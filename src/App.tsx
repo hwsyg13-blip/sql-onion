@@ -134,16 +134,16 @@ export const App = () => {
     case 'theory-detail': screen = <TheoryDetailScreen chapterId={params || 'c23'} onNavigate={navigate}/>; break;
     case 'mock':          screen = <MockLanding onNavigate={navigate}/>; break;
     case 'endless':       screen = <EndlessScreen onNavigate={navigate}/>; break;
-    case 'mock-exam':     screen = <CBTExam examId="AI-MOCK-1" mockMode={true} onNavigate={navigate} onFinish={(r: any) => { setCbtResult(r); navigate('cbt-result'); }}/>; break;
+    case 'mock-exam':     screen = <CBTExam examId="AI-MOCK-1" mockMode={true} onNavigate={navigate} onExit={() => navigate(exitReturnRoute || 'home')} onFinish={(r: any) => { setCbtResult(r); navigate('cbt-result'); }}/>; break;
     case 'exams':         screen = <ExamListScreen onNavigate={navigate}/>; break;
-    case 'cbt':           screen = <CBTExam examId={params || 'round-60'} onNavigate={navigate} onFinish={(r: any) => { setCbtResult(r); navigate('cbt-result'); }}/>; break;
+    case 'cbt':           screen = <CBTExam examId={params || 'round-60'} onNavigate={navigate} onExit={() => navigate(exitReturnRoute || 'home')} onFinish={(r: any) => { setCbtResult(r); navigate('cbt-result'); }}/>; break;
     case 'cbt-result':    screen = cbtResult ? <CBTResult result={cbtResult} onNavigate={navigate}/> : <HomeScreen onNavigate={navigate} user={user}/>; break;
     default:              screen = <HomeScreen onNavigate={navigate} user={user}/>;
   }
 
-  // 로그인 화면만 TopNav 숨김. CBT/모의 중에도 상단 네비게이터 유지 (나가기 버튼은 별도 헤더로 함께 표시)
+  // 로그인 화면만 TopNav 숨김. CBT/모의 중 나가기는 CBTExam 내부 상단 바에 통합.
   const hideTopBar = (route === 'login');
-  const showExitHeader = (route === 'cbt' || route === 'mock-exam');
+  const showExitHeader = false;
 
   return (
     <>

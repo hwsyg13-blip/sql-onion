@@ -72,7 +72,7 @@ export const ExamListScreen = ({onNavigate}) => {
 
 // CBT exam — 2-column: left questions, right sticky OMR
 // We'll show 50 "questions" — 20 real + 30 synthetic stubs — user picks an answer, submit at end.
-export const CBTExam = ({examId = "round-60", onFinish, onNavigate, mockMode = false}) => {
+export const CBTExam = ({examId = "round-60", onFinish, onNavigate, onExit, mockMode = false}) => {
   const totalQ = 50;
   // Build 50 questions:
   // - 기출 모드: 해당 회차(round-N)의 복원 문제를 우선 사용, 부족하면 다른 회차에서 같은 과목으로 보충
@@ -162,12 +162,21 @@ export const CBTExam = ({examId = "round-60", onFinish, onNavigate, mockMode = f
 
   return (
     <div style={{background:"var(--bg-page)",minHeight:"calc(100vh - 64px)"}}>
-      {/* CBT utility bar */}
+      {/* CBT utility bar — 나가기 + 회차/과목 · 진행 · 제출 을 한 줄로, TopNav 바로 아래 고정 */}
       <div style={{
         background:"var(--bg-card)",borderBottom:"1px solid var(--border-subtle)",
-        padding:"12px 28px",display:"flex",alignItems:"center",gap:16,flexWrap:"wrap",
+        padding:"10px 20px",display:"flex",alignItems:"center",gap:12,flexWrap:"wrap",
         position:"sticky",top:64,zIndex:20,
       }}>
+        {onExit && (
+          <button onClick={onExit} style={{
+            background:"var(--bg-muted)",border:"1px solid var(--border-default)",borderRadius:10,
+            padding:"6px 11px",fontFamily:"inherit",fontSize:12.5,cursor:"pointer",color:"var(--fg-2)",
+            display:"inline-flex",alignItems:"center",gap:6,
+          }}>
+            <Ic.ArrowLeft size={13}/> 나가기
+          </button>
+        )}
         <div style={{display:"flex",alignItems:"center",gap:8}}>
           <Tag tone={mockMode ? "peach" : "blue"}>{mockMode ? "AI 모의고사" : `${EXAM_SETS.find(s=>s.id===examId)?.label || examId} 기출`}</Tag>
           <span style={{fontSize:13,color:"var(--fg-3)"}}>CBT · 50문항</span>
@@ -185,7 +194,7 @@ export const CBTExam = ({examId = "round-60", onFinish, onNavigate, mockMode = f
               <Ic.Clock size={14}/> {timeStr}
             </div>
           )}
-          <div style={{fontSize:13,color:"var(--fg-3)"}}>답안 <strong style={{color:"var(--fg-1)",fontFamily:"var(--font-mono)"}}>{answered}</strong> / {totalQ}</div>
+          <div style={{fontSize:13,color:"var(--fg-3)"}}>진행 <strong style={{color:"var(--fg-1)",fontFamily:"var(--font-mono)"}}>{answered}</strong> / {totalQ}</div>
           <Btn size="sm" variant="primary" onClick={()=>setSubmitConfirm(true)}>제출하기</Btn>
         </div>
       </div>
