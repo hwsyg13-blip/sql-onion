@@ -2,6 +2,7 @@
 import React from 'react';
 import { OnionMark, Ic } from './components/Atoms';
 import { TopNav, MobileNav } from './components/TopNav';
+import { Footer } from './components/Footer';
 import { HomeScreen } from './screens/HomeScreen';
 import { LoginScreen } from './screens/LoginScreen';
 import { PricingScreen, SubscribeFlow, Paywall, sqloUsage } from './screens/PricingScreen';
@@ -138,6 +139,7 @@ export const App = () => {
           onNavigate={(to: string) => { setPaywall(null); setRoute(to); setParams(null); window.scrollTo({ top: 0 }); }}
         />
       )}
+      {!hideTopBar && !showExitHeader && <Footer/>}
       {!hideTopBar && <MobileNav route={route} onNavigate={navigate}/>}
     </>
   );

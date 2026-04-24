@@ -1,15 +1,20 @@
-// Final merge:  PDF + blog-full + authored overrides  →  src/data/quizBank.ts
-// Sources of truth per (round, subject, number), highest priority wins:
+// Final merge:  PDF + blog-full + authored overrides
+// → src/data/rounds/round-XX.ts (one file per round)
+// → src/data/quizBank.ts (index, re-exports QUIZ_BANK + EXAM_SETS)
+//
+// Sources per (round, subject, number), highest priority wins:
 //   1. scripts/authored/round-NN.json  (hand-authored)
 //   2. PDF extraction
 //   3. Blog extraction (only questions with 4 full options)
 
-import { readFileSync, writeFileSync, readdirSync, existsSync } from 'node:fs';
+import { readFileSync, writeFileSync, readdirSync, existsSync, rmSync, mkdirSync } from 'node:fs';
 import { resolve } from 'node:path';
 
 const PDF_TEXT = 'C:/Users/hwsyg/AppData/Local/Temp/design/sql/project/uploads/sqld_text.txt';
 const BLOG_RAW = 'scripts/blog-questions-raw.json';
 const AUTHORED_DIR = 'scripts/authored';
+const ROUNDS_DIR = 'src/data/rounds';
+const INDEX_FILE = 'src/data/quizBank.ts';
 
 const ROUND_DATES = {
   45: '2022년 5월', 46: '2022년 9월', 47: '2022년 11월',
@@ -63,7 +68,7 @@ function parsePdf() {
 const pdf = parsePdf();
 const blog = JSON.parse(readFileSync(BLOG_RAW, 'utf8'));
 
-// Load authored overrides
+// Authored overrides
 const authored = {};
 if (existsSync(AUTHORED_DIR)) {
   for (const f of readdirSync(AUTHORED_DIR)) {
@@ -75,35 +80,19 @@ if (existsSync(AUTHORED_DIR)) {
   }
 }
 
-// Merge per round
 const rounds = Object.keys(ROUND_DATES).map(Number).sort((a,b)=>b-a);
 const merged = {};
 for (const r of rounds) {
   const map = new Map();
-  // 1. PDF
-  for (const q of (pdf[r] || [])) {
-    map.set(`${q.subject}-${q.number}`, { ...q, source: 'pdf' });
-  }
-  // 2. Blog full-options (only if PDF didn't cover it)
+  for (const q of (pdf[r] || [])) map.set(`${q.subject}-${q.number}`, { ...q, source: 'pdf' });
   for (const q of (blog[r] || [])) {
     if (!q.fullOptions) continue;
     const k = `${q.subject}-${q.number}`;
     if (map.has(k)) continue;
-    map.set(k, {
-      round: r, subject: q.subject, number: q.number,
-      title: q.title, options: q.options,
-      correctIndex: q.correctIndex, explanation: q.explanation,
-      source: 'blog',
-    });
+    map.set(k, { round: r, subject: q.subject, number: q.number, title: q.title, options: q.options, correctIndex: q.correctIndex, explanation: q.explanation, source: 'blog' });
   }
-  // 3. Authored overrides (highest priority — overwrites even PDF if number matches)
   for (const a of (authored[r] || [])) {
-    map.set(`${a.subject}-${a.number}`, {
-      round: r, subject: a.subject, number: a.number,
-      title: a.title, options: a.options,
-      correctIndex: a.correctIndex, explanation: a.explanation,
-      source: 'authored',
-    });
+    map.set(`${a.subject}-${a.number}`, { round: r, subject: a.subject, number: a.number, title: a.title, options: a.options, correctIndex: a.correctIndex, explanation: a.explanation, source: 'authored' });
   }
   merged[r] = Array.from(map.values()).sort((a,b) => {
     if (a.subject !== b.subject) return a.subject.localeCompare(b.subject);
@@ -111,38 +100,44 @@ for (const r of rounds) {
   });
 }
 
-// Summary
-let total = 0;
-console.log('회차별 최종 문항 수:');
-for (const r of rounds) {
-  const cnt = merged[r].length;
-  total += cnt;
-  const bySource = merged[r].reduce((o, q) => ((o[q.source] = (o[q.source]||0)+1), o), {});
-  console.log(`  제${r}회: ${cnt}문항  ${JSON.stringify(bySource)}`);
-}
-console.log('---');
-console.log(`총 ${total}문항`);
+// Wipe + recreate rounds dir
+rmSync(ROUNDS_DIR, { recursive: true, force: true });
+mkdirSync(ROUNDS_DIR, { recursive: true });
 
-// Emit quizBank.ts
-const all = [];
+// Write per-round file
 let nextId = 10000;
+const roundFileNames = [];
+let totalCount = 0;
 for (const r of rounds) {
-  for (const q of merged[r]) {
-    all.push({
-      id: nextId++,
-      examSetId: `round-${r}`,
-      examLabel: `제${r}회 (${ROUND_DATES[r] || ''})`,
-      round: r,
-      subject: q.subject,
-      number: q.number,
-      title: q.title,
-      options: q.options.slice(0, 4),
-      correctIndex: q.correctIndex,
-      explanation: q.explanation || '',
-    });
-  }
+  const qs = merged[r].map(q => ({
+    id: nextId++,
+    examSetId: `round-${r}`,
+    examLabel: `제${r}회 (${ROUND_DATES[r] || ''})`,
+    round: r,
+    subject: q.subject,
+    number: q.number,
+    title: q.title,
+    options: q.options.slice(0, 4),
+    correctIndex: q.correctIndex,
+    explanation: q.explanation || '',
+    _source: q.source,
+  }));
+  totalCount += qs.length;
+
+  const varName = `ROUND_${r}`;
+  const body = `// Auto-generated from PDF + blog + scripts/authored/round-${r}.json
+// 제${r}회 — ${ROUND_DATES[r] || ''} · ${qs.length}문항
+// ⚠ 직접 편집 금지. 출처별 데이터를 고친 뒤 'node scripts/build-quiz-bank.mjs' 재실행.
+import type { QuizQuestion } from '../quizBank';
+
+export const ${varName}: QuizQuestion[] = ${JSON.stringify(qs, null, 2)};
+`;
+  const fname = `round-${r}.ts`;
+  writeFileSync(resolve(ROUNDS_DIR, fname), body, 'utf8');
+  roundFileNames.push({ r, varName, fname });
 }
 
+// Index file
 const examSets = rounds.map(r => ({
   id: `round-${r}`,
   round: r,
@@ -151,8 +146,11 @@ const examSets = rounds.map(r => ({
   count: merged[r].length,
 }));
 
-const tsBody = `// Auto-generated: PDF + yunamom.tistory.com 블로그 + scripts/authored/*
-// 총 ${all.length}문항, 제45회 ~ 제60회
+const importLines = roundFileNames.map(({ r, varName }) => `import { ${varName} } from './rounds/round-${r}';`).join('\n');
+const bankJoin = roundFileNames.map(({ varName }) => `  ...${varName},`).join('\n');
+
+const indexBody = `// Auto-generated index. Do not edit by hand — re-run scripts/build-quiz-bank.mjs.
+// 총 ${totalCount}문항, 제45회 ~ 제60회
 
 export type QuizQuestion = {
   id: number;
@@ -165,12 +163,26 @@ export type QuizQuestion = {
   options: string[];
   correctIndex: number;
   explanation: string;
+  /** 내부 출처 태그 ('pdf' | 'blog' | 'authored'). UI 에 노출하지 말 것. */
+  _source?: string;
 };
+
+${importLines}
 
 export const EXAM_SETS: { id: string; round: number; label: string; date: string; count: number }[] = ${JSON.stringify(examSets, null, 2)};
 
-export const QUIZ_BANK: QuizQuestion[] = ${JSON.stringify(all, null, 2)};
+export const QUIZ_BANK: QuizQuestion[] = [
+${bankJoin}
+];
 `;
 
-writeFileSync('src/data/quizBank.ts', tsBody, 'utf8');
-console.log(`\nsrc/data/quizBank.ts written (${all.length} questions)`);
+writeFileSync(INDEX_FILE, indexBody, 'utf8');
+
+console.log('회차별 파일:');
+for (const r of rounds) {
+  const bySource = merged[r].reduce((o, q) => ((o[q.source] = (o[q.source]||0)+1), o), {});
+  console.log(`  ${ROUNDS_DIR}/round-${r}.ts (${merged[r].length}) ${JSON.stringify(bySource)}`);
+}
+console.log('---');
+console.log(`total: ${totalCount}문항`);
+console.log(`wrote ${INDEX_FILE} + ${rounds.length} round files`);

@@ -178,7 +178,42 @@ git push -u origin main
 
 ---
 
-## 8. 다음에 추가할 것들 (이번 작업에는 포함 안 됨)
+## 8. Google AdSense 연결
+
+배포된 사이트에 광고를 붙이려면:
+
+### 8-1. AdSense 가입 (승인 1~4주)
+1. https://www.google.com/adsense 접속 → 가입
+2. **사이트 추가**: `https://sql-onion.vercel.app` (나중에 커스텀 도메인 생기면 교체)
+3. 승인 심사를 위해 Google이 요구하는 것:
+   - 개인정보처리방침 페이지 ✅ 이미 있음 (`https://sql-onion.vercel.app/privacy.html`)
+   - 독자적 콘텐츠 ✅ 기출 374문항
+   - 일정 수준의 방문자 트래픽 (Google이 암묵적으로 요구)
+4. 승인되면 퍼블리셔 ID `ca-pub-XXXXXXXXXXXXXXXX` 발급
+
+### 8-2. ads.txt 업데이트 (승인 후 즉시)
+AdSense 대시보드 → **사이트 → ads.txt 상태** 에서 안내하는 한 줄을 복사해서 `public/ads.txt` 파일에 붙여넣기. 예:
+
+```
+google.com, pub-1234567890123456, DIRECT, f08c47fec0942fa0
+```
+
+### 8-3. 광고 단위 생성 + 퍼블리셔 ID 주입
+1. AdSense 대시보드 → **광고 → 광고 단위별 → 디스플레이 광고** 생성 3개
+   - 이름: `HOME_BOTTOM`, `EXAMS_BOTTOM`, `RESULT_TOP`
+   - 각 광고 단위의 슬롯 ID(예: `1234567890`) 기록
+2. `src/components/AdSlot.tsx` 를 사용하는 3곳의 `slot="..."` 값을 각 슬롯 ID로 교체 (현재는 `"HOME_BOTTOM"` 등 플레이스홀더)
+3. Vercel 환경변수에 퍼블리셔 ID 추가:
+   - Vercel 대시보드 → Settings → Environment Variables
+   - `VITE_ADSENSE_CLIENT = ca-pub-XXXXXXXXXXXXXXXX` (Production / Preview / Development 모두 체크)
+4. 재배포: `git commit --allow-empty -m "chore: enable AdSense" && git push`
+
+### 8-4. 자동 비활성 보호
+`VITE_ADSENSE_CLIENT` 값이 없으면 `<AdSlot>` 컴포넌트가 아무것도 렌더링하지 않습니다 (스크립트 로드도 안 됨). 승인 전이나 로컬 개발 시에는 신경 안 써도 됩니다.
+
+---
+
+## 9. 다음에 추가할 것들 (이번 작업에는 포함 안 됨)
 
 - 카카오·네이버 **로그인** (결제 아닌 OAuth)
 - PortOne webhook 으로 결제 보안 강화 (`api/portone-webhook.ts`)

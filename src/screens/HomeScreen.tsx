@@ -4,6 +4,7 @@ import { Btn, Tag, Ic, Mascot, MascotGuide, OnionMark, Progress, Divider, CodeBl
 import { UsageBadge } from './PricingScreen';
 import { fetchHomeStats } from '../lib/queries';
 import { EXAM_SETS } from '../data/quizBank';
+import { AdSlot } from '../components/AdSlot';
 
 const FALLBACK_STATS = { totalAttempts: 0, correctRate: 0, examsDone: 0, recent: [] as any[] };
 
@@ -208,6 +209,11 @@ export const HomeScreen = ({onNavigate, user}) => {
         ))}
       </div>
     </section>
+
+    {/* 광고 슬롯 — 홈 하단 */}
+    <div style={{marginTop: 32}}>
+      <AdSlot slot="HOME_BOTTOM" format="horizontal"/>
+    </div>
   </div>
   );
 };

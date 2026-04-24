@@ -3,6 +3,7 @@ import React from 'react';
 import { Btn, Tag, Ic, CodeBlock, Mascot, MascotGuide, OnionMark, Progress, Divider, highlightSQL } from '../components/Atoms';
 import { QUIZ_BANK, EXAM_SETS } from '../data/quizBank';
 import { QuestionBody } from './MockScreens';
+import { AdSlot } from '../components/AdSlot';
 
 // CBT — Exam list, CBT exam screen (sticky OMR), and result.
 // Also Mock Exam full mode (50-item with timer) reusing pieces.
@@ -58,6 +59,11 @@ export const ExamListScreen = ({onNavigate}) => {
           </div>
         </section>
       ))}
+
+      {/* 광고 슬롯 — 기출 목록 하단 */}
+      <div style={{marginTop: 32}}>
+        <AdSlot slot="EXAMS_BOTTOM" format="horizontal"/>
+      </div>
     </div>
   );
 };
@@ -355,6 +361,11 @@ export const CBTResult = ({result, onNavigate}) => {
             <div style={{fontSize:12,color:"var(--fg-3)",marginTop:2}}>제한 90분 / 평균 1.8분 per 문항</div>
           </div>
         )}
+      </div>
+
+      {/* 광고 슬롯 — 점수 직후 */}
+      <div style={{marginTop: 28}}>
+        <AdSlot slot="RESULT_TOP" format="horizontal"/>
       </div>
 
       {/* Detailed question list with explanations */}
