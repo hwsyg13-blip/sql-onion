@@ -24,6 +24,12 @@ function ensureScript() {
 /** 실제 AdSense 슬롯 ID 는 숫자 문자열 (예: "1234567890"). 그 외 (HOME_BOTTOM 같은 라벨) 는 placeholder. */
 const isRealSlotId = (s: string) => /^\d{6,}$/.test(s);
 
+/** ?adsdebug=1 쿼리스트링 있을 때만 점선 placeholder 표시 (개발자 미리보기용) */
+function debugMode(): boolean {
+  if (typeof window === 'undefined') return false;
+  return /[?&]adsdebug=1/.test(window.location.search);
+}
+
 export const AdSlot = ({ slot, format = 'auto', style }: { slot: string; format?: 'auto' | 'fluid' | 'rectangle' | 'horizontal' | 'vertical'; style?: React.CSSProperties }) => {
   const pushedRef = React.useRef(false);
   const isLive = Boolean(CLIENT && isRealSlotId(slot));
@@ -45,11 +51,10 @@ export const AdSlot = ({ slot, format = 'auto', style }: { slot: string; format?
     return () => clearTimeout(t);
   }, [isLive]);
 
-  // CLIENT 없거나 슬롯이 placeholder 라벨이면 점선 박스로 자리만 잡아 둔다
+  // 실제 광고 슬롯 ID 가 없으면 사용자에게는 안 보이게 처리
+  // (?adsdebug=1 쿼리로 우리만 확인 가능한 점선 박스 표시)
   if (!isLive) {
-    const note = !CLIENT
-      ? `광고 영역 · ${slot}`
-      : `광고 영역 · ${slot} (실제 슬롯 ID 필요)`;
+    if (!debugMode()) return null;
     return (
       <div
         aria-hidden
@@ -69,7 +74,7 @@ export const AdSlot = ({ slot, format = 'auto', style }: { slot: string; format?
           ...style,
         }}
       >
-        {note}
+        광고 영역 · {slot}
       </div>
     );
   }
@@ -83,5 +88,70 @@ export const AdSlot = ({ slot, format = 'auto', style }: { slot: string; format?
       data-ad-format={format}
       data-full-width-responsive="true"
     />
+  );
+};
+
+/**
+ * AdSidebar — 우측 사이드바 광고 (PC 와이드 화면 전용)
+ * - viewport ≥ 1280px 에서만 노출 (SQL양파 컨테이너 max-width 1080px + 여유)
+ * - position: fixed, top: 80px (TopNav 아래)
+ * - 세로형 광고 단위 (160×600 또는 300×600)
+ */
+export const AdSidebar = ({ slot }: { slot: string }) => {
+  const pushedRef = React.useRef(false);
+  const isLive = Boolean(CLIENT && isRealSlotId(slot));
+  const [show, setShow] = React.useState(false);
+
+  React.useEffect(() => {
+    const check = () => setShow(window.innerWidth >= 1280);
+    check();
+    window.addEventListener('resize', check);
+    return () => window.removeEventListener('resize', check);
+  }, []);
+
+  React.useEffect(() => {
+    if (!isLive || !show) return;
+    ensureScript();
+    if (pushedRef.current) return;
+    pushedRef.current = true;
+    const t = setTimeout(() => {
+      try {
+        const w: any = window;
+        w.adsbygoogle = w.adsbygoogle || [];
+        w.adsbygoogle.push({});
+      } catch {}
+    }, 100);
+    return () => clearTimeout(t);
+  }, [isLive, show]);
+
+  if (!show) return null;
+
+  if (!isLive) {
+    if (!debugMode()) return null;
+    return (
+      <aside
+        aria-hidden
+        style={{
+          position: 'fixed', top: 96, right: 16, width: 160, height: 600,
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+          background: 'var(--bg-muted)', border: '1px dashed var(--border-default)',
+          borderRadius: 10, color: 'var(--fg-4)', fontSize: 12, fontWeight: 500,
+          zIndex: 30,
+        }}
+      >
+        사이드 광고 · {slot}
+      </aside>
+    );
+  }
+
+  return (
+    <aside style={{ position: 'fixed', top: 96, right: 16, width: 160, zIndex: 30 }}>
+      <ins
+        className="adsbygoogle"
+        style={{ display: 'inline-block', width: 160, height: 600 }}
+        data-ad-client={CLIENT}
+        data-ad-slot={slot}
+      />
+    </aside>
   );
 };

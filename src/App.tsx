@@ -3,6 +3,7 @@ import React from 'react';
 import { OnionMark, Ic } from './components/Atoms';
 import { TopNav, MobileNav } from './components/TopNav';
 import { Footer } from './components/Footer';
+import { AdSidebar } from './components/AdSlot';
 import { HomeScreen } from './screens/HomeScreen';
 import { LoginScreen } from './screens/LoginScreen';
 import { PricingScreen, SubscribeFlow, Paywall, sqloUsage } from './screens/PricingScreen';
@@ -221,6 +222,8 @@ export const App = () => {
       )}
       {!hideTopBar && !showExitHeader && <Footer/>}
       {!hideTopBar && <MobileNav route={route} onNavigate={navigate}/>}
+      {/* 사이드 광고 — PC 와이드 화면 전용 (≥1280px). 시험 중·로그인 화면 제외 */}
+      {!hideTopBar && route !== 'cbt' && route !== 'mock-exam' && <AdSidebar slot="SIDEBAR_RIGHT"/>}
     </>
   );
 };
