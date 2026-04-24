@@ -56,7 +56,13 @@ export const ROUND_52: QuizQuestion[] = [
     ],
     "correctIndex": 1,
     "explanation": "",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "text",
+        "content": "조직 전체 관점에서 데이터를 통합적으로 표현한 스키마"
+      }
+    ]
   },
   {
     "id": 10403,
@@ -92,7 +98,13 @@ export const ROUND_52: QuizQuestion[] = [
     ],
     "correctIndex": 2,
     "explanation": "",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "text",
+        "content": "해당 엔터티가 다른 엔터티들의 부모 역할을 하며, 업무에 원래부터 존재하여 독립적으로 생성된다."
+      }
+    ]
   },
   {
     "id": 10405,
@@ -164,7 +176,13 @@ export const ROUND_52: QuizQuestion[] = [
     ],
     "correctIndex": 2,
     "explanation": "교수-학생, 학생-과목의 M:N 관계가 각각 분해되어 연결 엔터티 두 개가 추가로 생성된다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "[ 교수 ] ∋-----|∘ [ 수강 ] ∘|-----∈ [ 학생 ]\n[ 학생 ] ∋-----|∘ [ 이수 ] ∘|-----∈ [ 과목 ]"
+      }
+    ]
   },
   {
     "id": 10409,
@@ -200,7 +218,38 @@ export const ROUND_52: QuizQuestion[] = [
     ],
     "correctIndex": 3,
     "explanation": "COL2 = NULL 은 UNKNOWN 이므로 NOT (1 OR UNKNOWN) = UNKNOWN 또는 FALSE 로 평가되어 대부분의 행이 제외되고, COL1=4 인 행만 남는다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "headers": [
+          "COL1",
+          "COL2"
+        ],
+        "rows": [
+          [
+            "NULL",
+            "A"
+          ],
+          [
+            "1",
+            "B"
+          ],
+          [
+            "3",
+            "C"
+          ],
+          [
+            "4",
+            "D"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT COL1, COL2\nFROM   T\nWHERE  NOT (COL1 = 1 OR COL2 = NULL);"
+      }
+    ]
   },
   {
     "id": 10411,
@@ -218,7 +267,34 @@ export const ROUND_52: QuizQuestion[] = [
     ],
     "correctIndex": 2,
     "explanation": "NULLIF 는 두 인자가 같으면 NULL, 다르면 첫 번째 값을 반환하므로 나머지와 결과가 다르다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "headers": [
+          "VAL",
+          "OPT"
+        ],
+        "rows": [
+          [
+            "100",
+            "50"
+          ],
+          [
+            "100",
+            "NULL"
+          ],
+          [
+            "NULL",
+            "250"
+          ],
+          [
+            "450",
+            "100"
+          ]
+        ]
+      }
+    ]
   },
   {
     "id": 10412,
@@ -236,7 +312,38 @@ export const ROUND_52: QuizQuestion[] = [
     ],
     "correctIndex": 2,
     "explanation": "원본 기출의 정답 표기를 보존한다. 각 행에 대해 VAL 기준 ±2 범위의 합을 계산한다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "headers": [
+          "ID",
+          "VAL"
+        ],
+        "rows": [
+          [
+            "1",
+            "3"
+          ],
+          [
+            "2",
+            "4"
+          ],
+          [
+            "3",
+            "5"
+          ],
+          [
+            "4",
+            "6"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT VAL, SUM(VAL) OVER (ORDER BY ID\n                           RANGE BETWEEN 2 PRECEDING AND 2 FOLLOWING) AS S\nFROM T;"
+      }
+    ]
   },
   {
     "id": 10413,
@@ -254,7 +361,13 @@ export const ROUND_52: QuizQuestion[] = [
     ],
     "correctIndex": 1,
     "explanation": "PRIOR 는 '이전 행' 의 컬럼을 참조하는 연산자이므로 PRIOR 매니저 ↔ 현재 사원이 아니라, PRIOR 사원 ↔ 현재 매니저 형태로 부모 사원의 사번이 자식 매니저와 매칭되도록 배치된다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT 사원, 매니저\nFROM   EMP\nSTART WITH 매니저 IS NULL\nCONNECT BY ( ㄱ ) 사원 = ( ㄴ ) 매니저;"
+      }
+    ]
   },
   {
     "id": 10414,
@@ -272,7 +385,38 @@ export const ROUND_52: QuizQuestion[] = [
     ],
     "correctIndex": 2,
     "explanation": "원본 기출의 정답 표기를 보존한다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "headers": [
+          "ID",
+          "금액"
+        ],
+        "rows": [
+          [
+            "1",
+            "1000"
+          ],
+          [
+            "2",
+            "NULL"
+          ],
+          [
+            "3",
+            "3000"
+          ],
+          [
+            "4",
+            "NULL"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT NVL(금액, 0) FROM T;"
+      }
+    ]
   },
   {
     "id": 10415,
@@ -308,7 +452,13 @@ export const ROUND_52: QuizQuestion[] = [
     ],
     "correctIndex": 2,
     "explanation": "",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "text",
+        "content": "트랜잭션이 동시에 실행될 경우 다른 트랜잭션에 의해 영향을 받지 않고 독립적으로 실행되어야 한다."
+      }
+    ]
   },
   {
     "id": 10417,
@@ -380,7 +530,13 @@ export const ROUND_52: QuizQuestion[] = [
     ],
     "correctIndex": 3,
     "explanation": "",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "text",
+        "content": "첫 번째 결과 집합에서 두 번째 결과 집합에 존재하는 행을 제외하고 반환한다."
+      }
+    ]
   },
   {
     "id": 10421,
@@ -416,7 +572,38 @@ export const ROUND_52: QuizQuestion[] = [
     ],
     "correctIndex": 2,
     "explanation": "각 행별 COALESCE 결과는 1, 2, 3 이며 SUM = 6 이다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "headers": [
+          "C1",
+          "C2",
+          "C3"
+        ],
+        "rows": [
+          [
+            "1",
+            "2",
+            "3"
+          ],
+          [
+            "NULL",
+            "2",
+            "3"
+          ],
+          [
+            "NULL",
+            "NULL",
+            "3"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT SUM(COALESCE(C1, C2, C3)) FROM TAB1;"
+      }
+    ]
   },
   {
     "id": 10423,
@@ -614,7 +801,13 @@ export const ROUND_52: QuizQuestion[] = [
     ],
     "correctIndex": 1,
     "explanation": "원본 기출에서 구체적 데이터 값이 유실되어 정답 번호와 값을 보존한다. 두 집계 결과(MAX·MIN)의 합이 8,925가 되는 전제로 출제되었다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT MAX(연봉) FROM 사원\nUNION\nSELECT MIN(연봉) FROM 사원;\n-- 두 집계 결과를 UNION 으로 결합하여 중복을 제거한 뒤, 전체 합계를 구한다."
+      }
+    ]
   },
   {
     "id": 10434,
@@ -794,7 +987,26 @@ export const ROUND_52: QuizQuestion[] = [
     ],
     "correctIndex": 3,
     "explanation": "AVG(COL) 은 NULL 을 제외하여 15 를 반환한다. NVL 처리한 경우는 NULL 을 0 으로 취급하므로 다른 결과가 된다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "headers": [
+          "COL"
+        ],
+        "rows": [
+          [
+            "10"
+          ],
+          [
+            "NULL"
+          ],
+          [
+            "20"
+          ]
+        ]
+      }
+    ]
   },
   {
     "id": 10444,
@@ -830,7 +1042,40 @@ export const ROUND_52: QuizQuestion[] = [
     ],
     "correctIndex": 2,
     "explanation": "ID=1 은 UPDATE, ID=2 유지, ID=3 은 신규 INSERT 된다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "headers": [
+          "TGT",
+          "SRC"
+        ],
+        "rows": [
+          [
+            "ID",
+            "V",
+            "ID",
+            "V"
+          ],
+          [
+            "1",
+            "a",
+            "1",
+            "b"
+          ],
+          [
+            "2",
+            "a",
+            "3",
+            "c"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "MERGE INTO TGT T USING SRC S ON (T.ID = S.ID)\nWHEN MATCHED THEN UPDATE SET T.V = S.V\nWHEN NOT MATCHED THEN INSERT (ID, V) VALUES (S.ID, S.V);"
+      }
+    ]
   },
   {
     "id": 10446,
@@ -866,7 +1111,13 @@ export const ROUND_52: QuizQuestion[] = [
     ],
     "correctIndex": 2,
     "explanation": "PRIOR 는 CONNECT BY 조건식의 좌측에 위치해 이전 행을 지정한다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT 사원, 매니저\nFROM   EMP  -- (ㄱ)\nSTART WITH 매니저 IS NULL  -- (ㄴ)\nCONNECT BY ( ㄷ ) mgr = ( ㄹ ) empno;"
+      }
+    ]
   },
   {
     "id": 10448,

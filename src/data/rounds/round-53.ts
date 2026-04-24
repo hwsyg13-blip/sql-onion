@@ -74,7 +74,13 @@ export const ROUND_53: QuizQuestion[] = [
     ],
     "correctIndex": 2,
     "explanation": "",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "text",
+        "content": "일반 속성이 주식별자에 모두 함수 종속하며 이행 함수 종속을 제거한 상태"
+      }
+    ]
   },
   {
     "id": 10354,
@@ -110,7 +116,13 @@ export const ROUND_53: QuizQuestion[] = [
     ],
     "correctIndex": 1,
     "explanation": "",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "text",
+        "content": "부분 함수 종속을 나누어 해결한다."
+      }
+    ]
   },
   {
     "id": 10356,
@@ -254,7 +266,34 @@ export const ROUND_53: QuizQuestion[] = [
     ],
     "correctIndex": 0,
     "explanation": "AMT 가 3000~5000 이고 VOL 이 10 이하인 행은 (4000, 5) 한 건이다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "WHERE amt BETWEEN 3000 AND 5000\nAND   vol <= 10"
+      },
+      {
+        "type": "table",
+        "headers": [
+          "AMT",
+          "VOL"
+        ],
+        "rows": [
+          [
+            "4000",
+            "5"
+          ],
+          [
+            "6000",
+            "3"
+          ],
+          [
+            "3000",
+            "15"
+          ]
+        ]
+      }
+    ]
   },
   {
     "id": 10364,
@@ -290,7 +329,26 @@ export const ROUND_53: QuizQuestion[] = [
     ],
     "correctIndex": 2,
     "explanation": "T1 의 1 은 T2 의 1(세 건) 과 매칭되고 T1 의 3 은 T2 의 3(한 건) 과 매칭되어 3 + 1 = 4 건이 나온다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "headers": [
+          "T1",
+          "T2"
+        ],
+        "rows": [
+          [
+            "1, 2, 3, 4, 5",
+            "1, 1, 1, 3, 6"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT COUNT(*)\nFROM   T1, T2\nWHERE  T1.COL1 = T2.COL1;"
+      }
+    ]
   },
   {
     "id": 10366,
@@ -308,7 +366,13 @@ export const ROUND_53: QuizQuestion[] = [
     ],
     "correctIndex": 2,
     "explanation": "",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "text",
+        "content": "주문번호 내림차순 정렬 후, 주문번호가 같을 경우 날짜를 오름차순으로 정렬한다."
+      }
+    ]
   },
   {
     "id": 10367,
@@ -326,7 +390,13 @@ export const ROUND_53: QuizQuestion[] = [
     ],
     "correctIndex": 3,
     "explanation": "DEFAULT 는 값 미지정 시 기본값을 적용할 뿐 값이 입력되면 그 값이 그대로 저장된다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "CREATE TABLE 학생 (\n  학번 NUMBER DEFAULT 100 PRIMARY KEY,\n  이름 VARCHAR2(30) NOT NULL,\n  학과번호 NUMBER REFERENCES 학과(학과번호)\n);"
+      }
+    ]
   },
   {
     "id": 10368,
@@ -362,7 +432,28 @@ export const ROUND_53: QuizQuestion[] = [
     ],
     "correctIndex": 3,
     "explanation": "조건을 만족하는 행이 없으므로 공집합이 반환된다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "headers": [
+          "회원번호",
+          "회원명",
+          "주문월"
+        ],
+        "rows": [
+          [
+            "1",
+            "홍길동",
+            "201001"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT * FROM 주문 WHERE 주문월 = '201010';"
+      }
+    ]
   },
   {
     "id": 10370,
@@ -380,7 +471,13 @@ export const ROUND_53: QuizQuestion[] = [
     ],
     "correctIndex": 3,
     "explanation": "",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "-- 사원의 매니저 이름을 조회하되 매니저가 없는 경우 '사장' 을 반환한다.\nSELECT E.이름, (  ?  ) AS 상사명\nFROM   사원 E LEFT JOIN 사원 M ON E.매니저ID = M.사원ID;"
+      }
+    ]
   },
   {
     "id": 10371,
@@ -416,7 +513,13 @@ export const ROUND_53: QuizQuestion[] = [
     ],
     "correctIndex": 0,
     "explanation": "LTRIM 은 왼쪽에서 지정된 문자를 모두 제거한다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT LTRIM('xxxxxxabcd', 'x') FROM DUAL;"
+      }
+    ]
   },
   {
     "id": 10373,
@@ -434,7 +537,13 @@ export const ROUND_53: QuizQuestion[] = [
     ],
     "correctIndex": 3,
     "explanation": "",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "WHERE (COL1, COL2) IN ((1, 3), (1, 4));"
+      }
+    ]
   },
   {
     "id": 10374,
@@ -470,7 +579,13 @@ export const ROUND_53: QuizQuestion[] = [
     ],
     "correctIndex": 1,
     "explanation": "서브쿼리가 다중 행을 반환할 수 있음에도 단일 행 비교 연산자 '=' 를 사용하여 런타임 오류가 발생할 수 있다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT SUM(SAL)            -- (1)\nFROM   EMP\nWHERE  컬럼 = (SELECT ID FROM A WHERE ~)  -- (2)\nGROUP BY ID                 -- (3)\nHAVING SUM(SAL) > 5000;     -- (4)"
+      }
+    ]
   },
   {
     "id": 10376,
@@ -506,7 +621,34 @@ export const ROUND_53: QuizQuestion[] = [
     ],
     "correctIndex": 0,
     "explanation": "동일 컬럼명이 여러 개이면서 값이 다르면 NATURAL JOIN 은 매칭 실패로 결과가 비거나 경우에 따라 예상과 다른 결과를 낸다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "headers": [
+          "A",
+          "B"
+        ],
+        "rows": [
+          [
+            "ID",
+            "COL1",
+            "ID",
+            "COL1"
+          ],
+          [
+            "1",
+            "X",
+            "1",
+            "Y"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT * FROM A NATURAL JOIN B;"
+      }
+    ]
   },
   {
     "id": 10378,
@@ -524,7 +666,13 @@ export const ROUND_53: QuizQuestion[] = [
     ],
     "correctIndex": 0,
     "explanation": "",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT 등급 FROM 회원 ORDER BY DECODE(등급, 'VVIP', 1, 'VIP', 2, 3);"
+      }
+    ]
   },
   {
     "id": 10379,
@@ -542,7 +690,36 @@ export const ROUND_53: QuizQuestion[] = [
     ],
     "correctIndex": 0,
     "explanation": "`<= ALL(50, 15)` 은 두 값 모두와 비교하여 최소값 15 이하를 만족하는 행을 반환한다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT * FROM T WHERE COL <= ALL(50, 15);"
+      },
+      {
+        "type": "table",
+        "headers": [
+          "COL"
+        ],
+        "rows": [
+          [
+            "10"
+          ],
+          [
+            "12"
+          ],
+          [
+            "15"
+          ],
+          [
+            "20"
+          ],
+          [
+            "60"
+          ]
+        ]
+      }
+    ]
   },
   {
     "id": 10380,
@@ -560,7 +737,13 @@ export const ROUND_53: QuizQuestion[] = [
     ],
     "correctIndex": 3,
     "explanation": "",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "text",
+        "content": "첫 번째 집합에서 두 번째 집합에 존재하는 행을 제외한 결과를 반환한다."
+      }
+    ]
   },
   {
     "id": 10381,
@@ -632,7 +815,22 @@ export const ROUND_53: QuizQuestion[] = [
     ],
     "correctIndex": 0,
     "explanation": "",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "headers": [
+          "M",
+          "N"
+        ],
+        "rows": [
+          [
+            "3",
+            "5"
+          ]
+        ]
+      }
+    ]
   },
   {
     "id": 10385,
@@ -758,7 +956,13 @@ export const ROUND_53: QuizQuestion[] = [
     ],
     "correctIndex": 0,
     "explanation": "MIN 은 10, MAX(TO_CHAR) 는 문자 비교 결과 90(문자열) 이 되어 묵시적 변환 시 10 + 90 = 100 이 된다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT MIN(COL1) + MAX(TO_CHAR(COL1))\nFROM   T;\n-- COL1 값: 10, 50, 90"
+      }
+    ]
   },
   {
     "id": 10392,
@@ -776,7 +980,26 @@ export const ROUND_53: QuizQuestion[] = [
     ],
     "correctIndex": 1,
     "explanation": "'n' 으로 끝나는 이름은 Kevin, Jason 의 두 명이다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "headers": [
+          "NAME"
+        ],
+        "rows": [
+          [
+            "Kevin"
+          ],
+          [
+            "Jason"
+          ],
+          [
+            "Tom"
+          ]
+        ]
+      }
+    ]
   },
   {
     "id": 10393,
@@ -812,7 +1035,13 @@ export const ROUND_53: QuizQuestion[] = [
     ],
     "correctIndex": 0,
     "explanation": "컬럼 목록을 명시하지 않은 INSERT 는 모든 컬럼에 값을 채워야 한다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "CREATE TABLE TEST45 (\n  COL1 NUMBER,\n  COL2 NUMBER,\n  COL3 NUMBER,\n  COL4 NUMBER\n);"
+      }
+    ]
   },
   {
     "id": 10395,
@@ -830,7 +1059,24 @@ export const ROUND_53: QuizQuestion[] = [
     ],
     "correctIndex": 0,
     "explanation": "세 테이블 모두에 값이 존재하는 키는 1 한 건 뿐이다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "headers": [
+          "T1",
+          "T2",
+          "T3"
+        ],
+        "rows": [
+          [
+            "1, 2, 3",
+            "1, 2, NULL",
+            "1, NULL, NULL"
+          ]
+        ]
+      }
+    ]
   },
   {
     "id": 10396,
@@ -848,7 +1094,22 @@ export const ROUND_53: QuizQuestion[] = [
     ],
     "correctIndex": 0,
     "explanation": "1·2·3·4·5·6 의 6개 값만 남는다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "headers": [
+          "A",
+          "B"
+        ],
+        "rows": [
+          [
+            "1, 2, 3, 4",
+            "3, 4, 5, 6"
+          ]
+        ]
+      }
+    ]
   },
   {
     "id": 10397,
@@ -866,7 +1127,33 @@ export const ROUND_53: QuizQuestion[] = [
     ],
     "correctIndex": 1,
     "explanation": "MIN(COL_B)=5, MAX(COL_C)=10, SUM(NVL(SCORE,0))=0 이므로 5+10+0 = 15 이다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "headers": [
+          "COL_B",
+          "COL_C",
+          "SCORE"
+        ],
+        "rows": [
+          [
+            "5",
+            "10",
+            "NULL"
+          ],
+          [
+            "10",
+            "NULL",
+            "NULL"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT NVL(MIN(COL_B), 0) + NVL(MAX(COL_C), 0) + SUM(NVL(SCORE, 0))\nFROM   T;"
+      }
+    ]
   },
   {
     "id": 10398,
@@ -902,6 +1189,12 @@ export const ROUND_53: QuizQuestion[] = [
     ],
     "correctIndex": 2,
     "explanation": "COMMIT 시점에 5건이 확정되고 SAVEPOINT SQL1 은 이미 사라졌으므로 이후 ROLLBACK TO SAVEPOINT SQL1 은 오류가 발생해 수행되지 않는다. 마지막 INSERT (6) 까지 포함한 6 건이 조회된다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "INSERT INTO TABLE50 VALUES (1);\nINSERT INTO TABLE50 VALUES (2);\nINSERT INTO TABLE50 VALUES (3);\nSAVEPOINT SQL1;\nINSERT INTO TABLE50 VALUES (4);\nINSERT INTO TABLE50 VALUES (5);\nCOMMIT;\nINSERT INTO TABLE50 VALUES (6);\nROLLBACK TO SAVEPOINT SQL1;\n\nSELECT * FROM TABLE50;"
+      }
+    ]
   }
 ];

@@ -20,7 +20,13 @@ export const ROUND_54: QuizQuestion[] = [
     ],
     "correctIndex": 0,
     "explanation": "",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "text",
+        "content": "시스템으로 구축하고자 하는 업무에 대해 Key, 속성, 관계 등을 정확하게 표현하고 재사용성이 높은 모델링"
+      }
+    ]
   },
   {
     "id": 10301,
@@ -110,7 +116,13 @@ export const ROUND_54: QuizQuestion[] = [
     ],
     "correctIndex": 0,
     "explanation": "",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "[ 고객 ] ||-----∈ [ 주문 ]"
+      }
+    ]
   },
   {
     "id": 10306,
@@ -146,7 +158,13 @@ export const ROUND_54: QuizQuestion[] = [
     ],
     "correctIndex": 2,
     "explanation": "",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "text",
+        "content": "업무적으로 만들어지지는 않지만 원조 식별자가 복잡한 구성을 갖고 있기 때문에 인위적으로 만든 식별자"
+      }
+    ]
   },
   {
     "id": 10308,
@@ -254,7 +272,30 @@ export const ROUND_54: QuizQuestion[] = [
     ],
     "correctIndex": 2,
     "explanation": "괄호 ')' 는 [0-9] 문자 클래스에 포함되지 않으므로 매칭되지 않는다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "headers": [
+          "PHONE"
+        ],
+        "rows": [
+          [
+            "010-1111-2222"
+          ],
+          [
+            "010-3333-4444"
+          ],
+          [
+            "02)345-6789"
+          ]
+        ]
+      },
+      {
+        "type": "text",
+        "content": "정규식 패턴: `^[0-9]{3}-[0-9]{3,4}-[0-9]{4}$`"
+      }
+    ]
   },
   {
     "id": 10314,
@@ -272,7 +313,13 @@ export const ROUND_54: QuizQuestion[] = [
     ],
     "correctIndex": 2,
     "explanation": "PRIOR emp_no = mgr_no 조건은 현재 행의 emp_no 가 자식 행의 mgr_no 가 되도록 부모→자식 순방향 전개가 된다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "-- emp_no : 하위 사원 번호, mgr_no : 상위 관리자 번호\nSELECT *\nFROM   EMP\nCONNECT BY PRIOR emp_no = mgr_no;"
+      }
+    ]
   },
   {
     "id": 10315,
@@ -308,7 +355,13 @@ export const ROUND_54: QuizQuestion[] = [
     ],
     "correctIndex": 3,
     "explanation": "NULLIF(a, b) 는 두 인자가 같으면 NULL, 다르면 a 를 반환한다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT CASE WHEN COL1 = 'X' THEN NULL ELSE COL1 END FROM T;"
+      }
+    ]
   },
   {
     "id": 10317,
@@ -326,7 +379,39 @@ export const ROUND_54: QuizQuestion[] = [
     ],
     "correctIndex": 1,
     "explanation": "Oracle 은 FROM 절에서 AS 키워드를 테이블 별칭에 허용하지 않아 ORA-00933 오류가 발생한다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "headers": [
+          "COL1",
+          "COL2",
+          "COL3"
+        ],
+        "rows": [
+          [
+            "1",
+            "2",
+            "A"
+          ],
+          [
+            "2",
+            "3",
+            "B"
+          ],
+          [
+            "3",
+            "2",
+            "C"
+          ],
+          [
+            "4",
+            "3",
+            "D"
+          ]
+        ]
+      }
+    ]
   },
   {
     "id": 10318,
@@ -362,7 +447,13 @@ export const ROUND_54: QuizQuestion[] = [
     ],
     "correctIndex": 3,
     "explanation": "COALESCE 는 왼쪽부터 NULL 이 아닌 첫 번째 값을 반환한다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT COALESCE(A, 50*B, '50') FROM T;"
+      }
+    ]
   },
   {
     "id": 10320,
@@ -380,7 +471,50 @@ export const ROUND_54: QuizQuestion[] = [
     ],
     "correctIndex": 0,
     "explanation": "",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "headers": [
+          "T1",
+          "T2"
+        ],
+        "rows": [
+          [
+            "KEYA",
+            "COL1",
+            "COL2",
+            "KEYB",
+            "COL1",
+            "COL2"
+          ],
+          [
+            "1",
+            "A",
+            "가",
+            "1",
+            "A",
+            "가"
+          ],
+          [
+            "2",
+            "A",
+            "가",
+            "3",
+            "C",
+            "다"
+          ],
+          [
+            "5",
+            "C",
+            "다",
+            "",
+            "",
+            ""
+          ]
+        ]
+      }
+    ]
   },
   {
     "id": 10321,
@@ -398,7 +532,42 @@ export const ROUND_54: QuizQuestion[] = [
     ],
     "correctIndex": 0,
     "explanation": "KIM 의 EMPNO 가 DEPT_EMP 에 두 번 등장하므로 조인 결과에서도 두 번 출력된다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "headers": [
+          "EMP",
+          "DEPT_EMP"
+        ],
+        "rows": [
+          [
+            "EMPNO",
+            "ENAME",
+            "EMPNO",
+            "DEPT"
+          ],
+          [
+            "1",
+            "KIM",
+            "1",
+            "10"
+          ],
+          [
+            "2",
+            "LEE",
+            "1",
+            "20"
+          ],
+          [
+            "3",
+            "PARK",
+            "2",
+            "10"
+          ]
+        ]
+      }
+    ]
   },
   {
     "id": 10322,
@@ -416,7 +585,42 @@ export const ROUND_54: QuizQuestion[] = [
     ],
     "correctIndex": 0,
     "explanation": "SMITH 의 EMPNO 는 DEPT_EMP 에 매칭되는 행이 없어 DEPT 컬럼이 NULL 로 표시된다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "headers": [
+          "EMP",
+          "DEPT_EMP"
+        ],
+        "rows": [
+          [
+            "EMPNO",
+            "ENAME",
+            "EMPNO",
+            "DEPT"
+          ],
+          [
+            "1",
+            "KIM",
+            "1",
+            "10"
+          ],
+          [
+            "2",
+            "SMITH",
+            "3",
+            "20"
+          ],
+          [
+            "3",
+            "LEE",
+            "",
+            ""
+          ]
+        ]
+      }
+    ]
   },
   {
     "id": 10323,
@@ -434,7 +638,48 @@ export const ROUND_54: QuizQuestion[] = [
     ],
     "correctIndex": 2,
     "explanation": "OR 조건이 광범위하므로 카티션 곱 중 조건을 만족하는 행이 9건으로 가장 많다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "headers": [
+          "TAB1",
+          "TAB2"
+        ],
+        "rows": [
+          [
+            "CODE",
+            "PCOLOR",
+            "CODE",
+            "PSIZE"
+          ],
+          [
+            "1",
+            "빨강",
+            "1",
+            "소"
+          ],
+          [
+            "2",
+            "노랑",
+            "2",
+            "중"
+          ],
+          [
+            "3",
+            "파랑",
+            "3",
+            "대"
+          ],
+          [
+            "4",
+            "검정",
+            "4",
+            "특대"
+          ]
+        ]
+      }
+    ]
   },
   {
     "id": 10324,
@@ -470,7 +715,13 @@ export const ROUND_54: QuizQuestion[] = [
     ],
     "correctIndex": 0,
     "explanation": "",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT * FROM A\nWHERE 번호 IN (SELECT 번호 FROM B WHERE A.성별 = B.성별);"
+      }
+    ]
   },
   {
     "id": 10326,
@@ -488,7 +739,34 @@ export const ROUND_54: QuizQuestion[] = [
     ],
     "correctIndex": 1,
     "explanation": "서브쿼리에 NULL 이 포함되어 NOT IN 전체가 UNKNOWN 으로 평가되어 공집합(0건)이 반환된다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "headers": [
+          "TAB_A (COL1)",
+          "TAB_B (COL2)"
+        ],
+        "rows": [
+          [
+            "1",
+            "1"
+          ],
+          [
+            "2",
+            "2"
+          ],
+          [
+            "NULL",
+            "3"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT COUNT(*)\nFROM   TAB_B\nWHERE  COL2 NOT IN (SELECT COL1 FROM TAB_A);"
+      }
+    ]
   },
   {
     "id": 10327,
@@ -506,7 +784,33 @@ export const ROUND_54: QuizQuestion[] = [
     ],
     "correctIndex": 1,
     "explanation": "IN 절의 NULL 은 어떤 값과도 비교되지 않아 결과에 포함되지 않는다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "headers": [
+          "COL"
+        ],
+        "rows": [
+          [
+            "A"
+          ],
+          [
+            "B"
+          ],
+          [
+            "C"
+          ],
+          [
+            "NULL"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT * FROM TAB\nWHERE COL IN ('A', 'B', NULL);"
+      }
+    ]
   },
   {
     "id": 10328,
@@ -524,7 +828,50 @@ export const ROUND_54: QuizQuestion[] = [
     ],
     "correctIndex": 2,
     "explanation": "AVG 함수는 NULL 을 자동으로 제외하므로 나이_그룹=3 에서는 (30+30)/2 = 30 이 산출된다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "headers": [
+          "나이_그룹",
+          "나이"
+        ],
+        "rows": [
+          [
+            "1",
+            "10"
+          ],
+          [
+            "1",
+            "10"
+          ],
+          [
+            "2",
+            "20"
+          ],
+          [
+            "2",
+            "20"
+          ],
+          [
+            "3",
+            "30"
+          ],
+          [
+            "3",
+            "30"
+          ],
+          [
+            "3",
+            "NULL"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT AVG(나이) AS 평균_나이\nFROM   TAB\nGROUP BY 나이_그룹;"
+      }
+    ]
   },
   {
     "id": 10329,
@@ -560,7 +907,13 @@ export const ROUND_54: QuizQuestion[] = [
     ],
     "correctIndex": 0,
     "explanation": "",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "text",
+        "content": "파티션별 윈도우의 전체 건수에서 현재 행보다 작거나 같은 건수에 대한 누적 백분율을 반환한다."
+      }
+    ]
   },
   {
     "id": 10331,
@@ -596,7 +949,42 @@ export const ROUND_54: QuizQuestion[] = [
     ],
     "correctIndex": 0,
     "explanation": "SALARY 오름차순 기준 7780 의 ROW_NUMBER 는 4, RANK 는 동점 처리되어 4, DENSE_RANK 는 건너뛰지 않아 3 이다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "headers": [
+          "EMP_ID",
+          "SALARY"
+        ],
+        "rows": [
+          [
+            "7780",
+            "4000"
+          ],
+          [
+            "7781",
+            "4000"
+          ],
+          [
+            "7782",
+            "3000"
+          ],
+          [
+            "7783",
+            "3000"
+          ],
+          [
+            "7784",
+            "2000"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT EMP_ID,\n       ROW_NUMBER() OVER (ORDER BY SALARY) AS ROW_NUM,\n       RANK()       OVER (ORDER BY SALARY) AS RANK_NUM,\n       DENSE_RANK() OVER (ORDER BY SALARY) AS DRANK_NUM\nFROM   EMP;"
+      }
+    ]
   },
   {
     "id": 10333,
@@ -632,7 +1020,13 @@ export const ROUND_54: QuizQuestion[] = [
     ],
     "correctIndex": 0,
     "explanation": "자기보다 점수가 높은 사람 수에 1 을 더하면 순위가 된다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT 이름, 점수,\n       (SELECT COUNT(*) + 1\n        FROM   T1 T2\n        WHERE  T1.점수 < T2.점수) AS 순위\nFROM   T1\nORDER BY 순위;"
+      }
+    ]
   },
   {
     "id": 10335,
@@ -668,7 +1062,13 @@ export const ROUND_54: QuizQuestion[] = [
     ],
     "correctIndex": 3,
     "explanation": "WHERE 절이 없는 UPDATE 이므로 모든 행에 대해 서브쿼리가 평가된다. DEPARTMENT_ID=60 조건을 만족하지 못하면 서브쿼리 결과가 NULL 이 된다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "UPDATE EMP_TEST A\nSET SALARY = (SELECT SALARY * 1.1\n              FROM   EMP_TEST B\n              WHERE  A.EMPLOYEE_ID = B.EMPLOYEE_ID\n              AND    B.DEPARTMENT_ID = 60);"
+      }
+    ]
   },
   {
     "id": 10337,
@@ -686,7 +1086,13 @@ export const ROUND_54: QuizQuestion[] = [
     ],
     "correctIndex": 2,
     "explanation": "CHECK·PK 위반 문장은 롤백되고 성공한 INSERT 두 건의 합계가 770 으로 집계된다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "-- COL1 PK, COL2 CHECK > 500\nINSERT ...;                -- 정상\nUPDATE ...;                -- CHECK 조건 위반\nINSERT ...;                -- PK 조건 위반\nINSERT ...;                -- 정상\n\nSELECT SUM(COL2) FROM T;"
+      }
+    ]
   },
   {
     "id": 10338,
@@ -704,7 +1110,13 @@ export const ROUND_54: QuizQuestion[] = [
     ],
     "correctIndex": 1,
     "explanation": "총매출 오름차순 정렬이므로 작은 값이 먼저 출력된다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT COL1, SUM(매출) AS 총매출\nFROM   T\nGROUP BY COL1\nORDER BY 총매출;"
+      }
+    ]
   },
   {
     "id": 10339,
@@ -722,7 +1134,38 @@ export const ROUND_54: QuizQuestion[] = [
     ],
     "correctIndex": 3,
     "explanation": "COL2+COL3 중 어느 한쪽이 NULL 이면 덧셈 결과가 NULL 이 되어 SUM 도 NULL 로 반환된다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "headers": [
+          "COL1",
+          "COL2",
+          "COL3"
+        ],
+        "rows": [
+          [
+            "A",
+            "10",
+            "1"
+          ],
+          [
+            "B",
+            "20",
+            "NULL"
+          ],
+          [
+            "C",
+            "NULL",
+            "3"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT COL1, MIN(COL2), MAX(COL2), SUM(COL2 + COL3)\nFROM   T\nGROUP BY COL1;"
+      }
+    ]
   },
   {
     "id": 10340,
@@ -740,7 +1183,13 @@ export const ROUND_54: QuizQuestion[] = [
     ],
     "correctIndex": 0,
     "explanation": "",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "text",
+        "content": "입력·수정·삭제한 데이터에 대해 전혀 문제가 없다고 판단되었을 경우 (   ) 명령을 수행한다."
+      }
+    ]
   },
   {
     "id": 10341,
@@ -758,7 +1207,13 @@ export const ROUND_54: QuizQuestion[] = [
     ],
     "correctIndex": 3,
     "explanation": "",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT *\nFROM   주문 JOIN 주문내역 ON 주문.번호 = 주문내역.번호\nORDER BY 계좌번호 DESC;"
+      }
+    ]
   },
   {
     "id": 10342,
@@ -794,7 +1249,13 @@ export const ROUND_54: QuizQuestion[] = [
     ],
     "correctIndex": 2,
     "explanation": "IN 조건을 만족하지 않는 값은 ELSE 절로 분기되어 '취급안함' 이 반환된다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT CASE\n         WHEN 분류 IN ('A','B') THEN '취급'\n         ELSE '취급안함'\n       END\nFROM   T;"
+      }
+    ]
   },
   {
     "id": 10344,
@@ -812,7 +1273,13 @@ export const ROUND_54: QuizQuestion[] = [
     ],
     "correctIndex": 0,
     "explanation": "",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT * FROM T WHERE COL1 LIKE 'A%';"
+      }
+    ]
   },
   {
     "id": 10345,
@@ -830,7 +1297,30 @@ export const ROUND_54: QuizQuestion[] = [
     ],
     "correctIndex": 0,
     "explanation": "LAG 는 이전 행의 값을 반환한다. 첫 행은 이전 값이 없으므로 NULL 이다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "headers": [
+          "COL1",
+          "COL2"
+        ],
+        "rows": [
+          [
+            "1",
+            "NULL"
+          ],
+          [
+            "2",
+            "1"
+          ],
+          [
+            "3",
+            "2"
+          ]
+        ]
+      }
+    ]
   },
   {
     "id": 10346,
@@ -848,7 +1338,42 @@ export const ROUND_54: QuizQuestion[] = [
     ],
     "correctIndex": 2,
     "explanation": "COUNT(*) = 5, COUNT(COL1) = 3 (NULL 제외), COUNT(DISTINCT COL2) = 2 (X, Y). 합계 10.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "headers": [
+          "COL1",
+          "COL2"
+        ],
+        "rows": [
+          [
+            "A",
+            "X"
+          ],
+          [
+            "B",
+            "X"
+          ],
+          [
+            "NULL",
+            "Y"
+          ],
+          [
+            "C",
+            "Y"
+          ],
+          [
+            "NULL",
+            "NULL"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT COUNT(*) + COUNT(COL1) + COUNT(DISTINCT COL2) FROM T;"
+      }
+    ]
   },
   {
     "id": 10347,
@@ -902,6 +1427,49 @@ export const ROUND_54: QuizQuestion[] = [
     ],
     "correctIndex": 1,
     "explanation": "T1.COL2 = T2.COL2 조인 시 T1 의 'A' 행은 T1.COL3=2 이므로 T1.COL3>=3 조건을 만족하지 못하고, T1 의 'B' 행은 T2 에 매칭되지 않아 결과가 공집합이 된다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "headers": [
+          "T1",
+          "T2"
+        ],
+        "rows": [
+          [
+            "COL1",
+            "COL2",
+            "COL3",
+            "COL1",
+            "COL2"
+          ],
+          [
+            "가",
+            "A",
+            "2",
+            "2",
+            "A"
+          ],
+          [
+            "나",
+            "B",
+            "3",
+            "3",
+            "C"
+          ],
+          [
+            "다",
+            "C",
+            "NULL",
+            "",
+            ""
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT *\nFROM   T1 INNER JOIN T2 ON T1.COL2 = T2.COL2\nWHERE  1 = 1\nAND    T1.COL3 >= 3\nAND    T2.COL2 IN ('A', 'B');"
+      }
+    ]
   }
 ];

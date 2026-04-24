@@ -20,7 +20,13 @@ export const ROUND_55: QuizQuestion[] = [
     ],
     "correctIndex": 1,
     "explanation": "내부 스키마는 물리적 저장 구조 및 저장 방식을 다루는 단계이다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "text",
+        "content": "가. 외부 사용자 관점에서 데이터를 표현한다.\n나. 물리적 저장 구조 및 저장 장치에서의 저장 방식을 표현한다.\n다. 조직 전체의 통합적 데이터 관점을 나타낸다.\n라. 내부 단계와 내부 스키마로 구성되며 DB 가 물리적으로 저장되는 형식을 정의한다."
+      }
+    ]
   },
   {
     "id": 10251,
@@ -74,7 +80,13 @@ export const ROUND_55: QuizQuestion[] = [
     ],
     "correctIndex": 1,
     "explanation": "부분 함수 종속을 제거하는 단계가 제2 정규화이다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "text",
+        "content": "주식별자 컬럼 두 개를 하나씩 나누어 테이블을 분리함으로써, 일반 속성이 주식별자에 부분적으로 종속되는 현상을 해결한다."
+      }
+    ]
   },
   {
     "id": 10254,
@@ -164,7 +176,13 @@ export const ROUND_55: QuizQuestion[] = [
     ],
     "correctIndex": 3,
     "explanation": "",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "text",
+        "content": "( ㉠ ) → ( ㉡ ) → ( ㉢ ) → ( ㉣ )"
+      }
+    ]
   },
   {
     "id": 10259,
@@ -182,7 +200,13 @@ export const ROUND_55: QuizQuestion[] = [
     ],
     "correctIndex": 1,
     "explanation": "",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "text",
+        "content": "두 개의 엔터티 간 관계에서 참여자의 수를 표현하는 것이며, 가장 일반적인 표현 방법은 1:M, 1:1, M:N 이다."
+      }
+    ]
   },
   {
     "id": 10260,
@@ -236,7 +260,38 @@ export const ROUND_55: QuizQuestion[] = [
     ],
     "correctIndex": 1,
     "explanation": "DEPT=10 에서 SAL=3000 이 두 개, SAL=2500 이 DENSE_RANK 2, DEPT=20 은 단독 1 이다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "headers": [
+          "DEPT",
+          "SAL"
+        ],
+        "rows": [
+          [
+            "10",
+            "3000"
+          ],
+          [
+            "10",
+            "3000"
+          ],
+          [
+            "10",
+            "2500"
+          ],
+          [
+            "20",
+            "5000"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT DEPT, SAL,\n       DENSE_RANK() OVER (PARTITION BY DEPT ORDER BY SAL DESC) AS RNK\nFROM   EMP;"
+      }
+    ]
   },
   {
     "id": 10263,
@@ -254,7 +309,13 @@ export const ROUND_55: QuizQuestion[] = [
     ],
     "correctIndex": 1,
     "explanation": "ROLLUP(COL1), COL1 은 GROUP BY COL1 UNION ALL GROUP BY COL1 과 동일하므로 A·B·C 각 3건씩 총 6건이 산출된다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "INSERT INTO TAB1 VALUES ('A', 100);\nINSERT INTO TAB1 VALUES ('B', 200);\nINSERT INTO TAB1 VALUES ('C', 300);\nINSERT INTO TAB1 VALUES ('C', 400);\n\nSELECT COUNT(*)\nFROM (\n  SELECT COL1, SUM(COL2)\n  FROM   TAB1\n  GROUP BY ROLLUP(COL1), COL1\n)\nWHERE 1 = 1;"
+      }
+    ]
   },
   {
     "id": 10264,
@@ -272,7 +333,13 @@ export const ROUND_55: QuizQuestion[] = [
     ],
     "correctIndex": 0,
     "explanation": "",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "CREATE TABLE 1234_TBL (  -- (1)\n  COL1 VARCHAR2(20),     -- (2)\n  COL2 NUMBER             -- (3)\n);                        -- (4)"
+      }
+    ]
   },
   {
     "id": 10265,
@@ -308,7 +375,13 @@ export const ROUND_55: QuizQuestion[] = [
     ],
     "correctIndex": 3,
     "explanation": "ROLLUP(A) 는 (A), () 를 산출하고 여기에 B 를 GROUPING SETS 로 합치면 (A), (B), () 의 세 조합이 된다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT A, B, SUM(SAL)\nFROM   T\nGROUP BY GROUPING SETS( ROLLUP(A), B );"
+      }
+    ]
   },
   {
     "id": 10267,
@@ -326,7 +399,34 @@ export const ROUND_55: QuizQuestion[] = [
     ],
     "correctIndex": 1,
     "explanation": "NULL 에 산술 연산을 적용하면 결과가 NULL 이 되므로, NULL 이 포함된 첫 번째·세 번째 행은 NULL 이 반환된다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "headers": [
+          "COL1",
+          "COL2"
+        ],
+        "rows": [
+          [
+            "NULL",
+            "10"
+          ],
+          [
+            "10",
+            "10"
+          ],
+          [
+            "10",
+            "NULL"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT COL1 * 2 + COL2 * 2 FROM T;"
+      }
+    ]
   },
   {
     "id": 10268,
@@ -344,7 +444,13 @@ export const ROUND_55: QuizQuestion[] = [
     ],
     "correctIndex": 2,
     "explanation": "SUM 은 NULL 값을 자동으로 제외하고 집계하며, 두 집계 값이 더해진 뒤 NVL 로 NULL 시 0 으로 치환된다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT NVL(SUM(C1) + SUM(C2), 0) FROM T;"
+      }
+    ]
   },
   {
     "id": 10269,
@@ -362,7 +468,22 @@ export const ROUND_55: QuizQuestion[] = [
     ],
     "correctIndex": 2,
     "explanation": "T1과 T2는 공통 값 3 하나로 매칭된다. LEFT OUTER JOIN은 T1 기준 3건(1, 2, 3), RIGHT OUTER JOIN은 T2 기준 3건(3, 4, 5), FULL OUTER JOIN은 매칭 1건 + T1 미매칭 2건 + T2 미매칭 2건으로 5건이 된다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "headers": [
+          "T1",
+          "T2"
+        ],
+        "rows": [
+          [
+            "1, 2, 3",
+            "3, 4, 5"
+          ]
+        ]
+      }
+    ]
   },
   {
     "id": 10270,
@@ -380,7 +501,13 @@ export const ROUND_55: QuizQuestion[] = [
     ],
     "correctIndex": 0,
     "explanation": "마지막 INNER JOIN 이 이전까지의 OUTER JOIN 결과 중 T4 와 매칭되는 행만 남기므로 최종 1 건이 반환된다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT COUNT(*)\nFROM   T1\nLEFT  OUTER JOIN T2 ON T1.ID = T2.ID\nLEFT  OUTER JOIN T3 ON T2.ID = T3.ID\nINNER JOIN T4 ON T3.ID = T4.ID;"
+      }
+    ]
   },
   {
     "id": 10271,
@@ -398,7 +525,13 @@ export const ROUND_55: QuizQuestion[] = [
     ],
     "correctIndex": 1,
     "explanation": "두 번째 캡처 그룹 '(4(56)(78))' 이 시작되는 위치인 4 를 반환한다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT REGEXP_INSTR('12345678', '(123)(4(56)(78))', 1, 1, 0, 'i', 2)\nFROM DUAL;"
+      }
+    ]
   },
   {
     "id": 10272,
@@ -416,7 +549,13 @@ export const ROUND_55: QuizQuestion[] = [
     ],
     "correctIndex": 1,
     "explanation": "첫 번째는 'b*c' 를 리터럴로 해석(b, *, c 가 연속)하여 매칭되지 않아 NULL 이 된다. 두 번째는 'b*c' 에서 * 가 0회 이상을 의미하므로 'bc' 에 매칭된다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT REGEXP_SUBSTR('abcd', 'b\\*c') AS COL1,\n       REGEXP_SUBSTR('abcd', 'b*c')  AS COL2\nFROM DUAL;"
+      }
+    ]
   },
   {
     "id": 10273,
@@ -434,7 +573,13 @@ export const ROUND_55: QuizQuestion[] = [
     ],
     "correctIndex": 0,
     "explanation": "",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT 사원번호, 관리자번호\nFROM   EMP\nSTART WITH 관리자번호 IS NULL\nCONNECT BY PRIOR ( ? ) = ( ? );"
+      }
+    ]
   },
   {
     "id": 10274,
@@ -452,7 +597,30 @@ export const ROUND_55: QuizQuestion[] = [
     ],
     "correctIndex": 1,
     "explanation": "내부 쿼리에서 VAL DESC 기준 RN=1이 (2, 150), RN=2가 (1, 40)으로 부여된다. 외부 ORDER BY RN은 오름차순이므로 RN=1인 (2, 150)이 먼저 출력되고 RN=2인 (1, 40)이 뒤에 출력된다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "headers": [
+          "ID",
+          "VAL"
+        ],
+        "rows": [
+          [
+            "1",
+            "40"
+          ],
+          [
+            "2",
+            "150"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT *\nFROM   (SELECT ID, VAL, ROW_NUMBER() OVER (ORDER BY VAL DESC) AS RN\n        FROM   T)\nORDER BY RN;"
+      }
+    ]
   },
   {
     "id": 10275,
@@ -506,7 +674,48 @@ export const ROUND_55: QuizQuestion[] = [
     ],
     "correctIndex": 0,
     "explanation": "AND가 OR보다 우선하므로 `(고객번호='YY' AND 등급=1 AND 지역='서울') OR 고객번호='XX'`로 평가된다. 고객번호='XX'인 세 건(1·2·4행)과 YY이면서 등급=1·서울인 두 건(3·5행)이 모두 조건을 만족하여 최종 5건이 반환된다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "headers": [
+          "고객번호",
+          "등급",
+          "지역"
+        ],
+        "rows": [
+          [
+            "XX",
+            "1",
+            "서울"
+          ],
+          [
+            "XX",
+            "2",
+            "부산"
+          ],
+          [
+            "YY",
+            "1",
+            "서울"
+          ],
+          [
+            "XX",
+            "1",
+            "서울"
+          ],
+          [
+            "YY",
+            "1",
+            "서울"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT *\nFROM   T\nWHERE  고객번호 = 'XX' OR 고객번호 = 'YY'\nAND    등급 = 1\nAND    지역 = '서울';"
+      }
+    ]
   },
   {
     "id": 10278,
@@ -578,7 +787,13 @@ export const ROUND_55: QuizQuestion[] = [
     ],
     "correctIndex": 1,
     "explanation": "1:M 연쇄 관계에서 상세내용 기준 조인 시 상세내용 행 수만큼 출력된다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "[ 고객 ] ||-----∈ [ 계약 ] ||-----∈ [ 상세내용 ]"
+      }
+    ]
   },
   {
     "id": 10282,
@@ -596,7 +811,13 @@ export const ROUND_55: QuizQuestion[] = [
     ],
     "correctIndex": 0,
     "explanation": "UNION 계열 쿼리의 결과 컬럼명은 첫 번째 SELECT 절의 별칭을 기준으로 결정된다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT COL1 AS AAB, COL2 AS BBA\nFROM   T\nUNION ALL\nSELECT COL1 AS BBA, COL2 AS AAB\nFROM   T;"
+      }
+    ]
   },
   {
     "id": 10283,
@@ -614,7 +835,13 @@ export const ROUND_55: QuizQuestion[] = [
     ],
     "correctIndex": 0,
     "explanation": "",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT 고객ID\nFROM   주문\nGROUP BY 고객ID\nHAVING ( ? );"
+      }
+    ]
   },
   {
     "id": 10284,
@@ -632,7 +859,13 @@ export const ROUND_55: QuizQuestion[] = [
     ],
     "correctIndex": 3,
     "explanation": "SQLD_55_34_01 에 'B' 키가 없으므로 외래키 무결성 제약조건 위반 오류(ORA-02291) 가 발생한다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "CREATE TABLE SQLD_55_34_01 (\n  COL1 VARCHAR2(50),\n  COL2 NUMBER,\n  COL3 VARCHAR2(50),\n  CONSTRAINT PK_01 PRIMARY KEY (COL1)\n);\n\nCREATE TABLE SQLD_55_34_02 (\n  COL4 VARCHAR2(50),\n  COL5 NUMBER,\n  COL1 VARCHAR2(50),\n  CONSTRAINT PK_02 PRIMARY KEY (COL4),\n  CONSTRAINT FK_02_01 FOREIGN KEY (COL1) REFERENCES SQLD_55_34_01(COL1)\n);\n\n-- (1) INSERT INTO SQLD_55_34_01 VALUES ('A', 100, '가');\n-- (2) INSERT INTO SQLD_55_34_02 VALUES ('02_A', 100, NULL);\n-- (3) INSERT INTO SQLD_55_34_02 VALUES ('02_B', 200, 'A');\n-- (4) UPDATE SQLD_55_34_02 SET COL1 = 'B' WHERE COL4 = '02_A';"
+      }
+    ]
   },
   {
     "id": 10285,
@@ -650,7 +883,13 @@ export const ROUND_55: QuizQuestion[] = [
     ],
     "correctIndex": 0,
     "explanation": "ROLLBACK TO SAVEPOINT A 는 (나)·(다) 의 변경을 취소한다. (가) 와 이후 실행된 (라)·(마) 만 COMMIT 으로 최종 반영된다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "(가) SQL1 ...\nSAVEPOINT A;\n(나) SQL2 ...\nSAVEPOINT B;\n(다) SQL3 ...\nROLLBACK TO SAVEPOINT A;\n(라) SQL4 ...\n(마) SQL5 ...\nCOMMIT;"
+      }
+    ]
   },
   {
     "id": 10286,
@@ -758,7 +997,13 @@ export const ROUND_55: QuizQuestion[] = [
     ],
     "correctIndex": 1,
     "explanation": "(1) 은 0/300=0, (2) 는 0 으로 나누기 오류(ORA-01476), (3) 은 NULL 연산 결과로 NULL 이 반환된다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "-- (1) SELECT COL1/COL2 FROM T WHERE COL1=0   AND COL2=300;\n-- (2) SELECT COL1/COL2 FROM T WHERE COL1=300 AND COL2=0;\n-- (3) SELECT COL1/COL2 FROM T WHERE COL1=100 AND COL2 IS NULL;"
+      }
+    ]
   },
   {
     "id": 10292,
@@ -794,7 +1039,30 @@ export const ROUND_55: QuizQuestion[] = [
     ],
     "correctIndex": 1,
     "explanation": "'학' 으로 끝나는 과목인 '물리학' 과 '수학' 이 반환된다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "headers": [
+          "과목"
+        ],
+        "rows": [
+          [
+            "물리학"
+          ],
+          [
+            "수학"
+          ],
+          [
+            "공학개론"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT *\nFROM   수강\nWHERE  과목 LIKE '%학';"
+      }
+    ]
   },
   {
     "id": 10294,
@@ -830,7 +1098,13 @@ export const ROUND_55: QuizQuestion[] = [
     ],
     "correctIndex": 1,
     "explanation": "",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "-- 직원 테이블에 직장우편번호(OFFI_POST_NUMBER) 컬럼을 추가한다."
+      }
+    ]
   },
   {
     "id": 10296,
@@ -884,7 +1158,13 @@ export const ROUND_55: QuizQuestion[] = [
     ],
     "correctIndex": 0,
     "explanation": "BETWEEN 은 양 끝점을 포함하므로 부등호가 `>`, `<` 인 조건은 경계값이 빠져 결과가 달라진다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT *\nFROM   T\nWHERE  COL1 BETWEEN 날짜(XXXX) AND 날짜(YYYY);"
+      }
+    ]
   },
   {
     "id": 10299,
@@ -902,6 +1182,12 @@ export const ROUND_55: QuizQuestion[] = [
     ],
     "correctIndex": 3,
     "explanation": "IN 은 다중 행 서브쿼리를 허용하므로 동명 직원이 다수라도 오류가 발생하지 않는다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT ...\nFROM   EMP\nWHERE  DEPT IN (SELECT DEPT\n                FROM   EMP\n                WHERE  EMPNM IN ('JOHN', 'SMITH'));"
+      }
+    ]
   }
 ];

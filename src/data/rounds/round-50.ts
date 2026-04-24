@@ -128,7 +128,13 @@ export const ROUND_50: QuizQuestion[] = [
     ],
     "correctIndex": 3,
     "explanation": "",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "text",
+        "content": "엔터티의 인스턴스를 유일하게 구분할 수 있게 하는 하나 또는 그 이상의 속성 집합"
+      }
+    ]
   },
   {
     "id": 10507,
@@ -200,7 +206,13 @@ export const ROUND_50: QuizQuestion[] = [
     ],
     "correctIndex": 2,
     "explanation": "",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "STUDENT(학과, 학번, 강좌), CLASS(강좌번호, ...), ENROLL(학번, 강좌번호, 학점)"
+      }
+    ]
   },
   {
     "id": 10511,
@@ -218,7 +230,38 @@ export const ROUND_50: QuizQuestion[] = [
     ],
     "correctIndex": 1,
     "explanation": "뷰 조건과 조회 조건이 AND 로 결합되어 C1='B' 이고 C2 >= 200 인 (B, 200) 한 건의 SUM 이 200 이다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "headers": [
+          "C1",
+          "C2"
+        ],
+        "rows": [
+          [
+            "A",
+            "100"
+          ],
+          [
+            "B",
+            "200"
+          ],
+          [
+            "B",
+            "100"
+          ],
+          [
+            "NULL",
+            "200"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "CREATE VIEW V_TBL AS\nSELECT * FROM TBL WHERE C1 = 'B' OR C1 IS NULL;\n\nSELECT SUM(C2) FROM V_TBL\nWHERE C2 >= 200 AND C1 = 'B';"
+      }
+    ]
   },
   {
     "id": 10512,
@@ -236,7 +279,58 @@ export const ROUND_50: QuizQuestion[] = [
     ],
     "correctIndex": 1,
     "explanation": "",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "headers": [
+          "TAB1",
+          "TAB2"
+        ],
+        "rows": [
+          [
+            "C1",
+            "C2",
+            "C1",
+            "C2"
+          ],
+          [
+            "A",
+            "1",
+            "B",
+            "2"
+          ],
+          [
+            "B",
+            "2",
+            "C",
+            "3"
+          ],
+          [
+            "C",
+            "3",
+            "D",
+            "4"
+          ],
+          [
+            "D",
+            "4",
+            "",
+            ""
+          ],
+          [
+            "E",
+            "5",
+            "",
+            ""
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT * FROM TAB1 A\nLEFT OUTER JOIN TAB2 B\nON (A.C1 = B.C1 AND B.C2 BETWEEN 1 AND 3);"
+      }
+    ]
   },
   {
     "id": 10513,
@@ -254,7 +348,17 @@ export const ROUND_50: QuizQuestion[] = [
     ],
     "correctIndex": 1,
     "explanation": "SUBSTR('abcdefg', 4) 는 4번째 문자부터 끝까지이므로 'defg' 이다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "text",
+        "content": "'abcdefg' 문자열에 대해 SUBSTR 을 수행한다."
+      },
+      {
+        "type": "sql",
+        "code": "SELECT SUBSTR(STR, LENGTH(STR) - 3) FROM T;\n-- STR = 'abcdefg', LENGTH = 7"
+      }
+    ]
   },
   {
     "id": 10514,
@@ -272,7 +376,13 @@ export const ROUND_50: QuizQuestion[] = [
     ],
     "correctIndex": 0,
     "explanation": "COUNT(*) 는 행이 없어도 0 을 반환하므로 NVL 의 대체 값이 적용되지 않는다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT NVL(COUNT(*), 9999)\nFROM   TAB1\nWHERE  1 = 2;"
+      }
+    ]
   },
   {
     "id": 10515,
@@ -326,7 +436,34 @@ export const ROUND_50: QuizQuestion[] = [
     ],
     "correctIndex": 3,
     "explanation": "CUBE 는 (A,B), (A), (B), () 의 모든 부분집합을 반환한다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "headers": [
+          "A",
+          "B"
+        ],
+        "rows": [
+          [
+            "A1",
+            "B1"
+          ],
+          [
+            "A1",
+            "NULL"
+          ],
+          [
+            "NULL",
+            "B1"
+          ],
+          [
+            "NULL",
+            "NULL"
+          ]
+        ]
+      }
+    ]
   },
   {
     "id": 10518,
@@ -362,7 +499,38 @@ export const ROUND_50: QuizQuestion[] = [
     ],
     "correctIndex": 0,
     "explanation": "",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "headers": [
+          "ID",
+          "NAME"
+        ],
+        "rows": [
+          [
+            "100",
+            "KIM"
+          ],
+          [
+            "200",
+            "PARK"
+          ],
+          [
+            "300",
+            "KANG"
+          ],
+          [
+            "400",
+            "KIM"
+          ],
+          [
+            "500",
+            "KANG"
+          ]
+        ]
+      }
+    ]
   },
   {
     "id": 10520,
@@ -398,7 +566,13 @@ export const ROUND_50: QuizQuestion[] = [
     ],
     "correctIndex": 1,
     "explanation": "",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT A.KEY_A, B.KEY_B, A.COL, B.COL\nFROM   A22 A, B22 B\nWHERE  A.KEY_A = B.KEY_B(+)\nUNION ALL\nSELECT A.KEY_A, B.KEY_B, A.COL, B.COL\nFROM   A22 A, B22 B\nWHERE  B.KEY_B = A.KEY_A(+);"
+      }
+    ]
   },
   {
     "id": 10522,
@@ -488,7 +662,13 @@ export const ROUND_50: QuizQuestion[] = [
     ],
     "correctIndex": 0,
     "explanation": "",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT 부서, MAX(연봉)\nFROM   EMP\n( ? );"
+      }
+    ]
   },
   {
     "id": 10527,
@@ -506,7 +686,33 @@ export const ROUND_50: QuizQuestion[] = [
     ],
     "correctIndex": 0,
     "explanation": "",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "headers": [
+          "급여"
+        ],
+        "rows": [
+          [
+            "4000"
+          ],
+          [
+            "NULL"
+          ],
+          [
+            "4000"
+          ],
+          [
+            "4000"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT SUM(급여)/3, COUNT(*), COUNT(급여) FROM T;\n-- SUM(급여)/3 = 12000/3 = 4000\n-- COUNT(*) = 4 (NULL 포함)\n-- COUNT(급여) = 3 (NULL 제외)"
+      }
+    ]
   },
   {
     "id": 10528,
@@ -524,7 +730,13 @@ export const ROUND_50: QuizQuestion[] = [
     ],
     "correctIndex": 1,
     "explanation": "",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "text",
+        "content": "현재 행 기준 이전 행의 값을 참조한다."
+      }
+    ]
   },
   {
     "id": 10529,
@@ -596,7 +808,13 @@ export const ROUND_50: QuizQuestion[] = [
     ],
     "correctIndex": 2,
     "explanation": "1/24/60 = 1분이며, 1/12/2 = 1/24 = 1시간에 해당한다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT SYSDATE + 1/12/(60/30) FROM DUAL;"
+      }
+    ]
   },
   {
     "id": 10533,
@@ -668,7 +886,30 @@ export const ROUND_50: QuizQuestion[] = [
     ],
     "correctIndex": 3,
     "explanation": "부서 11 에서 시작해 자식→부모 방향(역방향) 으로 2 까지 거슬러 올라간다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "headers": [
+          "부서코드",
+          "상위부서코드"
+        ],
+        "rows": [
+          [
+            "11",
+            "7"
+          ],
+          [
+            "7",
+            "2"
+          ],
+          [
+            "2",
+            "NULL"
+          ]
+        ]
+      }
+    ]
   },
   {
     "id": 10537,
@@ -686,7 +927,13 @@ export const ROUND_50: QuizQuestion[] = [
     ],
     "correctIndex": 3,
     "explanation": "",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "배우(배우번호, 배우명, 성별)\n영화(영화번호, 영화명, 제작년도)\n출연(배우번호, 영화번호, 출연료)"
+      }
+    ]
   },
   {
     "id": 10538,
@@ -704,7 +951,38 @@ export const ROUND_50: QuizQuestion[] = [
     ],
     "correctIndex": 1,
     "explanation": "서로 다른 급여 값은 30000, 35000, 4000 의 3개이다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "headers": [
+          "ID",
+          "급여"
+        ],
+        "rows": [
+          [
+            "101",
+            "30000"
+          ],
+          [
+            "102",
+            "35000"
+          ],
+          [
+            "103",
+            "4000"
+          ],
+          [
+            "104",
+            "35000"
+          ],
+          [
+            "105",
+            "4000"
+          ]
+        ]
+      }
+    ]
   },
   {
     "id": 10539,
@@ -740,7 +1018,13 @@ export const ROUND_50: QuizQuestion[] = [
     ],
     "correctIndex": 1,
     "explanation": "",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "-- 뷰: WHERE C1 = 'B' OR C1 IS NULL\n-- 조회: WHERE C2 >= 200 AND C1 = 'B'"
+      }
+    ]
   },
   {
     "id": 10541,
@@ -776,7 +1060,44 @@ export const ROUND_50: QuizQuestion[] = [
     ],
     "correctIndex": 1,
     "explanation": "원본 기출의 정답 표기를 보존한다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "headers": [
+          "회원번호",
+          "회원코드",
+          "물건",
+          "금액"
+        ],
+        "rows": [
+          [
+            "1001",
+            "A",
+            "1",
+            "100"
+          ],
+          [
+            "1001",
+            "B",
+            "1",
+            "200"
+          ],
+          [
+            "2102",
+            "A",
+            "1",
+            "NULL"
+          ],
+          [
+            "2102",
+            "B",
+            "NULL",
+            "300"
+          ]
+        ]
+      }
+    ]
   },
   {
     "id": 10543,
@@ -794,7 +1115,13 @@ export const ROUND_50: QuizQuestion[] = [
     ],
     "correctIndex": 3,
     "explanation": "ROLLBACK TO SAVEPOINT 후에도 UPDATE 로 인해 VAL=4 인 행은 남아 있고, 이후 INSERT 3 까지 포함되어 최대값은 4 이다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "INSERT INTO T VALUES (1);\nINSERT INTO T VALUES (2);\nSAVEPOINT SV1;\nUPDATE T SET VAL = 4 WHERE VAL = 1;\nSAVEPOINT SV1;          -- 덮어쓰기\nDELETE FROM T WHERE VAL = 2;\nROLLBACK TO SAVEPOINT SV1;\nINSERT INTO T VALUES (3);\nCOMMIT;\nSELECT MAX(VAL) FROM T;"
+      }
+    ]
   },
   {
     "id": 10544,
@@ -866,7 +1193,13 @@ export const ROUND_50: QuizQuestion[] = [
     ],
     "correctIndex": 3,
     "explanation": "조인 조건 없이 두 테이블을 결합하면 모든 행의 조합을 생성하는 카티션 곱(CROSS JOIN) 이 된다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT * FROM TABLE1, TABLE2;  -- 조인 조건 없음"
+      }
+    ]
   },
   {
     "id": 10548,
@@ -884,7 +1217,38 @@ export const ROUND_50: QuizQuestion[] = [
     ],
     "correctIndex": 0,
     "explanation": "LAG 함수는 현재 행의 직전 행 값을 반환하므로, 두 번째 행의 LAG 는 1행 값이며 세 번째 행의 LAG 는 2행의 값인 700 이 된다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "text",
+        "content": "LAG(금액, 1) 의 두 번째 행 값은 (ㄱ), 세 번째 행 값은 (ㄴ) 이다."
+      },
+      {
+        "type": "table",
+        "headers": [
+          "행",
+          "금액",
+          "LAG"
+        ],
+        "rows": [
+          [
+            "1",
+            "NULL",
+            "NULL"
+          ],
+          [
+            "2",
+            "(ㄱ)",
+            "1행 값"
+          ],
+          [
+            "3",
+            "(ㄴ)",
+            "2행 값"
+          ]
+        ]
+      }
+    ]
   },
   {
     "id": 10549,
@@ -902,6 +1266,12 @@ export const ROUND_50: QuizQuestion[] = [
     ],
     "correctIndex": 1,
     "explanation": "ROLLBACK 은 트랜잭션 내의 모든 변경 작업을 취소하고 직전 COMMIT 시점의 상태로 복원한다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "text",
+        "content": "트랜잭션 수행 중 오류가 발생한 경우 모든 작업을 취소하고 이전 상태로 되돌리는 명령"
+      }
+    ]
   }
 ];

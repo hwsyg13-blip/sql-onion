@@ -1,6 +1,6 @@
 {
   "round": 57,
-  "notes": "restored from 57회_복원.md — MCQ 50 (references 포함: 28) + 단답형 0 제외",
+  "notes": "restored from 57회_복원.md — MCQ 50 (질문refs 28, 선택지refs 1) + 단답형 0 제외",
   "authored": [
     {
       "subject": "1과목",
@@ -1050,10 +1050,10 @@
       "number": 50,
       "title": "아래 사원 테이블에 대한 SQL 의 실행 결과로 가장 적절한 것은?",
       "options": [
-        "2건 반환 <table border=\"1\" cellspacing=\"0\" cellpadding=\"6\"> <tr><th>사원ID</th><th>부서ID</th><th>사원명</th><th>연봉</th></tr> <tr><td>003</td><td>200</td><td>김유신</td><td>4500</td></tr> <tr><td>006</td><td>300</td><td>변사또</td><td>4500</td></tr> </table>",
-        "3건 반환 <table border=\"1\" cellspacing=\"0\" cellpadding=\"6\"> <tr><th>사원ID</th><th>부서ID</th><th>사원명</th><th>연봉</th></tr> <tr><td>001</td><td>100</td><td>홍길동</td><td>2500</td></tr> <tr><td>005</td><td>200</td><td>유학생</td><td>2500</td></tr> <tr><td>007</td><td>300</td><td>박문수</td><td>3000</td></tr> </table>",
-        "3건 반환 <table border=\"1\" cellspacing=\"0\" cellpadding=\"6\"> <tr><th>사원ID</th><th>부서ID</th><th>사원명</th><th>연봉</th></tr> <tr><td>002</td><td>100</td><td>강감찬</td><td>3000</td></tr> <tr><td>003</td><td>200</td><td>김유신</td><td>4500</td></tr> <tr><td>006</td><td>300</td><td>변사또</td><td>4500</td></tr> </table>",
-        "1건 반환 <table border=\"1\" cellspacing=\"0\" cellpadding=\"6\"> <tr><th>사원ID</th><th>부서ID</th><th>사원명</th><th>연봉</th></tr> <tr><td>003</td><td>200</td><td>김유신</td><td>4500</td></tr> </table>"
+        "2건 반환",
+        "3건 반환",
+        "3건 반환",
+        "1건 반환"
       ],
       "correctIndex": 2,
       "explanation": "인라인 뷰 X 에서 각 사원에 부서별 최고 연봉이 매핑된다. Y 와 조인하면서 사원ID 가 같고 '본인 연봉 = 부서 최고 연봉' 조건까지 만족하는 행만 남는다. 부서 100은 002(강감찬, 3000), 200은 003(김유신, 4500), 300은 006(변사또, 4500) 이 반환된다.",
@@ -1115,6 +1115,114 @@
           "type": "sql",
           "code": "SELECT Y.사원ID, Y.부서ID, Y.사원명, Y.연봉\nFROM   (SELECT 사원ID, MAX(연봉) OVER (PARTITION BY 부서ID) AS 최고연봉\n        FROM   사원) X,\n       사원 Y\nWHERE  X.사원ID = Y.사원ID\nAND    X.최고연봉 = Y.연봉;"
         }
+      ],
+      "optionReferences": [
+        [
+          {
+            "type": "table",
+            "headers": [
+              "사원ID",
+              "부서ID",
+              "사원명",
+              "연봉"
+            ],
+            "rows": [
+              [
+                "003",
+                "200",
+                "김유신",
+                "4500"
+              ],
+              [
+                "006",
+                "300",
+                "변사또",
+                "4500"
+              ]
+            ]
+          }
+        ],
+        [
+          {
+            "type": "table",
+            "headers": [
+              "사원ID",
+              "부서ID",
+              "사원명",
+              "연봉"
+            ],
+            "rows": [
+              [
+                "001",
+                "100",
+                "홍길동",
+                "2500"
+              ],
+              [
+                "005",
+                "200",
+                "유학생",
+                "2500"
+              ],
+              [
+                "007",
+                "300",
+                "박문수",
+                "3000"
+              ]
+            ]
+          }
+        ],
+        [
+          {
+            "type": "table",
+            "headers": [
+              "사원ID",
+              "부서ID",
+              "사원명",
+              "연봉"
+            ],
+            "rows": [
+              [
+                "002",
+                "100",
+                "강감찬",
+                "3000"
+              ],
+              [
+                "003",
+                "200",
+                "김유신",
+                "4500"
+              ],
+              [
+                "006",
+                "300",
+                "변사또",
+                "4500"
+              ]
+            ]
+          }
+        ],
+        [
+          {
+            "type": "table",
+            "headers": [
+              "사원ID",
+              "부서ID",
+              "사원명",
+              "연봉"
+            ],
+            "rows": [
+              [
+                "003",
+                "200",
+                "김유신",
+                "4500"
+              ]
+            ]
+          }
+        ]
       ]
     }
   ],

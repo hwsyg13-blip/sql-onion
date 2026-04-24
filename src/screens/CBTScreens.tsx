@@ -5,6 +5,7 @@ import { QUIZ_BANK, EXAM_SETS } from '../data/quizBank';
 import { QuestionBody } from './MockScreens';
 import { AdSlot } from '../components/AdSlot';
 import { recordExamComplete, recordQuizAttempt } from '../lib/progress';
+import { OptionReferences } from '../components/QuestionReferences';
 
 // CBT — Exam list, CBT exam screen (sticky OMR), and result.
 // Also Mock Exam full mode (50-item with timer) reusing pieces.
@@ -216,20 +217,24 @@ export const CBTExam = ({examId = "round-60", onFinish, onNavigate, mockMode = f
                 const sel = answers[idx] === i;
                 let bg="var(--bg-card)", br="1px solid var(--border-default)", badgeBg="var(--bg-muted)", badgeFg="var(--fg-3)";
                 if (sel) { bg="var(--point-100)"; br="2px solid var(--point-600)"; badgeBg="var(--point-600)"; badgeFg="#fff"; }
+                const optRefs = q.optionReferences?.[i];
                 return (
                   <li key={i}>
-                    <button onClick={()=>pick(i)} style={{
-                      width:"100%",textAlign:"left",display:"flex",gap:12,padding:"14px 16px",
-                      background:bg,border:br,borderRadius:12,alignItems:"flex-start",
+                    <div onClick={()=>pick(i)} style={{
+                      width:"100%",textAlign:"left",display:"flex",flexDirection:"column",gap:10,padding:"14px 16px",
+                      background:bg,border:br,borderRadius:12,
                       cursor:"pointer",fontFamily:"inherit",
                     }}>
-                      <span style={{
-                        width:32,height:32,borderRadius:999,background:badgeBg,color:badgeFg,flexShrink:0,
-                        fontSize:16,fontWeight:700,fontFamily:"var(--font-mono)",
-                        display:"inline-flex",alignItems:"center",justifyContent:"center",marginTop:1,
-                      }}>{i+1}</span>
-                      <span style={{fontSize:14.5,color:"var(--fg-2)",lineHeight:1.65}}>{opt}</span>
-                    </button>
+                      <div style={{display:"flex",gap:12,alignItems:"flex-start"}}>
+                        <span style={{
+                          width:32,height:32,borderRadius:999,background:badgeBg,color:badgeFg,flexShrink:0,
+                          fontSize:16,fontWeight:700,fontFamily:"var(--font-mono)",
+                          display:"inline-flex",alignItems:"center",justifyContent:"center",marginTop:1,
+                        }}>{i+1}</span>
+                        <span style={{fontSize:14.5,color:"var(--fg-2)",lineHeight:1.65,flex:1}}>{opt}</span>
+                      </div>
+                      {optRefs && <OptionReferences refs={optRefs}/>}
+                    </div>
                   </li>
                 );
               })}

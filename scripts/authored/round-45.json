@@ -1,6 +1,6 @@
 {
   "round": 45,
-  "notes": "restored from 45회_복원.md — MCQ 50 (references 포함: 31) + 단답형 0 제외",
+  "notes": "restored from 45회_복원.md — MCQ 50 (질문refs 31, 선택지refs 0) + 단답형 0 제외",
   "authored": [
     {
       "subject": "1과목",
@@ -584,10 +584,10 @@
       "number": 28,
       "title": "아래 테이블에 대한 INSERT 구문 수행 시 오류가 발생하지 않는 것은?",
       "options": [
-        "INSERT INTO T1 VALUES (NULL, 1,    2,    3);",
-        "INSERT INTO T1 VALUES (1,    NULL, 2,    3);",
-        "INSERT INTO T1 VALUES (1,    2,    NULL, 3);",
-        "INSERT INTO T1 VALUES (1,    2,    3,    NULL);"
+        "INSERT INTO T1 VALUES (NULL, 1, 2, 3);",
+        "INSERT INTO T1 VALUES (1, NULL, 2, 3);",
+        "INSERT INTO T1 VALUES (1, 2, NULL, 3);",
+        "INSERT INTO T1 VALUES (1, 2, 3, NULL);"
       ],
       "correctIndex": 2,
       "explanation": "UNIQUE 제약은 NULL을 허용하므로 C3에 NULL이 입력되어도 오류가 발생하지 않는다. 나머지는 각각 PK/NOT NULL/CHECK 제약에 위배된다.",

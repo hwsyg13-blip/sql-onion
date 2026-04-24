@@ -20,7 +20,13 @@ export const ROUND_58: QuizQuestion[] = [
     ],
     "correctIndex": 1,
     "explanation": "프로젝트는 업무에서 발생하는 중심 엔터티로 분류되며 키 엔터티(기본 엔터티)에는 해당하지 않는다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "[ 사원 ] ||-----∈ [ 프로젝트참여 ] ∋-----|| [ 프로젝트 ] ∋-----|| [ 회사 ]\n  (기본)              (행위)                    (중심)              (기본)"
+      }
+    ]
   },
   {
     "id": 10101,
@@ -74,7 +80,38 @@ export const ROUND_58: QuizQuestion[] = [
     ],
     "correctIndex": 3,
     "explanation": "도서는 출판사에 종속되므로 출판사 없이는 등록될 수 없다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "[ 출판사 ] ||-----∈ [ 도서 ]\n  (1)             (0..N)"
+      },
+      {
+        "type": "table",
+        "headers": [
+          "ISBN",
+          "제목",
+          "출판사"
+        ],
+        "rows": [
+          [
+            "978-1",
+            "SQL 입문",
+            "A출판사"
+          ],
+          [
+            "978-2",
+            "SQL 입문",
+            "B출판사"
+          ],
+          [
+            "978-3",
+            "데이터 모델링",
+            "A출판사"
+          ]
+        ]
+      }
+    ]
   },
   {
     "id": 10104,
@@ -92,7 +129,17 @@ export const ROUND_58: QuizQuestion[] = [
     ],
     "correctIndex": 1,
     "explanation": "양쪽 참여가 필수이므로 컴퓨터는 반드시 마더보드를 가진다. 마더보드 사용 여부가 선택 사항이라는 서술은 ERD와 어긋난다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "[ 컴퓨터 ] ||───────|─ [ 마더보드 ]"
+      },
+      {
+        "type": "text",
+        "content": "바커(Barker) 표기법 해석: 양쪽 모두 실선 + `|`(필수 단일성)로, 컴퓨터와 마더보드는 1:1 필수 관계이다. 컴퓨터는 반드시 하나의 마더보드를 가져야 하고, 마더보드도 반드시 하나의 컴퓨터에 장착된다."
+      }
+    ]
   },
   {
     "id": 10105,
@@ -128,7 +175,13 @@ export const ROUND_58: QuizQuestion[] = [
     ],
     "correctIndex": 2,
     "explanation": "A→B, B→C 관계가 성립할 때 A→C 를 이행 함수 종속이라 한다. 3정규화는 이를 제거한다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "사번 → 부서번호, 부서번호 → 부서위치"
+      }
+    ]
   },
   {
     "id": 10107,
@@ -146,7 +199,13 @@ export const ROUND_58: QuizQuestion[] = [
     ],
     "correctIndex": 3,
     "explanation": "서로 공존할 수 없고 반드시 하나만 선택되는 관계를 상호 배타적 관계(Arc Relationship)라 한다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "            ┌── [ 법인 ] ─┐\n[ 차량 ]────┤              ├── (상호배타적: 둘 중 하나)\n            └── [ 개인 ] ─┘"
+      }
+    ]
   },
   {
     "id": 10108,
@@ -164,7 +223,42 @@ export const ROUND_58: QuizQuestion[] = [
     ],
     "correctIndex": 1,
     "explanation": "수강을 하지 않은 학생도 존재할 수 있으므로 학생 존재만으로 수강 이력이 강제되지는 않는다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "[ 학생 ] ─|─ ─ ─o∈ [ 수강 ] ∋─ ─ ─o|─ [ 과목 ]"
+      },
+      {
+        "type": "text",
+        "content": "바커(Barker) 표기법 해석: 수강 쪽 실선 + `|`는 수강이 학생·과목을 필수로 가짐을, 학생·과목 쪽 점선 + `o`는 수강 참여가 선택적(0 이상)임을 의미한다. 즉, 학생·과목은 수강이 없어도 존재할 수 있으나, 수강은 반드시 학생·과목과 연결된다."
+      },
+      {
+        "type": "table",
+        "headers": [
+          "수강번호",
+          "학번",
+          "과목코드"
+        ],
+        "rows": [
+          [
+            "S001",
+            "1001",
+            "DB"
+          ],
+          [
+            "S002",
+            "1001",
+            "OS"
+          ],
+          [
+            "S003",
+            "1002",
+            "DB"
+          ]
+        ]
+      }
+    ]
   },
   {
     "id": 10109,
@@ -200,7 +294,13 @@ export const ROUND_58: QuizQuestion[] = [
     ],
     "correctIndex": 2,
     "explanation": "표준 SQL의 REPLACE 함수는 세 번째 인자(치환 문자열)를 요구하므로 두 인자만으로 호출하면 구문 오류가 발생한다. 나머지는 모두 'SQL' 결과를 반환한다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "-- 대상 문자열: 'xxSQLxx'\n-- 기준 문자: 'x'"
+      }
+    ]
   },
   {
     "id": 10111,
@@ -218,7 +318,33 @@ export const ROUND_58: QuizQuestion[] = [
     ],
     "correctIndex": 2,
     "explanation": "㉠의 '_'는 임의 한 문자를 의미하므로 모든 행이 매칭된다. ㉡은 ESCAPE 문자로 '_' 를 리터럴 밑줄로 해석하므로 'a_c'만 매칭된다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "headers": [
+          "COL"
+        ],
+        "rows": [
+          [
+            "a_c"
+          ],
+          [
+            "abc"
+          ],
+          [
+            "aXc"
+          ],
+          [
+            "a c"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "-- ㉠ WHERE COL LIKE '%a_c%'\n-- ㉡ WHERE COL LIKE '%a\\_c%' ESCAPE '\\'"
+      }
+    ]
   },
   {
     "id": 10112,
@@ -254,7 +380,13 @@ export const ROUND_58: QuizQuestion[] = [
     ],
     "correctIndex": 3,
     "explanation": "RESTRICT 옵션은 권한을 다시 부여한 사용자(U3)가 존재하면 REVOKE를 거부하여 오류가 발생한다. 따라서 네 사용자의 SELECT 권한이 모두 그대로 유지된다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "DBA : GRANT SELECT, INSERT, DELETE ON R TO U1;\nDBA : GRANT SELECT ON R TO U2 WITH GRANT OPTION;\nU2  : GRANT SELECT ON R TO U3;\nDBA : REVOKE SELECT ON R FROM U2 RESTRICT;"
+      }
+    ]
   },
   {
     "id": 10114,
@@ -272,7 +404,52 @@ export const ROUND_58: QuizQuestion[] = [
     ],
     "correctIndex": 3,
     "explanation": "CROSS JOIN은 4×3 = 12건, INNER JOIN은 ID=1 매칭 2건·ID=2 매칭 1건 합계 3건, FULL OUTER JOIN은 매칭 3건·A 미매칭 1건(ID=3)·B 미매칭 1건(ID=4)의 5건이므로 합계는 12 + 3 + 5 = 20이다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "headers": [
+          "TAB_A",
+          "TAB_B"
+        ],
+        "rows": [
+          [
+            "ID",
+            "V",
+            "ID",
+            "V"
+          ],
+          [
+            "1",
+            "가",
+            "1",
+            "X"
+          ],
+          [
+            "1",
+            "나",
+            "2",
+            "Y"
+          ],
+          [
+            "2",
+            "다",
+            "4",
+            "Z"
+          ],
+          [
+            "3",
+            "라",
+            "",
+            ""
+          ]
+        ]
+      },
+      {
+        "type": "text",
+        "content": "ㄱ. CROSS JOIN 결과 행 수\nㄴ. INNER JOIN 결과 행 수 (ID 기준)\nㄷ. FULL OUTER JOIN 결과 행 수 (ID 기준)"
+      }
+    ]
   },
   {
     "id": 10115,
@@ -290,7 +467,13 @@ export const ROUND_58: QuizQuestion[] = [
     ],
     "correctIndex": 1,
     "explanation": "NVL 함수는 첫 번째 인자가 NULL인 경우 두 번째 인자 값을 반환하여 안전한 산술 연산을 보장한다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "-- COMM 컬럼에 NULL이 존재할 때, \n-- NULL을 0으로 대체한 SAL+COMM을 계산한다."
+      }
+    ]
   },
   {
     "id": 10116,
@@ -326,7 +509,42 @@ export const ROUND_58: QuizQuestion[] = [
     ],
     "correctIndex": 1,
     "explanation": "원본 기출의 정답 표기를 보존한다. SUM·AVG는 NULL을 제외하고 집계하며, NVL 처리 시 분모에 NULL 건도 포함되어 결과가 달라진다는 점을 묻는 문항이다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "headers": [
+          "ID",
+          "VAL"
+        ],
+        "rows": [
+          [
+            "1",
+            "10"
+          ],
+          [
+            "2",
+            "(NULL)"
+          ],
+          [
+            "3",
+            "20"
+          ],
+          [
+            "4",
+            "(NULL)"
+          ],
+          [
+            "5",
+            "30"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT SUM(VAL), AVG(VAL), AVG(NVL(VAL, 0)) FROM T;"
+      }
+    ]
   },
   {
     "id": 10118,
@@ -344,7 +562,13 @@ export const ROUND_58: QuizQuestion[] = [
     ],
     "correctIndex": 0,
     "explanation": "오른쪽 테이블(B) 기준으로 모든 행을 포함해야 하므로 RIGHT OUTER JOIN을 사용한다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT A.ID, B.V\nFROM   A   ( ? )   B\nON     A.ID = B.ID;\n-- A에 없는 B의 행까지 모두 포함되는 결과를 얻어야 한다."
+      }
+    ]
   },
   {
     "id": 10119,
@@ -362,7 +586,13 @@ export const ROUND_58: QuizQuestion[] = [
     ],
     "correctIndex": 2,
     "explanation": "GROUP BY 절에 없는 일반 컬럼은 집계 함수 내부에서만 사용할 수 있다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT DEPTNO, SUM(SAL)\nFROM   EMP\nGROUP BY DEPTNO\nHAVING SUM(SAL) > 10000;"
+      }
+    ]
   },
   {
     "id": 10120,
@@ -380,7 +610,13 @@ export const ROUND_58: QuizQuestion[] = [
     ],
     "correctIndex": 0,
     "explanation": "ROLLUP은 (A,B), (A), () 순으로 좌측 기준 소계와 총계를 산출한다. CUBE는 모든 부분집합 조합을 포함한다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT DEPT, JOB, SUM(SAL)\nFROM   EMP\nGROUP BY ROLLUP(DEPT, JOB)\nHAVING GROUPING(DEPT) + GROUPING(JOB) > 0;"
+      }
+    ]
   },
   {
     "id": 10121,
@@ -398,7 +634,34 @@ export const ROUND_58: QuizQuestion[] = [
     ],
     "correctIndex": 0,
     "explanation": "NTILE(2)은 3건을 두 그룹으로 나눌 때 앞 그룹이 한 건 더 많도록 (2건, 1건)으로 배정한다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "headers": [
+          "ID",
+          "VAL"
+        ],
+        "rows": [
+          [
+            "1",
+            "100"
+          ],
+          [
+            "2",
+            "200"
+          ],
+          [
+            "3",
+            "300"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT ID, NTILE(2) OVER (ORDER BY ID) AS GRP FROM T;"
+      }
+    ]
   },
   {
     "id": 10122,
@@ -416,7 +679,24 @@ export const ROUND_58: QuizQuestion[] = [
     ],
     "correctIndex": 1,
     "explanation": "두 집합의 모든 조합(카티션 곱)이 결과가 되었으므로 CROSS JOIN이다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "headers": [
+          "A",
+          "B",
+          "C (결과)"
+        ],
+        "rows": [
+          [
+            "{1, 2, 3}",
+            "{6, 7}",
+            "{(1,6), (2,6), (3,6), (1,7), (2,7), (3,7)}"
+          ]
+        ]
+      }
+    ]
   },
   {
     "id": 10123,
@@ -434,7 +714,13 @@ export const ROUND_58: QuizQuestion[] = [
     ],
     "correctIndex": 0,
     "explanation": "NATURAL JOIN은 동일 이름의 모든 컬럼을 기준으로 자동 조인하므로, 일치하는 컬럼이 여러 개일 경우 USING·ON과 결과가 달라질 수 있다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "text",
+        "content": "㉠ `INNER JOIN USING ( ID )`\n㉡ `JOIN ON A.ID = B.ID`\n㉢ `NATURAL JOIN`\n㉣ `WHERE IN`(상관 서브쿼리)"
+      }
+    ]
   },
   {
     "id": 10124,
@@ -452,7 +738,79 @@ export const ROUND_58: QuizQuestion[] = [
     ],
     "correctIndex": 1,
     "explanation": "Tbl_B에서 E='E'인 D는 y, z 이다. Tbl_A에서 C가 y 또는 z인 행은 (2,a,z,1), (2,a,y,2), (3,b,y,2) 이며, (A,B) DISTINCT 결과는 (2,a), (3,b) 의 2건이다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "headers": [
+          "Tbl_A"
+        ],
+        "rows": [
+          [
+            "A",
+            "B",
+            "C",
+            "D"
+          ],
+          [
+            "1",
+            "a",
+            "x",
+            "1"
+          ],
+          [
+            "2",
+            "a",
+            "z",
+            "1"
+          ],
+          [
+            "2",
+            "a",
+            "y",
+            "2"
+          ],
+          [
+            "3",
+            "b",
+            "y",
+            "2"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "headers": [
+          "Tbl_B"
+        ],
+        "rows": [
+          [
+            "D",
+            "E",
+            "F"
+          ],
+          [
+            "x",
+            "D",
+            "5"
+          ],
+          [
+            "y",
+            "E",
+            "6"
+          ],
+          [
+            "z",
+            "E",
+            "9"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT COUNT(*)\nFROM (\n  SELECT DISTINCT A, B\n  FROM Tbl_A\n  WHERE C IN (\n    SELECT D\n    FROM   Tbl_B\n    WHERE  UPPER(E) = 'E'\n  )\n) X;"
+      }
+    ]
   },
   {
     "id": 10125,
@@ -488,7 +846,13 @@ export const ROUND_58: QuizQuestion[] = [
     ],
     "correctIndex": 1,
     "explanation": "NULL IS NULL 은 TRUE 이므로 'Y'가 반환된다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT CASE WHEN NULL IS NULL THEN 'Y' ELSE 'N' END\nFROM DUAL;"
+      }
+    ]
   },
   {
     "id": 10127,
@@ -506,7 +870,38 @@ export const ROUND_58: QuizQuestion[] = [
     ],
     "correctIndex": 1,
     "explanation": "EMPNO 내림차순으로 11이 먼저 오고 그중 DEPTNO 오름차순으로 1002가 뒤에 온다. 이후 10, NULL 순서이며 상위 3건만 반환된다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "headers": [
+          "EMPNO",
+          "DEPTNO"
+        ],
+        "rows": [
+          [
+            "11",
+            "1002"
+          ],
+          [
+            "10",
+            "1002"
+          ],
+          [
+            "11",
+            "1004"
+          ],
+          [
+            "(NULL)",
+            "1003"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT EMPNO, DEPTNO\nFROM   EMP\nORDER BY EMPNO DESC NULLS LAST, DEPTNO ASC\nFETCH FIRST 3 ROWS ONLY;"
+      }
+    ]
   },
   {
     "id": 10128,
@@ -542,7 +937,13 @@ export const ROUND_58: QuizQuestion[] = [
     ],
     "correctIndex": 1,
     "explanation": "",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "MERGE INTO TGT T\nUSING SRC S ON (T.ID = S.ID)\nWHEN MATCHED THEN UPDATE SET T.V = S.V\nWHEN NOT MATCHED THEN INSERT (ID, V) VALUES (S.ID, S.V);"
+      }
+    ]
   },
   {
     "id": 10130,
@@ -560,7 +961,13 @@ export const ROUND_58: QuizQuestion[] = [
     ],
     "correctIndex": 3,
     "explanation": "DUAL은 한 건만 반환하므로 COUNT(*)는 1이다. HAVING 조건 COUNT(*) > 4 를 만족하지 않아 결과는 공집합이 된다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT COUNT(*)\nFROM   DUAL\nHAVING COUNT(*) > 4;"
+      }
+    ]
   },
   {
     "id": 10131,
@@ -578,7 +985,13 @@ export const ROUND_58: QuizQuestion[] = [
     ],
     "correctIndex": 0,
     "explanation": "NVL과 COALESCE는 NULL 대체 기능이 동일하므로 'X'를 반환한다. NULLIF는 두 인자가 같으면 NULL, 다르면 첫 번째 값을 반환한다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "-- ㉠ SELECT NVL(NULL, 'X')\n-- ㉡ SELECT COALESCE(NULL, 'X')\n-- ㉢ SELECT NULLIF('X', 'X')\n-- ㉣ SELECT NULLIF('X', 'Y')"
+      }
+    ]
   },
   {
     "id": 10132,
@@ -596,7 +1009,53 @@ export const ROUND_58: QuizQuestion[] = [
     ],
     "correctIndex": 1,
     "explanation": "HAVING GROUPING(ID) + GROUPING(TYPE) != 1 조건은 (ID, TYPE) 세부 집계 네 건과 전체 총계 한 건만 남긴다. 결과 ID 컬럼은 a, a, b, b, NULL 순으로 출력된다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "headers": [
+          "ID",
+          "TYPE",
+          "AMT"
+        ],
+        "rows": [
+          [
+            "A",
+            "1",
+            "10"
+          ],
+          [
+            "A",
+            "1",
+            "15"
+          ],
+          [
+            "A",
+            "2",
+            "20"
+          ],
+          [
+            "A",
+            "2",
+            "30"
+          ],
+          [
+            "B",
+            "1",
+            "25"
+          ],
+          [
+            "B",
+            "2",
+            "10"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT ID, TYPE, SUM(AMT)\nFROM   TBL\nGROUP BY ROLLUP(ID, TYPE)\nHAVING GROUPING(ID) + GROUPING(TYPE) != 1;"
+      }
+    ]
   },
   {
     "id": 10133,
@@ -632,7 +1091,13 @@ export const ROUND_58: QuizQuestion[] = [
     ],
     "correctIndex": 0,
     "explanation": "문자 연결 연산자 `||` 는 NULL을 빈 문자열로 취급한다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT 'ABC' || NULL || 'XYZ' FROM DUAL;"
+      }
+    ]
   },
   {
     "id": 10135,
@@ -668,7 +1133,13 @@ export const ROUND_58: QuizQuestion[] = [
     ],
     "correctIndex": 0,
     "explanation": "DECODE는 비교 시 NULL = NULL을 동등한 것으로 처리하므로 'Y'를 반환한다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT DECODE(NULL, NULL, 'Y', 'N') FROM DUAL;"
+      }
+    ]
   },
   {
     "id": 10137,
@@ -686,7 +1157,13 @@ export const ROUND_58: QuizQuestion[] = [
     ],
     "correctIndex": 2,
     "explanation": "CONNECT BY LEVEL <= 2 는 두 행을 생성하며 COUNT(*)가 2를 반환한다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT COUNT(*)\nFROM DUAL\nCONNECT BY LEVEL <= 2;"
+      }
+    ]
   },
   {
     "id": 10138,
@@ -704,7 +1181,13 @@ export const ROUND_58: QuizQuestion[] = [
     ],
     "correctIndex": 1,
     "explanation": "COALESCE는 인자를 왼쪽부터 평가하여 가장 먼저 NULL이 아닌 값을 반환한다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT COALESCE(NULL, NULL, 3, 4) FROM DUAL;"
+      }
+    ]
   },
   {
     "id": 10139,
@@ -722,7 +1205,13 @@ export const ROUND_58: QuizQuestion[] = [
     ],
     "correctIndex": 2,
     "explanation": "문자열 '13123123123' 에서 '312' 패턴이 처음 등장하는 위치는 세 번째 문자이다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT REGEXP_INSTR('13123123123', '312')\nFROM DUAL;"
+      }
+    ]
   },
   {
     "id": 10140,
@@ -740,7 +1229,13 @@ export const ROUND_58: QuizQuestion[] = [
     ],
     "correctIndex": 2,
     "explanation": "서브쿼리 내부에서 외부 쿼리의 DEPTNO 를 참조하므로 연관 서브쿼리에 해당한다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT E.EMPNO\nFROM   EMP E\nWHERE  E.SAL > (SELECT AVG(SAL) FROM EMP WHERE DEPTNO = E.DEPTNO);"
+      }
+    ]
   },
   {
     "id": 10141,
@@ -758,7 +1253,13 @@ export const ROUND_58: QuizQuestion[] = [
     ],
     "correctIndex": 0,
     "explanation": "원본 기출의 정답 표기를 보존한다. 인접한 두 개의 작은따옴표는 하나의 따옴표 문자를 리터럴로 표현한다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT '''''A''''' AS R1 FROM DUAL;"
+      }
+    ]
   },
   {
     "id": 10142,
@@ -776,7 +1277,13 @@ export const ROUND_58: QuizQuestion[] = [
     ],
     "correctIndex": 1,
     "explanation": "",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "DROP TABLE T1 CASCADE CONSTRAINTS;"
+      }
+    ]
   },
   {
     "id": 10143,
@@ -812,7 +1319,13 @@ export const ROUND_58: QuizQuestion[] = [
     ],
     "correctIndex": 0,
     "explanation": "TRUNC는 지정된 자리수 미만을 버림 처리한다. 자리수 -1은 일의 자리를 버리므로 120이 된다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT TRUNC(123.456, -1) FROM DUAL;"
+      }
+    ]
   },
   {
     "id": 10145,
@@ -830,7 +1343,13 @@ export const ROUND_58: QuizQuestion[] = [
     ],
     "correctIndex": 1,
     "explanation": "NVL(NULL, 0)만 0이라는 값을 반환한다. 나머지는 모두 NULL 을 반환한다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "-- ㉠ COALESCE(NULL, NULL)\n-- ㉡ NVL(NULL, NULL)\n-- ㉢ NULLIF(1, 1)\n-- ㉣ NVL(NULL, 0)"
+      }
+    ]
   },
   {
     "id": 10146,
@@ -848,7 +1367,13 @@ export const ROUND_58: QuizQuestion[] = [
     ],
     "correctIndex": 0,
     "explanation": "이전 행의 MGR 값이 현재 행의 EMPNO 와 같으면 자식에서 부모로 거슬러 올라가는 역방향 전개가 된다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT *\nFROM   EMP\nSTART WITH EMPNO = 7902\nCONNECT BY (  ?  );"
+      }
+    ]
   },
   {
     "id": 10147,
@@ -866,7 +1391,34 @@ export const ROUND_58: QuizQuestion[] = [
     ],
     "correctIndex": 3,
     "explanation": "CUBE(A,B)는 (A,B), (A), (B), () 조합을 모두 반환한다. 세부 집계 3건, (A) 소계 2건, (B) 소계 2건, 총계 1건을 합쳐 8건이 된다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "headers": [
+          "A",
+          "B"
+        ],
+        "rows": [
+          [
+            "X",
+            "1"
+          ],
+          [
+            "X",
+            "2"
+          ],
+          [
+            "Y",
+            "1"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT A, B, COUNT(*)\nFROM   T\nGROUP BY CUBE(A, B);"
+      }
+    ]
   },
   {
     "id": 10148,
@@ -902,6 +1454,12 @@ export const ROUND_58: QuizQuestion[] = [
     ],
     "correctIndex": 1,
     "explanation": "SAL > ALL(집합) 은 집합의 최대값보다 큰 값을 의미한다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT *\nFROM   EMP\nWHERE  SAL > ALL (SELECT SAL FROM EMP WHERE DEPTNO = 10);"
+      }
+    ]
   }
 ];

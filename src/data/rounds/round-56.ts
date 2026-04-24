@@ -110,7 +110,13 @@ export const ROUND_56: QuizQuestion[] = [
     ],
     "correctIndex": 3,
     "explanation": "복합·단순·단일 값·다중 값 속성에 대한 네 개의 설명이 모두 옳다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "text",
+        "content": "가. 주소는 시·군·구 등으로 나누어지므로 복합 속성이다.\n나. 나이는 단순 속성이다.\n다. 주민번호는 단일 값 속성이다.\n라. 연락처는 휴대폰 번호와 집 전화번호가 될 수 있기 때문에 다중 값 속성이다."
+      }
+    ]
   },
   {
     "id": 10206,
@@ -128,7 +134,13 @@ export const ROUND_56: QuizQuestion[] = [
     ],
     "correctIndex": 0,
     "explanation": "세 관계는 각각 독립적인 의미를 가지며 단순 합성으로 대체할 수 없다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "[ 병원 ] ||-----∘| [ 의사 ] ||-----∘| [ 수술 ]\n   ㄱ                  ㄴ                ㄷ"
+      }
+    ]
   },
   {
     "id": 10207,
@@ -218,7 +230,50 @@ export const ROUND_56: QuizQuestion[] = [
     ],
     "correctIndex": 2,
     "explanation": "COL2='A' 인 행은 (1,A), (1,A), (3,A) 의 3건이고, COL1 의 고유값은 1·2·3·4 의 4건이다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "headers": [
+          "COL1",
+          "COL2"
+        ],
+        "rows": [
+          [
+            "1",
+            "A"
+          ],
+          [
+            "2",
+            "B"
+          ],
+          [
+            "3",
+            "C"
+          ],
+          [
+            "4",
+            "D"
+          ],
+          [
+            "1",
+            "A"
+          ],
+          [
+            "2",
+            "B"
+          ],
+          [
+            "3",
+            "A"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT COUNT(ALL COL1)      FROM TAB1 WHERE COL2 = 'A';\nSELECT COUNT(DISTINCT COL1) FROM TAB1;"
+      }
+    ]
   },
   {
     "id": 10212,
@@ -272,7 +327,42 @@ export const ROUND_56: QuizQuestion[] = [
     ],
     "correctIndex": 1,
     "explanation": "COL1 오름차순 첫 번째 그룹(COL1=1)에서 COL2 의 최대값 20 이 반환된다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "headers": [
+          "COL1",
+          "COL2"
+        ],
+        "rows": [
+          [
+            "1",
+            "10"
+          ],
+          [
+            "1",
+            "20"
+          ],
+          [
+            "2",
+            "30"
+          ],
+          [
+            "3",
+            "40"
+          ],
+          [
+            "3",
+            "50"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT MAX(COL2) KEEP (DENSE_RANK FIRST ORDER BY COL1) FROM TAB1;"
+      }
+    ]
   },
   {
     "id": 10215,
@@ -290,7 +380,13 @@ export const ROUND_56: QuizQuestion[] = [
     ],
     "correctIndex": 0,
     "explanation": "COALESCE 는 왼쪽부터 평가해 가장 먼저 NULL 이 아닌 값을 반환하므로 'S' 가 반환된다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT COALESCE(NULL, NULL, 'S', NULL, 'QL') FROM DUAL;"
+      }
+    ]
   },
   {
     "id": 10216,
@@ -308,7 +404,13 @@ export const ROUND_56: QuizQuestion[] = [
     ],
     "correctIndex": 1,
     "explanation": "CEIL 은 올림, ROUND 는 반올림, FLOOR 는 내림을 수행한다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "CEIL(9.36), ROUND(9.48), FLOOR(9.72)"
+      }
+    ]
   },
   {
     "id": 10217,
@@ -326,7 +428,13 @@ export const ROUND_56: QuizQuestion[] = [
     ],
     "correctIndex": 1,
     "explanation": "DISTINCT 물품 = 3종이므로 3, 두 번째 쿼리는 NULL 비교가 무시되어 'p' 인 30건만 반환된다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT COUNT(DISTINCT 물품) FROM 업체;\nSELECT COUNT(*) FROM 업체 WHERE 물품 IN ('p', NULL);"
+      }
+    ]
   },
   {
     "id": 10218,
@@ -380,7 +488,38 @@ export const ROUND_56: QuizQuestion[] = [
     ],
     "correctIndex": 1,
     "explanation": "COUNT(*) 는 NULL 을 포함한 모든 행을 세므로 조건 없이 전체를 조회해야 4 가 반환된다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "headers": [
+          "COL1",
+          "COL2"
+        ],
+        "rows": [
+          [
+            "1",
+            "Smith"
+          ],
+          [
+            "2",
+            "Charlie"
+          ],
+          [
+            "3",
+            "Alice"
+          ],
+          [
+            "4",
+            "NULL"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "COUNT(*)\n4"
+      }
+    ]
   },
   {
     "id": 10221,
@@ -434,7 +573,30 @@ export const ROUND_56: QuizQuestion[] = [
     ],
     "correctIndex": 2,
     "explanation": "첫 번째 쿼리는 조건을 만족하는 행이 없어 공집합을 반환한다. 두 번째 쿼리는 집계 함수이므로 조건에 맞는 행이 없더라도 한 건(NULL)을 반환한다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "headers": [
+          "COL1"
+        ],
+        "rows": [
+          [
+            "a"
+          ],
+          [
+            "b"
+          ],
+          [
+            "c"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT COL1      FROM TAB1 WHERE COL1 = 'z';\nSELECT MAX(COL1) FROM TAB1 WHERE COL1 = 'z';"
+      }
+    ]
   },
   {
     "id": 10224,
@@ -452,7 +614,13 @@ export const ROUND_56: QuizQuestion[] = [
     ],
     "correctIndex": 1,
     "explanation": "`{2,4}` 는 \"2~4회 반복\" 을 의미하며 탐욕적으로 최대 길이를 우선하여 네 개의 a 를 반환한다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT REGEXP_SUBSTR('aaaaabbbb', 'a{2,4}') FROM DUAL;"
+      }
+    ]
   },
   {
     "id": 10225,
@@ -488,7 +656,13 @@ export const ROUND_56: QuizQuestion[] = [
     ],
     "correctIndex": 3,
     "explanation": "높은 순으로 정렬하려면 ORDER BY SUM(SALARY) DESC 가 되어야 한다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT DEPT_NAME, SUM(SALARY)   -- (가)\nFROM   EMP\nWHERE  SALARY >= 2000           -- (나)\nGROUP BY DEPT_NAME              -- (다)\nORDER BY SUM(SALARY)            -- (라)"
+      }
+    ]
   },
   {
     "id": 10227,
@@ -542,7 +716,44 @@ export const ROUND_56: QuizQuestion[] = [
     ],
     "correctIndex": 0,
     "explanation": "동일 순위가 있어도 다음 순위를 건너뛰지 않고 연속적으로 부여하는 함수는 DENSE_RANK 이다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "headers": [
+          "NAME",
+          "SALARY",
+          "RANKING"
+        ],
+        "rows": [
+          [
+            "Bob",
+            "7000",
+            "1"
+          ],
+          [
+            "Smith",
+            "7000",
+            "1"
+          ],
+          [
+            "David",
+            "6000",
+            "2"
+          ],
+          [
+            "Alice",
+            "5000",
+            "3"
+          ],
+          [
+            "Charlie",
+            "3000",
+            "4"
+          ]
+        ]
+      }
+    ]
   },
   {
     "id": 10230,
@@ -578,7 +789,46 @@ export const ROUND_56: QuizQuestion[] = [
     ],
     "correctIndex": 0,
     "explanation": "서브쿼리에 NULL 이 포함되어 있으므로 NOT IN 비교 결과가 모두 UNKNOWN 으로 평가되어 공집합이 반환된다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "headers": [
+          "TAB1",
+          "TAB2"
+        ],
+        "rows": [
+          [
+            "COL1",
+            "COL2",
+            "COL1",
+            "COL2"
+          ],
+          [
+            "A",
+            "10",
+            "A",
+            "20"
+          ],
+          [
+            "B",
+            "20",
+            "B",
+            "20"
+          ],
+          [
+            "C",
+            "30",
+            "C",
+            "NULL"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT *\nFROM   TAB1\nWHERE  (COL1, COL2) NOT IN (SELECT COL1, COL2 FROM TAB2);"
+      }
+    ]
   },
   {
     "id": 10232,
@@ -596,7 +846,13 @@ export const ROUND_56: QuizQuestion[] = [
     ],
     "correctIndex": 3,
     "explanation": "MAX(NULL) 은 항상 NULL 을 반환하므로 모든 행의 COL1 이 NULL 로 갱신된다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "UPDATE TAB1 T1\nSET    COL1 = (SELECT MAX(NULL)\n               FROM   TAB2 T2\n               WHERE  T1.COL1 = T2.COL2\n               AND    T1.COL1 >= 200);"
+      }
+    ]
   },
   {
     "id": 10233,
@@ -632,7 +888,13 @@ export const ROUND_56: QuizQuestion[] = [
     ],
     "correctIndex": 2,
     "explanation": "조인 조건이 없으므로 카티션 곱이 수행되어 10 × 10 = 100 건이 반환된다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT COUNT(*) FROM TAB1, TAB2;"
+      }
+    ]
   },
   {
     "id": 10235,
@@ -650,7 +912,58 @@ export const ROUND_56: QuizQuestion[] = [
     ],
     "correctIndex": 0,
     "explanation": "두 테이블의 공통 컬럼은 ID 이지만 TAB1(1, 2, 3)과 TAB2(10, 20, 30, 40, 50) 사이에 일치하는 ID 값이 없으므로 NATURAL JOIN 결과는 0 건이다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "headers": [
+          "TAB1",
+          "TAB2"
+        ],
+        "rows": [
+          [
+            "ID",
+            "CUSTOMER",
+            "ID",
+            "PHONE"
+          ],
+          [
+            "1",
+            "A",
+            "10",
+            "111-1111"
+          ],
+          [
+            "2",
+            "B",
+            "20",
+            "222-2222"
+          ],
+          [
+            "3",
+            "C",
+            "30",
+            "333-3333"
+          ],
+          [
+            "",
+            "",
+            "40",
+            "444-4444"
+          ],
+          [
+            "",
+            "",
+            "50",
+            "555-5555"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT * FROM TAB1 NATURAL JOIN TAB2;"
+      }
+    ]
   },
   {
     "id": 10236,
@@ -668,7 +981,38 @@ export const ROUND_56: QuizQuestion[] = [
     ],
     "correctIndex": 0,
     "explanation": "COL2 ≤ 20 인 행은 (A,10),(A,20),(B,20) 이고 DISTINCT COL1 = A, B 의 2 이다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "headers": [
+          "COL1",
+          "COL2"
+        ],
+        "rows": [
+          [
+            "A",
+            "10"
+          ],
+          [
+            "A",
+            "20"
+          ],
+          [
+            "B",
+            "20"
+          ],
+          [
+            "C",
+            "30"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "COUNT()\n2"
+      }
+    ]
   },
   {
     "id": 10237,
@@ -722,7 +1066,38 @@ export const ROUND_56: QuizQuestion[] = [
     ],
     "correctIndex": 1,
     "explanation": "AGE<35 AND DEPT IN('A','B') 를 만족하는 이름은 PARK, KIM 이다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "headers": [
+          "NAME",
+          "AGE",
+          "DEPT"
+        ],
+        "rows": [
+          [
+            "PARK",
+            "30",
+            "A"
+          ],
+          [
+            "KIM",
+            "25",
+            "B"
+          ],
+          [
+            "LEE",
+            "40",
+            "A"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT NAME\nFROM   MEMBER\nWHERE  AGE < 35 AND DEPT IN ('A', 'B');"
+      }
+    ]
   },
   {
     "id": 10240,
@@ -740,7 +1115,33 @@ export const ROUND_56: QuizQuestion[] = [
     ],
     "correctIndex": 2,
     "explanation": "원본 기출의 정답 표기를 보존한다. NVL 처리 여부에 따라 집계 결과가 달라진다는 점을 묻는 문항이다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "headers": [
+          "SAL"
+        ],
+        "rows": [
+          [
+            "1000"
+          ],
+          [
+            "1000"
+          ],
+          [
+            "2500"
+          ],
+          [
+            "(NULL)"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT AVG(NVL(SAL,0)), MIN(SAL) FROM T;"
+      }
+    ]
   },
   {
     "id": 10241,
@@ -758,7 +1159,13 @@ export const ROUND_56: QuizQuestion[] = [
     ],
     "correctIndex": 1,
     "explanation": "내부 조인(,) 특성상 양 테이블에서 부서ID 가 일치하는 사원만 남으므로 부서 미소속 사원은 결과에서 제외된다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT E.*\nFROM   부서 D, 사원 E\nWHERE  D.부서ID = E.부서ID\nAND    E.등급 >= 2;"
+      }
+    ]
   },
   {
     "id": 10242,
@@ -812,7 +1219,13 @@ export const ROUND_56: QuizQuestion[] = [
     ],
     "correctIndex": 2,
     "explanation": "사번 7566 의 급여 2,975 가 단일 행으로 집계되어 그대로 반환된다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT SUM(SAL)\nFROM   EMP\nWHERE  EMPNO = 7566;   -- 사번 7566 의 급여는 2975"
+      }
+    ]
   },
   {
     "id": 10245,
@@ -830,7 +1243,13 @@ export const ROUND_56: QuizQuestion[] = [
     ],
     "correctIndex": 1,
     "explanation": "",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT NAME\nFROM   EMP\nORDER BY SAL NULLS LAST;"
+      }
+    ]
   },
   {
     "id": 10246,
@@ -848,7 +1267,13 @@ export const ROUND_56: QuizQuestion[] = [
     ],
     "correctIndex": 3,
     "explanation": "",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT 직원, 매출\nFROM   SALES\nORDER BY 매출;"
+      }
+    ]
   },
   {
     "id": 10247,
@@ -902,6 +1327,12 @@ export const ROUND_56: QuizQuestion[] = [
     ],
     "correctIndex": 2,
     "explanation": "UPDATE 로 COL2≤2 인 두 행의 COL1 이 4 로 갱신되고, DELETE 는 SP2 로 되돌려지므로 (4,2),(4,1),(3,4) 가 남는다. 마지막 INSERT (4,1) 가 더해져 COL1=4 인 행은 세 건이다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "CREATE TABLE TAB1 (COL1 NUMBER, COL2 NUMBER);\nINSERT INTO TAB1 VALUES (1, 2);\nINSERT INTO TAB1 VALUES (2, 1);\nINSERT INTO TAB1 VALUES (3, 4);\nSAVEPOINT SP1;\n\nUPDATE TAB1 SET COL1 = 4 WHERE COL2 <= 2;\nSAVEPOINT SP2;\n\nDELETE FROM TAB1 WHERE COL2 = 2;\nROLLBACK TO SAVEPOINT SP2;\n\nINSERT INTO TAB1 VALUES (4, 1);\nCOMMIT;\n\nSELECT COUNT(*) FROM TAB1 WHERE COL1 = 4;"
+      }
+    ]
   }
 ];

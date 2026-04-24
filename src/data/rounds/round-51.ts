@@ -38,7 +38,13 @@ export const ROUND_51: QuizQuestion[] = [
     ],
     "correctIndex": 3,
     "explanation": "주문은 반드시 고객에 종속되므로 고객 없이 존재할 수 없다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "[ 고객 ] ||-----∈ [ 주문 ]   -- 주문은 고객이 반드시 필요"
+      }
+    ]
   },
   {
     "id": 10452,
@@ -218,7 +224,34 @@ export const ROUND_51: QuizQuestion[] = [
     ],
     "correctIndex": 1,
     "explanation": "",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "headers": [
+          "일자",
+          "금액"
+        ],
+        "rows": [
+          [
+            "2023-11-01",
+            "100"
+          ],
+          [
+            "2023-11-02",
+            "150"
+          ],
+          [
+            "2023-11-02",
+            "250"
+          ],
+          [
+            "2023-11-03",
+            "100"
+          ]
+        ]
+      }
+    ]
   },
   {
     "id": 10462,
@@ -272,7 +305,41 @@ export const ROUND_51: QuizQuestion[] = [
     ],
     "correctIndex": 0,
     "explanation": "8 건을 세 그룹으로 나누면 앞부터 3, 3, 2 건이 배정된다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "headers": [
+          "COL1"
+        ],
+        "rows": [
+          [
+            "1"
+          ],
+          [
+            "2"
+          ],
+          [
+            "3"
+          ],
+          [
+            "4"
+          ],
+          [
+            "5"
+          ],
+          [
+            "6"
+          ],
+          [
+            "7"
+          ],
+          [
+            "8"
+          ]
+        ]
+      }
+    ]
   },
   {
     "id": 10465,
@@ -290,7 +357,13 @@ export const ROUND_51: QuizQuestion[] = [
     ],
     "correctIndex": 2,
     "explanation": "CUBE 는 (A,B), (A), (B), () 의 네 조합을 모두 반환한다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT A, B, SUM(X)\nFROM   T\nGROUP BY ( ? );"
+      }
+    ]
   },
   {
     "id": 10466,
@@ -308,7 +381,13 @@ export const ROUND_51: QuizQuestion[] = [
     ],
     "correctIndex": 1,
     "explanation": "NULLIF(COL2, 0) 은 COL2 가 0 이면 NULL 을 반환하여 오류 대신 NULL 연산으로 이어진다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT COL1 / ( ? )(COL2, 0) FROM T;"
+      }
+    ]
   },
   {
     "id": 10467,
@@ -326,7 +405,48 @@ export const ROUND_51: QuizQuestion[] = [
     ],
     "correctIndex": 1,
     "explanation": "NULL 포함 행은 + 연산 전체가 NULL 이 되어 ㉠ 에는 반영되지 않는다. ㉡ 은 컬럼별로 NULL 을 제외한 SUM 을 수행한다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "headers": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ],
+        "rows": [
+          [
+            "10",
+            "NULL",
+            "NULL",
+            "20"
+          ],
+          [
+            "NULL",
+            "10",
+            "20",
+            "NULL"
+          ],
+          [
+            "30",
+            "NULL",
+            "10",
+            "NULL"
+          ],
+          [
+            "4",
+            "6",
+            "10",
+            "10"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "-- ㉠ SELECT SUM(A + B + C + D) FROM T;\n-- ㉡ SELECT SUM(A) + SUM(B) + SUM(C) + SUM(D) FROM T;"
+      }
+    ]
   },
   {
     "id": 10468,
@@ -344,7 +464,13 @@ export const ROUND_51: QuizQuestion[] = [
     ],
     "correctIndex": 0,
     "explanation": "WHERE 조건을 만족하는 행이 없고 GROUP BY 가 지정되어 있으므로 결과가 공집합이다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT NVL(MAX(COL1), 'X')\nFROM   TAB1\nWHERE  COL2 > 9\nGROUP BY COL1;"
+      }
+    ]
   },
   {
     "id": 10469,
@@ -362,7 +488,13 @@ export const ROUND_51: QuizQuestion[] = [
     ],
     "correctIndex": 2,
     "explanation": "DATE 를 TIMESTAMP 로 변경하는 것은 호환 가능한 변환이므로 오류가 발생하지 않는다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "-- TAB1: COL1 NUMBER, COL2 VARCHAR2 DEFAULT '000',\n--       COL3 DATE, COL4 VARCHAR2 (값: 12345, 45677)"
+      }
+    ]
   },
   {
     "id": 10470,
@@ -380,7 +512,34 @@ export const ROUND_51: QuizQuestion[] = [
     ],
     "correctIndex": 0,
     "explanation": "T1.COL1=20 은 T2 에 매칭되는 값이 없어 NOT EXISTS 조건을 만족하여 1 건이 반환된다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "headers": [
+          "T1",
+          "T2"
+        ],
+        "rows": [
+          [
+            "COL1",
+            "COL1"
+          ],
+          [
+            "10",
+            "10"
+          ],
+          [
+            "20",
+            "NULL"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT COUNT(*) FROM T1\nWHERE NOT EXISTS (SELECT 'X' FROM T2 WHERE T1.COL1 = T2.COL1);"
+      }
+    ]
   },
   {
     "id": 10471,
@@ -398,7 +557,13 @@ export const ROUND_51: QuizQuestion[] = [
     ],
     "correctIndex": 1,
     "explanation": "NULL 과의 나눗셈은 NULL, 0 으로 나누면 'divisor is equal to zero' 오류가 발생한다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT 10 / NULL, 10 / 0 FROM DUAL;"
+      }
+    ]
   },
   {
     "id": 10472,
@@ -416,7 +581,13 @@ export const ROUND_51: QuizQuestion[] = [
     ],
     "correctIndex": 3,
     "explanation": "원본 기출의 조건을 만족하는 행이 없는 경우를 묻는 문항이다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT * FROM T\nWHERE COL1 <> 'CPG' AND COL2 > 10;"
+      }
+    ]
   },
   {
     "id": 10473,
@@ -434,7 +605,28 @@ export const ROUND_51: QuizQuestion[] = [
     ],
     "correctIndex": 1,
     "explanation": "T3 기준 조인 결과에서 매칭된 C1 값(1, 2, 3) 의 합이 반환된다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "headers": [
+          "T1",
+          "T2",
+          "T3"
+        ],
+        "rows": [
+          [
+            "1, 2, 3",
+            "1, 2, 4",
+            "1, 2, 3"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT SUM(C.C1)\nFROM   T1 A\nLEFT OUTER JOIN T2 B ON A.C1 = B.C1\nRIGHT OUTER JOIN T3 C ON B.C1 = C.C1\nWHERE 1 = 1;"
+      }
+    ]
   },
   {
     "id": 10474,
@@ -452,7 +644,13 @@ export const ROUND_51: QuizQuestion[] = [
     ],
     "correctIndex": 2,
     "explanation": "ROUND(값, 1) 은 소수 첫째 자리까지 반올림하며 109 가 그대로 유지된다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT SUBSTR('...의 마...', 3, 3), ROUND(109, 1) FROM DUAL;"
+      }
+    ]
   },
   {
     "id": 10475,
@@ -470,7 +668,13 @@ export const ROUND_51: QuizQuestion[] = [
     ],
     "correctIndex": 0,
     "explanation": "INSERT FIRST 는 조건에 만족하는 첫 번째 WHEN 만 실행되므로 2·4 는 T1 으로, 1 은 ELSE 의 T3 로 입력된다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "-- TAB1 데이터: 1, 2, 4\n\nINSERT FIRST\n  WHEN C1 >= 2 THEN INTO T1 VALUES (C1)\n  WHEN C1 >= 4 THEN INTO T2 VALUES (C1)\n  ELSE INTO T3 VALUES (C1)\nSELECT * FROM TAB1;"
+      }
+    ]
   },
   {
     "id": 10476,
@@ -488,7 +692,13 @@ export const ROUND_51: QuizQuestion[] = [
     ],
     "correctIndex": 1,
     "explanation": "",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "text",
+        "content": "팀 코드가 A 또는 B 이고, 다른 조건을 함께 만족하는 행을 조회한다."
+      }
+    ]
   },
   {
     "id": 10477,
@@ -542,7 +752,22 @@ export const ROUND_51: QuizQuestion[] = [
     ],
     "correctIndex": 1,
     "explanation": "",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "headers": [
+          "T1",
+          "T2"
+        ],
+        "rows": [
+          [
+            "A, B, C, D, E",
+            "A, B, C"
+          ]
+        ]
+      }
+    ]
   },
   {
     "id": 10480,
@@ -560,7 +785,13 @@ export const ROUND_51: QuizQuestion[] = [
     ],
     "correctIndex": 0,
     "explanation": "CHECK 조건을 통과한 행은 VALUE=3 한 건이다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "CREATE TABLE T1 (\n  MAIN  INT IDENTITY(1,1),\n  VALUE INT CHECK (VALUE >= 3)\n);\n\nINSERT INTO T1 VALUES(1);\nINSERT INTO T1 VALUES(2);\nINSERT INTO T1 VALUES(3);\n\nSELECT COUNT(*) FROM T1;"
+      }
+    ]
   },
   {
     "id": 10481,
@@ -578,7 +809,13 @@ export const ROUND_51: QuizQuestion[] = [
     ],
     "correctIndex": 0,
     "explanation": "",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "WHERE (COL1, COL2) IN (('A', 1000), ('B', 2000));"
+      }
+    ]
   },
   {
     "id": 10482,
@@ -614,7 +851,13 @@ export const ROUND_51: QuizQuestion[] = [
     ],
     "correctIndex": 0,
     "explanation": "SAVEPOINT P1 이후의 INSERT (4) 는 롤백되어 반영되지 않는다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "INSERT INTO T VALUES (1);\nINSERT INTO T VALUES (2);\nINSERT INTO T VALUES (3);\nSAVEPOINT P1;\nINSERT INTO T VALUES (4);\nROLLBACK TO SAVEPOINT P1;\n\nSELECT * FROM T;"
+      }
+    ]
   },
   {
     "id": 10484,
@@ -632,7 +875,43 @@ export const ROUND_51: QuizQuestion[] = [
     ],
     "correctIndex": 1,
     "explanation": "COL3 = 4 에서 역방향 전개로 (D→B→A) 결과가 구해지고, 이후 WHERE COL3 <> 2 로 B 가 제거되어 A, D 의 두 건이 남는다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "headers": [
+          "COL1",
+          "COL2",
+          "COL3"
+        ],
+        "rows": [
+          [
+            "A",
+            "NULL",
+            "1"
+          ],
+          [
+            "B",
+            "A",
+            "2"
+          ],
+          [
+            "C",
+            "A",
+            "3"
+          ],
+          [
+            "D",
+            "B",
+            "4"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT COUNT(*)\nFROM   TAB1\nWHERE  COL3 <> 2\nSTART WITH COL3 = 4\nCONNECT BY COL1 = PRIOR COL2;"
+      }
+    ]
   },
   {
     "id": 10485,
@@ -668,7 +947,30 @@ export const ROUND_51: QuizQuestion[] = [
     ],
     "correctIndex": 1,
     "explanation": "IN 절의 중복 값은 무시되어 100, 200 두 행만 반환된다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "headers": [
+          "COL1"
+        ],
+        "rows": [
+          [
+            "100"
+          ],
+          [
+            "200"
+          ],
+          [
+            "300"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT * FROM TAB WHERE COL1 IN (100, 200, 100);"
+      }
+    ]
   },
   {
     "id": 10487,
@@ -704,7 +1006,34 @@ export const ROUND_51: QuizQuestion[] = [
     ],
     "correctIndex": 2,
     "explanation": "ON 절의 조건으로 B 와 매칭되지 않아도 LEFT 테이블의 모든 행이 유지된다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "headers": [
+          "A",
+          "B"
+        ],
+        "rows": [
+          [
+            "1",
+            "10"
+          ],
+          [
+            "2",
+            "100"
+          ],
+          [
+            "3",
+            "220"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT A.*, B.*\nFROM   A LEFT OUTER JOIN B ON (A.COL1 = B.COL1 AND B.COL1 > 200);"
+      }
+    ]
   },
   {
     "id": 10489,
@@ -740,7 +1069,13 @@ export const ROUND_51: QuizQuestion[] = [
     ],
     "correctIndex": 1,
     "explanation": "TO_DATE('2023', 'YYYY') 는 시스템의 현재 월과 1일을 조합한 값으로 해석된다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT TO_DATE('2023', 'YYYY') FROM DUAL;"
+      }
+    ]
   },
   {
     "id": 10491,
@@ -758,7 +1093,13 @@ export const ROUND_51: QuizQuestion[] = [
     ],
     "correctIndex": 1,
     "explanation": "RANGE 는 값 기준 창이므로 기준 값 ±2 범위에 해당하는 행들의 합계를 구한다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT SUM(VAL)\nOVER (ORDER BY VAL\n      RANGE BETWEEN 2 PRECEDING AND 2 FOLLOWING)\nFROM T; -- VAL 데이터: 4, 5, 6"
+      }
+    ]
   },
   {
     "id": 10492,
@@ -794,7 +1135,26 @@ export const ROUND_51: QuizQuestion[] = [
     ],
     "correctIndex": 3,
     "explanation": "리터럴 '_' 을 검색하기 위해 ESCAPE 문자를 지정한다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "headers": [
+          "COL2"
+        ],
+        "rows": [
+          [
+            "AB_C"
+          ],
+          [
+            "DFG"
+          ],
+          [
+            "A_BD"
+          ]
+        ]
+      }
+    ]
   },
   {
     "id": 10494,
@@ -830,7 +1190,30 @@ export const ROUND_51: QuizQuestion[] = [
     ],
     "correctIndex": 1,
     "explanation": "1일까지 1000, 2일까지 1300, 3일까지 2300 으로 누적된다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "headers": [
+          "일자",
+          "금액"
+        ],
+        "rows": [
+          [
+            "1일",
+            "1000"
+          ],
+          [
+            "2일",
+            "300"
+          ],
+          [
+            "3일",
+            "1000"
+          ]
+        ]
+      }
+    ]
   },
   {
     "id": 10496,
@@ -848,7 +1231,13 @@ export const ROUND_51: QuizQuestion[] = [
     ],
     "correctIndex": 1,
     "explanation": "Oracle의 MOD는 `m - n * TRUNC(m/n)`로 계산된다. MOD(10, 3) = 10 - 3*3 = 1, MOD(10, -3) = 10 - (-3)*(-3) = 1이다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT MOD(10, 3), MOD(10, -3) FROM DUAL;"
+      }
+    ]
   },
   {
     "id": 10497,
@@ -866,7 +1255,13 @@ export const ROUND_51: QuizQuestion[] = [
     ],
     "correctIndex": 1,
     "explanation": "CASE 식은 위에서부터 차례로 평가되어 가장 먼저 참인 WHEN 절의 결과를 반환한다. `1 = 2`는 거짓이므로 넘어가고, `2 = 2`가 참이어서 'B'가 반환된다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT CASE WHEN 1 = 2 THEN 'A'\n            WHEN 2 = 2 THEN 'B'\n            ELSE 'C' END\nFROM DUAL;"
+      }
+    ]
   },
   {
     "id": 10498,
@@ -902,6 +1297,12 @@ export const ROUND_51: QuizQuestion[] = [
     ],
     "correctIndex": 1,
     "explanation": "FLOOR 함수는 실수를 그보다 작거나 같은 최대 정수로 내림한다. 음수의 경우 더 작은 쪽(-3) 으로 내려간다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT FLOOR(10.4), FLOOR(-2.4) FROM DUAL;"
+      }
+    ]
   }
 ];

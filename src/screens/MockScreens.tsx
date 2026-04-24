@@ -4,7 +4,7 @@ import { Btn, Tag, Ic, CodeBlock, Mascot, MascotGuide, OnionMark, Progress, Divi
 import { QUIZ_BANK } from '../data/quizBank';
 import { sqloUsage } from './PricingScreen';
 import { BETA_NO_AUTH } from '../App';
-import { QuestionReferences } from '../components/QuestionReferences';
+import { QuestionReferences, OptionReferences } from '../components/QuestionReferences';
 
 // Endless Quiz — flashcard-esque: single question → grade → explanation → next
 // Also hosts Mock landing & Mock exam full 50-item timer mode
@@ -181,21 +181,25 @@ export const OptionList = ({q, selected, setSelected, checked}) => (
       if (sel && !checked) { bg="var(--point-100)"; br="2px solid var(--point-600)"; badgeBg="var(--point-600)"; badgeFg="#fff"; }
       if (ok) { bg="var(--correct-bg)"; br="2px solid var(--point-600)"; badgeBg="var(--point-600)"; badgeFg="#fff"; }
       if (bad) { bg="var(--wrong-bg)"; br="2px solid var(--wrong-border)"; badgeBg="var(--wrong-fg)"; badgeFg="#fff"; }
+      const optRefs = q.optionReferences?.[i];
       return (
         <li key={i}>
-          <button onClick={()=>!checked && setSelected(i)} disabled={checked} style={{
-            width:"100%",textAlign:"left",display:"flex",gap:12,padding:"14px 16px",
-            background:bg,border:br,borderRadius:12,alignItems:"flex-start",
+          <div onClick={()=>!checked && setSelected(i)} style={{
+            width:"100%",textAlign:"left",display:"flex",flexDirection:"column",gap:10,padding:"14px 16px",
+            background:bg,border:br,borderRadius:12,
             cursor:checked?"default":"pointer",fontFamily:"inherit",
             transition:"background 150ms, border-color 150ms",
           }}>
-            <span style={{
-              width:32,height:32,borderRadius:999,background:badgeBg,color:badgeFg,flexShrink:0,
-              fontSize:16,fontWeight:700,fontFamily:"var(--font-mono)",
-              display:"inline-flex",alignItems:"center",justifyContent:"center",marginTop:1,
-            }}>{i+1}</span>
-            <span style={{fontSize:14.5,color:"var(--fg-2)",lineHeight:1.65}}>{opt}</span>
-          </button>
+            <div style={{display:"flex",gap:12,alignItems:"flex-start"}}>
+              <span style={{
+                width:32,height:32,borderRadius:999,background:badgeBg,color:badgeFg,flexShrink:0,
+                fontSize:16,fontWeight:700,fontFamily:"var(--font-mono)",
+                display:"inline-flex",alignItems:"center",justifyContent:"center",marginTop:1,
+              }}>{i+1}</span>
+              <span style={{fontSize:14.5,color:"var(--fg-2)",lineHeight:1.65,flex:1}}>{opt}</span>
+            </div>
+            {optRefs && <OptionReferences refs={optRefs}/>}
+          </div>
         </li>
       );
     })}

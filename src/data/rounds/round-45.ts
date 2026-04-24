@@ -38,7 +38,13 @@ export const ROUND_45: QuizQuestion[] = [
     ],
     "correctIndex": 2,
     "explanation": "이자는 원금·이자율·예치기간으로부터 계산되는 파생 속성에 해당하지만, 이자율은 업무상 정의되어 입력되는 값이므로 기본 속성으로 분류된다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "text",
+        "content": "우리은행은 예금분류(일반예금·특별예금 등)의 원금, 예치기간, 이자율을 관리하고자 한다. 또한 원금에 대한 이자율을 적용하여 계산된 이자를 별도 속성으로 관리하며, 일반예금·특별예금 등에 대해서는 코드를 부여(예: 01-일반예금, 02-특별예금)한다."
+      }
+    ]
   },
   {
     "id": 10752,
@@ -56,7 +62,42 @@ export const ROUND_45: QuizQuestion[] = [
     ],
     "correctIndex": 2,
     "explanation": "인스턴스는 엔터티가 정의한 각 속성에 대응하는 값의 집합으로 구성된다. 예시에서 인스턴스 1은 (10001, 정고객, AAA1) 세 속성값의 조합으로 성립하므로 속성 없이는 인스턴스가 존재할 수 없다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "ascii",
+        "text": "  엔터티\n    ↓\n  [ 고객 ]\n    └── 속성: (고객번호) (고객이름) (고객아이디)"
+      },
+      {
+        "type": "table",
+        "headers": [
+          "고객번호",
+          "고객이름",
+          "고객아이디",
+          "← 인스턴스"
+        ],
+        "rows": [
+          [
+            "10001",
+            "정고객",
+            "AAA1",
+            "← 인스턴스 1"
+          ],
+          [
+            "10002",
+            "김고객",
+            "BBB2",
+            "← 인스턴스 2"
+          ],
+          [
+            "10003",
+            "박고객",
+            "CCC3",
+            "← 인스턴스 3"
+          ]
+        ]
+      }
+    ]
   },
   {
     "id": 10753,
@@ -74,7 +115,17 @@ export const ROUND_45: QuizQuestion[] = [
     ],
     "correctIndex": 3,
     "explanation": "고객 쪽 참여는 실선 + `|`(필수 1)이므로 모든 주문은 반드시 한 명의 고객에 귀속되어야 한다. 반면 주문 쪽은 점선 + `o`(선택)이므로 고객은 주문이 없을 수도 있다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "ascii",
+        "text": "[ 고객 ] ─|─ ─ ─ ─o|─< [ 주문 ]"
+      },
+      {
+        "type": "text",
+        "content": "바커(Barker) 표기법 해석\n* 고객 쪽(실선 + `|`): 주문 입장에서 고객은 반드시 하나 존재\n* 중간 점선(`- - -`) + 주문 쪽 `o`: 고객 입장에서 주문 참여는 선택적(0개 가능)\n* 주문 쪽 `|<`(까마귀발): 고객은 여러 주문을 가질 수 있음"
+      }
+    ]
   },
   {
     "id": 10754,
@@ -146,7 +197,44 @@ export const ROUND_45: QuizQuestion[] = [
     ],
     "correctIndex": 1,
     "explanation": "관계차수는 두 엔터티 간 관계에 참여하는 인스턴스 수의 대응 관계를 나타내며, 위 표기법처럼 `|`(단일성)·`o`(선택성)·`<`(까마귀발, 다수) 기호 조합으로 1:1, 1:M, M:N 등의 카디널리티를 명시한다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "headers": [
+          "표기",
+          "카디널리티",
+          "의미"
+        ],
+        "rows": [
+          [
+            "[ A ] ─|─────|─ [ B ]",
+            "1 : 1",
+            "하나의 A는 하나의 B로 구성"
+          ],
+          [
+            "[ A ] ─|─────o|─ [ B ]",
+            "1 : 0 or 1",
+            "하나의 A는 0 또는 하나의 B로 구성"
+          ],
+          [
+            "[ A ] ─|─────< [ B ]",
+            "1 : N",
+            "하나의 A는 두 개 이상의 B로 구성"
+          ],
+          [
+            "[ A ] ─|─────|< [ B ]",
+            "1 : 1 or 1 : N",
+            "하나의 A는 하나 이상의 B로 구성"
+          ],
+          [
+            "[ A ] ─|─────o< [ B ]",
+            "1 : 0 or 1 or N",
+            "하나의 A는 0, 1 또는 그 이상의 B로 구성"
+          ]
+        ]
+      }
+    ]
   },
   {
     "id": 10758,
@@ -218,7 +306,13 @@ export const ROUND_45: QuizQuestion[] = [
     ],
     "correctIndex": 0,
     "explanation": "CEIL은 정수부를 올림하므로 23을 반환한다. FLOOR·TRUNC·ROUND(22.14)는 모두 22를 반환한다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "-- ① SELECT CEIL(22.14)  FROM DUAL;\n-- ② SELECT FLOOR(22.14) FROM DUAL;\n-- ③ SELECT TRUNC(22.14) FROM DUAL;\n-- ④ SELECT ROUND(22.14) FROM DUAL;"
+      }
+    ]
   },
   {
     "id": 10762,
@@ -236,7 +330,38 @@ export const ROUND_45: QuizQuestion[] = [
     ],
     "correctIndex": 3,
     "explanation": "손흥민이 속한 팀의 팀ID를 서브쿼리로 조회하여, 해당 팀의 모든 선수의 포지션을 일괄 변경한다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "headers": [
+          "선수번호",
+          "이름",
+          "팀ID",
+          "포지션"
+        ],
+        "rows": [
+          [
+            "1",
+            "손흥민",
+            "TOT",
+            "FW"
+          ],
+          [
+            "2",
+            "다이어",
+            "TOT",
+            "DF"
+          ],
+          [
+            "3",
+            "메시",
+            "PSG",
+            "FW"
+          ]
+        ]
+      }
+    ]
   },
   {
     "id": 10763,
@@ -254,7 +379,34 @@ export const ROUND_45: QuizQuestion[] = [
     ],
     "correctIndex": 2,
     "explanation": "SNS별 합계를 구해야 하므로 GROUP BY SNS와 집계함수 SUM을 함께 사용한다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "headers": [
+          "SNS",
+          "사용자",
+          "추천점수"
+        ],
+        "rows": [
+          [
+            "FB",
+            "A",
+            "5"
+          ],
+          [
+            "FB",
+            "B",
+            "4"
+          ],
+          [
+            "IG",
+            "C",
+            "3"
+          ]
+        ]
+      }
+    ]
   },
   {
     "id": 10764,
@@ -362,7 +514,13 @@ export const ROUND_45: QuizQuestion[] = [
     ],
     "correctIndex": 3,
     "explanation": "SAVEPOINT A로 되돌리면 A 이후 수행된 INSERT 2, DELETE 3이 모두 취소되고, 이후 수행된 INSERT 4, 5가 COMMIT으로 확정된다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "INSERT 1 ...\nSAVEPOINT A;\nINSERT 2 ...\nDELETE  3 ...\nROLLBACK TO SAVEPOINT A;\nINSERT 4 ...\nINSERT 5 ...\nCOMMIT;"
+      }
+    ]
   },
   {
     "id": 10770,
@@ -398,7 +556,13 @@ export const ROUND_45: QuizQuestion[] = [
     ],
     "correctIndex": 2,
     "explanation": "SUBSTR의 세 번째 인자(길이)가 음수이면 유효한 결과가 산출되지 않아 NULL 또는 빈 문자열을 반환한다. 나머지는 모두 'SE'를 반환한다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "-- ① SELECT SUBSTR('DATABASE', 7)       FROM DUAL;\n-- ② SELECT SUBSTR('DATABASE', -2)      FROM DUAL;\n-- ③ SELECT SUBSTR('DATABASE', 8, -2)   FROM DUAL;\n-- ④ SELECT SUBSTR('DATABASE', INSTR('DATABASE','S'), 2) FROM DUAL;"
+      }
+    ]
   },
   {
     "id": 10772,
@@ -416,7 +580,63 @@ export const ROUND_45: QuizQuestion[] = [
     ],
     "correctIndex": 0,
     "explanation": "T1에만 존재하고 T2에는 존재하지 않는 COL1 값을 추출하려면 상관 서브쿼리와 NOT EXISTS를 조합한다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "headers": [
+          "[T1]",
+          ""
+        ],
+        "rows": [
+          [
+            "COL1",
+            "COL2"
+          ],
+          [
+            "1",
+            "10"
+          ],
+          [
+            "2",
+            "20"
+          ],
+          [
+            "3",
+            "30"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "headers": [
+          "[T2]",
+          ""
+        ],
+        "rows": [
+          [
+            "COL1",
+            "COL2"
+          ],
+          [
+            "1",
+            "10"
+          ],
+          [
+            "2",
+            "20"
+          ]
+        ]
+      },
+      {
+        "type": "text",
+        "content": "기대 결과: COL1 = 3"
+      },
+      {
+        "type": "sql",
+        "code": "SELECT COL1\nFROM   T1 A\nWHERE  (  ㄱ  );"
+      }
+    ]
   },
   {
     "id": 10773,
@@ -452,7 +672,13 @@ export const ROUND_45: QuizQuestion[] = [
     ],
     "correctIndex": 3,
     "explanation": "이 구성은 A 단위와 (A, B) 단위 집계만 생성하고 전체 합계 그룹을 포함하지 않으므로 기대 결과와 다르다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "text",
+        "content": "A 단위 소계와 (A, B) 단위 합계, 그리고 전체 합계가 함께 도출되어야 한다."
+      }
+    ]
   },
   {
     "id": 10775,
@@ -499,14 +725,20 @@ export const ROUND_45: QuizQuestion[] = [
     "number": 28,
     "title": "아래 테이블에 대한 INSERT 구문 수행 시 오류가 발생하지 않는 것은?",
     "options": [
-      "INSERT INTO T1 VALUES (NULL, 1,    2,    3);",
-      "INSERT INTO T1 VALUES (1,    NULL, 2,    3);",
-      "INSERT INTO T1 VALUES (1,    2,    NULL, 3);",
-      "INSERT INTO T1 VALUES (1,    2,    3,    NULL);"
+      "INSERT INTO T1 VALUES (NULL, 1, 2, 3);",
+      "INSERT INTO T1 VALUES (1, NULL, 2, 3);",
+      "INSERT INTO T1 VALUES (1, 2, NULL, 3);",
+      "INSERT INTO T1 VALUES (1, 2, 3, NULL);"
     ],
     "correctIndex": 2,
     "explanation": "UNIQUE 제약은 NULL을 허용하므로 C3에 NULL이 입력되어도 오류가 발생하지 않는다. 나머지는 각각 PK/NOT NULL/CHECK 제약에 위배된다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "CREATE TABLE T1 (\n  C1 NUMBER PRIMARY KEY,\n  C2 NUMBER NOT NULL,\n  C3 NUMBER UNIQUE,\n  C4 NUMBER CHECK (C4 IS NOT NULL)\n);"
+      }
+    ]
   },
   {
     "id": 10778,
@@ -524,7 +756,30 @@ export const ROUND_45: QuizQuestion[] = [
     ],
     "correctIndex": 0,
     "explanation": "NVL로 NULL을 0으로 치환하면 대상은 {10, 20, 0}이 되고, 분모도 3이 되어 (10+20+0)/3 = 10이다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "headers": [
+          "C1"
+        ],
+        "rows": [
+          [
+            "10"
+          ],
+          [
+            "20"
+          ],
+          [
+            "NULL"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT AVG(NVL(C1, 0)) FROM T;"
+      }
+    ]
   },
   {
     "id": 10779,
@@ -542,7 +797,33 @@ export const ROUND_45: QuizQuestion[] = [
     ],
     "correctIndex": 2,
     "explanation": "INSERT FIRST는 먼저 만족한 WHEN 절로만 분기한다. N1=1은 ELSE(TABLE3), N1=2와 N1=5는 첫 WHEN(TABLE1)으로 이동하므로 TABLE1=2, TABLE2=0, TABLE3=1이다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "headers": [
+          "[TABLE0]"
+        ],
+        "rows": [
+          [
+            "N1"
+          ],
+          [
+            "1"
+          ],
+          [
+            "2"
+          ],
+          [
+            "5"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "INSERT FIRST\n       WHEN N1 >= 2 THEN INTO TABLE1(N1) VALUES (N1)\n       WHEN N1 >= 3 THEN INTO TABLE2(N1) VALUES (N1)\n       ELSE                INTO TABLE3    VALUES (N1)\nSELECT N1 FROM TABLE0;"
+      }
+    ]
   },
   {
     "id": 10780,
@@ -560,7 +841,13 @@ export const ROUND_45: QuizQuestion[] = [
     ],
     "correctIndex": 0,
     "explanation": "LEFT OUTER JOIN → LEFT OUTER JOIN 이후 마지막이 INNER JOIN이면 INNER JOIN의 결과만 남아 공통 키를 가진 행 1건만 반환된다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT *\nFROM   T1, T2, T3, T4\nWHERE  T2.COL1(+) = T1.COL1\nAND    T3.COL1(+) = T2.COL1\nAND    T4.COL1    = T3.COL1;"
+      }
+    ]
   },
   {
     "id": 10781,
@@ -596,7 +883,13 @@ export const ROUND_45: QuizQuestion[] = [
     ],
     "correctIndex": 2,
     "explanation": "NOT IN 목록에 NULL이 포함되면 A.N1 <> NULL 평가가 UNKNOWN이 되어 조건이 참으로 평가되는 행이 없으므로 결과가 0건이다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT *\nFROM   T1 A\nWHERE  A.N1 NOT IN (SELECT B.N1 FROM T3 B);"
+      }
+    ]
   },
   {
     "id": 10783,
@@ -614,7 +907,13 @@ export const ROUND_45: QuizQuestion[] = [
     ],
     "correctIndex": 1,
     "explanation": "NULL과의 산술 연산은 NULL을 반환한다. 따라서 ②는 NULL 행이 합계에서 제외되어 ①과 결과가 달라질 수 있다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "-- ① SELECT SUM( NVL(COL1, 0) + NVL(COL2, 0) ) FROM T;\n-- ② SELECT NVL( SUM(COL1 + COL2), 0 )        FROM T;"
+      }
+    ]
   },
   {
     "id": 10784,
@@ -632,7 +931,34 @@ export const ROUND_45: QuizQuestion[] = [
     ],
     "correctIndex": 1,
     "explanation": "UNION ALL은 중복을 제거하지 않아 A, B가 두 쿼리에서 모두 추출되어 A, B, A, B로 출력된다. 나머지는 중복이 제거된다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "headers": [
+          "COL1",
+          "COL2"
+        ],
+        "rows": [
+          [
+            "A",
+            "a"
+          ],
+          [
+            "B",
+            "b"
+          ],
+          [
+            "C",
+            "c"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "-- ① SELECT COL1 FROM T WHERE COL1 IN ('A','B') OR COL2 <> 'c';\n-- ② SELECT COL1 FROM T WHERE COL1 IN ('A','B')\n--    UNION ALL\n--    SELECT COL1 FROM T WHERE COL2 <> 'c';\n-- ③ SELECT COL1 FROM T WHERE COL1 IN ('A','B')\n--    UNION\n--    SELECT COL1 FROM T WHERE COL2 <> 'c';\n-- ④ SELECT COL1 FROM T WHERE COL1 = 'A' OR COL1 = 'B' OR COL2 <> 'c';"
+      }
+    ]
   },
   {
     "id": 10785,
@@ -650,7 +976,13 @@ export const ROUND_45: QuizQuestion[] = [
     ],
     "correctIndex": 1,
     "explanation": "②는 AND가 OR보다 우선순위가 높아 \"(V1='A' AND V2='T1') OR V2='T2' OR V2='T3'\"로 해석되므로 V1이 'A'가 아닌 행도 포함된다. 나머지는 V1='A'인 행만 대상으로 한다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "-- ① SELECT * FROM SQLD49 WHERE V1 = 'A' AND V2 IN ('T1','T2','T3');\n-- ② SELECT * FROM SQLD49 WHERE V1 = 'A' AND V2 = 'T1' OR V2 = 'T2' OR V2 = 'T3';\n-- ③ SELECT * FROM SQLD49 WHERE (V1, V2) IN (('A','T1'), ('A','T2'), ('A','T3'));\n-- ④ SELECT * FROM SQLD49 WHERE V1 = 'A' AND (V2 = 'T1' OR V2 = 'T2' OR V2 = 'T3');"
+      }
+    ]
   },
   {
     "id": 10786,
@@ -668,7 +1000,13 @@ export const ROUND_45: QuizQuestion[] = [
     ],
     "correctIndex": 1,
     "explanation": "이름이 중복될 수 있어 그룹 기준으로 이름만 사용하면 유일성이 보장되지 않는다. 학번과 이름을 함께 GROUP BY에 포함해야 학생 단위로 유일하게 구분된다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "ascii",
+        "text": "[수강]        [학생]        [과목]\n학번          이름          과목명\n과목          학번\n학점"
+      }
+    ]
   },
   {
     "id": 10787,
@@ -686,7 +1024,13 @@ export const ROUND_45: QuizQuestion[] = [
     ],
     "correctIndex": 2,
     "explanation": "WHERE 1=2는 항상 거짓이므로 선택되는 행이 없다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT N1\nFROM   SQLD\nWHERE  1 = 2;"
+      }
+    ]
   },
   {
     "id": 10788,
@@ -722,7 +1066,55 @@ export const ROUND_45: QuizQuestion[] = [
     ],
     "correctIndex": 1,
     "explanation": "ON 절의 T2.TYPE='X' 조건이 조인 단계에서 필터링되어 T1.ID=1 행만 매칭되고, 매칭되지 않은 행은 T2.TYPE이 NULL로 남는다. 이후 WHERE T2.TYPE='X' 필터가 적용되어 최종적으로 1건이 반환된다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "headers": [
+          "[T1]",
+          ""
+        ],
+        "rows": [
+          [
+            "ID",
+            "NAME"
+          ],
+          [
+            "1",
+            "A"
+          ],
+          [
+            "2",
+            "B"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "headers": [
+          "[T2]",
+          ""
+        ],
+        "rows": [
+          [
+            "ID",
+            "TYPE"
+          ],
+          [
+            "1",
+            "X"
+          ],
+          [
+            "2",
+            "Y"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT T1.ID, T1.NAME, T2.TYPE\nFROM   T1 LEFT OUTER JOIN T2\nON     T1.ID = T2.ID AND T2.TYPE = 'X'\nWHERE  T2.TYPE = 'X';"
+      }
+    ]
   },
   {
     "id": 10790,
@@ -740,7 +1132,13 @@ export const ROUND_45: QuizQuestion[] = [
     ],
     "correctIndex": 1,
     "explanation": "힌트에 지정된 인덱스를 사용해 조건에 해당하는 ROWID를 수집한 후, 테이블에 ROWID로 접근하여 컬럼 값을 읽는다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT /*+ INDEX(E EMP_DEPT_IDX) */ E.*\nFROM   EMP E\nWHERE  E.DEPT_NO = 10;"
+      }
+    ]
   },
   {
     "id": 10791,
@@ -758,7 +1156,13 @@ export const ROUND_45: QuizQuestion[] = [
     ],
     "correctIndex": 1,
     "explanation": "CUBE는 지정된 모든 컬럼의 가능한 조합에 대해 소계와 총계를 생성한다. ROLLUP은 지정 순서에 따른 계층적 소계만 생성한다는 점에서 구분된다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT 부서, 직급, AVG(급여)\nFROM   EMP\nGROUP BY CUBE(부서, 직급);"
+      }
+    ]
   },
   {
     "id": 10792,
@@ -776,7 +1180,13 @@ export const ROUND_45: QuizQuestion[] = [
     ],
     "correctIndex": 0,
     "explanation": "콤마로 연결한 FROM A, B 는 조인 조건이 없는 카티션 곱(CROSS JOIN)과 동치이다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "[SQL1]\nSELECT * FROM A, B;\n\n[SQL2]\nSELECT * FROM A (  ㄱ  ) B;"
+      }
+    ]
   },
   {
     "id": 10793,
@@ -794,7 +1204,48 @@ export const ROUND_45: QuizQuestion[] = [
     ],
     "correctIndex": 2,
     "explanation": "루트 C1=1(A)을 기준으로 자식들을 C1 내림차순으로 정렬하면 형제 노드 중 C1=3(C)이 C1=2(B)보다 먼저 오므로 두 번째 행은 C가 된다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "headers": [
+          "[SQLD44]",
+          "",
+          ""
+        ],
+        "rows": [
+          [
+            "C1",
+            "C2",
+            "C3"
+          ],
+          [
+            "1",
+            "NULL",
+            "A"
+          ],
+          [
+            "2",
+            "1",
+            "B"
+          ],
+          [
+            "3",
+            "1",
+            "C"
+          ],
+          [
+            "4",
+            "2",
+            "D"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT C1, C2, C3\nFROM   SQLD44\nCONNECT BY PRIOR C1 = C2\nSTART WITH C1 = 1\nORDER SIBLINGS BY C1 DESC;"
+      }
+    ]
   },
   {
     "id": 10794,
@@ -812,7 +1263,43 @@ export const ROUND_45: QuizQuestion[] = [
     ],
     "correctIndex": 1,
     "explanation": "START WITH C1=2(JOHN)에서 C1 = PRIOR C2 방향(역방향)으로 거슬러 올라가면 JOHN → KING 경로가 생성된다. WHERE C1<>2에 의해 JOHN이 제외되어 최종 결과는 KING만 남는다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "headers": [
+          "[SQLD45]",
+          "",
+          ""
+        ],
+        "rows": [
+          [
+            "C1",
+            "C2",
+            "C3"
+          ],
+          [
+            "1",
+            "NULL",
+            "KING"
+          ],
+          [
+            "2",
+            "1",
+            "JOHN"
+          ],
+          [
+            "3",
+            "2",
+            "SCOTT"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT C3\nFROM   SQLD45\nWHERE  C1 <> 2\nCONNECT BY C1 = PRIOR C2\nSTART WITH C1 = 2;"
+      }
+    ]
   },
   {
     "id": 10795,
@@ -848,7 +1335,30 @@ export const ROUND_45: QuizQuestion[] = [
     ],
     "correctIndex": 0,
     "explanation": "NTILE(3)은 전체 8개 행을 3개의 그룹으로 최대한 균등하게 분할한다. 8 = 3 + 3 + 2 이므로 각 버킷에 3개, 3개, 2개씩 배정되어 마지막 그룹은 2가 된다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "headers": [
+          "COL1",
+          "COL2"
+        ],
+        "rows": [
+          [
+            "A",
+            "( ㄱ )"
+          ],
+          [
+            "B",
+            "3"
+          ],
+          [
+            "C",
+            "( ㄴ )"
+          ]
+        ]
+      }
+    ]
   },
   {
     "id": 10797,
@@ -866,7 +1376,46 @@ export const ROUND_45: QuizQuestion[] = [
     ],
     "correctIndex": 3,
     "explanation": "현재 값에서 +0 ~ +50 범위에 속하는 값들의 COUNT를 구해야 하므로, 물리적 행이 아닌 값의 범위를 기준으로 하는 RANGE를 사용한다. ROWS는 행 단위로 누적한다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "headers": [
+          "[SQLD48]",
+          ""
+        ],
+        "rows": [
+          [
+            "V1",
+            "N1"
+          ],
+          [
+            "A",
+            "100"
+          ],
+          [
+            "B",
+            "150"
+          ],
+          [
+            "C",
+            "1400"
+          ],
+          [
+            "D",
+            "450"
+          ],
+          [
+            "E",
+            "50"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT V1, N1,\n       COUNT(N1) OVER\n             (ORDER BY N1 (  ㄱ  )\n              BETWEEN 0 PRECEDING AND 50 FOLLOWING) AS CNT\nFROM   SQLD48;"
+      }
+    ]
   },
   {
     "id": 10798,
@@ -884,7 +1433,43 @@ export const ROUND_45: QuizQuestion[] = [
     ],
     "correctIndex": 1,
     "explanation": "AND가 OR보다 우선순위가 높아 \"(V1='A' AND V2='T1') OR V2='T2' OR V2='T3'\"로 해석된다. 세 행 모두 하나 이상의 조건을 만족하므로 결과는 3건이다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "headers": [
+          "[SQLD49]",
+          "",
+          ""
+        ],
+        "rows": [
+          [
+            "N1",
+            "V1",
+            "V2"
+          ],
+          [
+            "1",
+            "A",
+            "T1"
+          ],
+          [
+            "2",
+            "B",
+            "T2"
+          ],
+          [
+            "3",
+            "NULL",
+            "T3"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT *\nFROM   SQLD49\nWHERE  V1 = 'A' AND V2 = 'T1'\n   OR  V2 = 'T2'\n   OR  V2 = 'T3';"
+      }
+    ]
   },
   {
     "id": 10799,
@@ -902,6 +1487,45 @@ export const ROUND_45: QuizQuestion[] = [
     ],
     "correctIndex": 0,
     "explanation": "'_L%'은 두 번째 문자가 L인 문자열을 의미한다. ALX(두 번째 L), CLARE(두 번째 L), BLX(두 번째 L) 세 건이 해당된다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "headers": [
+          "[SQLD50]",
+          ""
+        ],
+        "rows": [
+          [
+            "N1",
+            "V1"
+          ],
+          [
+            "1",
+            "SMITH"
+          ],
+          [
+            "2",
+            "JOHN"
+          ],
+          [
+            "3",
+            "ALX"
+          ],
+          [
+            "4",
+            "CLARE"
+          ],
+          [
+            "5",
+            "BLX"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT COUNT(*)\nFROM   SQLD50\nWHERE  V1 LIKE '_L%';"
+      }
+    ]
   }
 ];

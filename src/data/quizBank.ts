@@ -22,6 +22,8 @@ export type QuizQuestion = {
   explanation: string;
   /** 문항에 포함되는 보기(지문·표·SQL·도식) 블록들. 없으면 생략. */
   references?: QuestionReference[];
+  /** 선택지별 보기 블록. 인덱스가 options 와 일치. 빈 배열은 보기 없음. */
+  optionReferences?: (QuestionReference[] | undefined)[];
   /** 내부 출처 태그 ('pdf' | 'blog' | 'authored'). UI 에 노출하지 말 것. */
   _source?: string;
 };

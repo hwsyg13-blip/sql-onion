@@ -38,7 +38,13 @@ export const ROUND_48: QuizQuestion[] = [
     ],
     "correctIndex": 1,
     "explanation": "",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "text",
+        "content": "모든 사용자 관점을 통합한 조직 전체 관점의 통합 표현이며, DB 에 저장되는 데이터와 그들 간의 관계를 표현한다."
+      }
+    ]
   },
   {
     "id": 10602,
@@ -110,7 +116,43 @@ export const ROUND_48: QuizQuestion[] = [
     ],
     "correctIndex": 2,
     "explanation": "부서-사원 관계에서 사원에 상속된 부서번호는 외부식별자(FK)이며, 주민등록번호는 보조식별자(AK)이다. 사원-교육이력의 수강일자는 업무에서 자연스럽게 발생한 본질식별자, 구매신청의 주문번호는 사원번호와 주문일자를 결합한 복합식별자(인조식별자)이다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "ascii",
+        "text": "[ 부서 ]                       [ 사원 ]                          [ 교육이력 ]\n┌──────────────┐              ┌──────────────────────┐          ┌──────────────────┐\n│ 부서번호 (①) │─|─ ─ ─o<─│ 사원번호 (③)        │─|─ ─ ─o<│ 사원번호 (FK)   │\n│              │              │ 부서번호 (FK)        │          │ 수강일자 (④)    │\n│              │              │ 주민등록번호 (AK1.1) │          └──────────────────┘\n└──────────────┘              └──────────────────────┘\n                                       │\n                                       │─ ─ o<\n                                       ↓\n                              ┌──────────────────────────────────┐\n                              │ [ 구매신청 ]                     │\n                              │ 주문번호 (②)                    │\n                              │ 사원번호 (FK)                    │\n                              │ 주문일자                         │\n                              │ (주문번호 = 사원번호 + 주문일자_순번) │\n                              └──────────────────────────────────┘"
+      },
+      {
+        "type": "table",
+        "headers": [
+          "위치",
+          "속성",
+          "원본 표기 분류"
+        ],
+        "rows": [
+          [
+            "①",
+            "부서.부서번호",
+            "내부식별자·단일식별자·원조식별자"
+          ],
+          [
+            "②",
+            "구매신청.주문번호",
+            "주식별자·단일식별자·내부식별자·인조식별자"
+          ],
+          [
+            "③",
+            "사원.사원번호",
+            "주식별자·내부식별자·단일식별자"
+          ],
+          [
+            "④",
+            "교육이력.수강일자",
+            "주식별자·본질식별자"
+          ]
+        ]
+      }
+    ]
   },
   {
     "id": 10606,
@@ -146,7 +188,13 @@ export const ROUND_48: QuizQuestion[] = [
     ],
     "correctIndex": 1,
     "explanation": "",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "text",
+        "content": "주식별자를 구성하는 속성이 최소한으로 구성되어야 한다."
+      }
+    ]
   },
   {
     "id": 10608,
@@ -182,7 +230,13 @@ export const ROUND_48: QuizQuestion[] = [
     ],
     "correctIndex": 1,
     "explanation": "선택사양(Optional) 표기가 있다면 계정이 계정그룹 없이 존재할 수 있다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "[ 계정 ] ∋-----|∘ [ 계정그룹 ]"
+      }
+    ]
   },
   {
     "id": 10610,
@@ -200,7 +254,13 @@ export const ROUND_48: QuizQuestion[] = [
     ],
     "correctIndex": 3,
     "explanation": "",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT 선수이름 FROM 선수 WHERE 키 >= 185;"
+      }
+    ]
   },
   {
     "id": 10611,
@@ -236,7 +296,13 @@ export const ROUND_48: QuizQuestion[] = [
     ],
     "correctIndex": 3,
     "explanation": "",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "배우(배우번호, 배우명, 성별)\n영화(영화번호, 영화명, 제작년도)\n출연(배우번호, 영화번호, 출연료)"
+      }
+    ]
   },
   {
     "id": 10613,
@@ -247,14 +313,181 @@ export const ROUND_48: QuizQuestion[] = [
     "number": 14,
     "title": "아래 SQL 의 결과로 가장 적절한 것은?",
     "options": [
-      "3건 반환 <table border=\"1\" cellspacing=\"0\" cellpadding=\"6\"> <tr><th>사원ID</th><th>부서ID</th><th>사원명</th><th>연봉</th></tr> <tr><td>002</td><td>100</td><td>강감찬</td><td>3000</td></tr> <tr><td>003</td><td>200</td><td>김유신</td><td>4500</td></tr> <tr><td>006</td><td>300</td><td>변사또</td><td>4500</td></tr> </table>",
-      "3건 반환 <table border=\"1\" cellspacing=\"0\" cellpadding=\"6\"> <tr><th>사원ID</th><th>부서ID</th><th>사원명</th><th>연봉</th></tr> <tr><td>001</td><td>100</td><td>홍길동</td><td>2500</td></tr> <tr><td>005</td><td>200</td><td>유학생</td><td>2500</td></tr> <tr><td>007</td><td>300</td><td>박문수</td><td>3000</td></tr> </table>",
-      "2건 반환 <table border=\"1\" cellspacing=\"0\" cellpadding=\"6\"> <tr><th>사원ID</th><th>부서ID</th><th>사원명</th><th>연봉</th></tr> <tr><td>003</td><td>200</td><td>김유신</td><td>4500</td></tr> <tr><td>006</td><td>300</td><td>변사또</td><td>4500</td></tr> </table>",
-      "1건 반환 <table border=\"1\" cellspacing=\"0\" cellpadding=\"6\"> <tr><th>사원ID</th><th>부서ID</th><th>사원명</th><th>연봉</th></tr> <tr><td>003</td><td>200</td><td>김유신</td><td>4500</td></tr> </table>"
+      "3건 반환",
+      "3건 반환",
+      "2건 반환",
+      "1건 반환"
     ],
     "correctIndex": 0,
     "explanation": "각 부서별 최고 연봉 사원이 부서 100=강감찬(3000), 200=김유신(4500), 300=변사또(4500)로 산출된다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "headers": [
+          "사원ID",
+          "부서ID",
+          "사원명",
+          "연봉"
+        ],
+        "rows": [
+          [
+            "001",
+            "100",
+            "홍길동",
+            "2500"
+          ],
+          [
+            "002",
+            "100",
+            "강감찬",
+            "3000"
+          ],
+          [
+            "003",
+            "200",
+            "김유신",
+            "4500"
+          ],
+          [
+            "004",
+            "200",
+            "김선달",
+            "3000"
+          ],
+          [
+            "005",
+            "200",
+            "유학생",
+            "2500"
+          ],
+          [
+            "006",
+            "300",
+            "변사또",
+            "4500"
+          ],
+          [
+            "007",
+            "300",
+            "박문수",
+            "3000"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT Y.*\nFROM (SELECT 사원ID, MAX(연봉) OVER(PARTITION BY 부서ID) AS 최고연봉 FROM 사원) X,\n     사원 Y\nWHERE X.사원ID = Y.사원ID AND X.최고연봉 = Y.연봉;"
+      }
+    ],
+    "optionReferences": [
+      [
+        {
+          "type": "table",
+          "headers": [
+            "사원ID",
+            "부서ID",
+            "사원명",
+            "연봉"
+          ],
+          "rows": [
+            [
+              "002",
+              "100",
+              "강감찬",
+              "3000"
+            ],
+            [
+              "003",
+              "200",
+              "김유신",
+              "4500"
+            ],
+            [
+              "006",
+              "300",
+              "변사또",
+              "4500"
+            ]
+          ]
+        }
+      ],
+      [
+        {
+          "type": "table",
+          "headers": [
+            "사원ID",
+            "부서ID",
+            "사원명",
+            "연봉"
+          ],
+          "rows": [
+            [
+              "001",
+              "100",
+              "홍길동",
+              "2500"
+            ],
+            [
+              "005",
+              "200",
+              "유학생",
+              "2500"
+            ],
+            [
+              "007",
+              "300",
+              "박문수",
+              "3000"
+            ]
+          ]
+        }
+      ],
+      [
+        {
+          "type": "table",
+          "headers": [
+            "사원ID",
+            "부서ID",
+            "사원명",
+            "연봉"
+          ],
+          "rows": [
+            [
+              "003",
+              "200",
+              "김유신",
+              "4500"
+            ],
+            [
+              "006",
+              "300",
+              "변사또",
+              "4500"
+            ]
+          ]
+        }
+      ],
+      [
+        {
+          "type": "table",
+          "headers": [
+            "사원ID",
+            "부서ID",
+            "사원명",
+            "연봉"
+          ],
+          "rows": [
+            [
+              "003",
+              "200",
+              "김유신",
+              "4500"
+            ]
+          ]
+        }
+      ]
+    ]
   },
   {
     "id": 10614,
@@ -272,7 +505,13 @@ export const ROUND_48: QuizQuestion[] = [
     ],
     "correctIndex": 2,
     "explanation": "",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT 상품분류코드, AVG(상품가격) AS 상품가격,\n       COUNT(*) OVER(ORDER BY AVG(상품가격)\n                     RANGE BETWEEN 10000 PRECEDING AND 10000 FOLLOWING) AS 유사개수\nFROM   상품\nGROUP BY 상품분류코드;"
+      }
+    ]
   },
   {
     "id": 10615,
@@ -290,7 +529,38 @@ export const ROUND_48: QuizQuestion[] = [
     ],
     "correctIndex": 1,
     "explanation": "ID=A 는 순위 1, 나머지는 순위 2 로 정렬된 뒤 AMT DESC 로 내부 정렬된다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "headers": [
+          "ID",
+          "AMT"
+        ],
+        "rows": [
+          [
+            "A",
+            "50"
+          ],
+          [
+            "A",
+            "200"
+          ],
+          [
+            "B",
+            "300"
+          ],
+          [
+            "C",
+            "100"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT ID, AMT\nFROM   TBL\nORDER BY (CASE WHEN ID = 'A' THEN 1 ELSE 2 END), AMT DESC;"
+      }
+    ]
   },
   {
     "id": 10616,
@@ -362,7 +632,13 @@ export const ROUND_48: QuizQuestion[] = [
     ],
     "correctIndex": 3,
     "explanation": "",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT TO_CHAR(TO_DATE('2023-06-10','YYYY-MM-DD'), 'MONTH') FROM DUAL;"
+      }
+    ]
   },
   {
     "id": 10620,
@@ -398,7 +674,29 @@ export const ROUND_48: QuizQuestion[] = [
     ],
     "correctIndex": 2,
     "explanation": "",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "headers": [
+          "SAL"
+        ],
+        "rows": [
+          [
+            "2000"
+          ],
+          [
+            "1500"
+          ],
+          [
+            "1500"
+          ],
+          [
+            "1500"
+          ]
+        ]
+      }
+    ]
   },
   {
     "id": 10622,
@@ -434,7 +732,13 @@ export const ROUND_48: QuizQuestion[] = [
     ],
     "correctIndex": 2,
     "explanation": "",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT SUM(A) FROM T WHERE A >= B;\n-- 조건 만족 행: 10, 10, 10, 10 ... 총 10건이 10씩"
+      }
+    ]
   },
   {
     "id": 10624,
@@ -506,7 +810,13 @@ export const ROUND_48: QuizQuestion[] = [
     ],
     "correctIndex": 2,
     "explanation": "ROLLBACK 으로 DELETE·UPDATE 가 취소되고 COMMIT 된 INSERT 만 유지되어 단가 2000 인 행은 002, 004, 005 의 3건이다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "CREATE TABLE 품목 (품목ID VARCHAR2(3), 단가 NUMBER);\n-- 초기 데이터: 001 1000, 002 2000, 003 1000, 004 2000\n\nBEGIN TRANSACTION;\nINSERT INTO 품목 VALUES ('005', 2000);\nCOMMIT;\n\nBEGIN TRANSACTION;\nDELETE FROM 품목 WHERE 품목ID = '002';\nBEGIN TRANSACTION;\nUPDATE 품목 SET 단가 = 2000 WHERE 단가 = 1000;\nROLLBACK;\n\nSELECT COUNT(품목ID) FROM 품목 WHERE 단가 = 2000;"
+      }
+    ]
   },
   {
     "id": 10628,
@@ -542,7 +852,13 @@ export const ROUND_48: QuizQuestion[] = [
     ],
     "correctIndex": 2,
     "explanation": "",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT COUNT(*) FROM DUAL CONNECT BY LEVEL <= 2;"
+      }
+    ]
   },
   {
     "id": 10630,
@@ -686,7 +1002,39 @@ export const ROUND_48: QuizQuestion[] = [
     ],
     "correctIndex": 3,
     "explanation": "ESCAPE '@' 로 '_' 를 리터럴로 해석하여 모든 행이 매칭된다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "WHERE COL LIKE '%@_%' ESCAPE '@';"
+      },
+      {
+        "type": "table",
+        "headers": [
+          "COL"
+        ],
+        "rows": [
+          [
+            "A_B"
+          ],
+          [
+            "C_D"
+          ],
+          [
+            "E_F"
+          ],
+          [
+            "G_H"
+          ],
+          [
+            "I_J"
+          ],
+          [
+            "K_L"
+          ]
+        ]
+      }
+    ]
   },
   {
     "id": 10638,
@@ -758,7 +1106,13 @@ export const ROUND_48: QuizQuestion[] = [
     ],
     "correctIndex": 3,
     "explanation": "",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT 사원ID, 사원명, 연봉 FROM EMP ORDER BY 2;"
+      }
+    ]
   },
   {
     "id": 10642,
@@ -830,7 +1184,38 @@ export const ROUND_48: QuizQuestion[] = [
     ],
     "correctIndex": 0,
     "explanation": "ㄱ 은 COL2 의 NULL 을 제외한 50+10=60, ㄴ 은 COL1>0 행의 COL2 가 NULL 뿐이므로 NULL, ㄷ 은 COL1 IS NOT NULL 행에서 NULL+10=10, ㄹ 은 COL1 IS NULL 행의 COL2=50 이 된다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "headers": [
+          "COL1",
+          "COL2",
+          "COL3"
+        ],
+        "rows": [
+          [
+            "10",
+            "NULL",
+            "10"
+          ],
+          [
+            "NULL",
+            "50",
+            "10"
+          ],
+          [
+            "0",
+            "10",
+            "10"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "ㄱ. SELECT SUM(COL2) FROM T1;\nㄴ. SELECT SUM(COL2) FROM T1 WHERE COL1 > 0;\nㄷ. SELECT SUM(COL2) FROM T1 WHERE COL1 IS NOT NULL;\nㄹ. SELECT SUM(COL2) FROM T1 WHERE COL1 IS NULL;"
+      }
+    ]
   },
   {
     "id": 10646,
@@ -848,7 +1233,33 @@ export const ROUND_48: QuizQuestion[] = [
     ],
     "correctIndex": 2,
     "explanation": "정렬 키는 3*3=9, 1*3=3, 4, 2 순으로 3, 4, 1, 2 가 출력된다. 세 번째는 1 이다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "headers": [
+          "ID"
+        ],
+        "rows": [
+          [
+            "1"
+          ],
+          [
+            "2"
+          ],
+          [
+            "3"
+          ],
+          [
+            "4"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT ID FROM TAB1\nORDER BY (CASE WHEN ID IN (1, 3) THEN ID * 3 ELSE ID END) DESC;"
+      }
+    ]
   },
   {
     "id": 10647,
@@ -902,6 +1313,12 @@ export const ROUND_48: QuizQuestion[] = [
     ],
     "correctIndex": 1,
     "explanation": "GRANT 구문은 `GRANT 권한 ON 객체 TO 사용자` 형식을 따른다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "GRANT INSERT (   ) 테이블명 (   ) 사용자명;"
+      }
+    ]
   }
 ];

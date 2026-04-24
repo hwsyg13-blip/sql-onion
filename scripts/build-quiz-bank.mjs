@@ -88,7 +88,10 @@ for (const r of rounds) {
     merged[r] = authored[r].map(a => ({
       round: r, subject: a.subject, number: a.number,
       title: a.title, options: a.options, correctIndex: a.correctIndex,
-      explanation: a.explanation, source: 'authored',
+      explanation: a.explanation,
+      references: a.references,           // 질문 보기
+      optionReferences: a.optionReferences, // 선택지별 보기
+      source: 'authored',
     })).sort((a,b) => a.subject.localeCompare(b.subject) || a.number - b.number);
     continue;
   }
@@ -119,19 +122,26 @@ let nextId = 10000;
 const roundFileNames = [];
 let totalCount = 0;
 for (const r of rounds) {
-  const qs = merged[r].map(q => ({
-    id: nextId++,
-    examSetId: `round-${r}`,
-    examLabel: `제${r}회 (${ROUND_DATES[r] || ''})`,
-    round: r,
-    subject: q.subject,
-    number: q.number,
-    title: q.title,
-    options: q.options.slice(0, 4),
-    correctIndex: q.correctIndex,
-    explanation: q.explanation || '',
-    _source: q.source,
-  }));
+  const qs = merged[r].map(q => {
+    const entry = {
+      id: nextId++,
+      examSetId: `round-${r}`,
+      examLabel: `제${r}회 (${ROUND_DATES[r] || ''})`,
+      round: r,
+      subject: q.subject,
+      number: q.number,
+      title: q.title,
+      options: q.options.slice(0, 4),
+      correctIndex: q.correctIndex,
+      explanation: q.explanation || '',
+      _source: q.source,
+    };
+    if (q.references && q.references.length) entry.references = q.references;
+    if (q.optionReferences && q.optionReferences.some(r => r && r.length)) {
+      entry.optionReferences = q.optionReferences;
+    }
+    return entry;
+  });
   totalCount += qs.length;
 
   const varName = `ROUND_${r}`;
@@ -183,6 +193,8 @@ export type QuizQuestion = {
   explanation: string;
   /** 문항에 포함되는 보기(지문·표·SQL·도식) 블록들. 없으면 생략. */
   references?: QuestionReference[];
+  /** 선택지별 보기 블록. 인덱스가 options 와 일치. 빈 배열은 보기 없음. */
+  optionReferences?: (QuestionReference[] | undefined)[];
   /** 내부 출처 태그 ('pdf' | 'blog' | 'authored'). UI 에 노출하지 말 것. */
   _source?: string;
 };

@@ -146,6 +146,18 @@ function RefHtml({ html, caption }: any) {
   );
 }
 
+function renderBlock(r: QuestionReference, i: number) {
+  switch (r.type) {
+    case 'text':  return <RefText  key={i} {...r as any}/>;
+    case 'sql':   return <RefSql   key={i} {...r as any}/>;
+    case 'table': return <RefTable key={i} {...r as any}/>;
+    case 'ascii': return <RefAscii key={i} {...r as any}/>;
+    case 'html':  return <RefHtml  key={i} {...r as any}/>;
+    default: return null;
+  }
+}
+
+/** 질문용 "보기" 카드 — 제목과 선택지 사이에 렌더 */
 export const QuestionReferences = ({ refs }: { refs?: QuestionReference[] }) => {
   if (!refs || refs.length === 0) return null;
 
@@ -175,16 +187,22 @@ export const QuestionReferences = ({ refs }: { refs?: QuestionReference[] }) => 
         }}/>
         보기
       </div>
-      {refs.map((r, i) => {
-        switch (r.type) {
-          case 'text':  return <RefText  key={i} {...r as any}/>;
-          case 'sql':   return <RefSql   key={i} {...r as any}/>;
-          case 'table': return <RefTable key={i} {...r as any}/>;
-          case 'ascii': return <RefAscii key={i} {...r as any}/>;
-          case 'html':  return <RefHtml  key={i} {...r as any}/>;
-          default: return null;
-        }
-      })}
+      {refs.map(renderBlock)}
     </section>
+  );
+};
+
+/** 선택지 내부 보기 — 선택지 텍스트 아래에 좀 더 작게 렌더 */
+export const OptionReferences = ({ refs }: { refs?: QuestionReference[] }) => {
+  if (!refs || refs.length === 0) return null;
+  return (
+    <div style={{
+      marginTop: 10,
+      display: 'flex',
+      flexDirection: 'column',
+      gap: 10,
+    }}>
+      {refs.map(renderBlock)}
+    </div>
   );
 };

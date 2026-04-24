@@ -38,7 +38,13 @@ export const ROUND_59: QuizQuestion[] = [
     ],
     "correctIndex": 2,
     "explanation": "원금과 이자율로부터 계산되어 도출되는 값은 이자뿐이다. 이자율은 기본 속성이므로 \"이자와 이자율 모두가 파생 속성\"이라는 설명은 옳지 않다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "text",
+        "content": "우리은행은 예금분류(일반예금, 특별예금 등)의 원금, 예치기간, 이자율을 관리할 필요가 있다. 또한 원금에 이자율을 적용하여 산출되는 이자도 속성으로 관리하고자 한다. 예를 들어 원금이 1,000원이고 예치기간이 5개월이며 이자율이 5.0%이다. 일반예금이나 특별예금 등에 대해서는 코드를 부여(예: 01-일반예금, 02-특별예금)하여 관리한다."
+      }
+    ]
   },
   {
     "id": 10052,
@@ -56,7 +62,13 @@ export const ROUND_59: QuizQuestion[] = [
     ],
     "correctIndex": 1,
     "explanation": "",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "text",
+        "content": "속성이 가질 수 있는 값(데이터 타입 등)의 범위를 정의한 것"
+      }
+    ]
   },
   {
     "id": 10053,
@@ -110,7 +122,13 @@ export const ROUND_59: QuizQuestion[] = [
     ],
     "correctIndex": 3,
     "explanation": "비식별자 관계로 바꾸면 부모의 키가 자식의 PK에 포함되지 않아 하위 테이블까지 키가 전파되지 않는다. 이로 인해 상위 조상까지 접근하려면 추가 조인이 필요해져 조인이 더 복잡해진다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "[ A ] ||-----∈ [ B ] ||-----∈ [ C ] ||-----∈ [ D ]"
+      }
+    ]
   },
   {
     "id": 10056,
@@ -182,7 +200,13 @@ export const ROUND_59: QuizQuestion[] = [
     ],
     "correctIndex": 3,
     "explanation": "ERD의 선택사양이 Optional(원)으로 표기되어 있으므로 학생은 수강을 하지 않아도 존재할 수 있다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "[ 학생 ] ∋-----|∘ [ 수강 ] ∘|-----∈ [ 과목 ]\n     (1)       (0..N)      (1)"
+      }
+    ]
   },
   {
     "id": 10060,
@@ -200,7 +224,13 @@ export const ROUND_59: QuizQuestion[] = [
     ],
     "correctIndex": 2,
     "explanation": "가는 DCL이 데이터 제어 언어이므로 오답이며, 다는 REVOKE가 권한 회수 명령으로서 물리 디스크 저장과는 무관하므로 오답이다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "text",
+        "content": "가. DCL은 데이터 정의 언어이다.\n나. GRANT는 자신이 가진 권한을 다른 사용자에게 부여할 수 있다.\n다. REVOKE는 실행 후 물리 디스크에 저장한다.\n라. ROLE 권한은 데이터에 대한 접근 권한의 집합이다."
+      }
+    ]
   },
   {
     "id": 10061,
@@ -218,7 +248,30 @@ export const ROUND_59: QuizQuestion[] = [
     ],
     "correctIndex": 1,
     "explanation": "정렬을 역방향(DESC)으로 지정하면 LAG가 논리적으로 다음 행을 참조하는 효과를 얻을 수 있다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "headers": [
+          "ID",
+          "VAL"
+        ],
+        "rows": [
+          [
+            "1",
+            "100"
+          ],
+          [
+            "2",
+            "200"
+          ],
+          [
+            "3",
+            "300"
+          ]
+        ]
+      }
+    ]
   },
   {
     "id": 10062,
@@ -236,7 +289,26 @@ export const ROUND_59: QuizQuestion[] = [
     ],
     "correctIndex": 2,
     "explanation": "'%'는 0개 이상 임의 문자를 의미하므로, '연구소' 단독 값도 포함된다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "headers": [
+          "연구소명"
+        ],
+        "rows": [
+          [
+            "A연구소"
+          ],
+          [
+            "화학연구소"
+          ],
+          [
+            "연구소"
+          ]
+        ]
+      }
+    ]
   },
   {
     "id": 10063,
@@ -254,7 +326,13 @@ export const ROUND_59: QuizQuestion[] = [
     ],
     "correctIndex": 1,
     "explanation": "",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "NVL2(expr, a, b)\n-- expr이 NULL이면 b를 반환, NOT NULL이면 a를 반환"
+      }
+    ]
   },
   {
     "id": 10064,
@@ -272,7 +350,34 @@ export const ROUND_59: QuizQuestion[] = [
     ],
     "correctIndex": 0,
     "explanation": "",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "headers": [
+          "EMPNO",
+          "ENAME",
+          "MGR"
+        ],
+        "rows": [
+          [
+            "7566",
+            "JONES",
+            "7839"
+          ],
+          [
+            "7839",
+            "KING",
+            "(NULL)"
+          ],
+          [
+            "7902",
+            "FORD",
+            "7566"
+          ]
+        ]
+      }
+    ]
   },
   {
     "id": 10065,
@@ -290,7 +395,13 @@ export const ROUND_59: QuizQuestion[] = [
     ],
     "correctIndex": 0,
     "explanation": "(+) 기호가 오른쪽 테이블 쪽에 붙으면 왼쪽이 기준이 되는 LEFT OUTER JOIN에 해당한다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "-- Oracle 표기\nSELECT * FROM A, B WHERE A.ID = B.ID(+);"
+      }
+    ]
   },
   {
     "id": 10066,
@@ -308,7 +419,42 @@ export const ROUND_59: QuizQuestion[] = [
     ],
     "correctIndex": 2,
     "explanation": "수강 내역이 존재하는 학생을 선택해야 하므로 EXISTS나 INTERSECT 형태의 포지티브 조건이 필요하다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "headers": [
+          "STUDENT",
+          "LECTURE"
+        ],
+        "rows": [
+          [
+            "STU_ID",
+            "NAME",
+            "STU_ID",
+            "COURSE"
+          ],
+          [
+            "1",
+            "A",
+            "1",
+            "DB"
+          ],
+          [
+            "2",
+            "B",
+            "3",
+            "OS"
+          ],
+          [
+            "3",
+            "C",
+            "",
+            ""
+          ]
+        ]
+      }
+    ]
   },
   {
     "id": 10067,
@@ -326,7 +472,13 @@ export const ROUND_59: QuizQuestion[] = [
     ],
     "correctIndex": 0,
     "explanation": "Oracle에서 가장 일반적인 TOP-N 기법은 인라인 뷰 정렬 후 ROWNUM으로 행 개수를 제한하는 방식이다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "-- EMP 테이블: 다수 직원 데이터\nSELECT EMPNO\nFROM   (SELECT EMPNO FROM EMP ORDER BY EMPNO DESC)\nWHERE  (  ?  ) = 1;"
+      }
+    ]
   },
   {
     "id": 10068,
@@ -344,7 +496,13 @@ export const ROUND_59: QuizQuestion[] = [
     ],
     "correctIndex": 2,
     "explanation": "DDL 실행 시점에 묵시적 커밋이 발생해 직전까지의 30건이 확정된다. 이후 INSERT는 ROLLBACK으로 취소되므로 최종 30건이 남는다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "-- T 테이블 초기 상태: 0건\n\nINSERT INTO T ... 15건;        -- 15건, 미커밋\nCOMMIT;                         -- 15건 확정\n\nINSERT INTO T ... 15건;        -- 30건, 미커밋\nCREATE INDEX IDX_T ON T(COL);   -- DDL → 묵시적 커밋 (30건 확정)\n\nINSERT INTO T ... 20건;        -- 50건, 미커밋\nROLLBACK;                       -- 마지막 INSERT 취소\n\nSELECT COUNT(*) FROM T;"
+      }
+    ]
   },
   {
     "id": 10069,
@@ -362,7 +520,39 @@ export const ROUND_59: QuizQuestion[] = [
     ],
     "correctIndex": 2,
     "explanation": "COUNT(컬럼)은 NULL을 제외하므로 전체 건수에서 값이 있는 건수를 빼면 NULL 건수를 얻는다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "headers": [
+          "고객번호",
+          "고객명",
+          "집주소"
+        ],
+        "rows": [
+          [
+            "1001",
+            "홍길동",
+            "서울"
+          ],
+          [
+            "1002",
+            "이순신",
+            "(NULL)"
+          ],
+          [
+            "1003",
+            "강감찬",
+            "부산"
+          ],
+          [
+            "1004",
+            "유관순",
+            "(NULL)"
+          ]
+        ]
+      }
+    ]
   },
   {
     "id": 10070,
@@ -398,7 +588,26 @@ export const ROUND_59: QuizQuestion[] = [
     ],
     "correctIndex": 1,
     "explanation": "정규표현식에서 `^`는 문자열의 시작 위치를 나타낸다. `[^010]`은 문자 클래스 부정이므로 전혀 다른 의미이다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "headers": [
+          "PHONE"
+        ],
+        "rows": [
+          [
+            "010-1234-5678"
+          ],
+          [
+            "02-345-6789"
+          ],
+          [
+            "010-9999-0000"
+          ]
+        ]
+      }
+    ]
   },
   {
     "id": 10072,
@@ -416,7 +625,13 @@ export const ROUND_59: QuizQuestion[] = [
     ],
     "correctIndex": 2,
     "explanation": "`'B.D'`는 'B'+임의 문자+'D' 로 'BCD'와 매칭되어 \"BCD\"를 반환한다. `'b.d'`는 소문자이므로 대소문자를 구별하는 기본 옵션에서 매칭되지 않아 NULL을 반환한다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT REGEXP_SUBSTR('BCD', ( ? )) AS 첫번째,\n       REGEXP_SUBSTR('BCD', ( ? )) AS 두번째\nFROM DUAL;"
+      }
+    ]
   },
   {
     "id": 10073,
@@ -470,7 +685,13 @@ export const ROUND_59: QuizQuestion[] = [
     ],
     "correctIndex": 3,
     "explanation": "B 컬럼은 DATE 타입인데 숫자 리터럴 20240606이 직접 입력되어 자동 변환이 이루어지지 않으므로 타입 불일치 오류가 발생한다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "CREATE TABLE TABLE1 (\n  A NUMBER,\n  B DATE,\n  C VARCHAR2(10)\n);"
+      }
+    ]
   },
   {
     "id": 10076,
@@ -488,7 +709,38 @@ export const ROUND_59: QuizQuestion[] = [
     ],
     "correctIndex": 2,
     "explanation": "",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "headers": [
+          "고객ID",
+          "주문일자",
+          "금액"
+        ],
+        "rows": [
+          [
+            "C001",
+            "2025-01-05",
+            "10,000"
+          ],
+          [
+            "C001",
+            "2025-01-08",
+            "20,000"
+          ],
+          [
+            "C001",
+            "2025-01-12",
+            "5,000"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT 고객ID, 주문일자, 금액,\n       SUM(금액) OVER (PARTITION BY 고객ID ORDER BY 주문일자\n                       (  ?  )) AS 누적금액\nFROM   주문;"
+      }
+    ]
   },
   {
     "id": 10077,
@@ -524,7 +776,42 @@ export const ROUND_59: QuizQuestion[] = [
     ],
     "correctIndex": 3,
     "explanation": "COALESCE는 인자를 순서대로 평가하여 가장 먼저 NULL이 아닌 값을 반환한다. 행별로 30, 60, 60 이 반환된다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "headers": [
+          "ID",
+          "V1",
+          "V2",
+          "V3"
+        ],
+        "rows": [
+          [
+            "1",
+            "30",
+            "(NULL)",
+            "60"
+          ],
+          [
+            "2",
+            "(NULL)",
+            "60",
+            "90"
+          ],
+          [
+            "3",
+            "(NULL)",
+            "(NULL)",
+            "60"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT COALESCE(V1, V2, V3) FROM T ORDER BY ID;"
+      }
+    ]
   },
   {
     "id": 10079,
@@ -542,7 +829,28 @@ export const ROUND_59: QuizQuestion[] = [
     ],
     "correctIndex": 0,
     "explanation": "T2와 T3는 공통 원소가 없어 INTERSECT 결과는 공집합이다. 이어지는 UNION 연산에서 T1 {A, B, C}와 공집합의 합집합은 {A, B, C}가 된다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "headers": [
+          "T1",
+          "T2",
+          "T3"
+        ],
+        "rows": [
+          [
+            "A, B, C",
+            "B",
+            "C"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT V FROM T1\nUNION\n(SELECT V FROM T2 INTERSECT SELECT V FROM T3);"
+      }
+    ]
   },
   {
     "id": 10080,
@@ -578,7 +886,13 @@ export const ROUND_59: QuizQuestion[] = [
     ],
     "correctIndex": 1,
     "explanation": "연관 서브쿼리로 각 부서별 MAX를 스칼라로 반환하므로 다중 행 반환 오류가 발생하지 않는다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT *\nFROM   EMP E\nWHERE  SAL > (SELECT MAX(SAL) FROM EMP WHERE DEPTNO = E.DEPTNO);"
+      }
+    ]
   },
   {
     "id": 10082,
@@ -614,7 +928,13 @@ export const ROUND_59: QuizQuestion[] = [
     ],
     "correctIndex": 2,
     "explanation": "ROUND(136.2, -1)은 일의 자리에서 반올림되어 140이다. ROUND(-7.532, 2)는 소수 둘째 자리까지 반올림되어 -7.53이다. ROUND(3.561, 0)은 소수 첫째 자리에서 반올림되어 4이므로 (다)는 틀리다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "text",
+        "content": "(가) `ROUND(136.2, -1)` 은 140 이다.\n(나) `ROUND(-7.532, 2)` 는 -7.53 이다.\n(다) `ROUND(3.561, 0)` 은 3.5 이다."
+      }
+    ]
   },
   {
     "id": 10084,
@@ -632,7 +952,13 @@ export const ROUND_59: QuizQuestion[] = [
     ],
     "correctIndex": 0,
     "explanation": "①은 연도를 추출하는 식이며 월 추출과 무관하다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "-- 대상 문자열: '202505'\n-- 추출 목표: 05 (월)"
+      }
+    ]
   },
   {
     "id": 10085,
@@ -650,7 +976,28 @@ export const ROUND_59: QuizQuestion[] = [
     ],
     "correctIndex": 2,
     "explanation": "T2에서 T3에 포함된 값(C)을 제외하면 {B}만 남는다. 이를 T1 {A, B, C}와 UNION ALL로 결합하면 중복이 제거되지 않으므로 결과 다중집합은 {A, B, B, C}가 된다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "headers": [
+          "T1",
+          "T2",
+          "T3"
+        ],
+        "rows": [
+          [
+            "A, B, C",
+            "B",
+            "C"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT V FROM T1\nUNION ALL\nSELECT V FROM T2\nWHERE  V NOT IN (SELECT V FROM T3);"
+      }
+    ]
   },
   {
     "id": 10086,
@@ -668,7 +1015,13 @@ export const ROUND_59: QuizQuestion[] = [
     ],
     "correctIndex": 3,
     "explanation": "서브쿼리 내부에서 바깥 쿼리의 ACTOR_ID를 참조하므로 연관(Correlated) 서브쿼리에 해당한다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT A.*\nFROM   ACTOR_PAY A\nWHERE  A.FEE = (SELECT MAX(FEE)\n                FROM   ACTOR_PAY\n                WHERE  ACTOR_ID = A.ACTOR_ID);"
+      }
+    ]
   },
   {
     "id": 10087,
@@ -686,7 +1039,30 @@ export const ROUND_59: QuizQuestion[] = [
     ],
     "correctIndex": 0,
     "explanation": "EXISTS는 내부 쿼리의 존재 여부만 평가하므로 A의 모든 행이 반환된다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "headers": [
+          "A"
+        ],
+        "rows": [
+          [
+            "1"
+          ],
+          [
+            "2"
+          ],
+          [
+            "3"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT *\nFROM   A\nWHERE  EXISTS (SELECT NULL FROM A);"
+      }
+    ]
   },
   {
     "id": 10088,
@@ -704,7 +1080,13 @@ export const ROUND_59: QuizQuestion[] = [
     ],
     "correctIndex": 2,
     "explanation": "START WITH 11로 시작하며 PRIOR category_id = 상위카테고리 조건은 부모에서 자식으로 내려가는 정방향 탐색이므로 11에서 시작해 22 방향으로 확장한다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "-- [CATEGORY 테이블]\n-- category_id  상위카테고리\n--     1          (NULL)\n--     2          1\n--    11          2\n--    22          11\nSELECT *\nFROM   CATEGORY\nSTART WITH category_id = 11\nCONNECT BY PRIOR category_id = 상위카테고리;"
+      }
+    ]
   },
   {
     "id": 10089,
@@ -740,7 +1122,13 @@ export const ROUND_59: QuizQuestion[] = [
     ],
     "correctIndex": 3,
     "explanation": "세 진술 모두 TCL과 트랜잭션 기본 개념에 부합한다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "text",
+        "content": "가. DDL은 수행 전후 묵시적 COMMIT이 발생한다.\n나. 트랜잭션의 논리 단위는 여러 SQL 문장으로 구성될 수 있다.\n다. SAVEPOINT를 지정하면 해당 지점까지 부분 롤백이 가능하다."
+      }
+    ]
   },
   {
     "id": 10091,
@@ -758,7 +1146,50 @@ export const ROUND_59: QuizQuestion[] = [
     ],
     "correctIndex": 1,
     "explanation": "",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "headers": [
+          "고객ID",
+          "배송일자"
+        ],
+        "rows": [
+          [
+            "1",
+            "2025-01-01"
+          ],
+          [
+            "2",
+            "2025-01-03"
+          ],
+          [
+            "2",
+            "2025-01-05"
+          ],
+          [
+            "3",
+            "2025-02-01"
+          ],
+          [
+            "3",
+            "2025-02-10"
+          ],
+          [
+            "3",
+            "2025-02-20"
+          ],
+          [
+            "4",
+            "2025-03-01"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT 고객ID\nFROM   배송\nGROUP BY 고객ID\nHAVING COUNT(배송일자) >= 2;"
+      }
+    ]
   },
   {
     "id": 10092,
@@ -794,7 +1225,13 @@ export const ROUND_59: QuizQuestion[] = [
     ],
     "correctIndex": 3,
     "explanation": "",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "CREATE TABLE PARENT (ID NUMBER PRIMARY KEY);\nCREATE TABLE CHILD  (\n  ID     NUMBER PRIMARY KEY,\n  PAR_ID NUMBER REFERENCES PARENT(ID) ON DELETE CASCADE\n);\n\nINSERT INTO PARENT VALUES (1);\nINSERT INTO CHILD  VALUES (10, 1);\nDELETE FROM PARENT WHERE ID = 1;"
+      }
+    ]
   },
   {
     "id": 10094,
@@ -812,7 +1249,13 @@ export const ROUND_59: QuizQuestion[] = [
     ],
     "correctIndex": 0,
     "explanation": "서브쿼리가 NULL을 반환하므로 DEPTNO = NULL 비교가 UNKNOWN으로 평가되어 공집합이 반환된다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT *\nFROM   EMP\nWHERE  DEPTNO = (SELECT DEPTNO FROM DEPT WHERE DNAME = '없는부서');"
+      }
+    ]
   },
   {
     "id": 10095,
@@ -830,7 +1273,34 @@ export const ROUND_59: QuizQuestion[] = [
     ],
     "correctIndex": 3,
     "explanation": "ROLLUP(A, B)은 (A,B), (A), () 집계 레벨을 반환한다. (X,1),(X,2),(Y,1),(X),(Y),()의 6건이 출력된다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "headers": [
+          "A",
+          "B"
+        ],
+        "rows": [
+          [
+            "X",
+            "1"
+          ],
+          [
+            "X",
+            "2"
+          ],
+          [
+            "Y",
+            "1"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT A, B, COUNT(*)\nFROM   T\nGROUP BY ROLLUP(A, B);"
+      }
+    ]
   },
   {
     "id": 10096,
@@ -848,7 +1318,46 @@ export const ROUND_59: QuizQuestion[] = [
     ],
     "correctIndex": 3,
     "explanation": "모든 VAL이 100이므로 어떤 윈도우 범위에서도 결과 값은 100이다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "headers": [
+          "ID",
+          "VAL"
+        ],
+        "rows": [
+          [
+            "1",
+            "100"
+          ],
+          [
+            "2",
+            "100"
+          ],
+          [
+            "3",
+            "100"
+          ],
+          [
+            "4",
+            "100"
+          ],
+          [
+            "5",
+            "100"
+          ],
+          [
+            "6",
+            "100"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT VAL,\n       MAX(VAL)         OVER ()                         AS M,\n       SUM(VAL)         OVER (ORDER BY ID)              AS S,\n       FIRST_VALUE(VAL) OVER (ORDER BY ID ROWS BETWEEN\n                              200 PRECEDING AND 200 FOLLOWING) AS F\nFROM   T;"
+      }
+    ]
   },
   {
     "id": 10097,
@@ -866,7 +1375,13 @@ export const ROUND_59: QuizQuestion[] = [
     ],
     "correctIndex": 0,
     "explanation": "CASE 문은 위에서부터 첫 번째로 참인 조건의 결과를 반환한다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT CASE WHEN 1 = 1 THEN 'A'\n            WHEN 1 = 1 THEN 'B'\n            ELSE 'C'\n       END\nFROM DUAL;"
+      }
+    ]
   },
   {
     "id": 10098,
@@ -884,7 +1399,13 @@ export const ROUND_59: QuizQuestion[] = [
     ],
     "correctIndex": 2,
     "explanation": "NOCYCLE 옵션을 지정하면 사이클 발생 시 무한 루프에 빠지지 않고 CONNECT_BY_ISCYCLE 값으로 해당 행을 표시한다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT ENAME, LEVEL, CONNECT_BY_ISCYCLE\nFROM   EMP\nSTART WITH MGR IS NULL\nCONNECT BY ( ? ) PRIOR EMPNO = MGR;"
+      }
+    ]
   },
   {
     "id": 10099,
@@ -902,6 +1423,12 @@ export const ROUND_59: QuizQuestion[] = [
     ],
     "correctIndex": 3,
     "explanation": "WHERE 1=0 은 어떤 행도 만족할 수 없는 조건이므로 결과가 공집합이 된다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT *\nFROM   EMP\nWHERE  1 = 0;"
+      }
+    ]
   }
 ];

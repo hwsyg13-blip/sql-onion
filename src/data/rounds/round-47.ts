@@ -20,7 +20,13 @@ export const ROUND_47: QuizQuestion[] = [
     ],
     "correctIndex": 1,
     "explanation": "",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "text",
+        "content": "업무가 처리하는 일의 방법에 따라 데이터가 어떻게 영향을 받는지 모델링한다."
+      }
+    ]
   },
   {
     "id": 10651,
@@ -38,7 +44,54 @@ export const ROUND_47: QuizQuestion[] = [
     ],
     "correctIndex": 2,
     "explanation": "",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "headers": [
+          "고객"
+        ],
+        "rows": [
+          [
+            "고객번호 (PK)"
+          ],
+          [
+            "고객명"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "headers": [
+          "서비스이용"
+        ],
+        "rows": [
+          [
+            "고객번호 (PK, FK)"
+          ],
+          [
+            "서비스번호 (PK, FK)"
+          ],
+          [
+            "이용일자 (PK)"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "headers": [
+          "서비스"
+        ],
+        "rows": [
+          [
+            "서비스번호 (PK)"
+          ],
+          [
+            "서비스명"
+          ]
+        ]
+      }
+    ]
   },
   {
     "id": 10652,
@@ -74,7 +127,13 @@ export const ROUND_47: QuizQuestion[] = [
     ],
     "correctIndex": 2,
     "explanation": "",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "text",
+        "content": "엔터티의 일반 속성 간에는 서로 종속적이지 않아야 한다."
+      }
+    ]
   },
   {
     "id": 10654,
@@ -182,7 +241,13 @@ export const ROUND_47: QuizQuestion[] = [
     ],
     "correctIndex": 0,
     "explanation": "",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "text",
+        "content": "뷰 단계의 여러 사용자 관점으로 구성되어 개별 사용자가 보는 개인적 DB 스키마이며, 응용 프로그래머가 접근하는 DB 정의이다."
+      }
+    ]
   },
   {
     "id": 10660,
@@ -308,7 +373,13 @@ export const ROUND_47: QuizQuestion[] = [
     ],
     "correctIndex": 1,
     "explanation": "NVL(MAX(번호), 1) + 1 과 COALESCE(MAX(번호)+1, 1) 은 동일한 결과를 반환한다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT NVL(MAX(번호), 1) + 1 FROM T;"
+      }
+    ]
   },
   {
     "id": 10667,
@@ -398,7 +469,13 @@ export const ROUND_47: QuizQuestion[] = [
     ],
     "correctIndex": 3,
     "explanation": "",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "WHERE (TEAM_ID, HEIGHT) IN (SELECT TEAM_ID, MIN(HEIGHT) FROM PLAYER GROUP BY TEAM_ID);"
+      }
+    ]
   },
   {
     "id": 10672,
@@ -416,7 +493,13 @@ export const ROUND_47: QuizQuestion[] = [
     ],
     "correctIndex": 1,
     "explanation": "",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT 팀명\nFROM   팀\nWHERE  팀번호 = (SELECT 팀번호 FROM (SELECT 팀번호, SUM(연봉) AS 총급여 FROM 사원 GROUP BY 팀번호 ORDER BY 2 DESC) WHERE ROWNUM = 1);"
+      }
+    ]
   },
   {
     "id": 10673,
@@ -452,7 +535,13 @@ export const ROUND_47: QuizQuestion[] = [
     ],
     "correctIndex": 3,
     "explanation": "",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT ... FROM ... WHERE ... ORDER BY A;  -- A 를 내림차순으로 정렬해야 함"
+      }
+    ]
   },
   {
     "id": 10675,
@@ -470,7 +559,13 @@ export const ROUND_47: QuizQuestion[] = [
     ],
     "correctIndex": 2,
     "explanation": "",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "-- 데이터: GRADE=12, RANK=13\nSELECT CASE WHEN SUM(GRADE + RANK) IS NULL THEN 0\n            ELSE SUM(GRADE + RANK) END\nFROM T;"
+      }
+    ]
   },
   {
     "id": 10676,
@@ -488,7 +583,13 @@ export const ROUND_47: QuizQuestion[] = [
     ],
     "correctIndex": 1,
     "explanation": "원본 기출의 정답 표기를 보존한다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT GRADE FROM GRADE_TABLE A,\n  (SELECT MAX(SCORE) AS MAX_SCORE FROM PLAYER) B\nWHERE A.LOWER <= B.MAX_SCORE AND A.UPPER >= B.MAX_SCORE;"
+      }
+    ]
   },
   {
     "id": 10677,
@@ -506,7 +607,13 @@ export const ROUND_47: QuizQuestion[] = [
     ],
     "correctIndex": 0,
     "explanation": "MINUS 는 두 집합의 DISTINCT 결과에서 차집합을 반환한다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT COL1 FROM A\nUNION ALL\nSELECT COL1 FROM B\nMINUS\nSELECT COL1 FROM C;"
+      }
+    ]
   },
   {
     "id": 10678,
@@ -524,7 +631,13 @@ export const ROUND_47: QuizQuestion[] = [
     ],
     "correctIndex": 1,
     "explanation": "",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "MERGE INTO A USING B ON (A.ID = B.ID)\nWHEN MATCHED THEN UPDATE SET A.V = 100\nWHEN NOT MATCHED THEN INSERT (ID, V) VALUES (B.ID, 100);"
+      }
+    ]
   },
   {
     "id": 10679,
@@ -560,7 +673,30 @@ export const ROUND_47: QuizQuestion[] = [
     ],
     "correctIndex": 2,
     "explanation": "DESC 정렬 시 COL2=1 그룹 내 MAX(COL1) = 20 이 반환된다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT MAX(COL1) KEEP (DENSE_RANK FIRST ORDER BY COL2 DESC)\nFROM T;   -- COL2 기준 DESC 정렬 시 첫 값의 COL1 반환"
+      },
+      {
+        "type": "table",
+        "headers": [
+          "COL1",
+          "COL2"
+        ],
+        "rows": [
+          [
+            "10",
+            "1"
+          ],
+          [
+            "20",
+            "1"
+          ]
+        ]
+      }
+    ]
   },
   {
     "id": 10681,
@@ -740,7 +876,13 @@ export const ROUND_47: QuizQuestion[] = [
     ],
     "correctIndex": 0,
     "explanation": "AVG 는 NULL 을 제외해 210/2=105, SUM/COUNT(*) 는 210/3=70 이다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "-- 데이터: 100, 110, NULL\nSELECT ROUND(AVG(COL)), ROUND(SUM(COL)/COUNT(*)) FROM T;"
+      }
+    ]
   },
   {
     "id": 10691,
@@ -776,7 +918,13 @@ export const ROUND_47: QuizQuestion[] = [
     ],
     "correctIndex": 2,
     "explanation": "",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT COUNT(*) FROM T GROUP BY ID HAVING COUNT(*) >= 2;"
+      }
+    ]
   },
   {
     "id": 10693,
@@ -794,7 +942,34 @@ export const ROUND_47: QuizQuestion[] = [
     ],
     "correctIndex": 2,
     "explanation": "",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "headers": [
+          "COL1",
+          "COL2"
+        ],
+        "rows": [
+          [
+            "10",
+            "20"
+          ],
+          [
+            "0",
+            "NULL"
+          ],
+          [
+            "10",
+            "0"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT AVG(COL1), AVG(COL2) FROM T WHERE COL2 IS NOT NULL;"
+      }
+    ]
   },
   {
     "id": 10694,
@@ -830,7 +1005,13 @@ export const ROUND_47: QuizQuestion[] = [
     ],
     "correctIndex": 1,
     "explanation": "",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT SUBSTR('ABCDE', 2) FROM DUAL;"
+      }
+    ]
   },
   {
     "id": 10696,
@@ -848,7 +1029,13 @@ export const ROUND_47: QuizQuestion[] = [
     ],
     "correctIndex": 2,
     "explanation": "",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "DROP USER user_name (   );"
+      }
+    ]
   },
   {
     "id": 10697,
@@ -866,7 +1053,13 @@ export const ROUND_47: QuizQuestion[] = [
     ],
     "correctIndex": 0,
     "explanation": "",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT 부서, SUM(연봉) FROM EMP\n(   ) 부서\nORDER BY SUM(연봉) (   );"
+      }
+    ]
   },
   {
     "id": 10698,
@@ -884,7 +1077,13 @@ export const ROUND_47: QuizQuestion[] = [
     ],
     "correctIndex": 3,
     "explanation": "원본 기출의 정답 표기를 보존한다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT COL1\nFROM (SELECT COL1, ROW_NUMBER() OVER (PARTITION BY 부서 ORDER BY 연봉 DESC) AS RN\n      FROM EMP)\nWHERE RN = 1;"
+      }
+    ]
   },
   {
     "id": 10699,
@@ -902,6 +1101,57 @@ export const ROUND_47: QuizQuestion[] = [
     ],
     "correctIndex": 1,
     "explanation": "1부터 전개한 결과 {1, 3, 4, 7, 8} 중 COL1=4 를 제외하면 {1, 3, 7} 이나, 8 은 4 의 자식이므로 같이 제거되어 최종 2건이 남는다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "headers": [
+          "COL1",
+          "COL2"
+        ],
+        "rows": [
+          [
+            "1",
+            "NULL"
+          ],
+          [
+            "2",
+            "NULL"
+          ],
+          [
+            "3",
+            "1"
+          ],
+          [
+            "4",
+            "1"
+          ],
+          [
+            "5",
+            "2"
+          ],
+          [
+            "6",
+            "2"
+          ],
+          [
+            "7",
+            "3"
+          ],
+          [
+            "8",
+            "4"
+          ],
+          [
+            "9",
+            "5"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT COUNT(*) FROM T\nWHERE COL1 <> 4\nSTART WITH COL1 = 1\nCONNECT BY PRIOR COL1 = COL2;"
+      }
+    ]
   }
 ];

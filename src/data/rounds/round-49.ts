@@ -20,7 +20,13 @@ export const ROUND_49: QuizQuestion[] = [
     ],
     "correctIndex": 1,
     "explanation": "",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "text",
+        "content": "식별자 컬럼 간의 부분 함수 종속성을 해결한다."
+      }
+    ]
   },
   {
     "id": 10551,
@@ -74,7 +80,13 @@ export const ROUND_49: QuizQuestion[] = [
     ],
     "correctIndex": 2,
     "explanation": "바커(Barker) 표기법 해석: 상품 쪽 실선 + `|`는 주문 입장에서 상품이 필수 하나임을 의미하고, 주문 쪽 점선 + `o<`는 상품 입장에서 주문 참여가 선택적(0 이상 다수)임을 의미한다. 따라서 주문이 없는 상품도 존재할 수 있으므로 ③은 옳지 않다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "[ 상품 ] ─|─ ─ ─ ─o< [ 주문 ]"
+      }
+    ]
   },
   {
     "id": 10554,
@@ -128,7 +140,13 @@ export const ROUND_49: QuizQuestion[] = [
     ],
     "correctIndex": 1,
     "explanation": "",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "text",
+        "content": "업무상 필요한 데이터 이외에 데이터 모델링을 위해 업무를 규칙화하기 위한 속성"
+      }
+    ]
   },
   {
     "id": 10557,
@@ -146,7 +164,13 @@ export const ROUND_49: QuizQuestion[] = [
     ],
     "correctIndex": 2,
     "explanation": "",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "text",
+        "content": "두 개 이상의 부모 엔터티로부터 발생되고 자주 내용이 변경되거나 데이터량이 증가하는 엔터티. 분석 초기 단계에서는 잘 나타나지 않으며 상세 설계 단계나 프로세스 상관 모델링 과정에서 드러난다."
+      }
+    ]
   },
   {
     "id": 10558,
@@ -182,7 +206,44 @@ export const ROUND_49: QuizQuestion[] = [
     ],
     "correctIndex": 1,
     "explanation": "관계차수는 두 엔터티 간 관계에 참여하는 인스턴스 수의 대응 관계(1:1, 1:M, M:N)를 의미한다. `|`(단일성), `o`(선택성), `<`(까마귀발, 다수) 기호 조합으로 표기된다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "headers": [
+          "표기",
+          "카디널리티",
+          "의미"
+        ],
+        "rows": [
+          [
+            "[ A ] ─|─────|─ [ B ]",
+            "1 : 1",
+            "하나의 A는 하나의 B로 구성"
+          ],
+          [
+            "[ A ] ─|─────o|─ [ B ]",
+            "1 : 0 or 1",
+            "하나의 A는 0 또는 하나의 B로 구성"
+          ],
+          [
+            "[ A ] ─|─────< [ B ]",
+            "1 : N",
+            "하나의 A는 두 개 이상의 B로 구성"
+          ],
+          [
+            "[ A ] ─|─────|< [ B ]",
+            "1 : 1 or 1 : N",
+            "하나의 A는 하나 이상의 B로 구성"
+          ],
+          [
+            "[ A ] ─|─────o< [ B ]",
+            "1 : 0 or 1 or N",
+            "하나의 A는 0, 1 또는 그 이상의 B로 구성"
+          ]
+        ]
+      }
+    ]
   },
   {
     "id": 10560,
@@ -254,7 +315,13 @@ export const ROUND_49: QuizQuestion[] = [
     ],
     "correctIndex": 0,
     "explanation": "PRIOR 자식 = 부모 형태로 부모→자식 순방향 전개가 이루어진다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "[EMP] EMP_NO, MANAGER_NO"
+      }
+    ]
   },
   {
     "id": 10564,
@@ -272,7 +339,13 @@ export const ROUND_49: QuizQuestion[] = [
     ],
     "correctIndex": 1,
     "explanation": "",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "text",
+        "content": "A: 컬럼 값이 NULL 이면 B 를 출력\nB: 두 컬럼 값이 같으면 NULL\nC: 왼쪽부터 NULL 이 아닌 첫 값을 반환"
+      }
+    ]
   },
   {
     "id": 10565,
@@ -290,7 +363,42 @@ export const ROUND_49: QuizQuestion[] = [
     ],
     "correctIndex": 1,
     "explanation": "CASE 식은 ID=999 일 때 0 을 반환해 999 가 가장 먼저 정렬되고, 이어서 ID=100 이 반환된다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "headers": [
+          "ID"
+        ],
+        "rows": [
+          [
+            "100"
+          ],
+          [
+            "100"
+          ],
+          [
+            "200"
+          ],
+          [
+            "200"
+          ],
+          [
+            "200"
+          ],
+          [
+            "999"
+          ],
+          [
+            "999"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT ID FROM TBL\nGROUP BY ID\nHAVING COUNT(*) = 2\nORDER BY (CASE WHEN ID = 999 THEN 0 ELSE ID END);"
+      }
+    ]
   },
   {
     "id": 10566,
@@ -308,7 +416,36 @@ export const ROUND_49: QuizQuestion[] = [
     ],
     "correctIndex": 3,
     "explanation": "ON 절에는 비교식이 와야 하며, USING 절과 달리 컬럼명만 단독으로 지정할 수 없다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "headers": [
+          "TEAM",
+          "STADIUM"
+        ],
+        "rows": [
+          [
+            "ID",
+            "COL1",
+            "ID",
+            "COL2"
+          ],
+          [
+            "1",
+            "A",
+            "1",
+            "A"
+          ],
+          [
+            "2",
+            "B",
+            "2",
+            "B"
+          ]
+        ]
+      }
+    ]
   },
   {
     "id": 10567,
@@ -344,7 +481,17 @@ export const ROUND_49: QuizQuestion[] = [
     ],
     "correctIndex": 1,
     "explanation": "",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT A, B FROM T1 WHERE (A, B) IN (SELECT A, B FROM T2);"
+      },
+      {
+        "type": "text",
+        "content": "T2 의 B 값 중 일부가 NULL 이다."
+      }
+    ]
   },
   {
     "id": 10569,
@@ -380,7 +527,13 @@ export const ROUND_49: QuizQuestion[] = [
     ],
     "correctIndex": 2,
     "explanation": "ROLLUP 은 좌측부터 점진적으로 집계를 수행하므로 컬럼 순서가 결과에 영향을 미친다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "GROUP BY ROLLUP(고객등급, 첫번째컬럼, 세번째컬럼)"
+      }
+    ]
   },
   {
     "id": 10571,
@@ -398,7 +551,17 @@ export const ROUND_49: QuizQuestion[] = [
     ],
     "correctIndex": 0,
     "explanation": "GROUP BY 가 지정된 쿼리는 조건을 만족하는 그룹이 없으면 공집합을 반환한다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT COUNT(*)\nFROM   ...\nGROUP BY ID\nHAVING COUNT(*) > 3;"
+      },
+      {
+        "type": "text",
+        "content": "HAVING 조건을 만족하는 그룹이 없는 상태"
+      }
+    ]
   },
   {
     "id": 10572,
@@ -434,7 +597,30 @@ export const ROUND_49: QuizQuestion[] = [
     ],
     "correctIndex": 2,
     "explanation": "LAG 함수의 세 번째 인자로 기본값 0 을 지정하여 첫 행에 0 이 반환된다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "headers": [
+          "COL1",
+          "LAG"
+        ],
+        "rows": [
+          [
+            "100",
+            "0"
+          ],
+          [
+            "200",
+            "100"
+          ],
+          [
+            "300",
+            "200"
+          ]
+        ]
+      }
+    ]
   },
   {
     "id": 10574,
@@ -452,7 +638,133 @@ export const ROUND_49: QuizQuestion[] = [
     ],
     "correctIndex": 0,
     "explanation": "고객별 매출 합계를 구하면 홍길동·이규혁 각 700, 이순신 550, 강감찬·이상화 각 350이 된다. RANK 함수는 동순위를 동일한 순위로 부여하되 다음 순위는 건너뛰므로 1·1·3·4·4가 된다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "headers": [
+          "[고객]"
+        ],
+        "rows": [
+          [
+            "고객번호(PK)",
+            "고객명"
+          ],
+          [
+            "001",
+            "홍길동"
+          ],
+          [
+            "002",
+            "이순신"
+          ],
+          [
+            "003",
+            "강감찬"
+          ],
+          [
+            "004",
+            "이상화"
+          ],
+          [
+            "005",
+            "이규혁"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "headers": [
+          "[월별매출]"
+        ],
+        "rows": [
+          [
+            "고객번호(PK)",
+            "월",
+            "매출액"
+          ],
+          [
+            "001",
+            "202201",
+            "200"
+          ],
+          [
+            "002",
+            "202201",
+            "300"
+          ],
+          [
+            "003",
+            "202201",
+            "250"
+          ],
+          [
+            "004",
+            "202201",
+            "300"
+          ],
+          [
+            "005",
+            "202201",
+            "250"
+          ],
+          [
+            "001",
+            "202202",
+            "150"
+          ],
+          [
+            "002",
+            "202202",
+            "150"
+          ],
+          [
+            "003",
+            "202202",
+            "200"
+          ],
+          [
+            "004",
+            "202202",
+            "100"
+          ],
+          [
+            "005",
+            "202202",
+            "100"
+          ],
+          [
+            "001",
+            "202203",
+            "350"
+          ],
+          [
+            "002",
+            "202203",
+            "250"
+          ],
+          [
+            "003",
+            "202203",
+            "100"
+          ],
+          [
+            "004",
+            "202203",
+            "200"
+          ],
+          [
+            "005",
+            "202203",
+            "350"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT 고객번호, 고객명, 매출액,\n       RANK() OVER(ORDER BY 매출액 DESC) AS 순위\nFROM   ( SELECT A.고객번호,\n                MAX(A.고객명) AS 고객명,\n                SUM(B.매출액) AS 매출액\n         FROM   고객 A INNER JOIN 월별매출 B\n         ON     A.고객번호 = B.고객번호\n         GROUP BY A.고객번호 )\nORDER BY 순위;"
+      }
+    ]
   },
   {
     "id": 10575,
@@ -488,7 +800,13 @@ export const ROUND_49: QuizQuestion[] = [
     ],
     "correctIndex": 0,
     "explanation": "부서(B) 를 기준으로 유지해야 하므로 B 쪽이 오른쪽에 있다면 RIGHT OUTER JOIN 이다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT 부서명, COUNT(사원번호) AS 사원수\nFROM   EMP A ( ? ) JOIN DEPT B ON A.부서번호 = B.부서번호\nGROUP BY 부서명;"
+      }
+    ]
   },
   {
     "id": 10577,
@@ -506,7 +824,13 @@ export const ROUND_49: QuizQuestion[] = [
     ],
     "correctIndex": 3,
     "explanation": "UPDATE 는 WHERE 조건 평가를 위한 SELECT 와 실제 UPDATE 권한이 모두 필요하다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "UPDATE A_USER.TB_A SET COL1 = 'AAA' WHERE COL2 = 3;"
+      }
+    ]
   },
   {
     "id": 10578,
@@ -524,7 +848,13 @@ export const ROUND_49: QuizQuestion[] = [
     ],
     "correctIndex": 3,
     "explanation": "RESTRICT 옵션은 U3 가 권한을 이미 가진 상황에서 REVOKE 가 거부되므로 모든 사용자의 권한이 유지된다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "DBA : GRANT SELECT ON X TO U1;\nDBA : GRANT SELECT ON X TO U2 WITH GRANT OPTION;\nU2  : GRANT SELECT ON X TO U3;\nDBA : REVOKE SELECT ON X FROM U2 RESTRICT;"
+      }
+    ]
   },
   {
     "id": 10579,
@@ -542,7 +872,13 @@ export const ROUND_49: QuizQuestion[] = [
     ],
     "correctIndex": 3,
     "explanation": "A 는 DEFAULT 9 가 지정되어 있으므로 생략해도 9 가 할당되고 PK 조건을 만족한다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "CREATE TABLE T1 (\n  A NUMBER DEFAULT 9 PRIMARY KEY,\n  B NUMBER NOT NULL,\n  C NUMBER\n);"
+      }
+    ]
   },
   {
     "id": 10580,
@@ -560,7 +896,13 @@ export const ROUND_49: QuizQuestion[] = [
     ],
     "correctIndex": 1,
     "explanation": "ROLLBACK 으로 UPDATE·DELETE 가 취소되어 VAL 은 (1, 2, 3) 이 되며 평균은 2 이다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "INSERT INTO T VALUES (1);\nINSERT INTO T VALUES (2);\nSAVEPOINT X;\nUPDATE T SET VAL = VAL * 10;\nDELETE FROM T WHERE VAL = 20;\nROLLBACK TO SAVEPOINT X;\nINSERT INTO T VALUES (3);\nSELECT AVG(VAL) FROM T;"
+      }
+    ]
   },
   {
     "id": 10581,
@@ -596,7 +938,58 @@ export const ROUND_49: QuizQuestion[] = [
     ],
     "correctIndex": 0,
     "explanation": "각 윈도우 정의에 따른 계산 결과를 직접 산출하여 얻는다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "headers": [
+          "COL1",
+          "COL2",
+          "COL3"
+        ],
+        "rows": [
+          [
+            "100",
+            "100",
+            "100"
+          ],
+          [
+            "200",
+            "100",
+            "100"
+          ],
+          [
+            "300",
+            "200",
+            "100"
+          ],
+          [
+            "400",
+            "100",
+            "100"
+          ],
+          [
+            "500",
+            "300",
+            "100"
+          ],
+          [
+            "600",
+            "400",
+            "100"
+          ],
+          [
+            "700",
+            "200",
+            "100"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT MAX(COL1) OVER(ORDER BY COL1 ROWS BETWEEN UNBOUNDED PRECEDING AND 2 FOLLOWING) AS MAX,\n       SUM(COL2) OVER(ORDER BY COL1 ROWS BETWEEN 1 PRECEDING AND CURRENT ROW) AS SUM,\n       FIRST_VALUE(COL1) OVER(ORDER BY COL1 RANGE BETWEEN 200 PRECEDING AND 200 FOLLOWING) AS FIRST\nFROM T;"
+      }
+    ]
   },
   {
     "id": 10583,
@@ -614,7 +1007,38 @@ export const ROUND_49: QuizQuestion[] = [
     ],
     "correctIndex": 0,
     "explanation": "DISTINCT 결과 (1,A), (1,B) 의 2 건이므로 각 COUNT 는 2 이다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "headers": [
+          "COL1",
+          "COL2"
+        ],
+        "rows": [
+          [
+            "1",
+            "A"
+          ],
+          [
+            "1",
+            "A"
+          ],
+          [
+            "1",
+            "B"
+          ],
+          [
+            "1",
+            "B"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT COUNT(COL1), COUNT(COL2)\nFROM (SELECT DISTINCT COL1, COL2 FROM TAB1);"
+      }
+    ]
   },
   {
     "id": 10584,
@@ -632,7 +1056,13 @@ export const ROUND_49: QuizQuestion[] = [
     ],
     "correctIndex": 1,
     "explanation": "AVG 함수는 NULL 을 제외하고 평균을 계산하므로 COUNT(C2) 로 나눈 값과 동일하다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT SUM(C2)/COUNT(*)    AS AVG1,\n       SUM(C2)/COUNT(C2)   AS AVG2,\n       AVG(C2)             AS AVG3\nFROM   T;"
+      }
+    ]
   },
   {
     "id": 10585,
@@ -650,7 +1080,46 @@ export const ROUND_49: QuizQuestion[] = [
     ],
     "correctIndex": 0,
     "explanation": "'S%' 는 SMITH 와 SCOTT 에 매칭되고, '%T%' 도 두 이름 모두에 매칭된다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "headers": [
+          "TAB1",
+          "TAB2"
+        ],
+        "rows": [
+          [
+            "ID",
+            "NAME",
+            "ID",
+            "RULE"
+          ],
+          [
+            "1",
+            "SMITH",
+            "1",
+            "S%"
+          ],
+          [
+            "2",
+            "ALICE",
+            "2",
+            "%T%"
+          ],
+          [
+            "3",
+            "SCOTT",
+            "",
+            ""
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT * FROM TAB1 A, TAB2 B\nWHERE A.NAME LIKE B.RULE;"
+      }
+    ]
   },
   {
     "id": 10586,
@@ -686,7 +1155,13 @@ export const ROUND_49: QuizQuestion[] = [
     ],
     "correctIndex": 1,
     "explanation": "뒤에서 네 번째 문자부터 2 글자(6, 7) 를 반환한다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT SUBSTR('123456789', -4, 2) FROM DUAL;"
+      }
+    ]
   },
   {
     "id": 10588,
@@ -704,7 +1179,13 @@ export const ROUND_49: QuizQuestion[] = [
     ],
     "correctIndex": 1,
     "explanation": "공백을 포함하여 10 글자이다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT LENGTH('SQL EXPERT') FROM DUAL;"
+      }
+    ]
   },
   {
     "id": 10589,
@@ -722,7 +1203,13 @@ export const ROUND_49: QuizQuestion[] = [
     ],
     "correctIndex": 1,
     "explanation": "",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "text",
+        "content": "등급이 F 또는 G 이고, 금액 범위가 2,000 ~ 50,000 사이"
+      }
+    ]
   },
   {
     "id": 10590,
@@ -776,7 +1263,13 @@ export const ROUND_49: QuizQuestion[] = [
     ],
     "correctIndex": 1,
     "explanation": "",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT 부서, MAX(연봉)\nFROM   EMP\nGROUP BY 부서;"
+      }
+    ]
   },
   {
     "id": 10593,
@@ -794,7 +1287,52 @@ export const ROUND_49: QuizQuestion[] = [
     ],
     "correctIndex": 0,
     "explanation": "",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "headers": [
+          "TBL1",
+          "TBL2"
+        ],
+        "rows": [
+          [
+            "ID",
+            "COL1",
+            "ID",
+            "COL2"
+          ],
+          [
+            "1",
+            "A",
+            "1",
+            "C"
+          ],
+          [
+            "2",
+            "B",
+            "2",
+            "D"
+          ],
+          [
+            "",
+            "",
+            "3",
+            "E"
+          ],
+          [
+            "",
+            "",
+            "4",
+            "F"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "MERGE INTO TBL1 T USING TBL2 S ON (T.ID = S.ID)\nWHEN MATCHED THEN UPDATE SET T.COL1 = S.COL2\nWHEN NOT MATCHED THEN INSERT (ID, COL1) VALUES (S.ID, S.COL2);"
+      }
+    ]
   },
   {
     "id": 10594,
@@ -812,7 +1350,17 @@ export const ROUND_49: QuizQuestion[] = [
     ],
     "correctIndex": 3,
     "explanation": "가는 컬럼 개수 불일치, 나는 DEGREE 길이 초과, 다는 NOT NULL 위반으로 실패한다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "CREATE TABLE TBL (\n  ID     NUMBER PRIMARY KEY,\n  AMT    NUMBER NOT NULL,\n  DEGREE VARCHAR2(1)\n);"
+      },
+      {
+        "type": "text",
+        "content": "가. INSERT INTO TBL VALUES (1, 100);\n나. INSERT INTO TBL (ID, AMT, DEGREE) VALUES (2, 200, 'AB');\n다. INSERT INTO TBL (ID, DEGREE) VALUES (4, 'X');\n라. INSERT INTO TBL (ID, AMT) VALUES (3, 300);\n마. INSERT INTO TBL VALUES (5, 500, NULL);"
+      }
+    ]
   },
   {
     "id": 10595,
@@ -848,7 +1396,54 @@ export const ROUND_49: QuizQuestion[] = [
     ],
     "correctIndex": 2,
     "explanation": "C 그룹이 3건으로 유일하게 HAVING COUNT(*) > 2 를 만족한다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "headers": [
+          "ID",
+          "COL1"
+        ],
+        "rows": [
+          [
+            "A",
+            "1"
+          ],
+          [
+            "A",
+            "2"
+          ],
+          [
+            "B",
+            "3"
+          ],
+          [
+            "B",
+            "4"
+          ],
+          [
+            "C",
+            "5"
+          ],
+          [
+            "C",
+            "6"
+          ],
+          [
+            "C",
+            "7"
+          ],
+          [
+            "D",
+            "8"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT COUNT(*) FROM TAB1 GROUP BY ID HAVING COUNT(*) > 2;"
+      }
+    ]
   },
   {
     "id": 10597,
@@ -866,7 +1461,17 @@ export const ROUND_49: QuizQuestion[] = [
     ],
     "correctIndex": 3,
     "explanation": "",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT * FROM T\nWHERE  COL = 'A'\nOR     COL ( ? );"
+      },
+      {
+        "type": "text",
+        "content": "COL 이 NULL 인 행도 함께 포함하고 싶다."
+      }
+    ]
   },
   {
     "id": 10598,
@@ -902,6 +1507,29 @@ export const ROUND_49: QuizQuestion[] = [
     ],
     "correctIndex": 0,
     "explanation": "NTILE(3) 은 7건을 세 그룹으로 나눌 때 앞 그룹에 한 건을 더 배정해 3, 2, 2 로 구성한다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "headers": [
+          "NTILE",
+          "COUNT(*)"
+        ],
+        "rows": [
+          [
+            "(ㄱ)",
+            "(ㄴ)"
+          ],
+          [
+            "2",
+            "2"
+          ],
+          [
+            "3",
+            "2"
+          ]
+        ]
+      }
+    ]
   }
 ];

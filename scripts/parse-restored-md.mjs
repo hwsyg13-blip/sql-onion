@@ -239,39 +239,66 @@ function parseRoundMd(round, text) {
     const fullTitle = (sec.titleFirstLine + (trailingTitleExtra ? ' ' + trailingTitleExtra : '')).trim();
 
     // 3) 선택지·정답·해설 파싱
+    //   - 각 선택지 바로 아래에 <table>/<pre>/```sql``` 이 오면 그 선택지의 보기(optionReferences)
+    //   - "**정답:** " 이후 블록인용은 해설
     const options = [null, null, null, null];
+    const optionBodies = [[], [], [], []]; // 선택지 번호별 raw body lines
     let correctIndex = null;
     let explanation = '';
     let sawAnswer = false;
+    let currentOptIdx = -1;
 
     for (let i = 0; i < afterOptionLines.length; i++) {
       const line = afterOptionLines[i];
       const t = line.trim();
-      if (!t) continue;
 
-      // 선택지 — bullet style or bold style
+      // 선택지 시작 — bullet "* ① ..." or bold "**① ...**"
       let m = t.match(/^\*\s+([①②③④])\s+(.+)$/);
-      if (m) { options[CIRCLED[m[1]]] = m[2].trim(); continue; }
+      if (m) {
+        currentOptIdx = CIRCLED[m[1]];
+        options[currentOptIdx] = m[2].trim();
+        continue;
+      }
       m = t.match(/^\*\*([①②③④])\s+(.+?)\*\*$/);
-      if (m && correctIndex == null) { options[CIRCLED[m[1]]] = m[2].trim(); continue; }
+      if (m && correctIndex == null) {
+        currentOptIdx = CIRCLED[m[1]];
+        options[currentOptIdx] = m[2].trim();
+        continue;
+      }
 
       // 정답
       m = t.match(/^\*\*정답:\s*([①②③④])(?:\s+(.*?))?\s*\*\*$/);
-      if (m) { correctIndex = CIRCLED[m[1]]; sawAnswer = true; continue; }
+      if (m) { correctIndex = CIRCLED[m[1]]; sawAnswer = true; currentOptIdx = -1; continue; }
 
       // 해설 (정답 이후 blockquote)
       if (sawAnswer && /^>\s?/.test(t)) {
         explanation = (explanation ? explanation + ' ' : '') + t.replace(/^>\s?/, '');
         continue;
       }
-      // 선택지 텍스트 이어짐 (불릿 형식 선택지가 여러 줄일 때)
-      if (!sawAnswer && options[0] != null) {
-        // 아직 정답 못 봄 — 마지막 채워진 선택지에 이어붙임 (멀티라인 option)
-        const lastIdx = options.map((o, i) => o != null ? i : -1).filter(x => x >= 0).pop();
-        if (lastIdx != null && !/^\*/.test(t)) {
-          options[lastIdx] = options[lastIdx] + ' ' + t;
-        }
+
+      // 선택지 아래 블록 수집 (선택지 있고 정답 전일 때)
+      if (!sawAnswer && currentOptIdx >= 0) {
+        optionBodies[currentOptIdx].push(line);
       }
+    }
+
+    // 각 선택지 body 에서 references 추출 + 남은 평문은 선택지 텍스트 이어붙임
+    const optionReferences = [undefined, undefined, undefined, undefined];
+    for (let i = 0; i < 4; i++) {
+      const body = optionBodies[i].join('\n');
+      if (!body.trim()) continue;
+      const { refs: optRefs, trailingTitleExtra: extraText } = extractMidRegion(body);
+      if (extraText) {
+        options[i] = (options[i] || '') + ' ' + extraText;
+      }
+      if (optRefs.length > 0) {
+        optionReferences[i] = optRefs;
+      }
+    }
+
+    // 선택지 텍스트 정규화
+    for (let i = 0; i < 4; i++) {
+      if (options[i]) options[i] = options[i].replace(/\s+/g, ' ').trim();
     }
 
     if (options.filter(Boolean).length === 4 && correctIndex != null) {
@@ -284,6 +311,9 @@ function parseRoundMd(round, text) {
         explanation,
       };
       if (refs.length > 0) entry.references = refs;
+      if (optionReferences.some(r => r && r.length)) {
+        entry.optionReferences = optionReferences;
+      }
       mcq.push(entry);
     }
   }
@@ -312,26 +342,30 @@ for (const fname of readdirSync(MD_DIR)) {
       explanation: q.explanation,
     };
     if (q.references && q.references.length) base.references = q.references;
+    if (q.optionReferences && q.optionReferences.some(r => r && r.length)) {
+      base.optionReferences = q.optionReferences;
+    }
     return base;
   });
 
   const withRefs = authored.filter(q => q.references).length;
+  const withOptRefs = authored.filter(q => q.optionReferences).length;
 
   const payload = {
     round,
-    notes: `restored from ${fname} — MCQ ${mcq.length} (references 포함: ${withRefs}) + 단답형 ${shortAnswer.length} 제외`,
+    notes: `restored from ${fname} — MCQ ${mcq.length} (질문refs ${withRefs}, 선택지refs ${withOptRefs}) + 단답형 ${shortAnswer.length} 제외`,
     authored,
     shortAnswerOmitted: shortAnswer.map(s => ({ number: s.number, answer: s.answer })),
   };
 
   writeFileSync(resolve(OUT_DIR, `round-${round}.json`), JSON.stringify(payload, null, 2), 'utf8');
-  summary.push({ round, mcq: mcq.length, short: shortAnswer.length, withRefs });
+  summary.push({ round, mcq: mcq.length, short: shortAnswer.length, withRefs, withOptRefs });
 }
 
 summary.sort((a,b) => b.round - a.round);
 console.log('회차별 파싱 결과:');
 for (const s of summary) {
-  console.log(`  제${s.round}회: MCQ ${s.mcq} (refs ${s.withRefs}) + 단답형(제외) ${s.short}`);
+  console.log(`  제${s.round}회: MCQ ${s.mcq} (질문refs ${s.withRefs} · 선택지refs ${s.withOptRefs}) + 단답형(제외) ${s.short}`);
 }
 console.log('---');
 const total = summary.reduce((a,s)=>a+s.mcq,0);
