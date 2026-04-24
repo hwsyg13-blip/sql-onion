@@ -45,6 +45,8 @@ export const App = () => {
   const [params, setParams] = React.useState<any>(null);
   const [cbtResult, setCbtResult] = React.useState<any>(null);
   const [paywall, setPaywall] = React.useState<any>(null);
+  // 나가기 버튼이 돌아갈 '직전 화면' — cbt/mock-exam 진입 시 기록
+  const [exitReturnRoute, setExitReturnRoute] = React.useState<string>('home');
 
   const handleLogin = () => { /* noop: Supabase OAuth redirect handles it */ };
   const handleLogout = async () => { await signOut(); setRoute('home'); };
@@ -84,6 +86,10 @@ export const App = () => {
         }
       }
     }
+    // CBT/모의 진입 시 '직전 화면' 기억 — 나가기 버튼이 여기로 돌아감
+    if ((to === 'cbt' || to === 'mock-exam') && route !== 'cbt' && route !== 'mock-exam' && route !== 'cbt-result') {
+      setExitReturnRoute(route);
+    }
     setRoute(to);
     setParams(p);
     window.scrollTo({ top: 0, behavior: 'instant' as any });
@@ -122,7 +128,7 @@ export const App = () => {
           height: 56, background: 'var(--bg-card)', borderBottom: '1px solid var(--border-subtle)',
           display: 'flex', alignItems: 'center', padding: '0 20px', gap: 14, position: 'sticky', top: 0, zIndex: 50,
         }}>
-          <button onClick={() => { if (confirm('진행 중인 풀이를 종료하고 홈으로 이동할까요?')) navigate('home'); }}
+          <button onClick={() => { if (confirm('진행 중인 풀이를 종료하고 이전 화면으로 돌아갈까요?')) navigate(exitReturnRoute || 'home'); }}
             style={{ background: 'var(--bg-muted)', border: '1px solid var(--border-default)', borderRadius: 10, padding: '7px 12px', fontFamily: 'inherit', fontSize: 13, cursor: 'pointer', color: 'var(--fg-2)', display: 'inline-flex', alignItems: 'center', gap: 6 }}>
             <Ic.ArrowLeft size={14}/> 나가기
           </button>

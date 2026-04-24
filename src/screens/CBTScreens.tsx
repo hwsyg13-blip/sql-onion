@@ -186,7 +186,6 @@ export const CBTExam = ({examId = "round-60", onFinish, onNavigate, mockMode = f
             </div>
           )}
           <div style={{fontSize:13,color:"var(--fg-3)"}}>답안 <strong style={{color:"var(--fg-1)",fontFamily:"var(--font-mono)"}}>{answered}</strong> / {totalQ}</div>
-          <Btn size="sm" variant="ghost" icon={<Ic.Save size={14}/>} onClick={()=>onNavigate("home")}>중도 저장</Btn>
           <Btn size="sm" variant="primary" onClick={()=>setSubmitConfirm(true)}>제출하기</Btn>
         </div>
       </div>
@@ -194,15 +193,15 @@ export const CBTExam = ({examId = "round-60", onFinish, onNavigate, mockMode = f
       <div style={{maxWidth:1280,margin:"0 auto",padding:"24px 28px 60px",display:"grid",gridTemplateColumns:"minmax(0, 1fr) 320px",gap:24}} className="cbt-grid">
         {/* Left — question */}
         <main>
-          {/* Question number strip */}
+          {/* Question number strip — 체크(좌) / 진도(중) / 이전·다음(우) */}
           <div style={{display:"flex",gap:6,marginBottom:16,flexWrap:"wrap"}}>
-            <Btn size="sm" variant="ghost" icon={<Ic.ArrowLeft size={14}/>} onClick={()=>setIdx(Math.max(0, idx-1))} disabled={idx===0}>이전</Btn>
-            <div style={{flex:1,display:"flex",alignItems:"center",justifyContent:"center",fontSize:13,color:"var(--fg-3)",fontFamily:"var(--font-mono)"}}>
-              문항 {idx+1} / {totalQ}
-            </div>
             <Btn size="sm" variant={flags.has(idx)?"soft":"ghost"} icon={<Ic.Bookmark size={14}/>} onClick={()=>toggleFlag(idx)}>
               {flags.has(idx) ? "체크됨" : "체크"}
             </Btn>
+            <div style={{flex:1,display:"flex",alignItems:"center",justifyContent:"center",fontSize:13,color:"var(--fg-3)",fontFamily:"var(--font-mono)"}}>
+              문항 {idx+1} / {totalQ}
+            </div>
+            <Btn size="sm" variant="ghost" icon={<Ic.ArrowLeft size={14}/>} onClick={()=>setIdx(Math.max(0, idx-1))} disabled={idx===0}>이전</Btn>
             <Btn size="sm" variant="primary" iconRight={<Ic.ArrowRight size={14}/>} onClick={()=>setIdx(Math.min(totalQ-1, idx+1))} disabled={idx===totalQ-1}>다음</Btn>
           </div>
 
