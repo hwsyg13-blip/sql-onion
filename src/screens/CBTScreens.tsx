@@ -207,11 +207,12 @@ export const CBTExam = ({examId = "round-60", onFinish, onNavigate, mockMode = f
           </div>
 
           <div style={{background:"var(--bg-card)",border:"1px solid var(--border-subtle)",borderRadius:16,padding:28,boxShadow:"var(--shadow-sm)"}}>
-            <QuestionBody q={q} noTags/>
-            <div style={{display:"flex",gap:8,marginTop:14,marginBottom:-6}}>
+            {/* 태그는 질문 위에 */}
+            <div style={{display:"flex",gap:8,marginBottom:12}}>
               <Tag tone="green" size="sm">{q.subject}</Tag>
               <Tag tone="neutral" size="sm">문항 {idx+1}</Tag>
             </div>
+            <QuestionBody q={q} noTags/>
             <ol style={{listStyle:"none",padding:0,margin:"18px 0 0",display:"flex",flexDirection:"column",gap:10}}>
               {q.options.map((opt, i) => {
                 const sel = answers[idx] === i;

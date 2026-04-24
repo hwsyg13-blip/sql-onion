@@ -19,7 +19,8 @@ export type QuestionReference =
   | { type: 'sql'; code: string; caption?: string }
   | { type: 'table'; headers: string[]; rows: string[][]; caption?: string }
   | { type: 'ascii'; text: string; caption?: string }
-  | { type: 'html'; html: string; caption?: string };
+  | { type: 'html'; html: string; caption?: string }
+  | { type: 'entity-diagram'; entityName: string; preText: string; headers: string[]; rows: string[][] };
 
 const CAPTION_STYLE: React.CSSProperties = {
   fontSize: 11.5,
@@ -120,6 +121,126 @@ function RefAscii({ text, caption }: any) {
   );
 }
 
+function RefEntityDiagram({ entityName, headers, rows }: any) {
+  return (
+    <div style={{
+      display: 'grid',
+      gridTemplateColumns: 'auto 1fr auto',
+      gap: 20,
+      alignItems: 'center',
+      padding: '18px 12px',
+      background: 'var(--bg-card)',
+      border: '1px solid var(--border-subtle)',
+      borderRadius: 12,
+      overflowX: 'auto',
+    }}>
+      {/* 왼쪽: 엔터티 라벨 + 박스 */}
+      <div style={{ textAlign: 'center' }}>
+        <div style={{ fontSize: 12, color: 'var(--fg-3)', marginBottom: 10 }}>엔터티</div>
+        <div style={{ fontSize: 18, color: 'var(--fg-3)', lineHeight: 1, marginBottom: 10 }}>↓</div>
+        <div style={{
+          display: 'inline-block',
+          padding: '10px 20px',
+          border: '2px solid var(--border-strong)',
+          borderRadius: 8,
+          fontSize: 14,
+          fontWeight: 700,
+          color: 'var(--fg-1)',
+          background: 'var(--bg-card)',
+          whiteSpace: 'nowrap',
+        }}>[ {entityName || '엔터티'} ]</div>
+      </div>
+
+      {/* 중앙: 속성 라벨 + 표 */}
+      <div>
+        <div style={{
+          textAlign: 'center',
+          fontSize: 12,
+          color: 'var(--fg-3)',
+          marginBottom: 4,
+        }}>속성</div>
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: `repeat(${headers.length}, 1fr)`,
+          fontSize: 14,
+          color: 'var(--fg-3)',
+          marginBottom: 4,
+          textAlign: 'center',
+        }}>
+          {headers.map((_: any, i: number) => (<span key={i}>↓</span>))}
+        </div>
+        <table style={{
+          borderCollapse: 'separate',
+          borderSpacing: 0,
+          width: '100%',
+          fontSize: 13.5,
+          background: 'var(--bg-card)',
+          border: '1px solid var(--border-default)',
+          borderRadius: 8,
+          overflow: 'hidden',
+        }}>
+          <thead>
+            <tr>
+              {headers.map((h: string, i: number) => (
+                <th key={i} style={{
+                  padding: '10px 14px',
+                  background: 'var(--point-100)',
+                  color: 'var(--point-600)',
+                  fontWeight: 700,
+                  textAlign: 'center',
+                  borderBottom: '1px solid var(--border-default)',
+                  borderRight: i < headers.length - 1 ? '1px solid var(--border-subtle)' : 'none',
+                  whiteSpace: 'nowrap',
+                }}>{h}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {rows.map((r: string[], ri: number) => (
+              <tr key={ri}>
+                {r.map((c: string, ci: number) => (
+                  <td key={ci} style={{
+                    padding: '10px 14px',
+                    textAlign: 'center',
+                    color: 'var(--fg-2)',
+                    borderBottom: ri === rows.length - 1 ? 'none' : '1px solid var(--border-subtle)',
+                    borderRight: ci < r.length - 1 ? '1px solid var(--border-subtle)' : 'none',
+                    whiteSpace: 'nowrap',
+                  }}>{c}</td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      {/* 오른쪽: 인스턴스 화살표 */}
+      <div style={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'flex-start',
+        justifyContent: 'center',
+        paddingTop: 44,  // 헤더와 속성 라벨 높이만큼 내려서 정렬
+        gap: 0,
+      }}>
+        {rows.map((_: any, i: number) => (
+          <div key={i} style={{
+            height: 41,  // 각 행 높이 맞춤
+            display: 'flex',
+            alignItems: 'center',
+            fontSize: 13,
+            color: 'var(--fg-3)',
+            whiteSpace: 'nowrap',
+          }}>
+            <span style={{ marginRight: 6 }}>←</span>
+            인스턴스 {i + 1}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 function RefHtml({ html, caption }: any) {
   // 주의: 이 경로는 파서가 만든 신뢰된 HTML 에만 사용 (사용자 입력 아님).
   // 그래도 script·iframe·on* 속성은 혹시 섞이면 제거.
@@ -153,6 +274,7 @@ function renderBlock(r: QuestionReference, i: number) {
     case 'table': return <RefTable key={i} {...r as any}/>;
     case 'ascii': return <RefAscii key={i} {...r as any}/>;
     case 'html':  return <RefHtml  key={i} {...r as any}/>;
+    case 'entity-diagram': return <RefEntityDiagram key={i} {...r as any}/>;
     default: return null;
   }
 }

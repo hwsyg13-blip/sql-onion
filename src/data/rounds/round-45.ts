@@ -65,35 +65,29 @@ export const ROUND_45: QuizQuestion[] = [
     "_source": "authored",
     "references": [
       {
-        "type": "ascii",
-        "text": "  엔터티\n    ↓\n  [ 고객 ]\n    └── 속성: (고객번호) (고객이름) (고객아이디)"
-      },
-      {
-        "type": "table",
+        "type": "entity-diagram",
+        "entityName": "고객",
+        "preText": "  엔터티\n    ↓\n  [ 고객 ]\n    └── 속성: (고객번호) (고객이름) (고객아이디)",
         "headers": [
           "고객번호",
           "고객이름",
-          "고객아이디",
-          "← 인스턴스"
+          "고객아이디"
         ],
         "rows": [
           [
             "10001",
             "정고객",
-            "AAA1",
-            "← 인스턴스 1"
+            "AAA1"
           ],
           [
             "10002",
             "김고객",
-            "BBB2",
-            "← 인스턴스 2"
+            "BBB2"
           ],
           [
             "10003",
             "박고객",
-            "CCC3",
-            "← 인스턴스 3"
+            "CCC3"
           ]
         ]
       }

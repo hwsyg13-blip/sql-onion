@@ -178,7 +178,8 @@ export type QuestionReference =
   | { type: 'sql';   code: string; caption?: string }
   | { type: 'table'; headers: string[]; rows: string[][]; caption?: string }
   | { type: 'ascii'; text: string; caption?: string }
-  | { type: 'html';  html: string; caption?: string };
+  | { type: 'html';  html: string; caption?: string }
+  | { type: 'entity-diagram'; entityName: string; preText: string; headers: string[]; rows: string[][] };
 
 export type QuizQuestion = {
   id: number;

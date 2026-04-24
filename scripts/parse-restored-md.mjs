@@ -72,6 +72,38 @@ function extractMidRegion(midText) {
     pendingText = null;
   };
 
+  // Post-process: combine consecutive (ascii, table) into a single 'entity-diagram' block
+  const postProcess = (inputRefs) => {
+    const out = [];
+    for (let k = 0; k < inputRefs.length; k++) {
+      const cur = inputRefs[k];
+      const nxt = inputRefs[k + 1];
+      if (cur.type === 'ascii' && nxt && nxt.type === 'table') {
+        // Extract entity name from "[ 고객 ]" or "[고객]" pattern
+        const mName = cur.text.match(/\[\s*([^\]\n]+?)\s*\]/);
+        // 마지막 컬럼이 "← 인스턴스" 같은 주석 라벨이면 제거
+        let headers = nxt.headers.slice();
+        let rows = nxt.rows.map(r => r.slice());
+        const lastH = headers[headers.length - 1] || '';
+        if (/^[←→]/.test(lastH.trim()) || /인스턴스|instance/i.test(lastH)) {
+          headers.pop();
+          rows = rows.map(r => r.slice(0, headers.length));
+        }
+        out.push({
+          type: 'entity-diagram',
+          entityName: mName ? mName[1].trim() : '',
+          preText: cur.text,
+          headers,
+          rows,
+        });
+        k++; // skip the table
+      } else {
+        out.push(cur);
+      }
+    }
+    return out;
+  };
+
   while (i < lines.length) {
     const line = lines[i];
     const trimmed = line.trim();
@@ -158,7 +190,7 @@ function extractMidRegion(midText) {
   }
   flushText();
 
-  return { refs, trailingTitleExtra: trailingTitleLines.join(' ').trim() };
+  return { refs: postProcess(refs), trailingTitleExtra: trailingTitleLines.join(' ').trim() };
 }
 
 // ------------------------------------------------------------------
