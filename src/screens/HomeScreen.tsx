@@ -4,7 +4,8 @@ import { Btn, Tag, Ic, Mascot, MascotGuide, OnionMark, Progress, Divider, CodeBl
 import { UsageBadge } from './PricingScreen';
 import { EXAM_SETS } from '../data/quizBank';
 import { AdSlot } from '../components/AdSlot';
-import { useProgress } from '../lib/progress';
+import { useProgress, isPlanDayDone } from '../lib/progress';
+import { PLAN_DATA } from './PlanScreen';
 
 const EXAM_LABEL: Record<string, string> = Object.fromEntries(
   EXAM_SETS.map(s => [s.id, s.label])
@@ -12,8 +13,14 @@ const EXAM_LABEL: Record<string, string> = Object.fromEntries(
 
 // Home — hero + dashboard summary + quick entry to CBT / endless / plan
 export const HomeScreen = ({onNavigate, user}) => {
-  const { stats } = useProgress();
-  const { totalAttempts, correctRate, examsDone, dayProgress, weekNum, weekDay, recentExams } = stats;
+  const { progress, stats } = useProgress();
+  const { totalAttempts, correctRate, examsDone, recentExams } = stats;
+  // 3주 계획 컨텐츠 기반으로 진도 계산 — PlanScreen과 일치
+  const planDoneCount = PLAN_DATA.filter(d => isPlanDayDone(d, progress, stats)).length;
+  const dayProgress = Math.min(21, planDoneCount);
+  const nextDay = PLAN_DATA.find(d => !isPlanDayDone(d, progress, stats))?.day ?? 21;
+  const weekNum = Math.min(3, Math.ceil(nextDay / 7));
+  const weekDay = ((nextDay - 1) % 7) + 1;
 
   // 최근 완료 기록 있으면 그 카드, 없으면 학습 시작용 기본 카드
   const recentCards = recentExams.slice(0, 3).map(e => ({
@@ -148,7 +155,7 @@ export const HomeScreen = ({onNavigate, user}) => {
         </div>
         <div style={{marginTop:18}}>
           <div style={{display:"flex",justifyContent:"space-between",fontSize:12,color:"var(--fg-3)",marginBottom:6}}>
-            <span>Day {dayProgress} · {weekNum}주차 {weekDay}일</span>
+            <span>Day {nextDay} · {weekNum}주차 {weekDay}일</span>
             <span style={{fontFamily:"var(--font-mono)"}}>{dayProgress} / 21일</span>
           </div>
           <Progress value={dayProgress} total={21}/>

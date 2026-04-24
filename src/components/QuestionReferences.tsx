@@ -30,6 +30,29 @@ const CAPTION_STYLE: React.CSSProperties = {
   marginBottom: 6,
 };
 
+/** **bold** / *italic* / `code` / [text](url) → React 노드로 변환 (XSS 방지 위해 텍스트만) */
+function renderInlineMd(text: string) {
+  if (!text) return null;
+  // 단순 토크나이저: 양식 마커 기준으로 split
+  const tokens = [];
+  const re = /(\*\*([^*\n]+?)\*\*)|(`([^`\n]+?)`)|(\*([^*\n]+?)\*)/g;
+  let last = 0, m;
+  while ((m = re.exec(text)) !== null) {
+    if (m.index > last) tokens.push({ type: 'text', value: text.slice(last, m.index) });
+    if (m[1]) tokens.push({ type: 'b', value: m[2] });
+    else if (m[3]) tokens.push({ type: 'code', value: m[4] });
+    else if (m[5]) tokens.push({ type: 'i', value: m[6] });
+    last = m.index + m[0].length;
+  }
+  if (last < text.length) tokens.push({ type: 'text', value: text.slice(last) });
+  return tokens.map((t, i) => {
+    if (t.type === 'b') return <strong key={i} style={{ fontWeight: 700, color: 'var(--fg-1)' }}>{t.value}</strong>;
+    if (t.type === 'i') return <em key={i}>{t.value}</em>;
+    if (t.type === 'code') return <code key={i} style={{ fontFamily: 'var(--font-mono)', fontSize: '0.92em', background: 'var(--bg-code)', padding: '1px 5px', borderRadius: 4 }}>{t.value}</code>;
+    return <React.Fragment key={i}>{t.value}</React.Fragment>;
+  });
+}
+
 function RefText({ heading, content }: any) {
   return (
     <div>
@@ -37,7 +60,7 @@ function RefText({ heading, content }: any) {
       <p style={{
         margin: 0, fontSize: 14.5, lineHeight: 1.7, color: 'var(--fg-2)',
         whiteSpace: 'pre-wrap',
-      }}>{content}</p>
+      }}>{renderInlineMd(content)}</p>
     </div>
   );
 }

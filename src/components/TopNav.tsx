@@ -31,7 +31,7 @@ export const TopNav = ({route, onNavigate, dark, onToggleDark, user, onLogout, b
         background: "none", border: 0, cursor: "pointer", padding: 0,
         display: "inline-flex", alignItems: "center",
       }}>
-        <img src="/assets/logo.svg" height="28" alt="SQL양파"/>
+        <img src={dark ? "/assets/logo-dark.svg" : "/assets/logo.svg"} height="28" alt="SQL양파"/>
       </button>
       <nav style={{display: "flex", gap: 24, marginLeft: 12}} className="topnav-links">
         {links.map(l => {

@@ -118,10 +118,10 @@ export const CBTExam = ({examId = "round-60", onFinish, onNavigate, onExit, mock
   const [submitConfirm, setSubmitConfirm] = React.useState(false);
 
   React.useEffect(() => {
-    if (!mockMode) return;
+    // 기출·모의 둘 다 90분 카운트다운 표시 (학습용)
     const t = setInterval(() => setRemaining(r => Math.max(0, r-1)), 1000);
     return () => clearInterval(t);
-  }, [mockMode]);
+  }, []);
 
   const q = questions[idx];
   const answered = answers.filter(a=>a!=null).length;
@@ -154,7 +154,7 @@ export const CBTExam = ({examId = "round-60", onFinish, onNavigate, onExit, mock
       }
     } catch (e) { console.warn('[progress] CBT 기록 실패', e); }
 
-    onFinish({questions, answers, flags, examId, mockMode, timeUsed: mockMode ? (90*60 - remaining) : null});
+    onFinish({questions, answers, flags, examId, mockMode, timeUsed: 90*60 - remaining});
   };
 
   const mins = Math.floor(remaining/60), secs = remaining%60;
@@ -169,11 +169,18 @@ export const CBTExam = ({examId = "round-60", onFinish, onNavigate, onExit, mock
         position:"sticky",top:64,zIndex:20,
       }}>
         {onExit && (
-          <button onClick={onExit} style={{
-            background:"var(--bg-muted)",border:"1px solid var(--border-default)",borderRadius:10,
-            padding:"6px 11px",fontFamily:"inherit",fontSize:12.5,cursor:"pointer",color:"var(--fg-2)",
-            display:"inline-flex",alignItems:"center",gap:6,
-          }}>
+          <button
+            onClick={() => {
+              if (typeof window === 'undefined' || window.confirm('진행 중인 풀이를 종료하고 나가시겠어요? 답안은 저장되지 않아요.')) {
+                onExit();
+              }
+            }}
+            style={{
+              background:"var(--bg-muted)",border:"1px solid var(--border-default)",borderRadius:10,
+              padding:"6px 11px",fontFamily:"inherit",fontSize:12.5,cursor:"pointer",color:"var(--fg-2)",
+              display:"inline-flex",alignItems:"center",gap:6,
+            }}
+          >
             <Ic.ArrowLeft size={13}/> 나가기
           </button>
         )}
@@ -182,18 +189,16 @@ export const CBTExam = ({examId = "round-60", onFinish, onNavigate, onExit, mock
           <span style={{fontSize:13,color:"var(--fg-3)"}}>CBT · 50문항</span>
         </div>
         <div style={{marginLeft:"auto",display:"flex",alignItems:"center",gap:16,flexWrap:"wrap"}}>
-          {mockMode && (
-            <div style={{
-              display:"inline-flex",alignItems:"center",gap:6,padding:"6px 12px",
-              background: remaining < 300 ? "var(--wrong-bg)" : "var(--point-050)",
-              border:`1px solid ${remaining < 300 ? "var(--wrong-border)" : "var(--point-100)"}`,
-              borderRadius:8,fontFamily:"var(--font-mono)",fontWeight:700,
-              color: remaining < 300 ? "var(--wrong-fg)" : "var(--point-600)",
-              fontSize:15,
-            }}>
-              <Ic.Clock size={14}/> {timeStr}
-            </div>
-          )}
+          <div style={{
+            display:"inline-flex",alignItems:"center",gap:6,padding:"6px 12px",
+            background: remaining < 300 ? "var(--wrong-bg)" : "var(--point-050)",
+            border:`1px solid ${remaining < 300 ? "var(--wrong-border)" : "var(--point-100)"}`,
+            borderRadius:8,fontFamily:"var(--font-mono)",fontWeight:700,
+            color: remaining < 300 ? "var(--wrong-fg)" : "var(--point-600)",
+            fontSize:15,
+          }}>
+            <Ic.Clock size={14}/> {timeStr}
+          </div>
           <div style={{fontSize:13,color:"var(--fg-3)"}}>진행 <strong style={{color:"var(--fg-1)",fontFamily:"var(--font-mono)"}}>{answered}</strong> / {totalQ}</div>
           <Btn size="sm" variant="primary" onClick={()=>setSubmitConfirm(true)}>제출하기</Btn>
         </div>

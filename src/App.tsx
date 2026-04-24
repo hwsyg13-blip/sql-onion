@@ -82,11 +82,11 @@ export const App = () => {
   // 브라우저 히스토리와 동기화 — popstate 로 돌아올 때는 pushState 하지 않도록 플래그
   const isPoppingRef = React.useRef(false);
 
-  const navigate = (to: string, p: any = null) => {
+  const navigate = (to: string, p: any = null, opts?: { skipConfirm?: boolean }) => {
     // 시험 중 이탈 방지 — cbt/mock-exam 화면에서 다른 화면으로 갈 때 확인
     const inExam = (route === 'cbt' || route === 'mock-exam');
     const naturalExits = new Set(['cbt', 'mock-exam', 'cbt-result']);
-    if (inExam && !naturalExits.has(to) && !isPoppingRef.current) {
+    if (inExam && !naturalExits.has(to) && !isPoppingRef.current && !opts?.skipConfirm) {
       const ok = typeof window !== 'undefined'
         ? window.confirm('진행 중인 풀이를 종료하고 이동할까요? 답안은 저장되지 않아요.')
         : true;
@@ -177,9 +177,9 @@ export const App = () => {
     case 'theory-detail': screen = <TheoryDetailScreen chapterId={params || 'c23'} onNavigate={navigate}/>; break;
     case 'mock':          screen = <MockLanding onNavigate={navigate}/>; break;
     case 'endless':       screen = <EndlessScreen onNavigate={navigate}/>; break;
-    case 'mock-exam':     screen = <CBTExam examId="AI-MOCK-1" mockMode={true} onNavigate={navigate} onExit={() => navigate(exitReturnRoute || 'home')} onFinish={(r: any) => { setCbtResult(r); navigate('cbt-result'); }}/>; break;
+    case 'mock-exam':     screen = <CBTExam examId="AI-MOCK-1" mockMode={true} onNavigate={navigate} onExit={() => navigate(exitReturnRoute || 'home', null, { skipConfirm: true })} onFinish={(r: any) => { setCbtResult(r); navigate('cbt-result'); }}/>; break;
     case 'exams':         screen = <ExamListScreen onNavigate={navigate}/>; break;
-    case 'cbt':           screen = <CBTExam examId={params || 'round-60'} onNavigate={navigate} onExit={() => navigate(exitReturnRoute || 'home')} onFinish={(r: any) => { setCbtResult(r); navigate('cbt-result'); }}/>; break;
+    case 'cbt':           screen = <CBTExam examId={params || 'round-60'} onNavigate={navigate} onExit={() => navigate(exitReturnRoute || 'home', null, { skipConfirm: true })} onFinish={(r: any) => { setCbtResult(r); navigate('cbt-result'); }}/>; break;
     case 'cbt-result':    screen = cbtResult ? <CBTResult result={cbtResult} onNavigate={navigate}/> : <HomeScreen onNavigate={navigate} user={user}/>; break;
     default:              screen = <HomeScreen onNavigate={navigate} user={user}/>;
   }

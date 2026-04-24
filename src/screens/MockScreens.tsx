@@ -5,6 +5,7 @@ import { QUIZ_BANK } from '../data/quizBank';
 import { sqloUsage } from './PricingScreen';
 import { BETA_NO_AUTH } from '../App';
 import { QuestionReferences, OptionReferences } from '../components/QuestionReferences';
+import { AdSlot } from '../components/AdSlot';
 
 // Endless Quiz — flashcard-esque: single question → grade → explanation → next
 // Also hosts Mock landing & Mock exam full 50-item timer mode
@@ -39,6 +40,11 @@ export const MockLanding = ({onNavigate}) => (
           </button>
         );
       })}
+    </div>
+
+    {/* 광고 슬롯 — 모의고사 메뉴 하단 */}
+    <div style={{marginTop:32}}>
+      <AdSlot slot="MOCK_LANDING_BOTTOM" format="horizontal"/>
     </div>
   </div>
 );

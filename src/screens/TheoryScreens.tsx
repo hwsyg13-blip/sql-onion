@@ -6,6 +6,7 @@ import { THEORY, THEORY_BODY } from '../data/theory';
 import { QUIZ_BANK } from '../data/quizBank';
 import { CONCEPT_QUIZ } from '../data/conceptQuiz';
 import { recordTheoryView } from '../lib/progress';
+import { AdSlot } from '../components/AdSlot';
 
 // Theory list + detail (2-column with mini test on the right)
 
@@ -13,36 +14,49 @@ export const TheoryListScreen = ({onNavigate}) => (
   <div style={{maxWidth:960,margin:"0 auto",padding:"32px 28px 80px"}}>
     <h1 style={{fontSize:32,fontWeight:800,color:"var(--fg-1)",margin:"0 0 6px",letterSpacing:"-0.02em"}}>이론</h1>
     <p style={{fontSize:14,color:"var(--fg-3)",margin:"0 0 28px"}}>과목 → 장 → 절 단위로 개념을 차근차근 익혀봐요</p>
-    {THEORY.subjects.map(sub => (
-      <section key={sub.id} style={{marginBottom:32}}>
-        <div style={{display:"flex",alignItems:"baseline",gap:10,marginBottom:14}}>
-          <Tag tone="green">{sub.code}</Tag>
-          <h2 style={{fontSize:20,fontWeight:700,color:"var(--fg-1)",margin:0}}>{sub.title}</h2>
-        </div>
-        <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit, minmax(280px, 1fr))",gap:12}}>
-          {sub.chapters.map((ch, idx) => (
-            <button key={ch.id} onClick={()=>ch.detailed ? onNavigate("theory-detail", ch.id) : onNavigate("theory-detail", ch.id)} style={{
-              textAlign:"left",background:"var(--bg-card)",border:"1px solid var(--border-subtle)",
-              borderRadius:12,padding:"16px 18px",cursor:"pointer",fontFamily:"inherit",
-              boxShadow:"var(--shadow-sm)",display:"flex",flexDirection:"column",gap:10,
-            }}>
-              <div style={{display:"flex",justifyContent:"space-between",alignItems:"center"}}>
-                <div style={{fontSize:11,fontWeight:700,color:"var(--point-600)",letterSpacing:"0.04em",fontFamily:"var(--font-mono)"}}>
-                  CH {idx+1}
+    {THEORY.subjects.map((sub, sidx) => (
+      <React.Fragment key={sub.id}>
+        <section style={{marginBottom:32}}>
+          <div style={{display:"flex",alignItems:"baseline",gap:10,marginBottom:14}}>
+            <Tag tone="green">{sub.code}</Tag>
+            <h2 style={{fontSize:20,fontWeight:700,color:"var(--fg-1)",margin:0}}>{sub.title}</h2>
+          </div>
+          <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit, minmax(280px, 1fr))",gap:12}}>
+            {sub.chapters.map((ch, idx) => (
+              <button key={ch.id} onClick={()=>ch.detailed ? onNavigate("theory-detail", ch.id) : onNavigate("theory-detail", ch.id)} style={{
+                textAlign:"left",background:"var(--bg-card)",border:"1px solid var(--border-subtle)",
+                borderRadius:12,padding:"16px 18px",cursor:"pointer",fontFamily:"inherit",
+                boxShadow:"var(--shadow-sm)",display:"flex",flexDirection:"column",gap:10,
+              }}>
+                <div style={{display:"flex",justifyContent:"space-between",alignItems:"center"}}>
+                  <div style={{fontSize:11,fontWeight:700,color:"var(--point-600)",letterSpacing:"0.04em",fontFamily:"var(--font-mono)"}}>
+                    CH {idx+1}
+                  </div>
+                  {ch.detailed && <Tag tone="green" size="sm">상세</Tag>}
                 </div>
-                {ch.detailed && <Tag tone="green" size="sm">상세</Tag>}
-              </div>
-              <div style={{fontSize:15,fontWeight:700,color:"var(--fg-1)"}}>{ch.title}</div>
-              <ul style={{margin:0,padding:0,listStyle:"none",display:"flex",flexDirection:"column",gap:4}}>
-                {ch.sections.map((s,i)=>(
-                  <li key={i} style={{fontSize:12,color:"var(--fg-3)",lineHeight:1.5}}>· {s}</li>
-                ))}
-              </ul>
-            </button>
-          ))}
-        </div>
-      </section>
+                <div style={{fontSize:15,fontWeight:700,color:"var(--fg-1)"}}>{ch.title}</div>
+                <ul style={{margin:0,padding:0,listStyle:"none",display:"flex",flexDirection:"column",gap:4}}>
+                  {ch.sections.map((s,i)=>(
+                    <li key={i} style={{fontSize:12,color:"var(--fg-3)",lineHeight:1.5}}>· {s}</li>
+                  ))}
+                </ul>
+              </button>
+            ))}
+          </div>
+        </section>
+        {/* 광고 슬롯 — 1과목과 2과목 사이 */}
+        {sidx === 0 && (
+          <div style={{marginBottom:32}}>
+            <AdSlot slot="THEORY_LIST_MID" format="horizontal"/>
+          </div>
+        )}
+      </React.Fragment>
     ))}
+
+    {/* 광고 슬롯 — 이론 목록 하단 */}
+    <div style={{marginTop:32}}>
+      <AdSlot slot="THEORY_LIST_BOTTOM" format="horizontal"/>
+    </div>
   </div>
 );
 
@@ -180,13 +194,15 @@ export const TheoryDetailScreen = ({chapterId, onNavigate}) => {
           })()}
         </article>
 
-        {/* Right rail: section ToC + linked quiz */}
+        {/* Right rail: section ToC + linked quiz + 광고 */}
         <aside style={{position:"relative"}}>
           <div style={{position:"sticky",top:80,display:"flex",flexDirection:"column",gap:14}}>
             <SectionToc sections={body.sections}/>
             {linkedQuiz.length > 0 && (
               <MiniTest key={chapterId} questions={linkedQuiz}/>
             )}
+            {/* 광고 슬롯 — 미니테스트 하단 */}
+            <AdSlot slot="THEORY_DETAIL_AFTER_MINITEST" format="rectangle"/>
           </div>
         </aside>
       </div>

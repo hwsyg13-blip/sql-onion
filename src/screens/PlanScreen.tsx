@@ -2,6 +2,7 @@
 import React from 'react';
 import { Btn, Tag, Ic, Mascot, MascotGuide, OnionMark, Progress } from '../components/Atoms';
 import { useProgress, isPlanDayDone } from '../lib/progress';
+import { AdSlot } from '../components/AdSlot';
 
 // 3-week plan: summary + week tabs + daily cards. Toggle viz: calendar grid <-> timeline.
 
@@ -34,18 +35,25 @@ export const PLAN_DATA = [
 
 export const PlanScreen = ({onNavigate, planViz, setPlanViz}) => {
   const { progress, stats } = useProgress();
-  // 각 day 에 done/current 플래그 주입
-  const planWithStatus = React.useMemo(() => PLAN_DATA.map(d => ({
-    ...d,
-    done: isPlanDayDone(d, progress, stats),
-    current: d.day === stats.dayProgress,
-  })), [progress, stats]);
-  // 현재 진도가 속한 주차로 시작
-  const initialWeek = Math.min(3, Math.ceil(stats.dayProgress / 7));
-  const [week, setWeek] = React.useState(initialWeek);
-  React.useEffect(() => { setWeek(initialWeek); }, [initialWeek]);
+  // 컨텐츠 완료 기준으로 done 계산 → "다음 학습할 Day" 를 current 로
+  const planWithStatus = React.useMemo(() => {
+    const withDone = PLAN_DATA.map(d => ({
+      ...d,
+      done: isPlanDayDone(d, progress, stats),
+    }));
+    // 미완료 첫 Day = 현재
+    const nextDay = withDone.find(d => !d.done)?.day ?? 21;
+    return withDone.map(d => ({ ...d, current: !d.done && d.day === nextDay }));
+  }, [progress, stats]);
 
   const doneCount = planWithStatus.filter(d => d.done).length;
+  const currentDay = planWithStatus.find(d => d.current)?.day ?? 21;
+  const currentWeek = Math.min(3, Math.ceil(currentDay / 7));
+
+  // 시작 시 현재 주차로
+  const [week, setWeek] = React.useState(currentWeek);
+  React.useEffect(() => { setWeek(currentWeek); }, [currentWeek]);
+
   const totalMin = planWithStatus.reduce((a, d) => a + d.est, 0);
   const doneMin  = planWithStatus.filter(d=>d.done).reduce((a,d)=>a+d.est, 0);
 
@@ -85,7 +93,7 @@ export const PlanScreen = ({onNavigate, planViz, setPlanViz}) => {
           {[
             {l:"완료 일자", v:`${doneCount}`, u:"/ 21일"},
             {l:"누적 시간", v:`${Math.floor(doneMin/60)}h ${doneMin%60}m`, u:`전체 ${Math.floor(totalMin/60)}h`},
-            {l:"현재 주차", v:`${stats.weekNum}주차`, u:`Day ${stats.dayProgress} 진행 중`},
+            {l:"현재 주차", v:`${currentWeek}주차`, u:`Day ${currentDay} 진행 중`},
             {l:"남은 일자", v:`${21-doneCount}`, u:"일"},
           ].map((s,i)=>(
             <div key={i}>
@@ -137,6 +145,11 @@ export const PlanScreen = ({onNavigate, planViz, setPlanViz}) => {
             : <>아직 학습 기록이 없어요.<br/>Day 1 부터 차근차근 시작해봐요.</>;
           return <MascotGuide size={64} variant="smile" side="left">{msg}</MascotGuide>;
         })()}
+      </div>
+
+      {/* 광고 슬롯 — 3주 계획 하단 */}
+      <div style={{marginTop:32}}>
+        <AdSlot slot="PLAN_BOTTOM" format="horizontal"/>
       </div>
     </div>
   );
