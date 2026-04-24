@@ -21,11 +21,15 @@ function ensureScript() {
   scriptLoaded = true;
 }
 
+/** 실제 AdSense 슬롯 ID 는 숫자 문자열 (예: "1234567890"). 그 외 (HOME_BOTTOM 같은 라벨) 는 placeholder. */
+const isRealSlotId = (s: string) => /^\d{6,}$/.test(s);
+
 export const AdSlot = ({ slot, format = 'auto', style }: { slot: string; format?: 'auto' | 'fluid' | 'rectangle' | 'horizontal' | 'vertical'; style?: React.CSSProperties }) => {
   const pushedRef = React.useRef(false);
+  const isLive = Boolean(CLIENT && isRealSlotId(slot));
 
   React.useEffect(() => {
-    if (!CLIENT) return;
+    if (!isLive) return;
     ensureScript();
     if (pushedRef.current) return;
     pushedRef.current = true;
@@ -39,10 +43,13 @@ export const AdSlot = ({ slot, format = 'auto', style }: { slot: string; format?
       }
     }, 100);
     return () => clearTimeout(t);
-  }, []);
+  }, [isLive]);
 
-  // 승인 전 플레이스홀더 — 실제 광고와 비슷한 크기로 공간 잡아주기
-  if (!CLIENT) {
+  // CLIENT 없거나 슬롯이 placeholder 라벨이면 점선 박스로 자리만 잡아 둔다
+  if (!isLive) {
+    const note = !CLIENT
+      ? `광고 영역 · ${slot}`
+      : `광고 영역 · ${slot} (실제 슬롯 ID 필요)`;
     return (
       <div
         aria-hidden
@@ -62,7 +69,7 @@ export const AdSlot = ({ slot, format = 'auto', style }: { slot: string; format?
           ...style,
         }}
       >
-        광고 영역 · {slot}
+        {note}
       </div>
     );
   }
