@@ -209,8 +209,8 @@ export const ROUND_50: QuizQuestion[] = [
     "_source": "authored",
     "references": [
       {
-        "type": "sql",
-        "code": "STUDENT(학과, 학번, 강좌), CLASS(강좌번호, ...), ENROLL(학번, 강좌번호, 학점)"
+        "type": "ascii",
+        "text": "STUDENT(학과, 학번, 강좌), CLASS(강좌번호, ...), ENROLL(학번, 강좌번호, 학점)"
       }
     ]
   },
@@ -930,8 +930,8 @@ export const ROUND_50: QuizQuestion[] = [
     "_source": "authored",
     "references": [
       {
-        "type": "sql",
-        "code": "배우(배우번호, 배우명, 성별)\n영화(영화번호, 영화명, 제작년도)\n출연(배우번호, 영화번호, 출연료)"
+        "type": "ascii",
+        "text": "배우(배우번호, 배우명, 성별)\n영화(영화번호, 영화명, 제작년도)\n출연(배우번호, 영화번호, 출연료)"
       }
     ]
   },

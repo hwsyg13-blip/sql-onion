@@ -19,12 +19,12 @@ export const ROUND_58: QuizQuestion[] = [
       "프로젝트참여"
     ],
     "correctIndex": 1,
-    "explanation": "프로젝트는 업무에서 발생하는 중심 엔터티로 분류되며 키 엔터티(기본 엔터티)에는 해당하지 않는다.",
+    "explanation": "사원·회사는 업무에 원래부터 존재하여 독립적으로 생성되는 기본(키) 엔터티이고, 프로젝트참여는 사원과 프로젝트 사이의 업무 행위로 생성되는 행위 엔터티이다. 프로젝트는 기본 엔터티에서 파생되어 업무의 주 대상이 되는 중심 엔터티이므로 키 엔터티(기본 엔터티)에는 해당하지 않는다.",
     "_source": "authored",
     "references": [
       {
-        "type": "sql",
-        "code": "[ 사원 ] ||-----∈ [ 프로젝트참여 ] ∋-----|| [ 프로젝트 ] ∋-----|| [ 회사 ]\n  (기본)              (행위)                    (중심)              (기본)"
+        "type": "ascii",
+        "text": "[ 사원 ] ||-----∈ [ 프로젝트참여 ] ∋-----|| [ 프로젝트 ] ∋-----|| [ 회사 ]"
       }
     ]
   },
@@ -83,11 +83,9 @@ export const ROUND_58: QuizQuestion[] = [
     "_source": "authored",
     "references": [
       {
-        "type": "sql",
-        "code": "[ 출판사 ] ||-----∈ [ 도서 ]\n  (1)             (0..N)"
-      },
-      {
-        "type": "table",
+        "type": "entity-diagram",
+        "entityName": "출판사",
+        "preText": "[ 출판사 ] ||-----∈ [ 도서 ]\n  (1)             (0..N)",
         "headers": [
           "ISBN",
           "제목",
@@ -132,8 +130,8 @@ export const ROUND_58: QuizQuestion[] = [
     "_source": "authored",
     "references": [
       {
-        "type": "sql",
-        "code": "[ 컴퓨터 ] ||───────|─ [ 마더보드 ]"
+        "type": "ascii",
+        "text": "[ 컴퓨터 ] ||───────|─ [ 마더보드 ]"
       }
     ]
   },
@@ -174,8 +172,8 @@ export const ROUND_58: QuizQuestion[] = [
     "_source": "authored",
     "references": [
       {
-        "type": "sql",
-        "code": "사번 → 부서번호, 부서번호 → 부서위치"
+        "type": "ascii",
+        "text": "사번 → 부서번호, 부서번호 → 부서위치"
       }
     ]
   },
@@ -186,21 +184,41 @@ export const ROUND_58: QuizQuestion[] = [
     "round": 58,
     "subject": "1과목",
     "number": 8,
-    "title": "아래 [차량] 엔터티에서 소유자가 법인 또는 개인 중 하나로 반드시 지정되도록 표현한 관계는?",
+    "title": "다음 중 상호배타적(Arc) 관계를 표현한 ERD로 가장 적절한 것은?",
     "options": [
-      "1:1 관계",
-      "식별 관계",
-      "재귀 관계",
-      "법인 또는 개인 차량(상호 배타적 관계)"
+      "보기 ①",
+      "보기 ②",
+      "보기 ③",
+      "보기 ④"
     ],
     "correctIndex": 3,
-    "explanation": "서로 공존할 수 없고 반드시 하나만 선택되는 관계를 상호 배타적 관계(Arc Relationship)라 한다.",
+    "explanation": "하나의 엔터티가 복수의 엔터티 중 반드시 하나와만 연결되고 서로 공존할 수 없는 관계를 상호배타적(Arc) 관계라 한다. 분기되는 두 관계선을 가로지르는 반원(◠)과 \"Arc\" 라벨로 표기한다. ①은 1:1 관계, ②는 1:N 관계, ③은 자기 자신을 참조하는 재귀 관계를 의미한다.",
     "_source": "authored",
-    "references": [
-      {
-        "type": "sql",
-        "code": "            ┌── [ 법인 ] ─┐\n[ 차량 ]────┤              ├── (상호배타적: 둘 중 하나)\n            └── [ 개인 ] ─┘"
-      }
+    "optionReferences": [
+      [
+        {
+          "type": "ascii",
+          "text": "[ 차량 ] ──|─────|── [ 소유자 ]"
+        }
+      ],
+      [
+        {
+          "type": "ascii",
+          "text": "[ 부서 ] ──|─────∈ [ 사원 ]"
+        }
+      ],
+      [
+        {
+          "type": "ascii",
+          "text": "           ┌────┐\n           ↓    │\n        [ 사원 ]┘"
+        }
+      ],
+      [
+        {
+          "type": "ascii",
+          "text": "                   ─── [ 법인 소유자 ]\n                  /\n[ 차량 ] ────◠───\n     (Arc)        \\\n                   ─── [ 개인 소유자 ]"
+        }
+      ]
     ]
   },
   {
@@ -222,11 +240,9 @@ export const ROUND_58: QuizQuestion[] = [
     "_source": "authored",
     "references": [
       {
-        "type": "sql",
-        "code": "[ 학생 ] ─|─ ─ ─o∈ [ 수강 ] ∋─ ─ ─o|─ [ 과목 ]"
-      },
-      {
-        "type": "table",
+        "type": "entity-diagram",
+        "entityName": "학생",
+        "preText": "[ 학생 ] ─|─ ─ ─o∈ [ 수강 ] ∋─ ─ ─o|─ [ 과목 ]",
         "headers": [
           "수강번호",
           "학번",

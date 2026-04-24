@@ -790,8 +790,8 @@ export const ROUND_55: QuizQuestion[] = [
     "_source": "authored",
     "references": [
       {
-        "type": "sql",
-        "code": "[ 고객 ] ||-----∈ [ 계약 ] ||-----∈ [ 상세내용 ]"
+        "type": "ascii",
+        "text": "[ 고객 ] ||-----∈ [ 계약 ] ||-----∈ [ 상세내용 ]"
       }
     ]
   },

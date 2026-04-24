@@ -100,8 +100,8 @@
       "explanation": "세 관계는 각각 독립적인 의미를 가지며 단순 합성으로 대체할 수 없다.",
       "references": [
         {
-          "type": "sql",
-          "code": "[ 병원 ] ||-----∘| [ 의사 ] ||-----∘| [ 수술 ]\n   ㄱ                  ㄴ                ㄷ"
+          "type": "ascii",
+          "text": "[ 병원 ] ||-----∘| [ 의사 ] ||-----∘| [ 수술 ]\n   ㄱ                  ㄴ                ㄷ"
         }
       ]
     },
@@ -409,8 +409,8 @@
           ]
         },
         {
-          "type": "sql",
-          "code": "COUNT(*)\n4"
+          "type": "ascii",
+          "text": "COUNT(*)\n4"
         }
       ]
     },
@@ -822,8 +822,8 @@
           ]
         },
         {
-          "type": "sql",
-          "code": "COUNT()\n2"
+          "type": "ascii",
+          "text": "COUNT()\n2"
         }
       ]
     },

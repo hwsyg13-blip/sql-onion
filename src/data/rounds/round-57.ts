@@ -138,8 +138,8 @@ export const ROUND_57: QuizQuestion[] = [
     "_source": "authored",
     "references": [
       {
-        "type": "sql",
-        "code": "[ 고객 ] ||-----∈ [ 계약 ] ∋-----|| [ 납부자 ]"
+        "type": "ascii",
+        "text": "[ 고객 ] ||-----∈ [ 계약 ] ∋-----|| [ 납부자 ]"
       }
     ]
   },
@@ -233,8 +233,8 @@ export const ROUND_57: QuizQuestion[] = [
     "_source": "authored",
     "references": [
       {
-        "type": "sql",
-        "code": "[ 학생 ] ∋-----|∘ [ 수강 ] ∘|-----∈ [ 과목 ]"
+        "type": "ascii",
+        "text": "[ 학생 ] ∋-----|∘ [ 수강 ] ∘|-----∈ [ 과목 ]"
       }
     ]
   },
@@ -257,8 +257,8 @@ export const ROUND_57: QuizQuestion[] = [
     "_source": "authored",
     "references": [
       {
-        "type": "sql",
-        "code": "[ 상품 ] ∋-----|∘ [ 주문 ] ∋-----|| [ 주문항목 ]"
+        "type": "ascii",
+        "text": "[ 상품 ] ∋-----|∘ [ 주문 ] ∋-----|| [ 주문항목 ]"
       }
     ]
   },
@@ -775,8 +775,8 @@ export const ROUND_57: QuizQuestion[] = [
         ]
       },
       {
-        "type": "sql",
-        "code": "[TAB1]  [TAB2]\n  A       E\n  B       F\n  C       D\n  G       G"
+        "type": "ascii",
+        "text": "[TAB1]  [TAB2]\n  A       E\n  B       F\n  C       D\n  G       G"
       }
     ]
   },

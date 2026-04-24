@@ -166,8 +166,12 @@ function extractMidRegion(midText) {
       if (i < lines.length) i++; // skip closing ```
       const code = buf.join('\n').trimEnd();
       if (code) {
-        if (lang === 'sql' || lang === '' || lang === 'plsql') {
+        if (lang === 'sql' || lang === 'plsql') {
           refs.push({ type: 'sql', code });
+        } else if (lang === '') {
+          // 언어 지정 없는 fenced block → 실제 SQL 키워드 포함이면 sql, 아니면 ascii (ERD 도식용)
+          const looksSql = /\b(SELECT|FROM|WHERE|INSERT|UPDATE|DELETE|JOIN|GROUP\s+BY|ORDER\s+BY|CREATE|ALTER)\b/i.test(code);
+          refs.push(looksSql ? { type: 'sql', code } : { type: 'ascii', text: code });
         } else {
           refs.push({ type: 'text', content: code });
         }
@@ -256,7 +260,8 @@ function parseRoundMd(round, text) {
     let firstOptionLineIdx = -1;
     for (let i = 0; i < allLines.length; i++) {
       const t = allLines[i].trim();
-      if (/^\*\s+[①②③④]\s/.test(t) || /^\*\*[①②③④]\s+.+?\*\*$/.test(t)) {
+      // "* ①" (빈 선택지 허용), "* ① 텍스트", "**① 텍스트**"
+      if (/^\*\s+[①②③④]\s*$/.test(t) || /^\*\s+[①②③④]\s+\S/.test(t) || /^\*\*[①②③④]\s+.+?\*\*$/.test(t)) {
         firstOptionLineIdx = i;
         break;
       }
@@ -284,11 +289,11 @@ function parseRoundMd(round, text) {
       const line = afterOptionLines[i];
       const t = line.trim();
 
-      // 선택지 시작 — bullet "* ① ..." or bold "**① ...**"
-      let m = t.match(/^\*\s+([①②③④])\s+(.+)$/);
+      // 선택지 시작 — bullet "* ① text" OR 빈 "* ①" (다이어그램 전용 선택지)
+      let m = t.match(/^\*\s+([①②③④])(?:\s+(.+))?$/);
       if (m) {
         currentOptIdx = CIRCLED[m[1]];
-        options[currentOptIdx] = m[2].trim();
+        options[currentOptIdx] = (m[2] || '').trim();
         continue;
       }
       m = t.match(/^\*\*([①②③④])\s+(.+?)\*\*$/);
@@ -328,12 +333,18 @@ function parseRoundMd(round, text) {
       }
     }
 
-    // 선택지 텍스트 정규화
+    // 선택지 텍스트 정규화 — 비어있으면 번호를 라벨로 (다이어그램 전용 선택지용)
     for (let i = 0; i < 4; i++) {
-      if (options[i]) options[i] = options[i].replace(/\s+/g, ' ').trim();
+      if (options[i]) {
+        options[i] = options[i].replace(/\s+/g, ' ').trim();
+      } else if (optionReferences[i] && optionReferences[i].length > 0) {
+        options[i] = `보기 ${['①','②','③','④'][i]}`;
+      }
     }
 
-    if (options.filter(Boolean).length === 4 && correctIndex != null) {
+    // 선택지가 4개 모두 있으면 유효 (텍스트든 보기든)
+    const filled4 = options.every(o => o && o.trim());
+    if (filled4 && correctIndex != null) {
       const entry = {
         subject: inferSubject(sec.num),
         number: sec.num,

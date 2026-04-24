@@ -137,8 +137,8 @@ export const ROUND_56: QuizQuestion[] = [
     "_source": "authored",
     "references": [
       {
-        "type": "sql",
-        "code": "[ 병원 ] ||-----∘| [ 의사 ] ||-----∘| [ 수술 ]\n   ㄱ                  ㄴ                ㄷ"
+        "type": "ascii",
+        "text": "[ 병원 ] ||-----∘| [ 의사 ] ||-----∘| [ 수술 ]\n   ㄱ                  ㄴ                ㄷ"
       }
     ]
   },
@@ -516,8 +516,8 @@ export const ROUND_56: QuizQuestion[] = [
         ]
       },
       {
-        "type": "sql",
-        "code": "COUNT(*)\n4"
+        "type": "ascii",
+        "text": "COUNT(*)\n4"
       }
     ]
   },
@@ -1009,8 +1009,8 @@ export const ROUND_56: QuizQuestion[] = [
         ]
       },
       {
-        "type": "sql",
-        "code": "COUNT()\n2"
+        "type": "ascii",
+        "text": "COUNT()\n2"
       }
     ]
   },

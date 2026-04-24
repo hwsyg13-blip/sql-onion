@@ -83,8 +83,8 @@ export const ROUND_49: QuizQuestion[] = [
     "_source": "authored",
     "references": [
       {
-        "type": "sql",
-        "code": "[ 상품 ] ─|─ ─ ─ ─o< [ 주문 ]"
+        "type": "ascii",
+        "text": "[ 상품 ] ─|─ ─ ─ ─o< [ 주문 ]"
       }
     ]
   },
@@ -205,45 +205,8 @@ export const ROUND_49: QuizQuestion[] = [
       "관계속성(Relationship Attribute)"
     ],
     "correctIndex": 1,
-    "explanation": "관계차수는 두 엔터티 간 관계에 참여하는 인스턴스 수의 대응 관계(1:1, 1:M, M:N)를 의미한다. `|`(단일성), `o`(선택성), `<`(까마귀발, 다수) 기호 조합으로 표기된다.",
-    "_source": "authored",
-    "references": [
-      {
-        "type": "table",
-        "headers": [
-          "표기",
-          "카디널리티",
-          "의미"
-        ],
-        "rows": [
-          [
-            "[ A ] ─|─────|─ [ B ]",
-            "1 : 1",
-            "하나의 A는 하나의 B로 구성"
-          ],
-          [
-            "[ A ] ─|─────o|─ [ B ]",
-            "1 : 0 or 1",
-            "하나의 A는 0 또는 하나의 B로 구성"
-          ],
-          [
-            "[ A ] ─|─────< [ B ]",
-            "1 : N",
-            "하나의 A는 두 개 이상의 B로 구성"
-          ],
-          [
-            "[ A ] ─|─────|< [ B ]",
-            "1 : 1 or 1 : N",
-            "하나의 A는 하나 이상의 B로 구성"
-          ],
-          [
-            "[ A ] ─|─────o< [ B ]",
-            "1 : 0 or 1 or N",
-            "하나의 A는 0, 1 또는 그 이상의 B로 구성"
-          ]
-        ]
-      }
-    ]
+    "explanation": "관계차수는 두 엔터티 간 관계에 참여하는 인스턴스 수의 대응 관계(1:1, 1:M, M:N)를 의미하며, `|`(단일성), `o`(선택성), `<`(까마귀발, 다수) 기호 조합으로 표기된다. 예컨대 `[A] ─|─|─ [B]`는 1:1, `[A] ─|─< [B]`는 1:N, `[A] ─|─o< [B]`는 1:0·1·N 관계를 나타낸다.",
+    "_source": "authored"
   },
   {
     "id": 10560,
@@ -318,8 +281,8 @@ export const ROUND_49: QuizQuestion[] = [
     "_source": "authored",
     "references": [
       {
-        "type": "sql",
-        "code": "[EMP] EMP_NO, MANAGER_NO"
+        "type": "ascii",
+        "text": "[EMP] EMP_NO, MANAGER_NO"
       }
     ]
   },

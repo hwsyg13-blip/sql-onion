@@ -41,8 +41,8 @@ export const ROUND_51: QuizQuestion[] = [
     "_source": "authored",
     "references": [
       {
-        "type": "sql",
-        "code": "[ 고객 ] ||-----∈ [ 주문 ]   -- 주문은 고객이 반드시 필요"
+        "type": "ascii",
+        "text": "[ 고객 ] ||-----∈ [ 주문 ]   -- 주문은 고객이 반드시 필요"
       }
     ]
   },

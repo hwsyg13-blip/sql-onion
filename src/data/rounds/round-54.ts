@@ -119,8 +119,8 @@ export const ROUND_54: QuizQuestion[] = [
     "_source": "authored",
     "references": [
       {
-        "type": "sql",
-        "code": "[ 고객 ] ||-----∈ [ 주문 ]"
+        "type": "ascii",
+        "text": "[ 고객 ] ||-----∈ [ 주문 ]"
       }
     ]
   },

@@ -125,8 +125,8 @@ export const ROUND_59: QuizQuestion[] = [
     "_source": "authored",
     "references": [
       {
-        "type": "sql",
-        "code": "[ A ] ||-----∈ [ B ] ||-----∈ [ C ] ||-----∈ [ D ]"
+        "type": "ascii",
+        "text": "[ A ] ||-----∈ [ B ] ||-----∈ [ C ] ||-----∈ [ D ]"
       }
     ]
   },
@@ -203,8 +203,8 @@ export const ROUND_59: QuizQuestion[] = [
     "_source": "authored",
     "references": [
       {
-        "type": "sql",
-        "code": "[ 학생 ] ∋-----|∘ [ 수강 ] ∘|-----∈ [ 과목 ]\n     (1)       (0..N)      (1)"
+        "type": "ascii",
+        "text": "[ 학생 ] ∋-----|∘ [ 수강 ] ∘|-----∈ [ 과목 ]\n     (1)       (0..N)      (1)"
       }
     ]
   },

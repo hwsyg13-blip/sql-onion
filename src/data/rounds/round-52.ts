@@ -179,8 +179,8 @@ export const ROUND_52: QuizQuestion[] = [
     "_source": "authored",
     "references": [
       {
-        "type": "sql",
-        "code": "[ 교수 ] ∋-----|∘ [ 수강 ] ∘|-----∈ [ 학생 ]\n[ 학생 ] ∋-----|∘ [ 이수 ] ∘|-----∈ [ 과목 ]"
+        "type": "ascii",
+        "text": "[ 교수 ] ∋-----|∘ [ 수강 ] ∘|-----∈ [ 학생 ]\n[ 학생 ] ∋-----|∘ [ 이수 ] ∘|-----∈ [ 과목 ]"
       }
     ]
   },
