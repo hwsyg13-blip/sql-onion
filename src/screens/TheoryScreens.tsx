@@ -60,13 +60,28 @@ export const TheoryDetailScreen = ({chapterId, onNavigate}) => {
 
   return (
     <div style={{maxWidth:1180,margin:"0 auto",padding:"28px 28px 80px"}}>
-      {/* Breadcrumb */}
-      <div style={{display:"flex",alignItems:"center",gap:6,fontSize:12,color:"var(--fg-3)",marginBottom:18}}>
-        <button onClick={()=>onNavigate("theory")} style={{background:"none",border:0,color:"var(--fg-3)",cursor:"pointer",fontFamily:"inherit",fontSize:12,padding:0}}>이론</button>
-        <Ic.ChevronRight size={12}/>
-        <span>{body.subjectCode} · {body.subjectTitle}</span>
-        <Ic.ChevronRight size={12}/>
-        <span style={{color:"var(--fg-1)",fontWeight:600}}>{body.chapterNum} {body.title}</span>
+      {/* 뒤로가기 + Breadcrumb */}
+      <div style={{display:"flex",alignItems:"center",gap:10,marginBottom:18}}>
+        <button
+          onClick={() => { if (typeof window !== 'undefined' && window.history.length > 1) window.history.back(); else onNavigate("theory"); }}
+          title="뒤로가기"
+          style={{
+            width:36, height:36, display:"inline-flex", alignItems:"center", justifyContent:"center",
+            background:"var(--bg-card)", border:"1px solid var(--border-default)", borderRadius:10,
+            cursor:"pointer", color:"var(--fg-2)", padding:0,
+          }}
+          onMouseEnter={e => { e.currentTarget.style.background = 'var(--bg-muted)'; e.currentTarget.style.borderColor = 'var(--point-500)'; }}
+          onMouseLeave={e => { e.currentTarget.style.background = 'var(--bg-card)'; e.currentTarget.style.borderColor = 'var(--border-default)'; }}
+        >
+          <Ic.ArrowLeft size={18}/>
+        </button>
+        <div style={{display:"flex",alignItems:"center",gap:6,fontSize:12,color:"var(--fg-3)"}}>
+          <button onClick={()=>onNavigate("theory")} style={{background:"none",border:0,color:"var(--fg-3)",cursor:"pointer",fontFamily:"inherit",fontSize:12,padding:0}}>이론</button>
+          <Ic.ChevronRight size={12}/>
+          <span>{body.subjectCode} · {body.subjectTitle}</span>
+          <Ic.ChevronRight size={12}/>
+          <span style={{color:"var(--fg-1)",fontWeight:600}}>{body.chapterNum} {body.title}</span>
+        </div>
       </div>
 
       <div style={{display:"grid",gridTemplateColumns:"minmax(0, 1fr) 340px",gap:32}} className="theory-detail-grid">
@@ -189,12 +204,27 @@ export const TheoryStub = ({chapterId, onNavigate}) => {
   if (!ch) return <div style={{padding:80,textAlign:"center",color:"var(--fg-3)"}}>해당 이론을 찾을 수 없습니다.</div>;
   return (
     <div style={{maxWidth:1180,margin:"0 auto",padding:"28px 28px 80px"}}>
-      <div style={{display:"flex",alignItems:"center",gap:6,fontSize:12,color:"var(--fg-3)",marginBottom:18}}>
-        <button onClick={()=>onNavigate("theory")} style={{background:"none",border:0,color:"var(--fg-3)",cursor:"pointer",fontFamily:"inherit",fontSize:12,padding:0}}>이론</button>
-        <Ic.ChevronRight size={12}/>
-        <span>{sub.code} · {sub.title}</span>
-        <Ic.ChevronRight size={12}/>
-        <span style={{color:"var(--fg-1)",fontWeight:600}}>{ch.title}</span>
+      <div style={{display:"flex",alignItems:"center",gap:10,marginBottom:18}}>
+        <button
+          onClick={() => { if (typeof window !== 'undefined' && window.history.length > 1) window.history.back(); else onNavigate("theory"); }}
+          title="뒤로가기"
+          style={{
+            width:36, height:36, display:"inline-flex", alignItems:"center", justifyContent:"center",
+            background:"var(--bg-card)", border:"1px solid var(--border-default)", borderRadius:10,
+            cursor:"pointer", color:"var(--fg-2)", padding:0,
+          }}
+          onMouseEnter={e => { e.currentTarget.style.background = 'var(--bg-muted)'; e.currentTarget.style.borderColor = 'var(--point-500)'; }}
+          onMouseLeave={e => { e.currentTarget.style.background = 'var(--bg-card)'; e.currentTarget.style.borderColor = 'var(--border-default)'; }}
+        >
+          <Ic.ArrowLeft size={18}/>
+        </button>
+        <div style={{display:"flex",alignItems:"center",gap:6,fontSize:12,color:"var(--fg-3)"}}>
+          <button onClick={()=>onNavigate("theory")} style={{background:"none",border:0,color:"var(--fg-3)",cursor:"pointer",fontFamily:"inherit",fontSize:12,padding:0}}>이론</button>
+          <Ic.ChevronRight size={12}/>
+          <span>{sub.code} · {sub.title}</span>
+          <Ic.ChevronRight size={12}/>
+          <span style={{color:"var(--fg-1)",fontWeight:600}}>{ch.title}</span>
+        </div>
       </div>
       <div style={{display:"grid",gridTemplateColumns:"minmax(0, 1fr) 340px",gap:32}} className="theory-detail-grid">
         <article>
