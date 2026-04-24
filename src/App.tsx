@@ -79,11 +79,14 @@ export const App = () => {
     }
   }, [tweaks.theme, tweaks.accent]);
 
+  // 브라우저 히스토리와 동기화 — popstate 로 돌아올 때는 pushState 하지 않도록 플래그
+  const isPoppingRef = React.useRef(false);
+
   const navigate = (to: string, p: any = null) => {
     // 시험 중 이탈 방지 — cbt/mock-exam 화면에서 다른 화면으로 갈 때 확인
     const inExam = (route === 'cbt' || route === 'mock-exam');
     const naturalExits = new Set(['cbt', 'mock-exam', 'cbt-result']);
-    if (inExam && !naturalExits.has(to)) {
+    if (inExam && !naturalExits.has(to) && !isPoppingRef.current) {
       const ok = typeof window !== 'undefined'
         ? window.confirm('진행 중인 풀이를 종료하고 이동할까요? 답안은 저장되지 않아요.')
         : true;
@@ -114,10 +117,50 @@ export const App = () => {
     if ((to === 'cbt' || to === 'mock-exam') && route !== 'cbt' && route !== 'mock-exam' && route !== 'cbt-result') {
       setExitReturnRoute(route);
     }
+    // 브라우저 히스토리에 기록 — popstate 로 인해 호출된 경우는 제외
+    if (!isPoppingRef.current && typeof window !== 'undefined') {
+      try { window.history.pushState({ sqlo: true, route: to, params: p }, ''); } catch {}
+    }
     setRoute(to);
     setParams(p);
     window.scrollTo({ top: 0, behavior: 'instant' as any });
   };
+
+  // 최초 마운트: 현재 route/params 를 history state 로 교체 (앱 재시작 후 뒤로가기 처리)
+  React.useEffect(() => {
+    if (typeof window === 'undefined') return;
+    if (!window.history.state?.sqlo) {
+      try { window.history.replaceState({ sqlo: true, route, params }, ''); } catch {}
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // popstate (브라우저 뒤로가기/앞으로가기) — 시험 중 이탈 방어 후 route 복원
+  React.useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const onPop = (e: PopStateEvent) => {
+      const st = e.state;
+      if (!st?.sqlo) return;
+      // 시험 중이면 확인 요청, 거절 시 현 상태로 pushState 복구
+      const inExam = (route === 'cbt' || route === 'mock-exam');
+      const naturalExits = new Set(['cbt', 'mock-exam', 'cbt-result']);
+      if (inExam && !naturalExits.has(st.route)) {
+        const ok = window.confirm('진행 중인 풀이를 종료하고 이동할까요? 답안은 저장되지 않아요.');
+        if (!ok) {
+          try { window.history.pushState({ sqlo: true, route, params }, ''); } catch {}
+          return;
+        }
+      }
+      isPoppingRef.current = true;
+      setRoute(st.route);
+      setParams(st.params ?? null);
+      window.scrollTo({ top: 0, behavior: 'instant' as any });
+      // reset 플래그 (다음 tick)
+      setTimeout(() => { isPoppingRef.current = false; }, 0);
+    };
+    window.addEventListener('popstate', onPop);
+    return () => window.removeEventListener('popstate', onPop);
+  }, [route, params]);
 
   const toggleDark = () => setTweaks((t: any) => ({ ...t, theme: t.theme === 'dark' ? 'light' : 'dark' }));
 
@@ -173,7 +216,7 @@ export const App = () => {
           info={paywall.info}
           user={user}
           onClose={() => setPaywall(null)}
-          onNavigate={(to: string) => { setPaywall(null); setRoute(to); setParams(null); window.scrollTo({ top: 0 }); }}
+          onNavigate={(to: string) => { setPaywall(null); navigate(to); }}
         />
       )}
       {!hideTopBar && !showExitHeader && <Footer/>}
