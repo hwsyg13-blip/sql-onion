@@ -131,7 +131,8 @@ export const App = () => {
     default:              screen = <HomeScreen onNavigate={navigate} user={user}/>;
   }
 
-  const hideTopBar = (route === 'cbt' || route === 'mock-exam' || route === 'login');
+  // 로그인 화면만 TopNav 숨김. CBT/모의 중에도 상단 네비게이터 유지 (나가기 버튼은 별도 헤더로 함께 표시)
+  const hideTopBar = (route === 'login');
   const showExitHeader = (route === 'cbt' || route === 'mock-exam');
 
   return (
@@ -139,16 +140,18 @@ export const App = () => {
       {!hideTopBar && <TopNav route={route} onNavigate={navigate} dark={tweaks.theme === 'dark'} onToggleDark={toggleDark} user={BETA_NO_AUTH ? null : user} onLogout={handleLogout} betaNoAuth={BETA_NO_AUTH}/>}
       {showExitHeader && (
         <header style={{
-          height: 56, background: 'var(--bg-card)', borderBottom: '1px solid var(--border-subtle)',
-          display: 'flex', alignItems: 'center', padding: '0 20px', gap: 14, position: 'sticky', top: 0, zIndex: 50,
+          height: 48, background: 'var(--bg-surface)', borderBottom: '1px solid var(--border-subtle)',
+          display: 'flex', alignItems: 'center', padding: '0 20px', gap: 14,
+          /* TopNav(64px) 바로 아래에 붙도록 */
+          position: 'sticky', top: 64, zIndex: 40,
         }}>
           <button onClick={() => { if (confirm('진행 중인 풀이를 종료하고 이전 화면으로 돌아갈까요?')) navigate(exitReturnRoute || 'home'); }}
-            style={{ background: 'var(--bg-muted)', border: '1px solid var(--border-default)', borderRadius: 10, padding: '7px 12px', fontFamily: 'inherit', fontSize: 13, cursor: 'pointer', color: 'var(--fg-2)', display: 'inline-flex', alignItems: 'center', gap: 6 }}>
-            <Ic.ArrowLeft size={14}/> 나가기
+            style={{ background: 'var(--bg-card)', border: '1px solid var(--border-default)', borderRadius: 10, padding: '6px 11px', fontFamily: 'inherit', fontSize: 12.5, cursor: 'pointer', color: 'var(--fg-2)', display: 'inline-flex', alignItems: 'center', gap: 6 }}>
+            <Ic.ArrowLeft size={13}/> 나가기
           </button>
-          <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8 }}>
-            <OnionMark size={18}/>
-            <span style={{ fontSize: 13, color: 'var(--fg-3)', fontWeight: 600 }}>SQL양파 · 시험 진행 중</span>
+          <div style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 12, color: 'var(--fg-3)' }}>
+            <OnionMark size={14}/>
+            <span style={{ fontWeight: 600 }}>시험 진행 중</span>
           </div>
         </header>
       )}
