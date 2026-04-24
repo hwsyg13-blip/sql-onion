@@ -1,0 +1,657 @@
+{
+  "round": 52,
+  "notes": "restored from 52회_복원.md — MCQ 50 + 단답형 0 (단답형은 현재 UI 미지원이라 제외)",
+  "authored": [
+    {
+      "subject": "1과목",
+      "number": 1,
+      "title": "엔터티의 주식별자가 없어도 되는 예외적 경우는?",
+      "options": [
+        "기본 엔터티",
+        "중심 엔터티",
+        "행위 엔터티",
+        "관계 엔터티"
+      ],
+      "correctIndex": 3,
+      "explanation": "관계 엔터티는 양쪽 부모의 키 조합으로 식별되므로 별도의 주식별자 정의가 생략되는 경우가 있다."
+    },
+    {
+      "subject": "1과목",
+      "number": 2,
+      "title": "학생 테이블에서 학과가 삭제될 때의 적절한 처리 방식으로 옳은 것은?",
+      "options": [
+        "학과를 삭제한다.",
+        "학생 전체를 삭제한다.",
+        "학과 컬럼을 NULL 로 갱신한다.",
+        "참조 무결성 오류로 삭제가 중단된다."
+      ],
+      "correctIndex": 0,
+      "explanation": "원본 기출의 정답 표기를 보존한다. 참조 관계에 따라 학과 엔터티 삭제가 정상 처리되는 경우를 묻는다."
+    },
+    {
+      "subject": "1과목",
+      "number": 3,
+      "title": "아래 설명에 해당하는 스키마는?",
+      "options": [
+        "외부 스키마",
+        "개념 스키마",
+        "내부 스키마",
+        "물리 스키마"
+      ],
+      "correctIndex": 1,
+      "explanation": "조직 전체 관점에서 데이터를 통합적으로 표현한 스키마"
+    },
+    {
+      "subject": "1과목",
+      "number": 4,
+      "title": "개념적 데이터 모델링에 대한 설명으로 옳은 것은?",
+      "options": [
+        "추상화 수준이 높아 세부 구현을 파악하기 어렵다.",
+        "물리적 저장 구조에 가장 가깝다.",
+        "성능 튜닝을 위한 단계이다.",
+        "인덱스 설계를 포함한다."
+      ],
+      "correctIndex": 0,
+      "explanation": ""
+    },
+    {
+      "subject": "1과목",
+      "number": 5,
+      "title": "아래 설명에 해당하는 엔터티 분류는?",
+      "options": [
+        "행위 엔터티",
+        "중심 엔터티",
+        "기본 엔터티",
+        "관계 엔터티"
+      ],
+      "correctIndex": 2,
+      "explanation": "해당 엔터티가 다른 엔터티들의 부모 역할을 하며, 업무에 원래부터 존재하여 독립적으로 생성된다."
+    },
+    {
+      "subject": "1과목",
+      "number": 6,
+      "title": "'ERD 에서 인스턴스는 두 개 이상의 속성을 가지고, 속성은 하나의 속성값을 가진다' 는 규칙을 표현한 도식으로 옳은 것은?",
+      "options": [
+        "엔터티 ─ 인스턴스(1:1) ─ 속성(1:1) ─ 속성값(1:1)",
+        "엔터티 ─ 인스턴스(1:M) ─ 속성(1:M) ─ 속성값(1:M)",
+        "엔터티 ─ 인스턴스(M:1) ─ 속성(M:1) ─ 속성값(1:1)",
+        "엔터티 ─ 인스턴스(1:M) ─ 속성(1:M) ─ 속성값(1:1)"
+      ],
+      "correctIndex": 3,
+      "explanation": "왼쪽에서 오른쪽 방향으로 1:M 관계가 두 번 반복되고, 마지막 속성값 방향은 1:1 관계가 된다."
+    },
+    {
+      "subject": "1과목",
+      "number": 7,
+      "title": "다른 엔터티의 주식별자를 참조하는 키로 적절한 것은?",
+      "options": [
+        "내부 식별자",
+        "외래키(FK)",
+        "후보키",
+        "대체키"
+      ],
+      "correctIndex": 1,
+      "explanation": ""
+    },
+    {
+      "subject": "1과목",
+      "number": 8,
+      "title": "식별 관계와 비식별 관계에 대한 설명 중 옳은 것은?",
+      "options": [
+        "식별 관계는 점선, 비식별 관계는 실선으로 표기한다.",
+        "식별 관계와 비식별 관계 모두 실선으로 표기한다.",
+        "식별 관계는 실선, 비식별 관계는 점선으로 표기한다.",
+        "ERD 표기법에 따라 둘을 구분하지 않는다."
+      ],
+      "correctIndex": 2,
+      "explanation": ""
+    },
+    {
+      "subject": "1과목",
+      "number": 9,
+      "title": "교수·학생·과목 간 M:N 관계를 정규화할 때 추가로 생기는 테이블의 수는?\n```\n[ 교수 ] ∋-----|∘ [ 수강 ] ∘|-----∈ [ 학생 ]\n[ 학생 ] ∋-----|∘ [ 이수 ] ∘|-----∈ [ 과목 ]\n```",
+      "options": [
+        "1개",
+        "3개",
+        "2개",
+        "4개"
+      ],
+      "correctIndex": 2,
+      "explanation": "교수-학생, 학생-과목의 M:N 관계가 각각 분해되어 연결 엔터티 두 개가 추가로 생성된다."
+    },
+    {
+      "subject": "1과목",
+      "number": 10,
+      "title": "1정규형·2정규형·3정규형에 대한 설명으로 옳지 않은 것은?",
+      "options": [
+        "3정규화는 1정규화·2정규화를 만족하지 않아도 수행할 수 있다.",
+        "1정규형은 모든 속성이 원자값을 가진다.",
+        "2정규형은 부분 함수 종속을 제거한다.",
+        "3정규형은 이행 함수 종속을 제거한다."
+      ],
+      "correctIndex": 0,
+      "explanation": "3정규화는 반드시 1정규형과 2정규형을 모두 만족한 상태에서만 수행할 수 있다."
+    },
+    {
+      "subject": "2과목",
+      "number": 11,
+      "title": "아래 데이터에 대한 SQL 의 결과로 옳은 것은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>COL1</th><th>COL2</th></tr>\n  <tr><td>NULL</td><td>A</td></tr>\n  <tr><td>1</td><td>B</td></tr>\n  <tr><td>3</td><td>C</td></tr>\n  <tr><td>4</td><td>D</td></tr>\n</table>\n```sql\nSELECT COL1, COL2\nFROM   T\nWHERE  NOT (COL1 = 1 OR COL2 = NULL);\n```",
+      "options": [
+        "모든 행 반환",
+        "COL1 = NULL, COL2 = A",
+        "COL1 = 3, COL2 = C",
+        "COL1 = 4, COL2 = D"
+      ],
+      "correctIndex": 3,
+      "explanation": "COL2 = NULL 은 UNKNOWN 이므로 NOT (1 OR UNKNOWN) = UNKNOWN 또는 FALSE 로 평가되어 대부분의 행이 제외되고, COL1=4 인 행만 남는다."
+    },
+    {
+      "subject": "2과목",
+      "number": 12,
+      "title": "아래 데이터에 대해 결과 값이 나머지와 다른 함수는?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>VAL</th><th>OPT</th></tr>\n  <tr><td>100</td><td>50</td></tr>\n  <tr><td>100</td><td>NULL</td></tr>\n  <tr><td>NULL</td><td>250</td></tr>\n  <tr><td>450</td><td>100</td></tr>\n</table>",
+      "options": [
+        "NVL(VAL, OPT)",
+        "COALESCE(VAL, OPT)",
+        "NULLIF(VAL, OPT)",
+        "CASE WHEN VAL IS NOT NULL THEN VAL ELSE OPT END"
+      ],
+      "correctIndex": 2,
+      "explanation": "NULLIF 는 두 인자가 같으면 NULL, 다르면 첫 번째 값을 반환하므로 나머지와 결과가 다르다."
+    },
+    {
+      "subject": "2과목",
+      "number": 13,
+      "title": "아래 윈도우 절의 실행 결과로 옳은 것은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>ID</th><th>VAL</th></tr>\n  <tr><td>1</td><td>3</td></tr>\n  <tr><td>2</td><td>4</td></tr>\n  <tr><td>3</td><td>5</td></tr>\n  <tr><td>4</td><td>6</td></tr>\n</table>\n```sql\nSELECT VAL, SUM(VAL) OVER (ORDER BY ID\n                           RANGE BETWEEN 2 PRECEDING AND 2 FOLLOWING) AS S\nFROM T;\n```",
+      "options": [
+        "3, 9, 15, 21",
+        "3, 7, 12, 15",
+        "4, 9, 15, 12",
+        "18, 18, 18, 18"
+      ],
+      "correctIndex": 2,
+      "explanation": "원본 기출의 정답 표기를 보존한다. 각 행에 대해 VAL 기준 ±2 범위의 합을 계산한다."
+    },
+    {
+      "subject": "2과목",
+      "number": 14,
+      "title": "아래 계층형 SQL 에서 PRIOR 키워드가 들어갈 위치로 옳은 것은?\n```sql\nSELECT 사원, 매니저\nFROM   EMP\nSTART WITH 매니저 IS NULL\nCONNECT BY ( ㄱ ) 사원 = ( ㄴ ) 매니저;\n```",
+      "options": [
+        "ㄱ 위치",
+        "ㄴ 위치",
+        "ㄱ·ㄴ 위치 모두",
+        "위치 어디도 아님"
+      ],
+      "correctIndex": 1,
+      "explanation": "PRIOR 는 '이전 행' 의 컬럼을 참조하는 연산자이므로 PRIOR 매니저 ↔ 현재 사원이 아니라, PRIOR 사원 ↔ 현재 매니저 형태로 부모 사원의 사번이 자식 매니저와 매칭되도록 배치된다."
+    },
+    {
+      "subject": "2과목",
+      "number": 15,
+      "title": "아래 데이터에 NVL 을 적용했을 때 금액이 올바르게 출력되는 행은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>ID</th><th>금액</th></tr>\n  <tr><td>1</td><td>1000</td></tr>\n  <tr><td>2</td><td>NULL</td></tr>\n  <tr><td>3</td><td>3000</td></tr>\n  <tr><td>4</td><td>NULL</td></tr>\n</table>\n```sql\nSELECT NVL(금액, 0) FROM T;\n```",
+      "options": [
+        "1번 행",
+        "2번 행",
+        "3번 행",
+        "4번 행"
+      ],
+      "correctIndex": 2,
+      "explanation": "원본 기출의 정답 표기를 보존한다."
+    },
+    {
+      "subject": "2과목",
+      "number": 16,
+      "title": "계층형 질의에서 정방향·역방향 탐색 방향을 결정하는 키워드는?",
+      "options": [
+        "PRIOR",
+        "START WITH",
+        "CONNECT BY",
+        "LEVEL"
+      ],
+      "correctIndex": 0,
+      "explanation": "PRIOR 의 위치가 부모-자식 관계를 결정한다."
+    },
+    {
+      "subject": "2과목",
+      "number": 17,
+      "title": "아래 설명에 해당하는 트랜잭션의 특성은?",
+      "options": [
+        "원자성",
+        "일관성",
+        "고립성",
+        "지속성"
+      ],
+      "correctIndex": 2,
+      "explanation": "트랜잭션이 동시에 실행될 경우 다른 트랜잭션에 의해 영향을 받지 않고 독립적으로 실행되어야 한다."
+    },
+    {
+      "subject": "2과목",
+      "number": 18,
+      "title": "서브쿼리에 대한 설명 중 적절하지 않은 것은?",
+      "options": [
+        "서브쿼리는 SELECT, WHERE, FROM 절 등에 사용할 수 있다.",
+        "서브쿼리 테이블의 컬럼을 메인 쿼리에서 직접 사용할 수 있다.",
+        "연관 서브쿼리는 메인 쿼리의 컬럼을 참조한다.",
+        "스칼라 서브쿼리는 단일 값을 반환한다."
+      ],
+      "correctIndex": 1,
+      "explanation": "메인 쿼리는 서브쿼리의 컬럼을 직접 참조할 수 없다."
+    },
+    {
+      "subject": "2과목",
+      "number": 19,
+      "title": "RANK 컬럼에 1, 2, 2, 3, ... 과 같이 순위가 부여되는 윈도우 함수는?",
+      "options": [
+        "DENSE_RANK",
+        "RANK",
+        "ROW_NUMBER",
+        "NTILE"
+      ],
+      "correctIndex": 0,
+      "explanation": ""
+    },
+    {
+      "subject": "2과목",
+      "number": 20,
+      "title": "명령어와 분류가 올바르게 짝지어지지 않은 것은?",
+      "options": [
+        "INSERT — DCL",
+        "SELECT — DQL",
+        "CREATE — DDL",
+        "GRANT — DCL"
+      ],
+      "correctIndex": 0,
+      "explanation": "INSERT 는 DML 이다."
+    },
+    {
+      "subject": "2과목",
+      "number": 21,
+      "title": "아래 설명에 해당하는 집합 연산자는?",
+      "options": [
+        "UNION",
+        "UNION ALL",
+        "INTERSECT",
+        "EXCEPT"
+      ],
+      "correctIndex": 3,
+      "explanation": "첫 번째 결과 집합에서 두 번째 결과 집합에 존재하는 행을 제외하고 반환한다."
+    },
+    {
+      "subject": "2과목",
+      "number": 22,
+      "title": "세 번째 문자가 'L' 인 단어를 찾는 LIKE 패턴으로 옳은 것은?",
+      "options": [
+        "'L%'",
+        "'%L'",
+        "'_ _ L%'",
+        "'L_ _%'"
+      ],
+      "correctIndex": 2,
+      "explanation": "'_' 는 임의의 한 문자, '%' 는 0개 이상의 임의 문자를 의미한다."
+    },
+    {
+      "subject": "2과목",
+      "number": 23,
+      "title": "아래 SQL 의 결과로 옳은 것은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>C1</th><th>C2</th><th>C3</th></tr>\n  <tr><td>1</td><td>2</td><td>3</td></tr>\n  <tr><td>NULL</td><td>2</td><td>3</td></tr>\n  <tr><td>NULL</td><td>NULL</td><td>3</td></tr>\n</table>\n```sql\nSELECT SUM(COALESCE(C1, C2, C3)) FROM TAB1;\n```",
+      "options": [
+        "0",
+        "1",
+        "6",
+        "14"
+      ],
+      "correctIndex": 2,
+      "explanation": "각 행별 COALESCE 결과는 1, 2, 3 이며 SUM = 6 이다."
+    },
+    {
+      "subject": "2과목",
+      "number": 24,
+      "title": "SELECT 문의 실행 순서로 올바른 것은?",
+      "options": [
+        "SELECT - FROM - WHERE - GROUP BY - HAVING - ORDER BY",
+        "FROM - SELECT - WHERE - GROUP BY - HAVING - ORDER BY",
+        "FROM - WHERE - GROUP BY - HAVING - ORDER BY - SELECT",
+        "FROM - WHERE - GROUP BY - HAVING - SELECT - ORDER BY"
+      ],
+      "correctIndex": 3,
+      "explanation": ""
+    },
+    {
+      "subject": "2과목",
+      "number": 25,
+      "title": "아래 두 컬럼 A, B 의 값이 서로 다른 결과가 되는 SQL 은?",
+      "options": [
+        "SUM(SAL) AS A, SUM(SAL) AS B",
+        "AVG(SAL) AS A, AVG(SAL) AS B",
+        "MAX(SAL) AS A, MIN(SAL) AS B",
+        "COUNT(SAL) AS A, COUNT(SAL) AS B"
+      ],
+      "correctIndex": 2,
+      "explanation": ""
+    },
+    {
+      "subject": "2과목",
+      "number": 26,
+      "title": "제품·생산제품·생산라인 엔터티가 있을 때 제품과 생산라인을 직접 조인하면 발생하는 결과는?",
+      "options": [
+        "정상 조인 결과",
+        "중복 제거된 결과",
+        "공집합",
+        "카티션 곱(Cartesian Product)"
+      ],
+      "correctIndex": 3,
+      "explanation": "두 엔터티 사이에 직접 연결 키가 없기 때문에 중간 엔터티 없이 직접 조인하면 카티션 곱이 발생한다."
+    },
+    {
+      "subject": "2과목",
+      "number": 27,
+      "title": "주문한 이력이 없는 회원을 조회하는 SQL 로 옳은 것은?",
+      "options": [
+        "SELECT * FROM 회원 WHERE EXISTS (SELECT 1 FROM 주문 WHERE 주문.회원ID = 회원.회원ID);",
+        "SELECT * FROM 회원 WHERE 회원ID IN (SELECT 회원ID FROM 주문);",
+        "SELECT * FROM 회원 M WHERE NOT EXISTS (SELECT 1 FROM 주문 O WHERE O.회원ID = M.회원ID);",
+        "SELECT * FROM 회원 INNER JOIN 주문 ON 회원.회원ID = 주문.회원ID;"
+      ],
+      "correctIndex": 2,
+      "explanation": ""
+    },
+    {
+      "subject": "2과목",
+      "number": 28,
+      "title": "EMPLOYEE 테이블을 삭제할 때 참조하는 모든 제약 조건을 함께 제거하려면 어떤 옵션을 사용해야 하는가?",
+      "options": [
+        "RESTRICT",
+        "WITH GRANT",
+        "NO ACTION",
+        "CASCADE CONSTRAINTS"
+      ],
+      "correctIndex": 3,
+      "explanation": ""
+    },
+    {
+      "subject": "2과목",
+      "number": 29,
+      "title": "권한(ROLE) 에 대한 설명으로 옳은 것은?",
+      "options": [
+        "CREATE 로 권한을 부여하고 DROP 으로 회수한다.",
+        "INSERT 로 권한을 부여하고 DELETE 로 회수한다.",
+        "GRANT 로 권한을 부여하고 REVOKE 로 회수한다.",
+        "COMMIT 으로 권한을 부여하고 ROLLBACK 으로 회수한다."
+      ],
+      "correctIndex": 2,
+      "explanation": ""
+    },
+    {
+      "subject": "2과목",
+      "number": 30,
+      "title": "CTAS(CREATE TABLE AS SELECT) 로 테이블을 복제할 때 적용되는 제약 조건 중 옳은 설명은?",
+      "options": [
+        "프라이머리 키(PK) 는 복제되지 않는다.",
+        "NOT NULL 조건은 전달되지 않는다.",
+        "CHECK 제약은 전달된다.",
+        "DEFAULT 값은 그대로 전달된다."
+      ],
+      "correctIndex": 0,
+      "explanation": "CTAS 는 NOT NULL 과 컬럼 타입만 전달하며 PK·FK·UNIQUE·CHECK·DEFAULT 등은 복제되지 않는다."
+    },
+    {
+      "subject": "2과목",
+      "number": 31,
+      "title": "총 월급 2,000 이상인 직원을 기준으로 조건을 만족하지 않는 경우 NULL 을 반환하도록 하는 CASE 문으로 옳은 것은?",
+      "options": [
+        "CASE WHEN 총월급 >= 2000 THEN 총월급 ELSE 0 END",
+        "CASE WHEN 총월급 >= 2000 THEN 총월급 END",
+        "CASE WHEN 총월급 < 2000 THEN NULL END",
+        "CASE WHEN 총월급 >= 2000 THEN 총월급 ELSE NULL END"
+      ],
+      "correctIndex": 3,
+      "explanation": ""
+    },
+    {
+      "subject": "2과목",
+      "number": 32,
+      "title": "아래 네 개의 SQL 중 결과가 나머지와 다른 것은?",
+      "options": [
+        "SUM 으로 집계",
+        "AVG 로 집계",
+        "COUNT 로 집계",
+        "네 번째 SQL (나머지와 결과가 다르게 구성된 문항)"
+      ],
+      "correctIndex": 3,
+      "explanation": "원본 기출의 정답 표기를 보존한다. 결과가 상이한 SQL 은 ④번이다."
+    },
+    {
+      "subject": "2과목",
+      "number": 33,
+      "title": "SQL 의 특징으로 볼 수 없는 것은?",
+      "options": [
+        "절차적(Procedural)",
+        "구조적(Structured)",
+        "집합적(Set-based)",
+        "선언적(Declarative)"
+      ],
+      "correctIndex": 0,
+      "explanation": "SQL 은 비절차적 언어이다."
+    },
+    {
+      "subject": "2과목",
+      "number": 34,
+      "title": "아래 집합 연산자 SQL 의 결과로 옳은 것은?\n```sql\nSELECT MAX(연봉) FROM 사원\nUNION\nSELECT MIN(연봉) FROM 사원;\n-- 두 집계 결과를 UNION 으로 결합하여 중복을 제거한 뒤, 전체 합계를 구한다.\n```",
+      "options": [
+        "8895",
+        "8925",
+        "8900",
+        "8950"
+      ],
+      "correctIndex": 1,
+      "explanation": "원본 기출에서 구체적 데이터 값이 유실되어 정답 번호와 값을 보존한다. 두 집계 결과(MAX·MIN)의 합이 8,925가 되는 전제로 출제되었다."
+    },
+    {
+      "subject": "2과목",
+      "number": 35,
+      "title": "아래 ROLLUP 절 중 소계와 총계를 한 번에 나타내기 위해 괄호를 중첩한 구문으로 옳은 것은?",
+      "options": [
+        "ROLLUP(A, B)",
+        "ROLLUP((A), B)",
+        "ROLLUP((A, B))",
+        "ROLLUP(A, (B))"
+      ],
+      "correctIndex": 2,
+      "explanation": "중첩 괄호는 (A, B) 를 하나의 단위로 취급하여 () 총계만 추가로 반환한다."
+    },
+    {
+      "subject": "2과목",
+      "number": 36,
+      "title": "NULL 을 포함한 컬럼에 대한 AVG 계산에 대한 설명으로 옳은 것은?",
+      "options": [
+        "AVG(컬럼) 과 AVG(NVL(컬럼, 0)) 은 항상 같다.",
+        "AVG(컬럼) 은 NULL 을 0 으로 처리하여 계산한다.",
+        "AVG(NVL(컬럼, 0)) 은 NULL 행을 제외하고 계산한다.",
+        "AVG(컬럼) 과 AVG(NVL(컬럼, 0)) 은 NULL 처리 방식이 달라 결과가 다르다."
+      ],
+      "correctIndex": 3,
+      "explanation": "AVG 는 NULL 을 자동 제외하지만 NVL 로 치환하면 분모에 NULL 건도 포함되어 평균이 작아진다."
+    },
+    {
+      "subject": "2과목",
+      "number": 37,
+      "title": "NATURAL JOIN 에 대한 설명으로 옳지 않은 것은?",
+      "options": [
+        "동일 이름을 가진 컬럼이 있으면 자동으로 조인 조건이 된다.",
+        "NATURAL JOIN 은 USING·ON 절과 함께 사용할 수 있다.",
+        "조인 결과에 동일 이름 컬럼은 한 번만 나타난다.",
+        "동일 이름 컬럼이 없으면 CROSS JOIN 과 동일한 결과가 된다."
+      ],
+      "correctIndex": 1,
+      "explanation": "NATURAL JOIN 과 USING·ON 은 동시에 사용할 수 없다."
+    },
+    {
+      "subject": "2과목",
+      "number": 38,
+      "title": "제약 조건 설명 중 옳지 않은 것은?",
+      "options": [
+        "하나의 테이블에 기본키(PK) 는 하나만 설정할 수 있다.",
+        "고유키(UNIQUE) 는 NULL 값을 허용한다.",
+        "CHECK 조건은 TRUE/FALSE 로 판별 가능한 식이어야 한다.",
+        "DEFAULT 는 값이 지정되면 기존 데이터에도 소급 적용된다."
+      ],
+      "correctIndex": 3,
+      "explanation": "DEFAULT 변경은 과거 데이터에 적용되지 않는다."
+    },
+    {
+      "subject": "2과목",
+      "number": 39,
+      "title": "지정한 컬럼의 모든 부분집합 조합에 대해 집계를 산출하는 절은?",
+      "options": [
+        "ROLLUP",
+        "GROUPING SETS",
+        "GROUP BY",
+        "CUBE"
+      ],
+      "correctIndex": 3,
+      "explanation": ""
+    },
+    {
+      "subject": "2과목",
+      "number": 40,
+      "title": "WHERE NOT(COL <= 2) 조건에서 결과로 반환되는 COL 값은? (COL 에 NULL, 1, 2, 3, 4 가 있다고 가정)",
+      "options": [
+        "NULL, 3, 4",
+        "1, 2",
+        "3, 4",
+        "전체 행"
+      ],
+      "correctIndex": 2,
+      "explanation": "NOT (UNKNOWN) 은 UNKNOWN 이므로 NULL 행은 제외된다. COL > 2 를 만족하는 3, 4 만 반환된다."
+    },
+    {
+      "subject": "2과목",
+      "number": 41,
+      "title": "아래 네 가지 JOIN SQL 중 결과 행 수가 나머지와 다른 것은?",
+      "options": [
+        "INNER JOIN",
+        "LEFT OUTER JOIN",
+        "RIGHT OUTER JOIN",
+        "CROSS JOIN"
+      ],
+      "correctIndex": 3,
+      "explanation": "CROSS JOIN 은 두 테이블의 모든 조합을 반환하므로 결과 행 수가 가장 많다."
+    },
+    {
+      "subject": "2과목",
+      "number": 42,
+      "title": "제품·생산제품·생산라인 엔터티가 있을 때 제품과 생산라인을 직접 조인할 경우 발생하는 현상은?",
+      "options": [
+        "정상 조인 결과",
+        "공집합",
+        "중복 제거 결과",
+        "카티션 곱"
+      ],
+      "correctIndex": 3,
+      "explanation": ""
+    },
+    {
+      "subject": "2과목",
+      "number": 43,
+      "title": "NVL, NVL2, NULLIF, COALESCE 함수의 결과로 옳은 것은?",
+      "options": [
+        "NVL(NULL, 'A') 의 결과는 NULL 이다.",
+        "NVL2(NULL, 'A', 'B') 의 결과는 'B' 이다.",
+        "NULLIF('A', 'A') 의 결과는 'A' 이다.",
+        "COALESCE(NULL, NULL, NULL) 의 결과는 'NULL 문자열' 이다."
+      ],
+      "correctIndex": 1,
+      "explanation": ""
+    },
+    {
+      "subject": "2과목",
+      "number": 44,
+      "title": "아래 네 개의 AVG 연산 중 결과가 서로 다른 것은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>COL</th></tr>\n  <tr><td>10</td></tr>\n  <tr><td>NULL</td></tr>\n  <tr><td>20</td></tr>\n</table>",
+      "options": [
+        "AVG 전 SUM(COL) / COUNT(COL)",
+        "SUM(COL) / COUNT(*)",
+        "AVG(NVL(COL, 0))",
+        "AVG(COL)"
+      ],
+      "correctIndex": 3,
+      "explanation": "AVG(COL) 은 NULL 을 제외하여 15 를 반환한다. NVL 처리한 경우는 NULL 을 0 으로 취급하므로 다른 결과가 된다."
+    },
+    {
+      "subject": "2과목",
+      "number": 45,
+      "title": "행의 중복을 제거하는 SELECT 키워드는?",
+      "options": [
+        "DISTINCT",
+        "UNIQUE",
+        "LIMIT",
+        "TOP"
+      ],
+      "correctIndex": 0,
+      "explanation": ""
+    },
+    {
+      "subject": "2과목",
+      "number": 46,
+      "title": "아래 MERGE 구문 실행 후 결과로 옳은 것은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th colspan=\"2\">TGT</th><th colspan=\"2\">SRC</th></tr>\n  <tr><th>ID</th><th>V</th><th>ID</th><th>V</th></tr>\n  <tr><td>1</td><td>a</td><td>1</td><td>b</td></tr>\n  <tr><td>2</td><td>a</td><td>3</td><td>c</td></tr>\n</table>\n```sql\nMERGE INTO TGT T USING SRC S ON (T.ID = S.ID)\nWHEN MATCHED THEN UPDATE SET T.V = S.V\nWHEN NOT MATCHED THEN INSERT (ID, V) VALUES (S.ID, S.V);\n```",
+      "options": [
+        "1.a 2.a",
+        "1.a 2.a 3.c",
+        "1.b 2.a 3.c",
+        "1.b 3.c"
+      ],
+      "correctIndex": 2,
+      "explanation": "ID=1 은 UPDATE, ID=2 유지, ID=3 은 신규 INSERT 된다."
+    },
+    {
+      "subject": "2과목",
+      "number": 47,
+      "title": "YYYYMMDDHH24MISS 포맷에 해당하는 결과는?",
+      "options": [
+        "연도 네 자리만 표시",
+        "연/월/일/시/분/초 14자리 숫자 문자열",
+        "월/일/시/분 10자리",
+        "연/월/일/시/분/초를 포함한 ISO 8601 표기"
+      ],
+      "correctIndex": 1,
+      "explanation": ""
+    },
+    {
+      "subject": "2과목",
+      "number": 48,
+      "title": "아래 SQL 에서 PRIOR 키워드가 들어갈 위치로 옳은 것은?\n```sql\nSELECT 사원, 매니저\nFROM   EMP  -- (ㄱ)\nSTART WITH 매니저 IS NULL  -- (ㄴ)\nCONNECT BY ( ㄷ ) mgr = ( ㄹ ) empno;\n```",
+      "options": [
+        "ㄱ",
+        "ㄴ",
+        "ㄷ",
+        "ㄹ"
+      ],
+      "correctIndex": 2,
+      "explanation": "PRIOR 는 CONNECT BY 조건식의 좌측에 위치해 이전 행을 지정한다."
+    },
+    {
+      "subject": "2과목",
+      "number": 49,
+      "title": "부서 테이블의 한 행을 삭제할 때 이를 참조하는 사원 테이블의 행도 함께 삭제되도록 외래키에 설정해야 할 옵션은?",
+      "options": [
+        "RESTRICT",
+        "PARENT ← CHILD CASCADE",
+        "CHILD ← PARENT CASCADE (CHILD 에 ON DELETE CASCADE 설정)",
+        "NO ACTION"
+      ],
+      "correctIndex": 2,
+      "explanation": "자식 테이블의 외래키에 `ON DELETE CASCADE` 를 설정하면 부모 삭제 시 자식도 자동 삭제된다."
+    },
+    {
+      "subject": "2과목",
+      "number": 50,
+      "title": "아래 설명 중 옳지 않은 것은?",
+      "options": [
+        "기본키는 한 테이블에 두 개 이상일 수 있다.",
+        "고유키는 NULL 값을 허용한다.",
+        "외래키는 부모 테이블의 기본키를 참조한다.",
+        "CHECK 제약 조건은 특정 조건을 만족하는 값만 허용한다."
+      ],
+      "correctIndex": 0,
+      "explanation": "기본키는 한 테이블에 하나만 존재한다. 복합 키로 여러 컬럼을 묶더라도 하나의 기본키 제약이다."
+    }
+  ],
+  "shortAnswerOmitted": []
+}

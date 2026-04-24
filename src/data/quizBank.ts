@@ -1,5 +1,5 @@
 // Auto-generated index. Do not edit by hand — re-run scripts/build-quiz-bank.mjs.
-// 총 374문항, 제45회 ~ 제60회
+// 총 758문항, 제45회 ~ 제60회
 
 export type QuizQuestion = {
   id: number;
@@ -60,91 +60,91 @@ export const EXAM_SETS: { id: string; round: number; label: string; date: string
     "round": 57,
     "label": "제57회",
     "date": "2025년 5월",
-    "count": 22
+    "count": 50
   },
   {
     "id": "round-56",
     "round": 56,
     "label": "제56회",
     "date": "2025년 3월",
-    "count": 29
+    "count": 50
   },
   {
     "id": "round-55",
     "round": 55,
     "label": "제55회",
     "date": "2024년 11월",
-    "count": 27
+    "count": 50
   },
   {
     "id": "round-54",
     "round": 54,
     "label": "제54회",
     "date": "2024년 8월",
-    "count": 21
+    "count": 50
   },
   {
     "id": "round-53",
     "round": 53,
     "label": "제53회",
     "date": "2024년 5월",
-    "count": 9
+    "count": 50
   },
   {
     "id": "round-52",
     "round": 52,
     "label": "제52회",
     "date": "2024년 3월",
-    "count": 13
+    "count": 50
   },
   {
     "id": "round-51",
     "round": 51,
     "label": "제51회",
     "date": "2023년 11월",
-    "count": 10
+    "count": 46
   },
   {
     "id": "round-50",
     "round": 50,
     "label": "제50회",
     "date": "2023년 9월",
-    "count": 16
+    "count": 44
   },
   {
     "id": "round-49",
     "round": 49,
     "label": "제49회",
     "date": "2023년 6월",
-    "count": 13
+    "count": 44
   },
   {
     "id": "round-48",
     "round": 48,
     "label": "제48회",
     "date": "2023년 3월",
-    "count": 12
+    "count": 45
   },
   {
     "id": "round-47",
     "round": 47,
     "label": "제47회",
     "date": "2022년 11월",
-    "count": 13
+    "count": 44
   },
   {
     "id": "round-46",
     "round": 46,
     "label": "제46회",
     "date": "2022년 9월",
-    "count": 7
+    "count": 45
   },
   {
     "id": "round-45",
     "round": 45,
     "label": "제45회",
     "date": "2022년 5월",
-    "count": 32
+    "count": 40
   }
 ];
 

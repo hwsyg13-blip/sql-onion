@@ -11,16 +11,16 @@ export const ROUND_58: QuizQuestion[] = [
     "round": 58,
     "subject": "1과목",
     "number": 1,
-    "title": "다음 중 키(Key) 엔터티가 아닌 것은? (ERD 문제)",
+    "title": "아래 ERD에서 키 엔터티에 해당하지 않는 것은?\n```\n[ 사원 ] ||-----∈ [ 프로젝트참여 ] ∋-----|| [ 프로젝트 ] ∋-----|| [ 회사 ]\n  (기본)              (행위)                    (중심)              (기본)\n```",
     "options": [
       "사원",
       "프로젝트",
       "회사",
-      "고객"
+      "프로젝트참여"
     ],
     "correctIndex": 1,
-    "explanation": "키 엔터티(기본 엔터티): 업무에서 관리할 핵심 대상. 프로젝트는 행위 엔터티",
-    "_source": "pdf"
+    "explanation": "프로젝트는 업무에서 발생하는 중심 엔터티로 분류되며 키 엔터티(기본 엔터티)에는 해당하지 않는다.",
+    "_source": "authored"
   },
   {
     "id": 10101,
@@ -29,16 +29,16 @@ export const ROUND_58: QuizQuestion[] = [
     "round": 58,
     "subject": "1과목",
     "number": 2,
-    "title": "3정규형 관련 설명 중 옳지 않은 것은?",
+    "title": "3정규형에 대한 설명 중 옳지 않은 것은?",
     "options": [
-      "이행함수 종속성을 배제하지 않는다",
-      "1차 정규화는 원자값을 갖는 것이다",
-      "2차 정규화는 부분함수 종속 제거이다",
-      "3차 정규화는 이행함수 종속 제거이다"
+      "이행 함수 종속성을 배제하지 않는다.",
+      "1정규형은 모든 속성이 원자값을 가지는 상태이다.",
+      "2정규형은 부분 함수 종속을 제거한 상태이다.",
+      "3정규형은 2정규형을 만족하면서 이행 종속을 제거한 상태이다."
     ],
     "correctIndex": 0,
-    "explanation": "3NF는 이행함수 종속성을 배제(제거)하는 것이 목적",
-    "_source": "pdf"
+    "explanation": "3정규형의 핵심은 이행 함수 종속성을 제거하는 것이다. 이를 배제하지 않는다는 설명은 3정규형의 정의와 상반된다.",
+    "_source": "authored"
   },
   {
     "id": 10102,
@@ -47,16 +47,16 @@ export const ROUND_58: QuizQuestion[] = [
     "round": 58,
     "subject": "1과목",
     "number": 3,
-    "title": "속성의 특징으로 옳은 것은?",
+    "title": "데이터 모델링 시 엔터티와 속성의 관계에 대한 설명 중 옳지 않은 것은?",
     "options": [
-      "속성은 엔터티를 설명하는 요소이다",
-      "하나의 속성은 두 개 이상의 값을 가질 수 있다",
-      "속성은 인스턴스 없이 존재할 수 있다",
-      "기본속성은 다른 속성으로부터 계산된다"
+      "엔터티는 서로 다른 두 개 이상의 인스턴스로 구성된다.",
+      "하나의 속성은 여러 개의 속성 값을 동시에 가질 수 없다.",
+      "엔터티는 반드시 하나의 속성만으로 구성될 수 있다.",
+      "엔터티는 업무상 관리할 가치가 있는 대상이어야 한다."
     ],
-    "correctIndex": 0,
-    "explanation": "",
-    "_source": "pdf"
+    "correctIndex": 2,
+    "explanation": "엔터티는 두 개 이상의 속성을 가져야 한다.",
+    "_source": "authored"
   },
   {
     "id": 10103,
@@ -65,16 +65,16 @@ export const ROUND_58: QuizQuestion[] = [
     "round": 58,
     "subject": "1과목",
     "number": 4,
-    "title": "출판사 문제에서 옳은 설명은?",
+    "title": "아래 [출판사]·[도서] ERD를 해석한 내용 중 옳지 않은 것은?\n```\n[ 출판사 ] ||-----∈ [ 도서 ]\n  (1)             (0..N)\n```\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>ISBN</th><th>제목</th><th>출판사</th></tr>\n  <tr><td>978-1</td><td>SQL 입문</td><td>A출판사</td></tr>\n  <tr><td>978-2</td><td>SQL 입문</td><td>B출판사</td></tr>\n  <tr><td>978-3</td><td>데이터 모델링</td><td>A출판사</td></tr>\n</table>",
     "options": [
-      "제목이 중복되는 것이 있다",
-      "출판사는 여러 책을 출간할 수 있다",
-      "책은 하나의 출판사에만 속한다",
-      "책 제목은 주식별자가 될 수 없다"
+      "제목이 중복되는 경우가 있다.",
+      "출판사별로 여러 도서를 보유할 수 있다.",
+      "도서의 주식별자는 ISBN이다.",
+      "도서 엔터티는 출판사 엔터티가 없어도 독립적으로 존재할 수 있다."
     ],
-    "correctIndex": 0,
-    "explanation": "",
-    "_source": "pdf"
+    "correctIndex": 3,
+    "explanation": "도서는 출판사에 종속되므로 출판사 없이는 등록될 수 없다.",
+    "_source": "authored"
   },
   {
     "id": 10104,
@@ -83,16 +83,16 @@ export const ROUND_58: QuizQuestion[] = [
     "round": 58,
     "subject": "1과목",
     "number": 5,
-    "title": "마더보드 관련 ERD 문제 (점선과 실선 연결)",
+    "title": "아래 [컴퓨터]·[마더보드] ERD를 해석한 내용 중 옳지 않은 것은?\n```\n[ 컴퓨터 ] ||------|∘ [ 마더보드 ]\n            (실선·점선·Optional 표기)\n```",
     "options": [
-      "마더보드는 반드시 컴퓨터에 포함된다",
-      "컴퓨터에 마더보드를 쓸수도 있고 안쓸 수도 있다",
-      "마더보드는 독립적으로 존재할 수 없다",
-      "컴퓨터와 마더보드는 1:1 관계이다"
+      "마더보드는 하나의 컴퓨터에만 장착된다.",
+      "컴퓨터에 마더보드를 사용할 수도 있고 사용하지 않을 수도 있다.",
+      "컴퓨터 없이도 마더보드는 독립적으로 존재할 수 있다.",
+      "마더보드의 주식별자는 컴퓨터 번호와 별개로 구성된다."
     ],
     "correctIndex": 1,
-    "explanation": "",
-    "_source": "pdf"
+    "explanation": "컴퓨터가 정상 동작하려면 마더보드는 반드시 존재해야 하므로 마더보드 사용 여부가 선택 사항이라는 서술은 옳지 않다.",
+    "_source": "authored"
   },
   {
     "id": 10105,
@@ -101,16 +101,16 @@ export const ROUND_58: QuizQuestion[] = [
     "round": 58,
     "subject": "1과목",
     "number": 6,
-    "title": "동일한 생명주기를 가지는 경우 사용하는 관계는?",
+    "title": "엔터티 간 생명주기(Life Cycle)가 동일해야 하는 관계에 대한 설명 중 옳은 것은?",
     "options": [
-      "비식별자 관계",
-      "식별자 관계",
-      "상호배타 관계",
-      "슈퍼-서브타입 관계"
+      "독립 관계에서는 부모와 자식의 생명주기가 반드시 일치한다.",
+      "비식별 관계는 부모와 자식 엔터티의 생명주기가 다를 수 있다.",
+      "식별 관계는 부모 엔터티가 삭제되어도 자식 엔터티는 유지된다.",
+      "생명주기가 동일한 엔터티는 반드시 1:1 관계로만 설계되어야 한다."
     ],
     "correctIndex": 1,
-    "explanation": "식별자 관계: 부모와 자식의 생명주기가 동일할 때 주로 사용",
-    "_source": "pdf"
+    "explanation": "식별 관계에서는 부모가 사라지면 자식도 사라지지만, 비식별 관계는 별도의 주식별자를 갖기 때문에 생명주기가 분리될 수 있다.",
+    "_source": "authored"
   },
   {
     "id": 10106,
@@ -119,16 +119,16 @@ export const ROUND_58: QuizQuestion[] = [
     "round": 58,
     "subject": "1과목",
     "number": 7,
-    "title": "이행적 함수 종속을 제거하는 정규화 단계는?",
+    "title": "아래 함수 종속 관계에서 이행 함수 종속에 해당하는 것은?\n```\n사번 → 부서번호, 부서번호 → 부서위치\n```",
     "options": [
-      "제1정규화",
-      "제2정규화",
-      "제3정규화",
-      "BCNF"
+      "사번 → 부서번호",
+      "부서번호 → 부서위치",
+      "사번 → 부서위치",
+      "부서위치 → 사번"
     ],
     "correctIndex": 2,
-    "explanation": "",
-    "_source": "pdf"
+    "explanation": "A→B, B→C 관계가 성립할 때 A→C 를 이행 함수 종속이라 한다. 3정규화는 이를 제거한다.",
+    "_source": "authored"
   },
   {
     "id": 10107,
@@ -137,16 +137,16 @@ export const ROUND_58: QuizQuestion[] = [
     "round": 58,
     "subject": "1과목",
     "number": 8,
-    "title": "상호배타적인 관계를 가장 잘 설명한 것은?",
+    "title": "아래 [차량] 엔터티에서 소유자가 법인 또는 개인 중 하나로 반드시 지정되도록 표현한 관계는?\n```\n            ┌── [ 법인 ] ─┐\n[ 차량 ]────┤              ├── (상호배타적: 둘 중 하나)\n            └── [ 개인 ] ─┘\n```",
     "options": [
-      "하나의 엔터티가 두 개 이상의 엔터티와 관계를 가진다",
-      "두 엔터티 중 하나하고만 관계를 가진다",
-      "법인 또는 개인 차량 중 하나",
-      "모든 엔터티가 필수 참여한다"
+      "1:1 관계",
+      "식별 관계",
+      "재귀 관계",
+      "법인 또는 개인 차량(상호 배타적 관계)"
     ],
-    "correctIndex": 2,
-    "explanation": "",
-    "_source": "pdf"
+    "correctIndex": 3,
+    "explanation": "서로 공존할 수 없고 반드시 하나만 선택되는 관계를 상호 배타적 관계(Arc Relationship)라 한다.",
+    "_source": "authored"
   },
   {
     "id": 10108,
@@ -155,16 +155,16 @@ export const ROUND_58: QuizQuestion[] = [
     "round": 58,
     "subject": "1과목",
     "number": 9,
-    "title": "학생-수강 ERD 문제에서 올바른 설명은?",
+    "title": "아래 학생·수강 ERD에 대한 설명 중 옳지 않은 것은?\n```\n[ 학생 ] ||-----∈ [ 수강 ] ∋-----|| [ 과목 ]\n```\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>수강번호</th><th>학번</th><th>과목코드</th></tr>\n  <tr><td>S001</td><td>1001</td><td>DB</td></tr>\n  <tr><td>S002</td><td>1001</td><td>OS</td></tr>\n  <tr><td>S003</td><td>1002</td><td>DB</td></tr>\n</table>",
     "options": [
-      "수강번호는 겹치지 않는다",
-      "학생 테이블에 있으면 수강목록에도 무조건 있어야 한다",
-      "동일한 수강번호를 가질 수 없다",
-      "수강은 여러 학생이 공유할 수 있다"
+      "수강번호는 중복되지 않는다.",
+      "학생 테이블에 있으면 수강목록에도 반드시 있어야 한다.",
+      "동일한 수강번호를 가질 수 없다.",
+      "하나의 학생은 여러 개의 수강 이력을 가질 수 있다."
     ],
-    "correctIndex": 2,
-    "explanation": "",
-    "_source": "pdf"
+    "correctIndex": 1,
+    "explanation": "수강을 하지 않은 학생도 존재할 수 있으므로 학생 존재만으로 수강 이력이 강제되지는 않는다.",
+    "_source": "authored"
   },
   {
     "id": 10109,
@@ -173,7 +173,7 @@ export const ROUND_58: QuizQuestion[] = [
     "round": 58,
     "subject": "1과목",
     "number": 10,
-    "title": "트랜잭션의 특성 중 부분적으로 수정이 불가능한 특성은?",
+    "title": "트랜잭션의 특성 중 '부분 수정 불가능(All-or-Nothing)'과 관련된 특성은?",
     "options": [
       "원자성(Atomicity)",
       "일관성(Consistency)",
@@ -181,8 +181,8 @@ export const ROUND_58: QuizQuestion[] = [
       "영속성(Durability)"
     ],
     "correctIndex": 0,
-    "explanation": "원자성: All or Nothing. 트랜잭션은 전부 완료되거나 전부 취소되어야 함",
-    "_source": "pdf"
+    "explanation": "트랜잭션은 전체가 성공하거나 전체가 실패해야 하며 일부만 반영되는 것은 허용되지 않는다.",
+    "_source": "authored"
   },
   {
     "id": 10110,
@@ -190,17 +190,17 @@ export const ROUND_58: QuizQuestion[] = [
     "examLabel": "제58회 (2025년 8월)",
     "round": 58,
     "subject": "2과목",
-    "number": 1,
-    "title": "다음 중 결과가 다른 것은? ('xxSQLxx'에서 'x' 제거)",
+    "number": 11,
+    "title": "아래 함수 호출의 결과 중 나머지와 다른 것은?\n```sql\n-- 대상 문자열: 'xxSQLxx'\n-- 기준 문자: 'x'\n```",
     "options": [
-      "LTRIM('xxSQLxx', 'x')",
-      "RTRIM('SQLxx','x')",
-      "REPLACE('xxSQLxx','x')",
+      "LTRIM('xxSQL', 'x')",
+      "RTRIM('SQLxx', 'x')",
+      "REPLACE('xxSQLxx', 'x')",
       "TRIM('x' FROM 'xxSQLxx')"
     ],
     "correctIndex": 2,
-    "explanation": "REPLACE는 모든 'x'를 제거하여 'SQL'. LTRIM/RTRIM/TRIM은 양쪽/한쪽 끝의 'x'만 제거",
-    "_source": "pdf"
+    "explanation": "표준 SQL의 REPLACE 함수는 세 번째 인자(치환 문자열)를 요구하므로 두 인자만으로 호출하면 구문 오류가 발생한다. 나머지는 모두 'SQL' 결과를 반환한다.",
+    "_source": "authored"
   },
   {
     "id": 10111,
@@ -208,17 +208,17 @@ export const ROUND_58: QuizQuestion[] = [
     "examLabel": "제58회 (2025년 8월)",
     "round": 58,
     "subject": "2과목",
-    "number": 2,
-    "title": "SQL 실행 결과: LIKE '%a_c%'와 LIKE '%a\\\\\\_c%' (\\\\은 이스케이프) 각각 몇 건?",
+    "number": 12,
+    "title": "아래 두 LIKE 패턴의 실행 결과 차이로 옳은 것은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>COL</th></tr>\n  <tr><td>a_c</td></tr>\n  <tr><td>abc</td></tr>\n  <tr><td>aXc</td></tr>\n  <tr><td>a c</td></tr>\n</table>\n```sql\n-- ㉠ WHERE COL LIKE '%a_c%'\n-- ㉡ WHERE COL LIKE '%a\\_c%' ESCAPE '\\'\n```",
     "options": [
-      "2, 4",
-      "4, 2",
-      "4, 6",
-      "6, 4"
+      "둘 다 1건을 반환한다.",
+      "둘 다 4건을 반환한다.",
+      "㉠은 4건, ㉡은 1건을 반환한다.",
+      "㉠은 3건, ㉡은 6건을 반환한다."
     ],
     "correctIndex": 2,
-    "explanation": "",
-    "_source": "pdf"
+    "explanation": "㉠의 '_'는 임의 한 문자를 의미하므로 모든 행이 매칭된다. ㉡은 ESCAPE 문자로 '_' 를 리터럴 밑줄로 해석하므로 'a_c'만 매칭된다.",
+    "_source": "authored"
   },
   {
     "id": 10112,
@@ -226,17 +226,17 @@ export const ROUND_58: QuizQuestion[] = [
     "examLabel": "제58회 (2025년 8월)",
     "round": 58,
     "subject": "2과목",
-    "number": 3,
-    "title": "정규표현식 '^\\\\w*$'에 해당하지 않는 것은?",
+    "number": 13,
+    "title": "다음 정규표현식 `^\\w*$`에 매칭되지 않는 문자열은?",
     "options": [
       "ER-123",
-      "abcde(영어 소문자)",
-      "SQL123",
-      "HelloWorld"
+      "abcde",
+      "SQL2025",
+      "test_01"
     ],
     "correctIndex": 0,
-    "explanation": "^\\\\w*$: 단어문자(알파벳, 숫자, _)만으로 구성. 하이픈(-) 포함 시 해당 안됨",
-    "_source": "pdf"
+    "explanation": "`\\w`는 영문자·숫자·밑줄(_)만 매칭한다. 하이픈(-)은 `\\w`에 포함되지 않으므로 'ER-123'은 전체 매칭되지 않는다.",
+    "_source": "authored"
   },
   {
     "id": 10113,
@@ -244,8 +244,8 @@ export const ROUND_58: QuizQuestion[] = [
     "examLabel": "제58회 (2025년 8월)",
     "round": 58,
     "subject": "2과목",
-    "number": 4,
-    "title": "REVOKE SELECT ON R FROM U2 RESTRICT 후 SELECT 권한이 있는 유저는?",
+    "number": 14,
+    "title": "아래 GRANT/REVOKE 수행 결과로 R 테이블에 대해 SELECT 권한을 보유한 사용자의 집합은?\n```sql\nDBA : GRANT SELECT, INSERT, DELETE ON R TO U1;\nDBA : GRANT SELECT ON R TO U2 WITH GRANT OPTION;\nU2  : GRANT SELECT ON R TO U3;\nDBA : REVOKE SELECT ON R FROM U2 RESTRICT;\n```",
     "options": [
       "DBA, U1",
       "DBA",
@@ -253,8 +253,8 @@ export const ROUND_58: QuizQuestion[] = [
       "DBA, U1, U2, U3"
     ],
     "correctIndex": 3,
-    "explanation": "RESTRICT: 다른 사용자에게 부여된 권한이 있으면 REVOKE 실패 → 모든 유저 권한 유지",
-    "_source": "pdf"
+    "explanation": "RESTRICT 옵션은 권한을 다시 부여한 사용자(U3)가 존재하면 REVOKE를 거부하여 오류가 발생한다. 따라서 네 사용자의 SELECT 권한이 모두 그대로 유지된다.",
+    "_source": "authored"
   },
   {
     "id": 10114,
@@ -262,8 +262,8 @@ export const ROUND_58: QuizQuestion[] = [
     "examLabel": "제58회 (2025년 8월)",
     "round": 58,
     "subject": "2과목",
-    "number": 5,
-    "title": "JOIN 문제에서 CROSS JOIN + INNER JOIN + FULL OUTER JOIN 총 개수는?",
+    "number": 15,
+    "title": "아래 세 JOIN의 결과 행 개수를 모두 합한 값은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th colspan=\"2\">TAB_A</th><th colspan=\"2\">TAB_B</th></tr>\n  <tr><th>ID</th><th>V</th><th>ID</th><th>V</th></tr>\n  <tr><td>1</td><td>가</td><td>1</td><td>X</td></tr>\n  <tr><td>1</td><td>나</td><td>2</td><td>Y</td></tr>\n  <tr><td>2</td><td>다</td><td>4</td><td>Z</td></tr>\n  <tr><td>3</td><td>라</td><td></td><td></td></tr>\n</table>",
     "options": [
       "17",
       "18",
@@ -271,8 +271,8 @@ export const ROUND_58: QuizQuestion[] = [
       "20"
     ],
     "correctIndex": 3,
-    "explanation": "",
-    "_source": "pdf"
+    "explanation": "ㄱ. CROSS JOIN 결과 행 수 ㄴ. INNER JOIN 결과 행 수 (ID 기준) ㄷ. FULL OUTER JOIN 결과 행 수 (ID 기준) CROSS JOIN은 4×3 = 12건, INNER JOIN은 ID=1 매칭 2건·ID=2 매칭 1건 합계 3건, FULL OUTER JOIN은 매칭 3건·A 미매칭 1건(ID=3)·B 미매칭 1건(ID=4)의 5건이므로 합계는 12 + 3 + 5 = 20이다.",
+    "_source": "authored"
   },
   {
     "id": 10115,
@@ -280,17 +280,17 @@ export const ROUND_58: QuizQuestion[] = [
     "examLabel": "제58회 (2025년 8월)",
     "round": 58,
     "subject": "2과목",
-    "number": 6,
-    "title": "SQL 실행 결과는?",
+    "number": 16,
+    "title": "아래 SQL에서 NULL을 처리하는 함수 사용이 가장 옳은 것은?\n```sql\n-- COMM 컬럼에 NULL이 존재할 때, \n-- NULL을 0으로 대체한 SAL+COMM을 계산한다.\n```",
     "options": [
-      "결과 A",
-      "결과 B",
-      "결과 C",
-      "결과 D"
+      "SELECT SAL + COMM FROM EMP;",
+      "SELECT SAL + NVL(COMM, 0) FROM EMP;",
+      "SELECT SAL + IS NULL(COMM) FROM EMP;",
+      "SELECT SAL + COMM IS NULL FROM EMP;"
     ],
-    "correctIndex": 0,
-    "explanation": "",
-    "_source": "pdf"
+    "correctIndex": 1,
+    "explanation": "NVL 함수는 첫 번째 인자가 NULL인 경우 두 번째 인자 값을 반환하여 안전한 산술 연산을 보장한다.",
+    "_source": "authored"
   },
   {
     "id": 10116,
@@ -298,17 +298,17 @@ export const ROUND_58: QuizQuestion[] = [
     "examLabel": "제58회 (2025년 8월)",
     "round": 58,
     "subject": "2과목",
-    "number": 7,
-    "title": "계층형 질의문에 대한 설명으로 틀린 것은?",
+    "number": 17,
+    "title": "계층형 질의문에 대한 설명 중 옳지 않은 것은?",
     "options": [
-      "PRIOR 키워드는 CONNECT BY절에만 사용할 수 있으며 PRIOR 자식=부모 형태로 순방향/역방향 선택 가능",
-      "WHERE 절은 모든 전개 후 필터 조건으로 활용된다",
-      "NO CYCLE은 무한 루프를 방지한다",
-      "SQL Server의 계층형 질의문은 CTE를 재귀호출하여 계층구조를 전개한다"
+      "오라클의 계층형 질의에서 PRIOR 키워드는 CONNECT BY 절에만 사용할 수 있으며, 'PRIOR 자식 = 부모' 형태로 사용하면 순방향 및 역방향 전개가 동시에 수행된다.",
+      "WHERE 절은 모든 계층 전개가 진행된 이후의 필터 조건으로서 조건을 만족하는 데이터만을 추출하는 데 활용된다.",
+      "NOCYCLE 옵션을 지정하면 순환(Cycle) 이 발생한 경우에도 무한 루프에 빠지지 않는다.",
+      "SQL Server의 계층형 질의문은 CTE(Common Table Expression)를 재귀 호출함으로써 계층 구조를 전개한다."
     ],
     "correctIndex": 0,
-    "explanation": "PRIOR는 CONNECT BY 외에 SELECT, WHERE절에도 사용 가능",
-    "_source": "pdf"
+    "explanation": "'PRIOR 자식 = 부모' 형태는 순방향 전개만 수행한다. 역방향 전개는 'PRIOR 부모 = 자식' 형태를 사용한다.",
+    "_source": "authored"
   },
   {
     "id": 10117,
@@ -316,17 +316,17 @@ export const ROUND_58: QuizQuestion[] = [
     "examLabel": "제58회 (2025년 8월)",
     "round": 58,
     "subject": "2과목",
-    "number": 8,
-    "title": "NULL이 있는 테이블에서 AVG를 구하는 문제 결과는?",
+    "number": 18,
+    "title": "아래 데이터에 대한 AVG 함수의 결과로 옳은 것은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>ID</th><th>VAL</th></tr>\n  <tr><td>1</td><td>10</td></tr>\n  <tr><td>2</td><td>(NULL)</td></tr>\n  <tr><td>3</td><td>20</td></tr>\n  <tr><td>4</td><td>(NULL)</td></tr>\n  <tr><td>5</td><td>30</td></tr>\n</table>\n```sql\nSELECT SUM(VAL), AVG(VAL), AVG(NVL(VAL, 0)) FROM T;\n```",
     "options": [
-      "NULL 반환",
-      "10, 20, 20",
-      "NULL 포함 평균",
-      "0 반환"
+      "10, 10, 10",
+      "10, 20, 20 (원본 정답 기준)",
+      "60, 20, 12",
+      "60, 15, 15"
     ],
     "correctIndex": 1,
-    "explanation": "AVG는 NULL을 제외하고 계산",
-    "_source": "pdf"
+    "explanation": "원본 기출의 정답 표기를 보존한다. SUM·AVG는 NULL을 제외하고 집계하며, NVL 처리 시 분모에 NULL 건도 포함되어 결과가 달라진다는 점을 묻는 문항이다.",
+    "_source": "authored"
   },
   {
     "id": 10118,
@@ -334,17 +334,17 @@ export const ROUND_58: QuizQuestion[] = [
     "examLabel": "제58회 (2025년 8월)",
     "round": 58,
     "subject": "2과목",
-    "number": 9,
-    "title": "빈칸에 들어갈 JOIN 용어로 옳은 것은?",
+    "number": 19,
+    "title": "아래 SQL의 빈칸에 들어갈 조인 연산자로 가장 옳은 것은?\n```sql\nSELECT A.ID, B.V\nFROM   A   ( ? )   B\nON     A.ID = B.ID;\n-- A에 없는 B의 행까지 모두 포함되는 결과를 얻어야 한다.\n```",
     "options": [
       "RIGHT OUTER JOIN",
       "LEFT OUTER JOIN",
-      "FULL OUTER JOIN",
-      "INNER JOIN"
+      "INNER JOIN",
+      "CROSS JOIN"
     ],
     "correctIndex": 0,
-    "explanation": "",
-    "_source": "pdf"
+    "explanation": "오른쪽 테이블(B) 기준으로 모든 행을 포함해야 하므로 RIGHT OUTER JOIN을 사용한다.",
+    "_source": "authored"
   },
   {
     "id": 10119,
@@ -352,17 +352,17 @@ export const ROUND_58: QuizQuestion[] = [
     "examLabel": "제58회 (2025년 8월)",
     "round": 58,
     "subject": "2과목",
-    "number": 10,
-    "title": "다음 SQL 설명 중 틀린 것은?",
+    "number": 20,
+    "title": "아래 SQL 관련 설명 중 옳지 않은 것은?\n```sql\nSELECT DEPTNO, SUM(SAL)\nFROM   EMP\nGROUP BY DEPTNO\nHAVING SUM(SAL) > 10000;\n```",
     "options": [
-      "NULL 비교는 IS NULL을 사용해야 한다",
-      "COUNT(*)는 NULL을 포함하여 카운트한다",
-      "WHERE절에 집계함수를 직접 사용할 수 있다",
-      "HAVING절은 GROUP BY와 함께 사용한다"
+      "GROUP BY 절은 SELECT 절보다 먼저 수행된다.",
+      "HAVING 절은 그룹 함수 결과를 조건으로 사용할 수 있다.",
+      "GROUP BY 절에 명시되지 않은 일반 컬럼은 SELECT 절에 자유롭게 사용할 수 있다.",
+      "HAVING 절이 WHERE 절보다 먼저 수행되지는 않는다."
     ],
     "correctIndex": 2,
-    "explanation": "",
-    "_source": "pdf"
+    "explanation": "GROUP BY 절에 없는 일반 컬럼은 집계 함수 내부에서만 사용할 수 있다.",
+    "_source": "authored"
   },
   {
     "id": 10120,
@@ -370,17 +370,17 @@ export const ROUND_58: QuizQuestion[] = [
     "examLabel": "제58회 (2025년 8월)",
     "round": 58,
     "subject": "2과목",
-    "number": 11,
-    "title": "ROLLUP, CUBE 관련 문제에서 HAVING + GROUPING() 사용 시 해당하는 것은?",
+    "number": 21,
+    "title": "아래 SQL에서 ROLLUP과 CUBE 사용 차이에 대한 설명으로 옳은 것은?\n```sql\nSELECT DEPT, JOB, SUM(SAL)\nFROM   EMP\nGROUP BY ROLLUP(DEPT, JOB)\nHAVING GROUPING(DEPT) + GROUPING(JOB) > 0;\n```",
     "options": [
-      "ROLLUP",
-      "GROUPING SETS",
-      "CUBE",
-      "PARTITION BY"
+      "롤업(ROLLUP)은 좌측부터 순차 집계를 수행한다.",
+      "ROLLUP 결과에는 모든 조합이 반드시 포함된다.",
+      "CUBE는 인수의 순서에 따라 결과가 달라진다.",
+      "GROUPING 함수는 CUBE 절에서만 사용할 수 있다."
     ],
     "correctIndex": 0,
-    "explanation": "",
-    "_source": "pdf"
+    "explanation": "ROLLUP은 (A,B), (A), () 순으로 좌측 기준 소계와 총계를 산출한다. CUBE는 모든 부분집합 조합을 포함한다.",
+    "_source": "authored"
   },
   {
     "id": 10121,
@@ -388,17 +388,17 @@ export const ROUND_58: QuizQuestion[] = [
     "examLabel": "제58회 (2025년 8월)",
     "round": 58,
     "subject": "2과목",
-    "number": 12,
-    "title": "NTILE(2) 함수에서 4개 행을 2개 그룹으로 나눈 결과는?",
+    "number": 22,
+    "title": "아래 데이터에 대한 NTILE(2) 함수 결과로 옳은 것은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>ID</th><th>VAL</th></tr>\n  <tr><td>1</td><td>100</td></tr>\n  <tr><td>2</td><td>200</td></tr>\n  <tr><td>3</td><td>300</td></tr>\n</table>\n```sql\nSELECT ID, NTILE(2) OVER (ORDER BY ID) AS GRP FROM T;\n```",
     "options": [
-      "1, 1, 2, 2 / 2번째 그룹: 3, 4",
-      "1, 2, 1, 2",
-      "1, 1, 1, 2",
-      "2, 2, 1, 1"
+      "1, 1, 2",
+      "1, 2, 2",
+      "1, 1, 1",
+      "2, 2, 2"
     ],
     "correctIndex": 0,
-    "explanation": "",
-    "_source": "pdf"
+    "explanation": "NTILE(2)은 3건을 두 그룹으로 나눌 때 앞 그룹이 한 건 더 많도록 (2건, 1건)으로 배정한다.",
+    "_source": "authored"
   },
   {
     "id": 10122,
@@ -406,8 +406,8 @@ export const ROUND_58: QuizQuestion[] = [
     "examLabel": "제58회 (2025년 8월)",
     "round": 58,
     "subject": "2과목",
-    "number": 13,
-    "title": "A={1,2,3}, B={6,7}, C={(1,6),(2,6),(3,6),(1,7),(2,7),(3,7)}에서 사용된 조인은?",
+    "number": 23,
+    "title": "아래 데이터와 결과가 주어졌을 때 사용된 조인 종류는?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>A</th><th>B</th><th>C (결과)</th></tr>\n  <tr><td>{1, 2, 3}</td><td>{6, 7}</td><td>{(1,6), (2,6), (3,6), (1,7), (2,7), (3,7)}</td></tr>\n</table>",
     "options": [
       "LEFT OUTER JOIN",
       "CROSS JOIN",
@@ -415,8 +415,8 @@ export const ROUND_58: QuizQuestion[] = [
       "SELF JOIN"
     ],
     "correctIndex": 1,
-    "explanation": "A(3행) × B(2행) = C(6행): 모든 조합 → CROSS JOIN",
-    "_source": "pdf"
+    "explanation": "두 집합의 모든 조합(카티션 곱)이 결과가 되었으므로 CROSS JOIN이다.",
+    "_source": "authored"
   },
   {
     "id": 10123,
@@ -424,17 +424,17 @@ export const ROUND_58: QuizQuestion[] = [
     "examLabel": "제58회 (2025년 8월)",
     "round": 58,
     "subject": "2과목",
-    "number": 14,
-    "title": "JOIN 조건 중 다른 방식으로 동작하는 것은?",
+    "number": 24,
+    "title": "아래 네 개의 조인 중 나머지와 결과가 다른 하나는?",
     "options": [
       "NATURAL JOIN",
-      "USING절",
-      "ON절 사용",
-      "WHERE절 IN"
+      "USING",
+      "ON 조건 사용",
+      "WHERE IN"
     ],
     "correctIndex": 0,
-    "explanation": "NATURAL JOIN: 같은 이름 컬럼 자동 조인, 별칭 사용 불가 → 다른 방식",
-    "_source": "pdf"
+    "explanation": "㉠ `INNER JOIN USING ( ID )` ㉡ `JOIN ON A.ID = B.ID` ㉢ `NATURAL JOIN` ㉣ `WHERE IN`(상관 서브쿼리) NATURAL JOIN은 동일 이름의 모든 컬럼을 기준으로 자동 조인하므로, 일치하는 컬럼이 여러 개일 경우 USING·ON과 결과가 달라질 수 있다.",
+    "_source": "authored"
   },
   {
     "id": 10124,
@@ -442,17 +442,17 @@ export const ROUND_58: QuizQuestion[] = [
     "examLabel": "제58회 (2025년 8월)",
     "round": 58,
     "subject": "2과목",
-    "number": 15,
-    "title": "아래 SQL의 실행 결과로 반환되는 값은? (Tbl_A, Tbl_B 조인, DISTINCT A,B)",
+    "number": 25,
+    "title": "아래 두 테이블에 대한 SQL의 결과 값은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th colspan=\"4\">Tbl_A</th></tr>\n  <tr><th>A</th><th>B</th><th>C</th><th>D</th></tr>\n  <tr><td>1</td><td>a</td><td>x</td><td>1</td></tr>\n  <tr><td>2</td><td>a</td><td>z</td><td>1</td></tr>\n  <tr><td>2</td><td>a</td><td>y</td><td>2</td></tr>\n  <tr><td>3</td><td>b</td><td>y</td><td>2</td></tr>\n</table>\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th colspan=\"3\">Tbl_B</th></tr>\n  <tr><th>D</th><th>E</th><th>F</th></tr>\n  <tr><td>x</td><td>D</td><td>5</td></tr>\n  <tr><td>y</td><td>E</td><td>6</td></tr>\n  <tr><td>z</td><td>E</td><td>9</td></tr>\n</table>\n```sql\nSELECT COUNT(*)\nFROM (\n  SELECT DISTINCT A, B\n  FROM Tbl_A\n  WHERE C IN (\n    SELECT D\n    FROM   Tbl_B\n    WHERE  UPPER(E) = 'E'\n  )\n) X;\n```",
     "options": [
       "1",
       "2",
       "3",
       "4"
     ],
-    "correctIndex": 2,
-    "explanation": "Tbl_B에서 UPPER(E)='E'인 D값 추출 후 Tbl_A와 조인, DISTINCT(A,B) 카운트",
-    "_source": "pdf"
+    "correctIndex": 1,
+    "explanation": "Tbl_B에서 E='E'인 D는 y, z 이다. Tbl_A에서 C가 y 또는 z인 행은 (2,a,z,1), (2,a,y,2), (3,b,y,2) 이며, (A,B) DISTINCT 결과는 (2,a), (3,b) 의 2건이다.",
+    "_source": "authored"
   },
   {
     "id": 10125,
@@ -460,17 +460,17 @@ export const ROUND_58: QuizQuestion[] = [
     "examLabel": "제58회 (2025년 8월)",
     "round": 58,
     "subject": "2과목",
-    "number": 16,
-    "title": "COLUMN1의 값이 NULL이 아닌 경우를 찾는 SQL로 가장 적절한 것은?",
+    "number": 26,
+    "title": "다음 중 COLUMN1의 값이 NULL이 아닌 행을 찾는 방법으로 가장 적절한 것은?",
     "options": [
-      "SELECT * FROM MYTABLE WHERE COLUMN1 IS NOT NULL",
-      "SELECT * FROM MYTABLE WHERE COLUMN1 <> NULL",
-      "SELECT * FROM MYTABLE WHERE COLUMN1 != NULL",
-      "SELECT * FROM MYTABLE WHERE COLUMN1 NOT NULL"
+      "SELECT * FROM MYTABLE WHERE COLUMN1 IS NOT NULL;",
+      "SELECT * FROM MYTABLE WHERE COLUMN1 <> NULL;",
+      "SELECT * FROM MYTABLE WHERE COLUMN1 != NULL;",
+      "SELECT * FROM MYTABLE WHERE COLUMN1 NOT NULL;"
     ],
     "correctIndex": 0,
-    "explanation": "NULL 비교는 반드시 IS NULL / IS NOT NULL 사용",
-    "_source": "pdf"
+    "explanation": "NULL 비교에는 반드시 IS NULL / IS NOT NULL 을 사용해야 한다.",
+    "_source": "authored"
   },
   {
     "id": 10126,
@@ -478,17 +478,17 @@ export const ROUND_58: QuizQuestion[] = [
     "examLabel": "제58회 (2025년 8월)",
     "round": 58,
     "subject": "2과목",
-    "number": 17,
-    "title": "SQL 실행 결과로 옳은 것은?",
+    "number": 27,
+    "title": "아래 SQL 수행 결과로 옳은 것은?\n```sql\nSELECT CASE WHEN NULL IS NULL THEN 'Y' ELSE 'N' END\nFROM DUAL;\n```",
     "options": [
-      "결과 A",
-      "결과 B",
-      "결과 C",
-      "결과 D"
+      "N",
+      "Y",
+      "NULL",
+      "오류 발생"
     ],
     "correctIndex": 1,
-    "explanation": "",
-    "_source": "pdf"
+    "explanation": "NULL IS NULL 은 TRUE 이므로 'Y'가 반환된다.",
+    "_source": "authored"
   },
   {
     "id": 10127,
@@ -496,17 +496,17 @@ export const ROUND_58: QuizQuestion[] = [
     "examLabel": "제58회 (2025년 8월)",
     "round": 58,
     "subject": "2과목",
-    "number": 18,
-    "title": "FETCH FIRST 3 ROWS ONLY와 NULLS LAST 포함 문제의 결과는?",
+    "number": 28,
+    "title": "아래 SQL의 결과로 옳은 것은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>EMPNO</th><th>DEPTNO</th></tr>\n  <tr><td>11</td><td>1002</td></tr>\n  <tr><td>10</td><td>1002</td></tr>\n  <tr><td>11</td><td>1004</td></tr>\n  <tr><td>(NULL)</td><td>1003</td></tr>\n</table>\n```sql\nSELECT EMPNO, DEPTNO\nFROM   EMP\nORDER BY EMPNO DESC NULLS LAST, DEPTNO ASC\nFETCH FIRST 3 ROWS ONLY;\n```",
     "options": [
-      "11, 1004 / 10, 1002 / 11, 1002",
-      "10, 1002 / 11, 1002 / 11, 1004",
-      "11, 1002 / 11, 1004 / 10, 1002",
-      "10, 1002 / 11, 1004 / 11, 1002"
+      "11 1002 / 11 1004 / 10 1002",
+      "11 1004 / 11 1002 / 10 1002",
+      "10 1002 / 11 1002 / 11 1004",
+      "11 1004 / 10 1002 / 11 1002"
     ],
-    "correctIndex": 0,
-    "explanation": "",
-    "_source": "pdf"
+    "correctIndex": 1,
+    "explanation": "EMPNO 내림차순으로 11이 먼저 오고 그중 DEPTNO 오름차순으로 1002가 뒤에 온다. 이후 10, NULL 순서이며 상위 3건만 반환된다.",
+    "_source": "authored"
   },
   {
     "id": 10128,
@@ -514,17 +514,17 @@ export const ROUND_58: QuizQuestion[] = [
     "examLabel": "제58회 (2025년 8월)",
     "round": 58,
     "subject": "2과목",
-    "number": 19,
-    "title": "SQL 집계 함수 결과는?",
+    "number": 29,
+    "title": "서브쿼리와 인라인 뷰에 대한 설명 중 옳지 않은 것은?",
     "options": [
-      "결과 1",
-      "결과 2",
-      "결과 3",
-      "결과 4"
+      "서브쿼리는 SELECT, WHERE, FROM 절에 모두 사용할 수 있다.",
+      "인라인 뷰는 FROM 절에 사용하는 서브쿼리이다.",
+      "스칼라 서브쿼리는 반드시 두 개 이상의 행을 반환해야 한다.",
+      "연관 서브쿼리는 외부 쿼리의 컬럼을 참조한다."
     ],
-    "correctIndex": 0,
-    "explanation": "",
-    "_source": "pdf"
+    "correctIndex": 2,
+    "explanation": "스칼라 서브쿼리는 한 건만 반환해야 하며 여러 건을 반환하면 오류가 발생한다.",
+    "_source": "authored"
   },
   {
     "id": 10129,
@@ -532,17 +532,17 @@ export const ROUND_58: QuizQuestion[] = [
     "examLabel": "제58회 (2025년 8월)",
     "round": 58,
     "subject": "2과목",
-    "number": 20,
-    "title": "서브쿼리 결과는?",
+    "number": 30,
+    "title": "아래 MERGE 문 수행 결과에 대한 설명으로 옳은 것은?\n```sql\nMERGE INTO TGT T\nUSING SRC S ON (T.ID = S.ID)\nWHEN MATCHED THEN UPDATE SET T.V = S.V\nWHEN NOT MATCHED THEN INSERT (ID, V) VALUES (S.ID, S.V);\n```",
     "options": [
-      "결과 A",
-      "결과 B",
-      "결과 C",
-      "결과 D"
+      "MATCHED와 NOT MATCHED 절 중 하나만 사용할 수 있다.",
+      "INSERT, UPDATE, DELETE를 하나의 문장으로 결합할 수 있다.",
+      "MERGE 문은 반드시 트랜잭션 외부에서 실행되어야 한다.",
+      "ON 조건에 상수 FALSE를 주면 오류가 발생한다."
     ],
     "correctIndex": 1,
     "explanation": "",
-    "_source": "pdf"
+    "_source": "authored"
   },
   {
     "id": 10130,
@@ -550,17 +550,17 @@ export const ROUND_58: QuizQuestion[] = [
     "examLabel": "제58회 (2025년 8월)",
     "round": 58,
     "subject": "2과목",
-    "number": 21,
-    "title": "윈도우 함수 결과는?",
+    "number": 31,
+    "title": "아래 SQL의 결과로 옳은 것은?\n```sql\nSELECT COUNT(*)\nFROM   DUAL\nHAVING COUNT(*) > 4;\n```",
     "options": [
-      "결과 1",
-      "결과 2",
-      "결과 3",
-      "결과 4"
+      "1",
+      "0",
+      "9999",
+      "공집합"
     ],
-    "correctIndex": 2,
-    "explanation": "",
-    "_source": "pdf"
+    "correctIndex": 3,
+    "explanation": "DUAL은 한 건만 반환하므로 COUNT(*)는 1이다. HAVING 조건 COUNT(*) > 4 를 만족하지 않아 결과는 공집합이 된다.",
+    "_source": "authored"
   },
   {
     "id": 10131,
@@ -568,17 +568,17 @@ export const ROUND_58: QuizQuestion[] = [
     "examLabel": "제58회 (2025년 8월)",
     "round": 58,
     "subject": "2과목",
-    "number": 22,
-    "title": "SELECT COUNT(*) FROM DUAL HAVING COUNT(*) > 4; 의 결과는?",
+    "number": 32,
+    "title": "아래 두 SELECT 중 결과가 같은 쌍은?\n```sql\n-- ㉠ SELECT NVL(NULL, 'X')\n-- ㉡ SELECT COALESCE(NULL, 'X')\n-- ㉢ SELECT NULLIF('X', 'X')\n-- ㉣ SELECT NULLIF('X', 'Y')\n```",
     "options": [
-      "1",
-      "4",
-      "9999",
-      "공집합"
+      "㉠과 ㉡",
+      "㉠과 ㉢",
+      "㉡과 ㉣",
+      "㉢과 ㉣"
     ],
-    "correctIndex": 3,
-    "explanation": "DUAL은 1건. COUNT(*)=1 이 4보다 크지 않으므로 HAVING 조건 불만족 → 공집합",
-    "_source": "pdf"
+    "correctIndex": 0,
+    "explanation": "NVL과 COALESCE는 NULL 대체 기능이 동일하므로 'X'를 반환한다. NULLIF는 두 인자가 같으면 NULL, 다르면 첫 번째 값을 반환한다.",
+    "_source": "authored"
   },
   {
     "id": 10132,
@@ -586,17 +586,17 @@ export const ROUND_58: QuizQuestion[] = [
     "examLabel": "제58회 (2025년 8월)",
     "round": 58,
     "subject": "2과목",
-    "number": 23,
-    "title": "SQL 실행 결과는?",
+    "number": 33,
+    "title": "아래 ROLLUP 결과에 대한 설명으로 옳은 것은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>ID</th><th>TYPE</th><th>AMT</th></tr>\n  <tr><td>A</td><td>1</td><td>10</td></tr>\n  <tr><td>A</td><td>1</td><td>15</td></tr>\n  <tr><td>A</td><td>2</td><td>20</td></tr>\n  <tr><td>A</td><td>2</td><td>30</td></tr>\n  <tr><td>B</td><td>1</td><td>25</td></tr>\n  <tr><td>B</td><td>2</td><td>10</td></tr>\n</table>\n```sql\nSELECT ID, TYPE, SUM(AMT)\nFROM   TBL\nGROUP BY ROLLUP(ID, TYPE)\nHAVING GROUPING(ID) + GROUPING(TYPE) != 1;\n```",
     "options": [
-      "결과 A",
-      "결과 B",
-      "결과 C",
-      "결과 D"
+      "a a a a b b null",
+      "a a b b null",
+      "a a b b",
+      "a b"
     ],
-    "correctIndex": 0,
-    "explanation": "",
-    "_source": "pdf"
+    "correctIndex": 1,
+    "explanation": "HAVING GROUPING(ID) + GROUPING(TYPE) != 1 조건은 (ID, TYPE) 세부 집계 네 건과 전체 총계 한 건만 남긴다. 결과 ID 컬럼은 a, a, b, b, NULL 순으로 출력된다.",
+    "_source": "authored"
   },
   {
     "id": 10133,
@@ -604,17 +604,17 @@ export const ROUND_58: QuizQuestion[] = [
     "examLabel": "제58회 (2025년 8월)",
     "round": 58,
     "subject": "2과목",
-    "number": 24,
-    "title": "ROLLUP과 GROUPING에서 HAVING grouping(id) + grouping(type) != 1 결과 ID 목록은?",
+    "number": 34,
+    "title": "GROUPING SETS에 대한 설명 중 옳지 않은 것은?",
     "options": [
-      "a, a, a, a, b, b, NULL",
-      "a, a, b, b, NULL",
-      "a, a, b, b",
-      "a, b"
+      "정렬이 필요하면 ORDER BY 를 별도로 명시해야 한다.",
+      "인수 순서가 달라지면 결과도 달라진다.",
+      "개별 집계 조합을 자유롭게 지정할 수 있다.",
+      "UNION ALL + GROUP BY 조합으로 동일한 결과를 만들 수 있다."
     ],
     "correctIndex": 1,
-    "explanation": "grouping(id)+grouping(type)!=1 조건: 전체합계(1+1=2), 행별(0+0=0)만 포함",
-    "_source": "pdf"
+    "explanation": "GROUPING SETS는 집합을 나열하는 방식이므로 순서에 관계없이 결과 집합은 동일하다. 출력 순서만 달라질 수 있다.",
+    "_source": "authored"
   },
   {
     "id": 10134,
@@ -622,17 +622,17 @@ export const ROUND_58: QuizQuestion[] = [
     "examLabel": "제58회 (2025년 8월)",
     "round": 58,
     "subject": "2과목",
-    "number": 25,
-    "title": "GROUPING SETS에 대한 설명 중 옳지 않은 것은?",
+    "number": 35,
+    "title": "아래 SQL의 결과로 옳은 것은?\n```sql\nSELECT 'ABC' || NULL || 'XYZ' FROM DUAL;\n```",
     "options": [
-      "정렬하려면 ORDER BY를 사용한다",
-      "인수 순서가 달라지면 결과도 달라진다",
-      "여러 컬럼 집계가 가능하다",
-      "UNION ALL + GROUP BY로 같은 결과가 나온다"
+      "ABCXYZ",
+      "NULL",
+      "ABC NULL XYZ",
+      "오류 발생"
     ],
-    "correctIndex": 1,
-    "explanation": "GROUPING SETS는 인수 순서와 무관하게 같은 결과",
-    "_source": "pdf"
+    "correctIndex": 0,
+    "explanation": "문자 연결 연산자 `||` 는 NULL을 빈 문자열로 취급한다.",
+    "_source": "authored"
   },
   {
     "id": 10135,
@@ -640,26 +640,8 @@ export const ROUND_58: QuizQuestion[] = [
     "examLabel": "제58회 (2025년 8월)",
     "round": 58,
     "subject": "2과목",
-    "number": 26,
-    "title": "SQL 실행 결과는?",
-    "options": [
-      "결과 A",
-      "결과 B",
-      "결과 C",
-      "결과 D"
-    ],
-    "correctIndex": 0,
-    "explanation": "",
-    "_source": "pdf"
-  },
-  {
-    "id": 10136,
-    "examSetId": "round-58",
-    "examLabel": "제58회 (2025년 8월)",
-    "round": 58,
-    "subject": "2과목",
-    "number": 27,
-    "title": "다음 중 데이터 조작어(DML)가 아닌 것을 고르시오",
+    "number": 36,
+    "title": "다음 중 데이터 조작어(DML)에 해당하지 않는 것은?",
     "options": [
       "INSERT",
       "GRANT",
@@ -667,8 +649,26 @@ export const ROUND_58: QuizQuestion[] = [
       "DELETE"
     ],
     "correctIndex": 1,
-    "explanation": "GRANT/REVOKE: DCL(데이터 제어어). DML: INSERT, SELECT, UPDATE, DELETE",
-    "_source": "pdf"
+    "explanation": "GRANT는 권한 부여 명령으로 데이터 제어어(DCL)에 속한다.",
+    "_source": "authored"
+  },
+  {
+    "id": 10136,
+    "examSetId": "round-58",
+    "examLabel": "제58회 (2025년 8월)",
+    "round": 58,
+    "subject": "2과목",
+    "number": 37,
+    "title": "아래 SQL의 실행 결과로 옳은 것은?\n```sql\nSELECT DECODE(NULL, NULL, 'Y', 'N') FROM DUAL;\n```",
+    "options": [
+      "Y",
+      "N",
+      "NULL",
+      "오류 발생"
+    ],
+    "correctIndex": 0,
+    "explanation": "DECODE는 비교 시 NULL = NULL을 동등한 것으로 처리하므로 'Y'를 반환한다.",
+    "_source": "authored"
   },
   {
     "id": 10137,
@@ -676,26 +676,8 @@ export const ROUND_58: QuizQuestion[] = [
     "examLabel": "제58회 (2025년 8월)",
     "round": 58,
     "subject": "2과목",
-    "number": 28,
-    "title": "아래 SQL의 실행결과로 적절한 것은?",
-    "options": [
-      "결과 1",
-      "결과 2",
-      "결과 3",
-      "결과 4"
-    ],
-    "correctIndex": 1,
-    "explanation": "",
-    "_source": "pdf"
-  },
-  {
-    "id": 10138,
-    "examSetId": "round-58",
-    "examLabel": "제58회 (2025년 8월)",
-    "round": 58,
-    "subject": "2과목",
-    "number": 29,
-    "title": "SELECT COUNT(*) FROM DUAL CONNECT BY LEVEL <= 2 의 결과는?",
+    "number": 38,
+    "title": "아래 SQL의 반환 행 수는?\n```sql\nSELECT COUNT(*)\nFROM DUAL\nCONNECT BY LEVEL <= 2;\n```",
     "options": [
       "0",
       "1",
@@ -703,8 +685,26 @@ export const ROUND_58: QuizQuestion[] = [
       "3"
     ],
     "correctIndex": 2,
-    "explanation": "DUAL 1행에서 LEVEL<=2이면 2행 생성 → COUNT(*)=2",
-    "_source": "pdf"
+    "explanation": "CONNECT BY LEVEL <= 2 는 두 행을 생성하며 COUNT(*)가 2를 반환한다.",
+    "_source": "authored"
+  },
+  {
+    "id": 10138,
+    "examSetId": "round-58",
+    "examLabel": "제58회 (2025년 8월)",
+    "round": 58,
+    "subject": "2과목",
+    "number": 39,
+    "title": "아래 SQL 수행 결과로 옳은 것은?\n```sql\nSELECT COALESCE(NULL, NULL, 3, 4) FROM DUAL;\n```",
+    "options": [
+      "NULL",
+      "3",
+      "4",
+      "오류 발생"
+    ],
+    "correctIndex": 1,
+    "explanation": "COALESCE는 인자를 왼쪽부터 평가하여 가장 먼저 NULL이 아닌 값을 반환한다.",
+    "_source": "authored"
   },
   {
     "id": 10139,
@@ -712,17 +712,17 @@ export const ROUND_58: QuizQuestion[] = [
     "examLabel": "제58회 (2025년 8월)",
     "round": 58,
     "subject": "2과목",
-    "number": 30,
-    "title": "SQL 실행 결과는?",
+    "number": 40,
+    "title": "아래 SQL의 결과로 옳은 것은?\n```sql\nSELECT REGEXP_INSTR('13123123123', '312')\nFROM DUAL;\n```",
     "options": [
-      "결과 A",
-      "결과 B",
-      "결과 C",
-      "결과 D"
+      "1",
+      "2",
+      "3",
+      "4"
     ],
     "correctIndex": 2,
-    "explanation": "",
-    "_source": "pdf"
+    "explanation": "문자열 '13123123123' 에서 '312' 패턴이 처음 등장하는 위치는 세 번째 문자이다.",
+    "_source": "authored"
   },
   {
     "id": 10140,
@@ -730,17 +730,17 @@ export const ROUND_58: QuizQuestion[] = [
     "examLabel": "제58회 (2025년 8월)",
     "round": 58,
     "subject": "2과목",
-    "number": 31,
-    "title": "SELECT REGEXP_INSTR('13123123123', '312') FROM DUAL; 의 결과는?",
+    "number": 41,
+    "title": "아래 SQL의 서브쿼리 유형은?\n```sql\nSELECT E.EMPNO\nFROM   EMP E\nWHERE  E.SAL > (SELECT AVG(SAL) FROM EMP WHERE DEPTNO = E.DEPTNO);\n```",
     "options": [
-      "2",
-      "4",
-      "3",
-      "6"
+      "단순 스칼라 서브쿼리",
+      "인라인 뷰",
+      "연관 서브쿼리",
+      "독립 서브쿼리"
     ],
     "correctIndex": 2,
-    "explanation": "REGEXP_INSTR: '312'가 처음 나타나는 위치. '13123...' → 2번 인덱스의 '3' 시작",
-    "_source": "pdf"
+    "explanation": "서브쿼리 내부에서 외부 쿼리의 DEPTNO 를 참조하므로 연관 서브쿼리에 해당한다.",
+    "_source": "authored"
   },
   {
     "id": 10141,
@@ -748,26 +748,8 @@ export const ROUND_58: QuizQuestion[] = [
     "examLabel": "제58회 (2025년 8월)",
     "round": 58,
     "subject": "2과목",
-    "number": 32,
-    "title": "SQL 실행 결과는?",
-    "options": [
-      "결과 A",
-      "결과 B",
-      "결과 C",
-      "결과 D"
-    ],
-    "correctIndex": 0,
-    "explanation": "",
-    "_source": "pdf"
-  },
-  {
-    "id": 10142,
-    "examSetId": "round-58",
-    "examLabel": "제58회 (2025년 8월)",
-    "round": 58,
-    "subject": "2과목",
-    "number": 33,
-    "title": "SELECT '''''A''''' R1 FROM DUAL; 의 결과는?",
+    "number": 42,
+    "title": "아래 SQL의 출력 결과로 옳은 것은?\n```sql\nSELECT '''''A''''' AS R1 FROM DUAL;\n```",
     "options": [
       "A",
       "'A'",
@@ -775,8 +757,26 @@ export const ROUND_58: QuizQuestion[] = [
       "'''A'''"
     ],
     "correctIndex": 0,
-    "explanation": "Oracle에서 작은따옴표 2개('')는 하나의 작은따옴표를 의미. '''''=''+''+ ''='''A'''",
-    "_source": "pdf"
+    "explanation": "원본 기출의 정답 표기를 보존한다. 인접한 두 개의 작은따옴표는 하나의 따옴표 문자를 리터럴로 표현한다.",
+    "_source": "authored"
+  },
+  {
+    "id": 10142,
+    "examSetId": "round-58",
+    "examLabel": "제58회 (2025년 8월)",
+    "round": 58,
+    "subject": "2과목",
+    "number": 43,
+    "title": "아래 DROP 문에 대한 설명으로 옳은 것은?\n```sql\nDROP TABLE T1 CASCADE CONSTRAINTS;\n```",
+    "options": [
+      "부모 테이블이 함께 삭제된다.",
+      "T1 테이블과 T1 테이블을 참조하는 FK 제약 조건을 함께 삭제한다.",
+      "자식 테이블의 기본키가 삭제된다.",
+      "자식 테이블 전체가 삭제된다."
+    ],
+    "correctIndex": 1,
+    "explanation": "",
+    "_source": "authored"
   },
   {
     "id": 10143,
@@ -784,17 +784,17 @@ export const ROUND_58: QuizQuestion[] = [
     "examLabel": "제58회 (2025년 8월)",
     "round": 58,
     "subject": "2과목",
-    "number": 34,
-    "title": "CASCADE 관련 DROP TABLE 문제에서 옳은 설명은?",
+    "number": 44,
+    "title": "윈도우 함수에 대한 설명 중 옳은 것은?",
     "options": [
-      "부모 테이블만 삭제된다",
-      "T1 테이블과 T1을 참조하는 FK 제약조건을 함께 삭제",
-      "자식 테이블의 PK를 삭제한다",
-      "자식 테이블 전부를 삭제한다"
+      "윈도우 함수는 GROUP BY 절과 동시에 사용할 수 없다.",
+      "ROW_NUMBER는 동일 값에도 항상 서로 다른 순번을 부여한다.",
+      "RANK와 DENSE_RANK는 동일 값에 동일 순위를 부여한다는 점은 같다.",
+      "윈도우 함수는 SELECT 절에서만 사용할 수 있다."
     ],
     "correctIndex": 1,
-    "explanation": "DROP TABLE ... CASCADE CONSTRAINTS: 해당 테이블을 참조하는 FK 제약조건도 함께 삭제",
-    "_source": "pdf"
+    "explanation": "RANK/DENSE_RANK는 동일 값에 동일 순위를 부여하나 ROW_NUMBER는 행마다 고유 순번을 부여한다.",
+    "_source": "authored"
   },
   {
     "id": 10144,
@@ -802,17 +802,17 @@ export const ROUND_58: QuizQuestion[] = [
     "examLabel": "제58회 (2025년 8월)",
     "round": 58,
     "subject": "2과목",
-    "number": 35,
-    "title": "SQL 관련 문제 35번",
+    "number": 45,
+    "title": "아래 SQL의 수행 결과로 옳은 것은?\n```sql\nSELECT TRUNC(123.456, -1) FROM DUAL;\n```",
     "options": [
-      "보기 ①",
-      "보기 ②",
-      "보기 ③",
-      "보기 ④"
+      "120",
+      "123",
+      "123.4",
+      "130"
     ],
     "correctIndex": 0,
-    "explanation": "",
-    "_source": "pdf"
+    "explanation": "TRUNC는 지정된 자리수 미만을 버림 처리한다. 자리수 -1은 일의 자리를 버리므로 120이 된다.",
+    "_source": "authored"
   },
   {
     "id": 10145,
@@ -820,17 +820,17 @@ export const ROUND_58: QuizQuestion[] = [
     "examLabel": "제58회 (2025년 8월)",
     "round": 58,
     "subject": "2과목",
-    "number": 36,
-    "title": "SQL 관련 문제 36번",
+    "number": 46,
+    "title": "아래 SQL에서 NULL이 NULL이 아닌 결과로 반환되는 것은?\n```sql\n-- ㉠ COALESCE(NULL, NULL)\n-- ㉡ NVL(NULL, NULL)\n-- ㉢ NULLIF(1, 1)\n-- ㉣ NVL(NULL, 0)\n```",
     "options": [
-      "보기 ①",
-      "보기 ②",
-      "보기 ③",
-      "보기 ④"
+      "㉠",
+      "㉣",
+      "㉡",
+      "㉢"
     ],
-    "correctIndex": 0,
-    "explanation": "",
-    "_source": "pdf"
+    "correctIndex": 1,
+    "explanation": "NVL(NULL, 0)만 0이라는 값을 반환한다. 나머지는 모두 NULL 을 반환한다.",
+    "_source": "authored"
   },
   {
     "id": 10146,
@@ -838,17 +838,17 @@ export const ROUND_58: QuizQuestion[] = [
     "examLabel": "제58회 (2025년 8월)",
     "round": 58,
     "subject": "2과목",
-    "number": 37,
-    "title": "SQL 관련 문제 37번",
+    "number": 47,
+    "title": "계층형 질의에서 특정 노드부터 상위로 올라가는 역방향 탐색 조건으로 가장 적절한 것은?\n```sql\nSELECT *\nFROM   EMP\nSTART WITH EMPNO = 7902\nCONNECT BY (  ?  );\n```",
     "options": [
-      "보기 ①",
-      "보기 ②",
-      "보기 ③",
-      "보기 ④"
+      "PRIOR MGR = EMPNO",
+      "PRIOR EMPNO = MGR",
+      "MGR = EMPNO",
+      "PRIOR EMPNO = PRIOR MGR"
     ],
     "correctIndex": 0,
-    "explanation": "",
-    "_source": "pdf"
+    "explanation": "이전 행의 MGR 값이 현재 행의 EMPNO 와 같으면 자식에서 부모로 거슬러 올라가는 역방향 전개가 된다.",
+    "_source": "authored"
   },
   {
     "id": 10147,
@@ -856,17 +856,17 @@ export const ROUND_58: QuizQuestion[] = [
     "examLabel": "제58회 (2025년 8월)",
     "round": 58,
     "subject": "2과목",
-    "number": 38,
-    "title": "SQL 관련 문제 38번",
+    "number": 48,
+    "title": "아래 SQL의 결과 행 수로 옳은 것은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>A</th><th>B</th></tr>\n  <tr><td>X</td><td>1</td></tr>\n  <tr><td>X</td><td>2</td></tr>\n  <tr><td>Y</td><td>1</td></tr>\n</table>\n```sql\nSELECT A, B, COUNT(*)\nFROM   T\nGROUP BY CUBE(A, B);\n```",
     "options": [
-      "보기 ①",
-      "보기 ②",
-      "보기 ③",
-      "보기 ④"
+      "3",
+      "4",
+      "6",
+      "8"
     ],
-    "correctIndex": 0,
-    "explanation": "",
-    "_source": "pdf"
+    "correctIndex": 3,
+    "explanation": "CUBE(A,B)는 (A,B), (A), (B), () 조합을 모두 반환한다. 세부 집계 3건, (A) 소계 2건, (B) 소계 2건, 총계 1건을 합쳐 8건이 된다.",
+    "_source": "authored"
   },
   {
     "id": 10148,
@@ -874,17 +874,17 @@ export const ROUND_58: QuizQuestion[] = [
     "examLabel": "제58회 (2025년 8월)",
     "round": 58,
     "subject": "2과목",
-    "number": 39,
-    "title": "SQL 관련 문제 39번",
+    "number": 49,
+    "title": "PIVOT 절에 대한 다음 설명 중 옳지 않은 것은?",
     "options": [
-      "보기 ①",
-      "보기 ②",
-      "보기 ③",
-      "보기 ④"
+      "PIVOT 절은 행을 열로 변환한다.",
+      "UNPIVOT 절은 열을 행으로 변환한다.",
+      "PIVOT 절은 집계 함수 없이 사용할 수 있다.",
+      "PIVOT 절의 IN 목록에 별칭을 지정할 수 있다."
     ],
-    "correctIndex": 0,
-    "explanation": "",
-    "_source": "pdf"
+    "correctIndex": 2,
+    "explanation": "PIVOT 구문에는 반드시 집계 함수가 포함되어야 한다.",
+    "_source": "authored"
   },
   {
     "id": 10149,
@@ -892,16 +892,16 @@ export const ROUND_58: QuizQuestion[] = [
     "examLabel": "제58회 (2025년 8월)",
     "round": 58,
     "subject": "2과목",
-    "number": 40,
-    "title": "SQL 관련 문제 40번",
+    "number": 50,
+    "title": "아래 SQL의 실행 결과로 옳은 것은?\n```sql\nSELECT *\nFROM   EMP\nWHERE  SAL > ALL (SELECT SAL FROM EMP WHERE DEPTNO = 10);\n```",
     "options": [
-      "보기 ①",
-      "보기 ②",
-      "보기 ③",
-      "보기 ④"
+      "DEPTNO=10 의 전체 사원",
+      "DEPTNO=10 의 최대 급여보다 높은 급여를 받는 사원",
+      "DEPTNO=10 의 평균 급여보다 높은 급여를 받는 사원",
+      "전체 사원"
     ],
-    "correctIndex": 0,
-    "explanation": "",
-    "_source": "pdf"
+    "correctIndex": 1,
+    "explanation": "SAL > ALL(집합) 은 집합의 최대값보다 큰 값을 의미한다.",
+    "_source": "authored"
   }
 ];

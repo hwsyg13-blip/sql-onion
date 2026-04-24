@@ -83,6 +83,16 @@ if (existsSync(AUTHORED_DIR)) {
 const rounds = Object.keys(ROUND_DATES).map(Number).sort((a,b)=>b-a);
 const merged = {};
 for (const r of rounds) {
+  // authored 파일이 ≥10 문항이면 EXCLUSIVELY 사용 (PDF/blog 혼합 금지 — 번호·정답 정합성 보존)
+  if (authored[r] && authored[r].length >= 10) {
+    merged[r] = authored[r].map(a => ({
+      round: r, subject: a.subject, number: a.number,
+      title: a.title, options: a.options, correctIndex: a.correctIndex,
+      explanation: a.explanation, source: 'authored',
+    })).sort((a,b) => a.subject.localeCompare(b.subject) || a.number - b.number);
+    continue;
+  }
+  // 그 외 회차 — PDF + blog + 부분 authored 합집합
   const map = new Map();
   for (const q of (pdf[r] || [])) map.set(`${q.subject}-${q.number}`, { ...q, source: 'pdf' });
   for (const q of (blog[r] || [])) {

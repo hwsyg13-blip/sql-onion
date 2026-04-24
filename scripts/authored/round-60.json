@@ -1,0 +1,657 @@
+{
+  "round": 60,
+  "notes": "restored from 60회_복원.md — MCQ 50 + 단답형 0 (단답형은 현재 UI 미지원이라 제외)",
+  "authored": [
+    {
+      "subject": "1과목",
+      "number": 1,
+      "title": "다음 설명에 해당하는 엔터티 분류는?",
+      "options": [
+        "행위 엔터티",
+        "개념 엔터티",
+        "중심 엔터티",
+        "기본 엔터티"
+      ],
+      "correctIndex": 0,
+      "explanation": "해당 엔터티는 업무 수행 과정에서 지속적으로 이벤트가 쌓이므로 **데이터가 자주 변경되고 저장되는 양 또한 매우 많다.**"
+    },
+    {
+      "subject": "1과목",
+      "number": 2,
+      "title": "아래 [직원] 엔터티의 속성 중 성격이 나머지와 다른 것은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\" style=\"text-align: center;\">\n  <tr><th>속성명</th><th>예시 값</th><th>설명</th></tr>\n  <tr><td>사번</td><td>E1001</td><td>직원을 식별하는 번호</td></tr>\n  <tr><td>생년월일</td><td>1990-05-14</td><td>직원의 생일</td></tr>\n  <tr><td>연령</td><td>35</td><td>생년월일을 기준으로 계산된 값</td></tr>\n  <tr><td>부서코드</td><td>D10</td><td>소속 부서 코드</td></tr>\n</table>",
+      "options": [
+        "파생속성",
+        "설계속성",
+        "기본속성",
+        "연관속성"
+      ],
+      "correctIndex": 0,
+      "explanation": ""
+    },
+    {
+      "subject": "1과목",
+      "number": 3,
+      "title": "엔터티·인스턴스·속성에 대한 설명 중 옳지 않은 것은?",
+      "options": [
+        "엔터티는 두 개 이상의 인스턴스를 가진다.",
+        "하나의 속성에는 두 개 이상의 값이 들어갈 수 있다.",
+        "인스턴스는 두 가지의 속성값을 가진다.",
+        "하나의 엔터티는 두 개 이상의 속성을 가진다."
+      ],
+      "correctIndex": 2,
+      "explanation": "인스턴스가 가지는 속성 값의 수는 엔터티가 설계한 속성의 개수에 따라 달라진다. 특정 숫자로 고정되지 않는다."
+    },
+    {
+      "subject": "1과목",
+      "number": 4,
+      "title": "아래 ERD에 포함된 각 엔터티의 성격 분류에 대한 설명 중 옳지 않은 것은?\n```\n[ 서비스 ] ||------∈ [ 서비스이용 ] ∋------|| [ 청구 ] ||------∈ [ 납부 ]\n```",
+      "options": [
+        "서비스는 기본 엔터티에 해당한다.",
+        "서비스이용은 개념 엔터티에 해당한다.",
+        "청구는 행위 엔터티에 해당한다.",
+        "납부는 행위 엔터티에 해당한다."
+      ],
+      "correctIndex": 1,
+      "explanation": "서비스이용은 고객이 서비스를 실제로 사용한 사실을 기록하는 행위 엔터티이므로, 개념 엔터티로 분류하는 것은 옳지 않다."
+    },
+    {
+      "subject": "1과목",
+      "number": 5,
+      "title": "다음 SQL의 수행 목적을 가장 적절히 기술한 것은?\n```sql\nSELECT 고객ID, 주문번호, SUM(수량) AS 주문수량\nFROM   주문\nGROUP BY 고객ID, 주문번호\nHAVING SUM(수량) >= 10;\n```",
+      "options": [
+        "한 주문에 10개 이상인 고객 목록",
+        "누적 주문 수량이 10개 이상인 고객 목록",
+        "주문 횟수가 10회 이상인 고객 목록",
+        "10개 이상의 서로 다른 상품을 구매한 고객 목록"
+      ],
+      "correctIndex": 0,
+      "explanation": ""
+    },
+    {
+      "subject": "1과목",
+      "number": 6,
+      "title": "비식별자 관계에 대한 설명 중 옳지 않은 것은?",
+      "options": [
+        "부모의 기본키를 자식의 일반 속성으로 상속한다.",
+        "부모 엔터티의 생성과 자식 엔터티의 생성 시점이 분리될 수 있다.",
+        "주식별자와 식별자가 같다.",
+        "자식 엔터티에서 독립된 주식별자를 정의할 수 있다."
+      ],
+      "correctIndex": 2,
+      "explanation": ""
+    },
+    {
+      "subject": "1과목",
+      "number": 7,
+      "title": "피터 첸(Peter Chen) ERD 표기법에서 '관계(Relationship)'를 나타내는 도형은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\" style=\"text-align: center;\">\n  <tr><th>도형</th><th>의미</th></tr>\n  <tr><td>사각형 □</td><td>엔터티</td></tr>\n  <tr><td>마름모 ◇</td><td>관계</td></tr>\n  <tr><td>타원 ○</td><td>속성</td></tr>\n  <tr><td>밑줄</td><td>주식별자 속성</td></tr>\n</table>",
+      "options": [
+        "네모",
+        "세모",
+        "마름모",
+        "타원"
+      ],
+      "correctIndex": 2,
+      "explanation": ""
+    },
+    {
+      "subject": "1과목",
+      "number": 8,
+      "title": "주식별자를 구성하는 속성 중 한 개가 삭제되었을 때 인스턴스가 구분되지 않는다. 이러한 주식별자가 충족해야 하는 특성은?",
+      "options": [
+        "최소성",
+        "대표성",
+        "불변성",
+        "고립성"
+      ],
+      "correctIndex": 0,
+      "explanation": "최소성은 주식별자를 구성하는 속성의 수가 유일성을 보장하는 최소한이어야 한다는 특성이다."
+    },
+    {
+      "subject": "1과목",
+      "number": 9,
+      "title": "다음 중 주식별자 선정과 가장 관련이 적은 정규화는?",
+      "options": [
+        "1정규화",
+        "2정규화",
+        "3정규화",
+        "BCNF"
+      ],
+      "correctIndex": 2,
+      "explanation": "1·2정규화와 BCNF는 모두 키(결정자)를 기준으로 수행하지만, 3정규화는 비주식별자 간의 이행적 종속을 제거하는 단계로 주식별자 자체와의 관련성이 가장 낮다."
+    },
+    {
+      "subject": "1과목",
+      "number": 10,
+      "title": "인조 식별자와 본질 식별자에 대한 설명 중 옳지 않은 것은?",
+      "options": [
+        "본질 식별자는 업무 수행 과정에서 쉽게 파악된다.",
+        "본질 식별자는 어떠한 업무 행위 없이도 부여될 수 있다.",
+        "인조 식별자는 본질 식별자가 존재함에도 관리 편의를 위해 별도로 부여될 수 있다.",
+        "본질 식별자는 업무 규칙 변화에 따라 값이 변경될 수 있다."
+      ],
+      "correctIndex": 1,
+      "explanation": "본질 식별자는 업무 행위를 통해 그 값이 결정되는 속성이므로, 업무 행위가 전혀 없는 상태에서 부여되는 값은 본질 식별자로 적절하지 않다. 업무 행위 없이 부여되는 것은 인조 식별자의 특성이다."
+    },
+    {
+      "subject": "2과목",
+      "number": 11,
+      "title": "다음 계층형 질의에서 사용하는 가상 컬럼 및 연산자 중, 전제 조건 없이 단독으로 동작하지 않거나 특정 옵션이 선행되어야 유효한 값을 반환하는 것은 무엇인가?",
+      "options": [
+        "가",
+        "나, 다",
+        "나, 다, 라",
+        "가, 나, 다, 라"
+      ],
+      "correctIndex": 3,
+      "explanation": "* 가. LEVEL * 나. ISLEAF * 다. ISCYCLE * 라. CONNECT_BY_ROOT"
+    },
+    {
+      "subject": "2과목",
+      "number": 12,
+      "title": "아래 SQL의 결과로 옳은 것은? (단, MGR 컬럼에는 NULL 값이 존재한다.)\n```sql\nSELECT *\nFROM   EMP\nWHERE  EMPNO NOT IN (SELECT MGR FROM EMP);\n```",
+      "options": [
+        "EMP 테이블의 모든 행",
+        "매니저로 지정되지 않은 직원의 행",
+        "공집합",
+        "오류 발생"
+      ],
+      "correctIndex": 2,
+      "explanation": "NOT IN 서브쿼리의 결과에 NULL이 포함되면 모든 비교가 UNKNOWN으로 평가되어 최종 결과는 공집합이 반환된다."
+    },
+    {
+      "subject": "2과목",
+      "number": 13,
+      "title": "아래 결과를 얻기 위해 빈칸에 들어갈 SQL로 가장 적절한 것은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\" style=\"text-align: center;\">\n  <tr><th>부서</th><th>사원</th><th>대리</th><th>팀장</th><th>부장</th></tr>\n  <tr><td>인사팀</td><td>3,500</td><td>4,500</td><td>6,000</td><td>8,000</td></tr>\n  <tr><td>IT팀</td><td>4,000</td><td>5,000</td><td>7,000</td><td>9,000</td></tr>\n  <tr><td>행정팀</td><td>3,200</td><td>4,200</td><td>5,800</td><td>7,500</td></tr>\n</table>\n```sql\nSELECT *\nFROM   급여\n(  ?  );\n```",
+      "options": [
+        "`GROUP BY 부서 HAVING 직급 IN ('사원','대리','팀장','부장')`",
+        "`PIVOT (SUM(연봉) FOR 직급 IN ('사원','대리','팀장','부장'))`",
+        "`WHERE 직급 LIKE '%사원%' OR 직급 LIKE '%부장%'`",
+        "`UNPIVOT (연봉 FOR 직급 IN (사원, 대리, 팀장, 부장))`"
+      ],
+      "correctIndex": 1,
+      "explanation": ""
+    },
+    {
+      "subject": "2과목",
+      "number": 14,
+      "title": "아래 데이터와 SQL의 결과로 올바른 것은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\" style=\"text-align: center;\">\n  <tr><th>SAL</th></tr>\n  <tr><td>1000</td></tr>\n  <tr><td>2000</td></tr>\n  <tr><td>3000</td></tr>\n</table>\n```sql\nSELECT SAL,\n       FIRST_VALUE(SAL) OVER (ORDER BY SAL\n                              ROWS BETWEEN UNBOUNDED PRECEDING\n                                       AND CURRENT ROW) AS MIN_SAL\nFROM   T;\n```",
+      "options": [
+        "1000 1000 1000",
+        "1000 2000 3000",
+        "3000 2000 1000",
+        "3000 3000 3000"
+      ],
+      "correctIndex": 0,
+      "explanation": "ORDER BY SAL 오름차순 정렬 후 각 행까지의 누적 윈도우에서 FIRST_VALUE는 항상 최소값인 1000을 반환한다."
+    },
+    {
+      "subject": "2과목",
+      "number": 15,
+      "title": "아래 SQL과 동일한 의미를 가지는 조건식은?\n```sql\nSELECT *\nFROM   T\nWHERE  (사번, 회원번호) IN ((10005, 2003));\n```",
+      "options": [
+        "`(사번 = 10005) OR (회원번호 = 2003)`",
+        "`(사번 = 10005) AND (회원번호 = 2003)`",
+        "`(사번 = 10005) OR (회원번호 <> 2003)`",
+        "`NOT ((사번 = 10005) AND (회원번호 = 2003))`"
+      ],
+      "correctIndex": 0,
+      "explanation": "원본 기출의 정답 표기를 그대로 보존한다."
+    },
+    {
+      "subject": "2과목",
+      "number": 16,
+      "title": "아래 8건의 데이터에 대해 NTILE 함수가 반환하는 값으로 가장 옳은 것은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\" style=\"text-align: center;\">\n  <tr><th>EMPNO</th><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td></tr>\n</table>\n```sql\nSELECT EMPNO,\n       NTILE(3) OVER (ORDER BY EMPNO) AS GRP\nFROM   EMP;\n```",
+      "options": [
+        "1 1 1 2 2 2 3 3",
+        "1 1 2 2 3 3 3 3",
+        "1 2 3 1 2 3 1 2",
+        "3 3 3 2 2 2 1 1"
+      ],
+      "correctIndex": 0,
+      "explanation": "8건을 3그룹으로 나누면 앞쪽 그룹부터 3, 3, 2건으로 배정된다."
+    },
+    {
+      "subject": "2과목",
+      "number": 17,
+      "title": "아래 두 테이블을 조인하여 양쪽의 모든 행을 포함하되 NULL 값은 0으로 치환한 결과를 얻으려 한다. 가장 적절한 SQL은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\" style=\"text-align: center;\">\n  <tr><th colspan=\"2\">T1</th><th colspan=\"2\">T2</th></tr>\n  <tr><th>ID</th><th>VAL</th><th>ID</th><th>VAL</th></tr>\n  <tr><td>1</td><td>100</td><td>2</td><td>200</td></tr>\n  <tr><td>2</td><td>150</td><td>3</td><td>300</td></tr>\n</table>",
+      "options": [
+        "`SELECT NVL(T1.VAL,0), NVL(T2.VAL,0) FROM T1 CROSS JOIN T2;`",
+        "`SELECT NVL(T1.VAL,0), NVL(T2.VAL,0) FROM T1 FULL OUTER JOIN T2 ON T1.ID = T2.ID;`",
+        "`SELECT T1.VAL, T2.VAL FROM T1 FULL OUTER JOIN T2 ON T1.ID = T2.ID;`",
+        "`SELECT T1.VAL, T2.VAL FROM T1 UNION T2;`"
+      ],
+      "correctIndex": 1,
+      "explanation": ""
+    },
+    {
+      "subject": "2과목",
+      "number": 18,
+      "title": "사용자 R1이 테이블을 생성하고 접속을 종료한 뒤, 다른 사용자 R2가 접속하여 R1의 테이블을 조회하려 하자 오류가 발생하였다. 해결 방안으로 가장 적절한 것은?",
+      "options": [
+        "R2가 R1의 계정으로 재로그인하여 조회한다.",
+        "GRANT로 SELECT 권한을 부여한다.",
+        "R2 계정에서 SYNONYM만 생성하면 자동으로 접근이 허용된다.",
+        "R2가 관리자 권한으로 테이블을 강제 복제한다."
+      ],
+      "correctIndex": 1,
+      "explanation": ""
+    },
+    {
+      "subject": "2과목",
+      "number": 19,
+      "title": "다음 SQL의 실행 결과로 옳은 것은?\n```sql\nSELECT REGEXP_REPLACE(\n         '2026/02/25',\n         '([0-9]{4})/([0-9]{2})/([0-9]{2})',\n         '\\3/\\2/\\1'\n       )\nFROM DUAL;\n```",
+      "options": [
+        "2026/02/25",
+        "25/02/2026",
+        "02/25/2026",
+        "2026-02-25"
+      ],
+      "correctIndex": 1,
+      "explanation": "정규표현식으로 연/월/일을 캡처하여 일/월/연 순으로 재배열한다."
+    },
+    {
+      "subject": "2과목",
+      "number": 20,
+      "title": "아래 데이터에 대한 SQL의 결과로 옳은 것은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\" style=\"text-align: center;\">\n  <tr><th>SAL</th></tr>\n  <tr><td>4</td></tr>\n  <tr><td>NULL</td></tr>\n  <tr><td>NULL</td></tr>\n  <tr><td>9</td></tr>\n  <tr><td>10</td></tr>\n</table>\n```sql\nSELECT SUM( CASE WHEN SAL = 4 THEN SAL END ),   -- ㉠\n       SUM( SAL )                               -- ㉡\nFROM   T;\n```",
+      "options": [
+        "4, 23",
+        "null, 23",
+        "4, null",
+        "0, 0"
+      ],
+      "correctIndex": 0,
+      "explanation": "NULL 값은 SUM 집계에서 자동으로 제외되며, ㉠은 SAL=4인 행만 합산하여 4, ㉡은 4+9+10 = 23을 반환한다."
+    },
+    {
+      "subject": "2과목",
+      "number": 21,
+      "title": "아래 데이터에 대하여 결과 행 수가 나머지와 다른 하나는?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\" style=\"text-align: center;\">\n  <tr><th>행 순서</th><th>COL</th></tr>\n  <tr><td>1</td><td>A</td></tr>\n  <tr><td>2</td><td>B</td></tr>\n  <tr><td>3</td><td>C</td></tr>\n</table>",
+      "options": [
+        "`WHERE ROWNUM IN (1, 2)`",
+        "`WHERE ROWNUM < 1`",
+        "`WHERE ROWNUM > 1`",
+        "`WHERE ROWNUM = 2`"
+      ],
+      "correctIndex": 0,
+      "explanation": "ROWNUM은 WHERE 조건이 통과된 행에 대해서만 순차적으로 부여된다. ①은 첫 행에 1, 두 번째 행에 2가 부여되어 모두 조건을 만족하므로 2건을 반환한다. 반면 ② `ROWNUM < 1`은 어떤 행도 만족하지 못해 0건, ③ `ROWNUM > 1`은 첫 행이 ROWNUM=1을 받고 탈락한 뒤 다음 행에도 계속 1이 부여되어 0건, ④ `ROWNUM = 2`도 첫 행이 ROWNUM=1로 탈락한 뒤 ROWNUM 값이 2로 올라가지 못하여 0건이 반환된다. 따라서 ①만 결과 행 수가 다르다."
+    },
+    {
+      "subject": "2과목",
+      "number": 22,
+      "title": "아래 SQL에서 `WHERE 1 = 2` 조건에 의해 어떤 데이터도 선택되지 않았을 때, 반환 값이 NULL이 아닌 집계 함수는?\n```sql\nSELECT SUM(SAL),\n       AVG(SAL),\n       MIN(SAL),\n       COUNT(*)\nFROM   EMP\nWHERE  1 = 2;\n```",
+      "options": [
+        "`SUM(SAL)`",
+        "`AVG(SAL)`",
+        "`MIN(SAL)`",
+        "`COUNT(*)`"
+      ],
+      "correctIndex": 3,
+      "explanation": "공집합에 대한 집계 함수 중 COUNT(*)만 0을 반환하고, SUM·AVG·MIN·MAX는 모두 NULL을 반환한다."
+    },
+    {
+      "subject": "2과목",
+      "number": 23,
+      "title": "아래 네 개의 SQL 중 결과가 나머지와 다른 하나는? (A, B 테이블은 동일하며 B.FLG 값은 일부 행에만 'Y'이다.)\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\" style=\"text-align: center;\">\n  <tr><th colspan=\"2\">A</th><th colspan=\"3\">B</th></tr>\n  <tr><th>ID</th><th>NAME</th><th>ID</th><th>VAL</th><th>FLG</th></tr>\n  <tr><td>1</td><td>가</td><td>2</td><td>x</td><td>Y</td></tr>\n  <tr><td>2</td><td>나</td><td>3</td><td>y</td><td>N</td></tr>\n  <tr><td>3</td><td>다</td><td></td><td></td><td></td></tr>\n</table>",
+      "options": [
+        "`SELECT * FROM A, B WHERE A.ID = B.ID(+) AND B.FLG(+) = 'Y';`",
+        "`SELECT * FROM A LEFT OUTER JOIN B ON (A.ID = B.ID) WHERE B.FLG = 'Y';`",
+        "`SELECT * FROM A LEFT OUTER JOIN B ON (A.ID = B.ID AND B.FLG = 'Y');`",
+        "`SELECT * FROM A LEFT OUTER JOIN (SELECT * FROM B WHERE FLG = 'Y') B ON A.ID = B.ID;`"
+      ],
+      "correctIndex": 1,
+      "explanation": "①·③·④는 B에 대한 FLG 조건이 조인 단계(아우터 조인의 ON 절 또는 인라인 뷰 내부)에서 처리되어 매칭되지 않은 A의 행이 NULL로 보존된다. 반면 ②는 조인 후 WHERE 절에서 B.FLG = 'Y'를 적용하므로 NULL 값이 제거되어 내부 조인과 같은 결과가 된다. 따라서 ②만 결과가 다르다."
+    },
+    {
+      "subject": "2과목",
+      "number": 24,
+      "title": "아래 결과를 출력하기 위해 가장 적절한 SQL은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\" style=\"text-align: center;\">\n  <tr><th>지역</th><th>1월</th><th>2월</th><th>3월</th><th>4월</th></tr>\n  <tr><td>서울</td><td>12,000</td><td>13,500</td><td>14,200</td><td>15,000</td></tr>\n  <tr><td>부산</td><td>8,500</td><td>9,200</td><td>10,100</td><td>11,000</td></tr>\n  <tr><td>대구</td><td>6,800</td><td>7,400</td><td>8,000</td><td>8,600</td></tr>\n</table>",
+      "options": [
+        "`SELECT 지역, SUM(CASE WHEN 월='1월' THEN 매출 END) FROM 매출 GROUP BY 지역;`",
+        "`SELECT * FROM 매출 UNPIVOT (매출 FOR 월 IN ('1월','2월','3월','4월'));`",
+        "`SELECT * FROM 매출 PIVOT (SUM(매출) FOR 월 IN ('1월' AS \"1월\", '2월' AS \"2월\", '3월' AS \"3월\", '4월' AS \"4월\"));`",
+        "`SELECT 지역, AVG(매출) FROM 매출 GROUP BY CUBE(지역, 월);`"
+      ],
+      "correctIndex": 2,
+      "explanation": ""
+    },
+    {
+      "subject": "2과목",
+      "number": 25,
+      "title": "아래 SQL이 오류 없이 실행되기 위해 T2.COL2가 가져야 할 제약 조건은?\n```sql\nSELECT COL2\nFROM   T1\nWHERE  COL2 = (SELECT COL2\n               FROM   T2\n               WHERE  A = 'A');\n```",
+      "options": [
+        "UNIQUE",
+        "NOT NULL",
+        "FOREIGN KEY",
+        "CHECK"
+      ],
+      "correctIndex": 0,
+      "explanation": "단일 행 서브쿼리로 비교하므로 WHERE A='A'의 결과가 반드시 하나 이하로 보장되어야 한다."
+    },
+    {
+      "subject": "2과목",
+      "number": 26,
+      "title": "아래 쿼리의 윈도우 절과 동등한 의미를 가진 절은?\n```sql\nSELECT SAL,\n       SUM(SAL) OVER (ORDER BY SAL ROWS UNBOUNDED PRECEDING) AS 누적합계\nFROM   EMP;\n```",
+      "options": [
+        "`ROWS UNBOUNDED PRECEDING` (= ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW)",
+        "`ROWS UNBOUNDED PRECEDING AND 1 PRECEDING`",
+        "`RANGE UNBOUNDED PRECEDING`",
+        "`RANGE`"
+      ],
+      "correctIndex": 0,
+      "explanation": ""
+    },
+    {
+      "subject": "2과목",
+      "number": 27,
+      "title": "트랜잭션의 고립성(Isolation)에 대한 설명으로 가장 옳은 것은?",
+      "options": [
+        "다른 트랜잭션으로부터 영향을 받지 않는다.",
+        "트랜잭션 전후 데이터의 정합성이 유지된다.",
+        "전체가 반영되거나 전혀 반영되지 않는다.",
+        "커밋된 결과는 시스템 장애에도 보존된다."
+      ],
+      "correctIndex": 0,
+      "explanation": "고립성은 실행 중인 트랜잭션의 중간 결과가 다른 트랜잭션의 영향을 받지 않음을 보장한다."
+    },
+    {
+      "subject": "2과목",
+      "number": 28,
+      "title": "기본키(Primary Key) 컬럼이 반드시 만족해야 하는 제약 조건의 조합은?",
+      "options": [
+        "NULL 허용 + UNIQUE",
+        "NULL 허용 + NOT NULL",
+        "NOT NULL + UNIQUE",
+        "NOT NULL 단독"
+      ],
+      "correctIndex": 2,
+      "explanation": ""
+    },
+    {
+      "subject": "2과목",
+      "number": 29,
+      "title": "사원과 매니저 관계의 계층 트리를 조회하기 위한 CONNECT BY 절로 옳은 것은?\n```sql\nSELECT 사원, 매니저, LEVEL\nFROM   EMP\nSTART WITH 매니저 IS NULL\nCONNECT BY (  ?  );\n```",
+      "options": [
+        "PRIOR 매니저 = 사원",
+        "PRIOR 사원 = 매니저",
+        "사원 = 매니저",
+        "PRIOR 사원 = PRIOR 매니저"
+      ],
+      "correctIndex": 1,
+      "explanation": "부모의 사원번호가 자식의 매니저번호가 되어야 루트에서 아래 방향으로 트리가 확장된다."
+    },
+    {
+      "subject": "2과목",
+      "number": 30,
+      "title": "아래 계층형 질의의 결과에 대한 설명으로 가장 옳은 것은?\n```sql\nSELECT *\nFROM   부서\nSTART WITH 부서ID = 'D'\nCONNECT BY PRIOR 부서ID = 상위부서ID\n       AND COL3 <> 2;\n```",
+      "options": [
+        "루트 노드가 여러 건이어서 오류가 발생한다.",
+        "COL3 값이 2인 중간 노드가 제거되면서 그 아래 가지까지 트리에서 단절된다.",
+        "PRIOR 연산자는 CONNECT BY와 함께 사용할 수 없다.",
+        "AND 조건은 계층형 질의에서 지원되지 않는다."
+      ],
+      "correctIndex": 1,
+      "explanation": ""
+    },
+    {
+      "subject": "2과목",
+      "number": 31,
+      "title": "아래 테이블에서 FETCH 절로 상위 2건을 반환한 결과로 옳은 것은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\" style=\"text-align: center;\">\n  <tr><th>메달</th><th>개수</th></tr>\n  <tr><td>골드</td><td>1</td></tr>\n  <tr><td>실버</td><td>2</td></tr>\n  <tr><td>브론즈</td><td>1</td></tr>\n</table>\n```sql\nSELECT 메달, 개수\nFROM   메달\nFETCH FIRST 2 ROWS ONLY;\n```",
+      "options": [
+        "골드 1, 실버 2, 브론즈 1",
+        "골드 1, 실버 2",
+        "실버 2, 골드 1",
+        "실버 2, 브론즈 1"
+      ],
+      "correctIndex": 1,
+      "explanation": "FETCH FIRST n ROWS ONLY는 정렬 조건이 없으면 물리적 저장 순서대로 상위 n건을 반환한다. 테이블에 저장된 순서(골드, 실버, 브론즈) 기준 상위 2건은 골드 1, 실버 2이다."
+    },
+    {
+      "subject": "2과목",
+      "number": 32,
+      "title": "다음 중 ALTER TABLE 수행 시 오류가 발생하지 않는 것은?",
+      "options": [
+        "이미 값이 들어 있는 NOT NULL 제약을 추가하는 경우",
+        "기존 자릿수보다 짧게 NUMBER 크기를 변경하는 경우",
+        "중복 값이 있는 컬럼에 PRIMARY KEY를 추가하는 경우",
+        "TIMESTAMP 컬럼을 추가하는 경우"
+      ],
+      "correctIndex": 3,
+      "explanation": "컬럼 추가는 기존 데이터에 영향을 주지 않으므로 TIMESTAMP 컬럼 추가는 오류 없이 수행된다."
+    },
+    {
+      "subject": "2과목",
+      "number": 33,
+      "title": "아래 SQL의 결과로 옳은 것은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\" style=\"text-align: center;\">\n  <tr><th colspan=\"1\">주문</th><th colspan=\"1\">판매</th></tr>\n  <tr><th>ITEM</th><th>ITEM</th></tr>\n  <tr><td>1</td><td>3</td></tr>\n  <tr><td>2</td><td></td></tr>\n  <tr><td>3</td><td></td></tr>\n</table>\n```sql\nSELECT ITEM\nFROM   주문 O\nWHERE  NOT EXISTS (SELECT 1 FROM 판매 P WHERE P.ITEM = O.ITEM);\n```",
+      "options": [
+        "아이템 1",
+        "아이템 1, 2",
+        "공집합",
+        "오류"
+      ],
+      "correctIndex": 1,
+      "explanation": "판매에 없는 주문의 아이템인 1, 2가 반환된다."
+    },
+    {
+      "subject": "2과목",
+      "number": 34,
+      "title": "다음 집합 연산자 중 중복을 허용하는 것은?",
+      "options": [
+        "UNION",
+        "UNION ALL",
+        "INTERSECT",
+        "EXCEPT"
+      ],
+      "correctIndex": 1,
+      "explanation": ""
+    },
+    {
+      "subject": "2과목",
+      "number": 35,
+      "title": "아래 SQL 결과의 SELECT 컬럼 개수로 옳은 것은?\n```sql\nSELECT EMPNO,\n       ENAME,\n       EXTRACT(YEAR FROM HIREDATE) AS YR,\n       SAL\nFROM   EMP\nUNION\nSELECT EMPNO,\n       ENAME,\n       EXTRACT(YEAR FROM HIREDATE),\n       SAL\nFROM   EMP_HIST;\n```",
+      "options": [
+        "1개",
+        "2개",
+        "3개",
+        "4개"
+      ],
+      "correctIndex": 3,
+      "explanation": ""
+    },
+    {
+      "subject": "2과목",
+      "number": 36,
+      "title": "DML/DDL/DCL 구분에 대한 설명 중 잘못된 것은?",
+      "options": [
+        "TRUNCATE는 DML이다.",
+        "INSERT, UPDATE, DELETE, MERGE는 DML이다.",
+        "CREATE, ALTER, DROP은 DDL이다.",
+        "GRANT, REVOKE는 DCL이다."
+      ],
+      "correctIndex": 0,
+      "explanation": "TRUNCATE는 DDL에 속한다."
+    },
+    {
+      "subject": "2과목",
+      "number": 37,
+      "title": "아래 두 테이블을 조인한 결과의 SUM 값으로 옳은 것은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\" style=\"text-align: center;\">\n  <tr><th colspan=\"2\">[테이블1]</th><th>[테이블2]</th></tr>\n  <tr><th>컬럼1</th><th>컬럼2</th><th>컬럼1</th></tr>\n  <tr><td>1</td><td>10</td><td>1</td></tr>\n  <tr><td>2</td><td>20</td><td>2</td></tr>\n  <tr><td>3</td><td>30</td><td>3</td></tr>\n  <tr><td>4</td><td>40</td><td>4</td></tr>\n  <tr><td></td><td></td><td>5</td></tr>\n</table>\n```sql\nSELECT SUM(A.컬럼2)\nFROM   테이블1 A, 테이블2 B\nWHERE  A.컬럼1 = B.컬럼1;\n```",
+      "options": [
+        "100",
+        "120",
+        "140",
+        "NULL"
+      ],
+      "correctIndex": 0,
+      "explanation": "조인 키(컬럼1)가 일치하는 4건의 행이 매칭되고 컬럼2 값의 합은 10 + 20 + 30 + 40 = 100이 된다."
+    },
+    {
+      "subject": "2과목",
+      "number": 38,
+      "title": "아래 SQL의 결과로 옳은 것은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\" style=\"text-align: center;\">\n  <tr><th>테이블 A (2건)</th><th>테이블 B (2건)</th></tr>\n  <tr><td>a1, a2</td><td>b1, b2</td></tr>\n</table>\n```sql\nSELECT COUNT(*)\nFROM   A, B;   -- 카티션 곱\n```",
+      "options": [
+        "4",
+        "2",
+        "0",
+        "오류"
+      ],
+      "correctIndex": 0,
+      "explanation": "카티션 곱은 각 테이블의 행 수의 곱으로 반환된다."
+    },
+    {
+      "subject": "2과목",
+      "number": 39,
+      "title": "아래 MERGE 문 수행 후 각 컬럼의 값으로 옳은 것은?\n```sql\nMERGE INTO TGT T\nUSING SRC S\nON (T.ID = S.ID)\nWHEN MATCHED THEN\n  UPDATE SET T.V1 = 100, T.V2 = 100\nWHEN NOT MATCHED THEN\n  INSERT (ID, V1, V2, V3) VALUES (S.ID, 100, 100, 100);\n```",
+      "options": [
+        "100 100 100",
+        "100 100 NULL",
+        "NULL 100 100",
+        "100 NULL 100"
+      ],
+      "correctIndex": 0,
+      "explanation": ""
+    },
+    {
+      "subject": "2과목",
+      "number": 40,
+      "title": "아래 SQL에서 오류가 발생하는 절은?\n```sql\nSELECT PRODUCT_CD AS 제품코드\nFROM   PRODUCT\nWHERE  제품코드 = 'A01'\nAND    제품코드 LIKE 'A%'\nORDER BY 제품코드;\n```",
+      "options": [
+        "SELECT 절",
+        "FROM 절",
+        "WHERE 절의 제품코드 별칭 사용",
+        "ORDER BY 절의 제품코드 별칭 사용"
+      ],
+      "correctIndex": 2,
+      "explanation": "SELECT 절에서 부여한 별칭은 WHERE 절에서 참조할 수 없다. ORDER BY 절에서는 참조가 가능하다."
+    },
+    {
+      "subject": "2과목",
+      "number": 41,
+      "title": "아래 내용 중 결과가 나머지와 다른 하나는?",
+      "options": [
+        "`WHERE 1 > NULL`",
+        "`NULL + 1`",
+        "`NULL * 1`",
+        "`NULL * NULL`"
+      ],
+      "correctIndex": 0,
+      "explanation": "②, ③, ④는 모두 NULL 값을 반환하지만 ①은 UNKNOWN으로 평가되어 해당 행을 필터링한다."
+    },
+    {
+      "subject": "2과목",
+      "number": 42,
+      "title": "다음 SELECT 문 중 반환 값이 나머지와 다른 것은?",
+      "options": [
+        "`SELECT 1 + NULL FROM DUAL;`",
+        "`SELECT 'X' FROM DUAL;`",
+        "`SELECT 1 * NULL FROM DUAL;`",
+        "`SELECT NULL, NULL FROM DUAL;`"
+      ],
+      "correctIndex": 1,
+      "explanation": "①, ③, ④는 결과에 NULL이 포함되지만 ②만 문자 상수 'X'를 반환한다."
+    },
+    {
+      "subject": "2과목",
+      "number": 43,
+      "title": "아래 CREATE TABLE과 INSERT 수행 후 최종 COUNT 값으로 옳은 것은?\n```sql\nCREATE TABLE T (\n  ID  NUMBER GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1),\n  VAL NUMBER CHECK (VAL > 0)\n);\nINSERT INTO T(VAL) VALUES (-1);   -- CHECK 위반\nINSERT INTO T(VAL) VALUES ( 0);   -- CHECK 위반\nINSERT INTO T(VAL) VALUES ( 1);   -- 성공\nCOMMIT;\nSELECT COUNT(*) FROM T;\n```",
+      "options": [
+        "0",
+        "1",
+        "2",
+        "3"
+      ],
+      "correctIndex": 1,
+      "explanation": "CHECK 제약을 통과한 행은 VAL=1 한 건뿐이므로 COUNT 결과는 1이다."
+    },
+    {
+      "subject": "2과목",
+      "number": 44,
+      "title": "DROP TABLE ... RESTRICT 옵션 사용 시 해당 테이블을 참조하는 뷰가 존재하는 경우의 결과로 옳은 것은?",
+      "options": [
+        "어떤 객체도 삭제되지 않는다.",
+        "테이블만 삭제되고 뷰는 남는다.",
+        "테이블과 뷰가 함께 삭제된다.",
+        "뷰가 먼저 삭제된 뒤 테이블이 삭제된다."
+      ],
+      "correctIndex": 0,
+      "explanation": "RESTRICT 옵션은 참조하는 객체가 있으면 삭제를 거부한다. 오류가 발생하고 아무 것도 삭제되지 않는다."
+    },
+    {
+      "subject": "2과목",
+      "number": 45,
+      "title": "`NVL(COMM, SAL)`에 대한 설명 중 옳지 않은 것은?",
+      "options": [
+        "COMM과 SAL의 덧셈 연산을 수행한다.",
+        "COMM 값이 NULL일 때 SAL을 반환한다.",
+        "COMM과 SAL의 데이터 타입이 호환되어야 한다.",
+        "COMM 값이 NULL이 아니면 COMM을 그대로 반환한다."
+      ],
+      "correctIndex": 0,
+      "explanation": "NVL은 NULL 치환 함수이며 덧셈 연산을 수행하지 않는다. 따라서 덧셈 연산을 수행한다고 기술한 ①은 옳지 않은 설명에 해당하여 정답이 된다. 원본 파편의 \"덧셈 연산 안한다\"는 해당 보기를 요약한 메모로 판단하여, 본래의 틀린 진술 형태(\"덧셈 연산을 수행한다\")로 복원하였다."
+    },
+    {
+      "subject": "2과목",
+      "number": 46,
+      "title": "부서별 급여 상위 3명을 조회하려 한다. 빈칸에 들어갈 분석 함수로 가장 적절한 것은?\n```sql\nSELECT 부서, 사원, 급여\nFROM ( SELECT 부서, 사원, 급여,\n              (  ?  ) OVER (PARTITION BY 부서 ORDER BY 급여 DESC) AS RNK\n       FROM   EMP )\nWHERE RNK <= 3;\n```",
+      "options": [
+        "DENSE_RANK",
+        "ROWNUM",
+        "NTILE",
+        "CUME_DIST"
+      ],
+      "correctIndex": 0,
+      "explanation": ""
+    },
+    {
+      "subject": "2과목",
+      "number": 47,
+      "title": "어느 부서에도 속하지 않는 직원을 조회하는 SQL로 가장 적절한 것은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\" style=\"text-align: center;\">\n  <tr><th colspan=\"3\">EMP</th><th colspan=\"2\">DEPT</th></tr>\n  <tr><th>EMPNO</th><th>ENAME</th><th>DEPTNO</th><th>DEPTNO</th><th>DNAME</th></tr>\n  <tr><td>1</td><td>A</td><td>10</td><td>10</td><td>영업</td></tr>\n  <tr><td>2</td><td>B</td><td>NULL</td><td>20</td><td>인사</td></tr>\n  <tr><td>3</td><td>C</td><td>99</td><td></td><td></td></tr>\n</table>",
+      "options": [
+        "`SELECT * FROM EMP E, DEPT D WHERE E.DEPTNO = D.DEPTNO;`",
+        "`SELECT * FROM EMP WHERE DEPTNO IS NULL OR DEPTNO NOT IN (SELECT DEPTNO FROM DEPT);`",
+        "`SELECT * FROM EMP E WHERE EXISTS (SELECT 1 FROM DEPT D WHERE D.DEPTNO = E.DEPTNO);`",
+        "`SELECT * FROM EMP INNER JOIN DEPT USING (DEPTNO);`"
+      ],
+      "correctIndex": 1,
+      "explanation": "어떤 부서에도 속하지 않는 경우는 DEPTNO가 NULL이거나 DEPT 테이블에 존재하지 않는 값을 가진 경우이다."
+    },
+    {
+      "subject": "2과목",
+      "number": 48,
+      "title": "다음 중 ROLLUP(A, B)에는 포함되지 않지만 CUBE(A, B)에는 포함되는 집계 조합은?\n```sql\n-- ROLLUP(A,B):  (A,B), (A, NULL), (NULL, NULL)\n-- CUBE(A,B):    (A,B), (A, NULL), (NULL, B), (NULL, NULL)\n```",
+      "options": [
+        "(A, B)",
+        "(A, NULL)",
+        "(NULL, B)",
+        "(NULL, NULL)"
+      ],
+      "correctIndex": 2,
+      "explanation": "CUBE는 모든 조합을 반환하지만 ROLLUP은 좌측부터 점진적으로 집계를 수행하므로 (NULL, B) 조합은 ROLLUP 결과에는 존재하지 않는다."
+    },
+    {
+      "subject": "2과목",
+      "number": 49,
+      "title": "아래 DDL에서 성별 컬럼에 'M' 또는 'F'만 허용하도록 강제하는 제약 조건은?\n```sql\nCREATE TABLE MEMBER (\n  ID   VARCHAR2(10) PRIMARY KEY,\n  NAME VARCHAR2(30) NOT NULL,\n  SEX  CHAR(1)  (  ?  ) (SEX IN ('M','F'))\n);\n```",
+      "options": [
+        "NOT NULL",
+        "CHECK",
+        "PRIMARY KEY",
+        "FOREIGN KEY"
+      ],
+      "correctIndex": 1,
+      "explanation": ""
+    },
+    {
+      "subject": "2과목",
+      "number": 50,
+      "title": "아래 SQL이 반환하는 결과에 대한 설명으로 가장 적절한 것은?\n```sql\nSELECT 고객ID, COUNT(*) AS 주문건수\nFROM   주문\nGROUP BY 고객ID\nHAVING MAX(수량) > 10;\n```",
+      "options": [
+        "주문 수량이 10을 넘는 건이 있는 고객의 주문 건수를 조회한다",
+        "주문 수량 총 합계가 10을 넘는 고객의 주문 건수를 조회한다",
+        "주문 횟수가 10건을 넘는 고객의 주문 건수를 조회한다",
+        "수량 컬럼이 NULL이 아닌 고객의 주문 건수를 조회한다"
+      ],
+      "correctIndex": 0,
+      "explanation": "HAVING MAX(수량) > 10 은 한 건이라도 수량이 10을 초과하는 고객 그룹을 선택한다."
+    }
+  ],
+  "shortAnswerOmitted": []
+}

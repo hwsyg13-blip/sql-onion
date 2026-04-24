@@ -1,0 +1,604 @@
+{
+  "round": 50,
+  "notes": "restored from 50회_복원.md — MCQ 44 + 단답형 6 (단답형은 현재 UI 미지원이라 제외)",
+  "authored": [
+    {
+      "subject": "1과목",
+      "number": 1,
+      "title": "주식별자 도출 기준으로 옳지 않은 것은?",
+      "options": [
+        "해당 업무에서 자주 이용되는 속성을 주식별자로 지정한다.",
+        "지정된 주식별자의 값은 자주 변하지 않아야 한다.",
+        "명칭·내역 등과 같이 이름으로 기술되는 속성을 주식별자로 지정한다.",
+        "복합으로 주식별자를 구성할 경우 너무 많은 속성을 포함하지 않도록 한다."
+      ],
+      "correctIndex": 2,
+      "explanation": "명칭·내역 등 서술형 속성은 자주 변경되며 주식별자로 부적합하다."
+    },
+    {
+      "subject": "1과목",
+      "number": 2,
+      "title": "관계의 표기법 요소가 아닌 것은?",
+      "options": [
+        "관계명",
+        "관계차수",
+        "관계선택사양",
+        "관계분류"
+      ],
+      "correctIndex": 3,
+      "explanation": "관계 표기법은 관계명·관계차수·관계선택사양 세 요소로 구성된다."
+    },
+    {
+      "subject": "1과목",
+      "number": 3,
+      "title": "하나의 엔터티에 구성되어 있는 여러 속성 중 엔터티를 대표할 수 있는 속성은?",
+      "options": [
+        "파생속성",
+        "복합속성",
+        "단일속성",
+        "식별자"
+      ],
+      "correctIndex": 3,
+      "explanation": ""
+    },
+    {
+      "subject": "1과목",
+      "number": 4,
+      "title": "개념 엔터티로 적합한 예시는?",
+      "options": [
+        "조직, 보험상품",
+        "주문, 입금",
+        "청구, 결제",
+        "로그인, 알림"
+      ],
+      "correctIndex": 0,
+      "explanation": "개념 엔터티는 실체는 없으나 업무상 정의된 추상 개념을 다룬다."
+    },
+    {
+      "subject": "1과목",
+      "number": 5,
+      "title": "발생 시점 기준 중심 엔터티에 해당하는 예는?",
+      "options": [
+        "사원",
+        "고객",
+        "프로젝트",
+        "주문"
+      ],
+      "correctIndex": 2,
+      "explanation": "중심 엔터티는 기본 엔터티로부터 파생되어 업무 수행 과정에서 주 대상이 되는 엔터티이다."
+    },
+    {
+      "subject": "1과목",
+      "number": 6,
+      "title": "데이터 모델링 유의 사항 중 옳지 않은 것은?",
+      "options": [
+        "중복 데이터를 최소화한다.",
+        "업무 규칙을 반영해야 한다.",
+        "엔터티 간 관계를 명확히 표현해야 한다.",
+        "프로젝트별로 상이한 엔터티를 별도의 제약 없이 통합하여 저장한다."
+      ],
+      "correctIndex": 3,
+      "explanation": "업무 성격이 상이한 데이터를 무조건 합치면 데이터 무결성과 관리 효율이 떨어진다."
+    },
+    {
+      "subject": "1과목",
+      "number": 7,
+      "title": "아래 설명에 해당하는 개념은?",
+      "options": [
+        "관계",
+        "속성",
+        "도메인",
+        "식별자"
+      ],
+      "correctIndex": 3,
+      "explanation": "엔터티의 인스턴스를 유일하게 구분할 수 있게 하는 하나 또는 그 이상의 속성 집합"
+    },
+    {
+      "subject": "1과목",
+      "number": 8,
+      "title": "데이터베이스 스키마의 종류가 아닌 것은?",
+      "options": [
+        "외부 스키마",
+        "내부 스키마",
+        "개념 스키마",
+        "응용 스키마"
+      ],
+      "correctIndex": 3,
+      "explanation": ""
+    },
+    {
+      "subject": "1과목",
+      "number": 9,
+      "title": "M:N 관계를 1:M, M:1 관계로 해소하여 정규화를 수행하는 데이터 모델링 단계는?",
+      "options": [
+        "개괄적 모델링",
+        "개념적 모델링",
+        "논리적 모델링",
+        "물리적 모델링"
+      ],
+      "correctIndex": 2,
+      "explanation": ""
+    },
+    {
+      "subject": "2과목",
+      "number": 11,
+      "title": "평균 학점이 3.0 이상인 학생을 조회하는 SQL 로 가장 적절한 것은?\n```\nSTUDENT(학과, 학번, 강좌), CLASS(강좌번호, ...), ENROLL(학번, 강좌번호, 학점)\n```",
+      "options": [
+        "SELECT 학번 FROM STUDENT WHERE AVG(학점) >= 3.0;",
+        "SELECT 학번 FROM STUDENT S, ENROLL E WHERE S.학번 = E.학번 HAVING AVG(학점) >= 3.0;",
+        "SELECT S.학번 FROM STUDENT S JOIN ENROLL E ON S.학번 = E.학번 GROUP BY S.학번 HAVING AVG(E.학점) >= 3.0;",
+        "SELECT 학번 FROM ENROLL WHERE AVG(학점) >= 3.0;"
+      ],
+      "correctIndex": 2,
+      "explanation": ""
+    },
+    {
+      "subject": "2과목",
+      "number": 12,
+      "title": "아래 뷰 생성 스크립트와 조회 SQL 의 실행 결과로 옳은 것은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>C1</th><th>C2</th></tr>\n  <tr><td>A</td><td>100</td></tr>\n  <tr><td>B</td><td>200</td></tr>\n  <tr><td>B</td><td>100</td></tr>\n  <tr><td>NULL</td><td>200</td></tr>\n</table>\n```sql\nCREATE VIEW V_TBL AS\nSELECT * FROM TBL WHERE C1 = 'B' OR C1 IS NULL;\nSELECT SUM(C2) FROM V_TBL\nWHERE C2 >= 200 AND C1 = 'B';\n```",
+      "options": [
+        "0",
+        "200",
+        "300",
+        "400"
+      ],
+      "correctIndex": 1,
+      "explanation": "뷰 조건과 조회 조건이 AND 로 결합되어 C1='B' 이고 C2 >= 200 인 (B, 200) 한 건의 SUM 이 200 이다."
+    },
+    {
+      "subject": "2과목",
+      "number": 13,
+      "title": "아래 OUTER JOIN SQL 의 결과로 옳은 것은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th colspan=\"2\">TAB1</th><th colspan=\"2\">TAB2</th></tr>\n  <tr><th>C1</th><th>C2</th><th>C1</th><th>C2</th></tr>\n  <tr><td>A</td><td>1</td><td>B</td><td>2</td></tr>\n  <tr><td>B</td><td>2</td><td>C</td><td>3</td></tr>\n  <tr><td>C</td><td>3</td><td>D</td><td>4</td></tr>\n  <tr><td>D</td><td>4</td><td></td><td></td></tr>\n  <tr><td>E</td><td>5</td><td></td><td></td></tr>\n</table>\n```sql\nSELECT * FROM TAB1 A\nLEFT OUTER JOIN TAB2 B\nON (A.C1 = B.C1 AND B.C2 BETWEEN 1 AND 3);\n```",
+      "options": [
+        "TAB1 의 3행만 반환",
+        "TAB1 의 5행 모두 반환 (매칭되지 않은 D, E 의 TAB2 컬럼은 NULL)",
+        "TAB1 의 4행만 반환",
+        "공집합"
+      ],
+      "correctIndex": 1,
+      "explanation": ""
+    },
+    {
+      "subject": "2과목",
+      "number": 14,
+      "title": "아래 SQL 의 결과로 옳은 것은?\n```sql\nSELECT SUBSTR(STR, LENGTH(STR) - 3) FROM T;\n-- STR = 'abcdefg', LENGTH = 7\n```",
+      "options": [
+        "abcd",
+        "defg",
+        "cdefg",
+        "efg"
+      ],
+      "correctIndex": 1,
+      "explanation": "'abcdefg' 문자열에 대해 SUBSTR 을 수행한다. SUBSTR('abcdefg', 4) 는 4번째 문자부터 끝까지이므로 'defg' 이다."
+    },
+    {
+      "subject": "2과목",
+      "number": 15,
+      "title": "아래 SQL 의 결과로 옳은 것은?\n```sql\nSELECT NVL(COUNT(*), 9999)\nFROM   TAB1\nWHERE  1 = 2;\n```",
+      "options": [
+        "0",
+        "9999",
+        "1",
+        "ERROR"
+      ],
+      "correctIndex": 0,
+      "explanation": "COUNT(*) 는 행이 없어도 0 을 반환하므로 NVL 의 대체 값이 적용되지 않는다."
+    },
+    {
+      "subject": "2과목",
+      "number": 16,
+      "title": "클래스와 튜터 관계에서 빠짐없이 값이 나오도록 조인하려 한다. 가장 적절한 조합은?",
+      "options": [
+        "INNER JOIN 만 사용",
+        "클래스 기준 LEFT JOIN",
+        "튜터 기준 RIGHT JOIN",
+        "양쪽을 모두 포함하는 FULL OUTER JOIN"
+      ],
+      "correctIndex": 3,
+      "explanation": ""
+    },
+    {
+      "subject": "2과목",
+      "number": 17,
+      "title": "카테고리번호 11 에서 상위 카테고리까지 역방향으로 조회하는 계층형 SQL 로 옳은 것은?",
+      "options": [
+        "START WITH 카테고리번호=11 CONNECT BY PRIOR 카테고리번호=상위카테고리번호",
+        "START WITH 카테고리번호=11 CONNECT BY 카테고리번호=PRIOR 상위카테고리번호",
+        "START WITH 상위카테고리번호=11 CONNECT BY PRIOR 카테고리번호=상위카테고리번호",
+        "START WITH 카테고리번호=11 CONNECT BY 상위카테고리번호=PRIOR 상위카테고리번호"
+      ],
+      "correctIndex": 1,
+      "explanation": "자식의 카테고리번호가 부모 행의 상위카테고리번호와 매칭되어 자식→부모 역방향 탐색이 이루어진다."
+    },
+    {
+      "subject": "2과목",
+      "number": 18,
+      "title": "아래 집계 결과에 해당하는 GROUP BY 절은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>A</th><th>B</th></tr>\n  <tr><td>A1</td><td>B1</td></tr>\n  <tr><td>A1</td><td>NULL</td></tr>\n  <tr><td>NULL</td><td>B1</td></tr>\n  <tr><td>NULL</td><td>NULL</td></tr>\n</table>",
+      "options": [
+        "ROLLUP(A, B)",
+        "GROUPING SETS((A, B))",
+        "GROUP BY A, B",
+        "CUBE(A, B)"
+      ],
+      "correctIndex": 3,
+      "explanation": "CUBE 는 (A,B), (A), (B), () 의 모든 부분집합을 반환한다."
+    },
+    {
+      "subject": "2과목",
+      "number": 19,
+      "title": "NATURAL JOIN 의 특징으로 옳지 않은 것은?",
+      "options": [
+        "두 테이블 간 동일 이름의 컬럼으로 조인이 이루어진다.",
+        "등가 조인(Equi Join) 과 비등가 조인(Non-Equi Join) 이 모두 가능하다.",
+        "USING 절과 함께 사용할 수 없다.",
+        "ON 절과 함께 사용할 수 없다."
+      ],
+      "correctIndex": 1,
+      "explanation": "NATURAL JOIN 은 동일 이름 컬럼에 대해 등가 조인만 수행한다."
+    },
+    {
+      "subject": "2과목",
+      "number": 20,
+      "title": "아래 테이블에서 이름별 그룹의 최소 ID 만 남기고 삭제하는 SQL 로 옳은 것은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>ID</th><th>NAME</th></tr>\n  <tr><td>100</td><td>KIM</td></tr>\n  <tr><td>200</td><td>PARK</td></tr>\n  <tr><td>300</td><td>KANG</td></tr>\n  <tr><td>400</td><td>KIM</td></tr>\n  <tr><td>500</td><td>KANG</td></tr>\n</table>",
+      "options": [
+        "DELETE FROM T WHERE ID NOT IN (SELECT MIN(ID) FROM T GROUP BY NAME);",
+        "DELETE FROM T WHERE ID IN (SELECT MAX(ID) FROM T GROUP BY NAME);",
+        "DELETE FROM T WHERE ID = MIN(ID);",
+        "DELETE FROM T GROUP BY NAME HAVING ID = MIN(ID);"
+      ],
+      "correctIndex": 0,
+      "explanation": ""
+    },
+    {
+      "subject": "2과목",
+      "number": 21,
+      "title": "ALTER 문으로 컬럼의 형식을 변경하는 SQL 로 옳은 것은?",
+      "options": [
+        "ALTER TABLE TEAM MODIFY 컬럼명 VARCHAR2(10) DEFAULT '2023-09-09' NOT NULL;",
+        "ALTER TABLE TEAM CHANGE 컬럼명 VARCHAR2(10);",
+        "ALTER COLUMN TEAM.컬럼명 TYPE VARCHAR2(10);",
+        "UPDATE TABLE TEAM MODIFY 컬럼명 VARCHAR2(10);"
+      ],
+      "correctIndex": 0,
+      "explanation": ""
+    },
+    {
+      "subject": "2과목",
+      "number": 22,
+      "title": "아래 Oracle SQL 과 동일한 결과를 반환하는 ANSI 표준 SQL 은?\n```sql\nSELECT A.KEY_A, B.KEY_B, A.COL, B.COL\nFROM   A22 A, B22 B\nWHERE  A.KEY_A = B.KEY_B(+)\nUNION ALL\nSELECT A.KEY_A, B.KEY_B, A.COL, B.COL\nFROM   A22 A, B22 B\nWHERE  B.KEY_B = A.KEY_A(+);\n```",
+      "options": [
+        "FULL OUTER JOIN 만 사용",
+        "LEFT OUTER JOIN UNION ALL RIGHT OUTER JOIN",
+        "LEFT OUTER JOIN UNION RIGHT OUTER JOIN",
+        "CROSS JOIN"
+      ],
+      "correctIndex": 1,
+      "explanation": ""
+    },
+    {
+      "subject": "2과목",
+      "number": 23,
+      "title": "데이터 제어어(DCL) 및 트랜잭션 제어어(TCL) 에 해당하지 않는 명령은?",
+      "options": [
+        "GRANT",
+        "ROLLBACK",
+        "REVOKE",
+        "ALTER"
+      ],
+      "correctIndex": 3,
+      "explanation": "ALTER 는 DDL 에 속한다."
+    },
+    {
+      "subject": "2과목",
+      "number": 24,
+      "title": "SQL 집합 연산자 중 교집합을 반환하는 것은?",
+      "options": [
+        "UNION ALL",
+        "EXCEPT",
+        "INTERSECT",
+        "UNION"
+      ],
+      "correctIndex": 2,
+      "explanation": ""
+    },
+    {
+      "subject": "2과목",
+      "number": 25,
+      "title": "DELETE, TRUNCATE, DROP 명령어에 대한 비교 중 옳지 않은 것은?",
+      "options": [
+        "DROP 은 테이블 정의와 모든 데이터를 삭제한다.",
+        "TRUNCATE 는 테이블을 초기 상태로 만든다.",
+        "TRUNCATE 는 UNDO 데이터를 생성하지 않아 DELETE 보다 빠르다.",
+        "DROP 은 Auto Commit 이고 DELETE 와 TRUNCATE 는 사용자 COMMIT 으로 수행된다."
+      ],
+      "correctIndex": 3,
+      "explanation": "TRUNCATE 도 Auto Commit 이 수행된다. 사용자 COMMIT 이 필요한 것은 DELETE 뿐이다."
+    },
+    {
+      "subject": "2과목",
+      "number": 26,
+      "title": "아래 테이블명 중 올바른 것은?",
+      "options": [
+        "2023_TBL",
+        "2023-TBL",
+        "TBL-2023",
+        "TBL_2023#"
+      ],
+      "correctIndex": 3,
+      "explanation": "테이블명은 문자로 시작해야 하고 $, #, _ 특수문자는 허용된다."
+    },
+    {
+      "subject": "2과목",
+      "number": 27,
+      "title": "부서별 최고 연봉을 조회하는 SQL 로 옳은 것은?\n```sql\nSELECT 부서, MAX(연봉)\nFROM   EMP\n( ? );\n```",
+      "options": [
+        "GROUP BY 부서",
+        "HAVING 부서",
+        "ORDER BY 부서",
+        "WHERE 부서"
+      ],
+      "correctIndex": 0,
+      "explanation": ""
+    },
+    {
+      "subject": "2과목",
+      "number": 28,
+      "title": "아래 SQL 의 결과로 옳은 것은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>급여</th></tr>\n  <tr><td>4000</td></tr>\n  <tr><td>NULL</td></tr>\n  <tr><td>4000</td></tr>\n  <tr><td>4000</td></tr>\n</table>\n```sql\nSELECT SUM(급여)/3, COUNT(*), COUNT(급여) FROM T;\n-- SUM(급여)/3 = 12000/3 = 4000\n-- COUNT(*) = 4 (NULL 포함)\n-- COUNT(급여) = 3 (NULL 제외)\n```",
+      "options": [
+        "4000, 4, 3",
+        "4000, 3, 4",
+        "3000, 4, 4",
+        "4000, 4, 4"
+      ],
+      "correctIndex": 0,
+      "explanation": ""
+    },
+    {
+      "subject": "2과목",
+      "number": 29,
+      "title": "아래 설명에 해당하는 윈도우 함수는?",
+      "options": [
+        "LEAD",
+        "LAG",
+        "FIRST_VALUE",
+        "LAST_VALUE"
+      ],
+      "correctIndex": 1,
+      "explanation": "현재 행 기준 이전 행의 값을 참조한다."
+    },
+    {
+      "subject": "2과목",
+      "number": 30,
+      "title": "아래 LAG·LEAD 함수 결과 중 나머지와 다른 것은?",
+      "options": [
+        "LAG(VAL, 1) OVER(ORDER BY ID)",
+        "LEAD(VAL, -1) OVER(ORDER BY ID)",
+        "LAG(VAL, 1) OVER(ORDER BY ID DESC)",
+        "LEAD(VAL, 1) OVER(ORDER BY ID DESC) 과 동일한 효과"
+      ],
+      "correctIndex": 2,
+      "explanation": ""
+    },
+    {
+      "subject": "2과목",
+      "number": 31,
+      "title": "계층형 질의 관련 설명 중 옳지 않은 것은?",
+      "options": [
+        "LEAF 노드의 LEVEL 은 항상 1이다.",
+        "CONNECT_BY_ISLEAF 는 리프 노드이면 1을 반환한다.",
+        "ORDER SIBLINGS BY 는 동일 레벨 내에서 정렬을 수행한다.",
+        "NOCYCLE 옵션은 사이클 발생 시 전개를 중단한다."
+      ],
+      "correctIndex": 0,
+      "explanation": "LEVEL 은 루트에서 1, 하위로 내려갈수록 1씩 증가한다. 리프 노드의 LEVEL 이 항상 1이라는 설명은 잘못되었다."
+    },
+    {
+      "subject": "2과목",
+      "number": 32,
+      "title": "아래 컬럼 속성(VARCHAR2(8)) 을 변경하는 SQL 로 옳은 것은?",
+      "options": [
+        "ALTER TABLE T MODIFY (COL VARCHAR2(10));",
+        "ALTER TABLE T CHANGE COL VARCHAR2(10);",
+        "ALTER TABLE T ALTER COL VARCHAR2(10);",
+        "ALTER TABLE T UPDATE COL VARCHAR2(10);"
+      ],
+      "correctIndex": 0,
+      "explanation": "Oracle 문법상 컬럼 타입 변경은 MODIFY 키워드를 사용한다."
+    },
+    {
+      "subject": "2과목",
+      "number": 33,
+      "title": "아래 SQL 수행 시 추가되는 시간으로 옳은 것은?\n```sql\nSELECT SYSDATE + 1/12/(60/30) FROM DUAL;\n```",
+      "options": [
+        "+30분",
+        "+45분",
+        "+1시간",
+        "+2시간"
+      ],
+      "correctIndex": 2,
+      "explanation": "1/24/60 = 1분이며, 1/12/2 = 1/24 = 1시간에 해당한다."
+    },
+    {
+      "subject": "2과목",
+      "number": 34,
+      "title": "아래 네 개의 SQL 중 실행 결과가 다른 것은?",
+      "options": [
+        "LEFT OUTER JOIN",
+        "UNION ALL + RIGHT OUTER JOIN",
+        "FULL OUTER JOIN",
+        "INNER JOIN 만 수행"
+      ],
+      "correctIndex": 3,
+      "explanation": ""
+    },
+    {
+      "subject": "2과목",
+      "number": 35,
+      "title": "아래 설명 중 옳지 않은 것은?",
+      "options": [
+        "INTERSECT 는 두 집합의 교집합을 반환한다.",
+        "UNION 은 중복을 제거한다.",
+        "EXCEPT 는 차집합을 반환한다.",
+        "일반 집합 연산은 ORDER BY 구문으로 사용할 수 없다."
+      ],
+      "correctIndex": 3,
+      "explanation": "UNION, INTERSECT 등도 최종 결과에 ORDER BY 를 적용할 수 있다."
+    },
+    {
+      "subject": "2과목",
+      "number": 36,
+      "title": "사원이 없는 부서까지 포함하여 조회하는 조인 방식은?",
+      "options": [
+        "INNER JOIN",
+        "LEFT OUTER JOIN (부서 기준)",
+        "RIGHT OUTER JOIN (사원 기준)",
+        "CROSS JOIN"
+      ],
+      "correctIndex": 1,
+      "explanation": ""
+    },
+    {
+      "subject": "2과목",
+      "number": 37,
+      "title": "아래 계층형 결과를 반환하는 SQL 로 옳은 것은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>부서코드</th><th>상위부서코드</th></tr>\n  <tr><td>11</td><td>7</td></tr>\n  <tr><td>7</td><td>2</td></tr>\n  <tr><td>2</td><td>NULL</td></tr>\n</table>",
+      "options": [
+        "START WITH 부서코드=2 CONNECT BY 상위부서코드 = PRIOR 부서코드",
+        "START WITH 부서코드=2 CONNECT BY PRIOR 상위부서코드 = 부서코드",
+        "START WITH 부서코드=11 CONNECT BY 상위부서코드 = PRIOR 부서코드",
+        "START WITH 부서코드=11 CONNECT BY PRIOR 상위부서코드 = 부서코드"
+      ],
+      "correctIndex": 3,
+      "explanation": "부서 11 에서 시작해 자식→부모 방향(역방향) 으로 2 까지 거슬러 올라간다."
+    },
+    {
+      "subject": "2과목",
+      "number": 38,
+      "title": "출연료가 8,888 이상인 영화의 영화명·배우명·출연료를 조회하는 SQL 로 가장 적절한 것은?\n```\n배우(배우번호, 배우명, 성별)\n영화(영화번호, 영화명, 제작년도)\n출연(배우번호, 영화번호, 출연료)\n```",
+      "options": [
+        "SELECT 출연.영화명, 영화.배우명, ...",
+        "SELECT 영화.영화명, 배우.배우명 ... WHERE 출연료 > 8888",
+        "SELECT 영화명, 배우명 ... (테이블 소유 속성 오류)",
+        "SELECT 영화.영화명, 배우.배우명, 출연료 FROM 배우, 영화, 출연 WHERE 출연료 >= 8888 AND 출연.영화번호 = 영화.영화번호 AND 출연.배우번호 = 배우.배우번호;"
+      ],
+      "correctIndex": 3,
+      "explanation": ""
+    },
+    {
+      "subject": "2과목",
+      "number": 39,
+      "title": "아래 테이블에서 COUNT(DISTINCT 급여) 의 결과는?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>ID</th><th>급여</th></tr>\n  <tr><td>101</td><td>30000</td></tr>\n  <tr><td>102</td><td>35000</td></tr>\n  <tr><td>103</td><td>4000</td></tr>\n  <tr><td>104</td><td>35000</td></tr>\n  <tr><td>105</td><td>4000</td></tr>\n</table>",
+      "options": [
+        "5",
+        "3",
+        "4",
+        "2"
+      ],
+      "correctIndex": 1,
+      "explanation": "서로 다른 급여 값은 30000, 35000, 4000 의 3개이다."
+    },
+    {
+      "subject": "2과목",
+      "number": 40,
+      "title": "두 번째 글자가 's' 이고 전체 길이가 4 글자 이상인 문자열을 찾는 LIKE 패턴으로 옳지 않은 것은?",
+      "options": [
+        "'%S_ _'",
+        "'_S%_ _'",
+        "'_S_%_'",
+        "'_S_ _ %'"
+      ],
+      "correctIndex": 0,
+      "explanation": "'%S_ _' 은 S 의 위치가 두 번째가 아닐 수 있고 길이도 보장하지 못한다."
+    },
+    {
+      "subject": "2과목",
+      "number": 41,
+      "title": "아래 뷰와 SELECT 조건의 결과로 옳은 것은?\n```sql\n-- 뷰: WHERE C1 = 'B' OR C1 IS NULL\n-- 조회: WHERE C2 >= 200 AND C1 = 'B'\n```",
+      "options": [
+        "0",
+        "200",
+        "300",
+        "NULL"
+      ],
+      "correctIndex": 1,
+      "explanation": ""
+    },
+    {
+      "subject": "2과목",
+      "number": 42,
+      "title": "아래 네 개의 SQL 중 결과가 나머지와 다른 것은?",
+      "options": [
+        "SELECT * FROM T1 NATURAL JOIN T2;",
+        "SELECT * FROM T1 JOIN T2 USING(COL);",
+        "SELECT * FROM T1 INNER JOIN T2 ON T1.COL = T2.COL;",
+        "SELECT * FROM T2 WHERE T2.COL IN (SELECT COL FROM T1 WHERE T2.COL = T1.COL);"
+      ],
+      "correctIndex": 3,
+      "explanation": ""
+    },
+    {
+      "subject": "2과목",
+      "number": 43,
+      "title": "아래 데이터에 대한 SUM/COUNT 결과로 옳은 것은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>회원번호</th><th>회원코드</th><th>물건</th><th>금액</th></tr>\n  <tr><td>1001</td><td>A</td><td>1</td><td>100</td></tr>\n  <tr><td>1001</td><td>B</td><td>1</td><td>200</td></tr>\n  <tr><td>2102</td><td>A</td><td>1</td><td>NULL</td></tr>\n  <tr><td>2102</td><td>B</td><td>NULL</td><td>300</td></tr>\n</table>",
+      "options": [
+        "200",
+        "150",
+        "300",
+        "NULL"
+      ],
+      "correctIndex": 1,
+      "explanation": "원본 기출의 정답 표기를 보존한다."
+    },
+    {
+      "subject": "2과목",
+      "number": 44,
+      "title": "아래 SQL 실행 후 최대값으로 옳은 것은?\n```sql\nINSERT INTO T VALUES (1);\nINSERT INTO T VALUES (2);\nSAVEPOINT SV1;\nUPDATE T SET VAL = 4 WHERE VAL = 1;\nSAVEPOINT SV1;          -- 덮어쓰기\nDELETE FROM T WHERE VAL = 2;\nROLLBACK TO SAVEPOINT SV1;\nINSERT INTO T VALUES (3);\nCOMMIT;\nSELECT MAX(VAL) FROM T;\n```",
+      "options": [
+        "1",
+        "2",
+        "3",
+        "4"
+      ],
+      "correctIndex": 3,
+      "explanation": "ROLLBACK TO SAVEPOINT 후에도 UPDATE 로 인해 VAL=4 인 행은 남아 있고, 이후 INSERT 3 까지 포함되어 최대값은 4 이다."
+    },
+    {
+      "subject": "2과목",
+      "number": 45,
+      "title": "아래 질의 결과 중 다른 것은?",
+      "options": [
+        "T1 NATURAL JOIN T2",
+        "T1 JOIN T2 USING(COL)",
+        "T1 INNER JOIN T2 ON T1.COL = T2.COL",
+        "SELECT * FROM T2 WHERE T2.COL IN (SELECT COL FROM T1 WHERE T2.COL = T1.COL)"
+      ],
+      "correctIndex": 3,
+      "explanation": ""
+    }
+  ],
+  "shortAnswerOmitted": [
+    {
+      "number": 10,
+      "answer": "도메인"
+    },
+    {
+      "number": 46,
+      "answer": "ROW_NUMBER"
+    },
+    {
+      "number": 47,
+      "answer": "3.5"
+    },
+    {
+      "number": 48,
+      "answer": "CROSS JOIN (카티션 곱)"
+    },
+    {
+      "number": 49,
+      "answer": "ㄱ = 2, ㄴ = 700"
+    },
+    {
+      "number": 50,
+      "answer": "ROLLBACK"
+    }
+  ]
+}

@@ -1,11 +1,11 @@
 // Auto-generated from PDF + blog + scripts/authored/round-51.json
-// 제51회 — 2023년 11월 · 10문항
+// 제51회 — 2023년 11월 · 46문항
 // ⚠ 직접 편집 금지. 출처별 데이터를 고친 뒤 'node scripts/build-quiz-bank.mjs' 재실행.
 import type { QuizQuestion } from '../quizBank';
 
 export const ROUND_51: QuizQuestion[] = [
   {
-    "id": 10271,
+    "id": 10450,
     "examSetId": "round-51",
     "examLabel": "제51회 (2023년 11월)",
     "round": 51,
@@ -13,23 +13,59 @@ export const ROUND_51: QuizQuestion[] = [
     "number": 1,
     "title": "비식별자 관계로 구성된 테이블에 대한 설명 중 적절하지 않은 것은?",
     "options": [
-      "부모-자식간 1:M 관계이고 부모 미생성 시 자식 생성 가능",
-      "부모 테이블의 삭제 시점이 자식보다 빠르다",
-      "테이블간 조인을 최소화한다",
-      "자식 주식별자를 부모보다 직접 생성이 효율적"
+      "부모·자식 간 1:M 관계이며 부모 테이블이 생성되지 않은 상태에서도 자식 테이블이 생성될 수 있다.",
+      "부모 테이블의 삭제 시점이 자식 테이블보다 빠를 수 있다.",
+      "테이블 간 조인을 최소화한다.",
+      "자식 테이블의 주식별자를 부모 테이블에서 받아오는 것보다 직접 생성하는 것이 더 효율적인 경우가 있다."
     ],
     "correctIndex": 2,
-    "explanation": "비식별자 관계: 조인이 증가할 수 있음",
-    "_source": "pdf"
+    "explanation": "비식별자 관계는 부모 키가 자식의 일반 속성으로 전이되므로 상위 엔터티까지 접근하려면 추가 조인이 필요해져 오히려 조인이 많아진다.",
+    "_source": "authored"
   },
   {
-    "id": 10272,
+    "id": 10451,
+    "examSetId": "round-51",
+    "examLabel": "제51회 (2023년 11월)",
+    "round": 51,
+    "subject": "1과목",
+    "number": 2,
+    "title": "아래 ERD 해석에 대한 설명 중 적절하지 않은 것은?\n```\n[ 고객 ] ||-----∈ [ 주문 ]   -- 주문은 고객이 반드시 필요\n```",
+    "options": [
+      "하나의 고객은 여러 개의 주문을 가질 수 있다.",
+      "주문은 반드시 고객과 연결된다.",
+      "고객은 주문을 하지 않을 수도 있다.",
+      "주문은 고객을 가지지 않을 수도 있다."
+    ],
+    "correctIndex": 3,
+    "explanation": "주문은 반드시 고객에 종속되므로 고객 없이 존재할 수 없다.",
+    "_source": "authored"
+  },
+  {
+    "id": 10452,
+    "examSetId": "round-51",
+    "examLabel": "제51회 (2023년 11월)",
+    "round": 51,
+    "subject": "1과목",
+    "number": 3,
+    "title": "물리 모델링의 특징으로 적절하지 않은 것은?",
+    "options": [
+      "물리적 저장 구조와 접근 방식을 정의한다.",
+      "성능 향상을 위한 인덱스·파티션 등이 설계된다.",
+      "테이블·컬럼의 실제 물리 구현 단계이다.",
+      "어떻게 데이터에 접근하고 누가 접근하는지가 핵심인 모델링이다."
+    ],
+    "correctIndex": 3,
+    "explanation": "접근 방식과 권한 설계의 핵심은 논리 모델링 단계의 특징에 가까우며, 물리 모델링의 핵심은 저장 구조·성능이다.",
+    "_source": "authored"
+  },
+  {
+    "id": 10453,
     "examSetId": "round-51",
     "examLabel": "제51회 (2023년 11월)",
     "round": 51,
     "subject": "1과목",
     "number": 4,
-    "title": "엔터티의 분류 중 발생 시점에 따른 분류가 아닌 것은?",
+    "title": "발생 시점에 따른 엔터티 분류에 해당하지 않는 것은?",
     "options": [
       "기본 엔터티",
       "사건 엔터티",
@@ -37,11 +73,65 @@ export const ROUND_51: QuizQuestion[] = [
       "행위 엔터티"
     ],
     "correctIndex": 1,
-    "explanation": "",
-    "_source": "pdf"
+    "explanation": "발생 시점 기준 분류는 기본·중심·행위 세 가지이다.",
+    "_source": "authored"
   },
   {
-    "id": 10273,
+    "id": 10454,
+    "examSetId": "round-51",
+    "examLabel": "제51회 (2023년 11월)",
+    "round": 51,
+    "subject": "1과목",
+    "number": 5,
+    "title": "고객이 하나의 서비스만 계약할 수 있다는 제약을 반영해 '고객 - 서비스' 모델을 개선한 형태로 가장 적절한 것은?",
+    "options": [
+      "고객 테이블에 서비스 ID 를 단일 컬럼으로 추가",
+      "서비스 테이블에 고객 ID 를 직접 저장",
+      "고객 ─ 서비스계약 ─ 서비스 의 연결 엔터티를 두는 구조",
+      "고객과 서비스를 별도 스키마로 분리"
+    ],
+    "correctIndex": 2,
+    "explanation": "M:N 관계를 분해하며 계약 정보를 별도의 엔터티로 분리하는 설계가 가장 적절하다.",
+    "_source": "authored"
+  },
+  {
+    "id": 10455,
+    "examSetId": "round-51",
+    "examLabel": "제51회 (2023년 11월)",
+    "round": 51,
+    "subject": "1과목",
+    "number": 6,
+    "title": "파생 속성에 해당하는 예시로 적절한 것은?",
+    "options": [
+      "고객번호",
+      "주문일자",
+      "상품코드",
+      "최종주문일자"
+    ],
+    "correctIndex": 3,
+    "explanation": "최종주문일자는 주문 엔터티의 여러 일자 중 가장 마지막 값을 도출한 계산 속성이다.",
+    "_source": "authored"
+  },
+  {
+    "id": 10456,
+    "examSetId": "round-51",
+    "examLabel": "제51회 (2023년 11월)",
+    "round": 51,
+    "subject": "1과목",
+    "number": 7,
+    "title": "식별자의 분류가 올바르게 짝지어진 것은?",
+    "options": [
+      "후보 식별자 - 대체 식별자 - 인조 식별자 - 기본 식별자",
+      "대표 식별자 - 후보 식별자 - 복합 식별자 - 단일 식별자",
+      "주 식별자 - 외부 식별자 - 대체 식별자 - 인조 식별자",
+      "주 식별자 - 보조 식별자 - 본질 식별자 - 외부 식별자"
+    ],
+    "correctIndex": 3,
+    "explanation": "",
+    "_source": "authored"
+  },
+  {
+    "id": 10457,
     "examSetId": "round-51",
     "examLabel": "제51회 (2023년 11월)",
     "round": 51,
@@ -49,139 +139,697 @@ export const ROUND_51: QuizQuestion[] = [
     "number": 8,
     "title": "주식별자에 대한 설명으로 적절하지 않은 것은?",
     "options": [
-      "해당 업무에서 자주 이용되는 속성을 사용한다",
-      "복합 식별자에는 최대한 많은 속성이 포함되도록 하여야 한다",
-      "명칭은 되도록 지정하지 않는다",
-      "자주 변하지 않는 속성을 사용한다"
+      "해당 업무에서 자주 이용되는 속성을 사용한다.",
+      "복합 식별자에는 최대한 많은 속성이 포함되도록 구성한다.",
+      "명칭은 되도록 지정하지 않는다.",
+      "속성이 자주 사용되지 않는다는 이유로 임의의 속성을 주식별자로 선정하지 않는다."
     ],
     "correctIndex": 1,
-    "explanation": "주식별자 최소성: 필요한 최소 속성으로 구성",
-    "_source": "pdf"
+    "explanation": "주식별자는 최소성(minimal) 을 만족해야 하므로 꼭 필요한 최소한의 속성만 포함한다.",
+    "_source": "authored"
   },
   {
-    "id": 10274,
-    "examSetId": "round-51",
-    "examLabel": "제51회 (2023년 11월)",
-    "round": 51,
-    "subject": "1과목",
-    "number": 9,
-    "title": "주식별자의 특징 중 반드시 데이터 값이 존재해야 하는 것은?",
-    "options": [
-      "유일성",
-      "최소성",
-      "존재성",
-      "불변성"
-    ],
-    "correctIndex": 2,
-    "explanation": "",
-    "_source": "pdf"
-  },
-  {
-    "id": 10275,
+    "id": 10458,
     "examSetId": "round-51",
     "examLabel": "제51회 (2023년 11월)",
     "round": 51,
     "subject": "2과목",
     "number": 11,
-    "title": "트랜잭션의 설명으로 적절하지 않은 것은?",
+    "title": "트랜잭션에 대한 설명으로 적절하지 않은 것은?",
     "options": [
-      "원자적 실행을 보장한다",
-      "하나의 트랜잭션에서 처리되는 데이터는 다른 트랜잭션에서도 변경할 수 있다",
-      "TCL로 관리된다",
-      "고립성을 가진다"
+      "하나의 트랜잭션에서 처리되는 데이터는 다른 트랜잭션에서도 변경할 수 있다.",
+      "트랜잭션은 논리적 작업 단위이다.",
+      "트랜잭션 종료 시점에 COMMIT 또는 ROLLBACK 이 수행된다.",
+      "트랜잭션은 원자성·일관성·고립성·지속성 (ACID) 을 보장해야 한다."
+    ],
+    "correctIndex": 0,
+    "explanation": "고립성(Isolation) 에 따라 진행 중인 트랜잭션의 변경은 다른 트랜잭션과 격리되어야 한다.",
+    "_source": "authored"
+  },
+  {
+    "id": 10459,
+    "examSetId": "round-51",
+    "examLabel": "제51회 (2023년 11월)",
+    "round": 51,
+    "subject": "2과목",
+    "number": 12,
+    "title": "아래 데이터에 대한 누적합 쿼리 중 원하는 결과를 얻을 수 없는 것은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>일자</th><th>금액</th></tr>\n  <tr><td>2023-11-01</td><td>100</td></tr>\n  <tr><td>2023-11-02</td><td>150</td></tr>\n  <tr><td>2023-11-02</td><td>250</td></tr>\n  <tr><td>2023-11-03</td><td>100</td></tr>\n</table>",
+    "options": [
+      "SUM(금액) OVER (ORDER BY 일자)",
+      "SUM(금액) OVER (ORDER BY 일자 ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW)",
+      "SUM(금액) OVER (ORDER BY 일자 RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW)",
+      "서브쿼리를 이용한 누적합 계산"
     ],
     "correctIndex": 1,
     "explanation": "",
-    "_source": "pdf"
+    "_source": "authored"
   },
   {
-    "id": 10276,
+    "id": 10460,
+    "examSetId": "round-51",
+    "examLabel": "제51회 (2023년 11월)",
+    "round": 51,
+    "subject": "2과목",
+    "number": 13,
+    "title": "Oracle ORDER BY 절에서 NULL 값이 가장 마지막에 출력되도록 하는 옵션은?",
+    "options": [
+      "NVL(COL, 0) 으로 치환하여 정렬",
+      "NULLIF 로 치환하여 정렬",
+      "NULLS LAST 옵션을 사용",
+      "COALESCE 로 치환하여 정렬"
+    ],
+    "correctIndex": 2,
+    "explanation": "",
+    "_source": "authored"
+  },
+  {
+    "id": 10461,
+    "examSetId": "round-51",
+    "examLabel": "제51회 (2023년 11월)",
+    "round": 51,
+    "subject": "2과목",
+    "number": 14,
+    "title": "User1 이 생성한 테이블 user1.T1 을 User2 가 조회할 수 있도록 부여하는 명령은?",
+    "options": [
+      "REVOKE SELECT ON user1.T1 FROM user2;",
+      "GRANT SELECT ON user1.T1 TO user2;",
+      "GRANT ALL ON user1.T1 TO SYS;",
+      "CONNECT user2 TO user1;"
+    ],
+    "correctIndex": 1,
+    "explanation": "",
+    "_source": "authored"
+  },
+  {
+    "id": 10462,
     "examSetId": "round-51",
     "examLabel": "제51회 (2023년 11월)",
     "round": 51,
     "subject": "2과목",
     "number": 15,
-    "title": "NTILE(3) 결과 (8행 기준) 그룹별 배분은?",
+    "title": "아래 데이터에 대한 NTILE(3) 윈도우 함수의 결과로 옳은 것은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>COL1</th></tr>\n  <tr><td>1</td></tr>\n  <tr><td>2</td></tr>\n  <tr><td>3</td></tr>\n  <tr><td>4</td></tr>\n  <tr><td>5</td></tr>\n  <tr><td>6</td></tr>\n  <tr><td>7</td></tr>\n  <tr><td>8</td></tr>\n</table>",
     "options": [
-      "3, 3, 2",
-      "2, 3, 3",
-      "3, 2, 3",
-      "2, 2, 4"
+      "1,1,1,2,2,2,3,3",
+      "1,1,2,2,3,3,3,3",
+      "1,2,3,1,2,3,1,2",
+      "3,3,3,2,2,2,1,1"
     ],
     "correctIndex": 0,
-    "explanation": "",
-    "_source": "pdf"
+    "explanation": "8 건을 세 그룹으로 나누면 앞부터 3, 3, 2 건이 배정된다.",
+    "_source": "authored"
   },
   {
-    "id": 10277,
+    "id": 10463,
     "examSetId": "round-51",
     "examLabel": "제51회 (2023년 11월)",
     "round": 51,
     "subject": "2과목",
     "number": 16,
-    "title": "CUBE(A,B) 결과에 포함되는 것은?",
+    "title": "A 와 B 각각의 소계, 총계까지 모두 출력하는 GROUP BY 절은?\n```sql\nSELECT A, B, SUM(X)\nFROM   T\nGROUP BY ( ? );\n```",
     "options": [
-      "(A,B)와 (NULL,NULL)만",
-      "(A,B), (A,NULL), (NULL,B), (NULL,NULL)",
-      "(A,B)와 (A,NULL)만",
-      "(NULL,B)와 (NULL,NULL)만"
+      "ROLLUP(A, B)",
+      "GROUP BY A, B",
+      "CUBE(A, B)",
+      "GROUPING SETS((A, B))"
     ],
-    "correctIndex": 1,
-    "explanation": "",
-    "_source": "pdf"
+    "correctIndex": 2,
+    "explanation": "CUBE 는 (A,B), (A), (B), () 의 네 조합을 모두 반환한다.",
+    "_source": "authored"
   },
   {
-    "id": 10278,
+    "id": 10464,
     "examSetId": "round-51",
     "examLabel": "제51회 (2023년 11월)",
     "round": 51,
     "subject": "2과목",
     "number": 17,
-    "title": "SELECT 10/NULLIF(0,0), SELECT 10/NULLIF(NULL,0) 결과는?",
+    "title": "아래 데이터에 대해 나눗셈 연산 시 0 나누기 오류를 피하기 위해 사용되는 함수는?\n```sql\nSELECT COL1 / ( ? )(COL2, 0) FROM T;\n```",
     "options": [
-      "NULL, NULL",
-      "NULL, 오류",
-      "NULL, 오류",
-      "오류, NULL"
+      "NVL",
+      "NULLIF",
+      "COALESCE",
+      "DECODE"
     ],
-    "correctIndex": 0,
-    "explanation": "NULLIF(0,0)=NULL → 10/NULL=NULL. NULLIF(NULL,0)=NULL → 10/NULL=NULL",
-    "_source": "pdf"
+    "correctIndex": 1,
+    "explanation": "NULLIF(COL2, 0) 은 COL2 가 0 이면 NULL 을 반환하여 오류 대신 NULL 연산으로 이어진다.",
+    "_source": "authored"
   },
   {
-    "id": 10279,
+    "id": 10465,
+    "examSetId": "round-51",
+    "examLabel": "제51회 (2023년 11월)",
+    "round": 51,
+    "subject": "2과목",
+    "number": 18,
+    "title": "아래 데이터에 대한 두 SQL 의 결과로 옳은 것은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>A</th><th>B</th><th>C</th><th>D</th></tr>\n  <tr><td>10</td><td>NULL</td><td>NULL</td><td>20</td></tr>\n  <tr><td>NULL</td><td>10</td><td>20</td><td>NULL</td></tr>\n  <tr><td>30</td><td>NULL</td><td>10</td><td>NULL</td></tr>\n  <tr><td>4</td><td>6</td><td>10</td><td>10</td></tr>\n</table>\n```sql\n-- ㉠ SELECT SUM(A + B + C + D) FROM T;\n-- ㉡ SELECT SUM(A) + SUM(B) + SUM(C) + SUM(D) FROM T;\n```",
+    "options": [
+      "㉠ = 30, ㉡ = 130",
+      "㉠ = 30, ㉡ = 44 + 16 + 40 + 30 (분리 합산)",
+      "㉠ = 합계 동일, ㉡ = NULL",
+      "둘 다 NULL"
+    ],
+    "correctIndex": 1,
+    "explanation": "NULL 포함 행은 + 연산 전체가 NULL 이 되어 ㉠ 에는 반영되지 않는다. ㉡ 은 컬럼별로 NULL 을 제외한 SUM 을 수행한다.",
+    "_source": "authored"
+  },
+  {
+    "id": 10466,
+    "examSetId": "round-51",
+    "examLabel": "제51회 (2023년 11월)",
+    "round": 51,
+    "subject": "2과목",
+    "number": 19,
+    "title": "아래 SQL 의 결과로 옳은 것은?\n```sql\nSELECT NVL(MAX(COL1), 'X')\nFROM   TAB1\nWHERE  COL2 > 9\nGROUP BY COL1;\n```",
+    "options": [
+      "공집합",
+      "'X' 한 행",
+      "NULL 한 행",
+      "MAX(COL1) 값"
+    ],
+    "correctIndex": 0,
+    "explanation": "WHERE 조건을 만족하는 행이 없고 GROUP BY 가 지정되어 있으므로 결과가 공집합이다.",
+    "_source": "authored"
+  },
+  {
+    "id": 10467,
+    "examSetId": "round-51",
+    "examLabel": "제51회 (2023년 11월)",
+    "round": 51,
+    "subject": "2과목",
+    "number": 20,
+    "title": "아래 DDL 중 오류가 발생하지 않는 것은?\n```sql\n-- TAB1: COL1 NUMBER, COL2 VARCHAR2 DEFAULT '000',\n--       COL3 DATE, COL4 VARCHAR2 (값: 12345, 45677)\n```",
+    "options": [
+      "ALTER TABLE TAB1 MODIFY COL1 VARCHAR2(10);",
+      "ALTER TABLE TAB1 MODIFY COL2 NUMBER;",
+      "ALTER TABLE TAB1 MODIFY COL3 TIMESTAMP;",
+      "ALTER TABLE TAB1 MODIFY COL4 NUMBER;"
+    ],
+    "correctIndex": 2,
+    "explanation": "DATE 를 TIMESTAMP 로 변경하는 것은 호환 가능한 변환이므로 오류가 발생하지 않는다.",
+    "_source": "authored"
+  },
+  {
+    "id": 10468,
+    "examSetId": "round-51",
+    "examLabel": "제51회 (2023년 11월)",
+    "round": 51,
+    "subject": "2과목",
+    "number": 21,
+    "title": "아래 SQL 의 결과로 옳은 것은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th colspan=\"2\">T1</th><th colspan=\"2\">T2</th></tr>\n  <tr><th>COL1</th><th>COL1</th></tr>\n  <tr><td>10</td><td>10</td></tr>\n  <tr><td>20</td><td>NULL</td></tr>\n</table>\n```sql\nSELECT COUNT(*) FROM T1\nWHERE NOT EXISTS (SELECT 'X' FROM T2 WHERE T1.COL1 = T2.COL1);\n```",
+    "options": [
+      "1",
+      "0",
+      "2",
+      "NULL"
+    ],
+    "correctIndex": 0,
+    "explanation": "T1.COL1=20 은 T2 에 매칭되는 값이 없어 NOT EXISTS 조건을 만족하여 1 건이 반환된다.",
+    "_source": "authored"
+  },
+  {
+    "id": 10469,
+    "examSetId": "round-51",
+    "examLabel": "제51회 (2023년 11월)",
+    "round": 51,
+    "subject": "2과목",
+    "number": 22,
+    "title": "아래 SQL 의 결과로 옳게 짝지어진 것은?\n```sql\nSELECT 10 / NULL, 10 / 0 FROM DUAL;\n```",
+    "options": [
+      "10, 10",
+      "NULL, ERROR",
+      "0, 0",
+      "NULL, NULL"
+    ],
+    "correctIndex": 1,
+    "explanation": "NULL 과의 나눗셈은 NULL, 0 으로 나누면 'divisor is equal to zero' 오류가 발생한다.",
+    "_source": "authored"
+  },
+  {
+    "id": 10470,
+    "examSetId": "round-51",
+    "examLabel": "제51회 (2023년 11월)",
+    "round": 51,
+    "subject": "2과목",
+    "number": 23,
+    "title": "아래 SQL 의 결과로 옳은 것은?\n```sql\nSELECT * FROM T\nWHERE COL1 <> 'CPG' AND COL2 > 10;\n```",
+    "options": [
+      "전체 행",
+      "COL1 = 'CPG' 인 행",
+      "COL2 <= 10 인 행",
+      "조건을 만족하는 행 없음 (결과 없음)"
+    ],
+    "correctIndex": 3,
+    "explanation": "원본 기출의 조건을 만족하는 행이 없는 경우를 묻는 문항이다.",
+    "_source": "authored"
+  },
+  {
+    "id": 10471,
+    "examSetId": "round-51",
+    "examLabel": "제51회 (2023년 11월)",
+    "round": 51,
+    "subject": "2과목",
+    "number": 24,
+    "title": "아래 OUTER JOIN SQL 의 결과로 옳은 것은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>T1</th><th>T2</th><th>T3</th></tr>\n  <tr><td>1, 2, 3</td><td>1, 2, 4</td><td>1, 2, 3</td></tr>\n</table>\n```sql\nSELECT SUM(C.C1)\nFROM   T1 A\nLEFT OUTER JOIN T2 B ON A.C1 = B.C1\nRIGHT OUTER JOIN T3 C ON B.C1 = C.C1\nWHERE 1 = 1;\n```",
+    "options": [
+      "3",
+      "6",
+      "9",
+      "12"
+    ],
+    "correctIndex": 1,
+    "explanation": "T3 기준 조인 결과에서 매칭된 C1 값(1, 2, 3) 의 합이 반환된다.",
+    "_source": "authored"
+  },
+  {
+    "id": 10472,
+    "examSetId": "round-51",
+    "examLabel": "제51회 (2023년 11월)",
+    "round": 51,
+    "subject": "2과목",
+    "number": 25,
+    "title": "아래 SQL 의 결과로 옳은 것은?\n```sql\nSELECT SUBSTR('...의 마...', 3, 3), ROUND(109, 1) FROM DUAL;\n```",
+    "options": [
+      "'...의', 109.0",
+      "'의 마', 110",
+      "'의 마', 109",
+      "'마...', 100"
+    ],
+    "correctIndex": 2,
+    "explanation": "ROUND(값, 1) 은 소수 첫째 자리까지 반올림하며 109 가 그대로 유지된다.",
+    "_source": "authored"
+  },
+  {
+    "id": 10473,
+    "examSetId": "round-51",
+    "examLabel": "제51회 (2023년 11월)",
+    "round": 51,
+    "subject": "2과목",
+    "number": 26,
+    "title": "아래 INSERT FIRST 수행 후 T1, T2, T3 테이블의 행 수로 옳은 것은?\n```sql\n-- TAB1 데이터: 1, 2, 4\nINSERT FIRST\n  WHEN C1 >= 2 THEN INTO T1 VALUES (C1)\n  WHEN C1 >= 4 THEN INTO T2 VALUES (C1)\n  ELSE INTO T3 VALUES (C1)\nSELECT * FROM TAB1;\n```",
+    "options": [
+      "T1 = 2, T2 = 0, T3 = 1",
+      "T1 = 1, T2 = 1, T3 = 1",
+      "T1 = 3, T2 = 0, T3 = 0",
+      "T1 = 0, T2 = 1, T3 = 2"
+    ],
+    "correctIndex": 0,
+    "explanation": "INSERT FIRST 는 조건에 만족하는 첫 번째 WHEN 만 실행되므로 2·4 는 T1 으로, 1 은 ELSE 의 T3 로 입력된다.",
+    "_source": "authored"
+  },
+  {
+    "id": 10474,
+    "examSetId": "round-51",
+    "examLabel": "제51회 (2023년 11월)",
+    "round": 51,
+    "subject": "2과목",
+    "number": 27,
+    "title": "아래 조건을 만족하는 SQL 로 옳은 것은?",
+    "options": [
+      "WHERE TEAM_CODE = A AND B",
+      "WHERE (TEAM_CODE = 'A' OR TEAM_CODE = 'B') AND (다른 조건)",
+      "WHERE TEAM_CODE IN (A, B) OR (다른 조건)",
+      "WHERE TEAM_CODE BETWEEN A AND B"
+    ],
+    "correctIndex": 1,
+    "explanation": "팀 코드가 A 또는 B 이고, 다른 조건을 함께 만족하는 행을 조회한다.",
+    "_source": "authored"
+  },
+  {
+    "id": 10475,
     "examSetId": "round-51",
     "examLabel": "제51회 (2023년 11월)",
     "round": 51,
     "subject": "2과목",
     "number": 28,
-    "title": "현재 행에서부터 이전 행까지의 누적합 SQL은?",
+    "title": "'현재 행부터 이전 행까지의 누적합' 을 구하는 윈도우 절로 옳은 것은?",
     "options": [
-      "ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW",
-      "RANGE BETWEEN CURRENT ROW AND UNBOUNDED FOLLOWING",
-      "ROWS BETWEEN 1 PRECEDING AND CURRENT ROW",
-      "RANGE UNBOUNDED FOLLOWING"
+      "ROWS UNBOUNDED PRECEDING",
+      "RANGE UNBOUNDED PRECEDING",
+      "ROWS BETWEEN UNBOUNDED PRECEDING AND 1 PRECEDING",
+      "RANGE BETWEEN UNBOUNDED PRECEDING AND 1 PRECEDING"
+    ],
+    "correctIndex": 0,
+    "explanation": "행 단위로 첫 번째 행부터 현재 행까지의 누적합을 구한다.",
+    "_source": "authored"
+  },
+  {
+    "id": 10476,
+    "examSetId": "round-51",
+    "examLabel": "제51회 (2023년 11월)",
+    "round": 51,
+    "subject": "2과목",
+    "number": 29,
+    "title": "아래 네 SQL 중 결과가 나머지와 다른 것은?",
+    "options": [
+      "RANK() 를 이용한 순위 쿼리",
+      "DENSE_RANK() 를 이용한 순위 쿼리",
+      "ROW_NUMBER() 를 이용한 순위 쿼리",
+      "NTILE() 를 이용한 순위 쿼리"
+    ],
+    "correctIndex": 1,
+    "explanation": "",
+    "_source": "authored"
+  },
+  {
+    "id": 10477,
+    "examSetId": "round-51",
+    "examLabel": "제51회 (2023년 11월)",
+    "round": 51,
+    "subject": "2과목",
+    "number": 30,
+    "title": "아래 두 테이블에 대한 네 SQL 중 결과가 다른 하나는?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>T1</th><th>T2</th></tr>\n  <tr><td>A, B, C, D, E</td><td>A, B, C</td></tr>\n</table>",
+    "options": [
+      "`SELECT COL1 FROM T1 MINUS SELECT COL1 FROM T2;`",
+      "`SELECT T1.COL1 FROM T1, T2 WHERE T1.COL1 <> T2.COL1;`",
+      "`SELECT COL1 FROM T1 WHERE COL1 NOT IN (SELECT COL1 FROM T2);`",
+      "`SELECT T1.COL1 FROM T1 LEFT JOIN T2 ON T1.COL1 = T2.COL1 WHERE T2.COL1 IS NULL;`"
+    ],
+    "correctIndex": 1,
+    "explanation": "",
+    "_source": "authored"
+  },
+  {
+    "id": 10478,
+    "examSetId": "round-51",
+    "examLabel": "제51회 (2023년 11월)",
+    "round": 51,
+    "subject": "2과목",
+    "number": 31,
+    "title": "아래 SQL Server 테이블에 대한 INSERT 결과로 옳은 것은?\n```sql\nCREATE TABLE T1 (\n  MAIN  INT IDENTITY(1,1),\n  VALUE INT CHECK (VALUE >= 3)\n);\nINSERT INTO T1 VALUES(1);\nINSERT INTO T1 VALUES(2);\nINSERT INTO T1 VALUES(3);\nSELECT COUNT(*) FROM T1;\n```",
+    "options": [
+      "1",
+      "2",
+      "3",
+      "0"
+    ],
+    "correctIndex": 0,
+    "explanation": "CHECK 조건을 통과한 행은 VALUE=3 한 건이다.",
+    "_source": "authored"
+  },
+  {
+    "id": 10479,
+    "examSetId": "round-51",
+    "examLabel": "제51회 (2023년 11월)",
+    "round": 51,
+    "subject": "2과목",
+    "number": 32,
+    "title": "아래 WHERE 조건과 동일한 의미의 SQL 은?\n```sql\nWHERE (COL1, COL2) IN (('A', 1000), ('B', 2000));\n```",
+    "options": [
+      "WHERE (COL1 = 'A' AND COL2 = 1000) OR (COL1 = 'B' AND COL2 = 2000)",
+      "WHERE COL1 = 'A' AND COL2 = 1000 AND COL1 = 'B' AND COL2 = 2000",
+      "WHERE COL1 IN ('A', 'B') AND COL2 IN (1000, 2000)",
+      "WHERE COL1 = 'A' OR COL2 = 2000"
     ],
     "correctIndex": 0,
     "explanation": "",
-    "_source": "pdf"
+    "_source": "authored"
   },
   {
-    "id": 10280,
+    "id": 10480,
+    "examSetId": "round-51",
+    "examLabel": "제51회 (2023년 11월)",
+    "round": 51,
+    "subject": "2과목",
+    "number": 33,
+    "title": "뷰(VIEW) 에 대한 설명으로 옳지 않은 것은?",
+    "options": [
+      "뷰는 논리적 테이블이다.",
+      "뷰는 참조 테이블의 데이터를 조회할 수 있다.",
+      "뷰는 참조 테이블의 구조 변경에 영향을 받는다.",
+      "뷰에는 물리적인 데이터가 저장된다."
+    ],
+    "correctIndex": 3,
+    "explanation": "뷰는 저장된 쿼리이며 실제 데이터를 저장하지 않는다.",
+    "_source": "authored"
+  },
+  {
+    "id": 10481,
     "examSetId": "round-51",
     "examLabel": "제51회 (2023년 11월)",
     "round": 51,
     "subject": "2과목",
     "number": 34,
-    "title": "SAVEPOINT P1 설정 후 INSERT 4 후 ROLLBACK P1 → SELECT 결과는?",
+    "title": "아래 SQL 수행 후 테이블의 최종 값으로 옳은 것은?\n```sql\nINSERT INTO T VALUES (1);\nINSERT INTO T VALUES (2);\nINSERT INTO T VALUES (3);\nSAVEPOINT P1;\nINSERT INTO T VALUES (4);\nROLLBACK TO SAVEPOINT P1;\nSELECT * FROM T;\n```",
     "options": [
-      "1, 2, 3, 4",
       "1, 2, 3",
-      "4만",
-      "없음"
+      "1, 2, 3, 4",
+      "4",
+      "공집합"
+    ],
+    "correctIndex": 0,
+    "explanation": "SAVEPOINT P1 이후의 INSERT (4) 는 롤백되어 반영되지 않는다.",
+    "_source": "authored"
+  },
+  {
+    "id": 10482,
+    "examSetId": "round-51",
+    "examLabel": "제51회 (2023년 11월)",
+    "round": 51,
+    "subject": "2과목",
+    "number": 35,
+    "title": "아래 계층형 쿼리의 결과로 옳은 것은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>COL1</th><th>COL2</th><th>COL3</th></tr>\n  <tr><td>A</td><td>NULL</td><td>1</td></tr>\n  <tr><td>B</td><td>A</td><td>2</td></tr>\n  <tr><td>C</td><td>A</td><td>3</td></tr>\n  <tr><td>D</td><td>B</td><td>4</td></tr>\n</table>\n```sql\nSELECT COUNT(*)\nFROM   TAB1\nWHERE  COL3 <> 2\nSTART WITH COL3 = 4\nCONNECT BY COL1 = PRIOR COL2;\n```",
+    "options": [
+      "1",
+      "2",
+      "3",
+      "4"
+    ],
+    "correctIndex": 1,
+    "explanation": "COL3 = 4 에서 역방향 전개로 (D→B→A) 결과가 구해지고, 이후 WHERE COL3 <> 2 로 B 가 제거되어 A, D 의 두 건이 남는다.",
+    "_source": "authored"
+  },
+  {
+    "id": 10483,
+    "examSetId": "round-51",
+    "examLabel": "제51회 (2023년 11월)",
+    "round": 51,
+    "subject": "2과목",
+    "number": 36,
+    "title": "매출 상위 1·2위를 조회하는 SQL 로 옳은 것은?",
+    "options": [
+      "SELECT ... ORDER BY 매출 DESC LIMIT 2 (Oracle 사용 불가)",
+      "SELECT TOP 2 ... FROM ... (Oracle 사용 불가)",
+      "ROWNUM <= 2 를 직접 적용",
+      "ORDER BY 매출 DESC 로 정렬한 인라인 뷰에서 WHERE ROWNUM <= 2 적용"
+    ],
+    "correctIndex": 3,
+    "explanation": "",
+    "_source": "authored"
+  },
+  {
+    "id": 10484,
+    "examSetId": "round-51",
+    "examLabel": "제51회 (2023년 11월)",
+    "round": 51,
+    "subject": "2과목",
+    "number": 37,
+    "title": "아래 SQL 의 결과로 옳은 것은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>COL1</th></tr>\n  <tr><td>100</td></tr>\n  <tr><td>200</td></tr>\n  <tr><td>300</td></tr>\n</table>\n```sql\nSELECT * FROM TAB WHERE COL1 IN (100, 200, 100);\n```",
+    "options": [
+      "1건",
+      "2건",
+      "3건",
+      "4건"
+    ],
+    "correctIndex": 1,
+    "explanation": "IN 절의 중복 값은 무시되어 100, 200 두 행만 반환된다.",
+    "_source": "authored"
+  },
+  {
+    "id": 10485,
+    "examSetId": "round-51",
+    "examLabel": "제51회 (2023년 11월)",
+    "round": 51,
+    "subject": "2과목",
+    "number": 38,
+    "title": "SQL Server 에서 ORDER BY 절의 NULL 정렬에 대한 설명 중 결과가 다른 하나는?",
+    "options": [
+      "ORDER BY COL (기본 오름차순)",
+      "ORDER BY NVL(COL, 0) 처럼 NULL 을 0 으로 치환",
+      "ORDER BY COL NULLS FIRST",
+      "ORDER BY COL NULLS LAST"
     ],
     "correctIndex": 1,
     "explanation": "",
-    "_source": "pdf"
+    "_source": "authored"
+  },
+  {
+    "id": 10486,
+    "examSetId": "round-51",
+    "examLabel": "제51회 (2023년 11월)",
+    "round": 51,
+    "subject": "2과목",
+    "number": 39,
+    "title": "아래 OUTER JOIN 의 결과 행 수로 옳은 것은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>A</th><th>B</th></tr>\n  <tr><td>1</td><td>10</td></tr>\n  <tr><td>2</td><td>100</td></tr>\n  <tr><td>3</td><td>220</td></tr>\n</table>\n```sql\nSELECT A.*, B.*\nFROM   A LEFT OUTER JOIN B ON (A.COL1 = B.COL1 AND B.COL1 > 200);\n```",
+    "options": [
+      "1건",
+      "2건",
+      "3건",
+      "0건"
+    ],
+    "correctIndex": 2,
+    "explanation": "ON 절의 조건으로 B 와 매칭되지 않아도 LEFT 테이블의 모든 행이 유지된다.",
+    "_source": "authored"
+  },
+  {
+    "id": 10487,
+    "examSetId": "round-51",
+    "examLabel": "제51회 (2023년 11월)",
+    "round": 51,
+    "subject": "2과목",
+    "number": 40,
+    "title": "아래 SQL 중 NULL 이 포함된 상황에서 결과가 같은 것은?",
+    "options": [
+      "NOT EXISTS",
+      "NOT IN",
+      "OUTER JOIN + IS NULL",
+      "모두 같다"
+    ],
+    "correctIndex": 3,
+    "explanation": "원본 기출의 정답 표기를 보존한다. 데이터가 NULL 을 포함하지 않는 전제에서 세 방식 모두 같은 결과를 낸다.",
+    "_source": "authored"
+  },
+  {
+    "id": 10488,
+    "examSetId": "round-51",
+    "examLabel": "제51회 (2023년 11월)",
+    "round": 51,
+    "subject": "2과목",
+    "number": 41,
+    "title": "아래 SQL 의 결과로 옳은 것은? (SYSDATE = 2023-05-10)\n```sql\nSELECT TO_DATE('2023', 'YYYY') FROM DUAL;\n```",
+    "options": [
+      "2023-12-31",
+      "2023-05-01",
+      "2023-01-01",
+      "2023-05-10"
+    ],
+    "correctIndex": 1,
+    "explanation": "TO_DATE('2023', 'YYYY') 는 시스템의 현재 월과 1일을 조합한 값으로 해석된다.",
+    "_source": "authored"
+  },
+  {
+    "id": 10489,
+    "examSetId": "round-51",
+    "examLabel": "제51회 (2023년 11월)",
+    "round": 51,
+    "subject": "2과목",
+    "number": 42,
+    "title": "아래 SQL 의 결과로 옳은 것은?\n```sql\nSELECT SUM(VAL)\nOVER (ORDER BY VAL\n      RANGE BETWEEN 2 PRECEDING AND 2 FOLLOWING)\nFROM T; -- VAL 데이터: 4, 5, 6\n```",
+    "options": [
+      "16",
+      "17",
+      "23",
+      "26"
+    ],
+    "correctIndex": 1,
+    "explanation": "RANGE 는 값 기준 창이므로 기준 값 ±2 범위에 해당하는 행들의 합계를 구한다.",
+    "_source": "authored"
+  },
+  {
+    "id": 10490,
+    "examSetId": "round-51",
+    "examLabel": "제51회 (2023년 11월)",
+    "round": 51,
+    "subject": "2과목",
+    "number": 43,
+    "title": "ORDER BY COL1, COL2 DESC, COL3 NULLS LAST 에 대한 해석으로 옳은 것은?",
+    "options": [
+      "COL1 오름차순, COL2 내림차순, COL3 오름차순 (NULL 마지막)",
+      "모든 컬럼 내림차순 정렬",
+      "NULL 은 항상 가장 앞에 정렬된다.",
+      "ORDER BY 에 여러 컬럼은 지정할 수 없다."
+    ],
+    "correctIndex": 0,
+    "explanation": "",
+    "_source": "authored"
+  },
+  {
+    "id": 10491,
+    "examSetId": "round-51",
+    "examLabel": "제51회 (2023년 11월)",
+    "round": 51,
+    "subject": "2과목",
+    "number": 44,
+    "title": "아래 결과를 얻기 위한 LIKE 조건으로 옳은 것은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>COL2</th></tr>\n  <tr><td>AB_C</td></tr>\n  <tr><td>DFG</td></tr>\n  <tr><td>A_BD</td></tr>\n</table>",
+    "options": [
+      "WHERE COL2 LIKE '%_%'",
+      "WHERE COL2 LIKE 'A%'",
+      "WHERE COL2 LIKE 'A_B%'",
+      "WHERE COL2 LIKE '%@_%' ESCAPE '@'"
+    ],
+    "correctIndex": 3,
+    "explanation": "리터럴 '_' 을 검색하기 위해 ESCAPE 문자를 지정한다.",
+    "_source": "authored"
+  },
+  {
+    "id": 10492,
+    "examSetId": "round-51",
+    "examLabel": "제51회 (2023년 11월)",
+    "round": 51,
+    "subject": "2과목",
+    "number": 45,
+    "title": "제약 조건 설명 중 옳지 않은 것은?",
+    "options": [
+      "제약 조건은 데이터 무결성을 보장한다.",
+      "PRIMARY KEY 는 NOT NULL 과 UNIQUE 를 결합한 제약이다.",
+      "UNIQUE 제약 조건은 NULL 이 여러 개 들어가면 위반이다.",
+      "CHECK 제약은 TRUE/FALSE 로 판별 가능한 식이어야 한다."
+    ],
+    "correctIndex": 2,
+    "explanation": "UNIQUE 제약은 NULL 여러 개를 허용한다.",
+    "_source": "authored"
+  },
+  {
+    "id": 10493,
+    "examSetId": "round-51",
+    "examLabel": "제51회 (2023년 11월)",
+    "round": 51,
+    "subject": "2과목",
+    "number": 46,
+    "title": "아래 누적 합계 결과로 옳은 것은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>일자</th><th>금액</th></tr>\n  <tr><td>1일</td><td>1000</td></tr>\n  <tr><td>2일</td><td>300</td></tr>\n  <tr><td>3일</td><td>1000</td></tr>\n</table>",
+    "options": [
+      "1000, 1000, 1000",
+      "1000, 1300, 2300",
+      "1000, 2300, 1300",
+      "1000, 2300, 2000"
+    ],
+    "correctIndex": 1,
+    "explanation": "1일까지 1000, 2일까지 1300, 3일까지 2300 으로 누적된다.",
+    "_source": "authored"
+  },
+  {
+    "id": 10494,
+    "examSetId": "round-51",
+    "examLabel": "제51회 (2023년 11월)",
+    "round": 51,
+    "subject": "2과목",
+    "number": 47,
+    "title": "아래 SQL 의 결과로 옳은 것은?\n```sql\nSELECT MOD(10, 3), MOD(10, -3) FROM DUAL;\n```",
+    "options": [
+      "1, -1",
+      "1, 1",
+      "3, 3",
+      "0, 0"
+    ],
+    "correctIndex": 1,
+    "explanation": "Oracle의 MOD는 `m - n * TRUNC(m/n)`로 계산된다. MOD(10, 3) = 10 - 3*3 = 1, MOD(10, -3) = 10 - (-3)*(-3) = 1이다.",
+    "_source": "authored"
+  },
+  {
+    "id": 10495,
+    "examSetId": "round-51",
+    "examLabel": "제51회 (2023년 11월)",
+    "round": 51,
+    "subject": "2과목",
+    "number": 48,
+    "title": "아래 SQL 의 결과로 옳은 것은?\n```sql\nSELECT CASE WHEN 1 = 2 THEN 'A'\n            WHEN 2 = 2 THEN 'B'\n            ELSE 'C' END\nFROM DUAL;\n```",
+    "options": [
+      "A",
+      "B",
+      "C",
+      "오류"
+    ],
+    "correctIndex": 1,
+    "explanation": "CASE 식은 위에서부터 차례로 평가되어 가장 먼저 참인 WHEN 절의 결과를 반환한다. `1 = 2`는 거짓이므로 넘어가고, `2 = 2`가 참이어서 'B'가 반환된다.",
+    "_source": "authored"
   }
 ];

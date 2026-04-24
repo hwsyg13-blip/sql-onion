@@ -1,17 +1,17 @@
 // Auto-generated from PDF + blog + scripts/authored/round-56.json
-// 제56회 — 2025년 3월 · 29문항
+// 제56회 — 2025년 3월 · 50문항
 // ⚠ 직접 편집 금지. 출처별 데이터를 고친 뒤 'node scripts/build-quiz-bank.mjs' 재실행.
 import type { QuizQuestion } from '../quizBank';
 
 export const ROUND_56: QuizQuestion[] = [
   {
-    "id": 10172,
+    "id": 10200,
     "examSetId": "round-56",
     "examLabel": "제56회 (2025년 3월)",
     "round": 56,
     "subject": "1과목",
     "number": 1,
-    "title": "스키마의 종류로 옳지 않은 것은?",
+    "title": "데이터베이스 스키마의 종류가 아닌 것은?",
     "options": [
       "응용 스키마",
       "외부 스키마",
@@ -19,11 +19,11 @@ export const ROUND_56: QuizQuestion[] = [
       "내부 스키마"
     ],
     "correctIndex": 0,
-    "explanation": "스키마 3계층: 외부 스키마, 개념 스키마, 내부 스키마",
-    "_source": "pdf"
+    "explanation": "스키마는 외부·개념·내부의 3계층으로 구분된다. 응용 스키마는 표준 스키마 계층에 포함되지 않는다.",
+    "_source": "authored"
   },
   {
-    "id": 10173,
+    "id": 10201,
     "examSetId": "round-56",
     "examLabel": "제56회 (2025년 3월)",
     "round": 56,
@@ -31,23 +31,23 @@ export const ROUND_56: QuizQuestion[] = [
     "number": 2,
     "title": "데이터 모델링에 대한 설명으로 옳지 않은 것은?",
     "options": [
-      "현실 세계를 추상화하는 과정이다",
-      "업무 규칙이 모델에 포함되어야 한다",
-      "논리적 데이터 구조를 표현한다",
-      "업무 규칙이 모델에 포함되지 않아도 된다"
+      "업무에서 사용되는 모든 데이터를 포함해야 한다.",
+      "현실 세계를 추상화하여 데이터 관점으로 표현한다.",
+      "업무 프로세스를 이해하고 참여자들과 의사소통하는 도구가 된다.",
+      "업무 규칙이 모델에 포함되지 않아도 된다."
     ],
     "correctIndex": 3,
-    "explanation": "",
-    "_source": "pdf"
+    "explanation": "업무 규칙은 데이터 모델이 반드시 반영해야 하는 핵심 요소이다.",
+    "_source": "authored"
   },
   {
-    "id": 10174,
+    "id": 10202,
     "examSetId": "round-56",
     "examLabel": "제56회 (2025년 3월)",
     "round": 56,
     "subject": "1과목",
     "number": 3,
-    "title": "발생 시점에 따라 구분할 수 있는 엔터티 유형으로 적절하지 않은 것은?",
+    "title": "발생 시점에 따라 구분되는 엔터티의 유형으로 적절하지 않은 것은?",
     "options": [
       "관계 엔터티",
       "행위 엔터티",
@@ -55,29 +55,29 @@ export const ROUND_56: QuizQuestion[] = [
       "기본 엔터티"
     ],
     "correctIndex": 0,
-    "explanation": "발생시점 분류: 기본, 중심, 행위 엔터티",
-    "_source": "pdf"
+    "explanation": "발생 시점 기준 분류는 기본·중심·행위 세 가지이다.",
+    "_source": "authored"
   },
   {
-    "id": 10175,
+    "id": 10203,
     "examSetId": "round-56",
     "examLabel": "제56회 (2025년 3월)",
     "round": 56,
     "subject": "1과목",
     "number": 4,
-    "title": "다음 설명 중 옳지 않은 것은?",
+    "title": "아래 설명 중 옳지 않은 것은?",
     "options": [
-      "고객과 상품은 기본 엔터티다",
-      "주문은 사건 엔터티다",
-      "주문 상품 엔터티는 주문과 상품의 관계에 의해 생성된다",
-      "중심 엔터티는 반드시 기본 엔터티와 연결된다"
+      "고객과 상품은 기본 엔터티이다.",
+      "주문은 사건 엔터티이다.",
+      "주문 상품 엔터티는 주문과 상품의 관계에 의해 생성된다.",
+      "주문 상품 엔터티는 주문과 상품 간 M:N 관계의 중간 엔터티이다."
     ],
-    "correctIndex": 1,
-    "explanation": "주문은 행위 엔터티에 해당",
-    "_source": "pdf"
+    "correctIndex": 2,
+    "explanation": "주문 상품은 주문 발생이라는 업무 행위에 의해 생성되는 행위 엔터티이다. 주문과 상품의 관계 자체에 의해 자동 생성되는 것이 아니다.",
+    "_source": "authored"
   },
   {
-    "id": 10176,
+    "id": 10204,
     "examSetId": "round-56",
     "examLabel": "제56회 (2025년 3월)",
     "round": 56,
@@ -92,142 +92,142 @@ export const ROUND_56: QuizQuestion[] = [
     ],
     "correctIndex": 2,
     "explanation": "",
-    "_source": "pdf"
+    "_source": "authored"
   },
   {
-    "id": 10177,
+    "id": 10205,
     "examSetId": "round-56",
     "examLabel": "제56회 (2025년 3월)",
     "round": 56,
     "subject": "1과목",
     "number": 6,
-    "title": "속성 유형 문제에서 올바르게 짝지어진 것은? (주소=복합속성, 연락처=다중값 속성)",
+    "title": "다음 속성 분류에 대한 설명 중 옳은 것을 모두 고르시오.",
     "options": [
-      "가, 라 (주소=복합속성, 연락처=다중값 속성)",
-      "나, 다",
-      "가, 나",
-      "다, 라"
+      "가, 라",
+      "가, 나, 다",
+      "나, 다, 라",
+      "가, 나, 다, 라"
     ],
-    "correctIndex": 0,
-    "explanation": "",
-    "_source": "pdf"
+    "correctIndex": 3,
+    "explanation": "가. 주소는 시·군·구 등으로 나누어지므로 복합 속성이다. 나. 나이는 단순 속성이다. 다. 주민번호는 단일 값 속성이다. 라. 연락처는 휴대폰 번호와 집 전화번호가 될 수 있기 때문에 다중 값 속성이다. 복합·단순·단일 값·다중 값 속성에 대한 네 개의 설명이 모두 옳다.",
+    "_source": "authored"
   },
   {
-    "id": 10178,
+    "id": 10206,
     "examSetId": "round-56",
     "examLabel": "제56회 (2025년 3월)",
     "round": 56,
     "subject": "1과목",
     "number": 7,
-    "title": "주어진 ERD 설명 중 옳지 않은 것은?",
+    "title": "아래 ERD에 대한 설명 중 옳지 않은 것은?\n```\n[ 병원 ] ||-----∘| [ 의사 ] ||-----∘| [ 수술 ]\n   ㄱ                  ㄴ                ㄷ\n```",
     "options": [
-      "의사는 수술을 집도한다",
-      "수술은 반드시 의사가 집도해야 한다",
-      "하나의 수술에 여러 의사가 참여한다",
-      "의사가 집도하지 않는 수술이 있을 수 있다"
+      "ㄷ은 ㄱ과 ㄴ을 합한 것과 의미가 같다.",
+      "의사가 없는 병원이 있을 수 있다.",
+      "수술이 없는 의사가 있을 수 있다.",
+      "의사가 집도하지 않는 수술이 있을 수 있다."
     ],
-    "correctIndex": 3,
-    "explanation": "",
-    "_source": "pdf"
+    "correctIndex": 0,
+    "explanation": "세 관계는 각각 독립적인 의미를 가지며 단순 합성으로 대체할 수 없다.",
+    "_source": "authored"
   },
   {
-    "id": 10179,
+    "id": 10207,
     "examSetId": "round-56",
     "examLabel": "제56회 (2025년 3월)",
     "round": 56,
     "subject": "1과목",
     "number": 8,
-    "title": "업무에 의해 만들어진 식별자로 옳은 것은?",
+    "title": "업무에 의해 만들어진 식별자로 가장 적절한 것은?",
     "options": [
-      "인조식별자",
-      "외부식별자",
-      "본질식별자",
-      "대리식별자"
+      "외부 식별자",
+      "내부 식별자",
+      "본질 식별자",
+      "인조 식별자"
     ],
     "correctIndex": 2,
-    "explanation": "",
-    "_source": "pdf"
+    "explanation": "본질 식별자는 업무상 자연스럽게 부여되는 식별자이며, 인조 식별자는 시스템이 편의상 생성한 식별자이다.",
+    "_source": "authored"
   },
   {
-    "id": 10180,
+    "id": 10208,
     "examSetId": "round-56",
     "examLabel": "제56회 (2025년 3월)",
     "round": 56,
     "subject": "1과목",
     "number": 9,
-    "title": "모든 일반 속성이 주식별자에 종속되어 있는 정규형은?",
+    "title": "모든 일반 속성이 주식별자에 완전 함수 종속된 정규형은?",
     "options": [
-      "제1정규형",
-      "제2정규형",
-      "제3정규형",
-      "BCNF"
+      "제1 정규형",
+      "제2 정규형",
+      "제3 정규형",
+      "보이스-코드 정규형"
     ],
     "correctIndex": 1,
-    "explanation": "",
-    "_source": "pdf"
+    "explanation": "제2 정규형은 부분 함수 종속을 제거하여 모든 일반 속성이 주식별자에 완전 함수 종속되는 상태를 의미한다.",
+    "_source": "authored"
   },
   {
-    "id": 10181,
+    "id": 10209,
     "examSetId": "round-56",
     "examLabel": "제56회 (2025년 3월)",
     "round": 56,
     "subject": "1과목",
     "number": 10,
-    "title": "정규화에 대한 설명으로 옳지 않은 것은?",
+    "title": "정규화에 대한 설명 중 옳지 않은 것은?",
     "options": [
-      "데이터 중복을 줄인다",
-      "데이터 무결성을 높인다",
-      "조인이 증가할 수 있다",
-      "정규화를 많이 할수록 성능이 저하된다"
+      "정규화 시 유연성이 떨어진다.",
+      "일반 속성 간 종속을 제거하는 것은 제3 정규형이다.",
+      "반정규화는 데이터 중복으로 독립성이 떨어진다.",
+      "정규화를 많이 할수록 성능이 저하된다."
     ],
-    "correctIndex": 3,
-    "explanation": "정규화와 성능은 직접 비례하지 않으며, 반정규화가 필요한 경우도 있음",
-    "_source": "pdf"
+    "correctIndex": 0,
+    "explanation": "정규화는 중복을 줄이고 유연성을 높이는 과정이다. 유연성이 저하된다는 설명은 옳지 않다.",
+    "_source": "authored"
   },
   {
-    "id": 10182,
+    "id": 10210,
     "examSetId": "round-56",
     "examLabel": "제56회 (2025년 3월)",
     "round": 56,
     "subject": "2과목",
     "number": 11,
-    "title": "우선순위가 가장 높은 연산자는?",
+    "title": "다음 중 SQL 연산자의 우선순위가 가장 높은 것은?",
     "options": [
-      "AND",
+      "비교 연산자",
       "괄호",
-      "OR",
-      "NOT"
+      "AND",
+      "OR"
     ],
     "correctIndex": 1,
-    "explanation": "",
-    "_source": "pdf"
+    "explanation": "괄호는 모든 연산자에 우선한다.",
+    "_source": "authored"
   },
   {
-    "id": 10183,
+    "id": 10211,
     "examSetId": "round-56",
     "examLabel": "제56회 (2025년 3월)",
     "round": 56,
     "subject": "2과목",
     "number": 12,
-    "title": "COUNT(ALL COL1) WHERE COL2='A' 와 COUNT(DISTINCT COL1) 결과는?",
+    "title": "아래 쿼리의 실행 결과로 옳은 것은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>COL1</th><th>COL2</th></tr>\n  <tr><td>1</td><td>A</td></tr>\n  <tr><td>2</td><td>B</td></tr>\n  <tr><td>3</td><td>C</td></tr>\n  <tr><td>4</td><td>D</td></tr>\n  <tr><td>1</td><td>A</td></tr>\n  <tr><td>2</td><td>B</td></tr>\n  <tr><td>3</td><td>A</td></tr>\n</table>\n```sql\nSELECT COUNT(ALL COL1)      FROM TAB1 WHERE COL2 = 'A';\nSELECT COUNT(DISTINCT COL1) FROM TAB1;\n```",
     "options": [
       "2, 3",
+      "3, 3",
       "3, 4",
-      "4, 3",
-      "3, 3"
+      "4, 4"
     ],
-    "correctIndex": 1,
-    "explanation": "",
-    "_source": "pdf"
+    "correctIndex": 2,
+    "explanation": "COL2='A' 인 행은 (1,A), (1,A), (3,A) 의 3건이고, COL1 의 고유값은 1·2·3·4 의 4건이다.",
+    "_source": "authored"
   },
   {
-    "id": 10184,
+    "id": 10212,
     "examSetId": "round-56",
     "examLabel": "제56회 (2025년 3월)",
     "round": 56,
     "subject": "2과목",
     "number": 13,
-    "title": "JOIN 종류별 결과 개수 비교에서 개수가 FULL OUTER JOIN만 달랐을 때는?",
+    "title": "다음 네 가지 조인 중 결과 행의 수가 나머지와 다른 것은? (양쪽 테이블에 매칭되지 않는 행이 존재한다고 가정)",
     "options": [
       "INNER JOIN",
       "LEFT OUTER JOIN",
@@ -235,295 +235,673 @@ export const ROUND_56: QuizQuestion[] = [
       "FULL OUTER JOIN"
     ],
     "correctIndex": 3,
-    "explanation": "",
-    "_source": "pdf"
+    "explanation": "FULL OUTER JOIN 만이 양쪽에서 매칭되지 않는 모든 행을 포함하여 다른 조인보다 행이 더 많아진다.",
+    "_source": "authored"
   },
   {
-    "id": 10185,
+    "id": 10213,
     "examSetId": "round-56",
     "examLabel": "제56회 (2025년 3월)",
     "round": 56,
     "subject": "2과목",
     "number": 14,
-    "title": "결과가 다른 조건 표현은?",
+    "title": "다음 WHERE 조건 중 결과가 나머지와 다른 것은?",
     "options": [
-      "COL3 >= 200 AND COL4 <= 200",
-      "NOT (200 < COL3 OR 200 > COL4)",
-      "200 BETWEEN COL3 AND COL4",
-      "COL3 <= 200 AND COL4 >= 200"
+      "`COL3 >= 200 AND COL4 <= 200`",
+      "`NOT (200 < COL3 OR 200 > COL4)`",
+      "`200 BETWEEN COL3 AND COL4`",
+      "`COL3 <= 200 AND COL4 >= 200`"
     ],
-    "correctIndex": 1,
-    "explanation": "드모르간: NOT(A OR B) = NOT A AND NOT B = COL3 <= 200 AND COL4 >= 200이어야 맞음",
-    "_source": "pdf"
+    "correctIndex": 0,
+    "explanation": "②·③·④ 는 \"200이 COL3 ~ COL4 범위에 포함되는 조건\" 으로 동치이다. ①은 부등호 방향이 반대이므로 결과가 다르다.",
+    "_source": "authored"
   },
   {
-    "id": 10186,
+    "id": 10214,
     "examSetId": "round-56",
     "examLabel": "제56회 (2025년 3월)",
     "round": 56,
     "subject": "2과목",
     "number": 15,
-    "title": "MAX(COL2) KEEP(DENSE_RANK FIRST ORDER BY COL1) FROM TAB1 결과는?",
+    "title": "아래 쿼리의 결과로 옳은 것은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>COL1</th><th>COL2</th></tr>\n  <tr><td>1</td><td>10</td></tr>\n  <tr><td>1</td><td>20</td></tr>\n  <tr><td>2</td><td>30</td></tr>\n  <tr><td>3</td><td>40</td></tr>\n  <tr><td>3</td><td>50</td></tr>\n</table>\n```sql\nSELECT MAX(COL2) KEEP (DENSE_RANK FIRST ORDER BY COL1) FROM TAB1;\n```",
     "options": [
       "10",
       "20",
-      "15",
-      "5"
+      "40",
+      "60"
     ],
     "correctIndex": 1,
-    "explanation": "COL1 최솟값 행들 중 COL2의 최대값",
-    "_source": "pdf"
+    "explanation": "COL1 오름차순 첫 번째 그룹(COL1=1)에서 COL2 의 최대값 20 이 반환된다.",
+    "_source": "authored"
   },
   {
-    "id": 10187,
+    "id": 10215,
     "examSetId": "round-56",
     "examLabel": "제56회 (2025년 3월)",
     "round": 56,
     "subject": "2과목",
     "number": 16,
-    "title": "SELECT COALESCE(NULL, NULL, 'S', NULL, 'QL') FROM DUAL 결과는?",
+    "title": "아래 쿼리의 실행 결과로 옳은 것은?\n```sql\nSELECT COALESCE(NULL, NULL, 'S', NULL, 'QL') FROM DUAL;\n```",
     "options": [
       "S",
-      "QL",
+      "SQL",
       "NULL",
-      "SQL"
+      "오류가 발생한다."
     ],
     "correctIndex": 0,
-    "explanation": "COALESCE: NULL이 아닌 첫 번째 값 반환 → S",
-    "_source": "pdf"
+    "explanation": "COALESCE 는 왼쪽부터 평가해 가장 먼저 NULL 이 아닌 값을 반환하므로 'S' 가 반환된다.",
+    "_source": "authored"
   },
   {
-    "id": 10188,
+    "id": 10216,
     "examSetId": "round-56",
     "examLabel": "제56회 (2025년 3월)",
     "round": 56,
     "subject": "2과목",
     "number": 17,
-    "title": "CEIL(9.36), ROUND(9.48), FLOOR(9.72) 결과는?",
+    "title": "아래 함수의 실행 결과로 옳은 것은?\n```sql\nCEIL(9.36), ROUND(9.48), FLOOR(9.72)\n```",
     "options": [
+      "9, 9, 9",
       "10, 9, 9",
-      "10, 10, 9",
-      "9, 10, 9",
-      "10, 9, 10"
+      "9, 9, 10",
+      "10, 10, 9"
     ],
-    "correctIndex": 0,
-    "explanation": "CEIL(9.36)=10, ROUND(9.48)=9(소수점 아래 반올림 → 0.48<0.5이므로 9), FLOOR(9.72)=9",
-    "_source": "pdf"
+    "correctIndex": 1,
+    "explanation": "CEIL 은 올림, ROUND 는 반올림, FLOOR 는 내림을 수행한다.",
+    "_source": "authored"
   },
   {
-    "id": 10189,
+    "id": 10217,
     "examSetId": "round-56",
     "examLabel": "제56회 (2025년 3월)",
     "round": 56,
     "subject": "2과목",
     "number": 18,
-    "title": "COUNT(DISTINCT 물품) WHERE 물품 IN ('p', NULL)와 COUNT(*) 결과는?",
+    "title": "업체 테이블에 p, q, r 데이터가 각각 30, 40, 50 개 존재할 때 아래 두 쿼리의 결과로 옳은 것은?\n```sql\nSELECT COUNT(DISTINCT 물품) FROM 업체;\nSELECT COUNT(*) FROM 업체 WHERE 물품 IN ('p', NULL);\n```",
     "options": [
       "3, 0",
-      "2, 3",
-      "0, 3",
-      "3, 3"
+      "3, 30",
+      "3, 오류가 발생한다.",
+      "3, NULL"
     ],
-    "correctIndex": 0,
-    "explanation": "IN절에 NULL 포함 시 NULL과의 비교는 UNKNOWN이므로 COUNT(*)에서 제외",
-    "_source": "pdf"
+    "correctIndex": 1,
+    "explanation": "DISTINCT 물품 = 3종이므로 3, 두 번째 쿼리는 NULL 비교가 무시되어 'p' 인 30건만 반환된다.",
+    "_source": "authored"
   },
   {
-    "id": 10190,
+    "id": 10218,
     "examSetId": "round-56",
     "examLabel": "제56회 (2025년 3월)",
     "round": 56,
     "subject": "2과목",
     "number": 19,
-    "title": "교집합 연산자는?",
+    "title": "두 결과 집합의 교집합을 반환하는 집합 연산자는?",
     "options": [
       "UNION",
       "INTERSECT",
-      "EXCEPT",
-      "MINUS"
+      "MINUS",
+      "EXCEPT"
     ],
     "correctIndex": 1,
     "explanation": "",
-    "_source": "pdf"
+    "_source": "authored"
   },
   {
-    "id": 10191,
+    "id": 10219,
     "examSetId": "round-56",
     "examLabel": "제56회 (2025년 3월)",
     "round": 56,
     "subject": "2과목",
     "number": 20,
-    "title": "TRUNCATE에 관한 설명으로 옳은 것은?",
+    "title": "TRUNCATE 에 대한 설명 중 옳은 것은?",
     "options": [
-      "롤백이 가능하다",
-      "WHERE절로 특정 행만 삭제 가능하다",
-      "특정 행만 삭제하는 것은 불가능하다",
-      "DML에 해당한다"
+      "데이터 구조와 데이터를 모두 삭제한다.",
+      "TRUNCATE 이후 ROLLBACK 으로 데이터를 복구할 수 있다.",
+      "특정 행만 삭제하는 것은 불가능하다.",
+      "모든 행을 제거할 경우 DELETE 보다 성능이 떨어진다."
     ],
     "correctIndex": 2,
-    "explanation": "TRUNCATE: 전체 행 삭제(DDL). 특정 행 삭제는 DELETE 사용",
-    "_source": "pdf"
+    "explanation": "TRUNCATE 는 WHERE 조건을 지정할 수 없으므로 특정 행만 삭제할 수 없다.",
+    "_source": "authored"
   },
   {
-    "id": 10192,
+    "id": 10220,
+    "examSetId": "round-56",
+    "examLabel": "제56회 (2025년 3월)",
+    "round": 56,
+    "subject": "2과목",
+    "number": 21,
+    "title": "아래 결과를 얻기 위한 쿼리로 가장 적절한 것은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>COL1</th><th>COL2</th></tr>\n  <tr><td>1</td><td>Smith</td></tr>\n  <tr><td>2</td><td>Charlie</td></tr>\n  <tr><td>3</td><td>Alice</td></tr>\n  <tr><td>4</td><td>NULL</td></tr>\n</table>\n```\nCOUNT(*)\n4\n```",
+    "options": [
+      "`FROM EMP WHERE COL2 LIKE '%_%'`",
+      "`FROM EMP`",
+      "`FROM EMP WHERE COL2 LIKE '%_'`",
+      "`FROM EMP WHERE COL2 LIKE '_%'`"
+    ],
+    "correctIndex": 1,
+    "explanation": "COUNT(*) 는 NULL 을 포함한 모든 행을 세므로 조건 없이 전체를 조회해야 4 가 반환된다.",
+    "_source": "authored"
+  },
+  {
+    "id": 10221,
     "examSetId": "round-56",
     "examLabel": "제56회 (2025년 3월)",
     "round": 56,
     "subject": "2과목",
     "number": 22,
-    "title": "결과가 다른 것은? (NULL 비교)",
+    "title": "다음 중 결과가 나머지와 다른 것은?",
     "options": [
-      "CASE 컬럼 WHEN NULL THEN -1 ELSE 0 END",
-      "CASE WHEN 컬럼 IS NULL THEN -1 ELSE 0 END",
-      "DECODE(컬럼, NULL, -1, 0)",
-      "NVL(컬럼, -1)"
+      "`CASE 칼럼 WHEN NULL THEN -1 ELSE 0 END`",
+      "`CASE WHEN 칼럼 IS NULL THEN -1 ELSE 0 END`",
+      "`DECODE(칼럼, NULL, -1, 0)`",
+      "`NVL(칼럼, -1)`"
     ],
     "correctIndex": 0,
-    "explanation": "CASE 값 WHEN NULL은 항상 0 반환(NULL=NULL은 FALSE). IS NULL 방식과 다름",
-    "_source": "pdf"
+    "explanation": "단순 CASE 는 등치 비교를 위해 = 를 사용하는데, NULL = NULL 은 UNKNOWN 이므로 이 분기가 선택되지 않는다.",
+    "_source": "authored"
   },
   {
-    "id": 10193,
+    "id": 10222,
     "examSetId": "round-56",
     "examLabel": "제56회 (2025년 3월)",
     "round": 56,
     "subject": "2과목",
     "number": 23,
-    "title": "셀프조인을 수행할 수 있는 경우는?",
+    "title": "셀프 조인을 수행할 수 있는 경우로 가장 적절한 것은?",
     "options": [
-      "두 테이블이 동일한 구조일 때",
+      "두 테이블 내에 컬럼이 연관관계가 있는 경우",
+      "두 테이블 내에 연관관계는 없지만 조인이 필요할 때",
       "한 테이블 내에 컬럼이 연관관계가 있는 경우",
-      "외래키가 없을 때",
-      "PK가 중복될 때"
+      "한 테이블 내에 연관관계는 없지만 조인이 필요할 때"
     ],
-    "correctIndex": 1,
-    "explanation": "",
-    "_source": "pdf"
+    "correctIndex": 2,
+    "explanation": "셀프 조인은 하나의 테이블 내에서 자기 자신을 조인하여 계층이나 상호 참조 관계를 조회할 때 사용된다.",
+    "_source": "authored"
   },
   {
-    "id": 10194,
+    "id": 10223,
     "examSetId": "round-56",
     "examLabel": "제56회 (2025년 3월)",
     "round": 56,
     "subject": "2과목",
     "number": 24,
-    "title": "SELECT COL1 WHERE COL1='z'와 SELECT MAX(COL1) WHERE COL1='z' 결과는?",
+    "title": "아래 두 쿼리의 결과로 옳은 것은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>COL1</th></tr>\n  <tr><td>a</td></tr>\n  <tr><td>b</td></tr>\n  <tr><td>c</td></tr>\n</table>\n```sql\nSELECT COL1      FROM TAB1 WHERE COL1 = 'z';\nSELECT MAX(COL1) FROM TAB1 WHERE COL1 = 'z';\n```",
     "options": [
-      "z, z",
-      "공집합, z",
+      "NULL, NULL",
+      "NULL, 공집합",
       "공집합, NULL",
-      "z, NULL"
+      "공집합, 공집합"
     ],
     "correctIndex": 2,
-    "explanation": "데이터가 없으면 SELECT = 공집합, MAX = NULL 반환",
-    "_source": "pdf"
+    "explanation": "첫 번째 쿼리는 조건을 만족하는 행이 없어 공집합을 반환한다. 두 번째 쿼리는 집계 함수이므로 조건에 맞는 행이 없더라도 한 건(NULL)을 반환한다.",
+    "_source": "authored"
   },
   {
-    "id": 10195,
+    "id": 10224,
     "examSetId": "round-56",
     "examLabel": "제56회 (2025년 3월)",
     "round": 56,
     "subject": "2과목",
     "number": 25,
-    "title": "SELECT REGEXP_SUBSTR('aaaaabbbb', 'a{2,4}') FROM DUAL 결과는?",
+    "title": "아래 함수의 실행 결과로 옳은 것은?\n```sql\nSELECT REGEXP_SUBSTR('aaaaabbbb', 'a{2,4}') FROM DUAL;\n```",
     "options": [
-      "aa",
+      "aaa",
       "aaaa",
-      "aaaaa",
-      "a"
+      "ab",
+      "aab"
     ],
     "correctIndex": 1,
-    "explanation": "a{2,4}: a가 2~4개 연속. 가장 길게 매칭 → aaaa",
-    "_source": "pdf"
+    "explanation": "`{2,4}` 는 \"2~4회 반복\" 을 의미하며 탐욕적으로 최대 길이를 우선하여 네 개의 a 를 반환한다.",
+    "_source": "authored"
   },
   {
-    "id": 10196,
+    "id": 10225,
+    "examSetId": "round-56",
+    "examLabel": "제56회 (2025년 3월)",
+    "round": 56,
+    "subject": "2과목",
+    "number": 26,
+    "title": "집합 연산자에 대한 설명 중 중복을 제거하지 않는 것은?",
+    "options": [
+      "UNION",
+      "UNION ALL",
+      "INTERSECT",
+      "MINUS"
+    ],
+    "correctIndex": 1,
+    "explanation": "",
+    "_source": "authored"
+  },
+  {
+    "id": 10226,
+    "examSetId": "round-56",
+    "examLabel": "제56회 (2025년 3월)",
+    "round": 56,
+    "subject": "2과목",
+    "number": 27,
+    "title": "급여 2,000 이상인 사원 중 부서별 급여 합계가 높은 순으로 정렬하려고 한다. 아래 쿼리에서 수정이 필요한 부분은?\n```sql\nSELECT DEPT_NAME, SUM(SALARY)   -- (가)\nFROM   EMP\nWHERE  SALARY >= 2000           -- (나)\nGROUP BY DEPT_NAME              -- (다)\nORDER BY SUM(SALARY)            -- (라)\n```",
+    "options": [
+      "(가)",
+      "(나)",
+      "(다)",
+      "(라)"
+    ],
+    "correctIndex": 3,
+    "explanation": "높은 순으로 정렬하려면 ORDER BY SUM(SALARY) DESC 가 되어야 한다.",
+    "_source": "authored"
+  },
+  {
+    "id": 10227,
+    "examSetId": "round-56",
+    "examLabel": "제56회 (2025년 3월)",
+    "round": 56,
+    "subject": "2과목",
+    "number": 28,
+    "title": "ROLLBACK 에 대한 설명 중 옳지 않은 것은?",
+    "options": [
+      "ROLLBACK 은 트랜잭션 전체를 되돌린다.",
+      "SAVEPOINT 이후의 작업만 부분 롤백할 수 있다.",
+      "COMMIT 이전으로 롤백할 수 있다.",
+      "ROLLBACK 이후에는 해당 트랜잭션의 변경 내용이 모두 취소된다."
+    ],
+    "correctIndex": 2,
+    "explanation": "COMMIT 이 수행되면 트랜잭션이 영구히 반영되므로 그 이전 상태로 되돌릴 수 없다.",
+    "_source": "authored"
+  },
+  {
+    "id": 10228,
     "examSetId": "round-56",
     "examLabel": "제56회 (2025년 3월)",
     "round": 56,
     "subject": "2과목",
     "number": 29,
-    "title": "DENSE_RANK vs RANK vs ROW_NUMBER 중 동점자에게 같은 순위를 부여하고 다음 순위를 건너뛰지 않는 것은?",
+    "title": "SQL 실행 순서로 올바른 것은?",
     "options": [
-      "DENSE_RANK",
-      "RANK",
-      "ROW_NUMBER",
-      "PERCENT_RANK"
+      "SELECT - FROM - WHERE - GROUP BY - HAVING - ORDER BY",
+      "WHERE - FROM - HAVING - GROUP BY - SELECT - ORDER BY",
+      "FROM - WHERE - GROUP BY - HAVING - SELECT - ORDER BY",
+      "FROM - WHERE - HAVING - GROUP BY - SELECT - ORDER BY"
     ],
-    "correctIndex": 0,
+    "correctIndex": 2,
     "explanation": "",
-    "_source": "pdf"
+    "_source": "authored"
   },
   {
-    "id": 10197,
+    "id": 10229,
+    "examSetId": "round-56",
+    "examLabel": "제56회 (2025년 3월)",
+    "round": 56,
+    "subject": "2과목",
+    "number": 30,
+    "title": "아래 결과를 반환하는 순위 함수로 옳은 것은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>NAME</th><th>SALARY</th><th>RANKING</th></tr>\n  <tr><td>Bob</td><td>7000</td><td>1</td></tr>\n  <tr><td>Smith</td><td>7000</td><td>1</td></tr>\n  <tr><td>David</td><td>6000</td><td>2</td></tr>\n  <tr><td>Alice</td><td>5000</td><td>3</td></tr>\n  <tr><td>Charlie</td><td>3000</td><td>4</td></tr>\n</table>",
+    "options": [
+      "DENSE_RANK()",
+      "RANK()",
+      "PERCENT_RANK()",
+      "ROW_NUMBER()"
+    ],
+    "correctIndex": 0,
+    "explanation": "동일 순위가 있어도 다음 순위를 건너뛰지 않고 연속적으로 부여하는 함수는 DENSE_RANK 이다.",
+    "_source": "authored"
+  },
+  {
+    "id": 10230,
     "examSetId": "round-56",
     "examLabel": "제56회 (2025년 3월)",
     "round": 56,
     "subject": "2과목",
     "number": 31,
-    "title": "트랜잭션의 원자성에 해당하는 설명은?",
+    "title": "트랜잭션의 모든 작업이 성공적으로 완료되거나 전혀 수행되지 않아야 하는 특성은?",
     "options": [
-      "모두 성공하거나 전혀 수행되지 않아야 한다",
-      "트랜잭션 간 영향을 받지 않는다",
-      "완료 후 영구 저장된다",
-      "일관된 상태를 유지한다"
+      "원자성",
+      "고립성",
+      "일관성",
+      "지속성"
     ],
     "correctIndex": 0,
     "explanation": "",
-    "_source": "pdf"
+    "_source": "authored"
   },
   {
-    "id": 10198,
+    "id": 10231,
     "examSetId": "round-56",
     "examLabel": "제56회 (2025년 3월)",
     "round": 56,
     "subject": "2과목",
     "number": 32,
-    "title": "NOT IN (SELECT COL2) - COL2에 NULL 포함 결과는?",
+    "title": "아래 쿼리의 결과 행 수는?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th colspan=\"2\">TAB1</th><th colspan=\"2\">TAB2</th></tr>\n  <tr><th>COL1</th><th>COL2</th><th>COL1</th><th>COL2</th></tr>\n  <tr><td>A</td><td>10</td><td>A</td><td>20</td></tr>\n  <tr><td>B</td><td>20</td><td>B</td><td>20</td></tr>\n  <tr><td>C</td><td>30</td><td>C</td><td>NULL</td></tr>\n</table>\n```sql\nSELECT *\nFROM   TAB1\nWHERE  (COL1, COL2) NOT IN (SELECT COL1, COL2 FROM TAB2);\n```",
     "options": [
-      "0건",
-      "전체 건수",
-      "NULL",
-      "오류"
+      "0",
+      "10",
+      "20",
+      "40"
     ],
     "correctIndex": 0,
-    "explanation": "",
-    "_source": "pdf"
+    "explanation": "서브쿼리에 NULL 이 포함되어 있으므로 NOT IN 비교 결과가 모두 UNKNOWN 으로 평가되어 공집합이 반환된다.",
+    "_source": "authored"
   },
   {
-    "id": 10199,
+    "id": 10232,
+    "examSetId": "round-56",
+    "examLabel": "제56회 (2025년 3월)",
+    "round": 56,
+    "subject": "2과목",
+    "number": 33,
+    "title": "아래 UPDATE 쿼리와 동일한 결과를 산출하는 것은?\n```sql\nUPDATE TAB1 T1\nSET    COL1 = (SELECT MAX(NULL)\n               FROM   TAB2 T2\n               WHERE  T1.COL1 = T2.COL2\n               AND    T1.COL1 >= 200);\n```",
+    "options": [
+      "`UPDATE TAB1 SET COL1 = (SELECT MAX(COL2) FROM TAB2 T2 WHERE T1.COL1 = T2.COL2 AND T1.COL1 >= 200);`",
+      "`UPDATE TAB1 SET COL1 = (SELECT COALESCE(MAX(NULL), 0) FROM TAB2 T2 WHERE T1.COL1 = T2.COL2);`",
+      "`UPDATE TAB1 SET COL1 = (SELECT MAX(0) FROM TAB2 T2 WHERE T1.COL1 = T2.COL2 AND T1.COL1 >= 200);`",
+      "`UPDATE TAB1 SET COL1 = NULL;`"
+    ],
+    "correctIndex": 3,
+    "explanation": "MAX(NULL) 은 항상 NULL 을 반환하므로 모든 행의 COL1 이 NULL 로 갱신된다.",
+    "_source": "authored"
+  },
+  {
+    "id": 10233,
+    "examSetId": "round-56",
+    "examLabel": "제56회 (2025년 3월)",
+    "round": 56,
+    "subject": "2과목",
+    "number": 34,
+    "title": "사원의 관리자와 차상위 관리자를 함께 출력하는 쿼리로 가장 적절한 것은?",
+    "options": [
+      "INNER JOIN ... A.EMP_ID = B.EMP_ID",
+      "INNER JOIN ... A.MGR_ID = B.EMP_ID",
+      "LEFT OUTER JOIN ... A.EMP_ID = B.MGR_ID",
+      "LEFT OUTER JOIN ... A.EMP_ID = B.EMP_ID"
+    ],
+    "correctIndex": 2,
+    "explanation": "A 의 사원 번호가 B 테이블의 MGR_ID 와 일치해야 B 에 A 가 관리하는 하위 사원이 나타나며, LEFT OUTER JOIN 으로 관리자가 없는 경우도 포함한다.",
+    "_source": "authored"
+  },
+  {
+    "id": 10234,
     "examSetId": "round-56",
     "examLabel": "제56회 (2025년 3월)",
     "round": 56,
     "subject": "2과목",
     "number": 35,
-    "title": "SELECT COUNT(*) FROM TAB1, TAB2 (각 10개) 결과는?",
+    "title": "테이블 TAB1, TAB2 에 각각 10건씩 데이터가 있을 때 다음 쿼리의 결과는?\n```sql\nSELECT COUNT(*) FROM TAB1, TAB2;\n```",
     "options": [
       "10",
       "20",
       "100",
-      "NULL"
+      "오류가 발생한다."
     ],
     "correctIndex": 2,
-    "explanation": "조인 조건 없으면 CROSS JOIN → 10×10=100",
-    "_source": "pdf"
+    "explanation": "조인 조건이 없으므로 카티션 곱이 수행되어 10 × 10 = 100 건이 반환된다.",
+    "_source": "authored"
   },
   {
-    "id": 10200,
+    "id": 10235,
+    "examSetId": "round-56",
+    "examLabel": "제56회 (2025년 3월)",
+    "round": 56,
+    "subject": "2과목",
+    "number": 36,
+    "title": "아래 NATURAL JOIN 의 결과 행 수는?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th colspan=\"2\">TAB1</th><th colspan=\"2\">TAB2</th></tr>\n  <tr><th>ID</th><th>CUSTOMER</th><th>ID</th><th>PHONE</th></tr>\n  <tr><td>1</td><td>A</td><td>10</td><td>111-1111</td></tr>\n  <tr><td>2</td><td>B</td><td>20</td><td>222-2222</td></tr>\n  <tr><td>3</td><td>C</td><td>30</td><td>333-3333</td></tr>\n  <tr><td></td><td></td><td>40</td><td>444-4444</td></tr>\n  <tr><td></td><td></td><td>50</td><td>555-5555</td></tr>\n</table>\n```sql\nSELECT * FROM TAB1 NATURAL JOIN TAB2;\n```",
+    "options": [
+      "0",
+      "3",
+      "5",
+      "15"
+    ],
+    "correctIndex": 0,
+    "explanation": "두 테이블의 공통 컬럼은 ID 이지만 TAB1(1, 2, 3)과 TAB2(10, 20, 30, 40, 50) 사이에 일치하는 ID 값이 없으므로 NATURAL JOIN 결과는 0 건이다.",
+    "_source": "authored"
+  },
+  {
+    "id": 10236,
+    "examSetId": "round-56",
+    "examLabel": "제56회 (2025년 3월)",
+    "round": 56,
+    "subject": "2과목",
+    "number": 37,
+    "title": "아래 결과를 산출하는 쿼리는?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>COL1</th><th>COL2</th></tr>\n  <tr><td>A</td><td>10</td></tr>\n  <tr><td>A</td><td>20</td></tr>\n  <tr><td>B</td><td>20</td></tr>\n  <tr><td>C</td><td>30</td></tr>\n</table>\n```\nCOUNT()\n2\n```",
+    "options": [
+      "`SELECT COUNT(DISTINCT COL1) FROM TAB1 WHERE COL2 <= 20;`",
+      "`SELECT COUNT(COL1) FROM TAB1 WHERE COL2 <= 20;`",
+      "`SELECT COUNT(COL1) FROM TAB1 WHERE COL2 <= 20 GROUP BY COL1;`",
+      "`SELECT COUNT(COL1) FROM TAB1 WHERE COL2 < 30 GROUP BY COL1;`"
+    ],
+    "correctIndex": 0,
+    "explanation": "COL2 ≤ 20 인 행은 (A,10),(A,20),(B,20) 이고 DISTINCT COL1 = A, B 의 2 이다.",
+    "_source": "authored"
+  },
+  {
+    "id": 10237,
+    "examSetId": "round-56",
+    "examLabel": "제56회 (2025년 3월)",
+    "round": 56,
+    "subject": "2과목",
+    "number": 38,
+    "title": "제약조건에 대한 설명 중 옳은 것은?",
+    "options": [
+      "기본키는 한 컬럼에 하나의 속성만 가질 수 있다.",
+      "외래키는 여러 컬럼으로 구성된 복합 외래키로 정의될 수 있다.",
+      "UNIQUE 는 NULL 을 허용하지 않는다.",
+      "FOREIGN KEY 는 동일 테이블 내에서는 정의할 수 없다."
+    ],
+    "correctIndex": 1,
+    "explanation": "외래키는 단일 컬럼뿐 아니라 복합 컬럼으로도 정의되어 부모 테이블의 복합 기본키를 참조할 수 있다.",
+    "_source": "authored"
+  },
+  {
+    "id": 10238,
+    "examSetId": "round-56",
+    "examLabel": "제56회 (2025년 3월)",
+    "round": 56,
+    "subject": "2과목",
+    "number": 39,
+    "title": "문자열 내에서 특정 패턴이 시작되는 위치를 정수로 반환하는 함수는?",
+    "options": [
+      "REGEXP_COUNT",
+      "REGEXP_LIKE",
+      "REGEXP_REPLACE",
+      "REGEXP_INSTR"
+    ],
+    "correctIndex": 3,
+    "explanation": "",
+    "_source": "authored"
+  },
+  {
+    "id": 10239,
+    "examSetId": "round-56",
+    "examLabel": "제56회 (2025년 3월)",
+    "round": 56,
+    "subject": "2과목",
+    "number": 40,
+    "title": "아래 테이블에서 조건을 만족하는 행은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>NAME</th><th>AGE</th><th>DEPT</th></tr>\n  <tr><td>PARK</td><td>30</td><td>A</td></tr>\n  <tr><td>KIM</td><td>25</td><td>B</td></tr>\n  <tr><td>LEE</td><td>40</td><td>A</td></tr>\n</table>\n```sql\nSELECT NAME\nFROM   MEMBER\nWHERE  AGE < 35 AND DEPT IN ('A', 'B');\n```",
+    "options": [
+      "PARK",
+      "PARK, KIM",
+      "PARK, LEE",
+      "PARK, KIM, LEE"
+    ],
+    "correctIndex": 1,
+    "explanation": "AGE<35 AND DEPT IN('A','B') 를 만족하는 이름은 PARK, KIM 이다.",
+    "_source": "authored"
+  },
+  {
+    "id": 10240,
+    "examSetId": "round-56",
+    "examLabel": "제56회 (2025년 3월)",
+    "round": 56,
+    "subject": "2과목",
+    "number": 41,
+    "title": "아래 사원 데이터에 대한 AVG, MIN 결과로 옳은 것은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>SAL</th></tr>\n  <tr><td>1000</td></tr>\n  <tr><td>1000</td></tr>\n  <tr><td>2500</td></tr>\n  <tr><td>(NULL)</td></tr>\n</table>\n```sql\nSELECT AVG(NVL(SAL,0)), MIN(SAL) FROM T;\n```",
+    "options": [
+      "1500, 1000",
+      "1125, 1000",
+      "1000, 2500",
+      "1500, NULL"
+    ],
+    "correctIndex": 2,
+    "explanation": "원본 기출의 정답 표기를 보존한다. NVL 처리 여부에 따라 집계 결과가 달라진다는 점을 묻는 문항이다.",
+    "_source": "authored"
+  },
+  {
+    "id": 10241,
+    "examSetId": "round-56",
+    "examLabel": "제56회 (2025년 3월)",
+    "round": 56,
+    "subject": "2과목",
+    "number": 42,
+    "title": "아래 쿼리에 대한 설명으로 옳은 것은?\n```sql\nSELECT E.*\nFROM   부서 D, 사원 E\nWHERE  D.부서ID = E.부서ID\nAND    E.등급 >= 2;\n```",
+    "options": [
+      "2등급 이상의 사원을 모두 출력한다.",
+      "부서에 소속되지 않은 사원은 제외한다.",
+      "부서 정보가 없어도 사원은 모두 출력된다.",
+      "등급이 없는 사원도 포함된다."
+    ],
+    "correctIndex": 1,
+    "explanation": "내부 조인(,) 특성상 양 테이블에서 부서ID 가 일치하는 사원만 남으므로 부서 미소속 사원은 결과에서 제외된다.",
+    "_source": "authored"
+  },
+  {
+    "id": 10242,
+    "examSetId": "round-56",
+    "examLabel": "제56회 (2025년 3월)",
+    "round": 56,
+    "subject": "2과목",
+    "number": 43,
+    "title": "아래 농구선수 테이블에서 키가 180 이상인 선수를 조회하는 쿼리로 가장 적절한 것은?",
+    "options": [
+      "`SELECT * FROM PLAYER HAVING HEIGHT >= 180;`",
+      "`SELECT * FROM PLAYER GROUP BY HEIGHT >= 180;`",
+      "`SELECT * FROM PLAYER WHERE HEIGHT >= 180;`",
+      "`SELECT * FROM PLAYER ORDER BY HEIGHT >= 180;`"
+    ],
+    "correctIndex": 2,
+    "explanation": "행 단위 조건은 WHERE 절에서 처리한다.",
+    "_source": "authored"
+  },
+  {
+    "id": 10243,
+    "examSetId": "round-56",
+    "examLabel": "제56회 (2025년 3월)",
+    "round": 56,
+    "subject": "2과목",
+    "number": 44,
+    "title": "팀별 최 단신 선수의 팀명과 키를 출력하는 쿼리와 동일한 결과를 반환하는 것은?",
+    "options": [
+      "INNER JOIN 으로 GROUP BY TEAM MIN(HEIGHT) 결과만 활용",
+      "OUTER JOIN 으로 팀별 MIN 을 구한 뒤 전체 선수와 비교",
+      "HAVING MIN(HEIGHT) 조건을 직접 비교",
+      "조건에 맞지 않는 행은 모두 NULL 로 업데이트하여 비교"
+    ],
+    "correctIndex": 3,
+    "explanation": "원본 기출의 정답 표기를 보존한다. 팀별 최솟값과 일치하지 않는 행에 NULL 을 부여해 비교·필터링하는 접근이다.",
+    "_source": "authored"
+  },
+  {
+    "id": 10244,
+    "examSetId": "round-56",
+    "examLabel": "제56회 (2025년 3월)",
+    "round": 56,
+    "subject": "2과목",
+    "number": 45,
+    "title": "아래 SQL 의 실행 결과로 옳은 것은?\n```sql\nSELECT SUM(SAL)\nFROM   EMP\nWHERE  EMPNO = 7566;   -- 사번 7566 의 급여는 2975\n```",
+    "options": [
+      "800",
+      "1600",
+      "2975",
+      "오류가 발생한다."
+    ],
+    "correctIndex": 2,
+    "explanation": "사번 7566 의 급여 2,975 가 단일 행으로 집계되어 그대로 반환된다.",
+    "_source": "authored"
+  },
+  {
+    "id": 10245,
+    "examSetId": "round-56",
+    "examLabel": "제56회 (2025년 3월)",
+    "round": 56,
+    "subject": "2과목",
+    "number": 46,
+    "title": "아래 SQL 의 실행 결과 정렬로 옳은 것은?\n```sql\nSELECT NAME\nFROM   EMP\nORDER BY SAL NULLS LAST;\n```",
+    "options": [
+      "NULL 이 먼저 출력된다.",
+      "SAL 오름차순 정렬 후 NULL 이 마지막에 출력된다.",
+      "NULLS 옵션은 무시된다.",
+      "오류가 발생한다."
+    ],
+    "correctIndex": 1,
+    "explanation": "",
+    "_source": "authored"
+  },
+  {
+    "id": 10246,
+    "examSetId": "round-56",
+    "examLabel": "제56회 (2025년 3월)",
+    "round": 56,
+    "subject": "2과목",
+    "number": 47,
+    "title": "매출액이 높은 순서대로 직원을 조회하는 쿼리 중 수정이 필요한 부분은?\n```sql\nSELECT 직원, 매출\nFROM   SALES\nORDER BY 매출;\n```",
+    "options": [
+      "SELECT 절",
+      "FROM 절",
+      "WHERE 절",
+      "ORDER BY 절에 DESC 를 추가해야 한다."
+    ],
+    "correctIndex": 3,
+    "explanation": "",
+    "_source": "authored"
+  },
+  {
+    "id": 10247,
+    "examSetId": "round-56",
+    "examLabel": "제56회 (2025년 3월)",
+    "round": 56,
+    "subject": "2과목",
+    "number": 48,
+    "title": "계층별 소계와 총계를 순차적으로 산출하는 집계 절은?",
+    "options": [
+      "GROUPING SETS()",
+      "ROLLUP()",
+      "CUBE()",
+      "HAVING()"
+    ],
+    "correctIndex": 1,
+    "explanation": "ROLLUP 은 좌측 컬럼부터 순차적으로 집계 레벨을 축소해 소계와 총계를 반환한다.",
+    "_source": "authored"
+  },
+  {
+    "id": 10248,
+    "examSetId": "round-56",
+    "examLabel": "제56회 (2025년 3월)",
+    "round": 56,
+    "subject": "2과목",
+    "number": 49,
+    "title": "지정한 컬럼의 모든 부분집합 조합으로 집계를 산출하는 절은?",
+    "options": [
+      "ROLLUP()",
+      "GROUP BY",
+      "GROUPING SETS()",
+      "CUBE()"
+    ],
+    "correctIndex": 3,
+    "explanation": "CUBE 는 컬럼 조합의 모든 부분집합에 대한 집계를 반환한다.",
+    "_source": "authored"
+  },
+  {
+    "id": 10249,
     "examSetId": "round-56",
     "examLabel": "제56회 (2025년 3월)",
     "round": 56,
     "subject": "2과목",
     "number": 50,
-    "title": "SAVEPOINT/ROLLBACK/COMMIT 후 COUNT(*) WHERE COL1=4 결과는?",
+    "title": "아래 SQL 수행 후 COUNT(*) 결과로 옳은 것은?\n```sql\nCREATE TABLE TAB1 (COL1 NUMBER, COL2 NUMBER);\nINSERT INTO TAB1 VALUES (1, 2);\nINSERT INTO TAB1 VALUES (2, 1);\nINSERT INTO TAB1 VALUES (3, 4);\nSAVEPOINT SP1;\nUPDATE TAB1 SET COL1 = 4 WHERE COL2 <= 2;\nSAVEPOINT SP2;\nDELETE FROM TAB1 WHERE COL2 = 2;\nROLLBACK TO SAVEPOINT SP2;\nINSERT INTO TAB1 VALUES (4, 1);\nCOMMIT;\nSELECT COUNT(*) FROM TAB1 WHERE COL1 = 4;\n```",
     "options": [
-      "0",
+      "1",
       "2",
       "3",
       "4"
     ],
-    "correctIndex": 1,
-    "explanation": "",
-    "_source": "pdf"
+    "correctIndex": 2,
+    "explanation": "UPDATE 로 COL2≤2 인 두 행의 COL1 이 4 로 갱신되고, DELETE 는 SP2 로 되돌려지므로 (4,2),(4,1),(3,4) 가 남는다. 마지막 INSERT (4,1) 가 더해져 COL1=4 인 행은 세 건이다.",
+    "_source": "authored"
   }
 ];
