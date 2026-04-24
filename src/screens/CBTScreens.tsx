@@ -249,6 +249,11 @@ export const CBTExam = ({examId = "round-60", onFinish, onNavigate, onExit, mock
             <Btn size="sm" variant="ghost" icon={<Ic.ArrowLeft size={14}/>} onClick={()=>setIdx(Math.max(0, idx-1))} disabled={idx===0}>이전</Btn>
             <Btn size="sm" variant="primary" iconRight={<Ic.ArrowRight size={14}/>} onClick={()=>setIdx(Math.min(totalQ-1, idx+1))} disabled={idx===totalQ-1}>다음</Btn>
           </div>
+
+          {/* 광고 슬롯 — CBT 문제 화면 하단 */}
+          <div style={{marginTop: 28}}>
+            <AdSlot slot="CBT_BOTTOM" format="horizontal"/>
+          </div>
         </main>
 
         {/* Right — sticky OMR */}
