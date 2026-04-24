@@ -80,6 +80,16 @@ export const App = () => {
   }, [tweaks.theme, tweaks.accent]);
 
   const navigate = (to: string, p: any = null) => {
+    // 시험 중 이탈 방지 — cbt/mock-exam 화면에서 다른 화면으로 갈 때 확인
+    const inExam = (route === 'cbt' || route === 'mock-exam');
+    const naturalExits = new Set(['cbt', 'mock-exam', 'cbt-result']);
+    if (inExam && !naturalExits.has(to)) {
+      const ok = typeof window !== 'undefined'
+        ? window.confirm('진행 중인 풀이를 종료하고 이동할까요? 답안은 저장되지 않아요.')
+        : true;
+      if (!ok) return;
+    }
+
     // 베타 모드: 로그인/결제 없이 모든 화면 자유 접근
     if (BETA_NO_AUTH && (to === 'login' || to === 'pricing' || to === 'subscribe')) {
       to = 'home';
@@ -145,7 +155,7 @@ export const App = () => {
           /* TopNav(64px) 바로 아래에 붙도록 */
           position: 'sticky', top: 64, zIndex: 40,
         }}>
-          <button onClick={() => { if (confirm('진행 중인 풀이를 종료하고 이전 화면으로 돌아갈까요?')) navigate(exitReturnRoute || 'home'); }}
+          <button onClick={() => navigate(exitReturnRoute || 'home')}
             style={{ background: 'var(--bg-card)', border: '1px solid var(--border-default)', borderRadius: 10, padding: '6px 11px', fontFamily: 'inherit', fontSize: 12.5, cursor: 'pointer', color: 'var(--fg-2)', display: 'inline-flex', alignItems: 'center', gap: 6 }}>
             <Ic.ArrowLeft size={13}/> 나가기
           </button>
