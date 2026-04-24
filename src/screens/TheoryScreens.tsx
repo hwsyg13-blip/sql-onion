@@ -5,6 +5,7 @@ import { DIAGRAMS } from '../components/Diagrams';
 import { THEORY, THEORY_BODY } from '../data/theory';
 import { QUIZ_BANK } from '../data/quizBank';
 import { CONCEPT_QUIZ } from '../data/conceptQuiz';
+import { recordTheoryView } from '../lib/progress';
 
 // Theory list + detail (2-column with mini test on the right)
 
@@ -46,6 +47,8 @@ export const TheoryListScreen = ({onNavigate}) => (
 );
 
 export const TheoryDetailScreen = ({chapterId, onNavigate}) => {
+  // 챕터 열람 기록
+  React.useEffect(() => { recordTheoryView(chapterId); }, [chapterId]);
   const body = THEORY_BODY[chapterId];
   // Fallback if not detailed
   if (!body) {

@@ -2,11 +2,9 @@
 import React from 'react';
 import { Btn, Tag, Ic, Mascot, MascotGuide, OnionMark, Progress, Divider, CodeBlock, highlightSQL } from '../components/Atoms';
 import { UsageBadge } from './PricingScreen';
-import { fetchHomeStats } from '../lib/queries';
 import { EXAM_SETS } from '../data/quizBank';
 import { AdSlot } from '../components/AdSlot';
-
-const FALLBACK_STATS = { totalAttempts: 0, correctRate: 0, examsDone: 0, recent: [] as any[] };
+import { useProgress } from '../lib/progress';
 
 const EXAM_LABEL: Record<string, string> = Object.fromEntries(
   EXAM_SETS.map(s => [s.id, s.label])
@@ -14,29 +12,21 @@ const EXAM_LABEL: Record<string, string> = Object.fromEntries(
 
 // Home — hero + dashboard summary + quick entry to CBT / endless / plan
 export const HomeScreen = ({onNavigate, user}) => {
-  const [stats, setStats] = React.useState(FALLBACK_STATS);
-  React.useEffect(() => {
-    if (!user?.id) { setStats(FALLBACK_STATS); return; }
-    fetchHomeStats(user.id).then(setStats).catch(err => { console.error(err); setStats(FALLBACK_STATS); });
-  }, [user?.id]);
+  const { stats } = useProgress();
+  const { totalAttempts, correctRate, examsDone, dayProgress, weekNum, weekDay, recentExams } = stats;
 
-  const dayProgress = Math.min(21, Math.max(1, stats.examsDone * 3 + Math.floor(stats.totalAttempts / 20)));
-  const weekNum = Math.min(3, Math.ceil(dayProgress / 7));
-  const weekDay = ((dayProgress - 1) % 7) + 1;
-
-  const recentCards = (stats.recent || []).slice(0, 3).map((s: any) => ({
-    tag: EXAM_LABEL[s.exam_set_id] || s.exam_set_id,
-    title: s.finished_at
-      ? `${EXAM_LABEL[s.exam_set_id] || s.exam_set_id} 결과 다시 보기 (${s.score ?? 0}점)`
-      : `${EXAM_LABEL[s.exam_set_id] || s.exam_set_id} 이어 풀기`,
-    sub: s.finished_at ? '완료됨' : '중도 저장됨',
+  // 최근 완료 기록 있으면 그 카드, 없으면 학습 시작용 기본 카드
+  const recentCards = recentExams.slice(0, 3).map(e => ({
+    tag: EXAM_LABEL[e.examSetId] || e.examSetId,
+    title: `${EXAM_LABEL[e.examSetId] || e.examSetId} 결과 다시 보기 (${e.score}점)`,
+    sub: '완료됨',
     route: 'cbt',
-    arg: s.exam_set_id,
+    arg: e.examSetId,
   }));
   const resumeCards = recentCards.length > 0 ? recentCards : [
-    {tag: '1과목 · 5장', title: '식별자 관계 vs 비식별자 관계', sub: '이론 · 3분 예상', route: 'theory-detail', arg: 'c15'},
-    {tag: '2과목 · 3장', title: 'GROUP BY · HAVING 실행 순서', sub: '이론 + 미니 테스트', route: 'theory-detail', arg: 'c23'},
-    {tag: '제60회', title: '최신 기출 CBT 시작하기', sub: '2026년 3월 시행', route: 'cbt', arg: 'round-60'},
+    {tag: '1주차 · Day 1', title: '데이터 모델의 이해', sub: '이론부터 시작하기', route: 'theory-detail', arg: 'c11'},
+    {tag: '3주 계획', title: '오늘의 학습 보기', sub: '순서대로 따라가세요', route: 'plan', arg: null},
+    {tag: '제60회', title: '최신 기출 맛보기', sub: '2026년 3월 시행', route: 'cbt', arg: 'round-60'},
   ];
 
   return (

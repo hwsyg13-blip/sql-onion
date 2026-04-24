@@ -4,6 +4,7 @@ import { Btn, Tag, Ic, CodeBlock, Mascot, MascotGuide, OnionMark, Progress, Divi
 import { QUIZ_BANK, EXAM_SETS } from '../data/quizBank';
 import { QuestionBody } from './MockScreens';
 import { AdSlot } from '../components/AdSlot';
+import { recordExamComplete, recordQuizAttempt } from '../lib/progress';
 
 // CBT — Exam list, CBT exam screen (sticky OMR), and result.
 // Also Mock Exam full mode (50-item with timer) reusing pieces.
@@ -130,6 +131,28 @@ export const CBTExam = ({examId = "round-60", onFinish, onNavigate, mockMode = f
     setAnswers(a => { const n = [...a]; n[idx] = opt; return n; });
   };
   const doSubmit = () => {
+    // 진도 기록 — CBT 완료(점수) + 각 문항 답안
+    try {
+      let correctCount = 0;
+      questions.forEach((q, i) => {
+        const chosen = answers[i];
+        const isCorrect = chosen != null && chosen === q.correctIndex;
+        if (isCorrect) correctCount++;
+        recordQuizAttempt(`cbt-${examId}-q${i}`, {
+          chosen: chosen ?? -1,
+          correct: isCorrect,
+          round: q.round,
+          subject: q.subject,
+          number: q.number,
+          context: mockMode ? 'mock' : 'exam',
+        });
+      });
+      const score = Math.round((correctCount / questions.length) * 100);
+      if (!mockMode && examId) {
+        recordExamComplete(examId, score, questions.length);
+      }
+    } catch (e) { console.warn('[progress] CBT 기록 실패', e); }
+
     onFinish({questions, answers, flags, examId, mockMode, timeUsed: mockMode ? (90*60 - remaining) : null});
   };
 

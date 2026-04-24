@@ -11,6 +11,7 @@ import { TheoryListScreen, TheoryDetailScreen } from './screens/TheoryScreens';
 import { MockLanding, EndlessScreen } from './screens/MockScreens';
 import { ExamListScreen, CBTExam, CBTResult } from './screens/CBTScreens';
 import { useSession, signOut } from './lib/auth';
+import { recordVisit } from './lib/progress';
 
 // 🚧 베타 모드: 로그인/결제 기능 숨김 (나중에 켤 때 false 로만 바꾸면 됨)
 export const BETA_NO_AUTH = true;
@@ -50,6 +51,9 @@ export const App = () => {
 
   React.useEffect(() => { localStorage.setItem('sqlo_tweaks', JSON.stringify(tweaks)); }, [tweaks]);
   React.useEffect(() => { localStorage.setItem('sqlo_route', route); }, [route]);
+
+  // 방문 기록 — 앱 마운트 시 오늘 날짜를 visitDays 에 저장 (1일 1회만)
+  React.useEffect(() => { recordVisit(); }, []);
 
   React.useEffect(() => {
     document.documentElement.dataset.theme = tweaks.theme;

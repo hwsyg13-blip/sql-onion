@@ -1,41 +1,53 @@
 // @ts-nocheck
 import React from 'react';
 import { Btn, Tag, Ic, Mascot, MascotGuide, OnionMark, Progress } from '../components/Atoms';
+import { useProgress, isPlanDayDone } from '../lib/progress';
 
 // 3-week plan: summary + week tabs + daily cards. Toggle viz: calendar grid <-> timeline.
 
 export const PLAN_DATA = [
   // Week 1 — 이론 기초
-  {week:1, day:1,  subj:"1과목", title:"데이터 모델의 이해",       concept:["3층 스키마","ERD 표기"], est:60, done:true,  theoryId:"c11"},
-  {week:1, day:2,  subj:"1과목", title:"엔터티",                   concept:["엔터티 특징","분류"],    est:50, done:true,  theoryId:"c12"},
-  {week:1, day:3,  subj:"1과목", title:"속성",                     concept:["기본·설계·파생","도메인"], est:50, done:true, theoryId:"c13"},
-  {week:1, day:4,  subj:"1과목", title:"관계",                     concept:["관계차수","선택성"],     est:55, done:true,  theoryId:"c14"},
-  {week:1, day:5,  subj:"1과목", title:"식별자",                   concept:["4가지 특성","식별자관계"], est:60, done:true, theoryId:"c15"},
-  {week:1, day:6,  subj:"1과목", title:"정규화 · 반정규화",        concept:["1~5NF","반정규화"],      est:60, done:true,  theoryId:null},
-  {week:1, day:7,  subj:"1과목", title:"1과목 미니 테스트",        concept:["1과목 총 10문항"],       est:40, done:true,  theoryId:null, test:true},
+  {week:1, day:1,  subj:"1과목", title:"데이터 모델의 이해",       concept:["3층 스키마","ERD 표기"], est:60, theoryId:"c11"},
+  {week:1, day:2,  subj:"1과목", title:"엔터티",                   concept:["엔터티 특징","분류"],    est:50, theoryId:"c12"},
+  {week:1, day:3,  subj:"1과목", title:"속성",                     concept:["기본·설계·파생","도메인"], est:50, theoryId:"c13"},
+  {week:1, day:4,  subj:"1과목", title:"관계",                     concept:["관계차수","선택성"],     est:55, theoryId:"c14"},
+  {week:1, day:5,  subj:"1과목", title:"식별자",                   concept:["4가지 특성","식별자관계"], est:60, theoryId:"c15"},
+  {week:1, day:6,  subj:"1과목", title:"정규화 · 반정규화",        concept:["1~5NF","반정규화"],      est:60, theoryId:"c16"},
+  {week:1, day:7,  subj:"1과목", title:"1과목 미니 테스트",        concept:["1과목 총 10문항"],       est:40, test:true},
   // Week 2 — SQL 본체
-  {week:2, day:8,  subj:"2과목", title:"SQL 개요 · DDL",           concept:["CREATE/ALTER/DROP"],     est:55, done:false, current:true, theoryId:"c21"},
-  {week:2, day:9,  subj:"2과목", title:"SELECT · WHERE",           concept:["함수","연산자"],         est:60, done:false, theoryId:"c22"},
-  {week:2, day:10, subj:"2과목", title:"GROUP BY · HAVING",        concept:["집계","ROLLUP·CUBE"],    est:60, done:false, theoryId:"c23"},
-  {week:2, day:11, subj:"2과목", title:"JOIN",                     concept:["INNER","OUTER","SELF"],  est:65, done:false, theoryId:"c24"},
-  {week:2, day:12, subj:"2과목", title:"서브쿼리",                 concept:["스칼라","인라인뷰"],     est:60, done:false, theoryId:"c25"},
-  {week:2, day:13, subj:"2과목", title:"집합 · 계층형",            concept:["UNION","CONNECT BY"],    est:55, done:false, theoryId:"c26"},
-  {week:2, day:14, subj:"2과목", title:"윈도우 함수",              concept:["RANK","PARTITION BY"],   est:60, done:false, theoryId:"c27"},
+  {week:2, day:8,  subj:"2과목", title:"SQL 개요 · DDL",           concept:["CREATE/ALTER/DROP"],     est:55, theoryId:"c21"},
+  {week:2, day:9,  subj:"2과목", title:"SELECT · WHERE",           concept:["함수","연산자"],         est:60, theoryId:"c22"},
+  {week:2, day:10, subj:"2과목", title:"GROUP BY · HAVING",        concept:["집계","ROLLUP·CUBE"],    est:60, theoryId:"c23"},
+  {week:2, day:11, subj:"2과목", title:"JOIN",                     concept:["INNER","OUTER","SELF"],  est:65, theoryId:"c24"},
+  {week:2, day:12, subj:"2과목", title:"서브쿼리",                 concept:["스칼라","인라인뷰"],     est:60, theoryId:"c25"},
+  {week:2, day:13, subj:"2과목", title:"집합 · 계층형",            concept:["UNION","CONNECT BY"],    est:55, theoryId:"c26"},
+  {week:2, day:14, subj:"2과목", title:"윈도우 함수",              concept:["RANK","PARTITION BY"],   est:60, theoryId:"c27"},
   // Week 3 — 실전
-  {week:3, day:15, subj:"기출",   title:"제60회(최신) 기출",        concept:["CBT 실전"],              est:90, done:false, examId:"round-60"},
-  {week:3, day:16, subj:"기출",   title:"제59회 기출",              concept:["CBT 실전"],              est:90, done:false, examId:"round-59"},
-  {week:3, day:17, subj:"기출",   title:"제58회 기출 · 오답 복습",  concept:["오답노트"],               est:60, done:false, examId:"round-58"},
-  {week:3, day:18, subj:"모의",   title:"AI 모의고사 1회",         concept:["90분 실전"],              est:90, done:false, mock:true},
-  {week:3, day:19, subj:"모의",   title:"AI 모의고사 2회",         concept:["취약 단원 집중"],         est:90, done:false, mock:true},
-  {week:3, day:20, subj:"복습",   title:"전체 오답노트 리뷰",      concept:["해설 재확인"],            est:60, done:false},
-  {week:3, day:21, subj:"마무리", title:"시험 전날 체크리스트",    concept:["준비물","컨디션"],        est:30, done:false, final:true},
+  {week:3, day:15, subj:"기출",   title:"제60회(최신) 기출",        concept:["CBT 실전"],              est:90, examId:"round-60"},
+  {week:3, day:16, subj:"기출",   title:"제59회 기출",              concept:["CBT 실전"],              est:90, examId:"round-59"},
+  {week:3, day:17, subj:"기출",   title:"제58회 기출 · 오답 복습",  concept:["오답노트"],               est:60, examId:"round-58"},
+  {week:3, day:18, subj:"모의",   title:"AI 모의고사 1회",         concept:["90분 실전"],              est:90, mock:true},
+  {week:3, day:19, subj:"모의",   title:"AI 모의고사 2회",         concept:["취약 단원 집중"],         est:90, mock:true},
+  {week:3, day:20, subj:"복습",   title:"전체 오답노트 리뷰",      concept:["해설 재확인"],            est:60},
+  {week:3, day:21, subj:"마무리", title:"시험 전날 체크리스트",    concept:["준비물","컨디션"],        est:30, final:true},
 ];
 
 export const PlanScreen = ({onNavigate, planViz, setPlanViz}) => {
-  const [week, setWeek] = React.useState(2);
-  const doneCount = PLAN_DATA.filter(d => d.done).length;
-  const totalMin = PLAN_DATA.reduce((a, d) => a + d.est, 0);
-  const doneMin  = PLAN_DATA.filter(d=>d.done).reduce((a,d)=>a+d.est, 0);
+  const { progress, stats } = useProgress();
+  // 각 day 에 done/current 플래그 주입
+  const planWithStatus = React.useMemo(() => PLAN_DATA.map(d => ({
+    ...d,
+    done: isPlanDayDone(d, progress, stats),
+    current: d.day === stats.dayProgress,
+  })), [progress, stats]);
+  // 현재 진도가 속한 주차로 시작
+  const initialWeek = Math.min(3, Math.ceil(stats.dayProgress / 7));
+  const [week, setWeek] = React.useState(initialWeek);
+  React.useEffect(() => { setWeek(initialWeek); }, [initialWeek]);
+
+  const doneCount = planWithStatus.filter(d => d.done).length;
+  const totalMin = planWithStatus.reduce((a, d) => a + d.est, 0);
+  const doneMin  = planWithStatus.filter(d=>d.done).reduce((a,d)=>a+d.est, 0);
 
   const openDay = (d) => {
     if (d.theoryId) onNavigate("theory-detail", d.theoryId);
@@ -73,7 +85,7 @@ export const PlanScreen = ({onNavigate, planViz, setPlanViz}) => {
           {[
             {l:"완료 일자", v:`${doneCount}`, u:"/ 21일"},
             {l:"누적 시간", v:`${Math.floor(doneMin/60)}h ${doneMin%60}m`, u:`전체 ${Math.floor(totalMin/60)}h`},
-            {l:"현재 주차", v:"2주차", u:"Day 8 진행 중"},
+            {l:"현재 주차", v:`${stats.weekNum}주차`, u:`Day ${stats.dayProgress} 진행 중`},
             {l:"남은 일자", v:`${21-doneCount}`, u:"일"},
           ].map((s,i)=>(
             <div key={i}>
@@ -93,8 +105,8 @@ export const PlanScreen = ({onNavigate, planViz, setPlanViz}) => {
         {[1,2,3].map(w => {
           const active = week === w;
           const ws = ["이론 기초","SQL 본체","실전 모의"];
-          const doneW = PLAN_DATA.filter(d=>d.week===w && d.done).length;
-          const totalW = PLAN_DATA.filter(d=>d.week===w).length;
+          const doneW = planWithStatus.filter(d=>d.week===w && d.done).length;
+          const totalW = planWithStatus.filter(d=>d.week===w).length;
           return (
             <button key={w} onClick={()=>setWeek(w)} style={{
               padding:"12px 18px", background:"none", border:0, cursor:"pointer", fontFamily:"inherit",
@@ -111,17 +123,20 @@ export const PlanScreen = ({onNavigate, planViz, setPlanViz}) => {
       </div>
 
       {planViz === "calendar" ? (
-        <CalendarView week={week} openDay={openDay}/>
+        <CalendarView week={week} openDay={openDay} data={planWithStatus}/>
       ) : (
-        <TimelineView week={week} openDay={openDay}/>
+        <TimelineView week={week} openDay={openDay} data={planWithStatus}/>
       )}
 
       {/* Mascot guide */}
       <div style={{marginTop:28, display:"flex", justifyContent:"flex-end"}}>
-        <MascotGuide size={64} variant="smile" side="left">
-          <strong style={{color:"var(--fg-1)"}}>오늘은 Day 8이에요.</strong><br/>
-          DDL을 가볍게 훑고 내일 SELECT로 넘어가요.
-        </MascotGuide>
+        {(() => {
+          const today = planWithStatus.find(d => d.current);
+          const msg = today
+            ? <>오늘은 <strong style={{color:"var(--fg-1)"}}>Day {today.day}</strong>이에요.<br/>{today.title} 부터 시작해봐요.</>
+            : <>아직 학습 기록이 없어요.<br/>Day 1 부터 차근차근 시작해봐요.</>;
+          return <MascotGuide size={64} variant="smile" side="left">{msg}</MascotGuide>;
+        })()}
       </div>
     </div>
   );
@@ -136,8 +151,9 @@ const vizBtn = (active) => ({
   boxShadow: active ? "var(--shadow-sm)" : "none",
 });
 
-export const CalendarView = ({week, openDay}) => {
-  const days = PLAN_DATA.filter(d=>d.week===week);
+export const CalendarView = ({week, openDay, data}) => {
+  const src = data || PLAN_DATA;
+  const days = src.filter(d=>d.week===week);
   return (
     <div style={{marginTop:20, display:"grid", gridTemplateColumns:"repeat(7, 1fr)", gap:10}} className="plan-calendar">
       {days.map(d => {
@@ -176,8 +192,9 @@ export const CalendarView = ({week, openDay}) => {
   );
 };
 
-export const TimelineView = ({week, openDay}) => {
-  const days = PLAN_DATA.filter(d=>d.week===week);
+export const TimelineView = ({week, openDay, data}) => {
+  const src = data || PLAN_DATA;
+  const days = src.filter(d=>d.week===week);
   return (
     <div style={{marginTop:20,position:"relative",paddingLeft:36}}>
       <div style={{position:"absolute",left:14,top:12,bottom:12,width:2,background:"var(--border-subtle)"}}/>
