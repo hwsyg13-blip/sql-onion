@@ -164,12 +164,17 @@ export const EndlessScreen = ({onNavigate}) => {
 };
 
 // Shared question rendering pieces (used in Endless, MockExam, CBT)
-export const QuestionBody = ({q, noTags}) => (
+export const QuestionBody = ({q, noTags}) => {
+  // 출처 라벨: 회차 정보가 있으면 "제N회 기출", 변형/생성이면 "기출 변형"
+  const sourceLabel = q.round
+    ? `제${q.round}회 기출`
+    : (q.examLabel || (q.exam ? q.exam : '기출 변형'));
+  return (
   <div>
     {!noTags && (
       <div style={{display:"flex",gap:8,marginBottom:12,flexWrap:"wrap"}}>
         <Tag tone="green">{q.subject}</Tag>
-        <Tag tone="blue">{q.exam}</Tag>
+        <Tag tone="blue">{sourceLabel}</Tag>
         <Tag tone="neutral">{q.number}번</Tag>
       </div>
     )}
@@ -180,7 +185,8 @@ export const QuestionBody = ({q, noTags}) => (
     {/* 신규 보기 영역 — references 배열이 있으면 표/SQL/ASCII/HTML 블록을 한 번에 렌더 */}
     <QuestionReferences refs={q.references}/>
   </div>
-);
+  );
+};
 
 export const OptionList = ({q, selected, setSelected, checked}) => (
   <ol style={{listStyle:"none",padding:0,margin:"18px 0 0",display:"flex",flexDirection:"column",gap:10}}>
