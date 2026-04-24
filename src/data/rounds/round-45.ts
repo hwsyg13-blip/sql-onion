@@ -1,11 +1,11 @@
 // Auto-generated from PDF + blog + scripts/authored/round-45.json
-// 제45회 — 2022년 5월 · 40문항
+// 제45회 — 2022년 5월 · 50문항
 // ⚠ 직접 편집 금지. 출처별 데이터를 고친 뒤 'node scripts/build-quiz-bank.mjs' 재실행.
 import type { QuizQuestion } from '../quizBank';
 
 export const ROUND_45: QuizQuestion[] = [
   {
-    "id": 10718,
+    "id": 10750,
     "examSetId": "round-45",
     "examLabel": "제45회 (2022년 5월)",
     "round": 45,
@@ -23,7 +23,7 @@ export const ROUND_45: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10719,
+    "id": 10751,
     "examSetId": "round-45",
     "examLabel": "제45회 (2022년 5월)",
     "round": 45,
@@ -41,7 +41,7 @@ export const ROUND_45: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10720,
+    "id": 10752,
     "examSetId": "round-45",
     "examLabel": "제45회 (2022년 5월)",
     "round": 45,
@@ -59,13 +59,13 @@ export const ROUND_45: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10721,
+    "id": 10753,
     "examSetId": "round-45",
     "examLabel": "제45회 (2022년 5월)",
     "round": 45,
     "subject": "1과목",
     "number": 4,
-    "title": "아래 ERD에 대한 설명으로 가장 적절하지 않은 것은?\n<pre>\n[ 고객 ] ─|─────────< [ 주문 ]\n</pre>",
+    "title": "아래 ERD에 대한 설명으로 가장 적절하지 않은 것은?\n<pre>\n[ 고객 ] ─|─ ─ ─ ─o|─< [ 주문 ]\n</pre>",
     "options": [
       "고객은 주문을 하나도 하지 않을 수 있다.",
       "고객은 여러 건의 주문을 가질 수 있다.",
@@ -73,11 +73,11 @@ export const ROUND_45: QuizQuestion[] = [
       "주문은 고객이 없을 수도 있다."
     ],
     "correctIndex": 3,
-    "explanation": "주문 쪽 관계 참여가 필수(실선)이므로 모든 주문은 반드시 하나의 고객에 귀속되어야 한다.",
+    "explanation": "바커(Barker) 표기법 해석 * 고객 쪽(실선 + `|`): 주문 입장에서 고객은 반드시 하나 존재 * 중간 점선(`- - -`) + 주문 쪽 `o`: 고객 입장에서 주문 참여는 선택적(0개 가능) * 주문 쪽 `|<`(까마귀발): 고객은 여러 주문을 가질 수 있음 고객 쪽 참여는 실선 + `|`(필수 1)이므로 모든 주문은 반드시 한 명의 고객에 귀속되어야 한다. 반면 주문 쪽은 점선 + `o`(선택)이므로 고객은 주문이 없을 수도 있다.",
     "_source": "authored"
   },
   {
-    "id": 10722,
+    "id": 10754,
     "examSetId": "round-45",
     "examLabel": "제45회 (2022년 5월)",
     "round": 45,
@@ -95,7 +95,7 @@ export const ROUND_45: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10723,
+    "id": 10755,
     "examSetId": "round-45",
     "examLabel": "제45회 (2022년 5월)",
     "round": 45,
@@ -113,7 +113,7 @@ export const ROUND_45: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10724,
+    "id": 10756,
     "examSetId": "round-45",
     "examLabel": "제45회 (2022년 5월)",
     "round": 45,
@@ -131,7 +131,7 @@ export const ROUND_45: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10725,
+    "id": 10757,
     "examSetId": "round-45",
     "examLabel": "제45회 (2022년 5월)",
     "round": 45,
@@ -149,7 +149,43 @@ export const ROUND_45: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10726,
+    "id": 10758,
+    "examSetId": "round-45",
+    "examLabel": "제45회 (2022년 5월)",
+    "round": 45,
+    "subject": "1과목",
+    "number": 9,
+    "title": "업무에서 필요로 하는 인스턴스로 관리하고자 하는, 의미상 더 이상 분리되지 않는 최소의 데이터 단위는 무엇인가?",
+    "options": [
+      "엔터티(Entity)",
+      "속성(Attribute)",
+      "도메인(Domain)",
+      "식별자(Identifier)"
+    ],
+    "correctIndex": 1,
+    "explanation": "",
+    "_source": "authored"
+  },
+  {
+    "id": 10759,
+    "examSetId": "round-45",
+    "examLabel": "제45회 (2022년 5월)",
+    "round": 45,
+    "subject": "1과목",
+    "number": 10,
+    "title": "기본키가 아닌 모든 속성이 기본키에 완전 함수 종속된 상태를 무엇이라 하는가?",
+    "options": [
+      "제1정규형",
+      "BCNF",
+      "제2정규형",
+      "제3정규형"
+    ],
+    "correctIndex": 2,
+    "explanation": "",
+    "_source": "authored"
+  },
+  {
+    "id": 10760,
     "examSetId": "round-45",
     "examLabel": "제45회 (2022년 5월)",
     "round": 45,
@@ -167,7 +203,7 @@ export const ROUND_45: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10727,
+    "id": 10761,
     "examSetId": "round-45",
     "examLabel": "제45회 (2022년 5월)",
     "round": 45,
@@ -185,7 +221,7 @@ export const ROUND_45: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10728,
+    "id": 10762,
     "examSetId": "round-45",
     "examLabel": "제45회 (2022년 5월)",
     "round": 45,
@@ -203,7 +239,7 @@ export const ROUND_45: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10729,
+    "id": 10763,
     "examSetId": "round-45",
     "examLabel": "제45회 (2022년 5월)",
     "round": 45,
@@ -221,7 +257,7 @@ export const ROUND_45: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10730,
+    "id": 10764,
     "examSetId": "round-45",
     "examLabel": "제45회 (2022년 5월)",
     "round": 45,
@@ -239,7 +275,7 @@ export const ROUND_45: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10731,
+    "id": 10765,
     "examSetId": "round-45",
     "examLabel": "제45회 (2022년 5월)",
     "round": 45,
@@ -257,7 +293,7 @@ export const ROUND_45: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10732,
+    "id": 10766,
     "examSetId": "round-45",
     "examLabel": "제45회 (2022년 5월)",
     "round": 45,
@@ -275,7 +311,7 @@ export const ROUND_45: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10733,
+    "id": 10767,
     "examSetId": "round-45",
     "examLabel": "제45회 (2022년 5월)",
     "round": 45,
@@ -293,7 +329,7 @@ export const ROUND_45: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10734,
+    "id": 10768,
     "examSetId": "round-45",
     "examLabel": "제45회 (2022년 5월)",
     "round": 45,
@@ -311,7 +347,7 @@ export const ROUND_45: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10735,
+    "id": 10769,
     "examSetId": "round-45",
     "examLabel": "제45회 (2022년 5월)",
     "round": 45,
@@ -329,7 +365,7 @@ export const ROUND_45: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10736,
+    "id": 10770,
     "examSetId": "round-45",
     "examLabel": "제45회 (2022년 5월)",
     "round": 45,
@@ -347,7 +383,7 @@ export const ROUND_45: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10737,
+    "id": 10771,
     "examSetId": "round-45",
     "examLabel": "제45회 (2022년 5월)",
     "round": 45,
@@ -365,7 +401,7 @@ export const ROUND_45: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10738,
+    "id": 10772,
     "examSetId": "round-45",
     "examLabel": "제45회 (2022년 5월)",
     "round": 45,
@@ -383,7 +419,7 @@ export const ROUND_45: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10739,
+    "id": 10773,
     "examSetId": "round-45",
     "examLabel": "제45회 (2022년 5월)",
     "round": 45,
@@ -401,7 +437,7 @@ export const ROUND_45: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10740,
+    "id": 10774,
     "examSetId": "round-45",
     "examLabel": "제45회 (2022년 5월)",
     "round": 45,
@@ -419,7 +455,7 @@ export const ROUND_45: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10741,
+    "id": 10775,
     "examSetId": "round-45",
     "examLabel": "제45회 (2022년 5월)",
     "round": 45,
@@ -437,7 +473,7 @@ export const ROUND_45: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10742,
+    "id": 10776,
     "examSetId": "round-45",
     "examLabel": "제45회 (2022년 5월)",
     "round": 45,
@@ -455,7 +491,7 @@ export const ROUND_45: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10743,
+    "id": 10777,
     "examSetId": "round-45",
     "examLabel": "제45회 (2022년 5월)",
     "round": 45,
@@ -473,7 +509,7 @@ export const ROUND_45: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10744,
+    "id": 10778,
     "examSetId": "round-45",
     "examLabel": "제45회 (2022년 5월)",
     "round": 45,
@@ -491,7 +527,7 @@ export const ROUND_45: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10745,
+    "id": 10779,
     "examSetId": "round-45",
     "examLabel": "제45회 (2022년 5월)",
     "round": 45,
@@ -509,7 +545,7 @@ export const ROUND_45: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10746,
+    "id": 10780,
     "examSetId": "round-45",
     "examLabel": "제45회 (2022년 5월)",
     "round": 45,
@@ -527,7 +563,7 @@ export const ROUND_45: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10747,
+    "id": 10781,
     "examSetId": "round-45",
     "examLabel": "제45회 (2022년 5월)",
     "round": 45,
@@ -545,7 +581,7 @@ export const ROUND_45: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10748,
+    "id": 10782,
     "examSetId": "round-45",
     "examLabel": "제45회 (2022년 5월)",
     "round": 45,
@@ -563,7 +599,7 @@ export const ROUND_45: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10749,
+    "id": 10783,
     "examSetId": "round-45",
     "examLabel": "제45회 (2022년 5월)",
     "round": 45,
@@ -581,7 +617,7 @@ export const ROUND_45: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10750,
+    "id": 10784,
     "examSetId": "round-45",
     "examLabel": "제45회 (2022년 5월)",
     "round": 45,
@@ -599,7 +635,7 @@ export const ROUND_45: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10751,
+    "id": 10785,
     "examSetId": "round-45",
     "examLabel": "제45회 (2022년 5월)",
     "round": 45,
@@ -617,7 +653,7 @@ export const ROUND_45: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10752,
+    "id": 10786,
     "examSetId": "round-45",
     "examLabel": "제45회 (2022년 5월)",
     "round": 45,
@@ -635,7 +671,7 @@ export const ROUND_45: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10753,
+    "id": 10787,
     "examSetId": "round-45",
     "examLabel": "제45회 (2022년 5월)",
     "round": 45,
@@ -653,7 +689,7 @@ export const ROUND_45: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10754,
+    "id": 10788,
     "examSetId": "round-45",
     "examLabel": "제45회 (2022년 5월)",
     "round": 45,
@@ -671,7 +707,7 @@ export const ROUND_45: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10755,
+    "id": 10789,
     "examSetId": "round-45",
     "examLabel": "제45회 (2022년 5월)",
     "round": 45,
@@ -689,7 +725,7 @@ export const ROUND_45: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10756,
+    "id": 10790,
     "examSetId": "round-45",
     "examLabel": "제45회 (2022년 5월)",
     "round": 45,
@@ -707,7 +743,7 @@ export const ROUND_45: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10757,
+    "id": 10791,
     "examSetId": "round-45",
     "examLabel": "제45회 (2022년 5월)",
     "round": 45,
@@ -722,6 +758,150 @@ export const ROUND_45: QuizQuestion[] = [
     ],
     "correctIndex": 1,
     "explanation": "CUBE는 지정된 모든 컬럼의 가능한 조합에 대해 소계와 총계를 생성한다. ROLLUP은 지정 순서에 따른 계층적 소계만 생성한다는 점에서 구분된다.",
+    "_source": "authored"
+  },
+  {
+    "id": 10792,
+    "examSetId": "round-45",
+    "examLabel": "제45회 (2022년 5월)",
+    "round": 45,
+    "subject": "2과목",
+    "number": 43,
+    "title": "아래 SQL1과 동일한 결과를 반환하도록 SQL2의 빈칸에 들어갈 조인 방식은?\n```sql\n[SQL1]\nSELECT * FROM A, B;\n[SQL2]\nSELECT * FROM A (  ㄱ  ) B;\n```",
+    "options": [
+      "CROSS JOIN",
+      "INNER JOIN",
+      "NATURAL JOIN",
+      "FULL OUTER JOIN"
+    ],
+    "correctIndex": 0,
+    "explanation": "콤마로 연결한 FROM A, B 는 조인 조건이 없는 카티션 곱(CROSS JOIN)과 동치이다.",
+    "_source": "authored"
+  },
+  {
+    "id": 10793,
+    "examSetId": "round-45",
+    "examLabel": "제45회 (2022년 5월)",
+    "round": 45,
+    "subject": "2과목",
+    "number": 44,
+    "title": "아래 계층형 쿼리 결과에서 C3 컬럼의 두 번째 값은?\n<table border=\"1\">\n<tr><th>[SQLD44]</th><th></th><th></th></tr>\n<tr><td>C1</td><td>C2</td><td>C3</td></tr>\n<tr><td>1</td><td>NULL</td><td>A</td></tr>\n<tr><td>2</td><td>1</td><td>B</td></tr>\n<tr><td>3</td><td>1</td><td>C</td></tr>\n<tr><td>4</td><td>2</td><td>D</td></tr>\n</table>\n```sql\nSELECT C1, C2, C3\nFROM   SQLD44\nCONNECT BY PRIOR C1 = C2\nSTART WITH C1 = 1\nORDER SIBLINGS BY C1 DESC;\n```",
+    "options": [
+      "A",
+      "B",
+      "C",
+      "D"
+    ],
+    "correctIndex": 2,
+    "explanation": "루트 C1=1(A)을 기준으로 자식들을 C1 내림차순으로 정렬하면 형제 노드 중 C1=3(C)이 C1=2(B)보다 먼저 오므로 두 번째 행은 C가 된다.",
+    "_source": "authored"
+  },
+  {
+    "id": 10794,
+    "examSetId": "round-45",
+    "examLabel": "제45회 (2022년 5월)",
+    "round": 45,
+    "subject": "2과목",
+    "number": 45,
+    "title": "아래 계층형 쿼리의 결과로 옳은 것은?\n<table border=\"1\">\n<tr><th>[SQLD45]</th><th></th><th></th></tr>\n<tr><td>C1</td><td>C2</td><td>C3</td></tr>\n<tr><td>1</td><td>NULL</td><td>KING</td></tr>\n<tr><td>2</td><td>1</td><td>JOHN</td></tr>\n<tr><td>3</td><td>2</td><td>SCOTT</td></tr>\n</table>\n```sql\nSELECT C3\nFROM   SQLD45\nWHERE  C1 <> 2\nCONNECT BY C1 = PRIOR C2\nSTART WITH C1 = 2;\n```",
+    "options": [
+      "JOHN",
+      "KING",
+      "SCOTT",
+      "KING, JOHN"
+    ],
+    "correctIndex": 1,
+    "explanation": "START WITH C1=2(JOHN)에서 C1 = PRIOR C2 방향(역방향)으로 거슬러 올라가면 JOHN → KING 경로가 생성된다. WHERE C1<>2에 의해 JOHN이 제외되어 최종 결과는 KING만 남는다.",
+    "_source": "authored"
+  },
+  {
+    "id": 10795,
+    "examSetId": "round-45",
+    "examLabel": "제45회 (2022년 5월)",
+    "round": 45,
+    "subject": "2과목",
+    "number": 46,
+    "title": "GRANT, REVOKE 와 같이 권한을 부여하거나 회수하는 SQL의 분류로 옳은 것은?",
+    "options": [
+      "DDL (Data Definition Language)",
+      "DML (Data Manipulation Language)",
+      "TCL (Transaction Control Language)",
+      "DCL (Data Control Language)"
+    ],
+    "correctIndex": 3,
+    "explanation": "",
+    "_source": "authored"
+  },
+  {
+    "id": 10796,
+    "examSetId": "round-45",
+    "examLabel": "제45회 (2022년 5월)",
+    "round": 45,
+    "subject": "2과목",
+    "number": 47,
+    "title": "아래 SQL의 결과에서 빈칸 ㄱ, ㄴ에 들어갈 값으로 옳은 것은? (총 8개 행에 대한 NTILE(3))\n<table border=\"1\">\n<tr><th>COL1</th><th>COL2</th></tr>\n<tr><td>A</td><td>( ㄱ )</td></tr>\n<tr><td>B</td><td>3</td></tr>\n<tr><td>C</td><td>( ㄴ )</td></tr>\n</table>",
+    "options": [
+      "ㄱ 3, ㄴ 2",
+      "ㄱ 2, ㄴ 3",
+      "ㄱ 3, ㄴ 3",
+      "ㄱ 2, ㄴ 2"
+    ],
+    "correctIndex": 0,
+    "explanation": "NTILE(3)은 전체 8개 행을 3개의 그룹으로 최대한 균등하게 분할한다. 8 = 3 + 3 + 2 이므로 각 버킷에 3개, 3개, 2개씩 배정되어 마지막 그룹은 2가 된다.",
+    "_source": "authored"
+  },
+  {
+    "id": 10797,
+    "examSetId": "round-45",
+    "examLabel": "제45회 (2022년 5월)",
+    "round": 45,
+    "subject": "2과목",
+    "number": 48,
+    "title": "아래 SQL의 빈칸에 들어갈 윈도우 절로 옳은 것은?\n<table border=\"1\">\n<tr><th>[SQLD48]</th><th></th></tr>\n<tr><td>V1</td><td>N1</td></tr>\n<tr><td>A</td><td>100</td></tr>\n<tr><td>B</td><td>150</td></tr>\n<tr><td>C</td><td>1400</td></tr>\n<tr><td>D</td><td>450</td></tr>\n<tr><td>E</td><td>50</td></tr>\n</table>\n```sql\nSELECT V1, N1,\n       COUNT(N1) OVER\n             (ORDER BY N1 (  ㄱ  )\n              BETWEEN 0 PRECEDING AND 50 FOLLOWING) AS CNT\nFROM   SQLD48;\n```",
+    "options": [
+      "ROWS",
+      "GROUPS",
+      "PARTITION",
+      "RANGE"
+    ],
+    "correctIndex": 3,
+    "explanation": "현재 값에서 +0 ~ +50 범위에 속하는 값들의 COUNT를 구해야 하므로, 물리적 행이 아닌 값의 범위를 기준으로 하는 RANGE를 사용한다. ROWS는 행 단위로 누적한다.",
+    "_source": "authored"
+  },
+  {
+    "id": 10798,
+    "examSetId": "round-45",
+    "examLabel": "제45회 (2022년 5월)",
+    "round": 45,
+    "subject": "2과목",
+    "number": 49,
+    "title": "아래 SQL의 결과 행 수로 옳은 것은?\n<table border=\"1\">\n<tr><th>[SQLD49]</th><th></th><th></th></tr>\n<tr><td>N1</td><td>V1</td><td>V2</td></tr>\n<tr><td>1</td><td>A</td><td>T1</td></tr>\n<tr><td>2</td><td>B</td><td>T2</td></tr>\n<tr><td>3</td><td>NULL</td><td>T3</td></tr>\n</table>\n```sql\nSELECT *\nFROM   SQLD49\nWHERE  V1 = 'A' AND V2 = 'T1'\n   OR  V2 = 'T2'\n   OR  V2 = 'T3';\n```",
+    "options": [
+      "1",
+      "3",
+      "2",
+      "0"
+    ],
+    "correctIndex": 1,
+    "explanation": "AND가 OR보다 우선순위가 높아 \"(V1='A' AND V2='T1') OR V2='T2' OR V2='T3'\"로 해석된다. 세 행 모두 하나 이상의 조건을 만족하므로 결과는 3건이다.",
+    "_source": "authored"
+  },
+  {
+    "id": 10799,
+    "examSetId": "round-45",
+    "examLabel": "제45회 (2022년 5월)",
+    "round": 45,
+    "subject": "2과목",
+    "number": 50,
+    "title": "아래 SQL의 결과 행 수로 옳은 것은?\n<table border=\"1\">\n<tr><th>[SQLD50]</th><th></th></tr>\n<tr><td>N1</td><td>V1</td></tr>\n<tr><td>1</td><td>SMITH</td></tr>\n<tr><td>2</td><td>JOHN</td></tr>\n<tr><td>3</td><td>ALX</td></tr>\n<tr><td>4</td><td>CLARE</td></tr>\n<tr><td>5</td><td>BLX</td></tr>\n</table>\n```sql\nSELECT COUNT(*)\nFROM   SQLD50\nWHERE  V1 LIKE '_L%';\n```",
+    "options": [
+      "3",
+      "2",
+      "4",
+      "1"
+    ],
+    "correctIndex": 0,
+    "explanation": "'_L%'은 두 번째 문자가 L인 문자열을 의미한다. ALX(두 번째 L), CLARE(두 번째 L), BLX(두 번째 L) 세 건이 해당된다.",
     "_source": "authored"
   }
 ];

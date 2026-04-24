@@ -83,7 +83,7 @@ export const ROUND_58: QuizQuestion[] = [
     "round": 58,
     "subject": "1과목",
     "number": 5,
-    "title": "아래 [컴퓨터]·[마더보드] ERD를 해석한 내용 중 옳지 않은 것은?\n```\n[ 컴퓨터 ] ||------|∘ [ 마더보드 ]\n            (실선·점선·Optional 표기)\n```",
+    "title": "아래 [컴퓨터]·[마더보드] ERD를 해석한 내용 중 옳지 않은 것은?\n```\n[ 컴퓨터 ] ||───────|─ [ 마더보드 ]\n```",
     "options": [
       "마더보드는 하나의 컴퓨터에만 장착된다.",
       "컴퓨터에 마더보드를 사용할 수도 있고 사용하지 않을 수도 있다.",
@@ -91,7 +91,7 @@ export const ROUND_58: QuizQuestion[] = [
       "마더보드의 주식별자는 컴퓨터 번호와 별개로 구성된다."
     ],
     "correctIndex": 1,
-    "explanation": "컴퓨터가 정상 동작하려면 마더보드는 반드시 존재해야 하므로 마더보드 사용 여부가 선택 사항이라는 서술은 옳지 않다.",
+    "explanation": "바커(Barker) 표기법 해석: 양쪽 모두 실선 + `|`(필수 단일성)로, 컴퓨터와 마더보드는 1:1 필수 관계이다. 컴퓨터는 반드시 하나의 마더보드를 가져야 하고, 마더보드도 반드시 하나의 컴퓨터에 장착된다. 양쪽 참여가 필수이므로 컴퓨터는 반드시 마더보드를 가진다. 마더보드 사용 여부가 선택 사항이라는 서술은 ERD와 어긋난다.",
     "_source": "authored"
   },
   {
@@ -155,7 +155,7 @@ export const ROUND_58: QuizQuestion[] = [
     "round": 58,
     "subject": "1과목",
     "number": 9,
-    "title": "아래 학생·수강 ERD에 대한 설명 중 옳지 않은 것은?\n```\n[ 학생 ] ||-----∈ [ 수강 ] ∋-----|| [ 과목 ]\n```\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>수강번호</th><th>학번</th><th>과목코드</th></tr>\n  <tr><td>S001</td><td>1001</td><td>DB</td></tr>\n  <tr><td>S002</td><td>1001</td><td>OS</td></tr>\n  <tr><td>S003</td><td>1002</td><td>DB</td></tr>\n</table>",
+    "title": "아래 학생·수강 ERD에 대한 설명 중 옳지 않은 것은?\n```\n[ 학생 ] ─|─ ─ ─o∈ [ 수강 ] ∋─ ─ ─o|─ [ 과목 ]\n```\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>수강번호</th><th>학번</th><th>과목코드</th></tr>\n  <tr><td>S001</td><td>1001</td><td>DB</td></tr>\n  <tr><td>S002</td><td>1001</td><td>OS</td></tr>\n  <tr><td>S003</td><td>1002</td><td>DB</td></tr>\n</table>",
     "options": [
       "수강번호는 중복되지 않는다.",
       "학생 테이블에 있으면 수강목록에도 반드시 있어야 한다.",
@@ -163,7 +163,7 @@ export const ROUND_58: QuizQuestion[] = [
       "하나의 학생은 여러 개의 수강 이력을 가질 수 있다."
     ],
     "correctIndex": 1,
-    "explanation": "수강을 하지 않은 학생도 존재할 수 있으므로 학생 존재만으로 수강 이력이 강제되지는 않는다.",
+    "explanation": "바커(Barker) 표기법 해석: 수강 쪽 실선 + `|`는 수강이 학생·과목을 필수로 가짐을, 학생·과목 쪽 점선 + `o`는 수강 참여가 선택적(0 이상)임을 의미한다. 즉, 학생·과목은 수강이 없어도 존재할 수 있으나, 수강은 반드시 학생·과목과 연결된다. 수강을 하지 않은 학생도 존재할 수 있으므로 학생 존재만으로 수강 이력이 강제되지는 않는다.",
     "_source": "authored"
   },
   {

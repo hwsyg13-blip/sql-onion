@@ -1,11 +1,11 @@
 // Auto-generated from PDF + blog + scripts/authored/round-49.json
-// 제49회 — 2023년 6월 · 44문항
+// 제49회 — 2023년 6월 · 50문항
 // ⚠ 직접 편집 금지. 출처별 데이터를 고친 뒤 'node scripts/build-quiz-bank.mjs' 재실행.
 import type { QuizQuestion } from '../quizBank';
 
 export const ROUND_49: QuizQuestion[] = [
   {
-    "id": 10540,
+    "id": 10550,
     "examSetId": "round-49",
     "examLabel": "제49회 (2023년 6월)",
     "round": 49,
@@ -23,7 +23,7 @@ export const ROUND_49: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10541,
+    "id": 10551,
     "examSetId": "round-49",
     "examLabel": "제49회 (2023년 6월)",
     "round": 49,
@@ -41,7 +41,7 @@ export const ROUND_49: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10542,
+    "id": 10552,
     "examSetId": "round-49",
     "examLabel": "제49회 (2023년 6월)",
     "round": 49,
@@ -59,13 +59,13 @@ export const ROUND_49: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10543,
+    "id": 10553,
     "examSetId": "round-49",
     "examLabel": "제49회 (2023년 6월)",
     "round": 49,
     "subject": "1과목",
     "number": 4,
-    "title": "아래 ERD 해석 중 옳지 않은 것은?\n```\n[ 상품 ]-----+--∘< [ 주문 ]\n```",
+    "title": "아래 ERD 해석 중 옳지 않은 것은?\n```\n[ 상품 ] ─|─ ─ ─ ─o< [ 주문 ]\n```",
     "options": [
       "하나의 주문은 반드시 하나의 상품을 가진다.",
       "하나의 상품은 여러 주문을 가질 수 있다.",
@@ -73,11 +73,11 @@ export const ROUND_49: QuizQuestion[] = [
       "주문이 없는 상품도 존재할 수 있다."
     ],
     "correctIndex": 2,
-    "explanation": "Optional 표기가 있어 주문이 없는 상품도 존재할 수 있으므로 해당 서술은 옳지 않다.",
+    "explanation": "바커(Barker) 표기법 해석: 상품 쪽 실선 + `|`는 주문 입장에서 상품이 필수 하나임을 의미하고, 주문 쪽 점선 + `o<`는 상품 입장에서 주문 참여가 선택적(0 이상 다수)임을 의미한다. 따라서 주문이 없는 상품도 존재할 수 있으므로 ③은 옳지 않다.",
     "_source": "authored"
   },
   {
-    "id": 10544,
+    "id": 10554,
     "examSetId": "round-49",
     "examLabel": "제49회 (2023년 6월)",
     "round": 49,
@@ -95,7 +95,7 @@ export const ROUND_49: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10545,
+    "id": 10555,
     "examSetId": "round-49",
     "examLabel": "제49회 (2023년 6월)",
     "round": 49,
@@ -113,7 +113,7 @@ export const ROUND_49: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10546,
+    "id": 10556,
     "examSetId": "round-49",
     "examLabel": "제49회 (2023년 6월)",
     "round": 49,
@@ -131,7 +131,7 @@ export const ROUND_49: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10547,
+    "id": 10557,
     "examSetId": "round-49",
     "examLabel": "제49회 (2023년 6월)",
     "round": 49,
@@ -149,7 +149,7 @@ export const ROUND_49: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10548,
+    "id": 10558,
     "examSetId": "round-49",
     "examLabel": "제49회 (2023년 6월)",
     "round": 49,
@@ -167,7 +167,25 @@ export const ROUND_49: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10549,
+    "id": 10559,
+    "examSetId": "round-49",
+    "examLabel": "제49회 (2023년 6월)",
+    "round": 49,
+    "subject": "1과목",
+    "number": 10,
+    "title": "두 엔터티 간 관계에서 참여자의 수를 표현하는 것은?",
+    "options": [
+      "관계차성(Optionality)",
+      "관계차수(Cardinality)",
+      "관계명(Relationship Name)",
+      "관계속성(Relationship Attribute)"
+    ],
+    "correctIndex": 1,
+    "explanation": "",
+    "_source": "authored"
+  },
+  {
+    "id": 10560,
     "examSetId": "round-49",
     "examLabel": "제49회 (2023년 6월)",
     "round": 49,
@@ -185,7 +203,7 @@ export const ROUND_49: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10550,
+    "id": 10561,
     "examSetId": "round-49",
     "examLabel": "제49회 (2023년 6월)",
     "round": 49,
@@ -203,7 +221,7 @@ export const ROUND_49: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10551,
+    "id": 10562,
     "examSetId": "round-49",
     "examLabel": "제49회 (2023년 6월)",
     "round": 49,
@@ -221,7 +239,7 @@ export const ROUND_49: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10552,
+    "id": 10563,
     "examSetId": "round-49",
     "examLabel": "제49회 (2023년 6월)",
     "round": 49,
@@ -239,7 +257,7 @@ export const ROUND_49: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10553,
+    "id": 10564,
     "examSetId": "round-49",
     "examLabel": "제49회 (2023년 6월)",
     "round": 49,
@@ -257,7 +275,7 @@ export const ROUND_49: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10554,
+    "id": 10565,
     "examSetId": "round-49",
     "examLabel": "제49회 (2023년 6월)",
     "round": 49,
@@ -275,7 +293,7 @@ export const ROUND_49: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10555,
+    "id": 10566,
     "examSetId": "round-49",
     "examLabel": "제49회 (2023년 6월)",
     "round": 49,
@@ -293,7 +311,7 @@ export const ROUND_49: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10556,
+    "id": 10567,
     "examSetId": "round-49",
     "examLabel": "제49회 (2023년 6월)",
     "round": 49,
@@ -311,7 +329,7 @@ export const ROUND_49: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10557,
+    "id": 10568,
     "examSetId": "round-49",
     "examLabel": "제49회 (2023년 6월)",
     "round": 49,
@@ -329,7 +347,7 @@ export const ROUND_49: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10558,
+    "id": 10569,
     "examSetId": "round-49",
     "examLabel": "제49회 (2023년 6월)",
     "round": 49,
@@ -347,7 +365,7 @@ export const ROUND_49: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10559,
+    "id": 10570,
     "examSetId": "round-49",
     "examLabel": "제49회 (2023년 6월)",
     "round": 49,
@@ -365,7 +383,7 @@ export const ROUND_49: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10560,
+    "id": 10571,
     "examSetId": "round-49",
     "examLabel": "제49회 (2023년 6월)",
     "round": 49,
@@ -383,7 +401,7 @@ export const ROUND_49: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10561,
+    "id": 10572,
     "examSetId": "round-49",
     "examLabel": "제49회 (2023년 6월)",
     "round": 49,
@@ -401,7 +419,7 @@ export const ROUND_49: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10562,
+    "id": 10573,
     "examSetId": "round-49",
     "examLabel": "제49회 (2023년 6월)",
     "round": 49,
@@ -419,7 +437,7 @@ export const ROUND_49: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10563,
+    "id": 10574,
     "examSetId": "round-49",
     "examLabel": "제49회 (2023년 6월)",
     "round": 49,
@@ -437,7 +455,7 @@ export const ROUND_49: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10564,
+    "id": 10575,
     "examSetId": "round-49",
     "examLabel": "제49회 (2023년 6월)",
     "round": 49,
@@ -455,7 +473,7 @@ export const ROUND_49: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10565,
+    "id": 10576,
     "examSetId": "round-49",
     "examLabel": "제49회 (2023년 6월)",
     "round": 49,
@@ -473,7 +491,7 @@ export const ROUND_49: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10566,
+    "id": 10577,
     "examSetId": "round-49",
     "examLabel": "제49회 (2023년 6월)",
     "round": 49,
@@ -491,7 +509,7 @@ export const ROUND_49: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10567,
+    "id": 10578,
     "examSetId": "round-49",
     "examLabel": "제49회 (2023년 6월)",
     "round": 49,
@@ -509,7 +527,7 @@ export const ROUND_49: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10568,
+    "id": 10579,
     "examSetId": "round-49",
     "examLabel": "제49회 (2023년 6월)",
     "round": 49,
@@ -527,7 +545,7 @@ export const ROUND_49: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10569,
+    "id": 10580,
     "examSetId": "round-49",
     "examLabel": "제49회 (2023년 6월)",
     "round": 49,
@@ -545,7 +563,7 @@ export const ROUND_49: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10570,
+    "id": 10581,
     "examSetId": "round-49",
     "examLabel": "제49회 (2023년 6월)",
     "round": 49,
@@ -563,7 +581,7 @@ export const ROUND_49: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10571,
+    "id": 10582,
     "examSetId": "round-49",
     "examLabel": "제49회 (2023년 6월)",
     "round": 49,
@@ -581,7 +599,7 @@ export const ROUND_49: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10572,
+    "id": 10583,
     "examSetId": "round-49",
     "examLabel": "제49회 (2023년 6월)",
     "round": 49,
@@ -599,7 +617,7 @@ export const ROUND_49: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10573,
+    "id": 10584,
     "examSetId": "round-49",
     "examLabel": "제49회 (2023년 6월)",
     "round": 49,
@@ -617,7 +635,7 @@ export const ROUND_49: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10574,
+    "id": 10585,
     "examSetId": "round-49",
     "examLabel": "제49회 (2023년 6월)",
     "round": 49,
@@ -635,7 +653,7 @@ export const ROUND_49: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10575,
+    "id": 10586,
     "examSetId": "round-49",
     "examLabel": "제49회 (2023년 6월)",
     "round": 49,
@@ -653,7 +671,7 @@ export const ROUND_49: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10576,
+    "id": 10587,
     "examSetId": "round-49",
     "examLabel": "제49회 (2023년 6월)",
     "round": 49,
@@ -671,7 +689,7 @@ export const ROUND_49: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10577,
+    "id": 10588,
     "examSetId": "round-49",
     "examLabel": "제49회 (2023년 6월)",
     "round": 49,
@@ -689,7 +707,7 @@ export const ROUND_49: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10578,
+    "id": 10589,
     "examSetId": "round-49",
     "examLabel": "제49회 (2023년 6월)",
     "round": 49,
@@ -707,7 +725,7 @@ export const ROUND_49: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10579,
+    "id": 10590,
     "examSetId": "round-49",
     "examLabel": "제49회 (2023년 6월)",
     "round": 49,
@@ -725,7 +743,7 @@ export const ROUND_49: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10580,
+    "id": 10591,
     "examSetId": "round-49",
     "examLabel": "제49회 (2023년 6월)",
     "round": 49,
@@ -743,7 +761,7 @@ export const ROUND_49: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10581,
+    "id": 10592,
     "examSetId": "round-49",
     "examLabel": "제49회 (2023년 6월)",
     "round": 49,
@@ -761,7 +779,7 @@ export const ROUND_49: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10582,
+    "id": 10593,
     "examSetId": "round-49",
     "examLabel": "제49회 (2023년 6월)",
     "round": 49,
@@ -779,7 +797,7 @@ export const ROUND_49: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10583,
+    "id": 10594,
     "examSetId": "round-49",
     "examLabel": "제49회 (2023년 6월)",
     "round": 49,
@@ -794,6 +812,96 @@ export const ROUND_49: QuizQuestion[] = [
     ],
     "correctIndex": 3,
     "explanation": "가. INSERT INTO TBL VALUES (1, 100); 나. INSERT INTO TBL (ID, AMT, DEGREE) VALUES (2, 200, 'AB'); 다. INSERT INTO TBL (ID, DEGREE) VALUES (4, 'X'); 라. INSERT INTO TBL (ID, AMT) VALUES (3, 300); 마. INSERT INTO TBL VALUES (5, 500, NULL); 가는 컬럼 개수 불일치, 나는 DEGREE 길이 초과, 다는 NOT NULL 위반으로 실패한다.",
+    "_source": "authored"
+  },
+  {
+    "id": 10595,
+    "examSetId": "round-49",
+    "examLabel": "제49회 (2023년 6월)",
+    "round": 49,
+    "subject": "2과목",
+    "number": 46,
+    "title": "다른 테이블에서 파생된 테이블로 물리적 데이터를 저장하지 않고 논리적으로만 존재하는 객체는?",
+    "options": [
+      "VIEW (뷰)",
+      "INDEX (인덱스)",
+      "SYNONYM (동의어)",
+      "SEQUENCE (시퀀스)"
+    ],
+    "correctIndex": 0,
+    "explanation": "",
+    "_source": "authored"
+  },
+  {
+    "id": 10596,
+    "examSetId": "round-49",
+    "examLabel": "제49회 (2023년 6월)",
+    "round": 49,
+    "subject": "2과목",
+    "number": 47,
+    "title": "아래 SQL 의 결과를 작성하시오.\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>ID</th><th>COL1</th></tr>\n  <tr><td>A</td><td>1</td></tr>\n  <tr><td>A</td><td>2</td></tr>\n  <tr><td>B</td><td>3</td></tr>\n  <tr><td>B</td><td>4</td></tr>\n  <tr><td>C</td><td>5</td></tr>\n  <tr><td>C</td><td>6</td></tr>\n  <tr><td>C</td><td>7</td></tr>\n  <tr><td>D</td><td>8</td></tr>\n</table>\n```sql\nSELECT COUNT(*) FROM TAB1 GROUP BY ID HAVING COUNT(*) > 2;\n```",
+    "options": [
+      "1",
+      "2",
+      "3",
+      "4"
+    ],
+    "correctIndex": 2,
+    "explanation": "C 그룹이 3건으로 유일하게 HAVING COUNT(*) > 2 를 만족한다.",
+    "_source": "authored"
+  },
+  {
+    "id": 10597,
+    "examSetId": "round-49",
+    "examLabel": "제49회 (2023년 6월)",
+    "round": 49,
+    "subject": "2과목",
+    "number": 48,
+    "title": "아래 빈칸에 들어갈 조건식을 작성하시오.\n```sql\nSELECT * FROM T\nWHERE  COL = 'A'\nOR     COL ( ? );\n```",
+    "options": [
+      "= NULL",
+      "!= NULL",
+      "IS NOT NULL",
+      "IS NULL"
+    ],
+    "correctIndex": 3,
+    "explanation": "COL 이 NULL 인 행도 함께 포함하고 싶다.",
+    "_source": "authored"
+  },
+  {
+    "id": 10598,
+    "examSetId": "round-49",
+    "examLabel": "제49회 (2023년 6월)",
+    "round": 49,
+    "subject": "2과목",
+    "number": 49,
+    "title": "소계와 총계를 포함한 집계를 생성하는 GROUP BY 확장 연산자는?",
+    "options": [
+      "CUBE",
+      "ROLLUP",
+      "GROUPING SETS",
+      "PIVOT"
+    ],
+    "correctIndex": 1,
+    "explanation": "",
+    "_source": "authored"
+  },
+  {
+    "id": 10599,
+    "examSetId": "round-49",
+    "examLabel": "제49회 (2023년 6월)",
+    "round": 49,
+    "subject": "2과목",
+    "number": 50,
+    "title": "아래 NTILE(3) 결과의 빈칸을 채우시오. (총 7건)\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>NTILE</th><th>COUNT(*)</th></tr>\n  <tr><td>(ㄱ)</td><td>(ㄴ)</td></tr>\n  <tr><td>2</td><td>2</td></tr>\n  <tr><td>3</td><td>2</td></tr>\n</table>",
+    "options": [
+      "ㄱ = 1, ㄴ = 3",
+      "ㄱ = 1, ㄴ = 2",
+      "ㄱ = 2, ㄴ = 3",
+      "ㄱ = 3, ㄴ = 2"
+    ],
+    "correctIndex": 0,
+    "explanation": "NTILE(3) 은 7건을 세 그룹으로 나눌 때 앞 그룹에 한 건을 더 배정해 3, 2, 2 로 구성한다.",
     "_source": "authored"
   }
 ];

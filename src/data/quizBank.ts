@@ -1,5 +1,5 @@
 // Auto-generated index. Do not edit by hand — re-run scripts/build-quiz-bank.mjs.
-// 총 758문항, 제45회 ~ 제60회
+// 총 800문항, 제45회 ~ 제60회
 
 export type QuizQuestion = {
   id: number;
@@ -102,49 +102,49 @@ export const EXAM_SETS: { id: string; round: number; label: string; date: string
     "round": 51,
     "label": "제51회",
     "date": "2023년 11월",
-    "count": 46
+    "count": 50
   },
   {
     "id": "round-50",
     "round": 50,
     "label": "제50회",
     "date": "2023년 9월",
-    "count": 44
+    "count": 50
   },
   {
     "id": "round-49",
     "round": 49,
     "label": "제49회",
     "date": "2023년 6월",
-    "count": 44
+    "count": 50
   },
   {
     "id": "round-48",
     "round": 48,
     "label": "제48회",
     "date": "2023년 3월",
-    "count": 45
+    "count": 50
   },
   {
     "id": "round-47",
     "round": 47,
     "label": "제47회",
     "date": "2022년 11월",
-    "count": 44
+    "count": 50
   },
   {
     "id": "round-46",
     "round": 46,
     "label": "제46회",
     "date": "2022년 9월",
-    "count": 45
+    "count": 50
   },
   {
     "id": "round-45",
     "round": 45,
     "label": "제45회",
     "date": "2022년 5월",
-    "count": 40
+    "count": 50
   }
 ];
 

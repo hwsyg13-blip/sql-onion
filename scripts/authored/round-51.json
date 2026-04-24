@@ -1,6 +1,6 @@
 {
   "round": 51,
-  "notes": "restored from 51회_복원.md — MCQ 46 + 단답형 4 (단답형은 현재 UI 미지원이라 제외)",
+  "notes": "restored from 51회_복원.md — MCQ 50 + 단답형 0 (단답형은 현재 UI 미지원이라 제외)",
   "authored": [
     {
       "subject": "1과목",
@@ -105,6 +105,32 @@
       ],
       "correctIndex": 1,
       "explanation": "주식별자는 최소성(minimal) 을 만족해야 하므로 꼭 필요한 최소한의 속성만 포함한다."
+    },
+    {
+      "subject": "1과목",
+      "number": 9,
+      "title": "주식별자가 지정되면 반드시 데이터 값이 존재해야 한다는 특성의 명칭은?",
+      "options": [
+        "존재성",
+        "유일성",
+        "최소성",
+        "불변성"
+      ],
+      "correctIndex": 0,
+      "explanation": "NULL 값을 허용하지 않으며 항상 값이 존재해야 한다는 성질이다."
+    },
+    {
+      "subject": "1과목",
+      "number": 10,
+      "title": "업무에서 필요로 하는 인스턴스를 관리하고자 하는 의미상 더 이상 분리되지 않는 최소의 데이터 단위는?",
+      "options": [
+        "엔터티",
+        "인스턴스",
+        "속성",
+        "관계"
+      ],
+      "correctIndex": 2,
+      "explanation": "속성(Attribute) 은 엔터티를 구성하는 의미상 더 이상 분리되지 않는 최소 단위의 데이터 항목이다."
     },
     {
       "subject": "2과목",
@@ -599,24 +625,33 @@
       ],
       "correctIndex": 1,
       "explanation": "CASE 식은 위에서부터 차례로 평가되어 가장 먼저 참인 WHEN 절의 결과를 반환한다. `1 = 2`는 거짓이므로 넘어가고, `2 = 2`가 참이어서 'B'가 반환된다."
+    },
+    {
+      "subject": "2과목",
+      "number": 49,
+      "title": "데이터베이스 접근 권한과 객체 접근 권한을 부여하는 언어의 종류는?",
+      "options": [
+        "DDL (Data Definition Language)",
+        "DML (Data Manipulation Language)",
+        "TCL (Transaction Control Language)",
+        "DCL (Data Control Language)"
+      ],
+      "correctIndex": 3,
+      "explanation": "DCL 은 GRANT·REVOKE 를 통해 데이터베이스 접근 권한과 객체 접근 권한을 제어하는 언어이다."
+    },
+    {
+      "subject": "2과목",
+      "number": 50,
+      "title": "아래 SQL 의 결과는?\n```sql\nSELECT FLOOR(10.4), FLOOR(-2.4) FROM DUAL;\n```",
+      "options": [
+        "10, -2",
+        "10, -3",
+        "11, -3",
+        "11, -2"
+      ],
+      "correctIndex": 1,
+      "explanation": "FLOOR 함수는 실수를 그보다 작거나 같은 최대 정수로 내림한다. 음수의 경우 더 작은 쪽(-3) 으로 내려간다."
     }
   ],
-  "shortAnswerOmitted": [
-    {
-      "number": 9,
-      "answer": "존재성"
-    },
-    {
-      "number": 10,
-      "answer": "속성"
-    },
-    {
-      "number": 49,
-      "answer": "DCL (Data Control Language)"
-    },
-    {
-      "number": 50,
-      "answer": "10, -3"
-    }
-  ]
+  "shortAnswerOmitted": []
 }

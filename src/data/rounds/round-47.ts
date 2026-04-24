@@ -1,11 +1,11 @@
 // Auto-generated from PDF + blog + scripts/authored/round-47.json
-// 제47회 — 2022년 11월 · 44문항
+// 제47회 — 2022년 11월 · 50문항
 // ⚠ 직접 편집 금지. 출처별 데이터를 고친 뒤 'node scripts/build-quiz-bank.mjs' 재실행.
 import type { QuizQuestion } from '../quizBank';
 
 export const ROUND_47: QuizQuestion[] = [
   {
-    "id": 10629,
+    "id": 10650,
     "examSetId": "round-47",
     "examLabel": "제47회 (2022년 11월)",
     "round": 47,
@@ -23,7 +23,7 @@ export const ROUND_47: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10630,
+    "id": 10651,
     "examSetId": "round-47",
     "examLabel": "제47회 (2022년 11월)",
     "round": 47,
@@ -41,7 +41,7 @@ export const ROUND_47: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10631,
+    "id": 10652,
     "examSetId": "round-47",
     "examLabel": "제47회 (2022년 11월)",
     "round": 47,
@@ -59,7 +59,7 @@ export const ROUND_47: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10632,
+    "id": 10653,
     "examSetId": "round-47",
     "examLabel": "제47회 (2022년 11월)",
     "round": 47,
@@ -77,7 +77,7 @@ export const ROUND_47: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10633,
+    "id": 10654,
     "examSetId": "round-47",
     "examLabel": "제47회 (2022년 11월)",
     "round": 47,
@@ -95,7 +95,7 @@ export const ROUND_47: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10634,
+    "id": 10655,
     "examSetId": "round-47",
     "examLabel": "제47회 (2022년 11월)",
     "round": 47,
@@ -113,7 +113,7 @@ export const ROUND_47: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10635,
+    "id": 10656,
     "examSetId": "round-47",
     "examLabel": "제47회 (2022년 11월)",
     "round": 47,
@@ -131,7 +131,7 @@ export const ROUND_47: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10636,
+    "id": 10657,
     "examSetId": "round-47",
     "examLabel": "제47회 (2022년 11월)",
     "round": 47,
@@ -149,7 +149,43 @@ export const ROUND_47: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10637,
+    "id": 10658,
+    "examSetId": "round-47",
+    "examLabel": "제47회 (2022년 11월)",
+    "round": 47,
+    "subject": "1과목",
+    "number": 9,
+    "title": "주문번호+상품번호가 PK이고 상품명이 주식별자의 하나에만 종속된 경우, 이 상태가 만족하지 못하는 정규형은?",
+    "options": [
+      "제1정규형",
+      "제2정규형",
+      "제3정규형",
+      "BCNF"
+    ],
+    "correctIndex": 1,
+    "explanation": "",
+    "_source": "authored"
+  },
+  {
+    "id": 10659,
+    "examSetId": "round-47",
+    "examLabel": "제47회 (2022년 11월)",
+    "round": 47,
+    "subject": "1과목",
+    "number": 10,
+    "title": "아래 설명에 해당하는 스키마는?",
+    "options": [
+      "외부 스키마",
+      "개념 스키마",
+      "내부 스키마",
+      "물리 스키마"
+    ],
+    "correctIndex": 0,
+    "explanation": "뷰 단계의 여러 사용자 관점으로 구성되어 개별 사용자가 보는 개인적 DB 스키마이며, 응용 프로그래머가 접근하는 DB 정의이다.",
+    "_source": "authored"
+  },
+  {
+    "id": 10660,
     "examSetId": "round-47",
     "examLabel": "제47회 (2022년 11월)",
     "round": 47,
@@ -167,7 +203,7 @@ export const ROUND_47: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10638,
+    "id": 10661,
     "examSetId": "round-47",
     "examLabel": "제47회 (2022년 11월)",
     "round": 47,
@@ -185,7 +221,7 @@ export const ROUND_47: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10639,
+    "id": 10662,
     "examSetId": "round-47",
     "examLabel": "제47회 (2022년 11월)",
     "round": 47,
@@ -203,7 +239,7 @@ export const ROUND_47: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10640,
+    "id": 10663,
     "examSetId": "round-47",
     "examLabel": "제47회 (2022년 11월)",
     "round": 47,
@@ -221,7 +257,7 @@ export const ROUND_47: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10641,
+    "id": 10664,
     "examSetId": "round-47",
     "examLabel": "제47회 (2022년 11월)",
     "round": 47,
@@ -239,7 +275,7 @@ export const ROUND_47: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10642,
+    "id": 10665,
     "examSetId": "round-47",
     "examLabel": "제47회 (2022년 11월)",
     "round": 47,
@@ -257,7 +293,7 @@ export const ROUND_47: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10643,
+    "id": 10666,
     "examSetId": "round-47",
     "examLabel": "제47회 (2022년 11월)",
     "round": 47,
@@ -275,7 +311,7 @@ export const ROUND_47: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10644,
+    "id": 10667,
     "examSetId": "round-47",
     "examLabel": "제47회 (2022년 11월)",
     "round": 47,
@@ -293,7 +329,7 @@ export const ROUND_47: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10645,
+    "id": 10668,
     "examSetId": "round-47",
     "examLabel": "제47회 (2022년 11월)",
     "round": 47,
@@ -311,7 +347,7 @@ export const ROUND_47: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10646,
+    "id": 10669,
     "examSetId": "round-47",
     "examLabel": "제47회 (2022년 11월)",
     "round": 47,
@@ -329,7 +365,7 @@ export const ROUND_47: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10647,
+    "id": 10670,
     "examSetId": "round-47",
     "examLabel": "제47회 (2022년 11월)",
     "round": 47,
@@ -347,7 +383,7 @@ export const ROUND_47: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10648,
+    "id": 10671,
     "examSetId": "round-47",
     "examLabel": "제47회 (2022년 11월)",
     "round": 47,
@@ -365,7 +401,7 @@ export const ROUND_47: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10649,
+    "id": 10672,
     "examSetId": "round-47",
     "examLabel": "제47회 (2022년 11월)",
     "round": 47,
@@ -383,7 +419,7 @@ export const ROUND_47: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10650,
+    "id": 10673,
     "examSetId": "round-47",
     "examLabel": "제47회 (2022년 11월)",
     "round": 47,
@@ -401,7 +437,7 @@ export const ROUND_47: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10651,
+    "id": 10674,
     "examSetId": "round-47",
     "examLabel": "제47회 (2022년 11월)",
     "round": 47,
@@ -419,7 +455,7 @@ export const ROUND_47: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10652,
+    "id": 10675,
     "examSetId": "round-47",
     "examLabel": "제47회 (2022년 11월)",
     "round": 47,
@@ -437,7 +473,7 @@ export const ROUND_47: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10653,
+    "id": 10676,
     "examSetId": "round-47",
     "examLabel": "제47회 (2022년 11월)",
     "round": 47,
@@ -455,7 +491,7 @@ export const ROUND_47: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10654,
+    "id": 10677,
     "examSetId": "round-47",
     "examLabel": "제47회 (2022년 11월)",
     "round": 47,
@@ -473,7 +509,7 @@ export const ROUND_47: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10655,
+    "id": 10678,
     "examSetId": "round-47",
     "examLabel": "제47회 (2022년 11월)",
     "round": 47,
@@ -491,7 +527,7 @@ export const ROUND_47: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10656,
+    "id": 10679,
     "examSetId": "round-47",
     "examLabel": "제47회 (2022년 11월)",
     "round": 47,
@@ -509,7 +545,7 @@ export const ROUND_47: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10657,
+    "id": 10680,
     "examSetId": "round-47",
     "examLabel": "제47회 (2022년 11월)",
     "round": 47,
@@ -527,7 +563,7 @@ export const ROUND_47: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10658,
+    "id": 10681,
     "examSetId": "round-47",
     "examLabel": "제47회 (2022년 11월)",
     "round": 47,
@@ -545,7 +581,7 @@ export const ROUND_47: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10659,
+    "id": 10682,
     "examSetId": "round-47",
     "examLabel": "제47회 (2022년 11월)",
     "round": 47,
@@ -563,7 +599,7 @@ export const ROUND_47: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10660,
+    "id": 10683,
     "examSetId": "round-47",
     "examLabel": "제47회 (2022년 11월)",
     "round": 47,
@@ -581,7 +617,7 @@ export const ROUND_47: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10661,
+    "id": 10684,
     "examSetId": "round-47",
     "examLabel": "제47회 (2022년 11월)",
     "round": 47,
@@ -599,7 +635,7 @@ export const ROUND_47: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10662,
+    "id": 10685,
     "examSetId": "round-47",
     "examLabel": "제47회 (2022년 11월)",
     "round": 47,
@@ -617,7 +653,7 @@ export const ROUND_47: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10663,
+    "id": 10686,
     "examSetId": "round-47",
     "examLabel": "제47회 (2022년 11월)",
     "round": 47,
@@ -635,7 +671,7 @@ export const ROUND_47: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10664,
+    "id": 10687,
     "examSetId": "round-47",
     "examLabel": "제47회 (2022년 11월)",
     "round": 47,
@@ -653,7 +689,7 @@ export const ROUND_47: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10665,
+    "id": 10688,
     "examSetId": "round-47",
     "examLabel": "제47회 (2022년 11월)",
     "round": 47,
@@ -671,7 +707,7 @@ export const ROUND_47: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10666,
+    "id": 10689,
     "examSetId": "round-47",
     "examLabel": "제47회 (2022년 11월)",
     "round": 47,
@@ -689,7 +725,7 @@ export const ROUND_47: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10667,
+    "id": 10690,
     "examSetId": "round-47",
     "examLabel": "제47회 (2022년 11월)",
     "round": 47,
@@ -707,7 +743,7 @@ export const ROUND_47: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10668,
+    "id": 10691,
     "examSetId": "round-47",
     "examLabel": "제47회 (2022년 11월)",
     "round": 47,
@@ -725,7 +761,7 @@ export const ROUND_47: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10669,
+    "id": 10692,
     "examSetId": "round-47",
     "examLabel": "제47회 (2022년 11월)",
     "round": 47,
@@ -743,7 +779,7 @@ export const ROUND_47: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10670,
+    "id": 10693,
     "examSetId": "round-47",
     "examLabel": "제47회 (2022년 11월)",
     "round": 47,
@@ -761,7 +797,7 @@ export const ROUND_47: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10671,
+    "id": 10694,
     "examSetId": "round-47",
     "examLabel": "제47회 (2022년 11월)",
     "round": 47,
@@ -779,7 +815,7 @@ export const ROUND_47: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10672,
+    "id": 10695,
     "examSetId": "round-47",
     "examLabel": "제47회 (2022년 11월)",
     "round": 47,
@@ -794,6 +830,78 @@ export const ROUND_47: QuizQuestion[] = [
     ],
     "correctIndex": 1,
     "explanation": "",
+    "_source": "authored"
+  },
+  {
+    "id": 10696,
+    "examSetId": "round-47",
+    "examLabel": "제47회 (2022년 11월)",
+    "round": 47,
+    "subject": "2과목",
+    "number": 47,
+    "title": "사용자를 삭제할 때 해당 사용자에 속한 모든 오브젝트까지 함께 삭제하는 옵션은?\n```sql\nDROP USER user_name (   );\n```",
+    "options": [
+      "RESTRICT",
+      "PURGE",
+      "CASCADE",
+      "FORCE"
+    ],
+    "correctIndex": 2,
+    "explanation": "",
+    "_source": "authored"
+  },
+  {
+    "id": 10697,
+    "examSetId": "round-47",
+    "examLabel": "제47회 (2022년 11월)",
+    "round": 47,
+    "subject": "2과목",
+    "number": 48,
+    "title": "아래 SQL 의 빈칸에 들어갈 키워드 조합으로 옳은 것은?\n```sql\nSELECT 부서, SUM(연봉) FROM EMP\n(   ) 부서\nORDER BY SUM(연봉) (   );\n```",
+    "options": [
+      "GROUP BY, DESC",
+      "HAVING, ASC",
+      "ORDER BY, DESC",
+      "GROUP BY, ASC"
+    ],
+    "correctIndex": 0,
+    "explanation": "",
+    "_source": "authored"
+  },
+  {
+    "id": 10698,
+    "examSetId": "round-47",
+    "examLabel": "제47회 (2022년 11월)",
+    "round": 47,
+    "subject": "2과목",
+    "number": 49,
+    "title": "아래 SQL 의 결과로 옳은 것은?\n```sql\nSELECT COL1\nFROM (SELECT COL1, ROW_NUMBER() OVER (PARTITION BY 부서 ORDER BY 연봉 DESC) AS RN\n      FROM EMP)\nWHERE RN = 1;\n```",
+    "options": [
+      "1, 2",
+      "3, 3",
+      "4, 5",
+      "5, 4"
+    ],
+    "correctIndex": 3,
+    "explanation": "원본 기출의 정답 표기를 보존한다.",
+    "_source": "authored"
+  },
+  {
+    "id": 10699,
+    "examSetId": "round-47",
+    "examLabel": "제47회 (2022년 11월)",
+    "round": 47,
+    "subject": "2과목",
+    "number": 50,
+    "title": "아래 계층형 쿼리의 결과 행 수로 옳은 것은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>COL1</th><th>COL2</th></tr>\n  <tr><td>1</td><td>NULL</td></tr>\n  <tr><td>2</td><td>NULL</td></tr>\n  <tr><td>3</td><td>1</td></tr>\n  <tr><td>4</td><td>1</td></tr>\n  <tr><td>5</td><td>2</td></tr>\n  <tr><td>6</td><td>2</td></tr>\n  <tr><td>7</td><td>3</td></tr>\n  <tr><td>8</td><td>4</td></tr>\n  <tr><td>9</td><td>5</td></tr>\n</table>\n```sql\nSELECT COUNT(*) FROM T\nWHERE COL1 <> 4\nSTART WITH COL1 = 1\nCONNECT BY PRIOR COL1 = COL2;\n```",
+    "options": [
+      "1",
+      "2",
+      "3",
+      "5"
+    ],
+    "correctIndex": 1,
+    "explanation": "1부터 전개한 결과 {1, 3, 4, 7, 8} 중 COL1=4 를 제외하면 {1, 3, 7} 이나, 8 은 4 의 자식이므로 같이 제거되어 최종 2건이 남는다.",
     "_source": "authored"
   }
 ];

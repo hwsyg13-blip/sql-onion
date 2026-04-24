@@ -1,6 +1,6 @@
 {
   "round": 46,
-  "notes": "restored from 46회_복원.md — MCQ 45 + 단답형 5 (단답형은 현재 UI 미지원이라 제외)",
+  "notes": "restored from 46회_복원.md — MCQ 50 + 단답형 0 (단답형은 현재 UI 미지원이라 제외)",
   "authored": [
     {
       "subject": "1과목",
@@ -18,7 +18,7 @@
     {
       "subject": "1과목",
       "number": 2,
-      "title": "아래 ERD에서 정규화가 적절하게 수행된 형태는? (고객은 서비스를 하나만 가진다.)\n<pre>\n[ 고객 ] ─────< [ 서비스 ]\n</pre>",
+      "title": "아래 ERD에서 정규화가 적절하게 수행된 형태는? (고객은 서비스를 하나만 가진다.)\n<pre>\n[ 고객 ] ─|───────|─ [ 서비스 ]\n</pre>",
       "options": [
         "고객 엔터티에 서비스번호를 속성으로 포함시킨다.",
         "서비스 엔터티에 고객번호를 속성으로 포함시킨다.",
@@ -26,7 +26,7 @@
         "고객 ─< 서비스계약 >─ 서비스 로 분리하되, 서비스계약에 고객번호와 서비스번호만 둔다."
       ],
       "correctIndex": 3,
-      "explanation": "고객이 단일 서비스만 가지는 제약에서 서비스계약번호를 별도 PK로 두면 동일 고객이 같은 서비스를 중복 소유할 수 있게 되어 업무 규칙에 어긋난다."
+      "explanation": "바커(Barker) 표기법 해석: 고객 쪽 `|`와 서비스 쪽 `|`는 각각 필수 참여·단일성을 뜻하여 고객과 서비스가 1:1 관계임을 의미한다. 고객이 단일 서비스만 가지는 제약에서 서비스계약번호를 별도 PK로 두면 동일 고객이 같은 서비스를 중복 소유할 수 있게 되어 업무 규칙에 어긋난다."
     },
     {
       "subject": "1과목",
@@ -83,7 +83,7 @@
     {
       "subject": "1과목",
       "number": 7,
-      "title": "아래 ERD의 해석으로 가장 적절한 것은?\n<pre>\n[ 컴퓨터 ] ─o|────────|─ [ 마더보드 ]\n</pre>",
+      "title": "아래 ERD의 해석으로 가장 적절한 것은?\n<pre>\n[ 컴퓨터 ] ─o|─ ─ ─ ─ ─|─ [ 마더보드 ]\n</pre>",
       "options": [
         "마더보드는 반드시 한 개의 컴퓨터에 포함된다.",
         "마더보드는 때때로 하나의 컴퓨터에 포함된다.",
@@ -91,7 +91,7 @@
         "컴퓨터와 마더보드는 다대다 관계이다."
       ],
       "correctIndex": 1,
-      "explanation": "컴퓨터 쪽 선택 참여(o)·단일성(|)이므로 마더보드 입장에서 컴퓨터 참여는 선택적이고, 마더보드 쪽 필수 참여(|)·단일성(|)이므로 컴퓨터 하나당 마더보드 하나가 대응된다."
+      "explanation": "바커(Barker) 표기법 해석: 컴퓨터 쪽 점선 + `o|`는 선택 참여·단일성이므로 마더보드 입장에서 컴퓨터 참여가 선택적임을 의미한다. 반대쪽 실선 + `|`는 필수 참여·단일성이므로 컴퓨터 하나당 마더보드 하나가 대응된다."
     },
     {
       "subject": "1과목",
@@ -105,6 +105,32 @@
       ],
       "correctIndex": 0,
       "explanation": "( ㄱ ) 엔터티 내 각 인스턴스를 구분하며 타 엔터티와의 참조관계를 연결할 수 있는 대표 식별자 ( ㄴ ) 각 인스턴스를 구분할 수 있으나 대표성을 가지지 못하는 식별자 ( ㄷ ) 업무 수행 과정에서 자연스럽게 발생한 식별자 ( ㄹ ) 다른 엔터티와의 관계를 통해 상속받은 식별자"
+    },
+    {
+      "subject": "1과목",
+      "number": 9,
+      "title": "각 속성이 가질 수 있는 값의 범위를 의미하는 용어는?",
+      "options": [
+        "엔터티(Entity)",
+        "식별자(Identifier)",
+        "도메인(Domain)",
+        "인스턴스(Instance)"
+      ],
+      "correctIndex": 2,
+      "explanation": "도메인은 각 속성이 가질 수 있는 값의 범위(데이터 타입·길이·제약)를 정의하는 개념이다. 엔터티는 관리 대상 집합, 식별자는 인스턴스를 구분하는 속성, 인스턴스는 엔터티의 개별 발생을 의미한다."
+    },
+    {
+      "subject": "1과목",
+      "number": 10,
+      "title": "아래 주식별자 특성의 빈칸에 들어갈 용어로 올바른 것은?",
+      "options": [
+        "ㄱ 대표성, ㄴ 유일성",
+        "ㄱ 최소성, ㄴ 불변성",
+        "ㄱ 불변성, ㄴ 최소성",
+        "ㄱ 유일성, ㄴ 대표성"
+      ],
+      "correctIndex": 1,
+      "explanation": "유일성: 주식별자에 의해 엔터티 내의 모든 인스턴스가 유일하게 구분된다. 존재성: 주식별자가 지정되면 반드시 데이터 값이 존재한다. ( ㄱ ): 주식별자를 구성하는 속성의 수는 유일성을 만족하는 최소의 수여야 한다. ( ㄴ ): 주식별자가 한 번 지정되면 그 값은 변하지 않아야 한다. 주식별자의 4대 특성은 유일성·최소성·불변성·존재성이다. 최소성은 유일성을 만족하는 속성의 최소 집합 조건이고, 불변성은 한 번 부여된 식별자 값이 변경되지 않아야 한다는 요건이다."
     },
     {
       "subject": "2과목",
@@ -330,7 +356,7 @@
     {
       "subject": "2과목",
       "number": 28,
-      "title": "아래 ERD에 대한 설명으로 가장 적절한 것은?\n<pre>\n[ 지점 ] ─|─────────< [ 고객 ]\n</pre>",
+      "title": "아래 ERD에 대한 설명으로 가장 적절한 것은?\n<pre>\n[ 지점 ] ─|─ ─ ─ ─ ─ ─o< [ 고객 ]\n</pre>",
       "options": [
         "지점은 최소 한 명의 고객을 반드시 가진다.",
         "고객은 반드시 하나의 지점에 소속된다.",
@@ -338,7 +364,7 @@
         "고객과 지점은 다대다 관계이다."
       ],
       "correctIndex": 2,
-      "explanation": "고객 쪽 참여가 선택적(점선) 관계이면 소속 지점이 없는 고객이 존재할 수 있어, 조인 시 OUTER JOIN 또는 별도 조회가 필요하다."
+      "explanation": "바커(Barker) 표기법 해석: 지점 쪽 실선 + `|`는 고객 입장에서의 지점 참여를 명시하지만, 고객 쪽 점선 + `o<`는 지점 입장에서 고객 참여가 선택적(0 이상 다수)임을 의미한다. 따라서 소속 고객이 없는 지점도 가능하며, 역방향 해석상 지점에 소속되지 않은 고객이 존재할 수 있어 OUTER JOIN 또는 별도 조회가 필요하다."
     },
     {
       "subject": "2과목",
@@ -586,28 +612,46 @@
       ],
       "correctIndex": 3,
       "explanation": "RBO는 통계 정보를 이용하지 않고 규칙만으로 실행계획을 생성하므로 일반적으로 CBO의 정확도가 더 높다."
+    },
+    {
+      "subject": "2과목",
+      "number": 48,
+      "title": "아래 SQL의 결과 값은?\n<table border=\"1\">\n<tr><th>COL1</th></tr>\n<tr><td>4</td></tr>\n<tr><td>4</td></tr>\n<tr><td>NULL</td></tr>\n<tr><td>NULL</td></tr>\n<tr><td>8</td></tr>\n<tr><td>8</td></tr>\n</table>\n```sql\nSELECT AVG(COL1) - AVG(NVL(COL1, 0))\nFROM   T;\n```",
+      "options": [
+        "0",
+        "1",
+        "1.5",
+        "2"
+      ],
+      "correctIndex": 3,
+      "explanation": "AVG(COL1)은 NULL을 제외한 4개 값의 평균이므로 (4+4+8+8)/4 = 6이고, AVG(NVL(COL1, 0))은 NULL을 0으로 치환한 6개 값의 평균이므로 24/6 = 4이다. 따라서 차이는 6 - 4 = 2이다."
+    },
+    {
+      "subject": "2과목",
+      "number": 49,
+      "title": "부서 테이블에 존재하지만 대응되는 사원이 없는 부서까지 모두 조회하려 한다. 빈칸에 들어갈 조인 방식으로 올바른 것은? (사원 테이블이 FROM 절의 좌측, 부서 테이블이 우측에 위치한다고 가정)\n```sql\nSELECT *\nFROM   EMP E ???  JOIN DEPT D\nON     E.DNO = D.DNO;\n```",
+      "options": [
+        "RIGHT OUTER JOIN",
+        "LEFT OUTER JOIN",
+        "INNER JOIN",
+        "CROSS JOIN"
+      ],
+      "correctIndex": 0,
+      "explanation": "부서 테이블이 FROM 절의 우측에 위치하므로, 부서의 결측 행까지 보존하려면 RIGHT OUTER JOIN을 사용한다."
+    },
+    {
+      "subject": "2과목",
+      "number": 50,
+      "title": "아래 결과를 얻기 위한 SQL의 GROUP BY 절로 올바른 것은?\n```sql\nSELECT GRADE, JOB, COUNT(*)\nFROM   EMP\nGROUP BY (  ㄱ  );\n```",
+      "options": [
+        "ROLLUP ( GRADE, JOB )",
+        "GROUPING SETS ( GRADE, (GRADE, JOB) )",
+        "CUBE ( GRADE, JOB )",
+        "GRADE, JOB"
+      ],
+      "correctIndex": 1,
+      "explanation": "GRADE 단위 집계와 (GRADE, JOB) 단위 집계가 결합되어 나타난다. GROUPING SETS(A, B)는 GROUP BY (A) UNION ALL GROUP BY (B)와 동치이므로, GRADE 단위와 (GRADE, JOB) 단위의 두 집계 그룹을 동시에 생성한다."
     }
   ],
-  "shortAnswerOmitted": [
-    {
-      "number": 9,
-      "answer": "도메인(Domain)"
-    },
-    {
-      "number": 10,
-      "answer": "ㄱ 최소성, ㄴ 불변성"
-    },
-    {
-      "number": 48,
-      "answer": "2"
-    },
-    {
-      "number": 49,
-      "answer": "RIGHT OUTER JOIN"
-    },
-    {
-      "number": 50,
-      "answer": "GROUPING SETS ( GRADE, (GRADE, JOB) )"
-    }
-  ]
+  "shortAnswerOmitted": []
 }

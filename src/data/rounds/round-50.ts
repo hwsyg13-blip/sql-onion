@@ -1,11 +1,11 @@
 // Auto-generated from PDF + blog + scripts/authored/round-50.json
-// 제50회 — 2023년 9월 · 44문항
+// 제50회 — 2023년 9월 · 50문항
 // ⚠ 직접 편집 금지. 출처별 데이터를 고친 뒤 'node scripts/build-quiz-bank.mjs' 재실행.
 import type { QuizQuestion } from '../quizBank';
 
 export const ROUND_50: QuizQuestion[] = [
   {
-    "id": 10496,
+    "id": 10500,
     "examSetId": "round-50",
     "examLabel": "제50회 (2023년 9월)",
     "round": 50,
@@ -23,7 +23,7 @@ export const ROUND_50: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10497,
+    "id": 10501,
     "examSetId": "round-50",
     "examLabel": "제50회 (2023년 9월)",
     "round": 50,
@@ -41,7 +41,7 @@ export const ROUND_50: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10498,
+    "id": 10502,
     "examSetId": "round-50",
     "examLabel": "제50회 (2023년 9월)",
     "round": 50,
@@ -59,7 +59,7 @@ export const ROUND_50: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10499,
+    "id": 10503,
     "examSetId": "round-50",
     "examLabel": "제50회 (2023년 9월)",
     "round": 50,
@@ -77,7 +77,7 @@ export const ROUND_50: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10500,
+    "id": 10504,
     "examSetId": "round-50",
     "examLabel": "제50회 (2023년 9월)",
     "round": 50,
@@ -95,7 +95,7 @@ export const ROUND_50: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10501,
+    "id": 10505,
     "examSetId": "round-50",
     "examLabel": "제50회 (2023년 9월)",
     "round": 50,
@@ -113,7 +113,7 @@ export const ROUND_50: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10502,
+    "id": 10506,
     "examSetId": "round-50",
     "examLabel": "제50회 (2023년 9월)",
     "round": 50,
@@ -131,7 +131,7 @@ export const ROUND_50: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10503,
+    "id": 10507,
     "examSetId": "round-50",
     "examLabel": "제50회 (2023년 9월)",
     "round": 50,
@@ -149,7 +149,7 @@ export const ROUND_50: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10504,
+    "id": 10508,
     "examSetId": "round-50",
     "examLabel": "제50회 (2023년 9월)",
     "round": 50,
@@ -167,7 +167,25 @@ export const ROUND_50: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10505,
+    "id": 10509,
+    "examSetId": "round-50",
+    "examLabel": "제50회 (2023년 9월)",
+    "round": 50,
+    "subject": "1과목",
+    "number": 10,
+    "title": "속성이 가질 수 있는 값의 범위를 정의한 것으로, 데이터 타입과 범위를 지정한 개념은?",
+    "options": [
+      "도메인",
+      "엔터티",
+      "식별자",
+      "인스턴스"
+    ],
+    "correctIndex": 0,
+    "explanation": "도메인은 속성이 취할 수 있는 값의 범위·데이터 타입·크기를 정의한 집합이다.",
+    "_source": "authored"
+  },
+  {
+    "id": 10510,
     "examSetId": "round-50",
     "examLabel": "제50회 (2023년 9월)",
     "round": 50,
@@ -185,7 +203,7 @@ export const ROUND_50: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10506,
+    "id": 10511,
     "examSetId": "round-50",
     "examLabel": "제50회 (2023년 9월)",
     "round": 50,
@@ -203,7 +221,7 @@ export const ROUND_50: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10507,
+    "id": 10512,
     "examSetId": "round-50",
     "examLabel": "제50회 (2023년 9월)",
     "round": 50,
@@ -221,7 +239,7 @@ export const ROUND_50: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10508,
+    "id": 10513,
     "examSetId": "round-50",
     "examLabel": "제50회 (2023년 9월)",
     "round": 50,
@@ -239,7 +257,7 @@ export const ROUND_50: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10509,
+    "id": 10514,
     "examSetId": "round-50",
     "examLabel": "제50회 (2023년 9월)",
     "round": 50,
@@ -257,7 +275,7 @@ export const ROUND_50: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10510,
+    "id": 10515,
     "examSetId": "round-50",
     "examLabel": "제50회 (2023년 9월)",
     "round": 50,
@@ -275,7 +293,7 @@ export const ROUND_50: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10511,
+    "id": 10516,
     "examSetId": "round-50",
     "examLabel": "제50회 (2023년 9월)",
     "round": 50,
@@ -293,7 +311,7 @@ export const ROUND_50: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10512,
+    "id": 10517,
     "examSetId": "round-50",
     "examLabel": "제50회 (2023년 9월)",
     "round": 50,
@@ -311,7 +329,7 @@ export const ROUND_50: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10513,
+    "id": 10518,
     "examSetId": "round-50",
     "examLabel": "제50회 (2023년 9월)",
     "round": 50,
@@ -329,7 +347,7 @@ export const ROUND_50: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10514,
+    "id": 10519,
     "examSetId": "round-50",
     "examLabel": "제50회 (2023년 9월)",
     "round": 50,
@@ -347,7 +365,7 @@ export const ROUND_50: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10515,
+    "id": 10520,
     "examSetId": "round-50",
     "examLabel": "제50회 (2023년 9월)",
     "round": 50,
@@ -365,7 +383,7 @@ export const ROUND_50: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10516,
+    "id": 10521,
     "examSetId": "round-50",
     "examLabel": "제50회 (2023년 9월)",
     "round": 50,
@@ -383,7 +401,7 @@ export const ROUND_50: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10517,
+    "id": 10522,
     "examSetId": "round-50",
     "examLabel": "제50회 (2023년 9월)",
     "round": 50,
@@ -401,7 +419,7 @@ export const ROUND_50: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10518,
+    "id": 10523,
     "examSetId": "round-50",
     "examLabel": "제50회 (2023년 9월)",
     "round": 50,
@@ -419,7 +437,7 @@ export const ROUND_50: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10519,
+    "id": 10524,
     "examSetId": "round-50",
     "examLabel": "제50회 (2023년 9월)",
     "round": 50,
@@ -437,7 +455,7 @@ export const ROUND_50: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10520,
+    "id": 10525,
     "examSetId": "round-50",
     "examLabel": "제50회 (2023년 9월)",
     "round": 50,
@@ -455,7 +473,7 @@ export const ROUND_50: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10521,
+    "id": 10526,
     "examSetId": "round-50",
     "examLabel": "제50회 (2023년 9월)",
     "round": 50,
@@ -473,7 +491,7 @@ export const ROUND_50: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10522,
+    "id": 10527,
     "examSetId": "round-50",
     "examLabel": "제50회 (2023년 9월)",
     "round": 50,
@@ -491,7 +509,7 @@ export const ROUND_50: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10523,
+    "id": 10528,
     "examSetId": "round-50",
     "examLabel": "제50회 (2023년 9월)",
     "round": 50,
@@ -509,7 +527,7 @@ export const ROUND_50: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10524,
+    "id": 10529,
     "examSetId": "round-50",
     "examLabel": "제50회 (2023년 9월)",
     "round": 50,
@@ -527,7 +545,7 @@ export const ROUND_50: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10525,
+    "id": 10530,
     "examSetId": "round-50",
     "examLabel": "제50회 (2023년 9월)",
     "round": 50,
@@ -545,7 +563,7 @@ export const ROUND_50: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10526,
+    "id": 10531,
     "examSetId": "round-50",
     "examLabel": "제50회 (2023년 9월)",
     "round": 50,
@@ -563,7 +581,7 @@ export const ROUND_50: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10527,
+    "id": 10532,
     "examSetId": "round-50",
     "examLabel": "제50회 (2023년 9월)",
     "round": 50,
@@ -581,7 +599,7 @@ export const ROUND_50: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10528,
+    "id": 10533,
     "examSetId": "round-50",
     "examLabel": "제50회 (2023년 9월)",
     "round": 50,
@@ -599,7 +617,7 @@ export const ROUND_50: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10529,
+    "id": 10534,
     "examSetId": "round-50",
     "examLabel": "제50회 (2023년 9월)",
     "round": 50,
@@ -617,7 +635,7 @@ export const ROUND_50: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10530,
+    "id": 10535,
     "examSetId": "round-50",
     "examLabel": "제50회 (2023년 9월)",
     "round": 50,
@@ -635,7 +653,7 @@ export const ROUND_50: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10531,
+    "id": 10536,
     "examSetId": "round-50",
     "examLabel": "제50회 (2023년 9월)",
     "round": 50,
@@ -653,7 +671,7 @@ export const ROUND_50: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10532,
+    "id": 10537,
     "examSetId": "round-50",
     "examLabel": "제50회 (2023년 9월)",
     "round": 50,
@@ -671,7 +689,7 @@ export const ROUND_50: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10533,
+    "id": 10538,
     "examSetId": "round-50",
     "examLabel": "제50회 (2023년 9월)",
     "round": 50,
@@ -689,7 +707,7 @@ export const ROUND_50: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10534,
+    "id": 10539,
     "examSetId": "round-50",
     "examLabel": "제50회 (2023년 9월)",
     "round": 50,
@@ -707,7 +725,7 @@ export const ROUND_50: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10535,
+    "id": 10540,
     "examSetId": "round-50",
     "examLabel": "제50회 (2023년 9월)",
     "round": 50,
@@ -725,7 +743,7 @@ export const ROUND_50: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10536,
+    "id": 10541,
     "examSetId": "round-50",
     "examLabel": "제50회 (2023년 9월)",
     "round": 50,
@@ -743,7 +761,7 @@ export const ROUND_50: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10537,
+    "id": 10542,
     "examSetId": "round-50",
     "examLabel": "제50회 (2023년 9월)",
     "round": 50,
@@ -761,7 +779,7 @@ export const ROUND_50: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10538,
+    "id": 10543,
     "examSetId": "round-50",
     "examLabel": "제50회 (2023년 9월)",
     "round": 50,
@@ -779,7 +797,7 @@ export const ROUND_50: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10539,
+    "id": 10544,
     "examSetId": "round-50",
     "examLabel": "제50회 (2023년 9월)",
     "round": 50,
@@ -794,6 +812,96 @@ export const ROUND_50: QuizQuestion[] = [
     ],
     "correctIndex": 3,
     "explanation": "",
+    "_source": "authored"
+  },
+  {
+    "id": 10545,
+    "examSetId": "round-50",
+    "examLabel": "제50회 (2023년 9월)",
+    "round": 50,
+    "subject": "2과목",
+    "number": 46,
+    "title": "1, 2, 3, 4, 5 와 같이 동순위 없이 연속 번호를 부여하는 윈도우 함수는?",
+    "options": [
+      "RANK",
+      "ROW_NUMBER",
+      "DENSE_RANK",
+      "NTILE"
+    ],
+    "correctIndex": 1,
+    "explanation": "ROW_NUMBER 는 동일 값이 존재해도 순위를 공유하지 않고 1부터 연속된 번호를 부여한다.",
+    "_source": "authored"
+  },
+  {
+    "id": 10546,
+    "examSetId": "round-50",
+    "examLabel": "제50회 (2023년 9월)",
+    "round": 50,
+    "subject": "2과목",
+    "number": 47,
+    "title": "ROUND(3.45, 1) 의 결과는?",
+    "options": [
+      "3.4",
+      "3.45",
+      "3.5",
+      "4"
+    ],
+    "correctIndex": 2,
+    "explanation": "ROUND(3.45, 1) 은 소수점 둘째 자리에서 반올림하여 3.5 를 반환한다.",
+    "_source": "authored"
+  },
+  {
+    "id": 10547,
+    "examSetId": "round-50",
+    "examLabel": "제50회 (2023년 9월)",
+    "round": 50,
+    "subject": "2과목",
+    "number": 48,
+    "title": "아래 조건이 없는 결합 형태의 조인은?\n```sql\nSELECT * FROM TABLE1, TABLE2;  -- 조인 조건 없음\n```",
+    "options": [
+      "INNER JOIN",
+      "NATURAL JOIN",
+      "OUTER JOIN",
+      "CROSS JOIN"
+    ],
+    "correctIndex": 3,
+    "explanation": "조인 조건 없이 두 테이블을 결합하면 모든 행의 조합을 생성하는 카티션 곱(CROSS JOIN) 이 된다.",
+    "_source": "authored"
+  },
+  {
+    "id": 10548,
+    "examSetId": "round-50",
+    "examLabel": "제50회 (2023년 9월)",
+    "round": 50,
+    "subject": "2과목",
+    "number": 49,
+    "title": "아래 LAG 함수 쿼리의 결과로 옳은 것은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>행</th><th>금액</th><th>LAG</th></tr>\n  <tr><td>1</td><td>NULL</td><td>NULL</td></tr>\n  <tr><td>2</td><td>(ㄱ)</td><td>1행 값</td></tr>\n  <tr><td>3</td><td>(ㄴ)</td><td>2행 값</td></tr>\n</table>",
+    "options": [
+      "ㄱ = 2, ㄴ = 700",
+      "ㄱ = 1, ㄴ = 700",
+      "ㄱ = 2, ㄴ = 600",
+      "ㄱ = NULL, ㄴ = 700"
+    ],
+    "correctIndex": 0,
+    "explanation": "LAG(금액, 1) 의 두 번째 행 값은 (ㄱ), 세 번째 행 값은 (ㄴ) 이다. LAG 함수는 현재 행의 직전 행 값을 반환하므로, 두 번째 행의 LAG 는 1행 값이며 세 번째 행의 LAG 는 2행의 값인 700 이 된다.",
+    "_source": "authored"
+  },
+  {
+    "id": 10549,
+    "examSetId": "round-50",
+    "examLabel": "제50회 (2023년 9월)",
+    "round": 50,
+    "subject": "2과목",
+    "number": 50,
+    "title": "아래 설명에 해당하는 명령어는?",
+    "options": [
+      "COMMIT",
+      "ROLLBACK",
+      "SAVEPOINT",
+      "GRANT"
+    ],
+    "correctIndex": 1,
+    "explanation": "트랜잭션 수행 중 오류가 발생한 경우 모든 작업을 취소하고 이전 상태로 되돌리는 명령 ROLLBACK 은 트랜잭션 내의 모든 변경 작업을 취소하고 직전 COMMIT 시점의 상태로 복원한다.",
     "_source": "authored"
   }
 ];

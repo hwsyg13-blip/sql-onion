@@ -1,6 +1,6 @@
 {
   "round": 50,
-  "notes": "restored from 50회_복원.md — MCQ 44 + 단답형 6 (단답형은 현재 UI 미지원이라 제외)",
+  "notes": "restored from 50회_복원.md — MCQ 50 + 단답형 0 (단답형은 현재 UI 미지원이라 제외)",
   "authored": [
     {
       "subject": "1과목",
@@ -118,6 +118,19 @@
       ],
       "correctIndex": 2,
       "explanation": ""
+    },
+    {
+      "subject": "1과목",
+      "number": 10,
+      "title": "속성이 가질 수 있는 값의 범위를 정의한 것으로, 데이터 타입과 범위를 지정한 개념은?",
+      "options": [
+        "도메인",
+        "엔터티",
+        "식별자",
+        "인스턴스"
+      ],
+      "correctIndex": 0,
+      "explanation": "도메인은 속성이 취할 수 있는 값의 범위·데이터 타입·크기를 정의한 집합이다."
     },
     {
       "subject": "2과목",
@@ -573,32 +586,72 @@
       ],
       "correctIndex": 3,
       "explanation": ""
+    },
+    {
+      "subject": "2과목",
+      "number": 46,
+      "title": "1, 2, 3, 4, 5 와 같이 동순위 없이 연속 번호를 부여하는 윈도우 함수는?",
+      "options": [
+        "RANK",
+        "ROW_NUMBER",
+        "DENSE_RANK",
+        "NTILE"
+      ],
+      "correctIndex": 1,
+      "explanation": "ROW_NUMBER 는 동일 값이 존재해도 순위를 공유하지 않고 1부터 연속된 번호를 부여한다."
+    },
+    {
+      "subject": "2과목",
+      "number": 47,
+      "title": "ROUND(3.45, 1) 의 결과는?",
+      "options": [
+        "3.4",
+        "3.45",
+        "3.5",
+        "4"
+      ],
+      "correctIndex": 2,
+      "explanation": "ROUND(3.45, 1) 은 소수점 둘째 자리에서 반올림하여 3.5 를 반환한다."
+    },
+    {
+      "subject": "2과목",
+      "number": 48,
+      "title": "아래 조건이 없는 결합 형태의 조인은?\n```sql\nSELECT * FROM TABLE1, TABLE2;  -- 조인 조건 없음\n```",
+      "options": [
+        "INNER JOIN",
+        "NATURAL JOIN",
+        "OUTER JOIN",
+        "CROSS JOIN"
+      ],
+      "correctIndex": 3,
+      "explanation": "조인 조건 없이 두 테이블을 결합하면 모든 행의 조합을 생성하는 카티션 곱(CROSS JOIN) 이 된다."
+    },
+    {
+      "subject": "2과목",
+      "number": 49,
+      "title": "아래 LAG 함수 쿼리의 결과로 옳은 것은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>행</th><th>금액</th><th>LAG</th></tr>\n  <tr><td>1</td><td>NULL</td><td>NULL</td></tr>\n  <tr><td>2</td><td>(ㄱ)</td><td>1행 값</td></tr>\n  <tr><td>3</td><td>(ㄴ)</td><td>2행 값</td></tr>\n</table>",
+      "options": [
+        "ㄱ = 2, ㄴ = 700",
+        "ㄱ = 1, ㄴ = 700",
+        "ㄱ = 2, ㄴ = 600",
+        "ㄱ = NULL, ㄴ = 700"
+      ],
+      "correctIndex": 0,
+      "explanation": "LAG(금액, 1) 의 두 번째 행 값은 (ㄱ), 세 번째 행 값은 (ㄴ) 이다. LAG 함수는 현재 행의 직전 행 값을 반환하므로, 두 번째 행의 LAG 는 1행 값이며 세 번째 행의 LAG 는 2행의 값인 700 이 된다."
+    },
+    {
+      "subject": "2과목",
+      "number": 50,
+      "title": "아래 설명에 해당하는 명령어는?",
+      "options": [
+        "COMMIT",
+        "ROLLBACK",
+        "SAVEPOINT",
+        "GRANT"
+      ],
+      "correctIndex": 1,
+      "explanation": "트랜잭션 수행 중 오류가 발생한 경우 모든 작업을 취소하고 이전 상태로 되돌리는 명령 ROLLBACK 은 트랜잭션 내의 모든 변경 작업을 취소하고 직전 COMMIT 시점의 상태로 복원한다."
     }
   ],
-  "shortAnswerOmitted": [
-    {
-      "number": 10,
-      "answer": "도메인"
-    },
-    {
-      "number": 46,
-      "answer": "ROW_NUMBER"
-    },
-    {
-      "number": 47,
-      "answer": "3.5"
-    },
-    {
-      "number": 48,
-      "answer": "CROSS JOIN (카티션 곱)"
-    },
-    {
-      "number": 49,
-      "answer": "ㄱ = 2, ㄴ = 700"
-    },
-    {
-      "number": 50,
-      "answer": "ROLLBACK"
-    }
-  ]
+  "shortAnswerOmitted": []
 }

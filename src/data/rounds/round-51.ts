@@ -1,5 +1,5 @@
 // Auto-generated from PDF + blog + scripts/authored/round-51.json
-// 제51회 — 2023년 11월 · 46문항
+// 제51회 — 2023년 11월 · 50문항
 // ⚠ 직접 편집 금지. 출처별 데이터를 고친 뒤 'node scripts/build-quiz-bank.mjs' 재실행.
 import type { QuizQuestion } from '../quizBank';
 
@@ -153,6 +153,42 @@ export const ROUND_51: QuizQuestion[] = [
     "examSetId": "round-51",
     "examLabel": "제51회 (2023년 11월)",
     "round": 51,
+    "subject": "1과목",
+    "number": 9,
+    "title": "주식별자가 지정되면 반드시 데이터 값이 존재해야 한다는 특성의 명칭은?",
+    "options": [
+      "존재성",
+      "유일성",
+      "최소성",
+      "불변성"
+    ],
+    "correctIndex": 0,
+    "explanation": "NULL 값을 허용하지 않으며 항상 값이 존재해야 한다는 성질이다.",
+    "_source": "authored"
+  },
+  {
+    "id": 10459,
+    "examSetId": "round-51",
+    "examLabel": "제51회 (2023년 11월)",
+    "round": 51,
+    "subject": "1과목",
+    "number": 10,
+    "title": "업무에서 필요로 하는 인스턴스를 관리하고자 하는 의미상 더 이상 분리되지 않는 최소의 데이터 단위는?",
+    "options": [
+      "엔터티",
+      "인스턴스",
+      "속성",
+      "관계"
+    ],
+    "correctIndex": 2,
+    "explanation": "속성(Attribute) 은 엔터티를 구성하는 의미상 더 이상 분리되지 않는 최소 단위의 데이터 항목이다.",
+    "_source": "authored"
+  },
+  {
+    "id": 10460,
+    "examSetId": "round-51",
+    "examLabel": "제51회 (2023년 11월)",
+    "round": 51,
     "subject": "2과목",
     "number": 11,
     "title": "트랜잭션에 대한 설명으로 적절하지 않은 것은?",
@@ -167,7 +203,7 @@ export const ROUND_51: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10459,
+    "id": 10461,
     "examSetId": "round-51",
     "examLabel": "제51회 (2023년 11월)",
     "round": 51,
@@ -185,7 +221,7 @@ export const ROUND_51: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10460,
+    "id": 10462,
     "examSetId": "round-51",
     "examLabel": "제51회 (2023년 11월)",
     "round": 51,
@@ -203,7 +239,7 @@ export const ROUND_51: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10461,
+    "id": 10463,
     "examSetId": "round-51",
     "examLabel": "제51회 (2023년 11월)",
     "round": 51,
@@ -221,7 +257,7 @@ export const ROUND_51: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10462,
+    "id": 10464,
     "examSetId": "round-51",
     "examLabel": "제51회 (2023년 11월)",
     "round": 51,
@@ -239,7 +275,7 @@ export const ROUND_51: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10463,
+    "id": 10465,
     "examSetId": "round-51",
     "examLabel": "제51회 (2023년 11월)",
     "round": 51,
@@ -257,7 +293,7 @@ export const ROUND_51: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10464,
+    "id": 10466,
     "examSetId": "round-51",
     "examLabel": "제51회 (2023년 11월)",
     "round": 51,
@@ -275,7 +311,7 @@ export const ROUND_51: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10465,
+    "id": 10467,
     "examSetId": "round-51",
     "examLabel": "제51회 (2023년 11월)",
     "round": 51,
@@ -293,7 +329,7 @@ export const ROUND_51: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10466,
+    "id": 10468,
     "examSetId": "round-51",
     "examLabel": "제51회 (2023년 11월)",
     "round": 51,
@@ -311,7 +347,7 @@ export const ROUND_51: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10467,
+    "id": 10469,
     "examSetId": "round-51",
     "examLabel": "제51회 (2023년 11월)",
     "round": 51,
@@ -329,7 +365,7 @@ export const ROUND_51: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10468,
+    "id": 10470,
     "examSetId": "round-51",
     "examLabel": "제51회 (2023년 11월)",
     "round": 51,
@@ -347,7 +383,7 @@ export const ROUND_51: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10469,
+    "id": 10471,
     "examSetId": "round-51",
     "examLabel": "제51회 (2023년 11월)",
     "round": 51,
@@ -365,7 +401,7 @@ export const ROUND_51: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10470,
+    "id": 10472,
     "examSetId": "round-51",
     "examLabel": "제51회 (2023년 11월)",
     "round": 51,
@@ -383,7 +419,7 @@ export const ROUND_51: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10471,
+    "id": 10473,
     "examSetId": "round-51",
     "examLabel": "제51회 (2023년 11월)",
     "round": 51,
@@ -401,7 +437,7 @@ export const ROUND_51: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10472,
+    "id": 10474,
     "examSetId": "round-51",
     "examLabel": "제51회 (2023년 11월)",
     "round": 51,
@@ -419,7 +455,7 @@ export const ROUND_51: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10473,
+    "id": 10475,
     "examSetId": "round-51",
     "examLabel": "제51회 (2023년 11월)",
     "round": 51,
@@ -437,7 +473,7 @@ export const ROUND_51: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10474,
+    "id": 10476,
     "examSetId": "round-51",
     "examLabel": "제51회 (2023년 11월)",
     "round": 51,
@@ -455,7 +491,7 @@ export const ROUND_51: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10475,
+    "id": 10477,
     "examSetId": "round-51",
     "examLabel": "제51회 (2023년 11월)",
     "round": 51,
@@ -473,7 +509,7 @@ export const ROUND_51: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10476,
+    "id": 10478,
     "examSetId": "round-51",
     "examLabel": "제51회 (2023년 11월)",
     "round": 51,
@@ -491,7 +527,7 @@ export const ROUND_51: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10477,
+    "id": 10479,
     "examSetId": "round-51",
     "examLabel": "제51회 (2023년 11월)",
     "round": 51,
@@ -509,7 +545,7 @@ export const ROUND_51: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10478,
+    "id": 10480,
     "examSetId": "round-51",
     "examLabel": "제51회 (2023년 11월)",
     "round": 51,
@@ -527,7 +563,7 @@ export const ROUND_51: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10479,
+    "id": 10481,
     "examSetId": "round-51",
     "examLabel": "제51회 (2023년 11월)",
     "round": 51,
@@ -545,7 +581,7 @@ export const ROUND_51: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10480,
+    "id": 10482,
     "examSetId": "round-51",
     "examLabel": "제51회 (2023년 11월)",
     "round": 51,
@@ -563,7 +599,7 @@ export const ROUND_51: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10481,
+    "id": 10483,
     "examSetId": "round-51",
     "examLabel": "제51회 (2023년 11월)",
     "round": 51,
@@ -581,7 +617,7 @@ export const ROUND_51: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10482,
+    "id": 10484,
     "examSetId": "round-51",
     "examLabel": "제51회 (2023년 11월)",
     "round": 51,
@@ -599,7 +635,7 @@ export const ROUND_51: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10483,
+    "id": 10485,
     "examSetId": "round-51",
     "examLabel": "제51회 (2023년 11월)",
     "round": 51,
@@ -617,7 +653,7 @@ export const ROUND_51: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10484,
+    "id": 10486,
     "examSetId": "round-51",
     "examLabel": "제51회 (2023년 11월)",
     "round": 51,
@@ -635,7 +671,7 @@ export const ROUND_51: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10485,
+    "id": 10487,
     "examSetId": "round-51",
     "examLabel": "제51회 (2023년 11월)",
     "round": 51,
@@ -653,7 +689,7 @@ export const ROUND_51: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10486,
+    "id": 10488,
     "examSetId": "round-51",
     "examLabel": "제51회 (2023년 11월)",
     "round": 51,
@@ -671,7 +707,7 @@ export const ROUND_51: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10487,
+    "id": 10489,
     "examSetId": "round-51",
     "examLabel": "제51회 (2023년 11월)",
     "round": 51,
@@ -689,7 +725,7 @@ export const ROUND_51: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10488,
+    "id": 10490,
     "examSetId": "round-51",
     "examLabel": "제51회 (2023년 11월)",
     "round": 51,
@@ -707,7 +743,7 @@ export const ROUND_51: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10489,
+    "id": 10491,
     "examSetId": "round-51",
     "examLabel": "제51회 (2023년 11월)",
     "round": 51,
@@ -725,7 +761,7 @@ export const ROUND_51: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10490,
+    "id": 10492,
     "examSetId": "round-51",
     "examLabel": "제51회 (2023년 11월)",
     "round": 51,
@@ -743,7 +779,7 @@ export const ROUND_51: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10491,
+    "id": 10493,
     "examSetId": "round-51",
     "examLabel": "제51회 (2023년 11월)",
     "round": 51,
@@ -761,7 +797,7 @@ export const ROUND_51: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10492,
+    "id": 10494,
     "examSetId": "round-51",
     "examLabel": "제51회 (2023년 11월)",
     "round": 51,
@@ -779,7 +815,7 @@ export const ROUND_51: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10493,
+    "id": 10495,
     "examSetId": "round-51",
     "examLabel": "제51회 (2023년 11월)",
     "round": 51,
@@ -797,7 +833,7 @@ export const ROUND_51: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10494,
+    "id": 10496,
     "examSetId": "round-51",
     "examLabel": "제51회 (2023년 11월)",
     "round": 51,
@@ -815,7 +851,7 @@ export const ROUND_51: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10495,
+    "id": 10497,
     "examSetId": "round-51",
     "examLabel": "제51회 (2023년 11월)",
     "round": 51,
@@ -830,6 +866,42 @@ export const ROUND_51: QuizQuestion[] = [
     ],
     "correctIndex": 1,
     "explanation": "CASE 식은 위에서부터 차례로 평가되어 가장 먼저 참인 WHEN 절의 결과를 반환한다. `1 = 2`는 거짓이므로 넘어가고, `2 = 2`가 참이어서 'B'가 반환된다.",
+    "_source": "authored"
+  },
+  {
+    "id": 10498,
+    "examSetId": "round-51",
+    "examLabel": "제51회 (2023년 11월)",
+    "round": 51,
+    "subject": "2과목",
+    "number": 49,
+    "title": "데이터베이스 접근 권한과 객체 접근 권한을 부여하는 언어의 종류는?",
+    "options": [
+      "DDL (Data Definition Language)",
+      "DML (Data Manipulation Language)",
+      "TCL (Transaction Control Language)",
+      "DCL (Data Control Language)"
+    ],
+    "correctIndex": 3,
+    "explanation": "DCL 은 GRANT·REVOKE 를 통해 데이터베이스 접근 권한과 객체 접근 권한을 제어하는 언어이다.",
+    "_source": "authored"
+  },
+  {
+    "id": 10499,
+    "examSetId": "round-51",
+    "examLabel": "제51회 (2023년 11월)",
+    "round": 51,
+    "subject": "2과목",
+    "number": 50,
+    "title": "아래 SQL 의 결과는?\n```sql\nSELECT FLOOR(10.4), FLOOR(-2.4) FROM DUAL;\n```",
+    "options": [
+      "10, -2",
+      "10, -3",
+      "11, -3",
+      "11, -2"
+    ],
+    "correctIndex": 1,
+    "explanation": "FLOOR 함수는 실수를 그보다 작거나 같은 최대 정수로 내림한다. 음수의 경우 더 작은 쪽(-3) 으로 내려간다.",
     "_source": "authored"
   }
 ];

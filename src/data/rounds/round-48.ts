@@ -1,11 +1,11 @@
 // Auto-generated from PDF + blog + scripts/authored/round-48.json
-// 제48회 — 2023년 3월 · 45문항
+// 제48회 — 2023년 3월 · 50문항
 // ⚠ 직접 편집 금지. 출처별 데이터를 고친 뒤 'node scripts/build-quiz-bank.mjs' 재실행.
 import type { QuizQuestion } from '../quizBank';
 
 export const ROUND_48: QuizQuestion[] = [
   {
-    "id": 10584,
+    "id": 10600,
     "examSetId": "round-48",
     "examLabel": "제48회 (2023년 3월)",
     "round": 48,
@@ -23,7 +23,7 @@ export const ROUND_48: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10585,
+    "id": 10601,
     "examSetId": "round-48",
     "examLabel": "제48회 (2023년 3월)",
     "round": 48,
@@ -41,7 +41,7 @@ export const ROUND_48: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10586,
+    "id": 10602,
     "examSetId": "round-48",
     "examLabel": "제48회 (2023년 3월)",
     "round": 48,
@@ -59,7 +59,7 @@ export const ROUND_48: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10587,
+    "id": 10603,
     "examSetId": "round-48",
     "examLabel": "제48회 (2023년 3월)",
     "round": 48,
@@ -77,7 +77,7 @@ export const ROUND_48: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10588,
+    "id": 10604,
     "examSetId": "round-48",
     "examLabel": "제48회 (2023년 3월)",
     "round": 48,
@@ -95,7 +95,7 @@ export const ROUND_48: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10589,
+    "id": 10605,
     "examSetId": "round-48",
     "examLabel": "제48회 (2023년 3월)",
     "round": 48,
@@ -113,7 +113,7 @@ export const ROUND_48: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10590,
+    "id": 10606,
     "examSetId": "round-48",
     "examLabel": "제48회 (2023년 3월)",
     "round": 48,
@@ -131,7 +131,7 @@ export const ROUND_48: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10591,
+    "id": 10607,
     "examSetId": "round-48",
     "examLabel": "제48회 (2023년 3월)",
     "round": 48,
@@ -149,7 +149,7 @@ export const ROUND_48: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10592,
+    "id": 10608,
     "examSetId": "round-48",
     "examLabel": "제48회 (2023년 3월)",
     "round": 48,
@@ -167,7 +167,7 @@ export const ROUND_48: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10593,
+    "id": 10609,
     "examSetId": "round-48",
     "examLabel": "제48회 (2023년 3월)",
     "round": 48,
@@ -185,7 +185,7 @@ export const ROUND_48: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10594,
+    "id": 10610,
     "examSetId": "round-48",
     "examLabel": "제48회 (2023년 3월)",
     "round": 48,
@@ -203,7 +203,7 @@ export const ROUND_48: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10595,
+    "id": 10611,
     "examSetId": "round-48",
     "examLabel": "제48회 (2023년 3월)",
     "round": 48,
@@ -221,7 +221,7 @@ export const ROUND_48: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10596,
+    "id": 10612,
     "examSetId": "round-48",
     "examLabel": "제48회 (2023년 3월)",
     "round": 48,
@@ -239,7 +239,7 @@ export const ROUND_48: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10597,
+    "id": 10613,
     "examSetId": "round-48",
     "examLabel": "제48회 (2023년 3월)",
     "round": 48,
@@ -257,7 +257,7 @@ export const ROUND_48: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10598,
+    "id": 10614,
     "examSetId": "round-48",
     "examLabel": "제48회 (2023년 3월)",
     "round": 48,
@@ -275,7 +275,7 @@ export const ROUND_48: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10599,
+    "id": 10615,
     "examSetId": "round-48",
     "examLabel": "제48회 (2023년 3월)",
     "round": 48,
@@ -293,7 +293,7 @@ export const ROUND_48: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10600,
+    "id": 10616,
     "examSetId": "round-48",
     "examLabel": "제48회 (2023년 3월)",
     "round": 48,
@@ -311,7 +311,7 @@ export const ROUND_48: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10601,
+    "id": 10617,
     "examSetId": "round-48",
     "examLabel": "제48회 (2023년 3월)",
     "round": 48,
@@ -329,7 +329,7 @@ export const ROUND_48: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10602,
+    "id": 10618,
     "examSetId": "round-48",
     "examLabel": "제48회 (2023년 3월)",
     "round": 48,
@@ -347,7 +347,7 @@ export const ROUND_48: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10603,
+    "id": 10619,
     "examSetId": "round-48",
     "examLabel": "제48회 (2023년 3월)",
     "round": 48,
@@ -365,7 +365,7 @@ export const ROUND_48: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10604,
+    "id": 10620,
     "examSetId": "round-48",
     "examLabel": "제48회 (2023년 3월)",
     "round": 48,
@@ -383,7 +383,7 @@ export const ROUND_48: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10605,
+    "id": 10621,
     "examSetId": "round-48",
     "examLabel": "제48회 (2023년 3월)",
     "round": 48,
@@ -401,7 +401,7 @@ export const ROUND_48: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10606,
+    "id": 10622,
     "examSetId": "round-48",
     "examLabel": "제48회 (2023년 3월)",
     "round": 48,
@@ -419,7 +419,7 @@ export const ROUND_48: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10607,
+    "id": 10623,
     "examSetId": "round-48",
     "examLabel": "제48회 (2023년 3월)",
     "round": 48,
@@ -437,7 +437,7 @@ export const ROUND_48: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10608,
+    "id": 10624,
     "examSetId": "round-48",
     "examLabel": "제48회 (2023년 3월)",
     "round": 48,
@@ -455,7 +455,7 @@ export const ROUND_48: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10609,
+    "id": 10625,
     "examSetId": "round-48",
     "examLabel": "제48회 (2023년 3월)",
     "round": 48,
@@ -473,7 +473,7 @@ export const ROUND_48: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10610,
+    "id": 10626,
     "examSetId": "round-48",
     "examLabel": "제48회 (2023년 3월)",
     "round": 48,
@@ -491,7 +491,7 @@ export const ROUND_48: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10611,
+    "id": 10627,
     "examSetId": "round-48",
     "examLabel": "제48회 (2023년 3월)",
     "round": 48,
@@ -509,7 +509,7 @@ export const ROUND_48: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10612,
+    "id": 10628,
     "examSetId": "round-48",
     "examLabel": "제48회 (2023년 3월)",
     "round": 48,
@@ -527,7 +527,7 @@ export const ROUND_48: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10613,
+    "id": 10629,
     "examSetId": "round-48",
     "examLabel": "제48회 (2023년 3월)",
     "round": 48,
@@ -545,7 +545,7 @@ export const ROUND_48: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10614,
+    "id": 10630,
     "examSetId": "round-48",
     "examLabel": "제48회 (2023년 3월)",
     "round": 48,
@@ -563,7 +563,7 @@ export const ROUND_48: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10615,
+    "id": 10631,
     "examSetId": "round-48",
     "examLabel": "제48회 (2023년 3월)",
     "round": 48,
@@ -581,7 +581,7 @@ export const ROUND_48: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10616,
+    "id": 10632,
     "examSetId": "round-48",
     "examLabel": "제48회 (2023년 3월)",
     "round": 48,
@@ -599,7 +599,7 @@ export const ROUND_48: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10617,
+    "id": 10633,
     "examSetId": "round-48",
     "examLabel": "제48회 (2023년 3월)",
     "round": 48,
@@ -617,7 +617,7 @@ export const ROUND_48: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10618,
+    "id": 10634,
     "examSetId": "round-48",
     "examLabel": "제48회 (2023년 3월)",
     "round": 48,
@@ -635,7 +635,7 @@ export const ROUND_48: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10619,
+    "id": 10635,
     "examSetId": "round-48",
     "examLabel": "제48회 (2023년 3월)",
     "round": 48,
@@ -653,7 +653,7 @@ export const ROUND_48: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10620,
+    "id": 10636,
     "examSetId": "round-48",
     "examLabel": "제48회 (2023년 3월)",
     "round": 48,
@@ -671,7 +671,7 @@ export const ROUND_48: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10621,
+    "id": 10637,
     "examSetId": "round-48",
     "examLabel": "제48회 (2023년 3월)",
     "round": 48,
@@ -689,7 +689,7 @@ export const ROUND_48: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10622,
+    "id": 10638,
     "examSetId": "round-48",
     "examLabel": "제48회 (2023년 3월)",
     "round": 48,
@@ -707,7 +707,7 @@ export const ROUND_48: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10623,
+    "id": 10639,
     "examSetId": "round-48",
     "examLabel": "제48회 (2023년 3월)",
     "round": 48,
@@ -725,7 +725,7 @@ export const ROUND_48: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10624,
+    "id": 10640,
     "examSetId": "round-48",
     "examLabel": "제48회 (2023년 3월)",
     "round": 48,
@@ -743,7 +743,7 @@ export const ROUND_48: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10625,
+    "id": 10641,
     "examSetId": "round-48",
     "examLabel": "제48회 (2023년 3월)",
     "round": 48,
@@ -761,7 +761,7 @@ export const ROUND_48: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10626,
+    "id": 10642,
     "examSetId": "round-48",
     "examLabel": "제48회 (2023년 3월)",
     "round": 48,
@@ -779,7 +779,7 @@ export const ROUND_48: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10627,
+    "id": 10643,
     "examSetId": "round-48",
     "examLabel": "제48회 (2023년 3월)",
     "round": 48,
@@ -797,7 +797,7 @@ export const ROUND_48: QuizQuestion[] = [
     "_source": "authored"
   },
   {
-    "id": 10628,
+    "id": 10644,
     "examSetId": "round-48",
     "examLabel": "제48회 (2023년 3월)",
     "round": 48,
@@ -812,6 +812,96 @@ export const ROUND_48: QuizQuestion[] = [
     ],
     "correctIndex": 1,
     "explanation": "원본 기출의 정답 표기를 보존한다.",
+    "_source": "authored"
+  },
+  {
+    "id": 10645,
+    "examSetId": "round-48",
+    "examLabel": "제48회 (2023년 3월)",
+    "round": 48,
+    "subject": "2과목",
+    "number": 46,
+    "title": "아래 T1 테이블에 대한 SQL 의 결과(ㄱ / ㄴ / ㄷ / ㄹ) 로 옳은 것은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>COL1</th><th>COL2</th><th>COL3</th></tr>\n  <tr><td>10</td><td>NULL</td><td>10</td></tr>\n  <tr><td>NULL</td><td>50</td><td>10</td></tr>\n  <tr><td>0</td><td>10</td><td>10</td></tr>\n</table>\n```sql\nㄱ. SELECT SUM(COL2) FROM T1;\nㄴ. SELECT SUM(COL2) FROM T1 WHERE COL1 > 0;\nㄷ. SELECT SUM(COL2) FROM T1 WHERE COL1 IS NOT NULL;\nㄹ. SELECT SUM(COL2) FROM T1 WHERE COL1 IS NULL;\n```",
+    "options": [
+      "60 / NULL / 10 / 50",
+      "60 / 0 / 10 / 50",
+      "NULL / NULL / 10 / 50",
+      "60 / NULL / 10 / 0"
+    ],
+    "correctIndex": 0,
+    "explanation": "ㄱ 은 COL2 의 NULL 을 제외한 50+10=60, ㄴ 은 COL1>0 행의 COL2 가 NULL 뿐이므로 NULL, ㄷ 은 COL1 IS NOT NULL 행에서 NULL+10=10, ㄹ 은 COL1 IS NULL 행의 COL2=50 이 된다.",
+    "_source": "authored"
+  },
+  {
+    "id": 10646,
+    "examSetId": "round-48",
+    "examLabel": "제48회 (2023년 3월)",
+    "round": 48,
+    "subject": "2과목",
+    "number": 47,
+    "title": "아래 ORDER BY 수행 결과에서 세 번째로 출력되는 값은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>ID</th></tr>\n  <tr><td>1</td></tr>\n  <tr><td>2</td></tr>\n  <tr><td>3</td></tr>\n  <tr><td>4</td></tr>\n</table>\n```sql\nSELECT ID FROM TAB1\nORDER BY (CASE WHEN ID IN (1, 3) THEN ID * 3 ELSE ID END) DESC;\n```",
+    "options": [
+      "3",
+      "4",
+      "1",
+      "2"
+    ],
+    "correctIndex": 2,
+    "explanation": "정렬 키는 3*3=9, 1*3=3, 4, 2 순으로 3, 4, 1, 2 가 출력된다. 세 번째는 1 이다.",
+    "_source": "authored"
+  },
+  {
+    "id": 10647,
+    "examSetId": "round-48",
+    "examLabel": "제48회 (2023년 3월)",
+    "round": 48,
+    "subject": "2과목",
+    "number": 48,
+    "title": "START WITH 와 CONNECT BY 로 트리 전개 시 LEVEL = 2 인 행의 개수는?",
+    "options": [
+      "1",
+      "3",
+      "4",
+      "7"
+    ],
+    "correctIndex": 1,
+    "explanation": "루트(LEVEL=1) 아래 직속 자식 노드가 3개이므로 LEVEL=2 행은 3건이다.",
+    "_source": "authored"
+  },
+  {
+    "id": 10648,
+    "examSetId": "round-48",
+    "examLabel": "제48회 (2023년 3월)",
+    "round": 48,
+    "subject": "2과목",
+    "number": 49,
+    "title": "현재 행 이전 행의 값을 반환하는 윈도우 함수는?",
+    "options": [
+      "LEAD",
+      "FIRST_VALUE",
+      "NTILE",
+      "LAG"
+    ],
+    "correctIndex": 3,
+    "explanation": "LAG 는 파티션 내에서 현재 행으로부터 지정한 오프셋만큼 이전 행의 값을 반환한다.",
+    "_source": "authored"
+  },
+  {
+    "id": 10649,
+    "examSetId": "round-48",
+    "examLabel": "제48회 (2023년 3월)",
+    "round": 48,
+    "subject": "2과목",
+    "number": 50,
+    "title": "아래 GRANT 구문의 빈칸에 들어갈 키워드로 옳은 것은?\n```sql\nGRANT INSERT (   ) 테이블명 (   ) 사용자명;\n```",
+    "options": [
+      "TO, ON",
+      "ON, TO",
+      "FROM, TO",
+      "IN, TO"
+    ],
+    "correctIndex": 1,
+    "explanation": "GRANT 구문은 `GRANT 권한 ON 객체 TO 사용자` 형식을 따른다.",
     "_source": "authored"
   }
 ];
