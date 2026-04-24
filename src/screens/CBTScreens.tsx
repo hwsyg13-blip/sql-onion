@@ -193,18 +193,6 @@ export const CBTExam = ({examId = "round-60", onFinish, onNavigate, mockMode = f
       <div style={{maxWidth:1280,margin:"0 auto",padding:"24px 28px 60px",display:"grid",gridTemplateColumns:"minmax(0, 1fr) 320px",gap:24}} className="cbt-grid">
         {/* Left — question */}
         <main>
-          {/* Question number strip — 체크(좌) / 진도(중) / 이전·다음(우) */}
-          <div style={{display:"flex",gap:6,marginBottom:16,flexWrap:"wrap"}}>
-            <Btn size="sm" variant={flags.has(idx)?"soft":"ghost"} icon={<Ic.Bookmark size={14}/>} onClick={()=>toggleFlag(idx)}>
-              {flags.has(idx) ? "체크됨" : "체크"}
-            </Btn>
-            <div style={{flex:1,display:"flex",alignItems:"center",justifyContent:"center",fontSize:13,color:"var(--fg-3)",fontFamily:"var(--font-mono)"}}>
-              문항 {idx+1} / {totalQ}
-            </div>
-            <Btn size="sm" variant="ghost" icon={<Ic.ArrowLeft size={14}/>} onClick={()=>setIdx(Math.max(0, idx-1))} disabled={idx===0}>이전</Btn>
-            <Btn size="sm" variant="primary" iconRight={<Ic.ArrowRight size={14}/>} onClick={()=>setIdx(Math.min(totalQ-1, idx+1))} disabled={idx===totalQ-1}>다음</Btn>
-          </div>
-
           <div style={{background:"var(--bg-card)",border:"1px solid var(--border-subtle)",borderRadius:16,padding:28,boxShadow:"var(--shadow-sm)"}}>
             {/* 태그는 질문 위에 */}
             <div style={{display:"flex",gap:8,marginBottom:12}}>
@@ -239,6 +227,18 @@ export const CBTExam = ({examId = "round-60", onFinish, onNavigate, mockMode = f
                 );
               })}
             </ol>
+          </div>
+
+          {/* Question number strip — 문제 박스 아래에 (체크 좌 / 진도 중 / 이전·다음 우) */}
+          <div style={{display:"flex",gap:6,marginTop:16,flexWrap:"wrap"}}>
+            <Btn size="sm" variant={flags.has(idx)?"soft":"ghost"} icon={<Ic.Bookmark size={14}/>} onClick={()=>toggleFlag(idx)}>
+              {flags.has(idx) ? "체크됨" : "체크"}
+            </Btn>
+            <div style={{flex:1,display:"flex",alignItems:"center",justifyContent:"center",fontSize:13,color:"var(--fg-3)",fontFamily:"var(--font-mono)"}}>
+              문항 {idx+1} / {totalQ}
+            </div>
+            <Btn size="sm" variant="ghost" icon={<Ic.ArrowLeft size={14}/>} onClick={()=>setIdx(Math.max(0, idx-1))} disabled={idx===0}>이전</Btn>
+            <Btn size="sm" variant="primary" iconRight={<Ic.ArrowRight size={14}/>} onClick={()=>setIdx(Math.min(totalQ-1, idx+1))} disabled={idx===totalQ-1}>다음</Btn>
           </div>
         </main>
 

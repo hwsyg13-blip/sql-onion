@@ -42,17 +42,31 @@ export const App = () => {
     if (saved === 'login' || saved === 'subscribe') return 'home';
     return saved || 'home';
   });
-  const [params, setParams] = React.useState<any>(null);
+  const [params, setParams] = React.useState<any>(() => {
+    // route 가 cbt 로 복원되는 경우 examId 도 함께 복원
+    try {
+      const raw = localStorage.getItem('sqlo_params');
+      return raw ? JSON.parse(raw) : null;
+    } catch { return null; }
+  });
   const [cbtResult, setCbtResult] = React.useState<any>(null);
   const [paywall, setPaywall] = React.useState<any>(null);
-  // 나가기 버튼이 돌아갈 '직전 화면' — cbt/mock-exam 진입 시 기록
-  const [exitReturnRoute, setExitReturnRoute] = React.useState<string>('home');
+  // 나가기 버튼이 돌아갈 '직전 화면' — cbt/mock-exam 진입 시 기록 (새로고침 시 복원)
+  const [exitReturnRoute, setExitReturnRoute] = React.useState<string>(() => {
+    try { return localStorage.getItem('sqlo_exit_return') || 'home'; } catch { return 'home'; }
+  });
 
   const handleLogin = () => { /* noop: Supabase OAuth redirect handles it */ };
   const handleLogout = async () => { await signOut(); setRoute('home'); };
 
   React.useEffect(() => { localStorage.setItem('sqlo_tweaks', JSON.stringify(tweaks)); }, [tweaks]);
   React.useEffect(() => { localStorage.setItem('sqlo_route', route); }, [route]);
+  React.useEffect(() => {
+    if (params == null) localStorage.removeItem('sqlo_params');
+    else try { localStorage.setItem('sqlo_params', JSON.stringify(params)); } catch {}
+  }, [params]);
+  // 나가기 복귀 라우트도 복원 (새로고침 후 나가기가 이상한 경로로 가지 않도록)
+  React.useEffect(() => { localStorage.setItem('sqlo_exit_return', exitReturnRoute); }, [exitReturnRoute]);
 
   // 방문 기록 — 앱 마운트 시 오늘 날짜를 visitDays 에 저장 (1일 1회만)
   React.useEffect(() => { recordVisit(); }, []);
