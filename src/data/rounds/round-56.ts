@@ -109,7 +109,7 @@ export const ROUND_56: QuizQuestion[] = [
       "가, 나, 다, 라"
     ],
     "correctIndex": 3,
-    "explanation": "가. 주소는 시·군·구 등으로 나누어지므로 복합 속성이다. 나. 나이는 단순 속성이다. 다. 주민번호는 단일 값 속성이다. 라. 연락처는 휴대폰 번호와 집 전화번호가 될 수 있기 때문에 다중 값 속성이다. 복합·단순·단일 값·다중 값 속성에 대한 네 개의 설명이 모두 옳다.",
+    "explanation": "복합·단순·단일 값·다중 값 속성에 대한 네 개의 설명이 모두 옳다.",
     "_source": "authored"
   },
   {
@@ -119,7 +119,7 @@ export const ROUND_56: QuizQuestion[] = [
     "round": 56,
     "subject": "1과목",
     "number": 7,
-    "title": "아래 ERD에 대한 설명 중 옳지 않은 것은?\n```\n[ 병원 ] ||-----∘| [ 의사 ] ||-----∘| [ 수술 ]\n   ㄱ                  ㄴ                ㄷ\n```",
+    "title": "아래 ERD에 대한 설명 중 옳지 않은 것은?",
     "options": [
       "ㄷ은 ㄱ과 ㄴ을 합한 것과 의미가 같다.",
       "의사가 없는 병원이 있을 수 있다.",
@@ -209,7 +209,7 @@ export const ROUND_56: QuizQuestion[] = [
     "round": 56,
     "subject": "2과목",
     "number": 12,
-    "title": "아래 쿼리의 실행 결과로 옳은 것은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>COL1</th><th>COL2</th></tr>\n  <tr><td>1</td><td>A</td></tr>\n  <tr><td>2</td><td>B</td></tr>\n  <tr><td>3</td><td>C</td></tr>\n  <tr><td>4</td><td>D</td></tr>\n  <tr><td>1</td><td>A</td></tr>\n  <tr><td>2</td><td>B</td></tr>\n  <tr><td>3</td><td>A</td></tr>\n</table>\n```sql\nSELECT COUNT(ALL COL1)      FROM TAB1 WHERE COL2 = 'A';\nSELECT COUNT(DISTINCT COL1) FROM TAB1;\n```",
+    "title": "아래 쿼리의 실행 결과로 옳은 것은?",
     "options": [
       "2, 3",
       "3, 3",
@@ -263,7 +263,7 @@ export const ROUND_56: QuizQuestion[] = [
     "round": 56,
     "subject": "2과목",
     "number": 15,
-    "title": "아래 쿼리의 결과로 옳은 것은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>COL1</th><th>COL2</th></tr>\n  <tr><td>1</td><td>10</td></tr>\n  <tr><td>1</td><td>20</td></tr>\n  <tr><td>2</td><td>30</td></tr>\n  <tr><td>3</td><td>40</td></tr>\n  <tr><td>3</td><td>50</td></tr>\n</table>\n```sql\nSELECT MAX(COL2) KEEP (DENSE_RANK FIRST ORDER BY COL1) FROM TAB1;\n```",
+    "title": "아래 쿼리의 결과로 옳은 것은?",
     "options": [
       "10",
       "20",
@@ -281,7 +281,7 @@ export const ROUND_56: QuizQuestion[] = [
     "round": 56,
     "subject": "2과목",
     "number": 16,
-    "title": "아래 쿼리의 실행 결과로 옳은 것은?\n```sql\nSELECT COALESCE(NULL, NULL, 'S', NULL, 'QL') FROM DUAL;\n```",
+    "title": "아래 쿼리의 실행 결과로 옳은 것은?",
     "options": [
       "S",
       "SQL",
@@ -299,7 +299,7 @@ export const ROUND_56: QuizQuestion[] = [
     "round": 56,
     "subject": "2과목",
     "number": 17,
-    "title": "아래 함수의 실행 결과로 옳은 것은?\n```sql\nCEIL(9.36), ROUND(9.48), FLOOR(9.72)\n```",
+    "title": "아래 함수의 실행 결과로 옳은 것은?",
     "options": [
       "9, 9, 9",
       "10, 9, 9",
@@ -317,7 +317,7 @@ export const ROUND_56: QuizQuestion[] = [
     "round": 56,
     "subject": "2과목",
     "number": 18,
-    "title": "업체 테이블에 p, q, r 데이터가 각각 30, 40, 50 개 존재할 때 아래 두 쿼리의 결과로 옳은 것은?\n```sql\nSELECT COUNT(DISTINCT 물품) FROM 업체;\nSELECT COUNT(*) FROM 업체 WHERE 물품 IN ('p', NULL);\n```",
+    "title": "업체 테이블에 p, q, r 데이터가 각각 30, 40, 50 개 존재할 때 아래 두 쿼리의 결과로 옳은 것은?",
     "options": [
       "3, 0",
       "3, 30",
@@ -371,7 +371,7 @@ export const ROUND_56: QuizQuestion[] = [
     "round": 56,
     "subject": "2과목",
     "number": 21,
-    "title": "아래 결과를 얻기 위한 쿼리로 가장 적절한 것은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>COL1</th><th>COL2</th></tr>\n  <tr><td>1</td><td>Smith</td></tr>\n  <tr><td>2</td><td>Charlie</td></tr>\n  <tr><td>3</td><td>Alice</td></tr>\n  <tr><td>4</td><td>NULL</td></tr>\n</table>\n```\nCOUNT(*)\n4\n```",
+    "title": "아래 결과를 얻기 위한 쿼리로 가장 적절한 것은?",
     "options": [
       "`FROM EMP WHERE COL2 LIKE '%_%'`",
       "`FROM EMP`",
@@ -425,7 +425,7 @@ export const ROUND_56: QuizQuestion[] = [
     "round": 56,
     "subject": "2과목",
     "number": 24,
-    "title": "아래 두 쿼리의 결과로 옳은 것은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>COL1</th></tr>\n  <tr><td>a</td></tr>\n  <tr><td>b</td></tr>\n  <tr><td>c</td></tr>\n</table>\n```sql\nSELECT COL1      FROM TAB1 WHERE COL1 = 'z';\nSELECT MAX(COL1) FROM TAB1 WHERE COL1 = 'z';\n```",
+    "title": "아래 두 쿼리의 결과로 옳은 것은?",
     "options": [
       "NULL, NULL",
       "NULL, 공집합",
@@ -443,7 +443,7 @@ export const ROUND_56: QuizQuestion[] = [
     "round": 56,
     "subject": "2과목",
     "number": 25,
-    "title": "아래 함수의 실행 결과로 옳은 것은?\n```sql\nSELECT REGEXP_SUBSTR('aaaaabbbb', 'a{2,4}') FROM DUAL;\n```",
+    "title": "아래 함수의 실행 결과로 옳은 것은?",
     "options": [
       "aaa",
       "aaaa",
@@ -479,7 +479,7 @@ export const ROUND_56: QuizQuestion[] = [
     "round": 56,
     "subject": "2과목",
     "number": 27,
-    "title": "급여 2,000 이상인 사원 중 부서별 급여 합계가 높은 순으로 정렬하려고 한다. 아래 쿼리에서 수정이 필요한 부분은?\n```sql\nSELECT DEPT_NAME, SUM(SALARY)   -- (가)\nFROM   EMP\nWHERE  SALARY >= 2000           -- (나)\nGROUP BY DEPT_NAME              -- (다)\nORDER BY SUM(SALARY)            -- (라)\n```",
+    "title": "급여 2,000 이상인 사원 중 부서별 급여 합계가 높은 순으로 정렬하려고 한다. 아래 쿼리에서 수정이 필요한 부분은?",
     "options": [
       "(가)",
       "(나)",
@@ -533,7 +533,7 @@ export const ROUND_56: QuizQuestion[] = [
     "round": 56,
     "subject": "2과목",
     "number": 30,
-    "title": "아래 결과를 반환하는 순위 함수로 옳은 것은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>NAME</th><th>SALARY</th><th>RANKING</th></tr>\n  <tr><td>Bob</td><td>7000</td><td>1</td></tr>\n  <tr><td>Smith</td><td>7000</td><td>1</td></tr>\n  <tr><td>David</td><td>6000</td><td>2</td></tr>\n  <tr><td>Alice</td><td>5000</td><td>3</td></tr>\n  <tr><td>Charlie</td><td>3000</td><td>4</td></tr>\n</table>",
+    "title": "아래 결과를 반환하는 순위 함수로 옳은 것은?",
     "options": [
       "DENSE_RANK()",
       "RANK()",
@@ -569,7 +569,7 @@ export const ROUND_56: QuizQuestion[] = [
     "round": 56,
     "subject": "2과목",
     "number": 32,
-    "title": "아래 쿼리의 결과 행 수는?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th colspan=\"2\">TAB1</th><th colspan=\"2\">TAB2</th></tr>\n  <tr><th>COL1</th><th>COL2</th><th>COL1</th><th>COL2</th></tr>\n  <tr><td>A</td><td>10</td><td>A</td><td>20</td></tr>\n  <tr><td>B</td><td>20</td><td>B</td><td>20</td></tr>\n  <tr><td>C</td><td>30</td><td>C</td><td>NULL</td></tr>\n</table>\n```sql\nSELECT *\nFROM   TAB1\nWHERE  (COL1, COL2) NOT IN (SELECT COL1, COL2 FROM TAB2);\n```",
+    "title": "아래 쿼리의 결과 행 수는?",
     "options": [
       "0",
       "10",
@@ -587,7 +587,7 @@ export const ROUND_56: QuizQuestion[] = [
     "round": 56,
     "subject": "2과목",
     "number": 33,
-    "title": "아래 UPDATE 쿼리와 동일한 결과를 산출하는 것은?\n```sql\nUPDATE TAB1 T1\nSET    COL1 = (SELECT MAX(NULL)\n               FROM   TAB2 T2\n               WHERE  T1.COL1 = T2.COL2\n               AND    T1.COL1 >= 200);\n```",
+    "title": "아래 UPDATE 쿼리와 동일한 결과를 산출하는 것은?",
     "options": [
       "`UPDATE TAB1 SET COL1 = (SELECT MAX(COL2) FROM TAB2 T2 WHERE T1.COL1 = T2.COL2 AND T1.COL1 >= 200);`",
       "`UPDATE TAB1 SET COL1 = (SELECT COALESCE(MAX(NULL), 0) FROM TAB2 T2 WHERE T1.COL1 = T2.COL2);`",
@@ -623,7 +623,7 @@ export const ROUND_56: QuizQuestion[] = [
     "round": 56,
     "subject": "2과목",
     "number": 35,
-    "title": "테이블 TAB1, TAB2 에 각각 10건씩 데이터가 있을 때 다음 쿼리의 결과는?\n```sql\nSELECT COUNT(*) FROM TAB1, TAB2;\n```",
+    "title": "테이블 TAB1, TAB2 에 각각 10건씩 데이터가 있을 때 다음 쿼리의 결과는?",
     "options": [
       "10",
       "20",
@@ -641,7 +641,7 @@ export const ROUND_56: QuizQuestion[] = [
     "round": 56,
     "subject": "2과목",
     "number": 36,
-    "title": "아래 NATURAL JOIN 의 결과 행 수는?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th colspan=\"2\">TAB1</th><th colspan=\"2\">TAB2</th></tr>\n  <tr><th>ID</th><th>CUSTOMER</th><th>ID</th><th>PHONE</th></tr>\n  <tr><td>1</td><td>A</td><td>10</td><td>111-1111</td></tr>\n  <tr><td>2</td><td>B</td><td>20</td><td>222-2222</td></tr>\n  <tr><td>3</td><td>C</td><td>30</td><td>333-3333</td></tr>\n  <tr><td></td><td></td><td>40</td><td>444-4444</td></tr>\n  <tr><td></td><td></td><td>50</td><td>555-5555</td></tr>\n</table>\n```sql\nSELECT * FROM TAB1 NATURAL JOIN TAB2;\n```",
+    "title": "아래 NATURAL JOIN 의 결과 행 수는?",
     "options": [
       "0",
       "3",
@@ -659,7 +659,7 @@ export const ROUND_56: QuizQuestion[] = [
     "round": 56,
     "subject": "2과목",
     "number": 37,
-    "title": "아래 결과를 산출하는 쿼리는?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>COL1</th><th>COL2</th></tr>\n  <tr><td>A</td><td>10</td></tr>\n  <tr><td>A</td><td>20</td></tr>\n  <tr><td>B</td><td>20</td></tr>\n  <tr><td>C</td><td>30</td></tr>\n</table>\n```\nCOUNT()\n2\n```",
+    "title": "아래 결과를 산출하는 쿼리는?",
     "options": [
       "`SELECT COUNT(DISTINCT COL1) FROM TAB1 WHERE COL2 <= 20;`",
       "`SELECT COUNT(COL1) FROM TAB1 WHERE COL2 <= 20;`",
@@ -713,7 +713,7 @@ export const ROUND_56: QuizQuestion[] = [
     "round": 56,
     "subject": "2과목",
     "number": 40,
-    "title": "아래 테이블에서 조건을 만족하는 행은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>NAME</th><th>AGE</th><th>DEPT</th></tr>\n  <tr><td>PARK</td><td>30</td><td>A</td></tr>\n  <tr><td>KIM</td><td>25</td><td>B</td></tr>\n  <tr><td>LEE</td><td>40</td><td>A</td></tr>\n</table>\n```sql\nSELECT NAME\nFROM   MEMBER\nWHERE  AGE < 35 AND DEPT IN ('A', 'B');\n```",
+    "title": "아래 테이블에서 조건을 만족하는 행은?",
     "options": [
       "PARK",
       "PARK, KIM",
@@ -731,7 +731,7 @@ export const ROUND_56: QuizQuestion[] = [
     "round": 56,
     "subject": "2과목",
     "number": 41,
-    "title": "아래 사원 데이터에 대한 AVG, MIN 결과로 옳은 것은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>SAL</th></tr>\n  <tr><td>1000</td></tr>\n  <tr><td>1000</td></tr>\n  <tr><td>2500</td></tr>\n  <tr><td>(NULL)</td></tr>\n</table>\n```sql\nSELECT AVG(NVL(SAL,0)), MIN(SAL) FROM T;\n```",
+    "title": "아래 사원 데이터에 대한 AVG, MIN 결과로 옳은 것은?",
     "options": [
       "1500, 1000",
       "1125, 1000",
@@ -749,7 +749,7 @@ export const ROUND_56: QuizQuestion[] = [
     "round": 56,
     "subject": "2과목",
     "number": 42,
-    "title": "아래 쿼리에 대한 설명으로 옳은 것은?\n```sql\nSELECT E.*\nFROM   부서 D, 사원 E\nWHERE  D.부서ID = E.부서ID\nAND    E.등급 >= 2;\n```",
+    "title": "아래 쿼리에 대한 설명으로 옳은 것은?",
     "options": [
       "2등급 이상의 사원을 모두 출력한다.",
       "부서에 소속되지 않은 사원은 제외한다.",
@@ -803,7 +803,7 @@ export const ROUND_56: QuizQuestion[] = [
     "round": 56,
     "subject": "2과목",
     "number": 45,
-    "title": "아래 SQL 의 실행 결과로 옳은 것은?\n```sql\nSELECT SUM(SAL)\nFROM   EMP\nWHERE  EMPNO = 7566;   -- 사번 7566 의 급여는 2975\n```",
+    "title": "아래 SQL 의 실행 결과로 옳은 것은?",
     "options": [
       "800",
       "1600",
@@ -821,7 +821,7 @@ export const ROUND_56: QuizQuestion[] = [
     "round": 56,
     "subject": "2과목",
     "number": 46,
-    "title": "아래 SQL 의 실행 결과 정렬로 옳은 것은?\n```sql\nSELECT NAME\nFROM   EMP\nORDER BY SAL NULLS LAST;\n```",
+    "title": "아래 SQL 의 실행 결과 정렬로 옳은 것은?",
     "options": [
       "NULL 이 먼저 출력된다.",
       "SAL 오름차순 정렬 후 NULL 이 마지막에 출력된다.",
@@ -839,7 +839,7 @@ export const ROUND_56: QuizQuestion[] = [
     "round": 56,
     "subject": "2과목",
     "number": 47,
-    "title": "매출액이 높은 순서대로 직원을 조회하는 쿼리 중 수정이 필요한 부분은?\n```sql\nSELECT 직원, 매출\nFROM   SALES\nORDER BY 매출;\n```",
+    "title": "매출액이 높은 순서대로 직원을 조회하는 쿼리 중 수정이 필요한 부분은?",
     "options": [
       "SELECT 절",
       "FROM 절",
@@ -893,7 +893,7 @@ export const ROUND_56: QuizQuestion[] = [
     "round": 56,
     "subject": "2과목",
     "number": 50,
-    "title": "아래 SQL 수행 후 COUNT(*) 결과로 옳은 것은?\n```sql\nCREATE TABLE TAB1 (COL1 NUMBER, COL2 NUMBER);\nINSERT INTO TAB1 VALUES (1, 2);\nINSERT INTO TAB1 VALUES (2, 1);\nINSERT INTO TAB1 VALUES (3, 4);\nSAVEPOINT SP1;\nUPDATE TAB1 SET COL1 = 4 WHERE COL2 <= 2;\nSAVEPOINT SP2;\nDELETE FROM TAB1 WHERE COL2 = 2;\nROLLBACK TO SAVEPOINT SP2;\nINSERT INTO TAB1 VALUES (4, 1);\nCOMMIT;\nSELECT COUNT(*) FROM TAB1 WHERE COL1 = 4;\n```",
+    "title": "아래 SQL 수행 후 COUNT(*) 결과로 옳은 것은?",
     "options": [
       "1",
       "2",

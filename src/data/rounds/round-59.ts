@@ -37,7 +37,7 @@ export const ROUND_59: QuizQuestion[] = [
       "예금분류는 설계 속성이다."
     ],
     "correctIndex": 2,
-    "explanation": "우리은행은 예금분류(일반예금, 특별예금 등)의 원금, 예치기간, 이자율을 관리할 필요가 있다. 또한 원금에 이자율을 적용하여 산출되는 이자도 속성으로 관리하고자 한다. 예를 들어 원금이 1,000원이고 예치기간이 5개월이며 이자율이 5.0%이다. 일반예금이나 특별예금 등에 대해서는 코드를 부여(예: 01-일반예금, 02-특별예금)하여 관리한다. 원금과 이자율로부터 계산되어 도출되는 값은 이자뿐이다. 이자율은 기본 속성이므로 \"이자와 이자율 모두가 파생 속성\"이라는 설명은 옳지 않다.",
+    "explanation": "원금과 이자율로부터 계산되어 도출되는 값은 이자뿐이다. 이자율은 기본 속성이므로 \"이자와 이자율 모두가 파생 속성\"이라는 설명은 옳지 않다.",
     "_source": "authored"
   },
   {
@@ -55,7 +55,7 @@ export const ROUND_59: QuizQuestion[] = [
       "관계"
     ],
     "correctIndex": 1,
-    "explanation": "속성이 가질 수 있는 값(데이터 타입 등)의 범위를 정의한 것",
+    "explanation": "",
     "_source": "authored"
   },
   {
@@ -101,7 +101,7 @@ export const ROUND_59: QuizQuestion[] = [
     "round": 59,
     "subject": "1과목",
     "number": 6,
-    "title": "아래 네 개의 테이블이 1:M 관계로 연결된 모델에서 식별자·비식별자 관계에 대한 설명 중 옳지 않은 것은?\n```\n[ A ] ||-----∈ [ B ] ||-----∈ [ C ] ||-----∈ [ D ]\n```",
+    "title": "아래 네 개의 테이블이 1:M 관계로 연결된 모델에서 식별자·비식별자 관계에 대한 설명 중 옳지 않은 것은?",
     "options": [
       "1:M으로 연결되어 있다.",
       "비식별로 바꾸면 조회가 빠르다.",
@@ -173,7 +173,7 @@ export const ROUND_59: QuizQuestion[] = [
     "round": 59,
     "subject": "1과목",
     "number": 10,
-    "title": "아래 ERD 해석 중 옳지 않은 것은?\n```\n[ 학생 ] ∋-----|∘ [ 수강 ] ∘|-----∈ [ 과목 ]\n     (1)       (0..N)      (1)\n```",
+    "title": "아래 ERD 해석 중 옳지 않은 것은?",
     "options": [
       "학생과 수강은 1:M 관계이다.",
       "한 학생은 수강하지 않을 수도 있다.",
@@ -199,7 +199,7 @@ export const ROUND_59: QuizQuestion[] = [
       "가, 나, 라"
     ],
     "correctIndex": 2,
-    "explanation": "가. DCL은 데이터 정의 언어이다. 나. GRANT는 자신이 가진 권한을 다른 사용자에게 부여할 수 있다. 다. REVOKE는 실행 후 물리 디스크에 저장한다. 라. ROLE 권한은 데이터에 대한 접근 권한의 집합이다. 가는 DCL이 데이터 제어 언어이므로 오답이며, 다는 REVOKE가 권한 회수 명령으로서 물리 디스크 저장과는 무관하므로 오답이다.",
+    "explanation": "가는 DCL이 데이터 제어 언어이므로 오답이며, 다는 REVOKE가 권한 회수 명령으로서 물리 디스크 저장과는 무관하므로 오답이다.",
     "_source": "authored"
   },
   {
@@ -209,7 +209,7 @@ export const ROUND_59: QuizQuestion[] = [
     "round": 59,
     "subject": "2과목",
     "number": 12,
-    "title": "아래 데이터와 같이 바로 직전 행의 값을 가져오되, 정렬을 내림차순으로 지정해 역방향 탐색 효과를 내려면 가장 적절한 함수와 정렬 조합은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>ID</th><th>VAL</th></tr>\n  <tr><td>1</td><td>100</td></tr>\n  <tr><td>2</td><td>200</td></tr>\n  <tr><td>3</td><td>300</td></tr>\n</table>",
+    "title": "아래 데이터와 같이 바로 직전 행의 값을 가져오되, 정렬을 내림차순으로 지정해 역방향 탐색 효과를 내려면 가장 적절한 함수와 정렬 조합은?",
     "options": [
       "LAG, ORDER BY 조건은 ASC",
       "LAG, ORDER BY 조건은 DESC",
@@ -227,7 +227,7 @@ export const ROUND_59: QuizQuestion[] = [
     "round": 59,
     "subject": "2과목",
     "number": 13,
-    "title": "아래 결과를 조회할 수 있는 조건절로 옳은 것은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>연구소명</th></tr>\n  <tr><td>A연구소</td></tr>\n  <tr><td>화학연구소</td></tr>\n  <tr><td>연구소</td></tr>\n</table>",
+    "title": "아래 결과를 조회할 수 있는 조건절로 옳은 것은?",
     "options": [
       "`WHERE 명 = '_연구소'`",
       "`WHERE 명 = '%연구소'`",
@@ -245,7 +245,7 @@ export const ROUND_59: QuizQuestion[] = [
     "round": 59,
     "subject": "2과목",
     "number": 14,
-    "title": "NVL2 함수에 대한 다음 설명 중 옳은 것은?\n```sql\nNVL2(expr, a, b)\n-- expr이 NULL이면 b를 반환, NOT NULL이면 a를 반환\n```",
+    "title": "NVL2 함수에 대한 다음 설명 중 옳은 것은?",
     "options": [
       "`NVL2(SAL, 0, SAL)`은 SAL이 NULL일 때 0을 반환한다.",
       "`NVL2(NULL, a, b)`는 b를 반환한다.",
@@ -263,7 +263,7 @@ export const ROUND_59: QuizQuestion[] = [
     "round": 59,
     "subject": "2과목",
     "number": 15,
-    "title": "아래 EMP 테이블에서 직원 번호와 해당 직원의 상사 번호를 함께 조회하려 한다. 빈칸에 들어갈 SQL로 가장 적절한 것은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>EMPNO</th><th>ENAME</th><th>MGR</th></tr>\n  <tr><td>7566</td><td>JONES</td><td>7839</td></tr>\n  <tr><td>7839</td><td>KING</td><td>(NULL)</td></tr>\n  <tr><td>7902</td><td>FORD</td><td>7566</td></tr>\n</table>",
+    "title": "아래 EMP 테이블에서 직원 번호와 해당 직원의 상사 번호를 함께 조회하려 한다. 빈칸에 들어갈 SQL로 가장 적절한 것은?",
     "options": [
       "`SELECT E.EMPNO, M.EMPNO AS MGR_NO FROM EMP E, EMP M WHERE E.MGR = M.EMPNO;`",
       "`SELECT E.EMPNO, M.EMPNO AS MGR_NO FROM EMP E JOIN EMP M ON E.EMPNO = M.EMPNO;`",
@@ -281,7 +281,7 @@ export const ROUND_59: QuizQuestion[] = [
     "round": 59,
     "subject": "2과목",
     "number": 16,
-    "title": "다음 Oracle 전용 SQL을 ANSI 표준 SQL로 올바르게 전환한 것은?\n```sql\n-- Oracle 표기\nSELECT * FROM A, B WHERE A.ID = B.ID(+);\n```",
+    "title": "다음 Oracle 전용 SQL을 ANSI 표준 SQL로 올바르게 전환한 것은?",
     "options": [
       "LEFT OUTER JOIN",
       "RIGHT OUTER JOIN",
@@ -299,7 +299,7 @@ export const ROUND_59: QuizQuestion[] = [
     "round": 59,
     "subject": "2과목",
     "number": 17,
-    "title": "'수강 내역이 있는 학생'만 조회하려 한다. 아래 빈칸에 들어갈 SQL 유형으로 가장 적절한 것은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th colspan=\"2\">STUDENT</th><th colspan=\"2\">LECTURE</th></tr>\n  <tr><th>STU_ID</th><th>NAME</th><th>STU_ID</th><th>COURSE</th></tr>\n  <tr><td>1</td><td>A</td><td>1</td><td>DB</td></tr>\n  <tr><td>2</td><td>B</td><td>3</td><td>OS</td></tr>\n  <tr><td>3</td><td>C</td><td></td><td></td></tr>\n</table>",
+    "title": "'수강 내역이 있는 학생'만 조회하려 한다. 아래 빈칸에 들어갈 SQL 유형으로 가장 적절한 것은?",
     "options": [
       "IN ~ UNION",
       "NOT EXISTS ~ EXCEPT",
@@ -317,7 +317,7 @@ export const ROUND_59: QuizQuestion[] = [
     "round": 59,
     "subject": "2과목",
     "number": 18,
-    "title": "아래 SQL 중 가장 큰 EMPNO 한 건을 반환하는 TOP-N 질의로 가장 대표적으로 사용되는 방식은?\n```sql\n-- EMP 테이블: 다수 직원 데이터\nSELECT EMPNO\nFROM   (SELECT EMPNO FROM EMP ORDER BY EMPNO DESC)\nWHERE  (  ?  ) = 1;\n```",
+    "title": "아래 SQL 중 가장 큰 EMPNO 한 건을 반환하는 TOP-N 질의로 가장 대표적으로 사용되는 방식은?",
     "options": [
       "ROWNUM",
       "FETCH FIRST",
@@ -335,7 +335,7 @@ export const ROUND_59: QuizQuestion[] = [
     "round": 59,
     "subject": "2과목",
     "number": 19,
-    "title": "아래 트랜잭션 시나리오의 최종 행 개수는?\n```sql\n-- T 테이블 초기 상태: 0건\nINSERT INTO T ... 15건;        -- 15건, 미커밋\nCOMMIT;                         -- 15건 확정\nINSERT INTO T ... 15건;        -- 30건, 미커밋\nCREATE INDEX IDX_T ON T(COL);   -- DDL → 묵시적 커밋 (30건 확정)\nINSERT INTO T ... 20건;        -- 50건, 미커밋\nROLLBACK;                       -- 마지막 INSERT 취소\nSELECT COUNT(*) FROM T;\n```",
+    "title": "아래 트랜잭션 시나리오의 최종 행 개수는?",
     "options": [
       "0",
       "15",
@@ -353,7 +353,7 @@ export const ROUND_59: QuizQuestion[] = [
     "round": 59,
     "subject": "2과목",
     "number": 20,
-    "title": "아래 고객 테이블에 대한 설명 중 옳은 것은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>고객번호</th><th>고객명</th><th>집주소</th></tr>\n  <tr><td>1001</td><td>홍길동</td><td>서울</td></tr>\n  <tr><td>1002</td><td>이순신</td><td>(NULL)</td></tr>\n  <tr><td>1003</td><td>강감찬</td><td>부산</td></tr>\n  <tr><td>1004</td><td>유관순</td><td>(NULL)</td></tr>\n</table>",
+    "title": "아래 고객 테이블에 대한 설명 중 옳은 것은?",
     "options": [
       "`COUNT(집주소)` 는 NULL 값을 포함한 전체 고객 수를 반환한다.",
       "`COUNT(*)` 는 집주소가 있는 고객 수를 반환한다.",
@@ -389,7 +389,7 @@ export const ROUND_59: QuizQuestion[] = [
     "round": 59,
     "subject": "2과목",
     "number": 22,
-    "title": "전화번호 데이터에서 '010'으로 시작하는 번호만 필터링하려 한다. 정규표현식 패턴으로 올바른 것은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>PHONE</th></tr>\n  <tr><td>010-1234-5678</td></tr>\n  <tr><td>02-345-6789</td></tr>\n  <tr><td>010-9999-0000</td></tr>\n</table>",
+    "title": "전화번호 데이터에서 '010'으로 시작하는 번호만 필터링하려 한다. 정규표현식 패턴으로 올바른 것은?",
     "options": [
       "`[^010]`",
       "`'^010'`",
@@ -407,7 +407,7 @@ export const ROUND_59: QuizQuestion[] = [
     "round": 59,
     "subject": "2과목",
     "number": 23,
-    "title": "아래 두 REGEXP 함수의 결과가 'BCD, NULL'이 되도록 가장 적절한 조합은?\n```sql\nSELECT REGEXP_SUBSTR('BCD', ( ? )) AS 첫번째,\n       REGEXP_SUBSTR('BCD', ( ? )) AS 두번째\nFROM DUAL;\n```",
+    "title": "아래 두 REGEXP 함수의 결과가 'BCD, NULL'이 되도록 가장 적절한 조합은?",
     "options": [
       "`'B.D'`, `'B.D'`",
       "`'BCD'`, `'BCD'`",
@@ -461,7 +461,7 @@ export const ROUND_59: QuizQuestion[] = [
     "round": 59,
     "subject": "2과목",
     "number": 26,
-    "title": "다음 INSERT 문 중 입력 오류가 발생하는 것은?\n```sql\nCREATE TABLE TABLE1 (\n  A NUMBER,\n  B DATE,\n  C VARCHAR2(10)\n);\n```",
+    "title": "다음 INSERT 문 중 입력 오류가 발생하는 것은?",
     "options": [
       "`INSERT INTO TABLE1 VALUES (1, SYSDATE, '001');`",
       "`INSERT INTO TABLE1 VALUES (1, TO_DATE('2024-06-06', 'YYYY-MM-DD'), '001');`",
@@ -479,7 +479,7 @@ export const ROUND_59: QuizQuestion[] = [
     "round": 59,
     "subject": "2과목",
     "number": 27,
-    "title": "고객별 주문 금액의 누적 합계를 계산하려 한다. 아래 빈칸에 들어갈 윈도우 절로 가장 적절한 것은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>고객ID</th><th>주문일자</th><th>금액</th></tr>\n  <tr><td>C001</td><td>2025-01-05</td><td>10,000</td></tr>\n  <tr><td>C001</td><td>2025-01-08</td><td>20,000</td></tr>\n  <tr><td>C001</td><td>2025-01-12</td><td>5,000</td></tr>\n</table>\n```sql\nSELECT 고객ID, 주문일자, 금액,\n       SUM(금액) OVER (PARTITION BY 고객ID ORDER BY 주문일자\n                       (  ?  )) AS 누적금액\nFROM   주문;\n```",
+    "title": "고객별 주문 금액의 누적 합계를 계산하려 한다. 아래 빈칸에 들어갈 윈도우 절로 가장 적절한 것은?",
     "options": [
       "`ROWS BETWEEN 1 PRECEDING AND 1 FOLLOWING`",
       "`ROWS BETWEEN CURRENT ROW AND UNBOUNDED FOLLOWING`",
@@ -515,7 +515,7 @@ export const ROUND_59: QuizQuestion[] = [
     "round": 59,
     "subject": "2과목",
     "number": 29,
-    "title": "아래 구문의 빈칸에 들어갈 NULL 관련 함수 조합 중, 결과가 첫 행부터 30, 60, 60 순서로 출력되는 것은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>ID</th><th>V1</th><th>V2</th><th>V3</th></tr>\n  <tr><td>1</td><td>30</td><td>(NULL)</td><td>60</td></tr>\n  <tr><td>2</td><td>(NULL)</td><td>60</td><td>90</td></tr>\n  <tr><td>3</td><td>(NULL)</td><td>(NULL)</td><td>60</td></tr>\n</table>\n```sql\nSELECT COALESCE(V1, V2, V3) FROM T ORDER BY ID;\n```",
+    "title": "아래 구문의 빈칸에 들어갈 NULL 관련 함수 조합 중, 결과가 첫 행부터 30, 60, 60 순서로 출력되는 것은?",
     "options": [
       "30 60 30",
       "NULL 30 60",
@@ -533,7 +533,7 @@ export const ROUND_59: QuizQuestion[] = [
     "round": 59,
     "subject": "2과목",
     "number": 30,
-    "title": "아래 세 테이블에 대한 집합 연산의 결과로 가장 적절한 것은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>T1</th><th>T2</th><th>T3</th></tr>\n  <tr><td>A, B, C</td><td>B</td><td>C</td></tr>\n</table>\n```sql\nSELECT V FROM T1\nUNION\n(SELECT V FROM T2 INTERSECT SELECT V FROM T3);\n```",
+    "title": "아래 세 테이블에 대한 집합 연산의 결과로 가장 적절한 것은?",
     "options": [
       "A B C",
       "A B",
@@ -569,7 +569,7 @@ export const ROUND_59: QuizQuestion[] = [
     "round": 59,
     "subject": "2과목",
     "number": 32,
-    "title": "아래 SQL에 대한 설명 중 옳지 않은 것은?\n```sql\nSELECT *\nFROM   EMP E\nWHERE  SAL > (SELECT MAX(SAL) FROM EMP WHERE DEPTNO = E.DEPTNO);\n```",
+    "title": "아래 SQL에 대한 설명 중 옳지 않은 것은?",
     "options": [
       "부서가 1개이면 값이 하나이다.",
       "부서 수에 따라 오류가 발생할 수 있다.",
@@ -613,7 +613,7 @@ export const ROUND_59: QuizQuestion[] = [
       "나, 다"
     ],
     "correctIndex": 2,
-    "explanation": "(가) `ROUND(136.2, -1)` 은 140 이다. (나) `ROUND(-7.532, 2)` 는 -7.53 이다. (다) `ROUND(3.561, 0)` 은 3.5 이다. ROUND(136.2, -1)은 일의 자리에서 반올림되어 140이다. ROUND(-7.532, 2)는 소수 둘째 자리까지 반올림되어 -7.53이다. ROUND(3.561, 0)은 소수 첫째 자리에서 반올림되어 4이므로 (다)는 틀리다.",
+    "explanation": "ROUND(136.2, -1)은 일의 자리에서 반올림되어 140이다. ROUND(-7.532, 2)는 소수 둘째 자리까지 반올림되어 -7.53이다. ROUND(3.561, 0)은 소수 첫째 자리에서 반올림되어 4이므로 (다)는 틀리다.",
     "_source": "authored"
   },
   {
@@ -623,7 +623,7 @@ export const ROUND_59: QuizQuestion[] = [
     "round": 59,
     "subject": "2과목",
     "number": 35,
-    "title": "'202505' 문자열에서 월(MM) 부분만 추출하려 한다. 아래 방식 중 해당 목적과 가장 거리가 먼 것은?\n```sql\n-- 대상 문자열: '202505'\n-- 추출 목표: 05 (월)\n```",
+    "title": "'202505' 문자열에서 월(MM) 부분만 추출하려 한다. 아래 방식 중 해당 목적과 가장 거리가 먼 것은?",
     "options": [
       "`EXTRACT(YEAR FROM SYSDATE)`",
       "`EXTRACT(MONTH FROM TO_DATE('202505','YYYYMM'))`",
@@ -641,7 +641,7 @@ export const ROUND_59: QuizQuestion[] = [
     "round": 59,
     "subject": "2과목",
     "number": 36,
-    "title": "아래 집합 연산의 결과로 옳은 것은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>T1</th><th>T2</th><th>T3</th></tr>\n  <tr><td>A, B, C</td><td>B</td><td>C</td></tr>\n</table>\n```sql\nSELECT V FROM T1\nUNION ALL\nSELECT V FROM T2\nWHERE  V NOT IN (SELECT V FROM T3);\n```",
+    "title": "아래 집합 연산의 결과로 옳은 것은?",
     "options": [
       "A",
       "A B",
@@ -659,7 +659,7 @@ export const ROUND_59: QuizQuestion[] = [
     "round": 59,
     "subject": "2과목",
     "number": 37,
-    "title": "아래 영화 배우별 최대 출연료 건을 조회하는 SQL의 서브쿼리 유형은?\n```sql\nSELECT A.*\nFROM   ACTOR_PAY A\nWHERE  A.FEE = (SELECT MAX(FEE)\n                FROM   ACTOR_PAY\n                WHERE  ACTOR_ID = A.ACTOR_ID);\n```",
+    "title": "아래 영화 배우별 최대 출연료 건을 조회하는 SQL의 서브쿼리 유형은?",
     "options": [
       "단순 스칼라 서브쿼리",
       "인라인 뷰",
@@ -677,7 +677,7 @@ export const ROUND_59: QuizQuestion[] = [
     "round": 59,
     "subject": "2과목",
     "number": 38,
-    "title": "아래 SQL의 결과 건수로 옳은 것은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>A</th></tr>\n  <tr><td>1</td></tr>\n  <tr><td>2</td></tr>\n  <tr><td>3</td></tr>\n</table>\n```sql\nSELECT *\nFROM   A\nWHERE  EXISTS (SELECT NULL FROM A);\n```",
+    "title": "아래 SQL의 결과 건수로 옳은 것은?",
     "options": [
       "3건",
       "0건",
@@ -695,7 +695,7 @@ export const ROUND_59: QuizQuestion[] = [
     "round": 59,
     "subject": "2과목",
     "number": 39,
-    "title": "아래 계층형 질의에서 START WITH 11, PRIOR가 역방향으로 지정된 경우 트리 탐색 결과로 옳은 것은?\n```sql\n-- [CATEGORY 테이블]\n-- category_id  상위카테고리\n--     1          (NULL)\n--     2          1\n--    11          2\n--    22          11\nSELECT *\nFROM   CATEGORY\nSTART WITH category_id = 11\nCONNECT BY PRIOR category_id = 상위카테고리;\n```",
+    "title": "아래 계층형 질의에서 START WITH 11, PRIOR가 역방향으로 지정된 경우 트리 탐색 결과로 옳은 것은?",
     "options": [
       "2부터 시작",
       "역방향 2부터 시작",
@@ -739,7 +739,7 @@ export const ROUND_59: QuizQuestion[] = [
       "가, 나, 다"
     ],
     "correctIndex": 3,
-    "explanation": "가. DDL은 수행 전후 묵시적 COMMIT이 발생한다. 나. 트랜잭션의 논리 단위는 여러 SQL 문장으로 구성될 수 있다. 다. SAVEPOINT를 지정하면 해당 지점까지 부분 롤백이 가능하다. 세 진술 모두 TCL과 트랜잭션 기본 개념에 부합한다.",
+    "explanation": "세 진술 모두 TCL과 트랜잭션 기본 개념에 부합한다.",
     "_source": "authored"
   },
   {
@@ -749,7 +749,7 @@ export const ROUND_59: QuizQuestion[] = [
     "round": 59,
     "subject": "2과목",
     "number": 42,
-    "title": "배송 내역 테이블에서 배송일자가 2회 이상인 고객을 조회하는 다음 SQL의 결과로 옳은 것은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>고객ID</th><th>배송일자</th></tr>\n  <tr><td>1</td><td>2025-01-01</td></tr>\n  <tr><td>2</td><td>2025-01-03</td></tr>\n  <tr><td>2</td><td>2025-01-05</td></tr>\n  <tr><td>3</td><td>2025-02-01</td></tr>\n  <tr><td>3</td><td>2025-02-10</td></tr>\n  <tr><td>3</td><td>2025-02-20</td></tr>\n  <tr><td>4</td><td>2025-03-01</td></tr>\n</table>\n```sql\nSELECT 고객ID\nFROM   배송\nGROUP BY 고객ID\nHAVING COUNT(배송일자) >= 2;\n```",
+    "title": "배송 내역 테이블에서 배송일자가 2회 이상인 고객을 조회하는 다음 SQL의 결과로 옳은 것은?",
     "options": [
       "1, 4",
       "2, 3",
@@ -785,7 +785,7 @@ export const ROUND_59: QuizQuestion[] = [
     "round": 59,
     "subject": "2과목",
     "number": 44,
-    "title": "다음 DDL 문 수행 결과에 대한 설명으로 옳은 것은?\n```sql\nCREATE TABLE PARENT (ID NUMBER PRIMARY KEY);\nCREATE TABLE CHILD  (\n  ID     NUMBER PRIMARY KEY,\n  PAR_ID NUMBER REFERENCES PARENT(ID) ON DELETE CASCADE\n);\nINSERT INTO PARENT VALUES (1);\nINSERT INTO CHILD  VALUES (10, 1);\nDELETE FROM PARENT WHERE ID = 1;\n```",
+    "title": "다음 DDL 문 수행 결과에 대한 설명으로 옳은 것은?",
     "options": [
       "PARENT만 삭제되고 CHILD는 그대로 남는다.",
       "CHILD만 삭제되고 PARENT는 그대로 남는다.",
@@ -803,7 +803,7 @@ export const ROUND_59: QuizQuestion[] = [
     "round": 59,
     "subject": "2과목",
     "number": 45,
-    "title": "아래 서브쿼리의 결과로 옳은 것은?\n```sql\nSELECT *\nFROM   EMP\nWHERE  DEPTNO = (SELECT DEPTNO FROM DEPT WHERE DNAME = '없는부서');\n```",
+    "title": "아래 서브쿼리의 결과로 옳은 것은?",
     "options": [
       "공집합",
       "전체 사원",
@@ -821,7 +821,7 @@ export const ROUND_59: QuizQuestion[] = [
     "round": 59,
     "subject": "2과목",
     "number": 46,
-    "title": "아래 GROUP BY 절 결과의 총 행 개수로 옳은 것은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>A</th><th>B</th></tr>\n  <tr><td>X</td><td>1</td></tr>\n  <tr><td>X</td><td>2</td></tr>\n  <tr><td>Y</td><td>1</td></tr>\n</table>\n```sql\nSELECT A, B, COUNT(*)\nFROM   T\nGROUP BY ROLLUP(A, B);\n```",
+    "title": "아래 GROUP BY 절 결과의 총 행 개수로 옳은 것은?",
     "options": [
       "3",
       "4",
@@ -839,7 +839,7 @@ export const ROUND_59: QuizQuestion[] = [
     "round": 59,
     "subject": "2과목",
     "number": 47,
-    "title": "아래 SQL에서 SUM, MAX, FIRST_VALUE 컬럼이 반환하는 값으로 가장 적절한 것은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>ID</th><th>VAL</th></tr>\n  <tr><td>1</td><td>100</td></tr>\n  <tr><td>2</td><td>100</td></tr>\n  <tr><td>3</td><td>100</td></tr>\n  <tr><td>4</td><td>100</td></tr>\n  <tr><td>5</td><td>100</td></tr>\n  <tr><td>6</td><td>100</td></tr>\n</table>\n```sql\nSELECT VAL,\n       MAX(VAL)         OVER ()                         AS M,\n       SUM(VAL)         OVER (ORDER BY ID)              AS S,\n       FIRST_VALUE(VAL) OVER (ORDER BY ID ROWS BETWEEN\n                              200 PRECEDING AND 200 FOLLOWING) AS F\nFROM   T;\n```",
+    "title": "아래 SQL에서 SUM, MAX, FIRST_VALUE 컬럼이 반환하는 값으로 가장 적절한 것은?",
     "options": [
       "100 600 100 / 100 600 100 / ...",
       "100 / null / 100",
@@ -857,7 +857,7 @@ export const ROUND_59: QuizQuestion[] = [
     "round": 59,
     "subject": "2과목",
     "number": 48,
-    "title": "아래 질의 결과로 옳은 것은?\n```sql\nSELECT CASE WHEN 1 = 1 THEN 'A'\n            WHEN 1 = 1 THEN 'B'\n            ELSE 'C'\n       END\nFROM DUAL;\n```",
+    "title": "아래 질의 결과로 옳은 것은?",
     "options": [
       "A",
       "B",
@@ -875,7 +875,7 @@ export const ROUND_59: QuizQuestion[] = [
     "round": 59,
     "subject": "2과목",
     "number": 49,
-    "title": "계층형 질의에서 사이클(순환)을 허용하면서 순환된 행을 표시하려 한다. 빈칸에 들어갈 옵션은?\n```sql\nSELECT ENAME, LEVEL, CONNECT_BY_ISCYCLE\nFROM   EMP\nSTART WITH MGR IS NULL\nCONNECT BY ( ? ) PRIOR EMPNO = MGR;\n```",
+    "title": "계층형 질의에서 사이클(순환)을 허용하면서 순환된 행을 표시하려 한다. 빈칸에 들어갈 옵션은?",
     "options": [
       "NO CYCLE",
       "LEAF",
@@ -893,7 +893,7 @@ export const ROUND_59: QuizQuestion[] = [
     "round": 59,
     "subject": "2과목",
     "number": 50,
-    "title": "아래 SQL의 결과로 옳은 것은?\n```sql\nSELECT *\nFROM   EMP\nWHERE  1 = 0;\n```",
+    "title": "아래 SQL의 결과로 옳은 것은?",
     "options": [
       "EMP 전체 행",
       "오류 발생",

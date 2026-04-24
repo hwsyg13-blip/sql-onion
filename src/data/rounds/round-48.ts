@@ -37,7 +37,7 @@ export const ROUND_48: QuizQuestion[] = [
       "논리 스키마"
     ],
     "correctIndex": 1,
-    "explanation": "모든 사용자 관점을 통합한 조직 전체 관점의 통합 표현이며, DB 에 저장되는 데이터와 그들 간의 관계를 표현한다.",
+    "explanation": "",
     "_source": "authored"
   },
   {
@@ -101,7 +101,7 @@ export const ROUND_48: QuizQuestion[] = [
     "round": 48,
     "subject": "1과목",
     "number": 6,
-    "title": "아래 ERD 에 표시된 식별자의 분류가 올바르게 짝지어진 것은?\n```\n- 부서 : 내부식별자·단일식별자·원조식별자\n- 사원 : 주식별자·내부식별자·단일식별자\n- 주문 : 주식별자·단일식별자·내부식별자·인조식별자\n- 교육이력 : 주식별자·본질식별자\n```",
+    "title": "아래 ERD 에 표시된 식별자의 분류가 올바르게 짝지어진 것은? (IE 표기법)",
     "options": [
       "주식별자 - 본질식별자 - 보조식별자 - 복합식별자",
       "본질식별자 - 주식별자 - 보조식별자 - 복합식별자",
@@ -109,7 +109,7 @@ export const ROUND_48: QuizQuestion[] = [
       "주식별자 - 보조식별자 - 복합식별자 - 본질식별자"
     ],
     "correctIndex": 2,
-    "explanation": "",
+    "explanation": "부서-사원 관계에서 사원에 상속된 부서번호는 외부식별자(FK)이며, 주민등록번호는 보조식별자(AK)이다. 사원-교육이력의 수강일자는 업무에서 자연스럽게 발생한 본질식별자, 구매신청의 주문번호는 사원번호와 주문일자를 결합한 복합식별자(인조식별자)이다.",
     "_source": "authored"
   },
   {
@@ -145,7 +145,7 @@ export const ROUND_48: QuizQuestion[] = [
       "존재성"
     ],
     "correctIndex": 1,
-    "explanation": "주식별자를 구성하는 속성이 최소한으로 구성되어야 한다.",
+    "explanation": "",
     "_source": "authored"
   },
   {
@@ -173,7 +173,7 @@ export const ROUND_48: QuizQuestion[] = [
     "round": 48,
     "subject": "1과목",
     "number": 10,
-    "title": "아래 ERD 에 대한 설명 중 옳지 않은 것은?\n```\n[ 계정 ] ∋-----|∘ [ 계정그룹 ]\n```",
+    "title": "아래 ERD 에 대한 설명 중 옳지 않은 것은?",
     "options": [
       "계정그룹은 여러 계정을 가질 수 있다.",
       "계정은 반드시 계정그룹 하나에 속해야 한다.",
@@ -191,7 +191,7 @@ export const ROUND_48: QuizQuestion[] = [
     "round": 48,
     "subject": "2과목",
     "number": 11,
-    "title": "아래 WHERE 조건의 의미로 옳은 것은?\n```sql\nSELECT 선수이름 FROM 선수 WHERE 키 >= 185;\n```",
+    "title": "아래 WHERE 조건의 의미로 옳은 것은?",
     "options": [
       "키가 185 미만인 선수",
       "키가 185 초과인 선수",
@@ -227,7 +227,7 @@ export const ROUND_48: QuizQuestion[] = [
     "round": 48,
     "subject": "2과목",
     "number": 13,
-    "title": "출연료가 8,888 이상인 영화의 영화명·배우명·출연료를 조회하는 SQL 로 적절한 것은?\n```\n배우(배우번호, 배우명, 성별)\n영화(영화번호, 영화명, 제작년도)\n출연(배우번호, 영화번호, 출연료)\n```",
+    "title": "출연료가 8,888 이상인 영화의 영화명·배우명·출연료를 조회하는 SQL 로 적절한 것은?",
     "options": [
       "SELECT 출연.영화명, 영화.배우명, ... (컬럼 소유 불일치)",
       "출연료 > 8888 (조건 기준 불일치)",
@@ -245,12 +245,12 @@ export const ROUND_48: QuizQuestion[] = [
     "round": 48,
     "subject": "2과목",
     "number": 14,
-    "title": "아래 SQL 의 결과로 가장 적절한 것은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>사원ID</th><th>부서ID</th><th>사원명</th><th>연봉</th></tr>\n  <tr><td>001</td><td>100</td><td>홍길동</td><td>2500</td></tr>\n  <tr><td>002</td><td>100</td><td>강감찬</td><td>3000</td></tr>\n  <tr><td>003</td><td>200</td><td>김유신</td><td>4500</td></tr>\n  <tr><td>004</td><td>200</td><td>김선달</td><td>3000</td></tr>\n  <tr><td>005</td><td>200</td><td>유학생</td><td>2500</td></tr>\n  <tr><td>006</td><td>300</td><td>변사또</td><td>4500</td></tr>\n  <tr><td>007</td><td>300</td><td>박문수</td><td>3000</td></tr>\n</table>\n```sql\nSELECT Y.*\nFROM (SELECT 사원ID, MAX(연봉) OVER(PARTITION BY 부서ID) AS 최고연봉 FROM 사원) X,\n     사원 Y\nWHERE X.사원ID = Y.사원ID AND X.최고연봉 = Y.연봉;\n```",
+    "title": "아래 SQL 의 결과로 가장 적절한 것은?",
     "options": [
-      "3건 반환",
-      "3건 반환",
-      "2건 반환",
-      "1건 반환"
+      "3건 반환 <table border=\"1\" cellspacing=\"0\" cellpadding=\"6\"> <tr><th>사원ID</th><th>부서ID</th><th>사원명</th><th>연봉</th></tr> <tr><td>002</td><td>100</td><td>강감찬</td><td>3000</td></tr> <tr><td>003</td><td>200</td><td>김유신</td><td>4500</td></tr> <tr><td>006</td><td>300</td><td>변사또</td><td>4500</td></tr> </table>",
+      "3건 반환 <table border=\"1\" cellspacing=\"0\" cellpadding=\"6\"> <tr><th>사원ID</th><th>부서ID</th><th>사원명</th><th>연봉</th></tr> <tr><td>001</td><td>100</td><td>홍길동</td><td>2500</td></tr> <tr><td>005</td><td>200</td><td>유학생</td><td>2500</td></tr> <tr><td>007</td><td>300</td><td>박문수</td><td>3000</td></tr> </table>",
+      "2건 반환 <table border=\"1\" cellspacing=\"0\" cellpadding=\"6\"> <tr><th>사원ID</th><th>부서ID</th><th>사원명</th><th>연봉</th></tr> <tr><td>003</td><td>200</td><td>김유신</td><td>4500</td></tr> <tr><td>006</td><td>300</td><td>변사또</td><td>4500</td></tr> </table>",
+      "1건 반환 <table border=\"1\" cellspacing=\"0\" cellpadding=\"6\"> <tr><th>사원ID</th><th>부서ID</th><th>사원명</th><th>연봉</th></tr> <tr><td>003</td><td>200</td><td>김유신</td><td>4500</td></tr> </table>"
     ],
     "correctIndex": 0,
     "explanation": "각 부서별 최고 연봉 사원이 부서 100=강감찬(3000), 200=김유신(4500), 300=변사또(4500)로 산출된다.",
@@ -263,7 +263,7 @@ export const ROUND_48: QuizQuestion[] = [
     "round": 48,
     "subject": "2과목",
     "number": 15,
-    "title": "아래 WINDOW FUNCTION 에 대한 설명으로 옳은 것은?\n```sql\nSELECT 상품분류코드, AVG(상품가격) AS 상품가격,\n       COUNT(*) OVER(ORDER BY AVG(상품가격)\n                     RANGE BETWEEN 10000 PRECEDING AND 10000 FOLLOWING) AS 유사개수\nFROM   상품\nGROUP BY 상품분류코드;\n```",
+    "title": "아래 WINDOW FUNCTION 에 대한 설명으로 옳은 것은?",
     "options": [
       "GROUP BY 와 함께 사용했으므로 오류가 발생한다.",
       "ORDER BY 에 집계 함수를 사용해 오류가 발생한다.",
@@ -281,7 +281,7 @@ export const ROUND_48: QuizQuestion[] = [
     "round": 48,
     "subject": "2과목",
     "number": 16,
-    "title": "아래 SQL 의 결과로 가장 적절한 것은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>ID</th><th>AMT</th></tr>\n  <tr><td>A</td><td>50</td></tr>\n  <tr><td>A</td><td>200</td></tr>\n  <tr><td>B</td><td>300</td></tr>\n  <tr><td>C</td><td>100</td></tr>\n</table>\n```sql\nSELECT ID, AMT\nFROM   TBL\nORDER BY (CASE WHEN ID = 'A' THEN 1 ELSE 2 END), AMT DESC;\n```",
+    "title": "아래 SQL 의 결과로 가장 적절한 것은?",
     "options": [
       "B 300 / A 200 / C 100 / A 50",
       "A 200 / A 50 / B 300 / C 100",
@@ -353,7 +353,7 @@ export const ROUND_48: QuizQuestion[] = [
     "round": 48,
     "subject": "2과목",
     "number": 20,
-    "title": "아래 SQL 의 결과 월 이름(영문) 은?\n```sql\nSELECT TO_CHAR(TO_DATE('2023-06-10','YYYY-MM-DD'), 'MONTH') FROM DUAL;\n```",
+    "title": "아래 SQL 의 결과 월 이름(영문) 은?",
     "options": [
       "MARCH",
       "APRIL",
@@ -389,7 +389,7 @@ export const ROUND_48: QuizQuestion[] = [
     "round": 48,
     "subject": "2과목",
     "number": 22,
-    "title": "아래 사원 데이터에 대한 DENSE_RANK·RANK·FIRST_VALUE 결과로 옳은 것은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>SAL</th></tr>\n  <tr><td>2000</td></tr>\n  <tr><td>1500</td></tr>\n  <tr><td>1500</td></tr>\n  <tr><td>1500</td></tr>\n</table>",
+    "title": "아래 사원 데이터에 대한 DENSE_RANK·RANK·FIRST_VALUE 결과로 옳은 것은?",
     "options": [
       "DENSE_RANK: 1, 2, 2, 2",
       "RANK: 1, 2, 2, 2",
@@ -425,7 +425,7 @@ export const ROUND_48: QuizQuestion[] = [
     "round": 48,
     "subject": "2과목",
     "number": 24,
-    "title": "아래 조건을 만족하는 행에 대한 SUM 결과는? (A >= B 인 행이 10건씩 4개)\n```sql\nSELECT SUM(A) FROM T WHERE A >= B;\n-- 조건 만족 행: 10, 10, 10, 10 ... 총 10건이 10씩\n```",
+    "title": "아래 조건을 만족하는 행에 대한 SUM 결과는? (A >= B 인 행이 10건씩 4개)",
     "options": [
       "10",
       "40",
@@ -497,7 +497,7 @@ export const ROUND_48: QuizQuestion[] = [
     "round": 48,
     "subject": "2과목",
     "number": 28,
-    "title": "아래 SQL 수행 후 최종 COUNT 값은?\n```sql\nCREATE TABLE 품목 (품목ID VARCHAR2(3), 단가 NUMBER);\n-- 초기 데이터: 001 1000, 002 2000, 003 1000, 004 2000\nBEGIN TRANSACTION;\nINSERT INTO 품목 VALUES ('005', 2000);\nCOMMIT;\nBEGIN TRANSACTION;\nDELETE FROM 품목 WHERE 품목ID = '002';\nBEGIN TRANSACTION;\nUPDATE 품목 SET 단가 = 2000 WHERE 단가 = 1000;\nROLLBACK;\nSELECT COUNT(품목ID) FROM 품목 WHERE 단가 = 2000;\n```",
+    "title": "아래 SQL 수행 후 최종 COUNT 값은?",
     "options": [
       "0",
       "2",
@@ -533,7 +533,7 @@ export const ROUND_48: QuizQuestion[] = [
     "round": 48,
     "subject": "2과목",
     "number": 30,
-    "title": "아래 SQL 의 결과로 옳은 것은?\n```sql\nSELECT COUNT(*) FROM DUAL CONNECT BY LEVEL <= 2;\n```",
+    "title": "아래 SQL 의 결과로 옳은 것은?",
     "options": [
       "0",
       "1",
@@ -677,7 +677,7 @@ export const ROUND_48: QuizQuestion[] = [
     "round": 48,
     "subject": "2과목",
     "number": 38,
-    "title": "아래 LIKE 조건의 결과로 옳은 것은?\n```sql\nWHERE COL LIKE '%@_%' ESCAPE '@';\n```\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>COL</th></tr>\n  <tr><td>A_B</td></tr>\n  <tr><td>C_D</td></tr>\n  <tr><td>E_F</td></tr>\n  <tr><td>G_H</td></tr>\n  <tr><td>I_J</td></tr>\n  <tr><td>K_L</td></tr>\n</table>",
+    "title": "아래 LIKE 조건의 결과로 옳은 것은?",
     "options": [
       "2건",
       "4건",
@@ -749,7 +749,7 @@ export const ROUND_48: QuizQuestion[] = [
     "round": 48,
     "subject": "2과목",
     "number": 42,
-    "title": "아래 SQL 에서 ORDER BY 2 의 의미는?\n```sql\nSELECT 사원ID, 사원명, 연봉 FROM EMP ORDER BY 2;\n```",
+    "title": "아래 SQL 에서 ORDER BY 2 의 의미는?",
     "options": [
       "사원ID 기준 정렬",
       "연봉 기준 정렬",
@@ -821,7 +821,7 @@ export const ROUND_48: QuizQuestion[] = [
     "round": 48,
     "subject": "2과목",
     "number": 46,
-    "title": "아래 T1 테이블에 대한 SQL 의 결과(ㄱ / ㄴ / ㄷ / ㄹ) 로 옳은 것은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>COL1</th><th>COL2</th><th>COL3</th></tr>\n  <tr><td>10</td><td>NULL</td><td>10</td></tr>\n  <tr><td>NULL</td><td>50</td><td>10</td></tr>\n  <tr><td>0</td><td>10</td><td>10</td></tr>\n</table>\n```sql\nㄱ. SELECT SUM(COL2) FROM T1;\nㄴ. SELECT SUM(COL2) FROM T1 WHERE COL1 > 0;\nㄷ. SELECT SUM(COL2) FROM T1 WHERE COL1 IS NOT NULL;\nㄹ. SELECT SUM(COL2) FROM T1 WHERE COL1 IS NULL;\n```",
+    "title": "아래 T1 테이블에 대한 SQL 의 결과(ㄱ / ㄴ / ㄷ / ㄹ) 로 옳은 것은?",
     "options": [
       "60 / NULL / 10 / 50",
       "60 / 0 / 10 / 50",
@@ -839,7 +839,7 @@ export const ROUND_48: QuizQuestion[] = [
     "round": 48,
     "subject": "2과목",
     "number": 47,
-    "title": "아래 ORDER BY 수행 결과에서 세 번째로 출력되는 값은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>ID</th></tr>\n  <tr><td>1</td></tr>\n  <tr><td>2</td></tr>\n  <tr><td>3</td></tr>\n  <tr><td>4</td></tr>\n</table>\n```sql\nSELECT ID FROM TAB1\nORDER BY (CASE WHEN ID IN (1, 3) THEN ID * 3 ELSE ID END) DESC;\n```",
+    "title": "아래 ORDER BY 수행 결과에서 세 번째로 출력되는 값은?",
     "options": [
       "3",
       "4",
@@ -893,7 +893,7 @@ export const ROUND_48: QuizQuestion[] = [
     "round": 48,
     "subject": "2과목",
     "number": 50,
-    "title": "아래 GRANT 구문의 빈칸에 들어갈 키워드로 옳은 것은?\n```sql\nGRANT INSERT (   ) 테이블명 (   ) 사용자명;\n```",
+    "title": "아래 GRANT 구문의 빈칸에 들어갈 키워드로 옳은 것은?",
     "options": [
       "TO, ON",
       "ON, TO",

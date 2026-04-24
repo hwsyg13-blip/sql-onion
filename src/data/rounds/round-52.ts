@@ -55,7 +55,7 @@ export const ROUND_52: QuizQuestion[] = [
       "물리 스키마"
     ],
     "correctIndex": 1,
-    "explanation": "조직 전체 관점에서 데이터를 통합적으로 표현한 스키마",
+    "explanation": "",
     "_source": "authored"
   },
   {
@@ -91,7 +91,7 @@ export const ROUND_52: QuizQuestion[] = [
       "관계 엔터티"
     ],
     "correctIndex": 2,
-    "explanation": "해당 엔터티가 다른 엔터티들의 부모 역할을 하며, 업무에 원래부터 존재하여 독립적으로 생성된다.",
+    "explanation": "",
     "_source": "authored"
   },
   {
@@ -155,7 +155,7 @@ export const ROUND_52: QuizQuestion[] = [
     "round": 52,
     "subject": "1과목",
     "number": 9,
-    "title": "교수·학생·과목 간 M:N 관계를 정규화할 때 추가로 생기는 테이블의 수는?\n```\n[ 교수 ] ∋-----|∘ [ 수강 ] ∘|-----∈ [ 학생 ]\n[ 학생 ] ∋-----|∘ [ 이수 ] ∘|-----∈ [ 과목 ]\n```",
+    "title": "교수·학생·과목 간 M:N 관계를 정규화할 때 추가로 생기는 테이블의 수는?",
     "options": [
       "1개",
       "3개",
@@ -191,7 +191,7 @@ export const ROUND_52: QuizQuestion[] = [
     "round": 52,
     "subject": "2과목",
     "number": 11,
-    "title": "아래 데이터에 대한 SQL 의 결과로 옳은 것은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>COL1</th><th>COL2</th></tr>\n  <tr><td>NULL</td><td>A</td></tr>\n  <tr><td>1</td><td>B</td></tr>\n  <tr><td>3</td><td>C</td></tr>\n  <tr><td>4</td><td>D</td></tr>\n</table>\n```sql\nSELECT COL1, COL2\nFROM   T\nWHERE  NOT (COL1 = 1 OR COL2 = NULL);\n```",
+    "title": "아래 데이터에 대한 SQL 의 결과로 옳은 것은?",
     "options": [
       "모든 행 반환",
       "COL1 = NULL, COL2 = A",
@@ -209,7 +209,7 @@ export const ROUND_52: QuizQuestion[] = [
     "round": 52,
     "subject": "2과목",
     "number": 12,
-    "title": "아래 데이터에 대해 결과 값이 나머지와 다른 함수는?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>VAL</th><th>OPT</th></tr>\n  <tr><td>100</td><td>50</td></tr>\n  <tr><td>100</td><td>NULL</td></tr>\n  <tr><td>NULL</td><td>250</td></tr>\n  <tr><td>450</td><td>100</td></tr>\n</table>",
+    "title": "아래 데이터에 대해 결과 값이 나머지와 다른 함수는?",
     "options": [
       "NVL(VAL, OPT)",
       "COALESCE(VAL, OPT)",
@@ -227,7 +227,7 @@ export const ROUND_52: QuizQuestion[] = [
     "round": 52,
     "subject": "2과목",
     "number": 13,
-    "title": "아래 윈도우 절의 실행 결과로 옳은 것은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>ID</th><th>VAL</th></tr>\n  <tr><td>1</td><td>3</td></tr>\n  <tr><td>2</td><td>4</td></tr>\n  <tr><td>3</td><td>5</td></tr>\n  <tr><td>4</td><td>6</td></tr>\n</table>\n```sql\nSELECT VAL, SUM(VAL) OVER (ORDER BY ID\n                           RANGE BETWEEN 2 PRECEDING AND 2 FOLLOWING) AS S\nFROM T;\n```",
+    "title": "아래 윈도우 절의 실행 결과로 옳은 것은?",
     "options": [
       "3, 9, 15, 21",
       "3, 7, 12, 15",
@@ -245,7 +245,7 @@ export const ROUND_52: QuizQuestion[] = [
     "round": 52,
     "subject": "2과목",
     "number": 14,
-    "title": "아래 계층형 SQL 에서 PRIOR 키워드가 들어갈 위치로 옳은 것은?\n```sql\nSELECT 사원, 매니저\nFROM   EMP\nSTART WITH 매니저 IS NULL\nCONNECT BY ( ㄱ ) 사원 = ( ㄴ ) 매니저;\n```",
+    "title": "아래 계층형 SQL 에서 PRIOR 키워드가 들어갈 위치로 옳은 것은?",
     "options": [
       "ㄱ 위치",
       "ㄴ 위치",
@@ -263,7 +263,7 @@ export const ROUND_52: QuizQuestion[] = [
     "round": 52,
     "subject": "2과목",
     "number": 15,
-    "title": "아래 데이터에 NVL 을 적용했을 때 금액이 올바르게 출력되는 행은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>ID</th><th>금액</th></tr>\n  <tr><td>1</td><td>1000</td></tr>\n  <tr><td>2</td><td>NULL</td></tr>\n  <tr><td>3</td><td>3000</td></tr>\n  <tr><td>4</td><td>NULL</td></tr>\n</table>\n```sql\nSELECT NVL(금액, 0) FROM T;\n```",
+    "title": "아래 데이터에 NVL 을 적용했을 때 금액이 올바르게 출력되는 행은?",
     "options": [
       "1번 행",
       "2번 행",
@@ -307,7 +307,7 @@ export const ROUND_52: QuizQuestion[] = [
       "지속성"
     ],
     "correctIndex": 2,
-    "explanation": "트랜잭션이 동시에 실행될 경우 다른 트랜잭션에 의해 영향을 받지 않고 독립적으로 실행되어야 한다.",
+    "explanation": "",
     "_source": "authored"
   },
   {
@@ -379,7 +379,7 @@ export const ROUND_52: QuizQuestion[] = [
       "EXCEPT"
     ],
     "correctIndex": 3,
-    "explanation": "첫 번째 결과 집합에서 두 번째 결과 집합에 존재하는 행을 제외하고 반환한다.",
+    "explanation": "",
     "_source": "authored"
   },
   {
@@ -407,7 +407,7 @@ export const ROUND_52: QuizQuestion[] = [
     "round": 52,
     "subject": "2과목",
     "number": 23,
-    "title": "아래 SQL 의 결과로 옳은 것은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>C1</th><th>C2</th><th>C3</th></tr>\n  <tr><td>1</td><td>2</td><td>3</td></tr>\n  <tr><td>NULL</td><td>2</td><td>3</td></tr>\n  <tr><td>NULL</td><td>NULL</td><td>3</td></tr>\n</table>\n```sql\nSELECT SUM(COALESCE(C1, C2, C3)) FROM TAB1;\n```",
+    "title": "아래 SQL 의 결과로 옳은 것은?",
     "options": [
       "0",
       "1",
@@ -605,7 +605,7 @@ export const ROUND_52: QuizQuestion[] = [
     "round": 52,
     "subject": "2과목",
     "number": 34,
-    "title": "아래 집합 연산자 SQL 의 결과로 옳은 것은?\n```sql\nSELECT MAX(연봉) FROM 사원\nUNION\nSELECT MIN(연봉) FROM 사원;\n-- 두 집계 결과를 UNION 으로 결합하여 중복을 제거한 뒤, 전체 합계를 구한다.\n```",
+    "title": "아래 집합 연산자 SQL 의 결과로 옳은 것은?",
     "options": [
       "8895",
       "8925",
@@ -785,7 +785,7 @@ export const ROUND_52: QuizQuestion[] = [
     "round": 52,
     "subject": "2과목",
     "number": 44,
-    "title": "아래 네 개의 AVG 연산 중 결과가 서로 다른 것은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>COL</th></tr>\n  <tr><td>10</td></tr>\n  <tr><td>NULL</td></tr>\n  <tr><td>20</td></tr>\n</table>",
+    "title": "아래 네 개의 AVG 연산 중 결과가 서로 다른 것은?",
     "options": [
       "AVG 전 SUM(COL) / COUNT(COL)",
       "SUM(COL) / COUNT(*)",
@@ -821,7 +821,7 @@ export const ROUND_52: QuizQuestion[] = [
     "round": 52,
     "subject": "2과목",
     "number": 46,
-    "title": "아래 MERGE 구문 실행 후 결과로 옳은 것은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th colspan=\"2\">TGT</th><th colspan=\"2\">SRC</th></tr>\n  <tr><th>ID</th><th>V</th><th>ID</th><th>V</th></tr>\n  <tr><td>1</td><td>a</td><td>1</td><td>b</td></tr>\n  <tr><td>2</td><td>a</td><td>3</td><td>c</td></tr>\n</table>\n```sql\nMERGE INTO TGT T USING SRC S ON (T.ID = S.ID)\nWHEN MATCHED THEN UPDATE SET T.V = S.V\nWHEN NOT MATCHED THEN INSERT (ID, V) VALUES (S.ID, S.V);\n```",
+    "title": "아래 MERGE 구문 실행 후 결과로 옳은 것은?",
     "options": [
       "1.a 2.a",
       "1.a 2.a 3.c",
@@ -857,7 +857,7 @@ export const ROUND_52: QuizQuestion[] = [
     "round": 52,
     "subject": "2과목",
     "number": 48,
-    "title": "아래 SQL 에서 PRIOR 키워드가 들어갈 위치로 옳은 것은?\n```sql\nSELECT 사원, 매니저\nFROM   EMP  -- (ㄱ)\nSTART WITH 매니저 IS NULL  -- (ㄴ)\nCONNECT BY ( ㄷ ) mgr = ( ㄹ ) empno;\n```",
+    "title": "아래 SQL 에서 PRIOR 키워드가 들어갈 위치로 옳은 것은?",
     "options": [
       "ㄱ",
       "ㄴ",

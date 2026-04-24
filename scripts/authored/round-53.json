@@ -1,6 +1,6 @@
 {
   "round": 53,
-  "notes": "restored from 53회_복원.md — MCQ 50 + 단답형 0 (단답형은 현재 UI 미지원이라 제외)",
+  "notes": "restored from 53회_복원.md — MCQ 50 (references 포함: 23) + 단답형 0 제외",
   "authored": [
     {
       "subject": "1과목",
@@ -52,7 +52,13 @@
         "BCNF"
       ],
       "correctIndex": 2,
-      "explanation": "일반 속성이 주식별자에 모두 함수 종속하며 이행 함수 종속을 제거한 상태"
+      "explanation": "",
+      "references": [
+        {
+          "type": "text",
+          "content": "일반 속성이 주식별자에 모두 함수 종속하며 이행 함수 종속을 제거한 상태"
+        }
+      ]
     },
     {
       "subject": "1과목",
@@ -78,7 +84,13 @@
         "BCNF"
       ],
       "correctIndex": 1,
-      "explanation": "부분 함수 종속을 나누어 해결한다."
+      "explanation": "",
+      "references": [
+        {
+          "type": "text",
+          "content": "부분 함수 종속을 나누어 해결한다."
+        }
+      ]
     },
     {
       "subject": "1과목",
@@ -174,7 +186,7 @@
     {
       "subject": "2과목",
       "number": 14,
-      "title": "아래 조건을 만족하는 행의 개수로 옳은 것은?\n```sql\nWHERE amt BETWEEN 3000 AND 5000\nAND   vol <= 10\n```\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>AMT</th><th>VOL</th></tr>\n  <tr><td>4000</td><td>5</td></tr>\n  <tr><td>6000</td><td>3</td></tr>\n  <tr><td>3000</td><td>15</td></tr>\n</table>",
+      "title": "아래 조건을 만족하는 행의 개수로 옳은 것은?",
       "options": [
         "1개",
         "2개",
@@ -182,7 +194,34 @@
         "0개"
       ],
       "correctIndex": 0,
-      "explanation": "AMT 가 3000~5000 이고 VOL 이 10 이하인 행은 (4000, 5) 한 건이다."
+      "explanation": "AMT 가 3000~5000 이고 VOL 이 10 이하인 행은 (4000, 5) 한 건이다.",
+      "references": [
+        {
+          "type": "sql",
+          "code": "WHERE amt BETWEEN 3000 AND 5000\nAND   vol <= 10"
+        },
+        {
+          "type": "table",
+          "headers": [
+            "AMT",
+            "VOL"
+          ],
+          "rows": [
+            [
+              "4000",
+              "5"
+            ],
+            [
+              "6000",
+              "3"
+            ],
+            [
+              "3000",
+              "15"
+            ]
+          ]
+        }
+      ]
     },
     {
       "subject": "2과목",
@@ -200,7 +239,7 @@
     {
       "subject": "2과목",
       "number": 16,
-      "title": "아래 두 테이블에 대한 SQL 의 결과로 옳은 것은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>T1</th><th>T2</th></tr>\n  <tr><td>1, 2, 3, 4, 5</td><td>1, 1, 1, 3, 6</td></tr>\n</table>\n```sql\nSELECT COUNT(*)\nFROM   T1, T2\nWHERE  T1.COL1 = T2.COL1;\n```",
+      "title": "아래 두 테이블에 대한 SQL 의 결과로 옳은 것은?",
       "options": [
         "2",
         "3",
@@ -208,7 +247,26 @@
         "5"
       ],
       "correctIndex": 2,
-      "explanation": "T1 의 1 은 T2 의 1(세 건) 과 매칭되고 T1 의 3 은 T2 의 3(한 건) 과 매칭되어 3 + 1 = 4 건이 나온다."
+      "explanation": "T1 의 1 은 T2 의 1(세 건) 과 매칭되고 T1 의 3 은 T2 의 3(한 건) 과 매칭되어 3 + 1 = 4 건이 나온다.",
+      "references": [
+        {
+          "type": "table",
+          "headers": [
+            "T1",
+            "T2"
+          ],
+          "rows": [
+            [
+              "1, 2, 3, 4, 5",
+              "1, 1, 1, 3, 6"
+            ]
+          ]
+        },
+        {
+          "type": "sql",
+          "code": "SELECT COUNT(*)\nFROM   T1, T2\nWHERE  T1.COL1 = T2.COL1;"
+        }
+      ]
     },
     {
       "subject": "2과목",
@@ -221,12 +279,18 @@
         "ORDER BY 주문번호 DESC, 4 DESC, 1 DESC"
       ],
       "correctIndex": 2,
-      "explanation": "주문번호 내림차순 정렬 후, 주문번호가 같을 경우 날짜를 오름차순으로 정렬한다."
+      "explanation": "",
+      "references": [
+        {
+          "type": "text",
+          "content": "주문번호 내림차순 정렬 후, 주문번호가 같을 경우 날짜를 오름차순으로 정렬한다."
+        }
+      ]
     },
     {
       "subject": "2과목",
       "number": 18,
-      "title": "아래 테이블 DDL 에 대한 설명 중 옳지 않은 것은?\n```sql\nCREATE TABLE 학생 (\n  학번 NUMBER DEFAULT 100 PRIMARY KEY,\n  이름 VARCHAR2(30) NOT NULL,\n  학과번호 NUMBER REFERENCES 학과(학과번호)\n);\n```",
+      "title": "아래 테이블 DDL 에 대한 설명 중 옳지 않은 것은?",
       "options": [
         "학번 컬럼에 DEFAULT 값이 지정되어 있다.",
         "학생 이름은 NULL 을 허용하지 않는다.",
@@ -234,7 +298,13 @@
         "DEFAULT 때문에 101·102·103 학생 번호로 입력해도 학번에는 NULL 이 들어간다."
       ],
       "correctIndex": 3,
-      "explanation": "DEFAULT 는 값 미지정 시 기본값을 적용할 뿐 값이 입력되면 그 값이 그대로 저장된다."
+      "explanation": "DEFAULT 는 값 미지정 시 기본값을 적용할 뿐 값이 입력되면 그 값이 그대로 저장된다.",
+      "references": [
+        {
+          "type": "sql",
+          "code": "CREATE TABLE 학생 (\n  학번 NUMBER DEFAULT 100 PRIMARY KEY,\n  이름 VARCHAR2(30) NOT NULL,\n  학과번호 NUMBER REFERENCES 학과(학과번호)\n);"
+        }
+      ]
     },
     {
       "subject": "2과목",
@@ -252,7 +322,7 @@
     {
       "subject": "2과목",
       "number": 20,
-      "title": "아래 SQL 의 결과로 옳은 것은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>회원번호</th><th>회원명</th><th>주문월</th></tr>\n  <tr><td>1</td><td>홍길동</td><td>201001</td></tr>\n</table>\n```sql\nSELECT * FROM 주문 WHERE 주문월 = '201010';\n```",
+      "title": "아래 SQL 의 결과로 옳은 것은?",
       "options": [
         "전체 회원",
         "1건",
@@ -260,12 +330,33 @@
         "공집합"
       ],
       "correctIndex": 3,
-      "explanation": "조건을 만족하는 행이 없으므로 공집합이 반환된다."
+      "explanation": "조건을 만족하는 행이 없으므로 공집합이 반환된다.",
+      "references": [
+        {
+          "type": "table",
+          "headers": [
+            "회원번호",
+            "회원명",
+            "주문월"
+          ],
+          "rows": [
+            [
+              "1",
+              "홍길동",
+              "201001"
+            ]
+          ]
+        },
+        {
+          "type": "sql",
+          "code": "SELECT * FROM 주문 WHERE 주문월 = '201010';"
+        }
+      ]
     },
     {
       "subject": "2과목",
       "number": 21,
-      "title": "아래 셀프 조인 SQL 의 빈칸에 들어갈 함수로 옳은 것은?\n```sql\n-- 사원의 매니저 이름을 조회하되 매니저가 없는 경우 '사장' 을 반환한다.\nSELECT E.이름, (  ?  ) AS 상사명\nFROM   사원 E LEFT JOIN 사원 M ON E.매니저ID = M.사원ID;\n```",
+      "title": "아래 셀프 조인 SQL 의 빈칸에 들어갈 함수로 옳은 것은?",
       "options": [
         "NVL(M.이름)",
         "DECODE(M.이름)",
@@ -273,7 +364,13 @@
         "COALESCE(M.이름, '사장')"
       ],
       "correctIndex": 3,
-      "explanation": ""
+      "explanation": "",
+      "references": [
+        {
+          "type": "sql",
+          "code": "-- 사원의 매니저 이름을 조회하되 매니저가 없는 경우 '사장' 을 반환한다.\nSELECT E.이름, (  ?  ) AS 상사명\nFROM   사원 E LEFT JOIN 사원 M ON E.매니저ID = M.사원ID;"
+        }
+      ]
     },
     {
       "subject": "2과목",
@@ -291,7 +388,7 @@
     {
       "subject": "2과목",
       "number": 23,
-      "title": "아래 LTRIM 함수의 결과로 옳은 것은?\n```sql\nSELECT LTRIM('xxxxxxabcd', 'x') FROM DUAL;\n```",
+      "title": "아래 LTRIM 함수의 결과로 옳은 것은?",
       "options": [
         "abcd",
         "xxxabcd",
@@ -299,12 +396,18 @@
         "NULL"
       ],
       "correctIndex": 0,
-      "explanation": "LTRIM 은 왼쪽에서 지정된 문자를 모두 제거한다."
+      "explanation": "LTRIM 은 왼쪽에서 지정된 문자를 모두 제거한다.",
+      "references": [
+        {
+          "type": "sql",
+          "code": "SELECT LTRIM('xxxxxxabcd', 'x') FROM DUAL;"
+        }
+      ]
     },
     {
       "subject": "2과목",
       "number": 24,
-      "title": "아래 WHERE 조건과 동일한 의미의 SQL 은?\n```sql\nWHERE (COL1, COL2) IN ((1, 3), (1, 4));\n```",
+      "title": "아래 WHERE 조건과 동일한 의미의 SQL 은?",
       "options": [
         "COL1 = 1 AND COL2 = 3",
         "COL1 = 1 OR COL2 IN (3, 4)",
@@ -312,7 +415,13 @@
         "COL1 = 1 AND (COL2 = 3 OR COL2 = 4)"
       ],
       "correctIndex": 3,
-      "explanation": ""
+      "explanation": "",
+      "references": [
+        {
+          "type": "sql",
+          "code": "WHERE (COL1, COL2) IN ((1, 3), (1, 4));"
+        }
+      ]
     },
     {
       "subject": "2과목",
@@ -330,7 +439,7 @@
     {
       "subject": "2과목",
       "number": 26,
-      "title": "아래 SQL 의 오류가 발생하는 부분으로 가장 적절한 것은?\n```sql\nSELECT SUM(SAL)            -- (1)\nFROM   EMP\nWHERE  컬럼 = (SELECT ID FROM A WHERE ~)  -- (2)\nGROUP BY ID                 -- (3)\nHAVING SUM(SAL) > 5000;     -- (4)\n```",
+      "title": "아래 SQL 의 오류가 발생하는 부분으로 가장 적절한 것은?",
       "options": [
         "(1)",
         "(2)",
@@ -338,7 +447,13 @@
         "(4)"
       ],
       "correctIndex": 1,
-      "explanation": "서브쿼리가 다중 행을 반환할 수 있음에도 단일 행 비교 연산자 '=' 를 사용하여 런타임 오류가 발생할 수 있다."
+      "explanation": "서브쿼리가 다중 행을 반환할 수 있음에도 단일 행 비교 연산자 '=' 를 사용하여 런타임 오류가 발생할 수 있다.",
+      "references": [
+        {
+          "type": "sql",
+          "code": "SELECT SUM(SAL)            -- (1)\nFROM   EMP\nWHERE  컬럼 = (SELECT ID FROM A WHERE ~)  -- (2)\nGROUP BY ID                 -- (3)\nHAVING SUM(SAL) > 5000;     -- (4)"
+        }
+      ]
     },
     {
       "subject": "2과목",
@@ -356,7 +471,7 @@
     {
       "subject": "2과목",
       "number": 28,
-      "title": "아래 NATURAL JOIN SQL 의 결과로 옳은 것은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th colspan=\"2\">A</th><th colspan=\"2\">B</th></tr>\n  <tr><th>ID</th><th>COL1</th><th>ID</th><th>COL1</th></tr>\n  <tr><td>1</td><td>X</td><td>1</td><td>Y</td></tr>\n</table>\n```sql\nSELECT * FROM A NATURAL JOIN B;\n```",
+      "title": "아래 NATURAL JOIN SQL 의 결과로 옳은 것은?",
       "options": [
         "오류 발생",
         "60",
@@ -364,12 +479,39 @@
         "225"
       ],
       "correctIndex": 0,
-      "explanation": "동일 컬럼명이 여러 개이면서 값이 다르면 NATURAL JOIN 은 매칭 실패로 결과가 비거나 경우에 따라 예상과 다른 결과를 낸다."
+      "explanation": "동일 컬럼명이 여러 개이면서 값이 다르면 NATURAL JOIN 은 매칭 실패로 결과가 비거나 경우에 따라 예상과 다른 결과를 낸다.",
+      "references": [
+        {
+          "type": "table",
+          "headers": [
+            "A",
+            "B"
+          ],
+          "rows": [
+            [
+              "ID",
+              "COL1",
+              "ID",
+              "COL1"
+            ],
+            [
+              "1",
+              "X",
+              "1",
+              "Y"
+            ]
+          ]
+        },
+        {
+          "type": "sql",
+          "code": "SELECT * FROM A NATURAL JOIN B;"
+        }
+      ]
     },
     {
       "subject": "2과목",
       "number": 29,
-      "title": "아래 데이터를 VVIP → VIP 순서로 정렬하는 SQL 결과로 옳은 것은?\n```sql\nSELECT 등급 FROM 회원 ORDER BY DECODE(등급, 'VVIP', 1, 'VIP', 2, 3);\n```",
+      "title": "아래 데이터를 VVIP → VIP 순서로 정렬하는 SQL 결과로 옳은 것은?",
       "options": [
         "VVIP, VIP 순으로 출력",
         "VIP, VVIP 순으로 출력",
@@ -377,12 +519,18 @@
         "오류 발생"
       ],
       "correctIndex": 0,
-      "explanation": ""
+      "explanation": "",
+      "references": [
+        {
+          "type": "sql",
+          "code": "SELECT 등급 FROM 회원 ORDER BY DECODE(등급, 'VVIP', 1, 'VIP', 2, 3);"
+        }
+      ]
     },
     {
       "subject": "2과목",
       "number": 30,
-      "title": "아래 SQL 의 결과로 옳은 것은?\n```sql\nSELECT * FROM T WHERE COL <= ALL(50, 15);\n```\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>COL</th></tr>\n  <tr><td>10</td></tr>\n  <tr><td>12</td></tr>\n  <tr><td>15</td></tr>\n  <tr><td>20</td></tr>\n  <tr><td>60</td></tr>\n</table>",
+      "title": "아래 SQL 의 결과로 옳은 것은?",
       "options": [
         "10, 12, 15",
         "10, 12",
@@ -390,7 +538,36 @@
         "공집합"
       ],
       "correctIndex": 0,
-      "explanation": "`<= ALL(50, 15)` 은 두 값 모두와 비교하여 최소값 15 이하를 만족하는 행을 반환한다."
+      "explanation": "`<= ALL(50, 15)` 은 두 값 모두와 비교하여 최소값 15 이하를 만족하는 행을 반환한다.",
+      "references": [
+        {
+          "type": "sql",
+          "code": "SELECT * FROM T WHERE COL <= ALL(50, 15);"
+        },
+        {
+          "type": "table",
+          "headers": [
+            "COL"
+          ],
+          "rows": [
+            [
+              "10"
+            ],
+            [
+              "12"
+            ],
+            [
+              "15"
+            ],
+            [
+              "20"
+            ],
+            [
+              "60"
+            ]
+          ]
+        }
+      ]
     },
     {
       "subject": "2과목",
@@ -403,7 +580,13 @@
         "MINUS"
       ],
       "correctIndex": 3,
-      "explanation": "첫 번째 집합에서 두 번째 집합에 존재하는 행을 제외한 결과를 반환한다."
+      "explanation": "",
+      "references": [
+        {
+          "type": "text",
+          "content": "첫 번째 집합에서 두 번째 집합에 존재하는 행을 제외한 결과를 반환한다."
+        }
+      ]
     },
     {
       "subject": "2과목",
@@ -447,7 +630,7 @@
     {
       "subject": "2과목",
       "number": 35,
-      "title": "아래 CROSS JOIN 의 결과 행 수로 옳은 것은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>M</th><th>N</th></tr>\n  <tr><td>3</td><td>5</td></tr>\n</table>",
+      "title": "아래 CROSS JOIN 의 결과 행 수로 옳은 것은?",
       "options": [
         "15",
         "8",
@@ -455,7 +638,22 @@
         "3"
       ],
       "correctIndex": 0,
-      "explanation": ""
+      "explanation": "",
+      "references": [
+        {
+          "type": "table",
+          "headers": [
+            "M",
+            "N"
+          ],
+          "rows": [
+            [
+              "3",
+              "5"
+            ]
+          ]
+        }
+      ]
     },
     {
       "subject": "2과목",
@@ -538,7 +736,7 @@
     {
       "subject": "2과목",
       "number": 42,
-      "title": "아래 SQL 의 결과로 옳은 것은?\n```sql\nSELECT MIN(COL1) + MAX(TO_CHAR(COL1))\nFROM   T;\n-- COL1 값: 10, 50, 90\n```",
+      "title": "아래 SQL 의 결과로 옳은 것은?",
       "options": [
         "100",
         "190",
@@ -546,12 +744,18 @@
         "오류"
       ],
       "correctIndex": 0,
-      "explanation": "MIN 은 10, MAX(TO_CHAR) 는 문자 비교 결과 90(문자열) 이 되어 묵시적 변환 시 10 + 90 = 100 이 된다."
+      "explanation": "MIN 은 10, MAX(TO_CHAR) 는 문자 비교 결과 90(문자열) 이 되어 묵시적 변환 시 10 + 90 = 100 이 된다.",
+      "references": [
+        {
+          "type": "sql",
+          "code": "SELECT MIN(COL1) + MAX(TO_CHAR(COL1))\nFROM   T;\n-- COL1 값: 10, 50, 90"
+        }
+      ]
     },
     {
       "subject": "2과목",
       "number": 43,
-      "title": "LIKE '%n' 조건에 매칭되는 이름의 수로 옳은 것은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>NAME</th></tr>\n  <tr><td>Kevin</td></tr>\n  <tr><td>Jason</td></tr>\n  <tr><td>Tom</td></tr>\n</table>",
+      "title": "LIKE '%n' 조건에 매칭되는 이름의 수로 옳은 것은?",
       "options": [
         "1명",
         "2명",
@@ -559,7 +763,26 @@
         "0명"
       ],
       "correctIndex": 1,
-      "explanation": "'n' 으로 끝나는 이름은 Kevin, Jason 의 두 명이다."
+      "explanation": "'n' 으로 끝나는 이름은 Kevin, Jason 의 두 명이다.",
+      "references": [
+        {
+          "type": "table",
+          "headers": [
+            "NAME"
+          ],
+          "rows": [
+            [
+              "Kevin"
+            ],
+            [
+              "Jason"
+            ],
+            [
+              "Tom"
+            ]
+          ]
+        }
+      ]
     },
     {
       "subject": "2과목",
@@ -577,7 +800,7 @@
     {
       "subject": "2과목",
       "number": 45,
-      "title": "아래 테이블에 대한 INSERT 중 오류가 발생하는 것은?\n```sql\nCREATE TABLE TEST45 (\n  COL1 NUMBER,\n  COL2 NUMBER,\n  COL3 NUMBER,\n  COL4 NUMBER\n);\n```",
+      "title": "아래 테이블에 대한 INSERT 중 오류가 발생하는 것은?",
       "options": [
         "INSERT INTO TEST45 VALUES (1, 2, 3);",
         "INSERT INTO TEST45 VALUES (1, 2, 3, 4);",
@@ -585,12 +808,18 @@
         "INSERT INTO TEST45 (COL1, COL2, COL3, COL4) VALUES (1, 2, 3, 4);"
       ],
       "correctIndex": 0,
-      "explanation": "컬럼 목록을 명시하지 않은 INSERT 는 모든 컬럼에 값을 채워야 한다."
+      "explanation": "컬럼 목록을 명시하지 않은 INSERT 는 모든 컬럼에 값을 채워야 한다.",
+      "references": [
+        {
+          "type": "sql",
+          "code": "CREATE TABLE TEST45 (\n  COL1 NUMBER,\n  COL2 NUMBER,\n  COL3 NUMBER,\n  COL4 NUMBER\n);"
+        }
+      ]
     },
     {
       "subject": "2과목",
       "number": 46,
-      "title": "아래 세 테이블을 조인한 결과의 행 수로 옳은 것은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>T1</th><th>T2</th><th>T3</th></tr>\n  <tr><td>1, 2, 3</td><td>1, 2, NULL</td><td>1, NULL, NULL</td></tr>\n</table>",
+      "title": "아래 세 테이블을 조인한 결과의 행 수로 옳은 것은?",
       "options": [
         "1개",
         "2개",
@@ -598,12 +827,29 @@
         "0개"
       ],
       "correctIndex": 0,
-      "explanation": "세 테이블 모두에 값이 존재하는 키는 1 한 건 뿐이다."
+      "explanation": "세 테이블 모두에 값이 존재하는 키는 1 한 건 뿐이다.",
+      "references": [
+        {
+          "type": "table",
+          "headers": [
+            "T1",
+            "T2",
+            "T3"
+          ],
+          "rows": [
+            [
+              "1, 2, 3",
+              "1, 2, NULL",
+              "1, NULL, NULL"
+            ]
+          ]
+        }
+      ]
     },
     {
       "subject": "2과목",
       "number": 47,
-      "title": "A·B 테이블을 UNION 후 중복을 제거한 결과의 행 수는?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>A</th><th>B</th></tr>\n  <tr><td>1, 2, 3, 4</td><td>3, 4, 5, 6</td></tr>\n</table>",
+      "title": "A·B 테이블을 UNION 후 중복을 제거한 결과의 행 수는?",
       "options": [
         "6개",
         "8개",
@@ -611,12 +857,27 @@
         "2개"
       ],
       "correctIndex": 0,
-      "explanation": "1·2·3·4·5·6 의 6개 값만 남는다."
+      "explanation": "1·2·3·4·5·6 의 6개 값만 남는다.",
+      "references": [
+        {
+          "type": "table",
+          "headers": [
+            "A",
+            "B"
+          ],
+          "rows": [
+            [
+              "1, 2, 3, 4",
+              "3, 4, 5, 6"
+            ]
+          ]
+        }
+      ]
     },
     {
       "subject": "2과목",
       "number": 48,
-      "title": "아래 SQL 의 결과로 옳은 것은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>COL_B</th><th>COL_C</th><th>SCORE</th></tr>\n  <tr><td>5</td><td>10</td><td>NULL</td></tr>\n  <tr><td>10</td><td>NULL</td><td>NULL</td></tr>\n</table>\n```sql\nSELECT NVL(MIN(COL_B), 0) + NVL(MAX(COL_C), 0) + SUM(NVL(SCORE, 0))\nFROM   T;\n```",
+      "title": "아래 SQL 의 결과로 옳은 것은?",
       "options": [
         "5 (5+0+0)",
         "15 (5+10+0)",
@@ -624,7 +885,33 @@
         "50"
       ],
       "correctIndex": 1,
-      "explanation": "MIN(COL_B)=5, MAX(COL_C)=10, SUM(NVL(SCORE,0))=0 이므로 5+10+0 = 15 이다."
+      "explanation": "MIN(COL_B)=5, MAX(COL_C)=10, SUM(NVL(SCORE,0))=0 이므로 5+10+0 = 15 이다.",
+      "references": [
+        {
+          "type": "table",
+          "headers": [
+            "COL_B",
+            "COL_C",
+            "SCORE"
+          ],
+          "rows": [
+            [
+              "5",
+              "10",
+              "NULL"
+            ],
+            [
+              "10",
+              "NULL",
+              "NULL"
+            ]
+          ]
+        },
+        {
+          "type": "sql",
+          "code": "SELECT NVL(MIN(COL_B), 0) + NVL(MAX(COL_C), 0) + SUM(NVL(SCORE, 0))\nFROM   T;"
+        }
+      ]
     },
     {
       "subject": "2과목",
@@ -642,7 +929,7 @@
     {
       "subject": "2과목",
       "number": 50,
-      "title": "아래 SQL 실행 후 최종 조회 건수는?\n```sql\nINSERT INTO TABLE50 VALUES (1);\nINSERT INTO TABLE50 VALUES (2);\nINSERT INTO TABLE50 VALUES (3);\nSAVEPOINT SQL1;\nINSERT INTO TABLE50 VALUES (4);\nINSERT INTO TABLE50 VALUES (5);\nCOMMIT;\nINSERT INTO TABLE50 VALUES (6);\nROLLBACK TO SAVEPOINT SQL1;\nSELECT * FROM TABLE50;\n```",
+      "title": "아래 SQL 실행 후 최종 조회 건수는?",
       "options": [
         "4",
         "5",
@@ -650,7 +937,13 @@
         "7"
       ],
       "correctIndex": 2,
-      "explanation": "COMMIT 시점에 5건이 확정되고 SAVEPOINT SQL1 은 이미 사라졌으므로 이후 ROLLBACK TO SAVEPOINT SQL1 은 오류가 발생해 수행되지 않는다. 마지막 INSERT (6) 까지 포함한 6 건이 조회된다."
+      "explanation": "COMMIT 시점에 5건이 확정되고 SAVEPOINT SQL1 은 이미 사라졌으므로 이후 ROLLBACK TO SAVEPOINT SQL1 은 오류가 발생해 수행되지 않는다. 마지막 INSERT (6) 까지 포함한 6 건이 조회된다.",
+      "references": [
+        {
+          "type": "sql",
+          "code": "INSERT INTO TABLE50 VALUES (1);\nINSERT INTO TABLE50 VALUES (2);\nINSERT INTO TABLE50 VALUES (3);\nSAVEPOINT SQL1;\nINSERT INTO TABLE50 VALUES (4);\nINSERT INTO TABLE50 VALUES (5);\nCOMMIT;\nINSERT INTO TABLE50 VALUES (6);\nROLLBACK TO SAVEPOINT SQL1;\n\nSELECT * FROM TABLE50;"
+        }
+      ]
     }
   ],
   "shortAnswerOmitted": []

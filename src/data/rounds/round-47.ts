@@ -19,7 +19,7 @@ export const ROUND_47: QuizQuestion[] = [
       "보안 관점"
     ],
     "correctIndex": 1,
-    "explanation": "업무가 처리하는 일의 방법에 따라 데이터가 어떻게 영향을 받는지 모델링한다.",
+    "explanation": "",
     "_source": "authored"
   },
   {
@@ -29,7 +29,7 @@ export const ROUND_47: QuizQuestion[] = [
     "round": 47,
     "subject": "1과목",
     "number": 2,
-    "title": "아래 ERD 해석 중 옳지 않은 것은? (고객은 여러 서비스를 이용하며 동일 서비스를 재이용할 수 있다.)",
+    "title": "아래 ERD 해석 중 옳지 않은 것은? (고객은 여러 서비스를 이용하며 동일 서비스를 재이용할 수 있다.) <div style=\"display: flex; align-items: center; justify-content: center; gap: 12px; font-family: monospace; margin: 12px 0;\"> <span>||────&lt;</span> <span>&gt;────||</span> </div>",
     "options": [
       "고객과 서비스는 M:N 관계이다.",
       "서비스이용 엔터티가 중간 엔터티로 존재한다.",
@@ -73,7 +73,7 @@ export const ROUND_47: QuizQuestion[] = [
       "BCNF"
     ],
     "correctIndex": 2,
-    "explanation": "엔터티의 일반 속성 간에는 서로 종속적이지 않아야 한다.",
+    "explanation": "",
     "_source": "authored"
   },
   {
@@ -181,7 +181,7 @@ export const ROUND_47: QuizQuestion[] = [
       "물리 스키마"
     ],
     "correctIndex": 0,
-    "explanation": "뷰 단계의 여러 사용자 관점으로 구성되어 개별 사용자가 보는 개인적 DB 스키마이며, 응용 프로그래머가 접근하는 DB 정의이다.",
+    "explanation": "",
     "_source": "authored"
   },
   {
@@ -299,7 +299,7 @@ export const ROUND_47: QuizQuestion[] = [
     "round": 47,
     "subject": "2과목",
     "number": 17,
-    "title": "번호가 없으면 1을 반환하고 있으면 MAX(번호)+1 을 반환하는 SQL 로 동일한 결과의 쿼리는?\n```sql\nSELECT NVL(MAX(번호), 1) + 1 FROM T;\n```",
+    "title": "번호가 없으면 1을 반환하고 있으면 MAX(번호)+1 을 반환하는 SQL 로 동일한 결과의 쿼리는?",
     "options": [
       "SELECT COALESCE(MAX(번호), 1) FROM T;",
       "SELECT COALESCE(MAX(번호) + 1, 1) FROM T;",
@@ -389,7 +389,7 @@ export const ROUND_47: QuizQuestion[] = [
     "round": 47,
     "subject": "2과목",
     "number": 22,
-    "title": "TEAM·PLAYER 테이블에서 아래 SQL 과 다른 결과를 반환하는 것은?\n```sql\nWHERE (TEAM_ID, HEIGHT) IN (SELECT TEAM_ID, MIN(HEIGHT) FROM PLAYER GROUP BY TEAM_ID);\n```",
+    "title": "TEAM·PLAYER 테이블에서 아래 SQL 과 다른 결과를 반환하는 것은?",
     "options": [
       "상관 서브쿼리(EXISTS) 중첩",
       "인라인 뷰 조인",
@@ -407,7 +407,7 @@ export const ROUND_47: QuizQuestion[] = [
     "round": 47,
     "subject": "2과목",
     "number": 23,
-    "title": "아래 SQL 이 의미하는 것으로 적절한 것은?\n```sql\nSELECT 팀명\nFROM   팀\nWHERE  팀번호 = (SELECT 팀번호 FROM (SELECT 팀번호, SUM(연봉) AS 총급여 FROM 사원 GROUP BY 팀번호 ORDER BY 2 DESC) WHERE ROWNUM = 1);\n```",
+    "title": "아래 SQL 이 의미하는 것으로 적절한 것은?",
     "options": [
       "팀의 사원 수가 가장 많은 팀",
       "팀의 사원 총 연봉이 가장 높은 팀",
@@ -443,7 +443,7 @@ export const ROUND_47: QuizQuestion[] = [
     "round": 47,
     "subject": "2과목",
     "number": 25,
-    "title": "내림차순 정렬을 수행하는 SQL 에서 수정이 필요한 부분은?\n```sql\nSELECT ... FROM ... WHERE ... ORDER BY A;  -- A 를 내림차순으로 정렬해야 함\n```",
+    "title": "내림차순 정렬을 수행하는 SQL 에서 수정이 필요한 부분은?",
     "options": [
       "SELECT 절",
       "FROM 절",
@@ -461,7 +461,7 @@ export const ROUND_47: QuizQuestion[] = [
     "round": 47,
     "subject": "2과목",
     "number": 26,
-    "title": "아래 SQL 의 결과로 옳은 것은?\n```sql\n-- 데이터: GRADE=12, RANK=13\nSELECT CASE WHEN SUM(GRADE + RANK) IS NULL THEN 0\n            ELSE SUM(GRADE + RANK) END\nFROM T;\n```",
+    "title": "아래 SQL 의 결과로 옳은 것은?",
     "options": [
       "12",
       "13",
@@ -479,7 +479,7 @@ export const ROUND_47: QuizQuestion[] = [
     "round": 47,
     "subject": "2과목",
     "number": 27,
-    "title": "아래 SQL 의 결과 등급은?\n```sql\nSELECT GRADE FROM GRADE_TABLE A,\n  (SELECT MAX(SCORE) AS MAX_SCORE FROM PLAYER) B\nWHERE A.LOWER <= B.MAX_SCORE AND A.UPPER >= B.MAX_SCORE;\n```",
+    "title": "아래 SQL 의 결과 등급은?",
     "options": [
       "GOLD",
       "SILVER",
@@ -497,7 +497,7 @@ export const ROUND_47: QuizQuestion[] = [
     "round": 47,
     "subject": "2과목",
     "number": 28,
-    "title": "아래 집합 연산 SQL 의 결과로 옳은 것은?\n```sql\nSELECT COL1 FROM A\nUNION ALL\nSELECT COL1 FROM B\nMINUS\nSELECT COL1 FROM C;\n```",
+    "title": "아래 집합 연산 SQL 의 결과로 옳은 것은?",
     "options": [
       "1, 3, 5",
       "1, 2, 3",
@@ -515,7 +515,7 @@ export const ROUND_47: QuizQuestion[] = [
     "round": 47,
     "subject": "2과목",
     "number": 29,
-    "title": "아래 MERGE 구문 수행 후 결과로 옳은 것은?\n```sql\nMERGE INTO A USING B ON (A.ID = B.ID)\nWHEN MATCHED THEN UPDATE SET A.V = 100\nWHEN NOT MATCHED THEN INSERT (ID, V) VALUES (B.ID, 100);\n```",
+    "title": "아래 MERGE 구문 수행 후 결과로 옳은 것은?",
     "options": [
       "0, 0, 0",
       "100, 100, 100",
@@ -551,7 +551,7 @@ export const ROUND_47: QuizQuestion[] = [
     "round": 47,
     "subject": "2과목",
     "number": 31,
-    "title": "아래 SQL 의 결과로 옳은 것은?\n```sql\nSELECT MAX(COL1) KEEP (DENSE_RANK FIRST ORDER BY COL2 DESC)\nFROM T;   -- COL2 기준 DESC 정렬 시 첫 값의 COL1 반환\n```\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>COL1</th><th>COL2</th></tr>\n  <tr><td>10</td><td>1</td></tr>\n  <tr><td>20</td><td>1</td></tr>\n</table>",
+    "title": "아래 SQL 의 결과로 옳은 것은?",
     "options": [
       "10",
       "15",
@@ -731,7 +731,7 @@ export const ROUND_47: QuizQuestion[] = [
     "round": 47,
     "subject": "2과목",
     "number": 41,
-    "title": "아래 SQL 의 결과로 옳은 것은? (COL 에 NULL 1건 포함)\n```sql\n-- 데이터: 100, 110, NULL\nSELECT ROUND(AVG(COL)), ROUND(SUM(COL)/COUNT(*)) FROM T;\n```",
+    "title": "아래 SQL 의 결과로 옳은 것은? (COL 에 NULL 1건 포함)",
     "options": [
       "105, 70",
       "70, 105",
@@ -767,7 +767,7 @@ export const ROUND_47: QuizQuestion[] = [
     "round": 47,
     "subject": "2과목",
     "number": 43,
-    "title": "아래 SQL 의 결과로 옳은 것은?\n```sql\nSELECT COUNT(*) FROM T GROUP BY ID HAVING COUNT(*) >= 2;\n```",
+    "title": "아래 SQL 의 결과로 옳은 것은?",
     "options": [
       "조건을 만족하는 그룹이 없으면 공집합",
       "조건을 만족하는 그룹의 수만큼 COUNT 반환",
@@ -785,7 +785,7 @@ export const ROUND_47: QuizQuestion[] = [
     "round": 47,
     "subject": "2과목",
     "number": 44,
-    "title": "아래 데이터에 대한 AVG 결과로 옳은 것은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>COL1</th><th>COL2</th></tr>\n  <tr><td>10</td><td>20</td></tr>\n  <tr><td>0</td><td>NULL</td></tr>\n  <tr><td>10</td><td>0</td></tr>\n</table>\n```sql\nSELECT AVG(COL1), AVG(COL2) FROM T WHERE COL2 IS NOT NULL;\n```",
+    "title": "아래 데이터에 대한 AVG 결과로 옳은 것은?",
     "options": [
       "10, 10",
       "10, 0",
@@ -821,7 +821,7 @@ export const ROUND_47: QuizQuestion[] = [
     "round": 47,
     "subject": "2과목",
     "number": 46,
-    "title": "아래 SQL 의 결과로 옳은 것은?\n```sql\nSELECT SUBSTR('ABCDE', 2) FROM DUAL;\n```",
+    "title": "아래 SQL 의 결과로 옳은 것은?",
     "options": [
       "AB",
       "BCDE",
@@ -839,7 +839,7 @@ export const ROUND_47: QuizQuestion[] = [
     "round": 47,
     "subject": "2과목",
     "number": 47,
-    "title": "사용자를 삭제할 때 해당 사용자에 속한 모든 오브젝트까지 함께 삭제하는 옵션은?\n```sql\nDROP USER user_name (   );\n```",
+    "title": "사용자를 삭제할 때 해당 사용자에 속한 모든 오브젝트까지 함께 삭제하는 옵션은?",
     "options": [
       "RESTRICT",
       "PURGE",
@@ -857,7 +857,7 @@ export const ROUND_47: QuizQuestion[] = [
     "round": 47,
     "subject": "2과목",
     "number": 48,
-    "title": "아래 SQL 의 빈칸에 들어갈 키워드 조합으로 옳은 것은?\n```sql\nSELECT 부서, SUM(연봉) FROM EMP\n(   ) 부서\nORDER BY SUM(연봉) (   );\n```",
+    "title": "아래 SQL 의 빈칸에 들어갈 키워드 조합으로 옳은 것은?",
     "options": [
       "GROUP BY, DESC",
       "HAVING, ASC",
@@ -875,7 +875,7 @@ export const ROUND_47: QuizQuestion[] = [
     "round": 47,
     "subject": "2과목",
     "number": 49,
-    "title": "아래 SQL 의 결과로 옳은 것은?\n```sql\nSELECT COL1\nFROM (SELECT COL1, ROW_NUMBER() OVER (PARTITION BY 부서 ORDER BY 연봉 DESC) AS RN\n      FROM EMP)\nWHERE RN = 1;\n```",
+    "title": "아래 SQL 의 결과로 옳은 것은?",
     "options": [
       "1, 2",
       "3, 3",
@@ -893,7 +893,7 @@ export const ROUND_47: QuizQuestion[] = [
     "round": 47,
     "subject": "2과목",
     "number": 50,
-    "title": "아래 계층형 쿼리의 결과 행 수로 옳은 것은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>COL1</th><th>COL2</th></tr>\n  <tr><td>1</td><td>NULL</td></tr>\n  <tr><td>2</td><td>NULL</td></tr>\n  <tr><td>3</td><td>1</td></tr>\n  <tr><td>4</td><td>1</td></tr>\n  <tr><td>5</td><td>2</td></tr>\n  <tr><td>6</td><td>2</td></tr>\n  <tr><td>7</td><td>3</td></tr>\n  <tr><td>8</td><td>4</td></tr>\n  <tr><td>9</td><td>5</td></tr>\n</table>\n```sql\nSELECT COUNT(*) FROM T\nWHERE COL1 <> 4\nSTART WITH COL1 = 1\nCONNECT BY PRIOR COL1 = COL2;\n```",
+    "title": "아래 계층형 쿼리의 결과 행 수로 옳은 것은?",
     "options": [
       "1",
       "2",

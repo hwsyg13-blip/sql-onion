@@ -19,7 +19,7 @@ export const ROUND_55: QuizQuestion[] = [
       "나, 다"
     ],
     "correctIndex": 1,
-    "explanation": "가. 외부 사용자 관점에서 데이터를 표현한다. 나. 물리적 저장 구조 및 저장 장치에서의 저장 방식을 표현한다. 다. 조직 전체의 통합적 데이터 관점을 나타낸다. 라. 내부 단계와 내부 스키마로 구성되며 DB 가 물리적으로 저장되는 형식을 정의한다. 내부 스키마는 물리적 저장 구조 및 저장 방식을 다루는 단계이다.",
+    "explanation": "내부 스키마는 물리적 저장 구조 및 저장 방식을 다루는 단계이다.",
     "_source": "authored"
   },
   {
@@ -73,7 +73,7 @@ export const ROUND_55: QuizQuestion[] = [
       "BCNF"
     ],
     "correctIndex": 1,
-    "explanation": "주식별자 컬럼 두 개를 하나씩 나누어 테이블을 분리함으로써, 일반 속성이 주식별자에 부분적으로 종속되는 현상을 해결한다. 부분 함수 종속을 제거하는 단계가 제2 정규화이다.",
+    "explanation": "부분 함수 종속을 제거하는 단계가 제2 정규화이다.",
     "_source": "authored"
   },
   {
@@ -163,7 +163,7 @@ export const ROUND_55: QuizQuestion[] = [
       "엔터티 - 인스턴스 - 속성 - 속성값"
     ],
     "correctIndex": 3,
-    "explanation": "( ㉠ ) → ( ㉡ ) → ( ㉢ ) → ( ㉣ )",
+    "explanation": "",
     "_source": "authored"
   },
   {
@@ -181,7 +181,7 @@ export const ROUND_55: QuizQuestion[] = [
       "관계 유형"
     ],
     "correctIndex": 1,
-    "explanation": "두 개의 엔터티 간 관계에서 참여자의 수를 표현하는 것이며, 가장 일반적인 표현 방법은 1:M, 1:1, M:N 이다.",
+    "explanation": "",
     "_source": "authored"
   },
   {
@@ -227,7 +227,7 @@ export const ROUND_55: QuizQuestion[] = [
     "round": 55,
     "subject": "2과목",
     "number": 13,
-    "title": "아래 SQL 의 결과로 적절한 것은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>DEPT</th><th>SAL</th></tr>\n  <tr><td>10</td><td>3000</td></tr>\n  <tr><td>10</td><td>3000</td></tr>\n  <tr><td>10</td><td>2500</td></tr>\n  <tr><td>20</td><td>5000</td></tr>\n</table>\n```sql\nSELECT DEPT, SAL,\n       DENSE_RANK() OVER (PARTITION BY DEPT ORDER BY SAL DESC) AS RNK\nFROM   EMP;\n```",
+    "title": "아래 SQL 의 결과로 적절한 것은?",
     "options": [
       "1, 2, 2, 1",
       "1, 1, 2, 1",
@@ -245,7 +245,7 @@ export const ROUND_55: QuizQuestion[] = [
     "round": 55,
     "subject": "2과목",
     "number": 14,
-    "title": "아래 SQL 의 결과로 옳은 것은?\n```sql\nINSERT INTO TAB1 VALUES ('A', 100);\nINSERT INTO TAB1 VALUES ('B', 200);\nINSERT INTO TAB1 VALUES ('C', 300);\nINSERT INTO TAB1 VALUES ('C', 400);\nSELECT COUNT(*)\nFROM (\n  SELECT COL1, SUM(COL2)\n  FROM   TAB1\n  GROUP BY ROLLUP(COL1), COL1\n)\nWHERE 1 = 1;\n```",
+    "title": "아래 SQL 의 결과로 옳은 것은?",
     "options": [
       "3",
       "6",
@@ -263,7 +263,7 @@ export const ROUND_55: QuizQuestion[] = [
     "round": 55,
     "subject": "2과목",
     "number": 15,
-    "title": "아래 DDL 에서 오류가 발생하는 위치는?\n```sql\nCREATE TABLE 1234_TBL (  -- (1)\n  COL1 VARCHAR2(20),     -- (2)\n  COL2 NUMBER             -- (3)\n);                        -- (4)\n```",
+    "title": "아래 DDL 에서 오류가 발생하는 위치는?",
     "options": [
       "(1) 테이블명은 숫자로 시작할 수 없다.",
       "(2) VARCHAR2 타입이 허용되지 않는다.",
@@ -299,7 +299,7 @@ export const ROUND_55: QuizQuestion[] = [
     "round": 55,
     "subject": "2과목",
     "number": 17,
-    "title": "아래 SQL 과 동일한 결과를 반환하는 GROUP BY 절은?\n```sql\nSELECT A, B, SUM(SAL)\nFROM   T\nGROUP BY GROUPING SETS( ROLLUP(A), B );\n```",
+    "title": "아래 SQL 과 동일한 결과를 반환하는 GROUP BY 절은?",
     "options": [
       "GROUPING SETS(A, B)",
       "GROUPING SETS((A, B), ())",
@@ -317,7 +317,7 @@ export const ROUND_55: QuizQuestion[] = [
     "round": 55,
     "subject": "2과목",
     "number": 18,
-    "title": "아래 데이터와 SQL 의 결과로 옳은 것은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>COL1</th><th>COL2</th></tr>\n  <tr><td>NULL</td><td>10</td></tr>\n  <tr><td>10</td><td>10</td></tr>\n  <tr><td>10</td><td>NULL</td></tr>\n</table>\n```sql\nSELECT COL1 * 2 + COL2 * 2 FROM T;\n```",
+    "title": "아래 데이터와 SQL 의 결과로 옳은 것은?",
     "options": [
       "20, 40, 20",
       "NULL, 40, NULL",
@@ -335,7 +335,7 @@ export const ROUND_55: QuizQuestion[] = [
     "round": 55,
     "subject": "2과목",
     "number": 19,
-    "title": "아래 SQL 의 결과로 적절한 것은?\n```sql\nSELECT NVL(SUM(C1) + SUM(C2), 0) FROM T;\n```",
+    "title": "아래 SQL 의 결과로 적절한 것은?",
     "options": [
       "두 컬럼에 NULL 이 있으면 전체 결과가 NULL 이 된다.",
       "첫 번째 컬럼 SUM 만 계산된다.",
@@ -353,7 +353,7 @@ export const ROUND_55: QuizQuestion[] = [
     "round": 55,
     "subject": "2과목",
     "number": 20,
-    "title": "두 테이블에 대해 LEFT OUTER JOIN, FULL OUTER JOIN, RIGHT OUTER JOIN 을 각각 수행한 결과 행 수로 옳은 것은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>T1</th><th>T2</th></tr>\n  <tr><td>1, 2, 3</td><td>3, 4, 5</td></tr>\n</table>",
+    "title": "두 테이블에 대해 LEFT OUTER JOIN, FULL OUTER JOIN, RIGHT OUTER JOIN 을 각각 수행한 결과 행 수로 옳은 것은?",
     "options": [
       "3, 3, 3",
       "5, 5, 5",
@@ -371,7 +371,7 @@ export const ROUND_55: QuizQuestion[] = [
     "round": 55,
     "subject": "2과목",
     "number": 21,
-    "title": "아래 SQL 의 결과 행 수는?\n```sql\nSELECT COUNT(*)\nFROM   T1\nLEFT  OUTER JOIN T2 ON T1.ID = T2.ID\nLEFT  OUTER JOIN T3 ON T2.ID = T3.ID\nINNER JOIN T4 ON T3.ID = T4.ID;\n```",
+    "title": "아래 SQL 의 결과 행 수는?",
     "options": [
       "1 건",
       "3 건",
@@ -389,7 +389,7 @@ export const ROUND_55: QuizQuestion[] = [
     "round": 55,
     "subject": "2과목",
     "number": 22,
-    "title": "아래 SQL 의 결과로 옳은 것은?\n```sql\nSELECT REGEXP_INSTR('12345678', '(123)(4(56)(78))', 1, 1, 0, 'i', 2)\nFROM DUAL;\n```",
+    "title": "아래 SQL 의 결과로 옳은 것은?",
     "options": [
       "1",
       "4",
@@ -407,7 +407,7 @@ export const ROUND_55: QuizQuestion[] = [
     "round": 55,
     "subject": "2과목",
     "number": 23,
-    "title": "아래 두 REGEXP_SUBSTR 함수의 결과로 옳은 것은?\n```sql\nSELECT REGEXP_SUBSTR('abcd', 'b\\*c') AS COL1,\n       REGEXP_SUBSTR('abcd', 'b*c')  AS COL2\nFROM DUAL;\n```",
+    "title": "아래 두 REGEXP_SUBSTR 함수의 결과로 옳은 것은?",
     "options": [
       "bc, bc",
       "NULL, bc",
@@ -425,7 +425,7 @@ export const ROUND_55: QuizQuestion[] = [
     "round": 55,
     "subject": "2과목",
     "number": 24,
-    "title": "아래 계층형 질의에서 순방향(부모 → 자식) 전개가 되도록 CONNECT BY 절을 완성하는 것은?\n```sql\nSELECT 사원번호, 관리자번호\nFROM   EMP\nSTART WITH 관리자번호 IS NULL\nCONNECT BY PRIOR ( ? ) = ( ? );\n```",
+    "title": "아래 계층형 질의에서 순방향(부모 → 자식) 전개가 되도록 CONNECT BY 절을 완성하는 것은?",
     "options": [
       "PRIOR 사원번호 = 관리자번호",
       "PRIOR 관리자번호 = 사원번호",
@@ -443,7 +443,7 @@ export const ROUND_55: QuizQuestion[] = [
     "round": 55,
     "subject": "2과목",
     "number": 25,
-    "title": "아래 SQL 의 결과로 옳은 것은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>ID</th><th>VAL</th></tr>\n  <tr><td>1</td><td>40</td></tr>\n  <tr><td>2</td><td>150</td></tr>\n</table>\n```sql\nSELECT *\nFROM   (SELECT ID, VAL, ROW_NUMBER() OVER (ORDER BY VAL DESC) AS RN\n        FROM   T)\nORDER BY RN;\n```",
+    "title": "아래 SQL 의 결과로 옳은 것은?",
     "options": [
       "1, 40 / 2, 150",
       "2, 150 / 1, 40",
@@ -497,7 +497,7 @@ export const ROUND_55: QuizQuestion[] = [
     "round": 55,
     "subject": "2과목",
     "number": 28,
-    "title": "아래 WHERE 절의 결과 행 수로 옳은 것은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>고객번호</th><th>등급</th><th>지역</th></tr>\n  <tr><td>XX</td><td>1</td><td>서울</td></tr>\n  <tr><td>XX</td><td>2</td><td>부산</td></tr>\n  <tr><td>YY</td><td>1</td><td>서울</td></tr>\n  <tr><td>XX</td><td>1</td><td>서울</td></tr>\n  <tr><td>YY</td><td>1</td><td>서울</td></tr>\n</table>\n```sql\nSELECT *\nFROM   T\nWHERE  고객번호 = 'XX' OR 고객번호 = 'YY'\nAND    등급 = 1\nAND    지역 = '서울';\n```",
+    "title": "아래 WHERE 절의 결과 행 수로 옳은 것은?",
     "options": [
       "5건",
       "3건",
@@ -569,7 +569,7 @@ export const ROUND_55: QuizQuestion[] = [
     "round": 55,
     "subject": "2과목",
     "number": 32,
-    "title": "아래 ERD 를 해석한 내용으로 옳은 것은?\n```\n[ 고객 ] ||-----∈ [ 계약 ] ||-----∈ [ 상세내용 ]\n```",
+    "title": "아래 ERD 를 해석한 내용으로 옳은 것은?",
     "options": [
       "고객과 상세내용을 조인한 결과 건수는 고객 수와 같다.",
       "고객과 상세내용을 조인한 결과 건수는 상세내용 건수와 같다.",
@@ -587,7 +587,7 @@ export const ROUND_55: QuizQuestion[] = [
     "round": 55,
     "subject": "2과목",
     "number": 33,
-    "title": "아래 SQL 결과의 컬럼명으로 옳은 것은?\n```sql\nSELECT COL1 AS AAB, COL2 AS BBA\nFROM   T\nUNION ALL\nSELECT COL1 AS BBA, COL2 AS AAB\nFROM   T;\n```",
+    "title": "아래 SQL 결과의 컬럼명으로 옳은 것은?",
     "options": [
       "AAB, BBA",
       "BBA, AAB",
@@ -605,7 +605,7 @@ export const ROUND_55: QuizQuestion[] = [
     "round": 55,
     "subject": "2과목",
     "number": 34,
-    "title": "3회 이상 주문한 고객을 조회하는 HAVING 절로 옳은 것은?\n```sql\nSELECT 고객ID\nFROM   주문\nGROUP BY 고객ID\nHAVING ( ? );\n```",
+    "title": "3회 이상 주문한 고객을 조회하는 HAVING 절로 옳은 것은?",
     "options": [
       "HAVING COUNT(구매번호) >= 3",
       "HAVING SUM(구매번호) >= 3",
@@ -623,7 +623,7 @@ export const ROUND_55: QuizQuestion[] = [
     "round": 55,
     "subject": "2과목",
     "number": 35,
-    "title": "아래 SQL 중 오류가 발생하는 문장은?\n```sql\nCREATE TABLE SQLD_55_34_01 (\n  COL1 VARCHAR2(50),\n  COL2 NUMBER,\n  COL3 VARCHAR2(50),\n  CONSTRAINT PK_01 PRIMARY KEY (COL1)\n);\nCREATE TABLE SQLD_55_34_02 (\n  COL4 VARCHAR2(50),\n  COL5 NUMBER,\n  COL1 VARCHAR2(50),\n  CONSTRAINT PK_02 PRIMARY KEY (COL4),\n  CONSTRAINT FK_02_01 FOREIGN KEY (COL1) REFERENCES SQLD_55_34_01(COL1)\n);\n-- (1) INSERT INTO SQLD_55_34_01 VALUES ('A', 100, '가');\n-- (2) INSERT INTO SQLD_55_34_02 VALUES ('02_A', 100, NULL);\n-- (3) INSERT INTO SQLD_55_34_02 VALUES ('02_B', 200, 'A');\n-- (4) UPDATE SQLD_55_34_02 SET COL1 = 'B' WHERE COL4 = '02_A';\n```",
+    "title": "아래 SQL 중 오류가 발생하는 문장은?",
     "options": [
       "(1)",
       "(2)",
@@ -641,7 +641,7 @@ export const ROUND_55: QuizQuestion[] = [
     "round": 55,
     "subject": "2과목",
     "number": 36,
-    "title": "아래 SQL 수행 후 출력되는 SQL 의 조합으로 옳은 것은?\n```sql\n(가) SQL1 ...\nSAVEPOINT A;\n(나) SQL2 ...\nSAVEPOINT B;\n(다) SQL3 ...\nROLLBACK TO SAVEPOINT A;\n(라) SQL4 ...\n(마) SQL5 ...\nCOMMIT;\n```",
+    "title": "아래 SQL 수행 후 출력되는 SQL 의 조합으로 옳은 것은?",
     "options": [
       "가, 라, 마",
       "가, 나, 라, 마",
@@ -749,7 +749,7 @@ export const ROUND_55: QuizQuestion[] = [
     "round": 55,
     "subject": "2과목",
     "number": 42,
-    "title": "아래 SQL 의 결과로 옳은 것은?\n```sql\n-- (1) SELECT COL1/COL2 FROM T WHERE COL1=0   AND COL2=300;\n-- (2) SELECT COL1/COL2 FROM T WHERE COL1=300 AND COL2=0;\n-- (3) SELECT COL1/COL2 FROM T WHERE COL1=100 AND COL2 IS NULL;\n```",
+    "title": "아래 SQL 의 결과로 옳은 것은?",
     "options": [
       "0, 0, 0",
       "0, ERROR, NULL",
@@ -785,7 +785,7 @@ export const ROUND_55: QuizQuestion[] = [
     "round": 55,
     "subject": "2과목",
     "number": 44,
-    "title": "아래 과목 목록에서 LIKE '%학' 조건으로 반환되는 행의 개수는?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>과목</th></tr>\n  <tr><td>물리학</td></tr>\n  <tr><td>수학</td></tr>\n  <tr><td>공학개론</td></tr>\n</table>\n```sql\nSELECT *\nFROM   수강\nWHERE  과목 LIKE '%학';\n```",
+    "title": "아래 과목 목록에서 LIKE '%학' 조건으로 반환되는 행의 개수는?",
     "options": [
       "1개",
       "2개",
@@ -821,7 +821,7 @@ export const ROUND_55: QuizQuestion[] = [
     "round": 55,
     "subject": "2과목",
     "number": 46,
-    "title": "기존 테이블에 새로운 컬럼을 추가하는 DDL 로 적절한 것은?\n```sql\n-- 직원 테이블에 직장우편번호(OFFI_POST_NUMBER) 컬럼을 추가한다.\n```",
+    "title": "기존 테이블에 새로운 컬럼을 추가하는 DDL 로 적절한 것은?",
     "options": [
       "CREATE TABLE EMP ADD OFFI_POST_NUMBER VARCHAR2(80);",
       "ALTER TABLE EMP ADD (OFFI_POST_NUMBER VARCHAR2(80));",
@@ -875,7 +875,7 @@ export const ROUND_55: QuizQuestion[] = [
     "round": 55,
     "subject": "2과목",
     "number": 49,
-    "title": "아래 BETWEEN 조건과 결과가 다른 것은?\n```sql\nSELECT *\nFROM   T\nWHERE  COL1 BETWEEN 날짜(XXXX) AND 날짜(YYYY);\n```",
+    "title": "아래 BETWEEN 조건과 결과가 다른 것은?",
     "options": [
       "COL1 > 날짜(XXXX) AND COL1 < 날짜(YYYY)",
       "COL1 >= 날짜(XXXX) AND COL1 <= 날짜(YYYY)",
@@ -893,7 +893,7 @@ export const ROUND_55: QuizQuestion[] = [
     "round": 55,
     "subject": "2과목",
     "number": 50,
-    "title": "아래 SQL 에 대한 설명으로 적절하지 않은 것은?\n```sql\nSELECT ...\nFROM   EMP\nWHERE  DEPT IN (SELECT DEPT\n                FROM   EMP\n                WHERE  EMPNM IN ('JOHN', 'SMITH'));\n```",
+    "title": "아래 SQL 에 대한 설명으로 적절하지 않은 것은?",
     "options": [
       "IN 절은 다중 행 서브쿼리를 허용한다.",
       "이름이 'JOHN' 인 직원이 두 명이어도 오류가 발생하지 않는다.",

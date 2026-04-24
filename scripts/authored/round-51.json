@@ -1,6 +1,6 @@
 {
   "round": 51,
-  "notes": "restored from 51회_복원.md — MCQ 50 + 단답형 0 (단답형은 현재 UI 미지원이라 제외)",
+  "notes": "restored from 51회_복원.md — MCQ 50 (references 포함: 29) + 단답형 0 제외",
   "authored": [
     {
       "subject": "1과목",
@@ -18,7 +18,7 @@
     {
       "subject": "1과목",
       "number": 2,
-      "title": "아래 ERD 해석에 대한 설명 중 적절하지 않은 것은?\n```\n[ 고객 ] ||-----∈ [ 주문 ]   -- 주문은 고객이 반드시 필요\n```",
+      "title": "아래 ERD 해석에 대한 설명 중 적절하지 않은 것은?",
       "options": [
         "하나의 고객은 여러 개의 주문을 가질 수 있다.",
         "주문은 반드시 고객과 연결된다.",
@@ -26,7 +26,13 @@
         "주문은 고객을 가지지 않을 수도 있다."
       ],
       "correctIndex": 3,
-      "explanation": "주문은 반드시 고객에 종속되므로 고객 없이 존재할 수 없다."
+      "explanation": "주문은 반드시 고객에 종속되므로 고객 없이 존재할 수 없다.",
+      "references": [
+        {
+          "type": "sql",
+          "code": "[ 고객 ] ||-----∈ [ 주문 ]   -- 주문은 고객이 반드시 필요"
+        }
+      ]
     },
     {
       "subject": "1과목",
@@ -148,7 +154,7 @@
     {
       "subject": "2과목",
       "number": 12,
-      "title": "아래 데이터에 대한 누적합 쿼리 중 원하는 결과를 얻을 수 없는 것은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>일자</th><th>금액</th></tr>\n  <tr><td>2023-11-01</td><td>100</td></tr>\n  <tr><td>2023-11-02</td><td>150</td></tr>\n  <tr><td>2023-11-02</td><td>250</td></tr>\n  <tr><td>2023-11-03</td><td>100</td></tr>\n</table>",
+      "title": "아래 데이터에 대한 누적합 쿼리 중 원하는 결과를 얻을 수 없는 것은?",
       "options": [
         "SUM(금액) OVER (ORDER BY 일자)",
         "SUM(금액) OVER (ORDER BY 일자 ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW)",
@@ -156,7 +162,34 @@
         "서브쿼리를 이용한 누적합 계산"
       ],
       "correctIndex": 1,
-      "explanation": ""
+      "explanation": "",
+      "references": [
+        {
+          "type": "table",
+          "headers": [
+            "일자",
+            "금액"
+          ],
+          "rows": [
+            [
+              "2023-11-01",
+              "100"
+            ],
+            [
+              "2023-11-02",
+              "150"
+            ],
+            [
+              "2023-11-02",
+              "250"
+            ],
+            [
+              "2023-11-03",
+              "100"
+            ]
+          ]
+        }
+      ]
     },
     {
       "subject": "2과목",
@@ -187,7 +220,7 @@
     {
       "subject": "2과목",
       "number": 15,
-      "title": "아래 데이터에 대한 NTILE(3) 윈도우 함수의 결과로 옳은 것은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>COL1</th></tr>\n  <tr><td>1</td></tr>\n  <tr><td>2</td></tr>\n  <tr><td>3</td></tr>\n  <tr><td>4</td></tr>\n  <tr><td>5</td></tr>\n  <tr><td>6</td></tr>\n  <tr><td>7</td></tr>\n  <tr><td>8</td></tr>\n</table>",
+      "title": "아래 데이터에 대한 NTILE(3) 윈도우 함수의 결과로 옳은 것은?",
       "options": [
         "1,1,1,2,2,2,3,3",
         "1,1,2,2,3,3,3,3",
@@ -195,12 +228,46 @@
         "3,3,3,2,2,2,1,1"
       ],
       "correctIndex": 0,
-      "explanation": "8 건을 세 그룹으로 나누면 앞부터 3, 3, 2 건이 배정된다."
+      "explanation": "8 건을 세 그룹으로 나누면 앞부터 3, 3, 2 건이 배정된다.",
+      "references": [
+        {
+          "type": "table",
+          "headers": [
+            "COL1"
+          ],
+          "rows": [
+            [
+              "1"
+            ],
+            [
+              "2"
+            ],
+            [
+              "3"
+            ],
+            [
+              "4"
+            ],
+            [
+              "5"
+            ],
+            [
+              "6"
+            ],
+            [
+              "7"
+            ],
+            [
+              "8"
+            ]
+          ]
+        }
+      ]
     },
     {
       "subject": "2과목",
       "number": 16,
-      "title": "A 와 B 각각의 소계, 총계까지 모두 출력하는 GROUP BY 절은?\n```sql\nSELECT A, B, SUM(X)\nFROM   T\nGROUP BY ( ? );\n```",
+      "title": "A 와 B 각각의 소계, 총계까지 모두 출력하는 GROUP BY 절은?",
       "options": [
         "ROLLUP(A, B)",
         "GROUP BY A, B",
@@ -208,12 +275,18 @@
         "GROUPING SETS((A, B))"
       ],
       "correctIndex": 2,
-      "explanation": "CUBE 는 (A,B), (A), (B), () 의 네 조합을 모두 반환한다."
+      "explanation": "CUBE 는 (A,B), (A), (B), () 의 네 조합을 모두 반환한다.",
+      "references": [
+        {
+          "type": "sql",
+          "code": "SELECT A, B, SUM(X)\nFROM   T\nGROUP BY ( ? );"
+        }
+      ]
     },
     {
       "subject": "2과목",
       "number": 17,
-      "title": "아래 데이터에 대해 나눗셈 연산 시 0 나누기 오류를 피하기 위해 사용되는 함수는?\n```sql\nSELECT COL1 / ( ? )(COL2, 0) FROM T;\n```",
+      "title": "아래 데이터에 대해 나눗셈 연산 시 0 나누기 오류를 피하기 위해 사용되는 함수는?",
       "options": [
         "NVL",
         "NULLIF",
@@ -221,12 +294,18 @@
         "DECODE"
       ],
       "correctIndex": 1,
-      "explanation": "NULLIF(COL2, 0) 은 COL2 가 0 이면 NULL 을 반환하여 오류 대신 NULL 연산으로 이어진다."
+      "explanation": "NULLIF(COL2, 0) 은 COL2 가 0 이면 NULL 을 반환하여 오류 대신 NULL 연산으로 이어진다.",
+      "references": [
+        {
+          "type": "sql",
+          "code": "SELECT COL1 / ( ? )(COL2, 0) FROM T;"
+        }
+      ]
     },
     {
       "subject": "2과목",
       "number": 18,
-      "title": "아래 데이터에 대한 두 SQL 의 결과로 옳은 것은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>A</th><th>B</th><th>C</th><th>D</th></tr>\n  <tr><td>10</td><td>NULL</td><td>NULL</td><td>20</td></tr>\n  <tr><td>NULL</td><td>10</td><td>20</td><td>NULL</td></tr>\n  <tr><td>30</td><td>NULL</td><td>10</td><td>NULL</td></tr>\n  <tr><td>4</td><td>6</td><td>10</td><td>10</td></tr>\n</table>\n```sql\n-- ㉠ SELECT SUM(A + B + C + D) FROM T;\n-- ㉡ SELECT SUM(A) + SUM(B) + SUM(C) + SUM(D) FROM T;\n```",
+      "title": "아래 데이터에 대한 두 SQL 의 결과로 옳은 것은?",
       "options": [
         "㉠ = 30, ㉡ = 130",
         "㉠ = 30, ㉡ = 44 + 16 + 40 + 30 (분리 합산)",
@@ -234,12 +313,53 @@
         "둘 다 NULL"
       ],
       "correctIndex": 1,
-      "explanation": "NULL 포함 행은 + 연산 전체가 NULL 이 되어 ㉠ 에는 반영되지 않는다. ㉡ 은 컬럼별로 NULL 을 제외한 SUM 을 수행한다."
+      "explanation": "NULL 포함 행은 + 연산 전체가 NULL 이 되어 ㉠ 에는 반영되지 않는다. ㉡ 은 컬럼별로 NULL 을 제외한 SUM 을 수행한다.",
+      "references": [
+        {
+          "type": "table",
+          "headers": [
+            "A",
+            "B",
+            "C",
+            "D"
+          ],
+          "rows": [
+            [
+              "10",
+              "NULL",
+              "NULL",
+              "20"
+            ],
+            [
+              "NULL",
+              "10",
+              "20",
+              "NULL"
+            ],
+            [
+              "30",
+              "NULL",
+              "10",
+              "NULL"
+            ],
+            [
+              "4",
+              "6",
+              "10",
+              "10"
+            ]
+          ]
+        },
+        {
+          "type": "sql",
+          "code": "-- ㉠ SELECT SUM(A + B + C + D) FROM T;\n-- ㉡ SELECT SUM(A) + SUM(B) + SUM(C) + SUM(D) FROM T;"
+        }
+      ]
     },
     {
       "subject": "2과목",
       "number": 19,
-      "title": "아래 SQL 의 결과로 옳은 것은?\n```sql\nSELECT NVL(MAX(COL1), 'X')\nFROM   TAB1\nWHERE  COL2 > 9\nGROUP BY COL1;\n```",
+      "title": "아래 SQL 의 결과로 옳은 것은?",
       "options": [
         "공집합",
         "'X' 한 행",
@@ -247,12 +367,18 @@
         "MAX(COL1) 값"
       ],
       "correctIndex": 0,
-      "explanation": "WHERE 조건을 만족하는 행이 없고 GROUP BY 가 지정되어 있으므로 결과가 공집합이다."
+      "explanation": "WHERE 조건을 만족하는 행이 없고 GROUP BY 가 지정되어 있으므로 결과가 공집합이다.",
+      "references": [
+        {
+          "type": "sql",
+          "code": "SELECT NVL(MAX(COL1), 'X')\nFROM   TAB1\nWHERE  COL2 > 9\nGROUP BY COL1;"
+        }
+      ]
     },
     {
       "subject": "2과목",
       "number": 20,
-      "title": "아래 DDL 중 오류가 발생하지 않는 것은?\n```sql\n-- TAB1: COL1 NUMBER, COL2 VARCHAR2 DEFAULT '000',\n--       COL3 DATE, COL4 VARCHAR2 (값: 12345, 45677)\n```",
+      "title": "아래 DDL 중 오류가 발생하지 않는 것은?",
       "options": [
         "ALTER TABLE TAB1 MODIFY COL1 VARCHAR2(10);",
         "ALTER TABLE TAB1 MODIFY COL2 NUMBER;",
@@ -260,12 +386,18 @@
         "ALTER TABLE TAB1 MODIFY COL4 NUMBER;"
       ],
       "correctIndex": 2,
-      "explanation": "DATE 를 TIMESTAMP 로 변경하는 것은 호환 가능한 변환이므로 오류가 발생하지 않는다."
+      "explanation": "DATE 를 TIMESTAMP 로 변경하는 것은 호환 가능한 변환이므로 오류가 발생하지 않는다.",
+      "references": [
+        {
+          "type": "sql",
+          "code": "-- TAB1: COL1 NUMBER, COL2 VARCHAR2 DEFAULT '000',\n--       COL3 DATE, COL4 VARCHAR2 (값: 12345, 45677)"
+        }
+      ]
     },
     {
       "subject": "2과목",
       "number": 21,
-      "title": "아래 SQL 의 결과로 옳은 것은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th colspan=\"2\">T1</th><th colspan=\"2\">T2</th></tr>\n  <tr><th>COL1</th><th>COL1</th></tr>\n  <tr><td>10</td><td>10</td></tr>\n  <tr><td>20</td><td>NULL</td></tr>\n</table>\n```sql\nSELECT COUNT(*) FROM T1\nWHERE NOT EXISTS (SELECT 'X' FROM T2 WHERE T1.COL1 = T2.COL1);\n```",
+      "title": "아래 SQL 의 결과로 옳은 것은?",
       "options": [
         "1",
         "0",
@@ -273,12 +405,39 @@
         "NULL"
       ],
       "correctIndex": 0,
-      "explanation": "T1.COL1=20 은 T2 에 매칭되는 값이 없어 NOT EXISTS 조건을 만족하여 1 건이 반환된다."
+      "explanation": "T1.COL1=20 은 T2 에 매칭되는 값이 없어 NOT EXISTS 조건을 만족하여 1 건이 반환된다.",
+      "references": [
+        {
+          "type": "table",
+          "headers": [
+            "T1",
+            "T2"
+          ],
+          "rows": [
+            [
+              "COL1",
+              "COL1"
+            ],
+            [
+              "10",
+              "10"
+            ],
+            [
+              "20",
+              "NULL"
+            ]
+          ]
+        },
+        {
+          "type": "sql",
+          "code": "SELECT COUNT(*) FROM T1\nWHERE NOT EXISTS (SELECT 'X' FROM T2 WHERE T1.COL1 = T2.COL1);"
+        }
+      ]
     },
     {
       "subject": "2과목",
       "number": 22,
-      "title": "아래 SQL 의 결과로 옳게 짝지어진 것은?\n```sql\nSELECT 10 / NULL, 10 / 0 FROM DUAL;\n```",
+      "title": "아래 SQL 의 결과로 옳게 짝지어진 것은?",
       "options": [
         "10, 10",
         "NULL, ERROR",
@@ -286,12 +445,18 @@
         "NULL, NULL"
       ],
       "correctIndex": 1,
-      "explanation": "NULL 과의 나눗셈은 NULL, 0 으로 나누면 'divisor is equal to zero' 오류가 발생한다."
+      "explanation": "NULL 과의 나눗셈은 NULL, 0 으로 나누면 'divisor is equal to zero' 오류가 발생한다.",
+      "references": [
+        {
+          "type": "sql",
+          "code": "SELECT 10 / NULL, 10 / 0 FROM DUAL;"
+        }
+      ]
     },
     {
       "subject": "2과목",
       "number": 23,
-      "title": "아래 SQL 의 결과로 옳은 것은?\n```sql\nSELECT * FROM T\nWHERE COL1 <> 'CPG' AND COL2 > 10;\n```",
+      "title": "아래 SQL 의 결과로 옳은 것은?",
       "options": [
         "전체 행",
         "COL1 = 'CPG' 인 행",
@@ -299,12 +464,18 @@
         "조건을 만족하는 행 없음 (결과 없음)"
       ],
       "correctIndex": 3,
-      "explanation": "원본 기출의 조건을 만족하는 행이 없는 경우를 묻는 문항이다."
+      "explanation": "원본 기출의 조건을 만족하는 행이 없는 경우를 묻는 문항이다.",
+      "references": [
+        {
+          "type": "sql",
+          "code": "SELECT * FROM T\nWHERE COL1 <> 'CPG' AND COL2 > 10;"
+        }
+      ]
     },
     {
       "subject": "2과목",
       "number": 24,
-      "title": "아래 OUTER JOIN SQL 의 결과로 옳은 것은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>T1</th><th>T2</th><th>T3</th></tr>\n  <tr><td>1, 2, 3</td><td>1, 2, 4</td><td>1, 2, 3</td></tr>\n</table>\n```sql\nSELECT SUM(C.C1)\nFROM   T1 A\nLEFT OUTER JOIN T2 B ON A.C1 = B.C1\nRIGHT OUTER JOIN T3 C ON B.C1 = C.C1\nWHERE 1 = 1;\n```",
+      "title": "아래 OUTER JOIN SQL 의 결과로 옳은 것은?",
       "options": [
         "3",
         "6",
@@ -312,12 +483,33 @@
         "12"
       ],
       "correctIndex": 1,
-      "explanation": "T3 기준 조인 결과에서 매칭된 C1 값(1, 2, 3) 의 합이 반환된다."
+      "explanation": "T3 기준 조인 결과에서 매칭된 C1 값(1, 2, 3) 의 합이 반환된다.",
+      "references": [
+        {
+          "type": "table",
+          "headers": [
+            "T1",
+            "T2",
+            "T3"
+          ],
+          "rows": [
+            [
+              "1, 2, 3",
+              "1, 2, 4",
+              "1, 2, 3"
+            ]
+          ]
+        },
+        {
+          "type": "sql",
+          "code": "SELECT SUM(C.C1)\nFROM   T1 A\nLEFT OUTER JOIN T2 B ON A.C1 = B.C1\nRIGHT OUTER JOIN T3 C ON B.C1 = C.C1\nWHERE 1 = 1;"
+        }
+      ]
     },
     {
       "subject": "2과목",
       "number": 25,
-      "title": "아래 SQL 의 결과로 옳은 것은?\n```sql\nSELECT SUBSTR('...의 마...', 3, 3), ROUND(109, 1) FROM DUAL;\n```",
+      "title": "아래 SQL 의 결과로 옳은 것은?",
       "options": [
         "'...의', 109.0",
         "'의 마', 110",
@@ -325,12 +517,18 @@
         "'마...', 100"
       ],
       "correctIndex": 2,
-      "explanation": "ROUND(값, 1) 은 소수 첫째 자리까지 반올림하며 109 가 그대로 유지된다."
+      "explanation": "ROUND(값, 1) 은 소수 첫째 자리까지 반올림하며 109 가 그대로 유지된다.",
+      "references": [
+        {
+          "type": "sql",
+          "code": "SELECT SUBSTR('...의 마...', 3, 3), ROUND(109, 1) FROM DUAL;"
+        }
+      ]
     },
     {
       "subject": "2과목",
       "number": 26,
-      "title": "아래 INSERT FIRST 수행 후 T1, T2, T3 테이블의 행 수로 옳은 것은?\n```sql\n-- TAB1 데이터: 1, 2, 4\nINSERT FIRST\n  WHEN C1 >= 2 THEN INTO T1 VALUES (C1)\n  WHEN C1 >= 4 THEN INTO T2 VALUES (C1)\n  ELSE INTO T3 VALUES (C1)\nSELECT * FROM TAB1;\n```",
+      "title": "아래 INSERT FIRST 수행 후 T1, T2, T3 테이블의 행 수로 옳은 것은?",
       "options": [
         "T1 = 2, T2 = 0, T3 = 1",
         "T1 = 1, T2 = 1, T3 = 1",
@@ -338,7 +536,13 @@
         "T1 = 0, T2 = 1, T3 = 2"
       ],
       "correctIndex": 0,
-      "explanation": "INSERT FIRST 는 조건에 만족하는 첫 번째 WHEN 만 실행되므로 2·4 는 T1 으로, 1 은 ELSE 의 T3 로 입력된다."
+      "explanation": "INSERT FIRST 는 조건에 만족하는 첫 번째 WHEN 만 실행되므로 2·4 는 T1 으로, 1 은 ELSE 의 T3 로 입력된다.",
+      "references": [
+        {
+          "type": "sql",
+          "code": "-- TAB1 데이터: 1, 2, 4\n\nINSERT FIRST\n  WHEN C1 >= 2 THEN INTO T1 VALUES (C1)\n  WHEN C1 >= 4 THEN INTO T2 VALUES (C1)\n  ELSE INTO T3 VALUES (C1)\nSELECT * FROM TAB1;"
+        }
+      ]
     },
     {
       "subject": "2과목",
@@ -351,7 +555,13 @@
         "WHERE TEAM_CODE BETWEEN A AND B"
       ],
       "correctIndex": 1,
-      "explanation": "팀 코드가 A 또는 B 이고, 다른 조건을 함께 만족하는 행을 조회한다."
+      "explanation": "",
+      "references": [
+        {
+          "type": "text",
+          "content": "팀 코드가 A 또는 B 이고, 다른 조건을 함께 만족하는 행을 조회한다."
+        }
+      ]
     },
     {
       "subject": "2과목",
@@ -382,7 +592,7 @@
     {
       "subject": "2과목",
       "number": 30,
-      "title": "아래 두 테이블에 대한 네 SQL 중 결과가 다른 하나는?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>T1</th><th>T2</th></tr>\n  <tr><td>A, B, C, D, E</td><td>A, B, C</td></tr>\n</table>",
+      "title": "아래 두 테이블에 대한 네 SQL 중 결과가 다른 하나는?",
       "options": [
         "`SELECT COL1 FROM T1 MINUS SELECT COL1 FROM T2;`",
         "`SELECT T1.COL1 FROM T1, T2 WHERE T1.COL1 <> T2.COL1;`",
@@ -390,12 +600,27 @@
         "`SELECT T1.COL1 FROM T1 LEFT JOIN T2 ON T1.COL1 = T2.COL1 WHERE T2.COL1 IS NULL;`"
       ],
       "correctIndex": 1,
-      "explanation": ""
+      "explanation": "",
+      "references": [
+        {
+          "type": "table",
+          "headers": [
+            "T1",
+            "T2"
+          ],
+          "rows": [
+            [
+              "A, B, C, D, E",
+              "A, B, C"
+            ]
+          ]
+        }
+      ]
     },
     {
       "subject": "2과목",
       "number": 31,
-      "title": "아래 SQL Server 테이블에 대한 INSERT 결과로 옳은 것은?\n```sql\nCREATE TABLE T1 (\n  MAIN  INT IDENTITY(1,1),\n  VALUE INT CHECK (VALUE >= 3)\n);\nINSERT INTO T1 VALUES(1);\nINSERT INTO T1 VALUES(2);\nINSERT INTO T1 VALUES(3);\nSELECT COUNT(*) FROM T1;\n```",
+      "title": "아래 SQL Server 테이블에 대한 INSERT 결과로 옳은 것은?",
       "options": [
         "1",
         "2",
@@ -403,12 +628,18 @@
         "0"
       ],
       "correctIndex": 0,
-      "explanation": "CHECK 조건을 통과한 행은 VALUE=3 한 건이다."
+      "explanation": "CHECK 조건을 통과한 행은 VALUE=3 한 건이다.",
+      "references": [
+        {
+          "type": "sql",
+          "code": "CREATE TABLE T1 (\n  MAIN  INT IDENTITY(1,1),\n  VALUE INT CHECK (VALUE >= 3)\n);\n\nINSERT INTO T1 VALUES(1);\nINSERT INTO T1 VALUES(2);\nINSERT INTO T1 VALUES(3);\n\nSELECT COUNT(*) FROM T1;"
+        }
+      ]
     },
     {
       "subject": "2과목",
       "number": 32,
-      "title": "아래 WHERE 조건과 동일한 의미의 SQL 은?\n```sql\nWHERE (COL1, COL2) IN (('A', 1000), ('B', 2000));\n```",
+      "title": "아래 WHERE 조건과 동일한 의미의 SQL 은?",
       "options": [
         "WHERE (COL1 = 'A' AND COL2 = 1000) OR (COL1 = 'B' AND COL2 = 2000)",
         "WHERE COL1 = 'A' AND COL2 = 1000 AND COL1 = 'B' AND COL2 = 2000",
@@ -416,7 +647,13 @@
         "WHERE COL1 = 'A' OR COL2 = 2000"
       ],
       "correctIndex": 0,
-      "explanation": ""
+      "explanation": "",
+      "references": [
+        {
+          "type": "sql",
+          "code": "WHERE (COL1, COL2) IN (('A', 1000), ('B', 2000));"
+        }
+      ]
     },
     {
       "subject": "2과목",
@@ -434,7 +671,7 @@
     {
       "subject": "2과목",
       "number": 34,
-      "title": "아래 SQL 수행 후 테이블의 최종 값으로 옳은 것은?\n```sql\nINSERT INTO T VALUES (1);\nINSERT INTO T VALUES (2);\nINSERT INTO T VALUES (3);\nSAVEPOINT P1;\nINSERT INTO T VALUES (4);\nROLLBACK TO SAVEPOINT P1;\nSELECT * FROM T;\n```",
+      "title": "아래 SQL 수행 후 테이블의 최종 값으로 옳은 것은?",
       "options": [
         "1, 2, 3",
         "1, 2, 3, 4",
@@ -442,12 +679,18 @@
         "공집합"
       ],
       "correctIndex": 0,
-      "explanation": "SAVEPOINT P1 이후의 INSERT (4) 는 롤백되어 반영되지 않는다."
+      "explanation": "SAVEPOINT P1 이후의 INSERT (4) 는 롤백되어 반영되지 않는다.",
+      "references": [
+        {
+          "type": "sql",
+          "code": "INSERT INTO T VALUES (1);\nINSERT INTO T VALUES (2);\nINSERT INTO T VALUES (3);\nSAVEPOINT P1;\nINSERT INTO T VALUES (4);\nROLLBACK TO SAVEPOINT P1;\n\nSELECT * FROM T;"
+        }
+      ]
     },
     {
       "subject": "2과목",
       "number": 35,
-      "title": "아래 계층형 쿼리의 결과로 옳은 것은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>COL1</th><th>COL2</th><th>COL3</th></tr>\n  <tr><td>A</td><td>NULL</td><td>1</td></tr>\n  <tr><td>B</td><td>A</td><td>2</td></tr>\n  <tr><td>C</td><td>A</td><td>3</td></tr>\n  <tr><td>D</td><td>B</td><td>4</td></tr>\n</table>\n```sql\nSELECT COUNT(*)\nFROM   TAB1\nWHERE  COL3 <> 2\nSTART WITH COL3 = 4\nCONNECT BY COL1 = PRIOR COL2;\n```",
+      "title": "아래 계층형 쿼리의 결과로 옳은 것은?",
       "options": [
         "1",
         "2",
@@ -455,7 +698,43 @@
         "4"
       ],
       "correctIndex": 1,
-      "explanation": "COL3 = 4 에서 역방향 전개로 (D→B→A) 결과가 구해지고, 이후 WHERE COL3 <> 2 로 B 가 제거되어 A, D 의 두 건이 남는다."
+      "explanation": "COL3 = 4 에서 역방향 전개로 (D→B→A) 결과가 구해지고, 이후 WHERE COL3 <> 2 로 B 가 제거되어 A, D 의 두 건이 남는다.",
+      "references": [
+        {
+          "type": "table",
+          "headers": [
+            "COL1",
+            "COL2",
+            "COL3"
+          ],
+          "rows": [
+            [
+              "A",
+              "NULL",
+              "1"
+            ],
+            [
+              "B",
+              "A",
+              "2"
+            ],
+            [
+              "C",
+              "A",
+              "3"
+            ],
+            [
+              "D",
+              "B",
+              "4"
+            ]
+          ]
+        },
+        {
+          "type": "sql",
+          "code": "SELECT COUNT(*)\nFROM   TAB1\nWHERE  COL3 <> 2\nSTART WITH COL3 = 4\nCONNECT BY COL1 = PRIOR COL2;"
+        }
+      ]
     },
     {
       "subject": "2과목",
@@ -473,7 +752,7 @@
     {
       "subject": "2과목",
       "number": 37,
-      "title": "아래 SQL 의 결과로 옳은 것은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>COL1</th></tr>\n  <tr><td>100</td></tr>\n  <tr><td>200</td></tr>\n  <tr><td>300</td></tr>\n</table>\n```sql\nSELECT * FROM TAB WHERE COL1 IN (100, 200, 100);\n```",
+      "title": "아래 SQL 의 결과로 옳은 것은?",
       "options": [
         "1건",
         "2건",
@@ -481,7 +760,30 @@
         "4건"
       ],
       "correctIndex": 1,
-      "explanation": "IN 절의 중복 값은 무시되어 100, 200 두 행만 반환된다."
+      "explanation": "IN 절의 중복 값은 무시되어 100, 200 두 행만 반환된다.",
+      "references": [
+        {
+          "type": "table",
+          "headers": [
+            "COL1"
+          ],
+          "rows": [
+            [
+              "100"
+            ],
+            [
+              "200"
+            ],
+            [
+              "300"
+            ]
+          ]
+        },
+        {
+          "type": "sql",
+          "code": "SELECT * FROM TAB WHERE COL1 IN (100, 200, 100);"
+        }
+      ]
     },
     {
       "subject": "2과목",
@@ -499,7 +801,7 @@
     {
       "subject": "2과목",
       "number": 39,
-      "title": "아래 OUTER JOIN 의 결과 행 수로 옳은 것은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>A</th><th>B</th></tr>\n  <tr><td>1</td><td>10</td></tr>\n  <tr><td>2</td><td>100</td></tr>\n  <tr><td>3</td><td>220</td></tr>\n</table>\n```sql\nSELECT A.*, B.*\nFROM   A LEFT OUTER JOIN B ON (A.COL1 = B.COL1 AND B.COL1 > 200);\n```",
+      "title": "아래 OUTER JOIN 의 결과 행 수로 옳은 것은?",
       "options": [
         "1건",
         "2건",
@@ -507,7 +809,34 @@
         "0건"
       ],
       "correctIndex": 2,
-      "explanation": "ON 절의 조건으로 B 와 매칭되지 않아도 LEFT 테이블의 모든 행이 유지된다."
+      "explanation": "ON 절의 조건으로 B 와 매칭되지 않아도 LEFT 테이블의 모든 행이 유지된다.",
+      "references": [
+        {
+          "type": "table",
+          "headers": [
+            "A",
+            "B"
+          ],
+          "rows": [
+            [
+              "1",
+              "10"
+            ],
+            [
+              "2",
+              "100"
+            ],
+            [
+              "3",
+              "220"
+            ]
+          ]
+        },
+        {
+          "type": "sql",
+          "code": "SELECT A.*, B.*\nFROM   A LEFT OUTER JOIN B ON (A.COL1 = B.COL1 AND B.COL1 > 200);"
+        }
+      ]
     },
     {
       "subject": "2과목",
@@ -525,7 +854,7 @@
     {
       "subject": "2과목",
       "number": 41,
-      "title": "아래 SQL 의 결과로 옳은 것은? (SYSDATE = 2023-05-10)\n```sql\nSELECT TO_DATE('2023', 'YYYY') FROM DUAL;\n```",
+      "title": "아래 SQL 의 결과로 옳은 것은? (SYSDATE = 2023-05-10)",
       "options": [
         "2023-12-31",
         "2023-05-01",
@@ -533,12 +862,18 @@
         "2023-05-10"
       ],
       "correctIndex": 1,
-      "explanation": "TO_DATE('2023', 'YYYY') 는 시스템의 현재 월과 1일을 조합한 값으로 해석된다."
+      "explanation": "TO_DATE('2023', 'YYYY') 는 시스템의 현재 월과 1일을 조합한 값으로 해석된다.",
+      "references": [
+        {
+          "type": "sql",
+          "code": "SELECT TO_DATE('2023', 'YYYY') FROM DUAL;"
+        }
+      ]
     },
     {
       "subject": "2과목",
       "number": 42,
-      "title": "아래 SQL 의 결과로 옳은 것은?\n```sql\nSELECT SUM(VAL)\nOVER (ORDER BY VAL\n      RANGE BETWEEN 2 PRECEDING AND 2 FOLLOWING)\nFROM T; -- VAL 데이터: 4, 5, 6\n```",
+      "title": "아래 SQL 의 결과로 옳은 것은?",
       "options": [
         "16",
         "17",
@@ -546,7 +881,13 @@
         "26"
       ],
       "correctIndex": 1,
-      "explanation": "RANGE 는 값 기준 창이므로 기준 값 ±2 범위에 해당하는 행들의 합계를 구한다."
+      "explanation": "RANGE 는 값 기준 창이므로 기준 값 ±2 범위에 해당하는 행들의 합계를 구한다.",
+      "references": [
+        {
+          "type": "sql",
+          "code": "SELECT SUM(VAL)\nOVER (ORDER BY VAL\n      RANGE BETWEEN 2 PRECEDING AND 2 FOLLOWING)\nFROM T; -- VAL 데이터: 4, 5, 6"
+        }
+      ]
     },
     {
       "subject": "2과목",
@@ -564,7 +905,7 @@
     {
       "subject": "2과목",
       "number": 44,
-      "title": "아래 결과를 얻기 위한 LIKE 조건으로 옳은 것은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>COL2</th></tr>\n  <tr><td>AB_C</td></tr>\n  <tr><td>DFG</td></tr>\n  <tr><td>A_BD</td></tr>\n</table>",
+      "title": "아래 결과를 얻기 위한 LIKE 조건으로 옳은 것은?",
       "options": [
         "WHERE COL2 LIKE '%_%'",
         "WHERE COL2 LIKE 'A%'",
@@ -572,7 +913,26 @@
         "WHERE COL2 LIKE '%@_%' ESCAPE '@'"
       ],
       "correctIndex": 3,
-      "explanation": "리터럴 '_' 을 검색하기 위해 ESCAPE 문자를 지정한다."
+      "explanation": "리터럴 '_' 을 검색하기 위해 ESCAPE 문자를 지정한다.",
+      "references": [
+        {
+          "type": "table",
+          "headers": [
+            "COL2"
+          ],
+          "rows": [
+            [
+              "AB_C"
+            ],
+            [
+              "DFG"
+            ],
+            [
+              "A_BD"
+            ]
+          ]
+        }
+      ]
     },
     {
       "subject": "2과목",
@@ -590,7 +950,7 @@
     {
       "subject": "2과목",
       "number": 46,
-      "title": "아래 누적 합계 결과로 옳은 것은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>일자</th><th>금액</th></tr>\n  <tr><td>1일</td><td>1000</td></tr>\n  <tr><td>2일</td><td>300</td></tr>\n  <tr><td>3일</td><td>1000</td></tr>\n</table>",
+      "title": "아래 누적 합계 결과로 옳은 것은?",
       "options": [
         "1000, 1000, 1000",
         "1000, 1300, 2300",
@@ -598,12 +958,35 @@
         "1000, 2300, 2000"
       ],
       "correctIndex": 1,
-      "explanation": "1일까지 1000, 2일까지 1300, 3일까지 2300 으로 누적된다."
+      "explanation": "1일까지 1000, 2일까지 1300, 3일까지 2300 으로 누적된다.",
+      "references": [
+        {
+          "type": "table",
+          "headers": [
+            "일자",
+            "금액"
+          ],
+          "rows": [
+            [
+              "1일",
+              "1000"
+            ],
+            [
+              "2일",
+              "300"
+            ],
+            [
+              "3일",
+              "1000"
+            ]
+          ]
+        }
+      ]
     },
     {
       "subject": "2과목",
       "number": 47,
-      "title": "아래 SQL 의 결과로 옳은 것은?\n```sql\nSELECT MOD(10, 3), MOD(10, -3) FROM DUAL;\n```",
+      "title": "아래 SQL 의 결과로 옳은 것은?",
       "options": [
         "1, -1",
         "1, 1",
@@ -611,12 +994,18 @@
         "0, 0"
       ],
       "correctIndex": 1,
-      "explanation": "Oracle의 MOD는 `m - n * TRUNC(m/n)`로 계산된다. MOD(10, 3) = 10 - 3*3 = 1, MOD(10, -3) = 10 - (-3)*(-3) = 1이다."
+      "explanation": "Oracle의 MOD는 `m - n * TRUNC(m/n)`로 계산된다. MOD(10, 3) = 10 - 3*3 = 1, MOD(10, -3) = 10 - (-3)*(-3) = 1이다.",
+      "references": [
+        {
+          "type": "sql",
+          "code": "SELECT MOD(10, 3), MOD(10, -3) FROM DUAL;"
+        }
+      ]
     },
     {
       "subject": "2과목",
       "number": 48,
-      "title": "아래 SQL 의 결과로 옳은 것은?\n```sql\nSELECT CASE WHEN 1 = 2 THEN 'A'\n            WHEN 2 = 2 THEN 'B'\n            ELSE 'C' END\nFROM DUAL;\n```",
+      "title": "아래 SQL 의 결과로 옳은 것은?",
       "options": [
         "A",
         "B",
@@ -624,7 +1013,13 @@
         "오류"
       ],
       "correctIndex": 1,
-      "explanation": "CASE 식은 위에서부터 차례로 평가되어 가장 먼저 참인 WHEN 절의 결과를 반환한다. `1 = 2`는 거짓이므로 넘어가고, `2 = 2`가 참이어서 'B'가 반환된다."
+      "explanation": "CASE 식은 위에서부터 차례로 평가되어 가장 먼저 참인 WHEN 절의 결과를 반환한다. `1 = 2`는 거짓이므로 넘어가고, `2 = 2`가 참이어서 'B'가 반환된다.",
+      "references": [
+        {
+          "type": "sql",
+          "code": "SELECT CASE WHEN 1 = 2 THEN 'A'\n            WHEN 2 = 2 THEN 'B'\n            ELSE 'C' END\nFROM DUAL;"
+        }
+      ]
     },
     {
       "subject": "2과목",
@@ -642,7 +1037,7 @@
     {
       "subject": "2과목",
       "number": 50,
-      "title": "아래 SQL 의 결과는?\n```sql\nSELECT FLOOR(10.4), FLOOR(-2.4) FROM DUAL;\n```",
+      "title": "아래 SQL 의 결과는?",
       "options": [
         "10, -2",
         "10, -3",
@@ -650,7 +1045,13 @@
         "11, -2"
       ],
       "correctIndex": 1,
-      "explanation": "FLOOR 함수는 실수를 그보다 작거나 같은 최대 정수로 내림한다. 음수의 경우 더 작은 쪽(-3) 으로 내려간다."
+      "explanation": "FLOOR 함수는 실수를 그보다 작거나 같은 최대 정수로 내림한다. 음수의 경우 더 작은 쪽(-3) 으로 내려간다.",
+      "references": [
+        {
+          "type": "sql",
+          "code": "SELECT FLOOR(10.4), FLOOR(-2.4) FROM DUAL;"
+        }
+      ]
     }
   ],
   "shortAnswerOmitted": []

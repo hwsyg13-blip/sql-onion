@@ -73,7 +73,7 @@ export const ROUND_53: QuizQuestion[] = [
       "BCNF"
     ],
     "correctIndex": 2,
-    "explanation": "일반 속성이 주식별자에 모두 함수 종속하며 이행 함수 종속을 제거한 상태",
+    "explanation": "",
     "_source": "authored"
   },
   {
@@ -109,7 +109,7 @@ export const ROUND_53: QuizQuestion[] = [
       "BCNF"
     ],
     "correctIndex": 1,
-    "explanation": "부분 함수 종속을 나누어 해결한다.",
+    "explanation": "",
     "_source": "authored"
   },
   {
@@ -245,7 +245,7 @@ export const ROUND_53: QuizQuestion[] = [
     "round": 53,
     "subject": "2과목",
     "number": 14,
-    "title": "아래 조건을 만족하는 행의 개수로 옳은 것은?\n```sql\nWHERE amt BETWEEN 3000 AND 5000\nAND   vol <= 10\n```\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>AMT</th><th>VOL</th></tr>\n  <tr><td>4000</td><td>5</td></tr>\n  <tr><td>6000</td><td>3</td></tr>\n  <tr><td>3000</td><td>15</td></tr>\n</table>",
+    "title": "아래 조건을 만족하는 행의 개수로 옳은 것은?",
     "options": [
       "1개",
       "2개",
@@ -281,7 +281,7 @@ export const ROUND_53: QuizQuestion[] = [
     "round": 53,
     "subject": "2과목",
     "number": 16,
-    "title": "아래 두 테이블에 대한 SQL 의 결과로 옳은 것은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>T1</th><th>T2</th></tr>\n  <tr><td>1, 2, 3, 4, 5</td><td>1, 1, 1, 3, 6</td></tr>\n</table>\n```sql\nSELECT COUNT(*)\nFROM   T1, T2\nWHERE  T1.COL1 = T2.COL1;\n```",
+    "title": "아래 두 테이블에 대한 SQL 의 결과로 옳은 것은?",
     "options": [
       "2",
       "3",
@@ -307,7 +307,7 @@ export const ROUND_53: QuizQuestion[] = [
       "ORDER BY 주문번호 DESC, 4 DESC, 1 DESC"
     ],
     "correctIndex": 2,
-    "explanation": "주문번호 내림차순 정렬 후, 주문번호가 같을 경우 날짜를 오름차순으로 정렬한다.",
+    "explanation": "",
     "_source": "authored"
   },
   {
@@ -317,7 +317,7 @@ export const ROUND_53: QuizQuestion[] = [
     "round": 53,
     "subject": "2과목",
     "number": 18,
-    "title": "아래 테이블 DDL 에 대한 설명 중 옳지 않은 것은?\n```sql\nCREATE TABLE 학생 (\n  학번 NUMBER DEFAULT 100 PRIMARY KEY,\n  이름 VARCHAR2(30) NOT NULL,\n  학과번호 NUMBER REFERENCES 학과(학과번호)\n);\n```",
+    "title": "아래 테이블 DDL 에 대한 설명 중 옳지 않은 것은?",
     "options": [
       "학번 컬럼에 DEFAULT 값이 지정되어 있다.",
       "학생 이름은 NULL 을 허용하지 않는다.",
@@ -353,7 +353,7 @@ export const ROUND_53: QuizQuestion[] = [
     "round": 53,
     "subject": "2과목",
     "number": 20,
-    "title": "아래 SQL 의 결과로 옳은 것은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>회원번호</th><th>회원명</th><th>주문월</th></tr>\n  <tr><td>1</td><td>홍길동</td><td>201001</td></tr>\n</table>\n```sql\nSELECT * FROM 주문 WHERE 주문월 = '201010';\n```",
+    "title": "아래 SQL 의 결과로 옳은 것은?",
     "options": [
       "전체 회원",
       "1건",
@@ -371,7 +371,7 @@ export const ROUND_53: QuizQuestion[] = [
     "round": 53,
     "subject": "2과목",
     "number": 21,
-    "title": "아래 셀프 조인 SQL 의 빈칸에 들어갈 함수로 옳은 것은?\n```sql\n-- 사원의 매니저 이름을 조회하되 매니저가 없는 경우 '사장' 을 반환한다.\nSELECT E.이름, (  ?  ) AS 상사명\nFROM   사원 E LEFT JOIN 사원 M ON E.매니저ID = M.사원ID;\n```",
+    "title": "아래 셀프 조인 SQL 의 빈칸에 들어갈 함수로 옳은 것은?",
     "options": [
       "NVL(M.이름)",
       "DECODE(M.이름)",
@@ -407,7 +407,7 @@ export const ROUND_53: QuizQuestion[] = [
     "round": 53,
     "subject": "2과목",
     "number": 23,
-    "title": "아래 LTRIM 함수의 결과로 옳은 것은?\n```sql\nSELECT LTRIM('xxxxxxabcd', 'x') FROM DUAL;\n```",
+    "title": "아래 LTRIM 함수의 결과로 옳은 것은?",
     "options": [
       "abcd",
       "xxxabcd",
@@ -425,7 +425,7 @@ export const ROUND_53: QuizQuestion[] = [
     "round": 53,
     "subject": "2과목",
     "number": 24,
-    "title": "아래 WHERE 조건과 동일한 의미의 SQL 은?\n```sql\nWHERE (COL1, COL2) IN ((1, 3), (1, 4));\n```",
+    "title": "아래 WHERE 조건과 동일한 의미의 SQL 은?",
     "options": [
       "COL1 = 1 AND COL2 = 3",
       "COL1 = 1 OR COL2 IN (3, 4)",
@@ -461,7 +461,7 @@ export const ROUND_53: QuizQuestion[] = [
     "round": 53,
     "subject": "2과목",
     "number": 26,
-    "title": "아래 SQL 의 오류가 발생하는 부분으로 가장 적절한 것은?\n```sql\nSELECT SUM(SAL)            -- (1)\nFROM   EMP\nWHERE  컬럼 = (SELECT ID FROM A WHERE ~)  -- (2)\nGROUP BY ID                 -- (3)\nHAVING SUM(SAL) > 5000;     -- (4)\n```",
+    "title": "아래 SQL 의 오류가 발생하는 부분으로 가장 적절한 것은?",
     "options": [
       "(1)",
       "(2)",
@@ -497,7 +497,7 @@ export const ROUND_53: QuizQuestion[] = [
     "round": 53,
     "subject": "2과목",
     "number": 28,
-    "title": "아래 NATURAL JOIN SQL 의 결과로 옳은 것은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th colspan=\"2\">A</th><th colspan=\"2\">B</th></tr>\n  <tr><th>ID</th><th>COL1</th><th>ID</th><th>COL1</th></tr>\n  <tr><td>1</td><td>X</td><td>1</td><td>Y</td></tr>\n</table>\n```sql\nSELECT * FROM A NATURAL JOIN B;\n```",
+    "title": "아래 NATURAL JOIN SQL 의 결과로 옳은 것은?",
     "options": [
       "오류 발생",
       "60",
@@ -515,7 +515,7 @@ export const ROUND_53: QuizQuestion[] = [
     "round": 53,
     "subject": "2과목",
     "number": 29,
-    "title": "아래 데이터를 VVIP → VIP 순서로 정렬하는 SQL 결과로 옳은 것은?\n```sql\nSELECT 등급 FROM 회원 ORDER BY DECODE(등급, 'VVIP', 1, 'VIP', 2, 3);\n```",
+    "title": "아래 데이터를 VVIP → VIP 순서로 정렬하는 SQL 결과로 옳은 것은?",
     "options": [
       "VVIP, VIP 순으로 출력",
       "VIP, VVIP 순으로 출력",
@@ -533,7 +533,7 @@ export const ROUND_53: QuizQuestion[] = [
     "round": 53,
     "subject": "2과목",
     "number": 30,
-    "title": "아래 SQL 의 결과로 옳은 것은?\n```sql\nSELECT * FROM T WHERE COL <= ALL(50, 15);\n```\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>COL</th></tr>\n  <tr><td>10</td></tr>\n  <tr><td>12</td></tr>\n  <tr><td>15</td></tr>\n  <tr><td>20</td></tr>\n  <tr><td>60</td></tr>\n</table>",
+    "title": "아래 SQL 의 결과로 옳은 것은?",
     "options": [
       "10, 12, 15",
       "10, 12",
@@ -559,7 +559,7 @@ export const ROUND_53: QuizQuestion[] = [
       "MINUS"
     ],
     "correctIndex": 3,
-    "explanation": "첫 번째 집합에서 두 번째 집합에 존재하는 행을 제외한 결과를 반환한다.",
+    "explanation": "",
     "_source": "authored"
   },
   {
@@ -623,7 +623,7 @@ export const ROUND_53: QuizQuestion[] = [
     "round": 53,
     "subject": "2과목",
     "number": 35,
-    "title": "아래 CROSS JOIN 의 결과 행 수로 옳은 것은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>M</th><th>N</th></tr>\n  <tr><td>3</td><td>5</td></tr>\n</table>",
+    "title": "아래 CROSS JOIN 의 결과 행 수로 옳은 것은?",
     "options": [
       "15",
       "8",
@@ -749,7 +749,7 @@ export const ROUND_53: QuizQuestion[] = [
     "round": 53,
     "subject": "2과목",
     "number": 42,
-    "title": "아래 SQL 의 결과로 옳은 것은?\n```sql\nSELECT MIN(COL1) + MAX(TO_CHAR(COL1))\nFROM   T;\n-- COL1 값: 10, 50, 90\n```",
+    "title": "아래 SQL 의 결과로 옳은 것은?",
     "options": [
       "100",
       "190",
@@ -767,7 +767,7 @@ export const ROUND_53: QuizQuestion[] = [
     "round": 53,
     "subject": "2과목",
     "number": 43,
-    "title": "LIKE '%n' 조건에 매칭되는 이름의 수로 옳은 것은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>NAME</th></tr>\n  <tr><td>Kevin</td></tr>\n  <tr><td>Jason</td></tr>\n  <tr><td>Tom</td></tr>\n</table>",
+    "title": "LIKE '%n' 조건에 매칭되는 이름의 수로 옳은 것은?",
     "options": [
       "1명",
       "2명",
@@ -803,7 +803,7 @@ export const ROUND_53: QuizQuestion[] = [
     "round": 53,
     "subject": "2과목",
     "number": 45,
-    "title": "아래 테이블에 대한 INSERT 중 오류가 발생하는 것은?\n```sql\nCREATE TABLE TEST45 (\n  COL1 NUMBER,\n  COL2 NUMBER,\n  COL3 NUMBER,\n  COL4 NUMBER\n);\n```",
+    "title": "아래 테이블에 대한 INSERT 중 오류가 발생하는 것은?",
     "options": [
       "INSERT INTO TEST45 VALUES (1, 2, 3);",
       "INSERT INTO TEST45 VALUES (1, 2, 3, 4);",
@@ -821,7 +821,7 @@ export const ROUND_53: QuizQuestion[] = [
     "round": 53,
     "subject": "2과목",
     "number": 46,
-    "title": "아래 세 테이블을 조인한 결과의 행 수로 옳은 것은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>T1</th><th>T2</th><th>T3</th></tr>\n  <tr><td>1, 2, 3</td><td>1, 2, NULL</td><td>1, NULL, NULL</td></tr>\n</table>",
+    "title": "아래 세 테이블을 조인한 결과의 행 수로 옳은 것은?",
     "options": [
       "1개",
       "2개",
@@ -839,7 +839,7 @@ export const ROUND_53: QuizQuestion[] = [
     "round": 53,
     "subject": "2과목",
     "number": 47,
-    "title": "A·B 테이블을 UNION 후 중복을 제거한 결과의 행 수는?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>A</th><th>B</th></tr>\n  <tr><td>1, 2, 3, 4</td><td>3, 4, 5, 6</td></tr>\n</table>",
+    "title": "A·B 테이블을 UNION 후 중복을 제거한 결과의 행 수는?",
     "options": [
       "6개",
       "8개",
@@ -857,7 +857,7 @@ export const ROUND_53: QuizQuestion[] = [
     "round": 53,
     "subject": "2과목",
     "number": 48,
-    "title": "아래 SQL 의 결과로 옳은 것은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>COL_B</th><th>COL_C</th><th>SCORE</th></tr>\n  <tr><td>5</td><td>10</td><td>NULL</td></tr>\n  <tr><td>10</td><td>NULL</td><td>NULL</td></tr>\n</table>\n```sql\nSELECT NVL(MIN(COL_B), 0) + NVL(MAX(COL_C), 0) + SUM(NVL(SCORE, 0))\nFROM   T;\n```",
+    "title": "아래 SQL 의 결과로 옳은 것은?",
     "options": [
       "5 (5+0+0)",
       "15 (5+10+0)",
@@ -893,7 +893,7 @@ export const ROUND_53: QuizQuestion[] = [
     "round": 53,
     "subject": "2과목",
     "number": 50,
-    "title": "아래 SQL 실행 후 최종 조회 건수는?\n```sql\nINSERT INTO TABLE50 VALUES (1);\nINSERT INTO TABLE50 VALUES (2);\nINSERT INTO TABLE50 VALUES (3);\nSAVEPOINT SQL1;\nINSERT INTO TABLE50 VALUES (4);\nINSERT INTO TABLE50 VALUES (5);\nCOMMIT;\nINSERT INTO TABLE50 VALUES (6);\nROLLBACK TO SAVEPOINT SQL1;\nSELECT * FROM TABLE50;\n```",
+    "title": "아래 SQL 실행 후 최종 조회 건수는?",
     "options": [
       "4",
       "5",

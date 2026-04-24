@@ -1,6 +1,6 @@
 {
   "round": 47,
-  "notes": "restored from 47회_복원.md — MCQ 50 + 단답형 0 (단답형은 현재 UI 미지원이라 제외)",
+  "notes": "restored from 47회_복원.md — MCQ 50 (references 포함: 21) + 단답형 0 제외",
   "authored": [
     {
       "subject": "1과목",
@@ -13,12 +13,18 @@
         "보안 관점"
       ],
       "correctIndex": 1,
-      "explanation": "업무가 처리하는 일의 방법에 따라 데이터가 어떻게 영향을 받는지 모델링한다."
+      "explanation": "",
+      "references": [
+        {
+          "type": "text",
+          "content": "업무가 처리하는 일의 방법에 따라 데이터가 어떻게 영향을 받는지 모델링한다."
+        }
+      ]
     },
     {
       "subject": "1과목",
       "number": 2,
-      "title": "아래 ERD 해석 중 옳지 않은 것은? (고객은 여러 서비스를 이용하며 동일 서비스를 재이용할 수 있다.)",
+      "title": "아래 ERD 해석 중 옳지 않은 것은? (고객은 여러 서비스를 이용하며 동일 서비스를 재이용할 수 있다.) <div style=\"display: flex; align-items: center; justify-content: center; gap: 12px; font-family: monospace; margin: 12px 0;\"> <span>||────&lt;</span> <span>&gt;────||</span> </div>",
       "options": [
         "고객과 서비스는 M:N 관계이다.",
         "서비스이용 엔터티가 중간 엔터티로 존재한다.",
@@ -26,7 +32,54 @@
         "같은 서비스의 재이용 이력이 별도 행으로 구분된다."
       ],
       "correctIndex": 2,
-      "explanation": ""
+      "explanation": "",
+      "references": [
+        {
+          "type": "table",
+          "headers": [
+            "고객"
+          ],
+          "rows": [
+            [
+              "고객번호 (PK)"
+            ],
+            [
+              "고객명"
+            ]
+          ]
+        },
+        {
+          "type": "table",
+          "headers": [
+            "서비스이용"
+          ],
+          "rows": [
+            [
+              "고객번호 (PK, FK)"
+            ],
+            [
+              "서비스번호 (PK, FK)"
+            ],
+            [
+              "이용일자 (PK)"
+            ]
+          ]
+        },
+        {
+          "type": "table",
+          "headers": [
+            "서비스"
+          ],
+          "rows": [
+            [
+              "서비스번호 (PK)"
+            ],
+            [
+              "서비스명"
+            ]
+          ]
+        }
+      ]
     },
     {
       "subject": "1과목",
@@ -52,7 +105,13 @@
         "BCNF"
       ],
       "correctIndex": 2,
-      "explanation": "엔터티의 일반 속성 간에는 서로 종속적이지 않아야 한다."
+      "explanation": "",
+      "references": [
+        {
+          "type": "text",
+          "content": "엔터티의 일반 속성 간에는 서로 종속적이지 않아야 한다."
+        }
+      ]
     },
     {
       "subject": "1과목",
@@ -130,7 +189,13 @@
         "물리 스키마"
       ],
       "correctIndex": 0,
-      "explanation": "뷰 단계의 여러 사용자 관점으로 구성되어 개별 사용자가 보는 개인적 DB 스키마이며, 응용 프로그래머가 접근하는 DB 정의이다."
+      "explanation": "",
+      "references": [
+        {
+          "type": "text",
+          "content": "뷰 단계의 여러 사용자 관점으로 구성되어 개별 사용자가 보는 개인적 DB 스키마이며, 응용 프로그래머가 접근하는 DB 정의이다."
+        }
+      ]
     },
     {
       "subject": "2과목",
@@ -213,7 +278,7 @@
     {
       "subject": "2과목",
       "number": 17,
-      "title": "번호가 없으면 1을 반환하고 있으면 MAX(번호)+1 을 반환하는 SQL 로 동일한 결과의 쿼리는?\n```sql\nSELECT NVL(MAX(번호), 1) + 1 FROM T;\n```",
+      "title": "번호가 없으면 1을 반환하고 있으면 MAX(번호)+1 을 반환하는 SQL 로 동일한 결과의 쿼리는?",
       "options": [
         "SELECT COALESCE(MAX(번호), 1) FROM T;",
         "SELECT COALESCE(MAX(번호) + 1, 1) FROM T;",
@@ -221,7 +286,13 @@
         "SELECT NULLIF(MAX(번호), 1) FROM T;"
       ],
       "correctIndex": 1,
-      "explanation": "NVL(MAX(번호), 1) + 1 과 COALESCE(MAX(번호)+1, 1) 은 동일한 결과를 반환한다."
+      "explanation": "NVL(MAX(번호), 1) + 1 과 COALESCE(MAX(번호)+1, 1) 은 동일한 결과를 반환한다.",
+      "references": [
+        {
+          "type": "sql",
+          "code": "SELECT NVL(MAX(번호), 1) + 1 FROM T;"
+        }
+      ]
     },
     {
       "subject": "2과목",
@@ -278,7 +349,7 @@
     {
       "subject": "2과목",
       "number": 22,
-      "title": "TEAM·PLAYER 테이블에서 아래 SQL 과 다른 결과를 반환하는 것은?\n```sql\nWHERE (TEAM_ID, HEIGHT) IN (SELECT TEAM_ID, MIN(HEIGHT) FROM PLAYER GROUP BY TEAM_ID);\n```",
+      "title": "TEAM·PLAYER 테이블에서 아래 SQL 과 다른 결과를 반환하는 것은?",
       "options": [
         "상관 서브쿼리(EXISTS) 중첩",
         "인라인 뷰 조인",
@@ -286,12 +357,18 @@
         "`SELECT ... WHERE EXISTS (SELECT ...)` 만 단독 사용"
       ],
       "correctIndex": 3,
-      "explanation": ""
+      "explanation": "",
+      "references": [
+        {
+          "type": "sql",
+          "code": "WHERE (TEAM_ID, HEIGHT) IN (SELECT TEAM_ID, MIN(HEIGHT) FROM PLAYER GROUP BY TEAM_ID);"
+        }
+      ]
     },
     {
       "subject": "2과목",
       "number": 23,
-      "title": "아래 SQL 이 의미하는 것으로 적절한 것은?\n```sql\nSELECT 팀명\nFROM   팀\nWHERE  팀번호 = (SELECT 팀번호 FROM (SELECT 팀번호, SUM(연봉) AS 총급여 FROM 사원 GROUP BY 팀번호 ORDER BY 2 DESC) WHERE ROWNUM = 1);\n```",
+      "title": "아래 SQL 이 의미하는 것으로 적절한 것은?",
       "options": [
         "팀의 사원 수가 가장 많은 팀",
         "팀의 사원 총 연봉이 가장 높은 팀",
@@ -299,7 +376,13 @@
         "팀의 최고 연봉 사원이 속한 팀"
       ],
       "correctIndex": 1,
-      "explanation": ""
+      "explanation": "",
+      "references": [
+        {
+          "type": "sql",
+          "code": "SELECT 팀명\nFROM   팀\nWHERE  팀번호 = (SELECT 팀번호 FROM (SELECT 팀번호, SUM(연봉) AS 총급여 FROM 사원 GROUP BY 팀번호 ORDER BY 2 DESC) WHERE ROWNUM = 1);"
+        }
+      ]
     },
     {
       "subject": "2과목",
@@ -317,7 +400,7 @@
     {
       "subject": "2과목",
       "number": 25,
-      "title": "내림차순 정렬을 수행하는 SQL 에서 수정이 필요한 부분은?\n```sql\nSELECT ... FROM ... WHERE ... ORDER BY A;  -- A 를 내림차순으로 정렬해야 함\n```",
+      "title": "내림차순 정렬을 수행하는 SQL 에서 수정이 필요한 부분은?",
       "options": [
         "SELECT 절",
         "FROM 절",
@@ -325,12 +408,18 @@
         "ORDER BY 절에 DESC 추가"
       ],
       "correctIndex": 3,
-      "explanation": ""
+      "explanation": "",
+      "references": [
+        {
+          "type": "sql",
+          "code": "SELECT ... FROM ... WHERE ... ORDER BY A;  -- A 를 내림차순으로 정렬해야 함"
+        }
+      ]
     },
     {
       "subject": "2과목",
       "number": 26,
-      "title": "아래 SQL 의 결과로 옳은 것은?\n```sql\n-- 데이터: GRADE=12, RANK=13\nSELECT CASE WHEN SUM(GRADE + RANK) IS NULL THEN 0\n            ELSE SUM(GRADE + RANK) END\nFROM T;\n```",
+      "title": "아래 SQL 의 결과로 옳은 것은?",
       "options": [
         "12",
         "13",
@@ -338,12 +427,18 @@
         "0"
       ],
       "correctIndex": 2,
-      "explanation": ""
+      "explanation": "",
+      "references": [
+        {
+          "type": "sql",
+          "code": "-- 데이터: GRADE=12, RANK=13\nSELECT CASE WHEN SUM(GRADE + RANK) IS NULL THEN 0\n            ELSE SUM(GRADE + RANK) END\nFROM T;"
+        }
+      ]
     },
     {
       "subject": "2과목",
       "number": 27,
-      "title": "아래 SQL 의 결과 등급은?\n```sql\nSELECT GRADE FROM GRADE_TABLE A,\n  (SELECT MAX(SCORE) AS MAX_SCORE FROM PLAYER) B\nWHERE A.LOWER <= B.MAX_SCORE AND A.UPPER >= B.MAX_SCORE;\n```",
+      "title": "아래 SQL 의 결과 등급은?",
       "options": [
         "GOLD",
         "SILVER",
@@ -351,12 +446,18 @@
         "공집합"
       ],
       "correctIndex": 1,
-      "explanation": "원본 기출의 정답 표기를 보존한다."
+      "explanation": "원본 기출의 정답 표기를 보존한다.",
+      "references": [
+        {
+          "type": "sql",
+          "code": "SELECT GRADE FROM GRADE_TABLE A,\n  (SELECT MAX(SCORE) AS MAX_SCORE FROM PLAYER) B\nWHERE A.LOWER <= B.MAX_SCORE AND A.UPPER >= B.MAX_SCORE;"
+        }
+      ]
     },
     {
       "subject": "2과목",
       "number": 28,
-      "title": "아래 집합 연산 SQL 의 결과로 옳은 것은?\n```sql\nSELECT COL1 FROM A\nUNION ALL\nSELECT COL1 FROM B\nMINUS\nSELECT COL1 FROM C;\n```",
+      "title": "아래 집합 연산 SQL 의 결과로 옳은 것은?",
       "options": [
         "1, 3, 5",
         "1, 2, 3",
@@ -364,12 +465,18 @@
         "공집합"
       ],
       "correctIndex": 0,
-      "explanation": "MINUS 는 두 집합의 DISTINCT 결과에서 차집합을 반환한다."
+      "explanation": "MINUS 는 두 집합의 DISTINCT 결과에서 차집합을 반환한다.",
+      "references": [
+        {
+          "type": "sql",
+          "code": "SELECT COL1 FROM A\nUNION ALL\nSELECT COL1 FROM B\nMINUS\nSELECT COL1 FROM C;"
+        }
+      ]
     },
     {
       "subject": "2과목",
       "number": 29,
-      "title": "아래 MERGE 구문 수행 후 결과로 옳은 것은?\n```sql\nMERGE INTO A USING B ON (A.ID = B.ID)\nWHEN MATCHED THEN UPDATE SET A.V = 100\nWHEN NOT MATCHED THEN INSERT (ID, V) VALUES (B.ID, 100);\n```",
+      "title": "아래 MERGE 구문 수행 후 결과로 옳은 것은?",
       "options": [
         "0, 0, 0",
         "100, 100, 100",
@@ -377,7 +484,13 @@
         "오류"
       ],
       "correctIndex": 1,
-      "explanation": ""
+      "explanation": "",
+      "references": [
+        {
+          "type": "sql",
+          "code": "MERGE INTO A USING B ON (A.ID = B.ID)\nWHEN MATCHED THEN UPDATE SET A.V = 100\nWHEN NOT MATCHED THEN INSERT (ID, V) VALUES (B.ID, 100);"
+        }
+      ]
     },
     {
       "subject": "2과목",
@@ -395,7 +508,7 @@
     {
       "subject": "2과목",
       "number": 31,
-      "title": "아래 SQL 의 결과로 옳은 것은?\n```sql\nSELECT MAX(COL1) KEEP (DENSE_RANK FIRST ORDER BY COL2 DESC)\nFROM T;   -- COL2 기준 DESC 정렬 시 첫 값의 COL1 반환\n```\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>COL1</th><th>COL2</th></tr>\n  <tr><td>10</td><td>1</td></tr>\n  <tr><td>20</td><td>1</td></tr>\n</table>",
+      "title": "아래 SQL 의 결과로 옳은 것은?",
       "options": [
         "10",
         "15",
@@ -403,7 +516,30 @@
         "NULL"
       ],
       "correctIndex": 2,
-      "explanation": "DESC 정렬 시 COL2=1 그룹 내 MAX(COL1) = 20 이 반환된다."
+      "explanation": "DESC 정렬 시 COL2=1 그룹 내 MAX(COL1) = 20 이 반환된다.",
+      "references": [
+        {
+          "type": "sql",
+          "code": "SELECT MAX(COL1) KEEP (DENSE_RANK FIRST ORDER BY COL2 DESC)\nFROM T;   -- COL2 기준 DESC 정렬 시 첫 값의 COL1 반환"
+        },
+        {
+          "type": "table",
+          "headers": [
+            "COL1",
+            "COL2"
+          ],
+          "rows": [
+            [
+              "10",
+              "1"
+            ],
+            [
+              "20",
+              "1"
+            ]
+          ]
+        }
+      ]
     },
     {
       "subject": "2과목",
@@ -525,7 +661,7 @@
     {
       "subject": "2과목",
       "number": 41,
-      "title": "아래 SQL 의 결과로 옳은 것은? (COL 에 NULL 1건 포함)\n```sql\n-- 데이터: 100, 110, NULL\nSELECT ROUND(AVG(COL)), ROUND(SUM(COL)/COUNT(*)) FROM T;\n```",
+      "title": "아래 SQL 의 결과로 옳은 것은? (COL 에 NULL 1건 포함)",
       "options": [
         "105, 70",
         "70, 105",
@@ -533,7 +669,13 @@
         "NULL, NULL"
       ],
       "correctIndex": 0,
-      "explanation": "AVG 는 NULL 을 제외해 210/2=105, SUM/COUNT(*) 는 210/3=70 이다."
+      "explanation": "AVG 는 NULL 을 제외해 210/2=105, SUM/COUNT(*) 는 210/3=70 이다.",
+      "references": [
+        {
+          "type": "sql",
+          "code": "-- 데이터: 100, 110, NULL\nSELECT ROUND(AVG(COL)), ROUND(SUM(COL)/COUNT(*)) FROM T;"
+        }
+      ]
     },
     {
       "subject": "2과목",
@@ -551,7 +693,7 @@
     {
       "subject": "2과목",
       "number": 43,
-      "title": "아래 SQL 의 결과로 옳은 것은?\n```sql\nSELECT COUNT(*) FROM T GROUP BY ID HAVING COUNT(*) >= 2;\n```",
+      "title": "아래 SQL 의 결과로 옳은 것은?",
       "options": [
         "조건을 만족하는 그룹이 없으면 공집합",
         "조건을 만족하는 그룹의 수만큼 COUNT 반환",
@@ -559,12 +701,18 @@
         "HAVING 은 GROUP BY 와 함께 사용할 수 없다."
       ],
       "correctIndex": 2,
-      "explanation": ""
+      "explanation": "",
+      "references": [
+        {
+          "type": "sql",
+          "code": "SELECT COUNT(*) FROM T GROUP BY ID HAVING COUNT(*) >= 2;"
+        }
+      ]
     },
     {
       "subject": "2과목",
       "number": 44,
-      "title": "아래 데이터에 대한 AVG 결과로 옳은 것은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>COL1</th><th>COL2</th></tr>\n  <tr><td>10</td><td>20</td></tr>\n  <tr><td>0</td><td>NULL</td></tr>\n  <tr><td>10</td><td>0</td></tr>\n</table>\n```sql\nSELECT AVG(COL1), AVG(COL2) FROM T WHERE COL2 IS NOT NULL;\n```",
+      "title": "아래 데이터에 대한 AVG 결과로 옳은 것은?",
       "options": [
         "10, 10",
         "10, 0",
@@ -572,7 +720,34 @@
         "오류"
       ],
       "correctIndex": 2,
-      "explanation": ""
+      "explanation": "",
+      "references": [
+        {
+          "type": "table",
+          "headers": [
+            "COL1",
+            "COL2"
+          ],
+          "rows": [
+            [
+              "10",
+              "20"
+            ],
+            [
+              "0",
+              "NULL"
+            ],
+            [
+              "10",
+              "0"
+            ]
+          ]
+        },
+        {
+          "type": "sql",
+          "code": "SELECT AVG(COL1), AVG(COL2) FROM T WHERE COL2 IS NOT NULL;"
+        }
+      ]
     },
     {
       "subject": "2과목",
@@ -590,7 +765,7 @@
     {
       "subject": "2과목",
       "number": 46,
-      "title": "아래 SQL 의 결과로 옳은 것은?\n```sql\nSELECT SUBSTR('ABCDE', 2) FROM DUAL;\n```",
+      "title": "아래 SQL 의 결과로 옳은 것은?",
       "options": [
         "AB",
         "BCDE",
@@ -598,12 +773,18 @@
         "ABCDE"
       ],
       "correctIndex": 1,
-      "explanation": ""
+      "explanation": "",
+      "references": [
+        {
+          "type": "sql",
+          "code": "SELECT SUBSTR('ABCDE', 2) FROM DUAL;"
+        }
+      ]
     },
     {
       "subject": "2과목",
       "number": 47,
-      "title": "사용자를 삭제할 때 해당 사용자에 속한 모든 오브젝트까지 함께 삭제하는 옵션은?\n```sql\nDROP USER user_name (   );\n```",
+      "title": "사용자를 삭제할 때 해당 사용자에 속한 모든 오브젝트까지 함께 삭제하는 옵션은?",
       "options": [
         "RESTRICT",
         "PURGE",
@@ -611,12 +792,18 @@
         "FORCE"
       ],
       "correctIndex": 2,
-      "explanation": ""
+      "explanation": "",
+      "references": [
+        {
+          "type": "sql",
+          "code": "DROP USER user_name (   );"
+        }
+      ]
     },
     {
       "subject": "2과목",
       "number": 48,
-      "title": "아래 SQL 의 빈칸에 들어갈 키워드 조합으로 옳은 것은?\n```sql\nSELECT 부서, SUM(연봉) FROM EMP\n(   ) 부서\nORDER BY SUM(연봉) (   );\n```",
+      "title": "아래 SQL 의 빈칸에 들어갈 키워드 조합으로 옳은 것은?",
       "options": [
         "GROUP BY, DESC",
         "HAVING, ASC",
@@ -624,12 +811,18 @@
         "GROUP BY, ASC"
       ],
       "correctIndex": 0,
-      "explanation": ""
+      "explanation": "",
+      "references": [
+        {
+          "type": "sql",
+          "code": "SELECT 부서, SUM(연봉) FROM EMP\n(   ) 부서\nORDER BY SUM(연봉) (   );"
+        }
+      ]
     },
     {
       "subject": "2과목",
       "number": 49,
-      "title": "아래 SQL 의 결과로 옳은 것은?\n```sql\nSELECT COL1\nFROM (SELECT COL1, ROW_NUMBER() OVER (PARTITION BY 부서 ORDER BY 연봉 DESC) AS RN\n      FROM EMP)\nWHERE RN = 1;\n```",
+      "title": "아래 SQL 의 결과로 옳은 것은?",
       "options": [
         "1, 2",
         "3, 3",
@@ -637,12 +830,18 @@
         "5, 4"
       ],
       "correctIndex": 3,
-      "explanation": "원본 기출의 정답 표기를 보존한다."
+      "explanation": "원본 기출의 정답 표기를 보존한다.",
+      "references": [
+        {
+          "type": "sql",
+          "code": "SELECT COL1\nFROM (SELECT COL1, ROW_NUMBER() OVER (PARTITION BY 부서 ORDER BY 연봉 DESC) AS RN\n      FROM EMP)\nWHERE RN = 1;"
+        }
+      ]
     },
     {
       "subject": "2과목",
       "number": 50,
-      "title": "아래 계층형 쿼리의 결과 행 수로 옳은 것은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>COL1</th><th>COL2</th></tr>\n  <tr><td>1</td><td>NULL</td></tr>\n  <tr><td>2</td><td>NULL</td></tr>\n  <tr><td>3</td><td>1</td></tr>\n  <tr><td>4</td><td>1</td></tr>\n  <tr><td>5</td><td>2</td></tr>\n  <tr><td>6</td><td>2</td></tr>\n  <tr><td>7</td><td>3</td></tr>\n  <tr><td>8</td><td>4</td></tr>\n  <tr><td>9</td><td>5</td></tr>\n</table>\n```sql\nSELECT COUNT(*) FROM T\nWHERE COL1 <> 4\nSTART WITH COL1 = 1\nCONNECT BY PRIOR COL1 = COL2;\n```",
+      "title": "아래 계층형 쿼리의 결과 행 수로 옳은 것은?",
       "options": [
         "1",
         "2",
@@ -650,7 +849,58 @@
         "5"
       ],
       "correctIndex": 1,
-      "explanation": "1부터 전개한 결과 {1, 3, 4, 7, 8} 중 COL1=4 를 제외하면 {1, 3, 7} 이나, 8 은 4 의 자식이므로 같이 제거되어 최종 2건이 남는다."
+      "explanation": "1부터 전개한 결과 {1, 3, 4, 7, 8} 중 COL1=4 를 제외하면 {1, 3, 7} 이나, 8 은 4 의 자식이므로 같이 제거되어 최종 2건이 남는다.",
+      "references": [
+        {
+          "type": "table",
+          "headers": [
+            "COL1",
+            "COL2"
+          ],
+          "rows": [
+            [
+              "1",
+              "NULL"
+            ],
+            [
+              "2",
+              "NULL"
+            ],
+            [
+              "3",
+              "1"
+            ],
+            [
+              "4",
+              "1"
+            ],
+            [
+              "5",
+              "2"
+            ],
+            [
+              "6",
+              "2"
+            ],
+            [
+              "7",
+              "3"
+            ],
+            [
+              "8",
+              "4"
+            ],
+            [
+              "9",
+              "5"
+            ]
+          ]
+        },
+        {
+          "type": "sql",
+          "code": "SELECT COUNT(*) FROM T\nWHERE COL1 <> 4\nSTART WITH COL1 = 1\nCONNECT BY PRIOR COL1 = COL2;"
+        }
+      ]
     }
   ],
   "shortAnswerOmitted": []

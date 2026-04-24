@@ -127,7 +127,7 @@ export const ROUND_50: QuizQuestion[] = [
       "식별자"
     ],
     "correctIndex": 3,
-    "explanation": "엔터티의 인스턴스를 유일하게 구분할 수 있게 하는 하나 또는 그 이상의 속성 집합",
+    "explanation": "",
     "_source": "authored"
   },
   {
@@ -191,7 +191,7 @@ export const ROUND_50: QuizQuestion[] = [
     "round": 50,
     "subject": "2과목",
     "number": 11,
-    "title": "평균 학점이 3.0 이상인 학생을 조회하는 SQL 로 가장 적절한 것은?\n```\nSTUDENT(학과, 학번, 강좌), CLASS(강좌번호, ...), ENROLL(학번, 강좌번호, 학점)\n```",
+    "title": "평균 학점이 3.0 이상인 학생을 조회하는 SQL 로 가장 적절한 것은?",
     "options": [
       "SELECT 학번 FROM STUDENT WHERE AVG(학점) >= 3.0;",
       "SELECT 학번 FROM STUDENT S, ENROLL E WHERE S.학번 = E.학번 HAVING AVG(학점) >= 3.0;",
@@ -209,7 +209,7 @@ export const ROUND_50: QuizQuestion[] = [
     "round": 50,
     "subject": "2과목",
     "number": 12,
-    "title": "아래 뷰 생성 스크립트와 조회 SQL 의 실행 결과로 옳은 것은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>C1</th><th>C2</th></tr>\n  <tr><td>A</td><td>100</td></tr>\n  <tr><td>B</td><td>200</td></tr>\n  <tr><td>B</td><td>100</td></tr>\n  <tr><td>NULL</td><td>200</td></tr>\n</table>\n```sql\nCREATE VIEW V_TBL AS\nSELECT * FROM TBL WHERE C1 = 'B' OR C1 IS NULL;\nSELECT SUM(C2) FROM V_TBL\nWHERE C2 >= 200 AND C1 = 'B';\n```",
+    "title": "아래 뷰 생성 스크립트와 조회 SQL 의 실행 결과로 옳은 것은?",
     "options": [
       "0",
       "200",
@@ -227,7 +227,7 @@ export const ROUND_50: QuizQuestion[] = [
     "round": 50,
     "subject": "2과목",
     "number": 13,
-    "title": "아래 OUTER JOIN SQL 의 결과로 옳은 것은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th colspan=\"2\">TAB1</th><th colspan=\"2\">TAB2</th></tr>\n  <tr><th>C1</th><th>C2</th><th>C1</th><th>C2</th></tr>\n  <tr><td>A</td><td>1</td><td>B</td><td>2</td></tr>\n  <tr><td>B</td><td>2</td><td>C</td><td>3</td></tr>\n  <tr><td>C</td><td>3</td><td>D</td><td>4</td></tr>\n  <tr><td>D</td><td>4</td><td></td><td></td></tr>\n  <tr><td>E</td><td>5</td><td></td><td></td></tr>\n</table>\n```sql\nSELECT * FROM TAB1 A\nLEFT OUTER JOIN TAB2 B\nON (A.C1 = B.C1 AND B.C2 BETWEEN 1 AND 3);\n```",
+    "title": "아래 OUTER JOIN SQL 의 결과로 옳은 것은?",
     "options": [
       "TAB1 의 3행만 반환",
       "TAB1 의 5행 모두 반환 (매칭되지 않은 D, E 의 TAB2 컬럼은 NULL)",
@@ -245,7 +245,7 @@ export const ROUND_50: QuizQuestion[] = [
     "round": 50,
     "subject": "2과목",
     "number": 14,
-    "title": "아래 SQL 의 결과로 옳은 것은?\n```sql\nSELECT SUBSTR(STR, LENGTH(STR) - 3) FROM T;\n-- STR = 'abcdefg', LENGTH = 7\n```",
+    "title": "아래 SQL 의 결과로 옳은 것은?",
     "options": [
       "abcd",
       "defg",
@@ -253,7 +253,7 @@ export const ROUND_50: QuizQuestion[] = [
       "efg"
     ],
     "correctIndex": 1,
-    "explanation": "'abcdefg' 문자열에 대해 SUBSTR 을 수행한다. SUBSTR('abcdefg', 4) 는 4번째 문자부터 끝까지이므로 'defg' 이다.",
+    "explanation": "SUBSTR('abcdefg', 4) 는 4번째 문자부터 끝까지이므로 'defg' 이다.",
     "_source": "authored"
   },
   {
@@ -263,7 +263,7 @@ export const ROUND_50: QuizQuestion[] = [
     "round": 50,
     "subject": "2과목",
     "number": 15,
-    "title": "아래 SQL 의 결과로 옳은 것은?\n```sql\nSELECT NVL(COUNT(*), 9999)\nFROM   TAB1\nWHERE  1 = 2;\n```",
+    "title": "아래 SQL 의 결과로 옳은 것은?",
     "options": [
       "0",
       "9999",
@@ -317,7 +317,7 @@ export const ROUND_50: QuizQuestion[] = [
     "round": 50,
     "subject": "2과목",
     "number": 18,
-    "title": "아래 집계 결과에 해당하는 GROUP BY 절은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>A</th><th>B</th></tr>\n  <tr><td>A1</td><td>B1</td></tr>\n  <tr><td>A1</td><td>NULL</td></tr>\n  <tr><td>NULL</td><td>B1</td></tr>\n  <tr><td>NULL</td><td>NULL</td></tr>\n</table>",
+    "title": "아래 집계 결과에 해당하는 GROUP BY 절은?",
     "options": [
       "ROLLUP(A, B)",
       "GROUPING SETS((A, B))",
@@ -353,7 +353,7 @@ export const ROUND_50: QuizQuestion[] = [
     "round": 50,
     "subject": "2과목",
     "number": 20,
-    "title": "아래 테이블에서 이름별 그룹의 최소 ID 만 남기고 삭제하는 SQL 로 옳은 것은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>ID</th><th>NAME</th></tr>\n  <tr><td>100</td><td>KIM</td></tr>\n  <tr><td>200</td><td>PARK</td></tr>\n  <tr><td>300</td><td>KANG</td></tr>\n  <tr><td>400</td><td>KIM</td></tr>\n  <tr><td>500</td><td>KANG</td></tr>\n</table>",
+    "title": "아래 테이블에서 이름별 그룹의 최소 ID 만 남기고 삭제하는 SQL 로 옳은 것은?",
     "options": [
       "DELETE FROM T WHERE ID NOT IN (SELECT MIN(ID) FROM T GROUP BY NAME);",
       "DELETE FROM T WHERE ID IN (SELECT MAX(ID) FROM T GROUP BY NAME);",
@@ -389,7 +389,7 @@ export const ROUND_50: QuizQuestion[] = [
     "round": 50,
     "subject": "2과목",
     "number": 22,
-    "title": "아래 Oracle SQL 과 동일한 결과를 반환하는 ANSI 표준 SQL 은?\n```sql\nSELECT A.KEY_A, B.KEY_B, A.COL, B.COL\nFROM   A22 A, B22 B\nWHERE  A.KEY_A = B.KEY_B(+)\nUNION ALL\nSELECT A.KEY_A, B.KEY_B, A.COL, B.COL\nFROM   A22 A, B22 B\nWHERE  B.KEY_B = A.KEY_A(+);\n```",
+    "title": "아래 Oracle SQL 과 동일한 결과를 반환하는 ANSI 표준 SQL 은?",
     "options": [
       "FULL OUTER JOIN 만 사용",
       "LEFT OUTER JOIN UNION ALL RIGHT OUTER JOIN",
@@ -479,7 +479,7 @@ export const ROUND_50: QuizQuestion[] = [
     "round": 50,
     "subject": "2과목",
     "number": 27,
-    "title": "부서별 최고 연봉을 조회하는 SQL 로 옳은 것은?\n```sql\nSELECT 부서, MAX(연봉)\nFROM   EMP\n( ? );\n```",
+    "title": "부서별 최고 연봉을 조회하는 SQL 로 옳은 것은?",
     "options": [
       "GROUP BY 부서",
       "HAVING 부서",
@@ -497,7 +497,7 @@ export const ROUND_50: QuizQuestion[] = [
     "round": 50,
     "subject": "2과목",
     "number": 28,
-    "title": "아래 SQL 의 결과로 옳은 것은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>급여</th></tr>\n  <tr><td>4000</td></tr>\n  <tr><td>NULL</td></tr>\n  <tr><td>4000</td></tr>\n  <tr><td>4000</td></tr>\n</table>\n```sql\nSELECT SUM(급여)/3, COUNT(*), COUNT(급여) FROM T;\n-- SUM(급여)/3 = 12000/3 = 4000\n-- COUNT(*) = 4 (NULL 포함)\n-- COUNT(급여) = 3 (NULL 제외)\n```",
+    "title": "아래 SQL 의 결과로 옳은 것은?",
     "options": [
       "4000, 4, 3",
       "4000, 3, 4",
@@ -523,7 +523,7 @@ export const ROUND_50: QuizQuestion[] = [
       "LAST_VALUE"
     ],
     "correctIndex": 1,
-    "explanation": "현재 행 기준 이전 행의 값을 참조한다.",
+    "explanation": "",
     "_source": "authored"
   },
   {
@@ -587,7 +587,7 @@ export const ROUND_50: QuizQuestion[] = [
     "round": 50,
     "subject": "2과목",
     "number": 33,
-    "title": "아래 SQL 수행 시 추가되는 시간으로 옳은 것은?\n```sql\nSELECT SYSDATE + 1/12/(60/30) FROM DUAL;\n```",
+    "title": "아래 SQL 수행 시 추가되는 시간으로 옳은 것은?",
     "options": [
       "+30분",
       "+45분",
@@ -659,7 +659,7 @@ export const ROUND_50: QuizQuestion[] = [
     "round": 50,
     "subject": "2과목",
     "number": 37,
-    "title": "아래 계층형 결과를 반환하는 SQL 로 옳은 것은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>부서코드</th><th>상위부서코드</th></tr>\n  <tr><td>11</td><td>7</td></tr>\n  <tr><td>7</td><td>2</td></tr>\n  <tr><td>2</td><td>NULL</td></tr>\n</table>",
+    "title": "아래 계층형 결과를 반환하는 SQL 로 옳은 것은?",
     "options": [
       "START WITH 부서코드=2 CONNECT BY 상위부서코드 = PRIOR 부서코드",
       "START WITH 부서코드=2 CONNECT BY PRIOR 상위부서코드 = 부서코드",
@@ -677,7 +677,7 @@ export const ROUND_50: QuizQuestion[] = [
     "round": 50,
     "subject": "2과목",
     "number": 38,
-    "title": "출연료가 8,888 이상인 영화의 영화명·배우명·출연료를 조회하는 SQL 로 가장 적절한 것은?\n```\n배우(배우번호, 배우명, 성별)\n영화(영화번호, 영화명, 제작년도)\n출연(배우번호, 영화번호, 출연료)\n```",
+    "title": "출연료가 8,888 이상인 영화의 영화명·배우명·출연료를 조회하는 SQL 로 가장 적절한 것은?",
     "options": [
       "SELECT 출연.영화명, 영화.배우명, ...",
       "SELECT 영화.영화명, 배우.배우명 ... WHERE 출연료 > 8888",
@@ -695,7 +695,7 @@ export const ROUND_50: QuizQuestion[] = [
     "round": 50,
     "subject": "2과목",
     "number": 39,
-    "title": "아래 테이블에서 COUNT(DISTINCT 급여) 의 결과는?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>ID</th><th>급여</th></tr>\n  <tr><td>101</td><td>30000</td></tr>\n  <tr><td>102</td><td>35000</td></tr>\n  <tr><td>103</td><td>4000</td></tr>\n  <tr><td>104</td><td>35000</td></tr>\n  <tr><td>105</td><td>4000</td></tr>\n</table>",
+    "title": "아래 테이블에서 COUNT(DISTINCT 급여) 의 결과는?",
     "options": [
       "5",
       "3",
@@ -731,7 +731,7 @@ export const ROUND_50: QuizQuestion[] = [
     "round": 50,
     "subject": "2과목",
     "number": 41,
-    "title": "아래 뷰와 SELECT 조건의 결과로 옳은 것은?\n```sql\n-- 뷰: WHERE C1 = 'B' OR C1 IS NULL\n-- 조회: WHERE C2 >= 200 AND C1 = 'B'\n```",
+    "title": "아래 뷰와 SELECT 조건의 결과로 옳은 것은?",
     "options": [
       "0",
       "200",
@@ -767,7 +767,7 @@ export const ROUND_50: QuizQuestion[] = [
     "round": 50,
     "subject": "2과목",
     "number": 43,
-    "title": "아래 데이터에 대한 SUM/COUNT 결과로 옳은 것은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>회원번호</th><th>회원코드</th><th>물건</th><th>금액</th></tr>\n  <tr><td>1001</td><td>A</td><td>1</td><td>100</td></tr>\n  <tr><td>1001</td><td>B</td><td>1</td><td>200</td></tr>\n  <tr><td>2102</td><td>A</td><td>1</td><td>NULL</td></tr>\n  <tr><td>2102</td><td>B</td><td>NULL</td><td>300</td></tr>\n</table>",
+    "title": "아래 데이터에 대한 SUM/COUNT 결과로 옳은 것은?",
     "options": [
       "200",
       "150",
@@ -785,7 +785,7 @@ export const ROUND_50: QuizQuestion[] = [
     "round": 50,
     "subject": "2과목",
     "number": 44,
-    "title": "아래 SQL 실행 후 최대값으로 옳은 것은?\n```sql\nINSERT INTO T VALUES (1);\nINSERT INTO T VALUES (2);\nSAVEPOINT SV1;\nUPDATE T SET VAL = 4 WHERE VAL = 1;\nSAVEPOINT SV1;          -- 덮어쓰기\nDELETE FROM T WHERE VAL = 2;\nROLLBACK TO SAVEPOINT SV1;\nINSERT INTO T VALUES (3);\nCOMMIT;\nSELECT MAX(VAL) FROM T;\n```",
+    "title": "아래 SQL 실행 후 최대값으로 옳은 것은?",
     "options": [
       "1",
       "2",
@@ -857,7 +857,7 @@ export const ROUND_50: QuizQuestion[] = [
     "round": 50,
     "subject": "2과목",
     "number": 48,
-    "title": "아래 조건이 없는 결합 형태의 조인은?\n```sql\nSELECT * FROM TABLE1, TABLE2;  -- 조인 조건 없음\n```",
+    "title": "아래 조건이 없는 결합 형태의 조인은?",
     "options": [
       "INNER JOIN",
       "NATURAL JOIN",
@@ -875,7 +875,7 @@ export const ROUND_50: QuizQuestion[] = [
     "round": 50,
     "subject": "2과목",
     "number": 49,
-    "title": "아래 LAG 함수 쿼리의 결과로 옳은 것은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>행</th><th>금액</th><th>LAG</th></tr>\n  <tr><td>1</td><td>NULL</td><td>NULL</td></tr>\n  <tr><td>2</td><td>(ㄱ)</td><td>1행 값</td></tr>\n  <tr><td>3</td><td>(ㄴ)</td><td>2행 값</td></tr>\n</table>",
+    "title": "아래 LAG 함수 쿼리의 결과로 옳은 것은?",
     "options": [
       "ㄱ = 2, ㄴ = 700",
       "ㄱ = 1, ㄴ = 700",
@@ -883,7 +883,7 @@ export const ROUND_50: QuizQuestion[] = [
       "ㄱ = NULL, ㄴ = 700"
     ],
     "correctIndex": 0,
-    "explanation": "LAG(금액, 1) 의 두 번째 행 값은 (ㄱ), 세 번째 행 값은 (ㄴ) 이다. LAG 함수는 현재 행의 직전 행 값을 반환하므로, 두 번째 행의 LAG 는 1행 값이며 세 번째 행의 LAG 는 2행의 값인 700 이 된다.",
+    "explanation": "LAG 함수는 현재 행의 직전 행 값을 반환하므로, 두 번째 행의 LAG 는 1행 값이며 세 번째 행의 LAG 는 2행의 값인 700 이 된다.",
     "_source": "authored"
   },
   {
@@ -901,7 +901,7 @@ export const ROUND_50: QuizQuestion[] = [
       "GRANT"
     ],
     "correctIndex": 1,
-    "explanation": "트랜잭션 수행 중 오류가 발생한 경우 모든 작업을 취소하고 이전 상태로 되돌리는 명령 ROLLBACK 은 트랜잭션 내의 모든 변경 작업을 취소하고 직전 COMMIT 시점의 상태로 복원한다.",
+    "explanation": "ROLLBACK 은 트랜잭션 내의 모든 변경 작업을 취소하고 직전 COMMIT 시점의 상태로 복원한다.",
     "_source": "authored"
   }
 ];

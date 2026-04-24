@@ -29,7 +29,7 @@ export const ROUND_46: QuizQuestion[] = [
     "round": 46,
     "subject": "1과목",
     "number": 2,
-    "title": "아래 ERD에서 정규화가 적절하게 수행된 형태는? (고객은 서비스를 하나만 가진다.)\n<pre>\n[ 고객 ] ─|───────|─ [ 서비스 ]\n</pre>",
+    "title": "아래 ERD에서 정규화가 적절하게 수행된 형태는? (고객은 서비스를 하나만 가진다.)",
     "options": [
       "고객 엔터티에 서비스번호를 속성으로 포함시킨다.",
       "서비스 엔터티에 고객번호를 속성으로 포함시킨다.",
@@ -37,7 +37,7 @@ export const ROUND_46: QuizQuestion[] = [
       "고객 ─< 서비스계약 >─ 서비스 로 분리하되, 서비스계약에 고객번호와 서비스번호만 둔다."
     ],
     "correctIndex": 3,
-    "explanation": "바커(Barker) 표기법 해석: 고객 쪽 `|`와 서비스 쪽 `|`는 각각 필수 참여·단일성을 뜻하여 고객과 서비스가 1:1 관계임을 의미한다. 고객이 단일 서비스만 가지는 제약에서 서비스계약번호를 별도 PK로 두면 동일 고객이 같은 서비스를 중복 소유할 수 있게 되어 업무 규칙에 어긋난다.",
+    "explanation": "고객이 단일 서비스만 가지는 제약에서 서비스계약번호를 별도 PK로 두면 동일 고객이 같은 서비스를 중복 소유할 수 있게 되어 업무 규칙에 어긋난다.",
     "_source": "authored"
   },
   {
@@ -47,7 +47,7 @@ export const ROUND_46: QuizQuestion[] = [
     "round": 46,
     "subject": "1과목",
     "number": 3,
-    "title": "아래 ERD(A, B, C, D 네 테이블의 모든 관계가 식별자 관계)에 대한 설명으로 적절하지 않은 것은?\n<pre>\n[ A ] ─┼─< [ B ] ─┼─< [ C ] ─┼─< [ D ]\n</pre>",
+    "title": "아래 ERD(A, B, C, D 네 테이블의 모든 관계가 식별자 관계)에 대한 설명으로 적절하지 않은 것은?",
     "options": [
       "A의 PK는 B, C, D로 순차적으로 전파된다.",
       "A와 C를 조인할 때 B를 경유하지 않고도 조인이 가능하다.",
@@ -73,7 +73,7 @@ export const ROUND_46: QuizQuestion[] = [
       "기본속성, 파생속성, 설계속성"
     ],
     "correctIndex": 0,
-    "explanation": "( ㄱ ) 업무 분석을 통해 바로 도출되는 속성 ( ㄴ ) 원래 업무상 존재하지는 않지만 설계 과정에서 도출되는 속성 ( ㄷ ) 다른 속성으로부터 계산·변형되어 생성되는 속성",
+    "explanation": "",
     "_source": "authored"
   },
   {
@@ -109,7 +109,7 @@ export const ROUND_46: QuizQuestion[] = [
       "BCNF"
     ],
     "correctIndex": 1,
-    "explanation": "릴레이션이 제1정규형을 만족하고, 기본키가 아닌 모든 속성이 주식별자에 완전 함수 종속된다.",
+    "explanation": "",
     "_source": "authored"
   },
   {
@@ -119,7 +119,7 @@ export const ROUND_46: QuizQuestion[] = [
     "round": 46,
     "subject": "1과목",
     "number": 7,
-    "title": "아래 ERD의 해석으로 가장 적절한 것은?\n<pre>\n[ 컴퓨터 ] ─o|─ ─ ─ ─ ─|─ [ 마더보드 ]\n</pre>",
+    "title": "아래 ERD의 해석으로 가장 적절한 것은?",
     "options": [
       "마더보드는 반드시 한 개의 컴퓨터에 포함된다.",
       "마더보드는 때때로 하나의 컴퓨터에 포함된다.",
@@ -145,7 +145,7 @@ export const ROUND_46: QuizQuestion[] = [
       "보조식별자, 주식별자, 본질식별자, 외부식별자"
     ],
     "correctIndex": 0,
-    "explanation": "( ㄱ ) 엔터티 내 각 인스턴스를 구분하며 타 엔터티와의 참조관계를 연결할 수 있는 대표 식별자 ( ㄴ ) 각 인스턴스를 구분할 수 있으나 대표성을 가지지 못하는 식별자 ( ㄷ ) 업무 수행 과정에서 자연스럽게 발생한 식별자 ( ㄹ ) 다른 엔터티와의 관계를 통해 상속받은 식별자",
+    "explanation": "",
     "_source": "authored"
   },
   {
@@ -181,7 +181,7 @@ export const ROUND_46: QuizQuestion[] = [
       "ㄱ 유일성, ㄴ 대표성"
     ],
     "correctIndex": 1,
-    "explanation": "유일성: 주식별자에 의해 엔터티 내의 모든 인스턴스가 유일하게 구분된다. 존재성: 주식별자가 지정되면 반드시 데이터 값이 존재한다. ( ㄱ ): 주식별자를 구성하는 속성의 수는 유일성을 만족하는 최소의 수여야 한다. ( ㄴ ): 주식별자가 한 번 지정되면 그 값은 변하지 않아야 한다. 주식별자의 4대 특성은 유일성·최소성·불변성·존재성이다. 최소성은 유일성을 만족하는 속성의 최소 집합 조건이고, 불변성은 한 번 부여된 식별자 값이 변경되지 않아야 한다는 요건이다.",
+    "explanation": "주식별자의 4대 특성은 유일성·최소성·불변성·존재성이다. 최소성은 유일성을 만족하는 속성의 최소 집합 조건이고, 불변성은 한 번 부여된 식별자 값이 변경되지 않아야 한다는 요건이다.",
     "_source": "authored"
   },
   {
@@ -191,7 +191,7 @@ export const ROUND_46: QuizQuestion[] = [
     "round": 46,
     "subject": "2과목",
     "number": 11,
-    "title": "아래 테이블과 계층형 쿼리의 결과 행 수로 옳은 것은?\n<table border=\"1\">\n<tr><th>COL1</th><th>COL2</th><th>COL3</th></tr>\n<tr><td>A</td><td>NULL</td><td>1</td></tr>\n<tr><td>B</td><td>A</td><td>2</td></tr>\n<tr><td>C</td><td>A</td><td>3</td></tr>\n<tr><td>D</td><td>B</td><td>4</td></tr>\n</table>\n```sql\nSELECT *\nFROM   SQLD46_01\nWHERE  COL3 <> 2\nSTART WITH COL3 = 4\nCONNECT BY COL1 = PRIOR COL2;\n```",
+    "title": "아래 테이블과 계층형 쿼리의 결과 행 수로 옳은 것은?",
     "options": [
       "1건",
       "2건",
@@ -209,7 +209,7 @@ export const ROUND_46: QuizQuestion[] = [
     "round": 46,
     "subject": "2과목",
     "number": 12,
-    "title": "아래 네 SQL 중 COL이 NULL일 때 반환 결과가 나머지와 다른 것은?\n```sql\n-- ① IFNULL(COL, 'value')\n-- ② NVL(COL, 'value')\n-- ③ COALESCE(COL, 'value')\n-- ④ NULLIF(COL, 'value')\n```",
+    "title": "아래 네 SQL 중 COL이 NULL일 때 반환 결과가 나머지와 다른 것은?",
     "options": [
       "IFNULL(COL, 'value')",
       "NVL(COL, 'value')",
@@ -227,7 +227,7 @@ export const ROUND_46: QuizQuestion[] = [
     "round": 46,
     "subject": "2과목",
     "number": 13,
-    "title": "아래 계층형 쿼리가 사원-관리자 조직도를 최상위부터 순회하도록 빈칸을 채우시오.\n```sql\nSELECT 사원, 관리자, LEVEL\nFROM   EMP\nSTART WITH (  ㄱ  )\nCONNECT BY PRIOR ( ㄴ ) = ( ㄷ );\n```",
+    "title": "아래 계층형 쿼리가 사원-관리자 조직도를 최상위부터 순회하도록 빈칸을 채우시오.",
     "options": [
       "ㄱ 관리자 IS NULL, ㄴ 사원, ㄷ 관리자",
       "ㄱ 사원 IS NULL, ㄴ 관리자, ㄷ 사원",
@@ -245,7 +245,7 @@ export const ROUND_46: QuizQuestion[] = [
     "round": 46,
     "subject": "2과목",
     "number": 14,
-    "title": "두 SQL의 결과 집합에 대한 설명으로 옳은 것은?\n```sql\nSELECT A, B, C FROM TAB1\nUNION ALL\nSELECT A, B, C FROM TAB2;\nSELECT A, B, C FROM TAB1\nUNION\nSELECT A, B, C FROM TAB2;\n```",
+    "title": "두 SQL의 결과 집합에 대한 설명으로 옳은 것은?",
     "options": [
       "두 SQL의 결과는 항상 동일하다.",
       "UNION ALL은 중복을 제거하지 않고, UNION은 중복을 제거한다.",
@@ -307,7 +307,7 @@ export const ROUND_46: QuizQuestion[] = [
       "GROUP BY 매장ID, 매장명, 년도"
     ],
     "correctIndex": 1,
-    "explanation": "매장ID별 합계, (매장ID, 매장명)별 합계가 각각 년도와 결합하여 집계된다. ROLLUP(매장ID, 매장명)은 (매장ID, 매장명), (매장ID), ()의 집계 그룹을 생성하며, 이 각각에 년도가 교차 집계된다.",
+    "explanation": "ROLLUP(매장ID, 매장명)은 (매장ID, 매장명), (매장ID), ()의 집계 그룹을 생성하며, 이 각각에 년도가 교차 집계된다.",
     "_source": "authored"
   },
   {
@@ -317,7 +317,7 @@ export const ROUND_46: QuizQuestion[] = [
     "round": 46,
     "subject": "2과목",
     "number": 18,
-    "title": "아래 세 SQL의 결과에 대한 설명으로 옳은 것은? (WHERE 1=2 이므로 모두 공집합)\n```sql\n-- ① SELECT NVL(SUM(COL1), 0) FROM T WHERE 1=2;\n-- ② SELECT MIN(COL1)          FROM T WHERE 1=2;\n-- ③ SELECT COUNT(*)            FROM T WHERE 1=2;\n```",
+    "title": "아래 세 SQL의 결과에 대한 설명으로 옳은 것은? (WHERE 1=2 이므로 모두 공집합)",
     "options": [
       "①은 NULL, ②는 0, ③은 0을 반환한다.",
       "①은 0, ②는 NULL, ③은 0을 반환한다.",
@@ -335,7 +335,7 @@ export const ROUND_46: QuizQuestion[] = [
     "round": 46,
     "subject": "2과목",
     "number": 19,
-    "title": "아래 SQL의 결과 행 수로 옳은 것은?\n```sql\nSELECT COL FROM T1   -- {1,2,3}\nUNION\nSELECT COL FROM T2   -- {3,4,5}\nMINUS\nSELECT COL FROM T3;  -- {2}\n```",
+    "title": "아래 SQL의 결과 행 수로 옳은 것은?",
     "options": [
       "3건",
       "4건",
@@ -353,7 +353,7 @@ export const ROUND_46: QuizQuestion[] = [
     "round": 46,
     "subject": "2과목",
     "number": 20,
-    "title": "아래 SQL에서 결과와 상관없이 모든 행을 반환하는 테이블은?\n```sql\nSELECT T.NAME, S.DATE\nFROM   TUTOR T LEFT OUTER JOIN SESSIONS S\nON     T.TID = S.TID;\n```",
+    "title": "아래 SQL에서 결과와 상관없이 모든 행을 반환하는 테이블은?",
     "options": [
       "TUTOR",
       "SESSIONS",
@@ -407,7 +407,7 @@ export const ROUND_46: QuizQuestion[] = [
     "round": 46,
     "subject": "2과목",
     "number": 23,
-    "title": "다음 데이터와 SQL에서 정렬 조건의 중복 값을 동일 합으로 처리하는 윈도우 절은?\n<table border=\"1\">\n<tr><th>ID</th><th>GRP</th><th>AMT</th></tr>\n<tr><td>1</td><td>A</td><td>100</td></tr>\n<tr><td>2</td><td>A</td><td>100</td></tr>\n<tr><td>3</td><td>A</td><td>100</td></tr>\n</table>",
+    "title": "다음 데이터와 SQL에서 정렬 조건의 중복 값을 동일 합으로 처리하는 윈도우 절은?",
     "options": [
       "ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW",
       "RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW",
@@ -415,7 +415,7 @@ export const ROUND_46: QuizQuestion[] = [
       "ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING"
     ],
     "correctIndex": 1,
-    "explanation": "기대 결과: (A, 300), (A, 300), (A, 300) ORDER BY 키에 중복이 있을 때 ROWS는 물리적 행 단위로 누적하여 결과가 달라지는 반면, RANGE는 동일 값을 하나의 논리적 범위로 처리해 동일 누적 합을 반환한다.",
+    "explanation": "ORDER BY 키에 중복이 있을 때 ROWS는 물리적 행 단위로 누적하여 결과가 달라지는 반면, RANGE는 동일 값을 하나의 논리적 범위로 처리해 동일 누적 합을 반환한다.",
     "_source": "authored"
   },
   {
@@ -425,7 +425,7 @@ export const ROUND_46: QuizQuestion[] = [
     "round": 46,
     "subject": "2과목",
     "number": 24,
-    "title": "아래 윈도우 절의 결과로 옳은 것은?\n```sql\nSELECT 이름, 연봉,\n       MAX(연봉) OVER (ORDER BY 연봉 ROWS BETWEEN CURRENT ROW AND CURRENT ROW) AS M\nFROM   EMP;\n```",
+    "title": "아래 윈도우 절의 결과로 옳은 것은?",
     "options": [
       "전체 최대 연봉을 모든 행에 반환한다.",
       "현재 행의 연봉 값을 그대로 반환한다.",
@@ -479,7 +479,7 @@ export const ROUND_46: QuizQuestion[] = [
     "round": 46,
     "subject": "2과목",
     "number": 27,
-    "title": "아래 SQL의 실행 결과로 옳은 것은?\n```sql\nSELECT 이름, 급여\nFROM   EMP\nWHERE  급여 >= (SELECT MAX(급여) FROM EMP GROUP BY 부서);\n```",
+    "title": "아래 SQL의 실행 결과로 옳은 것은?",
     "options": [
       "전체 직원 중 급여 최상위 1명을 반환한다.",
       "부서별 최상위 급여자를 모두 반환한다.",
@@ -497,7 +497,7 @@ export const ROUND_46: QuizQuestion[] = [
     "round": 46,
     "subject": "2과목",
     "number": 28,
-    "title": "아래 ERD에 대한 설명으로 가장 적절한 것은?\n<pre>\n[ 지점 ] ─|─ ─ ─ ─ ─ ─o< [ 고객 ]\n</pre>",
+    "title": "아래 ERD에 대한 설명으로 가장 적절한 것은?",
     "options": [
       "지점은 최소 한 명의 고객을 반드시 가진다.",
       "고객은 반드시 하나의 지점에 소속된다.",
@@ -515,7 +515,7 @@ export const ROUND_46: QuizQuestion[] = [
     "round": 46,
     "subject": "2과목",
     "number": 29,
-    "title": "아래 두 SQL 중 오라클에서 오류가 발생하지 않는 것은?\n```sql\n-- ① SELECT A, SUM(X) FROM T GROUP BY A ORDER BY C;\n-- ② SELECT A, SUM(X) FROM T GROUP BY A HAVING COUNT(C) > 1;\n```",
+    "title": "아래 두 SQL 중 오라클에서 오류가 발생하지 않는 것은?",
     "options": [
       "①만 오류가 발생하지 않는다.",
       "②만 오류가 발생하지 않는다.",
@@ -533,7 +533,7 @@ export const ROUND_46: QuizQuestion[] = [
     "round": 46,
     "subject": "2과목",
     "number": 30,
-    "title": "오라클과 SQL Server에서 아래 DML·DDL이 순차 수행된 후 ROLLBACK의 효과로 적절하지 않은 것은?\n```sql\nUPDATE T1 SET COL2 = 200;\nCREATE TABLE TAB_NEW ( C1 NUMBER );\nROLLBACK;\n```",
+    "title": "오라클과 SQL Server에서 아래 DML·DDL이 순차 수행된 후 ROLLBACK의 효과로 적절하지 않은 것은?",
     "options": [
       "오라클에서는 CREATE 시 UPDATE가 자동 커밋되어 UPDATE 결과는 유지된다.",
       "오라클에서는 CREATE로 생성된 테이블 TAB_NEW는 유지된다.",
@@ -605,7 +605,7 @@ export const ROUND_46: QuizQuestion[] = [
     "round": 46,
     "subject": "2과목",
     "number": 34,
-    "title": "아래 SQL의 결과에 대한 설명으로 옳은 것은?\n```sql\nSELECT 운전자, COUNT(운행번호) AS 운행횟수\nFROM   DRIVING_LOG\nGROUP BY 운전자;\n```",
+    "title": "아래 SQL의 결과에 대한 설명으로 옳은 것은?",
     "options": [
       "운전자별 운행 횟수를 모두 알 수 있다.",
       "전체 운전자의 총 운행 횟수만 반환한다.",
@@ -623,7 +623,7 @@ export const ROUND_46: QuizQuestion[] = [
     "round": 46,
     "subject": "2과목",
     "number": 35,
-    "title": "아래 SQL의 의미로 가장 적절한 것은?\n```sql\nSELECT *\nFROM   CUSTOMER\nWHERE  지역 IN ('서울', '대전', '부산');\n```",
+    "title": "아래 SQL의 의미로 가장 적절한 것은?",
     "options": [
       "지역이 서울이면서 동시에 대전이면서 부산인 행을 조회한다.",
       "지역이 서울이거나 대전이거나 부산인 행을 조회한다.",
@@ -641,7 +641,7 @@ export const ROUND_46: QuizQuestion[] = [
     "round": 46,
     "subject": "2과목",
     "number": 36,
-    "title": "아래 SQL의 결과로 옳은 것은? (오라클에서 NULL은 정렬 시 가장 큰 값으로 간주된다.)\n<table border=\"1\">\n<tr><th>COL1</th><th>COL2</th><th>COL3</th></tr>\n<tr><td>A</td><td>1</td><td>100</td></tr>\n<tr><td>A</td><td>1</td><td>NULL</td></tr>\n<tr><td>A</td><td>2</td><td>50</td></tr>\n</table>\n```sql\nSELECT COL1, COL2, COL3\nFROM   T\nORDER BY COL1, COL2, COL3 DESC;\n```",
+    "title": "아래 SQL의 결과로 옳은 것은? (오라클에서 NULL은 정렬 시 가장 큰 값으로 간주된다.)",
     "options": [
       "(A,1,100), (A,1,NULL), (A,2,50)",
       "(A,1,NULL), (A,1,100), (A,2,50)",
@@ -667,7 +667,7 @@ export const ROUND_46: QuizQuestion[] = [
       "CONCAT"
     ],
     "correctIndex": 0,
-    "explanation": "문자열의 M번째 위치에서 N개 문자를 잘라 반환한다.",
+    "explanation": "",
     "_source": "authored"
   },
   {
@@ -685,7 +685,7 @@ export const ROUND_46: QuizQuestion[] = [
       "지속성(Durability)"
     ],
     "correctIndex": 0,
-    "explanation": "트랜잭션에서 정의된 연산들은 모두 성공적으로 수행되거나, 전혀 수행되지 않은 상태로 남아야 한다. (ALL OR NOTHING)",
+    "explanation": "",
     "_source": "authored"
   },
   {
@@ -695,7 +695,7 @@ export const ROUND_46: QuizQuestion[] = [
     "round": 46,
     "subject": "2과목",
     "number": 39,
-    "title": "아래 SQL의 결과 행 수로 옳은 것은? (T2.COL2에 NULL이 포함되어 있다.)\n```sql\nSELECT *\nFROM   T1\nWHERE  COL1 NOT IN (SELECT COL2 FROM T2);\n```",
+    "title": "아래 SQL의 결과 행 수로 옳은 것은? (T2.COL2에 NULL이 포함되어 있다.)",
     "options": [
       "T1의 모든 행",
       "T1 중 COL1이 T2.COL2에 존재하지 않는 행",
@@ -713,7 +713,7 @@ export const ROUND_46: QuizQuestion[] = [
     "round": 46,
     "subject": "2과목",
     "number": 40,
-    "title": "아래 데이터와 CASE 문의 결과로 옳은 것은?\n<table border=\"1\">\n<tr><th>COL1</th><th>COL2</th></tr>\n<tr><td>50</td><td>150</td></tr>\n<tr><td>100</td><td>250</td></tr>\n<tr><td>200</td><td>150</td></tr>\n<tr><td>300</td><td>400</td></tr>\n</table>\n```sql\nSELECT CASE WHEN COL1 <= 100 THEN 'B'\n            WHEN COL2 <= 200 THEN 'A'\n            ELSE 'S'\n       END\nFROM   T;\n```",
+    "title": "아래 데이터와 CASE 문의 결과로 옳은 것은?",
     "options": [
       "A, A, B, S",
       "B, B, A, S",
@@ -749,7 +749,7 @@ export const ROUND_46: QuizQuestion[] = [
     "round": 46,
     "subject": "2과목",
     "number": 42,
-    "title": "아래 함수의 수행 결과로 옳은 것은?\n```sql\nSELECT ROUND(10333.3333, -2) FROM DUAL;\n```",
+    "title": "아래 함수의 수행 결과로 옳은 것은?",
     "options": [
       "10333",
       "10300",
@@ -767,7 +767,7 @@ export const ROUND_46: QuizQuestion[] = [
     "round": 46,
     "subject": "2과목",
     "number": 43,
-    "title": "아래 SQL의 COALESCE 절에 대한 설명으로 옳은 것은?\n```sql\nSELECT 사번, COALESCE(COM, SAL) AS 보상\nFROM   EMP;\n```",
+    "title": "아래 SQL의 COALESCE 절에 대한 설명으로 옳은 것은?",
     "options": [
       "COM이 NULL이면 SAL을, NULL이 아니면 COM을 반환한다.",
       "COM과 SAL의 합을 반환한다.",
@@ -785,7 +785,7 @@ export const ROUND_46: QuizQuestion[] = [
     "round": 46,
     "subject": "2과목",
     "number": 44,
-    "title": "아래 SQL의 결과로 옳은 것은?\n<table border=\"1\">\n<tr><th>이름</th><th>급여</th></tr>\n<tr><td>A</td><td>150</td></tr>\n<tr><td>B</td><td>140</td></tr>\n<tr><td>C</td><td>130</td></tr>\n<tr><td>D</td><td>120</td></tr>\n</table>\n```sql\nSELECT 이름, 급여\nFROM   ( SELECT 이름, 급여,\n                ROW_NUMBER() OVER (ORDER BY 급여 DESC) AS RN\n         FROM   EMP )\nWHERE  RN <= 2;\n```",
+    "title": "아래 SQL의 결과로 옳은 것은?",
     "options": [
       "(A,150), (B,140)",
       "(A,150), (C,130)",
@@ -803,7 +803,7 @@ export const ROUND_46: QuizQuestion[] = [
     "round": 46,
     "subject": "2과목",
     "number": 45,
-    "title": "아래 데이터와 SQL의 결과로 옳은 것은?\n<table border=\"1\">\n<tr><th>COL1</th><th>COL2</th></tr>\n<tr><td>10</td><td>25</td></tr>\n<tr><td>20</td><td>26</td></tr>\n<tr><td>30</td><td>30</td></tr>\n<tr><td>40</td><td>20</td></tr>\n</table>\n```sql\nSELECT COUNT(COL1), AVG(COL2)\nFROM   T\nWHERE  COL2 > 21;\n```",
+    "title": "아래 데이터와 SQL의 결과로 옳은 것은?",
     "options": [
       "3, 27",
       "3, 33",
@@ -857,7 +857,7 @@ export const ROUND_46: QuizQuestion[] = [
     "round": 46,
     "subject": "2과목",
     "number": 48,
-    "title": "아래 SQL의 결과 값은?\n<table border=\"1\">\n<tr><th>COL1</th></tr>\n<tr><td>4</td></tr>\n<tr><td>4</td></tr>\n<tr><td>NULL</td></tr>\n<tr><td>NULL</td></tr>\n<tr><td>8</td></tr>\n<tr><td>8</td></tr>\n</table>\n```sql\nSELECT AVG(COL1) - AVG(NVL(COL1, 0))\nFROM   T;\n```",
+    "title": "아래 SQL의 결과 값은?",
     "options": [
       "0",
       "1",
@@ -875,7 +875,7 @@ export const ROUND_46: QuizQuestion[] = [
     "round": 46,
     "subject": "2과목",
     "number": 49,
-    "title": "부서 테이블에 존재하지만 대응되는 사원이 없는 부서까지 모두 조회하려 한다. 빈칸에 들어갈 조인 방식으로 올바른 것은? (사원 테이블이 FROM 절의 좌측, 부서 테이블이 우측에 위치한다고 가정)\n```sql\nSELECT *\nFROM   EMP E ???  JOIN DEPT D\nON     E.DNO = D.DNO;\n```",
+    "title": "부서 테이블에 존재하지만 대응되는 사원이 없는 부서까지 모두 조회하려 한다. 빈칸에 들어갈 조인 방식으로 올바른 것은? (사원 테이블이 FROM 절의 좌측, 부서 테이블이 우측에 위치한다고 가정)",
     "options": [
       "RIGHT OUTER JOIN",
       "LEFT OUTER JOIN",
@@ -893,7 +893,7 @@ export const ROUND_46: QuizQuestion[] = [
     "round": 46,
     "subject": "2과목",
     "number": 50,
-    "title": "아래 결과를 얻기 위한 SQL의 GROUP BY 절로 올바른 것은?\n```sql\nSELECT GRADE, JOB, COUNT(*)\nFROM   EMP\nGROUP BY (  ㄱ  );\n```",
+    "title": "아래 결과를 얻기 위한 SQL의 GROUP BY 절로 올바른 것은?",
     "options": [
       "ROLLUP ( GRADE, JOB )",
       "GROUPING SETS ( GRADE, (GRADE, JOB) )",
@@ -901,7 +901,7 @@ export const ROUND_46: QuizQuestion[] = [
       "GRADE, JOB"
     ],
     "correctIndex": 1,
-    "explanation": "GRADE 단위 집계와 (GRADE, JOB) 단위 집계가 결합되어 나타난다. GROUPING SETS(A, B)는 GROUP BY (A) UNION ALL GROUP BY (B)와 동치이므로, GRADE 단위와 (GRADE, JOB) 단위의 두 집계 그룹을 동시에 생성한다.",
+    "explanation": "GROUPING SETS(A, B)는 GROUP BY (A) UNION ALL GROUP BY (B)와 동치이므로, GRADE 단위와 (GRADE, JOB) 단위의 두 집계 그룹을 동시에 생성한다.",
     "_source": "authored"
   }
 ];

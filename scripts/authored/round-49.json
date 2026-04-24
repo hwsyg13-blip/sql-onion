@@ -1,6 +1,6 @@
 {
   "round": 49,
-  "notes": "restored from 49회_복원.md — MCQ 50 + 단답형 0 (단답형은 현재 UI 미지원이라 제외)",
+  "notes": "restored from 49회_복원.md — MCQ 50 (references 포함: 32) + 단답형 0 제외",
   "authored": [
     {
       "subject": "1과목",
@@ -13,7 +13,13 @@
         "BCNF"
       ],
       "correctIndex": 1,
-      "explanation": "식별자 컬럼 간의 부분 함수 종속성을 해결한다."
+      "explanation": "",
+      "references": [
+        {
+          "type": "text",
+          "content": "식별자 컬럼 간의 부분 함수 종속성을 해결한다."
+        }
+      ]
     },
     {
       "subject": "1과목",
@@ -44,7 +50,7 @@
     {
       "subject": "1과목",
       "number": 4,
-      "title": "아래 ERD 해석 중 옳지 않은 것은?\n```\n[ 상품 ] ─|─ ─ ─ ─o< [ 주문 ]\n```",
+      "title": "아래 ERD 해석 중 옳지 않은 것은?",
       "options": [
         "하나의 주문은 반드시 하나의 상품을 가진다.",
         "하나의 상품은 여러 주문을 가질 수 있다.",
@@ -52,7 +58,13 @@
         "주문이 없는 상품도 존재할 수 있다."
       ],
       "correctIndex": 2,
-      "explanation": "바커(Barker) 표기법 해석: 상품 쪽 실선 + `|`는 주문 입장에서 상품이 필수 하나임을 의미하고, 주문 쪽 점선 + `o<`는 상품 입장에서 주문 참여가 선택적(0 이상 다수)임을 의미한다. 따라서 주문이 없는 상품도 존재할 수 있으므로 ③은 옳지 않다."
+      "explanation": "바커(Barker) 표기법 해석: 상품 쪽 실선 + `|`는 주문 입장에서 상품이 필수 하나임을 의미하고, 주문 쪽 점선 + `o<`는 상품 입장에서 주문 참여가 선택적(0 이상 다수)임을 의미한다. 따라서 주문이 없는 상품도 존재할 수 있으므로 ③은 옳지 않다.",
+      "references": [
+        {
+          "type": "sql",
+          "code": "[ 상품 ] ─|─ ─ ─ ─o< [ 주문 ]"
+        }
+      ]
     },
     {
       "subject": "1과목",
@@ -91,7 +103,13 @@
         "관계 속성"
       ],
       "correctIndex": 1,
-      "explanation": "업무상 필요한 데이터 이외에 데이터 모델링을 위해 업무를 규칙화하기 위한 속성"
+      "explanation": "",
+      "references": [
+        {
+          "type": "text",
+          "content": "업무상 필요한 데이터 이외에 데이터 모델링을 위해 업무를 규칙화하기 위한 속성"
+        }
+      ]
     },
     {
       "subject": "1과목",
@@ -104,7 +122,13 @@
         "개념 엔터티"
       ],
       "correctIndex": 2,
-      "explanation": "두 개 이상의 부모 엔터티로부터 발생되고 자주 내용이 변경되거나 데이터량이 증가하는 엔터티. 분석 초기 단계에서는 잘 나타나지 않으며 상세 설계 단계나 프로세스 상관 모델링 과정에서 드러난다."
+      "explanation": "",
+      "references": [
+        {
+          "type": "text",
+          "content": "두 개 이상의 부모 엔터티로부터 발생되고 자주 내용이 변경되거나 데이터량이 증가하는 엔터티. 분석 초기 단계에서는 잘 나타나지 않으며 상세 설계 단계나 프로세스 상관 모델링 과정에서 드러난다."
+        }
+      ]
     },
     {
       "subject": "1과목",
@@ -130,7 +154,44 @@
         "관계속성(Relationship Attribute)"
       ],
       "correctIndex": 1,
-      "explanation": ""
+      "explanation": "관계차수는 두 엔터티 간 관계에 참여하는 인스턴스 수의 대응 관계(1:1, 1:M, M:N)를 의미한다. `|`(단일성), `o`(선택성), `<`(까마귀발, 다수) 기호 조합으로 표기된다.",
+      "references": [
+        {
+          "type": "table",
+          "headers": [
+            "표기",
+            "카디널리티",
+            "의미"
+          ],
+          "rows": [
+            [
+              "[ A ] ─|─────|─ [ B ]",
+              "1 : 1",
+              "하나의 A는 하나의 B로 구성"
+            ],
+            [
+              "[ A ] ─|─────o|─ [ B ]",
+              "1 : 0 or 1",
+              "하나의 A는 0 또는 하나의 B로 구성"
+            ],
+            [
+              "[ A ] ─|─────< [ B ]",
+              "1 : N",
+              "하나의 A는 두 개 이상의 B로 구성"
+            ],
+            [
+              "[ A ] ─|─────|< [ B ]",
+              "1 : 1 or 1 : N",
+              "하나의 A는 하나 이상의 B로 구성"
+            ],
+            [
+              "[ A ] ─|─────o< [ B ]",
+              "1 : 0 or 1 or N",
+              "하나의 A는 0, 1 또는 그 이상의 B로 구성"
+            ]
+          ]
+        }
+      ]
     },
     {
       "subject": "2과목",
@@ -174,7 +235,7 @@
     {
       "subject": "2과목",
       "number": 14,
-      "title": "아래 테이블에 대해 순방향 계층형 쿼리를 구성하는 SQL 로 옳은 것은?\n```\n[EMP] EMP_NO, MANAGER_NO\n```",
+      "title": "아래 테이블에 대해 순방향 계층형 쿼리를 구성하는 SQL 로 옳은 것은?",
       "options": [
         "CONNECT BY PRIOR EMP_NO = MANAGER_NO",
         "CONNECT BY PRIOR MANAGER_NO = EMP_NO",
@@ -182,7 +243,13 @@
         "CONNECT BY PRIOR EMP_NO = PRIOR MANAGER_NO"
       ],
       "correctIndex": 0,
-      "explanation": "PRIOR 자식 = 부모 형태로 부모→자식 순방향 전개가 이루어진다."
+      "explanation": "PRIOR 자식 = 부모 형태로 부모→자식 순방향 전개가 이루어진다.",
+      "references": [
+        {
+          "type": "sql",
+          "code": "[EMP] EMP_NO, MANAGER_NO"
+        }
+      ]
     },
     {
       "subject": "2과목",
@@ -195,12 +262,18 @@
         "A: NVL, B: COALESCE, C: NULLIF"
       ],
       "correctIndex": 1,
-      "explanation": "A: 컬럼 값이 NULL 이면 B 를 출력 B: 두 컬럼 값이 같으면 NULL C: 왼쪽부터 NULL 이 아닌 첫 값을 반환"
+      "explanation": "",
+      "references": [
+        {
+          "type": "text",
+          "content": "A: 컬럼 값이 NULL 이면 B 를 출력\nB: 두 컬럼 값이 같으면 NULL\nC: 왼쪽부터 NULL 이 아닌 첫 값을 반환"
+        }
+      ]
     },
     {
       "subject": "2과목",
       "number": 16,
-      "title": "아래 SQL 의 실행 결과로 옳은 것은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>ID</th></tr>\n  <tr><td>100</td></tr>\n  <tr><td>100</td></tr>\n  <tr><td>200</td></tr>\n  <tr><td>200</td></tr>\n  <tr><td>200</td></tr>\n  <tr><td>999</td></tr>\n  <tr><td>999</td></tr>\n</table>\n```sql\nSELECT ID FROM TBL\nGROUP BY ID\nHAVING COUNT(*) = 2\nORDER BY (CASE WHEN ID = 999 THEN 0 ELSE ID END);\n```",
+      "title": "아래 SQL 의 실행 결과로 옳은 것은?",
       "options": [
         "100, 999",
         "999, 100",
@@ -208,12 +281,47 @@
         "999, 200, 100"
       ],
       "correctIndex": 1,
-      "explanation": "CASE 식은 ID=999 일 때 0 을 반환해 999 가 가장 먼저 정렬되고, 이어서 ID=100 이 반환된다."
+      "explanation": "CASE 식은 ID=999 일 때 0 을 반환해 999 가 가장 먼저 정렬되고, 이어서 ID=100 이 반환된다.",
+      "references": [
+        {
+          "type": "table",
+          "headers": [
+            "ID"
+          ],
+          "rows": [
+            [
+              "100"
+            ],
+            [
+              "100"
+            ],
+            [
+              "200"
+            ],
+            [
+              "200"
+            ],
+            [
+              "200"
+            ],
+            [
+              "999"
+            ],
+            [
+              "999"
+            ]
+          ]
+        },
+        {
+          "type": "sql",
+          "code": "SELECT ID FROM TBL\nGROUP BY ID\nHAVING COUNT(*) = 2\nORDER BY (CASE WHEN ID = 999 THEN 0 ELSE ID END);"
+        }
+      ]
     },
     {
       "subject": "2과목",
       "number": 17,
-      "title": "아래 두 테이블에 대해 오류가 발생하는 INNER JOIN SQL 은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th colspan=\"2\">TEAM</th><th colspan=\"2\">STADIUM</th></tr>\n  <tr><th>ID</th><th>COL1</th><th>ID</th><th>COL2</th></tr>\n  <tr><td>1</td><td>A</td><td>1</td><td>A</td></tr>\n  <tr><td>2</td><td>B</td><td>2</td><td>B</td></tr>\n</table>",
+      "title": "아래 두 테이블에 대해 오류가 발생하는 INNER JOIN SQL 은?",
       "options": [
         "SELECT * FROM TEAM A INNER JOIN STADIUM B ON A.ID = B.ID;",
         "SELECT * FROM TEAM A INNER JOIN STADIUM B USING(ID);",
@@ -221,7 +329,36 @@
         "SELECT * FROM TEAM A INNER JOIN STADIUM B ON (ID);"
       ],
       "correctIndex": 3,
-      "explanation": "ON 절에는 비교식이 와야 하며, USING 절과 달리 컬럼명만 단독으로 지정할 수 없다."
+      "explanation": "ON 절에는 비교식이 와야 하며, USING 절과 달리 컬럼명만 단독으로 지정할 수 없다.",
+      "references": [
+        {
+          "type": "table",
+          "headers": [
+            "TEAM",
+            "STADIUM"
+          ],
+          "rows": [
+            [
+              "ID",
+              "COL1",
+              "ID",
+              "COL2"
+            ],
+            [
+              "1",
+              "A",
+              "1",
+              "A"
+            ],
+            [
+              "2",
+              "B",
+              "2",
+              "B"
+            ]
+          ]
+        }
+      ]
     },
     {
       "subject": "2과목",
@@ -239,7 +376,7 @@
     {
       "subject": "2과목",
       "number": 19,
-      "title": "아래 SQL 결과에 대한 설명으로 옳은 것은?\n```sql\nSELECT A, B FROM T1 WHERE (A, B) IN (SELECT A, B FROM T2);\n```",
+      "title": "아래 SQL 결과에 대한 설명으로 옳은 것은?",
       "options": [
         "모든 행 반환",
         "NULL 이 포함된 비교에서는 모든 매칭이 UNKNOWN 이 되어 행이 제외된다.",
@@ -247,7 +384,17 @@
         "T2 의 행 수만큼 반환"
       ],
       "correctIndex": 1,
-      "explanation": "T2 의 B 값 중 일부가 NULL 이다."
+      "explanation": "",
+      "references": [
+        {
+          "type": "sql",
+          "code": "SELECT A, B FROM T1 WHERE (A, B) IN (SELECT A, B FROM T2);"
+        },
+        {
+          "type": "text",
+          "content": "T2 의 B 값 중 일부가 NULL 이다."
+        }
+      ]
     },
     {
       "subject": "2과목",
@@ -265,7 +412,7 @@
     {
       "subject": "2과목",
       "number": 21,
-      "title": "ROLLUP 컬럼 순서에 대한 설명으로 옳은 것은?\n```sql\nGROUP BY ROLLUP(고객등급, 첫번째컬럼, 세번째컬럼)\n```",
+      "title": "ROLLUP 컬럼 순서에 대한 설명으로 옳은 것은?",
       "options": [
         "ROLLUP 에 컬럼 순서는 의미가 없다.",
         "첫 번째 컬럼 기준으로 순차 집계된다.",
@@ -273,12 +420,18 @@
         "ROLLUP 은 한 번의 집계만 수행한다."
       ],
       "correctIndex": 2,
-      "explanation": "ROLLUP 은 좌측부터 점진적으로 집계를 수행하므로 컬럼 순서가 결과에 영향을 미친다."
+      "explanation": "ROLLUP 은 좌측부터 점진적으로 집계를 수행하므로 컬럼 순서가 결과에 영향을 미친다.",
+      "references": [
+        {
+          "type": "sql",
+          "code": "GROUP BY ROLLUP(고객등급, 첫번째컬럼, 세번째컬럼)"
+        }
+      ]
     },
     {
       "subject": "2과목",
       "number": 22,
-      "title": "아래 SQL 의 결과로 옳은 것은?\n```sql\nSELECT COUNT(*)\nFROM   ...\nGROUP BY ID\nHAVING COUNT(*) > 3;\n```",
+      "title": "아래 SQL 의 결과로 옳은 것은?",
       "options": [
         "데이터가 출력되지 않는다.",
         "0 이 한 행 반환된다.",
@@ -286,7 +439,17 @@
         "오류 발생"
       ],
       "correctIndex": 0,
-      "explanation": "HAVING 조건을 만족하는 그룹이 없는 상태 GROUP BY 가 지정된 쿼리는 조건을 만족하는 그룹이 없으면 공집합을 반환한다."
+      "explanation": "GROUP BY 가 지정된 쿼리는 조건을 만족하는 그룹이 없으면 공집합을 반환한다.",
+      "references": [
+        {
+          "type": "sql",
+          "code": "SELECT COUNT(*)\nFROM   ...\nGROUP BY ID\nHAVING COUNT(*) > 3;"
+        },
+        {
+          "type": "text",
+          "content": "HAVING 조건을 만족하는 그룹이 없는 상태"
+        }
+      ]
     },
     {
       "subject": "2과목",
@@ -304,7 +467,7 @@
     {
       "subject": "2과목",
       "number": 24,
-      "title": "아래 결과를 반환하는 윈도우 함수로 옳은 것은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>COL1</th><th>LAG</th></tr>\n  <tr><td>100</td><td>0</td></tr>\n  <tr><td>200</td><td>100</td></tr>\n  <tr><td>300</td><td>200</td></tr>\n</table>",
+      "title": "아래 결과를 반환하는 윈도우 함수로 옳은 것은?",
       "options": [
         "LEAD(COL1, 1, 0) OVER(ORDER BY COL1)",
         "LAG(COL1, 1, NULL) OVER(ORDER BY COL1)",
@@ -312,20 +475,169 @@
         "FIRST_VALUE(COL1) OVER(ORDER BY COL1)"
       ],
       "correctIndex": 2,
-      "explanation": "LAG 함수의 세 번째 인자로 기본값 0 을 지정하여 첫 행에 0 이 반환된다."
+      "explanation": "LAG 함수의 세 번째 인자로 기본값 0 을 지정하여 첫 행에 0 이 반환된다.",
+      "references": [
+        {
+          "type": "table",
+          "headers": [
+            "COL1",
+            "LAG"
+          ],
+          "rows": [
+            [
+              "100",
+              "0"
+            ],
+            [
+              "200",
+              "100"
+            ],
+            [
+              "300",
+              "200"
+            ]
+          ]
+        }
+      ]
     },
     {
       "subject": "2과목",
       "number": 25,
-      "title": "아래 SQL 에서 RANK 함수의 순위 부여 결과로 옳은 것은?\n```sql\nSELECT 고객명, 매출액,\n       RANK() OVER(ORDER BY 매출액 DESC) AS 순위\nFROM   ...;\n```",
+      "title": "아래 두 테이블에 대한 SQL 에서 RANK 함수의 순위 부여 결과로 옳은 것은?",
       "options": [
-        "700,700,550,350,350 순위가 1,1,3,4,4 가 된다.",
-        "700,700,550,350,350 순위가 1,1,2,3,3 이 된다.",
-        "700,700,550,350,350 순위가 1,2,3,4,5 로 모두 다르다.",
-        "700,700,550,350,350 순위가 1,2,2,3,3 이 된다."
+        "700, 700, 550, 350, 350 순위가 1, 1, 3, 4, 4 가 된다.",
+        "700, 700, 550, 350, 350 순위가 1, 1, 2, 3, 3 이 된다.",
+        "700, 700, 550, 350, 350 순위가 1, 2, 3, 4, 5 로 모두 다르다.",
+        "700, 700, 550, 350, 350 순위가 1, 2, 2, 3, 3 이 된다."
       ],
       "correctIndex": 0,
-      "explanation": "RANK 는 동순위가 있으면 이후 순위를 건너뛴다."
+      "explanation": "고객별 매출 합계를 구하면 홍길동·이규혁 각 700, 이순신 550, 강감찬·이상화 각 350이 된다. RANK 함수는 동순위를 동일한 순위로 부여하되 다음 순위는 건너뛰므로 1·1·3·4·4가 된다.",
+      "references": [
+        {
+          "type": "table",
+          "headers": [
+            "[고객]"
+          ],
+          "rows": [
+            [
+              "고객번호(PK)",
+              "고객명"
+            ],
+            [
+              "001",
+              "홍길동"
+            ],
+            [
+              "002",
+              "이순신"
+            ],
+            [
+              "003",
+              "강감찬"
+            ],
+            [
+              "004",
+              "이상화"
+            ],
+            [
+              "005",
+              "이규혁"
+            ]
+          ]
+        },
+        {
+          "type": "table",
+          "headers": [
+            "[월별매출]"
+          ],
+          "rows": [
+            [
+              "고객번호(PK)",
+              "월",
+              "매출액"
+            ],
+            [
+              "001",
+              "202201",
+              "200"
+            ],
+            [
+              "002",
+              "202201",
+              "300"
+            ],
+            [
+              "003",
+              "202201",
+              "250"
+            ],
+            [
+              "004",
+              "202201",
+              "300"
+            ],
+            [
+              "005",
+              "202201",
+              "250"
+            ],
+            [
+              "001",
+              "202202",
+              "150"
+            ],
+            [
+              "002",
+              "202202",
+              "150"
+            ],
+            [
+              "003",
+              "202202",
+              "200"
+            ],
+            [
+              "004",
+              "202202",
+              "100"
+            ],
+            [
+              "005",
+              "202202",
+              "100"
+            ],
+            [
+              "001",
+              "202203",
+              "350"
+            ],
+            [
+              "002",
+              "202203",
+              "250"
+            ],
+            [
+              "003",
+              "202203",
+              "100"
+            ],
+            [
+              "004",
+              "202203",
+              "200"
+            ],
+            [
+              "005",
+              "202203",
+              "350"
+            ]
+          ]
+        },
+        {
+          "type": "sql",
+          "code": "SELECT 고객번호, 고객명, 매출액,\n       RANK() OVER(ORDER BY 매출액 DESC) AS 순위\nFROM   ( SELECT A.고객번호,\n                MAX(A.고객명) AS 고객명,\n                SUM(B.매출액) AS 매출액\n         FROM   고객 A INNER JOIN 월별매출 B\n         ON     A.고객번호 = B.고객번호\n         GROUP BY A.고객번호 )\nORDER BY 순위;"
+        }
+      ]
     },
     {
       "subject": "2과목",
@@ -343,7 +655,7 @@
     {
       "subject": "2과목",
       "number": 27,
-      "title": "사원이 없는 부서도 조회 결과에 포함하려면 어떤 조인을 사용해야 하는가?\n```sql\nSELECT 부서명, COUNT(사원번호) AS 사원수\nFROM   EMP A ( ? ) JOIN DEPT B ON A.부서번호 = B.부서번호\nGROUP BY 부서명;\n```",
+      "title": "사원이 없는 부서도 조회 결과에 포함하려면 어떤 조인을 사용해야 하는가?",
       "options": [
         "RIGHT OUTER",
         "LEFT OUTER",
@@ -351,12 +663,18 @@
         "CROSS"
       ],
       "correctIndex": 0,
-      "explanation": "부서(B) 를 기준으로 유지해야 하므로 B 쪽이 오른쪽에 있다면 RIGHT OUTER JOIN 이다."
+      "explanation": "부서(B) 를 기준으로 유지해야 하므로 B 쪽이 오른쪽에 있다면 RIGHT OUTER JOIN 이다.",
+      "references": [
+        {
+          "type": "sql",
+          "code": "SELECT 부서명, COUNT(사원번호) AS 사원수\nFROM   EMP A ( ? ) JOIN DEPT B ON A.부서번호 = B.부서번호\nGROUP BY 부서명;"
+        }
+      ]
     },
     {
       "subject": "2과목",
       "number": 28,
-      "title": "B_USER 가 아래 작업을 수행할 수 있도록 부여하는 DCL 로 가장 적절한 것은?\n```sql\nUPDATE A_USER.TB_A SET COL1 = 'AAA' WHERE COL2 = 3;\n```",
+      "title": "B_USER 가 아래 작업을 수행할 수 있도록 부여하는 DCL 로 가장 적절한 것은?",
       "options": [
         "GRANT SELECT, UPDATE TO B_USER;",
         "REVOKE SELECT ON A_USER.TB_A FROM B_USER;",
@@ -364,12 +682,18 @@
         "GRANT SELECT, UPDATE ON A_USER.TB_A TO B_USER;"
       ],
       "correctIndex": 3,
-      "explanation": "UPDATE 는 WHERE 조건 평가를 위한 SELECT 와 실제 UPDATE 권한이 모두 필요하다."
+      "explanation": "UPDATE 는 WHERE 조건 평가를 위한 SELECT 와 실제 UPDATE 권한이 모두 필요하다.",
+      "references": [
+        {
+          "type": "sql",
+          "code": "UPDATE A_USER.TB_A SET COL1 = 'AAA' WHERE COL2 = 3;"
+        }
+      ]
     },
     {
       "subject": "2과목",
       "number": 29,
-      "title": "아래 SQL 수행 후 SELECT 권한을 가진 사용자는?\n```sql\nDBA : GRANT SELECT ON X TO U1;\nDBA : GRANT SELECT ON X TO U2 WITH GRANT OPTION;\nU2  : GRANT SELECT ON X TO U3;\nDBA : REVOKE SELECT ON X FROM U2 RESTRICT;\n```",
+      "title": "아래 SQL 수행 후 SELECT 권한을 가진 사용자는?",
       "options": [
         "DBA, U1, U2",
         "DBA, U1",
@@ -377,12 +701,18 @@
         "DBA, U1, U2, U3"
       ],
       "correctIndex": 3,
-      "explanation": "RESTRICT 옵션은 U3 가 권한을 이미 가진 상황에서 REVOKE 가 거부되므로 모든 사용자의 권한이 유지된다."
+      "explanation": "RESTRICT 옵션은 U3 가 권한을 이미 가진 상황에서 REVOKE 가 거부되므로 모든 사용자의 권한이 유지된다.",
+      "references": [
+        {
+          "type": "sql",
+          "code": "DBA : GRANT SELECT ON X TO U1;\nDBA : GRANT SELECT ON X TO U2 WITH GRANT OPTION;\nU2  : GRANT SELECT ON X TO U3;\nDBA : REVOKE SELECT ON X FROM U2 RESTRICT;"
+        }
+      ]
     },
     {
       "subject": "2과목",
       "number": 30,
-      "title": "아래 CREATE TABLE 에 대해 오류 없이 INSERT 되는 것은?\n```sql\nCREATE TABLE T1 (\n  A NUMBER DEFAULT 9 PRIMARY KEY,\n  B NUMBER NOT NULL,\n  C NUMBER\n);\n```",
+      "title": "아래 CREATE TABLE 에 대해 오류 없이 INSERT 되는 것은?",
       "options": [
         "INSERT INTO T1 VALUES (7, 1);",
         "INSERT INTO T1 (C) VALUES (5);",
@@ -390,12 +720,18 @@
         "INSERT INTO T1 (B, C) VALUES (9, 1);"
       ],
       "correctIndex": 3,
-      "explanation": "A 는 DEFAULT 9 가 지정되어 있으므로 생략해도 9 가 할당되고 PK 조건을 만족한다."
+      "explanation": "A 는 DEFAULT 9 가 지정되어 있으므로 생략해도 9 가 할당되고 PK 조건을 만족한다.",
+      "references": [
+        {
+          "type": "sql",
+          "code": "CREATE TABLE T1 (\n  A NUMBER DEFAULT 9 PRIMARY KEY,\n  B NUMBER NOT NULL,\n  C NUMBER\n);"
+        }
+      ]
     },
     {
       "subject": "2과목",
       "number": 31,
-      "title": "아래 SQL 실행 후 AVG 결과로 옳은 것은?\n```sql\nINSERT INTO T VALUES (1);\nINSERT INTO T VALUES (2);\nSAVEPOINT X;\nUPDATE T SET VAL = VAL * 10;\nDELETE FROM T WHERE VAL = 20;\nROLLBACK TO SAVEPOINT X;\nINSERT INTO T VALUES (3);\nSELECT AVG(VAL) FROM T;\n```",
+      "title": "아래 SQL 실행 후 AVG 결과로 옳은 것은?",
       "options": [
         "1",
         "2",
@@ -403,7 +739,13 @@
         "NULL"
       ],
       "correctIndex": 1,
-      "explanation": "ROLLBACK 으로 UPDATE·DELETE 가 취소되어 VAL 은 (1, 2, 3) 이 되며 평균은 2 이다."
+      "explanation": "ROLLBACK 으로 UPDATE·DELETE 가 취소되어 VAL 은 (1, 2, 3) 이 되며 평균은 2 이다.",
+      "references": [
+        {
+          "type": "sql",
+          "code": "INSERT INTO T VALUES (1);\nINSERT INTO T VALUES (2);\nSAVEPOINT X;\nUPDATE T SET VAL = VAL * 10;\nDELETE FROM T WHERE VAL = 20;\nROLLBACK TO SAVEPOINT X;\nINSERT INTO T VALUES (3);\nSELECT AVG(VAL) FROM T;"
+        }
+      ]
     },
     {
       "subject": "2과목",
@@ -421,7 +763,7 @@
     {
       "subject": "2과목",
       "number": 33,
-      "title": "아래 WINDOW FUNCTION SQL 의 결과로 옳은 것은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>COL1</th><th>COL2</th><th>COL3</th></tr>\n  <tr><td>100</td><td>100</td><td>100</td></tr>\n  <tr><td>200</td><td>100</td><td>100</td></tr>\n  <tr><td>300</td><td>200</td><td>100</td></tr>\n  <tr><td>400</td><td>100</td><td>100</td></tr>\n  <tr><td>500</td><td>300</td><td>100</td></tr>\n  <tr><td>600</td><td>400</td><td>100</td></tr>\n  <tr><td>700</td><td>200</td><td>100</td></tr>\n</table>\n```sql\nSELECT MAX(COL1) OVER(ORDER BY COL1 ROWS BETWEEN UNBOUNDED PRECEDING AND 2 FOLLOWING) AS MAX,\n       SUM(COL2) OVER(ORDER BY COL1 ROWS BETWEEN 1 PRECEDING AND CURRENT ROW) AS SUM,\n       FIRST_VALUE(COL1) OVER(ORDER BY COL1 RANGE BETWEEN 200 PRECEDING AND 200 FOLLOWING) AS FIRST\nFROM T;\n```",
+      "title": "아래 WINDOW FUNCTION SQL 의 결과로 옳은 것은?",
       "options": [
         "MAX: 300, 400, 500, 600, 700, 700, 700",
         "다른 값들",
@@ -429,12 +771,63 @@
         "다른 값들"
       ],
       "correctIndex": 0,
-      "explanation": "각 윈도우 정의에 따른 계산 결과를 직접 산출하여 얻는다."
+      "explanation": "각 윈도우 정의에 따른 계산 결과를 직접 산출하여 얻는다.",
+      "references": [
+        {
+          "type": "table",
+          "headers": [
+            "COL1",
+            "COL2",
+            "COL3"
+          ],
+          "rows": [
+            [
+              "100",
+              "100",
+              "100"
+            ],
+            [
+              "200",
+              "100",
+              "100"
+            ],
+            [
+              "300",
+              "200",
+              "100"
+            ],
+            [
+              "400",
+              "100",
+              "100"
+            ],
+            [
+              "500",
+              "300",
+              "100"
+            ],
+            [
+              "600",
+              "400",
+              "100"
+            ],
+            [
+              "700",
+              "200",
+              "100"
+            ]
+          ]
+        },
+        {
+          "type": "sql",
+          "code": "SELECT MAX(COL1) OVER(ORDER BY COL1 ROWS BETWEEN UNBOUNDED PRECEDING AND 2 FOLLOWING) AS MAX,\n       SUM(COL2) OVER(ORDER BY COL1 ROWS BETWEEN 1 PRECEDING AND CURRENT ROW) AS SUM,\n       FIRST_VALUE(COL1) OVER(ORDER BY COL1 RANGE BETWEEN 200 PRECEDING AND 200 FOLLOWING) AS FIRST\nFROM T;"
+        }
+      ]
     },
     {
       "subject": "2과목",
       "number": 34,
-      "title": "아래 SQL 의 결과로 옳은 것은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>COL1</th><th>COL2</th></tr>\n  <tr><td>1</td><td>A</td></tr>\n  <tr><td>1</td><td>A</td></tr>\n  <tr><td>1</td><td>B</td></tr>\n  <tr><td>1</td><td>B</td></tr>\n</table>\n```sql\nSELECT COUNT(COL1), COUNT(COL2)\nFROM (SELECT DISTINCT COL1, COL2 FROM TAB1);\n```",
+      "title": "아래 SQL 의 결과로 옳은 것은?",
       "options": [
         "2, 2",
         "4, 4",
@@ -442,12 +835,43 @@
         "2, 1"
       ],
       "correctIndex": 0,
-      "explanation": "DISTINCT 결과 (1,A), (1,B) 의 2 건이므로 각 COUNT 는 2 이다."
+      "explanation": "DISTINCT 결과 (1,A), (1,B) 의 2 건이므로 각 COUNT 는 2 이다.",
+      "references": [
+        {
+          "type": "table",
+          "headers": [
+            "COL1",
+            "COL2"
+          ],
+          "rows": [
+            [
+              "1",
+              "A"
+            ],
+            [
+              "1",
+              "A"
+            ],
+            [
+              "1",
+              "B"
+            ],
+            [
+              "1",
+              "B"
+            ]
+          ]
+        },
+        {
+          "type": "sql",
+          "code": "SELECT COUNT(COL1), COUNT(COL2)\nFROM (SELECT DISTINCT COL1, COL2 FROM TAB1);"
+        }
+      ]
     },
     {
       "subject": "2과목",
       "number": 35,
-      "title": "아래 SQL 의 AVG 결과에 대한 설명으로 옳은 것은?\n```sql\nSELECT SUM(C2)/COUNT(*)    AS AVG1,\n       SUM(C2)/COUNT(C2)   AS AVG2,\n       AVG(C2)             AS AVG3\nFROM   T;\n```",
+      "title": "아래 SQL 의 AVG 결과에 대한 설명으로 옳은 것은?",
       "options": [
         "AVG1 과 AVG2 가 같다.",
         "AVG2 와 AVG3 가 같다.",
@@ -455,12 +879,18 @@
         "세 값 모두 다르다."
       ],
       "correctIndex": 1,
-      "explanation": "AVG 함수는 NULL 을 제외하고 평균을 계산하므로 COUNT(C2) 로 나눈 값과 동일하다."
+      "explanation": "AVG 함수는 NULL 을 제외하고 평균을 계산하므로 COUNT(C2) 로 나눈 값과 동일하다.",
+      "references": [
+        {
+          "type": "sql",
+          "code": "SELECT SUM(C2)/COUNT(*)    AS AVG1,\n       SUM(C2)/COUNT(C2)   AS AVG2,\n       AVG(C2)             AS AVG3\nFROM   T;"
+        }
+      ]
     },
     {
       "subject": "2과목",
       "number": 36,
-      "title": "아래 두 테이블에 대한 SQL 의 결과로 옳은 것은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th colspan=\"2\">TAB1</th><th colspan=\"2\">TAB2</th></tr>\n  <tr><th>ID</th><th>NAME</th><th>ID</th><th>RULE</th></tr>\n  <tr><td>1</td><td>SMITH</td><td>1</td><td>S%</td></tr>\n  <tr><td>2</td><td>ALICE</td><td>2</td><td>%T%</td></tr>\n  <tr><td>3</td><td>SCOTT</td><td></td><td></td></tr>\n</table>\n```sql\nSELECT * FROM TAB1 A, TAB2 B\nWHERE A.NAME LIKE B.RULE;\n```",
+      "title": "아래 두 테이블에 대한 SQL 의 결과로 옳은 것은?",
       "options": [
         "(1, SMITH, 1, S%), (3, SCOTT, 1, S%), (1, SMITH, 2, %T%), (3, SCOTT, 2, %T%)",
         "(1, SMITH, 1, S%) 만",
@@ -468,7 +898,46 @@
         "공집합"
       ],
       "correctIndex": 0,
-      "explanation": "'S%' 는 SMITH 와 SCOTT 에 매칭되고, '%T%' 도 두 이름 모두에 매칭된다."
+      "explanation": "'S%' 는 SMITH 와 SCOTT 에 매칭되고, '%T%' 도 두 이름 모두에 매칭된다.",
+      "references": [
+        {
+          "type": "table",
+          "headers": [
+            "TAB1",
+            "TAB2"
+          ],
+          "rows": [
+            [
+              "ID",
+              "NAME",
+              "ID",
+              "RULE"
+            ],
+            [
+              "1",
+              "SMITH",
+              "1",
+              "S%"
+            ],
+            [
+              "2",
+              "ALICE",
+              "2",
+              "%T%"
+            ],
+            [
+              "3",
+              "SCOTT",
+              "",
+              ""
+            ]
+          ]
+        },
+        {
+          "type": "sql",
+          "code": "SELECT * FROM TAB1 A, TAB2 B\nWHERE A.NAME LIKE B.RULE;"
+        }
+      ]
     },
     {
       "subject": "2과목",
@@ -486,7 +955,7 @@
     {
       "subject": "2과목",
       "number": 38,
-      "title": "아래 SQL 의 결과로 옳은 것은?\n```sql\nSELECT SUBSTR('123456789', -4, 2) FROM DUAL;\n```",
+      "title": "아래 SQL 의 결과로 옳은 것은?",
       "options": [
         "23",
         "67",
@@ -494,12 +963,18 @@
         "89"
       ],
       "correctIndex": 1,
-      "explanation": "뒤에서 네 번째 문자부터 2 글자(6, 7) 를 반환한다."
+      "explanation": "뒤에서 네 번째 문자부터 2 글자(6, 7) 를 반환한다.",
+      "references": [
+        {
+          "type": "sql",
+          "code": "SELECT SUBSTR('123456789', -4, 2) FROM DUAL;"
+        }
+      ]
     },
     {
       "subject": "2과목",
       "number": 39,
-      "title": "아래 SQL 의 결과로 옳은 것은?\n```sql\nSELECT LENGTH('SQL EXPERT') FROM DUAL;\n```",
+      "title": "아래 SQL 의 결과로 옳은 것은?",
       "options": [
         "9",
         "10",
@@ -507,7 +982,13 @@
         "7"
       ],
       "correctIndex": 1,
-      "explanation": "공백을 포함하여 10 글자이다."
+      "explanation": "공백을 포함하여 10 글자이다.",
+      "references": [
+        {
+          "type": "sql",
+          "code": "SELECT LENGTH('SQL EXPERT') FROM DUAL;"
+        }
+      ]
     },
     {
       "subject": "2과목",
@@ -520,7 +1001,13 @@
         "`COL1 = 'F' AND COL1 = 'G' AND 금액 BETWEEN 2000 AND 50000`"
       ],
       "correctIndex": 1,
-      "explanation": "등급이 F 또는 G 이고, 금액 범위가 2,000 ~ 50,000 사이"
+      "explanation": "",
+      "references": [
+        {
+          "type": "text",
+          "content": "등급이 F 또는 G 이고, 금액 범위가 2,000 ~ 50,000 사이"
+        }
+      ]
     },
     {
       "subject": "2과목",
@@ -551,7 +1038,7 @@
     {
       "subject": "2과목",
       "number": 43,
-      "title": "아래 SQL 의 수행 목적에 대한 설명으로 옳은 것은?\n```sql\nSELECT 부서, MAX(연봉)\nFROM   EMP\nGROUP BY 부서;\n```",
+      "title": "아래 SQL 의 수행 목적에 대한 설명으로 옳은 것은?",
       "options": [
         "전체 사원의 평균 연봉",
         "부서별 최고 연봉을 조회",
@@ -559,12 +1046,18 @@
         "사원 수를 세는 쿼리"
       ],
       "correctIndex": 1,
-      "explanation": ""
+      "explanation": "",
+      "references": [
+        {
+          "type": "sql",
+          "code": "SELECT 부서, MAX(연봉)\nFROM   EMP\nGROUP BY 부서;"
+        }
+      ]
     },
     {
       "subject": "2과목",
       "number": 44,
-      "title": "아래 MERGE 구문 수행 결과로 옳은 것은?\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th colspan=\"2\">TBL1</th><th colspan=\"2\">TBL2</th></tr>\n  <tr><th>ID</th><th>COL1</th><th>ID</th><th>COL2</th></tr>\n  <tr><td>1</td><td>A</td><td>1</td><td>C</td></tr>\n  <tr><td>2</td><td>B</td><td>2</td><td>D</td></tr>\n  <tr><td></td><td></td><td>3</td><td>E</td></tr>\n  <tr><td></td><td></td><td>4</td><td>F</td></tr>\n</table>\n```sql\nMERGE INTO TBL1 T USING TBL2 S ON (T.ID = S.ID)\nWHEN MATCHED THEN UPDATE SET T.COL1 = S.COL2\nWHEN NOT MATCHED THEN INSERT (ID, COL1) VALUES (S.ID, S.COL2);\n```",
+      "title": "아래 MERGE 구문 수행 결과로 옳은 것은?",
       "options": [
         "ID=1,2 는 UPDATE, ID=3,4 는 INSERT 되어 총 4행이 남는다.",
         "UPDATE 만 수행되어 2행이 남는다.",
@@ -572,12 +1065,57 @@
         "오류 발생"
       ],
       "correctIndex": 0,
-      "explanation": ""
+      "explanation": "",
+      "references": [
+        {
+          "type": "table",
+          "headers": [
+            "TBL1",
+            "TBL2"
+          ],
+          "rows": [
+            [
+              "ID",
+              "COL1",
+              "ID",
+              "COL2"
+            ],
+            [
+              "1",
+              "A",
+              "1",
+              "C"
+            ],
+            [
+              "2",
+              "B",
+              "2",
+              "D"
+            ],
+            [
+              "",
+              "",
+              "3",
+              "E"
+            ],
+            [
+              "",
+              "",
+              "4",
+              "F"
+            ]
+          ]
+        },
+        {
+          "type": "sql",
+          "code": "MERGE INTO TBL1 T USING TBL2 S ON (T.ID = S.ID)\nWHEN MATCHED THEN UPDATE SET T.COL1 = S.COL2\nWHEN NOT MATCHED THEN INSERT (ID, COL1) VALUES (S.ID, S.COL2);"
+        }
+      ]
     },
     {
       "subject": "2과목",
       "number": 45,
-      "title": "아래 DDL 에 대해 삽입이 성공하는 SQL 의 조합은?\n```sql\nCREATE TABLE TBL (\n  ID     NUMBER PRIMARY KEY,\n  AMT    NUMBER NOT NULL,\n  DEGREE VARCHAR2(1)\n);\n```",
+      "title": "아래 DDL 에 대해 삽입이 성공하는 SQL 의 조합은?",
       "options": [
         "가, 나",
         "나, 다",
@@ -585,7 +1123,17 @@
         "라, 마"
       ],
       "correctIndex": 3,
-      "explanation": "가. INSERT INTO TBL VALUES (1, 100); 나. INSERT INTO TBL (ID, AMT, DEGREE) VALUES (2, 200, 'AB'); 다. INSERT INTO TBL (ID, DEGREE) VALUES (4, 'X'); 라. INSERT INTO TBL (ID, AMT) VALUES (3, 300); 마. INSERT INTO TBL VALUES (5, 500, NULL); 가는 컬럼 개수 불일치, 나는 DEGREE 길이 초과, 다는 NOT NULL 위반으로 실패한다."
+      "explanation": "가는 컬럼 개수 불일치, 나는 DEGREE 길이 초과, 다는 NOT NULL 위반으로 실패한다.",
+      "references": [
+        {
+          "type": "sql",
+          "code": "CREATE TABLE TBL (\n  ID     NUMBER PRIMARY KEY,\n  AMT    NUMBER NOT NULL,\n  DEGREE VARCHAR2(1)\n);"
+        },
+        {
+          "type": "text",
+          "content": "가. INSERT INTO TBL VALUES (1, 100);\n나. INSERT INTO TBL (ID, AMT, DEGREE) VALUES (2, 200, 'AB');\n다. INSERT INTO TBL (ID, DEGREE) VALUES (4, 'X');\n라. INSERT INTO TBL (ID, AMT) VALUES (3, 300);\n마. INSERT INTO TBL VALUES (5, 500, NULL);"
+        }
+      ]
     },
     {
       "subject": "2과목",
@@ -603,7 +1151,7 @@
     {
       "subject": "2과목",
       "number": 47,
-      "title": "아래 SQL 의 결과를 작성하시오.\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>ID</th><th>COL1</th></tr>\n  <tr><td>A</td><td>1</td></tr>\n  <tr><td>A</td><td>2</td></tr>\n  <tr><td>B</td><td>3</td></tr>\n  <tr><td>B</td><td>4</td></tr>\n  <tr><td>C</td><td>5</td></tr>\n  <tr><td>C</td><td>6</td></tr>\n  <tr><td>C</td><td>7</td></tr>\n  <tr><td>D</td><td>8</td></tr>\n</table>\n```sql\nSELECT COUNT(*) FROM TAB1 GROUP BY ID HAVING COUNT(*) > 2;\n```",
+      "title": "아래 SQL 의 결과를 작성하시오.",
       "options": [
         "1",
         "2",
@@ -611,12 +1159,59 @@
         "4"
       ],
       "correctIndex": 2,
-      "explanation": "C 그룹이 3건으로 유일하게 HAVING COUNT(*) > 2 를 만족한다."
+      "explanation": "C 그룹이 3건으로 유일하게 HAVING COUNT(*) > 2 를 만족한다.",
+      "references": [
+        {
+          "type": "table",
+          "headers": [
+            "ID",
+            "COL1"
+          ],
+          "rows": [
+            [
+              "A",
+              "1"
+            ],
+            [
+              "A",
+              "2"
+            ],
+            [
+              "B",
+              "3"
+            ],
+            [
+              "B",
+              "4"
+            ],
+            [
+              "C",
+              "5"
+            ],
+            [
+              "C",
+              "6"
+            ],
+            [
+              "C",
+              "7"
+            ],
+            [
+              "D",
+              "8"
+            ]
+          ]
+        },
+        {
+          "type": "sql",
+          "code": "SELECT COUNT(*) FROM TAB1 GROUP BY ID HAVING COUNT(*) > 2;"
+        }
+      ]
     },
     {
       "subject": "2과목",
       "number": 48,
-      "title": "아래 빈칸에 들어갈 조건식을 작성하시오.\n```sql\nSELECT * FROM T\nWHERE  COL = 'A'\nOR     COL ( ? );\n```",
+      "title": "아래 빈칸에 들어갈 조건식을 작성하시오.",
       "options": [
         "= NULL",
         "!= NULL",
@@ -624,7 +1219,17 @@
         "IS NULL"
       ],
       "correctIndex": 3,
-      "explanation": "COL 이 NULL 인 행도 함께 포함하고 싶다."
+      "explanation": "",
+      "references": [
+        {
+          "type": "sql",
+          "code": "SELECT * FROM T\nWHERE  COL = 'A'\nOR     COL ( ? );"
+        },
+        {
+          "type": "text",
+          "content": "COL 이 NULL 인 행도 함께 포함하고 싶다."
+        }
+      ]
     },
     {
       "subject": "2과목",
@@ -642,7 +1247,7 @@
     {
       "subject": "2과목",
       "number": 50,
-      "title": "아래 NTILE(3) 결과의 빈칸을 채우시오. (총 7건)\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\">\n  <tr><th>NTILE</th><th>COUNT(*)</th></tr>\n  <tr><td>(ㄱ)</td><td>(ㄴ)</td></tr>\n  <tr><td>2</td><td>2</td></tr>\n  <tr><td>3</td><td>2</td></tr>\n</table>",
+      "title": "아래 NTILE(3) 결과의 빈칸을 채우시오. (총 7건)",
       "options": [
         "ㄱ = 1, ㄴ = 3",
         "ㄱ = 1, ㄴ = 2",
@@ -650,7 +1255,30 @@
         "ㄱ = 3, ㄴ = 2"
       ],
       "correctIndex": 0,
-      "explanation": "NTILE(3) 은 7건을 세 그룹으로 나눌 때 앞 그룹에 한 건을 더 배정해 3, 2, 2 로 구성한다."
+      "explanation": "NTILE(3) 은 7건을 세 그룹으로 나눌 때 앞 그룹에 한 건을 더 배정해 3, 2, 2 로 구성한다.",
+      "references": [
+        {
+          "type": "table",
+          "headers": [
+            "NTILE",
+            "COUNT(*)"
+          ],
+          "rows": [
+            [
+              "(ㄱ)",
+              "(ㄴ)"
+            ],
+            [
+              "2",
+              "2"
+            ],
+            [
+              "3",
+              "2"
+            ]
+          ]
+        }
+      ]
     }
   ],
   "shortAnswerOmitted": []
