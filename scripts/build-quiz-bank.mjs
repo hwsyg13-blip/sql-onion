@@ -162,6 +162,14 @@ const bankJoin = roundFileNames.map(({ varName }) => `  ...${varName},`).join('\
 const indexBody = `// Auto-generated index. Do not edit by hand — re-run scripts/build-quiz-bank.mjs.
 // 총 ${totalCount}문항, 제45회 ~ 제60회
 
+/** 문항에 딸린 보기(지문·표·SQL·ERD 도식) 블록 */
+export type QuestionReference =
+  | { type: 'text';  content: string; heading?: string }
+  | { type: 'sql';   code: string; caption?: string }
+  | { type: 'table'; headers: string[]; rows: string[][]; caption?: string }
+  | { type: 'ascii'; text: string; caption?: string }
+  | { type: 'html';  html: string; caption?: string };
+
 export type QuizQuestion = {
   id: number;
   examSetId: string;
@@ -173,6 +181,8 @@ export type QuizQuestion = {
   options: string[];
   correctIndex: number;
   explanation: string;
+  /** 문항에 포함되는 보기(지문·표·SQL·도식) 블록들. 없으면 생략. */
+  references?: QuestionReference[];
   /** 내부 출처 태그 ('pdf' | 'blog' | 'authored'). UI 에 노출하지 말 것. */
   _source?: string;
 };
