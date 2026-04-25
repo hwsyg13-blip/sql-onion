@@ -307,4 +307,23 @@ html[data-theme="dark"] {
 @media (max-width: 720px) {
   .plan-summary-grid { grid-template-columns: repeat(2, 1fr) !important; }
   .plan-calendar { grid-template-columns: repeat(2, 1fr) !important; }
+
+  /* 홈 — 패딩 축소 */
+  .home-page { padding: 20px 16px 80px !important; }
+  .home-hero { padding: 28px 22px !important; gap: 20px !important; border-radius: 16px !important; }
+  .home-hero-title { font-size: 32px !important; line-height: 1.2 !important; }
+  .home-hero-text { font-size: 14.5px !important; line-height: 1.6 !important; }
+  .home-hero-mascot { flex: 0 0 auto !important; }
+  .home-hero-mascot svg { width: 110px !important; height: 110px !important; }
+  .dashboard-grid { grid-template-columns: 1fr !important; }
+}
+
+@media (max-width: 480px) {
+  /* 홈 — 가장 좁은 화면(아이폰 SE 등) */
+  .home-page { padding: 16px 14px 80px !important; }
+  .home-hero { padding: 22px 18px !important; gap: 14px !important; }
+  .home-hero-title { font-size: 26px !important; }
+  .home-hero-text { font-size: 14px !important; }
+  .home-hero-mascot { display: none !important; }
+  .home-stats-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 10px !important; }
 }

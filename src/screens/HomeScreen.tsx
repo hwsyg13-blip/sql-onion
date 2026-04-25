@@ -37,7 +37,7 @@ export const HomeScreen = ({onNavigate, user}) => {
   ];
 
   return (
-  <div style={{maxWidth: 1080, margin: "0 auto", padding: "32px 28px 80px"}}>
+  <div className="home-page" style={{maxWidth: 1080, margin: "0 auto", padding: "32px 28px 80px"}}>
     {user && (
       <section style={{
         background:"var(--bg-card)", border:"1px solid var(--point-100)", borderRadius:14,
@@ -63,7 +63,7 @@ export const HomeScreen = ({onNavigate, user}) => {
       </section>
     )}
     {/* Hero */}
-    <section style={{
+    <section className="home-hero" style={{
       background: "linear-gradient(180deg, var(--point-050) 0%, var(--bg-page) 100%)",
       border: "1px solid var(--point-100)", borderRadius: 20,
       padding: "44px 44px", display: "flex", gap: 36, alignItems: "center",
@@ -74,20 +74,18 @@ export const HomeScreen = ({onNavigate, user}) => {
           <OnionMark size={20}/>
           <span style={{fontSize:13,color:"var(--point-600)",fontWeight:600,letterSpacing:"0.04em"}}>SQLD · 3주 합격 루틴</span>
         </div>
-        <h1 style={{fontSize:44,fontWeight:800,color:"var(--fg-1)",letterSpacing:"-0.02em",lineHeight:1.15,margin:"0 0 14px"}}>
-          SQLD,<br/>
-          <span style={{color:"var(--point-600)"}}>양파처럼</span> 한 겹씩.
+        <h1 className="home-hero-title" style={{fontSize:44,fontWeight:800,color:"var(--fg-1)",letterSpacing:"-0.02em",lineHeight:1.15,margin:"0 0 14px"}}>
+          SQLD, <span style={{color:"var(--point-600)"}}>양파처럼</span> 한 겹씩.
         </h1>
-        <p style={{fontSize:16,color:"var(--fg-2)",lineHeight:1.7,maxWidth:460,margin:0}}>
-          비전공자도 매일 1시간, 3주만에 완성하는 SQLD 자격증<br/>
-          주인장이 공부하려고 만든 사이트
+        <p className="home-hero-text" style={{fontSize:16,color:"var(--fg-2)",lineHeight:1.7,maxWidth:460,margin:0}}>
+          비전공자도 매일 1시간, 3주만에 완성하는 SQLD 자격증. 주인장이 공부하려고 만든 사이트.
         </p>
         <div style={{display:"flex",gap:10,marginTop:24,flexWrap:"wrap"}}>
           <Btn size="lg" onClick={() => onNavigate("plan")} iconRight={<Ic.ArrowRight/>}>3주 계획</Btn>
           <Btn size="lg" variant="outline" onClick={() => onNavigate("theory")}>이론 보기</Btn>
         </div>
       </div>
-      <div style={{flex: "1 1 220px", display:"flex", justifyContent:"center"}}>
+      <div className="home-hero-mascot" style={{flex: "1 1 220px", display:"flex", justifyContent:"center"}}>
         <Mascot size={168}/>
       </div>
     </section>
@@ -137,7 +135,7 @@ export const HomeScreen = ({onNavigate, user}) => {
           <h3 style={{fontSize:16,fontWeight:700,color:"var(--fg-1)",margin:0}}>회원님의 학습 현황</h3>
           <button onClick={()=>onNavigate("plan")} style={{background:"none",border:0,color:"var(--point-600)",fontSize:13,fontWeight:600,cursor:"pointer",fontFamily:"inherit"}}>3주 계획 보기 →</button>
         </div>
-        <div style={{display:"grid",gridTemplateColumns:"repeat(4,1fr)",gap:14}}>
+        <div className="home-stats-grid" style={{display:"grid",gridTemplateColumns:"repeat(4,1fr)",gap:14}}>
           {[
             {l:"학습 진도",   v:String(dayProgress), u:"/ 21일", c:"var(--point-600)"},
             {l:"푼 문항",     v:String(stats.totalAttempts), u:"문항", c:"var(--info-fg)"},
