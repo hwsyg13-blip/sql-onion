@@ -144,7 +144,7 @@ function head({ title, desc, path, type = 'article' }) {
 
 const tail = `  </main>
   <footer class="footer">
-    <p>SQL양파 — SQLD 3주 합격 루틴 · <a href="/">홈으로</a> · <a href="/privacy.html">개인정보처리방침</a></p>
+    <p>SQL양파 — SQLD 3주 합격 루틴 · <a href="/">홈으로</a> · <a href="/terms.html">이용약관</a> · <a href="/privacy.html">개인정보 처리방침</a></p>
   </footer>
 </body>
 </html>`;
@@ -500,6 +500,7 @@ function buildSitemap() {
     ...rounds.map(r => ({ loc: `${SITE}/exam/round-${r.round}/`, priority: 0.8, changefreq: 'monthly' })),
     ...THEORY.subjects.flatMap(s => s.chapters.map(c => ({ loc: `${SITE}/theory/${c.id}/`, priority: 0.7, changefreq: 'monthly' }))),
     ...guides.map(g => ({ loc: `${SITE}/guide/${g.slug}/`, priority: 0.6, changefreq: 'yearly' })),
+    { loc: SITE + '/terms.html', priority: 0.3, changefreq: 'yearly' },
     { loc: SITE + '/privacy.html', priority: 0.3, changefreq: 'yearly' },
   ];
 
