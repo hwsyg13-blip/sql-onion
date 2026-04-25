@@ -342,9 +342,9 @@
           ],
           "rows": [
             [
-              "STU_ID",
+              "SID",
               "NAME",
-              "STU_ID",
+              "SID",
               "COURSE"
             ],
             [

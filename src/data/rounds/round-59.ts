@@ -429,9 +429,9 @@ export const ROUND_59: QuizQuestion[] = [
         ],
         "rows": [
           [
-            "STU_ID",
+            "SID",
             "NAME",
-            "STU_ID",
+            "SID",
             "COURSE"
           ],
           [

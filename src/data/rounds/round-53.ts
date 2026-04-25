@@ -1126,14 +1126,14 @@ export const ROUND_53: QuizQuestion[] = [
       "50"
     ],
     "correctIndex": 1,
-    "explanation": "MIN(COL_B)=5, MAX(COL_C)=10, SUM(NVL(SCORE,0))=0 이므로 5+10+0 = 15 이다.",
+    "explanation": "MIN(COLB)=5, MAX(COLC)=10, SUM(NVL(SCORE,0))=0 이므로 5+10+0 = 15 이다.",
     "_source": "authored",
     "references": [
       {
         "type": "table",
         "headers": [
-          "COL_B",
-          "COL_C",
+          "COLB",
+          "COLC",
           "SCORE"
         ],
         "rows": [
@@ -1151,7 +1151,7 @@ export const ROUND_53: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT NVL(MIN(COL_B), 0) + NVL(MAX(COL_C), 0) + SUM(NVL(SCORE, 0))\nFROM   T;"
+        "code": "SELECT NVL(MIN(COLB), 0) + NVL(MAX(COLC), 0) + SUM(NVL(SCORE, 0))\nFROM   T;"
       }
     ]
   },

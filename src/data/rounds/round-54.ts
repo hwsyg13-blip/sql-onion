@@ -744,8 +744,8 @@ export const ROUND_54: QuizQuestion[] = [
       {
         "type": "table",
         "headers": [
-          "TAB_A (COL1)",
-          "TAB_B (COL2)"
+          "TAB1 (COL1)",
+          "TAB2 (COL2)"
         ],
         "rows": [
           [
@@ -764,7 +764,7 @@ export const ROUND_54: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT COUNT(*)\nFROM   TAB_B\nWHERE  COL2 NOT IN (SELECT COL1 FROM TAB_A);"
+        "code": "SELECT COUNT(*)\nFROM   TAB2\nWHERE  COL2 NOT IN (SELECT COL1 FROM TAB1);"
       }
     ]
   },
