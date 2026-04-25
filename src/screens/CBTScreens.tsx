@@ -6,6 +6,7 @@ import { QuestionBody } from './MockScreens';
 import { AdSlot } from '../components/AdSlot';
 import { recordExamComplete, recordQuizAttempt } from '../lib/progress';
 import { OptionReferences } from '../components/QuestionReferences';
+import { trackEvent } from '../lib/analytics';
 
 // CBT — Exam list, CBT exam screen (sticky OMR), and result.
 // Also Mock Exam full mode (50-item with timer) reusing pieces.
@@ -123,6 +124,15 @@ export const CBTExam = ({examId = "round-60", onFinish, onNavigate, onExit, mock
     return () => clearInterval(t);
   }, []);
 
+  // GA 이벤트: 시험 시작
+  React.useEffect(() => {
+    trackEvent('exam_start', {
+      mode: mockMode ? 'mock' : 'cbt',
+      exam_id: examId,
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const q = questions[idx];
   const answered = answers.filter(a=>a!=null).length;
   // App-level 나가기 인터셉트에서 읽는 전역 — mount/answered 변화 시 업데이트, unmount 시 초기화
@@ -157,6 +167,15 @@ export const CBTExam = ({examId = "round-60", onFinish, onNavigate, onExit, mock
       if (!mockMode && examId) {
         recordExamComplete(examId, score, questions.length);
       }
+      // GA 이벤트: 시험 완료 (점수·정답수 포함)
+      trackEvent('exam_finish', {
+        mode: mockMode ? 'mock' : 'cbt',
+        exam_id: examId,
+        score,
+        correct: correctCount,
+        total: questions.length,
+        time_used_sec: 90 * 60 - remaining,
+      });
     } catch (e) { console.warn('[progress] CBT 기록 실패', e); }
 
     onFinish({questions, answers, flags, examId, mockMode, timeUsed: 90*60 - remaining});

@@ -7,6 +7,7 @@ import { QUIZ_BANK } from '../data/quizBank';
 import { CONCEPT_QUIZ } from '../data/conceptQuiz';
 import { recordTheoryView } from '../lib/progress';
 import { AdSlot } from '../components/AdSlot';
+import { trackEvent } from '../lib/analytics';
 
 // Theory list + detail (2-column with mini test on the right)
 
@@ -62,7 +63,11 @@ export const TheoryListScreen = ({onNavigate}) => (
 
 export const TheoryDetailScreen = ({chapterId, onNavigate}) => {
   // 챕터 열람 기록
-  React.useEffect(() => { recordTheoryView(chapterId); }, [chapterId]);
+  React.useEffect(() => {
+    recordTheoryView(chapterId);
+    // GA 이벤트: 이론 챕터 열람
+    trackEvent('theory_open', { chapter: chapterId });
+  }, [chapterId]);
   const body = THEORY_BODY[chapterId];
   // Fallback if not detailed
   if (!body) {

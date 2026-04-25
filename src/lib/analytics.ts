@@ -9,6 +9,16 @@
 const GA_ID = import.meta.env.VITE_GA_MEASUREMENT_ID as string | undefined;
 const ENABLED = typeof GA_ID === 'string' && /^G-[A-Z0-9]+$/.test(GA_ID);
 
+// DebugView 모드 — 두 가지 트리거:
+//   1) 개발 빌드 (npm run dev) 자동 활성
+//   2) URL 에 ?gadebug=1 붙여서 임시 활성 (운영에서 디버깅할 때)
+// debug_mode: true 로 보낸 이벤트는 GA4 → 관리 → DebugView 화면에서 실시간으로 확인 가능.
+const DEBUG_MODE = (() => {
+  if (import.meta.env.DEV) return true;
+  if (typeof window !== 'undefined' && window.location?.search?.includes('gadebug=1')) return true;
+  return false;
+})();
+
 declare global {
   interface Window {
     dataLayer?: any[];
@@ -35,7 +45,7 @@ export function initGA() {
   };
   window.gtag('js', new Date());
   // SPA 자동 page_view 비활성 — trackPageView 가 수동 발사
-  window.gtag('config', GA_ID, { send_page_view: false });
+  window.gtag('config', GA_ID, { send_page_view: false, debug_mode: DEBUG_MODE });
 }
 
 export function trackPageView(route: string, params?: any) {
@@ -46,13 +56,15 @@ export function trackPageView(route: string, params?: any) {
     page_path: path,
     page_title: route,
     page_location: window.location.origin + path,
+    ...(DEBUG_MODE ? { debug_mode: true } : {}),
   });
 }
 
 // 임의 이벤트 (예: 결제 시작, 구독 완료, 오류제보 등)
 export function trackEvent(name: string, params?: Record<string, any>) {
   if (!ENABLED || typeof window === 'undefined' || !window.gtag) return;
-  window.gtag('event', name, params || {});
+  const payload = DEBUG_MODE ? { ...(params || {}), debug_mode: true } : (params || {});
+  window.gtag('event', name, payload);
 }
 
 export const isGAEnabled = () => ENABLED;

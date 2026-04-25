@@ -5,6 +5,7 @@
 
 import React from 'react';
 import { Btn, Ic } from './Atoms';
+import { trackEvent } from '../lib/analytics';
 
 const ENDPOINT = import.meta.env.VITE_BUG_REPORT_URL as string | undefined;
 
@@ -47,6 +48,13 @@ export const BugReportModal = ({ ctx, onClose }: { ctx: BugContext; onClose: () 
           body: JSON.stringify(payload),
         });
         setStatus('ok');
+        // GA 이벤트: 오류 제보 제출 성공
+        trackEvent('bug_report_submit', {
+          round: ctx.round,
+          subject: ctx.subject,
+          number: ctx.number,
+          length: text.trim().length,
+        });
         setTimeout(onClose, 1500);
       } catch (e: any) {
         console.error('[bug-report] submit failed', e);

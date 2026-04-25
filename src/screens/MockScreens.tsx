@@ -7,6 +7,7 @@ import { BETA_NO_AUTH } from '../App';
 import { QuestionReferences, OptionReferences } from '../components/QuestionReferences';
 import { AdSlot } from '../components/AdSlot';
 import { BugReportModal } from '../components/BugReportModal';
+import { trackEvent } from '../lib/analytics';
 
 // Endless Quiz — flashcard-esque: single question → grade → explanation → next
 // Also hosts Mock landing & Mock exam full 50-item timer mode
@@ -60,6 +61,11 @@ export const EndlessScreen = ({onNavigate}) => {
   const [stats, setStats] = React.useState({correct:0, wrong:0});
   const [saved, setSaved] = React.useState(new Set());
   const [limitHit, setLimitHit] = React.useState(false);
+
+  // GA 이벤트: 랜덤(엔드리스) 퀴즈 시작
+  React.useEffect(() => {
+    trackEvent('random_quiz_start');
+  }, []);
 
   const q = order[idx % order.length];
 
