@@ -1,0 +1,46 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
+  <!-- 배경 그라데이션 -->
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F0F7F1"/>
+      <stop offset="100%" stop-color="#E6F3E7"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+
+  <!-- 우상단 장식 점 -->
+  <circle cx="1100" cy="100" r="6" fill="#4CAF50" opacity="0.3"/>
+  <circle cx="1130" cy="140" r="4" fill="#2E7D32" opacity="0.4"/>
+  <circle cx="80" cy="540" r="8" fill="#4CAF50" opacity="0.25"/>
+
+  <!-- 양파 마스코트 (왼쪽 큰 사이즈) -->
+  <g transform="translate(140 175) scale(7)">
+    <path d="M20 35c-7.5 0-13-5.5-13-12.5C7 15.5 12.5 10 20 10s13 5.5 13 12.5C33 29.5 27.5 35 20 35Z" fill="#EBF5EC" stroke="#2E7D32" stroke-width="2"/>
+    <path d="M11 22c2 5 5 8 9 8M29 22c-2 5-5 8-9 8" stroke="#4CAF50" stroke-width="1.25" stroke-linecap="round" fill="none"/>
+    <path d="M20 10c0-3 1-5 2-5M20 10c0-2-2-4-4-4" stroke="#2E7D32" stroke-width="1.75" stroke-linecap="round" fill="none"/>
+  </g>
+
+  <!-- 메인 타이틀 -->
+  <text x="500" y="240" font-family="-apple-system, 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif" font-size="96" font-weight="800" fill="#1F2320" letter-spacing="-2">
+    SQL 양파
+  </text>
+
+  <!-- 서브 타이틀 -->
+  <text x="500" y="320" font-family="-apple-system, 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif" font-size="42" font-weight="600" fill="#2E7D32" letter-spacing="-0.5">
+    SQLD 3주 합격 루틴
+  </text>
+
+  <!-- 설명 라인 -->
+  <text x="500" y="395" font-family="-apple-system, 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif" font-size="28" font-weight="500" fill="#4F5950">
+    제45회~60회 기출 복원 800문항
+  </text>
+  <text x="500" y="438" font-family="-apple-system, 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif" font-size="28" font-weight="500" fill="#4F5950">
+    이론 · CBT 모의고사 · 회원가입 없이 무료
+  </text>
+
+  <!-- 하단 도메인 박스 -->
+  <rect x="500" y="495" width="270" height="56" rx="14" fill="#2E7D32"/>
+  <text x="635" y="532" text-anchor="middle" font-family="-apple-system, 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif" font-size="22" font-weight="700" fill="#FFFFFF">
+    sqldyangpa.com
+  </text>
+</svg>

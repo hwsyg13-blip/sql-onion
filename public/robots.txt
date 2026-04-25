@@ -1,0 +1,12 @@
+User-agent: *
+Allow: /
+
+# 검증 파일·정책 페이지는 색인 허용
+Allow: /privacy.html
+Allow: /ads.txt
+
+# Vite 빌드 산출물 — 사용자 페이지가 아니므로 제외 (있어도 무해)
+Disallow: /assets/
+
+# 사이트맵
+Sitemap: https://sqldyangpa.com/sitemap.xml
