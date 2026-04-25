@@ -13,6 +13,7 @@ import { MockLanding, EndlessScreen } from './screens/MockScreens';
 import { ExamListScreen, CBTExam, CBTResult } from './screens/CBTScreens';
 import { useSession, signOut } from './lib/auth';
 import { recordVisit } from './lib/progress';
+import { trackPageView } from './lib/analytics';
 
 // 🚧 베타 모드: 로그인/결제 기능 숨김 (나중에 켤 때 false 로만 바꾸면 됨)
 export const BETA_NO_AUTH = true;
@@ -137,6 +138,11 @@ export const App = () => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  // GA4 page_view — route/params 변경마다 발사 (SPA 라우팅이라 자동 추적 안 됨)
+  React.useEffect(() => {
+    trackPageView(route, params);
+  }, [route, params]);
 
   // popstate (브라우저 뒤로가기/앞으로가기) — 시험 중 이탈 방어 후 route 복원
   React.useEffect(() => {
