@@ -125,6 +125,11 @@ export const CBTExam = ({examId = "round-60", onFinish, onNavigate, onExit, mock
 
   const q = questions[idx];
   const answered = answers.filter(a=>a!=null).length;
+  // App-level 나가기 인터셉트에서 읽는 전역 — mount/answered 변화 시 업데이트, unmount 시 초기화
+  React.useEffect(() => {
+    (window as any).__sqlo_cbt_answered = answered;
+    return () => { (window as any).__sqlo_cbt_answered = 0; };
+  }, [answered]);
   const toggleFlag = (i) => {
     setFlags(s => { const n = new Set(s); n.has(i) ? n.delete(i) : n.add(i); return n; });
   };
@@ -171,6 +176,8 @@ export const CBTExam = ({examId = "round-60", onFinish, onNavigate, onExit, mock
         {onExit && (
           <button
             onClick={() => {
+              // 아직 아무것도 안 풀었으면 그냥 나감 (확인 스킵)
+              if (answered === 0) { onExit(); return; }
               if (typeof window === 'undefined' || window.confirm('진행 중인 풀이를 종료하고 나가시겠어요? 답안은 저장되지 않아요.')) {
                 onExit();
               }

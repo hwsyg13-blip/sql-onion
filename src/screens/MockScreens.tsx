@@ -6,6 +6,7 @@ import { sqloUsage } from './PricingScreen';
 import { BETA_NO_AUTH } from '../App';
 import { QuestionReferences, OptionReferences } from '../components/QuestionReferences';
 import { AdSlot } from '../components/AdSlot';
+import { BugReportModal } from '../components/BugReportModal';
 
 // Endless Quiz — flashcard-esque: single question → grade → explanation → next
 // Also hosts Mock landing & Mock exam full 50-item timer mode
@@ -169,14 +170,44 @@ export const QuestionBody = ({q, noTags}) => {
   const sourceLabel = q.round
     ? `제${q.round}회 기출`
     : (q.examLabel || (q.exam ? q.exam : '기출 변형'));
+  const [reportOpen, setReportOpen] = React.useState(false);
   return (
   <div>
-    {!noTags && (
-      <div style={{display:"flex",gap:8,marginBottom:12,flexWrap:"wrap"}}>
-        <Tag tone="green">{q.subject}</Tag>
-        <Tag tone="blue">{sourceLabel}</Tag>
-        <Tag tone="neutral">{q.number}번</Tag>
-      </div>
+    <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:12,flexWrap:"wrap"}}>
+      {!noTags && (
+        <>
+          <Tag tone="green">{q.subject}</Tag>
+          <Tag tone="blue">{sourceLabel}</Tag>
+          <Tag tone="neutral">{q.number}번</Tag>
+        </>
+      )}
+      <button
+        onClick={() => setReportOpen(true)}
+        title="이 문제의 오류를 제보"
+        style={{
+          marginLeft: 'auto',
+          display: 'inline-flex', alignItems: 'center', gap: 4,
+          background: 'transparent', border: '1px solid var(--border-default)', borderRadius: 8,
+          padding: '4px 10px', fontSize: 11.5, color: 'var(--fg-3)',
+          cursor: 'pointer', fontFamily: 'inherit',
+        }}
+        onMouseEnter={e => { e.currentTarget.style.color='var(--wrong-fg)'; e.currentTarget.style.borderColor='var(--wrong-border)'; }}
+        onMouseLeave={e => { e.currentTarget.style.color='var(--fg-3)'; e.currentTarget.style.borderColor='var(--border-default)'; }}
+      >
+        <Ic.X size={11}/> 오류 제보
+      </button>
+    </div>
+    {reportOpen && (
+      <BugReportModal
+        ctx={{
+          round: q.round,
+          subject: q.subject,
+          number: q.number,
+          examLabel: q.examLabel || (q.round ? `제${q.round}회` : undefined),
+          title: q.title,
+        }}
+        onClose={() => setReportOpen(false)}
+      />
     )}
     <h2 style={{fontSize:20,fontWeight:700,color:"var(--fg-1)",lineHeight:1.45,margin:"0 0 4px",letterSpacing:"-0.01em"}}>{q.title}</h2>
     {/* 구형 필드 유지 (기존 데이터 호환) */}

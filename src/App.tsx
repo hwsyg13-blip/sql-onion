@@ -88,10 +88,12 @@ export const App = () => {
     const inExam = (route === 'cbt' || route === 'mock-exam');
     const naturalExits = new Set(['cbt', 'mock-exam', 'cbt-result']);
     if (inExam && !naturalExits.has(to) && !isPoppingRef.current && !opts?.skipConfirm) {
-      const ok = typeof window !== 'undefined'
-        ? window.confirm('진행 중인 풀이를 종료하고 이동할까요? 답안은 저장되지 않아요.')
-        : true;
-      if (!ok) return;
+      // 답을 하나도 고르지 않은 상태면 confirm 스킵
+      const answered = (typeof window !== 'undefined' && (window as any).__sqlo_cbt_answered) || 0;
+      if (answered > 0) {
+        const ok = window.confirm('진행 중인 풀이를 종료하고 이동할까요? 답안은 저장되지 않아요.');
+        if (!ok) return;
+      }
     }
 
     // 베타 모드: 로그인/결제 없이 모든 화면 자유 접근
@@ -146,10 +148,13 @@ export const App = () => {
       const inExam = (route === 'cbt' || route === 'mock-exam');
       const naturalExits = new Set(['cbt', 'mock-exam', 'cbt-result']);
       if (inExam && !naturalExits.has(st.route)) {
-        const ok = window.confirm('진행 중인 풀이를 종료하고 이동할까요? 답안은 저장되지 않아요.');
-        if (!ok) {
-          try { window.history.pushState({ sqlo: true, route, params }, ''); } catch {}
-          return;
+        const answered = ((window as any).__sqlo_cbt_answered) || 0;
+        if (answered > 0) {
+          const ok = window.confirm('진행 중인 풀이를 종료하고 이동할까요? 답안은 저장되지 않아요.');
+          if (!ok) {
+            try { window.history.pushState({ sqlo: true, route, params }, ''); } catch {}
+            return;
+          }
         }
       }
       isPoppingRef.current = true;
