@@ -39,36 +39,52 @@ export const App = () => {
     try { return JSON.parse(localStorage.getItem('sqlo_tweaks') || 'null') || TWEAK_DEFAULTS; }
     catch { return TWEAK_DEFAULTS; }
   });
+  // 라우트 복원: sessionStorage 사용 — 같은 탭 새로고침은 복원, 새 탭/새 창은 홈에서 시작
   const [route, setRoute] = React.useState(() => {
-    const saved = localStorage.getItem('sqlo_route');
-    if (saved === 'login' || saved === 'subscribe') return 'home';
-    return saved || 'home';
+    try {
+      const saved = sessionStorage.getItem('sqlo_route');
+      if (saved === 'login' || saved === 'subscribe') return 'home';
+      return saved || 'home';
+    } catch { return 'home'; }
   });
   const [params, setParams] = React.useState<any>(() => {
     // route 가 cbt 로 복원되는 경우 examId 도 함께 복원
     try {
-      const raw = localStorage.getItem('sqlo_params');
+      const raw = sessionStorage.getItem('sqlo_params');
       return raw ? JSON.parse(raw) : null;
     } catch { return null; }
   });
   const [cbtResult, setCbtResult] = React.useState<any>(null);
   const [paywall, setPaywall] = React.useState<any>(null);
-  // 나가기 버튼이 돌아갈 '직전 화면' — cbt/mock-exam 진입 시 기록 (새로고침 시 복원)
+  // 나가기 버튼이 돌아갈 '직전 화면' — cbt/mock-exam 진입 시 기록 (같은 탭 새로고침 시 복원)
   const [exitReturnRoute, setExitReturnRoute] = React.useState<string>(() => {
-    try { return localStorage.getItem('sqlo_exit_return') || 'home'; } catch { return 'home'; }
+    try { return sessionStorage.getItem('sqlo_exit_return') || 'home'; } catch { return 'home'; }
   });
 
   const handleLogin = () => { /* noop: Supabase OAuth redirect handles it */ };
   const handleLogout = async () => { await signOut(); setRoute('home'); };
 
   React.useEffect(() => { localStorage.setItem('sqlo_tweaks', JSON.stringify(tweaks)); }, [tweaks]);
-  React.useEffect(() => { localStorage.setItem('sqlo_route', route); }, [route]);
+  // 라우트는 sessionStorage 에만 — 새 탭/새 창에서 열면 홈으로 시작
+  React.useEffect(() => { try { sessionStorage.setItem('sqlo_route', route); } catch {} }, [route]);
   React.useEffect(() => {
-    if (params == null) localStorage.removeItem('sqlo_params');
-    else try { localStorage.setItem('sqlo_params', JSON.stringify(params)); } catch {}
+    try {
+      if (params == null) sessionStorage.removeItem('sqlo_params');
+      else sessionStorage.setItem('sqlo_params', JSON.stringify(params));
+    } catch {}
   }, [params]);
-  // 나가기 복귀 라우트도 복원 (새로고침 후 나가기가 이상한 경로로 가지 않도록)
-  React.useEffect(() => { localStorage.setItem('sqlo_exit_return', exitReturnRoute); }, [exitReturnRoute]);
+  // 나가기 복귀 라우트도 같은 탭 한정으로 보존
+  React.useEffect(() => { try { sessionStorage.setItem('sqlo_exit_return', exitReturnRoute); } catch {} }, [exitReturnRoute]);
+
+  // 한 번 마이그레이션: 이전에 localStorage 에 박힌 라우트 잔재 정리
+  React.useEffect(() => {
+    try {
+      localStorage.removeItem('sqlo_route');
+      localStorage.removeItem('sqlo_params');
+      localStorage.removeItem('sqlo_exit_return');
+    } catch {}
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   // 방문 기록 — 앱 마운트 시 오늘 날짜를 visitDays 에 저장 (1일 1회만)
   React.useEffect(() => { recordVisit(); }, []);
