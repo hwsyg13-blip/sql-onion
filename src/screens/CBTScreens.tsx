@@ -215,11 +215,7 @@ export const CBTExam = ({examId = "round-60", onFinish, onNavigate, onExit, mock
         {/* Left — question */}
         <main>
           <div style={{background:"var(--bg-card)",border:"1px solid var(--border-subtle)",borderRadius:16,padding:28,boxShadow:"var(--shadow-sm)"}}>
-            {/* 태그는 질문 위에 */}
-            <div style={{display:"flex",gap:8,marginBottom:12}}>
-              <Tag tone="green" size="sm">{q.subject}</Tag>
-              <Tag tone="neutral" size="sm">문항 {idx+1}</Tag>
-            </div>
+            {/* QuestionBody 가 태그 + 오류제보 버튼을 한 줄로 렌더 */}
             <QuestionBody q={q} noTags/>
             <ol style={{listStyle:"none",padding:0,margin:"18px 0 0",display:"flex",flexDirection:"column",gap:10}}>
               {q.options.map((opt, i) => {

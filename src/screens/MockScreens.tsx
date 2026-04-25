@@ -174,27 +174,23 @@ export const QuestionBody = ({q, noTags}) => {
   return (
   <div>
     <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:12,flexWrap:"wrap"}}>
-      {!noTags && (
-        <>
-          <Tag tone="green">{q.subject}</Tag>
-          <Tag tone="blue">{sourceLabel}</Tag>
-          <Tag tone="neutral">{q.number}번</Tag>
-        </>
-      )}
+      <Tag tone="green" size={noTags ? "sm" : "md"}>{q.subject}</Tag>
+      {!noTags && <Tag tone="blue">{sourceLabel}</Tag>}
+      <Tag tone="neutral" size={noTags ? "sm" : "md"}>{q.number}번</Tag>
       <button
         onClick={() => setReportOpen(true)}
         title="이 문제의 오류를 제보"
         style={{
           marginLeft: 'auto',
-          display: 'inline-flex', alignItems: 'center', gap: 4,
+          display: 'inline-flex', alignItems: 'center',
           background: 'transparent', border: '1px solid var(--border-default)', borderRadius: 8,
           padding: '4px 10px', fontSize: 11.5, color: 'var(--fg-3)',
-          cursor: 'pointer', fontFamily: 'inherit',
+          cursor: 'pointer', fontFamily: 'inherit', whiteSpace: 'nowrap',
         }}
         onMouseEnter={e => { e.currentTarget.style.color='var(--wrong-fg)'; e.currentTarget.style.borderColor='var(--wrong-border)'; }}
         onMouseLeave={e => { e.currentTarget.style.color='var(--fg-3)'; e.currentTarget.style.borderColor='var(--border-default)'; }}
       >
-        <Ic.X size={11}/> 오류 제보
+        오류 제보
       </button>
     </div>
     {reportOpen && (
