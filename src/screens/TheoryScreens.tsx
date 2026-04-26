@@ -179,6 +179,7 @@ export const TheoryDetailScreen = ({ chapterId, onNavigate }) => {
   const ctx = findChapter(chapterId);
   const md = THEORY_BODY[chapterId];
   const bodyRef = React.useRef<HTMLDivElement>(null);
+  const [zoomedSvg, setZoomedSvg] = React.useState<string | null>(null);
 
   if (!ctx || !md) return <TheoryStub chapterId={chapterId} onNavigate={onNavigate} />;
 
@@ -215,11 +216,66 @@ export const TheoryDetailScreen = ({ chapterId, onNavigate }) => {
           sequence: { actorMargin: 50 },
           securityLevel: 'loose',
         });
-        mermaid.run({ nodes });
+        mermaid.run({ nodes }).then(() => {
+          // 렌더 후 각 mermaid 카드에 '확대' 버튼 부착
+          if (cancelled || !bodyRef.current) return;
+          bodyRef.current.querySelectorAll('.mermaid').forEach((m) => {
+            if (m.querySelector('.zoom-btn')) return;
+            const btn = document.createElement('button');
+            btn.className = 'zoom-btn';
+            btn.type = 'button';
+            btn.title = '확대 보기';
+            btn.innerHTML = '⛶';
+            btn.onclick = (e) => {
+              e.stopPropagation();
+              const svg = m.querySelector('svg');
+              if (svg) setZoomedSvg(svg.outerHTML);
+            };
+            m.appendChild(btn);
+          });
+        });
       } catch (e) { console.warn('[mermaid] render failed', e); }
     }).catch((e) => console.warn('[mermaid] load failed', e));
     return () => { cancelled = true; };
   }, [html]);
+
+  // 코드 블록 — 복사 버튼 부착 (Ctrl+C 도 동작하지만 보조 UI)
+  React.useEffect(() => {
+    if (!bodyRef.current) return;
+    const pres = bodyRef.current.querySelectorAll('.theory-md > pre, .theory-md pre:not(.diagram-card pre)');
+    pres.forEach((pre) => {
+      if (pre.parentElement?.classList?.contains('diagram-card')) return;
+      if (pre.querySelector('.copy-btn')) return;
+      const code = pre.querySelector('code');
+      if (!code) return;
+      const btn = document.createElement('button');
+      btn.className = 'copy-btn';
+      btn.type = 'button';
+      btn.textContent = '복사';
+      btn.onclick = async (e) => {
+        e.stopPropagation();
+        try {
+          await navigator.clipboard.writeText(code.textContent || '');
+          const orig = btn.textContent;
+          btn.textContent = '✓ 복사됨';
+          btn.classList.add('copied');
+          setTimeout(() => { btn.textContent = orig; btn.classList.remove('copied'); }, 1500);
+        } catch {
+          btn.textContent = '실패';
+          setTimeout(() => { btn.textContent = '복사'; }, 1500);
+        }
+      };
+      pre.appendChild(btn);
+    });
+  }, [html]);
+
+  // ESC 로 모달 닫기
+  React.useEffect(() => {
+    if (!zoomedSvg) return;
+    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') setZoomedSvg(null); };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [zoomedSvg]);
 
   // 다음 챕터 — 평탄화된 챕터 목록에서 인덱스 +1
   const allCh = THEORY.subjects.flatMap((s) => s.sections.flatMap((x) => x.chapters));
@@ -228,6 +284,38 @@ export const TheoryDetailScreen = ({ chapterId, onNavigate }) => {
   const prevCh = idx > 0 ? allCh[idx - 1] : null;
 
   return (
+    <>
+    {/* mermaid 확대 모달 */}
+    {zoomedSvg && (
+      <div
+        onClick={() => setZoomedSvg(null)}
+        style={{
+          position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.78)',
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+          zIndex: 1000, padding: 24, cursor: 'zoom-out',
+        }}
+      >
+        <div
+          onClick={(e) => e.stopPropagation()}
+          style={{
+            background: '#FFFFFF', borderRadius: 16, padding: 32,
+            maxWidth: '92vw', maxHeight: '88vh', overflow: 'auto',
+            boxShadow: '0 24px 80px rgba(0,0,0,0.5)', cursor: 'auto',
+            position: 'relative',
+          }}
+          dangerouslySetInnerHTML={{ __html: zoomedSvg }}
+        />
+        <button
+          onClick={() => setZoomedSvg(null)}
+          style={{
+            position: 'absolute', top: 20, right: 20,
+            background: 'rgba(255,255,255,0.95)', color: 'var(--fg-1)',
+            border: 0, borderRadius: 10, padding: '8px 14px',
+            fontSize: 13, fontWeight: 700, cursor: 'pointer',
+          }}
+        >닫기 ✕</button>
+      </div>
+    )}
     <div style={{ maxWidth: 1180, margin: '0 auto', padding: '28px 28px 80px' }}>
       {/* 뒤로가기 + Breadcrumb */}
       <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 18 }}>
@@ -300,6 +388,7 @@ export const TheoryDetailScreen = ({ chapterId, onNavigate }) => {
         </aside>
       </div>
     </div>
+    </>
   );
 };
 

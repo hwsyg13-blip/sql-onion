@@ -224,10 +224,10 @@ CREATE TABLE CUSTOMER (
 
 ### 발생 시점에 따른 분류
 
-\`\`\`
-[기본(Key)]  ──파생──→  [중심(Main)]  ──관계에서──→  [행위(Action)]
-독립적 존재             기본에서 파생            2개 이상 엔터티의 관계
-사원·부서·고객          주문·계약·매출           주문상세·출고·입출금
+\`\`\`mermaid
+flowchart LR
+    A[기본 엔터티<br/>독립 존재<br/>사원·부서·고객] -->|파생| B[중심 엔터티<br/>업무 핵심<br/>주문·계약·매출]
+    B -->|관계에서| C[행위 엔터티<br/>2개 이상에서 발생<br/>주문상세·출고·입출금]
 \`\`\`
 
 | 종류 | 의존성 | 예시 |
@@ -863,20 +863,12 @@ CREATE TABLE ORDER_DETAIL (
 
 ## [개념 도식화] 정규화 단계
 
-\`\`\`
-[비정규형]
-    │ 원자값으로
-    ▼
-[ 1NF ]
-    │ 부분함수 종속 제거
-    ▼
-[ 2NF ]
-    │ 이행함수 종속 제거
-    ▼
-[ 3NF ]
-    │ 모든 결정자가 후보키가 되도록
-    ▼
-[BCNF]
+\`\`\`mermaid
+flowchart LR
+    A[비정규형<br/>중복·다중값] -->|원자값으로| B[1NF]
+    B -->|부분함수 종속 제거| C[2NF]
+    C -->|이행함수 종속 제거| D[3NF]
+    D -->|모든 결정자 = 후보키| E[BCNF]
 \`\`\`
 
 | 단계 | 핵심 규칙 | 한줄 의미 |
@@ -1799,12 +1791,12 @@ CREATE TABLE BOOK (
 
 ## SQL 명령어 분류
 
-\`\`\`
-[ SQL ]
-  ├─ DDL  (Data Definition)    — 정의어:    CREATE / ALTER / DROP / TRUNCATE / RENAME
-  ├─ DML  (Data Manipulation)  — 조작어:    SELECT / INSERT / UPDATE / DELETE / MERGE
-  ├─ DCL  (Data Control)       — 제어어:    GRANT / REVOKE
-  └─ TCL  (Transaction Control) — 트랜잭션:  COMMIT / ROLLBACK / SAVEPOINT
+\`\`\`mermaid
+flowchart TD
+    SQL[SQL] --> DDL[DDL · 정의어<br/>CREATE / ALTER / DROP<br/>TRUNCATE / RENAME]
+    SQL --> DML[DML · 조작어<br/>SELECT / INSERT / UPDATE<br/>DELETE / MERGE]
+    SQL --> DCL[DCL · 제어어<br/>GRANT / REVOKE]
+    SQL --> TCL[TCL · 트랜잭션<br/>COMMIT / ROLLBACK / SAVEPOINT]
 \`\`\`
 
 | 분류 | 풀이 | 명령어 | 비유 |
@@ -2104,18 +2096,15 @@ SELECT USER FROM DUAL;       -- 접속 계정
 
 ## [개념 도식화] 함수의 분류
 
-\`\`\`
-[ SQL 함수 ]
-  │
-  ├─ 단일행 함수 (1행 → 1결과)
-  │    ├─ 문자        UPPER / SUBSTR / INSTR / LENGTH …
-  │    ├─ 숫자        ROUND / TRUNC / MOD / ABS …
-  │    ├─ 날짜        SYSDATE / ADD_MONTHS / MONTHS_BETWEEN …
-  │    ├─ 변환        TO_CHAR / TO_NUMBER / TO_DATE
-  │    └─ 일반/NULL   NVL / NVL2 / COALESCE / NULLIF / CASE / DECODE
-  │
-  └─ 다중행 함수 (여러 행 → 1결과 = 집계 함수)
-        SUM / AVG / COUNT / MAX / MIN
+\`\`\`mermaid
+flowchart TD
+    F[SQL 함수] --> S[단일행 함수<br/>1행 → 1결과]
+    F --> M[다중행 = 집계 함수<br/>N행 → 1결과<br/>SUM / AVG / COUNT<br/>MAX / MIN]
+    S --> S1[문자<br/>UPPER · SUBSTR<br/>INSTR · LENGTH]
+    S --> S2[숫자<br/>ROUND · TRUNC<br/>MOD · ABS]
+    S --> S3[날짜<br/>SYSDATE · ADD_MONTHS<br/>MONTHS_BETWEEN]
+    S --> S4[변환<br/>TO_CHAR · TO_NUMBER<br/>TO_DATE]
+    S --> S5[일반/NULL<br/>NVL · NVL2 · COALESCE<br/>CASE · DECODE]
 \`\`\`
 
 ---
@@ -2907,13 +2896,13 @@ ORDER BY가 마지막이라 별칭과 컬럼번호 사용이 가능하다.
 
 ## 조인의 종류
 
-\`\`\`
-[ 조인 ]
-  ├─ EQUI JOIN       — 등가 조인 (\`=\` 으로 연결, 가장 흔함)
-  ├─ Non-EQUI JOIN   — 비등가 조인 (BETWEEN / >, < 등)
-  ├─ SELF JOIN       — 자기 자신과 조인 (사원-매니저 같은 테이블 내 관계)
-  ├─ OUTER JOIN      — 한쪽 다 포함 (LEFT / RIGHT / FULL)
-  └─ CROSS JOIN      — 모든 조합 (카티션 곱)
+\`\`\`mermaid
+flowchart TD
+    J[조인] --> E[EQUI JOIN<br/>= 으로 연결<br/>가장 흔함]
+    J --> N[Non-EQUI JOIN<br/>BETWEEN / >, <]
+    J --> S[SELF JOIN<br/>같은 테이블<br/>사원-매니저]
+    J --> O[OUTER JOIN<br/>LEFT / RIGHT / FULL<br/>한쪽 다 포함]
+    J --> C[CROSS JOIN<br/>모든 조합<br/>카티션 곱]
 \`\`\`
 
 | 종류 | 의미 | 예 |
@@ -3831,11 +3820,11 @@ UNION 시 1행만 남는다.
 
 ## [개념 도식화] 그룹 함수의 종류
 
-\`\`\`
-[ 그룹 함수 (확장 GROUP BY) ]
-  ├─ ROLLUP(A, B)           — 계층적 소계: (A,B) → (A) → ()             결과 N+1 단계
-  ├─ CUBE(A, B)             — 모든 조합:   (A,B) → (A) → (B) → ()        결과 2^N 단계
-  └─ GROUPING SETS(...)     — 지정한 조합만 (가장 유연)
+\`\`\`mermaid
+flowchart TD
+    G[그룹 함수<br/>확장 GROUP BY] --> R[ROLLUP A,B<br/>계층적 소계<br/>A,B → A → ⌀<br/>N+1 단계]
+    G --> C[CUBE A,B<br/>모든 조합<br/>A,B → A → B → ⌀<br/>2^N 단계]
+    G --> S[GROUPING SETS<br/>지정한 조합만<br/>가장 유연]
 \`\`\`
 
 | 함수 | 의미 | 비유 |

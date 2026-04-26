@@ -466,6 +466,50 @@ img, svg {
   white-space: pre-wrap;
 }
 
+/* ── 코드 블록 복사 버튼 ── */
+.theory-md pre { position: relative; }
+.theory-md pre .copy-btn {
+  position: absolute; top: 8px; right: 8px;
+  background: rgba(255,255,255,0.08); color: #E6F3E7;
+  border: 1px solid rgba(255,255,255,0.18);
+  padding: 4px 10px; border-radius: 6px;
+  font-size: 11px; font-weight: 700;
+  font-family: var(--font-sans); cursor: pointer;
+  letter-spacing: -0.01em;
+  transition: background 150ms, border-color 150ms;
+  opacity: 0;
+}
+.theory-md pre:hover .copy-btn { opacity: 1; }
+.theory-md pre .copy-btn:hover {
+  background: rgba(76,175,80,0.35); border-color: rgba(76,175,80,0.5);
+}
+.theory-md pre .copy-btn.copied {
+  background: rgba(76,175,80,0.5); border-color: var(--point-500);
+  opacity: 1;
+}
+
+/* ── Mermaid 확대 버튼 ── */
+.theory-md .mermaid {
+  position: relative;
+}
+.theory-md .mermaid .zoom-btn {
+  position: absolute; top: 10px; left: 14px;
+  background: rgba(46,125,50,0.08); color: var(--point-600);
+  border: 1px solid var(--point-100);
+  width: 28px; height: 28px; border-radius: 8px;
+  font-size: 14px; line-height: 1; cursor: pointer;
+  display: inline-flex; align-items: center; justify-content: center;
+  transition: background 150ms, transform 150ms;
+}
+.theory-md .mermaid .zoom-btn:hover {
+  background: var(--point-100); transform: scale(1.08);
+}
+
+/* 모바일 — 복사 버튼은 항상 보이게 (hover 없음) */
+@media (max-width: 720px) {
+  .theory-md pre .copy-btn { opacity: 0.85; font-size: 10.5px; padding: 3px 8px; }
+}
+
 /* ── ASCII 도식 카드 (언어 없는 코드블록) ── */
 .theory-md .diagram-card {
   background: linear-gradient(135deg, var(--point-050) 0%, var(--bg-card) 100%);
