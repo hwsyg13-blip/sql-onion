@@ -765,8 +765,8 @@ export const ROUND_48: QuizQuestion[] = [
       "1, 4, 2, 3",
       "1, 2, 1, 2"
     ],
-    "correctIndex": 2,
-    "explanation": "원본 기출의 정답 표기를 보존한다. NTILE 은 지정한 분할 수 내에서 그룹 번호를 반환한다.",
+    "correctIndex": 1,
+    "explanation": "NTILE(n) 은 정렬된 데이터를 n 개의 그룹으로 최대한 고르게 나누어 각 행에 그룹 번호(1~n)를 부여한다. 4 건을 2 그룹으로 나누면 정확히 2 건씩 떨어지므로 앞 2 건은 1, 뒤 2 건은 2 가 되어 결과는 1, 1, 2, 2 이다. 분할 수(2)를 넘는 3·4 가 등장하는 보기는 NTILE(2) 결과로 불가능하다.",
     "_source": "authored"
   },
   {
