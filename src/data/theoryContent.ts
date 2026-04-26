@@ -4227,15 +4227,14 @@ FROM    EMP;
 
 ---
 
-## [개념 도식화] Top N의 3가지 방법
+## [개념 도식화] Top N의 4가지 방법
 
-\`\`\`mermaid
-flowchart TB
-    A[Top N 구현]
-    A --> B[Oracle: ROWNUM]
-    A --> C[표준: FETCH FIRST]
-    A --> D[MS-SQL: TOP]
-    A --> E[Oracle: 윈도우 함수<br/>ROW_NUMBER]
+\`\`\`
+[ Top N 구현 ]
+  ├─ Oracle: ROWNUM           — 의사 컬럼, 정렬 전 매겨짐 (인라인뷰 필수)
+  ├─ 표준 (12c+): FETCH FIRST — OFFSET / WITH TIES / PERCENT 지원
+  ├─ MS-SQL: TOP              — \`SELECT TOP n\` 또는 \`TOP n WITH TIES\`
+  └─ 범용: ROW_NUMBER() OVER  — PARTITION BY 로 그룹별 Top N 가능
 \`\`\`
 
 ---
@@ -4425,6 +4424,15 @@ WHERE  ROWNUM <= 3;
 | 페이징 표준 문법 | OFFSET ... FETCH NEXT ... |
 
 단골 함정: ROWNUM은 \`=1\`만 의미가 있고 \`>n\`은 항상 거짓이다.
+
+---
+
+> **30초 시험 직전 정리**
+> · ROWNUM 함정 = **\`=1\`만 가능**, **\`>n\` 항상 거짓**, **정렬 전에 매겨짐** → 인라인뷰로 정렬 먼저
+> · 표준: \`FETCH FIRST n ROWS ONLY\` (Oracle 12c+) / \`WITH TIES\` 면 동률 포함
+> · MS-SQL: \`SELECT TOP n\` / \`TOP n WITH TIES\`
+> · 부서별 Top N = **ROW_NUMBER() OVER (PARTITION BY ... ORDER BY ...)** + 인라인뷰
+> · 페이징 표준 = \`OFFSET n ROWS FETCH NEXT m ROWS ONLY\`
 `,
   c226: `# 2-2-6. 계층형 질의와 셀프 조인
 
@@ -4627,6 +4635,17 @@ CONNECT BY PRIOR EMP_ID = MGR_ID;
 | 계층형 질의는 표준인가 | Oracle 전용. 표준은 재귀 CTE |
 
 단골 함정: PRIOR의 위치를 바꾸면 순방향과 역방향이 뒤바뀐다.
+
+---
+
+> **30초 시험 직전 정리**
+> · \`START WITH\` = **루트 조건** (보통 MGR_ID IS NULL)
+> · \`CONNECT BY PRIOR EMP_ID = MGR_ID\` = **순방향** (부모 → 자식, 위에서 아래로)
+> · \`CONNECT BY PRIOR MGR_ID = EMP_ID\` = **역방향** (자식 → 부모)
+> · LEVEL = **1부터** (루트가 1) / SYS_CONNECT_BY_PATH = 경로 표시
+> · 형제 정렬 = **ORDER SIBLINGS BY** (일반 ORDER BY 는 트리 깨짐)
+> · 표준 재귀 쿼리 = **WITH RECURSIVE ... UNION ALL** (CTE)
+> · SELF JOIN = 같은 테이블 두 번 사용, **별칭 필수** (1단계 관계만)
 `,
   c227: `# 2-2-7. PIVOT 절과 UNPIVOT 절
 
@@ -4659,20 +4678,14 @@ CONNECT BY PRIOR EMP_ID = MGR_ID;
 
 ## [개념 도식화] PIVOT vs UNPIVOT
 
-\`\`\`mermaid
-flowchart LR
-    A["세로형 (Long)<br/>3개 행"] -->|PIVOT| B["가로형 (Wide)<br/>1개 행 3컬럼"]
-    B -->|UNPIVOT| A
 \`\`\`
-
-\`\`\`
-세로형                       가로형
-┌─────┬─────┬───┐         ┌─────┬───┬───┬───┐
-│회원  │과목  │수 │         │회원  │수학│영어│과학│
-├─────┼─────┼───┤         ├─────┼───┼───┼───┤
-│김    │수학  │ 3 │  PIVOT  │김    │ 3 │ 2 │ 1 │
-│김    │영어  │ 2 │ ──────► └─────┴───┴───┴───┘
-│김    │과학  │ 1 │
+세로형 (Long, 3행)                    가로형 (Wide, 1행 3컬럼)
+┌─────┬─────┬───┐                   ┌─────┬───┬───┬───┐
+│회원 │과목 │수 │   ─── PIVOT ──→   │회원 │수학│영어│과학│
+├─────┼─────┼───┤                   ├─────┼───┼───┼───┤
+│김   │수학 │ 3 │   ←── UNPIVOT ─   │김   │ 3 │ 2 │ 1 │
+│김   │영어 │ 2 │                   └─────┴───┴───┴───┘
+│김   │과학 │ 1 │
 └─────┴─────┴───┘
 \`\`\`
 
@@ -4855,6 +4868,16 @@ GROUP BY 분기;
 | CASE WHEN으로 PIVOT 가능? | 가능(PIVOT 절 없이) |
 
 단골 함정: PIVOT은 SUM/COUNT 같은 집계함수 사용이 필수다. 단순 변환만 하려고 해도 집계함수가 들어가야 한다.
+
+---
+
+> **30초 시험 직전 정리**
+> · PIVOT = **세로 → 가로** (행을 컬럼으로)
+> · UNPIVOT = **가로 → 세로** (컬럼을 행으로)
+> · PIVOT 은 **집계 함수 필수** (SUM/COUNT/MAX 등) — 단순 변환에도 형식상 필요
+> · 매칭 안 되는 칸 → **NULL**
+> · UNPIVOT 기본 = **NULL 제외**, \`INCLUDE NULLS\` 로 포함
+> · PIVOT 절 없이 = **CASE WHEN + GROUP BY** 로 흉내 가능 (시험 단골)
 `,
   c228: `# 2-2-8. 정규 표현식(Regular Expression)
 
@@ -4877,10 +4900,9 @@ LIKE가 단순 검색이라면 정규식은 정밀 검색이다.
 
 ## [개념 도식화] LIKE vs REGEXP 비교
 
-\`\`\`mermaid
-flowchart LR
-    A["LIKE<br/>단순 패턴<br/>%, _"] --> X[기본 검색]
-    B["REGEXP<br/>고급 패턴<br/>다양한 메타문자"] --> Y[정밀 검색]
+\`\`\`
+LIKE       │ % (0개 이상), _ (1개)               │  단순·기본 검색
+REGEXP     │ . * + ? [ ] ^ $ | { } \\d \\w \\s …    │  정밀·고급 검색
 \`\`\`
 
 | 비교 | LIKE | REGEXP |
@@ -5033,6 +5055,16 @@ REGEXP_LIKE('ABC', 'abc', 'i')   -- 대소문자 무시
 | LIKE와 REGEXP_LIKE 차이 | LIKE는 \`%\`와 \`_\`만, REGEXP는 다양한 메타문자 사용 |
 
 단골 함정: \`^\`이 \`[]\` 안과 밖에서 의미가 다르다. 밖에서 \`^\`은 시작, \`[^abc]\` 안에서는 부정.
+
+---
+
+> **30초 시험 직전 정리**
+> · 5개 함수: **REGEXP_LIKE** (조건) / **REGEXP_REPLACE** (교체) / **REGEXP_SUBSTR** (추출) / **REGEXP_INSTR** (위치) / **REGEXP_COUNT** (횟수)
+> · 자주 쓰는 메타: \`.\` (1글자), \`*\` (0+), \`+\` (1+), \`?\` (0/1), \`[abc]\`, \`[^abc]\`, \`^\` (시작), \`$\` (끝)
+> · \`\\d\` = 숫자 / \`\\w\` = 영숫자_  / \`\\s\` = 공백 / \`[가-힣]\` = 한글 1자
+> · \`^\` 함정 = \`[]\` 밖이면 **시작** / \`[]\` 안이면 **부정**
+> · 옵션 4번째 인자: \`i\` 대소문자 무시 / \`m\` 멀티라인
+> · LIKE 와 차이 = 표현력 ↑, **성능 약간 ↓**
 `,
   c231: `# 2-3-1. DML (Data Manipulation Language)
 
