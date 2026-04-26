@@ -39,17 +39,25 @@ export const App = () => {
     try { return JSON.parse(localStorage.getItem('sqlo_tweaks') || 'null') || TWEAK_DEFAULTS; }
     catch { return TWEAK_DEFAULTS; }
   });
-  // 라우트 복원: sessionStorage 사용 — 같은 탭 새로고침은 복원, 새 탭/새 창은 홈에서 시작
+  // 라우트 복원 우선순위: URL 쿼리(?cbt=round-NN) > sessionStorage > 'home'
+  // — 정적 /exam/ 인덱스에서 회차 카드 클릭 시 SPA 딥링크 진입용
   const [route, setRoute] = React.useState(() => {
     try {
+      const sp = new URLSearchParams(window.location.search);
+      const cbtId = sp.get('cbt');
+      if (cbtId && /^round-\d+$/.test(cbtId)) return 'cbt';
+      const mock = sp.get('mock');
+      if (mock === '1') return 'mock-exam';
       const saved = sessionStorage.getItem('sqlo_route');
       if (saved === 'login' || saved === 'subscribe') return 'home';
       return saved || 'home';
     } catch { return 'home'; }
   });
   const [params, setParams] = React.useState<any>(() => {
-    // route 가 cbt 로 복원되는 경우 examId 도 함께 복원
     try {
+      const sp = new URLSearchParams(window.location.search);
+      const cbtId = sp.get('cbt');
+      if (cbtId && /^round-\d+$/.test(cbtId)) return cbtId;
       const raw = sessionStorage.getItem('sqlo_params');
       return raw ? JSON.parse(raw) : null;
     } catch { return null; }

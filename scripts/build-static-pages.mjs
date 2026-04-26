@@ -83,6 +83,9 @@ function head({ title, desc, path, type = 'article' }) {
   <style>
     :root{--bg:#F5F7F6;--surface:#FFFFFF;--fg-1:#1F2320;--fg-2:#333;--fg-3:#6B7280;--border:#EEF1EE;--accent:#2E7D32;--accent-bg:#EBF5EC;--correct-bg:#E6F3E7;--correct-fg:#256B29}
     *{box-sizing:border-box}
+    html,body{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;-webkit-touch-callout:none}
+    input,textarea,[contenteditable="true"],pre,code,.allow-select{-webkit-user-select:text!important;-moz-user-select:text!important;-ms-user-select:text!important;user-select:text!important}
+    img,svg{-webkit-user-drag:none;user-drag:none}
     body{margin:0;background:var(--bg);color:var(--fg-2);font-family:-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;line-height:1.7;font-size:15.5px}
     .top{background:var(--surface);border-bottom:1px solid var(--border);padding:14px 24px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:10}
     .top a.brand{color:var(--accent);font-weight:800;font-size:18px;text-decoration:none;display:inline-flex;align-items:center;gap:8px}
@@ -128,6 +131,10 @@ function head({ title, desc, path, type = 'article' }) {
   <script>
     window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
     gtag('js',new Date());gtag('config','${GA_ID}');
+    // 콘텐츠 보호 — 우클릭/복사/잘라내기/드래그 차단
+    (function(){var ok=function(t){return t&&t.closest&&t.closest('input,textarea,[contenteditable="true"],pre,code,.allow-select');};
+    var b=function(e){if(ok(e.target))return;e.preventDefault();};
+    ['contextmenu','copy','cut','selectstart','dragstart'].forEach(function(n){document.addEventListener(n,b);});})();
   </script>
 </head>
 <body>
@@ -228,8 +235,8 @@ function buildExamIndexPage() {
 
   const items = rounds.slice().sort((a, b) => b.round - a.round).map(r => {
     return `<li>
-  <a href="/exam/round-${r.round}/">SQLD 제${r.round}회 기출 복원문제</a>
-  <div class="sub">${r.date.ko} 시행 · 50문항 · 정답·해설 포함</div>
+  <a href="/?cbt=round-${r.round}">SQLD 제${r.round}회 기출문제 풀어보기 →</a>
+  <div class="sub">${r.date.ko} 시행 · 50문항 · CBT 모드 (90분)</div>
 </li>`;
   }).join('\n');
 
@@ -497,7 +504,6 @@ function buildSitemap() {
     { loc: SITE + '/', priority: 1.0, changefreq: 'weekly' },
     { loc: SITE + '/exam/', priority: 0.9, changefreq: 'monthly' },
     { loc: SITE + '/theory/', priority: 0.9, changefreq: 'monthly' },
-    ...rounds.map(r => ({ loc: `${SITE}/exam/round-${r.round}/`, priority: 0.8, changefreq: 'monthly' })),
     ...THEORY.subjects.flatMap(s => s.chapters.map(c => ({ loc: `${SITE}/theory/${c.id}/`, priority: 0.7, changefreq: 'monthly' }))),
     ...guides.map(g => ({ loc: `${SITE}/guide/${g.slug}/`, priority: 0.6, changefreq: 'yearly' })),
     { loc: SITE + '/terms.html', priority: 0.3, changefreq: 'yearly' },
@@ -523,14 +529,10 @@ ${urls.map(u => `  <url>
 // ============================================================
 console.log('Generating static SEO pages...');
 
-// 회차별 + 회차 인덱스
-let cnt = 0;
-for (const r of rounds) {
-  writePage(`/exam/round-${r.round}/`, buildRoundPage(r));
-  cnt++;
-}
+// 회차 인덱스만 — 회차 상세 페이지(/exam/round-NN/)는 콘텐츠 무단 복제 방지를 위해
+// 정적 노출 중단. 인덱스의 각 회차 카드는 SPA CBT 풀이 모드로 직접 연결.
 writePage('/exam/', buildExamIndexPage());
-console.log(`  exam: ${rounds.length} round pages + 1 index`);
+console.log(`  exam: 1 index page (round detail static pages removed)`);
 
 // 이론 챕터 + 인덱스
 let chCnt = 0;

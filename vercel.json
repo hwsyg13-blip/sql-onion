@@ -1,0 +1,15 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "redirects": [
+    {
+      "source": "/exam/round-:n(\\d+)",
+      "destination": "/?cbt=round-:n",
+      "permanent": true
+    },
+    {
+      "source": "/exam/round-:n(\\d+)/",
+      "destination": "/?cbt=round-:n",
+      "permanent": true
+    }
+  ]
+}
