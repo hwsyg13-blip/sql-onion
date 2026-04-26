@@ -317,6 +317,111 @@ img, svg {
   pointer-events: auto;
 }
 
+/* =============================================================
+   .theory-md — 마크다운 본문 디자인 시스템
+   ============================================================= */
+.theory-md { color: var(--fg-2); font-size: 15.5px; line-height: 1.78; }
+.theory-md h2 { font-size: 22px; font-weight: 800; color: var(--fg-1); margin: 36px 0 12px; letterspacing: -0.01em; padding-bottom: 6px; border-bottom: 2px solid var(--point-100); }
+.theory-md h2:first-child { margin-top: 0; }
+.theory-md h3 { font-size: 17px; font-weight: 700; color: var(--fg-1); margin: 24px 0 10px; }
+.theory-md h4 { font-size: 15px; font-weight: 700; color: var(--fg-1); margin: 18px 0 8px; }
+.theory-md p { font-size: 15.5px; color: var(--fg-2); line-height: 1.78; margin: 0 0 12px; }
+.theory-md strong { color: var(--fg-1); font-weight: 700; }
+.theory-md ul, .theory-md ol { padding-left: 22px; margin: 8px 0 16px; }
+.theory-md ul li, .theory-md ol li { margin: 4px 0; line-height: 1.7; }
+.theory-md ul li::marker { color: var(--point-500); }
+.theory-md a { color: var(--point-600); text-decoration: underline; text-underline-offset: 2px; }
+.theory-md hr { border: 0; border-top: 1px solid var(--border-subtle); margin: 28px 0; }
+
+/* 인용 — 핵심 요약 강조 */
+.theory-md blockquote {
+  margin: 12px 0 18px;
+  padding: 14px 18px;
+  background: var(--point-050);
+  border-left: 4px solid var(--point-500);
+  border-radius: 8px;
+  color: var(--fg-1);
+  font-size: 15px;
+  line-height: 1.7;
+}
+.theory-md blockquote p { margin: 0; color: var(--fg-1); }
+.theory-md blockquote p + p { margin-top: 8px; }
+
+/* 인라인 코드 */
+.theory-md :not(pre) > code {
+  background: var(--bg-code);
+  color: var(--fg-1);
+  padding: 1px 6px;
+  border-radius: 5px;
+  font-family: var(--font-mono);
+  font-size: 0.92em;
+}
+
+/* 코드 블록 — SQL 톤 */
+.theory-md pre {
+  background: #1F2320;
+  color: #E6F3E7;
+  padding: 14px 18px;
+  border-radius: 10px;
+  overflow-x: auto;
+  font-family: var(--font-mono);
+  font-size: 13.5px;
+  line-height: 1.6;
+  margin: 12px 0 18px;
+  white-space: pre;
+  border: none;
+}
+.theory-md pre code {
+  background: transparent;
+  color: inherit;
+  padding: 0;
+  font-size: inherit;
+}
+.theory-md pre.language-mermaid {
+  background: var(--bg-muted);
+  color: var(--fg-3);
+  font-style: italic;
+  font-size: 12.5px;
+}
+
+/* 표 */
+.theory-md table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 14px 0 18px;
+  font-size: 14px;
+  border: 1px solid var(--border-subtle);
+  border-radius: 10px;
+  overflow: hidden;
+}
+.theory-md table thead { background: var(--bg-muted); }
+.theory-md table th {
+  text-align: left;
+  padding: 10px 14px;
+  color: var(--fg-1);
+  font-weight: 700;
+  border-bottom: 1px solid var(--border-subtle);
+  font-size: 13px;
+}
+.theory-md table td {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border-subtle);
+  color: var(--fg-2);
+  vertical-align: top;
+  line-height: 1.6;
+}
+.theory-md table tbody tr:last-child td { border-bottom: 0; }
+.theory-md table tbody tr:hover { background: var(--bg-muted); }
+.theory-md table td:first-child { color: var(--fg-1); font-weight: 600; }
+
+/* 모바일에서 표 스크롤 */
+@media (max-width: 720px) {
+  .theory-md table { display: block; overflow-x: auto; white-space: nowrap; }
+  .theory-md h2 { font-size: 19px; margin: 28px 0 10px; }
+  .theory-md h3 { font-size: 15.5px; margin: 20px 0 8px; }
+  .theory-md pre { font-size: 12.5px; padding: 12px 14px; }
+}
+
 /* Responsive */
 @media (max-width: 900px) {
   .topnav-links { display: none !important; }
