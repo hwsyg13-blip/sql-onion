@@ -22,28 +22,115 @@ export const THEORY_MD: Record<string, string> = {
 
 ---
 
-## [개념 도식화] 데이터 모델링 3단계
+## [개념 도식화] 한 비즈니스가 데이터베이스가 되기까지
+
+같은 쇼핑몰 사례가 단계별로 어떻게 구체화되는지 직접 본다.
+
+### 1단계 — 개념적 모델 (큰 그림)
+
+업무에서 **무엇을 다루는가**를 핵심 명사 (엔터티) 와 그 관계로 그린다. ERD 의 가장 추상적인 형태.
 
 \`\`\`mermaid
-flowchart LR
-    R[현실 세계<br/>고객 · 상품 · 주문] -->|모델링| M[설계도<br/>데이터 모델]
-    M -->|구현| T[테이블]
-    T --> D[(실제 저장<br/>Database)]
+erDiagram
+    회원 ||--o{ 주문 : "주문하다"
+    상품 ||--o{ 주문상세 : "포함되다"
+    주문 ||--|{ 주문상세 : "구성된다"
 \`\`\`
 
-| 단계 | 이름 | 하는 일 | 비유 |
+이 단계에서는 속성·자료형·키 같은 디테일은 신경 쓰지 않고, **누가 무엇과 연결되는가**만 본다.
+
+### 2단계 — 논리적 모델 (속성·키·정규화)
+
+각 엔터티의 속성을 채우고 PK·FK 를 정한다. **DBMS 와 무관한 추상 모델**.
+
+\`\`\`mermaid
+erDiagram
+    회원 {
+        string 회원ID PK
+        string 이름
+        string 전화번호
+    }
+    상품 {
+        string 상품ID PK
+        string 상품명
+        int 가격
+    }
+    주문 {
+        int 주문번호 PK
+        string 회원ID FK
+        date 주문일
+    }
+    주문상세 {
+        int 주문번호 PK,FK
+        string 상품ID PK,FK
+        int 수량
+    }
+    회원 ||--o{ 주문 : ""
+    주문 ||--|{ 주문상세 : ""
+    상품 ||--o{ 주문상세 : ""
+\`\`\`
+
+이 단계에서 **정규화** (1NF → 2NF → 3NF) 도 함께 수행한다.
+
+### 3단계 — 물리적 모델 (실제 DBMS 구현)
+
+논리 모델을 실제 데이터베이스의 **테이블** 로 만든다. 자료형·인덱스·제약조건을 명시.
+
+\`\`\`sql
+CREATE TABLE MEMBER (
+    MEMBER_ID  VARCHAR2(10) PRIMARY KEY,
+    NAME       VARCHAR2(50) NOT NULL,
+    PHONE      VARCHAR2(20)
+);
+
+CREATE TABLE PRODUCT (
+    PROD_ID    VARCHAR2(10) PRIMARY KEY,
+    PROD_NAME  VARCHAR2(100) NOT NULL,
+    PRICE      NUMBER(10) NOT NULL
+);
+
+CREATE TABLE ORDERS (
+    ORDER_ID   NUMBER PRIMARY KEY,
+    MEMBER_ID  VARCHAR2(10) REFERENCES MEMBER(MEMBER_ID),
+    ORD_DATE   DATE DEFAULT SYSDATE
+);
+
+CREATE INDEX IDX_ORDERS_MEMBER ON ORDERS(MEMBER_ID);  -- 성능용 인덱스
+\`\`\`
+
+### 4단계 — 데이터베이스 (운영 중인 실제 데이터)
+
+만든 테이블에 데이터가 **차곡차곡 쌓인 상태**. 사용자가 SQL 로 조회·입력·수정.
+
+**MEMBER**
+
+| MEMBER_ID | NAME | PHONE |
+|---|---|---|
+| M01 | 김철수 | 010-1111 |
+| M02 | 이영희 | 010-2222 |
+
+**PRODUCT**
+
+| PROD_ID | PROD_NAME | PRICE |
+|---|---|---|
+| P01 | 사과 | 1,000 |
+| P02 | 배 | 2,000 |
+
+**ORDERS**
+
+| ORDER_ID | MEMBER_ID | ORD_DATE |
+|---|---|---|
+| 1001 | M01 | 2026-04-01 |
+| 1002 | M02 | 2026-04-05 |
+
+### 단계 정리
+
+| 단계 | 이름 | 결과물 | 비유 |
 |---|---|---|---|
-| 1 | 개념적 모델링 | 주요 엔터티·관계 도출 (큰 그림) | 손으로 그리는 스케치 |
-| 2 | 논리적 모델링 | 속성·관계·키 상세화 + **정규화** | 정식 건축 도면 |
-| 3 | 물리적 모델링 | 실제 DBMS에 맞춰 구체화 (인덱스·파티셔닝) | 시공 계획서 |
-
-\`\`\`mermaid
-flowchart LR
-    A[현실 세계<br/>업무·요구사항] --> B[개념적 모델<br/>핵심 엔터티·관계]
-    B --> C[논리적 모델<br/>속성·키·정규화]
-    C --> D[물리적 모델<br/>DBMS·인덱스·파티션]
-    D --> E[(Database)]
-\`\`\`
+| 1 | 개념적 모델링 | 핵심 엔터티·관계 ERD (큰 그림) | 손으로 그린 스케치 |
+| 2 | 논리적 모델링 | 속성·키 상세 ERD + **정규화** | 정식 건축 도면 |
+| 3 | 물리적 모델링 | DBMS 별 CREATE TABLE + 인덱스·파티션 | 시공 계획서 |
+| → | 운영 | 데이터가 쌓인 실제 데이터베이스 | 입주 완료된 건물 |
 
 ---
 
