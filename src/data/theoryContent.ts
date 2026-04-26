@@ -1783,12 +1783,12 @@ CREATE TABLE BOOK (
 
 ## SQL 명령어 분류
 
-\`\`\`mermaid
-flowchart TB
-    A[SQL] --> B[DDL<br/>정의어]
-    A --> C[DML<br/>조작어]
-    A --> D[DCL<br/>제어어]
-    A --> E[TCL<br/>트랜잭션 제어어]
+\`\`\`
+[ SQL ]
+  ├─ DDL  (Data Definition)    — 정의어:    CREATE / ALTER / DROP / TRUNCATE / RENAME
+  ├─ DML  (Data Manipulation)  — 조작어:    SELECT / INSERT / UPDATE / DELETE / MERGE
+  ├─ DCL  (Data Control)       — 제어어:    GRANT / REVOKE
+  └─ TCL  (Transaction Control) — 트랜잭션:  COMMIT / ROLLBACK / SAVEPOINT
 \`\`\`
 
 | 분류 | 풀이 | 명령어 | 비유 |
@@ -1806,11 +1806,11 @@ flowchart TB
 
 | 타입 | 의미 | 예 |
 |---|---|---|
-| CHAR(n) | 고정 길이 문자열 | CHAR(5) → '가나'__ (공백 채움) |
-| VARCHAR2(n) | 가변 길이 문자열 | '가나' (그대로) |
-| NUMBER(p, s) | 숫자(전체 p자리, 소수 s자리) | NUMBER(7, 2) |
-| DATE | 날짜+시간 | 2026-04-26 |
-| TIMESTAMP | 정밀 시간 | 마이크로초까지 |
+| CHAR(n) | **고정** 길이 문자열 — 모자라면 공백으로 채움 | CHAR(5) 에 'AB' 저장 → 'AB&nbsp;&nbsp;&nbsp;' (공백 3칸) |
+| VARCHAR2(n) | **가변** 길이 문자열 — 입력한 만큼만 저장 | VARCHAR2(5) 에 'AB' 저장 → 'AB' |
+| NUMBER(p, s) | 숫자 (전체 p자리, 소수 s자리) | NUMBER(7, 2) → 12345.67 |
+| DATE | 날짜+시간 | 2026-04-26 13:24:00 |
+| TIMESTAMP | 정밀 시간 (소수초까지) | 2026-04-26 13:24:00.123456 |
 
 ---
 
@@ -1895,6 +1895,16 @@ SELECT * FROM EMP WHERE SAL > 2000;
 | 한 열을 무엇이라 하는가 | Column, Attribute, Field |
 
 단골 함정: "INSERT/UPDATE/DELETE/SELECT 모두 DML이다"는 옳다. MERGE도 DML이다.
+
+---
+
+> **30초 시험 직전 정리**
+> · DDL: **CREATE / ALTER / DROP / TRUNCATE / RENAME** (자동 COMMIT, 롤백 불가)
+> · DML: **SELECT / INSERT / UPDATE / DELETE / MERGE**
+> · DCL: **GRANT / REVOKE** (권한)
+> · TCL: **COMMIT / ROLLBACK / SAVEPOINT** (트랜잭션)
+> · 함정: **TRUNCATE = DDL** (롤백 X), **DELETE = DML** (롤백 O)
+> · 행/열 동의어: Row=Record=Tuple / Column=Attribute=Field
 `,
   c212: `# 2-1-2. SELECT 문
 
@@ -2050,6 +2060,16 @@ SELECT USER FROM DUAL;       -- 접속 계정
 | \`SELECT * FROM DUAL\`의 결과 | 1행 1컬럼('X') |
 
 자주 출제: WHERE 절에서 SELECT 별칭을 쓰면 에러가 난다. 실행 순서상 WHERE가 먼저 처리되기 때문이다.
+
+---
+
+> **30초 시험 직전 정리**
+> · 작성: SELECT → FROM → WHERE → GROUP → HAVING → ORDER
+> · 실행: **FROM → WHERE → GROUP → HAVING → SELECT → ORDER (FWGHSO)**
+> · 별칭 사용: **ORDER BY 만 가능**, WHERE/GROUP/HAVING 은 불가 (SELECT 가 더 늦게 실행됨)
+> · DISTINCT = SELECT 절 전체에 적용 (여러 컬럼이면 컬럼 조합 단위로 중복 제거)
+> · Oracle 테이블 별칭 = AS 사용 **불가** / 컬럼 별칭 = AS 사용 **가능 (생략도 가능)**
+> · DUAL = Oracle 시스템 내장 1행 1컬럼 가짜 테이블 (계산·함수 테스트용)
 `,
   c213: `# 2-1-3. 함수(Function)
 
@@ -2068,16 +2088,18 @@ SELECT USER FROM DUAL;       -- 접속 계정
 
 ## [개념 도식화] 함수의 분류
 
-\`\`\`mermaid
-flowchart TB
-    A[SQL 함수] --> B[단일행 함수<br/>1행 → 1결과]
-    A --> C[다중행 함수<br/>여러 행 → 1결과<br/>=집계함수]
-    B --> B1[문자]
-    B --> B2[숫자]
-    B --> B3[날짜]
-    B --> B4[변환]
-    B --> B5[일반/NULL]
-    C --> C1[SUM, AVG, COUNT, MAX, MIN]
+\`\`\`
+[ SQL 함수 ]
+  │
+  ├─ 단일행 함수 (1행 → 1결과)
+  │    ├─ 문자        UPPER / SUBSTR / INSTR / LENGTH …
+  │    ├─ 숫자        ROUND / TRUNC / MOD / ABS …
+  │    ├─ 날짜        SYSDATE / ADD_MONTHS / MONTHS_BETWEEN …
+  │    ├─ 변환        TO_CHAR / TO_NUMBER / TO_DATE
+  │    └─ 일반/NULL   NVL / NVL2 / COALESCE / NULLIF / CASE / DECODE
+  │
+  └─ 다중행 함수 (여러 행 → 1결과 = 집계 함수)
+        SUM / AVG / COUNT / MAX / MIN
 \`\`\`
 
 ---
@@ -2133,12 +2155,13 @@ flowchart TB
 
 ## 변환 함수
 
-\`\`\`mermaid
-flowchart LR
-    A[숫자] -->|TO_CHAR| B[문자]
-    C[날짜] -->|TO_CHAR| B
-    B -->|TO_NUMBER| A
-    B -->|TO_DATE| C
+\`\`\`
+        TO_CHAR
+[숫자] ────────→ [문자] ←────────  [날짜]
+   ↑              │                  │
+   └─ TO_NUMBER ──┘                  │
+                  │                  │
+                  └──── TO_DATE ────→┘
 \`\`\`
 
 | 함수 | 변환 | 예 |
@@ -2243,6 +2266,18 @@ FROM    EMP;
 | 암시적 형변환 권장? | 명시적이 안전 |
 
 단골: COUNT(*) vs COUNT(컬럼) 차이를 묻는 문제. NULL 처리에 주의해야 한다.
+
+---
+
+> **30초 시험 직전 정리**
+> · 함수 = **단일행** (1행 → 1결과) vs **다중행 = 집계** (여러 행 → 1결과)
+> · SUBSTR 인덱스 = **1부터** 시작 (Oracle)
+> · LENGTH = 글자 수 / LENGTHB = 바이트 수 (한글 1자 = 3바이트)
+> · ROUND vs TRUNC = 반올림 vs 버림
+> · DECODE = **동등 비교만** / CASE = **모든 비교 (범위 가능)**
+> · NVL(A, B) / NVL2(A, B, C) / NULLIF(A, B) / COALESCE(A, B, ...)
+> · 집계 함수는 **NULL 무시** (단 COUNT(*) 만 NULL 포함)
+> · 명시적 형변환 (TO_*) 권장 — 암시적은 의도치 않은 결과 위험
 `,
   c214: `# 2-1-4. WHERE 절
 
@@ -2427,6 +2462,16 @@ SELECT * FROM EMP WHERE DEPT_ID = 'D1' AND SAL >= 3000;
 | \`_\`와 \`%\` 차이 | \`_\`은 1글자, \`%\`은 0개 이상 |
 
 단골 함정: \`WHERE A NOT IN (1, 2, NULL)\`은 항상 거짓이 되어 결과가 비어버린다.
+
+---
+
+> **30초 시험 직전 정리**
+> · BETWEEN A AND B = **A·B 양 끝 포함** (A ≤ x ≤ B)
+> · IN(a,b,c) = OR 의 단축형 / NOT IN + NULL = **항상 거짓** (결과 0건)
+> · LIKE: \`%\` = 0개 이상 / \`_\` = 정확히 1개. 자체 검색은 ESCAPE
+> · NULL 비교는 **IS NULL / IS NOT NULL** 만 가능 (\`= NULL\` 항상 거짓)
+> · 우선순위: 산술 > 연결(||) > 비교 > NOT > AND > OR
+> · 함정: \`A=1 OR B=2 AND C=3\` = \`A=1 OR (B=2 AND C=3)\` (AND 가 먼저)
 `,
   c215: `# 2-1-5. GROUP BY, HAVING 절
 
