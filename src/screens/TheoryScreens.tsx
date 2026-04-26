@@ -9,8 +9,20 @@ import { recordTheoryView } from '../lib/progress';
 import { AdSlot } from '../components/AdSlot';
 import { trackEvent } from '../lib/analytics';
 
-// marked 옵션 — GFM(테이블·체크박스), 줄바꿈, 매끈한 헤더
-marked.setOptions({ gfm: true, breaks: false });
+// marked 옵션 — GFM(테이블·체크박스), 줄바꿈 살림(TIP 박스의 · 항목들이 분리되도록)
+marked.setOptions({ gfm: true, breaks: true });
+
+// 섹션 라벨 → CSS 클래스 매핑
+function labelToClass(label) {
+  const t = label.replace(/\s/g, '');
+  if (t.includes('핵심 요약'.replace(/\s/g, ''))) return 'sec-summary';
+  if (t.includes('일상비유') || t.includes('비유')) return 'sec-analogy';
+  if (t.includes('개념도식화') || t.includes('도식화')) return 'sec-diagram';
+  if (t.includes('SQL실전') || t.includes('SQL')) return 'sec-sql';
+  if (t.includes('Before') || t.includes('After')) return 'sec-compare';
+  if (t.includes('시험출제포인트') || t.includes('시험')) return 'sec-exam';
+  return 'sec-other';
+}
 
 // ─────────────────────────────────────────────────────────────
 // 이론 목록 화면 (과목 → 서브섹션 → 챕터)
@@ -99,11 +111,33 @@ function buildToc(md) {
 
 function renderMd(md) {
   let i = 0;
-  // 각 h2 에 id 부여 (ToC 클릭용)
-  const html = marked.parse(md.replace(/^##\s+(.+)$/gm, (m, t) => {
+  // 1) 각 h2 에 id 부여 + 섹션 라벨 클래스 부여 (`## [핵심 요약] ...` 같은 헤더)
+  const preprocessed = md.replace(/^##\s+(.+)$/gm, (m, t) => {
     const id = 's' + i++;
+    const lm = t.match(/^\[(.+?)\]\s*(.*)$/);
+    if (lm) {
+      const label = lm[1].trim();
+      const rest = lm[2].trim();
+      const cls = labelToClass(label);
+      const restHtml = rest ? `<span class="label-rest">${rest}</span>` : '';
+      return `<h2 id="${id}" class="section-label ${cls}"><span class="label-tag">${label}</span>${restHtml}</h2>`;
+    }
     return `<h2 id="${id}">${t}</h2>`;
-  }));
+  });
+
+  let html = marked.parse(preprocessed);
+
+  // 2) 코드블록 — 언어 없는 코드블록(ASCII 도식)을 .diagram-card 로 래핑
+  html = html.replace(
+    /<pre><code(\s+class="language-[\w-]+")?>([\s\S]*?)<\/code><\/pre>/g,
+    (m, langClass, content) => {
+      if (!langClass) {
+        return `<div class="diagram-card"><pre>${content}</pre></div>`;
+      }
+      return m;
+    }
+  );
+
   return html;
 }
 
@@ -153,15 +187,26 @@ export const TheoryDetailScreen = ({ chapterId, onNavigate }) => {
       <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1fr) 280px', gap: 32 }} className="theory-detail-grid">
         {/* Main body */}
         <article>
-          <div style={{ display: 'flex', gap: 8, marginBottom: 10, alignItems: 'center' }}>
-            <Tag tone="green">{sub.code}</Tag>
-            <Tag tone="neutral">{ch.num}</Tag>
-            <span style={{ fontSize: 12, color: 'var(--fg-3)' }}>{sec.title}</span>
+          {/* 챕터 헤어로 — 양파 그린 그라데이션 카드 */}
+          <div style={{
+            background: 'linear-gradient(135deg, var(--point-050) 0%, var(--bg-card) 100%)',
+            border: '1px solid var(--point-100)',
+            borderRadius: 16,
+            padding: '24px 28px',
+            marginBottom: 28,
+            position: 'relative',
+            overflow: 'hidden',
+          }}>
+            <div style={{ display: 'flex', gap: 8, marginBottom: 12, alignItems: 'center', flexWrap: 'wrap' }}>
+              <Tag tone="green">{sub.code}</Tag>
+              <span style={{ fontSize: 12, fontWeight: 700, color: 'var(--point-600)', letterSpacing: '0.04em', fontFamily: 'var(--font-mono)' }}>{ch.num}</span>
+              <span style={{ fontSize: 12, color: 'var(--fg-3)' }}>· {sec.title}</span>
+            </div>
+            <h1 style={{ fontSize: 30, fontWeight: 800, color: 'var(--fg-1)', letterSpacing: '-0.02em', margin: '0 0 8px', lineHeight: 1.2 }}>
+              {ch.title}
+            </h1>
+            <p style={{ fontSize: 14.5, color: 'var(--fg-2)', margin: 0, lineHeight: 1.6 }}>{ch.oneLine}</p>
           </div>
-          <h1 style={{ fontSize: 32, fontWeight: 800, color: 'var(--fg-1)', letterSpacing: '-0.02em', margin: '0 0 8px', lineHeight: 1.2 }}>
-            {ch.title}
-          </h1>
-          <p style={{ fontSize: 15, color: 'var(--fg-3)', margin: '0 0 24px' }}>{ch.oneLine}</p>
 
           {/* 마크다운 본문 — .theory-md 가 디자인 시스템 적용 */}
           <div className="theory-md" dangerouslySetInnerHTML={{ __html: html }} />
