@@ -3377,10 +3377,14 @@ FROM    (서브쿼리)                 ← FROM 서브쿼리(인라인 뷰)
 WHERE   컬럼 = (서브쿼리);         ← WHERE 서브쿼리(대표적)
 \`\`\`
 
-\`\`\`mermaid
-flowchart TB
-    A[메인 쿼리] -->|값 필요| B[서브 쿼리]
-    B -->|값 반환| A
+\`\`\`
+[ 메인 쿼리 ]
+      │  ① 값 필요
+      ▼
+[ 서브 쿼리 ]
+      │  ② 값 반환
+      ▼
+[ 메인 쿼리 (계속) ]
 \`\`\`
 
 ---
@@ -3568,6 +3572,16 @@ WHERE  SAL > (SELECT AVG(SAL) FROM EMP WHERE DEPT_ID = E.DEPT_ID);
 | 연관 서브쿼리 특징 | 메인쿼리 컬럼 참조 |
 
 단골 함정: \`SAL > ANY(...)\`를 "모두보다 큰"으로 잘못 해석하는 보기. ANY=최소 기준, ALL=최대 기준이다.
+
+---
+
+> **30초 시험 직전 정리**
+> · 행수 분류: **단일행** (\`=\`,\`>\`,…) / **다중행** (IN, ANY, ALL, EXISTS) / **다중컬럼**
+> · 위치 분류: **스칼라** (SELECT) / **인라인뷰** (FROM) / **중첩** (WHERE)
+> · \`> ANY\` = **최솟값보다 크면** 통과 (헐거움) / \`> ALL\` = **최댓값보다 커야** 통과 (엄격)
+> · EXISTS = 존재 여부만 확인 (1건이라도 있으면 TRUE)
+> · 연관 서브쿼리 = 메인쿼리 컬럼 참조, **각 행마다 반복 실행** (성능 주의)
+> · 인라인뷰 = **별칭 필수** (FROM 절 서브쿼리)
 `,
   c222: `# 2-2-2. 집합 연산자(Set Operators)
 
@@ -3589,12 +3603,13 @@ WHERE  SAL > (SELECT AVG(SAL) FROM EMP WHERE DEPT_ID = E.DEPT_ID);
 
 ## [개념 도식화]
 
-\`\`\`mermaid
-flowchart LR
-    A1["A 합집합 B<br/>UNION"] --> A2["A ∪ B<br/>중복 제거"]
-    B1["A UNION ALL B"] --> B2["A + B<br/>중복 유지"]
-    C1["A INTERSECT B"] --> C2["A ∩ B<br/>교집합"]
-    D1["A MINUS B"] --> D2["A − B<br/>차집합"]
+\`\`\`
+A = { 김, 이, 박 }      B = { 이, 박, 최 }
+
+UNION       (A ∪ B, 중복 제거)  →  { 김, 이, 박, 최 }
+UNION ALL   (A + B, 중복 유지)  →  { 김, 이, 박, 이, 박, 최 }
+INTERSECT   (A ∩ B, 교집합)     →  { 이, 박 }
+MINUS       (A − B, 차집합)     →  { 김 }       (A 에만 있는 것)
 \`\`\`
 
 ---
@@ -3612,13 +3627,12 @@ flowchart LR
 
 ## 사용 조건
 
-\`\`\`mermaid
-flowchart TB
-    A[집합 연산자 사용 조건]
-    A --> B[① 컬럼 개수 동일]
-    A --> C[② 컬럼 데이터 타입 호환]
-    A --> D[③ 컬럼명은 첫 SELECT 기준]
-    A --> E[④ ORDER BY는 마지막에 한 번만]
+\`\`\`
+[ 집합 연산자 사용 4조건 ]
+  ① 양쪽 SELECT 의 컬럼 개수 동일
+  ② 같은 자리 컬럼은 데이터 타입 호환
+  ③ 결과의 컬럼명은 첫 SELECT 기준
+  ④ ORDER BY 는 맨 마지막에 한 번만
 \`\`\`
 
 | 조건 | 설명 |
@@ -3769,6 +3783,16 @@ UNION 시 1행만 남는다.
 | NULL의 처리 | NULL = NULL로 간주(중복) |
 
 단골 함정: 컬럼 데이터 타입이 다른데 합치려는 케이스는 에러가 난다.
+
+---
+
+> **30초 시험 직전 정리**
+> · UNION = **중복 제거** (정렬 발생, 느림) / UNION ALL = **중복 유지** (정렬 없음, 빠름)
+> · INTERSECT = 교집합 (중복 제거) / MINUS(Oracle) = EXCEPT(표준) = A − B (중복 제거)
+> · 사용 조건: **컬럼 개수 동일** + **타입 호환** + 컬럼명은 첫 SELECT
+> · ORDER BY = **맨 마지막에 한 번만**
+> · NULL 처리 = \`NULL = NULL\` 로 간주 (중복 제거 대상)
+> · 중복 없다고 확신 → **UNION ALL** 로 성능 ↑
 `,
   c223: `# 2-2-3. 그룹 함수(Group Functions)
 
@@ -3791,11 +3815,11 @@ UNION 시 1행만 남는다.
 
 ## [개념 도식화] 그룹 함수의 종류
 
-\`\`\`mermaid
-flowchart TB
-    A[그룹 함수] --> B[ROLLUP<br/>계층적 소계]
-    A --> C[CUBE<br/>모든 조합]
-    A --> D[GROUPING SETS<br/>지정한 조합만]
+\`\`\`
+[ 그룹 함수 (확장 GROUP BY) ]
+  ├─ ROLLUP(A, B)           — 계층적 소계: (A,B) → (A) → ()             결과 N+1 단계
+  ├─ CUBE(A, B)             — 모든 조합:   (A,B) → (A) → (B) → ()        결과 2^N 단계
+  └─ GROUPING SETS(...)     — 지정한 조합만 (가장 유연)
 \`\`\`
 
 | 함수 | 의미 | 비유 |
@@ -3958,6 +3982,16 @@ GROUP BY ROLLUP(DEPT_ID, JOB);
 | 소계 NULL과 데이터 NULL 구분 | GROUPING 함수 사용 |
 
 단골 함정: ROLLUP(A, B, C)의 단계 수는 N+1 = 4단계, CUBE는 2^N = 8단계.
+
+---
+
+> **30초 시험 직전 정리**
+> · ROLLUP(A, B) = (A,B) → (A) → () — **N+1 단계** (계층적 소계)
+> · CUBE(A, B) = (A,B) → (A) → (B) → () — **2^N 단계** (모든 조합)
+> · GROUPING SETS = 원하는 조합만 골라 (유연)
+> · GROUPING(컬럼) = **1 이면 소계 행** / 0 이면 일반 행
+> · 결과의 NULL 이 데이터인지 소계인지 → **GROUPING 함수로 구분**
+> · "ROLLUP 시작 위치만 다름" 함정 — \`ROLLUP(A,B)\` ≠ \`ROLLUP(B,A)\` (단계 다름)
 `,
   c224: `# 2-2-4. 윈도우 함수(Window Function)
 
@@ -3986,9 +4020,8 @@ NAME  SAL                    NAME  SAL  RANK  AVG
                             (행 그대로 유지)
 \`\`\`
 
-\`\`\`mermaid
-flowchart LR
-    A[원본 행] --> B[OVER 절로<br/>윈도우 정의] --> C[행 옆에<br/>분석값 추가]
+\`\`\`
+[원본 행]  ──OVER 절로 윈도우 정의──→  [행 그대로 유지 + 옆에 분석값 추가]
 \`\`\`
 
 ---
@@ -4169,6 +4202,17 @@ FROM    EMP;
 | 윈도우 함수 결과 행 수 | 원본과 동일 |
 
 단골 함정: \`RANK() OVER(...)\` 결과를 WHERE에 직접 쓸 수 없다. 서브쿼리/인라인뷰로 감싸야 한다.
+
+---
+
+> **30초 시험 직전 정리**
+> · 결과 행 수 = **원본과 동일** (GROUP BY 처럼 합치지 않음)
+> · 순위: **RANK** (동점 후 건너뜀: 1,1,3) / **DENSE_RANK** (연속: 1,1,2) / **ROW_NUMBER** (모두 다름)
+> · 문법: \`함수() OVER (PARTITION BY ... ORDER BY ... ROWS BETWEEN ...)\`
+> · PARTITION BY 생략 = **전체를 한 그룹**
+> · LAG = 앞 / LEAD = 뒤 / FIRST_VALUE / LAST_VALUE / NTILE(N)
+> · 윈도우 결과를 **WHERE 에서 직접 사용 불가** → 서브쿼리·인라인뷰로 감쌈
+> · 누적합 = \`SUM(...) OVER (ORDER BY ... ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW)\`
 `,
   c225: `# 2-2-5. Top N 쿼리
 
