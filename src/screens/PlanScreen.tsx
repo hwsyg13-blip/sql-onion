@@ -34,12 +34,16 @@ export const PLAN_DATA = [
 
 export const PlanScreen = ({onNavigate, planViz, setPlanViz}) => {
   const { progress, stats } = useProgress();
-  // 각 day 에 done/current 플래그 주입
-  const planWithStatus = React.useMemo(() => PLAN_DATA.map(d => ({
-    ...d,
-    done: isPlanDayDone(d, progress, stats),
-    current: d.day === stats.dayProgress,
-  })), [progress, stats]);
+  // 각 day 에 done/current 플래그 주입.
+  // done 과 current 가 동시에 참이면 "완료"만 보여줌 (Day 1 을 봤는데 "진행 중" 과 "완료" 가 같이 뜨던 시각적 불일치 제거).
+  const planWithStatus = React.useMemo(() => PLAN_DATA.map(d => {
+    const done = isPlanDayDone(d, progress, stats);
+    return {
+      ...d,
+      done,
+      current: !done && d.day === stats.dayProgress,
+    };
+  }), [progress, stats]);
   // 현재 진도가 속한 주차로 시작
   const initialWeek = Math.min(3, Math.ceil(stats.dayProgress / 7));
   const [week, setWeek] = React.useState(initialWeek);

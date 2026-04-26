@@ -29,6 +29,35 @@ const CAPTION_STYLE: React.CSSProperties = {
   marginBottom: 6,
 };
 
+// 경량 인라인 마크다운 — **bold** 와 `code` 만 지원. HTML 이 아닌 React 노드로 반환해 XSS 안전.
+// 원본 텍스트에 별표나 백틱이 원치 않게 들어가 있을 때만 강조로 바뀌고, 개행·공백은 그대로 보존.
+export function renderInlineMD(s: any): React.ReactNode {
+  if (s == null) return s;
+  const text = String(s);
+  const regex = /(\*\*[^*\n][^*\n]*?\*\*|`[^`\n]+`)/g;
+  const nodes: React.ReactNode[] = [];
+  let last = 0;
+  let key = 0;
+  let m: RegExpExecArray | null;
+  while ((m = regex.exec(text)) !== null) {
+    if (m.index > last) nodes.push(text.slice(last, m.index));
+    const t = m[0];
+    if (t.startsWith('**')) {
+      nodes.push(<strong key={key++} style={{ color: 'var(--fg-1)', fontWeight: 700 }}>{t.slice(2, -2)}</strong>);
+    } else {
+      nodes.push(
+        <code key={key++} style={{
+          background: 'var(--bg-code)', padding: '1px 5px', borderRadius: 4,
+          fontFamily: 'var(--font-mono)', fontSize: '0.92em',
+        }}>{t.slice(1, -1)}</code>
+      );
+    }
+    last = m.index + t.length;
+  }
+  if (last < text.length) nodes.push(text.slice(last));
+  return nodes.length === 1 ? nodes[0] : nodes;
+}
+
 function RefText({ heading, content }: any) {
   return (
     <div>
@@ -36,7 +65,7 @@ function RefText({ heading, content }: any) {
       <p style={{
         margin: 0, fontSize: 14.5, lineHeight: 1.7, color: 'var(--fg-2)',
         whiteSpace: 'pre-wrap',
-      }}>{content}</p>
+      }}>{renderInlineMD(content)}</p>
     </div>
   );
 }

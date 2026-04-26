@@ -63,6 +63,27 @@ export const App = () => {
     }
   }, [tweaks.theme, tweaks.accent]);
 
+  // 라우트별 <title> 갱신 — 탭 구분·SEO·공유 미리보기 개선
+  React.useEffect(() => {
+    const base = 'SQL양파';
+    const names: Record<string, string> = {
+      home: `${base} — SQLD 3주 합격 루틴`,
+      login: `로그인 · ${base}`,
+      pricing: `요금제 · ${base}`,
+      subscribe: `결제 · ${base}`,
+      plan: `3주 공부계획 · ${base}`,
+      theory: `이론 · ${base}`,
+      'theory-detail': `이론 상세 · ${base}`,
+      mock: `모의고사 · ${base}`,
+      endless: `랜덤 퀴즈 · ${base}`,
+      'mock-exam': `AI 모의고사 진행 · ${base}`,
+      exams: `기출문제 · ${base}`,
+      cbt: `CBT 진행 · ${base}`,
+      'cbt-result': `CBT 결과 · ${base}`,
+    };
+    document.title = names[route] || `${base} — SQLD 3주 합격 루틴`;
+  }, [route]);
+
   const navigate = (to: string, p: any = null) => {
     // 베타 모드: 로그인/결제 없이 모든 화면 자유 접근
     if (BETA_NO_AUTH && (to === 'login' || to === 'pricing' || to === 'subscribe')) {

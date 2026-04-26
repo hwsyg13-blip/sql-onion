@@ -270,8 +270,8 @@ export const ROUND_60: QuizQuestion[] = [
       "`(사번 = 10005) OR (회원번호 <> 2003)`",
       "`NOT ((사번 = 10005) AND (회원번호 = 2003))`"
     ],
-    "correctIndex": 0,
-    "explanation": "원본 기출의 정답 표기를 그대로 보존한다.",
+    "correctIndex": 1,
+    "explanation": "튜플 IN 절 `(A, B) IN ((x, y))` 는 `(A = x AND B = y)` 와 동등하다. 두 컬럼이 동시에 매칭되어야 한다는 뜻이므로 OR 가 아닌 AND. 같은 시험의 다른 회차(예: 51회 Q32)에서도 동일한 정답 패턴을 사용한다.",
     "_source": "authored"
   },
   {

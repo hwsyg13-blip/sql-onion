@@ -6,6 +6,7 @@ import { UserMenu } from '../screens/LoginScreen';
 
 export const TopNav = ({route, onNavigate, dark, onToggleDark, user, onLogout, betaNoAuth = false}: any) => {
   const links = [
+    {id: "home",   label: "홈"},
     {id: "plan",   label: "3주 공부계획"},
     {id: "theory", label: "이론"},
     {id: "mock",   label: "모의고사"},
@@ -13,6 +14,7 @@ export const TopNav = ({route, onNavigate, dark, onToggleDark, user, onLogout, b
     ...(betaNoAuth ? [] : [{id: "pricing", label: "요금제"}]),
   ];
   const isActive = (id: string) => {
+    if (id === "home" && route === "home") return true;
     if (id === "theory" && (route === "theory" || route === "theory-detail")) return true;
     if (id === "exams" && (route === "exams" || route === "cbt" || route === "cbt-result")) return true;
     if (id === "mock" && (route === "mock" || route === "mock-exam" || route === "endless")) return true;
@@ -27,11 +29,11 @@ export const TopNav = ({route, onNavigate, dark, onToggleDark, user, onLogout, b
       display: "flex", alignItems: "center", padding: "0 28px", gap: 28,
       position: "sticky", top: 0, zIndex: 50,
     }}>
-      <button onClick={() => onNavigate("home")} style={{
+      <button onClick={() => onNavigate("home")} aria-label="SQL양파 홈으로" style={{
         background: "none", border: 0, cursor: "pointer", padding: 0,
         display: "inline-flex", alignItems: "center",
       }}>
-        <img src="/assets/logo.svg" height="28" alt="SQL양파"/>
+        <img src={dark ? "/assets/logo-dark.svg" : "/assets/logo.svg"} height="28" alt="SQL양파"/>
       </button>
       <nav style={{display: "flex", gap: 24, marginLeft: 12}} className="topnav-links">
         {links.map(l => {
@@ -59,7 +61,11 @@ export const TopNav = ({route, onNavigate, dark, onToggleDark, user, onLogout, b
           borderRadius: 10, color: "var(--fg-2)", cursor: "pointer",
         }}>{dark ? <Ic.Sun/> : <Ic.Moon/>}</button>
         {betaNoAuth
-          ? <span style={{fontSize:11,color:"var(--fg-3)",padding:"6px 10px",background:"var(--bg-muted)",borderRadius:999,fontWeight:600}}>BETA</span>
+          ? <span
+              title="베타 버전 — 사용자 피드백을 받으며 다듬는 중이에요 🧅"
+              aria-label="베타 버전"
+              style={{fontSize:11,color:"var(--fg-3)",padding:"6px 10px",background:"var(--bg-muted)",borderRadius:999,fontWeight:600,cursor:"help"}}
+            >BETA</span>
           : user
             ? <UserMenu user={user} onLogout={onLogout} onNavigate={onNavigate}/>
             : <Btn size="sm" variant="ghost" icon={<Ic.User size={16}/>} onClick={() => onNavigate("login")}>로그인</Btn>

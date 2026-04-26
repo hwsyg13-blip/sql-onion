@@ -3,6 +3,7 @@ import React from 'react';
 import { Btn, Tag, Ic, CodeBlock, Mascot, MascotGuide, OnionMark, Progress, Divider, highlightSQL } from '../components/Atoms';
 import { QUIZ_BANK, EXAM_SETS } from '../data/quizBank';
 import { QuestionBody } from './MockScreens';
+import { renderInlineMD } from '../components/QuestionReferences';
 import { AdSlot } from '../components/AdSlot';
 import { recordExamComplete, recordQuizAttempt } from '../lib/progress';
 
@@ -114,13 +115,42 @@ export const CBTExam = ({examId = "round-60", onFinish, onNavigate, mockMode = f
   const [answers, setAnswers] = React.useState(() => Array(totalQ).fill(null));
   const [flags, setFlags] = React.useState(() => new Set());
   const [remaining, setRemaining] = React.useState(90*60); // 90 min (used in mock mode)
+  const [elapsed, setElapsed] = React.useState(0);        // 기출 모드용 경과 시간 (초)
   const [submitConfirm, setSubmitConfirm] = React.useState(false);
 
   React.useEffect(() => {
-    if (!mockMode) return;
-    const t = setInterval(() => setRemaining(r => Math.max(0, r-1)), 1000);
+    if (mockMode) {
+      const t = setInterval(() => setRemaining(r => Math.max(0, r-1)), 1000);
+      return () => clearInterval(t);
+    }
+    // 기출 모드: 경과 시간만 카운트 (제한 없음)
+    const t = setInterval(() => setElapsed(e => e + 1), 1000);
     return () => clearInterval(t);
   }, [mockMode]);
+
+  // 키보드 단축키 — 숫자 1~4 답 선택, 화살표 이동, F/B 체크 토글
+  React.useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      if (submitConfirm) return;
+      const tag = (e.target as HTMLElement)?.tagName;
+      if (tag === 'INPUT' || tag === 'TEXTAREA') return;
+      if (e.key >= '1' && e.key <= '4') {
+        e.preventDefault();
+        setAnswers(a => { const n = [...a]; n[idx] = Number(e.key) - 1; return n; });
+      } else if (e.key === 'ArrowRight') {
+        e.preventDefault();
+        setIdx(i => Math.min(totalQ - 1, i + 1));
+      } else if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        setIdx(i => Math.max(0, i - 1));
+      } else if (e.key === 'f' || e.key === 'F') {
+        e.preventDefault();
+        setFlags(s => { const n = new Set(s); n.has(idx) ? n.delete(idx) : n.add(idx); return n; });
+      }
+    };
+    window.addEventListener('keydown', handler);
+    return () => window.removeEventListener('keydown', handler);
+  }, [idx, submitConfirm, totalQ]);
 
   const q = questions[idx];
   const answered = answers.filter(a=>a!=null).length;
@@ -158,6 +188,8 @@ export const CBTExam = ({examId = "round-60", onFinish, onNavigate, mockMode = f
 
   const mins = Math.floor(remaining/60), secs = remaining%60;
   const timeStr = `${String(mins).padStart(2,"0")}:${String(secs).padStart(2,"0")}`;
+  const elapMin = Math.floor(elapsed/60), elapSec = elapsed%60;
+  const elapsedStr = `${String(elapMin).padStart(2,"0")}:${String(elapSec).padStart(2,"0")}`;
 
   return (
     <div style={{background:"var(--bg-page)",minHeight:"calc(100vh - 64px)"}}>
@@ -172,20 +204,39 @@ export const CBTExam = ({examId = "round-60", onFinish, onNavigate, mockMode = f
           <span style={{fontSize:13,color:"var(--fg-3)"}}>CBT · 50문항</span>
         </div>
         <div style={{marginLeft:"auto",display:"flex",alignItems:"center",gap:16,flexWrap:"wrap"}}>
-          {mockMode && (
-            <div style={{
-              display:"inline-flex",alignItems:"center",gap:6,padding:"6px 12px",
-              background: remaining < 300 ? "var(--wrong-bg)" : "var(--point-050)",
-              border:`1px solid ${remaining < 300 ? "var(--wrong-border)" : "var(--point-100)"}`,
-              borderRadius:8,fontFamily:"var(--font-mono)",fontWeight:700,
-              color: remaining < 300 ? "var(--wrong-fg)" : "var(--point-600)",
-              fontSize:15,
-            }}>
+          {mockMode ? (
+            <div
+              aria-label={`남은 시간 ${mins}분 ${secs}초`}
+              title="제한 시간 — 0이 되면 자동 제출돼요"
+              style={{
+                display:"inline-flex",alignItems:"center",gap:6,padding:"6px 12px",
+                background: remaining < 300 ? "var(--wrong-bg)" : "var(--point-050)",
+                border:`1px solid ${remaining < 300 ? "var(--wrong-border)" : "var(--point-100)"}`,
+                borderRadius:8,fontFamily:"var(--font-mono)",fontWeight:700,
+                color: remaining < 300 ? "var(--wrong-fg)" : "var(--point-600)",
+                fontSize:15,
+              }}>
               <Ic.Clock size={14}/> {timeStr}
+            </div>
+          ) : (
+            <div
+              aria-label={`경과 시간 ${elapMin}분 ${elapSec}초`}
+              title="경과 시간 — 기출 모드는 시간 제한이 없어요. 페이스 파악용"
+              style={{
+                display:"inline-flex",alignItems:"center",gap:6,padding:"6px 12px",
+                background:"var(--bg-muted)",border:"1px solid var(--border-subtle)",
+                borderRadius:8,fontFamily:"var(--font-mono)",fontWeight:600,
+                color:"var(--fg-3)",fontSize:14,
+              }}>
+              <Ic.Clock size={14}/> {elapsedStr}
             </div>
           )}
           <div style={{fontSize:13,color:"var(--fg-3)"}}>답안 <strong style={{color:"var(--fg-1)",fontFamily:"var(--font-mono)"}}>{answered}</strong> / {totalQ}</div>
-          <Btn size="sm" variant="ghost" icon={<Ic.Save size={14}/>} onClick={()=>onNavigate("home")}>중도 저장</Btn>
+          <span
+            title="단축키: 1~4 답 선택 · ← → 이동 · F 체크 토글"
+            aria-hidden="true"
+            style={{fontSize:11,color:"var(--fg-4)",padding:"4px 8px",border:"1px dashed var(--border-subtle)",borderRadius:6,fontFamily:"var(--font-mono)",cursor:"help"}}
+          >⌨ 1–4 · ← →</span>
           <Btn size="sm" variant="primary" onClick={()=>setSubmitConfirm(true)}>제출하기</Btn>
         </div>
       </div>
@@ -211,24 +262,33 @@ export const CBTExam = ({examId = "round-60", onFinish, onNavigate, mockMode = f
               <Tag tone="green" size="sm">{q.subject}</Tag>
               <Tag tone="neutral" size="sm">문항 {idx+1}</Tag>
             </div>
-            <ol style={{listStyle:"none",padding:0,margin:"18px 0 0",display:"flex",flexDirection:"column",gap:10}}>
+            <ol
+              role="radiogroup"
+              aria-label={`문항 ${idx+1} 보기`}
+              style={{listStyle:"none",padding:0,margin:"18px 0 0",display:"flex",flexDirection:"column",gap:10}}
+            >
               {q.options.map((opt, i) => {
                 const sel = answers[idx] === i;
                 let bg="var(--bg-card)", br="1px solid var(--border-default)", badgeBg="var(--bg-muted)", badgeFg="var(--fg-3)";
                 if (sel) { bg="var(--point-100)"; br="2px solid var(--point-600)"; badgeBg="var(--point-600)"; badgeFg="#fff"; }
                 return (
                   <li key={i}>
-                    <button onClick={()=>pick(i)} style={{
-                      width:"100%",textAlign:"left",display:"flex",gap:12,padding:"14px 16px",
-                      background:bg,border:br,borderRadius:12,alignItems:"flex-start",
-                      cursor:"pointer",fontFamily:"inherit",
-                    }}>
-                      <span style={{
+                    <button
+                      onClick={()=>pick(i)}
+                      role="radio"
+                      aria-checked={sel}
+                      aria-label={`${i+1}번 선택. ${opt}`}
+                      style={{
+                        width:"100%",textAlign:"left",display:"flex",gap:12,padding:"14px 16px",
+                        background:bg,border:br,borderRadius:12,alignItems:"flex-start",
+                        cursor:"pointer",fontFamily:"inherit",
+                      }}>
+                      <span aria-hidden="true" style={{
                         width:32,height:32,borderRadius:999,background:badgeBg,color:badgeFg,flexShrink:0,
                         fontSize:16,fontWeight:700,fontFamily:"var(--font-mono)",
                         display:"inline-flex",alignItems:"center",justifyContent:"center",marginTop:1,
                       }}>{i+1}</span>
-                      <span style={{fontSize:14.5,color:"var(--fg-2)",lineHeight:1.65}}>{opt}</span>
+                      <span style={{fontSize:14.5,color:"var(--fg-2)",lineHeight:1.65}}>{renderInlineMD(opt)}</span>
                     </button>
                   </li>
                 );
@@ -294,20 +354,26 @@ export const CBTExam = ({examId = "round-60", onFinish, onNavigate, mockMode = f
 };
 
 export const OMRGrid = ({start, end, answers, flags, current, onJump}) => (
-  <div style={{display:"grid",gridTemplateColumns:"repeat(5, 1fr)",gap:4}}>
+  <div role="grid" style={{display:"grid",gridTemplateColumns:"repeat(5, 1fr)",gap:4}}>
     {Array.from({length: end-start}).map((_, i) => {
       const qi = start + i;
       const a = answers[qi];
       const flagged = flags.has(qi);
       const isCurrent = qi === current;
+      const status = a!=null ? `${a+1}번 응답` : flagged ? '체크 · 미응답' : '미응답';
       return (
-        <button key={qi} onClick={()=>onJump(qi)} style={{
-          display:"flex",flexDirection:"column",alignItems:"center",gap:2,
-          padding:"6px 0",background: flagged ? "var(--wrong-bg)" : "var(--bg-card)",
-          border: isCurrent ? "2px solid var(--point-600)" : flagged ? "1px solid var(--wrong-border)" : "1px solid var(--border-default)",
-          borderRadius:6,cursor:"pointer",fontFamily:"inherit",
-          position:"relative",
-        }}>
+        <button
+          key={qi}
+          onClick={()=>onJump(qi)}
+          aria-label={`문항 ${qi+1}, ${status}${isCurrent ? ', 현재' : ''}`}
+          aria-current={isCurrent ? 'true' : undefined}
+          style={{
+            display:"flex",flexDirection:"column",alignItems:"center",gap:2,
+            padding:"6px 0",background: flagged ? "var(--wrong-bg)" : "var(--bg-card)",
+            border: isCurrent ? "2px solid var(--point-600)" : flagged ? "1px solid var(--wrong-border)" : "1px solid var(--border-default)",
+            borderRadius:6,cursor:"pointer",fontFamily:"inherit",
+            position:"relative",
+          }}>
           <span style={{fontSize:10,color:"var(--fg-3)",fontFamily:"var(--font-mono)"}}>{qi+1}</span>
           <span style={{
             fontSize:12,fontWeight:700,fontFamily:"var(--font-mono)",
