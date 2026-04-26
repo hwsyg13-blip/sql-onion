@@ -2495,17 +2495,10 @@ WHERE는 영수증 한 장 한 장을 거르고, HAVING은 묶어 놓은 그룹�
 
 \`\`\`
 원본 행 ──[WHERE]──→ 거른 행 ──[GROUP BY]──→ 그룹들 ──[HAVING]──→ 최종 그룹
-   행 단위 필터          그룹화          그룹 단위 필터
+   행 단위 필터          그룹화                  그룹 단위 필터
 \`\`\`
 
-\`\`\`mermaid
-flowchart LR
-    A[원본] --> B[WHERE<br/>행 필터]
-    B --> C[GROUP BY<br/>그룹화]
-    C --> D[HAVING<br/>그룹 필터]
-    D --> E[SELECT]
-    E --> F[ORDER BY]
-\`\`\`
+실행 순서: **FROM → WHERE → GROUP BY → HAVING → SELECT → ORDER BY**
 
 ---
 
@@ -2656,6 +2649,15 @@ GROUP BY DEPT_ID, JOB;
 | GROUP BY (A, B) 결과 행 수 | A, B 조합 개수 |
 
 단골 함정: SELECT에 그룹화되지 않은 컬럼이 끼어 있는 쿼리를 에러로 판별하라는 문제.
+
+---
+
+> **30초 시험 직전 정리**
+> · WHERE = **행 단위 필터** / HAVING = **그룹 단위 필터** (실행 순서상 GROUP BY 후 적용)
+> · WHERE 에 집계 함수 = **불가** / HAVING 에 집계 함수 = **가능**
+> · GROUP BY 에 없는 일반 컬럼을 SELECT 에 그대로 사용 = **불가**
+> · GROUP BY 없이 HAVING 단독 = **가능** (전체를 1개 그룹으로 봄)
+> · 결과 행 수 = GROUP BY 컬럼 조합의 개수
 `,
   c216: `# 2-1-6. ORDER BY 절
 
@@ -2685,9 +2687,8 @@ HAVING  ...
 ORDER BY ...   ← 항상 맨 마지막
 \`\`\`
 
-\`\`\`mermaid
-flowchart LR
-    A[정리 안 된 결과] --> B[ORDER BY] --> C[정렬된 결과]
+\`\`\`
+[정리 안 된 결과]  ──ORDER BY──→  [정렬된 결과]
 \`\`\`
 
 ---
@@ -2847,6 +2848,16 @@ ORDER BY가 마지막이라 별칭과 컬럼번호 사용이 가능하다.
 | 집합연산자(UNION) 후 ORDER BY 위치 | 맨 마지막에 한 번만 |
 
 단골 함정: 문자형 컬럼에 숫자값이 들어 있을 때 정렬 순서. 예) '1', '10', '2'를 정렬하면 사전순으로 '1', '10', '2'가 된다.
+
+---
+
+> **30초 시험 직전 정리**
+> · 기본값 = **ASC** (오름차순). DESC 명시 필수
+> · ORDER BY 에는 **컬럼명 / 별칭 / 컬럼 번호** 모두 사용 가능 (가장 마지막 실행이라)
+> · \`ORDER BY DEPT, SAL DESC\` = DEPT ASC + SAL DESC (정렬 옵션은 컬럼별 개별 적용)
+> · NULL 위치: Oracle ASC = **마지막** / MS-SQL ASC = **처음**. 명시는 \`NULLS FIRST/LAST\`
+> · 문자형 정렬 = **사전순** ('1', '10', '2' 순). 숫자 정렬 원하면 TO_NUMBER 후
+> · UNION 등 집합연산 후 ORDER BY = **맨 마지막에 한 번만**
 `,
   c217: `# 2-1-7. 조인(JOIN)
 
@@ -2880,14 +2891,13 @@ ORDER BY가 마지막이라 별칭과 컬럼번호 사용이 가능하다.
 
 ## 조인의 종류
 
-\`\`\`mermaid
-flowchart TB
-    A[조인]
-    A --> B[EQUI JOIN<br/>등가 조인]
-    A --> C[Non-EQUI JOIN<br/>비등가 조인]
-    A --> D[SELF JOIN<br/>자기 자신과]
-    A --> E[OUTER JOIN<br/>한쪽 다 포함]
-    A --> F[CROSS JOIN<br/>모든 조합]
+\`\`\`
+[ 조인 ]
+  ├─ EQUI JOIN       — 등가 조인 (\`=\` 으로 연결, 가장 흔함)
+  ├─ Non-EQUI JOIN   — 비등가 조인 (BETWEEN / >, < 등)
+  ├─ SELF JOIN       — 자기 자신과 조인 (사원-매니저 같은 테이블 내 관계)
+  ├─ OUTER JOIN      — 한쪽 다 포함 (LEFT / RIGHT / FULL)
+  └─ CROSS JOIN      — 모든 조합 (카티션 곱)
 \`\`\`
 
 | 종류 | 의미 | 예 |
@@ -2958,11 +2968,10 @@ WHERE   E.MGR_ID = M.EMP_ID;
 
 ## OUTER JOIN — 한쪽 다 포함
 
-\`\`\`mermaid
-flowchart LR
-    A1["A: 1, 2, 3"] -->|LEFT| C1["1, 2, 3<br/>(B에 없으면 NULL)"]
-    A2["A: 1, 2, 3"] -->|RIGHT| C2["B 다, A 매칭"]
-    A3["A, B 양쪽"] -->|FULL| C3["둘 다 포함"]
+\`\`\`
+LEFT  OUTER : A 모두 + 매칭되는 B    (A 에 없으면 결과에서 빠짐, B 에 없으면 NULL)
+RIGHT OUTER : B 모두 + 매칭되는 A    (B 에 없으면 결과에서 빠짐, A 에 없으면 NULL)
+FULL  OUTER : A·B 모두                (한쪽이라도 있으면 결과에 포함, 없는 쪽은 NULL)
 \`\`\`
 
 \`\`\`sql
@@ -3084,6 +3093,16 @@ FROM   MEMBER M LEFT JOIN ORDERS O ON M.MEMBER_ID = O.MEMBER_ID;
 | INNER vs OUTER 차이 | OUTER는 매칭 안 되는 행도 NULL과 함께 포함 |
 
 단골 함정: Oracle의 \`(+)\` 위치는 NULL을 채울 쪽(없을 수 있는 쪽)에 붙인다.
+
+---
+
+> **30초 시험 직전 정리**
+> · 5종류: **EQUI / Non-EQUI / SELF / OUTER / CROSS**
+> · 조인 조건 누락 = **카티션 곱** (행 수 폭발: A행 × B행)
+> · N개 테이블 조인 = 조인 조건 **최소 N-1 개**
+> · SELF 조인 = **별칭 필수** (같은 테이블을 두 번 사용)
+> · Oracle \`(+)\` 표기 = **NULL 채울 쪽** (없을 수 있는 쪽)에 붙임
+> · OUTER JOIN 추가 조건 = **ON 절에** (WHERE 두면 NULL 행 빠져 INNER 와 같아짐)
 `,
   c218: `# 2-1-8. 표준 조인 (ANSI Standard Join)
 
@@ -3100,15 +3119,15 @@ Oracle 전통 방식(\`,\` 와 \`WHERE\`)이 사투리라면, 표준 조인(\`JO
 
 ## [개념 도식화] 표준 조인의 종류
 
-\`\`\`mermaid
-flowchart TB
-    A[표준 조인] --> B[INNER JOIN]
-    A --> C[LEFT OUTER]
-    A --> D[RIGHT OUTER]
-    A --> E[FULL OUTER]
-    A --> F[CROSS JOIN]
-    A --> G[NATURAL JOIN]
-    A --> H[USING 절]
+\`\`\`
+[ 표준 조인 (ANSI) ]
+  ├─ INNER JOIN        — 양쪽 매칭만 (INNER 키워드 생략 가능)
+  ├─ LEFT OUTER JOIN   — 왼쪽 모두 + 매칭되는 오른쪽
+  ├─ RIGHT OUTER JOIN  — 오른쪽 모두 + 매칭되는 왼쪽
+  ├─ FULL OUTER JOIN   — 양쪽 모두 (없는 쪽은 NULL)
+  ├─ CROSS JOIN        — 모든 조합 (조인 조건 없음)
+  ├─ NATURAL JOIN      — 같은 이름 컬럼 자동 매칭
+  └─ USING (컬럼)      — 명시한 같은 이름 컬럼만 매칭
 \`\`\`
 
 ---
@@ -3321,6 +3340,16 @@ FROM   MEMBER M LEFT JOIN ORDERS O
 | CROSS JOIN 행수 | A × B |
 
 단골 함정: LEFT JOIN인데 WHERE에 오른쪽 조건을 거는 케이스. 결과적으로 INNER JOIN과 같아진다.
+
+---
+
+> **30초 시험 직전 정리**
+> · \`JOIN ... ON\` = 표준 ANSI 문법 (어느 DBMS 든 통함)
+> · INNER 키워드 생략 가능 / OUTER 키워드 생략 가능 (\`LEFT JOIN\` = \`LEFT OUTER JOIN\`)
+> · NATURAL JOIN = 같은 이름 컬럼 **자동 전부** 매칭. 별칭 사용 **불가**
+> · USING (컬럼) = **지정한 컬럼만** 매칭. USING 컬럼에 테이블 별칭 **불가**
+> · OUTER JOIN 추가 조건은 반드시 **ON** 에 (WHERE 두면 INNER 효과)
+> · 결과 행: INNER ≤ LEFT/RIGHT ≤ FULL, CROSS = A × B
 `,
   c221: `# 2-2-1. 서브쿼리(Sub Query)
 
