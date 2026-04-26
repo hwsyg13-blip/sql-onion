@@ -5087,13 +5087,13 @@ REGEXP_LIKE('ABC', 'abc', 'i')   -- 대소문자 무시
 
 ## [개념 도식화] DML의 분류
 
-\`\`\`mermaid
-flowchart TB
-    A[DML] --> B[INSERT<br/>입력]
-    A --> C[UPDATE<br/>수정]
-    A --> D[DELETE<br/>삭제]
-    A --> E[MERGE<br/>병합]
-    A --> F[SELECT<br/>조회]
+\`\`\`
+[ DML (Data Manipulation Language) ]
+  ├─ INSERT  — 새 행 입력
+  ├─ UPDATE  — 기존 행 수정
+  ├─ DELETE  — 행 삭제 (롤백 가능)
+  ├─ MERGE   — UPSERT (있으면 UPDATE, 없으면 INSERT)
+  └─ SELECT  — 조회
 \`\`\`
 
 | 명령 | 용도 |
@@ -5278,6 +5278,16 @@ DML은 트랜잭션의 대상이며 COMMIT 전까지 메모리에만 있다.
 | DML 후 자동 커밋? | Oracle은 명시적 COMMIT 필요 |
 
 단골 함정: TRUNCATE와 DELETE의 차이. TRUNCATE는 롤백 불가, AUTO_COMMIT, 빠름.
+
+---
+
+> **30초 시험 직전 정리**
+> · DML 5종: **INSERT / UPDATE / DELETE / MERGE / SELECT**
+> · DELETE = **DML** (롤백 O) / TRUNCATE = **DDL** (롤백 X, 자동 COMMIT) / DROP = 테이블 자체 삭제
+> · UPDATE 에 WHERE 누락 = **모든 행 수정** (위험)
+> · MERGE = \`WHEN MATCHED THEN UPDATE\` + \`WHEN NOT MATCHED THEN INSERT\` (UPSERT)
+> · INSERT 다중행 = **\`INSERT ALL\`** 또는 **\`INSERT INTO ... SELECT\`**
+> · DML 후 Oracle 은 **명시적 COMMIT 필요** (DDL 은 자동)
 `,
   c232: `# 2-3-2. TCL (Transaction Control Language)
 
@@ -5299,14 +5309,17 @@ DML은 트랜잭션의 대상이며 COMMIT 전까지 메모리에만 있다.
 
 ## [개념 도식화] 트랜잭션의 흐름
 
-\`\`\`mermaid
-flowchart LR
-    A[트랜잭션 시작] --> B[DML 작업들]
-    B --> C{결정}
-    C -->|성공| D[COMMIT<br/>영구 저장]
-    C -->|실패| E[ROLLBACK<br/>취소]
-    B --> F[SAVEPOINT<br/>중간 지점]
-    F -->|부분 취소| G[ROLLBACK TO sp]
+\`\`\`
+[ 트랜잭션 시작 ]
+        │
+        ▼
+   DML 작업들 ──── (필요시 SAVEPOINT 표시)
+        │              │
+        ▼              ▼
+    결정 시점     ROLLBACK TO sp  (부분 취소)
+        │
+        ├─ 성공 ──→ COMMIT    (영구 저장, 락 해제)
+        └─ 실패 ──→ ROLLBACK  (마지막 COMMIT 이후 모두 취소)
 \`\`\`
 
 ---
@@ -5468,6 +5481,17 @@ COMMIT;
 | 비정상 종료 시 | 자동 ROLLBACK |
 
 단골 함정: "DDL 실행 후 ROLLBACK으로 취소 가능"은 틀렸다. Oracle에서 DDL은 자동 COMMIT이다.
+
+---
+
+> **30초 시험 직전 정리**
+> · TCL 3종: **COMMIT / ROLLBACK / SAVEPOINT**
+> · COMMIT = 영구 반영 + 락 해제 + 다른 사용자도 변경 사항 조회 가능
+> · ROLLBACK = **마지막 COMMIT 이후** 모든 DML 취소 (SAVEPOINT 도 함께 사라짐)
+> · ROLLBACK TO sp = **부분 취소** (sp 이전 작업은 유지)
+> · DDL 실행 = **자동 COMMIT** (롤백 불가)
+> · 비정상 종료 = **자동 ROLLBACK** / 정상 종료 = 자동 COMMIT
+> · Oracle 기본 격리 수준 = **READ COMMITTED**
 `,
   c233: `# 2-3-3. DDL (Data Definition Language)
 
@@ -5484,13 +5508,13 @@ DML이 방 안의 가구 배치를 바꾸는 일이라면, DDL은 건물 자체�
 
 ## [개념 도식화] DDL 명령 5종
 
-\`\`\`mermaid
-flowchart TB
-    A[DDL] --> B[CREATE<br/>만들기]
-    A --> C[ALTER<br/>변경]
-    A --> D[DROP<br/>삭제]
-    A --> E[TRUNCATE<br/>비우기]
-    A --> F[RENAME<br/>이름변경]
+\`\`\`
+[ DDL (Data Definition Language) ]
+  ├─ CREATE   — 객체(테이블/뷰/인덱스) 생성
+  ├─ ALTER    — 객체 구조 변경 (컬럼·제약 추가/수정/삭제)
+  ├─ DROP     — 객체 자체 삭제
+  ├─ TRUNCATE — 데이터만 비움 (구조 유지, 롤백 불가)
+  └─ RENAME   — 객체 이름 변경
 \`\`\`
 
 | 명령 | 의미 |
@@ -5715,6 +5739,17 @@ PHONE
 | \`ALTER TABLE ... DROP COLUMN\`은 ROLLBACK 가능? | 불가 |
 
 단골 함정: TRUNCATE는 DDL이지만 데이터만 삭제(구조 유지)된다. DROP은 테이블 자체를 삭제한다.
+
+---
+
+> **30초 시험 직전 정리**
+> · DDL 5종: **CREATE / ALTER / DROP / TRUNCATE / RENAME** — 모두 **자동 COMMIT** (롤백 불가)
+> · 제약 6종: **PK / FK / UNIQUE / NOT NULL / CHECK / DEFAULT**
+> · PK = **UNIQUE + NOT NULL** / 테이블당 1개 / FK 가 참조하는 컬럼은 PK 또는 UNIQUE
+> · UNIQUE = **NULL 허용** (중복만 막음)
+> · DELETE / TRUNCATE / DROP — **데이터·구조·롤백** 차이 (가장 단골 함정)
+> · ON DELETE CASCADE = 부모 삭제 시 자식도 자동 삭제
+> · 컬럼 추가 = \`ALTER TABLE ADD\` / 변경 = \`MODIFY\` / 삭제 = \`DROP COLUMN\`
 `,
   c234: `# 2-3-4. DCL (Data Control Language)
 
@@ -5737,11 +5772,14 @@ PHONE
 
 ## [개념 도식화] DCL 흐름
 
-\`\`\`mermaid
-flowchart LR
-    A[관리자 DBA] -->|GRANT| B[일반 사용자]
-    A -->|REVOKE| B
-    A --> C[ROLE<br/>권한 묶음] --> B
+\`\`\`
+[ 관리자 (DBA) ]
+       │
+       ├── GRANT  ──→  [ 일반 사용자 ]
+       │
+       ├── REVOKE ──→  [ 일반 사용자 ]
+       │
+       └── ROLE 생성 ─→ [ 권한 묶음 ] ─GRANT→ [ 일반 사용자 ]
 \`\`\`
 
 ---
@@ -5833,11 +5871,9 @@ GRANT DEV_ROLE TO USER2;
 REVOKE DEV_ROLE FROM USER1;
 \`\`\`
 
-\`\`\`mermaid
-flowchart LR
-    A[권한1, 권한2, ...] --> R[ROLE 묶음]
-    R --> U1[USER1]
-    R --> U2[USER2]
+\`\`\`
+[권한1, 권한2, 권한3, ...]  ──묶음──→  [ROLE]  ──GRANT──┬──→ USER1
+                                                       └──→ USER2
 \`\`\`
 
 ---
@@ -5932,5 +5968,16 @@ DCL: GRANT, REVOKE                               (권한)
 | WITH GRANT OPTION 회수 영향 | 연쇄 회수(다시 부여한 사용자도) |
 
 단골 함정: GRANT/REVOKE를 DDL이나 DML로 잘못 분류하는 보기. DCL이 정답이다.
+
+---
+
+> **30초 시험 직전 정리**
+> · DCL 명령: **GRANT / REVOKE** (ROLE 부여도 GRANT 로 함)
+> · 권한 종류: **시스템 권한** (CREATE SESSION/TABLE 등) + **객체 권한** (SELECT/INSERT/UPDATE 등)
+> · 옵션: **WITH GRANT OPTION** (객체 권한 재부여) / **WITH ADMIN OPTION** (시스템 권한 재부여)
+> · ROLE = 권한 묶음 → 여러 사용자에 한 번에 부여 (CONNECT / RESOURCE / DBA 가 대표)
+> · \`TO PUBLIC\` = 모든 사용자에게
+> · WITH GRANT OPTION 으로 재부여한 권한 = REVOKE 시 **연쇄 회수**
+> · 4대 분류 한 줄 정리: **DDL=객체 / DML=데이터 / TCL=트랜잭션 / DCL=권한**
 `
 };
