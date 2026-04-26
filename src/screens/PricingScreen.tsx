@@ -319,7 +319,7 @@ export const SubscribeFlow = ({user, onComplete, onCancel}) => {
           <div style={{fontSize:13,fontWeight:700,color:"var(--fg-3)",letterSpacing:"0.04em",marginBottom:12}}>주문 요약</div>
           <div style={{display:"flex",justifyContent:"space-between",alignItems:"baseline",padding:"12px 0",borderBottom:"1px solid var(--border-subtle)"}}>
             <div>
-              <div style={{fontSize:15,fontWeight:700,color:"var(--fg-1)"}}>SQL양파 Pro</div>
+              <div style={{fontSize:15,fontWeight:700,color:"var(--fg-1)"}}>SQLD양파 Pro</div>
               <div style={{fontSize:12,color:"var(--fg-3)",marginTop:2}}>월 구독 · 자동 갱신</div>
             </div>
             <div style={{fontSize:15,fontWeight:700,color:"var(--fg-1)",fontFamily:"var(--font-mono)"}}>₩9,900</div>

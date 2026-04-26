@@ -65,10 +65,14 @@ function head({ title, desc, path, type = 'article' }) {
   <meta name="description" content="${esc(desc)}" />
   <meta name="robots" content="index, follow, max-image-preview:large" />
   <link rel="canonical" href="${url}" />
+  <link rel="icon" href="/assets/favicon-32.png" sizes="32x32" type="image/png" />
+  <link rel="icon" href="/assets/favicon-96.png" sizes="96x96" type="image/png" />
   <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
 
   <meta property="og:type" content="${type}" />
-  <meta property="og:site_name" content="SQL양파" />
+  <meta property="og:site_name" content="SQLD양파" />
   <meta property="og:title" content="${esc(title)}" />
   <meta property="og:description" content="${esc(desc)}" />
   <meta property="og:url" content="${url}" />
@@ -139,7 +143,7 @@ function head({ title, desc, path, type = 'article' }) {
 </head>
 <body>
   <header class="top">
-    <a class="brand" href="/">SQL양파</a>
+    <a class="brand" href="/">SQLD양파</a>
     <nav>
       <a href="/exam/">기출문제</a>
       <a href="/theory/">이론</a>
@@ -151,7 +155,7 @@ function head({ title, desc, path, type = 'article' }) {
 
 const tail = `  </main>
   <footer class="footer">
-    <p>SQL양파 — SQLD 3주 합격 루틴 · <a href="/">홈으로</a> · <a href="/terms.html">이용약관</a> · <a href="/privacy.html">개인정보 처리방침</a></p>
+    <p>SQLD양파 — SQLD 3주 합격 루틴 · <a href="/">홈으로</a> · <a href="/terms.html">이용약관</a> · <a href="/privacy.html">개인정보 처리방침</a></p>
   </footer>
 </body>
 </html>`;
@@ -181,7 +185,7 @@ function renderRef(ref) {
 
 function buildRoundPage(r) {
   const { round, date, authored } = r;
-  const title = `SQLD 제${round}회 (${date.ko}) 기출 복원문제 50문항 · 정답·해설 — SQL양파`;
+  const title = `SQLD 제${round}회 (${date.ko}) 기출 복원문제 50문항 · 정답·해설 — SQLD양파`;
   const desc = `SQLD ${date.ko} 시행 제${round}회 기출 복원문제 50문항을 무료로 풀어보세요. 데이터모델링·SQL 활용 1·2과목 정답과 해설 포함, 회원가입 없이 즉시 풀이 가능.`;
   const path = `/exam/round-${round}/`;
 
@@ -230,7 +234,7 @@ function buildRoundPage(r) {
 // ============================================================
 function buildExamIndexPage() {
   const path = '/exam/';
-  const title = `SQLD 기출 복원문제 — 제45회~60회 800문항 무료 — SQL양파`;
+  const title = `SQLD 기출 복원문제 — 제45회~60회 800문항 무료 — SQLD양파`;
   const desc = `SQLD 자격증 기출 복원문제를 회차별로 정리. 제45회(2022.05)부터 제60회(2026.03)까지 16개 회차 800문항을 회원가입 없이 무료로 풀이.`;
 
   const items = rounds.slice().sort((a, b) => b.round - a.round).map(r => {
@@ -255,7 +259,7 @@ function buildExamIndexPage() {
 // ============================================================
 function buildTheoryChapterPage(subject, ch) {
   const path = `/theory/${ch.id}/`;
-  const title = `${ch.title} — ${subject.code} ${subject.title} · SQLD 이론 — SQL양파`;
+  const title = `${ch.title} — ${subject.code} ${subject.title} · SQLD 이론 — SQLD양파`;
   const desc = `SQLD 자격증 ${subject.code} '${subject.title}'의 핵심 챕터 '${ch.title}' 학습 노트. 출제 범위와 핵심 섹션 정리.`;
   const sectionsHtml = (ch.sections || []).map(s => `<li>${esc(s)}</li>`).join('');
 
@@ -267,14 +271,14 @@ function buildTheoryChapterPage(subject, ch) {
     <h2>핵심 섹션</h2>
     <ul>${sectionsHtml}</ul>
     <h2>학습 가이드</h2>
-    <p>본 챕터는 SQLD 시험에서 반복적으로 출제되는 핵심 영역입니다. SQL양파 사이트에서 본문 + 도식 + 미니 테스트로 빠르게 정리할 수 있습니다.</p>
-    <a class="cta cta-secondary" href="/">SQL양파 홈에서 학습 시작 →</a>
+    <p>본 챕터는 SQLD 시험에서 반복적으로 출제되는 핵심 영역입니다. SQLD양파 사이트에서 본문 + 도식 + 미니 테스트로 빠르게 정리할 수 있습니다.</p>
+    <a class="cta cta-secondary" href="/">SQLD양파 홈에서 학습 시작 →</a>
 ` + tail;
 }
 
 function buildTheoryIndexPage() {
   const path = '/theory/';
-  const title = `SQLD 이론 정리 · 데이터모델링·SQL활용 핵심 챕터 — SQL양파`;
+  const title = `SQLD 이론 정리 · 데이터모델링·SQL활용 핵심 챕터 — SQLD양파`;
   const desc = `SQLD 자격증 1과목 데이터 모델링의 이해 6챕터 + 2과목 SQL 기본 및 활용 7챕터를 한눈에. 회원가입 없이 무료.`;
 
   const subjects = THEORY.subjects.map(s => {
@@ -299,12 +303,12 @@ function buildTheoryIndexPage() {
 // ============================================================
 function buildGuide({ slug, title, desc, body }) {
   const path = `/guide/${slug}/`;
-  return head({ title: `${title} — SQL양파`, desc, path }) + `
+  return head({ title: `${title} — SQLD양파`, desc, path }) + `
     <div class="crumb"><a href="/">홈</a> · 가이드 · ${esc(title)}</div>
     <h1>${esc(title)}</h1>
     <p class="lead">${esc(desc)}</p>
     ${body}
-    <a class="cta" href="/">SQL양파에서 학습 시작 →</a>
+    <a class="cta" href="/">SQLD양파에서 학습 시작 →</a>
 ` + tail;
 }
 
@@ -379,8 +383,8 @@ const guides = [
         <li>중간 저장 가능, 시험 종료 전 자유롭게 이동</li>
       </ul>
 
-      <h2>SQL양파의 CBT 모드</h2>
-      <p>SQL양파는 실제 CBT 환경과 동일한 50문항·90분 풀이 모드를 제공합니다. 회차별 기출 또는 랜덤 모의고사로 시험장 환경에 미리 적응할 수 있습니다.</p>
+      <h2>SQLD양파의 CBT 모드</h2>
+      <p>SQLD양파는 실제 CBT 환경과 동일한 50문항·90분 풀이 모드를 제공합니다. 회차별 기출 또는 랜덤 모의고사로 시험장 환경에 미리 적응할 수 있습니다.</p>
     `,
   },
   {
@@ -409,7 +413,7 @@ const guides = [
 
       <h2>2주차 — 기출 풀이</h2>
       <p>매일 회차 1~2개씩 푼다. 틀린 문항은 오답노트에 정리.</p>
-      <p>SQL양파의 회차별 페이지로 빠르게 풀이 가능: <a href="/exam/round-45/">45회</a>, <a href="/exam/round-50/">50회</a>, <a href="/exam/round-55/">55회</a>...</p>
+      <p>SQLD양파의 회차별 페이지로 빠르게 풀이 가능: <a href="/exam/round-45/">45회</a>, <a href="/exam/round-50/">50회</a>, <a href="/exam/round-55/">55회</a>...</p>
 
       <h2>3주차 — 실전 모의고사</h2>
       <p>최근 3개 회차(58·59·60회)를 시험 환경처럼 90분 타이머로 풀이. 약점 챕터의 이론 재정리 + 단답형 암기.</p>

@@ -93,7 +93,7 @@ export const AdSlot = ({ slot, format = 'auto', style }: { slot: string; format?
 
 /**
  * AdSidebar — 우측 사이드바 광고 (PC 와이드 화면 전용)
- * - viewport ≥ 1280px 에서만 노출 (SQL양파 컨테이너 max-width 1080px + 여유)
+ * - viewport ≥ 1280px 에서만 노출 (SQLD양파 컨테이너 max-width 1080px + 여유)
  * - position: fixed, top: 80px (TopNav 아래)
  * - 세로형 광고 단위 (160×600 또는 300×600)
  */

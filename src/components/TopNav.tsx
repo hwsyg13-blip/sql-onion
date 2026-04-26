@@ -31,7 +31,7 @@ export const TopNav = ({route, onNavigate, dark, onToggleDark, user, onLogout, b
         background: "none", border: 0, cursor: "pointer", padding: 0,
         display: "inline-flex", alignItems: "center",
       }}>
-        <img src={dark ? "/assets/logo-dark.svg" : "/assets/logo.svg"} height="28" alt="SQL양파"/>
+        <img src={dark ? "/assets/logo-dark.svg" : "/assets/logo.svg"} height="28" alt="SQLD양파"/>
       </button>
       <nav style={{display: "flex", gap: 24, marginLeft: 12}} className="topnav-links">
         {links.map(l => {
@@ -71,10 +71,11 @@ export const TopNav = ({route, onNavigate, dark, onToggleDark, user, onLogout, b
 
 // Mobile bottom tabs
 export const MobileNav = ({route, onNavigate}: any) => {
+  // 모바일 네비 — 사용 빈도 순서: 3주계획·이론·홈(중앙)·모의고사·기출
   const tabs = [
-    {id: "home",   label: "홈",     icon: Ic.Target},
     {id: "plan",   label: "3주계획", icon: Ic.Calendar},
     {id: "theory", label: "이론",    icon: Ic.Book},
+    {id: "home",   label: "홈",     icon: Ic.Home},
     {id: "mock",   label: "모의고사", icon: Ic.Sparkles},
     {id: "exams",  label: "기출",    icon: Ic.ListChecks},
   ];

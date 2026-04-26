@@ -17,7 +17,7 @@
 import { readFileSync, writeFileSync, existsSync, mkdirSync, readdirSync } from 'node:fs';
 import { resolve } from 'node:path';
 
-const MD_DIR = 'C:/Users/hwsyg/OneDrive/문서/Claude/Projects/SQLD 양파';
+const MD_DIR = 'C:/Users/hwsyg/OneDrive/문서/Claude/Projects/SQLD양파';
 const OUT_DIR = 'scripts/authored';
 if (!existsSync(OUT_DIR)) mkdirSync(OUT_DIR, { recursive: true });
 

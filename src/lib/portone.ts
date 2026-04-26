@@ -16,7 +16,7 @@ export async function payProWithKakao(opts: { userId: string; email: string }) {
     storeId: STORE_ID!,
     channelKey: CHANNEL_KAKAO!,
     paymentId,
-    orderName: 'SQL 양파 Pro (1개월)',
+    orderName: 'SQLD양파 Pro (1개월)',
     totalAmount: 9900,
     currency: 'KRW',
     payMethod: 'EASY_PAY',

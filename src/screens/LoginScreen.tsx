@@ -52,7 +52,7 @@ export const GoogleAccountPicker = ({onPick, onClose}: any) => {
             <span style={{fontSize:13,color:"#5f6368",letterSpacing:"0.02em"}}>accounts.google.com</span>
           </div>
           <div style={{fontSize:22,color:"#202124",fontWeight:400,marginBottom:6}}>계정 선택</div>
-          <div style={{fontSize:13,color:"#5f6368"}}><b style={{color:"#202124"}}>SQL양파</b>(으)로 이동</div>
+          <div style={{fontSize:13,color:"#5f6368"}}><b style={{color:"#202124"}}>SQLD양파</b>(으)로 이동</div>
         </div>
         <div>
           {accounts.map(a => (
@@ -91,7 +91,7 @@ export const GoogleAccountPicker = ({onPick, onClose}: any) => {
           </button>
         </div>
         <div style={{padding:"16px 28px 22px", background:"#fafafa", fontSize:11, color:"#5f6368", lineHeight:1.6}}>
-          계속하려면 Google에서 이름, 이메일 주소, 언어 환경설정 및 프로필 사진을 SQL양파과(와) 공유합니다. 앱을 사용하기 전에 SQL양파의 <span style={{color:"#1a73e8"}}>개인정보처리방침</span> 및 <span style={{color:"#1a73e8"}}>서비스약관</span>을 검토하세요.
+          계속하려면 Google에서 이름, 이메일 주소, 언어 환경설정 및 프로필 사진을 SQLD양파과(와) 공유합니다. 앱을 사용하기 전에 SQLD양파의 <span style={{color:"#1a73e8"}}>개인정보처리방침</span> 및 <span style={{color:"#1a73e8"}}>서비스약관</span>을 검토하세요.
         </div>
       </div>
     </div>
@@ -144,7 +144,7 @@ export const AuthBody = ({onPicker, onGuest, onKakao, onNaver, compact}: any) =>
     }}>로그인 없이 둘러보기</button>
     {!compact && (
       <p style={{fontSize:11.5,color:"var(--fg-4)",lineHeight:1.7,textAlign:"center",margin:"12px 0 0"}}>
-        계속 진행하면 SQL양파의 <span style={{color:"var(--fg-3)",textDecoration:"underline"}}>서비스약관</span>과 <span style={{color:"var(--fg-3)",textDecoration:"underline"}}>개인정보처리방침</span>에 동의하는 것으로 간주합니다.
+        계속 진행하면 SQLD양파의 <span style={{color:"var(--fg-3)",textDecoration:"underline"}}>서비스약관</span>과 <span style={{color:"var(--fg-3)",textDecoration:"underline"}}>개인정보처리방침</span>에 동의하는 것으로 간주합니다.
       </p>
     )}
   </div>
@@ -263,7 +263,7 @@ export const LoginScreen = ({onNavigate, onLogin, layout = "centered"}: any) => 
           <div style={{position:"absolute",right:40,bottom:-140,width:300,height:300,borderRadius:"50%",background:"rgba(255,255,255,0.04)"}}/>
           <div style={{display:"flex",alignItems:"center",gap:10,position:"relative"}}>
             <OnionMark size={26}/>
-            <span style={{fontSize:18,fontWeight:700,letterSpacing:"-0.01em"}}>SQL양파</span>
+            <span style={{fontSize:18,fontWeight:700,letterSpacing:"-0.01em"}}>SQLD양파</span>
           </div>
           <div style={{position:"relative"}}>
             <div style={{fontSize:13,opacity:0.75,fontWeight:600,letterSpacing:"0.08em",marginBottom:14}}>SQLD 3주 합격 루틴</div>

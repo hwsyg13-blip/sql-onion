@@ -239,7 +239,7 @@ export const App = () => {
             <Ic.ArrowLeft size={13}/> 나가기
           </button>
           <div style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 12, color: 'var(--fg-3)' }}>
-            <OnionMark size={14}/>
+            <Ic.Clock size={13}/>
             <span style={{ fontWeight: 600 }}>시험 진행 중</span>
           </div>
         </header>

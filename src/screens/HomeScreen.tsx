@@ -71,7 +71,6 @@ export const HomeScreen = ({onNavigate, user}) => {
     }}>
       <div style={{flex: "2 1 360px"}}>
         <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:12}}>
-          <OnionMark size={20}/>
           <span style={{fontSize:13,color:"var(--point-600)",fontWeight:600,letterSpacing:"0.04em"}}>SQLD · 3주 합격 루틴</span>
         </div>
         <h1 className="home-hero-title" style={{fontSize:44,fontWeight:800,color:"var(--fg-1)",letterSpacing:"-0.02em",lineHeight:1.15,margin:"0 0 14px"}}>
