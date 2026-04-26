@@ -407,7 +407,7 @@ img, svg {
   font-weight: 600;
 }
 
-/* ── SQL 코드 블록 (다크) ── */
+/* ── SQL 코드 블록 (다크 + 신택스 컬러) ── */
 .theory-md pre {
   background: #1F2320; color: #E6F3E7;
   padding: 16px 20px; border-radius: 12px;
@@ -416,12 +416,54 @@ img, svg {
   margin: 14px 0 20px;
   white-space: pre; border: none;
   box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  position: relative;
 }
 .theory-md pre code { background: transparent; color: inherit; padding: 0; font-size: inherit; }
-.theory-md pre.language-mermaid {
-  background: var(--bg-muted); color: var(--fg-3);
-  font-style: italic; font-size: 12.5px;
-  box-shadow: none;
+
+/* 다크 테마 SQL 신택스 (highlight.js 클래스) — 양파 팔레트 */
+.theory-md pre code.hljs                         { color: #E6F3E7; }
+.theory-md pre code .hljs-keyword,
+.theory-md pre code .hljs-built_in,
+.theory-md pre code .hljs-type                   { color: #80CBC4; font-weight: 600; }  /* SELECT/WHERE/JOIN — 민트 */
+.theory-md pre code .hljs-string                 { color: #FFAB91; }                    /* 'string' — 살구 */
+.theory-md pre code .hljs-number,
+.theory-md pre code .hljs-literal                { color: #B39DDB; }                    /* 숫자/NULL — 라일락 */
+.theory-md pre code .hljs-comment                { color: #6B7280; font-style: italic; }/* 주석 — 회색 */
+.theory-md pre code .hljs-operator,
+.theory-md pre code .hljs-punctuation            { color: #BCAAA4; }                    /* 연산자 — 톤다운 */
+.theory-md pre code .hljs-function,
+.theory-md pre code .hljs-name,
+.theory-md pre code .hljs-title                  { color: #A5D6A7; }                    /* 함수·테이블명 — 양파 그린 */
+.theory-md pre code .hljs-attr,
+.theory-md pre code .hljs-attribute              { color: #FFE082; }                    /* 컬럼·속성 — 옅은 노랑 */
+.theory-md pre code .hljs-meta                   { color: #90CAF9; }                    /* 메타 — 옅은 블루 */
+
+/* ── Mermaid 다이어그램 — 양파 그린 카드 안에 SVG 배치 ── */
+.theory-md .mermaid {
+  background: linear-gradient(135deg, #FFFFFF 0%, var(--point-050) 100%);
+  border: 1px solid var(--point-100);
+  border-radius: 14px;
+  padding: 24px;
+  margin: 18px 0 24px;
+  text-align: center;
+  overflow-x: auto;
+  box-shadow: 0 1px 3px rgba(46,125,50,0.06);
+  font-family: var(--font-sans);
+  position: relative;
+}
+.theory-md .mermaid::before {
+  content: '◆ Diagram';
+  position: absolute; top: 10px; right: 14px;
+  color: var(--point-500); font-size: 10.5px; font-weight: 700;
+  letter-spacing: 0.04em;
+}
+.theory-md .mermaid svg { max-width: 100%; height: auto !important; display: inline-block; }
+.theory-md .mermaid:not([data-processed]) {
+  background: var(--bg-muted);
+  color: var(--fg-3);
+  font-family: var(--font-mono);
+  font-size: 12px; text-align: left;
+  white-space: pre-wrap;
 }
 
 /* ── ASCII 도식 카드 (언어 없는 코드블록) ── */

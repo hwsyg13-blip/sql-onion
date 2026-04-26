@@ -1,6 +1,10 @@
 // @ts-nocheck
 import React from 'react';
 import { marked } from 'marked';
+import { markedHighlight } from 'marked-highlight';
+import hljs from 'highlight.js/lib/core';
+import sql from 'highlight.js/lib/languages/sql';
+import bash from 'highlight.js/lib/languages/bash';
 import { Btn, Tag, Ic } from '../components/Atoms';
 import { THEORY, THEORY_BODY } from '../data/theory';
 import { QUIZ_BANK } from '../data/quizBank';
@@ -9,7 +13,22 @@ import { recordTheoryView } from '../lib/progress';
 import { AdSlot } from '../components/AdSlot';
 import { trackEvent } from '../lib/analytics';
 
-// marked 옵션 — GFM(테이블·체크박스), 줄바꿈 살림(TIP 박스의 · 항목들이 분리되도록)
+// highlight.js 등록 — SQL 위주
+hljs.registerLanguage('sql', sql);
+hljs.registerLanguage('bash', bash);
+
+// marked + 코드 하이라이트 (mermaid 는 패스 — 별도 렌더)
+marked.use(markedHighlight({
+  langPrefix: 'hljs language-',
+  highlight(code, lang) {
+    if (!lang || lang === 'mermaid') return code;
+    if (hljs.getLanguage(lang)) {
+      try { return hljs.highlight(code, { language: lang, ignoreIllegals: true }).value; }
+      catch { return code; }
+    }
+    return code;
+  },
+}));
 marked.setOptions({ gfm: true, breaks: true });
 
 // 섹션 라벨 → CSS 클래스 매핑
@@ -127,11 +146,21 @@ function renderMd(md) {
 
   let html = marked.parse(preprocessed);
 
-  // 2) 코드블록 — 언어 없는 코드블록(ASCII 도식)을 .diagram-card 로 래핑
+  // 2) 코드블록 후처리:
+  //    - mermaid → <div class="mermaid"> (별도 렌더)
+  //    - 언어 없는 ASCII → .diagram-card
+  //    - 그 외 (sql/bash 등) → 다크 코드 카드 (이미 hljs 색칠됨)
   html = html.replace(
-    /<pre><code(\s+class="language-[\w-]+")?>([\s\S]*?)<\/code><\/pre>/g,
-    (m, langClass, content) => {
-      if (!langClass) {
+    /<pre><code(\s+class="(?:hljs )?language-([\w-]+)")?>([\s\S]*?)<\/code><\/pre>/g,
+    (m, _langAttr, lang, content) => {
+      if (lang === 'mermaid') {
+        // 엔티티 디코드 (<,>,&,") — mermaid 가 원본 텍스트를 받음
+        const text = content
+          .replace(/&lt;/g, '<').replace(/&gt;/g, '>')
+          .replace(/&amp;/g, '&').replace(/&quot;/g, '"').replace(/&#39;/g, "'");
+        return `<div class="mermaid">${text}</div>`;
+      }
+      if (!lang) {
         return `<div class="diagram-card"><pre>${content}</pre></div>`;
       }
       return m;
@@ -149,12 +178,48 @@ export const TheoryDetailScreen = ({ chapterId, onNavigate }) => {
 
   const ctx = findChapter(chapterId);
   const md = THEORY_BODY[chapterId];
+  const bodyRef = React.useRef<HTMLDivElement>(null);
 
   if (!ctx || !md) return <TheoryStub chapterId={chapterId} onNavigate={onNavigate} />;
 
   const { sub, sec, ch } = ctx;
   const html = React.useMemo(() => renderMd(md), [md]);
   const toc = React.useMemo(() => buildToc(md), [md]);
+
+  // mermaid — 본문에 .mermaid 가 있으면 동적 로드 + 렌더 (양파 그린 테마)
+  React.useEffect(() => {
+    if (!bodyRef.current) return;
+    const nodes = bodyRef.current.querySelectorAll('.mermaid');
+    if (!nodes.length) return;
+    let cancelled = false;
+    import('mermaid').then(({ default: mermaid }) => {
+      if (cancelled) return;
+      try {
+        mermaid.initialize({
+          startOnLoad: false,
+          theme: 'base',
+          themeVariables: {
+            fontFamily: 'Pretendard Variable, -apple-system, sans-serif',
+            primaryColor: '#EBF5EC',
+            primaryTextColor: '#1F2320',
+            primaryBorderColor: '#2E7D32',
+            lineColor: '#2E7D32',
+            secondaryColor: '#F0F7F1',
+            tertiaryColor: '#FFFFFF',
+            mainBkg: '#EBF5EC',
+            edgeLabelBackground: '#FFFFFF',
+            clusterBkg: '#F0F7F1',
+            clusterBorder: '#A5D6A7',
+          },
+          flowchart: { curve: 'basis', htmlLabels: true, padding: 12 },
+          sequence: { actorMargin: 50 },
+          securityLevel: 'loose',
+        });
+        mermaid.run({ nodes });
+      } catch (e) { console.warn('[mermaid] render failed', e); }
+    }).catch((e) => console.warn('[mermaid] load failed', e));
+    return () => { cancelled = true; };
+  }, [html]);
 
   // 다음 챕터 — 평탄화된 챕터 목록에서 인덱스 +1
   const allCh = THEORY.subjects.flatMap((s) => s.sections.flatMap((x) => x.chapters));
@@ -209,7 +274,7 @@ export const TheoryDetailScreen = ({ chapterId, onNavigate }) => {
           </div>
 
           {/* 마크다운 본문 — .theory-md 가 디자인 시스템 적용 */}
-          <div className="theory-md" dangerouslySetInnerHTML={{ __html: html }} />
+          <div ref={bodyRef} className="theory-md" dangerouslySetInnerHTML={{ __html: html }} />
 
           {/* Nav footer */}
           <div style={{ display: 'flex', justifyContent: 'space-between', gap: 10, marginTop: 40, paddingTop: 24, borderTop: '1px solid var(--border-subtle)' }}>
