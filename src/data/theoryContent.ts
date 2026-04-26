@@ -38,8 +38,12 @@ export const THEORY_MD: Record<string, string> = {
 | 2 | 논리적 모델링 | 속성·관계·키 상세화 + **정규화** | 정식 건축 도면 |
 | 3 | 물리적 모델링 | 실제 DBMS에 맞춰 구체화 (인덱스·파티셔닝) | 시공 계획서 |
 
-\`\`\`
-[현실 세계]  →  [개념적 모델]  →  [논리적 모델]  →  [물리적 모델]  →  [Database]
+\`\`\`mermaid
+flowchart LR
+    A[현실 세계<br/>업무·요구사항] --> B[개념적 모델<br/>핵심 엔터티·관계]
+    B --> C[논리적 모델<br/>속성·키·정규화]
+    C --> D[물리적 모델<br/>DBMS·인덱스·파티션]
+    D --> E[(Database)]
 \`\`\`
 
 ---
@@ -342,6 +346,20 @@ CREATE TABLE MEMBER (
 
 ## 속성의 3가지 분류 기준
 
+\`\`\`mermaid
+flowchart TD
+    A[속성 분류 3기준] --> B[① 특성]
+    A --> C[② 분해 가능 여부]
+    A --> D[③ 값 개수]
+    B --> B1[기본 속성]
+    B --> B2[설계 속성]
+    B --> B3[파생 속성]
+    C --> C1[단순 속성<br/>원자]
+    C --> C2[복합 속성]
+    D --> D1[단일값 속성]
+    D --> D2[다중값 속성<br/>→ 별도 엔터티]
+\`\`\`
+
 ### 특성에 따른 분류
 
 | 종류 | 의미 | 예시 |
@@ -510,10 +528,11 @@ CREATE TABLE MEMBER (
 
 ## 관계차수(Cardinality) 3가지
 
-\`\`\`
-1 : 1     [남편] ─── [아내]            한쪽도 한 개, 다른 쪽도 한 개
-1 : N     [부모] ─── [자식들]          한쪽은 한 개, 다른 쪽은 여러 개
-M : N     [학생] ─── [과목]            양쪽 모두 여러 개 → 분해 필요
+\`\`\`mermaid
+flowchart LR
+    H1[남편] -- 1 : 1 --- W1[아내]
+    P[부모] -- 1 : N --- C[자식들]
+    S[학생] -- M : N --- K[과목]
 \`\`\`
 
 ### 1:1 관계
@@ -1104,10 +1123,10 @@ CREATE TABLE ORDER_DETAIL(ORDER_ID NUMBER, PROD_ID VARCHAR2(10), QTY NUMBER);
 
 ## [개념 도식화] 관계 → FK → JOIN
 
-\`\`\`
-[설계 단계]              [구현 단계]                 [조회 단계]
-   관계        ────→       외래키(FK)       ────→       JOIN
-(개념 모델)             (논리/물리 모델)             (SQL 실행)
+\`\`\`mermaid
+flowchart LR
+    A[설계 단계<br/>관계<br/>개념 모델] --> B[구현 단계<br/>외래키 FK<br/>논리/물리 모델]
+    B --> C[조회 단계<br/>JOIN<br/>SQL 실행]
 \`\`\`
 
 \`\`\`
@@ -1269,12 +1288,12 @@ A 계좌에서 1만원이 빠지고 B 계좌에 1만원이 들어와야 정상�
 
 ## [개념 도식화] 트랜잭션의 ACID
 
-\`\`\`
-[ 트랜잭션 ACID ]
-  ├─ A. 원자성 (Atomicity)   — 전부 또는 전무
-  ├─ C. 일관성 (Consistency) — 무결성 규칙 유지
-  ├─ I. 고립성 (Isolation)   — 다른 트랜잭션 간섭 없음
-  └─ D. 지속성 (Durability)  — 커밋되면 시스템 장애에도 영구 보존
+\`\`\`mermaid
+flowchart TD
+    T[트랜잭션 ACID] --> A[A. 원자성<br/>Atomicity<br/>전부 또는 전무]
+    T --> C[C. 일관성<br/>Consistency<br/>무결성 규칙 유지]
+    T --> I[I. 고립성<br/>Isolation<br/>다른 트랜잭션 간섭 없음]
+    T --> D[D. 지속성<br/>Durability<br/>커밋되면 영구 보존]
 \`\`\`
 
 | 성질 | 의미 | 비유 |
@@ -1648,18 +1667,15 @@ ISBN은 길고 책마다 형식이 달라, 도서관에서는 자체 번호(A-00
 
 ## 언제 무엇을 쓸까
 
-\`\`\`
-[ 식별자 결정 ]
-      │
-      ▼
-업무 본질키 존재?
-      ├─ NO  ─→  [ 인조식별자 ]
-      │
-      └─ YES ─→  길거나 자주 바뀌나?
-                       ├─ YES ─→  [ 인조식별자 ]
-                       └─ NO  ─→  보안·개인정보?
-                                       ├─ YES ─→  [ 인조식별자 ]
-                                       └─ NO  ─→  [ 본질식별자 ]
+\`\`\`mermaid
+flowchart TD
+    A[식별자 결정] --> B{업무 본질키 존재?}
+    B -- NO --> X[인조식별자]
+    B -- YES --> C{길거나 자주 바뀌나?}
+    C -- YES --> X
+    C -- NO --> D{보안 / 개인정보?}
+    D -- YES --> X
+    D -- NO --> Y[본질식별자]
 \`\`\`
 
 **현업 권장 패턴**: PK 는 인조식별자, 본질키는 UNIQUE 제약으로 별도 보존 → 보안·성능·일관성 모두 만족.
@@ -1945,6 +1961,15 @@ ORDER BY  정렬기준;                ← ⑥ 어떻게 정렬?
 \`\`\`
 
 ### 작성 순서 vs 실행 순서
+
+\`\`\`mermaid
+flowchart LR
+    F[FROM<br/>① 어디서] --> W[WHERE<br/>② 어떤 행]
+    W --> G[GROUP BY<br/>③ 어떻게 묶나]
+    G --> H[HAVING<br/>④ 그룹 조건]
+    H --> S[SELECT<br/>⑤ 어떤 컬럼]
+    S --> O[ORDER BY<br/>⑥ 어떻게 정렬]
+\`\`\`
 
 | 작성 순서 | 실행 순서 |
 |---|---|
@@ -2498,9 +2523,11 @@ WHERE는 영수증 한 장 한 장을 거르고, HAVING은 묶어 놓은 그룹�
 
 ## [개념 도식화] WHERE vs HAVING의 위치
 
-\`\`\`
-원본 행 ──[WHERE]──→ 거른 행 ──[GROUP BY]──→ 그룹들 ──[HAVING]──→ 최종 그룹
-   행 단위 필터          그룹화                  그룹 단위 필터
+\`\`\`mermaid
+flowchart LR
+    A[원본 행] -->|WHERE<br/>행 단위 필터| B[거른 행]
+    B -->|GROUP BY<br/>그룹화| C[그룹들]
+    C -->|HAVING<br/>그룹 단위 필터| D[최종 그룹]
 \`\`\`
 
 실행 순서: **FROM → WHERE → GROUP BY → HAVING → SELECT → ORDER BY**
@@ -3124,15 +3151,15 @@ Oracle 전통 방식(\`,\` 와 \`WHERE\`)이 사투리라면, 표준 조인(\`JO
 
 ## [개념 도식화] 표준 조인의 종류
 
-\`\`\`
-[ 표준 조인 (ANSI) ]
-  ├─ INNER JOIN        — 양쪽 매칭만 (INNER 키워드 생략 가능)
-  ├─ LEFT OUTER JOIN   — 왼쪽 모두 + 매칭되는 오른쪽
-  ├─ RIGHT OUTER JOIN  — 오른쪽 모두 + 매칭되는 왼쪽
-  ├─ FULL OUTER JOIN   — 양쪽 모두 (없는 쪽은 NULL)
-  ├─ CROSS JOIN        — 모든 조합 (조인 조건 없음)
-  ├─ NATURAL JOIN      — 같은 이름 컬럼 자동 매칭
-  └─ USING (컬럼)      — 명시한 같은 이름 컬럼만 매칭
+\`\`\`mermaid
+flowchart TD
+    A[표준 조인 ANSI] --> I[INNER JOIN<br/>양쪽 매칭만<br/>INNER 생략 가능]
+    A --> L[LEFT OUTER JOIN<br/>왼쪽 모두 + 매칭]
+    A --> R[RIGHT OUTER JOIN<br/>오른쪽 모두 + 매칭]
+    A --> F[FULL OUTER JOIN<br/>양쪽 모두 + NULL]
+    A --> C[CROSS JOIN<br/>모든 조합<br/>조건 없음]
+    A --> N[NATURAL JOIN<br/>같은 이름 자동]
+    A --> U[USING 컬럼<br/>명시 컬럼만]
 \`\`\`
 
 ---
@@ -3382,14 +3409,10 @@ FROM    (서브쿼리)                 ← FROM 서브쿼리(인라인 뷰)
 WHERE   컬럼 = (서브쿼리);         ← WHERE 서브쿼리(대표적)
 \`\`\`
 
-\`\`\`
-[ 메인 쿼리 ]
-      │  ① 값 필요
-      ▼
-[ 서브 쿼리 ]
-      │  ② 값 반환
-      ▼
-[ 메인 쿼리 (계속) ]
+\`\`\`mermaid
+flowchart TD
+    M1[메인 쿼리] -->|① 값 필요| S[서브 쿼리]
+    S -->|② 값 반환| M2[메인 쿼리 계속]
 \`\`\`
 
 ---
@@ -4049,6 +4072,16 @@ NAME  SAL                    NAME  SAL  RANK  AVG
 
 ---
 
+## 윈도우 함수의 분류
+
+\`\`\`mermaid
+flowchart TD
+    W[윈도우 함수<br/>OVER 절] --> R[순위<br/>RANK · DENSE_RANK<br/>ROW_NUMBER · NTILE]
+    W --> A[집계<br/>SUM · AVG · COUNT<br/>MAX · MIN]
+    W --> O[행 순서<br/>LAG · LEAD<br/>FIRST_VALUE · LAST_VALUE]
+    W --> P[비율<br/>CUME_DIST · PERCENT_RANK<br/>RATIO_TO_REPORT]
+\`\`\`
+
 ## 순위 함수
 
 | 함수 | 동점 처리 | 다음 순위 |
@@ -4234,12 +4267,12 @@ FROM    EMP;
 
 ## [개념 도식화] Top N의 4가지 방법
 
-\`\`\`
-[ Top N 구현 ]
-  ├─ Oracle: ROWNUM           — 의사 컬럼, 정렬 전 매겨짐 (인라인뷰 필수)
-  ├─ 표준 (12c+): FETCH FIRST — OFFSET / WITH TIES / PERCENT 지원
-  ├─ MS-SQL: TOP              — \`SELECT TOP n\` 또는 \`TOP n WITH TIES\`
-  └─ 범용: ROW_NUMBER() OVER  — PARTITION BY 로 그룹별 Top N 가능
+\`\`\`mermaid
+flowchart TD
+    T[Top N 구현] --> R[Oracle ROWNUM<br/>의사 컬럼<br/>정렬 전 매겨짐<br/>인라인뷰 필수]
+    T --> F[표준 12c+<br/>FETCH FIRST<br/>OFFSET / WITH TIES / PERCENT]
+    T --> P[MS-SQL TOP<br/>SELECT TOP n<br/>TOP n WITH TIES]
+    T --> W[범용 윈도우<br/>ROW_NUMBER OVER<br/>PARTITION BY 로 그룹별 가능]
 \`\`\`
 
 ---
@@ -4920,6 +4953,15 @@ REGEXP     │ . * + ? [ ] ^ $ | { } \\d \\w \\s …    │  정밀·고급 검�
 
 ## Oracle 정규식 함수
 
+\`\`\`mermaid
+flowchart TD
+    R[REGEXP 함수 5종] --> L[REGEXP_LIKE<br/>조건절 — TRUE/FALSE]
+    R --> P[REGEXP_REPLACE<br/>패턴 부분 교체]
+    R --> S[REGEXP_SUBSTR<br/>패턴 일치 추출]
+    R --> I[REGEXP_INSTR<br/>패턴 위치]
+    R --> C[REGEXP_COUNT<br/>패턴 등장 횟수]
+\`\`\`
+
 | 함수 | 의미 |
 |---|---|
 | REGEXP_LIKE(s, pattern) | LIKE의 정규식 버전(조건절용) |
@@ -5092,13 +5134,13 @@ REGEXP_LIKE('ABC', 'abc', 'i')   -- 대소문자 무시
 
 ## [개념 도식화] DML의 분류
 
-\`\`\`
-[ DML (Data Manipulation Language) ]
-  ├─ INSERT  — 새 행 입력
-  ├─ UPDATE  — 기존 행 수정
-  ├─ DELETE  — 행 삭제 (롤백 가능)
-  ├─ MERGE   — UPSERT (있으면 UPDATE, 없으면 INSERT)
-  └─ SELECT  — 조회
+\`\`\`mermaid
+flowchart TD
+    D[DML<br/>Data Manipulation] --> I[INSERT<br/>새 행 입력]
+    D --> U[UPDATE<br/>기존 행 수정]
+    D --> X[DELETE<br/>행 삭제<br/>롤백 가능]
+    D --> M[MERGE<br/>UPSERT<br/>있으면 UPDATE / 없으면 INSERT]
+    D --> S[SELECT<br/>조회]
 \`\`\`
 
 | 명령 | 용도 |
@@ -5314,17 +5356,14 @@ DML은 트랜잭션의 대상이며 COMMIT 전까지 메모리에만 있다.
 
 ## [개념 도식화] 트랜잭션의 흐름
 
-\`\`\`
-[ 트랜잭션 시작 ]
-        │
-        ▼
-   DML 작업들 ──── (필요시 SAVEPOINT 표시)
-        │              │
-        ▼              ▼
-    결정 시점     ROLLBACK TO sp  (부분 취소)
-        │
-        ├─ 성공 ──→ COMMIT    (영구 저장, 락 해제)
-        └─ 실패 ──→ ROLLBACK  (마지막 COMMIT 이후 모두 취소)
+\`\`\`mermaid
+flowchart TD
+    A[트랜잭션 시작] --> B[DML 작업들]
+    B -->|필요시| F[SAVEPOINT<br/>중간 지점]
+    F -->|부분 취소| G[ROLLBACK TO sp]
+    B --> C{결정 시점}
+    C -->|성공| D[COMMIT<br/>영구 저장 / 락 해제]
+    C -->|실패| E[ROLLBACK<br/>마지막 COMMIT 이후 취소]
 \`\`\`
 
 ---
@@ -5513,13 +5552,13 @@ DML이 방 안의 가구 배치를 바꾸는 일이라면, DDL은 건물 자체�
 
 ## [개념 도식화] DDL 명령 5종
 
-\`\`\`
-[ DDL (Data Definition Language) ]
-  ├─ CREATE   — 객체(테이블/뷰/인덱스) 생성
-  ├─ ALTER    — 객체 구조 변경 (컬럼·제약 추가/수정/삭제)
-  ├─ DROP     — 객체 자체 삭제
-  ├─ TRUNCATE — 데이터만 비움 (구조 유지, 롤백 불가)
-  └─ RENAME   — 객체 이름 변경
+\`\`\`mermaid
+flowchart TD
+    D[DDL<br/>Data Definition] --> C[CREATE<br/>객체 생성<br/>테이블/뷰/인덱스]
+    D --> A[ALTER<br/>구조 변경<br/>컬럼·제약]
+    D --> X[DROP<br/>객체 자체 삭제]
+    D --> T[TRUNCATE<br/>데이터만 비움<br/>구조 유지 · 롤백 불가]
+    D --> R[RENAME<br/>객체 이름 변경]
 \`\`\`
 
 | 명령 | 의미 |
@@ -5777,14 +5816,12 @@ PHONE
 
 ## [개념 도식화] DCL 흐름
 
-\`\`\`
-[ 관리자 (DBA) ]
-       │
-       ├── GRANT  ──→  [ 일반 사용자 ]
-       │
-       ├── REVOKE ──→  [ 일반 사용자 ]
-       │
-       └── ROLE 생성 ─→ [ 권한 묶음 ] ─GRANT→ [ 일반 사용자 ]
+\`\`\`mermaid
+flowchart LR
+    A[관리자 DBA] -->|GRANT| U1[일반 사용자]
+    A -->|REVOKE| U1
+    A -->|ROLE 생성| R[권한 묶음<br/>ROLE]
+    R -->|GRANT| U2[일반 사용자]
 \`\`\`
 
 ---
@@ -5876,9 +5913,13 @@ GRANT DEV_ROLE TO USER2;
 REVOKE DEV_ROLE FROM USER1;
 \`\`\`
 
-\`\`\`
-[권한1, 권한2, 권한3, ...]  ──묶음──→  [ROLE]  ──GRANT──┬──→ USER1
-                                                       └──→ USER2
+\`\`\`mermaid
+flowchart LR
+    P1[권한 1] --> R[ROLE 묶음]
+    P2[권한 2] --> R
+    P3[권한 3] --> R
+    R -->|GRANT| U1[USER 1]
+    R -->|GRANT| U2[USER 2]
 \`\`\`
 
 ---
