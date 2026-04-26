@@ -31,7 +31,7 @@ const CAPTION_STYLE: React.CSSProperties = {
 };
 
 /** **bold** / *italic* / `code` / [text](url) → React 노드로 변환 (XSS 방지 위해 텍스트만) */
-function renderInlineMd(text: string) {
+export function renderInlineMd(text: string) {
   if (!text) return null;
   // 단순 토크나이저: 양식 마커 기준으로 split
   const tokens = [];
