@@ -207,8 +207,43 @@
         "오류 발생"
       ],
       "correctIndex": 2,
-      "explanation": "NOT IN 서브쿼리의 결과에 NULL이 포함되면 모든 비교가 UNKNOWN으로 평가되어 최종 결과는 공집합이 반환된다.",
+      "explanation": "EMP 테이블의 MGR 컬럼에 KING·JONES 두 행의 값이 NULL로 존재한다. NOT IN 비교는 내부적으로 모든 값에 대한 비교를 AND로 묶는데, 어떤 값과 NULL을 비교하면 UNKNOWN으로 평가되므로 전체 조건이 어떤 행에서도 참이 되지 못한다. 따라서 결과는 공집합이 된다. 만약 MGR이 모두 NOT NULL이라면 매니저로 지정된 적이 없는 직원의 행이 반환될 수 있지만, NULL이 한 건이라도 존재하면 그 가능성은 차단된다.",
       "references": [
+        {
+          "type": "table",
+          "headers": [
+            "EMPNO",
+            "ENAME",
+            "MGR"
+          ],
+          "rows": [
+            [
+              "7369",
+              "SMITH",
+              "7902"
+            ],
+            [
+              "7499",
+              "ALLEN",
+              "7698"
+            ],
+            [
+              "7839",
+              "KING",
+              "NULL"
+            ],
+            [
+              "7902",
+              "FORD",
+              "7566"
+            ],
+            [
+              "7566",
+              "JONES",
+              "NULL"
+            ]
+          ]
+        },
         {
           "type": "sql",
           "code": "SELECT *\nFROM   EMP\nWHERE  EMPNO NOT IN (SELECT MGR FROM EMP);"
@@ -314,8 +349,37 @@
         "`NOT ((사번 = 10005) AND (회원번호 = 2003))`"
       ],
       "correctIndex": 1,
-      "explanation": "튜플 IN 절 `(A, B) IN ((x, y))` 는 `(A = x AND B = y)` 와 동등하다. 두 컬럼이 동시에 매칭되어야 한다는 뜻이므로 OR 가 아닌 AND. 같은 시험의 다른 회차(예: 51회 Q32)에서도 동일한 정답 패턴을 사용한다.",
+      "explanation": "튜플 IN 절 `(A, B) IN ((x, y))` 는 `(A = x AND B = y)` 와 동등하다. 두 컬럼이 동시에 매칭되어야 한다는 뜻이므로 OR가 아닌 AND이다. 위 데이터에 원 SQL을 적용하면 (10005, 2003) 행 두 건만 통과한다. 보기 ① OR로 바꾸면 사번이 10005인 모든 행과 회원번호가 2003인 모든 행이 통과하여 4건이 나오므로 결과가 달라진다. 보기 ④ NOT은 정반대 결과(나머지 행)를 반환한다.",
       "references": [
+        {
+          "type": "table",
+          "headers": [
+            "사번",
+            "회원번호"
+          ],
+          "rows": [
+            [
+              "10005",
+              "2003"
+            ],
+            [
+              "10005",
+              "1500"
+            ],
+            [
+              "20007",
+              "2003"
+            ],
+            [
+              "30001",
+              "2003"
+            ],
+            [
+              "10005",
+              "2003"
+            ]
+          ]
+        },
         {
           "type": "sql",
           "code": "SELECT *\nFROM   T\nWHERE  (사번, 회원번호) IN ((10005, 2003));"
@@ -338,17 +402,34 @@
         {
           "type": "table",
           "headers": [
-            "EMPNO",
-            "1",
-            "2",
-            "3",
-            "4",
-            "5",
-            "6",
-            "7",
-            "8"
+            "EMPNO"
           ],
-          "rows": []
+          "rows": [
+            [
+              "1"
+            ],
+            [
+              "2"
+            ],
+            [
+              "3"
+            ],
+            [
+              "4"
+            ],
+            [
+              "5"
+            ],
+            [
+              "6"
+            ],
+            [
+              "7"
+            ],
+            [
+              "8"
+            ]
+          ]
         },
         {
           "type": "sql",
@@ -367,30 +448,39 @@
         "`SELECT T1.VAL, T2.VAL FROM T1 UNION T2;`"
       ],
       "correctIndex": 1,
-      "explanation": "",
+      "explanation": "양쪽 테이블의 모든 행을 빠짐없이 보존하려면 FULL OUTER JOIN을 사용해야 한다. 매칭되지 않은 행은 NULL로 채워지며, NVL 함수를 통해 0으로 치환할 수 있다. ① CROSS JOIN은 양쪽 모든 행의 조합을 생성하므로 결과가 폭증하고, ③은 NVL이 빠져 NULL이 그대로 노출되며, ④ UNION은 두 결과를 위아래로 합치는 연산이라 이 문제의 의도와 맞지 않는다.",
       "references": [
         {
           "type": "table",
+          "caption": "T1",
           "headers": [
-            "T1",
-            "T2"
+            "ID",
+            "VAL"
           ],
           "rows": [
             [
-              "ID",
-              "VAL",
-              "ID",
-              "VAL"
+              "1",
+              "100"
             ],
             [
-              "1",
-              "100",
+              "2",
+              "150"
+            ]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "T2",
+          "headers": [
+            "ID",
+            "VAL"
+          ],
+          "rows": [
+            [
               "2",
               "200"
             ],
             [
-              "2",
-              "150",
               "3",
               "300"
             ]
@@ -793,30 +883,35 @@
         "오류"
       ],
       "correctIndex": 1,
-      "explanation": "판매에 없는 주문의 아이템인 1, 2가 반환된다.",
+      "explanation": "NOT EXISTS는 서브쿼리에서 매칭 행이 한 건도 없을 때만 참이 된다. 주문의 ITEM 1과 2는 판매 테이블에 등장하지 않으므로 NOT EXISTS가 참이 되어 결과에 포함되고, ITEM 3은 판매에 있으므로 제외된다.",
       "references": [
         {
           "type": "table",
+          "caption": "주문",
           "headers": [
-            "주문",
-            "판매"
+            "ITEM"
           ],
           "rows": [
             [
-              "ITEM",
-              "ITEM"
+              "1"
             ],
             [
-              "1",
+              "2"
+            ],
+            [
               "3"
-            ],
+            ]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "판매",
+          "headers": [
+            "ITEM"
+          ],
+          "rows": [
             [
-              "2",
-              ""
-            ],
-            [
-              "3",
-              ""
+              "3"
             ]
           ]
         },
@@ -1096,46 +1191,53 @@
       "options": [
         "`SELECT * FROM EMP E, DEPT D WHERE E.DEPTNO = D.DEPTNO;`",
         "`SELECT * FROM EMP WHERE DEPTNO IS NULL OR DEPTNO NOT IN (SELECT DEPTNO FROM DEPT);`",
-        "`SELECT * FROM EMP E WHERE EXISTS (SELECT 1 FROM DEPT D WHERE D.DEPTNO = E.DEPTNO);`",
-        "`SELECT * FROM EMP INNER JOIN DEPT USING (DEPTNO);`"
+        "`SELECT * FROM EMP E LEFT JOIN DEPT D ON E.DEPTNO = D.DEPTNO WHERE D.DEPTNO IS NOT NULL;`",
+        "`SELECT * FROM EMP E LEFT JOIN DEPT D ON E.DEPTNO = D.DEPTNO WHERE D.DEPTNO IS NULL;`"
       ],
       "correctIndex": 1,
-      "explanation": "어떤 부서에도 속하지 않는 경우는 DEPTNO가 NULL이거나 DEPT 테이블에 존재하지 않는 값을 가진 경우이다.",
+      "explanation": "\"어떤 부서에도 속하지 않는다\"는 두 가지 경우를 모두 포함한다. (a) DEPTNO 자체가 NULL인 경우, (b) DEPTNO 값이 있지만 DEPT 테이블에 등록되지 않은 경우(예: 99번). ②는 OR로 두 경우를 모두 잡으므로 가장 적절하다. ① 일반 조인은 부서가 매칭된 직원만 조회한다. ③ LEFT JOIN + IS NOT NULL은 매칭된 직원만 남기므로 정답과 정반대다. ④ LEFT JOIN + IS NULL은 (a) 케이스만 잡고 (b) DEPTNO=99처럼 DEPT에 등록되지 않은 외래값은 매칭 단계에서 NULL로 채워지지 않고 그대로 결합되어 결과에서 누락될 수 있다.",
       "references": [
         {
           "type": "table",
+          "caption": "EMP",
           "headers": [
-            "EMP",
-            "DEPT"
+            "EMPNO",
+            "ENAME",
+            "DEPTNO"
           ],
           "rows": [
             [
-              "EMPNO",
-              "ENAME",
-              "DEPTNO",
-              "DEPTNO",
-              "DNAME"
-            ],
-            [
               "1",
               "A",
-              "10",
-              "10",
-              "영업"
+              "10"
             ],
             [
               "2",
               "B",
-              "NULL",
-              "20",
-              "인사"
+              "NULL"
             ],
             [
               "3",
               "C",
-              "99",
-              "",
-              ""
+              "99"
+            ]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "DEPT",
+          "headers": [
+            "DEPTNO",
+            "DNAME"
+          ],
+          "rows": [
+            [
+              "10",
+              "영업"
+            ],
+            [
+              "20",
+              "인사"
             ]
           ]
         }
