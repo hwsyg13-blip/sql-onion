@@ -105,6 +105,27 @@ export const App = () => {
     }
   }, [tweaks.theme, tweaks.accent]);
 
+  // 라우트별 <title> 갱신 — 탭 구분·SEO·공유 미리보기 개선
+  React.useEffect(() => {
+    const base = 'SQLD양파';
+    const names: Record<string, string> = {
+      home: `${base} — SQLD 3주 합격 루틴`,
+      login: `로그인 · ${base}`,
+      pricing: `요금제 · ${base}`,
+      subscribe: `결제 · ${base}`,
+      plan: `3주 공부계획 · ${base}`,
+      theory: `이론 · ${base}`,
+      'theory-detail': `이론 상세 · ${base}`,
+      mock: `모의고사 · ${base}`,
+      endless: `랜덤 퀴즈 · ${base}`,
+      'mock-exam': `AI 모의고사 진행 · ${base}`,
+      exams: `기출문제 · ${base}`,
+      cbt: `CBT 진행 · ${base}`,
+      'cbt-result': `CBT 결과 · ${base}`,
+    };
+    document.title = names[route] || `${base} — SQLD 3주 합격 루틴`;
+  }, [route]);
+
   // 브라우저 히스토리와 동기화 — popstate 로 돌아올 때는 pushState 하지 않도록 플래그
   const isPoppingRef = React.useRef(false);
 

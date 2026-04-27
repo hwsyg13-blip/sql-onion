@@ -4,7 +4,7 @@ import { Btn, Tag, Ic, CodeBlock, Mascot, MascotGuide, OnionMark, Progress, Divi
 import { QUIZ_BANK } from '../data/quizBank';
 import { sqloUsage } from './PricingScreen';
 import { BETA_NO_AUTH } from '../App';
-import { QuestionReferences, OptionReferences } from '../components/QuestionReferences';
+import { QuestionReferences, OptionReferences, renderInlineMd } from '../components/QuestionReferences';
 import { AdSlot } from '../components/AdSlot';
 import { BugReportModal } from '../components/BugReportModal';
 import { trackEvent } from '../lib/analytics';
@@ -211,9 +211,9 @@ export const QuestionBody = ({q, noTags}) => {
         onClose={() => setReportOpen(false)}
       />
     )}
-    <h2 style={{fontSize:20,fontWeight:700,color:"var(--fg-1)",lineHeight:1.45,margin:"0 0 4px",letterSpacing:"-0.01em"}}>{q.title}</h2>
+    <h2 style={{fontSize:20,fontWeight:700,color:"var(--fg-1)",lineHeight:1.45,margin:"0 0 4px",letterSpacing:"-0.01em"}}>{renderInlineMd(q.title)}</h2>
     {/* 구형 필드 유지 (기존 데이터 호환) */}
-    {q.body && <p style={{fontSize:15,lineHeight:1.7,color:"var(--fg-2)",margin:"10px 0 0"}}>{q.body}</p>}
+    {q.body && <p style={{fontSize:15,lineHeight:1.7,color:"var(--fg-2)",margin:"10px 0 0"}}>{renderInlineMd(q.body)}</p>}
     {q.query && <CodeBlock>{q.query}</CodeBlock>}
     {/* 신규 보기 영역 — references 배열이 있으면 표/SQL/ASCII/HTML 블록을 한 번에 렌더 */}
     <QuestionReferences refs={q.references}/>
