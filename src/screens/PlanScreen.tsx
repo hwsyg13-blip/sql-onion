@@ -3,75 +3,148 @@ import React from 'react';
 import { Btn, Tag, Ic, Mascot, MascotGuide, OnionMark, Progress } from '../components/Atoms';
 import { useProgress, isPlanDayDone } from '../lib/progress';
 import { AdSlot } from '../components/AdSlot';
-import { THEORY } from '../data/theory';
 import { NEXT_EXAM, daysUntilExam } from '../lib/examDate';
 
-// 3-week plan v2 — chapters 배열 + 시험일 기준 D-day.
-// 명세: docs/qa/3-week-plan-redesign.md
-// 시작 권장일 = 시험일 - 21일 = 5/11. Day N 권장 날짜 = 시작일 + (N-1)일.
+// 3-week plan v3 — actions 배열 (한 Day 안에 여러 활동 → 각각 따로 버튼).
+// 명세: 사용자 요청 (2026-04-27)
+//   Week 1~2 (14일): 30챕터 이론 마스터 (미니 테스트 제거)
+//   Week 3 Day 15~18 (월~목): 매일 기출 3회차씩 (round-60→49 내림차순, 12회차)
+//   Week 3 Day 19~20 (금~토): 모의고사 3개씩
+//   Week 3 Day 21 (일): 최종 암기장
+
+// 액션 타입:
+//   { kind: 'theory', label, chapterId }
+//   { kind: 'cbt',    label, examId }
+//   { kind: 'mock',   label }
+//   { kind: 'cheatsheet', label }
 
 export const PLAN_DATA = [
-  // ─ Week 1: 1과목 데이터 모델링 (10개 챕터 + 미니테스트)
-  {week:1, day:1,  subj:"1과목", title:"데이터 모델의 이해",
-    chapters:["c111"], concept:["3층 스키마","개념→논리→물리"], est:50},
-  {week:1, day:2,  subj:"1과목", title:"엔터티 + 속성",
-    chapters:["c112","c113"], concept:["엔터티 5대 특징","기본·설계·파생"], est:60},
-  {week:1, day:3,  subj:"1과목", title:"관계 + 식별자",
-    chapters:["c114","c115"], concept:["1:1·1:N·M:N","유·최·불·존"], est:65},
-  {week:1, day:4,  subj:"1과목", title:"정규화",
-    chapters:["c121"], concept:["1NF→2NF→3NF→BCNF","반정규화"], est:60},
-  {week:1, day:5,  subj:"1과목", title:"관계와 조인 + 트랜잭션",
-    chapters:["c122","c123"], concept:["관계=FK=JOIN","ACID"], est:60},
-  {week:1, day:6,  subj:"1과목", title:"NULL + 본질·인조 식별자",
-    chapters:["c124","c125"], concept:["IS NULL만 가능","본질 vs 인조"], est:60},
-  {week:1, day:7,  subj:"1과목", title:"1과목 미니 테스트",
-    concept:["1과목 핵심 10문항"], est:40, test:true},
+  // ─ Week 1 Day 1~4 (4일): 1과목 10챕터 압축 — 출제 비중 10/50 으로 빠르게 보고 2과목에 시간 배분
+  {week:1, day:1,  subj:"1과목", title:"데이터 모델 + 엔터티",
+    actions:[{kind:'theory',label:'데이터 모델의 이해',chapterId:'c111'},{kind:'theory',label:'엔터티',chapterId:'c112'}],
+    concept:["3층 스키마","엔터티 5대 특징"], est:60},
+  {week:1, day:2,  subj:"1과목", title:"속성 + 관계 + 식별자",
+    actions:[
+      {kind:'theory',label:'속성',chapterId:'c113'},
+      {kind:'theory',label:'관계',chapterId:'c114'},
+      {kind:'theory',label:'식별자',chapterId:'c115'},
+    ],
+    concept:["기본·설계·파생","1:1·1:N·M:N","유·최·불·존"], est:75},
+  {week:1, day:3,  subj:"1과목", title:"정규화 + 관계조인 + 트랜잭션",
+    actions:[
+      {kind:'theory',label:'정규화',chapterId:'c121'},
+      {kind:'theory',label:'관계와 조인의 이해',chapterId:'c122'},
+      {kind:'theory',label:'트랜잭션의 이해',chapterId:'c123'},
+    ],
+    concept:["1NF→2NF→3NF→BCNF","관계=FK=JOIN","ACID"], est:75},
+  {week:1, day:4,  subj:"1과목", title:"NULL + 본질·인조 식별자",
+    actions:[
+      {kind:'theory',label:'NULL 속성의 이해',chapterId:'c124'},
+      {kind:'theory',label:'본질식별자 vs 인조식별자',chapterId:'c125'},
+    ],
+    concept:["IS NULL만 가능","본질 vs 인조"], est:55},
 
-  // ─ Week 2: 2-1 (8개) + 2-2 일부 (6개) = 14개
-  {week:2, day:8,  subj:"2과목", title:"RDB 개요 + SELECT문",
-    chapters:["c211","c212"], concept:["DDL/DML/DCL/TCL","FWGHSO 실행 순서"], est:55},
-  {week:2, day:9,  subj:"2과목", title:"함수 + WHERE절",
-    chapters:["c213","c214"], concept:["단일행/다중행","AND/OR/IN/LIKE"], est:60},
-  {week:2, day:10, subj:"2과목", title:"GROUP BY/HAVING + ORDER BY",
-    chapters:["c215","c216"], concept:["WHERE vs HAVING","NULL 정렬"], est:60},
-  {week:2, day:11, subj:"2과목", title:"조인 + 표준 조인",
-    chapters:["c217","c218"], concept:["등가/비등가/셀프/외부/교차","INNER/OUTER/NATURAL/USING"], est:65},
-  {week:2, day:12, subj:"2과목", title:"서브쿼리 + 집합 연산자",
-    chapters:["c221","c222"], concept:["스칼라/인라인뷰/연관","UNION/INTERSECT/MINUS"], est:60},
-  {week:2, day:13, subj:"2과목", title:"그룹 함수 + 윈도우 함수",
-    chapters:["c223","c224"], concept:["ROLLUP/CUBE","RANK/PARTITION BY"], est:65},
-  {week:2, day:14, subj:"2과목", title:"Top N + 계층형 질의",
-    chapters:["c225","c226"], concept:["ROWNUM/FETCH","CONNECT BY"], est:60},
+  // ─ Week 1 Day 5~7 + Week 2 Day 8~14 (10일): 2과목 20챕터 — 출제 비중 40/50, 일별 2챕터 여유
+  {week:1, day:5,  subj:"2과목", title:"RDB 개요 + SELECT문",
+    actions:[{kind:'theory',label:'RDB 개요',chapterId:'c211'},{kind:'theory',label:'SELECT문',chapterId:'c212'}],
+    concept:["DDL/DML/DCL/TCL","FWGHSO 실행 순서"], est:55},
+  {week:1, day:6,  subj:"2과목", title:"함수 + WHERE절",
+    actions:[{kind:'theory',label:'함수',chapterId:'c213'},{kind:'theory',label:'WHERE절',chapterId:'c214'}],
+    concept:["단일행/다중행","AND/OR/IN/LIKE"], est:60},
+  {week:1, day:7,  subj:"2과목", title:"GROUP BY/HAVING + ORDER BY",
+    actions:[{kind:'theory',label:'GROUP BY/HAVING',chapterId:'c215'},{kind:'theory',label:'ORDER BY',chapterId:'c216'}],
+    concept:["WHERE vs HAVING","NULL 정렬"], est:60},
+  {week:2, day:8,  subj:"2과목", title:"조인 + 표준 조인",
+    actions:[{kind:'theory',label:'조인',chapterId:'c217'},{kind:'theory',label:'표준 조인',chapterId:'c218'}],
+    concept:["등가/비등가/셀프/외부/교차","INNER/OUTER/NATURAL/USING"], est:75},
+  {week:2, day:9,  subj:"2과목", title:"서브쿼리 + 집합 연산자",
+    actions:[
+      {kind:'theory',label:'서브쿼리',chapterId:'c221'},
+      {kind:'theory',label:'집합 연산자',chapterId:'c222'},
+    ],
+    concept:["스칼라/인라인뷰","UNION/INTERSECT/MINUS"], est:65},
+  {week:2, day:10, subj:"2과목", title:"그룹 함수 + 윈도우 함수",
+    actions:[
+      {kind:'theory',label:'그룹 함수',chapterId:'c223'},
+      {kind:'theory',label:'윈도우 함수',chapterId:'c224'},
+    ],
+    concept:["ROLLUP/CUBE","RANK/PARTITION BY"], est:80},
+  {week:2, day:11, subj:"2과목", title:"Top N + 계층형 질의",
+    actions:[
+      {kind:'theory',label:'Top N 쿼리',chapterId:'c225'},
+      {kind:'theory',label:'계층형 질의와 셀프 조인',chapterId:'c226'},
+    ],
+    concept:["ROWNUM/FETCH","CONNECT BY"], est:65},
+  {week:2, day:12, subj:"2과목", title:"PIVOT/UNPIVOT + 정규 표현식",
+    actions:[
+      {kind:'theory',label:'PIVOT/UNPIVOT',chapterId:'c227'},
+      {kind:'theory',label:'정규 표현식',chapterId:'c228'},
+    ],
+    concept:["세로↔가로","REGEXP_*"], est:55},
+  {week:2, day:13, subj:"2과목", title:"DML + TCL",
+    actions:[
+      {kind:'theory',label:'DML',chapterId:'c231'},
+      {kind:'theory',label:'TCL',chapterId:'c232'},
+    ],
+    concept:["INSERT/UPDATE/DELETE/MERGE","COMMIT/ROLLBACK"], est:55},
+  {week:2, day:14, subj:"2과목", title:"DDL + DCL",
+    actions:[
+      {kind:'theory',label:'DDL',chapterId:'c233'},
+      {kind:'theory',label:'DCL',chapterId:'c234'},
+    ],
+    concept:["CREATE/ALTER/DROP","GRANT/REVOKE"], est:55},
 
-  // ─ Week 3: 2-2 마무리 + 2-3 + 실전
-  {week:3, day:15, subj:"2과목", title:"PIVOT/UNPIVOT + 정규 표현식",
-    chapters:["c227","c228"], concept:["세로↔가로","REGEXP_*"], est:55},
-  {week:3, day:16, subj:"2과목", title:"DML + TCL",
-    chapters:["c231","c232"], concept:["INSERT/UPDATE/DELETE/MERGE","COMMIT/ROLLBACK"], est:60},
-  {week:3, day:17, subj:"2과목", title:"DDL + DCL",
-    chapters:["c233","c234"], concept:["CREATE/ALTER/DROP","GRANT/REVOKE"], est:55},
-  {week:3, day:18, subj:"기출", title:"제60회(최신) 기출",
-    concept:["CBT 실전"], est:90, examId:"round-60"},
-  {week:3, day:19, subj:"기출", title:"제59회 기출",
-    concept:["CBT 실전","약점 보강"], est:90, examId:"round-59"},
-  {week:3, day:20, subj:"실전", title:"제58회 기출 + 모의고사 1회",
-    concept:["기출 마무리","90분 모의 1차"], est:150, examId:"round-58", mock:true},
-  {week:3, day:21, subj:"마무리", title:"모의 2회 + 시험 대비 통독 + 체크리스트",
-    concept:["취약 단원 점검","함정·정리 한 번에","준비물·컨디션"], est:150, mock:true, examReview:true, final:true},
+  // ─ Week 3 Day 15~18: 기출 12회차 (round-60 → round-49 내림차순)
+  {week:3, day:15, subj:"기출", title:"제60·59·58회",
+    actions:[
+      {kind:'cbt',label:'제60회',examId:'round-60'},
+      {kind:'cbt',label:'제59회',examId:'round-59'},
+      {kind:'cbt',label:'제58회',examId:'round-58'},
+    ],
+    concept:["CBT 실전 3회"], est:270},
+  {week:3, day:16, subj:"기출", title:"제57·56·55회",
+    actions:[
+      {kind:'cbt',label:'제57회',examId:'round-57'},
+      {kind:'cbt',label:'제56회',examId:'round-56'},
+      {kind:'cbt',label:'제55회',examId:'round-55'},
+    ],
+    concept:["CBT 실전 3회"], est:270},
+  {week:3, day:17, subj:"기출", title:"제54·53·52회",
+    actions:[
+      {kind:'cbt',label:'제54회',examId:'round-54'},
+      {kind:'cbt',label:'제53회',examId:'round-53'},
+      {kind:'cbt',label:'제52회',examId:'round-52'},
+    ],
+    concept:["CBT 실전 3회"], est:270},
+  {week:3, day:18, subj:"기출", title:"제51·50·49회",
+    actions:[
+      {kind:'cbt',label:'제51회',examId:'round-51'},
+      {kind:'cbt',label:'제50회',examId:'round-50'},
+      {kind:'cbt',label:'제49회',examId:'round-49'},
+    ],
+    concept:["CBT 실전 3회"], est:270},
+
+  // ─ Week 3 Day 19~20: 모의고사 3개씩
+  {week:3, day:19, subj:"모의", title:"실전 모의 3회",
+    actions:[
+      {kind:'mock',label:'모의 1회'},
+      {kind:'mock',label:'모의 2회'},
+      {kind:'mock',label:'모의 3회'},
+    ],
+    concept:["90분 실전 ×3"], est:270},
+  {week:3, day:20, subj:"모의", title:"실전 모의 3회",
+    actions:[
+      {kind:'mock',label:'모의 1회'},
+      {kind:'mock',label:'모의 2회'},
+      {kind:'mock',label:'모의 3회'},
+    ],
+    concept:["90분 실전 ×3"], est:270},
+
+  // ─ Week 3 Day 21: 최종 암기장 (시험일)
+  {week:3, day:21, subj:"마무리", title:"최종 암기장",
+    actions:[{kind:'cheatsheet',label:'암기장 보기'}],
+    concept:["함정·정리 한 번에","준비물·컨디션"], est:60, final:true},
 ];
-
-// 챕터 ID → 제목 lookup (Day 카드의 챕터 칩에 사용)
-const CHAPTER_TITLE: Record<string, string> = (() => {
-  const out: Record<string, string> = {};
-  for (const sub of THEORY.subjects || []) {
-    for (const sec of sub.sections || []) {
-      for (const ch of sec.chapters || []) {
-        out[ch.id] = ch.title;
-      }
-    }
-  }
-  return out;
-})();
 
 // 권장 시작일 = 시험일 - 21일 = 2026-05-11 (월).  Day N 권장 날짜 = 시작일 + (N-1)일.
 const PLAN_START = '2026-05-11';
@@ -84,10 +157,19 @@ function recommendedDateLabel(dayN: number): string {
   return `${m}/${dd} (${wd})`;
 }
 
+function actionRoute(a: any): [string, any?] {
+  switch (a.kind) {
+    case 'theory': return ['theory-detail', a.chapterId];
+    case 'cbt':    return ['cbt', a.examId];
+    case 'mock':   return ['mock-exam'];
+    case 'cheatsheet': return ['final-cheatsheet'];
+    default: return ['home'];
+  }
+}
+
 export const PlanScreen = ({onNavigate, planViz, setPlanViz}) => {
   const { progress, stats } = useProgress();
 
-  // 컨텐츠 완료 기준으로 done 계산 → "다음 학습할 Day" 를 current 로
   const planWithStatus = React.useMemo(() => {
     const withDone = PLAN_DATA.map(d => ({
       ...d,
@@ -100,24 +182,18 @@ export const PlanScreen = ({onNavigate, planViz, setPlanViz}) => {
   const currentDay = planWithStatus.find(d => d.current)?.day ?? 21;
   const currentWeek = Math.min(3, Math.ceil(currentDay / 7));
 
-  // 시작 시 현재 주차로
   const [week, setWeek] = React.useState(currentWeek);
   React.useEffect(() => { setWeek(currentWeek); }, [currentWeek]);
 
-  // D-day
   const dDay = daysUntilExam();
   const dDayLabel =
     dDay > 0 ? `시험까지 ${dDay}일`
     : dDay === 0 ? '시험 당일'
     : `시험 ${-dDay}일 지남`;
 
-  const openDay = (d: any) => {
-    if (d.chapters?.length) {
-      // 첫 챕터로 진입 (여러 챕터 묶음 보기는 다음 PR 에서 별도 라우트 추가 예정)
-      onNavigate('theory-detail', d.chapters[0]);
-    } else if (d.examId) onNavigate('cbt', d.examId);
-    else if (d.mock) onNavigate('mock-exam');
-    else if (d.test) onNavigate('endless');
+  const handleAction = (a: any) => {
+    const [route, params] = actionRoute(a);
+    onNavigate(route, params);
   };
 
   return (
@@ -148,7 +224,7 @@ export const PlanScreen = ({onNavigate, planViz, setPlanViz}) => {
       <div style={{marginTop:8,display:"flex",gap:8,borderBottom:"1px solid var(--border-subtle)"}}>
         {[1,2,3].map(w => {
           const active = week === w;
-          const ws = ["이론 기초","SQL 본체","실전 모의"];
+          const ws = ["이론 1","이론 2","실전·기출"];
           const doneW = planWithStatus.filter(d=>d.week===w && d.done).length;
           const totalW = planWithStatus.filter(d=>d.week===w).length;
           return (
@@ -167,9 +243,9 @@ export const PlanScreen = ({onNavigate, planViz, setPlanViz}) => {
       </div>
 
       {planViz === "calendar" ? (
-        <CalendarView week={week} openDay={openDay} data={planWithStatus}/>
+        <CalendarView week={week} data={planWithStatus} onAction={handleAction}/>
       ) : (
-        <TimelineView week={week} openDay={openDay} data={planWithStatus}/>
+        <TimelineView week={week} data={planWithStatus} onAction={handleAction}/>
       )}
 
       {/* Mascot guide */}
@@ -200,37 +276,53 @@ const vizBtn = (active) => ({
   boxShadow: active ? "var(--shadow-sm)" : "none",
 });
 
-// 챕터 칩 — chapters 배열을 Day 카드 안에 표시
-const ChapterChips = ({chapters, max = 2}: any) => {
-  if (!chapters?.length) return null;
+// 액션 버튼 — 카드 안에 N개 나열. 카드 자체 클릭 비활성, 각 버튼만 동작.
+const ActionButton = ({action, onClick, compact}: any) => {
+  const icon = action.kind === 'theory' ? <Ic.Book size={12}/>
+    : action.kind === 'cbt' ? <Ic.ListChecks size={12}/>
+    : action.kind === 'mock' ? <Ic.Clock size={12}/>
+    : <Ic.Sparkles size={12}/>;
   return (
-    <div style={{display:'flex',gap:4,flexWrap:'wrap'}}>
-      {chapters.slice(0, max).map((cid: string) => (
-        <span key={cid} style={{
-          fontSize: 10.5, fontWeight: 700, padding: '2px 7px', borderRadius: 5,
-          background: 'var(--point-100)', color: 'var(--point-600)',
-          fontFamily: 'var(--font-mono)', letterSpacing: '0.02em',
-        }}>{cid}</span>
-      ))}
-      {chapters.length > max && (
-        <span style={{fontSize:10.5,color:'var(--fg-3)'}}>+{chapters.length - max}</span>
-      )}
-    </div>
+    <button
+      onClick={(e) => { e.stopPropagation(); onClick(action); }}
+      style={{
+        display: 'inline-flex', alignItems: 'center', gap: 6,
+        padding: compact ? '6px 9px' : '8px 11px',
+        background: 'var(--bg-card)',
+        border: '1px solid var(--border-default)',
+        borderRadius: 8,
+        cursor: 'pointer',
+        fontFamily: 'inherit',
+        fontSize: compact ? 11.5 : 12.5,
+        fontWeight: 600,
+        color: 'var(--fg-2)',
+        textAlign: 'left',
+        flex: '1 1 auto',
+        minWidth: 0,
+        transition: 'border-color 150ms, color 150ms',
+      }}
+      onMouseEnter={(e)=>{e.currentTarget.style.borderColor='var(--point-500)';e.currentTarget.style.color='var(--point-600)';}}
+      onMouseLeave={(e)=>{e.currentTarget.style.borderColor='var(--border-default)';e.currentTarget.style.color='var(--fg-2)';}}
+    >
+      <span style={{color:'var(--point-600)',flexShrink:0,display:'inline-flex'}}>{icon}</span>
+      <span style={{overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{action.label}</span>
+      <Ic.ArrowRight size={11} style={{marginLeft:'auto',flexShrink:0,opacity:0.6}}/>
+    </button>
   );
 };
 
-export const CalendarView = ({week, openDay, data}) => {
+export const CalendarView = ({week, data, onAction}) => {
   const src = data || PLAN_DATA;
   const days = src.filter(d=>d.week===week);
   return (
     <div style={{marginTop:20, display:"grid", gridTemplateColumns:"repeat(7, 1fr)", gap:10}} className="plan-calendar">
       {days.map(d => {
-        const bg = d.current ? "var(--point-050)" : d.done ? "var(--bg-card)" : "var(--bg-card)";
+        const bg = d.current ? "var(--point-050)" : "var(--bg-card)";
         const border = d.current ? "2px solid var(--point-600)" : d.done ? "1px solid var(--point-100)" : "1px solid var(--border-subtle)";
         return (
-          <button key={d.day} onClick={()=>openDay(d)} style={{
-            textAlign:"left", background:bg, border, borderRadius:12, padding:"14px 14px",
-            cursor:"pointer", fontFamily:"inherit", minHeight:170,
+          <div key={d.day} style={{
+            background:bg, border, borderRadius:12, padding:"14px 14px",
+            fontFamily:"inherit", minHeight:200,
             display:"flex",flexDirection:"column",gap:8,
           }}>
             <div style={{display:"flex",justifyContent:"space-between",alignItems:"center"}}>
@@ -247,23 +339,25 @@ export const CalendarView = ({week, openDay, data}) => {
                 <span style={{width:8,height:8,borderRadius:999,background:"var(--border-strong)"}}/>
               )}
             </div>
-            <Tag tone={d.subj==="1과목"||d.subj==="2과목"?"green":d.subj==="기출"?"blue":"peach"} size="sm">{d.subj}</Tag>
+            <Tag tone={d.subj==="1과목"||d.subj==="2과목"?"green":d.subj==="기출"?"blue":d.subj==="모의"?"peach":"neutral"} size="sm">{d.subj}</Tag>
             <div style={{fontSize:13,fontWeight:700,color:"var(--fg-1)",lineHeight:1.35}}>{d.title}</div>
-            <ChapterChips chapters={d.chapters}/>
-            <div style={{fontSize:11,color:"var(--fg-3)",display:"flex",flexWrap:"wrap",gap:4}}>
-              {d.concept.map((c,i)=>(<span key={i}>{c}{i<d.concept.length-1 && " · "}</span>))}
+            {/* 액션 버튼들 — 각각 따로 클릭 */}
+            <div style={{display:'flex',flexDirection:'column',gap:6,marginTop:4}}>
+              {(d.actions || []).map((a: any, i: number) => (
+                <ActionButton key={i} action={a} onClick={onAction} compact/>
+              ))}
             </div>
             <div style={{fontSize:11,color:"var(--fg-3)",fontFamily:"var(--font-mono)",display:"flex",alignItems:"center",gap:4,marginTop:"auto"}}>
               <Ic.Clock size={11}/> {d.est}분
             </div>
-          </button>
+          </div>
         );
       })}
     </div>
   );
 };
 
-export const TimelineView = ({week, openDay, data}) => {
+export const TimelineView = ({week, data, onAction}) => {
   const src = data || PLAN_DATA;
   const days = src.filter(d=>d.week===week);
   return (
@@ -281,35 +375,29 @@ export const TimelineView = ({week, openDay, data}) => {
           }}>
             {d.done ? <Ic.Check size={14}/> : d.day}
           </div>
-          <button onClick={()=>openDay(d)} style={{
-            width:"100%",textAlign:"left",background:"var(--bg-card)",
+          <div style={{
+            background:"var(--bg-card)",
             border: d.current ? "2px solid var(--point-600)" : "1px solid var(--border-subtle)",
-            borderRadius:12,padding:"16px 20px",cursor:"pointer",fontFamily:"inherit",
-            display:"flex",alignItems:"center",gap:16,
+            borderRadius:12,padding:"16px 20px",fontFamily:"inherit",
           }}>
-            <div style={{flex:1,minWidth:0}}>
-              <div style={{display:"flex",gap:6,marginBottom:6,alignItems:'center',flexWrap:'wrap'}}>
-                <Tag tone={d.subj==="1과목"||d.subj==="2과목"?"green":d.subj==="기출"?"blue":"peach"} size="sm">{d.subj}</Tag>
-                {d.current && <Tag tone="solid" size="sm">오늘</Tag>}
-                {d.done && <Tag tone="neutral" size="sm">완료</Tag>}
-                <span style={{fontSize:11,color:'var(--fg-4)',fontFamily:'var(--font-mono)'}}>{recommendedDateLabel(d.day)}</span>
-              </div>
-              <div style={{fontSize:15,fontWeight:700,color:"var(--fg-1)",marginBottom:4}}>Day {d.day} · {d.title}</div>
-              <div style={{fontSize:12,color:"var(--fg-3)",display:'flex',gap:8,alignItems:'center',flexWrap:'wrap'}}>
-                <span>{d.concept.join(" · ")}</span>
-                {d.chapters?.length > 0 && (
-                  <>
-                    <span style={{color:'var(--border-strong)'}}>·</span>
-                    <ChapterChips chapters={d.chapters} max={3}/>
-                  </>
-                )}
-              </div>
+            <div style={{display:"flex",gap:6,marginBottom:8,alignItems:'center',flexWrap:'wrap'}}>
+              <Tag tone={d.subj==="1과목"||d.subj==="2과목"?"green":d.subj==="기출"?"blue":d.subj==="모의"?"peach":"neutral"} size="sm">{d.subj}</Tag>
+              {d.current && <Tag tone="solid" size="sm">오늘</Tag>}
+              {d.done && <Tag tone="neutral" size="sm">완료</Tag>}
+              <span style={{fontSize:11,color:'var(--fg-4)',fontFamily:'var(--font-mono)'}}>{recommendedDateLabel(d.day)}</span>
+              <span style={{marginLeft:'auto',display:"flex",alignItems:"center",gap:4,fontSize:12,color:"var(--fg-3)",fontFamily:"var(--font-mono)"}}>
+                <Ic.Clock size={12}/> {d.est}분
+              </span>
             </div>
-            <div style={{display:"flex",alignItems:"center",gap:4,fontSize:12,color:"var(--fg-3)",fontFamily:"var(--font-mono)"}}>
-              <Ic.Clock size={12}/> {d.est}분
+            <div style={{fontSize:15,fontWeight:700,color:"var(--fg-1)",marginBottom:6}}>Day {d.day} · {d.title}</div>
+            <div style={{fontSize:12,color:"var(--fg-3)",marginBottom:10}}>{d.concept.join(" · ")}</div>
+            {/* 액션 버튼들 */}
+            <div style={{display:'flex',flexWrap:'wrap',gap:8}}>
+              {(d.actions || []).map((a: any, i: number) => (
+                <ActionButton key={i} action={a} onClick={onAction}/>
+              ))}
             </div>
-            <Ic.ChevronRight size={18}/>
-          </button>
+          </div>
         </div>
       ))}
     </div>
