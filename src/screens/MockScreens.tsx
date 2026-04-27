@@ -21,8 +21,8 @@ export const MockLanding = ({onNavigate}) => (
     <p style={{fontSize:14,color:"var(--fg-3)",margin:"0 0 28px"}}>AI가 실제 시험 출제 비율대로 새로운 문제를 만들어요.</p>
     <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit, minmax(300px, 1fr))",gap:16}}>
       {[
-        {id:"mock-exam", t:"실전 모의고사 모드", s:"1과목 10 · 2과목 40, 총 50문항 · 90분 타이머 · 자동 채점", cta:"응시하기", icon:Ic.Clock, tone:"peach"},
         {id:"endless",   t:"랜덤 퀴즈 모드",   s:"한문항씩 즉시 채점 · 해설 보기 · 무한 ", cta:"시작하기", icon:Ic.Shuffle, tone:"blue"},
+        {id:"mock-exam", t:"실전 모의고사 모드", s:"1과목 10 · 2과목 40, 총 50문항 · 90분 타이머 · 자동 채점", cta:"응시하기", icon:Ic.Clock, tone:"peach"},
       ].map(c=>{
         const I = c.icon;
         const accent = c.tone==="peach"?"var(--wrong-fg)":"var(--info-fg)";
