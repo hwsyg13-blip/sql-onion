@@ -155,6 +155,10 @@ export function computeStats(p: LocalProgress): DerivedStats {
 export function isPlanDayDone(day: any, p: LocalProgress, stats: DerivedStats): boolean {
   // day: PlanScreen.PLAN_DATA 의 한 항목
   // 현재 위치보다 이전이면 done 으로 간주 + 실제 완료 증거가 있으면 확실히 done
+  if (day.chapters?.length) {
+    // 챕터 배열 — 모든 챕터를 열람했으면 완료
+    return day.chapters.every((c: string) => p.theoryViewed.includes(c));
+  }
   if (day.theoryId) {
     return p.theoryViewed.includes(day.theoryId);
   }
