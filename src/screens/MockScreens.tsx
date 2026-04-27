@@ -59,7 +59,6 @@ export const EndlessScreen = ({onNavigate}) => {
   const [checked, setChecked] = React.useState(false);
   const [open, setOpen] = React.useState(false);
   const [stats, setStats] = React.useState({correct:0, wrong:0});
-  const [saved, setSaved] = React.useState(new Set());
   const [limitHit, setLimitHit] = React.useState(false);
 
   // GA 이벤트: 랜덤(엔드리스) 퀴즈 시작
@@ -89,9 +88,6 @@ export const EndlessScreen = ({onNavigate}) => {
     setSelected(null); setChecked(false); setOpen(false);
     if (idx + 1 >= order.length) setOrder([...QUIZ_BANK].sort(()=>Math.random()-0.5));
     setIdx((idx + 1) % order.length);
-  };
-  const toggleSave = () => {
-    setSaved(s => { const n = new Set(s); n.has(q.id) ? n.delete(q.id) : n.add(q.id); return n; });
   };
 
   const total = stats.correct + stats.wrong;
@@ -124,9 +120,6 @@ export const EndlessScreen = ({onNavigate}) => {
 
         <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginTop:22,gap:10,flexWrap:"wrap"}}>
           <div style={{display:"flex",gap:8}}>
-            <Btn variant="text" size="sm" onClick={toggleSave} icon={saved.has(q.id) ? <Ic.BookmarkFill size={14}/> : <Ic.Bookmark size={14}/>}>
-              {saved.has(q.id) ? "오답노트 저장됨" : "오답노트"}
-            </Btn>
             <Btn variant="text" size="sm" onClick={next}>건너뛰기</Btn>
           </div>
           <div style={{display:"flex",gap:10}}>

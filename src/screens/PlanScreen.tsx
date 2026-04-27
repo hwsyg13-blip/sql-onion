@@ -26,10 +26,10 @@ export const PLAN_DATA = [
   // Week 3 — 실전
   {week:3, day:15, subj:"기출",   title:"제60회(최신) 기출",        concept:["CBT 실전"],              est:90, examId:"round-60"},
   {week:3, day:16, subj:"기출",   title:"제59회 기출",              concept:["CBT 실전"],              est:90, examId:"round-59"},
-  {week:3, day:17, subj:"기출",   title:"제58회 기출 · 오답 복습",  concept:["오답노트"],               est:60, examId:"round-58"},
+  {week:3, day:17, subj:"기출",   title:"제58회 기출 복습",         concept:["약점 보강"],              est:60, examId:"round-58"},
   {week:3, day:18, subj:"모의",   title:"AI 모의고사 1회",         concept:["90분 실전"],              est:90, mock:true},
   {week:3, day:19, subj:"모의",   title:"AI 모의고사 2회",         concept:["취약 단원 집중"],         est:90, mock:true},
-  {week:3, day:20, subj:"복습",   title:"전체 오답노트 리뷰",      concept:["해설 재확인"],            est:60},
+  {week:3, day:20, subj:"복습",   title:"전체 풀이 점검",           concept:["해설 재확인"],            est:60},
   {week:3, day:21, subj:"마무리", title:"시험 전날 체크리스트",    concept:["준비물","컨디션"],        est:30, final:true},
 ];
 
