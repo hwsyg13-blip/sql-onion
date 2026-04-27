@@ -167,7 +167,7 @@ function actionRoute(a: any): [string, any?] {
   }
 }
 
-export const PlanScreen = ({onNavigate, planViz, setPlanViz}) => {
+export const PlanScreen = ({onNavigate}: any) => {
   const { progress, stats } = useProgress();
 
   const planWithStatus = React.useMemo(() => {
@@ -210,43 +210,33 @@ export const PlanScreen = ({onNavigate, planViz, setPlanViz}) => {
             <strong style={{color:dDay <= 7 ? 'var(--wrong-fg)' : 'var(--point-600)',fontWeight:700,fontFamily:'var(--font-mono)'}}>{dDayLabel}</strong>
           </div>
         </div>
-        <div style={{display:"flex",gap:6,padding:4,background:"var(--bg-muted)",borderRadius:10}}>
-          <button onClick={()=>setPlanViz("calendar")} style={vizBtn(planViz==="calendar")}>
-            <Ic.Calendar size={14}/> 캘린더
-          </button>
-          <button onClick={()=>setPlanViz("timeline")} style={vizBtn(planViz==="timeline")}>
-            <Ic.ListChecks size={14}/> 타임라인
-          </button>
-        </div>
       </div>
 
-      {/* Week tabs */}
-      <div style={{marginTop:8,display:"flex",gap:8,borderBottom:"1px solid var(--border-subtle)"}}>
+      {/* Week tabs — 가로 1:1:1 균등 배치, 라벨 짧게 */}
+      <div className="plan-week-tabs" style={{marginTop:8,display:"flex",gap:0,borderBottom:"1px solid var(--border-subtle)"}}>
         {[1,2,3].map(w => {
           const active = week === w;
-          const ws = ["이론 1","이론 2","실전·기출"];
+          const sub = ["이론","이론","실전"][w-1];
           const doneW = planWithStatus.filter(d=>d.week===w && d.done).length;
           const totalW = planWithStatus.filter(d=>d.week===w).length;
           return (
-            <button key={w} onClick={()=>setWeek(w)} style={{
-              padding:"12px 18px", background:"none", border:0, cursor:"pointer", fontFamily:"inherit",
+            <button key={w} onClick={()=>setWeek(w)} className="plan-week-tab" style={{
+              flex: 1,
+              padding:"12px 8px", background:"none", border:0, cursor:"pointer", fontFamily:"inherit",
               fontSize:14, fontWeight: active ? 700 : 500,
               color: active ? "var(--fg-1)" : "var(--fg-3)",
               borderBottom: active ? "2px solid var(--point-600)" : "2px solid transparent",
-              marginBottom:-1, display:"flex", alignItems:"center", gap:8,
+              marginBottom:-1, display:"flex", alignItems:"center", justifyContent:"center", gap:8,
+              whiteSpace: "nowrap",
             }}>
-              <span>{w}주차 · {ws[w-1]}</span>
+              <span>{w}주차 · {sub}</span>
               <Tag tone={doneW===totalW ? "green" : "neutral"} size="sm">{doneW}/{totalW}</Tag>
             </button>
           );
         })}
       </div>
 
-      {planViz === "calendar" ? (
-        <CalendarView week={week} data={planWithStatus} onAction={handleAction}/>
-      ) : (
-        <TimelineView week={week} data={planWithStatus} onAction={handleAction}/>
-      )}
+      <TimelineView week={week} data={planWithStatus} onAction={handleAction}/>
 
       {/* Mascot guide */}
       <div style={{marginTop:28, display:"flex", justifyContent:"flex-end"}}>
@@ -266,15 +256,6 @@ export const PlanScreen = ({onNavigate, planViz, setPlanViz}) => {
     </div>
   );
 };
-
-const vizBtn = (active) => ({
-  display:"inline-flex", alignItems:"center", gap:6,
-  padding:"7px 12px", fontSize:13, fontWeight:600, borderRadius:7, cursor:"pointer",
-  fontFamily:"inherit", border:0,
-  background: active ? "var(--bg-card)" : "transparent",
-  color: active ? "var(--fg-1)" : "var(--fg-3)",
-  boxShadow: active ? "var(--shadow-sm)" : "none",
-});
 
 // 액션 버튼 — 카드 안에 N개 나열. 카드 자체 클릭 비활성, 각 버튼만 동작.
 const ActionButton = ({action, onClick, compact}: any) => {
@@ -311,53 +292,7 @@ const ActionButton = ({action, onClick, compact}: any) => {
   );
 };
 
-export const CalendarView = ({week, data, onAction}) => {
-  const src = data || PLAN_DATA;
-  const days = src.filter(d=>d.week===week);
-  return (
-    <div style={{marginTop:20, display:"grid", gridTemplateColumns:"repeat(7, 1fr)", gap:10}} className="plan-calendar">
-      {days.map(d => {
-        const bg = d.current ? "var(--point-050)" : "var(--bg-card)";
-        const border = d.current ? "2px solid var(--point-600)" : d.done ? "1px solid var(--point-100)" : "1px solid var(--border-subtle)";
-        return (
-          <div key={d.day} style={{
-            background:bg, border, borderRadius:12, padding:"14px 14px",
-            fontFamily:"inherit", minHeight:200,
-            display:"flex",flexDirection:"column",gap:8,
-          }}>
-            <div style={{display:"flex",justifyContent:"space-between",alignItems:"center"}}>
-              <div style={{fontSize:11,color:"var(--fg-3)",fontWeight:700,fontFamily:'var(--font-mono)'}}>
-                DAY {d.day} · <span style={{color:'var(--fg-4)'}}>{recommendedDateLabel(d.day)}</span>
-              </div>
-              {d.done ? (
-                <div style={{width:18,height:18,borderRadius:999,background:"var(--point-600)",color:"#fff",display:"flex",alignItems:"center",justifyContent:"center"}}>
-                  <Ic.Check size={11}/>
-                </div>
-              ) : d.current ? (
-                <span style={{width:8,height:8,borderRadius:999,background:"var(--point-600)",boxShadow:"0 0 0 4px var(--point-100)"}}/>
-              ) : (
-                <span style={{width:8,height:8,borderRadius:999,background:"var(--border-strong)"}}/>
-              )}
-            </div>
-            <Tag tone={d.subj==="1과목"||d.subj==="2과목"?"green":d.subj==="기출"?"blue":d.subj==="모의"?"peach":"neutral"} size="sm">{d.subj}</Tag>
-            <div style={{fontSize:13,fontWeight:700,color:"var(--fg-1)",lineHeight:1.35}}>{d.title}</div>
-            {/* 액션 버튼들 — 각각 따로 클릭 */}
-            <div style={{display:'flex',flexDirection:'column',gap:6,marginTop:4}}>
-              {(d.actions || []).map((a: any, i: number) => (
-                <ActionButton key={i} action={a} onClick={onAction} compact/>
-              ))}
-            </div>
-            <div style={{fontSize:11,color:"var(--fg-3)",fontFamily:"var(--font-mono)",display:"flex",alignItems:"center",gap:4,marginTop:"auto"}}>
-              <Ic.Clock size={11}/> {d.est}분
-            </div>
-          </div>
-        );
-      })}
-    </div>
-  );
-};
-
-export const TimelineView = ({week, data, onAction}) => {
+export const TimelineView = ({week, data, onAction}: any) => {
   const src = data || PLAN_DATA;
   const days = src.filter(d=>d.week===week);
   return (
