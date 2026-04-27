@@ -13,6 +13,7 @@ import { resolve } from 'node:path';
 const PDF_TEXT = 'C:/Users/hwsyg/AppData/Local/Temp/design/sql/project/uploads/sqld_text.txt';
 const BLOG_RAW = 'scripts/blog-questions-raw.json';
 const AUTHORED_DIR = 'scripts/authored';
+const AI_MOCK_FILE = 'scripts/authored/ai-mock.json';
 const ROUNDS_DIR = 'src/data/rounds';
 const INDEX_FILE = 'src/data/quizBank.ts';
 
@@ -78,6 +79,13 @@ if (existsSync(AUTHORED_DIR)) {
     const data = JSON.parse(readFileSync(resolve(AUTHORED_DIR, f), 'utf8'));
     authored[round] = data.authored || [];
   }
+}
+
+// AI mock (기출 변형) — 회차에 속하지 않는 별도 풀
+let aiMock = [];
+if (existsSync(AI_MOCK_FILE)) {
+  const data = JSON.parse(readFileSync(AI_MOCK_FILE, 'utf8'));
+  aiMock = data.authored || [];
 }
 
 const rounds = Object.keys(ROUND_DATES).map(Number).sort((a,b)=>b-a);
@@ -157,6 +165,37 @@ export const ${varName}: QuizQuestion[] = ${JSON.stringify(qs, null, 2)};
   roundFileNames.push({ r, varName, fname });
 }
 
+// AI mock 풀 별도 파일 생성 (UI에서 자동 노출 — 기출 회차 시험은 round 필터로 제외, 모의고사 모드는 통합 풀에서 셔플)
+const aiMockEntries = aiMock.map((q, i) => {
+  const entry = {
+    id: nextId++,
+    examSetId: 'ai-mock',
+    examLabel: '기출 변형 (AI 모의)',
+    subject: q.subject,
+    number: i + 1,
+    title: q.title,
+    options: q.options.slice(0, 4),
+    correctIndex: q.correctIndex,
+    explanation: q.explanation || '',
+    chapter: q.chapter,
+    _source: 'ai-mock',
+    _origId: q._id,
+  };
+  if (q.references && q.references.length) entry.references = q.references;
+  if (q.optionReferences && q.optionReferences.some(r => r && r.length)) {
+    entry.optionReferences = q.optionReferences;
+  }
+  return entry;
+});
+
+writeFileSync(resolve(ROUNDS_DIR, 'ai-mock.ts'), `// Auto-generated from scripts/authored/ai-mock.json
+// AI 생성 모의고사 풀 (기출 변형) · ${aiMockEntries.length}문항
+// ⚠ 직접 편집 금지. ai-mock.json 수정 후 'node scripts/build-quiz-bank.mjs' 재실행.
+import type { QuizQuestion } from '../quizBank';
+
+export const AI_MOCK: QuizQuestion[] = ${JSON.stringify(aiMockEntries, null, 2)};
+`, 'utf8');
+
 // Index file
 const examSets = rounds.map(r => ({
   id: `round-${r}`,
@@ -166,7 +205,8 @@ const examSets = rounds.map(r => ({
   count: merged[r].length,
 }));
 
-const importLines = roundFileNames.map(({ r, varName }) => `import { ${varName} } from './rounds/round-${r}';`).join('\n');
+const importLines = roundFileNames.map(({ r, varName }) => `import { ${varName} } from './rounds/round-${r}';`).join('\n')
+  + `\nimport { AI_MOCK } from './rounds/ai-mock';`;
 const bankJoin = roundFileNames.map(({ varName }) => `  ...${varName},`).join('\n');
 
 const indexBody = `// Auto-generated index. Do not edit by hand — re-run scripts/build-quiz-bank.mjs.
@@ -185,7 +225,8 @@ export type QuizQuestion = {
   id: number;
   examSetId: string;
   examLabel: string;
-  round: number;
+  /** 기출 회차 번호. ai-mock 등 회차에 속하지 않는 풀은 undefined. */
+  round?: number;
   subject: '1과목' | '2과목';
   number: number;
   title: string;
@@ -196,16 +237,30 @@ export type QuizQuestion = {
   references?: QuestionReference[];
   /** 선택지별 보기 블록. 인덱스가 options 와 일치. 빈 배열은 보기 없음. */
   optionReferences?: (QuestionReference[] | undefined)[];
-  /** 내부 출처 태그 ('pdf' | 'blog' | 'authored'). UI 에 노출하지 말 것. */
+  /** SQLD 챕터 메타태그 (ai-mock 항목에 부여). UI 노출 가능. */
+  chapter?: string;
+  /** 내부 출처 태그 ('pdf' | 'blog' | 'authored' | 'ai-mock'). UI 에 노출하지 말 것. */
   _source?: string;
+  /** AI 모의 원본 ID (ai-mock-001 등). 추적용. */
+  _origId?: string;
 };
 
 ${importLines}
 
 export const EXAM_SETS: { id: string; round: number; label: string; date: string; count: number }[] = ${JSON.stringify(examSets, null, 2)};
 
-export const QUIZ_BANK: QuizQuestion[] = [
+/** 기출 회차 풀 (45회~60회) — 회차 시험·모의고사 출제 풀 */
+export const QUIZ_BANK_EXAM: QuizQuestion[] = [
 ${bankJoin}
+];
+
+/** AI 생성 변형 풀 — 기출 회차에 속하지 않는 별도 풀 */
+export const QUIZ_BANK_AI_MOCK: QuizQuestion[] = [...AI_MOCK];
+
+/** 통합 풀 (기출 + AI 변형) — 모의고사·랜덤 퀴즈 모드 출제용. 기출 회차 CBT 는 round 필터로 ai-mock 자동 제외됨. */
+export const QUIZ_BANK: QuizQuestion[] = [
+  ...QUIZ_BANK_EXAM,
+  ...QUIZ_BANK_AI_MOCK,
 ];
 `;
 
@@ -216,6 +271,7 @@ for (const r of rounds) {
   const bySource = merged[r].reduce((o, q) => ((o[q.source] = (o[q.source]||0)+1), o), {});
   console.log(`  ${ROUNDS_DIR}/round-${r}.ts (${merged[r].length}) ${JSON.stringify(bySource)}`);
 }
+console.log(`  ${ROUNDS_DIR}/ai-mock.ts (${aiMockEntries.length}) {"ai-mock":${aiMockEntries.length}}`);
 console.log('---');
-console.log(`total: ${totalCount}문항`);
-console.log(`wrote ${INDEX_FILE} + ${rounds.length} round files`);
+console.log(`total: ${totalCount + aiMockEntries.length}문항 (기출 ${totalCount} + AI 변형 ${aiMockEntries.length})`);
+console.log(`wrote ${INDEX_FILE} + ${rounds.length} round files + 1 ai-mock file`);
