@@ -619,7 +619,33 @@
         "라 — ORDER BY 에서 집계 함수를 사용했으므로 오류"
       ],
       "correctIndex": 3,
-      "explanation": "원본 기출의 정답 표기를 보존하되 일반적으로 ORDER BY 에서 집계 함수는 사용 가능하므로, 원본 문항의 다른 맥락이 있을 수 있다."
+      "explanation": "원본 기출의 정답 표기를 보존하되 일반적으로 ORDER BY 에서 집계 함수는 사용 가능하므로, 원본 문항의 다른 맥락이 있을 수 있다.",
+      "references": [
+        {
+          "type": "sql",
+          "caption": "가. 보기 ① 분류: SELECT 서브쿼리 + 집계 함수 사용으로 인한 오류 (분류 자체가 부적절)",
+          "code": "SELECT EMPNO,\n       (SELECT MAX(SAL) FROM EMP) AS MAX_SAL\nFROM   EMP;"
+        },
+        {
+          "type": "sql",
+          "caption": "나. 보기 ② 분류: 집계 함수 오류가 아니고 '=' 연산자 때문 (실제로는 다중 행 서브쿼리 + '=' 의 ORA-01427)",
+          "code": "SELECT *\nFROM   EMP\nWHERE  SAL = (SELECT SAL FROM EMP WHERE DEPTNO = 10);"
+        },
+        {
+          "type": "sql",
+          "caption": "다. 보기 ③ 분류: GROUP BY 에서 집계 함수 사용 (실제로는 WHERE 절에 집계 함수 사용 오류)",
+          "code": "SELECT DEPTNO, COUNT(*)\nFROM   EMP\nWHERE  SUM(SAL) > 10000\nGROUP BY DEPTNO;"
+        },
+        {
+          "type": "sql",
+          "caption": "라. 보기 ④ 분류: ORDER BY 에서 집계 함수 사용으로 오류",
+          "code": "SELECT EMPNO, ENAME\nFROM   EMP\nORDER BY SUM(SAL);"
+        },
+        {
+          "type": "text",
+          "content": "참고: GROUP BY 가 적용된 결과 집합에서는 ORDER BY 에 집계 함수를 사용하는 것이 가능하다. 본 문항은 GROUP BY 가 없는 일반 SELECT 컨텍스트에서 집계 함수를 정렬 키로 사용한 케이스로 한정해 오류 원인을 검토한다."
+        }
+      ]
     },
     {
       "subject": "2과목",

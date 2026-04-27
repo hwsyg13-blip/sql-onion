@@ -926,7 +926,85 @@ export const ROUND_54: QuizQuestion[] = [
     ],
     "correctIndex": 0,
     "explanation": "(COL1, COL2) 세부 집계와 COL2 별 소계가 함께 필요하므로 해당 GROUPING SETS 조합이 옳다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "caption": "원본 데이터 (T)",
+        "headers": [
+          "COL1",
+          "COL2",
+          "COL3"
+        ],
+        "rows": [
+          [
+            "A",
+            "10",
+            "100"
+          ],
+          [
+            "A",
+            "20",
+            "200"
+          ],
+          [
+            "B",
+            "10",
+            "150"
+          ],
+          [
+            "B",
+            "20",
+            "250"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT COL1, COL2, SUM(COL3)\nFROM   T\nGROUP BY GROUPING SETS ( (  ?  ) );"
+      },
+      {
+        "type": "table",
+        "caption": "출력 결과 — COL2 별 소계 행에서 COL1 만 NULL 로 표시 (COL2 자리에는 NULL 없음)",
+        "headers": [
+          "COL1",
+          "COL2",
+          "SUM(COL3)"
+        ],
+        "rows": [
+          [
+            "A",
+            "10",
+            "100"
+          ],
+          [
+            "A",
+            "20",
+            "200"
+          ],
+          [
+            "B",
+            "10",
+            "150"
+          ],
+          [
+            "B",
+            "20",
+            "250"
+          ],
+          [
+            "NULL",
+            "10",
+            "250"
+          ],
+          [
+            "NULL",
+            "20",
+            "450"
+          ]
+        ]
+      }
+    ]
   },
   {
     "id": 10330,
