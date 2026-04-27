@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>식별자(Identifier) — SQLD양파 이론</title>
+<link rel="stylesheet" href="./common.css">
+<style>
+  /* 1-1-5 특화: PK 강조 표시 */
+  .pk-row { background: var(--point-100) !important; }
+  .pk-row td:first-child { color: var(--point-600) !important; }
+  .pk-mark { display: inline-block; background: var(--point-600); color: white; font-size: 9.5px; font-weight: 800; padding: 2px 6px; border-radius: 4px; margin-right: 6px; letter-spacing: 0.04em; vertical-align: middle; }
+</style>
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="topnav-inner">
+    <div class="topnav-brand">SQLD양파</div>
+    <div class="topnav-links">
+      <a href="#">홈</a>
+      <a href="#" class="active">이론</a>
+      <a href="#">기출 CBT</a>
+      <a href="#">모의고사</a>
+      <a href="#">Pro</a>
+    </div>
+  </div>
+</nav>
+
+<main class="page-shell">
+  <div class="breadcrumb">
+    <a href="#">이론</a><span class="sep">›</span>
+    <a href="#">1과목 데이터 모델링</a><span class="sep">›</span>
+    <a href="#">1-1. 데이터 모델링의 이해</a>
+  </div>
+
+  <header class="page-title-block">
+    <h1>식별자(Identifier)</h1>
+    <p class="subtitle">인스턴스 구분 표식 = PK. 4대 조건 <strong>유·최·불·존</strong> · 4대 분류 기준</p>
+  </header>
+
+  <article class="theory-md">
+
+    <!-- 핵심 요약 -->
+    <h2 class="section-label sec-summary reveal"><span class="label-tag">핵심 요약</span><span class="label-rest">정의</span></h2>
+    <blockquote class="reveal">
+      식별자(Identifier)란 <a href="./1-1-2_엔터티.html">엔터티</a> 안의 인스턴스를 서로 구분해 주는 <strong>유일한 표식</strong>이다. 테이블의 기본키(Primary Key)가 된다.
+    </blockquote>
+    <div class="ex-box reveal">
+      같은 이름의 김철수가 100명 있어도 주민등록번호는 모두 다르다 — 이름은 일반 속성이지만 주민번호는 식별자(겹치지 않는 유일값)다.
+    </div>
+
+    <!-- 개념 도식화 -->
+    <h2 class="section-label sec-diagram reveal"><span class="label-tag">개념 도식화</span><span class="label-rest">식별자의 위치</span></h2>
+    <p class="reveal">회원(MEMBER) 테이블 — PK 가 모든 행을 유일하게 구분:</p>
+    <table class="reveal">
+      <thead><tr><th>PK (주식별자)</th><th>이름</th><th>전화번호</th></tr></thead>
+      <tbody>
+        <tr><td><span class="pk-mark">PK</span><strong>M01</strong></td><td>김철수</td><td>010-1111</td></tr>
+        <tr><td><span class="pk-mark">PK</span><strong>M02</strong></td><td>이영희</td><td>010-2222</td></tr>
+      </tbody>
+    </table>
+    <p class="reveal">같은 이름이어도 PK가 다르므로 <strong>100% 구분 가능</strong>.</p>
+
+    <p class="reveal">PK는 자기 엔터티 안의 식별자, FK(외부식별자)는 다른 엔터티의 PK 를 참조한 식별자다 — ER로 같이 본다.</p>
+    <div class="mermaid reveal">
+erDiagram
+    MEMBER ||--o{ ORDERS : "주문하다"
+    ORDERS ||--|{ ORDER_DETAIL : "상세 (식별 관계)"
+    PRODUCT ||--o{ ORDER_DETAIL : "포함된다"
+    MEMBER {
+        VARCHAR2 MEMBER_ID PK
+        VARCHAR2 EMAIL "보조식별자(UNIQUE)"
+        VARCHAR2 NAME
+    }
+    ORDERS {
+        NUMBER ORDER_ID PK
+        VARCHAR2 MEMBER_ID FK
+    }
+    ORDER_DETAIL {
+        NUMBER ORDER_ID PK "복합식별자"
+        VARCHAR2 PROD_ID PK
+        NUMBER QTY
+    }
+    PRODUCT {
+        VARCHAR2 PROD_ID PK
+        VARCHAR2 PROD_NAME
+    }
+    </div>
+
+    <!-- 4대 조건: 유최불존 -->
+    <h2 class="reveal">주식별자의 4가지 조건</h2>
+    <div class="trait-grid cols-4 reveal">
+      <div class="trait-card"><div class="glyph">유</div><div class="label">유일성</div><div class="desc">모든 인스턴스를 <strong>유일하게</strong> 구분</div></div>
+      <div class="trait-card"><div class="glyph">최</div><div class="label">최소성</div><div class="desc">꼭 필요한 속성만 — <a href="./1-2-1_정규화.html">정규화</a>와 직결</div></div>
+      <div class="trait-card"><div class="glyph">불</div><div class="label">불변성</div><div class="desc">한 번 정해지면 <strong>거의 변하지 않음</strong></div></div>
+      <div class="trait-card"><div class="glyph">존</div><div class="label">존재성</div><div class="desc">NULL이 될 수 없음 (<strong>NOT NULL</strong>)</div></div>
+    </div>
+    <div class="mnemonic reveal">
+      <div class="label-side">암기<br><small>주식별자 4대 조건</small></div>
+      <div class="glyphs">
+        <div class="glyph-chip">유</div>
+        <div class="glyph-chip">최</div>
+        <div class="glyph-chip">불</div>
+        <div class="glyph-chip">존</div>
+      </div>
+    </div>
+    <table class="reveal">
+      <thead><tr><th>조건</th><th>의미</th></tr></thead>
+      <tbody>
+        <tr><td>유일성</td><td>모든 인스턴스를 유일하게 구분</td></tr>
+        <tr><td>최소성</td><td>꼭 필요한 속성만으로 구성 (<a href="./1-2-1_정규화.html">정규화</a>와 직결)</td></tr>
+        <tr><td>불변성</td><td>한번 정해지면 거의 변하지 않음</td></tr>
+        <tr><td>존재성</td><td>NULL이 될 수 없음</td></tr>
+      </tbody>
+    </table>
+
+    <!-- 4대 분류 기준 -->
+    <h2 class="reveal">식별자의 4가지 분류 기준</h2>
+
+    <div class="cls-row cols-4 reveal">
+      <div class="cls-card">
+        <span class="badge">① 대표성</span>
+        <div class="name">주 / 보조</div>
+        <div class="ex">엔터티 대표 vs 보조용</div>
+      </div>
+      <div class="cls-card">
+        <span class="badge b-info">② 생성 여부</span>
+        <div class="name">내부 / 외부</div>
+        <div class="ex">내가 만듦 vs 가져옴(=FK)</div>
+      </div>
+      <div class="cls-card">
+        <span class="badge b-warn">③ 속성 수</span>
+        <div class="name">단일 / 복합</div>
+        <div class="ex">1개 vs 2개 이상 결합</div>
+      </div>
+      <div class="cls-card">
+        <span class="badge b-event">④ 대체 여부</span>
+        <div class="name">본질 / 인조</div>
+        <div class="ex">자연 도출 vs 인위 부여</div>
+      </div>
+    </div>
+    <table class="reveal">
+      <thead><tr><th>기준</th><th>분류</th><th>핵심 차이</th></tr></thead>
+      <tbody>
+        <tr><td>① 대표성</td><td><strong>주식별자 / 보조식별자</strong></td><td>엔터티의 대표 식별자 vs 보조용</td></tr>
+        <tr><td>② 생성 여부</td><td><strong>내부식별자 / 외부식별자</strong></td><td>자기 엔터티에서 생성 vs 다른 엔터티에서 가져옴 (= FK)</td></tr>
+        <tr><td>③ 속성 수</td><td><strong>단일식별자 / 복합식별자</strong></td><td>1개 속성 vs 2개 이상 결합</td></tr>
+        <tr><td>④ 대체 여부</td><td><strong>본질식별자 / 인조식별자</strong></td><td>업무 자연 도출 vs 인위적 부여</td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="reveal">대표성</h3>
+    <table class="reveal">
+      <thead><tr><th>종류</th><th>의미</th><th>예</th></tr></thead>
+      <tbody>
+        <tr><td>주식별자(Primary)</td><td>엔터티 대표 식별자</td><td>회원ID</td></tr>
+        <tr><td>보조식별자(Alternate)</td><td>보조적 식별자</td><td>이메일</td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="reveal">스스로 만든 vs 외부에서 받음</h3>
+    <table class="reveal">
+      <thead><tr><th>종류</th><th>의미</th><th>예</th></tr></thead>
+      <tbody>
+        <tr><td>내부식별자</td><td>자기 엔터티 내에서 생성</td><td>MEMBER 테이블의 MEMBER_ID</td></tr>
+        <tr><td>외부식별자</td><td>다른 엔터티의 주식별자를 참조해 가져옴 = <strong>외래키(FK)</strong></td><td>주문 테이블의 MEMBER_ID (← 회원 PK 참조)</td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="reveal">속성의 개수</h3>
+    <table class="reveal">
+      <thead><tr><th>종류</th><th>의미</th><th>예</th></tr></thead>
+      <tbody>
+        <tr><td>단일식별자</td><td>1개 속성</td><td>회원ID</td></tr>
+        <tr><td>복합식별자</td><td>2개 이상 속성 결합</td><td>(주문ID + 상품ID) → 주문상세 PK</td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="reveal">본질 vs 인조</h3>
+    <table class="reveal">
+      <thead><tr><th>종류</th><th>의미</th><th>예</th></tr></thead>
+      <tbody>
+        <tr><td>본질식별자</td><td>업무에서 자연스럽게 도출</td><td>주민번호, 학번</td></tr>
+        <tr><td>인조식별자</td><td>인위적으로 만든 식별자</td><td>자동증가 ID, UUID</td></tr>
+      </tbody>
+    </table>
+    <p class="reveal">본질·인조의 트레이드오프는 <a href="./1-2-5_본질식별자vs인조식별자.html">본질식별자 vs 인조식별자</a>에서 자세히 다룬다.</p>
+
+    <!-- SQL 실전 -->
+    <h2 class="section-label sec-sql reveal"><span class="label-tag">SQL 실전</span><span class="label-rest">PK / FK 정의</span></h2>
+    <p class="reveal" style="font-size: 13px; color: var(--fg-3); margin: 8px 0 4px;">예시 데이터 — 단일 PK(MEMBER) + 복합 PK(ORDER_DETAIL)</p>
+    <div class="ba-flow reveal" style="grid-template-columns: 1fr 36px 1fr; align-items: stretch;">
+      <div class="ba-side before">
+        <span class="ba-tag">MEMBER</span>
+        <h4 class="ba-h">단일 식별자</h4>
+        <div class="mini-table cols-3">
+          <div class="h">MEMBER_ID (PK)</div><div class="h">EMAIL (UK)</div><div class="h">NAME</div>
+          <div class="c">M01</div><div class="c">a@a.com</div><div class="c">김철수</div>
+        </div>
+      </div>
+      <div class="ba-arrow" style="font-size: 22px; color: var(--point-500);">+</div>
+      <div class="ba-side before">
+        <span class="ba-tag">ORDER_DETAIL</span>
+        <h4 class="ba-h">복합 식별자 (ORDER_ID + PROD_ID)</h4>
+        <div class="mini-table cols-3">
+          <div class="h">ORDER_ID (PK)</div><div class="h">PROD_ID (PK)</div><div class="h">QTY</div>
+          <div class="c">1001</div><div class="c">P01</div><div class="c">2</div>
+          <div class="c">1001</div><div class="c">P02</div><div class="c">1</div>
+        </div>
+      </div>
+    </div>
+    <pre class="reveal"><button class="copy-btn">복사</button><code><span class="sql-cm">-- 회원: 단일 PK</span>
+<span class="sql-kw">CREATE TABLE</span> <span class="sql-name">MEMBER</span> (
+    <span class="sql-type">MEMBER_ID</span>  <span class="sql-type">VARCHAR2</span>(<span class="sql-num">10</span>) <span class="sql-kw">PRIMARY KEY</span>,   <span class="sql-cm">-- 주식별자</span>
+    <span class="sql-type">EMAIL</span>      <span class="sql-type">VARCHAR2</span>(<span class="sql-num">100</span>) <span class="sql-kw">UNIQUE</span>,       <span class="sql-cm">-- 보조식별자</span>
+    <span class="sql-type">NAME</span>       <span class="sql-type">VARCHAR2</span>(<span class="sql-num">50</span>) <span class="sql-kw">NOT NULL</span>
+);
+
+<span class="sql-cm">-- 주문상세: 복합 PK</span>
+<span class="sql-kw">CREATE TABLE</span> <span class="sql-name">ORDER_DETAIL</span> (
+    <span class="sql-type">ORDER_ID</span>   <span class="sql-type">NUMBER</span>,
+    <span class="sql-type">PROD_ID</span>    <span class="sql-type">VARCHAR2</span>(<span class="sql-num">10</span>),
+    <span class="sql-type">QTY</span>        <span class="sql-type">NUMBER</span>,
+    <span class="sql-kw">CONSTRAINT</span> <span class="sql-name">PK_ORD_DTL</span> <span class="sql-kw">PRIMARY KEY</span> (<span class="sql-type">ORDER_ID</span>, <span class="sql-type">PROD_ID</span>),  <span class="sql-cm">-- 복합 식별자</span>
+    <span class="sql-kw">CONSTRAINT</span> <span class="sql-name">FK_OD_ORD</span>  <span class="sql-kw">FOREIGN KEY</span> (<span class="sql-type">ORDER_ID</span>) <span class="sql-kw">REFERENCES</span> <span class="sql-name">ORDERS</span>(<span class="sql-type">ORDER_ID</span>),
+    <span class="sql-kw">CONSTRAINT</span> <span class="sql-name">FK_OD_PROD</span> <span class="sql-kw">FOREIGN KEY</span> (<span class="sql-type">PROD_ID</span>)  <span class="sql-kw">REFERENCES</span> <span class="sql-name">PRODUCT</span>(<span class="sql-type">PROD_ID</span>)
+);
+
+<span class="sql-cm">-- PK 위반 — 같은 회원ID 중복 입력</span>
+<span class="sql-kw">INSERT INTO</span> <span class="sql-name">MEMBER</span> <span class="sql-kw">VALUES</span>(<span class="sql-str">'M01'</span>, <span class="sql-str">'a@a.com'</span>, <span class="sql-str">'김철수'</span>);
+<span class="sql-kw">INSERT INTO</span> <span class="sql-name">MEMBER</span> <span class="sql-kw">VALUES</span>(<span class="sql-str">'M01'</span>, <span class="sql-str">'b@b.com'</span>, <span class="sql-str">'박민수'</span>);   <span class="sql-cm">-- 에러!</span>
+
+<span class="sql-cm">-- NULL 위반 — 주식별자에는 NULL 불가</span>
+<span class="sql-kw">INSERT INTO</span> <span class="sql-name">MEMBER</span> <span class="sql-kw">VALUES</span>(<span class="sql-kw">NULL</span>, <span class="sql-str">'c@c.com'</span>, <span class="sql-str">'이영희'</span>);  <span class="sql-cm">-- 에러!</span></code></pre>
+
+    <p class="reveal" style="font-size:13px;color:var(--fg-3);margin:8px 0 4px;">↓ 실행 결과 (DBMS 메시지)</p>
+    <table class="reveal">
+      <thead><tr><th>SQL</th><th>결과</th></tr></thead>
+      <tbody>
+        <tr><td><code>INSERT … 'M01' … '김철수'</code></td><td><span style="color:var(--correct-fg);font-weight:700;">1 row inserted.</span></td></tr>
+        <tr><td><code>INSERT … 'M01' … '박민수'</code></td><td><span style="color:var(--wrong-fg);font-weight:700;">ORA-00001: unique constraint violated</span> (유일성 위반)</td></tr>
+        <tr><td><code>INSERT … NULL … '이영희'</code></td><td><span style="color:var(--wrong-fg);font-weight:700;">ORA-01400: cannot insert NULL into PK</span> (존재성 위반)</td></tr>
+      </tbody>
+    </table>
+    <p class="reveal">PRIMARY KEY 제약은 <strong>유일성 + NOT NULL</strong>을 한꺼번에 강제한다 — 식별자 4대 조건 중 두 가지가 DBMS 차원에서 자동 보장된다.</p>
+
+    <!-- Before & After -->
+    <h2 class="section-label sec-compare reveal"><span class="label-tag">Before &amp; After</span><span class="label-rest">식별자를 잘못 잡으면</span></h2>
+    <p class="reveal">이름이 똑같은 김철수가 두 명 가입한 상황. 이름을 PK로 잡은 경우와 회원ID 를 따로 부여한 경우를 비교한다.</p>
+
+    <div class="ba-flow reveal">
+      <div class="ba-side before">
+        <span class="ba-tag">BEFORE</span>
+        <h4 class="ba-h">식별자 = 이름</h4>
+        <div class="mini-table">
+          <div class="h">NAME (PK?)</div><div class="h">PHONE</div>
+          <div class="c">김철수</div><div class="c">010-1111</div>
+          <div class="c is-null">김철수</div><div class="c">010-2222</div>
+        </div>
+        <p style="font-size:12px;color:var(--fg-3);margin:10px 0 0;">동명이인 등록 불가 (유일성 위반)</p>
+      </div>
+      <div class="ba-arrow">→</div>
+      <div class="ba-side after">
+        <span class="ba-tag">AFTER</span>
+        <h4 class="ba-h">식별자 = 회원ID</h4>
+        <div class="mini-table cols-3">
+          <div class="h">ID (PK)</div><div class="h">NAME</div><div class="h">PHONE</div>
+          <div class="c">M01</div><div class="c">김철수</div><div class="c">010-1111</div>
+          <div class="c">M02</div><div class="c">김철수</div><div class="c">010-2222</div>
+        </div>
+        <p style="font-size:12px;color:var(--fg-3);margin:10px 0 0;">동명이인이라도 ID로 구분</p>
+      </div>
+    </div>
+
+    <h4 class="reveal">Before — 식별자가 '이름'</h4>
+    <table class="reveal">
+      <thead><tr><th>NAME (PK?)</th><th>PHONE</th></tr></thead>
+      <tbody>
+        <tr><td>김철수</td><td>010-1111</td></tr>
+        <tr><td>김철수</td><td>010-2222</td></tr>
+      </tbody>
+    </table>
+    <p class="reveal">동명이인을 등록할 수 없다(유일성 위반).</p>
+
+    <h4 class="reveal">After — 식별자가 '회원ID'</h4>
+    <table class="reveal">
+      <thead><tr><th>MEMBER_ID (PK)</th><th>NAME</th><th>PHONE</th></tr></thead>
+      <tbody>
+        <tr><td>M01</td><td>김철수</td><td>010-1111</td></tr>
+        <tr><td>M02</td><td>김철수</td><td>010-2222</td></tr>
+      </tbody>
+    </table>
+    <p class="reveal">이름은 같은 값이 얼마든지 나올 수 있으므로 유일성을 보장하지 못한다. 식별자의 4대 조건(유·최·불·존) 중 가장 먼저 깨지는 게 유일성이고, 결혼·개명 등으로 변할 수도 있어 불변성도 위태롭다. 업무 속성 중 자연스러운 유일값이 마땅치 않으면 회원ID 처럼 인조식별자를 만들어 PK 로 두는 것이 안전하다.</p>
+
+    <!-- 식별자 표기 -->
+    <h2 class="reveal">식별자 표기</h2>
+    <p class="reveal">ERD 표기 — 회원 엔터티:</p>
+    <table class="reveal">
+      <thead><tr><th>영역</th><th>속성</th><th>비고</th></tr></thead>
+      <tbody>
+        <tr><td><strong>PK 영역</strong></td><td>MEMBER_ID</td><td>주식별자 (Primary)</td></tr>
+        <tr><td>일반 속성</td><td>NAME</td><td></td></tr>
+        <tr><td>일반 속성</td><td>EMAIL</td><td>UNIQUE = 보조식별자</td></tr>
+        <tr><td>일반 속성</td><td>PHONE</td><td></td></tr>
+      </tbody>
+    </table>
+
+    <div class="reveal" style="margin: 40px 0 0; padding: 22px 24px; background: linear-gradient(135deg, var(--point-050), var(--bg-card)); border: 1px solid var(--point-100); border-radius: 12px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;">
+      <div>
+        <div style="font-size: 12px; font-weight: 800; color: var(--point-600); letter-spacing: 0.04em; margin-bottom: 4px;">시험 대비</div>
+        <div style="font-size: 14px; color: var(--fg-2);">이 챕터의 함정·정답과 30초 정리는 통합 시험 대비 페이지에서 볼 수 있습니다.</div>
+      </div>
+      <a href="./exam-review.html#ch-1-1-5" style="font-size: 14px; font-weight: 700; color: var(--point-600); text-decoration: none; padding: 8px 14px; border: 1px solid var(--point-300); border-radius: 8px; background: var(--bg-card); white-space: nowrap;">시험 대비 보기 →</a>
+    </div>
+
+  </article>
+</main>
+
+<script src="./common.js"></script>
+</body>
+</html>

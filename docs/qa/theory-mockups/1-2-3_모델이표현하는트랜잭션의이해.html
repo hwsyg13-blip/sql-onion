@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>모델이 표현하는 트랜잭션의 이해 — SQLD양파 이론</title>
+<link rel="stylesheet" href="./common.css">
+</head>
+<body>
+<nav class="topnav">
+  <div class="topnav-inner">
+    <div class="topnav-brand">SQLD양파</div>
+    <div class="topnav-links">
+      <a href="#">홈</a><a href="#" class="active">이론</a><a href="#">기출 CBT</a><a href="#">모의고사</a><a href="#">Pro</a>
+    </div>
+  </div>
+</nav>
+<main class="page-shell">
+  <div class="breadcrumb">
+    <a href="#">이론</a><span class="sep">›</span>
+    <a href="#">1과목 데이터 모델링</a><span class="sep">›</span>
+    <a href="#">1-2. 데이터 모델과 SQL</a>
+  </div>
+  <header class="page-title-block">
+    <h1>모델이 표현하는 트랜잭션의 이해</h1>
+    <p class="subtitle">함께 성공하거나 함께 실패해야 할 작업 묶음. 관계의 필수성·식별성으로 모델에 새겨진다</p>
+  </header>
+  <article class="theory-md">
+
+  <!-- 핵심 요약 -->
+  <h2 class="section-label sec-summary reveal">
+    <span class="label-tag">핵심 요약</span>
+    <span class="label-rest">정의</span>
+  </h2>
+  <blockquote class="reveal">
+    트랜잭션(Transaction)이란 <strong>함께 성공하거나 함께 실패해야 하는 데이터 작업의 묶음</strong>이다. 모델은 이 묶음을 관계의 <strong>필수성</strong>과 <strong>식별성</strong>으로 표현한다.
+  </blockquote>
+  <div class="ex-box reveal">
+    계좌 이체에서 A에서 1만원이 빠지고 B에 1만원이 들어와야 정상. A에서만 빠지고 멈추면 돈이 사라지므로, 둘 다 성공하거나 둘 다 취소되어야 한다.
+  </div>
+
+  <!-- 개념 도식화 — ACID 4특성 -->
+  <h2 class="section-label sec-diagram reveal">
+    <span class="label-tag">개념 도식화</span>
+    <span class="label-rest">트랜잭션의 ACID</span>
+  </h2>
+  <div class="trait-grid cols-4 reveal">
+    <div class="trait-card">
+      <div class="glyph">A</div>
+      <div class="label">원자성</div>
+      <div class="desc"><strong>Atomicity</strong><br>전부 성공 또는 전부 실패</div>
+    </div>
+    <div class="trait-card">
+      <div class="glyph">C</div>
+      <div class="label">일관성</div>
+      <div class="desc"><strong>Consistency</strong><br>무결성 규칙 유지</div>
+    </div>
+    <div class="trait-card">
+      <div class="glyph">I</div>
+      <div class="label">고립성</div>
+      <div class="desc"><strong>Isolation</strong><br>다른 트랜잭션 간섭 없음</div>
+    </div>
+    <div class="trait-card">
+      <div class="glyph">D</div>
+      <div class="label">지속성</div>
+      <div class="desc"><strong>Durability</strong><br>커밋되면 영구 보존</div>
+    </div>
+  </div>
+  <table class="reveal">
+    <thead><tr><th>성질</th><th>의미</th><th>비유</th></tr></thead>
+    <tbody>
+      <tr><td>원자성 (Atomicity)</td><td>모두 성공하거나 모두 실패</td><td>이체는 출금+입금 한 묶음</td></tr>
+      <tr><td>일관성 (Consistency)</td><td>트랜잭션 전후 데이터 무결성 규칙 유지</td><td>잔고 합계는 변하지 않음</td></tr>
+      <tr><td>고립성 (Isolation)</td><td>동시 실행이라도 서로 간섭 없음</td><td>다른 사람 이체와 겹치지 않음</td></tr>
+      <tr><td>지속성 (Durability)</td><td>커밋되면 시스템이 죽어도 보존</td><td>영수증으로 기록됨</td></tr>
+    </tbody>
+  </table>
+
+  <h3 class="reveal">트랜잭션 상태 흐름</h3>
+  <div class="mermaid reveal">
+stateDiagram-v2
+    [*] --> Active : BEGIN / 첫 DML
+    Active --> PartiallyCommitted : 마지막 SQL 성공
+    PartiallyCommitted --> Committed : COMMIT
+    Committed --> [*]
+    Active --> Failed : 오류 발생
+    PartiallyCommitted --> Failed : 디스크 쓰기 실패
+    Failed --> Aborted : ROLLBACK
+    Aborted --> [*]
+  </div>
+  <p class="reveal">Active(활성) → 마지막 SQL까지 무사 통과하면 Partially Committed → COMMIT으로 영구 반영(Committed). 중간에 오류면 Failed → ROLLBACK으로 Aborted 종료.</p>
+
+  <!-- 모델에서 트랜잭션은 어떻게 보이는가 -->
+  <h2 class="reveal">모델에서 트랜잭션은 어떻게 보이는가</h2>
+  <div class="cls-row reveal">
+    <div class="cls-card">
+      <span class="badge">필수</span>
+      <div class="name">관계의 필수성</div>
+      <div class="ex">주문상세는 반드시 주문이 있어야 함 (Mandatory). 주문 INSERT 시 주문상세도 함께 INSERT</div>
+    </div>
+    <div class="cls-card">
+      <span class="badge b-warn">식별</span>
+      <div class="name">관계의 식별성</div>
+      <div class="ex">주문상세는 주문 PK 일부를 자기 PK로 가짐 — 주문 없이 존재 불가. DELETE 시 함께 처리 또는 차단</div>
+    </div>
+    <div class="cls-card">
+      <span class="badge b-info">선택</span>
+      <div class="name">선택 관계 (Optional)</div>
+      <div class="ex">고객은 주문이 없을 수 있음 — 트랜잭션으로 묶을 필요 없는 느슨한 연결</div>
+    </div>
+  </div>
+
+  <h3 class="reveal">관계의 필수성</h3>
+  <p class="reveal">주문을 INSERT할 때 주문상세도 함께 INSERT되어야 정상 트랜잭션이다.</p>
+
+  <h3 class="reveal">관계의 식별성</h3>
+  <pre class="reveal"><code>[주문]  ──── [주문상세]   :  식별 관계(실선), 주문 없이 주문상세 존재 불가</code></pre>
+  <p class="reveal">주문을 DELETE할 때 주문상세도 함께 DELETE되거나 막아야 한다.</p>
+
+  <h3 class="reveal">트랜잭션 표현 예시</h3>
+  <pre class="reveal"><code>[고객]  ──○──── [주문]  ──────── [주문상세]
+              선택              식별(실선)</code></pre>
+  <table class="reveal">
+    <thead><tr><th>표기</th><th>의미</th></tr></thead>
+    <tbody>
+      <tr><td>고객 ─○─ 주문</td><td>고객은 주문이 없을 수 있음 (선택, Optional)</td></tr>
+      <tr><td>주문 ──── 주문상세 (실선)</td><td><strong>식별 관계</strong> — 주문상세는 주문 PK 일부를 자기 PK로 가짐 (주문 없이 존재 불가)</td></tr>
+      <tr><td>주문 ─ ─ ─ 주문상세 (점선)</td><td><strong>비식별 관계</strong> — 주문 키는 일반 FK로만 (주문상세가 독자 PK 보유)</td></tr>
+    </tbody>
+  </table>
+
+  <!-- SQL 실전 -->
+  <h2 class="section-label sec-sql reveal">
+    <span class="label-tag">SQL 실전</span>
+    <span class="label-rest">트랜잭션 묶음</span>
+  </h2>
+  <p class="reveal">INSERT/UPDATE/DELETE는 <a href="./2-3-1_DML.html">DML</a>로 실행되고, COMMIT/ROLLBACK은 <a href="./2-3-2_TCL.html">TCL</a>로 트랜잭션을 마감한다.</p>
+  <p class="reveal" style="font-size: 13px; color: var(--fg-3); margin: 8px 0 4px;">예시 — INSERT 대상 (주문 1001 + 주문상세 2건을 한 묶음으로)</p>
+  <div class="ba-flow reveal" style="grid-template-columns: 1fr 36px 1fr; align-items: stretch;">
+    <div class="ba-side before">
+      <span class="ba-tag">ORDERS</span>
+      <h4 class="ba-h">주문 (부모)</h4>
+      <div class="mini-table cols-3">
+        <div class="h">ORDER_ID</div><div class="h">CUST_ID</div><div class="h">ORD_DATE</div>
+        <div class="c">1001</div><div class="c">C001</div><div class="c">2026-04-27</div>
+      </div>
+    </div>
+    <div class="ba-arrow" style="font-size: 22px; color: var(--point-500);">+</div>
+    <div class="ba-side before">
+      <span class="ba-tag">ORDER_DETAIL</span>
+      <h4 class="ba-h">주문상세 (자식 · 식별)</h4>
+      <div class="mini-table cols-3">
+        <div class="h">ORDER_ID</div><div class="h">PROD_ID</div><div class="h">QTY</div>
+        <div class="c">1001</div><div class="c">P01</div><div class="c">2</div>
+        <div class="c">1001</div><div class="c">P02</div><div class="c">1</div>
+      </div>
+    </div>
+  </div>
+  <pre class="reveal"><button class="copy-btn">복사</button><code><span class="sql-cm">-- 시작 (Oracle은 DML 실행 시 자동 시작)</span>
+<span class="sql-kw">INSERT INTO</span> <span class="sql-name">ORDERS</span>(<span class="sql-type">ORDER_ID</span>, <span class="sql-type">CUST_ID</span>, <span class="sql-type">ORD_DATE</span>)
+<span class="sql-kw">VALUES</span> (<span class="sql-num">1001</span>, <span class="sql-str">'C001'</span>, <span class="sql-kw">SYSDATE</span>);
+
+<span class="sql-kw">INSERT INTO</span> <span class="sql-name">ORDER_DETAIL</span>(<span class="sql-type">ORDER_ID</span>, <span class="sql-type">PROD_ID</span>, <span class="sql-type">QTY</span>)
+<span class="sql-kw">VALUES</span> (<span class="sql-num">1001</span>, <span class="sql-str">'P01'</span>, <span class="sql-num">2</span>);
+
+<span class="sql-kw">INSERT INTO</span> <span class="sql-name">ORDER_DETAIL</span>(<span class="sql-type">ORDER_ID</span>, <span class="sql-type">PROD_ID</span>, <span class="sql-type">QTY</span>)
+<span class="sql-kw">VALUES</span> (<span class="sql-num">1001</span>, <span class="sql-str">'P02'</span>, <span class="sql-num">1</span>);
+
+<span class="sql-kw">COMMIT</span>;  <span class="sql-cm">-- 한 묶음으로 영구 저장</span>
+
+<span class="sql-cm">-- 중간에 오류 발생 시</span>
+<span class="sql-kw">ROLLBACK</span>; <span class="sql-cm">-- 모두 취소</span></code></pre>
+
+  <p class="reveal" style="font-size: 13px; color: var(--fg-3); margin: 8px 0 4px;">↓ COMMIT 후 ORDERS 조회 결과</p>
+  <table class="reveal">
+    <thead><tr><th>ORDER_ID</th><th>CUST_ID</th><th>ORD_DATE</th></tr></thead>
+    <tbody>
+      <tr><td>1001</td><td>C001</td><td>2026-04-27</td></tr>
+    </tbody>
+  </table>
+  <p class="reveal" style="font-size: 13px; color: var(--fg-3); margin: 8px 0 4px;">반대로 ROLLBACK 했다면</p>
+  <table class="reveal">
+    <thead><tr><th>ORDER_ID</th><th>CUST_ID</th><th>ORD_DATE</th></tr></thead>
+    <tbody>
+      <tr><td colspan="3" style="text-align:center;color:var(--fg-3);font-style:italic;">(0건 — INSERT 모두 취소됨)</td></tr>
+    </tbody>
+  </table>
+  <p class="reveal" style="font-size: 12.5px; color: var(--fg-3); margin: 0 0 12px;">→ COMMIT 직전까지는 모두 같은 트랜잭션. 중간 어디서 깨져도 ROLLBACK 한 번에 3개 INSERT 가 통째로 사라진다(원자성).</p>
+
+  <!-- Before & After -->
+  <h2 class="section-label sec-compare reveal">
+    <span class="label-tag">Before &amp; After</span>
+    <span class="label-rest">트랜잭션이 깨지면</span>
+  </h2>
+  <p class="reveal">A 계좌에서 B 계좌로 1만원 이체. 출금(A) → 입금(B) 두 작업 사이에서 시스템이 멈춘 상황과, 두 작업을 한 트랜잭션으로 묶어 ROLLBACK 한 상황의 잔고를 비교한다.</p>
+
+  <h3 class="reveal">Before — 출금만 성공, 입금 실패</h3>
+  <table class="reveal">
+    <thead><tr><th>계좌</th><th>잔고</th></tr></thead>
+    <tbody>
+      <tr><td>A</td><td>90,000 (10,000 빠짐)</td></tr>
+      <tr><td>B</td><td>50,000 (그대로)</td></tr>
+    </tbody>
+  </table>
+  <p class="reveal">1만원이 사라진다.</p>
+
+  <h3 class="reveal">After — 트랜잭션으로 묶었을 때</h3>
+  <p class="reveal">ROLLBACK 후</p>
+  <table class="reveal">
+    <thead><tr><th>계좌</th><th>잔고</th></tr></thead>
+    <tbody>
+      <tr><td>A</td><td>100,000 (원상복구)</td></tr>
+      <tr><td>B</td><td>50,000</td></tr>
+    </tbody>
+  </table>
+  <p class="reveal">데이터가 보존된다.</p>
+
+  <div class="ba-flow reveal">
+    <div class="ba-side before">
+      <span class="ba-tag">BEFORE · 묶지 않음</span>
+      <h4 class="ba-h">출금만 성공 → 1만원 증발</h4>
+      <div class="sql">UPDATE A SET 잔고 = 잔고 - 10000;
+-- 시스템 다운 -- 입금 못함</div>
+      <div class="mini-table">
+        <div class="h">계좌</div><div class="h">잔고</div>
+        <div class="c">A</div><div class="c is-null">90,000</div>
+        <div class="c">B</div><div class="c">50,000</div>
+      </div>
+    </div>
+    <div class="ba-arrow">→</div>
+    <div class="ba-side after">
+      <span class="ba-tag">AFTER · 한 트랜잭션</span>
+      <h4 class="ba-h">ROLLBACK으로 원상복구</h4>
+      <div class="sql">BEGIN;
+UPDATE A …;  UPDATE B …;
+ROLLBACK; -- 둘 다 취소</div>
+      <div class="mini-table">
+        <div class="h">계좌</div><div class="h">잔고</div>
+        <div class="c">A</div><div class="c">100,000</div>
+        <div class="c">B</div><div class="c">50,000</div>
+      </div>
+    </div>
+  </div>
+
+  <p class="reveal">출금과 입금은 업무적으로 한 사건(이체)이지만 SQL 입장에선 별개의 UPDATE 두 개다. 묶지 않으면 중간 실패가 곧 데이터 모순(원자성 깨짐)이 된다. 모델에서 두 엔터티가 식별 관계나 필수 관계로 묶여 있다는 것은 곧 "이 INSERT/UPDATE/DELETE 들은 한 트랜잭션 안에서 함께 처리해야 한다"는 신호다. 함께 변해야 하는 데이터는 코드에서도 <code>BEGIN ~ COMMIT</code>으로 한 묶음이 되도록 설계해야 한다.</p>
+
+  <!-- 트랜잭션 처리 패턴 -->
+  <h2 class="reveal">트랜잭션 처리 패턴</h2>
+  <table class="reveal">
+    <thead><tr><th>패턴</th><th>모델 단서</th><th>SQL</th></tr></thead>
+    <tbody>
+      <tr><td>묶어서 INSERT</td><td>식별 관계 / 필수 관계</td><td>INSERT ... INSERT ... COMMIT</td></tr>
+      <tr><td>묶어서 UPDATE</td><td>1:1 관계</td><td>UPDATE A ... UPDATE B ... COMMIT</td></tr>
+      <tr><td>묶어서 DELETE</td><td>식별 관계(CASCADE)</td><td>DELETE 부모 → 자식 자동/명시 삭제</td></tr>
+    </tbody>
+  </table>
+
+  <div class="reveal" style="margin: 40px 0 0; padding: 22px 24px; background: linear-gradient(135deg, var(--point-050), var(--bg-card)); border: 1px solid var(--point-100); border-radius: 12px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;">
+    <div>
+      <div style="font-size: 12px; font-weight: 800; color: var(--point-600); letter-spacing: 0.04em; margin-bottom: 4px;">시험 대비</div>
+      <div style="font-size: 14px; color: var(--fg-2);">이 챕터의 함정·정답과 30초 정리는 통합 시험 대비 페이지에서 볼 수 있습니다.</div>
+    </div>
+    <a href="./exam-review.html#ch-1-2-3" style="font-size: 14px; font-weight: 700; color: var(--point-600); text-decoration: none; padding: 8px 14px; border: 1px solid var(--point-300); border-radius: 8px; background: var(--bg-card); white-space: nowrap;">시험 대비 보기 →</a>
+  </div>
+
+  </article>
+</main>
+<script src="./common.js"></script>
+</body>
+</html>

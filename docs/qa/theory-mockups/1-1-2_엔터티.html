@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>엔터티 — SQLD양파 이론</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@1.3.9/dist/web/variable/pretendardvariable.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/wan2land/d2coding/d2coding-ligature-subset.css">
+<style>
+/* ============================================================
+   양파단 디자인 토큰 (src/index.css 흡수)
+   ============================================================ */
+:root {
+  --bg-page: #F5F7F6;
+  --bg-surface: #FAFAFA;
+  --bg-card: #FFFFFF;
+  --bg-code: #EEF1EE;
+  --bg-muted: #F3F5F3;
+
+  --point-600: #2E7D32;
+  --point-500: #4CAF50;
+  --point-300: #A5D6A7;
+  --point-100: #EBF5EC;
+  --point-050: #F0F7F1;
+
+  --fg-1: #1F2320;
+  --fg-2: #333333;
+  --fg-3: #6B7280;
+  --fg-4: #9CA3AF;
+
+  --correct-fg: #256B29;
+  --correct-bg: #E6F3E7;
+  --correct-border: #BFDFC2;
+
+  --wrong-fg: #A9562E;
+  --wrong-bg: #FCEEE5;
+  --wrong-border: #F1D6C1;
+
+  --info-fg: #2F5D80;
+  --info-bg: #E9F0F6;
+
+  --border-subtle: #EEF1EE;
+  --border-default: #E5E7EB;
+  --border-strong: #D1D5DB;
+
+  --font-sans: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif;
+  --font-mono: "D2Coding ligature", "D2Coding", "Fira Code", "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+  --shadow-sm: 0 1px 2px rgba(17, 24, 39, 0.04);
+  --shadow-md: 0 4px 12px rgba(17, 24, 39, 0.06);
+  --shadow-lg: 0 12px 32px rgba(17, 24, 39, 0.08);
+
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+  --duration-base: 200ms;
+  --duration-slow: 300ms;
+
+  --container-content: 720px;
+  --container-page: 960px;
+  --header-h: 64px;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; background: var(--bg-page); color: var(--fg-2); font-family: var(--font-sans); font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+/* ============================================================
+   페이지 쉘 (TopNav 모방 + 콘텐츠 영역)
+   ============================================================ */
+.topnav {
+  height: var(--header-h);
+  background: var(--bg-card);
+  border-bottom: 1px solid var(--border-subtle);
+  display: flex; align-items: center;
+  padding: 0 24px;
+  position: sticky; top: 0; z-index: 10;
+  backdrop-filter: blur(8px); background: rgba(255,255,255,0.92);
+}
+.topnav-inner { max-width: var(--container-page); margin: 0 auto; width: 100%; display: flex; align-items: center; gap: 24px; }
+.topnav-brand {
+  font-size: 18px; font-weight: 800; color: var(--point-600);
+  letter-spacing: -0.01em; display: flex; align-items: center; gap: 8px;
+}
+.topnav-brand::before { content: "🧅"; font-size: 22px; }
+.topnav-links { display: flex; gap: 20px; flex: 1; }
+.topnav-links a { color: var(--fg-2); text-decoration: none; font-size: 14.5px; font-weight: 600; padding: 6px 0; border-bottom: 2px solid transparent; transition: border-color 200ms; }
+.topnav-links a:hover, .topnav-links a.active { border-bottom-color: var(--point-500); color: var(--point-600); }
+
+.page-shell { max-width: var(--container-page); margin: 0 auto; padding: 28px 24px 80px; }
+.breadcrumb { font-size: 13px; color: var(--fg-3); margin-bottom: 12px; display: flex; gap: 6px; align-items: center; }
+.breadcrumb a { color: var(--fg-3); text-decoration: none; }
+.breadcrumb a:hover { color: var(--point-600); }
+.breadcrumb .sep { opacity: 0.5; }
+
+.page-title-block { margin-bottom: 32px; padding-bottom: 24px; border-bottom: 1px solid var(--border-subtle); }
+.page-title-block h1 {
+  font-size: 36px; font-weight: 800; color: var(--fg-1);
+  margin: 0 0 10px; letter-spacing: -0.02em; line-height: 1.2;
+}
+.page-title-block .subtitle { font-size: 14.5px; color: var(--fg-3); }
+.page-title-block .chapter-tag {
+  display: inline-block; background: var(--point-100); color: var(--point-600);
+  font-size: 11.5px; font-weight: 800; letter-spacing: 0.02em;
+  padding: 4px 10px; border-radius: 6px; margin-right: 8px;
+}
+
+/* ============================================================
+   .theory-md — 사이트 마크다운 렌더 시스템 (그대로 흡수)
+   ============================================================ */
+.theory-md { color: var(--fg-2); font-size: 15.5px; line-height: 1.8; }
+.theory-md > *:first-child { margin-top: 0 !important; }
+.theory-md p { font-size: 15.5px; color: var(--fg-2); line-height: 1.8; margin: 0 0 14px; }
+.theory-md strong { color: var(--fg-1); font-weight: 700; }
+.theory-md em { color: var(--fg-1); font-style: normal; background: var(--point-050); padding: 0 4px; border-radius: 3px; }
+.theory-md ul, .theory-md ol { padding-left: 22px; margin: 10px 0 18px; }
+.theory-md ul li { margin: 5px 0; line-height: 1.75; }
+.theory-md ul li::marker { color: var(--point-500); font-weight: 700; }
+.theory-md a { color: var(--point-600); text-decoration: underline; text-underline-offset: 2px; transition: color 150ms; }
+.theory-md a:hover { color: var(--point-500); }
+.theory-md hr { border: 0; height: 1px; background: linear-gradient(90deg, transparent, var(--border-subtle), transparent); margin: 36px 0; }
+
+.theory-md h2 { font-size: 21px; font-weight: 800; color: var(--fg-1); margin: 40px 0 16px; letter-spacing: -0.01em; }
+.theory-md h3 { font-size: 16px; font-weight: 700; color: var(--fg-1); margin: 28px 0 10px; padding-left: 12px; border-left: 3px solid var(--point-500); }
+.theory-md h4 { font-size: 14.5px; font-weight: 700; color: var(--fg-1); margin: 20px 0 8px; }
+
+/* 섹션 라벨 헤딩 */
+.theory-md h2.section-label { display: flex; align-items: center; gap: 12px; margin: 50px 0 22px; font-size: 19px; font-weight: 800; }
+.theory-md h2.section-label .label-tag {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-size: 11.5px; font-weight: 800; letter-spacing: -0.01em;
+  padding: 6px 12px; border-radius: 8px;
+  flex-shrink: 0; line-height: 1; white-space: nowrap;
+}
+.theory-md h2.section-label .label-tag::before { content: ''; display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: currentColor; opacity: 0.9; }
+.theory-md h2.section-label .label-rest { color: var(--fg-1); font-weight: 800; }
+
+.theory-md h2.sec-summary .label-tag { background: var(--point-100); color: var(--point-600); }
+.theory-md h2.sec-diagram .label-tag { background: var(--info-bg); color: var(--info-fg); }
+.theory-md h2.sec-sql .label-tag { background: #E8F5E9; color: #1B5E20; }
+.theory-md h2.sec-compare .label-tag { background: #FFF8E1; color: #8B6914; }
+.theory-md h2.sec-exam .label-tag { background: var(--wrong-bg); color: var(--wrong-fg); }
+
+/* blockquote (TIP) */
+.theory-md blockquote {
+  position: relative; margin: 16px 0 22px;
+  padding: 18px 22px 18px 56px;
+  background: var(--point-050);
+  border: 1px solid var(--point-100);
+  border-left: 4px solid var(--point-500);
+  border-radius: 12px;
+  color: var(--fg-1); font-size: 14.5px; line-height: 1.75;
+}
+.theory-md blockquote::before { content: '💡'; position: absolute; left: 18px; top: 16px; font-size: 22px; line-height: 1; }
+.theory-md blockquote p { margin: 0; color: var(--fg-1); }
+.theory-md blockquote strong { color: var(--point-600); font-weight: 800; }
+.theory-md blockquote code { background: rgba(46,125,50,0.1); color: var(--point-600); padding: 1px 5px; border-radius: 4px; font-size: 0.9em; }
+
+/* ex) 박스 — 핵심 요약 직후 예시 */
+.theory-md .ex-box {
+  margin: 14px 0 8px; padding: 14px 18px;
+  background: var(--bg-card); border: 1px dashed var(--border-default);
+  border-radius: 10px; color: var(--fg-2); font-size: 14.5px; line-height: 1.7;
+}
+.theory-md .ex-box::before {
+  content: 'ex)'; display: inline-block; margin-right: 8px;
+  color: var(--point-600); font-weight: 800; font-family: var(--font-mono);
+  font-size: 13px;
+}
+
+/* 인라인 코드 */
+.theory-md :not(pre) > code { background: var(--bg-code); color: var(--fg-1); padding: 1px 6px; border-radius: 5px; font-family: var(--font-mono); font-size: 0.9em; font-weight: 600; }
+
+/* SQL 코드 블록 — 라이트 톤 (디자인 토큰 기반) */
+.theory-md pre {
+  background: var(--bg-code);
+  color: var(--fg-1);
+  padding: 16px 20px; border-radius: 12px;
+  overflow-x: auto;
+  font-family: var(--font-mono); font-size: 13px; line-height: 1.65;
+  margin: 14px 0 20px;
+  white-space: pre;
+  border: 1px solid var(--border-subtle);
+  box-shadow: var(--shadow-sm);
+  position: relative;
+}
+.theory-md pre .copy-btn {
+  position: absolute; top: 8px; right: 8px;
+  background: var(--bg-card); color: var(--fg-3);
+  border: 1px solid var(--border-default);
+  padding: 4px 10px; border-radius: 6px;
+  font-size: 11px; font-weight: 700; cursor: pointer;
+  opacity: 0; transition: opacity 150ms, background 150ms, color 150ms, border-color 150ms;
+}
+.theory-md pre:hover .copy-btn { opacity: 1; }
+.theory-md pre .copy-btn:hover {
+  background: var(--point-100); color: var(--point-600); border-color: var(--point-300);
+}
+
+.sql-kw { color: var(--point-600); font-weight: 700; }
+.sql-type { color: var(--info-fg); font-weight: 600; }
+.sql-cm { color: var(--fg-3); font-style: italic; }
+.sql-name { color: var(--fg-1); font-weight: 700; }
+.sql-str { color: var(--wrong-fg); }
+.sql-num { color: var(--info-fg); }
+
+/* 표 */
+.theory-md table {
+  width: 100%; border-collapse: separate; border-spacing: 0;
+  margin: 16px 0 22px; font-size: 13.5px;
+  border: 1px solid var(--border-subtle); border-radius: 12px; overflow: hidden;
+  background: var(--bg-card); box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+}
+.theory-md table thead { background: var(--point-050); }
+.theory-md table thead th {
+  text-align: left; padding: 12px 16px;
+  color: var(--point-600); font-weight: 800;
+  border-bottom: 2px solid var(--point-100);
+  font-size: 12.5px; letter-spacing: -0.01em; white-space: nowrap;
+}
+.theory-md table tbody td {
+  padding: 11px 16px; border-bottom: 1px solid var(--border-subtle);
+  color: var(--fg-2); vertical-align: top; line-height: 1.65;
+}
+.theory-md table tbody tr:last-child td { border-bottom: 0; }
+.theory-md table tbody tr:nth-child(even) { background: rgba(240,247,241,0.4); }
+.theory-md table tbody tr:hover { background: var(--point-050); }
+.theory-md table tbody td:first-child { color: var(--fg-1); font-weight: 700; }
+.theory-md table code { background: var(--point-050); color: var(--point-600); padding: 1px 6px; border-radius: 4px; font-size: 0.9em; font-weight: 600; }
+
+/* ============================================================
+   ★ 새 인포그래픽 컴포넌트 (시안 핵심)
+   ============================================================ */
+
+/* (1) 3계층 시각화 — 엔터티 → 속성 → 인스턴스 */
+.entity-layers {
+  margin: 24px 0 28px;
+  padding: 28px 24px;
+  background: linear-gradient(135deg, #FFFFFF 0%, var(--point-050) 100%);
+  border: 1px solid var(--point-100);
+  border-radius: 16px;
+  box-shadow: 0 1px 3px rgba(46,125,50,0.06);
+  position: relative;
+}
+.entity-layers::before {
+  content: '◆ Diagram'; position: absolute; top: 12px; right: 16px;
+  color: var(--point-500); font-size: 10.5px; font-weight: 700; letter-spacing: 0.04em;
+}
+.entity-layers-track { display: grid; grid-template-columns: 1fr; gap: 14px; max-width: 600px; margin: 0 auto; }
+.entity-layer {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  padding: 16px 18px;
+  display: grid; grid-template-columns: 64px 1fr; gap: 16px; align-items: center;
+  transition: transform var(--duration-base) var(--ease-standard), border-color var(--duration-base);
+  position: relative;
+}
+.entity-layer:hover { transform: translateY(-2px); border-color: var(--point-500); box-shadow: 0 4px 12px rgba(46,125,50,0.10); }
+.entity-layer .icon {
+  width: 64px; height: 64px; border-radius: 12px;
+  background: var(--point-100); color: var(--point-600);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 26px; font-weight: 800; font-family: var(--font-mono);
+}
+.entity-layer .body { display: flex; flex-direction: column; gap: 4px; }
+.entity-layer .body .name { font-size: 15px; font-weight: 800; color: var(--fg-1); }
+.entity-layer .body .name small { font-size: 11.5px; color: var(--fg-3); font-weight: 600; margin-left: 4px; }
+.entity-layer .body .desc { font-size: 13.5px; color: var(--fg-3); line-height: 1.6; }
+.entity-layer .arrow {
+  position: absolute; left: 50%; bottom: -16px; transform: translateX(-50%);
+  color: var(--point-300); font-size: 18px; line-height: 1; pointer-events: none;
+}
+
+/* (2) 5대 특징 카드 그리드 — "업·식·인·속·관" */
+.trait-grid {
+  display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px;
+  margin: 24px 0 28px;
+}
+.trait-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 14px;
+  padding: 18px 14px 16px;
+  text-align: center;
+  transition: transform var(--duration-base) var(--ease-standard), border-color var(--duration-base), box-shadow var(--duration-base);
+  cursor: default; position: relative;
+  overflow: hidden;
+}
+.trait-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+  background: linear-gradient(90deg, var(--point-500), var(--point-300));
+  transform: scaleX(0); transform-origin: left;
+  transition: transform var(--duration-slow) var(--ease-standard);
+}
+.trait-card:hover { transform: translateY(-4px); border-color: var(--point-500); box-shadow: 0 8px 20px rgba(46,125,50,0.12); }
+.trait-card:hover::before { transform: scaleX(1); }
+.trait-card .glyph {
+  font-size: 28px; font-weight: 900; color: var(--point-600);
+  margin-bottom: 8px; font-family: var(--font-sans); line-height: 1;
+}
+.trait-card .label { font-size: 13px; font-weight: 800; color: var(--fg-1); margin-bottom: 6px; }
+.trait-card .desc { font-size: 11.5px; color: var(--fg-3); line-height: 1.5; }
+
+/* (3) 분류 매트릭스 — 유무형 + 발생 시점 */
+.classification-block {
+  display: grid; grid-template-columns: 1fr; gap: 22px;
+  margin: 22px 0 28px;
+}
+.classification-section h3.cls-h {
+  font-size: 14.5px; font-weight: 800; color: var(--fg-1);
+  margin: 0 0 12px; padding-left: 12px; border-left: 3px solid var(--point-500);
+}
+.cls-row {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;
+}
+.cls-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  padding: 16px 16px 14px;
+  transition: transform var(--duration-base), border-color var(--duration-base);
+  position: relative;
+}
+.cls-card:hover { transform: translateY(-2px); border-color: var(--point-300); }
+.cls-card .badge {
+  display: inline-block; font-size: 10.5px; font-weight: 800;
+  padding: 3px 8px; border-radius: 999px;
+  background: var(--point-100); color: var(--point-600);
+  letter-spacing: 0.02em; margin-bottom: 8px;
+}
+.cls-card .badge.b-physical { background: var(--info-bg); color: var(--info-fg); }
+.cls-card .badge.b-conceptual { background: #FFF8E1; color: #8B6914; }
+.cls-card .badge.b-event { background: var(--wrong-bg); color: var(--wrong-fg); }
+.cls-card .name { font-size: 14.5px; font-weight: 800; color: var(--fg-1); margin-bottom: 6px; }
+.cls-card .ex { font-size: 12.5px; color: var(--fg-3); line-height: 1.5; }
+
+/* 발생 시점 흐름 */
+.timing-flow {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;
+  align-items: stretch; position: relative;
+}
+.timing-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  padding: 16px 16px 14px;
+  position: relative; transition: transform var(--duration-base), border-color var(--duration-base);
+}
+.timing-card:hover { transform: translateY(-2px); border-color: var(--point-500); }
+.timing-card .step {
+  font-size: 10.5px; font-weight: 800; color: var(--point-600);
+  letter-spacing: 0.06em; margin-bottom: 6px;
+}
+.timing-card .name { font-size: 14.5px; font-weight: 800; color: var(--fg-1); margin-bottom: 4px; }
+.timing-card .name small { font-size: 11px; color: var(--fg-3); font-weight: 600; margin-left: 4px; }
+.timing-card .ex { font-size: 12.5px; color: var(--fg-3); line-height: 1.5; }
+.timing-card .arrow-next {
+  position: absolute; right: -8px; top: 50%; transform: translateY(-50%);
+  width: 16px; height: 16px;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--point-300); font-size: 16px; font-weight: 800;
+  z-index: 1; background: var(--bg-page); border-radius: 50%;
+}
+.timing-card:last-child .arrow-next { display: none; }
+
+/* (4) 암기 박스 — "업·식·인·속·관" */
+.mnemonic {
+  margin: 18px 0 24px;
+  background: var(--bg-card);
+  border: 1px solid var(--point-100);
+  border-radius: 14px;
+  padding: 20px 22px;
+  display: grid; grid-template-columns: auto 1fr; gap: 18px; align-items: center;
+}
+.mnemonic .label-side {
+  font-size: 12px; font-weight: 800; color: var(--point-600);
+  letter-spacing: 0.04em; line-height: 1.4;
+}
+.mnemonic .label-side small { display: block; font-size: 11px; color: var(--fg-3); font-weight: 600; margin-top: 2px; letter-spacing: 0.02em; }
+.mnemonic .glyphs { display: flex; gap: 8px; flex-wrap: wrap; }
+.mnemonic .glyph-chip {
+  background: linear-gradient(135deg, var(--point-100), var(--point-050));
+  border: 1px solid var(--point-300);
+  width: 44px; height: 44px;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 10px;
+  font-size: 18px; font-weight: 900; color: var(--point-600);
+  transition: transform var(--duration-base), box-shadow var(--duration-base);
+}
+.mnemonic .glyph-chip:hover { transform: rotate(-4deg) scale(1.06); box-shadow: 0 4px 10px rgba(46,125,50,0.20); }
+
+/* (5) Before → After 흐름 */
+.ba-flow {
+  margin: 22px 0 28px;
+  display: grid; grid-template-columns: 1fr 48px 2fr; gap: 16px; align-items: start;
+}
+.ba-side {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  padding: 16px 18px;
+  position: relative;
+}
+.ba-side .ba-tag {
+  display: inline-block; font-size: 10.5px; font-weight: 800;
+  padding: 3px 10px; border-radius: 999px;
+  margin-bottom: 10px; letter-spacing: 0.04em;
+}
+.ba-side.before .ba-tag { background: var(--wrong-bg); color: var(--wrong-fg); }
+.ba-side.after .ba-tag { background: var(--correct-bg); color: var(--correct-fg); }
+.ba-side h4.ba-h { font-size: 13px; font-weight: 800; color: var(--fg-1); margin: 0 0 10px; }
+.ba-row {
+  background: var(--bg-muted); border: 1px dashed var(--border-default);
+  border-radius: 8px; padding: 8px 10px;
+  font-size: 12.5px; color: var(--fg-2); margin-bottom: 6px;
+}
+.ba-row:last-child { margin-bottom: 0; }
+.ba-arrow { display: flex; align-items: center; justify-content: center; padding-top: 50px; color: var(--point-500); font-size: 28px; font-weight: 800; }
+
+.ba-tables { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.ba-mini-table { background: var(--bg-page); border: 1px solid var(--border-subtle); border-radius: 8px; padding: 10px 12px; }
+.ba-mini-table .h { font-size: 11.5px; font-weight: 800; color: var(--point-600); margin-bottom: 6px; letter-spacing: 0.02em; }
+.ba-mini-table .row { font-size: 11.5px; font-family: var(--font-mono); color: var(--fg-2); padding: 2px 0; line-height: 1.55; }
+
+/* (6) 시험 함정 박스 */
+.trap-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 14px;
+  margin: 18px 0 22px;
+}
+.trap-row {
+  background: var(--bg-card); border: 1px solid var(--border-subtle);
+  border-radius: 12px; padding: 16px 18px;
+  transition: border-color var(--duration-base);
+}
+.trap-row.trap { border-left: 4px solid var(--wrong-fg); }
+.trap-row.right { border-left: 4px solid var(--correct-fg); }
+.trap-row .marker {
+  font-size: 11px; font-weight: 800; padding: 3px 9px;
+  border-radius: 999px; display: inline-block; margin-bottom: 8px;
+  letter-spacing: 0.04em;
+}
+.trap-row.trap .marker { background: var(--wrong-bg); color: var(--wrong-fg); }
+.trap-row.right .marker { background: var(--correct-bg); color: var(--correct-fg); }
+.trap-row .body { font-size: 13.5px; color: var(--fg-1); line-height: 1.6; }
+
+/* (7) 30초 정리 미니 카드 */
+.summary-cards {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;
+  margin: 18px 0 0;
+}
+.s-card {
+  background: linear-gradient(135deg, var(--point-050), var(--bg-card));
+  border: 1px solid var(--point-100);
+  border-radius: 12px; padding: 14px 16px;
+  font-size: 13px; color: var(--fg-1); line-height: 1.55;
+  transition: transform var(--duration-base);
+}
+.s-card:hover { transform: translateY(-2px); }
+.s-card .head { font-size: 11px; font-weight: 800; color: var(--point-600); letter-spacing: 0.04em; margin-bottom: 6px; }
+.s-card strong { color: var(--point-600); font-weight: 800; }
+
+/* ============================================================
+   ★ 새 도식 — mermaid · 트리 · ER (1-1-2 보강용)
+   ============================================================ */
+.theory-md .mermaid {
+  background: linear-gradient(135deg, #FFFFFF 0%, var(--point-050) 100%);
+  border: 1px solid var(--point-100);
+  border-radius: 14px;
+  padding: 24px;
+  margin: 18px 0 24px;
+  text-align: center;
+  overflow-x: auto;
+  box-shadow: 0 1px 3px rgba(46,125,50,0.06);
+  font-family: var(--font-sans);
+  position: relative;
+}
+.theory-md .mermaid::before {
+  content: '◆ Diagram'; position: absolute; top: 10px; right: 14px;
+  color: var(--point-500); font-size: 10.5px; font-weight: 700;
+  letter-spacing: 0.04em; pointer-events: none;
+}
+.theory-md .mermaid svg { max-width: 100%; height: auto !important; display: inline-block; }
+.theory-md .mermaid:not([data-processed="true"]) {
+  background: var(--bg-muted); color: var(--fg-3);
+  font-family: var(--font-mono); font-size: 12px;
+  text-align: left; white-space: pre-wrap;
+}
+
+.tree-diagram {
+  margin: 18px 0 24px; padding: 24px;
+  background: linear-gradient(135deg, #FFFFFF 0%, var(--point-050) 100%);
+  border: 1px solid var(--point-100); border-radius: 14px;
+  position: relative; overflow-x: auto;
+}
+.tree-diagram::before {
+  content: '◆ Tree'; position: absolute; top: 10px; right: 14px;
+  color: var(--point-500); font-size: 10.5px; font-weight: 700;
+  letter-spacing: 0.04em;
+}
+.tree-diagram ul { list-style: none; padding-left: 24px; margin: 0; position: relative; }
+.tree-diagram > ul { padding-left: 0; }
+.tree-diagram li { position: relative; padding: 6px 0 6px 22px; }
+.tree-diagram li::before {
+  content: ''; position: absolute; left: 0; top: 0; bottom: 50%;
+  width: 14px; border-left: 2px solid var(--point-300);
+  border-bottom: 2px solid var(--point-300);
+  border-bottom-left-radius: 6px;
+}
+.tree-diagram li::after {
+  content: ''; position: absolute; left: 0; top: 50%; bottom: 0;
+  border-left: 2px solid var(--point-300);
+}
+.tree-diagram li:last-child::after { display: none; }
+.tree-diagram > ul > li { padding-left: 0; }
+.tree-diagram > ul > li::before, .tree-diagram > ul > li::after { display: none; }
+.tree-diagram .node {
+  display: inline-block;
+  background: var(--bg-card); border: 1px solid var(--border-subtle);
+  border-radius: 8px; padding: 6px 12px;
+  font-size: 13px; font-weight: 700; color: var(--fg-1);
+  font-family: var(--font-mono);
+}
+.tree-diagram .node.root {
+  background: var(--point-100); color: var(--point-600);
+  border-color: var(--point-300); font-weight: 800;
+}
+.tree-diagram .node .meta {
+  font-size: 11px; color: var(--fg-3); font-weight: 600;
+  margin-left: 6px; font-family: var(--font-sans);
+}
+
+.er-row {
+  display: grid; grid-template-columns: 1fr auto 1fr; gap: 16px; align-items: center;
+  margin: 18px 0 24px;
+}
+.er-entity {
+  background: var(--bg-card); border: 1px solid var(--border-subtle);
+  border-radius: 12px; padding: 14px 16px;
+  font-family: var(--font-mono);
+}
+.er-entity:hover { border-color: var(--point-500); }
+.er-entity .ent-name { font-size: 14px; font-weight: 800; color: var(--point-600); margin-bottom: 8px; padding-bottom: 6px; border-bottom: 1px solid var(--border-subtle); }
+.er-entity .attr { font-size: 12px; color: var(--fg-2); padding: 2px 0; line-height: 1.6; }
+.er-entity .attr.pk { color: var(--point-600); font-weight: 700; }
+.er-entity .attr.pk::before { content: '🔑 '; }
+.er-entity .attr.fk { color: var(--info-fg); }
+.er-entity .attr.fk::before { content: '🔗 '; }
+.er-relation {
+  font-family: var(--font-mono); font-size: 13px; color: var(--fg-3);
+  text-align: center; min-width: 60px;
+}
+.er-relation .card { font-weight: 800; color: var(--point-600); font-size: 14px; }
+.er-relation .label { display: block; font-size: 10.5px; margin-top: 2px; letter-spacing: 0.04em; }
+
+/* ============================================================
+   엔트리 애니메이션
+   ============================================================ */
+.reveal { opacity: 0; transform: translateY(12px); transition: opacity 500ms var(--ease-standard), transform 500ms var(--ease-standard); }
+.reveal.is-visible { opacity: 1; transform: translateY(0); }
+
+/* ============================================================
+   반응형
+   ============================================================ */
+@media (max-width: 900px) {
+  .topnav-links { display: none; }
+  .trait-grid { grid-template-columns: repeat(2, 1fr); }
+  .ba-flow { grid-template-columns: 1fr; }
+  .ba-arrow { padding: 0; transform: rotate(90deg); }
+  .ba-tables { grid-template-columns: 1fr; }
+  .trap-grid { grid-template-columns: 1fr; }
+  .timing-flow { grid-template-columns: 1fr; }
+  .timing-card .arrow-next { right: 50%; top: auto; bottom: -8px; transform: translate(50%, 0) rotate(90deg); }
+  .summary-cards { grid-template-columns: 1fr; }
+  .cls-row { grid-template-columns: 1fr; }
+  .er-row { grid-template-columns: 1fr; }
+}
+@media (max-width: 720px) {
+  .page-title-block h1 { font-size: 28px; }
+  .theory-md { font-size: 15px; }
+  .trait-grid { grid-template-columns: repeat(2, 1fr); }
+  .mnemonic { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="topnav-inner">
+    <div class="topnav-brand">SQLD양파</div>
+    <div class="topnav-links">
+      <a href="#">홈</a>
+      <a href="#" class="active">이론</a>
+      <a href="#">기출 CBT</a>
+      <a href="#">모의고사</a>
+      <a href="#">Pro</a>
+    </div>
+  </div>
+</nav>
+
+<main class="page-shell">
+  <div class="breadcrumb">
+    <a href="#">이론</a>
+    <span class="sep">›</span>
+    <a href="#">1과목 데이터 모델링</a>
+    <span class="sep">›</span>
+    <a href="#">1-1. 데이터 모델링의 이해</a>
+  </div>
+
+  <header class="page-title-block">
+    <h1>엔터티 (Entity)</h1>
+    <p class="subtitle">정보의 덩어리. 5대 특징 · 유무형 분류 · 발생 시점 분류</p>
+  </header>
+
+  <article class="theory-md">
+
+  <!-- 핵심 요약 -->
+  <h2 class="section-label sec-summary reveal">
+    <span class="label-tag">핵심 요약</span>
+    <span class="label-rest">정의</span>
+  </h2>
+  <blockquote class="reveal">
+    엔터티(Entity)란 업무에서 관리해야 할 <strong>정보의 덩어리(명사)</strong>다. 실제 테이블의 후보가 된다.
+  </blockquote>
+  <div class="ex-box reveal">
+    쇼핑몰이라면 <strong>회원·상품·주문·배송</strong> 같은 명사 하나하나가 엔터티이며, 각 엔터티의 개별 사례(예: '김철수 회원')를 <strong>인스턴스(Instance, 한 행)</strong> 라고 부른다.
+  </div>
+
+  <!-- 개념 도식화 — 인포그래픽 1 -->
+  <h2 class="section-label sec-diagram reveal">
+    <span class="label-tag">개념 도식화</span>
+    <span class="label-rest">엔터티의 구성</span>
+  </h2>
+  <div class="entity-layers reveal">
+    <div class="entity-layers-track">
+      <div class="entity-layer">
+        <div class="icon">📋</div>
+        <div class="body">
+          <div class="name">엔터티 <small>(테이블)</small></div>
+          <div class="desc">정보의 덩어리. <em>예: 회원</em></div>
+        </div>
+        <div class="arrow">▼</div>
+      </div>
+      <div class="entity-layer">
+        <div class="icon">🏷️</div>
+        <div class="body">
+          <div class="name">속성 <small>(컬럼)</small></div>
+          <div class="desc">정보의 세부 항목. <em>회원ID · 이름 · 전화번호</em></div>
+        </div>
+        <div class="arrow">▼</div>
+      </div>
+      <div class="entity-layer">
+        <div class="icon">📄</div>
+        <div class="body">
+          <div class="name">인스턴스 <small>(행)</small></div>
+          <div class="desc">개별 사례. <em>C001, 김철수, 010-1111</em></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <p class="reveal" style="font-size: 13.5px; color: var(--fg-3); margin: 18px 0 6px;">↓ 위 엔터티가 실제 테이블이 되면 이렇게 채워진다</p>
+  <table class="reveal">
+    <thead>
+      <tr><th>MEMBER_ID</th><th>NAME</th><th>PHONE</th><th>JOIN_DATE</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><code>C001</code></td><td>김철수</td><td>010-1111-2222</td><td>2026-01-15</td></tr>
+      <tr><td><code>C002</code></td><td>이영희</td><td>010-2222-3333</td><td>2026-02-08</td></tr>
+      <tr><td><code>C003</code></td><td>박민수</td><td>010-3333-4444</td><td>2026-03-22</td></tr>
+    </tbody>
+  </table>
+  <p class="reveal" style="font-size: 12.5px; color: var(--fg-3); margin: 0 0 12px; padding-left: 10px;">→ 표 자체가 <strong style="color:var(--point-600);">엔터티(MEMBER)</strong>, 헤더가 <strong style="color:var(--point-600);">속성</strong>, 각 행이 <strong style="color:var(--point-600);">인스턴스</strong></p>
+
+  <h3 class="reveal" style="font-size:16px;font-weight:700;color:var(--fg-1);margin:28px 0 10px;padding-left:12px;border-left:3px solid var(--point-500);">ER 다이어그램으로 보는 엔터티</h3>
+  <p class="reveal">엔터티 사이의 연결도 함께 본다 — 회원(MEMBER) 1명은 여러 주문(ORDER)을 만들 수 있다.</p>
+  <div class="mermaid reveal">
+erDiagram
+    MEMBER ||--o{ ORDER : "주문하다"
+    MEMBER {
+        VARCHAR2 MEMBER_ID PK
+        VARCHAR2 NAME
+        VARCHAR2 PHONE
+        DATE JOIN_DATE
+    }
+    ORDER {
+        NUMBER ORDER_ID PK
+        VARCHAR2 MEMBER_ID FK
+        DATE ORD_DATE
+    }
+  </div>
+
+  <!-- 5가지 특징 — 인포그래픽 2 -->
+  <h2 class="reveal">엔터티의 5가지 특징</h2>
+  <div class="trait-grid reveal">
+    <div class="trait-card">
+      <div class="glyph">업</div>
+      <div class="label">업무에서 필요</div>
+      <div class="desc">관리할 가치가 있는 정보</div>
+    </div>
+    <div class="trait-card">
+      <div class="glyph">식</div>
+      <div class="label">식별 가능</div>
+      <div class="desc"><a href="./1-1-5_식별자.html">식별자</a>로 구분</div>
+    </div>
+    <div class="trait-card">
+      <div class="glyph">인</div>
+      <div class="label">인스턴스 ≥ 2</div>
+      <div class="desc">2개 이상의 행 존재</div>
+    </div>
+    <div class="trait-card">
+      <div class="glyph">속</div>
+      <div class="label">속성 ≥ 2</div>
+      <div class="desc">2개 이상의 <a href="./1-1-3_속성.html">속성</a></div>
+    </div>
+    <div class="trait-card">
+      <div class="glyph">관</div>
+      <div class="label">관계 보유</div>
+      <div class="desc">다른 엔터티와의 <a href="./1-1-4_관계.html">관계</a></div>
+    </div>
+  </div>
+
+  <div class="mnemonic reveal">
+    <div class="label-side">
+      암기
+      <small>5대 특징</small>
+    </div>
+    <div class="glyphs">
+      <div class="glyph-chip">업</div>
+      <div class="glyph-chip">식</div>
+      <div class="glyph-chip">인</div>
+      <div class="glyph-chip">속</div>
+      <div class="glyph-chip">관</div>
+    </div>
+  </div>
+
+  <!-- 분류 — 인포그래픽 3 -->
+  <h2 class="reveal">엔터티의 분류</h2>
+
+  <div class="classification-block reveal">
+
+    <section class="classification-section">
+      <h3 class="cls-h">유무형에 따른 분류</h3>
+      <div class="cls-row">
+        <div class="cls-card">
+          <span class="badge b-physical">유형</span>
+          <div class="name">유형 엔터티</div>
+          <div class="ex">물리적으로 존재 — <em>상품 · 사원 · 매장</em></div>
+        </div>
+        <div class="cls-card">
+          <span class="badge b-conceptual">개념</span>
+          <div class="name">개념 엔터티</div>
+          <div class="ex">개념적으로만 존재 — <em>부서 · 조직 · 학과</em></div>
+        </div>
+        <div class="cls-card">
+          <span class="badge b-event">사건</span>
+          <div class="name">사건 엔터티</div>
+          <div class="ex">행위로 발생 — <em>주문 · 결제 · 출입기록</em></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="classification-section">
+      <h3 class="cls-h">발생 시점에 따른 분류</h3>
+      <div class="timing-flow">
+        <div class="timing-card">
+          <div class="step">STEP 1 · 독립</div>
+          <div class="name">기본 엔터티 <small>(Key)</small></div>
+          <div class="ex">다른 엔터티 없이도 성립<br><em>사원 · 부서 · 고객</em></div>
+          <div class="arrow-next">→</div>
+        </div>
+        <div class="timing-card">
+          <div class="step">STEP 2 · 파생</div>
+          <div class="name">중심 엔터티 <small>(Main)</small></div>
+          <div class="ex">기본 엔터티에서 파생<br><em>주문 · 계약 · 매출</em></div>
+          <div class="arrow-next">→</div>
+        </div>
+        <div class="timing-card">
+          <div class="step">STEP 3 · 행위</div>
+          <div class="name">행위 엔터티 <small>(Action)</small></div>
+          <div class="ex">2개 이상 엔터티의 관계에서 발생<br><em>주문상세 · 출고 · 입출금</em></div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- SQL 실전 -->
+  <h2 class="section-label sec-sql reveal">
+    <span class="label-tag">SQL 실전</span>
+    <span class="label-rest">엔터티는 테이블이 된다</span>
+  </h2>
+  <p class="reveal" style="font-size: 13px; color: var(--fg-3); margin: 8px 0 4px;">예시 데이터 — 입력할 인스턴스</p>
+  <div class="ba-side before reveal" style="max-width: 460px;">
+    <span class="ba-tag">MEMBER</span>
+    <h4 class="ba-h">회원 엔터티 → 테이블</h4>
+    <div class="mini-table cols-4">
+      <div class="h">MEMBER_ID</div><div class="h">NAME</div><div class="h">PHONE</div><div class="h">JOIN_DATE</div>
+      <div class="c">M01</div><div class="c">김철수</div><div class="c">010-1111</div><div class="c">2026-01-15</div>
+      <div class="c">M02</div><div class="c">이영희</div><div class="c">010-2222</div><div class="c">2026-02-08</div>
+    </div>
+  </div>
+  <pre class="reveal"><button class="copy-btn">복사</button><code><span class="sql-kw">CREATE TABLE</span> <span class="sql-name">MEMBER</span> (
+    <span class="sql-type">MEMBER_ID</span>    <span class="sql-kw">VARCHAR2</span>(10) <span class="sql-kw">PRIMARY KEY</span>,  <span class="sql-cm">-- 식별자</span>
+    <span class="sql-type">NAME</span>         <span class="sql-kw">VARCHAR2</span>(50),
+    <span class="sql-type">PHONE</span>        <span class="sql-kw">VARCHAR2</span>(20),
+    <span class="sql-type">JOIN_DATE</span>    <span class="sql-kw">DATE</span>
+);
+
+<span class="sql-cm">-- 인스턴스(행) 입력</span>
+<span class="sql-kw">INSERT INTO</span> <span class="sql-name">MEMBER</span> <span class="sql-kw">VALUES</span>(<span class="sql-str">'M01'</span>, <span class="sql-str">'김철수'</span>, <span class="sql-str">'010-1111'</span>, <span class="sql-kw">DATE</span> <span class="sql-str">'2026-01-15'</span>);
+<span class="sql-kw">INSERT INTO</span> <span class="sql-name">MEMBER</span> <span class="sql-kw">VALUES</span>(<span class="sql-str">'M02'</span>, <span class="sql-str">'이영희'</span>, <span class="sql-str">'010-2222'</span>, <span class="sql-kw">DATE</span> <span class="sql-str">'2026-02-08'</span>);
+
+<span class="sql-cm">-- 조회</span>
+<span class="sql-kw">SELECT</span> <span class="sql-type">MEMBER_ID</span>, <span class="sql-type">NAME</span> <span class="sql-kw">FROM</span> <span class="sql-name">MEMBER</span>;</code></pre>
+
+  <p class="reveal" style="font-size:13px;color:var(--fg-3);margin:8px 0 4px;">↓ 결과</p>
+  <table class="reveal">
+    <thead><tr><th>MEMBER_ID</th><th>NAME</th></tr></thead>
+    <tbody>
+      <tr><td>M01</td><td>김철수</td></tr>
+      <tr><td>M02</td><td>이영희</td></tr>
+    </tbody>
+  </table>
+  <p class="reveal" style="font-size: 12.5px; color: var(--fg-3); margin: 0 0 12px;">→ SELECT 문이 두 인스턴스(M01·M02)에서 두 속성(MEMBER_ID·NAME)만 골라 보여준다.</p>
+  <p class="reveal" style="font-size:13px;color:var(--fg-3);">엔터티(설계 단계) → 테이블(SQL 단계) → 행(인스턴스)으로 단계가 매핑된다.</p>
+
+  <!-- Before & After — 인포그래픽 4 -->
+  <h2 class="section-label sec-compare reveal">
+    <span class="label-tag">Before &amp; After</span>
+    <span class="label-rest">엔터티 도출 전후</span>
+  </h2>
+  <div class="ba-flow reveal">
+    <div class="ba-side before">
+      <span class="ba-tag">BEFORE</span>
+      <h4 class="ba-h">엔터티 구분 없이 한 덩어리</h4>
+      <div class="ba-row">김철수가 2026-04-01에 사과 2개 주문</div>
+      <div class="ba-row">이영희가 2026-04-02에 배 1개 주문</div>
+    </div>
+    <div class="ba-arrow">→</div>
+    <div class="ba-side after">
+      <span class="ba-tag">AFTER</span>
+      <h4 class="ba-h">엔터티 분리 — 회원 · 상품 · 주문</h4>
+      <div class="ba-tables">
+        <div class="ba-mini-table">
+          <div class="h">MEMBER</div>
+          <div class="row">M01 · 김철수</div>
+          <div class="row">M02 · 이영희</div>
+        </div>
+        <div class="ba-mini-table">
+          <div class="h">PRODUCT</div>
+          <div class="row">P01 · 사과</div>
+          <div class="row">P02 · 배</div>
+        </div>
+        <div class="ba-mini-table">
+          <div class="h">ORDER</div>
+          <div class="row">1 · M01 · P01 · 2</div>
+          <div class="row">2 · M02 · P02 · 1</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="reveal" style="margin: 40px 0 0; padding: 22px 24px; background: linear-gradient(135deg, var(--point-050), var(--bg-card)); border: 1px solid var(--point-100); border-radius: 12px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;">
+    <div>
+      <div style="font-size: 12px; font-weight: 800; color: var(--point-600); letter-spacing: 0.04em; margin-bottom: 4px;">시험 대비</div>
+      <div style="font-size: 14px; color: var(--fg-2);">이 챕터의 함정·정답과 30초 정리는 통합 시험 대비 페이지에서 볼 수 있습니다.</div>
+    </div>
+    <a href="./exam-review.html#ch-1-1-2" style="font-size: 14px; font-weight: 700; color: var(--point-600); text-decoration: none; padding: 8px 14px; border: 1px solid var(--point-300); border-radius: 8px; background: var(--bg-card); white-space: nowrap;">시험 대비 보기 →</a>
+  </div>
+
+  </article>
+</main>
+
+<script>
+// 스크롤 등장 애니메이션
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('is-visible');
+      io.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+// 코드 복사 버튼
+document.querySelectorAll('.copy-btn').forEach(btn => {
+  btn.addEventListener('click', async () => {
+    const pre = btn.closest('pre');
+    const code = pre.querySelector('code').innerText;
+    try { await navigator.clipboard.writeText(code); btn.textContent = '복사됨'; setTimeout(() => btn.textContent = '복사', 1400); } catch(e) {}
+  });
+});
+
+// mermaid 동적 로드
+if (document.querySelector('.mermaid')) {
+  const script = document.createElement('script');
+  script.src = 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js';
+  script.onload = () => {
+    if (!window.mermaid) return;
+    window.mermaid.initialize({
+      startOnLoad: true,
+      securityLevel: 'loose',
+      theme: 'base',
+      themeVariables: {
+        primaryColor: '#EBF5EC',
+        primaryTextColor: '#1F2320',
+        primaryBorderColor: '#A5D6A7',
+        lineColor: '#2E7D32',
+        secondaryColor: '#F0F7F1',
+        tertiaryColor: '#FFFFFF',
+        background: '#FFFFFF',
+        mainBkg: '#EBF5EC',
+        secondBkg: '#F0F7F1',
+        fontFamily: '"Pretendard Variable", Pretendard, -apple-system, sans-serif',
+        fontSize: '13px',
+        edgeLabelBackground: '#FFFFFF',
+        attributeBackgroundColorEven: '#F0F7F1',
+        attributeBackgroundColorOdd: '#FFFFFF',
+      },
+      flowchart: { curve: 'basis', padding: 12, useMaxWidth: true },
+      er: { useMaxWidth: true },
+    });
+    document.querySelectorAll('.mermaid').forEach((el) => {
+      const observer = new MutationObserver(() => {
+        if (el.querySelector('svg')) {
+          el.setAttribute('data-processed', 'true');
+          observer.disconnect();
+        }
+      });
+      observer.observe(el, { childList: true, subtree: true });
+    });
+  };
+  document.head.appendChild(script);
+}
+</script>
+</body>
+</html>

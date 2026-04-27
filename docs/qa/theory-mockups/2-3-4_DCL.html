@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DCL — SQLD양파 이론</title>
+<link rel="stylesheet" href="./common.css">
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="topnav-inner">
+    <div class="topnav-brand">SQLD양파</div>
+    <div class="topnav-links">
+      <a href="#">홈</a>
+      <a href="#" class="active">이론</a>
+      <a href="#">기출 CBT</a>
+      <a href="#">모의고사</a>
+      <a href="#">Pro</a>
+    </div>
+  </div>
+</nav>
+
+<main class="page-shell">
+  <div class="breadcrumb">
+    <a href="#">이론</a>
+    <span class="sep">›</span>
+    <a href="#">2과목 SQL 기본 및 활용</a>
+    <span class="sep">›</span>
+    <a href="#">2-3. 관리 구문</a>
+  </div>
+
+  <header class="page-title-block">
+    <h1>DCL (Data Control Language)</h1>
+    <p class="subtitle">권한 통제. <code>GRANT</code> · <code>REVOKE</code> · 시스템/객체 권한 · ROLE · WITH GRANT OPTION</p>
+  </header>
+
+  <article class="theory-md">
+
+  <!-- 핵심 요약 -->
+  <h2 class="section-label sec-summary reveal">
+    <span class="label-tag">핵심 요약</span>
+    <span class="label-rest">정의</span>
+  </h2>
+  <blockquote class="reveal">
+    DCL은 <strong>사용자에게 권한을 주거나 회수하는 명령어</strong>들이다 (<code>GRANT</code>, <code>REVOKE</code>).
+  </blockquote>
+  <div class="ex-box reveal">
+    사무실 출입카드처럼 <strong>신입에게 발급(GRANT)</strong>·<strong>퇴사자 회수(REVOKE)</strong>·<strong>부서별 묶음(ROLE)</strong>으로 누가 어떤 테이블을 SELECT/INSERT/UPDATE 할 수 있는지를 통제한다.
+  </div>
+
+  <!-- 개념 도식화 — GRANT vs REVOKE -->
+  <h2 class="section-label sec-diagram reveal">
+    <span class="label-tag">개념 도식화</span>
+    <span class="label-rest">DCL 명령 2종</span>
+  </h2>
+  <div class="cls-row cols-2 reveal">
+    <div class="cls-card">
+      <span class="badge">GRANT</span>
+      <div class="name">권한 부여</div>
+      <div class="ex"><code>GRANT 권한 ON 객체 TO 사용자</code> · ROLE 부여도 GRANT 로 함</div>
+    </div>
+    <div class="cls-card">
+      <span class="badge b-event">REVOKE</span>
+      <div class="name">권한 회수</div>
+      <div class="ex"><code>REVOKE 권한 ON 객체 FROM 사용자</code> · WITH GRANT OPTION 시 연쇄 회수</div>
+    </div>
+  </div>
+
+  <h3 class="reveal">DCL 흐름</h3>
+  <div class="step-flow cols-4 reveal">
+    <div class="step-card">
+      <div class="step">STEP 1</div>
+      <div class="name">관리자 (DBA)</div>
+      <div class="ex">권한 보유자</div>
+      <span class="arrow-next">›</span>
+    </div>
+    <div class="step-card">
+      <div class="step">STEP 2</div>
+      <div class="name">GRANT / REVOKE</div>
+      <div class="ex">사용자에게 직접 부여 / 회수</div>
+      <span class="arrow-next">›</span>
+    </div>
+    <div class="step-card">
+      <div class="step">STEP 3</div>
+      <div class="name">ROLE 생성·부여</div>
+      <div class="ex">권한 묶음을 한 번에 관리</div>
+      <span class="arrow-next">›</span>
+    </div>
+    <div class="step-card">
+      <div class="step">STEP 4</div>
+      <div class="name">일반 사용자</div>
+      <div class="ex">SELECT/INSERT/UPDATE 등 수행</div>
+    </div>
+  </div>
+
+  <!-- 권한의 종류 — layer-stack 인포그래픽 -->
+  <h2 class="reveal">권한의 종류</h2>
+  <div class="layer-stack reveal">
+    <div class="layer-stack-track">
+      <div class="layer-row">
+        <div class="icon">SYS</div>
+        <div class="body">
+          <div class="name">시스템 권한 <small>System Privilege</small></div>
+          <div class="desc">DB 자체에 대한 권한 — 접속, 객체 생성, 사용자 생성 등. 부여 시 옵션은 <strong>WITH ADMIN OPTION</strong></div>
+        </div>
+        <div class="arrow">↓</div>
+      </div>
+      <div class="layer-row">
+        <div class="icon">OBJ</div>
+        <div class="body">
+          <div class="name">객체 권한 <small>Object Privilege</small></div>
+          <div class="desc">특정 객체(테이블/뷰 등)에 대한 권한 — SELECT/INSERT/UPDATE/DELETE/ALTER/EXECUTE/REFERENCES. 부여 시 옵션은 <strong>WITH GRANT OPTION</strong></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h3 class="reveal">시스템 권한 (System Privilege)</h3>
+  <table class="reveal">
+    <thead>
+      <tr><th>권한</th><th>의미</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>CREATE SESSION</td><td>접속 권한</td></tr>
+      <tr><td>CREATE TABLE</td><td>테이블 생성 권한</td></tr>
+      <tr><td>CREATE VIEW</td><td>뷰 생성 권한</td></tr>
+      <tr><td>CREATE USER</td><td>사용자 생성 권한</td></tr>
+      <tr><td>DROP ANY TABLE</td><td>모든 테이블 삭제 권한</td></tr>
+    </tbody>
+  </table>
+
+  <h3 class="reveal">객체 권한 (Object Privilege)</h3>
+  <table class="reveal">
+    <thead>
+      <tr><th>권한</th><th>의미</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>SELECT</td><td>조회</td></tr>
+      <tr><td>INSERT</td><td>입력</td></tr>
+      <tr><td>UPDATE</td><td>수정</td></tr>
+      <tr><td>DELETE</td><td>삭제</td></tr>
+      <tr><td>ALTER</td><td>변경</td></tr>
+      <tr><td>EXECUTE</td><td>프로시저/함수 실행</td></tr>
+      <tr><td>REFERENCES</td><td>FK로 참조</td></tr>
+    </tbody>
+  </table>
+
+  <!-- GRANT -->
+  <h2 class="section-label sec-sql reveal">
+    <span class="label-tag">SQL 실전</span>
+    <span class="label-rest">GRANT / REVOKE / ROLE</span>
+  </h2>
+
+  <h3 class="reveal">GRANT — 권한 부여</h3>
+  <p class="reveal" style="font-size: 13px; color: var(--fg-3); margin: 8px 0 4px;">예시 데이터 — USER1 권한 표 (변경 전, 권한 없음)</p>
+  <div class="ba-side before reveal" style="max-width: 460px;">
+    <span class="ba-tag">PRIVS</span>
+    <h4 class="ba-h">USER1 권한 (변경 전)</h4>
+    <div class="mini-table cols-2">
+      <div class="h">권한</div><div class="h">상태</div>
+      <div class="c">CREATE SESSION</div><div class="c" style="color: var(--wrong-fg);">없음</div>
+      <div class="c">CREATE TABLE</div><div class="c" style="color: var(--wrong-fg);">없음</div>
+      <div class="c">SELECT ON EMP</div><div class="c" style="color: var(--wrong-fg);">없음</div>
+    </div>
+  </div>
+  <pre class="reveal"><button class="copy-btn">복사</button><code><span class="sql-cm">-- 시스템 권한</span>
+<span class="sql-kw">GRANT CREATE SESSION</span> <span class="sql-kw">TO</span> <span class="sql-name">USER1</span>;
+<span class="sql-kw">GRANT CREATE TABLE</span>   <span class="sql-kw">TO</span> <span class="sql-name">USER1</span>;
+
+<span class="sql-cm">-- 객체 권한</span>
+<span class="sql-kw">GRANT SELECT</span> <span class="sql-kw">ON</span> <span class="sql-name">EMP</span> <span class="sql-kw">TO</span> <span class="sql-name">USER1</span>;
+<span class="sql-kw">GRANT SELECT</span>, <span class="sql-kw">INSERT</span>, <span class="sql-kw">UPDATE</span> <span class="sql-kw">ON</span> <span class="sql-name">EMP</span> <span class="sql-kw">TO</span> <span class="sql-name">USER1</span>;
+
+<span class="sql-cm">-- 모든 사용자에게</span>
+<span class="sql-kw">GRANT SELECT</span> <span class="sql-kw">ON</span> <span class="sql-name">EMP</span> <span class="sql-kw">TO</span> <span class="sql-kw">PUBLIC</span>;
+
+<span class="sql-cm">-- 권한 부여 가능 권한도 함께(재부여 가능)</span>
+<span class="sql-kw">GRANT SELECT</span> <span class="sql-kw">ON</span> <span class="sql-name">EMP</span> <span class="sql-kw">TO</span> <span class="sql-name">USER1</span> <span class="sql-kw">WITH GRANT OPTION</span>;</code></pre>
+  <p class="reveal" style="font-size: 13px; color: var(--fg-3); margin: 8px 0 4px;">↓ 실행 후 (USER1 권한 변화)</p>
+  <table class="reveal">
+    <thead><tr><th>권한</th><th>유형</th><th>USER1 상태</th></tr></thead>
+    <tbody>
+      <tr><td>CREATE SESSION</td><td>시스템</td><td style="color: var(--correct-fg); font-weight: 700;">부여됨</td></tr>
+      <tr><td>CREATE TABLE</td><td>시스템</td><td style="color: var(--correct-fg); font-weight: 700;">부여됨</td></tr>
+      <tr><td>SELECT, INSERT, UPDATE ON EMP</td><td>객체</td><td style="color: var(--correct-fg); font-weight: 700;">부여됨</td></tr>
+      <tr><td>SELECT ON EMP (WITH GRANT OPTION)</td><td>객체</td><td style="color: var(--correct-fg); font-weight: 700;">부여 + 재부여 가능</td></tr>
+    </tbody>
+  </table>
+  <p class="reveal" style="font-size: 12.5px; color: var(--fg-3); margin: 0 0 12px;">→ 시스템 권한이 먼저 있어야 접속이 되고, 객체 권한으로 개별 테이블 작업 권한이 쌓인다.</p>
+
+  <!-- 옵션 — fn-grid -->
+  <div class="fn-grid reveal">
+    <div class="fn-card">
+      <div class="name">WITH GRANT OPTION</div>
+      <div class="desc"><strong>객체 권한</strong> 부여 옵션. 받은 사람이 다른 사람에게 다시 줄 수 있음</div>
+      <div class="ex">GRANT SELECT ON EMP TO USER1 WITH GRANT OPTION</div>
+    </div>
+    <div class="fn-card">
+      <div class="name">WITH ADMIN OPTION</div>
+      <div class="desc"><strong>시스템 권한</strong> 부여 옵션. 관리자처럼 다시 부여 가능</div>
+      <div class="ex">GRANT CREATE TABLE TO USER1 WITH ADMIN OPTION</div>
+    </div>
+  </div>
+
+  <!-- REVOKE -->
+  <h3 class="reveal">REVOKE — 권한 회수</h3>
+  <p class="reveal" style="font-size: 13px; color: var(--fg-3); margin: 8px 0 4px;">예시 데이터 — USER1 권한 표 (변경 전 · 권한 보유 상태)</p>
+  <div class="ba-side before reveal" style="max-width: 460px;">
+    <span class="ba-tag">PRIVS</span>
+    <h4 class="ba-h">USER1 권한 (변경 전)</h4>
+    <div class="mini-table cols-2">
+      <div class="h">권한</div><div class="h">상태</div>
+      <div class="c">CREATE TABLE</div><div class="c" style="color: var(--correct-fg);">부여됨</div>
+      <div class="c">SELECT ON EMP</div><div class="c" style="color: var(--correct-fg);">부여됨</div>
+    </div>
+  </div>
+  <pre class="reveal"><button class="copy-btn">복사</button><code><span class="sql-kw">REVOKE SELECT</span> <span class="sql-kw">ON</span> <span class="sql-name">EMP</span> <span class="sql-kw">FROM</span> <span class="sql-name">USER1</span>;
+<span class="sql-kw">REVOKE CREATE TABLE</span> <span class="sql-kw">FROM</span> <span class="sql-name">USER1</span>;</code></pre>
+  <p class="reveal" style="font-size: 12.5px; color: var(--fg-3); margin: 0 0 12px;">→ 두 권한 모두 회수. 다른 권한은 영향 없으며, 회수된 권한으로는 더 이상 해당 작업을 수행할 수 없다.</p>
+
+  <h4 class="reveal">연쇄 회수</h4>
+  <p class="reveal"><code>WITH GRANT OPTION</code>으로 다른 사람에게 부여된 권한도 함께 회수된다.</p>
+  <pre class="reveal"><code>관리자 → USER1 (WITH GRANT OPTION) → USER2
+        REVOKE 시 USER2 권한도 함께 사라짐</code></pre>
+
+  <h4 class="reveal">GRANT 위임 시퀀스</h4>
+  <div class="mermaid reveal">
+sequenceDiagram
+    participant DBA
+    participant U1 as USER1
+    participant U2 as USER2
+    DBA->>U1: GRANT SELECT ON EMP<br/>WITH GRANT OPTION
+    Note over U1: USER1 = SELECT 가능<br/>+ 재부여 권한 보유
+    U1->>U2: GRANT SELECT ON EMP TO USER2
+    Note over U2: USER2 = SELECT 가능<br/>(USER1 통해 받음)
+    DBA->>U1: REVOKE SELECT ON EMP FROM USER1
+    Note over U1: USER1 권한 회수
+    Note over U2: USER2도 연쇄 회수<br/>(WITH GRANT OPTION)
+  </div>
+  <p class="reveal" style="font-size: 13px; color: var(--fg-3); margin: 8px 0 4px;">↓ 결과 (시점별 권한 상태)</p>
+  <table class="reveal">
+    <thead><tr><th>시점</th><th>USER1</th><th>USER2</th></tr></thead>
+    <tbody>
+      <tr><td>초기</td><td>없음</td><td>없음</td></tr>
+      <tr><td>DBA → USER1 (WITH GRANT OPTION)</td><td>SELECT O · 재부여 가능</td><td>없음</td></tr>
+      <tr><td>USER1 → USER2</td><td>SELECT O</td><td>SELECT O</td></tr>
+      <tr><td>DBA REVOKE FROM USER1</td><td style="color: var(--wrong-fg); font-weight: 700;">없음</td><td style="color: var(--wrong-fg); font-weight: 700;">없음 (연쇄)</td></tr>
+    </tbody>
+  </table>
+
+  <!-- ROLE -->
+  <h2 class="reveal">ROLE — 권한 묶음</h2>
+  <p class="reveal" style="font-size: 13px; color: var(--fg-3); margin: 8px 0 4px;">예시 데이터 — 권한 표 (변경 전 · ROLE 미생성)</p>
+  <div class="ba-side before reveal" style="max-width: 460px;">
+    <span class="ba-tag">ROLES</span>
+    <h4 class="ba-h">ROLE 목록 (변경 전)</h4>
+    <div class="mini-table cols-2">
+      <div class="h">ROLE</div><div class="h">상태</div>
+      <div class="c">DEV_ROLE</div><div class="c" style="color: var(--fg-4);">(없음)</div>
+    </div>
+  </div>
+  <pre class="reveal"><button class="copy-btn">복사</button><code><span class="sql-cm">-- 1. 역할 만들기</span>
+<span class="sql-kw">CREATE ROLE</span> <span class="sql-name">DEV_ROLE</span>;
+
+<span class="sql-cm">-- 2. 역할에 권한 부여</span>
+<span class="sql-kw">GRANT SELECT</span>, <span class="sql-kw">INSERT</span>, <span class="sql-kw">UPDATE</span> <span class="sql-kw">ON</span> <span class="sql-name">EMP</span> <span class="sql-kw">TO</span> <span class="sql-name">DEV_ROLE</span>;
+<span class="sql-kw">GRANT SELECT</span> <span class="sql-kw">ON</span> <span class="sql-name">DEPT</span>                <span class="sql-kw">TO</span> <span class="sql-name">DEV_ROLE</span>;
+
+<span class="sql-cm">-- 3. 사용자에게 역할 부여</span>
+<span class="sql-kw">GRANT</span> <span class="sql-name">DEV_ROLE</span> <span class="sql-kw">TO</span> <span class="sql-name">USER1</span>;
+<span class="sql-kw">GRANT</span> <span class="sql-name">DEV_ROLE</span> <span class="sql-kw">TO</span> <span class="sql-name">USER2</span>;
+
+<span class="sql-cm">-- 회수</span>
+<span class="sql-kw">REVOKE</span> <span class="sql-name">DEV_ROLE</span> <span class="sql-kw">FROM</span> <span class="sql-name">USER1</span>;</code></pre>
+  <p class="reveal" style="font-size: 13px; color: var(--fg-3); margin: 8px 0 4px;">↓ 실행 후 (사용자별 권한 상태)</p>
+  <table class="reveal">
+    <thead><tr><th>사용자</th><th>DEV_ROLE</th><th>실제 보유 권한</th></tr></thead>
+    <tbody>
+      <tr><td>USER1</td><td style="color: var(--wrong-fg); font-weight: 700;">회수됨</td><td>없음</td></tr>
+      <tr><td>USER2</td><td style="color: var(--correct-fg); font-weight: 700;">유지</td><td>SELECT/INSERT/UPDATE ON EMP, SELECT ON DEPT</td></tr>
+    </tbody>
+  </table>
+  <p class="reveal" style="font-size: 12.5px; color: var(--fg-3); margin: 0 0 12px;">→ ROLE에 권한을 묶어 두면 한 번의 GRANT로 여러 사용자에게 일괄 부여하고, 한 번의 REVOKE로 떼어낼 수 있다.</p>
+
+  <div class="step-flow cols-3 reveal">
+    <div class="step-card">
+      <div class="step">권한 1</div>
+      <div class="name">SELECT ON EMP</div>
+      <div class="ex">묶음에 포함</div>
+      <span class="arrow-next">›</span>
+    </div>
+    <div class="step-card">
+      <div class="step">ROLE</div>
+      <div class="name">DEV_ROLE</div>
+      <div class="ex">권한 묶음 (단일 객체로 관리)</div>
+      <span class="arrow-next">›</span>
+    </div>
+    <div class="step-card">
+      <div class="step">사용자</div>
+      <div class="name">USER1, USER2 …</div>
+      <div class="ex">한 번의 GRANT로 일괄 부여</div>
+    </div>
+  </div>
+
+  <!-- 사용자 관리 -->
+  <h2 class="reveal">사용자 관리 (참고)</h2>
+  <p class="reveal">CREATE USER, ALTER USER, DROP USER 자체는 <a href="./2-3-3_DDL.html">DDL</a>이지만 권한 관리와 짝을 이룬다.</p>
+  <pre class="reveal"><button class="copy-btn">복사</button><code><span class="sql-cm">-- 사용자 생성</span>
+<span class="sql-kw">CREATE USER</span> <span class="sql-name">USER1</span> <span class="sql-kw">IDENTIFIED BY</span> <span class="sql-str">password123</span>;
+
+<span class="sql-cm">-- 비밀번호 변경</span>
+<span class="sql-kw">ALTER USER</span> <span class="sql-name">USER1</span> <span class="sql-kw">IDENTIFIED BY</span> <span class="sql-str">newpass</span>;
+
+<span class="sql-cm">-- 사용자 삭제</span>
+<span class="sql-kw">DROP USER</span> <span class="sql-name">USER1</span>;
+<span class="sql-kw">DROP USER</span> <span class="sql-name">USER1</span> <span class="sql-kw">CASCADE</span>;     <span class="sql-cm">-- 소유 객체까지 모두 삭제</span></code></pre>
+  <p class="reveal">Oracle에서 사용자 = 스키마(객체 모음). 사용자 생성 권한은 DBA가 가진다.</p>
+
+  <!-- SQL 실전 — 권한 흐름 -->
+  <h3 class="reveal">권한 흐름 예시</h3>
+  <pre class="reveal"><button class="copy-btn">복사</button><code><span class="sql-cm">-- 관리자(DBA)로 접속</span>
+<span class="sql-kw">CREATE USER</span> <span class="sql-name">STAFF</span> <span class="sql-kw">IDENTIFIED BY</span> <span class="sql-str">pw1234</span>;
+
+<span class="sql-kw">GRANT CREATE SESSION</span> <span class="sql-kw">TO</span> <span class="sql-name">STAFF</span>;       <span class="sql-cm">-- 접속 권한</span>
+<span class="sql-kw">GRANT SELECT</span> <span class="sql-kw">ON</span> <span class="sql-name">HR.EMP</span> <span class="sql-kw">TO</span> <span class="sql-name">STAFF</span>;     <span class="sql-cm">-- HR 스키마 EMP 조회 권한</span>
+
+<span class="sql-cm">-- STAFF로 접속</span>
+<span class="sql-kw">SELECT</span> * <span class="sql-kw">FROM</span> <span class="sql-name">HR.EMP</span>;     <span class="sql-cm">-- 가능</span>
+
+<span class="sql-cm">-- 권한 회수</span>
+<span class="sql-kw">REVOKE SELECT</span> <span class="sql-kw">ON</span> <span class="sql-name">HR.EMP</span> <span class="sql-kw">FROM</span> <span class="sql-name">STAFF</span>;
+
+<span class="sql-kw">SELECT</span> * <span class="sql-kw">FROM</span> <span class="sql-name">HR.EMP</span>;     <span class="sql-cm">-- 권한 부족 에러</span></code></pre>
+  <p class="reveal" style="font-size: 13px; color: var(--fg-3); margin: 8px 0 4px;">↓ 결과 (STAFF의 작업 가능 여부)</p>
+  <table class="reveal">
+    <thead><tr><th>시점</th><th>접속</th><th>SELECT * FROM HR.EMP</th></tr></thead>
+    <tbody>
+      <tr><td>CREATE USER 직후</td><td style="color: var(--wrong-fg);">불가 (CREATE SESSION 없음)</td><td style="color: var(--wrong-fg);">불가</td></tr>
+      <tr><td>GRANT CREATE SESSION</td><td>가능</td><td style="color: var(--wrong-fg);">불가 (객체 권한 없음)</td></tr>
+      <tr><td>GRANT SELECT ON HR.EMP</td><td>가능</td><td style="color: var(--correct-fg); font-weight: 700;">가능</td></tr>
+      <tr><td>REVOKE SELECT</td><td>가능</td><td style="color: var(--wrong-fg); font-weight: 700;">ORA-00942: 권한 부족</td></tr>
+    </tbody>
+  </table>
+
+  <!-- Before & After -->
+  <h2 class="section-label sec-compare reveal">
+    <span class="label-tag">Before &amp; After</span>
+    <span class="label-rest">USER1 권한 변화 추적</span>
+  </h2>
+  <p class="reveal">방금 만들어진 USER1 계정에 권한을 한 단계씩 부여하다가 마지막에 SELECT 한 가지만 회수해 본다. <strong>시스템 권한(CREATE SESSION)이 먼저 있어야 접속 자체가 되고</strong>, 그 위에 객체 권한(SELECT/INSERT)이 올라가는 순서를 따라간다.</p>
+
+  <div class="ba-flow large-after reveal">
+    <div class="ba-side before">
+      <span class="ba-tag">BEFORE</span>
+      <h4 class="ba-h">초기 — 권한 없음</h4>
+      <div class="sql">USER1 계정 생성 직후</div>
+      <div class="ba-row">접속 자체 불가</div>
+      <div class="ba-row">EMP 조회 불가</div>
+      <div class="ba-row">EMP 입력 불가</div>
+    </div>
+    <div class="ba-arrow">→</div>
+    <div class="ba-side after">
+      <span class="ba-tag">AFTER</span>
+      <h4 class="ba-h">GRANT 누적 → 마지막에 SELECT만 REVOKE</h4>
+      <div class="sql">CREATE SESSION + SELECT + INSERT → REVOKE SELECT</div>
+      <div class="ba-row">접속 가능 (CREATE SESSION 유지)</div>
+      <div class="ba-row">EMP 조회 <strong>불가</strong> (SELECT 회수됨)</div>
+      <div class="ba-row">EMP 입력 가능 (INSERT 유지)</div>
+    </div>
+  </div>
+
+  <p class="reveal" style="font-size: 13.5px; color: var(--fg-3);">시점별 권한 표</p>
+  <table class="reveal">
+    <thead>
+      <tr><th>시점</th><th>가능한 작업</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>초기</td><td>접속도 불가</td></tr>
+      <tr><td>GRANT CREATE SESSION 후</td><td>접속 가능</td></tr>
+      <tr><td>GRANT SELECT ON EMP 후</td><td>EMP 조회 가능</td></tr>
+      <tr><td>GRANT INSERT ON EMP 후</td><td>EMP 입력 가능</td></tr>
+      <tr><td>REVOKE SELECT ON EMP 후</td><td>EMP 조회 불가 (INSERT는 유지)</td></tr>
+    </tbody>
+  </table>
+
+  <p class="reveal">권한은 <strong>"접속(시스템 권한) → 개별 객체 작업(객체 권한)"</strong> 순으로 쌓인다. CREATE SESSION이 없으면 SELECT 권한이 있어도 접속 자체가 안 되고, REVOKE는 해당 권한만 정확히 떼어내므로 INSERT 권한은 그대로 남는다는 점에 주의한다. WITH GRANT OPTION으로 재부여된 권한이라면 REVOKE 한 번에 <strong>연쇄적으로 회수</strong>된다는 점까지 함께 기억하면 된다.</p>
+
+  <!-- DBA의 대표 ROLE -->
+  <h2 class="reveal">DBA의 대표 ROLE</h2>
+  <table class="reveal">
+    <thead>
+      <tr><th>ROLE</th><th>설명</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>CONNECT</td><td>접속 권한(CREATE SESSION 포함)</td></tr>
+      <tr><td>RESOURCE</td><td>객체 생성 권한(테이블, 시퀀스 등)</td></tr>
+      <tr><td>DBA</td><td>모든 권한</td></tr>
+    </tbody>
+  </table>
+  <pre class="reveal"><button class="copy-btn">복사</button><code><span class="sql-kw">GRANT CONNECT</span>, <span class="sql-kw">RESOURCE</span> <span class="sql-kw">TO</span> <span class="sql-name">USER1</span>;</code></pre>
+
+  <!-- DCL vs 다른 명령어 분류 -->
+  <h2 class="reveal">DCL vs 다른 명령어 분류</h2>
+  <div class="cls-row cols-4 reveal">
+    <div class="cls-card">
+      <span class="badge b-info">DDL</span>
+      <div class="name">객체</div>
+      <div class="ex">CREATE · ALTER · DROP · TRUNCATE · RENAME</div>
+    </div>
+    <div class="cls-card">
+      <span class="badge">DML</span>
+      <div class="name">데이터</div>
+      <div class="ex">INSERT · UPDATE · DELETE · MERGE · SELECT</div>
+    </div>
+    <div class="cls-card">
+      <span class="badge b-warn">TCL</span>
+      <div class="name">트랜잭션</div>
+      <div class="ex">COMMIT · ROLLBACK · SAVEPOINT</div>
+    </div>
+    <div class="cls-card">
+      <span class="badge b-event">DCL</span>
+      <div class="name">권한</div>
+      <div class="ex">GRANT · REVOKE</div>
+    </div>
+  </div>
+
+  <div class="reveal" style="margin: 40px 0 0; padding: 22px 24px; background: linear-gradient(135deg, var(--point-050), var(--bg-card)); border: 1px solid var(--point-100); border-radius: 12px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;">
+    <div>
+      <div style="font-size: 12px; font-weight: 800; color: var(--point-600); letter-spacing: 0.04em; margin-bottom: 4px;">시험 대비</div>
+      <div style="font-size: 14px; color: var(--fg-2);">이 챕터의 함정·정답과 30초 정리는 통합 시험 대비 페이지에서 볼 수 있습니다.</div>
+    </div>
+    <a href="./exam-review.html#ch-2-3-4" style="font-size: 14px; font-weight: 700; color: var(--point-600); text-decoration: none; padding: 8px 14px; border: 1px solid var(--point-300); border-radius: 8px; background: var(--bg-card); white-space: nowrap;">시험 대비 보기 →</a>
+  </div>
+
+  </article>
+</main>
+
+<script src="./common.js"></script>
+</body>
+</html>

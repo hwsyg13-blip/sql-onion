@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="light">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DML — SQLD양파 이론</title>
+<link rel="stylesheet" href="./common.css">
+</head>
+<body>
+<nav class="topnav">
+  <div class="topnav-inner">
+    <div class="topnav-brand">SQLD양파</div>
+    <div class="topnav-links"><a href="#">홈</a><a href="#" class="active">이론</a><a href="#">기출 CBT</a><a href="#">모의고사</a><a href="#">Pro</a></div>
+  </div>
+</nav>
+<main class="page-shell">
+  <div class="breadcrumb"><a href="#">이론</a><span class="sep">›</span><a href="#">2과목 SQL 기본 및 활용</a><span class="sep">›</span><a href="#">2-3 관리 구문</a></div>
+  <header class="page-title-block">
+    <h1>DML (Data Manipulation Language)</h1>
+    <p class="subtitle">데이터 입력·수정·삭제·조회 · INSERT · UPDATE · DELETE · MERGE · SELECT</p>
+  </header>
+  <article class="theory-md">
+
+  <!-- 핵심 요약 -->
+  <h2 class="section-label sec-summary reveal">
+    <span class="label-tag">핵심 요약</span>
+    <span class="label-rest">정의</span>
+  </h2>
+  <blockquote class="reveal">
+    DML은 <strong>테이블 안의 데이터를 입력·수정·삭제·조회</strong>하는 명령어들이다(INSERT, UPDATE, DELETE, MERGE, SELECT).
+  </blockquote>
+  <div class="ex-box reveal">
+    테이블을 노트에 비유하면 INSERT는 새 줄 적기, UPDATE는 줄 고치기, DELETE는 줄 지우기, MERGE는 있으면 고치고 없으면 적기, SELECT는 읽기다.
+  </div>
+
+  <!-- 개념 도식화 -->
+  <h2 class="section-label sec-diagram reveal">
+    <span class="label-tag">개념 도식화</span>
+    <span class="label-rest">DML의 분류</span>
+  </h2>
+  <div class="cls-row cols-4 reveal">
+    <div class="cls-card">
+      <span class="badge">INSERT</span>
+      <div class="name">새 행 입력</div>
+      <div class="ex">노트에 새 줄 적기 — <code>VALUES</code> · <code>SELECT</code> · <code>INSERT ALL</code></div>
+    </div>
+    <div class="cls-card">
+      <span class="badge b-info">UPDATE</span>
+      <div class="name">기존 행 수정</div>
+      <div class="ex">줄 고치기 — <code>SET</code> · <code>WHERE</code> 누락 시 전 행 수정</div>
+    </div>
+    <div class="cls-card">
+      <span class="badge b-warn">DELETE</span>
+      <div class="name">행 삭제 (롤백 가능)</div>
+      <div class="ex">줄 지우기 — DML이라 <code>ROLLBACK</code> 가능</div>
+    </div>
+    <div class="cls-card">
+      <span class="badge b-event">MERGE</span>
+      <div class="name">UPSERT</div>
+      <div class="ex">있으면 UPDATE / 없으면 INSERT</div>
+    </div>
+  </div>
+  <table class="reveal">
+    <thead><tr><th>명령</th><th>용도</th></tr></thead>
+    <tbody>
+      <tr><td>INSERT</td><td>새 행 입력</td></tr>
+      <tr><td>UPDATE</td><td>기존 행 수정</td></tr>
+      <tr><td>DELETE</td><td>행 삭제</td></tr>
+      <tr><td>MERGE</td><td>UPSERT(있으면 UPDATE, 없으면 INSERT)</td></tr>
+      <tr><td>SELECT</td><td>조회</td></tr>
+    </tbody>
+  </table>
+
+  <h3 class="reveal">DML → 트랜잭션 시퀀스</h3>
+  <div class="mermaid reveal">
+sequenceDiagram
+    participant U as User
+    participant DB as DB (메모리)
+    participant Disk as 디스크
+    U->>DB: INSERT INTO EMP ...
+    Note over DB: 행 추가 (메모리)
+    U->>DB: UPDATE EMP SET SAL = ...
+    Note over DB: 행 수정 (메모리)
+    U->>DB: DELETE FROM EMP WHERE ...
+    Note over DB: 행 삭제 (메모리)
+    alt 정상
+        U->>DB: COMMIT
+        DB->>Disk: 변경분 영구 반영
+        Note over Disk: 다른 사용자도 조회 가능
+    else 오류
+        U->>DB: ROLLBACK
+        Note over DB: 모든 DML 취소
+    end
+  </div>
+
+  <!-- SQL 실전 -->
+  <h2 class="section-label sec-sql reveal">
+    <span class="label-tag">SQL 실전</span>
+    <span class="label-rest">DML 5종</span>
+  </h2>
+
+  <h2 class="reveal">INSERT — 데이터 입력</h2>
+  <h3 class="reveal">기본 문법</h3>
+  <p class="reveal" style="font-size: 13px; color: var(--fg-3); margin: 8px 0 4px;">예시 데이터 — EMP 테이블 (변경 전, 비어있음)</p>
+  <div class="ba-side before reveal" style="max-width: 460px;">
+    <span class="ba-tag">EMP</span>
+    <h4 class="ba-h">사원 테이블 (변경 전)</h4>
+    <div class="mini-table cols-4">
+      <div class="h">EMP_ID</div><div class="h">NAME</div><div class="h">DEPT_ID</div><div class="h">SAL</div>
+      <div class="c" style="grid-column: 1 / -1; color: var(--fg-4);">(0행)</div>
+    </div>
+  </div>
+  <pre class="reveal"><button class="copy-btn">복사</button><code><span class="sql-cm">-- 모든 컬럼에 입력</span>
+<span class="sql-kw">INSERT INTO</span> <span class="sql-name">EMP</span> <span class="sql-kw">VALUES</span> (<span class="sql-num">1</span>, <span class="sql-str">'김철수'</span>, <span class="sql-str">'D1'</span>, <span class="sql-num">3000</span>);
+<span class="sql-cm">-- 1 row inserted.</span>
+
+<span class="sql-cm">-- 특정 컬럼만</span>
+<span class="sql-kw">INSERT INTO</span> <span class="sql-name">EMP</span> (<span class="sql-type">EMP_ID</span>, <span class="sql-type">NAME</span>) <span class="sql-kw">VALUES</span> (<span class="sql-num">2</span>, <span class="sql-str">'이영희'</span>);
+<span class="sql-cm">-- 1 row inserted. (DEPT_ID, SAL은 NULL 또는 DEFAULT)</span></code></pre>
+  <p class="reveal" style="font-size: 13px; color: var(--fg-3); margin: 8px 0 4px;">↓ 실행 후</p>
+  <table class="reveal">
+    <thead><tr><th>EMP_ID</th><th>NAME</th><th>DEPT_ID</th><th>SAL</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>김철수</td><td>D1</td><td>3000</td></tr>
+      <tr><td>2</td><td>이영희</td><td style="color: var(--wrong-fg);">NULL</td><td style="color: var(--wrong-fg);">NULL</td></tr>
+    </tbody>
+  </table>
+  <p class="reveal" style="font-size: 12.5px; color: var(--fg-3); margin: 0 0 12px;">→ 행 2개 추가. 컬럼을 명시하지 않으면 누락된 컬럼은 NULL/DEFAULT로 채워진다.</p>
+
+  <h3 class="reveal">다른 테이블에서 가져오기</h3>
+  <pre class="reveal"><button class="copy-btn">복사</button><code><span class="sql-kw">INSERT INTO</span> <span class="sql-name">EMP_BACKUP</span>
+<span class="sql-kw">SELECT</span> * <span class="sql-kw">FROM</span> <span class="sql-name">EMP</span> <span class="sql-kw">WHERE</span> <span class="sql-type">DEPT_ID</span> = <span class="sql-str">'D1'</span>;</code></pre>
+
+  <h3 class="reveal">Multi-Insert (Oracle)</h3>
+  <pre class="reveal"><button class="copy-btn">복사</button><code><span class="sql-kw">INSERT ALL</span>
+    <span class="sql-kw">INTO</span> <span class="sql-name">TBL_A</span> <span class="sql-kw">VALUES</span> (<span class="sql-num">1</span>, <span class="sql-str">'A'</span>)
+    <span class="sql-kw">INTO</span> <span class="sql-name">TBL_B</span> <span class="sql-kw">VALUES</span> (<span class="sql-num">2</span>, <span class="sql-str">'B'</span>)
+<span class="sql-kw">SELECT</span> * <span class="sql-kw">FROM</span> <span class="sql-name">DUAL</span>;</code></pre>
+
+  <h2 class="reveal">UPDATE — 데이터 수정</h2>
+  <p class="reveal" style="font-size: 13px; color: var(--fg-3); margin: 8px 0 4px;">예시 데이터 — EMP 테이블 (변경 전)</p>
+  <div class="ba-side before reveal" style="max-width: 460px;">
+    <span class="ba-tag">EMP</span>
+    <h4 class="ba-h">사원 테이블 (변경 전)</h4>
+    <div class="mini-table cols-4">
+      <div class="h">EMP_ID</div><div class="h">NAME</div><div class="h">DEPT_ID</div><div class="h">SAL</div>
+      <div class="c">1</div><div class="c">김</div><div class="c">D1</div><div class="c">3000</div>
+      <div class="c">2</div><div class="c">이</div><div class="c">D1</div><div class="c">4000</div>
+      <div class="c">3</div><div class="c">박</div><div class="c">D2</div><div class="c">3500</div>
+    </div>
+  </div>
+  <pre class="reveal"><button class="copy-btn">복사</button><code><span class="sql-cm">-- 모든 행 수정 (위험)</span>
+<span class="sql-kw">UPDATE</span> <span class="sql-name">EMP</span> <span class="sql-kw">SET</span> <span class="sql-type">SAL</span> = <span class="sql-type">SAL</span> * <span class="sql-num">1.1</span>;
+
+<span class="sql-cm">-- 조건부 수정</span>
+<span class="sql-kw">UPDATE</span> <span class="sql-name">EMP</span>
+<span class="sql-kw">SET</span>    <span class="sql-type">SAL</span> = <span class="sql-type">SAL</span> * <span class="sql-num">1.1</span>
+<span class="sql-kw">WHERE</span>  <span class="sql-type">DEPT_ID</span> = <span class="sql-str">'D1'</span>;
+
+<span class="sql-cm">-- 여러 컬럼 동시 수정</span>
+<span class="sql-kw">UPDATE</span> <span class="sql-name">EMP</span>
+<span class="sql-kw">SET</span>    <span class="sql-type">SAL</span> = <span class="sql-num">5000</span>, <span class="sql-type">DEPT_ID</span> = <span class="sql-str">'D2'</span>
+<span class="sql-kw">WHERE</span>  <span class="sql-type">EMP_ID</span> = <span class="sql-num">1</span>;
+
+<span class="sql-cm">-- 서브쿼리로 수정</span>
+<span class="sql-kw">UPDATE</span> <span class="sql-name">EMP</span>
+<span class="sql-kw">SET</span>    <span class="sql-type">SAL</span> = (<span class="sql-kw">SELECT</span> <span class="sql-kw">AVG</span>(<span class="sql-type">SAL</span>) <span class="sql-kw">FROM</span> <span class="sql-name">EMP</span>)
+<span class="sql-kw">WHERE</span>  <span class="sql-type">EMP_ID</span> = <span class="sql-num">1</span>;</code></pre>
+  <p class="reveal" style="font-size: 13px; color: var(--fg-3); margin: 8px 0 4px;">↓ 실행 후 (조건부 UPDATE — D1 부서만 SAL × 1.1)</p>
+  <table class="reveal">
+    <thead><tr><th>EMP_ID</th><th>DEPT_ID</th><th>SAL (변경 전)</th><th>SAL (변경 후)</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>D1</td><td>3000</td><td>3300</td></tr>
+      <tr><td>2</td><td>D1</td><td>4000</td><td>4400</td></tr>
+      <tr><td>3</td><td>D2</td><td>3500</td><td>3500 (변경 없음)</td></tr>
+    </tbody>
+  </table>
+  <p class="reveal" style="font-size: 12.5px; color: var(--fg-3); margin: 0 0 12px;">→ 행 2개 수정 (D1 두 명). <code>WHERE</code>를 빼먹으면 <strong>모든 행이 수정</strong>되므로 항상 WHERE를 확인한다.</p>
+
+  <h2 class="reveal">DELETE — 데이터 삭제</h2>
+  <p class="reveal" style="font-size: 13px; color: var(--fg-3); margin: 8px 0 4px;">예시 데이터 — EMP 테이블 (변경 전)</p>
+  <div class="ba-side before reveal" style="max-width: 460px;">
+    <span class="ba-tag">EMP</span>
+    <h4 class="ba-h">사원 테이블 (변경 전)</h4>
+    <div class="mini-table cols-3">
+      <div class="h">EMP_ID</div><div class="h">NAME</div><div class="h">DEPT_ID</div>
+      <div class="c">1</div><div class="c">김</div><div class="c">D1</div>
+      <div class="c">2</div><div class="c">이</div><div class="c">D1</div>
+      <div class="c">9</div><div class="c">최</div><div class="c">D9</div>
+    </div>
+  </div>
+  <pre class="reveal"><button class="copy-btn">복사</button><code><span class="sql-cm">-- 조건부 삭제</span>
+<span class="sql-kw">DELETE FROM</span> <span class="sql-name">EMP</span> <span class="sql-kw">WHERE</span> <span class="sql-type">DEPT_ID</span> = <span class="sql-str">'D9'</span>;
+
+<span class="sql-cm">-- 모든 행 삭제(구조는 유지)</span>
+<span class="sql-kw">DELETE FROM</span> <span class="sql-name">EMP</span>;</code></pre>
+  <p class="reveal" style="font-size: 13px; color: var(--fg-3); margin: 8px 0 4px;">↓ 실행 후 (DEPT_ID='D9'만 삭제)</p>
+  <table class="reveal">
+    <thead><tr><th>EMP_ID</th><th>NAME</th><th>DEPT_ID</th><th>삭제 여부</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>김</td><td>D1</td><td>유지</td></tr>
+      <tr><td>2</td><td>이</td><td>D1</td><td>유지</td></tr>
+      <tr><td>9</td><td>최</td><td>D9</td><td style="color: var(--wrong-fg); font-weight: 700;">삭제됨</td></tr>
+    </tbody>
+  </table>
+  <p class="reveal" style="font-size: 12.5px; color: var(--fg-3); margin: 0 0 12px;">→ 행 1개 삭제. 테이블 구조는 그대로 남고, COMMIT 전이라면 ROLLBACK으로 되돌릴 수 있다.</p>
+
+  <h3 class="reveal">DELETE vs TRUNCATE vs DROP</h3>
+  <div class="threeway reveal">
+    <div class="threeway-card t-correct">
+      <div class="glyph">DELETE</div>
+      <div class="name">DML · 롤백 가능</div>
+      <div class="desc">데이터 삭제, 테이블 구조 <strong>유지</strong>. 행 단위 처리라 <strong>느림</strong>. <code>WHERE</code>로 조건 가능</div>
+    </div>
+    <div class="threeway-card t-warn">
+      <div class="glyph">TRUNC</div>
+      <div class="name"><a href="./2-3-3_DDL.html">DDL</a> · 롤백 불가</div>
+      <div class="desc">모든 데이터 삭제, 테이블 구조 <strong>유지</strong>. 자동 COMMIT, <strong>빠름</strong></div>
+    </div>
+    <div class="threeway-card t-danger">
+      <div class="glyph">DROP</div>
+      <div class="name">DDL · 롤백 불가</div>
+      <div class="desc">테이블 자체를 <strong>삭제</strong>. 구조까지 사라짐. <strong>매우 빠름</strong></div>
+    </div>
+  </div>
+  <table class="reveal">
+    <thead><tr><th>명령</th><th>분류</th><th>데이터</th><th>테이블 구조</th><th>롤백</th><th>속도</th></tr></thead>
+    <tbody>
+      <tr><td>DELETE</td><td>DML</td><td>삭제</td><td>유지</td><td>가능</td><td>느림</td></tr>
+      <tr><td>TRUNCATE</td><td><a href="./2-3-3_DDL.html">DDL</a></td><td>모두 삭제</td><td>유지</td><td>불가</td><td>빠름</td></tr>
+      <tr><td>DROP</td><td>DDL</td><td>삭제</td><td>삭제</td><td>불가</td><td>매우 빠름</td></tr>
+    </tbody>
+  </table>
+  <pre class="reveal"><button class="copy-btn">복사</button><code><span class="sql-kw">DELETE FROM</span> <span class="sql-name">EMP</span>;       <span class="sql-cm">-- 데이터만, 롤백 가능</span>
+<span class="sql-kw">TRUNCATE TABLE</span> <span class="sql-name">EMP</span>;    <span class="sql-cm">-- 데이터만, 롤백 불가</span>
+<span class="sql-kw">DROP TABLE</span> <span class="sql-name">EMP</span>;        <span class="sql-cm">-- 테이블 자체 삭제</span></code></pre>
+
+  <h2 class="reveal">MERGE — 있으면 UPDATE, 없으면 INSERT (UPSERT)</h2>
+  <p class="reveal" style="font-size: 13px; color: var(--fg-3); margin: 8px 0 4px;">예시 데이터</p>
+  <div class="ba-flow reveal" style="grid-template-columns: 1fr 36px 1fr; align-items: stretch;">
+    <div class="ba-side before">
+      <span class="ba-tag">EMP</span>
+      <h4 class="ba-h">대상 테이블 (변경 전)</h4>
+      <div class="mini-table cols-3">
+        <div class="h">EMP_ID</div><div class="h">NAME</div><div class="h">SAL</div>
+        <div class="c">1</div><div class="c">김</div><div class="c">3000</div>
+      </div>
+    </div>
+    <div class="ba-arrow" style="font-size: 22px; color: var(--point-500);">+</div>
+    <div class="ba-side before">
+      <span class="ba-tag">NEW_EMP</span>
+      <h4 class="ba-h">소스 테이블</h4>
+      <div class="mini-table cols-3">
+        <div class="h">EMP_ID</div><div class="h">NAME</div><div class="h">SAL</div>
+        <div class="c">1</div><div class="c">김</div><div class="c">5000</div>
+        <div class="c">2</div><div class="c">이</div><div class="c">4000</div>
+      </div>
+    </div>
+  </div>
+  <pre class="reveal"><button class="copy-btn">복사</button><code><span class="sql-kw">MERGE INTO</span> <span class="sql-name">EMP</span> <span class="sql-type">E</span>
+<span class="sql-kw">USING</span> <span class="sql-name">NEW_EMP</span> <span class="sql-type">N</span>
+   <span class="sql-kw">ON</span> (<span class="sql-type">E</span>.<span class="sql-type">EMP_ID</span> = <span class="sql-type">N</span>.<span class="sql-type">EMP_ID</span>)
+<span class="sql-kw">WHEN MATCHED THEN</span>
+    <span class="sql-kw">UPDATE SET</span> <span class="sql-type">E</span>.<span class="sql-type">SAL</span> = <span class="sql-type">N</span>.<span class="sql-type">SAL</span>
+<span class="sql-kw">WHEN NOT MATCHED THEN</span>
+    <span class="sql-kw">INSERT</span> (<span class="sql-type">EMP_ID</span>, <span class="sql-type">NAME</span>, <span class="sql-type">SAL</span>) <span class="sql-kw">VALUES</span> (<span class="sql-type">N</span>.<span class="sql-type">EMP_ID</span>, <span class="sql-type">N</span>.<span class="sql-type">NAME</span>, <span class="sql-type">N</span>.<span class="sql-type">SAL</span>);</code></pre>
+  <p class="reveal" style="font-size: 13px; color: var(--fg-3); margin: 8px 0 4px;">↓ 실행 후 (EMP에 ID=1 있음, ID=2 없음)</p>
+  <table class="reveal">
+    <thead><tr><th>NEW_EMP (소스)</th><th>EMP에 매칭?</th><th>처리</th><th>EMP 결과</th></tr></thead>
+    <tbody>
+      <tr><td>(1, '김', 5000)</td><td>O (MATCHED)</td><td>UPDATE SAL</td><td>1번 SAL → 5000</td></tr>
+      <tr><td>(2, '이', 4000)</td><td>X (NOT MATCHED)</td><td>INSERT</td><td>2번 신규 추가</td></tr>
+    </tbody>
+  </table>
+  <p class="reveal" style="font-size: 12.5px; color: var(--fg-3); margin: 0 0 12px;">→ 행 1개 수정 + 1개 추가. 같은 키가 있으면 UPDATE, 없으면 INSERT — 한 번의 명령으로 두 작업을 함께 처리한다.</p>
+
+  <h3 class="reveal">시각화</h3>
+  <div class="step-flow cols-3 reveal">
+    <div class="step-card">
+      <div class="step">STEP 1</div>
+      <div class="name">NEW_EMP의 행</div>
+      <div class="ex">소스 테이블의 한 행을 잡는다</div>
+      <div class="arrow-next">›</div>
+    </div>
+    <div class="step-card">
+      <div class="step">STEP 2</div>
+      <div class="name">E.EMP_ID 매칭?</div>
+      <div class="ex">ON 조건으로 EMP에 같은 키가 있는지 검사</div>
+      <div class="arrow-next">›</div>
+    </div>
+    <div class="step-card">
+      <div class="step">STEP 3</div>
+      <div class="name">분기 처리</div>
+      <div class="ex">있음 → <strong>UPDATE</strong> / 없음 → <strong>INSERT</strong></div>
+    </div>
+  </div>
+
+  <!-- DML과 트랜잭션 -->
+  <h2 class="reveal">DML과 트랜잭션</h2>
+  <pre class="reveal"><button class="copy-btn">복사</button><code><span class="sql-kw">INSERT INTO</span> <span class="sql-name">EMP</span> ...;
+<span class="sql-kw">UPDATE</span> <span class="sql-name">EMP</span> ...;
+<span class="sql-kw">DELETE FROM</span> <span class="sql-name">EMP</span> ...;
+<span class="sql-kw">COMMIT</span>;        <span class="sql-cm">-- 영구 반영</span>
+<span class="sql-cm">-- 또는</span>
+<span class="sql-kw">ROLLBACK</span>;      <span class="sql-cm">-- 취소</span></code></pre>
+  <p class="reveal">DML은 <a href="./1-2-3_모델이표현하는트랜잭션의이해.html">트랜잭션</a>의 대상이며 COMMIT 전까지 메모리에만 있다. COMMIT/ROLLBACK 같은 트랜잭션 제어 명령은 <a href="./2-3-2_TCL.html">TCL</a>에서 다룬다.</p>
+
+  <!-- Before & After -->
+  <h2 class="section-label sec-compare reveal">
+    <span class="label-tag">Before &amp; After</span>
+    <span class="label-rest">INSERT → UPDATE → DELETE 흐름</span>
+  </h2>
+  <p class="reveal">3행짜리 EMP 테이블에 INSERT → UPDATE → DELETE를 순서대로 적용해 본다. D1 부서 직원(김·이) 두 명에게만 10% 인상이 들어가고, 새로 추가했던 4번 직원(최)은 마지막에 다시 삭제되는 흐름이다.</p>
+  <p class="reveal" style="font-size: 13.5px; color: var(--fg-3); margin-top: 0;">EMP (초기 상태)</p>
+  <table class="reveal">
+    <thead><tr><th>EMP_ID</th><th>NAME</th><th>DEPT_ID</th><th>SAL</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>김</td><td>D1</td><td>3000</td></tr>
+      <tr><td>2</td><td>이</td><td>D1</td><td>4000</td></tr>
+      <tr><td>3</td><td>박</td><td>D2</td><td>3500</td></tr>
+    </tbody>
+  </table>
+  <div class="step-flow cols-3 reveal">
+    <div class="step-card">
+      <div class="step">STEP 1 · INSERT</div>
+      <div class="name"><code>VALUES (4, '최', 'D2', 4500)</code></div>
+      <div class="ex">최이 4번으로 추가됨 (4행)</div>
+      <div class="arrow-next">›</div>
+    </div>
+    <div class="step-card">
+      <div class="step">STEP 2 · UPDATE</div>
+      <div class="name"><code>SAL*1.1 WHERE DEPT_ID='D1'</code></div>
+      <div class="ex">D1만 김 3300 / 이 4400 (10% 인상)</div>
+      <div class="arrow-next">›</div>
+    </div>
+    <div class="step-card">
+      <div class="step">STEP 3 · DELETE</div>
+      <div class="name"><code>WHERE EMP_ID = 4</code></div>
+      <div class="ex">최(4번) 다시 삭제 → 3행으로 복귀</div>
+    </div>
+  </div>
+  <div class="ba-flow reveal">
+    <div class="ba-side before">
+      <span class="ba-tag">INSERT 후</span>
+      <h4 class="ba-h">4행으로 늘어남</h4>
+      <div class="mini-table cols-4">
+        <div class="h">ID</div><div class="h">NAME</div><div class="h">DEPT</div><div class="h">SAL</div>
+        <div class="c">1</div><div class="c">김</div><div class="c">D1</div><div class="c">3000</div>
+        <div class="c">2</div><div class="c">이</div><div class="c">D1</div><div class="c">4000</div>
+        <div class="c">3</div><div class="c">박</div><div class="c">D2</div><div class="c">3500</div>
+        <div class="c">4</div><div class="c">최</div><div class="c">D2</div><div class="c">4500</div>
+      </div>
+    </div>
+    <div class="ba-arrow">→</div>
+    <div class="ba-side after">
+      <span class="ba-tag">UPDATE → DELETE 후</span>
+      <h4 class="ba-h">D1 인상 + 4번 삭제 결과</h4>
+      <div class="mini-table cols-4">
+        <div class="h">ID</div><div class="h">NAME</div><div class="h">DEPT</div><div class="h">SAL</div>
+        <div class="c">1</div><div class="c">김</div><div class="c">D1</div><div class="c">3300</div>
+        <div class="c">2</div><div class="c">이</div><div class="c">D1</div><div class="c">4400</div>
+        <div class="c">3</div><div class="c">박</div><div class="c">D2</div><div class="c">3500</div>
+      </div>
+    </div>
+  </div>
+  <p class="reveal">DML은 행 단위로 데이터를 바꾸지만 테이블 구조 자체는 건드리지 않는다. 위 작업들은 모두 COMMIT 전까지는 메모리에만 머물러 있어서, 잘못 친 UPDATE나 DELETE는 ROLLBACK으로 되돌릴 수 있다. 반대로 같은 "삭제"라도 TRUNCATE/DROP은 DDL이라 자동 COMMIT되며 되돌릴 수 없으니, 데이터만 비울지·구조까지 없앨지·되돌릴 여지를 둘지를 항상 의식해서 명령을 골라야 한다.</p>
+
+  <div class="reveal" style="margin: 40px 0 0; padding: 22px 24px; background: linear-gradient(135deg, var(--point-050), var(--bg-card)); border: 1px solid var(--point-100); border-radius: 12px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;">
+    <div>
+      <div style="font-size: 12px; font-weight: 800; color: var(--point-600); letter-spacing: 0.04em; margin-bottom: 4px;">시험 대비</div>
+      <div style="font-size: 14px; color: var(--fg-2);">이 챕터의 함정·정답과 30초 정리는 통합 시험 대비 페이지에서 볼 수 있습니다.</div>
+    </div>
+    <a href="./exam-review.html#ch-2-3-1" style="font-size: 14px; font-weight: 700; color: var(--point-600); text-decoration: none; padding: 8px 14px; border: 1px solid var(--point-300); border-radius: 8px; background: var(--bg-card); white-space: nowrap;">시험 대비 보기 →</a>
+  </div>
+
+  </article>
+</main>
+<script src="./common.js"></script>
+</body>
+</html>

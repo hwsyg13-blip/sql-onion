@@ -1,0 +1,2581 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>시험 대비 — SQLD양파 이론</title>
+<link rel="stylesheet" href="./common.css">
+<style>
+/* 시험 대비 통합 페이지 전용 */
+.exam-search { margin: 0 0 24px; position: sticky; top: calc(var(--header-h) + 16px); z-index: 5; }
+.exam-search input {
+  width: 100%; padding: 12px 16px; border: 1px solid var(--border-default);
+  border-radius: 10px; font-size: 14px; font-family: var(--font-sans);
+  background: var(--bg-card); box-shadow: var(--shadow-sm);
+  transition: border-color 150ms, box-shadow 150ms;
+}
+.exam-search input:focus { outline: none; border-color: var(--point-500); box-shadow: 0 0 0 3px var(--point-100); }
+
+.exam-toc {
+  margin: 0 0 32px; padding: 22px 24px;
+  background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: 14px;
+  box-shadow: var(--shadow-sm);
+}
+.exam-toc h2 { font-size: 15px; font-weight: 800; color: var(--fg-1); margin: 0 0 12px; padding: 0; border: 0; }
+.exam-toc-section {
+  font-size: 11px; font-weight: 800; color: var(--point-600);
+  letter-spacing: 0.04em; margin: 14px 0 6px; padding: 0 10px;
+}
+.exam-toc-section:first-of-type { margin-top: 0; }
+.exam-toc-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 6px; }
+.exam-toc-grid a {
+  font-size: 13px; color: var(--fg-2); text-decoration: none;
+  padding: 7px 10px; border-radius: 6px; transition: background 150ms, color 150ms;
+}
+.exam-toc-grid a:hover { background: var(--point-100); color: var(--point-600); }
+
+.exam-chapter { margin: 48px 0 0; padding-top: 28px; border-top: 1px solid var(--border-subtle); scroll-margin-top: calc(var(--header-h) + 16px); }
+.exam-chapter:first-of-type { border-top: 0; padding-top: 0; }
+.exam-chapter[hidden] { display: none; }
+.exam-chapter h2.exam-h {
+  display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+  font-size: 22px; font-weight: 800; color: var(--fg-1);
+  margin: 0 0 18px; padding: 0; letter-spacing: -0.01em;
+}
+.exam-chapter h2.exam-h .ch-tag {
+  background: var(--point-100); color: var(--point-600);
+  font-size: 12px; font-weight: 800; letter-spacing: 0.02em;
+  padding: 4px 10px; border-radius: 6px;
+}
+.exam-chapter h2.exam-h .theory-link {
+  font-size: 13px; font-weight: 600; color: var(--point-600);
+  margin-left: auto; text-decoration: none;
+  padding: 4px 10px; border-radius: 6px;
+  border: 1px solid var(--point-100);
+  transition: background 150ms, border-color 150ms;
+}
+.exam-chapter h2.exam-h .theory-link:hover { background: var(--point-100); border-color: var(--point-300); }
+.exam-chapter h3.exam-section-h {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 12.5px; font-weight: 800; letter-spacing: -0.01em;
+  padding: 5px 12px; border-radius: 8px; margin: 22px 0 10px;
+  border: 0;
+}
+.exam-chapter h3.exam-section-h::before { content: ''; display: inline-block; width: 5px; height: 5px; border-radius: 50%; background: currentColor; opacity: 0.9; }
+.exam-chapter h3.exam-section-h.h-trap { background: var(--wrong-bg); color: var(--wrong-fg); }
+.exam-chapter h3.exam-section-h.h-summary { background: var(--point-100); color: var(--point-600); }
+
+@media (max-width: 720px) {
+  .exam-toc-grid { grid-template-columns: 1fr; }
+  .exam-chapter h2.exam-h .theory-link { margin-left: 0; }
+}
+</style>
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="topnav-inner">
+    <div class="topnav-brand">SQLD양파</div>
+    <div class="topnav-links">
+      <a href="#">홈</a>
+      <a href="#" class="active">이론</a>
+      <a href="#">기출 CBT</a>
+      <a href="#">모의고사</a>
+      <a href="#">Pro</a>
+    </div>
+  </div>
+</nav>
+
+<main class="page-shell">
+  <div class="breadcrumb">
+    <a href="#">이론</a>
+    <span class="sep">›</span>
+    <a href="#">시험 대비</a>
+  </div>
+
+  <header class="page-title-block">
+    <h1><span class="chapter-tag">REVIEW</span>시험 대비</h1>
+    <p class="subtitle">30개 챕터의 <strong>함정과 정답</strong> + <strong>30초 정리</strong>를 한 페이지에. 시험 직전 빠른 점검용.</p>
+  </header>
+
+  <div class="exam-search">
+    <input type="text" placeholder="🔍 함정 텍스트로 검색 (예: NULL, JOIN, AVG…)" oninput="filterExam(this.value)">
+  </div>
+
+  <section class="exam-toc">
+    <h2>챕터 인덱스</h2>
+
+    <div class="exam-toc-section">1과목 — 데이터 모델링의 이해</div>
+    <div class="exam-toc-grid">
+      <a href="#ch-1-1-1">1-1-1 데이터모델의 이해</a>
+      <a href="#ch-1-1-2">1-1-2 엔터티</a>
+      <a href="#ch-1-1-3">1-1-3 속성</a>
+      <a href="#ch-1-1-4">1-1-4 관계</a>
+      <a href="#ch-1-1-5">1-1-5 식별자</a>
+      <a href="#ch-1-2-1">1-2-1 정규화</a>
+      <a href="#ch-1-2-2">1-2-2 관계와 조인</a>
+      <a href="#ch-1-2-3">1-2-3 트랜잭션</a>
+      <a href="#ch-1-2-4">1-2-4 NULL 속성</a>
+      <a href="#ch-1-2-5">1-2-5 본질·인조 식별자</a>
+    </div>
+
+    <div class="exam-toc-section">2과목 — SQL 기본</div>
+    <div class="exam-toc-grid">
+      <a href="#ch-2-1-1">2-1-1 관계형DB 개요</a>
+      <a href="#ch-2-1-2">2-1-2 SELECT문</a>
+      <a href="#ch-2-1-3">2-1-3 함수</a>
+      <a href="#ch-2-1-4">2-1-4 WHERE절</a>
+      <a href="#ch-2-1-5">2-1-5 GROUP BY/HAVING</a>
+      <a href="#ch-2-1-6">2-1-6 ORDER BY</a>
+      <a href="#ch-2-1-7">2-1-7 조인</a>
+      <a href="#ch-2-1-8">2-1-8 표준 조인</a>
+    </div>
+
+    <div class="exam-toc-section">2과목 — SQL 활용</div>
+    <div class="exam-toc-grid">
+      <a href="#ch-2-2-1">2-2-1 서브쿼리</a>
+      <a href="#ch-2-2-2">2-2-2 집합연산자</a>
+      <a href="#ch-2-2-3">2-2-3 그룹함수</a>
+      <a href="#ch-2-2-4">2-2-4 윈도우함수</a>
+      <a href="#ch-2-2-5">2-2-5 TopN 쿼리</a>
+      <a href="#ch-2-2-6">2-2-6 계층형 질의</a>
+      <a href="#ch-2-2-7">2-2-7 PIVOT/UNPIVOT</a>
+      <a href="#ch-2-2-8">2-2-8 정규표현식</a>
+    </div>
+
+    <div class="exam-toc-section">2과목 — 관리 구문</div>
+    <div class="exam-toc-grid">
+      <a href="#ch-2-3-1">2-3-1 DML</a>
+      <a href="#ch-2-3-2">2-3-2 TCL</a>
+      <a href="#ch-2-3-3">2-3-3 DDL</a>
+      <a href="#ch-2-3-4">2-3-4 DCL</a>
+    </div>
+  </section>
+
+  <article class="theory-md">
+
+    <section class="exam-chapter" id="ch-1-1-1">
+      <h2 class="exam-h">
+        데이터 모델의 이해
+        <a class="theory-link" href="./1-1-1_데이터모델의이해.html">→ 이론 페이지</a>
+      </h2>
+      <h3 class="exam-section-h h-trap">OX 미니 퀴즈</h3>
+      <div class="ox-quiz reveal">
+        <div class="ox-q">
+          <div class="num">Q1</div>
+          <div class="q">물리적 모델링이 가장 먼저 진행된다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict x">X</span><strong>개념 → 논리 → 물리</strong> 순서로 진행한다.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q2</div>
+          <div class="q">데이터 모델은 코드 작성을 위한 것이다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict x">X</span>현실 세계를 <strong>추상화</strong>한 것이다.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q3</div>
+          <div class="q">좋은 모델은 데이터 중복을 일부 허용한다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict x">X</span>원칙은 <strong>중복 배제</strong>. 다만 성능을 위한 의도적 반정규화는 별개.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q4</div>
+          <div class="q">데이터 모델링의 3대 관점은 데이터 / 프로세스 / 상관이다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict o">O</span><strong>데이터 · 프로세스 · 상관</strong> 3대 관점이 정답.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q5</div>
+          <div class="q">좋은 모델의 6대 특징에 "통합성"은 포함되지 않는다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict x">X</span>완전성 · 중복배제 · 업무규칙 · 재사용 · 의사소통 · <strong>통합성</strong> 6가지 모두 포함.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q6</div>
+          <div class="q">정규화는 물리적 모델링 단계에서 수행한다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict x">X</span>정규화는 <strong>논리적 단계</strong>에서 수행한다.</div>
+          </details>
+        </div>
+      </div>
+
+      <h3 class="exam-section-h h-summary">30초 정리</h3>
+      <div class="summary-cards cols-3 reveal">
+        <div class="s-card"><div class="head">모델링 순서</div><strong>개념 → 논리 → 물리</strong> (정규화 = 논리)</div>
+        <div class="s-card"><div class="head">3가지 관점</div><strong>데이터 / 프로세스 / 상관</strong></div>
+        <div class="s-card"><div class="head">좋은 모델 6요소</div>완전성 · 중복배제 · 업무규칙 · 재사용성 · 의사소통 · 통합성</div>
+        <div class="s-card"><div class="head">3층 스키마</div><strong>외부(View) / 개념(ERD) / 내부(저장)</strong></div>
+        <div class="s-card"><div class="head">독립성</div><strong>논리적 · 물리적</strong> 독립성 보장</div>
+        <div class="s-card"><div class="head">정규화 시점</div>논리적 모델링 단계</div>
+      </div>
+    </section>
+
+    <section class="exam-chapter" id="ch-1-1-2">
+      <h2 class="exam-h">
+        엔터티
+        <a class="theory-link" href="./1-1-2_엔터티.html">→ 이론 페이지</a>
+      </h2>
+      <h3 class="exam-section-h h-trap">OX 미니 퀴즈</h3>
+      <div class="ox-quiz reveal">
+        <div class="ox-q">
+          <div class="num">Q1</div>
+          <div class="q">엔터티는 1개 인스턴스만 있어도 된다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict x">X</span><strong>2개 이상</strong>의 인스턴스가 필요하다.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q2</div>
+          <div class="q">엔터티는 속성이 1개여도 가능하다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict x">X</span><strong>2개 이상</strong>의 속성이 필요하다.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q3</div>
+          <div class="q">엔터티는 영속적으로 존재하는 인스턴스의 집합이다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict o">O</span>옳은 표현. "인스턴스가 1개여도 무방하다"는 반대로 <strong>틀린 진술</strong>이다.</div>
+          </details>
+        </div>
+      </div>
+
+      <blockquote class="reveal">
+        <strong>명명 규칙</strong> — 현업 용어 사용 / 단수 명사 / 약어 지양 / 대문자 표기 권장
+      </blockquote>
+
+      <h3 class="exam-section-h h-summary">30초 정리</h3>
+      <div class="summary-cards reveal">
+        <div class="s-card">
+          <div class="head">5대 특징</div>
+          <strong>업·식·인·속·관</strong> — 업무 필요 / 식별 가능 / 인스턴스 ≥ 2 / 속성 ≥ 2 / 관계 보유
+        </div>
+        <div class="s-card">
+          <div class="head">유무형 분류</div>
+          <strong>유형 / 개념 / 사건</strong>
+        </div>
+        <div class="s-card">
+          <div class="head">발생 시점 분류</div>
+          <strong>기본 → 중심 → 행위</strong>
+        </div>
+        <div class="s-card">
+          <div class="head">명명 규칙</div>
+          <strong>단수 명사 / 현업 용어 / 약어 지양 / 대문자 권장</strong>
+        </div>
+      </div>
+    </section>
+
+    <section class="exam-chapter" id="ch-1-1-3">
+      <h2 class="exam-h">
+        속성
+        <a class="theory-link" href="./1-1-3_속성.html">→ 이론 페이지</a>
+      </h2>
+      <h3 class="exam-section-h h-trap">OX 미니 퀴즈</h3>
+      <div class="ox-quiz reveal">
+        <div class="ox-q">
+          <div class="num">Q1</div>
+          <div class="q">"주문수량 × 단가 = 주문금액"은 파생 속성이다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict o">O</span>다른 속성에서 계산되는 <strong>파생 속성</strong>이다.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q2</div>
+          <div class="q">"주민등록번호로부터 추출한 성별"은 기본 속성이다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict x">X</span>주민번호에서 계산·추출한 값이므로 <strong>파생 속성</strong>이다.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q3</div>
+          <div class="q">다중값 속성은 그대로 두어도 된다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict x">X</span>별도 엔터티로 <strong>분리(정규화)</strong>해야 한다.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q4</div>
+          <div class="q">주소(시·구·동)는 복합 속성, 나이는 단순 속성이다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict o">O</span>여러 의미로 쪼갤 수 있으면 <strong>복합</strong>, 더 못 쪼개면 <strong>단순</strong>.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q5</div>
+          <div class="q">속성은 더 이상 쪼갤 수 없는 최소 단위이다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict o">O</span>속성은 의미상 <strong>최소 단위</strong>이다.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q6</div>
+          <div class="q">한 인스턴스는 각 속성에 단 하나의 값을 가진다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict o">O</span>1인스턴스 ↔ 1속성 = <strong>단일값</strong>이 원칙. 다중값이면 분리한다.</div>
+          </details>
+        </div>
+      </div>
+      <blockquote class="reveal">
+        함정 단골 — "파생 속성은 가급적 줄여야 한다"는 옳은 진술. 데이터 일관성을 위해 그렇다. 단, 성능을 위해 의도적으로 둘 수는 있다.
+      </blockquote>
+
+      <h3 class="exam-section-h h-summary">30초 정리</h3>
+      <div class="summary-cards cols-3 reveal">
+        <div class="s-card"><div class="head">특성 분류</div><strong>기본 / 설계 / 파생</strong> (파생 = 다른 속성에서 계산)</div>
+        <div class="s-card"><div class="head">분해 분류</div><strong>단순(원자) / 복합</strong> (복합 ≠ 복합식별자)</div>
+        <div class="s-card"><div class="head">값 개수</div><strong>단일값 / 다중값</strong> (다중값은 별도 엔터티로)</div>
+        <div class="s-card"><div class="head">도메인</div><strong>타입 + 크기 + 제약조건</strong></div>
+        <div class="s-card"><div class="head">명명</div>현업 용어 · 명사형 · 약어 자제 · 유일</div>
+        <div class="s-card"><div class="head">단골 함정</div>주민번호로 구한 나이 = <strong>파생</strong></div>
+      </div>
+    </section>
+
+    <section class="exam-chapter" id="ch-1-1-4">
+      <h2 class="exam-h">
+        관계
+        <a class="theory-link" href="./1-1-4_관계.html">→ 이론 페이지</a>
+      </h2>
+      <h3 class="exam-section-h h-trap">OX 미니 퀴즈</h3>
+      <div class="ox-quiz reveal">
+        <div class="ox-q">
+          <div class="num">Q1</div>
+          <div class="q">M:N 관계는 그대로 구현 가능하다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict x">X</span>교차 엔터티로 <strong>1:N 두 개</strong>로 분해해야 한다.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q2</div>
+          <div class="q">식별 관계는 점선으로 표기한다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict x">X</span>식별 관계 = <strong>실선</strong>, 비식별 관계 = 점선이다.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q3</div>
+          <div class="q">관계의 4가지 표기 요소는 관계명 / 차수 / 선택성 / 방향성이다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict o">O</span><strong>관계명 · 차수 · 선택성 · 방향성</strong> 4가지가 정답.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q4</div>
+          <div class="q">관계차수의 3종류는 1:1, 1:N, M:N이다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict o">O</span><strong>1:1 · 1:N · M:N</strong> 3종이 정답.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q5</div>
+          <div class="q">자식 엔터티에 부모 식별자가 PK로 들어가면 식별 관계이다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict o">O</span>부모 PK가 자식 PK 일부로 상속 → <strong>식별 관계</strong>(실선).</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q6</div>
+          <div class="q">부모 식별자가 일반 속성(FK)으로만 들어가면 식별 관계이다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict x">X</span>일반 속성으로만 상속되면 <strong>비식별 관계</strong>(점선)이다.</div>
+          </details>
+        </div>
+      </div>
+      <blockquote class="reveal">단골 트릭 — "관계의 페어링(pairing)은 인스턴스 간의 개별적인 연결" — 관계의 구체적 사례를 가리키는 <strong>옳은 설명</strong>이다.</blockquote>
+
+      <h3 class="exam-section-h h-summary">30초 정리</h3>
+      <div class="summary-cards cols-3 reveal">
+        <div class="s-card"><div class="head">관계 4요소</div><strong>관계명 / 차수 / 선택성 / 방향</strong></div>
+        <div class="s-card"><div class="head">차수 3종</div><strong>1:1 · 1:N · M:N</strong> (M:N은 교차 엔터티 분해)</div>
+        <div class="s-card"><div class="head">식별 / 비식별</div>식별 = <strong>실선</strong> · 비식별 = <strong>점선</strong></div>
+        <div class="s-card"><div class="head">선택성</div>필수(─) / 선택(○)</div>
+        <div class="s-card"><div class="head">SQL 구현</div>관계 = <strong>외래키(FK)</strong></div>
+        <div class="s-card"><div class="head">M:N 분해</div>가운데 <strong>교차 엔터티</strong> 삽입</div>
+      </div>
+    </section>
+
+    <section class="exam-chapter" id="ch-1-1-5">
+      <h2 class="exam-h">
+        식별자
+        <a class="theory-link" href="./1-1-5_식별자.html">→ 이론 페이지</a>
+      </h2>
+      <h3 class="exam-section-h h-trap">OX 미니 퀴즈</h3>
+      <div class="ox-quiz reveal">
+        <div class="ox-q">
+          <div class="num">Q1</div>
+          <div class="q">주식별자 4대 조건은 유일성·최소성·불변성·존재성이다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict o">O</span><strong>유·최·불·존</strong> (유일성 / 최소성 / 불변성 / 존재성=NOT NULL).</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q2</div>
+          <div class="q">주식별자는 NULL이 가능하다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict x">X</span>NULL은 <strong>존재성 위반</strong>으로 불가능하다.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q3</div>
+          <div class="q">복합식별자는 PK가 될 수 없다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict x">X</span>여러 속성으로 구성된 <strong>정상적인 PK</strong>가 될 수 있다.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q4</div>
+          <div class="q">외부식별자는 다른 엔터티의 주식별자를 참조하는 식별자이다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict o">O</span>외부식별자 = <strong>외래키(FK)</strong>로, 다른 엔터티 PK를 참조한다.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q5</div>
+          <div class="q">인조식별자는 업무적 의미가 없어 데이터 품질 검증이 어렵다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict o">O</span>업무적 의미가 없으므로 <strong>중복 자연 검출이 어렵다</strong>는 단점이 있다.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q6</div>
+          <div class="q">본질식별자가 너무 길거나 자주 변하면 그대로 PK로 사용한다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict x">X</span><strong>인조식별자(대체키)</strong> 도입을 고려해야 한다.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q7</div>
+          <div class="q">주식별자는 자주 변경되어도 된다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict x">X</span><strong>불변성 위반</strong>. 거의 변하지 않아야 한다.</div>
+          </details>
+        </div>
+      </div>
+      <h3 class="exam-section-h h-summary">30초 정리</h3>
+      <div class="summary-cards cols-3 reveal">
+        <div class="s-card"><div class="head">4대 조건</div><strong>유·최·불·존</strong></div>
+        <div class="s-card"><div class="head">4대 분류 기준</div>대표성·생성·속성수·대체 → 8개 종류</div>
+        <div class="s-card"><div class="head">외부식별자</div>= <strong>외래키(FK)</strong> = 다른 엔터티의 PK 참조</div>
+        <div class="s-card"><div class="head">길거나 자주 변함</div>→ <strong>인조식별자(대체키)</strong> 도입</div>
+        <div class="s-card"><div class="head">NULL 가능?</div><strong>불가</strong> (존재성 위반)</div>
+        <div class="s-card"><div class="head">복합식별자</div>여러 속성 결합 → 정상적인 PK</div>
+      </div>
+    </section>
+
+    <section class="exam-chapter" id="ch-1-2-1">
+      <h2 class="exam-h">
+        정규화
+        <a class="theory-link" href="./1-2-1_정규화.html">→ 이론 페이지</a>
+      </h2>
+      <h3 class="exam-section-h h-trap">OX 미니 퀴즈</h3>
+      <div class="ox-quiz reveal">
+        <div class="ox-q">
+          <div class="num">Q1</div>
+          <div class="q">정규화 단계는 1NF → 2NF → 3NF → BCNF 순으로 진행된다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict o">O</span><strong>1NF → 2NF → 3NF → BCNF</strong>가 정답. 순서 함정 단골.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q2</div>
+          <div class="q">1NF의 핵심은 부분 함수 종속 제거이다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict x">X</span>1NF는 <strong>원자값</strong>(한 칸에 한 값)이 핵심. 부분종속 제거는 2NF.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q3</div>
+          <div class="q">2NF의 핵심은 부분 함수 종속 제거이다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict o">O</span>2NF = <strong>부분 함수 종속 제거</strong>.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q4</div>
+          <div class="q">3NF의 핵심은 이행 함수 종속 제거이다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict o">O</span>3NF = <strong>이행 함수 종속 제거</strong>.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q5</div>
+          <div class="q">정규화의 단점은 조인 증가로 인한 조회 성능 저하이다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict o">O</span>테이블이 쪼개져 <strong>조인이 많아져</strong> 조회가 느려질 수 있다.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q6</div>
+          <div class="q">이상현상 3종은 삽입 / 갱신 / 삭제 이상이다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict o">O</span><strong>삽입 · 갱신 · 삭제</strong> 이상 3종이 정답.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q7</div>
+          <div class="q">정규화하면 항상 성능이 좋아진다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict x">X</span>조회는 느려질 수 있다. 단 <strong>데이터 무결성</strong>은 향상된다.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q8</div>
+          <div class="q">복합 PK 중 일부 속성에만 종속되는 컬럼이 있으면 2NF 위반이다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict o">O</span><strong>부분 함수 종속</strong>으로 2NF 위반이다.</div>
+          </details>
+        </div>
+      </div>
+
+      <h3 class="exam-section-h h-summary">30초 정리</h3>
+      <div class="summary-cards cols-3">
+        <div class="s-card"><div class="head">단계</div><strong>1NF → 2NF → 3NF → BCNF</strong> (순서 함정 단골)</div>
+        <div class="s-card"><div class="head">1NF</div><strong>원자값</strong> (한 칸에 한 값)</div>
+        <div class="s-card"><div class="head">2NF</div><strong>부분종속 제거</strong></div>
+        <div class="s-card"><div class="head">3NF</div><strong>이행종속 제거</strong></div>
+        <div class="s-card"><div class="head">BCNF</div><strong>결정자 = 후보키</strong></div>
+        <div class="s-card"><div class="head">이상현상 3종</div>삽입 / 갱신 / 삭제</div>
+        <div class="s-card"><div class="head">트레이드오프</div>정규화 ↔ <strong>반정규화</strong> (무결성 vs 성능)</div>
+        <div class="s-card"><div class="head">조회 성능</div>조인 증가로 일부 저하 가능</div>
+      </div>
+    </section>
+
+    <section class="exam-chapter" id="ch-1-2-2">
+      <h2 class="exam-h">
+        관계와 조인의 이해
+        <a class="theory-link" href="./1-2-2_관계와조인의이해.html">→ 이론 페이지</a>
+      </h2>
+      <h3 class="exam-section-h h-trap">OX 미니 퀴즈</h3>
+      <div class="ox-quiz reveal">
+        <div class="ox-q">
+          <div class="num">Q1</div>
+          <div class="q">관계는 SQL에서 외래키(FK)로 구현된다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict o">O</span>관계 → SQL의 <strong>외래키(FK)</strong> → 조회 시 JOIN.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q2</div>
+          <div class="q">1:N 관계를 조인하면 부모 1행에 자식 N개일 때 결과는 N행이 된다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict o">O</span>부모 1행이 <strong>자식 N행</strong>으로 부풀려진다.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q3</div>
+          <div class="q">M:N 관계를 조인할 때는 반드시 교차 엔터티를 거쳐야 한다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict o">O</span><strong>교차 엔터티</strong>를 통해 두 번 조인한다 (수강·주문상세 등).</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q4</div>
+          <div class="q">조인 조건을 누락하면 카티션 곱(Cartesian Product)이 발생한다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict o">O</span>조건 누락 시 <strong>카티션 곱</strong>으로 행 수가 폭발한다.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q5</div>
+          <div class="q">외래키는 항상 NOT NULL이다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict x">X</span><strong>선택 관계</strong>면 FK에 NULL이 허용된다.</div>
+          </details>
+        </div>
+      </div>
+      <blockquote>
+        <strong>단골 트릭</strong> — 1:N 관계를 조인한 뒤 부모의 합계를 그대로 SUM하면 자식 수만큼 부풀려진다. 서브쿼리로 자식 합계를 먼저 구한 뒤 조인해야 안전하다.
+      </blockquote>
+
+      <h3 class="exam-section-h h-summary">30초 정리</h3>
+      <div class="summary-cards cols-3">
+        <div class="s-card">
+          <div class="head">3계층</div>
+          관계 → SQL의 <strong>외래키(FK)</strong> → 조회 시 <strong>JOIN</strong>
+        </div>
+        <div class="s-card">
+          <div class="head">1:N 조인</div>
+          결과 행 수 = <strong>자식 N</strong> (부모 1행이 N행으로 부풀려짐)
+        </div>
+        <div class="s-card">
+          <div class="head">M:N</div>
+          <strong>교차 엔터티</strong> 거쳐 두 번 조인 (수강·주문상세)
+        </div>
+        <div class="s-card">
+          <div class="head">OUTER JOIN</div>
+          추가 조건은 반드시 <strong>ON 절</strong>에 (WHERE에 두면 INNER 됨)
+        </div>
+        <div class="s-card">
+          <div class="head">조인 누락</div>
+          <strong>카티션 곱</strong> (행 수 폭발)
+        </div>
+        <div class="s-card">
+          <div class="head">FK NULL</div>
+          선택 관계면 <strong>NULL 허용</strong>
+        </div>
+      </div>
+    </section>
+
+    <section class="exam-chapter" id="ch-1-2-3">
+      <h2 class="exam-h">
+        트랜잭션의 이해
+        <a class="theory-link" href="./1-2-3_모델이표현하는트랜잭션의이해.html">→ 이론 페이지</a>
+      </h2>
+      <h3 class="exam-section-h h-trap">OX 미니 퀴즈</h3>
+      <div class="ox-quiz reveal">
+        <div class="ox-q">
+          <div class="num">Q1</div>
+          <div class="q">ACID 4성질은 원자성 / 일관성 / 고립성 / 지속성이다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict o">O</span><strong>원자성 · 일관성 · 고립성 · 지속성</strong> 4가지가 정답.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q2</div>
+          <div class="q">모델은 트랜잭션을 표현할 수 없다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict x">X</span>관계의 <strong>필수성</strong>·<strong>식별성</strong>으로 트랜잭션을 표현한다.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q3</div>
+          <div class="q">원자성은 일부만 반영해도 된다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict x">X</span>원자성은 <strong>전부 또는 전무</strong>(All or Nothing)이다.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q4</div>
+          <div class="q">식별 관계는 부모 없이 자식이 존재할 수 없는 관계이다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict o">O</span>부모 없이 자식 존재 불가 → 트랜잭션을 <strong>함께 처리</strong>해야 한다.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q5</div>
+          <div class="q">필수 관계는 관계 자체가 반드시 있어야 함을 의미한다(NOT NULL FK).</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict o">O</span>필수 관계 = <strong>NOT NULL FK</strong>로 구현된다.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q6</div>
+          <div class="q">COMMIT은 트랜잭션을 영구 반영하는 명령이다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict o">O</span>COMMIT = 트랜잭션을 <strong>영구 반영</strong>(지속성).</div>
+          </details>
+        </div>
+      </div>
+      <blockquote>
+        <strong>자주 출제</strong> — "모델은 트랜잭션을 표현할 수 없다"는 <strong>틀린 진술</strong>이다. 관계의 필수성·식별성으로 표현한다.
+      </blockquote>
+
+      <h3 class="exam-section-h h-summary">30초 정리</h3>
+      <div class="summary-cards cols-3">
+        <div class="s-card">
+          <div class="head">ACID</div>
+          <strong>원자성·일관성·고립성·지속성</strong>
+        </div>
+        <div class="s-card">
+          <div class="head">모델 단서</div>
+          관계의 <strong>필수성</strong> + <strong>식별성</strong>
+        </div>
+        <div class="s-card">
+          <div class="head">COMMIT</div>
+          영구 반영 (지속성)
+        </div>
+        <div class="s-card">
+          <div class="head">ROLLBACK</div>
+          트랜잭션 시작 시점으로 복구
+        </div>
+        <div class="s-card">
+          <div class="head">DDL</div>
+          자동 COMMIT — <strong>ROLLBACK 불가</strong>
+        </div>
+        <div class="s-card">
+          <div class="head">필수 vs 식별</div>
+          필수 = NOT NULL FK / 식별 = 부모 PK가 자식 PK 일부
+        </div>
+      </div>
+    </section>
+
+    <section class="exam-chapter" id="ch-1-2-4">
+      <h2 class="exam-h">
+        NULL 속성의 이해
+        <a class="theory-link" href="./1-2-4_NULL속성의이해.html">→ 이론 페이지</a>
+      </h2>
+      <h3 class="exam-section-h h-trap">OX 미니 퀴즈</h3>
+      <div class="ox-quiz reveal">
+        <div class="ox-q">
+          <div class="num">Q1</div>
+          <div class="q"><code>WHERE COL = NULL</code>은 NULL인 행을 찾아준다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict x">X</span>결과 없음(0건). NULL 비교는 <code>IS NULL</code>을 사용한다.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q2</div>
+          <div class="q"><code>NULL + 100</code>의 결과는 100이다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict x">X</span>결과는 <strong>NULL</strong>. NULL과의 산술 연산은 모두 NULL이다.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q3</div>
+          <div class="q"><code>AVG(컬럼)</code>의 분모는 NULL을 제외한 개수이다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict o">O</span>NULL 제외 개수가 분모이므로 <strong>분모도 줄어든다</strong>.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q4</div>
+          <div class="q"><code>COUNT(*)</code>는 NULL을 포함하고, <code>COUNT(컬럼)</code>은 NULL을 제외한다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict o">O</span><code>*</code>는 <strong>NULL 포함</strong> / 컬럼명은 <strong>NULL 제외</strong>.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q5</div>
+          <div class="q"><code>NULL = NULL</code>의 결과는 TRUE이다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict x">X</span>결과는 <strong>UNKNOWN</strong>. WHERE 절에서는 FALSE처럼 동작해 행이 제외된다.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q6</div>
+          <div class="q">Oracle에서 <code>ORDER BY ASC</code>의 기본 NULL 위치는 마지막(NULLS LAST)이다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict o">O</span>Oracle ASC 기본 = <strong>NULLS LAST</strong> (마지막).</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q7</div>
+          <div class="q"><code>NULLIF(10, 10)</code>의 결과는 10이다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict x">X</span>두 값이 같으면 <strong>NULL</strong>을 반환한다.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q8</div>
+          <div class="q"><code>COALESCE(NULL, NULL, 'X')</code>의 결과는 'X'이다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict o">O</span>NULL이 아닌 <strong>첫 번째 값</strong>인 'X'를 반환한다.</div>
+          </details>
+        </div>
+      </div>
+
+      <blockquote class="reveal">
+        <strong>단골 함정</strong> — "NULL은 0이다" "NULL은 공백이다"는 둘 다 틀린 진술이다. NULL은 <strong>값 없음</strong>이다.
+      </blockquote>
+
+      <h3 class="exam-section-h h-summary">30초 정리</h3>
+      <div class="summary-cards reveal">
+        <div class="s-card">
+          <div class="head">정의</div>
+          NULL = <strong>값 없음</strong> (≠ 0, ≠ 공백)
+        </div>
+        <div class="s-card">
+          <div class="head">비교</div>
+          <strong>IS NULL / IS NOT NULL</strong>만 가능 (<code>= NULL</code> 항상 거짓)
+        </div>
+        <div class="s-card">
+          <div class="head">산술</div>
+          NULL + 값 = <strong>NULL</strong>
+        </div>
+        <div class="s-card">
+          <div class="head">집계</div>
+          <strong>COUNT(*)</strong> = NULL 포함 / <strong>COUNT(컬럼)</strong> = NULL 제외 / SUM·AVG·MAX·MIN = 무시
+        </div>
+        <div class="s-card">
+          <div class="head">처리 함수</div>
+          <strong>NVL · NVL2 · NULLIF · COALESCE</strong>
+        </div>
+        <div class="s-card">
+          <div class="head">정렬 (Oracle)</div>
+          ASC 기본 NULL 위치 = <strong>마지막</strong>
+        </div>
+      </div>
+    </section>
+
+    <section class="exam-chapter" id="ch-1-2-5">
+      <h2 class="exam-h">
+        본질식별자 vs 인조식별자
+        <a class="theory-link" href="./1-2-5_본질식별자vs인조식별자.html">→ 이론 페이지</a>
+      </h2>
+      <h3 class="exam-section-h h-trap">OX 미니 퀴즈</h3>
+      <div class="ox-quiz reveal">
+        <div class="ox-q">
+          <div class="num">Q1</div>
+          <div class="q">인조식별자는 업무적 의미가 없어 중복 검증이 어렵다는 단점이 있다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict o">O</span><strong>업무적 의미 없음</strong>, 중복 자연 검출이 어렵다는 단점이 있다.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q2</div>
+          <div class="q">본질식별자는 길거나 변경 위험, 보안 이슈가 단점이 될 수 있다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict o">O</span>주민번호 등은 <strong>길이·변경·보안</strong> 위험이 단점.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q3</div>
+          <div class="q">인조식별자는 항상 본질식별자보다 좋다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict x">X</span><strong>상황에 따라 다르다</strong>. 길이·변경·보안 위험이 있을 때 인조 권장.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q4</div>
+          <div class="q">인조식별자 도입 시 본질키는 UNIQUE 제약으로 무결성을 보존해야 한다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict o">O</span>본질키에 <strong>UNIQUE 제약</strong>을 걸지 않으면 중복 데이터가 발생할 수 있다.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q5</div>
+          <div class="q">주민등록번호를 PK로 쓰는 것이 보안상 권장된다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict x">X</span>보안 이슈로 보통 <strong>인조식별자</strong>가 권장된다.</div>
+          </details>
+        </div>
+      </div>
+      <blockquote class="reveal">
+        <strong>자주 나옴</strong> — 인조식별자 도입 시 본질키에 UNIQUE 처리를 안 하면 중복 데이터가 발생할 수 있다.
+      </blockquote>
+
+      <h3 class="exam-section-h h-summary">30초 정리</h3>
+      <div class="summary-cards cols-3 reveal">
+        <div class="s-card">
+          <div class="head">본질식별자</div>
+          업무 자연 도출 (주민번호·사업자번호·ISBN)
+        </div>
+        <div class="s-card">
+          <div class="head">인조식별자</div>
+          인위적 부여 (자동증가 ID·UUID)
+        </div>
+        <div class="s-card">
+          <div class="head">권장</div>
+          "주민번호를 PK" → <strong>틀림</strong>. 인조식별자 권장
+        </div>
+        <div class="s-card">
+          <div class="head">본질키 보존</div>
+          인조식별자 도입 시 본질키는 <strong>UNIQUE 제약</strong>
+        </div>
+        <div class="s-card">
+          <div class="head">인조식별자 단점</div>
+          <strong>업무적 의미 없음</strong>, 중복 자연 검출 어려움
+        </div>
+        <div class="s-card">
+          <div class="head">선택 기준</div>
+          길이·변경·보안 위험 → 인조 / 그 외 → 본질
+        </div>
+      </div>
+    </section>
+
+    <section class="exam-chapter" id="ch-2-1-1">
+      <h2 class="exam-h">
+        관계형 데이터베이스 개요
+        <a class="theory-link" href="./2-1-1_관계형데이터베이스개요.html">→ 이론 페이지</a>
+      </h2>
+      <h3 class="exam-section-h h-trap">OX 미니 퀴즈</h3>
+      <div class="ox-quiz reveal">
+        <div class="ox-q">
+          <div class="num">Q1</div>
+          <div class="q"><code>TRUNCATE</code>는 DML이며 롤백이 가능하다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict x">X</span><strong>DDL</strong>이며 롤백 불가(자동 COMMIT).</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q2</div>
+          <div class="q"><code>DELETE</code>는 DML이며 롤백이 가능하다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict o">O</span><strong>DML</strong>이라 트랜잭션 제어로 롤백 가능.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q3</div>
+          <div class="q"><code>COMMIT</code>은 TCL에 속한다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict o">O</span>TCL = <strong>COMMIT / ROLLBACK / SAVEPOINT</strong>.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q4</div>
+          <div class="q"><code>GRANT</code>와 <code>REVOKE</code>는 DDL에 속한다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict x">X</span>권한을 다루는 <strong>DCL</strong>이다.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q5</div>
+          <div class="q">관계형 데이터베이스의 데이터 저장 단위는 테이블(행과 열)이다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict o">O</span>RDB는 행(Row)과 열(Column)로 구성된 <strong>테이블</strong>에 저장한다.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q6</div>
+          <div class="q">한 행은 Row, Record, Tuple이라고 부른다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict o">O</span>모두 같은 의미의 동의어다.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q7</div>
+          <div class="q">한 열은 Column, Attribute, Field라고 부른다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict o">O</span>모두 같은 의미의 동의어다.</div>
+          </details>
+        </div>
+      </div>
+      <blockquote class="reveal">
+        <strong>단골 함정</strong> — "INSERT/UPDATE/DELETE/SELECT 모두 DML이다"는 옳다. <code>MERGE</code>도 DML이다.
+      </blockquote>
+
+      <h3 class="exam-section-h h-summary">30초 정리</h3>
+      <div class="summary-cards cols-3 reveal">
+        <div class="s-card">
+          <div class="head">DDL</div>
+          <strong>CREATE / ALTER / DROP / TRUNCATE / RENAME</strong> (자동 COMMIT, 롤백 불가)
+        </div>
+        <div class="s-card">
+          <div class="head">DML</div>
+          <strong>SELECT / INSERT / UPDATE / DELETE / MERGE</strong>
+        </div>
+        <div class="s-card">
+          <div class="head">DCL</div>
+          <strong>GRANT / REVOKE</strong> (권한)
+        </div>
+        <div class="s-card">
+          <div class="head">TCL</div>
+          <strong>COMMIT / ROLLBACK / SAVEPOINT</strong>
+        </div>
+        <div class="s-card">
+          <div class="head">함정</div>
+          <strong>TRUNCATE = DDL</strong> (롤백 X) / <strong>DELETE = DML</strong> (롤백 O)
+        </div>
+        <div class="s-card">
+          <div class="head">동의어</div>
+          Row=Record=Tuple / Column=Attribute=Field
+        </div>
+      </div>
+    </section>
+
+    <section class="exam-chapter" id="ch-2-1-2">
+      <h2 class="exam-h">
+        SELECT문
+        <a class="theory-link" href="./2-1-2_SELECT문.html">→ 이론 페이지</a>
+      </h2>
+      <h3 class="exam-section-h h-trap">OX 미니 퀴즈</h3>
+      <div class="ox-quiz reveal">
+        <div class="ox-q">
+          <div class="num">Q1</div>
+          <div class="q">SELECT 실행 순서는 SELECT → FROM → WHERE → GROUP BY → HAVING → ORDER BY 이다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict x">X</span>실제 실행 순서는 <strong>FROM → WHERE → GROUP BY → HAVING → SELECT → ORDER BY</strong>.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q2</div>
+          <div class="q">WHERE 절에서 SELECT 절의 별칭(alias)을 사용할 수 있다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict x">X</span>SELECT가 WHERE보다 <strong>나중에</strong> 실행되므로 별칭 사용 불가.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q3</div>
+          <div class="q">ORDER BY 절에서 SELECT 절의 별칭을 사용할 수 있다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict o">O</span>ORDER BY는 SELECT 이후 실행되므로 <strong>별칭 사용 가능</strong>.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q4</div>
+          <div class="q">DISTINCT는 첫 번째 컬럼에만 적용된다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict x">X</span>SELECT 절 전체(여러 컬럼이면 <strong>조합 단위</strong>)에 적용된다.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q5</div>
+          <div class="q">Oracle에서 테이블 별칭에 <code>AS</code>를 사용할 수 있다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict x">X</span>Oracle 테이블 별칭에는 AS <strong>사용 불가</strong>(컬럼 별칭은 가능).</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q6</div>
+          <div class="q"><code>SELECT * FROM DUAL</code> 결과는 1행 1컬럼('X')이다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict o">O</span>DUAL은 Oracle의 1행 1컬럼 가짜 테이블.</div>
+          </details>
+        </div>
+      </div>
+      <blockquote class="reveal">
+        <strong>자주 출제</strong> — WHERE 절에서 SELECT 별칭을 쓰면 에러가 난다. 실행 순서상 WHERE가 먼저 처리되기 때문이다.
+      </blockquote>
+
+      <h3 class="exam-section-h h-summary">30초 정리</h3>
+      <div class="summary-cards cols-3 reveal">
+        <div class="s-card">
+          <div class="head">작성</div>
+          SELECT → FROM → WHERE → GROUP → HAVING → ORDER
+        </div>
+        <div class="s-card">
+          <div class="head">실행 (FWGHSO)</div>
+          <strong>FROM → WHERE → GROUP → HAVING → SELECT → ORDER</strong>
+        </div>
+        <div class="s-card">
+          <div class="head">별칭 사용</div>
+          <strong>ORDER BY 만 가능</strong> · WHERE/GROUP/HAVING 불가
+        </div>
+        <div class="s-card">
+          <div class="head">DISTINCT</div>
+          SELECT 절 전체에 적용 (컬럼 조합 단위)
+        </div>
+        <div class="s-card">
+          <div class="head">Oracle 별칭</div>
+          테이블 별칭 = AS <strong>불가</strong> / 컬럼 별칭 = AS <strong>가능</strong>(생략도 OK)
+        </div>
+        <div class="s-card">
+          <div class="head">DUAL</div>
+          Oracle 1행 1컬럼 가짜 테이블 (계산·함수 테스트)
+        </div>
+      </div>
+    </section>
+
+    <section class="exam-chapter" id="ch-2-1-3">
+      <h2 class="exam-h">
+        함수
+        <a class="theory-link" href="./2-1-3_함수.html">→ 이론 페이지</a>
+      </h2>
+      <h3 class="exam-section-h h-trap">OX 미니 퀴즈</h3>
+      <div class="ox-quiz reveal">
+        <div class="ox-q">
+          <div class="num">Q1</div>
+          <div class="q"><code>SUBSTR('ABCDE', 2, 3)</code>의 결과는 'BCD'이다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict o">O</span>Oracle 인덱스는 <strong>1부터</strong>, 2번째부터 3글자 → 'BCD'.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q2</div>
+          <div class="q">Oracle <code>LENGTH('한글')</code>의 결과는 6이다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict x">X</span>LENGTH는 <strong>글자 수(=2)</strong>. 바이트 수(6)는 <strong>LENGTHB</strong>.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q3</div>
+          <div class="q"><code>MOD(10, 3)</code>의 결과는 1이다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict o">O</span>10을 3으로 나눈 나머지 = 1.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q4</div>
+          <div class="q"><code>ROUND(3.456, 2)</code>의 결과는 3.46이다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict o">O</span>소수점 2자리에서 반올림 → 3.46.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q5</div>
+          <div class="q"><code>TRUNC(3.456, 2)</code>의 결과는 3.46이다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict x">X</span>TRUNC는 <strong>버림</strong> → 3.45.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q6</div>
+          <div class="q">DECODE로 범위 비교(BETWEEN, &gt;, &lt;)를 할 수 있다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict x">X</span>DECODE는 <strong>동등 비교만</strong> 가능. 범위 비교는 CASE.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q7</div>
+          <div class="q">날짜 - 날짜의 결과는 숫자(일수)이다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict o">O</span>두 날짜의 차이는 <strong>일수(숫자)</strong>로 반환.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q8</div>
+          <div class="q"><code>NVL2(NULL, 'A', 'B')</code>의 결과는 'A'이다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict x">X</span>NVL2(expr, A, B)는 expr이 NULL이면 <strong>B</strong>, 아니면 A → 결과는 'B'.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q9</div>
+          <div class="q">암시적 형변환이 명시적 형변환보다 권장된다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict x">X</span><strong>명시적</strong>(TO_NUMBER, TO_DATE 등)이 안전하고 권장.</div>
+          </details>
+        </div>
+      </div>
+      <blockquote class="reveal">
+        <strong>단골</strong> — COUNT(*) vs COUNT(컬럼) 차이를 묻는 문제. NULL 처리에 주의해야 한다.
+      </blockquote>
+
+      <h3 class="exam-section-h h-summary">30초 정리</h3>
+      <div class="summary-cards cols-3 reveal">
+        <div class="s-card">
+          <div class="head">분류</div>
+          <strong>단일행</strong>(1행→1결과) vs <strong>다중행=집계</strong>(여러 행→1결과)
+        </div>
+        <div class="s-card">
+          <div class="head">SUBSTR</div>
+          인덱스 = <strong>1부터</strong> 시작 (Oracle)
+        </div>
+        <div class="s-card">
+          <div class="head">LENGTH</div>
+          글자 수 / <strong>LENGTHB</strong> = 바이트 수 (한글 1자 = 3바이트)
+        </div>
+        <div class="s-card">
+          <div class="head">ROUND vs TRUNC</div>
+          반올림 vs 버림
+        </div>
+        <div class="s-card">
+          <div class="head">DECODE vs CASE</div>
+          DECODE = <strong>동등 비교만</strong> / CASE = <strong>모든 비교</strong>(범위 가능)
+        </div>
+        <div class="s-card">
+          <div class="head">NULL 함수</div>
+          <strong>NVL · NVL2 · NULLIF · COALESCE</strong>
+        </div>
+        <div class="s-card">
+          <div class="head">집계와 NULL</div>
+          집계 함수는 <strong>NULL 무시</strong> (단 <code>COUNT(*)</code>만 NULL 포함)
+        </div>
+        <div class="s-card">
+          <div class="head">형변환</div>
+          <strong>명시적</strong>(TO_*) 권장 — 암시적은 의도치 않은 결과 위험
+        </div>
+      </div>
+    </section>
+
+    <section class="exam-chapter" id="ch-2-1-4">
+      <h2 class="exam-h">
+        WHERE절
+        <a class="theory-link" href="./2-1-4_WHERE절.html">→ 이론 페이지</a>
+      </h2>
+      <h3 class="exam-section-h h-trap">OX 미니 퀴즈</h3>
+      <div class="ox-quiz reveal">
+        <div class="ox-q">
+          <div class="num">Q1</div>
+          <div class="q"><code>WHERE COMM = NULL</code>은 COMM이 NULL인 행을 반환한다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict x">X</span><code>= NULL</code>은 항상 거짓이라 <strong>0건</strong>. <code>IS NULL</code>을 사용해야 한다.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q2</div>
+          <div class="q"><code>BETWEEN 100 AND 200</code>은 100과 200을 포함한다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict o">O</span>BETWEEN은 <strong>양 끝 포함</strong>(100 ≤ x ≤ 200).</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q3</div>
+          <div class="q"><code>LIKE '_김%'</code>은 첫 글자가 '김'인 문자열을 찾는다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict x">X</span><code>_</code>은 임의 1글자이므로 <strong>두 번째 글자가 '김'</strong>인 문자열을 찾는다.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q4</div>
+          <div class="q"><code>IN (a, b, c)</code>은 OR의 단축형과 같다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict o">O</span><code>IN (a,b,c)</code> ≡ <code>= a OR = b OR = c</code>.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q5</div>
+          <div class="q">AND가 OR보다 우선순위가 높다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict o">O</span><code>A=1 OR B=2 AND C=3</code> = <code>A=1 OR (B=2 AND C=3)</code>.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q6</div>
+          <div class="q"><code>NOT IN</code> 목록에 NULL이 포함돼도 결과는 정상이다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict x">X</span><code>NOT IN (..., NULL)</code>은 항상 거짓 → <strong>결과가 비어버린다</strong>.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q7</div>
+          <div class="q">LIKE의 <code>_</code>는 1글자, <code>%</code>는 0개 이상의 임의 문자에 매칭된다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict o">O</span><code>_</code> = 정확히 1글자 / <code>%</code> = 0개 이상.</div>
+          </details>
+        </div>
+      </div>
+      <blockquote class="reveal">
+        <strong>단골 함정</strong> — <code>WHERE A NOT IN (1, 2, NULL)</code>은 항상 거짓이 되어 결과가 비어버린다.
+      </blockquote>
+
+      <h3 class="exam-section-h h-summary">30초 정리</h3>
+      <div class="summary-cards cols-3 reveal">
+        <div class="s-card">
+          <div class="head">BETWEEN</div>
+          A AND B = <strong>양 끝 포함</strong> (A ≤ x ≤ B)
+        </div>
+        <div class="s-card">
+          <div class="head">IN / NOT IN</div>
+          IN = OR 단축형 / <strong>NOT IN + NULL = 항상 거짓</strong>
+        </div>
+        <div class="s-card">
+          <div class="head">LIKE</div>
+          <code>%</code> 0개 이상 / <code>_</code> 정확히 1개. 자체 검색은 ESCAPE
+        </div>
+        <div class="s-card">
+          <div class="head">NULL 비교</div>
+          <strong>IS NULL / IS NOT NULL</strong>만 (<code>= NULL</code> 항상 거짓)
+        </div>
+        <div class="s-card">
+          <div class="head">우선순위</div>
+          산술 &gt; <code>||</code> &gt; 비교 &gt; NOT &gt; <strong>AND &gt; OR</strong>
+        </div>
+        <div class="s-card">
+          <div class="head">함정</div>
+          <code>A=1 OR B=2 AND C=3</code> = <code>A=1 OR (B=2 AND C=3)</code>
+        </div>
+      </div>
+    </section>
+
+    <section class="exam-chapter" id="ch-2-1-5">
+      <h2 class="exam-h">
+        GROUP BY/HAVING절
+        <a class="theory-link" href="./2-1-5_GROUPBY_HAVING절.html">→ 이론 페이지</a>
+      </h2>
+      <h3 class="exam-section-h h-trap">OX 미니 퀴즈</h3>
+      <div class="ox-quiz reveal">
+        <div class="ox-q">
+          <div class="num">Q1</div>
+          <div class="q">WHERE 절에서 집계 함수(SUM, AVG 등)를 사용할 수 있다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict x">X</span>WHERE에서는 집계 함수 사용 <strong>불가</strong>. <strong>HAVING</strong>에서 사용한다.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q2</div>
+          <div class="q">GROUP BY에 없는 일반 컬럼을 SELECT 절에 그대로 쓸 수 있다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict x">X</span><strong>집계 함수로 감싼 형태</strong>로만 가능. 그대로는 에러.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q3</div>
+          <div class="q">HAVING은 GROUP BY 없이도 사용할 수 있다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict o">O</span>전체를 <strong>1개 그룹</strong>으로 보고 사용 가능.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q4</div>
+          <div class="q">실행 순서는 FROM → WHERE → GROUP BY → HAVING → SELECT → ORDER BY 이다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict o">O</span>이 순서가 정답(WHERE는 행 단위, HAVING은 그룹 단위 필터).</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q5</div>
+          <div class="q"><code>COUNT(*)</code>와 <code>COUNT(컬럼)</code>의 결과는 항상 같다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict x">X</span><code>COUNT(*)</code>는 NULL 포함, <code>COUNT(컬럼)</code>은 <strong>NULL 제외</strong>.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q6</div>
+          <div class="q"><code>GROUP BY (A, B)</code> 결과 행 수는 A, B 컬럼 조합의 개수다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict o">O</span>GROUP BY 결과 행 수 = <strong>그룹화 컬럼 조합의 개수</strong>.</div>
+          </details>
+        </div>
+      </div>
+      <blockquote class="reveal">
+        <strong>단골 함정</strong> — SELECT에 그룹화되지 않은 컬럼이 끼어 있는 쿼리를 에러로 판별하라는 문제.
+      </blockquote>
+
+      <h3 class="exam-section-h h-summary">30초 정리</h3>
+      <div class="summary-cards cols-3 reveal">
+        <div class="s-card">
+          <div class="head">필터 단계</div>
+          WHERE = <strong>행 단위</strong> / HAVING = <strong>그룹 단위</strong>
+        </div>
+        <div class="s-card">
+          <div class="head">집계 함수</div>
+          WHERE에 = <strong>불가</strong> / HAVING에 = <strong>가능</strong>
+        </div>
+        <div class="s-card">
+          <div class="head">SELECT 규칙</div>
+          GROUP BY에 없는 일반 컬럼은 SELECT 절에 <strong>쓸 수 없음</strong>
+        </div>
+        <div class="s-card">
+          <div class="head">HAVING 단독</div>
+          GROUP BY 없이 가능 (전체를 <strong>1개 그룹</strong>으로 봄)
+        </div>
+        <div class="s-card">
+          <div class="head">결과 행 수</div>
+          GROUP BY 컬럼 <strong>조합의 개수</strong>
+        </div>
+        <div class="s-card">
+          <div class="head">실행 순서</div>
+          FROM → WHERE → <strong>GROUP BY → HAVING</strong> → SELECT → ORDER BY
+        </div>
+      </div>
+    </section>
+
+    <section class="exam-chapter" id="ch-2-1-6">
+      <h2 class="exam-h">
+        ORDER BY절
+        <a class="theory-link" href="./2-1-6_ORDERBY절.html">→ 이론 페이지</a>
+      </h2>
+      <h3 class="exam-section-h h-trap">OX 미니 퀴즈</h3>
+      <div class="ox-quiz reveal">
+        <div class="ox-q">
+          <div class="num">Q1</div>
+          <div class="q">ORDER BY의 정렬 방향 기본값은 DESC(내림차순)이다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict x">X</span>기본값은 <strong>ASC(오름차순)</strong>. DESC는 명시 필수.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q2</div>
+          <div class="q">ORDER BY 절에서 SELECT 별칭을 사용할 수 있다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict o">O</span>ORDER BY는 SELECT 이후 실행 → <strong>별칭 사용 가능</strong>.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q3</div>
+          <div class="q">ORDER BY 절에서 컬럼 번호(숫자)로 정렬 기준을 지정할 수 있다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict o">O</span>컬럼명 / 별칭 / <strong>컬럼 번호</strong> 모두 가능.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q4</div>
+          <div class="q">Oracle에서 <code>ORDER BY ASC</code> 시 NULL은 맨 처음에 나온다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict x">X</span>Oracle ASC = <strong>NULL 마지막</strong>(NULLS LAST).</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q5</div>
+          <div class="q">MS-SQL에서 <code>ORDER BY ASC</code> 시 NULL은 맨 처음에 나온다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict o">O</span>MS-SQL ASC = <strong>NULL 처음</strong>(NULLS FIRST).</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q6</div>
+          <div class="q"><code>ORDER BY DEPT, SAL DESC</code>는 두 컬럼 모두 DESC로 정렬된다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict x">X</span>DEPT는 ASC(생략값), <strong>SAL만 DESC</strong>. 정렬 방향은 컬럼별로 따로 적용.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q7</div>
+          <div class="q">UNION 등 집합 연산 후 ORDER BY는 맨 마지막에 한 번만 쓴다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict o">O</span>각 SELECT마다 ORDER BY 불가, <strong>최종 결과에 한 번만</strong>.</div>
+          </details>
+        </div>
+      </div>
+      <blockquote class="reveal">
+        <strong>단골 함정</strong> — 문자형 컬럼에 숫자값이 들어 있을 때 정렬 순서. 예) '1', '10', '2'를 정렬하면 사전순으로 '1', '10', '2'가 된다.
+      </blockquote>
+
+      <h3 class="exam-section-h h-summary">30초 정리</h3>
+      <div class="summary-cards cols-3 reveal">
+        <div class="s-card">
+          <div class="head">기본값</div>
+          <strong>ASC</strong> (오름차순). DESC 명시 필수
+        </div>
+        <div class="s-card">
+          <div class="head">정렬 기준</div>
+          컬럼명 / <strong>별칭</strong> / 컬럼 번호 모두 가능
+        </div>
+        <div class="s-card">
+          <div class="head">다중 정렬</div>
+          <code>ORDER BY DEPT, SAL DESC</code> = DEPT ASC + SAL DESC
+        </div>
+        <div class="s-card">
+          <div class="head">NULL 위치</div>
+          Oracle ASC = <strong>마지막</strong> / MS-SQL ASC = <strong>처음</strong>
+        </div>
+        <div class="s-card">
+          <div class="head">문자형 정렬</div>
+          <strong>사전순</strong> ('1', '10', '2'). 숫자 원하면 TO_NUMBER 후
+        </div>
+        <div class="s-card">
+          <div class="head">UNION 후</div>
+          ORDER BY는 <strong>맨 마지막에 한 번만</strong>
+        </div>
+      </div>
+    </section>
+
+    <section class="exam-chapter" id="ch-2-1-7">
+      <h2 class="exam-h">
+        조인(JOIN)
+        <a class="theory-link" href="./2-1-7_조인.html">→ 이론 페이지</a>
+      </h2>
+      <h3 class="exam-section-h h-trap">OX 미니 퀴즈</h3>
+      <div class="ox-quiz reveal">
+        <div class="ox-q">
+          <div class="num">Q1</div>
+          <div class="q">조인 조건이 빠지면 카티션 곱(Cartesian Product)이 발생한다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict o">O</span>조건 누락 시 행 수 폭발(<strong>A행 × B행</strong>).</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q2</div>
+          <div class="q">Oracle 외부조인 표기 <code>(+)</code>는 행이 살아남을 쪽에 붙인다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict x">X</span><code>(+)</code>는 <strong>NULL을 채울 쪽</strong>(없을 수 있는 쪽)에 붙인다.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q3</div>
+          <div class="q">N개 테이블 조인 시 조인 조건은 최소 N-1개 필요하다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict o">O</span>덜 주면 카티션 곱 발생.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q4</div>
+          <div class="q">BETWEEN, &gt;, &lt; 같은 조건은 비동등 조인의 예이다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict o">O</span>= 가 아닌 비교 연산자를 사용하면 <strong>Non-EQUI 조인</strong>.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q5</div>
+          <div class="q">SELF 조인은 같은 테이블을 두 번 사용하며 별칭이 필수다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict o">O</span>같은 테이블을 두 번 참조하므로 <strong>별칭 필수</strong>.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q6</div>
+          <div class="q">OUTER 조인은 매칭되지 않는 행을 NULL과 함께 결과에 포함한다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict o">O</span>INNER는 매칭만, <strong>OUTER는 비매칭도 NULL로 보존</strong>.</div>
+          </details>
+        </div>
+      </div>
+      <blockquote class="reveal">
+        <strong>단골 함정</strong> — Oracle의 <code>(+)</code> 위치는 NULL을 채울 쪽(없을 수 있는 쪽)에 붙인다.
+      </blockquote>
+
+      <h3 class="exam-section-h h-summary">30초 정리</h3>
+      <div class="summary-cards cols-3 reveal">
+        <div class="s-card">
+          <div class="head">5종류</div>
+          <strong>EQUI · Non-EQUI · SELF · OUTER · CROSS</strong>
+        </div>
+        <div class="s-card">
+          <div class="head">조건 누락</div>
+          <strong>카티션 곱</strong> (행 수 폭발: A행 × B행)
+        </div>
+        <div class="s-card">
+          <div class="head">N개 테이블</div>
+          조인 조건 <strong>최소 N-1 개</strong>
+        </div>
+        <div class="s-card">
+          <div class="head">SELF 조인</div>
+          <strong>별칭 필수</strong> (같은 테이블을 두 번 사용)
+        </div>
+        <div class="s-card">
+          <div class="head">Oracle (+)</div>
+          <strong>NULL 채울 쪽</strong>(없을 수 있는 쪽)에 붙임
+        </div>
+        <div class="s-card">
+          <div class="head">OUTER 추가 조건</div>
+          <strong>ON 절에</strong> (WHERE 두면 NULL 행 빠져 INNER 와 같아짐)
+        </div>
+      </div>
+    </section>
+
+    <section class="exam-chapter" id="ch-2-1-8">
+      <h2 class="exam-h">
+        표준 조인
+        <a class="theory-link" href="./2-1-8_표준조인.html">→ 이론 페이지</a>
+      </h2>
+            <h3 class="exam-section-h h-trap">OX 미니 퀴즈</h3>
+      <div class="ox-quiz reveal">
+        <div class="ox-q">
+          <div class="num">Q1</div>
+          <div class="q"><code>JOIN ... ON</code>에서 INNER 키워드는 생략할 수 있다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict o">O</span>INNER 생략 시 기본이 INNER JOIN.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q2</div>
+          <div class="q"><code>LEFT JOIN</code>에서 OUTER 키워드는 생략할 수 있다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict o">O</span><code>LEFT JOIN</code> = <code>LEFT OUTER JOIN</code>.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q3</div>
+          <div class="q">NATURAL JOIN은 PK 컬럼만 자동으로 매칭한다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict x">X</span><strong>이름이 같은 모든 컬럼</strong>을 자동 매칭.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q4</div>
+          <div class="q">NATURAL JOIN에서 같은 이름 컬럼에 테이블 별칭을 붙일 수 있다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict x">X</span>NATURAL JOIN의 공통 컬럼에는 <strong>별칭 사용 불가</strong>.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q5</div>
+          <div class="q">USING 절에서 명시한 컬럼에는 테이블 별칭을 붙일 수 없다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict o">O</span>USING 컬럼에 테이블 별칭 <strong>불가</strong>.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q6</div>
+          <div class="q">OUTER JOIN의 추가 조건은 ON 절보다 WHERE 절에 두는 게 안전하다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict x">X</span>WHERE에 두면 NULL 행이 빠져 <strong>INNER 효과</strong>. 반드시 <strong>ON</strong>에.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q7</div>
+          <div class="q">FULL OUTER JOIN은 양쪽에서 매칭 안 되는 행까지 모두 포함한다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict o">O</span>FULL OUTER = LEFT + RIGHT 합집합.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q8</div>
+          <div class="q">CROSS JOIN의 결과 행수는 A + B 이다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict x">X</span>CROSS JOIN = <strong>A × B</strong>(카티션 곱).</div>
+          </details>
+        </div>
+      </div>
+      <blockquote class="reveal">
+        <strong>단골 함정</strong> — LEFT JOIN인데 WHERE에 오른쪽 조건을 거는 케이스. 결과적으로 INNER JOIN과 같아진다.
+      </blockquote>
+      <h3 class="exam-section-h h-summary">30초 정리</h3>
+      <div class="summary-cards cols-3 reveal">
+        <div class="s-card"><div class="head">표준 문법</div><code>JOIN ... ON</code> = ANSI 표준 (어느 DBMS든 통함)</div>
+        <div class="s-card"><div class="head">키워드 생략</div><strong>INNER</strong> 생략 가능 / <strong>OUTER</strong> 생략 가능</div>
+        <div class="s-card"><div class="head">NATURAL</div>같은 이름 컬럼 <strong>자동 전부</strong> 매칭. 별칭 <strong>불가</strong></div>
+        <div class="s-card"><div class="head">USING</div><strong>지정 컬럼만</strong> 매칭. USING 컬럼에 테이블 별칭 <strong>불가</strong></div>
+        <div class="s-card"><div class="head">OUTER 조건</div>반드시 <strong>ON</strong>에 (WHERE 두면 INNER 효과)</div>
+        <div class="s-card"><div class="head">결과 행수</div>INNER ≤ LEFT/RIGHT ≤ FULL · CROSS = A × B</div>
+      </div>
+    </section>
+
+    <section class="exam-chapter" id="ch-2-2-1">
+      <h2 class="exam-h">
+        서브쿼리
+        <a class="theory-link" href="./2-2-1_서브쿼리.html">→ 이론 페이지</a>
+      </h2>
+      <h3 class="exam-section-h h-trap">OX 미니 퀴즈</h3>
+      <div class="ox-quiz reveal">
+        <div class="ox-q">
+          <div class="num">Q1</div>
+          <div class="q">다중행 서브쿼리에 <code>=</code> 연산자를 사용할 수 있다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict x">X</span>다중행에는 에러 → <code>IN</code>을 사용해야 한다.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q2</div>
+          <div class="q"><code>&gt; ANY(...)</code>는 <strong>최솟값보다</strong> 크면 통과한다 (헐거운 조건).</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict o">O</span><code>&gt; ANY</code> = 최솟값 기준, <code>&gt; ALL</code> = 최댓값 기준.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q3</div>
+          <div class="q"><code>&gt; ALL(...)</code>은 최솟값보다만 크면 통과한다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict x">X</span><code>&gt; ALL</code>은 <strong>최댓값보다 커야</strong> 통과한다 (엄격한 조건).</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q4</div>
+          <div class="q">스칼라 서브쿼리는 여러 행을 반환해도 정상 동작한다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict x">X</span>스칼라 서브쿼리는 <strong>1행 1값</strong>만 허용 — 여러 행이면 에러.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q5</div>
+          <div class="q">인라인 뷰는 <strong>FROM 절</strong>에 위치하며 별칭이 필수다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict o">O</span>FROM 절 서브쿼리이며 <strong>별칭 필수</strong>.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q6</div>
+          <div class="q">EXISTS는 서브쿼리 결과 값을 가져와 사용한다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict x">X</span>EXISTS는 결과 값이 아니라 <strong>존재 여부만</strong> 확인한다.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q7</div>
+          <div class="q">연관 서브쿼리는 메인쿼리 컬럼을 참조하며 <strong>행마다 반복 실행</strong>된다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict o">O</span>메인 컬럼 참조 + 각 행마다 반복 (성능 주의).</div>
+          </details>
+        </div>
+      </div>
+      <blockquote class="reveal">
+        <strong>단골 함정</strong> — <code>SAL &gt; ANY(...)</code>를 "모두보다 큰"으로 잘못 해석하는 보기. <strong>ANY=최소 기준, ALL=최대 기준</strong>이다. 두 SELECT 결과를 합치는 도구는 서브쿼리가 아니라 <a href="./2-2-2_집합연산자.html">집합 연산자</a>다(혼동 주의).
+      </blockquote>
+      <h3 class="exam-section-h h-summary">30초 정리</h3>
+      <div class="summary-cards cols-3 reveal">
+        <div class="s-card"><div class="head">행수 분류</div><strong>단일행</strong> (<code>=</code>,<code>&gt;</code>) / <strong>다중행</strong> (IN, ANY, ALL, EXISTS) / <strong>다중컬럼</strong></div>
+        <div class="s-card"><div class="head">위치 분류</div><strong>스칼라</strong> (SELECT) / <strong>인라인뷰</strong> (FROM) / <strong>중첩</strong> (WHERE)</div>
+        <div class="s-card"><div class="head">ANY vs ALL</div><code>&gt; ANY</code> = <strong>최솟값보다</strong> / <code>&gt; ALL</code> = <strong>최댓값보다</strong></div>
+        <div class="s-card"><div class="head">EXISTS</div>존재 여부만 확인 (1건이라도 있으면 TRUE)</div>
+        <div class="s-card"><div class="head">연관 서브쿼리</div>메인 컬럼 참조 · <strong>각 행마다 반복</strong> 실행 (성능 주의)</div>
+        <div class="s-card"><div class="head">인라인뷰</div>FROM 절 서브쿼리 · <strong>별칭 필수</strong></div>
+      </div>
+    </section>
+
+    <section class="exam-chapter" id="ch-2-2-2">
+      <h2 class="exam-h">
+        집합 연산자
+        <a class="theory-link" href="./2-2-2_집합연산자.html">→ 이론 페이지</a>
+      </h2>
+      <h3 class="exam-section-h h-trap">OX 미니 퀴즈</h3>
+      <div class="ox-quiz reveal">
+        <div class="ox-q">
+          <div class="num">Q1</div>
+          <div class="q">집합 연산자로 합치는 두 SELECT의 컬럼 개수가 달라도 자동으로 맞춰진다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict x">X</span>컬럼 개수가 다르면 <strong>에러</strong>다.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q2</div>
+          <div class="q">UNION은 중복을 제거하고, UNION ALL은 그대로 둔다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict o">O</span>UNION = 중복 제거(정렬 발생, 느림) / UNION ALL = 중복 유지(빠름).</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q3</div>
+          <div class="q">집합 연산 결과의 컬럼명은 마지막 SELECT를 기준으로 정해진다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict x">X</span>결과 컬럼명은 <strong>첫 SELECT</strong> 기준이다.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q4</div>
+          <div class="q">ORDER BY는 각 SELECT마다 따로 작성한다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict x">X</span>ORDER BY는 <strong>마지막에 한 번</strong>만 작성한다.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q5</div>
+          <div class="q">UNION/INTERSECT/MINUS는 중복 제거를 위해 <strong>정렬이 발생</strong>한다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict o">O</span>중복 제거 과정에서 정렬이 일어난다 (UNION ALL은 정렬 없음).</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q6</div>
+          <div class="q">MINUS는 ANSI 표준 집합 연산자다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict x">X</span>MINUS는 <strong>Oracle 전용</strong>. 표준은 <code>EXCEPT</code>다.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q7</div>
+          <div class="q">집합 연산자에서는 <code>NULL = NULL</code>로 간주되어 중복 제거 대상이 된다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict o">O</span>일반 비교와 달리 NULL끼리 같다고 보고 중복으로 취급한다.</div>
+          </details>
+        </div>
+      </div>
+      <blockquote class="reveal">
+        <strong>단골 함정</strong> — 컬럼 데이터 타입이 다른데 합치려는 케이스는 에러가 난다.
+      </blockquote>
+      <h3 class="exam-section-h h-summary">30초 정리</h3>
+      <div class="summary-cards cols-3 reveal">
+        <div class="s-card"><div class="head">UNION 차이</div>UNION = <strong>중복 제거</strong>(정렬, 느림) / UNION ALL = <strong>중복 유지</strong>(빠름)</div>
+        <div class="s-card"><div class="head">INTERSECT/MINUS</div>교집합 / A − B (Oracle MINUS = 표준 EXCEPT)</div>
+        <div class="s-card"><div class="head">사용 조건</div><strong>컬럼 개수 동일</strong> + <strong>타입 호환</strong> + 컬럼명은 첫 SELECT</div>
+        <div class="s-card"><div class="head">ORDER BY</div>맨 마지막에 한 번만</div>
+        <div class="s-card"><div class="head">NULL 처리</div><code>NULL = NULL</code>로 간주 (중복 제거 대상)</div>
+        <div class="s-card"><div class="head">성능 팁</div>중복 없다고 확신 → <strong>UNION ALL</strong>로 성능 ↑</div>
+      </div>
+    </section>
+
+    <section class="exam-chapter" id="ch-2-2-3">
+      <h2 class="exam-h">
+        그룹 함수
+        <a class="theory-link" href="./2-2-3_그룹함수.html">→ 이론 페이지</a>
+      </h2>
+      <h3 class="exam-section-h h-trap">OX 미니 퀴즈</h3>
+      <div class="ox-quiz reveal">
+        <div class="ox-q">
+          <div class="num">Q1</div>
+          <div class="q"><code>ROLLUP(A, B)</code>는 <strong>(A, B) → (A) → ()</strong> 3단계의 소계를 만든다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict o">O</span>ROLLUP은 <strong>N+1 단계</strong>의 계층적 소계를 만든다.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q2</div>
+          <div class="q"><code>CUBE(A, B)</code>는 (A, B), (A), () 3단계만 만든다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict x">X</span>CUBE는 <strong>(A, B), (A), (B), ()</strong> — 모든 조합 (2^N 단계).</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q3</div>
+          <div class="q">ROLLUP/CUBE 결과의 NULL 행은 모두 원본 데이터의 NULL을 의미한다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict x">X</span>NULL 행은 <strong>소계 행</strong>이거나 <strong>원래 NULL</strong>인 경우 둘 다 가능하다.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q4</div>
+          <div class="q"><code>GROUPING</code> 함수의 결과가 <strong>1이면 소계 행</strong>이다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict o">O</span>1 = 소계 / 0 = 일반 행. 데이터 NULL과 소계 NULL을 구분할 때 사용.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q5</div>
+          <div class="q">CUBE(컬럼수=N)의 결과 조합 수는 N+1개다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict x">X</span>CUBE 조합 수는 <strong>2^N</strong>이다 (N+1은 ROLLUP).</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q6</div>
+          <div class="q">소계 NULL과 데이터 NULL을 구분하려면 <strong>GROUPING 함수</strong>를 사용한다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict o">O</span>GROUPING(컬럼) = 1이면 소계, 0이면 일반.</div>
+          </details>
+        </div>
+      </div>
+      <blockquote class="reveal">
+        <strong>단골 함정</strong> — ROLLUP(A, B, C)의 단계 수는 <strong>N+1 = 4단계</strong>, CUBE는 <strong>2^N = 8단계</strong>. 행을 합치는 그룹 함수와 달리 행을 그대로 두고 옆에 통계를 붙이는 도구는 <a href="./2-2-4_윈도우함수.html">윈도우 함수</a>, 행을 컬럼으로 펼치는 도구는 <a href="./2-2-7_PIVOT_UNPIVOT절.html">PIVOT</a>이다.
+      </blockquote>
+      <h3 class="exam-section-h h-summary">30초 정리</h3>
+      <div class="summary-cards cols-3 reveal">
+        <div class="s-card"><div class="head">ROLLUP</div>(A,B) → (A) → () — <strong>N+1 단계</strong> (계층적 소계)</div>
+        <div class="s-card"><div class="head">CUBE</div>(A,B) → (A) → (B) → () — <strong>2^N 단계</strong> (모든 조합)</div>
+        <div class="s-card"><div class="head">GROUPING SETS</div>원하는 조합만 골라 (가장 유연)</div>
+        <div class="s-card"><div class="head">GROUPING 함수</div><strong>1이면 소계</strong> / 0이면 일반 행</div>
+        <div class="s-card"><div class="head">NULL 구분</div>데이터 NULL인지 소계 NULL인지 → <strong>GROUPING 함수</strong></div>
+        <div class="s-card"><div class="head">함정</div><code>ROLLUP(A,B)</code> ≠ <code>ROLLUP(B,A)</code> (단계 다름)</div>
+      </div>
+    </section>
+
+    <section class="exam-chapter" id="ch-2-2-4">
+      <h2 class="exam-h">
+        윈도우 함수
+        <a class="theory-link" href="./2-2-4_윈도우함수.html">→ 이론 페이지</a>
+      </h2>
+      <h3 class="exam-section-h h-trap">OX 미니 퀴즈</h3>
+      <div class="ox-quiz reveal">
+        <div class="ox-q">
+          <div class="num">Q1</div>
+          <div class="q">동점이 있을 때 <strong>RANK</strong>는 다음 순위를 건너뛰고, <strong>DENSE_RANK</strong>는 연속, <strong>ROW_NUMBER</strong>는 모두 다른 순위를 매긴다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict o">O</span>RANK(1,1,3) / DENSE_RANK(1,1,2) / ROW_NUMBER(모두 다름).</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q2</div>
+          <div class="q"><code>OVER ()</code>처럼 괄호를 비우면 에러가 난다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict x">X</span>빈 괄호는 <strong>전체를 한 윈도우</strong>로 간주한다 (정상 동작).</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q3</div>
+          <div class="q">PARTITION BY를 생략하면 <strong>전체 행을 하나의 그룹</strong>으로 본다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict o">O</span>생략 = 전체가 단일 윈도우.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q4</div>
+          <div class="q">윈도우 함수 결과를 WHERE 절에 직접 사용할 수 있다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict x">X</span>WHERE에 직접 사용 불가 → <strong>인라인뷰/서브쿼리</strong>로 감싸야 한다.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q5</div>
+          <div class="q">LAG/LEAD의 기본 오프셋은 <strong>1</strong>이다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict o">O</span>인자를 생략하면 1행 앞/뒤를 본다.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q6</div>
+          <div class="q">윈도우 함수는 GROUP BY처럼 결과 행 수를 줄인다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict x">X</span>윈도우 함수 결과 행 수는 <strong>원본과 동일</strong> (행을 합치지 않음).</div>
+          </details>
+        </div>
+      </div>
+      <blockquote class="reveal">
+        <strong>단골 함정</strong> — <code>RANK() OVER(...)</code> 결과를 WHERE에 직접 쓸 수 없다. 서브쿼리/인라인뷰로 감싸야 한다(부서별 <a href="./2-2-5_TopN쿼리.html">Top N 쿼리</a>도 같은 패턴).
+      </blockquote>
+      <h3 class="exam-section-h h-summary">30초 정리</h3>
+      <div class="summary-cards cols-3 reveal">
+        <div class="s-card"><div class="head">결과 행수</div>원본과 <strong>동일</strong> (GROUP BY처럼 합치지 않음)</div>
+        <div class="s-card"><div class="head">순위</div><strong>RANK</strong>(1,1,3) / <strong>DENSE_RANK</strong>(1,1,2) / <strong>ROW_NUMBER</strong>(모두 다름)</div>
+        <div class="s-card"><div class="head">문법</div><code>함수() OVER (PARTITION BY ... ORDER BY ... ROWS BETWEEN ...)</code></div>
+        <div class="s-card"><div class="head">PARTITION BY</div>생략 = <strong>전체를 한 그룹</strong></div>
+        <div class="s-card"><div class="head">행 순서</div>LAG(앞) · LEAD(뒤) · FIRST/LAST_VALUE · NTILE(N)</div>
+        <div class="s-card"><div class="head">WHERE 직접 사용</div>불가 → <strong>서브쿼리·인라인뷰</strong>로 감쌈</div>
+      </div>
+    </section>
+
+    <section class="exam-chapter" id="ch-2-2-5">
+      <h2 class="exam-h">
+        Top N 쿼리
+        <a class="theory-link" href="./2-2-5_TopN쿼리.html">→ 이론 페이지</a>
+      </h2>
+      <h3 class="exam-section-h h-trap">OX 미니 퀴즈</h3>
+      <div class="ox-quiz reveal">
+        <div class="ox-q">
+          <div class="num">Q1</div>
+          <div class="q"><code>WHERE ROWNUM = 5</code>는 5번째 행을 반환한다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict x">X</span>결과 없음. ROWNUM은 <strong><code>=1</code>만 매칭</strong>되고 <code>&gt;n</code>은 항상 거짓이다.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q2</div>
+          <div class="q">ROWNUM과 ORDER BY를 함께 쓰면 정렬 후 N건이 잘린다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict x">X</span>ROWNUM이 정렬 <strong>전</strong>에 매겨지므로, <strong>인라인 뷰로 정렬 먼저</strong> 수행하고 ROWNUM은 나중에 적용해야 한다.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q3</div>
+          <div class="q">동률을 포함해 Top N을 뽑으려면 <code>WITH TIES</code> 또는 <code>RANK()</code>를 쓴다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict o">O</span>정확히 N개만 = <strong>ROW_NUMBER</strong>, 동률 포함 = <strong>WITH TIES · RANK</strong>.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q4</div>
+          <div class="q">부서별 Top N은 <code>ROW_NUMBER() OVER (PARTITION BY ...)</code> 윈도우 함수로 처리한다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict o">O</span><strong>ROW_NUMBER + PARTITION BY</strong> 후 인라인뷰에서 N 이하 필터.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q5</div>
+          <div class="q">페이징 표준 문법은 <code>OFFSET ... FETCH NEXT ...</code>이다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict o">O</span><code>OFFSET n ROWS FETCH NEXT m ROWS ONLY</code>가 표준.</div>
+          </details>
+        </div>
+      </div>
+      <blockquote class="reveal">
+        <strong>단골 함정</strong> — ROWNUM은 <code>=1</code>만 의미가 있고 <code>&gt;n</code>은 항상 거짓이다.
+      </blockquote>
+      <h3 class="exam-section-h h-summary">30초 정리</h3>
+      <div class="summary-cards cols-3 reveal">
+        <div class="s-card">
+          <div class="head">ROWNUM 함정</div>
+          <strong><code>=1</code>만 가능</strong>, <code>&gt;n</code> 항상 거짓, 정렬 전에 매겨짐 → 인라인뷰로 정렬 먼저
+        </div>
+        <div class="s-card">
+          <div class="head">표준</div>
+          <strong>FETCH FIRST n ROWS ONLY</strong> (Oracle 12c+) / <code>WITH TIES</code> 면 동률 포함
+        </div>
+        <div class="s-card">
+          <div class="head">MS-SQL</div>
+          <code>SELECT TOP n</code> / <code>TOP n WITH TIES</code>
+        </div>
+        <div class="s-card">
+          <div class="head">부서별 Top N</div>
+          <strong>ROW_NUMBER() OVER (PARTITION BY ... ORDER BY ...)</strong> + 인라인뷰
+        </div>
+        <div class="s-card">
+          <div class="head">페이징 표준</div>
+          <strong><code>OFFSET n ROWS FETCH NEXT m ROWS ONLY</code></strong>
+        </div>
+        <div class="s-card">
+          <div class="head">동률 정책</div>
+          정확히 N개 = <strong>ROW_NUMBER</strong> / 동률 포함 = <strong>WITH TIES · RANK</strong>
+        </div>
+      </div>
+    </section>
+
+    <section class="exam-chapter" id="ch-2-2-6">
+      <h2 class="exam-h">
+        계층형 질의와 셀프 조인
+        <a class="theory-link" href="./2-2-6_계층형질의와셀프조인.html">→ 이론 페이지</a>
+      </h2>
+            <h3 class="exam-section-h h-trap">OX 미니 퀴즈</h3>
+      <div class="ox-quiz reveal">
+        <div class="ox-q">
+          <div class="num">Q1</div>
+          <div class="q"><code>START WITH</code>는 루트(최상위) 조건을 지정한다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict o">O</span>보통 <code>MGR_ID IS NULL</code>처럼 <strong>루트 조건</strong>을 명시한다.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q2</div>
+          <div class="q"><code>CONNECT BY PRIOR EMP_ID = MGR_ID</code>는 역방향(자식→부모) 전개이다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict x">X</span><strong>순방향(부모→자식)</strong>이다. 역방향은 <code>PRIOR MGR_ID = EMP_ID</code>.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q3</div>
+          <div class="q"><code>LEVEL</code>은 루트에서 0부터 시작한다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict x">X</span>루트가 <strong>1</strong>부터 시작한다.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q4</div>
+          <div class="q">계층형 결과의 형제 정렬은 일반 <code>ORDER BY</code>로 처리한다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict x">X</span>일반 ORDER BY는 트리가 깨진다. <strong><code>ORDER SIBLINGS BY</code></strong>를 써야 한다.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q5</div>
+          <div class="q"><code>SYS_CONNECT_BY_PATH</code>는 루트에서 현재 노드까지의 경로 문자열을 반환한다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict o">O</span>루트→현재까지의 <strong>경로 문자열</strong>을 만들어 준다.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q6</div>
+          <div class="q">셀프 조인 시 별칭(alias)은 선택 사항이다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict x">X</span>같은 테이블을 두 번 참조하므로 <strong>별칭은 필수</strong>다.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q7</div>
+          <div class="q">Oracle의 <code>CONNECT BY</code> 구문은 ANSI 표준이다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict x">X</span><strong>Oracle 전용</strong>이다. 표준은 <code>WITH RECURSIVE ... UNION ALL</code> 재귀 CTE.</div>
+          </details>
+        </div>
+      </div>
+      <blockquote class="reveal">
+        <strong>단골 함정</strong> — <code>PRIOR</code>의 위치를 바꾸면 순방향과 역방향이 뒤바뀐다.
+      </blockquote>
+      <h3 class="exam-section-h h-summary">30초 정리</h3>
+      <div class="summary-cards cols-3 reveal">
+        <div class="s-card">
+          <div class="head">START WITH</div>
+          <strong>루트 조건</strong> (보통 <code>MGR_ID IS NULL</code>)
+        </div>
+        <div class="s-card">
+          <div class="head">순방향</div>
+          <code>PRIOR EMP_ID = MGR_ID</code> (부모 → 자식)
+        </div>
+        <div class="s-card">
+          <div class="head">역방향</div>
+          <code>PRIOR MGR_ID = EMP_ID</code> (자식 → 부모)
+        </div>
+        <div class="s-card">
+          <div class="head">LEVEL</div>
+          1부터 (루트가 1) / <code>SYS_CONNECT_BY_PATH</code> = 경로
+        </div>
+        <div class="s-card">
+          <div class="head">형제 정렬</div>
+          <strong>ORDER SIBLINGS BY</strong> (일반 ORDER BY 는 트리 깨짐)
+        </div>
+        <div class="s-card">
+          <div class="head">표준 재귀</div>
+          <code>WITH RECURSIVE ... UNION ALL</code> (CTE)
+        </div>
+        <div class="s-card">
+          <div class="head">SELF JOIN</div>
+          같은 테이블 두 번, <strong>별칭 필수</strong> (1단계 관계만)
+        </div>
+      </div>
+    </section>
+
+    <section class="exam-chapter" id="ch-2-2-7">
+      <h2 class="exam-h">
+        PIVOT / UNPIVOT 절
+        <a class="theory-link" href="./2-2-7_PIVOT_UNPIVOT절.html">→ 이론 페이지</a>
+      </h2>
+            <h3 class="exam-section-h h-trap">OX 미니 퀴즈</h3>
+      <div class="ox-quiz reveal">
+        <div class="ox-q">
+          <div class="num">Q1</div>
+          <div class="q">PIVOT은 행을 컬럼으로 변환한다(세로 → 가로).</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict o">O</span><strong>행 → 컬럼</strong>으로 변환한다.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q2</div>
+          <div class="q">UNPIVOT은 행을 컬럼으로 변환한다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict x">X</span><strong>컬럼 → 행</strong>(가로 → 세로)으로 변환한다.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q3</div>
+          <div class="q">PIVOT의 <code>IN</code> 절에는 변환할 값들을 나열한다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict o">O</span>새 <strong>컬럼이 될 값들</strong>을 <code>IN</code>으로 나열한다.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q4</div>
+          <div class="q">PIVOT 결과에서 매칭이 없는 칸은 0으로 채워진다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict x">X</span>매칭이 없는 칸은 <strong>NULL</strong>이다.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q5</div>
+          <div class="q">UNPIVOT은 기본적으로 NULL 행을 제외하며, <code>INCLUDE NULLS</code>로 포함시킬 수 있다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict o">O</span>기본 <strong>제외</strong>, <code>INCLUDE NULLS</code>로 포함 가능.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q6</div>
+          <div class="q">PIVOT 절 없이 <code>CASE WHEN + GROUP BY</code>로도 같은 결과를 만들 수 있다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict o">O</span>가능하다. <strong>CASE WHEN + GROUP BY</strong> 조합은 시험 단골.</div>
+          </details>
+        </div>
+      </div>
+      <blockquote class="reveal">
+        <strong>단골 함정</strong> — PIVOT은 <strong>SUM/COUNT 같은 집계함수 사용이 필수</strong>다. 단순 변환만 하려고 해도 집계함수가 들어가야 한다. 참고로 UNPIVOT 결과를 다른 SELECT 결과와 합치려면 <a href="./2-2-2_집합연산자.html">집합 연산자</a>(UNION ALL 등)를 함께 쓴다.
+      </blockquote>
+      <h3 class="exam-section-h h-summary">30초 정리</h3>
+      <div class="summary-cards cols-3 reveal">
+        <div class="s-card">
+          <div class="head">PIVOT</div>
+          <strong>세로 → 가로</strong> (행을 컬럼으로)
+        </div>
+        <div class="s-card">
+          <div class="head">UNPIVOT</div>
+          <strong>가로 → 세로</strong> (컬럼을 행으로)
+        </div>
+        <div class="s-card">
+          <div class="head">집계 함수</div>
+          PIVOT은 <strong>SUM/COUNT/MAX 등 필수</strong> — 단순 변환에도 형식상 필요
+        </div>
+        <div class="s-card">
+          <div class="head">매칭 없는 칸</div>
+          → <strong>NULL</strong>
+        </div>
+        <div class="s-card">
+          <div class="head">UNPIVOT NULL</div>
+          기본 <strong>제외</strong>, <code>INCLUDE NULLS</code>로 포함
+        </div>
+        <div class="s-card">
+          <div class="head">CASE WHEN 흉내</div>
+          <strong>CASE WHEN + GROUP BY</strong> — 시험 단골
+        </div>
+      </div>
+    </section>
+
+    <section class="exam-chapter" id="ch-2-2-8">
+      <h2 class="exam-h">
+        정규 표현식
+        <a class="theory-link" href="./2-2-8_정규표현식.html">→ 이론 페이지</a>
+      </h2>
+      <h3 class="exam-section-h h-trap">OX 미니 퀴즈</h3>
+      <div class="ox-quiz reveal">
+        <div class="ox-q">
+          <div class="num">Q1</div>
+          <div class="q"><code>^</code>은 <code>[]</code> 밖에서 문자열의 시작을, 안에서는 부정을 의미한다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict o">O</span><code>[]</code> <strong>밖</strong>이면 시작, <code>[^abc]</code>처럼 <strong>안</strong>이면 부정.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q2</div>
+          <div class="q"><code>$</code>는 문자열의 끝을 의미한다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict o">O</span><strong>문자열의 끝</strong>을 의미한다.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q3</div>
+          <div class="q"><code>*</code>은 1개 이상, <code>+</code>은 0개 이상의 반복을 의미한다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict x">X</span>반대다. <code>*</code>은 <strong>0개 이상</strong>, <code>+</code>은 <strong>1개 이상</strong>.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q4</div>
+          <div class="q"><code>.</code>은 임의의 한 글자를 뜻하며 LIKE의 <code>_</code>와 같은 역할이다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict o">O</span><strong>임의의 한 글자</strong>. LIKE의 <code>_</code>에 대응.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q5</div>
+          <div class="q"><code>\d</code>는 숫자 한 글자(<code>[0-9]</code>)를 의미한다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict o">O</span><strong>숫자 [0-9]</strong>를 의미한다.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q6</div>
+          <div class="q"><code>[가-힣]</code>은 한글 한 글자를 의미한다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict o">O</span><strong>한글 1자</strong>를 매칭한다.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q7</div>
+          <div class="q">LIKE는 다양한 메타문자를 지원하지만 REGEXP_LIKE는 <code>%</code>·<code>_</code>만 지원한다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict x">X</span>반대다. <strong>LIKE는 <code>%</code>·<code>_</code>만</strong>, <strong>REGEXP는 다양한 메타문자</strong>를 지원한다.</div>
+          </details>
+        </div>
+      </div>
+      <blockquote class="reveal">
+        <strong>단골 함정</strong> — <code>^</code>이 <code>[]</code> 안과 밖에서 의미가 다르다. 밖에서 <code>^</code>은 시작, <code>[^abc]</code> 안에서는 부정.
+      </blockquote>
+
+      <h3 class="exam-section-h h-summary">30초 정리</h3>
+      <div class="summary-cards cols-3 reveal">
+        <div class="s-card">
+          <div class="head">5개 함수</div>
+          <strong>LIKE</strong>(조건) / <strong>REPLACE</strong>(교체) / <strong>SUBSTR</strong>(추출) / <strong>INSTR</strong>(위치) / <strong>COUNT</strong>(횟수)
+        </div>
+        <div class="s-card">
+          <div class="head">자주 쓰는 메타</div>
+          <code>.</code>(1자), <code>*</code>(0+), <code>+</code>(1+), <code>?</code>(0/1), <code>[abc]</code>, <code>[^abc]</code>, <code>^</code>(시작), <code>$</code>(끝)
+        </div>
+        <div class="s-card">
+          <div class="head">문자류</div>
+          <code>\d</code> 숫자 / <code>\w</code> 영숫자_ / <code>\s</code> 공백 / <code>[가-힣]</code> 한글 1자
+        </div>
+        <div class="s-card">
+          <div class="head"><code>^</code> 함정</div>
+          <code>[]</code> <strong>밖</strong>이면 시작 / <code>[]</code> <strong>안</strong>이면 부정
+        </div>
+        <div class="s-card">
+          <div class="head">옵션 4번째 인자</div>
+          <code>i</code> 대소문자 무시 / <code>m</code> 멀티라인
+        </div>
+        <div class="s-card">
+          <div class="head">LIKE와 차이</div>
+          표현력 ↑, <strong>성능 약간 ↓</strong>
+        </div>
+      </div>
+    </section>
+
+    <section class="exam-chapter" id="ch-2-3-1">
+      <h2 class="exam-h">
+        DML
+        <a class="theory-link" href="./2-3-1_DML.html">→ 이론 페이지</a>
+      </h2>
+      <h3 class="exam-section-h h-trap">OX 미니 퀴즈</h3>
+      <div class="ox-quiz reveal">
+        <div class="ox-q">
+          <div class="num">Q1</div>
+          <div class="q">TRUNCATE는 DML이다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict x">X</span><strong>DDL</strong>이며 롤백 불가하다.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q2</div>
+          <div class="q">DELETE 후 ROLLBACK이 가능하다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict o">O</span>DELETE는 DML이므로 ROLLBACK으로 취소 가능하다.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q3</div>
+          <div class="q"><code>INSERT INTO ... VALUES</code>로 한 번에 여러 행을 입력할 수 있다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict x">X</span>일반 INSERT는 1행만. 다중행은 <code>INSERT ALL</code> 또는 <code>INSERT INTO ... SELECT</code>를 사용한다.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q4</div>
+          <div class="q"><code>UPDATE ... WHERE</code>에서 WHERE 절을 누락하면 에러가 발생한다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict x">X</span>에러 없이 <strong>모든 행이 수정</strong>된다 (위험).</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q5</div>
+          <div class="q">MERGE의 두 가지 절은 <code>WHEN MATCHED</code>와 <code>WHEN NOT MATCHED</code>이다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict o">O</span>MATCHED → UPDATE, NOT MATCHED → INSERT (UPSERT).</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q6</div>
+          <div class="q">Oracle은 DML 후 자동 커밋된다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict x">X</span>Oracle은 DML 후 <strong>명시적 COMMIT 필요</strong> (DDL은 자동 COMMIT).</div>
+          </details>
+        </div>
+      </div>
+
+      <h3 class="exam-section-h h-summary">30초 정리</h3>
+      <div class="summary-cards cols-3 reveal">
+        <div class="s-card">
+          <div class="head">DML 5종</div>
+          <strong>INSERT / UPDATE / DELETE / MERGE / SELECT</strong>
+        </div>
+        <div class="s-card">
+          <div class="head">삭제 3총사</div>
+          DELETE = <strong>DML</strong>(롤백 O) / TRUNCATE = <strong>DDL</strong>(롤백 X, 자동 COMMIT) / DROP = 테이블 자체 삭제
+        </div>
+        <div class="s-card">
+          <div class="head">UPDATE 함정</div>
+          <code>WHERE</code> 누락 = <strong>모든 행 수정</strong> (위험)
+        </div>
+        <div class="s-card">
+          <div class="head">MERGE</div>
+          <code>WHEN MATCHED THEN UPDATE</code> + <code>WHEN NOT MATCHED THEN INSERT</code> (UPSERT)
+        </div>
+        <div class="s-card">
+          <div class="head">INSERT 다중행</div>
+          <strong><code>INSERT ALL</code></strong> 또는 <strong><code>INSERT INTO ... SELECT</code></strong>
+        </div>
+        <div class="s-card">
+          <div class="head">트랜잭션</div>
+          Oracle은 DML 후 <strong>명시적 COMMIT 필요</strong> (DDL은 자동)
+        </div>
+      </div>
+    </section>
+
+    <section class="exam-chapter" id="ch-2-3-2">
+      <h2 class="exam-h">
+        TCL
+        <a class="theory-link" href="./2-3-2_TCL.html">→ 이론 페이지</a>
+      </h2>
+      <h3 class="exam-section-h h-trap">OX 미니 퀴즈</h3>
+      <div class="ox-quiz reveal">
+        <div class="ox-q">
+          <div class="num">Q1</div>
+          <div class="q">TCL 명령어는 <code>COMMIT</code>, <code>ROLLBACK</code>, <code>SAVEPOINT</code>이다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict o">O</span>이 3가지가 TCL의 전부.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q2</div>
+          <div class="q">DDL 실행 후 ROLLBACK으로 취소가 가능하다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict x">X</span>불가 — Oracle DDL은 <strong>자동 COMMIT</strong>이다.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q3</div>
+          <div class="q">ROLLBACK은 마지막 COMMIT 이후의 모든 DML을 취소한다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict o">O</span>마지막 COMMIT 시점까지 되돌린다.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q4</div>
+          <div class="q">SAVEPOINT는 부분 ROLLBACK이 가능한 지점을 의미한다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict o">O</span><code>ROLLBACK TO sp</code>로 부분 취소 가능.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q5</div>
+          <div class="q"><code>ROLLBACK TO SP1</code> 실행 후 SP1 이전 작업도 함께 취소된다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict x">X</span>SP1 이전 작업은 <strong>유지</strong>되고 SP1 이후만 취소된다.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q6</div>
+          <div class="q">전체 ROLLBACK 후에도 SAVEPOINT는 그대로 유지된다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict x">X</span>전체 ROLLBACK 시 SAVEPOINT는 <strong>모두 사라진다</strong>.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q7</div>
+          <div class="q">비정상 종료 시 자동 ROLLBACK 처리된다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict o">O</span>정상 종료 = 자동 COMMIT, 비정상 = 자동 ROLLBACK.</div>
+          </details>
+        </div>
+      </div>
+
+      <h3 class="exam-section-h h-summary">30초 정리</h3>
+      <div class="summary-cards cols-3 reveal">
+        <div class="s-card">
+          <div class="head">TCL 3종</div>
+          <strong>COMMIT / ROLLBACK / SAVEPOINT</strong>
+        </div>
+        <div class="s-card">
+          <div class="head">COMMIT</div>
+          영구 반영 + 락 해제 + 다른 사용자 조회 가능
+        </div>
+        <div class="s-card">
+          <div class="head">ROLLBACK</div>
+          <strong>마지막 COMMIT 이후</strong> 모든 DML 취소 (SAVEPOINT 함께 사라짐)
+        </div>
+        <div class="s-card">
+          <div class="head">ROLLBACK TO sp</div>
+          <strong>부분 취소</strong> (sp 이전 작업 유지)
+        </div>
+        <div class="s-card">
+          <div class="head">DDL 실행</div>
+          <strong>자동 COMMIT</strong> (롤백 불가)
+        </div>
+        <div class="s-card">
+          <div class="head">종료 시</div>
+          비정상 = <strong>자동 ROLLBACK</strong> / 정상 = 자동 COMMIT
+        </div>
+        <div class="s-card">
+          <div class="head">Oracle 기본 격리</div>
+          <strong>READ COMMITTED</strong>
+        </div>
+      </div>
+    </section>
+
+    <section class="exam-chapter" id="ch-2-3-3">
+      <h2 class="exam-h">
+        DDL
+        <a class="theory-link" href="./2-3-3_DDL.html">→ 이론 페이지</a>
+      </h2>
+      <h3 class="exam-section-h h-trap">OX 미니 퀴즈</h3>
+      <div class="ox-quiz reveal">
+        <div class="ox-q">
+          <div class="num">Q1</div>
+          <div class="q">TRUNCATE는 DML로 분류된다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict x">X</span><strong>DDL</strong>이다 (DML 아님).</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q2</div>
+          <div class="q">DDL 실행 후 ROLLBACK이 가능하다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict x">X</span>불가 — DDL은 자동 COMMIT.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q3</div>
+          <div class="q">PRIMARY KEY는 NULL을 허용한다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict x">X</span>불허 (UNIQUE + NOT NULL).</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q4</div>
+          <div class="q">UNIQUE 제약은 NULL을 허용한다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict o">O</span>중복만 막으며 NULL은 허용된다.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q5</div>
+          <div class="q">한 테이블에 PK는 여러 개 지정할 수 있다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict x">X</span>한 테이블당 PK는 <strong>1개</strong>만 가능.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q6</div>
+          <div class="q">FK가 참조하는 컬럼은 PK 또는 UNIQUE여야 한다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict o">O</span>참조 대상은 PK 또는 UNIQUE 제약을 가진 컬럼이어야 한다.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q7</div>
+          <div class="q"><code>CHECK (SAL &gt; 0)</code>은 올바른 CHECK 제약 예시이다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict o">O</span>조건식을 만족하는 값만 허용하는 CHECK 제약.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q8</div>
+          <div class="q"><code>ON DELETE CASCADE</code>는 부모 삭제 시 자식도 함께 삭제된다는 뜻이다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict o">O</span>부모 삭제 → 자식 자동 삭제.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q9</div>
+          <div class="q"><code>ALTER TABLE ... DROP COLUMN</code> 실행 후 ROLLBACK이 가능하다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict x">X</span>불가 (DDL이므로 자동 COMMIT).</div>
+          </details>
+        </div>
+      </div>
+
+      <h3 class="exam-section-h h-summary">30초 정리</h3>
+      <div class="summary-cards cols-3 reveal">
+        <div class="s-card">
+          <div class="head">DDL 5종</div>
+          <strong>CREATE / ALTER / DROP / TRUNCATE / RENAME</strong> — 모두 자동 COMMIT
+        </div>
+        <div class="s-card">
+          <div class="head">제약 6종</div>
+          <strong>PK / FK / UNIQUE / NOT NULL / CHECK / DEFAULT</strong>
+        </div>
+        <div class="s-card">
+          <div class="head">PK</div>
+          <strong>UNIQUE + NOT NULL</strong> · 테이블당 1개 · FK 참조 대상은 PK 또는 UNIQUE
+        </div>
+        <div class="s-card">
+          <div class="head">UNIQUE</div>
+          <strong>NULL 허용</strong> (중복만 막음)
+        </div>
+        <div class="s-card">
+          <div class="head">DELETE/TRUNCATE/DROP</div>
+          데이터·구조·롤백 차이 (단골 함정)
+        </div>
+        <div class="s-card">
+          <div class="head">ON DELETE CASCADE</div>
+          부모 삭제 시 자식 자동 삭제
+        </div>
+        <div class="s-card">
+          <div class="head">컬럼 조작</div>
+          추가 <code>ADD</code> / 변경 <code>MODIFY</code> / 삭제 <code>DROP COLUMN</code>
+        </div>
+      </div>
+    </section>
+
+    <section class="exam-chapter" id="ch-2-3-4">
+      <h2 class="exam-h">
+        DCL
+        <a class="theory-link" href="./2-3-4_DCL.html">→ 이론 페이지</a>
+      </h2>
+      <h3 class="exam-section-h h-trap">OX 미니 퀴즈</h3>
+      <div class="ox-quiz reveal">
+        <div class="ox-q">
+          <div class="num">Q1</div>
+          <div class="q">DCL 명령어는 <code>GRANT</code>와 <code>REVOKE</code>이다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict o">O</span>권한 부여 / 회수 두 가지가 DCL.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q2</div>
+          <div class="q">시스템 권한 부여 시 옵션은 <strong>WITH GRANT OPTION</strong>이다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict x">X</span>시스템 권한은 <strong>WITH ADMIN OPTION</strong>. (WITH GRANT OPTION은 객체 권한)</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q3</div>
+          <div class="q">객체 권한 부여 시 옵션은 <strong>WITH GRANT OPTION</strong>이다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict o">O</span>객체 권한 = WITH GRANT OPTION, 시스템 권한 = WITH ADMIN OPTION.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q4</div>
+          <div class="q">ROLE은 권한 묶음을 한 번에 관리하기 위한 것이다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict o">O</span>여러 권한을 ROLE에 묶어 사용자에 일괄 부여.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q5</div>
+          <div class="q"><code>GRANT DEV_ROLE TO USER1</code>은 DDL로 분류된다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict x">X</span>GRANT 이므로 <strong>DCL</strong>이다.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q6</div>
+          <div class="q">모든 사용자에게 권한을 부여하려면 <code>TO PUBLIC</code>을 사용한다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict o">O</span><code>TO PUBLIC</code>은 모든 사용자 대상.</div>
+          </details>
+        </div>
+        <div class="ox-q">
+          <div class="num">Q7</div>
+          <div class="q">WITH GRANT OPTION 으로 부여된 권한을 회수하면 재부여된 사용자의 권한도 함께 사라진다.</div>
+          <details><summary>정답 보기</summary>
+            <div class="a"><span class="verdict o">O</span>연쇄 회수 (cascade revoke).</div>
+          </details>
+        </div>
+      </div>
+
+      <h3 class="exam-section-h h-summary">30초 정리</h3>
+      <div class="summary-cards cols-3 reveal">
+        <div class="s-card">
+          <div class="head">DCL 명령</div>
+          <strong>GRANT / REVOKE</strong> (ROLE 부여도 GRANT)
+        </div>
+        <div class="s-card">
+          <div class="head">권한 종류</div>
+          <strong>시스템 권한</strong> (CREATE SESSION/TABLE 등) + <strong>객체 권한</strong> (SELECT/INSERT/UPDATE 등)
+        </div>
+        <div class="s-card">
+          <div class="head">옵션</div>
+          <strong>WITH GRANT OPTION</strong> (객체) / <strong>WITH ADMIN OPTION</strong> (시스템)
+        </div>
+        <div class="s-card">
+          <div class="head">ROLE</div>
+          권한 묶음 → 여러 사용자에 일괄 부여 (CONNECT / RESOURCE / DBA 가 대표)
+        </div>
+        <div class="s-card">
+          <div class="head">TO PUBLIC</div>
+          모든 사용자에게 부여
+        </div>
+        <div class="s-card">
+          <div class="head">연쇄 회수</div>
+          WITH GRANT OPTION 으로 재부여된 권한 = REVOKE 시 함께 사라짐
+        </div>
+        <div class="s-card">
+          <div class="head">4대 분류</div>
+          <strong>DDL=객체 / DML=데이터 / TCL=트랜잭션 / DCL=권한</strong>
+        </div>
+      </div>
+    </section>
+
+  </article>
+</main>
+
+<script src="./common.js"></script>
+<script>
+function filterExam(q) {
+  const norm = q.trim().toLowerCase();
+  document.querySelectorAll('.exam-chapter').forEach(sec => {
+    if (!norm) { sec.hidden = false; return; }
+    sec.hidden = !sec.innerText.toLowerCase().includes(norm);
+  });
+}
+</script>
+</body>
+</html>

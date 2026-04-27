@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>데이터 모델의 이해 — SQLD양파 이론</title>
+<link rel="stylesheet" href="./common.css">
+<style>
+  /* 1-1-1 특화: 3층 스키마 시각화 */
+  .threelayer { display: grid; grid-template-columns: 1fr; gap: 14px; margin: 22px 0 24px; }
+  .threelayer .tl-row { background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: 12px; padding: 16px 18px; position: relative; transition: transform var(--duration-base), border-color var(--duration-base); }
+  .threelayer .tl-row:hover { transform: translateY(-2px); border-color: var(--point-500); }
+  .threelayer .tl-row .tl-tag { display: inline-block; background: var(--info-bg); color: var(--info-fg); font-size: 10.5px; font-weight: 800; padding: 3px 9px; border-radius: 999px; letter-spacing: 0.04em; margin-right: 8px; }
+  .threelayer .tl-row .tl-name { font-size: 14.5px; font-weight: 800; color: var(--fg-1); }
+  .threelayer .tl-row .tl-desc { font-size: 12.5px; color: var(--fg-3); margin-top: 6px; line-height: 1.6; }
+  .threelayer .tl-row.outer { background: linear-gradient(135deg, #FFFFFF 0%, var(--info-bg) 30%); }
+  .threelayer .tl-row.conceptual { background: linear-gradient(135deg, #FFFFFF 0%, var(--point-050) 30%); }
+  .threelayer .tl-row.internal { background: linear-gradient(135deg, #FFFFFF 0%, var(--bg-muted) 30%); }
+  .indep-line { display: flex; gap: 10px; align-items: center; justify-content: center; font-size: 12px; color: var(--fg-3); margin: 4px 0 4px; }
+  .indep-line strong { color: var(--point-600); font-weight: 800; }
+</style>
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="topnav-inner">
+    <div class="topnav-brand">SQLD양파</div>
+    <div class="topnav-links">
+      <a href="#">홈</a>
+      <a href="#" class="active">이론</a>
+      <a href="#">기출 CBT</a>
+      <a href="#">모의고사</a>
+      <a href="#">Pro</a>
+    </div>
+  </div>
+</nav>
+
+<main class="page-shell">
+  <div class="breadcrumb">
+    <a href="#">이론</a><span class="sep">›</span>
+    <a href="#">1과목 데이터 모델링</a><span class="sep">›</span>
+    <a href="#">1-1. 데이터 모델링의 이해</a>
+  </div>
+
+  <header class="page-title-block">
+    <h1>데이터 모델의 이해</h1>
+    <p class="subtitle">현실 → 개념 → 논리 → 물리. 3가지 관점, 3층 스키마, 좋은 모델 6요소</p>
+  </header>
+
+  <article class="theory-md">
+
+    <!-- 핵심 요약 -->
+    <h2 class="section-label sec-summary reveal"><span class="label-tag">핵심 요약</span><span class="label-rest">정의</span></h2>
+    <blockquote class="reveal">
+      데이터 모델이란 현실의 정보를 데이터베이스(DB)에 담기 위해 그린 <strong>설계 도면</strong>이다.
+    </blockquote>
+    <div class="ex-box reveal">
+      회원·상품·주문 같은 정보를 어떻게 저장하고 연결할지 미리 그려보는 작업이다. 정보의 덩어리는 <a href="./1-1-2_엔터티.html">엔터티</a>, 세부 항목은 <a href="./1-1-3_속성.html">속성</a>, 엔터티 간 연결은 <a href="./1-1-4_관계.html">관계</a>로 표현한다.
+    </div>
+
+    <!-- 개념 도식화 — 모델링 단계 흐름 -->
+    <h2 class="section-label sec-diagram reveal"><span class="label-tag">개념 도식화</span><span class="label-rest">한 비즈니스가 데이터베이스가 되기까지</span></h2>
+    <p class="reveal">같은 쇼핑몰 사례가 단계별로 어떻게 구체화되는지 직접 본다.</p>
+
+    <div class="step-flow cols-4 reveal">
+      <div class="step-card">
+        <div class="step">STEP 1</div>
+        <div class="name">개념적 모델 <small>큰 그림</small></div>
+        <div class="ex">핵심 엔터티·관계 ERD. 속성·자료형은 아직 안 본다.</div>
+        <div class="arrow-next">›</div>
+      </div>
+      <div class="step-card">
+        <div class="step">STEP 2</div>
+        <div class="name">논리적 모델 <small>속성·키</small></div>
+        <div class="ex">속성·PK·FK 채움 + <strong>정규화</strong>. DBMS와 무관.</div>
+        <div class="arrow-next">›</div>
+      </div>
+      <div class="step-card">
+        <div class="step">STEP 3</div>
+        <div class="name">물리적 모델 <small>실제 DBMS</small></div>
+        <div class="ex">CREATE TABLE + 인덱스·파티션·자료형 명시.</div>
+        <div class="arrow-next">›</div>
+      </div>
+      <div class="step-card">
+        <div class="step">STEP 4</div>
+        <div class="name">데이터베이스 <small>운영</small></div>
+        <div class="ex">데이터가 차곡차곡 쌓인 상태. SQL로 조회·입력·수정.</div>
+      </div>
+    </div>
+
+    <h3 class="reveal">1단계 — 개념적 모델 (큰 그림)</h3>
+    <p class="reveal">업무에서 다루는 핵심 명사(엔터티)와 그 사이의 연결을 큰 그림으로 그린다.</p>
+    <pre class="reveal"><button class="copy-btn">복사</button><code><span class="sql-cm">// 회원 1 : N 주문</span>
+<span class="sql-cm">// 주문 1 : N 주문상세  ←  N : 1 상품</span></code></pre>
+
+    <h3 class="reveal">2단계 — 논리적 모델 (속성·키·정규화)</h3>
+    <p class="reveal">각 엔터티의 속성을 채우고 PK·FK 를 정한다. 이 단계에서 <a href="./1-2-1_정규화.html">정규화</a>(1NF → 2NF → 3NF)도 함께 수행한다.</p>
+
+    <h3 class="reveal">3단계 — 물리적 모델 (실제 DBMS 구현)</h3>
+    <p class="reveal">논리 모델을 실제 데이터베이스의 <strong>테이블</strong>로 만든다. 자료형·인덱스·제약조건을 명시.</p>
+    <pre class="reveal"><button class="copy-btn">복사</button><code><span class="sql-kw">CREATE TABLE</span> <span class="sql-name">MEMBER</span> (
+    <span class="sql-type">MEMBER_ID</span>  <span class="sql-type">VARCHAR2</span>(<span class="sql-num">10</span>) <span class="sql-kw">PRIMARY KEY</span>,
+    <span class="sql-type">NAME</span>       <span class="sql-type">VARCHAR2</span>(<span class="sql-num">50</span>) <span class="sql-kw">NOT NULL</span>,
+    <span class="sql-type">PHONE</span>      <span class="sql-type">VARCHAR2</span>(<span class="sql-num">20</span>)
+);
+
+<span class="sql-kw">CREATE TABLE</span> <span class="sql-name">PRODUCT</span> (
+    <span class="sql-type">PROD_ID</span>    <span class="sql-type">VARCHAR2</span>(<span class="sql-num">10</span>) <span class="sql-kw">PRIMARY KEY</span>,
+    <span class="sql-type">PROD_NAME</span>  <span class="sql-type">VARCHAR2</span>(<span class="sql-num">100</span>) <span class="sql-kw">NOT NULL</span>,
+    <span class="sql-type">PRICE</span>      <span class="sql-type">NUMBER</span>(<span class="sql-num">10</span>) <span class="sql-kw">NOT NULL</span>
+);
+
+<span class="sql-kw">CREATE TABLE</span> <span class="sql-name">ORDERS</span> (
+    <span class="sql-type">ORDER_ID</span>   <span class="sql-type">NUMBER</span> <span class="sql-kw">PRIMARY KEY</span>,
+    <span class="sql-type">MEMBER_ID</span>  <span class="sql-type">VARCHAR2</span>(<span class="sql-num">10</span>) <span class="sql-kw">REFERENCES</span> <span class="sql-name">MEMBER</span>(<span class="sql-type">MEMBER_ID</span>),
+    <span class="sql-type">ORD_DATE</span>   <span class="sql-type">DATE</span> <span class="sql-kw">DEFAULT</span> <span class="sql-kw">SYSDATE</span>
+);
+
+<span class="sql-kw">CREATE INDEX</span> <span class="sql-name">IDX_ORDERS_MEMBER</span> <span class="sql-kw">ON</span> <span class="sql-name">ORDERS</span>(<span class="sql-type">MEMBER_ID</span>);  <span class="sql-cm">-- 성능용 인덱스</span></code></pre>
+
+    <h3 class="reveal">4단계 — 데이터베이스 (운영 중인 실제 데이터)</h3>
+    <p class="reveal">만든 테이블에 데이터가 <strong>차곡차곡 쌓인 상태</strong>. 사용자가 SQL 로 조회·입력·수정.</p>
+
+    <p class="reveal" style="font-size:13.5px;color:var(--fg-3);margin-top:12px;">MEMBER</p>
+    <table class="reveal">
+      <thead><tr><th>MEMBER_ID</th><th>NAME</th><th>PHONE</th></tr></thead>
+      <tbody>
+        <tr><td>M01</td><td>김철수</td><td>010-1111</td></tr>
+        <tr><td>M02</td><td>이영희</td><td>010-2222</td></tr>
+      </tbody>
+    </table>
+    <p class="reveal" style="font-size:13.5px;color:var(--fg-3);">PRODUCT</p>
+    <table class="reveal">
+      <thead><tr><th>PROD_ID</th><th>PROD_NAME</th><th>PRICE</th></tr></thead>
+      <tbody>
+        <tr><td>P01</td><td>사과</td><td>1,000</td></tr>
+        <tr><td>P02</td><td>배</td><td>2,000</td></tr>
+      </tbody>
+    </table>
+    <p class="reveal" style="font-size:13.5px;color:var(--fg-3);">ORDERS</p>
+    <table class="reveal">
+      <thead><tr><th>ORDER_ID</th><th>MEMBER_ID</th><th>ORD_DATE</th></tr></thead>
+      <tbody>
+        <tr><td>1001</td><td>M01</td><td>2026-04-01</td></tr>
+        <tr><td>1002</td><td>M02</td><td>2026-04-05</td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="reveal">단계 정리</h3>
+    <table class="reveal">
+      <thead><tr><th>단계</th><th>이름</th><th>결과물</th><th>비유</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>개념적 모델링</td><td>핵심 엔터티·관계 ERD (큰 그림)</td><td>손으로 그린 스케치</td></tr>
+        <tr><td>2</td><td>논리적 모델링</td><td>속성·키 상세 ERD + <strong>정규화</strong></td><td>정식 건축 도면</td></tr>
+        <tr><td>3</td><td>물리적 모델링</td><td>DBMS 별 CREATE TABLE + 인덱스·파티션</td><td>시공 계획서</td></tr>
+        <tr><td>→</td><td>운영</td><td>데이터가 쌓인 실제 데이터베이스</td><td>입주 완료된 건물</td></tr>
+      </tbody>
+    </table>
+
+    <!-- 3가지 관점 -->
+    <h2 class="reveal">데이터 모델링의 3가지 관점</h2>
+    <div class="cls-row reveal">
+      <div class="cls-card">
+        <span class="badge b-info">DATA</span>
+        <div class="name">데이터 관점</div>
+        <div class="ex">업무가 관리하는 데이터(엔터티·속성)<br><strong>무엇을(What) 저장하지</strong></div>
+      </div>
+      <div class="cls-card">
+        <span class="badge">PROCESS</span>
+        <div class="name">프로세스 관점</div>
+        <div class="ex">업무가 실제 하고 있는 일(또는 해야 할 일)<br><strong>어떻게(How) 처리하지</strong></div>
+      </div>
+      <div class="cls-card">
+        <span class="badge b-event">INTERACTION</span>
+        <div class="name">상관 관점</div>
+        <div class="ex">프로세스가 데이터에 미치는 영향(CRUD 매트릭스)<br><strong>언제(When) 어떤 데이터가 변하지</strong></div>
+      </div>
+    </div>
+
+    <!-- 좋은 모델의 6대 특징 -->
+    <h2 class="reveal">좋은 데이터 모델의 특징</h2>
+    <div class="trait-grid cols-3 reveal">
+      <div class="trait-card"><div class="num">1</div><div class="label">완전성</div><div class="desc">업무에 필요한 데이터를 빠짐없이 담았는가</div></div>
+      <div class="trait-card"><div class="num">2</div><div class="label">중복 배제</div><div class="desc">같은 데이터가 여러 곳에 흩어져 있지 않은가</div></div>
+      <div class="trait-card"><div class="num">3</div><div class="label">업무 규칙</div><div class="desc">회사의 규칙이 모델에 녹아 있는가</div></div>
+      <div class="trait-card"><div class="num">4</div><div class="label">데이터 재사용</div><div class="desc">다른 업무에서도 활용할 수 있는가</div></div>
+      <div class="trait-card"><div class="num">5</div><div class="label">의사소통</div><div class="desc">보는 사람마다 같은 의미로 읽히는가</div></div>
+      <div class="trait-card"><div class="num">6</div><div class="label">통합성</div><div class="desc">같은 데이터는 한 곳에 정의되어 있는가</div></div>
+    </div>
+
+    <!-- 3층 스키마 -->
+    <h2 class="reveal">3층 스키마 (ANSI/SPARC)</h2>
+    <p class="reveal">같은 쇼핑몰 데이터베이스를 <strong>세 가지 관점에서 본 모습</strong>. 누가 보느냐에 따라 같은 데이터가 전혀 다른 형태로 보인다.</p>
+
+    <div class="threelayer reveal">
+      <div class="tl-row outer">
+        <span class="tl-tag">EXTERNAL</span><span class="tl-name">외부 스키마 — 각 사용자/앱이 보는 화면</span>
+        <div class="tl-desc">여러 개 · 사용자·개발자 · SQL의 <strong>VIEW</strong> 또는 응용 프로그램의 가공 데이터</div>
+      </div>
+      <div class="indep-line">↑ <strong>논리적 독립성</strong> — 개념 스키마가 바뀌어도 외부 스키마는 영향 없음 ↑</div>
+      <div class="tl-row conceptual">
+        <span class="tl-tag" style="background:var(--point-100);color:var(--point-600);">CONCEPTUAL</span><span class="tl-name">개념 스키마 — 조직 전체가 공유하는 ERD</span>
+        <div class="tl-desc">1개 · DA(Data Architect) · 모든 화면의 원본이 되는 통합 설계도</div>
+      </div>
+      <div class="indep-line">↑ <strong>물리적 독립성</strong> — 내부 스키마가 바뀌어도 개념·외부 스키마는 영향 없음 ↑</div>
+      <div class="tl-row internal">
+        <span class="tl-tag" style="background:var(--bg-muted);color:var(--fg-3);">INTERNAL</span><span class="tl-name">내부 스키마 — 디스크 위 실제 저장 구조</span>
+        <div class="tl-desc">1개 · DBA(DB Administrator) · 데이터 파일·인덱스·파티션·캐시</div>
+      </div>
+    </div>
+
+    <h3 class="reveal">관점 1. 외부 스키마 (External) — 각 사용자/앱이 보는 화면</h3>
+    <table class="reveal">
+      <thead><tr><th>누가 본다</th><th>화면 (View)</th><th>보이는 컬럼 예시</th></tr></thead>
+      <tbody>
+        <tr><td>김철수 (모바일앱)</td><td>"내 주문 내역"</td><td>주문번호 · 상품명 · 금액 · 주문일</td></tr>
+        <tr><td>이영희 (웹)</td><td>"위시리스트"</td><td>상품명 · 가격 · 이미지</td></tr>
+        <tr><td>관리자 (백오피스)</td><td>"일별 매출"</td><td>날짜 · 총매출 · 주문건수</td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="reveal">관점 2. 개념 스키마 (Conceptual) — 조직 전체가 공유하는 ERD</h3>
+    <p class="reveal">위 모든 화면의 원본이 되는 <strong>하나의 통합 설계도</strong>. 회원·상품·주문·주문상세·결제·배송 등 모든 엔터티와 관계. 설계자(DA)가 관리하는 <strong>전사 데이터 모델</strong>. 데이터베이스에 단 하나만 존재.</p>
+
+    <h3 class="reveal">관점 3. 내부 스키마 (Internal) — 디스크 위 실제 저장 구조</h3>
+    <p class="reveal">개념 스키마가 <strong>물리적으로 어떻게 저장되는가</strong>. DBA·DBMS의 영역.</p>
+    <table class="reveal">
+      <thead><tr><th>항목</th><th>예시</th></tr></thead>
+      <tbody>
+        <tr><td>데이터 파일</td><td><code>/oracle/data/SHOP_DATA01.dbf</code> (8KB 블록 단위)</td></tr>
+        <tr><td>인덱스</td><td><code>IDX_ORDERS_MEMBER</code> (B-Tree, 회원ID 정렬)</td></tr>
+        <tr><td>파티션</td><td>ORDERS 테이블을 월별로 분할 (<code>P_2026_04</code>, <code>P_2026_05</code> ...)</td></tr>
+        <tr><td>캐시</td><td>자주 조회되는 회원 데이터 메모리 캐시</td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="reveal">3층이 분리된 이유 — 데이터 독립성</h3>
+    <table class="reveal">
+      <thead><tr><th>스키마</th><th>관점</th><th>개수</th><th>누가 다룬다</th></tr></thead>
+      <tbody>
+        <tr><td>외부 (External)</td><td>사용자·응용 프로그램</td><td><strong>여러 개</strong></td><td>사용자·개발자</td></tr>
+        <tr><td>개념 (Conceptual)</td><td>설계자 통합</td><td><strong>1개</strong></td><td>DA (Data Architect)</td></tr>
+        <tr><td>내부 (Internal)</td><td>물리 저장</td><td><strong>1개</strong></td><td>DBA (DB Administrator)</td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="reveal">데이터 독립성 2가지</h3>
+    <table class="reveal">
+      <thead><tr><th>종류</th><th>의미</th></tr></thead>
+      <tbody>
+        <tr><td>논리적 독립성</td><td>개념 스키마가 변경돼도 외부 스키마(응용)는 영향 없음</td></tr>
+        <tr><td>물리적 독립성</td><td>내부 스키마가 변경돼도 개념·외부 스키마는 영향 없음</td></tr>
+      </tbody>
+    </table>
+
+    <!-- SQL 실전 -->
+    <h2 class="section-label sec-sql reveal"><span class="label-tag">SQL 실전</span><span class="label-rest">모델이 곧 테이블이 된다</span></h2>
+    <p class="reveal">논리 모델의 PK는 물리 모델에서 <a href="./1-1-5_식별자.html">식별자</a>(PRIMARY KEY 제약)가 된다.</p>
+    <pre class="reveal"><button class="copy-btn">복사</button><code><span class="sql-cm">-- 논리 모델의 '고객' 엔터티 → 물리 모델의 CUSTOMER 테이블</span>
+<span class="sql-kw">CREATE TABLE</span> <span class="sql-name">CUSTOMER</span> (
+    <span class="sql-type">CUST_ID</span>    <span class="sql-type">VARCHAR2</span>(<span class="sql-num">10</span>) <span class="sql-kw">PRIMARY KEY</span>,  <span class="sql-cm">-- 식별자</span>
+    <span class="sql-type">CUST_NAME</span>  <span class="sql-type">VARCHAR2</span>(<span class="sql-num">50</span>) <span class="sql-kw">NOT NULL</span>,     <span class="sql-cm">-- 속성</span>
+    <span class="sql-type">PHONE</span>      <span class="sql-type">VARCHAR2</span>(<span class="sql-num">20</span>)               <span class="sql-cm">-- 속성</span>
+);
+
+<span class="sql-cm">-- 외부 스키마(VIEW) — 응용 프로그램이 보는 화면</span>
+<span class="sql-kw">CREATE VIEW</span> <span class="sql-name">V_MY_ORDER</span> <span class="sql-kw">AS</span>
+<span class="sql-kw">SELECT</span> <span class="sql-type">O</span>.<span class="sql-type">ORDER_ID</span>, <span class="sql-type">O</span>.<span class="sql-type">ORD_DATE</span>, <span class="sql-type">M</span>.<span class="sql-type">NAME</span>
+  <span class="sql-kw">FROM</span> <span class="sql-name">ORDERS</span> <span class="sql-type">O</span> <span class="sql-kw">JOIN</span> <span class="sql-name">MEMBER</span> <span class="sql-type">M</span> <span class="sql-kw">ON</span> <span class="sql-type">M</span>.<span class="sql-type">MEMBER_ID</span> = <span class="sql-type">O</span>.<span class="sql-type">MEMBER_ID</span>;</code></pre>
+
+    <p class="reveal" style="font-size:13px;color:var(--fg-3);margin:8px 0 4px;">↓ V_MY_ORDER 조회 결과 (외부 스키마가 보는 화면)</p>
+    <table class="reveal">
+      <thead><tr><th>ORDER_ID</th><th>ORD_DATE</th><th>NAME</th></tr></thead>
+      <tbody>
+        <tr><td>1001</td><td>2026-04-01</td><td>김철수</td></tr>
+        <tr><td>1002</td><td>2026-04-05</td><td>이영희</td></tr>
+      </tbody>
+    </table>
+    <p class="reveal">개념 스키마(MEMBER + ORDERS 두 테이블)는 그대로지만, VIEW를 통해 외부 스키마는 "주문번호·날짜·이름" 한 화면처럼 보인다 — 같은 데이터를 보는 관점이 다른 것뿐이다.</p>
+
+    <!-- Before & After -->
+    <h2 class="section-label sec-compare reveal"><span class="label-tag">Before &amp; After</span><span class="label-rest">모델링이 없을 때 vs 있을 때</span></h2>
+    <p class="reveal">쇼핑몰에서 김철수가 사과·배·포도를 여러 번 주문한 상황. 한 테이블에 고객·상품을 다 욱여넣은 형태와, 고객·주문을 분리한 형태를 비교한다.</p>
+
+    <div class="ba-flow large-after reveal">
+      <div class="ba-side before">
+        <span class="ba-tag">BEFORE</span>
+        <h4 class="ba-h">모델링 없이 만든 테이블</h4>
+        <div class="mini-table cols-4">
+          <div class="h">주문</div><div class="h">고객</div><div class="h">상품1</div><div class="h">상품2</div>
+          <div class="c">1</div><div class="c">김철수</div><div class="c">사과</div><div class="c">배</div>
+          <div class="c">2</div><div class="c">김철수</div><div class="c">포도</div><div class="c is-null">NULL</div>
+        </div>
+        <p style="font-size:12px;color:var(--fg-3);margin:10px 0 0;">고객 정보 중복 + 상품 칸 부족</p>
+      </div>
+      <div class="ba-arrow">→</div>
+      <div class="ba-side after">
+        <span class="ba-tag">AFTER</span>
+        <h4 class="ba-h">엔터티 분리</h4>
+        <div class="ba-tables cols-2">
+          <div class="ba-mini-table">
+            <div class="h">CUSTOMER</div>
+            <div class="row">C001 / 김철수 / 010-1111</div>
+          </div>
+          <div class="ba-mini-table">
+            <div class="h">ORDER</div>
+            <div class="row">1 / C001 / 사과</div>
+            <div class="row">2 / C001 / 배</div>
+            <div class="row">3 / C001 / 포도</div>
+          </div>
+        </div>
+        <p style="font-size:12px;color:var(--fg-3);margin:10px 0 0;">중복 사라짐 + 상품 무한 추가 가능</p>
+      </div>
+    </div>
+
+    <h4 class="reveal">Before — 모델링 없이 만든 테이블</h4>
+    <table class="reveal">
+      <thead><tr><th>주문번호</th><th>고객이름</th><th>고객전화</th><th>상품1</th><th>상품2</th><th>상품3</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>김철수</td><td>010-1111</td><td>사과</td><td>배</td><td>NULL</td></tr>
+        <tr><td>2</td><td>김철수</td><td>010-1111</td><td>포도</td><td>NULL</td><td>NULL</td></tr>
+      </tbody>
+    </table>
+    <p class="reveal">고객 정보가 중복되고, 상품 칸이 모자라면 더 못 담는다.</p>
+
+    <h4 class="reveal">After — 모델링 후 분리된 테이블</h4>
+    <p class="reveal" style="font-size:13.5px;color:var(--fg-3);">CUSTOMER</p>
+    <table class="reveal">
+      <thead><tr><th>CUST_ID</th><th>NAME</th><th>PHONE</th></tr></thead>
+      <tbody><tr><td>C001</td><td>김철수</td><td>010-1111</td></tr></tbody>
+    </table>
+    <p class="reveal" style="font-size:13.5px;color:var(--fg-3);">ORDER</p>
+    <table class="reveal">
+      <thead><tr><th>ORD_ID</th><th>CUST_ID</th><th>PRODUCT</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>C001</td><td>사과</td></tr>
+        <tr><td>2</td><td>C001</td><td>배</td></tr>
+        <tr><td>3</td><td>C001</td><td>포도</td></tr>
+      </tbody>
+    </table>
+    <p class="reveal">Before 구조는 "상품1·상품2·상품3" 같은 컬럼을 미리 박아두기 때문에 사람마다 다른 주문 개수에 대응할 수 없고, 고객 정보도 주문마다 똑같이 반복 저장되어 전화번호 한 번 바뀌면 모든 행을 손봐야 한다. 모델링은 이런 반복과 한계를 엔터티 분리로 해소한다 — 한 가지 의미는 한 곳에만 두고, 관계는 키로 잇는다는 원칙은 어떤 도메인이든 공통이다.</p>
+
+    <div class="reveal" style="margin: 40px 0 0; padding: 22px 24px; background: linear-gradient(135deg, var(--point-050), var(--bg-card)); border: 1px solid var(--point-100); border-radius: 12px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;">
+      <div>
+        <div style="font-size: 12px; font-weight: 800; color: var(--point-600); letter-spacing: 0.04em; margin-bottom: 4px;">시험 대비</div>
+        <div style="font-size: 14px; color: var(--fg-2);">이 챕터의 함정·정답과 30초 정리는 통합 시험 대비 페이지에서 볼 수 있습니다.</div>
+      </div>
+      <a href="./exam-review.html#ch-1-1-1" style="font-size: 14px; font-weight: 700; color: var(--point-600); text-decoration: none; padding: 8px 14px; border: 1px solid var(--point-300); border-radius: 8px; background: var(--bg-card); white-space: nowrap;">시험 대비 보기 →</a>
+    </div>
+
+  </article>
+</main>
+
+<script src="./common.js"></script>
+</body>
+</html>
