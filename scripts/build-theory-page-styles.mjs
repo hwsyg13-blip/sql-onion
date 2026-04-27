@@ -36,6 +36,9 @@ for (const f of files) {
   }
   let body = m[1].trim();
   if (!body) continue;
+  // .reveal 룰은 src/index.css 의 전역 override 로 통일 (opacity:1 강제) — 시안의 opacity:0
+  // 룰이 여기 섞여 들어오면 cascade 후행 우선으로 본문이 영구 invisible 됨.
+  body = body.replace(/\.reveal(\.is-visible)?\s*\{[^}]*\}\s*/g, '');
   // 시안의 inline style="grid-template-columns: ..." 가 미디어쿼리 룰을 덮어쓰는 문제 해결.
   // @media 블록 안의 grid-template-columns 에 !important 자동 부착 — balanced brace 처리.
   body = (() => {
