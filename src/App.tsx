@@ -11,6 +11,7 @@ import { PlanScreen } from './screens/PlanScreen';
 import { TheoryListScreen, TheoryDetailScreen } from './screens/TheoryScreens';
 import { MockLanding, EndlessScreen } from './screens/MockScreens';
 import { ExamListScreen, CBTExam, CBTResult } from './screens/CBTScreens';
+import { CheatSheetScreen } from './screens/CheatSheetScreen';
 import { useSession, signOut } from './lib/auth';
 import { recordVisit } from './lib/progress';
 import { trackPageView } from './lib/analytics';
@@ -122,6 +123,7 @@ export const App = () => {
       exams: `기출문제 · ${base}`,
       cbt: `CBT 진행 · ${base}`,
       'cbt-result': `CBT 결과 · ${base}`,
+      'final-cheatsheet': `최종 암기장 · ${base}`,
     };
     document.title = names[route] || `${base} — SQLD 3주 합격 루틴`;
   }, [route]);
@@ -238,6 +240,7 @@ export const App = () => {
     case 'exams':         screen = <ExamListScreen onNavigate={navigate}/>; break;
     case 'cbt':           screen = <CBTExam examId={params || 'round-60'} onNavigate={navigate} onExit={() => navigate(exitReturnRoute || 'home', null, { skipConfirm: true })} onFinish={(r: any) => { setCbtResult(r); navigate('cbt-result'); }}/>; break;
     case 'cbt-result':    screen = cbtResult ? <CBTResult result={cbtResult} onNavigate={navigate}/> : <HomeScreen onNavigate={navigate} user={user}/>; break;
+    case 'final-cheatsheet': screen = <CheatSheetScreen onNavigate={navigate}/>; break;
     default:              screen = <HomeScreen onNavigate={navigate} user={user}/>;
   }
 

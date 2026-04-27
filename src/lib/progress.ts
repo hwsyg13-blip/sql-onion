@@ -153,10 +153,21 @@ export function computeStats(p: LocalProgress): DerivedStats {
 
 /** Day 번호 → 완료된 것인지 판단 (진도에 맞게 PlanScreen 체크 표시) */
 export function isPlanDayDone(day: any, p: LocalProgress, stats: DerivedStats): boolean {
-  // day: PlanScreen.PLAN_DATA 의 한 항목
-  // 현재 위치보다 이전이면 done 으로 간주 + 실제 완료 증거가 있으면 확실히 done
+  // v3: actions 배열을 우선 처리 — 추적 가능한 모든 액션(theory/cbt) 완료 시 done.
+  if (day.actions?.length) {
+    const trackable = day.actions.filter((a: any) => a.kind === 'theory' || a.kind === 'cbt');
+    if (trackable.length === 0) {
+      // 모의·암기장 등 추적 불가 액션만 있는 Day: 진도 휴리스틱
+      return day.day < stats.dayProgress;
+    }
+    return trackable.every((a: any) => {
+      if (a.kind === 'theory') return p.theoryViewed.includes(a.chapterId);
+      if (a.kind === 'cbt') return Boolean(p.examSessions[a.examId]?.finishedAt);
+      return false;
+    });
+  }
+  // v2 호환 — chapters 배열
   if (day.chapters?.length) {
-    // 챕터 배열 — 모든 챕터를 열람했으면 완료
     return day.chapters.every((c: string) => p.theoryViewed.includes(c));
   }
   if (day.theoryId) {
@@ -166,15 +177,12 @@ export function isPlanDayDone(day: any, p: LocalProgress, stats: DerivedStats): 
     return Boolean(p.examSessions[day.examId]?.finishedAt);
   }
   if (day.mock) {
-    // 모의고사는 별도 ID 없이 AI 생성이라 — 단순히 day 번호가 지난 진도보다 앞이면 done
     return day.day <= stats.dayProgress - 1;
   }
   if (day.test) {
-    // 1과목 미니테스트: 1과목 퀴즈 10+ 시도했으면 완료
     const s1Attempts = Object.values(p.quizAttempts).filter(a => a.subject === '1과목').length;
     return s1Attempts >= 10;
   }
-  // 복습·마무리 같은 활동: day 번호가 현재 진도보다 이전이면 done
   return day.day < stats.dayProgress;
 }
 
