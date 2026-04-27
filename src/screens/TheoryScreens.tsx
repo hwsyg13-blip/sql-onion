@@ -11,6 +11,10 @@ import { QUIZ_BANK } from '../data/quizBank';
 import { CONCEPT_QUIZ } from '../data/conceptQuiz';
 import { recordTheoryView } from '../lib/progress';
 import { AdSlot } from '../components/AdSlot';
+import { MiniTestSidebar } from '../components/MiniTestSidebar';
+import { OX_QUIZ } from '../data/miniTest/ox';
+import { EXAM_MAPPING } from '../data/miniTest/examMapping';
+import { THEORY_HTML } from '../data/theoryHtml';
 import { trackEvent } from '../lib/analytics';
 
 // highlight.js 등록 — SQL 위주
@@ -177,15 +181,39 @@ export const TheoryDetailScreen = ({ chapterId, onNavigate }) => {
   }, [chapterId]);
 
   const ctx = findChapter(chapterId);
+  // 새 시안 HTML 우선, 없으면 기존 마크다운 fallback
+  const newHtml = THEORY_HTML[chapterId];
   const md = THEORY_BODY[chapterId];
   const bodyRef = React.useRef<HTMLDivElement>(null);
   const [zoomedSvg, setZoomedSvg] = React.useState<string | null>(null);
 
-  if (!ctx || !md) return <TheoryStub chapterId={chapterId} onNavigate={onNavigate} />;
+  if (!ctx || (!newHtml && !md)) return <TheoryStub chapterId={chapterId} onNavigate={onNavigate} />;
 
   const { sub, sec, ch } = ctx;
-  const html = React.useMemo(() => renderMd(md), [md]);
-  const toc = React.useMemo(() => buildToc(md), [md]);
+  const html = React.useMemo(() => newHtml || renderMd(md), [newHtml, md]);
+  const toc = React.useMemo(() => (newHtml ? [] : buildToc(md)), [newHtml, md]);
+
+  // 새 시안 HTML 안의 <a data-chapter="cXYZ"> 클릭 → SPA 라우팅
+  React.useEffect(() => {
+    if (!bodyRef.current) return;
+    const handler = (e: any) => {
+      const a = e.target?.closest?.('a[data-chapter]');
+      if (!a) return;
+      const cid = a.getAttribute('data-chapter');
+      if (cid && cid !== chapterId) {
+        e.preventDefault();
+        onNavigate('theory-detail', cid);
+      }
+    };
+    bodyRef.current.addEventListener('click', handler);
+    return () => bodyRef.current?.removeEventListener('click', handler);
+  }, [chapterId, html]);
+
+  // 시안에 미리 박힌 .copy-btn 은 onClick 없는 죽은 버튼 — 제거 (아래 effect 가 다시 부착)
+  React.useEffect(() => {
+    if (!bodyRef.current) return;
+    bodyRef.current.querySelectorAll('button.copy-btn').forEach((b) => b.remove());
+  }, [html]);
 
   // mermaid — 본문에 .mermaid 가 있으면 동적 로드 + 렌더 (양파 그린 테마)
   React.useEffect(() => {
@@ -337,7 +365,7 @@ export const TheoryDetailScreen = ({ chapterId, onNavigate }) => {
         </div>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1fr) 280px', gap: 32 }} className="theory-detail-grid">
+      <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1fr) 320px', gap: 32 }} className="theory-detail-grid">
         {/* Main body */}
         <article>
           {/* 챕터 헤어로 — 양파 그린 그라데이션 카드 */}
@@ -379,10 +407,13 @@ export const TheoryDetailScreen = ({ chapterId, onNavigate }) => {
           </div>
         </article>
 
-        {/* Right rail: ToC + 광고 */}
+        {/* Right rail: 미니 테스트 + ToC + 광고 */}
         <aside style={{ position: 'relative' }}>
           <div style={{ position: 'sticky', top: 80, display: 'flex', flexDirection: 'column', gap: 14 }}>
-            <TocCard toc={toc} />
+            {(OX_QUIZ[chapterId]?.length || EXAM_MAPPING[chapterId]?.length) ? (
+              <MiniTestSidebar chapterId={chapterId} />
+            ) : null}
+            {toc.length > 0 && <TocCard toc={toc} />}
             <AdSlot slot="THEORY_DETAIL_AFTER_MINITEST" format="rectangle" />
           </div>
         </aside>
