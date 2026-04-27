@@ -1202,8 +1202,35 @@ export const ROUND_57: QuizQuestion[] = [
       "모든 값이 채워져 있지만 금액이 상이한 표"
     ],
     "correctIndex": 0,
-    "explanation": "UNPIVOT 은 열로 흩어진 값을 행으로 전개하여 각 조합이 온전히 채워진 레코드로 변환한다.",
-    "_source": "authored"
+    "explanation": "UNPIVOT 은 열로 흩어진 값을 행으로 전개하여 각 조합이 온전히 채워진 레코드로 변환한다. 입력 표(2행 × 3컬럼)의 매출값이 행으로 전개되어 결과는 (지점, 월, 매출) 4행으로 모두 채워진 형태이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "caption": "[입력] 매출 (피벗된 가로형)",
+        "headers": [
+          "지점",
+          "1월",
+          "2월"
+        ],
+        "rows": [
+          [
+            "서울",
+            "100",
+            "200"
+          ],
+          [
+            "부산",
+            "300",
+            "400"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT 지점, 월, 매출\nFROM   매출\nUNPIVOT (매출 FOR 월 IN (\"1월\", \"2월\"));"
+      }
+    ]
   },
   {
     "id": 10195,

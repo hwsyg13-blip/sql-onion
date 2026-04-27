@@ -1051,7 +1051,64 @@ export const ROUND_51: QuizQuestion[] = [
     ],
     "correctIndex": 3,
     "explanation": "원본 기출의 정답 표기를 보존한다. 데이터가 NULL 을 포함하지 않는 전제에서 세 방식 모두 같은 결과를 낸다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "caption": "A",
+        "headers": [
+          "COL1"
+        ],
+        "rows": [
+          [
+            "1"
+          ],
+          [
+            "2"
+          ],
+          [
+            "3"
+          ],
+          [
+            "4"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "B",
+        "headers": [
+          "COL1"
+        ],
+        "rows": [
+          [
+            "2"
+          ],
+          [
+            "3"
+          ]
+        ]
+      },
+      {
+        "type": "text",
+        "content": "전제: 양쪽 테이블의 비교 컬럼(COL1)에 NULL 이 존재하지 않는다. 목표는 'A 에는 있고 B 에는 없는 행' 을 조회하는 것이다."
+      },
+      {
+        "type": "sql",
+        "caption": "가. NOT EXISTS",
+        "code": "SELECT A.COL1\nFROM   A\nWHERE  NOT EXISTS (SELECT 1 FROM B WHERE A.COL1 = B.COL1);"
+      },
+      {
+        "type": "sql",
+        "caption": "나. NOT IN",
+        "code": "SELECT A.COL1\nFROM   A\nWHERE  A.COL1 NOT IN (SELECT B.COL1 FROM B);"
+      },
+      {
+        "type": "sql",
+        "caption": "다. OUTER JOIN + IS NULL",
+        "code": "SELECT A.COL1\nFROM   A LEFT OUTER JOIN B\n         ON A.COL1 = B.COL1\nWHERE  B.COL1 IS NULL;"
+      }
+    ]
   },
   {
     "id": 10490,

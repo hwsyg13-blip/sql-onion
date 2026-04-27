@@ -343,7 +343,77 @@
         "NOT EXISTS (SELECT 'X' FROM EMP B WHERE A.MGR_NO = B.EMP_NO AND B.SAL > 3000)"
       ],
       "correctIndex": 3,
-      "explanation": "NOT EXISTS 는 매니저 연봉이 3,000 초과가 아닌 경우이므로 '이하' 의미와는 다르고 NULL 처리에서도 차이가 발생한다."
+      "explanation": "NOT EXISTS 는 매니저 연봉이 3,000 초과가 아닌 경우이므로 '이하' 의미와는 다르고 NULL 처리에서도 차이가 발생한다.",
+      "references": [
+        {
+          "type": "table",
+          "caption": "EMP",
+          "headers": [
+            "EMP_NO",
+            "ENAME",
+            "MGR_NO",
+            "SAL"
+          ],
+          "rows": [
+            [
+              "7001",
+              "KING",
+              "NULL",
+              "5000"
+            ],
+            [
+              "7002",
+              "SMITH",
+              "7001",
+              "1000"
+            ],
+            [
+              "7003",
+              "ALLEN",
+              "7001",
+              "1500"
+            ],
+            [
+              "7004",
+              "WARD",
+              "7005",
+              "2500"
+            ],
+            [
+              "7005",
+              "JONES",
+              "7001",
+              "2800"
+            ],
+            [
+              "7006",
+              "FORD",
+              "7001",
+              "3500"
+            ]
+          ]
+        },
+        {
+          "type": "sql",
+          "caption": "가. EXISTS 조건 사용",
+          "code": "SELECT A.EMP_NO, A.ENAME\nFROM   EMP A\nWHERE  EXISTS (SELECT 'X' FROM EMP B\n               WHERE  A.MGR_NO = B.EMP_NO\n                 AND  B.SAL <= 3000);"
+        },
+        {
+          "type": "sql",
+          "caption": "나. IN 조건 사용",
+          "code": "SELECT A.EMP_NO, A.ENAME\nFROM   EMP A\nWHERE  A.MGR_NO IN (SELECT B.EMP_NO FROM EMP B\n                    WHERE  B.SAL <= 3000);"
+        },
+        {
+          "type": "sql",
+          "caption": "다. INNER JOIN 조건 사용",
+          "code": "SELECT A.EMP_NO, A.ENAME\nFROM   EMP A\n       INNER JOIN EMP B\n         ON A.MGR_NO = B.EMP_NO\nWHERE  B.SAL <= 3000;"
+        },
+        {
+          "type": "sql",
+          "caption": "라. NOT EXISTS — 매니저 연봉이 3,000 초과가 아닌 경우 (의미 불일치)",
+          "code": "SELECT A.EMP_NO, A.ENAME\nFROM   EMP A\nWHERE  NOT EXISTS (SELECT 'X' FROM EMP B\n                   WHERE  A.MGR_NO = B.EMP_NO\n                     AND  B.SAL > 3000);"
+        }
+      ]
     },
     {
       "subject": "2과목",

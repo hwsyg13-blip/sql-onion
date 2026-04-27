@@ -604,7 +604,81 @@
         "정상 쿼리"
       ],
       "correctIndex": 1,
-      "explanation": ""
+      "explanation": "",
+      "references": [
+        {
+          "type": "table",
+          "caption": "상품",
+          "headers": [
+            "상품ID",
+            "상품명"
+          ],
+          "rows": [
+            [
+              "P001",
+              "사과"
+            ],
+            [
+              "P001",
+              "사과(중복)"
+            ],
+            [
+              "P002",
+              "배"
+            ],
+            [
+              "P003",
+              "감"
+            ]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "평가항목",
+          "headers": [
+            "평가번호",
+            "상품ID",
+            "평가점수"
+          ],
+          "rows": [
+            [
+              "E01",
+              "P001",
+              "4"
+            ],
+            [
+              "E02",
+              "P002",
+              "5"
+            ],
+            [
+              "E03",
+              "P003",
+              "3"
+            ]
+          ]
+        },
+        {
+          "type": "sql",
+          "caption": "가. 정상 쿼리 (단일 행 보장 스칼라 서브쿼리)",
+          "code": "SELECT A.평가번호,\n       (SELECT B.상품명 FROM 상품 B WHERE A.상품ID = B.상품ID AND ROWNUM = 1) AS 상품명\nFROM   평가항목 A;"
+        },
+        {
+          "type": "sql",
+          "caption": "나. 다중 행 반환으로 오류",
+          "code": "SELECT (SELECT B.상품명 FROM 상품 B WHERE A.상품ID = B.상품ID) AS 상품명\nFROM   평가항목 A;"
+        },
+        {
+          "type": "sql",
+          "caption": "다. 컬럼 부재로 오류 (평가항목에 상품ID 컬럼이 없는 가정)",
+          "code": "SELECT *\nFROM   상품 A\nWHERE  A.상품ID = (SELECT 상품ID FROM 평가항목 WHERE 평가번호 = 'E01');"
+        },
+        {
+          "type": "sql",
+          "caption": "라. 정상 쿼리 (EXISTS 상관 서브쿼리)",
+          "code": "SELECT *\nFROM   상품 A\nWHERE  EXISTS (SELECT 1 FROM 평가항목 B WHERE A.상품ID = B.상품ID);"
+        }
+      ]
     },
     {
       "subject": "2과목",
