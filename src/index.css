@@ -1471,6 +1471,67 @@ img, svg {
 /* 모바일: 사이드바 그리드를 1단으로 (이론 본문 아래로 떨어짐) */
 @media (max-width: 1024px) {
   .theory-detail-grid {
+    /* minmax(0, ...) — grid item 의 자식 min-content 가 컬럼을 viewport 넘게 늘리지 못하도록 */
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+  .theory-detail-grid > article,
+  .theory-detail-grid > aside {
+    min-width: 0;
+  }
+  .theory-md { min-width: 0; max-width: 100%; }
+}
+
+/* =============================================================
+   모바일 가로 오버플로우 방지 — 이론 본문 자식들이 viewport 넘지 않도록
+   ============================================================= */
+html, body { overflow-x: hidden; }
+
+@media (max-width: 720px) {
+  /* article 본문 자식이 viewport 넘지 않도록 — 강제 max-width */
+  .theory-md > * { max-width: 100%; }
+
+  /* 표 — 가로 스크롤 가능한 wrapper 효과 */
+  .theory-md table {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    max-width: 100%;
+  }
+  .theory-md table th, .theory-md table td { white-space: nowrap; }
+
+  /* mermaid SVG — viewport 안에 맞춰 비례 축소 */
+  .theory-md .mermaid svg { max-width: 100% !important; height: auto !important; }
+
+  /* diagram-card / 인포그래픽 박스들 — 자식이 넘치면 스크롤 */
+  .theory-md .diagram-card,
+  .theory-md .step-flow,
+  .theory-md .threelayer,
+  .theory-md .ba-flow,
+  .theory-md .cls-row,
+  .theory-md .trait-grid,
+  .theory-md .null-flow,
+  .theory-md .threeway,
+  .theory-md .rule-grid,
+  .theory-md .fn-grid,
+  .theory-md .trap-grid,
+  .theory-md .summary-cards {
+    max-width: 100%;
+    overflow-x: auto;
+  }
+
+  /* 다단 grid 인포그래픽 — 모바일에서는 1단으로 */
+  .theory-md .step-flow.cols-4,
+  .theory-md .step-flow.cols-3,
+  .theory-md .cls-row,
+  .theory-md .trait-grid.cols-3,
+  .theory-md .trait-grid.cols-4,
+  .theory-md .ba-flow {
     grid-template-columns: 1fr !important;
   }
+
+  /* code 블록 — pre 가로 스크롤 보장 */
+  .theory-md pre { overflow-x: auto; max-width: 100%; }
+
+  /* 인라인 code — 긴 단어 잘림 방지 */
+  .theory-md code { word-break: break-word; }
 }
