@@ -103,7 +103,7 @@
         "영속성(Durability)"
       ],
       "correctIndex": 0,
-      "explanation": ""
+      "explanation": "원자성(Atomicity)은 트랜잭션의 모든 연산이 모두 수행되거나 전혀 수행되지 않아야 한다는 특성이다."
     },
     {
       "subject": "1과목",
@@ -129,7 +129,7 @@
         "엔터티 - 인스턴스 - 속성 - 속성값"
       ],
       "correctIndex": 3,
-      "explanation": "",
+      "explanation": "데이터 모델의 구성 요소는 엔터티(집합) → 인스턴스(개별 행) → 속성(컬럼) → 속성값(셀 값) 순서의 포함 관계로 정의된다.",
       "references": [
         {
           "type": "text",
@@ -180,7 +180,7 @@
         "COMMIT, ROLLBACK"
       ],
       "correctIndex": 0,
-      "explanation": ""
+      "explanation": "DML(Data Manipulation Language)은 데이터 조작어로 INSERT·UPDATE·DELETE·SELECT가 해당된다. CREATE/ALTER/DROP은 DDL, GRANT/REVOKE는 DCL, COMMIT/ROLLBACK은 TCL이다."
     },
     {
       "subject": "2과목",
@@ -256,7 +256,7 @@
         "(4) 세미콜론 위치 오류"
       ],
       "correctIndex": 0,
-      "explanation": "",
+      "explanation": "Oracle 식별자 규칙상 테이블명은 영문자로 시작해야 하며 숫자로 시작할 수 없다. VARCHAR2(20)·NUMBER(크기 생략 허용)·세미콜론은 모두 정상 구문이다.",
       "references": [
         {
           "type": "sql",
@@ -451,7 +451,7 @@
         "PRIOR 사원번호 = PRIOR 관리자번호"
       ],
       "correctIndex": 0,
-      "explanation": "",
+      "explanation": "순방향(부모→자식) 전개에서는 현재 행의 사원번호(PRIOR 사원번호)가 다음 행의 관리자번호와 일치해야 하므로 'PRIOR 사원번호 = 관리자번호'가 된다.",
       "references": [
         {
           "type": "sql",
@@ -586,7 +586,7 @@
         "`SELECT * FROM EMP WHERE MGR = '홍길동';`"
       ],
       "correctIndex": 0,
-      "explanation": ""
+      "explanation": "'홍길동'을 A, 자식을 B(B.MGR=A.EMPNO), 자식의 자식을 C(C.MGR=B.EMPNO)로 두고 EMP 테이블을 세 번 셀프 조인하여 C를 조회한다."
     },
     {
       "subject": "2과목",
@@ -663,7 +663,7 @@
         "HAVING 구매번호 = 3"
       ],
       "correctIndex": 0,
-      "explanation": "",
+      "explanation": "그룹 함수 결과를 필터링할 때는 HAVING을 사용하며, 3회 이상 주문 조건은 COUNT(구매번호) >= 3으로 표현한다. WHERE 절에는 집계 함수를 직접 사용할 수 없다.",
       "references": [
         {
           "type": "sql",
@@ -766,13 +766,13 @@
       "number": 41,
       "title": "SQL 집합 연산자 UNION ALL 과 의미가 동일한 조합은?",
       "options": [
-        "UNION + INTERSECT",
-        "UNION + UNION",
-        "INTERSECT + MINUS",
-        "UNION - MINUS"
+        "(A UNION B) UNION ALL (A INTERSECT B)",
+        "(A UNION B) UNION (A UNION B)",
+        "(A INTERSECT B) UNION ALL (A MINUS B)",
+        "(A UNION B) MINUS (A INTERSECT B)"
       ],
       "correctIndex": 0,
-      "explanation": "원본 기출의 정답 표기를 보존한다."
+      "explanation": "(A UNION B)는 양쪽 모두에 있는 행을 한 번씩 포함하는 합집합. (A INTERSECT B)는 양쪽 공통 행. UNION ALL은 두 결과를 그대로 이어 붙이므로, (A UNION B) UNION ALL (A INTERSECT B)는 A UNION ALL B와 같은 행 수를 가진다(공통 행이 두 번 등장하는 효과)."
     },
     {
       "subject": "2과목",
@@ -853,7 +853,7 @@
         "NOT NULL"
       ],
       "correctIndex": 0,
-      "explanation": ""
+      "explanation": "NULL은 비교 연산자(=, <>, !=)로 비교할 수 없으며 IS NULL / IS NOT NULL 만 사용해야 한다."
     },
     {
       "subject": "2과목",
@@ -866,7 +866,7 @@
         "INSERT INTO EMP (OFFI_POST_NUMBER) VALUES (NULL);"
       ],
       "correctIndex": 1,
-      "explanation": "",
+      "explanation": "기존 테이블에 컬럼을 추가할 때는 ALTER TABLE ... ADD (컬럼명 데이터타입) 구문을 사용한다. CREATE는 신규 생성, UPDATE는 데이터 수정, INSERT는 행 추가용이다.",
       "references": [
         {
           "type": "sql",
