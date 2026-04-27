@@ -103,16 +103,36 @@
     └── support/                # CS 산출물 (FAQ, 주간 리포트)
 ```
 
-## 환경변수 (`.env.example` 기준)
+## 환경변수
 
-클라이언트(빌드 시 주입):
+### 현재 Vercel 프로덕션 (2026-04-27 기준)
+실제 등록된 키:
+- `VITE_GA_MEASUREMENT_ID` — Google Analytics 4
+- `VITE_BUG_REPORT_URL` — 오류 제보 Google Apps Script endpoint
+- `VITE_ADSENSE_CLIENT` — AdSense publisher ID
+
+### 베타 모드 동안 미설정 (의도적)
+`src/App.tsx` 의 `BETA_NO_AUTH = true` 인 동안 다음 키는 **설정 안 해도 정상 동작**:
 - `VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY`
 - `VITE_PORTONE_STORE_ID`, `VITE_PORTONE_CHANNEL_KEY_KAKAO`
-- `VITE_ADSENSE_CLIENT` (선택)
 
-서버(Vercel 함수용, 아직 일부 미사용):
-- `SUPABASE_SERVICE_ROLE_KEY` (webhook 등 관리자 권한)
-- `PORTONE_API_SECRET`
+근거:
+- `src/lib/supabase.ts` 가 env 미설정 시 placeholder URL/key + `hasSupabase=false` 로 폴백
+- `src/lib/auth.ts` 의 모든 함수가 `hasSupabase` 체크 — `useSession()` 은 즉시 `{ user: null, loading: false }` 반환, Supabase 호출 0회
+- 로그인/요금제/결제 라우트는 home 으로 redirect (`App.tsx` `BETA_NO_AUTH` 가드)
+- 진도/방문/퀴즈 기록은 `src/lib/progress.ts` localStorage 전용 (Supabase 의존 없음)
+
+### 베타 종료 시 체크리스트 — `BETA_NO_AUTH = false` 로 바꾸기 직전
+1. Vercel env 추가 (Production / Preview / Development 모두):
+   - `VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY`
+   - `VITE_PORTONE_STORE_ID`, `VITE_PORTONE_CHANNEL_KEY_KAKAO`
+2. 서버용 env 추가 (Vercel Functions / webhook 사용 시):
+   - `SUPABASE_SERVICE_ROLE_KEY`
+   - `PORTONE_API_SECRET`
+3. Supabase 프로젝트 마이그레이션 적용 (`supabase/migrations/0001_init.sql` 외)
+4. PortOne 콘솔에서 카카오페이 채널 발급 + 채널키 확인
+5. Preview 배포에서 로그인 → 무료 사용 → Pro 결제 → 회차 풀이 E2E 검증
+6. 검증 통과 후 Production 배포
 
 **원칙**: 시크릿은 절대 커밋 금지. `.env.local` 은 `.gitignore` 확인 필수.
 
@@ -128,6 +148,41 @@
 | 이론 (Theory) | 해설·개념 정리 (`TheoryScreens.tsx`, `src/data/theory*.ts`) |
 | 양파 레이어 | 학습 깊이의 시각적 메타포 |
 | Pro | 유료 플랜 — PortOne 카카오페이 결제, `gating.ts` 에서 권한 분기 |
+
+## 4-채팅 분리 워크플로우 (2026-04-27~)
+
+운영 효율을 위해 작업을 4개 Claude Code 세션(채팅)으로 분리합니다. 각 채팅은 자체 브랜치·스코프·디렉토리(worktree)에서 작업합니다.
+
+| 채팅 | 브랜치 | 스코프 | main 직접 push |
+|------|--------|--------|----------------|
+| **배포** | `main` | Vercel env, 프로덕션 배포 결정, PR 리뷰·머지, CLAUDE.md/`.claude/` 운영 가이드 | ✅ |
+| **콘텐츠/QA** | `qa/<YYYY-MM-DD>-...`, `content/<주제>` | `scripts/authored/`, `scripts/*.mjs`, `docs/qa/`, `src/data/rounds/` | ❌ PR만 |
+| **기능 개발** | `feat/<기능>` | `src/components/`, `src/screens/`, `src/lib/`, `src/App.tsx` | ❌ PR만 |
+| **CS 운영** | `cs/<YYYY-MM-DD>-...` | `docs/support/`, `scripts/cs-triage.mjs` 등 | 작은 문서 수정만 직접 (사용자 승인 후) |
+
+### 채팅별 worktree 분리 — **필수**
+
+같은 디렉토리를 여러 채팅이 공유하면 mid-rebase 상태가 글로벌이라 한 채팅이 멈추면 다른 채팅도 잠깁니다 (2026-04-27 충돌 사례). 채팅마다 **자체 worktree**를 사용하세요.
+
+**관례**: 메인 디렉토리 옆에 `양파단-wt-<scope>-<topic>` 형태로 worktree 생성.
+
+```bash
+# 예: 콘텐츠/QA 채팅이 round-58/60 검수 작업 시작
+git fetch
+git worktree add ../양파단-wt-qa-rounds-58-60 -b qa/2026-04-27-rounds-58-60 origin/main
+cd ../양파단-wt-qa-rounds-58-60
+# 작업 → commit → push → gh pr create
+
+# 작업 완료 후 (PR 머지된 뒤)
+cd ../양파단
+git worktree remove ../양파단-wt-qa-rounds-58-60
+git branch -d qa/2026-04-27-rounds-58-60   # 원격은 PR 머지 시 자동 삭제
+```
+
+**배포 채팅**은 메인 디렉토리(`양파단/`)를 단독 사용하며 항상 `main` 브랜치 위에서 동작합니다.
+
+### 스코프 위반 처리
+다른 채팅의 영역 파일을 수정 요청받으면 일단 짧게 "이거 X 채팅에서 하시는 게 맞을 것 같다"고 짚어주고 사용자 결정을 따르세요. 확인 없이 일단 작업 시작해도 OK — 도중에 스코프 어긋나면 그때 짚어줌.
 
 ## 커뮤니케이션 규칙
 
