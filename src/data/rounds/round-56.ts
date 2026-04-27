@@ -874,10 +874,10 @@ export const ROUND_56: QuizQuestion[] = [
     "number": 34,
     "title": "사원의 관리자와 차상위 관리자를 함께 출력하는 쿼리로 가장 적절한 것은?",
     "options": [
-      "INNER JOIN ... A.EMP_ID = B.EMP_ID",
-      "INNER JOIN ... A.MGR_ID = B.EMP_ID",
-      "LEFT OUTER JOIN ... A.EMP_ID = B.MGR_ID",
-      "LEFT OUTER JOIN ... A.EMP_ID = B.EMP_ID"
+      "SELECT A.EMP_ID, B.EMP_ID FROM EMP A INNER JOIN EMP B ON A.EMP_ID = B.EMP_ID;",
+      "SELECT A.EMP_ID, B.EMP_ID FROM EMP A INNER JOIN EMP B ON A.MGR_ID = B.EMP_ID;",
+      "SELECT A.EMP_ID, B.EMP_ID FROM EMP A LEFT OUTER JOIN EMP B ON A.EMP_ID = B.MGR_ID;",
+      "SELECT A.EMP_ID, B.EMP_ID FROM EMP A LEFT OUTER JOIN EMP B ON A.EMP_ID = B.EMP_ID;"
     ],
     "correctIndex": 2,
     "explanation": "A 의 사원 번호가 B 테이블의 MGR_ID 와 일치해야 B 에 A 가 관리하는 하위 사원이 나타나며, LEFT OUTER JOIN 으로 관리자가 없는 경우도 포함한다.",
@@ -1212,10 +1212,10 @@ export const ROUND_56: QuizQuestion[] = [
     "number": 44,
     "title": "팀별 최 단신 선수의 팀명과 키를 출력하는 쿼리와 동일한 결과를 반환하는 것은?",
     "options": [
-      "`SELECT TEAM, MIN(HEIGHT) FROM 선수 WHERE HEIGHT IS NULL GROUP BY TEAM;`",
-      "`SELECT TEAM, HEIGHT FROM 선수 HAVING HEIGHT = MIN(HEIGHT);`",
-      "`SELECT TEAM, HEIGHT FROM 선수 WHERE HEIGHT > (SELECT MIN(HEIGHT) FROM 선수);`",
-      "`SELECT P.TEAM, P.HEIGHT FROM 선수 P INNER JOIN (SELECT TEAM, MIN(HEIGHT) AS H FROM 선수 GROUP BY TEAM) M ON P.TEAM = M.TEAM AND P.HEIGHT = M.H;`"
+      "SELECT TEAM, MIN(HEIGHT) FROM 선수 WHERE HEIGHT IS NULL GROUP BY TEAM;",
+      "SELECT TEAM, HEIGHT FROM 선수 HAVING HEIGHT = MIN(HEIGHT);",
+      "SELECT TEAM, HEIGHT FROM 선수 WHERE HEIGHT > (SELECT MIN(HEIGHT) FROM 선수);",
+      "SELECT P.TEAM, P.HEIGHT FROM 선수 P INNER JOIN (SELECT TEAM, MIN(HEIGHT) AS H FROM 선수 GROUP BY TEAM) M ON P.TEAM = M.TEAM AND P.HEIGHT = M.H;"
     ],
     "correctIndex": 3,
     "explanation": "팀별 최저 신장 선수의 정확한 (TEAM, HEIGHT) 행을 가져오려면 (TEAM, MIN(HEIGHT))를 인라인 뷰로 만든 뒤 원본 테이블과 INNER JOIN해야 한다. ① WHERE HEIGHT IS NULL은 NULL 행만 잡고, ② HAVING HEIGHT = MIN(HEIGHT)는 비집계 컬럼 HEIGHT 사용 오류, ③ HEIGHT > MIN은 최저값을 제외한 행을 반환하므로 모두 오답이다.",
@@ -1278,9 +1278,9 @@ export const ROUND_56: QuizQuestion[] = [
     "number": 47,
     "title": "매출액이 높은 순서대로 직원을 조회하는 쿼리 중 수정이 필요한 부분은?",
     "options": [
-      "SELECT 절",
-      "FROM 절",
-      "WHERE 절",
+      "SELECT 절에 직원, 매출 컬럼을 명시적으로 나열해야 한다.",
+      "FROM 절을 SALES 가 아닌 EMP_SALES 뷰로 교체해야 한다.",
+      "WHERE 절에 매출 IS NOT NULL 조건을 추가해야 한다.",
       "ORDER BY 절에 DESC 를 추가해야 한다."
     ],
     "correctIndex": 3,

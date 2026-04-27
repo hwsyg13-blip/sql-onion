@@ -337,9 +337,9 @@
       "number": 18,
       "title": "아래 SQL 에서 매니저의 연봉이 3,000 이하인 결과를 조회하는 SQL 이 아닌 것은?",
       "options": [
-        "EXISTS 조건 사용",
-        "IN 조건 사용",
-        "INNER JOIN 조건 사용",
+        "SELECT A.* FROM EMP A WHERE EXISTS (SELECT 1 FROM EMP B WHERE A.MGR_NO = B.EMP_NO AND B.SAL <= 3000);",
+        "SELECT A.* FROM EMP A WHERE A.MGR_NO IN (SELECT B.EMP_NO FROM EMP B WHERE B.SAL <= 3000);",
+        "SELECT A.* FROM EMP A INNER JOIN EMP B ON A.MGR_NO = B.EMP_NO WHERE B.SAL <= 3000;",
         "NOT EXISTS (SELECT 'X' FROM EMP B WHERE A.MGR_NO = B.EMP_NO AND B.SAL > 3000)"
       ],
       "correctIndex": 3,
@@ -420,10 +420,10 @@
       "number": 19,
       "title": "아래 SQL 결과에 대한 설명으로 옳은 것은?",
       "options": [
-        "모든 행 반환",
+        "T1 의 모든 행이 그대로 반환된다.",
         "NULL 이 포함된 비교에서는 모든 매칭이 UNKNOWN 이 되어 행이 제외된다.",
-        "오류 발생",
-        "T2 의 행 수만큼 반환"
+        "복수컬럼 IN 비교에서 NULL 이 나타나면 컴파일 단계에서 오류가 발생한다.",
+        "T2 의 행 수만큼 카티션 곱 형태로 반환된다."
       ],
       "correctIndex": 1,
       "explanation": "복수컬럼 IN 비교에서도 NULL 비교는 일반 비교와 동일하게 UNKNOWN 으로 평가된다. T2 의 B 가 NULL 인 행과의 (A,B) IN 비교 결과는 모두 UNKNOWN 이 되어 WHERE 조건을 통과하지 못하므로 해당 행은 결과에서 제외된다.",
@@ -804,9 +804,9 @@
       "title": "아래 WINDOW FUNCTION SQL 의 결과로 옳은 것은?",
       "options": [
         "MAX: 300, 400, 500, 600, 700, 700, 700",
-        "다른 값들",
-        "다른 값들",
-        "다른 값들"
+        "MAX: 300, 400, 500, 600, 700, 700, 600",
+        "MAX: 100, 200, 300, 400, 500, 600, 700",
+        "MAX: 700, 700, 700, 700, 700, 700, 700"
       ],
       "correctIndex": 0,
       "explanation": "각 윈도우 정의에 따른 계산 결과를 직접 산출하여 얻는다.",
@@ -931,9 +931,9 @@
       "title": "아래 두 테이블에 대한 SQL 의 결과로 옳은 것은?",
       "options": [
         "(1, SMITH, 1, S%), (3, SCOTT, 1, S%), (1, SMITH, 2, %T%), (3, SCOTT, 2, %T%)",
-        "(1, SMITH, 1, S%) 만",
-        "전체 카티션 곱",
-        "공집합"
+        "(1, SMITH, 1, S%) 한 건만 반환된다.",
+        "조인 조건이 없으므로 TAB1 × TAB2 카티션 곱(8건)이 그대로 반환된다.",
+        "조건을 만족하는 행이 없어 공집합이 반환된다."
       ],
       "correctIndex": 0,
       "explanation": "'S%' 는 SMITH 와 SCOTT 에 매칭되고, '%T%' 도 두 이름 모두에 매칭된다.",

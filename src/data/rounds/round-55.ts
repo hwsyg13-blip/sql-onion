@@ -461,10 +461,10 @@ export const ROUND_55: QuizQuestion[] = [
     "number": 20,
     "title": "두 테이블에 대해 LEFT OUTER JOIN, FULL OUTER JOIN, RIGHT OUTER JOIN 을 각각 수행한 결과 행 수로 옳은 것은?",
     "options": [
-      "3, 3, 3",
-      "5, 5, 5",
-      "3, 5, 3 (LEFT 3, FULL 5, RIGHT 3)",
-      "3, 5, 4"
+      "LEFT 3, FULL 3, RIGHT 3 — 매칭된 1 건만 모든 조인에서 반환된다.",
+      "LEFT 5, FULL 5, RIGHT 5 — 모든 조인에서 양쪽 행이 모두 반환된다.",
+      "LEFT 3, FULL 5, RIGHT 3",
+      "LEFT 3, FULL 5, RIGHT 4 — RIGHT 결과는 매칭 1 건 + T2 미매칭 3 건이다."
     ],
     "correctIndex": 2,
     "explanation": "T1과 T2는 공통 값 3 하나로 매칭된다. LEFT OUTER JOIN은 T1 기준 3건(1, 2, 3), RIGHT OUTER JOIN은 T2 기준 3건(3, 4, 5), FULL OUTER JOIN은 매칭 1건 + T1 미매칭 2건 + T2 미매칭 2건으로 5건이 된다.",
@@ -1133,7 +1133,7 @@ export const ROUND_55: QuizQuestion[] = [
     "number": 48,
     "title": "무결성 제약조건 위배에 대한 설명 중 옳지 않은 것은?",
     "options": [
-      "도서관 테이블에 (2, '...') 을 삽입하는 경우 참조 무결성을 위배한다.",
+      "도서관 테이블에 (2, '미존재 회원ID') 를 삽입하는 경우 참조 무결성을 위배한다.",
       "PRIMARY KEY 컬럼에 중복 값을 삽입하면 개체 무결성이 위배된다.",
       "CHECK 제약을 벗어난 값이 입력되면 도메인 무결성이 위배된다.",
       "NOT NULL 컬럼에 NULL 이 들어가면 개체 무결성이 위배된다."

@@ -939,10 +939,10 @@
       "number": 34,
       "title": "강좌번호 100 과 101 을 동시에 수강하는 학번을 조회하는 SQL 로 적절한 것은?",
       "options": [
-        "`WHERE 강의번호 = 100 AND 강의번호 = 101`",
+        "SELECT 학번 FROM 수강 WHERE 강의번호 = 100 AND 강의번호 = 101;",
         "`SELECT 학번 FROM 수강 WHERE 강의번호=100 INTERSECT SELECT 학번 FROM 수강 WHERE 강의번호=101`",
-        "`WHERE 강의번호 IN (100, 101)`",
-        "`WHERE 강의번호 = 100 OR 101`"
+        "SELECT 학번 FROM 수강 WHERE 강의번호 IN (100, 101);",
+        "SELECT 학번 FROM 수강 WHERE 강의번호 = 100 OR 강의번호 = 101;"
       ],
       "correctIndex": 1,
       "explanation": "AND 는 한 행이 동시에 두 값일 수 없어 공집합, IN/OR 은 둘 중 하나라도 만족하는 학번을 반환한다. INTERSECT 로 두 강좌의 학번 집합을 교집합 처리해야 동시에 수강한 학번을 얻는다."
@@ -984,9 +984,9 @@
       "number": 37,
       "title": "아래 SQL 의 동작에 대한 설명으로 옳은 것은?",
       "options": [
-        "DEPTNO 가 10 인 사원들의 월급을 10% 인상한다.",
-        "`UPDATE ... WHERE DEPTNO = 10` 과 동일한 의미이다.",
-        "오류가 발생한다.",
+        "DEPARTMENT_ID 가 60 인 사원의 SALARY 만 10% 인상되고 그 외에는 변경되지 않는다.",
+        "WHERE 절이 생략되어 UPDATE EMP_TEST SET SALARY = SALARY * 1.1 WHERE DEPARTMENT_ID = 60 과 동일한 의미가 된다.",
+        "상관 서브쿼리에 비집계 컬럼이 사용되어 SQL 컴파일 단계에서 오류가 발생한다.",
         "DEPARTMENT_ID 가 60 이 아닌 모든 사원의 월급이 NULL 로 갱신된다."
       ],
       "correctIndex": 3,
@@ -1123,10 +1123,10 @@
       "number": 43,
       "title": "테이블의 데이터와 종속된 테이블을 함께 삭제하는 명령어는?",
       "options": [
-        "TRUNCATE",
-        "DROP TABLE ... CASCADE",
-        "DELETE",
-        "ALTER TABLE"
+        "TRUNCATE TABLE 부서;",
+        "DROP TABLE 부서 CASCADE CONSTRAINTS;",
+        "DELETE FROM 부서;",
+        "ALTER TABLE 부서 DROP COLUMN 부서명;"
       ],
       "correctIndex": 1,
       "explanation": "CASCADE 옵션으로 종속 제약 조건 및 관련 객체가 함께 삭제된다."

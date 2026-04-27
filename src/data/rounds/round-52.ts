@@ -758,10 +758,10 @@ export const ROUND_52: QuizQuestion[] = [
     "number": 32,
     "title": "아래 네 개의 SQL 중 결과가 나머지와 다른 것은?",
     "options": [
-      "SUM 으로 집계",
-      "AVG 로 집계",
-      "COUNT 로 집계",
-      "네 번째 SQL (나머지와 결과가 다르게 구성된 문항)"
+      "SELECT SUM(COL1) FROM T WHERE COL2 IS NOT NULL;",
+      "SELECT AVG(COL1) * COUNT(COL2) FROM T;",
+      "SELECT COUNT(COL2) * (SUM(COL1) / COUNT(COL2)) FROM T;",
+      "SELECT SUM(COL1) FROM T;"
     ],
     "correctIndex": 3,
     "explanation": "원본 기출의 정답 표기를 보존한다. 결과가 상이한 SQL 은 ④번이다.",
@@ -1137,10 +1137,10 @@ export const ROUND_52: QuizQuestion[] = [
     "number": 49,
     "title": "부서 테이블의 한 행을 삭제할 때 이를 참조하는 사원 테이블의 행도 함께 삭제되도록 외래키에 설정해야 할 옵션은?",
     "options": [
-      "RESTRICT",
-      "PARENT ← CHILD CASCADE",
+      "RESTRICT (참조하는 자식 행이 있으면 부모 삭제를 거부)",
+      "PARENT ← CHILD CASCADE (부모 삭제 시 자식 PK 가 부모로 전파됨 — 잘못된 방향)",
       "CHILD ← PARENT CASCADE (CHILD 에 ON DELETE CASCADE 설정)",
-      "NO ACTION"
+      "NO ACTION (참조 무결성 위반 시 명령을 거부하는 표준 SQL 기본 동작)"
     ],
     "correctIndex": 2,
     "explanation": "자식 테이블의 외래키에 `ON DELETE CASCADE` 를 설정하면 부모 삭제 시 자식도 자동 삭제된다.",
