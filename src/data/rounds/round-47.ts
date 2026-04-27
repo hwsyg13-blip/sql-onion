@@ -19,7 +19,7 @@ export const ROUND_47: QuizQuestion[] = [
       "보안 관점"
     ],
     "correctIndex": 1,
-    "explanation": "",
+    "explanation": "데이터 모델링은 보는 시각에 따라 셋으로 나뉩니다. 데이터 관점은 어떤 정보(엔터티·속성·관계)를 다룰지에 집중하고, 프로세스 관점은 어떤 일이 어떻게 처리되는지에 집중합니다. 데이터와 프로세스 관점은 두 가지를 함께 보면서 업무 처리 방식이 데이터에 어떤 영향을 주는지를 분석합니다. 설명이 그 영향 관계를 묘사하므로 정답은 ②번입니다.",
     "_source": "authored",
     "references": [
       {
@@ -43,7 +43,7 @@ export const ROUND_47: QuizQuestion[] = [
       "같은 서비스의 재이용 이력이 별도 행으로 구분된다."
     ],
     "correctIndex": 2,
-    "explanation": "",
+    "explanation": "서비스이용 엔터티의 PK가 (고객번호, 서비스번호, 이용일자) 세 컬럼으로 구성되어 있다는 점이 핵심입니다. 이용일자가 PK에 들어가 있으면 같은 고객이 같은 서비스를 다른 날 다시 이용해도 행이 새로 생길 수 있습니다. 즉 재이용이 자유롭게 가능하다는 의미이므로 \"재사용할 수 없도록 제약되어 있다\"는 ③번이 옳지 않은 설명이 되어 정답입니다.",
     "_source": "authored",
     "references": [
       {
@@ -108,7 +108,7 @@ export const ROUND_47: QuizQuestion[] = [
       "상품 총금액 (단가 × 수량)"
     ],
     "correctIndex": 3,
-    "explanation": "",
+    "explanation": "다른 속성에서 계산되어 만들어지는 속성을 파생속성이라고 합니다. 회원 ID·생년월일·상품 단가는 시스템에 직접 입력되어 보관되는 기본속성입니다. 반면 상품 총금액은 단가 × 수량으로 계산되어 도출되므로 파생속성입니다. 정답은 ④번입니다.",
     "_source": "authored"
   },
   {
@@ -126,7 +126,7 @@ export const ROUND_47: QuizQuestion[] = [
       "BCNF"
     ],
     "correctIndex": 2,
-    "explanation": "",
+    "explanation": "정규화 단계에서 제3정규형은 일반 속성끼리 서로 종속되지 않아야 한다는 조건(이행적 종속 제거)을 추가합니다. 예를 들어 사원 테이블에서 부서코드만 알아도 부서명을 알 수 있다면, 부서명은 사원 정보가 아니라 부서 정보로 따로 분리해야 합니다. 설명이 일반 속성 간 종속을 금지하는 조건을 묘사하므로 정답은 ③번입니다.",
     "_source": "authored",
     "references": [
       {
@@ -150,7 +150,7 @@ export const ROUND_47: QuizQuestion[] = [
       "자주 변경되지 않아야 한다."
     ],
     "correctIndex": 0,
-    "explanation": "",
+    "explanation": "주식별자는 행 하나하나를 구별해 주는 핵심 키이므로 반드시 값이 있어야 합니다(NOT NULL). 비어 있으면 어느 행을 가리키는지 알 수 없습니다. 따라서 NULL을 허용한다는 ①번 설명이 잘못되어 정답이 됩니다. 나머지 보기는 주식별자의 표준 특성(최소성·유일성·불변성)에 부합합니다.",
     "_source": "authored"
   },
   {
@@ -168,7 +168,7 @@ export const ROUND_47: QuizQuestion[] = [
       "Sub Only"
     ],
     "correctIndex": 1,
-    "explanation": "",
+    "explanation": "슈퍼-서브 타입 구조란 공통 속성을 가진 부모(슈퍼) 엔터티 아래에 특수한 자식(서브) 엔터티가 붙는 구조입니다. 구현 방법은 세 가지입니다. Single Table은 모든 서브를 하나의 큰 테이블에 합칩니다. One To One은 슈퍼와 서브를 각각 별도 테이블로 두는 1:1 분리 방식입니다. Plus(슈퍼+서브)는 슈퍼 없이 서브 별로 묶습니다. 개별 서브 테이블을 자주 따로 조회한다면 분리해 두는 것이 빠르므로 One To One이 적합해 정답은 ②번입니다.",
     "_source": "authored"
   },
   {
@@ -186,7 +186,7 @@ export const ROUND_47: QuizQuestion[] = [
       "모든 컬럼을 파티셔닝한다."
     ],
     "correctIndex": 1,
-    "explanation": "",
+    "explanation": "같은 테이블 안에 자주 쓰이는 컬럼과 거의 안 쓰이는 컬럼이 섞여 있으면 매번 큰 행을 통째로 읽어 비효율이 발생합니다. 로그인용 핵심 컬럼만 별도 테이블로 분리하면 자주 일어나는 로그인 처리에서 데이터를 적게 읽어 성능이 향상됩니다. 이를 수직 분할이라고 합니다. 정답은 ②번입니다.",
     "_source": "authored"
   },
   {
@@ -204,7 +204,7 @@ export const ROUND_47: QuizQuestion[] = [
       "정규화는 성능과 무관하다."
     ],
     "correctIndex": 2,
-    "explanation": "",
+    "explanation": "정규화는 데이터 중복을 줄이고 무결성을 높이는 작업이고, 반정규화는 성능을 위해 일부러 중복을 허용해 조회 속도를 끌어올리는 작업입니다. 표준 절차는 먼저 정규화를 끝까지 수행해 깨끗한 모델을 만든 뒤, 실측되는 성능 이슈에 맞춰 필요한 부분만 반정규화하는 것입니다. 처음부터 반정규화를 남발하면 데이터 정합성이 깨지기 쉽습니다. 정답은 ③번입니다.",
     "_source": "authored"
   },
   {
@@ -222,7 +222,7 @@ export const ROUND_47: QuizQuestion[] = [
       "BCNF"
     ],
     "correctIndex": 1,
-    "explanation": "",
+    "explanation": "기본키가 (주문번호, 상품번호) 두 컬럼으로 구성되어 있는데 상품명은 상품번호만 보면 알 수 있는 정보입니다. 즉 PK 일부에만 종속된 부분 함수 종속이 발생합니다. 부분 종속을 제거해 기본키 전체에 완전히 종속되도록 만드는 단계가 제2정규형입니다. 따라서 이 상태는 1정규형까지는 만족하지만 2정규형은 만족하지 못해 정답은 ②번입니다.",
     "_source": "authored"
   },
   {
@@ -240,7 +240,7 @@ export const ROUND_47: QuizQuestion[] = [
       "물리 스키마"
     ],
     "correctIndex": 0,
-    "explanation": "",
+    "explanation": "데이터베이스의 3단계 스키마는 사용자에게 가까운 순서로 외부 → 개념 → 내부입니다. 외부 스키마는 사용자나 응용 프로그램이 보는 개별 뷰, 개념 스키마는 조직 전체가 공유하는 통합된 논리 구조, 내부 스키마는 실제 저장 방식·인덱스 등 물리 구조를 정의합니다. 설명이 응용 프로그래머가 보는 개인적 DB 정의를 가리키므로 정답은 ①번입니다.",
     "_source": "authored",
     "references": [
       {
@@ -282,7 +282,7 @@ export const ROUND_47: QuizQuestion[] = [
       "GROUP BY 평가항목"
     ],
     "correctIndex": 1,
-    "explanation": "",
+    "explanation": "ROLLUP(A, B)는 왼쪽부터 점차 줄여가며 (A, B), (A), () 세 가지 그룹을 만듭니다. 문제는 첫 컬럼 집계, 두 컬럼 조합 집계, 전체 집계가 필요하므로 정확히 ROLLUP이 만드는 세 가지 그룹과 일치합니다. CUBE는 (B) 단독까지 추가로 만들어 결과 행이 더 많아 의도에 맞지 않습니다. 정답은 ②번입니다.",
     "_source": "authored"
   },
   {
@@ -300,7 +300,7 @@ export const ROUND_47: QuizQuestion[] = [
       "COMMIT 과 ROLLBACK 을 사용하여 데이터 무결성을 보장할 수 있다."
     ],
     "correctIndex": 3,
-    "explanation": "",
+    "explanation": "트랜잭션은 한 묶음의 작업을 의미하며 무결성 유지를 위해 COMMIT(확정)과 ROLLBACK(취소)이라는 두 명령으로 제어합니다. 작업이 정상적으로 끝나면 COMMIT으로 영구 반영하고, 도중에 문제가 생기면 ROLLBACK으로 되돌립니다. ①은 지속성에 대한 설명이고, ②·③은 잘못된 진술입니다. 정답은 ④번입니다.",
     "_source": "authored"
   },
   {
@@ -354,7 +354,7 @@ export const ROUND_47: QuizQuestion[] = [
       "OUTER JOIN"
     ],
     "correctIndex": 3,
-    "explanation": "",
+    "explanation": "일반 조인(INNER JOIN)은 양쪽 테이블에 모두 매칭되는 행만 결과로 보여줍니다. 매칭되지 않은 행까지 결과에 살리고 싶을 때 사용하는 것이 OUTER JOIN입니다. LEFT/RIGHT/FULL 세 가지 형태가 있어 각각 한쪽 또는 양쪽의 미매칭 행을 NULL로 채워 보존합니다. 정답은 ④번입니다.",
     "_source": "authored"
   },
   {
@@ -396,7 +396,7 @@ export const ROUND_47: QuizQuestion[] = [
       "LAG"
     ],
     "correctIndex": 3,
-    "explanation": "",
+    "explanation": "윈도우 함수에서 행을 앞뒤로 들춰보는 함수가 두 가지 있습니다. LAG는 정해진 정렬 안에서 \"앞 행\"의 값을 가져오고, LEAD는 \"뒤 행\"의 값을 가져옵니다. \"이전 행 값\"을 반환한다고 했으므로 LAG가 정답입니다. SUM·ROW_NUMBER는 의미가 다릅니다. 정답은 ④번입니다.",
     "_source": "authored"
   },
   {
@@ -468,7 +468,7 @@ export const ROUND_47: QuizQuestion[] = [
       "`SELECT ... WHERE EXISTS (SELECT ...)` 만 단독 사용"
     ],
     "correctIndex": 3,
-    "explanation": "",
+    "explanation": "원본 SQL은 (TEAM_ID, HEIGHT) 두 컬럼이 동시에 일치하는 조건입니다. 이는 상관 서브쿼리·인라인 뷰 조인·JOIN+HAVING 형태로 모두 동등하게 변환할 수 있습니다. 그러나 EXISTS만 단독으로 쓰면 \"존재만 확인\"하는 식이 되어 컬럼 짝까지 비교하는 의미를 살리려면 추가 조건이 필요합니다. 따라서 EXISTS 단독 사용은 결과가 달라질 수 있어 ④번이 정답입니다.",
     "_source": "authored",
     "references": [
       {
@@ -492,7 +492,7 @@ export const ROUND_47: QuizQuestion[] = [
       "팀의 최고 연봉 사원이 속한 팀"
     ],
     "correctIndex": 1,
-    "explanation": "",
+    "explanation": "안쪽부터 차근차근 따라가면 됩니다. 가장 안쪽 인라인 뷰는 팀별로 사원의 연봉을 모두 더한 총급여를 만든 뒤 총급여 내림차순으로 정렬합니다. 그 위 인라인 뷰에서 ROWNUM = 1로 첫 행, 즉 총급여가 가장 큰 팀의 팀번호 하나만 뽑습니다. 마지막으로 그 팀번호와 일치하는 팀의 팀명을 조회합니다. 따라서 사원 연봉 합계가 가장 큰 팀의 이름이 결과로 나오므로 정답은 ②번입니다.",
     "_source": "authored",
     "references": [
       {
@@ -516,7 +516,7 @@ export const ROUND_47: QuizQuestion[] = [
       "WHERE COL >= 10 AND COL > 50"
     ],
     "correctIndex": 2,
-    "explanation": "",
+    "explanation": "`BETWEEN A AND B`는 `A 이상이고 B 이하`를 한 번에 표현해 줍니다. ①의 IN은 정확히 10 또는 50인 두 값만 골라내고, ②의 OR도 마찬가지입니다. ④는 `>= 10 AND > 50`이라 50보다 큰 값만 남아 의도와 다릅니다. 10부터 50 사이 모든 값을 잡는 것은 ③번뿐입니다.",
     "_source": "authored"
   },
   {
@@ -534,7 +534,7 @@ export const ROUND_47: QuizQuestion[] = [
       "ORDER BY 절에 DESC 추가"
     ],
     "correctIndex": 3,
-    "explanation": "",
+    "explanation": "ORDER BY는 기본적으로 오름차순(ASC)으로 정렬합니다. 내림차순으로 바꾸려면 컬럼 뒤에 명시적으로 DESC 키워드를 붙여야 합니다. SELECT/FROM/WHERE 절은 정렬과 무관하므로 정답은 ④번입니다.",
     "_source": "authored",
     "references": [
       {
@@ -558,7 +558,7 @@ export const ROUND_47: QuizQuestion[] = [
       "0"
     ],
     "correctIndex": 2,
-    "explanation": "",
+    "explanation": "CASE 식은 위에서 아래로 평가하다가 처음 참이 되는 분기를 따릅니다. 한 행만 있고 GRADE = 12, RANK = 13이라고 가정하면, GRADE + RANK = 25입니다. SUM(25)의 결과는 25이고 NULL이 아니므로 ELSE 분기인 SUM(GRADE + RANK)이 그대로 25로 반환됩니다. 정답은 ③번입니다.",
     "_source": "authored",
     "references": [
       {
@@ -630,7 +630,7 @@ export const ROUND_47: QuizQuestion[] = [
       "오류"
     ],
     "correctIndex": 1,
-    "explanation": "",
+    "explanation": "MERGE는 한 명령으로 UPDATE와 INSERT를 동시에 처리하는 구문입니다. ON 조건으로 두 테이블을 매칭한 뒤, 매칭되면 UPDATE를, 매칭되지 않으면 INSERT를 수행합니다. 본 문항에서는 매칭되든 매칭되지 않든 V가 100으로 채워지도록 작성되어 있어 결과의 모든 행 V 컬럼은 100이 됩니다. 정답은 ②번입니다.",
     "_source": "authored",
     "references": [
       {
@@ -654,7 +654,7 @@ export const ROUND_47: QuizQuestion[] = [
       "WHERE ROWNUM = MAX(COL)"
     ],
     "correctIndex": 1,
-    "explanation": "",
+    "explanation": "ROWNUM은 결과 행에 1부터 차례로 번호를 매기는 가상 컬럼입니다. 그러나 ROWNUM은 ORDER BY가 적용되기 전에 매겨지므로 단순히 `WHERE ROWNUM = 1`만 쓰면 정렬이 무시된 첫 행이 나와 최대값이 보장되지 않습니다. 따라서 인라인 뷰 안에서 먼저 ORDER BY DESC로 정렬해 둔 뒤, 바깥에서 ROWNUM = 1로 첫 행을 잘라야 안전하게 최대값을 얻습니다. 정답은 ②번입니다. ① MAX 함수만으로도 가능하지만, 본 문항이 묻는 것은 ROWNUM 사용 패턴입니다.",
     "_source": "authored"
   },
   {
@@ -713,7 +713,7 @@ export const ROUND_47: QuizQuestion[] = [
       "NTILE"
     ],
     "correctIndex": 0,
-    "explanation": "",
+    "explanation": "같은 값에는 같은 순위를 주되 다음 순위를 건너뛰지 않고 1, 2, 2, 3처럼 연속해서 매기는 함수가 DENSE_RANK입니다. RANK는 동순위 뒤 번호를 건너뛰며(1, 2, 2, 4...), ROW_NUMBER는 동순위 없이 무조건 일련번호를 매기고, NTILE은 그룹을 분할하는 함수입니다. 정답은 ①번입니다.",
     "_source": "authored"
   },
   {
@@ -731,7 +731,7 @@ export const ROUND_47: QuizQuestion[] = [
       "NTILE"
     ],
     "correctIndex": 1,
-    "explanation": "",
+    "explanation": "비율 함수 RATIO_TO_REPORT는 한 행의 값을 파티션 전체 합으로 나눈 비율을 0~1 사이의 소수로 돌려줍니다. 예: 합계가 100이고 어떤 행 값이 20이면 0.2를 반환합니다. PERCENT_RANK는 순위 기반 백분위, CUME_DIST는 누적 분포, NTILE은 그룹 분할이라 의미가 다릅니다. 정답은 ②번입니다.",
     "_source": "authored"
   },
   {
@@ -749,7 +749,7 @@ export const ROUND_47: QuizQuestion[] = [
       "EXCEPT"
     ],
     "correctIndex": 2,
-    "explanation": "",
+    "explanation": "집합 연산자의 의미를 정리하면 UNION은 합집합(중복 제거), UNION ALL은 합집합(중복 유지), INTERSECT는 교집합(양쪽 모두에 있는 행), EXCEPT/MINUS는 차집합입니다. 두 SELECT의 공통 행을 보고 싶을 때 쓰는 것이 INTERSECT이므로 정답은 ③번입니다.",
     "_source": "authored"
   },
   {
@@ -767,7 +767,7 @@ export const ROUND_47: QuizQuestion[] = [
       "NOT NULL"
     ],
     "correctIndex": 0,
-    "explanation": "",
+    "explanation": "NULL은 일반 비교 연산자로 다룰 수 없습니다. `<> NULL`이나 `!= NULL`처럼 쓰면 결과가 항상 UNKNOWN이 되어 어떤 행도 통과하지 못합니다. NULL 여부를 검사하려면 전용 연산자인 `IS NULL` 또는 `IS NOT NULL`을 써야 합니다. 정답은 ①번입니다.",
     "_source": "authored"
   },
   {
@@ -785,7 +785,7 @@ export const ROUND_47: QuizQuestion[] = [
       "정상 쿼리"
     ],
     "correctIndex": 1,
-    "explanation": "",
+    "explanation": "본 문항은 보기 4개 SQL(가·나·다·라) 중 어느 SQL이 오류를 일으키는지를 묻습니다. 가(A.상품ID = B.상품ID AND ROWNUM = 1)는 상관 서브쿼리에 ROWNUM = 1을 두어 한 행만 보장하므로 정상 동작합니다. 라(EXISTS 상관 서브쿼리)는 존재 여부만 확인하므로 정상입니다. 그러나 나(A.상품ID = B.상품ID)는 상품 테이블에 같은 상품ID가 두 건(P001 사과·P001 사과(중복)) 있어 SELECT 절 스칼라 서브쿼리가 다중 행을 반환해 \"단일 행 서브쿼리에 둘 이상의 행이 반환됨\" 오류가 납니다. 다(상품 테이블에서 평가항목.상품ID 참조)는 평가항목에 상품ID 컬럼이 없다는 가정이라 컬럼 식별 오류가 납니다. 따라서 오류가 발생하는 것은 나·다 두 개이므로 ②번이 정답입니다.",
     "_source": "authored",
     "references": [
       {
@@ -877,7 +877,7 @@ export const ROUND_47: QuizQuestion[] = [
       "동일 이름 컬럼으로 자동 조인된다."
     ],
     "correctIndex": 0,
-    "explanation": "",
+    "explanation": "CROSS JOIN(카티션 곱)은 조인 조건 없이 두 테이블의 모든 행을 일대일로 짝지어 만들 수 있는 모든 조합을 반환합니다. 결과 행 수는 두 테이블의 행 수의 곱입니다. ②는 INNER, ③은 일반 ON 절이 있는 조인, ④는 NATURAL JOIN의 특성이라 다릅니다. 정답은 ①번입니다.",
     "_source": "authored"
   },
   {
@@ -895,7 +895,7 @@ export const ROUND_47: QuizQuestion[] = [
       "EMP A RIGHT OUTER JOIN EMP B ON A.MGR_NO = B.EMP_NO"
     ],
     "correctIndex": 2,
-    "explanation": "",
+    "explanation": "사원 자신과 그 매니저 정보를 함께 보려면 EMP 테이블을 자기 자신과 조인하는 셀프 조인을 합니다. 이때 사원 A의 매니저 번호(A.MGR_NO)가 매니저 B의 사원 번호(B.EMP_NO)와 일치해야 하므로 ON 조건이 정해집니다. 매니저가 없는 사원(예: CEO)도 결과에 포함시키려면 LEFT OUTER JOIN을 써야 합니다. 정답은 ③번입니다.",
     "_source": "authored"
   },
   {
@@ -913,7 +913,7 @@ export const ROUND_47: QuizQuestion[] = [
       "식별자 관계에서는 자식이 부모 없이 존재할 수 없다."
     ],
     "correctIndex": 2,
-    "explanation": "",
+    "explanation": "일반적으로 N개의 테이블을 조인하려면 최소 N - 1개의 조인 조건이 필요합니다. A·B·C 세 테이블이라면 조건 두 개면 충분합니다. 따라서 \"조인 조건이 최소 3개 이상이어야 한다\"는 ③번 설명은 잘못되어 정답이 됩니다. 식별자 관계는 부모 키가 자식의 PK 일부가 되며, 이로 인해 자식은 부모 없이 존재할 수 없는 의존 관계가 됩니다.",
     "_source": "authored"
   },
   {
@@ -973,7 +973,7 @@ export const ROUND_47: QuizQuestion[] = [
       "주문 테이블의 고객 ID 를 고객 테이블에 없는 값으로 업데이트"
     ],
     "correctIndex": 3,
-    "explanation": "",
+    "explanation": "외래키(FK)는 부모 테이블의 PK를 참조한다는 약속이라, 자식 테이블의 FK 값은 반드시 부모 테이블에 존재하는 값이어야 합니다. 부모에 없는 값으로 INSERT나 UPDATE를 시도하면 참조 무결성 위배 오류가 발생합니다. ①·②·③은 모두 정상 흐름이고, ④만 부모에 없는 고객 ID로 자식을 변경하므로 정답입니다.",
     "_source": "authored"
   },
   {
@@ -991,7 +991,7 @@ export const ROUND_47: QuizQuestion[] = [
       "HAVING 은 GROUP BY 와 함께 사용할 수 없다."
     ],
     "correctIndex": 2,
-    "explanation": "",
+    "explanation": "`GROUP BY ID`로 같은 ID끼리 묶고, `HAVING COUNT(*) >= 2`로 행 수가 2 이상인 그룹만 남깁니다. 살아남은 그룹마다 한 행씩 결과로 나오며 각 행에는 그 그룹의 COUNT 값이 표시됩니다. 예를 들어 행이 300건인 ID 그룹 하나가 조건을 통과하면 결과로 300이 1건 반환됩니다. 정답은 ③번입니다.",
     "_source": "authored",
     "references": [
       {
@@ -1015,7 +1015,7 @@ export const ROUND_47: QuizQuestion[] = [
       "오류"
     ],
     "correctIndex": 2,
-    "explanation": "",
+    "explanation": "WHERE COL2 IS NOT NULL로 (10, 20)과 (10, 0) 두 행만 남습니다. AVG(COL1) = (10 + 10) ÷ 2 = 10, AVG(COL2) = (20 + 0) ÷ 2 = 10이 됩니다. AVG는 NULL을 자동으로 빼지만 0은 정상 값으로 포함된다는 점이 함정입니다. 정답은 ③번입니다.",
     "_source": "authored",
     "references": [
       {
@@ -1060,7 +1060,7 @@ export const ROUND_47: QuizQuestion[] = [
       "중복 허용을 기본으로 한다."
     ],
     "correctIndex": 2,
-    "explanation": "",
+    "explanation": "UNION은 두 SELECT 결과를 합치되 중복된 행은 한 번으로 줄여 보여줍니다. 그래서 ①에서 말하는 것과 달리 UNION ALL보다 정렬·중복 제거 비용이 들어 일반적으로 더 느립니다. ②와 ④는 잘못된 진술입니다. 정답은 ③번입니다.",
     "_source": "authored"
   },
   {
@@ -1078,7 +1078,7 @@ export const ROUND_47: QuizQuestion[] = [
       "ABCDE"
     ],
     "correctIndex": 1,
-    "explanation": "",
+    "explanation": "`SUBSTR('ABCDE', 2)`는 두 번째 문자부터 끝까지 잘라 옵니다. 길이를 지정하지 않으면 끝까지 가져오므로 'BCDE'가 됩니다. 시작 위치는 1부터 셉니다. 정답은 ②번입니다.",
     "_source": "authored",
     "references": [
       {
@@ -1102,7 +1102,7 @@ export const ROUND_47: QuizQuestion[] = [
       "FORCE"
     ],
     "correctIndex": 2,
-    "explanation": "",
+    "explanation": "DROP USER에 CASCADE 옵션을 붙이면 그 사용자가 소유한 테이블·뷰·시퀀스 등 모든 객체까지 함께 삭제됩니다. 옵션 없이 DROP USER를 시도하면 사용자가 가진 객체가 있을 때 삭제가 거부됩니다. RESTRICT는 참조 객체가 있을 때 삭제를 막는 보호 옵션, PURGE는 휴지통까지 비우는 옵션이라 의미가 다릅니다. 정답은 ③번입니다.",
     "_source": "authored",
     "references": [
       {
@@ -1126,7 +1126,7 @@ export const ROUND_47: QuizQuestion[] = [
       "GROUP BY, ASC"
     ],
     "correctIndex": 0,
-    "explanation": "",
+    "explanation": "부서별로 합계를 구하려면 GROUP BY 부서로 그룹을 만들어야 합니다. 합계 큰 순서로 보고 싶다면 ORDER BY에 DESC(내림차순)를 붙입니다. ORDER BY는 ASC가 기본이므로 큰 값부터 보려면 DESC를 명시해야 합니다. 정답은 ①번입니다.",
     "_source": "authored",
     "references": [
       {
