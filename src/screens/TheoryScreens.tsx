@@ -78,9 +78,6 @@ export const TheoryListScreen = ({ onNavigate }) => (
                   }}
                     onMouseEnter={(e) => { e.currentTarget.style.borderColor = 'var(--point-500)'; }}
                     onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'var(--border-subtle)'; }}>
-                    <div style={{ fontSize: 11, fontWeight: 700, color: 'var(--point-600)', letterSpacing: '0.04em', fontFamily: 'var(--font-mono)' }}>
-                      {ch.num}
-                    </div>
                     <div style={{ fontSize: 15.5, fontWeight: 700, color: 'var(--fg-1)' }}>{ch.title}</div>
                     <div style={{ fontSize: 12, color: 'var(--fg-3)', lineHeight: 1.5 }}>{ch.oneLine}</div>
                   </button>
@@ -361,7 +358,7 @@ export const TheoryDetailScreen = ({ chapterId, onNavigate }) => {
           <Ic.ChevronRight size={12} />
           <span>{sub.code} · {sub.title}</span>
           <Ic.ChevronRight size={12} />
-          <span style={{ color: 'var(--fg-1)', fontWeight: 600 }}>{ch.num} {ch.title}</span>
+          <span style={{ color: 'var(--fg-1)', fontWeight: 600 }}>{ch.title}</span>
         </div>
       </div>
 
@@ -380,8 +377,7 @@ export const TheoryDetailScreen = ({ chapterId, onNavigate }) => {
           }}>
             <div style={{ display: 'flex', gap: 8, marginBottom: 12, alignItems: 'center', flexWrap: 'wrap' }}>
               <Tag tone="green">{sub.code}</Tag>
-              <span style={{ fontSize: 12, fontWeight: 700, color: 'var(--point-600)', letterSpacing: '0.04em', fontFamily: 'var(--font-mono)' }}>{ch.num}</span>
-              <span style={{ fontSize: 12, color: 'var(--fg-3)' }}>· {sec.title}</span>
+              <span style={{ fontSize: 12, color: 'var(--fg-3)' }}>{sec.title}</span>
             </div>
             <h1 style={{ fontSize: 30, fontWeight: 800, color: 'var(--fg-1)', letterSpacing: '-0.02em', margin: '0 0 8px', lineHeight: 1.2 }}>
               {ch.title}
