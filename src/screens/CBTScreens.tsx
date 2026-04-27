@@ -253,11 +253,6 @@ export const CBTExam = ({examId = "round-60", onFinish, onNavigate, onExit, mock
             <Ic.Clock size={14}/> {timeStr}
           </div>
           <div style={{fontSize:13,color:"var(--fg-3)"}}>진행 <strong style={{color:"var(--fg-1)",fontFamily:"var(--font-mono)"}}>{answered}</strong> / {totalQ}</div>
-          <span
-            title="단축키: 1~4 답 선택 · ← → 이동 · F 체크 토글"
-            aria-hidden="true"
-            style={{fontSize:11,color:"var(--fg-4)",padding:"4px 8px",border:"1px dashed var(--border-subtle)",borderRadius:6,fontFamily:"var(--font-mono)",cursor:"help"}}
-          >⌨ 1–4 · ← →</span>
           <Btn size="sm" variant="primary" onClick={()=>setSubmitConfirm(true)}>제출하기</Btn>
         </div>
       </div>
@@ -275,8 +270,8 @@ export const CBTExam = ({examId = "round-60", onFinish, onNavigate, onExit, mock
             >
               {q.options.map((opt, i) => {
                 const sel = answers[idx] === i;
-                let bg="var(--bg-card)", br="1px solid var(--border-default)", badgeBg="var(--bg-muted)", badgeFg="var(--fg-3)";
-                if (sel) { bg="var(--point-100)"; br="2px solid var(--point-600)"; badgeBg="var(--point-600)"; badgeFg="#fff"; }
+                let bg="var(--bg-card)", br="1px solid var(--border-default)", badgeBg="var(--bg-muted)", badgeFg="var(--fg-3)", optFg="var(--fg-2)";
+                if (sel) { bg="var(--point-100)"; br="2px solid var(--point-600)"; badgeBg="var(--point-600)"; badgeFg="#fff"; optFg="var(--point-600)"; }
                 const optRefs = q.optionReferences?.[i];
                 return (
                   <li key={i}>
@@ -298,7 +293,7 @@ export const CBTExam = ({examId = "round-60", onFinish, onNavigate, onExit, mock
                           fontSize:16,fontWeight:700,fontFamily:"var(--font-mono)",
                           display:"inline-flex",alignItems:"center",justifyContent:"center",marginTop:1,
                         }}>{i+1}</span>
-                        <span style={{fontSize:14.5,color:"var(--fg-2)",lineHeight:1.65,flex:1}}>{renderInlineMd(opt)}</span>
+                        <span style={{fontSize:14.5,color:optFg,fontWeight: sel ? 600 : 400,lineHeight:1.65,flex:1}}>{renderInlineMd(opt)}</span>
                       </div>
                       {optRefs && <OptionReferences refs={optRefs}/>}
                     </div>

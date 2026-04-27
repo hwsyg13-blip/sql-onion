@@ -227,10 +227,10 @@ export const OptionList = ({q, selected, setSelected, checked}) => (
       const sel = selected === i;
       const ok = checked && i === q.correctIndex;
       const bad = checked && sel && !ok;
-      let bg="var(--bg-card)", br="1px solid var(--border-default)", badgeBg="var(--bg-muted)", badgeFg="var(--fg-3)";
-      if (sel && !checked) { bg="var(--point-100)"; br="2px solid var(--point-600)"; badgeBg="var(--point-600)"; badgeFg="#fff"; }
-      if (ok) { bg="var(--correct-bg)"; br="2px solid var(--point-600)"; badgeBg="var(--point-600)"; badgeFg="#fff"; }
-      if (bad) { bg="var(--wrong-bg)"; br="2px solid var(--wrong-border)"; badgeBg="var(--wrong-fg)"; badgeFg="#fff"; }
+      let bg="var(--bg-card)", br="1px solid var(--border-default)", badgeBg="var(--bg-muted)", badgeFg="var(--fg-3)", optFg="var(--fg-2)";
+      if (sel && !checked) { bg="var(--point-100)"; br="2px solid var(--point-600)"; badgeBg="var(--point-600)"; badgeFg="#fff"; optFg="var(--point-600)"; }
+      if (ok) { bg="var(--correct-bg)"; br="2px solid var(--point-600)"; badgeBg="var(--point-600)"; badgeFg="#fff"; optFg="var(--correct-fg)"; }
+      if (bad) { bg="var(--wrong-bg)"; br="2px solid var(--wrong-border)"; badgeBg="var(--wrong-fg)"; badgeFg="#fff"; optFg="var(--wrong-fg)"; }
       const optRefs = q.optionReferences?.[i];
       return (
         <li key={i}>
@@ -246,7 +246,7 @@ export const OptionList = ({q, selected, setSelected, checked}) => (
                 fontSize:16,fontWeight:700,fontFamily:"var(--font-mono)",
                 display:"inline-flex",alignItems:"center",justifyContent:"center",marginTop:1,
               }}>{i+1}</span>
-              <span style={{fontSize:14.5,color:"var(--fg-2)",lineHeight:1.65,flex:1}}>{opt}</span>
+              <span style={{fontSize:14.5,color:optFg,fontWeight: (sel || ok || bad) ? 600 : 400,lineHeight:1.65,flex:1}}>{opt}</span>
             </div>
             {optRefs && <OptionReferences refs={optRefs}/>}
           </div>
