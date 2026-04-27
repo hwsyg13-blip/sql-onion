@@ -19,67 +19,80 @@ import { NEXT_EXAM, daysUntilExam } from '../lib/examDate';
 //   { kind: 'cheatsheet', label }
 
 export const PLAN_DATA = [
-  // ─ Week 1: 1과목 (10 챕터, 6일)
-  {week:1, day:1,  subj:"1과목", title:"데이터 모델의 이해",
-    actions:[{kind:'theory',label:'데이터 모델의 이해',chapterId:'c111'}],
-    concept:["3층 스키마","개념→논리→물리"], est:50},
-  {week:1, day:2,  subj:"1과목", title:"엔터티 + 속성",
-    actions:[{kind:'theory',label:'엔터티',chapterId:'c112'},{kind:'theory',label:'속성',chapterId:'c113'}],
-    concept:["엔터티 5대 특징","기본·설계·파생"], est:60},
-  {week:1, day:3,  subj:"1과목", title:"관계 + 식별자",
-    actions:[{kind:'theory',label:'관계',chapterId:'c114'},{kind:'theory',label:'식별자',chapterId:'c115'}],
-    concept:["1:1·1:N·M:N","유·최·불·존"], est:65},
-  {week:1, day:4,  subj:"1과목", title:"정규화",
-    actions:[{kind:'theory',label:'정규화',chapterId:'c121'}],
-    concept:["1NF→2NF→3NF→BCNF","반정규화"], est:60},
-  {week:1, day:5,  subj:"1과목", title:"관계와 조인 + 트랜잭션",
-    actions:[{kind:'theory',label:'관계와 조인의 이해',chapterId:'c122'},{kind:'theory',label:'트랜잭션의 이해',chapterId:'c123'}],
-    concept:["관계=FK=JOIN","ACID"], est:60},
-  {week:1, day:6,  subj:"1과목", title:"NULL + 본질·인조 식별자",
-    actions:[{kind:'theory',label:'NULL 속성의 이해',chapterId:'c124'},{kind:'theory',label:'본질식별자 vs 인조식별자',chapterId:'c125'}],
-    concept:["IS NULL만 가능","본질 vs 인조"], est:60},
+  // ─ Week 1 Day 1~4 (4일): 1과목 10챕터 압축 — 출제 비중 10/50 으로 빠르게 보고 2과목에 시간 배분
+  {week:1, day:1,  subj:"1과목", title:"데이터 모델 + 엔터티",
+    actions:[{kind:'theory',label:'데이터 모델의 이해',chapterId:'c111'},{kind:'theory',label:'엔터티',chapterId:'c112'}],
+    concept:["3층 스키마","엔터티 5대 특징"], est:60},
+  {week:1, day:2,  subj:"1과목", title:"속성 + 관계 + 식별자",
+    actions:[
+      {kind:'theory',label:'속성',chapterId:'c113'},
+      {kind:'theory',label:'관계',chapterId:'c114'},
+      {kind:'theory',label:'식별자',chapterId:'c115'},
+    ],
+    concept:["기본·설계·파생","1:1·1:N·M:N","유·최·불·존"], est:75},
+  {week:1, day:3,  subj:"1과목", title:"정규화 + 관계조인 + 트랜잭션",
+    actions:[
+      {kind:'theory',label:'정규화',chapterId:'c121'},
+      {kind:'theory',label:'관계와 조인의 이해',chapterId:'c122'},
+      {kind:'theory',label:'트랜잭션의 이해',chapterId:'c123'},
+    ],
+    concept:["1NF→2NF→3NF→BCNF","관계=FK=JOIN","ACID"], est:75},
+  {week:1, day:4,  subj:"1과목", title:"NULL + 본질·인조 식별자",
+    actions:[
+      {kind:'theory',label:'NULL 속성의 이해',chapterId:'c124'},
+      {kind:'theory',label:'본질식별자 vs 인조식별자',chapterId:'c125'},
+    ],
+    concept:["IS NULL만 가능","본질 vs 인조"], est:55},
 
-  // ─ Week 2: 2과목 (20 챕터, 8일)
-  {week:2, day:7,  subj:"2과목", title:"RDB 개요 + SELECT문",
+  // ─ Week 1 Day 5~7 + Week 2 Day 8~14 (10일): 2과목 20챕터 — 출제 비중 40/50, 일별 2챕터 여유
+  {week:1, day:5,  subj:"2과목", title:"RDB 개요 + SELECT문",
     actions:[{kind:'theory',label:'RDB 개요',chapterId:'c211'},{kind:'theory',label:'SELECT문',chapterId:'c212'}],
     concept:["DDL/DML/DCL/TCL","FWGHSO 실행 순서"], est:55},
-  {week:2, day:8,  subj:"2과목", title:"함수 + WHERE절",
+  {week:1, day:6,  subj:"2과목", title:"함수 + WHERE절",
     actions:[{kind:'theory',label:'함수',chapterId:'c213'},{kind:'theory',label:'WHERE절',chapterId:'c214'}],
     concept:["단일행/다중행","AND/OR/IN/LIKE"], est:60},
-  {week:2, day:9,  subj:"2과목", title:"GROUP BY/HAVING + ORDER BY",
+  {week:1, day:7,  subj:"2과목", title:"GROUP BY/HAVING + ORDER BY",
     actions:[{kind:'theory',label:'GROUP BY/HAVING',chapterId:'c215'},{kind:'theory',label:'ORDER BY',chapterId:'c216'}],
     concept:["WHERE vs HAVING","NULL 정렬"], est:60},
-  {week:2, day:10, subj:"2과목", title:"조인 + 표준 조인",
+  {week:2, day:8,  subj:"2과목", title:"조인 + 표준 조인",
     actions:[{kind:'theory',label:'조인',chapterId:'c217'},{kind:'theory',label:'표준 조인',chapterId:'c218'}],
-    concept:["등가/비등가/셀프/외부/교차","INNER/OUTER/NATURAL/USING"], est:65},
-  {week:2, day:11, subj:"2과목", title:"서브쿼리 + 집합 + 그룹 함수",
+    concept:["등가/비등가/셀프/외부/교차","INNER/OUTER/NATURAL/USING"], est:75},
+  {week:2, day:9,  subj:"2과목", title:"서브쿼리 + 집합 연산자",
     actions:[
       {kind:'theory',label:'서브쿼리',chapterId:'c221'},
       {kind:'theory',label:'집합 연산자',chapterId:'c222'},
-      {kind:'theory',label:'그룹 함수',chapterId:'c223'},
     ],
-    concept:["스칼라/인라인뷰","UNION/INTERSECT","ROLLUP/CUBE"], est:75},
-  {week:2, day:12, subj:"2과목", title:"윈도우 + Top N + 계층형",
+    concept:["스칼라/인라인뷰","UNION/INTERSECT/MINUS"], est:65},
+  {week:2, day:10, subj:"2과목", title:"그룹 함수 + 윈도우 함수",
     actions:[
+      {kind:'theory',label:'그룹 함수',chapterId:'c223'},
       {kind:'theory',label:'윈도우 함수',chapterId:'c224'},
+    ],
+    concept:["ROLLUP/CUBE","RANK/PARTITION BY"], est:80},
+  {week:2, day:11, subj:"2과목", title:"Top N + 계층형 질의",
+    actions:[
       {kind:'theory',label:'Top N 쿼리',chapterId:'c225'},
       {kind:'theory',label:'계층형 질의와 셀프 조인',chapterId:'c226'},
     ],
-    concept:["RANK/PARTITION","ROWNUM/FETCH","CONNECT BY"], est:75},
-  {week:2, day:13, subj:"2과목", title:"PIVOT + 정규표현식 + DML",
+    concept:["ROWNUM/FETCH","CONNECT BY"], est:65},
+  {week:2, day:12, subj:"2과목", title:"PIVOT/UNPIVOT + 정규 표현식",
     actions:[
       {kind:'theory',label:'PIVOT/UNPIVOT',chapterId:'c227'},
       {kind:'theory',label:'정규 표현식',chapterId:'c228'},
-      {kind:'theory',label:'DML',chapterId:'c231'},
     ],
-    concept:["세로↔가로","REGEXP_*","INSERT/UPDATE/DELETE/MERGE"], est:75},
-  {week:2, day:14, subj:"2과목", title:"TCL + DDL + DCL",
+    concept:["세로↔가로","REGEXP_*"], est:55},
+  {week:2, day:13, subj:"2과목", title:"DML + TCL",
     actions:[
+      {kind:'theory',label:'DML',chapterId:'c231'},
       {kind:'theory',label:'TCL',chapterId:'c232'},
+    ],
+    concept:["INSERT/UPDATE/DELETE/MERGE","COMMIT/ROLLBACK"], est:55},
+  {week:2, day:14, subj:"2과목", title:"DDL + DCL",
+    actions:[
       {kind:'theory',label:'DDL',chapterId:'c233'},
       {kind:'theory',label:'DCL',chapterId:'c234'},
     ],
-    concept:["COMMIT/ROLLBACK","CREATE/ALTER","GRANT/REVOKE"], est:70},
+    concept:["CREATE/ALTER/DROP","GRANT/REVOKE"], est:55},
 
   // ─ Week 3 Day 15~18: 기출 12회차 (round-60 → round-49 내림차순)
   {week:3, day:15, subj:"기출", title:"제60·59·58회",
@@ -211,7 +224,7 @@ export const PlanScreen = ({onNavigate, planViz, setPlanViz}) => {
       <div style={{marginTop:8,display:"flex",gap:8,borderBottom:"1px solid var(--border-subtle)"}}>
         {[1,2,3].map(w => {
           const active = week === w;
-          const ws = ["1과목","2과목","실전·기출"];
+          const ws = ["이론 1","이론 2","실전·기출"];
           const doneW = planWithStatus.filter(d=>d.week===w && d.done).length;
           const totalW = planWithStatus.filter(d=>d.week===w).length;
           return (
