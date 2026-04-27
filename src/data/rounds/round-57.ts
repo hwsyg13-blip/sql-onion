@@ -98,7 +98,7 @@ export const ROUND_57: QuizQuestion[] = [
       "파생 속성"
     ],
     "correctIndex": 3,
-    "explanation": "",
+    "explanation": "파생 속성은 다른 속성의 값을 기반으로 계산·변환하여 도출되는 속성이다. 기본 속성은 업무에서 직접 발생하고, 설계 속성은 모델링 과정에서 부여되며, 일반 속성은 고유 의미를 갖는 속성이다.",
     "_source": "authored"
   },
   {
@@ -377,7 +377,7 @@ export const ROUND_57: QuizQuestion[] = [
       "SQL 결과 간의 차집합으로 중복된 행은 하나의 행으로 출력한다."
     ],
     "correctIndex": 2,
-    "explanation": "",
+    "explanation": "INTERSECT 는 두 집합의 공통 행만 반환하는 교집합 연산자이며 결과의 중복은 제거되어 한 행으로 출력된다. 합집합은 UNION/UNION ALL, 차집합은 MINUS(EXCEPT) 가 담당한다.",
     "_source": "authored"
   },
   {
@@ -395,7 +395,7 @@ export const ROUND_57: QuizQuestion[] = [
       "다중 컬럼 서브쿼리"
     ],
     "correctIndex": 3,
-    "explanation": "",
+    "explanation": "다중 컬럼 서브쿼리는 서브쿼리 결과로 둘 이상의 컬럼이 함께 반환되어 메인 쿼리의 (col1, col2, ...) IN (서브쿼리) 형태로 동시에 비교되는 유형이다.",
     "_source": "authored"
   },
   {
@@ -460,7 +460,7 @@ export const ROUND_57: QuizQuestion[] = [
     "options": [
       "1, 1, 1, 1",
       "1, 2, 2, 3",
-      "ID가 3인 값 5를 기준으로 범위 내 VAL=3 의 개수는 3",
+      "1, 2, 3, 4",
       "0, 0, 0, 0"
     ],
     "correctIndex": 2,
@@ -795,7 +795,7 @@ export const ROUND_57: QuizQuestion[] = [
       "ORDER BY 를 적용한 인라인 뷰에서 메인 쿼리의 ROWNUM 을 조건으로 사용"
     ],
     "correctIndex": 3,
-    "explanation": "",
+    "explanation": "Oracle 에서 ORDER BY 결과의 상위 N 건을 안전하게 얻으려면, 정렬을 적용한 인라인 뷰를 만든 뒤 바깥 쿼리에서 ROWNUM 조건을 거는 방식이 가장 일반적이다. ROWNUM 을 ORDER BY 와 같은 SELECT 에 직접 쓰면 정렬 이전에 부여되어 의도한 결과가 나오지 않는다.",
     "_source": "authored"
   },
   {
@@ -837,7 +837,7 @@ export const ROUND_57: QuizQuestion[] = [
       "RIGHT OUTER JOIN"
     ],
     "correctIndex": 2,
-    "explanation": "",
+    "explanation": "NATURAL JOIN 은 두 테이블에서 이름과 데이터 타입이 동일한 컬럼을 자동으로 찾아 등가 조인하며 ON·USING 절을 명시할 필요가 없다.",
     "_source": "authored"
   },
   {
@@ -959,7 +959,7 @@ export const ROUND_57: QuizQuestion[] = [
     "number": 39,
     "title": "아래 SQL 의 실행 결과로 옳은 것은? (오늘 날짜는 2025년 1월 1일 오후 1시로 가정)",
     "options": [
-      "2025/01/01 00:00:00, 2025/01/02 00:00:00",
+      "2025/01/01 00:00:00, 2026/01/01 00:00:00",
       "2025/01/01 13:00:00, 2025/01/01 13:00:00",
       "2024/12/31 00:00:00, 2025/01/01 00:00:00",
       "2025/01/02 00:00:00, 2025/01/02 00:00:00"
@@ -1319,7 +1319,7 @@ export const ROUND_57: QuizQuestion[] = [
       "GROUPING 은 ROLLUP 에서만 사용 가능"
     ],
     "correctIndex": 0,
-    "explanation": "",
+    "explanation": "ROLLUP 결과의 소계·총계 행은 GROUPING 함수가 1 을 반환한다. DEPT·JOB 모두 GROUPING=1 이면 전체 총계, DEPT 만 1 이면 부서별 소계로 라벨링하는 ① 조합이 옳다. GROUPING 은 ROLLUP·CUBE·GROUPING SETS 에서 모두 사용 가능하므로 ③·④ 는 부적절하다.",
     "_source": "authored",
     "references": [
       {
