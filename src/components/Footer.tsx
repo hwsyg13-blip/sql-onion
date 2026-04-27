@@ -32,10 +32,9 @@ export const Footer = () => (
       <nav style={{ display: 'flex', gap: 16, flexWrap: 'wrap', justifyContent: 'center' }}>
         <FooterLink href="/privacy.html">개인정보처리방침</FooterLink>
         <FooterLink href="/terms.html">이용약관</FooterLink>
-        <FooterLink href="mailto:hwsyg13@gmail.com">문의</FooterLink>
       </nav>
       <div style={{ color: 'var(--fg-4)', fontSize: 11.5, lineHeight: 1.7 }}>
-        © 2026 SQLD양파 · 학습용 자료이며 실제 시험 문제와 동일하지 않습니다.
+        © 2026 SQLD양파
       </div>
     </div>
   </footer>
