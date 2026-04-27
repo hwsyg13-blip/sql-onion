@@ -475,23 +475,14 @@ export const ROUND_54: QuizQuestion[] = [
     "references": [
       {
         "type": "table",
+        "caption": "T1",
         "headers": [
-          "T1",
-          "T2"
+          "KEYA",
+          "COL1",
+          "COL2"
         ],
         "rows": [
           [
-            "KEYA",
-            "COL1",
-            "COL2",
-            "KEYB",
-            "COL1",
-            "COL2"
-          ],
-          [
-            "1",
-            "A",
-            "가",
             "1",
             "A",
             "가"
@@ -499,18 +490,33 @@ export const ROUND_54: QuizQuestion[] = [
           [
             "2",
             "A",
-            "가",
-            "3",
-            "C",
-            "다"
+            "가"
           ],
           [
             "5",
             "C",
-            "다",
-            "",
-            "",
-            ""
+            "다"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "T2",
+        "headers": [
+          "KEYB",
+          "COL1",
+          "COL2"
+        ],
+        "rows": [
+          [
+            "1",
+            "A",
+            "가"
+          ],
+          [
+            "3",
+            "C",
+            "다"
           ]
         ]
       }
@@ -536,32 +542,43 @@ export const ROUND_54: QuizQuestion[] = [
     "references": [
       {
         "type": "table",
+        "caption": "EMP",
         "headers": [
-          "EMP",
-          "DEPT_EMP"
+          "EMPNO",
+          "ENAME"
         ],
         "rows": [
           [
-            "EMPNO",
-            "ENAME",
-            "EMPNO",
-            "DEPT"
+            "1",
+            "KIM"
           ],
           [
-            "1",
-            "KIM",
+            "2",
+            "LEE"
+          ],
+          [
+            "3",
+            "PARK"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "DEPT_EMP",
+        "headers": [
+          "EMPNO",
+          "DEPT"
+        ],
+        "rows": [
+          [
             "1",
             "10"
           ],
           [
-            "2",
-            "LEE",
             "1",
             "20"
           ],
           [
-            "3",
-            "PARK",
             "2",
             "10"
           ]
@@ -589,34 +606,41 @@ export const ROUND_54: QuizQuestion[] = [
     "references": [
       {
         "type": "table",
+        "caption": "EMP",
         "headers": [
-          "EMP",
-          "DEPT_EMP"
+          "EMPNO",
+          "ENAME"
         ],
         "rows": [
           [
-            "EMPNO",
-            "ENAME",
-            "EMPNO",
-            "DEPT"
+            "1",
+            "KIM"
           ],
           [
-            "1",
-            "KIM",
+            "2",
+            "SMITH"
+          ],
+          [
+            "3",
+            "LEE"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "DEPT_EMP",
+        "headers": [
+          "EMPNO",
+          "DEPT"
+        ],
+        "rows": [
+          [
             "1",
             "10"
           ],
           [
-            "2",
-            "SMITH",
             "3",
             "20"
-          ],
-          [
-            "3",
-            "LEE",
-            "",
-            ""
           ]
         ]
       }
@@ -642,38 +666,51 @@ export const ROUND_54: QuizQuestion[] = [
     "references": [
       {
         "type": "table",
+        "caption": "TAB1",
         "headers": [
-          "TAB1",
-          "TAB2"
+          "CODE",
+          "PCOLOR"
         ],
         "rows": [
           [
-            "CODE",
-            "PCOLOR",
-            "CODE",
-            "PSIZE"
+            "1",
+            "빨강"
           ],
           [
-            "1",
-            "빨강",
+            "2",
+            "노랑"
+          ],
+          [
+            "3",
+            "파랑"
+          ],
+          [
+            "4",
+            "검정"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "TAB2",
+        "headers": [
+          "CODE",
+          "PSIZE"
+        ],
+        "rows": [
+          [
             "1",
             "소"
           ],
           [
             "2",
-            "노랑",
-            "2",
             "중"
           ],
           [
             "3",
-            "파랑",
-            "3",
             "대"
           ],
           [
-            "4",
-            "검정",
             "4",
             "특대"
           ]
@@ -1431,38 +1468,45 @@ export const ROUND_54: QuizQuestion[] = [
     "references": [
       {
         "type": "table",
+        "caption": "T1",
         "headers": [
-          "T1",
-          "T2"
+          "COL1",
+          "COL2",
+          "COL3"
         ],
         "rows": [
           [
-            "COL1",
-            "COL2",
-            "COL3",
-            "COL1",
-            "COL2"
-          ],
-          [
             "가",
             "A",
-            "2",
-            "2",
-            "A"
+            "2"
           ],
           [
             "나",
             "B",
-            "3",
-            "3",
-            "C"
+            "3"
           ],
           [
             "다",
             "C",
-            "NULL",
-            "",
-            ""
+            "NULL"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "T2",
+        "headers": [
+          "COL1",
+          "COL2"
+        ],
+        "rows": [
+          [
+            "2",
+            "A"
+          ],
+          [
+            "3",
+            "C"
           ]
         ]
       },

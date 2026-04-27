@@ -283,46 +283,53 @@ export const ROUND_50: QuizQuestion[] = [
     "references": [
       {
         "type": "table",
+        "caption": "TAB1",
         "headers": [
-          "TAB1",
-          "TAB2"
+          "C1",
+          "C2"
         ],
         "rows": [
           [
-            "C1",
-            "C2",
-            "C1",
-            "C2"
+            "A",
+            "1"
           ],
           [
-            "A",
-            "1",
             "B",
             "2"
           ],
           [
-            "B",
-            "2",
             "C",
             "3"
           ],
           [
-            "C",
-            "3",
             "D",
             "4"
           ],
           [
-            "D",
-            "4",
-            "",
-            ""
+            "E",
+            "5"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "TAB2",
+        "headers": [
+          "C1",
+          "C2"
+        ],
+        "rows": [
+          [
+            "B",
+            "2"
           ],
           [
-            "E",
-            "5",
-            "",
-            ""
+            "C",
+            "3"
+          ],
+          [
+            "D",
+            "4"
           ]
         ]
       },

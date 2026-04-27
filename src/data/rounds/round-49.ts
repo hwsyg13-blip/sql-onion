@@ -383,26 +383,35 @@ export const ROUND_49: QuizQuestion[] = [
     "references": [
       {
         "type": "table",
+        "caption": "TEAM",
         "headers": [
-          "TEAM",
-          "STADIUM"
+          "ID",
+          "COL1"
         ],
         "rows": [
           [
-            "ID",
-            "COL1",
-            "ID",
-            "COL2"
-          ],
-          [
-            "1",
-            "A",
             "1",
             "A"
           ],
           [
             "2",
-            "B",
+            "B"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "STADIUM",
+        "headers": [
+          "ID",
+          "COL2"
+        ],
+        "rows": [
+          [
+            "1",
+            "A"
+          ],
+          [
             "2",
             "B"
           ]
@@ -605,14 +614,12 @@ export const ROUND_49: QuizQuestion[] = [
     "references": [
       {
         "type": "table",
+        "caption": "고객",
         "headers": [
-          "[고객]"
+          "고객번호(PK)",
+          "고객명"
         ],
         "rows": [
-          [
-            "고객번호(PK)",
-            "고객명"
-          ],
           [
             "001",
             "홍길동"
@@ -637,15 +644,13 @@ export const ROUND_49: QuizQuestion[] = [
       },
       {
         "type": "table",
+        "caption": "월별매출",
         "headers": [
-          "[월별매출]"
+          "고객번호(PK)",
+          "월",
+          "매출액"
         ],
         "rows": [
-          [
-            "고객번호(PK)",
-            "월",
-            "매출액"
-          ],
           [
             "001",
             "202201",
@@ -1047,34 +1052,41 @@ export const ROUND_49: QuizQuestion[] = [
     "references": [
       {
         "type": "table",
+        "caption": "TAB1",
         "headers": [
-          "TAB1",
-          "TAB2"
+          "ID",
+          "NAME"
         ],
         "rows": [
           [
-            "ID",
-            "NAME",
-            "ID",
-            "RULE"
+            "1",
+            "SMITH"
           ],
           [
-            "1",
-            "SMITH",
+            "2",
+            "ALICE"
+          ],
+          [
+            "3",
+            "SCOTT"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "TAB2",
+        "headers": [
+          "ID",
+          "RULE"
+        ],
+        "rows": [
+          [
             "1",
             "S%"
           ],
           [
             "2",
-            "ALICE",
-            "2",
             "%T%"
-          ],
-          [
-            "3",
-            "SCOTT",
-            "",
-            ""
           ]
         ]
       },
@@ -1254,38 +1266,43 @@ export const ROUND_49: QuizQuestion[] = [
     "references": [
       {
         "type": "table",
+        "caption": "TBL1",
         "headers": [
-          "TBL1",
-          "TBL2"
+          "ID",
+          "COL1"
         ],
         "rows": [
           [
-            "ID",
-            "COL1",
-            "ID",
-            "COL2"
+            "1",
+            "A"
           ],
           [
-            "1",
-            "A",
+            "2",
+            "B"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "TBL2",
+        "headers": [
+          "ID",
+          "COL2"
+        ],
+        "rows": [
+          [
             "1",
             "C"
           ],
           [
             "2",
-            "B",
-            "2",
             "D"
           ],
           [
-            "",
-            "",
             "3",
             "E"
           ],
           [
-            "",
-            "",
             "4",
             "F"
           ]

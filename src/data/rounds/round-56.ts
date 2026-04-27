@@ -793,32 +793,43 @@ export const ROUND_56: QuizQuestion[] = [
     "references": [
       {
         "type": "table",
+        "caption": "TAB1",
         "headers": [
-          "TAB1",
-          "TAB2"
+          "COL1",
+          "COL2"
         ],
         "rows": [
           [
-            "COL1",
-            "COL2",
-            "COL1",
-            "COL2"
+            "A",
+            "10"
           ],
           [
-            "A",
-            "10",
-            "A",
-            "20"
-          ],
-          [
-            "B",
-            "20",
             "B",
             "20"
           ],
           [
             "C",
-            "30",
+            "30"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "TAB2",
+        "headers": [
+          "COL1",
+          "COL2"
+        ],
+        "rows": [
+          [
+            "A",
+            "20"
+          ],
+          [
+            "B",
+            "20"
+          ],
+          [
             "C",
             "NULL"
           ]
@@ -916,44 +927,51 @@ export const ROUND_56: QuizQuestion[] = [
     "references": [
       {
         "type": "table",
+        "caption": "TAB1",
         "headers": [
-          "TAB1",
-          "TAB2"
+          "ID",
+          "CUSTOMER"
         ],
         "rows": [
           [
-            "ID",
-            "CUSTOMER",
-            "ID",
-            "PHONE"
+            "1",
+            "A"
           ],
           [
-            "1",
-            "A",
+            "2",
+            "B"
+          ],
+          [
+            "3",
+            "C"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "TAB2",
+        "headers": [
+          "ID",
+          "PHONE"
+        ],
+        "rows": [
+          [
             "10",
             "111-1111"
           ],
           [
-            "2",
-            "B",
             "20",
             "222-2222"
           ],
           [
-            "3",
-            "C",
             "30",
             "333-3333"
           ],
           [
-            "",
-            "",
             "40",
             "444-4444"
           ],
           [
-            "",
-            "",
             "50",
             "555-5555"
           ]

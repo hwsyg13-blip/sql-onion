@@ -423,34 +423,41 @@ export const ROUND_59: QuizQuestion[] = [
     "references": [
       {
         "type": "table",
+        "caption": "STUDENT",
         "headers": [
-          "STUDENT",
-          "LECTURE"
+          "SID",
+          "NAME"
         ],
         "rows": [
           [
-            "SID",
-            "NAME",
-            "SID",
-            "COURSE"
+            "1",
+            "A"
           ],
           [
-            "1",
-            "A",
+            "2",
+            "B"
+          ],
+          [
+            "3",
+            "C"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "LECTURE",
+        "headers": [
+          "SID",
+          "COURSE"
+        ],
+        "rows": [
+          [
             "1",
             "DB"
           ],
           [
-            "2",
-            "B",
             "3",
             "OS"
-          ],
-          [
-            "3",
-            "C",
-            "",
-            ""
           ]
         ]
       }
