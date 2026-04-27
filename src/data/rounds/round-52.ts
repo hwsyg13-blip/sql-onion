@@ -55,7 +55,7 @@ export const ROUND_52: QuizQuestion[] = [
       "물리 스키마"
     ],
     "correctIndex": 1,
-    "explanation": "",
+    "explanation": "조직 전체 관점에서 데이터를 통합적으로 표현하는 스키마는 개념 스키마이다. 외부 스키마는 사용자 관점, 내부 스키마는 물리적 저장 관점에 해당한다.",
     "_source": "authored",
     "references": [
       {
@@ -79,7 +79,7 @@ export const ROUND_52: QuizQuestion[] = [
       "인덱스 설계를 포함한다."
     ],
     "correctIndex": 0,
-    "explanation": "",
+    "explanation": "개념적 데이터 모델링은 추상화 수준이 가장 높아 업무 중심으로 표현되며 세부 구현(저장 구조·인덱스·튜닝 등)은 다루지 않는다.",
     "_source": "authored"
   },
   {
@@ -97,7 +97,7 @@ export const ROUND_52: QuizQuestion[] = [
       "관계 엔터티"
     ],
     "correctIndex": 2,
-    "explanation": "",
+    "explanation": "다른 엔터티의 부모 역할을 하면서 업무에 원래부터 존재해 독립적으로 생성되는 엔터티는 기본 엔터티이다. 중심 엔터티는 기본 엔터티에서 파생되어 업무의 중심 역할을 한다.",
     "_source": "authored",
     "references": [
       {
@@ -139,7 +139,7 @@ export const ROUND_52: QuizQuestion[] = [
       "대체키"
     ],
     "correctIndex": 1,
-    "explanation": "",
+    "explanation": "다른 엔터티의 주식별자(PK)를 참조하기 위해 사용하는 키는 외래키(FK)이다. 후보키·대체키는 같은 엔터티 내부의 식별자 후보이다.",
     "_source": "authored"
   },
   {
@@ -157,7 +157,7 @@ export const ROUND_52: QuizQuestion[] = [
       "ERD 표기법에 따라 둘을 구분하지 않는다."
     ],
     "correctIndex": 2,
-    "explanation": "",
+    "explanation": "ERD(IE 표기법)에서 식별 관계는 실선, 비식별 관계는 점선으로 표기한다. 식별 관계는 부모의 주식별자가 자식의 주식별자에 포함되는 관계이다.",
     "_source": "authored"
   },
   {
@@ -307,7 +307,7 @@ export const ROUND_52: QuizQuestion[] = [
     "options": [
       "3, 9, 15, 21",
       "3, 7, 12, 15",
-      "4, 9, 15, 12",
+      "12, 18, 18, 15",
       "18, 18, 18, 18"
     ],
     "correctIndex": 2,
@@ -384,7 +384,7 @@ export const ROUND_52: QuizQuestion[] = [
       "4번 행"
     ],
     "correctIndex": 2,
-    "explanation": "원본 기출의 정답 표기를 보존한다.",
+    "explanation": "NVL(금액, 0)은 NULL 행을 0으로 대체하지만 원래 NULL 이 아닌 행은 그대로 출력된다. 보기에서 정상 금액이 출력되는 행으로 3번 행(3000) 이 정답이다.",
     "_source": "authored",
     "references": [
       {
@@ -451,7 +451,7 @@ export const ROUND_52: QuizQuestion[] = [
       "지속성"
     ],
     "correctIndex": 2,
-    "explanation": "",
+    "explanation": "트랜잭션의 ACID 중 고립성(Isolation)에 대한 설명이다. 동시 실행되는 다른 트랜잭션의 영향을 받지 않고 독립적으로 수행됨을 보장한다.",
     "_source": "authored",
     "references": [
       {
@@ -493,7 +493,7 @@ export const ROUND_52: QuizQuestion[] = [
       "NTILE"
     ],
     "correctIndex": 0,
-    "explanation": "",
+    "explanation": "동순위가 발생해도 다음 순위를 건너뛰지 않고 1, 2, 2, 3 처럼 부여하는 함수는 DENSE_RANK 이다. RANK 는 1, 2, 2, 4 처럼 건너뛴다.",
     "_source": "authored"
   },
   {
@@ -529,7 +529,7 @@ export const ROUND_52: QuizQuestion[] = [
       "EXCEPT"
     ],
     "correctIndex": 3,
-    "explanation": "",
+    "explanation": "첫 번째 결과 집합에서 두 번째 결과 집합에 존재하는 행을 제외하는 차집합 연산자는 EXCEPT(Oracle 의 MINUS) 이다.",
     "_source": "authored",
     "references": [
       {
@@ -620,7 +620,7 @@ export const ROUND_52: QuizQuestion[] = [
       "FROM - WHERE - GROUP BY - HAVING - SELECT - ORDER BY"
     ],
     "correctIndex": 3,
-    "explanation": "",
+    "explanation": "SELECT 문의 논리적 실행 순서는 FROM → WHERE → GROUP BY → HAVING → SELECT → ORDER BY 이다. 작성 순서와 다르다는 점이 핵심이다.",
     "_source": "authored"
   },
   {
@@ -638,7 +638,7 @@ export const ROUND_52: QuizQuestion[] = [
       "COUNT(SAL) AS A, COUNT(SAL) AS B"
     ],
     "correctIndex": 2,
-    "explanation": "",
+    "explanation": "MAX 와 MIN 은 각각 최댓값·최솟값을 반환하므로 단일 컬럼이라도 결과가 다르다. 나머지 보기는 동일 함수를 두 번 사용해 같은 값을 반환한다.",
     "_source": "authored"
   },
   {
@@ -674,7 +674,7 @@ export const ROUND_52: QuizQuestion[] = [
       "SELECT * FROM 회원 INNER JOIN 주문 ON 회원.회원ID = 주문.회원ID;"
     ],
     "correctIndex": 2,
-    "explanation": "",
+    "explanation": "주문 이력이 없는 회원은 주문 테이블에 매칭 행이 없는 회원이므로 NOT EXISTS 또는 LEFT OUTER JOIN ... IS NULL 패턴이 정답이다. EXISTS·IN·INNER JOIN 은 모두 주문이 있는 회원을 반환한다.",
     "_source": "authored"
   },
   {
@@ -692,7 +692,7 @@ export const ROUND_52: QuizQuestion[] = [
       "CASCADE CONSTRAINTS"
     ],
     "correctIndex": 3,
-    "explanation": "",
+    "explanation": "테이블을 삭제하면서 이를 참조하는 외래키 등 모든 제약을 함께 제거하려면 DROP TABLE ... CASCADE CONSTRAINTS 옵션을 사용한다.",
     "_source": "authored"
   },
   {
@@ -710,7 +710,7 @@ export const ROUND_52: QuizQuestion[] = [
       "COMMIT 으로 권한을 부여하고 ROLLBACK 으로 회수한다."
     ],
     "correctIndex": 2,
-    "explanation": "",
+    "explanation": "권한은 GRANT 로 부여하고 REVOKE 로 회수한다. ROLE 은 권한의 묶음이며 동일하게 GRANT·REVOKE 로 관리한다.",
     "_source": "authored"
   },
   {
@@ -746,7 +746,7 @@ export const ROUND_52: QuizQuestion[] = [
       "CASE WHEN 총월급 >= 2000 THEN 총월급 ELSE NULL END"
     ],
     "correctIndex": 3,
-    "explanation": "",
+    "explanation": "조건을 만족하지 않을 때 NULL 을 반환하려면 ELSE NULL 을 명시해야 한다. ELSE 를 생략하면 동일하게 NULL 이 반환되지만, 명시적으로 NULL 반환을 묻는 보기는 ④ 이다.",
     "_source": "authored"
   },
   {
@@ -896,7 +896,7 @@ export const ROUND_52: QuizQuestion[] = [
       "CUBE"
     ],
     "correctIndex": 3,
-    "explanation": "",
+    "explanation": "지정한 컬럼들의 모든 부분집합 조합에 대해 집계를 산출하는 절은 CUBE 이다. ROLLUP 은 계층적 소계만, GROUPING SETS 는 명시한 조합만 산출한다.",
     "_source": "authored"
   },
   {
@@ -968,7 +968,7 @@ export const ROUND_52: QuizQuestion[] = [
       "COALESCE(NULL, NULL, NULL) 의 결과는 'NULL 문자열' 이다."
     ],
     "correctIndex": 1,
-    "explanation": "",
+    "explanation": "NVL2(EXPR, V1, V2) 는 EXPR 이 NULL 이면 V2 를 반환한다. 따라서 NVL2(NULL, 'A', 'B') = 'B'. ① NVL(NULL,'A')='A', ③ NULLIF('A','A')=NULL, ④ COALESCE(NULL,NULL,NULL)=NULL 이므로 ② 만 옳다.",
     "_source": "authored"
   },
   {
@@ -980,7 +980,7 @@ export const ROUND_52: QuizQuestion[] = [
     "number": 44,
     "title": "아래 네 개의 AVG 연산 중 결과가 서로 다른 것은?",
     "options": [
-      "AVG 전 SUM(COL) / COUNT(COL)",
+      "SUM(NVL(COL, 0)) / COUNT(*)",
       "SUM(COL) / COUNT(*)",
       "AVG(NVL(COL, 0))",
       "AVG(COL)"
@@ -1023,7 +1023,7 @@ export const ROUND_52: QuizQuestion[] = [
       "TOP"
     ],
     "correctIndex": 0,
-    "explanation": "",
+    "explanation": "SELECT 절에서 행의 중복을 제거하는 표준 키워드는 DISTINCT 이다. UNIQUE 는 일부 DBMS 의 동의어이며 표준 정답은 DISTINCT 이다.",
     "_source": "authored"
   },
   {
@@ -1101,7 +1101,7 @@ export const ROUND_52: QuizQuestion[] = [
       "연/월/일/시/분/초를 포함한 ISO 8601 표기"
     ],
     "correctIndex": 1,
-    "explanation": "",
+    "explanation": "YYYYMMDDHH24MISS 포맷은 4+2+2+2+2+2 = 14자리 숫자 문자열로, 연·월·일·시(24시)·분·초를 모두 포함한다.",
     "_source": "authored"
   },
   {
