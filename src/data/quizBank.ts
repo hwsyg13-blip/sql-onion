@@ -14,7 +14,8 @@ export type QuizQuestion = {
   id: number;
   examSetId: string;
   examLabel: string;
-  round: number;
+  /** 기출 회차 번호. ai-mock 등 회차에 속하지 않는 풀은 undefined. */
+  round?: number;
   subject: '1과목' | '2과목';
   number: number;
   title: string;
@@ -25,8 +26,12 @@ export type QuizQuestion = {
   references?: QuestionReference[];
   /** 선택지별 보기 블록. 인덱스가 options 와 일치. 빈 배열은 보기 없음. */
   optionReferences?: (QuestionReference[] | undefined)[];
-  /** 내부 출처 태그 ('pdf' | 'blog' | 'authored'). UI 에 노출하지 말 것. */
+  /** SQLD 챕터 메타태그 (ai-mock 항목에 부여). UI 노출 가능. */
+  chapter?: string;
+  /** 내부 출처 태그 ('pdf' | 'blog' | 'authored' | 'ai-mock'). UI 에 노출하지 말 것. */
   _source?: string;
+  /** AI 모의 원본 ID (ai-mock-001 등). 추적용. */
+  _origId?: string;
 };
 
 import { ROUND_60 } from './rounds/round-60';
@@ -45,6 +50,7 @@ import { ROUND_48 } from './rounds/round-48';
 import { ROUND_47 } from './rounds/round-47';
 import { ROUND_46 } from './rounds/round-46';
 import { ROUND_45 } from './rounds/round-45';
+import { AI_MOCK } from './rounds/ai-mock';
 
 export const EXAM_SETS: { id: string; round: number; label: string; date: string; count: number }[] = [
   {
@@ -161,7 +167,8 @@ export const EXAM_SETS: { id: string; round: number; label: string; date: string
   }
 ];
 
-export const QUIZ_BANK: QuizQuestion[] = [
+/** 기출 회차 풀 (45회~60회) — 회차 시험·모의고사 출제 풀 */
+export const QUIZ_BANK_EXAM: QuizQuestion[] = [
   ...ROUND_60,
   ...ROUND_59,
   ...ROUND_58,
@@ -178,4 +185,13 @@ export const QUIZ_BANK: QuizQuestion[] = [
   ...ROUND_47,
   ...ROUND_46,
   ...ROUND_45,
+];
+
+/** AI 생성 변형 풀 — 기출 회차에 속하지 않는 별도 풀 */
+export const QUIZ_BANK_AI_MOCK: QuizQuestion[] = [...AI_MOCK];
+
+/** 통합 풀 (기출 + AI 변형) — 모의고사·랜덤 퀴즈 모드 출제용. 기출 회차 CBT 는 round 필터로 ai-mock 자동 제외됨. */
+export const QUIZ_BANK: QuizQuestion[] = [
+  ...QUIZ_BANK_EXAM,
+  ...QUIZ_BANK_AI_MOCK,
 ];
