@@ -11,6 +11,9 @@ import { QUIZ_BANK } from '../data/quizBank';
 import { CONCEPT_QUIZ } from '../data/conceptQuiz';
 import { recordTheoryView } from '../lib/progress';
 import { AdSlot } from '../components/AdSlot';
+import { MiniTestSidebar } from '../components/MiniTestSidebar';
+import { OX_QUIZ } from '../data/miniTest/ox';
+import { EXAM_MAPPING } from '../data/miniTest/examMapping';
 import { trackEvent } from '../lib/analytics';
 
 // highlight.js 등록 — SQL 위주
@@ -337,7 +340,7 @@ export const TheoryDetailScreen = ({ chapterId, onNavigate }) => {
         </div>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1fr) 280px', gap: 32 }} className="theory-detail-grid">
+      <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1fr) 320px', gap: 32 }} className="theory-detail-grid">
         {/* Main body */}
         <article>
           {/* 챕터 헤어로 — 양파 그린 그라데이션 카드 */}
@@ -379,9 +382,12 @@ export const TheoryDetailScreen = ({ chapterId, onNavigate }) => {
           </div>
         </article>
 
-        {/* Right rail: ToC + 광고 */}
+        {/* Right rail: 미니 테스트(데이터 있을 때만) + ToC + 광고 */}
         <aside style={{ position: 'relative' }}>
           <div style={{ position: 'sticky', top: 80, display: 'flex', flexDirection: 'column', gap: 14 }}>
+            {(OX_QUIZ[chapterId]?.length || EXAM_MAPPING[chapterId]?.length) ? (
+              <MiniTestSidebar chapterId={chapterId} />
+            ) : null}
             <TocCard toc={toc} />
             <AdSlot slot="THEORY_DETAIL_AFTER_MINITEST" format="rectangle" />
           </div>

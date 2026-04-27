@@ -629,3 +629,183 @@ img, svg {
   .home-hero-mascot { display: none !important; }
   .home-stats-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 10px !important; }
 }
+
+/* =============================================================
+   미니 테스트 사이드바 — 이론 챕터 우측 (PC ≥ 1024px)
+   한 블럭 안에서 OX → 연관 기출(MC) 시퀀스
+   ============================================================= */
+.mt-block {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 14px;
+  padding: 18px;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.mt-head {
+  display: flex; align-items: center; gap: 8px;
+  padding-bottom: 10px; border-bottom: 1px solid var(--border-subtle);
+}
+.mt-icon {
+  width: 26px; height: 26px; border-radius: 7px;
+  background: var(--point-100); color: var(--point-600);
+  display: inline-flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.mt-icon-ox {
+  font-size: 11px; font-weight: 800; letter-spacing: -0.5px;
+}
+.mt-title {
+  flex: 1; font-size: 13px; font-weight: 700; color: var(--fg-1); letter-spacing: -0.01em;
+}
+.mt-progress {
+  font-size: 11px; font-weight: 700; color: var(--point-600);
+  background: var(--point-100); padding: 3px 8px; border-radius: 999px;
+  font-family: var(--font-mono);
+}
+.mt-meta {
+  display: flex; gap: 6px; flex-wrap: wrap;
+}
+.mt-question {
+  font-size: 14px; line-height: 1.6; color: var(--fg-1); font-weight: 500;
+}
+.mt-refs {
+  background: var(--bg-muted); border-radius: 8px; padding: 10px 12px;
+}
+.mt-refs-text {
+  font-size: 12.5px; color: var(--fg-2); margin: 0; line-height: 1.6;
+  white-space: pre-wrap;
+}
+
+/* OX 답 영역 */
+.mt-actions-ox {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+}
+.mt-ox {
+  height: 56px; border-radius: 10px; cursor: pointer;
+  font-family: var(--font-mono); font-size: 22px; font-weight: 800;
+  background: var(--bg-card); transition: background 150ms, border-color 150ms, transform 80ms;
+}
+.mt-ox-o {
+  border: 2px solid var(--correct-border); color: var(--correct-fg);
+}
+.mt-ox-o:hover { background: var(--correct-bg); }
+.mt-ox-x {
+  border: 2px solid var(--wrong-border); color: var(--wrong-fg);
+}
+.mt-ox-x:hover { background: var(--wrong-bg); }
+.mt-ox:active { transform: scale(0.98); }
+
+/* MC 답 영역 */
+.mt-actions-mc {
+  list-style: none; padding: 0; margin: 0;
+  display: flex; flex-direction: column; gap: 6px;
+}
+.mt-actions-mc li { display: block; }
+.mt-mc {
+  width: 100%; text-align: left; display: flex; align-items: flex-start; gap: 10px;
+  padding: 10px 12px; border-radius: 9px; cursor: pointer;
+  background: var(--bg-card); border: 1px solid var(--border-default);
+  font-family: inherit; transition: border-color 150ms, background 150ms;
+}
+.mt-mc:hover {
+  border-color: var(--point-500); background: var(--point-050);
+}
+.mt-mc-num {
+  width: 22px; height: 22px; border-radius: 999px; flex-shrink: 0;
+  background: var(--bg-muted); color: var(--fg-3);
+  font-size: 11.5px; font-weight: 700; font-family: var(--font-mono);
+  display: inline-flex; align-items: center; justify-content: center;
+  margin-top: 1px;
+}
+.mt-mc-text {
+  flex: 1; font-size: 13px; color: var(--fg-2); line-height: 1.5;
+}
+
+/* 풀이 결과 박스 */
+.mt-result {
+  border-radius: 10px; padding: 12px 14px;
+  display: flex; flex-direction: column; gap: 8px;
+}
+.mt-result-correct {
+  background: var(--correct-bg); border: 1px solid var(--correct-border);
+}
+.mt-result-wrong {
+  background: var(--wrong-bg); border: 1px solid var(--wrong-border);
+}
+.mt-result-mark {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-size: 13px; font-weight: 800; letter-spacing: -0.01em;
+  align-self: flex-start;
+}
+.mt-result-correct .mt-result-mark { color: var(--correct-fg); }
+.mt-result-wrong .mt-result-mark { color: var(--wrong-fg); }
+.mt-result-correct-info {
+  font-size: 12.5px; color: var(--fg-2); line-height: 1.5;
+  padding-top: 6px; border-top: 1px solid rgba(0,0,0,0.06);
+}
+.mt-result-explain {
+  font-size: 12.5px; color: var(--fg-2); line-height: 1.65;
+}
+.mt-result-explain strong { color: var(--fg-1); font-weight: 700; }
+
+/* 하단 네비 */
+.mt-nav {
+  display: flex; align-items: center; gap: 8px;
+  padding-top: 8px;
+}
+.mt-nav-btn {
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 7px 11px; border-radius: 8px; cursor: pointer;
+  background: var(--bg-card); border: 1px solid var(--border-default);
+  font-family: inherit; font-size: 12px; font-weight: 600; color: var(--fg-2);
+  transition: border-color 150ms, color 150ms;
+}
+.mt-nav-btn:hover:not(:disabled) {
+  border-color: var(--point-500); color: var(--point-600);
+}
+.mt-nav-btn:disabled { opacity: 0.45; cursor: not-allowed; }
+.mt-nav-next {
+  background: var(--point-600); color: #fff; border-color: var(--point-600);
+}
+.mt-nav-next:hover:not(:disabled) {
+  background: var(--point-500); color: #fff; border-color: var(--point-500);
+}
+.mt-nav-progress {
+  flex: 1; text-align: center; font-size: 11.5px; color: var(--fg-3);
+  font-family: var(--font-mono);
+}
+
+/* 결과 요약 화면 */
+.mt-summary {
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+  padding: 18px 0;
+}
+.mt-summary-rate {
+  font-size: 22px; font-family: var(--font-mono); color: var(--fg-2);
+}
+.mt-summary-rate strong {
+  font-size: 32px; font-weight: 800; color: var(--point-600); letter-spacing: -0.02em;
+}
+.mt-summary-pct {
+  font-size: 14px; font-weight: 700; color: var(--point-600);
+  background: var(--point-100); padding: 4px 12px; border-radius: 999px;
+}
+.mt-btn-restart {
+  width: 100%; padding: 11px 14px; border-radius: 10px; cursor: pointer;
+  background: var(--bg-card); border: 1px solid var(--border-default);
+  font-family: inherit; font-size: 13px; font-weight: 700; color: var(--fg-1);
+  transition: border-color 150ms;
+}
+.mt-btn-restart:hover {
+  border-color: var(--point-500); color: var(--point-600);
+}
+
+/* 모바일: 사이드바 그리드를 1단으로 (이론 본문 아래로 떨어짐) */
+@media (max-width: 1024px) {
+  .theory-detail-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
