@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="light">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>그룹 함수 — SQLD양파 이론</title>
+<link rel="stylesheet" href="./common.css">
+</head>
+<body>
+<nav class="topnav">
+  <div class="topnav-inner">
+    <div class="topnav-brand">SQLD양파</div>
+    <div class="topnav-links"><a href="#">홈</a><a href="#" class="active">이론</a><a href="#">기출 CBT</a><a href="#">모의고사</a><a href="#">Pro</a></div>
+  </div>
+</nav>
+<main class="page-shell">
+  <div class="breadcrumb"><a href="#">이론</a><span class="sep">›</span><a href="#">2과목 SQL 기본 및 활용</a><span class="sep">›</span><a href="#">2-2. SQL 활용</a></div>
+  <header class="page-title-block">
+    <h1>그룹 함수 (Group Functions)</h1>
+    <p class="subtitle">소계·합계를 한 쿼리로 한꺼번에 · ROLLUP · CUBE · GROUPING SETS</p>
+  </header>
+  <article class="theory-md">
+
+  <!-- 핵심 요약 -->
+  <h2 class="section-label sec-summary reveal">
+    <span class="label-tag">핵심 요약</span>
+    <span class="label-rest">정의</span>
+  </h2>
+  <blockquote class="reveal">
+    그룹 함수는 <strong>다양한 단위의 소계와 합계를 한 쿼리로 한꺼번에</strong> 뽑아주는 확장 <a href="./2-1-5_GROUPBY_HAVING절.html">GROUP BY</a> 도구다(ROLLUP, CUBE, GROUPING SETS).
+  </blockquote>
+  <div class="ex-box reveal">
+    매장 매출 보고서에서 <strong>"부서별 / 부서+상품별 / 전체 합계"</strong>를 따로따로 SELECT하지 않고 한 번에 뽑는 도구.
+  </div>
+
+  <!-- 개념 도식화 -->
+  <h2 class="section-label sec-diagram reveal">
+    <span class="label-tag">개념 도식화</span>
+    <span class="label-rest">그룹 함수의 종류</span>
+  </h2>
+  <div class="threeway reveal">
+    <div class="threeway-card t-info">
+      <div class="glyph">ROLLUP</div>
+      <div class="name">계층적 소계</div>
+      <div class="desc">A,B → A → ⌀ — <strong>N+1 단계</strong>. 왼쪽부터 한 칸씩 떼며 소계</div>
+    </div>
+    <div class="threeway-card t-warn">
+      <div class="glyph">CUBE</div>
+      <div class="name">모든 조합</div>
+      <div class="desc">A,B → A → B → ⌀ — <strong>2^N 단계</strong>. 큐브의 모든 면</div>
+    </div>
+    <div class="threeway-card t-correct">
+      <div class="glyph">SETS</div>
+      <div class="name">GROUPING SETS</div>
+      <div class="desc">지정한 조합만 — <strong>가장 유연</strong>. 골라서 보기</div>
+    </div>
+  </div>
+  <table class="reveal">
+    <thead><tr><th>함수</th><th>의미</th><th>비유</th></tr></thead>
+    <tbody>
+      <tr><td>ROLLUP(A, B)</td><td>A별, A+B별, 전체 합계</td><td>단계적 소계</td></tr>
+      <tr><td>CUBE(A, B)</td><td>모든 조합(A별, B별, A+B별, 전체)</td><td>큐브의 모든 면</td></tr>
+      <tr><td>GROUPING SETS((A), (B))</td><td>특정 조합만</td><td>골라서 보기</td></tr>
+    </tbody>
+  </table>
+
+  <h3 class="reveal">ROLLUP의 누적 그룹 — (DEPT, JOB) 기준</h3>
+  <div class="tree-diagram reveal">
+    <ul>
+      <li><span class="node root">ROLLUP(DEPT, JOB)</span>
+        <ul>
+          <li><span class="node">(DEPT, JOB) <span class="meta">상세 그룹</span></span></li>
+          <li><span class="node">(DEPT) <span class="meta">부서 소계</span></span></li>
+          <li><span class="node">() <span class="meta">전체 합계</span></span></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+  <p class="reveal">왼쪽부터 한 칸씩 떼어내며 누적되는 구조다. <code>ROLLUP(A, B, C)</code>라면 (A,B,C) → (A,B) → (A) → () 총 4단계가 만들어진다.</p>
+
+  <!-- SQL 실전 -->
+  <h2 class="section-label sec-sql reveal">
+    <span class="label-tag">SQL 실전</span>
+    <span class="label-rest">함수별 사용 예제</span>
+  </h2>
+
+  <h3 class="reveal">ROLLUP — 계층적 소계</h3>
+  <p class="reveal" style="font-size: 13px; color: var(--fg-3); margin: 8px 0 4px;">예시 데이터</p>
+  <div class="ba-side before reveal" style="max-width: 460px;">
+    <span class="ba-tag">EMP</span>
+    <h4 class="ba-h">사원 테이블</h4>
+    <div class="mini-table cols-3">
+      <div class="h">DEPT_ID</div><div class="h">JOB</div><div class="h">SAL</div>
+      <div class="c">D1</div><div class="c">MGR</div><div class="c">5000</div>
+      <div class="c">D1</div><div class="c">CLERK</div><div class="c">2000</div>
+      <div class="c">D2</div><div class="c">MGR</div><div class="c">4500</div>
+    </div>
+  </div>
+  <pre class="reveal"><button class="copy-btn">복사</button><code><span class="sql-kw">SELECT</span>  <span class="sql-type">DEPT_ID</span>, <span class="sql-type">JOB</span>, <span class="sql-kw">SUM</span>(<span class="sql-type">SAL</span>)
+<span class="sql-kw">FROM</span>    <span class="sql-name">EMP</span>
+<span class="sql-kw">GROUP BY</span> <span class="sql-kw">ROLLUP</span>(<span class="sql-type">DEPT_ID</span>, <span class="sql-type">JOB</span>);</code></pre>
+
+  <h4 class="reveal">결과 — 3단계(부서+직무, 부서, 전체)</h4>
+  <table class="reveal">
+    <thead><tr><th>DEPT_ID</th><th>JOB</th><th>SUM(SAL)</th></tr></thead>
+    <tbody>
+      <tr><td>D1</td><td>MGR</td><td>5000</td></tr>
+      <tr><td>D1</td><td>CLERK</td><td>2000</td></tr>
+      <tr><td>D1</td><td style="color: var(--wrong-fg); font-weight: 700;">NULL</td><td>7000 (D1 소계)</td></tr>
+      <tr><td>D2</td><td>MGR</td><td>4500</td></tr>
+      <tr><td>D2</td><td style="color: var(--wrong-fg); font-weight: 700;">NULL</td><td>4500 (D2 소계)</td></tr>
+      <tr><td style="color: var(--wrong-fg); font-weight: 700;">NULL</td><td style="color: var(--wrong-fg); font-weight: 700;">NULL</td><td>11500 (전체 합계)</td></tr>
+    </tbody>
+  </table>
+  <p class="reveal">ROLLUP(A, B): A → A+B로 갈수록 세분화되고, 위로 갈수록 소계가 된다.</p>
+
+  <h3 class="reveal">CUBE — 모든 조합</h3>
+  <pre class="reveal"><button class="copy-btn">복사</button><code><span class="sql-kw">SELECT</span>  <span class="sql-type">DEPT_ID</span>, <span class="sql-type">JOB</span>, <span class="sql-kw">SUM</span>(<span class="sql-type">SAL</span>)
+<span class="sql-kw">FROM</span>    <span class="sql-name">EMP</span>
+<span class="sql-kw">GROUP BY</span> <span class="sql-kw">CUBE</span>(<span class="sql-type">DEPT_ID</span>, <span class="sql-type">JOB</span>);</code></pre>
+
+  <h4 class="reveal">결과 — ROLLUP 결과 + JOB별 합계까지</h4>
+  <table class="reveal">
+    <thead><tr><th>DEPT_ID</th><th>JOB</th><th>SUM(SAL)</th></tr></thead>
+    <tbody>
+      <tr><td>D1</td><td>MGR</td><td>5000</td></tr>
+      <tr><td>D1</td><td>CLERK</td><td>2000</td></tr>
+      <tr><td>D1</td><td style="color: var(--wrong-fg); font-weight: 700;">NULL</td><td>7000</td></tr>
+      <tr><td>D2</td><td>MGR</td><td>4500</td></tr>
+      <tr><td>D2</td><td style="color: var(--wrong-fg); font-weight: 700;">NULL</td><td>4500</td></tr>
+      <tr><td style="color: var(--wrong-fg); font-weight: 700;">NULL</td><td>MGR</td><td>9500 (MGR 합계, CUBE만 추가)</td></tr>
+      <tr><td style="color: var(--wrong-fg); font-weight: 700;">NULL</td><td>CLERK</td><td>2000 (CLERK 합계)</td></tr>
+      <tr><td style="color: var(--wrong-fg); font-weight: 700;">NULL</td><td style="color: var(--wrong-fg); font-weight: 700;">NULL</td><td>11500</td></tr>
+    </tbody>
+  </table>
+  <p class="reveal">N개 컬럼 CUBE는 <strong>2^N가지 조합</strong>을 만든다.</p>
+
+  <h3 class="reveal">GROUPING SETS — 골라 보기</h3>
+  <pre class="reveal"><button class="copy-btn">복사</button><code><span class="sql-kw">SELECT</span>  <span class="sql-type">DEPT_ID</span>, <span class="sql-type">JOB</span>, <span class="sql-kw">SUM</span>(<span class="sql-type">SAL</span>)
+<span class="sql-kw">FROM</span>    <span class="sql-name">EMP</span>
+<span class="sql-kw">GROUP BY</span> <span class="sql-kw">GROUPING SETS</span>((<span class="sql-type">DEPT_ID</span>), (<span class="sql-type">JOB</span>), ());</code></pre>
+
+  <h4 class="reveal">결과 — 부서별, 직무별, 전체</h4>
+  <table class="reveal">
+    <thead><tr><th>DEPT_ID</th><th>JOB</th><th>SUM(SAL)</th></tr></thead>
+    <tbody>
+      <tr><td>D1</td><td style="color: var(--wrong-fg); font-weight: 700;">NULL</td><td>7000</td></tr>
+      <tr><td>D2</td><td style="color: var(--wrong-fg); font-weight: 700;">NULL</td><td>4500</td></tr>
+      <tr><td style="color: var(--wrong-fg); font-weight: 700;">NULL</td><td>MGR</td><td>9500</td></tr>
+      <tr><td style="color: var(--wrong-fg); font-weight: 700;">NULL</td><td>CLERK</td><td>2000</td></tr>
+      <tr><td style="color: var(--wrong-fg); font-weight: 700;">NULL</td><td style="color: var(--wrong-fg); font-weight: 700;">NULL</td><td>11500</td></tr>
+    </tbody>
+  </table>
+
+  <!-- 정리표 -->
+  <h2 class="reveal">정리표</h2>
+  <table class="reveal">
+    <thead><tr><th>함수</th><th>결과</th></tr></thead>
+    <tbody>
+      <tr><td>GROUP BY (A, B)</td><td>A, B 조합</td></tr>
+      <tr><td>GROUP BY ROLLUP(A, B)</td><td>(A, B), (A), ()</td></tr>
+      <tr><td>GROUP BY CUBE(A, B)</td><td>(A, B), (A), (B), ()</td></tr>
+      <tr><td>GROUP BY GROUPING SETS((A, B), (A))</td><td>지정한 조합만</td></tr>
+    </tbody>
+  </table>
+
+  <!-- GROUPING 함수 -->
+  <h2 class="reveal">GROUPING 함수 — 소계 행 구분</h2>
+  <p class="reveal">결과에 NULL이 보일 때, <strong>원래 NULL</strong>인지 <strong>소계로 인한 NULL</strong>인지 구분하는 함수다.</p>
+  <div class="fn-grid reveal">
+    <div class="fn-card">
+      <div class="name">GROUPING(컬럼) = 0</div>
+      <div class="desc">일반 행 (실제 그룹의 데이터 NULL)</div>
+      <div class="ex">D1, MGR, 5000 → 0, 0</div>
+    </div>
+    <div class="fn-card">
+      <div class="name">GROUPING(컬럼) = 1</div>
+      <div class="desc"><strong>소계 행</strong>의 NULL (집계로 생긴 NULL)</div>
+      <div class="ex">D1, NULL(소계) → 0, 1</div>
+    </div>
+  </div>
+  <table class="reveal">
+    <thead><tr><th>결과</th><th>의미</th></tr></thead>
+    <tbody>
+      <tr><td>GROUPING(컬럼) = 0</td><td>일반 행(실제 그룹)</td></tr>
+      <tr><td>GROUPING(컬럼) = 1</td><td>소계 행</td></tr>
+    </tbody>
+  </table>
+  <pre class="reveal"><button class="copy-btn">복사</button><code><span class="sql-kw">SELECT</span>  <span class="sql-type">DEPT_ID</span>, <span class="sql-type">JOB</span>, <span class="sql-kw">SUM</span>(<span class="sql-type">SAL</span>),
+        <span class="sql-kw">GROUPING</span>(<span class="sql-type">DEPT_ID</span>) <span class="sql-kw">AS</span> <span class="sql-type">G_DEPT</span>,
+        <span class="sql-kw">GROUPING</span>(<span class="sql-type">JOB</span>)     <span class="sql-kw">AS</span> <span class="sql-type">G_JOB</span>
+<span class="sql-kw">FROM</span>    <span class="sql-name">EMP</span>
+<span class="sql-kw">GROUP BY</span> <span class="sql-kw">ROLLUP</span>(<span class="sql-type">DEPT_ID</span>, <span class="sql-type">JOB</span>);</code></pre>
+  <table class="reveal">
+    <thead><tr><th>DEPT_ID</th><th>JOB</th><th>SUM</th><th>G_DEPT</th><th>G_JOB</th></tr></thead>
+    <tbody>
+      <tr><td>D1</td><td>MGR</td><td>5000</td><td>0</td><td>0</td></tr>
+      <tr><td>D1</td><td style="color: var(--wrong-fg); font-weight: 700;">NULL</td><td>7000</td><td>0</td><td>1 (소계)</td></tr>
+      <tr><td style="color: var(--wrong-fg); font-weight: 700;">NULL</td><td style="color: var(--wrong-fg); font-weight: 700;">NULL</td><td>11500</td><td>1</td><td>1 (전체 합계)</td></tr>
+    </tbody>
+  </table>
+
+  <!-- Before & After -->
+  <h2 class="section-label sec-compare reveal">
+    <span class="label-tag">Before &amp; After</span>
+    <span class="label-rest">ROLLUP vs CUBE 비교</span>
+  </h2>
+  <p class="reveal">EMP 3행(D1·D2 부서, A·B 직무)을 부서/직무로 집계하는 상황. 같은 데이터를 일반 GROUP BY, ROLLUP, CUBE에 차례로 넣어 어디까지 소계가 추가되는지 비교한다. 핵심은 <strong>"부서 소계만 필요한가, 직무 소계까지 필요한가"</strong>이다.</p>
+
+  <p class="reveal" style="font-size: 13.5px; color: var(--fg-3);">EMP</p>
+  <table class="reveal">
+    <thead><tr><th>DEPT_ID</th><th>JOB</th><th>SAL</th></tr></thead>
+    <tbody>
+      <tr><td>D1</td><td>A</td><td>1000</td></tr>
+      <tr><td>D1</td><td>B</td><td>2000</td></tr>
+      <tr><td>D2</td><td>A</td><td>3000</td></tr>
+    </tbody>
+  </table>
+
+  <div class="ba-flow large-after reveal">
+    <div class="ba-side before">
+      <span class="ba-tag">BEFORE</span>
+      <h4 class="ba-h">기본 GROUP BY (DEPT, JOB)</h4>
+      <div class="sql">SELECT DEPT_ID, JOB, SUM(SAL)
+FROM EMP
+GROUP BY DEPT_ID, JOB;</div>
+      <div class="mini-table cols-3">
+        <div class="h">D</div><div class="h">J</div><div class="h">SUM</div>
+        <div class="c">D1</div><div class="c">A</div><div class="c">1000</div>
+        <div class="c">D1</div><div class="c">B</div><div class="c">2000</div>
+        <div class="c">D2</div><div class="c">A</div><div class="c">3000</div>
+      </div>
+    </div>
+    <div class="ba-arrow">→</div>
+    <div class="ba-side after">
+      <span class="ba-tag">AFTER</span>
+      <h4 class="ba-h">ROLLUP / CUBE</h4>
+      <div class="ba-tables cols-2">
+        <div class="ba-mini-table">
+          <div class="h">ROLLUP(D, J)</div>
+          <div class="row">D1·A · 1000</div>
+          <div class="row">D1·B · 2000</div>
+          <div class="row">D1·NULL · 3000</div>
+          <div class="row">D2·A · 3000</div>
+          <div class="row">D2·NULL · 3000</div>
+          <div class="row">NULL·NULL · 6000</div>
+        </div>
+        <div class="ba-mini-table">
+          <div class="h">CUBE 추가 행</div>
+          <div class="row">NULL · A · 4000</div>
+          <div class="row">NULL · B · 2000</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h3 class="reveal"><code>GROUP BY (DEPT, JOB)</code> — 기본</h3>
+  <table class="reveal">
+    <thead><tr><th>D</th><th>J</th><th>SUM</th></tr></thead>
+    <tbody>
+      <tr><td>D1</td><td>A</td><td>1000</td></tr>
+      <tr><td>D1</td><td>B</td><td>2000</td></tr>
+      <tr><td>D2</td><td>A</td><td>3000</td></tr>
+    </tbody>
+  </table>
+
+  <h3 class="reveal"><code>ROLLUP(DEPT, JOB)</code></h3>
+  <table class="reveal">
+    <thead><tr><th>D</th><th>J</th><th>SUM</th></tr></thead>
+    <tbody>
+      <tr><td>D1</td><td>A</td><td>1000</td></tr>
+      <tr><td>D1</td><td>B</td><td>2000</td></tr>
+      <tr><td>D1</td><td style="color: var(--wrong-fg); font-weight: 700;">NULL</td><td>3000</td></tr>
+      <tr><td>D2</td><td>A</td><td>3000</td></tr>
+      <tr><td>D2</td><td style="color: var(--wrong-fg); font-weight: 700;">NULL</td><td>3000</td></tr>
+      <tr><td style="color: var(--wrong-fg); font-weight: 700;">NULL</td><td style="color: var(--wrong-fg); font-weight: 700;">NULL</td><td>6000</td></tr>
+    </tbody>
+  </table>
+
+  <h3 class="reveal"><code>CUBE(DEPT, JOB)</code> 추가 행</h3>
+  <table class="reveal">
+    <thead><tr><th>D</th><th>J</th><th>SUM</th></tr></thead>
+    <tbody>
+      <tr><td style="color: var(--wrong-fg); font-weight: 700;">NULL</td><td>A</td><td>4000</td></tr>
+      <tr><td style="color: var(--wrong-fg); font-weight: 700;">NULL</td><td>B</td><td>2000</td></tr>
+    </tbody>
+  </table>
+
+  <p class="reveal">기본 GROUP BY는 (DEPT, JOB) 조합 1단계만, ROLLUP(DEPT, JOB)은 (DEPT, JOB) → (DEPT) → ()로 <strong>왼쪽부터 한 칸씩 떼어내며 소계를 쌓는다(N+1단계)</strong>. CUBE(DEPT, JOB)는 거기에 더해 (JOB) 단독 소계까지 만들어 모든 조합 2^N단계를 채운다. 부서 단위 소계만 필요하면 ROLLUP으로 충분하지만, 직무별 가로 합계까지 한 번에 보고 싶다면 CUBE가 정답이다. 더 정밀하게 특정 조합만 골라 뽑고 싶다면 GROUPING SETS를 쓴다.</p>
+
+  <div class="reveal" style="margin: 40px 0 0; padding: 22px 24px; background: linear-gradient(135deg, var(--point-050), var(--bg-card)); border: 1px solid var(--point-100); border-radius: 12px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;">
+    <div>
+      <div style="font-size: 12px; font-weight: 800; color: var(--point-600); letter-spacing: 0.04em; margin-bottom: 4px;">시험 대비</div>
+      <div style="font-size: 14px; color: var(--fg-2);">이 챕터의 함정·정답과 30초 정리는 통합 시험 대비 페이지에서 볼 수 있습니다.</div>
+    </div>
+    <a href="./exam-review.html#ch-2-2-3" style="font-size: 14px; font-weight: 700; color: var(--point-600); text-decoration: none; padding: 8px 14px; border: 1px solid var(--point-300); border-radius: 8px; background: var(--bg-card); white-space: nowrap;">시험 대비 보기 →</a>
+  </div>
+
+  </article>
+</main>
+<script src="./common.js"></script>
+</body>
+</html>

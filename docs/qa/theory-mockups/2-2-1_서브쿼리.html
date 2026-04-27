@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="light">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>서브쿼리 — SQLD양파 이론</title>
+<link rel="stylesheet" href="./common.css">
+</head>
+<body>
+<nav class="topnav">
+  <div class="topnav-inner">
+    <div class="topnav-brand">SQLD양파</div>
+    <div class="topnav-links"><a href="#">홈</a><a href="#" class="active">이론</a><a href="#">기출 CBT</a><a href="#">모의고사</a><a href="#">Pro</a></div>
+  </div>
+</nav>
+<main class="page-shell">
+  <div class="breadcrumb"><a href="#">이론</a><span class="sep">›</span><a href="#">2과목 SQL 기본 및 활용</a><span class="sep">›</span><a href="#">2-2. SQL 활용</a></div>
+  <header class="page-title-block">
+    <h1>서브쿼리 (Sub Query)</h1>
+    <p class="subtitle">쿼리 안의 또 다른 쿼리 · 메인이 사용할 값을 미리 계산해 알려주는 보조 쿼리</p>
+  </header>
+  <article class="theory-md">
+
+  <!-- 핵심 요약 -->
+  <h2 class="section-label sec-summary reveal">
+    <span class="label-tag">핵심 요약</span>
+    <span class="label-rest">정의</span>
+  </h2>
+  <blockquote class="reveal">
+    서브쿼리는 <strong>쿼리 안에 들어 있는 또 다른 쿼리</strong>다. 메인쿼리가 사용할 값을 미리 계산해 알려주는 보조 쿼리다.
+  </blockquote>
+  <div class="ex-box reveal">
+    "평균 가격보다 비싼 상품"을 찾을 때, 평균을 먼저 계산(<strong>서브쿼리</strong>)한 뒤 그 값보다 큰 상품을 찾는(<strong>메인쿼리</strong>) 두 단계 작업.
+  </div>
+
+  <!-- 개념 도식화 -->
+  <h2 class="section-label sec-diagram reveal">
+    <span class="label-tag">개념 도식화</span>
+    <span class="label-rest">서브쿼리의 위치</span>
+  </h2>
+  <pre class="reveal"><button class="copy-btn">복사</button><code><span class="sql-kw">SELECT</span>  컬럼들                    <span class="sql-cm">← SELECT 서브쿼리(스칼라)</span>
+<span class="sql-kw">FROM</span>    (서브쿼리)                 <span class="sql-cm">← FROM 서브쿼리(인라인 뷰)</span>
+<span class="sql-kw">WHERE</span>   컬럼 = (서브쿼리);         <span class="sql-cm">← WHERE 서브쿼리(대표적)</span></code></pre>
+
+  <div class="step-flow reveal">
+    <div class="step-card">
+      <div class="step">STEP 1</div>
+      <div class="name">메인 쿼리 시작</div>
+      <div class="ex">실행 중 서브쿼리 결과가 필요한 자리에 도달</div>
+      <div class="arrow-next">→</div>
+    </div>
+    <div class="step-card">
+      <div class="step">STEP 2</div>
+      <div class="name">서브쿼리 실행</div>
+      <div class="ex">메인이 필요로 하는 값을 계산해 반환</div>
+      <div class="arrow-next">→</div>
+    </div>
+    <div class="step-card">
+      <div class="step">STEP 3</div>
+      <div class="name">메인 쿼리 계속</div>
+      <div class="ex">반환된 값으로 비교/필터/투영을 마무리</div>
+    </div>
+  </div>
+
+  <!-- 분류 트리 (mermaid) -->
+  <h2 class="reveal">서브쿼리 분류</h2>
+  <div class="mermaid reveal">flowchart TD
+    A[서브쿼리] --> B[결과 행수]
+    A --> C[위치]
+    A --> D[메인쿼리 관계]
+    B --> B1[단일행<br/>=, &gt;, &lt;]
+    B --> B2[다중행<br/>IN, ANY, ALL, EXISTS]
+    B --> B3[다중컬럼<br/>A,B IN ...]
+    C --> C1[SELECT 절<br/>스칼라]
+    C --> C2[FROM 절<br/>인라인 뷰]
+    C --> C3[WHERE 절<br/>중첩]
+    D --> D1[비연관<br/>한 번 실행]
+    D --> D2[연관<br/>행마다 반복]
+  </div>
+
+  <h2 class="reveal">서브쿼리의 분류</h2>
+
+  <h3 class="reveal">결과 행수에 따른 분류</h3>
+  <div class="cls-row reveal">
+    <div class="cls-card"><span class="badge">단일행</span><div class="name">Single-row</div><div class="ex">1행 반환. <code>=</code>, <code>&gt;</code>, <code>&lt;</code>, <code>&gt;=</code>, <code>&lt;=</code>, <code>&lt;&gt;</code></div></div>
+    <div class="cls-card"><span class="badge b-info">다중행</span><div class="name">Multi-row</div><div class="ex">여러 행 반환. <code>IN</code>, <code>ANY</code>, <code>ALL</code>, <code>EXISTS</code></div></div>
+    <div class="cls-card"><span class="badge b-warn">다중컬럼</span><div class="name">Multi-column</div><div class="ex"><code>(A, B) IN (...)</code></div></div>
+  </div>
+  <table class="reveal">
+    <thead><tr><th>종류</th><th>결과 행수</th><th>사용 연산자</th></tr></thead>
+    <tbody>
+      <tr><td>단일행 서브쿼리</td><td>1행</td><td><code>=</code>, <code>&gt;</code>, <code>&lt;</code>, <code>&gt;=</code>, <code>&lt;=</code>, <code>&lt;&gt;</code></td></tr>
+      <tr><td>다중행 서브쿼리</td><td>여러 행</td><td>IN, ANY, ALL, EXISTS</td></tr>
+      <tr><td>다중컬럼 서브쿼리</td><td>여러 컬럼</td><td><code>(A, B) IN (...)</code></td></tr>
+    </tbody>
+  </table>
+
+  <h3 class="reveal">위치에 따른 분류</h3>
+  <div class="cls-row reveal">
+    <div class="cls-card"><span class="badge">SELECT 절</span><div class="name">스칼라 서브쿼리</div><div class="ex"><code>SELECT (SELECT MAX(SAL) FROM EMP) FROM ...</code></div></div>
+    <div class="cls-card"><span class="badge b-info">FROM 절</span><div class="name">인라인 뷰</div><div class="ex"><code>FROM (SELECT ...) X</code> · 별칭 필수</div></div>
+    <div class="cls-card"><span class="badge b-warn">WHERE 절</span><div class="name">중첩 서브쿼리</div><div class="ex"><code>WHERE SAL &gt; (SELECT AVG(SAL)...)</code> — <a href="./2-1-4_WHERE절.html">WHERE 절</a></div></div>
+  </div>
+
+  <h3 class="reveal">메인쿼리와의 관계</h3>
+  <table class="reveal">
+    <thead><tr><th>종류</th><th>의미</th><th>특징</th></tr></thead>
+    <tbody>
+      <tr><td>비연관 서브쿼리</td><td>메인쿼리 컬럼 사용 안 함</td><td>한 번만 실행</td></tr>
+      <tr><td>연관 서브쿼리</td><td>메인쿼리 컬럼 참조</td><td>메인의 각 행마다 반복 실행</td></tr>
+    </tbody>
+  </table>
+
+  <!-- 서브쿼리 vs 조인 vs 집합 -->
+  <h2 class="reveal">서브쿼리 vs 조인 vs 집합 연산자</h2>
+  <div class="threeway reveal">
+    <div class="threeway-card t-info">
+      <div class="glyph">SUB</div>
+      <div class="name">서브쿼리</div>
+      <div class="desc">메인쿼리에 <strong>값 하나(또는 집합)을 공급</strong>. 보조 쿼리</div>
+    </div>
+    <div class="threeway-card t-correct">
+      <div class="glyph">JOIN</div>
+      <div class="name"><a href="./2-1-7_조인.html">조인</a></div>
+      <div class="desc">컬럼을 <strong>옆으로 붙임</strong>. 두 테이블의 행 결합</div>
+    </div>
+    <div class="threeway-card t-warn">
+      <div class="glyph">SET</div>
+      <div class="name"><a href="./2-2-2_집합연산자.html">집합 연산자</a></div>
+      <div class="desc">행을 <strong>위·아래로 이어붙임</strong>. UNION/INTERSECT/MINUS</div>
+    </div>
+  </div>
+
+  <!-- SQL 실전 -->
+  <h2 class="section-label sec-sql reveal">
+    <span class="label-tag">SQL 실전</span>
+    <span class="label-rest">서브쿼리 패턴별 예제</span>
+  </h2>
+
+  <h3 class="reveal">단일행 서브쿼리</h3>
+  <p class="reveal" style="font-size: 13px; color: var(--fg-3); margin: 8px 0 4px;">예시 데이터</p>
+  <div class="ba-side before reveal" style="max-width: 460px;">
+    <span class="ba-tag">EMP</span>
+    <h4 class="ba-h">사원 테이블</h4>
+    <div class="mini-table cols-2">
+      <div class="h">NAME</div><div class="h">SAL</div>
+      <div class="c">김</div><div class="c">3000</div>
+      <div class="c">이</div><div class="c">5000</div>
+      <div class="c">박</div><div class="c">4000</div>
+      <div class="c">최</div><div class="c">4500</div>
+    </div>
+  </div>
+  <pre class="reveal"><button class="copy-btn">복사</button><code><span class="sql-cm">-- 평균 급여보다 많이 받는 사원</span>
+<span class="sql-kw">SELECT</span>  <span class="sql-type">NAME</span>, <span class="sql-type">SAL</span>
+<span class="sql-kw">FROM</span>    <span class="sql-name">EMP</span>
+<span class="sql-kw">WHERE</span>   <span class="sql-type">SAL</span> &gt; (<span class="sql-kw">SELECT</span> <span class="sql-kw">AVG</span>(<span class="sql-type">SAL</span>) <span class="sql-kw">FROM</span> <span class="sql-name">EMP</span>);</code></pre>
+  <p class="reveal" style="font-size: 13px; color: var(--fg-3); margin: 8px 0 4px;">↓ 결과 (전체 평균 = 4125)</p>
+  <table class="reveal">
+    <thead><tr><th>NAME</th><th>SAL</th></tr></thead>
+    <tbody>
+      <tr><td>이</td><td>5000</td></tr>
+      <tr><td>최</td><td>4500</td></tr>
+    </tbody>
+  </table>
+  <p class="reveal" style="font-size: 12.5px; color: var(--fg-3); margin: 0 0 12px;">→ 서브쿼리 결과가 1행 1값이므로 <code>&gt;</code> 같은 단순 연산자 사용이 가능하다.</p>
+
+  <h3 class="reveal">다중행 서브쿼리 — IN / ANY / ALL</h3>
+  <table class="reveal">
+    <thead><tr><th>연산자</th><th>의미</th></tr></thead>
+    <tbody>
+      <tr><td><code>IN (...)</code></td><td>값 중 하나와 같으면</td></tr>
+      <tr><td><code>&gt; ANY(...)</code></td><td>하나 이상보다 크면 → <strong>최솟값보다 크면</strong> 됨</td></tr>
+      <tr><td><code>&gt; ALL(...)</code></td><td>모두보다 크면 → <strong>최댓값보다 커야</strong> 함</td></tr>
+      <tr><td><code>EXISTS (...)</code></td><td>존재하면 참</td></tr>
+    </tbody>
+  </table>
+  <pre class="reveal"><button class="copy-btn">복사</button><code><span class="sql-cm">-- IN</span>
+<span class="sql-kw">SELECT</span>  *
+<span class="sql-kw">FROM</span>    <span class="sql-name">EMP</span>
+<span class="sql-kw">WHERE</span>   <span class="sql-type">DEPT_ID</span> <span class="sql-kw">IN</span> (<span class="sql-kw">SELECT</span> <span class="sql-type">DEPT_ID</span> <span class="sql-kw">FROM</span> <span class="sql-name">DEPT</span> <span class="sql-kw">WHERE</span> <span class="sql-type">LOC</span> = <span class="sql-str">'SEOUL'</span>);
+
+<span class="sql-cm">-- &gt; ANY: 어느 한 값보다 크면 → 최솟값보다만 크면 됨</span>
+<span class="sql-kw">SELECT</span>  *
+<span class="sql-kw">FROM</span>    <span class="sql-name">EMP</span>
+<span class="sql-kw">WHERE</span>   <span class="sql-type">SAL</span> &gt; <span class="sql-kw">ANY</span> (<span class="sql-kw">SELECT</span> <span class="sql-type">SAL</span> <span class="sql-kw">FROM</span> <span class="sql-name">EMP</span> <span class="sql-kw">WHERE</span> <span class="sql-type">DEPT_ID</span> = <span class="sql-str">'D1'</span>);
+
+<span class="sql-cm">-- &gt; ALL: 모든 값보다 커야 함 → 최댓값보다 커야 함</span>
+<span class="sql-kw">SELECT</span>  *
+<span class="sql-kw">FROM</span>    <span class="sql-name">EMP</span>
+<span class="sql-kw">WHERE</span>   <span class="sql-type">SAL</span> &gt; <span class="sql-kw">ALL</span> (<span class="sql-kw">SELECT</span> <span class="sql-type">SAL</span> <span class="sql-kw">FROM</span> <span class="sql-name">EMP</span> <span class="sql-kw">WHERE</span> <span class="sql-type">DEPT_ID</span> = <span class="sql-str">'D1'</span>);</code></pre>
+
+  <h3 class="reveal">EXISTS 서브쿼리</h3>
+  <pre class="reveal"><button class="copy-btn">복사</button><code><span class="sql-cm">-- 주문 내역이 있는 회원만</span>
+<span class="sql-kw">SELECT</span>  *
+<span class="sql-kw">FROM</span>    <span class="sql-name">MEMBER</span> M
+<span class="sql-kw">WHERE</span>   <span class="sql-kw">EXISTS</span> (<span class="sql-kw">SELECT</span> <span class="sql-num">1</span> <span class="sql-kw">FROM</span> <span class="sql-name">ORDERS</span> O <span class="sql-kw">WHERE</span> O.<span class="sql-type">MEMBER_ID</span> = M.<span class="sql-type">MEMBER_ID</span>);</code></pre>
+  <table class="reveal">
+    <thead><tr><th>특징</th><th>설명</th></tr></thead>
+    <tbody>
+      <tr><td>결과가 존재하기만 하면 TRUE</td><td>1건이라도 있으면 통과</td></tr>
+      <tr><td>IN보다 효율적일 수 있음</td><td>존재 확인만 하면 됨</td></tr>
+    </tbody>
+  </table>
+
+  <h3 class="reveal">스칼라 서브쿼리 (SELECT 절)</h3>
+  <pre class="reveal"><button class="copy-btn">복사</button><code><span class="sql-kw">SELECT</span>  E.<span class="sql-type">NAME</span>,
+        E.<span class="sql-type">SAL</span>,
+        (<span class="sql-kw">SELECT</span> <span class="sql-kw">AVG</span>(<span class="sql-type">SAL</span>) <span class="sql-kw">FROM</span> <span class="sql-name">EMP</span>) <span class="sql-kw">AS</span> 전체평균
+<span class="sql-kw">FROM</span>    <span class="sql-name">EMP</span> E;</code></pre>
+  <p class="reveal" style="font-size: 13px; color: var(--fg-3); margin: 8px 0 4px;">↓ 결과 (전체평균 = 4125, 모든 행에 같은 값)</p>
+  <table class="reveal">
+    <thead><tr><th>NAME</th><th>SAL</th><th>전체평균</th></tr></thead>
+    <tbody>
+      <tr><td>김</td><td>3000</td><td>4125</td></tr>
+      <tr><td>이</td><td>5000</td><td>4125</td></tr>
+      <tr><td>박</td><td>4000</td><td>4125</td></tr>
+      <tr><td>최</td><td>4500</td><td>4125</td></tr>
+    </tbody>
+  </table>
+  <p class="reveal">반드시 1행 1값을 반환해야 하며, 여러 행 반환 시 에러가 난다.</p>
+
+  <h3 class="reveal">인라인 뷰 (FROM 절)</h3>
+  <pre class="reveal"><button class="copy-btn">복사</button><code><span class="sql-cm">-- 부서별 평균 중 평균 4000 이상인 부서</span>
+<span class="sql-kw">SELECT</span>  *
+<span class="sql-kw">FROM</span>    (<span class="sql-kw">SELECT</span> <span class="sql-type">DEPT_ID</span>, <span class="sql-kw">AVG</span>(<span class="sql-type">SAL</span>) <span class="sql-kw">AS</span> <span class="sql-type">AVG_SAL</span>
+         <span class="sql-kw">FROM</span>   <span class="sql-name">EMP</span>
+         <span class="sql-kw">GROUP BY</span> <span class="sql-type">DEPT_ID</span>) X
+<span class="sql-kw">WHERE</span>   X.<span class="sql-type">AVG_SAL</span> &gt;= <span class="sql-num">4000</span>;</code></pre>
+  <p class="reveal" style="font-size: 13px; color: var(--fg-3); margin: 8px 0 4px;">↓ 결과 (D1=4000 통과, D2=4250 통과)</p>
+  <table class="reveal">
+    <thead><tr><th>DEPT_ID</th><th>AVG_SAL</th></tr></thead>
+    <tbody>
+      <tr><td>D1</td><td>4000</td></tr>
+      <tr><td>D2</td><td>4250</td></tr>
+    </tbody>
+  </table>
+  <p class="reveal">임시 테이블처럼 사용한다. <strong>별칭 필수</strong>.</p>
+
+  <h4 class="reveal">EXISTS SQL + 결과</h4>
+  <p class="reveal" style="font-size: 13px; color: var(--fg-3); margin: 8px 0 4px;">예시 데이터</p>
+  <div class="ba-flow reveal" style="grid-template-columns: 1fr 36px 1fr; align-items: stretch;">
+    <div class="ba-side before">
+      <span class="ba-tag">MEMBER</span>
+      <h4 class="ba-h">회원 테이블</h4>
+      <div class="mini-table cols-2">
+        <div class="h">MEMBER</div><div class="h">NAME</div>
+        <div class="c">M01</div><div class="c">김</div>
+        <div class="c">M02</div><div class="c">이</div>
+        <div class="c">M03</div><div class="c">박</div>
+      </div>
+    </div>
+    <div class="ba-arrow" style="font-size: 22px; color: var(--point-500);">+</div>
+    <div class="ba-side before">
+      <span class="ba-tag">ORDERS</span>
+      <h4 class="ba-h">주문 테이블</h4>
+      <div class="mini-table cols-2">
+        <div class="h">ORDER_ID</div><div class="h">MEMBER_ID</div>
+        <div class="c">#1</div><div class="c">M01</div>
+        <div class="c">#2</div><div class="c">M01</div>
+        <div class="c">#3</div><div class="c">M03</div>
+      </div>
+    </div>
+  </div>
+  <pre class="reveal"><button class="copy-btn">복사</button><code><span class="sql-kw">SELECT</span> <span class="sql-type">NAME</span> <span class="sql-kw">FROM</span> <span class="sql-name">MEMBER</span> M
+<span class="sql-kw">WHERE</span>  <span class="sql-kw">EXISTS</span> (<span class="sql-kw">SELECT</span> <span class="sql-num">1</span> <span class="sql-kw">FROM</span> <span class="sql-name">ORDERS</span> O <span class="sql-kw">WHERE</span> O.<span class="sql-type">MEMBER_ID</span> = M.<span class="sql-type">MEMBER_ID</span>);</code></pre>
+  <p class="reveal" style="font-size: 13px; color: var(--fg-3); margin: 8px 0 4px;">↓ 결과 (주문 있는 회원만)</p>
+  <table class="reveal">
+    <thead><tr><th>NAME</th></tr></thead>
+    <tbody>
+      <tr><td>김</td></tr>
+      <tr><td>박</td></tr>
+    </tbody>
+  </table>
+  <p class="reveal">이(M02)는 주문 없으므로 EXISTS가 거짓이 되어 결과에서 빠진다.</p>
+
+  <h3 class="reveal">연관 서브쿼리</h3>
+  <pre class="reveal"><button class="copy-btn">복사</button><code><span class="sql-cm">-- 자기 부서 평균보다 많이 받는 사원</span>
+<span class="sql-kw">SELECT</span>  E.<span class="sql-type">NAME</span>, E.<span class="sql-type">SAL</span>, E.<span class="sql-type">DEPT_ID</span>
+<span class="sql-kw">FROM</span>    <span class="sql-name">EMP</span> E
+<span class="sql-kw">WHERE</span>   E.<span class="sql-type">SAL</span> &gt; (<span class="sql-kw">SELECT</span> <span class="sql-kw">AVG</span>(<span class="sql-type">SAL</span>)
+                 <span class="sql-kw">FROM</span>   <span class="sql-name">EMP</span>
+                 <span class="sql-kw">WHERE</span>  <span class="sql-type">DEPT_ID</span> = E.<span class="sql-type">DEPT_ID</span>);   <span class="sql-cm">-- E.DEPT_ID는 메인쿼리 참조</span></code></pre>
+  <table class="reveal">
+    <thead><tr><th>특징</th><th>설명</th></tr></thead>
+    <tbody>
+      <tr><td>메인쿼리의 각 행마다 서브쿼리 실행</td><td>행 수만큼 반복</td></tr>
+      <tr><td>성능 영향</td><td>큼. 필요시 <a href="./2-1-7_조인.html">조인</a>으로 변환</td></tr>
+    </tbody>
+  </table>
+
+  <!-- Before & After -->
+  <h2 class="section-label sec-compare reveal">
+    <span class="label-tag">Before &amp; After</span>
+    <span class="label-rest">단일행(전체 평균) vs 연관(부서 평균)</span>
+  </h2>
+  <p class="reveal">같은 EMP 4명 데이터에 같은 비교(자기보다 평균이 큰 사람)를 적용해도, 비교 기준이 <strong>"회사 전체 평균"</strong>이냐 <strong>"자기 부서 평균"</strong>이냐에 따라 결과가 달라지는 상황. 단일행 서브쿼리(전체 평균 1개)와 연관 서브쿼리(부서별 평균 2개)가 어떻게 다른 행을 골라내는지 비교한다.</p>
+
+  <p class="reveal" style="font-size: 13.5px; color: var(--fg-3);">EMP 테이블</p>
+  <table class="reveal">
+    <thead><tr><th>NAME</th><th>DEPT_ID</th><th>SAL</th></tr></thead>
+    <tbody>
+      <tr><td>김</td><td>D1</td><td>3000</td></tr>
+      <tr><td>이</td><td>D1</td><td>5000</td></tr>
+      <tr><td>박</td><td>D2</td><td>4000</td></tr>
+      <tr><td>최</td><td>D2</td><td>4500</td></tr>
+    </tbody>
+  </table>
+
+  <div class="ba-flow reveal">
+    <div class="ba-side before">
+      <span class="ba-tag">단일행 서브쿼리</span>
+      <h4 class="ba-h">전체 평균 1개와 비교</h4>
+      <div class="sql">SELECT NAME, SAL FROM EMP
+WHERE SAL &gt; (SELECT AVG(SAL) FROM EMP);
+
+전체 평균 = 4125</div>
+      <div class="mini-table">
+        <div class="h">NAME</div><div class="h">SAL</div>
+        <div class="c">이</div><div class="c">5000</div>
+        <div class="c">최</div><div class="c">4500</div>
+      </div>
+    </div>
+    <div class="ba-arrow">→</div>
+    <div class="ba-side after">
+      <span class="ba-tag">연관 서브쿼리</span>
+      <h4 class="ba-h">부서별 평균과 행마다 비교</h4>
+      <div class="sql">SELECT NAME, SAL FROM EMP E
+WHERE SAL &gt; (SELECT AVG(SAL) FROM EMP
+             WHERE DEPT_ID = E.DEPT_ID);
+
+D1=4000 · D2=4250</div>
+      <div class="mini-table">
+        <div class="h">NAME</div><div class="h">SAL</div>
+        <div class="c">이</div><div class="c">5000</div>
+        <div class="c">최</div><div class="c">4500</div>
+      </div>
+    </div>
+  </div>
+
+  <p class="reveal">비연관(단일행) 서브쿼리는 메인쿼리와 무관하게 한 번만 실행되어 4125라는 한 값을 만들고 모든 행이 그 값과 비교된다. 반면 연관 서브쿼리는 바깥의 <code>E.DEPT_ID</code>를 참조하므로 <strong>행마다 평균이 다시 계산</strong>된다(D1행은 4000, D2행은 4250 기준). 결과 행 집합은 우연히 같아 보여도 비교 기준은 행마다 달라지는 셈이다. <strong>"전체 기준"인지 "그룹 기준"인지</strong>에 따라 단일행이냐 연관이냐를 선택해야 한다.</p>
+
+  <div class="reveal" style="margin: 40px 0 0; padding: 22px 24px; background: linear-gradient(135deg, var(--point-050), var(--bg-card)); border: 1px solid var(--point-100); border-radius: 12px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;">
+    <div>
+      <div style="font-size: 12px; font-weight: 800; color: var(--point-600); letter-spacing: 0.04em; margin-bottom: 4px;">시험 대비</div>
+      <div style="font-size: 14px; color: var(--fg-2);">이 챕터의 함정·정답과 30초 정리는 통합 시험 대비 페이지에서 볼 수 있습니다.</div>
+    </div>
+    <a href="./exam-review.html#ch-2-2-1" style="font-size: 14px; font-weight: 700; color: var(--point-600); text-decoration: none; padding: 8px 14px; border: 1px solid var(--point-300); border-radius: 8px; background: var(--bg-card); white-space: nowrap;">시험 대비 보기 →</a>
+  </div>
+
+  </article>
+</main>
+<script src="./common.js"></script>
+</body>
+</html>

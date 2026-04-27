@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TCL — SQLD양파 이론</title>
+<link rel="stylesheet" href="./common.css">
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="topnav-inner">
+    <div class="topnav-brand">SQLD양파</div>
+    <div class="topnav-links">
+      <a href="#">홈</a>
+      <a href="#" class="active">이론</a>
+      <a href="#">기출 CBT</a>
+      <a href="#">모의고사</a>
+      <a href="#">Pro</a>
+    </div>
+  </div>
+</nav>
+
+<main class="page-shell">
+  <div class="breadcrumb">
+    <a href="#">이론</a>
+    <span class="sep">›</span>
+    <a href="#">2과목 SQL 기본 및 활용</a>
+    <span class="sep">›</span>
+    <a href="#">2-3. 관리 구문</a>
+  </div>
+
+  <header class="page-title-block">
+    <h1>TCL (Transaction Control Language)</h1>
+    <p class="subtitle">트랜잭션 제어. <code>COMMIT</code> · <code>ROLLBACK</code> · <code>SAVEPOINT</code> · 자동 COMMIT 규칙</p>
+  </header>
+
+  <article class="theory-md">
+
+  <!-- 핵심 요약 -->
+  <h2 class="section-label sec-summary reveal">
+    <span class="label-tag">핵심 요약</span>
+    <span class="label-rest">정의</span>
+  </h2>
+  <blockquote class="reveal">
+    TCL은 <strong>트랜잭션을 제어하는 명령어</strong>들이다 (<code>COMMIT</code>, <code>ROLLBACK</code>, <code>SAVEPOINT</code>).
+  </blockquote>
+  <div class="ex-box reveal">
+    워드(Word)에서 작성 중인 내용은 메모리에만 있고, <strong>저장 버튼이 COMMIT</strong>(영구 반영), <strong>CTRL+Z가 ROLLBACK</strong>(취소), 임시 저장 지점이 <strong>SAVEPOINT</strong>(부분 취소)에 해당한다.
+  </div>
+
+  <!-- 개념 도식화 — TCL 3종 카드 -->
+  <h2 class="section-label sec-diagram reveal">
+    <span class="label-tag">개념 도식화</span>
+    <span class="label-rest">TCL 명령어 3종</span>
+  </h2>
+  <div class="cls-row cols-3 reveal">
+    <div class="cls-card">
+      <span class="badge">COMMIT</span>
+      <div class="name">영구 반영</div>
+      <div class="ex">DML을 묶어 저장 · 락 해제 · 다른 사용자도 조회 가능</div>
+    </div>
+    <div class="cls-card">
+      <span class="badge b-event">ROLLBACK</span>
+      <div class="name">취소</div>
+      <div class="ex">마지막 COMMIT 이후 모든 DML 취소 · SAVEPOINT 도 사라짐</div>
+    </div>
+    <div class="cls-card">
+      <span class="badge b-info">SAVEPOINT</span>
+      <div class="name">임시 저장 지점</div>
+      <div class="ex"><code>ROLLBACK TO sp</code> 로 부분 취소 가능</div>
+    </div>
+  </div>
+
+  <h3 class="reveal">트랜잭션의 흐름</h3>
+  <div class="step-flow cols-4 reveal">
+    <div class="step-card">
+      <div class="step">STEP 1</div>
+      <div class="name">트랜잭션 시작</div>
+      <div class="ex">DML 작업 누적 (메모리에만 존재)</div>
+      <span class="arrow-next">›</span>
+    </div>
+    <div class="step-card">
+      <div class="step">STEP 2</div>
+      <div class="name">SAVEPOINT</div>
+      <div class="ex">중간 지점 표시 (필요 시 부분 취소용)</div>
+      <span class="arrow-next">›</span>
+    </div>
+    <div class="step-card">
+      <div class="step">STEP 3-A</div>
+      <div class="name">COMMIT</div>
+      <div class="ex">성공 → 영구 저장 / 락 해제</div>
+      <span class="arrow-next">›</span>
+    </div>
+    <div class="step-card">
+      <div class="step">STEP 3-B</div>
+      <div class="name">ROLLBACK</div>
+      <div class="ex">실패 → 마지막 COMMIT 이후 모든 변경 취소</div>
+    </div>
+  </div>
+
+  <!-- COMMIT -->
+  <h2 class="reveal">COMMIT — 영구 반영</h2>
+  <p class="reveal"><a href="./2-3-1_DML.html">DML</a> 작업을 묶어서 영구 반영한다.</p>
+  <p class="reveal" style="font-size: 13px; color: var(--fg-3); margin: 8px 0 4px;">예시 데이터 — ACCOUNT 테이블 (변경 전)</p>
+  <div class="ba-side before reveal" style="max-width: 460px;">
+    <span class="ba-tag">ACCOUNT</span>
+    <h4 class="ba-h">계좌 테이블 (변경 전)</h4>
+    <div class="mini-table cols-3">
+      <div class="h">ID</div><div class="h">NAME</div><div class="h">BALANCE</div>
+      <div class="c" style="grid-column: 1 / -1; color: var(--fg-4);">(0행, 비어있음)</div>
+    </div>
+  </div>
+  <pre class="reveal"><button class="copy-btn">복사</button><code><span class="sql-kw">INSERT INTO</span> <span class="sql-name">EMP</span> <span class="sql-kw">VALUES</span> (<span class="sql-num">1</span>, <span class="sql-str">'김'</span>, <span class="sql-num">3000</span>);
+<span class="sql-kw">UPDATE</span> <span class="sql-name">EMP</span> <span class="sql-kw">SET</span> <span class="sql-type">SAL</span> = <span class="sql-num">4000</span> <span class="sql-kw">WHERE</span> <span class="sql-type">EMP_ID</span> = <span class="sql-num">1</span>;
+<span class="sql-kw">COMMIT</span>;     <span class="sql-cm">-- 위 두 작업을 영구 반영</span></code></pre>
+  <p class="reveal" style="font-size: 12.5px; color: var(--fg-3); margin: 0 0 12px;">→ COMMIT 시점에 INSERT·UPDATE가 디스크에 영구 반영되며, 락이 풀리고 다른 사용자도 변경 결과를 조회할 수 있다.</p>
+  <table class="reveal">
+    <thead>
+      <tr><th>COMMIT 후</th><th>결과</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>다른 사용자도 변경 사항을 볼 수 있음</td><td>가능</td></tr>
+      <tr><td>ROLLBACK</td><td>불가</td></tr>
+      <tr><td>락(Lock) 해제</td><td>됨</td></tr>
+    </tbody>
+  </table>
+
+  <!-- ROLLBACK -->
+  <h2 class="reveal">ROLLBACK — 취소</h2>
+  <p class="reveal" style="font-size: 13px; color: var(--fg-3); margin: 8px 0 4px;">예시 데이터 — ACCOUNT 테이블 (변경 전)</p>
+  <div class="ba-side before reveal" style="max-width: 460px;">
+    <span class="ba-tag">ACCOUNT</span>
+    <h4 class="ba-h">계좌 테이블 (변경 전 · 마지막 COMMIT 직후)</h4>
+    <div class="mini-table cols-3">
+      <div class="h">ID</div><div class="h">NAME</div><div class="h">BALANCE</div>
+      <div class="c">101</div><div class="c">A</div><div class="c">10000</div>
+    </div>
+  </div>
+  <pre class="reveal"><button class="copy-btn">복사</button><code><span class="sql-kw">INSERT INTO</span> <span class="sql-name">EMP</span> <span class="sql-kw">VALUES</span> (<span class="sql-num">1</span>, <span class="sql-str">'김'</span>, <span class="sql-num">3000</span>);
+<span class="sql-kw">DELETE FROM</span> <span class="sql-name">EMP</span> <span class="sql-kw">WHERE</span> <span class="sql-type">EMP_ID</span> = <span class="sql-num">999</span>;
+<span class="sql-kw">ROLLBACK</span>;   <span class="sql-cm">-- 위 두 작업 모두 취소</span></code></pre>
+  <p class="reveal" style="font-size: 12.5px; color: var(--fg-3); margin: 0 0 12px;">→ 마지막 <code>COMMIT</code> 이후의 모든 DML이 취소된다. 메모리 상태가 마지막 COMMIT 시점으로 되돌아간다.</p>
+
+  <!-- SAVEPOINT -->
+  <h2 class="reveal">SAVEPOINT — 임시 저장 지점</h2>
+  <p class="reveal" style="font-size: 13px; color: var(--fg-3); margin: 8px 0 4px;">예시 데이터 — EMP 테이블 (변경 전, 비어있음)</p>
+  <div class="ba-side before reveal" style="max-width: 460px;">
+    <span class="ba-tag">EMP</span>
+    <h4 class="ba-h">사원 테이블 (변경 전)</h4>
+    <div class="mini-table cols-3">
+      <div class="h">EMP_ID</div><div class="h">NAME</div><div class="h">SAL</div>
+      <div class="c" style="grid-column: 1 / -1; color: var(--fg-4);">(0행)</div>
+    </div>
+  </div>
+  <pre class="reveal"><button class="copy-btn">복사</button><code><span class="sql-kw">INSERT INTO</span> <span class="sql-name">EMP</span> <span class="sql-kw">VALUES</span> (<span class="sql-num">1</span>, <span class="sql-str">'김'</span>, <span class="sql-num">3000</span>);
+<span class="sql-kw">SAVEPOINT</span> <span class="sql-name">SP1</span>;
+
+<span class="sql-kw">INSERT INTO</span> <span class="sql-name">EMP</span> <span class="sql-kw">VALUES</span> (<span class="sql-num">2</span>, <span class="sql-str">'이'</span>, <span class="sql-num">4000</span>);
+<span class="sql-kw">SAVEPOINT</span> <span class="sql-name">SP2</span>;
+
+<span class="sql-kw">INSERT INTO</span> <span class="sql-name">EMP</span> <span class="sql-kw">VALUES</span> (<span class="sql-num">3</span>, <span class="sql-str">'박'</span>, <span class="sql-num">5000</span>);
+
+<span class="sql-cm">-- SP2 시점으로 되돌리기 (3번 INSERT만 취소)</span>
+<span class="sql-kw">ROLLBACK TO</span> <span class="sql-name">SP2</span>;</code></pre>
+  <p class="reveal" style="font-size: 12.5px; color: var(--fg-3); margin: 0 0 12px;">→ 행 1개 취소(박). SP2 이후의 DML만 되돌리므로 김·이는 그대로 남는다.</p>
+
+  <h3 class="reveal">SAVEPOINT → ROLLBACK TO 시퀀스</h3>
+  <div class="mermaid reveal">
+sequenceDiagram
+    participant U as User
+    participant DB
+    U->>DB: INSERT (1, '김')
+    Note over DB: 김
+    U->>DB: SAVEPOINT SP1
+    Note over DB: SP1 표시
+    U->>DB: INSERT (2, '이')
+    Note over DB: 김, 이
+    U->>DB: SAVEPOINT SP2
+    Note over DB: SP2 표시
+    U->>DB: INSERT (3, '박')
+    Note over DB: 김, 이, 박
+    U->>DB: ROLLBACK TO SP2
+    Note over DB: SP2 이후만 취소<br/>→ 김, 이
+    U->>DB: COMMIT
+    Note over DB: 영구 반영 (김, 이)
+  </div>
+
+  <h3 class="reveal">시점별 상태 표</h3>
+  <table class="reveal">
+    <thead>
+      <tr><th>시점</th><th>상태</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>시작</td><td>EMP 비어있음</td></tr>
+      <tr><td>SP1</td><td>김</td></tr>
+      <tr><td>SP2</td><td>김, 이</td></tr>
+      <tr><td>마지막 INSERT 후</td><td>김, 이, 박</td></tr>
+      <tr><td>ROLLBACK TO SP2</td><td>김, 이</td></tr>
+    </tbody>
+  </table>
+
+  <!-- ACID -->
+  <h2 class="reveal"><a href="./1-2-3_모델이표현하는트랜잭션의이해.html">트랜잭션</a>의 ACID</h2>
+  <div class="trait-grid cols-4 reveal">
+    <div class="trait-card">
+      <div class="glyph">A</div>
+      <div class="label">Atomicity<br>원자성</div>
+      <div class="desc">전부 또는 전무</div>
+    </div>
+    <div class="trait-card">
+      <div class="glyph">C</div>
+      <div class="label">Consistency<br>일관성</div>
+      <div class="desc">규칙 유지</div>
+    </div>
+    <div class="trait-card">
+      <div class="glyph">I</div>
+      <div class="label">Isolation<br>고립성</div>
+      <div class="desc">동시 처리 격리</div>
+    </div>
+    <div class="trait-card">
+      <div class="glyph">D</div>
+      <div class="label">Durability<br>지속성</div>
+      <div class="desc">COMMIT 후 영구</div>
+    </div>
+  </div>
+
+  <!-- 자동 커밋 -->
+  <h2 class="reveal">자동 커밋 vs 명시적 커밋</h2>
+  <table class="reveal">
+    <thead>
+      <tr><th>상황</th><th>Oracle</th><th>MS-SQL</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>DML 후</td><td>수동 COMMIT 필요</td><td>자동 커밋(설정 따라)</td></tr>
+      <tr><td>DDL 후</td><td>자동 COMMIT</td><td>트랜잭션 가능</td></tr>
+      <tr><td>정상 종료</td><td>자동 COMMIT</td><td>—</td></tr>
+      <tr><td>비정상 종료</td><td>자동 ROLLBACK</td><td>—</td></tr>
+    </tbody>
+  </table>
+  <p class="reveal">Oracle에서 <code>CREATE</code>, <code>DROP</code> 같은 DDL은 <strong>자동 COMMIT</strong>된다.</p>
+
+  <!-- SQL 실전 -->
+  <h2 class="section-label sec-sql reveal">
+    <span class="label-tag">SQL 실전</span>
+    <span class="label-rest">계좌 트랜잭션</span>
+  </h2>
+  <p class="reveal" style="font-size: 13px; color: var(--fg-3); margin: 8px 0 4px;">예시 데이터 — ACCOUNT 테이블 (변경 전, 비어있음)</p>
+  <div class="ba-side before reveal" style="max-width: 460px;">
+    <span class="ba-tag">ACCOUNT</span>
+    <h4 class="ba-h">계좌 테이블 (트랜잭션 시작 전)</h4>
+    <div class="mini-table cols-3">
+      <div class="h">ID</div><div class="h">NAME</div><div class="h">BALANCE</div>
+      <div class="c" style="grid-column: 1 / -1; color: var(--fg-4);">(0행)</div>
+    </div>
+  </div>
+  <pre class="reveal"><button class="copy-btn">복사</button><code><span class="sql-cm">-- 트랜잭션 1: 정상 처리</span>
+<span class="sql-kw">INSERT INTO</span> <span class="sql-name">ACCOUNT</span> <span class="sql-kw">VALUES</span> (<span class="sql-num">101</span>, <span class="sql-str">'A'</span>, <span class="sql-num">10000</span>);
+<span class="sql-kw">INSERT INTO</span> <span class="sql-name">ACCOUNT</span> <span class="sql-kw">VALUES</span> (<span class="sql-num">102</span>, <span class="sql-str">'B'</span>, <span class="sql-num">5000</span>);
+<span class="sql-kw">COMMIT</span>;     <span class="sql-cm">-- 둘 다 저장</span>
+
+<span class="sql-cm">-- 트랜잭션 2: 중간 오류</span>
+<span class="sql-kw">UPDATE</span> <span class="sql-name">ACCOUNT</span> <span class="sql-kw">SET</span> <span class="sql-type">BALANCE</span> = <span class="sql-type">BALANCE</span> - <span class="sql-num">1000</span> <span class="sql-kw">WHERE</span> <span class="sql-type">ID</span> = <span class="sql-num">101</span>;
+<span class="sql-kw">SAVEPOINT</span> <span class="sql-name">BEFORE_DEPOSIT</span>;
+
+<span class="sql-kw">UPDATE</span> <span class="sql-name">ACCOUNT</span> <span class="sql-kw">SET</span> <span class="sql-type">BALANCE</span> = <span class="sql-type">BALANCE</span> + <span class="sql-num">1000</span> <span class="sql-kw">WHERE</span> <span class="sql-type">ID</span> = <span class="sql-num">999</span>;  <span class="sql-cm">-- 존재 X</span>
+
+<span class="sql-cm">-- 부분 취소 후 다른 처리</span>
+<span class="sql-kw">ROLLBACK TO</span> <span class="sql-name">BEFORE_DEPOSIT</span>;
+<span class="sql-kw">UPDATE</span> <span class="sql-name">ACCOUNT</span> <span class="sql-kw">SET</span> <span class="sql-type">BALANCE</span> = <span class="sql-type">BALANCE</span> + <span class="sql-num">1000</span> <span class="sql-kw">WHERE</span> <span class="sql-type">ID</span> = <span class="sql-num">102</span>;
+<span class="sql-kw">COMMIT</span>;</code></pre>
+  <p class="reveal" style="font-size: 13px; color: var(--fg-3); margin: 8px 0 4px;">↓ 실행 후 (ACCOUNT 잔액 시점별 변화)</p>
+  <table class="reveal">
+    <thead><tr><th>시점</th><th>ID=101 잔액</th><th>ID=102 잔액</th><th>비고</th></tr></thead>
+    <tbody>
+      <tr><td>초기</td><td>10000</td><td>5000</td><td>COMMIT 직후</td></tr>
+      <tr><td>UPDATE 101 (-1000)</td><td>9000</td><td>5000</td><td>출금</td></tr>
+      <tr><td>SAVEPOINT BEFORE_DEPOSIT</td><td>9000</td><td>5000</td><td>지점 표시</td></tr>
+      <tr><td>UPDATE 999 (+1000)</td><td>9000</td><td>5000</td><td>대상 없음 (0행)</td></tr>
+      <tr><td>ROLLBACK TO BEFORE_DEPOSIT</td><td>9000</td><td>5000</td><td>SP 이후만 취소 (101 출금은 유지)</td></tr>
+      <tr><td>UPDATE 102 (+1000)</td><td>9000</td><td>6000</td><td>이체 완료</td></tr>
+      <tr><td>COMMIT</td><td>9000</td><td>6000</td><td>영구 반영</td></tr>
+    </tbody>
+  </table>
+  <p class="reveal" style="font-size: 12.5px; color: var(--fg-3); margin: 0 0 12px;">→ 101 출금은 SAVEPOINT 이전이라 살아남고, 999 갱신만 ROLLBACK TO로 취소된 뒤 102 입금으로 이체가 마무리된다.</p>
+
+  <!-- Before & After — SAVEPOINT 동작 -->
+  <h2 class="section-label sec-compare reveal">
+    <span class="label-tag">Before &amp; After</span>
+    <span class="label-rest">SAVEPOINT 동작</span>
+  </h2>
+  <p class="reveal">비어있는 EMP에 김·이·박을 차례로 INSERT하면서 SP1, SP2 두 지점을 찍어 둔다. 마지막에 <code>ROLLBACK TO SP1</code>을 걸면 어디까지 살아남는지, 그 뒤 COMMIT까지 어떻게 이어지는지를 시점별로 추적한다.</p>
+
+  <p class="reveal" style="font-size: 13.5px; color: var(--fg-3);">작업 시나리오</p>
+  <pre class="reveal"><button class="copy-btn">복사</button><code><span class="sql-kw">INSERT INTO</span> <span class="sql-name">EMP</span> <span class="sql-kw">VALUES</span> (<span class="sql-num">1</span>, <span class="sql-str">'김'</span>);
+<span class="sql-kw">SAVEPOINT</span> <span class="sql-name">SP1</span>;
+<span class="sql-kw">INSERT INTO</span> <span class="sql-name">EMP</span> <span class="sql-kw">VALUES</span> (<span class="sql-num">2</span>, <span class="sql-str">'이'</span>);
+<span class="sql-kw">SAVEPOINT</span> <span class="sql-name">SP2</span>;
+<span class="sql-kw">INSERT INTO</span> <span class="sql-name">EMP</span> <span class="sql-kw">VALUES</span> (<span class="sql-num">3</span>, <span class="sql-str">'박'</span>);
+<span class="sql-kw">ROLLBACK TO</span> <span class="sql-name">SP1</span>;
+<span class="sql-kw">COMMIT</span>;</code></pre>
+
+  <div class="ba-flow large-after reveal">
+    <div class="ba-side before">
+      <span class="ba-tag">BEFORE</span>
+      <h4 class="ba-h">ROLLBACK 직전 상태</h4>
+      <div class="sql">3건 INSERT 누적 (김, 이, 박)</div>
+      <div class="mini-table">
+        <div class="h">EMP_ID</div><div class="h">NAME</div>
+        <div class="c">1</div><div class="c">김</div>
+        <div class="c">2</div><div class="c">이</div>
+        <div class="c">3</div><div class="c">박</div>
+      </div>
+    </div>
+    <div class="ba-arrow">→</div>
+    <div class="ba-side after">
+      <span class="ba-tag">AFTER</span>
+      <h4 class="ba-h">ROLLBACK TO SP1 후 → COMMIT</h4>
+      <div class="sql">SP1 이후 INSERT 만 취소</div>
+      <div class="mini-table">
+        <div class="h">EMP_ID</div><div class="h">NAME</div>
+        <div class="c">1</div><div class="c">김</div>
+      </div>
+    </div>
+  </div>
+
+  <p class="reveal" style="font-size: 13.5px; color: var(--fg-3);">시점별 상태 표</p>
+  <table class="reveal">
+    <thead>
+      <tr><th>시점</th><th>데이터</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>첫 INSERT 후</td><td>김</td></tr>
+      <tr><td>SP1</td><td>김</td></tr>
+      <tr><td>둘째 INSERT 후</td><td>김, 이</td></tr>
+      <tr><td>SP2</td><td>김, 이</td></tr>
+      <tr><td>셋째 INSERT 후</td><td>김, 이, 박</td></tr>
+      <tr><td>ROLLBACK TO SP1</td><td>김</td></tr>
+      <tr><td>COMMIT</td><td>김</td></tr>
+    </tbody>
+  </table>
+
+  <p class="reveal"><code>ROLLBACK TO SP1</code>은 SP1 이후의 DML(이·박 INSERT)만 취소하고 그 이전 작업은 그대로 둔다. 그래서 최종 COMMIT 시점에는 김 한 행만 남는다. 트랜잭션 도중 일부만 되돌리고 싶을 때는 SAVEPOINT로 안전 지점을 미리 찍어두는 게 핵심 — 단, 전체 ROLLBACK이나 COMMIT이 일어나면 SAVEPOINT는 모두 사라진다는 점도 함께 기억해야 한다.</p>
+
+  <!-- 격리 수준 -->
+  <h2 class="reveal">트랜잭션 격리 수준 (참고)</h2>
+  <table class="reveal">
+    <thead>
+      <tr><th>수준</th><th>설명</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>READ UNCOMMITTED</td><td>커밋 안 된 것도 읽음</td></tr>
+      <tr><td>READ COMMITTED</td><td>커밋된 것만(Oracle 기본)</td></tr>
+      <tr><td>REPEATABLE READ</td><td>같은 쿼리는 같은 결과</td></tr>
+      <tr><td>SERIALIZABLE</td><td>완전 격리(가장 엄격)</td></tr>
+    </tbody>
+  </table>
+
+  <div class="reveal" style="margin: 40px 0 0; padding: 22px 24px; background: linear-gradient(135deg, var(--point-050), var(--bg-card)); border: 1px solid var(--point-100); border-radius: 12px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;">
+    <div>
+      <div style="font-size: 12px; font-weight: 800; color: var(--point-600); letter-spacing: 0.04em; margin-bottom: 4px;">시험 대비</div>
+      <div style="font-size: 14px; color: var(--fg-2);">이 챕터의 함정·정답과 30초 정리는 통합 시험 대비 페이지에서 볼 수 있습니다.</div>
+    </div>
+    <a href="./exam-review.html#ch-2-3-2" style="font-size: 14px; font-weight: 700; color: var(--point-600); text-decoration: none; padding: 8px 14px; border: 1px solid var(--point-300); border-radius: 8px; background: var(--bg-card); white-space: nowrap;">시험 대비 보기 →</a>
+  </div>
+
+  </article>
+</main>
+
+<script src="./common.js"></script>
+</body>
+</html>

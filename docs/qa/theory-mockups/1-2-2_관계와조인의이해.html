@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>관계와 조인의 이해 — SQLD양파 이론</title>
+<link rel="stylesheet" href="./common.css">
+</head>
+<body>
+<nav class="topnav">
+  <div class="topnav-inner">
+    <div class="topnav-brand">SQLD양파</div>
+    <div class="topnav-links">
+      <a href="#">홈</a><a href="#" class="active">이론</a><a href="#">기출 CBT</a><a href="#">모의고사</a><a href="#">Pro</a>
+    </div>
+  </div>
+</nav>
+<main class="page-shell">
+  <div class="breadcrumb">
+    <a href="#">이론</a><span class="sep">›</span>
+    <a href="#">1과목 데이터 모델링</a><span class="sep">›</span>
+    <a href="#">1-2. 데이터 모델과 SQL</a>
+  </div>
+  <header class="page-title-block">
+    <h1>관계와 조인의 이해</h1>
+    <p class="subtitle">관계 → 외래키(FK) → 조인(JOIN). 흩어진 데이터를 키로 합치는 흐름</p>
+  </header>
+  <article class="theory-md">
+
+  <!-- 핵심 요약 -->
+  <h2 class="section-label sec-summary reveal">
+    <span class="label-tag">핵심 요약</span>
+    <span class="label-rest">정의</span>
+  </h2>
+  <blockquote class="reveal">
+    모델에서의 <a href="./1-1-4_관계.html">관계</a>는 외래키(FK)로 구현되고, 그 관계를 따라 여러 테이블을 합쳐 보는 작업이 <strong>조인(JOIN)</strong>이다.
+  </blockquote>
+  <div class="ex-box reveal">
+    영수증에는 주문 정보만, 회원카드에는 회원 정보만 있다. 같은 사람의 영수증과 카드를 맞춰 보면 "<strong>김철수가 사과 2개 샀구나</strong>"가 보인다 — 흩어진 정보를 키로 맞춰 합치는 것이 조인이다.
+  </div>
+
+  <!-- 개념 도식화 — 3계층 흐름 -->
+  <h2 class="section-label sec-diagram reveal">
+    <span class="label-tag">개념 도식화</span>
+    <span class="label-rest">관계 → FK → JOIN</span>
+  </h2>
+  <div class="layer-stack reveal">
+    <div class="layer-stack-track">
+      <div class="layer-row">
+        <div class="icon">①</div>
+        <div class="body">
+          <div class="name">관계 <small>설계 단계 · 개념 모델</small></div>
+          <div class="desc">두 엔터티 사이의 의미적 연결("회원이 주문을 한다")을 ERD 선으로 표현</div>
+        </div>
+        <span class="arrow">▼</span>
+      </div>
+      <div class="layer-row">
+        <div class="icon">②</div>
+        <div class="body">
+          <div class="name">외래키 (FK) <small>구현 단계 · 논리/물리 모델</small></div>
+          <div class="desc">자식 테이블이 부모 테이블의 PK를 참조하는 컬럼. <strong>FK = 조인 키</strong></div>
+        </div>
+        <span class="arrow">▼</span>
+      </div>
+      <div class="layer-row">
+        <div class="icon">③</div>
+        <div class="body">
+          <div class="name">조인 (JOIN) <small>조회 단계 · SQL 실행</small></div>
+          <div class="desc">FK = PK 조건으로 두 테이블을 합쳐 한 결과로 보는 SQL 동작</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p class="reveal">자식 테이블의 <strong>FK가 곧 조인 키</strong>다. 예: <code>MEMBER(MEMBER_ID PK)</code> ↔ <code>ORDERS(MEMBER_ID FK)</code>.</p>
+
+  <div class="mermaid reveal">
+erDiagram
+    MEMBER ||--o{ ORDERS : "필수1 - 선택N"
+    MEMBER {
+        varchar MEMBER_ID PK
+        varchar NAME
+    }
+    ORDERS {
+        number  ORDER_ID PK
+        varchar MEMBER_ID FK
+        date    ORD_DATE
+    }
+  </div>
+  <p class="reveal" style="font-size: 13px; color: var(--fg-3);">표기: <code>||--o{</code> = "회원은 항상 1명, 주문은 0개 이상" (회원에 필수, 주문은 선택). 식별 관계는 <code>||--|{</code>.</p>
+
+  <!-- 조인의 4가지 종류 -->
+  <h2 class="reveal">조인의 4가지 종류 — 개념 미리보기</h2>
+  <table class="reveal">
+    <thead><tr><th>종류</th><th>의미</th><th>비유</th></tr></thead>
+    <tbody>
+      <tr><td>INNER JOIN</td><td>양쪽에 다 있는 것만</td><td>양쪽 카드 모두 가진 사람</td></tr>
+      <tr><td>LEFT OUTER</td><td>왼쪽 다, 오른쪽은 매칭만</td><td>왼쪽 기준, 오른쪽 없으면 NULL</td></tr>
+      <tr><td>RIGHT OUTER</td><td>오른쪽 다</td><td>오른쪽 기준</td></tr>
+      <tr><td>FULL OUTER</td><td>양쪽 모두 다</td><td>한쪽만 있어도 표시</td></tr>
+    </tbody>
+  </table>
+  <p class="reveal">자세한 구문은 <a href="./2-1-7_조인.html">조인</a> / <a href="./2-1-8_표준조인.html">표준 조인</a>에서 다룬다.</p>
+
+  <div class="venn-row cols-4 reveal">
+    <div class="venn-card">
+      <svg viewBox="0 0 220 130">
+        <circle class="v-a" cx="80" cy="65" r="50"/>
+        <circle class="v-b" cx="140" cy="65" r="50"/>
+        <path class="v-hl" d="M 110,30 A 50,50 0 0,1 110,100 A 50,50 0 0,1 110,30 Z"/>
+        <text class="v-label" x="110" y="125">A ∩ B</text>
+      </svg>
+      <div class="name">INNER JOIN</div>
+      <div class="desc">교집합 — 양쪽 매칭 행만</div>
+    </div>
+    <div class="venn-card">
+      <svg viewBox="0 0 220 130">
+        <circle class="v-hl" cx="80" cy="65" r="50"/>
+        <circle class="v-b" cx="140" cy="65" r="50"/>
+        <text class="v-label" x="110" y="125">A (전부)</text>
+      </svg>
+      <div class="name">LEFT OUTER</div>
+      <div class="desc">왼쪽 다 + 매칭, 미매칭은 NULL</div>
+    </div>
+    <div class="venn-card">
+      <svg viewBox="0 0 220 130">
+        <circle class="v-a" cx="80" cy="65" r="50"/>
+        <circle class="v-hl" cx="140" cy="65" r="50"/>
+        <text class="v-label" x="110" y="125">B (전부)</text>
+      </svg>
+      <div class="name">RIGHT OUTER</div>
+      <div class="desc">오른쪽 다 + 매칭, 미매칭은 NULL</div>
+    </div>
+    <div class="venn-card">
+      <svg viewBox="0 0 220 130">
+        <circle class="v-hl" cx="80" cy="65" r="50"/>
+        <circle class="v-hl" cx="140" cy="65" r="50"/>
+        <text class="v-label" x="110" y="125">A ∪ B</text>
+      </svg>
+      <div class="name">FULL OUTER</div>
+      <div class="desc">합집합 — 한쪽만 있어도 모두</div>
+    </div>
+  </div>
+
+  <!-- 관계의 종류와 조인 시 주의점 -->
+  <h2 class="reveal">관계의 종류와 조인 시 주의점</h2>
+  <div class="cls-row reveal">
+    <div class="cls-card">
+      <span class="badge">1:1</span>
+      <div class="name">단순 매칭</div>
+      <div class="ex"><code>[사원] 1 ── 1 [사원증]</code><br>사원 한 명당 사원증 한 개 → 행 수 그대로</div>
+    </div>
+    <div class="cls-card">
+      <span class="badge b-info">1:N</span>
+      <div class="name">행이 늘어남</div>
+      <div class="ex"><code>[회원] 1 ── N [주문]</code><br>회원 1명에 주문 3건이면 결과 3행</div>
+    </div>
+    <div class="cls-card">
+      <span class="badge b-event">M:N</span>
+      <div class="name">교차 엔터티 필요</div>
+      <div class="ex"><code>학생 M─N 과목</code> → 수강 거쳐 두 번 조인</div>
+    </div>
+  </div>
+
+  <h3 class="reveal">1:1 관계 — 단순 매칭</h3>
+  <p class="reveal">INNER JOIN 결과: 사원 한 명당 사원증 한 개 → 사원 행 수 그대로 유지. (사원증이 없는 사원은 LEFT JOIN을 써야 결과에 남음)</p>
+
+  <h3 class="reveal">1:N 관계 — 행이 늘어남</h3>
+  <p class="reveal">회원 1명에게 주문이 3건이면 조인 후 3행으로 늘어난다.</p>
+
+  <h3 class="reveal">M:N 관계 — 교차 엔터티 필요</h3>
+  <pre class="reveal"><code>[학생] M ── N [과목]    →    [학생] 1─N [수강] N─1 [과목]</code></pre>
+  <p class="reveal">조인은 반드시 수강(교차)을 거쳐 두 번 한다.</p>
+
+  <!-- SQL 실전 -->
+  <h2 class="section-label sec-sql reveal">
+    <span class="label-tag">SQL 실전</span>
+    <span class="label-rest">관계로 연결된 테이블 조인</span>
+  </h2>
+  <p class="reveal" style="font-size: 13px; color: var(--fg-3); margin: 8px 0 4px;">예시 데이터 — M:N (학생 ─ 수강 ─ 과목)</p>
+  <div class="ba-flow reveal" style="grid-template-columns: 1fr 28px 1fr 28px 1fr; align-items: stretch;">
+    <div class="ba-side before">
+      <span class="ba-tag">STUDENT</span>
+      <h4 class="ba-h">학생 테이블</h4>
+      <div class="mini-table cols-2">
+        <div class="h">STU_ID</div><div class="h">NAME</div>
+        <div class="c">S01</div><div class="c">김철수</div>
+        <div class="c">S02</div><div class="c">이영희</div>
+      </div>
+    </div>
+    <div class="ba-arrow" style="font-size: 18px; color: var(--point-500);">+</div>
+    <div class="ba-side before">
+      <span class="ba-tag">REGISTER</span>
+      <h4 class="ba-h">수강 (교차 엔터티)</h4>
+      <div class="mini-table cols-3">
+        <div class="h">STU_ID</div><div class="h">SUB_ID</div><div class="h">GRADE</div>
+        <div class="c">S01</div><div class="c">K1</div><div class="c">A</div>
+        <div class="c">S01</div><div class="c">K2</div><div class="c">B+</div>
+        <div class="c">S02</div><div class="c">K1</div><div class="c">B</div>
+      </div>
+    </div>
+    <div class="ba-arrow" style="font-size: 18px; color: var(--point-500);">+</div>
+    <div class="ba-side before">
+      <span class="ba-tag">SUBJECT</span>
+      <h4 class="ba-h">과목 테이블</h4>
+      <div class="mini-table cols-2">
+        <div class="h">SUB_ID</div><div class="h">NAME</div>
+        <div class="c">K1</div><div class="c">수학</div>
+        <div class="c">K2</div><div class="c">영어</div>
+      </div>
+    </div>
+  </div>
+  <pre class="reveal"><button class="copy-btn">복사</button><code><span class="sql-cm">-- 1:N 조인: 회원과 주문</span>
+<span class="sql-kw">SELECT</span>  <span class="sql-name">M</span>.<span class="sql-type">NAME</span>, <span class="sql-name">O</span>.<span class="sql-type">ORDER_ID</span>, <span class="sql-name">O</span>.<span class="sql-type">ORD_DATE</span>
+<span class="sql-kw">FROM</span>    <span class="sql-name">MEMBER</span> <span class="sql-name">M</span>
+        <span class="sql-kw">JOIN</span> <span class="sql-name">ORDERS</span> <span class="sql-name">O</span> <span class="sql-kw">ON</span> <span class="sql-name">M</span>.<span class="sql-type">MEMBER_ID</span> = <span class="sql-name">O</span>.<span class="sql-type">MEMBER_ID</span>;
+
+<span class="sql-cm">-- M:N → 교차 테이블 거쳐 두 번 조인</span>
+<span class="sql-kw">SELECT</span>  <span class="sql-name">S</span>.<span class="sql-type">NAME</span> <span class="sql-kw">AS</span> <span class="sql-type">STUDENT</span>, <span class="sql-name">K</span>.<span class="sql-type">NAME</span> <span class="sql-kw">AS</span> <span class="sql-type">SUBJECT</span>, <span class="sql-name">R</span>.<span class="sql-type">GRADE</span>
+<span class="sql-kw">FROM</span>    <span class="sql-name">STUDENT</span>  <span class="sql-name">S</span>
+        <span class="sql-kw">JOIN</span> <span class="sql-name">REGISTER</span> <span class="sql-name">R</span> <span class="sql-kw">ON</span> <span class="sql-name">S</span>.<span class="sql-type">STU_ID</span> = <span class="sql-name">R</span>.<span class="sql-type">STU_ID</span>
+        <span class="sql-kw">JOIN</span> <span class="sql-name">SUBJECT</span>  <span class="sql-name">K</span> <span class="sql-kw">ON</span> <span class="sql-name">R</span>.<span class="sql-type">SUB_ID</span> = <span class="sql-name">K</span>.<span class="sql-type">SUB_ID</span>;</code></pre>
+  <p class="reveal" style="font-size: 13px; color: var(--fg-3); margin: 8px 0 4px;">↓ 결과 (M:N 조인)</p>
+  <table class="reveal">
+    <thead><tr><th>STUDENT</th><th>SUBJECT</th><th>GRADE</th></tr></thead>
+    <tbody>
+      <tr><td>김철수</td><td>수학</td><td>A</td></tr>
+      <tr><td>김철수</td><td>영어</td><td>B+</td></tr>
+      <tr><td>이영희</td><td>수학</td><td>B</td></tr>
+    </tbody>
+  </table>
+  <p class="reveal" style="font-size: 12.5px; color: var(--fg-3); margin: 0 0 12px;">→ STUDENT와 SUBJECT를 직접 못 잇기 때문에 REGISTER를 거쳐 두 번 조인. 수강 행 수만큼(3행) 결과가 만들어진다.</p>
+
+  <!-- Before & After -->
+  <h2 class="section-label sec-compare reveal">
+    <span class="label-tag">Before &amp; After</span>
+    <span class="label-rest">데이터가 합쳐지는 모습</span>
+  </h2>
+  <p class="reveal">회원은 2명(김철수·이영희), 주문은 3건(김철수가 2건, 이영희가 1건)인 상황. <code>MEMBER</code>와 <code>ORDERS</code>가 <code>MEMBER_ID</code>로 1:N 관계일 때, INNER JOIN 결과의 행 수가 어떻게 결정되는지 본다.</p>
+
+  <h3 class="reveal">입력 테이블</h3>
+  <p class="reveal" style="font-size: 13.5px; color: var(--fg-3);">MEMBER</p>
+  <table class="reveal">
+    <thead><tr><th>MEMBER_ID</th><th>NAME</th></tr></thead>
+    <tbody>
+      <tr><td>M01</td><td>김철수</td></tr>
+      <tr><td>M02</td><td>이영희</td></tr>
+    </tbody>
+  </table>
+  <p class="reveal" style="font-size: 13.5px; color: var(--fg-3);">ORDERS</p>
+  <table class="reveal">
+    <thead><tr><th>ORDER_ID</th><th>MEMBER_ID</th><th>ORD_DATE</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>M01</td><td>2026-04-01</td></tr>
+      <tr><td>2</td><td>M01</td><td>2026-04-05</td></tr>
+      <tr><td>3</td><td>M02</td><td>2026-04-10</td></tr>
+    </tbody>
+  </table>
+
+  <h3 class="reveal">After — INNER JOIN 결과</h3>
+  <table class="reveal">
+    <thead><tr><th>NAME</th><th>ORDER_ID</th><th>ORD_DATE</th></tr></thead>
+    <tbody>
+      <tr><td>김철수</td><td>1</td><td>2026-04-01</td></tr>
+      <tr><td>김철수</td><td>2</td><td>2026-04-05</td></tr>
+      <tr><td>이영희</td><td>3</td><td>2026-04-10</td></tr>
+    </tbody>
+  </table>
+
+  <div class="ba-flow large-after reveal">
+    <div class="ba-side before">
+      <span class="ba-tag">BEFORE</span>
+      <h4 class="ba-h">두 테이블 분리</h4>
+      <div class="ba-tables cols-2">
+        <div class="ba-mini-table">
+          <div class="h">MEMBER (2행)</div>
+          <div class="row">M01 김철수</div>
+          <div class="row">M02 이영희</div>
+        </div>
+        <div class="ba-mini-table">
+          <div class="h">ORDERS (3행)</div>
+          <div class="row">1 · M01 · 04-01</div>
+          <div class="row">2 · M01 · 04-05</div>
+          <div class="row">3 · M02 · 04-10</div>
+        </div>
+      </div>
+    </div>
+    <div class="ba-arrow">→</div>
+    <div class="ba-side after">
+      <span class="ba-tag">AFTER · INNER JOIN</span>
+      <h4 class="ba-h">M01은 2번 복제 → 3행</h4>
+      <div class="mini-table cols-3">
+        <div class="h">NAME</div><div class="h">ORDER</div><div class="h">DATE</div>
+        <div class="c">김철수</div><div class="c">1</div><div class="c">04-01</div>
+        <div class="c">김철수</div><div class="c">2</div><div class="c">04-05</div>
+        <div class="c">이영희</div><div class="c">3</div><div class="c">04-10</div>
+      </div>
+    </div>
+  </div>
+
+  <p class="reveal">회원 2명이지만 주문이 3건이므로 결과는 <strong>3행</strong>이다. 1:N 조인의 결과 행 수는 부모(1쪽) 수가 아니라 <strong>자식(N쪽) 수에 맞춰</strong> 결정된다 — 부모 한 행이 매칭된 자식 수만큼 복제된다고 보면 된다. 이 사실을 잊고 부모 컬럼(예: 회원 등급별 포인트)을 그대로 SUM 하면 자식 수만큼 부풀려진 합계가 나온다. 1:N 조인 후 부모 쪽 집계가 필요하면 자식 합계를 서브쿼리로 먼저 구해 1:1로 만들어 붙이는 것이 안전하다.</p>
+
+  <!-- 조인 시 자주 하는 실수 -->
+  <h2 class="reveal">조인 시 자주 하는 실수</h2>
+  <table class="reveal">
+    <thead><tr><th>실수</th><th>결과</th><th>해결</th></tr></thead>
+    <tbody>
+      <tr><td>조인 조건 빠짐</td><td>카티션 곱(행 수 폭발)</td><td>ON 명시</td></tr>
+      <tr><td>1:N 관계인데 합계 계산</td><td>중복 합산</td><td>DISTINCT 또는 서브쿼리 분리</td></tr>
+      <tr><td>OUTER JOIN과 WHERE 혼동</td><td>NULL 행이 빠짐</td><td>OUTER JOIN 시 조건은 ON에 둠</td></tr>
+    </tbody>
+  </table>
+
+  <!-- 조인의 방향성 -->
+  <h2 class="reveal">조인의 방향성</h2>
+  <p class="reveal">일반적으로 <strong>PK(부모) ← FK(자식)</strong> 방향으로 조인한다.</p>
+  <pre class="reveal"><code>[부서] PK ←─── FK [사원]
+   조인 키 = 부서.PK = 사원.FK</code></pre>
+
+  <div class="reveal" style="margin: 40px 0 0; padding: 22px 24px; background: linear-gradient(135deg, var(--point-050), var(--bg-card)); border: 1px solid var(--point-100); border-radius: 12px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;">
+    <div>
+      <div style="font-size: 12px; font-weight: 800; color: var(--point-600); letter-spacing: 0.04em; margin-bottom: 4px;">시험 대비</div>
+      <div style="font-size: 14px; color: var(--fg-2);">이 챕터의 함정·정답과 30초 정리는 통합 시험 대비 페이지에서 볼 수 있습니다.</div>
+    </div>
+    <a href="./exam-review.html#ch-1-2-2" style="font-size: 14px; font-weight: 700; color: var(--point-600); text-decoration: none; padding: 8px 14px; border: 1px solid var(--point-300); border-radius: 8px; background: var(--bg-card); white-space: nowrap;">시험 대비 보기 →</a>
+  </div>
+
+  </article>
+</main>
+<script src="./common.js"></script>
+</body>
+</html>

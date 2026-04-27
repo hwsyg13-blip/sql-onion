@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="light">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>표준 조인 — SQLD양파 이론</title>
+<link rel="stylesheet" href="./common.css">
+</head>
+<body>
+<nav class="topnav">
+  <div class="topnav-inner">
+    <div class="topnav-brand">SQLD양파</div>
+    <div class="topnav-links"><a href="#">홈</a><a href="#" class="active">이론</a><a href="#">기출 CBT</a><a href="#">모의고사</a><a href="#">Pro</a></div>
+  </div>
+</nav>
+<main class="page-shell">
+  <div class="breadcrumb"><a href="#">이론</a><span class="sep">›</span><a href="#">2과목 SQL 기본 및 활용</a><span class="sep">›</span><a href="#">2-1. SQL 기본</a></div>
+  <header class="page-title-block">
+    <h1>표준 조인 (ANSI Standard Join)</h1>
+    <p class="subtitle"><code>JOIN ... ON</code> · 어느 DBMS든 통하는 ANSI/ISO 표준 문법</p>
+  </header>
+  <article class="theory-md">
+
+  <!-- 핵심 요약 -->
+  <h2 class="section-label sec-summary reveal">
+    <span class="label-tag">핵심 요약</span>
+    <span class="label-rest">정의</span>
+  </h2>
+  <blockquote class="reveal">
+    표준 조인은 ANSI/ISO에서 정의한, <strong>모든 DBMS에서 통하는 조인 문법</strong>이다. <code>JOIN ... ON</code> 키워드를 사용한다. 앞 챕터의 <a href="./2-1-7_조인.html">조인</a> 종류를 표준 문법으로 다시 정리한다.
+  </blockquote>
+
+  <!-- 개념 도식화 -->
+  <h2 class="section-label sec-diagram reveal">
+    <span class="label-tag">개념 도식화</span>
+    <span class="label-rest">표준 조인의 종류</span>
+  </h2>
+
+  <div class="cls-row cols-4 reveal">
+    <div class="cls-card"><span class="badge">INNER</span><div class="name">INNER JOIN (내부 조인)</div><div class="ex">양쪽 매칭만. <code>INNER</code> 키워드 생략 가능 (<code>JOIN ... ON</code>)</div></div>
+    <div class="cls-card"><span class="badge b-info">LEFT</span><div class="name">LEFT OUTER JOIN (왼쪽 외부 조인)</div><div class="ex">왼쪽 모두 + 매칭된 오른쪽. <code>OUTER</code> 생략 가능</div></div>
+    <div class="cls-card"><span class="badge b-info">RIGHT</span><div class="name">RIGHT OUTER JOIN (오른쪽 외부 조인)</div><div class="ex">오른쪽 모두 + 매칭된 왼쪽</div></div>
+    <div class="cls-card"><span class="badge b-warn">FULL</span><div class="name">FULL OUTER JOIN (전체 외부 조인)</div><div class="ex">양쪽 모두(매칭 안 되면 NULL 채움)</div></div>
+  </div>
+
+  <!-- 벤다이어그램 4종 -->
+  <h3 class="reveal">표준 OUTER 조인 — 벤 다이어그램</h3>
+  <div class="venn-row cols-4 reveal">
+    <div class="venn-card">
+      <svg viewBox="0 0 220 140">
+        <defs>
+          <clipPath id="std-inner-clip"><circle cx="85" cy="70" r="50"/></clipPath>
+        </defs>
+        <circle class="v-a" cx="85" cy="70" r="50"/>
+        <circle class="v-b" cx="135" cy="70" r="50"/>
+        <circle class="v-hl" cx="135" cy="70" r="50" clip-path="url(#std-inner-clip)"/>
+        <text class="v-label" x="55" y="75">A</text>
+        <text class="v-label" x="165" y="75">B</text>
+      </svg>
+      <div class="name">INNER</div>
+      <div class="desc">A ∩ B</div>
+    </div>
+    <div class="venn-card">
+      <svg viewBox="0 0 220 140">
+        <circle class="v-hl" cx="85" cy="70" r="50"/>
+        <circle class="v-b" cx="135" cy="70" r="50"/>
+        <text class="v-label" x="55" y="75">A</text>
+        <text class="v-label" x="165" y="75">B</text>
+      </svg>
+      <div class="name">LEFT</div>
+      <div class="desc">A 모두 + 매칭 B</div>
+    </div>
+    <div class="venn-card">
+      <svg viewBox="0 0 220 140">
+        <circle class="v-a" cx="85" cy="70" r="50"/>
+        <circle class="v-hl" cx="135" cy="70" r="50"/>
+        <text class="v-label" x="55" y="75">A</text>
+        <text class="v-label" x="165" y="75">B</text>
+      </svg>
+      <div class="name">RIGHT</div>
+      <div class="desc">B 모두 + 매칭 A</div>
+    </div>
+    <div class="venn-card">
+      <svg viewBox="0 0 220 140">
+        <circle class="v-hl" cx="85" cy="70" r="50"/>
+        <circle class="v-hl" cx="135" cy="70" r="50"/>
+        <text class="v-label" x="55" y="75">A</text>
+        <text class="v-label" x="165" y="75">B</text>
+      </svg>
+      <div class="name">FULL OUTER</div>
+      <div class="desc">A ∪ B 모두</div>
+    </div>
+  </div>
+  <div class="cls-row reveal">
+    <div class="cls-card"><span class="badge b-event">CROSS</span><div class="name">CROSS JOIN (교차 조인)</div><div class="ex">조인 조건 없이 모든 조합. 결과 행수 = A × B</div></div>
+    <div class="cls-card"><span class="badge b-event">NATURAL</span><div class="name">NATURAL JOIN (자연 조인)</div><div class="ex">같은 이름 컬럼으로 자동 매칭. 별칭 사용 불가</div></div>
+    <div class="cls-card"><span class="badge">USING</span><div class="name">USING (컬럼)</div><div class="ex">지정한 컬럼만 매칭. USING 컬럼에 테이블 별칭 불가</div></div>
+  </div>
+
+  <!-- SQL 실전 -->
+  <h2 class="section-label sec-sql reveal">
+    <span class="label-tag">SQL 실전</span>
+    <span class="label-rest">조인 종류별 표준 문법</span>
+  </h2>
+
+  <h3 class="reveal">INNER JOIN (내부 조인) — 양쪽 매칭만</h3>
+  <pre class="reveal"><button class="copy-btn">복사</button><code><span class="sql-kw">SELECT</span>  E.<span class="sql-type">NAME</span>, D.<span class="sql-type">DEPT_NAME</span>
+<span class="sql-kw">FROM</span>    <span class="sql-name">EMP</span> E
+        <span class="sql-kw">INNER JOIN</span> <span class="sql-name">DEPT</span> D <span class="sql-kw">ON</span> E.<span class="sql-type">DEPT_ID</span> = D.<span class="sql-type">DEPT_ID</span>;
+        <span class="sql-cm">-- INNER 생략 가능: JOIN ... ON</span></code></pre>
+
+  <h3 class="reveal">LEFT OUTER JOIN (왼쪽 외부 조인) — 왼쪽 다, 오른쪽 매칭</h3>
+  <pre class="reveal"><button class="copy-btn">복사</button><code><span class="sql-kw">SELECT</span>  E.<span class="sql-type">NAME</span>, D.<span class="sql-type">DEPT_NAME</span>
+<span class="sql-kw">FROM</span>    <span class="sql-name">EMP</span> E
+        <span class="sql-kw">LEFT OUTER JOIN</span> <span class="sql-name">DEPT</span> D <span class="sql-kw">ON</span> E.<span class="sql-type">DEPT_ID</span> = D.<span class="sql-type">DEPT_ID</span>;
+        <span class="sql-cm">-- OUTER 생략 가능: LEFT JOIN</span></code></pre>
+
+  <h3 class="reveal">RIGHT OUTER JOIN (오른쪽 외부 조인) — 오른쪽 다, 왼쪽 매칭</h3>
+  <pre class="reveal"><button class="copy-btn">복사</button><code><span class="sql-kw">SELECT</span>  E.<span class="sql-type">NAME</span>, D.<span class="sql-type">DEPT_NAME</span>
+<span class="sql-kw">FROM</span>    <span class="sql-name">EMP</span> E
+        <span class="sql-kw">RIGHT OUTER JOIN</span> <span class="sql-name">DEPT</span> D <span class="sql-kw">ON</span> E.<span class="sql-type">DEPT_ID</span> = D.<span class="sql-type">DEPT_ID</span>;</code></pre>
+
+  <h3 class="reveal">FULL OUTER JOIN (전체 외부 조인) — 양쪽 다</h3>
+  <pre class="reveal"><button class="copy-btn">복사</button><code><span class="sql-kw">SELECT</span>  E.<span class="sql-type">NAME</span>, D.<span class="sql-type">DEPT_NAME</span>
+<span class="sql-kw">FROM</span>    <span class="sql-name">EMP</span> E
+        <span class="sql-kw">FULL OUTER JOIN</span> <span class="sql-name">DEPT</span> D <span class="sql-kw">ON</span> E.<span class="sql-type">DEPT_ID</span> = D.<span class="sql-type">DEPT_ID</span>;</code></pre>
+
+  <h3 class="reveal">CROSS JOIN (교차 조인) — 모든 조합</h3>
+  <pre class="reveal"><button class="copy-btn">복사</button><code><span class="sql-kw">SELECT</span>  *
+<span class="sql-kw">FROM</span>    <span class="sql-name">EMP</span> E <span class="sql-kw">CROSS JOIN</span> <span class="sql-name">DEPT</span> D;</code></pre>
+  <p class="reveal">조인 조건 없음. 결과는 A행수 × B행수.</p>
+
+  <h3 class="reveal">NATURAL JOIN (자연 조인) — 같은 이름 컬럼 자동 조인</h3>
+  <pre class="reveal"><button class="copy-btn">복사</button><code><span class="sql-kw">SELECT</span>  *
+<span class="sql-kw">FROM</span>    <span class="sql-name">EMP</span> <span class="sql-kw">NATURAL JOIN</span> <span class="sql-name">DEPT</span>;     <span class="sql-cm">-- DEPT_ID로 자동 조인</span></code></pre>
+  <table class="reveal">
+    <thead><tr><th>특징</th><th>설명</th></tr></thead>
+    <tbody>
+      <tr><td>자동 매칭</td><td>이름이 같은 컬럼으로 매칭</td></tr>
+      <tr><td>별칭 사용 X</td><td>같은 이름 컬럼에 별칭 사용 불가</td></tr>
+      <tr><td>같은 이름 컬럼은 한 번만 등장</td><td>중복 제거</td></tr>
+    </tbody>
+  </table>
+  <p class="reveal">의도치 않은 컬럼이 매칭될 수 있어 실무에서는 잘 쓰지 않는다.</p>
+
+  <h3 class="reveal">USING 절 — 명시적 컬럼 매칭</h3>
+  <pre class="reveal"><button class="copy-btn">복사</button><code><span class="sql-kw">SELECT</span>  <span class="sql-type">NAME</span>, <span class="sql-type">DEPT_NAME</span>, <span class="sql-type">DEPT_ID</span>
+<span class="sql-kw">FROM</span>    <span class="sql-name">EMP</span> <span class="sql-kw">JOIN</span> <span class="sql-name">DEPT</span> <span class="sql-kw">USING</span> (<span class="sql-type">DEPT_ID</span>);</code></pre>
+
+  <!-- NATURAL vs USING vs ON -->
+  <h2 class="reveal">NATURAL vs USING vs ON</h2>
+  <div class="threeway reveal">
+    <div class="threeway-card t-info">
+      <div class="glyph">NATURAL</div>
+      <div class="name">자동 매칭</div>
+      <div class="desc"><strong>이름이 같은 모든 컬럼</strong>으로 자동 조인. 별칭 불가, 의도치 않은 매칭 위험</div>
+    </div>
+    <div class="threeway-card t-warn">
+      <div class="glyph">USING</div>
+      <div class="name">지정 컬럼만</div>
+      <div class="desc">괄호 안 <strong>지정한 컬럼만</strong> 매칭. USING 컬럼에 테이블 별칭 사용 불가 (<code>E.DEPT_ID</code> ✗)</div>
+    </div>
+    <div class="threeway-card t-correct">
+      <div class="glyph">ON</div>
+      <div class="name">명시적 조건</div>
+      <div class="desc">조인 조건을 <strong>직접 지정</strong>. 다른 이름 컬럼끼리도 조인 가능, 별칭 자유</div>
+    </div>
+  </div>
+  <table class="reveal">
+    <thead><tr><th>NATURAL vs USING</th><th>차이</th></tr></thead>
+    <tbody>
+      <tr><td>NATURAL</td><td>자동(모든 같은 이름)</td></tr>
+      <tr><td>USING</td><td>지정한 컬럼만</td></tr>
+    </tbody>
+  </table>
+  <p class="reveal">USING으로 조인된 컬럼은 테이블 별칭을 붙일 수 없다(예: <code>E.DEPT_ID</code> 불가).</p>
+
+  <h3 class="reveal">ON 절 vs WHERE 절 (OUTER JOIN 핵심)</h3>
+  <pre class="reveal"><button class="copy-btn">복사</button><code><span class="sql-cm">-- 잘못된 예: OUTER JOIN인데 WHERE로 필터하면 NULL 행이 빠짐</span>
+<span class="sql-kw">SELECT</span> M.<span class="sql-type">NAME</span>, O.<span class="sql-type">ORDER_ID</span>
+<span class="sql-kw">FROM</span>   <span class="sql-name">MEMBER</span> M <span class="sql-kw">LEFT JOIN</span> <span class="sql-name">ORDERS</span> O <span class="sql-kw">ON</span> M.<span class="sql-type">MEMBER_ID</span> = O.<span class="sql-type">MEMBER_ID</span>
+<span class="sql-kw">WHERE</span>  O.<span class="sql-type">AMOUNT</span> &gt; <span class="sql-num">1000</span>;     <span class="sql-cm">-- 주문 없는 회원이 사라짐</span>
+
+<span class="sql-cm">-- 올바른 예: 조인 조건에 함께</span>
+<span class="sql-kw">SELECT</span> M.<span class="sql-type">NAME</span>, O.<span class="sql-type">ORDER_ID</span>
+<span class="sql-kw">FROM</span>   <span class="sql-name">MEMBER</span> M <span class="sql-kw">LEFT JOIN</span> <span class="sql-name">ORDERS</span> O
+       <span class="sql-kw">ON</span> M.<span class="sql-type">MEMBER_ID</span> = O.<span class="sql-type">MEMBER_ID</span>
+       <span class="sql-kw">AND</span> O.<span class="sql-type">AMOUNT</span> &gt; <span class="sql-num">1000</span>;</code></pre>
+
+  <!-- Before & After -->
+  <h2 class="section-label sec-compare reveal">
+    <span class="label-tag">Before &amp; After</span>
+    <span class="label-rest">표준 조인 결과 비교</span>
+  </h2>
+  <p class="reveal">EMP 3행(박은 부서 미지정)과 DEPT 3행(D3 개발은 소속 사원 없음)을 같은 키 <code>DEPT_ID</code>로 조인하는 상황. 동일한 두 테이블에 INNER / LEFT / RIGHT / FULL / CROSS를 차례로 적용하면서 ANSI 표준 문법별 결과 행 수가 어떻게 달라지는지 비교한다.</p>
+
+  <h3 class="reveal">입력</h3>
+  <p class="reveal" style="font-size: 13px; color: var(--fg-3); margin: 8px 0 4px;">예시 데이터</p>
+  <div class="ba-flow reveal" style="grid-template-columns: 1fr 36px 1fr; align-items: stretch;">
+    <div class="ba-side before">
+      <span class="ba-tag">EMP</span>
+      <h4 class="ba-h">사원 테이블</h4>
+      <div class="mini-table cols-3">
+        <div class="h">EMP_ID</div><div class="h">NAME</div><div class="h">DEPT_ID</div>
+        <div class="c">1</div><div class="c">김</div><div class="c">D1</div>
+        <div class="c">2</div><div class="c">이</div><div class="c">D2</div>
+        <div class="c">3</div><div class="c">박</div><div class="c is-null">NULL</div>
+      </div>
+    </div>
+    <div class="ba-arrow" style="font-size: 22px; color: var(--point-500);">+</div>
+    <div class="ba-side before">
+      <span class="ba-tag">DEPT</span>
+      <h4 class="ba-h">부서 테이블</h4>
+      <div class="mini-table cols-2">
+        <div class="h">DEPT_ID</div><div class="h">DEPT_NAME</div>
+        <div class="c">D1</div><div class="c">영업</div>
+        <div class="c">D2</div><div class="c">인사</div>
+        <div class="c">D3</div><div class="c">개발</div>
+      </div>
+    </div>
+  </div>
+
+  <h3 class="reveal">INNER JOIN (내부 조인) 결과</h3>
+  <table class="reveal">
+    <thead><tr><th>NAME</th><th>DEPT_NAME</th></tr></thead>
+    <tbody>
+      <tr><td>김</td><td>영업</td></tr>
+      <tr><td>이</td><td>인사</td></tr>
+    </tbody>
+  </table>
+
+  <h3 class="reveal">LEFT JOIN (왼쪽 외부 조인) 결과</h3>
+  <table class="reveal">
+    <thead><tr><th>NAME</th><th>DEPT_NAME</th></tr></thead>
+    <tbody>
+      <tr><td>김</td><td>영업</td></tr>
+      <tr><td>이</td><td>인사</td></tr>
+      <tr><td>박</td><td style="color: var(--wrong-fg); font-weight: 700;">NULL</td></tr>
+    </tbody>
+  </table>
+
+  <h3 class="reveal">RIGHT JOIN (오른쪽 외부 조인) 결과</h3>
+  <table class="reveal">
+    <thead><tr><th>NAME</th><th>DEPT_NAME</th></tr></thead>
+    <tbody>
+      <tr><td>김</td><td>영업</td></tr>
+      <tr><td>이</td><td>인사</td></tr>
+      <tr><td style="color: var(--wrong-fg); font-weight: 700;">NULL</td><td>개발</td></tr>
+    </tbody>
+  </table>
+
+  <h3 class="reveal">FULL JOIN (전체 외부 조인) 결과</h3>
+  <table class="reveal">
+    <thead><tr><th>NAME</th><th>DEPT_NAME</th></tr></thead>
+    <tbody>
+      <tr><td>김</td><td>영업</td></tr>
+      <tr><td>이</td><td>인사</td></tr>
+      <tr><td>박</td><td style="color: var(--wrong-fg); font-weight: 700;">NULL</td></tr>
+      <tr><td style="color: var(--wrong-fg); font-weight: 700;">NULL</td><td>개발</td></tr>
+    </tbody>
+  </table>
+
+  <h3 class="reveal">CROSS JOIN (교차 조인) 결과</h3>
+  <p class="reveal">3 × 3 = 9행.</p>
+
+  <!-- Oracle 사투리 vs ANSI 표준 SQL 비교 -->
+  <h3 class="reveal">Oracle 사투리 vs ANSI 표준</h3>
+  <p class="reveal">같은 LEFT OUTER 조인을 두 문법으로 작성한 비교다. Oracle 전용 <code>(+)</code> 표기와 ANSI 표준 <code>LEFT JOIN ... ON</code> 결과는 동일하지만, 표준 문법은 어느 DBMS에서나 통한다.</p>
+  <pre class="reveal"><button class="copy-btn">복사</button><code><span class="sql-cm">-- Oracle 사투리: (+) 기호</span>
+<span class="sql-kw">SELECT</span> <span class="sql-type">E</span>.<span class="sql-type">NAME</span>, <span class="sql-type">D</span>.<span class="sql-type">DEPT_NAME</span>
+<span class="sql-kw">FROM</span>   <span class="sql-name">EMP</span> <span class="sql-type">E</span>, <span class="sql-name">DEPT</span> <span class="sql-type">D</span>
+<span class="sql-kw">WHERE</span>  <span class="sql-type">E</span>.<span class="sql-type">DEPT_ID</span> = <span class="sql-type">D</span>.<span class="sql-type">DEPT_ID</span>(+);
+
+<span class="sql-cm">-- ANSI 표준: LEFT JOIN ... ON</span>
+<span class="sql-kw">SELECT</span> <span class="sql-type">E</span>.<span class="sql-type">NAME</span>, <span class="sql-type">D</span>.<span class="sql-type">DEPT_NAME</span>
+<span class="sql-kw">FROM</span>   <span class="sql-name">EMP</span> <span class="sql-type">E</span> <span class="sql-kw">LEFT JOIN</span> <span class="sql-name">DEPT</span> <span class="sql-type">D</span>
+       <span class="sql-kw">ON</span> <span class="sql-type">E</span>.<span class="sql-type">DEPT_ID</span> = <span class="sql-type">D</span>.<span class="sql-type">DEPT_ID</span>;</code></pre>
+  <p class="reveal" style="font-size: 13px; color: var(--fg-3); margin: 8px 0 4px;">↓ 두 쿼리의 결과 (동일)</p>
+  <table class="reveal">
+    <thead><tr><th>NAME</th><th>DEPT_NAME</th></tr></thead>
+    <tbody>
+      <tr><td>김</td><td>영업</td></tr>
+      <tr><td>이</td><td>인사</td></tr>
+      <tr><td>박</td><td style="color: var(--wrong-fg); font-weight: 700;">NULL</td></tr>
+    </tbody>
+  </table>
+
+  <p class="reveal">ANSI 표준은 결과 집합을 키워드 한 단어로 명확히 구분한다 — INNER는 매칭만, LEFT/RIGHT는 한쪽 기준 모두, FULL은 양쪽 모두, CROSS는 카티션 곱이다. <strong>"어느 쪽에 매칭이 없는 데이터까지 살릴 것인가"</strong>를 먼저 정한 다음 그에 맞는 키워드를 고르고, OUTER 조인의 추가 조건은 반드시 <code>ON</code> 절에 두어야 매칭 안 되는 NULL 행이 그대로 살아남는다.</p>
+
+  <!-- 정리표 -->
+  <h2 class="reveal">정리표</h2>
+  <table class="reveal">
+    <thead><tr><th>종류</th><th>매칭 안 되는 왼쪽</th><th>매칭 안 되는 오른쪽</th></tr></thead>
+    <tbody>
+      <tr><td>INNER</td><td>제외</td><td>제외</td></tr>
+      <tr><td>LEFT</td><td>포함(NULL)</td><td>제외</td></tr>
+      <tr><td>RIGHT</td><td>제외</td><td>포함(NULL)</td></tr>
+      <tr><td>FULL</td><td>포함</td><td>포함</td></tr>
+      <tr><td>CROSS</td><td>모든 조합</td><td>모든 조합</td></tr>
+    </tbody>
+  </table>
+
+  <div class="reveal" style="margin: 40px 0 0; padding: 22px 24px; background: linear-gradient(135deg, var(--point-050), var(--bg-card)); border: 1px solid var(--point-100); border-radius: 12px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;">
+    <div>
+      <div style="font-size: 12px; font-weight: 800; color: var(--point-600); letter-spacing: 0.04em; margin-bottom: 4px;">시험 대비</div>
+      <div style="font-size: 14px; color: var(--fg-2);">이 챕터의 함정·정답과 30초 정리는 통합 시험 대비 페이지에서 볼 수 있습니다.</div>
+    </div>
+    <a href="./exam-review.html#ch-2-1-8" style="font-size: 14px; font-weight: 700; color: var(--point-600); text-decoration: none; padding: 8px 14px; border: 1px solid var(--point-300); border-radius: 8px; background: var(--bg-card); white-space: nowrap;">시험 대비 보기 →</a>
+  </div>
+
+  </article>
+</main>
+<script src="./common.js"></script>
+</body>
+</html>

@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="light">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PIVOT 절과 UNPIVOT 절 — SQLD양파 이론</title>
+<link rel="stylesheet" href="./common.css">
+</head>
+<body>
+<nav class="topnav">
+  <div class="topnav-inner">
+    <div class="topnav-brand">SQLD양파</div>
+    <div class="topnav-links"><a href="#">홈</a><a href="#" class="active">이론</a><a href="#">기출 CBT</a><a href="#">모의고사</a><a href="#">Pro</a></div>
+  </div>
+</nav>
+<main class="page-shell">
+  <div class="breadcrumb"><a href="#">이론</a><span class="sep">›</span><a href="#">2과목 SQL 기본 및 활용</a><span class="sep">›</span><a href="#">2-2 SQL 활용</a></div>
+  <header class="page-title-block">
+    <h1>PIVOT 절과 UNPIVOT 절</h1>
+    <p class="subtitle">데이터 모양 변환 · 세로↔가로 · 집계 함수 필수 · CASE WHEN 흉내</p>
+  </header>
+  <article class="theory-md">
+
+  <!-- 핵심 요약 -->
+  <h2 class="section-label sec-summary reveal">
+    <span class="label-tag">핵심 요약</span>
+    <span class="label-rest">정의</span>
+  </h2>
+  <blockquote class="reveal">
+    PIVOT은 <strong>세로 데이터를 가로</strong>로, UNPIVOT은 <strong>가로 데이터를 세로</strong>로 바꾼다. 데이터 모양 변환 도구다.
+  </blockquote>
+  <div class="ex-box reveal">
+    "(김철수, 수학, 3) / (김철수, 영어, 2)" 같은 세로 카드 형태를 "김철수 | 수학3 | 영어2"의 가로 엑셀 표로 펼치는 작업이 PIVOT.
+  </div>
+
+  <!-- 개념 도식화 -->
+  <h2 class="section-label sec-diagram reveal">
+    <span class="label-tag">개념 도식화</span>
+    <span class="label-rest">PIVOT vs UNPIVOT</span>
+  </h2>
+  <div class="threeway cols-2 reveal">
+    <div class="threeway-card t-info">
+      <div class="glyph">↕→↔</div>
+      <div class="name">PIVOT (세로 → 가로)</div>
+      <div class="desc"><strong>행을 컬럼</strong>으로 펼침. 집계함수 필수. 매칭 안 되는 칸은 NULL</div>
+    </div>
+    <div class="threeway-card t-warn">
+      <div class="glyph">↔→↕</div>
+      <div class="name">UNPIVOT (가로 → 세로)</div>
+      <div class="desc"><strong>컬럼을 행</strong>으로 접음. 기본 NULL 제외, <code>INCLUDE NULLS</code>로 포함</div>
+    </div>
+  </div>
+
+  <p class="reveal">PIVOT과 UNPIVOT은 형식상 서로 역연산이지만, PIVOT은 집계함수가 끼고 UNPIVOT은 NULL을 기본으로 버린다는 비대칭이 있다.</p>
+
+  <div class="ba-flow reveal">
+    <div class="ba-side before">
+      <span class="ba-tag">세로형 (Long) — 원본</span>
+      <h4 class="ba-h">행 단위로 쌓인 카드</h4>
+      <div class="mini-table cols-3">
+        <div class="h">회원</div><div class="h">과목</div><div class="h">수</div>
+        <div class="c">김</div><div class="c">수학</div><div class="c">3</div>
+        <div class="c">김</div><div class="c">영어</div><div class="c">2</div>
+        <div class="c">김</div><div class="c">과학</div><div class="c">1</div>
+      </div>
+    </div>
+    <div class="ba-arrow">↔</div>
+    <div class="ba-side after">
+      <span class="ba-tag">가로형 (Wide) — 변환</span>
+      <h4 class="ba-h">컬럼으로 펼쳐진 표</h4>
+      <div class="mini-table cols-4">
+        <div class="h">회원</div><div class="h">수학</div><div class="h">영어</div><div class="h">과학</div>
+        <div class="c">김</div><div class="c">3</div><div class="c">2</div><div class="c">1</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PIVOT -->
+  <h2 class="reveal">PIVOT 절 — 세로 → 가로</h2>
+  <h3 class="reveal">문법</h3>
+  <pre class="reveal"><button class="copy-btn">복사</button><code><span class="sql-kw">SELECT</span>  *
+<span class="sql-kw">FROM</span>    <span class="sql-name">원본테이블</span>
+        <span class="sql-kw">PIVOT</span> (
+            <span class="sql-kw">집계함수</span>(<span class="sql-type">값컬럼</span>)
+            <span class="sql-kw">FOR</span>  <span class="sql-type">변환대상컬럼</span> <span class="sql-kw">IN</span> (<span class="sql-str">'값1'</span> <span class="sql-kw">AS</span> <span class="sql-type">별칭1</span>, <span class="sql-str">'값2'</span> <span class="sql-kw">AS</span> <span class="sql-type">별칭2</span>, ...)
+        );</code></pre>
+  <h3 class="reveal">예시</h3>
+  <p class="reveal" style="font-size: 13px; color: var(--fg-3); margin: 8px 0 4px;">예시 데이터</p>
+  <div class="ba-flow reveal" style="grid-template-columns: 1fr 36px 1fr; align-items: stretch;">
+    <div class="ba-side before">
+      <span class="ba-tag">SCORE (Before)</span>
+      <h4 class="ba-h">세로형 — 원본</h4>
+      <div class="mini-table cols-3">
+        <div class="h">MEMBER</div><div class="h">SUBJECT</div><div class="h">POINT</div>
+        <div class="c">김</div><div class="c">수학</div><div class="c">90</div>
+        <div class="c">김</div><div class="c">영어</div><div class="c">80</div>
+        <div class="c">김</div><div class="c">과학</div><div class="c">70</div>
+        <div class="c">이</div><div class="c">수학</div><div class="c">100</div>
+      </div>
+    </div>
+    <div class="ba-arrow" style="font-size: 22px; color: var(--point-500);">→</div>
+    <div class="ba-side after">
+      <span class="ba-tag">PIVOT (After)</span>
+      <h4 class="ba-h">가로형 — 변환</h4>
+      <div class="mini-table cols-4">
+        <div class="h">MEMBER</div><div class="h">수학</div><div class="h">영어</div><div class="h">과학</div>
+        <div class="c">김</div><div class="c">90</div><div class="c">80</div><div class="c">70</div>
+        <div class="c">이</div><div class="c">100</div><div class="c is-null">NULL</div><div class="c is-null">NULL</div>
+      </div>
+    </div>
+  </div>
+  <pre class="reveal"><button class="copy-btn">복사</button><code><span class="sql-kw">SELECT</span> *
+<span class="sql-kw">FROM</span>   <span class="sql-name">SCORE</span>
+       <span class="sql-kw">PIVOT</span> (
+           <span class="sql-kw">SUM</span>(<span class="sql-type">POINT</span>)
+           <span class="sql-kw">FOR</span> <span class="sql-type">SUBJECT</span> <span class="sql-kw">IN</span> (<span class="sql-str">'수학'</span> <span class="sql-kw">AS</span> <span class="sql-type">수학</span>, <span class="sql-str">'영어'</span> <span class="sql-kw">AS</span> <span class="sql-type">영어</span>, <span class="sql-str">'과학'</span> <span class="sql-kw">AS</span> <span class="sql-type">과학</span>)
+       );</code></pre>
+  <p class="reveal" style="font-size: 12.5px; color: var(--fg-3); margin: 0 0 12px;">→ SUBJECT의 값('수학'/'영어'/'과학')이 컬럼명으로 펼쳐진다. 이는 영어·과학 시험을 보지 않아 매칭 행이 없으므로 두 칸이 NULL.</p>
+
+  <!-- UNPIVOT -->
+  <h2 class="reveal">UNPIVOT 절 — 가로 → 세로</h2>
+  <h3 class="reveal">문법</h3>
+  <pre class="reveal"><button class="copy-btn">복사</button><code><span class="sql-kw">SELECT</span>  *
+<span class="sql-kw">FROM</span>    <span class="sql-name">가로테이블</span>
+        <span class="sql-kw">UNPIVOT</span> (
+            <span class="sql-type">값컬럼</span>
+            <span class="sql-kw">FOR</span> <span class="sql-type">새컬럼명</span> <span class="sql-kw">IN</span> (<span class="sql-type">가로컬럼1</span> <span class="sql-kw">AS</span> <span class="sql-str">'값1'</span>, <span class="sql-type">가로컬럼2</span> <span class="sql-kw">AS</span> <span class="sql-str">'값2'</span>, ...)
+        );</code></pre>
+  <h3 class="reveal">예시</h3>
+  <p class="reveal" style="font-size: 13px; color: var(--fg-3); margin: 8px 0 4px;">예시 데이터</p>
+  <div class="ba-flow reveal" style="grid-template-columns: 1fr 36px 1fr; align-items: stretch;">
+    <div class="ba-side before">
+      <span class="ba-tag">SCORE_WIDE (Before)</span>
+      <h4 class="ba-h">가로형 — 원본</h4>
+      <div class="mini-table cols-4">
+        <div class="h">MEMBER</div><div class="h">수학</div><div class="h">영어</div><div class="h">과학</div>
+        <div class="c">김</div><div class="c">90</div><div class="c">80</div><div class="c">70</div>
+      </div>
+    </div>
+    <div class="ba-arrow" style="font-size: 22px; color: var(--point-500);">→</div>
+    <div class="ba-side after">
+      <span class="ba-tag">UNPIVOT (After)</span>
+      <h4 class="ba-h">세로형 — 변환</h4>
+      <div class="mini-table cols-3">
+        <div class="h">MEMBER</div><div class="h">SUBJECT</div><div class="h">POINT</div>
+        <div class="c">김</div><div class="c">수학</div><div class="c">90</div>
+        <div class="c">김</div><div class="c">영어</div><div class="c">80</div>
+        <div class="c">김</div><div class="c">과학</div><div class="c">70</div>
+      </div>
+    </div>
+  </div>
+  <pre class="reveal"><button class="copy-btn">복사</button><code><span class="sql-kw">SELECT</span> *
+<span class="sql-kw">FROM</span>   <span class="sql-name">SCORE_WIDE</span>
+       <span class="sql-kw">UNPIVOT</span> (
+           <span class="sql-type">POINT</span>
+           <span class="sql-kw">FOR</span> <span class="sql-type">SUBJECT</span> <span class="sql-kw">IN</span> (<span class="sql-type">수학</span> <span class="sql-kw">AS</span> <span class="sql-str">'수학'</span>, <span class="sql-type">영어</span> <span class="sql-kw">AS</span> <span class="sql-str">'영어'</span>, <span class="sql-type">과학</span> <span class="sql-kw">AS</span> <span class="sql-str">'과학'</span>)
+       );</code></pre>
+  <p class="reveal" style="font-size: 12.5px; color: var(--fg-3); margin: 0 0 12px;">→ 가로의 수학·영어·과학 컬럼이 SUBJECT 값으로 접히고, 그 점수가 POINT 컬럼으로 풀린다. 1행이 3행으로 늘어남.</p>
+
+  <!-- CASE WHEN으로 PIVOT -->
+  <h2 class="reveal">CASE WHEN으로 PIVOT 흉내내기 (전통 방식)</h2>
+  <p class="reveal">PIVOT 절 없이도 같은 결과를 만들 수 있다.</p>
+  <div class="fn-grid cols-3 reveal">
+    <div class="fn-card">
+      <div class="name">SUM(CASE WHEN ...)</div>
+      <div class="desc">조건별로 더하는 컬럼을 만든다</div>
+      <div class="ex">SUM(CASE WHEN SUBJECT='수학' THEN POINT END)</div>
+    </div>
+    <div class="fn-card">
+      <div class="name">GROUP BY</div>
+      <div class="desc">행 키를 묶어 한 줄로 모은다</div>
+      <div class="ex">GROUP BY MEMBER</div>
+    </div>
+    <div class="fn-card">
+      <div class="name">ROLLUP / CUBE</div>
+      <div class="desc">소계까지 함께 뽑고 싶을 때</div>
+      <div class="ex">GROUP BY ROLLUP(MEMBER)</div>
+    </div>
+  </div>
+  <pre class="reveal"><button class="copy-btn">복사</button><code><span class="sql-kw">SELECT</span>  <span class="sql-type">MEMBER</span>,
+        <span class="sql-kw">SUM</span>(<span class="sql-kw">CASE WHEN</span> <span class="sql-type">SUBJECT</span> = <span class="sql-str">'수학'</span> <span class="sql-kw">THEN</span> <span class="sql-type">POINT</span> <span class="sql-kw">END</span>) <span class="sql-kw">AS</span> <span class="sql-type">수학</span>,
+        <span class="sql-kw">SUM</span>(<span class="sql-kw">CASE WHEN</span> <span class="sql-type">SUBJECT</span> = <span class="sql-str">'영어'</span> <span class="sql-kw">THEN</span> <span class="sql-type">POINT</span> <span class="sql-kw">END</span>) <span class="sql-kw">AS</span> <span class="sql-type">영어</span>,
+        <span class="sql-kw">SUM</span>(<span class="sql-kw">CASE WHEN</span> <span class="sql-type">SUBJECT</span> = <span class="sql-str">'과학'</span> <span class="sql-kw">THEN</span> <span class="sql-type">POINT</span> <span class="sql-kw">END</span>) <span class="sql-kw">AS</span> <span class="sql-type">과학</span>
+<span class="sql-kw">FROM</span>    <span class="sql-name">SCORE</span>
+<span class="sql-kw">GROUP BY</span> <span class="sql-type">MEMBER</span>;</code></pre>
+  <p class="reveal">시험에서 단골: PIVOT 절을 모르고도 CASE + GROUP BY로 같은 효과를 낼 수 있다(소계까지 함께 뽑고 싶으면 <a href="./2-2-3_그룹함수.html">그룹 함수</a>의 ROLLUP/CUBE를 결합한다).</p>
+
+  <!-- NULL 처리 -->
+  <h2 class="reveal">NULL 처리</h2>
+  <table class="reveal">
+    <thead><tr><th>상황</th><th>결과</th></tr></thead>
+    <tbody>
+      <tr><td>PIVOT 후 매칭 없는 칸</td><td>NULL</td></tr>
+      <tr><td>UNPIVOT 시 NULL 값</td><td>기본 제외</td></tr>
+      <tr><td><code>INCLUDE NULLS</code> 옵션</td><td>NULL 값도 포함</td></tr>
+    </tbody>
+  </table>
+  <pre class="reveal"><button class="copy-btn">복사</button><code><span class="sql-cm">-- NULL도 포함시켜 UNPIVOT</span>
+... <span class="sql-kw">UNPIVOT INCLUDE NULLS</span> (<span class="sql-type">POINT</span> <span class="sql-kw">FOR</span> <span class="sql-type">SUBJECT</span> <span class="sql-kw">IN</span> (...));</code></pre>
+
+  <!-- SQL 실전 추가 -->
+  <h2 class="section-label sec-sql reveal">
+    <span class="label-tag">SQL 실전</span>
+    <span class="label-rest">추가 예시</span>
+  </h2>
+  <pre class="reveal"><button class="copy-btn">복사</button><code><span class="sql-cm">-- 부서별, 직무별 인원수를 가로로</span>
+<span class="sql-kw">SELECT</span> *
+<span class="sql-kw">FROM</span>   <span class="sql-name">EMP</span>
+       <span class="sql-kw">PIVOT</span> (
+           <span class="sql-kw">COUNT</span>(*)
+           <span class="sql-kw">FOR</span> <span class="sql-type">JOB</span> <span class="sql-kw">IN</span> (<span class="sql-str">'MGR'</span> <span class="sql-kw">AS</span> <span class="sql-type">매니저</span>, <span class="sql-str">'CLERK'</span> <span class="sql-kw">AS</span> <span class="sql-type">사무직</span>, <span class="sql-str">'SALES'</span> <span class="sql-kw">AS</span> <span class="sql-type">영업</span>)
+       );</code></pre>
+  <table class="reveal">
+    <thead><tr><th>DEPT_ID</th><th>매니저</th><th>사무직</th><th>영업</th></tr></thead>
+    <tbody>
+      <tr><td>D1</td><td>1</td><td>2</td><td>0</td></tr>
+      <tr><td>D2</td><td>1</td><td>0</td><td>3</td></tr>
+    </tbody>
+  </table>
+
+  <!-- Before & After -->
+  <h2 class="section-label sec-compare reveal">
+    <span class="label-tag">Before &amp; After</span>
+    <span class="label-rest">CASE 방식과 PIVOT 절 비교</span>
+  </h2>
+  <p class="reveal">분기·카테고리·매출이 세로로 쌓인 SALES 표를 분기별 가로 보고서로 바꾸는 상황. Q2에는 카테고리 B 매출이 없다는 점이 핵심으로, 이 빈 칸이 결과에서 NULL로 처리된다. 같은 변환을 Oracle PIVOT 절과 전통적인 CASE WHEN + GROUP BY 방식으로 동시에 표현해 비교한다.</p>
+  <h4 class="reveal">원본</h4>
+  <table class="reveal">
+    <thead><tr><th>분기</th><th>카테고리</th><th>매출</th></tr></thead>
+    <tbody>
+      <tr><td>Q1</td><td>A</td><td>100</td></tr>
+      <tr><td>Q1</td><td>B</td><td>200</td></tr>
+      <tr><td>Q2</td><td>A</td><td>150</td></tr>
+    </tbody>
+  </table>
+  <div class="ba-flow reveal">
+    <div class="ba-side before">
+      <span class="ba-tag">PIVOT 절</span>
+      <h4 class="ba-h">선언적 — IN 절에 컬럼 명시</h4>
+      <div class="sql">SELECT * FROM SALES PIVOT (SUM(매출) FOR 카테고리 IN ('A' AS A, 'B' AS B));</div>
+      <div class="mini-table cols-3">
+        <div class="h">분기</div><div class="h">A</div><div class="h">B</div>
+        <div class="c">Q1</div><div class="c">100</div><div class="c">200</div>
+        <div class="c">Q2</div><div class="c">150</div><div class="c is-null">NULL</div>
+      </div>
+    </div>
+    <div class="ba-arrow">↔</div>
+    <div class="ba-side after">
+      <span class="ba-tag">CASE WHEN 방식</span>
+      <h4 class="ba-h">유연 — 컬럼 동적 조립</h4>
+      <div class="sql">SELECT 분기, SUM(CASE WHEN 카테고리='A' THEN 매출 END) AS A, SUM(CASE WHEN 카테고리='B' THEN 매출 END) AS B FROM SALES GROUP BY 분기;</div>
+      <div class="mini-table cols-3">
+        <div class="h">분기</div><div class="h">A</div><div class="h">B</div>
+        <div class="c">Q1</div><div class="c">100</div><div class="c">200</div>
+        <div class="c">Q2</div><div class="c">150</div><div class="c is-null">NULL</div>
+      </div>
+    </div>
+  </div>
+  <p class="reveal">두 방식의 결과가 같은 이유는 PIVOT 절이 사실상 "카테고리별 <code>SUM(CASE WHEN ...)</code>"을 분기 GROUP BY로 묶는 동작을 문법적으로 단순화한 것이기 때문이다. Q2의 B 칸이 NULL이 되는 것도 같은 메커니즘으로, 매칭되는 원본 행이 없어 SUM의 입력이 비어 있기 때문이다. PIVOT은 IN 절에 변환할 값을 명시적으로 나열해야 하므로 "어떤 컬럼이 만들어질지"를 미리 알아야 하고, CASE 방식은 분기 컬럼을 동적으로 조립할 수 있어 더 유연하다는 점이 표현력의 차이로 남는다.</p>
+
+  <div class="reveal" style="margin: 40px 0 0; padding: 22px 24px; background: linear-gradient(135deg, var(--point-050), var(--bg-card)); border: 1px solid var(--point-100); border-radius: 12px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;">
+    <div>
+      <div style="font-size: 12px; font-weight: 800; color: var(--point-600); letter-spacing: 0.04em; margin-bottom: 4px;">시험 대비</div>
+      <div style="font-size: 14px; color: var(--fg-2);">이 챕터의 함정·정답과 30초 정리는 통합 시험 대비 페이지에서 볼 수 있습니다.</div>
+    </div>
+    <a href="./exam-review.html#ch-2-2-7" style="font-size: 14px; font-weight: 700; color: var(--point-600); text-decoration: none; padding: 8px 14px; border: 1px solid var(--point-300); border-radius: 8px; background: var(--bg-card); white-space: nowrap;">시험 대비 보기 →</a>
+  </div>
+
+  </article>
+</main>
+<script src="./common.js"></script>
+</body>
+</html>

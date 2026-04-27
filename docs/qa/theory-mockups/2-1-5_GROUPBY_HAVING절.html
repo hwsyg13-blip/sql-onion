@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="light">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GROUP BY, HAVING 절 — SQLD양파 이론</title>
+<link rel="stylesheet" href="./common.css">
+</head>
+<body>
+<nav class="topnav">
+  <div class="topnav-inner">
+    <div class="topnav-brand">SQLD양파</div>
+    <div class="topnav-links">
+      <a href="#">홈</a><a href="#" class="active">이론</a><a href="#">기출 CBT</a><a href="#">모의고사</a><a href="#">Pro</a>
+    </div>
+  </div>
+</nav>
+<main class="page-shell">
+  <div class="breadcrumb"><a href="#">이론</a><span class="sep">›</span><a href="#">2과목 SQL 기본 및 활용</a><span class="sep">›</span><a href="#">2-1. SQL 기본</a></div>
+  <header class="page-title-block">
+    <h1>GROUP BY, HAVING 절</h1>
+    <p class="subtitle">행 단위 묶기 · 그룹 단위 필터 · 실행 순서 <code>FROM → WHERE → GROUP BY → HAVING → SELECT → ORDER BY</code></p>
+  </header>
+  <article class="theory-md">
+
+  <!-- 핵심 요약 -->
+  <h2 class="section-label sec-summary reveal">
+    <span class="label-tag">핵심 요약</span>
+    <span class="label-rest">정의</span>
+  </h2>
+  <blockquote class="reveal">
+    <strong>GROUP BY</strong>는 데이터를 그룹별로 묶는 절, <strong>HAVING</strong>은 묶인 그룹에 조건을 거는 절이다.
+  </blockquote>
+  <div class="ex-box reveal">
+    영수증 50장을 "분류별로 묶어 합계(<code>GROUP BY 분류</code>)" → "합계 10만원 넘는 분류만(<code>HAVING 합계 &gt; 10만</code>)"으로 거르는 것과 같다.
+  </div>
+
+  <!-- 개념 도식화 — 실행 흐름 -->
+  <h2 class="section-label sec-diagram reveal">
+    <span class="label-tag">개념 도식화</span>
+    <span class="label-rest">WHERE vs HAVING의 위치</span>
+  </h2>
+  <div class="mermaid reveal">
+flowchart LR
+    A[FROM<br/>테이블] --> B[WHERE<br/>행 필터]
+    B --> C[GROUP BY<br/>그룹화]
+    C --> D[HAVING<br/>그룹 필터]
+    D --> E[SELECT<br/>컬럼 추출]
+  </div>
+  <p class="reveal">실행 순서: <strong>FROM → WHERE → GROUP BY → HAVING → SELECT → ORDER BY</strong></p>
+
+  <!-- GROUP BY 핵심 규칙 -->
+  <h2 class="reveal">GROUP BY의 핵심 규칙</h2>
+  <p class="reveal">GROUP BY에 명시되지 않은 컬럼은 SELECT 절에 그대로 쓸 수 없다. 집계함수로만 사용 가능하다.</p>
+  <pre class="reveal"><button class="copy-btn">복사</button><code><span class="sql-cm">-- 잘못된 쿼리</span>
+<span class="sql-kw">SELECT</span> <span class="sql-type">DEPT_ID</span>, <span class="sql-type">NAME</span>, <span class="sql-kw">AVG</span>(<span class="sql-type">SAL</span>)   <span class="sql-cm">-- NAME이 GROUP BY에 없음</span>
+<span class="sql-kw">FROM</span>   <span class="sql-name">EMP</span>
+<span class="sql-kw">GROUP BY</span> <span class="sql-type">DEPT_ID</span>;
+
+<span class="sql-cm">-- 옳은 쿼리</span>
+<span class="sql-kw">SELECT</span> <span class="sql-type">DEPT_ID</span>, <span class="sql-kw">AVG</span>(<span class="sql-type">SAL</span>)
+<span class="sql-kw">FROM</span>   <span class="sql-name">EMP</span>
+<span class="sql-kw">GROUP BY</span> <span class="sql-type">DEPT_ID</span>;</code></pre>
+
+  <!-- 집계 함수 복습 -->
+  <h2 class="reveal">집계 함수 복습</h2>
+  <p class="reveal">GROUP BY와 함께 쓰이는 <a href="./2-2-3_그룹함수.html">그룹함수</a>의 기본형. 행 단위 분석이 필요하면 <a href="./2-2-4_윈도우함수.html">윈도우함수</a>로 확장한다.</p>
+  <table class="reveal">
+    <thead><tr><th>함수</th><th>설명</th></tr></thead>
+    <tbody>
+      <tr><td>COUNT(*)</td><td>행 수(NULL 포함)</td></tr>
+      <tr><td>COUNT(컬럼)</td><td>NULL 제외 행 수</td></tr>
+      <tr><td>SUM(컬럼)</td><td>합</td></tr>
+      <tr><td>AVG(컬럼)</td><td>평균</td></tr>
+      <tr><td>MAX/MIN(컬럼)</td><td>최대/최소</td></tr>
+    </tbody>
+  </table>
+
+  <!-- WHERE vs HAVING — 인포그래픽 -->
+  <h2 class="section-label sec-compare reveal">
+    <span class="label-tag">비교</span>
+    <span class="label-rest">WHERE vs HAVING</span>
+  </h2>
+  <p class="reveal"><a href="./2-1-4_WHERE절.html">WHERE 절</a>이 행 단위 필터라면, HAVING은 그룹 단위 필터다.</p>
+  <div class="threeway cols-2 reveal">
+    <div class="threeway-card t-info">
+      <div class="glyph">WHERE</div>
+      <div class="name">행 단위 필터</div>
+      <div class="desc">적용 시점: <strong>그룹화 전</strong> · 집계함수 <strong>불가</strong><br>예) <code>WHERE SAL &gt; 3000</code></div>
+    </div>
+    <div class="threeway-card t-correct">
+      <div class="glyph">HAVING</div>
+      <div class="name">그룹 단위 필터</div>
+      <div class="desc">적용 시점: <strong>그룹화 후</strong> · 집계함수 <strong>가능</strong><br>예) <code>HAVING AVG(SAL) &gt; 3000</code></div>
+    </div>
+  </div>
+  <pre class="reveal"><button class="copy-btn">복사</button><code><span class="sql-cm">-- 잘못된 예: WHERE에 집계함수</span>
+<span class="sql-kw">SELECT</span> <span class="sql-type">DEPT_ID</span>, <span class="sql-kw">AVG</span>(<span class="sql-type">SAL</span>)
+<span class="sql-kw">FROM</span>   <span class="sql-name">EMP</span>
+<span class="sql-kw">WHERE</span>  <span class="sql-kw">AVG</span>(<span class="sql-type">SAL</span>) &gt; <span class="sql-num">3000</span>;     <span class="sql-cm">-- 에러</span>
+
+<span class="sql-cm">-- 옳은 예: HAVING에 집계함수</span>
+<span class="sql-kw">SELECT</span> <span class="sql-type">DEPT_ID</span>, <span class="sql-kw">AVG</span>(<span class="sql-type">SAL</span>)
+<span class="sql-kw">FROM</span>   <span class="sql-name">EMP</span>
+<span class="sql-kw">GROUP BY</span> <span class="sql-type">DEPT_ID</span>
+<span class="sql-kw">HAVING</span> <span class="sql-kw">AVG</span>(<span class="sql-type">SAL</span>) &gt; <span class="sql-num">3000</span>;</code></pre>
+
+  <!-- SQL 실전 -->
+  <h2 class="section-label sec-sql reveal">
+    <span class="label-tag">SQL 실전</span>
+    <span class="label-rest">집계와 필터의 결합</span>
+  </h2>
+  <p class="reveal" style="font-size: 13px; color: var(--fg-3); margin: 8px 0 4px;">예시 데이터</p>
+  <div class="ba-side before reveal" style="max-width: 460px;">
+    <span class="ba-tag">EMP</span>
+    <h4 class="ba-h">사원 테이블 (5명 / 3개 부서)</h4>
+    <div class="mini-table cols-3">
+      <div class="h">NAME</div><div class="h">DEPT_ID</div><div class="h">SAL</div>
+      <div class="c">김</div><div class="c">D1</div><div class="c">3000</div>
+      <div class="c">이</div><div class="c">D1</div><div class="c">4000</div>
+      <div class="c">박</div><div class="c">D2</div><div class="c">2500</div>
+      <div class="c">최</div><div class="c">D2</div><div class="c">3500</div>
+      <div class="c">홍</div><div class="c">D3</div><div class="c">5000</div>
+    </div>
+  </div>
+  <pre class="reveal"><button class="copy-btn">복사</button><code><span class="sql-cm">-- 부서별 인원수와 평균급여</span>
+<span class="sql-kw">SELECT</span>  <span class="sql-type">DEPT_ID</span>,
+        <span class="sql-kw">COUNT</span>(*)    <span class="sql-kw">AS</span> <span class="sql-type">CNT</span>,
+        <span class="sql-kw">AVG</span>(<span class="sql-type">SAL</span>)    <span class="sql-kw">AS</span> <span class="sql-type">AVG_SAL</span>
+<span class="sql-kw">FROM</span>    <span class="sql-name">EMP</span>
+<span class="sql-kw">GROUP BY</span> <span class="sql-type">DEPT_ID</span>;
+
+<span class="sql-cm">-- 부서별 평균급여가 3500 이상인 부서만</span>
+<span class="sql-kw">SELECT</span>  <span class="sql-type">DEPT_ID</span>, <span class="sql-kw">AVG</span>(<span class="sql-type">SAL</span>)
+<span class="sql-kw">FROM</span>    <span class="sql-name">EMP</span>
+<span class="sql-kw">GROUP BY</span> <span class="sql-type">DEPT_ID</span>
+<span class="sql-kw">HAVING</span>  <span class="sql-kw">AVG</span>(<span class="sql-type">SAL</span>) &gt;= <span class="sql-num">3500</span>;
+
+<span class="sql-cm">-- WHERE + GROUP BY + HAVING 조합</span>
+<span class="sql-kw">SELECT</span>  <span class="sql-type">DEPT_ID</span>, <span class="sql-kw">AVG</span>(<span class="sql-type">SAL</span>)
+<span class="sql-kw">FROM</span>    <span class="sql-name">EMP</span>
+<span class="sql-kw">WHERE</span>   <span class="sql-type">HIRE_DATE</span> &gt;= <span class="sql-kw">DATE</span> <span class="sql-str">'2020-01-01'</span>   <span class="sql-cm">-- 2020년 이후 입사자만</span>
+<span class="sql-kw">GROUP BY</span> <span class="sql-type">DEPT_ID</span>
+<span class="sql-kw">HAVING</span>  <span class="sql-kw">COUNT</span>(*) &gt;= <span class="sql-num">3</span>;                   <span class="sql-cm">-- 3명 이상인 부서</span></code></pre>
+
+  <p class="reveal" style="font-size: 13px; color: var(--fg-3); margin: 8px 0 4px;">↓ 결과 (GROUP BY 후 — 부서별 인원수와 평균급여)</p>
+  <table class="reveal">
+    <thead><tr><th>DEPT_ID</th><th>CNT</th><th>AVG_SAL</th></tr></thead>
+    <tbody>
+      <tr><td>D1</td><td>2</td><td>3500</td></tr>
+      <tr><td>D2</td><td>2</td><td>3000</td></tr>
+      <tr><td>D3</td><td>1</td><td>5000</td></tr>
+    </tbody>
+  </table>
+  <p class="reveal" style="font-size: 12.5px; color: var(--fg-3); margin: 0 0 12px;">→ DEPT_ID 값별로 5명의 행이 3개 그룹으로 접히고, 각 그룹마다 COUNT·AVG가 한 번씩 계산된다.</p>
+  <p class="reveal" style="font-size: 13px; color: var(--fg-3); margin: 8px 0 4px;">↓ 결과 (HAVING 적용 후 — 평균급여 3500 이상 그룹만)</p>
+  <table class="reveal">
+    <thead><tr><th>DEPT_ID</th><th>AVG(SAL)</th></tr></thead>
+    <tbody>
+      <tr><td>D1</td><td>3500</td></tr>
+      <tr><td>D3</td><td>5000</td></tr>
+    </tbody>
+  </table>
+  <p class="reveal" style="font-size: 12.5px; color: var(--fg-3); margin: 0 0 12px;">→ 그룹 단위 결과 3행 중 AVG(SAL) &lt; 3500인 D2(3000)가 빠진다. HAVING은 그룹 결과를 거르는 필터.</p>
+
+  <!-- Before & After -->
+  <h2 class="section-label sec-compare reveal">
+    <span class="label-tag">Before &amp; After</span>
+    <span class="label-rest">그룹화 전 → 후</span>
+  </h2>
+  <p class="reveal">EMP 5명을 D1·D2·D3 세 부서로 묶어 부서별 인원수와 평균급여를 구하고, 그중 평균급여 3500 이상 부서만 남기는 상황. GROUP BY로 그룹을 만든 단계와 HAVING으로 그룹을 거른 단계의 결과를 단계별로 비교한다.</p>
+  <p class="reveal" style="font-size: 13.5px; color: var(--fg-3);">EMP 테이블</p>
+  <table class="reveal">
+    <thead><tr><th>NAME</th><th>DEPT_ID</th><th>SAL</th></tr></thead>
+    <tbody>
+      <tr><td>김</td><td>D1</td><td>3000</td></tr>
+      <tr><td>이</td><td>D1</td><td>4000</td></tr>
+      <tr><td>박</td><td>D2</td><td>2500</td></tr>
+      <tr><td>최</td><td>D2</td><td>3500</td></tr>
+      <tr><td>홍</td><td>D3</td><td>5000</td></tr>
+    </tbody>
+  </table>
+  <div class="ba-flow reveal">
+    <div class="ba-side before">
+      <span class="ba-tag">GROUP BY</span>
+      <h4 class="ba-h">DEPT_ID로 묶음</h4>
+      <div class="sql">SELECT DEPT_ID, COUNT(*), AVG(SAL) FROM EMP GROUP BY DEPT_ID;</div>
+      <div class="mini-table cols-3">
+        <div class="h">DEPT_ID</div><div class="h">COUNT</div><div class="h">AVG(SAL)</div>
+        <div class="c">D1</div><div class="c">2</div><div class="c">3500</div>
+        <div class="c">D2</div><div class="c">2</div><div class="c">3000</div>
+        <div class="c">D3</div><div class="c">1</div><div class="c">5000</div>
+      </div>
+    </div>
+    <div class="ba-arrow">→</div>
+    <div class="ba-side after">
+      <span class="ba-tag">HAVING</span>
+      <h4 class="ba-h">AVG(SAL) ≥ 3500 그룹만</h4>
+      <div class="sql">… GROUP BY DEPT_ID HAVING AVG(SAL) &gt;= 3500;</div>
+      <div class="mini-table">
+        <div class="h">DEPT_ID</div><div class="h">AVG(SAL)</div>
+        <div class="c">D1</div><div class="c">3500</div>
+        <div class="c">D3</div><div class="c">5000</div>
+      </div>
+    </div>
+  </div>
+  <p class="reveal">GROUP BY는 행을 키 단위로 접어 한 그룹당 한 행으로 만들고, 그 위에서 집계 함수가 동작한다. 따라서 평균급여 같은 집계 결과를 조건으로 걸려면 행 단위인 WHERE가 아니라 그룹 단위인 HAVING을 써야 한다. "어떤 행을 걸러야 하나"는 WHERE, "묶은 결과 중 어떤 그룹을 남기나"는 HAVING — 필터를 어느 단계에 둘지를 먼저 정한 뒤 쿼리를 짜는 것이 안전하다.</p>
+
+  <!-- 다중 컬럼 그룹화 -->
+  <h2 class="reveal">다중 컬럼 그룹화</h2>
+  <pre class="reveal"><button class="copy-btn">복사</button><code><span class="sql-kw">SELECT</span>  <span class="sql-type">DEPT_ID</span>, <span class="sql-type">JOB</span>, <span class="sql-kw">COUNT</span>(*)
+<span class="sql-kw">FROM</span>    <span class="sql-name">EMP</span>
+<span class="sql-kw">GROUP BY</span> <span class="sql-type">DEPT_ID</span>, <span class="sql-type">JOB</span>;</code></pre>
+  <table class="reveal">
+    <thead><tr><th>DEPT_ID</th><th>JOB</th><th>COUNT(*)</th></tr></thead>
+    <tbody>
+      <tr><td>D1</td><td>MGR</td><td>1</td></tr>
+      <tr><td>D1</td><td>CLERK</td><td>1</td></tr>
+      <tr><td>D2</td><td>CLERK</td><td>2</td></tr>
+    </tbody>
+  </table>
+
+  <!-- SELECT - GROUP BY 매칭 규칙 -->
+  <h2 class="reveal">SELECT — GROUP BY 매칭 규칙</h2>
+  <table class="reveal">
+    <thead><tr><th>SELECT 절에 쓸 수 있는 것</th><th>가능 여부</th></tr></thead>
+    <tbody>
+      <tr><td>GROUP BY 컬럼</td><td>가능</td></tr>
+      <tr><td>집계 함수(SUM, AVG 등)</td><td>가능</td></tr>
+      <tr><td>상수, 함수, 표현식</td><td>가능</td></tr>
+      <tr><td>그 외 일반 컬럼</td><td>불가</td></tr>
+    </tbody>
+  </table>
+
+  <div class="reveal" style="margin: 40px 0 0; padding: 22px 24px; background: linear-gradient(135deg, var(--point-050), var(--bg-card)); border: 1px solid var(--point-100); border-radius: 12px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;">
+    <div>
+      <div style="font-size: 12px; font-weight: 800; color: var(--point-600); letter-spacing: 0.04em; margin-bottom: 4px;">시험 대비</div>
+      <div style="font-size: 14px; color: var(--fg-2);">이 챕터의 함정·정답과 30초 정리는 통합 시험 대비 페이지에서 볼 수 있습니다.</div>
+    </div>
+    <a href="./exam-review.html#ch-2-1-5" style="font-size: 14px; font-weight: 700; color: var(--point-600); text-decoration: none; padding: 8px 14px; border: 1px solid var(--point-300); border-radius: 8px; background: var(--bg-card); white-space: nowrap;">시험 대비 보기 →</a>
+  </div>
+
+  </article>
+</main>
+<script src="./common.js"></script>
+</body>
+</html>

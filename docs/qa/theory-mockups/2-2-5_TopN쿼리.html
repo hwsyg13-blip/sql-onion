@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="light">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Top N 쿼리 — SQLD양파 이론</title>
+<link rel="stylesheet" href="./common.css">
+</head>
+<body>
+<nav class="topnav">
+  <div class="topnav-inner">
+    <div class="topnav-brand">SQLD양파</div>
+    <div class="topnav-links"><a href="#">홈</a><a href="#" class="active">이론</a><a href="#">기출 CBT</a><a href="#">모의고사</a><a href="#">Pro</a></div>
+  </div>
+</nav>
+<main class="page-shell">
+  <div class="breadcrumb"><a href="#">이론</a><span class="sep">›</span><a href="#">2과목 SQL 기본 및 활용</a><span class="sep">›</span><a href="#">2-2 SQL 활용</a></div>
+  <header class="page-title-block">
+    <h1>Top N 쿼리</h1>
+    <p class="subtitle">상위 N개를 뽑는 4가지 방법 · ROWNUM · FETCH FIRST · TOP · ROW_NUMBER</p>
+  </header>
+  <article class="theory-md">
+
+  <!-- 핵심 요약 -->
+  <h2 class="section-label sec-summary reveal">
+    <span class="label-tag">핵심 요약</span>
+    <span class="label-rest">정의</span>
+  </h2>
+  <blockquote class="reveal">
+    Top N 쿼리는 <strong>상위 N개 행</strong>만 뽑는 쿼리다(예: 매출 상위 10개 상품, 최신 5건의 주문).
+  </blockquote>
+
+  <!-- 개념 도식화 -->
+  <h2 class="section-label sec-diagram reveal">
+    <span class="label-tag">개념 도식화</span>
+    <span class="label-rest">Top N의 4가지 방법</span>
+  </h2>
+  <div class="threeway cols-4 reveal">
+    <div class="threeway-card t-warn">
+      <div class="glyph">ROWNUM</div>
+      <div class="name">Oracle ROWNUM</div>
+      <div class="desc">의사 컬럼 · <strong>정렬 전</strong> 매겨짐 · 인라인뷰 필수</div>
+    </div>
+    <div class="threeway-card t-correct">
+      <div class="glyph">FETCH</div>
+      <div class="name">표준 FETCH FIRST</div>
+      <div class="desc">Oracle 12c+ · OFFSET · WITH TIES · PERCENT</div>
+    </div>
+    <div class="threeway-card t-info">
+      <div class="glyph">TOP</div>
+      <div class="name">MS-SQL TOP</div>
+      <div class="desc"><code>SELECT TOP n</code> · <code>TOP n WITH TIES</code></div>
+    </div>
+    <div class="threeway-card t-danger">
+      <div class="glyph">ROW#</div>
+      <div class="name">윈도우 함수</div>
+      <div class="desc"><code>ROW_NUMBER() OVER</code> · <strong>PARTITION BY</strong>로 그룹별 가능</div>
+    </div>
+  </div>
+
+  <h3 class="reveal">실행 순서 — 정렬 → Top N 적용</h3>
+  <div class="timeline reveal">
+    <div class="timeline-track">
+      <div class="tl-step">
+        <div class="label">STEP 1</div>
+        <div class="dot"></div>
+        <div class="body">원본 테이블 <code>EMP</code> 스캔</div>
+      </div>
+      <div class="tl-step">
+        <div class="label">STEP 2</div>
+        <div class="dot"></div>
+        <div class="body"><code>ORDER BY SAL DESC</code><br/>정렬 먼저</div>
+      </div>
+      <div class="tl-step">
+        <div class="label">STEP 3</div>
+        <div class="dot"></div>
+        <div class="body">번호 매김<br/><code>ROWNUM</code> · <code>ROW_NUMBER()</code></div>
+      </div>
+      <div class="tl-step">
+        <div class="label">STEP 4</div>
+        <div class="dot"></div>
+        <div class="body">상위 N개 자르기<br/><code>WHERE RN &lt;= N</code></div>
+      </div>
+    </div>
+  </div>
+  <p class="reveal">ROWNUM 함정의 본질이 여기 있다 — STEP 2(정렬) 전에 STEP 3(번호)이 먼저 매겨지면 의도와 다른 5명이 잘려 나온다. 그래서 인라인뷰로 정렬을 먼저 끝내야 한다.</p>
+
+  <!-- SQL 실전 -->
+  <h2 class="section-label sec-sql reveal">
+    <span class="label-tag">SQL 실전</span>
+    <span class="label-rest">방식별 구현</span>
+  </h2>
+
+  <h3 class="reveal">Oracle ROWNUM</h3>
+  <p class="reveal">ROWNUM은 행이 만들어진 순서대로 1, 2, 3...이 매겨지는 의사 컬럼이다.</p>
+  <p class="reveal" style="font-size: 13px; color: var(--fg-3); margin: 8px 0 4px;">예시 데이터 — 아래 모든 SQL은 이 EMP를 사용</p>
+  <div class="ba-side before reveal" style="max-width: 460px;">
+    <span class="ba-tag">EMP</span>
+    <h4 class="ba-h">사원 테이블 (5명)</h4>
+    <div class="mini-table cols-2">
+      <div class="h">NAME</div><div class="h">SAL</div>
+      <div class="c">김</div><div class="c">3000</div>
+      <div class="c">이</div><div class="c">5000</div>
+      <div class="c">박</div><div class="c">4500</div>
+      <div class="c">최</div><div class="c">4500</div>
+      <div class="c">홍</div><div class="c">2000</div>
+    </div>
+  </div>
+  <pre class="reveal"><button class="copy-btn">복사</button><code><span class="sql-kw">SELECT</span>  *
+<span class="sql-kw">FROM</span>    <span class="sql-name">EMP</span>
+<span class="sql-kw">WHERE</span>   <span class="sql-kw">ROWNUM</span> &lt;= <span class="sql-num">3</span>;</code></pre>
+  <p class="reveal" style="font-size: 13px; color: var(--fg-3); margin: 8px 0 4px;">↓ 결과 — 정렬 없이 저장 순서 앞 3행</p>
+  <table class="reveal">
+    <thead><tr><th>NAME</th><th>SAL</th></tr></thead>
+    <tbody>
+      <tr><td>김</td><td>3000</td></tr>
+      <tr><td>이</td><td>5000</td></tr>
+      <tr><td>박</td><td>4500</td></tr>
+    </tbody>
+  </table>
+  <p class="reveal" style="font-size: 12.5px; color: var(--fg-3); margin: 0 0 12px;">→ "급여 상위 3명"이 의도였다면 이 결과는 틀렸다. ROWNUM이 정렬 전 매겨지기 때문.</p>
+
+  <h4 class="reveal">ROWNUM의 함정</h4>
+  <p class="reveal">ROWNUM은 <a href="./2-1-6_ORDERBY절.html">ORDER BY</a> 적용 전에 매겨지므로 정렬을 먼저 한 인라인 뷰를 감싸야 한다.</p>
+  <pre class="reveal"><button class="copy-btn">복사</button><code><span class="sql-cm">-- 잘못된 예: 정렬 전에 ROWNUM이 매겨짐</span>
+<span class="sql-kw">SELECT</span> *
+<span class="sql-kw">FROM</span>   <span class="sql-name">EMP</span>
+<span class="sql-kw">WHERE</span>  <span class="sql-kw">ROWNUM</span> &lt;= <span class="sql-num">5</span>
+<span class="sql-kw">ORDER BY</span> <span class="sql-type">SAL</span> <span class="sql-kw">DESC</span>;     <span class="sql-cm">-- 5개 추출 후 정렬되어 의도와 다름</span>
+
+<span class="sql-cm">-- 올바른 예: 인라인 뷰로 정렬 먼저</span>
+<span class="sql-kw">SELECT</span> *
+<span class="sql-kw">FROM</span>   (<span class="sql-kw">SELECT</span> * <span class="sql-kw">FROM</span> <span class="sql-name">EMP</span> <span class="sql-kw">ORDER BY</span> <span class="sql-type">SAL</span> <span class="sql-kw">DESC</span>)
+<span class="sql-kw">WHERE</span>  <span class="sql-kw">ROWNUM</span> &lt;= <span class="sql-num">5</span>;</code></pre>
+  <table class="reveal">
+    <thead><tr><th>조건</th><th>결과</th></tr></thead>
+    <tbody>
+      <tr><td><code>ROWNUM = 1</code></td><td>가능</td></tr>
+      <tr><td><code>ROWNUM &lt;= 5</code></td><td>가능</td></tr>
+      <tr><td><code>ROWNUM = 5</code></td><td>결과 없음</td></tr>
+      <tr><td><code>ROWNUM &gt; 5</code></td><td>결과 없음</td></tr>
+    </tbody>
+  </table>
+  <p class="reveal">ROWNUM은 1부터 시작하므로 "5번째만"을 ROWNUM = 5로 표현할 수 없다.</p>
+
+  <h3 class="reveal">표준 FETCH FIRST (Oracle 12c+)</h3>
+  <p class="reveal" style="font-size: 13.5px; color: var(--fg-3);">EMP — 이 5000 / 박 4500 / 최 4500 (박·최 SAL 동률) 기준. <code>ROWS ONLY</code>와 <code>WITH TIES</code> 차이를 명확히 보려면 상위 2개로 비교.</p>
+  <pre class="reveal"><button class="copy-btn">복사</button><code><span class="sql-cm">-- 상위 2개 (정확히 N행)</span>
+<span class="sql-kw">SELECT</span> *
+<span class="sql-kw">FROM</span>   <span class="sql-name">EMP</span>
+<span class="sql-kw">ORDER BY</span> <span class="sql-type">SAL</span> <span class="sql-kw">DESC</span>
+<span class="sql-kw">FETCH FIRST</span> <span class="sql-num">2</span> <span class="sql-kw">ROWS ONLY</span>;</code></pre>
+  <p class="reveal" style="font-size: 13px; color: var(--fg-3); margin: 8px 0 4px;">↓ 결과 (2행) — 4500 동률 중 한 명만 임의로 포함(비결정적)</p>
+  <table class="reveal">
+    <thead><tr><th>NAME</th><th>SAL</th></tr></thead>
+    <tbody>
+      <tr><td>이</td><td>5000</td></tr>
+      <tr><td>박 또는 최</td><td>4500</td></tr>
+    </tbody>
+  </table>
+  <pre class="reveal"><button class="copy-btn">복사</button><code><span class="sql-cm">-- 상위 2개 (동률 포함)</span>
+<span class="sql-kw">SELECT</span> *
+<span class="sql-kw">FROM</span>   <span class="sql-name">EMP</span>
+<span class="sql-kw">ORDER BY</span> <span class="sql-type">SAL</span> <span class="sql-kw">DESC</span>
+<span class="sql-kw">FETCH FIRST</span> <span class="sql-num">2</span> <span class="sql-kw">ROWS WITH TIES</span>;     <span class="sql-cm">-- 마지막 행 동률은 모두 포함</span>
+
+<span class="sql-cm">-- 상위 10%(백분율)</span>
+<span class="sql-kw">SELECT</span> *
+<span class="sql-kw">FROM</span>   <span class="sql-name">EMP</span>
+<span class="sql-kw">ORDER BY</span> <span class="sql-type">SAL</span> <span class="sql-kw">DESC</span>
+<span class="sql-kw">FETCH FIRST</span> <span class="sql-num">10</span> <span class="sql-kw">PERCENT ROWS ONLY</span>;</code></pre>
+  <p class="reveal" style="font-size: 13px; color: var(--fg-3); margin: 8px 0 4px;">↓ WITH TIES 결과 — 4500 동률 두 명 모두 포함되어 3행</p>
+  <table class="reveal">
+    <thead><tr><th>NAME</th><th>SAL</th></tr></thead>
+    <tbody>
+      <tr><td>이</td><td>5000</td></tr>
+      <tr><td>박</td><td>4500</td></tr>
+      <tr><td>최</td><td>4500</td></tr>
+    </tbody>
+  </table>
+  <p class="reveal" style="font-size: 12.5px; color: var(--fg-3); margin: 0 0 12px;">→ <code>ROWS ONLY</code>는 정확히 N행(동률은 잘림), <code>WITH TIES</code>는 마지막 N등과 동률인 행을 모두 포함해 N+α행이 될 수 있다.</p>
+  <table class="reveal">
+    <thead><tr><th>옵션</th><th>의미</th></tr></thead>
+    <tbody>
+      <tr><td><code>FETCH FIRST n ROWS ONLY</code></td><td>정확히 n개</td></tr>
+      <tr><td><code>FETCH FIRST n ROWS WITH TIES</code></td><td>n등 동률은 모두 포함</td></tr>
+      <tr><td><code>OFFSET n ROWS</code></td><td>n개 건너뛰고</td></tr>
+    </tbody>
+  </table>
+
+  <h3 class="reveal">MS-SQL TOP</h3>
+  <pre class="reveal"><button class="copy-btn">복사</button><code><span class="sql-kw">SELECT TOP</span> <span class="sql-num">5</span> *
+<span class="sql-kw">FROM</span>   <span class="sql-name">EMP</span>
+<span class="sql-kw">ORDER BY</span> <span class="sql-type">SAL</span> <span class="sql-kw">DESC</span>;
+
+<span class="sql-cm">-- 동률 포함</span>
+<span class="sql-kw">SELECT TOP</span> <span class="sql-num">5</span> <span class="sql-kw">WITH TIES</span> *
+<span class="sql-kw">FROM</span>   <span class="sql-name">EMP</span>
+<span class="sql-kw">ORDER BY</span> <span class="sql-type">SAL</span> <span class="sql-kw">DESC</span>;</code></pre>
+
+  <h3 class="reveal"><a href="./2-2-4_윈도우함수.html">윈도우 함수</a> — 부서별 Top N</h3>
+  <pre class="reveal"><button class="copy-btn">복사</button><code><span class="sql-cm">-- 부서별 급여 상위 3명</span>
+<span class="sql-kw">SELECT</span> *
+<span class="sql-kw">FROM</span>   (<span class="sql-kw">SELECT</span> <span class="sql-type">NAME</span>, <span class="sql-type">DEPT_ID</span>, <span class="sql-type">SAL</span>,
+               <span class="sql-kw">ROW_NUMBER</span>() <span class="sql-kw">OVER</span> (<span class="sql-kw">PARTITION BY</span> <span class="sql-type">DEPT_ID</span> <span class="sql-kw">ORDER BY</span> <span class="sql-type">SAL</span> <span class="sql-kw">DESC</span>) <span class="sql-kw">AS</span> <span class="sql-type">RN</span>
+        <span class="sql-kw">FROM</span>   <span class="sql-name">EMP</span>)
+<span class="sql-kw">WHERE</span>  <span class="sql-type">RN</span> &lt;= <span class="sql-num">3</span>;</code></pre>
+  <p class="reveal" style="font-size: 13px; color: var(--fg-3); margin: 8px 0 4px;">↓ 결과 (D1·D2 부서 각각 Top 2 — RN 매김 결과)</p>
+  <table class="reveal">
+    <thead><tr><th>NAME</th><th>DEPT_ID</th><th>SAL</th><th>RN</th></tr></thead>
+    <tbody>
+      <tr><td>이</td><td>D1</td><td>5000</td><td>1</td></tr>
+      <tr><td>김</td><td>D1</td><td>3000</td><td>2</td></tr>
+      <tr><td>박</td><td>D2</td><td>4500</td><td>1</td></tr>
+      <tr><td>최</td><td>D2</td><td>4500</td><td>2</td></tr>
+    </tbody>
+  </table>
+  <table class="reveal">
+    <thead><tr><th>함수</th><th>동률 처리</th></tr></thead>
+    <tbody>
+      <tr><td><code>ROW_NUMBER()</code></td><td>무조건 다른 번호 → 정확히 N개</td></tr>
+      <tr><td><code>RANK()</code></td><td>동률 같은 등수, 건너뜀</td></tr>
+      <tr><td><code>DENSE_RANK()</code></td><td>동률 같은 등수, 연속</td></tr>
+    </tbody>
+  </table>
+
+  <h3 class="reveal">페이징(Pagination)</h3>
+  <p class="reveal">"1페이지: 1-10번째, 2페이지: 11-20번째..."</p>
+  <h4 class="reveal">Oracle</h4>
+  <pre class="reveal"><button class="copy-btn">복사</button><code><span class="sql-cm">-- 11~20번째</span>
+<span class="sql-kw">SELECT</span> *
+<span class="sql-kw">FROM</span>   (<span class="sql-kw">SELECT</span> <span class="sql-kw">ROWNUM</span> <span class="sql-type">RN</span>, <span class="sql-type">X</span>.*
+        <span class="sql-kw">FROM</span>   (<span class="sql-kw">SELECT</span> * <span class="sql-kw">FROM</span> <span class="sql-name">EMP</span> <span class="sql-kw">ORDER BY</span> <span class="sql-type">SAL</span> <span class="sql-kw">DESC</span>) <span class="sql-type">X</span>
+        <span class="sql-kw">WHERE</span>  <span class="sql-kw">ROWNUM</span> &lt;= <span class="sql-num">20</span>)
+<span class="sql-kw">WHERE</span>  <span class="sql-type">RN</span> &gt;= <span class="sql-num">11</span>;</code></pre>
+  <h4 class="reveal">표준 (Oracle 12c+)</h4>
+  <pre class="reveal"><button class="copy-btn">복사</button><code><span class="sql-kw">SELECT</span> *
+<span class="sql-kw">FROM</span>   <span class="sql-name">EMP</span>
+<span class="sql-kw">ORDER BY</span> <span class="sql-type">SAL</span> <span class="sql-kw">DESC</span>
+<span class="sql-kw">OFFSET</span> <span class="sql-num">10</span> <span class="sql-kw">ROWS FETCH NEXT</span> <span class="sql-num">10</span> <span class="sql-kw">ROWS ONLY</span>;</code></pre>
+
+  <!-- Before & After -->
+  <h2 class="section-label sec-compare reveal">
+    <span class="label-tag">Before &amp; After</span>
+    <span class="label-rest">동률이 들어오면 갈라진다</span>
+  </h2>
+  <p class="reveal">EMP 5명에서 급여 상위 3명을 뽑는 상황. 박·최가 4500으로 동률이라는 점이 핵심 차이를 만든다. 같은 "Top 3" 요구라도 ROWNUM 기반(정확히 3명)과 WITH TIES(동률 모두 포함)가 어떻게 갈라지는지 비교한다.</p>
+  <p class="reveal" style="font-size: 13.5px; color: var(--fg-3); margin-top: 0;">EMP 테이블</p>
+  <table class="reveal">
+    <thead><tr><th>NAME</th><th>SAL</th></tr></thead>
+    <tbody>
+      <tr><td>김</td><td>3000</td></tr>
+      <tr><td>이</td><td>5000</td></tr>
+      <tr><td>박</td><td>4500</td></tr>
+      <tr><td>최</td><td>4500</td></tr>
+      <tr><td>홍</td><td>2000</td></tr>
+    </tbody>
+  </table>
+  <div class="ba-flow reveal">
+    <div class="ba-side before">
+      <span class="ba-tag">ROWNUM</span>
+      <h4 class="ba-h">정확히 N개 (인라인뷰 + ROWNUM)</h4>
+      <div class="sql">SELECT * FROM (SELECT * FROM EMP ORDER BY SAL DESC) WHERE ROWNUM &lt;= 3;</div>
+      <div class="mini-table">
+        <div class="h">NAME</div><div class="h">SAL</div>
+        <div class="c">이</div><div class="c">5000</div>
+        <div class="c">박</div><div class="c">4500</div>
+        <div class="c">최</div><div class="c">4500</div>
+      </div>
+    </div>
+    <div class="ba-arrow">↔</div>
+    <div class="ba-side after">
+      <span class="ba-tag">WITH TIES</span>
+      <h4 class="ba-h">동률 모두 포함 (4명 이상 가능)</h4>
+      <div class="sql">SELECT * FROM EMP ORDER BY SAL DESC FETCH FIRST 3 ROWS WITH TIES;</div>
+      <div class="mini-table">
+        <div class="h">NAME</div><div class="h">SAL</div>
+        <div class="c">이</div><div class="c">5000</div>
+        <div class="c">박</div><div class="c">4500</div>
+        <div class="c">최</div><div class="c">4500</div>
+      </div>
+    </div>
+  </div>
+  <p class="reveal">이 예에서는 박·최 두 명이 4500이라 마침 정확히 3명이 떨어졌지만, 만약 4500이 한 명 더 있었다면 ROWNUM 방식은 그중 임의의 3명만, WITH TIES는 동률 전원을 포함해 4명 이상을 반환한다. 즉 "정확한 N개"가 필요하면 <code>ROW_NUMBER()</code>/ROWNUM, "공평하게 동률 포함"이 원칙이면 WITH TIES나 RANK()를 써야 한다. 결과 행 수가 입력 데이터에 따라 달라질 수 있다는 점이 Top N 쿼리에서 가장 흔히 놓치는 함정이다.</p>
+
+  <!-- ROWNUM vs ROW_NUMBER() -->
+  <h2 class="reveal">ROWNUM vs ROW_NUMBER()</h2>
+  <table class="reveal">
+    <thead><tr><th>항목</th><th>ROWNUM</th><th>ROW_NUMBER()</th></tr></thead>
+    <tbody>
+      <tr><td>정렬 적용 시점</td><td>WHERE보다 먼저(정렬 전)</td><td>OVER에 ORDER BY 명시</td></tr>
+      <tr><td>그룹별 번호</td><td>불가</td><td>가능(PARTITION BY)</td></tr>
+      <tr><td><code>=N</code> 사용</td><td>안 됨(1만 가능)</td><td>가능</td></tr>
+    </tbody>
+  </table>
+
+  <div class="reveal" style="margin: 40px 0 0; padding: 22px 24px; background: linear-gradient(135deg, var(--point-050), var(--bg-card)); border: 1px solid var(--point-100); border-radius: 12px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;">
+    <div>
+      <div style="font-size: 12px; font-weight: 800; color: var(--point-600); letter-spacing: 0.04em; margin-bottom: 4px;">시험 대비</div>
+      <div style="font-size: 14px; color: var(--fg-2);">이 챕터의 함정·정답과 30초 정리는 통합 시험 대비 페이지에서 볼 수 있습니다.</div>
+    </div>
+    <a href="./exam-review.html#ch-2-2-5" style="font-size: 14px; font-weight: 700; color: var(--point-600); text-decoration: none; padding: 8px 14px; border: 1px solid var(--point-300); border-radius: 8px; background: var(--bg-card); white-space: nowrap;">시험 대비 보기 →</a>
+  </div>
+
+  </article>
+</main>
+<script src="./common.js"></script>
+</body>
+</html>

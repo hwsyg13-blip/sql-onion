@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>본질식별자 vs 인조식별자 — SQLD양파 이론</title>
+<link rel="stylesheet" href="./common.css">
+</head>
+<body>
+<nav class="topnav">
+  <div class="topnav-inner">
+    <div class="topnav-brand">SQLD양파</div>
+    <div class="topnav-links">
+      <a href="#">홈</a><a href="#" class="active">이론</a><a href="#">기출 CBT</a><a href="#">모의고사</a><a href="#">Pro</a>
+    </div>
+  </div>
+</nav>
+<main class="page-shell">
+  <div class="breadcrumb">
+    <a href="#">이론</a><span class="sep">›</span>
+    <a href="#">1과목 데이터 모델링</a><span class="sep">›</span>
+    <a href="#">1-2. 데이터 모델과 SQL</a>
+  </div>
+  <header class="page-title-block">
+    <h1>본질식별자 vs 인조식별자</h1>
+    <p class="subtitle">업무 자연 도출 vs 인위적 부여. 보안·성능·일관성 균형을 맞추는 PK 선택</p>
+  </header>
+  <article class="theory-md">
+
+  <!-- 핵심 요약 -->
+  <h2 class="section-label sec-summary reveal">
+    <span class="label-tag">핵심 요약</span>
+    <span class="label-rest">정의</span>
+  </h2>
+  <blockquote class="reveal">
+    본질<a href="./1-1-5_식별자.html">식별자</a>는 <strong>업무에서 자연스럽게 도출된 식별자</strong>, 인조식별자는 <strong>인위적으로 만든 식별자</strong>다. 둘의 장단점을 알고 상황에 맞게 선택한다.
+  </blockquote>
+  <div class="ex-box reveal">
+    도서관에서 ISBN(출판사 부여 = <strong>본질식별자</strong>)과 자체 분류번호 A-001(도서관 임의 부여 = <strong>인조식별자</strong>) 두 가지로 책을 구분할 수 있다. ISBN이 길고 형식이 들쑥날쑥해서 도서관은 자체 번호를 더 자주 쓴다.
+  </div>
+
+  <!-- 개념 도식화 — threeway 2-way -->
+  <h2 class="section-label sec-diagram reveal">
+    <span class="label-tag">개념 도식화</span>
+    <span class="label-rest">본질 vs 인조</span>
+  </h2>
+  <div class="threeway cols-2 reveal">
+    <div class="threeway-card t-info">
+      <div class="glyph">本</div>
+      <div class="name">본질식별자 (Natural)</div>
+      <div class="desc"><strong>업무에서 자연 도출</strong> · 의미 있음 · 변경 위험 존재<br>예: 주민번호 · 사업자번호 · ISBN</div>
+    </div>
+    <div class="threeway-card t-correct">
+      <div class="glyph">人</div>
+      <div class="name">인조식별자 (Surrogate)</div>
+      <div class="desc"><strong>인위적으로 부여</strong> · 의미 없음 · 변경에 자유<br>예: 자동증가 ID · UUID · GUID</div>
+    </div>
+  </div>
+  <table class="reveal">
+    <thead><tr><th>구분</th><th>본질식별자</th><th>인조식별자</th></tr></thead>
+    <tbody>
+      <tr><td>출처</td><td>업무에서 자연 발생</td><td>인위적으로 부여</td></tr>
+      <tr><td>예시</td><td>주민번호 · 사업자번호 · ISBN</td><td>자동증가 ID · UUID · GUID</td></tr>
+      <tr><td>의미</td><td>업무적 의미 있음</td><td>의미 없음 (대체 키)</td></tr>
+      <tr><td>변경</td><td>변경되면 큰 영향</td><td>자유롭게 부여 가능</td></tr>
+    </tbody>
+  </table>
+  <div class="mermaid reveal">
+flowchart TD
+    Start["식별자 후보 검토"] --> Q1{"업무에서<br/>자연 도출?"}
+    Q1 -->|"NO"| SUR1["인조식별자<br/>(SEQ · UUID)"]
+    Q1 -->|"YES"| Q2{"길이가 길거나<br/>형식 들쑥날쑥?"}
+    Q2 -->|"YES"| SUR2["인조식별자"]
+    Q2 -->|"NO"| Q3{"보안·개인정보<br/>이슈?"}
+    Q3 -->|"YES"| SUR3["인조식별자<br/>(본질키는 UNIQUE)"]
+    Q3 -->|"NO"| Q4{"값이 자주<br/>변경되나?"}
+    Q4 -->|"YES"| SUR4["인조식별자"]
+    Q4 -->|"NO"| NAT["본질식별자<br/>OK"]
+    style NAT fill:#E9F0F6,stroke:#2F5D80
+    style SUR1 fill:#E6F3E7,stroke:#256B29
+    style SUR2 fill:#E6F3E7,stroke:#256B29
+    style SUR3 fill:#E6F3E7,stroke:#256B29
+    style SUR4 fill:#E6F3E7,stroke:#256B29
+  </div>
+
+  <!-- 비교표 -->
+  <h2 class="reveal">비교표</h2>
+  <table class="reveal">
+    <thead><tr><th>항목</th><th>본질식별자</th><th>인조식별자</th></tr></thead>
+    <tbody>
+      <tr><td>정의</td><td>업무에서 자연스럽게 도출</td><td>인위적으로 부여</td></tr>
+      <tr><td>예시</td><td>주민번호, 사업자번호, ISBN</td><td>자동증가 ID, UUID, GUID</td></tr>
+      <tr><td>의미</td><td>업무적 의미 있음</td><td>의미 없음 (단순 키)</td></tr>
+      <tr><td>변경 위험</td><td><strong>존재</strong> — 업무 규칙 변동 시 변할 수 있음 (예: 주민번호 체계 개편)</td><td><strong>없음</strong> — 한 번 부여되면 영구 고정</td></tr>
+      <tr><td>길이</td><td>길 수 있음</td><td>짧고 일관</td></tr>
+      <tr><td>데이터 품질 검증</td><td>가능 (중복 자연 검출)</td><td>어려움 — 본질키에 별도 UNIQUE 필요</td></tr>
+      <tr><td>PK 사용 시 장점</td><td>의미 검증 용이</td><td>JOIN/인덱스/관리 효율</td></tr>
+    </tbody>
+  </table>
+
+  <!-- 장단점 — fn-grid 스타일 -->
+  <h2 class="reveal">인조식별자의 장단점</h2>
+  <div class="fn-grid reveal">
+    <div class="fn-card">
+      <div class="name">+ 장점</div>
+      <div class="desc">짧고 일관된 형식 · 변경에 자유로움 · JOIN/인덱스 효율 · 보안(주민번호 노출 회피)</div>
+    </div>
+    <div class="fn-card">
+      <div class="name">- 단점</div>
+      <div class="desc">업무적 의미 없음 · 중복 데이터 식별 어려움 · 추가 UNIQUE 제약 필요 · 모델이 직관적이지 않음</div>
+    </div>
+  </div>
+  <table class="reveal">
+    <thead><tr><th>장점</th><th>단점</th></tr></thead>
+    <tbody>
+      <tr><td>짧고 일관된 형식</td><td>업무적 의미 없음</td></tr>
+      <tr><td>변경에 자유로움</td><td>중복 데이터 식별 어려움</td></tr>
+      <tr><td>JOIN/인덱스 효율</td><td>추가 UNIQUE 제약 필요</td></tr>
+      <tr><td>보안(주민번호 노출 회피)</td><td>모델이 직관적이지 않음</td></tr>
+    </tbody>
+  </table>
+
+  <h2 class="reveal">본질식별자의 장단점</h2>
+  <div class="fn-grid reveal">
+    <div class="fn-card">
+      <div class="name">+ 장점</div>
+      <div class="desc">업무적 의미 명확 · 자연스러운 데이터 검증 · 모델 직관적</div>
+    </div>
+    <div class="fn-card">
+      <div class="name">- 단점</div>
+      <div class="desc">길거나 복잡 · 변경되면 큰 영향 · 보안 이슈(개인정보 등)</div>
+    </div>
+  </div>
+  <table class="reveal">
+    <thead><tr><th>장점</th><th>단점</th></tr></thead>
+    <tbody>
+      <tr><td>업무적 의미 명확</td><td>길거나 복잡</td></tr>
+      <tr><td>자연스러운 데이터 검증</td><td>변경되면 큰 영향</td></tr>
+      <tr><td>모델 직관적</td><td>보안 이슈(개인정보 등)</td></tr>
+    </tbody>
+  </table>
+
+  <!-- 언제 무엇을 쓸까 -->
+  <h2 class="reveal">언제 무엇을 쓸까</h2>
+  <p class="reveal"><strong>현업 권장 패턴</strong>: PK는 인조식별자, 본질키는 UNIQUE 제약으로 별도 보존 → 보안·성능·일관성 모두 만족. 본질키를 PK로 쓰면 <a href="./1-2-1_정규화.html">정규화</a> 단계의 종속성 분석이 자연스럽지만, 변경 위험이 따른다는 점을 고려한다.</p>
+
+  <!-- SQL 실전 -->
+  <h2 class="section-label sec-sql reveal">
+    <span class="label-tag">SQL 실전</span>
+    <span class="label-rest">두 식별자의 구현</span>
+  </h2>
+  <p class="reveal" style="font-size: 13px; color: var(--fg-3); margin: 8px 0 4px;">예시 데이터 — 같은 책을 두 가지 PK 설계로 만들어 본 BOOK 테이블 형태</p>
+  <div class="ba-flow reveal" style="grid-template-columns: 1fr 36px 1fr; align-items: stretch;">
+    <div class="ba-side before">
+      <span class="ba-tag">본질 PK</span>
+      <h4 class="ba-h">BOOK (PK = ISBN)</h4>
+      <div class="mini-table cols-3">
+        <div class="h">ISBN (PK)</div><div class="h">TITLE</div><div class="h">AUTHOR</div>
+        <div class="c">978-89-1234</div><div class="c">SQL</div><div class="c is-null">NULL</div>
+      </div>
+    </div>
+    <div class="ba-arrow" style="font-size: 22px; color: var(--point-500);">↔</div>
+    <div class="ba-side after">
+      <span class="ba-tag">인조 PK + UQ</span>
+      <h4 class="ba-h">BOOK (PK = BOOK_ID, UQ = ISBN)</h4>
+      <div class="mini-table cols-4">
+        <div class="h">BOOK_ID (PK)</div><div class="h">ISBN (UQ)</div><div class="h">TITLE</div><div class="h">AUTHOR</div>
+        <div class="c">1</div><div class="c">978-89-1234</div><div class="c">SQL</div><div class="c is-null">NULL</div>
+      </div>
+    </div>
+  </div>
+  <h3 class="reveal">본질식별자 사용</h3>
+  <pre class="reveal"><button class="copy-btn">복사</button><code><span class="sql-kw">CREATE TABLE</span> <span class="sql-name">BOOK</span> (
+    <span class="sql-type">ISBN</span>     <span class="sql-kw">VARCHAR2</span>(<span class="sql-num">20</span>) <span class="sql-kw">PRIMARY KEY</span>,  <span class="sql-cm">-- 본질식별자</span>
+    <span class="sql-type">TITLE</span>    <span class="sql-kw">VARCHAR2</span>(<span class="sql-num">200</span>),
+    <span class="sql-type">AUTHOR</span>   <span class="sql-kw">VARCHAR2</span>(<span class="sql-num">100</span>)
+);</code></pre>
+
+  <h3 class="reveal">인조식별자 사용</h3>
+  <pre class="reveal"><button class="copy-btn">복사</button><code><span class="sql-kw">CREATE TABLE</span> <span class="sql-name">BOOK</span> (
+    <span class="sql-type">BOOK_ID</span>  <span class="sql-kw">NUMBER GENERATED ALWAYS AS IDENTITY PRIMARY KEY</span>,  <span class="sql-cm">-- 인조식별자</span>
+    <span class="sql-type">ISBN</span>     <span class="sql-kw">VARCHAR2</span>(<span class="sql-num">20</span>) <span class="sql-kw">UNIQUE</span>,                              <span class="sql-cm">-- 본질키는 UNIQUE로 유지</span>
+    <span class="sql-type">TITLE</span>    <span class="sql-kw">VARCHAR2</span>(<span class="sql-num">200</span>),
+    <span class="sql-type">AUTHOR</span>   <span class="sql-kw">VARCHAR2</span>(<span class="sql-num">100</span>)
+);
+
+<span class="sql-cm">-- 같은 ISBN을 두 번 INSERT 시도</span>
+<span class="sql-kw">INSERT INTO</span> <span class="sql-name">BOOK</span>(<span class="sql-type">ISBN</span>, <span class="sql-type">TITLE</span>) <span class="sql-kw">VALUES</span>(<span class="sql-str">'978-89-1234'</span>, <span class="sql-str">'SQL'</span>);
+<span class="sql-kw">INSERT INTO</span> <span class="sql-name">BOOK</span>(<span class="sql-type">ISBN</span>, <span class="sql-type">TITLE</span>) <span class="sql-kw">VALUES</span>(<span class="sql-str">'978-89-1234'</span>, <span class="sql-str">'SQL'</span>);
+<span class="sql-cm">-- ORA-00001: unique constraint violated</span>
+
+<span class="sql-kw">SELECT</span> * <span class="sql-kw">FROM</span> <span class="sql-name">BOOK</span>;</code></pre>
+  <p class="reveal" style="font-size: 13px; color: var(--fg-3); margin: 8px 0 4px;">↓ 결과</p>
+  <table class="reveal">
+    <thead><tr><th>BOOK_ID (PK)</th><th>ISBN (UQ)</th><th>TITLE</th><th>AUTHOR</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>978-89-1234</td><td>SQL</td><td>(NULL)</td></tr>
+    </tbody>
+  </table>
+  <p class="reveal" style="font-size: 12.5px; color: var(--fg-3); margin: 0 0 12px;">→ 두 번째 INSERT는 ISBN UNIQUE 제약 위반으로 거부 → 1행만 남는다. 인조 PK + 본질키 UNIQUE 조합이 무결성을 함께 지켜준다.</p>
+  <p class="reveal">권장 패턴: 인조식별자를 <strong>PK</strong>로, 본질식별자를 <strong>UNIQUE 제약</strong>으로 함께 둔다. UNIQUE 제약 덕에 같은 ISBN 중복 입력은 차단되어 본질키의 무결성도 보존된다.</p>
+
+  <h3 class="reveal">ER로 보는 인조식별자 패턴</h3>
+  <p class="reveal" style="font-size: 13.5px; color: var(--fg-3);">인조식별자 PK — 본질키는 UNIQUE로 보존, 자식엔 짧은 ID</p>
+  <div class="mermaid reveal">
+erDiagram
+    MEMBER_SUR ||--o{ ORDER_SUR : "주문"
+    MEMBER_SUR {
+        varchar MEMBER_ID PK "M01 같은 인조키"
+        varchar RRN "UNIQUE - 본질키 보존"
+        varchar NAME
+    }
+    ORDER_SUR {
+        number  ORDER_ID PK
+        varchar MEMBER_ID FK "짧은 ID만"
+    }
+  </div>
+
+  <!-- Before & After -->
+  <h2 class="section-label sec-compare reveal">
+    <span class="label-tag">Before &amp; After</span>
+    <span class="label-rest">인조식별자 도입의 효과</span>
+  </h2>
+  <p class="reveal">회원 김철수의 주민번호(800101-1234567)를 회원 PK로 쓰는 경우와, 인조식별자(M01)를 PK로 두고 주민번호는 UNIQUE로 보존하는 경우. 자식 테이블(주문)에 어떤 값이 흩뿌려지는지를 비교한다.</p>
+
+  <h3 class="reveal">Before — 본질식별자(주민번호)를 PK로</h3>
+  <table class="reveal">
+    <thead><tr><th>주문 (FK: 주민번호)</th></tr></thead>
+    <tbody>
+      <tr><td>800101-1234567 → 김철수 주문 1</td></tr>
+      <tr><td>800101-1234567 → 김철수 주문 2</td></tr>
+    </tbody>
+  </table>
+  <p class="reveal">모든 자식 테이블에 주민번호가 흩뿌려져 개인정보 노출 위험이 커진다.</p>
+
+  <h3 class="reveal">After — 인조식별자(MEMBER_ID) 도입</h3>
+  <p class="reveal" style="font-size: 13.5px; color: var(--fg-3);">MEMBER</p>
+  <table class="reveal">
+    <thead><tr><th>MEMBER_ID(PK)</th><th>RRN(UQ)</th><th>NAME</th></tr></thead>
+    <tbody>
+      <tr><td>M01</td><td>800101-1234567</td><td>김철수</td></tr>
+    </tbody>
+  </table>
+  <p class="reveal" style="font-size: 13.5px; color: var(--fg-3);">ORDER (FK: MEMBER_ID)</p>
+  <table class="reveal">
+    <thead><tr><th>ORDER_ID</th><th>MEMBER_ID</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>M01</td></tr>
+      <tr><td>2</td><td>M01</td></tr>
+    </tbody>
+  </table>
+  <p class="reveal">자식 테이블엔 의미 없는 ID만 들어가 보안과 JOIN 효율이 모두 향상된다.</p>
+
+  <div class="ba-flow large-after reveal">
+    <div class="ba-side before">
+      <span class="ba-tag">BEFORE · 본질식별자 PK</span>
+      <h4 class="ba-h">자식에도 주민번호 흩뿌려짐</h4>
+      <div class="ba-tables cols-2">
+        <div class="ba-mini-table">
+          <div class="h">MEMBER (PK=주민번호)</div>
+          <div class="row">800101-1234567 김철수</div>
+        </div>
+        <div class="ba-mini-table">
+          <div class="h">ORDER (FK)</div>
+          <div class="row">1 · 800101-1234567</div>
+          <div class="row">2 · 800101-1234567</div>
+        </div>
+      </div>
+    </div>
+    <div class="ba-arrow">→</div>
+    <div class="ba-side after">
+      <span class="ba-tag">AFTER · 인조식별자 PK</span>
+      <h4 class="ba-h">자식엔 짧은 ID만, 본질키는 UNIQUE로 보존</h4>
+      <div class="ba-tables cols-2">
+        <div class="ba-mini-table">
+          <div class="h">MEMBER (PK=M01, UQ=RRN)</div>
+          <div class="row">M01 · 800101-1234567 · 김철수</div>
+        </div>
+        <div class="ba-mini-table">
+          <div class="h">ORDER (FK=MEMBER_ID)</div>
+          <div class="row">1 · M01</div>
+          <div class="row">2 · M01</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <p class="reveal">PK는 모든 자식 테이블에 FK로 흩어지므로, 본질식별자가 PK면 그 값(주민번호)도 함께 흩어진다 — 보안 사고의 표면적이 그대로 늘어나는 셈이다. 또 본질키는 길거나 형식이 들쑥날쑥해 인덱스·조인 비용도 커진다. 인조식별자(M01 같은 짧은 키)를 PK로 두고 본질키는 회원 테이블 한 곳에 UNIQUE로 가둬두면, 보안·성능·일관성이 한꺼번에 정리된다. 다만 본질키의 무결성 검증을 위해 <strong>UNIQUE 제약을 빼먹지 않는 것이 핵심</strong>이다.</p>
+
+  <div class="reveal" style="margin: 40px 0 0; padding: 22px 24px; background: linear-gradient(135deg, var(--point-050), var(--bg-card)); border: 1px solid var(--point-100); border-radius: 12px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;">
+    <div>
+      <div style="font-size: 12px; font-weight: 800; color: var(--point-600); letter-spacing: 0.04em; margin-bottom: 4px;">시험 대비</div>
+      <div style="font-size: 14px; color: var(--fg-2);">이 챕터의 함정·정답과 30초 정리는 통합 시험 대비 페이지에서 볼 수 있습니다.</div>
+    </div>
+    <a href="./exam-review.html#ch-1-2-5" style="font-size: 14px; font-weight: 700; color: var(--point-600); text-decoration: none; padding: 8px 14px; border: 1px solid var(--point-300); border-radius: 8px; background: var(--bg-card); white-space: nowrap;">시험 대비 보기 →</a>
+  </div>
+
+  </article>
+</main>
+<script src="./common.js"></script>
+</body>
+</html>

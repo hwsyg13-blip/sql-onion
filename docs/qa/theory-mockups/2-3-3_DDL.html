@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DDL — SQLD양파 이론</title>
+<link rel="stylesheet" href="./common.css">
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="topnav-inner">
+    <div class="topnav-brand">SQLD양파</div>
+    <div class="topnav-links">
+      <a href="#">홈</a>
+      <a href="#" class="active">이론</a>
+      <a href="#">기출 CBT</a>
+      <a href="#">모의고사</a>
+      <a href="#">Pro</a>
+    </div>
+  </div>
+</nav>
+
+<main class="page-shell">
+  <div class="breadcrumb">
+    <a href="#">이론</a>
+    <span class="sep">›</span>
+    <a href="#">2과목 SQL 기본 및 활용</a>
+    <span class="sep">›</span>
+    <a href="#">2-3. 관리 구문</a>
+  </div>
+
+  <header class="page-title-block">
+    <h1>DDL (Data Definition Language)</h1>
+    <p class="subtitle">객체 정의. <code>CREATE</code> · <code>ALTER</code> · <code>DROP</code> · <code>TRUNCATE</code> · <code>RENAME</code> · 제약조건</p>
+  </header>
+
+  <article class="theory-md">
+
+  <!-- 핵심 요약 -->
+  <h2 class="section-label sec-summary reveal">
+    <span class="label-tag">핵심 요약</span>
+    <span class="label-rest">정의</span>
+  </h2>
+  <blockquote class="reveal">
+    DDL은 테이블·뷰·인덱스 같은 <strong>객체를 만들고 바꾸고 지우는 명령어</strong>들이다 (<code>CREATE</code>, <code>ALTER</code>, <code>DROP</code>, <code>TRUNCATE</code>, <code>RENAME</code>).
+  </blockquote>
+
+  <!-- 개념 도식화 — DDL 5종 -->
+  <h2 class="section-label sec-diagram reveal">
+    <span class="label-tag">개념 도식화</span>
+    <span class="label-rest">DDL 명령 5종</span>
+  </h2>
+  <div class="cls-row cols-4 reveal">
+    <div class="cls-card">
+      <span class="badge">CREATE</span>
+      <div class="name">객체 생성</div>
+      <div class="ex">테이블 / 뷰 / 인덱스 등</div>
+    </div>
+    <div class="cls-card">
+      <span class="badge b-info">ALTER</span>
+      <div class="name">구조 변경</div>
+      <div class="ex">컬럼 · 제약조건 추가/변경/삭제</div>
+    </div>
+    <div class="cls-card">
+      <span class="badge b-event">DROP</span>
+      <div class="name">객체 자체 삭제</div>
+      <div class="ex">테이블·뷰 그 자체가 사라짐</div>
+    </div>
+    <div class="cls-card">
+      <span class="badge b-warn">TRUNCATE</span>
+      <div class="name">데이터만 비움</div>
+      <div class="ex">구조 유지 · 롤백 불가 · 매우 빠름</div>
+    </div>
+  </div>
+  <div class="cls-row cols-2 reveal">
+    <div class="cls-card">
+      <span class="badge">RENAME</span>
+      <div class="name">이름 변경</div>
+      <div class="ex">테이블/객체 이름 바꾸기</div>
+    </div>
+    <div class="cls-card">
+      <span class="badge b-event">자동 COMMIT</span>
+      <div class="name">DDL 공통 특성</div>
+      <div class="ex">실행 즉시 영구 반영 · <code>ROLLBACK</code> 불가</div>
+    </div>
+  </div>
+
+  <h3 class="reveal">DDL 자동 COMMIT 시퀀스</h3>
+  <div class="mermaid reveal">
+sequenceDiagram
+    participant U as User
+    participant DB
+    participant Disk
+    Note over U,DB: (사전 DML이 있다면 함께 묶여 COMMIT 됨)
+    U->>DB: ALTER TABLE EMP ADD ...
+    DB->>DB: 펜딩 트랜잭션 자동 COMMIT
+    DB->>Disk: DDL 영구 반영
+    Note over Disk: ROLLBACK 불가
+    DB-->>U: Table altered.
+  </div>
+
+  <!-- SQL 실전 -->
+  <h2 class="section-label sec-sql reveal">
+    <span class="label-tag">SQL 실전</span>
+    <span class="label-rest">CREATE / ALTER / DROP / TRUNCATE / RENAME</span>
+  </h2>
+
+  <h3 class="reveal">CREATE — 객체 생성</h3>
+  <p class="reveal" style="font-size: 13px; color: var(--fg-3); margin: 8px 0 4px;">예시 데이터 — 데이터베이스 스키마 (변경 전, 테이블 없음)</p>
+  <div class="ba-side before reveal" style="max-width: 460px;">
+    <span class="ba-tag">SCHEMA</span>
+    <h4 class="ba-h">스키마 (변경 전)</h4>
+    <div class="mini-table" style="grid-template-columns: 1fr;">
+      <div class="h">테이블 목록</div>
+      <div class="c" style="color: var(--fg-4);">(EMP 없음)</div>
+    </div>
+  </div>
+  <pre class="reveal"><button class="copy-btn">복사</button><code><span class="sql-kw">CREATE TABLE</span> <span class="sql-name">EMP</span> (
+    <span class="sql-type">EMP_ID</span>    <span class="sql-type">NUMBER</span>       <span class="sql-kw">PRIMARY KEY</span>,
+    <span class="sql-type">NAME</span>      <span class="sql-type">VARCHAR2</span>(<span class="sql-num">50</span>) <span class="sql-kw">NOT NULL</span>,
+    <span class="sql-type">SAL</span>       <span class="sql-type">NUMBER</span>       <span class="sql-kw">DEFAULT</span> <span class="sql-num">0</span>,
+    <span class="sql-type">DEPT_ID</span>   <span class="sql-type">VARCHAR2</span>(<span class="sql-num">10</span>),
+    <span class="sql-type">HIRE_DATE</span> <span class="sql-type">DATE</span>         <span class="sql-kw">DEFAULT</span> <span class="sql-kw">SYSDATE</span>,
+    <span class="sql-kw">CONSTRAINT</span> <span class="sql-name">FK_EMP_DEPT</span> <span class="sql-kw">FOREIGN KEY</span> (<span class="sql-type">DEPT_ID</span>) <span class="sql-kw">REFERENCES</span> <span class="sql-name">DEPT</span>(<span class="sql-type">DEPT_ID</span>)
+);
+<span class="sql-cm">-- Table created.</span></code></pre>
+  <p class="reveal" style="font-size: 13px; color: var(--fg-3); margin: 8px 0 4px;">↓ 실행 후 (EMP 테이블 구조)</p>
+  <table class="reveal">
+    <thead><tr><th>컬럼</th><th>자료형</th><th>제약</th></tr></thead>
+    <tbody>
+      <tr><td>EMP_ID</td><td>NUMBER</td><td>PRIMARY KEY</td></tr>
+      <tr><td>NAME</td><td>VARCHAR2(50)</td><td>NOT NULL</td></tr>
+      <tr><td>SAL</td><td>NUMBER</td><td>DEFAULT 0</td></tr>
+      <tr><td>DEPT_ID</td><td>VARCHAR2(10)</td><td>FK → DEPT(DEPT_ID)</td></tr>
+      <tr><td>HIRE_DATE</td><td>DATE</td><td>DEFAULT SYSDATE</td></tr>
+    </tbody>
+  </table>
+  <p class="reveal" style="font-size: 12.5px; color: var(--fg-3); margin: 0 0 12px;">→ 5개 컬럼·1개 FK 제약을 가진 빈 테이블 생성. DDL이라 실행 즉시 자동 COMMIT.</p>
+
+  <h4 class="reveal">테이블 명명 규칙</h4>
+  <table class="reveal">
+    <thead>
+      <tr><th>규칙</th><th>설명</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>영문/숫자/<code>_</code>만</td><td>한글, 특수문자 불가</td></tr>
+      <tr><td>첫 글자는 영문</td><td>숫자로 시작 불가</td></tr>
+      <tr><td>예약어 사용 불가</td><td>SELECT, FROM 등</td></tr>
+      <tr><td>길이 30바이트 이내</td><td>Oracle 11g 이하 30 / 12.2+ 128 (시험은 30 기준)</td></tr>
+      <tr><td>동일 사용자 내 중복 불가</td><td>—</td></tr>
+    </tbody>
+  </table>
+
+  <!-- 제약조건 — fn-grid 인포그래픽 -->
+  <h2 class="reveal">제약조건 (Constraints)</h2>
+  <div class="fn-grid cols-3 reveal">
+    <div class="fn-card">
+      <div class="name">PRIMARY KEY</div>
+      <div class="desc">기본키 = <strong>UNIQUE + NOT NULL</strong>. <a href="./1-1-5_식별자.html">식별자</a> 역할 · 테이블당 1개</div>
+      <div class="ex">EMP_ID NUMBER PRIMARY KEY</div>
+    </div>
+    <div class="fn-card">
+      <div class="name">FOREIGN KEY</div>
+      <div class="desc">외래키. 부모의 PK 또는 UNIQUE 컬럼을 참조</div>
+      <div class="ex">FOREIGN KEY (DEPT_ID) REFERENCES DEPT(DEPT_ID)</div>
+    </div>
+    <div class="fn-card">
+      <div class="name">UNIQUE</div>
+      <div class="desc">중복 불가. <a href="./1-2-4_NULL속성의이해.html">NULL</a>은 <strong>허용</strong> · 여러 개 가능</div>
+      <div class="ex">EMAIL VARCHAR2(100) UNIQUE</div>
+    </div>
+    <div class="fn-card">
+      <div class="name">NOT NULL</div>
+      <div class="desc">NULL 입력 불가</div>
+      <div class="ex">NAME VARCHAR2(50) NOT NULL</div>
+    </div>
+    <div class="fn-card">
+      <div class="name">CHECK</div>
+      <div class="desc">컬럼 값이 조건을 만족해야 함</div>
+      <div class="ex">CHECK (SAL &gt; 0)</div>
+    </div>
+    <div class="fn-card">
+      <div class="name">DEFAULT</div>
+      <div class="desc">값 미지정 시 기본값으로 채움</div>
+      <div class="ex">SAL NUMBER DEFAULT 0</div>
+    </div>
+  </div>
+
+  <h3 class="reveal">PK vs UNIQUE</h3>
+  <table class="reveal">
+    <thead>
+      <tr><th>비교</th><th>PRIMARY KEY</th><th>UNIQUE</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>중복</td><td>불가</td><td>불가</td></tr>
+      <tr><td>NULL</td><td>불가</td><td>허용</td></tr>
+      <tr><td>테이블당 개수</td><td>1개</td><td>여러 개</td></tr>
+    </tbody>
+  </table>
+
+  <h3 class="reveal">FK 옵션</h3>
+  <pre class="reveal"><button class="copy-btn">복사</button><code><span class="sql-kw">FOREIGN KEY</span> (<span class="sql-type">DEPT_ID</span>) <span class="sql-kw">REFERENCES</span> <span class="sql-name">DEPT</span>(<span class="sql-type">DEPT_ID</span>)
+    <span class="sql-kw">ON DELETE CASCADE</span>       <span class="sql-cm">-- 부모 삭제 시 자식도 삭제</span>
+    <span class="sql-kw">ON DELETE SET NULL</span>      <span class="sql-cm">-- 부모 삭제 시 자식 FK NULL</span></code></pre>
+
+  <!-- ALTER -->
+  <h2 class="reveal">ALTER — 구조 변경</h2>
+  <p class="reveal" style="font-size: 13px; color: var(--fg-3); margin: 8px 0 4px;">예시 데이터 — EMP 테이블 (변경 전)</p>
+  <div class="ba-side before reveal" style="max-width: 460px;">
+    <span class="ba-tag">EMP</span>
+    <h4 class="ba-h">사원 테이블 구조 (변경 전)</h4>
+    <div class="mini-table cols-2">
+      <div class="h">컬럼</div><div class="h">자료형</div>
+      <div class="c">EMP_ID</div><div class="c">NUMBER (PK)</div>
+      <div class="c">NAME</div><div class="c">VARCHAR2(50)</div>
+      <div class="c">SAL</div><div class="c">NUMBER</div>
+      <div class="c">DEPT_ID</div><div class="c">VARCHAR2(10)</div>
+      <div class="c">HIRE_DATE</div><div class="c">DATE</div>
+    </div>
+  </div>
+  <pre class="reveal"><button class="copy-btn">복사</button><code><span class="sql-cm">-- 컬럼 추가</span>
+<span class="sql-kw">ALTER TABLE</span> <span class="sql-name">EMP</span> <span class="sql-kw">ADD</span> (<span class="sql-type">PHONE</span> <span class="sql-type">VARCHAR2</span>(<span class="sql-num">20</span>));
+
+<span class="sql-cm">-- 컬럼 변경</span>
+<span class="sql-kw">ALTER TABLE</span> <span class="sql-name">EMP</span> <span class="sql-kw">MODIFY</span> (<span class="sql-type">PHONE</span> <span class="sql-type">VARCHAR2</span>(<span class="sql-num">30</span>));
+
+<span class="sql-cm">-- 컬럼 이름 변경</span>
+<span class="sql-kw">ALTER TABLE</span> <span class="sql-name">EMP</span> <span class="sql-kw">RENAME COLUMN</span> <span class="sql-type">PHONE</span> <span class="sql-kw">TO</span> <span class="sql-type">MOBILE</span>;
+
+<span class="sql-cm">-- 컬럼 삭제</span>
+<span class="sql-kw">ALTER TABLE</span> <span class="sql-name">EMP</span> <span class="sql-kw">DROP COLUMN</span> <span class="sql-type">MOBILE</span>;
+
+<span class="sql-cm">-- 제약조건 추가/삭제</span>
+<span class="sql-kw">ALTER TABLE</span> <span class="sql-name">EMP</span> <span class="sql-kw">ADD CONSTRAINT</span> <span class="sql-name">UQ_NAME</span> <span class="sql-kw">UNIQUE</span> (<span class="sql-type">NAME</span>);
+<span class="sql-kw">ALTER TABLE</span> <span class="sql-name">EMP</span> <span class="sql-kw">DROP CONSTRAINT</span> <span class="sql-name">UQ_NAME</span>;</code></pre>
+  <p class="reveal" style="font-size: 13px; color: var(--fg-3); margin: 8px 0 4px;">↓ 실행 후 (명령별 EMP 컬럼 변화)</p>
+  <table class="reveal">
+    <thead><tr><th>명령</th><th>EMP 컬럼 구성</th><th>비고</th></tr></thead>
+    <tbody>
+      <tr><td>CREATE TABLE EMP</td><td>EMP_ID, NAME, SAL, DEPT_ID, HIRE_DATE</td><td>초기 5개</td></tr>
+      <tr><td>ADD (PHONE VARCHAR2(20))</td><td>+ PHONE</td><td>6개 (VARCHAR2(20))</td></tr>
+      <tr><td>MODIFY (PHONE VARCHAR2(30))</td><td>(동일)</td><td>PHONE 길이 30으로 확장</td></tr>
+      <tr><td>RENAME COLUMN PHONE TO MOBILE</td><td>… MOBILE</td><td>이름 변경</td></tr>
+      <tr><td>DROP COLUMN MOBILE</td><td>다시 5개</td><td>컬럼 제거 (ROLLBACK 불가)</td></tr>
+    </tbody>
+  </table>
+  <p class="reveal" style="font-size: 12.5px; color: var(--fg-3); margin: 0 0 12px;">→ ADD/MODIFY/RENAME COLUMN/DROP COLUMN으로 구조만 바뀐다. 모두 DDL이라 실행 즉시 자동 COMMIT 되어 되돌릴 수 없다.</p>
+
+  <!-- DROP -->
+  <h2 class="reveal">DROP — 객체 삭제</h2>
+  <p class="reveal" style="font-size: 13px; color: var(--fg-3); margin: 8px 0 4px;">예시 데이터 — EMP 테이블 (변경 전 · 데이터 일부 존재)</p>
+  <div class="ba-side before reveal" style="max-width: 460px;">
+    <span class="ba-tag">EMP</span>
+    <h4 class="ba-h">사원 테이블 (변경 전)</h4>
+    <div class="mini-table cols-3">
+      <div class="h">EMP_ID</div><div class="h">NAME</div><div class="h">SAL</div>
+      <div class="c">1</div><div class="c">김</div><div class="c">3000</div>
+      <div class="c">2</div><div class="c">이</div><div class="c">4000</div>
+    </div>
+  </div>
+  <pre class="reveal"><button class="copy-btn">복사</button><code><span class="sql-kw">DROP TABLE</span> <span class="sql-name">EMP</span>;                  <span class="sql-cm">-- 테이블 자체 삭제</span>
+<span class="sql-kw">DROP TABLE</span> <span class="sql-name">EMP</span> <span class="sql-kw">CASCADE CONSTRAINTS</span>;  <span class="sql-cm">-- 참조 제약까지 함께</span>
+<span class="sql-kw">DROP TABLE</span> <span class="sql-name">EMP</span> <span class="sql-kw">PURGE</span>;            <span class="sql-cm">-- 휴지통도 비움(복구 불가)</span></code></pre>
+  <p class="reveal" style="font-size: 12.5px; color: var(--fg-3); margin: 0 0 12px;">→ 객체 자체가 사라짐. 컬럼 정의·데이터·인덱스 모두 함께 삭제되며 ROLLBACK 불가.</p>
+
+  <!-- TRUNCATE -->
+  <h2 class="reveal">TRUNCATE — 데이터만 비우기</h2>
+  <p class="reveal" style="font-size: 13px; color: var(--fg-3); margin: 8px 0 4px;">예시 데이터 — EMP 테이블 (변경 전 · 데이터 존재)</p>
+  <div class="ba-side before reveal" style="max-width: 460px;">
+    <span class="ba-tag">EMP</span>
+    <h4 class="ba-h">사원 테이블 (변경 전)</h4>
+    <div class="mini-table cols-3">
+      <div class="h">EMP_ID</div><div class="h">NAME</div><div class="h">SAL</div>
+      <div class="c">1</div><div class="c">김</div><div class="c">3000</div>
+      <div class="c">2</div><div class="c">이</div><div class="c">4000</div>
+      <div class="c">3</div><div class="c">박</div><div class="c">3500</div>
+    </div>
+  </div>
+  <pre class="reveal"><button class="copy-btn">복사</button><code><span class="sql-kw">TRUNCATE TABLE</span> <span class="sql-name">EMP</span>;
+<span class="sql-cm">-- Table truncated.</span></code></pre>
+  <p class="reveal" style="font-size: 13px; color: var(--fg-3); margin: 8px 0 4px;">↓ 실행 후 (구조 유지, 데이터만 0행)</p>
+  <div class="ba-side after reveal" style="max-width: 460px;">
+    <span class="ba-tag">EMP</span>
+    <h4 class="ba-h">사원 테이블 (TRUNCATE 후)</h4>
+    <div class="mini-table cols-3">
+      <div class="h">EMP_ID</div><div class="h">NAME</div><div class="h">SAL</div>
+      <div class="c" style="grid-column: 1 / -1; color: var(--fg-4);">(0행 — 컬럼 정의는 유지)</div>
+    </div>
+  </div>
+  <p class="reveal" style="font-size: 12.5px; color: var(--fg-3); margin: 0 0 12px;">→ 행 전부 삭제, 구조는 그대로. 자동 COMMIT 되어 ROLLBACK 불가하지만 DELETE보다 빠르다.</p>
+  <table class="reveal">
+    <thead>
+      <tr><th>TRUNCATE 특징</th><th>설명</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>데이터 모두 삭제</td><td>됨</td></tr>
+      <tr><td>테이블 구조</td><td>유지</td></tr>
+      <tr><td>롤백</td><td>불가</td></tr>
+      <tr><td>속도</td><td>매우 빠름</td></tr>
+    </tbody>
+  </table>
+
+  <!-- RENAME -->
+  <h2 class="reveal">RENAME — 이름 변경</h2>
+  <pre class="reveal"><button class="copy-btn">복사</button><code><span class="sql-kw">RENAME</span> <span class="sql-name">EMP</span> <span class="sql-kw">TO</span> <span class="sql-name">EMPLOYEE</span>;
+<span class="sql-kw">ALTER TABLE</span> <span class="sql-name">EMP</span> <span class="sql-kw">RENAME TO</span> <span class="sql-name">EMPLOYEE</span>;  <span class="sql-cm">-- 동일</span></code></pre>
+
+  <!-- DELETE vs TRUNCATE vs DROP — threeway 인포그래픽 -->
+  <h2 class="section-label sec-compare reveal">
+    <span class="label-tag">비교</span>
+    <span class="label-rest">DELETE vs TRUNCATE vs DROP</span>
+  </h2>
+  <div class="threeway cols-3 reveal">
+    <div class="threeway-card t-info">
+      <div class="glyph">DELETE</div>
+      <div class="name">DML · 행 단위 삭제</div>
+      <div class="desc"><strong>WHERE 가능</strong> · ROLLBACK 가능 · 자동 COMMIT 없음 · 느림</div>
+    </div>
+    <div class="threeway-card t-warn">
+      <div class="glyph">TRUNCATE</div>
+      <div class="name">DDL · 데이터 전부 삭제</div>
+      <div class="desc">구조 <strong>유지</strong> · ROLLBACK 불가 · 자동 COMMIT · 빠름</div>
+    </div>
+    <div class="threeway-card t-danger">
+      <div class="glyph">DROP</div>
+      <div class="name">DDL · 객체 자체 삭제</div>
+      <div class="desc">구조까지 <strong>삭제</strong> · ROLLBACK 불가 · 자동 COMMIT · 매우 빠름</div>
+    </div>
+  </div>
+  <table class="reveal">
+    <thead>
+      <tr><th>비교</th><th>DELETE</th><th>TRUNCATE</th><th>DROP</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>분류</td><td><a href="./2-3-1_DML.html">DML</a></td><td>DDL</td><td>DDL</td></tr>
+      <tr><td>데이터</td><td>삭제</td><td>모두 삭제</td><td>삭제</td></tr>
+      <tr><td>구조</td><td>유지</td><td>유지</td><td>삭제</td></tr>
+      <tr><td>ROLLBACK</td><td>가능</td><td>불가</td><td>불가</td></tr>
+      <tr><td>WHERE</td><td>가능</td><td>불가</td><td>—</td></tr>
+      <tr><td>속도</td><td>느림</td><td>빠름</td><td>매우 빠름</td></tr>
+      <tr><td>자동 COMMIT</td><td>없음</td><td>있음</td><td>있음</td></tr>
+    </tbody>
+  </table>
+
+  <!-- VIEW -->
+  <h2 class="reveal">VIEW (뷰)</h2>
+  <pre class="reveal"><button class="copy-btn">복사</button><code><span class="sql-kw">CREATE VIEW</span> <span class="sql-name">V_EMP_HIGH</span> <span class="sql-kw">AS</span>
+<span class="sql-kw">SELECT</span> <span class="sql-type">NAME</span>, <span class="sql-type">SAL</span> <span class="sql-kw">FROM</span> <span class="sql-name">EMP</span> <span class="sql-kw">WHERE</span> <span class="sql-type">SAL</span> &gt; <span class="sql-num">5000</span>;
+
+<span class="sql-kw">SELECT</span> * <span class="sql-kw">FROM</span> <span class="sql-name">V_EMP_HIGH</span>;     <span class="sql-cm">-- 사용</span>
+<span class="sql-kw">DROP VIEW</span> <span class="sql-name">V_EMP_HIGH</span>;</code></pre>
+  <table class="reveal">
+    <thead>
+      <tr><th>뷰의 장점</th><th></th></tr>
+    </thead>
+    <tbody>
+      <tr><td>복잡한 쿼리를 간단한 이름으로</td><td>됨</td></tr>
+      <tr><td>보안(특정 컬럼/행만 노출 — <a href="./2-3-4_DCL.html">DCL</a>과 함께 권한 통제)</td><td>됨</td></tr>
+      <tr><td>실제 테이블 아님(가상)</td><td>됨</td></tr>
+    </tbody>
+  </table>
+
+  <!-- 인덱스 -->
+  <h2 class="reveal">인덱스 (INDEX)</h2>
+  <pre class="reveal"><button class="copy-btn">복사</button><code><span class="sql-kw">CREATE INDEX</span> <span class="sql-name">IDX_EMP_NAME</span> <span class="sql-kw">ON</span> <span class="sql-name">EMP</span>(<span class="sql-type">NAME</span>);
+<span class="sql-kw">DROP INDEX</span> <span class="sql-name">IDX_EMP_NAME</span>;</code></pre>
+  <p class="reveal">도서관의 목차 같은 역할이다. 검색 속도는 빨라지지만 입력·수정 속도는 느려질 수 있다.</p>
+
+  <!-- Before & After -->
+  <h2 class="section-label sec-compare reveal">
+    <span class="label-tag">Before &amp; After</span>
+    <span class="label-rest">CREATE → ALTER → TRUNCATE → DROP 추적</span>
+  </h2>
+  <p class="reveal">EMP_ID(PK)·NAME(NOT NULL)·SAL(DEFAULT 0)을 가진 EMP 테이블을 만들고, 거기에 PHONE 컬럼을 더한 뒤, 같은 테이블에 TRUNCATE와 DROP을 차례로 적용해 본다. <strong>데이터·구조·테이블 자체</strong>가 어느 명령에서 사라지는지를 비교한다.</p>
+
+  <div class="step-flow cols-4 reveal">
+    <div class="step-card">
+      <div class="step">CREATE 후</div>
+      <div class="name">EMP 신규 생성</div>
+      <div class="ex">EMP_ID (PK)<br>NAME (NOT NULL)<br>SAL (DEFAULT 0)</div>
+      <span class="arrow-next">›</span>
+    </div>
+    <div class="step-card">
+      <div class="step">ALTER ADD</div>
+      <div class="name">컬럼 추가</div>
+      <div class="ex">EMP_ID (PK)<br>NAME · SAL<br><strong>PHONE (추가됨)</strong></div>
+      <span class="arrow-next">›</span>
+    </div>
+    <div class="step-card">
+      <div class="step">TRUNCATE</div>
+      <div class="name">데이터만 비움</div>
+      <div class="ex">구조 유지<br>EMP_ID · NAME · SAL · PHONE<br><strong>데이터 0행</strong></div>
+      <span class="arrow-next">›</span>
+    </div>
+    <div class="step-card">
+      <div class="step">DROP</div>
+      <div class="name">테이블 자체 삭제</div>
+      <div class="ex"><strong>객체가 사라짐</strong><br>(구조 + 데이터 모두)</div>
+    </div>
+  </div>
+
+  <table class="reveal">
+    <thead>
+      <tr><th>명령</th><th>구조</th><th>데이터</th><th>ROLLBACK</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><code>CREATE TABLE EMP</code></td><td>신규</td><td>0행</td><td>불가 (자동 COMMIT)</td></tr>
+      <tr><td><code>ALTER ... ADD PHONE</code></td><td>컬럼 추가</td><td>유지</td><td>불가</td></tr>
+      <tr><td><code>TRUNCATE TABLE EMP</code></td><td>유지</td><td>모두 비움</td><td>불가</td></tr>
+      <tr><td><code>DROP TABLE EMP</code></td><td>객체 삭제</td><td>—</td><td>불가</td></tr>
+    </tbody>
+  </table>
+
+  <p class="reveal">ALTER는 컬럼을 추가해 구조를 키우고, TRUNCATE는 데이터만 비우되 컬럼 정의(EMP_ID·NAME·SAL·PHONE)는 그대로 남기며, DROP은 테이블 객체 자체를 지운다. 셋 다 DDL이라 실행 즉시 <strong>자동 COMMIT</strong>되어 ROLLBACK으로 되돌릴 수 없다는 점이 핵심이다. "데이터만 비우고 싶다 → TRUNCATE", "테이블 자체가 필요 없다 → DROP", "구조만 바꾼다 → ALTER" 식으로 의도와 명령을 정확히 매칭해야 한다.</p>
+
+  <div class="reveal" style="margin: 40px 0 0; padding: 22px 24px; background: linear-gradient(135deg, var(--point-050), var(--bg-card)); border: 1px solid var(--point-100); border-radius: 12px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;">
+    <div>
+      <div style="font-size: 12px; font-weight: 800; color: var(--point-600); letter-spacing: 0.04em; margin-bottom: 4px;">시험 대비</div>
+      <div style="font-size: 14px; color: var(--fg-2);">이 챕터의 함정·정답과 30초 정리는 통합 시험 대비 페이지에서 볼 수 있습니다.</div>
+    </div>
+    <a href="./exam-review.html#ch-2-3-3" style="font-size: 14px; font-weight: 700; color: var(--point-600); text-decoration: none; padding: 8px 14px; border: 1px solid var(--point-300); border-radius: 8px; background: var(--bg-card); white-space: nowrap;">시험 대비 보기 →</a>
+  </div>
+
+  </article>
+</main>
+
+<script src="./common.js"></script>
+</body>
+</html>

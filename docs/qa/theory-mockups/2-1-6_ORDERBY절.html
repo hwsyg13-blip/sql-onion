@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="light">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ORDER BY 절 — SQLD양파 이론</title>
+<link rel="stylesheet" href="./common.css">
+</head>
+<body>
+<nav class="topnav">
+  <div class="topnav-inner">
+    <div class="topnav-brand">SQLD양파</div>
+    <div class="topnav-links">
+      <a href="#">홈</a><a href="#" class="active">이론</a><a href="#">기출 CBT</a><a href="#">모의고사</a><a href="#">Pro</a>
+    </div>
+  </div>
+</nav>
+<main class="page-shell">
+  <div class="breadcrumb"><a href="#">이론</a><span class="sep">›</span><a href="#">2과목 SQL 기본 및 활용</a><span class="sep">›</span><a href="#">2-1. SQL 기본</a></div>
+  <header class="page-title-block">
+    <h1>ORDER BY 절</h1>
+    <p class="subtitle">결과 정렬 · ASC/DESC · 컬럼명·별칭·번호 모두 가능 · NULL 위치는 DBMS별 다름</p>
+  </header>
+  <article class="theory-md">
+
+  <!-- 핵심 요약 -->
+  <h2 class="section-label sec-summary reveal">
+    <span class="label-tag">핵심 요약</span>
+    <span class="label-rest">정의</span>
+  </h2>
+  <blockquote class="reveal">
+    ORDER BY는 결과를 <strong>어떤 순서로 보여줄지</strong> 정렬하는 절이다. SELECT 문에서 <strong>가장 마지막에 실행</strong>된다.
+  </blockquote>
+  <div class="ex-box reveal">
+    책장 정리처럼 "가나다순(<code>ASC</code>)·최신순(<code>DESC</code>)·분야별 → 분야 내 가나다순(<code>ORDER BY 분야, 책이름</code>)" 식으로 1차·2차 정렬이 가능하다.
+  </div>
+
+  <!-- 개념 도식화 — 위치 -->
+  <h2 class="section-label sec-diagram reveal">
+    <span class="label-tag">개념 도식화</span>
+    <span class="label-rest">ORDER BY의 위치</span>
+  </h2>
+  <pre class="reveal"><button class="copy-btn">복사</button><code><span class="sql-kw">SELECT</span>  ...
+<span class="sql-kw">FROM</span>    ...
+<span class="sql-kw">WHERE</span>   ...
+<span class="sql-kw">GROUP BY</span> ...
+<span class="sql-kw">HAVING</span>  ...
+<span class="sql-kw">ORDER BY</span> ...   <span class="sql-cm">← 항상 맨 마지막</span></code></pre>
+
+  <p class="reveal">ORDER BY는 SELECT 다음에 실행되는 <strong>가장 마지막 단계</strong>다. 그래서 SELECT에서 만든 별칭과 컬럼 번호를 사용할 수 있다.</p>
+
+  <!-- ASC vs DESC — 인포그래픽 -->
+  <h2 class="reveal">ASC vs DESC</h2>
+  <div class="cls-row cols-2 reveal">
+    <div class="cls-card">
+      <span class="badge">ASC (기본)</span>
+      <div class="name">오름차순</div>
+      <div class="ex">작 → 큰, ㄱ → ㅎ, 1 → 9 · 생략 시 ASC</div>
+    </div>
+    <div class="cls-card">
+      <span class="badge b-event">DESC</span>
+      <div class="name">내림차순</div>
+      <div class="ex">큰 → 작 · 명시 필수</div>
+    </div>
+  </div>
+  <pre class="reveal"><button class="copy-btn">복사</button><code><span class="sql-kw">ORDER BY</span> <span class="sql-type">SAL</span>          <span class="sql-cm">-- ASC(기본)</span>
+<span class="sql-kw">ORDER BY</span> <span class="sql-type">SAL</span> <span class="sql-kw">ASC</span>      <span class="sql-cm">-- 명시</span>
+<span class="sql-kw">ORDER BY</span> <span class="sql-type">SAL</span> <span class="sql-kw">DESC</span>     <span class="sql-cm">-- 내림차순</span></code></pre>
+
+  <!-- 정렬 기준 작성 방법 3가지 — 인포그래픽 -->
+  <h2 class="reveal">정렬 기준 작성 방법 3가지</h2>
+  <div class="trait-grid cols-3 reveal">
+    <div class="trait-card">
+      <div class="num">1</div>
+      <div class="label">컬럼명</div>
+      <div class="desc"><code>ORDER BY SAL DESC</code></div>
+    </div>
+    <div class="trait-card">
+      <div class="num">2</div>
+      <div class="label">별칭(Alias)</div>
+      <div class="desc"><code>ORDER BY ANNUAL_SAL DESC</code></div>
+    </div>
+    <div class="trait-card">
+      <div class="num">3</div>
+      <div class="label">N번째 컬럼(정수)</div>
+      <div class="desc"><code>ORDER BY 2 DESC</code></div>
+    </div>
+  </div>
+  <pre class="reveal"><button class="copy-btn">복사</button><code><span class="sql-kw">SELECT</span> <span class="sql-type">NAME</span>, <span class="sql-type">SAL</span> <span class="sql-kw">FROM</span> <span class="sql-name">EMP</span>
+<span class="sql-cm">-- 방법 1: 컬럼명</span>
+<span class="sql-kw">ORDER BY</span> <span class="sql-type">SAL</span> <span class="sql-kw">DESC</span>;
+
+<span class="sql-cm">-- 방법 2: SELECT 별칭(Alias)</span>
+<span class="sql-kw">SELECT</span> <span class="sql-type">NAME</span>, <span class="sql-type">SAL</span>*<span class="sql-num">12</span> <span class="sql-kw">AS</span> <span class="sql-type">ANNUAL_SAL</span> <span class="sql-kw">FROM</span> <span class="sql-name">EMP</span>
+<span class="sql-kw">ORDER BY</span> <span class="sql-type">ANNUAL_SAL</span> <span class="sql-kw">DESC</span>;
+
+<span class="sql-cm">-- 방법 3: SELECT의 N번째 컬럼(정수)</span>
+<span class="sql-kw">SELECT</span> <span class="sql-type">NAME</span>, <span class="sql-type">SAL</span> <span class="sql-kw">FROM</span> <span class="sql-name">EMP</span>
+<span class="sql-kw">ORDER BY</span> <span class="sql-num">2</span> <span class="sql-kw">DESC</span>;        <span class="sql-cm">-- 2번째 컬럼 = SAL</span></code></pre>
+  <p class="reveal">ORDER BY는 SELECT 다음에 실행되므로 <strong>별칭 사용이 가능</strong>하다(WHERE, GROUP BY는 불가).</p>
+
+  <!-- 다중 정렬 -->
+  <h2 class="reveal">다중 정렬</h2>
+  <p class="reveal" style="font-size: 13px; color: var(--fg-3); margin: 8px 0 4px;">예시 데이터</p>
+  <div class="ba-side before reveal" style="max-width: 460px;">
+    <span class="ba-tag">EMP</span>
+    <h4 class="ba-h">사원 테이블</h4>
+    <div class="mini-table cols-3">
+      <div class="h">NAME</div><div class="h">DEPT_ID</div><div class="h">SAL</div>
+      <div class="c">김</div><div class="c">D1</div><div class="c">3000</div>
+      <div class="c">이</div><div class="c">D2</div><div class="c">4000</div>
+      <div class="c">박</div><div class="c">D1</div><div class="c">2500</div>
+      <div class="c">최</div><div class="c">D2</div><div class="c">4500</div>
+      <div class="c">홍</div><div class="c">D1</div><div class="c">4000</div>
+    </div>
+  </div>
+  <pre class="reveal"><button class="copy-btn">복사</button><code><span class="sql-cm">-- 부서별로 묶고, 같은 부서 안에서는 급여 높은 순</span>
+<span class="sql-kw">SELECT</span> <span class="sql-type">NAME</span>, <span class="sql-type">DEPT_ID</span>, <span class="sql-type">SAL</span>
+<span class="sql-kw">FROM</span>   <span class="sql-name">EMP</span>
+<span class="sql-kw">ORDER BY</span> <span class="sql-type">DEPT_ID</span> <span class="sql-kw">ASC</span>, <span class="sql-type">SAL</span> <span class="sql-kw">DESC</span>;</code></pre>
+  <p class="reveal" style="font-size: 13px; color: var(--fg-3); margin: 8px 0 4px;">↓ 결과</p>
+  <table class="reveal">
+    <thead><tr><th>NAME</th><th>DEPT_ID</th><th>SAL</th></tr></thead>
+    <tbody>
+      <tr><td>홍</td><td>D1</td><td>4000</td></tr>
+      <tr><td>김</td><td>D1</td><td>3000</td></tr>
+      <tr><td>박</td><td>D1</td><td>2500</td></tr>
+      <tr><td>최</td><td>D2</td><td>4500</td></tr>
+      <tr><td>이</td><td>D2</td><td>4000</td></tr>
+    </tbody>
+  </table>
+  <p class="reveal" style="font-size: 12.5px; color: var(--fg-3); margin: 0 0 12px;">→ DEPT_ID 오름차순으로 묶고, 같은 부서 안에서는 SAL 내림차순으로 2차 정렬된다.</p>
+
+  <!-- NULL 정렬 — 인포그래픽 -->
+  <h2 class="section-label sec-compare reveal">
+    <span class="label-tag">비교</span>
+    <span class="label-rest">NULL의 정렬 순서 — DBMS별</span>
+  </h2>
+  <p class="reveal"><a href="./1-2-4_NULL속성의이해.html">NULL</a>은 비교 불가 값이므로 정렬에서도 DBMS마다 다르게 처리된다.</p>
+  <div class="threeway cols-2 reveal">
+    <div class="threeway-card t-info">
+      <div class="glyph">Oracle</div>
+      <div class="name">ASC = NULL <strong>마지막</strong></div>
+      <div class="desc">DESC = NULL <strong>처음</strong><br>"비어있는 값은 뒤로"</div>
+    </div>
+    <div class="threeway-card t-warn">
+      <div class="glyph">MS-SQL</div>
+      <div class="name">ASC = NULL <strong>처음</strong></div>
+      <div class="desc">DESC = NULL <strong>마지막</strong><br>Oracle과 정반대</div>
+    </div>
+  </div>
+  <table class="reveal">
+    <thead><tr><th>DBMS</th><th>ASC 기본</th><th>DESC 기본</th></tr></thead>
+    <tbody>
+      <tr><td>Oracle</td><td>NULL이 마지막</td><td>NULL이 처음</td></tr>
+      <tr><td>MS-SQL Server</td><td>NULL이 처음</td><td>NULL이 마지막</td></tr>
+    </tbody>
+  </table>
+  <p class="reveal">명시적 지정:</p>
+  <pre class="reveal"><button class="copy-btn">복사</button><code><span class="sql-kw">ORDER BY</span> <span class="sql-type">COMM</span> <span class="sql-kw">ASC NULLS FIRST</span>   <span class="sql-cm">-- NULL 먼저</span>
+<span class="sql-kw">ORDER BY</span> <span class="sql-type">COMM</span> <span class="sql-kw">ASC NULLS LAST</span>    <span class="sql-cm">-- NULL 마지막</span></code></pre>
+
+  <!-- NULL 위치 SQL + 결과 -->
+  <h3 class="reveal">NULL 위치 — SQL 예시 + 결과</h3>
+  <p class="reveal" style="font-size: 13px; color: var(--fg-3); margin: 8px 0 4px;">예시 데이터 (Oracle 기준)</p>
+  <div class="ba-side before reveal" style="max-width: 460px;">
+    <span class="ba-tag">EMP</span>
+    <h4 class="ba-h">사원 테이블</h4>
+    <div class="mini-table cols-2">
+      <div class="h">NAME</div><div class="h">COMM</div>
+      <div class="c">김</div><div class="c">100</div>
+      <div class="c">이</div><div class="c is-null">NULL</div>
+      <div class="c">박</div><div class="c">300</div>
+      <div class="c">최</div><div class="c is-null">NULL</div>
+      <div class="c">홍</div><div class="c">200</div>
+    </div>
+  </div>
+  <pre class="reveal"><button class="copy-btn">복사</button><code><span class="sql-kw">SELECT</span> <span class="sql-type">NAME</span>, <span class="sql-type">COMM</span> <span class="sql-kw">FROM</span> <span class="sql-name">EMP</span> <span class="sql-kw">ORDER BY</span> <span class="sql-type">COMM</span> <span class="sql-kw">ASC NULLS FIRST</span>;</code></pre>
+  <p class="reveal" style="font-size: 13px; color: var(--fg-3); margin: 8px 0 4px;">↓ 결과 (NULL이 먼저)</p>
+  <table class="reveal">
+    <thead><tr><th>NAME</th><th>COMM</th></tr></thead>
+    <tbody>
+      <tr><td>이</td><td style="color: var(--wrong-fg); font-weight: 700;">NULL</td></tr>
+      <tr><td>최</td><td style="color: var(--wrong-fg); font-weight: 700;">NULL</td></tr>
+      <tr><td>김</td><td>100</td></tr>
+      <tr><td>홍</td><td>200</td></tr>
+      <tr><td>박</td><td>300</td></tr>
+    </tbody>
+  </table>
+  <pre class="reveal"><button class="copy-btn">복사</button><code><span class="sql-kw">SELECT</span> <span class="sql-type">NAME</span>, <span class="sql-type">COMM</span> <span class="sql-kw">FROM</span> <span class="sql-name">EMP</span> <span class="sql-kw">ORDER BY</span> <span class="sql-type">COMM</span> <span class="sql-kw">ASC</span>;   <span class="sql-cm">-- Oracle 기본</span></code></pre>
+  <p class="reveal" style="font-size: 13px; color: var(--fg-3); margin: 8px 0 4px;">↓ 결과 (Oracle 기본 = NULLS LAST)</p>
+  <table class="reveal">
+    <thead><tr><th>NAME</th><th>COMM</th></tr></thead>
+    <tbody>
+      <tr><td>김</td><td>100</td></tr>
+      <tr><td>홍</td><td>200</td></tr>
+      <tr><td>박</td><td>300</td></tr>
+      <tr><td>이</td><td style="color: var(--wrong-fg); font-weight: 700;">NULL</td></tr>
+      <tr><td>최</td><td style="color: var(--wrong-fg); font-weight: 700;">NULL</td></tr>
+    </tbody>
+  </table>
+
+  <!-- SQL 실전 -->
+  <h2 class="section-label sec-sql reveal">
+    <span class="label-tag">SQL 실전</span>
+    <span class="label-rest">정렬 패턴</span>
+  </h2>
+  <pre class="reveal"><button class="copy-btn">복사</button><code><span class="sql-cm">-- 단일 컬럼</span>
+<span class="sql-kw">SELECT</span> <span class="sql-type">NAME</span>, <span class="sql-type">SAL</span> <span class="sql-kw">FROM</span> <span class="sql-name">EMP</span>
+<span class="sql-kw">ORDER BY</span> <span class="sql-type">SAL</span> <span class="sql-kw">DESC</span>;
+
+<span class="sql-cm">-- 다중 컬럼</span>
+<span class="sql-kw">SELECT</span> <span class="sql-type">NAME</span>, <span class="sql-type">DEPT_ID</span>, <span class="sql-type">SAL</span> <span class="sql-kw">FROM</span> <span class="sql-name">EMP</span>
+<span class="sql-kw">ORDER BY</span> <span class="sql-type">DEPT_ID</span>, <span class="sql-type">SAL</span> <span class="sql-kw">DESC</span>;
+
+<span class="sql-cm">-- 별칭으로</span>
+<span class="sql-kw">SELECT</span> <span class="sql-type">NAME</span>, <span class="sql-type">SAL</span>*<span class="sql-num">12</span> <span class="sql-kw">AS</span> <span class="sql-type">YEAR_SAL</span> <span class="sql-kw">FROM</span> <span class="sql-name">EMP</span>
+<span class="sql-kw">ORDER BY</span> <span class="sql-type">YEAR_SAL</span> <span class="sql-kw">DESC</span>;
+
+<span class="sql-cm">-- 컬럼 번호로</span>
+<span class="sql-kw">SELECT</span> <span class="sql-type">NAME</span>, <span class="sql-type">DEPT_ID</span>, <span class="sql-type">SAL</span> <span class="sql-kw">FROM</span> <span class="sql-name">EMP</span>
+<span class="sql-kw">ORDER BY</span> <span class="sql-num">3</span> <span class="sql-kw">DESC</span>, <span class="sql-num">2</span> <span class="sql-kw">ASC</span>;</code></pre>
+
+  <!-- Before & After -->
+  <h2 class="section-label sec-compare reveal">
+    <span class="label-tag">Before &amp; After</span>
+    <span class="label-rest">다중 정렬의 우선순위</span>
+  </h2>
+  <p class="reveal">EMP 5명을 부서별로 묶어 보여주되, 같은 부서 안에서는 급여가 높은 사람이 먼저 보이도록 정렬하는 상황. DEPT_ID(오름차순)와 SAL(내림차순)을 하나의 ORDER BY 절에 섞었을 때 결과 순서가 어떻게 결정되는지 확인한다.</p>
+  <p class="reveal" style="font-size: 13.5px; color: var(--fg-3);">EMP 테이블</p>
+  <table class="reveal">
+    <thead><tr><th>NAME</th><th>DEPT_ID</th><th>SAL</th></tr></thead>
+    <tbody>
+      <tr><td>김</td><td>D1</td><td>3000</td></tr>
+      <tr><td>이</td><td>D2</td><td>4000</td></tr>
+      <tr><td>박</td><td>D1</td><td>2500</td></tr>
+      <tr><td>최</td><td>D2</td><td>4500</td></tr>
+      <tr><td>홍</td><td>D1</td><td>4000</td></tr>
+    </tbody>
+  </table>
+  <div class="ba-flow reveal">
+    <div class="ba-side before">
+      <span class="ba-tag">BEFORE</span>
+      <h4 class="ba-h">정렬 안 된 원본</h4>
+      <div class="sql">SELECT NAME, DEPT_ID, SAL FROM EMP;</div>
+      <div class="mini-table cols-3">
+        <div class="h">NAME</div><div class="h">DEPT</div><div class="h">SAL</div>
+        <div class="c">김</div><div class="c">D1</div><div class="c">3000</div>
+        <div class="c">이</div><div class="c">D2</div><div class="c">4000</div>
+        <div class="c">박</div><div class="c">D1</div><div class="c">2500</div>
+        <div class="c">최</div><div class="c">D2</div><div class="c">4500</div>
+        <div class="c">홍</div><div class="c">D1</div><div class="c">4000</div>
+      </div>
+    </div>
+    <div class="ba-arrow">→</div>
+    <div class="ba-side after">
+      <span class="ba-tag">AFTER</span>
+      <h4 class="ba-h">DEPT_ID ASC, SAL DESC</h4>
+      <div class="sql">ORDER BY DEPT_ID ASC, SAL DESC;</div>
+      <div class="mini-table cols-3">
+        <div class="h">NAME</div><div class="h">DEPT</div><div class="h">SAL</div>
+        <div class="c">홍</div><div class="c">D1</div><div class="c">4000</div>
+        <div class="c">김</div><div class="c">D1</div><div class="c">3000</div>
+        <div class="c">박</div><div class="c">D1</div><div class="c">2500</div>
+        <div class="c">최</div><div class="c">D2</div><div class="c">4500</div>
+        <div class="c">이</div><div class="c">D2</div><div class="c">4000</div>
+      </div>
+    </div>
+  </div>
+  <p class="reveal">부서 오름차순 → 부서 내 급여 내림차순으로 정렬되었다. ORDER BY는 나열된 컬럼 순서대로 1차·2차·3차 정렬을 적용하고, ASC/DESC는 컬럼별로 따로 지정된다. 따라서 "DEPT_ID는 오름차순, SAL은 내림차순"처럼 키마다 방향이 달라도 한 줄에 함께 쓸 수 있다. 결과 순서를 사람 눈에 보일 형태로 확정해야 하는 보고서·페이지네이션·TopN 쿼리에서는 정렬 키를 의도대로 명시해두는 것이 안전하다.</p>
+
+  <!-- 주의사항 -->
+  <h2 class="reveal">ORDER BY 주의사항</h2>
+  <p class="reveal">ORDER BY는 정렬된 상위 N개만 추출하는 <a href="./2-2-5_TopN쿼리.html">TopN 쿼리</a>의 기반이 된다.</p>
+  <table class="reveal">
+    <thead><tr><th>주의</th><th>설명</th></tr></thead>
+    <tbody>
+      <tr><td>항상 맨 끝</td><td>UNION 등 집합연산자 사용 시도 마지막에 한 번만</td></tr>
+      <tr><td>숫자 정렬</td><td>1, 2, 10... 숫자 그대로</td></tr>
+      <tr><td>문자 정렬</td><td>'1', '10', '2'... <strong>사전순</strong> → 1, 10, 2</td></tr>
+      <tr><td>NULL 위치</td><td>DBMS별로 다름. 명시 권장</td></tr>
+      <tr><td>인덱스 활용</td><td>정렬 작업에 인덱스가 활용될 수 있음</td></tr>
+    </tbody>
+  </table>
+
+  <!-- SELECT 실행 순서 -->
+  <h2 class="reveal">SELECT 실행 순서</h2>
+  <table class="reveal">
+    <thead><tr><th>순서</th><th>절</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>FROM</td></tr>
+      <tr><td>2</td><td>WHERE</td></tr>
+      <tr><td>3</td><td>GROUP BY</td></tr>
+      <tr><td>4</td><td>HAVING</td></tr>
+      <tr><td>5</td><td>SELECT</td></tr>
+      <tr><td>6</td><td>ORDER BY</td></tr>
+    </tbody>
+  </table>
+  <p class="reveal">ORDER BY가 마지막이라 <strong>별칭과 컬럼번호 사용이 가능</strong>하다.</p>
+
+  <div class="reveal" style="margin: 40px 0 0; padding: 22px 24px; background: linear-gradient(135deg, var(--point-050), var(--bg-card)); border: 1px solid var(--point-100); border-radius: 12px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;">
+    <div>
+      <div style="font-size: 12px; font-weight: 800; color: var(--point-600); letter-spacing: 0.04em; margin-bottom: 4px;">시험 대비</div>
+      <div style="font-size: 14px; color: var(--fg-2);">이 챕터의 함정·정답과 30초 정리는 통합 시험 대비 페이지에서 볼 수 있습니다.</div>
+    </div>
+    <a href="./exam-review.html#ch-2-1-6" style="font-size: 14px; font-weight: 700; color: var(--point-600); text-decoration: none; padding: 8px 14px; border: 1px solid var(--point-300); border-radius: 8px; background: var(--bg-card); white-space: nowrap;">시험 대비 보기 →</a>
+  </div>
+
+  </article>
+</main>
+<script src="./common.js"></script>
+</body>
+</html>

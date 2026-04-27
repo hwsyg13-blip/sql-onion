@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="light">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>집합 연산자 — SQLD양파 이론</title>
+<link rel="stylesheet" href="./common.css">
+</head>
+<body>
+<nav class="topnav">
+  <div class="topnav-inner">
+    <div class="topnav-brand">SQLD양파</div>
+    <div class="topnav-links"><a href="#">홈</a><a href="#" class="active">이론</a><a href="#">기출 CBT</a><a href="#">모의고사</a><a href="#">Pro</a></div>
+  </div>
+</nav>
+<main class="page-shell">
+  <div class="breadcrumb"><a href="#">이론</a><span class="sep">›</span><a href="#">2과목 SQL 기본 및 활용</a><span class="sep">›</span><a href="#">2-2. SQL 활용</a></div>
+  <header class="page-title-block">
+    <h1>집합 연산자 (Set Operators)</h1>
+    <p class="subtitle">두 개 이상 SELECT 결과를 합치거나 비교 · UNION · INTERSECT · MINUS</p>
+  </header>
+  <article class="theory-md">
+
+  <!-- 핵심 요약 -->
+  <h2 class="section-label sec-summary reveal">
+    <span class="label-tag">핵심 요약</span>
+    <span class="label-rest">정의</span>
+  </h2>
+  <blockquote class="reveal">
+    집합 연산자는 <strong>두 개 이상의 SELECT 결과를 합치거나 비교하는 도구</strong>다. 합집합(UNION), 교집합(INTERSECT), 차집합(MINUS).
+  </blockquote>
+  <div class="ex-box reveal">
+    도시락 A={김밥,사과,우유}와 B={사과,빵,우유} → <strong>UNION</strong>={김밥,사과,우유,빵}, <strong>INTERSECT</strong>={사과,우유}, <strong>MINUS(A-B)</strong>={김밥}.
+  </div>
+
+  <!-- 개념 도식화 -->
+  <h2 class="section-label sec-diagram reveal">
+    <span class="label-tag">개념 도식화</span>
+    <span class="label-rest">4가지 집합 연산자</span>
+  </h2>
+  <pre class="reveal"><button class="copy-btn">복사</button><code>A = { 김, 이, 박 }      B = { 이, 박, 최 }
+
+UNION       (A ∪ B, 중복 제거)  →  { 김, 이, 박, 최 }
+UNION ALL   (A + B, 중복 유지)  →  { 김, 이, 박, 이, 박, 최 }
+INTERSECT   (A ∩ B, 교집합)     →  { 이, 박 }
+MINUS       (A − B, 차집합)     →  { 김 }       (A 에만 있는 것)</code></pre>
+
+  <!-- 벤 다이어그램 4종 (집합 연산자 챕터의 핵심 시각화) -->
+  <h3 class="reveal">벤 다이어그램으로 보는 4가지 집합 연산자</h3>
+  <div class="venn-row cols-4 reveal">
+    <div class="venn-card">
+      <svg viewBox="0 0 220 140">
+        <circle class="v-hl" cx="85" cy="70" r="50"/>
+        <circle class="v-hl" cx="135" cy="70" r="50"/>
+        <text class="v-label" x="55" y="75">A</text>
+        <text class="v-label" x="165" y="75">B</text>
+      </svg>
+      <div class="name">UNION</div>
+      <div class="desc">A ∪ B<br/>중복 제거 (정렬 발생)</div>
+    </div>
+    <div class="venn-card">
+      <svg viewBox="0 0 220 140">
+        <circle class="v-hl" cx="85" cy="70" r="50"/>
+        <circle class="v-hl" cx="135" cy="70" r="50"/>
+        <text class="v-label" x="55" y="75">A</text>
+        <text class="v-label" x="165" y="75">B</text>
+        <text x="110" y="125" style="font-size:11px; fill: var(--wrong-fg); font-weight:700; text-anchor:middle; font-family: var(--font-mono);">+ 중복 그대로</text>
+      </svg>
+      <div class="name">UNION ALL</div>
+      <div class="desc">A + B<br/>중복 유지 (가장 빠름)</div>
+    </div>
+    <div class="venn-card">
+      <svg viewBox="0 0 220 140">
+        <defs>
+          <clipPath id="set-inter-clip"><circle cx="85" cy="70" r="50"/></clipPath>
+        </defs>
+        <circle class="v-a" cx="85" cy="70" r="50"/>
+        <circle class="v-b" cx="135" cy="70" r="50"/>
+        <circle class="v-hl" cx="135" cy="70" r="50" clip-path="url(#set-inter-clip)"/>
+        <text class="v-label" x="55" y="75">A</text>
+        <text class="v-label" x="165" y="75">B</text>
+      </svg>
+      <div class="name">INTERSECT</div>
+      <div class="desc">A ∩ B<br/>양쪽 공통만</div>
+    </div>
+    <div class="venn-card">
+      <svg viewBox="0 0 220 140">
+        <defs>
+          <mask id="set-minus-mask">
+            <rect width="220" height="140" fill="white"/>
+            <circle cx="135" cy="70" r="50" fill="black"/>
+          </mask>
+        </defs>
+        <circle class="v-b" cx="135" cy="70" r="50"/>
+        <circle class="v-hl" cx="85" cy="70" r="50" mask="url(#set-minus-mask)"/>
+        <text class="v-label" x="55" y="75">A</text>
+        <text class="v-label" x="165" y="75">B</text>
+      </svg>
+      <div class="name">MINUS / EXCEPT</div>
+      <div class="desc">A − B<br/>A에만 있는 것</div>
+    </div>
+  </div>
+
+  <!-- 4가지 집합 연산자 표 -->
+  <h2 class="reveal">4가지 집합 연산자</h2>
+  <table class="reveal">
+    <thead><tr><th>연산자</th><th>의미</th><th>중복 처리</th></tr></thead>
+    <tbody>
+      <tr><td>UNION</td><td>합집합</td><td>중복 제거</td></tr>
+      <tr><td>UNION ALL</td><td>합집합</td><td>중복 유지(가장 빠름)</td></tr>
+      <tr><td>INTERSECT</td><td>교집합</td><td>중복 제거</td></tr>
+      <tr><td>MINUS(Oracle) / EXCEPT(표준)</td><td>차집합</td><td>중복 제거</td></tr>
+    </tbody>
+  </table>
+
+  <!-- 사용 조건 -->
+  <h2 class="reveal">사용 조건</h2>
+  <div class="trait-grid cols-4 reveal">
+    <div class="trait-card">
+      <div class="num">1</div>
+      <div class="label">컬럼 개수 동일</div>
+      <div class="desc">두 SELECT의 컬럼 수가 같아야 함</div>
+    </div>
+    <div class="trait-card">
+      <div class="num">2</div>
+      <div class="label">데이터 타입 호환</div>
+      <div class="desc">같은 자리 컬럼은 호환되는 타입</div>
+    </div>
+    <div class="trait-card">
+      <div class="num">3</div>
+      <div class="label">컬럼명은 첫 SELECT</div>
+      <div class="desc">결과의 컬럼명은 첫 SELECT 기준</div>
+    </div>
+    <div class="trait-card">
+      <div class="num">4</div>
+      <div class="label">ORDER BY 마지막 한 번</div>
+      <div class="desc">맨 마지막에 한 번만 사용</div>
+    </div>
+  </div>
+  <table class="reveal">
+    <thead><tr><th>조건</th><th>설명</th></tr></thead>
+    <tbody>
+      <tr><td>컬럼 개수</td><td>두 SELECT의 컬럼 수가 같아야 함</td></tr>
+      <tr><td>데이터 타입</td><td>같은 자리의 컬럼은 호환되는 타입</td></tr>
+      <tr><td>컬럼명</td><td>결과의 컬럼명은 첫 SELECT 기준</td></tr>
+      <tr><td>ORDER BY</td><td>맨 마지막에 한 번만</td></tr>
+    </tbody>
+  </table>
+
+  <!-- SQL 실전 -->
+  <h2 class="section-label sec-sql reveal">
+    <span class="label-tag">SQL 실전</span>
+    <span class="label-rest">집합 연산자 사용</span>
+  </h2>
+  <p class="reveal" style="font-size: 13px; color: var(--fg-3); margin: 8px 0 4px;">예시 데이터</p>
+  <div class="ba-flow reveal" style="grid-template-columns: 1fr 36px 1fr; align-items: stretch;">
+    <div class="ba-side before">
+      <span class="ba-tag">EMP_A</span>
+      <h4 class="ba-h">본사 명단</h4>
+      <div class="mini-table" style="grid-template-columns: 1fr;">
+        <div class="h">NAME</div>
+        <div class="c">김</div>
+        <div class="c">이</div>
+        <div class="c">박</div>
+      </div>
+    </div>
+    <div class="ba-arrow" style="font-size: 22px; color: var(--point-500);">+</div>
+    <div class="ba-side before">
+      <span class="ba-tag">EMP_B</span>
+      <h4 class="ba-h">지사 명단</h4>
+      <div class="mini-table" style="grid-template-columns: 1fr;">
+        <div class="h">NAME</div>
+        <div class="c">이</div>
+        <div class="c">박</div>
+        <div class="c">최</div>
+      </div>
+    </div>
+  </div>
+  <pre class="reveal"><button class="copy-btn">복사</button><code><span class="sql-cm">-- UNION (합집합 · 중복 제거)</span>
+<span class="sql-kw">SELECT</span> <span class="sql-type">NAME</span> <span class="sql-kw">FROM</span> <span class="sql-name">EMP_A</span>
+<span class="sql-kw">UNION</span>
+<span class="sql-kw">SELECT</span> <span class="sql-type">NAME</span> <span class="sql-kw">FROM</span> <span class="sql-name">EMP_B</span>;</code></pre>
+  <p class="reveal" style="font-size: 13px; color: var(--fg-3); margin: 8px 0 4px;">↓ 결과 (4행)</p>
+  <table class="reveal">
+    <thead><tr><th>NAME</th></tr></thead>
+    <tbody>
+      <tr><td>김</td></tr><tr><td>이</td></tr><tr><td>박</td></tr><tr><td>최</td></tr>
+    </tbody>
+  </table>
+  <p class="reveal" style="font-size: 12.5px; color: var(--fg-3); margin: 0 0 12px;">→ 양쪽에 모두 있는 "이", "박"은 한 번씩만 등장.</p>
+
+  <pre class="reveal"><button class="copy-btn">복사</button><code><span class="sql-cm">-- UNION ALL (합집합 · 중복 유지)</span>
+<span class="sql-kw">SELECT</span> <span class="sql-type">NAME</span> <span class="sql-kw">FROM</span> <span class="sql-name">EMP_A</span>
+<span class="sql-kw">UNION ALL</span>
+<span class="sql-kw">SELECT</span> <span class="sql-type">NAME</span> <span class="sql-kw">FROM</span> <span class="sql-name">EMP_B</span>;</code></pre>
+  <p class="reveal" style="font-size: 13px; color: var(--fg-3); margin: 8px 0 4px;">↓ 결과 (6행 · 중복 그대로)</p>
+  <table class="reveal">
+    <thead><tr><th>NAME</th></tr></thead>
+    <tbody>
+      <tr><td>김</td></tr><tr><td>이</td></tr><tr><td>박</td></tr>
+      <tr><td>이</td></tr><tr><td>박</td></tr><tr><td>최</td></tr>
+    </tbody>
+  </table>
+  <p class="reveal" style="font-size: 12.5px; color: var(--fg-3); margin: 0 0 12px;">→ 중복 제거 단계가 없어 양쪽 행이 그대로 이어붙는다.</p>
+
+  <pre class="reveal"><button class="copy-btn">복사</button><code><span class="sql-cm">-- INTERSECT (교집합)</span>
+<span class="sql-kw">SELECT</span> <span class="sql-type">NAME</span> <span class="sql-kw">FROM</span> <span class="sql-name">EMP_A</span>
+<span class="sql-kw">INTERSECT</span>
+<span class="sql-kw">SELECT</span> <span class="sql-type">NAME</span> <span class="sql-kw">FROM</span> <span class="sql-name">EMP_B</span>;</code></pre>
+  <p class="reveal" style="font-size: 13px; color: var(--fg-3); margin: 8px 0 4px;">↓ 결과</p>
+  <table class="reveal">
+    <thead><tr><th>NAME</th></tr></thead>
+    <tbody>
+      <tr><td>이</td></tr><tr><td>박</td></tr>
+    </tbody>
+  </table>
+  <p class="reveal" style="font-size: 12.5px; color: var(--fg-3); margin: 0 0 12px;">→ 양쪽에 모두 있는 행만 남는다.</p>
+
+  <pre class="reveal"><button class="copy-btn">복사</button><code><span class="sql-cm">-- MINUS (차집합, A에만 있는 것)</span>
+<span class="sql-kw">SELECT</span> <span class="sql-type">NAME</span> <span class="sql-kw">FROM</span> <span class="sql-name">EMP_A</span>
+<span class="sql-kw">MINUS</span>
+<span class="sql-kw">SELECT</span> <span class="sql-type">NAME</span> <span class="sql-kw">FROM</span> <span class="sql-name">EMP_B</span>;</code></pre>
+  <p class="reveal" style="font-size: 13px; color: var(--fg-3); margin: 8px 0 4px;">↓ 결과</p>
+  <table class="reveal">
+    <thead><tr><th>NAME</th></tr></thead>
+    <tbody>
+      <tr><td>김</td></tr>
+    </tbody>
+  </table>
+  <p class="reveal" style="font-size: 12.5px; color: var(--fg-3); margin: 0 0 12px;">→ A(EMP_A)에만 있는 행만 남는다. "이", "박"은 B에도 있어서 제외.</p>
+
+  <pre class="reveal"><button class="copy-btn">복사</button><code><span class="sql-cm">-- ORDER BY는 마지막에</span>
+<span class="sql-kw">SELECT</span> <span class="sql-type">NAME</span> <span class="sql-kw">FROM</span> <span class="sql-name">EMP_A</span>
+<span class="sql-kw">UNION</span>
+<span class="sql-kw">SELECT</span> <span class="sql-type">NAME</span> <span class="sql-kw">FROM</span> <span class="sql-name">EMP_B</span>
+<span class="sql-kw">ORDER BY</span> <span class="sql-type">NAME</span>;</code></pre>
+
+  <!-- Before & After -->
+  <h2 class="section-label sec-compare reveal">
+    <span class="label-tag">Before &amp; After</span>
+    <span class="label-rest">UNION / UNION ALL / INTERSECT / MINUS</span>
+  </h2>
+  <p class="reveal">본사(EMP_A)와 지사(EMP_B) 두 명단을 합치거나 비교하는 상황. 두 표에는 <strong>"이"와 "박"이 양쪽 모두</strong>에 들어 있고, "김"은 A에만, "최"는 B에만 있다. 같은 데이터를 네 가지 집합 연산자(UNION/UNION ALL/INTERSECT/MINUS)에 넣었을 때 결과가 어떻게 갈라지는지 비교한다.</p>
+
+  <p class="reveal" style="font-size: 13.5px; color: var(--fg-3);">EMP_A</p>
+  <table class="reveal">
+    <thead><tr><th>NAME</th></tr></thead>
+    <tbody>
+      <tr><td>김</td></tr>
+      <tr><td>이</td></tr>
+      <tr><td>박</td></tr>
+    </tbody>
+  </table>
+  <p class="reveal" style="font-size: 13.5px; color: var(--fg-3);">EMP_B</p>
+  <table class="reveal">
+    <thead><tr><th>NAME</th></tr></thead>
+    <tbody>
+      <tr><td>이</td></tr>
+      <tr><td>박</td></tr>
+      <tr><td>최</td></tr>
+    </tbody>
+  </table>
+
+  <h3 class="reveal">UNION (중복 제거, 4행)</h3>
+  <table class="reveal"><thead><tr><th>NAME</th></tr></thead><tbody>
+    <tr><td>김</td></tr><tr><td>이</td></tr><tr><td>박</td></tr><tr><td>최</td></tr>
+  </tbody></table>
+
+  <h3 class="reveal">UNION ALL (중복 그대로, 6행)</h3>
+  <table class="reveal"><thead><tr><th>NAME</th></tr></thead><tbody>
+    <tr><td>김</td></tr><tr><td>이</td></tr><tr><td>박</td></tr>
+    <tr><td>이</td></tr><tr><td>박</td></tr><tr><td>최</td></tr>
+  </tbody></table>
+
+  <h3 class="reveal">INTERSECT</h3>
+  <table class="reveal"><thead><tr><th>NAME</th></tr></thead><tbody>
+    <tr><td>이</td></tr><tr><td>박</td></tr>
+  </tbody></table>
+
+  <h3 class="reveal">MINUS</h3>
+  <table class="reveal"><thead><tr><th>NAME</th></tr></thead><tbody>
+    <tr><td>김</td></tr>
+  </tbody></table>
+
+  <p class="reveal">같은 두 입력에서 4가지 결과가 갈라지는 이유는 <strong>"중복을 어떻게 다루느냐"와 "어느 쪽 기준으로 비교하느냐"</strong>가 연산마다 다르기 때문이다. UNION은 중복을 제거하기 위해 정렬을 한 번 더 거치므로 행 수가 줄고, UNION ALL은 그 단계를 건너뛰어 그대로 이어붙인다. INTERSECT는 양쪽 모두에 있는 값만, MINUS는 A에만 있는 값만 남긴다. 따라서 "합칠 때 중복이 의미가 있는가" "두 집합의 공통 부분만 보고 싶은가" "한쪽에만 있는 것을 추리는가"를 먼저 묻고 연산자를 고르는 것이 핵심이다.</p>
+
+  <!-- UNION vs UNION ALL 성능 -->
+  <h2 class="reveal">UNION vs UNION ALL 성능 차이</h2>
+  <table class="reveal">
+    <thead><tr><th>비교</th><th>UNION</th><th>UNION ALL</th></tr></thead>
+    <tbody>
+      <tr><td>중복 제거</td><td>함</td><td>안 함</td></tr>
+      <tr><td>정렬 작업</td><td>일어남(중복 제거 위해)</td><td>안 일어남</td></tr>
+      <tr><td>성능</td><td>느림</td><td>빠름</td></tr>
+      <tr><td>권장</td><td>중복 가능성이 있을 때</td><td>중복 없거나 그대로 둬도 될 때</td></tr>
+    </tbody>
+  </table>
+  <p class="reveal">중복이 절대 없다고 확신하면 <strong>UNION ALL</strong>을 사용해 성능을 높인다. 두 결과를 "행 단위로 이어붙이는" 집합 연산자와 달리 <a href="./2-1-7_조인.html">조인</a>은 컬럼을 옆으로 붙이고, <a href="./2-2-1_서브쿼리.html">서브쿼리</a>는 메인쿼리에 값 하나를 공급한다는 점에서 역할이 다르다.</p>
+
+  <!-- 다중 컬럼 -->
+  <h2 class="reveal">다중 컬럼 집합 연산</h2>
+  <pre class="reveal"><button class="copy-btn">복사</button><code><span class="sql-kw">SELECT</span> <span class="sql-type">NAME</span>, <span class="sql-type">DEPT_ID</span>, <span class="sql-type">SAL</span> <span class="sql-kw">FROM</span> <span class="sql-name">EMP_A</span>
+<span class="sql-kw">UNION</span>
+<span class="sql-kw">SELECT</span> <span class="sql-type">NAME</span>, <span class="sql-type">DEPT_ID</span>, <span class="sql-type">SAL</span> <span class="sql-kw">FROM</span> <span class="sql-name">EMP_B</span>;</code></pre>
+  <p class="reveal">모든 컬럼 값이 일치할 때만 중복으로 간주된다.</p>
+
+  <!-- NULL과 집합 연산 -->
+  <h2 class="reveal">NULL과 집합 연산</h2>
+  <p class="reveal">집합 연산에서 NULL은 NULL과 같은 값으로 취급되어 <strong>중복으로 처리</strong>된다(일반 비교 <code>=</code>와 다름).</p>
+  <table class="reveal">
+    <thead><tr><th>EMP_A.COL</th><th>EMP_B.COL</th></tr></thead>
+    <tbody>
+      <tr><td style="color: var(--wrong-fg); font-weight: 700;">NULL</td><td style="color: var(--wrong-fg); font-weight: 700;">NULL</td></tr>
+    </tbody>
+  </table>
+  <p class="reveal">UNION 시 1행만 남는다.</p>
+
+  <div class="reveal" style="margin: 40px 0 0; padding: 22px 24px; background: linear-gradient(135deg, var(--point-050), var(--bg-card)); border: 1px solid var(--point-100); border-radius: 12px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;">
+    <div>
+      <div style="font-size: 12px; font-weight: 800; color: var(--point-600); letter-spacing: 0.04em; margin-bottom: 4px;">시험 대비</div>
+      <div style="font-size: 14px; color: var(--fg-2);">이 챕터의 함정·정답과 30초 정리는 통합 시험 대비 페이지에서 볼 수 있습니다.</div>
+    </div>
+    <a href="./exam-review.html#ch-2-2-2" style="font-size: 14px; font-weight: 700; color: var(--point-600); text-decoration: none; padding: 8px 14px; border: 1px solid var(--point-300); border-radius: 8px; background: var(--bg-card); white-space: nowrap;">시험 대비 보기 →</a>
+  </div>
+
+  </article>
+</main>
+<script src="./common.js"></script>
+</body>
+</html>

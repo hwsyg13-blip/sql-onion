@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="light">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>계층형 질의와 셀프 조인 — SQLD양파 이론</title>
+<link rel="stylesheet" href="./common.css">
+</head>
+<body>
+<nav class="topnav">
+  <div class="topnav-inner">
+    <div class="topnav-brand">SQLD양파</div>
+    <div class="topnav-links"><a href="#">홈</a><a href="#" class="active">이론</a><a href="#">기출 CBT</a><a href="#">모의고사</a><a href="#">Pro</a></div>
+  </div>
+</nav>
+<main class="page-shell">
+  <div class="breadcrumb"><a href="#">이론</a><span class="sep">›</span><a href="#">2과목 SQL 기본 및 활용</a><span class="sep">›</span><a href="#">2-2 SQL 활용</a></div>
+  <header class="page-title-block">
+    <h1>계층형 질의와 셀프 조인</h1>
+    <p class="subtitle">트리 구조 펼치기 · CONNECT BY · LEVEL · SYS_CONNECT_BY_PATH · SELF JOIN</p>
+  </header>
+  <article class="theory-md">
+
+  <!-- 핵심 요약 -->
+  <h2 class="section-label sec-summary reveal">
+    <span class="label-tag">핵심 요약</span>
+    <span class="label-rest">정의</span>
+  </h2>
+  <blockquote class="reveal">
+    계층형 질의는 <strong>트리 구조 데이터(예: 조직도)</strong>를 위에서 아래로 펼치는 쿼리다. 셀프 조인은 같은 테이블을 자기 자신과 조인하는 것이다.
+  </blockquote>
+  <div class="ex-box reveal">
+    가족 족보를 "사람ID, 부모ID" 한 테이블에 저장한 뒤 <code>CONNECT BY</code>로 할아버지 → 아버지 → 나 순으로 펼쳐 보는 쿼리.
+  </div>
+
+  <!-- 개념 도식화 -->
+  <h2 class="section-label sec-diagram reveal">
+    <span class="label-tag">개념 도식화</span>
+    <span class="label-rest">계층형 데이터의 모양</span>
+  </h2>
+  <div class="layer-stack reveal">
+    <div class="layer-stack-track">
+      <div class="layer-row">
+        <div class="icon">L1</div>
+        <div class="body">
+          <div class="name">사장 <small>E1 · MGR_ID = NULL</small></div>
+          <div class="desc">루트(최상위) — START WITH의 시작점</div>
+        </div>
+        <div class="arrow">↓</div>
+      </div>
+      <div class="layer-row">
+        <div class="icon">L2</div>
+        <div class="body">
+          <div class="name">매니저A · 매니저B <small>E2, E3 · MGR_ID = E1</small></div>
+          <div class="desc">사장의 직속 자식 두 명 (형제 관계)</div>
+        </div>
+        <div class="arrow">↓</div>
+      </div>
+      <div class="layer-row">
+        <div class="icon">L3</div>
+        <div class="body">
+          <div class="name">사원 <small>E4 · MGR_ID = E2</small></div>
+          <div class="desc">매니저A의 자식 — 리프(잎)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <table class="reveal">
+    <thead><tr><th>EMP_ID</th><th>NAME</th><th>MGR_ID</th></tr></thead>
+    <tbody>
+      <tr><td>E1</td><td>사장</td><td style="color: var(--wrong-fg); font-weight: 700;">NULL</td></tr>
+      <tr><td>E2</td><td>매니저A</td><td>E1</td></tr>
+      <tr><td>E3</td><td>매니저B</td><td>E1</td></tr>
+      <tr><td>E4</td><td>사원</td><td>E2</td></tr>
+    </tbody>
+  </table>
+
+  <h3 class="reveal">조직도 트리</h3>
+  <div class="tree-diagram reveal">
+    <ul>
+      <li><span class="node root">사장 <span class="meta">E1 · LEVEL 1</span></span>
+        <ul>
+          <li><span class="node">매니저A <span class="meta">E2 · LEVEL 2</span></span>
+            <ul>
+              <li><span class="node">사원 <span class="meta">E4 · LEVEL 3 · LEAF</span></span></li>
+            </ul>
+          </li>
+          <li><span class="node">매니저B <span class="meta">E3 · LEVEL 2 · LEAF</span></span></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+  <p class="reveal">평면 4행이 트리로 펼쳐지면 LEVEL이 1·2·3으로 자연스레 매겨지고, 자식이 없는 매니저B와 사원이 LEAF가 된다.</p>
+
+  <!-- CONNECT BY -->
+  <h2 class="reveal">CONNECT BY (Oracle 계층형 질의)</h2>
+  <p class="reveal" style="font-size: 13px; color: var(--fg-3); margin: 8px 0 4px;">예시 데이터 — 아래 모든 SQL은 이 EMP를 사용</p>
+  <div class="ba-side before reveal" style="max-width: 460px;">
+    <span class="ba-tag">EMP</span>
+    <h4 class="ba-h">사원 테이블 (자기 참조)</h4>
+    <div class="mini-table cols-3">
+      <div class="h">EMP_ID</div><div class="h">NAME</div><div class="h">MGR_ID</div>
+      <div class="c">E1</div><div class="c">사장</div><div class="c is-null">NULL</div>
+      <div class="c">E2</div><div class="c">매니저A</div><div class="c">E1</div>
+      <div class="c">E3</div><div class="c">매니저B</div><div class="c">E1</div>
+      <div class="c">E4</div><div class="c">사원</div><div class="c">E2</div>
+    </div>
+  </div>
+  <pre class="reveal"><button class="copy-btn">복사</button><code><span class="sql-kw">SELECT</span>  <span class="sql-kw">LEVEL</span>,
+        <span class="sql-type">EMP_ID</span>, <span class="sql-type">NAME</span>, <span class="sql-type">MGR_ID</span>
+<span class="sql-kw">FROM</span>    <span class="sql-name">EMP</span>
+<span class="sql-kw">START WITH</span> <span class="sql-type">MGR_ID</span> <span class="sql-kw">IS NULL</span>          <span class="sql-cm">-- 시작점(루트)</span>
+<span class="sql-kw">CONNECT BY PRIOR</span> <span class="sql-type">EMP_ID</span> = <span class="sql-type">MGR_ID</span>;  <span class="sql-cm">-- 부모-자식 관계</span></code></pre>
+  <p class="reveal" style="font-size: 13px; color: var(--fg-3); margin: 8px 0 4px;">↓ 결과 — 깊이 우선으로 트리 펼침, LEVEL이 1·2·3 매겨짐</p>
+  <table class="reveal">
+    <thead><tr><th>LEVEL</th><th>EMP_ID</th><th>NAME</th><th>MGR_ID</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>E1</td><td>사장</td><td style="color: var(--wrong-fg); font-weight: 700;">NULL</td></tr>
+      <tr><td>2</td><td>E2</td><td>매니저A</td><td>E1</td></tr>
+      <tr><td>3</td><td>E4</td><td>사원</td><td>E2</td></tr>
+      <tr><td>2</td><td>E3</td><td>매니저B</td><td>E1</td></tr>
+    </tbody>
+  </table>
+  <p class="reveal" style="font-size: 12.5px; color: var(--fg-3); margin: 0 0 12px;">→ 매니저A의 자식(사원)이 먼저 따라붙은 뒤 매니저B가 출력된다(깊이 우선).</p>
+
+  <div class="fn-grid cols-3 reveal">
+    <div class="fn-card">
+      <div class="name">START WITH</div>
+      <div class="desc">루트 행 조건</div>
+      <div class="ex">START WITH MGR_ID IS NULL</div>
+    </div>
+    <div class="fn-card">
+      <div class="name">CONNECT BY PRIOR</div>
+      <div class="desc">부모-자식 연결</div>
+      <div class="ex">PRIOR EMP_ID = MGR_ID</div>
+    </div>
+    <div class="fn-card">
+      <div class="name">LEVEL</div>
+      <div class="desc">깊이(1=루트)</div>
+      <div class="ex">SELECT LEVEL ...</div>
+    </div>
+    <div class="fn-card">
+      <div class="name">CONNECT_BY_ROOT</div>
+      <div class="desc">루트의 컬럼값</div>
+      <div class="ex">CONNECT_BY_ROOT NAME</div>
+    </div>
+    <div class="fn-card">
+      <div class="name">CONNECT_BY_ISLEAF</div>
+      <div class="desc">리프(잎)이면 1</div>
+      <div class="ex">CONNECT_BY_ISLEAF</div>
+    </div>
+    <div class="fn-card">
+      <div class="name">SYS_CONNECT_BY_PATH</div>
+      <div class="desc">경로 표시</div>
+      <div class="ex">SYS_CONNECT_BY_PATH(NAME, '/')</div>
+    </div>
+  </div>
+
+  <h3 class="reveal">PRIOR 위치</h3>
+  <table class="reveal">
+    <thead><tr><th>표현</th><th>의미</th></tr></thead>
+    <tbody>
+      <tr><td><code>PRIOR EMP_ID = MGR_ID</code></td><td>순방향: 부모→자식</td></tr>
+      <tr><td><code>PRIOR MGR_ID = EMP_ID</code></td><td>역방향: 자식→부모</td></tr>
+    </tbody>
+  </table>
+
+  <!-- SQL 실전 -->
+  <h2 class="section-label sec-sql reveal">
+    <span class="label-tag">SQL 실전</span>
+    <span class="label-rest">계층형 질의</span>
+  </h2>
+  <pre class="reveal"><button class="copy-btn">복사</button><code><span class="sql-kw">SELECT</span>  <span class="sql-kw">LEVEL</span>,
+        <span class="sql-kw">LPAD</span>(<span class="sql-str">' '</span>, (<span class="sql-kw">LEVEL</span>-<span class="sql-num">1</span>)*<span class="sql-num">4</span>) || <span class="sql-type">NAME</span> <span class="sql-kw">AS</span> <span class="sql-type">TREE</span>,
+        <span class="sql-kw">SYS_CONNECT_BY_PATH</span>(<span class="sql-type">NAME</span>, <span class="sql-str">'/'</span>) <span class="sql-kw">AS</span> <span class="sql-type">PATH</span>
+<span class="sql-kw">FROM</span>    <span class="sql-name">EMP</span>
+<span class="sql-kw">START WITH</span> <span class="sql-type">MGR_ID</span> <span class="sql-kw">IS NULL</span>
+<span class="sql-kw">CONNECT BY PRIOR</span> <span class="sql-type">EMP_ID</span> = <span class="sql-type">MGR_ID</span>;</code></pre>
+  <h4 class="reveal">결과</h4>
+  <table class="reveal">
+    <thead><tr><th>LEVEL</th><th>TREE</th><th>PATH</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>사장</td><td>/사장</td></tr>
+      <tr><td>2</td><td>&nbsp;&nbsp;&nbsp;&nbsp;매니저A</td><td>/사장/매니저A</td></tr>
+      <tr><td>3</td><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;사원</td><td>/사장/매니저A/사원</td></tr>
+      <tr><td>2</td><td>&nbsp;&nbsp;&nbsp;&nbsp;매니저B</td><td>/사장/매니저B</td></tr>
+    </tbody>
+  </table>
+
+  <!-- ORDER SIBLINGS BY -->
+  <h2 class="reveal">ORDER SIBLINGS BY — 형제 정렬</h2>
+  <pre class="reveal"><button class="copy-btn">복사</button><code><span class="sql-kw">SELECT</span>  <span class="sql-kw">LEVEL</span>, <span class="sql-type">NAME</span>
+<span class="sql-kw">FROM</span>    <span class="sql-name">EMP</span>
+<span class="sql-kw">START WITH</span> <span class="sql-type">MGR_ID</span> <span class="sql-kw">IS NULL</span>
+<span class="sql-kw">CONNECT BY PRIOR</span> <span class="sql-type">EMP_ID</span> = <span class="sql-type">MGR_ID</span>
+<span class="sql-kw">ORDER SIBLINGS BY</span> <span class="sql-type">NAME</span>;     <span class="sql-cm">-- 형제(같은 LEVEL)끼리만 정렬</span></code></pre>
+  <p class="reveal">일반 <code>ORDER BY</code>는 계층 구조를 망가뜨리므로 <code>ORDER SIBLINGS BY</code>를 사용한다.</p>
+
+  <!-- SELF JOIN -->
+  <h2 class="reveal">SELF JOIN</h2>
+  <p class="reveal">같은 테이블을 두 번 사용해서 <a href="./2-1-7_조인.html">조인</a>한다. 별칭으로 구분한다.</p>
+  <pre class="reveal"><button class="copy-btn">복사</button><code><span class="sql-kw">SELECT</span>  <span class="sql-type">E</span>.<span class="sql-type">NAME</span>    <span class="sql-kw">AS</span> <span class="sql-type">사원</span>,
+        <span class="sql-type">M</span>.<span class="sql-type">NAME</span>    <span class="sql-kw">AS</span> <span class="sql-type">매니저</span>
+<span class="sql-kw">FROM</span>    <span class="sql-name">EMP</span> <span class="sql-type">E</span>,  <span class="sql-name">EMP</span> <span class="sql-type">M</span>
+<span class="sql-kw">WHERE</span>   <span class="sql-type">E</span>.<span class="sql-type">MGR_ID</span> = <span class="sql-type">M</span>.<span class="sql-type">EMP_ID</span>;</code></pre>
+  <p class="reveal">표준 방식:</p>
+  <pre class="reveal"><button class="copy-btn">복사</button><code><span class="sql-kw">SELECT</span>  <span class="sql-type">E</span>.<span class="sql-type">NAME</span>    <span class="sql-kw">AS</span> <span class="sql-type">사원</span>,
+        <span class="sql-type">M</span>.<span class="sql-type">NAME</span>    <span class="sql-kw">AS</span> <span class="sql-type">매니저</span>
+<span class="sql-kw">FROM</span>    <span class="sql-name">EMP</span> <span class="sql-type">E</span> <span class="sql-kw">LEFT JOIN</span> <span class="sql-name">EMP</span> <span class="sql-type">M</span> <span class="sql-kw">ON</span> <span class="sql-type">E</span>.<span class="sql-type">MGR_ID</span> = <span class="sql-type">M</span>.<span class="sql-type">EMP_ID</span>;</code></pre>
+  <table class="reveal">
+    <thead><tr><th>사원</th><th>매니저</th></tr></thead>
+    <tbody>
+      <tr><td>사장</td><td style="color: var(--wrong-fg); font-weight: 700;">NULL</td></tr>
+      <tr><td>매니저A</td><td>사장</td></tr>
+      <tr><td>매니저B</td><td>사장</td></tr>
+      <tr><td>사원</td><td>매니저A</td></tr>
+    </tbody>
+  </table>
+
+  <!-- 비교 -->
+  <h2 class="section-label sec-compare reveal">
+    <span class="label-tag">비교</span>
+    <span class="label-rest">계층형 질의 vs 셀프 조인</span>
+  </h2>
+  <table class="reveal">
+    <thead><tr><th>비교</th><th>계층형 질의</th><th>셀프 조인</th></tr></thead>
+    <tbody>
+      <tr><td>구조</td><td>여러 단계 트리</td><td>보통 1단계(직속만)</td></tr>
+      <tr><td>사용 함수</td><td>LEVEL, PATH 등</td><td>일반 SQL</td></tr>
+      <tr><td>표준 여부</td><td>Oracle 전용(CONNECT BY)</td><td>표준</td></tr>
+      <tr><td>깊이 제한</td><td>무제한</td><td>1단계</td></tr>
+    </tbody>
+  </table>
+
+  <!-- 표준 재귀 쿼리 -->
+  <h2 class="reveal">표준 재귀 쿼리 (참고)</h2>
+  <pre class="reveal"><button class="copy-btn">복사</button><code><span class="sql-cm">-- ANSI 표준: 재귀 CTE(Common Table Expression)</span>
+<span class="sql-kw">WITH RECURSIVE</span> <span class="sql-type">EMP_TREE</span>(<span class="sql-type">EMP_ID</span>, <span class="sql-type">NAME</span>, <span class="sql-type">MGR_ID</span>, <span class="sql-type">LV</span>) <span class="sql-kw">AS</span> (
+    <span class="sql-kw">SELECT</span> <span class="sql-type">EMP_ID</span>, <span class="sql-type">NAME</span>, <span class="sql-type">MGR_ID</span>, <span class="sql-num">1</span>
+    <span class="sql-kw">FROM</span>   <span class="sql-name">EMP</span>
+    <span class="sql-kw">WHERE</span>  <span class="sql-type">MGR_ID</span> <span class="sql-kw">IS NULL</span>
+    <span class="sql-kw">UNION ALL</span>
+    <span class="sql-kw">SELECT</span> <span class="sql-type">E</span>.<span class="sql-type">EMP_ID</span>, <span class="sql-type">E</span>.<span class="sql-type">NAME</span>, <span class="sql-type">E</span>.<span class="sql-type">MGR_ID</span>, <span class="sql-type">T</span>.<span class="sql-type">LV</span> + <span class="sql-num">1</span>
+    <span class="sql-kw">FROM</span>   <span class="sql-name">EMP</span> <span class="sql-type">E</span> <span class="sql-kw">JOIN</span> <span class="sql-type">EMP_TREE</span> <span class="sql-type">T</span> <span class="sql-kw">ON</span> <span class="sql-type">E</span>.<span class="sql-type">MGR_ID</span> = <span class="sql-type">T</span>.<span class="sql-type">EMP_ID</span>
+)
+<span class="sql-kw">SELECT</span> * <span class="sql-kw">FROM</span> <span class="sql-type">EMP_TREE</span>;</code></pre>
+  <p class="reveal">Oracle 12c 이상 및 다른 DBMS도 지원한다.</p>
+
+  <!-- Before & After -->
+  <h2 class="section-label sec-compare reveal">
+    <span class="label-tag">Before &amp; After</span>
+    <span class="label-rest">평면 → 트리</span>
+  </h2>
+  <p class="reveal">평면 테이블 EMP는 4행이 단순히 나열돼 있을 뿐, 사장-매니저-사원의 위계가 보이지 않는다. CONNECT BY로 MGR_ID 컬럼을 따라 부모-자식 관계를 펼치면 같은 4행이 트리 순서로 재배열되고 LEVEL이 1·2·3으로 매겨지는 상황을 비교한다.</p>
+  <div class="ba-flow large-after reveal">
+    <div class="ba-side before">
+      <span class="ba-tag">BEFORE</span>
+      <h4 class="ba-h">평면 EMP — 위계 없음</h4>
+      <div class="mini-table cols-3">
+        <div class="h">EMP_ID</div><div class="h">NAME</div><div class="h">MGR_ID</div>
+        <div class="c">E1</div><div class="c">사장</div><div class="c is-null">NULL</div>
+        <div class="c">E2</div><div class="c">매니저A</div><div class="c">E1</div>
+        <div class="c">E3</div><div class="c">매니저B</div><div class="c">E1</div>
+        <div class="c">E4</div><div class="c">사원</div><div class="c">E2</div>
+      </div>
+    </div>
+    <div class="ba-arrow">→</div>
+    <div class="ba-side after">
+      <span class="ba-tag">AFTER (CONNECT BY)</span>
+      <h4 class="ba-h">트리 순서로 재배열 + LEVEL</h4>
+      <div class="sql">START WITH MGR_ID IS NULL CONNECT BY PRIOR EMP_ID = MGR_ID</div>
+      <div class="mini-table cols-4">
+        <div class="h">LEVEL</div><div class="h">NAME</div><div class="h">EMP_ID</div><div class="h">MGR_ID</div>
+        <div class="c">1</div><div class="c">사장</div><div class="c">E1</div><div class="c is-null">NULL</div>
+        <div class="c">2</div><div class="c">매니저A</div><div class="c">E2</div><div class="c">E1</div>
+        <div class="c">3</div><div class="c">사원</div><div class="c">E4</div><div class="c">E2</div>
+        <div class="c">2</div><div class="c">매니저B</div><div class="c">E3</div><div class="c">E1</div>
+      </div>
+    </div>
+  </div>
+  <p class="reveal"><code>START WITH MGR_ID IS NULL</code>이 사장(E1)을 루트로 잡고, <code>CONNECT BY PRIOR EMP_ID = MGR_ID</code>가 "현재 행의 EMP_ID = 다음 행의 MGR_ID"라는 부모-자식 규칙을 정의해 깊이 우선으로 트리를 펼친다. 그래서 매니저A 다음에 그 자식인 사원이 먼저 따라붙고, 그다음에야 매니저B가 출력된다(매니저B 자식이 없으면 거기서 가지 끝). 셀프 조인이라면 "사원-매니저" 1단계만 가능하지만, 계층형 질의는 깊이가 깊어져도 LEVEL과 SYS_CONNECT_BY_PATH로 재귀 추적이 가능하다는 점이 결정적인 차이다.</p>
+
+  <div class="reveal" style="margin: 40px 0 0; padding: 22px 24px; background: linear-gradient(135deg, var(--point-050), var(--bg-card)); border: 1px solid var(--point-100); border-radius: 12px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;">
+    <div>
+      <div style="font-size: 12px; font-weight: 800; color: var(--point-600); letter-spacing: 0.04em; margin-bottom: 4px;">시험 대비</div>
+      <div style="font-size: 14px; color: var(--fg-2);">이 챕터의 함정·정답과 30초 정리는 통합 시험 대비 페이지에서 볼 수 있습니다.</div>
+    </div>
+    <a href="./exam-review.html#ch-2-2-6" style="font-size: 14px; font-weight: 700; color: var(--point-600); text-decoration: none; padding: 8px 14px; border: 1px solid var(--point-300); border-radius: 8px; background: var(--bg-card); white-space: nowrap;">시험 대비 보기 →</a>
+  </div>
+
+  </article>
+</main>
+<script src="./common.js"></script>
+</body>
+</html>

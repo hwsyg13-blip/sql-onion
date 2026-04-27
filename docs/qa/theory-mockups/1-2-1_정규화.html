@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>정규화(Normalization) — SQLD양파 이론</title>
+<link rel="stylesheet" href="./common.css">
+<style>
+  /* 1-2-1 특화: 이상현상 카드 */
+  .anom-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 18px 0 22px; }
+  .anom-card { background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: 12px; padding: 16px 18px; border-left: 4px solid var(--wrong-fg); transition: transform var(--duration-base); }
+  .anom-card:hover { transform: translateY(-2px); }
+  .anom-card .icn { font-size: 22px; margin-bottom: 6px; color: var(--wrong-fg); }
+  .anom-card .nm { font-size: 14px; font-weight: 800; color: var(--fg-1); margin-bottom: 4px; }
+  .anom-card .ds { font-size: 12.5px; color: var(--fg-3); line-height: 1.55; margin-bottom: 4px; }
+  .anom-card .ex { font-size: 11.5px; color: var(--fg-3); font-style: italic; }
+  @media (max-width: 900px) { .anom-grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="topnav-inner">
+    <div class="topnav-brand">SQLD양파</div>
+    <div class="topnav-links">
+      <a href="#">홈</a>
+      <a href="#" class="active">이론</a>
+      <a href="#">기출 CBT</a>
+      <a href="#">모의고사</a>
+      <a href="#">Pro</a>
+    </div>
+  </div>
+</nav>
+
+<main class="page-shell">
+  <div class="breadcrumb">
+    <a href="#">이론</a><span class="sep">›</span>
+    <a href="#">1과목 데이터 모델링</a><span class="sep">›</span>
+    <a href="#">1-2. 데이터 모델과 SQL</a>
+  </div>
+
+  <header class="page-title-block">
+    <h1>정규화(Normalization)</h1>
+    <p class="subtitle">중복 제거 · 이상현상 방지. <strong>1NF → 2NF → 3NF → BCNF</strong></p>
+  </header>
+
+  <article class="theory-md">
+
+    <!-- 핵심 요약 -->
+    <h2 class="section-label sec-summary reveal"><span class="label-tag">핵심 요약</span><span class="label-rest">정의</span></h2>
+    <blockquote class="reveal">
+      정규화(Normalization)란 데이터의 <strong>중복을 없애고</strong> 깔끔하게 정리하는 작업이다. 테이블을 단계적으로 쪼개서 <strong>이상현상</strong>을 막는다.
+    </blockquote>
+    <div class="ex-box reveal">
+      옷장 한 칸에 속옷·양말·셔츠·외투를 다 욱여넣으면 양말 찾기가 어렵고, 셔츠를 빼다가 다른 옷이 떨어진다. 칸을 나눠 종류별로 분리하는 것이 정규화다.
+    </div>
+
+    <!-- 개념 도식화 — 정규화 단계 -->
+    <h2 class="section-label sec-diagram reveal"><span class="label-tag">개념 도식화</span><span class="label-rest">정규화 단계</span></h2>
+    <div class="step-flow cols-4 reveal">
+      <div class="step-card">
+        <div class="step">STEP 1</div>
+        <div class="name">1NF <small>원자값</small></div>
+        <div class="ex">한 칸에 한 값만</div>
+        <div class="arrow-next">›</div>
+      </div>
+      <div class="step-card">
+        <div class="step">STEP 2</div>
+        <div class="name">2NF <small>부분종속 제거</small></div>
+        <div class="ex">PK 일부에만 종속된 컬럼 분리</div>
+        <div class="arrow-next">›</div>
+      </div>
+      <div class="step-card">
+        <div class="step">STEP 3</div>
+        <div class="name">3NF <small>이행종속 제거</small></div>
+        <div class="ex">A→B→C 형태 분리</div>
+        <div class="arrow-next">›</div>
+      </div>
+      <div class="step-card">
+        <div class="step">STEP 4</div>
+        <div class="name">BCNF <small>엄격 3NF</small></div>
+        <div class="ex">모든 결정자 = 후보키</div>
+      </div>
+    </div>
+    <table class="reveal">
+      <thead><tr><th>단계</th><th>핵심 규칙</th><th>한줄 의미</th></tr></thead>
+      <tbody>
+        <tr><td>1NF</td><td>모든 속성이 원자값</td><td>한 칸에 한 값만</td></tr>
+        <tr><td>2NF</td><td>부분 함수 종속 제거</td><td>PK 일부에만 종속된 컬럼 분리</td></tr>
+        <tr><td>3NF</td><td>이행 함수 종속 제거</td><td>A→B→C 형태 분리</td></tr>
+        <tr><td>BCNF</td><td>모든 결정자가 후보키</td><td>더 엄격한 3NF</td></tr>
+      </tbody>
+    </table>
+
+    <div class="mermaid reveal">
+flowchart LR
+    NF0["비정규형<br/>(다중값·반복그룹)"] -->|"원자값으로"| NF1["1NF<br/>한 칸에 한 값"]
+    NF1 -->|"부분종속 제거"| NF2["2NF<br/>PK 전체에 종속"]
+    NF2 -->|"이행종속 제거"| NF3["3NF<br/>비이행 종속만"]
+    NF3 -->|"결정자=후보키"| BCNF["BCNF<br/>엄격한 3NF"]
+    style NF0 fill:#FCEEE5,stroke:#A9562E
+    style BCNF fill:#E6F3E7,stroke:#256B29
+    </div>
+
+    <!-- 이상현상 -->
+    <h2 class="reveal">이상현상(Anomaly) 3가지</h2>
+    <div class="anom-grid reveal">
+      <div class="anom-card">
+        <div class="icn">＋</div>
+        <div class="nm">삽입 이상</div>
+        <div class="ds">데이터 넣으려는데 다른 정보가 없어 못 넣음</div>
+        <div class="ex">학생 등록하려는데 수강과목 칸을 비울 수 없음</div>
+      </div>
+      <div class="anom-card">
+        <div class="icn">↻</div>
+        <div class="nm">갱신 이상</div>
+        <div class="ds">한 곳만 바꿨는데 다른 곳이 안 바뀜</div>
+        <div class="ex">회원 주소 1곳만 수정해 데이터 불일치</div>
+      </div>
+      <div class="anom-card">
+        <div class="icn">−</div>
+        <div class="nm">삭제 이상</div>
+        <div class="ds">데이터 지우려다 필요한 정보까지 사라짐</div>
+        <div class="ex">마지막 수강 취소했는데 학생 정보까지 삭제</div>
+      </div>
+    </div>
+    <table class="reveal">
+      <thead><tr><th>종류</th><th>무슨 일인가</th><th>비유</th></tr></thead>
+      <tbody>
+        <tr><td>삽입 이상</td><td>데이터 넣으려는데 다른 정보가 없어 못 넣음</td><td>학생 등록하려는데 수강과목 칸을 비울 수 없음</td></tr>
+        <tr><td>갱신 이상</td><td>한 곳만 바꿨는데 다른 곳이 안 바뀜</td><td>회원 주소 1곳만 수정해 데이터 불일치</td></tr>
+        <tr><td>삭제 이상</td><td>데이터 지우려다 필요한 정보까지 사라짐</td><td>마지막 수강 취소했는데 학생 정보까지 삭제</td></tr>
+      </tbody>
+    </table>
+
+    <!-- 1NF -->
+    <h2 class="reveal">1NF — 원자값 만들기</h2>
+    <div class="ba-flow reveal">
+      <div class="ba-side before">
+        <span class="ba-tag">BEFORE</span>
+        <h4 class="ba-h">비정규형 (다중값)</h4>
+        <div class="mini-table">
+          <div class="h">학생</div><div class="h">수강과목</div>
+          <div class="c">김철수</div><div class="c is-null">수학, 영어, 국어</div>
+        </div>
+      </div>
+      <div class="ba-arrow">→</div>
+      <div class="ba-side after">
+        <span class="ba-tag">AFTER (1NF)</span>
+        <h4 class="ba-h">한 칸에 한 값</h4>
+        <div class="mini-table">
+          <div class="h">학생</div><div class="h">수강과목</div>
+          <div class="c">김철수</div><div class="c">수학</div>
+          <div class="c">김철수</div><div class="c">영어</div>
+          <div class="c">김철수</div><div class="c">국어</div>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="reveal">Before(비정규형)</h3>
+    <table class="reveal">
+      <thead><tr><th>학생</th><th>수강과목</th></tr></thead>
+      <tbody><tr><td>김철수</td><td>수학, 영어, 국어</td></tr></tbody>
+    </table>
+
+    <h3 class="reveal">After(1NF)</h3>
+    <table class="reveal">
+      <thead><tr><th>학생</th><th>수강과목</th></tr></thead>
+      <tbody>
+        <tr><td>김철수</td><td>수학</td></tr>
+        <tr><td>김철수</td><td>영어</td></tr>
+        <tr><td>김철수</td><td>국어</td></tr>
+      </tbody>
+    </table>
+    <p class="reveal">모든 칸이 하나의 값을 가진다.</p>
+
+    <!-- 2NF -->
+    <h2 class="reveal">2NF — 부분 함수 종속 제거</h2>
+    <p class="reveal">부분 함수 종속이란 <a href="./1-1-5_식별자.html">복합 식별자</a>인 PK (A, B) 중 어떤 컬럼이 A에만 또는 B에만 의존하는 상태다.</p>
+
+    <div class="ba-flow large-after reveal">
+      <div class="ba-side before">
+        <span class="ba-tag">BEFORE (1NF)</span>
+        <h4 class="ba-h">PK = (학생ID, 과목ID) — 부분종속</h4>
+        <div class="mini-table cols-4">
+          <div class="h">학생ID</div><div class="h">과목ID</div><div class="h">학생이름</div><div class="h">성적</div>
+          <div class="c">S01</div><div class="c">K1</div><div class="c is-null">김철수</div><div class="c">90</div>
+          <div class="c">S01</div><div class="c">K2</div><div class="c is-null">김철수</div><div class="c">85</div>
+        </div>
+        <p style="font-size:12px;color:var(--fg-3);margin:10px 0 0;">학생이름은 학생ID에만, 과목명은 과목ID에만 종속</p>
+      </div>
+      <div class="ba-arrow">→</div>
+      <div class="ba-side after">
+        <span class="ba-tag">AFTER (2NF)</span>
+        <h4 class="ba-h">3개로 분리</h4>
+        <div class="ba-tables cols-3">
+          <div class="ba-mini-table"><div class="h">학생</div><div class="row">S01 / 김철수</div></div>
+          <div class="ba-mini-table"><div class="h">과목</div><div class="row">K1 / 수학</div><div class="row">K2 / 영어</div></div>
+          <div class="ba-mini-table"><div class="h">수강</div><div class="row">S01·K1 / 90</div><div class="row">S01·K2 / 85</div></div>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="reveal">Before(1NF, 부분종속 존재)</h3>
+    <p class="reveal">PK = (학생ID, 과목ID)</p>
+    <table class="reveal">
+      <thead><tr><th>학생ID</th><th>과목ID</th><th>학생이름</th><th>과목명</th><th>성적</th></tr></thead>
+      <tbody>
+        <tr><td>S01</td><td>K1</td><td>김철수</td><td>수학</td><td>90</td></tr>
+        <tr><td>S01</td><td>K2</td><td>김철수</td><td>영어</td><td>85</td></tr>
+      </tbody>
+    </table>
+    <p class="reveal">학생이름은 학생ID에만, 과목명은 과목ID에만 종속된다.</p>
+
+    <h3 class="reveal">After(2NF)</h3>
+    <p class="reveal" style="font-size:13.5px;color:var(--fg-3);">학생</p>
+    <table class="reveal">
+      <thead><tr><th>학생ID</th><th>학생이름</th></tr></thead>
+      <tbody><tr><td>S01</td><td>김철수</td></tr></tbody>
+    </table>
+    <p class="reveal" style="font-size:13.5px;color:var(--fg-3);">과목</p>
+    <table class="reveal">
+      <thead><tr><th>과목ID</th><th>과목명</th></tr></thead>
+      <tbody>
+        <tr><td>K1</td><td>수학</td></tr>
+        <tr><td>K2</td><td>영어</td></tr>
+      </tbody>
+    </table>
+    <p class="reveal" style="font-size:13.5px;color:var(--fg-3);">수강</p>
+    <table class="reveal">
+      <thead><tr><th>학생ID</th><th>과목ID</th><th>성적</th></tr></thead>
+      <tbody>
+        <tr><td>S01</td><td>K1</td><td>90</td></tr>
+        <tr><td>S01</td><td>K2</td><td>85</td></tr>
+      </tbody>
+    </table>
+
+    <!-- 3NF -->
+    <h2 class="reveal">3NF — 이행 함수 종속 제거</h2>
+    <p class="reveal">이행 종속이란 <strong>A → B → C</strong> 형태로, PK가 아닌 B를 통해 C가 결정되는 상태다.</p>
+
+    <div class="ba-flow reveal">
+      <div class="ba-side before">
+        <span class="ba-tag">BEFORE (2NF)</span>
+        <h4 class="ba-h">사원ID → 부서ID → 부서명</h4>
+        <div class="mini-table cols-3">
+          <div class="h">사원ID</div><div class="h">부서ID</div><div class="h">부서명</div>
+          <div class="c">E01</div><div class="c">D1</div><div class="c is-null">영업부</div>
+          <div class="c">E02</div><div class="c">D1</div><div class="c is-null">영업부</div>
+        </div>
+      </div>
+      <div class="ba-arrow">→</div>
+      <div class="ba-side after">
+        <span class="ba-tag">AFTER (3NF)</span>
+        <h4 class="ba-h">사원·부서 분리</h4>
+        <div class="ba-tables cols-2">
+          <div class="ba-mini-table"><div class="h">사원</div><div class="row">E01 / D1</div><div class="row">E02 / D1</div></div>
+          <div class="ba-mini-table"><div class="h">부서</div><div class="row">D1 / 영업부</div></div>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="reveal">Before(2NF, 이행종속)</h3>
+    <table class="reveal">
+      <thead><tr><th>사원ID(PK)</th><th>부서ID</th><th>부서명</th></tr></thead>
+      <tbody>
+        <tr><td>E01</td><td>D1</td><td>영업부</td></tr>
+        <tr><td>E02</td><td>D1</td><td>영업부</td></tr>
+      </tbody>
+    </table>
+    <p class="reveal">사원ID → 부서ID → 부서명 (이행 종속)</p>
+
+    <h3 class="reveal">After(3NF)</h3>
+    <p class="reveal" style="font-size:13.5px;color:var(--fg-3);">사원</p>
+    <table class="reveal">
+      <thead><tr><th>사원ID</th><th>부서ID</th></tr></thead>
+      <tbody>
+        <tr><td>E01</td><td>D1</td></tr>
+        <tr><td>E02</td><td>D1</td></tr>
+      </tbody>
+    </table>
+    <p class="reveal" style="font-size:13.5px;color:var(--fg-3);">부서</p>
+    <table class="reveal">
+      <thead><tr><th>부서ID</th><th>부서명</th></tr></thead>
+      <tbody><tr><td>D1</td><td>영업부</td></tr></tbody>
+    </table>
+
+    <!-- BCNF -->
+    <h2 class="reveal">BCNF — 더 엄격한 3NF</h2>
+    <p class="reveal">3NF 까지 정규화해도 일부 비정상 종속이 남는 경우가 있다. <strong>모든 결정자(determinant)가 후보키여야</strong> BCNF다.</p>
+    <blockquote class="reveal">
+      <strong>결정자란?</strong> — A → B 일 때 B 를 결정하는 A. 이 A 가 후보키 (PK 또는 UNIQUE) 가 아니면 BCNF 위반.
+    </blockquote>
+
+    <h3 class="reveal">예시 (3NF 만족, BCNF 위반)</h3>
+    <p class="reveal">PK = (학생, 과목)</p>
+    <table class="reveal">
+      <thead><tr><th>학생</th><th>과목</th><th>강사</th></tr></thead>
+      <tbody>
+        <tr><td>S01</td><td>수학</td><td>김교수</td></tr>
+        <tr><td>S02</td><td>수학</td><td>김교수</td></tr>
+        <tr><td>S03</td><td>영어</td><td>이교수</td></tr>
+      </tbody>
+    </table>
+    <p class="reveal">규칙: 한 강사는 한 과목만 가르친다 → <strong>강사 → 과목</strong> 종속 존재.<br>문제: '강사' 는 후보키가 아닌데 '과목' 을 결정 → BCNF 위반.</p>
+
+    <h3 class="reveal">After (BCNF)</h3>
+    <p class="reveal"><strong>강사_과목</strong>: (강사, 과목) / <strong>학생_강사</strong>: (학생, 강사)</p>
+    <table class="reveal">
+      <thead><tr><th>단계</th><th>차이</th></tr></thead>
+      <tbody>
+        <tr><td>3NF</td><td>PK가 아닌 컬럼이 PK에 직접 종속 (이행 종속 제거 완료)</td></tr>
+        <tr><td>BCNF</td><td>모든 함수 종속의 <strong>결정자가 후보키</strong> 여야 함</td></tr>
+      </tbody>
+    </table>
+    <p class="reveal">비유하면 3NF 는 거의 깔끔, BCNF 는 완벽주의 정리다.</p>
+
+    <!-- SQL 실전 -->
+    <h2 class="section-label sec-sql reveal"><span class="label-tag">SQL 실전</span><span class="label-rest">정규화로 분리</span></h2>
+    <p class="reveal" style="font-size: 13px; color: var(--fg-3); margin: 8px 0 4px;">예시 데이터 — 정규화 후 4개 테이블 (주문 1건: 김철수가 사과 2개)</p>
+    <div class="ba-flow reveal" style="grid-template-columns: 1fr 28px 1fr 28px 1fr 28px 1fr; align-items: stretch;">
+      <div class="ba-side before">
+        <span class="ba-tag">CUSTOMER</span>
+        <h4 class="ba-h">고객</h4>
+        <div class="mini-table cols-2">
+          <div class="h">CUST_ID</div><div class="h">CUST_NAME</div>
+          <div class="c">C01</div><div class="c">김철수</div>
+        </div>
+      </div>
+      <div class="ba-arrow" style="font-size: 18px; color: var(--point-500);">+</div>
+      <div class="ba-side before">
+        <span class="ba-tag">ORDERS</span>
+        <h4 class="ba-h">주문</h4>
+        <div class="mini-table cols-2">
+          <div class="h">ORDER_ID</div><div class="h">CUST_ID</div>
+          <div class="c">1</div><div class="c">C01</div>
+        </div>
+      </div>
+      <div class="ba-arrow" style="font-size: 18px; color: var(--point-500);">+</div>
+      <div class="ba-side before">
+        <span class="ba-tag">ORDER_DETAIL</span>
+        <h4 class="ba-h">주문상세</h4>
+        <div class="mini-table cols-3">
+          <div class="h">ORDER_ID</div><div class="h">PROD_ID</div><div class="h">QTY</div>
+          <div class="c">1</div><div class="c">P01</div><div class="c">2</div>
+        </div>
+      </div>
+      <div class="ba-arrow" style="font-size: 18px; color: var(--point-500);">+</div>
+      <div class="ba-side before">
+        <span class="ba-tag">PRODUCT</span>
+        <h4 class="ba-h">상품</h4>
+        <div class="mini-table cols-2">
+          <div class="h">PROD_ID</div><div class="h">PROD_NAME</div>
+          <div class="c">P01</div><div class="c">사과</div>
+        </div>
+      </div>
+    </div>
+    <pre class="reveal"><button class="copy-btn">복사</button><code><span class="sql-cm">-- 정규화 전: 한 테이블에 모든 정보</span>
+<span class="sql-kw">CREATE TABLE</span> <span class="sql-name">BAD_ORDER</span> (
+    <span class="sql-type">ORDER_ID</span> <span class="sql-type">NUMBER</span>,
+    <span class="sql-type">PROD_ID</span>  <span class="sql-type">VARCHAR2</span>(<span class="sql-num">10</span>),
+    <span class="sql-type">PROD_NAME</span> <span class="sql-type">VARCHAR2</span>(<span class="sql-num">50</span>),  <span class="sql-cm">-- 상품명이 함께</span>
+    <span class="sql-type">QTY</span>      <span class="sql-type">NUMBER</span>,
+    <span class="sql-type">CUST_NAME</span> <span class="sql-type">VARCHAR2</span>(<span class="sql-num">50</span>)   <span class="sql-cm">-- 고객명이 함께</span>
+);
+
+<span class="sql-cm">-- 정규화 후: 책임에 따라 분리</span>
+<span class="sql-kw">CREATE TABLE</span> <span class="sql-name">PRODUCT</span> (<span class="sql-type">PROD_ID</span> <span class="sql-type">VARCHAR2</span>(<span class="sql-num">10</span>) <span class="sql-kw">PRIMARY KEY</span>, <span class="sql-type">PROD_NAME</span> <span class="sql-type">VARCHAR2</span>(<span class="sql-num">50</span>));
+<span class="sql-kw">CREATE TABLE</span> <span class="sql-name">CUSTOMER</span>(<span class="sql-type">CUST_ID</span> <span class="sql-type">VARCHAR2</span>(<span class="sql-num">10</span>) <span class="sql-kw">PRIMARY KEY</span>, <span class="sql-type">CUST_NAME</span> <span class="sql-type">VARCHAR2</span>(<span class="sql-num">50</span>));
+<span class="sql-kw">CREATE TABLE</span> <span class="sql-name">ORDERS</span>  (<span class="sql-type">ORDER_ID</span> <span class="sql-type">NUMBER</span> <span class="sql-kw">PRIMARY KEY</span>, <span class="sql-type">CUST_ID</span> <span class="sql-type">VARCHAR2</span>(<span class="sql-num">10</span>));
+<span class="sql-kw">CREATE TABLE</span> <span class="sql-name">ORDER_DETAIL</span>(<span class="sql-type">ORDER_ID</span> <span class="sql-type">NUMBER</span>, <span class="sql-type">PROD_ID</span> <span class="sql-type">VARCHAR2</span>(<span class="sql-num">10</span>), <span class="sql-type">QTY</span> <span class="sql-type">NUMBER</span>);
+
+<span class="sql-cm">-- 같은 주문(주문 1: 고객 C01의 사과 2개)을 INSERT 후 SELECT</span>
+<span class="sql-kw">SELECT</span> <span class="sql-name">O</span>.<span class="sql-type">ORDER_ID</span>, <span class="sql-name">C</span>.<span class="sql-type">CUST_NAME</span>, <span class="sql-name">P</span>.<span class="sql-type">PROD_NAME</span>, <span class="sql-name">D</span>.<span class="sql-type">QTY</span>
+<span class="sql-kw">FROM</span>   <span class="sql-name">ORDERS</span> <span class="sql-name">O</span>
+       <span class="sql-kw">JOIN</span> <span class="sql-name">CUSTOMER</span>     <span class="sql-name">C</span> <span class="sql-kw">ON</span> <span class="sql-name">O</span>.<span class="sql-type">CUST_ID</span>  = <span class="sql-name">C</span>.<span class="sql-type">CUST_ID</span>
+       <span class="sql-kw">JOIN</span> <span class="sql-name">ORDER_DETAIL</span> <span class="sql-name">D</span> <span class="sql-kw">ON</span> <span class="sql-name">O</span>.<span class="sql-type">ORDER_ID</span> = <span class="sql-name">D</span>.<span class="sql-type">ORDER_ID</span>
+       <span class="sql-kw">JOIN</span> <span class="sql-name">PRODUCT</span>      <span class="sql-name">P</span> <span class="sql-kw">ON</span> <span class="sql-name">D</span>.<span class="sql-type">PROD_ID</span>  = <span class="sql-name">P</span>.<span class="sql-type">PROD_ID</span>;</code></pre>
+    <p class="reveal" style="font-size: 13px; color: var(--fg-3); margin: 8px 0 4px;">↓ 결과</p>
+    <table class="reveal">
+      <thead><tr><th>ORDER_ID</th><th>CUST_NAME</th><th>PROD_NAME</th><th>QTY</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>김철수</td><td>사과</td><td>2</td></tr>
+      </tbody>
+    </table>
+    <p class="reveal" style="font-size: 12.5px; color: var(--fg-3); margin: 0 0 12px;">→ 4개 테이블에 흩어진 데이터가 3-way JOIN으로 합쳐져 비정규형과 같은 모양으로 조회된다. 저장은 분산, 조회는 통합 — 정규화의 본질.</p>
+    <p class="reveal">정규화로 분리한 데이터도 <strong>JOIN으로 합쳐 보면</strong> 비정규형과 같은 결과를 낸다.</p>
+
+    <h3 class="reveal">ER로 보는 정규화 후</h3>
+    <div class="mermaid reveal">
+erDiagram
+    CUSTOMER ||--o{ ORDERS : "주문한다"
+    ORDERS   ||--|{ ORDER_DETAIL : "포함한다"
+    PRODUCT  ||--o{ ORDER_DETAIL : "팔린다"
+    CUSTOMER {
+        varchar CUST_ID PK
+        varchar CUST_NAME
+    }
+    ORDERS {
+        number  ORDER_ID PK
+        varchar CUST_ID  FK
+    }
+    PRODUCT {
+        varchar PROD_ID PK
+        varchar PROD_NAME
+    }
+    ORDER_DETAIL {
+        number  ORDER_ID PK,FK
+        varchar PROD_ID  PK,FK
+        number  QTY
+    }
+    </div>
+
+    <!-- Before & After -->
+    <h2 class="section-label sec-compare reveal"><span class="label-tag">Before &amp; After</span><span class="label-rest">정규화 효과</span></h2>
+    <p class="reveal">주문 한 건마다 고객 정보·상품 단가까지 한 줄에 다 적어두는 비정규형 테이블. 김철수가 두 번 주문하면 그의 전화번호가 두 번 똑같이 적히고, 사과의 단가는 주문될 때마다 반복된다. 정규화 전후의 차이를 본다.</p>
+
+    <div class="ba-flow large-after reveal">
+      <div class="ba-side before">
+        <span class="ba-tag">BEFORE</span>
+        <h4 class="ba-h">한 테이블에 모두</h4>
+        <div class="mini-table cols-4">
+          <div class="h">주문</div><div class="h">고객</div><div class="h">상품</div><div class="h">단가</div>
+          <div class="c">1</div><div class="c is-null">김철수·010-1111</div><div class="c">사과</div><div class="c is-null">1000</div>
+          <div class="c">2</div><div class="c is-null">김철수·010-1111</div><div class="c">배</div><div class="c">2000</div>
+          <div class="c">3</div><div class="c">이영희·010-2222</div><div class="c">사과</div><div class="c is-null">1000</div>
+        </div>
+        <p style="font-size:12px;color:var(--fg-3);margin:10px 0 0;">고객 정보 중복 + 상품 단가 중복</p>
+      </div>
+      <div class="ba-arrow">→</div>
+      <div class="ba-side after">
+        <span class="ba-tag">AFTER (3NF)</span>
+        <h4 class="ba-h">4개 테이블로 분리</h4>
+        <div class="ba-tables cols-2">
+          <div class="ba-mini-table"><div class="h">고객</div><div class="row">C01 / 김철수 / 010-1111</div><div class="row">C02 / 이영희 / 010-2222</div></div>
+          <div class="ba-mini-table"><div class="h">상품</div><div class="row">P01 / 사과 / 1000</div><div class="row">P02 / 배 / 2000</div></div>
+          <div class="ba-mini-table"><div class="h">주문</div><div class="row">1 / C01</div><div class="row">2 / C01</div><div class="row">3 / C02</div></div>
+          <div class="ba-mini-table"><div class="h">주문상세</div><div class="row">1·P01·2</div><div class="row">2·P02·1</div><div class="row">3·P01·3</div></div>
+        </div>
+      </div>
+    </div>
+
+    <h4 class="reveal">Before</h4>
+    <table class="reveal">
+      <thead><tr><th>주문ID</th><th>고객명</th><th>고객전화</th><th>상품명</th><th>단가</th><th>수량</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>김철수</td><td>010-1111</td><td>사과</td><td>1000</td><td>2</td></tr>
+        <tr><td>2</td><td>김철수</td><td>010-1111</td><td>배</td><td>2000</td><td>1</td></tr>
+        <tr><td>3</td><td>이영희</td><td>010-2222</td><td>사과</td><td>1000</td><td>3</td></tr>
+      </tbody>
+    </table>
+    <p class="reveal">고객 정보 중복, 상품 단가 중복, 수정 시 일관성 깨짐.</p>
+
+    <h4 class="reveal">After (3NF)</h4>
+    <p class="reveal">고객·상품·주문·주문상세 4개로 분리되어 중복이 사라진다.</p>
+    <p class="reveal">같은 고객 전화번호가 주문 행마다 반복되는 것은 함수 종속이 한 테이블 안에 섞여 있기 때문이다(고객명·고객전화는 고객ID 에, 상품명·단가는 상품ID 에 종속). 종속이 다른 데이터끼리 같은 테이블을 공유하면 갱신·삭제·삽입 이상이 모두 한 자리에서 발생한다. "한 테이블엔 한 가지 의미만"이라는 원칙으로 단계적으로 쪼개면, 김철수의 전화번호는 고객 테이블 한 줄에서만 관리하면 된다.</p>
+
+    <!-- 장단점 -->
+    <h2 class="reveal">정규화의 장단점</h2>
+    <table class="reveal">
+      <thead><tr><th>장점</th><th>단점</th></tr></thead>
+      <tbody>
+        <tr><td>데이터 중복 제거</td><td>테이블이 많아짐</td></tr>
+        <tr><td>이상현상 방지</td><td><a href="./1-2-2_관계와조인의이해.html">조인</a>이 늘어남</td></tr>
+        <tr><td>데이터 무결성</td><td>조회 성능 일부 저하 가능</td></tr>
+        <tr><td>변경/유지보수 용이</td><td>—</td></tr>
+      </tbody>
+    </table>
+    <p class="reveal">성능을 위해 의도적으로 <strong>반정규화(역정규화)</strong>를 하기도 한다.</p>
+
+    <div class="reveal" style="margin: 40px 0 0; padding: 22px 24px; background: linear-gradient(135deg, var(--point-050), var(--bg-card)); border: 1px solid var(--point-100); border-radius: 12px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;">
+      <div>
+        <div style="font-size: 12px; font-weight: 800; color: var(--point-600); letter-spacing: 0.04em; margin-bottom: 4px;">시험 대비</div>
+        <div style="font-size: 14px; color: var(--fg-2);">이 챕터의 함정·정답과 30초 정리는 통합 시험 대비 페이지에서 볼 수 있습니다.</div>
+      </div>
+      <a href="./exam-review.html#ch-1-2-1" style="font-size: 14px; font-weight: 700; color: var(--point-600); text-decoration: none; padding: 8px 14px; border: 1px solid var(--point-300); border-radius: 8px; background: var(--bg-card); white-space: nowrap;">시험 대비 보기 →</a>
+    </div>
+
+  </article>
+</main>
+
+<script src="./common.js"></script>
+</body>
+</html>

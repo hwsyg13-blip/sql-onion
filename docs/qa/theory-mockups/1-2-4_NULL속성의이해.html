@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NULL 속성의 이해 — SQLD양파 이론</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@1.3.9/dist/web/variable/pretendardvariable.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/wan2land/d2coding/d2coding-ligature-subset.css">
+<style>
+:root {
+  --bg-page: #F5F7F6; --bg-surface: #FAFAFA; --bg-card: #FFFFFF; --bg-code: #EEF1EE; --bg-muted: #F3F5F3;
+  --point-600: #2E7D32; --point-500: #4CAF50; --point-300: #A5D6A7; --point-100: #EBF5EC; --point-050: #F0F7F1;
+  --fg-1: #1F2320; --fg-2: #333333; --fg-3: #6B7280; --fg-4: #9CA3AF;
+  --correct-fg: #256B29; --correct-bg: #E6F3E7; --correct-border: #BFDFC2;
+  --wrong-fg: #A9562E; --wrong-bg: #FCEEE5; --wrong-border: #F1D6C1;
+  --info-fg: #2F5D80; --info-bg: #E9F0F6;
+  --border-subtle: #EEF1EE; --border-default: #E5E7EB; --border-strong: #D1D5DB;
+  --font-sans: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif;
+  --font-mono: "D2Coding ligature", "D2Coding", "Fira Code", "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --shadow-sm: 0 1px 2px rgba(17, 24, 39, 0.04); --shadow-md: 0 4px 12px rgba(17, 24, 39, 0.06); --shadow-lg: 0 12px 32px rgba(17, 24, 39, 0.08);
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1); --duration-base: 200ms; --duration-slow: 300ms;
+  --container-content: 720px; --container-page: 960px; --header-h: 64px;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; background: var(--bg-page); color: var(--fg-2); font-family: var(--font-sans); font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+/* ── 페이지 쉘 ── */
+.topnav { height: var(--header-h); background: rgba(255,255,255,0.92); backdrop-filter: blur(8px); border-bottom: 1px solid var(--border-subtle); display: flex; align-items: center; padding: 0 24px; position: sticky; top: 0; z-index: 10; }
+.topnav-inner { max-width: var(--container-page); margin: 0 auto; width: 100%; display: flex; align-items: center; gap: 24px; }
+.topnav-brand { font-size: 18px; font-weight: 800; color: var(--point-600); letter-spacing: -0.01em; display: flex; align-items: center; gap: 8px; }
+.topnav-brand::before { content: "🧅"; font-size: 22px; }
+.topnav-links { display: flex; gap: 20px; flex: 1; }
+.topnav-links a { color: var(--fg-2); text-decoration: none; font-size: 14.5px; font-weight: 600; padding: 6px 0; border-bottom: 2px solid transparent; transition: border-color 200ms; }
+.topnav-links a:hover, .topnav-links a.active { border-bottom-color: var(--point-500); color: var(--point-600); }
+
+.page-shell { max-width: var(--container-page); margin: 0 auto; padding: 28px 24px 80px; }
+.breadcrumb { font-size: 13px; color: var(--fg-3); margin-bottom: 12px; display: flex; gap: 6px; align-items: center; }
+.breadcrumb a { color: var(--fg-3); text-decoration: none; }
+.breadcrumb a:hover { color: var(--point-600); }
+.breadcrumb .sep { opacity: 0.5; }
+.page-title-block { margin-bottom: 32px; padding-bottom: 24px; border-bottom: 1px solid var(--border-subtle); }
+.page-title-block h1 { font-size: 36px; font-weight: 800; color: var(--fg-1); margin: 0 0 10px; letter-spacing: -0.02em; line-height: 1.2; }
+.page-title-block .subtitle { font-size: 14.5px; color: var(--fg-3); }
+.page-title-block .chapter-tag { display: inline-block; background: var(--point-100); color: var(--point-600); font-size: 11.5px; font-weight: 800; letter-spacing: 0.02em; padding: 4px 10px; border-radius: 6px; margin-right: 8px; }
+
+/* ── .theory-md (사이트 흡수) ── */
+.theory-md { color: var(--fg-2); font-size: 15.5px; line-height: 1.8; }
+.theory-md > *:first-child { margin-top: 0 !important; }
+.theory-md p { font-size: 15.5px; color: var(--fg-2); line-height: 1.8; margin: 0 0 14px; }
+.theory-md strong { color: var(--fg-1); font-weight: 700; }
+.theory-md em { color: var(--fg-1); font-style: normal; background: var(--point-050); padding: 0 4px; border-radius: 3px; }
+.theory-md a { color: var(--point-600); text-decoration: underline; text-underline-offset: 2px; transition: color 150ms; }
+.theory-md a:hover { color: var(--point-500); }
+.theory-md hr { border: 0; height: 1px; background: linear-gradient(90deg, transparent, var(--border-subtle), transparent); margin: 36px 0; }
+.theory-md h2 { font-size: 21px; font-weight: 800; color: var(--fg-1); margin: 40px 0 16px; letter-spacing: -0.01em; }
+.theory-md h3 { font-size: 16px; font-weight: 700; color: var(--fg-1); margin: 28px 0 10px; padding-left: 12px; border-left: 3px solid var(--point-500); }
+.theory-md h4 { font-size: 14.5px; font-weight: 700; color: var(--fg-1); margin: 20px 0 8px; }
+
+.theory-md h2.section-label { display: flex; align-items: center; gap: 12px; margin: 50px 0 22px; font-size: 19px; font-weight: 800; }
+.theory-md h2.section-label .label-tag { display: inline-flex; align-items: center; gap: 5px; font-size: 11.5px; font-weight: 800; letter-spacing: -0.01em; padding: 6px 12px; border-radius: 8px; flex-shrink: 0; line-height: 1; white-space: nowrap; }
+.theory-md h2.section-label .label-tag::before { content: ''; display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: currentColor; opacity: 0.9; }
+.theory-md h2.section-label .label-rest { color: var(--fg-1); font-weight: 800; }
+.theory-md h2.sec-summary .label-tag { background: var(--point-100); color: var(--point-600); }
+.theory-md h2.sec-diagram .label-tag { background: var(--info-bg); color: var(--info-fg); }
+.theory-md h2.sec-sql .label-tag { background: #E8F5E9; color: #1B5E20; }
+.theory-md h2.sec-compare .label-tag { background: #FFF8E1; color: #8B6914; }
+.theory-md h2.sec-exam .label-tag { background: var(--wrong-bg); color: var(--wrong-fg); }
+
+.theory-md blockquote { position: relative; margin: 16px 0 22px; padding: 18px 22px 18px 56px; background: var(--point-050); border: 1px solid var(--point-100); border-left: 4px solid var(--point-500); border-radius: 12px; color: var(--fg-1); font-size: 14.5px; line-height: 1.75; }
+.theory-md blockquote::before { content: '💡'; position: absolute; left: 18px; top: 16px; font-size: 22px; line-height: 1; }
+.theory-md blockquote p { margin: 0; color: var(--fg-1); }
+.theory-md blockquote strong { color: var(--point-600); font-weight: 800; }
+.theory-md blockquote code { background: rgba(46,125,50,0.1); color: var(--point-600); padding: 1px 5px; border-radius: 4px; font-size: 0.9em; }
+
+.theory-md .ex-box { margin: 14px 0 8px; padding: 14px 18px; background: var(--bg-card); border: 1px dashed var(--border-default); border-radius: 10px; color: var(--fg-2); font-size: 14.5px; line-height: 1.7; }
+.theory-md .ex-box::before { content: 'ex)'; display: inline-block; margin-right: 8px; color: var(--point-600); font-weight: 800; font-family: var(--font-mono); font-size: 13px; }
+
+.theory-md :not(pre) > code { background: var(--bg-code); color: var(--fg-1); padding: 1px 6px; border-radius: 5px; font-family: var(--font-mono); font-size: 0.9em; font-weight: 600; }
+
+/* SQL 코드 — 라이트 톤 */
+.theory-md pre { background: var(--bg-code); color: var(--fg-1); padding: 16px 20px; border-radius: 12px; overflow-x: auto; font-family: var(--font-mono); font-size: 13px; line-height: 1.65; margin: 14px 0 20px; white-space: pre; border: 1px solid var(--border-subtle); box-shadow: var(--shadow-sm); position: relative; }
+.theory-md pre .copy-btn { position: absolute; top: 8px; right: 8px; background: var(--bg-card); color: var(--fg-3); border: 1px solid var(--border-default); padding: 4px 10px; border-radius: 6px; font-size: 11px; font-weight: 700; cursor: pointer; opacity: 0; transition: opacity 150ms, background 150ms, color 150ms, border-color 150ms; }
+.theory-md pre:hover .copy-btn { opacity: 1; }
+.theory-md pre .copy-btn:hover { background: var(--point-100); color: var(--point-600); border-color: var(--point-300); }
+.sql-kw { color: var(--point-600); font-weight: 700; }
+.sql-type { color: var(--info-fg); font-weight: 600; }
+.sql-cm { color: var(--fg-3); font-style: italic; }
+.sql-name { color: var(--fg-1); font-weight: 700; }
+.sql-str { color: var(--wrong-fg); }
+.sql-num { color: var(--info-fg); }
+
+/* 표 */
+.theory-md table { width: 100%; border-collapse: separate; border-spacing: 0; margin: 16px 0 22px; font-size: 13.5px; border: 1px solid var(--border-subtle); border-radius: 12px; overflow: hidden; background: var(--bg-card); box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
+.theory-md table thead { background: var(--point-050); }
+.theory-md table thead th { text-align: left; padding: 12px 16px; color: var(--point-600); font-weight: 800; border-bottom: 2px solid var(--point-100); font-size: 12.5px; letter-spacing: -0.01em; white-space: nowrap; }
+.theory-md table tbody td { padding: 11px 16px; border-bottom: 1px solid var(--border-subtle); color: var(--fg-2); vertical-align: top; line-height: 1.65; }
+.theory-md table tbody tr:last-child td { border-bottom: 0; }
+.theory-md table tbody tr:nth-child(even) { background: rgba(240,247,241,0.4); }
+.theory-md table tbody tr:hover { background: var(--point-050); }
+.theory-md table tbody td:first-child { color: var(--fg-1); font-weight: 700; }
+.theory-md table code { background: var(--point-050); color: var(--point-600); padding: 1px 6px; border-radius: 4px; font-size: 0.9em; font-weight: 600; }
+
+/* ============================================================
+   ★ 인포그래픽 컴포넌트 (1-1-2 베이스 + NULL 특화)
+   ============================================================ */
+
+/* (NULL 특화) 3-way 비교 — NULL vs 0 vs 공백 */
+.threeway {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;
+  margin: 22px 0 16px;
+}
+.threeway-card {
+  background: var(--bg-card); border: 1px solid var(--border-subtle);
+  border-radius: 14px; padding: 20px 18px 18px;
+  position: relative; overflow: hidden;
+  transition: transform var(--duration-base), border-color var(--duration-base), box-shadow var(--duration-base);
+}
+.threeway-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+  transform: scaleX(0); transform-origin: left;
+  transition: transform var(--duration-slow) var(--ease-standard);
+}
+.threeway-card.zero::before { background: linear-gradient(90deg, var(--info-fg), var(--info-bg)); }
+.threeway-card.blank::before { background: linear-gradient(90deg, #8B6914, #FFF8E1); }
+.threeway-card.null-card::before { background: linear-gradient(90deg, var(--wrong-fg), var(--wrong-bg)); }
+.threeway-card:hover { transform: translateY(-4px); border-color: var(--point-500); box-shadow: 0 8px 20px rgba(46,125,50,0.10); }
+.threeway-card:hover::before { transform: scaleX(1); }
+.threeway-card .glyph {
+  font-family: var(--font-mono); font-size: 32px; font-weight: 900;
+  text-align: center; padding: 14px 0; margin-bottom: 12px;
+  border-radius: 10px;
+}
+.threeway-card.zero .glyph { background: var(--info-bg); color: var(--info-fg); }
+.threeway-card.blank .glyph { background: #FFF8E1; color: #8B6914; }
+.threeway-card.null-card .glyph { background: var(--wrong-bg); color: var(--wrong-fg); }
+.threeway-card .name { font-size: 14.5px; font-weight: 800; color: var(--fg-1); margin-bottom: 6px; }
+.threeway-card .desc { font-size: 12.5px; color: var(--fg-3); line-height: 1.55; }
+.threeway-card .desc strong { color: var(--fg-1); }
+
+/* (NULL 특화) 4규칙 카드 — trait-grid 변형 */
+.rule-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;
+  margin: 20px 0 24px;
+}
+.rule-card {
+  background: var(--bg-card); border: 1px solid var(--border-subtle);
+  border-radius: 14px; padding: 18px 16px 16px;
+  transition: transform var(--duration-base), border-color var(--duration-base), box-shadow var(--duration-base);
+  position: relative; overflow: hidden;
+}
+.rule-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+  background: linear-gradient(90deg, var(--point-500), var(--point-300));
+  transform: scaleX(0); transform-origin: left;
+  transition: transform var(--duration-slow) var(--ease-standard);
+}
+.rule-card:hover { transform: translateY(-4px); border-color: var(--point-500); box-shadow: 0 8px 20px rgba(46,125,50,0.12); }
+.rule-card:hover::before { transform: scaleX(1); }
+.rule-card .num {
+  width: 28px; height: 28px; border-radius: 999px;
+  background: var(--point-100); color: var(--point-600);
+  display: inline-flex; align-items: center; justify-content: center;
+  font-size: 13px; font-weight: 900; margin-bottom: 10px;
+}
+.rule-card .label { font-size: 13px; font-weight: 800; color: var(--fg-1); margin-bottom: 6px; line-height: 1.4; }
+.rule-card .desc { font-size: 11.5px; color: var(--fg-3); line-height: 1.55; }
+.rule-card .desc code { background: var(--bg-code); color: var(--fg-1); padding: 1px 5px; border-radius: 4px; font-size: 0.95em; }
+
+/* NULL 처리 함수 카드 */
+.fn-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin: 18px 0 22px; }
+.fn-card {
+  background: var(--bg-card); border: 1px solid var(--border-subtle);
+  border-radius: 12px; padding: 16px 18px 14px;
+  transition: transform var(--duration-base), border-color var(--duration-base);
+}
+.fn-card:hover { transform: translateY(-2px); border-color: var(--point-300); }
+.fn-card .name { font-family: var(--font-mono); font-size: 14px; font-weight: 800; color: var(--point-600); margin-bottom: 8px; }
+.fn-card .desc { font-size: 13px; color: var(--fg-2); line-height: 1.55; margin-bottom: 8px; }
+.fn-card .ex { font-family: var(--font-mono); font-size: 12px; background: var(--bg-code); padding: 6px 10px; border-radius: 6px; color: var(--fg-1); }
+
+/* Before/After 흐름 (1-1-2 ba-flow를 NULL 차이용으로 변형) */
+.null-flow {
+  margin: 22px 0 28px;
+  display: grid; grid-template-columns: 1fr 48px 1fr; gap: 16px; align-items: stretch;
+}
+.null-side {
+  background: var(--bg-card); border: 1px solid var(--border-subtle);
+  border-radius: 12px; padding: 16px 18px;
+}
+.null-side .tag {
+  display: inline-block; font-size: 10.5px; font-weight: 800;
+  padding: 3px 10px; border-radius: 999px;
+  margin-bottom: 8px; letter-spacing: 0.04em;
+}
+.null-side.no-fix .tag { background: var(--wrong-bg); color: var(--wrong-fg); }
+.null-side.fixed .tag { background: var(--correct-bg); color: var(--correct-fg); }
+.null-side h4.h { font-size: 13px; font-weight: 800; color: var(--fg-1); margin: 0 0 8px; }
+.null-side .sql {
+  font-family: var(--font-mono); font-size: 12px; color: var(--fg-1);
+  background: var(--bg-code); padding: 8px 10px; border-radius: 6px;
+  margin: 0 0 10px; line-height: 1.6;
+}
+.null-side .mini-table { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; font-size: 12px; }
+.null-side .mini-table .h { font-size: 10.5px; font-weight: 800; color: var(--point-600); padding: 4px 8px; background: var(--point-050); border-radius: 4px; letter-spacing: 0.02em; }
+.null-side .mini-table .c { padding: 4px 8px; font-family: var(--font-mono); color: var(--fg-1); }
+.null-side .mini-table .c.is-null { color: var(--wrong-fg); font-weight: 700; }
+.null-arrow { display: flex; align-items: center; justify-content: center; color: var(--point-500); font-size: 28px; font-weight: 800; }
+
+/* 시험 함정 그리드 (1-1-2와 동일) */
+.trap-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 18px 0 22px; }
+.trap-row { background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: 12px; padding: 16px 18px; transition: border-color var(--duration-base); }
+.trap-row.trap { border-left: 4px solid var(--wrong-fg); }
+.trap-row.right { border-left: 4px solid var(--correct-fg); }
+.trap-row .marker { font-size: 11px; font-weight: 800; padding: 3px 9px; border-radius: 999px; display: inline-block; margin-bottom: 8px; letter-spacing: 0.04em; }
+.trap-row.trap .marker { background: var(--wrong-bg); color: var(--wrong-fg); }
+.trap-row.right .marker { background: var(--correct-bg); color: var(--correct-fg); }
+.trap-row .body { font-size: 13.5px; color: var(--fg-1); line-height: 1.6; }
+.trap-row .body code { background: var(--bg-code); color: var(--fg-1); padding: 1px 5px; border-radius: 4px; font-size: 0.92em; font-family: var(--font-mono); }
+
+/* 30초 정리 */
+.summary-cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin: 18px 0 0; }
+.s-card { background: linear-gradient(135deg, var(--point-050), var(--bg-card)); border: 1px solid var(--point-100); border-radius: 12px; padding: 14px 16px; font-size: 13px; color: var(--fg-1); line-height: 1.55; transition: transform var(--duration-base); }
+.s-card:hover { transform: translateY(-2px); }
+.s-card .head { font-size: 11px; font-weight: 800; color: var(--point-600); letter-spacing: 0.04em; margin-bottom: 6px; }
+.s-card strong { color: var(--point-600); font-weight: 800; }
+
+/* 등장 애니메이션 */
+.reveal { opacity: 0; transform: translateY(12px); transition: opacity 500ms var(--ease-standard), transform 500ms var(--ease-standard); }
+.reveal.is-visible { opacity: 1; transform: translateY(0); }
+
+/* Mermaid 컨테이너 */
+.theory-md .mermaid {
+  background: linear-gradient(135deg, #FFFFFF 0%, var(--point-050) 100%);
+  border: 1px solid var(--point-100);
+  border-radius: 14px;
+  padding: 24px;
+  margin: 18px 0 24px;
+  text-align: center;
+  overflow-x: auto;
+  box-shadow: 0 1px 3px rgba(46,125,50,0.06);
+  font-family: var(--font-sans);
+  position: relative;
+}
+.theory-md .mermaid::before {
+  content: '◆ Diagram'; position: absolute; top: 10px; right: 14px;
+  color: var(--point-500); font-size: 10.5px; font-weight: 700; letter-spacing: 0.04em; pointer-events: none;
+}
+.theory-md .mermaid svg { max-width: 100%; height: auto !important; display: inline-block; }
+.theory-md .mermaid:not([data-processed="true"]) {
+  background: var(--bg-muted); color: var(--fg-3);
+  font-family: var(--font-mono); font-size: 12px;
+  text-align: left; white-space: pre-wrap;
+}
+
+/* 반응형 */
+@media (max-width: 900px) {
+  .topnav-links { display: none; }
+  .threeway { grid-template-columns: 1fr; }
+  .rule-grid { grid-template-columns: repeat(2, 1fr); }
+  .fn-grid { grid-template-columns: 1fr; }
+  .null-flow { grid-template-columns: 1fr; }
+  .null-arrow { transform: rotate(90deg); padding: 0; }
+  .trap-grid { grid-template-columns: 1fr; }
+  .summary-cards { grid-template-columns: 1fr; }
+}
+@media (max-width: 720px) {
+  .page-title-block h1 { font-size: 28px; }
+  .rule-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="topnav-inner">
+    <div class="topnav-brand">SQLD양파</div>
+    <div class="topnav-links">
+      <a href="#">홈</a>
+      <a href="#" class="active">이론</a>
+      <a href="#">기출 CBT</a>
+      <a href="#">모의고사</a>
+      <a href="#">Pro</a>
+    </div>
+  </div>
+</nav>
+
+<main class="page-shell">
+  <div class="breadcrumb">
+    <a href="#">이론</a>
+    <span class="sep">›</span>
+    <a href="#">1과목 데이터 모델링</a>
+    <span class="sep">›</span>
+    <a href="#">1-2. 데이터 모델과 SQL</a>
+  </div>
+
+  <header class="page-title-block">
+    <h1>NULL 속성의 이해</h1>
+    <p class="subtitle">값 없음. <code>IS NULL</code>로만 비교 · 3-값 논리 · NULL 처리 함수</p>
+  </header>
+
+  <article class="theory-md">
+
+  <!-- 핵심 요약 -->
+  <h2 class="section-label sec-summary reveal">
+    <span class="label-tag">핵심 요약</span>
+    <span class="label-rest">정의</span>
+  </h2>
+  <blockquote class="reveal">
+    NULL이란 <strong>값이 없거나 아직 모름</strong>을 나타내는 특수한 표시다. 0이나 공백과는 전혀 다르다.
+  </blockquote>
+  <div class="ex-box reveal">
+    설문지에서 "월 소득: <strong>0원</strong>"은 0이라는 값이 적힌 것, "월 소득: <strong>␣</strong>"(한 칸 띈 상태)은 공백 문자, "월 소득: <strong>미작성</strong>"이 NULL(값 자체가 없음)이다.
+  </div>
+
+  <!-- 개념 도식화 — 3-way 비교 인포그래픽 -->
+  <h2 class="section-label sec-diagram reveal">
+    <span class="label-tag">개념 도식화</span>
+    <span class="label-rest">NULL vs 0 vs 공백</span>
+  </h2>
+  <div class="threeway reveal">
+    <div class="threeway-card zero">
+      <div class="glyph">0</div>
+      <div class="name">숫자 0</div>
+      <div class="desc"><strong>존재 O</strong> · 산술 가능 · 비교 가능</div>
+    </div>
+    <div class="threeway-card blank">
+      <div class="glyph">' '</div>
+      <div class="name">공백 문자</div>
+      <div class="desc"><strong>존재 O</strong> · 문자열 한 칸 · 비교 가능</div>
+    </div>
+    <div class="threeway-card null-card">
+      <div class="glyph">NULL</div>
+      <div class="name">NULL</div>
+      <div class="desc"><strong>존재 X</strong> · 값 자체가 없음 · <code>IS NULL</code>만 가능</div>
+    </div>
+  </div>
+  <table class="reveal">
+    <thead>
+      <tr><th>비교</th><th>0</th><th>공백</th><th>NULL</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>데이터 존재 여부</td><td>있음</td><td>있음</td><td>없음</td></tr>
+      <tr><td>비교 가능 여부</td><td>가능</td><td>가능</td><td>불가 (<code>= NULL</code> 안 됨)</td></tr>
+      <tr><td>산술연산</td><td>가능</td><td>—</td><td>불가 (결과는 모두 NULL)</td></tr>
+    </tbody>
+  </table>
+
+  <!-- NULL 4가지 규칙 — 인포그래픽 -->
+  <h2 class="reveal">NULL의 4가지 규칙</h2>
+  <div class="rule-grid reveal">
+    <div class="rule-card">
+      <div class="num">1</div>
+      <div class="label">산술 연산</div>
+      <div class="desc">결과는 <strong>NULL</strong><br><code>1000 + NULL = NULL</code></div>
+    </div>
+    <div class="rule-card">
+      <div class="num">2</div>
+      <div class="label">비교 연산</div>
+      <div class="desc">결과는 <strong>UNKNOWN</strong> (3-값 논리). <a href="./2-1-4_WHERE절.html">WHERE 절</a>에서 행 제외</div>
+    </div>
+    <div class="rule-card">
+      <div class="num">3</div>
+      <div class="label"><code>IS NULL</code> / <code>IS NOT NULL</code></div>
+      <div class="desc"><code>= NULL</code>, <code>!= NULL</code>은 <strong>항상 거짓</strong></div>
+    </div>
+    <div class="rule-card">
+      <div class="num">4</div>
+      <div class="label">집계 함수</div>
+      <div class="desc">NULL을 무시. <strong><code>COUNT(*)</code>만 NULL 포함</strong></div>
+    </div>
+  </div>
+  <blockquote class="reveal">
+    <strong>SQL 3-값 논리</strong> — 일반 프로그래밍은 TRUE/FALSE 2값이지만 SQL은 NULL 때문에 <strong>TRUE / FALSE / UNKNOWN</strong> 3값. <code>NULL = NULL</code>도 결과가 UNKNOWN.
+  </blockquote>
+
+  <div class="mermaid reveal">
+flowchart TD
+    Q["WHERE 조건 평가"] --> V{"피연산자에<br/>NULL 포함?"}
+    V -->|"NO"| R["TRUE 또는 FALSE<br/>(2-값 논리)"]
+    V -->|"YES"| U["UNKNOWN<br/>(3-값 논리)"]
+    R -->|"TRUE"| KEEP["행 포함"]
+    R -->|"FALSE"| DROP1["행 제외"]
+    U --> DROP2["행 제외<br/>(UNKNOWN은 TRUE 아님)"]
+    style U fill:#FCEEE5,stroke:#A9562E
+    style KEEP fill:#E6F3E7,stroke:#256B29
+  </div>
+  <p class="reveal" style="font-size: 13px; color: var(--fg-3);">WHERE 절은 결과가 <strong>TRUE인 행만</strong> 남긴다. UNKNOWN은 TRUE가 아니므로 자동 제외 — 그래서 <code>= NULL</code>은 항상 0건.</p>
+
+  <!-- NULL 처리 함수 — 인포그래픽 -->
+  <h2 class="reveal">NULL 처리 함수</h2>
+  <p class="reveal">자세한 동작은 <a href="./2-1-3_함수.html">함수</a> 챕터에서도 다룬다.</p>
+  <div class="fn-grid reveal">
+    <div class="fn-card">
+      <div class="name">NVL(A, B)</div>
+      <div class="desc">A가 NULL이면 <strong>B</strong>로 대체</div>
+      <div class="ex">NVL(SAL, 0)</div>
+    </div>
+    <div class="fn-card">
+      <div class="name">NVL2(A, B, C)</div>
+      <div class="desc">A가 NULL <strong>아니면 B</strong>, NULL이면 <strong>C</strong></div>
+      <div class="ex">NVL2(COMM, '있음', '없음')</div>
+    </div>
+    <div class="fn-card">
+      <div class="name">NULLIF(A, B)</div>
+      <div class="desc">A=B면 <strong>NULL</strong>, 아니면 A</div>
+      <div class="ex">NULLIF(A, 0)</div>
+    </div>
+    <div class="fn-card">
+      <div class="name">COALESCE(A, B, C, …)</div>
+      <div class="desc">NULL이 <strong>아닌 첫 값</strong> 반환</div>
+      <div class="ex">COALESCE(P1, P2, '없음')</div>
+    </div>
+  </div>
+
+  <!-- 집계 함수에서의 NULL -->
+  <h2 class="reveal">집계 함수에서의 NULL</h2>
+  <table class="reveal">
+    <thead>
+      <tr><th>함수</th><th>NULL 처리</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><code>COUNT(*)</code></td><td>NULL 포함 모든 행 카운트</td></tr>
+      <tr><td><code>COUNT(컬럼)</code></td><td>NULL 제외</td></tr>
+      <tr><td><code>SUM/AVG/MAX/MIN</code></td><td>NULL 무시</td></tr>
+      <tr><td><code>AVG(컬럼)</code></td><td>(NULL 제외 합) / (NULL 제외 개수)</td></tr>
+    </tbody>
+  </table>
+
+  <h3 class="reveal">예시</h3>
+  <p class="reveal" style="font-size: 13.5px; color: var(--fg-3);">EMP 테이블</p>
+  <table class="reveal">
+    <thead>
+      <tr><th>EMP</th><th>SAL</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>A</td><td>100</td></tr>
+      <tr><td>B</td><td style="color: var(--wrong-fg); font-weight: 700;">NULL</td></tr>
+      <tr><td>C</td><td>200</td></tr>
+    </tbody>
+  </table>
+  <p class="reveal" style="font-size: 13.5px; color: var(--fg-3);">위 데이터에 집계 함수를 적용하면</p>
+  <table class="reveal">
+    <thead>
+      <tr><th>쿼리</th><th>결과</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><code>COUNT(*)</code></td><td>3</td></tr>
+      <tr><td><code>COUNT(SAL)</code></td><td>2</td></tr>
+      <tr><td><code>SUM(SAL)</code></td><td>300</td></tr>
+      <tr><td><code>AVG(SAL)</code></td><td>150 (300/2 — 0 포함이 아님에 주의)</td></tr>
+    </tbody>
+  </table>
+
+  <!-- SQL 실전 -->
+  <h2 class="section-label sec-sql reveal">
+    <span class="label-tag">SQL 실전</span>
+    <span class="label-rest">NULL 다루기</span>
+  </h2>
+  <p class="reveal" style="font-size: 13px; color: var(--fg-3); margin: 8px 0 4px;">예시 데이터 — EMP는 COMM이 NULL인 행이 섞여 있고, MEMBER는 PHONE/EMAIL 모두 비어 있을 수 있다</p>
+  <div class="null-flow reveal" style="grid-template-columns: 1fr 36px 1fr;">
+    <div class="null-side no-fix">
+      <span class="tag" style="background: var(--info-bg); color: var(--info-fg);">EMP</span>
+      <h4 class="h">사원 테이블</h4>
+      <div class="mini-table" style="grid-template-columns: 1fr 1fr 1fr;">
+        <div class="h">NAME</div><div class="h">SAL</div><div class="h">COMM</div>
+        <div class="c">A</div><div class="c">100</div><div class="c">10</div>
+        <div class="c">B</div><div class="c">200</div><div class="c is-null">NULL</div>
+        <div class="c">C</div><div class="c">300</div><div class="c">20</div>
+      </div>
+    </div>
+    <div class="null-arrow">+</div>
+    <div class="null-side no-fix">
+      <span class="tag" style="background: var(--info-bg); color: var(--info-fg);">MEMBER</span>
+      <h4 class="h">회원 테이블</h4>
+      <div class="mini-table" style="grid-template-columns: 1fr 1fr 1fr;">
+        <div class="h">NAME</div><div class="h">PHONE</div><div class="h">EMAIL</div>
+        <div class="c">김</div><div class="c">010-1234</div><div class="c">k@x</div>
+        <div class="c">이</div><div class="c is-null">NULL</div><div class="c">l@x</div>
+        <div class="c">박</div><div class="c is-null">NULL</div><div class="c is-null">NULL</div>
+      </div>
+    </div>
+  </div>
+  <pre class="reveal"><button class="copy-btn">복사</button><code><span class="sql-cm">-- 잘못된 비교</span>
+<span class="sql-kw">SELECT</span> * <span class="sql-kw">FROM</span> <span class="sql-name">EMP</span> <span class="sql-kw">WHERE</span> <span class="sql-type">COMM</span> = <span class="sql-kw">NULL</span>;     <span class="sql-cm">-- 결과 0건</span>
+<span class="sql-kw">SELECT</span> * <span class="sql-kw">FROM</span> <span class="sql-name">EMP</span> <span class="sql-kw">WHERE</span> <span class="sql-type">COMM</span> != <span class="sql-kw">NULL</span>;    <span class="sql-cm">-- 결과 0건</span>
+
+<span class="sql-cm">-- 올바른 비교</span>
+<span class="sql-kw">SELECT</span> * <span class="sql-kw">FROM</span> <span class="sql-name">EMP</span> <span class="sql-kw">WHERE</span> <span class="sql-type">COMM</span> <span class="sql-kw">IS NULL</span>;
+<span class="sql-kw">SELECT</span> * <span class="sql-kw">FROM</span> <span class="sql-name">EMP</span> <span class="sql-kw">WHERE</span> <span class="sql-type">COMM</span> <span class="sql-kw">IS NOT NULL</span>;
+
+<span class="sql-cm">-- NULL 대체</span>
+<span class="sql-kw">SELECT</span> <span class="sql-type">NAME</span>, <span class="sql-kw">NVL</span>(<span class="sql-type">COMM</span>, <span class="sql-num">0</span>) <span class="sql-kw">AS</span> <span class="sql-type">COMM_FIX</span> <span class="sql-kw">FROM</span> <span class="sql-name">EMP</span>;
+<span class="sql-kw">SELECT</span> <span class="sql-type">NAME</span>, <span class="sql-kw">NVL2</span>(<span class="sql-type">COMM</span>, <span class="sql-str">'있음'</span>, <span class="sql-str">'없음'</span>) <span class="sql-kw">AS</span> <span class="sql-type">FLAG</span> <span class="sql-kw">FROM</span> <span class="sql-name">EMP</span>;
+<span class="sql-kw">SELECT</span> <span class="sql-type">NAME</span>, <span class="sql-kw">COALESCE</span>(<span class="sql-type">PHONE</span>, <span class="sql-type">EMAIL</span>, <span class="sql-str">'연락처 없음'</span>) <span class="sql-kw">FROM</span> <span class="sql-name">MEMBER</span>;</code></pre>
+  <p class="reveal" style="font-size: 13px; color: var(--fg-3); margin: 8px 0 4px;">↓ NVL2 결과 (EMP의 COMM이 NULL인 행은 '없음')</p>
+  <table class="reveal">
+    <thead><tr><th>NAME</th><th>COMM</th><th>FLAG</th></tr></thead>
+    <tbody>
+      <tr><td>A</td><td>10</td><td>있음</td></tr>
+      <tr><td>B</td><td style="color: var(--wrong-fg); font-weight: 700;">NULL</td><td>없음</td></tr>
+      <tr><td>C</td><td>20</td><td>있음</td></tr>
+    </tbody>
+  </table>
+  <p class="reveal" style="font-size: 12.5px; color: var(--fg-3); margin: 0 0 12px;">→ NVL2(A, B, C): A가 NULL이 아니면 B('있음'), NULL이면 C('없음').</p>
+  <p class="reveal" style="font-size: 13px; color: var(--fg-3); margin: 8px 0 4px;">↓ COALESCE 결과 (PHONE → EMAIL → '연락처 없음' 순으로 첫 비-NULL)</p>
+  <table class="reveal">
+    <thead><tr><th>NAME</th><th>PHONE</th><th>EMAIL</th><th>COALESCE</th></tr></thead>
+    <tbody>
+      <tr><td>김</td><td>010-1234</td><td>k@x</td><td>010-1234</td></tr>
+      <tr><td>이</td><td style="color: var(--wrong-fg); font-weight: 700;">NULL</td><td>l@x</td><td>l@x</td></tr>
+      <tr><td>박</td><td style="color: var(--wrong-fg); font-weight: 700;">NULL</td><td style="color: var(--wrong-fg); font-weight: 700;">NULL</td><td>연락처 없음</td></tr>
+    </tbody>
+  </table>
+  <p class="reveal" style="font-size: 12.5px; color: var(--fg-3); margin: 0 0 12px;">→ 왼쪽부터 평가하다 처음으로 NULL이 아닌 값이 나오면 그 값을 반환. 모두 NULL이면 마지막 기본값(문자열).</p>
+
+  <!-- Before / After — 인포그래픽 -->
+  <h2 class="section-label sec-compare reveal">
+    <span class="label-tag">Before &amp; After</span>
+    <span class="label-rest">NULL이 끼면 결과가 달라진다</span>
+  </h2>
+  <p class="reveal">기본급(<code>SAL</code>)에 커미션(<code>COMM</code>)을 더해 <strong>총급여</strong>를 구하는 상황. 아래 EMP에서 <strong>B</strong>는 커미션이 등록되지 않아 <code>COMM</code>이 NULL이다. 단순 합산과 <code>NVL</code> 처리의 결과를 비교한다.</p>
+  <p class="reveal" style="font-size: 13.5px; color: var(--fg-3); margin-top: 0;">EMP 테이블</p>
+  <table class="reveal">
+    <thead>
+      <tr><th>NAME</th><th>SAL</th><th>COMM</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>A</td><td>100</td><td>10</td></tr>
+      <tr><td>B</td><td>200</td><td style="color: var(--wrong-fg); font-weight: 700;">NULL</td></tr>
+      <tr><td>C</td><td>300</td><td>20</td></tr>
+    </tbody>
+  </table>
+  <div class="null-flow reveal">
+    <div class="null-side no-fix">
+      <span class="tag">BEFORE</span>
+      <h4 class="h">NULL을 그대로 더하면</h4>
+      <div class="sql">SELECT NAME, SAL + COMM FROM EMP;</div>
+      <div class="mini-table">
+        <div class="h">NAME</div><div class="h">SAL+COMM</div>
+        <div class="c">A</div><div class="c">110</div>
+        <div class="c">B</div><div class="c is-null">NULL</div>
+        <div class="c">C</div><div class="c">320</div>
+      </div>
+    </div>
+    <div class="null-arrow">→</div>
+    <div class="null-side fixed">
+      <span class="tag">AFTER</span>
+      <h4 class="h">NVL로 안전하게 처리</h4>
+      <div class="sql">SELECT NAME, SAL + NVL(COMM, 0) FROM EMP;</div>
+      <div class="mini-table">
+        <div class="h">NAME</div><div class="h">TOTAL</div>
+        <div class="c">A</div><div class="c">110</div>
+        <div class="c">B</div><div class="c">200</div>
+        <div class="c">C</div><div class="c">320</div>
+      </div>
+    </div>
+  </div>
+  <p class="reveal">NULL은 산술 연산에 들어가면 결과 전체를 NULL로 만든다. B처럼 커미션이 비어 있을 뿐인 직원의 총급여까지 사라져버리는 셈이다. <code>NVL(COMM, 0)</code>으로 <strong>"커미션 없음 = 0"</strong>으로 안전하게 치환하면, NULL 행도 정상 합산되어 보고서에 누락이 생기지 않는다. 합계·평균 같은 집계 전에는 늘 NULL을 어떻게 다룰지 정해두는 것이 안전하다.</p>
+
+  <!-- NULL과 정렬 -->
+  <h2 class="reveal">NULL과 정렬</h2>
+  <table class="reveal">
+    <thead>
+      <tr><th>DBMS</th><th>기본 정렬 시 NULL 위치</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Oracle</td><td>오름차순(ASC)에서 마지막, 내림차순(DESC)에서 처음</td></tr>
+      <tr><td>MS-SQL</td><td>오름차순에서 처음</td></tr>
+    </tbody>
+  </table>
+  <p class="reveal">직접 지정: <code>ORDER BY COL NULLS FIRST</code> / <code>NULLS LAST</code> (자세히는 <a href="./2-1-6_ORDERBY절.html">ORDER BY 절</a>)</p>
+
+  <div class="reveal" style="margin: 40px 0 0; padding: 22px 24px; background: linear-gradient(135deg, var(--point-050), var(--bg-card)); border: 1px solid var(--point-100); border-radius: 12px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;">
+    <div>
+      <div style="font-size: 12px; font-weight: 800; color: var(--point-600); letter-spacing: 0.04em; margin-bottom: 4px;">시험 대비</div>
+      <div style="font-size: 14px; color: var(--fg-2);">이 챕터의 함정·정답과 30초 정리는 통합 시험 대비 페이지에서 볼 수 있습니다.</div>
+    </div>
+    <a href="./exam-review.html#ch-1-2-4" style="font-size: 14px; font-weight: 700; color: var(--point-600); text-decoration: none; padding: 8px 14px; border: 1px solid var(--point-300); border-radius: 8px; background: var(--bg-card); white-space: nowrap;">시험 대비 보기 →</a>
+  </div>
+
+  </article>
+</main>
+
+<script>
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('is-visible'); io.unobserve(e.target); } });
+}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+document.querySelectorAll('.copy-btn').forEach(btn => {
+  btn.addEventListener('click', async () => {
+    const pre = btn.closest('pre');
+    const code = pre.querySelector('code').innerText;
+    try { await navigator.clipboard.writeText(code); btn.textContent = '복사됨'; setTimeout(() => btn.textContent = '복사', 1400); } catch(e) {}
+  });
+});
+
+if (document.querySelector('.mermaid')) {
+  const s = document.createElement('script');
+  s.src = 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js';
+  s.onload = () => {
+    if (!window.mermaid) return;
+    window.mermaid.initialize({
+      startOnLoad: true, securityLevel: 'loose', theme: 'base',
+      themeVariables: {
+        primaryColor: '#EBF5EC', primaryTextColor: '#1F2320', primaryBorderColor: '#A5D6A7',
+        lineColor: '#2E7D32', secondaryColor: '#F0F7F1', tertiaryColor: '#FFFFFF',
+        background: '#FFFFFF', mainBkg: '#EBF5EC', secondBkg: '#F0F7F1',
+        fontFamily: '"Pretendard Variable", Pretendard, sans-serif', fontSize: '13px',
+        edgeLabelBackground: '#FFFFFF',
+      },
+      flowchart: { curve: 'basis', padding: 12, useMaxWidth: true },
+    });
+    document.querySelectorAll('.mermaid').forEach((el) => {
+      const obs = new MutationObserver(() => {
+        if (el.querySelector('svg')) { el.setAttribute('data-processed', 'true'); obs.disconnect(); }
+      });
+      obs.observe(el, { childList: true, subtree: true });
+    });
+  };
+  document.head.appendChild(s);
+}
+</script>
+</body>
+</html>

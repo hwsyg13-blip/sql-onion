@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="light">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>윈도우 함수 — SQLD양파 이론</title>
+<link rel="stylesheet" href="./common.css">
+</head>
+<body>
+<nav class="topnav">
+  <div class="topnav-inner">
+    <div class="topnav-brand">SQLD양파</div>
+    <div class="topnav-links"><a href="#">홈</a><a href="#" class="active">이론</a><a href="#">기출 CBT</a><a href="#">모의고사</a><a href="#">Pro</a></div>
+  </div>
+</nav>
+<main class="page-shell">
+  <div class="breadcrumb"><a href="#">이론</a><span class="sep">›</span><a href="#">2과목 SQL 기본 및 활용</a><span class="sep">›</span><a href="#">2-2. SQL 활용</a></div>
+  <header class="page-title-block">
+    <h1>윈도우 함수 (Window Function)</h1>
+    <p class="subtitle">행을 그대로 두고 옆에 통계·순위를 붙임 · 분석 함수 · OVER</p>
+  </header>
+  <article class="theory-md">
+
+  <!-- 핵심 요약 -->
+  <h2 class="section-label sec-summary reveal">
+    <span class="label-tag">핵심 요약</span>
+    <span class="label-rest">정의</span>
+  </h2>
+  <blockquote class="reveal">
+    윈도우 함수는 <strong>행을 합치지 않으면서</strong>, 행마다 <a href="./2-2-3_그룹함수.html">그룹</a>별 통계나 순위를 옆에 붙여주는 함수다(분석 함수라고도 한다).
+  </blockquote>
+  <div class="ex-box reveal">
+    학생 명단을 GROUP BY로 묶으면 학년 평균만 남아 개별 정보가 사라지지만, 윈도우 함수는 <strong>학생 행은 그대로 두고 옆에 학년 평균/등수를 추가</strong>한다.
+  </div>
+
+  <!-- 개념 도식화 -->
+  <h2 class="section-label sec-diagram reveal">
+    <span class="label-tag">개념 도식화</span>
+    <span class="label-rest">일반 집계 vs 윈도우 함수</span>
+  </h2>
+  <div class="ba-flow reveal">
+    <div class="ba-side before">
+      <span class="ba-tag">GROUP BY</span>
+      <h4 class="ba-h">행이 합쳐짐 (1행 결과)</h4>
+      <div class="sql">SELECT AVG(SAL) FROM EMP;</div>
+      <div class="mini-table">
+        <div class="h">AVG</div><div class="h">—</div>
+        <div class="c">4000</div><div class="c">—</div>
+      </div>
+      <div class="ba-row">개별 데이터 사라짐</div>
+    </div>
+    <div class="ba-arrow">→</div>
+    <div class="ba-side after">
+      <span class="ba-tag">OVER</span>
+      <h4 class="ba-h">행 유지 + 옆에 분석값</h4>
+      <div class="sql">AVG(SAL) OVER () + RANK()</div>
+      <div class="mini-table cols-4">
+        <div class="h">NAME</div><div class="h">SAL</div><div class="h">RANK</div><div class="h">AVG</div>
+        <div class="c">김</div><div class="c">3000</div><div class="c">3</div><div class="c">4000</div>
+        <div class="c">이</div><div class="c">5000</div><div class="c">1</div><div class="c">4000</div>
+        <div class="c">박</div><div class="c">4000</div><div class="c">2</div><div class="c">4000</div>
+      </div>
+    </div>
+  </div>
+  <table class="reveal">
+    <thead><tr><th>일반 집계 (GROUP BY)</th><th>윈도우 함수 (OVER)</th></tr></thead>
+    <tbody>
+      <tr><td>행이 그룹별로 <strong>합쳐짐</strong></td><td>행은 <strong>그대로 유지</strong> + 옆에 분석값</td></tr>
+      <tr><td>결과 1행</td><td>결과 N행 (원본과 같음)</td></tr>
+      <tr><td>AVG = 4000</td><td>NAME · SAL · RANK · AVG 모두 보임</td></tr>
+    </tbody>
+  </table>
+  <pre class="reveal"><button class="copy-btn">복사</button><code>[원본 행]  ──OVER 절로 윈도우 정의──→  [행 그대로 유지 + 옆에 분석값 추가]</code></pre>
+
+  <!-- 기본 문법 -->
+  <h2 class="reveal">기본 문법</h2>
+  <pre class="reveal"><button class="copy-btn">복사</button><code>함수명(컬럼) <span class="sql-kw">OVER</span> (
+    <span class="sql-kw">PARTITION BY</span> 그룹기준        <span class="sql-cm">-- 어떻게 묶을지</span>
+    <span class="sql-kw">ORDER BY</span> 정렬기준              <span class="sql-cm">-- 어떻게 정렬할지</span>
+    <span class="sql-kw">ROWS BETWEEN</span> ... <span class="sql-kw">AND</span> ...       <span class="sql-cm">-- 어디부터 어디까지(윈도우)</span>
+)</code></pre>
+
+  <div class="mermaid reveal">
+flowchart TD
+    A["원본 행"] --> B["PARTITION BY<br/>그룹 분할"]
+    B --> C["ORDER BY<br/>그룹 내 정렬"]
+    C --> D["ROWS / RANGE<br/>윈도우 프레임 결정"]
+    D --> E["함수 적용<br/>(RANK · SUM · LAG …)"]
+    E --> F["행 유지 + 옆에 분석값"]
+  </div>
+
+  <div class="cls-row reveal">
+    <div class="cls-card"><span class="badge">PARTITION BY</span><div class="name">그룹 기준</div><div class="ex">생략 시 전체. 부서별·지점별 등 윈도우 분리</div></div>
+    <div class="cls-card"><span class="badge b-info">ORDER BY</span><div class="name">그룹 내 정렬</div><div class="ex">순위·LAG/LEAD에 필수. <a href="./2-1-6_ORDERBY절.html">ORDER BY 절</a></div></div>
+    <div class="cls-card"><span class="badge b-warn">ROWS / RANGE</span><div class="name">윈도우 프레임</div><div class="ex">어디부터 어디까지 (PRECEDING/FOLLOWING)</div></div>
+  </div>
+
+  <!-- 윈도우 함수 분류 -->
+  <h2 class="reveal">윈도우 함수의 분류</h2>
+  <div class="fn-grid cols-4 reveal">
+    <div class="fn-card">
+      <div class="name">RANK</div>
+      <div class="desc">동점 같은 등수, 다음 <strong>건너뜀</strong> (1, 1, 3)</div>
+      <div class="ex">RANK() OVER (ORDER BY SAL DESC)</div>
+    </div>
+    <div class="fn-card">
+      <div class="name">DENSE_RANK</div>
+      <div class="desc">동점 같은 등수, 다음 <strong>연속</strong> (1, 1, 2)</div>
+      <div class="ex">DENSE_RANK() OVER (...)</div>
+    </div>
+    <div class="fn-card">
+      <div class="name">ROW_NUMBER</div>
+      <div class="desc">동점 무시, <strong>모두 다른 등수</strong> (1, 2, 3)</div>
+      <div class="ex">ROW_NUMBER() OVER (...)</div>
+    </div>
+    <div class="fn-card">
+      <div class="name">NTILE(N)</div>
+      <div class="desc">N등분 그룹 번호 부여</div>
+      <div class="ex">NTILE(4) OVER (ORDER BY SAL DESC)</div>
+    </div>
+  </div>
+  <div class="fn-grid cols-4 reveal">
+    <div class="fn-card">
+      <div class="name">LAG(col, n)</div>
+      <div class="desc">n행 전(앞) 값. 기본 오프셋 1</div>
+      <div class="ex">LAG(NAME) OVER (ORDER BY HIRE_DATE)</div>
+    </div>
+    <div class="fn-card">
+      <div class="name">LEAD(col, n)</div>
+      <div class="desc">n행 후(뒷) 값. 기본 오프셋 1</div>
+      <div class="ex">LEAD(NAME) OVER (ORDER BY HIRE_DATE)</div>
+    </div>
+    <div class="fn-card">
+      <div class="name">FIRST_VALUE / LAST_VALUE</div>
+      <div class="desc">윈도우의 첫 / 마지막 값</div>
+      <div class="ex">FIRST_VALUE(SAL) OVER (...)</div>
+    </div>
+    <div class="fn-card">
+      <div class="name">SUM/AVG/COUNT/MAX/MIN</div>
+      <div class="desc">행 옆에 그룹 통계</div>
+      <div class="ex">AVG(SAL) OVER (PARTITION BY DEPT_ID)</div>
+    </div>
+  </div>
+
+  <!-- SQL 실전 -->
+  <h2 class="section-label sec-sql reveal">
+    <span class="label-tag">SQL 실전</span>
+    <span class="label-rest">함수별 사용 예제</span>
+  </h2>
+
+  <h3 class="reveal">순위 함수 — RANK vs DENSE_RANK vs ROW_NUMBER</h3>
+  <div class="threeway reveal">
+    <div class="threeway-card t-info">
+      <div class="glyph">1,1,3</div>
+      <div class="name">RANK()</div>
+      <div class="desc">동점 같은 등수 → 다음 등수 <strong>건너뜀</strong></div>
+    </div>
+    <div class="threeway-card t-warn">
+      <div class="glyph">1,1,2</div>
+      <div class="name">DENSE_RANK()</div>
+      <div class="desc">동점 같은 등수 → 다음 등수 <strong>연속</strong></div>
+    </div>
+    <div class="threeway-card t-correct">
+      <div class="glyph">1,2,3</div>
+      <div class="name">ROW_NUMBER()</div>
+      <div class="desc">동점 무시 → <strong>무조건 다른 등수</strong></div>
+    </div>
+  </div>
+  <table class="reveal">
+    <thead><tr><th>함수</th><th>동점 처리</th><th>다음 순위</th></tr></thead>
+    <tbody>
+      <tr><td>RANK()</td><td>같은 등수</td><td>건너뜀 (1, 1, 3)</td></tr>
+      <tr><td>DENSE_RANK()</td><td>같은 등수</td><td>연속 (1, 1, 2)</td></tr>
+      <tr><td>ROW_NUMBER()</td><td>무조건 다른 등수</td><td>(1, 2, 3)</td></tr>
+    </tbody>
+  </table>
+  <p class="reveal" style="font-size: 13px; color: var(--fg-3); margin: 8px 0 4px;">예시 데이터</p>
+  <div class="ba-side before reveal" style="max-width: 460px;">
+    <span class="ba-tag">EMP</span>
+    <h4 class="ba-h">사원 테이블</h4>
+    <div class="mini-table cols-2">
+      <div class="h">NAME</div><div class="h">SAL</div>
+      <div class="c">이</div><div class="c">5000</div>
+      <div class="c">박</div><div class="c">5000</div>
+      <div class="c">최</div><div class="c">4500</div>
+      <div class="c">김</div><div class="c">3000</div>
+    </div>
+  </div>
+  <pre class="reveal"><button class="copy-btn">복사</button><code><span class="sql-kw">SELECT</span>  <span class="sql-type">NAME</span>, <span class="sql-type">SAL</span>,
+        <span class="sql-kw">RANK</span>()       <span class="sql-kw">OVER</span> (<span class="sql-kw">ORDER BY</span> <span class="sql-type">SAL</span> <span class="sql-kw">DESC</span>) <span class="sql-kw">AS</span> R,
+        <span class="sql-kw">DENSE_RANK</span>() <span class="sql-kw">OVER</span> (<span class="sql-kw">ORDER BY</span> <span class="sql-type">SAL</span> <span class="sql-kw">DESC</span>) <span class="sql-kw">AS</span> DR,
+        <span class="sql-kw">ROW_NUMBER</span>() <span class="sql-kw">OVER</span> (<span class="sql-kw">ORDER BY</span> <span class="sql-type">SAL</span> <span class="sql-kw">DESC</span>) <span class="sql-kw">AS</span> RN
+<span class="sql-kw">FROM</span>    <span class="sql-name">EMP</span>;</code></pre>
+  <p class="reveal" style="font-size: 13px; color: var(--fg-3); margin: 8px 0 4px;">↓ 결과</p>
+  <table class="reveal">
+    <thead><tr><th>NAME</th><th>SAL</th><th>R</th><th>DR</th><th>RN</th></tr></thead>
+    <tbody>
+      <tr><td>이</td><td>5000</td><td>1</td><td>1</td><td>1</td></tr>
+      <tr><td>박</td><td>5000</td><td>1</td><td>1</td><td>2</td></tr>
+      <tr><td>최</td><td>4500</td><td>3</td><td>2</td><td>3</td></tr>
+      <tr><td>김</td><td>3000</td><td>4</td><td>3</td><td>4</td></tr>
+    </tbody>
+  </table>
+  <p class="reveal" style="font-size: 12.5px; color: var(--fg-3); margin: 0 0 12px;">→ 이·박이 5000으로 동률. RANK는 다음을 3으로 건너뛰고, DENSE_RANK는 2로 연속, ROW_NUMBER는 동률 무시하고 1·2를 다르게 매긴다.</p>
+
+  <h3 class="reveal">집계 윈도우 함수</h3>
+  <table class="reveal">
+    <thead><tr><th>함수</th><th>의미</th></tr></thead>
+    <tbody>
+      <tr><td>SUM/AVG/MAX/MIN/COUNT</td><td>행 옆에 그룹 통계</td></tr>
+    </tbody>
+  </table>
+  <p class="reveal" style="font-size: 13px; color: var(--fg-3); margin: 8px 0 4px;">예시 데이터</p>
+  <div class="ba-side before reveal" style="max-width: 460px;">
+    <span class="ba-tag">EMP</span>
+    <h4 class="ba-h">사원 테이블 (부서·급여)</h4>
+    <div class="mini-table cols-3">
+      <div class="h">NAME</div><div class="h">DEPT_ID</div><div class="h">SAL</div>
+      <div class="c">김</div><div class="c">D1</div><div class="c">3000</div>
+      <div class="c">이</div><div class="c">D1</div><div class="c">5000</div>
+      <div class="c">박</div><div class="c">D2</div><div class="c">4000</div>
+      <div class="c">최</div><div class="c">D2</div><div class="c">4000</div>
+    </div>
+  </div>
+  <pre class="reveal"><button class="copy-btn">복사</button><code><span class="sql-cm">-- 부서별 평균 급여를 옆에 붙임</span>
+<span class="sql-kw">SELECT</span>  <span class="sql-type">NAME</span>, <span class="sql-type">DEPT_ID</span>, <span class="sql-type">SAL</span>,
+        <span class="sql-kw">AVG</span>(<span class="sql-type">SAL</span>) <span class="sql-kw">OVER</span> (<span class="sql-kw">PARTITION BY</span> <span class="sql-type">DEPT_ID</span>) <span class="sql-kw">AS</span> <span class="sql-type">DEPT_AVG</span>
+<span class="sql-kw">FROM</span>    <span class="sql-name">EMP</span>;</code></pre>
+  <p class="reveal" style="font-size: 13px; color: var(--fg-3); margin: 8px 0 4px;">↓ 결과</p>
+  <table class="reveal">
+    <thead><tr><th>NAME</th><th>DEPT_ID</th><th>SAL</th><th>DEPT_AVG</th></tr></thead>
+    <tbody>
+      <tr><td>김</td><td>D1</td><td>3000</td><td>4000</td></tr>
+      <tr><td>이</td><td>D1</td><td>5000</td><td>4000</td></tr>
+      <tr><td>박</td><td>D2</td><td>4000</td><td>4000</td></tr>
+      <tr><td>최</td><td>D2</td><td>4000</td><td>4000</td></tr>
+    </tbody>
+  </table>
+  <p class="reveal" style="font-size: 12.5px; color: var(--fg-3); margin: 0 0 12px;">→ <code>PARTITION BY DEPT_ID</code>로 D1·D2를 나눠 각 부서 평균을 행마다 붙인다. 행은 합쳐지지 않고 4행 그대로.</p>
+
+  <h3 class="reveal">행 순서 함수</h3>
+  <table class="reveal">
+    <thead><tr><th>함수</th><th>의미</th></tr></thead>
+    <tbody>
+      <tr><td>LAG(col, n)</td><td>n행 전 값(앞 행)</td></tr>
+      <tr><td>LEAD(col, n)</td><td>n행 후 값(뒷 행)</td></tr>
+      <tr><td>FIRST_VALUE(col)</td><td>윈도우의 첫 값</td></tr>
+      <tr><td>LAST_VALUE(col)</td><td>윈도우의 마지막 값</td></tr>
+    </tbody>
+  </table>
+  <p class="reveal" style="font-size: 13px; color: var(--fg-3); margin: 8px 0 4px;">예시 데이터</p>
+  <div class="ba-side before reveal" style="max-width: 460px;">
+    <span class="ba-tag">EMP</span>
+    <h4 class="ba-h">입사일 순 사원</h4>
+    <div class="mini-table cols-2">
+      <div class="h">NAME</div><div class="h">HIRE_DATE</div>
+      <div class="c">김</div><div class="c">2020-01</div>
+      <div class="c">이</div><div class="c">2021-03</div>
+      <div class="c">박</div><div class="c">2022-07</div>
+      <div class="c">최</div><div class="c">2023-09</div>
+    </div>
+  </div>
+  <pre class="reveal"><button class="copy-btn">복사</button><code><span class="sql-kw">SELECT</span>  <span class="sql-type">NAME</span>, <span class="sql-type">HIRE_DATE</span>,
+        <span class="sql-kw">LAG</span>(<span class="sql-type">NAME</span>)  <span class="sql-kw">OVER</span> (<span class="sql-kw">ORDER BY</span> <span class="sql-type">HIRE_DATE</span>) <span class="sql-kw">AS</span> <span class="sql-type">PREV_EMP</span>,
+        <span class="sql-kw">LEAD</span>(<span class="sql-type">NAME</span>) <span class="sql-kw">OVER</span> (<span class="sql-kw">ORDER BY</span> <span class="sql-type">HIRE_DATE</span>) <span class="sql-kw">AS</span> <span class="sql-type">NEXT_EMP</span>
+<span class="sql-kw">FROM</span>    <span class="sql-name">EMP</span>;</code></pre>
+  <p class="reveal" style="font-size: 13px; color: var(--fg-3); margin: 8px 0 4px;">↓ 결과</p>
+  <table class="reveal">
+    <thead><tr><th>NAME</th><th>HIRE_DATE</th><th>PREV_EMP</th><th>NEXT_EMP</th></tr></thead>
+    <tbody>
+      <tr><td>김</td><td>2020-01</td><td style="color: var(--wrong-fg); font-weight: 700;">NULL</td><td>이</td></tr>
+      <tr><td>이</td><td>2021-03</td><td>김</td><td>박</td></tr>
+      <tr><td>박</td><td>2022-07</td><td>이</td><td>최</td></tr>
+      <tr><td>최</td><td>2023-09</td><td>박</td><td style="color: var(--wrong-fg); font-weight: 700;">NULL</td></tr>
+    </tbody>
+  </table>
+  <p class="reveal">첫 행에는 LAG가 NULL, 마지막 행에는 LEAD가 NULL이다(기본 오프셋 1).</p>
+
+  <h3 class="reveal">비율 함수</h3>
+  <table class="reveal">
+    <thead><tr><th>함수</th><th>의미</th></tr></thead>
+    <tbody>
+      <tr><td>CUME_DIST()</td><td>누적 비율</td></tr>
+      <tr><td>PERCENT_RANK()</td><td>백분위 순위</td></tr>
+      <tr><td>NTILE(N)</td><td>N등분 그룹</td></tr>
+      <tr><td>RATIO_TO_REPORT(col)</td><td>전체 합 대비 비율(Oracle)</td></tr>
+    </tbody>
+  </table>
+  <pre class="reveal"><button class="copy-btn">복사</button><code><span class="sql-cm">-- 4등분으로 나눠서 그룹 번호 부여</span>
+<span class="sql-kw">SELECT</span> <span class="sql-type">NAME</span>, <span class="sql-type">SAL</span>, <span class="sql-kw">NTILE</span>(<span class="sql-num">4</span>) <span class="sql-kw">OVER</span> (<span class="sql-kw">ORDER BY</span> <span class="sql-type">SAL</span> <span class="sql-kw">DESC</span>) <span class="sql-kw">AS</span> <span class="sql-type">QUARTILE</span> <span class="sql-kw">FROM</span> <span class="sql-name">EMP</span>;</code></pre>
+
+  <h3 class="reveal">윈도우 프레임 — ROWS / RANGE</h3>
+  <pre class="reveal"><button class="copy-btn">복사</button><code><span class="sql-kw">ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW</span>   <span class="sql-cm">-- 처음~현재</span>
+<span class="sql-kw">ROWS BETWEEN</span> <span class="sql-num">1</span> <span class="sql-kw">PRECEDING AND</span> <span class="sql-num">1</span> <span class="sql-kw">FOLLOWING</span>           <span class="sql-cm">-- 앞1, 자신, 뒤1</span>
+<span class="sql-kw">RANGE BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING</span>  <span class="sql-cm">-- 전체</span></code></pre>
+  <table class="reveal">
+    <thead><tr><th>키워드</th><th>의미</th></tr></thead>
+    <tbody>
+      <tr><td>UNBOUNDED PRECEDING</td><td>그룹의 처음부터</td></tr>
+      <tr><td>n PRECEDING</td><td>앞 n번째부터</td></tr>
+      <tr><td>CURRENT ROW</td><td>현재 행</td></tr>
+      <tr><td>n FOLLOWING</td><td>뒤 n번째까지</td></tr>
+      <tr><td>UNBOUNDED FOLLOWING</td><td>그룹의 끝까지</td></tr>
+    </tbody>
+  </table>
+  <pre class="reveal"><button class="copy-btn">복사</button><code><span class="sql-cm">-- 누적 합(running total)</span>
+<span class="sql-kw">SELECT</span>  <span class="sql-type">NAME</span>, <span class="sql-type">HIRE_DATE</span>, <span class="sql-type">SAL</span>,
+        <span class="sql-kw">SUM</span>(<span class="sql-type">SAL</span>) <span class="sql-kw">OVER</span> (<span class="sql-kw">ORDER BY</span> <span class="sql-type">HIRE_DATE</span>
+                       <span class="sql-kw">ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW</span>) <span class="sql-kw">AS</span> <span class="sql-type">RUN_TOT</span>
+<span class="sql-kw">FROM</span>    <span class="sql-name">EMP</span>;</code></pre>
+  <p class="reveal" style="font-size: 13px; color: var(--fg-3); margin: 8px 0 4px;">↓ 결과</p>
+  <table class="reveal">
+    <thead><tr><th>NAME</th><th>HIRE_DATE</th><th>SAL</th><th>RUN_TOT</th></tr></thead>
+    <tbody>
+      <tr><td>김</td><td>2020-01</td><td>3000</td><td>3000</td></tr>
+      <tr><td>이</td><td>2021-03</td><td>5000</td><td>8000</td></tr>
+      <tr><td>박</td><td>2022-07</td><td>4000</td><td>12000</td></tr>
+      <tr><td>최</td><td>2023-09</td><td>4000</td><td>16000</td></tr>
+    </tbody>
+  </table>
+
+  <!-- Before & After -->
+  <h2 class="section-label sec-compare reveal">
+    <span class="label-tag">Before &amp; After</span>
+    <span class="label-rest">PARTITION BY로 부서별 RANK + AVG</span>
+  </h2>
+  <p class="reveal">D1·D2 두 부서 4명에 대해 <strong>"부서 안에서의 등수"와 "부서 평균"</strong>을 동시에 한 표에 보여줘야 하는 상황. GROUP BY로 묶으면 4행이 2행으로 줄어 개별 이름이 사라지지만, 윈도우 함수는 4행을 그대로 유지하면서 옆에 부서별 RANK와 부서 AVG를 붙인다. D2의 박·최가 4500으로 동률일 때 RANK가 어떻게 매겨지는지도 함께 본다.</p>
+
+  <p class="reveal" style="font-size: 13.5px; color: var(--fg-3);">EMP</p>
+  <table class="reveal">
+    <thead><tr><th>NAME</th><th>DEPT_ID</th><th>SAL</th></tr></thead>
+    <tbody>
+      <tr><td>김</td><td>D1</td><td>3000</td></tr>
+      <tr><td>이</td><td>D1</td><td>5000</td></tr>
+      <tr><td>박</td><td>D2</td><td>4500</td></tr>
+      <tr><td>최</td><td>D2</td><td>4500</td></tr>
+    </tbody>
+  </table>
+
+  <h3 class="reveal">쿼리</h3>
+  <pre class="reveal"><button class="copy-btn">복사</button><code><span class="sql-kw">SELECT</span>  <span class="sql-type">NAME</span>, <span class="sql-type">DEPT_ID</span>, <span class="sql-type">SAL</span>,
+        <span class="sql-kw">RANK</span>() <span class="sql-kw">OVER</span> (<span class="sql-kw">PARTITION BY</span> <span class="sql-type">DEPT_ID</span> <span class="sql-kw">ORDER BY</span> <span class="sql-type">SAL</span> <span class="sql-kw">DESC</span>) <span class="sql-kw">AS</span> <span class="sql-type">DEPT_RANK</span>,
+        <span class="sql-kw">AVG</span>(<span class="sql-type">SAL</span>) <span class="sql-kw">OVER</span> (<span class="sql-kw">PARTITION BY</span> <span class="sql-type">DEPT_ID</span>) <span class="sql-kw">AS</span> <span class="sql-type">DEPT_AVG</span>
+<span class="sql-kw">FROM</span>    <span class="sql-name">EMP</span>;</code></pre>
+
+  <div class="ba-flow large-after reveal">
+    <div class="ba-side before">
+      <span class="ba-tag">BEFORE</span>
+      <h4 class="ba-h">GROUP BY DEPT_ID로 묶으면</h4>
+      <div class="sql">SELECT DEPT_ID, AVG(SAL)
+FROM EMP
+GROUP BY DEPT_ID;</div>
+      <div class="mini-table">
+        <div class="h">DEPT_ID</div><div class="h">AVG</div>
+        <div class="c">D1</div><div class="c">4000</div>
+        <div class="c">D2</div><div class="c">4500</div>
+      </div>
+      <div class="ba-row">개별 이름 사라짐 (4행 → 2행)</div>
+    </div>
+    <div class="ba-arrow">→</div>
+    <div class="ba-side after">
+      <span class="ba-tag">AFTER</span>
+      <h4 class="ba-h">윈도우 함수: 4행 유지 + 옆에 RANK·AVG</h4>
+      <div class="mini-table cols-4">
+        <div class="h">NAME</div><div class="h">SAL</div><div class="h">DEPT_RANK</div><div class="h">DEPT_AVG</div>
+        <div class="c">이</div><div class="c">5000</div><div class="c">1</div><div class="c">4000</div>
+        <div class="c">김</div><div class="c">3000</div><div class="c">2</div><div class="c">4000</div>
+        <div class="c">박</div><div class="c">4500</div><div class="c">1</div><div class="c">4500</div>
+        <div class="c">최</div><div class="c">4500</div><div class="c">1</div><div class="c">4500</div>
+      </div>
+    </div>
+  </div>
+
+  <table class="reveal">
+    <thead><tr><th>NAME</th><th>DEPT_ID</th><th>SAL</th><th>DEPT_RANK</th><th>DEPT_AVG</th></tr></thead>
+    <tbody>
+      <tr><td>이</td><td>D1</td><td>5000</td><td>1</td><td>4000</td></tr>
+      <tr><td>김</td><td>D1</td><td>3000</td><td>2</td><td>4000</td></tr>
+      <tr><td>박</td><td>D2</td><td>4500</td><td>1</td><td>4500</td></tr>
+      <tr><td>최</td><td>D2</td><td>4500</td><td>1</td><td>4500</td></tr>
+    </tbody>
+  </table>
+
+  <p class="reveal"><code>PARTITION BY DEPT_ID</code>가 D1·D2를 각각 독립된 윈도우로 나누기 때문에 RANK와 AVG가 부서별로 따로 계산된다. D2의 박·최가 둘 다 RANK 1을 받는 이유는 <strong>RANK()가 동률을 같은 등수</strong>로 처리하기 때문이고(다음 등수는 3으로 건너뜀), AVG도 부서 안 두 명만으로 계산해 4500이 된다. <strong>행을 합치지 않고 옆에 통계를 붙이는 윈도우 함수의 본질</strong>이 같은 부서 두 명의 SAL이 그대로 보이면서 평균·등수가 함께 따라붙는 결과로 드러난다.</p>
+
+  <!-- 윈도우 함수 vs GROUP BY -->
+  <h2 class="reveal">윈도우 함수 vs GROUP BY</h2>
+  <table class="reveal">
+    <thead><tr><th>항목</th><th>GROUP BY</th><th>윈도우 함수</th></tr></thead>
+    <tbody>
+      <tr><td>결과 행수</td><td>줄어듦(그룹별 1행)</td><td>유지(원본 그대로)</td></tr>
+      <tr><td>개별 데이터</td><td>사라짐</td><td>남음</td></tr>
+      <tr><td>사용 목적</td><td>집계 결과만</td><td>개별 + 집계</td></tr>
+    </tbody>
+  </table>
+
+  <div class="reveal" style="margin: 40px 0 0; padding: 22px 24px; background: linear-gradient(135deg, var(--point-050), var(--bg-card)); border: 1px solid var(--point-100); border-radius: 12px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;">
+    <div>
+      <div style="font-size: 12px; font-weight: 800; color: var(--point-600); letter-spacing: 0.04em; margin-bottom: 4px;">시험 대비</div>
+      <div style="font-size: 14px; color: var(--fg-2);">이 챕터의 함정·정답과 30초 정리는 통합 시험 대비 페이지에서 볼 수 있습니다.</div>
+    </div>
+    <a href="./exam-review.html#ch-2-2-4" style="font-size: 14px; font-weight: 700; color: var(--point-600); text-decoration: none; padding: 8px 14px; border: 1px solid var(--point-300); border-radius: 8px; background: var(--bg-card); white-space: nowrap;">시험 대비 보기 →</a>
+  </div>
+
+  </article>
+</main>
+<script src="./common.js"></script>
+</body>
+</html>

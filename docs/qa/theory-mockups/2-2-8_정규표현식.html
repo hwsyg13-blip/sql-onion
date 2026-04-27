@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="light">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>정규 표현식 — SQLD양파 이론</title>
+<link rel="stylesheet" href="./common.css">
+</head>
+<body>
+<nav class="topnav">
+  <div class="topnav-inner">
+    <div class="topnav-brand">SQLD양파</div>
+    <div class="topnav-links"><a href="#">홈</a><a href="#" class="active">이론</a><a href="#">기출 CBT</a><a href="#">모의고사</a><a href="#">Pro</a></div>
+  </div>
+</nav>
+<main class="page-shell">
+  <div class="breadcrumb"><a href="#">이론</a><span class="sep">›</span><a href="#">2과목 SQL 기본 및 활용</a><span class="sep">›</span><a href="#">2-2 SQL 활용</a></div>
+  <header class="page-title-block">
+    <h1>정규 표현식 (Regular Expression)</h1>
+    <p class="subtitle">LIKE보다 강력한 패턴 검색 · 5개 함수 · 메타문자 · 문자 종류·길이·위치 동시 검사</p>
+  </header>
+  <article class="theory-md">
+
+  <!-- 핵심 요약 -->
+  <h2 class="section-label sec-summary reveal">
+    <span class="label-tag">핵심 요약</span>
+    <span class="label-rest">정의</span>
+  </h2>
+  <blockquote class="reveal">
+    정규 표현식은 <strong>문자 패턴을 표현하는 짧은 식</strong>이다. LIKE보다 훨씬 강력하게 문자열을 검색·추출·교체할 수 있다.
+  </blockquote>
+  <div class="ex-box reveal">
+    LIKE는 "<code>'김%'</code>로 시작" 정도지만, 정규식은 "010-숫자4자리-숫자4자리" / "한글 3글자 이름" / "이메일 형식" 같은 정밀 패턴을 표현한다.
+  </div>
+
+  <!-- 개념 도식화 -->
+  <h2 class="section-label sec-diagram reveal">
+    <span class="label-tag">개념 도식화</span>
+    <span class="label-rest">LIKE vs REGEXP</span>
+  </h2>
+  <div class="threeway cols-2 reveal">
+    <div class="threeway-card t-info">
+      <div class="glyph">LIKE</div>
+      <div class="name">LIKE</div>
+      <div class="desc"><strong>%</strong> (0개 이상), <strong>_</strong> (1개) — 단순·기본 검색 · 빠름</div>
+    </div>
+    <div class="threeway-card t-correct">
+      <div class="glyph">.*+?</div>
+      <div class="name">REGEXP</div>
+      <div class="desc"><code>. * + ? [ ] ^ $ | { } \d \w \s …</code> — 정밀·고급 검색 · 약간 느림</div>
+    </div>
+  </div>
+  <table class="reveal">
+    <thead><tr><th>비교</th><th>LIKE</th><th>REGEXP</th></tr></thead>
+    <tbody>
+      <tr><td>표현력</td><td>약함</td><td>강함</td></tr>
+      <tr><td>와일드카드</td><td><code>%</code>, <code>_</code></td><td><code>.</code>, <code>*</code>, <code>+</code>, <code>[]</code>, <code>^</code>, <code>$</code> 등 다수</td></tr>
+      <tr><td>성능</td><td>빠름</td><td>약간 느림</td></tr>
+    </tbody>
+  </table>
+
+  <!-- Oracle 정규식 함수 -->
+  <h2 class="reveal">Oracle 정규식 <a href="./2-1-3_함수.html">함수</a></h2>
+  <div class="fn-grid cols-3 reveal">
+    <div class="fn-card">
+      <div class="name">REGEXP_LIKE(s, pattern)</div>
+      <div class="desc">LIKE의 정규식 버전 — <strong>조건절</strong>용 (TRUE/FALSE)</div>
+      <div class="ex">WHERE REGEXP_LIKE(NAME, '^[가-힣]+$')</div>
+    </div>
+    <div class="fn-card">
+      <div class="name">REGEXP_REPLACE(s, p, r)</div>
+      <div class="desc">패턴 매칭 부분을 <strong>교체</strong></div>
+      <div class="ex">REGEXP_REPLACE(STR, '\s+', '')</div>
+    </div>
+    <div class="fn-card">
+      <div class="name">REGEXP_SUBSTR(s, p)</div>
+      <div class="desc">패턴 일치 부분 <strong>추출</strong></div>
+      <div class="ex">REGEXP_SUBSTR(STR, '\d+')</div>
+    </div>
+    <div class="fn-card">
+      <div class="name">REGEXP_INSTR(s, p)</div>
+      <div class="desc">패턴이 처음 나타나는 <strong>위치</strong></div>
+      <div class="ex">REGEXP_INSTR('abc123', '\d')</div>
+    </div>
+    <div class="fn-card">
+      <div class="name">REGEXP_COUNT(s, p)</div>
+      <div class="desc">패턴 등장 <strong>횟수</strong></div>
+      <div class="ex">REGEXP_COUNT(STR, '\w+')</div>
+    </div>
+  </div>
+
+  <!-- 자주 쓰는 메타문자 -->
+  <h2 class="reveal">자주 쓰는 메타문자</h2>
+  <div class="cls-row cols-4 reveal">
+    <div class="cls-card">
+      <span class="badge">위치</span>
+      <div class="name"><code>^</code> · <code>$</code></div>
+      <div class="ex">문자열 시작 · 끝<br><code>^010</code> / <code>\.com$</code></div>
+    </div>
+    <div class="cls-card">
+      <span class="badge b-info">반복</span>
+      <div class="name"><code>*</code> · <code>+</code> · <code>?</code></div>
+      <div class="ex">0+ · 1+ · 0/1<br><code>ab+</code> → ab, abb</div>
+    </div>
+    <div class="cls-card">
+      <span class="badge b-warn">집합</span>
+      <div class="name"><code>[abc]</code> · <code>[^abc]</code></div>
+      <div class="ex">중 하나 · 부정<br><code>[Aa]pple</code></div>
+    </div>
+    <div class="cls-card">
+      <span class="badge b-event">임의</span>
+      <div class="name"><code>.</code></div>
+      <div class="ex">임의의 한 글자<br><code>a.c</code> → abc, aXc</div>
+    </div>
+    <div class="cls-card">
+      <span class="badge">횟수</span>
+      <div class="name"><code>{n}</code> · <code>{n,m}</code></div>
+      <div class="ex">정확히 n번 · n~m번<br><code>\d{2,4}</code></div>
+    </div>
+    <div class="cls-card">
+      <span class="badge b-info">또는</span>
+      <div class="name"><code>|</code></div>
+      <div class="ex">택일<br><code>(cat|dog)</code></div>
+    </div>
+    <div class="cls-card">
+      <span class="badge b-warn">문자류</span>
+      <div class="name"><code>\d</code> · <code>\w</code> · <code>\s</code></div>
+      <div class="ex">숫자 · 단어문자 · 공백</div>
+    </div>
+    <div class="cls-card">
+      <span class="badge b-event">한글</span>
+      <div class="name"><code>[가-힣]</code></div>
+      <div class="ex">한글 한 글자</div>
+    </div>
+  </div>
+  <table class="reveal">
+    <thead><tr><th>기호</th><th>의미</th><th>예</th></tr></thead>
+    <tbody>
+      <tr><td><code>.</code></td><td>임의의 한 글자</td><td><code>'a.c'</code> → 'abc', 'aXc'</td></tr>
+      <tr><td><code>*</code></td><td>0개 이상 반복</td><td><code>'ab*'</code> → 'a', 'ab', 'abb'</td></tr>
+      <tr><td><code>+</code></td><td>1개 이상 반복</td><td><code>'ab+'</code> → 'ab', 'abb' (a 안 됨)</td></tr>
+      <tr><td><code>?</code></td><td>0 또는 1</td><td><code>'colou?r'</code> → 'color', 'colour'</td></tr>
+      <tr><td><code>[abc]</code></td><td>a, b, c 중 하나</td><td><code>'[Aa]pple'</code></td></tr>
+      <tr><td><code>[^abc]</code></td><td>a, b, c가 아닌 것</td><td></td></tr>
+      <tr><td><code>[0-9]</code></td><td>숫자 한 글자</td><td></td></tr>
+      <tr><td><code>[a-z]</code></td><td>영소문자</td><td></td></tr>
+      <tr><td><code>^</code></td><td>문자열 시작</td><td><code>^010</code> (010으로 시작)</td></tr>
+      <tr><td><code>$</code></td><td>문자열 끝</td><td><code>\.com$</code></td></tr>
+      <tr><td><code>|</code></td><td>또는</td><td><code>(cat|dog)</code></td></tr>
+      <tr><td><code>{n}</code></td><td>정확히 n번</td><td><code>\d{4}</code></td></tr>
+      <tr><td><code>{n,m}</code></td><td>n~m번</td><td><code>\d{2,4}</code></td></tr>
+      <tr><td><code>\d</code></td><td>숫자 [0-9]</td><td>※ Oracle은 12c부터 일부 동작</td></tr>
+      <tr><td><code>\w</code></td><td>단어문자 [A-Za-z0-9_]</td><td>※ Oracle 호환 제한</td></tr>
+      <tr><td><code>\s</code></td><td>공백</td><td>※ Oracle 호환 제한</td></tr>
+    </tbody>
+  </table>
+  <blockquote class="reveal">
+    <strong>Oracle 호환성</strong> — Oracle 정규식은 <strong>POSIX 1003.2 표준</strong> 기반이라 <code>\d</code>·<code>\w</code>·<code>\s</code>(PCRE 단축 클래스)는 12c 이후 일부 버전에서만 동작합니다. 호환성 보장을 위해 <code>[0-9]</code>·<code>[A-Za-z0-9_]</code> 또는 POSIX 문자 클래스 <code>[[:digit:]]</code>·<code>[[:alpha:]]</code>·<code>[[:space:]]</code>를 사용하는 것이 안전.
+  </blockquote>
+
+  <!-- SQL 실전 -->
+  <h2 class="section-label sec-sql reveal">
+    <span class="label-tag">SQL 실전</span>
+    <span class="label-rest">함수별 사용 예</span>
+  </h2>
+  <h3 class="reveal">REGEXP_LIKE (<a href="./2-1-4_WHERE절.html">WHERE</a> 조건절)</h3>
+  <p class="reveal" style="font-size: 13px; color: var(--fg-3); margin: 8px 0 4px;">예시 데이터</p>
+  <div class="ba-side before reveal" style="max-width: 460px;">
+    <span class="ba-tag">MEMBER</span>
+    <h4 class="ba-h">회원 테이블</h4>
+    <div class="mini-table cols-2">
+      <div class="h">NAME</div><div class="h">PHONE</div>
+      <div class="c">김철수</div><div class="c">010-1234-5678</div>
+      <div class="c">이영희</div><div class="c">02-1234-5678</div>
+      <div class="c">홍길동전</div><div class="c">010-9876-5432</div>
+      <div class="c">Jane</div><div class="c">010-9999-1234</div>
+    </div>
+  </div>
+  <pre class="reveal"><button class="copy-btn">복사</button><code><span class="sql-cm">-- 휴대폰 번호 형식 (010으로 시작, 3-4-4 자리)</span>
+<span class="sql-kw">SELECT</span> *
+<span class="sql-kw">FROM</span>   <span class="sql-name">MEMBER</span>
+<span class="sql-kw">WHERE</span>  <span class="sql-kw">REGEXP_LIKE</span>(<span class="sql-type">PHONE</span>, <span class="sql-str">'^010-\d{3,4}-\d{4}$'</span>);
+
+<span class="sql-cm">-- 이메일 형식</span>
+<span class="sql-kw">SELECT</span> *
+<span class="sql-kw">FROM</span>   <span class="sql-name">MEMBER</span>
+<span class="sql-kw">WHERE</span>  <span class="sql-kw">REGEXP_LIKE</span>(<span class="sql-type">EMAIL</span>, <span class="sql-str">'^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$'</span>);
+
+<span class="sql-cm">-- 한글 3글자 이름</span>
+<span class="sql-kw">SELECT</span> *
+<span class="sql-kw">FROM</span>   <span class="sql-name">MEMBER</span>
+<span class="sql-kw">WHERE</span>  <span class="sql-kw">REGEXP_LIKE</span>(<span class="sql-type">NAME</span>, <span class="sql-str">'^[가-힣]{3}$'</span>);</code></pre>
+  <p class="reveal" style="font-size: 13px; color: var(--fg-3); margin: 8px 0 4px;">↓ 결과 (한글 3글자 이름 쿼리)</p>
+  <table class="reveal">
+    <thead><tr><th>NAME</th><th>매칭</th></tr></thead>
+    <tbody>
+      <tr><td>김철수</td><td>O</td></tr>
+      <tr><td>이영희</td><td>O</td></tr>
+      <tr><td>홍길동전</td><td>X (4글자)</td></tr>
+      <tr><td>Jane</td><td>X (영문)</td></tr>
+    </tbody>
+  </table>
+
+  <h3 class="reveal">REGEXP_REPLACE (교체)</h3>
+  <pre class="reveal"><button class="copy-btn">복사</button><code><span class="sql-cm">-- 모든 공백 제거</span>
+<span class="sql-kw">SELECT</span> <span class="sql-kw">REGEXP_REPLACE</span>(<span class="sql-str">'Hello   World'</span>, <span class="sql-str">'\s+'</span>, <span class="sql-str">''</span>) <span class="sql-kw">FROM</span> <span class="sql-name">DUAL</span>;
+<span class="sql-cm">-- 결과: 'HelloWorld'</span>
+
+<span class="sql-cm">-- 전화번호 가운데를 마스킹</span>
+<span class="sql-kw">SELECT</span> <span class="sql-kw">REGEXP_REPLACE</span>(<span class="sql-str">'010-1234-5678'</span>, <span class="sql-str">'(\d{3})-(\d{4})-(\d{4})'</span>, <span class="sql-str">'\1-****-\3'</span>) <span class="sql-kw">FROM</span> <span class="sql-name">DUAL</span>;
+<span class="sql-cm">-- 결과: '010-****-5678'</span></code></pre>
+  <p class="reveal" style="font-size: 13px; color: var(--fg-3); margin: 8px 0 4px;">↓ 결과</p>
+  <table class="reveal">
+    <thead><tr><th>입력</th><th>패턴 → 치환</th><th>결과</th></tr></thead>
+    <tbody>
+      <tr><td>'Hello   World'</td><td><code>\s+</code> → <code>''</code></td><td>HelloWorld</td></tr>
+      <tr><td>'010-1234-5678'</td><td><code>(\d{3})-(\d{4})-(\d{4})</code> → <code>\1-****-\3</code></td><td>010-****-5678</td></tr>
+    </tbody>
+  </table>
+
+  <h3 class="reveal">REGEXP_SUBSTR (추출)</h3>
+  <pre class="reveal"><button class="copy-btn">복사</button><code><span class="sql-cm">-- 첫 번째 숫자 묶음 추출</span>
+<span class="sql-kw">SELECT</span> <span class="sql-kw">REGEXP_SUBSTR</span>(<span class="sql-str">'주문번호 12345 입니다'</span>, <span class="sql-str">'\d+'</span>) <span class="sql-kw">FROM</span> <span class="sql-name">DUAL</span>;
+<span class="sql-cm">-- 결과: '12345'</span></code></pre>
+  <p class="reveal" style="font-size: 13px; color: var(--fg-3); margin: 8px 0 4px;">↓ 결과</p>
+  <table class="reveal">
+    <thead><tr><th>입력</th><th>패턴</th><th>추출 결과</th></tr></thead>
+    <tbody>
+      <tr><td>'주문번호 12345 입니다'</td><td><code>\d+</code></td><td>12345</td></tr>
+      <tr><td>'no-digits'</td><td><code>\d+</code></td><td>NULL</td></tr>
+      <tr><td>'abc 12 def 34'</td><td><code>\d+</code></td><td>12 (첫 매치만)</td></tr>
+    </tbody>
+  </table>
+
+  <h3 class="reveal">REGEXP_INSTR / REGEXP_COUNT</h3>
+  <pre class="reveal"><button class="copy-btn">복사</button><code><span class="sql-cm">-- 처음 숫자가 나타나는 위치</span>
+<span class="sql-kw">SELECT</span> <span class="sql-kw">REGEXP_INSTR</span>(<span class="sql-str">'abc123def'</span>, <span class="sql-str">'\d'</span>) <span class="sql-kw">FROM</span> <span class="sql-name">DUAL</span>;  <span class="sql-cm">-- 4</span>
+
+<span class="sql-cm">-- 단어 개수</span>
+<span class="sql-kw">SELECT</span> <span class="sql-kw">REGEXP_COUNT</span>(<span class="sql-str">'one two three'</span>, <span class="sql-str">'\w+'</span>) <span class="sql-kw">FROM</span> <span class="sql-name">DUAL</span>;  <span class="sql-cm">-- 3</span></code></pre>
+  <p class="reveal" style="font-size: 13px; color: var(--fg-3); margin: 8px 0 4px;">↓ 결과</p>
+  <table class="reveal">
+    <thead><tr><th>함수</th><th>입력 / 패턴</th><th>결과</th></tr></thead>
+    <tbody>
+      <tr><td>REGEXP_INSTR</td><td>'abc123def' / <code>\d</code></td><td>4 (1-based)</td></tr>
+      <tr><td>REGEXP_INSTR</td><td>'no digits' / <code>\d</code></td><td>0 (없음)</td></tr>
+      <tr><td>REGEXP_COUNT</td><td>'one two three' / <code>\w+</code></td><td>3</td></tr>
+      <tr><td>REGEXP_COUNT</td><td>'aaaa' / <code>a</code></td><td>4</td></tr>
+    </tbody>
+  </table>
+
+  <!-- Before & After -->
+  <h2 class="section-label sec-compare reveal">
+    <span class="label-tag">Before &amp; After</span>
+    <span class="label-rest">LIKE로는 까다로운 두 조건</span>
+  </h2>
+  <p class="reveal">MEMBER 3건에서 "한글 이름이고 동시에 010 휴대폰 번호인 회원"만 골라내야 하는 상황. 2번은 휴대폰이 02 지역번호라 떨어지고, 3번은 이름이 영문이라 떨어진다. LIKE 두 개로는 표현하기 까다로운 두 조건을 REGEXP_LIKE로 정밀하게 거른다.</p>
+  <p class="reveal" style="font-size: 13.5px; color: var(--fg-3); margin-top: 0;">MEMBER 테이블</p>
+  <table class="reveal">
+    <thead><tr><th>ID</th><th>NAME</th><th>PHONE</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>김철수</td><td>010-1234-5678</td></tr>
+      <tr><td>2</td><td>이영희</td><td>02-1234-5678</td></tr>
+      <tr><td>3</td><td>Jane</td><td>010-9999-1234</td></tr>
+    </tbody>
+  </table>
+  <div class="ba-flow reveal">
+    <div class="ba-side before">
+      <span class="ba-tag">BEFORE (원본 3건)</span>
+      <h4 class="ba-h">한글 이름 + 010 휴대폰만</h4>
+      <div class="sql">SELECT * FROM MEMBER WHERE REGEXP_LIKE(NAME, '^[가-힣]+$') AND REGEXP_LIKE(PHONE, '^010-');</div>
+      <div class="mini-table cols-3">
+        <div class="h">ID</div><div class="h">NAME</div><div class="h">PHONE</div>
+        <div class="c">1</div><div class="c">김철수</div><div class="c">010-...</div>
+        <div class="c is-null">2</div><div class="c is-null">이영희</div><div class="c is-null">02-...</div>
+        <div class="c is-null">3</div><div class="c is-null">Jane</div><div class="c is-null">010-...</div>
+      </div>
+    </div>
+    <div class="ba-arrow">→</div>
+    <div class="ba-side after">
+      <span class="ba-tag">AFTER (교집합 1건)</span>
+      <h4 class="ba-h">두 정규식 AND</h4>
+      <div class="sql">^[가-힣]+$ : 한글만 / ^010- : 010 시작</div>
+      <div class="mini-table cols-3">
+        <div class="h">ID</div><div class="h">NAME</div><div class="h">PHONE</div>
+        <div class="c">1</div><div class="c">김철수</div><div class="c">010-1234-5678</div>
+      </div>
+    </div>
+  </div>
+  <p class="reveal"><code>^[가-힣]+$</code>는 문자열 처음(<code>^</code>)부터 끝(<code>$</code>)까지가 모두 한글 한 글자(<code>[가-힣]</code>)의 1회 이상 반복으로만 채워질 때만 매칭하므로, "Jane"은 영문이라 즉시 탈락하고 김철수·이영희는 통과한다. 다음 조건 <code>^010-</code>은 PHONE이 정확히 "010-"으로 시작할 때만 통과시키므로 02 지역번호인 이영희가 떨어진다. 두 정규식 조건을 AND로 조합해 "한글 이름 + 010 휴대폰" 교집합만 남는 셈이다. LIKE의 <code>%</code>·<code>_</code>로는 "글자 종류(한글)"를 표현할 수 없으니, 문자 종류·길이·위치를 동시에 검사해야 할 때는 정규식이 자연스러운 선택이다.</p>
+
+  <!-- 정규식 옵션 -->
+  <h2 class="reveal">정규식 옵션 (4번째 인자)</h2>
+  <pre class="reveal"><button class="copy-btn">복사</button><code><span class="sql-kw">REGEXP_LIKE</span>(<span class="sql-str">'ABC'</span>, <span class="sql-str">'abc'</span>, <span class="sql-str">'i'</span>)   <span class="sql-cm">-- 대소문자 무시</span></code></pre>
+  <table class="reveal">
+    <thead><tr><th>옵션</th><th>의미</th></tr></thead>
+    <tbody>
+      <tr><td><code>i</code></td><td>대소문자 무시</td></tr>
+      <tr><td><code>c</code></td><td>대소문자 구분(기본)</td></tr>
+      <tr><td><code>m</code></td><td>멀티라인</td></tr>
+      <tr><td><code>n</code></td><td><code>.</code>이 줄바꿈도 매칭</td></tr>
+      <tr><td><code>x</code></td><td>공백 무시</td></tr>
+    </tbody>
+  </table>
+
+  <div class="reveal" style="margin: 40px 0 0; padding: 22px 24px; background: linear-gradient(135deg, var(--point-050), var(--bg-card)); border: 1px solid var(--point-100); border-radius: 12px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;">
+    <div>
+      <div style="font-size: 12px; font-weight: 800; color: var(--point-600); letter-spacing: 0.04em; margin-bottom: 4px;">시험 대비</div>
+      <div style="font-size: 14px; color: var(--fg-2);">이 챕터의 함정·정답과 30초 정리는 통합 시험 대비 페이지에서 볼 수 있습니다.</div>
+    </div>
+    <a href="./exam-review.html#ch-2-2-8" style="font-size: 14px; font-weight: 700; color: var(--point-600); text-decoration: none; padding: 8px 14px; border: 1px solid var(--point-300); border-radius: 8px; background: var(--bg-card); white-space: nowrap;">시험 대비 보기 →</a>
+  </div>
+
+  </article>
+</main>
+<script src="./common.js"></script>
+</body>
+</html>
