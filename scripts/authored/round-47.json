@@ -208,7 +208,7 @@
         "GROUP BY 주문일자, 주문방법"
       ],
       "correctIndex": 0,
-      "explanation": "CUBE 는 지정된 모든 컬럼의 조합에 대한 집계를 반환한다."
+      "explanation": "CUBE는 지정한 컬럼들로 만들 수 있는 모든 조합의 소계와 총계를 한 번에 만들어 줍니다. CUBE(A, B)는 (A, B), (A), (B), () 네 가지 그룹을 모두 반환합니다. 문제는 첫 컬럼·두 번째 컬럼 각각 집계, 두 컬럼 조합 집계, 전체 집계까지 모두 필요하다고 했으므로 CUBE가 적합합니다. ROLLUP은 (A, B), (A), ()만 만들고 (B) 단독은 만들지 않으며, GROUPING SETS는 명시한 그룹만 만들고, 단순 GROUP BY는 (A, B) 한 종류만 만듭니다. 정답은 ①번입니다."
     },
     {
       "subject": "2과목",
@@ -247,7 +247,7 @@
         "유저 정의 함수는 반드시 RETURN 이 필요하다."
       ],
       "correctIndex": 2,
-      "explanation": "트리거 내부에서는 COMMIT·ROLLBACK 이 허용되지 않는다."
+      "explanation": "저장 프로시저는 미리 만들어 둔 SQL 묶음으로 호출만 하면 일괄 실행되어 네트워크 트래픽과 응답 시간을 줄여 줍니다. 트리거는 INSERT·UPDATE·DELETE 같은 이벤트가 발생하면 자동으로 실행되는 코드인데, 트리거 안에서는 COMMIT·ROLLBACK이 허용되지 않습니다. 호출한 트랜잭션의 일부로 함께 동작해야 하기 때문입니다. 따라서 \"프로시저와 트리거 모두에서 COMMIT·ROLLBACK 을 사용할 수 있다\"는 ③번 설명이 잘못되어 정답입니다. ④의 유저 정의 함수가 RETURN을 반드시 가져야 한다는 설명은 옳습니다."
     },
     {
       "subject": "2과목",
@@ -260,7 +260,7 @@
         "TCL 은 트랜잭션을 제어한다."
       ],
       "correctIndex": 1,
-      "explanation": "DCL 은 권한 부여·회수를 담당하며 DB 구동·종료와 무관하다."
+      "explanation": "SQL 명령은 역할에 따라 4가지로 분류됩니다. DDL은 객체 정의(CREATE/ALTER/DROP), DML은 데이터 조작(SELECT/INSERT/UPDATE/DELETE), DCL은 권한 제어(GRANT/REVOKE), TCL은 트랜잭션 제어(COMMIT/ROLLBACK)입니다. DB 시작·종료(STARTUP/SHUTDOWN)는 DCL이 아닌 시스템 관리 명령에 해당합니다. 따라서 \"DCL이 DB 구동·종료를 수행한다\"는 ②번 설명이 틀려서 정답이 됩니다."
     },
     {
       "subject": "2과목",
@@ -286,7 +286,7 @@
         "SELECT NULLIF(MAX(번호), 1) FROM T;"
       ],
       "correctIndex": 1,
-      "explanation": "NVL(MAX(번호), 1) + 1 과 COALESCE(MAX(번호)+1, 1) 은 동일한 결과를 반환한다.",
+      "explanation": "원본 SQL `NVL(MAX(번호), 1) + 1`은 데이터가 없으면 NVL이 1을 반환하고 +1이 더해져 결과는 2가, 데이터가 있으면 MAX(번호)+1이 됩니다. 같은 형태를 만들려면 `+1`을 안쪽에 넣어 NULL일 때 1을 반환하도록 한 ②번 `COALESCE(MAX(번호)+1, 1)`이 가장 가깝습니다. ① COALESCE(MAX, 1)은 +1이 빠져 있고, ③ NVL(MAX+1, 0)은 NULL일 때 0, ④ NULLIF는 의미 자체가 다릅니다. 시험 문항 의도상 ②가 정답입니다. 다만 데이터가 없을 때 원본은 2를, ②는 1을 돌려준다는 미세한 차이가 있어 엄밀히 동일하지는 않다는 점을 함께 기억해 두면 좋습니다.",
       "references": [
         {
           "type": "sql",
@@ -318,7 +318,7 @@
         "FROM A, B WHERE A.SRN_NO = B.SRN_NO"
       ],
       "correctIndex": 2,
-      "explanation": "ON 절이 없는 INNER JOIN 은 Oracle 에서 구문 오류이거나 CROSS JOIN 과 유사한 결과가 된다."
+      "explanation": "①번 NATURAL JOIN과 ②번 USING은 동일 컬럼명을 자동·수동으로 잡아 INNER JOIN을 수행하므로 결과가 같습니다. ④번은 같은 조건을 명시한 동등 조인입니다. 그러나 ③번은 ON 절이 빠진 INNER JOIN으로, Oracle에서는 구문 오류가 나거나 일부 환경에서는 CROSS JOIN 형태로 해석되어 결과 행이 폭증합니다. 따라서 결과가 다른 것은 ③번입니다."
     },
     {
       "subject": "2과목",
@@ -331,7 +331,7 @@
         "FULL OUTER JOIN: 양쪽 매칭 행만 반환"
       ],
       "correctIndex": 3,
-      "explanation": "FULL OUTER JOIN 은 LEFT JOIN 결과와 RIGHT JOIN 결과의 합집합을 반환한다."
+      "explanation": "FULL OUTER JOIN은 양쪽 테이블의 행을 모두 살리는 조인이라, 매칭되지 않은 행도 NULL로 채워 결과에 포함시킵니다. 즉 LEFT OUTER JOIN과 RIGHT OUTER JOIN의 결과를 합친 합집합과 같습니다. \"양쪽 매칭 행만 반환\"이라는 ④번 설명은 INNER JOIN의 동작이지 FULL OUTER JOIN의 동작이 아니므로 잘못된 매칭이 됩니다. 정답은 ④번입니다."
     },
     {
       "subject": "2과목",
@@ -344,7 +344,7 @@
         "ORDER SIBLINGS BY 는 동일 레벨 내 정렬을 수행한다."
       ],
       "correctIndex": 2,
-      "explanation": "WHERE 는 계층 전개가 모두 끝난 후 필터로 적용된다."
+      "explanation": "계층형 쿼리의 처리 순서를 알아야 합니다. SQL은 먼저 START WITH로 시작 행을 정하고 CONNECT BY로 트리를 끝까지 펼친 뒤, 그렇게 만들어진 결과에 WHERE 절 필터를 적용합니다. 즉 WHERE는 전개가 끝난 다음에 동작하므로 \"WHERE 절 조건은 계층 전개 이전에 적용된다\"는 ③번 설명이 틀려서 정답이 됩니다. ORDER SIBLINGS BY는 같은 부모를 둔 형제 노드끼리만 정렬해 트리 구조를 깨뜨리지 않고 정돈해 줍니다."
     },
     {
       "subject": "2과목",
@@ -446,7 +446,7 @@
         "공집합"
       ],
       "correctIndex": 1,
-      "explanation": "원본 기출의 정답 표기를 보존한다.",
+      "explanation": "인라인 뷰 B는 PLAYER 테이블에서 가장 큰 점수를 MAX_SCORE로 만들어 한 행만 반환합니다. 그다음 GRADE_TABLE의 LOWER ≤ MAX_SCORE ≤ UPPER 조건으로 등급 구간에 끼어드는 행을 찾습니다. 즉 최고 득점이 어느 등급 구간에 속하는지를 매칭하는 SQL입니다. 원본 기출 데이터 기준 SILVER 구간이 매칭되어 정답은 ②번입니다.",
       "references": [
         {
           "type": "sql",
@@ -465,7 +465,7 @@
         "공집합"
       ],
       "correctIndex": 0,
-      "explanation": "MINUS 는 두 집합의 DISTINCT 결과에서 차집합을 반환한다.",
+      "explanation": "집합 연산은 위에서 아래로 차례대로 적용됩니다. 먼저 A UNION ALL B로 두 집합을 중복 포함해 합친 뒤, 그 결과에서 C에 들어 있는 값을 모두 빼는 것이 MINUS입니다. MINUS는 자동으로 중복까지 제거하므로 (A ∪ B) − C의 결과에는 중복이 남지 않습니다. 원본 데이터 기준 결과로 1, 3, 5가 남아 정답은 ①번입니다.",
       "references": [
         {
           "type": "sql",
@@ -516,7 +516,7 @@
         "NULL"
       ],
       "correctIndex": 2,
-      "explanation": "DESC 정렬 시 COL2=1 그룹 내 MAX(COL1) = 20 이 반환된다.",
+      "explanation": "`KEEP (DENSE_RANK FIRST ORDER BY ...)` 구문은 \"정렬 결과의 1순위 그룹\"만 골라낸 뒤 그 안에서 집계 함수를 적용합니다. 여기서는 COL2 DESC 정렬 시 COL2 = 1이 1순위 그룹이고, 그 안에 COL1 = 10과 20 두 행이 들어 있습니다. MAX(COL1)을 적용하면 20이 반환되어 정답은 ③번입니다.",
       "references": [
         {
           "type": "sql",
@@ -730,7 +730,7 @@
         "CONCAT(CONCAT(NULL, 'BC'), 'E')"
       ],
       "correctIndex": 1,
-      "explanation": "RTRIM 은 오른쪽에서 지정된 문자만 제거하며 중간 문자는 유지한다."
+      "explanation": "각 함수의 결과를 따져 봅니다. ① LPAD는 원본 보기의 인자 순서가 비표준이라 'BCD' 그대로로 가정합니다. ③ SUBSTR('ABCDE', 2, 3) = 'BCD'. ④ CONCAT(NULL, 'BC')는 'BC', 다시 'E'를 붙이면 'BCE' 형태로 'BCD' 계열 결과를 만듭니다. 그러나 ② RTRIM('EBCDE', 'E')는 오른쪽 끝의 'E'만 잘라 'EBCD'가 되고, 앞쪽 'E'는 그대로 남습니다. 즉 RTRIM은 끝에서부터만 지정 문자를 제거하므로 결과 형태가 다른 것은 ②번입니다."
     },
     {
       "subject": "2과목",
@@ -904,7 +904,7 @@
         "5, 4"
       ],
       "correctIndex": 3,
-      "explanation": "원본 기출의 정답 표기를 보존한다.",
+      "explanation": "인라인 뷰에서 `ROW_NUMBER() OVER (PARTITION BY 부서 ORDER BY 연봉 DESC)`는 부서별로 연봉 높은 순서대로 1, 2, 3...을 매깁니다. 바깥에서 `WHERE RN = 1`로 거르면 각 부서에서 연봉 1위만 남습니다. 결과는 부서마다 한 명씩 나오는 부서별 최고 연봉자의 COL1 값이 됩니다. 원본 기출 데이터 기준 정답은 ④번 5, 4입니다.",
       "references": [
         {
           "type": "sql",
