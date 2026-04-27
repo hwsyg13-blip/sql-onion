@@ -4,7 +4,7 @@
   "notes": "AI 생성 모의고사 — 기출 변형 문제 1000제 (점진적 추가). 기출(round-XX.json)과 별개로 관리. 모의고사 모드에서 기출 풀과 함께 출제 가능 (build 스크립트 통합 시).",
   "schema": {
     "subject": "1과목 | 2과목",
-    "chapter": "SQLD 표준 출제 영역 + 옵티마이저·인덱스 (SQLP 영역 일부 포함)",
+    "chapter": "SQLD 표준 출제 영역 (2024년 변경 반영, 옵티마이저·인덱스는 SQLP 영역으로 제외)",
     "title": "문항 본문 (필수)",
     "options": "보기 4개 배열 (필수, 4개 정확히)",
     "correctIndex": "0~3 (필수, 정답 위치)",
@@ -43,8 +43,7 @@
       "DDL",
       "DCL·TCL",
       "절차형 SQL",
-      "정규 표현식",
-      "옵티마이저·인덱스"
+      "정규 표현식"
     ]
   },
   "authored": [
@@ -106,28 +105,6 @@
       "explanation": "ORDER SIBLINGS BY는 계층 구조의 트리 형태를 유지한 상태에서, 같은 레벨에 있는 형제(Siblings) 노드들 사이에서만 정렬을 수행합니다."
     },
     {
-      "_id": "ai-mock-004",
-      "_source": "gemini-mock-1",
-      "subject": "2과목",
-      "chapter": "옵티마이저·인덱스",
-      "title": "다음 테이블 스키마와 쿼리를 보고 인덱스(Index) 사용이 억제(Suppress)되어 Table Full Scan이 발생할 확률이 가장 높은 쿼리는 무엇인가? (단, DBMS의 옵티마이저는 기본 설정으로 동작한다.)",
-      "options": [
-        "SELECT * FROM ORDER_LOG WHERE ORDER_DT = 20231031;",
-        "SELECT * FROM ORDER_LOG WHERE ORDER_AMT > 10000;",
-        "SELECT * FROM ORDER_LOG WHERE ORDER_DT LIKE '202310%';",
-        "SELECT * FROM ORDER_LOG WHERE ORDER_DT = '20231031';"
-      ],
-      "correctIndex": 0,
-      "explanation": "문자열 컬럼(ORDER_DT)과 숫자형 값(20231031)을 비교하면 우선순위에 의해 컬럼 자체가 숫자로 내부적 형변환(TO_NUMBER)이 일어납니다. 컬럼이 가공되면 인덱스를 사용할 수 없습니다.",
-      "references": [
-        {
-          "type": "sql",
-          "caption": "테이블 생성",
-          "code": "CREATE TABLE ORDER_LOG (\n  ORDER_ID  VARCHAR2(10) PRIMARY KEY,\n  ORDER_DT  VARCHAR2(8),\n  ORDER_AMT NUMBER\n);\nCREATE INDEX IDX_ORDER_DT ON ORDER_LOG(ORDER_DT);"
-        }
-      ]
-    },
-    {
       "_id": "ai-mock-005",
       "_source": "gemini-mock-1",
       "subject": "2과목",
@@ -160,28 +137,6 @@
         {
           "type": "sql",
           "code": "SELECT NULLIF(COALESCE(NULL, 'A', 'B'), 'A') FROM DUAL;"
-        }
-      ]
-    },
-    {
-      "_id": "ai-mock-007",
-      "_source": "gemini-mock-1",
-      "subject": "2과목",
-      "chapter": "옵티마이저·인덱스",
-      "title": "다음 실행 계획(Execution Plan)을 읽고, 데이터베이스 옵티마이저가 가장 먼저 접근(Access)하는 테이블이나 인덱스는 무엇인가?",
-      "options": [
-        "IDX_DEPTNO 인덱스 (INDEX RANGE SCAN)",
-        "NESTED LOOPS",
-        "DEPT 테이블 (TABLE ACCESS BY INDEX ROWID)",
-        "EMP 테이블 (TABLE ACCESS FULL)"
-      ],
-      "correctIndex": 3,
-      "explanation": "실행 계획은 들여쓰기가 가장 깊고, 형제 노드 중 가장 위에 있는 것부터 읽습니다. EMP 테이블의 TABLE ACCESS FULL이 가장 안쪽 위에 위치하므로 옵티마이저가 가장 먼저 접근합니다.",
-      "references": [
-        {
-          "type": "ascii",
-          "caption": "실행 계획",
-          "text": "Id | Operation                     | Name\n0  | SELECT STATEMENT              |\n1  |  NESTED LOOPS                 |\n2  |   NESTED LOOPS                |\n3  |    TABLE ACCESS FULL          | EMP\n4  |    INDEX RANGE SCAN           | IDX_DEPTNO\n5  |   TABLE ACCESS BY INDEX ROWID | DEPT"
         }
       ]
     },
@@ -276,21 +231,6 @@
       "explanation": "NOT IN은 내부적으로 AND NOT 조건의 결합이므로, 비교 대상 중 하나라도 NULL이면 결과가 UNKNOWN이 되어 전체 조건이 거짓이 되고 결과를 반환하지 못합니다. EXISTS/NOT EXISTS는 행의 존재 여부만 확인해 NULL의 영향을 받지 않습니다."
     },
     {
-      "_id": "ai-mock-014",
-      "_source": "gemini-mock-1",
-      "subject": "2과목",
-      "chapter": "옵티마이저·인덱스",
-      "title": "인덱스(Index) 스캔 시, 인덱스 컬럼의 데이터가 자동 형변환(Implicit Conversion)되어 인덱스를 타지 못하게(Table Full Scan) 되는 쿼리는? (EMP_ID는 VARCHAR2 타입이다.)",
-      "options": [
-        "WHERE EMP_ID = '1234'",
-        "WHERE EMP_ID >= '1000'",
-        "WHERE EMP_ID = 1234",
-        "WHERE EMP_ID LIKE '123%'"
-      ],
-      "correctIndex": 2,
-      "explanation": "문자형 컬럼과 숫자형 리터럴을 비교하면 데이터 타입 우선순위에 따라 컬럼 측이 TO_NUMBER로 변환됩니다. 인덱스 컬럼이 가공되면 인덱스를 사용할 수 없습니다."
-    },
-    {
       "_id": "ai-mock-015",
       "_source": "gemini-mock-1",
       "subject": "2과목",
@@ -351,21 +291,6 @@
       "explanation": "MINUS는 UNION·INTERSECT와 마찬가지로 결과 집합에서 중복을 제거하여 고유한 행만 출력합니다. UNION ALL만 중복을 보존합니다."
     },
     {
-      "_id": "ai-mock-019",
-      "_source": "gemini-mock-1",
-      "subject": "2과목",
-      "chapter": "옵티마이저·인덱스",
-      "title": "실행 계획(Execution Plan)에서 테이블 조인 방식 중, 대용량 데이터 조인 시 메모리에 해시 영역을 생성하여 조인하는 가장 효율적인 방식은?",
-      "options": [
-        "SORT MERGE JOIN",
-        "NESTED LOOPS JOIN",
-        "HASH JOIN",
-        "CARTESIAN JOIN"
-      ],
-      "correctIndex": 2,
-      "explanation": "HASH JOIN은 선행 테이블의 조인 키로 메모리에 해시 테이블을 구축한 뒤, 후행 테이블을 읽으며 해시 함수를 적용해 매칭하는 대용량 처리에 특화된 방식입니다. 동등(=) 조건에서만 사용 가능합니다."
-    },
-    {
       "_id": "ai-mock-020",
       "_source": "gemini-mock-1",
       "subject": "2과목",
@@ -379,21 +304,6 @@
       ],
       "correctIndex": 1,
       "explanation": "MERGE는 단일 문장으로 UPSERT(Update or Insert)를 처리하는 것이 핵심 기능입니다. WHEN 절은 둘 중 하나만 사용 가능하며, ON 절의 조인 키 컬럼은 UPDATE 대상이 될 수 없습니다."
-    },
-    {
-      "_id": "ai-mock-021",
-      "_source": "gemini-mock-1",
-      "subject": "2과목",
-      "chapter": "옵티마이저·인덱스",
-      "title": "다음 중 테이블의 특정 파티션 구조에 관계없이 전체 테이블 단위로 생성되며, 파티션 키가 아닌 다른 컬럼으로 구성된 인덱스를 무엇이라 하는가?",
-      "options": [
-        "Local Partitioned Index",
-        "Bitmap Index",
-        "Global Non-Partitioned Index",
-        "Prefixed Index"
-      ],
-      "correctIndex": 2,
-      "explanation": "Global Non-Partitioned Index는 파티션 테이블에 대해 파티션 단위가 아닌 단일(전역) 인덱스로 생성된 형태입니다. Local은 각 파티션마다 별도 생성, Prefixed는 파티션 키가 인덱스 첫 컬럼인 경우입니다."
     },
     {
       "_id": "ai-mock-022",
@@ -738,21 +648,6 @@
       "explanation": "RANGE는 정렬 키 값 기준이라 동일 SALARY 값을 가진 행을 한 번에 묶어 누적합니다. 반면 ROWS는 물리적 행 순서대로 하나씩 누적하므로 동일 값이 있을 때 RANGE 방식과 결과가 달라집니다. ①·②(생략 시 기본값 RANGE)·④는 모두 RANGE 기반이라 같은 결과를, ③ ROWS는 다른 결과를 냅니다."
     },
     {
-      "_id": "ai-mock-044",
-      "_source": "gemini-mock-2",
-      "subject": "2과목",
-      "chapter": "옵티마이저·인덱스",
-      "title": "다음 실행 계획(Execution Plan)에서 조인 기법으로 HASH JOIN이 선택되었습니다. HASH JOIN에 대한 설명으로 올바른 것은?",
-      "options": [
-        "동등(=) 조인 조건에서만 사용할 수 있는 조인 기법이다.",
-        "조인 컬럼에 인덱스가 존재해야만 사용할 수 있는 기법이다.",
-        "양쪽 테이블을 조인 컬럼 기준으로 미리 정렬(Sort)한 후 병합하는 방식이다.",
-        "데이터의 크기가 큰 테이블을 먼저 읽어(Build Input) 메모리에 해시 영역을 생성하는 것이 성능에 유리하다."
-      ],
-      "correctIndex": 0,
-      "explanation": "HASH JOIN은 해시 함수를 이용해 동일 값을 매칭하는 방식이므로 동등(=) 조건에서만 사용 가능합니다. 인덱스가 없어도 사용 가능하며, 정렬 후 병합은 SORT MERGE JOIN의 방식이고, 작은 쪽을 Build Input으로 두는 것이 효율적입니다."
-    },
-    {
       "_id": "ai-mock-045",
       "_source": "gemini-mock-2",
       "subject": "2과목",
@@ -798,28 +693,6 @@
       "explanation": "UNION은 중복 제거를 위해 내부 정렬·중복 제거 단계가 있어 일반적으로 UNION ALL보다 느립니다. 컬럼 개수와 위치별 데이터 타입은 양쪽 쿼리가 일치해야 하며, 결과 컬럼명은 첫 번째(위쪽) 쿼리의 컬럼명을 따릅니다."
     },
     {
-      "_id": "ai-mock-048",
-      "_source": "gemini-mock-2",
-      "subject": "2과목",
-      "chapter": "옵티마이저·인덱스",
-      "title": "다음 실행 계획(Execution Plan)의 읽는 순서로 올바른 것은?",
-      "options": [
-        "2 -> 4 -> 3 -> 1",
-        "1 -> 2 -> 3 -> 4",
-        "4 -> 3 -> 2 -> 1",
-        "2 -> 3 -> 4 -> 1"
-      ],
-      "correctIndex": 0,
-      "explanation": "실행 계획 트리는 들여쓰기가 깊은 노드를, 형제 노드 중에서는 위에 있는 것을 먼저 읽습니다. (2) EMP TABLE ACCESS FULL → (4) IDX 인덱스 → (3) DEPT TABLE ACCESS BY ROWID → (1) NESTED LOOPS 조인 순으로 동작합니다.",
-      "references": [
-        {
-          "type": "ascii",
-          "caption": "실행 계획",
-          "text": "1 NESTED LOOPS\n2  TABLE ACCESS FULL          (EMP)\n3  TABLE ACCESS BY INDEX ROWID (DEPT)\n4   INDEX RANGE SCAN           (IDX)"
-        }
-      ]
-    },
-    {
       "_id": "ai-mock-049",
       "_source": "gemini-mock-2",
       "subject": "2과목",
@@ -848,27 +721,6 @@
       ],
       "correctIndex": 1,
       "explanation": "NATURAL JOIN과 USING 절의 공통 컬럼은 두 테이블의 식별자를 잃고 단일 개념으로 통합되므로, 테이블 접두사(Alias)를 붙이면 오류가 발생합니다."
-    },
-    {
-      "_id": "ai-mock-051",
-      "_source": "gemini-mock-2",
-      "subject": "2과목",
-      "chapter": "옵티마이저·인덱스",
-      "title": "다음 SQL 쿼리의 실행 시 발생하는 암시적 형변환(Implicit Type Conversion)에 대한 설명으로 옳은 것은? (단, EMP_ID는 VARCHAR2(10) 타입이며 인덱스가 존재한다.)",
-      "options": [
-        "EMP_ID 컬럼이 숫자 형태로 시작하지 않는 데이터(예: 'A100')를 가지고 있다면 에러 없이 무시된다.",
-        "타입 불일치로 인해 구문 오류(Syntax Error)가 발생한다.",
-        "EMP_ID 컬럼 내부의 데이터들이 숫자로 변환(TO_NUMBER(EMP_ID))되므로 인덱스를 사용할 수 없다.",
-        "비교 대상 리터럴(7900)이 문자열 '7900'으로 변환되어 정상적으로 인덱스를 사용한다."
-      ],
-      "correctIndex": 2,
-      "explanation": "데이터 타입 우선순위에 따라 문자형 컬럼이 숫자로 변환됩니다(TO_NUMBER(EMP_ID)). 인덱스 컬럼이 가공되면 인덱스 스캔이 억제되어 Full Table Scan이 발생합니다.",
-      "references": [
-        {
-          "type": "sql",
-          "code": "SELECT * FROM EMP WHERE EMP_ID = 7900;"
-        }
-      ]
     },
     {
       "_id": "ai-mock-052",
@@ -929,21 +781,6 @@
       ],
       "correctIndex": 3,
       "explanation": "테이블이 분할되면 조회 시 조인 연산이 늘어나므로 오히려 조회 성능이 저하될 수 있습니다. 이러한 부작용을 보완하기 위해 반정규화(Denormalization)를 수행합니다."
-    },
-    {
-      "_id": "ai-mock-056",
-      "_source": "gemini-mock-2",
-      "subject": "2과목",
-      "chapter": "옵티마이저·인덱스",
-      "title": "테이블 조인 방식 중 동등 조인(=)이 아닌 비동등 조인(Non-Equi Join)을 수행할 때 주로 사용되는 기법은?",
-      "options": [
-        "HASH JOIN",
-        "CROSS JOIN",
-        "NATURAL JOIN",
-        "SORT MERGE JOIN"
-      ],
-      "correctIndex": 3,
-      "explanation": "SORT MERGE JOIN은 양쪽 데이터를 정렬한 후 병합하므로 범위(<, >, BETWEEN)를 스캔하는 비동등 조인에서도 효과적입니다. HASH JOIN은 해시 함수 특성상 동등(=) 조건에서만 사용 가능합니다."
     },
     {
       "_id": "ai-mock-057",
