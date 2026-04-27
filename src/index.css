@@ -295,6 +295,21 @@ html[data-theme="dark"] {
   --shadow-lg: 0 12px 32px rgba(0,0,0,0.45);
 }
 
+/* 홈 Hero — 라이트는 부드러운 녹색 wash, 다크는 깊이감 있는 그래디언트 */
+.home-hero {
+  background: linear-gradient(180deg, var(--point-050) 0%, var(--bg-page) 100%);
+  border: 1px solid var(--point-100);
+}
+html[data-theme="dark"] .home-hero {
+  background:
+    radial-gradient(ellipse 60% 80% at 85% 50%, rgba(76, 175, 80, 0.16), transparent 70%),
+    linear-gradient(135deg, #1E2A22 0%, #18201C 55%, #14181A 100%);
+  border-color: rgba(123, 196, 127, 0.22);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.04),
+    0 24px 56px -28px rgba(0, 0, 0, 0.7);
+}
+
 /* 콘텐츠 보호 — 텍스트 선택·드래그·우클릭 차단
    (입력 필드 / 코드 블록은 예외) */
 html, body {
