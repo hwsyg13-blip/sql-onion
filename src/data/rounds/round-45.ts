@@ -442,10 +442,10 @@ export const ROUND_45: QuizQuestion[] = [
     "number": 19,
     "title": "직급 인원이 9명 이상인 직급 중 나이가 가장 많은 직원의 이름을 조회하는 SQL로 올바른 것은?",
     "options": [
-      "SELECT 이름 FROM EMP WHERE COUNT(*) >= 9 GROUP BY 직급;",
-      "SELECT 이름 FROM EMP GROUP BY 직급 HAVING COUNT(*) >= 9 ORDER BY 나이 DESC;",
+      "SELECT 이름 FROM EMP WHERE COUNT(*) >= 9 GROUP BY 직급 ORDER BY 나이 DESC FETCH FIRST 1 ROWS ONLY;",
+      "SELECT 이름 FROM EMP GROUP BY 직급 HAVING COUNT(*) >= 9 ORDER BY 나이 DESC FETCH FIRST 1 ROWS ONLY;",
       "SELECT 이름 FROM EMP WHERE 직급 IN (SELECT 직급 FROM EMP GROUP BY 직급 HAVING COUNT(*) >= 9) ORDER BY 나이 DESC FETCH FIRST 1 ROWS ONLY;",
-      "SELECT 이름 FROM EMP GROUP BY 직급 HAVING 나이 = MAX(나이);"
+      "SELECT 이름 FROM EMP GROUP BY 직급 HAVING 나이 = MAX(나이) AND COUNT(*) >= 9 ORDER BY 나이 DESC FETCH FIRST 1 ROWS ONLY;"
     ],
     "correctIndex": 2,
     "explanation": "HAVING COUNT(*) >= 9 조건으로 9명 이상 직급을 먼저 추출하고, 해당 직급 직원 중 나이가 가장 많은 사람을 반환한다.",
@@ -845,10 +845,10 @@ export const ROUND_45: QuizQuestion[] = [
     "number": 34,
     "title": "아래 두 SQL의 결과에 대한 설명으로 옳은 것은? (NULL 처리 차이)",
     "options": [
-      "두 SQL의 결과는 항상 동일하다.",
+      "두 SQL 모두 NULL 을 0 으로 치환한 뒤 합산하므로 결과가 항상 동일하다.",
       "①은 NULL을 0으로 개별 치환 후 합하므로 모든 행이 반영되지만, ②는 COL1 또는 COL2가 NULL인 행은 NULL이 되어 SUM에서 제외된다.",
-      "②가 ①보다 항상 큰 값을 반환한다.",
-      "①이 ②보다 항상 작은 값을 반환한다."
+      "②는 NULL 행을 SUM 대신 0 으로 보정하므로 ①보다 항상 큰 값을 반환한다.",
+      "①은 외곽에서만 NVL 을 적용하므로 ②보다 항상 작은 값을 반환한다."
     ],
     "correctIndex": 1,
     "explanation": "NULL과의 산술 연산은 NULL을 반환한다. 따라서 ②는 NULL 행이 합계에서 제외되어 ①과 결과가 달라질 수 있다.",

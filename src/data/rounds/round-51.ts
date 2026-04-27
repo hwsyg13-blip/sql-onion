@@ -398,10 +398,10 @@ export const ROUND_51: QuizQuestion[] = [
     "number": 18,
     "title": "아래 데이터에 대한 두 SQL 의 결과로 옳은 것은?",
     "options": [
+      "㉠ = 130, ㉡ = 130 (두 SQL 의 결과가 동일하다)",
       "㉠ = 30, ㉡ = 130",
-      "㉠ = 30, ㉡ = 44 + 16 + 40 + 30 (분리 합산)",
-      "㉠ = 합계 동일, ㉡ = NULL",
-      "둘 다 NULL"
+      "㉠ = 130, ㉡ = NULL (㉡ 은 NULL 행이 섞여 결과가 NULL 이 된다)",
+      "㉠ 과 ㉡ 모두 NULL 이 반환된다."
     ],
     "correctIndex": 1,
     "explanation": "NULL 포함 행은 + 연산 전체가 NULL 이 되어 ㉠ 에는 반영되지 않는다. ㉡ 은 컬럼별로 NULL 을 제외한 SUM 을 수행한다.",
@@ -922,10 +922,10 @@ export const ROUND_51: QuizQuestion[] = [
     "number": 36,
     "title": "매출 상위 1·2위를 조회하는 SQL 로 옳은 것은?",
     "options": [
-      "SELECT ... ORDER BY 매출 DESC LIMIT 2 (Oracle 사용 불가)",
-      "SELECT TOP 2 ... FROM ... (Oracle 사용 불가)",
-      "ROWNUM <= 2 를 직접 적용",
-      "ORDER BY 매출 DESC 로 정렬한 인라인 뷰에서 WHERE ROWNUM <= 2 적용"
+      "SELECT 영업, 매출 FROM SALES ORDER BY 매출 DESC LIMIT 2;",
+      "SELECT TOP 2 영업, 매출 FROM SALES ORDER BY 매출 DESC;",
+      "SELECT 영업, 매출 FROM SALES WHERE ROWNUM <= 2 ORDER BY 매출 DESC;",
+      "SELECT 영업, 매출 FROM (SELECT 영업, 매출 FROM SALES ORDER BY 매출 DESC) WHERE ROWNUM <= 2;"
     ],
     "correctIndex": 3,
     "explanation": "Oracle 에서 ROWNUM 은 정렬 전에 부여되므로 ORDER BY 와 동시에 사용하면 의도된 상위 N 건이 나오지 않는다. 따라서 ORDER BY 결과를 인라인 뷰로 감싼 뒤 바깥에서 WHERE ROWNUM <= 2 를 적용해야 한다.",

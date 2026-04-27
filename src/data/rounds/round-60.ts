@@ -879,9 +879,9 @@ export const ROUND_60: QuizQuestion[] = [
     "title": "아래 쿼리의 윈도우 절과 동등한 의미를 가진 절은?",
     "options": [
       "`ROWS UNBOUNDED PRECEDING` (= ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW)",
-      "`ROWS UNBOUNDED PRECEDING AND 1 PRECEDING`",
-      "`RANGE UNBOUNDED PRECEDING`",
-      "`RANGE`"
+      "ROWS BETWEEN UNBOUNDED PRECEDING AND 1 PRECEDING (= 현재 행 직전까지의 누적합)",
+      "RANGE UNBOUNDED PRECEDING (= RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW)",
+      "RANGE BETWEEN CURRENT ROW AND UNBOUNDED FOLLOWING"
     ],
     "correctIndex": 0,
     "explanation": "ROWS UNBOUNDED PRECEDING은 윈도우 시작점만 명시한 축약형으로, 종료점이 생략되면 기본값인 CURRENT ROW가 적용된다. 즉 ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW와 동등하다. ②는 종료점이 1 PRECEDING이라 누적합 의미가 다르고, ③·④는 RANGE 모드라 동일 정렬 키를 가진 행을 묶어 처리하므로 ROWS 기반과 결과가 다를 수 있다.",

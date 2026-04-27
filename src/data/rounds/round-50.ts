@@ -272,10 +272,10 @@ export const ROUND_50: QuizQuestion[] = [
     "number": 13,
     "title": "아래 OUTER JOIN SQL 의 결과로 옳은 것은?",
     "options": [
-      "TAB1 의 3행만 반환",
+      "TAB1 과 TAB2 가 매칭되는 3 행만 반환된다.",
       "TAB1 의 5행 모두 반환 (매칭되지 않은 D, E 의 TAB2 컬럼은 NULL)",
-      "TAB1 의 4행만 반환",
-      "공집합"
+      "ON 조건을 만족하지 않는 D, E 가 제외되어 TAB1 의 4 행만 반환된다.",
+      "양쪽 조인 키가 모두 NULL 이라 공집합이 반환된다."
     ],
     "correctIndex": 1,
     "explanation": "LEFT OUTER JOIN 은 좌측 TAB1 의 모든 행을 보존하며, ON 조건 불일치 행(D, E)의 우측 컬럼은 NULL 로 채워진다.",
@@ -927,9 +927,9 @@ export const ROUND_50: QuizQuestion[] = [
     "number": 38,
     "title": "출연료가 8,888 이상인 영화의 영화명·배우명·출연료를 조회하는 SQL 로 가장 적절한 것은?",
     "options": [
-      "SELECT 출연.영화명, 영화.배우명, ...",
-      "SELECT 영화.영화명, 배우.배우명 ... WHERE 출연료 > 8888",
-      "SELECT 영화명, 배우명 ... (테이블 소유 속성 오류)",
+      "SELECT 출연.영화명, 영화.배우명, 출연.출연료 FROM 배우, 영화, 출연 WHERE 출연.출연료 >= 8888 AND 출연.영화번호 = 영화.영화번호 AND 출연.배우번호 = 배우.배우번호;",
+      "SELECT 영화.영화명, 배우.배우명, 출연료 FROM 배우, 영화, 출연 WHERE 출연료 > 8888 AND 출연.영화번호 = 영화.영화번호 AND 출연.배우번호 = 배우.배우번호;",
+      "SELECT 영화명, 배우명, 출연료 FROM 배우, 영화, 출연 WHERE 출연료 >= 8888 AND 출연.영화번호 = 영화.영화번호 AND 출연.배우번호 = 배우.배우번호;",
       "SELECT 영화.영화명, 배우.배우명, 출연료 FROM 배우, 영화, 출연 WHERE 출연료 >= 8888 AND 출연.영화번호 = 영화.영화번호 AND 출연.배우번호 = 배우.배우번호;"
     ],
     "correctIndex": 3,

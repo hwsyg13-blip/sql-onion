@@ -282,9 +282,9 @@ export const ROUND_48: QuizQuestion[] = [
     "number": 13,
     "title": "출연료가 8,888 이상인 영화의 영화명·배우명·출연료를 조회하는 SQL 로 적절한 것은?",
     "options": [
-      "SELECT 출연.영화명, 영화.배우명, ... (컬럼 소유 불일치)",
-      "출연료 > 8888 (조건 기준 불일치)",
-      "컬럼 소유 오류",
+      "SELECT 출연.영화명, 영화.배우명, 출연.출연료 FROM 배우, 영화, 출연 WHERE 출연.출연료 >= 8888 AND 출연.영화번호 = 영화.영화번호 AND 출연.배우번호 = 배우.배우번호;",
+      "SELECT 영화.영화명, 배우.배우명, 출연료 FROM 배우, 영화, 출연 WHERE 출연료 > 8888 AND 출연.영화번호 = 영화.영화번호 AND 출연.배우번호 = 배우.배우번호;",
+      "SELECT 영화.영화명, 배우.배우명, 출연료 FROM 배우, 영화, 출연 WHERE 출연료 >= 8888 AND 영화.영화번호 = 출연.영화번호;",
       "SELECT 영화.영화명, 배우.배우명, 출연료 FROM 배우, 영화, 출연 WHERE 출연료 >= 8888 AND 출연.영화번호 = 영화.영화번호 AND 출연.배우번호 = 배우.배우번호;"
     ],
     "correctIndex": 3,
@@ -1116,10 +1116,10 @@ export const ROUND_48: QuizQuestion[] = [
     "number": 43,
     "title": "상위 10건을 조회하는 ROWNUM 기반 SQL 로 옳은 것은?",
     "options": [
-      "WHERE ROWNUM <= 10 ORDER BY 컬럼 DESC",
-      "ORDER BY 컬럼 DESC WHERE ROWNUM <= 10",
+      "SELECT 컬럼 FROM T WHERE ROWNUM <= 10 ORDER BY 컬럼 DESC;",
+      "SELECT 컬럼 FROM T ORDER BY 컬럼 DESC WHERE ROWNUM <= 10;",
       "SELECT ... FROM (SELECT ... ORDER BY 컬럼 DESC) WHERE ROWNUM <= 10",
-      "WHERE ROWNUM = 10"
+      "SELECT 컬럼 FROM T WHERE ROWNUM = 10 ORDER BY 컬럼 DESC;"
     ],
     "correctIndex": 2,
     "explanation": "Oracle의 ROWNUM은 ORDER BY가 적용되기 전 단계에서 행에 1부터 부여됩니다. 따라서 같은 SELECT 안에서 `WHERE ROWNUM <= 10 ... ORDER BY ... DESC`처럼 쓰면 정렬되지 않은 임의의 10건이 잡힌 뒤 정렬되어 \"상위 10건\"이 보장되지 않습니다. 안전하게 상위 10건을 얻으려면 인라인 뷰 안에서 먼저 ORDER BY DESC로 정렬한 뒤, 바깥쪽에서 `WHERE ROWNUM <= 10`으로 자르는 ③번 패턴을 써야 합니다. ②는 문법 오류, ④는 정확히 10번째 행만 잡습니다. 정답은 ③번입니다.",
@@ -1134,10 +1134,10 @@ export const ROUND_48: QuizQuestion[] = [
     "number": 44,
     "title": "아래 집계 결과 4x2 표 중 NULL 이 포함되는 경우는?",
     "options": [
-      "COUNT(*) = 5, MIN(COL) = 1, MAX(COL) = 'A', ...",
+      "COUNT(*) = 5, MIN(COL) = 1, MAX(COL) = 'A', SUM(COL) = 15 — 모든 결과가 정상 값으로 반환된다.",
       "집계 함수 결과에 NULL 포함",
-      "모든 결과가 NULL",
-      "오류 발생"
+      "MIN, MAX, SUM 등 모든 집계 함수 결과가 NULL 로 반환된다.",
+      "데이터 타입 불일치로 ORA-01722 등 오류가 발생한다."
     ],
     "correctIndex": 1,
     "explanation": "집계 함수(SUM·AVG·MIN·MAX 등)는 일반적으로 NULL을 자동으로 제외하지만, 모든 입력 행이 NULL이거나 결과 집합이 비어 있는 경우에는 결과 자체가 NULL이 됩니다. ① 정상 결과(NULL 미포함)는 본 문항 의도와 반대, ③ 모든 결과가 NULL은 비현실적, ④ 오류 발생은 집계 함수의 정상 동작과 무관하므로 ②번 '집계 함수 결과에 NULL 포함'이 옳습니다. 본 문항은 원본 기출에서 표 데이터가 일부 유실된 메타 형태로 정답 표기를 보존하였습니다.",
