@@ -19,7 +19,7 @@ export const ROUND_54: QuizQuestion[] = [
       "데이터베이스 모델링"
     ],
     "correctIndex": 0,
-    "explanation": "",
+    "explanation": "Key·속성·관계를 정확히 표현하고 재사용성을 강조하는 단계는 논리적 데이터 모델링이다. 개념적 단계는 핵심 엔터티 중심의 추상화, 물리적 단계는 DBMS·성능을 고려한 구현 모델링이다.",
     "_source": "authored",
     "references": [
       {
@@ -115,7 +115,7 @@ export const ROUND_54: QuizQuestion[] = [
       "주문 엔터티의 주식별자는 고객번호이다."
     ],
     "correctIndex": 0,
-    "explanation": "",
+    "explanation": "고객-주문 관계에서 주문의 고객번호는 부모 엔터티(고객)의 식별자를 외래키로 상속받은 것이다. 까마귀발 표기에서 고객 쪽이 1, 주문 쪽이 다(M)이며 고객 없이는 주문이 발생할 수 없다.",
     "_source": "authored",
     "references": [
       {
@@ -157,7 +157,7 @@ export const ROUND_54: QuizQuestion[] = [
       "자연 식별자"
     ],
     "correctIndex": 2,
-    "explanation": "",
+    "explanation": "원조(자연) 식별자가 복합·복잡할 때 일련번호 등으로 인위 부여한 것이 인조 식별자(Surrogate Key)이다. 외래키는 참조용, 복합 식별자는 두 개 이상의 속성으로 구성된 식별자, 자연 식별자는 업무에서 자연 발생한 식별자이다.",
     "_source": "authored",
     "references": [
       {
@@ -199,7 +199,7 @@ export const ROUND_54: QuizQuestion[] = [
       "IE 표기법에서 NULL 허용 여부를 알 수 있다."
     ],
     "correctIndex": 2,
-    "explanation": "",
+    "explanation": "NULL 은 '값이 없음(미지의 값)' 을 의미하므로 일반 비교 연산자(=, <>) 로 비교할 수 없고 IS NULL / IS NOT NULL 로만 판별한다. NULL 에도 산술·문자 연산자는 사용 가능하나 결과는 NULL 이 된다.",
     "_source": "authored"
   },
   {
@@ -253,7 +253,7 @@ export const ROUND_54: QuizQuestion[] = [
       "테이블"
     ],
     "correctIndex": 0,
-    "explanation": "",
+    "explanation": "트랜잭션은 분리될 수 없는 하나의 논리적 업무 처리 단위이다. 레코드·테이블·Query 는 물리적·구문적 단위이므로 논리적 업무 최소 단위가 아니다.",
     "_source": "authored"
   },
   {
@@ -464,13 +464,13 @@ export const ROUND_54: QuizQuestion[] = [
     "number": 21,
     "title": "아래 두 테이블을 NATURAL JOIN 한 결과로 옳은 것은? (문항 오류로 복수 정답 처리된 문항)",
     "options": [
-      "문항 오류로 전원 정답 처리",
-      "INNER JOIN 결과와 동일",
-      "CROSS JOIN 결과와 동일",
+      "3건",
+      "2건",
+      "1건",
       "공집합"
     ],
     "correctIndex": 0,
-    "explanation": "",
+    "explanation": "키 컬럼명이 KEYA·KEYB 로 달라 NATURAL JOIN 의 자동 매칭 대상이 되지 못하고, 동일명 컬럼인 COL1·COL2 만 조인 조건에 사용된다. T1 의 (A,가) 2건 × T2 의 (A,가) 1건 = 2건, T1 의 (C,다) 1건 × T2 의 (C,다) 1건 = 1건. 합계 3건.",
     "_source": "authored",
     "references": [
       {
@@ -751,7 +751,7 @@ export const ROUND_54: QuizQuestion[] = [
       "`SELECT * FROM A WHERE 번호 = ALL (SELECT 번호 FROM B WHERE A.성별 = B.성별);`"
     ],
     "correctIndex": 0,
-    "explanation": "",
+    "explanation": "원본 IN 서브쿼리는 A.번호 = B.번호 와 A.성별 = B.성별 두 조건을 동시에 요구하므로 EXISTS 변환 시 두 상관 조건을 모두 명시한 ① 이 정답이다.",
     "_source": "authored",
     "references": [
       {
@@ -1021,7 +1021,7 @@ export const ROUND_54: QuizQuestion[] = [
       "PERCENT_RANK"
     ],
     "correctIndex": 0,
-    "explanation": "",
+    "explanation": "CUME_DIST 는 '현재 행 이하 누적 건수 / 전체 건수' 의 누적 분포를 반환한다. PERCENT_RANK 는 (RANK-1)/(N-1), DENSE_RANK·RANK 는 정수 순위를 반환한다.",
     "_source": "authored",
     "references": [
       {
@@ -1116,7 +1116,7 @@ export const ROUND_54: QuizQuestion[] = [
       "`WHERE 강의번호 = 100 OR 101`"
     ],
     "correctIndex": 1,
-    "explanation": "",
+    "explanation": "AND 는 한 행이 동시에 두 값일 수 없어 공집합, IN/OR 은 둘 중 하나라도 만족하는 학번을 반환한다. INTERSECT 로 두 강좌의 학번 집합을 교집합 처리해야 동시에 수강한 학번을 얻는다.",
     "_source": "authored"
   },
   {
@@ -1297,7 +1297,7 @@ export const ROUND_54: QuizQuestion[] = [
       "GRANT"
     ],
     "correctIndex": 0,
-    "explanation": "",
+    "explanation": "정상 처리된 트랜잭션을 영속화하여 다른 트랜잭션에서 조회 가능하게 만드는 명령은 COMMIT 이다. ROLLBACK 은 취소, SAVEPOINT 는 부분 저장점, GRANT 는 DCL 권한 부여이다.",
     "_source": "authored",
     "references": [
       {
@@ -1321,7 +1321,7 @@ export const ROUND_54: QuizQuestion[] = [
       "계좌번호 내림차순 정렬"
     ],
     "correctIndex": 3,
-    "explanation": "",
+    "explanation": "ORDER BY 계좌번호 DESC 로 명시되었으므로 결과는 계좌번호 내림차순으로 정렬된다. NULL 위치는 DBMS 별 기본 동작에 따르며 별도의 NULLS FIRST 지정이 없다.",
     "_source": "authored",
     "references": [
       {
@@ -1387,7 +1387,7 @@ export const ROUND_54: QuizQuestion[] = [
       "정확히 'A' 인 행만 반환한다."
     ],
     "correctIndex": 0,
-    "explanation": "",
+    "explanation": "LIKE 'A%' 는 'A' 로 시작하는 모든 문자열을 매칭한다. Oracle 기본 비교는 대소문자 구분이므로 소문자 'a' 는 매칭되지 않는다.",
     "_source": "authored",
     "references": [
       {

@@ -52,7 +52,7 @@
         "BCNF"
       ],
       "correctIndex": 2,
-      "explanation": "",
+      "explanation": "주식별자에 일반 속성이 모두 함수 종속하면서 이행 함수 종속까지 제거된 상태는 3정규형이다.",
       "references": [
         {
           "type": "text",
@@ -84,7 +84,7 @@
         "BCNF"
       ],
       "correctIndex": 1,
-      "explanation": "",
+      "explanation": "부분 함수 종속을 분리하여 해결하는 정규화 단계는 2정규화이다.",
       "references": [
         {
           "type": "text",
@@ -116,7 +116,7 @@
         "대체키"
       ],
       "correctIndex": 0,
-      "explanation": ""
+      "explanation": "외래키(FK)는 다른 엔터티(부모 테이블)의 주식별자를 참조하여 참조 무결성을 보장한다."
     },
     {
       "subject": "1과목",
@@ -155,7 +155,7 @@
         "COMMIT, ROLLBACK"
       ],
       "correctIndex": 2,
-      "explanation": ""
+      "explanation": "GRANT 와 REVOKE 는 권한을 부여·회수하는 데이터 제어어(DCL)이다. CREATE/ALTER 는 DDL, INSERT/UPDATE 는 DML, COMMIT/ROLLBACK 은 TCL 이다."
     },
     {
       "subject": "2과목",
@@ -279,7 +279,7 @@
         "ORDER BY 주문번호 DESC, 4 DESC, 1 DESC"
       ],
       "correctIndex": 2,
-      "explanation": "",
+      "explanation": "주문번호 DESC, 4번 컬럼 DESC, 1번 컬럼 ASC 형태로 ORDER BY 절에 컬럼 순번을 사용할 수 있다.",
       "references": [
         {
           "type": "text",
@@ -317,7 +317,7 @@
         "NTILE"
       ],
       "correctIndex": 0,
-      "explanation": ""
+      "explanation": "DENSE_RANK 는 동순위를 같은 등수로 부여하면서 다음 등수를 건너뛰지 않아, 상위 N 순위 동순위 포함 조회에 적합하다."
     },
     {
       "subject": "2과목",
@@ -364,7 +364,7 @@
         "COALESCE(M.이름, '사장')"
       ],
       "correctIndex": 3,
-      "explanation": "",
+      "explanation": "COALESCE 는 인자 중 NULL 이 아닌 첫 번째 값을 반환한다. 매니저가 없으면 M.이름이 NULL 이므로 '사장'이 반환된다.",
       "references": [
         {
           "type": "sql",
@@ -415,7 +415,7 @@
         "COL1 = 1 AND (COL2 = 3 OR COL2 = 4)"
       ],
       "correctIndex": 3,
-      "explanation": "",
+      "explanation": "(COL1, COL2) IN ((1,3),(1,4)) 는 (COL1=1 AND COL2=3) OR (COL1=1 AND COL2=4) 와 같으며, COL1=1 AND (COL2=3 OR COL2=4) 로 정리된다.",
       "references": [
         {
           "type": "sql",
@@ -473,7 +473,7 @@
       "number": 28,
       "title": "아래 NATURAL JOIN SQL 의 결과로 옳은 것은?",
       "options": [
-        "오류 발생",
+        "공집합 (0건)",
         "60",
         "90",
         "225"
@@ -526,7 +526,7 @@
         "오류 발생"
       ],
       "correctIndex": 0,
-      "explanation": "",
+      "explanation": "DECODE 가 VVIP 에 1, VIP 에 2, 기타에 3 을 부여하므로 ORDER BY 결과는 VVIP → VIP 순으로 정렬된다.",
       "references": [
         {
           "type": "sql",
@@ -587,7 +587,7 @@
         "MINUS"
       ],
       "correctIndex": 3,
-      "explanation": "",
+      "explanation": "MINUS 는 첫 번째 집합에서 두 번째 집합에 존재하는 행을 제외한 차집합을 반환한다.",
       "references": [
         {
           "type": "text",
@@ -671,7 +671,7 @@
         "3"
       ],
       "correctIndex": 0,
-      "explanation": "",
+      "explanation": "CROSS JOIN 의 결과 행 수는 두 테이블의 카디널리티 곱이므로 3 × 5 = 15 이다.",
       "references": [
         {
           "type": "table",
@@ -699,7 +699,7 @@
         "FETCH FIRST 5 WITHOUT ORDER"
       ],
       "correctIndex": 2,
-      "explanation": ""
+      "explanation": "ORDER BY SAL DESC 를 인라인 뷰로 먼저 수행한 뒤 외부 쿼리에서 ROWNUM <= 5 를 적용해야 정렬된 상위 5건이 보장된다."
     },
     {
       "subject": "2과목",
@@ -712,7 +712,7 @@
         "UNPIVOT 은 반드시 세 개의 열을 대상으로 한다."
       ],
       "correctIndex": 0,
-      "explanation": ""
+      "explanation": "UNPIVOT 의 열 나열 순서는 결과 행의 순서에만 영향을 주며 행 자체의 배치(컬럼별 매핑)는 동일하게 유지된다."
     },
     {
       "subject": "2과목",
@@ -764,7 +764,7 @@
         "NOCYCLE 은 CONNECT_BY_ROOT 와 반드시 함께 사용한다."
       ],
       "correctIndex": 0,
-      "explanation": ""
+      "explanation": "NOCYCLE 옵션은 순환을 만나면 전개를 중단하며, 순환이 발생한 행은 CONNECT_BY_ISCYCLE 의사 컬럼으로 식별할 수 있다."
     },
     {
       "subject": "2과목",

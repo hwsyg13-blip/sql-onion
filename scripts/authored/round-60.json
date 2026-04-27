@@ -13,7 +13,7 @@
         "기본 엔터티"
       ],
       "correctIndex": 0,
-      "explanation": "",
+      "explanation": "행위 엔터티는 업무 수행 과정에서 이벤트가 지속적으로 발생하여 데이터가 자주 변경·축적되는 엔터티이다. 주문, 청구, 납부처럼 업무 행위의 결과로 데이터가 쌓이는 대상이 이에 해당한다. 개념·기본 엔터티는 비교적 정적이며 행위 엔터티의 모태가 된다.",
       "references": [
         {
           "type": "text",
@@ -104,7 +104,7 @@
         "10개 이상의 서로 다른 상품을 구매한 고객 목록"
       ],
       "correctIndex": 0,
-      "explanation": "",
+      "explanation": "GROUP BY 고객ID, 주문번호로 묶고 HAVING SUM(수량) >= 10을 적용하므로 '한 주문 단위(주문번호)'에서 수량 합계가 10 이상인 고객을 집계한다. 즉 한 번의 주문에서 10개 이상을 산 고객을 찾는 SQL이다. ②는 고객별 누적이려면 GROUP BY 고객ID 단독이어야 하고, ③은 COUNT(주문번호) 기반이어야 하며, ④는 COUNT(DISTINCT 상품) 조건이어야 한다.",
       "references": [
         {
           "type": "sql",
@@ -123,7 +123,7 @@
         "자식 엔터티에서 독립된 주식별자를 정의할 수 있다."
       ],
       "correctIndex": 2,
-      "explanation": ""
+      "explanation": "비식별자 관계는 부모의 기본키를 자식의 일반 속성(외래키)으로만 상속하므로 자식은 별도의 주식별자를 정의한다. 따라서 부모 식별자가 곧 자식 주식별자가 되는 식별자 관계와 달리 '주식별자와 식별자가 같다'는 설명은 옳지 않다. ③은 식별자 관계의 특성에 가까우며, 비식별자 관계와는 구분된다."
     },
     {
       "subject": "1과목",
@@ -188,7 +188,7 @@
         "가, 나, 다, 라"
       ],
       "correctIndex": 3,
-      "explanation": "",
+      "explanation": "LEVEL은 계층형 질의에서 단독으로 사용 가능하지만 CONNECT BY가 선행되어야 의미를 갖는다. ISLEAF·ISCYCLE은 CONNECT BY NOCYCLE 옵션 등 특정 조건에서만 유효한 값을 반환하며, CONNECT_BY_ROOT 또한 계층형 질의의 컨텍스트가 전제되어야 동작한다. 모두 단독으로는 의미 있는 결과를 내지 못하므로 정답은 '가, 나, 다, 라'이다.",
       "references": [
         {
           "type": "text",
@@ -261,7 +261,7 @@
         "`UNPIVOT (연봉 FOR 직급 IN (사원, 대리, 팀장, 부장))`"
       ],
       "correctIndex": 1,
-      "explanation": "",
+      "explanation": "결과 표는 부서를 행으로, 직급(사원·대리·팀장·부장)을 열로 가지는 가로형 표이다. 직급 컬럼의 값을 컬럼명으로 펼치고 연봉을 집계하는 PIVOT 절이 정확히 부합한다. ① GROUP BY는 직급별 집계를 하나의 행으로 만들지 못하고, ③ LIKE는 행 필터에 불과하며, ④ UNPIVOT은 가로 → 세로 변환이라 방향이 반대다.",
       "references": [
         {
           "type": "table",
@@ -499,7 +499,7 @@
         "R2가 관리자 권한으로 테이블을 강제 복제한다."
       ],
       "correctIndex": 1,
-      "explanation": ""
+      "explanation": "다른 사용자의 객체에 접근하려면 객체 소유자가 GRANT 명령으로 SELECT 권한을 부여해야 한다. ①은 보안상 부적절하고, ③ SYNONYM은 객체에 대한 별칭일 뿐 권한을 자동 부여하지 않으며, ④ 강제 복제는 정상적인 권한 관리 방식이 아니다."
     },
     {
       "subject": "2과목",
@@ -686,7 +686,7 @@
         "`SELECT 지역, AVG(매출) FROM 매출 GROUP BY CUBE(지역, 월);`"
       ],
       "correctIndex": 2,
-      "explanation": "",
+      "explanation": "결과는 지역을 행으로, 1월~4월을 열로 가지는 가로형 매출표이다. 월 컬럼을 열로 펼치면서 매출을 SUM 집계하는 PIVOT 절이 정확히 부합한다. ① CASE+GROUP BY는 단일 컬럼만 펼쳐 1월 외의 컬럼이 누락되고, ② UNPIVOT은 가로 → 세로 변환으로 방향이 반대이며, ④ CUBE는 소계·총계 행이 추가되어 결과 형태가 달라진다.",
       "references": [
         {
           "type": "table",
@@ -753,7 +753,7 @@
         "`RANGE`"
       ],
       "correctIndex": 0,
-      "explanation": "",
+      "explanation": "ROWS UNBOUNDED PRECEDING은 윈도우 시작점만 명시한 축약형으로, 종료점이 생략되면 기본값인 CURRENT ROW가 적용된다. 즉 ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW와 동등하다. ②는 종료점이 1 PRECEDING이라 누적합 의미가 다르고, ③·④는 RANGE 모드라 동일 정렬 키를 가진 행을 묶어 처리하므로 ROWS 기반과 결과가 다를 수 있다.",
       "references": [
         {
           "type": "sql",
@@ -938,7 +938,7 @@
         "EXCEPT"
       ],
       "correctIndex": 1,
-      "explanation": ""
+      "explanation": "UNION ALL은 두 결과 집합을 그대로 합치며 중복 행을 제거하지 않고 모두 반환한다. 반면 UNION·INTERSECT·EXCEPT(MINUS)는 모두 내부적으로 중복 제거(DISTINCT)를 수행한다."
     },
     {
       "subject": "2과목",
@@ -951,7 +951,7 @@
         "4개"
       ],
       "correctIndex": 3,
-      "explanation": "",
+      "explanation": "UNION 연산은 위·아래 SELECT의 컬럼 개수와 데이터 타입이 일치해야 한다. 첫 SELECT에 EMPNO, ENAME, YR, SAL 4개의 컬럼이 있으므로 결과 컬럼 개수도 4개가 된다. 별칭(YR)은 첫 SELECT에서 부여한 것이 결과 컬럼명으로 사용된다.",
       "references": [
         {
           "type": "sql",
@@ -1084,7 +1084,7 @@
         "100 NULL 100"
       ],
       "correctIndex": 0,
-      "explanation": "",
+      "explanation": "ID가 일치하지 않으므로 NOT MATCHED 분기가 실행되어 SRC 행이 TGT에 INSERT된다. INSERT 절에서 V1·V2·V3 모두 100을 명시했으므로 세 컬럼 값은 모두 100이 된다. MATCHED 분기가 실행되었다면 V3는 갱신 대상이 아니어서 NULL이 남았겠지만, 본 문제에서는 INSERT 분기가 동작한다.",
       "references": [
         {
           "type": "sql",
@@ -1193,7 +1193,7 @@
         "CUME_DIST"
       ],
       "correctIndex": 0,
-      "explanation": "",
+      "explanation": "부서 내 동률을 같은 순위로 매기되 다음 순위를 건너뛰지 않는 DENSE_RANK가 '상위 N명' 조회에 가장 적합하다. ② ROWNUM은 분석 함수가 아니며 PARTITION BY와 함께 쓸 수 없고, ③ NTILE은 등분 그룹을 매기는 용도이며, ④ CUME_DIST는 누적 분포 비율(0~1)을 반환하므로 상위 3명 필터링에 부적합하다.",
       "references": [
         {
           "type": "sql",
@@ -1290,7 +1290,7 @@
         "FOREIGN KEY"
       ],
       "correctIndex": 1,
-      "explanation": "",
+      "explanation": "특정 컬럼이 지정한 값 집합에 한정되도록 강제하려면 CHECK 제약 조건을 사용한다. NOT NULL은 NULL 금지만, PRIMARY KEY는 유일성+NOT NULL을, FOREIGN KEY는 다른 테이블 참조를 강제할 뿐 값 도메인을 제한하지 못한다.",
       "references": [
         {
           "type": "sql",

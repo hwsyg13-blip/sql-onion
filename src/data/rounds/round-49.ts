@@ -19,7 +19,7 @@ export const ROUND_49: QuizQuestion[] = [
       "BCNF"
     ],
     "correctIndex": 1,
-    "explanation": "",
+    "explanation": "주식별자(PK)를 구성하는 컬럼이 둘 이상일 때 일반 컬럼이 PK 전체에 종속되지 않고 PK 의 일부에만 종속되는 부분 함수 종속을 제거하는 단계가 제2정규화이다. 제1정규화는 다가속성·반복그룹 제거, 제3정규화는 이행 종속 제거, BCNF 는 결정자 후보키화에 해당한다.",
     "_source": "authored",
     "references": [
       {
@@ -43,7 +43,7 @@ export const ROUND_49: QuizQuestion[] = [
       "인스턴스"
     ],
     "correctIndex": 2,
-    "explanation": "",
+    "explanation": "도메인(Domain)은 어떤 속성(Attribute)이 가질 수 있는 원자값의 집합과 데이터 타입·길이·NULL 허용 여부 등 제약을 의미한다. 관계는 엔터티 간 연결, 식별자는 인스턴스 구분 키, 인스턴스는 엔터티의 한 행을 가리킨다.",
     "_source": "authored"
   },
   {
@@ -61,7 +61,7 @@ export const ROUND_49: QuizQuestion[] = [
       "불변성"
     ],
     "correctIndex": 2,
-    "explanation": "",
+    "explanation": "주식별자의 4대 특성은 유일성·최소성·불변성·존재성(NOT NULL)이며, 그중 '구성 컬럼 중 하나라도 빠지면 유일성을 잃는' 성질은 최소성(Minimal)이다. 유일성은 식별자 자체가 중복되지 않는 성질이고, 대표성은 본질 식별자 선정 기준에 가깝다.",
     "_source": "authored"
   },
   {
@@ -139,7 +139,7 @@ export const ROUND_49: QuizQuestion[] = [
       "관계 속성"
     ],
     "correctIndex": 1,
-    "explanation": "",
+    "explanation": "설계 속성(Designed Attribute)은 업무 분석 과정에서 본래 데이터 외에 데이터 모델링·업무 규칙화를 위해 추가로 도출되는 속성이다. 기본 속성은 업무에서 직접 추출한 원천 속성, 파생 속성은 다른 속성으로부터 계산된 속성, 관계 속성은 엔터티 간 관계에서 발생하는 외래키 성격의 속성이다.",
     "_source": "authored",
     "references": [
       {
@@ -163,7 +163,7 @@ export const ROUND_49: QuizQuestion[] = [
       "개념 엔터티"
     ],
     "correctIndex": 2,
-    "explanation": "",
+    "explanation": "행위 엔터티(Active Entity)는 두 개 이상의 부모 엔터티의 행위·트랜잭션으로부터 발생하며, 분석 초기에는 잘 드러나지 않다가 상세 설계 단계에서 식별된다. 기본 엔터티는 업무에 원래 존재하는 독립 엔터티, 중심 엔터티는 기본 엔터티에서 파생된 핵심 엔터티, 개념 엔터티는 추상적·관념적 단위이다.",
     "_source": "authored",
     "references": [
       {
@@ -301,7 +301,7 @@ export const ROUND_49: QuizQuestion[] = [
       "A: NVL, B: COALESCE, C: NULLIF"
     ],
     "correctIndex": 1,
-    "explanation": "",
+    "explanation": "NVL(컬럼, 대체값) 은 컬럼이 NULL 일 때 대체값을 출력하므로 A 에 해당하고, NULLIF(a, b) 는 a 와 b 가 같으면 NULL 을 반환하므로 B 에 해당하며, COALESCE(v1, v2, ...) 는 인자들 중 NULL 이 아닌 첫 값을 반환하므로 C 에 해당한다.",
     "_source": "authored",
     "references": [
       {
@@ -522,7 +522,7 @@ export const ROUND_49: QuizQuestion[] = [
       "T2 의 행 수만큼 반환"
     ],
     "correctIndex": 1,
-    "explanation": "",
+    "explanation": "복수컬럼 IN 비교에서도 NULL 비교는 일반 비교와 동일하게 UNKNOWN 으로 평가된다. T2 의 B 가 NULL 인 행과의 (A,B) IN 비교 결과는 모두 UNKNOWN 이 되어 WHERE 조건을 통과하지 못하므로 해당 행은 결과에서 제외된다.",
     "_source": "authored",
     "references": [
       {
@@ -620,7 +620,7 @@ export const ROUND_49: QuizQuestion[] = [
       "SELECT TOP 1 * FROM 주문 ORDER BY 주문금액 DESC;"
     ],
     "correctIndex": 1,
-    "explanation": "",
+    "explanation": "Oracle 에서는 ORDER BY 가 적용된 인라인 뷰를 먼저 만든 뒤 외부 쿼리에서 ROWNUM = 1 로 한 건만 잘라야 '가장 큰 1건' 을 정확히 얻는다. ①은 표준 Oracle 에 LIMIT 가 없고, ③은 ROWNUM 이 ORDER BY 이전에 부여되어 잘못된 결과가 나오며, ④의 TOP 은 SQL Server 문법이고 GROUP BY 도 없다.",
     "_source": "authored"
   },
   {
@@ -819,7 +819,7 @@ export const ROUND_49: QuizQuestion[] = [
       "NTILE"
     ],
     "correctIndex": 0,
-    "explanation": "",
+    "explanation": "DENSE_RANK 는 동순위에 동일 순위를 부여하되 다음 순위를 건너뛰지 않으므로 1, 1, 2 가 된다. RANK 는 동순위 후 다음 순위를 건너뛰어 1, 1, 3 이 되고, ROW_NUMBER 는 1, 2, 3, NTILE 은 그룹 번호를 반환하는 함수이다.",
     "_source": "authored"
   },
   {
@@ -1181,7 +1181,7 @@ export const ROUND_49: QuizQuestion[] = [
       "SELECT DISTINCT COL1 FROM T;"
     ],
     "correctIndex": 1,
-    "explanation": "",
+    "explanation": "①·③·④ 는 모두 컬럼 COL1 의 서로 다른 값 목록(중복 제거)을 반환하지만, ② SELECT DISTINCT COUNT(*) FROM T 는 그룹 함수가 단일 행 결과로 전체 행 수를 한 번 반환하므로 한 건의 집계값만 출력된다.",
     "_source": "authored"
   },
   {
@@ -1247,7 +1247,7 @@ export const ROUND_49: QuizQuestion[] = [
       "`COL1 = 'F' AND COL1 = 'G' AND 금액 BETWEEN 2000 AND 50000`"
     ],
     "correctIndex": 1,
-    "explanation": "",
+    "explanation": "조건 우선순위는 AND 가 OR 보다 먼저 평가되므로 괄호 없이 `OR ... AND ...` 를 쓰면 의도와 다르게 결합된다. '등급 F 또는 G' 부분에 괄호를 묶고 금액 BETWEEN 조건을 AND 로 결합한 ②가 요구사항을 정확히 표현한다.",
     "_source": "authored",
     "references": [
       {
@@ -1271,7 +1271,7 @@ export const ROUND_49: QuizQuestion[] = [
       "NULL 은 항상 가장 먼저 출력된다."
     ],
     "correctIndex": 2,
-    "explanation": "",
+    "explanation": "Oracle 의 기본 NULL 정렬 규칙은 ASC 정렬 시 NULL 을 마지막에, DESC 정렬 시 NULL 을 가장 먼저 배치한다(NULLS LAST / NULLS FIRST 가 각각 기본). NULLS FIRST·NULLS LAST 옵션으로 변경할 수 있다.",
     "_source": "authored"
   },
   {
@@ -1289,7 +1289,7 @@ export const ROUND_49: QuizQuestion[] = [
       "EXCEPT"
     ],
     "correctIndex": 2,
-    "explanation": "",
+    "explanation": "INTERSECT 는 두 결과 집합의 공통 행만 반환하는 교집합 연산자이다. UNION 은 합집합(중복 제거), UNION ALL 은 합집합(중복 유지), EXCEPT(MINUS) 는 차집합이다.",
     "_source": "authored"
   },
   {
@@ -1427,7 +1427,7 @@ export const ROUND_49: QuizQuestion[] = [
       "SEQUENCE (시퀀스)"
     ],
     "correctIndex": 0,
-    "explanation": "",
+    "explanation": "VIEW 는 하나 이상의 기본 테이블에서 파생된 가상 테이블로, 정의만 데이터 사전에 저장될 뿐 실제 데이터를 저장하지 않는다. INDEX 는 검색 성능을 위한 물리 객체, SYNONYM 은 객체에 대한 별칭, SEQUENCE 는 순번 생성기이다.",
     "_source": "authored"
   },
   {
@@ -1510,7 +1510,7 @@ export const ROUND_49: QuizQuestion[] = [
       "IS NULL"
     ],
     "correctIndex": 3,
-    "explanation": "",
+    "explanation": "NULL 은 어떤 값과도 = / != 비교 시 UNKNOWN 으로 평가되어 결과에서 제외되므로 NULL 여부는 반드시 IS NULL / IS NOT NULL 로 판별해야 한다. COL = 'A' 또는 COL 이 NULL 인 행을 모두 포함하려면 `OR COL IS NULL` 이 옳다.",
     "_source": "authored",
     "references": [
       {
@@ -1538,7 +1538,7 @@ export const ROUND_49: QuizQuestion[] = [
       "PIVOT"
     ],
     "correctIndex": 1,
-    "explanation": "",
+    "explanation": "ROLLUP 은 GROUP BY 컬럼을 좌측부터 점진적으로 줄여가며 소계와 총계까지 함께 산출하는 확장 연산자이다. CUBE 는 모든 차원 조합의 소계를, GROUPING SETS 는 지정한 그룹들만 산출하며, PIVOT 은 행을 열로 전환하는 연산이다.",
     "_source": "authored"
   },
   {

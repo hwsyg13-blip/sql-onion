@@ -204,7 +204,7 @@ export const ROUND_45: QuizQuestion[] = [
       "식별자(Identifier)"
     ],
     "correctIndex": 1,
-    "explanation": "",
+    "explanation": "속성(Attribute)은 업무에서 필요로 하는 인스턴스로 관리하고자 하는, 의미상 더 이상 분리되지 않는 최소의 데이터 단위이다. 엔터티는 속성의 집합, 도메인은 속성이 가질 수 있는 값의 범위, 식별자는 인스턴스를 유일하게 구분하는 속성(또는 속성 집합)이다.",
     "_source": "authored"
   },
   {
@@ -222,7 +222,7 @@ export const ROUND_45: QuizQuestion[] = [
       "제3정규형"
     ],
     "correctIndex": 2,
-    "explanation": "",
+    "explanation": "제2정규형(2NF)은 제1정규형을 만족하면서 기본키가 아닌 모든 속성이 기본키 전체에 완전 함수 종속(Full Functional Dependency)된 상태이다. 즉 부분 함수 종속이 제거된 상태를 의미한다. 제3정규형은 이행적 종속 제거, BCNF는 모든 결정자가 후보키여야 하는 더 강한 형태이다.",
     "_source": "authored"
   },
   {
@@ -240,7 +240,7 @@ export const ROUND_45: QuizQuestion[] = [
       "DELETE"
     ],
     "correctIndex": 1,
-    "explanation": "",
+    "explanation": "INSERT는 테이블에 새로운 행을 추가하는 DML 명령어이다. SELECT는 조회, UPDATE는 기존 행 수정, DELETE는 기존 행 삭제에 사용된다.",
     "_source": "authored"
   },
   {
@@ -394,7 +394,7 @@ export const ROUND_45: QuizQuestion[] = [
       "Product (곱집합)"
     ],
     "correctIndex": 2,
-    "explanation": "",
+    "explanation": "교집합(Intersection)은 두 집합에 공통으로 속한 원소만 추출한다. A ∩ B = {3, 4}이다. 합집합은 {1,2,3,4,5,6}, 차집합 A-B는 {1,2}, 곱집합은 모든 (a,b) 쌍을 만든다.",
     "_source": "authored"
   },
   {
@@ -430,7 +430,7 @@ export const ROUND_45: QuizQuestion[] = [
       "LEAD"
     ],
     "correctIndex": 0,
-    "explanation": "",
+    "explanation": "FIRST_VALUE는 정렬된 파티션에서 첫 번째 값을 반환한다. LAST_VALUE는 마지막 값, LAG은 이전 행의 값, LEAD는 다음 행의 값을 반환한다.",
     "_source": "authored"
   },
   {
@@ -490,7 +490,7 @@ export const ROUND_45: QuizQuestion[] = [
       "Windowing"
     ],
     "correctIndex": 2,
-    "explanation": "",
+    "explanation": "ROLLUP, CUBE, GROUPING SETS는 GROUP BY의 확장으로 소계와 총계를 한 번에 생성하는 그룹핑(Grouping) 함수에 해당한다. Aggregation은 SUM·AVG 등 집계함수, Partition·Windowing은 윈도우 함수의 영역 지정에 사용된다.",
     "_source": "authored"
   },
   {
@@ -537,15 +537,12 @@ export const ROUND_45: QuizQuestion[] = [
     "references": [
       {
         "type": "table",
+        "caption": "T1",
         "headers": [
-          "[T1]",
-          ""
+          "COL1",
+          "COL2"
         ],
         "rows": [
-          [
-            "COL1",
-            "COL2"
-          ],
           [
             "1",
             "10"
@@ -562,15 +559,12 @@ export const ROUND_45: QuizQuestion[] = [
       },
       {
         "type": "table",
+        "caption": "T2",
         "headers": [
-          "[T2]",
-          ""
+          "COL1",
+          "COL2"
         ],
         "rows": [
-          [
-            "COL1",
-            "COL2"
-          ],
           [
             "1",
             "10"
@@ -754,13 +748,11 @@ export const ROUND_45: QuizQuestion[] = [
     "references": [
       {
         "type": "table",
+        "caption": "TABLE0",
         "headers": [
-          "[TABLE0]"
+          "N1"
         ],
         "rows": [
-          [
-            "N1"
-          ],
           [
             "1"
           ],
@@ -1023,15 +1015,12 @@ export const ROUND_45: QuizQuestion[] = [
     "references": [
       {
         "type": "table",
+        "caption": "T1",
         "headers": [
-          "[T1]",
-          ""
+          "ID",
+          "NAME"
         ],
         "rows": [
-          [
-            "ID",
-            "NAME"
-          ],
           [
             "1",
             "A"
@@ -1044,15 +1033,12 @@ export const ROUND_45: QuizQuestion[] = [
       },
       {
         "type": "table",
+        "caption": "T2",
         "headers": [
-          "[T2]",
-          ""
+          "ID",
+          "TYPE"
         ],
         "rows": [
-          [
-            "ID",
-            "TYPE"
-          ],
           [
             "1",
             "X"
@@ -1161,17 +1147,13 @@ export const ROUND_45: QuizQuestion[] = [
     "references": [
       {
         "type": "table",
+        "caption": "SQLD44",
         "headers": [
-          "[SQLD44]",
-          "",
-          ""
+          "C1",
+          "C2",
+          "C3"
         ],
         "rows": [
-          [
-            "C1",
-            "C2",
-            "C3"
-          ],
           [
             "1",
             "NULL",
@@ -1220,17 +1202,13 @@ export const ROUND_45: QuizQuestion[] = [
     "references": [
       {
         "type": "table",
+        "caption": "SQLD45",
         "headers": [
-          "[SQLD45]",
-          "",
-          ""
+          "C1",
+          "C2",
+          "C3"
         ],
         "rows": [
-          [
-            "C1",
-            "C2",
-            "C3"
-          ],
           [
             "1",
             "NULL",
@@ -1269,7 +1247,7 @@ export const ROUND_45: QuizQuestion[] = [
       "DCL (Data Control Language)"
     ],
     "correctIndex": 3,
-    "explanation": "",
+    "explanation": "GRANT(권한 부여), REVOKE(권한 회수)는 데이터에 대한 접근 제어를 정의하는 DCL(Data Control Language)에 속한다. DDL은 CREATE·ALTER·DROP, DML은 SELECT·INSERT·UPDATE·DELETE, TCL은 COMMIT·ROLLBACK·SAVEPOINT이다.",
     "_source": "authored"
   },
   {
@@ -1333,15 +1311,12 @@ export const ROUND_45: QuizQuestion[] = [
     "references": [
       {
         "type": "table",
+        "caption": "SQLD48",
         "headers": [
-          "[SQLD48]",
-          ""
+          "V1",
+          "N1"
         ],
         "rows": [
-          [
-            "V1",
-            "N1"
-          ],
           [
             "A",
             "100"
@@ -1390,17 +1365,13 @@ export const ROUND_45: QuizQuestion[] = [
     "references": [
       {
         "type": "table",
+        "caption": "SQLD49",
         "headers": [
-          "[SQLD49]",
-          "",
-          ""
+          "N1",
+          "V1",
+          "V2"
         ],
         "rows": [
-          [
-            "N1",
-            "V1",
-            "V2"
-          ],
           [
             "1",
             "A",
@@ -1444,15 +1415,12 @@ export const ROUND_45: QuizQuestion[] = [
     "references": [
       {
         "type": "table",
+        "caption": "SQLD50",
         "headers": [
-          "[SQLD50]",
-          ""
+          "N1",
+          "V1"
         ],
         "rows": [
-          [
-            "N1",
-            "V1"
-          ],
           [
             "1",
             "SMITH"

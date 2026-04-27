@@ -37,7 +37,7 @@ export const ROUND_48: QuizQuestion[] = [
       "논리 스키마"
     ],
     "correctIndex": 1,
-    "explanation": "",
+    "explanation": "데이터베이스의 3단계 스키마는 외부(사용자별 뷰), 개념(조직 전체 통합 구조), 내부(물리 저장 구조)로 나뉩니다. 설명이 \"조직 전체 관점의 통합 표현\"이라고 했으므로 개념 스키마에 해당해 정답은 ②번입니다.",
     "_source": "authored",
     "references": [
       {
@@ -61,7 +61,7 @@ export const ROUND_48: QuizQuestion[] = [
       "유형 엔터티"
     ],
     "correctIndex": 3,
-    "explanation": "",
+    "explanation": "발생 시점에 따라 엔터티는 기본 → 중심 → 행위 세 가지로 분류됩니다. 기본은 가장 먼저 만들어지는 독립 엔터티(고객·상품), 중심은 기본끼리 만나 만들어지는 핵심 업무 엔터티(주문·계약), 행위는 사건이 일어날 때마다 생기는 엔터티(주문이력)입니다. \"유형 엔터티\"는 이 세 가지에 포함되지 않아 정답은 ④번입니다.",
     "_source": "authored"
   },
   {
@@ -97,7 +97,7 @@ export const ROUND_48: QuizQuestion[] = [
       "PK속성"
     ],
     "correctIndex": 0,
-    "explanation": "",
+    "explanation": "다른 속성에서 계산해 만든 속성이 파생속성입니다. 매번 계산하지 않고 미리 계산값을 저장해 두면 조회 성능이 좋아지지만, 원본 값이 바뀌면 함께 갱신해야 한다는 부담이 따릅니다. 정답은 ①번입니다.",
     "_source": "authored"
   },
   {
@@ -162,7 +162,7 @@ export const ROUND_48: QuizQuestion[] = [
       "속성의 분류에는 PK 속성, FK 속성, 일반 속성이 있다."
     ],
     "correctIndex": 1,
-    "explanation": "",
+    "explanation": "속성은 엔터티의 특징을 표현하는 컬럼에 해당하며, 한 행(인스턴스)을 이루는 부품입니다. ①은 보통 엔터티가 두 개 이상 속성을 가지므로 잘못, ③은 한 속성에는 한 값만 들어가야 한다는 원자성에 어긋나므로 잘못, ④는 분류 기준이 다르므로 잘못입니다. 정답은 ②번입니다.",
     "_source": "authored"
   },
   {
@@ -180,7 +180,7 @@ export const ROUND_48: QuizQuestion[] = [
       "존재성"
     ],
     "correctIndex": 1,
-    "explanation": "",
+    "explanation": "주식별자의 4대 특성 중 최소성은 행을 식별하는 데 필요한 최소한의 속성으로 구성해야 한다는 조건입니다. 빠뜨리면 식별이 안 되는 속성만 묶이도록 설계해야 합니다. 정답은 ②번입니다.",
     "_source": "authored",
     "references": [
       {
@@ -204,7 +204,7 @@ export const ROUND_48: QuizQuestion[] = [
       "관계정의(Relationship Definition)"
     ],
     "correctIndex": 1,
-    "explanation": "",
+    "explanation": "1:1, 1:M, M:N처럼 두 엔터티 간 관계가 몇 대 몇인지 표시하는 것을 관계차수(Cardinality)라고 합니다. 관계명은 관계 자체의 이름, 관계선택사양은 필수/선택 여부를 나타내므로 의미가 다릅니다. 정답은 ②번입니다.",
     "_source": "authored"
   },
   {
@@ -246,7 +246,7 @@ export const ROUND_48: QuizQuestion[] = [
       "키가 185 이상인 선수"
     ],
     "correctIndex": 3,
-    "explanation": "",
+    "explanation": "`>=`는 \"크거나 같다\"는 의미로 한국어로는 \"이상\"에 해당합니다. 따라서 키 185도 포함합니다. `>` 만 있으면 \"초과\"라 185는 빠집니다. 정답은 ④번입니다.",
     "_source": "authored",
     "references": [
       {
@@ -270,7 +270,7 @@ export const ROUND_48: QuizQuestion[] = [
       "FROM - WHERE - GROUP BY - HAVING - SELECT - ORDER BY"
     ],
     "correctIndex": 3,
-    "explanation": "",
+    "explanation": "SQL은 작성 순서와 실제 실행 순서가 다릅니다. 먼저 FROM으로 테이블을 가져오고, WHERE로 행을 거른 뒤, GROUP BY로 묶고, HAVING으로 그룹을 거른 다음, SELECT로 컬럼을 골라내고, 마지막으로 ORDER BY로 정렬합니다. 그래서 SELECT의 별칭을 WHERE에서 못 쓰고 ORDER BY에서는 쓸 수 있는 것입니다. 정답은 ④번입니다.",
     "_source": "authored"
   },
   {
@@ -288,7 +288,7 @@ export const ROUND_48: QuizQuestion[] = [
       "SELECT 영화.영화명, 배우.배우명, 출연료 FROM 배우, 영화, 출연 WHERE 출연료 >= 8888 AND 출연.영화번호 = 영화.영화번호 AND 출연.배우번호 = 배우.배우번호;"
     ],
     "correctIndex": 3,
-    "explanation": "",
+    "explanation": "테이블 구조는 배우(배우번호, 배우명, 성별)·영화(영화번호, 영화명, 제작년도)·출연(배우번호, 영화번호, 출연료)이므로 영화명은 영화 테이블에서, 배우명은 배우 테이블에서, 출연료는 출연 테이블에서 가져와야 합니다. ①·②·③은 컬럼 소유 테이블을 잘못 짚거나 조건 부등호를 잘못 쓴 형태입니다. ④번은 출연·영화·배우 세 테이블을 출연.영화번호 = 영화.영화번호 AND 출연.배우번호 = 배우.배우번호로 정확히 조인하고 출연료 >= 8888 조건까지 올바르게 기술되어 있어 정답입니다.",
     "_source": "authored",
     "references": [
       {
@@ -497,7 +497,7 @@ export const ROUND_48: QuizQuestion[] = [
       "전체 상품의 평균 상품가격을 서로 비교하여 -10,000 ~ +10,000 범위 내 상품 개수를 센다."
     ],
     "correctIndex": 2,
-    "explanation": "",
+    "explanation": "이 SQL은 GROUP BY 상품분류코드로 분류별 평균 상품가격을 만든 뒤, 그 결과 행에 대해 윈도우 함수를 적용합니다. OVER(ORDER BY AVG(상품가격) RANGE BETWEEN 10000 PRECEDING AND 10000 FOLLOWING)은 GROUP BY로 만들어진 각 행(상품분류코드)을 평균 상품가격으로 정렬한 뒤, 현재 분류의 평균을 기준으로 ±10,000 범위 내에 들어오는 상품분류코드 행의 개수를 셉니다. 즉 \"비슷한 평균가를 가진 분류가 몇 개인가\"를 반환하므로 ③번이 정답입니다. ①·②는 GROUP BY와 윈도우 함수 결합이 정상 동작하지 않는다는 오해이고, ④는 상품 개별이 아닌 \"상품분류코드\" 단위로 비교한다는 점을 놓친 보기입니다.",
     "_source": "authored",
     "references": [
       {
@@ -606,7 +606,7 @@ export const ROUND_48: QuizQuestion[] = [
       "다중 컬럼 서브쿼리"
     ],
     "correctIndex": 3,
-    "explanation": "",
+    "explanation": "서브쿼리는 반환되는 행 수와 컬럼 수에 따라 단일/다중 행, 단일/다중 컬럼으로 분류됩니다. 두 개 이상의 컬럼을 한꺼번에 반환해 메인쿼리에서 짝지어 비교하는 것이 다중 컬럼 서브쿼리입니다. 정답은 ④번입니다.",
     "_source": "authored"
   },
   {
@@ -624,7 +624,7 @@ export const ROUND_48: QuizQuestion[] = [
       "JUNE"
     ],
     "correctIndex": 3,
-    "explanation": "",
+    "explanation": "`TO_DATE`로 문자열을 날짜로 변환한 뒤 `TO_CHAR(..., 'MONTH')`로 월 이름을 영문으로 추출합니다. 6월에 해당하는 영문 월 이름은 JUNE이므로 정답은 ④번입니다.",
     "_source": "authored",
     "references": [
       {
@@ -648,7 +648,7 @@ export const ROUND_48: QuizQuestion[] = [
       "`HIRE_DT >= DATE '2025-10-21' AND HIRE_DT <= DATE '2025-10-21' + 1 - 1/86400`"
     ],
     "correctIndex": 2,
-    "explanation": "",
+    "explanation": "Oracle DATE 리터럴 비교 시 `DATE '2025-10-22'`는 22일 0시 0분 0초를 의미합니다. ①은 \"21일 0시 ≤ HIRE_DT < 22일 0시\"로 정확히 21일 하루만 잡고, ②는 TRUNC로 시간을 0시로 깎아 21일만 잡으며, ④는 \"21일 0시 ≤ HIRE_DT ≤ 22일 0시 - 1초\"라 21일 23:59:59까지만 잡습니다. 그러나 ③의 BETWEEN은 양 끝값을 포함하므로 22일 0시까지 결과에 들어가 22일 0시 정각의 데이터가 같이 잡힐 수 있습니다. 결과가 달라지는 것은 ③번이라 정답입니다.",
     "_source": "authored"
   },
   {
@@ -660,13 +660,13 @@ export const ROUND_48: QuizQuestion[] = [
     "number": 22,
     "title": "아래 사원 데이터에 대한 DENSE_RANK·RANK·FIRST_VALUE 결과로 옳은 것은?",
     "options": [
-      "DENSE_RANK: 1, 2, 2, 2",
-      "RANK: 1, 2, 2, 2",
+      "DENSE_RANK: 1, 2, 3, 4 (모두 다른 순위)",
+      "RANK: 1, 4, 4, 4 (마지막 동순위 끝 처리)",
       "FIRST_VALUE: 2000 (각 행 모두)",
       "모두 다른 값"
     ],
     "correctIndex": 2,
-    "explanation": "",
+    "explanation": "데이터 SAL = 2000, 1500, 1500, 1500을 SAL DESC 정렬 시 RANK·DENSE_RANK 모두 1, 2, 2, 2를 부여합니다(동순위 1500 세 행이 모두 2위, 마지막 행 끝이라 RANK도 다음 순위 건너뛰기 효과 없음). 그러나 ①은 'DENSE_RANK가 동순위에도 다른 순위(1,2,3,4)를 부여한다'고 잘못 진술했고, ②는 'RANK가 1, 4, 4, 4를 부여한다'고 잘못 진술했습니다(실제로는 1, 2, 2, 2). FIRST_VALUE는 정렬된 윈도우의 첫 행 값(2000)을 모든 행에 동일하게 반환하므로 ③이 옳습니다. 정답은 ③번입니다.",
     "_source": "authored",
     "references": [
       {
@@ -706,7 +706,7 @@ export const ROUND_48: QuizQuestion[] = [
       "지속성"
     ],
     "correctIndex": 2,
-    "explanation": "",
+    "explanation": "트랜잭션 ACID 중 격리성(Isolation)은 동시에 실행되는 다른 트랜잭션의 중간 결과로부터 영향을 받지 않고 마치 혼자 실행되는 것처럼 동작하도록 보장하는 성질입니다. 정답은 ③번입니다.",
     "_source": "authored"
   },
   {
@@ -724,12 +724,12 @@ export const ROUND_48: QuizQuestion[] = [
       "NULL"
     ],
     "correctIndex": 2,
-    "explanation": "",
+    "explanation": "조건 A >= B를 만족하는 행이 총 10건이고 각 행의 A 값이 10이라고 가정하면 SUM(A) = 10 × 10 = 100입니다. 보기 ①(10)은 단일 행 값, ②(40)는 4건만 가정한 결과, ④(NULL)은 빈 결과를 의미하므로 모두 의도와 맞지 않습니다. 정답은 ③번 100입니다.",
     "_source": "authored",
     "references": [
       {
         "type": "sql",
-        "code": "SELECT SUM(A) FROM T WHERE A >= B;\n-- 조건 만족 행: 10, 10, 10, 10 ... 총 10건이 10씩"
+        "code": "SELECT SUM(A) FROM T WHERE A >= B;\n-- 조건 A >= B 만족 행 총 10건 (각 행의 A 값 = 10)"
       }
     ]
   },
@@ -748,7 +748,7 @@ export const ROUND_48: QuizQuestion[] = [
       "NOT NULL + UNIQUE"
     ],
     "correctIndex": 3,
-    "explanation": "",
+    "explanation": "기본키는 행을 유일하게 식별해야 하므로 비어 있어도 안 되고(NOT NULL) 중복도 허용되지 않아야 합니다(UNIQUE). 두 가지를 모두 만족시키는 ④번이 정답입니다.",
     "_source": "authored"
   },
   {
@@ -826,7 +826,7 @@ export const ROUND_48: QuizQuestion[] = [
       "(A, B), (A), (B), () 모든 조합"
     ],
     "correctIndex": 1,
-    "explanation": "",
+    "explanation": "ROLLUP(A, B)는 왼쪽부터 단계적으로 그룹 키를 줄여가며 (A, B), (A), () 세 가지 수준의 집계만 반환합니다. (B) 단독 그룹은 만들지 않습니다. CUBE(A, B)가 (A, B), (A), (B), () 모든 조합을 만드는 것과 구분해야 합니다. 정답은 ②번입니다.",
     "_source": "authored"
   },
   {
@@ -844,7 +844,7 @@ export const ROUND_48: QuizQuestion[] = [
       "NULL"
     ],
     "correctIndex": 2,
-    "explanation": "",
+    "explanation": "`CONNECT BY LEVEL <= 2`는 LEVEL이 1, 2가 되는 두 행을 가상으로 만들어내는 패턴입니다. DUAL은 한 행짜리 더미 테이블이지만 CONNECT BY와 결합하면 LEVEL 조건을 만족할 때까지 행이 복제됩니다. 결과적으로 LEVEL=1, LEVEL=2의 두 행이 만들어지고 COUNT(*)는 2를 반환합니다. 정답은 ③번입니다.",
     "_source": "authored",
     "references": [
       {
@@ -862,13 +862,13 @@ export const ROUND_48: QuizQuestion[] = [
     "number": 31,
     "title": "아래 COUNT 함수 중 결과가 나머지와 다른 것은?",
     "options": [
-      "COUNT(3)",
+      "COUNT(NULL)",
       "COUNT(*)",
       "COUNT(1)",
       "COUNT('X')"
     ],
     "correctIndex": 0,
-    "explanation": "원본 기출의 정답 표기를 보존한다. 일반적으로 COUNT(상수) 는 COUNT(*) 과 동일하지만 본 문항은 ① 을 정답으로 한다.",
+    "explanation": "COUNT 함수는 인자가 NULL인 행을 세지 않는 특성을 가집니다. ② COUNT(*)는 모든 행을 세고, ③ COUNT(1)은 상수 1을 모든 행에 적용해 모든 행을 세며, ④ COUNT(EMPNO)는 NULL이 아닌 EMPNO 행을 셉니다. 그러나 ① COUNT(NULL)은 인자 자체가 NULL이라 어떤 행도 세지 않고 항상 0을 반환합니다. 따라서 결과가 다른 것은 ①번입니다.",
     "_source": "authored"
   },
   {
@@ -886,7 +886,7 @@ export const ROUND_48: QuizQuestion[] = [
       "REPLACE"
     ],
     "correctIndex": 1,
-    "explanation": "",
+    "explanation": "DROP TABLE 시 다른 테이블이 외래키로 참조 중이면 기본적으로 삭제가 거부됩니다. CASCADE CONSTRAINTS 옵션을 붙이면 참조하는 외래키 제약을 함께 정리한 뒤 테이블을 삭제할 수 있습니다. RESTRICT는 참조가 있으면 막는 보호 옵션, NO ACTION은 표준 SQL 외래키 동작 정의, REPLACE는 뷰에서 사용하는 옵션이라 의미가 다릅니다. 정답은 ②번입니다.",
     "_source": "authored"
   },
   {
@@ -904,7 +904,7 @@ export const ROUND_48: QuizQuestion[] = [
       "NULLIF(컬럼, '')"
     ],
     "correctIndex": 0,
-    "explanation": "",
+    "explanation": "ROLLUP·CUBE 결과의 소계·총계 행에서는 그룹 키 컬럼이 NULL로 표시됩니다. 이 NULL은 \"진짜 데이터의 NULL\"이 아니라 \"소계 행임을 나타내는 표식\"이라 구분이 필요합니다. GROUPING(컬럼) 함수는 해당 컬럼이 소계·총계 행이면 1, 일반 행이면 0을 반환하므로 `CASE WHEN GROUPING(컬럼) = 1 THEN '' ELSE 컬럼 END` 형태로 빈 문자열을 출력할 수 있습니다. ②·④는 데이터의 NULL과 소계 NULL을 구분하지 못하고, ③은 NULL을 0으로 바꾸므로 의도와 다릅니다. 정답은 ①번입니다.",
     "_source": "authored"
   },
   {
@@ -958,7 +958,7 @@ export const ROUND_48: QuizQuestion[] = [
       "UNION 9, UNION ALL 10"
     ],
     "correctIndex": 3,
-    "explanation": "",
+    "explanation": "두 SELECT 결과를 합쳤을 때 한 쪽이 9건, 다른 쪽이 10건이 나오는 경우는 \"한 행이 중복되어 있을 때\"입니다. 이때 UNION은 중복을 제거하므로 9건, UNION ALL은 중복을 그대로 유지하므로 10건이 나옵니다. 따라서 (UNION, UNION ALL) = (9, 10)이 되는 ④번이 정답입니다.",
     "_source": "authored"
   },
   {
@@ -1044,7 +1044,7 @@ export const ROUND_48: QuizQuestion[] = [
       "FULL OUTER JOIN"
     ],
     "correctIndex": 0,
-    "explanation": "",
+    "explanation": "CROSS JOIN(카티션 곱)은 조인 조건 없이 두 테이블의 모든 행을 짝지어 만들 수 있는 모든 조합을 반환하며, 결과 행 수는 두 테이블 행 수의 곱이 됩니다. INNER JOIN은 매칭 조건이 필요하고, LEFT/FULL OUTER JOIN은 매칭 조건이 있는 상태에서 미매칭 행까지 보존하는 조인이라 의미가 다릅니다. 정답은 ①번입니다.",
     "_source": "authored"
   },
   {
@@ -1062,7 +1062,7 @@ export const ROUND_48: QuizQuestion[] = [
       "오류가 발생한다."
     ],
     "correctIndex": 1,
-    "explanation": "",
+    "explanation": "계층형 쿼리에서 `CONNECT BY PRIOR 자식 = 부모`로 트리를 전개할 때, 다음에 따라가야 할 부모 키 값이 NULL이면 \"매칭되는 부모가 없다\"는 의미가 되어 그 가지의 전개가 거기서 멈춥니다. 무한 전개·역방향 전환·오류는 발생하지 않습니다. 정답은 ②번입니다.",
     "_source": "authored"
   },
   {
@@ -1098,7 +1098,7 @@ export const ROUND_48: QuizQuestion[] = [
       "두 번째 컬럼(사원명) 기준 정렬"
     ],
     "correctIndex": 3,
-    "explanation": "",
+    "explanation": "ORDER BY 뒤에 컬럼명을 쓰지 않고 숫자를 쓰면 SELECT 절에 나열된 컬럼의 순서 번호를 의미합니다. SELECT 사원ID, 사원명, 연봉에서 1=사원ID, 2=사원명, 3=연봉이므로 `ORDER BY 2`는 두 번째 컬럼인 사원명을 기준으로 정렬합니다. 정답은 ④번입니다.",
     "_source": "authored",
     "references": [
       {
@@ -1122,7 +1122,7 @@ export const ROUND_48: QuizQuestion[] = [
       "WHERE ROWNUM = 10"
     ],
     "correctIndex": 2,
-    "explanation": "",
+    "explanation": "Oracle의 ROWNUM은 ORDER BY가 적용되기 전 단계에서 행에 1부터 부여됩니다. 따라서 같은 SELECT 안에서 `WHERE ROWNUM <= 10 ... ORDER BY ... DESC`처럼 쓰면 정렬되지 않은 임의의 10건이 잡힌 뒤 정렬되어 \"상위 10건\"이 보장되지 않습니다. 안전하게 상위 10건을 얻으려면 인라인 뷰 안에서 먼저 ORDER BY DESC로 정렬한 뒤, 바깥쪽에서 `WHERE ROWNUM <= 10`으로 자르는 ③번 패턴을 써야 합니다. ②는 문법 오류, ④는 정확히 10번째 행만 잡습니다. 정답은 ③번입니다.",
     "_source": "authored"
   },
   {
@@ -1140,7 +1140,7 @@ export const ROUND_48: QuizQuestion[] = [
       "오류 발생"
     ],
     "correctIndex": 1,
-    "explanation": "원본 기출 복수 의견이 있으나 가장 유력한 정답을 채택한다.",
+    "explanation": "집계 함수(SUM·AVG·MIN·MAX 등)는 일반적으로 NULL을 자동으로 제외하지만, 모든 입력 행이 NULL이거나 결과 집합이 비어 있는 경우에는 결과 자체가 NULL이 됩니다. ① 정상 결과(NULL 미포함)는 본 문항 의도와 반대, ③ 모든 결과가 NULL은 비현실적, ④ 오류 발생은 집계 함수의 정상 동작과 무관하므로 ②번 '집계 함수 결과에 NULL 포함'이 옳습니다. 본 문항은 원본 기출에서 표 데이터가 일부 유실된 메타 형태로 정답 표기를 보존하였습니다.",
     "_source": "authored"
   },
   {
@@ -1153,12 +1153,12 @@ export const ROUND_48: QuizQuestion[] = [
     "title": "서브쿼리에 대한 설명 중 옳은 것은?",
     "options": [
       "메인쿼리에서 서브쿼리의 컬럼을 직접 사용할 수 있다.",
-      "SELECT 절에서 다중 컬럼 서브쿼리를 사용할 수 있다.",
+      "WHERE 절에서 다중 컬럼 서브쿼리를 사용할 수 있다.",
       "FROM 절의 서브쿼리는 스칼라 서브쿼리라고 한다.",
       "서브쿼리의 결과 집합은 항상 메인쿼리의 영향을 받는다."
     ],
     "correctIndex": 1,
-    "explanation": "원본 기출의 정답 표기를 보존한다.",
+    "explanation": "다중 컬럼 서브쿼리는 두 개 이상의 컬럼을 한꺼번에 반환하는 서브쿼리로 일반적으로 WHERE 절의 IN 또는 = 비교에서 사용합니다. 예: `WHERE (사번, 부서) IN (SELECT 사번, 부서 FROM ...)`. SELECT 절은 일반적으로 단일 행·단일 컬럼만 반환하는 스칼라 서브쿼리만 허용하므로 다중 컬럼 서브쿼리는 적합하지 않습니다. 따라서 ②번이 옳은 설명입니다.",
     "_source": "authored"
   },
   {

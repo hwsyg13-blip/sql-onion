@@ -794,7 +794,7 @@
         "ON 조건에 상수 FALSE를 주면 오류가 발생한다."
       ],
       "correctIndex": 1,
-      "explanation": "",
+      "explanation": "MERGE 문은 ON 조건의 매칭 여부에 따라 WHEN MATCHED(기존 행 UPDATE/DELETE)와 WHEN NOT MATCHED(신규 행 INSERT)를 한 문장에 결합할 수 있다. 따라서 INSERT·UPDATE·DELETE를 단일 문장으로 처리할 수 있다는 ②가 옳다. ① 두 절은 함께 사용 가능하고, ③ 트랜잭션 내부에서 정상 실행되며, ④ ON 조건이 항상 거짓이어도 오류 없이 NOT MATCHED 분기만 수행된다.",
       "references": [
         {
           "type": "sql",
@@ -1069,7 +1069,7 @@
         "자식 테이블 전체가 삭제된다."
       ],
       "correctIndex": 1,
-      "explanation": "",
+      "explanation": "CASCADE CONSTRAINTS 옵션은 대상 테이블(T1)을 삭제하면서 T1을 참조하는 다른 테이블의 외래키(FK) 제약 조건까지 함께 제거한다. 부모 테이블이나 자식 테이블 자체가 삭제되거나 자식 테이블의 기본키가 함께 삭제되는 것은 아니다.",
       "references": [
         {
           "type": "sql",
