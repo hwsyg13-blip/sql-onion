@@ -307,7 +307,7 @@ export const QuestionReferences = ({ refs }: { refs?: QuestionReference[] }) => 
   if (!refs || refs.length === 0) return null;
 
   return (
-    <section style={{
+    <section className="question-refs" style={{
       margin: '14px 0 0',
       padding: '16px 18px',
       background: 'var(--bg-surface)',

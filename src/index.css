@@ -1474,3 +1474,40 @@ img, svg {
     grid-template-columns: 1fr !important;
   }
 }
+
+/* 모바일: CBT/Mock 문제 카드 + 코드 블록 — 좁은 화면에서 SQL 가로 잘림 완화 */
+@media (max-width: 720px) {
+  .question-card {
+    padding: 18px 14px !important;
+    border-radius: 12px !important;
+  }
+  /* references 영역(보기) 도 카드 가장자리까지 확장 */
+  .question-card .question-refs {
+    margin-left: -14px !important;
+    margin-right: -14px !important;
+    padding: 14px 12px !important;
+    border-left: 0 !important;
+    border-right: 0 !important;
+    border-radius: 0 !important;
+  }
+  /* 코드 블록 — references 안/밖 모두 카드 좌우 padding(14) + refs padding(12) 만큼 음수 margin */
+  .question-card .question-refs pre.code-block {
+    margin-left: -12px !important;
+    margin-right: -12px !important;
+    border-radius: 0 !important;
+    border-left: 0 !important;
+    border-right: 0 !important;
+    padding: 12px 14px !important;
+    font-size: 12.5px !important;
+  }
+  /* references 밖 (옵션 explanation 등)에도 직접 들어가는 코드 블록 */
+  .question-card > pre.code-block {
+    margin-left: -14px !important;
+    margin-right: -14px !important;
+    border-radius: 0 !important;
+    border-left: 0 !important;
+    border-right: 0 !important;
+    padding: 12px 14px !important;
+    font-size: 12.5px !important;
+  }
+}

@@ -256,7 +256,7 @@ export const CBTExam = ({examId = "round-60", onFinish, onNavigate, onExit, mock
       <div style={{maxWidth:1280,margin:"0 auto",padding:"24px 28px 60px",display:"grid",gridTemplateColumns:"minmax(0, 1fr) 320px",gap:24}} className="cbt-grid">
         {/* Left — question */}
         <main>
-          <div style={{background:"var(--bg-card)",border:"1px solid var(--border-subtle)",borderRadius:16,padding:28,boxShadow:"var(--shadow-sm)"}}>
+          <div className="question-card" style={{background:"var(--bg-card)",border:"1px solid var(--border-subtle)",borderRadius:16,padding:28,boxShadow:"var(--shadow-sm)"}}>
             {/* QuestionBody 가 태그 + 오류제보 버튼을 한 줄로 렌더 */}
             <QuestionBody q={q} noTags/>
             <ol
