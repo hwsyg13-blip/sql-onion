@@ -1294,12 +1294,14 @@ img, svg {
   .mnemonic { grid-template-columns: 1fr; }
 }
 
+/* =============================================================
    미니 테스트 사이드바 — 이론 챕터 우측 (PC ≥ 1024px)
    한 블럭 안에서 OX → 연관 기출(MC) 시퀀스
    ============================================================= */
 .mt-block {
   background: var(--bg-card);
   border: 1px solid var(--border-subtle);
+  border-top: 4px solid var(--point-600);
   border-radius: 14px;
   padding: 18px;
   box-shadow: var(--shadow-sm);
