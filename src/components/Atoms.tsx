@@ -83,7 +83,7 @@ export const highlightSQL = (code: any) => {
 };
 
 export const CodeBlock = ({children, style}: any) => (
-  <pre style={{
+  <pre className="code-block" style={{
     fontFamily: "var(--font-mono)", fontSize: 13.5, lineHeight: 1.7,
     background: "var(--bg-code)", color: "var(--fg-1)",
     padding: "14px 18px", borderRadius: 12, border: "1px solid var(--border-subtle)",

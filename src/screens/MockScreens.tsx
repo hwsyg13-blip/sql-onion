@@ -111,7 +111,7 @@ export const EndlessScreen = ({onNavigate}) => {
         </div>
       </div>
 
-      <div style={{background:"var(--bg-card)",border:"1px solid var(--border-subtle)",borderRadius:16,padding:28,boxShadow:"var(--shadow-sm)"}}>
+      <div className="question-card" style={{background:"var(--bg-card)",border:"1px solid var(--border-subtle)",borderRadius:16,padding:28,boxShadow:"var(--shadow-sm)"}}>
         <QuestionBody q={q}/>
         <OptionList q={q} selected={selected} setSelected={setSelected} checked={checked}/>
 
