@@ -30,8 +30,8 @@ export const Footer = () => (
       display: 'flex', flexDirection: 'column', gap: 12, alignItems: 'center', textAlign: 'center',
     }}>
       <nav style={{ display: 'flex', gap: 16, flexWrap: 'wrap', justifyContent: 'center' }}>
-        <FooterLink href="/privacy.html">개인정보처리방침</FooterLink>
         <FooterLink href="/terms.html">이용약관</FooterLink>
+        <FooterLink href="/privacy.html">개인정보처리방침</FooterLink>
       </nav>
       <div style={{ color: 'var(--fg-4)', fontSize: 11.5, lineHeight: 1.7 }}>
         © 2026 SQLD양파
