@@ -64,8 +64,7 @@ export const HomeScreen = ({onNavigate, user}) => {
     )}
     {/* Hero */}
     <section className="home-hero" style={{
-      background: "linear-gradient(180deg, var(--point-050) 0%, var(--bg-page) 100%)",
-      border: "1px solid var(--point-100)", borderRadius: 20,
+      borderRadius: 20,
       padding: "44px 44px", display: "flex", gap: 36, alignItems: "center",
       flexWrap: "wrap",
     }}>
