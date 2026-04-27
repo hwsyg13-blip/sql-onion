@@ -564,9 +564,6 @@ html, body { margin: 0; background: var(--bg-page); color: var(--fg-2); font-fam
 /* ============================================================
    엔트리 애니메이션
    ============================================================ */
-.reveal { opacity: 0; transform: translateY(12px); transition: opacity 500ms var(--ease-standard), transform 500ms var(--ease-standard); }
-.reveal.is-visible { opacity: 1; transform: translateY(0); }
-
 /* ============================================================
    반응형
    ============================================================ */
@@ -855,9 +852,6 @@ html, body { margin: 0; background: var(--bg-page); color: var(--fg-2); font-fam
 .s-card strong { color: var(--point-600); font-weight: 800; }
 
 /* 등장 애니메이션 */
-.reveal { opacity: 0; transform: translateY(12px); transition: opacity 500ms var(--ease-standard), transform 500ms var(--ease-standard); }
-.reveal.is-visible { opacity: 1; transform: translateY(0); }
-
 /* Mermaid 컨테이너 */
 .theory-md .mermaid {
   background: linear-gradient(135deg, #FFFFFF 0%, var(--point-050) 100%);
