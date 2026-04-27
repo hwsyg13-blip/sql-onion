@@ -27,7 +27,7 @@ export const ExamListScreen = ({onNavigate}) => {
         <Ic.ListChecks size={14}/> SQLD 기출복원 · CBT
       </div>
       <h1 style={{fontSize:32,fontWeight:800,color:"var(--fg-1)",margin:"6px 0 6px",letterSpacing:"-0.02em"}}>기출문제</h1>
-      <p style={{fontSize:14,color:"var(--fg-3)",margin:"0 0 28px"}}>제45회 ~ 제60회 복원문제입니다. 실제 시험처럼 4지선다 · 50문항으로 풀 수 있어요.</p>
+      <p style={{fontSize:14,color:"var(--fg-3)",margin:"0 0 28px"}}>2022년부터 2026년 최신 기출을 4지선다형으로 복원했어요.</p>
 
       {years.map((yr) => (
         <section key={yr} style={{marginBottom:28}}>
@@ -38,7 +38,6 @@ export const ExamListScreen = ({onNavigate}) => {
           <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit, minmax(260px, 1fr))",gap:12}}>
             {byYear[yr].map((set) => {
               const isLatest = set.round === latestRound;
-              const restored = set.count; // 몇 문항이 복원됐는가
               return (
                 <button key={set.id} onClick={()=>onNavigate("cbt", set.id)} style={{
                   textAlign:"left",background:"var(--bg-card)",border:"1px solid var(--border-subtle)",borderRadius:12,
@@ -49,11 +48,8 @@ export const ExamListScreen = ({onNavigate}) => {
                     <span style={{fontSize:11,color:"var(--fg-3)"}}>{set.date}</span>
                     {isLatest && <Tag tone="solid" size="sm">최신</Tag>}
                   </div>
-                  <div style={{fontSize:15,fontWeight:700,color:"var(--fg-1)"}}>{set.label} 기출복원 · 50문항</div>
-                  <div style={{marginTop:8,display:"flex",justifyContent:"space-between",fontSize:12,color:"var(--fg-3)"}}>
-                    <span>{restored}문항 복원 {restored < 50 ? `(나머지 ${50-restored} 문항은 다른 회차에서 보충)` : ''}</span>
-                  </div>
-                  <div style={{marginTop:8,display:"flex",justifyContent:"flex-end",fontSize:12}}>
+                  <div style={{fontSize:15,fontWeight:700,color:"var(--fg-1)"}}>{set.label} 기출복원</div>
+                  <div style={{marginTop:12,display:"flex",justifyContent:"flex-end",fontSize:12}}>
                     <span style={{color:"var(--point-600)",fontWeight:600,display:"inline-flex",alignItems:"center",gap:3}}>시작 <Ic.ArrowRight size={12}/></span>
                   </div>
                 </button>
