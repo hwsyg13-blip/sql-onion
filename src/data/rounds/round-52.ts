@@ -1046,26 +1046,35 @@ export const ROUND_52: QuizQuestion[] = [
     "references": [
       {
         "type": "table",
+        "caption": "TGT",
         "headers": [
-          "TGT",
-          "SRC"
+          "ID",
+          "V"
         ],
         "rows": [
           [
-            "ID",
-            "V",
-            "ID",
-            "V"
+            "1",
+            "a"
           ],
           [
-            "1",
-            "a",
+            "2",
+            "a"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "SRC",
+        "headers": [
+          "ID",
+          "V"
+        ],
+        "rows": [
+          [
             "1",
             "b"
           ],
           [
-            "2",
-            "a",
             "3",
             "c"
           ]
