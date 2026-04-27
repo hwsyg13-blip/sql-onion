@@ -22,7 +22,7 @@
 
   <!-- 메인 타이틀 -->
   <text x="500" y="240" font-family="-apple-system, 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif" font-size="96" font-weight="800" fill="#1F2320" letter-spacing="-2">
-    SQL 양파
+    SQLD양파
   </text>
 
   <!-- 서브 타이틀 -->
