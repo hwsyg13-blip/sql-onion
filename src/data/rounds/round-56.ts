@@ -91,7 +91,7 @@ export const ROUND_56: QuizQuestion[] = [
       "관계 속성"
     ],
     "correctIndex": 2,
-    "explanation": "",
+    "explanation": "파생 속성은 다른 속성의 값을 계산·가공하여 도출되는 속성이다.",
     "_source": "authored"
   },
   {
@@ -451,7 +451,7 @@ export const ROUND_56: QuizQuestion[] = [
       "EXCEPT"
     ],
     "correctIndex": 1,
-    "explanation": "",
+    "explanation": "INTERSECT 는 두 결과 집합 모두에 존재하는 행만 반환하는 교집합 연산자이다.",
     "_source": "authored"
   },
   {
@@ -637,7 +637,7 @@ export const ROUND_56: QuizQuestion[] = [
       "MINUS"
     ],
     "correctIndex": 1,
-    "explanation": "",
+    "explanation": "UNION ALL 은 중복 제거 없이 두 결과 집합을 그대로 결합한다. UNION·INTERSECT·MINUS 는 모두 중복을 제거한다.",
     "_source": "authored"
   },
   {
@@ -697,7 +697,7 @@ export const ROUND_56: QuizQuestion[] = [
       "FROM - WHERE - HAVING - GROUP BY - SELECT - ORDER BY"
     ],
     "correctIndex": 2,
-    "explanation": "",
+    "explanation": "SQL 의 논리적 실행 순서는 FROM → WHERE → GROUP BY → HAVING → SELECT → ORDER BY 이다.",
     "_source": "authored"
   },
   {
@@ -770,7 +770,7 @@ export const ROUND_56: QuizQuestion[] = [
       "지속성"
     ],
     "correctIndex": 0,
-    "explanation": "",
+    "explanation": "원자성(Atomicity)은 트랜잭션 내 모든 작업이 전부 반영되거나 전혀 반영되지 않아야 함을 보장하는 ACID 특성이다.",
     "_source": "authored"
   },
   {
@@ -1065,7 +1065,7 @@ export const ROUND_56: QuizQuestion[] = [
       "REGEXP_INSTR"
     ],
     "correctIndex": 3,
-    "explanation": "",
+    "explanation": "REGEXP_INSTR 는 문자열에서 정규식과 일치하는 패턴의 시작 위치를 정수로 반환한다. REGEXP_LIKE 는 boolean 판정, REGEXP_COUNT 는 일치 횟수, REGEXP_REPLACE 는 치환을 수행한다.",
     "_source": "authored"
   },
   {
@@ -1212,13 +1212,13 @@ export const ROUND_56: QuizQuestion[] = [
     "number": 44,
     "title": "팀별 최 단신 선수의 팀명과 키를 출력하는 쿼리와 동일한 결과를 반환하는 것은?",
     "options": [
-      "INNER JOIN 으로 GROUP BY TEAM MIN(HEIGHT) 결과만 활용",
-      "OUTER JOIN 으로 팀별 MIN 을 구한 뒤 전체 선수와 비교",
-      "HAVING MIN(HEIGHT) 조건을 직접 비교",
-      "조건에 맞지 않는 행은 모두 NULL 로 업데이트하여 비교"
+      "`SELECT TEAM, MIN(HEIGHT) FROM 선수 WHERE HEIGHT IS NULL GROUP BY TEAM;`",
+      "`SELECT TEAM, HEIGHT FROM 선수 HAVING HEIGHT = MIN(HEIGHT);`",
+      "`SELECT TEAM, HEIGHT FROM 선수 WHERE HEIGHT > (SELECT MIN(HEIGHT) FROM 선수);`",
+      "`SELECT P.TEAM, P.HEIGHT FROM 선수 P INNER JOIN (SELECT TEAM, MIN(HEIGHT) AS H FROM 선수 GROUP BY TEAM) M ON P.TEAM = M.TEAM AND P.HEIGHT = M.H;`"
     ],
     "correctIndex": 3,
-    "explanation": "원본 기출의 정답 표기를 보존한다. 팀별 최솟값과 일치하지 않는 행에 NULL 을 부여해 비교·필터링하는 접근이다.",
+    "explanation": "팀별 최저 신장 선수의 정확한 (TEAM, HEIGHT) 행을 가져오려면 (TEAM, MIN(HEIGHT))를 인라인 뷰로 만든 뒤 원본 테이블과 INNER JOIN해야 한다. ① WHERE HEIGHT IS NULL은 NULL 행만 잡고, ② HAVING HEIGHT = MIN(HEIGHT)는 비집계 컬럼 HEIGHT 사용 오류, ③ HEIGHT > MIN은 최저값을 제외한 행을 반환하므로 모두 오답이다.",
     "_source": "authored"
   },
   {
@@ -1260,7 +1260,7 @@ export const ROUND_56: QuizQuestion[] = [
       "오류가 발생한다."
     ],
     "correctIndex": 1,
-    "explanation": "",
+    "explanation": "NULLS LAST 옵션은 SAL 오름차순 정렬 후 NULL 값을 결과의 마지막에 배치한다.",
     "_source": "authored",
     "references": [
       {
@@ -1284,7 +1284,7 @@ export const ROUND_56: QuizQuestion[] = [
       "ORDER BY 절에 DESC 를 추가해야 한다."
     ],
     "correctIndex": 3,
-    "explanation": "",
+    "explanation": "ORDER BY 는 기본이 오름차순(ASC)이므로 매출이 높은 순으로 출력하려면 DESC 를 명시해야 한다.",
     "_source": "authored",
     "references": [
       {
