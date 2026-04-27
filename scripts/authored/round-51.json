@@ -97,7 +97,7 @@
         "주 식별자 - 보조 식별자 - 본질 식별자 - 외부 식별자"
       ],
       "correctIndex": 3,
-      "explanation": ""
+      "explanation": "주 식별자 - 보조 식별자 - 본질 식별자 - 외부 식별자 가 식별자 분류의 올바른 짝이다. 주/보조는 대표성 기준, 본질/인조는 속성의 업무적 발생 여부 기준, 내부/외부는 엔터티 내·외 발생 여부 기준이다."
     },
     {
       "subject": "1과목",
@@ -202,7 +202,7 @@
         "COALESCE 로 치환하여 정렬"
       ],
       "correctIndex": 2,
-      "explanation": ""
+      "explanation": "Oracle 에서 ORDER BY 절에 NULLS LAST 를 명시하면 NULL 이 정렬 결과의 가장 마지막에 위치한다. NVL·NULLIF·COALESCE 는 값을 치환하는 방식이라 정렬 의미가 달라질 수 있다."
     },
     {
       "subject": "2과목",
@@ -215,7 +215,7 @@
         "CONNECT user2 TO user1;"
       ],
       "correctIndex": 1,
-      "explanation": ""
+      "explanation": "다른 사용자에게 객체 권한을 부여할 때는 GRANT 권한 ON 객체 TO 사용자 구문을 사용한다. REVOKE 는 권한 회수, CONNECT 는 접속 명령으로 본 목적과 무관하다."
     },
     {
       "subject": "2과목",
@@ -555,7 +555,7 @@
         "WHERE TEAM_CODE BETWEEN A AND B"
       ],
       "correctIndex": 1,
-      "explanation": "",
+      "explanation": "팀 코드가 'A' 또는 'B' 는 OR 로 묶고, 다른 조건과는 AND 로 결합하므로 괄호로 우선순위를 명시해야 한다. 문자열 리터럴은 따옴표로 감싸야 한다.",
       "references": [
         {
           "type": "text",
@@ -574,7 +574,7 @@
         "RANGE BETWEEN UNBOUNDED PRECEDING AND 1 PRECEDING"
       ],
       "correctIndex": 0,
-      "explanation": "행 단위로 첫 번째 행부터 현재 행까지의 누적합을 구한다."
+      "explanation": "ROWS UNBOUNDED PRECEDING 은 파티션의 첫 행부터 현재 행까지 행 단위로 누적합을 계산한다. RANGE 옵션은 값 기준이므로 동일 정렬 값이 함께 묶여 결과가 달라질 수 있다."
     },
     {
       "subject": "2과목",
@@ -587,7 +587,7 @@
         "NTILE() 를 이용한 순위 쿼리"
       ],
       "correctIndex": 1,
-      "explanation": ""
+      "explanation": "RANK·ROW_NUMBER·NTILE 은 동순위 처리 방식과 그룹 분배 방식이 달라도 본 데이터에서는 동일한 시퀀스를 만들지만, DENSE_RANK 는 동순위 다음 순번을 건너뛰지 않으므로 나머지와 다른 결과를 반환한다."
     },
     {
       "subject": "2과목",
@@ -600,7 +600,7 @@
         "`SELECT T1.COL1 FROM T1 LEFT JOIN T2 ON T1.COL1 = T2.COL1 WHERE T2.COL1 IS NULL;`"
       ],
       "correctIndex": 1,
-      "explanation": "",
+      "explanation": "MINUS·NOT IN·LEFT JOIN+IS NULL 은 모두 'T1 에는 있고 T2 에는 없는 값 (D, E)' 을 반환하지만, T1, T2 카티션 곱에 `<>` 조건을 적용하면 비교 대상이 다른 모든 행과 매칭되어 중복된 결과가 나오므로 다른 답이 된다.",
       "references": [
         {
           "type": "table",
@@ -647,7 +647,7 @@
         "WHERE COL1 = 'A' OR COL2 = 2000"
       ],
       "correctIndex": 0,
-      "explanation": "",
+      "explanation": "(COL1, COL2) IN ((...))(다중 컬럼 IN) 은 각 튜플에 대해 컬럼별 등호 비교를 AND 로 결합한 뒤 튜플 간을 OR 로 결합한 형태와 동일하다.",
       "references": [
         {
           "type": "sql",
@@ -747,7 +747,7 @@
         "ORDER BY 매출 DESC 로 정렬한 인라인 뷰에서 WHERE ROWNUM <= 2 적용"
       ],
       "correctIndex": 3,
-      "explanation": ""
+      "explanation": "Oracle 에서 ROWNUM 은 정렬 전에 부여되므로 ORDER BY 와 동시에 사용하면 의도된 상위 N 건이 나오지 않는다. 따라서 ORDER BY 결과를 인라인 뷰로 감싼 뒤 바깥에서 WHERE ROWNUM <= 2 를 적용해야 한다."
     },
     {
       "subject": "2과목",
@@ -796,7 +796,7 @@
         "ORDER BY COL NULLS LAST"
       ],
       "correctIndex": 1,
-      "explanation": ""
+      "explanation": "SQL Server 의 ORDER BY 기본 동작에서 NULL 은 가장 앞에 정렬된다(NULLS FIRST 와 동일). NVL/ISNULL 로 NULL 을 0 으로 치환하면 0 의 정렬 위치를 따르므로 다른 결과가 나온다."
     },
     {
       "subject": "2과목",
@@ -932,13 +932,13 @@
       "number": 42,
       "title": "아래 SQL 의 결과로 옳은 것은?",
       "options": [
-        "16",
-        "17",
-        "23",
-        "26"
+        "모든 행에서 16",
+        "모든 행에서 15",
+        "행마다 4, 9, 15",
+        "모든 행에서 26"
       ],
       "correctIndex": 1,
-      "explanation": "RANGE 는 값 기준 창이므로 기준 값 ±2 범위에 해당하는 행들의 합계를 구한다.",
+      "explanation": "윈도우 함수 SUM 의 RANGE BETWEEN 1 PRECEDING AND 1 FOLLOWING 은 정렬 값 ±1 범위에 들어오는 행의 합을 반환한다. 본 데이터에서는 모든 행에서 4·5·6 의 합 15 가 일관되게 나오므로 정답은 ②번이다.",
       "references": [
         {
           "type": "sql",
@@ -957,7 +957,7 @@
         "ORDER BY 에 여러 컬럼은 지정할 수 없다."
       ],
       "correctIndex": 0,
-      "explanation": ""
+      "explanation": "ORDER BY 의 정렬 옵션은 컬럼별로 독립 적용된다. COL1 은 기본값 ASC, COL2 는 DESC, COL3 은 ASC 이며 NULLS LAST 옵션으로 NULL 이 마지막에 출력된다."
     },
     {
       "subject": "2과목",
