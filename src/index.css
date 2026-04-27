@@ -1265,8 +1265,10 @@ img, svg {
 /* ============================================================
    엔트리 애니메이션
    ============================================================ */
-.reveal { opacity: 0; transform: translateY(12px); transition: opacity 500ms var(--ease-standard), transform 500ms var(--ease-standard); }
-.reveal.is-visible { opacity: 1; transform: translateY(0); }
+/* 시안의 reveal 효과는 common.js(IntersectionObserver) 가 부착하는 패턴이지만
+   양파단에선 common.js 미적용 → 항상 visible 로 강제 (페이드인 효과 자체는 미반영) */
+.reveal { opacity: 1; transform: none; }
+.reveal.is-visible { opacity: 1; transform: none; }
 
 /* ============================================================
    반응형
