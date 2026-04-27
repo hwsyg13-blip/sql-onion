@@ -85,7 +85,7 @@ export const ROUND_46: QuizQuestion[] = [
       "기본속성, 파생속성, 설계속성"
     ],
     "correctIndex": 0,
-    "explanation": "",
+    "explanation": "기본속성은 업무 분석에서 자연스럽게 도출되는 속성, 설계속성은 업무에는 없으나 설계 과정에서 새로 만든 속성(코드·자동부여 ID 등), 파생속성은 다른 속성에서 계산·변형해 만든 속성이다. ㄱ→기본, ㄴ→설계, ㄷ→파생 순으로 매핑되어 정답은 ①이다.",
     "_source": "authored",
     "references": [
       {
@@ -109,7 +109,7 @@ export const ROUND_46: QuizQuestion[] = [
       "연관속성"
     ],
     "correctIndex": 2,
-    "explanation": "",
+    "explanation": "다른 속성에서 계산되거나 변형되어 만들어진 속성을 파생속성이라 한다. 예: 생년월일에서 계산되는 나이, 단가·수량에서 계산되는 합계 등이 파생속성에 해당한다. 기본속성·설계속성과 달리 다른 값에 종속된다는 특징을 갖는다.",
     "_source": "authored"
   },
   {
@@ -127,7 +127,7 @@ export const ROUND_46: QuizQuestion[] = [
       "BCNF"
     ],
     "correctIndex": 1,
-    "explanation": "",
+    "explanation": "제2정규형은 제1정규형을 만족하면서, 기본키가 아닌 모든 속성이 주식별자에 완전 함수 종속되어야 한다는 조건을 추가한다. 즉 복합키의 일부에만 종속되는 부분 함수 종속이 제거된 상태이며, 설명이 정확히 이 조건이므로 정답은 ②이다.",
     "_source": "authored",
     "references": [
       {
@@ -175,7 +175,7 @@ export const ROUND_46: QuizQuestion[] = [
       "보조식별자, 주식별자, 본질식별자, 외부식별자"
     ],
     "correctIndex": 0,
-    "explanation": "",
+    "explanation": "주식별자는 엔터티의 모든 인스턴스를 대표해 구분하는 식별자, 보조식별자는 인스턴스 구분은 가능하나 대표성이 없는 식별자, 본질식별자는 업무에서 자연스럽게 발생한 식별자(예: 주문번호), 외부식별자는 다른 엔터티와의 관계로부터 상속받은 식별자(외래키)이다. ㄱ→주, ㄴ→보조, ㄷ→본질, ㄹ→외부 순서이므로 정답은 ①이다.",
     "_source": "authored",
     "references": [
       {
@@ -319,7 +319,7 @@ export const ROUND_46: QuizQuestion[] = [
       "ㄱ 관리자 IS NULL, ㄴ 관리자, ㄷ 사원"
     ],
     "correctIndex": 0,
-    "explanation": "",
+    "explanation": "조직도의 최상위 직원은 자신의 관리자가 없으므로 관리자 컬럼이 NULL이다. 따라서 START WITH 관리자 IS NULL로 출발점을 잡고, 부모(상사)의 사원번호가 자식(부하)의 관리자번호와 같다는 조건으로 트리를 위에서 아래로 펼치므로 PRIOR 사원 = 관리자가 된다. ㄱ→관리자 IS NULL, ㄴ→사원, ㄷ→관리자.",
     "_source": "authored",
     "references": [
       {
@@ -343,7 +343,7 @@ export const ROUND_46: QuizQuestion[] = [
       "UNION ALL은 서로 다른 컬럼 수를 가진 집합도 결합할 수 있다."
     ],
     "correctIndex": 1,
-    "explanation": "",
+    "explanation": "UNION은 합친 뒤 중복을 제거하기 위해 내부 정렬·중복 제거 단계가 추가되고, UNION ALL은 두 결과를 그대로 이어 붙여 중복을 보존한다. ③은 반대(UNION이 정렬 비용으로 더 느림), ④는 컬럼 수가 다르면 결합 자체가 불가하므로 모두 옳지 않다. 정답은 ②.",
     "_source": "authored",
     "references": [
       {
@@ -475,7 +475,7 @@ export const ROUND_46: QuizQuestion[] = [
       "두 테이블 중 어느 쪽도 보장되지 않는다."
     ],
     "correctIndex": 0,
-    "explanation": "",
+    "explanation": "LEFT OUTER JOIN은 FROM 절의 좌측 테이블 모든 행을 결과에 보존하고, 우측에서 매칭되는 행이 없으면 NULL로 채운다. 좌측이 TUTOR이므로 SESSIONS에 짝이 없어도 TUTOR의 모든 행은 항상 반환된다.",
     "_source": "authored",
     "references": [
       {
@@ -584,7 +584,7 @@ export const ROUND_46: QuizQuestion[] = [
       "오류가 발생한다."
     ],
     "correctIndex": 1,
-    "explanation": "",
+    "explanation": "ROWS BETWEEN CURRENT ROW AND CURRENT ROW로 프레임을 설정하면 누적 범위가 현재 한 행으로 한정된다. 한 행만 본 MAX는 곧 자기 자신이므로, 모든 행에서 자신의 연봉 값이 그대로 반환된다.",
     "_source": "authored",
     "references": [
       {
@@ -776,7 +776,7 @@ export const ROUND_46: QuizQuestion[] = [
       "ROLLBACK"
     ],
     "correctIndex": 1,
-    "explanation": "",
+    "explanation": "GRANT는 사용자에게 객체 접근 권한을 부여하는 DCL 명령이다. REVOKE는 권한을 회수하며, COMMIT·ROLLBACK은 트랜잭션 제어(TCL)에 해당하므로 권한 부여 명령과는 무관하다.",
     "_source": "authored"
   },
   {
@@ -794,7 +794,7 @@ export const ROUND_46: QuizQuestion[] = [
       "GROUP BY 컬럼과 집계 컬럼이 함께 올 수 없으므로 오류가 발생한다."
     ],
     "correctIndex": 0,
-    "explanation": "",
+    "explanation": "GROUP BY 운전자로 같은 운전자끼리 한 그룹으로 묶고, COUNT(운행번호)로 그룹별 운행 건수를 센다. 결과적으로 운전자 한 명당 한 행씩 운행횟수가 나오므로 운전자별 운행 횟수를 모두 확인할 수 있다.",
     "_source": "authored",
     "references": [
       {
@@ -891,7 +891,7 @@ export const ROUND_46: QuizQuestion[] = [
       "CONCAT"
     ],
     "correctIndex": 0,
-    "explanation": "",
+    "explanation": "SUBSTR(Oracle)·SUBSTRING(SQL Server)은 문자열의 M번째 위치에서 N개 문자를 잘라 반환하는 부분 문자열 함수이다. INSTR은 특정 문자의 위치를 찾고, REPLACE는 문자열을 치환하며, CONCAT은 문자열을 이어 붙이므로 자르기 동작과는 다르다.",
     "_source": "authored",
     "references": [
       {
@@ -915,7 +915,7 @@ export const ROUND_46: QuizQuestion[] = [
       "지속성(Durability)"
     ],
     "correctIndex": 0,
-    "explanation": "",
+    "explanation": "원자성(Atomicity)은 트랜잭션의 모든 연산이 모두 성공해 반영되거나, 하나라도 실패하면 전혀 수행되지 않은 상태로 남아야 한다는 ALL OR NOTHING 속성이다. 일관성·고립성·지속성과 함께 ACID를 구성한다.",
     "_source": "authored",
     "references": [
       {
@@ -1012,7 +1012,7 @@ export const ROUND_46: QuizQuestion[] = [
       "NATURAL JOIN"
     ],
     "correctIndex": 2,
-    "explanation": "",
+    "explanation": "계층형 쿼리는 같은 테이블 안의 부모-자식 관계를 표현하므로 한 테이블을 두 번 참조해 자기 자신과 결합하는 셀프 조인 형태로 동작한다. 오라클의 CONNECT BY 구문도 내부적으로 셀프 조인 방식으로 처리된다.",
     "_source": "authored"
   },
   {
