@@ -1572,3 +1572,12 @@ html, body { overflow-x: hidden; }
     font-size: 12.5px !important;
   }
 }
+
+/* 3주 계획 — Week 탭 모바일 폰트·패딩 축소 (글자 줄바꿈 방지) */
+@media (max-width: 720px) {
+  .plan-week-tabs .plan-week-tab {
+    padding: 10px 4px !important;
+    font-size: 12px !important;
+    gap: 4px !important;
+  }
+}
