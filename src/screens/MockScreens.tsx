@@ -249,30 +249,40 @@ export const OptionList = ({q, selected, setSelected, checked}) => (
   </ol>
 );
 
-export const FeedbackBanner = ({q, correct}) => (
-  <div style={{
-    padding:"14px 16px",
-    background: correct ? "var(--correct-bg)" : "var(--wrong-bg)",
-    border: `1px solid ${correct ? "var(--correct-border)" : "var(--wrong-border)"}`,
-    borderRadius:12, marginTop:16,
-    display:"flex",gap:12,alignItems:"center",
-  }}>
+export const FeedbackBanner = ({q, correct}) => {
+  const accent = correct ? "var(--correct-fg)" : "var(--wrong-fg)";
+  // 부제 — 핵심 개념(정답 시) 또는 정답 안내(오답 시). concept 없으면 부제 자체 생략.
+  const sub = correct
+    ? (q.concept ? `핵심 개념 · ${q.concept}` : null)
+    : `정답은 ${q.correctIndex + 1}번${q.concept ? ` · ${q.concept}` : ''}`;
+  return (
     <div style={{
-      width:30,height:30,borderRadius:999,flexShrink:0,
-      background: correct ? "var(--point-600)" : "var(--wrong-fg)",
-      color:"#fff",display:"flex",alignItems:"center",justifyContent:"center",
-    }}>{correct ? <Ic.Check size={16}/> : <Ic.X size={16}/>}</div>
-    <div style={{flex:1}}>
-      <div style={{fontSize:14.5,fontWeight:700,color: correct ? "var(--correct-fg)" : "var(--wrong-fg)"}}>
-        {correct ? "정답입니다." : "오답이에요."}
+      padding: "14px 16px",
+      background: "var(--bg-card)",
+      border: "1px solid var(--border-subtle)",
+      borderLeft: `4px solid ${accent}`,
+      borderRadius: 12, marginTop: 16,
+      display: "flex", gap: 12, alignItems: "center",
+    }}>
+      <div style={{
+        width: 30, height: 30, borderRadius: 999, flexShrink: 0,
+        background: accent,
+        color: "#fff", display: "flex", alignItems: "center", justifyContent: "center",
+      }}>{correct ? <Ic.Check size={16}/> : <Ic.X size={16}/>}</div>
+      <div style={{flex: 1, minWidth: 0}}>
+        <div style={{fontSize: 14.5, fontWeight: 700, color: accent}}>
+          {correct ? "정답입니다." : "오답이에요."}
+        </div>
+        {sub && (
+          <div style={{fontSize: 12.5, color: "var(--fg-3)", marginTop: 2, lineHeight: 1.5}}>
+            {sub}
+          </div>
+        )}
       </div>
-      <div style={{fontSize:12.5,color: correct ? "var(--correct-fg)" : "var(--wrong-fg)",opacity:.85,marginTop:2}}>
-        {correct ? `핵심 개념 · ${q.concept}` : `정답은 ${q.correctIndex+1}번 · ${q.concept}`}
-      </div>
+      <Mascot size={36} variant={correct ? "smile" : "sad"}/>
     </div>
-    <Mascot size={36} variant={correct ? "smile" : "sad"}/>
-  </div>
-);
+  );
+};
 
 export const Accordion = ({open, setOpen, explanation}) => (
   <div style={{marginTop:12,border:"1px solid var(--border-subtle)",borderRadius:12,background:"var(--bg-card)",overflow:"hidden"}}>
