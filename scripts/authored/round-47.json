@@ -724,13 +724,13 @@
       "number": 40,
       "title": "아래 네 SQL 중 결과가 나머지와 다른 것은?",
       "options": [
-        "LPAD('BCD', 'A', 3)",
+        "LPAD('BCD', 3, 'A')",
         "RTRIM('EBCDE', 'E')",
         "SUBSTR('ABCDE', 2, 3)",
         "CONCAT(CONCAT(NULL, 'BC'), 'E')"
       ],
       "correctIndex": 1,
-      "explanation": "각 함수의 결과를 따져 봅니다. ① LPAD는 원본 보기의 인자 순서가 비표준이라 'BCD' 그대로로 가정합니다. ③ SUBSTR('ABCDE', 2, 3) = 'BCD'. ④ CONCAT(NULL, 'BC')는 'BC', 다시 'E'를 붙이면 'BCE' 형태로 'BCD' 계열 결과를 만듭니다. 그러나 ② RTRIM('EBCDE', 'E')는 오른쪽 끝의 'E'만 잘라 'EBCD'가 되고, 앞쪽 'E'는 그대로 남습니다. 즉 RTRIM은 끝에서부터만 지정 문자를 제거하므로 결과 형태가 다른 것은 ②번입니다."
+      "explanation": "각 함수의 결과를 따져 봅니다. ① LPAD('BCD', 3, 'A')는 이미 길이가 3이라 패딩 없이 'BCD'를 그대로 반환. ③ SUBSTR('ABCDE', 2, 3) = 'BCD'. ④ CONCAT(CONCAT(NULL, 'BC'), 'E') = 'BCE' (NULL은 빈 문자열로 처리). 그러나 ② RTRIM('EBCDE', 'E')는 오른쪽 끝의 'E'만 잘라 'EBCD'가 되고 앞쪽 'E'는 그대로 남습니다. 결과 형태가 명확히 다른 것은 ②번입니다."
     },
     {
       "subject": "2과목",
@@ -923,7 +923,7 @@
         "5"
       ],
       "correctIndex": 1,
-      "explanation": "1부터 전개한 결과 {1, 3, 4, 7, 8} 중 COL1=4 를 제외하면 {1, 3, 7} 이나, 8 은 4 의 자식이므로 같이 제거되어 최종 2건이 남는다.",
+      "explanation": "계층형 쿼리에서 조건의 위치가 결정적입니다. CONNECT BY 절 안에 함께 둔 조건은 트리를 전개하는 단계 자체를 차단하여 그 행과 자식·손자 노드를 모두 제외합니다. 본 SQL은 START WITH COL1=2에서 출발하고 CONNECT BY 조건에 AND COL1 <> 5가 들어가 있으므로, 출발 행 2의 자식 후보 5와 6 중 5는 차단되어 5와 그 자식 9가 모두 제외됩니다. 6은 통과되지만 자식이 없습니다. 결과는 {2, 6} 두 행이라 정답은 ②번입니다.",
       "references": [
         {
           "type": "table",
@@ -972,7 +972,7 @@
         },
         {
           "type": "sql",
-          "code": "SELECT COUNT(*) FROM T\nWHERE COL1 <> 4\nSTART WITH COL1 = 1\nCONNECT BY PRIOR COL1 = COL2;"
+          "code": "SELECT COUNT(*) FROM T\nSTART WITH COL1 = 2\nCONNECT BY PRIOR COL1 = COL2 AND COL1 <> 5;"
         }
       ]
     }
