@@ -155,7 +155,7 @@ function head({ title, desc, path, type = 'article' }) {
 
 const tail = `  </main>
   <footer class="footer">
-    <p>SQLD양파 — SQLD 3주 합격 루틴 · <a href="/">홈으로</a> · <a href="/terms.html">이용약관</a> · <a href="/privacy.html">개인정보 처리방침</a></p>
+    <p>SQLD양파 — SQLD 3주 합격 루틴 · <a href="/">홈으로</a> · <a href="/terms.html">이용약관</a> · <a href="/privacy.html">개인정보처리방침</a></p>
   </footer>
 </body>
 </html>`;
