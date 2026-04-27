@@ -55,7 +55,7 @@ export const ROUND_50: QuizQuestion[] = [
       "식별자"
     ],
     "correctIndex": 3,
-    "explanation": "",
+    "explanation": "식별자는 엔터티 내 여러 속성 가운데 인스턴스를 대표·구분하는 속성이다.",
     "_source": "authored"
   },
   {
@@ -127,7 +127,7 @@ export const ROUND_50: QuizQuestion[] = [
       "식별자"
     ],
     "correctIndex": 3,
-    "explanation": "",
+    "explanation": "식별자는 엔터티의 인스턴스를 유일하게 구분할 수 있게 하는 하나 또는 그 이상의 속성 집합이다.",
     "_source": "authored",
     "references": [
       {
@@ -151,7 +151,7 @@ export const ROUND_50: QuizQuestion[] = [
       "응용 스키마"
     ],
     "correctIndex": 3,
-    "explanation": "",
+    "explanation": "데이터베이스 스키마는 외부·개념·내부 3계층으로 구성되며 응용 스키마는 표준 분류에 포함되지 않는다.",
     "_source": "authored"
   },
   {
@@ -169,7 +169,7 @@ export const ROUND_50: QuizQuestion[] = [
       "물리적 모델링"
     ],
     "correctIndex": 2,
-    "explanation": "",
+    "explanation": "M:N 관계 해소·정규화 등 업무 규칙을 상세화하는 단계는 논리적 모델링이다.",
     "_source": "authored"
   },
   {
@@ -205,7 +205,7 @@ export const ROUND_50: QuizQuestion[] = [
       "SELECT 학번 FROM ENROLL WHERE AVG(학점) >= 3.0;"
     ],
     "correctIndex": 2,
-    "explanation": "",
+    "explanation": "학점은 ENROLL 에 있으므로 STUDENT 와 조인 후 학번으로 GROUP BY 하고 HAVING 으로 평균 학점을 필터링해야 한다.",
     "_source": "authored",
     "references": [
       {
@@ -278,7 +278,7 @@ export const ROUND_50: QuizQuestion[] = [
       "공집합"
     ],
     "correctIndex": 1,
-    "explanation": "",
+    "explanation": "LEFT OUTER JOIN 은 좌측 TAB1 의 모든 행을 보존하며, ON 조건 불일치 행(D, E)의 우측 컬럼은 NULL 로 채워진다.",
     "_source": "authored",
     "references": [
       {
@@ -406,7 +406,7 @@ export const ROUND_50: QuizQuestion[] = [
       "양쪽을 모두 포함하는 FULL OUTER JOIN"
     ],
     "correctIndex": 3,
-    "explanation": "",
+    "explanation": "양쪽 모두에 매칭되지 않는 행까지 포함해야 하므로 FULL OUTER JOIN 이 적합하다.",
     "_source": "authored"
   },
   {
@@ -505,7 +505,7 @@ export const ROUND_50: QuizQuestion[] = [
       "DELETE FROM T GROUP BY NAME HAVING ID = MIN(ID);"
     ],
     "correctIndex": 0,
-    "explanation": "",
+    "explanation": "그룹별 MIN(ID) 를 NOT IN 으로 제외하고 나머지를 삭제하면 이름별 최소 ID 만 남는다.",
     "_source": "authored",
     "references": [
       {
@@ -554,7 +554,7 @@ export const ROUND_50: QuizQuestion[] = [
       "UPDATE TABLE TEAM MODIFY 컬럼명 VARCHAR2(10);"
     ],
     "correctIndex": 0,
-    "explanation": "",
+    "explanation": "Oracle 에서 컬럼 형식 변경은 ALTER TABLE ... MODIFY 구문을 사용하며 DEFAULT·NOT NULL 도 함께 지정할 수 있다.",
     "_source": "authored"
   },
   {
@@ -572,7 +572,7 @@ export const ROUND_50: QuizQuestion[] = [
       "CROSS JOIN"
     ],
     "correctIndex": 1,
-    "explanation": "",
+    "explanation": "Oracle (+) 외부조인 두 방향을 UNION ALL 로 결합한 형태는 ANSI 의 LEFT OUTER JOIN UNION ALL RIGHT OUTER JOIN 과 동치이다.",
     "_source": "authored",
     "references": [
       {
@@ -668,7 +668,7 @@ export const ROUND_50: QuizQuestion[] = [
       "WHERE 부서"
     ],
     "correctIndex": 0,
-    "explanation": "",
+    "explanation": "그룹 함수 MAX 를 비집계 컬럼 부서와 함께 사용하려면 GROUP BY 부서 가 필요하다.",
     "_source": "authored",
     "references": [
       {
@@ -692,7 +692,7 @@ export const ROUND_50: QuizQuestion[] = [
       "4000, 4, 4"
     ],
     "correctIndex": 0,
-    "explanation": "",
+    "explanation": "SUM(급여)=12000, 12000/3=4000. COUNT(*) 는 NULL 포함 4, COUNT(급여) 는 NULL 제외 3 이다.",
     "_source": "authored",
     "references": [
       {
@@ -736,7 +736,7 @@ export const ROUND_50: QuizQuestion[] = [
       "LAST_VALUE"
     ],
     "correctIndex": 1,
-    "explanation": "",
+    "explanation": "LAG 는 현재 행 기준 이전 행의 값을 참조하는 윈도우 함수이다.",
     "_source": "authored",
     "references": [
       {
@@ -760,7 +760,7 @@ export const ROUND_50: QuizQuestion[] = [
       "LEAD(VAL, 1) OVER(ORDER BY ID DESC) 과 동일한 효과"
     ],
     "correctIndex": 2,
-    "explanation": "",
+    "explanation": "①·②·④ 는 모두 직전 행 값을 가져오는 효과이지만, ③ 은 정렬을 DESC 로 뒤집은 뒤 LAG 를 적용하므로 결과 방향이 반대가 된다.",
     "_source": "authored"
   },
   {
@@ -838,7 +838,7 @@ export const ROUND_50: QuizQuestion[] = [
       "INNER JOIN 만 수행"
     ],
     "correctIndex": 3,
-    "explanation": "",
+    "explanation": "①·②·③ 은 외부 조인으로 미매칭 행을 보존하지만, ④ INNER JOIN 은 매칭되지 않는 행을 제외하므로 결과가 다르다.",
     "_source": "authored"
   },
   {
@@ -874,7 +874,7 @@ export const ROUND_50: QuizQuestion[] = [
       "CROSS JOIN"
     ],
     "correctIndex": 1,
-    "explanation": "",
+    "explanation": "사원이 없는 부서까지 포함하려면 부서 테이블을 좌측에 두고 LEFT OUTER JOIN 으로 사원 테이블을 결합한다.",
     "_source": "authored"
   },
   {
@@ -933,7 +933,7 @@ export const ROUND_50: QuizQuestion[] = [
       "SELECT 영화.영화명, 배우.배우명, 출연료 FROM 배우, 영화, 출연 WHERE 출연료 >= 8888 AND 출연.영화번호 = 영화.영화번호 AND 출연.배우번호 = 배우.배우번호;"
     ],
     "correctIndex": 3,
-    "explanation": "",
+    "explanation": "다중 테이블 조인 시 동명 컬럼 충돌을 피하기 위해 각 속성을 소유 테이블로 한정하고, 출연·영화·배우의 PK/FK 조건을 모두 명시해야 한다.",
     "_source": "authored",
     "references": [
       {
@@ -1000,10 +1000,10 @@ export const ROUND_50: QuizQuestion[] = [
     "number": 40,
     "title": "두 번째 글자가 's' 이고 전체 길이가 4 글자 이상인 문자열을 찾는 LIKE 패턴으로 옳지 않은 것은?",
     "options": [
-      "'%S_ _'",
-      "'_S%_ _'",
+      "'%S__'",
+      "'_S%__'",
       "'_S_%_'",
-      "'_S_ _ %'"
+      "'_S__%'"
     ],
     "correctIndex": 0,
     "explanation": "'%S_ _' 은 S 의 위치가 두 번째가 아닐 수 있고 길이도 보장하지 못한다.",
@@ -1024,7 +1024,7 @@ export const ROUND_50: QuizQuestion[] = [
       "NULL"
     ],
     "correctIndex": 1,
-    "explanation": "",
+    "explanation": "뷰 조건과 외부 조회 조건이 AND 로 결합되어 C1='B' 이고 C2 >= 200 인 (B, 200) 한 건의 SUM 이 200 이다.",
     "_source": "authored",
     "references": [
       {
@@ -1048,7 +1048,7 @@ export const ROUND_50: QuizQuestion[] = [
       "SELECT * FROM T2 WHERE T2.COL IN (SELECT COL FROM T1 WHERE T2.COL = T1.COL);"
     ],
     "correctIndex": 3,
-    "explanation": "",
+    "explanation": "①·②·③ 은 동일한 이너 조인 결과(T1·T2 컬럼 모두 반환)이지만, ④ 의 서브쿼리 형태는 T2 의 컬럼만 반환되어 결과 컬럼 구성이 다르다.",
     "_source": "authored"
   },
   {
@@ -1066,7 +1066,7 @@ export const ROUND_50: QuizQuestion[] = [
       "NULL"
     ],
     "correctIndex": 1,
-    "explanation": "원본 기출의 정답 표기를 보존한다.",
+    "explanation": "SUM(금액) 은 NULL 을 제외하여 100+200+300=600, COUNT(*) 는 NULL 포함 4 이므로 600/4=150 이 된다. 분모가 COUNT(금액) 이었다면 600/3=200 이 된다.",
     "_source": "authored",
     "references": [
       {
@@ -1145,7 +1145,7 @@ export const ROUND_50: QuizQuestion[] = [
       "SELECT * FROM T2 WHERE T2.COL IN (SELECT COL FROM T1 WHERE T2.COL = T1.COL)"
     ],
     "correctIndex": 3,
-    "explanation": "",
+    "explanation": "①·②·③ 은 동일한 이너 조인 결과이지만, ④ 의 서브쿼리는 T1 의 컬럼이 반환되지 않아 결과 컬럼 구성이 다르다.",
     "_source": "authored"
   },
   {
