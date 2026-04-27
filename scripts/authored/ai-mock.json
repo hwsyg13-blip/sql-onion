@@ -1,0 +1,49 @@
+{
+  "source": "ai-mock",
+  "version": 1,
+  "notes": "AI 생성 모의고사 — 기출 변형 문제 1000제 (점진적 추가). 기출(round-XX.json)과 별개로 관리. 모의고사 모드에서 기출 풀과 함께 출제 가능 (build 스크립트 통합 시).",
+  "schema": {
+    "subject": "1과목 | 2과목",
+    "chapter": "SQLD 표준 출제 영역 (아래 chapter-list 참고)",
+    "title": "문항 본문 (필수)",
+    "options": "보기 4개 배열 (필수, 4개 정확히)",
+    "correctIndex": "0~3 (필수, 정답 위치)",
+    "explanation": "해설 (권장, raw markdown ** 사용 금지)",
+    "references": "선택. 표/SQL/도식 객체 배열 (기출 데이터와 동일 구조)",
+    "_id": "선택. ai-mock-001~1000 식 고유 ID (build 시 자동 부여 가능)"
+  },
+  "chapter_list": {
+    "1과목": [
+      "데이터 모델 개념",
+      "엔터티",
+      "속성",
+      "관계",
+      "식별자",
+      "정규화",
+      "관계와 조인",
+      "트랜잭션과 Null",
+      "본질·인조 식별자"
+    ],
+    "2과목": [
+      "관계형 DB와 SELECT",
+      "함수",
+      "WHERE",
+      "ORDER BY",
+      "GROUP BY·HAVING",
+      "조인",
+      "표준 조인",
+      "집합 연산자",
+      "계층형 질의",
+      "서브쿼리",
+      "그룹 함수",
+      "윈도우 함수",
+      "TOP N 쿼리",
+      "DML",
+      "DDL",
+      "DCL·TCL",
+      "절차형 SQL",
+      "정규 표현식"
+    ]
+  },
+  "authored": []
+}
