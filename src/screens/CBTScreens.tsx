@@ -450,7 +450,7 @@ export const CBTResult = ({result, onNavigate}) => {
               ? "60점 이상 · 과목별 40% 이상을 달성했어요. 오답 해설로 약점을 다지고 다음 회차에 도전해요."
               : fail40
               ? "합격 기준(60점)에는 도달했더라도 과목별 40% 미만이 있으면 과락으로 불합격이에요. 취약 과목을 다시 학습해 보세요."
-              : "조금만 더. 전체 점수를 60점까지 끌어올리면 합격이에요. 오답 노트로 약점을 좁혀가요."}
+              : "조금만 더. 전체 점수를 60점까지 끌어올리면 합격이에요. 해설을 다시 보면서 약점을 좁혀가요."}
           </div>
         </div>
         <div style={{flex:"0 0 auto",textAlign:"center",padding:"14px 24px",background:"var(--bg-card)",borderRadius:14,border:"1px solid var(--border-subtle)"}}>
@@ -546,11 +546,6 @@ export const ResultRow = ({row}) => {
           <div style={{marginTop:10,padding:"12px 14px",background:"var(--point-050)",borderLeft:"3px solid var(--point-500)",borderRadius:6,fontSize:13,color:"var(--fg-2)",lineHeight:1.7}}>
             <strong style={{color:"var(--point-600)"}}>해설</strong> — {q.explanation}
           </div>
-          {!correct && (
-            <div style={{marginTop:10,display:"flex",justifyContent:"flex-end"}}>
-              <Btn size="sm" variant="soft" icon={<Ic.Bookmark size={14}/>}>오답노트 저장</Btn>
-            </div>
-          )}
         </div>
       )}
     </div>

@@ -68,7 +68,7 @@ export const PLANS = [
       {t: "오늘 모의고사 10문제", on: true, hint: "하루 10문제 제한"},
       {t: "기출문제 1세트", on: true, hint: "제60회(최신) 한정"},
       {t: "AI 무한 퀴즈", on: false},
-      {t: "오답 노트 · 풀이 기록 저장", on: false},
+      {t: "풀이 기록 저장", on: false},
       {t: "3주 합격 플랜 커스텀", on: false},
       {t: "모바일 · 오프라인 풀이", on: false},
     ],
@@ -86,7 +86,7 @@ export const PLANS = [
       {t: "모의고사 무제한", on: true},
       {t: "기출문제 전 회차 (제45~60회 · 16회차)", on: true},
       {t: "AI 무한 퀴즈 무제한", on: true},
-      {t: "오답 노트 · 풀이 기록 영구 저장", on: true},
+      {t: "풀이 기록 영구 저장", on: true},
       {t: "3주 합격 플랜 커스텀", on: true},
       {t: "모바일 · 오프라인 풀이", on: true},
     ],
@@ -212,7 +212,7 @@ export const PricingScreen = ({onNavigate, user, onSubscribe, onCancel}) => {
       {showCancel && (
         <ConfirmModal
           title="구독을 해지할까요?"
-          body="다음 결제일까지는 Pro 혜택을 계속 사용할 수 있어요. 기록한 오답 노트와 학습 데이터는 그대로 유지됩니다."
+          body="다음 결제일까지는 Pro 혜택을 계속 사용할 수 있어요. 학습 데이터는 그대로 유지됩니다."
           confirmLabel="해지하기" danger
           cancelLabel="유지하기"
           onConfirm={()=>{ setShowCancel(false); onCancel && onCancel(); }}

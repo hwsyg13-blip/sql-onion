@@ -235,7 +235,7 @@ export const LoginScreen = ({onNavigate, onLogin, layout = "centered"}: any) => 
               한 겹씩, <span style={{color:"var(--point-600)"}}>SQLD</span> 합격까지
             </h1>
             <p style={{fontSize:14,color:"var(--fg-3)",margin:0,lineHeight:1.6}}>
-              로그인하고 내 학습 기록·오답노트를 저장하세요
+              로그인하고 내 학습 기록을 저장하세요
             </p>
           </div>
           <AuthBody
