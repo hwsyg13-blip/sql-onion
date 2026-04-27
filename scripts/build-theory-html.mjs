@@ -53,7 +53,11 @@ for (const f of files) {
     }
   );
 
-  // exam-review 링크는 일단 그대로 (다음 PR 에서 SPA 라우트 연결)
+  // 본문 끝의 '시험 대비 보기 →' 안내 카드 제거 (양파단에선 사이드바 미니 테스트로 대체)
+  body = body.replace(
+    /<div class="reveal"[^>]*linear-gradient[^>]*>[\s\S]*?시험 대비 보기[\s\S]*?<\/a>\s*<\/div>/g,
+    ''
+  );
 
   entries.push({ chapterId, body: body.trim() });
   console.log(`  [ok] ${f} → ${chapterId} (${body.length} chars)`);
