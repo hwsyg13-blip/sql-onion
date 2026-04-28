@@ -170,7 +170,7 @@
       "references": [
         {
           "type": "erd",
-          "caption": "계정-계정그룹 ERD (계정 측 0..N, 계정그룹 측 0..1 — 양쪽 모두 선택)",
+          "caption": "계정-계정그룹 ERD",
           "mermaid": "erDiagram\n    계정그룹 |o--o{ 계정 : \"포함\""
         }
       ]
