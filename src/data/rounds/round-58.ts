@@ -317,7 +317,7 @@ export const ROUND_58: QuizQuestion[] = [
     "round": 58,
     "subject": "2과목",
     "number": 12,
-    "title": "아래 두 LIKE 패턴의 실행 결과 차이로 옳은 것은?",
+    "title": "아래 T 테이블에 대한 두 LIKE 패턴의 실행 결과 차이로 옳은 것은?",
     "options": [
       "둘 다 1건을 반환한다.",
       "둘 다 4건을 반환한다.",
@@ -325,11 +325,12 @@ export const ROUND_58: QuizQuestion[] = [
       "㉠은 3건, ㉡은 6건을 반환한다."
     ],
     "correctIndex": 2,
-    "explanation": "㉠의 '_'는 임의 한 문자를 의미하므로 모든 행이 매칭된다. ㉡은 ESCAPE 문자로 '_' 를 리터럴 밑줄로 해석하므로 'a_c'만 매칭된다.",
+    "explanation": "㉠ `LIKE '%a_c%'` 의 `_` 는 임의 한 문자를 의미하는 와일드카드라 모든 4행이 매칭된다. ㉡ `LIKE '%a\\_c%' ESCAPE '\\'` 는 `\\` 다음의 `_` 를 리터럴 밑줄로 해석하므로 \"a_c\" 문자열만 매칭 → 1건.",
     "_source": "authored",
     "references": [
       {
         "type": "table",
+        "caption": "T 테이블",
         "headers": [
           "COL"
         ],
@@ -350,7 +351,7 @@ export const ROUND_58: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "-- ㉠ WHERE COL LIKE '%a_c%'\n-- ㉡ WHERE COL LIKE '%a\\_c%' ESCAPE '\\'"
+        "code": "-- ㉠ SELECT * FROM T WHERE COL LIKE '%a_c%';\n-- ㉡ SELECT * FROM T WHERE COL LIKE '%a\\_c%' ESCAPE '\\';"
       }
     ]
   },
@@ -361,7 +362,7 @@ export const ROUND_58: QuizQuestion[] = [
     "round": 58,
     "subject": "2과목",
     "number": 13,
-    "title": "다음 정규표현식 `^\\w*$`에 매칭되지 않는 문자열은?",
+    "title": "다음 정규표현식 `^\\w*$` 에 매칭되지 않는 문자열은?",
     "options": [
       "ER-123",
       "abcde",
@@ -369,8 +370,14 @@ export const ROUND_58: QuizQuestion[] = [
       "test_01"
     ],
     "correctIndex": 0,
-    "explanation": "`\\w`는 영문자·숫자·밑줄(_)만 매칭한다. 하이픈(-)은 `\\w`에 포함되지 않으므로 'ER-123'은 전체 매칭되지 않는다.",
-    "_source": "authored"
+    "explanation": "`\\w` 는 영문자·숫자·밑줄(_) 만 매칭한다. 하이픈 `-` 은 `\\w` 에 포함되지 않으므로 'ER-123' 은 전체 매칭되지 않는다. ②③④ 는 모두 영숫자·밑줄로만 구성되어 매칭된다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "-- 각 옵션을 다음 SQL 의 첫 인자로 치환해 평가:\nSELECT REGEXP_LIKE('ER-123',  '^\\w*$') FROM DUAL;\nSELECT REGEXP_LIKE('abcde',   '^\\w*$') FROM DUAL;\nSELECT REGEXP_LIKE('SQL2025', '^\\w*$') FROM DUAL;\nSELECT REGEXP_LIKE('test_01', '^\\w*$') FROM DUAL;"
+      }
+    ]
   },
   {
     "id": 10113,
@@ -461,6 +468,10 @@ export const ROUND_58: QuizQuestion[] = [
             "Z"
           ]
         ]
+      },
+      {
+        "type": "sql",
+        "code": "-- ㄱ. CROSS JOIN\nSELECT COUNT(*) FROM TAB1, TAB2;\n\n-- ㄴ. INNER JOIN\nSELECT COUNT(*) FROM TAB1 A INNER JOIN TAB2 B ON A.ID = B.ID;\n\n-- ㄷ. FULL OUTER JOIN\nSELECT COUNT(*) FROM TAB1 A FULL OUTER JOIN TAB2 B ON A.ID = B.ID;"
       }
     ]
   },
@@ -682,7 +693,7 @@ export const ROUND_58: QuizQuestion[] = [
     "round": 58,
     "subject": "2과목",
     "number": 21,
-    "title": "아래 SQL에서 ROLLUP과 CUBE 사용 차이에 대한 설명으로 옳은 것은?",
+    "title": "아래 EMP 테이블에 대한 SQL 에서 ROLLUP 과 CUBE 사용 차이에 대한 설명으로 옳은 것은?",
     "options": [
       "롤업(ROLLUP)은 좌측부터 순차 집계를 수행한다.",
       "ROLLUP 결과에는 모든 조합이 반드시 포함된다.",
@@ -690,9 +701,40 @@ export const ROUND_58: QuizQuestion[] = [
       "GROUPING 함수는 CUBE 절에서만 사용할 수 있다."
     ],
     "correctIndex": 0,
-    "explanation": "ROLLUP은 (A,B), (A), () 순으로 좌측 기준 소계와 총계를 산출한다. CUBE는 모든 부분집합 조합을 포함한다.",
+    "explanation": "`ROLLUP(A, B)` 는 좌측부터 점진적 집계 — (A, B), (A), () 의 세 그룹만 산출. `CUBE(A, B)` 는 모든 부분집합 조합 — (A, B), (A), (B), () 네 그룹. ② ROLLUP 은 일부 조합만 포함, ③ CUBE 는 순서 무관, ④ GROUPING 은 ROLLUP·CUBE·GROUPING SETS 모두에서 사용 가능.",
     "_source": "authored",
     "references": [
+      {
+        "type": "table",
+        "caption": "EMP 테이블",
+        "headers": [
+          "DEPT",
+          "JOB",
+          "SAL"
+        ],
+        "rows": [
+          [
+            "10",
+            "MGR",
+            "5000"
+          ],
+          [
+            "10",
+            "DEV",
+            "3000"
+          ],
+          [
+            "20",
+            "MGR",
+            "4500"
+          ],
+          [
+            "20",
+            "DEV",
+            "3500"
+          ]
+        ]
+      },
       {
         "type": "sql",
         "code": "SELECT DEPT, JOB, SUM(SAL)\nFROM   EMP\nGROUP BY ROLLUP(DEPT, JOB)\nHAVING GROUPING(DEPT) + GROUPING(JOB) > 0;"
@@ -752,7 +794,7 @@ export const ROUND_58: QuizQuestion[] = [
     "round": 58,
     "subject": "2과목",
     "number": 23,
-    "title": "아래 데이터와 결과가 주어졌을 때 사용된 조인 종류는?",
+    "title": "아래 두 테이블 A, B 와 결과 C 가 주어졌을 때 사용된 조인 종류는?",
     "options": [
       "LEFT OUTER JOIN",
       "CROSS JOIN",
@@ -760,21 +802,73 @@ export const ROUND_58: QuizQuestion[] = [
       "SELF JOIN"
     ],
     "correctIndex": 1,
-    "explanation": "두 집합의 모든 조합(카티션 곱)이 결과가 되었으므로 CROSS JOIN이다.",
+    "explanation": "두 집합의 모든 조합(카티션 곱)이 결과로 나왔으므로 CROSS JOIN. |A| × |B| = 3 × 2 = 6 행이 결과 C 에 그대로 나타난다. ① LEFT OUTER 는 왼쪽 기준 모든 행 유지(매칭 + 미매칭 NULL), ③ INNER 는 매칭만, ④ SELF 는 자기 자신과 조인.",
     "_source": "authored",
     "references": [
       {
         "type": "table",
+        "caption": "A 테이블",
         "headers": [
-          "A",
-          "B",
-          "C (결과)"
+          "A"
         ],
         "rows": [
           [
-            "{1, 2, 3}",
-            "{6, 7}",
-            "{(1,6), (2,6), (3,6), (1,7), (2,7), (3,7)}"
+            "1"
+          ],
+          [
+            "2"
+          ],
+          [
+            "3"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "B 테이블",
+        "headers": [
+          "B"
+        ],
+        "rows": [
+          [
+            "6"
+          ],
+          [
+            "7"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "결과 C",
+        "headers": [
+          "A",
+          "B"
+        ],
+        "rows": [
+          [
+            "1",
+            "6"
+          ],
+          [
+            "2",
+            "6"
+          ],
+          [
+            "3",
+            "6"
+          ],
+          [
+            "1",
+            "7"
+          ],
+          [
+            "2",
+            "7"
+          ],
+          [
+            "3",
+            "7"
           ]
         ]
       }
@@ -1300,7 +1394,7 @@ export const ROUND_58: QuizQuestion[] = [
     "round": 58,
     "subject": "2과목",
     "number": 41,
-    "title": "아래 SQL의 서브쿼리 유형은?",
+    "title": "아래 EMP 테이블에 대한 SQL 의 서브쿼리 유형은?",
     "options": [
       "단순 스칼라 서브쿼리",
       "인라인 뷰",
@@ -1308,9 +1402,40 @@ export const ROUND_58: QuizQuestion[] = [
       "독립 서브쿼리"
     ],
     "correctIndex": 2,
-    "explanation": "서브쿼리 내부에서 외부 쿼리의 DEPTNO 를 참조하므로 연관 서브쿼리에 해당한다.",
+    "explanation": "서브쿼리 내부의 `WHERE DEPTNO = E.DEPTNO` 가 외부 쿼리 별칭 `E` 의 DEPTNO 를 참조하므로 연관(Correlated) 서브쿼리. 외부 행마다 서브쿼리가 다시 실행된다. ① 은 단일 값 반환 + 외부 참조 X, ② 는 FROM 절 인라인 뷰, ④ 는 외부 참조 없는 독립 실행.",
     "_source": "authored",
     "references": [
+      {
+        "type": "table",
+        "caption": "EMP 테이블",
+        "headers": [
+          "EMPNO",
+          "DEPTNO",
+          "SAL"
+        ],
+        "rows": [
+          [
+            "1",
+            "10",
+            "3000"
+          ],
+          [
+            "2",
+            "10",
+            "5000"
+          ],
+          [
+            "3",
+            "20",
+            "4000"
+          ],
+          [
+            "4",
+            "20",
+            "4500"
+          ]
+        ]
+      },
       {
         "type": "sql",
         "code": "SELECT E.EMPNO\nFROM   EMP E\nWHERE  E.SAL > (SELECT AVG(SAL) FROM EMP WHERE DEPTNO = E.DEPTNO);"
@@ -1348,7 +1473,7 @@ export const ROUND_58: QuizQuestion[] = [
     "round": 58,
     "subject": "2과목",
     "number": 43,
-    "title": "아래 DROP 문에 대한 설명으로 옳은 것은?",
+    "title": "아래 T1, T2 테이블 구조에서 `DROP TABLE T1 CASCADE CONSTRAINTS` 수행 결과로 옳은 것은?",
     "options": [
       "부모 테이블이 함께 삭제된다.",
       "T1 테이블과 T1 테이블을 참조하는 FK 제약 조건을 함께 삭제한다.",
@@ -1356,12 +1481,45 @@ export const ROUND_58: QuizQuestion[] = [
       "자식 테이블 전체가 삭제된다."
     ],
     "correctIndex": 1,
-    "explanation": "CASCADE CONSTRAINTS 옵션은 대상 테이블(T1)을 삭제하면서 T1을 참조하는 다른 테이블의 외래키(FK) 제약 조건까지 함께 제거한다. 부모 테이블이나 자식 테이블 자체가 삭제되거나 자식 테이블의 기본키가 함께 삭제되는 것은 아니다.",
+    "explanation": "`CASCADE CONSTRAINTS` 옵션은 대상 테이블(T1) 을 삭제하면서, T1 을 참조하는 다른 테이블의 외래키(FK) 제약 조건까지 함께 제거한다. 본 케이스에서는 T2 의 FK 제약(REFERENCES T1) 만 삭제되고 T2 테이블 자체는 그대로 남는다. ①, ④ 는 T2 가 삭제되지 않으므로 오답, ③ T2 의 PK 도 그대로.",
     "_source": "authored",
     "references": [
       {
+        "type": "table",
+        "caption": "T1 테이블 (부모, PK = ID)",
+        "headers": [
+          "ID"
+        ],
+        "rows": [
+          [
+            "1"
+          ],
+          [
+            "2"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "T2 테이블 (자식, FK: T1_ID → T1.ID)",
+        "headers": [
+          "ID",
+          "T1_ID"
+        ],
+        "rows": [
+          [
+            "10",
+            "1"
+          ],
+          [
+            "20",
+            "2"
+          ]
+        ]
+      },
+      {
         "type": "sql",
-        "code": "DROP TABLE T1 CASCADE CONSTRAINTS;"
+        "code": "DROP TABLE T1 CASCADE CONSTRAINTS;\n-- 결과: T1 삭제 + T2 의 FK 제약 삭제\n-- T2 테이블 자체는 그대로 남음"
       }
     ]
   },
@@ -1438,7 +1596,7 @@ export const ROUND_58: QuizQuestion[] = [
     "round": 58,
     "subject": "2과목",
     "number": 47,
-    "title": "계층형 질의에서 특정 노드부터 상위로 올라가는 역방향 탐색 조건으로 가장 적절한 것은?",
+    "title": "아래 EMP 테이블에서 특정 노드부터 상위로 올라가는 역방향 계층형 탐색 조건으로 가장 적절한 것은?",
     "options": [
       "PRIOR MGR = EMPNO",
       "PRIOR EMPNO = MGR",
@@ -1446,12 +1604,43 @@ export const ROUND_58: QuizQuestion[] = [
       "PRIOR EMPNO = PRIOR MGR"
     ],
     "correctIndex": 0,
-    "explanation": "이전 행의 MGR 값이 현재 행의 EMPNO 와 같으면 자식에서 부모로 거슬러 올라가는 역방향 전개가 된다.",
+    "explanation": "`PRIOR MGR = EMPNO` 는 \"이전(자식) 행의 MGR 이 다음(부모) 행의 EMPNO 와 같으면 연결\" 의미. 자식 → 부모 역방향 전개. EMPNO=7902(FORD) 에서 시작하면 MGR=7566(JONES) 으로, 다시 7566 의 MGR=7839(KING) 으로 올라간다. ② 는 정방향, ③ 은 PRIOR 없음, ④ 는 자기 참조.",
     "_source": "authored",
     "references": [
       {
+        "type": "table",
+        "caption": "EMP 테이블",
+        "headers": [
+          "EMPNO",
+          "ENAME",
+          "MGR"
+        ],
+        "rows": [
+          [
+            "7839",
+            "KING",
+            "(NULL)"
+          ],
+          [
+            "7566",
+            "JONES",
+            "7839"
+          ],
+          [
+            "7902",
+            "FORD",
+            "7566"
+          ],
+          [
+            "7369",
+            "SMITH",
+            "7902"
+          ]
+        ]
+      },
+      {
         "type": "sql",
-        "code": "SELECT *\nFROM   EMP\nSTART WITH EMPNO = 7902\nCONNECT BY (  ?  );"
+        "code": "SELECT *\nFROM   EMP\nSTART WITH EMPNO = 7902\nCONNECT BY (  ?  );\n-- 7902(FORD) → 7566(JONES) → 7839(KING) 순으로 거슬러 올라감"
       }
     ]
   },
@@ -1526,7 +1715,7 @@ export const ROUND_58: QuizQuestion[] = [
     "round": 58,
     "subject": "2과목",
     "number": 50,
-    "title": "아래 SQL의 실행 결과로 옳은 것은?",
+    "title": "아래 EMP 테이블에 대한 SQL 의 실행 결과로 옳은 것은?",
     "options": [
       "DEPTNO=10 의 전체 사원",
       "DEPTNO=10 의 최대 급여보다 높은 급여를 받는 사원",
@@ -1534,9 +1723,45 @@ export const ROUND_58: QuizQuestion[] = [
       "전체 사원"
     ],
     "correctIndex": 1,
-    "explanation": "SAL > ALL(집합) 은 집합의 최대값보다 큰 값을 의미한다.",
+    "explanation": "`SAL > ALL (집합)` 은 집합의 모든 원소보다 커야 한다는 의미 = 집합의 최대값보다 큰 값. 본 SQL 은 DEPTNO=10 사원들의 SAL 모두 보다 큰 사원 = DEPTNO=10 의 최대 급여(5000) 초과인 사원만 선택. 본 데이터에서는 6000 인 BLAKE 한 명이 결과.",
     "_source": "authored",
     "references": [
+      {
+        "type": "table",
+        "caption": "EMP 테이블",
+        "headers": [
+          "EMPNO",
+          "ENAME",
+          "DEPTNO",
+          "SAL"
+        ],
+        "rows": [
+          [
+            "7839",
+            "KING",
+            "10",
+            "5000"
+          ],
+          [
+            "7782",
+            "CLARK",
+            "10",
+            "2450"
+          ],
+          [
+            "7698",
+            "BLAKE",
+            "20",
+            "6000"
+          ],
+          [
+            "7566",
+            "JONES",
+            "20",
+            "2975"
+          ]
+        ]
+      },
       {
         "type": "sql",
         "code": "SELECT *\nFROM   EMP\nWHERE  SAL > ALL (SELECT SAL FROM EMP WHERE DEPTNO = 10);"
