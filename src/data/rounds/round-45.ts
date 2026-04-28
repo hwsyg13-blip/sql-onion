@@ -252,10 +252,10 @@ export const ROUND_45: QuizQuestion[] = [
     "number": 12,
     "title": "아래 네 SQL 중 수행 결과가 나머지와 다른 것은?",
     "options": [
-      "CEIL(22.14)",
-      "FLOOR(22.14)",
-      "TRUNC(22.14)",
-      "ROUND(22.14)"
+      "`CEIL(22.14)`",
+      "`FLOOR(22.14)`",
+      "`TRUNC(22.14)`",
+      "`ROUND(22.14)`"
     ],
     "correctIndex": 0,
     "explanation": "CEIL은 정수부를 올림하므로 23을 반환한다. FLOOR·TRUNC·ROUND(22.14)는 모두 22를 반환한다.",
@@ -276,10 +276,10 @@ export const ROUND_45: QuizQuestion[] = [
     "number": 13,
     "title": "선수 테이블에서 손흥민 선수가 소속된 팀의 모든 선수 포지션을 'FW'로 변경하는 SQL로 올바른 것은?",
     "options": [
-      "UPDATE 선수 SET 포지션 = 'FW' WHERE 이름 = '손흥민';",
-      "UPDATE 선수 SET 팀ID = 'FW' WHERE 이름 = '손흥민';",
-      "UPDATE 선수 SET 포지션 = 'FW' WHERE 팀ID = '손흥민';",
-      "UPDATE 선수 SET 포지션 = 'FW' WHERE 팀ID = (SELECT 팀ID FROM 선수 WHERE 이름 = '손흥민');"
+      "`UPDATE 선수 SET 포지션 = 'FW' WHERE 이름 = '손흥민';`",
+      "`UPDATE 선수 SET 팀ID = 'FW' WHERE 이름 = '손흥민';`",
+      "`UPDATE 선수 SET 포지션 = 'FW' WHERE 팀ID = '손흥민';`",
+      "`UPDATE 선수 SET 포지션 = 'FW' WHERE 팀ID = (SELECT 팀ID FROM 선수 WHERE 이름 = '손흥민');`"
     ],
     "correctIndex": 3,
     "explanation": "손흥민이 속한 팀의 팀ID를 서브쿼리로 조회하여, 해당 팀의 모든 선수의 포지션을 일괄 변경한다.",
@@ -287,6 +287,7 @@ export const ROUND_45: QuizQuestion[] = [
     "references": [
       {
         "type": "table",
+        "caption": "선수 테이블",
         "headers": [
           "선수번호",
           "이름",
@@ -325,10 +326,10 @@ export const ROUND_45: QuizQuestion[] = [
     "number": 14,
     "title": "SNS별 추천점수를 집계하여 추출하는 함수로 올바른 것은?",
     "options": [
-      "SELECT SUM(추천점수) FROM SNS_LOG;",
-      "SELECT 추천점수 FROM SNS_LOG GROUP BY SNS;",
-      "SELECT SNS, SUM(추천점수) FROM SNS_LOG GROUP BY SNS;",
-      "SELECT SNS, 추천점수 FROM SNS_LOG ORDER BY SNS;"
+      "`SELECT SUM(추천점수) FROM SNS_LOG;`",
+      "`SELECT 추천점수 FROM SNS_LOG GROUP BY SNS;`",
+      "`SELECT SNS, SUM(추천점수) FROM SNS_LOG GROUP BY SNS;`",
+      "`SELECT SNS, 추천점수 FROM SNS_LOG ORDER BY SNS;`"
     ],
     "correctIndex": 2,
     "explanation": "SNS별 합계를 구해야 하므로 GROUP BY SNS와 집계함수 SUM을 함께 사용한다.",
@@ -336,6 +337,7 @@ export const ROUND_45: QuizQuestion[] = [
     "references": [
       {
         "type": "table",
+        "caption": "SNS_LOG 테이블",
         "headers": [
           "SNS",
           "사용자",
@@ -442,10 +444,10 @@ export const ROUND_45: QuizQuestion[] = [
     "number": 19,
     "title": "직급 인원이 9명 이상인 직급 중 나이가 가장 많은 직원의 이름을 조회하는 SQL로 올바른 것은?",
     "options": [
-      "SELECT 이름 FROM EMP WHERE COUNT(*) >= 9 GROUP BY 직급 ORDER BY 나이 DESC FETCH FIRST 1 ROWS ONLY;",
-      "SELECT 이름 FROM EMP GROUP BY 직급 HAVING COUNT(*) >= 9 ORDER BY 나이 DESC FETCH FIRST 1 ROWS ONLY;",
-      "SELECT 이름 FROM EMP WHERE 직급 IN (SELECT 직급 FROM EMP GROUP BY 직급 HAVING COUNT(*) >= 9) ORDER BY 나이 DESC FETCH FIRST 1 ROWS ONLY;",
-      "SELECT 이름 FROM EMP GROUP BY 직급 HAVING 나이 = MAX(나이) AND COUNT(*) >= 9 ORDER BY 나이 DESC FETCH FIRST 1 ROWS ONLY;"
+      "`SELECT 이름 FROM EMP WHERE COUNT(*) >= 9 GROUP BY 직급 ORDER BY 나이 DESC FETCH FIRST 1 ROWS ONLY;`",
+      "`SELECT 이름 FROM EMP GROUP BY 직급 HAVING COUNT(*) >= 9 ORDER BY 나이 DESC FETCH FIRST 1 ROWS ONLY;`",
+      "`SELECT 이름 FROM EMP WHERE 직급 IN (SELECT 직급 FROM EMP GROUP BY 직급 HAVING COUNT(*) >= 9) ORDER BY 나이 DESC FETCH FIRST 1 ROWS ONLY;`",
+      "`SELECT 이름 FROM EMP GROUP BY 직급 HAVING 나이 = MAX(나이) AND COUNT(*) >= 9 ORDER BY 나이 DESC FETCH FIRST 1 ROWS ONLY;`"
     ],
     "correctIndex": 2,
     "explanation": "HAVING COUNT(*) >= 9 조건으로 9명 이상 직급을 먼저 추출하고, 해당 직급 직원 중 나이가 가장 많은 사람을 반환한다.",
@@ -526,10 +528,10 @@ export const ROUND_45: QuizQuestion[] = [
     "number": 23,
     "title": "아래 결과를 얻기 위해 A 테이블과 B 테이블에 적용할 조건절로 올바른 것은?",
     "options": [
-      "NOT EXISTS (SELECT 1 FROM T2 B WHERE B.COL1 = A.COL1)",
-      "EXISTS (SELECT 1 FROM T2 B WHERE B.COL1 = A.COL1)",
-      "COL1 IN (SELECT COL1 FROM T2)",
-      "COL1 > (SELECT MAX(COL1) FROM T2)"
+      "`NOT EXISTS (SELECT 1 FROM T2 B WHERE B.COL1 = A.COL1)`",
+      "`EXISTS (SELECT 1 FROM T2 B WHERE B.COL1 = A.COL1)`",
+      "`COL1 IN (SELECT COL1 FROM T2)`",
+      "`COL1 > (SELECT MAX(COL1) FROM T2)`"
     ],
     "correctIndex": 0,
     "explanation": "T1에만 존재하고 T2에는 존재하지 않는 COL1 값을 추출하려면 상관 서브쿼리와 NOT EXISTS를 조합한다.",
@@ -791,29 +793,63 @@ export const ROUND_45: QuizQuestion[] = [
     "references": [
       {
         "type": "table",
+        "caption": "T1 테이블",
         "headers": [
-          "테이블",
-          "COL1 값"
+          "COL1"
         ],
         "rows": [
           [
-            "T1",
-            "1, 2"
+            "1"
           ],
           [
-            "T2",
-            "1, 3"
-          ],
-          [
-            "T3",
-            "1, 4"
-          ],
-          [
-            "T4",
-            "1, 5"
+            "2"
           ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "T2 테이블",
+        "headers": [
+          "COL1"
         ],
-        "caption": "T1 테이블"
+        "rows": [
+          [
+            "1"
+          ],
+          [
+            "3"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "T3 테이블",
+        "headers": [
+          "COL1"
+        ],
+        "rows": [
+          [
+            "1"
+          ],
+          [
+            "4"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "T4 테이블",
+        "headers": [
+          "COL1"
+        ],
+        "rows": [
+          [
+            "1"
+          ],
+          [
+            "5"
+          ]
+        ]
       },
       {
         "type": "sql",
@@ -859,21 +895,36 @@ export const ROUND_45: QuizQuestion[] = [
     "references": [
       {
         "type": "table",
+        "caption": "T1 테이블",
         "headers": [
-          "T1.N1",
-          "T3.N1"
+          "N1"
         ],
         "rows": [
           [
-            "1",
+            "1"
+          ],
+          [
             "2"
           ],
           [
-            "2",
+            "3"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "T3 테이블 (N1 에 NULL 포함)",
+        "headers": [
+          "N1"
+        ],
+        "rows": [
+          [
+            "2"
+          ],
+          [
             "3"
           ],
           [
-            "3",
             "NULL"
           ]
         ]
