@@ -560,10 +560,10 @@ export const ROUND_55: QuizQuestion[] = [
     "number": 20,
     "title": "아래 두 테이블 T1, T2 에 대해 LEFT OUTER JOIN, FULL OUTER JOIN, RIGHT OUTER JOIN 을 각각 수행한 결과 행 수로 옳은 것은?",
     "options": [
-      "LEFT 3, FULL 3, RIGHT 3 — 매칭된 1 건만 모든 조인에서 반환된다.",
-      "LEFT 5, FULL 5, RIGHT 5 — 모든 조인에서 양쪽 행이 모두 반환된다.",
+      "LEFT 3, FULL 3, RIGHT 3",
+      "LEFT 5, FULL 5, RIGHT 5",
       "LEFT 3, FULL 5, RIGHT 3",
-      "LEFT 3, FULL 5, RIGHT 4 — RIGHT 결과는 매칭 1 건 + T2 미매칭 3 건이다."
+      "LEFT 3, FULL 5, RIGHT 4"
     ],
     "correctIndex": 2,
     "explanation": "T1 과 T2 는 공통 값 3 하나로 매칭된다. LEFT OUTER JOIN 은 T1 기준 3 건(1, 2, 3), RIGHT OUTER JOIN 은 T2 기준 3 건(3, 4, 5), FULL OUTER JOIN 은 매칭 1 건 + T1 미매칭 2 건 + T2 미매칭 2 건으로 5 건이 된다.",
@@ -649,7 +649,7 @@ export const ROUND_55: QuizQuestion[] = [
             "1"
           ]
         ],
-        "caption": "T1 테이블"
+        "caption": "테이블별 ID 값"
       },
       {
         "type": "sql",
@@ -1093,10 +1093,10 @@ export const ROUND_55: QuizQuestion[] = [
       },
       {
         "type": "table",
-        "caption": "결과 (컬럼명은 첫 SELECT 의 별칭 사용)",
+        "caption": "결과 (UNION ALL 후)",
         "headers": [
-          "AAB",
-          "BBA"
+          "?",
+          "?"
         ],
         "rows": [
           [
