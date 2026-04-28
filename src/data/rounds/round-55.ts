@@ -560,10 +560,10 @@ export const ROUND_55: QuizQuestion[] = [
     "number": 20,
     "title": "아래 두 테이블 T1, T2 에 대해 LEFT OUTER JOIN, FULL OUTER JOIN, RIGHT OUTER JOIN 을 각각 수행한 결과 행 수로 옳은 것은?",
     "options": [
-      "LEFT 3, FULL 3, RIGHT 3 — 매칭된 1 건만 모든 조인에서 반환된다.",
-      "LEFT 5, FULL 5, RIGHT 5 — 모든 조인에서 양쪽 행이 모두 반환된다.",
+      "LEFT 3, FULL 3, RIGHT 3",
+      "LEFT 5, FULL 5, RIGHT 5",
       "LEFT 3, FULL 5, RIGHT 3",
-      "LEFT 3, FULL 5, RIGHT 4 — RIGHT 결과는 매칭 1 건 + T2 미매칭 3 건이다."
+      "LEFT 3, FULL 5, RIGHT 4"
     ],
     "correctIndex": 2,
     "explanation": "T1 과 T2 는 공통 값 3 하나로 매칭된다. LEFT OUTER JOIN 은 T1 기준 3 건(1, 2, 3), RIGHT OUTER JOIN 은 T2 기준 3 건(3, 4, 5), FULL OUTER JOIN 은 매칭 1 건 + T1 미매칭 2 건 + T2 미매칭 2 건으로 5 건이 된다.",
@@ -649,7 +649,7 @@ export const ROUND_55: QuizQuestion[] = [
             "1"
           ]
         ],
-        "caption": "T1 테이블"
+        "caption": "테이블별 ID 값"
       },
       {
         "type": "sql",
@@ -1093,10 +1093,10 @@ export const ROUND_55: QuizQuestion[] = [
       },
       {
         "type": "table",
-        "caption": "결과 (컬럼명은 첫 SELECT 의 별칭 사용)",
+        "caption": "결과 (UNION ALL 후)",
         "headers": [
-          "AAB",
-          "BBA"
+          "?",
+          "?"
         ],
         "rows": [
           [
@@ -1518,13 +1518,13 @@ export const ROUND_55: QuizQuestion[] = [
     "number": 48,
     "title": "무결성 제약조건 위배에 대한 설명 중 옳지 않은 것은?",
     "options": [
-      "도서관 테이블에 (2, '미존재 회원ID') 를 삽입하는 경우 참조 무결성을 위배한다.",
+      "도서관 테이블의 회원ID 컬럼에 FOREIGN KEY 제약이 정의되지 않았더라도 다른 테이블에 없는 회원ID 값을 넣으면 참조 무결성이 위배된다.",
       "PRIMARY KEY 컬럼에 중복 값을 삽입하면 개체 무결성이 위배된다.",
       "CHECK 제약을 벗어난 값이 입력되면 도메인 무결성이 위배된다.",
       "NOT NULL 컬럼에 NULL 이 들어가면 개체 무결성이 위배된다."
     ],
     "correctIndex": 0,
-    "explanation": "단독 테이블에 값을 삽입할 때는 개체 무결성이나 도메인 무결성 위배가 더 일반적이며, 참조 무결성은 외래키 참조가 존재해야 성립한다.",
+    "explanation": "참조 무결성은 FOREIGN KEY 제약이 정의된 경우에만 적용된다. FK 제약이 없는 컬럼은 일반 데이터 컬럼일 뿐이라, 다른 테이블에 없는 값을 넣어도 참조 무결성과 무관하다. 따라서 ① 은 옳지 않은 설명. ② PK 중복은 개체 무결성, ③ CHECK 벗어남은 도메인 무결성, ④ NOT NULL 위반은 개체 무결성(주식별자 NULL 금지의 연장 해석)으로 분류되어 모두 옳다.",
     "_source": "authored"
   },
   {
