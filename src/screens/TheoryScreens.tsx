@@ -391,12 +391,12 @@ export const TheoryDetailScreen = ({ chapterId, onNavigate }) => {
           {/* Nav footer */}
           <div style={{ display: 'flex', justifyContent: 'space-between', gap: 10, marginTop: 40, paddingTop: 24, borderTop: '1px solid var(--border-subtle)' }}>
             {prevCh ? (
-              <Btn variant="ghost" icon={<Ic.ArrowLeft />} onClick={() => onNavigate('theory-detail', prevCh.id)}>이전 ({prevCh.title})</Btn>
+              <Btn variant="ghost" icon={<Ic.ArrowLeft />} onClick={() => onNavigate('theory-detail', prevCh.id)}>이전<span className="theory-nav-title"> ({prevCh.title})</span></Btn>
             ) : (
               <Btn variant="ghost" icon={<Ic.ArrowLeft />} onClick={() => onNavigate('theory')}>이론 목록</Btn>
             )}
             {nextCh ? (
-              <Btn onClick={() => onNavigate('theory-detail', nextCh.id)} iconRight={<Ic.ArrowRight />}>다음 ({nextCh.title})</Btn>
+              <Btn onClick={() => onNavigate('theory-detail', nextCh.id)} iconRight={<Ic.ArrowRight />}>다음<span className="theory-nav-title"> ({nextCh.title})</span></Btn>
             ) : (
               <Btn variant="outline" onClick={() => onNavigate('endless')} iconRight={<Ic.ArrowRight />}>무한 퀴즈로 연습</Btn>
             )}
