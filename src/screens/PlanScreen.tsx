@@ -182,8 +182,20 @@ export const PlanScreen = ({onNavigate}: any) => {
   const currentDay = planWithStatus.find(d => d.current)?.day ?? 21;
   const currentWeek = Math.min(3, Math.ceil(currentDay / 7));
 
-  const [week, setWeek] = React.useState(currentWeek);
-  React.useEffect(() => { setWeek(currentWeek); }, [currentWeek]);
+  // 사용자가 고른 week 는 sessionStorage 에 영속 — 기출/모의고사 들어갔다 뒤로
+  // 가도 같은 주차 유지. 처음 진입 시(저장 값 없음) 진도 기반 currentWeek 으로
+  // 시작. currentWeek 변경 시 자동 리셋하지 않음 (사용자 선택을 덮으면 안 됨).
+  const [week, setWeek] = React.useState<number>(() => {
+    try {
+      const saved = sessionStorage.getItem('sqlo_plan_week');
+      const n = saved != null ? Number(saved) : NaN;
+      if (n === 1 || n === 2 || n === 3) return n;
+    } catch {}
+    return currentWeek;
+  });
+  React.useEffect(() => {
+    try { sessionStorage.setItem('sqlo_plan_week', String(week)); } catch {}
+  }, [week]);
 
   const dDay = daysUntilExam();
   const dDayLabel =
