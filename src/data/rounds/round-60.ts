@@ -1836,13 +1836,7 @@ export const ROUND_60: QuizQuestion[] = [
     ],
     "correctIndex": 2,
     "explanation": "ROLLUP(A, B) 는 좌측에서 우측으로 점진적으로 그룹 키를 줄여가며 집계 — (A, B) → (A) → () 세 그룹만 산출. 따라서 A 를 건너뛰고 B 단독으로 묶는 그룹은 만들지 못한다. CUBE(A, B) 는 그룹 키 (A, B) 의 모든 부분집합 — (A, B), (A), (B), () 네 그룹 — 을 산출하므로 (B) 그룹 (= A 가 NULL 인 행) 도 포함된다. ① (A, B) 는 양쪽 모두 산출, ② (A, NULL) = (A) 그룹도 양쪽 모두 산출, ④ (NULL, NULL) = () 전체 총계도 양쪽 모두 산출. 오직 ③ (NULL, B) = (B) 단독 그룹 만이 CUBE 에만 등장한다.",
-    "_source": "authored",
-    "references": [
-      {
-        "type": "text",
-        "content": "ROLLUP(A, B): 좌→우 점진 집계. (A, B) → (A) → () 의 3 그룹.\nCUBE(A, B): 그룹 키의 모든 부분집합. (A, B), (A), (B), () 의 4 그룹.\n\n* (A) 그룹 = B 컬럼이 NULL 인 소계, (B) 그룹 = A 컬럼이 NULL 인 소계, () = 전체 총계."
-      }
-    ]
+    "_source": "authored"
   },
   {
     "id": 10048,
