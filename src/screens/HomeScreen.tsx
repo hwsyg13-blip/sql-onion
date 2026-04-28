@@ -6,6 +6,7 @@ import { EXAM_SETS } from '../data/quizBank';
 import { AdSlot } from '../components/AdSlot';
 import { useProgress, isPlanDayDone } from '../lib/progress';
 import { PLAN_DATA } from './PlanScreen';
+import { daysUntilExam } from '../lib/examDate';
 
 const EXAM_LABEL: Record<string, string> = Object.fromEntries(
   EXAM_SETS.map(s => [s.id, s.label])
@@ -134,12 +135,18 @@ export const HomeScreen = ({onNavigate, user}) => {
           <button onClick={()=>onNavigate("plan")} style={{background:"none",border:0,color:"var(--point-600)",fontSize:13,fontWeight:600,cursor:"pointer",fontFamily:"inherit"}}>3주 계획 보기 →</button>
         </div>
         <div className="home-stats-grid" style={{display:"grid",gridTemplateColumns:"repeat(4,1fr)",gap:14}}>
-          {[
-            {l:"학습 진도",   v:String(dayProgress), u:"/ 21일", c:"var(--point-600)"},
-            {l:"푼 문항",     v:String(stats.totalAttempts), u:"문항", c:"var(--info-fg)"},
-            {l:"정답률",      v:String(stats.correctRate), u:"%",   c:"var(--point-600)"},
-            {l:"완료 시험",   v:String(stats.examsDone), u:"회",   c:"var(--wrong-fg)"},
-          ].map((s,i)=>(
+          {(() => {
+            const dDay = daysUntilExam();
+            const dDayValue = dDay > 0 ? `D-${dDay}` : dDay === 0 ? 'D-DAY' : `D+${-dDay}`;
+            const dDayUnit  = dDay > 0 ? '남음' : dDay === 0 ? '오늘' : '경과';
+            const dDayColor = dDay <= 7 ? 'var(--wrong-fg)' : 'var(--point-600)';
+            return [
+              {l:"학습 진도", v:String(dayProgress),         u:"/ 21일", c:"var(--point-600)"},
+              {l:"푼 문항",   v:String(stats.totalAttempts), u:"문항",   c:"var(--info-fg)"},
+              {l:"정답률",    v:String(stats.correctRate),   u:"%",      c:"var(--point-600)"},
+              {l:"시험까지",  v:dDayValue,                   u:dDayUnit, c:dDayColor},
+            ];
+          })().map((s,i)=>(
             <div key={i}>
               <div style={{fontSize:12,color:"var(--fg-3)",fontWeight:600,marginBottom:6}}>{s.l}</div>
               <div style={{display:"flex",gap:4,alignItems:"baseline"}}>

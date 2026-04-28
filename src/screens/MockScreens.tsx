@@ -8,6 +8,7 @@ import { QuestionReferences, OptionReferences, renderInlineMd } from '../compone
 import { AdSlot } from '../components/AdSlot';
 import { BugReportModal } from '../components/BugReportModal';
 import { trackEvent } from '../lib/analytics';
+import { recordQuizAttempt } from '../lib/progress';
 
 // Endless Quiz — flashcard-esque: single question → grade → explanation → next
 // Also hosts Mock landing & Mock exam full 50-item timer mode
@@ -70,8 +71,18 @@ export const EndlessScreen = ({onNavigate}) => {
 
   const check = () => {
     if (selected == null) return;
+    const isCorrect = selected === q.correctIndex;
     setChecked(true); setOpen(true);
-    setStats(s => selected === q.correctIndex ? {...s, correct: s.correct+1} : {...s, wrong: s.wrong+1});
+    setStats(s => isCorrect ? {...s, correct: s.correct+1} : {...s, wrong: s.wrong+1});
+    // 홈 학습 현황(푼 문항·정답률) 에 반영. 같은 문항 재출제 시도 카운트 위해
+    // 시간 포함 unique 키 사용.
+    recordQuizAttempt(`endless-q${q.id}-${Date.now()}`, {
+      chosen: selected,
+      correct: isCorrect,
+      subject: q.subject,
+      number: q.number,
+      context: 'endless',
+    });
     // Track daily mock usage (skip in beta — no plans, no limits)
     if (!BETA_NO_AUTH) {
       try {
