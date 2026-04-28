@@ -11,12 +11,13 @@ import { EXAM_MAPPING } from '../data/miniTest/examMapping';
 import { QUIZ_BANK } from '../data/quizBank';
 import { Ic, Tag } from './Atoms';
 import { renderInlineMd } from './QuestionReferences';
+import { BugReportModal } from './BugReportModal';
 
 type SeqItem =
   | { type: 'ox'; data: { q: string; answer: boolean; explanation: string } }
   | { type: 'mc'; data: any /* QuizQuestion */ };
 
-export const MiniTestSidebar = ({ chapterId }: any) => {
+export const MiniTestSidebar = ({ chapterId, chapterLabel }: any) => {
   // 시퀀스 빌드 — OX 먼저, 그다음 연관 기출
   const seq: SeqItem[] = React.useMemo(() => {
     const items: SeqItem[] = [];
@@ -34,6 +35,7 @@ export const MiniTestSidebar = ({ chapterId }: any) => {
   // 풀이 누적 — 결과 요약용
   const [results, setResults] = React.useState<{ correct: number; total: number }>({ correct: 0, total: 0 });
   const [done, setDone] = React.useState(false);
+  const [bugOpen, setBugOpen] = React.useState(false);
 
   // 챕터가 바뀌면 초기화
   React.useEffect(() => {
@@ -109,6 +111,14 @@ export const MiniTestSidebar = ({ chapterId }: any) => {
             {cur.type === 'ox' ? 'OX 퀴즈' : '연관 기출'}
           </span>
           <span className="mt-progress">{idx + 1} / {seq.length}</span>
+          <button
+            className="mt-bug"
+            onClick={() => setBugOpen(true)}
+            title="이 문항의 오류를 제보"
+            aria-label="오류 제보"
+          >
+            오류
+          </button>
         </div>
 
         {cur.type === 'mc' && (
@@ -180,6 +190,23 @@ export const MiniTestSidebar = ({ chapterId }: any) => {
           </button>
         </div>
       </div>
+      {bugOpen && (
+        <BugReportModal
+          ctx={
+            cur.type === 'ox'
+              ? { kind: 'OX', chapter: chapterLabel || chapterId, title: cur.data.q }
+              : {
+                  kind: '문제',
+                  round: cur.data.round,
+                  subject: cur.data.subject,
+                  number: cur.data.number,
+                  examLabel: cur.data.examLabel || (cur.data.round ? `제${cur.data.round}회` : undefined),
+                  title: cur.data.title,
+                }
+          }
+          onClose={() => setBugOpen(false)}
+        />
+      )}
     </aside>
   );
 };

@@ -15,6 +15,11 @@ export type BugContext = {
   number?: number;
   examLabel?: string;
   title?: string;
+  /** 이론/미니테스트 같은 비-기출 컨텍스트용 라벨 (예: '1-1-4 관계'). 있으면
+   *  '회차' 자리 대신 '챕터' 로 표시. */
+  chapter?: string;
+  /** 디스플레이/payload 의 source 분류 (기본 '문제'). 이론은 '이론', OX 는 'OX'. */
+  kind?: '문제' | '이론' | 'OX';
 };
 
 export const BugReportModal = ({ ctx, onClose }: { ctx: BugContext; onClose: () => void }) => {
@@ -28,10 +33,12 @@ export const BugReportModal = ({ ctx, onClose }: { ctx: BugContext; onClose: () 
     setSending(true);
     setStatus('idle');
     const payload = {
+      kind: ctx.kind || '문제',
       round: ctx.round,
       subject: ctx.subject,
       number: ctx.number,
       examLabel: ctx.examLabel,
+      chapter: ctx.chapter,
       title: ctx.title,
       content: text.trim(),
       reportedAt: new Date().toISOString(),
@@ -106,9 +113,12 @@ export const BugReportModal = ({ ctx, onClose }: { ctx: BugContext; onClose: () 
           background: 'var(--bg-muted)', borderRadius: 10, padding: '10px 12px',
           fontSize: 12.5, color: 'var(--fg-2)', display: 'flex', flexWrap: 'wrap', gap: 8,
         }}>
-          {ctx.examLabel && <span><strong>회차</strong>: {ctx.examLabel}</span>}
+          {ctx.chapter
+            ? <span><strong>챕터</strong>: {ctx.chapter}</span>
+            : ctx.examLabel && <span><strong>회차</strong>: {ctx.examLabel}</span>}
           {ctx.subject && <span><strong>과목</strong>: {ctx.subject}</span>}
           {ctx.number != null && <span><strong>문항</strong>: {ctx.number}번</span>}
+          {ctx.title && <span><strong>제목</strong>: {ctx.title.length > 40 ? ctx.title.slice(0, 40) + '…' : ctx.title}</span>}
         </div>
 
         <textarea
