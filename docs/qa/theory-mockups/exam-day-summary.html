@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>시험 당일 핵심 총정리 — SQLD양파</title>
+<link rel="stylesheet" href="./common.css">
+<style>
+/* 시험 당일 cheat sheet 전용 */
+.day-toc {
+  margin: 0 0 28px; padding: 16px 20px;
+  background: linear-gradient(135deg, var(--point-050), var(--bg-card));
+  border: 1px solid var(--point-100); border-radius: 12px;
+  display: flex; gap: 8px; flex-wrap: wrap; align-items: center;
+  position: sticky; top: calc(var(--header-h) + 8px); z-index: 5;
+  box-shadow: var(--shadow-sm);
+}
+.day-toc .toc-label { font-size: 11px; font-weight: 800; color: var(--point-600); letter-spacing: 0.06em; margin-right: 4px; }
+.day-toc a {
+  font-size: 12.5px; font-weight: 700; color: var(--fg-2);
+  text-decoration: none; padding: 6px 12px;
+  background: var(--bg-card); border: 1px solid var(--border-subtle);
+  border-radius: 999px;
+  transition: background var(--duration-base), color var(--duration-base), border-color var(--duration-base);
+}
+.day-toc a:hover { background: var(--point-100); color: var(--point-600); border-color: var(--point-300); }
+
+.day-section { margin: 48px 0 0; padding-top: 32px; border-top: 1px solid var(--border-subtle); scroll-margin-top: calc(var(--header-h) + 80px); }
+.day-section:first-of-type { border-top: 0; padding-top: 0; margin-top: 0; }
+.day-section h2 {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 22px; font-weight: 800; color: var(--fg-1);
+  margin: 0 0 18px; padding: 0; letter-spacing: -0.01em;
+}
+.day-section h2 .num {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 28px; height: 28px; border-radius: 50%;
+  background: var(--point-100); color: var(--point-600);
+  font-size: 13px; font-weight: 900; flex-shrink: 0;
+}
+.day-section h3 {
+  font-size: 13px; font-weight: 800; color: var(--point-600);
+  letter-spacing: 0.04em; margin: 24px 0 10px;
+  padding: 0; border: 0;
+}
+.day-section h3:first-of-type { margin-top: 12px; }
+
+/* 챕터별 30초 미니 카드 */
+.day-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 8px 0 0; }
+.day-mini {
+  background: var(--bg-card);
+  border: 1px solid var(--point-100);
+  border-radius: 10px; padding: 12px 14px;
+  font-size: 12.5px; line-height: 1.55; color: var(--fg-2);
+}
+.day-mini .head {
+  font-size: 10.5px; font-weight: 800; color: var(--point-600);
+  letter-spacing: 0.04em; margin-bottom: 5px;
+}
+.day-mini strong { color: var(--fg-1); font-weight: 800; }
+.day-mini code {
+  background: var(--bg-code); padding: 1px 5px;
+  border-radius: 4px; font-size: 0.92em; font-family: var(--font-mono);
+}
+
+/* 빈출 함정 */
+.trap-list {
+  display: grid; grid-template-columns: 1fr; gap: 6px; margin: 12px 0 0;
+}
+.trap-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-left: 3px solid var(--wrong-fg);
+  padding: 10px 14px; border-radius: 6px;
+  font-size: 13px; line-height: 1.55; color: var(--fg-1);
+  transition: border-color var(--duration-base);
+}
+.trap-item:hover { border-color: var(--point-300); border-left-color: var(--wrong-fg); }
+.trap-item .num {
+  display: inline-block; width: 22px;
+  font-weight: 900; color: var(--wrong-fg); margin-right: 4px;
+  font-family: var(--font-mono);
+}
+.trap-item code {
+  background: var(--bg-code); padding: 1px 5px;
+  border-radius: 4px; font-size: 0.92em; font-family: var(--font-mono);
+  color: var(--fg-1);
+}
+.trap-item strong { color: var(--point-600); font-weight: 800; }
+
+/* 명령어 분류 4-칸 */
+.cmd-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin: 12px 0 0;
+}
+.cmd-card {
+  background: var(--bg-card); border: 1px solid var(--border-subtle);
+  border-radius: 12px; padding: 16px 14px; text-align: center;
+}
+.cmd-card .cmd-tag {
+  display: inline-block; font-size: 13px; font-weight: 900;
+  padding: 4px 12px; border-radius: 6px;
+  letter-spacing: 0.02em;
+  font-family: var(--font-mono);
+}
+.cmd-card .cmd-tag.tag-ddl { background: #FFF8E1; color: #8B6914; }
+.cmd-card .cmd-tag.tag-dml { background: var(--info-bg); color: var(--info-fg); }
+.cmd-card .cmd-tag.tag-dcl { background: var(--point-100); color: var(--point-600); }
+.cmd-card .cmd-tag.tag-tcl { background: var(--wrong-bg); color: var(--wrong-fg); }
+.cmd-card .cmd-list {
+  font-size: 12.5px; font-weight: 700; color: var(--fg-1);
+  margin: 8px 0 6px; line-height: 1.6;
+  font-family: var(--font-mono);
+}
+.cmd-card .cmd-note {
+  font-size: 11px; color: var(--fg-3); line-height: 1.4;
+}
+
+/* 체크리스트 */
+.checklist-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 12px 0 0; }
+.checklist-card {
+  background: linear-gradient(135deg, var(--point-050), var(--bg-card));
+  border: 1px solid var(--point-100); border-radius: 12px;
+  padding: 16px 18px;
+}
+.checklist-card .title {
+  font-size: 13px; font-weight: 800; color: var(--point-600);
+  letter-spacing: 0.02em; margin-bottom: 10px;
+  display: flex; align-items: center; gap: 6px;
+}
+.checklist-card ul { margin: 0; padding-left: 18px; font-size: 12.5px; color: var(--fg-2); line-height: 1.65; }
+.checklist-card li { margin: 4px 0; }
+.checklist-card li::marker { color: var(--point-500); font-weight: 700; }
+.checklist-card strong { color: var(--fg-1); }
+
+/* 마지막 격려 박스 */
+.final-msg {
+  margin: 56px 0 16px;
+  padding: 28px 24px;
+  background: linear-gradient(135deg, var(--point-100), var(--point-050));
+  border: 1px solid var(--point-300); border-radius: 14px;
+  text-align: center;
+}
+.final-msg .emoji { font-size: 32px; line-height: 1; margin-bottom: 8px; }
+.final-msg .msg-title { font-size: 18px; font-weight: 800; color: var(--point-600); margin-bottom: 6px; }
+.final-msg .msg-body { font-size: 13.5px; color: var(--fg-2); line-height: 1.6; }
+
+@media (max-width: 900px) {
+  .day-grid { grid-template-columns: repeat(2, 1fr); }
+  .cmd-grid { grid-template-columns: repeat(2, 1fr); }
+  .checklist-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 600px) {
+  .day-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="topnav-inner">
+    <div class="topnav-brand">SQLD양파</div>
+    <div class="topnav-links">
+      <a href="#">홈</a>
+      <a href="#" class="active">이론</a>
+      <a href="#">기출 CBT</a>
+      <a href="#">모의고사</a>
+      <a href="#">Pro</a>
+    </div>
+  </div>
+</nav>
+
+<main class="page-shell">
+  <div class="breadcrumb">
+    <a href="#">이론</a><span class="sep">›</span>
+    <a href="#">시험 대비</a><span class="sep">›</span>
+    <a href="#">시험 당일 총정리</a>
+  </div>
+
+  <header class="page-title-block">
+    <h1>시험 당일 핵심 총정리</h1>
+    <p class="subtitle">
+      시험 직전 5~10분 통독용. 챕터별 한 줄 정리 · 빈출 함정 TOP 30 · 명령어 분류 · 당일 체크리스트
+    </p>
+  </header>
+
+  <nav class="day-toc reveal">
+    <span class="toc-label">바로가기</span>
+    <a href="#summary">챕터 정리</a>
+    <a href="#traps">빈출 함정 30</a>
+    <a href="#cmds">명령어 분류</a>
+    <a href="#checklist">당일 체크</a>
+  </nav>
+
+  <article class="theory-md">
+
+  <!-- ── 1. 챕터별 30초 정리 ── -->
+  <section class="day-section" id="summary">
+    <h2><span class="num">1</span>챕터별 30초 정리</h2>
+
+    <h3>1과목 — 데이터 모델링의 이해</h3>
+    <div class="day-grid">
+      <div class="day-mini"><div class="head">1-1-1 데이터 모델</div><strong>개념 → 논리 → 물리</strong>. 정규화는 논리 단계.</div>
+      <div class="day-mini"><div class="head">1-1-2 엔터티</div>5대 특징 <strong>업·식·인·속·관</strong>. 인스턴스 ≥ 2, 속성 ≥ 2.</div>
+      <div class="day-mini"><div class="head">1-1-3 속성</div><strong>기본·설계·파생</strong>. 한 컬럼 한 값(원자성).</div>
+      <div class="day-mini"><div class="head">1-1-4 관계</div>1:1 / 1:N / <strong>M:N</strong>(분해 필요). 식별/비식별.</div>
+      <div class="day-mini"><div class="head">1-1-5 식별자</div>4대 조건 <strong>유·최·불·존</strong>. PK = UNIQUE + NOT NULL.</div>
+      <div class="day-mini"><div class="head">1-2-1 정규화</div>1NF→2NF→3NF→BCNF. <strong>부분종속=2NF / 이행종속=3NF</strong>.</div>
+      <div class="day-mini"><div class="head">1-2-2 관계와 조인</div><strong>관계 = FK = JOIN</strong>의 토대.</div>
+      <div class="day-mini"><div class="head">1-2-3 트랜잭션</div><strong>ACID</strong> — 원자성·일관성·고립성·지속성.</div>
+      <div class="day-mini"><div class="head">1-2-4 NULL</div><code>= NULL</code> 안 됨, <code>IS NULL</code>만. NULL+값=NULL. <strong>COUNT(*)만 NULL 포함</strong>.</div>
+      <div class="day-mini"><div class="head">1-2-5 본질·인조 식별자</div>본질=업무 키, 인조=대리키(SEQ). 인조는 모델 가독성↓.</div>
+    </div>
+
+    <h3>2과목 — SQL 기본 (2-1)</h3>
+    <div class="day-grid">
+      <div class="day-mini"><div class="head">2-1-1 RDB 개요</div><strong>DDL/DML/DCL/TCL</strong>. <code>TRUNCATE</code>=DDL, <code>DELETE</code>=DML.</div>
+      <div class="day-mini"><div class="head">2-1-2 SELECT문</div>작성 SFWGHO / <strong>실행 FWGHSO</strong>(FROM→WHERE→GROUP→HAVING→SELECT→ORDER).</div>
+      <div class="day-mini"><div class="head">2-1-3 함수</div>단일행/다중행. <strong>NVL · NVL2 · NULLIF · COALESCE</strong>.</div>
+      <div class="day-mini"><div class="head">2-1-4 WHERE절</div>AND > OR. BETWEEN <strong>양 끝 포함</strong>. LIKE <code>_</code>=1글자, <code>%</code>=0+.</div>
+      <div class="day-mini"><div class="head">2-1-5 GROUP BY/HAVING</div>WHERE는 집계 전, <strong>HAVING은 집계 후</strong>.</div>
+      <div class="day-mini"><div class="head">2-1-6 ORDER BY</div>Oracle ASC <strong>NULL 마지막</strong>, MS-SQL ASC NULL 처음.</div>
+      <div class="day-mini"><div class="head">2-1-7 조인</div>EQUI/Non-EQUI/SELF/OUTER/CROSS. <strong>OUTER 조건은 ON에</strong>.</div>
+      <div class="day-mini"><div class="head">2-1-8 표준 조인</div>NATURAL=같은 이름·타입 자동, USING=컬럼 명시.</div>
+    </div>
+
+    <h3>2과목 — SQL 활용 (2-2)</h3>
+    <div class="day-grid">
+      <div class="day-mini"><div class="head">2-2-1 서브쿼리</div>스칼라/인라인뷰/연관. <strong>ANY=최소 / ALL=최대</strong>.</div>
+      <div class="day-mini"><div class="head">2-2-2 집합 연산자</div>UNION 정렬·중복제거, <strong>UNION ALL 그대로</strong>. INTERSECT, MINUS.</div>
+      <div class="day-mini"><div class="head">2-2-3 그룹 함수</div><strong>ROLLUP N+1단계 / CUBE 2^N</strong>. GROUPING SETS는 골라보기.</div>
+      <div class="day-mini"><div class="head">2-2-4 윈도우 함수</div><strong>RANK(건너뜀) vs DENSE_RANK(연속)</strong>. PARTITION BY로 그룹별.</div>
+      <div class="day-mini"><div class="head">2-2-5 Top N</div>ROWNUM <strong>정렬 전 매겨짐</strong>. FETCH FIRST는 12c+, WITH TIES.</div>
+      <div class="day-mini"><div class="head">2-2-6 계층형 질의</div>START WITH ... CONNECT BY <strong>PRIOR</strong>. LEVEL 의사컬럼.</div>
+      <div class="day-mini"><div class="head">2-2-7 PIVOT/UNPIVOT</div>세로↔가로. PIVOT <strong>집계 필수</strong>, UNPIVOT NULL 기본 제외.</div>
+      <div class="day-mini"><div class="head">2-2-8 정규 표현식</div>REGEXP_LIKE/REPLACE/SUBSTR/INSTR/COUNT.</div>
+    </div>
+
+    <h3>2과목 — 관리 구문 (2-3)</h3>
+    <div class="day-grid">
+      <div class="day-mini"><div class="head">2-3-1 DML</div>INSERT/UPDATE/DELETE/<strong>MERGE</strong>. ROLLBACK 가능.</div>
+      <div class="day-mini"><div class="head">2-3-2 TCL</div>COMMIT/ROLLBACK/<strong>SAVEPOINT</strong>. ROLLBACK TO SP.</div>
+      <div class="day-mini"><div class="head">2-3-3 DDL</div>CREATE/ALTER/DROP/TRUNCATE/RENAME. <strong>자동 COMMIT</strong>.</div>
+      <div class="day-mini"><div class="head">2-3-4 DCL</div>GRANT/REVOKE. <strong>WITH GRANT OPTION</strong>(객체) / WITH ADMIN OPTION(시스템).</div>
+    </div>
+  </section>
+
+  <!-- ── 2. 빈출 함정 TOP 30 ── -->
+  <section class="day-section" id="traps">
+    <h2><span class="num">2</span>빈출 함정 TOP 30</h2>
+    <p style="font-size: 13px; color: var(--fg-3); margin-bottom: 4px;">출제 빈도 높은 함정 위주. 함정 → 정답·이유 한 줄.</p>
+    <div class="trap-list">
+      <div class="trap-item"><span class="num">01</span><code>NULL = NULL</code>의 결과는 <strong>UNKNOWN</strong>(FALSE 아님). WHERE에서는 행 제외.</div>
+      <div class="trap-item"><span class="num">02</span><code>WHERE COL = NULL</code> → <strong>결과 0건</strong>. 반드시 <code>IS NULL</code> 사용.</div>
+      <div class="trap-item"><span class="num">03</span><code>NULL + 100</code> = <strong>NULL</strong>. NULL과의 산술은 모두 NULL.</div>
+      <div class="trap-item"><span class="num">04</span><code>AVG(컬럼)</code>의 분모는 <strong>NULL 제외 개수</strong>. 0 포함 평균과 다름.</div>
+      <div class="trap-item"><span class="num">05</span><code>COUNT(*)</code>는 NULL 포함 / <code>COUNT(컬럼)</code>은 <strong>NULL 제외</strong>.</div>
+      <div class="trap-item"><span class="num">06</span><code>ROWNUM</code>은 <strong>정렬 전</strong> 매겨짐. 인라인뷰로 정렬 먼저.</div>
+      <div class="trap-item"><span class="num">07</span><code>ROWNUM = 5</code> → 결과 0건. <code>ROWNUM ≤ N</code> 또는 <code>= 1</code>만 가능.</div>
+      <div class="trap-item"><span class="num">08</span><code>ROWNUM &gt; N</code> → 항상 거짓(결과 0건).</div>
+      <div class="trap-item"><span class="num">09</span><code>TRUNCATE</code>=<strong>DDL</strong>. 자동 COMMIT, ROLLBACK 불가, 매우 빠름.</div>
+      <div class="trap-item"><span class="num">10</span><code>DELETE</code>=<strong>DML</strong>. ROLLBACK 가능, WHERE 가능.</div>
+      <div class="trap-item"><span class="num">11</span>DDL은 실행 즉시 <strong>자동 COMMIT</strong>. 펜딩 트랜잭션도 같이 커밋.</div>
+      <div class="trap-item"><span class="num">12</span>SELECT 실행 순서 = <strong>FROM → WHERE → GROUP → HAVING → SELECT → ORDER</strong>(FWGHSO).</div>
+      <div class="trap-item"><span class="num">13</span>OUTER JOIN 조건은 <strong>ON에</strong>. WHERE에 두면 NULL 행이 제외돼 INNER 효과.</div>
+      <div class="trap-item"><span class="num">14</span>NATURAL JOIN: 같은 <strong>이름·타입 컬럼</strong> 자동 조인. 이름 같고 타입 다르면 에러.</div>
+      <div class="trap-item"><span class="num">15</span>CROSS JOIN: 조인 조건 누락 시 카티션 곱. <strong>의도치 않으면 위험</strong>.</div>
+      <div class="trap-item"><span class="num">16</span><strong>RANK</strong>(1,1,3,4) vs <strong>DENSE_RANK</strong>(1,1,2,3) — RANK는 동률 다음 순위 건너뜀.</div>
+      <div class="trap-item"><span class="num">17</span>정규화: <strong>부분종속 → 2NF / 이행종속 → 3NF</strong>.</div>
+      <div class="trap-item"><span class="num">18</span>엔터티 조건: 인스턴스 <strong>≥ 2</strong>, 속성 <strong>≥ 2</strong>.</div>
+      <div class="trap-item"><span class="num">19</span><strong>PK</strong> = UNIQUE + NOT NULL, 1개만. <strong>UNIQUE</strong>는 NULL 허용, 여러 개 가능.</div>
+      <div class="trap-item"><span class="num">20</span>FK는 부모의 <strong>PK 또는 UNIQUE</strong> 컬럼만 참조 가능.</div>
+      <div class="trap-item"><span class="num">21</span><code>DECODE</code>는 <strong>동등비교만</strong>(=). <code>CASE</code>는 범위·논리 가능.</div>
+      <div class="trap-item"><span class="num">22</span><code>NVL2(A,B,C)</code> — A NOT NULL → B / NULL → <strong>C</strong>.</div>
+      <div class="trap-item"><span class="num">23</span><code>NULLIF(A,B)</code> — A=B면 <strong>NULL</strong>, 아니면 A.</div>
+      <div class="trap-item"><span class="num">24</span><code>COALESCE(...)</code> — <strong>NULL이 아닌 첫 값</strong> 반환.</div>
+      <div class="trap-item"><span class="num">25</span>ROLLUP(A,B): N+1 = <strong>3단계</strong> — (A,B), (A), ().</div>
+      <div class="trap-item"><span class="num">26</span>CUBE(A,B): 2^N = <strong>4단계</strong> — 모든 조합.</div>
+      <div class="trap-item"><span class="num">27</span><code>UNION</code>은 정렬+중복제거(느림), <code>UNION ALL</code>은 그대로(빠름).</div>
+      <div class="trap-item"><span class="num">28</span><code>ROLLBACK TO SP1</code> → SP1 <strong>이후 작업만 취소</strong>. 이전 작업은 유지.</div>
+      <div class="trap-item"><span class="num">29</span>GROUP BY 사용 시 SELECT의 <strong>일반 컬럼은 GROUP BY에 명시</strong> 필수(집계 함수는 예외).</div>
+      <div class="trap-item"><span class="num">30</span><strong>ANY</strong>=최소값 기준(작아도 됨) / <strong>ALL</strong>=최대값 기준(가장 커야 됨).</div>
+    </div>
+  </section>
+
+  <!-- ── 3. 명령어 분류 ── -->
+  <section class="day-section" id="cmds">
+    <h2><span class="num">3</span>명령어 분류 한 장 정리</h2>
+    <p style="font-size: 13px; color: var(--fg-3); margin-bottom: 4px;">시험에서 가장 자주 묻는 분류. 자동 COMMIT 여부 주의.</p>
+    <div class="cmd-grid">
+      <div class="cmd-card">
+        <div class="cmd-tag tag-ddl">DDL</div>
+        <div class="cmd-list">CREATE · ALTER<br>DROP · TRUNCATE<br>RENAME</div>
+        <div class="cmd-note">자동 COMMIT<br>ROLLBACK 불가</div>
+      </div>
+      <div class="cmd-card">
+        <div class="cmd-tag tag-dml">DML</div>
+        <div class="cmd-list">INSERT · UPDATE<br>DELETE · MERGE<br>(SELECT)</div>
+        <div class="cmd-note">ROLLBACK 가능<br>TCL로 확정</div>
+      </div>
+      <div class="cmd-card">
+        <div class="cmd-tag tag-dcl">DCL</div>
+        <div class="cmd-list">GRANT<br>REVOKE</div>
+        <div class="cmd-note">자동 COMMIT<br>권한 관리</div>
+      </div>
+      <div class="cmd-card">
+        <div class="cmd-tag tag-tcl">TCL</div>
+        <div class="cmd-list">COMMIT<br>ROLLBACK<br>SAVEPOINT</div>
+        <div class="cmd-note">트랜잭션 제어</div>
+      </div>
+    </div>
+
+    <h3>주의 — 시험에 단골</h3>
+    <div class="trap-list">
+      <div class="trap-item"><span class="num">!</span><strong>TRUNCATE는 DDL</strong>(DML 아님) — 자동 COMMIT, ROLLBACK 불가, WHERE 불가.</div>
+      <div class="trap-item"><span class="num">!</span><strong>DELETE는 DML</strong>(DDL 아님) — ROLLBACK 가능, WHERE 가능, 느림.</div>
+      <div class="trap-item"><span class="num">!</span>DROP은 객체 자체 제거. TRUNCATE는 데이터만 비우고 구조 유지.</div>
+      <div class="trap-item"><span class="num">!</span>DCL <code>GRANT</code>도 자동 COMMIT (별도 COMMIT 불필요).</div>
+    </div>
+  </section>
+
+  <!-- ── 4. 시험 당일 체크리스트 ── -->
+  <section class="day-section" id="checklist">
+    <h2><span class="num">4</span>시험 당일 체크리스트</h2>
+    <div class="checklist-grid">
+      <div class="checklist-card">
+        <div class="title">📋 준비물</div>
+        <ul>
+          <li><strong>신분증</strong>(필수 — 없으면 응시 불가)</li>
+          <li>수험표 출력본</li>
+          <li>컴퓨터용 사인펜 또는 검정 볼펜 2자루</li>
+          <li>수정테이프(필요 시)</li>
+          <li>아날로그 시계(스마트워치 X)</li>
+        </ul>
+      </div>
+      <div class="checklist-card">
+        <div class="title">⏰ 시간 관리</div>
+        <ul>
+          <li>시험 시작 <strong>30분 전 도착</strong></li>
+          <li>총 시험 시간 <strong>50분</strong>, 50문항</li>
+          <li>1문항 평균 <strong>1분</strong> — 길게 안 끌기</li>
+          <li>막히면 일단 ① 표시 후 다음으로</li>
+          <li>마지막 5분 OMR 검토</li>
+        </ul>
+      </div>
+      <div class="checklist-card">
+        <div class="title">💪 컨디션</div>
+        <ul>
+          <li>전날 <strong>충분한 수면</strong>(밤샘 X)</li>
+          <li>아침 가벼운 식사</li>
+          <li>커피·차는 평소 양만</li>
+          <li>화장실 시험 전 미리</li>
+          <li>긴장될 땐 깊게 호흡 3번</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3>마음가짐</h3>
+    <div class="trap-list">
+      <div class="trap-item"><span class="num">★</span>모르는 문제가 보여도 당황 X. 보기만 봐도 답이 좁혀지는 경우 많음.</div>
+      <div class="trap-item"><span class="num">★</span>함정 패턴(NULL, ROWNUM, ON vs WHERE) 떠올리면서 침착하게.</div>
+      <div class="trap-item"><span class="num">★</span>완전히 막히면 패스 후 끝까지 푼 다음 돌아오기.</div>
+      <div class="trap-item"><span class="num">★</span>합격 기준 60점(60/100). <strong>킬러 문제 욕심 X</strong>, 풀 수 있는 문제부터.</div>
+    </div>
+  </section>
+
+  <div class="final-msg reveal">
+    <div class="emoji">🧅</div>
+    <div class="msg-title">행운을 빕니다!</div>
+    <div class="msg-body">
+      양파처럼 한 겹씩 차근차근 벗겨내며 풀어보세요.<br>
+      여러분의 합격을 응원합니다.
+    </div>
+  </div>
+
+  </article>
+</main>
+
+<script src="./common.js"></script>
+</body>
+</html>
