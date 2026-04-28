@@ -329,7 +329,7 @@ export const TimelineView = ({week, data, onAction}: any) => {
           }}>
             <div style={{display:"flex",gap:6,marginBottom:8,alignItems:'center',flexWrap:'wrap'}}>
               <Tag tone={d.subj==="1과목"||d.subj==="2과목"?"green":d.subj==="기출"?"blue":d.subj==="모의"?"peach":"neutral"} size="sm">{d.subj}</Tag>
-              {d.current && <Tag tone="solid" size="sm">오늘</Tag>}
+              {d.current && <Tag tone="solid" size="sm">To-Do</Tag>}
               {d.done && <Tag tone="neutral" size="sm">완료</Tag>}
               <span style={{fontSize:11,color:'var(--fg-4)',fontFamily:'var(--font-mono)'}}>{recommendedDateLabel(d.day)}</span>
               <span style={{marginLeft:'auto',display:"flex",alignItems:"center",gap:4,fontSize:12,color:"var(--fg-3)",fontFamily:"var(--font-mono)"}}>
