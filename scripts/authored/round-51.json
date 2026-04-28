@@ -30,7 +30,7 @@
       "references": [
         {
           "type": "erd",
-          "caption": "고객-주문 ERD (고객 측 1 필수, 주문 측 0..N — 주문은 고객이 반드시 필요)",
+          "caption": "고객-주문 ERD",
           "mermaid": "erDiagram\n    고객 ||--o{ 주문 : \"한다\""
         }
       ]
@@ -167,7 +167,7 @@
       "references": [
         {
           "type": "table",
-          "caption": "T 테이블 (일자별 매출 — 2023-11-02 가 두 행 존재)",
+          "caption": "T 테이블 (일자별 매출)",
           "headers": ["일자", "금액"],
           "rows": [
             ["2023-11-01", "100"],
@@ -431,7 +431,7 @@
     {
       "subject": "2과목",
       "number": 23,
-      "title": "아래 SQL 의 결과로 옳은 것은?",
+      "title": "아래 T 테이블에 대한 SQL 의 결과로 옳은 것은?",
       "options": [
         "전체 행",
         "COL1 = 'CPG' 인 행",
@@ -439,8 +439,19 @@
         "조건을 만족하는 행 없음 (결과 없음)"
       ],
       "correctIndex": 3,
-      "explanation": "원본 기출의 조건을 만족하는 행이 없는 경우를 묻는 문항이다.",
+      "explanation": "표의 모든 행은 COL1 = 'CPG' 이거나 COL2 ≤ 10 이라 `COL1 <> 'CPG' AND COL2 > 10` 두 조건을 동시에 만족하는 행이 없다.",
       "references": [
+        {
+          "type": "table",
+          "caption": "T 테이블",
+          "headers": ["COL1", "COL2"],
+          "rows": [
+            ["CPG", "5"],
+            ["CPG", "20"],
+            ["ABC", "3"],
+            ["XYZ", "8"]
+          ]
+        },
         {
           "type": "sql",
           "code": "SELECT * FROM T\nWHERE COL1 <> 'CPG' AND COL2 > 10;"
@@ -495,11 +506,11 @@
         "'마...', 100"
       ],
       "correctIndex": 2,
-      "explanation": "ROUND(값, 1) 은 소수 첫째 자리까지 반올림하며 109 가 그대로 유지된다.",
+      "explanation": "SUBSTR('...의 마...', 4, 3) 은 4번째 문자부터 3글자를 추출 → '의 마'. ROUND(109, 1) 은 소수 첫째 자리까지 반올림하지만 정수 109 는 변환할 소수가 없으므로 109 가 그대로 유지된다.",
       "references": [
         {
           "type": "sql",
-          "code": "SELECT SUBSTR('...의 마...', 3, 3), ROUND(109, 1) FROM DUAL;"
+          "code": "SELECT SUBSTR('...의 마...', 4, 3), ROUND(109, 1) FROM DUAL;"
         }
       ]
     },
@@ -575,15 +586,28 @@
     {
       "subject": "2과목",
       "number": 29,
-      "title": "아래 네 SQL 중 결과가 나머지와 다른 것은?",
+      "title": "아래 EMP 테이블에 대해 다음 네 SQL 을 수행한 RNK 결과 중 나머지와 다른 것은?",
       "options": [
-        "RANK() 를 이용한 순위 쿼리",
-        "DENSE_RANK() 를 이용한 순위 쿼리",
-        "ROW_NUMBER() 를 이용한 순위 쿼리",
-        "NTILE() 를 이용한 순위 쿼리"
+        "`RANK() OVER (ORDER BY SAL DESC)`",
+        "`DENSE_RANK() OVER (ORDER BY SAL DESC)`",
+        "`ROW_NUMBER() OVER (ORDER BY SAL DESC)`",
+        "`NTILE(4) OVER (ORDER BY SAL DESC)`"
       ],
       "correctIndex": 1,
-      "explanation": "RANK·ROW_NUMBER·NTILE 은 동순위 처리 방식과 그룹 분배 방식이 달라도 본 데이터에서는 동일한 시퀀스를 만들지만, DENSE_RANK 는 동순위 다음 순번을 건너뛰지 않으므로 나머지와 다른 결과를 반환한다."
+      "explanation": "EMP 데이터에 동일 SAL이 두 행 있을 때:\n- RANK: 1, 2, 2, 4 (동률 다음 순위 건너뜀)\n- DENSE_RANK: 1, 2, 2, 3 (다음 순위 건너뛰지 않음)\n- ROW_NUMBER: 1, 2, 3, 4 (동률 무관 순차)\n- NTILE(4): 1, 2, 3, 4 (4개 그룹 균등 분배)\n\n결과: ②(DENSE_RANK)만 1, 2, 2, 3을 반환하고 나머지는 모두 4라는 마지막 값을 가진다.",
+      "references": [
+        {
+          "type": "table",
+          "caption": "EMP 테이블",
+          "headers": ["EMPNO", "SAL"],
+          "rows": [
+            ["1", "5000"],
+            ["2", "4000"],
+            ["3", "4000"],
+            ["4", "3000"]
+          ]
+        }
+      ]
     },
     {
       "subject": "2과목",
@@ -627,13 +651,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "CREATE TABLE T1 (\n  MAIN  INT IDENTITY(1,1),\n  VALUE INT CHECK (VALUE >= 3)\n);\n\nINSERT INTO T1 VALUES(1);   -- CHECK 위반 실패\nINSERT INTO T1 VALUES(2);   -- CHECK 위반 실패\nINSERT INTO T1 VALUES(3);   -- 통과\n\nSELECT COUNT(*) FROM T1;"
-        },
-        {
-          "type": "table",
-          "caption": "T1 최종 상태 (CHECK VALUE >= 3 통과 행만)",
-          "headers": ["MAIN", "VALUE"],
-          "rows": [["1", "3"]]
+          "code": "CREATE TABLE T1 (\n  MAIN  INT IDENTITY(1,1),\n  VALUE INT CHECK (VALUE >= 3)\n);\n\nINSERT INTO T1 VALUES(1);\nINSERT INTO T1 VALUES(2);\nINSERT INTO T1 VALUES(3);\n\nSELECT COUNT(*) FROM T1;"
         }
       ]
     },
@@ -690,7 +708,7 @@
         },
         {
           "type": "sql",
-          "code": "INSERT INTO T VALUES (1);\nINSERT INTO T VALUES (2);\nINSERT INTO T VALUES (3);   -- T = (1, 2, 3)\nSAVEPOINT P1;\nINSERT INTO T VALUES (4);   -- T = (1, 2, 3, 4)\nROLLBACK TO SAVEPOINT P1;   -- T = (1, 2, 3) 로 복원\n\nSELECT * FROM T;"
+          "code": "INSERT INTO T VALUES (1);\nINSERT INTO T VALUES (2);\nINSERT INTO T VALUES (3);\nSAVEPOINT P1;\nINSERT INTO T VALUES (4);\nROLLBACK TO SAVEPOINT P1;\n\nSELECT * FROM T;"
         }
       ]
     },
