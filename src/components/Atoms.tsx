@@ -87,7 +87,7 @@ export const CodeBlock = ({children, style}: any) => (
     fontFamily: "var(--font-mono)", fontSize: 13.5, lineHeight: 1.7,
     background: "var(--bg-code)", color: "var(--fg-1)",
     padding: "14px 18px", borderRadius: 12, border: "1px solid var(--border-subtle)",
-    overflowX: "auto", margin: "12px 0", whiteSpace: "pre", tabSize: 2,
+    overflowX: "auto", margin: "12px 0", whiteSpace: "pre-wrap", wordBreak: "break-word", tabSize: 2,
     ...style,
   }}>{typeof children === "string" ? highlightSQL(children) : children}</pre>
 );
