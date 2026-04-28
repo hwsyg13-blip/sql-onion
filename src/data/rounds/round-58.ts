@@ -130,13 +130,13 @@ export const ROUND_58: QuizQuestion[] = [
       "마더보드의 주식별자는 컴퓨터 번호와 별개로 구성된다."
     ],
     "correctIndex": 1,
-    "explanation": "양쪽 참여가 필수이므로 컴퓨터는 반드시 마더보드를 가진다. 마더보드 사용 여부가 선택 사항이라는 서술은 ERD와 어긋난다.",
+    "explanation": "양쪽 참여가 필수(1:1 필수) 이므로 컴퓨터는 반드시 마더보드를 가진다. ② 마더보드 사용 여부가 선택 사항이라는 서술은 ERD 와 어긋남 (옳지 않은 정답). ① 1:1 이라 한 마더보드는 한 컴퓨터에만, 옳음. ③ 비식별 관계로 해석하면 마더보드 PK 가 별도라 독립 가능 — 일반적으로 옳음. ④ ERD 의 컬럼 정의에서 마더보드 PK = '마더보드번호' 로 컴퓨터번호와 별개 식별자, 옳음.",
     "_source": "authored",
     "references": [
       {
         "type": "erd",
-        "caption": "컴퓨터-마더보드 ERD (1:1 필수 — 양쪽 모두 필수 1)",
-        "mermaid": "erDiagram\n    컴퓨터 ||--|| 마더보드 : \"포함\""
+        "caption": "컴퓨터-마더보드 ERD (1:1 필수 — 양쪽 모두 필수 1, 별도 PK)",
+        "mermaid": "erDiagram\n    컴퓨터 ||--|| 마더보드 : \"포함\"\n    컴퓨터 {\n        string 컴퓨터번호 PK\n        string 모델명\n    }\n    마더보드 {\n        string 마더보드번호 PK\n        string 컴퓨터번호 FK\n    }"
       }
     ]
   },
@@ -305,20 +305,20 @@ export const ROUND_58: QuizQuestion[] = [
     "round": 58,
     "subject": "2과목",
     "number": 11,
-    "title": "아래 함수 호출의 결과 중 나머지와 다른 것은?",
+    "title": "아래 함수 호출의 결과 중 나머지와 다른 것은? (표준 SQL 기준)",
     "options": [
-      "LTRIM('xxSQL', 'x')",
-      "RTRIM('SQLxx', 'x')",
-      "REPLACE('xxSQLxx', 'x')",
-      "TRIM('x' FROM 'xxSQLxx')"
+      "`LTRIM('xxSQL', 'x')`",
+      "`RTRIM('SQLxx', 'x')`",
+      "`REPLACE('xxSQLxx', 'x', 'Y')`",
+      "`TRIM('x' FROM 'xxSQLxx')`"
     ],
     "correctIndex": 2,
-    "explanation": "표준 SQL의 REPLACE 함수는 세 번째 인자(치환 문자열)를 요구하므로 두 인자만으로 호출하면 구문 오류가 발생한다. 나머지는 모두 'SQL' 결과를 반환한다.",
+    "explanation": "① `LTRIM('xxSQL','x')` → 왼쪽 'x' 제거 → 'SQL'. ② `RTRIM('SQLxx','x')` → 오른쪽 'x' 제거 → 'SQL'. ③ `REPLACE('xxSQLxx','x','Y')` → 'x' 를 모두 'Y' 로 치환 → 'YYSQLYY'. ④ `TRIM('x' FROM 'xxSQLxx')` → 양쪽 'x' 제거 → 'SQL'. ①②④ 는 'SQL' 반환, ③ 만 'YYSQLYY' 로 결과가 다르다.",
     "_source": "authored",
     "references": [
       {
         "type": "sql",
-        "code": "-- 대상 문자열: 'xxSQLxx'\n-- 기준 문자: 'x'"
+        "code": "-- 대상 문자열: 'xxSQLxx'\n-- 기준 문자: 'x'\n-- ① LTRIM('xxSQL','x')           → 'SQL'\n-- ② RTRIM('SQLxx','x')           → 'SQL'\n-- ③ REPLACE('xxSQLxx','x','Y')   → 'YYSQLYY'\n-- ④ TRIM('x' FROM 'xxSQLxx')     → 'SQL'"
       }
     ]
   },
@@ -893,20 +893,20 @@ export const ROUND_58: QuizQuestion[] = [
     "round": 58,
     "subject": "2과목",
     "number": 24,
-    "title": "아래 네 개의 조인 중 나머지와 결과가 다른 하나는?",
+    "title": "아래 네 개의 조인/조회 방식 중 나머지와 결과가 다른 하나는? (두 테이블 A, B 모두 ID 외에도 동일 이름 컬럼 NAME 을 추가로 가진다고 가정)",
     "options": [
-      "NATURAL JOIN",
-      "USING",
-      "ON 조건 사용",
-      "WHERE IN"
+      "`A NATURAL JOIN B` (동일 이름 컬럼 모두로 자동 조인)",
+      "`A INNER JOIN B USING (ID)` (USING 으로 ID 만 명시)",
+      "`A JOIN B ON A.ID = B.ID` (ON 으로 ID 만 명시)",
+      "`SELECT * FROM A WHERE A.ID IN (SELECT ID FROM B)` (WHERE IN 서브쿼리)"
     ],
     "correctIndex": 0,
-    "explanation": "NATURAL JOIN은 동일 이름의 모든 컬럼을 기준으로 자동 조인하므로, 일치하는 컬럼이 여러 개일 경우 USING·ON과 결과가 달라질 수 있다.",
+    "explanation": "두 테이블에 동일 이름 컬럼이 ID 외에 NAME 도 있다고 가정. ① NATURAL JOIN 은 ID 와 NAME 모두를 자동 조인 조건으로 사용 → ID 가 같아도 NAME 이 다르면 매칭 실패. ②③ 은 ID 만 조인 조건이라 NAME 무관. ④ 는 A 의 ID 가 B 의 ID 에 존재하는지만 확인. 결과적으로 ① 만 NAME 까지 매칭이 필요해 다른 셋과 결과가 달라질 수 있다.",
     "_source": "authored",
     "references": [
       {
         "type": "text",
-        "content": "㉠ `INNER JOIN USING ( ID )`\n㉡ `JOIN ON A.ID = B.ID`\n㉢ `NATURAL JOIN`\n㉣ `WHERE IN`(상관 서브쿼리)"
+        "content": "전제: 두 테이블 A, B 가 ID 컬럼 외에 동일 이름 NAME 컬럼도 가지며, NAME 값은 행마다 일치하지 않을 수 있다."
       }
     ]
   },
@@ -1584,20 +1584,20 @@ export const ROUND_58: QuizQuestion[] = [
     "round": 58,
     "subject": "2과목",
     "number": 46,
-    "title": "아래 SQL에서 NULL이 NULL이 아닌 결과로 반환되는 것은?",
+    "title": "아래 네 개의 NULL 관련 함수 호출 중 결과가 NULL 이 아닌 것은?",
     "options": [
-      "㉠",
-      "㉣",
-      "㉡",
-      "㉢"
+      "`COALESCE(NULL, NULL)`",
+      "`NVL(NULL, 0)`",
+      "`NVL(NULL, NULL)`",
+      "`NULLIF(1, 1)`"
     ],
     "correctIndex": 1,
-    "explanation": "NVL(NULL, 0)만 0이라는 값을 반환한다. 나머지는 모두 NULL 을 반환한다.",
+    "explanation": "② `NVL(NULL, 0)` 만 NULL 을 0 으로 치환하여 0 을 반환한다. ① `COALESCE(NULL, NULL)` 은 모든 인자가 NULL 이라 NULL, ③ `NVL(NULL, NULL)` 도 NULL, ④ `NULLIF(1, 1)` 은 두 인자가 같으면 NULL 반환이라 NULL.",
     "_source": "authored",
     "references": [
       {
         "type": "sql",
-        "code": "-- ㉠ COALESCE(NULL, NULL)\n-- ㉡ NVL(NULL, NULL)\n-- ㉢ NULLIF(1, 1)\n-- ㉣ NVL(NULL, 0)"
+        "code": "-- 각 호출의 결과:\n-- ① COALESCE(NULL, NULL) → NULL\n-- ② NVL(NULL, 0)        → 0      ← 정답\n-- ③ NVL(NULL, NULL)     → NULL\n-- ④ NULLIF(1, 1)        → NULL"
       }
     ]
   },
