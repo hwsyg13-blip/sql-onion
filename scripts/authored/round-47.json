@@ -24,7 +24,7 @@
     {
       "subject": "1과목",
       "number": 2,
-      "title": "아래 ERD 해석 중 옳지 않은 것은? (고객은 여러 서비스를 이용하며 동일 서비스를 재이용할 수 있다.) <div style=\"display: flex; align-items: center; justify-content: center; gap: 12px; font-family: monospace; margin: 12px 0;\"> <span>||────&lt;</span> <span>&gt;────||</span> </div>",
+      "title": "아래 ERD 해석 중 옳지 않은 것은? (고객은 여러 서비스를 이용하며 동일 서비스를 재이용할 수 있다.)",
       "options": [
         "고객과 서비스는 M:N 관계이다.",
         "서비스이용 엔터티가 중간 엔터티로 존재한다.",
