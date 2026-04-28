@@ -516,10 +516,6 @@ export const CBTExam = ({examId = "round-60", onFinish, onNavigate, onExit, mock
 
             <div style={{padding:"16px 28px 22px",display:"flex",gap:8,flexWrap:"wrap",justifyContent:"flex-end"}}>
               <Btn variant="ghost" onClick={()=>onNavigate("home")}>홈으로</Btn>
-              <Btn variant="outline" icon={<Ic.Refresh/>} onClick={()=>{
-                // 같은 examId 로 다시 풀기 — App 가 cbt 라우트로 재진입
-                onNavigate("cbt", examId);
-              }}>다시 풀기</Btn>
               <Btn onClick={()=>setResultOpen(false)} iconRight={<Ic.ArrowRight/>}>해설 보기</Btn>
             </div>
           </div>
