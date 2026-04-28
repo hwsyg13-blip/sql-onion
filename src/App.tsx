@@ -4,6 +4,7 @@ import { OnionMark, Ic } from './components/Atoms';
 import { TopNav, MobileNav } from './components/TopNav';
 import { Footer } from './components/Footer';
 import { AdSidebar } from './components/AdSlot';
+import { ErrorBoundary } from './components/ErrorBoundary';
 import { HomeScreen } from './screens/HomeScreen';
 import { LoginScreen } from './screens/LoginScreen';
 import { PricingScreen, SubscribeFlow, Paywall, sqloUsage } from './screens/PricingScreen';
@@ -246,29 +247,11 @@ export const App = () => {
 
   // 로그인 화면만 TopNav 숨김. CBT/모의 중 나가기는 CBTExam 내부 상단 바에 통합.
   const hideTopBar = (route === 'login');
-  const showExitHeader = false;
 
   return (
     <>
       {!hideTopBar && <TopNav route={route} onNavigate={navigate} dark={tweaks.theme === 'dark'} onToggleDark={toggleDark} user={BETA_NO_AUTH ? null : user} onLogout={handleLogout} betaNoAuth={BETA_NO_AUTH}/>}
-      {showExitHeader && (
-        <header style={{
-          height: 48, background: 'var(--bg-surface)', borderBottom: '1px solid var(--border-subtle)',
-          display: 'flex', alignItems: 'center', padding: '0 20px', gap: 14,
-          /* TopNav(64px) 바로 아래에 붙도록 */
-          position: 'sticky', top: 64, zIndex: 40,
-        }}>
-          <button onClick={() => navigate(exitReturnRoute || 'home')}
-            style={{ background: 'var(--bg-card)', border: '1px solid var(--border-default)', borderRadius: 10, padding: '6px 11px', fontFamily: 'inherit', fontSize: 12.5, cursor: 'pointer', color: 'var(--fg-2)', display: 'inline-flex', alignItems: 'center', gap: 6 }}>
-            <Ic.ArrowLeft size={13}/> 나가기
-          </button>
-          <div style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 12, color: 'var(--fg-3)' }}>
-            <Ic.Clock size={13}/>
-            <span style={{ fontWeight: 600 }}>시험 진행 중</span>
-          </div>
-        </header>
-      )}
-      {screen}
+      <ErrorBoundary resetKey={route}>{screen}</ErrorBoundary>
       {paywall && !BETA_NO_AUTH && (
         <Paywall
           kind={paywall.kind}
@@ -279,7 +262,7 @@ export const App = () => {
           onNavigate={(to: string) => { setPaywall(null); navigate(to); }}
         />
       )}
-      {!hideTopBar && !showExitHeader && <Footer/>}
+      {!hideTopBar && <Footer/>}
       {!hideTopBar && <MobileNav route={route} onNavigate={navigate}/>}
       {/* 사이드 광고 — PC 와이드 화면 전용 (≥1280px). 시험 중·로그인 화면 제외 */}
       {!hideTopBar && route !== 'cbt' && route !== 'mock-exam' && <AdSidebar slot="SIDEBAR_RIGHT"/>}
