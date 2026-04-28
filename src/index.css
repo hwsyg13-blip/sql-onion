@@ -1490,11 +1490,14 @@ html, body { overflow-x: hidden; }
   /* article 본문 자식이 viewport 넘지 않도록 — 강제 max-width */
   .theory-md > * { max-width: 100%; }
 
-  /* 표 — 가로 스크롤 가능한 wrapper 효과 */
+  /* 표 — 가로 스크롤 가능한 wrapper 효과.
+     width: max-content 로 좁은 표는 콘텐츠 폭만 차지(오른쪽 빈박스 방지),
+     넓은 표는 max-width: 100% 로 viewport 안 잡힌 뒤 overflow-x 로 스크롤. */
   .theory-md table {
     display: block;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
+    width: max-content;
     max-width: 100%;
   }
   .theory-md table th, .theory-md table td { white-space: nowrap; }

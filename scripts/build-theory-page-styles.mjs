@@ -39,6 +39,10 @@ for (const f of files) {
   // .reveal 룰은 src/index.css 의 전역 override 로 통일 (opacity:1 강제) — 시안의 opacity:0
   // 룰이 여기 섞여 들어오면 cascade 후행 우선으로 본문이 영구 invisible 됨.
   body = body.replace(/\.reveal(\.is-visible)?\s*\{[^}]*\}\s*/g, '');
+  // .theory-md table* 베이스 룰도 src/index.css 가 단일 출처. 시안 head <style> 마다 동일
+  // 룰이 박혀 있어 추출되면 중복 베이스 룰이 index.css 의 모바일 @media (width: max-content) 를
+  // cascade 후행 우선으로 덮어써, 좁은 표 오른쪽에 빈 박스가 생기는 버그 발생.
+  body = body.replace(/\.theory-md\s+table[^{,]*\{[^}]*\}\s*/g, '');
   // 시안의 inline style="grid-template-columns: ..." 가 미디어쿼리 룰을 덮어쓰는 문제 해결.
   // @media 블록 안의 grid-template-columns 에 !important 자동 부착 — balanced brace 처리.
   body = (() => {

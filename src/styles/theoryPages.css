@@ -213,29 +213,6 @@ html, body { margin: 0; background: var(--bg-page); color: var(--fg-2); font-fam
 .sql-num { color: var(--info-fg); }
 
 /* 표 */
-.theory-md table {
-  width: 100%; border-collapse: separate; border-spacing: 0;
-  margin: 16px 0 22px; font-size: 13.5px;
-  border: 1px solid var(--border-subtle); border-radius: 12px; overflow: hidden;
-  background: var(--bg-card); box-shadow: 0 1px 3px rgba(0,0,0,0.04);
-}
-.theory-md table thead { background: var(--point-050); }
-.theory-md table thead th {
-  text-align: left; padding: 12px 16px;
-  color: var(--point-600); font-weight: 800;
-  border-bottom: 2px solid var(--point-100);
-  font-size: 12.5px; letter-spacing: -0.01em; white-space: nowrap;
-}
-.theory-md table tbody td {
-  padding: 11px 16px; border-bottom: 1px solid var(--border-subtle);
-  color: var(--fg-2); vertical-align: top; line-height: 1.65;
-}
-.theory-md table tbody tr:last-child td { border-bottom: 0; }
-.theory-md table tbody tr:nth-child(even) { background: rgba(240,247,241,0.4); }
-.theory-md table tbody tr:hover { background: var(--point-050); }
-.theory-md table tbody td:first-child { color: var(--fg-1); font-weight: 700; }
-.theory-md table code { background: var(--point-050); color: var(--point-600); padding: 1px 6px; border-radius: 4px; font-size: 0.9em; font-weight: 600; }
-
 /* ============================================================
    ★ 새 인포그래픽 컴포넌트 (시안 핵심)
    ============================================================ */
@@ -717,16 +694,6 @@ html, body { margin: 0; background: var(--bg-page); color: var(--fg-2); font-fam
 .sql-num { color: var(--info-fg); }
 
 /* 표 */
-.theory-md table { width: 100%; border-collapse: separate; border-spacing: 0; margin: 16px 0 22px; font-size: 13.5px; border: 1px solid var(--border-subtle); border-radius: 12px; overflow: hidden; background: var(--bg-card); box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
-.theory-md table thead { background: var(--point-050); }
-.theory-md table thead th { text-align: left; padding: 12px 16px; color: var(--point-600); font-weight: 800; border-bottom: 2px solid var(--point-100); font-size: 12.5px; letter-spacing: -0.01em; white-space: nowrap; }
-.theory-md table tbody td { padding: 11px 16px; border-bottom: 1px solid var(--border-subtle); color: var(--fg-2); vertical-align: top; line-height: 1.65; }
-.theory-md table tbody tr:last-child td { border-bottom: 0; }
-.theory-md table tbody tr:nth-child(even) { background: rgba(240,247,241,0.4); }
-.theory-md table tbody tr:hover { background: var(--point-050); }
-.theory-md table tbody td:first-child { color: var(--fg-1); font-weight: 700; }
-.theory-md table code { background: var(--point-050); color: var(--point-600); padding: 1px 6px; border-radius: 4px; font-size: 0.9em; font-weight: 600; }
-
 /* ============================================================
    ★ 인포그래픽 컴포넌트 (1-1-2 베이스 + NULL 특화)
    ============================================================ */
