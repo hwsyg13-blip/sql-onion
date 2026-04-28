@@ -84,7 +84,7 @@ export const ROUND_49: QuizQuestion[] = [
     "references": [
       {
         "type": "erd",
-        "caption": "상품-주문 ERD (상품 측 1 필수, 주문 측 0..N — 주문이 없는 상품도 가능)",
+        "caption": "상품-주문 ERD",
         "mermaid": "erDiagram\n    상품 ||--o{ 주문 : \"주문된다\""
       }
     ]
@@ -515,22 +515,22 @@ export const ROUND_49: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "caption": "가. EXISTS 조건 사용",
+        "caption": "가",
         "code": "SELECT A.EMP_NO, A.ENAME\nFROM   EMP A\nWHERE  EXISTS (SELECT 'X' FROM EMP B\n               WHERE  A.MGR_NO = B.EMP_NO\n                 AND  B.SAL <= 3000);"
       },
       {
         "type": "sql",
-        "caption": "나. IN 조건 사용",
+        "caption": "나",
         "code": "SELECT A.EMP_NO, A.ENAME\nFROM   EMP A\nWHERE  A.MGR_NO IN (SELECT B.EMP_NO FROM EMP B\n                    WHERE  B.SAL <= 3000);"
       },
       {
         "type": "sql",
-        "caption": "다. INNER JOIN 조건 사용",
+        "caption": "다",
         "code": "SELECT A.EMP_NO, A.ENAME\nFROM   EMP A\n       INNER JOIN EMP B\n         ON A.MGR_NO = B.EMP_NO\nWHERE  B.SAL <= 3000;"
       },
       {
         "type": "sql",
-        "caption": "라. NOT EXISTS — 매니저 연봉이 3,000 초과가 아닌 경우 (의미 불일치)",
+        "caption": "라",
         "code": "SELECT A.EMP_NO, A.ENAME\nFROM   EMP A\nWHERE  NOT EXISTS (SELECT 'X' FROM EMP B\n                   WHERE  A.MGR_NO = B.EMP_NO\n                     AND  B.SAL > 3000);"
       }
     ]
@@ -577,7 +577,7 @@ export const ROUND_49: QuizQuestion[] = [
       },
       {
         "type": "table",
-        "caption": "T2 테이블 (B 컬럼에 NULL 포함)",
+        "caption": "T2 테이블",
         "headers": [
           "A",
           "B"
@@ -652,7 +652,7 @@ export const ROUND_49: QuizQuestion[] = [
     "round": 49,
     "subject": "2과목",
     "number": 22,
-    "title": "아래 SQL 의 결과로 옳은 것은?",
+    "title": "아래 T 테이블에 대한 SQL 의 결과로 옳은 것은?",
     "options": [
       "데이터가 출력되지 않는다.",
       "0 이 한 행 반환된다.",
@@ -660,16 +660,36 @@ export const ROUND_49: QuizQuestion[] = [
       "오류 발생"
     ],
     "correctIndex": 0,
-    "explanation": "GROUP BY 가 지정된 쿼리는 조건을 만족하는 그룹이 없으면 공집합을 반환한다.",
+    "explanation": "GROUP BY 가 지정된 쿼리는 조건을 만족하는 그룹이 없으면 공집합을 반환한다. 본 데이터에서 ID 별 그룹은 A=2건, B=2건, C=1건 으로 모두 3 이하라 HAVING COUNT(*) > 3 을 만족하는 그룹이 없다.",
     "_source": "authored",
     "references": [
       {
-        "type": "sql",
-        "code": "SELECT COUNT(*)\nFROM   ...\nGROUP BY ID\nHAVING COUNT(*) > 3;"
+        "type": "table",
+        "caption": "T 테이블",
+        "headers": [
+          "ID"
+        ],
+        "rows": [
+          [
+            "A"
+          ],
+          [
+            "A"
+          ],
+          [
+            "B"
+          ],
+          [
+            "B"
+          ],
+          [
+            "C"
+          ]
+        ]
       },
       {
-        "type": "text",
-        "content": "HAVING 조건을 만족하는 그룹이 없는 상태"
+        "type": "sql",
+        "code": "SELECT COUNT(*)\nFROM   T\nGROUP BY ID\nHAVING COUNT(*) > 3;"
       }
     ]
   },
@@ -1019,7 +1039,7 @@ export const ROUND_49: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "INSERT INTO T VALUES (1);\nINSERT INTO T VALUES (2);\nSAVEPOINT X;\nUPDATE T SET VAL = VAL * 10;       -- T = (10, 20)\nDELETE FROM T WHERE VAL = 20;       -- T = (10)\nROLLBACK TO SAVEPOINT X;            -- T = (1, 2) 로 복원\nINSERT INTO T VALUES (3);           -- T = (1, 2, 3)\nSELECT AVG(VAL) FROM T;             -- (1+2+3)/3 = 2"
+        "code": "INSERT INTO T VALUES (1);\nINSERT INTO T VALUES (2);\nSAVEPOINT X;\nUPDATE T SET VAL = VAL * 10;\nDELETE FROM T WHERE VAL = 20;\nROLLBACK TO SAVEPOINT X;\nINSERT INTO T VALUES (3);\nSELECT AVG(VAL) FROM T;"
       }
     ]
   },
@@ -1717,14 +1737,14 @@ export const ROUND_49: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT NTILE(3) OVER (ORDER BY VAL) AS NTILE,\n       COUNT(*) AS CNT\nFROM   T\nGROUP BY NTILE(3) OVER (ORDER BY VAL);"
+        "code": "SELECT GRP, COUNT(*) AS CNT\nFROM   ( SELECT NTILE(3) OVER (ORDER BY VAL) AS GRP\n         FROM   T )\nGROUP BY GRP\nORDER BY GRP;"
       },
       {
         "type": "table",
-        "caption": "NTILE 그룹별 건수 결과 (7건 = 3 + 2 + 2)",
+        "caption": "NTILE 그룹별 건수 결과",
         "headers": [
-          "NTILE",
-          "COUNT(*)"
+          "GRP",
+          "CNT"
         ],
         "rows": [
           [
