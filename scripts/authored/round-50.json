@@ -297,15 +297,19 @@
         "efg"
       ],
       "correctIndex": 1,
-      "explanation": "SUBSTR('abcdefg', 4) 는 4번째 문자부터 끝까지이므로 'defg' 이다.",
+      "explanation": "T 의 단일 행에 STR='abcdefg' 가 들어 있으므로 LENGTH(STR)=7 이고 LENGTH(STR)-3 = 4 이다. SUBSTR('abcdefg', 4) 는 4번째 문자부터 끝까지를 반환하므로 'defg' 이다. 정답은 ②.",
       "references": [
         {
-          "type": "text",
-          "content": "'abcdefg' 문자열에 대해 SUBSTR 을 수행한다."
+          "type": "table",
+          "caption": "T 테이블",
+          "headers": ["STR"],
+          "rows": [
+            ["abcdefg"]
+          ]
         },
         {
           "type": "sql",
-          "code": "SELECT SUBSTR(STR, LENGTH(STR) - 3) FROM T;\n-- STR = 'abcdefg', LENGTH = 7"
+          "code": "SELECT SUBSTR(STR, LENGTH(STR) - 3) FROM T;\n-- STR = 'abcdefg', LENGTH(STR) = 7, 시작 위치 = 7 - 3 = 4"
         }
       ]
     },
@@ -929,11 +933,29 @@
         "4"
       ],
       "correctIndex": 3,
-      "explanation": "ROLLBACK TO SAVEPOINT 후에도 UPDATE 로 인해 VAL=4 인 행은 남아 있고, 이후 INSERT 3 까지 포함되어 최대값은 4 이다.",
+      "explanation": "T 는 비어 있는 상태로 시작한다. INSERT 1, INSERT 2 로 T={1,2}. SAVEPOINT SV1 후 UPDATE VAL=4 WHERE VAL=1 → T={4,2}. 같은 이름의 SAVEPOINT SV1 을 다시 선언하면 직전 SV1 은 사라지고 현재 시점이 새 SV1 이 된다(T={4,2}). DELETE VAL=2 → T={4}. ROLLBACK TO SAVEPOINT SV1 → T={4,2} 로 복원. INSERT 3 → T={4,2,3}. COMMIT 후 MAX(VAL)=4. 정답은 ④.",
       "references": [
         {
+          "type": "table",
+          "caption": "T 테이블 (초기 상태)",
+          "headers": ["VAL"],
+          "rows": [
+            ["(empty)"]
+          ]
+        },
+        {
           "type": "sql",
-          "code": "INSERT INTO T VALUES (1);\nINSERT INTO T VALUES (2);\nSAVEPOINT SV1;\nUPDATE T SET VAL = 4 WHERE VAL = 1;\nSAVEPOINT SV1;          -- 덮어쓰기\nDELETE FROM T WHERE VAL = 2;\nROLLBACK TO SAVEPOINT SV1;\nINSERT INTO T VALUES (3);\nCOMMIT;\nSELECT MAX(VAL) FROM T;"
+          "code": "INSERT INTO T VALUES (1);\nINSERT INTO T VALUES (2);\nSAVEPOINT SV1;\nUPDATE T SET VAL = 4 WHERE VAL = 1;\nSAVEPOINT SV1;          -- 덮어쓰기 (이전 SV1 폐기)\nDELETE FROM T WHERE VAL = 2;\nROLLBACK TO SAVEPOINT SV1;\nINSERT INTO T VALUES (3);\nCOMMIT;\nSELECT MAX(VAL) FROM T;"
+        },
+        {
+          "type": "table",
+          "caption": "최종 T 상태",
+          "headers": ["VAL"],
+          "rows": [
+            ["4"],
+            ["2"],
+            ["3"]
+          ]
         }
       ]
     },

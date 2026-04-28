@@ -891,7 +891,7 @@ export const ROUND_45: QuizQuestion[] = [
     "round": 45,
     "subject": "2과목",
     "number": 34,
-    "title": "아래 두 SQL의 결과에 대한 설명으로 옳은 것은? (NULL 처리 차이)",
+    "title": "아래 T 테이블에 대한 두 SQL 의 결과에 대한 설명으로 옳은 것은?",
     "options": [
       "두 SQL 모두 NULL 을 0 으로 치환한 뒤 합산하므로 결과가 항상 동일하다.",
       "①은 NULL을 0으로 개별 치환 후 합하므로 모든 행이 반영되지만, ②는 COL1 또는 COL2가 NULL인 행은 NULL이 되어 SUM에서 제외된다.",
@@ -899,9 +899,35 @@ export const ROUND_45: QuizQuestion[] = [
       "①은 외곽에서만 NVL 을 적용하므로 ②보다 항상 작은 값을 반환한다."
     ],
     "correctIndex": 1,
-    "explanation": "NULL과의 산술 연산은 NULL을 반환한다. 따라서 ②는 NULL 행이 합계에서 제외되어 ①과 결과가 달라질 수 있다.",
+    "explanation": "NULL 과의 산술 연산은 NULL 을 반환한다. ① 은 각 컬럼을 NVL 로 0 치환 후 더하므로 모든 행이 합계에 반영되어 (10+20)+(0+30)+(40+0)+(50+50)=200 을 얻는다. ② 는 COL1+COL2 결과가 NULL 인 행이 SUM 에서 제외되어 30+100=130 만 합산된다. 따라서 ② 는 NULL 행이 제외되므로 ① 과 결과가 달라질 수 있다.",
     "_source": "authored",
     "references": [
+      {
+        "type": "table",
+        "caption": "T 테이블",
+        "headers": [
+          "COL1",
+          "COL2"
+        ],
+        "rows": [
+          [
+            "10",
+            "20"
+          ],
+          [
+            "NULL",
+            "30"
+          ],
+          [
+            "40",
+            "NULL"
+          ],
+          [
+            "50",
+            "50"
+          ]
+        ]
+      },
       {
         "type": "sql",
         "code": "-- ① SELECT SUM( NVL(COL1, 0) + NVL(COL2, 0) ) FROM T;\n-- ② SELECT NVL( SUM(COL1 + COL2), 0 )        FROM T;"

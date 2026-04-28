@@ -751,7 +751,7 @@
     {
       "subject": "2과목",
       "number": 40,
-      "title": "WHERE NOT(COL <= 2) 조건에서 결과로 반환되는 COL 값은? (COL 에 NULL, 1, 2, 3, 4 가 있다고 가정)",
+      "title": "아래 T 테이블에 대해 WHERE NOT(COL <= 2) 조건의 결과로 반환되는 COL 값은?",
       "options": [
         "NULL, 3, 4",
         "1, 2",
@@ -759,7 +759,37 @@
         "전체 행"
       ],
       "correctIndex": 2,
-      "explanation": "NOT (UNKNOWN) 은 UNKNOWN 이므로 NULL 행은 제외된다. COL > 2 를 만족하는 3, 4 만 반환된다."
+      "explanation": "NULL 과의 비교는 UNKNOWN 을 반환하고 NOT(UNKNOWN) 도 UNKNOWN 이므로 COL 이 NULL 인 행은 제외된다. COL <= 2 는 1, 2 에 대해 TRUE 이고 그 NOT 은 FALSE 이므로 1, 2 도 제외된다. 결과적으로 COL > 2 를 만족하는 3, 4 만 반환된다.",
+      "references": [
+        {
+          "type": "table",
+          "caption": "T 테이블",
+          "headers": [
+            "COL"
+          ],
+          "rows": [
+            [
+              "NULL"
+            ],
+            [
+              "1"
+            ],
+            [
+              "2"
+            ],
+            [
+              "3"
+            ],
+            [
+              "4"
+            ]
+          ]
+        },
+        {
+          "type": "sql",
+          "code": "SELECT COL FROM T WHERE NOT (COL <= 2);"
+        }
+      ]
     },
     {
       "subject": "2과목",

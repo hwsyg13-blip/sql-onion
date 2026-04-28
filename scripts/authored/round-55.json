@@ -700,11 +700,31 @@
         "첫 번째 SELECT 별칭만 유효"
       ],
       "correctIndex": 0,
-      "explanation": "UNION 계열 쿼리의 결과 컬럼명은 첫 번째 SELECT 절의 별칭을 기준으로 결정된다.",
+      "explanation": "UNION/UNION ALL 등 집합 연산 결과의 컬럼명은 첫 번째 SELECT 절에서 부여한 별칭을 따른다. 두 번째 SELECT 가 동일 컬럼에 다른 별칭(BBA, AAB)을 붙여도 무시되므로, 결과 컬럼명은 (AAB, BBA) 순서로 출력된다. 정답은 ①.",
       "references": [
+        {
+          "type": "table",
+          "caption": "T 테이블",
+          "headers": ["COL1", "COL2"],
+          "rows": [
+            ["1", "10"],
+            ["2", "20"]
+          ]
+        },
         {
           "type": "sql",
           "code": "SELECT COL1 AS AAB, COL2 AS BBA\nFROM   T\nUNION ALL\nSELECT COL1 AS BBA, COL2 AS AAB\nFROM   T;"
+        },
+        {
+          "type": "table",
+          "caption": "결과 (컬럼명은 첫 SELECT 의 별칭 사용)",
+          "headers": ["AAB", "BBA"],
+          "rows": [
+            ["1", "10"],
+            ["2", "20"],
+            ["1", "10"],
+            ["2", "20"]
+          ]
         }
       ]
     },

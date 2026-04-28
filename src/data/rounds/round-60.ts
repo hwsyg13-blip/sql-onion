@@ -867,9 +867,49 @@ export const ROUND_60: QuizQuestion[] = [
       "CHECK"
     ],
     "correctIndex": 0,
-    "explanation": "단일 행 서브쿼리로 비교하므로 WHERE A='A'의 결과가 반드시 하나 이하로 보장되어야 한다.",
+    "explanation": "외부 쿼리가 '=' 단일 행 비교를 사용하므로 서브쿼리 (SELECT COL2 FROM T2 WHERE A='A') 가 반드시 0행 또는 1행만 반환해야 한다. 만약 T2.A='A' 인 행이 둘 이상이면 'ORA-01427: single-row subquery returns more than one row' 같은 오류가 난다. 이를 데이터 차원에서 보장하는 가장 적절한 제약은 T2.COL2 의 UNIQUE 이며, 아래 예시 데이터처럼 A='A' 두 행이 존재할 때 COL2 가 UNIQUE 라면 두 COL2 값이 다르더라도 서로 같은 값이 동시에 들어올 수 없게 되고, 실제 출제 의도는 서브쿼리 결과의 단일성을 강제하는 컬럼 제약 선택지에서 UNIQUE 가 가장 직접적인 답이 된다. NOT NULL·FOREIGN KEY·CHECK 는 단일성을 보장하지 못한다. 정답은 ①.",
     "_source": "authored",
     "references": [
+      {
+        "type": "table",
+        "caption": "T1 테이블",
+        "headers": [
+          "COL2"
+        ],
+        "rows": [
+          [
+            "10"
+          ],
+          [
+            "20"
+          ],
+          [
+            "30"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "T2 테이블 (A='A' 행이 둘 이상이면 단일 행 서브쿼리 오류)",
+        "headers": [
+          "A",
+          "COL2"
+        ],
+        "rows": [
+          [
+            "A",
+            "10"
+          ],
+          [
+            "A",
+            "20"
+          ],
+          [
+            "B",
+            "30"
+          ]
+        ]
+      },
       {
         "type": "sql",
         "code": "SELECT COL2\nFROM   T1\nWHERE  COL2 = (SELECT COL2\n               FROM   T2\n               WHERE  A = 'A');"

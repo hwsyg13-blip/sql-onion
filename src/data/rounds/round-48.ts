@@ -768,7 +768,7 @@ export const ROUND_48: QuizQuestion[] = [
     "round": 48,
     "subject": "2과목",
     "number": 24,
-    "title": "아래 조건을 만족하는 행에 대한 SUM 결과는? (A >= B 인 행이 10건씩 4개)",
+    "title": "아래 T 테이블에 대해 조건을 만족하는 행에 대한 SUM(A) 결과는?",
     "options": [
       "10",
       "40",
@@ -776,12 +776,62 @@ export const ROUND_48: QuizQuestion[] = [
       "NULL"
     ],
     "correctIndex": 2,
-    "explanation": "조건 A >= B를 만족하는 행이 총 10건이고 각 행의 A 값이 10이라고 가정하면 SUM(A) = 10 × 10 = 100입니다. 보기 ①(10)은 단일 행 값, ②(40)는 4건만 가정한 결과, ④(NULL)은 빈 결과를 의미하므로 모두 의도와 맞지 않습니다. 정답은 ③번 100입니다.",
+    "explanation": "WHERE A >= B 조건을 만족하는 행이 총 10 건이고 각 행의 A 값이 10 이므로 SUM(A) = 10 × 10 = 100 이다. 보기 ①(10) 은 단일 행 값, ②(40) 는 4 건만 가정한 결과, ④(NULL) 은 빈 결과를 의미하므로 모두 의도와 맞지 않는다. 정답은 ③ 번 100 이다.",
     "_source": "authored",
     "references": [
       {
+        "type": "table",
+        "caption": "T 테이블 (총 10 행, 모두 A >= B 조건을 만족)",
+        "headers": [
+          "A",
+          "B"
+        ],
+        "rows": [
+          [
+            "10",
+            "5"
+          ],
+          [
+            "10",
+            "5"
+          ],
+          [
+            "10",
+            "5"
+          ],
+          [
+            "10",
+            "5"
+          ],
+          [
+            "10",
+            "5"
+          ],
+          [
+            "10",
+            "5"
+          ],
+          [
+            "10",
+            "5"
+          ],
+          [
+            "10",
+            "5"
+          ],
+          [
+            "10",
+            "5"
+          ],
+          [
+            "10",
+            "5"
+          ]
+        ]
+      },
+      {
         "type": "sql",
-        "code": "SELECT SUM(A) FROM T WHERE A >= B;\n-- 조건 A >= B 만족 행 총 10건 (각 행의 A 값 = 10)"
+        "code": "SELECT SUM(A) FROM T WHERE A >= B;"
       }
     ]
   },
@@ -810,7 +860,7 @@ export const ROUND_48: QuizQuestion[] = [
     "round": 48,
     "subject": "2과목",
     "number": 26,
-    "title": "NTILE(2) 함수 결과로 옳은 것은? (데이터 4건)",
+    "title": "아래 T 테이블에 대한 NTILE(2) 함수 결과로 옳은 것은?",
     "options": [
       "1, 2, 3, 4",
       "1, 1, 2, 2",
@@ -818,8 +868,35 @@ export const ROUND_48: QuizQuestion[] = [
       "1, 2, 1, 2"
     ],
     "correctIndex": 1,
-    "explanation": "NTILE(n) 은 정렬된 데이터를 n 개의 그룹으로 최대한 고르게 나누어 각 행에 그룹 번호(1~n)를 부여한다. 4 건을 2 그룹으로 나누면 정확히 2 건씩 떨어지므로 앞 2 건은 1, 뒤 2 건은 2 가 되어 결과는 1, 1, 2, 2 이다. 분할 수(2)를 넘는 3·4 가 등장하는 보기는 NTILE(2) 결과로 불가능하다.",
-    "_source": "authored"
+    "explanation": "NTILE(n) 은 정렬된 데이터를 n 개의 그룹으로 최대한 고르게 나누어 각 행에 그룹 번호(1~n) 를 부여한다. 4 건을 2 그룹으로 나누면 정확히 2 건씩 떨어지므로 앞 2 건은 1, 뒤 2 건은 2 가 되어 결과는 1, 1, 2, 2 이다. 분할 수(2) 를 넘는 3·4 가 등장하는 보기는 NTILE(2) 결과로 불가능하다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "caption": "T 테이블 (ORDER BY ID ASC)",
+        "headers": [
+          "ID"
+        ],
+        "rows": [
+          [
+            "1"
+          ],
+          [
+            "2"
+          ],
+          [
+            "3"
+          ],
+          [
+            "4"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT ID, NTILE(2) OVER (ORDER BY ID) AS GRP\nFROM   T;"
+      }
+    ]
   },
   {
     "id": 10626,

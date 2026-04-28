@@ -473,12 +473,60 @@ export const ROUND_53: QuizQuestion[] = [
       "COALESCE(M.이름, '사장')"
     ],
     "correctIndex": 3,
-    "explanation": "COALESCE 는 인자 중 NULL 이 아닌 첫 번째 값을 반환한다. 매니저가 없으면 M.이름이 NULL 이므로 '사장'이 반환된다.",
+    "explanation": "사원 테이블에서 매니저ID 가 NULL 인 사원(예: 김사장)은 LEFT JOIN 결과에서 M 측 컬럼이 모두 NULL 이 된다. 이때 COALESCE(M.이름, '사장') 은 NULL 이 아닌 첫 인자를 반환하므로 '사장' 이 출력된다. NVL 은 인자가 두 개 필요하고 NULLIF 는 두 값이 같으면 NULL 을 반환하는 함수라 의미가 다르다. 정답은 ④.",
     "_source": "authored",
     "references": [
       {
+        "type": "table",
+        "caption": "사원 테이블",
+        "headers": [
+          "사원ID",
+          "이름",
+          "매니저ID"
+        ],
+        "rows": [
+          [
+            "1",
+            "김사장",
+            "(NULL)"
+          ],
+          [
+            "2",
+            "이부장",
+            "1"
+          ],
+          [
+            "3",
+            "박과장",
+            "2"
+          ]
+        ]
+      },
+      {
         "type": "sql",
         "code": "-- 사원의 매니저 이름을 조회하되 매니저가 없는 경우 '사장' 을 반환한다.\nSELECT E.이름, (  ?  ) AS 상사명\nFROM   사원 E LEFT JOIN 사원 M ON E.매니저ID = M.사원ID;"
+      },
+      {
+        "type": "table",
+        "caption": "기대 결과",
+        "headers": [
+          "이름",
+          "상사명"
+        ],
+        "rows": [
+          [
+            "김사장",
+            "사장"
+          ],
+          [
+            "이부장",
+            "김사장"
+          ],
+          [
+            "박과장",
+            "이부장"
+          ]
+        ]
       }
     ]
   },
@@ -1313,12 +1361,51 @@ export const ROUND_53: QuizQuestion[] = [
       "7"
     ],
     "correctIndex": 2,
-    "explanation": "COMMIT 시점에 5건이 확정되고 SAVEPOINT SQL1 은 이미 사라졌으므로 이후 ROLLBACK TO SAVEPOINT SQL1 은 오류가 발생해 수행되지 않는다. 마지막 INSERT (6) 까지 포함한 6 건이 조회된다.",
+    "explanation": "TABLE50 은 비어 있는 상태로 시작한다. INSERT 1·2·3 → 3건. SAVEPOINT SQL1 선언. INSERT 4·5 → 5건. COMMIT 시점에 5건이 영구 확정되며 이때 SAVEPOINT SQL1 은 함께 사라진다. 이후 INSERT 6 → 6건. ROLLBACK TO SAVEPOINT SQL1 은 가리킬 SAVEPOINT 가 없으므로 오류가 발생해 무시되거나 영향이 없고, 최종 SELECT 결과는 6 건이다. 정답은 ③.",
     "_source": "authored",
     "references": [
       {
+        "type": "table",
+        "caption": "TABLE50 테이블 (초기 상태)",
+        "headers": [
+          "COL"
+        ],
+        "rows": [
+          [
+            "(empty)"
+          ]
+        ]
+      },
+      {
         "type": "sql",
-        "code": "INSERT INTO TABLE50 VALUES (1);\nINSERT INTO TABLE50 VALUES (2);\nINSERT INTO TABLE50 VALUES (3);\nSAVEPOINT SQL1;\nINSERT INTO TABLE50 VALUES (4);\nINSERT INTO TABLE50 VALUES (5);\nCOMMIT;\nINSERT INTO TABLE50 VALUES (6);\nROLLBACK TO SAVEPOINT SQL1;\n\nSELECT * FROM TABLE50;"
+        "code": "INSERT INTO TABLE50 VALUES (1);\nINSERT INTO TABLE50 VALUES (2);\nINSERT INTO TABLE50 VALUES (3);\nSAVEPOINT SQL1;\nINSERT INTO TABLE50 VALUES (4);\nINSERT INTO TABLE50 VALUES (5);\nCOMMIT;            -- 5건 확정 + SAVEPOINT SQL1 폐기\nINSERT INTO TABLE50 VALUES (6);\nROLLBACK TO SAVEPOINT SQL1;   -- SAVEPOINT 가 없으므로 오류\n\nSELECT * FROM TABLE50;"
+      },
+      {
+        "type": "table",
+        "caption": "최종 TABLE50 상태",
+        "headers": [
+          "COL"
+        ],
+        "rows": [
+          [
+            "1"
+          ],
+          [
+            "2"
+          ],
+          [
+            "3"
+          ],
+          [
+            "4"
+          ],
+          [
+            "5"
+          ],
+          [
+            "6"
+          ]
+        ]
       }
     ]
   }

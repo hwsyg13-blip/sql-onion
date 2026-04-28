@@ -575,12 +575,79 @@ export const ROUND_58: QuizQuestion[] = [
       "CROSS JOIN"
     ],
     "correctIndex": 0,
-    "explanation": "오른쪽 테이블(B) 기준으로 모든 행을 포함해야 하므로 RIGHT OUTER JOIN을 사용한다.",
+    "explanation": "B 의 모든 행이 결과에 포함되어야 하므로 오른쪽 기준 외부 조인이 필요하다. RIGHT OUTER JOIN 을 쓰면 A 에 매칭이 없는 B.ID=3·4 행까지 결과에 살아남고 그 자리에 A.ID 는 NULL 로 채워진다. LEFT OUTER JOIN 은 A 기준이라 B.ID=3·4 행이 사라지고, INNER JOIN 은 매칭만 남으며, CROSS JOIN 은 카티시안 곱이라 의미가 다르다. 정답은 ①.",
     "_source": "authored",
     "references": [
       {
+        "type": "table",
+        "caption": "A 테이블",
+        "headers": [
+          "ID"
+        ],
+        "rows": [
+          [
+            "1"
+          ],
+          [
+            "2"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "B 테이블",
+        "headers": [
+          "ID",
+          "V"
+        ],
+        "rows": [
+          [
+            "1",
+            "10"
+          ],
+          [
+            "2",
+            "20"
+          ],
+          [
+            "3",
+            "30"
+          ],
+          [
+            "4",
+            "40"
+          ]
+        ]
+      },
+      {
         "type": "sql",
         "code": "SELECT A.ID, B.V\nFROM   A   ( ? )   B\nON     A.ID = B.ID;\n-- A에 없는 B의 행까지 모두 포함되는 결과를 얻어야 한다."
+      },
+      {
+        "type": "table",
+        "caption": "기대 결과 (RIGHT OUTER JOIN)",
+        "headers": [
+          "A.ID",
+          "B.V"
+        ],
+        "rows": [
+          [
+            "1",
+            "10"
+          ],
+          [
+            "2",
+            "20"
+          ],
+          [
+            "(NULL)",
+            "30"
+          ],
+          [
+            "(NULL)",
+            "40"
+          ]
+        ]
       }
     ]
   },
