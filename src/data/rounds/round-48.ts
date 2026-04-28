@@ -1367,10 +1367,10 @@ export const ROUND_48: QuizQuestion[] = [
       "사원ID 기준 정렬",
       "연봉 기준 정렬",
       "2개 컬럼으로 정렬",
-      "두 번째 컬럼(사원명) 기준 정렬"
+      "사원명 기준 정렬"
     ],
     "correctIndex": 3,
-    "explanation": "ORDER BY 뒤에 컬럼명을 쓰지 않고 숫자를 쓰면 SELECT 절에 나열된 컬럼의 순서 번호를 의미합니다. SELECT 사원ID, 사원명, 연봉에서 1=사원ID, 2=사원명, 3=연봉이므로 `ORDER BY 2`는 두 번째 컬럼인 사원명을 기준으로 정렬합니다. 정답은 ④번입니다.",
+    "explanation": "ORDER BY 뒤에 컬럼명을 쓰지 않고 숫자를 쓰면 SELECT 절에 나열된 컬럼의 순서 번호를 의미한다. SELECT 사원ID, 사원명, 연봉 에서 1=사원ID, 2=사원명, 3=연봉 이므로 `ORDER BY 2` 는 두 번째 컬럼인 사원명을 기준으로 정렬한다. 따라서 정답은 ④ 사원명 기준 정렬.",
     "_source": "authored",
     "references": [
       {
