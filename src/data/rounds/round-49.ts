@@ -83,8 +83,9 @@ export const ROUND_49: QuizQuestion[] = [
     "_source": "authored",
     "references": [
       {
-        "type": "ascii",
-        "text": "[ 상품 ] ─|─ ─ ─ ─o< [ 주문 ]"
+        "type": "erd",
+        "caption": "상품-주문 ERD (상품 측 1 필수, 주문 측 0..N — 주문이 없는 상품도 가능)",
+        "mermaid": "erDiagram\n    상품 ||--o{ 주문 : \"주문된다\""
       }
     ]
   },

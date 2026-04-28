@@ -139,8 +139,9 @@ export const ROUND_57: QuizQuestion[] = [
     "_source": "authored",
     "references": [
       {
-        "type": "ascii",
-        "text": "[ 고객 ] ||-----∈ [ 계약 ] ∋-----|| [ 납부자 ]"
+        "type": "erd",
+        "caption": "고객-계약-납부자 ERD (고객 1:N 계약, 계약 N:1 납부자)",
+        "mermaid": "erDiagram\n    고객 ||--o{ 계약 : \"체결\"\n    납부자 ||--o{ 계약 : \"납부\""
       }
     ]
   },
@@ -235,8 +236,9 @@ export const ROUND_57: QuizQuestion[] = [
     "_source": "authored",
     "references": [
       {
-        "type": "ascii",
-        "text": "[ 학생 ] ∋-----|∘ [ 수강 ] ∘|-----∈ [ 과목 ]"
+        "type": "erd",
+        "caption": "학생·수강·과목 ERD (M:N 정규화 — [수강] 교차 엔터티)",
+        "mermaid": "erDiagram\n    학생 ||--o{ 수강 : \"수강\"\n    과목 ||--o{ 수강 : \"개설\""
       }
     ]
   },
@@ -259,8 +261,9 @@ export const ROUND_57: QuizQuestion[] = [
     "_source": "authored",
     "references": [
       {
-        "type": "ascii",
-        "text": "[ 상품 ] ∋-----|∘ [ 주문 ] ∋-----|| [ 주문항목 ]"
+        "type": "erd",
+        "caption": "상품·주문·주문항목 ERD",
+        "mermaid": "erDiagram\n    상품 |o--o{ 주문 : \"주문\"\n    주문 ||--o{ 주문항목 : \"포함\""
       }
     ]
   },

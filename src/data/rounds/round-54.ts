@@ -119,8 +119,9 @@ export const ROUND_54: QuizQuestion[] = [
     "_source": "authored",
     "references": [
       {
-        "type": "ascii",
-        "text": "[ 고객 ] ||-----∈ [ 주문 ]"
+        "type": "erd",
+        "caption": "고객-주문 ERD (고객 측 1 필수, 주문 측 0..N — 까마귀발 다)",
+        "mermaid": "erDiagram\n    고객 ||--o{ 주문 : \"한다\"\n    고객 {\n        string 고객번호 PK\n        string 고객명\n    }\n    주문 {\n        string 주문번호 PK\n        string 고객번호 FK\n        date 주문일자\n    }"
       }
     ]
   },

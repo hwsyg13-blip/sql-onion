@@ -23,8 +23,9 @@ export const ROUND_58: QuizQuestion[] = [
     "_source": "authored",
     "references": [
       {
-        "type": "ascii",
-        "text": "[ 회사 ] ||-----∈ [ 부서 ] ||-----∈ [ 사원 ] ||-----∈ [ 프로젝트 ]"
+        "type": "erd",
+        "caption": "회사·부서·사원·프로젝트 ERD (모두 1:M 식별자 관계)",
+        "mermaid": "erDiagram\n    회사 ||--o{ 부서 : \"보유\"\n    부서 ||--o{ 사원 : \"소속\"\n    사원 ||--o{ 프로젝트 : \"참여\""
       }
     ]
   },
@@ -83,31 +84,34 @@ export const ROUND_58: QuizQuestion[] = [
     "_source": "authored",
     "references": [
       {
-        "type": "entity-diagram",
-        "entityName": "도서",
-        "preText": "[ 출판사 ] ||-----∈ [ 도서 ]\n  (1)             (0..N)",
-        "headers": [
-          "ISBN",
-          "제목",
-          "출판사"
-        ],
-        "rows": [
-          [
-            "978-1",
-            "SQL 입문",
-            "A출판사"
+        "type": "erd",
+        "caption": "출판사-도서 ERD (출판사 측 1, 도서 측 0..N)",
+        "mermaid": "erDiagram\n    출판사 ||--o{ 도서 : \"발행\"\n    도서 {\n        string ISBN PK\n        string 제목\n        string 출판사 FK\n    }",
+        "instanceTable": {
+          "of": "도서",
+          "headers": [
+            "ISBN",
+            "제목",
+            "출판사"
           ],
-          [
-            "978-2",
-            "SQL 입문",
-            "B출판사"
-          ],
-          [
-            "978-3",
-            "데이터 모델링",
-            "A출판사"
+          "rows": [
+            [
+              "978-1",
+              "SQL 입문",
+              "A출판사"
+            ],
+            [
+              "978-2",
+              "SQL 입문",
+              "B출판사"
+            ],
+            [
+              "978-3",
+              "데이터 모델링",
+              "A출판사"
+            ]
           ]
-        ]
+        }
       }
     ]
   },
@@ -130,8 +134,9 @@ export const ROUND_58: QuizQuestion[] = [
     "_source": "authored",
     "references": [
       {
-        "type": "ascii",
-        "text": "[ 컴퓨터 ] ||───────|─ [ 마더보드 ]"
+        "type": "erd",
+        "caption": "컴퓨터-마더보드 ERD (1:1 필수 — 양쪽 모두 필수 1)",
+        "mermaid": "erDiagram\n    컴퓨터 ||--|| 마더보드 : \"포함\""
       }
     ]
   },
@@ -240,31 +245,34 @@ export const ROUND_58: QuizQuestion[] = [
     "_source": "authored",
     "references": [
       {
-        "type": "entity-diagram",
-        "entityName": "수강",
-        "preText": "[ 학생 ] ─|─ ─ ─o∈ [ 수강 ] ∋─ ─ ─o|─ [ 과목 ]",
-        "headers": [
-          "수강번호",
-          "학번",
-          "과목코드"
-        ],
-        "rows": [
-          [
-            "S001",
-            "1001",
-            "DB"
+        "type": "erd",
+        "caption": "학생·수강·과목 ERD — [수강] 교차 엔터티 (학생/과목 측 0..N 선택)",
+        "mermaid": "erDiagram\n    학생 ||--o{ 수강 : \"수강\"\n    과목 ||--o{ 수강 : \"개설\"\n    수강 {\n        string 수강번호 PK\n        string 학번 FK\n        string 과목코드 FK\n    }",
+        "instanceTable": {
+          "of": "수강",
+          "headers": [
+            "수강번호",
+            "학번",
+            "과목코드"
           ],
-          [
-            "S002",
-            "1001",
-            "OS"
-          ],
-          [
-            "S003",
-            "1002",
-            "DB"
+          "rows": [
+            [
+              "S001",
+              "1001",
+              "DB"
+            ],
+            [
+              "S002",
+              "1001",
+              "OS"
+            ],
+            [
+              "S003",
+              "1002",
+              "DB"
+            ]
           ]
-        ]
+        }
       }
     ]
   },

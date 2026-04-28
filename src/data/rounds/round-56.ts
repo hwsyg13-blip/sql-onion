@@ -137,8 +137,9 @@ export const ROUND_56: QuizQuestion[] = [
     "_source": "authored",
     "references": [
       {
-        "type": "ascii",
-        "text": "[ 병원 ] ||-----∘| [ 의사 ] ||-----∘| [ 수술 ]\n   ㄱ                  ㄴ                ㄷ"
+        "type": "erd",
+        "caption": "병원·의사·수술 ERD — 관계 라벨 ㄱ(병원-의사), ㄴ(의사-수술), ㄷ(병원-수술 직접)",
+        "mermaid": "erDiagram\n    병원 ||--o| 의사 : \"ㄱ\"\n    의사 ||--o| 수술 : \"ㄴ\"\n    병원 ||--o| 수술 : \"ㄷ\""
       }
     ]
   },

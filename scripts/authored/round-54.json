@@ -87,8 +87,9 @@
       "explanation": "고객-주문 관계에서 주문의 고객번호는 부모 엔터티(고객)의 식별자를 외래키로 상속받은 것이다. 까마귀발 표기에서 고객 쪽이 1, 주문 쪽이 다(M)이며 고객 없이는 주문이 발생할 수 없다.",
       "references": [
         {
-          "type": "ascii",
-          "text": "[ 고객 ] ||-----∈ [ 주문 ]"
+          "type": "erd",
+          "caption": "고객-주문 ERD (고객 측 1 필수, 주문 측 0..N — 까마귀발 다)",
+          "mermaid": "erDiagram\n    고객 ||--o{ 주문 : \"한다\"\n    고객 {\n        string 고객번호 PK\n        string 고객명\n    }\n    주문 {\n        string 주문번호 PK\n        string 고객번호 FK\n        date 주문일자\n    }"
         }
       ]
     },

@@ -138,8 +138,9 @@
       "explanation": "교수-학생, 학생-과목의 M:N 관계가 각각 분해되어 연결 엔터티 두 개가 추가로 생성된다.",
       "references": [
         {
-          "type": "ascii",
-          "text": "[ 교수 ] ∋-----|∘ [ 수강 ] ∘|-----∈ [ 학생 ]\n[ 학생 ] ∋-----|∘ [ 이수 ] ∘|-----∈ [ 과목 ]"
+          "type": "erd",
+          "caption": "교수·학생·과목 M:N 정규화 ERD — [수강][이수] 두 개의 연결 엔터티 추가",
+          "mermaid": "erDiagram\n    교수 ||--o{ 수강 : \"담당\"\n    학생 ||--o{ 수강 : \"수강\"\n    학생 ||--o{ 이수 : \"이수\"\n    과목 ||--o{ 이수 : \"포함\""
         }
       ]
     },
@@ -566,26 +567,9 @@
       "explanation": "제품과 생산라인은 교차 엔터티 '생산제품' 을 거쳐 M:N 으로 연결된다. 중간 엔터티를 건너뛰고 두 테이블을 직접 조인하면 조인 조건이 성립할 키가 없어 모든 행이 곱해지는 카티션 곱(CROSS JOIN) 이 발생한다.",
       "references": [
         {
-          "type": "ascii",
-          "text": "[ 제품 ] ─|─ ─ ─ ─o< [ 생산제품 ] >o─ ─ ─ ─|─ [ 생산라인 ]\n  (제품번호 PK)        (제품번호 FK,             (라인번호 PK)\n                       라인번호 FK)"
-        },
-        {
-          "type": "table",
-          "caption": "제품 엔터티",
-          "headers": ["컬럼"],
-          "rows": [["제품번호 (PK)"], ["제품명"]]
-        },
-        {
-          "type": "table",
-          "caption": "생산제품 엔터티 (교차 엔터티)",
-          "headers": ["컬럼"],
-          "rows": [["제품번호 (PK, FK)"], ["라인번호 (PK, FK)"], ["생산일자"]]
-        },
-        {
-          "type": "table",
-          "caption": "생산라인 엔터티",
-          "headers": ["컬럼"],
-          "rows": [["라인번호 (PK)"], ["라인명"]]
+          "type": "erd",
+          "caption": "제품·생산제품·생산라인 ERD — [생산제품] 이 M:N 교차 엔터티",
+          "mermaid": "erDiagram\n    제품 ||--o{ 생산제품 : \"생산\"\n    생산라인 ||--o{ 생산제품 : \"운영\"\n    제품 {\n        string 제품번호 PK\n        string 제품명\n    }\n    생산제품 {\n        string 제품번호 PK_FK\n        string 라인번호 PK_FK\n        date 생산일자\n    }\n    생산라인 {\n        string 라인번호 PK\n        string 라인명\n    }"
         }
       ]
     },
@@ -915,8 +899,9 @@
       "explanation": "제품과 생산라인은 교차 엔터티인 생산제품을 거쳐 M:N 관계로 연결된다. 중간 엔터티를 건너뛰고 두 테이블을 직접 `JOIN` 하면 조인 조건이 성립할 키가 없어 모든 행이 곱해지는 카티션 곱(CROSS JOIN) 이 발생한다. 정확히 조인하려면 `제품 JOIN 생산제품 ON 제품.제품번호 = 생산제품.제품번호 JOIN 생산라인 ON 생산제품.라인번호 = 생산라인.라인번호` 형태로 중간 엔터티를 경유해야 한다.",
       "references": [
         {
-          "type": "ascii",
-          "text": "[ 제품 ] ─|─ ─ ─ ─o< [ 생산제품 ] >o─ ─ ─ ─|─ [ 생산라인 ]\n  (제품번호 PK)        (제품번호 FK,             (라인번호 PK)\n                       라인번호 FK)"
+          "type": "erd",
+          "caption": "제품·생산제품·생산라인 ERD — [생산제품] 이 M:N 교차 엔터티",
+          "mermaid": "erDiagram\n    제품 ||--o{ 생산제품 : \"생산\"\n    생산라인 ||--o{ 생산제품 : \"운영\"\n    제품 {\n        string 제품번호 PK\n        string 제품명\n    }\n    생산제품 {\n        string 제품번호 PK_FK\n        string 라인번호 PK_FK\n        date 생산일자\n    }\n    생산라인 {\n        string 라인번호 PK\n        string 라인명\n    }"
         }
       ]
     },
@@ -1083,8 +1068,9 @@
       "explanation": "자식 테이블(사원)의 외래키에 `ON DELETE CASCADE` 를 설정하면 부모(부서) 삭제 시 자식 행도 자동 삭제된다. 즉 부모→자식 방향(CHILD ← PARENT CASCADE)으로 전파가 이루어진다.",
       "references": [
         {
-          "type": "ascii",
-          "text": "[ 부서 ] ─|─ ─ ─ ─o< [ 사원 ]\n  (부서번호 PK)         (사원번호 PK,\n                        부서번호 FK ON DELETE CASCADE)"
+          "type": "erd",
+          "caption": "부서-사원 ERD — 사원의 부서번호 FK 에 ON DELETE CASCADE 설정",
+          "mermaid": "erDiagram\n    부서 ||--o{ 사원 : \"소속\"\n    부서 {\n        string 부서번호 PK\n    }\n    사원 {\n        string 사원번호 PK\n        string 부서번호 FK \"ON DELETE CASCADE\"\n    }"
         },
         {
           "type": "sql",

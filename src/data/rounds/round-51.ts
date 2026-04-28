@@ -41,8 +41,9 @@ export const ROUND_51: QuizQuestion[] = [
     "_source": "authored",
     "references": [
       {
-        "type": "ascii",
-        "text": "[ 고객 ] ||-----∈ [ 주문 ]   -- 주문은 고객이 반드시 필요"
+        "type": "erd",
+        "caption": "고객-주문 ERD (고객 측 1 필수, 주문 측 0..N — 주문은 고객이 반드시 필요)",
+        "mermaid": "erDiagram\n    고객 ||--o{ 주문 : \"한다\""
       }
     ]
   },

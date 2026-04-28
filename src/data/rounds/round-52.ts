@@ -185,8 +185,9 @@ export const ROUND_52: QuizQuestion[] = [
     "_source": "authored",
     "references": [
       {
-        "type": "ascii",
-        "text": "[ 교수 ] ∋-----|∘ [ 수강 ] ∘|-----∈ [ 학생 ]\n[ 학생 ] ∋-----|∘ [ 이수 ] ∘|-----∈ [ 과목 ]"
+        "type": "erd",
+        "caption": "교수·학생·과목 M:N 정규화 ERD — [수강][이수] 두 개의 연결 엔터티 추가",
+        "mermaid": "erDiagram\n    교수 ||--o{ 수강 : \"담당\"\n    학생 ||--o{ 수강 : \"수강\"\n    학생 ||--o{ 이수 : \"이수\"\n    과목 ||--o{ 이수 : \"포함\""
       }
     ]
   },
@@ -755,56 +756,9 @@ export const ROUND_52: QuizQuestion[] = [
     "_source": "authored",
     "references": [
       {
-        "type": "ascii",
-        "text": "[ 제품 ] ─|─ ─ ─ ─o< [ 생산제품 ] >o─ ─ ─ ─|─ [ 생산라인 ]\n  (제품번호 PK)        (제품번호 FK,             (라인번호 PK)\n                       라인번호 FK)"
-      },
-      {
-        "type": "table",
-        "caption": "제품 엔터티",
-        "headers": [
-          "컬럼"
-        ],
-        "rows": [
-          [
-            "제품번호 (PK)"
-          ],
-          [
-            "제품명"
-          ]
-        ]
-      },
-      {
-        "type": "table",
-        "caption": "생산제품 엔터티 (교차 엔터티)",
-        "headers": [
-          "컬럼"
-        ],
-        "rows": [
-          [
-            "제품번호 (PK, FK)"
-          ],
-          [
-            "라인번호 (PK, FK)"
-          ],
-          [
-            "생산일자"
-          ]
-        ]
-      },
-      {
-        "type": "table",
-        "caption": "생산라인 엔터티",
-        "headers": [
-          "컬럼"
-        ],
-        "rows": [
-          [
-            "라인번호 (PK)"
-          ],
-          [
-            "라인명"
-          ]
-        ]
+        "type": "erd",
+        "caption": "제품·생산제품·생산라인 ERD — [생산제품] 이 M:N 교차 엔터티",
+        "mermaid": "erDiagram\n    제품 ||--o{ 생산제품 : \"생산\"\n    생산라인 ||--o{ 생산제품 : \"운영\"\n    제품 {\n        string 제품번호 PK\n        string 제품명\n    }\n    생산제품 {\n        string 제품번호 PK_FK\n        string 라인번호 PK_FK\n        date 생산일자\n    }\n    생산라인 {\n        string 라인번호 PK\n        string 라인명\n    }"
       }
     ]
   },
@@ -1274,8 +1228,9 @@ export const ROUND_52: QuizQuestion[] = [
     "_source": "authored",
     "references": [
       {
-        "type": "ascii",
-        "text": "[ 제품 ] ─|─ ─ ─ ─o< [ 생산제품 ] >o─ ─ ─ ─|─ [ 생산라인 ]\n  (제품번호 PK)        (제품번호 FK,             (라인번호 PK)\n                       라인번호 FK)"
+        "type": "erd",
+        "caption": "제품·생산제품·생산라인 ERD — [생산제품] 이 M:N 교차 엔터티",
+        "mermaid": "erDiagram\n    제품 ||--o{ 생산제품 : \"생산\"\n    생산라인 ||--o{ 생산제품 : \"운영\"\n    제품 {\n        string 제품번호 PK\n        string 제품명\n    }\n    생산제품 {\n        string 제품번호 PK_FK\n        string 라인번호 PK_FK\n        date 생산일자\n    }\n    생산라인 {\n        string 라인번호 PK\n        string 라인명\n    }"
       }
     ]
   },
@@ -1500,8 +1455,9 @@ export const ROUND_52: QuizQuestion[] = [
     "_source": "authored",
     "references": [
       {
-        "type": "ascii",
-        "text": "[ 부서 ] ─|─ ─ ─ ─o< [ 사원 ]\n  (부서번호 PK)         (사원번호 PK,\n                        부서번호 FK ON DELETE CASCADE)"
+        "type": "erd",
+        "caption": "부서-사원 ERD — 사원의 부서번호 FK 에 ON DELETE CASCADE 설정",
+        "mermaid": "erDiagram\n    부서 ||--o{ 사원 : \"소속\"\n    부서 {\n        string 부서번호 PK\n    }\n    사원 {\n        string 사원번호 PK\n        string 부서번호 FK \"ON DELETE CASCADE\"\n    }"
       },
       {
         "type": "sql",
