@@ -116,7 +116,7 @@ export const ROUND_45: QuizQuestion[] = [
     "references": [
       {
         "type": "erd",
-        "caption": "고객-주문 ERD (고객 측 필수 1, 주문 측 선택 0..N)",
+        "caption": "고객-주문 ERD",
         "mermaid": "erDiagram\n    고객 ||--o{ 주문 : \"한다\""
       }
     ]
@@ -508,10 +508,10 @@ export const ROUND_45: QuizQuestion[] = [
     "number": 22,
     "title": "아래 네 SUBSTR 호출 중 결과가 나머지와 다른 것은?",
     "options": [
-      "`SUBSTR('DATABASE', 7)` → 'SE'",
-      "`SUBSTR('DATABASE', -2)` → 'SE'",
-      "`SUBSTR('DATABASE', 8, -2)` → NULL/빈 문자열",
-      "`SUBSTR('DATABASE', INSTR('DATABASE','S'), 2)` → 'SE'"
+      "`SUBSTR('DATABASE', 7)`",
+      "`SUBSTR('DATABASE', -2)`",
+      "`SUBSTR('DATABASE', 8, -2)`",
+      "`SUBSTR('DATABASE', INSTR('DATABASE','S'), 2)`"
     ],
     "correctIndex": 2,
     "explanation": "각 호출의 결과는 다음과 같다. ① `SUBSTR('DATABASE', 7)` 은 7번째 문자부터 끝까지 → 'SE'. ② `SUBSTR('DATABASE', -2)` 는 끝에서 2번째 문자부터 끝까지 → 'SE'. ③ `SUBSTR('DATABASE', 8, -2)` 는 길이 인자가 음수라 Oracle 에서 빈 문자열(NULL) 을 반환. ④ `INSTR('DATABASE','S')` = 7 이므로 `SUBSTR('DATABASE', 7, 2)` = 'SE'. ①②④ 가 모두 'SE' 인 반면 ③ 만 NULL/빈 문자열로 결과가 다르다.",
@@ -519,7 +519,7 @@ export const ROUND_45: QuizQuestion[] = [
     "references": [
       {
         "type": "sql",
-        "code": "-- ① SELECT SUBSTR('DATABASE', 7)       FROM DUAL;  -- 'SE'\n-- ② SELECT SUBSTR('DATABASE', -2)      FROM DUAL;  -- 'SE'\n-- ③ SELECT SUBSTR('DATABASE', 8, -2)   FROM DUAL;  -- NULL/빈 문자열\n-- ④ SELECT SUBSTR('DATABASE', INSTR('DATABASE','S'), 2) FROM DUAL;  -- 'SE'\n\n-- 'DATABASE' 의 1-base 문자 위치:\n--   1 2 3 4 5 6 7 8\n--   D A T A B A S E"
+        "code": "-- 'DATABASE' 의 1-base 문자 위치:\n--   1 2 3 4 5 6 7 8\n--   D A T A B A S E\n\n-- ① SELECT SUBSTR('DATABASE', 7)       FROM DUAL;\n-- ② SELECT SUBSTR('DATABASE', -2)      FROM DUAL;\n-- ③ SELECT SUBSTR('DATABASE', 8, -2)   FROM DUAL;\n-- ④ SELECT SUBSTR('DATABASE', INSTR('DATABASE','S'), 2) FROM DUAL;"
       }
     ]
   },
@@ -1096,15 +1096,15 @@ export const ROUND_45: QuizQuestion[] = [
     "round": 45,
     "subject": "2과목",
     "number": 35,
-    "title": "아래 테이블과 네 SQL 중 결과가 다른 것은?",
+    "title": "아래 T 테이블에 대한 네 SQL ①·②·③·④ 중 결과가 나머지와 다른 것은?",
     "options": [
-      "①과 ④ (두 결과 모두 {A, B})",
-      "UNION ALL 사용 SQL",
-      "UNION 사용 SQL",
-      "OR 조건 SQL"
+      "①",
+      "②",
+      "③",
+      "④"
     ],
     "correctIndex": 1,
-    "explanation": "UNION ALL은 중복을 제거하지 않아 A, B가 두 쿼리에서 모두 추출되어 A, B, A, B로 출력된다. 나머지는 중복이 제거된다.",
+    "explanation": "①은 IN/OR 조건으로 A·B 두 행 반환. ②는 UNION ALL이라 중복을 제거하지 않아 두 SELECT의 결과가 모두 합쳐져 A·B가 두 번씩 나타남. ③은 UNION이라 중복 제거되어 A·B만. ④는 OR 조건으로 ①과 동일하게 A·B 반환. 결과 A·B만 반환하는 ①·③·④와 달리 ②만 A·B·A·B를 반환하므로 결과가 다르다.",
     "_source": "authored",
     "references": [
       {
@@ -1606,11 +1606,11 @@ export const ROUND_45: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT NTILE(3) OVER (ORDER BY VAL) AS GRP,\n       COUNT(*) AS CNT\nFROM   T\nGROUP BY NTILE(3) OVER (ORDER BY VAL);"
+        "code": "SELECT GRP, COUNT(*) AS CNT\nFROM   ( SELECT NTILE(3) OVER (ORDER BY VAL) AS GRP\n         FROM   T )\nGROUP BY GRP\nORDER BY GRP;"
       },
       {
         "type": "table",
-        "caption": "그룹별 건수 결과 (8 = 3+3+2)",
+        "caption": "그룹별 건수 결과",
         "headers": [
           "그룹라벨",
           "건수"
