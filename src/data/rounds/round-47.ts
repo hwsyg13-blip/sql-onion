@@ -63,7 +63,7 @@ export const ROUND_47: QuizQuestion[] = [
       },
       {
         "type": "table",
-        "caption": "서비스이용 엔터티 (이용일자가 PK 에 포함되어 재이용 시 별도 행)",
+        "caption": "서비스이용 엔터티",
         "headers": [
           "컬럼"
         ],
@@ -578,7 +578,7 @@ export const ROUND_47: QuizQuestion[] = [
     "references": [
       {
         "type": "sql",
-        "code": "SELECT ... FROM ... WHERE ... ORDER BY A;  -- A 를 내림차순으로 정렬해야 함"
+        "code": "SELECT ... FROM ... WHERE ... ORDER BY A;"
       }
     ]
   },
@@ -868,7 +868,7 @@ export const ROUND_47: QuizQuestion[] = [
     "references": [
       {
         "type": "sql",
-        "code": "SELECT MAX(COL1) KEEP (DENSE_RANK FIRST ORDER BY COL2 DESC)\nFROM T;   -- COL2 기준 DESC 정렬 시 첫 값의 COL1 반환"
+        "code": "SELECT MAX(COL1) KEEP (DENSE_RANK FIRST ORDER BY COL2 DESC)\nFROM T;"
       },
       {
         "type": "table",
@@ -971,13 +971,13 @@ export const ROUND_47: QuizQuestion[] = [
     "number": 36,
     "title": "아래 SQL 중 오류가 발생하는 것을 모두 고른 것은?",
     "options": [
-      "정상 쿼리",
-      "`SELECT (SELECT COL1 FROM 상품 B WHERE A.상품ID = B.상품ID) FROM 평가항목 A` — 다중 행 반환으로 오류",
-      "`SELECT ... WHERE (SELECT 상품ID FROM 평가항목 ...)` — 평가항목에 상품ID 컬럼이 없어 오류",
-      "정상 쿼리"
+      "가, 나",
+      "나, 다",
+      "다, 라",
+      "가, 나, 다, 라"
     ],
     "correctIndex": 1,
-    "explanation": "본 문항은 보기 4개 SQL(가·나·다·라) 중 어느 SQL이 오류를 일으키는지를 묻습니다. 가(A.상품ID = B.상품ID AND ROWNUM = 1)는 상관 서브쿼리에 ROWNUM = 1을 두어 한 행만 보장하므로 정상 동작합니다. 라(EXISTS 상관 서브쿼리)는 존재 여부만 확인하므로 정상입니다. 그러나 나(A.상품ID = B.상품ID)는 상품 테이블에 같은 상품ID가 두 건(P001 사과·P001 사과(중복)) 있어 SELECT 절 스칼라 서브쿼리가 다중 행을 반환해 \"단일 행 서브쿼리에 둘 이상의 행이 반환됨\" 오류가 납니다. 다(상품 테이블에서 평가항목.상품ID 참조)는 평가항목에 상품ID 컬럼이 없다는 가정이라 컬럼 식별 오류가 납니다. 따라서 오류가 발생하는 것은 나·다 두 개이므로 ②번이 정답입니다.",
+    "explanation": "보기 4개 SQL을 차례로 분석한다. 가(A.상품ID = B.상품ID AND ROWNUM = 1) 는 상관 서브쿼리에 ROWNUM = 1을 두어 한 행만 보장하므로 정상 동작. 나(A.상품ID = B.상품ID) 는 상품 테이블에 같은 상품ID가 두 건(P001 사과·P001 사과(중복)) 있어 SELECT 절 스칼라 서브쿼리가 다중 행을 반환해 ORA-01427 오류. 다(상품 테이블에서 평가항목 서브쿼리 참조) 는 평가항목에 상품ID 컬럼이 없다는 가정이라 컬럼 식별 오류. 라(EXISTS 상관 서브쿼리) 는 존재 여부만 확인하므로 정상. 따라서 오류가 발생하는 것은 나·다 두 개이므로 ②번이 정답.",
     "_source": "authored",
     "references": [
       {
@@ -1034,22 +1034,22 @@ export const ROUND_47: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "caption": "가. 정상 쿼리 (단일 행 보장 스칼라 서브쿼리)",
+        "caption": "가",
         "code": "SELECT A.평가번호,\n       (SELECT B.상품명 FROM 상품 B WHERE A.상품ID = B.상품ID AND ROWNUM = 1) AS 상품명\nFROM   평가항목 A;"
       },
       {
         "type": "sql",
-        "caption": "나. 다중 행 반환으로 오류",
+        "caption": "나",
         "code": "SELECT (SELECT B.상품명 FROM 상품 B WHERE A.상품ID = B.상품ID) AS 상품명\nFROM   평가항목 A;"
       },
       {
         "type": "sql",
-        "caption": "다. 컬럼 부재로 오류 (평가항목에 상품ID 컬럼이 없는 가정)",
+        "caption": "다 (가정: 평가항목 에 상품ID 컬럼이 없음)",
         "code": "SELECT *\nFROM   상품 A\nWHERE  A.상품ID = (SELECT 상품ID FROM 평가항목 WHERE 평가번호 = 'E01');"
       },
       {
         "type": "sql",
-        "caption": "라. 정상 쿼리 (EXISTS 상관 서브쿼리)",
+        "caption": "라",
         "code": "SELECT *\nFROM   상품 A\nWHERE  EXISTS (SELECT 1 FROM 평가항목 B WHERE A.상품ID = B.상품ID);"
       }
     ]
@@ -1281,18 +1281,6 @@ export const ROUND_47: QuizQuestion[] = [
       {
         "type": "sql",
         "code": "SELECT COUNT(*)\nFROM   T\nGROUP BY ID\nHAVING COUNT(*) >= 2;"
-      },
-      {
-        "type": "table",
-        "caption": "결과 테이블",
-        "headers": [
-          "COUNT(*)"
-        ],
-        "rows": [
-          [
-            "300"
-          ]
-        ]
       }
     ]
   },
