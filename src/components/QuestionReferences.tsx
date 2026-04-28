@@ -144,17 +144,34 @@ function RefAscii({ text, caption }: any) {
   );
 }
 
-function RefEntityDiagram({ entityName, headers, rows }: any) {
+function RefEntityDiagram({ entityName, preText, headers, rows }: any) {
   return (
+    <div style={{
+      background: 'var(--bg-card)',
+      border: '1px solid var(--border-subtle)',
+      borderRadius: 12,
+      overflow: 'hidden',
+    }}>
+      {preText && (
+        <pre style={{
+          margin: 0,
+          padding: '14px 18px',
+          fontFamily: 'var(--font-mono)',
+          fontSize: 13,
+          lineHeight: 1.55,
+          color: 'var(--fg-2)',
+          background: 'var(--bg-surface)',
+          borderBottom: '1px solid var(--border-subtle)',
+          whiteSpace: 'pre',
+          overflowX: 'auto',
+        }}>{preText}</pre>
+      )}
     <div style={{
       display: 'grid',
       gridTemplateColumns: 'auto 1fr auto',
       gap: 20,
       alignItems: 'center',
       padding: '18px 12px',
-      background: 'var(--bg-card)',
-      border: '1px solid var(--border-subtle)',
-      borderRadius: 12,
       overflowX: 'auto',
     }}>
       {/* 왼쪽: 엔터티 라벨 + 박스 */}
@@ -260,6 +277,7 @@ function RefEntityDiagram({ entityName, headers, rows }: any) {
           </div>
         ))}
       </div>
+    </div>
     </div>
   );
 }
