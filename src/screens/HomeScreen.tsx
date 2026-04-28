@@ -165,9 +165,8 @@ export const HomeScreen = ({onNavigate, user}) => {
 
     {/* 학습 순서 — 합격까지 4단계 로드맵 */}
     <section style={{marginTop: 28}}>
-      <div style={{display:"flex",justifyContent:"space-between",alignItems:"baseline",marginBottom:12}}>
+      <div style={{marginBottom:12}}>
         <h3 style={{fontSize:16,fontWeight:700,color:"var(--fg-1)",margin:0}}>학습 순서</h3>
-        <span style={{fontSize:12,color:"var(--fg-3)"}}>합격까지 4단계 · 클릭해서 바로 이동</span>
       </div>
       <ol className="home-roadmap" style={{
         listStyle:"none", margin:0, padding:0,
