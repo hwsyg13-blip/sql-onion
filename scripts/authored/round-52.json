@@ -160,7 +160,7 @@
     {
       "subject": "2과목",
       "number": 11,
-      "title": "아래 데이터에 대한 SQL 의 결과로 옳은 것은?",
+      "title": "아래 T 테이블에 대한 SQL 의 결과로 출제 의도상 옳은 것은? (원본 기출 정답 보존)",
       "options": [
         "모든 행 반환",
         "COL1 = NULL, COL2 = A",
@@ -168,7 +168,7 @@
         "COL1 = 4, COL2 = D"
       ],
       "correctIndex": 3,
-      "explanation": "COL2 = NULL 은 UNKNOWN 이므로 NOT (1 OR UNKNOWN) = UNKNOWN 또는 FALSE 로 평가되어 대부분의 행이 제외되고, COL1=4 인 행만 남는다.",
+      "explanation": "원본 기출 정답은 ④ COL1=4, COL2=D 로 보존한다. 출제 의도는 'COL2 = NULL' 비교를 'COL2 IS NULL' 로 의역해 COL1≠1 이고 COL2≠NULL 인 행을 찾는 것 — 이때 (4, D) 가 정답이 된다.\n\n다만 SQL 표준 NULL 처리 규칙으로 엄격히 평가하면 'COL2 = NULL' 은 모든 행에서 UNKNOWN 을 반환하므로 NOT (X OR UNKNOWN) 도 모든 행에서 UNKNOWN 또는 FALSE 가 되어 결과는 공집합이 되어야 한다. 이 점은 원본 기출의 모호한 케이스로 알려져 있다.",
       "references": [
         {
           "type": "table",
@@ -231,7 +231,7 @@
     {
       "subject": "2과목",
       "number": 13,
-      "title": "아래 윈도우 절의 실행 결과로 옳은 것은?",
+      "title": "아래 T 테이블에 대한 윈도우 절의 실행 결과로 옳은 것은?",
       "options": [
         "3, 9, 15, 21",
         "3, 7, 12, 15",
@@ -239,7 +239,7 @@
         "18, 18, 18, 18"
       ],
       "correctIndex": 2,
-      "explanation": "원본 기출의 정답 표기를 보존한다. 각 행에 대해 VAL 기준 ±2 범위의 합을 계산한다.",
+      "explanation": "ORDER BY ID 이므로 RANGE 의 ±2 는 'ID 값' 기준 범위. ID=1 의 윈도우: ID ∈ [-1, 3] = {1, 2, 3} → VAL 합 3+4+5 = 12. ID=2: ID ∈ [0, 4] = {1, 2, 3, 4} → 3+4+5+6 = 18. ID=3: ID ∈ [1, 5] = {1, 2, 3, 4} → 18. ID=4: ID ∈ [2, 6] = {2, 3, 4} → 4+5+6 = 15. 결과 12, 18, 18, 15 → ③ 정답.",
       "references": [
         {
           "type": "table",
@@ -306,15 +306,15 @@
     {
       "subject": "2과목",
       "number": 15,
-      "title": "아래 데이터에 NVL 을 적용했을 때 금액이 올바르게 출력되는 행은?",
+      "title": "아래 T 테이블에 NVL(금액, 0) 을 적용했을 때 출력 결과가 가장 큰 금액인 행은?",
       "options": [
-        "1번 행",
-        "2번 행",
-        "3번 행",
-        "4번 행"
+        "1번 행 (1000)",
+        "2번 행 (NVL 로 0 출력)",
+        "3번 행 (3000)",
+        "4번 행 (NVL 로 0 출력)"
       ],
       "correctIndex": 2,
-      "explanation": "NVL(금액, 0)은 NULL 행을 0으로 대체하지만 원래 NULL 이 아닌 행은 그대로 출력된다. 보기에서 정상 금액이 출력되는 행으로 3번 행(3000) 이 정답이다.",
+      "explanation": "NVL(금액, 0) 적용 후 출력값: ID=1 → 1000, ID=2 → 0 (NVL 적용), ID=3 → 3000, ID=4 → 0 (NVL 적용). 가장 큰 값은 ID=3 의 3000. 정답 ③.\n\n보충: 원본 기출이 \"올바르게 출력되는 행\" 표현을 사용해 모호함이 있었으나 (NULL 이 아닌 행은 ① ③ 둘 다 그대로 출력), 출제 의도는 \"NVL 적용 후 가장 큰 금액\" 으로 해석하는 것이 정답 ③ 과 일치한다.",
       "references": [
         {
           "type": "table",
@@ -570,7 +570,7 @@
         {
           "type": "erd",
           "caption": "제품·생산제품·생산라인 ERD — [생산제품] 이 M:N 교차 엔터티",
-          "mermaid": "erDiagram\n    제품 ||--o{ 생산제품 : \"생산\"\n    생산라인 ||--o{ 생산제품 : \"운영\"\n    제품 {\n        string 제품번호 PK\n        string 제품명\n    }\n    생산제품 {\n        string 제품번호 PK_FK\n        string 라인번호 PK_FK\n        date 생산일자\n    }\n    생산라인 {\n        string 라인번호 PK\n        string 라인명\n    }"
+          "mermaid": "erDiagram\n    제품 ||--o{ 생산제품 : \"생산\"\n    생산라인 ||--o{ 생산제품 : \"운영\"\n    제품 {\n        string 제품번호 PK\n        string 제품명\n    }\n    생산제품 {\n        string 제품번호 PK,FK\n        string 라인번호 PK,FK\n        date 생산일자\n    }\n    생산라인 {\n        string 라인번호 PK\n        string 라인명\n    }"
         }
       ]
     },
@@ -579,13 +579,13 @@
       "number": 27,
       "title": "주문한 이력이 없는 회원을 조회하는 SQL 로 옳은 것은?",
       "options": [
-        "SELECT * FROM 회원 WHERE EXISTS (SELECT 1 FROM 주문 WHERE 주문.회원ID = 회원.회원ID);",
-        "SELECT * FROM 회원 WHERE 회원ID IN (SELECT 회원ID FROM 주문);",
-        "SELECT * FROM 회원 M WHERE NOT EXISTS (SELECT 1 FROM 주문 O WHERE O.회원ID = M.회원ID);",
-        "SELECT * FROM 회원 INNER JOIN 주문 ON 회원.회원ID = 주문.회원ID;"
+        "`SELECT * FROM 회원 WHERE EXISTS (SELECT 1 FROM 주문 WHERE 주문.회원ID = 회원.회원ID);`",
+        "`SELECT * FROM 회원 WHERE 회원ID IN (SELECT 회원ID FROM 주문);`",
+        "`SELECT * FROM 회원 M WHERE NOT EXISTS (SELECT 1 FROM 주문 O WHERE O.회원ID = M.회원ID);`",
+        "`SELECT * FROM 회원 INNER JOIN 주문 ON 회원.회원ID = 주문.회원ID;`"
       ],
       "correctIndex": 2,
-      "explanation": "주문 이력이 없는 회원은 주문 테이블에 매칭 행이 없는 회원이므로 NOT EXISTS 또는 LEFT OUTER JOIN ... IS NULL 패턴이 정답이다. EXISTS·IN·INNER JOIN 은 모두 주문이 있는 회원을 반환한다."
+      "explanation": "주문 이력이 없는 회원은 주문 테이블에 매칭 행이 없는 회원이므로 NOT EXISTS 또는 LEFT OUTER JOIN ... IS NULL 패턴이 정답이다. ① EXISTS 는 주문 있는 회원, ② IN 도 주문 있는 회원, ④ INNER JOIN 은 매칭만 — 모두 의도와 반대. 정답 ③ NOT EXISTS."
     },
     {
       "subject": "2과목",
@@ -902,7 +902,7 @@
         {
           "type": "erd",
           "caption": "제품·생산제품·생산라인 ERD — [생산제품] 이 M:N 교차 엔터티",
-          "mermaid": "erDiagram\n    제품 ||--o{ 생산제품 : \"생산\"\n    생산라인 ||--o{ 생산제품 : \"운영\"\n    제품 {\n        string 제품번호 PK\n        string 제품명\n    }\n    생산제품 {\n        string 제품번호 PK_FK\n        string 라인번호 PK_FK\n        date 생산일자\n    }\n    생산라인 {\n        string 라인번호 PK\n        string 라인명\n    }"
+          "mermaid": "erDiagram\n    제품 ||--o{ 생산제품 : \"생산\"\n    생산라인 ||--o{ 생산제품 : \"운영\"\n    제품 {\n        string 제품번호 PK\n        string 제품명\n    }\n    생산제품 {\n        string 제품번호 PK,FK\n        string 라인번호 PK,FK\n        date 생산일자\n    }\n    생산라인 {\n        string 라인번호 PK\n        string 라인명\n    }"
         }
       ]
     },
