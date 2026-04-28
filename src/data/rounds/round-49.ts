@@ -269,20 +269,46 @@ export const ROUND_49: QuizQuestion[] = [
     "round": 49,
     "subject": "2과목",
     "number": 14,
-    "title": "아래 테이블에 대해 순방향 계층형 쿼리를 구성하는 SQL 로 옳은 것은?",
+    "title": "아래 EMP 테이블에 대해 순방향 계층형 쿼리(부모 → 자식)를 구성하는 SQL 로 옳은 것은?",
     "options": [
-      "CONNECT BY PRIOR EMP_NO = MANAGER_NO",
-      "CONNECT BY PRIOR MANAGER_NO = EMP_NO",
-      "CONNECT BY EMP_NO = MANAGER_NO",
-      "CONNECT BY PRIOR EMP_NO = PRIOR MANAGER_NO"
+      "`SELECT * FROM EMP START WITH MANAGER_NO IS NULL CONNECT BY PRIOR EMP_NO = MANAGER_NO;`",
+      "`SELECT * FROM EMP START WITH MANAGER_NO IS NULL CONNECT BY PRIOR MANAGER_NO = EMP_NO;`",
+      "`SELECT * FROM EMP START WITH MANAGER_NO IS NULL CONNECT BY EMP_NO = MANAGER_NO;`",
+      "`SELECT * FROM EMP START WITH MANAGER_NO IS NULL CONNECT BY PRIOR EMP_NO = PRIOR MANAGER_NO;`"
     ],
     "correctIndex": 0,
-    "explanation": "PRIOR 자식 = 부모 형태로 부모→자식 순방향 전개가 이루어진다.",
+    "explanation": "`PRIOR` 는 \"이전(부모) 행의 컬럼\" 을 의미한다. `PRIOR EMP_NO = MANAGER_NO` 는 \"이전 행의 EMP_NO 가 다음 행의 MANAGER_NO 가 되도록\" 연결 — 즉 부모(EMP_NO) → 자식(MANAGER_NO 가 부모를 가리키는 행) 순방향 전개. ② 는 자식 → 부모 역방향, ③ 은 PRIOR 없어 모든 행이 단일 그룹으로 평가, ④ 는 PRIOR 가 양쪽에 있어 자기 참조라 무한루프 또는 0 건.",
     "_source": "authored",
     "references": [
       {
-        "type": "ascii",
-        "text": "[EMP] EMP_NO, MANAGER_NO"
+        "type": "table",
+        "caption": "EMP 테이블",
+        "headers": [
+          "EMP_NO",
+          "MANAGER_NO"
+        ],
+        "rows": [
+          [
+            "100",
+            "NULL"
+          ],
+          [
+            "200",
+            "100"
+          ],
+          [
+            "300",
+            "100"
+          ],
+          [
+            "400",
+            "200"
+          ],
+          [
+            "500",
+            "300"
+          ]
+        ]
       }
     ]
   },
@@ -355,7 +381,8 @@ export const ROUND_49: QuizQuestion[] = [
           [
             "999"
           ]
-        ]
+        ],
+        "caption": "TBL 테이블"
       },
       {
         "type": "sql",
@@ -560,7 +587,7 @@ export const ROUND_49: QuizQuestion[] = [
     "round": 49,
     "subject": "2과목",
     "number": 21,
-    "title": "ROLLUP 컬럼 순서에 대한 설명으로 옳은 것은?",
+    "title": "아래 SQL 의 ROLLUP 컬럼 순서에 대한 설명으로 옳은 것은?",
     "options": [
       "ROLLUP 에 컬럼 순서는 의미가 없다.",
       "첫 번째 컬럼 기준으로 순차 집계된다.",
@@ -568,12 +595,12 @@ export const ROUND_49: QuizQuestion[] = [
       "ROLLUP 은 한 번의 집계만 수행한다."
     ],
     "correctIndex": 2,
-    "explanation": "ROLLUP 은 좌측부터 점진적으로 집계를 수행하므로 컬럼 순서가 결과에 영향을 미친다.",
+    "explanation": "`ROLLUP(A, B, C)` 은 좌측부터 점진적으로 그룹을 줄여가며 (A, B, C), (A, B), (A), () 네 단계의 소계·총계를 만든다. 따라서 컬럼 순서를 바꾸면 만들어지는 집계 레벨이 달라진다.",
     "_source": "authored",
     "references": [
       {
         "type": "sql",
-        "code": "GROUP BY ROLLUP(고객등급, 첫번째컬럼, 세번째컬럼)"
+        "code": "SELECT 고객등급, 첫번째컬럼, 세번째컬럼, SUM(매출)\nFROM   판매\nGROUP BY ROLLUP(고객등급, 첫번째컬럼, 세번째컬럼);"
       }
     ]
   },
@@ -1021,7 +1048,8 @@ export const ROUND_49: QuizQuestion[] = [
             "200",
             "100"
           ]
-        ]
+        ],
+        "caption": "T 테이블"
       },
       {
         "type": "sql",
@@ -1070,7 +1098,8 @@ export const ROUND_49: QuizQuestion[] = [
             "1",
             "B"
           ]
-        ]
+        ],
+        "caption": "TAB1 테이블"
       },
       {
         "type": "sql",
@@ -1114,7 +1143,8 @@ export const ROUND_49: QuizQuestion[] = [
           [
             "30"
           ]
-        ]
+        ],
+        "caption": "T 테이블"
       },
       {
         "type": "sql",
@@ -1507,7 +1537,8 @@ export const ROUND_49: QuizQuestion[] = [
             "D",
             "8"
           ]
-        ]
+        ],
+        "caption": "TAB1 테이블"
       },
       {
         "type": "sql",

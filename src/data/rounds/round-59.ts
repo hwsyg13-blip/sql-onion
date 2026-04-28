@@ -280,15 +280,15 @@ export const ROUND_59: QuizQuestion[] = [
     "round": 59,
     "subject": "2과목",
     "number": 13,
-    "title": "아래 결과를 조회할 수 있는 조건절로 옳은 것은?",
+    "title": "아래 연구소 테이블에서 결과 (A연구소, 화학연구소, 연구소) 를 모두 조회할 수 있는 SQL 로 옳은 것은?",
     "options": [
-      "`WHERE 명 = '_연구소'`",
-      "`WHERE 명 = '%연구소'`",
-      "`WHERE 명 LIKE '%연구소'`",
-      "`WHERE 명 LIKE '_연구소'`"
+      "`SELECT * FROM 연구소 WHERE 명 = '_연구소';`",
+      "`SELECT * FROM 연구소 WHERE 명 = '%연구소';`",
+      "`SELECT * FROM 연구소 WHERE 명 LIKE '%연구소';`",
+      "`SELECT * FROM 연구소 WHERE 명 LIKE '_연구소';`"
     ],
     "correctIndex": 2,
-    "explanation": "'%'는 0개 이상 임의 문자를 의미하므로, '연구소' 단독 값도 포함된다.",
+    "explanation": "`=` 비교는 정확히 그 문자열이어야 매칭되므로 ① `'_연구소'` 는 \"_연구소\" 라는 문자열만 찾고, ② `'%연구소'` 도 \"%연구소\" 문자열만 찾는다 (모두 매칭 0 건). LIKE 와 함께 써야 와일드카드로 동작. ③ `LIKE '%연구소'` 는 `%` (0 글자 이상) 라 \"연구소\" 단독도 포함해 세 행 모두 매칭. ④ `LIKE '_연구소'` 는 `_` (정확히 1 글자) 라 \"A연구소\" 만 매칭, \"화학연구소\" 와 \"연구소\" 는 누락.",
     "_source": "authored",
     "references": [
       {
@@ -306,7 +306,8 @@ export const ROUND_59: QuizQuestion[] = [
           [
             "연구소"
           ]
-        ]
+        ],
+        "caption": "연구소 테이블"
       }
     ]
   },
@@ -375,7 +376,8 @@ export const ROUND_59: QuizQuestion[] = [
             "FORD",
             "7566"
           ]
-        ]
+        ],
+        "caption": "EMP 테이블"
       }
     ]
   },
@@ -557,7 +559,8 @@ export const ROUND_59: QuizQuestion[] = [
             "유관순",
             "(NULL)"
           ]
-        ]
+        ],
+        "caption": "고객 테이블"
       }
     ]
   },
@@ -741,7 +744,8 @@ export const ROUND_59: QuizQuestion[] = [
             "2025-01-12",
             "5,000"
           ]
-        ]
+        ],
+        "caption": "주문 테이블"
       },
       {
         "type": "sql",
@@ -812,7 +816,8 @@ export const ROUND_59: QuizQuestion[] = [
             "(NULL)",
             "60"
           ]
-        ]
+        ],
+        "caption": "T 테이블"
       },
       {
         "type": "sql",
@@ -1063,7 +1068,8 @@ export const ROUND_59: QuizQuestion[] = [
           [
             "3"
           ]
-        ]
+        ],
+        "caption": "A 테이블"
       },
       {
         "type": "sql",
@@ -1112,7 +1118,8 @@ export const ROUND_59: QuizQuestion[] = [
             "22",
             "11"
           ]
-        ]
+        ],
+        "caption": "CATEGORY 테이블"
       },
       {
         "type": "sql",
@@ -1215,7 +1222,8 @@ export const ROUND_59: QuizQuestion[] = [
             "4",
             "2025-03-01"
           ]
-        ]
+        ],
+        "caption": "배송 테이블"
       },
       {
         "type": "sql",
@@ -1230,15 +1238,15 @@ export const ROUND_59: QuizQuestion[] = [
     "round": 59,
     "subject": "2과목",
     "number": 43,
-    "title": "아래 SQL 중 WHERE 절에 사용된 연산자의 평가 결과가 나머지와 다른 것은?",
+    "title": "아래 SQL 들 중 WHERE 절 평가 결과가 나머지와 다른 것은?",
     "options": [
-      "`WHERE 1 <> NULL`",
-      "`WHERE NULL = NULL`",
-      "`WHERE NULL IS NULL`",
-      "`WHERE 1 > NULL`"
+      "`SELECT * FROM DUAL WHERE 1 <> NULL;`",
+      "`SELECT * FROM DUAL WHERE NULL = NULL;`",
+      "`SELECT * FROM DUAL WHERE NULL IS NULL;`",
+      "`SELECT * FROM DUAL WHERE 1 > NULL;`"
     ],
     "correctIndex": 2,
-    "explanation": "IS NULL 연산자만이 NULL 비교에서 TRUE를 반환한다. 나머지는 모두 UNKNOWN으로 평가되어 행이 선택되지 않는다.",
+    "explanation": "①②④ 의 NULL 비교(`=`, `<>`, `>` 등 일반 연산자) 는 모두 UNKNOWN 으로 평가되어 행이 선택되지 않아 0 건 반환. 그러나 ③ `IS NULL` 은 NULL 판별 전용 연산자로 TRUE 를 반환해 1 건 (DUAL 의 한 행) 반환. 결과가 다른 것은 ③.",
     "_source": "authored"
   },
   {
@@ -1326,7 +1334,8 @@ export const ROUND_59: QuizQuestion[] = [
             "Y",
             "1"
           ]
-        ]
+        ],
+        "caption": "T 테이블"
       },
       {
         "type": "sql",
@@ -1383,7 +1392,8 @@ export const ROUND_59: QuizQuestion[] = [
             "6",
             "100"
           ]
-        ]
+        ],
+        "caption": "T 테이블"
       },
       {
         "type": "sql",

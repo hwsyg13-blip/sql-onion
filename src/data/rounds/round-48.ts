@@ -292,8 +292,58 @@ export const ROUND_48: QuizQuestion[] = [
     "_source": "authored",
     "references": [
       {
-        "type": "ascii",
-        "text": "배우(배우번호, 배우명, 성별)\n영화(영화번호, 영화명, 제작년도)\n출연(배우번호, 영화번호, 출연료)"
+        "type": "table",
+        "caption": "배우 테이블",
+        "headers": [
+          "컬럼"
+        ],
+        "rows": [
+          [
+            "배우번호 (PK)"
+          ],
+          [
+            "배우명"
+          ],
+          [
+            "성별"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "영화 테이블",
+        "headers": [
+          "컬럼"
+        ],
+        "rows": [
+          [
+            "영화번호 (PK)"
+          ],
+          [
+            "영화명"
+          ],
+          [
+            "제작년도"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "출연 테이블",
+        "headers": [
+          "컬럼"
+        ],
+        "rows": [
+          [
+            "배우번호 (PK, FK)"
+          ],
+          [
+            "영화번호 (PK, FK)"
+          ],
+          [
+            "출연료"
+          ]
+        ]
       }
     ]
   },
@@ -366,7 +416,8 @@ export const ROUND_48: QuizQuestion[] = [
             "박문수",
             "3000"
           ]
-        ]
+        ],
+        "caption": "사원 테이블"
       },
       {
         "type": "sql",
@@ -547,7 +598,8 @@ export const ROUND_48: QuizQuestion[] = [
             "C",
             "100"
           ]
-        ]
+        ],
+        "caption": "TBL 테이블"
       },
       {
         "type": "sql",
@@ -776,15 +828,15 @@ export const ROUND_48: QuizQuestion[] = [
     "round": 48,
     "subject": "2과목",
     "number": 27,
-    "title": "아래 조건들 중 결과 건수가 나머지와 다른 것은?",
+    "title": "아래 SQL 들 중 결과 건수가 나머지와 다른 것은? (테이블 T 에는 충분한 행이 존재한다고 가정)",
     "options": [
-      "`WHERE ROWNUM = 2`",
-      "`WHERE ROWNUM <= 2`",
-      "`WHERE ROWNUM IN (1, 2)`",
-      "`WHERE ROWNUM = 1 OR ROWNUM = 2`"
+      "`SELECT * FROM T WHERE ROWNUM = 2;`",
+      "`SELECT * FROM T WHERE ROWNUM <= 2;`",
+      "`SELECT * FROM T WHERE ROWNUM IN (1, 2);`",
+      "`SELECT * FROM T WHERE ROWNUM = 1 OR ROWNUM = 2;`"
     ],
     "correctIndex": 0,
-    "explanation": "ROWNUM 은 1부터 순차 부여되므로 ROWNUM = 2 는 만족되지 않아 0 건이 된다.",
+    "explanation": "Oracle 의 `ROWNUM` 은 fetch 시점에 1 부터 순차 부여되는 의사 컬럼이라 `ROWNUM = 2` 같은 등호 조건(N≥2)은 절대 만족되지 않아 0 건이 된다. ②③④ 는 모두 ROWNUM 1, 2 를 포함하는 조건이라 2 건 반환. 결과가 다른 것은 ①.",
     "_source": "authored"
   },
   {
@@ -986,7 +1038,7 @@ export const ROUND_48: QuizQuestion[] = [
     "round": 48,
     "subject": "2과목",
     "number": 38,
-    "title": "아래 LIKE 조건의 결과로 옳은 것은?",
+    "title": "아래 T 테이블에 대한 LIKE 조건 SQL 의 결과로 옳은 것은?",
     "options": [
       "2건",
       "4건",
@@ -994,15 +1046,12 @@ export const ROUND_48: QuizQuestion[] = [
       "6건"
     ],
     "correctIndex": 3,
-    "explanation": "ESCAPE '@' 로 '_' 를 리터럴로 해석하여 모든 행이 매칭된다.",
+    "explanation": "`ESCAPE '@'` 옵션으로 `@_` 를 리터럴 밑줄(`_`) 로 해석한다. 따라서 패턴 `'%@_%'` 는 \"문자열 안에 `_` 를 포함하는 행\" 을 의미하며, T 테이블의 모든 6 행이 `_` 를 포함하므로 6 건이 매칭된다.",
     "_source": "authored",
     "references": [
       {
-        "type": "sql",
-        "code": "WHERE COL LIKE '%@_%' ESCAPE '@';"
-      },
-      {
         "type": "table",
+        "caption": "T 테이블",
         "headers": [
           "COL"
         ],
@@ -1026,6 +1075,10 @@ export const ROUND_48: QuizQuestion[] = [
             "K_L"
           ]
         ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT COUNT(*)\nFROM   T\nWHERE  COL LIKE '%@_%' ESCAPE '@';"
       }
     ]
   },
@@ -1229,7 +1282,8 @@ export const ROUND_48: QuizQuestion[] = [
             "10",
             "10"
           ]
-        ]
+        ],
+        "caption": "T1 테이블"
       },
       {
         "type": "sql",
@@ -1273,7 +1327,8 @@ export const ROUND_48: QuizQuestion[] = [
           [
             "4"
           ]
-        ]
+        ],
+        "caption": "TAB1 테이블"
       },
       {
         "type": "sql",

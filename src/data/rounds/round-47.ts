@@ -406,15 +406,15 @@ export const ROUND_47: QuizQuestion[] = [
     "round": 47,
     "subject": "2과목",
     "number": 19,
-    "title": "아래 두 테이블 조인 결과가 나머지와 다른 SQL 은?",
+    "title": "아래 두 테이블 A, B 조인 결과가 나머지와 다른 SQL 은?",
     "options": [
-      "FROM A NATURAL JOIN B",
-      "FROM A JOIN B USING(SRN_NO)",
-      "FROM A INNER JOIN B",
-      "FROM A, B WHERE A.SRN_NO = B.SRN_NO"
+      "`SELECT * FROM A NATURAL JOIN B;`",
+      "`SELECT * FROM A JOIN B USING(SRN_NO);`",
+      "`SELECT * FROM A INNER JOIN B;`",
+      "`SELECT * FROM A, B WHERE A.SRN_NO = B.SRN_NO;`"
     ],
     "correctIndex": 2,
-    "explanation": "①번 NATURAL JOIN과 ②번 USING은 동일 컬럼명을 자동·수동으로 잡아 INNER JOIN을 수행하므로 결과가 같습니다. ④번은 같은 조건을 명시한 동등 조인입니다. 그러나 ③번은 ON 절이 빠진 INNER JOIN으로, Oracle에서는 구문 오류가 나거나 일부 환경에서는 CROSS JOIN 형태로 해석되어 결과 행이 폭증합니다. 따라서 결과가 다른 것은 ③번입니다.",
+    "explanation": "① `NATURAL JOIN` 과 ② `USING` 은 동일 컬럼명을 자동·수동으로 잡아 INNER JOIN 을 수행하므로 결과가 같다. ④ 는 같은 조건을 명시한 동등 조인. 그러나 ③ 은 `ON` 절이 빠진 `INNER JOIN` 으로 Oracle 에서는 구문 오류가 나거나 일부 환경에서는 CROSS JOIN 형태로 해석되어 결과 행이 폭증한다. 결과가 다른 것은 ③.",
     "_source": "authored"
   },
   {
@@ -460,20 +460,56 @@ export const ROUND_47: QuizQuestion[] = [
     "round": 47,
     "subject": "2과목",
     "number": 22,
-    "title": "TEAM·PLAYER 테이블에서 아래 SQL 과 다른 결과를 반환하는 것은?",
+    "title": "아래 PLAYER 테이블에 대한 SQL 과 다른 결과를 반환하는 것은? (각 팀의 최단신 선수의 PNAME 을 조회)",
     "options": [
-      "SELECT P.PNAME FROM PLAYER P WHERE EXISTS (SELECT 1 FROM PLAYER X WHERE X.TEAM_ID = P.TEAM_ID AND X.HEIGHT = P.HEIGHT AND X.HEIGHT = (SELECT MIN(HEIGHT) FROM PLAYER WHERE TEAM_ID = P.TEAM_ID));",
-      "SELECT P.PNAME FROM PLAYER P, (SELECT TEAM_ID, MIN(HEIGHT) AS MH FROM PLAYER GROUP BY TEAM_ID) M WHERE P.TEAM_ID = M.TEAM_ID AND P.HEIGHT = M.MH;",
-      "SELECT P.PNAME FROM PLAYER P JOIN PLAYER X ON P.TEAM_ID = X.TEAM_ID GROUP BY P.PNAME, P.TEAM_ID, P.HEIGHT HAVING P.HEIGHT = MIN(X.HEIGHT);",
-      "SELECT P.PNAME FROM PLAYER P WHERE EXISTS (SELECT 1 FROM PLAYER X WHERE X.TEAM_ID = P.TEAM_ID);"
+      "`SELECT P.PNAME FROM PLAYER P WHERE EXISTS (SELECT 1 FROM PLAYER X WHERE X.TEAM_ID = P.TEAM_ID AND X.HEIGHT = P.HEIGHT AND X.HEIGHT = (SELECT MIN(HEIGHT) FROM PLAYER WHERE TEAM_ID = P.TEAM_ID));`",
+      "`SELECT P.PNAME FROM PLAYER P, (SELECT TEAM_ID, MIN(HEIGHT) AS MH FROM PLAYER GROUP BY TEAM_ID) M WHERE P.TEAM_ID = M.TEAM_ID AND P.HEIGHT = M.MH;`",
+      "`SELECT P.PNAME FROM PLAYER P JOIN PLAYER X ON P.TEAM_ID = X.TEAM_ID GROUP BY P.PNAME, P.TEAM_ID, P.HEIGHT HAVING P.HEIGHT = MIN(X.HEIGHT);`",
+      "`SELECT P.PNAME FROM PLAYER P WHERE EXISTS (SELECT 1 FROM PLAYER X WHERE X.TEAM_ID = P.TEAM_ID);`"
     ],
     "correctIndex": 3,
-    "explanation": "원본 SQL은 (TEAM_ID, HEIGHT) 두 컬럼이 동시에 일치하는 조건입니다. 이는 상관 서브쿼리·인라인 뷰 조인·JOIN+HAVING 형태로 모두 동등하게 변환할 수 있습니다. 그러나 EXISTS만 단독으로 쓰면 \"존재만 확인\"하는 식이 되어 컬럼 짝까지 비교하는 의미를 살리려면 추가 조건이 필요합니다. 따라서 EXISTS 단독 사용은 결과가 달라질 수 있어 ④번이 정답입니다.",
+    "explanation": "원본 SQL 은 `(TEAM_ID, HEIGHT) IN (SELECT TEAM_ID, MIN(HEIGHT) ...)` 으로 \"각 팀의 최단신 선수\" 를 조회한다. ① 상관 서브쿼리, ② 인라인 뷰 조인, ③ JOIN + HAVING 형태로 모두 같은 결과를 낸다. ④ 는 단순히 \"같은 TEAM_ID 행이 존재하는지\" 만 확인하므로 PLAYER 테이블의 거의 모든 선수가 반환되어 결과가 다르다.",
     "_source": "authored",
     "references": [
       {
+        "type": "table",
+        "caption": "PLAYER 테이블",
+        "headers": [
+          "TEAM_ID",
+          "PNAME",
+          "HEIGHT"
+        ],
+        "rows": [
+          [
+            "T01",
+            "김철수",
+            "175"
+          ],
+          [
+            "T01",
+            "이영희",
+            "180"
+          ],
+          [
+            "T01",
+            "박민수",
+            "175"
+          ],
+          [
+            "T02",
+            "최정훈",
+            "182"
+          ],
+          [
+            "T02",
+            "강동원",
+            "178"
+          ]
+        ]
+      },
+      {
         "type": "sql",
-        "code": "WHERE (TEAM_ID, HEIGHT) IN (SELECT TEAM_ID, MIN(HEIGHT) FROM PLAYER GROUP BY TEAM_ID);"
+        "code": "SELECT P.PNAME\nFROM   PLAYER P\nWHERE  (TEAM_ID, HEIGHT) IN (\n    SELECT TEAM_ID, MIN(HEIGHT)\n    FROM   PLAYER\n    GROUP BY TEAM_ID\n);"
       }
     ]
   },
@@ -694,7 +730,8 @@ export const ROUND_47: QuizQuestion[] = [
             "20",
             "1"
           ]
-        ]
+        ],
+        "caption": "T 테이블"
       }
     ]
   },
@@ -1037,7 +1074,8 @@ export const ROUND_47: QuizQuestion[] = [
             "10",
             "0"
           ]
-        ]
+        ],
+        "caption": "T 테이블"
       },
       {
         "type": "sql",
@@ -1220,7 +1258,8 @@ export const ROUND_47: QuizQuestion[] = [
             "9",
             "5"
           ]
-        ]
+        ],
+        "caption": "T 테이블"
       },
       {
         "type": "sql",

@@ -257,7 +257,7 @@ export const ROUND_53: QuizQuestion[] = [
     "round": 53,
     "subject": "2과목",
     "number": 14,
-    "title": "아래 조건을 만족하는 행의 개수로 옳은 것은?",
+    "title": "아래 T 테이블에 대한 SQL 의 결과 행 개수로 옳은 것은?",
     "options": [
       "1개",
       "2개",
@@ -265,15 +265,12 @@ export const ROUND_53: QuizQuestion[] = [
       "0개"
     ],
     "correctIndex": 0,
-    "explanation": "AMT 가 3000~5000 이고 VOL 이 10 이하인 행은 (4000, 5) 한 건이다.",
+    "explanation": "`AMT BETWEEN 3000 AND 5000` 과 `VOL <= 10` 을 동시에 만족해야 한다. (4000, 5) 만 두 조건 모두 만족, (6000, 3) 은 AMT 범위 초과, (3000, 15) 는 VOL 초과. 따라서 1 건.",
     "_source": "authored",
     "references": [
       {
-        "type": "sql",
-        "code": "WHERE amt BETWEEN 3000 AND 5000\nAND   vol <= 10"
-      },
-      {
         "type": "table",
+        "caption": "T 테이블",
         "headers": [
           "AMT",
           "VOL"
@@ -292,6 +289,10 @@ export const ROUND_53: QuizQuestion[] = [
             "15"
           ]
         ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT COUNT(*)\nFROM   T\nWHERE  AMT BETWEEN 3000 AND 5000\nAND    VOL <= 10;"
       }
     ]
   },
@@ -342,7 +343,8 @@ export const ROUND_53: QuizQuestion[] = [
             "1, 2, 3, 4, 5",
             "1, 1, 1, 3, 6"
           ]
-        ]
+        ],
+        "caption": "T1 테이블"
       },
       {
         "type": "sql",
@@ -447,7 +449,8 @@ export const ROUND_53: QuizQuestion[] = [
             "홍길동",
             "201001"
           ]
-        ]
+        ],
+        "caption": "주문 테이블"
       },
       {
         "type": "sql",
@@ -528,20 +531,20 @@ export const ROUND_53: QuizQuestion[] = [
     "round": 53,
     "subject": "2과목",
     "number": 24,
-    "title": "아래 WHERE 조건과 동일한 의미의 SQL 은?",
+    "title": "아래 SQL 의 WHERE 조건과 동일한 의미를 가지는 것은?",
     "options": [
-      "COL1 = 1 AND COL2 = 3",
-      "COL1 = 1 OR COL2 IN (3, 4)",
-      "COL1 IN (1) AND COL2 IN (3, 4)",
-      "COL1 = 1 AND (COL2 = 3 OR COL2 = 4)"
+      "`SELECT * FROM T WHERE COL1 = 1 AND COL2 = 3;`",
+      "`SELECT * FROM T WHERE COL1 = 1 OR COL2 IN (3, 4);`",
+      "`SELECT * FROM T WHERE COL1 IN (1) AND COL2 IN (3, 4);`",
+      "`SELECT * FROM T WHERE COL1 = 1 AND (COL2 = 3 OR COL2 = 4);`"
     ],
     "correctIndex": 3,
-    "explanation": "(COL1, COL2) IN ((1,3),(1,4)) 는 (COL1=1 AND COL2=3) OR (COL1=1 AND COL2=4) 와 같으며, COL1=1 AND (COL2=3 OR COL2=4) 로 정리된다.",
+    "explanation": "다중 컬럼 IN `(COL1, COL2) IN ((1, 3), (1, 4))` 는 `(COL1=1 AND COL2=3) OR (COL1=1 AND COL2=4)` 와 동일하다. COL1 이 두 튜플에서 모두 1 이라 공통 인수로 묶으면 `COL1=1 AND (COL2=3 OR COL2=4)` 로 정리된다. ① 은 한 조건만, ② 는 OR 결합으로 더 넓고, ③ 은 (1, 3) (1, 4) 가 아닌 다른 조합도 매칭하므로 의미가 다르다.",
     "_source": "authored",
     "references": [
       {
         "type": "sql",
-        "code": "WHERE (COL1, COL2) IN ((1, 3), (1, 4));"
+        "code": "SELECT *\nFROM   T\nWHERE  (COL1, COL2) IN ((1, 3), (1, 4));"
       }
     ]
   },
@@ -724,7 +727,8 @@ export const ROUND_53: QuizQuestion[] = [
           [
             "60"
           ]
-        ]
+        ],
+        "caption": "T 테이블"
       }
     ]
   },
@@ -941,7 +945,8 @@ export const ROUND_53: QuizQuestion[] = [
             "MILLER",
             "1300"
           ]
-        ]
+        ],
+        "caption": "EMP 테이블"
       }
     ]
   },
@@ -1074,7 +1079,8 @@ export const ROUND_53: QuizQuestion[] = [
           [
             "90"
           ]
-        ]
+        ],
+        "caption": "T 테이블"
       },
       {
         "type": "sql",
@@ -1265,7 +1271,8 @@ export const ROUND_53: QuizQuestion[] = [
             "NULL",
             "NULL"
           ]
-        ]
+        ],
+        "caption": "T 테이블"
       },
       {
         "type": "sql",
