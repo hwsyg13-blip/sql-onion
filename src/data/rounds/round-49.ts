@@ -1627,7 +1627,7 @@ export const ROUND_49: QuizQuestion[] = [
     "round": 49,
     "subject": "2과목",
     "number": 48,
-    "title": "아래 빈칸에 들어갈 조건식을 작성하시오.",
+    "title": "아래 SQL 의 빈칸에 들어갈 조건식으로 옳은 것은? (결과 행 수: 2건)",
     "options": [
       "= NULL",
       "!= NULL",
@@ -1635,7 +1635,7 @@ export const ROUND_49: QuizQuestion[] = [
       "IS NULL"
     ],
     "correctIndex": 3,
-    "explanation": "NULL 은 어떤 값과도 = / != 비교 시 UNKNOWN 으로 평가되어 결과에서 제외되므로 NULL 여부는 반드시 IS NULL / IS NOT NULL 로 판별해야 한다. COL = 'A' 또는 COL 이 NULL 인 행을 모두 포함하려면 `OR COL IS NULL` 이 옳다.",
+    "explanation": "NULL 은 어떤 값과도 = / != 비교 시 UNKNOWN 으로 평가되어 결과에서 제외되므로 NULL 여부는 반드시 IS NULL / IS NOT NULL 로 판별해야 한다. ④ `IS NULL` 을 넣으면 COL = 'A' 인 행과 COL 이 NULL 인 행을 합쳐 2 건이 반환된다. ①·② 는 NULL 비교가 UNKNOWN 이라 'A' 한 건만 반환되고, ③ `IS NOT NULL` 은 'A', 'B', 'C' 세 건이 반환되어 결과 행 수가 다르다.",
     "_source": "authored",
     "references": [
       {
@@ -1662,10 +1662,6 @@ export const ROUND_49: QuizQuestion[] = [
       {
         "type": "sql",
         "code": "SELECT * FROM T\nWHERE  COL = 'A'\nOR     COL ( ? );"
-      },
-      {
-        "type": "text",
-        "content": "COL 이 NULL 인 행도 함께 포함하고 싶다."
       }
     ]
   },
