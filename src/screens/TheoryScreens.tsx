@@ -16,6 +16,7 @@ import { OX_QUIZ } from '../data/miniTest/ox';
 import { EXAM_MAPPING } from '../data/miniTest/examMapping';
 import { THEORY_HTML } from '../data/theoryHtml';
 import { trackEvent } from '../lib/analytics';
+import { BugReportModal } from '../components/BugReportModal';
 
 // highlight.js 등록 — SQL 위주
 hljs.registerLanguage('sql', sql);
@@ -183,6 +184,7 @@ export const TheoryDetailScreen = ({ chapterId, onNavigate }) => {
   const md = THEORY_BODY[chapterId];
   const bodyRef = React.useRef<HTMLDivElement>(null);
   const [zoomedSvg, setZoomedSvg] = React.useState<string | null>(null);
+  const [bugOpen, setBugOpen] = React.useState(false);
 
   if (!ctx || (!newHtml && !md)) return <TheoryStub chapterId={chapterId} onNavigate={onNavigate} />;
 
@@ -375,11 +377,26 @@ export const TheoryDetailScreen = ({ chapterId, onNavigate }) => {
             position: 'relative',
             overflow: 'hidden',
           }}>
+            <button
+              onClick={() => setBugOpen(true)}
+              title="이 이론 내용의 오류를 제보"
+              style={{
+                position: 'absolute', top: 14, right: 14,
+                display: 'inline-flex', alignItems: 'center',
+                background: 'var(--bg-card)', border: '1px solid var(--border-default)', borderRadius: 8,
+                padding: '4px 10px', fontSize: 11.5, color: 'var(--fg-3)',
+                cursor: 'pointer', fontFamily: 'inherit', whiteSpace: 'nowrap',
+              }}
+              onMouseEnter={e => { e.currentTarget.style.color='var(--wrong-fg)'; e.currentTarget.style.borderColor='var(--wrong-border)'; }}
+              onMouseLeave={e => { e.currentTarget.style.color='var(--fg-3)'; e.currentTarget.style.borderColor='var(--border-default)'; }}
+            >
+              오류 제보
+            </button>
             <div style={{ display: 'flex', gap: 8, marginBottom: 12, alignItems: 'center', flexWrap: 'wrap' }}>
               <Tag tone="green">{sub.code}</Tag>
               <span style={{ fontSize: 12, color: 'var(--fg-3)' }}>{sec.title}</span>
             </div>
-            <h1 style={{ fontSize: 30, fontWeight: 800, color: 'var(--fg-1)', letterSpacing: '-0.02em', margin: '0 0 8px', lineHeight: 1.2 }}>
+            <h1 style={{ fontSize: 30, fontWeight: 800, color: 'var(--fg-1)', letterSpacing: '-0.02em', margin: '0 0 8px', lineHeight: 1.2, paddingRight: 84 }}>
               {ch.title}
             </h1>
             <p style={{ fontSize: 14.5, color: 'var(--fg-2)', margin: 0, lineHeight: 1.6 }}>{ch.oneLine}</p>
@@ -407,7 +424,7 @@ export const TheoryDetailScreen = ({ chapterId, onNavigate }) => {
         <aside style={{ position: 'relative' }}>
           <div style={{ position: 'sticky', top: 80, display: 'flex', flexDirection: 'column', gap: 14 }}>
             {(OX_QUIZ[chapterId]?.length || EXAM_MAPPING[chapterId]?.length) ? (
-              <MiniTestSidebar chapterId={chapterId} />
+              <MiniTestSidebar chapterId={chapterId} chapterLabel={`${sub.code} ${ch.title}`} />
             ) : null}
             {toc.length > 0 && <TocCard toc={toc} />}
             <AdSlot slot="THEORY_DETAIL_AFTER_MINITEST" format="rectangle" />
@@ -415,6 +432,16 @@ export const TheoryDetailScreen = ({ chapterId, onNavigate }) => {
         </aside>
       </div>
     </div>
+    {bugOpen && (
+      <BugReportModal
+        ctx={{
+          kind: '이론',
+          chapter: `${sub.code} ${ch.title}`,
+          title: ch.title,
+        }}
+        onClose={() => setBugOpen(false)}
+      />
+    )}
     </>
   );
 };

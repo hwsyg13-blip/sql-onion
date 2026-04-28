@@ -1334,6 +1334,17 @@ img, svg {
   background: var(--point-100); padding: 3px 8px; border-radius: 999px;
   font-family: var(--font-mono);
 }
+.mt-bug {
+  font-family: inherit; font-size: 10.5px; font-weight: 600;
+  color: var(--fg-3); background: transparent;
+  border: 1px solid var(--border-default); border-radius: 6px;
+  padding: 3px 8px; cursor: pointer; white-space: nowrap;
+  transition: color 120ms, border-color 120ms;
+}
+.mt-bug:hover {
+  color: var(--wrong-fg);
+  border-color: var(--wrong-border, var(--wrong-fg));
+}
 .mt-meta {
   display: flex; gap: 6px; flex-wrap: wrap;
 }
