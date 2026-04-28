@@ -746,12 +746,12 @@ export const ROUND_54: QuizQuestion[] = [
     "title": "아래 IN 서브쿼리와 동일한 결과를 반환하는 EXISTS 쿼리는?",
     "options": [
       "`SELECT * FROM A WHERE EXISTS (SELECT 1 FROM B WHERE A.성별 = B.성별 AND A.번호 = B.번호);`",
-      "`SELECT * FROM A JOIN B ON A.성별 = B.성별;`",
-      "`SELECT * FROM A WHERE A.성별 IN (SELECT B.성별 FROM B WHERE A.번호 = B.번호);`",
-      "`SELECT * FROM A WHERE 번호 = ALL (SELECT 번호 FROM B WHERE A.성별 = B.성별);`"
+      "`SELECT * FROM A WHERE EXISTS (SELECT 1 FROM B WHERE A.번호 = B.번호);`",
+      "`SELECT * FROM A WHERE EXISTS (SELECT 1 FROM B WHERE A.성별 = B.성별);`",
+      "`SELECT * FROM A WHERE NOT EXISTS (SELECT 1 FROM B WHERE A.성별 = B.성별 AND A.번호 = B.번호);`"
     ],
     "correctIndex": 0,
-    "explanation": "원본 IN 서브쿼리는 A.번호 = B.번호 와 A.성별 = B.성별 두 조건을 동시에 요구하므로 EXISTS 변환 시 두 상관 조건을 모두 명시한 ① 이 정답이다.",
+    "explanation": "원본 IN 서브쿼리 `WHERE 번호 IN (SELECT 번호 FROM B WHERE A.성별 = B.성별)` 은 ① 외부의 `A.번호 = B.번호` 조건과 ② 서브쿼리 안의 `A.성별 = B.성별` 상관 조건을 동시에 요구한다. EXISTS 로 변환하려면 두 조건을 모두 EXISTS 절 안에 옮겨야 한다. ② 는 성별 조건 누락, ③ 은 번호 조건 누락, ④ 는 NOT EXISTS 라 논리 반전이라 모두 오답.",
     "_source": "authored",
     "references": [
       {
@@ -922,10 +922,10 @@ export const ROUND_54: QuizQuestion[] = [
       "`GROUPING SETS( (COL1, COL2), COL2 )`",
       "`GROUPING SETS( COL1, (COL1, COL2) )`",
       "`GROUPING SETS( (), COL1 )`",
-      "`ROLLUP( COL1, COL2 )`"
+      "`GROUPING SETS( COL1, COL2 )`"
     ],
     "correctIndex": 0,
-    "explanation": "(COL1, COL2) 세부 집계와 COL2 별 소계가 함께 필요하므로 해당 GROUPING SETS 조합이 옳다.",
+    "explanation": "결과에는 (COL1, COL2) 세부 집계 행과 COL2 만 보이고 COL1 이 NULL 인 소계 행이 함께 있어야 한다. ① `(COL1, COL2)` + `COL2` 조합이 정확히 이 둘을 산출한다. ② 는 COL1 소계가 추가로 나오고 COL2 소계가 빠지며, ③ 은 전체 합계와 COL1 소계만 산출, ④ 는 COL1 소계 + COL2 소계 두 행만 있고 (COL1, COL2) 세부 집계가 없다.",
     "_source": "authored",
     "references": [
       {

@@ -729,12 +729,12 @@
       "title": "UNPIVOT 절 사용 시 열 이름의 순서에 대한 설명 중 옳은 것은?",
       "options": [
         "AMOUNT3, AMOUNT2, AMOUNT1 순으로 UNPIVOT 해도 행 배치는 동일하다.",
-        "PIVOT 의 역순으로 입력하면 오류가 발생한다.",
+        "UNPIVOT 시 입력 열의 순서를 바꾸면 결과 행 수가 달라진다.",
         "UNPIVOT 은 NULL 행을 항상 유지한다.",
         "UNPIVOT 은 반드시 세 개의 열을 대상으로 한다."
       ],
       "correctIndex": 0,
-      "explanation": "UNPIVOT 의 열 나열 순서는 결과 행의 순서에만 영향을 주며 행 자체의 배치(컬럼별 매핑)는 동일하게 유지된다."
+      "explanation": "UNPIVOT 의 열 나열 순서는 결과 행의 순서에만 영향을 줄 뿐 행 자체의 배치(컬럼별 매핑)는 동일하게 유지된다. ② 입력 열 순서를 바꿔도 결과 행 수는 같다. ③ UNPIVOT 은 기본적으로 NULL 행을 제외하며 `INCLUDE NULLS` 옵션을 줄 때만 유지한다. ④ UNPIVOT 의 대상 열 수는 두 개 이상이면 충분하다."
     },
     {
       "subject": "2과목",
