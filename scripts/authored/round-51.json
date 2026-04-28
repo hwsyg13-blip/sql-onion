@@ -627,7 +627,13 @@
       "references": [
         {
           "type": "sql",
-          "code": "CREATE TABLE T1 (\n  MAIN  INT IDENTITY(1,1),\n  VALUE INT CHECK (VALUE >= 3)\n);\n\nINSERT INTO T1 VALUES(1);\nINSERT INTO T1 VALUES(2);\nINSERT INTO T1 VALUES(3);\n\nSELECT COUNT(*) FROM T1;"
+          "code": "CREATE TABLE T1 (\n  MAIN  INT IDENTITY(1,1),\n  VALUE INT CHECK (VALUE >= 3)\n);\n\nINSERT INTO T1 VALUES(1);   -- CHECK 위반 실패\nINSERT INTO T1 VALUES(2);   -- CHECK 위반 실패\nINSERT INTO T1 VALUES(3);   -- 통과\n\nSELECT COUNT(*) FROM T1;"
+        },
+        {
+          "type": "table",
+          "caption": "T1 최종 상태 (CHECK VALUE >= 3 통과 행만)",
+          "headers": ["MAIN", "VALUE"],
+          "rows": [["1", "3"]]
         }
       ]
     },
@@ -677,8 +683,14 @@
       "explanation": "SAVEPOINT P1 이후의 INSERT (4) 는 롤백되어 반영되지 않는다.",
       "references": [
         {
+          "type": "table",
+          "caption": "T 테이블 (초기 상태 — 비어있음)",
+          "headers": ["VAL"],
+          "rows": [["(empty)"]]
+        },
+        {
           "type": "sql",
-          "code": "INSERT INTO T VALUES (1);\nINSERT INTO T VALUES (2);\nINSERT INTO T VALUES (3);\nSAVEPOINT P1;\nINSERT INTO T VALUES (4);\nROLLBACK TO SAVEPOINT P1;\n\nSELECT * FROM T;"
+          "code": "INSERT INTO T VALUES (1);\nINSERT INTO T VALUES (2);\nINSERT INTO T VALUES (3);   -- T = (1, 2, 3)\nSAVEPOINT P1;\nINSERT INTO T VALUES (4);   -- T = (1, 2, 3, 4)\nROLLBACK TO SAVEPOINT P1;   -- T = (1, 2, 3) 로 복원\n\nSELECT * FROM T;"
         }
       ]
     },

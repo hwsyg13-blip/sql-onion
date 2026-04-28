@@ -798,8 +798,14 @@
       "explanation": "ROLLBACK 으로 UPDATE·DELETE 가 취소되어 VAL 은 (1, 2, 3) 이 되며 평균은 2 이다.",
       "references": [
         {
+          "type": "table",
+          "caption": "T 테이블 (초기 상태 — 비어있음)",
+          "headers": ["VAL"],
+          "rows": [["(empty)"]]
+        },
+        {
           "type": "sql",
-          "code": "INSERT INTO T VALUES (1);\nINSERT INTO T VALUES (2);\nSAVEPOINT X;\nUPDATE T SET VAL = VAL * 10;\nDELETE FROM T WHERE VAL = 20;\nROLLBACK TO SAVEPOINT X;\nINSERT INTO T VALUES (3);\nSELECT AVG(VAL) FROM T;"
+          "code": "INSERT INTO T VALUES (1);\nINSERT INTO T VALUES (2);\nSAVEPOINT X;\nUPDATE T SET VAL = VAL * 10;       -- T = (10, 20)\nDELETE FROM T WHERE VAL = 20;       -- T = (10)\nROLLBACK TO SAVEPOINT X;            -- T = (1, 2) 로 복원\nINSERT INTO T VALUES (3);           -- T = (1, 2, 3)\nSELECT AVG(VAL) FROM T;             -- (1+2+3)/3 = 2"
         }
       ]
     },
@@ -1313,6 +1319,12 @@
       "correctIndex": 3,
       "explanation": "NULL 은 어떤 값과도 = / != 비교 시 UNKNOWN 으로 평가되어 결과에서 제외되므로 NULL 여부는 반드시 IS NULL / IS NOT NULL 로 판별해야 한다. COL = 'A' 또는 COL 이 NULL 인 행을 모두 포함하려면 `OR COL IS NULL` 이 옳다.",
       "references": [
+        {
+          "type": "table",
+          "caption": "T 테이블",
+          "headers": ["COL"],
+          "rows": [["A"], ["B"], ["NULL"], ["C"]]
+        },
         {
           "type": "sql",
           "code": "SELECT * FROM T\nWHERE  COL = 'A'\nOR     COL ( ? );"

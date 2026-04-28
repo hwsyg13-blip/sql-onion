@@ -330,6 +330,16 @@
       "explanation": "COALESCE 는 왼쪽부터 NULL 이 아닌 첫 번째 값을 반환한다.",
       "references": [
         {
+          "type": "table",
+          "caption": "T 테이블",
+          "headers": ["A", "B"],
+          "rows": [
+            ["10", "5"],
+            ["NULL", "5"],
+            ["NULL", "NULL"]
+          ]
+        },
+        {
           "type": "sql",
           "code": "SELECT COALESCE(A, 50*B, '50') FROM T;"
         }

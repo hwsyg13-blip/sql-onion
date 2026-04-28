@@ -1324,6 +1324,48 @@ export const ROUND_60: QuizQuestion[] = [
     "_source": "authored",
     "references": [
       {
+        "type": "table",
+        "caption": "EMP 테이블",
+        "headers": [
+          "EMPNO",
+          "ENAME",
+          "HIREDATE",
+          "SAL"
+        ],
+        "rows": [
+          [
+            "7839",
+            "KING",
+            "1981-11-17",
+            "5000"
+          ],
+          [
+            "7566",
+            "JONES",
+            "1981-04-02",
+            "2975"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "EMP_HIST 테이블 (퇴사 이력)",
+        "headers": [
+          "EMPNO",
+          "ENAME",
+          "HIREDATE",
+          "SAL"
+        ],
+        "rows": [
+          [
+            "7369",
+            "SMITH",
+            "1980-12-17",
+            "800"
+          ]
+        ]
+      },
+      {
         "type": "sql",
         "code": "SELECT EMPNO,\n       ENAME,\n       EXTRACT(YEAR FROM HIREDATE) AS YR,\n       SAL\nFROM   EMP\nUNION\nSELECT EMPNO,\n       ENAME,\n       EXTRACT(YEAR FROM HIREDATE),\n       SAL\nFROM   EMP_HIST;"
       }
@@ -1610,6 +1652,20 @@ export const ROUND_60: QuizQuestion[] = [
       {
         "type": "sql",
         "code": "CREATE TABLE T (\n  ID  NUMBER GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1),\n  VAL NUMBER CHECK (VAL > 0)\n);\n\nINSERT INTO T(VAL) VALUES (-1);   -- CHECK 위반\nINSERT INTO T(VAL) VALUES ( 0);   -- CHECK 위반\nINSERT INTO T(VAL) VALUES ( 1);   -- 성공\nCOMMIT;\n\nSELECT COUNT(*) FROM T;"
+      },
+      {
+        "type": "table",
+        "caption": "최종 T 상태 (CHECK VAL > 0 통과 행만)",
+        "headers": [
+          "ID",
+          "VAL"
+        ],
+        "rows": [
+          [
+            "1",
+            "1"
+          ]
+        ]
       }
     ]
   },

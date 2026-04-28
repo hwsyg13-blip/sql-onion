@@ -477,6 +477,28 @@ export const ROUND_54: QuizQuestion[] = [
     "_source": "authored",
     "references": [
       {
+        "type": "table",
+        "caption": "T 테이블",
+        "headers": [
+          "A",
+          "B"
+        ],
+        "rows": [
+          [
+            "10",
+            "5"
+          ],
+          [
+            "NULL",
+            "5"
+          ],
+          [
+            "NULL",
+            "NULL"
+          ]
+        ]
+      },
+      {
         "type": "sql",
         "code": "SELECT COALESCE(A, 50*B, '50') FROM T;"
       }

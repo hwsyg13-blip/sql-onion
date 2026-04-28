@@ -789,6 +789,42 @@ export const ROUND_47: QuizQuestion[] = [
     "_source": "authored",
     "references": [
       {
+        "type": "table",
+        "caption": "A 테이블 (TGT)",
+        "headers": [
+          "ID",
+          "V"
+        ],
+        "rows": [
+          [
+            "1",
+            "0"
+          ],
+          [
+            "2",
+            "0"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "B 테이블 (SRC)",
+        "headers": [
+          "ID",
+          "V"
+        ],
+        "rows": [
+          [
+            "1",
+            "5"
+          ],
+          [
+            "3",
+            "7"
+          ]
+        ]
+      },
+      {
         "type": "sql",
         "code": "MERGE INTO A USING B ON (A.ID = B.ID)\nWHEN MATCHED THEN UPDATE SET A.V = 100\nWHEN NOT MATCHED THEN INSERT (ID, V) VALUES (B.ID, 100);"
       }

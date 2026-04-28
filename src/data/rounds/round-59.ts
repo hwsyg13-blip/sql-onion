@@ -607,6 +607,18 @@ export const ROUND_59: QuizQuestion[] = [
     "_source": "authored",
     "references": [
       {
+        "type": "table",
+        "caption": "T 테이블 (초기 상태 — 0건)",
+        "headers": [
+          "COL"
+        ],
+        "rows": [
+          [
+            "(empty)"
+          ]
+        ]
+      },
+      {
         "type": "sql",
         "code": "-- T 테이블 초기 상태: 0건\n\nINSERT INTO T ... 15건;        -- 15건, 미커밋\nCOMMIT;                         -- 15건 확정\n\nINSERT INTO T ... 15건;        -- 30건, 미커밋\nCREATE INDEX IDX_T ON T(COL);   -- DDL → 묵시적 커밋 (30건 확정)\n\nINSERT INTO T ... 20건;        -- 50건, 미커밋\nROLLBACK;                       -- 마지막 INSERT 취소\n\nSELECT COUNT(*) FROM T;"
       }
