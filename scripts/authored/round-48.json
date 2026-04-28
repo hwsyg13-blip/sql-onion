@@ -906,7 +906,7 @@
         "SELECT 컬럼 FROM T WHERE ROWNUM = 10 ORDER BY 컬럼 DESC;"
       ],
       "correctIndex": 2,
-      "explanation": "Oracle의 ROWNUM은 ORDER BY가 적용되기 전 단계에서 행에 1부터 부여됩니다. 따라서 같은 SELECT 안에서 `WHERE ROWNUM <= 10 ... ORDER BY ... DESC`처럼 쓰면 정렬되지 않은 임의의 10건이 잡힌 뒤 정렬되어 \"상위 10건\"이 보장되지 않습니다. 안전하게 상위 10건을 얻으려면 인라인 뷰 안에서 먼저 ORDER BY DESC로 정렬한 뒤, 바깥쪽에서 `WHERE ROWNUM <= 10`으로 자르는 ③번 패턴을 써야 합니다. ②는 문법 오류, ④는 정확히 10번째 행만 잡습니다. 정답은 ③번입니다."
+      "explanation": "Oracle의 ROWNUM은 ORDER BY가 적용되기 전 단계에서 행에 1부터 부여됩니다. 따라서 같은 SELECT 안에서 `WHERE ROWNUM <= 10 ... ORDER BY ... DESC`처럼 쓰면 정렬되지 않은 임의의 10건이 잡힌 뒤 정렬되어 \"상위 10건\"이 보장되지 않습니다. 안전하게 상위 10건을 얻으려면 인라인 뷰 안에서 먼저 ORDER BY DESC로 정렬한 뒤, 바깥쪽에서 `WHERE ROWNUM <= 10`으로 자르는 ③번 패턴을 써야 합니다. ②는 문법 오류(`WHERE` 가 `ORDER BY` 뒤에 올 수 없음), ④는 `ROWNUM = 10` 이 절대 만족되지 않아 항상 0건이 반환됩니다. 정답은 ③번입니다."
     },
     {
       "subject": "2과목",

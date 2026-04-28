@@ -1307,7 +1307,7 @@ export const ROUND_49: QuizQuestion[] = [
       "사원 수를 세는 쿼리"
     ],
     "correctIndex": 1,
-    "explanation": "",
+    "explanation": "`GROUP BY 부서` 로 부서 단위로 행을 묶고 그룹별 `MAX(연봉)` 을 구하므로 부서별 최고 연봉을 조회하는 쿼리이다. 평균은 `AVG`, 합계는 `SUM`, 개수는 `COUNT` 이며 `GROUP BY` 가 없으면 전체 단일 값이 된다.",
     "_source": "authored",
     "references": [
       {
@@ -1331,7 +1331,7 @@ export const ROUND_49: QuizQuestion[] = [
       "오류 발생"
     ],
     "correctIndex": 0,
-    "explanation": "",
+    "explanation": "`MERGE` 는 ON 조건 일치 행에 `WHEN MATCHED` 의 `UPDATE`, 미일치 행에 `WHEN NOT MATCHED` 의 `INSERT` 를 적용한다. TBL2 의 ID=1,2 는 TBL1 과 매칭되어 COL1 이 C, D 로 변경되고, ID=3,4 는 신규로 INSERT 되므로 최종 TBL1 은 4행이 된다.",
     "_source": "authored",
     "references": [
       {

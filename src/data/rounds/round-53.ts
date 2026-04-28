@@ -229,7 +229,7 @@ export const ROUND_53: QuizQuestion[] = [
       "GROUP BY SAL HAVING COUNT(*) >= 5 을 사용한다."
     ],
     "correctIndex": 0,
-    "explanation": "TOP-N 쿼리에서 동순위를 포함하려면 RANK() 또는 FETCH FIRST N ROWS WITH TIES 를 사용해야 한다.",
+    "explanation": "TOP-N 쿼리에서 동순위를 포함하려면 `RANK()` 또는 `FETCH FIRST N ROWS WITH TIES` 를 사용해야 한다. ③ `WHERE ROWNUM = 5` 는 ROWNUM 의사 컬럼 특성상 항상 0건이 반환되어 부적합하다.",
     "_source": "authored"
   },
   {
@@ -785,7 +785,7 @@ export const ROUND_53: QuizQuestion[] = [
       "라 — ORDER BY 에서 집계 함수를 사용했으므로 오류"
     ],
     "correctIndex": 3,
-    "explanation": "원본 기출의 정답 표기를 보존하되 일반적으로 ORDER BY 에서 집계 함수는 사용 가능하므로, 원본 문항의 다른 맥락이 있을 수 있다.",
+    "explanation": "참조 텍스트의 단서대로 본 문항은 `GROUP BY` 없는 일반 `SELECT` 컨텍스트로 한정한다. 이 경우 ④ `ORDER BY SUM(SAL)` 은 집계 그룹이 형성되지 않아 ORA-00937(단일 그룹의 그룹 함수가 아닙니다) 오류가 발생한다. ① 스칼라 서브쿼리 안의 집계는 정상, ② 는 다중 행 서브쿼리 + `=` (ORA-01427), ③ 은 `WHERE` 에 집계 함수 사용 오류로 분류 자체가 부적절하다.",
     "_source": "authored",
     "references": [
       {
@@ -934,8 +934,14 @@ export const ROUND_53: QuizQuestion[] = [
       "빈 문자열"
     ],
     "correctIndex": 1,
-    "explanation": "정규표현식 패턴과 탐욕적 매칭으로 해당 결과가 도출된다. 원본 기출의 정답 표기를 보존한다.",
-    "_source": "authored"
+    "explanation": "원본 기출에서 구체적 SQL 표기와 선지 텍스트가 유실되어 정답 번호(②)만 보존한다. 정규표현식 패턴과 탐욕적 매칭으로 해당 결과가 도출되는 출제 의도로 추정된다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "text",
+        "content": "원본 PDF 표기: '문제 39. REGEXP_SUBSTR 다른 문제 / 예상: aabbc abbc' — 본문 SQL 과 4 개 선지 텍스트가 원본 복원 메모에서 누락되었고 출제 키워드(REGEXP_SUBSTR, 'aabbc' 관련)와 ① 선지로 추정되는 'aabbc abbc' 표기만 남아 있다."
+      }
+    ]
   },
   {
     "id": 10389,
@@ -944,15 +950,15 @@ export const ROUND_53: QuizQuestion[] = [
     "round": 53,
     "subject": "2과목",
     "number": 40,
-    "title": "아래 윈도우 절 중 PRECEDING 1 · FOLLOWING 1 과 동등한 것은?",
+    "title": "아래 윈도우 절 중 `BETWEEN 1 PRECEDING AND 1 FOLLOWING` 과 동등한 것은?",
     "options": [
-      "ROWS BETWEEN 1 PRECEDING AND 1 FOLLOWING",
       "RANGE BETWEEN 50 PRECEDING AND 150 FOLLOWING",
+      "ROWS BETWEEN 1 PRECEDING AND 1 FOLLOWING",
       "ROWS UNBOUNDED PRECEDING",
       "RANGE BETWEEN CURRENT ROW AND UNBOUNDED FOLLOWING"
     ],
     "correctIndex": 1,
-    "explanation": "원본 기출의 정답 표기를 보존한다.",
+    "explanation": "축약형 `BETWEEN 1 PRECEDING AND 1 FOLLOWING` 은 기본 단위 `ROWS` 로 해석되어 `ROWS BETWEEN 1 PRECEDING AND 1 FOLLOWING` 과 동등하다. RANGE 는 값 범위 기준이라 단위가 다르고, UNBOUNDED 는 한쪽이 무한이라 1·1 과 다르다.",
     "_source": "authored"
   },
   {

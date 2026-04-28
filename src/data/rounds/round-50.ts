@@ -614,7 +614,7 @@ export const ROUND_50: QuizQuestion[] = [
       "UNION"
     ],
     "correctIndex": 2,
-    "explanation": "",
+    "explanation": "`INTERSECT` 는 두 결과 집합에 공통으로 존재하는 행만 반환하는 교집합 연산자이다. `UNION` 은 합집합(중복 제거), `UNION ALL` 은 중복 유지 합집합, `EXCEPT`(MINUS)는 차집합이다.",
     "_source": "authored"
   },
   {
