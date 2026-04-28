@@ -20,7 +20,9 @@ export type QuestionReference =
   | { type: 'table'; headers: string[]; rows: string[][]; caption?: string }
   | { type: 'ascii'; text: string; caption?: string }
   | { type: 'html'; html: string; caption?: string }
-  | { type: 'entity-diagram'; entityName: string; preText: string; headers: string[]; rows: string[][] };
+  /** @deprecated 호환성 유지용. 새 데이터는 'erd' 사용. PR #100 spec 참조. */
+  | { type: 'entity-diagram'; entityName: string; preText: string; headers: string[]; rows: string[][] }
+  | { type: 'erd'; mermaid: string; caption?: string; instanceTable?: { of: string; headers: string[]; rows: string[][] } };
 
 const CAPTION_STYLE: React.CSSProperties = {
   fontSize: 11.5,
@@ -282,6 +284,91 @@ function RefEntityDiagram({ entityName, preText, headers, rows }: any) {
   );
 }
 
+// ER 다이어그램 — mermaid erDiagram 으로 진짜 ERD SVG 렌더.
+// 데이터에 mermaid 코드 그대로 박힘. 'entity-diagram' 후속 (PR #100 spec).
+// 다크모드는 data-theme 감지 + themeVariables 분기. 같은 페이지 여러 ERD 도
+// useId 로 ID 충돌 방지.
+function RefErd({ mermaid: code, caption, instanceTable }: any) {
+  const ref = React.useRef<HTMLDivElement>(null);
+  const reactId = React.useId().replace(/[:]/g, '-');
+  // data-theme 변경 감지 — 다크모드 전환 시 mermaid 다시 렌더
+  const [theme, setTheme] = React.useState<string>(() =>
+    typeof document !== 'undefined' ? (document.documentElement.dataset.theme || 'light') : 'light'
+  );
+  React.useEffect(() => {
+    if (typeof document === 'undefined') return;
+    const obs = new MutationObserver(() => {
+      const t = document.documentElement.dataset.theme || 'light';
+      setTheme(prev => prev !== t ? t : prev);
+    });
+    obs.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+    return () => obs.disconnect();
+  }, []);
+
+  React.useEffect(() => {
+    if (!code) return;
+    let cancelled = false;
+    import('mermaid').then(({ default: mermaid }) => {
+      if (cancelled) return;
+      const isDark = theme === 'dark';
+      mermaid.initialize({
+        startOnLoad: false,
+        theme: 'base',
+        themeVariables: {
+          fontFamily: 'Pretendard Variable, -apple-system, sans-serif',
+          // 양파 그린 (TheoryScreens.tsx 와 동일 토큰 값)
+          primaryColor: isDark ? '#1F2A1F' : '#EBF5EC',
+          primaryTextColor: isDark ? '#E5E7EB' : '#1F2320',
+          primaryBorderColor: '#2E7D32',
+          lineColor: isDark ? '#A5D6A7' : '#2E7D32',
+          secondaryColor: isDark ? '#262E26' : '#F0F7F1',
+          tertiaryColor: isDark ? '#1A1F1A' : '#FFFFFF',
+          mainBkg: isDark ? '#1F2A1F' : '#EBF5EC',
+          edgeLabelBackground: isDark ? '#262E26' : '#FFFFFF',
+          attributeBackgroundColorOdd: isDark ? '#1A1F1A' : '#FFFFFF',
+          attributeBackgroundColorEven: isDark ? '#262E26' : '#F0F7F1',
+        },
+        securityLevel: 'loose',
+      });
+      const renderId = `erd-${reactId}-${isDark ? 'd' : 'l'}`;
+      mermaid.render(renderId, code).then(({ svg }) => {
+        if (!cancelled && ref.current) ref.current.innerHTML = svg;
+      }).catch(err => {
+        if (!cancelled && ref.current) {
+          ref.current.innerHTML = `<pre style="color:var(--wrong-fg);font-size:12px;white-space:pre-wrap;">ERD 렌더 실패: ${String(err?.message || err).replace(/[<>&]/g, '')}</pre>`;
+        }
+      });
+    }).catch(err => {
+      console.warn('[RefErd] mermaid load failed', err);
+    });
+    return () => { cancelled = true; };
+  }, [code, theme, reactId]);
+
+  return (
+    <div style={{
+      background: 'var(--bg-card)',
+      border: '1px solid var(--border-subtle)',
+      borderRadius: 12,
+      overflow: 'hidden',
+      padding: '14px 12px',
+    }}>
+      {caption && <div style={{ ...CAPTION_STYLE, padding: '0 6px 8px' }}>{caption}</div>}
+      <div ref={ref} style={{
+        display: 'flex', justifyContent: 'center',
+        overflowX: 'auto', minHeight: 80,
+      }} aria-label="ER 다이어그램" />
+      {instanceTable && (
+        <div style={{ marginTop: 14, padding: '0 6px' }}>
+          <div style={{ fontSize: 11.5, color: 'var(--fg-3)', fontWeight: 600, marginBottom: 6, textAlign: 'center' }}>
+            [ {instanceTable.of} ] 인스턴스
+          </div>
+          <RefTable headers={instanceTable.headers} rows={instanceTable.rows} />
+        </div>
+      )}
+    </div>
+  );
+}
+
 function RefHtml({ html, caption }: any) {
   // 주의: 이 경로는 파서가 만든 신뢰된 HTML 에만 사용 (사용자 입력 아님).
   // 그래도 script·iframe·on* 속성은 혹시 섞이면 제거.
@@ -316,6 +403,7 @@ function renderBlock(r: QuestionReference, i: number) {
     case 'ascii': return <RefAscii key={i} {...r as any}/>;
     case 'html':  return <RefHtml  key={i} {...r as any}/>;
     case 'entity-diagram': return <RefEntityDiagram key={i} {...r as any}/>;
+    case 'erd':   return <RefErd   key={i} {...r as any}/>;
     default: return null;
   }
 }
