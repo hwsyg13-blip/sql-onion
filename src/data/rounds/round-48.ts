@@ -282,10 +282,10 @@ export const ROUND_48: QuizQuestion[] = [
     "number": 13,
     "title": "출연료가 8,888 이상인 영화의 영화명·배우명·출연료를 조회하는 SQL 로 적절한 것은?",
     "options": [
-      "SELECT 출연.영화명, 영화.배우명, 출연.출연료 FROM 배우, 영화, 출연 WHERE 출연.출연료 >= 8888 AND 출연.영화번호 = 영화.영화번호 AND 출연.배우번호 = 배우.배우번호;",
-      "SELECT 영화.영화명, 배우.배우명, 출연료 FROM 배우, 영화, 출연 WHERE 출연료 > 8888 AND 출연.영화번호 = 영화.영화번호 AND 출연.배우번호 = 배우.배우번호;",
-      "SELECT 영화.영화명, 배우.배우명, 출연료 FROM 배우, 영화, 출연 WHERE 출연료 >= 8888 AND 영화.영화번호 = 출연.영화번호;",
-      "SELECT 영화.영화명, 배우.배우명, 출연료 FROM 배우, 영화, 출연 WHERE 출연료 >= 8888 AND 출연.영화번호 = 영화.영화번호 AND 출연.배우번호 = 배우.배우번호;"
+      "`SELECT 출연.영화명, 영화.배우명, 출연.출연료 FROM 배우, 영화, 출연 WHERE 출연.출연료 >= 8888 AND 출연.영화번호 = 영화.영화번호 AND 출연.배우번호 = 배우.배우번호;`",
+      "`SELECT 영화.영화명, 배우.배우명, 출연료 FROM 배우, 영화, 출연 WHERE 출연료 > 8888 AND 출연.영화번호 = 영화.영화번호 AND 출연.배우번호 = 배우.배우번호;`",
+      "`SELECT 영화.영화명, 배우.배우명, 출연료 FROM 배우, 영화, 출연 WHERE 출연료 >= 8888 AND 영화.영화번호 = 출연.영화번호;`",
+      "`SELECT 영화.영화명, 배우.배우명, 출연료 FROM 배우, 영화, 출연 WHERE 출연료 >= 8888 AND 출연.영화번호 = 영화.영화번호 AND 출연.배우번호 = 배우.배우번호;`"
     ],
     "correctIndex": 3,
     "explanation": "테이블 구조는 배우(배우번호, 배우명, 성별)·영화(영화번호, 영화명, 제작년도)·출연(배우번호, 영화번호, 출연료)이므로 영화명은 영화 테이블에서, 배우명은 배우 테이블에서, 출연료는 출연 테이블에서 가져와야 합니다. ①·②·③은 컬럼 소유 테이블을 잘못 짚거나 조건 부등호를 잘못 쓴 형태입니다. ④번은 출연·영화·배우 세 테이블을 출연.영화번호 = 영화.영화번호 AND 출연.배우번호 = 배우.배우번호로 정확히 조인하고 출연료 >= 8888 조건까지 올바르게 기술되어 있어 정답입니다.",
@@ -632,12 +632,12 @@ export const ROUND_48: QuizQuestion[] = [
     "round": 48,
     "subject": "2과목",
     "number": 18,
-    "title": "컬럼을 추가할 때 올바른 ALTER 구문은?",
+    "title": "컬럼을 추가할 때 올바른 ALTER 구문은? (Oracle 환경)",
     "options": [
-      "ALTER TABLE T COLUMN 컬럼명 DATE DEFAULT '날짜' NOT NULL;",
-      "ALTER TABLE T ADD 컬럼명 DATE DEFAULT '날짜' NOT NULL;",
-      "ALTER TABLE T ADD COLUMN 컬럼명 DATE DEFAULT '날짜' NOT NULL;",
-      "ALTER TABLE T MODIFY 컬럼명 DATE DEFAULT '날짜' NOT NULL;"
+      "`ALTER TABLE T COLUMN 컬럼명 DATE DEFAULT '날짜' NOT NULL;`",
+      "`ALTER TABLE T ADD 컬럼명 DATE DEFAULT '날짜' NOT NULL;`",
+      "`ALTER TABLE T ADD COLUMN 컬럼명 DATE DEFAULT '날짜' NOT NULL;`",
+      "`ALTER TABLE T MODIFY 컬럼명 DATE DEFAULT '날짜' NOT NULL;`"
     ],
     "correctIndex": 1,
     "explanation": "Oracle 에서는 ADD 뒤에 COLUMN 키워드를 쓰지 않는다.",
@@ -710,7 +710,7 @@ export const ROUND_48: QuizQuestion[] = [
     "round": 48,
     "subject": "2과목",
     "number": 22,
-    "title": "아래 사원 데이터에 대한 DENSE_RANK·RANK·FIRST_VALUE 결과로 옳은 것은?",
+    "title": "아래 사원 테이블에 대한 DENSE_RANK·RANK·FIRST_VALUE 결과로 옳은 것은?",
     "options": [
       "DENSE_RANK: 1, 2, 3, 4 (모두 다른 순위)",
       "RANK: 1, 4, 4, 4 (마지막 동순위 끝 처리)",
@@ -723,6 +723,7 @@ export const ROUND_48: QuizQuestion[] = [
     "references": [
       {
         "type": "table",
+        "caption": "사원 테이블 (SAL)",
         "headers": [
           "SAL"
         ],
@@ -740,6 +741,10 @@ export const ROUND_48: QuizQuestion[] = [
             "1500"
           ]
         ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT SAL,\n       RANK()       OVER (ORDER BY SAL DESC) AS RNK,\n       DENSE_RANK() OVER (ORDER BY SAL DESC) AS D_RNK,\n       FIRST_VALUE(SAL) OVER (ORDER BY SAL DESC) AS FV\nFROM   사원;"
       }
     ]
   },
@@ -1244,12 +1249,12 @@ export const ROUND_48: QuizQuestion[] = [
     "round": 48,
     "subject": "2과목",
     "number": 43,
-    "title": "상위 10건을 조회하는 ROWNUM 기반 SQL 로 옳은 것은?",
+    "title": "상위 10건을 조회하는 ROWNUM 기반 SQL 로 옳은 것은? (Oracle 환경)",
     "options": [
-      "SELECT 컬럼 FROM T WHERE ROWNUM <= 10 ORDER BY 컬럼 DESC;",
-      "SELECT 컬럼 FROM T ORDER BY 컬럼 DESC WHERE ROWNUM <= 10;",
-      "SELECT ... FROM (SELECT ... ORDER BY 컬럼 DESC) WHERE ROWNUM <= 10",
-      "SELECT 컬럼 FROM T WHERE ROWNUM = 10 ORDER BY 컬럼 DESC;"
+      "`SELECT 컬럼 FROM T WHERE ROWNUM <= 10 ORDER BY 컬럼 DESC;`",
+      "`SELECT 컬럼 FROM T ORDER BY 컬럼 DESC WHERE ROWNUM <= 10;`",
+      "`SELECT * FROM (SELECT 컬럼 FROM T ORDER BY 컬럼 DESC) WHERE ROWNUM <= 10;`",
+      "`SELECT 컬럼 FROM T WHERE ROWNUM = 10 ORDER BY 컬럼 DESC;`"
     ],
     "correctIndex": 2,
     "explanation": "Oracle의 ROWNUM은 ORDER BY가 적용되기 전 단계에서 행에 1부터 부여됩니다. 따라서 같은 SELECT 안에서 `WHERE ROWNUM <= 10 ... ORDER BY ... DESC`처럼 쓰면 정렬되지 않은 임의의 10건이 잡힌 뒤 정렬되어 \"상위 10건\"이 보장되지 않습니다. 안전하게 상위 10건을 얻으려면 인라인 뷰 안에서 먼저 ORDER BY DESC로 정렬한 뒤, 바깥쪽에서 `WHERE ROWNUM <= 10`으로 자르는 ③번 패턴을 써야 합니다. ②는 문법 오류(`WHERE` 가 `ORDER BY` 뒤에 올 수 없음), ④는 `ROWNUM = 10` 이 절대 만족되지 않아 항상 0건이 반환됩니다. 정답은 ③번입니다.",
@@ -1262,10 +1267,10 @@ export const ROUND_48: QuizQuestion[] = [
     "round": 48,
     "subject": "2과목",
     "number": 44,
-    "title": "아래 표 T 에 대한 집계 함수 결과에 NULL 이 포함되는 경우로 옳은 것은?",
+    "title": "아래 T 테이블에 대한 집계 함수 결과 중 NULL 이 반환되는 경우로 옳은 것은?",
     "options": [
       "`COUNT(*)`, `COUNT(COL)`, `SUM(COL)` — 모든 결과가 정상 값",
-      "`AVG(COL)`, `SUM(COL)` 등 NULL 행만 있는 컬럼의 집계",
+      "`AVG(COL_NULL)`, `SUM(COL_NULL)` 등 NULL 행만 있는 컬럼의 집계",
       "모든 집계 함수 결과가 NULL",
       "데이터 타입 불일치로 ORA-01722 오류 발생"
     ],
@@ -1275,6 +1280,7 @@ export const ROUND_48: QuizQuestion[] = [
     "references": [
       {
         "type": "table",
+        "caption": "T 테이블 (COL_NULL 컬럼은 모든 값이 NULL)",
         "headers": [
           "ID",
           "COL",
@@ -1297,6 +1303,10 @@ export const ROUND_48: QuizQuestion[] = [
             "NULL"
           ]
         ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT COUNT(*),\n       COUNT(COL),\n       SUM(COL),\n       AVG(COL_NULL),\n       SUM(COL_NULL)\nFROM   T;"
       }
     ]
   },
