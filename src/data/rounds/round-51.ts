@@ -215,12 +215,12 @@ export const ROUND_51: QuizQuestion[] = [
     "round": 51,
     "subject": "2과목",
     "number": 12,
-    "title": "아래 데이터에 대한 누적합 쿼리 중 원하는 결과를 얻을 수 없는 것은?",
+    "title": "아래 일자별 매출 데이터에 대한 누적합 쿼리 중 \"일자별\" 누적합을 얻을 수 없는 것은?",
     "options": [
-      "SUM(금액) OVER (ORDER BY 일자)",
-      "SUM(금액) OVER (ORDER BY 일자 ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW)",
-      "SUM(금액) OVER (ORDER BY 일자 RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW)",
-      "서브쿼리를 이용한 누적합 계산"
+      "`SUM(금액) OVER (ORDER BY 일자)`",
+      "`SUM(금액) OVER (ORDER BY 일자 ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW)`",
+      "`SUM(금액) OVER (ORDER BY 일자 RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW)`",
+      "서브쿼리를 이용한 일자별 누적합 계산"
     ],
     "correctIndex": 1,
     "explanation": "동일 일자(2023-11-02) 가 두 행 존재할 때 `ROWS` 윈도우는 행 단위로 누적해 같은 일자임에도 누적값이 달라진다. 일자별 누적합을 보려면 동률을 한 묶음으로 처리하는 `RANGE`(생략 시 기본) 또는 서브쿼리 방식이 적합하다.",
@@ -228,6 +228,7 @@ export const ROUND_51: QuizQuestion[] = [
     "references": [
       {
         "type": "table",
+        "caption": "T 테이블 (일자별 매출 — 2023-11-02 가 두 행 존재)",
         "headers": [
           "일자",
           "금액"
@@ -296,7 +297,7 @@ export const ROUND_51: QuizQuestion[] = [
     "round": 51,
     "subject": "2과목",
     "number": 15,
-    "title": "아래 데이터에 대한 NTILE(3) 윈도우 함수의 결과로 옳은 것은?",
+    "title": "아래 T 테이블에 대한 NTILE(3) 윈도우 함수의 결과로 옳은 것은?",
     "options": [
       "1,1,1,2,2,2,3,3",
       "1,1,2,2,3,3,3,3",
@@ -309,6 +310,7 @@ export const ROUND_51: QuizQuestion[] = [
     "references": [
       {
         "type": "table",
+        "caption": "T 테이블",
         "headers": [
           "COL1"
         ],
@@ -338,6 +340,10 @@ export const ROUND_51: QuizQuestion[] = [
             "8"
           ]
         ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT COL1, NTILE(3) OVER (ORDER BY COL1) AS GRP\nFROM   T;"
       }
     ]
   },
@@ -535,21 +541,30 @@ export const ROUND_51: QuizQuestion[] = [
     "references": [
       {
         "type": "table",
+        "caption": "T1 테이블",
         "headers": [
-          "T1",
-          "T2"
+          "COL1"
         ],
         "rows": [
           [
-            "COL1",
-            "COL1"
-          ],
-          [
-            "10",
             "10"
           ],
           [
-            "20",
+            "20"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "T2 테이블",
+        "headers": [
+          "COL1"
+        ],
+        "rows": [
+          [
+            "10"
+          ],
+          [
             "NULL"
           ]
         ]
@@ -628,19 +643,57 @@ export const ROUND_51: QuizQuestion[] = [
     "references": [
       {
         "type": "table",
+        "caption": "T1 테이블",
         "headers": [
-          "T1",
-          "T2",
-          "T3"
+          "C1"
         ],
         "rows": [
           [
-            "1, 2, 3",
-            "1, 2, 4",
-            "1, 2, 3"
+            "1"
+          ],
+          [
+            "2"
+          ],
+          [
+            "3"
           ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "T2 테이블",
+        "headers": [
+          "C1"
         ],
-        "caption": "T1 테이블"
+        "rows": [
+          [
+            "1"
+          ],
+          [
+            "2"
+          ],
+          [
+            "4"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "T3 테이블",
+        "headers": [
+          "C1"
+        ],
+        "rows": [
+          [
+            "1"
+          ],
+          [
+            "2"
+          ],
+          [
+            "3"
+          ]
+        ]
       },
       {
         "type": "sql",
@@ -794,14 +847,43 @@ export const ROUND_51: QuizQuestion[] = [
     "references": [
       {
         "type": "table",
+        "caption": "T1 테이블",
         "headers": [
-          "T1",
-          "T2"
+          "COL1"
         ],
         "rows": [
           [
-            "A, B, C, D, E",
-            "A, B, C"
+            "A"
+          ],
+          [
+            "B"
+          ],
+          [
+            "C"
+          ],
+          [
+            "D"
+          ],
+          [
+            "E"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "T2 테이블",
+        "headers": [
+          "COL1"
+        ],
+        "rows": [
+          [
+            "A"
+          ],
+          [
+            "B"
+          ],
+          [
+            "C"
           ]
         ]
       }
@@ -1037,7 +1119,7 @@ export const ROUND_51: QuizQuestion[] = [
     "round": 51,
     "subject": "2과목",
     "number": 39,
-    "title": "아래 OUTER JOIN 의 결과 행 수로 옳은 것은?",
+    "title": "아래 A, B 테이블에 대한 LEFT OUTER JOIN 의 결과 행 수로 옳은 것은?",
     "options": [
       "1건",
       "2건",
@@ -1045,30 +1127,44 @@ export const ROUND_51: QuizQuestion[] = [
       "0건"
     ],
     "correctIndex": 2,
-    "explanation": "ON 절의 조건으로 B 와 매칭되지 않아도 LEFT 테이블의 모든 행이 유지된다.",
+    "explanation": "LEFT OUTER JOIN 은 ON 조건에 매칭되지 않아도 LEFT 테이블(A) 의 모든 행이 유지되므로 A 의 3건이 그대로 결과에 남는다. B 측 컬럼은 매칭되는 행이 있을 때만 채워지고 그렇지 않으면 NULL.",
     "_source": "authored",
     "references": [
       {
         "type": "table",
+        "caption": "A 테이블",
         "headers": [
-          "A",
-          "B"
+          "COL1"
         ],
         "rows": [
           [
-            "1",
+            "1"
+          ],
+          [
+            "2"
+          ],
+          [
+            "3"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "B 테이블",
+        "headers": [
+          "COL1"
+        ],
+        "rows": [
+          [
             "10"
           ],
           [
-            "2",
             "100"
           ],
           [
-            "3",
             "220"
           ]
-        ],
-        "caption": "A 테이블"
+        ]
       },
       {
         "type": "sql",
@@ -1242,19 +1338,20 @@ export const ROUND_51: QuizQuestion[] = [
     "round": 51,
     "subject": "2과목",
     "number": 44,
-    "title": "아래 결과를 얻기 위한 LIKE 조건으로 옳은 것은?",
+    "title": "아래 T 테이블에서 \"문자열에 리터럴 '_' 을 포함하는 행\" 을 찾는 LIKE 조건으로 옳은 것은? (기대 결과: AB_C, A_BD)",
     "options": [
-      "WHERE COL2 LIKE '%_%'",
-      "WHERE COL2 LIKE 'A%'",
-      "WHERE COL2 LIKE 'A_B%'",
-      "WHERE COL2 LIKE '%@_%' ESCAPE '@'"
+      "`WHERE COL2 LIKE '%_%'`",
+      "`WHERE COL2 LIKE 'A%'`",
+      "`WHERE COL2 LIKE 'A_B%'`",
+      "`WHERE COL2 LIKE '%@_%' ESCAPE '@'`"
     ],
     "correctIndex": 3,
-    "explanation": "리터럴 '_' 을 검색하기 위해 ESCAPE 문자를 지정한다.",
+    "explanation": "LIKE 패턴에서 '_' 은 임의의 한 문자를 의미하므로 ① 처럼 그대로 쓰면 모든 행이 매칭된다. 리터럴 '_' 자체를 검색하려면 ESCAPE 문자를 지정하고 그 뒤에 '_' 을 두어야 한다. ④ 의 `%@_%` ESCAPE '@' 는 '@_' 를 리터럴 '_' 로 해석해 'AB_C', 'A_BD' 만 매칭한다.",
     "_source": "authored",
     "references": [
       {
         "type": "table",
+        "caption": "T 테이블",
         "headers": [
           "COL2"
         ],
@@ -1297,7 +1394,7 @@ export const ROUND_51: QuizQuestion[] = [
     "round": 51,
     "subject": "2과목",
     "number": 46,
-    "title": "아래 누적 합계 결과로 옳은 것은?",
+    "title": "아래 일자별 매출 테이블에 대해 일자별 누적 합계를 계산한 결과로 옳은 것은?",
     "options": [
       "1000, 1000, 1000",
       "1000, 1300, 2300",
@@ -1305,11 +1402,12 @@ export const ROUND_51: QuizQuestion[] = [
       "1000, 2300, 2000"
     ],
     "correctIndex": 1,
-    "explanation": "1일까지 1000, 2일까지 1300, 3일까지 2300 으로 누적된다.",
+    "explanation": "1일까지 1000, 2일까지 1000+300=1300, 3일까지 1300+1000=2300 으로 누적된다.",
     "_source": "authored",
     "references": [
       {
         "type": "table",
+        "caption": "T 테이블 (일자별 매출)",
         "headers": [
           "일자",
           "금액"
@@ -1328,6 +1426,10 @@ export const ROUND_51: QuizQuestion[] = [
             "1000"
           ]
         ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT 일자,\n       SUM(금액) OVER (ORDER BY 일자\n                       ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS 누적합\nFROM   T;"
       }
     ]
   },
