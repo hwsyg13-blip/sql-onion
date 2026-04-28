@@ -111,6 +111,28 @@
   border-radius: 4px; font-size: 0.92em; font-family: var(--font-mono);
 }
 
+/* SQL 예시 박스 */
+.day-card .ex-sql {
+  margin-top: 2px; padding: 9px 12px;
+  background: var(--bg-code);
+  border: 1px solid var(--border-subtle);
+  border-radius: 6px;
+}
+.day-card .ex-sql .ex-label {
+  font-size: 10.5px; font-weight: 800; color: var(--point-600);
+  letter-spacing: 0.04em; margin-bottom: 5px;
+  text-transform: uppercase;
+}
+.day-card .ex-sql pre {
+  margin: 0; padding: 0; background: transparent; border: 0;
+  font-family: var(--font-mono);
+  font-size: 11.5px; line-height: 1.55; color: var(--fg-1);
+  white-space: pre-wrap; word-break: break-word;
+  overflow-x: auto;
+}
+.day-card .ex-sql .kw { color: var(--point-600); font-weight: 700; }
+.day-card .ex-sql .cm { color: var(--fg-3); font-style: italic; }
+
 /* 체크리스트 */
 .checklist-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 12px 0 0; }
 .checklist-card {
@@ -185,7 +207,7 @@
   <nav class="day-toc reveal">
     <span class="toc-label">바로가기</span>
     <a href="#chapters">챕터별 정리</a>
-    <a href="#checklist">당일 체크</a>
+    <a href="#checklist">체크리스트</a>
   </nav>
 
   <article class="theory-md">
@@ -408,6 +430,21 @@
           <li>NULL: NVL/NVL2/NULLIF/COALESCE</li>
           <li>조건: <strong>CASE</strong>(범위 가능) vs <strong>DECODE</strong>(동등비교만)</li>
         </ul>
+        <div class="ex-sql">
+          <div class="ex-label">예시</div>
+<pre><span class="cm">-- 문자/숫자/날짜</span>
+<span class="kw">SELECT</span> SUBSTR(<span class="kw">'SQLD'</span>,1,3)        <span class="cm">→ 'SQL'</span>
+     , LENGTH(<span class="kw">'양파'</span>)             <span class="cm">→ 2</span>
+     , ROUND(123.456, 1)         <span class="cm">→ 123.5</span>
+     , MOD(10, 3)                <span class="cm">→ 1</span>
+     , TO_CHAR(SYSDATE,<span class="kw">'YYYY-MM-DD'</span>)
+<span class="kw">FROM</span> DUAL;
+
+<span class="cm">-- NULL/조건</span>
+NVL(SAL, 0), NVL2(COMM,<span class="kw">'있음'</span>,<span class="kw">'없음'</span>)
+<span class="kw">CASE WHEN</span> SAL &gt; 3000 <span class="kw">THEN</span> <span class="kw">'高'</span> <span class="kw">ELSE</span> <span class="kw">'低' END</span>
+DECODE(JOB, <span class="kw">'CLERK'</span>, 1, <span class="kw">'SALES'</span>, 2, 0)</pre>
+        </div>
         <div class="traps">
           <div class="trap-label">⚠ 함정</div>
           <ul>
@@ -548,6 +585,19 @@
           <li><strong>GROUPING SETS</strong>: 지정한 조합만 (가장 유연)</li>
           <li><code>GROUPING()</code> 함수로 소계 행 식별 (1=소계, 0=원본)</li>
         </ul>
+        <div class="ex-sql">
+          <div class="ex-label">예시</div>
+<pre><span class="kw">SELECT</span> DEPT, JOB, <span class="kw">SUM</span>(SAL)
+<span class="kw">FROM</span> EMP
+<span class="kw">GROUP BY</span> ROLLUP(DEPT, JOB);
+<span class="cm">-- (DEPT,JOB) → (DEPT) → ()  3단계</span>
+
+<span class="kw">GROUP BY</span> CUBE(DEPT, JOB);
+<span class="cm">-- (D,J),(D),(J),()  4단계 (2^2)</span>
+
+<span class="kw">GROUP BY</span> GROUPING SETS((DEPT,JOB),(DEPT));
+<span class="cm">-- 지정한 조합만</span></pre>
+        </div>
         <div class="traps">
           <div class="trap-label">⚠ 함정</div>
           <ul>
@@ -565,6 +615,17 @@
           <li>집계 OVER: SUM/AVG/COUNT OVER PARTITION BY</li>
           <li>WINDOWING: ROWS BETWEEN ... AND ... (행 범위 지정)</li>
         </ul>
+        <div class="ex-sql">
+          <div class="ex-label">예시</div>
+<pre><span class="kw">SELECT</span> ENAME, DEPT, SAL,
+  <span class="kw">RANK</span>()       <span class="kw">OVER</span>(<span class="kw">PARTITION BY</span> DEPT <span class="kw">ORDER BY</span> SAL <span class="kw">DESC</span>) R,
+  DENSE_RANK() <span class="kw">OVER</span>(<span class="kw">PARTITION BY</span> DEPT <span class="kw">ORDER BY</span> SAL <span class="kw">DESC</span>) DR,
+  ROW_NUMBER() <span class="kw">OVER</span>(<span class="kw">ORDER BY</span> SAL <span class="kw">DESC</span>) RN,
+  LAG(SAL,1)   <span class="kw">OVER</span>(<span class="kw">ORDER BY</span> HIRE) PREV,
+  <span class="kw">SUM</span>(SAL)    <span class="kw">OVER</span>(<span class="kw">PARTITION BY</span> DEPT) DEPT_SUM
+<span class="kw">FROM</span> EMP;
+<span class="cm">-- RANK: 1,1,3 / DENSE_RANK: 1,1,2 / ROW_NUMBER: 1,2,3</span></pre>
+        </div>
         <div class="traps">
           <div class="trap-label">⚠ 함정</div>
           <ul>
@@ -634,6 +695,19 @@
           <li>메타문자: <code>.</code> <code>*</code> <code>+</code> <code>?</code> <code>[]</code> <code>^</code> <code>$</code> <code>|</code> <code>{n}</code></li>
           <li>한글: <code>[가-힣]</code></li>
         </ul>
+        <div class="ex-sql">
+          <div class="ex-label">예시</div>
+<pre><span class="cm">-- 한글만 / 휴대폰 형식</span>
+<span class="kw">WHERE</span> REGEXP_LIKE(NAME, <span class="kw">'^[가-힣]+$'</span>)
+<span class="kw">WHERE</span> REGEXP_LIKE(PHONE, <span class="kw">'^010-[0-9]{4}-[0-9]{4}$'</span>)
+
+<span class="cm">-- 숫자 추출</span>
+<span class="kw">SELECT</span> REGEXP_SUBSTR(<span class="kw">'A123B45'</span>, <span class="kw">'[0-9]+'</span>) <span class="kw">FROM</span> DUAL;
+<span class="cm">→ '123'</span>
+
+<span class="kw">SELECT</span> REGEXP_REPLACE(STR, <span class="kw">'[^0-9]'</span>, <span class="kw">''</span>) <span class="kw">FROM</span> ...;
+<span class="cm">-- 숫자만 남김</span></pre>
+        </div>
         <div class="traps">
           <div class="trap-label">⚠ 함정</div>
           <ul>
@@ -653,6 +727,18 @@
           <li>ROLLBACK 가능 → TCL로 확정 필요</li>
           <li>MERGE: INSERT + UPDATE 합쳐진 형태 (UPSERT)</li>
         </ul>
+        <div class="ex-sql">
+          <div class="ex-label">예시</div>
+<pre><span class="kw">INSERT INTO</span> EMP (ID, NAME, SAL) <span class="kw">VALUES</span> (1, <span class="kw">'홍길동'</span>, 3000);
+
+<span class="kw">UPDATE</span> EMP <span class="kw">SET</span> SAL = SAL * 1.1 <span class="kw">WHERE</span> DEPT = 10;
+
+<span class="kw">DELETE FROM</span> EMP <span class="kw">WHERE</span> ID = 1;
+
+<span class="kw">MERGE INTO</span> TGT <span class="kw">USING</span> SRC <span class="kw">ON</span> (TGT.ID = SRC.ID)
+  <span class="kw">WHEN MATCHED THEN UPDATE SET</span> TGT.NAME = SRC.NAME
+  <span class="kw">WHEN NOT MATCHED THEN INSERT</span> (ID, NAME) <span class="kw">VALUES</span> (SRC.ID, SRC.NAME);</pre>
+        </div>
         <div class="traps">
           <div class="trap-label">⚠ 함정 (단골)</div>
           <ul>
@@ -669,6 +755,14 @@
           <li>SAVEPOINT 후 <code>ROLLBACK TO SP</code> = SP 이후 작업만 취소</li>
           <li>전체 ROLLBACK 또는 COMMIT 시 SAVEPOINT 소멸</li>
         </ul>
+        <div class="ex-sql">
+          <div class="ex-label">예시</div>
+<pre><span class="kw">INSERT INTO</span> EMP <span class="kw">VALUES</span> (1, <span class="kw">'A'</span>);
+<span class="kw">SAVEPOINT</span> SP1;
+<span class="kw">UPDATE</span> EMP <span class="kw">SET</span> NAME = <span class="kw">'B'</span> <span class="kw">WHERE</span> ID = 1;
+<span class="kw">ROLLBACK TO</span> SP1;   <span class="cm">-- UPDATE만 취소 (INSERT는 살아있음)</span>
+<span class="kw">COMMIT</span>;             <span class="cm">-- INSERT 확정</span></pre>
+        </div>
         <div class="traps">
           <div class="trap-label">⚠ 함정</div>
           <ul>
@@ -686,6 +780,23 @@
           <li>제약조건: PRIMARY KEY / FOREIGN KEY / UNIQUE / NOT NULL / CHECK / DEFAULT</li>
           <li>PK = UNIQUE + NOT NULL (1개) / UNIQUE는 NULL 허용 (여러 개)</li>
         </ul>
+        <div class="ex-sql">
+          <div class="ex-label">예시</div>
+<pre><span class="kw">CREATE TABLE</span> EMP (
+  ID      <span class="kw">NUMBER PRIMARY KEY</span>,
+  NAME    <span class="kw">VARCHAR2</span>(20) <span class="kw">NOT NULL</span>,
+  EMAIL   <span class="kw">VARCHAR2</span>(50) <span class="kw">UNIQUE</span>,
+  SAL     <span class="kw">NUMBER DEFAULT</span> 0 <span class="kw">CHECK</span> (SAL &gt;= 0),
+  DEPT_ID <span class="kw">NUMBER REFERENCES</span> DEPT(ID)
+);
+
+<span class="kw">ALTER TABLE</span> EMP <span class="kw">ADD</span> (HIRE_DT <span class="kw">DATE</span>);
+<span class="kw">ALTER TABLE</span> EMP <span class="kw">MODIFY</span> (NAME <span class="kw">VARCHAR2</span>(30));
+<span class="kw">ALTER TABLE</span> EMP <span class="kw">DROP COLUMN</span> EMAIL;
+
+<span class="kw">TRUNCATE TABLE</span> EMP;   <span class="cm">-- 전체 삭제, 자동 COMMIT</span>
+<span class="kw">DROP TABLE</span> EMP;</pre>
+        </div>
         <div class="traps">
           <div class="trap-label">⚠ 함정 (단골)</div>
           <ul>
@@ -704,6 +815,23 @@
           <li>객체 권한: <strong>WITH GRANT OPTION</strong> (ex: SELECT ON EMP)</li>
           <li>ROLE: 권한 묶음. GRANT/REVOKE 한 번에</li>
         </ul>
+        <div class="ex-sql">
+          <div class="ex-label">예시</div>
+<pre><span class="cm">-- 객체 권한</span>
+<span class="kw">GRANT SELECT</span>, <span class="kw">INSERT ON</span> EMP <span class="kw">TO</span> USER1;
+<span class="kw">GRANT SELECT ON</span> EMP <span class="kw">TO</span> USER1 <span class="kw">WITH GRANT OPTION</span>;
+
+<span class="cm">-- 시스템 권한</span>
+<span class="kw">GRANT CREATE TABLE TO</span> USER1 <span class="kw">WITH ADMIN OPTION</span>;
+
+<span class="cm">-- 회수</span>
+<span class="kw">REVOKE SELECT ON</span> EMP <span class="kw">FROM</span> USER1;
+
+<span class="cm">-- ROLE</span>
+<span class="kw">CREATE ROLE</span> DEV_ROLE;
+<span class="kw">GRANT SELECT ON</span> EMP <span class="kw">TO</span> DEV_ROLE;
+<span class="kw">GRANT</span> DEV_ROLE <span class="kw">TO</span> USER1;</pre>
+        </div>
         <div class="traps">
           <div class="trap-label">⚠ 함정</div>
           <ul>
