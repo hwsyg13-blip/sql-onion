@@ -263,7 +263,7 @@ export const ROUND_54: QuizQuestion[] = [
     "round": 54,
     "subject": "2과목",
     "number": 14,
-    "title": "아래 정규형 정의에 따를 때 값이 나오지 않는 전화번호 형식은?",
+    "title": "아래 PHONE 테이블에 정규식 패턴을 적용했을 때 매칭되지 않는(값이 나오지 않는) 전화번호 형식은?",
     "options": [
       "010-1111-2222",
       "010-3333-4444",
@@ -271,11 +271,12 @@ export const ROUND_54: QuizQuestion[] = [
       "070-1111-2222"
     ],
     "correctIndex": 2,
-    "explanation": "괄호 ')' 는 [0-9] 문자 클래스에 포함되지 않으므로 매칭되지 않는다.",
+    "explanation": "정규식 `^[0-9]{3}-[0-9]{3,4}-[0-9]{4}$` 는 \"숫자 3 자리-숫자 3·4 자리-숫자 4 자리\" 패턴을 매칭한다. ① 010-1111-2222, ② 010-3333-4444, ④ 070-1111-2222 는 모두 패턴에 부합. ③ '02)345-6789' 는 괄호 `)` 가 `[0-9]` 클래스에 포함되지 않고 첫 그룹이 2 자리(02)밖에 안 되어 매칭 실패.",
     "_source": "authored",
     "references": [
       {
         "type": "table",
+        "caption": "PHONE 테이블",
         "headers": [
           "PHONE"
         ],
@@ -288,12 +289,15 @@ export const ROUND_54: QuizQuestion[] = [
           ],
           [
             "02)345-6789"
+          ],
+          [
+            "070-1111-2222"
           ]
         ]
       },
       {
-        "type": "text",
-        "content": "정규식 패턴: `^[0-9]{3}-[0-9]{3,4}-[0-9]{4}$`"
+        "type": "sql",
+        "code": "SELECT *\nFROM   PHONE\nWHERE  REGEXP_LIKE(PHONE, '^[0-9]{3}-[0-9]{3,4}-[0-9]{4}$');"
       }
     ]
   },
@@ -346,20 +350,41 @@ export const ROUND_54: QuizQuestion[] = [
     "round": 54,
     "subject": "2과목",
     "number": 17,
-    "title": "아래 SQL 과 동일한 결과를 반환하는 함수는?",
+    "title": "아래 T 테이블에 대한 SQL 과 동일한 결과를 반환하는 함수는?",
     "options": [
-      "NVL(COL1, 'X')",
-      "DECODE(COL1, NULL, 'X')",
-      "COALESCE(COL1, 'X')",
-      "NULLIF(COL1, 'X')"
+      "`NVL(COL1, 'X')`",
+      "`DECODE(COL1, NULL, 'X')`",
+      "`COALESCE(COL1, 'X')`",
+      "`NULLIF(COL1, 'X')`"
     ],
     "correctIndex": 3,
-    "explanation": "NULLIF(a, b) 는 두 인자가 같으면 NULL, 다르면 a 를 반환한다.",
+    "explanation": "원본 SQL 의 `CASE WHEN COL1 = 'X' THEN NULL ELSE COL1 END` 는 \"COL1 이 'X' 이면 NULL, 아니면 COL1\" 을 반환. 이건 정확히 `NULLIF(COL1, 'X')` 의 의미. ① NVL 은 NULL → 'X', ② DECODE 도 NULL → 'X', ③ COALESCE 도 NULL → 'X' 라 의미 반대.",
     "_source": "authored",
     "references": [
       {
+        "type": "table",
+        "caption": "T 테이블",
+        "headers": [
+          "COL1"
+        ],
+        "rows": [
+          [
+            "A"
+          ],
+          [
+            "X"
+          ],
+          [
+            "B"
+          ],
+          [
+            "(NULL)"
+          ]
+        ]
+      },
+      {
         "type": "sql",
-        "code": "SELECT CASE WHEN COL1 = 'X' THEN NULL ELSE COL1 END FROM T;"
+        "code": "SELECT CASE WHEN COL1 = 'X' THEN NULL ELSE COL1 END\nFROM   T;"
       }
     ]
   },
@@ -370,7 +395,7 @@ export const ROUND_54: QuizQuestion[] = [
     "round": 54,
     "subject": "2과목",
     "number": 18,
-    "title": "아래 SQL 중 Oracle 환경에서 결과가 다른 것은?",
+    "title": "아래 TAB 테이블에 대한 SQL 중 Oracle 환경에서 결과가 다른 것은?",
     "options": [
       "`SELECT COL1, COL2, COL3 FROM TAB WHERE COL1 < 5;`",
       "`SELECT T.* FROM TAB AS T;`",
@@ -378,11 +403,12 @@ export const ROUND_54: QuizQuestion[] = [
       "`SELECT * FROM TAB WHERE COL2 IN (2, 3);`"
     ],
     "correctIndex": 1,
-    "explanation": "Oracle 은 FROM 절에서 AS 키워드를 테이블 별칭에 허용하지 않아 ORA-00933 오류가 발생한다.",
+    "explanation": "Oracle 은 FROM 절에서 테이블 별칭에 `AS` 키워드를 허용하지 않아 ② 는 ORA-00933 오류 발생. ①③④ 는 모두 정상 실행되어 같은 4 행을 반환 (조건이 충분히 넓음).",
     "_source": "authored",
     "references": [
       {
         "type": "table",
+        "caption": "TAB 테이블",
         "headers": [
           "COL1",
           "COL2",
@@ -743,7 +769,7 @@ export const ROUND_54: QuizQuestion[] = [
     "round": 54,
     "subject": "2과목",
     "number": 26,
-    "title": "아래 IN 서브쿼리와 동일한 결과를 반환하는 EXISTS 쿼리는?",
+    "title": "아래 두 테이블 A, B 에 대한 IN 서브쿼리와 동일한 결과를 반환하는 EXISTS 쿼리는?",
     "options": [
       "`SELECT * FROM A WHERE EXISTS (SELECT 1 FROM B WHERE A.성별 = B.성별 AND A.번호 = B.번호);`",
       "`SELECT * FROM A WHERE EXISTS (SELECT 1 FROM B WHERE A.번호 = B.번호);`",
@@ -751,9 +777,49 @@ export const ROUND_54: QuizQuestion[] = [
       "`SELECT * FROM A WHERE NOT EXISTS (SELECT 1 FROM B WHERE A.성별 = B.성별 AND A.번호 = B.번호);`"
     ],
     "correctIndex": 0,
-    "explanation": "원본 IN 서브쿼리 `WHERE 번호 IN (SELECT 번호 FROM B WHERE A.성별 = B.성별)` 은 ① 외부의 `A.번호 = B.번호` 조건과 ② 서브쿼리 안의 `A.성별 = B.성별` 상관 조건을 동시에 요구한다. EXISTS 로 변환하려면 두 조건을 모두 EXISTS 절 안에 옮겨야 한다. ② 는 성별 조건 누락, ③ 은 번호 조건 누락, ④ 는 NOT EXISTS 라 논리 반전이라 모두 오답.",
+    "explanation": "원본 IN 서브쿼리 `WHERE 번호 IN (SELECT 번호 FROM B WHERE A.성별 = B.성별)` 은 외부의 `A.번호 = B.번호` 조건과 서브쿼리 안의 `A.성별 = B.성별` 상관 조건을 동시에 요구한다. EXISTS 로 변환하려면 두 조건을 모두 EXISTS 절 안에 옮겨야 한다. ② 성별 조건 누락, ③ 번호 조건 누락, ④ NOT EXISTS 논리 반전.",
     "_source": "authored",
     "references": [
+      {
+        "type": "table",
+        "caption": "A 테이블",
+        "headers": [
+          "번호",
+          "성별"
+        ],
+        "rows": [
+          [
+            "1",
+            "M"
+          ],
+          [
+            "2",
+            "F"
+          ],
+          [
+            "3",
+            "M"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "B 테이블",
+        "headers": [
+          "번호",
+          "성별"
+        ],
+        "rows": [
+          [
+            "1",
+            "M"
+          ],
+          [
+            "2",
+            "M"
+          ]
+        ]
+      },
       {
         "type": "sql",
         "code": "SELECT * FROM A\nWHERE 번호 IN (SELECT 번호 FROM B WHERE A.성별 = B.성별);"
@@ -767,7 +833,7 @@ export const ROUND_54: QuizQuestion[] = [
     "round": 54,
     "subject": "2과목",
     "number": 27,
-    "title": "아래 SQL 의 결과로 옳은 것은?",
+    "title": "아래 두 테이블 TAB1, TAB2 에 대한 SQL 의 결과로 옳은 것은?",
     "options": [
       "NULL",
       "0",
@@ -775,26 +841,41 @@ export const ROUND_54: QuizQuestion[] = [
       "전체 건수"
     ],
     "correctIndex": 1,
-    "explanation": "서브쿼리에 NULL 이 포함되어 NOT IN 전체가 UNKNOWN 으로 평가되어 공집합(0건)이 반환된다.",
+    "explanation": "TAB1.COL1 에 NULL 이 포함되어 있어 `NOT IN` 비교 결과가 모두 UNKNOWN 으로 평가된다. 따라서 `COUNT(*)` 가 0 을 반환 (공집합 카운트).",
     "_source": "authored",
     "references": [
       {
         "type": "table",
+        "caption": "TAB1 테이블",
         "headers": [
-          "TAB1 (COL1)",
-          "TAB2 (COL2)"
+          "COL1"
         ],
         "rows": [
           [
-            "1",
             "1"
           ],
           [
-            "2",
             "2"
           ],
           [
-            "NULL",
+            "NULL"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "TAB2 테이블",
+        "headers": [
+          "COL2"
+        ],
+        "rows": [
+          [
+            "1"
+          ],
+          [
+            "2"
+          ],
+          [
             "3"
           ]
         ]
@@ -1111,16 +1192,52 @@ export const ROUND_54: QuizQuestion[] = [
     "round": 54,
     "subject": "2과목",
     "number": 34,
-    "title": "강좌번호 100 과 101 을 동시에 수강하는 학번을 조회하는 SQL 로 적절한 것은?",
+    "title": "아래 수강 테이블에서 강좌번호 100 과 101 을 동시에 수강하는 학번을 조회하는 SQL 로 적절한 것은?",
     "options": [
-      "SELECT 학번 FROM 수강 WHERE 강의번호 = 100 AND 강의번호 = 101;",
-      "`SELECT 학번 FROM 수강 WHERE 강의번호=100 INTERSECT SELECT 학번 FROM 수강 WHERE 강의번호=101`",
-      "SELECT 학번 FROM 수강 WHERE 강의번호 IN (100, 101);",
-      "SELECT 학번 FROM 수강 WHERE 강의번호 = 100 OR 강의번호 = 101;"
+      "`SELECT 학번 FROM 수강 WHERE 강의번호 = 100 AND 강의번호 = 101;`",
+      "`SELECT 학번 FROM 수강 WHERE 강의번호=100 INTERSECT SELECT 학번 FROM 수강 WHERE 강의번호=101;`",
+      "`SELECT 학번 FROM 수강 WHERE 강의번호 IN (100, 101);`",
+      "`SELECT 학번 FROM 수강 WHERE 강의번호 = 100 OR 강의번호 = 101;`"
     ],
     "correctIndex": 1,
     "explanation": "AND 는 한 행이 동시에 두 값일 수 없어 공집합, IN/OR 은 둘 중 하나라도 만족하는 학번을 반환한다. INTERSECT 로 두 강좌의 학번 집합을 교집합 처리해야 동시에 수강한 학번을 얻는다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "caption": "수강 테이블",
+        "headers": [
+          "학번",
+          "강의번호"
+        ],
+        "rows": [
+          [
+            "S1",
+            "100"
+          ],
+          [
+            "S1",
+            "101"
+          ],
+          [
+            "S2",
+            "100"
+          ],
+          [
+            "S3",
+            "101"
+          ],
+          [
+            "S4",
+            "100"
+          ],
+          [
+            "S4",
+            "101"
+          ]
+        ]
+      }
+    ]
   },
   {
     "id": 10334,
@@ -1129,20 +1246,46 @@ export const ROUND_54: QuizQuestion[] = [
     "round": 54,
     "subject": "2과목",
     "number": 35,
-    "title": "아래 SELF JOIN 을 이용한 등수 쿼리에서 빈칸에 들어갈 내용으로 옳은 것은?",
+    "title": "아래 T1 테이블에 대한 SELF JOIN 등수 쿼리에서 빈칸 ⓐ, ⓑ 에 들어갈 내용으로 옳은 것은?",
     "options": [
-      "COUNT(*) + 1, T1.점수 < T2.점수",
-      "COUNT(*), T1.점수 = T2.점수",
-      "COUNT(*) + 1, T1.점수 > T2.점수",
-      "COUNT(*) - 1, T1.점수 <= T2.점수"
+      "ⓐ COUNT(*) + 1 / ⓑ T1.점수 < T2.점수",
+      "ⓐ COUNT(*) / ⓑ T1.점수 = T2.점수",
+      "ⓐ COUNT(*) + 1 / ⓑ T1.점수 > T2.점수",
+      "ⓐ COUNT(*) - 1 / ⓑ T1.점수 <= T2.점수"
     ],
     "correctIndex": 0,
-    "explanation": "자기보다 점수가 높은 사람 수에 1 을 더하면 순위가 된다.",
+    "explanation": "자기보다 점수가 높은 사람 수에 1 을 더하면 순위가 된다. 따라서 ⓐ 는 `COUNT(*) + 1`, ⓑ 의 비교 조건은 `T1.점수 < T2.점수` 가 되어야 한다.",
     "_source": "authored",
     "references": [
       {
+        "type": "table",
+        "caption": "T1 테이블",
+        "headers": [
+          "이름",
+          "점수"
+        ],
+        "rows": [
+          [
+            "홍길동",
+            "90"
+          ],
+          [
+            "김철수",
+            "85"
+          ],
+          [
+            "이영희",
+            "95"
+          ],
+          [
+            "박지성",
+            "80"
+          ]
+        ]
+      },
+      {
         "type": "sql",
-        "code": "SELECT 이름, 점수,\n       (SELECT COUNT(*) + 1\n        FROM   T1 T2\n        WHERE  T1.점수 < T2.점수) AS 순위\nFROM   T1\nORDER BY 순위;"
+        "code": "SELECT 이름, 점수,\n       (SELECT  ⓐ \n        FROM   T1 T2\n        WHERE   ⓑ ) AS 순위\nFROM   T1\nORDER BY 순위;"
       }
     ]
   },
@@ -1171,10 +1314,10 @@ export const ROUND_54: QuizQuestion[] = [
     "round": 54,
     "subject": "2과목",
     "number": 37,
-    "title": "아래 SQL 의 동작에 대한 설명으로 옳은 것은?",
+    "title": "아래 EMP_TEST 테이블에 대한 UPDATE SQL 의 동작에 대한 설명으로 옳은 것은?",
     "options": [
       "DEPARTMENT_ID 가 60 인 사원의 SALARY 만 10% 인상되고 그 외에는 변경되지 않는다.",
-      "WHERE 절이 생략되어 UPDATE EMP_TEST SET SALARY = SALARY * 1.1 WHERE DEPARTMENT_ID = 60 과 동일한 의미가 된다.",
+      "WHERE 절이 생략되어 `UPDATE EMP_TEST SET SALARY = SALARY * 1.1 WHERE DEPARTMENT_ID = 60` 과 동일한 의미가 된다.",
       "상관 서브쿼리에 비집계 컬럼이 사용되어 SQL 컴파일 단계에서 오류가 발생한다.",
       "DEPARTMENT_ID 가 60 이 아닌 모든 사원의 월급이 NULL 로 갱신된다."
     ],
@@ -1182,6 +1325,37 @@ export const ROUND_54: QuizQuestion[] = [
     "explanation": "WHERE 절이 없는 UPDATE 이므로 모든 행에 대해 서브쿼리가 평가된다. DEPARTMENT_ID=60 조건을 만족하지 못하면 서브쿼리 결과가 NULL 이 된다.",
     "_source": "authored",
     "references": [
+      {
+        "type": "table",
+        "caption": "EMP_TEST 테이블",
+        "headers": [
+          "EMPLOYEE_ID",
+          "DEPARTMENT_ID",
+          "SALARY"
+        ],
+        "rows": [
+          [
+            "100",
+            "60",
+            "5000"
+          ],
+          [
+            "101",
+            "60",
+            "4000"
+          ],
+          [
+            "102",
+            "50",
+            "3000"
+          ],
+          [
+            "103",
+            "70",
+            "3500"
+          ]
+        ]
+      },
       {
         "type": "sql",
         "code": "UPDATE EMP_TEST A\nSET SALARY = (SELECT SALARY * 1.1\n              FROM   EMP_TEST B\n              WHERE  A.EMPLOYEE_ID = B.EMPLOYEE_ID\n              AND    B.DEPARTMENT_ID = 60);"
@@ -1365,7 +1539,7 @@ export const ROUND_54: QuizQuestion[] = [
     "round": 54,
     "subject": "2과목",
     "number": 42,
-    "title": "아래 SQL 에서 정렬 결과에 대한 설명으로 옳은 것은?",
+    "title": "아래 주문/주문내역 테이블에 대한 SQL 의 정렬 결과에 대한 설명으로 옳은 것은?",
     "options": [
       "계좌번호 오름차순 정렬",
       "계좌번호가 NULL 인 행이 먼저 출력",
@@ -1376,6 +1550,58 @@ export const ROUND_54: QuizQuestion[] = [
     "explanation": "ORDER BY 계좌번호 DESC 로 명시되었으므로 결과는 계좌번호 내림차순으로 정렬된다. NULL 위치는 DBMS 별 기본 동작에 따르며 별도의 NULLS FIRST 지정이 없다.",
     "_source": "authored",
     "references": [
+      {
+        "type": "table",
+        "caption": "주문 테이블",
+        "headers": [
+          "번호",
+          "고객명",
+          "계좌번호"
+        ],
+        "rows": [
+          [
+            "1",
+            "홍길동",
+            "A100"
+          ],
+          [
+            "2",
+            "김철수",
+            "A200"
+          ],
+          [
+            "3",
+            "이영희",
+            "A150"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "주문내역 테이블",
+        "headers": [
+          "번호",
+          "상품",
+          "수량"
+        ],
+        "rows": [
+          [
+            "1",
+            "노트북",
+            "1"
+          ],
+          [
+            "2",
+            "마우스",
+            "2"
+          ],
+          [
+            "3",
+            "키보드",
+            "1"
+          ]
+        ]
+      },
       {
         "type": "sql",
         "code": "SELECT *\nFROM   주문 JOIN 주문내역 ON 주문.번호 = 주문내역.번호\nORDER BY 계좌번호 DESC;"
@@ -1431,7 +1657,7 @@ export const ROUND_54: QuizQuestion[] = [
     "round": 54,
     "subject": "2과목",
     "number": 45,
-    "title": "아래 LIKE 조건의 결과로 옳은 것은?",
+    "title": "아래 T 테이블에 대한 LIKE 조건의 결과로 옳은 것은?",
     "options": [
       "대문자 'A' 로 시작하는 모든 행을 반환한다.",
       "소문자 'a' 로 시작하는 행도 포함된다.",
@@ -1442,6 +1668,30 @@ export const ROUND_54: QuizQuestion[] = [
     "explanation": "LIKE 'A%' 는 'A' 로 시작하는 모든 문자열을 매칭한다. Oracle 기본 비교는 대소문자 구분이므로 소문자 'a' 는 매칭되지 않는다.",
     "_source": "authored",
     "references": [
+      {
+        "type": "table",
+        "caption": "T 테이블",
+        "headers": [
+          "COL1"
+        ],
+        "rows": [
+          [
+            "APPLE"
+          ],
+          [
+            "apple"
+          ],
+          [
+            "BANANA"
+          ],
+          [
+            "AVOCADO"
+          ],
+          [
+            "mango"
+          ]
+        ]
+      },
       {
         "type": "sql",
         "code": "SELECT * FROM T WHERE COL1 LIKE 'A%';"
@@ -1455,12 +1705,12 @@ export const ROUND_54: QuizQuestion[] = [
     "round": 54,
     "subject": "2과목",
     "number": 46,
-    "title": "아래 결과를 반환하는 윈도우 함수는?",
+    "title": "아래 결과(COL1, COL2) 를 반환하는 윈도우 함수는?",
     "options": [
-      "LAG(COL1) OVER (ORDER BY COL1)",
-      "LEAD(COL1) OVER (ORDER BY COL1)",
-      "ROW_NUMBER() OVER (ORDER BY COL1)",
-      "RANK() OVER (ORDER BY COL1)"
+      "`LAG(COL1) OVER (ORDER BY COL1)`",
+      "`LEAD(COL1) OVER (ORDER BY COL1)`",
+      "`ROW_NUMBER() OVER (ORDER BY COL1)`",
+      "`RANK() OVER (ORDER BY COL1)`"
     ],
     "correctIndex": 0,
     "explanation": "LAG 는 이전 행의 값을 반환한다. 첫 행은 이전 값이 없으므로 NULL 이다.",
@@ -1468,6 +1718,7 @@ export const ROUND_54: QuizQuestion[] = [
     "references": [
       {
         "type": "table",
+        "caption": "출력 결과 (COL1, COL2 = 함수 결과)",
         "headers": [
           "COL1",
           "COL2"
