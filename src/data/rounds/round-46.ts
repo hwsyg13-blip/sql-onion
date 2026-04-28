@@ -290,10 +290,10 @@ export const ROUND_46: QuizQuestion[] = [
     "number": 12,
     "title": "아래 네 SQL 중 COL이 NULL일 때 반환 결과가 나머지와 다른 것은?",
     "options": [
-      "IFNULL(COL, 'value')",
-      "NVL(COL, 'value')",
-      "COALESCE(COL, 'value')",
-      "NULLIF(COL, 'value')"
+      "`IFNULL(COL, 'value')`",
+      "`NVL(COL, 'value')`",
+      "`COALESCE(COL, 'value')`",
+      "`NULLIF(COL, 'value')`"
     ],
     "correctIndex": 3,
     "explanation": "①·②·③은 NULL을 지정한 값으로 치환하지만, NULLIF는 두 값이 같으면 NULL을, 다르면 첫 번째 값을 반환한다.",
@@ -362,10 +362,10 @@ export const ROUND_46: QuizQuestion[] = [
     "number": 15,
     "title": "아래 T 테이블에 대한 네 SQL 중 결과가 다른 것은?",
     "options": [
-      "SELECT A, SUM(X) FROM T GROUP BY A UNION ALL SELECT NULL, SUM(X) FROM T;",
-      "SELECT A, SUM(X) FROM T GROUP BY ROLLUP(A);",
-      "SELECT A, SUM(X) FROM T GROUP BY CUBE(A);",
-      "SELECT A, SUM(X) FROM T GROUP BY GROUPING SETS(A);"
+      "`SELECT A, SUM(X) FROM T GROUP BY A UNION ALL SELECT NULL, SUM(X) FROM T;`",
+      "`SELECT A, SUM(X) FROM T GROUP BY ROLLUP(A);`",
+      "`SELECT A, SUM(X) FROM T GROUP BY CUBE(A);`",
+      "`SELECT A, SUM(X) FROM T GROUP BY GROUPING SETS(A);`"
     ],
     "correctIndex": 3,
     "explanation": "T 의 A 별 합계는 A=1 → 30, A=2 → 70 이고 전체 합계는 100 이다. ① UNION ALL 은 A 별 소계 두 행과 NULL 키 전체 합계 한 행을 더해 (1,30),(2,70),(NULL,100) 을 반환한다. ② ROLLUP(A) 와 ③ CUBE(A) 는 단일 컬럼이므로 A 별 소계와 전체 합계를 함께 반환해 결과가 같다. ④ GROUPING SETS(A) 는 A 단위 소계만 생성하고 전체 합계를 포함하지 않으므로 (1,30),(2,70) 두 행만 반환된다. 따라서 결과가 다른 것은 ④ 이다.",
@@ -485,21 +485,48 @@ export const ROUND_46: QuizQuestion[] = [
     "references": [
       {
         "type": "table",
+        "caption": "T1 테이블",
         "headers": [
-          "테이블",
-          "COL 값"
+          "COL"
         ],
         "rows": [
           [
-            "T1",
-            "1, 2, 3"
+            "1"
           ],
           [
-            "T2",
-            "3, 4, 5"
+            "2"
           ],
           [
-            "T3",
+            "3"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "T2 테이블",
+        "headers": [
+          "COL"
+        ],
+        "rows": [
+          [
+            "3"
+          ],
+          [
+            "4"
+          ],
+          [
+            "5"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "T3 테이블",
+        "headers": [
+          "COL"
+        ],
+        "rows": [
+          [
             "2"
           ]
         ]
@@ -577,12 +604,12 @@ export const ROUND_46: QuizQuestion[] = [
     "round": 46,
     "subject": "2과목",
     "number": 23,
-    "title": "다음 데이터와 SQL에서 정렬 조건의 중복 값을 동일 합으로 처리하는 윈도우 절은?",
+    "title": "아래 T 테이블에서 정렬 조건의 중복 값을 동일 합으로 처리하는 윈도우 절은? (기대 결과: (A, 300), (A, 300), (A, 300))",
     "options": [
-      "ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW",
-      "RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW",
-      "ROWS BETWEEN 1 PRECEDING AND 1 FOLLOWING",
-      "ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING"
+      "`ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW`",
+      "`RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW`",
+      "`ROWS BETWEEN 1 PRECEDING AND 1 FOLLOWING`",
+      "`ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING`"
     ],
     "correctIndex": 1,
     "explanation": "ORDER BY 키에 중복이 있을 때 ROWS는 물리적 행 단위로 누적하여 결과가 달라지는 반면, RANGE는 동일 값을 하나의 논리적 범위로 처리해 동일 누적 합을 반환한다.",
@@ -590,6 +617,7 @@ export const ROUND_46: QuizQuestion[] = [
     "references": [
       {
         "type": "table",
+        "caption": "T 테이블 (GRP=A 그룹의 AMT 가 모두 동일)",
         "headers": [
           "ID",
           "GRP",
@@ -614,8 +642,8 @@ export const ROUND_46: QuizQuestion[] = [
         ]
       },
       {
-        "type": "text",
-        "content": "기대 결과: (A, 300), (A, 300), (A, 300)"
+        "type": "sql",
+        "code": "SELECT GRP, SUM(AMT) OVER (\n  PARTITION BY GRP\n  ORDER BY AMT\n  [ ? ]\n) AS RUNNING_SUM\nFROM T;"
       }
     ]
   },
@@ -652,10 +680,10 @@ export const ROUND_46: QuizQuestion[] = [
     "number": 25,
     "title": "아래 네 SQL 중 JOB 컬럼의 중복 데이터가 제거되지 않는 것은?",
     "options": [
-      "SELECT JOB FROM EMP WHERE EXISTS (SELECT 1 FROM DEPT WHERE DEPT.DNO = EMP.DNO);",
-      "SELECT DISTINCT JOB FROM EMP;",
-      "SELECT JOB FROM EMP GROUP BY JOB;",
-      "SELECT JOB FROM EMP UNION SELECT JOB FROM EMP2;"
+      "`SELECT JOB FROM EMP WHERE EXISTS (SELECT 1 FROM DEPT WHERE DEPT.DNO = EMP.DNO);`",
+      "`SELECT DISTINCT JOB FROM EMP;`",
+      "`SELECT JOB FROM EMP GROUP BY JOB;`",
+      "`SELECT JOB FROM EMP UNION SELECT JOB FROM EMP2;`"
     ],
     "correctIndex": 0,
     "explanation": "EXISTS는 행의 존재 여부만 판별할 뿐 중복을 제거하지 않는다. 나머지는 DISTINCT, GROUP BY, UNION 모두 중복을 제거한다.",
@@ -670,10 +698,10 @@ export const ROUND_46: QuizQuestion[] = [
     "number": 26,
     "title": "평균 키가 180 이상인 부서만 조회하는 SQL로 올바른 것은?",
     "options": [
-      "SELECT 부서, AVG(키) FROM EMP WHERE AVG(키) >= 180 GROUP BY 부서;",
-      "SELECT 부서, AVG(키) FROM EMP GROUP BY 부서 HAVING AVG(키) >= 180;",
-      "SELECT 부서, AVG(키) FROM EMP HAVING AVG(키) >= 180;",
-      "SELECT 부서, AVG(키) FROM EMP WHERE 키 >= 180 GROUP BY 부서;"
+      "`SELECT 부서, AVG(키) FROM EMP WHERE AVG(키) >= 180 GROUP BY 부서;`",
+      "`SELECT 부서, AVG(키) FROM EMP GROUP BY 부서 HAVING AVG(키) >= 180;`",
+      "`SELECT 부서, AVG(키) FROM EMP HAVING AVG(키) >= 180;`",
+      "`SELECT 부서, AVG(키) FROM EMP WHERE 키 >= 180 GROUP BY 부서;`"
     ],
     "correctIndex": 1,
     "explanation": "그룹 함수 결과에 대한 조건은 WHERE가 아닌 HAVING 절에서 지정한다. GROUP BY와 HAVING은 순서가 바뀌어도 동일하게 동작한다.",
@@ -995,21 +1023,36 @@ export const ROUND_46: QuizQuestion[] = [
     "references": [
       {
         "type": "table",
+        "caption": "T1 테이블",
         "headers": [
-          "T1.COL1",
-          "T2.COL2"
+          "COL1"
         ],
         "rows": [
           [
-            "1",
+            "1"
+          ],
+          [
             "2"
           ],
           [
-            "2",
+            "3"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "T2 테이블 (COL2 에 NULL 포함)",
+        "headers": [
+          "COL2"
+        ],
+        "rows": [
+          [
+            "2"
+          ],
+          [
             "3"
           ],
           [
-            "3",
             "NULL"
           ]
         ]
