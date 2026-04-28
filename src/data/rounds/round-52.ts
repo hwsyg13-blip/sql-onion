@@ -758,7 +758,7 @@ export const ROUND_52: QuizQuestion[] = [
       {
         "type": "erd",
         "caption": "제품·생산제품·생산라인 ERD — [생산제품] 이 M:N 교차 엔터티",
-        "mermaid": "erDiagram\n    제품 ||--o{ 생산제품 : \"생산\"\n    생산라인 ||--o{ 생산제품 : \"운영\"\n    제품 {\n        string 제품번호 PK\n        string 제품명\n    }\n    생산제품 {\n        string 제품번호 PK_FK\n        string 라인번호 PK_FK\n        date 생산일자\n    }\n    생산라인 {\n        string 라인번호 PK\n        string 라인명\n    }"
+        "mermaid": "erDiagram\n    제품 ||--o{ 생산제품 : \"생산\"\n    생산라인 ||--o{ 생산제품 : \"운영\"\n    제품 {\n        string 제품번호 PK\n        string 제품명\n    }\n    생산제품 {\n        string 제품번호 PK,FK\n        string 라인번호 PK,FK\n        date 생산일자\n    }\n    생산라인 {\n        string 라인번호 PK\n        string 라인명\n    }"
       }
     ]
   },
@@ -1230,7 +1230,7 @@ export const ROUND_52: QuizQuestion[] = [
       {
         "type": "erd",
         "caption": "제품·생산제품·생산라인 ERD — [생산제품] 이 M:N 교차 엔터티",
-        "mermaid": "erDiagram\n    제품 ||--o{ 생산제품 : \"생산\"\n    생산라인 ||--o{ 생산제품 : \"운영\"\n    제품 {\n        string 제품번호 PK\n        string 제품명\n    }\n    생산제품 {\n        string 제품번호 PK_FK\n        string 라인번호 PK_FK\n        date 생산일자\n    }\n    생산라인 {\n        string 라인번호 PK\n        string 라인명\n    }"
+        "mermaid": "erDiagram\n    제품 ||--o{ 생산제품 : \"생산\"\n    생산라인 ||--o{ 생산제품 : \"운영\"\n    제품 {\n        string 제품번호 PK\n        string 제품명\n    }\n    생산제품 {\n        string 제품번호 PK,FK\n        string 라인번호 PK,FK\n        date 생산일자\n    }\n    생산라인 {\n        string 라인번호 PK\n        string 라인명\n    }"
       }
     ]
   },
