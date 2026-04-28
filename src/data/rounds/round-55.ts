@@ -1045,8 +1045,9 @@ export const ROUND_55: QuizQuestion[] = [
     "_source": "authored",
     "references": [
       {
-        "type": "ascii",
-        "text": "[ 고객 ] ||-----∈ [ 계약 ] ||-----∈ [ 상세내용 ]"
+        "type": "erd",
+        "caption": "고객-계약-상세내용 ERD (1:M 연쇄)",
+        "mermaid": "erDiagram\n    고객 ||--o{ 계약 : \"체결\"\n    계약 ||--o{ 상세내용 : \"구성\""
       }
     ]
   },

@@ -65,31 +65,34 @@ export const ROUND_45: QuizQuestion[] = [
     "_source": "authored",
     "references": [
       {
-        "type": "entity-diagram",
-        "entityName": "고객",
-        "preText": "  엔터티\n    ↓\n  [ 고객 ]\n    └── 속성: (고객번호) (고객이름) (고객아이디)",
-        "headers": [
-          "고객번호",
-          "고객이름",
-          "고객아이디"
-        ],
-        "rows": [
-          [
-            "10001",
-            "정고객",
-            "AAA1"
+        "type": "erd",
+        "caption": "고객 엔터티",
+        "mermaid": "erDiagram\n    고객 {\n        string 고객번호 PK\n        string 고객이름\n        string 고객아이디\n    }",
+        "instanceTable": {
+          "of": "고객",
+          "headers": [
+            "고객번호",
+            "고객이름",
+            "고객아이디"
           ],
-          [
-            "10002",
-            "김고객",
-            "BBB2"
-          ],
-          [
-            "10003",
-            "박고객",
-            "CCC3"
+          "rows": [
+            [
+              "10001",
+              "정고객",
+              "AAA1"
+            ],
+            [
+              "10002",
+              "김고객",
+              "BBB2"
+            ],
+            [
+              "10003",
+              "박고객",
+              "CCC3"
+            ]
           ]
-        ]
+        }
       }
     ]
   },
@@ -112,8 +115,9 @@ export const ROUND_45: QuizQuestion[] = [
     "_source": "authored",
     "references": [
       {
-        "type": "ascii",
-        "text": "[ 고객 ] ─|─ ─ ─ ─o|─< [ 주문 ]"
+        "type": "erd",
+        "caption": "고객-주문 ERD (고객 측 필수 1, 주문 측 선택 0..N)",
+        "mermaid": "erDiagram\n    고객 ||--o{ 주문 : \"한다\""
       }
     ]
   },

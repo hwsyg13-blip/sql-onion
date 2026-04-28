@@ -41,8 +41,9 @@ export const ROUND_46: QuizQuestion[] = [
     "_source": "authored",
     "references": [
       {
-        "type": "ascii",
-        "text": "[ 고객 ] ─|───────|─ [ 서비스 ]"
+        "type": "erd",
+        "caption": "고객-서비스 ERD (1:1 필수)",
+        "mermaid": "erDiagram\n    고객 ||--|| 서비스 : \"계약\""
       }
     ]
   },
@@ -65,8 +66,9 @@ export const ROUND_46: QuizQuestion[] = [
     "_source": "authored",
     "references": [
       {
-        "type": "ascii",
-        "text": "[ A ] ─┼─< [ B ] ─┼─< [ C ] ─┼─< [ D ]"
+        "type": "erd",
+        "caption": "A-B-C-D 식별자 관계 ERD (모두 1:N, A 의 PK 가 D 까지 순차 전파)",
+        "mermaid": "erDiagram\n    A ||--o{ B : \"갖는다\"\n    B ||--o{ C : \"갖는다\"\n    C ||--o{ D : \"갖는다\""
       }
     ]
   },
@@ -155,8 +157,9 @@ export const ROUND_46: QuizQuestion[] = [
     "_source": "authored",
     "references": [
       {
-        "type": "ascii",
-        "text": "[ 컴퓨터 ] ─o|─ ─ ─ ─ ─|─ [ 마더보드 ]"
+        "type": "erd",
+        "caption": "컴퓨터-마더보드 ERD (마더보드 → 컴퓨터: 0..1, 컴퓨터 → 마더보드: 1)",
+        "mermaid": "erDiagram\n    마더보드 ||--o| 컴퓨터 : \"포함된다\""
       }
     ]
   },
@@ -750,8 +753,9 @@ export const ROUND_46: QuizQuestion[] = [
     "_source": "authored",
     "references": [
       {
-        "type": "ascii",
-        "text": "[ 지점 ] ─|─ ─ ─ ─ ─ ─o< [ 고객 ]"
+        "type": "erd",
+        "caption": "지점-고객 ERD (지점 측 1, 고객 측 0..N)",
+        "mermaid": "erDiagram\n    지점 ||--o{ 고객 : \"소속\""
       }
     ]
   },

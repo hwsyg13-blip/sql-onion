@@ -111,8 +111,9 @@ export const ROUND_60: QuizQuestion[] = [
     "_source": "authored",
     "references": [
       {
-        "type": "ascii",
-        "text": "[ 서비스 ] ||------∈ [ 서비스이용 ] ∋------|| [ 청구 ] ||------∈ [ 납부 ]"
+        "type": "erd",
+        "caption": "서비스·서비스이용·청구·납부 ERD",
+        "mermaid": "erDiagram\n    서비스 ||--o{ 서비스이용 : \"이용\"\n    청구 ||--o{ 서비스이용 : \"기준\"\n    청구 ||--o{ 납부 : \"수행\""
       }
     ]
   },

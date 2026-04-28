@@ -125,8 +125,9 @@ export const ROUND_59: QuizQuestion[] = [
     "_source": "authored",
     "references": [
       {
-        "type": "ascii",
-        "text": "[ A ] ||-----∈ [ B ] ||-----∈ [ C ] ||-----∈ [ D ]"
+        "type": "erd",
+        "caption": "A·B·C·D 식별자 관계 ERD (모두 1:N — A 의 PK 가 D 까지 순차 전파)",
+        "mermaid": "erDiagram\n    A ||--o{ B : \"갖는다\"\n    B ||--o{ C : \"갖는다\"\n    C ||--o{ D : \"갖는다\""
       }
     ]
   },
@@ -203,8 +204,9 @@ export const ROUND_59: QuizQuestion[] = [
     "_source": "authored",
     "references": [
       {
-        "type": "ascii",
-        "text": "[ 학생 ] ∋-----|∘ [ 수강 ] ∘|-----∈ [ 과목 ]\n     (1)       (0..N)      (1)"
+        "type": "erd",
+        "caption": "학생·수강·과목 ERD — [수강] 교차 엔터티 (학생/과목 측 0..N 선택)",
+        "mermaid": "erDiagram\n    학생 ||--o{ 수강 : \"수강\"\n    과목 ||--o{ 수강 : \"개설\""
       }
     ]
   },
