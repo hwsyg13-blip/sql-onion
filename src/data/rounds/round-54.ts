@@ -182,7 +182,7 @@ export const ROUND_54: QuizQuestion[] = [
       "Barker 표기법은 선택 사양을 실선 점선과 O 기호로 구분한다."
     ],
     "correctIndex": 1,
-    "explanation": "IE·Barker 표기법의 실선·점선 의미는 표기 체계마다 다르므로 기재된 내용이 뒤섞여 있다.",
+    "explanation": "② 가 옳지 않은 진술이다. IE 표기법에서 실선이 식별 관계인 것은 옳지만, Barker 표기법의 원(○) 은 '필수 여부' 가 아니라 '선택 참여(Optional)' 를 표기한다 — 두 진술이 한 문장에 뒤섞임. ① IE 까마귀발 카디널리티 표기는 옳음. ③ Barker 식별 관계는 실선이 아닌 점선으로 표기 — 일부 자료에서는 반대로 기술하기도 하나 본 시험에서는 정답 ② 를 기준으로 보존. ④ Barker 선택 사양은 실선·점선·O 기호로 구분 — 옳음.",
     "_source": "authored"
   },
   {
@@ -309,7 +309,7 @@ export const ROUND_54: QuizQuestion[] = [
     "round": 54,
     "subject": "2과목",
     "number": 15,
-    "title": "아래 계층형 쿼리에 대한 설명으로 적절하지 않은 것은?",
+    "title": "아래 EMP 테이블에 대한 계층형 쿼리에 대한 설명으로 적절하지 않은 것은?",
     "options": [
       "계층 구조를 조회한다.",
       "상위 관리자부터 조회한다.",
@@ -317,12 +317,43 @@ export const ROUND_54: QuizQuestion[] = [
       "순방향 탐색이다."
     ],
     "correctIndex": 2,
-    "explanation": "PRIOR emp_no = mgr_no 조건은 현재 행의 emp_no 가 자식 행의 mgr_no 가 되도록 부모→자식 순방향 전개가 된다.",
+    "explanation": "PRIOR emp_no = mgr_no 조건은 \"이전(부모) 행의 emp_no 가 다음(자식) 행의 mgr_no 와 같아야 연결\" 의미 — 즉 부모→자식 순방향 전개. 따라서 ③ '역방향 탐색이다' 가 옳지 않은 진술. ① 계층 구조 조회 옳음, ② START WITH mgr_no IS NULL 이 묵시되면 최상위(관리자가 없는 KING) 부터 조회되므로 옳음, ④ 순방향 탐색 옳음.",
     "_source": "authored",
     "references": [
       {
+        "type": "table",
+        "caption": "EMP 테이블 (emp_no = 사원번호, mgr_no = 상위 관리자 번호)",
+        "headers": [
+          "emp_no",
+          "ename",
+          "mgr_no"
+        ],
+        "rows": [
+          [
+            "100",
+            "KING",
+            "(NULL)"
+          ],
+          [
+            "200",
+            "JONES",
+            "100"
+          ],
+          [
+            "300",
+            "SCOTT",
+            "200"
+          ],
+          [
+            "400",
+            "FORD",
+            "200"
+          ]
+        ]
+      },
+      {
         "type": "sql",
-        "code": "-- emp_no : 하위 사원 번호, mgr_no : 상위 관리자 번호\nSELECT *\nFROM   EMP\nCONNECT BY PRIOR emp_no = mgr_no;"
+        "code": "-- emp_no : 하위 사원 번호, mgr_no : 상위 관리자 번호\nSELECT *\nFROM   EMP\nCONNECT BY PRIOR emp_no = mgr_no;\n-- 100(KING) → 200(JONES) → 300(SCOTT)/400(FORD) 순방향 전개"
       }
     ]
   },
@@ -710,7 +741,7 @@ export const ROUND_54: QuizQuestion[] = [
       "`SELECT * FROM TAB1 FULL OUTER JOIN TAB2 ON TAB1.CODE = TAB2.CODE;`"
     ],
     "correctIndex": 2,
-    "explanation": "OR 조건이 광범위하므로 카티션 곱 중 조건을 만족하는 행이 9건으로 가장 많다.",
+    "explanation": "각 SQL 의 결과 행 수: ① UNION ALL = 4 + 4 = 8건. ② INNER JOIN ON CODE = 매칭 4건. ③ 카티션 곱(4×4=16) 에서 OR 조건 만족 행 = TAB1 의 PCOLOR ∈ {노랑,파랑,검정}(3행) × TAB2(4행) ∪ TAB1(4행) × TAB2 의 PSIZE ∈ {소,중,대}(3행) = 12 + 12 - 9(중복) = 15건. ④ FULL OUTER JOIN ON CODE = 매칭 4건 (양쪽 미매칭 없음). ③ 이 15건으로 가장 많아 정답.",
     "_source": "authored",
     "references": [
       {
@@ -1161,7 +1192,7 @@ export const ROUND_54: QuizQuestion[] = [
     "round": 54,
     "subject": "2과목",
     "number": 33,
-    "title": "아래 SQL 에서 7780 번 직원의 세 가지 순위 결과로 옳은 것은?",
+    "title": "아래 EMP 테이블에 대한 SQL 에서 7780 번 직원의 세 가지 순위 (ROW_NUMBER, RANK, DENSE_RANK) 결과로 옳은 것은? (동점 시 EMP_ID 작은 쪽이 먼저)",
     "options": [
       "4, 4, 3",
       "3, 3, 3",
@@ -1169,7 +1200,7 @@ export const ROUND_54: QuizQuestion[] = [
       "3, 4, 3"
     ],
     "correctIndex": 0,
-    "explanation": "SALARY 오름차순 기준 7780 의 ROW_NUMBER 는 4, RANK 는 동점 처리되어 4, DENSE_RANK 는 건너뛰지 않아 3 이다.",
+    "explanation": "SALARY 오름차순으로 정렬하면 7784(2000) → 7782(3000), 7783(3000) → 7780(4000), 7781(4000) 순서. 7780/7781 동점이지만 EMP_ID 작은 7780 이 먼저 4 위치. ROW_NUMBER=4 (4 번째 행), RANK=4 (동점 시 같은 순위, 7782/7783 이 2 위로 두 명이라 다음은 4 위), DENSE_RANK=3 (건너뛰지 않음 — 1, 2, 3, 3 식). 정답 ① (4, 4, 3).",
     "_source": "authored",
     "references": [
       {
@@ -1728,7 +1759,7 @@ export const ROUND_54: QuizQuestion[] = [
     "round": 54,
     "subject": "2과목",
     "number": 46,
-    "title": "아래 결과(COL1, COL2) 를 반환하는 윈도우 함수는?",
+    "title": "아래 T 테이블에 대한 SQL 의 출력 결과(COL1, 함수 결과) 가 다음과 같을 때 빈칸 윈도우 함수로 옳은 것은?",
     "options": [
       "`LAG(COL1) OVER (ORDER BY COL1)`",
       "`LEAD(COL1) OVER (ORDER BY COL1)`",
@@ -1736,15 +1767,37 @@ export const ROUND_54: QuizQuestion[] = [
       "`RANK() OVER (ORDER BY COL1)`"
     ],
     "correctIndex": 0,
-    "explanation": "LAG 는 이전 행의 값을 반환한다. 첫 행은 이전 값이 없으므로 NULL 이다.",
+    "explanation": "출력 결과가 (1, NULL), (2, 1), (3, 2) 형태 — 두 번째 컬럼이 '직전 행의 COL1 값' 임을 의미. LAG 는 이전 행의 값을 반환하며 첫 행은 NULL. ② LEAD 는 다음 행 값이라 (1, 2), (2, 3), (3, NULL) 가 되어 반대. ③ ROW_NUMBER 는 1, 2, 3 (NULL 없음). ④ RANK 도 동일하게 1, 2, 3. 정답 ① LAG.",
     "_source": "authored",
     "references": [
       {
         "type": "table",
-        "caption": "출력 결과 (COL1, COL2 = 함수 결과)",
+        "caption": "T 테이블 (원본 입력 데이터)",
+        "headers": [
+          "COL1"
+        ],
+        "rows": [
+          [
+            "1"
+          ],
+          [
+            "2"
+          ],
+          [
+            "3"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT COL1,\n       (  ?  ) AS 함수결과\nFROM   T;"
+      },
+      {
+        "type": "table",
+        "caption": "기대 출력 결과 (COL1, 함수결과)",
         "headers": [
           "COL1",
-          "COL2"
+          "함수결과"
         ],
         "rows": [
           [
