@@ -688,8 +688,14 @@
       "explanation": "COUNT(*) 는 어떤 행도 없을 때 0 을 반환하므로 NVL 의 대체 값 9999 는 적용되지 않는다.",
       "references": [
         {
+          "type": "table",
+          "caption": "TBL 테이블 (데이터가 있더라도 WHERE 1=2 로 모두 공집합)",
+          "headers": ["COL"],
+          "rows": [["A"], ["B"], ["C"]]
+        },
+        {
           "type": "sql",
-          "code": "SELECT NVL(COUNT(*), 9999)\nFROM   TABLE\nWHERE  1 = 2;"
+          "code": "SELECT NVL(COUNT(*), 9999)\nFROM   TBL\nWHERE  1 = 2;"
         }
       ]
     },

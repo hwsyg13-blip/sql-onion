@@ -463,6 +463,24 @@ export const ROUND_46: QuizQuestion[] = [
     "_source": "authored",
     "references": [
       {
+        "type": "table",
+        "caption": "T 테이블 (어떤 데이터가 있어도 WHERE 1=2 로 모두 공집합)",
+        "headers": [
+          "COL1"
+        ],
+        "rows": [
+          [
+            "10"
+          ],
+          [
+            "20"
+          ],
+          [
+            "NULL"
+          ]
+        ]
+      },
+      {
         "type": "sql",
         "code": "-- ① SELECT NVL(SUM(COL1), 0) FROM T WHERE 1=2;\n-- ② SELECT MIN(COL1)          FROM T WHERE 1=2;\n-- ③ SELECT COUNT(*)            FROM T WHERE 1=2;"
       }
@@ -558,6 +576,49 @@ export const ROUND_46: QuizQuestion[] = [
     "explanation": "LEFT OUTER JOIN은 FROM 절의 좌측 테이블 모든 행을 결과에 보존하고, 우측에서 매칭되는 행이 없으면 NULL로 채운다. 좌측이 TUTOR이므로 SESSIONS에 짝이 없어도 TUTOR의 모든 행은 항상 반환된다.",
     "_source": "authored",
     "references": [
+      {
+        "type": "table",
+        "caption": "TUTOR 테이블",
+        "headers": [
+          "TID",
+          "NAME"
+        ],
+        "rows": [
+          [
+            "T01",
+            "홍길동"
+          ],
+          [
+            "T02",
+            "이순신"
+          ],
+          [
+            "T03",
+            "강감찬"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "SESSIONS 테이블",
+        "headers": [
+          "SID",
+          "TID",
+          "DATE"
+        ],
+        "rows": [
+          [
+            "S01",
+            "T01",
+            "2025-10-01"
+          ],
+          [
+            "S02",
+            "T02",
+            "2025-10-02"
+          ]
+        ]
+      },
       {
         "type": "sql",
         "code": "SELECT T.NAME, S.DATE\nFROM   TUTOR T LEFT OUTER JOIN SESSIONS S\nON     T.TID = S.TID;"
@@ -778,6 +839,32 @@ export const ROUND_46: QuizQuestion[] = [
     "_source": "authored",
     "references": [
       {
+        "type": "table",
+        "caption": "T 테이블",
+        "headers": [
+          "A",
+          "X",
+          "C"
+        ],
+        "rows": [
+          [
+            "a",
+            "10",
+            "p"
+          ],
+          [
+            "a",
+            "20",
+            "q"
+          ],
+          [
+            "b",
+            "30",
+            "r"
+          ]
+        ]
+      },
+      {
         "type": "sql",
         "code": "-- ① SELECT A, SUM(X) FROM T GROUP BY A ORDER BY C;\n-- ② SELECT A, SUM(X) FROM T GROUP BY A HAVING COUNT(C) > 1;"
       }
@@ -880,6 +967,47 @@ export const ROUND_46: QuizQuestion[] = [
     "_source": "authored",
     "references": [
       {
+        "type": "table",
+        "caption": "DRIVING_LOG 테이블",
+        "headers": [
+          "운행번호",
+          "운전자",
+          "거리"
+        ],
+        "rows": [
+          [
+            "D001",
+            "홍길동",
+            "120"
+          ],
+          [
+            "D002",
+            "홍길동",
+            "80"
+          ],
+          [
+            "D003",
+            "이순신",
+            "200"
+          ],
+          [
+            "D004",
+            "강감찬",
+            "150"
+          ],
+          [
+            "D005",
+            "강감찬",
+            "90"
+          ],
+          [
+            "D006",
+            "강감찬",
+            "70"
+          ]
+        ]
+      },
+      {
         "type": "sql",
         "code": "SELECT 운전자, COUNT(운행번호) AS 운행횟수\nFROM   DRIVING_LOG\nGROUP BY 운전자;"
       }
@@ -903,6 +1031,37 @@ export const ROUND_46: QuizQuestion[] = [
     "explanation": "IN은 OR 조건의 축약 표현이다.",
     "_source": "authored",
     "references": [
+      {
+        "type": "table",
+        "caption": "CUSTOMER 테이블",
+        "headers": [
+          "고객ID",
+          "이름",
+          "지역"
+        ],
+        "rows": [
+          [
+            "C01",
+            "홍길동",
+            "서울"
+          ],
+          [
+            "C02",
+            "이순신",
+            "대전"
+          ],
+          [
+            "C03",
+            "강감찬",
+            "부산"
+          ],
+          [
+            "C04",
+            "박지성",
+            "광주"
+          ]
+        ]
+      },
       {
         "type": "sql",
         "code": "SELECT *\nFROM   CUSTOMER\nWHERE  지역 IN ('서울', '대전', '부산');"
@@ -1412,6 +1571,37 @@ export const ROUND_46: QuizQuestion[] = [
     "explanation": "GROUPING SETS(A, B)는 GROUP BY (A) UNION ALL GROUP BY (B)와 동치이므로, GRADE 단위와 (GRADE, JOB) 단위의 두 집계 그룹을 동시에 생성한다.",
     "_source": "authored",
     "references": [
+      {
+        "type": "table",
+        "caption": "EMP 테이블",
+        "headers": [
+          "GRADE",
+          "JOB",
+          "ENAME"
+        ],
+        "rows": [
+          [
+            "A",
+            "MANAGER",
+            "홍길동"
+          ],
+          [
+            "A",
+            "CLERK",
+            "김철수"
+          ],
+          [
+            "B",
+            "MANAGER",
+            "이순신"
+          ],
+          [
+            "B",
+            "CLERK",
+            "박지성"
+          ]
+        ]
+      },
       {
         "type": "text",
         "content": "GRADE 단위 집계와 (GRADE, JOB) 단위 집계가 결합되어 나타난다."

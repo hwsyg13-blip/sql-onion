@@ -586,6 +586,24 @@
       "explanation": "MERGE는 한 명령으로 UPDATE와 INSERT를 동시에 처리하는 구문입니다. ON 조건으로 두 테이블을 매칭한 뒤, 매칭되면 UPDATE를, 매칭되지 않으면 INSERT를 수행합니다. 본 문항에서는 매칭되든 매칭되지 않든 V가 100으로 채워지도록 작성되어 있어 결과의 모든 행 V 컬럼은 100이 됩니다. 정답은 ②번입니다.",
       "references": [
         {
+          "type": "table",
+          "caption": "A 테이블 (TGT)",
+          "headers": ["ID", "V"],
+          "rows": [
+            ["1", "0"],
+            ["2", "0"]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "B 테이블 (SRC)",
+          "headers": ["ID", "V"],
+          "rows": [
+            ["1", "5"],
+            ["3", "7"]
+          ]
+        },
+        {
           "type": "sql",
           "code": "MERGE INTO A USING B ON (A.ID = B.ID)\nWHEN MATCHED THEN UPDATE SET A.V = 100\nWHEN NOT MATCHED THEN INSERT (ID, V) VALUES (B.ID, 100);"
         }
@@ -817,7 +835,14 @@
         "식별자 관계에서는 자식이 부모 없이 존재할 수 없다."
       ],
       "correctIndex": 2,
-      "explanation": "일반적으로 N개의 테이블을 조인하려면 최소 N - 1개의 조인 조건이 필요합니다. A·B·C 세 테이블이라면 조건 두 개면 충분합니다. 따라서 \"조인 조건이 최소 3개 이상이어야 한다\"는 ③번 설명은 잘못되어 정답이 됩니다. 식별자 관계는 부모 키가 자식의 PK 일부가 되며, 이로 인해 자식은 부모 없이 존재할 수 없는 의존 관계가 됩니다."
+      "explanation": "일반적으로 N개의 테이블을 조인하려면 최소 N - 1개의 조인 조건이 필요합니다. A·B·C 세 테이블이라면 조건 두 개면 충분합니다. 따라서 \"조인 조건이 최소 3개 이상이어야 한다\"는 ③번 설명은 잘못되어 정답이 됩니다. 식별자 관계는 부모 키가 자식의 PK 일부가 되며, 이로 인해 자식은 부모 없이 존재할 수 없는 의존 관계가 됩니다.",
+      "references": [
+        {
+          "type": "erd",
+          "caption": "A-B-C 식별자 관계 ERD (1:N 연쇄 — A 의 PK 가 C 까지 순차 전파)",
+          "mermaid": "erDiagram\n    A ||--o{ B : \"갖는다\"\n    B ||--o{ C : \"갖는다\""
+        }
+      ]
     },
     {
       "subject": "2과목",

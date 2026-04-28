@@ -1017,6 +1017,54 @@ export const ROUND_56: QuizQuestion[] = [
     "_source": "authored",
     "references": [
       {
+        "type": "table",
+        "caption": "TAB1 테이블 (10건 가정)",
+        "headers": [
+          "COL1"
+        ],
+        "rows": [
+          [
+            "1"
+          ],
+          [
+            "2"
+          ],
+          [
+            "3"
+          ],
+          [
+            "…"
+          ],
+          [
+            "10"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "TAB2 테이블 (10건 가정)",
+        "headers": [
+          "COL1"
+        ],
+        "rows": [
+          [
+            "A"
+          ],
+          [
+            "B"
+          ],
+          [
+            "C"
+          ],
+          [
+            "…"
+          ],
+          [
+            "J"
+          ]
+        ]
+      },
+      {
         "type": "sql",
         "code": "SELECT COUNT(*) FROM TAB1, TAB2;"
       }
@@ -1456,7 +1504,7 @@ export const ROUND_56: QuizQuestion[] = [
     "round": 56,
     "subject": "2과목",
     "number": 45,
-    "title": "아래 SQL 의 실행 결과로 옳은 것은?",
+    "title": "아래 EMP 테이블에 대한 SQL 의 실행 결과로 옳은 것은?",
     "options": [
       "800",
       "1600",
@@ -1464,12 +1512,63 @@ export const ROUND_56: QuizQuestion[] = [
       "오류가 발생한다."
     ],
     "correctIndex": 2,
-    "explanation": "사번 7566 의 급여 2,975 가 단일 행으로 집계되어 그대로 반환된다.",
+    "explanation": "WHERE EMPNO = 7566 조건으로 사번 7566 (JONES) 한 행만 선택되고 SAL = 2975 가 SUM 으로 집계되어 2975 가 반환된다. ① 800, ② 1600 은 다른 사번 행의 SAL 이며 본 SQL 결과가 아니다.",
     "_source": "authored",
     "references": [
       {
+        "type": "table",
+        "caption": "EMP 테이블",
+        "headers": [
+          "EMPNO",
+          "ENAME",
+          "SAL"
+        ],
+        "rows": [
+          [
+            "7369",
+            "SMITH",
+            "800"
+          ],
+          [
+            "7499",
+            "ALLEN",
+            "1600"
+          ],
+          [
+            "7521",
+            "WARD",
+            "1250"
+          ],
+          [
+            "7566",
+            "JONES",
+            "2975"
+          ],
+          [
+            "7654",
+            "MARTIN",
+            "1250"
+          ],
+          [
+            "7698",
+            "BLAKE",
+            "2850"
+          ],
+          [
+            "7782",
+            "CLARK",
+            "2450"
+          ],
+          [
+            "7839",
+            "KING",
+            "5000"
+          ]
+        ]
+      },
+      {
         "type": "sql",
-        "code": "SELECT SUM(SAL)\nFROM   EMP\nWHERE  EMPNO = 7566;   -- 사번 7566 의 급여는 2975"
+        "code": "SELECT SUM(SAL)\nFROM   EMP\nWHERE  EMPNO = 7566;"
       }
     ]
   },
@@ -1624,8 +1723,56 @@ export const ROUND_56: QuizQuestion[] = [
     "_source": "authored",
     "references": [
       {
+        "type": "table",
+        "caption": "TAB1 초기 INSERT 직후",
+        "headers": [
+          "COL1",
+          "COL2"
+        ],
+        "rows": [
+          [
+            "1",
+            "2"
+          ],
+          [
+            "2",
+            "1"
+          ],
+          [
+            "3",
+            "4"
+          ]
+        ]
+      },
+      {
         "type": "sql",
-        "code": "CREATE TABLE TAB1 (COL1 NUMBER, COL2 NUMBER);\nINSERT INTO TAB1 VALUES (1, 2);\nINSERT INTO TAB1 VALUES (2, 1);\nINSERT INTO TAB1 VALUES (3, 4);\nSAVEPOINT SP1;\n\nUPDATE TAB1 SET COL1 = 4 WHERE COL2 <= 2;\nSAVEPOINT SP2;\n\nDELETE FROM TAB1 WHERE COL2 = 2;\nROLLBACK TO SAVEPOINT SP2;\n\nINSERT INTO TAB1 VALUES (4, 1);\nCOMMIT;\n\nSELECT COUNT(*) FROM TAB1 WHERE COL1 = 4;"
+        "code": "CREATE TABLE TAB1 (COL1 NUMBER, COL2 NUMBER);\nINSERT INTO TAB1 VALUES (1, 2);\nINSERT INTO TAB1 VALUES (2, 1);\nINSERT INTO TAB1 VALUES (3, 4);\nSAVEPOINT SP1;\n\nUPDATE TAB1 SET COL1 = 4 WHERE COL2 <= 2;   -- (4,2),(4,1),(3,4)\nSAVEPOINT SP2;\n\nDELETE FROM TAB1 WHERE COL2 = 2;\nROLLBACK TO SAVEPOINT SP2;                  -- (4,2),(4,1),(3,4) 복원\n\nINSERT INTO TAB1 VALUES (4, 1);             -- (4,2),(4,1),(3,4),(4,1)\nCOMMIT;\n\nSELECT COUNT(*) FROM TAB1 WHERE COL1 = 4;   -- 3"
+      },
+      {
+        "type": "table",
+        "caption": "최종 TAB1 상태",
+        "headers": [
+          "COL1",
+          "COL2"
+        ],
+        "rows": [
+          [
+            "4",
+            "2"
+          ],
+          [
+            "4",
+            "1"
+          ],
+          [
+            "3",
+            "4"
+          ],
+          [
+            "4",
+            "1"
+          ]
+        ]
       }
     ]
   }

@@ -202,26 +202,30 @@ export const ROUND_58: QuizQuestion[] = [
     "optionReferences": [
       [
         {
-          "type": "ascii",
-          "text": "[ 차량 ] ──|─────|── [ 소유자 ]"
+          "type": "erd",
+          "caption": "보기 ① — 1:1 관계 (차량과 소유자가 1:1 필수)",
+          "mermaid": "erDiagram\n    차량 ||--|| 소유자 : \"보유\""
         }
       ],
       [
         {
-          "type": "ascii",
-          "text": "[ 부서 ] ──|─────∈ [ 사원 ]"
+          "type": "erd",
+          "caption": "보기 ② — 1:N 관계 (한 부서에 여러 사원)",
+          "mermaid": "erDiagram\n    부서 ||--o{ 사원 : \"소속\""
         }
       ],
       [
         {
-          "type": "ascii",
-          "text": "           ┌────┐\n           ↓    │\n        [ 사원 ]┘"
+          "type": "erd",
+          "caption": "보기 ③ — 자기 참조(재귀) 관계 (사원이 다른 사원을 매니저로 가짐)",
+          "mermaid": "erDiagram\n    사원 ||--o{ 사원 : \"관리\""
         }
       ],
       [
         {
-          "type": "ascii",
-          "text": "                   ─── [ 법인 소유자 ]\n                  /\n[ 차량 ] ────◠───\n     (Arc)        \\\n                   ─── [ 개인 소유자 ]"
+          "type": "erd",
+          "caption": "보기 ④ — Arc(상호배타적) 관계 — 차량은 [법인 소유자] 또는 [개인 소유자] 중 하나에만 연결",
+          "mermaid": "erDiagram\n    차량 }o--|| 법인소유자 : \"보유 (Arc)\"\n    차량 }o--|| 개인소유자 : \"보유 (Arc)\""
         }
       ]
     ]

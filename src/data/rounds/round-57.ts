@@ -975,8 +975,26 @@ export const ROUND_57: QuizQuestion[] = [
     "_source": "authored",
     "references": [
       {
+        "type": "table",
+        "caption": "TBL 테이블 (데이터가 있더라도 WHERE 1=2 로 모두 공집합)",
+        "headers": [
+          "COL"
+        ],
+        "rows": [
+          [
+            "A"
+          ],
+          [
+            "B"
+          ],
+          [
+            "C"
+          ]
+        ]
+      },
+      {
         "type": "sql",
-        "code": "SELECT NVL(COUNT(*), 9999)\nFROM   TABLE\nWHERE  1 = 2;"
+        "code": "SELECT NVL(COUNT(*), 9999)\nFROM   TBL\nWHERE  1 = 2;"
       }
     ]
   },
