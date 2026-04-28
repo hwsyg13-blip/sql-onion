@@ -311,7 +311,7 @@
     {
       "subject": "2과목",
       "number": 17,
-      "title": "아래 함수의 실행 결과로 옳은 것은?",
+      "title": "아래 SQL 의 실행 결과로 옳은 것은?",
       "options": [
         "9, 9, 9",
         "10, 9, 9",
@@ -319,11 +319,11 @@
         "10, 10, 9"
       ],
       "correctIndex": 1,
-      "explanation": "CEIL 은 올림, ROUND 는 반올림, FLOOR 는 내림을 수행한다.",
+      "explanation": "`CEIL(9.36)` = 10 (올림), `ROUND(9.48)` = 9 (소수 첫째자리 반올림 = 9.5 미만이라 9), `FLOOR(9.72)` = 9 (내림). 결과: 10, 9, 9.",
       "references": [
         {
           "type": "sql",
-          "code": "CEIL(9.36), ROUND(9.48), FLOOR(9.72)"
+          "code": "SELECT CEIL(9.36),\n       ROUND(9.48),\n       FLOOR(9.72)\nFROM   DUAL;"
         }
       ]
     },
@@ -537,7 +537,7 @@
     {
       "subject": "2과목",
       "number": 27,
-      "title": "급여 2,000 이상인 사원 중 부서별 급여 합계가 높은 순으로 정렬하려고 한다. 아래 쿼리에서 수정이 필요한 부분은?",
+      "title": "아래 EMP 테이블에서 급여 2,000 이상인 사원의 부서별 급여 합계를 높은 순으로 정렬하려 한다. 아래 쿼리에서 수정이 필요한 부분은?",
       "options": [
         "(가)",
         "(나)",
@@ -545,8 +545,19 @@
         "(라)"
       ],
       "correctIndex": 3,
-      "explanation": "높은 순으로 정렬하려면 ORDER BY SUM(SALARY) DESC 가 되어야 한다.",
+      "explanation": "ORDER BY 는 기본 오름차순(ASC)이므로 \"높은 순\"으로 정렬하려면 (라) 의 `ORDER BY SUM(SALARY)` 에 `DESC` 를 추가해 `ORDER BY SUM(SALARY) DESC` 로 만들어야 한다. (가) SELECT 절, (나) WHERE 조건, (다) GROUP BY 는 모두 정상.",
       "references": [
+        {
+          "type": "table",
+          "caption": "EMP 테이블",
+          "headers": ["DEPT_NAME", "SALARY"],
+          "rows": [
+            ["영업", "2500"],
+            ["영업", "3000"],
+            ["인사", "2200"],
+            ["IT", "5000"]
+          ]
+        },
         {
           "type": "sql",
           "code": "SELECT DEPT_NAME, SUM(SALARY)   -- (가)\nFROM   EMP\nWHERE  SALARY >= 2000           -- (나)\nGROUP BY DEPT_NAME              -- (다)\nORDER BY SUM(SALARY)            -- (라)"
@@ -582,7 +593,7 @@
     {
       "subject": "2과목",
       "number": 30,
-      "title": "아래 결과를 반환하는 순위 함수로 옳은 것은?",
+      "title": "아래 결과 (NAME, SALARY, RANKING) 를 반환하는 순위 함수로 옳은 것은?",
       "options": [
         "DENSE_RANK()",
         "RANK()",
@@ -590,41 +601,18 @@
         "ROW_NUMBER()"
       ],
       "correctIndex": 0,
-      "explanation": "동일 순위가 있어도 다음 순위를 건너뛰지 않고 연속적으로 부여하는 함수는 DENSE_RANK 이다.",
+      "explanation": "Bob, Smith 가 같은 7000 으로 1 위, 다음 David(6000) 이 2 위 — \"동일 순위 후 다음 순위를 건너뛰지 않는\" 패턴은 DENSE_RANK. RANK 는 동일 1, 1, 3, 4, 5 처럼 건너뛰며, ROW_NUMBER 는 동률이어도 1, 2, 3, 4, 5 로 고유 부여, PERCENT_RANK 는 0~1 비율 반환.",
       "references": [
         {
           "type": "table",
-          "headers": [
-            "NAME",
-            "SALARY",
-            "RANKING"
-          ],
+          "caption": "기대 결과 (DENSE_RANK 출력)",
+          "headers": ["NAME", "SALARY", "RANKING"],
           "rows": [
-            [
-              "Bob",
-              "7000",
-              "1"
-            ],
-            [
-              "Smith",
-              "7000",
-              "1"
-            ],
-            [
-              "David",
-              "6000",
-              "2"
-            ],
-            [
-              "Alice",
-              "5000",
-              "3"
-            ],
-            [
-              "Charlie",
-              "3000",
-              "4"
-            ]
+            ["Bob", "7000", "1"],
+            ["Smith", "7000", "1"],
+            ["David", "6000", "2"],
+            ["Alice", "5000", "3"],
+            ["Charlie", "3000", "4"]
           ]
         }
       ]
@@ -708,7 +696,7 @@
     {
       "subject": "2과목",
       "number": 33,
-      "title": "아래 UPDATE 쿼리와 동일한 결과를 산출하는 것은?",
+      "title": "아래 TAB1, TAB2 테이블에 대한 UPDATE 쿼리와 동일한 결과를 산출하는 것은?",
       "options": [
         "`UPDATE TAB1 SET COL1 = (SELECT MAX(COL2) FROM TAB2 T2 WHERE T1.COL1 = T2.COL2 AND T1.COL1 >= 200);`",
         "`UPDATE TAB1 SET COL1 = (SELECT COALESCE(MAX(NULL), 0) FROM TAB2 T2 WHERE T1.COL1 = T2.COL2);`",
@@ -716,8 +704,20 @@
         "`UPDATE TAB1 SET COL1 = NULL;`"
       ],
       "correctIndex": 3,
-      "explanation": "MAX(NULL) 은 항상 NULL 을 반환하므로 모든 행의 COL1 이 NULL 로 갱신된다.",
+      "explanation": "서브쿼리가 `SELECT MAX(NULL) FROM TAB2 ...` 이라 항상 NULL 을 반환 (MAX 의 입력이 NULL 상수). WHERE 조건과 무관하게 모든 TAB1 행의 COL1 이 NULL 로 갱신된다 = ④ `UPDATE TAB1 SET COL1 = NULL;` 과 동일.",
       "references": [
+        {
+          "type": "table",
+          "caption": "TAB1 테이블 (UPDATE 전)",
+          "headers": ["COL1"],
+          "rows": [["100"], ["200"], ["300"]]
+        },
+        {
+          "type": "table",
+          "caption": "TAB2 테이블",
+          "headers": ["COL2"],
+          "rows": [["200"], ["300"]]
+        },
         {
           "type": "sql",
           "code": "UPDATE TAB1 T1\nSET    COL1 = (SELECT MAX(NULL)\n               FROM   TAB2 T2\n               WHERE  T1.COL1 = T2.COL2\n               AND    T1.COL1 >= 200);"
@@ -727,15 +727,28 @@
     {
       "subject": "2과목",
       "number": 34,
-      "title": "사원의 관리자와 차상위 관리자를 함께 출력하는 쿼리로 가장 적절한 것은?",
+      "title": "아래 EMP 테이블에서 사원의 관리자와 차상위 관리자를 함께 출력하는 쿼리로 가장 적절한 것은?",
       "options": [
-        "SELECT A.EMP_ID, B.EMP_ID FROM EMP A INNER JOIN EMP B ON A.EMP_ID = B.EMP_ID;",
-        "SELECT A.EMP_ID, B.EMP_ID FROM EMP A INNER JOIN EMP B ON A.MGR_ID = B.EMP_ID;",
-        "SELECT A.EMP_ID, B.EMP_ID FROM EMP A LEFT OUTER JOIN EMP B ON A.EMP_ID = B.MGR_ID;",
-        "SELECT A.EMP_ID, B.EMP_ID FROM EMP A LEFT OUTER JOIN EMP B ON A.EMP_ID = B.EMP_ID;"
+        "`SELECT A.EMP_ID, B.EMP_ID FROM EMP A INNER JOIN EMP B ON A.EMP_ID = B.EMP_ID;`",
+        "`SELECT A.EMP_ID, B.EMP_ID FROM EMP A INNER JOIN EMP B ON A.MGR_ID = B.EMP_ID;`",
+        "`SELECT A.EMP_ID, B.EMP_ID FROM EMP A LEFT OUTER JOIN EMP B ON A.EMP_ID = B.MGR_ID;`",
+        "`SELECT A.EMP_ID, B.EMP_ID FROM EMP A LEFT OUTER JOIN EMP B ON A.EMP_ID = B.EMP_ID;`"
       ],
       "correctIndex": 2,
-      "explanation": "A 의 사원 번호가 B 테이블의 MGR_ID 와 일치해야 B 에 A 가 관리하는 하위 사원이 나타나며, LEFT OUTER JOIN 으로 관리자가 없는 경우도 포함한다."
+      "explanation": "셀프 조인으로 \"A 가 관리하는 하위 사원 B\" 를 매칭하려면 `A.EMP_ID = B.MGR_ID` 조건이 필요. LEFT OUTER JOIN 으로 매칭되지 않는 A(관리하는 부하 없는 사원) 도 결과에 포함. ① 자기 자신과 매칭, ② 는 \"A 의 상사 = B\" 매칭, ④ 자기 자신 LEFT OUTER 라 모두 의도와 다름.",
+      "references": [
+        {
+          "type": "table",
+          "caption": "EMP 테이블",
+          "headers": ["EMP_ID", "MGR_ID"],
+          "rows": [
+            ["1001", "(NULL)"],
+            ["1002", "1001"],
+            ["1003", "1002"],
+            ["1004", "1002"]
+          ]
+        }
+      ]
     },
     {
       "subject": "2과목",
@@ -830,7 +843,7 @@
     {
       "subject": "2과목",
       "number": 37,
-      "title": "아래 결과를 산출하는 쿼리는?",
+      "title": "아래 TAB1 테이블에서 결과(COUNT() = 2) 를 산출하는 쿼리는?",
       "options": [
         "`SELECT COUNT(DISTINCT COL1) FROM TAB1 WHERE COL2 <= 20;`",
         "`SELECT COUNT(COL1) FROM TAB1 WHERE COL2 <= 20;`",
@@ -838,31 +851,17 @@
         "`SELECT COUNT(COL1) FROM TAB1 WHERE COL2 < 30 GROUP BY COL1;`"
       ],
       "correctIndex": 0,
-      "explanation": "COL2 ≤ 20 인 행은 (A,10),(A,20),(B,20) 이고 DISTINCT COL1 = A, B 의 2 이다.",
+      "explanation": "`COL2 <= 20` 만족 행은 (A,10), (A,20), (B,20) 3 행. ① `COUNT(DISTINCT COL1)` = {A, B} = 2 → 결과 2. ② `COUNT(COL1)` = 3 (행 수). ③④ GROUP BY 라 행이 여러 건 반환되어 단일 값 2 안 됨. 정답은 ①.",
       "references": [
         {
           "type": "table",
-          "headers": [
-            "COL1",
-            "COL2"
-          ],
+          "caption": "TAB1 테이블",
+          "headers": ["COL1", "COL2"],
           "rows": [
-            [
-              "A",
-              "10"
-            ],
-            [
-              "A",
-              "20"
-            ],
-            [
-              "B",
-              "20"
-            ],
-            [
-              "C",
-              "30"
-            ]
+            ["A", "10"],
+            ["A", "20"],
+            ["B", "20"],
+            ["C", "30"]
           ]
         },
         {
@@ -985,7 +984,7 @@
     {
       "subject": "2과목",
       "number": 42,
-      "title": "아래 쿼리에 대한 설명으로 옳은 것은?",
+      "title": "아래 부서, 사원 테이블에 대한 쿼리에 대한 설명으로 옳은 것은?",
       "options": [
         "2등급 이상의 사원을 모두 출력한다.",
         "부서에 소속되지 않은 사원은 제외한다.",
@@ -993,8 +992,28 @@
         "등급이 없는 사원도 포함된다."
       ],
       "correctIndex": 1,
-      "explanation": "내부 조인(,) 특성상 양 테이블에서 부서ID 가 일치하는 사원만 남으므로 부서 미소속 사원은 결과에서 제외된다.",
+      "explanation": "`FROM 부서 D, 사원 E` 와 `WHERE D.부서ID = E.부서ID` 는 내부 조인(INNER JOIN) 으로 동작. 양쪽 테이블에서 부서ID 가 일치하는 행만 남으므로 부서 미소속 사원(E.부서ID 가 NULL 또는 부서에 없는 ID) 은 결과에서 제외된다. ① 은 `>= 2` 조건이 추가로 들어가 \"부서 소속 + 2 등급 이상\" 만 출력, ③④ 는 INNER JOIN 특성과 어긋난다.",
       "references": [
+        {
+          "type": "table",
+          "caption": "부서 테이블",
+          "headers": ["부서ID", "부서명"],
+          "rows": [
+            ["10", "영업"],
+            ["20", "인사"]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "사원 테이블",
+          "headers": ["사원ID", "부서ID", "등급"],
+          "rows": [
+            ["1", "10", "3"],
+            ["2", "10", "1"],
+            ["3", "20", "2"],
+            ["4", "(NULL)", "5"]
+          ]
+        },
         {
           "type": "sql",
           "code": "SELECT E.*\nFROM   부서 D, 사원 E\nWHERE  D.부서ID = E.부서ID\nAND    E.등급 >= 2;"
@@ -1004,7 +1023,7 @@
     {
       "subject": "2과목",
       "number": 43,
-      "title": "아래 농구선수 테이블에서 키가 180 이상인 선수를 조회하는 쿼리로 가장 적절한 것은?",
+      "title": "아래 PLAYER 테이블에서 키가 180 이상인 선수를 조회하는 쿼리로 가장 적절한 것은?",
       "options": [
         "`SELECT * FROM PLAYER HAVING HEIGHT >= 180;`",
         "`SELECT * FROM PLAYER GROUP BY HEIGHT >= 180;`",
@@ -1012,20 +1031,46 @@
         "`SELECT * FROM PLAYER ORDER BY HEIGHT >= 180;`"
       ],
       "correctIndex": 2,
-      "explanation": "행 단위 조건은 WHERE 절에서 처리한다."
+      "explanation": "행 단위 필터 조건은 `WHERE` 절에서 처리한다. ① `HAVING` 은 GROUP BY 후 그룹 조건, ② `GROUP BY` 는 그룹화 키 (불리언이 올 수 없음), ④ `ORDER BY` 는 정렬이라 의미 다름.",
+      "references": [
+        {
+          "type": "table",
+          "caption": "PLAYER 테이블",
+          "headers": ["NAME", "HEIGHT"],
+          "rows": [
+            ["김선수", "175"],
+            ["이선수", "182"],
+            ["박선수", "178"],
+            ["최선수", "190"]
+          ]
+        }
+      ]
     },
     {
       "subject": "2과목",
       "number": 44,
-      "title": "팀별 최 단신 선수의 팀명과 키를 출력하는 쿼리와 동일한 결과를 반환하는 것은?",
+      "title": "아래 선수 테이블에서 팀별 최단신 선수의 팀명과 키를 출력하는 쿼리와 동일한 결과를 반환하는 것은?",
       "options": [
-        "SELECT TEAM, MIN(HEIGHT) FROM 선수 WHERE HEIGHT IS NULL GROUP BY TEAM;",
-        "SELECT TEAM, HEIGHT FROM 선수 HAVING HEIGHT = MIN(HEIGHT);",
-        "SELECT TEAM, HEIGHT FROM 선수 WHERE HEIGHT > (SELECT MIN(HEIGHT) FROM 선수);",
-        "SELECT P.TEAM, P.HEIGHT FROM 선수 P INNER JOIN (SELECT TEAM, MIN(HEIGHT) AS H FROM 선수 GROUP BY TEAM) M ON P.TEAM = M.TEAM AND P.HEIGHT = M.H;"
+        "`SELECT TEAM, MIN(HEIGHT) FROM 선수 WHERE HEIGHT IS NULL GROUP BY TEAM;`",
+        "`SELECT TEAM, HEIGHT FROM 선수 HAVING HEIGHT = MIN(HEIGHT);`",
+        "`SELECT TEAM, HEIGHT FROM 선수 WHERE HEIGHT > (SELECT MIN(HEIGHT) FROM 선수);`",
+        "`SELECT P.TEAM, P.HEIGHT FROM 선수 P INNER JOIN (SELECT TEAM, MIN(HEIGHT) AS H FROM 선수 GROUP BY TEAM) M ON P.TEAM = M.TEAM AND P.HEIGHT = M.H;`"
       ],
       "correctIndex": 3,
-      "explanation": "팀별 최저 신장 선수의 정확한 (TEAM, HEIGHT) 행을 가져오려면 (TEAM, MIN(HEIGHT))를 인라인 뷰로 만든 뒤 원본 테이블과 INNER JOIN해야 한다. ① WHERE HEIGHT IS NULL은 NULL 행만 잡고, ② HAVING HEIGHT = MIN(HEIGHT)는 비집계 컬럼 HEIGHT 사용 오류, ③ HEIGHT > MIN은 최저값을 제외한 행을 반환하므로 모두 오답이다."
+      "explanation": "팀별 최저 신장 선수의 정확한 (TEAM, HEIGHT) 행을 가져오려면 (TEAM, MIN(HEIGHT)) 를 인라인 뷰로 만든 뒤 원본 테이블과 INNER JOIN 해야 한다. ① `WHERE HEIGHT IS NULL` 은 NULL 행만 잡고, ② `HAVING HEIGHT = MIN(HEIGHT)` 는 비집계 컬럼 HEIGHT 사용 오류, ③ `HEIGHT > MIN` 은 최저값을 제외한 행을 반환하므로 모두 오답.",
+      "references": [
+        {
+          "type": "table",
+          "caption": "선수 테이블",
+          "headers": ["TEAM", "NAME", "HEIGHT"],
+          "rows": [
+            ["A", "김선수", "180"],
+            ["A", "이선수", "175"],
+            ["B", "박선수", "188"],
+            ["B", "최선수", "182"]
+          ]
+        }
+      ]
     },
     {
       "subject": "2과목",
@@ -1049,7 +1094,7 @@
     {
       "subject": "2과목",
       "number": 46,
-      "title": "아래 SQL 의 실행 결과 정렬로 옳은 것은?",
+      "title": "아래 EMP 테이블에 대한 SQL 의 실행 결과 정렬로 옳은 것은?",
       "options": [
         "NULL 이 먼저 출력된다.",
         "SAL 오름차순 정렬 후 NULL 이 마지막에 출력된다.",
@@ -1057,8 +1102,19 @@
         "오류가 발생한다."
       ],
       "correctIndex": 1,
-      "explanation": "NULLS LAST 옵션은 SAL 오름차순 정렬 후 NULL 값을 결과의 마지막에 배치한다.",
+      "explanation": "`ORDER BY SAL` 은 기본 오름차순(ASC). `NULLS LAST` 옵션은 정렬 후 NULL 값을 결과의 마지막에 배치한다. 본 데이터에서 출력 순서: SAL=2000(이순신) → 3000(홍길동) → 5000(강감찬) → NULL(박문수).",
       "references": [
+        {
+          "type": "table",
+          "caption": "EMP 테이블",
+          "headers": ["NAME", "SAL"],
+          "rows": [
+            ["홍길동", "3000"],
+            ["이순신", "2000"],
+            ["강감찬", "5000"],
+            ["박문수", "(NULL)"]
+          ]
+        },
         {
           "type": "sql",
           "code": "SELECT NAME\nFROM   EMP\nORDER BY SAL NULLS LAST;"
@@ -1068,7 +1124,7 @@
     {
       "subject": "2과목",
       "number": 47,
-      "title": "매출액이 높은 순서대로 직원을 조회하는 쿼리 중 수정이 필요한 부분은?",
+      "title": "아래 SALES 테이블에서 매출액이 높은 순서대로 직원을 조회하는 쿼리 중 수정이 필요한 부분은?",
       "options": [
         "SELECT 절에 직원, 매출 컬럼을 명시적으로 나열해야 한다.",
         "FROM 절을 SALES 가 아닌 EMP_SALES 뷰로 교체해야 한다.",
@@ -1076,8 +1132,18 @@
         "ORDER BY 절에 DESC 를 추가해야 한다."
       ],
       "correctIndex": 3,
-      "explanation": "ORDER BY 는 기본이 오름차순(ASC)이므로 매출이 높은 순으로 출력하려면 DESC 를 명시해야 한다.",
+      "explanation": "`ORDER BY 매출` 은 기본 오름차순(ASC) 정렬이라 \"매출이 높은 순\" (내림차순) 으로 출력하려면 `ORDER BY 매출 DESC` 처럼 `DESC` 를 명시해야 한다. ① SELECT 절은 정상, ② SALES 테이블 그대로 사용, ③ NULL 처리는 본 문항과 무관.",
       "references": [
+        {
+          "type": "table",
+          "caption": "SALES 테이블",
+          "headers": ["직원", "매출"],
+          "rows": [
+            ["김철수", "5000"],
+            ["이영희", "8000"],
+            ["박민수", "3000"]
+          ]
+        },
         {
           "type": "sql",
           "code": "SELECT 직원, 매출\nFROM   SALES\nORDER BY 매출;"
