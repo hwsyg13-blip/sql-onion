@@ -285,7 +285,8 @@ export const ROUND_55: QuizQuestion[] = [
             "20",
             "5000"
           ]
-        ]
+        ],
+        "caption": "EMP 테이블"
       },
       {
         "type": "sql",
@@ -334,7 +335,8 @@ export const ROUND_55: QuizQuestion[] = [
             "C",
             "400"
           ]
-        ]
+        ],
+        "caption": "TAB1 테이블"
       },
       {
         "type": "sql",
@@ -373,15 +375,15 @@ export const ROUND_55: QuizQuestion[] = [
     "round": 55,
     "subject": "2과목",
     "number": 16,
-    "title": "아래 GROUP BY 절 중 집계 결과 집합이 나머지와 다른 것은?",
+    "title": "아래 SQL 들 중 집계 결과 집합이 나머지와 다른 것은?",
     "options": [
-      "`GROUP BY ROLLUP(A, B)`",
-      "`GROUP BY GROUPING SETS((A, B), (A), ())`",
-      "`GROUP BY GROUPING SETS((A, B), (A), (B))`",
-      "`GROUP BY GROUPING SETS((), (A), (A, B))`"
+      "`SELECT A, B, SUM(VAL) FROM T GROUP BY ROLLUP(A, B);`",
+      "`SELECT A, B, SUM(VAL) FROM T GROUP BY GROUPING SETS((A, B), (A), ());`",
+      "`SELECT A, B, SUM(VAL) FROM T GROUP BY GROUPING SETS((A, B), (A), (B));`",
+      "`SELECT A, B, SUM(VAL) FROM T GROUP BY GROUPING SETS((), (A), (A, B));`"
     ],
     "correctIndex": 2,
-    "explanation": "①·②·④는 모두 (A,B), (A), () 세 집계 레벨을 산출하여 동일한 결과 집합을 반환하지만, ③은 () 총계 대신 (B) 레벨이 포함되어 결과 집합이 다르다.",
+    "explanation": "① ROLLUP(A, B) 은 (A, B), (A), () 세 집계 레벨을 산출. ② 와 ④ 도 같은 세 레벨을 명시적으로 나열했을 뿐 결과 집합 동일. 그러나 ③ 은 () 총계 대신 (B) 레벨이 포함되어 결과 집합이 다르다.",
     "_source": "authored"
   },
   {
@@ -445,7 +447,8 @@ export const ROUND_55: QuizQuestion[] = [
             "10",
             "NULL"
           ]
-        ]
+        ],
+        "caption": "T 테이블"
       },
       {
         "type": "sql",
@@ -551,7 +554,8 @@ export const ROUND_55: QuizQuestion[] = [
             "T4",
             "1"
           ]
-        ]
+        ],
+        "caption": "T1 테이블"
       },
       {
         "type": "sql",
@@ -664,7 +668,8 @@ export const ROUND_55: QuizQuestion[] = [
             "2",
             "150"
           ]
-        ]
+        ],
+        "caption": "T 테이블"
       },
       {
         "type": "sql",
@@ -759,7 +764,8 @@ export const ROUND_55: QuizQuestion[] = [
             "1",
             "서울"
           ]
-        ]
+        ],
+        "caption": "T 테이블"
       },
       {
         "type": "sql",
@@ -792,15 +798,15 @@ export const ROUND_55: QuizQuestion[] = [
     "round": 55,
     "subject": "2과목",
     "number": 30,
-    "title": "아래 네 가지 JOIN SQL 중 결과가 다른 것은?",
+    "title": "아래 EMP, DEPT 테이블 조인 SQL 중 결과가 다른 것은?",
     "options": [
-      "`INNER JOIN DEPT B ON (DEPT_NO)` — 오류가 발생하는 구문",
-      "`INNER JOIN DEPT B ON A.DEPT_NO = B.DEPT_NO`",
-      "`INNER JOIN DEPT B USING (DEPT_NO)`",
-      "`NATURAL JOIN DEPT B`"
+      "`SELECT * FROM EMP A INNER JOIN DEPT B ON (DEPT_NO);`",
+      "`SELECT * FROM EMP A INNER JOIN DEPT B ON A.DEPT_NO = B.DEPT_NO;`",
+      "`SELECT * FROM EMP A INNER JOIN DEPT B USING (DEPT_NO);`",
+      "`SELECT * FROM EMP A NATURAL JOIN DEPT B;`"
     ],
     "correctIndex": 0,
-    "explanation": "ON 절에는 컬럼 비교식이 와야 하며, USING 절과는 다르게 컬럼명만 지정할 수 없다.",
+    "explanation": "① `ON` 절에는 컬럼 비교식 (예: `A.DEPT_NO = B.DEPT_NO`) 이 와야 한다. `ON (DEPT_NO)` 처럼 컬럼명만 쓰면 구문 오류 (USING 절과 다름). ②③④ 는 모두 동일 컬럼명 `DEPT_NO` 로 정상 INNER JOIN 을 수행해 같은 결과를 낸다. 결과가 다른 (오류 발생) 것은 ①.",
     "_source": "authored"
   },
   {
@@ -1068,7 +1074,8 @@ export const ROUND_55: QuizQuestion[] = [
             "100",
             "NULL"
           ]
-        ]
+        ],
+        "caption": "T 테이블"
       },
       {
         "type": "sql",
@@ -1127,7 +1134,8 @@ export const ROUND_55: QuizQuestion[] = [
           [
             "공학개론"
           ]
-        ]
+        ],
+        "caption": "수강 테이블"
       },
       {
         "type": "sql",

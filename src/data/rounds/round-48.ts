@@ -366,7 +366,8 @@ export const ROUND_48: QuizQuestion[] = [
             "박문수",
             "3000"
           ]
-        ]
+        ],
+        "caption": "사원 테이블"
       },
       {
         "type": "sql",
@@ -547,7 +548,8 @@ export const ROUND_48: QuizQuestion[] = [
             "C",
             "100"
           ]
-        ]
+        ],
+        "caption": "TBL 테이블"
       },
       {
         "type": "sql",
@@ -776,15 +778,15 @@ export const ROUND_48: QuizQuestion[] = [
     "round": 48,
     "subject": "2과목",
     "number": 27,
-    "title": "아래 조건들 중 결과 건수가 나머지와 다른 것은?",
+    "title": "아래 SQL 들 중 결과 건수가 나머지와 다른 것은? (테이블 T 에는 충분한 행이 존재한다고 가정)",
     "options": [
-      "`WHERE ROWNUM = 2`",
-      "`WHERE ROWNUM <= 2`",
-      "`WHERE ROWNUM IN (1, 2)`",
-      "`WHERE ROWNUM = 1 OR ROWNUM = 2`"
+      "`SELECT * FROM T WHERE ROWNUM = 2;`",
+      "`SELECT * FROM T WHERE ROWNUM <= 2;`",
+      "`SELECT * FROM T WHERE ROWNUM IN (1, 2);`",
+      "`SELECT * FROM T WHERE ROWNUM = 1 OR ROWNUM = 2;`"
     ],
     "correctIndex": 0,
-    "explanation": "ROWNUM 은 1부터 순차 부여되므로 ROWNUM = 2 는 만족되지 않아 0 건이 된다.",
+    "explanation": "Oracle 의 `ROWNUM` 은 fetch 시점에 1 부터 순차 부여되는 의사 컬럼이라 `ROWNUM = 2` 같은 등호 조건(N≥2)은 절대 만족되지 않아 0 건이 된다. ②③④ 는 모두 ROWNUM 1, 2 를 포함하는 조건이라 2 건 반환. 결과가 다른 것은 ①.",
     "_source": "authored"
   },
   {
@@ -1229,7 +1231,8 @@ export const ROUND_48: QuizQuestion[] = [
             "10",
             "10"
           ]
-        ]
+        ],
+        "caption": "T1 테이블"
       },
       {
         "type": "sql",
@@ -1273,7 +1276,8 @@ export const ROUND_48: QuizQuestion[] = [
           [
             "4"
           ]
-        ]
+        ],
+        "caption": "TAB1 테이블"
       },
       {
         "type": "sql",

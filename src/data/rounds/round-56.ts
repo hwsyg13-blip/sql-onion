@@ -267,7 +267,8 @@ export const ROUND_56: QuizQuestion[] = [
             "3",
             "A"
           ]
-        ]
+        ],
+        "caption": "TAB1 테이블"
       },
       {
         "type": "sql",
@@ -356,7 +357,8 @@ export const ROUND_56: QuizQuestion[] = [
             "3",
             "50"
           ]
-        ]
+        ],
+        "caption": "TAB1 테이블"
       },
       {
         "type": "sql",
@@ -449,7 +451,8 @@ export const ROUND_56: QuizQuestion[] = [
             "r",
             "50"
           ]
-        ]
+        ],
+        "caption": "업체 테이블"
       },
       {
         "type": "sql",
@@ -500,19 +503,20 @@ export const ROUND_56: QuizQuestion[] = [
     "round": 56,
     "subject": "2과목",
     "number": 21,
-    "title": "아래 결과를 얻기 위한 쿼리로 가장 적절한 것은?",
+    "title": "아래 EMP 테이블에서 결과(COUNT(*) = 4)를 얻기 위한 쿼리로 가장 적절한 것은?",
     "options": [
-      "`FROM EMP WHERE COL2 LIKE '%_%'`",
-      "`FROM EMP`",
-      "`FROM EMP WHERE COL2 LIKE '%_'`",
-      "`FROM EMP WHERE COL2 LIKE '_%'`"
+      "`SELECT COUNT(*) FROM EMP WHERE COL2 LIKE '%_%';`",
+      "`SELECT COUNT(*) FROM EMP;`",
+      "`SELECT COUNT(*) FROM EMP WHERE COL2 LIKE '%_';`",
+      "`SELECT COUNT(*) FROM EMP WHERE COL2 LIKE '_%';`"
     ],
     "correctIndex": 1,
-    "explanation": "COUNT(*) 는 NULL 을 포함한 모든 행을 세므로 조건 없이 전체를 조회해야 4 가 반환된다.",
+    "explanation": "`COUNT(*)` 는 NULL 을 포함한 모든 행을 세므로 조건 없이 전체를 조회해야 4 가 반환된다. ① `LIKE '%_%'` 는 \"한 글자 이상\" 의미로 NULL 행 1 개를 제외한 3 행, ③ `LIKE '%_'` 와 ④ `LIKE '_%'` 도 마찬가지로 NULL 제외 3 행이라 4 를 반환하지 못한다.",
     "_source": "authored",
     "references": [
       {
         "type": "table",
+        "caption": "EMP 테이블",
         "headers": [
           "COL1",
           "COL2"
@@ -611,7 +615,8 @@ export const ROUND_56: QuizQuestion[] = [
           [
             "c"
           ]
-        ]
+        ],
+        "caption": "TAB1 테이블"
       },
       {
         "type": "sql",
@@ -1130,7 +1135,8 @@ export const ROUND_56: QuizQuestion[] = [
             "40",
             "A"
           ]
-        ]
+        ],
+        "caption": "MEMBER 테이블"
       },
       {
         "type": "sql",
@@ -1174,7 +1180,8 @@ export const ROUND_56: QuizQuestion[] = [
           [
             "(NULL)"
           ]
-        ]
+        ],
+        "caption": "T 테이블"
       },
       {
         "type": "sql",

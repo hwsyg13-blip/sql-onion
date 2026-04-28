@@ -188,7 +188,8 @@ export const ROUND_57: QuizQuestion[] = [
             "강감찬",
             "010-2222"
           ]
-        ]
+        ],
+        "caption": "회원 테이블"
       },
       {
         "type": "sql",
@@ -490,7 +491,8 @@ export const ROUND_57: QuizQuestion[] = [
             "4",
             "3"
           ]
-        ]
+        ],
+        "caption": "T 테이블"
       },
       {
         "type": "sql",
@@ -621,7 +623,8 @@ export const ROUND_57: QuizQuestion[] = [
             "5",
             "5"
           ]
-        ]
+        ],
+        "caption": "T 테이블"
       },
       {
         "type": "sql",
@@ -895,7 +898,8 @@ export const ROUND_57: QuizQuestion[] = [
           [
             "70건 보유"
           ]
-        ]
+        ],
+        "caption": "T 테이블"
       },
       {
         "type": "sql",
@@ -1054,7 +1058,8 @@ export const ROUND_57: QuizQuestion[] = [
           [
             "T1, T2"
           ]
-        ]
+        ],
+        "caption": "TUTOR 테이블"
       },
       {
         "type": "sql",
@@ -1167,7 +1172,8 @@ export const ROUND_57: QuizQuestion[] = [
           [
             "2023-05"
           ]
-        ]
+        ],
+        "caption": "MONTHLY 테이블"
       },
       {
         "type": "sql",
@@ -1434,7 +1440,8 @@ export const ROUND_57: QuizQuestion[] = [
             "박문수",
             "3000"
           ]
-        ]
+        ],
+        "caption": "사원 테이블"
       },
       {
         "type": "sql",

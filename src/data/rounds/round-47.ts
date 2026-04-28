@@ -406,15 +406,15 @@ export const ROUND_47: QuizQuestion[] = [
     "round": 47,
     "subject": "2과목",
     "number": 19,
-    "title": "아래 두 테이블 조인 결과가 나머지와 다른 SQL 은?",
+    "title": "아래 두 테이블 A, B 조인 결과가 나머지와 다른 SQL 은?",
     "options": [
-      "FROM A NATURAL JOIN B",
-      "FROM A JOIN B USING(SRN_NO)",
-      "FROM A INNER JOIN B",
-      "FROM A, B WHERE A.SRN_NO = B.SRN_NO"
+      "`SELECT * FROM A NATURAL JOIN B;`",
+      "`SELECT * FROM A JOIN B USING(SRN_NO);`",
+      "`SELECT * FROM A INNER JOIN B;`",
+      "`SELECT * FROM A, B WHERE A.SRN_NO = B.SRN_NO;`"
     ],
     "correctIndex": 2,
-    "explanation": "①번 NATURAL JOIN과 ②번 USING은 동일 컬럼명을 자동·수동으로 잡아 INNER JOIN을 수행하므로 결과가 같습니다. ④번은 같은 조건을 명시한 동등 조인입니다. 그러나 ③번은 ON 절이 빠진 INNER JOIN으로, Oracle에서는 구문 오류가 나거나 일부 환경에서는 CROSS JOIN 형태로 해석되어 결과 행이 폭증합니다. 따라서 결과가 다른 것은 ③번입니다.",
+    "explanation": "① `NATURAL JOIN` 과 ② `USING` 은 동일 컬럼명을 자동·수동으로 잡아 INNER JOIN 을 수행하므로 결과가 같다. ④ 는 같은 조건을 명시한 동등 조인. 그러나 ③ 은 `ON` 절이 빠진 `INNER JOIN` 으로 Oracle 에서는 구문 오류가 나거나 일부 환경에서는 CROSS JOIN 형태로 해석되어 결과 행이 폭증한다. 결과가 다른 것은 ③.",
     "_source": "authored"
   },
   {
@@ -694,7 +694,8 @@ export const ROUND_47: QuizQuestion[] = [
             "20",
             "1"
           ]
-        ]
+        ],
+        "caption": "T 테이블"
       }
     ]
   },
@@ -1037,7 +1038,8 @@ export const ROUND_47: QuizQuestion[] = [
             "10",
             "0"
           ]
-        ]
+        ],
+        "caption": "T 테이블"
       },
       {
         "type": "sql",
@@ -1220,7 +1222,8 @@ export const ROUND_47: QuizQuestion[] = [
             "9",
             "5"
           ]
-        ]
+        ],
+        "caption": "T 테이블"
       },
       {
         "type": "sql",

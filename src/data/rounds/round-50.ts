@@ -713,7 +713,8 @@ export const ROUND_50: QuizQuestion[] = [
           [
             "4000"
           ]
-        ]
+        ],
+        "caption": "T 테이블"
       },
       {
         "type": "sql",

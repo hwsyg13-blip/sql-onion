@@ -304,7 +304,8 @@ export const ROUND_60: QuizQuestion[] = [
             "JONES",
             "NULL"
           ]
-        ]
+        ],
+        "caption": "EMP 테이블"
       },
       {
         "type": "sql",
@@ -361,7 +362,8 @@ export const ROUND_60: QuizQuestion[] = [
             "5,800",
             "7,500"
           ]
-        ]
+        ],
+        "caption": "급여 테이블"
       },
       {
         "type": "sql",
@@ -402,7 +404,8 @@ export const ROUND_60: QuizQuestion[] = [
           [
             "3000"
           ]
-        ]
+        ],
+        "caption": "T 테이블"
       },
       {
         "type": "sql",
@@ -455,7 +458,8 @@ export const ROUND_60: QuizQuestion[] = [
             "10005",
             "2003"
           ]
-        ]
+        ],
+        "caption": "T 테이블"
       },
       {
         "type": "sql",
@@ -511,7 +515,8 @@ export const ROUND_60: QuizQuestion[] = [
           [
             "8"
           ]
-        ]
+        ],
+        "caption": "EMP 테이블"
       },
       {
         "type": "sql",
@@ -656,7 +661,8 @@ export const ROUND_60: QuizQuestion[] = [
           [
             "10"
           ]
-        ]
+        ],
+        "caption": "T 테이블"
       },
       {
         "type": "sql",
@@ -671,19 +677,20 @@ export const ROUND_60: QuizQuestion[] = [
     "round": 60,
     "subject": "2과목",
     "number": 21,
-    "title": "아래 데이터에 대하여 결과 행 수가 나머지와 다른 하나는?",
+    "title": "아래 T 테이블에 대해 SQL 들 중 결과 행 수가 나머지와 다른 하나는?",
     "options": [
-      "`WHERE ROWNUM IN (1, 2)`",
-      "`WHERE ROWNUM < 1`",
-      "`WHERE ROWNUM > 1`",
-      "`WHERE ROWNUM = 2`"
+      "`SELECT * FROM T WHERE ROWNUM IN (1, 2);`",
+      "`SELECT * FROM T WHERE ROWNUM < 1;`",
+      "`SELECT * FROM T WHERE ROWNUM > 1;`",
+      "`SELECT * FROM T WHERE ROWNUM = 2;`"
     ],
     "correctIndex": 0,
-    "explanation": "ROWNUM은 WHERE 조건이 통과된 행에 대해서만 순차적으로 부여된다. ①은 첫 행에 1, 두 번째 행에 2가 부여되어 모두 조건을 만족하므로 2건을 반환한다. 반면 ② `ROWNUM < 1`은 어떤 행도 만족하지 못해 0건, ③ `ROWNUM > 1`은 첫 행이 ROWNUM=1을 받고 탈락한 뒤 다음 행에도 계속 1이 부여되어 0건, ④ `ROWNUM = 2`도 첫 행이 ROWNUM=1로 탈락한 뒤 ROWNUM 값이 2로 올라가지 못하여 0건이 반환된다. 따라서 ①만 결과 행 수가 다르다.",
+    "explanation": "Oracle 의 `ROWNUM` 은 `WHERE` 조건이 통과된 행에 대해서만 순차적으로 부여된다. ① 은 첫 행에 ROWNUM=1, 두 번째 행에 ROWNUM=2 가 부여되어 모두 조건을 만족 → 2 건 반환. ② `ROWNUM < 1` 은 어떤 행도 만족 못 함 → 0 건. ③ `ROWNUM > 1` 은 첫 행이 ROWNUM=1 로 탈락한 뒤 다음 행에도 계속 1 이 부여되어 0 건. ④ `ROWNUM = 2` 도 ROWNUM 값이 2 로 올라가지 못해 0 건. 결과가 다른 것은 ①.",
     "_source": "authored",
     "references": [
       {
         "type": "table",
+        "caption": "T 테이블",
         "headers": [
           "행 순서",
           "COL"
@@ -1014,7 +1021,8 @@ export const ROUND_60: QuizQuestion[] = [
             "브론즈",
             "1"
           ]
-        ]
+        ],
+        "caption": "메달 테이블"
       },
       {
         "type": "sql",
@@ -1257,7 +1265,8 @@ export const ROUND_60: QuizQuestion[] = [
             "a1, a2",
             "b1, b2"
           ]
-        ]
+        ],
+        "caption": "A 테이블"
       },
       {
         "type": "sql",

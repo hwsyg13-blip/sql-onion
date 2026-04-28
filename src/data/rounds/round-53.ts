@@ -342,7 +342,8 @@ export const ROUND_53: QuizQuestion[] = [
             "1, 2, 3, 4, 5",
             "1, 1, 1, 3, 6"
           ]
-        ]
+        ],
+        "caption": "T1 테이블"
       },
       {
         "type": "sql",
@@ -447,7 +448,8 @@ export const ROUND_53: QuizQuestion[] = [
             "홍길동",
             "201001"
           ]
-        ]
+        ],
+        "caption": "주문 테이블"
       },
       {
         "type": "sql",
@@ -724,7 +726,8 @@ export const ROUND_53: QuizQuestion[] = [
           [
             "60"
           ]
-        ]
+        ],
+        "caption": "T 테이블"
       }
     ]
   },
@@ -941,7 +944,8 @@ export const ROUND_53: QuizQuestion[] = [
             "MILLER",
             "1300"
           ]
-        ]
+        ],
+        "caption": "EMP 테이블"
       }
     ]
   },
@@ -1074,7 +1078,8 @@ export const ROUND_53: QuizQuestion[] = [
           [
             "90"
           ]
-        ]
+        ],
+        "caption": "T 테이블"
       },
       {
         "type": "sql",
@@ -1265,7 +1270,8 @@ export const ROUND_53: QuizQuestion[] = [
             "NULL",
             "NULL"
           ]
-        ]
+        ],
+        "caption": "T 테이블"
       },
       {
         "type": "sql",

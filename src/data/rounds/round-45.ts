@@ -720,7 +720,8 @@ export const ROUND_45: QuizQuestion[] = [
           [
             "NULL"
           ]
-        ]
+        ],
+        "caption": "T 테이블"
       },
       {
         "type": "sql",
@@ -811,7 +812,8 @@ export const ROUND_45: QuizQuestion[] = [
             "T4",
             "1, 5"
           ]
-        ]
+        ],
+        "caption": "T1 테이블"
       },
       {
         "type": "sql",
@@ -943,7 +945,8 @@ export const ROUND_45: QuizQuestion[] = [
             "C",
             "c"
           ]
-        ]
+        ],
+        "caption": "T 테이블"
       },
       {
         "type": "sql",

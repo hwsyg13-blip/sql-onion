@@ -551,7 +551,8 @@ export const ROUND_58: QuizQuestion[] = [
             "5",
             "30"
           ]
-        ]
+        ],
+        "caption": "T 테이블"
       },
       {
         "type": "sql",
@@ -668,7 +669,8 @@ export const ROUND_58: QuizQuestion[] = [
             "3",
             "300"
           ]
-        ]
+        ],
+        "caption": "T 테이블"
       },
       {
         "type": "sql",
@@ -904,7 +906,8 @@ export const ROUND_58: QuizQuestion[] = [
             "(NULL)",
             "1003"
           ]
-        ]
+        ],
+        "caption": "EMP 테이블"
       },
       {
         "type": "sql",
@@ -1058,7 +1061,8 @@ export const ROUND_58: QuizQuestion[] = [
             "2",
             "10"
           ]
-        ]
+        ],
+        "caption": "TBL 테이블"
       },
       {
         "type": "sql",
@@ -1421,7 +1425,8 @@ export const ROUND_58: QuizQuestion[] = [
             "Y",
             "1"
           ]
-        ]
+        ],
+        "caption": "T 테이블"
       },
       {
         "type": "sql",

@@ -272,7 +272,8 @@ export const ROUND_46: QuizQuestion[] = [
             "B",
             "4"
           ]
-        ]
+        ],
+        "caption": "SQLD46_01 테이블"
       },
       {
         "type": "sql",
@@ -889,7 +890,8 @@ export const ROUND_46: QuizQuestion[] = [
             "2",
             "50"
           ]
-        ]
+        ],
+        "caption": "T 테이블"
       },
       {
         "type": "sql",
@@ -1031,7 +1033,8 @@ export const ROUND_46: QuizQuestion[] = [
             "300",
             "400"
           ]
-        ]
+        ],
+        "caption": "T 테이블"
       },
       {
         "type": "sql",
@@ -1146,7 +1149,8 @@ export const ROUND_46: QuizQuestion[] = [
             "D",
             "120"
           ]
-        ]
+        ],
+        "caption": "EMP 테이블"
       },
       {
         "type": "sql",
@@ -1195,7 +1199,8 @@ export const ROUND_46: QuizQuestion[] = [
             "40",
             "20"
           ]
-        ]
+        ],
+        "caption": "T 테이블"
       },
       {
         "type": "sql",
@@ -1281,7 +1286,8 @@ export const ROUND_46: QuizQuestion[] = [
           [
             "8"
           ]
-        ]
+        ],
+        "caption": "T 테이블"
       },
       {
         "type": "sql",

@@ -355,7 +355,8 @@ export const ROUND_49: QuizQuestion[] = [
           [
             "999"
           ]
-        ]
+        ],
+        "caption": "TBL 테이블"
       },
       {
         "type": "sql",
@@ -1021,7 +1022,8 @@ export const ROUND_49: QuizQuestion[] = [
             "200",
             "100"
           ]
-        ]
+        ],
+        "caption": "T 테이블"
       },
       {
         "type": "sql",
@@ -1070,7 +1072,8 @@ export const ROUND_49: QuizQuestion[] = [
             "1",
             "B"
           ]
-        ]
+        ],
+        "caption": "TAB1 테이블"
       },
       {
         "type": "sql",
@@ -1114,7 +1117,8 @@ export const ROUND_49: QuizQuestion[] = [
           [
             "30"
           ]
-        ]
+        ],
+        "caption": "T 테이블"
       },
       {
         "type": "sql",
@@ -1507,7 +1511,8 @@ export const ROUND_49: QuizQuestion[] = [
             "D",
             "8"
           ]
-        ]
+        ],
+        "caption": "TAB1 테이블"
       },
       {
         "type": "sql",

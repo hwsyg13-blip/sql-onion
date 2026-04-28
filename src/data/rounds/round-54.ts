@@ -841,7 +841,8 @@ export const ROUND_54: QuizQuestion[] = [
           [
             "NULL"
           ]
-        ]
+        ],
+        "caption": "TAB 테이블"
       },
       {
         "type": "sql",
@@ -902,7 +903,8 @@ export const ROUND_54: QuizQuestion[] = [
             "3",
             "NULL"
           ]
-        ]
+        ],
+        "caption": "TAB 테이블"
       },
       {
         "type": "sql",
@@ -1093,7 +1095,8 @@ export const ROUND_54: QuizQuestion[] = [
             "7784",
             "2000"
           ]
-        ]
+        ],
+        "caption": "EMP 테이블"
       },
       {
         "type": "sql",
@@ -1254,7 +1257,8 @@ export const ROUND_54: QuizQuestion[] = [
             "부서1",
             "5000"
           ]
-        ]
+        ],
+        "caption": "T 테이블"
       },
       {
         "type": "sql",
@@ -1303,7 +1307,8 @@ export const ROUND_54: QuizQuestion[] = [
             "NULL",
             "3"
           ]
-        ]
+        ],
+        "caption": "T 테이블"
       },
       {
         "type": "sql",
@@ -1511,7 +1516,8 @@ export const ROUND_54: QuizQuestion[] = [
             "NULL",
             "NULL"
           ]
-        ]
+        ],
+        "caption": "T 테이블"
       },
       {
         "type": "sql",
