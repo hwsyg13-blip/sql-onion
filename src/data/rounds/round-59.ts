@@ -440,7 +440,8 @@ export const ROUND_59: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "-- Oracle 표기\nSELECT * FROM A, B WHERE A.ID = B.ID(+);\n\n-- ANSI 표준 SQL\nSELECT * FROM A LEFT OUTER JOIN B ON A.ID = B.ID;"
+        "caption": "Oracle 표기를 어떤 ANSI 조인으로 바꿔야 할까?",
+        "code": "-- Oracle 표기\nSELECT * FROM A, B WHERE A.ID = B.ID(+);\n\n-- ANSI 표준 SQL\nSELECT * FROM A ( ? ) B ON A.ID = B.ID;"
       },
       {
         "type": "table",

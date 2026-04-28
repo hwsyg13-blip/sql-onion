@@ -419,7 +419,7 @@ export const ROUND_50: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT SUBSTR(STR, LENGTH(STR) - 3) FROM T;\n-- STR = 'abcdefg', LENGTH(STR) = 7, 시작 위치 = 7 - 3 = 4"
+        "code": "-- STR = 'abcdefg'\nSELECT SUBSTR(STR, LENGTH(STR) - 3) FROM T;"
       }
     ]
   },
