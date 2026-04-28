@@ -263,7 +263,7 @@ export const ROUND_57: QuizQuestion[] = [
       {
         "type": "erd",
         "caption": "상품·주문·주문항목 ERD",
-        "mermaid": "erDiagram\n    상품 |o--o{ 주문 : \"주문\"\n    주문 ||--o{ 주문항목 : \"포함\""
+        "mermaid": "erDiagram\n    상품 ||--o{ 주문 : \"주문\"\n    주문 ||--o{ 주문항목 : \"포함\""
       }
     ]
   },
@@ -498,7 +498,7 @@ export const ROUND_57: QuizQuestion[] = [
       "0, 0, 0, 0"
     ],
     "correctIndex": 2,
-    "explanation": "원본 기출의 정답 표기를 보존한다. 누적 윈도우에서 특정 조건의 값 개수가 3으로 계산된다는 의미이다.",
+    "explanation": "윈도우 절 `ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW`는 첫 행부터 현재 행까지 누적 범위를 의미한다. `COUNT(*)`는 NULL 여부와 무관하게 행 개수를 세므로, ID 1~4까지 누적되어 1, 2, 3, 4가 된다.",
     "_source": "authored",
     "references": [
       {
@@ -560,13 +560,13 @@ export const ROUND_57: QuizQuestion[] = [
     "number": 22,
     "title": "아래 부서 테이블에서 부서 ID 가 100 인 부서의 최상위부터 최하위까지 계층 경로를 출력하는 조건으로 옳은 것은?",
     "options": [
+      "서브쿼리 사용, PRIOR 부서 = 상위",
       "서브쿼리 사용, PRIOR 상위 = 부서",
-      "서브쿼리 사용, 부서 = PRIOR 상위",
-      "PRIOR 상위 = 부서",
-      "부서 = PRIOR 상위"
+      "PRIOR 부서 = 상위",
+      "PRIOR 상위 = 부서"
     ],
     "correctIndex": 3,
-    "explanation": "`부서 = PRIOR 상위` 는 \"현재 행의 부서가 다음 행의 상위와 같으면 연결\" → 자식이 위로(부모로) 거슬러 올라가는 역방향 전개. 100 부서에서 시작해 최상위까지 탐색 가능. ③ `PRIOR 상위 = 부서` 와 비교하면, 컬럼 순서는 다르지만 PRIOR 가 어디 붙어있는지가 핵심. 본 문제는 자식 → 부모 방향이라 PRIOR 가 우측(상위)에 붙어야 함.",
+    "explanation": "`PRIOR 상위 = 부서` 는 \"이전(PRIOR) 행의 상위가 다음 행의 부서와 같으면 연결\" → 자식이 부모로 거슬러 올라가는 역방향 전개. 100 부서에서 시작해 최상위까지 탐색 가능. ③ `PRIOR 부서 = 상위` 는 부모 → 자식 정방향 전개라 100 부서에서 시작해도 그 아래 자식이 없어 결과가 100 한 행에 그친다. ①·②는 서브쿼리를 추가로 사용할 필요가 없으므로 부적절하다.",
     "_source": "authored",
     "references": [
       {
@@ -610,13 +610,13 @@ export const ROUND_57: QuizQuestion[] = [
     "number": 23,
     "title": "아래 EMP 테이블에 대한 SQL 의 빈칸에 들어갈 조건으로 가장 적절한 것은?",
     "options": [
-      "ORDER BY ANY",
-      "ORDER BY AVG ANY",
-      "HAVING ALL",
-      "HAVING AVG ALL"
+      "`ORDER BY AVG(SAL) > ANY (SELECT AVG(SAL) FROM EMP GROUP BY DEPTNO)`",
+      "`ORDER BY AVG(SAL) > ALL (SELECT AVG(SAL) FROM EMP GROUP BY DEPTNO)`",
+      "`HAVING AVG(SAL) > ANY (SELECT AVG(SAL) FROM EMP GROUP BY DEPTNO)`",
+      "`HAVING AVG(SAL) > ALL (SELECT AVG(SAL) FROM EMP GROUP BY DEPTNO)`"
     ],
     "correctIndex": 3,
-    "explanation": "\"모든 부서의 평균 급여보다 많이 받는\" 조건은 그룹 단위 필터라 `HAVING` 이 필요하고, \"모든 부서 평균보다 큼\" = `> ALL (각 부서별 AVG)` 이므로 `HAVING AVG SAL > ALL ...` 형태가 된다. ③ HAVING ALL 만으론 불완전, ④ HAVING AVG ALL 이 정답.",
+    "explanation": "\"모든 부서의 평균 급여보다 많이 받는\" 조건은 그룹 단위 필터라 `HAVING` 이 필요하고 (정렬용 ORDER BY 가 아님), \"모든 부서 평균보다 큼\" = `> ALL (각 부서별 AVG)` 이므로 ④ `HAVING AVG(SAL) > ALL (...)` 이 정답이다. ①·② 는 절 자체가 ORDER BY 라 필터 기능이 없고, ③ ANY 는 최소 기준(어떤 하나보다만 크면 됨)이라 \"모든 평균보다 큼\" 의 의미와 다르다.",
     "_source": "authored",
     "references": [
       {
@@ -793,10 +793,6 @@ export const ROUND_57: QuizQuestion[] = [
             "Sunday"
           ]
         ]
-      },
-      {
-        "type": "text",
-        "content": "원본 PDF 표기: '^[^mw][[:lowercase:]]*[u]*day$', ' i ' (REGEXP_LIKE 의 패턴과 옵션만 발췌됨)"
       },
       {
         "type": "sql",
@@ -976,7 +972,7 @@ export const ROUND_57: QuizQuestion[] = [
     "references": [
       {
         "type": "table",
-        "caption": "TBL 테이블 (데이터가 있더라도 WHERE 1=2 로 모두 공집합)",
+        "caption": "TBL 테이블",
         "headers": [
           "COL"
         ],
@@ -1059,16 +1055,8 @@ export const ROUND_57: QuizQuestion[] = [
     "_source": "authored",
     "references": [
       {
-        "type": "table",
-        "headers": [
-          "COL"
-        ],
-        "rows": [
-          [
-            "70건 보유"
-          ]
-        ],
-        "caption": "T 테이블"
+        "type": "text",
+        "content": "T 테이블에는 총 70건의 행이 저장되어 있다."
       },
       {
         "type": "sql",
@@ -1114,7 +1102,7 @@ export const ROUND_57: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT name\nFROM   NAME\nWHERE  ( ? );  -- 결과: Kim, Tim"
+        "code": "SELECT name\nFROM   NAME\nWHERE  ( ? );"
       },
       {
         "type": "table",
@@ -1220,7 +1208,7 @@ export const ROUND_57: QuizQuestion[] = [
     "number": 41,
     "title": "아래 TUTOR(2건), CLASS(4건) 테이블을 튜터 기준으로 LEFT OUTER JOIN 한 결과의 행 수는? (튜터별로 매칭되는 클래스가 0~다수일 수 있음)",
     "options": [
-      "2건 (튜터 기준 그대로 유지)",
+      "2건",
       "4건",
       "6건",
       "8건"
@@ -1443,15 +1431,15 @@ export const ROUND_57: QuizQuestion[] = [
     "round": 57,
     "subject": "2과목",
     "number": 45,
-    "title": "아래 결과가 UNPIVOT 을 수행한 것으로 가장 적절한 선지는?",
+    "title": "아래 매출 테이블에 UNPIVOT 을 수행한 결과로 가장 적절한 것은?",
     "options": [
-      "모든 값이 채워진 4행 형태의 표",
-      "특정 컬럼이 NULL 인 표",
-      "다른 특정 컬럼이 NULL 인 표",
-      "모든 값이 채워져 있지만 금액이 상이한 표"
+      "(서울, 1월, 100), (서울, 2월, 200), (부산, 1월, 300), (부산, 2월, 400) — 모든 값이 채워진 4 행",
+      "(서울, 1월, 100), (서울, 2월, NULL), (부산, 1월, 300), (부산, 2월, NULL) — 매출 일부 NULL",
+      "(서울, NULL, 100), (서울, NULL, 200), (부산, NULL, 300), (부산, NULL, 400) — 월 컬럼 NULL",
+      "(서울, 1월, 50), (서울, 2월, 100), (부산, 1월, 150), (부산, 2월, 200) — 매출 값이 입력과 상이"
     ],
     "correctIndex": 0,
-    "explanation": "UNPIVOT 은 열로 흩어진 값을 행으로 전개하여 각 조합이 온전히 채워진 레코드로 변환한다. 입력 표(2행 × 3컬럼)의 매출값이 행으로 전개되어 결과는 (지점, 월, 매출) 4행으로 모두 채워진 형태이다.",
+    "explanation": "UNPIVOT 은 열로 흩어진 값을 행으로 전개하여 각 조합이 온전히 채워진 레코드로 변환한다. 입력 표(2행 × 1월·2월 컬럼)의 매출값 4 개(100, 200, 300, 400)가 (지점, 월, 매출) 4 행으로 그대로 옮겨진다. NULL 이 끼어들 일이 없고, 매출 값도 입력 그대로다.",
     "_source": "authored",
     "references": [
       {
@@ -1622,12 +1610,8 @@ export const ROUND_57: QuizQuestion[] = [
     "_source": "authored",
     "references": [
       {
-        "type": "text",
-        "content": "원본 PDF 표기: '문제 48. (ㄱ) 들어가있고, Not in, not exist 문제.' — ①②선지는 원본에서도 표기되지 않았고, ③ '(ㄱ) where 회원id not in x.회원? 으로 바꿔도 결과는 동일하다', ④ 'X=null로 바꿔도 결과는 동일하다' (정답) 만 복원되어 있다."
-      },
-      {
         "type": "sql",
-        "code": "SELECT *\nFROM   회원 M\nWHERE  NOT EXISTS (SELECT 1 FROM 탈퇴 X WHERE X.회원ID = M.회원ID);\n-- (ㄱ) 지점을 다른 조건식으로 대체한 경우 결과가 동일한지 판단한다."
+        "code": "SELECT *\nFROM   회원 M\n( ㄱ )"
       }
     ]
   },
@@ -1677,7 +1661,7 @@ export const ROUND_57: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT CASE WHEN GROUPING(DEPT) = 1 AND GROUPING(JOB) = 1 THEN '전체총계'\n            WHEN GROUPING(DEPT) = 1 THEN '부서별 소계'\n            ELSE DEPT\n       END AS DEPT_LBL,\n       SUM(SAL)\nFROM   EMP\nGROUP BY ROLLUP(DEPT, JOB);"
+        "code": "SELECT CASE\n         ( ? )\n         ELSE DEPT\n       END AS DEPT_LBL,\n       SUM(SAL)\nFROM   EMP\nGROUP BY ROLLUP(DEPT, JOB);"
       }
     ]
   },
@@ -1690,10 +1674,10 @@ export const ROUND_57: QuizQuestion[] = [
     "number": 50,
     "title": "아래 사원 테이블에 대한 SQL 의 실행 결과로 가장 적절한 것은?",
     "options": [
-      "2건 반환",
-      "3건 반환",
-      "3건 반환",
-      "1건 반환"
+      "2건 반환 (김유신, 변사또)",
+      "3건 반환 (홍길동, 유학생, 박문수 — 부서별 최저 연봉)",
+      "3건 반환 (강감찬, 김유신, 변사또 — 부서별 최고 연봉)",
+      "1건 반환 (김유신)"
     ],
     "correctIndex": 2,
     "explanation": "인라인 뷰 X 에서 각 사원에 부서별 최고 연봉이 매핑된다. Y 와 조인하면서 사원ID 가 같고 '본인 연봉 = 부서 최고 연봉' 조건까지 만족하는 행만 남는다. 부서 100은 002(강감찬, 3000), 200은 003(김유신, 4500), 300은 006(변사또, 4500) 이 반환된다.",
