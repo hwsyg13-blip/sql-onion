@@ -91,7 +91,9 @@ export const EndlessScreen = ({onNavigate}) => {
           const newCount = sqloUsage.incMock(1);
           if (newCount >= sqloUsage.LIMITS.mockDaily) setLimitHit(true);
         }
-      } catch(e){}
+      } catch(e){
+        console.warn('[endless] mock usage tracking failed', e);
+      }
     }
   };
   const next = () => {
