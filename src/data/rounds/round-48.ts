@@ -205,7 +205,13 @@ export const ROUND_48: QuizQuestion[] = [
     ],
     "correctIndex": 1,
     "explanation": "1:1, 1:M, M:N처럼 두 엔터티 간 관계가 몇 대 몇인지 표시하는 것을 관계차수(Cardinality)라고 합니다. 관계명은 관계 자체의 이름, 관계선택사양은 필수/선택 여부를 나타내므로 의미가 다릅니다. 정답은 ②번입니다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "ascii",
+        "text": "[ A ] ─|─────|─ [ B ]   (1:1 관계)\n[ A ] ─|─────< [ B ]   (1:M 관계)\n[ A ] >─────< [ B ]   (M:N 관계)\n\n* `|` 단일성 (1)\n* `<` 까마귀발 (다수, M)\n* `o` 선택성 (0 또는 그 이상)"
+      }
+    ]
   },
   {
     "id": 10609,
@@ -540,7 +546,7 @@ export const ROUND_48: QuizQuestion[] = [
     "round": 48,
     "subject": "2과목",
     "number": 15,
-    "title": "아래 WINDOW FUNCTION 에 대한 설명으로 옳은 것은?",
+    "title": "아래 상품 테이블에 대한 WINDOW FUNCTION SQL 에 대한 설명으로 옳은 것은?",
     "options": [
       "GROUP BY 와 함께 사용했으므로 오류가 발생한다.",
       "ORDER BY 에 집계 함수를 사용해 오류가 발생한다.",
@@ -551,6 +557,47 @@ export const ROUND_48: QuizQuestion[] = [
     "explanation": "이 SQL은 GROUP BY 상품분류코드로 분류별 평균 상품가격을 만든 뒤, 그 결과 행에 대해 윈도우 함수를 적용합니다. OVER(ORDER BY AVG(상품가격) RANGE BETWEEN 10000 PRECEDING AND 10000 FOLLOWING)은 GROUP BY로 만들어진 각 행(상품분류코드)을 평균 상품가격으로 정렬한 뒤, 현재 분류의 평균을 기준으로 ±10,000 범위 내에 들어오는 상품분류코드 행의 개수를 셉니다. 즉 \"비슷한 평균가를 가진 분류가 몇 개인가\"를 반환하므로 ③번이 정답입니다. ①·②는 GROUP BY와 윈도우 함수 결합이 정상 동작하지 않는다는 오해이고, ④는 상품 개별이 아닌 \"상품분류코드\" 단위로 비교한다는 점을 놓친 보기입니다.",
     "_source": "authored",
     "references": [
+      {
+        "type": "table",
+        "caption": "상품 테이블",
+        "headers": [
+          "상품ID",
+          "상품분류코드",
+          "상품가격"
+        ],
+        "rows": [
+          [
+            "P001",
+            "C01",
+            "10000"
+          ],
+          [
+            "P002",
+            "C01",
+            "12000"
+          ],
+          [
+            "P003",
+            "C02",
+            "25000"
+          ],
+          [
+            "P004",
+            "C02",
+            "27000"
+          ],
+          [
+            "P005",
+            "C03",
+            "50000"
+          ],
+          [
+            "P006",
+            "C03",
+            "55000"
+          ]
+        ]
+      },
       {
         "type": "sql",
         "code": "SELECT 상품분류코드, AVG(상품가격) AS 상품가격,\n       COUNT(*) OVER(ORDER BY AVG(상품가격)\n                     RANGE BETWEEN 10000 PRECEDING AND 10000 FOLLOWING) AS 유사개수\nFROM   상품\nGROUP BY 상품분류코드;"
@@ -692,7 +739,7 @@ export const ROUND_48: QuizQuestion[] = [
     "round": 48,
     "subject": "2과목",
     "number": 21,
-    "title": "2025-10-21 시각 하루 데이터를 조회하려 할 때 결과가 달라지는 조건은?",
+    "title": "아래 EMP 테이블의 HIRE_DT 컬럼에 대해 \"2025-10-21 하루\" 데이터를 조회하려 할 때 결과가 달라지는 조건은?",
     "options": [
       "`HIRE_DT >= DATE '2025-10-21' AND HIRE_DT < DATE '2025-10-22'`",
       "`TRUNC(HIRE_DT) = DATE '2025-10-21'`",
@@ -701,7 +748,39 @@ export const ROUND_48: QuizQuestion[] = [
     ],
     "correctIndex": 2,
     "explanation": "Oracle DATE 리터럴 비교 시 `DATE '2025-10-22'`는 22일 0시 0분 0초를 의미합니다. ①은 \"21일 0시 ≤ HIRE_DT < 22일 0시\"로 정확히 21일 하루만 잡고, ②는 TRUNC로 시간을 0시로 깎아 21일만 잡으며, ④는 \"21일 0시 ≤ HIRE_DT ≤ 22일 0시 - 1초\"라 21일 23:59:59까지만 잡습니다. 그러나 ③의 BETWEEN은 양 끝값을 포함하므로 22일 0시까지 결과에 들어가 22일 0시 정각의 데이터가 같이 잡힐 수 있습니다. 결과가 달라지는 것은 ③번이라 정답입니다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "caption": "EMP 테이블 (HIRE_DT — DATE 타입, 시·분·초 포함)",
+        "headers": [
+          "EMPNO",
+          "HIRE_DT"
+        ],
+        "rows": [
+          [
+            "7001",
+            "2025-10-20 17:30:00"
+          ],
+          [
+            "7002",
+            "2025-10-21 09:00:00"
+          ],
+          [
+            "7003",
+            "2025-10-21 18:45:00"
+          ],
+          [
+            "7004",
+            "2025-10-22 00:00:00"
+          ],
+          [
+            "7005",
+            "2025-10-22 11:00:00"
+          ]
+        ]
+      }
+    ]
   },
   {
     "id": 10621,
@@ -928,7 +1007,7 @@ export const ROUND_48: QuizQuestion[] = [
     "round": 48,
     "subject": "2과목",
     "number": 28,
-    "title": "아래 SQL 수행 후 최종 COUNT 값은?",
+    "title": "아래 품목 테이블에 대한 SQL 수행 후 최종 COUNT 값은?",
     "options": [
       "0",
       "2",
@@ -936,12 +1015,60 @@ export const ROUND_48: QuizQuestion[] = [
       "4"
     ],
     "correctIndex": 2,
-    "explanation": "ROLLBACK 으로 DELETE·UPDATE 가 취소되고 COMMIT 된 INSERT 만 유지되어 단가 2000 인 행은 002, 004, 005 의 3건이다.",
+    "explanation": "ROLLBACK 으로 DELETE·UPDATE 가 취소되고 COMMIT 된 INSERT 만 유지된다. 최종 단가 2000 인 행은 처음 데이터의 002·004 와 COMMIT 된 005 의 3건이다.",
     "_source": "authored",
     "references": [
       {
+        "type": "table",
+        "caption": "품목 테이블 (초기 상태)",
+        "headers": [
+          "품목ID",
+          "단가"
+        ],
+        "rows": [
+          [
+            "001",
+            "1000"
+          ],
+          [
+            "002",
+            "2000"
+          ],
+          [
+            "003",
+            "1000"
+          ],
+          [
+            "004",
+            "2000"
+          ]
+        ]
+      },
+      {
         "type": "sql",
-        "code": "CREATE TABLE 품목 (품목ID VARCHAR2(3), 단가 NUMBER);\n-- 초기 데이터: 001 1000, 002 2000, 003 1000, 004 2000\n\nBEGIN TRANSACTION;\nINSERT INTO 품목 VALUES ('005', 2000);\nCOMMIT;\n\nBEGIN TRANSACTION;\nDELETE FROM 품목 WHERE 품목ID = '002';\nBEGIN TRANSACTION;\nUPDATE 품목 SET 단가 = 2000 WHERE 단가 = 1000;\nROLLBACK;\n\nSELECT COUNT(품목ID) FROM 품목 WHERE 단가 = 2000;"
+        "code": "CREATE TABLE 품목 (품목ID VARCHAR2(3), 단가 NUMBER);\n-- 초기 데이터: 001 1000, 002 2000, 003 1000, 004 2000\n\nBEGIN TRANSACTION;\nINSERT INTO 품목 VALUES ('005', 2000);\nCOMMIT;             -- 005 영구 반영\n\nBEGIN TRANSACTION;\nDELETE FROM 품목 WHERE 품목ID = '002';\nBEGIN TRANSACTION;\nUPDATE 품목 SET 단가 = 2000 WHERE 단가 = 1000;\nROLLBACK;            -- DELETE·UPDATE 모두 취소\n\nSELECT COUNT(품목ID) FROM 품목 WHERE 단가 = 2000;"
+      },
+      {
+        "type": "table",
+        "caption": "최종 단가=2000 인 행",
+        "headers": [
+          "품목ID",
+          "단가"
+        ],
+        "rows": [
+          [
+            "002",
+            "2000"
+          ],
+          [
+            "004",
+            "2000"
+          ],
+          [
+            "005",
+            "2000"
+          ]
+        ]
       }
     ]
   },
@@ -1225,7 +1352,7 @@ export const ROUND_48: QuizQuestion[] = [
     "round": 48,
     "subject": "2과목",
     "number": 42,
-    "title": "아래 SQL 에서 ORDER BY 2 의 의미는?",
+    "title": "아래 EMP 테이블에 대한 SQL 에서 `ORDER BY 2` 의 의미는?",
     "options": [
       "사원ID 기준 정렬",
       "연봉 기준 정렬",
@@ -1236,6 +1363,32 @@ export const ROUND_48: QuizQuestion[] = [
     "explanation": "ORDER BY 뒤에 컬럼명을 쓰지 않고 숫자를 쓰면 SELECT 절에 나열된 컬럼의 순서 번호를 의미합니다. SELECT 사원ID, 사원명, 연봉에서 1=사원ID, 2=사원명, 3=연봉이므로 `ORDER BY 2`는 두 번째 컬럼인 사원명을 기준으로 정렬합니다. 정답은 ④번입니다.",
     "_source": "authored",
     "references": [
+      {
+        "type": "table",
+        "caption": "EMP 테이블",
+        "headers": [
+          "사원ID",
+          "사원명",
+          "연봉"
+        ],
+        "rows": [
+          [
+            "E01",
+            "홍길동",
+            "5000"
+          ],
+          [
+            "E02",
+            "김철수",
+            "4000"
+          ],
+          [
+            "E03",
+            "박영희",
+            "4500"
+          ]
+        ]
+      },
       {
         "type": "sql",
         "code": "SELECT 사원ID, 사원명, 연봉 FROM EMP ORDER BY 2;"
@@ -1430,7 +1583,7 @@ export const ROUND_48: QuizQuestion[] = [
     "round": 48,
     "subject": "2과목",
     "number": 48,
-    "title": "START WITH 와 CONNECT BY 로 트리 전개 시 LEVEL = 2 인 행의 개수는?",
+    "title": "아래 트리 구조에 대해 START WITH 와 CONNECT BY 로 트리 전개 시 LEVEL = 2 인 행의 개수는?",
     "options": [
       "1",
       "3",
@@ -1439,7 +1592,55 @@ export const ROUND_48: QuizQuestion[] = [
     ],
     "correctIndex": 1,
     "explanation": "루트(LEVEL=1) 아래 직속 자식 노드가 3개이므로 LEVEL=2 행은 3건이다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "ascii",
+        "text": "                  [ A ]   ← LEVEL 1 (루트)\n                /  |  \\\n             [B] [C] [D]   ← LEVEL 2 (직속 자식 3개)\n             /\\       \\\n           [E][F]    [G]   ← LEVEL 3"
+      },
+      {
+        "type": "table",
+        "caption": "트리 데이터 (사원-매니저 형식)",
+        "headers": [
+          "사원",
+          "매니저"
+        ],
+        "rows": [
+          [
+            "A",
+            "(NULL)"
+          ],
+          [
+            "B",
+            "A"
+          ],
+          [
+            "C",
+            "A"
+          ],
+          [
+            "D",
+            "A"
+          ],
+          [
+            "E",
+            "B"
+          ],
+          [
+            "F",
+            "B"
+          ],
+          [
+            "G",
+            "D"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT 사원, LEVEL\nFROM   EMP\nSTART WITH 매니저 IS NULL\nCONNECT BY PRIOR 사원 = 매니저;"
+      }
+    ]
   },
   {
     "id": 10648,
