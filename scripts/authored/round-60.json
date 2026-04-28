@@ -36,27 +36,16 @@
       "references": [
         {
           "type": "table",
+          "caption": "직원 엔터티",
           "headers": [
             "속성명",
             "예시 값"
           ],
           "rows": [
-            [
-              "사번",
-              "E1001"
-            ],
-            [
-              "생년월일",
-              "1990-05-14"
-            ],
-            [
-              "연령",
-              "35"
-            ],
-            [
-              "부서코드",
-              "D10"
-            ]
+            ["사번", "E1001"],
+            ["생년월일", "1990-05-14"],
+            ["연령", "35"],
+            ["부서코드", "D10"]
           ]
         }
       ]
@@ -697,35 +686,31 @@
       "references": [
         {
           "type": "table",
-          "headers": [
-            "지역",
-            "1월",
-            "2월",
-            "3월",
-            "4월"
-          ],
+          "caption": "원본 매출 테이블",
+          "headers": ["지역", "월", "매출"],
           "rows": [
-            [
-              "서울",
-              "12,000",
-              "13,500",
-              "14,200",
-              "15,000"
-            ],
-            [
-              "부산",
-              "8,500",
-              "9,200",
-              "10,100",
-              "11,000"
-            ],
-            [
-              "대구",
-              "6,800",
-              "7,400",
-              "8,000",
-              "8,600"
-            ]
+            ["서울", "1월", "12,000"],
+            ["서울", "2월", "13,500"],
+            ["서울", "3월", "14,200"],
+            ["서울", "4월", "15,000"],
+            ["부산", "1월", "8,500"],
+            ["부산", "2월", "9,200"],
+            ["부산", "3월", "10,100"],
+            ["부산", "4월", "11,000"],
+            ["대구", "1월", "6,800"],
+            ["대구", "2월", "7,400"],
+            ["대구", "3월", "8,000"],
+            ["대구", "4월", "8,600"]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "기대 결과 (PIVOT 후)",
+          "headers": ["지역", "1월", "2월", "3월", "4월"],
+          "rows": [
+            ["서울", "12,000", "13,500", "14,200", "15,000"],
+            ["부산", "8,500", "9,200", "10,100", "11,000"],
+            ["대구", "6,800", "7,400", "8,000", "8,600"]
           ]
         }
       ]
@@ -817,16 +802,28 @@
     {
       "subject": "2과목",
       "number": 29,
-      "title": "사원과 매니저 관계의 계층 트리를 조회하기 위한 CONNECT BY 절로 옳은 것은?",
+      "title": "아래 EMP 테이블에서 사원과 매니저 관계의 계층 트리를 조회하기 위한 CONNECT BY 절로 옳은 것은?",
       "options": [
-        "PRIOR 매니저 = 사원",
-        "PRIOR 사원 = 매니저",
-        "사원 = 매니저",
-        "PRIOR 사원 = PRIOR 매니저"
+        "`PRIOR 매니저 = 사원`",
+        "`PRIOR 사원 = 매니저`",
+        "`사원 = 매니저`",
+        "`PRIOR 사원 = PRIOR 매니저`"
       ],
       "correctIndex": 1,
-      "explanation": "부모의 사원번호가 자식의 매니저번호가 되어야 루트에서 아래 방향으로 트리가 확장된다.",
+      "explanation": "부모의 사원번호가 자식의 매니저번호가 되어야 루트(매니저 IS NULL)에서 아래 방향으로 트리가 확장된다. `PRIOR 사원 = 매니저` 는 \"이전(부모) 행의 사원번호 = 다음 행의 매니저번호\" 를 의미하여 부모 → 자식 정방향 전개. ① 은 자식 → 부모 역방향, ③ 은 PRIOR 없어 트리 미구성, ④ 는 PRIOR 가 양쪽에 있어 자기 참조라 의미 없음.",
       "references": [
+        {
+          "type": "table",
+          "caption": "EMP 테이블",
+          "headers": ["사원", "매니저"],
+          "rows": [
+            ["1001", "NULL"],
+            ["1002", "1001"],
+            ["1003", "1001"],
+            ["1004", "1002"],
+            ["1005", "1003"]
+          ]
+        },
         {
           "type": "sql",
           "code": "SELECT 사원, 매니저, LEVEL\nFROM   EMP\nSTART WITH 매니저 IS NULL\nCONNECT BY (  ?  );"
@@ -836,7 +833,7 @@
     {
       "subject": "2과목",
       "number": 30,
-      "title": "아래 계층형 질의의 결과에 대한 설명으로 가장 옳은 것은?",
+      "title": "아래 부서 테이블에 대한 계층형 질의의 결과에 대한 설명으로 가장 옳은 것은?",
       "options": [
         "루트 노드가 여러 건이어서 오류가 발생한다.",
         "COL3 값이 2인 중간 노드가 제거되면서 그 아래 가지까지 트리에서 단절된다.",
@@ -844,8 +841,21 @@
         "AND 조건은 계층형 질의에서 지원되지 않는다."
       ],
       "correctIndex": 1,
-      "explanation": "`CONNECT BY` 절의 조건은 트리 전개 자체에 적용되어 조건을 만족하지 못한 노드부터 그 하위 가지 전체가 따라오지 못한다. 따라서 COL3=2 인 중간 노드가 탈락하면 해당 노드의 자식·자손도 결과에서 단절된다. `WHERE` 절에서 같은 조건을 주는 것과는 동작이 다르다.",
+      "explanation": "`CONNECT BY` 절의 조건(`AND COL3 <> 2`) 은 트리 전개 자체에 적용되어 조건을 만족하지 못한 노드부터 그 하위 가지 전체가 따라오지 못한다. 표에서 'D2' 노드의 COL3=2 라 'D2' 가 제거되고, 그 자식인 'D2-1', 'D2-2' 도 함께 단절된다. `WHERE` 절에서 같은 조건을 주는 것과는 동작이 다르다.",
       "references": [
+        {
+          "type": "table",
+          "caption": "부서 테이블",
+          "headers": ["부서ID", "상위부서ID", "COL3"],
+          "rows": [
+            ["D", "NULL", "1"],
+            ["D1", "D", "1"],
+            ["D2", "D", "2"],
+            ["D3", "D", "1"],
+            ["D2-1", "D2", "1"],
+            ["D2-2", "D2", "1"]
+          ]
+        },
         {
           "type": "sql",
           "code": "SELECT *\nFROM   부서\nSTART WITH 부서ID = 'D'\nCONNECT BY PRIOR 부서ID = 상위부서ID\n       AND COL3 <> 2;"
@@ -1072,7 +1082,7 @@
     {
       "subject": "2과목",
       "number": 38,
-      "title": "아래 SQL의 결과로 옳은 것은?",
+      "title": "아래 두 테이블 A, B 에 대한 SQL 의 결과로 옳은 것은?",
       "options": [
         "4",
         "2",
@@ -1080,32 +1090,30 @@
         "오류"
       ],
       "correctIndex": 0,
-      "explanation": "카티션 곱은 각 테이블의 행 수의 곱으로 반환된다.",
+      "explanation": "조인 조건이 없는 `FROM A, B` 는 카티션 곱(Cross Join)이라 결과 행 수 = `|A| × |B|` = 2 × 2 = 4. `COUNT(*)` 가 4 를 반환한다.",
       "references": [
         {
           "type": "table",
-          "headers": [
-            "테이블 A (2건)",
-            "테이블 B (2건)"
-          ],
-          "rows": [
-            [
-              "a1, a2",
-              "b1, b2"
-            ]
-          ],
-          "caption": "A 테이블"
+          "caption": "A 테이블",
+          "headers": ["COL"],
+          "rows": [["a1"], ["a2"]]
+        },
+        {
+          "type": "table",
+          "caption": "B 테이블",
+          "headers": ["COL"],
+          "rows": [["b1"], ["b2"]]
         },
         {
           "type": "sql",
-          "code": "SELECT COUNT(*)\nFROM   A, B;   -- 카티션 곱"
+          "code": "SELECT COUNT(*)\nFROM   A, B;"
         }
       ]
     },
     {
       "subject": "2과목",
       "number": 39,
-      "title": "아래 MERGE 문 수행 후 각 컬럼의 값으로 옳은 것은?",
+      "title": "아래 TGT, SRC 테이블에 대해 MERGE 문 수행 후 TGT 의 V1, V2, V3 값으로 옳은 것은?",
       "options": [
         "100 100 100",
         "100 100 NULL",
@@ -1113,8 +1121,22 @@
         "100 NULL 100"
       ],
       "correctIndex": 0,
-      "explanation": "ID가 일치하지 않으므로 NOT MATCHED 분기가 실행되어 SRC 행이 TGT에 INSERT된다. INSERT 절에서 V1·V2·V3 모두 100을 명시했으므로 세 컬럼 값은 모두 100이 된다. MATCHED 분기가 실행되었다면 V3는 갱신 대상이 아니어서 NULL이 남았겠지만, 본 문제에서는 INSERT 분기가 동작한다.",
+      "explanation": "TGT.ID = (1) 이고 SRC.ID = (2) 라 ON 조건 (T.ID = S.ID) 이 매칭되지 않는다. 따라서 NOT MATCHED 분기가 실행되어 SRC 의 ID=2 행이 TGT 에 INSERT 되며, INSERT 절에서 V1·V2·V3 모두 100 을 명시했으므로 새 행은 (2, 100, 100, 100) 이 된다. MATCHED 분기가 실행되었다면 V3 는 UPDATE 대상에 없어 기존 NULL 이 남았겠지만 이 문제는 NOT MATCHED 가 동작한다.",
       "references": [
+        {
+          "type": "table",
+          "caption": "TGT 테이블 (MERGE 전)",
+          "headers": ["ID", "V1", "V2", "V3"],
+          "rows": [
+            ["1", "10", "20", "NULL"]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "SRC 테이블",
+          "headers": ["ID"],
+          "rows": [["2"]]
+        },
         {
           "type": "sql",
           "code": "MERGE INTO TGT T\nUSING SRC S\nON (T.ID = S.ID)\nWHEN MATCHED THEN\n  UPDATE SET T.V1 = 100, T.V2 = 100\nWHEN NOT MATCHED THEN\n  INSERT (ID, V1, V2, V3) VALUES (S.ID, 100, 100, 100);"
@@ -1143,15 +1165,15 @@
     {
       "subject": "2과목",
       "number": 41,
-      "title": "아래 내용 중 결과가 나머지와 다른 하나는?",
+      "title": "아래 SQL 들 중 결과가 나머지와 다른 하나는?",
       "options": [
-        "`WHERE 1 > NULL`",
-        "`NULL + 1`",
-        "`NULL * 1`",
-        "`NULL * NULL`"
+        "`SELECT * FROM DUAL WHERE 1 > NULL;`",
+        "`SELECT NULL + 1 FROM DUAL;`",
+        "`SELECT NULL * 1 FROM DUAL;`",
+        "`SELECT NULL * NULL FROM DUAL;`"
       ],
       "correctIndex": 0,
-      "explanation": "②, ③, ④는 모두 NULL 값을 반환하지만 ①은 UNKNOWN으로 평가되어 해당 행을 필터링한다."
+      "explanation": "②③④ 는 산술 연산 결과로 NULL 을 한 행 반환한다 (DUAL 의 한 행 + NULL 컬럼). ① 의 `WHERE 1 > NULL` 은 UNKNOWN 으로 평가되어 행이 필터링되므로 0 건(공집합) 이 반환된다. 즉 ① 만 반환 행 수가 다르다."
     },
     {
       "subject": "2과목",
@@ -1214,7 +1236,7 @@
     {
       "subject": "2과목",
       "number": 46,
-      "title": "부서별 급여 상위 3명을 조회하려 한다. 빈칸에 들어갈 분석 함수로 가장 적절한 것은?",
+      "title": "아래 EMP 테이블에서 부서별 급여 상위 3 명을 조회하려 한다. 빈칸에 들어갈 분석 함수로 가장 적절한 것은?",
       "options": [
         "DENSE_RANK",
         "ROWNUM",
@@ -1222,8 +1244,21 @@
         "CUME_DIST"
       ],
       "correctIndex": 0,
-      "explanation": "부서 내 동률을 같은 순위로 매기되 다음 순위를 건너뛰지 않는 DENSE_RANK가 '상위 N명' 조회에 가장 적합하다. ② ROWNUM은 분석 함수가 아니며 PARTITION BY와 함께 쓸 수 없고, ③ NTILE은 등분 그룹을 매기는 용도이며, ④ CUME_DIST는 누적 분포 비율(0~1)을 반환하므로 상위 3명 필터링에 부적합하다.",
+      "explanation": "부서 내 동률을 같은 순위로 매기되 다음 순위를 건너뛰지 않는 `DENSE_RANK` 가 \"상위 N 명\" 조회에 가장 적합하다. 예: 부서 A 의 급여가 (5000, 4000, 4000, 3000) 일 때 DENSE_RANK 는 (1, 2, 2, 3) 을 부여해 RNK ≤ 3 으로 4 명 모두 조회 가능. ② `ROWNUM` 은 분석 함수가 아니며 `PARTITION BY` 와 함께 쓸 수 없고, ③ `NTILE` 은 등분 그룹을 매기는 용도, ④ `CUME_DIST` 는 누적 분포 비율(0~1) 을 반환하므로 상위 3 명 필터링에 부적합.",
       "references": [
+        {
+          "type": "table",
+          "caption": "EMP 테이블",
+          "headers": ["부서", "사원", "급여"],
+          "rows": [
+            ["A", "김철수", "5000"],
+            ["A", "이영희", "4000"],
+            ["A", "박민수", "4000"],
+            ["A", "최지훈", "3000"],
+            ["B", "정수민", "4500"],
+            ["B", "강호동", "3500"]
+          ]
+        },
         {
           "type": "sql",
           "code": "SELECT 부서, 사원, 급여\nFROM ( SELECT 부서, 사원, 급여,\n              (  ?  ) OVER (PARTITION BY 부서 ORDER BY 급여 DESC) AS RNK\n       FROM   EMP )\nWHERE RNK <= 3;"
@@ -1292,7 +1327,7 @@
     {
       "subject": "2과목",
       "number": 48,
-      "title": "다음 중 ROLLUP(A, B)에는 포함되지 않지만 CUBE(A, B)에는 포함되는 집계 조합은?",
+      "title": "다음 중 `ROLLUP(A, B)` 에는 포함되지 않지만 `CUBE(A, B)` 에는 포함되는 집계 조합은?",
       "options": [
         "(A, B)",
         "(A, NULL)",
@@ -1300,11 +1335,28 @@
         "(NULL, NULL)"
       ],
       "correctIndex": 2,
-      "explanation": "CUBE는 모든 조합을 반환하지만 ROLLUP은 좌측부터 점진적으로 집계를 수행하므로 (NULL, B) 조합은 ROLLUP 결과에는 존재하지 않는다.",
+      "explanation": "CUBE 는 모든 조합을 반환하지만 ROLLUP 은 좌측부터 점진적으로 집계를 수행하므로 (NULL, B) 조합 — 즉 B 단독 소계 — 은 ROLLUP 결과에는 존재하지 않는다.",
       "references": [
         {
-          "type": "sql",
-          "code": "-- ROLLUP(A,B):  (A,B), (A, NULL), (NULL, NULL)\n-- CUBE(A,B):    (A,B), (A, NULL), (NULL, B), (NULL, NULL)"
+          "type": "table",
+          "caption": "ROLLUP(A, B) 가 만드는 집계 그룹",
+          "headers": ["A", "B"],
+          "rows": [
+            ["A 값", "B 값"],
+            ["A 값", "NULL (소계)"],
+            ["NULL (총계)", "NULL (총계)"]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "CUBE(A, B) 가 만드는 집계 그룹",
+          "headers": ["A", "B"],
+          "rows": [
+            ["A 값", "B 값"],
+            ["A 값", "NULL"],
+            ["NULL", "B 값"],
+            ["NULL", "NULL"]
+          ]
         }
       ]
     },
@@ -1330,7 +1382,7 @@
     {
       "subject": "2과목",
       "number": 50,
-      "title": "아래 SQL이 반환하는 결과에 대한 설명으로 가장 적절한 것은?",
+      "title": "아래 주문 테이블에 대한 SQL 이 반환하는 결과에 대한 설명으로 가장 적절한 것은?",
       "options": [
         "주문 수량이 10을 넘는 건이 있는 고객의 주문 건수를 조회한다",
         "주문 수량 총 합계가 10을 넘는 고객의 주문 건수를 조회한다",
@@ -1338,8 +1390,21 @@
         "수량 컬럼이 NULL이 아닌 고객의 주문 건수를 조회한다"
       ],
       "correctIndex": 0,
-      "explanation": "HAVING MAX(수량) > 10 은 한 건이라도 수량이 10을 초과하는 고객 그룹을 선택한다.",
+      "explanation": "`GROUP BY 고객ID` 로 고객별 그룹을 만들고 `HAVING MAX(수량) > 10` 으로 \"한 건이라도 수량이 10 을 초과하는\" 고객 그룹만 남긴다. ② 는 SUM, ③ 은 COUNT, ④ 는 IS NOT NULL 조건이라야 한다.",
       "references": [
+        {
+          "type": "table",
+          "caption": "주문 테이블",
+          "headers": ["고객ID", "주문번호", "수량"],
+          "rows": [
+            ["C001", "O100", "5"],
+            ["C001", "O101", "12"],
+            ["C001", "O102", "3"],
+            ["C002", "O103", "8"],
+            ["C002", "O104", "9"],
+            ["C003", "O105", "15"]
+          ]
+        },
         {
           "type": "sql",
           "code": "SELECT 고객ID, COUNT(*) AS 주문건수\nFROM   주문\nGROUP BY 고객ID\nHAVING MAX(수량) > 10;"
