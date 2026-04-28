@@ -997,12 +997,12 @@ export const ROUND_60: QuizQuestion[] = [
     "round": 60,
     "subject": "2과목",
     "number": 26,
-    "title": "아래 쿼리의 윈도우 절과 동등한 의미를 가진 절은?",
+    "title": "아래 쿼리의 `ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW` 절과 동등한 의미를 가진 절은?",
     "options": [
-      "`ROWS UNBOUNDED PRECEDING` (= ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW)",
-      "ROWS BETWEEN UNBOUNDED PRECEDING AND 1 PRECEDING (= 현재 행 직전까지의 누적합)",
-      "RANGE UNBOUNDED PRECEDING (= RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW)",
-      "RANGE BETWEEN CURRENT ROW AND UNBOUNDED FOLLOWING"
+      "`ROWS UNBOUNDED PRECEDING`",
+      "`ROWS BETWEEN UNBOUNDED PRECEDING AND 1 PRECEDING`",
+      "`RANGE UNBOUNDED PRECEDING`",
+      "`RANGE BETWEEN CURRENT ROW AND UNBOUNDED FOLLOWING`"
     ],
     "correctIndex": 0,
     "explanation": "ROWS UNBOUNDED PRECEDING은 윈도우 시작점만 명시한 축약형으로, 종료점이 생략되면 기본값인 CURRENT ROW가 적용된다. 즉 ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW와 동등하다. ②는 종료점이 1 PRECEDING이라 누적합 의미가 다르고, ③·④는 RANGE 모드라 동일 정렬 키를 가진 행을 묶어 처리하므로 ROWS 기반과 결과가 다를 수 있다.",
@@ -1651,21 +1651,7 @@ export const ROUND_60: QuizQuestion[] = [
     "references": [
       {
         "type": "sql",
-        "code": "CREATE TABLE T (\n  ID  NUMBER GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1),\n  VAL NUMBER CHECK (VAL > 0)\n);\n\nINSERT INTO T(VAL) VALUES (-1);   -- CHECK 위반\nINSERT INTO T(VAL) VALUES ( 0);   -- CHECK 위반\nINSERT INTO T(VAL) VALUES ( 1);   -- 성공\nCOMMIT;\n\nSELECT COUNT(*) FROM T;"
-      },
-      {
-        "type": "table",
-        "caption": "최종 T 상태 (CHECK VAL > 0 통과 행만)",
-        "headers": [
-          "ID",
-          "VAL"
-        ],
-        "rows": [
-          [
-            "1",
-            "1"
-          ]
-        ]
+        "code": "CREATE TABLE T (\n  ID  NUMBER GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1),\n  VAL NUMBER CHECK (VAL > 0)\n);\n\nINSERT INTO T(VAL) VALUES (-1);\nINSERT INTO T(VAL) VALUES ( 0);\nINSERT INTO T(VAL) VALUES ( 1);\nCOMMIT;\n\nSELECT COUNT(*) FROM T;"
       }
     ]
   },
@@ -1782,10 +1768,10 @@ export const ROUND_60: QuizQuestion[] = [
       "`SELECT * FROM EMP E, DEPT D WHERE E.DEPTNO = D.DEPTNO;`",
       "`SELECT * FROM EMP WHERE DEPTNO IS NULL OR DEPTNO NOT IN (SELECT DEPTNO FROM DEPT);`",
       "`SELECT * FROM EMP E LEFT JOIN DEPT D ON E.DEPTNO = D.DEPTNO WHERE D.DEPTNO IS NOT NULL;`",
-      "`SELECT * FROM EMP E LEFT JOIN DEPT D ON E.DEPTNO = D.DEPTNO WHERE D.DEPTNO IS NULL;`"
+      "`SELECT * FROM EMP WHERE DEPTNO NOT IN (SELECT DEPTNO FROM DEPT);`"
     ],
     "correctIndex": 1,
-    "explanation": "\"어떤 부서에도 속하지 않는다\"는 두 가지 경우를 모두 포함한다. (a) DEPTNO 자체가 NULL인 경우, (b) DEPTNO 값이 있지만 DEPT 테이블에 등록되지 않은 경우(예: 99번). ②는 OR로 두 경우를 모두 잡으므로 가장 적절하다. ① 일반 조인은 부서가 매칭된 직원만 조회한다. ③ LEFT JOIN + IS NOT NULL은 매칭된 직원만 남기므로 정답과 정반대다. ④ LEFT JOIN + IS NULL은 (a) 케이스만 잡고 (b) DEPTNO=99처럼 DEPT에 등록되지 않은 외래값은 매칭 단계에서 NULL로 채워지지 않고 그대로 결합되어 결과에서 누락될 수 있다.",
+    "explanation": "\"어떤 부서에도 속하지 않는다\"는 두 가지 경우를 모두 포함한다. (a) DEPTNO 자체가 NULL인 경우, (b) DEPTNO 값이 있지만 DEPT 테이블에 등록되지 않은 경우(예: 99번). ②는 OR로 두 경우를 모두 잡으므로 가장 적절하다. ① 일반 조인은 부서가 매칭된 직원만 조회한다. ③ LEFT JOIN + IS NOT NULL은 매칭된 직원만 남기므로 정답과 정반대다. ④ NOT IN 단독은 DEPTNO 값이 있는 행 중 DEPT에 없는 외래값(예: 99)은 잡지만, DEPTNO가 NULL인 행은 NULL 비교가 UNKNOWN이라 결과에서 누락된다. (a) NULL 케이스를 함께 잡으려면 ②의 OR 조합이 필요하다.",
     "_source": "authored",
     "references": [
       {
