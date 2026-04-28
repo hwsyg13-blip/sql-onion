@@ -6,9 +6,8 @@
 <title>시험 당일 핵심 총정리 — SQLD양파</title>
 <link rel="stylesheet" href="./common.css">
 <style>
-/* 시험 당일 cheat sheet 전용 */
 .day-toc {
-  margin: 0 0 28px; padding: 16px 20px;
+  margin: 0 0 28px; padding: 14px 18px;
   background: linear-gradient(135deg, var(--point-050), var(--bg-card));
   border: 1px solid var(--point-100); border-radius: 12px;
   display: flex; gap: 8px; flex-wrap: wrap; align-items: center;
@@ -25,12 +24,12 @@
 }
 .day-toc a:hover { background: var(--point-100); color: var(--point-600); border-color: var(--point-300); }
 
-.day-section { margin: 48px 0 0; padding-top: 32px; border-top: 1px solid var(--border-subtle); scroll-margin-top: calc(var(--header-h) + 80px); }
+.day-section { margin: 56px 0 0; padding-top: 36px; border-top: 1px solid var(--border-subtle); scroll-margin-top: calc(var(--header-h) + 80px); }
 .day-section:first-of-type { border-top: 0; padding-top: 0; margin-top: 0; }
 .day-section h2 {
   display: flex; align-items: center; gap: 10px;
   font-size: 22px; font-weight: 800; color: var(--fg-1);
-  margin: 0 0 18px; padding: 0; letter-spacing: -0.01em;
+  margin: 0 0 8px; padding: 0; letter-spacing: -0.01em;
 }
 .day-section h2 .num {
   display: inline-flex; align-items: center; justify-content: center;
@@ -38,82 +37,101 @@
   background: var(--point-100); color: var(--point-600);
   font-size: 13px; font-weight: 900; flex-shrink: 0;
 }
-.day-section h3 {
+.day-section .section-lead { font-size: 13.5px; color: var(--fg-3); margin: 0 0 22px; }
+
+.day-section h3.subj-h {
   font-size: 13px; font-weight: 800; color: var(--point-600);
-  letter-spacing: 0.04em; margin: 24px 0 10px;
-  padding: 0; border: 0;
-}
-.day-section h3:first-of-type { margin-top: 12px; }
-
-/* 챕터별 30초 미니 카드 */
-.day-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 8px 0 0; }
-.day-mini {
-  background: var(--bg-card);
+  letter-spacing: 0.04em; margin: 32px 0 12px;
+  padding: 6px 12px; display: inline-block;
+  background: var(--point-050); border-radius: 6px;
   border: 1px solid var(--point-100);
-  border-radius: 10px; padding: 12px 14px;
-  font-size: 12.5px; line-height: 1.55; color: var(--fg-2);
-}
-.day-mini .head {
-  font-size: 10.5px; font-weight: 800; color: var(--point-600);
-  letter-spacing: 0.04em; margin-bottom: 5px;
-}
-.day-mini strong { color: var(--fg-1); font-weight: 800; }
-.day-mini code {
-  background: var(--bg-code); padding: 1px 5px;
-  border-radius: 4px; font-size: 0.92em; font-family: var(--font-mono);
 }
 
-/* 빈출 함정 */
-.trap-list {
-  display: grid; grid-template-columns: 1fr; gap: 6px; margin: 12px 0 0;
-}
-.trap-item {
+/* 챕터별 카드 — 정리 + 함정 통합 */
+.day-card-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin: 0; }
+.day-card {
   background: var(--bg-card);
   border: 1px solid var(--border-subtle);
-  border-left: 3px solid var(--wrong-fg);
-  padding: 10px 14px; border-radius: 6px;
-  font-size: 13px; line-height: 1.55; color: var(--fg-1);
-  transition: border-color var(--duration-base);
+  border-radius: 12px;
+  padding: 16px 18px;
+  display: flex; flex-direction: column; gap: 12px;
+  transition: border-color var(--duration-base), box-shadow var(--duration-base);
 }
-.trap-item:hover { border-color: var(--point-300); border-left-color: var(--wrong-fg); }
-.trap-item .num {
-  display: inline-block; width: 22px;
-  font-weight: 900; color: var(--wrong-fg); margin-right: 4px;
-  font-family: var(--font-mono);
+.day-card:hover { border-color: var(--point-300); box-shadow: var(--shadow-sm); }
+
+.day-card .card-head {
+  display: flex; align-items: center; gap: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border-subtle);
 }
-.trap-item code {
+.day-card .card-tag {
+  font-size: 11px; font-weight: 800; color: var(--point-600);
+  background: var(--point-100);
+  padding: 3px 9px; border-radius: 6px;
+  letter-spacing: 0.02em; font-family: var(--font-mono);
+  flex-shrink: 0;
+}
+.day-card .card-title {
+  font-size: 14px; font-weight: 800; color: var(--fg-1);
+  letter-spacing: -0.01em;
+}
+
+.day-card .points { margin: 0; padding: 0 0 0 18px; }
+.day-card .points li {
+  font-size: 12.5px; color: var(--fg-2); line-height: 1.6;
+  margin: 3px 0;
+}
+.day-card .points li::marker { color: var(--point-500); font-weight: 700; }
+.day-card .points strong { color: var(--fg-1); font-weight: 800; }
+.day-card .points code {
   background: var(--bg-code); padding: 1px 5px;
   border-radius: 4px; font-size: 0.92em; font-family: var(--font-mono);
-  color: var(--fg-1);
 }
-.trap-item strong { color: var(--point-600); font-weight: 800; }
 
-/* 명령어 분류 4-칸 */
-.cmd-grid {
-  display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin: 12px 0 0;
+.day-card .traps {
+  margin-top: 4px; padding: 10px 12px;
+  background: var(--wrong-bg);
+  border-left: 3px solid var(--wrong-fg);
+  border-radius: 6px;
 }
-.cmd-card {
-  background: var(--bg-card); border: 1px solid var(--border-subtle);
-  border-radius: 12px; padding: 16px 14px; text-align: center;
+.day-card .traps .trap-label {
+  font-size: 10.5px; font-weight: 800; color: var(--wrong-fg);
+  letter-spacing: 0.04em; margin-bottom: 6px;
+  text-transform: uppercase;
 }
-.cmd-card .cmd-tag {
-  display: inline-block; font-size: 13px; font-weight: 900;
-  padding: 4px 12px; border-radius: 6px;
-  letter-spacing: 0.02em;
+.day-card .traps ul { margin: 0; padding: 0 0 0 16px; }
+.day-card .traps li {
+  font-size: 12px; color: var(--fg-1); line-height: 1.55;
+  margin: 3px 0;
+}
+.day-card .traps li::marker { color: var(--wrong-fg); }
+.day-card .traps strong { color: var(--wrong-fg); font-weight: 800; }
+.day-card .traps code {
+  background: var(--bg-card); padding: 1px 5px;
+  border-radius: 4px; font-size: 0.92em; font-family: var(--font-mono);
+}
+
+/* SQL 예시 박스 */
+.day-card .ex-sql {
+  margin-top: 2px; padding: 9px 12px;
+  background: var(--bg-code);
+  border: 1px solid var(--border-subtle);
+  border-radius: 6px;
+}
+.day-card .ex-sql .ex-label {
+  font-size: 10.5px; font-weight: 800; color: var(--point-600);
+  letter-spacing: 0.04em; margin-bottom: 5px;
+  text-transform: uppercase;
+}
+.day-card .ex-sql pre {
+  margin: 0; padding: 0; background: transparent; border: 0;
   font-family: var(--font-mono);
+  font-size: 11.5px; line-height: 1.55; color: var(--fg-1);
+  white-space: pre-wrap; word-break: break-word;
+  overflow-x: auto;
 }
-.cmd-card .cmd-tag.tag-ddl { background: #FFF8E1; color: #8B6914; }
-.cmd-card .cmd-tag.tag-dml { background: var(--info-bg); color: var(--info-fg); }
-.cmd-card .cmd-tag.tag-dcl { background: var(--point-100); color: var(--point-600); }
-.cmd-card .cmd-tag.tag-tcl { background: var(--wrong-bg); color: var(--wrong-fg); }
-.cmd-card .cmd-list {
-  font-size: 12.5px; font-weight: 700; color: var(--fg-1);
-  margin: 8px 0 6px; line-height: 1.6;
-  font-family: var(--font-mono);
-}
-.cmd-card .cmd-note {
-  font-size: 11px; color: var(--fg-3); line-height: 1.4;
-}
+.day-card .ex-sql .kw { color: var(--point-600); font-weight: 700; }
+.day-card .ex-sql .cm { color: var(--fg-3); font-style: italic; }
 
 /* 체크리스트 */
 .checklist-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 12px 0 0; }
@@ -132,10 +150,17 @@
 .checklist-card li::marker { color: var(--point-500); font-weight: 700; }
 .checklist-card strong { color: var(--fg-1); }
 
-/* 마지막 격려 박스 */
+.mindset-list { display: grid; grid-template-columns: 1fr; gap: 6px; margin: 12px 0 0; }
+.mindset-item {
+  background: var(--bg-card); border: 1px solid var(--border-subtle);
+  border-left: 3px solid var(--point-500);
+  padding: 10px 14px; border-radius: 6px;
+  font-size: 13px; color: var(--fg-1); line-height: 1.55;
+}
+.mindset-item .star { color: var(--point-500); font-weight: 800; margin-right: 6px; }
+
 .final-msg {
-  margin: 56px 0 16px;
-  padding: 28px 24px;
+  margin: 56px 0 16px; padding: 28px 24px;
   background: linear-gradient(135deg, var(--point-100), var(--point-050));
   border: 1px solid var(--point-300); border-radius: 14px;
   text-align: center;
@@ -145,12 +170,8 @@
 .final-msg .msg-body { font-size: 13.5px; color: var(--fg-2); line-height: 1.6; }
 
 @media (max-width: 900px) {
-  .day-grid { grid-template-columns: repeat(2, 1fr); }
-  .cmd-grid { grid-template-columns: repeat(2, 1fr); }
+  .day-card-grid { grid-template-columns: 1fr; }
   .checklist-grid { grid-template-columns: 1fr; }
-}
-@media (max-width: 600px) {
-  .day-grid { grid-template-columns: 1fr; }
 }
 </style>
 </head>
@@ -179,148 +200,655 @@
   <header class="page-title-block">
     <h1>시험 당일 핵심 총정리</h1>
     <p class="subtitle">
-      시험 직전 5~10분 통독용. 챕터별 한 줄 정리 · 빈출 함정 TOP 30 · 명령어 분류 · 당일 체크리스트
+      시험 직전 통독용. 챕터별 핵심 정리 + 빈출 함정 한 묶음 · 당일 체크리스트
     </p>
   </header>
 
   <nav class="day-toc reveal">
     <span class="toc-label">바로가기</span>
-    <a href="#summary">챕터 정리</a>
-    <a href="#traps">빈출 함정 30</a>
-    <a href="#cmds">명령어 분류</a>
-    <a href="#checklist">당일 체크</a>
+    <a href="#chapters">챕터별 정리</a>
+    <a href="#checklist">체크리스트</a>
   </nav>
 
   <article class="theory-md">
 
-  <!-- ── 1. 챕터별 30초 정리 ── -->
-  <section class="day-section" id="summary">
-    <h2><span class="num">1</span>챕터별 30초 정리</h2>
+  <!-- ── 챕터별 핵심 정리 + 빈출 함정 ── -->
+  <section class="day-section" id="chapters">
+    <h2><span class="num">1</span>챕터별 핵심 정리 + 빈출 함정</h2>
+    <p class="section-lead">30개 챕터의 핵심 포인트와 자주 출제되는 함정을 한 카드에. 4과목 분류로 묶음.</p>
 
-    <h3>1과목 — 데이터 모델링의 이해</h3>
-    <div class="day-grid">
-      <div class="day-mini"><div class="head">1-1-1 데이터 모델</div><strong>개념 → 논리 → 물리</strong>. 정규화는 논리 단계.</div>
-      <div class="day-mini"><div class="head">1-1-2 엔터티</div>5대 특징 <strong>업·식·인·속·관</strong>. 인스턴스 ≥ 2, 속성 ≥ 2.</div>
-      <div class="day-mini"><div class="head">1-1-3 속성</div><strong>기본·설계·파생</strong>. 한 컬럼 한 값(원자성).</div>
-      <div class="day-mini"><div class="head">1-1-4 관계</div>1:1 / 1:N / <strong>M:N</strong>(분해 필요). 식별/비식별.</div>
-      <div class="day-mini"><div class="head">1-1-5 식별자</div>4대 조건 <strong>유·최·불·존</strong>. PK = UNIQUE + NOT NULL.</div>
-      <div class="day-mini"><div class="head">1-2-1 정규화</div>1NF→2NF→3NF→BCNF. <strong>부분종속=2NF / 이행종속=3NF</strong>.</div>
-      <div class="day-mini"><div class="head">1-2-2 관계와 조인</div><strong>관계 = FK = JOIN</strong>의 토대.</div>
-      <div class="day-mini"><div class="head">1-2-3 트랜잭션</div><strong>ACID</strong> — 원자성·일관성·고립성·지속성.</div>
-      <div class="day-mini"><div class="head">1-2-4 NULL</div><code>= NULL</code> 안 됨, <code>IS NULL</code>만. NULL+값=NULL. <strong>COUNT(*)만 NULL 포함</strong>.</div>
-      <div class="day-mini"><div class="head">1-2-5 본질·인조 식별자</div>본질=업무 키, 인조=대리키(SEQ). 인조는 모델 가독성↓.</div>
+    <h3 class="subj-h">1과목 — 데이터 모델링의 이해</h3>
+    <div class="day-card-grid">
+      <div class="day-card">
+        <div class="card-head"><span class="card-tag">1-1-1</span><span class="card-title">데이터 모델의 이해</span></div>
+        <ul class="points">
+          <li>3단계: <strong>개념 → 논리 → 물리</strong></li>
+          <li>3대 관점: <strong>데이터 / 프로세스 / 상관</strong></li>
+          <li>3층 스키마: 외부(View) / 개념(ERD) / 내부(저장)</li>
+          <li>좋은 모델 6요소: 완전성·중복배제·업무규칙·재사용·의사소통·통합성</li>
+        </ul>
+        <div class="traps">
+          <div class="trap-label">⚠ 함정</div>
+          <ul>
+            <li>"물리 모델링이 가장 먼저" → <strong>X</strong> (개념 → 논리 → 물리)</li>
+            <li>"정규화는 물리 단계" → <strong>X</strong> (논리 단계)</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="day-card">
+        <div class="card-head"><span class="card-tag">1-1-2</span><span class="card-title">엔터티</span></div>
+        <ul class="points">
+          <li>5대 특징 <strong>업·식·인·속·관</strong> — 업무 필요·식별·인스턴스 ≥ 2·속성 ≥ 2·관계</li>
+          <li>유무형 분류: 유형 / 개념 / 사건</li>
+          <li>발생 시점 분류: <strong>기본 → 중심 → 행위</strong></li>
+        </ul>
+        <div class="traps">
+          <div class="trap-label">⚠ 함정</div>
+          <ul>
+            <li>인스턴스 1개도 OK → <strong>X (≥ 2)</strong></li>
+            <li>속성 1개도 OK → <strong>X (≥ 2)</strong></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="day-card">
+        <div class="card-head"><span class="card-tag">1-1-3</span><span class="card-title">속성</span></div>
+        <ul class="points">
+          <li>분류: <strong>기본 / 설계 / 파생</strong></li>
+          <li>구성 분류: 단순 / 복합 / 다치</li>
+          <li>한 컬럼에 한 값(원자성) — 1NF의 기본</li>
+        </ul>
+        <div class="traps">
+          <div class="trap-label">⚠ 함정</div>
+          <ul>
+            <li>다치 속성(여러 값) 그대로 OK → <strong>X (1NF 위반)</strong></li>
+            <li>파생 속성은 저장하면 안 된다 → 상황에 따라(성능 시 허용)</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="day-card">
+        <div class="card-head"><span class="card-tag">1-1-4</span><span class="card-title">관계</span></div>
+        <ul class="points">
+          <li>차수: <strong>1:1 / 1:N / M:N</strong></li>
+          <li>식별 관계 vs 비식별 관계</li>
+          <li>M:N은 분해(연관 엔터티) 필요</li>
+        </ul>
+        <div class="traps">
+          <div class="trap-label">⚠ 함정</div>
+          <ul>
+            <li>M:N 그대로 RDB 구현 → <strong>X (분해 필수)</strong></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="day-card">
+        <div class="card-head"><span class="card-tag">1-1-5</span><span class="card-title">식별자</span></div>
+        <ul class="points">
+          <li>4대 조건 <strong>유·최·불·존</strong> — 유일성·최소성·불변성·존재성</li>
+          <li>4대 분류: 주/보조, 본질/인조, 단일/복합, 내부/외부</li>
+          <li><strong>PK = UNIQUE + NOT NULL</strong>, 테이블당 1개</li>
+        </ul>
+        <div class="traps">
+          <div class="trap-label">⚠ 함정</div>
+          <ul>
+            <li>PK 여러 개 가능? → <strong>X (1개)</strong></li>
+            <li>UNIQUE는 NULL 안 됨? → <strong>X (NULL 허용)</strong></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="day-card">
+        <div class="card-head"><span class="card-tag">1-2-1</span><span class="card-title">정규화</span></div>
+        <ul class="points">
+          <li><strong>1NF → 2NF → 3NF → BCNF</strong></li>
+          <li><strong>부분종속 = 2NF 위반</strong> / <strong>이행종속 = 3NF 위반</strong></li>
+          <li>이상현상 3종: 삽입·갱신·삭제 이상</li>
+          <li>반정규화: 의도적 중복 허용(성능 위함)</li>
+        </ul>
+        <div class="traps">
+          <div class="trap-label">⚠ 함정</div>
+          <ul>
+            <li>BCNF가 3NF보다 약하다 → <strong>X (더 강함)</strong></li>
+            <li>정규화는 항상 성능 개선 → <strong>X (조인 늘어 느려질 수 있음)</strong></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="day-card">
+        <div class="card-head"><span class="card-tag">1-2-2</span><span class="card-title">관계와 조인의 이해</span></div>
+        <ul class="points">
+          <li><strong>관계 = FK = JOIN</strong>의 토대</li>
+          <li>필수성(NOT NULL)·식별성(PK 포함 여부)</li>
+        </ul>
+        <div class="traps">
+          <div class="trap-label">⚠ 함정</div>
+          <ul>
+            <li>FK 없으면 조인 불가 → <strong>X (논리적으론 가능, 권장 X)</strong></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="day-card">
+        <div class="card-head"><span class="card-tag">1-2-3</span><span class="card-title">트랜잭션의 이해</span></div>
+        <ul class="points">
+          <li><strong>ACID</strong> — 원자성 / 일관성 / 고립성 / 지속성</li>
+          <li>모델의 필수성·식별성이 트랜잭션 무결성과 연결</li>
+        </ul>
+        <div class="traps">
+          <div class="trap-label">⚠ 함정</div>
+          <ul>
+            <li>ACID는 3개 원칙 → <strong>X (4개)</strong></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="day-card">
+        <div class="card-head"><span class="card-tag">1-2-4</span><span class="card-title">NULL 속성의 이해</span></div>
+        <ul class="points">
+          <li><code>= NULL</code> 안 됨 — <strong><code>IS NULL</code> / <code>IS NOT NULL</code>만 가능</strong></li>
+          <li>NULL과 산술 → 결과는 모두 <strong>NULL</strong></li>
+          <li>SQL 3-값 논리: TRUE / FALSE / <strong>UNKNOWN</strong></li>
+          <li>집계: <code>COUNT(*)</code>만 NULL 포함 / 나머지는 NULL 무시</li>
+          <li>NULL 처리 함수: <code>NVL</code> / <code>NVL2</code> / <code>NULLIF</code> / <code>COALESCE</code></li>
+        </ul>
+        <div class="traps">
+          <div class="trap-label">⚠ 함정 (시험 단골)</div>
+          <ul>
+            <li><code>NULL = NULL</code> → <strong>UNKNOWN</strong> (FALSE 아님)</li>
+            <li><code>WHERE COL = NULL</code> → <strong>결과 0건</strong>. <code>IS NULL</code> 사용</li>
+            <li><code>NULL + 100</code> → <strong>NULL</strong></li>
+            <li><code>AVG(컬럼)</code>의 분모는 <strong>NULL 제외 개수</strong> (0 포함 평균과 다름)</li>
+            <li><code>NULLIF(A, B)</code> — A=B면 <strong>NULL</strong></li>
+            <li><code>COALESCE(NULL, NULL, 'X')</code> → <strong>'X'</strong></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="day-card">
+        <div class="card-head"><span class="card-tag">1-2-5</span><span class="card-title">본질·인조 식별자</span></div>
+        <ul class="points">
+          <li><strong>본질식별자</strong>: 업무 의미가 있는 자연 키 (주민번호, ISBN 등)</li>
+          <li><strong>인조식별자</strong>: 의도적으로 만든 대리키 (시퀀스, GUID)</li>
+          <li>인조키는 가독성↓·중복 위험, 별도 UNIQUE 제약 필요</li>
+        </ul>
+        <div class="traps">
+          <div class="trap-label">⚠ 함정</div>
+          <ul>
+            <li>본질식별자가 항상 좋다 → <strong>X (보안·변경 위험 시 인조 선호)</strong></li>
+          </ul>
+        </div>
+      </div>
     </div>
 
-    <h3>2과목 — SQL 기본 (2-1)</h3>
-    <div class="day-grid">
-      <div class="day-mini"><div class="head">2-1-1 RDB 개요</div><strong>DDL/DML/DCL/TCL</strong>. <code>TRUNCATE</code>=DDL, <code>DELETE</code>=DML.</div>
-      <div class="day-mini"><div class="head">2-1-2 SELECT문</div>작성 SFWGHO / <strong>실행 FWGHSO</strong>(FROM→WHERE→GROUP→HAVING→SELECT→ORDER).</div>
-      <div class="day-mini"><div class="head">2-1-3 함수</div>단일행/다중행. <strong>NVL · NVL2 · NULLIF · COALESCE</strong>.</div>
-      <div class="day-mini"><div class="head">2-1-4 WHERE절</div>AND > OR. BETWEEN <strong>양 끝 포함</strong>. LIKE <code>_</code>=1글자, <code>%</code>=0+.</div>
-      <div class="day-mini"><div class="head">2-1-5 GROUP BY/HAVING</div>WHERE는 집계 전, <strong>HAVING은 집계 후</strong>.</div>
-      <div class="day-mini"><div class="head">2-1-6 ORDER BY</div>Oracle ASC <strong>NULL 마지막</strong>, MS-SQL ASC NULL 처음.</div>
-      <div class="day-mini"><div class="head">2-1-7 조인</div>EQUI/Non-EQUI/SELF/OUTER/CROSS. <strong>OUTER 조건은 ON에</strong>.</div>
-      <div class="day-mini"><div class="head">2-1-8 표준 조인</div>NATURAL=같은 이름·타입 자동, USING=컬럼 명시.</div>
+    <h3 class="subj-h">2과목 — SQL 기본 (2-1)</h3>
+    <div class="day-card-grid">
+      <div class="day-card">
+        <div class="card-head"><span class="card-tag">2-1-1</span><span class="card-title">관계형 DB 개요</span></div>
+        <ul class="points">
+          <li>SQL 분류: <strong>DDL / DML / DCL / TCL</strong></li>
+          <li>DDL: CREATE/ALTER/DROP/TRUNCATE/RENAME — <strong>자동 COMMIT</strong></li>
+          <li>DML: INSERT/UPDATE/DELETE/MERGE — <strong>ROLLBACK 가능</strong></li>
+          <li>DCL: GRANT/REVOKE — 자동 COMMIT</li>
+          <li>TCL: COMMIT/ROLLBACK/SAVEPOINT</li>
+        </ul>
+        <div class="traps">
+          <div class="trap-label">⚠ 함정</div>
+          <ul>
+            <li><code>TRUNCATE</code>는 DML이다 → <strong>X (DDL — 자동 COMMIT, ROLLBACK 불가)</strong></li>
+            <li><code>DELETE</code>는 DDL이다 → <strong>X (DML — ROLLBACK 가능)</strong></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="day-card">
+        <div class="card-head"><span class="card-tag">2-1-2</span><span class="card-title">SELECT문</span></div>
+        <ul class="points">
+          <li>작성 순서: <strong>SELECT</strong> - FROM - WHERE - GROUP BY - HAVING - ORDER BY</li>
+          <li>실행 순서: <strong>FROM → WHERE → GROUP → HAVING → SELECT → ORDER</strong> (FWGHSO)</li>
+          <li>DUAL: Oracle 시스템 가상 테이블 (1행 1컬럼)</li>
+          <li>DISTINCT로 중복 제거</li>
+        </ul>
+        <div class="traps">
+          <div class="trap-label">⚠ 함정</div>
+          <ul>
+            <li>SELECT가 가장 먼저 실행 → <strong>X (거의 마지막)</strong></li>
+            <li>SELECT의 별칭(AS)을 WHERE에서 사용 → <strong>X (WHERE는 SELECT보다 먼저 실행)</strong></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="day-card">
+        <div class="card-head"><span class="card-tag">2-1-3</span><span class="card-title">함수</span></div>
+        <ul class="points">
+          <li>단일행 vs 다중행(집계)</li>
+          <li>문자: UPPER/LOWER/SUBSTR/INSTR/LENGTH/LPAD/RPAD/REPLACE/CONCAT(<code>||</code>)</li>
+          <li>숫자: ROUND/TRUNC/MOD/CEIL/FLOOR</li>
+          <li>날짜: SYSDATE/ADD_MONTHS/MONTHS_BETWEEN/LAST_DAY/NEXT_DAY</li>
+          <li>변환: TO_CHAR/TO_NUMBER/TO_DATE</li>
+          <li>NULL: NVL/NVL2/NULLIF/COALESCE</li>
+          <li>조건: <strong>CASE</strong>(범위 가능) vs <strong>DECODE</strong>(동등비교만)</li>
+        </ul>
+        <div class="ex-sql">
+          <div class="ex-label">예시</div>
+<pre><span class="cm">-- 문자/숫자/날짜</span>
+<span class="kw">SELECT</span> SUBSTR(<span class="kw">'SQLD'</span>,1,3)        <span class="cm">→ 'SQL'</span>
+     , LENGTH(<span class="kw">'양파'</span>)             <span class="cm">→ 2</span>
+     , ROUND(123.456, 1)         <span class="cm">→ 123.5</span>
+     , MOD(10, 3)                <span class="cm">→ 1</span>
+     , TO_CHAR(SYSDATE,<span class="kw">'YYYY-MM-DD'</span>)
+<span class="kw">FROM</span> DUAL;
+
+<span class="cm">-- NULL/조건</span>
+NVL(SAL, 0), NVL2(COMM,<span class="kw">'있음'</span>,<span class="kw">'없음'</span>)
+<span class="kw">CASE WHEN</span> SAL &gt; 3000 <span class="kw">THEN</span> <span class="kw">'高'</span> <span class="kw">ELSE</span> <span class="kw">'低' END</span>
+DECODE(JOB, <span class="kw">'CLERK'</span>, 1, <span class="kw">'SALES'</span>, 2, 0)</pre>
+        </div>
+        <div class="traps">
+          <div class="trap-label">⚠ 함정</div>
+          <ul>
+            <li>DECODE로 BETWEEN 같은 범위 비교 가능 → <strong>X (CASE만 가능)</strong></li>
+            <li>날짜 - 날짜 = 날짜 → <strong>X (일수, 숫자)</strong></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="day-card">
+        <div class="card-head"><span class="card-tag">2-1-4</span><span class="card-title">WHERE절</span></div>
+        <ul class="points">
+          <li>비교: =, &lt;&gt;, !=, &gt;, &lt;</li>
+          <li>논리: AND > OR (AND 우선)</li>
+          <li>SQL 연산자: <strong>BETWEEN</strong>(양 끝 포함) / <strong>IN</strong> / <strong>LIKE</strong>(<code>_</code>=1글자, <code>%</code>=0+) / <strong>IS NULL</strong></li>
+        </ul>
+        <div class="traps">
+          <div class="trap-label">⚠ 함정</div>
+          <ul>
+            <li>BETWEEN 100 AND 200 → 100, 200 <strong>포함</strong></li>
+            <li><code>NOT IN (서브쿼리)</code>에 NULL 있으면 → <strong>결과 0건</strong> 위험</li>
+            <li>AND/OR 우선순위 헷갈리면 <strong>괄호 사용</strong></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="day-card">
+        <div class="card-head"><span class="card-tag">2-1-5</span><span class="card-title">GROUP BY / HAVING</span></div>
+        <ul class="points">
+          <li><strong>WHERE는 집계 전</strong>, <strong>HAVING은 집계 후</strong></li>
+          <li>SELECT의 일반 컬럼은 GROUP BY에 명시 필수 (집계 함수는 예외)</li>
+          <li>NULL은 하나의 그룹으로 처리</li>
+        </ul>
+        <div class="traps">
+          <div class="trap-label">⚠ 함정</div>
+          <ul>
+            <li>HAVING 없이 집계 결과 필터 → <strong>X</strong></li>
+            <li>SELECT의 일반 컬럼이 GROUP BY 없으면 → <strong>에러</strong></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="day-card">
+        <div class="card-head"><span class="card-tag">2-1-6</span><span class="card-title">ORDER BY절</span></div>
+        <ul class="points">
+          <li>실행 순서 마지막. ASC(기본) / DESC</li>
+          <li>NULLS FIRST / NULLS LAST 직접 지정 가능</li>
+          <li>SELECT의 별칭·컬럼 위치(1, 2, ...) 사용 가능</li>
+        </ul>
+        <div class="traps">
+          <div class="trap-label">⚠ 함정</div>
+          <ul>
+            <li>Oracle ASC 기본 NULL 위치 → <strong>마지막 (NULLS LAST)</strong></li>
+            <li>MS-SQL ASC 기본 NULL 위치 → <strong>처음 (NULLS FIRST)</strong></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="day-card">
+        <div class="card-head"><span class="card-tag">2-1-7</span><span class="card-title">조인 (JOIN)</span></div>
+        <ul class="points">
+          <li>5종: <strong>EQUI / Non-EQUI / SELF / OUTER / CROSS</strong></li>
+          <li>EQUI: <code>=</code>로 연결 (가장 흔함)</li>
+          <li>Non-EQUI: BETWEEN, &gt;, &lt; 등으로 연결</li>
+          <li>SELF: 같은 테이블 두 번 조인 (별칭 필수)</li>
+          <li>OUTER: LEFT/RIGHT/FULL — 매칭 안 돼도 한쪽 다 포함</li>
+          <li>CROSS: 카티션 곱 (조인 조건 없음)</li>
+        </ul>
+        <div class="traps">
+          <div class="trap-label">⚠ 함정</div>
+          <ul>
+            <li>OUTER JOIN 조건은 <strong>ON에</strong>. WHERE에 두면 NULL 행 제외돼 INNER 효과</li>
+            <li>CROSS JOIN: 조인 조건 빼먹어도 발생 → <strong>의도치 않으면 위험</strong></li>
+            <li>Oracle <code>(+)</code>는 <strong>NULL로 보충될 쪽(없을 수 있는 쪽)</strong>에 붙임</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="day-card">
+        <div class="card-head"><span class="card-tag">2-1-8</span><span class="card-title">표준 조인</span></div>
+        <ul class="points">
+          <li>INNER / LEFT OUTER / RIGHT OUTER / FULL OUTER / CROSS / NATURAL / USING</li>
+          <li><strong>NATURAL</strong>: 같은 이름·타입 컬럼 자동 조인 (조건 명시 X)</li>
+          <li><strong>USING</strong>: 같은 이름 컬럼 명시</li>
+          <li>FULL OUTER: 양쪽 다 (없는 쪽 NULL)</li>
+        </ul>
+        <div class="traps">
+          <div class="trap-label">⚠ 함정</div>
+          <ul>
+            <li>NATURAL JOIN: 이름 같고 <strong>타입 다르면 에러</strong></li>
+            <li>MySQL은 FULL OUTER 미지원 → LEFT UNION RIGHT</li>
+          </ul>
+        </div>
+      </div>
     </div>
 
-    <h3>2과목 — SQL 활용 (2-2)</h3>
-    <div class="day-grid">
-      <div class="day-mini"><div class="head">2-2-1 서브쿼리</div>스칼라/인라인뷰/연관. <strong>ANY=최소 / ALL=최대</strong>.</div>
-      <div class="day-mini"><div class="head">2-2-2 집합 연산자</div>UNION 정렬·중복제거, <strong>UNION ALL 그대로</strong>. INTERSECT, MINUS.</div>
-      <div class="day-mini"><div class="head">2-2-3 그룹 함수</div><strong>ROLLUP N+1단계 / CUBE 2^N</strong>. GROUPING SETS는 골라보기.</div>
-      <div class="day-mini"><div class="head">2-2-4 윈도우 함수</div><strong>RANK(건너뜀) vs DENSE_RANK(연속)</strong>. PARTITION BY로 그룹별.</div>
-      <div class="day-mini"><div class="head">2-2-5 Top N</div>ROWNUM <strong>정렬 전 매겨짐</strong>. FETCH FIRST는 12c+, WITH TIES.</div>
-      <div class="day-mini"><div class="head">2-2-6 계층형 질의</div>START WITH ... CONNECT BY <strong>PRIOR</strong>. LEVEL 의사컬럼.</div>
-      <div class="day-mini"><div class="head">2-2-7 PIVOT/UNPIVOT</div>세로↔가로. PIVOT <strong>집계 필수</strong>, UNPIVOT NULL 기본 제외.</div>
-      <div class="day-mini"><div class="head">2-2-8 정규 표현식</div>REGEXP_LIKE/REPLACE/SUBSTR/INSTR/COUNT.</div>
+    <h3 class="subj-h">2과목 — SQL 활용 (2-2)</h3>
+    <div class="day-card-grid">
+      <div class="day-card">
+        <div class="card-head"><span class="card-tag">2-2-1</span><span class="card-title">서브쿼리</span></div>
+        <ul class="points">
+          <li>위치별: 스칼라 / 인라인뷰 / WHERE 서브쿼리</li>
+          <li>행 수별: 단일행(=, &lt;, &gt; 등) / 다중행(IN, ANY, ALL, EXISTS)</li>
+          <li>연관 vs 비연관 서브쿼리</li>
+        </ul>
+        <div class="traps">
+          <div class="trap-label">⚠ 함정</div>
+          <ul>
+            <li><strong>ANY = 최소 기준</strong>(중 어느 하나보다 작아도 OK) / <strong>ALL = 최대 기준</strong>(모두보다 커야)</li>
+            <li><code>IN (a, b, c)</code> = OR 연결의 단축</li>
+            <li>스칼라 서브쿼리는 <strong>1행 1컬럼만 반환</strong></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="day-card">
+        <div class="card-head"><span class="card-tag">2-2-2</span><span class="card-title">집합 연산자</span></div>
+        <ul class="points">
+          <li><strong>UNION</strong>: 합집합 (정렬 + 중복 제거)</li>
+          <li><strong>UNION ALL</strong>: 합집합 (그대로, 빠름)</li>
+          <li><strong>INTERSECT</strong>: 교집합 / <strong>MINUS</strong>(EXCEPT): 차집합</li>
+          <li>컬럼 수·타입 일치 필수</li>
+        </ul>
+        <div class="traps">
+          <div class="trap-label">⚠ 함정</div>
+          <ul>
+            <li>UNION ALL은 정렬 안 함 → <strong>O (UNION만 정렬)</strong></li>
+            <li>컬럼 수 다르면 → <strong>에러</strong></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="day-card">
+        <div class="card-head"><span class="card-tag">2-2-3</span><span class="card-title">그룹 함수</span></div>
+        <ul class="points">
+          <li><strong>ROLLUP(A, B)</strong>: N+1 단계 — (A,B), (A), () 3단계</li>
+          <li><strong>CUBE(A, B)</strong>: 2^N 단계 — 모든 조합 4가지</li>
+          <li><strong>GROUPING SETS</strong>: 지정한 조합만 (가장 유연)</li>
+          <li><code>GROUPING()</code> 함수로 소계 행 식별 (1=소계, 0=원본)</li>
+        </ul>
+        <div class="ex-sql">
+          <div class="ex-label">예시</div>
+<pre><span class="kw">SELECT</span> DEPT, JOB, <span class="kw">SUM</span>(SAL)
+<span class="kw">FROM</span> EMP
+<span class="kw">GROUP BY</span> ROLLUP(DEPT, JOB);
+<span class="cm">-- (DEPT,JOB) → (DEPT) → ()  3단계</span>
+
+<span class="kw">GROUP BY</span> CUBE(DEPT, JOB);
+<span class="cm">-- (D,J),(D),(J),()  4단계 (2^2)</span>
+
+<span class="kw">GROUP BY</span> GROUPING SETS((DEPT,JOB),(DEPT));
+<span class="cm">-- 지정한 조합만</span></pre>
+        </div>
+        <div class="traps">
+          <div class="trap-label">⚠ 함정</div>
+          <ul>
+            <li>ROLLUP(A,B,C) → <strong>4단계</strong> ((A,B,C), (A,B), (A), ())</li>
+            <li>CUBE(A,B,C) → <strong>8단계 (2^3)</strong></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="day-card">
+        <div class="card-head"><span class="card-tag">2-2-4</span><span class="card-title">윈도우 함수</span></div>
+        <ul class="points">
+          <li>순위: <strong>RANK</strong>(1,1,3) / <strong>DENSE_RANK</strong>(1,1,2) / <strong>ROW_NUMBER</strong>(1,2,3)</li>
+          <li>행 순서: LAG / LEAD (앞·뒤 행 값)</li>
+          <li>집계 OVER: SUM/AVG/COUNT OVER PARTITION BY</li>
+          <li>WINDOWING: ROWS BETWEEN ... AND ... (행 범위 지정)</li>
+        </ul>
+        <div class="ex-sql">
+          <div class="ex-label">예시</div>
+<pre><span class="kw">SELECT</span> ENAME, DEPT, SAL,
+  <span class="kw">RANK</span>()       <span class="kw">OVER</span>(<span class="kw">PARTITION BY</span> DEPT <span class="kw">ORDER BY</span> SAL <span class="kw">DESC</span>) R,
+  DENSE_RANK() <span class="kw">OVER</span>(<span class="kw">PARTITION BY</span> DEPT <span class="kw">ORDER BY</span> SAL <span class="kw">DESC</span>) DR,
+  ROW_NUMBER() <span class="kw">OVER</span>(<span class="kw">ORDER BY</span> SAL <span class="kw">DESC</span>) RN,
+  LAG(SAL,1)   <span class="kw">OVER</span>(<span class="kw">ORDER BY</span> HIRE) PREV,
+  <span class="kw">SUM</span>(SAL)    <span class="kw">OVER</span>(<span class="kw">PARTITION BY</span> DEPT) DEPT_SUM
+<span class="kw">FROM</span> EMP;
+<span class="cm">-- RANK: 1,1,3 / DENSE_RANK: 1,1,2 / ROW_NUMBER: 1,2,3</span></pre>
+        </div>
+        <div class="traps">
+          <div class="trap-label">⚠ 함정</div>
+          <ul>
+            <li>RANK는 동률 다음 순위 <strong>건너뜀</strong>, DENSE_RANK는 <strong>연속</strong></li>
+            <li>LAG/LEAD 기본 오프셋은 <strong>1</strong></li>
+            <li>PARTITION BY 없으면 전체가 한 그룹</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="day-card">
+        <div class="card-head"><span class="card-tag">2-2-5</span><span class="card-title">Top N 쿼리</span></div>
+        <ul class="points">
+          <li>Oracle <strong>ROWNUM</strong>: 의사컬럼, 인라인뷰 + ORDER BY 후 사용</li>
+          <li>표준 <strong>FETCH FIRST</strong> N ROWS ONLY/WITH TIES (Oracle 12c+)</li>
+          <li>MS-SQL <strong>TOP</strong> N / TOP N WITH TIES</li>
+          <li>윈도우 <strong>ROW_NUMBER() OVER</strong> + PARTITION BY (그룹별 TopN)</li>
+        </ul>
+        <div class="traps">
+          <div class="trap-label">⚠ 함정</div>
+          <ul>
+            <li>ROWNUM은 <strong>정렬 전 매겨짐</strong> — 인라인뷰로 정렬 먼저</li>
+            <li><code>ROWNUM = N</code> (N≥2) → <strong>결과 0건</strong></li>
+            <li><code>ROWNUM &gt; N</code> → <strong>항상 거짓</strong></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="day-card">
+        <div class="card-head"><span class="card-tag">2-2-6</span><span class="card-title">계층형 질의</span></div>
+        <ul class="points">
+          <li><code>START WITH</code> ... <code>CONNECT BY PRIOR</code></li>
+          <li><strong>LEVEL</strong> 의사컬럼 (계층 깊이)</li>
+          <li>SYS_CONNECT_BY_PATH (경로 출력)</li>
+          <li>ORDER SIBLINGS BY (같은 LEVEL 정렬)</li>
+        </ul>
+        <div class="traps">
+          <div class="trap-label">⚠ 함정</div>
+          <ul>
+            <li>PRIOR 위치가 <strong>부모 결정</strong> (PRIOR 컬럼 = 부모 컬럼)</li>
+            <li>일반 ORDER BY는 LEVEL 순서를 흩트림 → ORDER SIBLINGS BY 사용</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="day-card">
+        <div class="card-head"><span class="card-tag">2-2-7</span><span class="card-title">PIVOT / UNPIVOT</span></div>
+        <ul class="points">
+          <li><strong>PIVOT</strong>: 세로 → 가로 변환</li>
+          <li><strong>UNPIVOT</strong>: 가로 → 세로 변환</li>
+          <li>PIVOT은 <strong>집계 함수 필수</strong> (SUM, COUNT 등)</li>
+          <li>UNPIVOT는 NULL 기본 제외 → <code>INCLUDE NULLS</code> 옵션으로 포함</li>
+        </ul>
+        <div class="traps">
+          <div class="trap-label">⚠ 함정</div>
+          <ul>
+            <li>PIVOT은 집계 없이도 가능 → <strong>X (집계 필수)</strong></li>
+            <li>UNPIVOT은 NULL 자동 포함 → <strong>X (기본 제외)</strong></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="day-card">
+        <div class="card-head"><span class="card-tag">2-2-8</span><span class="card-title">정규 표현식</span></div>
+        <ul class="points">
+          <li>5함수: REGEXP_LIKE / REPLACE / SUBSTR / INSTR / COUNT</li>
+          <li>메타문자: <code>.</code> <code>*</code> <code>+</code> <code>?</code> <code>[]</code> <code>^</code> <code>$</code> <code>|</code> <code>{n}</code></li>
+          <li>한글: <code>[가-힣]</code></li>
+        </ul>
+        <div class="ex-sql">
+          <div class="ex-label">예시</div>
+<pre><span class="cm">-- 한글만 / 휴대폰 형식</span>
+<span class="kw">WHERE</span> REGEXP_LIKE(NAME, <span class="kw">'^[가-힣]+$'</span>)
+<span class="kw">WHERE</span> REGEXP_LIKE(PHONE, <span class="kw">'^010-[0-9]{4}-[0-9]{4}$'</span>)
+
+<span class="cm">-- 숫자 추출</span>
+<span class="kw">SELECT</span> REGEXP_SUBSTR(<span class="kw">'A123B45'</span>, <span class="kw">'[0-9]+'</span>) <span class="kw">FROM</span> DUAL;
+<span class="cm">→ '123'</span>
+
+<span class="kw">SELECT</span> REGEXP_REPLACE(STR, <span class="kw">'[^0-9]'</span>, <span class="kw">''</span>) <span class="kw">FROM</span> ...;
+<span class="cm">-- 숫자만 남김</span></pre>
+        </div>
+        <div class="traps">
+          <div class="trap-label">⚠ 함정</div>
+          <ul>
+            <li>Oracle은 <strong>POSIX 1003.2 기반</strong> — <code>\d</code>·<code>\w</code>·<code>\s</code>는 12c 이후 일부 동작</li>
+            <li>호환 안전: <code>[0-9]</code>·<code>[[:digit:]]</code> 사용</li>
+          </ul>
+        </div>
+      </div>
     </div>
 
-    <h3>2과목 — 관리 구문 (2-3)</h3>
-    <div class="day-grid">
-      <div class="day-mini"><div class="head">2-3-1 DML</div>INSERT/UPDATE/DELETE/<strong>MERGE</strong>. ROLLBACK 가능.</div>
-      <div class="day-mini"><div class="head">2-3-2 TCL</div>COMMIT/ROLLBACK/<strong>SAVEPOINT</strong>. ROLLBACK TO SP.</div>
-      <div class="day-mini"><div class="head">2-3-3 DDL</div>CREATE/ALTER/DROP/TRUNCATE/RENAME. <strong>자동 COMMIT</strong>.</div>
-      <div class="day-mini"><div class="head">2-3-4 DCL</div>GRANT/REVOKE. <strong>WITH GRANT OPTION</strong>(객체) / WITH ADMIN OPTION(시스템).</div>
+    <h3 class="subj-h">2과목 — 관리 구문 (2-3) · 명령어 분류 포함</h3>
+    <div class="day-card-grid">
+      <div class="day-card">
+        <div class="card-head"><span class="card-tag">2-3-1</span><span class="card-title">DML</span></div>
+        <ul class="points">
+          <li><strong>분류</strong>: INSERT / UPDATE / DELETE / MERGE (SELECT 포함 시 5종)</li>
+          <li>ROLLBACK 가능 → TCL로 확정 필요</li>
+          <li>MERGE: INSERT + UPDATE 합쳐진 형태 (UPSERT)</li>
+        </ul>
+        <div class="ex-sql">
+          <div class="ex-label">예시</div>
+<pre><span class="kw">INSERT INTO</span> EMP (ID, NAME, SAL) <span class="kw">VALUES</span> (1, <span class="kw">'홍길동'</span>, 3000);
+
+<span class="kw">UPDATE</span> EMP <span class="kw">SET</span> SAL = SAL * 1.1 <span class="kw">WHERE</span> DEPT = 10;
+
+<span class="kw">DELETE FROM</span> EMP <span class="kw">WHERE</span> ID = 1;
+
+<span class="kw">MERGE INTO</span> TGT <span class="kw">USING</span> SRC <span class="kw">ON</span> (TGT.ID = SRC.ID)
+  <span class="kw">WHEN MATCHED THEN UPDATE SET</span> TGT.NAME = SRC.NAME
+  <span class="kw">WHEN NOT MATCHED THEN INSERT</span> (ID, NAME) <span class="kw">VALUES</span> (SRC.ID, SRC.NAME);</pre>
+        </div>
+        <div class="traps">
+          <div class="trap-label">⚠ 함정 (단골)</div>
+          <ul>
+            <li><code>DELETE</code>는 DDL이다 → <strong>X (DML)</strong></li>
+            <li>DELETE WHERE 빠뜨림 → <strong>전체 삭제 위험</strong> (다만 ROLLBACK 가능)</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="day-card">
+        <div class="card-head"><span class="card-tag">2-3-2</span><span class="card-title">TCL</span></div>
+        <ul class="points">
+          <li><strong>분류</strong>: COMMIT / ROLLBACK / SAVEPOINT</li>
+          <li>SAVEPOINT 후 <code>ROLLBACK TO SP</code> = SP 이후 작업만 취소</li>
+          <li>전체 ROLLBACK 또는 COMMIT 시 SAVEPOINT 소멸</li>
+        </ul>
+        <div class="ex-sql">
+          <div class="ex-label">예시</div>
+<pre><span class="kw">INSERT INTO</span> EMP <span class="kw">VALUES</span> (1, <span class="kw">'A'</span>);
+<span class="kw">SAVEPOINT</span> SP1;
+<span class="kw">UPDATE</span> EMP <span class="kw">SET</span> NAME = <span class="kw">'B'</span> <span class="kw">WHERE</span> ID = 1;
+<span class="kw">ROLLBACK TO</span> SP1;   <span class="cm">-- UPDATE만 취소 (INSERT는 살아있음)</span>
+<span class="kw">COMMIT</span>;             <span class="cm">-- INSERT 확정</span></pre>
+        </div>
+        <div class="traps">
+          <div class="trap-label">⚠ 함정</div>
+          <ul>
+            <li>COMMIT 후 ROLLBACK 가능 → <strong>X (불가)</strong></li>
+            <li>DDL 실행 시 펜딩 트랜잭션 → <strong>자동 COMMIT됨</strong></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="day-card">
+        <div class="card-head"><span class="card-tag">2-3-3</span><span class="card-title">DDL</span></div>
+        <ul class="points">
+          <li><strong>분류</strong>: CREATE / ALTER / DROP / TRUNCATE / RENAME</li>
+          <li><strong>자동 COMMIT</strong> — ROLLBACK 불가</li>
+          <li>제약조건: PRIMARY KEY / FOREIGN KEY / UNIQUE / NOT NULL / CHECK / DEFAULT</li>
+          <li>PK = UNIQUE + NOT NULL (1개) / UNIQUE는 NULL 허용 (여러 개)</li>
+        </ul>
+        <div class="ex-sql">
+          <div class="ex-label">예시</div>
+<pre><span class="kw">CREATE TABLE</span> EMP (
+  ID      <span class="kw">NUMBER PRIMARY KEY</span>,
+  NAME    <span class="kw">VARCHAR2</span>(20) <span class="kw">NOT NULL</span>,
+  EMAIL   <span class="kw">VARCHAR2</span>(50) <span class="kw">UNIQUE</span>,
+  SAL     <span class="kw">NUMBER DEFAULT</span> 0 <span class="kw">CHECK</span> (SAL &gt;= 0),
+  DEPT_ID <span class="kw">NUMBER REFERENCES</span> DEPT(ID)
+);
+
+<span class="kw">ALTER TABLE</span> EMP <span class="kw">ADD</span> (HIRE_DT <span class="kw">DATE</span>);
+<span class="kw">ALTER TABLE</span> EMP <span class="kw">MODIFY</span> (NAME <span class="kw">VARCHAR2</span>(30));
+<span class="kw">ALTER TABLE</span> EMP <span class="kw">DROP COLUMN</span> EMAIL;
+
+<span class="kw">TRUNCATE TABLE</span> EMP;   <span class="cm">-- 전체 삭제, 자동 COMMIT</span>
+<span class="kw">DROP TABLE</span> EMP;</pre>
+        </div>
+        <div class="traps">
+          <div class="trap-label">⚠ 함정 (단골)</div>
+          <ul>
+            <li><code>TRUNCATE</code>는 DML이다 → <strong>X (DDL — ROLLBACK 불가)</strong></li>
+            <li>TRUNCATE는 WHERE 가능 → <strong>X (전체 삭제만)</strong></li>
+            <li>FK는 부모의 일반 컬럼 참조 가능 → <strong>X (PK or UNIQUE만)</strong></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="day-card">
+        <div class="card-head"><span class="card-tag">2-3-4</span><span class="card-title">DCL</span></div>
+        <ul class="points">
+          <li><strong>분류</strong>: GRANT / REVOKE</li>
+          <li>시스템 권한: <strong>WITH ADMIN OPTION</strong> (ex: CREATE TABLE)</li>
+          <li>객체 권한: <strong>WITH GRANT OPTION</strong> (ex: SELECT ON EMP)</li>
+          <li>ROLE: 권한 묶음. GRANT/REVOKE 한 번에</li>
+        </ul>
+        <div class="ex-sql">
+          <div class="ex-label">예시</div>
+<pre><span class="cm">-- 객체 권한</span>
+<span class="kw">GRANT SELECT</span>, <span class="kw">INSERT ON</span> EMP <span class="kw">TO</span> USER1;
+<span class="kw">GRANT SELECT ON</span> EMP <span class="kw">TO</span> USER1 <span class="kw">WITH GRANT OPTION</span>;
+
+<span class="cm">-- 시스템 권한</span>
+<span class="kw">GRANT CREATE TABLE TO</span> USER1 <span class="kw">WITH ADMIN OPTION</span>;
+
+<span class="cm">-- 회수</span>
+<span class="kw">REVOKE SELECT ON</span> EMP <span class="kw">FROM</span> USER1;
+
+<span class="cm">-- ROLE</span>
+<span class="kw">CREATE ROLE</span> DEV_ROLE;
+<span class="kw">GRANT SELECT ON</span> EMP <span class="kw">TO</span> DEV_ROLE;
+<span class="kw">GRANT</span> DEV_ROLE <span class="kw">TO</span> USER1;</pre>
+        </div>
+        <div class="traps">
+          <div class="trap-label">⚠ 함정</div>
+          <ul>
+            <li>GRANT는 자동 COMMIT 안 됨 → <strong>X (자동 COMMIT)</strong></li>
+            <li>REVOKE WITH GRANT OPTION → <strong>연쇄 회수</strong> (위임 받은 사용자도 잃음)</li>
+            <li>WITH ADMIN OPTION 회수 → <strong>위임 받은 사용자는 유지</strong> (객체 권한과 차이)</li>
+          </ul>
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- ── 2. 빈출 함정 TOP 30 ── -->
-  <section class="day-section" id="traps">
-    <h2><span class="num">2</span>빈출 함정 TOP 30</h2>
-    <p style="font-size: 13px; color: var(--fg-3); margin-bottom: 4px;">출제 빈도 높은 함정 위주. 함정 → 정답·이유 한 줄.</p>
-    <div class="trap-list">
-      <div class="trap-item"><span class="num">01</span><code>NULL = NULL</code>의 결과는 <strong>UNKNOWN</strong>(FALSE 아님). WHERE에서는 행 제외.</div>
-      <div class="trap-item"><span class="num">02</span><code>WHERE COL = NULL</code> → <strong>결과 0건</strong>. 반드시 <code>IS NULL</code> 사용.</div>
-      <div class="trap-item"><span class="num">03</span><code>NULL + 100</code> = <strong>NULL</strong>. NULL과의 산술은 모두 NULL.</div>
-      <div class="trap-item"><span class="num">04</span><code>AVG(컬럼)</code>의 분모는 <strong>NULL 제외 개수</strong>. 0 포함 평균과 다름.</div>
-      <div class="trap-item"><span class="num">05</span><code>COUNT(*)</code>는 NULL 포함 / <code>COUNT(컬럼)</code>은 <strong>NULL 제외</strong>.</div>
-      <div class="trap-item"><span class="num">06</span><code>ROWNUM</code>은 <strong>정렬 전</strong> 매겨짐. 인라인뷰로 정렬 먼저.</div>
-      <div class="trap-item"><span class="num">07</span><code>ROWNUM = 5</code> → 결과 0건. <code>ROWNUM ≤ N</code> 또는 <code>= 1</code>만 가능.</div>
-      <div class="trap-item"><span class="num">08</span><code>ROWNUM &gt; N</code> → 항상 거짓(결과 0건).</div>
-      <div class="trap-item"><span class="num">09</span><code>TRUNCATE</code>=<strong>DDL</strong>. 자동 COMMIT, ROLLBACK 불가, 매우 빠름.</div>
-      <div class="trap-item"><span class="num">10</span><code>DELETE</code>=<strong>DML</strong>. ROLLBACK 가능, WHERE 가능.</div>
-      <div class="trap-item"><span class="num">11</span>DDL은 실행 즉시 <strong>자동 COMMIT</strong>. 펜딩 트랜잭션도 같이 커밋.</div>
-      <div class="trap-item"><span class="num">12</span>SELECT 실행 순서 = <strong>FROM → WHERE → GROUP → HAVING → SELECT → ORDER</strong>(FWGHSO).</div>
-      <div class="trap-item"><span class="num">13</span>OUTER JOIN 조건은 <strong>ON에</strong>. WHERE에 두면 NULL 행이 제외돼 INNER 효과.</div>
-      <div class="trap-item"><span class="num">14</span>NATURAL JOIN: 같은 <strong>이름·타입 컬럼</strong> 자동 조인. 이름 같고 타입 다르면 에러.</div>
-      <div class="trap-item"><span class="num">15</span>CROSS JOIN: 조인 조건 누락 시 카티션 곱. <strong>의도치 않으면 위험</strong>.</div>
-      <div class="trap-item"><span class="num">16</span><strong>RANK</strong>(1,1,3,4) vs <strong>DENSE_RANK</strong>(1,1,2,3) — RANK는 동률 다음 순위 건너뜀.</div>
-      <div class="trap-item"><span class="num">17</span>정규화: <strong>부분종속 → 2NF / 이행종속 → 3NF</strong>.</div>
-      <div class="trap-item"><span class="num">18</span>엔터티 조건: 인스턴스 <strong>≥ 2</strong>, 속성 <strong>≥ 2</strong>.</div>
-      <div class="trap-item"><span class="num">19</span><strong>PK</strong> = UNIQUE + NOT NULL, 1개만. <strong>UNIQUE</strong>는 NULL 허용, 여러 개 가능.</div>
-      <div class="trap-item"><span class="num">20</span>FK는 부모의 <strong>PK 또는 UNIQUE</strong> 컬럼만 참조 가능.</div>
-      <div class="trap-item"><span class="num">21</span><code>DECODE</code>는 <strong>동등비교만</strong>(=). <code>CASE</code>는 범위·논리 가능.</div>
-      <div class="trap-item"><span class="num">22</span><code>NVL2(A,B,C)</code> — A NOT NULL → B / NULL → <strong>C</strong>.</div>
-      <div class="trap-item"><span class="num">23</span><code>NULLIF(A,B)</code> — A=B면 <strong>NULL</strong>, 아니면 A.</div>
-      <div class="trap-item"><span class="num">24</span><code>COALESCE(...)</code> — <strong>NULL이 아닌 첫 값</strong> 반환.</div>
-      <div class="trap-item"><span class="num">25</span>ROLLUP(A,B): N+1 = <strong>3단계</strong> — (A,B), (A), ().</div>
-      <div class="trap-item"><span class="num">26</span>CUBE(A,B): 2^N = <strong>4단계</strong> — 모든 조합.</div>
-      <div class="trap-item"><span class="num">27</span><code>UNION</code>은 정렬+중복제거(느림), <code>UNION ALL</code>은 그대로(빠름).</div>
-      <div class="trap-item"><span class="num">28</span><code>ROLLBACK TO SP1</code> → SP1 <strong>이후 작업만 취소</strong>. 이전 작업은 유지.</div>
-      <div class="trap-item"><span class="num">29</span>GROUP BY 사용 시 SELECT의 <strong>일반 컬럼은 GROUP BY에 명시</strong> 필수(집계 함수는 예외).</div>
-      <div class="trap-item"><span class="num">30</span><strong>ANY</strong>=최소값 기준(작아도 됨) / <strong>ALL</strong>=최대값 기준(가장 커야 됨).</div>
-    </div>
-  </section>
-
-  <!-- ── 3. 명령어 분류 ── -->
-  <section class="day-section" id="cmds">
-    <h2><span class="num">3</span>명령어 분류 한 장 정리</h2>
-    <p style="font-size: 13px; color: var(--fg-3); margin-bottom: 4px;">시험에서 가장 자주 묻는 분류. 자동 COMMIT 여부 주의.</p>
-    <div class="cmd-grid">
-      <div class="cmd-card">
-        <div class="cmd-tag tag-ddl">DDL</div>
-        <div class="cmd-list">CREATE · ALTER<br>DROP · TRUNCATE<br>RENAME</div>
-        <div class="cmd-note">자동 COMMIT<br>ROLLBACK 불가</div>
-      </div>
-      <div class="cmd-card">
-        <div class="cmd-tag tag-dml">DML</div>
-        <div class="cmd-list">INSERT · UPDATE<br>DELETE · MERGE<br>(SELECT)</div>
-        <div class="cmd-note">ROLLBACK 가능<br>TCL로 확정</div>
-      </div>
-      <div class="cmd-card">
-        <div class="cmd-tag tag-dcl">DCL</div>
-        <div class="cmd-list">GRANT<br>REVOKE</div>
-        <div class="cmd-note">자동 COMMIT<br>권한 관리</div>
-      </div>
-      <div class="cmd-card">
-        <div class="cmd-tag tag-tcl">TCL</div>
-        <div class="cmd-list">COMMIT<br>ROLLBACK<br>SAVEPOINT</div>
-        <div class="cmd-note">트랜잭션 제어</div>
-      </div>
-    </div>
-
-    <h3>주의 — 시험에 단골</h3>
-    <div class="trap-list">
-      <div class="trap-item"><span class="num">!</span><strong>TRUNCATE는 DDL</strong>(DML 아님) — 자동 COMMIT, ROLLBACK 불가, WHERE 불가.</div>
-      <div class="trap-item"><span class="num">!</span><strong>DELETE는 DML</strong>(DDL 아님) — ROLLBACK 가능, WHERE 가능, 느림.</div>
-      <div class="trap-item"><span class="num">!</span>DROP은 객체 자체 제거. TRUNCATE는 데이터만 비우고 구조 유지.</div>
-      <div class="trap-item"><span class="num">!</span>DCL <code>GRANT</code>도 자동 COMMIT (별도 COMMIT 불필요).</div>
-    </div>
-  </section>
-
-  <!-- ── 4. 시험 당일 체크리스트 ── -->
+  <!-- ── 당일 체크리스트 ── -->
   <section class="day-section" id="checklist">
-    <h2><span class="num">4</span>시험 당일 체크리스트</h2>
+    <h2><span class="num">2</span>시험 당일 체크리스트</h2>
+    <p class="section-lead">시험 1시간 전부터 종료까지의 흐름.</p>
+
     <div class="checklist-grid">
       <div class="checklist-card">
         <div class="title">📋 준비물</div>
@@ -336,8 +864,7 @@
         <div class="title">⏰ 시간 관리</div>
         <ul>
           <li>시험 시작 <strong>30분 전 도착</strong></li>
-          <li>총 시험 시간 <strong>50분</strong>, 50문항</li>
-          <li>1문항 평균 <strong>1분</strong> — 길게 안 끌기</li>
+          <li>총 <strong>50문항 / 90분</strong> (1문항 평균 1.8분)</li>
           <li>막히면 일단 ① 표시 후 다음으로</li>
           <li>마지막 5분 OMR 검토</li>
         </ul>
@@ -354,12 +881,12 @@
       </div>
     </div>
 
-    <h3>마음가짐</h3>
-    <div class="trap-list">
-      <div class="trap-item"><span class="num">★</span>모르는 문제가 보여도 당황 X. 보기만 봐도 답이 좁혀지는 경우 많음.</div>
-      <div class="trap-item"><span class="num">★</span>함정 패턴(NULL, ROWNUM, ON vs WHERE) 떠올리면서 침착하게.</div>
-      <div class="trap-item"><span class="num">★</span>완전히 막히면 패스 후 끝까지 푼 다음 돌아오기.</div>
-      <div class="trap-item"><span class="num">★</span>합격 기준 60점(60/100). <strong>킬러 문제 욕심 X</strong>, 풀 수 있는 문제부터.</div>
+    <h3 class="subj-h" style="margin-top: 28px;">마음가짐</h3>
+    <div class="mindset-list">
+      <div class="mindset-item"><span class="star">★</span>모르는 문제가 보여도 당황 X. 보기만 봐도 답이 좁혀지는 경우 많음.</div>
+      <div class="mindset-item"><span class="star">★</span>함정 패턴(NULL, ROWNUM, ON vs WHERE) 떠올리면서 침착하게.</div>
+      <div class="mindset-item"><span class="star">★</span>완전히 막히면 패스 후 끝까지 푼 다음 돌아오기.</div>
+      <div class="mindset-item"><span class="star">★</span>합격 기준 60점(60/100). <strong>킬러 문제 욕심 X</strong>, 풀 수 있는 문제부터.</div>
     </div>
   </section>
 
