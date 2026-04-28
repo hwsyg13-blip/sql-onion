@@ -1835,56 +1835,12 @@ export const ROUND_60: QuizQuestion[] = [
       "(NULL, NULL)"
     ],
     "correctIndex": 2,
-    "explanation": "CUBE 는 모든 조합을 반환하지만 ROLLUP 은 좌측부터 점진적으로 집계를 수행하므로 (NULL, B) 조합 — 즉 B 단독 소계 — 은 ROLLUP 결과에는 존재하지 않는다.",
+    "explanation": "ROLLUP(A, B) 는 좌측에서 우측으로 점진적으로 그룹 키를 줄여가며 집계 — (A, B) → (A) → () 세 그룹만 산출. 따라서 A 를 건너뛰고 B 단독으로 묶는 그룹은 만들지 못한다. CUBE(A, B) 는 그룹 키 (A, B) 의 모든 부분집합 — (A, B), (A), (B), () 네 그룹 — 을 산출하므로 (B) 그룹 (= A 가 NULL 인 행) 도 포함된다. ① (A, B) 는 양쪽 모두 산출, ② (A, NULL) = (A) 그룹도 양쪽 모두 산출, ④ (NULL, NULL) = () 전체 총계도 양쪽 모두 산출. 오직 ③ (NULL, B) = (B) 단독 그룹 만이 CUBE 에만 등장한다.",
     "_source": "authored",
     "references": [
       {
-        "type": "table",
-        "caption": "ROLLUP(A, B) 가 만드는 집계 그룹",
-        "headers": [
-          "A",
-          "B"
-        ],
-        "rows": [
-          [
-            "A 값",
-            "B 값"
-          ],
-          [
-            "A 값",
-            "NULL (소계)"
-          ],
-          [
-            "NULL (총계)",
-            "NULL (총계)"
-          ]
-        ]
-      },
-      {
-        "type": "table",
-        "caption": "CUBE(A, B) 가 만드는 집계 그룹",
-        "headers": [
-          "A",
-          "B"
-        ],
-        "rows": [
-          [
-            "A 값",
-            "B 값"
-          ],
-          [
-            "A 값",
-            "NULL"
-          ],
-          [
-            "NULL",
-            "B 값"
-          ],
-          [
-            "NULL",
-            "NULL"
-          ]
-        ]
+        "type": "text",
+        "content": "ROLLUP(A, B): 좌→우 점진 집계. (A, B) → (A) → () 의 3 그룹.\nCUBE(A, B): 그룹 키의 모든 부분집합. (A, B), (A), (B), () 의 4 그룹.\n\n* (A) 그룹 = B 컬럼이 NULL 인 소계, (B) 그룹 = A 컬럼이 NULL 인 소계, () = 전체 총계."
       }
     ]
   },
