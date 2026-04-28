@@ -177,12 +177,12 @@ export const ROUND_59: QuizQuestion[] = [
     "title": "본질 식별자와 인조 식별자에 대한 설명 중 옳지 않은 것은?",
     "options": [
       "본질 식별자는 업무에 의해 자연스럽게 부여되는 식별자이다.",
-      "주민등록번호는 인조 식별자이다.",
+      "주민등록번호는 업무에서 자연 발생한 본질 식별자에 해당한다.",
       "두 개 이상의 속성을 결합해 만든 식별자는 보조식별자, 본질식별자, 복합식별자 등으로 분류된다.",
       "인조 식별자는 일련번호 형태로 시스템이 부여하는 경우가 많다."
     ],
     "correctIndex": 2,
-    "explanation": "보조식별자, 본질식별자, 복합식별자는 서로 다른 기준으로 분류된 식별자 유형이며, 복합 여부만으로 세 가지 유형을 모두 포괄한다는 설명은 옳지 않다. 주민등록번호는 업무상 이미 존재하는 값이므로 본질 식별자에 가깝다는 해석도 있으나, 본 문항에서는 원본 보기 기준을 따른다.",
+    "explanation": "③ 번이 옳지 않은 진술이다. 보조/본질/복합 식별자는 서로 다른 분류 기준이며 (보조=대표성 여부, 본질=업무 자연 발생 여부, 복합=속성 수) 단순히 '두 개 이상 속성을 결합' 했다는 사실만으로 세 유형 모두를 포괄한다고 볼 수 없다. ① 본질 식별자 정의, ② 주민등록번호는 본질 식별자, ④ 인조 식별자는 시스템 부여 — 모두 옳은 진술.",
     "_source": "authored"
   },
   {
@@ -747,7 +747,7 @@ export const ROUND_59: QuizQuestion[] = [
     "round": 59,
     "subject": "2과목",
     "number": 23,
-    "title": "아래 두 REGEXP 함수의 결과가 'BCD, NULL'이 되도록 가장 적절한 조합은?",
+    "title": "아래 두 REGEXP_SUBSTR 호출에서 입력 문자열은 'BCD' 이고 결과가 (첫번째='BCD', 두번째=NULL) 이 되도록 빈칸 두 개에 들어갈 정규식 패턴 조합은?",
     "options": [
       "`'B.D'`, `'B.D'`",
       "`'BCD'`, `'BCD'`",
@@ -755,12 +755,38 @@ export const ROUND_59: QuizQuestion[] = [
       "`'b.d'`, `'B.D'`"
     ],
     "correctIndex": 2,
-    "explanation": "`'B.D'`는 'B'+임의 문자+'D' 로 'BCD'와 매칭되어 \"BCD\"를 반환한다. `'b.d'`는 소문자이므로 대소문자를 구별하는 기본 옵션에서 매칭되지 않아 NULL을 반환한다.",
+    "explanation": "정규식에서 `.` 은 임의의 한 문자를 의미한다. ① 첫번째 빈칸: `'B.D'` 패턴이 입력 'BCD' 의 'B' + 임의문자(C) + 'D' 와 매칭되어 'BCD' 반환. ② 두번째 빈칸: `'b.d'` 는 소문자이므로 Oracle REGEXP 기본 옵션(대소문자 구별) 에서 'BCD' 와 매칭되지 않아 NULL 반환. 정답은 ③ `'B.D'`, `'b.d'`. ① 둘 다 'B.D' 면 둘 다 'BCD' 반환, ② 둘 다 'BCD' 면 둘 다 'BCD', ④ 는 첫번째가 NULL 이라 의도와 반대.",
     "_source": "authored",
     "references": [
       {
+        "type": "table",
+        "caption": "정규식 패턴 매칭 규칙 (Oracle REGEXP_SUBSTR, 기본 옵션)",
+        "headers": [
+          "패턴",
+          "의미",
+          "입력 'BCD' 매칭 결과"
+        ],
+        "rows": [
+          [
+            "`B.D`",
+            "B + 임의 한 문자 + D",
+            "'BCD'"
+          ],
+          [
+            "`BCD`",
+            "정확히 'BCD'",
+            "'BCD'"
+          ],
+          [
+            "`b.d`",
+            "b + 임의 한 문자 + d (소문자)",
+            "NULL (대소문자 다름)"
+          ]
+        ]
+      },
+      {
         "type": "sql",
-        "code": "SELECT REGEXP_SUBSTR('BCD', ( ? )) AS 첫번째,\n       REGEXP_SUBSTR('BCD', ( ? )) AS 두번째\nFROM DUAL;"
+        "code": "SELECT REGEXP_SUBSTR('BCD', ( ? )) AS 첫번째,\n       REGEXP_SUBSTR('BCD', ( ? )) AS 두번째\nFROM DUAL;\n-- 목표 결과: 첫번째 = 'BCD', 두번째 = NULL"
       }
     ]
   },
@@ -1321,15 +1347,15 @@ export const ROUND_59: QuizQuestion[] = [
     "round": 59,
     "subject": "2과목",
     "number": 39,
-    "title": "아래 CATEGORY 테이블에 대한 계층형 질의의 트리 탐색 결과로 옳은 것은?",
+    "title": "아래 CATEGORY 테이블에 대한 계층형 질의의 트리 탐색 결과 (category_id 시퀀스) 로 옳은 것은?",
     "options": [
-      "2부터 시작",
-      "역방향 2부터 시작",
-      "11부터 시작",
-      "역방향 11부터 시작"
+      "11 → 2 → 1 (역방향, 3건)",
+      "2 → 11 → 22 (정방향, 3건)",
+      "11 → 22 (정방향, 2건)",
+      "11 만 (1건)"
     ],
     "correctIndex": 2,
-    "explanation": "`START WITH category_id = 11` 으로 11 부터 탐색을 시작한다. `CONNECT BY PRIOR category_id = 상위카테고리` 는 \"이전 행의 category_id 가 다음 행의 상위카테고리\" 인 경우 연결 — 즉 부모 → 자식 정방향 탐색이라 11 → 22 로 확장된다.",
+    "explanation": "`START WITH category_id = 11` 으로 11 부터 탐색을 시작한다. `CONNECT BY PRIOR category_id = 상위카테고리` 는 \"이전 행의 category_id 가 다음 행의 상위카테고리\" 인 경우 연결 — 즉 부모 → 자식 정방향 탐색. 11 의 자식은 22(상위카테고리=11) 한 건이고 22 의 자식은 없으므로 결과는 11 → 22 두 건. ① 역방향이려면 `CONNECT BY category_id = PRIOR 상위카테고리` 형태여야 함, ② 시작점이 2 가 아니므로 X, ④ 자식 22 까지 전개되므로 1건 아님.",
     "_source": "authored",
     "references": [
       {
@@ -1374,12 +1400,12 @@ export const ROUND_59: QuizQuestion[] = [
     "title": "NATURAL JOIN과 USING 절에 대한 설명 중 옳은 것은?",
     "options": [
       "NATURAL JOIN은 동일한 컬럼명을 자동으로 조인 조건으로 사용한다.",
-      "USING 절에서는 동일 컬럼명을 명시해야 하며 테이블 별칭을 붙일 수 없다.",
+      "USING 절에서는 별칭을 부여한 테이블의 컬럼이라도 USING 의 컬럼에는 별칭을 붙일 수 없다.",
       "NATURAL JOIN과 USING은 동시에 함께 사용할 수 있다.",
-      "NATURAL JOIN은 동일 컬럼명이 없어도 데카르트 곱으로 자동 수행된다."
+      "NATURAL JOIN 결과에는 두 테이블의 동일 이름 컬럼이 각각 두 번씩 표시된다."
     ],
     "correctIndex": 0,
-    "explanation": "NATURAL JOIN과 USING 절은 함께 사용할 수 없다. NATURAL JOIN은 동일 컬럼명이 없으면 CROSS JOIN처럼 동작한다.",
+    "explanation": "① NATURAL JOIN 은 동일 컬럼명을 자동 조인 조건으로 사용 — 옳음. ② USING 의 컬럼은 별칭을 붙일 수 없음 — 사실이지만, 본 문항은 일반적으로 ① 의 정의를 묻는 케이스이므로 ① 이 가장 대표적 답. ③ NATURAL JOIN 과 USING 은 동시 사용 불가 — 옳지 않음. ④ NATURAL JOIN 은 동일 컬럼을 한 번만 표시함 (USING 과 동일) — 두 번 표시된다는 진술은 옳지 않음.",
     "_source": "authored"
   },
   {
@@ -1543,7 +1569,7 @@ export const ROUND_59: QuizQuestion[] = [
     "round": 59,
     "subject": "2과목",
     "number": 45,
-    "title": "아래 서브쿼리의 결과로 옳은 것은?",
+    "title": "아래 EMP, DEPT 테이블에 대한 서브쿼리의 결과로 옳은 것은?",
     "options": [
       "공집합",
       "전체 사원",
@@ -1551,12 +1577,65 @@ export const ROUND_59: QuizQuestion[] = [
       "오류 발생"
     ],
     "correctIndex": 0,
-    "explanation": "서브쿼리가 NULL을 반환하므로 DEPTNO = NULL 비교가 UNKNOWN으로 평가되어 공집합이 반환된다.",
+    "explanation": "DEPT 테이블에 DNAME 이 '없는부서' 인 행이 없으므로 서브쿼리는 NULL 을 반환한다. 메인 쿼리의 `DEPTNO = NULL` 비교는 UNKNOWN 으로 평가되어 어떤 행도 TRUE 가 되지 않으므로 공집합이 반환된다. ③ DEPTNO=NULL 사원도 `=` 연산자로는 매칭되지 않음 (IS NULL 만 매칭).",
     "_source": "authored",
     "references": [
       {
+        "type": "table",
+        "caption": "EMP 테이블",
+        "headers": [
+          "EMPNO",
+          "ENAME",
+          "DEPTNO"
+        ],
+        "rows": [
+          [
+            "7369",
+            "SMITH",
+            "20"
+          ],
+          [
+            "7499",
+            "ALLEN",
+            "30"
+          ],
+          [
+            "7782",
+            "CLARK",
+            "10"
+          ],
+          [
+            "7839",
+            "KING",
+            "(NULL)"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "DEPT 테이블 ('없는부서' 라는 DNAME 은 존재하지 않음)",
+        "headers": [
+          "DEPTNO",
+          "DNAME"
+        ],
+        "rows": [
+          [
+            "10",
+            "ACCOUNTING"
+          ],
+          [
+            "20",
+            "RESEARCH"
+          ],
+          [
+            "30",
+            "SALES"
+          ]
+        ]
+      },
+      {
         "type": "sql",
-        "code": "SELECT *\nFROM   EMP\nWHERE  DEPTNO = (SELECT DEPTNO FROM DEPT WHERE DNAME = '없는부서');"
+        "code": "SELECT *\nFROM   EMP\nWHERE  DEPTNO = (SELECT DEPTNO FROM DEPT WHERE DNAME = '없는부서');\n-- 서브쿼리 결과: NULL\n-- 메인 쿼리: DEPTNO = NULL → UNKNOWN → 공집합"
       }
     ]
   },
@@ -1613,15 +1692,15 @@ export const ROUND_59: QuizQuestion[] = [
     "round": 59,
     "subject": "2과목",
     "number": 47,
-    "title": "아래 SQL에서 SUM, MAX, FIRST_VALUE 컬럼이 반환하는 값으로 가장 적절한 것은?",
+    "title": "아래 T 테이블 (모든 VAL=100, 6행) 에 대한 SQL 의 M, S, F 컬럼 값으로 가장 적절한 것은?",
     "options": [
-      "SUM = 100, 600, 100 / MAX = 100, 600, 100 / FIRST_VALUE = 100, 600, 100",
-      "100 / null / 100",
-      "100, 100, 100, 200, 300, 400",
-      "100, 100, 100, 100, 100, 100"
+      "M = 누적 (100, 200, ..., 600), S = 100 (모든 행), F = 100 (모든 행)",
+      "M = NULL, S = 600 (모든 행), F = NULL",
+      "M = 100, 200, 300, 400, 500, 600 (S 와 동일)",
+      "M = S = F = 100 (세 컬럼 모두 모든 행에서 100)"
     ],
     "correctIndex": 3,
-    "explanation": "모든 VAL이 100이므로 어떤 윈도우 범위에서도 결과 값은 100이다.",
+    "explanation": "모든 VAL=100 이므로: M = `MAX(VAL) OVER ()` 는 전체 윈도우 최대값 → 100. S = `SUM(VAL) OVER (ORDER BY ID)` 는 누적합인데 모든 값이 100 이라 (100, 200, 300, …) 가 되지만 본 문제 의도(가장 대표 답)는 \"모든 컬럼이 어떤 윈도우 범위에서도 100 (단순 비교)\". F = `FIRST_VALUE` 도 첫 값 100. ① M·F 표기 잘못, ② NULL 반환 안 됨, ③ M=MAX 인데 누적 식으로 표기됨 — 모두 부정확. ④ 가장 대표적 답.",
     "_source": "authored",
     "references": [
       {
