@@ -204,39 +204,25 @@
     {
       "subject": "2과목",
       "number": 12,
-      "title": "아래 데이터에 대해 결과 값이 나머지와 다른 함수는?",
+      "title": "아래 T 테이블 (VAL, OPT) 에 대해 결과 값이 나머지와 다른 함수는?",
       "options": [
-        "NVL(VAL, OPT)",
-        "COALESCE(VAL, OPT)",
-        "NULLIF(VAL, OPT)",
-        "CASE WHEN VAL IS NOT NULL THEN VAL ELSE OPT END"
+        "`NVL(VAL, OPT)`",
+        "`COALESCE(VAL, OPT)`",
+        "`NULLIF(VAL, OPT)`",
+        "`CASE WHEN VAL IS NOT NULL THEN VAL ELSE OPT END`"
       ],
       "correctIndex": 2,
-      "explanation": "NULLIF 는 두 인자가 같으면 NULL, 다르면 첫 번째 값을 반환하므로 나머지와 결과가 다르다.",
+      "explanation": "NULLIF 는 두 인자가 같으면 NULL, 다르면 첫 번째 값을 반환하므로 나머지와 결과가 다르다. ① NVL/② COALESCE/④ CASE 는 VAL 이 NULL 일 때 OPT 로 대체하고 그 외에는 VAL 을 그대로 반환하므로 동일한 결과를 낸다.",
       "references": [
         {
           "type": "table",
-          "headers": [
-            "VAL",
-            "OPT"
-          ],
+          "caption": "T 테이블",
+          "headers": ["VAL", "OPT"],
           "rows": [
-            [
-              "100",
-              "50"
-            ],
-            [
-              "100",
-              "NULL"
-            ],
-            [
-              "NULL",
-              "250"
-            ],
-            [
-              "450",
-              "100"
-            ]
+            ["100", "50"],
+            ["100", "NULL"],
+            ["NULL", "250"],
+            ["450", "100"]
           ]
         }
       ]
@@ -833,31 +819,24 @@
     {
       "subject": "2과목",
       "number": 44,
-      "title": "아래 네 개의 AVG 연산 중 결과가 서로 다른 것은?",
+      "title": "아래 T 테이블에 대한 네 개의 AVG 계산식 중 결과가 서로 다른 것은?",
       "options": [
-        "SUM(NVL(COL, 0)) / COUNT(*)",
-        "SUM(COL) / COUNT(*)",
-        "AVG(NVL(COL, 0))",
-        "AVG(COL)"
+        "`SUM(NVL(COL, 0)) / COUNT(*)`",
+        "`SUM(COL) / COUNT(*)`",
+        "`AVG(NVL(COL, 0))`",
+        "`AVG(COL)`"
       ],
       "correctIndex": 3,
-      "explanation": "AVG(COL) 은 NULL 을 제외하여 15 를 반환한다. NVL 처리한 경우는 NULL 을 0 으로 취급하므로 다른 결과가 된다.",
+      "explanation": "AVG(COL) 은 NULL 을 자동 제외하여 (10+20)/2 = 15 를 반환한다. ① ② ③ 은 모두 NULL 을 0 으로 취급하거나 분모가 전체 행이라 (10+0+20)/3 = 10 으로 같은 값이 나온다.",
       "references": [
         {
           "type": "table",
-          "headers": [
-            "COL"
-          ],
+          "caption": "T 테이블",
+          "headers": ["COL"],
           "rows": [
-            [
-              "10"
-            ],
-            [
-              "NULL"
-            ],
-            [
-              "20"
-            ]
+            ["10"],
+            ["NULL"],
+            ["20"]
           ]
         }
       ]
