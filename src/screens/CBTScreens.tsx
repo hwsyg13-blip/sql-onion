@@ -113,12 +113,19 @@ export const CBTExam = ({examId = "round-60", onFinish, onNavigate, onExit, mock
   const [flags, setFlags] = React.useState(() => new Set());
   const [remaining, setRemaining] = React.useState(90*60); // 90 min — 기출·모의 모두
   const [submitConfirm, setSubmitConfirm] = React.useState(false);
+  // 채점 후 같은 화면을 review mode 로 재사용:
+  //   - 옵션은 정답/오답 색칠 + 해설 카드 inline 노출
+  //   - 답안 변경 X, 시간/제출 버튼 X
+  //   - 결과 요약은 팝업으로 띄우고, 닫으면 review 만 남음
+  const [reviewMode, setReviewMode] = React.useState(false);
+  const [resultOpen, setResultOpen] = React.useState(false);
 
   React.useEffect(() => {
+    if (reviewMode) return; // review 중엔 타이머 멈춤
     // 기출·모의 둘 다 90분 카운트다운 표시 (학습용)
     const t = setInterval(() => setRemaining(r => Math.max(0, r-1)), 1000);
     return () => clearInterval(t);
-  }, []);
+  }, [reviewMode]);
 
   // GA 이벤트: 시험 시작
   React.useEffect(() => {
@@ -132,10 +139,11 @@ export const CBTExam = ({examId = "round-60", onFinish, onNavigate, onExit, mock
   // 키보드 단축키 — 숫자 1~4 답 선택, 화살표 이동, F/B 체크 토글
   React.useEffect(() => {
     const handler = (e: KeyboardEvent) => {
-      if (submitConfirm) return;
+      if (submitConfirm || resultOpen) return;
       const tag = (e.target as HTMLElement)?.tagName;
       if (tag === 'INPUT' || tag === 'TEXTAREA') return;
-      if (e.key >= '1' && e.key <= '4') {
+      // review 중엔 답 변경 / 체크 토글 비활성. 이전/다음만 동작.
+      if (e.key >= '1' && e.key <= '4' && !reviewMode) {
         e.preventDefault();
         setAnswers(a => { const n = [...a]; n[idx] = Number(e.key) - 1; return n; });
       } else if (e.key === 'ArrowRight') {
@@ -144,14 +152,14 @@ export const CBTExam = ({examId = "round-60", onFinish, onNavigate, onExit, mock
       } else if (e.key === 'ArrowLeft') {
         e.preventDefault();
         setIdx(i => Math.max(0, i - 1));
-      } else if (e.key === 'f' || e.key === 'F') {
+      } else if ((e.key === 'f' || e.key === 'F') && !reviewMode) {
         e.preventDefault();
         setFlags(s => { const n = new Set(s); n.has(idx) ? n.delete(idx) : n.add(idx); return n; });
       }
     };
     window.addEventListener('keydown', handler);
     return () => window.removeEventListener('keydown', handler);
-  }, [idx, submitConfirm, totalQ]);
+  }, [idx, submitConfirm, resultOpen, reviewMode, totalQ]);
 
   const q = questions[idx];
   const answered = answers.filter(a=>a!=null).length;
@@ -164,6 +172,7 @@ export const CBTExam = ({examId = "round-60", onFinish, onNavigate, onExit, mock
     setFlags(s => { const n = new Set(s); n.has(i) ? n.delete(i) : n.add(i); return n; });
   };
   const pick = (opt) => {
+    if (reviewMode) return; // review 중엔 답 변경 X
     setAnswers(a => { const n = [...a]; n[idx] = opt; return n; });
   };
   const doSubmit = () => {
@@ -198,8 +207,33 @@ export const CBTExam = ({examId = "round-60", onFinish, onNavigate, onExit, mock
       });
     } catch (e) { console.warn('[progress] CBT 기록 실패', e); }
 
-    onFinish({questions, answers, flags, examId, mockMode, timeUsed: 90*60 - remaining});
+    // 화면 전환 없이 같은 컴포넌트에서 review mode 로 전환 + 결과 팝업.
+    setSubmitConfirm(false);
+    setReviewMode(true);
+    setResultOpen(true);
+    setIdx(0);
+    if (typeof window !== 'undefined') window.scrollTo({ top: 0, behavior: 'smooth' });
   };
+
+  // ── 채점 결과 (review mode 일 때만 의미 있음) ──
+  const grading = React.useMemo(() => {
+    if (!reviewMode) return null;
+    const s1Total = 10, s2Total = 40;
+    let s1Correct = 0, s2Correct = 0;
+    questions.forEach((q, i) => {
+      const isCorrect = answers[i] != null && answers[i] === q.correctIndex;
+      if (i < s1Total && isCorrect) s1Correct++;
+      else if (i >= s1Total && isCorrect) s2Correct++;
+    });
+    const totalCorrect = s1Correct + s2Correct;
+    // 50문항 × 2점 = 100점 만점
+    const score = (s1Correct + s2Correct) * 2;
+    const s1Rate = (s1Correct / s1Total) * 100;
+    const s2Rate = (s2Correct / s2Total) * 100;
+    const pass = score >= 60 && s1Rate >= 40 && s2Rate >= 40;
+    const fail40 = s1Rate < 40 || s2Rate < 40;
+    return { s1Correct, s2Correct, totalCorrect, score, s1Rate, s2Rate, pass, fail40 };
+  }, [reviewMode, questions, answers]);
 
   const mins = Math.floor(remaining/60), secs = remaining%60;
   const timeStr = `${String(mins).padStart(2,"0")}:${String(secs).padStart(2,"0")}`;
@@ -215,8 +249,8 @@ export const CBTExam = ({examId = "round-60", onFinish, onNavigate, onExit, mock
         {onExit && (
           <button
             onClick={() => {
-              // 아직 아무것도 안 풀었으면 그냥 나감 (확인 스킵)
-              if (answered === 0) { onExit(); return; }
+              // review 중엔 confirm 스킵, 풀이 시작 전에도 스킵
+              if (reviewMode || answered === 0) { onExit(); return; }
               if (typeof window === 'undefined' || window.confirm('진행 중인 풀이를 종료하고 나가시겠어요? 답안은 저장되지 않아요.')) {
                 onExit();
               }
@@ -232,24 +266,36 @@ export const CBTExam = ({examId = "round-60", onFinish, onNavigate, onExit, mock
         )}
         <div style={{display:"flex",alignItems:"center",gap:8}}>
           <Tag tone={mockMode ? "peach" : "blue"}>{mockMode ? "AI 모의고사" : `${EXAM_SETS.find(s=>s.id===examId)?.label || examId} 기출`}</Tag>
-          <span style={{fontSize:13,color:"var(--fg-3)"}}>CBT · 50문항</span>
+          <span style={{fontSize:13,color:"var(--fg-3)"}}>{reviewMode ? "복습 · 해설 보기" : "CBT · 50문항"}</span>
         </div>
         <div style={{marginLeft:"auto",display:"flex",alignItems:"center",gap:16,flexWrap:"wrap"}}>
-          <div
-            aria-label={`남은 시간 ${mins}분 ${secs}초`}
-            title="제한 시간 — 0이 되면 자동 제출돼요"
-            style={{
-              display:"inline-flex",alignItems:"center",gap:6,padding:"6px 12px",
-              background: remaining < 300 ? "var(--wrong-bg)" : "var(--point-050)",
-              border:`1px solid ${remaining < 300 ? "var(--wrong-border)" : "var(--point-100)"}`,
-              borderRadius:8,fontFamily:"var(--font-mono)",fontWeight:700,
-              color: remaining < 300 ? "var(--wrong-fg)" : "var(--point-600)",
-              fontSize:15,
-            }}>
-            <Ic.Clock size={14}/> {timeStr}
-          </div>
-          <div style={{fontSize:13,color:"var(--fg-3)"}}>진행 <strong style={{color:"var(--fg-1)",fontFamily:"var(--font-mono)"}}>{answered}</strong> / {totalQ}</div>
-          <Btn size="sm" variant="primary" onClick={()=>setSubmitConfirm(true)}>제출하기</Btn>
+          {!reviewMode && (
+            <>
+              <div
+                aria-label={`남은 시간 ${mins}분 ${secs}초`}
+                title="제한 시간 — 0이 되면 자동 제출돼요"
+                style={{
+                  display:"inline-flex",alignItems:"center",gap:6,padding:"6px 12px",
+                  background: remaining < 300 ? "var(--wrong-bg)" : "var(--point-050)",
+                  border:`1px solid ${remaining < 300 ? "var(--wrong-border)" : "var(--point-100)"}`,
+                  borderRadius:8,fontFamily:"var(--font-mono)",fontWeight:700,
+                  color: remaining < 300 ? "var(--wrong-fg)" : "var(--point-600)",
+                  fontSize:15,
+                }}>
+                <Ic.Clock size={14}/> {timeStr}
+              </div>
+              <div style={{fontSize:13,color:"var(--fg-3)"}}>진행 <strong style={{color:"var(--fg-1)",fontFamily:"var(--font-mono)"}}>{answered}</strong> / {totalQ}</div>
+              <Btn size="sm" variant="primary" onClick={()=>setSubmitConfirm(true)}>제출하기</Btn>
+            </>
+          )}
+          {reviewMode && grading && (
+            <>
+              <div style={{fontSize:13,color:"var(--fg-3)"}}>
+                점수 <strong style={{color: grading.pass ? "var(--point-600)" : "var(--wrong-fg)",fontFamily:"var(--font-mono)"}}>{grading.score}</strong> / 100
+              </div>
+              <Btn size="sm" variant="outline" onClick={()=>setResultOpen(true)}>결과 다시 보기</Btn>
+            </>
+          )}
         </div>
       </div>
 
@@ -266,8 +312,18 @@ export const CBTExam = ({examId = "round-60", onFinish, onNavigate, onExit, mock
             >
               {q.options.map((opt, i) => {
                 const sel = answers[idx] === i;
+                const isCorrect = i === q.correctIndex;
+                const isWrongChoice = reviewMode && sel && !isCorrect;
                 let bg="var(--bg-card)", br="1px solid var(--border-default)", badgeBg="var(--bg-muted)", badgeFg="var(--fg-3)", optFg="var(--fg-2)";
-                if (sel) { bg="var(--point-100)"; br="2px solid var(--point-600)"; badgeBg="var(--point-600)"; badgeFg="#fff"; optFg="var(--point-600)"; }
+                if (!reviewMode && sel) {
+                  bg="var(--point-100)"; br="2px solid var(--point-600)"; badgeBg="var(--point-600)"; badgeFg="#fff"; optFg="var(--point-600)";
+                } else if (reviewMode && isCorrect) {
+                  // 정답: 항상 초록 강조 (사용자가 골랐든 안 골랐든)
+                  bg="var(--correct-bg)"; br="2px solid var(--point-600)"; badgeBg="var(--point-600)"; badgeFg="#fff"; optFg="var(--correct-fg)";
+                } else if (isWrongChoice) {
+                  // 사용자가 고른 오답: 빨강 강조
+                  bg="var(--wrong-bg)"; br="2px solid var(--wrong-fg)"; badgeBg="var(--wrong-fg)"; badgeFg="#fff"; optFg="var(--wrong-fg)";
+                }
                 const optRefs = q.optionReferences?.[i];
                 return (
                   <li key={i}>
@@ -297,13 +353,35 @@ export const CBTExam = ({examId = "round-60", onFinish, onNavigate, onExit, mock
                 );
               })}
             </ol>
+
+            {/* Review 전용 — 정답·해설 카드 (옵션 바로 아래) */}
+            {reviewMode && (
+              <div style={{marginTop:18,padding:"14px 16px",background:"var(--point-050)",borderLeft:"3px solid var(--point-500)",borderRadius:8}}>
+                <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:8}}>
+                  <span style={{
+                    width:24,height:24,borderRadius:999,
+                    background: answers[idx] === q.correctIndex ? "var(--point-600)" : "var(--wrong-fg)",
+                    color:"#fff",display:"inline-flex",alignItems:"center",justifyContent:"center",
+                  }}>{answers[idx] === q.correctIndex ? <Ic.Check size={14}/> : <Ic.X size={14}/>}</span>
+                  <span style={{fontSize:13,fontWeight:700,color: answers[idx] === q.correctIndex ? "var(--point-600)" : "var(--wrong-fg)"}}>
+                    {answers[idx] === q.correctIndex ? "정답" : (answers[idx] == null ? `미응답 — 정답 ${q.correctIndex + 1}번` : `오답 — 내 답 ${answers[idx] + 1}번 / 정답 ${q.correctIndex + 1}번`)}
+                  </span>
+                </div>
+                <div style={{fontSize:13.5,color:"var(--fg-2)",lineHeight:1.7}}>
+                  <strong style={{color:"var(--point-600)",marginRight:6}}>해설</strong>
+                  {q.explanation || "이 문항에는 아직 해설이 등록되지 않았습니다."}
+                </div>
+              </div>
+            )}
           </div>
 
           {/* Question number strip — 문제 박스 아래에 (체크 좌 / 진도 중 / 이전·다음 우) */}
           <div style={{display:"flex",gap:6,marginTop:16,flexWrap:"wrap"}}>
-            <Btn size="sm" variant={flags.has(idx)?"soft":"ghost"} icon={<Ic.Bookmark size={14}/>} onClick={()=>toggleFlag(idx)}>
-              {flags.has(idx) ? "체크됨" : "체크"}
-            </Btn>
+            {!reviewMode && (
+              <Btn size="sm" variant={flags.has(idx)?"soft":"ghost"} icon={<Ic.Bookmark size={14}/>} onClick={()=>toggleFlag(idx)}>
+                {flags.has(idx) ? "체크됨" : "체크"}
+              </Btn>
+            )}
             <div style={{flex:1,display:"flex",alignItems:"center",justifyContent:"center",fontSize:13,color:"var(--fg-3)",fontFamily:"var(--font-mono)"}}>
               문항 {idx+1} / {totalQ}
             </div>
@@ -322,27 +400,40 @@ export const CBTExam = ({examId = "round-60", onFinish, onNavigate, onExit, mock
           <div style={{position:"sticky",top:132,background:"var(--bg-card)",border:"1px solid var(--border-subtle)",borderRadius:14,boxShadow:"var(--shadow-sm)",overflow:"hidden"}}>
             <div style={{padding:"14px 16px",borderBottom:"1px solid var(--border-subtle)",background:"var(--bg-muted)"}}>
               <div style={{display:"flex",justifyContent:"space-between",alignItems:"center"}}>
-                <div style={{fontSize:13,fontWeight:700,color:"var(--fg-1)"}}>답안지 · OMR</div>
-                <div style={{fontSize:11,color:"var(--fg-3)",fontFamily:"var(--font-mono)"}}>{answered}/{totalQ}</div>
+                <div style={{fontSize:13,fontWeight:700,color:"var(--fg-1)"}}>{reviewMode ? "채점표 · OMR" : "답안지 · OMR"}</div>
+                <div style={{fontSize:11,color:"var(--fg-3)",fontFamily:"var(--font-mono)"}}>
+                  {reviewMode && grading ? `${grading.totalCorrect}/${totalQ}` : `${answered}/${totalQ}`}
+                </div>
               </div>
               <div style={{display:"flex",gap:12,marginTop:8,fontSize:11,color:"var(--fg-3)"}}>
-                <span style={{display:"inline-flex",alignItems:"center",gap:4}}><span style={{width:10,height:10,borderRadius:3,background:"var(--point-600)"}}/> 선택</span>
-                <span style={{display:"inline-flex",alignItems:"center",gap:4}}><span style={{width:10,height:10,borderRadius:3,background:"var(--wrong-bg)",border:"1px solid var(--wrong-border)"}}/> 체크</span>
-                <span style={{display:"inline-flex",alignItems:"center",gap:4}}><span style={{width:10,height:10,borderRadius:3,background:"var(--bg-muted)",border:"1px solid var(--border-default)"}}/> 미응답</span>
+                {reviewMode ? (
+                  <>
+                    <span style={{display:"inline-flex",alignItems:"center",gap:4}}><span style={{width:10,height:10,borderRadius:3,background:"var(--correct-bg)",border:"1px solid var(--point-600)"}}/> 정답</span>
+                    <span style={{display:"inline-flex",alignItems:"center",gap:4}}><span style={{width:10,height:10,borderRadius:3,background:"var(--wrong-bg)",border:"1px solid var(--wrong-fg)"}}/> 오답</span>
+                  </>
+                ) : (
+                  <>
+                    <span style={{display:"inline-flex",alignItems:"center",gap:4}}><span style={{width:10,height:10,borderRadius:3,background:"var(--point-600)"}}/> 선택</span>
+                    <span style={{display:"inline-flex",alignItems:"center",gap:4}}><span style={{width:10,height:10,borderRadius:3,background:"var(--wrong-bg)",border:"1px solid var(--wrong-border)"}}/> 체크</span>
+                    <span style={{display:"inline-flex",alignItems:"center",gap:4}}><span style={{width:10,height:10,borderRadius:3,background:"var(--bg-muted)",border:"1px solid var(--border-default)"}}/> 미응답</span>
+                  </>
+                )}
               </div>
             </div>
             <div style={{padding:"14px 16px",maxHeight:"calc(100vh - 260px)",overflowY:"auto"}}>
               {/* 1과목 */}
               <div style={{fontSize:11,fontWeight:700,color:"var(--point-600)",letterSpacing:"0.04em",marginBottom:8}}>1과목 · 데이터 모델링</div>
-              <OMRGrid start={0} end={10} answers={answers} flags={flags} current={idx} onJump={setIdx}/>
+              <OMRGrid start={0} end={10} answers={answers} flags={flags} current={idx} onJump={setIdx} reviewMode={reviewMode} questions={questions}/>
               <div style={{fontSize:11,fontWeight:700,color:"var(--point-600)",letterSpacing:"0.04em",margin:"16px 0 8px"}}>2과목 · SQL 기본 및 활용</div>
-              <OMRGrid start={10} end={50} answers={answers} flags={flags} current={idx} onJump={setIdx}/>
+              <OMRGrid start={10} end={50} answers={answers} flags={flags} current={idx} onJump={setIdx} reviewMode={reviewMode} questions={questions}/>
             </div>
-            <div style={{padding:"12px 16px",borderTop:"1px solid var(--border-subtle)",background:"var(--bg-muted)"}}>
-              <Btn size="sm" variant="primary" style={{width:"100%"}} onClick={()=>setSubmitConfirm(true)}>
-                <Ic.Send size={12}/> 답안 제출
-              </Btn>
-            </div>
+            {!reviewMode && (
+              <div style={{padding:"12px 16px",borderTop:"1px solid var(--border-subtle)",background:"var(--bg-muted)"}}>
+                <Btn size="sm" variant="primary" style={{width:"100%"}} onClick={()=>setSubmitConfirm(true)}>
+                  <Ic.Send size={12}/> 답안 제출
+                </Btn>
+              </div>
+            )}
           </div>
         </aside>
       </div>
@@ -369,18 +460,99 @@ export const CBTExam = ({examId = "round-60", onFinish, onNavigate, onExit, mock
           </div>
         </div>
       )}
+
+      {/* Result popup — 채점 직후 + 'review 중 결과 다시보기' 버튼에서 호출 */}
+      {resultOpen && grading && (
+        <div style={{position:"fixed",inset:0,background:"rgba(17,24,39,0.4)",zIndex:100,display:"flex",alignItems:"center",justifyContent:"center",padding:20,overflow:"auto"}}
+             onClick={()=>setResultOpen(false)}>
+          <div onClick={e=>e.stopPropagation()} style={{background:"var(--bg-card)",borderRadius:18,padding:0,maxWidth:480,width:"100%",boxShadow:"var(--shadow-lg)",overflow:"hidden"}}>
+            <div style={{
+              padding:"28px 28px 20px",
+              background: grading.pass
+                ? "linear-gradient(180deg, var(--point-050) 0%, var(--bg-card) 100%)"
+                : "linear-gradient(180deg, var(--wrong-bg) 0%, var(--bg-card) 100%)",
+              borderBottom:`1px solid ${grading.pass ? "var(--point-100)" : "var(--wrong-border)"}`,
+              display:"flex",gap:16,alignItems:"center",
+            }}>
+              <Mascot size={64} variant={grading.pass ? "smile" : "sad"}/>
+              <div style={{flex:1,minWidth:0}}>
+                <div style={{fontSize:11,fontWeight:700,color:grading.pass?"var(--point-600)":"var(--wrong-fg)",letterSpacing:"0.04em"}}>
+                  {mockMode ? "AI 모의고사" : `${EXAM_SETS.find(s=>s.id===examId)?.label || examId} 기출`} · 채점 완료
+                </div>
+                <div style={{fontSize:20,fontWeight:800,color:"var(--fg-1)",marginTop:4,letterSpacing:"-0.01em"}}>
+                  {grading.pass ? "합격 기준 통과" : grading.fail40 ? "과락 발생" : "한 걸음 남았어요"}
+                </div>
+                <div style={{fontSize:12.5,color:"var(--fg-3)",marginTop:4,lineHeight:1.55}}>
+                  {grading.pass
+                    ? "60점 이상 · 과목별 40% 이상 달성. 오답 해설로 약점 확인."
+                    : grading.fail40
+                    ? "60점 이상이어도 과목별 40% 미만이면 과락. 취약 과목 재학습 필요."
+                    : "60점까지 끌어올리면 합격. 해설로 약점 좁히기."}
+                </div>
+              </div>
+            </div>
+
+            <div style={{padding:"20px 28px",display:"grid",gridTemplateColumns:"1fr auto",gap:16,alignItems:"center",borderBottom:"1px solid var(--border-subtle)"}}>
+              <div style={{display:"flex",flexDirection:"column",gap:8}}>
+                <div style={{display:"flex",justifyContent:"space-between",fontSize:13}}>
+                  <span style={{color:"var(--fg-3)"}}>1과목 · 데이터 모델링</span>
+                  <span style={{fontFamily:"var(--font-mono)",fontWeight:700,color:grading.s1Rate < 40 ? "var(--wrong-fg)" : "var(--fg-1)"}}>
+                    {grading.s1Correct}/10 ({grading.s1Rate.toFixed(0)}%) {grading.s1Rate < 40 && <span style={{color:"var(--wrong-fg)"}}>· 과락</span>}
+                  </span>
+                </div>
+                <div style={{display:"flex",justifyContent:"space-between",fontSize:13}}>
+                  <span style={{color:"var(--fg-3)"}}>2과목 · SQL 기본·활용</span>
+                  <span style={{fontFamily:"var(--font-mono)",fontWeight:700,color:grading.s2Rate < 40 ? "var(--wrong-fg)" : "var(--fg-1)"}}>
+                    {grading.s2Correct}/40 ({grading.s2Rate.toFixed(0)}%) {grading.s2Rate < 40 && <span style={{color:"var(--wrong-fg)"}}>· 과락</span>}
+                  </span>
+                </div>
+              </div>
+              <div style={{textAlign:"center",padding:"10px 18px",background:"var(--bg-muted)",borderRadius:12}}>
+                <div style={{fontSize:11,color:"var(--fg-3)",fontWeight:600}}>총점</div>
+                <div style={{fontSize:36,fontWeight:800,color:grading.pass?"var(--point-600)":"var(--wrong-fg)",fontFamily:"var(--font-mono)",lineHeight:1,letterSpacing:"-0.04em",margin:"4px 0"}}>{grading.score}</div>
+                <div style={{fontSize:11,color:"var(--fg-3)"}}>/ 100</div>
+              </div>
+            </div>
+
+            <div style={{padding:"16px 28px 22px",display:"flex",gap:8,flexWrap:"wrap",justifyContent:"flex-end"}}>
+              <Btn variant="ghost" onClick={()=>onNavigate("home")}>홈으로</Btn>
+              <Btn variant="outline" icon={<Ic.Refresh/>} onClick={()=>{
+                // 같은 examId 로 다시 풀기 — App 가 cbt 라우트로 재진입
+                onNavigate("cbt", examId);
+              }}>다시 풀기</Btn>
+              <Btn onClick={()=>setResultOpen(false)} iconRight={<Ic.ArrowRight/>}>해설 보기</Btn>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
 
-export const OMRGrid = ({start, end, answers, flags, current, onJump}) => (
+export const OMRGrid = ({start, end, answers, flags, current, onJump, reviewMode = false, questions = null}) => (
   <div role="grid" style={{display:"grid",gridTemplateColumns:"repeat(5, 1fr)",gap:4}}>
     {Array.from({length: end-start}).map((_, i) => {
       const qi = start + i;
       const a = answers[qi];
       const flagged = flags.has(qi);
       const isCurrent = qi === current;
-      const status = a!=null ? `${a+1}번 응답` : flagged ? '체크 · 미응답' : '미응답';
+      const isCorrect = reviewMode && questions && a != null && a === questions[qi]?.correctIndex;
+      const isWrong = reviewMode && !isCorrect; // unanswered 도 오답으로 처리
+      const status = reviewMode
+        ? (isCorrect ? '정답' : (a == null ? '미응답' : `오답 — 정답 ${(questions[qi]?.correctIndex ?? -1) + 1}번`))
+        : (a != null ? `${a + 1}번 응답` : flagged ? '체크 · 미응답' : '미응답');
+
+      let bg = "var(--bg-card)";
+      let border = "1px solid var(--border-default)";
+      if (reviewMode) {
+        if (isCorrect) { bg = "var(--correct-bg)"; border = "1px solid var(--point-600)"; }
+        else { bg = "var(--wrong-bg)"; border = "1px solid var(--wrong-fg)"; }
+      } else if (flagged) {
+        bg = "var(--wrong-bg)";
+        border = "1px solid var(--wrong-border)";
+      }
+      if (isCurrent) border = "2px solid var(--point-600)";
+
       return (
         <button
           key={qi}
@@ -389,16 +561,23 @@ export const OMRGrid = ({start, end, answers, flags, current, onJump}) => (
           aria-current={isCurrent ? 'true' : undefined}
           style={{
             display:"flex",flexDirection:"column",alignItems:"center",gap:2,
-            padding:"6px 0",background: flagged ? "var(--wrong-bg)" : "var(--bg-card)",
-            border: isCurrent ? "2px solid var(--point-600)" : flagged ? "1px solid var(--wrong-border)" : "1px solid var(--border-default)",
-            borderRadius:6,cursor:"pointer",fontFamily:"inherit",
+            padding:"6px 0",background: bg,
+            border, borderRadius:6,cursor:"pointer",fontFamily:"inherit",
             position:"relative",
           }}>
           <span style={{fontSize:10,color:"var(--fg-3)",fontFamily:"var(--font-mono)"}}>{qi+1}</span>
-          <span style={{
-            fontSize:12,fontWeight:700,fontFamily:"var(--font-mono)",
-            color: a!=null ? "var(--point-600)" : "var(--fg-4)",
-          }}>{a!=null ? a+1 : "·"}</span>
+          {reviewMode ? (
+            <span style={{
+              fontSize:12,fontWeight:700,
+              color: isCorrect ? "var(--point-600)" : "var(--wrong-fg)",
+              display:"inline-flex",alignItems:"center",
+            }}>{isCorrect ? '✓' : '✕'}</span>
+          ) : (
+            <span style={{
+              fontSize:12,fontWeight:700,fontFamily:"var(--font-mono)",
+              color: a!=null ? "var(--point-600)" : "var(--fg-4)",
+            }}>{a!=null ? a+1 : "·"}</span>
+          )}
         </button>
       );
     })}
