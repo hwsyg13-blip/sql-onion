@@ -184,6 +184,28 @@ git branch -d qa/2026-04-27-rounds-58-60   # 원격은 PR 머지 시 자동 삭�
 ### 스코프 위반 처리
 다른 채팅의 영역 파일을 수정 요청받으면 일단 짧게 "이거 X 채팅에서 하시는 게 맞을 것 같다"고 짚어주고 사용자 결정을 따르세요. 확인 없이 일단 작업 시작해도 OK — 도중에 스코프 어긋나면 그때 짚어줌.
 
+## Vercel 배포 정책 (2026-04-28~)
+
+### Preview 배포 비활성화
+`vercel.json` 의 `git.deploymentEnabled: { "main": true }` 설정으로 **main 브랜치 push만 빌드**합니다. feat/qa/cs/* 브랜치 push 는 Vercel 빌드 0회.
+
+**배경**: 2026-04-27 ~ 28 사이 일일 50+ PR 머지로 Vercel Free 일일 100 배포 한도(`api-deployments-free-per-day`) 초과 사고. PR 마다 preview + prod 합쳐 2회씩 차감되던 패턴이 직접 원인.
+
+### 작업자에게 미치는 영향
+- **PR 페이지에 Vercel Preview URL 안 뜸** — GitHub CI 체크에 Vercel 항목 부재가 정상
+- **로컬 검증 의무화** — `npm run dev` 로 `localhost:5173` 에서 직접 확인 후 PR 올릴 것. UI 변경은 라이트/다크/모바일까지 본인이 사전 확인
+- **머지 후에야 prod 에서 결과 확인 가능** — preview gate 사라짐. 머지 신중히
+- **이론·CBT·결제 흐름 같은 큰 변경**은 PR 본문에 로컬 검증 결과(스크린샷 또는 computed style 검증) 명시 권장
+
+### 배포 채팅 처리
+- 머지된 main commit 의 prod 빌드가 rate limit 으로 실패하면 alias 우회 가능
+- 가장 최근 성공한 preview/prod deployment 의 alias 를 sqldyangpa.com / www.sqldyangpa.com 으로 재할당:
+  ```bash
+  vercel alias set <recent-ready-deployment-url> sqldyangpa.com --scope lees-projects-fd7a21b5
+  vercel alias set <recent-ready-deployment-url> www.sqldyangpa.com --scope lees-projects-fd7a21b5
+  ```
+- 한도 초과 빈번해지면 Vercel Pro 업그레이드 검토 (월 $20)
+
 ## 커뮤니케이션 규칙
 
 - **에이전트 간 정보 교환**은 CEO를 통해서만. 서브에이전트끼리 직접 호출 불가 (Claude 제약).
