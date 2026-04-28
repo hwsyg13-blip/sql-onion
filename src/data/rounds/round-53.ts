@@ -334,17 +334,51 @@ export const ROUND_53: QuizQuestion[] = [
     "references": [
       {
         "type": "table",
+        "caption": "T1 테이블",
         "headers": [
-          "T1",
-          "T2"
+          "COL1"
         ],
         "rows": [
           [
-            "1, 2, 3, 4, 5",
-            "1, 1, 1, 3, 6"
+            "1"
+          ],
+          [
+            "2"
+          ],
+          [
+            "3"
+          ],
+          [
+            "4"
+          ],
+          [
+            "5"
           ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "T2 테이블",
+        "headers": [
+          "COL1"
         ],
-        "caption": "T1 테이블"
+        "rows": [
+          [
+            "1"
+          ],
+          [
+            "1"
+          ],
+          [
+            "1"
+          ],
+          [
+            "3"
+          ],
+          [
+            "6"
+          ]
+        ]
       },
       {
         "type": "sql",
@@ -359,20 +393,24 @@ export const ROUND_53: QuizQuestion[] = [
     "round": 53,
     "subject": "2과목",
     "number": 17,
-    "title": "아래 SQL 의 ORDER BY 절로 가장 적절한 것은?",
+    "title": "아래 주문 테이블에 대한 SELECT 의 ORDER BY 절로 가장 적절한 것은? (요구사항: 주문번호 DESC → 4번 컬럼 DESC → 1번 컬럼 ASC)",
     "options": [
-      "ORDER BY 주문번호 DESC, 금액 ASC",
-      "ORDER BY 주문번호 DESC, 금액테이블번호 ASC",
-      "ORDER BY 주문번호 DESC, 4 DESC, 1 ASC",
-      "ORDER BY 주문번호 DESC, 4 DESC, 1 DESC"
+      "`ORDER BY 주문번호 DESC, 금액 ASC`",
+      "`ORDER BY 주문번호 DESC, 금액테이블번호 ASC`",
+      "`ORDER BY 주문번호 DESC, 4 DESC, 1 ASC`",
+      "`ORDER BY 주문번호 DESC, 4 DESC, 1 DESC`"
     ],
     "correctIndex": 2,
     "explanation": "주문번호 DESC, 4번 컬럼 DESC, 1번 컬럼 ASC 형태로 ORDER BY 절에 컬럼 순번을 사용할 수 있다.",
     "_source": "authored",
     "references": [
       {
+        "type": "sql",
+        "code": "SELECT 회원번호,    -- 1번 컬럼\n       회원명,      -- 2번 컬럼\n       주문번호,    -- 3번 컬럼\n       금액         -- 4번 컬럼\nFROM   주문\n[ ORDER BY  ?  ];"
+      },
+      {
         "type": "text",
-        "content": "주문번호 내림차순 정렬 후, 주문번호가 같을 경우 날짜를 오름차순으로 정렬한다."
+        "content": "요구사항: 주문번호 내림차순 정렬 후, 같은 주문번호 내에서 4번 컬럼(금액) 내림차순, 1번 컬럼(회원번호) 오름차순으로 정렬한다."
       }
     ]
   },
@@ -715,7 +753,7 @@ export const ROUND_53: QuizQuestion[] = [
     "round": 53,
     "subject": "2과목",
     "number": 29,
-    "title": "아래 데이터를 VVIP → VIP 순서로 정렬하는 SQL 결과로 옳은 것은?",
+    "title": "아래 회원 테이블에 대한 SQL 의 결과 정렬 순서로 옳은 것은?",
     "options": [
       "VVIP, VIP 순으로 출력",
       "VIP, VVIP 순으로 출력",
@@ -726,6 +764,36 @@ export const ROUND_53: QuizQuestion[] = [
     "explanation": "DECODE 가 VVIP 에 1, VIP 에 2, 기타에 3 을 부여하므로 ORDER BY 결과는 VVIP → VIP 순으로 정렬된다.",
     "_source": "authored",
     "references": [
+      {
+        "type": "table",
+        "caption": "회원 테이블",
+        "headers": [
+          "회원ID",
+          "등급"
+        ],
+        "rows": [
+          [
+            "1",
+            "VIP"
+          ],
+          [
+            "2",
+            "VVIP"
+          ],
+          [
+            "3",
+            "VIP"
+          ],
+          [
+            "4",
+            "일반"
+          ],
+          [
+            "5",
+            "VVIP"
+          ]
+        ]
+      },
       {
         "type": "sql",
         "code": "SELECT 등급 FROM 회원 ORDER BY DECODE(등급, 'VVIP', 1, 'VIP', 2, 3);"
@@ -891,7 +959,7 @@ export const ROUND_53: QuizQuestion[] = [
     "round": 53,
     "subject": "2과목",
     "number": 35,
-    "title": "아래 CROSS JOIN 의 결과 행 수로 옳은 것은?",
+    "title": "아래 두 테이블에 대한 CROSS JOIN 의 결과 행 수로 옳은 것은? (T1 의 행 수 = M, T2 의 행 수 = N)",
     "options": [
       "15",
       "8",
@@ -904,6 +972,7 @@ export const ROUND_53: QuizQuestion[] = [
     "references": [
       {
         "type": "table",
+        "caption": "테이블 카디널리티 (M = T1 행 수, N = T2 행 수)",
         "headers": [
           "M",
           "N"
@@ -914,6 +983,10 @@ export const ROUND_53: QuizQuestion[] = [
             "5"
           ]
         ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT *\nFROM   T1 CROSS JOIN T2;"
       }
     ]
   },
@@ -1143,7 +1216,7 @@ export const ROUND_53: QuizQuestion[] = [
     "round": 53,
     "subject": "2과목",
     "number": 43,
-    "title": "LIKE '%n' 조건에 매칭되는 이름의 수로 옳은 것은?",
+    "title": "아래 NAMES 테이블에서 LIKE '%n' 조건에 매칭되는 이름의 수로 옳은 것은?",
     "options": [
       "1명",
       "2명",
@@ -1156,6 +1229,7 @@ export const ROUND_53: QuizQuestion[] = [
     "references": [
       {
         "type": "table",
+        "caption": "NAMES 테이블",
         "headers": [
           "NAME"
         ],
@@ -1170,6 +1244,10 @@ export const ROUND_53: QuizQuestion[] = [
             "Tom"
           ]
         ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT COUNT(*)\nFROM   NAMES\nWHERE  NAME LIKE '%n';"
       }
     ]
   },
@@ -1222,7 +1300,7 @@ export const ROUND_53: QuizQuestion[] = [
     "round": 53,
     "subject": "2과목",
     "number": 46,
-    "title": "아래 세 테이블을 조인한 결과의 행 수로 옳은 것은?",
+    "title": "아래 세 테이블 T1, T2, T3 을 키 컬럼으로 INNER JOIN 한 결과의 행 수로 옳은 것은?",
     "options": [
       "1개",
       "2개",
@@ -1230,21 +1308,60 @@ export const ROUND_53: QuizQuestion[] = [
       "0개"
     ],
     "correctIndex": 0,
-    "explanation": "세 테이블 모두에 값이 존재하는 키는 1 한 건 뿐이다.",
+    "explanation": "세 테이블 모두에 값이 존재하는 키는 1 한 건 뿐이다. T2 의 NULL 과 T3 의 NULL 은 동등 비교 대상이 되지 않는다.",
     "_source": "authored",
     "references": [
       {
         "type": "table",
+        "caption": "T1 테이블",
         "headers": [
-          "T1",
-          "T2",
-          "T3"
+          "KEY"
         ],
         "rows": [
           [
-            "1, 2, 3",
-            "1, 2, NULL",
-            "1, NULL, NULL"
+            "1"
+          ],
+          [
+            "2"
+          ],
+          [
+            "3"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "T2 테이블",
+        "headers": [
+          "KEY"
+        ],
+        "rows": [
+          [
+            "1"
+          ],
+          [
+            "2"
+          ],
+          [
+            "NULL"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "T3 테이블",
+        "headers": [
+          "KEY"
+        ],
+        "rows": [
+          [
+            "1"
+          ],
+          [
+            "NULL"
+          ],
+          [
+            "NULL"
           ]
         ]
       }
@@ -1257,7 +1374,7 @@ export const ROUND_53: QuizQuestion[] = [
     "round": 53,
     "subject": "2과목",
     "number": 47,
-    "title": "A·B 테이블을 UNION 후 중복을 제거한 결과의 행 수는?",
+    "title": "아래 A, B 테이블을 UNION 한 결과(중복 제거) 의 행 수는?",
     "options": [
       "6개",
       "8개",
@@ -1270,16 +1387,49 @@ export const ROUND_53: QuizQuestion[] = [
     "references": [
       {
         "type": "table",
+        "caption": "A 테이블",
         "headers": [
-          "A",
-          "B"
+          "COL"
         ],
         "rows": [
           [
-            "1, 2, 3, 4",
-            "3, 4, 5, 6"
+            "1"
+          ],
+          [
+            "2"
+          ],
+          [
+            "3"
+          ],
+          [
+            "4"
           ]
         ]
+      },
+      {
+        "type": "table",
+        "caption": "B 테이블",
+        "headers": [
+          "COL"
+        ],
+        "rows": [
+          [
+            "3"
+          ],
+          [
+            "4"
+          ],
+          [
+            "5"
+          ],
+          [
+            "6"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT COL FROM A\nUNION\nSELECT COL FROM B;"
       }
     ]
   },
