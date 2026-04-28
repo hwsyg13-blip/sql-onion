@@ -610,13 +610,13 @@ export const ROUND_57: QuizQuestion[] = [
     "number": 23,
     "title": "아래 EMP 테이블에 대한 SQL 의 빈칸에 들어갈 조건으로 가장 적절한 것은?",
     "options": [
-      "ORDER BY ANY",
-      "ORDER BY AVG ANY",
-      "HAVING ALL",
-      "HAVING AVG ALL"
+      "`ORDER BY AVG(SAL) > ANY (SELECT AVG(SAL) FROM EMP GROUP BY DEPTNO)`",
+      "`ORDER BY AVG(SAL) > ALL (SELECT AVG(SAL) FROM EMP GROUP BY DEPTNO)`",
+      "`HAVING AVG(SAL) > ANY (SELECT AVG(SAL) FROM EMP GROUP BY DEPTNO)`",
+      "`HAVING AVG(SAL) > ALL (SELECT AVG(SAL) FROM EMP GROUP BY DEPTNO)`"
     ],
     "correctIndex": 3,
-    "explanation": "\"모든 부서의 평균 급여보다 많이 받는\" 조건은 그룹 단위 필터라 `HAVING` 이 필요하고, \"모든 부서 평균보다 큼\" = `> ALL (각 부서별 AVG)` 이므로 `HAVING AVG SAL > ALL ...` 형태가 된다. ③ HAVING ALL 만으론 불완전, ④ HAVING AVG ALL 이 정답.",
+    "explanation": "\"모든 부서의 평균 급여보다 많이 받는\" 조건은 그룹 단위 필터라 `HAVING` 이 필요하고 (정렬용 ORDER BY 가 아님), \"모든 부서 평균보다 큼\" = `> ALL (각 부서별 AVG)` 이므로 ④ `HAVING AVG(SAL) > ALL (...)` 이 정답이다. ①·② 는 절 자체가 ORDER BY 라 필터 기능이 없고, ③ ANY 는 최소 기준(어떤 하나보다만 크면 됨)이라 \"모든 평균보다 큼\" 의 의미와 다르다.",
     "_source": "authored",
     "references": [
       {
@@ -1431,15 +1431,15 @@ export const ROUND_57: QuizQuestion[] = [
     "round": 57,
     "subject": "2과목",
     "number": 45,
-    "title": "아래 결과가 UNPIVOT 을 수행한 것으로 가장 적절한 선지는?",
+    "title": "아래 매출 테이블에 UNPIVOT 을 수행한 결과로 가장 적절한 것은?",
     "options": [
-      "모든 값이 채워진 4행 형태의 표",
-      "특정 컬럼이 NULL 인 표",
-      "다른 특정 컬럼이 NULL 인 표",
-      "모든 값이 채워져 있지만 금액이 상이한 표"
+      "(서울, 1월, 100), (서울, 2월, 200), (부산, 1월, 300), (부산, 2월, 400) — 모든 값이 채워진 4 행",
+      "(서울, 1월, 100), (서울, 2월, NULL), (부산, 1월, 300), (부산, 2월, NULL) — 매출 일부 NULL",
+      "(서울, NULL, 100), (서울, NULL, 200), (부산, NULL, 300), (부산, NULL, 400) — 월 컬럼 NULL",
+      "(서울, 1월, 50), (서울, 2월, 100), (부산, 1월, 150), (부산, 2월, 200) — 매출 값이 입력과 상이"
     ],
     "correctIndex": 0,
-    "explanation": "UNPIVOT 은 열로 흩어진 값을 행으로 전개하여 각 조합이 온전히 채워진 레코드로 변환한다. 입력 표(2행 × 3컬럼)의 매출값이 행으로 전개되어 결과는 (지점, 월, 매출) 4행으로 모두 채워진 형태이다.",
+    "explanation": "UNPIVOT 은 열로 흩어진 값을 행으로 전개하여 각 조합이 온전히 채워진 레코드로 변환한다. 입력 표(2행 × 1월·2월 컬럼)의 매출값 4 개(100, 200, 300, 400)가 (지점, 월, 매출) 4 행으로 그대로 옮겨진다. NULL 이 끼어들 일이 없고, 매출 값도 입력 그대로다.",
     "_source": "authored",
     "references": [
       {
