@@ -502,20 +502,20 @@ export const ROUND_45: QuizQuestion[] = [
     "round": 45,
     "subject": "2과목",
     "number": 22,
-    "title": "아래 네 SUBSTR 결과 중 다른 것은?",
+    "title": "아래 네 SUBSTR 호출 중 결과가 나머지와 다른 것은?",
     "options": [
-      "'SE'",
-      "'SE'",
-      "빈 문자열 또는 한 글자",
-      "'SE'"
+      "`SUBSTR('DATABASE', 7)` → 'SE'",
+      "`SUBSTR('DATABASE', -2)` → 'SE'",
+      "`SUBSTR('DATABASE', 8, -2)` → NULL/빈 문자열",
+      "`SUBSTR('DATABASE', INSTR('DATABASE','S'), 2)` → 'SE'"
     ],
     "correctIndex": 2,
-    "explanation": "SUBSTR의 세 번째 인자(길이)가 음수이면 유효한 결과가 산출되지 않아 NULL 또는 빈 문자열을 반환한다. 나머지는 모두 'SE'를 반환한다.",
+    "explanation": "각 호출의 결과는 다음과 같다. ① `SUBSTR('DATABASE', 7)` 은 7번째 문자부터 끝까지 → 'SE'. ② `SUBSTR('DATABASE', -2)` 는 끝에서 2번째 문자부터 끝까지 → 'SE'. ③ `SUBSTR('DATABASE', 8, -2)` 는 길이 인자가 음수라 Oracle 에서 빈 문자열(NULL) 을 반환. ④ `INSTR('DATABASE','S')` = 7 이므로 `SUBSTR('DATABASE', 7, 2)` = 'SE'. ①②④ 가 모두 'SE' 인 반면 ③ 만 NULL/빈 문자열로 결과가 다르다.",
     "_source": "authored",
     "references": [
       {
         "type": "sql",
-        "code": "-- ① SELECT SUBSTR('DATABASE', 7)       FROM DUAL;\n-- ② SELECT SUBSTR('DATABASE', -2)      FROM DUAL;\n-- ③ SELECT SUBSTR('DATABASE', 8, -2)   FROM DUAL;\n-- ④ SELECT SUBSTR('DATABASE', INSTR('DATABASE','S'), 2) FROM DUAL;"
+        "code": "-- ① SELECT SUBSTR('DATABASE', 7)       FROM DUAL;  -- 'SE'\n-- ② SELECT SUBSTR('DATABASE', -2)      FROM DUAL;  -- 'SE'\n-- ③ SELECT SUBSTR('DATABASE', 8, -2)   FROM DUAL;  -- NULL/빈 문자열\n-- ④ SELECT SUBSTR('DATABASE', INSTR('DATABASE','S'), 2) FROM DUAL;  -- 'SE'\n\n-- 'DATABASE' 의 1-base 문자 위치:\n--   1 2 3 4 5 6 7 8\n--   D A T A B A S E"
       }
     ]
   },
@@ -636,16 +636,62 @@ export const ROUND_45: QuizQuestion[] = [
     "round": 45,
     "subject": "2과목",
     "number": 26,
-    "title": "아래 네 SQL 중 FULL OUTER JOIN의 결과와 다른 것은?",
+    "title": "아래 두 테이블 A, B 에 대한 네 SQL 중 FULL OUTER JOIN 의 결과와 다른 것은?",
     "options": [
-      "SELECT * FROM A FULL OUTER JOIN B ON A.KEY = B.KEY;",
-      "SELECT * FROM A FULL JOIN B ON A.KEY = B.KEY;",
-      "(A LEFT OUTER JOIN B) UNION (A RIGHT OUTER JOIN B)",
-      "(A LEFT OUTER JOIN B) UNION ALL (A RIGHT OUTER JOIN B)"
+      "`SELECT * FROM A FULL OUTER JOIN B ON A.KEY = B.KEY;`",
+      "`SELECT * FROM A FULL JOIN B ON A.KEY = B.KEY;`",
+      "`(A LEFT OUTER JOIN B) UNION (A RIGHT OUTER JOIN B)`",
+      "`(A LEFT OUTER JOIN B) UNION ALL (A RIGHT OUTER JOIN B)`"
     ],
     "correctIndex": 3,
-    "explanation": "UNION ALL은 중복을 제거하지 않아 교집합 부분이 두 번 반환되므로, 중복을 제거하는 FULL OUTER JOIN과 결과가 다르다.",
-    "_source": "authored"
+    "explanation": "UNION ALL 은 중복을 제거하지 않아 교집합 부분(양쪽에 모두 매칭되는 행) 이 두 번 반환되므로, 중복을 제거하는 FULL OUTER JOIN 과 결과가 다르다. ① FULL OUTER JOIN 과 ② FULL JOIN 은 동의어이며, ③ LEFT UNION RIGHT 는 중복 제거하므로 FULL OUTER JOIN 과 동일.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "caption": "A 테이블",
+        "headers": [
+          "KEY",
+          "VAL_A"
+        ],
+        "rows": [
+          [
+            "1",
+            "AA1"
+          ],
+          [
+            "2",
+            "AA2"
+          ],
+          [
+            "3",
+            "AA3"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "B 테이블",
+        "headers": [
+          "KEY",
+          "VAL_B"
+        ],
+        "rows": [
+          [
+            "2",
+            "BB2"
+          ],
+          [
+            "3",
+            "BB3"
+          ],
+          [
+            "4",
+            "BB4"
+          ]
+        ]
+      }
+    ]
   },
   {
     "id": 10776,
@@ -654,16 +700,70 @@ export const ROUND_45: QuizQuestion[] = [
     "round": 45,
     "subject": "2과목",
     "number": 27,
-    "title": "주문 테이블에서 특정 기간 고객의 주문금액을 구하되, 현재 고객 테이블에 존재하는 고객 데이터만으로 집계하려 한다. 동일 기간의 주문 금액 합계를 구하는 SQL로 가장 적절한 것은?",
+    "title": "아래 고객/주문 테이블에서 특정 기간 고객의 주문금액을 구하되, 현재 고객 테이블에 존재하는 고객 데이터(주문 없는 고객 포함) 만으로 집계하려 한다. 동일 기간의 주문 금액 합계를 구하는 SQL 로 가장 적절한 것은?",
     "options": [
-      "SELECT C.고객ID, SUM(O.금액) FROM 고객 C, 주문 O WHERE O.주문일 BETWEEN :시작 AND :종료 GROUP BY C.고객ID;",
-      "SELECT C.고객ID, SUM(O.금액) FROM 주문 O, 고객 C WHERE C.고객ID = O.고객ID(+) GROUP BY C.고객ID;",
-      "SELECT C.고객ID, (SELECT SUM(금액) FROM 주문 WHERE 고객ID = C.고객ID) FROM 고객 C;",
-      "SELECT C.고객ID, SUM(O.금액) FROM 고객 C LEFT OUTER JOIN 주문 O ON C.고객ID = O.고객ID AND O.주문일 BETWEEN :시작 AND :종료 GROUP BY C.고객ID;"
+      "`SELECT C.고객ID, SUM(O.금액) FROM 고객 C, 주문 O WHERE O.주문일 BETWEEN :시작 AND :종료 GROUP BY C.고객ID;`",
+      "`SELECT C.고객ID, SUM(O.금액) FROM 주문 O, 고객 C WHERE C.고객ID = O.고객ID(+) GROUP BY C.고객ID;`",
+      "`SELECT C.고객ID, (SELECT SUM(금액) FROM 주문 WHERE 고객ID = C.고객ID) FROM 고객 C;`",
+      "`SELECT C.고객ID, SUM(O.금액) FROM 고객 C LEFT OUTER JOIN 주문 O ON C.고객ID = O.고객ID AND O.주문일 BETWEEN :시작 AND :종료 GROUP BY C.고객ID;`"
     ],
     "correctIndex": 3,
-    "explanation": "현재 고객 전체를 기준으로 주문을 결합하되 기간 필터를 ON 절에 두어야 주문이 없는 고객도 누락되지 않고, 기간 제약이 조인 이후 WHERE 필터로 동작해 결과를 왜곡하지 않는다.",
-    "_source": "authored"
+    "explanation": "현재 고객 전체를 기준으로 주문을 결합하되 기간 필터를 ON 절에 두어야 주문이 없는 고객도 누락되지 않고, 기간 제약이 조인 이후 WHERE 필터로 동작해 결과를 왜곡하지 않는다. ① 기간 조건이 WHERE 에 있어 주문 없는 고객은 모두 제외, ② 표준 SQL 이 아닌 Oracle (+) 외부조인이지만 기간 필터 없음, ③ 스칼라 서브쿼리는 기간 필터가 없어 전체 기간을 합산.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "caption": "고객 테이블",
+        "headers": [
+          "고객ID",
+          "이름"
+        ],
+        "rows": [
+          [
+            "C001",
+            "홍길동"
+          ],
+          [
+            "C002",
+            "이순신"
+          ],
+          [
+            "C003",
+            "강감찬"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "주문 테이블",
+        "headers": [
+          "주문ID",
+          "고객ID",
+          "주문일",
+          "금액"
+        ],
+        "rows": [
+          [
+            "O01",
+            "C001",
+            "2025-01-15",
+            "10000"
+          ],
+          [
+            "O02",
+            "C001",
+            "2025-02-10",
+            "5000"
+          ],
+          [
+            "O03",
+            "C002",
+            "2024-12-30",
+            "8000"
+          ]
+        ]
+      }
+    ]
   },
   {
     "id": 10777,
@@ -672,15 +772,15 @@ export const ROUND_45: QuizQuestion[] = [
     "round": 45,
     "subject": "2과목",
     "number": 28,
-    "title": "아래 테이블에 대한 INSERT 구문 수행 시 오류가 발생하지 않는 것은?",
+    "title": "아래 T1 테이블 정의에 대한 INSERT 구문 수행 시 오류가 발생하지 않는 것은?",
     "options": [
-      "INSERT INTO T1 VALUES (NULL, 1, 2, 3);",
-      "INSERT INTO T1 VALUES (1, NULL, 2, 3);",
-      "INSERT INTO T1 VALUES (1, 2, NULL, 3);",
-      "INSERT INTO T1 VALUES (1, 2, 3, NULL);"
+      "`INSERT INTO T1 VALUES (NULL, 1, 2, 3);`",
+      "`INSERT INTO T1 VALUES (1, NULL, 2, 3);`",
+      "`INSERT INTO T1 VALUES (1, 2, NULL, 3);`",
+      "`INSERT INTO T1 VALUES (1, 2, 3, NULL);`"
     ],
     "correctIndex": 2,
-    "explanation": "UNIQUE 제약은 NULL을 허용하므로 C3에 NULL이 입력되어도 오류가 발생하지 않는다. 나머지는 각각 PK/NOT NULL/CHECK 제약에 위배된다.",
+    "explanation": "UNIQUE 제약은 NULL 을 허용하므로 ③ C3 에 NULL 이 입력되어도 오류가 발생하지 않는다. ① C1 PRIMARY KEY 위반, ② C2 NOT NULL 위반, ④ C4 CHECK(C4 IS NOT NULL) 위반.",
     "_source": "authored",
     "references": [
       {
@@ -864,15 +964,15 @@ export const ROUND_45: QuizQuestion[] = [
     "round": 45,
     "subject": "2과목",
     "number": 32,
-    "title": "아래 네 SQL 중 반환 행 수가 1건이 아닌 것은?",
+    "title": "아래 네 SQL 중 반환 행 수가 1건이 아닌 것은? (테이블 T 에는 충분한 행이 존재한다고 가정)",
     "options": [
-      "WHERE ROWNUM = 1",
-      "WHERE ROWNUM < 2",
-      "WHERE ROWNUM <= 2",
-      "WHERE ROWNUM <= 2 - 1"
+      "`SELECT * FROM T WHERE ROWNUM = 1;`",
+      "`SELECT * FROM T WHERE ROWNUM < 2;`",
+      "`SELECT * FROM T WHERE ROWNUM <= 2;`",
+      "`SELECT * FROM T WHERE ROWNUM <= 2 - 1;`"
     ],
     "correctIndex": 2,
-    "explanation": "ROWNUM <= 2는 2건을 반환한다. 나머지는 모두 1건을 반환한다.",
+    "explanation": "Oracle ROWNUM 은 fetch 시점에 1 부터 부여된다. ① ROWNUM = 1 은 첫 행만 반환, ② ROWNUM < 2 도 1 건 (ROWNUM=1), ④ ROWNUM <= 1 도 1 건. 그러나 ③ `ROWNUM <= 2` 는 2 건을 반환하므로 결과가 다르다.",
     "_source": "authored"
   },
   {
@@ -1038,20 +1138,52 @@ export const ROUND_45: QuizQuestion[] = [
     "round": 45,
     "subject": "2과목",
     "number": 36,
-    "title": "아래 네 SQL 중 결과가 다른 것은? (괄호 우선순위 문제)",
+    "title": "아래 SQLD49 테이블에 대한 네 SQL 중 결과가 다른 것은? (괄호 우선순위 문제)",
     "options": [
-      "①",
-      "②",
-      "③",
-      "④"
+      "`SELECT * FROM SQLD49 WHERE V1 = 'A' AND V2 IN ('T1','T2','T3');`",
+      "`SELECT * FROM SQLD49 WHERE V1 = 'A' AND V2 = 'T1' OR V2 = 'T2' OR V2 = 'T3';`",
+      "`SELECT * FROM SQLD49 WHERE (V1, V2) IN (('A','T1'), ('A','T2'), ('A','T3'));`",
+      "`SELECT * FROM SQLD49 WHERE V1 = 'A' AND (V2 = 'T1' OR V2 = 'T2' OR V2 = 'T3');`"
     ],
     "correctIndex": 1,
-    "explanation": "②는 AND가 OR보다 우선순위가 높아 \"(V1='A' AND V2='T1') OR V2='T2' OR V2='T3'\"로 해석되므로 V1이 'A'가 아닌 행도 포함된다. 나머지는 V1='A'인 행만 대상으로 한다.",
+    "explanation": "② 는 AND 가 OR 보다 우선순위가 높아 `(V1='A' AND V2='T1') OR V2='T2' OR V2='T3'` 로 해석되므로 V1 이 'A' 가 아닌 행도 포함된다. 나머지 ①·③·④ 는 모두 V1='A' 인 행만 대상으로 V2 가 T1/T2/T3 인 경우를 조회한다.",
     "_source": "authored",
     "references": [
       {
-        "type": "sql",
-        "code": "-- ① SELECT * FROM SQLD49 WHERE V1 = 'A' AND V2 IN ('T1','T2','T3');\n-- ② SELECT * FROM SQLD49 WHERE V1 = 'A' AND V2 = 'T1' OR V2 = 'T2' OR V2 = 'T3';\n-- ③ SELECT * FROM SQLD49 WHERE (V1, V2) IN (('A','T1'), ('A','T2'), ('A','T3'));\n-- ④ SELECT * FROM SQLD49 WHERE V1 = 'A' AND (V2 = 'T1' OR V2 = 'T2' OR V2 = 'T3');"
+        "type": "table",
+        "caption": "SQLD49 테이블",
+        "headers": [
+          "N1",
+          "V1",
+          "V2"
+        ],
+        "rows": [
+          [
+            "1",
+            "A",
+            "T1"
+          ],
+          [
+            "2",
+            "A",
+            "T2"
+          ],
+          [
+            "3",
+            "B",
+            "T2"
+          ],
+          [
+            "4",
+            "A",
+            "T4"
+          ],
+          [
+            "5",
+            "C",
+            "T3"
+          ]
+        ]
       }
     ]
   },
@@ -1064,10 +1196,10 @@ export const ROUND_45: QuizQuestion[] = [
     "number": 37,
     "title": "수강, 학생, 과목 테이블에서 특정 과목의 학점이 4.0 이상인 학생의 이름을 구하는 SQL로 올바른 것은?",
     "options": [
-      "SELECT 이름 FROM 수강, 학생 WHERE 수강.학번 = 학생.학번 GROUP BY 이름 HAVING MAX(학점) > 4;",
-      "SELECT 이름 FROM 수강, 학생 WHERE 수강.학번 = 학생.학번 GROUP BY 학번, 이름 HAVING MAX(학점) > 4;",
-      "SELECT 이름 FROM 수강, 학생 WHERE 수강.학번 = 학생.학번 AND 학점 > 4;",
-      "SELECT 이름 FROM 수강 GROUP BY 학번 HAVING MAX(학점) > 4;"
+      "`SELECT 이름 FROM 수강, 학생 WHERE 수강.학번 = 학생.학번 GROUP BY 이름 HAVING MAX(학점) > 4;`",
+      "`SELECT 이름 FROM 수강, 학생 WHERE 수강.학번 = 학생.학번 GROUP BY 학번, 이름 HAVING MAX(학점) > 4;`",
+      "`SELECT 이름 FROM 수강, 학생 WHERE 수강.학번 = 학생.학번 AND 학점 > 4;`",
+      "`SELECT 이름 FROM 수강 GROUP BY 학번 HAVING MAX(학점) > 4;`"
     ],
     "correctIndex": 1,
     "explanation": "이름이 중복될 수 있어 그룹 기준으로 이름만 사용하면 유일성이 보장되지 않는다. 학번과 이름을 함께 GROUP BY에 포함해야 학생 단위로 유일하게 구분된다.",
@@ -1424,7 +1556,7 @@ export const ROUND_45: QuizQuestion[] = [
     "round": 45,
     "subject": "2과목",
     "number": 47,
-    "title": "아래 SQL의 결과에서 빈칸 ㄱ, ㄴ에 들어갈 값으로 옳은 것은? (총 8개 행에 대한 NTILE(3))",
+    "title": "아래 8개 행 데이터에 대한 NTILE(3) 그룹별 건수 결과의 빈칸 (ㄱ), (ㄴ) 으로 옳은 것은?",
     "options": [
       "ㄱ 3, ㄴ 2",
       "ㄱ 2, ㄴ 3",
@@ -1432,27 +1564,65 @@ export const ROUND_45: QuizQuestion[] = [
       "ㄱ 2, ㄴ 2"
     ],
     "correctIndex": 0,
-    "explanation": "NTILE(3)은 전체 8개 행을 3개의 그룹으로 최대한 균등하게 분할한다. 8 = 3 + 3 + 2 이므로 각 버킷에 3개, 3개, 2개씩 배정되어 마지막 그룹은 2가 된다.",
+    "explanation": "NTILE(3) 은 전체 8 개 행을 3 개의 그룹으로 최대한 균등하게 분할한다. 8 = 3 + 3 + 2 이므로 첫 번째 그룹에 3 개, 두 번째 그룹에 3 개, 세 번째 그룹에 2 개씩 배정된다. 표의 행 라벨이 'A=첫그룹', 'B=두번째그룹(고정 3)', 'C=세번째그룹' 일 때 (ㄱ)=첫그룹 건수=3, (ㄴ)=세번째그룹 건수=2 가 된다.",
     "_source": "authored",
     "references": [
       {
         "type": "table",
+        "caption": "원본 T 테이블 (총 8행)",
         "headers": [
-          "COL1",
-          "COL2"
+          "VAL"
         ],
         "rows": [
           [
-            "A",
-            "( ㄱ )"
+            "10"
           ],
           [
-            "B",
+            "20"
+          ],
+          [
+            "30"
+          ],
+          [
+            "40"
+          ],
+          [
+            "50"
+          ],
+          [
+            "60"
+          ],
+          [
+            "70"
+          ],
+          [
+            "80"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT NTILE(3) OVER (ORDER BY VAL) AS GRP,\n       COUNT(*) AS CNT\nFROM   T\nGROUP BY NTILE(3) OVER (ORDER BY VAL);"
+      },
+      {
+        "type": "table",
+        "caption": "그룹별 건수 결과 (8 = 3+3+2)",
+        "headers": [
+          "그룹라벨",
+          "건수"
+        ],
+        "rows": [
+          [
+            "A (첫 그룹)",
+            "(ㄱ)"
+          ],
+          [
+            "B (두 번째 그룹)",
             "3"
           ],
           [
-            "C",
-            "( ㄴ )"
+            "C (세 번째 그룹)",
+            "(ㄴ)"
           ]
         ]
       }
