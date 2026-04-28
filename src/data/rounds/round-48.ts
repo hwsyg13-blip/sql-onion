@@ -988,7 +988,7 @@ export const ROUND_48: QuizQuestion[] = [
     "round": 48,
     "subject": "2과목",
     "number": 38,
-    "title": "아래 LIKE 조건의 결과로 옳은 것은?",
+    "title": "아래 T 테이블에 대한 LIKE 조건 SQL 의 결과로 옳은 것은?",
     "options": [
       "2건",
       "4건",
@@ -996,15 +996,12 @@ export const ROUND_48: QuizQuestion[] = [
       "6건"
     ],
     "correctIndex": 3,
-    "explanation": "ESCAPE '@' 로 '_' 를 리터럴로 해석하여 모든 행이 매칭된다.",
+    "explanation": "`ESCAPE '@'` 옵션으로 `@_` 를 리터럴 밑줄(`_`) 로 해석한다. 따라서 패턴 `'%@_%'` 는 \"문자열 안에 `_` 를 포함하는 행\" 을 의미하며, T 테이블의 모든 6 행이 `_` 를 포함하므로 6 건이 매칭된다.",
     "_source": "authored",
     "references": [
       {
-        "type": "sql",
-        "code": "WHERE COL LIKE '%@_%' ESCAPE '@';"
-      },
-      {
         "type": "table",
+        "caption": "T 테이블",
         "headers": [
           "COL"
         ],
@@ -1028,6 +1025,10 @@ export const ROUND_48: QuizQuestion[] = [
             "K_L"
           ]
         ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT COUNT(*)\nFROM   T\nWHERE  COL LIKE '%@_%' ESCAPE '@';"
       }
     ]
   },

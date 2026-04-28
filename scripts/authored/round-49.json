@@ -455,7 +455,7 @@
     {
       "subject": "2과목",
       "number": 21,
-      "title": "ROLLUP 컬럼 순서에 대한 설명으로 옳은 것은?",
+      "title": "아래 SQL 의 ROLLUP 컬럼 순서에 대한 설명으로 옳은 것은?",
       "options": [
         "ROLLUP 에 컬럼 순서는 의미가 없다.",
         "첫 번째 컬럼 기준으로 순차 집계된다.",
@@ -463,11 +463,11 @@
         "ROLLUP 은 한 번의 집계만 수행한다."
       ],
       "correctIndex": 2,
-      "explanation": "ROLLUP 은 좌측부터 점진적으로 집계를 수행하므로 컬럼 순서가 결과에 영향을 미친다.",
+      "explanation": "`ROLLUP(A, B, C)` 은 좌측부터 점진적으로 그룹을 줄여가며 (A, B, C), (A, B), (A), () 네 단계의 소계·총계를 만든다. 따라서 컬럼 순서를 바꾸면 만들어지는 집계 레벨이 달라진다.",
       "references": [
         {
           "type": "sql",
-          "code": "GROUP BY ROLLUP(고객등급, 첫번째컬럼, 세번째컬럼)"
+          "code": "SELECT 고객등급, 첫번째컬럼, 세번째컬럼, SUM(매출)\nFROM   판매\nGROUP BY ROLLUP(고객등급, 첫번째컬럼, 세번째컬럼);"
         }
       ]
     },
