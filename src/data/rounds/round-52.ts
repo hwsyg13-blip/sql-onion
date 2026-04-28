@@ -619,7 +619,8 @@ export const ROUND_52: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT *\nFROM   NAMES\nWHERE  NAME LIKE '__L%';"
+        "caption": "( ) 안에 들어갈 LIKE 패턴 고르기",
+        "code": "SELECT *\nFROM   NAMES\nWHERE  NAME LIKE ( );"
       }
     ]
   },
