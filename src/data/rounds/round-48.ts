@@ -1601,16 +1601,12 @@ export const ROUND_48: QuizQuestion[] = [
       "7"
     ],
     "correctIndex": 1,
-    "explanation": "루트(LEVEL=1) 아래 직속 자식 노드가 3개이므로 LEVEL=2 행은 3건이다.",
+    "explanation": "START WITH 매니저 IS NULL → 루트는 매니저가 NULL 인 A (LEVEL=1). CONNECT BY PRIOR 사원 = 매니저 는 부모 행의 사원이 자식 행의 매니저와 매칭되는 순방향 전개. A 의 자식은 매니저='A' 인 행 → B·C·D 세 명이 LEVEL=2. 그 아래 LEVEL=3 은 B 의 자식 (E, F) + D 의 자식 (G) 으로 3 명이지만 질문은 LEVEL=2 만 묻고 있으므로 정답은 3 건.",
     "_source": "authored",
     "references": [
       {
-        "type": "ascii",
-        "text": "                  [ A ]   ← LEVEL 1 (루트)\n                /  |  \\\n             [B] [C] [D]   ← LEVEL 2 (직속 자식 3개)\n             /\\       \\\n           [E][F]    [G]   ← LEVEL 3"
-      },
-      {
         "type": "table",
-        "caption": "트리 데이터 (사원-매니저 형식)",
+        "caption": "EMP 테이블",
         "headers": [
           "사원",
           "매니저"
