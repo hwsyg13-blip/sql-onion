@@ -1,0 +1,171 @@
+/* ============================================================
+   자동 생성 — exam-day-summary.html 의 head <style> 페이지 특화 CSS.
+   다시 빌드: node scripts/build-exam-day-summary.mjs
+   ============================================================ */
+.day-toc {
+  margin: 0 0 28px; padding: 14px 18px;
+  background: linear-gradient(135deg, var(--point-050), var(--bg-card));
+  border: 1px solid var(--point-100); border-radius: 12px;
+  display: flex; gap: 8px; flex-wrap: wrap; align-items: center;
+  position: sticky; top: calc(var(--header-h) + 8px); z-index: 5;
+  box-shadow: var(--shadow-sm);
+}
+.day-toc .toc-label { font-size: 11px; font-weight: 800; color: var(--point-600); letter-spacing: 0.06em; margin-right: 4px; }
+.day-toc a {
+  font-size: 12.5px; font-weight: 700; color: var(--fg-2);
+  text-decoration: none; padding: 6px 12px;
+  background: var(--bg-card); border: 1px solid var(--border-subtle);
+  border-radius: 999px;
+  transition: background var(--duration-base), color var(--duration-base), border-color var(--duration-base);
+}
+.day-toc a:hover { background: var(--point-100); color: var(--point-600); border-color: var(--point-300); }
+
+.day-section { margin: 56px 0 0; padding-top: 36px; border-top: 1px solid var(--border-subtle); scroll-margin-top: calc(var(--header-h) + 80px); }
+.day-section:first-of-type { border-top: 0; padding-top: 0; margin-top: 0; }
+.day-section h2 {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 22px; font-weight: 800; color: var(--fg-1);
+  margin: 0 0 8px; padding: 0; letter-spacing: -0.01em;
+}
+.day-section h2 .num {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 28px; height: 28px; border-radius: 50%;
+  background: var(--point-100); color: var(--point-600);
+  font-size: 13px; font-weight: 900; flex-shrink: 0;
+}
+.day-section .section-lead { font-size: 13.5px; color: var(--fg-3); margin: 0 0 22px; }
+
+.day-section h3.subj-h {
+  font-size: 13px; font-weight: 800; color: var(--point-600);
+  letter-spacing: 0.04em; margin: 32px 0 12px;
+  padding: 6px 12px; display: inline-block;
+  background: var(--point-050); border-radius: 6px;
+  border: 1px solid var(--point-100);
+}
+
+/* 챕터별 카드 — 정리 + 함정 통합 */
+.day-card-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin: 0; }
+.day-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  padding: 16px 18px;
+  display: flex; flex-direction: column; gap: 12px;
+  transition: border-color var(--duration-base), box-shadow var(--duration-base);
+}
+.day-card:hover { border-color: var(--point-300); box-shadow: var(--shadow-sm); }
+
+.day-card .card-head {
+  display: flex; align-items: center; gap: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+.day-card .card-tag {
+  font-size: 11px; font-weight: 800; color: var(--point-600);
+  background: var(--point-100);
+  padding: 3px 9px; border-radius: 6px;
+  letter-spacing: 0.02em; font-family: var(--font-mono);
+  flex-shrink: 0;
+}
+.day-card .card-title {
+  font-size: 14px; font-weight: 800; color: var(--fg-1);
+  letter-spacing: -0.01em;
+}
+
+.day-card .points { margin: 0; padding: 0 0 0 18px; }
+.day-card .points li {
+  font-size: 12.5px; color: var(--fg-2); line-height: 1.6;
+  margin: 3px 0;
+}
+.day-card .points li::marker { color: var(--point-500); font-weight: 700; }
+.day-card .points strong { color: var(--fg-1); font-weight: 800; }
+.day-card .points code {
+  background: var(--bg-code); padding: 1px 5px;
+  border-radius: 4px; font-size: 0.92em; font-family: var(--font-mono);
+}
+
+.day-card .traps {
+  margin-top: 4px; padding: 10px 12px;
+  background: var(--wrong-bg);
+  border-left: 3px solid var(--wrong-fg);
+  border-radius: 6px;
+}
+.day-card .traps .trap-label {
+  font-size: 10.5px; font-weight: 800; color: var(--wrong-fg);
+  letter-spacing: 0.04em; margin-bottom: 6px;
+  text-transform: uppercase;
+}
+.day-card .traps ul { margin: 0; padding: 0 0 0 16px; }
+.day-card .traps li {
+  font-size: 12px; color: var(--fg-1); line-height: 1.55;
+  margin: 3px 0;
+}
+.day-card .traps li::marker { color: var(--wrong-fg); }
+.day-card .traps strong { color: var(--wrong-fg); font-weight: 800; }
+.day-card .traps code {
+  background: var(--bg-card); padding: 1px 5px;
+  border-radius: 4px; font-size: 0.92em; font-family: var(--font-mono);
+}
+
+/* SQL 예시 박스 */
+.day-card .ex-sql {
+  margin-top: 2px; padding: 9px 12px;
+  background: var(--bg-code);
+  border: 1px solid var(--border-subtle);
+  border-radius: 6px;
+}
+.day-card .ex-sql .ex-label {
+  font-size: 10.5px; font-weight: 800; color: var(--point-600);
+  letter-spacing: 0.04em; margin-bottom: 5px;
+  text-transform: uppercase;
+}
+.day-card .ex-sql pre {
+  margin: 0; padding: 0; background: transparent; border: 0;
+  font-family: var(--font-mono);
+  font-size: 11.5px; line-height: 1.55; color: var(--fg-1);
+  white-space: pre-wrap; word-break: break-word;
+  overflow-x: auto;
+}
+.day-card .ex-sql .kw { color: var(--point-600); font-weight: 700; }
+.day-card .ex-sql .cm { color: var(--fg-3); font-style: italic; }
+
+/* 체크리스트 */
+.checklist-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 12px 0 0; }
+.checklist-card {
+  background: linear-gradient(135deg, var(--point-050), var(--bg-card));
+  border: 1px solid var(--point-100); border-radius: 12px;
+  padding: 16px 18px;
+}
+.checklist-card .title {
+  font-size: 13px; font-weight: 800; color: var(--point-600);
+  letter-spacing: 0.02em; margin-bottom: 10px;
+  display: flex; align-items: center; gap: 6px;
+}
+.checklist-card ul { margin: 0; padding-left: 18px; font-size: 12.5px; color: var(--fg-2); line-height: 1.65; }
+.checklist-card li { margin: 4px 0; }
+.checklist-card li::marker { color: var(--point-500); font-weight: 700; }
+.checklist-card strong { color: var(--fg-1); }
+
+.mindset-list { display: grid; grid-template-columns: 1fr; gap: 6px; margin: 12px 0 0; }
+.mindset-item {
+  background: var(--bg-card); border: 1px solid var(--border-subtle);
+  border-left: 3px solid var(--point-500);
+  padding: 10px 14px; border-radius: 6px;
+  font-size: 13px; color: var(--fg-1); line-height: 1.55;
+}
+.mindset-item .star { color: var(--point-500); font-weight: 800; margin-right: 6px; }
+
+.final-msg {
+  margin: 56px 0 16px; padding: 28px 24px;
+  background: linear-gradient(135deg, var(--point-100), var(--point-050));
+  border: 1px solid var(--point-300); border-radius: 14px;
+  text-align: center;
+}
+.final-msg .emoji { font-size: 32px; line-height: 1; margin-bottom: 8px; }
+.final-msg .msg-title { font-size: 18px; font-weight: 800; color: var(--point-600); margin-bottom: 6px; }
+.final-msg .msg-body { font-size: 13.5px; color: var(--fg-2); line-height: 1.6; }
+
+@media (max-width: 900px) {
+  .day-card-grid { grid-template-columns: 1fr; }
+  .checklist-grid { grid-template-columns: 1fr; }
+}
