@@ -1070,7 +1070,14 @@ export const ROUND_47: QuizQuestion[] = [
     ],
     "correctIndex": 2,
     "explanation": "일반적으로 N개의 테이블을 조인하려면 최소 N - 1개의 조인 조건이 필요합니다. A·B·C 세 테이블이라면 조건 두 개면 충분합니다. 따라서 \"조인 조건이 최소 3개 이상이어야 한다\"는 ③번 설명은 잘못되어 정답이 됩니다. 식별자 관계는 부모 키가 자식의 PK 일부가 되며, 이로 인해 자식은 부모 없이 존재할 수 없는 의존 관계가 됩니다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "erd",
+        "caption": "A-B-C 식별자 관계 ERD (1:N 연쇄 — A 의 PK 가 C 까지 순차 전파)",
+        "mermaid": "erDiagram\n    A ||--o{ B : \"갖는다\"\n    B ||--o{ C : \"갖는다\""
+      }
+    ]
   },
   {
     "id": 10689,
