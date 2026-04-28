@@ -328,7 +328,7 @@
     {
       "subject": "2과목",
       "number": 18,
-      "title": "업체 테이블에 p, q, r 데이터가 각각 30, 40, 50 개 존재할 때 아래 두 쿼리의 결과로 옳은 것은?",
+      "title": "아래 업체 테이블에 대한 두 쿼리의 결과로 옳은 것은?",
       "options": [
         "3, 0",
         "3, 30",
@@ -336,8 +336,20 @@
         "3, NULL"
       ],
       "correctIndex": 1,
-      "explanation": "DISTINCT 물품 = 3종이므로 3, 두 번째 쿼리는 NULL 비교가 무시되어 'p' 인 30건만 반환된다.",
+      "explanation": "(1) `COUNT(DISTINCT 물품)` 은 서로 다른 물품 종류의 수. p, q, r 3 종이라 3 반환. (2) `IN ('p', NULL)` 에서 NULL 비교는 UNKNOWN 으로 평가되어 무시되고 `물품 = 'p'` 만 매칭되어 30 건 반환.",
       "references": [
+        {
+          "type": "table",
+          "headers": [
+            "물품",
+            "행 수"
+          ],
+          "rows": [
+            ["p", "30"],
+            ["q", "40"],
+            ["r", "50"]
+          ]
+        },
         {
           "type": "sql",
           "code": "SELECT COUNT(DISTINCT 물품) FROM 업체;\nSELECT COUNT(*) FROM 업체 WHERE 물품 IN ('p', NULL);"

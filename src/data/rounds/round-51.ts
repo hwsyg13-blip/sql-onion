@@ -455,7 +455,7 @@ export const ROUND_51: QuizQuestion[] = [
     "round": 51,
     "subject": "2과목",
     "number": 19,
-    "title": "아래 SQL 의 결과로 옳은 것은?",
+    "title": "아래 TAB1 테이블에 대한 SQL 의 결과로 옳은 것은?",
     "options": [
       "공집합",
       "'X' 한 행",
@@ -463,9 +463,26 @@ export const ROUND_51: QuizQuestion[] = [
       "MAX(COL1) 값"
     ],
     "correctIndex": 0,
-    "explanation": "WHERE 조건을 만족하는 행이 없고 GROUP BY 가 지정되어 있으므로 결과가 공집합이다.",
+    "explanation": "TAB1 의 COL2 값이 모두 9 이하라 `WHERE COL2 > 9` 를 만족하는 행이 없다. `GROUP BY` 가 지정된 SQL 은 그룹이 0 개이면 결과 행도 0 개로 공집합이 된다. `GROUP BY` 가 없었다면 단일 그룹으로 처리되어 `MAX(COL1)` = NULL → NVL 로 'X' 1 행이 나오겠지만, 본 SQL 은 `GROUP BY COL1` 이라 공집합이 정답.",
     "_source": "authored",
     "references": [
+      {
+        "type": "table",
+        "headers": [
+          "COL1",
+          "COL2"
+        ],
+        "rows": [
+          [
+            "A",
+            "5"
+          ],
+          [
+            "B",
+            "7"
+          ]
+        ]
+      },
       {
         "type": "sql",
         "code": "SELECT NVL(MAX(COL1), 'X')\nFROM   TAB1\nWHERE  COL2 > 9\nGROUP BY COL1;"
@@ -659,7 +676,7 @@ export const ROUND_51: QuizQuestion[] = [
     "round": 51,
     "subject": "2과목",
     "number": 26,
-    "title": "아래 INSERT FIRST 수행 후 T1, T2, T3 테이블의 행 수로 옳은 것은?",
+    "title": "아래 TAB1 테이블에 대해 INSERT FIRST 를 수행한 뒤 T1, T2, T3 의 행 수로 옳은 것은?",
     "options": [
       "T1 = 2, T2 = 0, T3 = 1",
       "T1 = 1, T2 = 1, T3 = 1",
@@ -667,12 +684,29 @@ export const ROUND_51: QuizQuestion[] = [
       "T1 = 0, T2 = 1, T3 = 2"
     ],
     "correctIndex": 0,
-    "explanation": "INSERT FIRST 는 조건에 만족하는 첫 번째 WHEN 만 실행되므로 2·4 는 T1 으로, 1 은 ELSE 의 T3 로 입력된다.",
+    "explanation": "`INSERT FIRST` 는 조건을 만족하는 첫 번째 `WHEN` 만 실행한다. C1 = 1: 두 WHEN 모두 불만족 → ELSE T3, C1 = 2: 첫 WHEN 만족 → T1, C1 = 4: 첫 WHEN 만족 → T1 (두 번째 WHEN 도 만족하지만 FIRST 라 무시). 결과: T1 = 2 행, T2 = 0 행, T3 = 1 행.",
     "_source": "authored",
     "references": [
       {
+        "type": "table",
+        "headers": [
+          "TAB1.C1"
+        ],
+        "rows": [
+          [
+            "1"
+          ],
+          [
+            "2"
+          ],
+          [
+            "4"
+          ]
+        ]
+      },
+      {
         "type": "sql",
-        "code": "-- TAB1 데이터: 1, 2, 4\n\nINSERT FIRST\n  WHEN C1 >= 2 THEN INTO T1 VALUES (C1)\n  WHEN C1 >= 4 THEN INTO T2 VALUES (C1)\n  ELSE INTO T3 VALUES (C1)\nSELECT * FROM TAB1;"
+        "code": "INSERT FIRST\n  WHEN C1 >= 2 THEN INTO T1 VALUES (C1)\n  WHEN C1 >= 4 THEN INTO T2 VALUES (C1)\n  ELSE INTO T3 VALUES (C1)\nSELECT * FROM TAB1;"
       }
     ]
   },
@@ -1149,12 +1183,29 @@ export const ROUND_51: QuizQuestion[] = [
       "모든 행에서 26"
     ],
     "correctIndex": 1,
-    "explanation": "윈도우 함수 SUM 의 RANGE BETWEEN 1 PRECEDING AND 1 FOLLOWING 은 정렬 값 ±1 범위에 들어오는 행의 합을 반환한다. 본 데이터에서는 모든 행에서 4·5·6 의 합 15 가 일관되게 나오므로 정답은 ②번이다.",
+    "explanation": "윈도우 함수 `SUM` 의 `RANGE BETWEEN 2 PRECEDING AND 2 FOLLOWING` 은 정렬 값 ±2 범위에 들어오는 행의 합을 반환한다. VAL = (4, 5, 6) 일 때 모든 값이 서로 ±2 범위 안에 있어 모든 행에서 4 + 5 + 6 = 15 가 일관되게 나온다. 정답은 ②번.",
     "_source": "authored",
     "references": [
       {
+        "type": "table",
+        "headers": [
+          "VAL"
+        ],
+        "rows": [
+          [
+            "4"
+          ],
+          [
+            "5"
+          ],
+          [
+            "6"
+          ]
+        ]
+      },
+      {
         "type": "sql",
-        "code": "SELECT SUM(VAL)\nOVER (ORDER BY VAL\n      RANGE BETWEEN 2 PRECEDING AND 2 FOLLOWING)\nFROM T; -- VAL 데이터: 4, 5, 6"
+        "code": "SELECT SUM(VAL)\nOVER (ORDER BY VAL\n      RANGE BETWEEN 2 PRECEDING AND 2 FOLLOWING)\nFROM T;"
       }
     ]
   },

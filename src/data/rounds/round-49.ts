@@ -1085,7 +1085,7 @@ export const ROUND_49: QuizQuestion[] = [
     "round": 49,
     "subject": "2과목",
     "number": 35,
-    "title": "아래 SQL 의 AVG 결과에 대한 설명으로 옳은 것은?",
+    "title": "아래 T 테이블에 대한 SQL 의 AVG 결과에 대한 설명으로 옳은 것은?",
     "options": [
       "AVG1 과 AVG2 가 같다.",
       "AVG2 와 AVG3 가 같다.",
@@ -1093,9 +1093,29 @@ export const ROUND_49: QuizQuestion[] = [
       "세 값 모두 다르다."
     ],
     "correctIndex": 1,
-    "explanation": "AVG 함수는 NULL 을 제외하고 평균을 계산하므로 COUNT(C2) 로 나눈 값과 동일하다.",
+    "explanation": "C2 = (10, NULL, 20, 30) 일 때 `SUM(C2)` = 60, `COUNT(*)` = 4, `COUNT(C2)` = 3 (NULL 제외). AVG1 = 60/4 = 15, AVG2 = 60/3 = 20, AVG3 = `AVG(C2)` = 20 (AVG 는 NULL 자동 제외). 따라서 AVG2 와 AVG3 가 같다.",
     "_source": "authored",
     "references": [
+      {
+        "type": "table",
+        "headers": [
+          "C2"
+        ],
+        "rows": [
+          [
+            "10"
+          ],
+          [
+            "NULL"
+          ],
+          [
+            "20"
+          ],
+          [
+            "30"
+          ]
+        ]
+      },
       {
         "type": "sql",
         "code": "SELECT SUM(C2)/COUNT(*)    AS AVG1,\n       SUM(C2)/COUNT(C2)   AS AVG2,\n       AVG(C2)             AS AVG3\nFROM   T;"

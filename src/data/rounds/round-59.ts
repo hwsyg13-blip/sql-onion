@@ -589,12 +589,12 @@ export const ROUND_59: QuizQuestion[] = [
     "title": "전화번호 데이터에서 '010'으로 시작하는 번호만 필터링하려 한다. 정규표현식 패턴으로 올바른 것은?",
     "options": [
       "`[^010]`",
-      "`'^010'`",
+      "`^010`",
       "`$010`",
       "`02`"
     ],
     "correctIndex": 1,
-    "explanation": "정규표현식에서 `^`는 문자열의 시작 위치를 나타낸다. `[^010]`은 문자 클래스 부정이므로 전혀 다른 의미이다.",
+    "explanation": "정규표현식에서 `^` 는 문자열의 시작 위치, `$` 는 끝 위치를 의미한다. ① `[^010]` 은 문자 클래스 부정(0/1 이 아닌 한 글자), ③ `$010` 은 `$` 가 잘못된 자리에 있어 의도와 다른 패턴, ④ `02` 는 02 가 포함된 모든 문자열을 의미한다. `010` 으로 시작하는 패턴은 ② `^010` 이 정답.",
     "_source": "authored",
     "references": [
       {
@@ -1078,7 +1078,7 @@ export const ROUND_59: QuizQuestion[] = [
     "round": 59,
     "subject": "2과목",
     "number": 39,
-    "title": "아래 계층형 질의에서 START WITH 11, PRIOR가 역방향으로 지정된 경우 트리 탐색 결과로 옳은 것은?",
+    "title": "아래 CATEGORY 테이블에 대한 계층형 질의의 트리 탐색 결과로 옳은 것은?",
     "options": [
       "2부터 시작",
       "역방향 2부터 시작",
@@ -1086,12 +1086,37 @@ export const ROUND_59: QuizQuestion[] = [
       "역방향 11부터 시작"
     ],
     "correctIndex": 2,
-    "explanation": "START WITH 11로 시작하며 PRIOR category_id = 상위카테고리 조건은 부모에서 자식으로 내려가는 정방향 탐색이므로 11에서 시작해 22 방향으로 확장한다.",
+    "explanation": "`START WITH category_id = 11` 으로 11 부터 탐색을 시작한다. `CONNECT BY PRIOR category_id = 상위카테고리` 는 \"이전 행의 category_id 가 다음 행의 상위카테고리\" 인 경우 연결 — 즉 부모 → 자식 정방향 탐색이라 11 → 22 로 확장된다.",
     "_source": "authored",
     "references": [
       {
+        "type": "table",
+        "headers": [
+          "category_id",
+          "상위카테고리"
+        ],
+        "rows": [
+          [
+            "1",
+            "NULL"
+          ],
+          [
+            "2",
+            "1"
+          ],
+          [
+            "11",
+            "2"
+          ],
+          [
+            "22",
+            "11"
+          ]
+        ]
+      },
+      {
         "type": "sql",
-        "code": "-- [CATEGORY 테이블]\n-- category_id  상위카테고리\n--     1          (NULL)\n--     2          1\n--    11          2\n--    22          11\nSELECT *\nFROM   CATEGORY\nSTART WITH category_id = 11\nCONNECT BY PRIOR category_id = 상위카테고리;"
+        "code": "SELECT *\nFROM   CATEGORY\nSTART WITH category_id = 11\nCONNECT BY PRIOR category_id = 상위카테고리;"
       }
     ]
   },

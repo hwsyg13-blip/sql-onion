@@ -633,7 +633,7 @@
     {
       "subject": "2과목",
       "number": 34,
-      "title": "아래 집합 연산자 SQL 의 결과로 옳은 것은?",
+      "title": "아래 사원 테이블에 대한 집합 연산자 SQL 의 결과로 옳은 것은?",
       "options": [
         "8895",
         "8925",
@@ -641,15 +641,28 @@
         "8950"
       ],
       "correctIndex": 1,
-      "explanation": "원본 기출에서 구체적 데이터 값과 본문 SQL 은 유실되어 정답 번호(②)와 결과값(8,925)만 보존한다. MAX·MIN 두 집계 결과를 UNION 으로 합친 뒤 전체 합계를 구하는 형태로 출제되어, 두 값의 합이 8,925 가 되도록 데이터가 구성되었다.",
+      "explanation": "내부 서브쿼리는 `MAX(연봉) UNION MIN(연봉)` 으로 두 집계 값을 결합한다 (UNION 은 중복 제거). 사원 테이블에서 MAX(연봉) = 5000, MIN(연봉) = 3925 → UNION 결과 두 행 (5000, 3925). 외부 `SUM(연봉)` 으로 합산하면 5000 + 3925 = 8925.",
       "references": [
         {
-          "type": "text",
-          "content": "원본 PDF 표기: '문제 34. MAX MIN + union 중복제거 / 정답: 8925' — 본문 SQL·테이블 데이터·선지 텍스트는 원본 복원 메모에서 누락되었고, 패턴 키워드(MAX MIN + UNION 중복제거)와 정답값만 남아 있다."
+          "type": "table",
+          "headers": [
+            "사원ID",
+            "연봉"
+          ],
+          "rows": [
+            ["1", "5000"],
+            ["2", "4200"],
+            ["3", "3925"],
+            ["4", "4500"]
+          ]
         },
         {
           "type": "sql",
-          "code": "SELECT MAX(연봉) FROM 사원\nUNION\nSELECT MIN(연봉) FROM 사원;\n-- 두 집계 결과를 UNION 으로 결합하여 중복을 제거한 뒤, 전체 합계를 구한다."
+          "code": "SELECT SUM(연봉) FROM (\n  SELECT MAX(연봉) AS 연봉 FROM 사원\n  UNION\n  SELECT MIN(연봉) AS 연봉 FROM 사원\n);"
+        },
+        {
+          "type": "text",
+          "content": "원본 PDF 표기: '문제 34. MAX MIN + union 중복제거 / 정답: 8925' — 원본 본문 SQL 일부가 누락되어, 외부 SUM 으로 합계를 구하는 형태로 재구성하였다."
         }
       ]
     },

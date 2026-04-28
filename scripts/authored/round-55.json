@@ -229,7 +229,7 @@
     {
       "subject": "2과목",
       "number": 14,
-      "title": "아래 SQL 의 결과로 옳은 것은?",
+      "title": "아래 TAB1 테이블에 대한 SQL 의 결과로 옳은 것은?",
       "options": [
         "3",
         "6",
@@ -237,11 +237,24 @@
         "8"
       ],
       "correctIndex": 1,
-      "explanation": "ROLLUP(COL1), COL1 은 GROUP BY COL1 UNION ALL GROUP BY COL1 과 동일하므로 A·B·C 각 3건씩 총 6건이 산출된다.",
+      "explanation": "`GROUP BY ROLLUP(COL1), COL1` 은 `GROUP BY COL1 UNION ALL GROUP BY COL1` 과 동일하다 (ROLLUP 의 소계가 COL1 별 그룹과 결합됨). 그룹 = {A, B, C} 3 개 × 2 회 = 6 행이 산출되고 외부 `COUNT(*)` 가 6 을 반환한다.",
       "references": [
         {
+          "type": "table",
+          "headers": [
+            "COL1",
+            "COL2"
+          ],
+          "rows": [
+            ["A", "100"],
+            ["B", "200"],
+            ["C", "300"],
+            ["C", "400"]
+          ]
+        },
+        {
           "type": "sql",
-          "code": "INSERT INTO TAB1 VALUES ('A', 100);\nINSERT INTO TAB1 VALUES ('B', 200);\nINSERT INTO TAB1 VALUES ('C', 300);\nINSERT INTO TAB1 VALUES ('C', 400);\n\nSELECT COUNT(*)\nFROM (\n  SELECT COL1, SUM(COL2)\n  FROM   TAB1\n  GROUP BY ROLLUP(COL1), COL1\n)\nWHERE 1 = 1;"
+          "code": "SELECT COUNT(*)\nFROM (\n  SELECT COL1, SUM(COL2)\n  FROM   TAB1\n  GROUP BY ROLLUP(COL1), COL1\n);"
         }
       ]
     },
@@ -386,7 +399,7 @@
     {
       "subject": "2과목",
       "number": 21,
-      "title": "아래 SQL 의 결과 행 수는?",
+      "title": "아래 네 테이블에 대한 SQL 의 결과 행 수는?",
       "options": [
         "1 건",
         "3 건",
@@ -394,8 +407,21 @@
         "매칭되지 않는 모든 T1 행"
       ],
       "correctIndex": 0,
-      "explanation": "마지막 INNER JOIN 이 이전까지의 OUTER JOIN 결과 중 T4 와 매칭되는 행만 남기므로 최종 1 건이 반환된다.",
+      "explanation": "마지막 `INNER JOIN T4` 가 이전까지의 OUTER JOIN 결과 중 T4 와 매칭되는 행만 남긴다. 네 테이블 공통 ID 는 1 한 건이라 최종 1 행이 반환된다.",
       "references": [
+        {
+          "type": "table",
+          "headers": [
+            "테이블",
+            "ID 값"
+          ],
+          "rows": [
+            ["T1", "1, 2, 3"],
+            ["T2", "1, 2"],
+            ["T3", "1, 2"],
+            ["T4", "1"]
+          ]
+        },
         {
           "type": "sql",
           "code": "SELECT COUNT(*)\nFROM   T1\nLEFT  OUTER JOIN T2 ON T1.ID = T2.ID\nLEFT  OUTER JOIN T3 ON T2.ID = T3.ID\nINNER JOIN T4 ON T3.ID = T4.ID;"
@@ -777,7 +803,7 @@
     {
       "subject": "2과목",
       "number": 42,
-      "title": "아래 SQL 의 결과로 옳은 것은?",
+      "title": "아래 T 테이블에 대한 세 SQL 의 결과로 옳은 것은?",
       "options": [
         "0, 0, 0",
         "0, ERROR, NULL",
@@ -785,11 +811,23 @@
         "0, NULL, ERROR"
       ],
       "correctIndex": 1,
-      "explanation": "(1) 은 0/300=0, (2) 는 0 으로 나누기 오류(ORA-01476), (3) 은 NULL 연산 결과로 NULL 이 반환된다.",
+      "explanation": "(1) `0 / 300` = 0. (2) `300 / 0` 은 0 으로 나누기 오류 ORA-01476 발생. (3) `100 / NULL` 은 NULL 연산 결과로 NULL 반환.",
       "references": [
         {
+          "type": "table",
+          "headers": [
+            "COL1",
+            "COL2"
+          ],
+          "rows": [
+            ["0", "300"],
+            ["300", "0"],
+            ["100", "NULL"]
+          ]
+        },
+        {
           "type": "sql",
-          "code": "-- (1) SELECT COL1/COL2 FROM T WHERE COL1=0   AND COL2=300;\n-- (2) SELECT COL1/COL2 FROM T WHERE COL1=300 AND COL2=0;\n-- (3) SELECT COL1/COL2 FROM T WHERE COL1=100 AND COL2 IS NULL;"
+          "code": "-- (1) SELECT COL1/COL2 FROM T WHERE COL1 = 0   AND COL2 = 300;\n-- (2) SELECT COL1/COL2 FROM T WHERE COL1 = 300 AND COL2 = 0;\n-- (3) SELECT COL1/COL2 FROM T WHERE COL1 = 100 AND COL2 IS NULL;"
         }
       ]
     },

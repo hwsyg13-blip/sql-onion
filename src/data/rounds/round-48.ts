@@ -304,15 +304,15 @@ export const ROUND_48: QuizQuestion[] = [
     "round": 48,
     "subject": "2과목",
     "number": 14,
-    "title": "아래 SQL 의 결과로 가장 적절한 것은?",
+    "title": "아래 사원 테이블에 대한 SQL 의 결과로 가장 적절한 것은?",
     "options": [
-      "3건 반환",
-      "3건 반환",
+      "3건 반환 (부서별 최고 연봉자: 강감찬, 김유신, 변사또)",
+      "전체 사원 7건 반환",
       "2건 반환",
-      "1건 반환"
+      "1건 반환 (전체 최고 연봉자만)"
     ],
     "correctIndex": 0,
-    "explanation": "각 부서별 최고 연봉 사원이 부서 100=강감찬(3000), 200=김유신(4500), 300=변사또(4500)로 산출된다.",
+    "explanation": "인라인 뷰 X 가 `MAX(연봉) OVER(PARTITION BY 부서ID)` 로 각 사원에게 자기 부서의 최고 연봉을 부여한 뒤, 외부에서 `X.최고연봉 = Y.연봉` 으로 그 값과 같은 사원만 남긴다. 부서 100 = 강감찬(3000), 부서 200 = 김유신(4500), 부서 300 = 변사또(4500) 로 총 3 건이 반환된다.",
     "_source": "authored",
     "references": [
       {
@@ -1132,16 +1132,43 @@ export const ROUND_48: QuizQuestion[] = [
     "round": 48,
     "subject": "2과목",
     "number": 44,
-    "title": "아래 집계 결과 4x2 표 중 NULL 이 포함되는 경우는?",
+    "title": "아래 표 T 에 대한 집계 함수 결과에 NULL 이 포함되는 경우로 옳은 것은?",
     "options": [
-      "COUNT(*) = 5, MIN(COL) = 1, MAX(COL) = 'A', SUM(COL) = 15 — 모든 결과가 정상 값으로 반환된다.",
-      "집계 함수 결과에 NULL 포함",
-      "MIN, MAX, SUM 등 모든 집계 함수 결과가 NULL 로 반환된다.",
-      "데이터 타입 불일치로 ORA-01722 등 오류가 발생한다."
+      "`COUNT(*)`, `COUNT(COL)`, `SUM(COL)` — 모든 결과가 정상 값",
+      "`AVG(COL)`, `SUM(COL)` 등 NULL 행만 있는 컬럼의 집계",
+      "모든 집계 함수 결과가 NULL",
+      "데이터 타입 불일치로 ORA-01722 오류 발생"
     ],
     "correctIndex": 1,
-    "explanation": "집계 함수(SUM·AVG·MIN·MAX 등)는 일반적으로 NULL을 자동으로 제외하지만, 모든 입력 행이 NULL이거나 결과 집합이 비어 있는 경우에는 결과 자체가 NULL이 됩니다. ① 정상 결과(NULL 미포함)는 본 문항 의도와 반대, ③ 모든 결과가 NULL은 비현실적, ④ 오류 발생은 집계 함수의 정상 동작과 무관하므로 ②번 '집계 함수 결과에 NULL 포함'이 옳습니다. 본 문항은 원본 기출에서 표 데이터가 일부 유실된 메타 형태로 정답 표기를 보존하였습니다.",
-    "_source": "authored"
+    "explanation": "집계 함수(SUM·AVG·MIN·MAX) 는 NULL 을 자동으로 제외하고 계산하지만, 컬럼의 모든 값이 NULL 이거나 결과 집합이 비어있으면 결과 자체가 NULL 이 된다. 표 T 에서 COL_NULL 처럼 모든 값이 NULL 인 컬럼에 `SUM`/`AVG` 등을 적용하면 NULL 이 반환된다. ① `COUNT(*)` 는 NULL 이어도 행을 세고 `COUNT(COL)` 은 NULL 제외 후 0 을 반환하므로 NULL 아님. ③ 은 비현실적, ④ 는 무관.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "headers": [
+          "ID",
+          "COL",
+          "COL_NULL"
+        ],
+        "rows": [
+          [
+            "1",
+            "10",
+            "NULL"
+          ],
+          [
+            "2",
+            "20",
+            "NULL"
+          ],
+          [
+            "3",
+            "NULL",
+            "NULL"
+          ]
+        ]
+      }
+    ]
   },
   {
     "id": 10644,

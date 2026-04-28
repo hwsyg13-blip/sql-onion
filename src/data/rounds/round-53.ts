@@ -872,16 +872,78 @@ export const ROUND_53: QuizQuestion[] = [
     "round": 53,
     "subject": "2과목",
     "number": 36,
-    "title": "SAL 상위 5순위 사원을 조회하는 SQL 로 옳은 것은?",
+    "title": "아래 EMP 테이블에서 SAL 상위 5순위 사원을 조회하는 SQL 로 옳은 것은?",
     "options": [
-      "ROWNUM <= 5 를 직접 WHERE 절에 사용",
-      "RANK OVER 없이 DISTINCT SAL 사용",
-      "ORDER BY SAL DESC 한 뒤 인라인 뷰로 WHERE ROWNUM <= 5 사용",
-      "FETCH FIRST 5 WITHOUT ORDER"
+      "`SELECT * FROM EMP WHERE ROWNUM <= 5 ORDER BY SAL DESC;`",
+      "`SELECT DISTINCT SAL FROM EMP ORDER BY SAL DESC;`",
+      "`SELECT * FROM (SELECT * FROM EMP ORDER BY SAL DESC) WHERE ROWNUM <= 5;`",
+      "`SELECT * FROM EMP FETCH FIRST 5 ROWS ONLY;`"
     ],
     "correctIndex": 2,
-    "explanation": "ORDER BY SAL DESC 를 인라인 뷰로 먼저 수행한 뒤 외부 쿼리에서 ROWNUM <= 5 를 적용해야 정렬된 상위 5건이 보장된다.",
-    "_source": "authored"
+    "explanation": "Oracle 의 `ROWNUM` 은 `ORDER BY` 가 적용되기 전에 행에 1 부터 부여된다. ① 처럼 `WHERE ROWNUM <= 5` 와 `ORDER BY` 를 한 SELECT 안에 두면 정렬되지 않은 임의의 5 건이 잡힌 뒤 정렬되어 \"상위 5 건\" 이 보장되지 않는다. ② `DISTINCT` 는 중복 제거일 뿐 행 수를 5 로 제한하지 않는다. ④ 는 `ORDER BY` 가 없어 어떤 5 건이 나올지 보장되지 않는다. 정답은 인라인 뷰에서 먼저 정렬한 뒤 외부 쿼리에서 `ROWNUM <= 5` 를 적용하는 ③ 번 패턴이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "headers": [
+          "EMPNO",
+          "ENAME",
+          "SAL"
+        ],
+        "rows": [
+          [
+            "7839",
+            "KING",
+            "5000"
+          ],
+          [
+            "7902",
+            "FORD",
+            "3000"
+          ],
+          [
+            "7788",
+            "SCOTT",
+            "3000"
+          ],
+          [
+            "7566",
+            "JONES",
+            "2975"
+          ],
+          [
+            "7698",
+            "BLAKE",
+            "2850"
+          ],
+          [
+            "7782",
+            "CLARK",
+            "2450"
+          ],
+          [
+            "7499",
+            "ALLEN",
+            "1600"
+          ],
+          [
+            "7521",
+            "WARD",
+            "1250"
+          ],
+          [
+            "7654",
+            "MARTIN",
+            "1250"
+          ],
+          [
+            "7934",
+            "MILLER",
+            "1300"
+          ]
+        ]
+      }
+    ]
   },
   {
     "id": 10386,
@@ -893,12 +955,12 @@ export const ROUND_53: QuizQuestion[] = [
     "title": "UNPIVOT 절 사용 시 열 이름의 순서에 대한 설명 중 옳은 것은?",
     "options": [
       "AMOUNT3, AMOUNT2, AMOUNT1 순으로 UNPIVOT 해도 행 배치는 동일하다.",
-      "PIVOT 의 역순으로 입력하면 오류가 발생한다.",
+      "UNPIVOT 시 입력 열의 순서를 바꾸면 결과 행 수가 달라진다.",
       "UNPIVOT 은 NULL 행을 항상 유지한다.",
       "UNPIVOT 은 반드시 세 개의 열을 대상으로 한다."
     ],
     "correctIndex": 0,
-    "explanation": "UNPIVOT 의 열 나열 순서는 결과 행의 순서에만 영향을 주며 행 자체의 배치(컬럼별 매핑)는 동일하게 유지된다.",
+    "explanation": "UNPIVOT 의 열 나열 순서는 결과 행의 순서에만 영향을 줄 뿐 행 자체의 배치(컬럼별 매핑)는 동일하게 유지된다. ② 입력 열 순서를 바꿔도 결과 행 수는 같다. ③ UNPIVOT 은 기본적으로 NULL 행을 제외하며 `INCLUDE NULLS` 옵션을 줄 때만 유지한다. ④ UNPIVOT 의 대상 열 수는 두 개 이상이면 충분하다.",
     "_source": "authored"
   },
   {
@@ -994,12 +1056,29 @@ export const ROUND_53: QuizQuestion[] = [
       "오류"
     ],
     "correctIndex": 0,
-    "explanation": "MIN 은 10, MAX(TO_CHAR) 는 문자 비교 결과 90(문자열) 이 되어 묵시적 변환 시 10 + 90 = 100 이 된다.",
+    "explanation": "T.COL1 = (10, 50, 90). `MIN(COL1)` = 10 (숫자), `MAX(TO_CHAR(COL1))` = '90' (문자 비교 기준 가장 큰 문자열). `숫자 + 문자열` 은 묵시적 형변환으로 10 + 90 = 100 이 된다.",
     "_source": "authored",
     "references": [
       {
+        "type": "table",
+        "headers": [
+          "COL1"
+        ],
+        "rows": [
+          [
+            "10"
+          ],
+          [
+            "50"
+          ],
+          [
+            "90"
+          ]
+        ]
+      },
+      {
         "type": "sql",
-        "code": "SELECT MIN(COL1) + MAX(TO_CHAR(COL1))\nFROM   T;\n-- COL1 값: 10, 50, 90"
+        "code": "SELECT MIN(COL1) + MAX(TO_CHAR(COL1))\nFROM   T;"
       }
     ]
   },
