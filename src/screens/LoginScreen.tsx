@@ -171,6 +171,35 @@ export const TrustRow = () => (
 export const LoginScreen = ({onNavigate, onLogin, layout = "centered"}: any) => {
   const [picker, setPicker] = React.useState(false);
   const [loading, setLoading] = React.useState(null); // null | "google" | "kakao" | "naver"
+  const [loginError, setLoginError] = React.useState<string | null>(null);
+
+  // Google OAuth 실패 공통 핸들러 — alert() 대신 inline 에러 배너로 표시.
+  const handleGoogleError = (err: any) => {
+    console.error('[login] google sign-in failed', err);
+    setLoading(null);
+    setLoginError(`로그인에 실패했어요: ${err?.message || '알 수 없는 오류'}`);
+  };
+  const startGoogleSignIn = () => {
+    setLoginError(null);
+    setLoading('google');
+    signInWithGoogle().catch(handleGoogleError);
+  };
+
+  const ErrorBanner = () => loginError ? (
+    <div role="alert" style={{
+      padding: '10px 14px', background: 'var(--wrong-bg)', color: 'var(--wrong-fg)',
+      border: '1px solid var(--wrong-border, var(--wrong-bg))', borderRadius: 10,
+      fontSize: 13, fontWeight: 600, marginBottom: 12, display: 'flex',
+      gap: 8, alignItems: 'flex-start',
+    }}>
+      <span aria-hidden style={{flexShrink: 0}}>!</span>
+      <span style={{flex: 1, lineHeight: 1.55}}>{loginError}</span>
+      <button onClick={() => setLoginError(null)} aria-label="에러 닫기" style={{
+        background: 'none', border: 0, cursor: 'pointer', color: 'inherit',
+        fontSize: 16, lineHeight: 1, padding: 0,
+      }}>×</button>
+    </div>
+  ) : null;
 
   const finishLogin = (user) => {
     setLoading(user.provider);
@@ -238,8 +267,9 @@ export const LoginScreen = ({onNavigate, onLogin, layout = "centered"}: any) => 
               로그인하고 내 학습 기록을 저장하세요
             </p>
           </div>
+          <ErrorBanner />
           <AuthBody
-            onPicker={() => { setLoading("google"); signInWithGoogle().catch(err => { console.error(err); setLoading(null); alert("로그인 실패: " + (err?.message || "알 수 없는 오류")); }); }}
+            onPicker={startGoogleSignIn}
             onGuest={guest}
             onKakao={loginKakao}
             onNaver={loginNaver}
@@ -289,8 +319,9 @@ export const LoginScreen = ({onNavigate, onLogin, layout = "centered"}: any) => 
           <div style={{width:"100%", maxWidth:380}}>
             <h2 style={{fontSize:24,fontWeight:800,color:"var(--fg-1)",margin:"0 0 8px",letterSpacing:"-0.02em"}}>로그인 / 회원가입</h2>
             <p style={{fontSize:14,color:"var(--fg-3)",margin:"0 0 28px"}}>3초만에 시작 · 별도 가입 없이 소셜 로그인</p>
+            <ErrorBanner />
             <AuthBody
-              onPicker={() => { setLoading("google"); signInWithGoogle().catch(err => { console.error(err); setLoading(null); alert("로그인 실패: " + (err?.message || "알 수 없는 오류")); }); }}
+              onPicker={startGoogleSignIn}
               onGuest={guest}
               onKakao={loginKakao}
               onNaver={loginNaver}
@@ -320,8 +351,9 @@ export const LoginScreen = ({onNavigate, onLogin, layout = "centered"}: any) => 
           </p>
           <TrustRow/>
         </div>
+        <ErrorBanner />
         <AuthBody
-          onPicker={() => { setLoading("google"); signInWithGoogle().catch(err => { console.error(err); setLoading(null); alert("로그인 실패: " + (err?.message || "알 수 없는 오류")); }); }}
+          onPicker={startGoogleSignIn}
           onGuest={guest}
           onKakao={loginKakao}
           onNaver={loginNaver}
