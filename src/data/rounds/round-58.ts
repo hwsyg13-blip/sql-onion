@@ -84,7 +84,7 @@ export const ROUND_58: QuizQuestion[] = [
     "references": [
       {
         "type": "entity-diagram",
-        "entityName": "출판사",
+        "entityName": "도서",
         "preText": "[ 출판사 ] ||-----∈ [ 도서 ]\n  (1)             (0..N)",
         "headers": [
           "ISBN",
@@ -241,7 +241,7 @@ export const ROUND_58: QuizQuestion[] = [
     "references": [
       {
         "type": "entity-diagram",
-        "entityName": "학생",
+        "entityName": "수강",
         "preText": "[ 학생 ] ─|─ ─ ─o∈ [ 수강 ] ∋─ ─ ─o|─ [ 과목 ]",
         "headers": [
           "수강번호",
