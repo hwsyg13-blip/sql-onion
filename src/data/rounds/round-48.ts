@@ -292,8 +292,58 @@ export const ROUND_48: QuizQuestion[] = [
     "_source": "authored",
     "references": [
       {
-        "type": "ascii",
-        "text": "배우(배우번호, 배우명, 성별)\n영화(영화번호, 영화명, 제작년도)\n출연(배우번호, 영화번호, 출연료)"
+        "type": "table",
+        "caption": "배우 테이블",
+        "headers": [
+          "컬럼"
+        ],
+        "rows": [
+          [
+            "배우번호 (PK)"
+          ],
+          [
+            "배우명"
+          ],
+          [
+            "성별"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "영화 테이블",
+        "headers": [
+          "컬럼"
+        ],
+        "rows": [
+          [
+            "영화번호 (PK)"
+          ],
+          [
+            "영화명"
+          ],
+          [
+            "제작년도"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "출연 테이블",
+        "headers": [
+          "컬럼"
+        ],
+        "rows": [
+          [
+            "배우번호 (PK, FK)"
+          ],
+          [
+            "영화번호 (PK, FK)"
+          ],
+          [
+            "출연료"
+          ]
+        ]
       }
     ]
   },

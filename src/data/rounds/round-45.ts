@@ -997,8 +997,49 @@ export const ROUND_45: QuizQuestion[] = [
     "_source": "authored",
     "references": [
       {
-        "type": "ascii",
-        "text": "[수강]        [학생]        [과목]\n학번          이름          과목명\n과목          학번\n학점"
+        "type": "table",
+        "caption": "수강 테이블",
+        "headers": [
+          "컬럼"
+        ],
+        "rows": [
+          [
+            "학번"
+          ],
+          [
+            "과목"
+          ],
+          [
+            "학점"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "학생 테이블",
+        "headers": [
+          "컬럼"
+        ],
+        "rows": [
+          [
+            "이름"
+          ],
+          [
+            "학번"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "과목 테이블",
+        "headers": [
+          "컬럼"
+        ],
+        "rows": [
+          [
+            "과목명"
+          ]
+        ]
       }
     ]
   },

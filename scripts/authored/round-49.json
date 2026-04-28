@@ -198,19 +198,30 @@
     {
       "subject": "2과목",
       "number": 14,
-      "title": "아래 테이블에 대해 순방향 계층형 쿼리를 구성하는 SQL 로 옳은 것은?",
+      "title": "아래 EMP 테이블에 대해 순방향 계층형 쿼리(부모 → 자식)를 구성하는 SQL 로 옳은 것은?",
       "options": [
-        "CONNECT BY PRIOR EMP_NO = MANAGER_NO",
-        "CONNECT BY PRIOR MANAGER_NO = EMP_NO",
-        "CONNECT BY EMP_NO = MANAGER_NO",
-        "CONNECT BY PRIOR EMP_NO = PRIOR MANAGER_NO"
+        "`SELECT * FROM EMP START WITH MANAGER_NO IS NULL CONNECT BY PRIOR EMP_NO = MANAGER_NO;`",
+        "`SELECT * FROM EMP START WITH MANAGER_NO IS NULL CONNECT BY PRIOR MANAGER_NO = EMP_NO;`",
+        "`SELECT * FROM EMP START WITH MANAGER_NO IS NULL CONNECT BY EMP_NO = MANAGER_NO;`",
+        "`SELECT * FROM EMP START WITH MANAGER_NO IS NULL CONNECT BY PRIOR EMP_NO = PRIOR MANAGER_NO;`"
       ],
       "correctIndex": 0,
-      "explanation": "PRIOR 자식 = 부모 형태로 부모→자식 순방향 전개가 이루어진다.",
+      "explanation": "`PRIOR` 는 \"이전(부모) 행의 컬럼\" 을 의미한다. `PRIOR EMP_NO = MANAGER_NO` 는 \"이전 행의 EMP_NO 가 다음 행의 MANAGER_NO 가 되도록\" 연결 — 즉 부모(EMP_NO) → 자식(MANAGER_NO 가 부모를 가리키는 행) 순방향 전개. ② 는 자식 → 부모 역방향, ③ 은 PRIOR 없어 모든 행이 단일 그룹으로 평가, ④ 는 PRIOR 가 양쪽에 있어 자기 참조라 무한루프 또는 0 건.",
       "references": [
         {
-          "type": "ascii",
-          "text": "[EMP] EMP_NO, MANAGER_NO"
+          "type": "table",
+          "caption": "EMP 테이블",
+          "headers": [
+            "EMP_NO",
+            "MANAGER_NO"
+          ],
+          "rows": [
+            ["100", "NULL"],
+            ["200", "100"],
+            ["300", "100"],
+            ["400", "200"],
+            ["500", "300"]
+          ]
         }
       ]
     },

@@ -152,8 +152,22 @@
       "explanation": "학점은 ENROLL 에 있으므로 STUDENT 와 조인 후 학번으로 GROUP BY 하고 HAVING 으로 평균 학점을 필터링해야 한다.",
       "references": [
         {
-          "type": "ascii",
-          "text": "STUDENT(학과, 학번, 강좌), CLASS(강좌번호, ...), ENROLL(학번, 강좌번호, 학점)"
+          "type": "table",
+          "caption": "STUDENT 테이블",
+          "headers": ["컬럼"],
+          "rows": [["학과"], ["학번 (PK)"], ["강좌"]]
+        },
+        {
+          "type": "table",
+          "caption": "CLASS 테이블",
+          "headers": ["컬럼"],
+          "rows": [["강좌번호 (PK)"], ["..."]]
+        },
+        {
+          "type": "table",
+          "caption": "ENROLL 테이블",
+          "headers": ["컬럼"],
+          "rows": [["학번 (PK, FK)"], ["강좌번호 (PK, FK)"], ["학점"]]
         }
       ]
     },
@@ -746,8 +760,22 @@
       "explanation": "다중 테이블 조인 시 동명 컬럼 충돌을 피하기 위해 각 속성을 소유 테이블로 한정하고, 출연·영화·배우의 PK/FK 조건을 모두 명시해야 한다.",
       "references": [
         {
-          "type": "ascii",
-          "text": "배우(배우번호, 배우명, 성별)\n영화(영화번호, 영화명, 제작년도)\n출연(배우번호, 영화번호, 출연료)"
+          "type": "table",
+          "caption": "배우 테이블",
+          "headers": ["컬럼"],
+          "rows": [["배우번호 (PK)"], ["배우명"], ["성별"]]
+        },
+        {
+          "type": "table",
+          "caption": "영화 테이블",
+          "headers": ["컬럼"],
+          "rows": [["영화번호 (PK)"], ["영화명"], ["제작년도"]]
+        },
+        {
+          "type": "table",
+          "caption": "출연 테이블",
+          "headers": ["컬럼"],
+          "rows": [["배우번호 (PK, FK)"], ["영화번호 (PK, FK)"], ["출연료"]]
         }
       ]
     },
