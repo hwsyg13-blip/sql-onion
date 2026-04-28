@@ -281,6 +281,7 @@ export const ROUND_50: QuizQuestion[] = [
     "references": [
       {
         "type": "table",
+        "caption": "TBL 테이블",
         "headers": [
           "C1",
           "C2"
@@ -489,19 +490,20 @@ export const ROUND_50: QuizQuestion[] = [
     "round": 50,
     "subject": "2과목",
     "number": 18,
-    "title": "아래 집계 결과에 해당하는 GROUP BY 절은?",
+    "title": "아래 집계 결과(소계 행에서 NULL 이 등장하는 패턴) 에 해당하는 GROUP BY 절은?",
     "options": [
-      "ROLLUP(A, B)",
-      "GROUPING SETS((A, B))",
-      "GROUP BY A, B",
-      "CUBE(A, B)"
+      "`ROLLUP(A, B)`",
+      "`GROUPING SETS((A, B))`",
+      "`GROUP BY A, B`",
+      "`CUBE(A, B)`"
     ],
     "correctIndex": 3,
-    "explanation": "CUBE 는 (A,B), (A), (B), () 의 모든 부분집합을 반환한다.",
+    "explanation": "CUBE 는 (A,B), (A), (B), () 의 모든 부분집합을 반환하므로 (A=A1, B=NULL), (A=NULL, B=B1), (A=NULL, B=NULL) 행이 모두 등장한다. ROLLUP 은 (A) 소계와 () 총계만, GROUPING SETS((A,B)) 는 세부 행만, GROUP BY A,B 는 소계 자체가 없다.",
     "_source": "authored",
     "references": [
       {
         "type": "table",
+        "caption": "출력 결과 (A, B 그룹 키)",
         "headers": [
           "A",
           "B"
@@ -552,19 +554,20 @@ export const ROUND_50: QuizQuestion[] = [
     "round": 50,
     "subject": "2과목",
     "number": 20,
-    "title": "아래 테이블에서 이름별 그룹의 최소 ID 만 남기고 삭제하는 SQL 로 옳은 것은?",
+    "title": "아래 T 테이블에서 NAME 별 그룹의 최소 ID 만 남기고 나머지를 삭제하는 SQL 로 옳은 것은?",
     "options": [
-      "DELETE FROM T WHERE ID NOT IN (SELECT MIN(ID) FROM T GROUP BY NAME);",
-      "DELETE FROM T WHERE ID IN (SELECT MAX(ID) FROM T GROUP BY NAME);",
-      "DELETE FROM T WHERE ID = MIN(ID);",
-      "DELETE FROM T GROUP BY NAME HAVING ID = MIN(ID);"
+      "`DELETE FROM T WHERE ID NOT IN (SELECT MIN(ID) FROM T GROUP BY NAME);`",
+      "`DELETE FROM T WHERE ID IN (SELECT MAX(ID) FROM T GROUP BY NAME);`",
+      "`DELETE FROM T WHERE ID = MIN(ID);`",
+      "`DELETE FROM T GROUP BY NAME HAVING ID = MIN(ID);`"
     ],
     "correctIndex": 0,
-    "explanation": "그룹별 MIN(ID) 를 NOT IN 으로 제외하고 나머지를 삭제하면 이름별 최소 ID 만 남는다.",
+    "explanation": "그룹별 MIN(ID) 를 NOT IN 으로 제외하고 나머지를 삭제하면 이름별 최소 ID 만 남는다. ② 는 MAX 만 삭제하고, ③ 은 비집계 컨텍스트에서 MIN 사용 불가, ④ 는 DELETE 에 GROUP BY/HAVING 직접 사용 불가.",
     "_source": "authored",
     "references": [
       {
         "type": "table",
+        "caption": "T 테이블",
         "headers": [
           "ID",
           "NAME"
@@ -940,19 +943,20 @@ export const ROUND_50: QuizQuestion[] = [
     "round": 50,
     "subject": "2과목",
     "number": 37,
-    "title": "아래 계층형 결과를 반환하는 SQL 로 옳은 것은?",
+    "title": "아래 부서 테이블에서 부서코드 11 → 7 → 2 의 계층 결과를 반환하는 SQL 로 옳은 것은?",
     "options": [
-      "START WITH 부서코드=2 CONNECT BY 상위부서코드 = PRIOR 부서코드",
-      "START WITH 부서코드=2 CONNECT BY PRIOR 상위부서코드 = 부서코드",
-      "START WITH 부서코드=11 CONNECT BY 상위부서코드 = PRIOR 부서코드",
-      "START WITH 부서코드=11 CONNECT BY PRIOR 상위부서코드 = 부서코드"
+      "`START WITH 부서코드=2 CONNECT BY 상위부서코드 = PRIOR 부서코드`",
+      "`START WITH 부서코드=2 CONNECT BY PRIOR 상위부서코드 = 부서코드`",
+      "`START WITH 부서코드=11 CONNECT BY 상위부서코드 = PRIOR 부서코드`",
+      "`START WITH 부서코드=11 CONNECT BY PRIOR 상위부서코드 = 부서코드`"
     ],
     "correctIndex": 3,
-    "explanation": "부서 11 에서 시작해 자식→부모 방향(역방향) 으로 2 까지 거슬러 올라간다.",
+    "explanation": "부서 11 에서 시작해 자식→부모 방향(역방향) 으로 2 까지 거슬러 올라간다. PRIOR 상위부서코드 = 부서코드 형태가 자식 행의 상위부서코드 가 부모 행의 부서코드와 매칭되어 역방향 전개가 이루어진다.",
     "_source": "authored",
     "references": [
       {
         "type": "table",
+        "caption": "부서 테이블",
         "headers": [
           "부서코드",
           "상위부서코드"
@@ -1055,7 +1059,7 @@ export const ROUND_50: QuizQuestion[] = [
     "round": 50,
     "subject": "2과목",
     "number": 39,
-    "title": "아래 테이블에서 COUNT(DISTINCT 급여) 의 결과는?",
+    "title": "아래 EMP 테이블에서 COUNT(DISTINCT 급여) 의 결과는?",
     "options": [
       "5",
       "3",
@@ -1068,6 +1072,7 @@ export const ROUND_50: QuizQuestion[] = [
     "references": [
       {
         "type": "table",
+        "caption": "EMP 테이블",
         "headers": [
           "ID",
           "급여"
@@ -1094,6 +1099,10 @@ export const ROUND_50: QuizQuestion[] = [
             "4000"
           ]
         ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT COUNT(DISTINCT 급여) FROM EMP;"
       }
     ]
   },
@@ -1122,7 +1131,7 @@ export const ROUND_50: QuizQuestion[] = [
     "round": 50,
     "subject": "2과목",
     "number": 41,
-    "title": "아래 뷰와 SELECT 조건의 결과로 옳은 것은?",
+    "title": "아래 TBL 테이블에 대해 뷰를 만들고 외부 조회 조건을 적용한 결과로 옳은 것은?",
     "options": [
       "0",
       "200",
@@ -1134,8 +1143,34 @@ export const ROUND_50: QuizQuestion[] = [
     "_source": "authored",
     "references": [
       {
+        "type": "table",
+        "caption": "TBL 테이블",
+        "headers": [
+          "C1",
+          "C2"
+        ],
+        "rows": [
+          [
+            "A",
+            "100"
+          ],
+          [
+            "B",
+            "200"
+          ],
+          [
+            "B",
+            "100"
+          ],
+          [
+            "NULL",
+            "200"
+          ]
+        ]
+      },
+      {
         "type": "sql",
-        "code": "-- 뷰: WHERE C1 = 'B' OR C1 IS NULL\n-- 조회: WHERE C2 >= 200 AND C1 = 'B'"
+        "code": "CREATE VIEW V_TBL AS\nSELECT * FROM TBL WHERE C1 = 'B' OR C1 IS NULL;\n\nSELECT SUM(C2) FROM V_TBL\nWHERE C2 >= 200 AND C1 = 'B';"
       }
     ]
   },
@@ -1164,7 +1199,7 @@ export const ROUND_50: QuizQuestion[] = [
     "round": 50,
     "subject": "2과목",
     "number": 43,
-    "title": "아래 데이터에 대한 SUM/COUNT 결과로 옳은 것은?",
+    "title": "아래 주문 테이블에 대한 `SUM(금액) / COUNT(*)` 의 결과로 옳은 것은?",
     "options": [
       "200",
       "150",
@@ -1177,6 +1212,7 @@ export const ROUND_50: QuizQuestion[] = [
     "references": [
       {
         "type": "table",
+        "caption": "주문 테이블",
         "headers": [
           "회원번호",
           "회원코드",
@@ -1209,6 +1245,10 @@ export const ROUND_50: QuizQuestion[] = [
             "300"
           ]
         ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT SUM(금액) / COUNT(*) FROM 주문;"
       }
     ]
   },
@@ -1351,7 +1391,7 @@ export const ROUND_50: QuizQuestion[] = [
     "round": 50,
     "subject": "2과목",
     "number": 49,
-    "title": "아래 LAG 함수 쿼리의 결과로 옳은 것은?",
+    "title": "아래 매출 테이블에 대한 LAG 함수 쿼리의 결과 빈칸 (ㄱ), (ㄴ) 으로 옳은 것은?",
     "options": [
       "ㄱ = 2, ㄴ = 700",
       "ㄱ = 1, ㄴ = 700",
@@ -1359,35 +1399,58 @@ export const ROUND_50: QuizQuestion[] = [
       "ㄱ = NULL, ㄴ = 700"
     ],
     "correctIndex": 0,
-    "explanation": "LAG 함수는 현재 행의 직전 행 값을 반환하므로, 두 번째 행의 LAG 는 1행 값이며 세 번째 행의 LAG 는 2행의 값인 700 이 된다.",
+    "explanation": "LAG(금액, 1) 은 직전 행의 금액을 반환한다. 1행의 LAG 는 이전 행이 없어 NULL, 2행의 LAG 는 1행의 금액 (ㄱ), 3행의 LAG 는 2행의 금액 (ㄴ) 이다. 출제 데이터에서 (ㄱ)=2, (ㄴ)=700.",
     "_source": "authored",
     "references": [
       {
-        "type": "text",
-        "content": "LAG(금액, 1) 의 두 번째 행 값은 (ㄱ), 세 번째 행 값은 (ㄴ) 이다."
-      },
-      {
         "type": "table",
+        "caption": "매출 테이블",
         "headers": [
           "행",
-          "금액",
-          "LAG"
+          "금액"
         ],
         "rows": [
           [
             "1",
-            "NULL",
+            "2"
+          ],
+          [
+            "2",
+            "700"
+          ],
+          [
+            "3",
+            "600"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT 행,\n       LAG(금액, 1) OVER (ORDER BY 행) AS 이전금액\nFROM   매출;"
+      },
+      {
+        "type": "table",
+        "caption": "출력 결과 (LAG 컬럼이 정답의 ㄱ/ㄴ 위치)",
+        "headers": [
+          "행",
+          "금액",
+          "LAG(금액, 1)"
+        ],
+        "rows": [
+          [
+            "1",
+            "2",
             "NULL"
           ],
           [
             "2",
-            "(ㄱ)",
-            "1행 값"
+            "700",
+            "(ㄱ)"
           ],
           [
             "3",
-            "(ㄴ)",
-            "2행 값"
+            "600",
+            "(ㄴ)"
           ]
         ]
       }
