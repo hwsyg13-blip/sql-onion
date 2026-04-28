@@ -65,7 +65,13 @@
         "주문"
       ],
       "correctIndex": 2,
-      "explanation": "중심 엔터티는 기본 엔터티로부터 파생되어 업무 수행 과정에서 주 대상이 되는 엔터티이다."
+      "explanation": "발생 시점 기준 엔터티는 기본/중심/행위 세 가지로 분류된다. ① 사원·② 고객은 다른 엔터티에 의존하지 않고 독립적으로 존재하는 기본 엔터티이다. ④ 주문은 고객·상품 두 부모로부터 발생하므로 행위 엔터티에 해당한다. ③ 프로젝트는 사원·조직(기본 엔터티) 으로부터 발생하면서 동시에 작업·일정 등 다른 행위 엔터티의 부모가 되는 중심 엔터티이다.",
+      "references": [
+        {
+          "type": "text",
+          "content": "발생 시점 기준 엔터티 분류\n\n• 기본(Key) 엔터티: 다른 엔터티에 의존하지 않음 — 사원, 고객, 부서, 상품\n• 중심(Main) 엔터티: 기본 엔터티에서 발생, 다른 행위 엔터티의 부모 — 계좌, 프로젝트, 계약\n• 행위(Action) 엔터티: 두 개 이상의 부모로부터 발생 — 주문, 입금, 출금, 주문내역"
+        }
+      ]
     },
     {
       "subject": "1과목",
@@ -212,7 +218,7 @@
         "양쪽 조인 키가 모두 NULL 이라 공집합이 반환된다."
       ],
       "correctIndex": 1,
-      "explanation": "LEFT OUTER JOIN 은 좌측 TAB1 의 모든 행을 보존하며, ON 조건 불일치 행(D, E)의 우측 컬럼은 NULL 로 채워진다.",
+      "explanation": "LEFT OUTER JOIN 은 좌측 TAB1 의 모든 행을 보존하며, ON 조건 불일치 행의 우측 컬럼은 NULL 로 채워진다. ON 절은 두 조건의 AND 결합으로, ① C1 매칭 ② B.C2 BETWEEN 1 AND 3 둘 다 만족해야 매칭된다. TAB2 에는 D 가 (D,4) 로 존재하지만 C2=4 가 BETWEEN 1 AND 3 을 만족하지 못하므로 매칭에서 제외된다 → TAB1 의 D 행은 미매칭 처리되어 우측 컬럼이 NULL. E 는 TAB2 자체에 없어 NULL. 결과적으로 TAB1 의 5행 모두 보존되고 D·E 의 TAB2 컬럼만 NULL 이 된다.",
       "references": [
         {
           "type": "table",
@@ -342,7 +348,35 @@
         "START WITH 카테고리번호=11 CONNECT BY 상위카테고리번호=PRIOR 상위카테고리번호"
       ],
       "correctIndex": 1,
-      "explanation": "자식의 카테고리번호가 부모 행의 상위카테고리번호와 매칭되어 자식→부모 역방향 탐색이 이루어진다."
+      "explanation": "자식→부모 역방향 탐색은 PRIOR 가 자식 쪽 컬럼에 붙어야 한다. ② `카테고리번호 = PRIOR 상위카테고리번호` 는 \"부모 행의 카테고리번호 = 자식 행의 상위카테고리번호\" 를 의미하므로, 11 → 5 → 2 → 1 순으로 거슬러 올라간다. ① 은 PRIOR 가 자식 쪽이 아니라 부모 쪽 컬럼에 붙어 순방향(부모→자식) 전개가 된다.",
+      "references": [
+        {
+          "type": "table",
+          "caption": "카테고리 테이블",
+          "headers": ["카테고리번호", "카테고리명", "상위카테고리번호"],
+          "rows": [
+            ["1", "전체", "NULL"],
+            ["2", "디지털", "1"],
+            ["5", "노트북", "2"],
+            ["11", "게이밍 노트북", "5"]
+          ]
+        },
+        {
+          "type": "sql",
+          "code": "-- 11 에서 시작하여 1 까지 거슬러 올라가기 (자식→부모)\nSELECT 카테고리번호, 카테고리명, 상위카테고리번호, LEVEL\nFROM   카테고리\nSTART WITH 카테고리번호 = 11\nCONNECT BY 카테고리번호 = PRIOR 상위카테고리번호;"
+        },
+        {
+          "type": "table",
+          "caption": "출력 결과 (역방향 전개)",
+          "headers": ["카테고리번호", "카테고리명", "LEVEL"],
+          "rows": [
+            ["11", "게이밍 노트북", "1"],
+            ["5", "노트북", "2"],
+            ["2", "디지털", "3"],
+            ["1", "전체", "4"]
+          ]
+        }
+      ]
     },
     {
       "subject": "2과목",
@@ -580,10 +614,10 @@
         "LAG(VAL, 1) OVER(ORDER BY ID)",
         "LEAD(VAL, -1) OVER(ORDER BY ID)",
         "LAG(VAL, 1) OVER(ORDER BY ID DESC)",
-        "LEAD(VAL, 1) OVER(ORDER BY ID DESC) 과 동일한 효과"
+        "LEAD(VAL, 1) OVER(ORDER BY ID DESC)"
       ],
       "correctIndex": 2,
-      "explanation": "①·②·④ 는 모두 직전 행 값을 가져오는 효과이지만, ③ 은 정렬을 DESC 로 뒤집은 뒤 LAG 를 적용하므로 결과 방향이 반대가 된다."
+      "explanation": "ID 오름차순 정렬 기준의 \"직전 행\" 을 반환하는지를 비교한다. ① LAG(1) ASC = 직전 행. ② LEAD(-1) ASC = 음수 offset 으로 LAG(1) 과 동일 = 직전 행. ④ LEAD(1) DESC = DESC 정렬에서 다음 행 = 원래 ASC 기준에서 직전 행. 따라서 ①·②·④ 가 모두 직전 행 값을 반환한다. ③ LAG(1) DESC = DESC 정렬에서 직전 행 = 원래 ASC 기준에서 다음 행으로 방향이 반대가 된다."
     },
     {
       "subject": "2과목",
@@ -812,7 +846,28 @@
         "SELECT * FROM T2 WHERE T2.COL IN (SELECT COL FROM T1 WHERE T2.COL = T1.COL);"
       ],
       "correctIndex": 3,
-      "explanation": "①·②·③ 은 동일한 이너 조인 결과(T1·T2 컬럼 모두 반환)이지만, ④ 의 서브쿼리 형태는 T2 의 컬럼만 반환되어 결과 컬럼 구성이 다르다."
+      "explanation": "①·②·③ 은 모두 T1·T2 의 공통 컬럼 COL 로 이너 조인을 수행하며, SELECT * 가 양쪽 테이블의 컬럼을 모두 반환한다. (① NATURAL JOIN, ② USING 은 공통 컬럼을 한 번씩 반환하고, ③ ON 은 양쪽 컬럼을 각각 반환하지만 모든 행 대상은 동일.) ④ 는 T2 만 FROM 절에 두고 IN 서브쿼리로 필터링하므로 SELECT * 의 결과가 T2 의 컬럼만 반환되어 결과 컬럼 구성이 ①~③ 과 다르다.",
+      "references": [
+        {
+          "type": "table",
+          "caption": "T1",
+          "headers": ["COL", "VAL1"],
+          "rows": [
+            ["A", "10"],
+            ["B", "20"],
+            ["C", "30"]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "T2",
+          "headers": ["COL", "VAL2"],
+          "rows": [
+            ["A", "100"],
+            ["B", "200"]
+          ]
+        }
+      ]
     },
     {
       "subject": "2과목",
@@ -892,7 +947,28 @@
         "SELECT * FROM T2 WHERE T2.COL IN (SELECT COL FROM T1 WHERE T2.COL = T1.COL)"
       ],
       "correctIndex": 3,
-      "explanation": "①·②·③ 은 동일한 이너 조인 결과이지만, ④ 의 서브쿼리는 T1 의 컬럼이 반환되지 않아 결과 컬럼 구성이 다르다."
+      "explanation": "①·②·③ 은 모두 T1·T2 의 COL 로 이너 조인을 수행하므로 양쪽 테이블의 컬럼이 결과에 모두 등장한다. ④ 의 IN 서브쿼리 형태는 FROM 에 T2 만 두고 T1 은 EXISTS 와 유사한 필터로 사용하므로 결과 컬럼이 T2 의 것만 반환되어 ①~③ 과 컬럼 구성이 다르다. (50회는 42·45 두 번에 걸쳐 동일 변별 패턴을 출제했다.)",
+      "references": [
+        {
+          "type": "table",
+          "caption": "T1",
+          "headers": ["COL", "VAL1"],
+          "rows": [
+            ["A", "10"],
+            ["B", "20"],
+            ["C", "30"]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "T2",
+          "headers": ["COL", "VAL2"],
+          "rows": [
+            ["A", "100"],
+            ["B", "200"]
+          ]
+        }
+      ]
     },
     {
       "subject": "2과목",
