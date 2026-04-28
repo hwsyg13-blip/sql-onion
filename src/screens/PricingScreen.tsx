@@ -25,7 +25,7 @@ export const getUsage = () => {
 };
 export const setUsage = (u) => {
   localStorage.setItem(USAGE_KEY, JSON.stringify(u));
-  try { window.dispatchEvent(new Event("sqlo_usage_change")); } catch(e){}
+  try { window.dispatchEvent(new Event("sqlo_usage_change")); } catch(e){ console.warn('[usage] event dispatch failed', e); }
 };
 export const incMock = (n = 1) => { const u = getUsage(); u.mockToday = (u.mockToday||0) + n; setUsage(u); return u.mockToday; };
 export const markExamDone = (id) => { const u = getUsage(); if (!u.examsDone.includes(id)) u.examsDone.push(id); setUsage(u); };

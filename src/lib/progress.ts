@@ -82,9 +82,22 @@ export function recordTheoryView(chapterId: string) {
   }
 }
 
+/** localStorage QuotaExceededError 방지용 attempt 보존 한도. 무한 퀴즈가 매
+ *  시도마다 unique 키(`endless-q${id}-${ts}`)를 누적하므로 cap 없으면 폭증. */
+const MAX_QUIZ_ATTEMPTS = 1000;
+
 export function recordQuizAttempt(key: string, info: LocalProgress['quizAttempts'][string]) {
   const p = getProgress();
-  p.quizAttempts = { ...p.quizAttempts, [key]: { at: Date.now(), ...info } };
+  const next = { ...p.quizAttempts, [key]: { at: Date.now(), ...info } };
+  const keys = Object.keys(next);
+  if (keys.length > MAX_QUIZ_ATTEMPTS) {
+    // at 기준 오래된 것부터 drop. 통계(totalAttempts/correctRate) 는 약간 과거를
+    // 포기하되 storage quota 보호.
+    const sorted = keys.sort((a, b) => (next[a].at || 0) - (next[b].at || 0));
+    const dropCount = keys.length - MAX_QUIZ_ATTEMPTS;
+    for (let i = 0; i < dropCount; i++) delete next[sorted[i]];
+  }
+  p.quizAttempts = next;
   save(p);
 }
 
