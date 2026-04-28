@@ -79,7 +79,7 @@
         {
           "type": "erd",
           "caption": "서비스·서비스이용·청구·납부 ERD",
-          "mermaid": "erDiagram\n    서비스 ||--o{ 서비스이용 : \"이용\"\n    청구 ||--o{ 서비스이용 : \"기준\"\n    청구 ||--o{ 납부 : \"수행\""
+          "mermaid": "erDiagram\n    서비스 ||--o{ 서비스이용 : \"이용\"\n    서비스이용 ||--o{ 청구 : \"발행\"\n    청구 ||--o{ 납부 : \"수행\""
         }
       ]
     },
@@ -719,7 +719,7 @@
     {
       "subject": "2과목",
       "number": 25,
-      "title": "아래 SQL이 오류 없이 실행되기 위해 T2.COL2가 가져야 할 제약 조건은?",
+      "title": "아래 SQL의 서브쿼리가 항상 1건 이하만 반환하도록 보장하기 위해 T2.A 컬럼이 가져야 할 제약 조건은?",
       "options": [
         "UNIQUE",
         "NOT NULL",
@@ -727,7 +727,7 @@
         "CHECK"
       ],
       "correctIndex": 0,
-      "explanation": "외부 쿼리가 '=' 단일 행 비교를 사용하므로 서브쿼리 (SELECT COL2 FROM T2 WHERE A='A') 가 반드시 0행 또는 1행만 반환해야 한다. 만약 T2.A='A' 인 행이 둘 이상이면 'ORA-01427: single-row subquery returns more than one row' 같은 오류가 난다. 이를 데이터 차원에서 보장하는 가장 적절한 제약은 T2.COL2 의 UNIQUE 이며, 아래 예시 데이터처럼 A='A' 두 행이 존재할 때 COL2 가 UNIQUE 라면 두 COL2 값이 다르더라도 서로 같은 값이 동시에 들어올 수 없게 되고, 실제 출제 의도는 서브쿼리 결과의 단일성을 강제하는 컬럼 제약 선택지에서 UNIQUE 가 가장 직접적인 답이 된다. NOT NULL·FOREIGN KEY·CHECK 는 단일성을 보장하지 못한다. 정답은 ①.",
+      "explanation": "외부 쿼리가 '=' 단일 행 비교를 사용하므로 서브쿼리 (SELECT COL2 FROM T2 WHERE A='A') 가 반드시 0행 또는 1행만 반환해야 한다. 만약 T2.A='A' 인 행이 둘 이상이면 'ORA-01427: single-row subquery returns more than one row' 오류가 발생한다. 따라서 검색 키인 T2.A 컬럼이 UNIQUE여야 'A='A''인 행이 최대 1건으로 보장된다. NOT NULL은 NULL만 막을 뿐 중복은 허용하고, FOREIGN KEY는 다른 테이블 참조를 강제, CHECK는 값 도메인을 제한할 뿐 단일성과 무관하다. 정답은 ①.",
       "references": [
         {
           "type": "table",
@@ -741,7 +741,7 @@
         },
         {
           "type": "table",
-          "caption": "T2 테이블 (A='A' 행이 둘 이상이면 단일 행 서브쿼리 오류)",
+          "caption": "T2 테이블",
           "headers": ["A", "COL2"],
           "rows": [
             ["A", "10"],
@@ -758,12 +758,12 @@
     {
       "subject": "2과목",
       "number": 26,
-      "title": "아래 쿼리의 윈도우 절과 동등한 의미를 가진 절은?",
+      "title": "아래 쿼리의 `ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW` 절과 동등한 의미를 가진 절은?",
       "options": [
-        "`ROWS UNBOUNDED PRECEDING` (= ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW)",
-        "ROWS BETWEEN UNBOUNDED PRECEDING AND 1 PRECEDING (= 현재 행 직전까지의 누적합)",
-        "RANGE UNBOUNDED PRECEDING (= RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW)",
-        "RANGE BETWEEN CURRENT ROW AND UNBOUNDED FOLLOWING"
+        "`ROWS UNBOUNDED PRECEDING`",
+        "`ROWS BETWEEN UNBOUNDED PRECEDING AND 1 PRECEDING`",
+        "`RANGE UNBOUNDED PRECEDING`",
+        "`RANGE BETWEEN CURRENT ROW AND UNBOUNDED FOLLOWING`"
       ],
       "correctIndex": 0,
       "explanation": "ROWS UNBOUNDED PRECEDING은 윈도우 시작점만 명시한 축약형으로, 종료점이 생략되면 기본값인 CURRENT ROW가 적용된다. 즉 ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW와 동등하다. ②는 종료점이 1 PRECEDING이라 누적합 의미가 다르고, ③·④는 RANGE 모드라 동일 정렬 키를 가진 행을 묶어 처리하므로 ROWS 기반과 결과가 다를 수 있다.",
@@ -1131,7 +1131,7 @@
     {
       "subject": "2과목",
       "number": 39,
-      "title": "아래 TGT, SRC 테이블에 대해 MERGE 문 수행 후 TGT 의 V1, V2, V3 값으로 옳은 것은?",
+      "title": "아래 TGT, SRC 테이블에 대해 MERGE 문 수행 후 TGT의 ID=2 행의 V1, V2, V3 값으로 옳은 것은?",
       "options": [
         "100 100 100",
         "100 100 NULL",
@@ -1221,13 +1221,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "CREATE TABLE T (\n  ID  NUMBER GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1),\n  VAL NUMBER CHECK (VAL > 0)\n);\n\nINSERT INTO T(VAL) VALUES (-1);   -- CHECK 위반\nINSERT INTO T(VAL) VALUES ( 0);   -- CHECK 위반\nINSERT INTO T(VAL) VALUES ( 1);   -- 성공\nCOMMIT;\n\nSELECT COUNT(*) FROM T;"
-        },
-        {
-          "type": "table",
-          "caption": "최종 T 상태 (CHECK VAL > 0 통과 행만)",
-          "headers": ["ID", "VAL"],
-          "rows": [["1", "1"]]
+          "code": "CREATE TABLE T (\n  ID  NUMBER GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1),\n  VAL NUMBER CHECK (VAL > 0)\n);\n\nINSERT INTO T(VAL) VALUES (-1);\nINSERT INTO T(VAL) VALUES ( 0);\nINSERT INTO T(VAL) VALUES ( 1);\nCOMMIT;\n\nSELECT COUNT(*) FROM T;"
         }
       ]
     },
@@ -1297,10 +1291,10 @@
         "`SELECT * FROM EMP E, DEPT D WHERE E.DEPTNO = D.DEPTNO;`",
         "`SELECT * FROM EMP WHERE DEPTNO IS NULL OR DEPTNO NOT IN (SELECT DEPTNO FROM DEPT);`",
         "`SELECT * FROM EMP E LEFT JOIN DEPT D ON E.DEPTNO = D.DEPTNO WHERE D.DEPTNO IS NOT NULL;`",
-        "`SELECT * FROM EMP E LEFT JOIN DEPT D ON E.DEPTNO = D.DEPTNO WHERE D.DEPTNO IS NULL;`"
+        "`SELECT * FROM EMP WHERE DEPTNO NOT IN (SELECT DEPTNO FROM DEPT);`"
       ],
       "correctIndex": 1,
-      "explanation": "\"어떤 부서에도 속하지 않는다\"는 두 가지 경우를 모두 포함한다. (a) DEPTNO 자체가 NULL인 경우, (b) DEPTNO 값이 있지만 DEPT 테이블에 등록되지 않은 경우(예: 99번). ②는 OR로 두 경우를 모두 잡으므로 가장 적절하다. ① 일반 조인은 부서가 매칭된 직원만 조회한다. ③ LEFT JOIN + IS NOT NULL은 매칭된 직원만 남기므로 정답과 정반대다. ④ LEFT JOIN + IS NULL은 (a) 케이스만 잡고 (b) DEPTNO=99처럼 DEPT에 등록되지 않은 외래값은 매칭 단계에서 NULL로 채워지지 않고 그대로 결합되어 결과에서 누락될 수 있다.",
+      "explanation": "\"어떤 부서에도 속하지 않는다\"는 두 가지 경우를 모두 포함한다. (a) DEPTNO 자체가 NULL인 경우, (b) DEPTNO 값이 있지만 DEPT 테이블에 등록되지 않은 경우(예: 99번). ②는 OR로 두 경우를 모두 잡으므로 가장 적절하다. ① 일반 조인은 부서가 매칭된 직원만 조회한다. ③ LEFT JOIN + IS NOT NULL은 매칭된 직원만 남기므로 정답과 정반대다. ④ NOT IN 단독은 DEPTNO 값이 있는 행 중 DEPT에 없는 외래값(예: 99)은 잡지만, DEPTNO가 NULL인 행은 NULL 비교가 UNKNOWN이라 결과에서 누락된다. (a) NULL 케이스를 함께 잡으려면 ②의 OR 조합이 필요하다.",
       "references": [
         {
           "type": "table",
