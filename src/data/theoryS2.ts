@@ -5,25 +5,25 @@ export const THEORY_BODY_S2: any = ({
   c21: {
     subjectCode: "2과목", subjectTitle: "SQL 기본 및 활용",
     chapterNum: "1장", title: "관계형 DB · SQL 개요",
-    subtitle: "SQL의 분류(DDL/DML/DCL/TCL)와 트랜잭션 ACID — 정의 매칭 문제가 필수 출제.",
+    subtitle: "SQL의 분류(DDL/DML/DCL/TCL)와 트랜잭션 ACID — 정의 매칭 문제가 필수 출제",
     sections: [
       {
         id: "s1", heading: "1.1 관계형 데이터베이스(RDB)",
         paragraphs: [
-          "관계형 데이터베이스는 데이터를 2차원 표(테이블) 형태로 저장하는 데이터베이스입니다. 각 테이블은 행(Row, 튜플)과 열(Column, 속성)로 구성되고, 행은 엔터티의 인스턴스, 열은 속성에 해당합니다.",
-          "RDB는 정규화를 통해 데이터 중복을 최소화하고, 외래 키(FK) 제약으로 참조 무결성을 보장합니다.",
+          "관계형 데이터베이스는 데이터를 2차원 표(테이블) 형태로 저장하는 데이터베이스다. 각 테이블은 행(Row, 튜플)과 열(Column, 속성)로 구성되고, 행은 엔터티의 인스턴스, 열은 속성에 해당한다.",
+          "RDB는 정규화로 데이터 중복을 최소화하고, 외래 키(FK) 제약으로 참조 무결성을 보장한다.",
         ],
         bullets: [
           { t: "테이블 (Table · Relation)", d: "행과 열로 구성된 2차원 구조" },
-          { t: "행 (Row · Tuple)", d: "한 건의 데이터 인스턴스 — 실제 실제 레코드 1개" },
+          { t: "행 (Row · Tuple)", d: "한 건의 데이터 인스턴스 — 레코드 1개" },
           { t: "열 (Column · Attribute)", d: "같은 도메인(값의 범위)에 속하는 속성" },
-          { t: "기본 키 (PK)", d: "각 행을 유일하게 식별할 수 있어요 — NOT NULL + UNIQUE" },
-          { t: "외래 키 (FK)", d: "다른 테이블의 PK를 참조해서 참조 무결성을 보장해줘요" },
+          { t: "기본 키 (PK)", d: "각 행을 유일하게 식별 — NOT NULL + UNIQUE" },
+          { t: "외래 키 (FK)", d: "다른 테이블의 PK를 참조해 참조 무결성 보장" },
         ],
       },
       {
         id: "s2", heading: "1.2 SQL의 분류",
-        paragraphs: ["SQL은 기능에 따라 네 가지로 구분합니다. 시험에서 '다음 중 DDL인 것은?' 형태로 자주 출제됩니다."],
+        paragraphs: ["SQL은 기능에 따라 네 가지로 구분한다. 시험에서 '다음 중 DDL인 것은?' 형태로 자주 출제된다."],
         table: {
           headers: ["분류", "명령어", "설명"],
           rows: [
@@ -33,11 +33,11 @@ export const THEORY_BODY_S2: any = ({
             ["TCL (Transaction Control)", "COMMIT, ROLLBACK, SAVEPOINT", "트랜잭션 제어."],
           ],
         },
-        tip: "TRUNCATE는 DDL이라 Auto-Commit, WHERE 불가, ROLLBACK 불가. DELETE와 혼동 금지.",
+        tip: "TRUNCATE는 DDL이라 Auto-Commit, WHERE 불가, ROLLBACK 불가. DELETE와 혼동 금지",
       },
       {
         id: "s3", heading: "1.3 트랜잭션 (ACID)",
-        paragraphs: ["트랜잭션은 '하나의 논리적 작업 단위'로 묶인 SQL 집합입니다. 4가지 특성을 만족해야 합니다."],
+        paragraphs: ["트랜잭션은 '하나의 논리적 작업 단위'로 묶인 SQL 집합이다. 4가지 특성을 만족해야 한다."],
         table: {
           headers: ["특성", "영문", "의미"],
           rows: [
@@ -74,11 +74,11 @@ DROP TABLE emp;                       -- 테이블 자체 제거`,
   c22: {
     subjectCode: "2과목", subjectTitle: "SQL 기본 및 활용",
     chapterNum: "2장", title: "SELECT · WHERE · 함수",
-    subtitle: "SELECT 실행 순서, NULL 처리, 문자/숫자/날짜 함수 — 실전에서 매회 3~4문제.",
+    subtitle: "SELECT 실행 순서, NULL 처리, 문자/숫자/날짜 함수 — 실전에서 매회 3~4문제",
     sections: [
       {
         id: "s1", heading: "2.1 SELECT 문의 실행 순서",
-        paragraphs: ["작성 순서와 실행 순서가 다른 것이 포인트. 실행 순서 문제는 단골."],
+        paragraphs: ["작성 순서와 실행 순서가 다른 것이 포인트. 실행 순서 문제는 단골"],
         diagram: "selectOrder",
         table: {
           headers: ["작성 순서", "실행 순서"],
@@ -91,16 +91,16 @@ DROP TABLE emp;                       -- 테이블 자체 제거`,
             ["6. ORDER BY", "6. ORDER BY (정렬)"],
           ],
         },
-        tip: "별칭(alias)은 SELECT에서 정의되지만, SELECT 실행은 5번째 → WHERE/GROUP BY에서는 별칭 사용 불가. ORDER BY에서는 가능.",
+        tip: "별칭(alias)은 SELECT에서 정의되지만, SELECT 실행은 5번째 → WHERE/GROUP BY에서는 별칭 사용 불가. ORDER BY에서는 가능",
       },
       {
         id: "s2", heading: "2.2 WHERE 조건 · 연산자",
         bullets: [
           { t: "비교", d: "= , <>, !=, <, >, <=, >=" },
-          { t: "BETWEEN a AND b", d: "a 이상 b 이하 — 양 끝값도 포함돼요" },
+          { t: "BETWEEN a AND b", d: "a 이상 b 이하 — 양 끝값 포함" },
           { t: "IN (a, b, c)", d: "목록 안의 값 중 하나와 일치하면 참" },
           { t: "LIKE 'A%'", d: "와일드카드 검색 — %는 0자 이상, _는 정확히 1자" },
-          { t: "IS NULL · IS NOT NULL", d: "NULL 판별은 반드시 IS로 — = NULL으로 쓰면 결과가 UNKNOWN이 돼요" },
+          { t: "IS NULL · IS NOT NULL", d: "NULL 판별은 반드시 IS로 — = NULL으로 쓰면 결과가 UNKNOWN" },
         ],
       },
       {
@@ -135,7 +135,7 @@ SELECT TRUNC(12.456, 1)              FROM DUAL;  -- 12.4`,
             ["NULLIF(a, b)", "a = b 이면 NULL, 아니면 a", "NULLIF(dept, 0)"],
           ],
         },
-        tip: "NULL + 숫자 = NULL. 집계함수(SUM/AVG)는 NULL 무시. COUNT(*) 는 NULL 포함, COUNT(컬럼)은 NULL 제외.",
+        tip: "NULL + 숫자 = NULL. 집계함수(SUM/AVG)는 NULL 무시. COUNT(*)는 NULL 포함, COUNT(컬럼)은 NULL 제외",
       },
     ],
     linkedQuizIds: [203, 205, 212],
@@ -144,11 +144,11 @@ SELECT TRUNC(12.456, 1)              FROM DUAL;  -- 12.4`,
   c23: {
     subjectCode: "2과목", subjectTitle: "SQL 기본 및 활용",
     chapterNum: "3장", title: "GROUP BY · HAVING",
-    subtitle: "집계 함수와 HAVING 절. ROLLUP · CUBE · GROUPING SETS 가 SQLD 핵심.",
+    subtitle: "집계 함수와 HAVING 절. ROLLUP · CUBE · GROUPING SETS가 SQLD 핵심",
     sections: [
       {
         id: "s1", heading: "3.1 집계 함수",
-        paragraphs: ["여러 행에서 하나의 결과를 만드는 함수. NULL을 무시합니다(COUNT(*) 제외)."],
+        paragraphs: ["여러 행에서 하나의 결과를 만드는 함수. NULL을 무시한다(COUNT(*) 제외)."],
         table: {
           headers: ["함수", "설명"],
           rows: [
@@ -162,7 +162,7 @@ SELECT TRUNC(12.456, 1)              FROM DUAL;  -- 12.4`,
       },
       {
         id: "s2", heading: "3.2 GROUP BY · HAVING",
-        paragraphs: ["GROUP BY는 행을 그룹으로 묶고, HAVING은 그룹에 대한 조건을 겁니다. WHERE는 그룹 전 행, HAVING은 그룹 후 결과에 적용."],
+        paragraphs: ["GROUP BY는 행을 그룹으로 묶고, HAVING은 그룹에 대한 조건을 건다. WHERE는 그룹 전 행, HAVING은 그룹 후 결과에 적용"],
         example: {
           caption: "부서별 평균 급여 3,000,000 초과 부서",
           sql: `SELECT d.dept_name, AVG(e.salary) AS avg_sal
@@ -173,14 +173,14 @@ HAVING AVG(e.salary) > 3000000
  ORDER BY avg_sal DESC;`,
         },
         bullets: [
-          { t: "규칙", d: "SELECT 절에 쓴 일반 컬럼은 전부 GROUP BY에도 써야 해요" },
-          { t: "WHERE vs HAVING", d: "WHERE는 그룹 만들기 전 행을 걸러내고, HAVING은 그룹 만든 뒤에 걸러내요" },
-          { t: "둘 다 가능한 경우", d: "집계함수를 안 쓰는 조건은 WHERE가 더 빠라요 — 미리 걸러낼수록 시스템이 편해져요" },
+          { t: "규칙", d: "SELECT 절에 쓴 일반 컬럼은 전부 GROUP BY에도 명시" },
+          { t: "WHERE vs HAVING", d: "WHERE는 그룹 만들기 전 행 필터, HAVING은 그룹 만든 뒤 필터" },
+          { t: "둘 다 가능한 경우", d: "집계함수를 안 쓰는 조건은 WHERE가 더 빠름 — 미리 걸러낼수록 유리" },
         ],
       },
       {
         id: "s3", heading: "3.3 ROLLUP · CUBE · GROUPING SETS",
-        paragraphs: ["다차원 집계 함수. 소계·총계를 한 번에 계산."],
+        paragraphs: ["다차원 집계 함수. 소계·총계를 한 번에 계산"],
         diagram: "rollupCube",
         table: {
           headers: ["함수", "생성되는 그룹 조합", "예: (A, B)"],
@@ -204,7 +204,7 @@ SELECT dept_id, job_id, SUM(salary)
  GROUP BY CUBE(dept_id, job_id);
 -- 위 + (job_id) 추가`,
         },
-        tip: "GROUPING() 함수는 해당 행이 소계로 생성된 것인지(1), 원본인지(0) 구분할 때 사용.",
+        tip: "GROUPING() 함수는 해당 행이 소계로 생성된 것인지(1), 원본인지(0) 구분할 때 사용",
       },
     ],
     linkedQuizIds: [201, 210],
@@ -213,11 +213,11 @@ SELECT dept_id, job_id, SUM(salary)
   c24: {
     subjectCode: "2과목", subjectTitle: "SQL 기본 및 활용",
     chapterNum: "4장", title: "JOIN",
-    subtitle: "INNER / OUTER / CROSS / SELF. ANSI 표기와 Oracle (+) 표기 모두 익혀야 함.",
+    subtitle: "INNER / OUTER / CROSS / SELF. ANSI 표기와 Oracle (+) 표기 모두 숙지",
     sections: [
       {
         id: "s1", heading: "4.1 INNER JOIN",
-        paragraphs: ["양쪽 테이블에서 조인 조건을 만족하는 행만 반환. 가장 기본적인 조인."],
+        paragraphs: ["양쪽 테이블에서 조인 조건을 만족하는 행만 반환. 가장 기본적인 조인"],
         example: {
           caption: "ANSI vs Oracle 표기",
           sql: `-- ANSI
@@ -231,8 +231,8 @@ SELECT e.name, d.dept_name
  WHERE e.dept_id = d.dept_id;`,
         },
         bullets: [
-          { t: "USING", d: "조인할 컬럼 이름이 양쪽 테이블에서 같을 때, USING(dept_id) 형식으로 짧게 쓸 수 있어요" },
-          { t: "NATURAL JOIN", d: "양쪽의 같은 이름 컬럼 전부로 자동 조인이 돼요 — 의도치 않은 조인이 생길 수 있어 조심해야 해요" },
+          { t: "USING", d: "조인할 컬럼 이름이 양쪽 테이블에서 같을 때, USING(dept_id) 형식으로 짧게 표기" },
+          { t: "NATURAL JOIN", d: "양쪽의 같은 이름 컬럼 전부로 자동 조인 — 의도치 않은 조인이 생길 수 있어 주의" },
         ],
       },
       {
@@ -258,13 +258,13 @@ SELECT e.name, d.dept_name
   FROM employee e, department d
  WHERE e.dept_id = d.dept_id(+);`,
         },
-        tip: "Oracle의 (+)는 외부 조인 표시. NULL이 올 쪽에 붙인다고 기억. FULL OUTER는 (+)로 표현 불가 → ANSI 사용.",
+        tip: "Oracle의 (+)는 외부 조인 표시. NULL이 올 쪽에 붙인다고 기억. FULL OUTER는 (+)로 표현 불가 → ANSI 사용",
       },
       {
         id: "s3", heading: "4.3 CROSS JOIN · SELF JOIN",
         bullets: [
-          { t: "CROSS JOIN", d: "조건 없이 모든 조합을 만들어요 — m개 × n개 결과행(카테시안 곱)" },
-          { t: "SELF JOIN", d: "같은 테이블을 자기 자신과 조인해요 — 사원-상사 관계가 대표 예시, 별칭이 반드시 필요해요" },
+          { t: "CROSS JOIN", d: "조건 없이 모든 조합 생성 — m개 × n개 결과행(카테시안 곱)" },
+          { t: "SELF JOIN", d: "같은 테이블을 자기 자신과 조인 — 사원-상사 관계가 대표 예시, 별칭 필수" },
         ],
         example: {
           caption: "SELF JOIN — 사원과 상사 이름",
@@ -296,7 +296,7 @@ SELECT e.name, d.dept_name
   c25: {
     subjectCode: "2과목", subjectTitle: "SQL 기본 및 활용",
     chapterNum: "5장", title: "서브쿼리 (Subquery)",
-    subtitle: "단일·다중 행 / 스칼라 · 인라인 뷰 / 연관 서브쿼리 — 위치별 특성 구분.",
+    subtitle: "단일·다중 행 / 스칼라 · 인라인 뷰 / 연관 서브쿼리 — 위치별 특성 구분",
     sections: [
       {
         id: "s1", heading: "5.1 서브쿼리의 분류",
@@ -350,9 +350,9 @@ SELECT e.name, e.salary
                     WHERE dept_id = e.dept_id);`,
         },
         bullets: [
-          { t: "스칼라 서브쿼리", d: "반드시 1행 1컬럼만 반환해야 해요 — 여러 행이 나오면 에러가 나요" },
-          { t: "인라인 뷰", d: "FROM 절 안에 쓰는 서브쿼리에요 — 별칭이 반드시 필요하고, 집계 후 다시 필터링할 때 유용해요" },
-          { t: "연관 서브쿼리", d: "매 바깥 행마다 서브쿼리를 다시 실행해요 — 행 수가 많으면 성능이 느려져요" },
+          { t: "스칼라 서브쿼리", d: "반드시 1행 1컬럼만 반환 — 여러 행이 나오면 에러" },
+          { t: "인라인 뷰", d: "FROM 절 안에 쓰는 서브쿼리 — 별칭 필수, 집계 후 다시 필터링할 때 유용" },
+          { t: "연관 서브쿼리", d: "매 바깥 행마다 서브쿼리 재실행 — 행 수가 많으면 성능 저하" },
         ],
       },
     ],
@@ -362,11 +362,11 @@ SELECT e.name, e.salary
   c26: {
     subjectCode: "2과목", subjectTitle: "SQL 기본 및 활용",
     chapterNum: "6장", title: "집합 연산자",
-    subtitle: "UNION · UNION ALL · INTERSECT · MINUS — 중복 처리 차이가 핵심.",
+    subtitle: "UNION · UNION ALL · INTERSECT · MINUS — 중복 처리 차이가 핵심",
     sections: [
       {
         id: "s1", heading: "6.1 집합 연산자 종류",
-        paragraphs: ["두 SELECT 결과를 집합 연산으로 결합. 양쪽 컬럼 수·데이터 타입이 동일해야 함."],
+        paragraphs: ["두 SELECT 결과를 집합 연산으로 결합. 양쪽 컬럼 수·데이터 타입이 동일해야 함"],
         diagram: "setOperators",
         table: {
           headers: ["연산자", "의미", "중복 처리"],
@@ -377,15 +377,15 @@ SELECT e.name, e.salary
             ["MINUS (EXCEPT)", "차집합 (A − B)", "중복 제거"],
           ],
         },
-        tip: "UNION은 내부적으로 정렬 후 중복 제거 → UNION ALL보다 느림. 중복이 없음을 확신하면 UNION ALL 사용.",
+        tip: "UNION은 내부적으로 정렬 후 중복 제거 → UNION ALL보다 느림. 중복이 없음을 확신하면 UNION ALL 사용",
       },
       {
         id: "s2", heading: "6.2 사용 규칙",
         bullets: [
-          { t: "컬럼 수", d: "양쪽 SELECT 절의 컬럼 갯수가 같아야 해요" },
-          { t: "데이터 타입", d: "서로 대응하는 컬럼의 타입이 호환돼야 해요" },
-          { t: "컬럼명", d: "위쪽 SELECT에서 쓴 컬럼명이 결과의 컬럼명이 돼요" },
-          { t: "ORDER BY", d: "제일 마지막 SELECT 뒤에 딱 한 번만 쓸 수 있어요" },
+          { t: "컬럼 수", d: "양쪽 SELECT 절의 컬럼 갯수가 동일해야 함" },
+          { t: "데이터 타입", d: "서로 대응하는 컬럼의 타입이 호환되어야 함" },
+          { t: "컬럼명", d: "위쪽 SELECT에서 쓴 컬럼명이 결과의 컬럼명이 됨" },
+          { t: "ORDER BY", d: "제일 마지막 SELECT 뒤에 딱 한 번만 사용 가능" },
         ],
         example: {
           caption: "UNION 예",
@@ -402,11 +402,11 @@ SELECT con_id, name, 'CON' AS type FROM contractor
   c27: {
     subjectCode: "2과목", subjectTitle: "SQL 기본 및 활용",
     chapterNum: "7장", title: "계층형 질의 · 윈도우 함수",
-    subtitle: "CONNECT BY로 조직도 전개, 윈도우 함수로 순위·누적·이동 — 최근 출제 비중 ↑.",
+    subtitle: "CONNECT BY로 조직도 전개, 윈도우 함수로 순위·누적·이동 — 최근 출제 비중 ↑",
     sections: [
       {
         id: "s1", heading: "7.1 계층형 질의 (Oracle CONNECT BY)",
-        paragraphs: ["같은 테이블 내 계층 관계(부모-자식)를 재귀적으로 전개. 조직도, 카테고리 트리 등."],
+        paragraphs: ["같은 테이블 내 계층 관계(부모-자식)를 재귀적으로 전개. 조직도·카테고리 트리 등"],
         diagram: "hierarchyTree",
         example: {
           caption: "사원 조직도 — 상사→부하 전개",
@@ -418,17 +418,17 @@ SELECT con_id, name, 'CON' AS type FROM contractor
  ORDER SIBLINGS BY name;`,
         },
         bullets: [
-          { t: "START WITH", d: "전개를 시작할 루트 노드를 지정해요" },
-          { t: "CONNECT BY PRIOR", d: "부모-자식 관계를 선언해요 — PRIOR는 '이전(부모)' 행을 가리켜요" },
+          { t: "START WITH", d: "전개를 시작할 루트 노드 지정" },
+          { t: "CONNECT BY PRIOR", d: "부모-자식 관계 선언 — PRIOR는 '이전(부모)' 행을 가리킴" },
           { t: "PRIOR 위치", d: "'PRIOR 자식키 = 부모키' 형태면 Top-Down(순방향) 전개" },
           { t: "PRIOR 반대", d: "'PRIOR 부모키 = 자식키' 형태면 Bottom-Up(역방향) 전개" },
-          { t: "LEVEL", d: "의사 컬럼 — 루트가 1, 그 자식이 2, 3... 식으로 증가해요" },
-          { t: "ORDER SIBLINGS BY", d: "같은 계층(형제 노드) 안에서만 정렬해요" },
+          { t: "LEVEL", d: "의사 컬럼 — 루트가 1, 그 자식이 2, 3... 식으로 증가" },
+          { t: "ORDER SIBLINGS BY", d: "같은 계층(형제 노드) 안에서만 정렬" },
         ],
       },
       {
         id: "s2", heading: "7.2 윈도우 함수 개요",
-        paragraphs: ["행별로 집계를 계산하되, GROUP BY처럼 행이 줄어들지 않는 함수. OVER 절로 범위 지정."],
+        paragraphs: ["행별로 집계를 계산하되, GROUP BY처럼 행이 줄어들지 않는 함수. OVER 절로 범위 지정"],
         example: {
           caption: "윈도우 함수 기본 구조",
           sql: `함수(인수) OVER (
@@ -461,11 +461,11 @@ SELECT con_id, name, 'CON' AS type FROM contractor
       {
         id: "s4", heading: "7.4 집계 윈도우 · LAG · LEAD",
         bullets: [
-          { t: "SUM / AVG / COUNT OVER (...)", d: "누적 합계, 이동 평균을 행 수를 줄이지 않고 계산해요" },
-          { t: "LAG(col, n, default)", d: "현재 행 기준 n번째 이전 행의 값을 가져와요 — n의 기본값은 1이에요" },
-          { t: "LEAD(col, n, default)", d: "현재 행 기준 n번째 다음 행의 값을 가져와요" },
-          { t: "FIRST_VALUE · LAST_VALUE", d: "지정한 윈도우 안 첫 행과 마지막 행의 값을 돌려줘요" },
-          { t: "NTILE(n)", d: "전체를 n개 그룹으로 균등 분할해서 그룹 번호를 붙여줘요" },
+          { t: "SUM / AVG / COUNT OVER (...)", d: "누적 합계·이동 평균을 행 수를 줄이지 않고 계산" },
+          { t: "LAG(col, n, default)", d: "현재 행 기준 n번째 이전 행의 값 반환 — n의 기본값은 1" },
+          { t: "LEAD(col, n, default)", d: "현재 행 기준 n번째 다음 행의 값 반환" },
+          { t: "FIRST_VALUE · LAST_VALUE", d: "지정한 윈도우 안 첫 행·마지막 행의 값 반환" },
+          { t: "NTILE(n)", d: "전체를 n개 그룹으로 균등 분할해 그룹 번호 부여" },
         ],
         example: {
           caption: "누적 합계 · 전월 대비 변화",
@@ -476,7 +476,7 @@ SELECT con_id, name, 'CON' AS type FROM contractor
        amount - LAG(amount, 1, 0) OVER (ORDER BY month_id) AS delta
   FROM sales;`,
         },
-        tip: "ROWS BETWEEN: 물리적 행 개수 / RANGE BETWEEN: 논리적 값 범위. ORDER BY 없이 OVER() 만 쓰면 전체를 하나의 윈도우로.",
+        tip: "ROWS BETWEEN: 물리적 행 개수 / RANGE BETWEEN: 논리적 값 범위. ORDER BY 없이 OVER()만 쓰면 전체가 하나의 윈도우",
       },
     ],
     linkedQuizIds: [206, 213],
