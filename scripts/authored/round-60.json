@@ -79,7 +79,7 @@
         {
           "type": "erd",
           "caption": "서비스·서비스이용·청구·납부 ERD",
-          "mermaid": "erDiagram\n    서비스 ||--o{ 서비스이용 : \"이용\"\n    청구 ||--o{ 서비스이용 : \"기준\"\n    청구 ||--o{ 납부 : \"수행\""
+          "mermaid": "erDiagram\n    서비스 ||--o{ 서비스이용 : \"이용\"\n    서비스이용 ||--o{ 청구 : \"발행\"\n    청구 ||--o{ 납부 : \"수행\""
         }
       ]
     },
@@ -719,7 +719,7 @@
     {
       "subject": "2과목",
       "number": 25,
-      "title": "아래 SQL이 오류 없이 실행되기 위해 T2.COL2가 가져야 할 제약 조건은?",
+      "title": "아래 SQL의 서브쿼리가 항상 1건 이하만 반환하도록 보장하기 위해 T2.A 컬럼이 가져야 할 제약 조건은?",
       "options": [
         "UNIQUE",
         "NOT NULL",
@@ -727,7 +727,7 @@
         "CHECK"
       ],
       "correctIndex": 0,
-      "explanation": "외부 쿼리가 '=' 단일 행 비교를 사용하므로 서브쿼리 (SELECT COL2 FROM T2 WHERE A='A') 가 반드시 0행 또는 1행만 반환해야 한다. 만약 T2.A='A' 인 행이 둘 이상이면 'ORA-01427: single-row subquery returns more than one row' 같은 오류가 난다. 이를 데이터 차원에서 보장하는 가장 적절한 제약은 T2.COL2 의 UNIQUE 이며, 아래 예시 데이터처럼 A='A' 두 행이 존재할 때 COL2 가 UNIQUE 라면 두 COL2 값이 다르더라도 서로 같은 값이 동시에 들어올 수 없게 되고, 실제 출제 의도는 서브쿼리 결과의 단일성을 강제하는 컬럼 제약 선택지에서 UNIQUE 가 가장 직접적인 답이 된다. NOT NULL·FOREIGN KEY·CHECK 는 단일성을 보장하지 못한다. 정답은 ①.",
+      "explanation": "외부 쿼리가 '=' 단일 행 비교를 사용하므로 서브쿼리 (SELECT COL2 FROM T2 WHERE A='A') 가 반드시 0행 또는 1행만 반환해야 한다. 만약 T2.A='A' 인 행이 둘 이상이면 'ORA-01427: single-row subquery returns more than one row' 오류가 발생한다. 따라서 검색 키인 T2.A 컬럼이 UNIQUE여야 'A='A''인 행이 최대 1건으로 보장된다. NOT NULL은 NULL만 막을 뿐 중복은 허용하고, FOREIGN KEY는 다른 테이블 참조를 강제, CHECK는 값 도메인을 제한할 뿐 단일성과 무관하다. 정답은 ①.",
       "references": [
         {
           "type": "table",
@@ -741,7 +741,7 @@
         },
         {
           "type": "table",
-          "caption": "T2 테이블 (A='A' 행이 둘 이상이면 단일 행 서브쿼리 오류)",
+          "caption": "T2 테이블",
           "headers": ["A", "COL2"],
           "rows": [
             ["A", "10"],
@@ -1131,7 +1131,7 @@
     {
       "subject": "2과목",
       "number": 39,
-      "title": "아래 TGT, SRC 테이블에 대해 MERGE 문 수행 후 TGT 의 V1, V2, V3 값으로 옳은 것은?",
+      "title": "아래 TGT, SRC 테이블에 대해 MERGE 문 수행 후 TGT의 ID=2 행의 V1, V2, V3 값으로 옳은 것은?",
       "options": [
         "100 100 100",
         "100 100 NULL",
