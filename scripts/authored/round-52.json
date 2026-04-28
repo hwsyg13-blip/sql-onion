@@ -275,7 +275,7 @@
     {
       "subject": "2과목",
       "number": 14,
-      "title": "아래 계층형 SQL 에서 PRIOR 키워드가 들어갈 위치로 옳은 것은?",
+      "title": "아래 EMP 테이블 (사원-매니저) 에 대한 계층형 SQL 에서 PRIOR 키워드가 들어갈 위치로 옳은 것은?",
       "options": [
         "ㄱ 위치",
         "ㄴ 위치",
@@ -283,8 +283,19 @@
         "위치 어디도 아님"
       ],
       "correctIndex": 1,
-      "explanation": "PRIOR 는 '이전 행' 의 컬럼을 참조하는 연산자이므로 PRIOR 매니저 ↔ 현재 사원이 아니라, PRIOR 사원 ↔ 현재 매니저 형태로 부모 사원의 사번이 자식 매니저와 매칭되도록 배치된다.",
+      "explanation": "PRIOR 는 '이전 행' 의 컬럼을 참조하는 연산자이므로 PRIOR 매니저 ↔ 현재 사원이 아니라, PRIOR 사원 ↔ 현재 매니저 형태로 부모 사원의 사번이 자식 매니저와 매칭되도록 배치된다. 따라서 ㄴ 위치에 PRIOR 가 들어가야 한다.",
       "references": [
+        {
+          "type": "table",
+          "caption": "EMP 테이블",
+          "headers": ["사원", "매니저"],
+          "rows": [
+            ["100", "(NULL)"],
+            ["200", "100"],
+            ["300", "100"],
+            ["400", "200"]
+          ]
+        },
         {
           "type": "sql",
           "code": "SELECT 사원, 매니저\nFROM   EMP\nSTART WITH 매니저 IS NULL\nCONNECT BY ( ㄱ ) 사원 = ( ㄴ ) 매니저;"
@@ -429,15 +440,33 @@
     {
       "subject": "2과목",
       "number": 22,
-      "title": "세 번째 문자가 'L' 인 단어를 찾는 LIKE 패턴으로 옳은 것은?",
+      "title": "아래 NAMES 테이블에서 세 번째 문자가 'L' 인 단어를 찾는 LIKE 패턴으로 옳은 것은?",
       "options": [
-        "'L%'",
-        "'%L'",
-        "'_ _ L%'",
-        "'L_ _%'"
+        "`'L%'`",
+        "`'%L'`",
+        "`'__L%'`",
+        "`'L__%'`"
       ],
       "correctIndex": 2,
-      "explanation": "'_' 는 임의의 한 문자, '%' 는 0개 이상의 임의 문자를 의미한다."
+      "explanation": "LIKE 패턴에서 `_` 는 임의의 한 문자, `%` 는 0개 이상의 임의 문자를 의미한다. 따라서 \"세 번째 문자가 'L'\" 을 표현하려면 앞에 `_` 두 개를 두어 임의의 두 문자를 건너뛴 뒤 'L', 그 뒤에 `%` 로 임의 길이 문자열을 잇는 `'__L%'` 가 된다. ① 은 'L' 로 시작, ② 는 'L' 로 끝남, ④ 는 첫 글자가 'L' 이고 네 번째에 임의 문자열이 와 의미가 다르다.",
+      "references": [
+        {
+          "type": "table",
+          "caption": "NAMES 테이블",
+          "headers": ["NAME"],
+          "rows": [
+            ["APPLE"],
+            ["HELLO"],
+            ["WORLD"],
+            ["MILK"],
+            ["GULF"]
+          ]
+        },
+        {
+          "type": "sql",
+          "code": "SELECT *\nFROM   NAMES\nWHERE  NAME LIKE '__L%';"
+        }
+      ]
     },
     {
       "subject": "2과목",
@@ -500,20 +529,33 @@
     {
       "subject": "2과목",
       "number": 25,
-      "title": "아래 두 컬럼 A, B 의 값이 서로 다른 결과가 되는 SQL 은?",
+      "title": "아래 EMP 테이블에 대해 두 컬럼 A, B 의 값이 서로 다른 결과가 되는 SQL 은?",
       "options": [
-        "SUM(SAL) AS A, SUM(SAL) AS B",
-        "AVG(SAL) AS A, AVG(SAL) AS B",
-        "MAX(SAL) AS A, MIN(SAL) AS B",
-        "COUNT(SAL) AS A, COUNT(SAL) AS B"
+        "`SELECT SUM(SAL) AS A, SUM(SAL) AS B FROM EMP;`",
+        "`SELECT AVG(SAL) AS A, AVG(SAL) AS B FROM EMP;`",
+        "`SELECT MAX(SAL) AS A, MIN(SAL) AS B FROM EMP;`",
+        "`SELECT COUNT(SAL) AS A, COUNT(SAL) AS B FROM EMP;`"
       ],
       "correctIndex": 2,
-      "explanation": "MAX 와 MIN 은 각각 최댓값·최솟값을 반환하므로 단일 컬럼이라도 결과가 다르다. 나머지 보기는 동일 함수를 두 번 사용해 같은 값을 반환한다."
+      "explanation": "MAX 와 MIN 은 각각 최댓값(5000)·최솟값(2000) 을 반환하므로 A 와 B 결과가 다르다. ① SUM/② AVG/④ COUNT 는 동일 함수를 두 번 호출하므로 A 와 B 가 같다.",
+      "references": [
+        {
+          "type": "table",
+          "caption": "EMP 테이블",
+          "headers": ["EMPNO", "SAL"],
+          "rows": [
+            ["7001", "5000"],
+            ["7002", "3500"],
+            ["7003", "2800"],
+            ["7004", "2000"]
+          ]
+        }
+      ]
     },
     {
       "subject": "2과목",
       "number": 26,
-      "title": "제품·생산제품·생산라인 엔터티가 있을 때 제품과 생산라인을 직접 조인하면 발생하는 결과는?",
+      "title": "아래 ERD 와 같이 제품·생산제품·생산라인 엔터티가 있을 때 제품과 생산라인을 직접 조인하면 발생하는 결과는?",
       "options": [
         "정상 조인 결과",
         "중복 제거된 결과",
@@ -521,7 +563,31 @@
         "카티션 곱(Cartesian Product)"
       ],
       "correctIndex": 3,
-      "explanation": "두 엔터티 사이에 직접 연결 키가 없기 때문에 중간 엔터티 없이 직접 조인하면 카티션 곱이 발생한다."
+      "explanation": "제품과 생산라인은 교차 엔터티 '생산제품' 을 거쳐 M:N 으로 연결된다. 중간 엔터티를 건너뛰고 두 테이블을 직접 조인하면 조인 조건이 성립할 키가 없어 모든 행이 곱해지는 카티션 곱(CROSS JOIN) 이 발생한다.",
+      "references": [
+        {
+          "type": "ascii",
+          "text": "[ 제품 ] ─|─ ─ ─ ─o< [ 생산제품 ] >o─ ─ ─ ─|─ [ 생산라인 ]\n  (제품번호 PK)        (제품번호 FK,             (라인번호 PK)\n                       라인번호 FK)"
+        },
+        {
+          "type": "table",
+          "caption": "제품 엔터티",
+          "headers": ["컬럼"],
+          "rows": [["제품번호 (PK)"], ["제품명"]]
+        },
+        {
+          "type": "table",
+          "caption": "생산제품 엔터티 (교차 엔터티)",
+          "headers": ["컬럼"],
+          "rows": [["제품번호 (PK, FK)"], ["라인번호 (PK, FK)"], ["생산일자"]]
+        },
+        {
+          "type": "table",
+          "caption": "생산라인 엔터티",
+          "headers": ["컬럼"],
+          "rows": [["라인번호 (PK)"], ["라인명"]]
+        }
+      ]
     },
     {
       "subject": "2과목",
@@ -672,15 +738,38 @@
     {
       "subject": "2과목",
       "number": 35,
-      "title": "아래 ROLLUP 절 중 소계와 총계를 한 번에 나타내기 위해 괄호를 중첩한 구문으로 옳은 것은?",
+      "title": "아래 T 테이블에서 소계 없이 (A, B) 세부 집계와 () 총계만 한 번에 나타내기 위해 괄호를 중첩한 ROLLUP 구문으로 옳은 것은?",
       "options": [
-        "ROLLUP(A, B)",
-        "ROLLUP((A), B)",
-        "ROLLUP((A, B))",
-        "ROLLUP(A, (B))"
+        "`ROLLUP(A, B)`",
+        "`ROLLUP((A), B)`",
+        "`ROLLUP((A, B))`",
+        "`ROLLUP(A, (B))`"
       ],
       "correctIndex": 2,
-      "explanation": "중첩 괄호는 (A, B) 를 하나의 단위로 취급하여 () 총계만 추가로 반환한다."
+      "explanation": "중첩 괄호 `((A, B))` 는 (A, B) 를 하나의 그룹 단위로 취급하므로 (A, B) 세부 집계와 () 총계 두 가지만 반환된다. ① `ROLLUP(A, B)` 는 (A, B), (A), () 세 그룹, ② `ROLLUP((A), B)` 는 (A, B), (A), () 와 동일, ④ `ROLLUP(A, (B))` 는 (A, B), (A), () 와 동일하게 (A) 소계가 추가된다.",
+      "references": [
+        {
+          "type": "table",
+          "caption": "T 테이블",
+          "headers": ["A", "B", "C"],
+          "rows": [
+            ["A1", "B1", "10"],
+            ["A1", "B2", "20"],
+            ["A2", "B1", "30"]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "기대 결과 — (A, B) 세부 + () 총계만 (A 단독 소계 없음)",
+          "headers": ["A", "B", "SUM(C)"],
+          "rows": [
+            ["A1", "B1", "10"],
+            ["A1", "B2", "20"],
+            ["A2", "B1", "30"],
+            ["(NULL)", "(NULL)", "60"]
+          ]
+        }
+      ]
     },
     {
       "subject": "2과목",
@@ -780,20 +869,42 @@
     {
       "subject": "2과목",
       "number": 41,
-      "title": "아래 네 가지 JOIN SQL 중 결과 행 수가 나머지와 다른 것은?",
+      "title": "아래 두 테이블 T1(3행), T2(3행) 에 대한 네 가지 JOIN SQL 중 결과 행 수가 나머지와 다른 것은? (단, 모든 행이 매칭되는 데이터)",
       "options": [
-        "INNER JOIN",
-        "LEFT OUTER JOIN",
-        "RIGHT OUTER JOIN",
-        "CROSS JOIN"
+        "`SELECT * FROM T1 INNER JOIN T2 ON T1.ID = T2.ID;`",
+        "`SELECT * FROM T1 LEFT OUTER JOIN T2 ON T1.ID = T2.ID;`",
+        "`SELECT * FROM T1 RIGHT OUTER JOIN T2 ON T1.ID = T2.ID;`",
+        "`SELECT * FROM T1 CROSS JOIN T2;`"
       ],
       "correctIndex": 3,
-      "explanation": "CROSS JOIN 은 두 테이블의 모든 조합을 반환하므로 결과 행 수가 가장 많다."
+      "explanation": "INNER/LEFT/RIGHT OUTER JOIN 은 모두 ON 조건으로 ID 가 매칭되는 행만 반환하므로 (모든 행이 매칭되는 가정에서) 결과는 3 행으로 동일하다. CROSS JOIN 은 조인 조건 없이 모든 조합을 반환하므로 3 × 3 = 9 행으로 결과 행 수가 가장 많다.",
+      "references": [
+        {
+          "type": "table",
+          "caption": "T1 테이블",
+          "headers": ["ID", "VAL"],
+          "rows": [
+            ["1", "A"],
+            ["2", "B"],
+            ["3", "C"]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "T2 테이블",
+          "headers": ["ID", "DESCRIPTION"],
+          "rows": [
+            ["1", "X"],
+            ["2", "Y"],
+            ["3", "Z"]
+          ]
+        }
+      ]
     },
     {
       "subject": "2과목",
       "number": 42,
-      "title": "제품·생산제품·생산라인 엔터티가 있을 때 제품과 생산라인을 직접 조인할 경우 발생하는 현상은?",
+      "title": "아래 ERD 와 같이 제품·생산제품·생산라인 엔터티가 있을 때 제품과 생산라인을 직접 조인할 경우 발생하는 현상은?",
       "options": [
         "정상 조인 결과",
         "공집합",
@@ -801,7 +912,13 @@
         "카티션 곱"
       ],
       "correctIndex": 3,
-      "explanation": "제품과 생산라인은 교차 엔터티인 생산제품을 거쳐 M:N 관계로 연결된다. 중간 엔터티를 건너뛰고 두 테이블을 직접 `JOIN` 하면 조인 조건이 성립할 키가 없어 모든 행이 곱해지는 카티션 곱(CROSS JOIN) 이 발생한다."
+      "explanation": "제품과 생산라인은 교차 엔터티인 생산제품을 거쳐 M:N 관계로 연결된다. 중간 엔터티를 건너뛰고 두 테이블을 직접 `JOIN` 하면 조인 조건이 성립할 키가 없어 모든 행이 곱해지는 카티션 곱(CROSS JOIN) 이 발생한다. 정확히 조인하려면 `제품 JOIN 생산제품 ON 제품.제품번호 = 생산제품.제품번호 JOIN 생산라인 ON 생산제품.라인번호 = 생산라인.라인번호` 형태로 중간 엔터티를 경유해야 한다.",
+      "references": [
+        {
+          "type": "ascii",
+          "text": "[ 제품 ] ─|─ ─ ─ ─o< [ 생산제품 ] >o─ ─ ─ ─|─ [ 생산라인 ]\n  (제품번호 PK)        (제품번호 FK,             (라인번호 PK)\n                       라인번호 FK)"
+        }
+      ]
     },
     {
       "subject": "2과목",
@@ -925,7 +1042,7 @@
     {
       "subject": "2과목",
       "number": 48,
-      "title": "아래 SQL 에서 PRIOR 키워드가 들어갈 위치로 옳은 것은?",
+      "title": "아래 EMP 테이블에 대한 계층형 SQL 에서 PRIOR 키워드가 들어갈 위치로 옳은 것은?",
       "options": [
         "ㄱ",
         "ㄴ",
@@ -933,8 +1050,19 @@
         "ㄹ"
       ],
       "correctIndex": 2,
-      "explanation": "PRIOR 는 CONNECT BY 조건식의 좌측에 위치해 이전 행을 지정한다.",
+      "explanation": "PRIOR 는 CONNECT BY 조건식의 좌측에 위치해 이전(부모) 행을 지정한다. `PRIOR mgr = empno` 는 \"이전 행의 mgr 가 다음 행의 empno 와 같다\" 는 의미가 되어 자식→부모 역방향 전개가 이루어진다. ㄱ·ㄴ 은 FROM·START WITH 위치라 PRIOR 가 올 수 없고, ㄹ 위치(empno 좌측) 에 PRIOR 가 오면 부모→자식 순방향이 되어 본 SQL 의 의도와 다르다.",
       "references": [
+        {
+          "type": "table",
+          "caption": "EMP 테이블 (사원-매니저 계층)",
+          "headers": ["empno", "mgr"],
+          "rows": [
+            ["100", "(NULL)"],
+            ["200", "100"],
+            ["300", "100"],
+            ["400", "200"]
+          ]
+        },
         {
           "type": "sql",
           "code": "SELECT 사원, 매니저\nFROM   EMP  -- (ㄱ)\nSTART WITH 매니저 IS NULL  -- (ㄴ)\nCONNECT BY ( ㄷ ) mgr = ( ㄹ ) empno;"
@@ -944,7 +1072,7 @@
     {
       "subject": "2과목",
       "number": 49,
-      "title": "부서 테이블의 한 행을 삭제할 때 이를 참조하는 사원 테이블의 행도 함께 삭제되도록 외래키에 설정해야 할 옵션은?",
+      "title": "아래 부서·사원 ERD 에서 부서 한 행을 삭제할 때 이를 참조하는 사원 테이블의 행도 함께 삭제되도록 외래키에 설정해야 할 옵션은?",
       "options": [
         "RESTRICT (참조하는 자식 행이 있으면 부모 삭제를 거부)",
         "PARENT ← CHILD CASCADE (부모 삭제 시 자식 PK 가 부모로 전파됨 — 잘못된 방향)",
@@ -952,7 +1080,17 @@
         "NO ACTION (참조 무결성 위반 시 명령을 거부하는 표준 SQL 기본 동작)"
       ],
       "correctIndex": 2,
-      "explanation": "자식 테이블의 외래키에 `ON DELETE CASCADE` 를 설정하면 부모 삭제 시 자식도 자동 삭제된다."
+      "explanation": "자식 테이블(사원)의 외래키에 `ON DELETE CASCADE` 를 설정하면 부모(부서) 삭제 시 자식 행도 자동 삭제된다. 즉 부모→자식 방향(CHILD ← PARENT CASCADE)으로 전파가 이루어진다.",
+      "references": [
+        {
+          "type": "ascii",
+          "text": "[ 부서 ] ─|─ ─ ─ ─o< [ 사원 ]\n  (부서번호 PK)         (사원번호 PK,\n                        부서번호 FK ON DELETE CASCADE)"
+        },
+        {
+          "type": "sql",
+          "code": "ALTER TABLE 사원\nADD CONSTRAINT FK_사원_부서\nFOREIGN KEY (부서번호) REFERENCES 부서(부서번호)\nON DELETE CASCADE;"
+        }
+      ]
     },
     {
       "subject": "2과목",
