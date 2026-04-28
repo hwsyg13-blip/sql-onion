@@ -618,6 +618,8 @@ img, svg {
   .home-hero-mascot { flex: 0 0 auto !important; }
   .home-hero-mascot svg { width: 110px !important; height: 110px !important; }
   .dashboard-grid { grid-template-columns: 1fr !important; }
+  /* 학습 순서 4-step 로드맵 — 태블릿/모바일에서 2열로 wrap */
+  .home-roadmap { grid-template-columns: repeat(2, 1fr) !important; }
 }
 
 @media (max-width: 480px) {
@@ -628,6 +630,8 @@ img, svg {
   .home-hero-text { font-size: 14px !important; }
   .home-hero-mascot { display: none !important; }
   .home-stats-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 10px !important; }
+  /* 학습 순서 — 가장 좁은 화면에선 단일 컬럼 */
+  .home-roadmap { grid-template-columns: 1fr !important; }
 }
 
 /* =============================================================

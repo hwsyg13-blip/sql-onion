@@ -2,40 +2,20 @@
 import React from 'react';
 import { Btn, Tag, Ic, Mascot, MascotGuide, OnionMark, Progress, Divider, CodeBlock, highlightSQL } from '../components/Atoms';
 import { UsageBadge } from './PricingScreen';
-import { EXAM_SETS } from '../data/quizBank';
 import { AdSlot } from '../components/AdSlot';
 import { useProgress, isPlanDayDone } from '../lib/progress';
 import { PLAN_DATA } from './PlanScreen';
 import { daysUntilExam } from '../lib/examDate';
 
-const EXAM_LABEL: Record<string, string> = Object.fromEntries(
-  EXAM_SETS.map(s => [s.id, s.label])
-);
-
 // Home — hero + dashboard summary + quick entry to CBT / endless / plan
 export const HomeScreen = ({onNavigate, user}) => {
   const { progress, stats } = useProgress();
-  const { totalAttempts, correctRate, examsDone, recentExams } = stats;
   // 3주 계획 컨텐츠 기반으로 진도 계산 — PlanScreen과 일치
   const planDoneCount = PLAN_DATA.filter(d => isPlanDayDone(d, progress, stats)).length;
   const dayProgress = Math.min(21, planDoneCount);
   const nextDay = PLAN_DATA.find(d => !isPlanDayDone(d, progress, stats))?.day ?? 21;
   const weekNum = Math.min(3, Math.ceil(nextDay / 7));
   const weekDay = ((nextDay - 1) % 7) + 1;
-
-  // 최근 완료 기록 있으면 그 카드, 없으면 학습 시작용 기본 카드
-  const recentCards = recentExams.slice(0, 3).map(e => ({
-    tag: EXAM_LABEL[e.examSetId] || e.examSetId,
-    title: `${EXAM_LABEL[e.examSetId] || e.examSetId} 결과 다시 보기 (${e.score}점)`,
-    sub: '완료됨',
-    route: 'cbt',
-    arg: e.examSetId,
-  }));
-  const resumeCards = recentCards.length > 0 ? recentCards : [
-    {tag: '1주차 · Day 1', title: '데이터 모델의 이해', sub: '이론부터 시작하기', route: 'theory-detail', arg: 'c11'},
-    {tag: '3주 계획', title: '오늘의 학습 보기', sub: '순서대로 따라가세요', route: 'plan', arg: null},
-    {tag: '제60회', title: '최신 기출 맛보기', sub: '2026년 3월 시행', route: 'cbt', arg: 'round-60'},
-  ];
 
   return (
   <div className="home-page" style={{maxWidth: 1080, margin: "0 auto", padding: "32px 28px 80px"}}>
@@ -92,8 +72,8 @@ export const HomeScreen = ({onNavigate, user}) => {
     {/* Quick entries — 3 primary paths */}
     <section style={{marginTop: 28, display:"grid", gridTemplateColumns:"repeat(auto-fit, minmax(260px, 1fr))", gap: 14}}>
       {[
-        {id:"exams",   tone:"point", title:"기출문제 CBT", sub:"실제 시험처럼 OMR 답안지로", badge:"추천", icon: Ic.ListChecks, cta:"회차 선택"},
-        {id:"endless", tone:"blue",  title:"무한 퀴즈",   sub:"AI가 만드는 단일 문제 · 즉시 채점", badge:"새로", icon: Ic.Shuffle, cta:"시작하기"},
+        {id:"exams",   tone:"point", title:"기출문제 CBT", sub:"실제 시험처럼 OMR 답안지로", icon: Ic.ListChecks, cta:"회차 선택"},
+        {id:"endless", tone:"blue",  title:"무한 퀴즈",   sub:"AI가 만드는 단일 문제 · 즉시 채점", badge:"추천", icon: Ic.Shuffle, cta:"시작하기"},
         {id:"mock-exam",tone:"peach", title:"실전 모의고사", sub:"50문항 · 90분 · 합격 판정", icon: Ic.Clock, cta:"응시하기"},
       ].map(card => {
         const I = card.icon;
@@ -183,31 +163,76 @@ export const HomeScreen = ({onNavigate, user}) => {
       </div>
     </section>
 
-    {/* Recent activity / suggestion */}
+    {/* 학습 순서 — 합격까지 4단계 로드맵 */}
     <section style={{marginTop: 28}}>
       <div style={{display:"flex",justifyContent:"space-between",alignItems:"baseline",marginBottom:12}}>
-        <h3 style={{fontSize:16,fontWeight:700,color:"var(--fg-1)",margin:0}}>이어서 공부하기</h3>
+        <h3 style={{fontSize:16,fontWeight:700,color:"var(--fg-1)",margin:0}}>학습 순서</h3>
+        <span style={{fontSize:12,color:"var(--fg-3)"}}>합격까지 4단계 · 클릭해서 바로 이동</span>
       </div>
-      <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit, minmax(280px,1fr))",gap:12}}>
-        {resumeCards.map((c,i)=>(
-          <button key={i} onClick={()=>onNavigate(c.route, c.arg)} style={{
-            textAlign:"left", background:"var(--bg-card)", border:"1px solid var(--border-subtle)",
-            borderRadius:12, padding:"16px 18px", cursor:"pointer", fontFamily:"inherit",
-            display:"flex",gap:12, alignItems:"flex-start",
-          }}>
-            <div style={{
-              width:36,height:36,borderRadius:10,background:"var(--point-100)",color:"var(--point-600)",
-              display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0,
-            }}><Ic.Play size={14}/></div>
-            <div style={{flex:1,minWidth:0}}>
-              <div style={{fontSize:11,color:"var(--fg-3)",fontWeight:600,marginBottom:3}}>{c.tag}</div>
-              <div style={{fontSize:14,color:"var(--fg-1)",fontWeight:600,marginBottom:3,lineHeight:1.4}}>{c.title}</div>
-              <div style={{fontSize:12,color:"var(--fg-3)"}}>{c.sub}</div>
-            </div>
-            <Ic.ChevronRight size={18}/>
-          </button>
-        ))}
-      </div>
+      <ol className="home-roadmap" style={{
+        listStyle:"none", margin:0, padding:0,
+        display:"grid", gridTemplateColumns:"repeat(4, 1fr)", gap:10,
+      }}>
+        {[
+          {
+            n:1, icon: Ic.Calendar,
+            title:"3주 계획 따라가기",
+            sub:"하루 1시간, Day 1~14 이론 마스터",
+            route:"plan",
+          },
+          {
+            n:2, icon: Ic.Shuffle,
+            title:"틈틈이 무한 퀴즈",
+            sub:"이동 중·자투리 시간에 단일 문제로 감 유지",
+            route:"endless",
+          },
+          {
+            n:3, icon: Ic.ListChecks,
+            title:"마지막 주 실전 정리",
+            sub:"Day 15~20: 기출 12회차 + 실전 모의 6회",
+            route:"exams",
+          },
+          {
+            n:4, icon: Ic.Sparkles,
+            title:"시험 당일 총정리",
+            sub:"Day 21: 핵심·함정·체크리스트 통독 후 입실",
+            route:"final-cheatsheet",
+          },
+        ].map(step => {
+          const I = step.icon;
+          return (
+            <li key={step.n}>
+              <button onClick={()=>onNavigate(step.route)} style={{
+                width:"100%", height:"100%", textAlign:"left", fontFamily:"inherit",
+                background:"var(--bg-card)", border:"1px solid var(--border-subtle)",
+                borderRadius:14, padding:"16px 18px", cursor:"pointer",
+                display:"flex", flexDirection:"column", gap:10, position:"relative",
+                transition:"border-color 150ms, transform 150ms",
+              }}
+              onMouseEnter={(e)=>{e.currentTarget.style.borderColor="var(--point-500)";}}
+              onMouseLeave={(e)=>{e.currentTarget.style.borderColor="var(--border-subtle)";}}>
+                <div style={{display:"flex",alignItems:"center",gap:10}}>
+                  <div style={{
+                    width:28, height:28, borderRadius:"50%",
+                    background:"var(--point-600)", color:"#fff",
+                    display:"flex", alignItems:"center", justifyContent:"center",
+                    fontSize:13, fontWeight:800, fontFamily:"var(--font-mono)",
+                    flexShrink:0,
+                  }}>{step.n}</div>
+                  <div style={{
+                    width:32, height:32, borderRadius:10,
+                    background:"var(--point-050)", color:"var(--point-600)",
+                    display:"flex", alignItems:"center", justifyContent:"center",
+                    flexShrink:0,
+                  }}><I size={18}/></div>
+                </div>
+                <div style={{fontSize:14,fontWeight:700,color:"var(--fg-1)",lineHeight:1.4}}>{step.title}</div>
+                <div style={{fontSize:12,color:"var(--fg-3)",lineHeight:1.55,marginTop:"-4px"}}>{step.sub}</div>
+              </button>
+            </li>
+          );
+        })}
+      </ol>
     </section>
 
     {/* 광고 슬롯 — 홈 하단 */}
