@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import './styles/theoryPages.css';
+import './styles/examDaySummary.css';
 import { App } from './App';
 import { initGA } from './lib/analytics';
 

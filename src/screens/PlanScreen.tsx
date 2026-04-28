@@ -141,8 +141,8 @@ export const PLAN_DATA = [
     concept:["90분 실전 ×3"], est:270},
 
   // ─ Week 3 Day 21: 최종 암기장 (시험일)
-  {week:3, day:21, subj:"마무리", title:"최종 암기장",
-    actions:[{kind:'cheatsheet',label:'암기장 보기'}],
+  {week:3, day:21, subj:"마무리", title:"시험 당일 핵심 총정리",
+    actions:[{kind:'cheatsheet',label:'당일 총정리 보기'}],
     concept:["함정·정리 한 번에","준비물·컨디션"], est:60, final:true},
 ];
 
