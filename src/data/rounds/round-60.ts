@@ -926,7 +926,7 @@ export const ROUND_60: QuizQuestion[] = [
       "NOT NULL 단독"
     ],
     "correctIndex": 2,
-    "explanation": "",
+    "explanation": "기본키는 행을 유일하게 식별해야 하므로 중복 불가 `UNIQUE` 와 NULL 불가 `NOT NULL` 을 동시에 만족해야 한다. NULL 을 허용하면 식별 불가능하고, `NOT NULL` 만으로는 중복이 생길 수 있어 식별자 역할을 할 수 없다.",
     "_source": "authored"
   },
   {
@@ -968,7 +968,7 @@ export const ROUND_60: QuizQuestion[] = [
       "AND 조건은 계층형 질의에서 지원되지 않는다."
     ],
     "correctIndex": 1,
-    "explanation": "",
+    "explanation": "`CONNECT BY` 절의 조건은 트리 전개 자체에 적용되어 조건을 만족하지 못한 노드부터 그 하위 가지 전체가 따라오지 못한다. 따라서 COL3=2 인 중간 노드가 탈락하면 해당 노드의 자식·자손도 결과에서 단절된다. `WHERE` 절에서 같은 조건을 주는 것과는 동작이 다르다.",
     "_source": "authored",
     "references": [
       {

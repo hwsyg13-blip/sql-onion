@@ -513,15 +513,15 @@ export const ROUND_58: QuizQuestion[] = [
     "round": 58,
     "subject": "2과목",
     "number": 18,
-    "title": "아래 데이터에 대한 AVG 함수의 결과로 옳은 것은?",
+    "title": "아래 데이터에 대한 `SUM(VAL)`, `AVG(VAL)`, `AVG(NVL(VAL, 0))` 의 결과로 옳은 것은?",
     "options": [
       "10, 10, 10",
-      "10, 20, 20 (원본 정답 기준)",
       "60, 20, 12",
+      "10, 20, 20",
       "60, 15, 15"
     ],
     "correctIndex": 1,
-    "explanation": "원본 기출의 정답 표기를 보존한다. SUM·AVG는 NULL을 제외하고 집계하며, NVL 처리 시 분모에 NULL 건도 포함되어 결과가 달라진다는 점을 묻는 문항이다.",
+    "explanation": "VAL = (10, NULL, 20, NULL, 30). `SUM(VAL)` = 10 + 20 + 30 = 60 (NULL 제외). `AVG(VAL)` = 60 / 3 = 20 (분모는 NULL 아닌 3건). `AVG(NVL(VAL, 0))` = (10 + 0 + 20 + 0 + 30) / 5 = 60 / 5 = 12 (NVL 로 NULL → 0 변환 후 분모는 5건). 정답은 `60, 20, 12`.",
     "_source": "authored",
     "references": [
       {
@@ -1255,13 +1255,13 @@ export const ROUND_58: QuizQuestion[] = [
     "number": 42,
     "title": "아래 SQL의 출력 결과로 옳은 것은?",
     "options": [
-      "A",
-      "'A'",
       "''A''",
+      "'A'",
+      "A",
       "'''A'''"
     ],
     "correctIndex": 0,
-    "explanation": "원본 기출의 정답 표기를 보존한다. 인접한 두 개의 작은따옴표는 하나의 따옴표 문자를 리터럴로 표현한다.",
+    "explanation": "Oracle 문자열 리터럴은 양쪽 작은따옴표가 구분자, 내부의 인접한 두 개의 작은따옴표(`''`)는 하나의 작은따옴표 리터럴로 해석된다. `'''''A'''''` 를 분해하면 양 끝 1개씩이 구분자, 내부에는 `''`(=`'`) 2쌍 + `A` + `''`(=`'`) 2쌍 → 결과는 `''A''`.",
     "_source": "authored",
     "references": [
       {

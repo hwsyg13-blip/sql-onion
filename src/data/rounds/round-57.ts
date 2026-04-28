@@ -662,12 +662,16 @@ export const ROUND_57: QuizQuestion[] = [
       "Saturday"
     ],
     "correctIndex": 2,
-    "explanation": "원본 기출의 정답 표기를 보존한다. 문항 내 선지 배치상 Friday 가 제외 조건에 해당하는 값으로 출제되었다.",
+    "explanation": "정규식 '^[^mw][[:lowercase:]]*[u]*day$' 는 첫 글자가 m·w 가 아니어야 하고('Monday', 'Wednesday' 제외), 마지막 두 글자가 ay 이며 그 앞에 u 가 0개 이상 와야 한다. 'i' 옵션으로 대소문자를 구분하지 않으므로 Tuesday(첫 글자 t, …uesday)·Sunday(첫 글자 s, …unday)·Saturday(첫 글자 s, …urday)는 매칭되지만 Friday 는 ay 직전에 'd' 만 있고 'u' 가 없는 패턴이므로 매칭되지 않는다.",
     "_source": "authored",
     "references": [
       {
+        "type": "text",
+        "content": "원본 PDF 표기: '^[^mw][[:lowercase:]]*[u]*day$', ' i ' (REGEXP_LIKE 의 패턴과 옵션만 발췌됨)"
+      },
+      {
         "type": "sql",
-        "code": "REGEXP_LIKE(요일, '^[^mw][[:lower:]]*[u]*day$', 'i')"
+        "code": "SELECT 요일\nFROM   요일테이블\nWHERE  REGEXP_LIKE(요일, '^[^mw][[:lowercase:]]*[u]*day$', 'i');"
       }
     ]
   },
@@ -714,7 +718,7 @@ export const ROUND_57: QuizQuestion[] = [
     "round": 57,
     "subject": "2과목",
     "number": 30,
-    "title": "계층형 질의에서 루트 행의 조건을 지정하는 절은?",
+    "title": "계층형 질의에서 트리 전개가 끝난 뒤 결과 행을 필터링할 때 사용하는 절은?",
     "options": [
       "CONNECT BY 절",
       "FROM 절",
@@ -722,7 +726,7 @@ export const ROUND_57: QuizQuestion[] = [
       "START WITH 절"
     ],
     "correctIndex": 2,
-    "explanation": "원본 기출의 정답 표기를 보존한다. 본 문항은 \"계층 전개 이후 적용되는 필터 조건\"을 묻는 의도로 출제되어 WHERE 절이 정답이 된다.",
+    "explanation": "`START WITH` 는 트리 전개의 시작점(루트), `CONNECT BY` 는 부모-자식 관계 조건이라 두 절은 트리 전개 자체에 영향을 준다. 반면 `WHERE` 는 트리 전개가 모두 끝난 결과 행에만 적용되어 단순 필터로 동작한다.",
     "_source": "authored"
   },
   {
@@ -957,15 +961,15 @@ export const ROUND_57: QuizQuestion[] = [
     "round": 57,
     "subject": "2과목",
     "number": 39,
-    "title": "아래 SQL 의 실행 결과로 옳은 것은? (오늘 날짜는 2025년 1월 1일 오후 1시로 가정)",
+    "title": "아래 SQL 의 실행 결과로 옳은 것은? (오늘 날짜는 2025년 8월 15일 오후 1시로 가정)",
     "options": [
       "2025/01/01 00:00:00, 2026/01/01 00:00:00",
-      "2025/01/01 13:00:00, 2025/01/01 13:00:00",
+      "2025/08/15 13:00:00, 2025/08/15 13:00:00",
       "2024/12/31 00:00:00, 2025/01/01 00:00:00",
-      "2025/01/02 00:00:00, 2025/01/02 00:00:00"
+      "2025/01/01 00:00:00, 2025/01/01 00:00:00"
     ],
     "correctIndex": 0,
-    "explanation": "원본 기출의 정답 표기를 보존한다. TRUNC/ROUND 의 연 단위 처리 결과를 묻는 문항이다.",
+    "explanation": "`TRUNC(SYSDATE, 'YYYY')` 는 연 단위 절삭이라 항상 1월 1일 0시. `ROUND(SYSDATE, 'YYYY')` 는 7월 1일을 기준으로 반올림하므로 8월 15일은 다음 해 1월 1일로 올라감. 따라서 결과는 `2025/01/01 00:00:00, 2026/01/01 00:00:00`.",
     "_source": "authored",
     "references": [
       {
@@ -1295,9 +1299,13 @@ export const ROUND_57: QuizQuestion[] = [
       "X 가 NULL 로 바뀌어도 결과는 동일하다."
     ],
     "correctIndex": 3,
-    "explanation": "원본 기출의 정답 표기를 보존한다. NOT EXISTS 는 NULL 상황을 올바르게 처리하여 동일한 결과를 유지한다.",
+    "explanation": "④ 가 옳다. NOT EXISTS 는 상관 서브쿼리에서 행 존재 여부만 판정하므로 X 자리에 NULL 행이 끼어 있어도 결과가 그대로 유지된다. 반면 ① 의 NOT IN 형태는 비교 대상에 NULL 이 한 행이라도 존재하면 전체 결과가 빈 집합이 되어 NOT EXISTS 와 다른 결과를 낸다. ② 의 EXISTS (긍정형) 는 NOT EXISTS 와 정반대로 매칭되는 행만 남기므로 결과가 반대가 된다. ③ 은 'NOT IN X.회원ID' 자체가 부속 질의 없는 잘못된 구문이다.",
     "_source": "authored",
     "references": [
+      {
+        "type": "text",
+        "content": "원본 PDF 표기: '문제 48. (ㄱ) 들어가있고, Not in, not exist 문제.' — ①②선지는 원본에서도 표기되지 않았고, ③ '(ㄱ) where 회원id not in x.회원? 으로 바꿔도 결과는 동일하다', ④ 'X=null로 바꿔도 결과는 동일하다' (정답) 만 복원되어 있다."
+      },
       {
         "type": "sql",
         "code": "SELECT *\nFROM   회원 M\nWHERE  NOT EXISTS (SELECT 1 FROM 탈퇴 X WHERE X.회원ID = M.회원ID);\n-- (ㄱ) 지점을 다른 조건식으로 대체한 경우 결과가 동일한지 판단한다."
