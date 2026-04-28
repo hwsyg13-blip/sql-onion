@@ -360,7 +360,7 @@ export const ROUND_46: QuizQuestion[] = [
     "round": 46,
     "subject": "2과목",
     "number": 15,
-    "title": "아래 네 SQL 중 결과가 다른 것은? (A 컬럼별 합계 및 전체 합계를 반환)",
+    "title": "아래 T 테이블에 대한 네 SQL 중 결과가 다른 것은?",
     "options": [
       "SELECT A, SUM(X) FROM T GROUP BY A UNION ALL SELECT NULL, SUM(X) FROM T;",
       "SELECT A, SUM(X) FROM T GROUP BY ROLLUP(A);",
@@ -368,8 +368,36 @@ export const ROUND_46: QuizQuestion[] = [
       "SELECT A, SUM(X) FROM T GROUP BY GROUPING SETS(A);"
     ],
     "correctIndex": 3,
-    "explanation": "GROUPING SETS(A)는 A 단위 소계만 생성하고 전체 합계를 포함하지 않는다. 나머지는 모두 A별 합계와 전체 합계를 함께 반환한다.",
-    "_source": "authored"
+    "explanation": "T 의 A 별 합계는 A=1 → 30, A=2 → 70 이고 전체 합계는 100 이다. ① UNION ALL 은 A 별 소계 두 행과 NULL 키 전체 합계 한 행을 더해 (1,30),(2,70),(NULL,100) 을 반환한다. ② ROLLUP(A) 와 ③ CUBE(A) 는 단일 컬럼이므로 A 별 소계와 전체 합계를 함께 반환해 결과가 같다. ④ GROUPING SETS(A) 는 A 단위 소계만 생성하고 전체 합계를 포함하지 않으므로 (1,30),(2,70) 두 행만 반환된다. 따라서 결과가 다른 것은 ④ 이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "caption": "T 테이블",
+        "headers": [
+          "A",
+          "X"
+        ],
+        "rows": [
+          [
+            "1",
+            "10"
+          ],
+          [
+            "1",
+            "20"
+          ],
+          [
+            "2",
+            "30"
+          ],
+          [
+            "2",
+            "40"
+          ]
+        ]
+      }
+    ]
   },
   {
     "id": 10715,

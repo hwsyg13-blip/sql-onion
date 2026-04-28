@@ -586,7 +586,7 @@ export const ROUND_47: QuizQuestion[] = [
     "round": 47,
     "subject": "2과목",
     "number": 26,
-    "title": "아래 SQL 의 결과로 옳은 것은?",
+    "title": "아래 T 테이블에 대한 SQL 의 결과로 옳은 것은?",
     "options": [
       "12",
       "13",
@@ -594,12 +594,26 @@ export const ROUND_47: QuizQuestion[] = [
       "0"
     ],
     "correctIndex": 2,
-    "explanation": "CASE 식은 위에서 아래로 평가하다가 처음 참이 되는 분기를 따릅니다. 한 행만 있고 GRADE = 12, RANK = 13이라고 가정하면, GRADE + RANK = 25입니다. SUM(25)의 결과는 25이고 NULL이 아니므로 ELSE 분기인 SUM(GRADE + RANK)이 그대로 25로 반환됩니다. 정답은 ③번입니다.",
+    "explanation": "CASE 식은 위에서 아래로 평가하다가 처음 참이 되는 분기를 따른다. T 에는 한 행만 있고 GRADE = 12, RANK = 13 이므로 GRADE + RANK = 25 이다. SUM(25) 의 결과는 25 이고 NULL 이 아니므로 ELSE 분기인 SUM(GRADE + RANK) 이 그대로 25 로 반환된다. 정답은 ③ 번이다.",
     "_source": "authored",
     "references": [
       {
+        "type": "table",
+        "caption": "T 테이블",
+        "headers": [
+          "GRADE",
+          "RANK"
+        ],
+        "rows": [
+          [
+            "12",
+            "13"
+          ]
+        ]
+      },
+      {
         "type": "sql",
-        "code": "-- 데이터: GRADE=12, RANK=13\nSELECT CASE WHEN SUM(GRADE + RANK) IS NULL THEN 0\n            ELSE SUM(GRADE + RANK) END\nFROM T;"
+        "code": "SELECT CASE WHEN SUM(GRADE + RANK) IS NULL THEN 0\n            ELSE SUM(GRADE + RANK) END\nFROM   T;"
       }
     ]
   },
@@ -618,9 +632,57 @@ export const ROUND_47: QuizQuestion[] = [
       "공집합"
     ],
     "correctIndex": 1,
-    "explanation": "인라인 뷰 B는 PLAYER 테이블에서 가장 큰 점수를 MAX_SCORE로 만들어 한 행만 반환합니다. 그다음 GRADE_TABLE의 LOWER ≤ MAX_SCORE ≤ UPPER 조건으로 등급 구간에 끼어드는 행을 찾습니다. 즉 최고 득점이 어느 등급 구간에 속하는지를 매칭하는 SQL입니다. 원본 기출 데이터 기준 SILVER 구간이 매칭되어 정답은 ②번입니다.",
+    "explanation": "인라인 뷰 B는 PLAYER 테이블에서 가장 큰 점수를 MAX_SCORE로 만들어 한 행만 반환합니다. PLAYER의 SCORE 최대값은 75 이고, 이 값이 GRADE_TABLE 의 LOWER ≤ 75 ≤ UPPER 구간에 들어가는 행을 찾으면 SILVER(50~79) 구간이 매칭됩니다. 따라서 정답은 ②번입니다.",
     "_source": "authored",
     "references": [
+      {
+        "type": "table",
+        "caption": "GRADE_TABLE 테이블",
+        "headers": [
+          "GRADE",
+          "LOWER",
+          "UPPER"
+        ],
+        "rows": [
+          [
+            "BRONZE",
+            "0",
+            "49"
+          ],
+          [
+            "SILVER",
+            "50",
+            "79"
+          ],
+          [
+            "GOLD",
+            "80",
+            "100"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "PLAYER 테이블",
+        "headers": [
+          "PLAYER_ID",
+          "SCORE"
+        ],
+        "rows": [
+          [
+            "P01",
+            "30"
+          ],
+          [
+            "P02",
+            "60"
+          ],
+          [
+            "P03",
+            "75"
+          ]
+        ]
+      },
       {
         "type": "sql",
         "code": "SELECT GRADE FROM GRADE_TABLE A,\n  (SELECT MAX(SCORE) AS MAX_SCORE FROM PLAYER) B\nWHERE A.LOWER <= B.MAX_SCORE AND A.UPPER >= B.MAX_SCORE;"
@@ -634,7 +696,7 @@ export const ROUND_47: QuizQuestion[] = [
     "round": 47,
     "subject": "2과목",
     "number": 28,
-    "title": "아래 집합 연산 SQL 의 결과로 옳은 것은?",
+    "title": "아래 세 테이블 A, B, C 에 대한 집합 연산 SQL 의 결과로 옳은 것은?",
     "options": [
       "1, 3, 5",
       "1, 2, 3",
@@ -642,9 +704,30 @@ export const ROUND_47: QuizQuestion[] = [
       "공집합"
     ],
     "correctIndex": 0,
-    "explanation": "집합 연산은 위에서 아래로 차례대로 적용됩니다. 먼저 A UNION ALL B로 두 집합을 중복 포함해 합친 뒤, 그 결과에서 C에 들어 있는 값을 모두 빼는 것이 MINUS입니다. MINUS는 자동으로 중복까지 제거하므로 (A ∪ B) − C의 결과에는 중복이 남지 않습니다. 원본 데이터 기준 결과로 1, 3, 5가 남아 정답은 ①번입니다.",
+    "explanation": "집합 연산은 위에서 아래로 차례대로 적용된다. 먼저 `A UNION ALL B` 로 두 집합을 중복 포함해 합치면 {1, 2, 3, 3, 4, 5}. 그 결과에서 `MINUS C` 로 C 의 원소 {2, 4, 6} 을 모두 빼고 중복도 자동 제거 → {1, 3, 5}. 정답은 ①.",
     "_source": "authored",
     "references": [
+      {
+        "type": "table",
+        "headers": [
+          "테이블",
+          "COL1 값"
+        ],
+        "rows": [
+          [
+            "A",
+            "1, 2, 3"
+          ],
+          [
+            "B",
+            "3, 4, 5"
+          ],
+          [
+            "C",
+            "2, 4, 6"
+          ]
+        ]
+      },
       {
         "type": "sql",
         "code": "SELECT COL1 FROM A\nUNION ALL\nSELECT COL1 FROM B\nMINUS\nSELECT COL1 FROM C;"
@@ -978,7 +1061,7 @@ export const ROUND_47: QuizQuestion[] = [
     "round": 47,
     "subject": "2과목",
     "number": 41,
-    "title": "아래 SQL 의 결과로 옳은 것은? (COL 에 NULL 1건 포함)",
+    "title": "아래 T 테이블에 대한 SQL 의 결과로 옳은 것은?",
     "options": [
       "105, 70",
       "70, 105",
@@ -986,12 +1069,30 @@ export const ROUND_47: QuizQuestion[] = [
       "NULL, NULL"
     ],
     "correctIndex": 0,
-    "explanation": "AVG 는 NULL 을 제외해 210/2=105, SUM/COUNT(*) 는 210/3=70 이다.",
+    "explanation": "T.COL = (100, 110, NULL). `AVG(COL)` 은 NULL 을 자동 제외해 (100+110)/2 = 105. `SUM(COL)/COUNT(*)` 는 SUM 만 NULL 제외(210), `COUNT(*)` 는 NULL 포함 행 수(3) 라 210/3 = 70. 정답 ① `105, 70`.",
     "_source": "authored",
     "references": [
       {
+        "type": "table",
+        "caption": "T 테이블",
+        "headers": [
+          "COL"
+        ],
+        "rows": [
+          [
+            "100"
+          ],
+          [
+            "110"
+          ],
+          [
+            "NULL"
+          ]
+        ]
+      },
+      {
         "type": "sql",
-        "code": "-- 데이터: 100, 110, NULL\nSELECT ROUND(AVG(COL)), ROUND(SUM(COL)/COUNT(*)) FROM T;"
+        "code": "SELECT ROUND(AVG(COL)),\n       ROUND(SUM(COL)/COUNT(*))\nFROM   T;"
       }
     ]
   },
@@ -1002,16 +1103,61 @@ export const ROUND_47: QuizQuestion[] = [
     "round": 47,
     "subject": "2과목",
     "number": 42,
-    "title": "아래 시나리오 중 외래키 참조 무결성 오류가 발생하는 구문은?",
+    "title": "아래 고객·주문 테이블에 대해 외래키 참조 무결성 오류가 발생하는 구문은?",
     "options": [
-      "주문 테이블에 고객 ID 를 INSERT 할 때 고객 테이블에 있는 ID 로 추가",
-      "고객 테이블에 새 고객을 추가한 뒤 주문 추가",
-      "주문 테이블에서 고객 ID = 기존 값을 유지한 채 다른 컬럼 업데이트",
-      "주문 테이블의 고객 ID 를 고객 테이블에 없는 값으로 업데이트"
+      "`INSERT INTO 주문 (주문ID, 고객ID) VALUES (501, 'C001');`",
+      "`INSERT INTO 고객 VALUES ('C004', '신규'); INSERT INTO 주문 VALUES (502, 'C004');`",
+      "`UPDATE 주문 SET 주문일 = SYSDATE WHERE 주문ID = 501;`",
+      "`UPDATE 주문 SET 고객ID = 'C999' WHERE 주문ID = 501;`"
     ],
     "correctIndex": 3,
-    "explanation": "외래키(FK)는 부모 테이블의 PK를 참조한다는 약속이라, 자식 테이블의 FK 값은 반드시 부모 테이블에 존재하는 값이어야 합니다. 부모에 없는 값으로 INSERT나 UPDATE를 시도하면 참조 무결성 위배 오류가 발생합니다. ①·②·③은 모두 정상 흐름이고, ④만 부모에 없는 고객 ID로 자식을 변경하므로 정답입니다.",
-    "_source": "authored"
+    "explanation": "외래키 (FK) 는 부모 테이블 (고객) 의 PK 를 참조한다는 제약이라, 자식 테이블 (주문) 의 `고객ID` 값은 반드시 고객 테이블에 존재해야 한다. ① C001 은 고객에 존재 → 정상, ② 새 고객 C004 추가 후 그 ID 참조 → 정상, ③ 고객ID 는 그대로 두고 주문일만 변경 → FK 무관. ④ 'C999' 는 고객 테이블에 없어 ORA-02291 (참조 무결성 위배) 오류 발생.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "caption": "고객 테이블 (PK: 고객ID)",
+        "headers": [
+          "고객ID",
+          "이름"
+        ],
+        "rows": [
+          [
+            "C001",
+            "홍길동"
+          ],
+          [
+            "C002",
+            "이순신"
+          ],
+          [
+            "C003",
+            "강감찬"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "주문 테이블 (PK: 주문ID, FK: 고객ID → 고객.고객ID)",
+        "headers": [
+          "주문ID",
+          "고객ID",
+          "주문일"
+        ],
+        "rows": [
+          [
+            "501",
+            "C001",
+            "2026-04-10"
+          ],
+          [
+            "502",
+            "C002",
+            "2026-04-12"
+          ]
+        ]
+      }
+    ]
   },
   {
     "id": 10692,
@@ -1020,12 +1166,12 @@ export const ROUND_47: QuizQuestion[] = [
     "round": 47,
     "subject": "2과목",
     "number": 43,
-    "title": "아래 SQL 의 결과로 옳은 것은?",
+    "title": "아래 T 테이블에 대한 SQL 의 결과로 옳은 것은?",
     "options": [
-      "조건을 만족하는 그룹이 없으면 공집합",
-      "조건을 만족하는 그룹의 수만큼 COUNT 반환",
-      "300 인 그룹이 하나 존재하면 1건 반환",
-      "HAVING 은 GROUP BY 와 함께 사용할 수 없다."
+      "공집합 (행 0건)",
+      "ID 별 COUNT 가 모두 표시된 다중 행",
+      "`COUNT(*) = 300` 인 한 행",
+      "ORA-00937 등 그룹 함수 오류"
     ],
     "correctIndex": 2,
     "explanation": "`GROUP BY ID`로 같은 ID끼리 묶고, `HAVING COUNT(*) >= 2`로 행 수가 2 이상인 그룹만 남깁니다. 살아남은 그룹마다 한 행씩 결과로 나오며 각 행에는 그 그룹의 COUNT 값이 표시됩니다. 예를 들어 행이 300건인 ID 그룹 하나가 조건을 통과하면 결과로 300이 1건 반환됩니다. 정답은 ③번입니다.",
@@ -1180,7 +1326,7 @@ export const ROUND_47: QuizQuestion[] = [
     "round": 47,
     "subject": "2과목",
     "number": 49,
-    "title": "아래 SQL 의 결과로 옳은 것은?",
+    "title": "아래 EMP 테이블에 대한 SQL 의 결과로 옳은 것은?",
     "options": [
       "1, 2",
       "3, 3",
@@ -1188,12 +1334,48 @@ export const ROUND_47: QuizQuestion[] = [
       "5, 4"
     ],
     "correctIndex": 3,
-    "explanation": "인라인 뷰에서 `ROW_NUMBER() OVER (PARTITION BY 부서 ORDER BY 연봉 DESC)`는 부서별로 연봉 높은 순서대로 1, 2, 3...을 매깁니다. 바깥에서 `WHERE RN = 1`로 거르면 각 부서에서 연봉 1위만 남습니다. 결과는 부서마다 한 명씩 나오는 부서별 최고 연봉자의 COL1 값이 됩니다. 원본 기출 데이터 기준 정답은 ④번 5, 4입니다.",
+    "explanation": "인라인 뷰에서 `ROW_NUMBER() OVER (PARTITION BY 부서 ORDER BY 연봉 DESC)` 는 부서별로 연봉 높은 순서대로 1, 2, 3 을 매긴다. 부서 A: (COL1=5, 연봉=5000) 이 RN=1, 부서 B: (COL1=4, 연봉=4500) 이 RN=1. 외부 `WHERE RN = 1` 로 부서별 최고 연봉자만 남기면 COL1 = 5, 4 가 반환된다.",
     "_source": "authored",
     "references": [
       {
+        "type": "table",
+        "caption": "EMP 테이블",
+        "headers": [
+          "COL1",
+          "부서",
+          "연봉"
+        ],
+        "rows": [
+          [
+            "1",
+            "A",
+            "3000"
+          ],
+          [
+            "5",
+            "A",
+            "5000"
+          ],
+          [
+            "3",
+            "A",
+            "4000"
+          ],
+          [
+            "2",
+            "B",
+            "2500"
+          ],
+          [
+            "4",
+            "B",
+            "4500"
+          ]
+        ]
+      },
+      {
         "type": "sql",
-        "code": "SELECT COL1\nFROM (SELECT COL1, ROW_NUMBER() OVER (PARTITION BY 부서 ORDER BY 연봉 DESC) AS RN\n      FROM EMP)\nWHERE RN = 1;"
+        "code": "SELECT COL1\nFROM (\n    SELECT COL1,\n           ROW_NUMBER() OVER (PARTITION BY 부서 ORDER BY 연봉 DESC) AS RN\n    FROM EMP\n)\nWHERE RN = 1;"
       }
     ]
   },

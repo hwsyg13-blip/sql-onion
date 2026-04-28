@@ -1195,7 +1195,7 @@ export const ROUND_54: QuizQuestion[] = [
     "round": 54,
     "subject": "2과목",
     "number": 38,
-    "title": "아래 제약 조건을 가진 테이블에 대해 SQL 을 수행한 뒤 COL2 의 합계는?",
+    "title": "아래 제약 조건을 가진 T 테이블에 대해 SQL 을 수행한 뒤 COL2 의 합계는?",
     "options": [
       "500",
       "600",
@@ -1203,12 +1203,30 @@ export const ROUND_54: QuizQuestion[] = [
       "850"
     ],
     "correctIndex": 2,
-    "explanation": "CHECK·PK 위반 문장은 롤백되고 성공한 INSERT 두 건의 합계가 770 으로 집계된다.",
+    "explanation": "PK 와 CHECK 제약을 위반하는 문장은 실패해 테이블 상태에 반영되지 않는다. 첫 번째 INSERT(1, 380) 만 성공해 (1, 380) 행이 들어가고, UPDATE(COL2=600) 는 CHECK(COL2 < 500) 위반으로 롤백되며, INSERT(1, 200) 은 PK 중복으로 실패한다. 마지막 INSERT(2, 390) 가 성공해 (2, 390) 행이 추가된다. 따라서 SELECT SUM(COL2) 는 380 + 390 = 770 을 반환한다. 정답은 ③ 번이다.",
     "_source": "authored",
     "references": [
       {
+        "type": "table",
+        "caption": "T 테이블 제약 조건 (초기 데이터 없음)",
+        "headers": [
+          "컬럼",
+          "제약"
+        ],
+        "rows": [
+          [
+            "COL1",
+            "PRIMARY KEY"
+          ],
+          [
+            "COL2",
+            "CHECK (COL2 < 500)"
+          ]
+        ]
+      },
+      {
         "type": "sql",
-        "code": "-- COL1 PK, COL2 CHECK > 500\nINSERT ...;                -- 정상\nUPDATE ...;                -- CHECK 조건 위반\nINSERT ...;                -- PK 조건 위반\nINSERT ...;                -- 정상\n\nSELECT SUM(COL2) FROM T;"
+        "code": "INSERT INTO T VALUES (1, 380);   -- 정상\nUPDATE T SET COL2 = 600 WHERE COL1 = 1;   -- CHECK 조건 위반\nINSERT INTO T VALUES (1, 200);   -- PK 조건 위반\nINSERT INTO T VALUES (2, 390);   -- 정상\n\nSELECT SUM(COL2) FROM T;"
       }
     ]
   },

@@ -396,12 +396,74 @@ export const ROUND_59: QuizQuestion[] = [
       "CROSS JOIN"
     ],
     "correctIndex": 0,
-    "explanation": "(+) 기호가 오른쪽 테이블 쪽에 붙으면 왼쪽이 기준이 되는 LEFT OUTER JOIN에 해당한다.",
+    "explanation": "Oracle 표기에서 (+) 가 붙은 쪽(B)이 부족분을 NULL 로 채우는 측이므로, A 의 모든 행은 결과에 살아남고 B 는 매칭이 있을 때만 합쳐진다. 즉 A 가 기준이 되는 LEFT OUTER JOIN 에 해당한다. 예시 데이터에서 A.ID=3 은 B 에 매칭이 없지만 결과에 포함되며 B 컬럼이 NULL 로 출력된다. 정답은 ①.",
     "_source": "authored",
     "references": [
       {
+        "type": "table",
+        "caption": "A 테이블",
+        "headers": [
+          "ID"
+        ],
+        "rows": [
+          [
+            "1"
+          ],
+          [
+            "2"
+          ],
+          [
+            "3"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "B 테이블",
+        "headers": [
+          "ID",
+          "V"
+        ],
+        "rows": [
+          [
+            "1",
+            "10"
+          ],
+          [
+            "2",
+            "20"
+          ]
+        ]
+      },
+      {
         "type": "sql",
-        "code": "-- Oracle 표기\nSELECT * FROM A, B WHERE A.ID = B.ID(+);"
+        "code": "-- Oracle 표기\nSELECT * FROM A, B WHERE A.ID = B.ID(+);\n\n-- ANSI 표준 SQL\nSELECT * FROM A LEFT OUTER JOIN B ON A.ID = B.ID;"
+      },
+      {
+        "type": "table",
+        "caption": "기대 결과 (LEFT OUTER JOIN)",
+        "headers": [
+          "A.ID",
+          "B.ID",
+          "B.V"
+        ],
+        "rows": [
+          [
+            "1",
+            "1",
+            "10"
+          ],
+          [
+            "2",
+            "2",
+            "20"
+          ],
+          [
+            "3",
+            "(NULL)",
+            "(NULL)"
+          ]
+        ]
       }
     ]
   },
