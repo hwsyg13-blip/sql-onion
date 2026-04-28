@@ -411,32 +411,19 @@
         {
           "type": "table",
           "caption": "EMP 테이블",
-          "headers": [
-            "COL1",
-            "COL2"
-          ],
+          "headers": ["COL1", "COL2"],
           "rows": [
-            [
-              "1",
-              "Smith"
-            ],
-            [
-              "2",
-              "Charlie"
-            ],
-            [
-              "3",
-              "Alice"
-            ],
-            [
-              "4",
-              "NULL"
-            ]
+            ["1", "Smith"],
+            ["2", "Charlie"],
+            ["3", "Alice"],
+            ["4", "NULL"]
           ]
         },
         {
-          "type": "ascii",
-          "text": "COUNT(*)\n4"
+          "type": "table",
+          "caption": "기대 결과 (COUNT(*) = 4)",
+          "headers": ["COUNT(*)"],
+          "rows": [["4"]]
         }
       ]
     },
@@ -728,7 +715,7 @@
     {
       "subject": "2과목",
       "number": 34,
-      "title": "아래 EMP 테이블에서 사원의 관리자와 차상위 관리자를 함께 출력하는 쿼리로 가장 적절한 것은?",
+      "title": "아래 EMP 테이블에서 사원(A) 과 그 사원이 관리하는 부하 사원(B) 을 함께 출력하되, 부하가 없는 사원도 결과에 포함하려면 가장 적절한 쿼리는?",
       "options": [
         "`SELECT A.EMP_ID, B.EMP_ID FROM EMP A INNER JOIN EMP B ON A.EMP_ID = B.EMP_ID;`",
         "`SELECT A.EMP_ID, B.EMP_ID FROM EMP A INNER JOIN EMP B ON A.MGR_ID = B.EMP_ID;`",
@@ -736,7 +723,7 @@
         "`SELECT A.EMP_ID, B.EMP_ID FROM EMP A LEFT OUTER JOIN EMP B ON A.EMP_ID = B.EMP_ID;`"
       ],
       "correctIndex": 2,
-      "explanation": "셀프 조인으로 \"A 가 관리하는 하위 사원 B\" 를 매칭하려면 `A.EMP_ID = B.MGR_ID` 조건이 필요. LEFT OUTER JOIN 으로 매칭되지 않는 A(관리하는 부하 없는 사원) 도 결과에 포함. ① 자기 자신과 매칭, ② 는 \"A 의 상사 = B\" 매칭, ④ 자기 자신 LEFT OUTER 라 모두 의도와 다름.",
+      "explanation": "셀프 조인으로 \"A 가 관리하는 부하 사원 B\" 를 매칭하려면 `A.EMP_ID = B.MGR_ID` 조건이 필요 (B 의 관리자 = A). LEFT OUTER JOIN 으로 부하가 없는 A 사원(예: 1003, 1004) 도 결과에 NULL 과 함께 포함된다. ① 자기 자신과 매칭, ② 는 \"A 의 상사 = B\" 매칭으로 의미 반대, ④ 자기 자신 LEFT OUTER 라 모두 의도와 다름.",
       "references": [
         {
           "type": "table",
@@ -878,8 +865,10 @@
           ]
         },
         {
-          "type": "ascii",
-          "text": "COUNT()\n2"
+          "type": "table",
+          "caption": "기대 결과 (COUNT 결과 = 2)",
+          "headers": ["COUNT()"],
+          "rows": [["2"]]
         }
       ]
     },
