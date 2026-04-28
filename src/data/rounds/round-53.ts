@@ -910,27 +910,23 @@ export const ROUND_53: QuizQuestion[] = [
     "references": [
       {
         "type": "sql",
-        "caption": "가. 보기 ① 분류: SELECT 서브쿼리 + 집계 함수 사용으로 인한 오류 (분류 자체가 부적절)",
+        "caption": "가",
         "code": "SELECT EMPNO,\n       (SELECT MAX(SAL) FROM EMP) AS MAX_SAL\nFROM   EMP;"
       },
       {
         "type": "sql",
-        "caption": "나. 보기 ② 분류: 집계 함수 오류가 아니고 '=' 연산자 때문 (실제로는 다중 행 서브쿼리 + '=' 의 ORA-01427)",
+        "caption": "나",
         "code": "SELECT *\nFROM   EMP\nWHERE  SAL = (SELECT SAL FROM EMP WHERE DEPTNO = 10);"
       },
       {
         "type": "sql",
-        "caption": "다. 보기 ③ 분류: GROUP BY 에서 집계 함수 사용 (실제로는 WHERE 절에 집계 함수 사용 오류)",
+        "caption": "다",
         "code": "SELECT DEPTNO, COUNT(*)\nFROM   EMP\nWHERE  SUM(SAL) > 10000\nGROUP BY DEPTNO;"
       },
       {
         "type": "sql",
-        "caption": "라. 보기 ④ 분류: ORDER BY 에서 집계 함수 사용으로 오류",
+        "caption": "라",
         "code": "SELECT EMPNO, ENAME\nFROM   EMP\nORDER BY SUM(SAL);"
-      },
-      {
-        "type": "text",
-        "content": "참고: GROUP BY 가 적용된 결과 집합에서는 ORDER BY 에 집계 함수를 사용하는 것이 가능하다. 본 문항은 GROUP BY 가 없는 일반 SELECT 컨텍스트에서 집계 함수를 정렬 키로 사용한 케이스로 한정해 오류 원인을 검토한다."
       }
     ]
   },
@@ -1080,13 +1076,13 @@ export const ROUND_53: QuizQuestion[] = [
     "number": 37,
     "title": "UNPIVOT 절 사용 시 열 이름의 순서에 대한 설명 중 옳은 것은?",
     "options": [
-      "AMOUNT3, AMOUNT2, AMOUNT1 순으로 UNPIVOT 해도 행 배치는 동일하다.",
+      "AMOUNT3, AMOUNT2, AMOUNT1 순으로 UNPIVOT 해도 결과 행 자체(컬럼-값 매핑) 는 동일하고 출력 순서만 바뀐다.",
       "UNPIVOT 시 입력 열의 순서를 바꾸면 결과 행 수가 달라진다.",
       "UNPIVOT 은 NULL 행을 항상 유지한다.",
       "UNPIVOT 은 반드시 세 개의 열을 대상으로 한다."
     ],
     "correctIndex": 0,
-    "explanation": "UNPIVOT 의 열 나열 순서는 결과 행의 순서에만 영향을 줄 뿐 행 자체의 배치(컬럼별 매핑)는 동일하게 유지된다. ② 입력 열 순서를 바꿔도 결과 행 수는 같다. ③ UNPIVOT 은 기본적으로 NULL 행을 제외하며 `INCLUDE NULLS` 옵션을 줄 때만 유지한다. ④ UNPIVOT 의 대상 열 수는 두 개 이상이면 충분하다.",
+    "explanation": "UNPIVOT 의 열 나열 순서는 결과 행의 출력 순서에만 영향을 줄 뿐, 각 행의 컬럼-값 매핑 자체는 동일하게 유지되고 행 수도 같다. ② 입력 열 순서를 바꿔도 결과 행 수는 같다. ③ UNPIVOT 은 기본적으로 NULL 행을 제외하며 `INCLUDE NULLS` 옵션을 줄 때만 유지한다. ④ UNPIVOT 의 대상 열 수는 두 개 이상이면 충분하다.",
     "_source": "authored"
   },
   {
@@ -1122,14 +1118,8 @@ export const ROUND_53: QuizQuestion[] = [
       "빈 문자열"
     ],
     "correctIndex": 1,
-    "explanation": "원본 기출에서 구체적 SQL 표기와 선지 텍스트가 유실되어 정답 번호(②)만 보존한다. 정규표현식 패턴과 탐욕적 매칭으로 해당 결과가 도출되는 출제 의도로 추정된다.",
-    "_source": "authored",
-    "references": [
-      {
-        "type": "text",
-        "content": "원본 PDF 표기: '문제 39. REGEXP_SUBSTR 다른 문제 / 예상: aabbc abbc' — 본문 SQL 과 4 개 선지 텍스트가 원본 복원 메모에서 누락되었고 출제 키워드(REGEXP_SUBSTR, 'aabbc' 관련)와 ① 선지로 추정되는 'aabbc abbc' 표기만 남아 있다."
-      }
-    ]
+    "explanation": "원본 기출에서 구체적 SQL 표기와 선지 텍스트가 유실되어 정답 번호(②) 만 보존한다.",
+    "_source": "authored"
   },
   {
     "id": 10389,
@@ -1515,47 +1505,12 @@ export const ROUND_53: QuizQuestion[] = [
     "_source": "authored",
     "references": [
       {
-        "type": "table",
-        "caption": "TABLE50 테이블 (초기 상태)",
-        "headers": [
-          "COL"
-        ],
-        "rows": [
-          [
-            "(empty)"
-          ]
-        ]
+        "type": "text",
+        "content": "TABLE50 은 비어 있는 상태에서 시작한다."
       },
       {
         "type": "sql",
-        "code": "INSERT INTO TABLE50 VALUES (1);\nINSERT INTO TABLE50 VALUES (2);\nINSERT INTO TABLE50 VALUES (3);\nSAVEPOINT SQL1;\nINSERT INTO TABLE50 VALUES (4);\nINSERT INTO TABLE50 VALUES (5);\nCOMMIT;            -- 5건 확정 + SAVEPOINT SQL1 폐기\nINSERT INTO TABLE50 VALUES (6);\nROLLBACK TO SAVEPOINT SQL1;   -- SAVEPOINT 가 없으므로 오류\n\nSELECT * FROM TABLE50;"
-      },
-      {
-        "type": "table",
-        "caption": "최종 TABLE50 상태",
-        "headers": [
-          "COL"
-        ],
-        "rows": [
-          [
-            "1"
-          ],
-          [
-            "2"
-          ],
-          [
-            "3"
-          ],
-          [
-            "4"
-          ],
-          [
-            "5"
-          ],
-          [
-            "6"
-          ]
-        ]
+        "code": "INSERT INTO TABLE50 VALUES (1);\nINSERT INTO TABLE50 VALUES (2);\nINSERT INTO TABLE50 VALUES (3);\nSAVEPOINT SQL1;\nINSERT INTO TABLE50 VALUES (4);\nINSERT INTO TABLE50 VALUES (5);\nCOMMIT;\nINSERT INTO TABLE50 VALUES (6);\nROLLBACK TO SAVEPOINT SQL1;\n\nSELECT COUNT(*) FROM TABLE50;"
       }
     ]
   }
