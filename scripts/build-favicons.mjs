@@ -2,7 +2,7 @@
 // Google 검색 결과 favicon 표시 + Apple Touch Icon + PWA 아이콘 + Schema.org Organization.logo
 //
 // 사용: node scripts/build-favicons.mjs
-import { readFileSync, writeFileSync } from 'node:fs';
+import { copyFileSync, readFileSync, writeFileSync } from 'node:fs';
 import sharp from 'sharp';
 
 const src = readFileSync('public/assets/onion-mark.svg');
@@ -26,4 +26,11 @@ for (const t of targets) {
   writeFileSync(t.out, buf);
   console.log(`  ${t.out} — ${buf.length} bytes (${t.size}x${t.size})`);
 }
+
+// public/favicon.ico — Google 검색 결과 favicon 의 1차 lookup 경로.
+// SPA fallback (vercel.json rewrites) 가 /favicon.ico 를 index.html 로 보내지 않도록
+// 루트에 실제 파일이 존재해야 함. PNG 를 .ico 확장자로 두면 모든 주요 브라우저·Google 이 수용.
+copyFileSync('public/assets/favicon-32.png', 'public/favicon.ico');
+console.log('  public/favicon.ico — copy of favicon-32.png');
+
 console.log('Done.');

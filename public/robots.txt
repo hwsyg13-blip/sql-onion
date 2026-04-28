@@ -5,7 +5,23 @@ Allow: /
 Allow: /privacy.html
 Allow: /ads.txt
 
-# Vite 빌드 산출물 — 사용자 페이지가 아니므로 제외 (있어도 무해)
+# 파비콘·로고·OG 이미지 — Google 검색 결과 표시에 필요. /assets/ 차단보다 먼저 선언해 우선 적용.
+Allow: /assets/favicon-32.png
+Allow: /assets/favicon-48.png
+Allow: /assets/favicon-96.png
+Allow: /assets/favicon.svg
+Allow: /assets/apple-touch-icon.png
+Allow: /assets/icon-192.png
+Allow: /assets/icon-512.png
+Allow: /assets/logo.svg
+Allow: /assets/logo-dark.svg
+Allow: /assets/logo-512.png
+Allow: /assets/og-cover.png
+Allow: /assets/og-cover.svg
+Allow: /assets/onion-mark.svg
+Allow: /assets/onion-mascot.svg
+
+# Vite 빌드 산출물(JS/CSS chunk) — 사용자 페이지가 아니므로 색인 제외
 Disallow: /assets/
 
 # 사이트맵
