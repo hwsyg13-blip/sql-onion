@@ -36,47 +36,30 @@
       "references": [
         {
           "type": "table",
-          "headers": [
-            "고객"
-          ],
+          "caption": "고객 엔터티",
+          "headers": ["컬럼"],
           "rows": [
-            [
-              "고객번호 (PK)"
-            ],
-            [
-              "고객명"
-            ]
+            ["고객번호 (PK)"],
+            ["고객명"]
           ]
         },
         {
           "type": "table",
-          "headers": [
-            "서비스이용"
-          ],
+          "caption": "서비스이용 엔터티 (이용일자가 PK 에 포함되어 재이용 시 별도 행)",
+          "headers": ["컬럼"],
           "rows": [
-            [
-              "고객번호 (PK, FK)"
-            ],
-            [
-              "서비스번호 (PK, FK)"
-            ],
-            [
-              "이용일자 (PK)"
-            ]
+            ["고객번호 (PK, FK)"],
+            ["서비스번호 (PK, FK)"],
+            ["이용일자 (PK)"]
           ]
         },
         {
           "type": "table",
-          "headers": [
-            "서비스"
-          ],
+          "caption": "서비스 엔터티",
+          "headers": ["컬럼"],
           "rows": [
-            [
-              "서비스번호 (PK)"
-            ],
-            [
-              "서비스명"
-            ]
+            ["서비스번호 (PK)"],
+            ["서비스명"]
           ]
         }
       ]
@@ -202,10 +185,10 @@
       "number": 11,
       "title": "ONLINE·OFFLINE 두 컬럼에 대해 첫 번째·두 번째 컬럼 집계와 두 컬럼 조합, 전체 집계가 모두 필요한 SQL 로 적절한 것은?",
       "options": [
-        "CUBE(주문일자, 주문방법)",
-        "ROLLUP(주문일자, 주문방법)",
-        "GROUPING SETS(주문일자, 주문방법)",
-        "GROUP BY 주문일자, 주문방법"
+        "`CUBE(주문일자, 주문방법)`",
+        "`ROLLUP(주문일자, 주문방법)`",
+        "`GROUPING SETS(주문일자, 주문방법)`",
+        "`GROUP BY 주문일자, 주문방법`"
       ],
       "correctIndex": 0,
       "explanation": "CUBE는 지정한 컬럼들로 만들 수 있는 모든 조합의 소계와 총계를 한 번에 만들어 줍니다. CUBE(A, B)는 (A, B), (A), (B), () 네 가지 그룹을 모두 반환합니다. 문제는 첫 컬럼·두 번째 컬럼 각각 집계, 두 컬럼 조합 집계, 전체 집계까지 모두 필요하다고 했으므로 CUBE가 적합합니다. ROLLUP은 (A, B), (A), ()만 만들고 (B) 단독은 만들지 않으며, GROUPING SETS는 명시한 그룹만 만들고, 단순 GROUP BY는 (A, B) 한 종류만 만듭니다. 정답은 ①번입니다."
@@ -215,10 +198,10 @@
       "number": 12,
       "title": "첫 번째 컬럼 집계, 첫 번째+두 번째 컬럼 집계, 전체 집계가 필요한 SQL 로 적절한 것은?",
       "options": [
-        "CUBE(평가항목, 평가)",
-        "ROLLUP(평가항목, 평가)",
-        "GROUPING SETS((평가항목, 평가), (평가항목), (평가))",
-        "GROUP BY 평가항목"
+        "`CUBE(평가항목, 평가)`",
+        "`ROLLUP(평가항목, 평가)`",
+        "`GROUPING SETS((평가항목, 평가), (평가항목), (평가))`",
+        "`GROUP BY 평가항목`"
       ],
       "correctIndex": 1,
       "explanation": "ROLLUP(A, B)는 왼쪽부터 점차 줄여가며 (A, B), (A), () 세 가지 그룹을 만듭니다. 문제는 첫 컬럼 집계, 두 컬럼 조합 집계, 전체 집계가 필요하므로 정확히 ROLLUP이 만드는 세 가지 그룹과 일치합니다. CUBE는 (B) 단독까지 추가로 만들어 결과 행이 더 많아 의도에 맞지 않습니다. 정답은 ②번입니다."
@@ -280,10 +263,10 @@
       "number": 17,
       "title": "번호가 없으면 1을 반환하고 있으면 MAX(번호)+1 을 반환하는 SQL 로 동일한 결과의 쿼리는?",
       "options": [
-        "SELECT COALESCE(MAX(번호), 1) FROM T;",
-        "SELECT COALESCE(MAX(번호) + 1, 1) FROM T;",
-        "SELECT NVL(MAX(번호) + 1, 0) FROM T;",
-        "SELECT NULLIF(MAX(번호), 1) FROM T;"
+        "`SELECT COALESCE(MAX(번호), 1) FROM T;`",
+        "`SELECT COALESCE(MAX(번호) + 1, 1) FROM T;`",
+        "`SELECT NVL(MAX(번호) + 1, 0) FROM T;`",
+        "`SELECT NULLIF(MAX(번호), 1) FROM T;`"
       ],
       "correctIndex": 1,
       "explanation": "원본 SQL `NVL(MAX(번호), 1) + 1`은 데이터가 없으면 NVL이 1을 반환하고 +1이 더해져 결과는 2가, 데이터가 있으면 MAX(번호)+1이 됩니다. 같은 형태를 만들려면 `+1`을 안쪽에 넣어 NULL일 때 1을 반환하도록 한 ②번 `COALESCE(MAX(번호)+1, 1)`이 가장 가깝습니다. ① COALESCE(MAX, 1)은 +1이 빠져 있고, ③ NVL(MAX+1, 0)은 NULL일 때 0, ④ NULLIF는 의미 자체가 다릅니다. 시험 문항 의도상 ②가 정답입니다. 다만 데이터가 없을 때 원본은 2를, ②는 1을 돌려준다는 미세한 차이가 있어 엄밀히 동일하지는 않다는 점을 함께 기억해 두면 좋습니다.",
@@ -567,24 +550,21 @@
       "references": [
         {
           "type": "table",
-          "headers": [
-            "테이블",
-            "COL1 값"
-          ],
-          "rows": [
-            [
-              "A",
-              "1, 2, 3"
-            ],
-            [
-              "B",
-              "3, 4, 5"
-            ],
-            [
-              "C",
-              "2, 4, 6"
-            ]
-          ]
+          "caption": "A 테이블",
+          "headers": ["COL1"],
+          "rows": [["1"], ["2"], ["3"]]
+        },
+        {
+          "type": "table",
+          "caption": "B 테이블",
+          "headers": ["COL1"],
+          "rows": [["3"], ["4"], ["5"]]
+        },
+        {
+          "type": "table",
+          "caption": "C 테이블",
+          "headers": ["COL1"],
+          "rows": [["2"], ["4"], ["6"]]
         },
         {
           "type": "sql",
@@ -616,10 +596,10 @@
       "number": 30,
       "title": "최대값을 조회하는 SQL 로 옳은 것은?",
       "options": [
-        "SELECT MAX(COL) FROM T WHERE ROWNUM = 1;",
-        "SELECT * FROM (SELECT COL FROM T ORDER BY COL DESC) WHERE ROWNUM = 1;",
-        "SELECT COL FROM T ORDER BY COL DESC WHERE ROWNUM = 1;",
-        "SELECT COL FROM T WHERE ROWNUM = (SELECT MAX(COL) FROM T);"
+        "`SELECT MAX(COL) FROM T WHERE ROWNUM = 1;`",
+        "`SELECT * FROM (SELECT COL FROM T ORDER BY COL DESC) WHERE ROWNUM = 1;`",
+        "`SELECT COL FROM T ORDER BY COL DESC WHERE ROWNUM = 1;`",
+        "`SELECT COL FROM T WHERE ROWNUM = (SELECT MAX(COL) FROM T);`"
       ],
       "correctIndex": 1,
       "explanation": "ROWNUM은 결과 행에 1부터 차례로 번호를 매기는 가상 컬럼입니다. 그러나 ROWNUM은 ORDER BY가 적용되기 전에 매겨지므로 단순히 `WHERE ROWNUM = 1`만 쓰면 정렬이 무시된 첫 행이 나와 최대값이 보장되지 않습니다. 따라서 인라인 뷰 안에서 먼저 ORDER BY DESC로 정렬해 둔 뒤, 바깥에서 ROWNUM = 1로 첫 행을 잘라야 안전하게 최대값을 얻습니다. 정답은 ②번입니다. ① MAX 함수만으로도 가능하지만, 본 문항이 묻는 것은 ROWNUM 사용 패턴입니다."
@@ -818,10 +798,10 @@
       "number": 38,
       "title": "사원과 차상위 매니저 정보를 함께 조회하는 SQL 로 옳은 것은?",
       "options": [
-        "EMP A INNER JOIN EMP B ON A.MGR_NO = B.EMP_NO",
-        "EMP A INNER JOIN EMP B ON A.EMP_NO = B.EMP_NO",
-        "EMP A LEFT OUTER JOIN EMP B ON A.MGR_NO = B.EMP_NO",
-        "EMP A RIGHT OUTER JOIN EMP B ON A.MGR_NO = B.EMP_NO"
+        "`EMP A INNER JOIN EMP B ON A.MGR_NO = B.EMP_NO`",
+        "`EMP A INNER JOIN EMP B ON A.EMP_NO = B.EMP_NO`",
+        "`EMP A LEFT OUTER JOIN EMP B ON A.MGR_NO = B.EMP_NO`",
+        "`EMP A RIGHT OUTER JOIN EMP B ON A.MGR_NO = B.EMP_NO`"
       ],
       "correctIndex": 2,
       "explanation": "사원 자신과 그 매니저 정보를 함께 보려면 EMP 테이블을 자기 자신과 조인하는 셀프 조인을 합니다. 이때 사원 A의 매니저 번호(A.MGR_NO)가 매니저 B의 사원 번호(B.EMP_NO)와 일치해야 하므로 ON 조건이 정해집니다. 매니저가 없는 사원(예: CEO)도 결과에 포함시키려면 LEFT OUTER JOIN을 써야 합니다. 정답은 ③번입니다."
@@ -844,10 +824,10 @@
       "number": 40,
       "title": "아래 네 SQL 중 결과가 나머지와 다른 것은?",
       "options": [
-        "LPAD('BCD', 3, 'A')",
-        "RTRIM('EBCDE', 'E')",
-        "SUBSTR('ABCDE', 2, 3)",
-        "CONCAT(CONCAT(NULL, 'BC'), 'E')"
+        "`LPAD('BCD', 3, 'A')`",
+        "`RTRIM('EBCDE', 'E')`",
+        "`SUBSTR('ABCDE', 2, 3)`",
+        "`CONCAT(CONCAT(NULL, 'BC'), 'E')`"
       ],
       "correctIndex": 1,
       "explanation": "각 함수의 결과를 따져 봅니다. ① LPAD('BCD', 3, 'A')는 이미 길이가 3이라 패딩 없이 'BCD'를 그대로 반환. ③ SUBSTR('ABCDE', 2, 3) = 'BCD'. ④ CONCAT(CONCAT(NULL, 'BC'), 'E') = 'BCE' (NULL은 빈 문자열로 처리). 그러나 ② RTRIM('EBCDE', 'E')는 오른쪽 끝의 'E'만 잘라 'EBCD'가 되고 앞쪽 'E'는 그대로 남습니다. 결과 형태가 명확히 다른 것은 ②번입니다."
@@ -958,13 +938,7 @@
           ]
         }
       ],
-      "explanation": "`GROUP BY ID`로 같은 ID끼리 묶고, `HAVING COUNT(*) >= 2`로 행 수가 2 이상인 그룹만 남깁니다. 살아남은 그룹마다 한 행씩 결과로 나오며 각 행에는 그 그룹의 COUNT 값이 표시됩니다. 예를 들어 행이 300건인 ID 그룹 하나가 조건을 통과하면 결과로 300이 1건 반환됩니다. 정답은 ③번입니다.",
-      "references": [
-        {
-          "type": "sql",
-          "code": "SELECT COUNT(*) FROM T GROUP BY ID HAVING COUNT(*) >= 2;"
-        }
-      ]
+      "explanation": "`GROUP BY ID`로 같은 ID끼리 묶고, `HAVING COUNT(*) >= 2`로 행 수가 2 이상인 그룹만 남깁니다. 살아남은 그룹마다 한 행씩 결과로 나오며 각 행에는 그 그룹의 COUNT 값이 표시됩니다. 예를 들어 행이 300건인 ID 그룹 하나가 조건을 통과하면 결과로 300이 1건 반환됩니다. 정답은 ③번입니다."
     },
     {
       "subject": "2과목",
