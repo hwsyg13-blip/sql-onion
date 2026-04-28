@@ -1321,7 +1321,7 @@ export const ROUND_57: QuizQuestion[] = [
     "number": 49,
     "title": "아래 SQL 의 출력 레이블 가공으로 가장 적절한 CASE-GROUPING 조합은?",
     "options": [
-      "GROUPING = 1 AND GROUPING = 1 → NULL 표시, GROUPING = 1 → 소계 표시",
+      "GROUPING(DEPT) = 1 AND GROUPING(JOB) = 1 → '전체총계', GROUPING(DEPT) = 1 → '부서별 소계'",
       "GROUPING(DEPT) = 0 AND GROUPING(JOB) = 0 → '전체총계', GROUPING(DEPT) = 1 → '부서별 소계'",
       "GROUPING 함수는 CUBE 절과만 결합 가능하므로 ROLLUP 결과에 적용할 수 없다.",
       "GROUPING 함수는 ROLLUP 절과만 결합 가능하므로 CUBE·GROUPING SETS 결과에 적용할 수 없다."

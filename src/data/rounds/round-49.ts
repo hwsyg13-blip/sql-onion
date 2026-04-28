@@ -1175,13 +1175,13 @@ export const ROUND_49: QuizQuestion[] = [
     "number": 37,
     "title": "아래 네 SQL 중 결과가 다른 것은?",
     "options": [
-      "SELECT COUNT(DISTINCT COL1) FROM T;",
+      "SELECT UNIQUE COL1 FROM T;",
       "SELECT DISTINCT COUNT(*) FROM T;",
       "SELECT COL1 FROM T GROUP BY COL1;",
       "SELECT DISTINCT COL1 FROM T;"
     ],
     "correctIndex": 1,
-    "explanation": "①·③·④ 는 모두 컬럼 COL1 의 서로 다른 값 목록(중복 제거)을 반환하지만, ② SELECT DISTINCT COUNT(*) FROM T 는 그룹 함수가 단일 행 결과로 전체 행 수를 한 번 반환하므로 한 건의 집계값만 출력된다.",
+    "explanation": "①·③·④ 는 모두 컬럼 COL1 의 서로 다른 값 목록(중복 제거)을 반환한다. Oracle 의 UNIQUE 키워드는 DISTINCT 와 동의어로 동작하므로 ① 도 목록을 반환하고, ③ GROUP BY COL1 과 ④ DISTINCT COL1 도 같은 결과다. 반면 ② SELECT DISTINCT COUNT(*) FROM T 는 COUNT(*) 그룹 함수가 단일 행 결과로 전체 행 수를 한 번 반환하므로 DISTINCT 가 의미 없이 한 건의 집계값만 출력된다.",
     "_source": "authored"
   },
   {
