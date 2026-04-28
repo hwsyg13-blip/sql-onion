@@ -882,7 +882,7 @@
     {
       "subject": "2과목",
       "number": 39,
-      "title": "아래 계층형 질의에서 START WITH 11, PRIOR가 역방향으로 지정된 경우 트리 탐색 결과로 옳은 것은?",
+      "title": "아래 CATEGORY 테이블에 대한 계층형 질의의 트리 탐색 결과로 옳은 것은?",
       "options": [
         "2부터 시작",
         "역방향 2부터 시작",
@@ -890,11 +890,24 @@
         "역방향 11부터 시작"
       ],
       "correctIndex": 2,
-      "explanation": "START WITH 11로 시작하며 PRIOR category_id = 상위카테고리 조건은 부모에서 자식으로 내려가는 정방향 탐색이므로 11에서 시작해 22 방향으로 확장한다.",
+      "explanation": "`START WITH category_id = 11` 으로 11 부터 탐색을 시작한다. `CONNECT BY PRIOR category_id = 상위카테고리` 는 \"이전 행의 category_id 가 다음 행의 상위카테고리\" 인 경우 연결 — 즉 부모 → 자식 정방향 탐색이라 11 → 22 로 확장된다.",
       "references": [
         {
+          "type": "table",
+          "headers": [
+            "category_id",
+            "상위카테고리"
+          ],
+          "rows": [
+            ["1", "NULL"],
+            ["2", "1"],
+            ["11", "2"],
+            ["22", "11"]
+          ]
+        },
+        {
           "type": "sql",
-          "code": "-- [CATEGORY 테이블]\n-- category_id  상위카테고리\n--     1          (NULL)\n--     2          1\n--    11          2\n--    22          11\nSELECT *\nFROM   CATEGORY\nSTART WITH category_id = 11\nCONNECT BY PRIOR category_id = 상위카테고리;"
+          "code": "SELECT *\nFROM   CATEGORY\nSTART WITH category_id = 11\nCONNECT BY PRIOR category_id = 상위카테고리;"
         }
       ]
     },

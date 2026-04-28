@@ -805,11 +805,22 @@
         "오류"
       ],
       "correctIndex": 0,
-      "explanation": "MIN 은 10, MAX(TO_CHAR) 는 문자 비교 결과 90(문자열) 이 되어 묵시적 변환 시 10 + 90 = 100 이 된다.",
+      "explanation": "T.COL1 = (10, 50, 90). `MIN(COL1)` = 10 (숫자), `MAX(TO_CHAR(COL1))` = '90' (문자 비교 기준 가장 큰 문자열). `숫자 + 문자열` 은 묵시적 형변환으로 10 + 90 = 100 이 된다.",
       "references": [
         {
+          "type": "table",
+          "headers": [
+            "COL1"
+          ],
+          "rows": [
+            ["10"],
+            ["50"],
+            ["90"]
+          ]
+        },
+        {
           "type": "sql",
-          "code": "SELECT MIN(COL1) + MAX(TO_CHAR(COL1))\nFROM   T;\n-- COL1 값: 10, 50, 90"
+          "code": "SELECT MIN(COL1) + MAX(TO_CHAR(COL1))\nFROM   T;"
         }
       ]
     },

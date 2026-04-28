@@ -1216,7 +1216,7 @@ export const ROUND_54: QuizQuestion[] = [
     "round": 54,
     "subject": "2과목",
     "number": 39,
-    "title": "아래 SQL 의 결과로 옳은 것은?",
+    "title": "아래 T 테이블에 대한 SQL 의 결과로 옳은 것은?",
     "options": [
       "부서1 18000 / 부서2 11300",
       "부서2 11300 / 부서1 18000",
@@ -1224,9 +1224,38 @@ export const ROUND_54: QuizQuestion[] = [
       "부서2 18000 / 부서1 11300"
     ],
     "correctIndex": 1,
-    "explanation": "총매출 오름차순 정렬이므로 작은 값이 먼저 출력된다.",
+    "explanation": "`GROUP BY COL1` 으로 부서별 `SUM(매출)` 을 집계하면 부서1 = 5000+8000+5000 = 18000, 부서2 = 4000+7300 = 11300. `ORDER BY 총매출` 은 기본 오름차순이라 작은 값(11300, 부서2) 이 먼저 출력된다. 정답은 ② 부서2 11300 / 부서1 18000.",
     "_source": "authored",
     "references": [
+      {
+        "type": "table",
+        "headers": [
+          "COL1",
+          "매출"
+        ],
+        "rows": [
+          [
+            "부서1",
+            "5000"
+          ],
+          [
+            "부서2",
+            "4000"
+          ],
+          [
+            "부서1",
+            "8000"
+          ],
+          [
+            "부서2",
+            "7300"
+          ],
+          [
+            "부서1",
+            "5000"
+          ]
+        ]
+      },
       {
         "type": "sql",
         "code": "SELECT COL1, SUM(매출) AS 총매출\nFROM   T\nGROUP BY COL1\nORDER BY 총매출;"

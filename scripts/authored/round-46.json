@@ -347,7 +347,7 @@
     {
       "subject": "2과목",
       "number": 19,
-      "title": "아래 SQL의 결과 행 수로 옳은 것은?",
+      "title": "아래 세 테이블에 대한 SQL 의 결과 행 수로 옳은 것은?",
       "options": [
         "3건",
         "4건",
@@ -355,11 +355,23 @@
         "오류 발생"
       ],
       "correctIndex": 1,
-      "explanation": "UNION 결과는 {1,2,3,4,5}이며, 여기서 {2}를 차집합하면 {1,3,4,5}로 총 4건이다.",
+      "explanation": "T1 UNION T2 = {1, 2, 3, 4, 5} (UNION 은 중복 제거). 거기서 T3 = {2} 를 MINUS 하면 {1, 3, 4, 5} 로 총 4 건이다.",
       "references": [
         {
+          "type": "table",
+          "headers": [
+            "테이블",
+            "COL 값"
+          ],
+          "rows": [
+            ["T1", "1, 2, 3"],
+            ["T2", "3, 4, 5"],
+            ["T3", "2"]
+          ]
+        },
+        {
           "type": "sql",
-          "code": "SELECT COL FROM T1   -- {1,2,3}\nUNION\nSELECT COL FROM T2   -- {3,4,5}\nMINUS\nSELECT COL FROM T3;  -- {2}"
+          "code": "SELECT COL FROM T1\nUNION\nSELECT COL FROM T2\nMINUS\nSELECT COL FROM T3;"
         }
       ]
     },
@@ -735,7 +747,7 @@
     {
       "subject": "2과목",
       "number": 39,
-      "title": "아래 SQL의 결과 행 수로 옳은 것은? (T2.COL2에 NULL이 포함되어 있다.)",
+      "title": "아래 두 테이블에 대해 NOT IN 서브쿼리를 사용한 SQL 의 결과 행 수로 옳은 것은? (T2.COL2 에 NULL 포함)",
       "options": [
         "T1의 모든 행",
         "T1 중 COL1이 T2.COL2에 존재하지 않는 행",
@@ -743,8 +755,20 @@
         "오류 발생"
       ],
       "correctIndex": 2,
-      "explanation": "NOT IN 목록에 NULL이 포함되면 NULL과의 비교 결과가 UNKNOWN이 되어 전체 조건이 FALSE로 평가되므로 결과가 0건이다.",
+      "explanation": "`NOT IN` 목록에 NULL 이 포함되면 `COL1 <> NULL` 평가가 UNKNOWN 이 되어 어떤 행도 조건을 TRUE 로 만족시키지 못한다. 따라서 결과는 0 건이다.",
       "references": [
+        {
+          "type": "table",
+          "headers": [
+            "T1.COL1",
+            "T2.COL2"
+          ],
+          "rows": [
+            ["1", "2"],
+            ["2", "3"],
+            ["3", "NULL"]
+          ]
+        },
         {
           "type": "sql",
           "code": "SELECT *\nFROM   T1\nWHERE  COL1 NOT IN (SELECT COL2 FROM T2);"
