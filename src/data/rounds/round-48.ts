@@ -1601,16 +1601,12 @@ export const ROUND_48: QuizQuestion[] = [
       "7"
     ],
     "correctIndex": 1,
-    "explanation": "루트(LEVEL=1) 아래 직속 자식 노드가 3개이므로 LEVEL=2 행은 3건이다.",
+    "explanation": "LEVEL 은 EMP 에 저장된 컬럼이 아니라 Oracle CONNECT BY 가 트리 전개 과정에서 자동으로 부여하는 가상 컬럼(pseudo-column) 으로, 루트가 1 이고 한 단계 내려갈 때마다 1 씩 증가한다. START WITH 매니저 IS NULL → 루트는 매니저가 NULL 인 A (LEVEL=1). CONNECT BY PRIOR 사원 = 매니저 는 부모 행의 사원이 자식 행의 매니저와 매칭되는 순방향 전개. A 의 자식은 매니저='A' 인 행 → B·C·D 세 명이 LEVEL=2. 그 아래 LEVEL=3 은 B 의 자식 (E, F) + D 의 자식 (G) 으로 3 명이지만 질문은 LEVEL=2 만 묻고 있으므로 정답은 3 건.",
     "_source": "authored",
     "references": [
       {
-        "type": "ascii",
-        "text": "                  [ A ]   ← LEVEL 1 (루트)\n                /  |  \\\n             [B] [C] [D]   ← LEVEL 2 (직속 자식 3개)\n             /\\       \\\n           [E][F]    [G]   ← LEVEL 3"
-      },
-      {
         "type": "table",
-        "caption": "트리 데이터 (사원-매니저 형식)",
+        "caption": "EMP 테이블 (LEVEL 은 저장 컬럼이 아닌 CONNECT BY 가상 컬럼)",
         "headers": [
           "사원",
           "매니저"
@@ -1648,7 +1644,7 @@ export const ROUND_48: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT 사원, LEVEL\nFROM   EMP\nSTART WITH 매니저 IS NULL\nCONNECT BY PRIOR 사원 = 매니저;"
+        "code": "-- LEVEL 은 CONNECT BY 가 부여하는 가상 컬럼 (1 부터 시작)\nSELECT 사원, LEVEL\nFROM   EMP\nSTART WITH 매니저 IS NULL\nCONNECT BY PRIOR 사원 = 매니저;"
       }
     ]
   },
