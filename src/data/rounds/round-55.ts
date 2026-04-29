@@ -1342,7 +1342,7 @@ export const ROUND_55: QuizQuestion[] = [
     "round": 55,
     "subject": "2과목",
     "number": 36,
-    "title": "아래 SQL 수행 후 출력되는 SQL 의 조합으로 옳은 것은?",
+    "title": "아래 트랜잭션 수행 후 COMMIT 으로 데이터베이스에 영구 반영되는 SQL 의 조합으로 옳은 것은?",
     "options": [
       "가, 라, 마",
       "가, 나, 라, 마",
@@ -1350,12 +1350,54 @@ export const ROUND_55: QuizQuestion[] = [
       "가, 마"
     ],
     "correctIndex": 0,
-    "explanation": "ROLLBACK TO SAVEPOINT A 는 (나)·(다) 의 변경을 취소한다. (가) 와 이후 실행된 (라)·(마) 만 COMMIT 으로 최종 반영된다.",
+    "explanation": "트랜잭션은 위에서 아래 순서로 실행되며, ROLLBACK TO SAVEPOINT 는 해당 SAVEPOINT 이후의 모든 변경을 취소하고 그 시점 상태로 되돌린다.\n\n단계별 분석:\n1. (가) 실행 → 변경 적용\n2. SAVEPOINT A → 현재 상태 저장점 A\n3. (나) 실행 → 변경 적용\n4. SAVEPOINT B → 저장점 B\n5. (다) 실행 → 변경 적용\n6. ROLLBACK TO SAVEPOINT A → A 이후의 변경인 (나)·(다) 취소. (가) 의 효과는 유지.\n7. (라) 실행 → 변경 적용\n8. (마) 실행 → 변경 적용\n9. COMMIT → 현재까지의 모든 누적 변경 ((가)·(라)·(마)) 영구 반영.\n\n따라서 영구 반영되는 SQL = (가), (라), (마) → 정답 ①. ② 는 (나) 가 ROLLBACK 으로 취소되었음을 놓쳤고, ③ 는 (다) 까지 모두 살았다고 잘못 판단, ④ 는 (라) 가 ROLLBACK 영향을 받지 않음을 놓쳤다.",
     "_source": "authored",
     "references": [
       {
         "type": "sql",
-        "code": "(가) SQL1 ...\nSAVEPOINT A;\n(나) SQL2 ...\nSAVEPOINT B;\n(다) SQL3 ...\nROLLBACK TO SAVEPOINT A;\n(라) SQL4 ...\n(마) SQL5 ...\nCOMMIT;"
+        "code": "-- 트랜잭션 시작\n(가) SQL1   -- 첫 번째 변경\nSAVEPOINT A;\n(나) SQL2   -- A 이후 변경\nSAVEPOINT B;\n(다) SQL3   -- B 이후 변경\nROLLBACK TO SAVEPOINT A;   -- (나)·(다) 취소, (가) 는 유지\n(라) SQL4   -- 다시 변경 시작\n(마) SQL5\nCOMMIT;     -- 누적된 (가)·(라)·(마) 영구 반영"
+      },
+      {
+        "type": "table",
+        "caption": "각 SQL 의 최종 운명",
+        "headers": [
+          "라벨",
+          "실행 시점",
+          "ROLLBACK 영향",
+          "COMMIT 반영"
+        ],
+        "rows": [
+          [
+            "(가)",
+            "트랜잭션 시작 직후",
+            "받지 않음 (SAVEPOINT A 이전)",
+            "✓"
+          ],
+          [
+            "(나)",
+            "SAVEPOINT A 이후",
+            "취소됨",
+            "✗"
+          ],
+          [
+            "(다)",
+            "SAVEPOINT B 이후",
+            "취소됨",
+            "✗"
+          ],
+          [
+            "(라)",
+            "ROLLBACK 이후",
+            "받지 않음 (이후 실행)",
+            "✓"
+          ],
+          [
+            "(마)",
+            "ROLLBACK 이후",
+            "받지 않음 (이후 실행)",
+            "✓"
+          ]
+        ]
       }
     ]
   },
