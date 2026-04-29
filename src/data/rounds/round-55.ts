@@ -193,13 +193,13 @@ export const ROUND_55: QuizQuestion[] = [
     "number": 10,
     "title": "아래 설명에 해당하는 용어는?",
     "options": [
-      "관계 선택사양",
-      "관계 차수",
-      "관계 명",
-      "관계 유형"
+      "Relationship Optionality",
+      "Relationship Cardinality",
+      "Relationship Name",
+      "Relationship Type"
     ],
     "correctIndex": 1,
-    "explanation": "두 엔터티 간 관계에 참여하는 인스턴스의 수(1:1, 1:M, M:N) 를 표현하는 것은 관계 차수(Cardinality) 이다. 관계 선택사양은 필수/선택 여부, 관계 명은 관계의 이름, 관계 유형은 식별/비식별 구분에 해당한다.",
+    "explanation": "두 엔터티 간 관계에 참여하는 인스턴스의 수 (1:1, 1:M, M:N) 를 표현하는 것은 관계 차수 (Relationship Cardinality, 또는 Degree) 이다. ① Relationship Optionality (관계 선택사양) 는 필수/선택 참여 여부, ③ Relationship Name (관계 명) 은 관계의 이름 (예: \"소속\", \"보유\"), ④ Relationship Type (관계 유형) 은 식별·비식별 등의 구분에 해당한다.",
     "_source": "authored",
     "references": [
       {
