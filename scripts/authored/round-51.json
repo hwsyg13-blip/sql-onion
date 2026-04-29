@@ -277,12 +277,12 @@
       "title": "A 와 B 각각의 소계, 총계까지 모두 출력하는 GROUP BY 절은?",
       "options": [
         "ROLLUP(A, B)",
-        "GROUP BY A, B",
+        "A, B",
         "CUBE(A, B)",
         "GROUPING SETS((A, B))"
       ],
       "correctIndex": 2,
-      "explanation": "CUBE 는 (A,B), (A), (B), () 의 네 조합을 모두 반환한다.",
+      "explanation": "SQL 의 빈칸 ( ? ) 는 GROUP BY 뒤에 들어갈 표현식 자리이므로 옵션은 GROUP BY 키워드를 다시 포함하지 않는다. CUBE(A, B) 는 (A, B), (A), (B), () 의 네 조합을 모두 반환하므로 \"A 와 B 각각의 소계, 총계까지\" 모두 출력한다. ② \"A, B\" 는 단순 그룹핑이라 소계·총계가 없고, ① ROLLUP 은 (A, B), (A), () 만 (B 단독 소계 누락), ④ GROUPING SETS((A, B)) 는 (A, B) 단일 그룹만 산출한다.",
       "references": [
         {
           "type": "sql",

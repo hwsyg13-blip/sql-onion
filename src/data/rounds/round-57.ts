@@ -1071,15 +1071,15 @@ export const ROUND_57: QuizQuestion[] = [
     "round": 57,
     "subject": "2과목",
     "number": 38,
-    "title": "아래 NAME 테이블에서 결과가 (Kim, Tim) 으로 나오도록 LIKE 조건을 설정한 것은? (SQL Server)",
+    "title": "아래 NAME 테이블에서 결과가 (Kim, Tim) 으로 나오도록 SQL 의 빈칸 ( ? ) 에 들어갈 LIKE 조건은? (SQL Server)",
     "options": [
-      "WHERE name LIKE '_im'",
-      "WHERE name LIKE '%im'",
-      "WHERE name LIKE '[JK]im'",
-      "WHERE name LIKE '[KT]im'"
+      "name LIKE '_im'",
+      "name LIKE '%im'",
+      "name LIKE '[JK]im'",
+      "name LIKE '[KT]im'"
     ],
     "correctIndex": 3,
-    "explanation": "SQL Server LIKE 의 문자 클래스 `[KT]` 는 \"K 또는 T 한 글자\" 를 의미. ④ `[KT]im` 은 Kim 과 Tim 만 매칭. ① `_im` 은 임의 한 글자 + im 이라 Jim/Kim/Tim 모두 매칭. ② `%im` 도 모두 매칭. ③ `[JK]im` 은 Jim/Kim 매칭 (Tim 누락).",
+    "explanation": "SQL 의 빈칸 ( ? ) 는 WHERE 절 뒤에 들어갈 Boolean 조건 자리이므로 옵션은 WHERE 키워드를 다시 포함하지 않는다. SQL Server LIKE 의 문자 클래스 [KT] 는 \"K 또는 T 한 글자\" 를 의미. ④ name LIKE '[KT]im' 은 Kim 과 Tim 만 매칭. ① '_im' 은 임의 한 글자 + im 이라 Jim/Kim/Tim 모두 매칭. ② '%im' 도 모두 매칭. ③ '[JK]im' 은 Jim/Kim 매칭 (Tim 누락).",
     "_source": "authored",
     "references": [
       {

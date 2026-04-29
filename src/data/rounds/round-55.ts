@@ -1126,7 +1126,7 @@ export const ROUND_55: QuizQuestion[] = [
     "round": 55,
     "subject": "2과목",
     "number": 34,
-    "title": "아래 주문 테이블에서 3 회 이상 주문한 고객을 조회하는 HAVING 절로 옳은 것은?",
+    "title": "아래 주문 테이블에서 3 회 이상 주문한 고객을 조회하는 SQL 의 빈칸 ( ? ) 으로 옳은 것은?",
     "options": [
       "HAVING COUNT(구매번호) >= 3",
       "HAVING SUM(구매번호) >= 3",
@@ -1134,7 +1134,7 @@ export const ROUND_55: QuizQuestion[] = [
       "HAVING 구매번호 = 3"
     ],
     "correctIndex": 0,
-    "explanation": "그룹 함수 결과를 필터링할 때는 `HAVING` 을 사용. 3 회 이상 주문 조건은 `COUNT(구매번호) >= 3`. ② SUM 은 합계라 의미 다름, ③ WHERE 절에는 집계 함수를 직접 쓸 수 없음, ④ 는 그룹 함수 없이 비교라 의미 안 맞음.",
+    "explanation": "그룹 함수 결과를 필터링할 때는 HAVING 절을 사용한다. 3 회 이상 주문한 고객 조건은 COUNT(구매번호) >= 3. ② SUM 은 합계라 \"3 회 이상\" 과 의미 다름, ③ WHERE 절에는 집계 함수를 직접 쓸 수 없음, ④ 는 그룹 함수 없이 단일 값 비교라 의미 안 맞음.",
     "_source": "authored",
     "references": [
       {
@@ -1173,7 +1173,7 @@ export const ROUND_55: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT 고객ID\nFROM   주문\nGROUP BY 고객ID\nHAVING ( ? );"
+        "code": "SELECT 고객ID\nFROM   주문\nGROUP BY 고객ID\n( ? );"
       }
     ]
   },
