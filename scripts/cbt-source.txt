@@ -1,0 +1,835 @@
+                                                                          로그인 | 회원가입
+
+글자 크기 100% 150% 200%    SQL 개발자 필기                              35  1234  
+
+                                  ㆍ전체 문제 수 : 50 ㆍ안 푼 문제 수 : 49
+
+                                                                36  1234
+
+                                                                37  1234
+
+1. 다음의 PREV_SAL은 어떤 윈도우 함수를 사용해야 하는가?                           38  1234
+
+                                                                39  1234
+
+                                                                40  1234
+
+                                                                41  1234
+
+                                                                42  1234
+
+                                                                43  1234
+
+                                                                44  1234
+
+                                                                45  1234
+
+                                                                46  1234
+
+     1 LEAD                                                     47  1234
+     2 LAG
+     3 NTILE                                                    48  1234
+     4 LAST_VALUE
+                                                                49  1234
+     정답 : 2
+     LAG() 윈도우 함수는 이전 행의 몇 번째 행 값을 가지고 올 수 있다.                  50  1234
+
+2. 다음 SQL 실행 시, 최종 출력되는 결과로 가장 알맞은 것은?                                    
+
+SELECT ORDER_ID
+FROM TB_ORDER
+WHERE CUST_ID NOT IN (
+SELECT CUST_ID
+FROM TB_CUSTOMER
+WHERE CITY = 'SEOUL'
+);​
+
+1 103
+
+2 101, 104
+     3 102, 103
+     4 102, 103, 104
+     정답 : 3
+     CUSTOMER 테이블에서 CITY가 SEOUL인 CUST_ID는 1, 4이다. 즉 WHERE CUST_ID
+     NOT IN (1, 4)이므로 TB_ORDER 테이블에서 ORDER_ID가 102, 103이 출력된다.​
+
+3. 다음 SQL 실행 시 최종 출력되는 결과로 가장 알맞은 것은?
+
+     SELECT NAME
+     FROM PRODUCTS
+     WHERE PRICE = (SELECT MAX(PRICE) FROM
+     PRODUCTS);​
+     1 Pen
+     2 Pencil
+     3 Book
+     4 오류 발생
+     정답 : 3
+     WHERE에 있는 서브쿼리는 메인 쿼리의 컬럼이 없는 비상관 서브쿼리이므로 독립적으로
+     먼저 실행할 수 있다. 서브쿼리 실행 결과 1000이 출력되고, 이를 대입해 메인 쿼리를 풀
+     면 Book이 출력된다.​
+
+4. 두 개 릴레이션 Student와 Department가 있을 때, 질의문 “SELECT * FROM Student s, Department d
+    WHERE s.dept > 100;”을 수행하려고 한다. 이 질의 수행으로 생성되는 결과 릴레이션의 차수(Degree)
+    와 카디널리티(Cardinality)는 각각 얼마인가? (단, 릴레이션 Student의 애트리뷰트 ‘소속(dept)’은 릴레
+    이션 Department의 애트리뷰트 ‘코드(dno)’를 외부키로 참조한다)
+
+     1 차수＝5, 카디널리티＝3
+     2 차수＝5, 카디널리티＝2
+     3 차수＝8, 카디널리티＝9
+     4 차수＝8, 카디널리티＝3
+
+     정답 : 3
+     차수(Degree)와 카디널리티(Cardinality)를 구하는 문제로 차수는 결과 릴레이션의 칼럼
+     수이다. 그래서 Student와 dept 테이블을 조인하여 모든 컬럼을 출력하기 때문에
+     (SELECT *) 각각 Student 테이블에서 5개 , dept 테이블에서 3개 , 총 8개의 컬럼(=차
+     수)을 가지게 된다.
+     카디널리티는 선택된 행들의 개수이다. Where문을 보면 결과 릴레이션에서 Student 릴
+     레이션의 dept값이 100보다 큰 것만 조회한다. 위 조건에 부합하는 결과 행수는 9건이므
+     로 카디널리티는 9가 된다.
+     (Student와 Dept를 카티션곱 조인하면 15개의 행이 나오고, 이중 where 조건에 부합하
+     는 대상은 9건이다)
+
+5. 다음 중 자신과 성별이 같은 부양가족을 가진 직원의 이름을 검색하는 질의를 SQL로 적절하게 표현한
+    것을 고르시오.
+     1 SELECT E.이름
+         FROM 직원 AS E
+         WHERE E.직원번호 LIKE ( SELECT 직원번호 FROM 부양가족 WHERE E.성별 = 성별);
+     2 SELECT E.이름
+         FROM 직원 AS E WHERE NOT EXISTS (SELECT * FROM 부양가족
+         WHERE E.직원번호 = 직원번호);
+     3 SELECT E.이름
+         FROM 직원 AS E
+         WHERE EXISTS (SELECT * FROM 부양가족 WHERE E.직원번호 = 직원번호 AND E.성별
+         = 성별);
+     4 SELECT E.이름
+         FROM 직원 AS E
+         WHERE NOT EXISTS (SELECT * FROM 부양가족 WHERE E.직원번호 = 직원번호 AND
+         E.성별 = 성별);
+
+     정답 : 3
+
+6. 다음 테이블과 SQL을 기준으로 실행 결과가 올바른 것은?
+
+     [쿼리]
+     SELECT NAME, GRADE, STATUS
+     FROM TB_USER
+     WHERE GRADE = 'A' OR GRADE = 'B' AND
+     STATUS = 'ACTIVE';​
+
+        1
+
+        2
+        3
+
+        4
+
+     정답 : 2
+     WHERE 절에서 AND와 OR가 함께 사용될 경우, AND가 OR보다 먼저 평가된다. 이는 수
+     학에서 덧셈보다 곱셈이 먼저 계산되는 것과 유사한 개념이다. 따라서 조건문은 다음과 같
+     이 해석된다.
+     • GRADE = ‘A’ OR (GRADE = ‘B’ AND STATUS = ‘ACTIVE’)
+     • GRADE = ‘A’에 해당하는 사람 → Kim, Park
+     • GRADE = ‘B’ AND STATUS = ‘ACTIVE’에 해당하는 사람 → Jang
+
+  ② 이 세 명이 조건을 만족하므로 총 3행이 출력되며, 정답은 가 된다.​
+
+7. 다음 SQL 실행 결과로 가장 알맞은 것은?
+
+     SELECT COUNT(SALARY), SUM(SALARY),
+     AVG(SALARY)
+     FROM EMPLOYEE;​
+     1 3, 6000, 2000
+     2 4, 6000, 2000
+     3 3, 6000, 1500
+     4 3, NULL, 2000
+     정답 : 1
+     집계 함수는 NULL을 제외하고 집계한다. COUNT(SALARY)는 NULL 제외하고 3을 출력
+     한다. SUM(SALARY)는 NULL을 제외하고 1000 + 2000 + 3000 = 6000이 출력된다.
+     AVG(SALARY)는 NULL을 제외하고 (1000 + 2000 + 3000) / 3으로 2000이 출력된다.​
+
+8. 데이터 모델링에 대한 설명 중 알맞은 것은?
+     1 데이터 모델링의 3가지 요소는 Process, Attributes, Relationships이다.
+     2 실제로 데이터베이스를 구축할 때 참고되는 모델은 개념적 데이터 모델링이다.
+     3 물리 모델링 → 논리 모델링 → 개념 모델링 단계로 갈수록 구체적이다.
+     4 논리 모델링의 외래키는 물리 모델에서 반드시 구현되지는 않는다.
+      정답 : 4
+
+   ① 데이터 모델링의 3요소는 Things, Attributes, Relationships이다.
+   ② 실제 데이터베이스 구축 시 참고되는 모델은 물리적 데이터 모델링이다.
+   ③ 개념 모델링에서 물리 모델링으로 가면서 더 구체적이며 개념 모델링이 가장 추상적이
+
+      다.
+
+   ④ 논리 모델링의 외래키는 물리 모델에서 반드시 구현되지 않는 선택 사항이다.
+
+9. 다음 중 정규화의 이점으로 적절하지 않은 것은?
+      1 데이터 중복 최소화
+      2 처리 성능 향상
+      3 이상 현상 제거
+      4 무결성 보장
+
+      정답 : 2
+
+      정규화는 데이터 구조적 안정성 확보에 초점을 두며, 지나친 정규화는 JOIN을 증가시켜 성
+      능을 저하시킬 수 있다.
+
+10. 다음은 ERD(Entity Relationship Diagram) 작성 순서이다. 올바른 것을 고르시오.
+
+      가) 엔터티를 그린다.
+      나) 엔터티를 적절하게 배치한다.
+      다) 엔터티 간에 관계를 설정한다.
+      라) 관계명을 기술한다.
+      마) 관계의 참여도를 기술한다.
+      바) 관계의 필수 여부를 기술한다.
+
+      1 나)→가)→다)→라)→마)→바)
+      2 가)→나)→다)→라)→마)→바)
+      3 가)→나)→라)→다)→마)→바)
+      4 가)→나)→다)→마)→바)→라)
+
+      정답 : 2
+
+11. 다음 중 해시 조인(Hash Join)에 대한 설명으로 올바르지 않은 것은?
+      1 해시 조인은 해시 함수를 사용해서 주소를 계산하고 조인을 수행한다.
+      2 해시 조인을 할 때는 선행 테이블의 크기가 작아야 한다.
+      3 해시 조인은 CPU 연산이 많이 발생한다.
+      4 해시 조인은 랜덤 액세스(Random Access)로 인하여 부하가 발생한다.
+
+      정답 : 4
+
+      해시 조인은 해시 함수를 사용하므로 CPU를 많이 사용하지만, 랜덤 액세스는 발생하지 않
+      는다. 랜덤 액세스는 Nested Loop 조인이 발생한다.
+
+12. 다음 SQL 실행 결과로 가장 알맞은 것은?
+      SELECT NAME, NVL(SALARY, 0) AS SALARY
+      FROM EMP;​
+
+         1
+
+         2
+
+         3
+
+         4
+
+      정답 : 1
+      NVL 함수는 NULL을 대체하므로 Park의 SALARY는 0으로 출력된다. 또한 AS를 이용해
+      서 다시 별칭을 SALARY로 주었으므로 컬럼이 각각 NAME, SALARY로 표현되어야 한다.
+13. 다음 SQL 실행 결과로 가장 알맞은 것은?
+
+      SELECT STUDENT,
+      CASE
+      WHEN SCORE >= 80 THEN 'PASS'
+      WHEN SCORE IS NULL THEN 'NO DATA'
+      ELSE 'FAIL'
+      END AS RESULT
+      FROM SCORE;​
+
+         1
+
+         2
+         3
+
+         4
+
+      정답 : 1
+      이 SQL은 CASE 문을 사용하여 SCORE 값에 따라 각 학생의 결과를 판별한다. CASE 문은
+      위에서 아래로 조건을 순차적으로 평가하며, 가장 먼저 만족하는 조건에 해당하는 결과를
+      반환한다.
+      • A (SCORE = 85)일 경우 85 ≥ 80 조건을 만족하므로 결과는 ‘PASS’
+      • B (SCORE = 72)일 경우 72 ≥ 80, 72 IS NULL은 거짓이므로 ELSE가 적용되어 ‘FAIL’
+      • C (SCORE = NULL)일 경우 NULL ≥ 80은 비교 불가, NULL IS NULL 조건이 만족하므
+      로 ‘NO DATA’​
+14. 다음 중 아래 테이블 정의와 인덱스 구조를 참고하여, 인덱스를 효율적으로 액세스할 수 없는 검색조건
+     을 고르시오.
+
+      1 where 주문번호 between 1 and 10
+      2 where 주문자명 like ‘%홍길동%’
+      3 where 주문일자 >= ‘20181201’
+      4 where 주문일자 = ‘20181201’
+      정답 : 2
+
+15. 다음 중 식별자(Identifier)로 가장 부적절한 속성은?
+      1 주민등록번호
+      2 주민등록번호
+      3 학번
+      4 이메일 수신 여부(Y/N)
+      정답 : 4
+      식별자는 유일성을 보장해야 한다. 이메일 수신 여부는 Y, N이 여러 번 입력될 수 있으므
+      로 식별자로는 적합하지 않다.
+16. 다음 중 절차형 SQL을 이용하여 주로 만드는 것이 아닌 것은?
+      1 PROCEDURE
+      2 TRIGGER
+      3 BUILT-IN FUNCTION
+      4 USER DEFINED FUNCTION
+      정답 : 3
+      절차형 SQL을 이용하여 PROCEDURE, TRIGGER, USER DEFINED FUNCTION을 만들
+      수 있다.
+17. 다음 주어진 테이블에 대해서 아래와 같은 결과값이 반환되도록 아래 SQL문의 빈칸에 들어갈 것을 고르
+     시오.
+
+      1 max(COL2), min(COL2), sum(COL1)
+      2 max(COL1), min(COL2), sum(COL2)
+      3 max(COL1), min(COL2), sum(COL1)
+      4 min(COL1), max(COL2), max(COL1)
+      정답 : 3
+      A 속성은 COL1의 최댓값, B 속성은 COL2의 최솟값, C 속성은 COL1 속성의 합이다.
+18. 다음 SQL문의 실행 결과는 무엇인가?
+      SELECT COALESCE(NULL, ‘2’, ‘1’) FROM DUAL;
+
+      11
+      22
+      33
+      4 NULL
+
+      정답 : 2
+
+      COALESCE 함수는 NULL이 아닌 첫 번째 값을 리턴하는 함수이다. 즉, 위의 문제에서 첫
+      번째는 NULL이고 두 번째는 ‘2’이다. 따라서 ‘2’가 리턴된다.
+
+19. 다음 트랜잭션 처리 결과로 최종 테이블에 남는 데이터의 개수는? (단, SQL Server 환경이다.)
+
+      BEGIN TRAN;
+      CREATE TABLE TBL (ID INT PRIMARY KEY);
+      INSERT INTO TBL VALUES (1);
+      SAVE TRAN S1;
+      INSERT INTO TBL VALUES (2);
+      ROLLBACK TRAN S1;
+      INSERT INTO TBL VALUES (3);
+      COMMIT;
+      SELECT COUNT(*) FROM TBL;​
+
+      10
+      21
+      32
+      43
+
+      정답 : 3
+
+      먼저 INSERT로 값 1이 등록되고, SAVEPOINT S1이 설정된다. 이후 값 2가 INSERT 되지
+      만, ROLLBACK TRAN S1 명령으로 인해 저장점 이전 상태로 되돌아가면서 값 2는 사라진
+      다. 그다음 값 3이 INSERT되고, COMMIT을 통해 트랜잭션이 정상적으로 종료된다. 따라
+      서 테이블에는 값 1과 3이 남으며, 최종 결과는 2건이다.
+
+20. 발생 시점에 따른 엔터티 분류에 의한 중심 엔터티가 아닌 것은?
+      1 매출
+      2 주문
+      3 사원
+      4 계약
+
+      정답 : 3
+
+      사원, 부서, 고객, 상품, 자재 등이 기본 엔터티가 될 수 있다.
+
+21. 주문과 주문상세 테이블이 1:1 필수관계일 때 이에 대한 설명으로 올바른 것은? (단, 둘 다 PK로 주문번
+     호를 가지고 있으며 식별관계이다.)
+      1 주문 테이블의 전체 개수와 주문상세 테이 블의 전체 개수는 다르다.
+      2 주문이 입력되어도 주문상세 테이블은 입력되지 않을 수 있다.
+      3 주문 테이블 MINUS 주문상세 테이블의 출력 건수는 0건이다.
+
+         4
+          주문 테이블 INTERSECT 주문상세 테이블의 데이터 합계와 주문 테이블 데이터 합계는 다르
+          다.
+
+      정답 : 3
+      1:1 필수관계라면 주문에 있는 하나의 주문번호가 반드시 주문상세 테이블에도 하나만 존
+      재한다는 뜻이다.
+      예를 들어 주문 테이블에 (1, 2, 3)이 있다면 주문상세 테이블에도 반드시 (1, 2, 3)이 있
+      다. 따라서 주문 테이블에서 주문상세 테이블을 MINUS하면 0건이 남게 된다.​
+
+22. 그룹 내 순위 관련 WINDOW 함수의 특징으로 틀린 것은?
+      1 RANK 함수는 동일한 값에 대해서는 동일한 순위를 부여한다(같은 등수에 여럿이 존재하는
+          경우 등수가 SKIP될 수 있음).
+      2 RANK 함수는 동일한 값에 대해서는 동일한 순위를 부여한다(같은 등수에 여럿이 존재하는
+          경우 등수가 SKIP될 수 있음).
+      3 RANK 함수는 동일한 값에 대해서는 동일한 순위를 부여한다(같은 등수에 여럿이 존재하는
+          경우 등수가 SKIP될 수 있음).
+      4 RANK 함수는 동일한 값에 대해서는 동일한 순위를 부여한다(같은 등수에 여럿이 존재하는
+          경우 등수가 SKIP될 수 있음).
+
+      정답 : 4
+      그룹 내 순위 관련 WINDOW FUNCTION으로는 RANK, DENSE_RANK,
+
+   ④ ROW_NUMBER 함수가 있고, 번은 DENSE_RANK 함수에 대한 설명이며,
+
+      CUMM_RANK 함수는 존재하지 않는다.
+
+23. 다음 SQL 실행 결과로 가장 알맞은 것은?
+
+      SELECT COUNT(*) FROM T1
+      LEFT OUTER JOIN T2 ON T1.COL = T2.COL
+      LEFT OUTER JOIN T3 ON T1.COL = T3.COL
+      WHERE T2.COL IS NOT NULL ;​
+
+      11
+      22
+      33
+      40
+
+      정답 : 2
+      조인은 두 테이블씩 발생한다.
+      T1 LEFT OUTER JOIN T2 ON T1.COL = T2.COL 결과는 다음과 같다.
+      위 결과와 T3을 LEFT OUTER JOIN 한다( R1 LEFT OUTER JOIN T3 ON (R1.COL =
+      T3.COL).
+
+      이후 T2.COL이 NULL이 아닌 대상만 추출하므로 총 2행이 출력된다.​
+
+24. 다음 식별관계와 비식별관계에 대해 옳은 것은?
+      1 비식별관계는 자식 주식별자 구성에 부모 주식별자를 포함해야 한다.
+      2 비식별관계는 강한 연결 관계를 의미한다.
+      3 식별관계는 부모 쪽의 관계 참여가 선택 관계이다.
+      4 식별관계는 부모 엔터티의 주식별자 속성을 자식 엔터티의 식별자에 포함한다.
+
+      정답 : 4
+
+   ① ② ④ ③ , , 는 식별관계에 대한 설명이고 은 비식별관계에 대한 설명이다. 교재에서는 식
+
+      별자의 특징으로 다른 엔터티에 “이전”이 필요하다고 설명하고 있으며, 비식별자의 특징으
+      로는 다른 엔터티에 “차단”이 필요하다고설명하고 있다.​
+
+25. 다음 중 DML에 해당하지 않는 것은?
+      1 INSERT
+      2 DELETE
+      3 MERGE
+      4 TRUNCATE
+
+      정답 : 4
+      TRUNCATE는 DDL에 해당한다.
+
+26. 다음의 SQL문과 동일한 것을 고르시오.
+
+      Select NVL(Name,‘없음’) From Emp;
+
+      1 Select Case When Name IS NOT NULL THEN NAME ELSE ‘0’ END AS USER_NAME
+          From Emp;
+
+      2 Select Case When Name IS NOT NULL THEN ‘0’ ELSE NAME END AS USER_NAME
+          From Emp;
+
+      3 Select Case When Name IS NULL THEN ‘없음’ ELSE NAME END AS USER_NAME
+          From Emp;
+
+      4 Select Case When Name IS NULL THEN ‘없음’ ELSE ‘0’ END AS USER_NAME
+          From Emp;
+
+      정답 : 3
+      IS NULL 함수는 만약 NULL이면 “없음”을 출력하고 그렇지 않으면 NAME 칼럼의 값을 출
+      력하는 것이다.
+
+27. EMP 테이블 7788번 사원의 SAL 값이 현재 1,000인 상황에서 아래 TX1, TX2 두 개의 트랜잭션이 동시
+     에 수행되었다. 양쪽 트랜잭션이 모두 완료된 시점에 7788번 사원의 SAL 값은?
+      1 1000
+      2 1100
+      3 1200
+      4 1300
+
+      정답 : 4
+
+      TX2의 update 문은 베타적 Lock 때문에 대기했다가 TX1 트랜잭션이 commit 한 후에 처
+      리를 계속한다. TX1에 의해 1,100으로 바뀐 값을 읽어 200을 더하므로 최종 결과는
+      1,300이 된다.
+
+28. 윈도우 함수에 대한 설명으로 올바르지 않은 것은?
+      1 윈도우 함수는 GROUP BY와 동일하게 처리 건수가 줄어든다.
+      2 PARTITION BY 컬럼;을 하면 각 컬럼의 값에 대해 윈도우 행 범위를 넘어갈 수 없다.
+      3 WINDOWING 절을 사용하려면 ORDER BY가 있어야 한다.
+      4 PARTITION BY 절이 없으면 전체 행을 대상으로 진행한다.
+
+      정답 : 1
+
+      GROUP BY는 특정 컬럼 값을 기준으로 행을 그룹화하여, 집계된 결과만 출력하므로 출력
+      행 수가 줄어든다.
+      반면, 윈도우 함수는 행 수를 줄이지 않고, 각 행에 대해 집계 결과나 순위 등의 값을 추가
+      로 계산한다.
+      즉, PARTITION BY는 GROUP BY처럼 데이터를 그룹으로 나누는 역할을 하지만, 출력 행
+      수는 유지된다는 점에서 GROUP BY와는 처리 방식이 다르다.​
+
+29. 아래의 계층형 SQL에서 리프 데이터이면 1, 그렇지 않으면 0을 출력하고 싶을 때 사용하는 키워드로 알
+     맞은 것은?
+
+      SELECT LEVEL, LPAD(‘ ’,4 * (LEVEL -1) || EMPNO,
+      MGR, ( ) AS ISLEAF FROM SCOTT.EMP
+      START WITH MGR IS NULL
+      CONNECT BY PRIOR EMPNO = MGR;
+
+      1 CONNECT_BY_ISLEAF
+      2 CONNECT_BY_ISCYCLE
+      3 SYS_CONNECT_BY_PATH
+      4 CONNECT_BY_ROOT
+
+      정답 : 1
+30. 다음 쿼리 중 의미가 다른 하나는? (단, COL1은 날짜형 컬럼이다.)
+
+         1
+
+     SELECT * FROM TAB
+     WHERE TO_CHAR(COL1,
+     'YYYYMMDDHH24') = '2025010113'
+     OR TO_CHAR(COL1,
+     'YYYYMMDDHH24') = '2025010114' ;​
+
+         2
+
+     SELECT * FROM TAB
+     WHERE COL1 >= TO_DATE('20250
+     101130000', 'YYYYMMDDHH24MISS')
+     AND COL1 <= TO_DATE('20250
+     101145959', 'YYYYMMDDHH24MISS') ;​
+
+         3
+
+     SELECT * FROM TAB
+     WHERE ((TO_CHAR(COL1, 'YYYYMMDD'),
+     (TO_CHAR(COL1, 'HH24') )
+     IN (('20250101', '13'),
+     ('20250101', '14')) ;​
+
+         4
+
+     SELECT * FROM TAB
+     WHERE COL1 = TO_DATE('2025010113',
+     'YYYYMMDDHH24')
+     OR COL1 = TO_DATE('2025010114',
+     'YYYYMMDDHH24');​
+
+      정답 : 4
+
+   ① ③~ 은 모두 2025년 1월 1일 13시 00분 00초부터 2025년 1월 1일 14시 59분 59초
+
+      까지 범위를 대상으로 필터링하고 있다.
+
+   ④는 COL1이 2025년 1월 1일 13시 00분 00초이거나 2025년 1월 1일 14시 00분 00
+   ① ③ 초인 대상만 정확하게 추출하므로 ~ 보다 조건 범위가 좁아 의미가 다르다.​
+
+31. 다음 SQL의 의도와 가장 가까운 설명은? (단, SAL은 급여를 의미한다.)
+
+      SELECT *
+      FROM EMP
+      WHERE SAL > (SELECT AVG(SAL) FROM EMP);​
+
+      1 평균 급여보다 많은 사원 목록을 조회한다.
+      2 평균 급여보다 적은 사원 목록을 조회한다.
+      3 평균 급여를 포함한 전체 사원 목록을 조회
+
+          한다.
+      4 오류가 발생하는 쿼리이다.
+
+      정답 : 1
+
+      서브쿼리를 풀면 전체 직원의 평균 금액이 나오고, 이보다 큰 SAL(급여)를 가지고 있는 대
+      상을 찾는 쿼리이다.​
+
+32. Subquery의 종류 중에서 Subquery가 Mainquery의 제공자 역할을 하고 Mainquery의 값이 Subquery
+     에 주입되지 않는 유형은 무엇인가?
+
+   ① 1 Filter형 Subquery
+
+      2 Early Filter형 Subquery
+      3 Associative Subquery
+      4 Access Subquery
+      정답 : 4
+
+      Access Subquery는 제공자 역할을 하는 서브쿼리이다.
+
+33. 다음 중 집합 연산자에 대한 설명으로 올바르지 않은 것은?
+      1 UNION 연산자를 사용할 때 각각의 SELECT문에 ORDER BY를 사용할 수 있다.
+      2 U N I O N 은 중복을 제거하는 데 반해 UNION ALL은 중복을 제거하지 않는다.
+      3 INTERSECT는 중복 제거 및 정렬을 수행한다.
+      4 두 집합 간 중복이 없다면 UNION, UNION ALL 모두 동일한 결과를 출력한다.
+
+      정답 : 1
+
+      집합 연산자 이용 시 ORDER BY는 전체 집합 결과에 대해 한 번만 사용해야 하므로 마지
+      막 SELECT 문 뒤에 작성된다.
+      UNION ALL은 중복 제거 및 정렬을 수행하지 않지만, 나머지 UNION, MINUS,
+      INTERSECT 집합 연산자는 모두 중복 제거 및 정렬을 수행한다.​
+
+34. 다음 설명 중 맞는 것은 무엇인가?
+      1 모든 자료는 실질적으로 테이블에 저장되며 테이블에 있는 자료들을 꺼내 볼 수 있다.
+      2 데이터베이스 내에 테이블이란 존재하지 않는다.
+      3 아주 복잡한 자료도 테이블은 하나만 만드는 것이 바람직하다.
+      4 데이터베이스에는 단 한 개의 테이블만 존재할 수 있다.
+
+      정답 : 1
+
+      데이터베이스에는 자료의 성격에 따라 N개의 테이블을 생성한다. 모든 자료들은 테이블에
+      입력되며 조회, 수정, 삭제할 수 있다.
+
+35. 학생(STUDENT) 테이블에 영문학과 학생 50명, 법학과 학생 100명, 수학과 학생 50명의 정보가 저장되
+     어 있을 때, 다음 SQL문의 실행 결과 튜플 수는 각각 얼마인가? (단, DEPT필드는 학과명, NAME필드는
+     이름을 의미한다)
+
+      ㄱ : SELECT DEPT FROM STUDENT;
+      ㄴ : SELECT DISTINCT DEPT FROM STUDENT;
+      ㄷ : SELECT NAME FROM STUDENT WHERE DEPT=‘영문학과’;
+
+      1 ㄱ : 3, ㄴ : 3, ㄷ : 1
+      2 ㄱ : 200, ㄴ : 3, ㄷ : 1
+      3 ㄱ : 200, ㄴ : 3, ㄷ : 50
+      4 ㄱ : 200, ㄴ : 200, ㄷ : 50
+
+      정답 : 3
+
+      ㄱ은 STUDENT 테이블을 조건없이 조회하는 것이므로 200=50+100+50이 된다. 그리고
+      ㄴ은 “DISTINCT”를 사용했으므로 학과명이 중복되면 한 번만 출력한다. 문제에서는 영문
+      학과, 법학과, 수학과가 있으므로 3이 되고 ㄷ은 WHERE절에 “영문학과”만 조회하므로
+      50이 된다.
+36. 다음 주어진 테이블에서 아래와 같은 결괏값을 반환하도록 아래의 SQL문의 빈칸에 들어갈 올바른 것을
+     고르시오.
+
+      1 RANK()
+      2 NTILE()
+      3 ROW_NUMBER()
+      4 DENSE_RANK()
+      정답 : 4
+      결괏값에서 중복된 등수 2등 다음에 바로 다음 등수인 3이 왔으므로 빈칸에는
+      DENSE_RANK가 와야 한다.
+37. {학번, 과목번호}는 결정자이면서 기본키이고 {성적, 지도교수명, 학과명}은 종속자이다. 속성 중 과목번
+     호가 결정자이고 {지도교수명, 학과명}이 과목번호에만 함수적 종속성을 가진다면 이는 몇 차정규형에
+     속하고 몇 차정 규화의 대상인가?
+
+      1 2차정규형 - 3차정규화 대상
+      2 1차정규형 - 2차정규화 대상
+      3 3차정규형 - 보이스-코드 정규화 대상
+      4 보이스-코드 정규화 - 4차정규화 대상
+      정답 : 2
+      결정자 중 일부 속성에만 함수 종속성을 가지고 있는 ‘Partial Dependency Attribute’를
+      갖는 것은 2차정규형을 위반한 사례에 해당한다. 즉 1차정규형이면서 2차정규화의 대상이
+      된다.
+
+38. 다음 SQL 실행 결과로 가장 알맞은 것은?
+
+      SELECT NAME, ROW_NUMBER() OVER (ORDER
+      BY SCORE DESC) AS RN
+      FROM SCORES;​
+
+         1
+
+         2
+
+         3
+
+         4
+
+      정답 : 4
+      ROW_NUMBER( )는 값에 상관없이 고유한 순위를 부여한다.
+      <오답 피하기>
+
+   ① ② 은 RANK()에 대한 답이고, 는 DENSE_RANK()에 대한 답이다(A, C는 동점이므로 출
+
+      력 순서는 A, C 혹은 C, A가 될 수 있다).​
+
+39. 다음의 데이터베이스에서 ‘부양가족을 2명 이상 가진 사원의 사번(eno), 성명(ename), 부양가족 수를
+     검색’하는 질의를 SQL로 적절하게 표현한 것은?
+      employee(eno, ename, adddress, score, dno)
+      dependent(eno, ename, birthday, relation)
+      1 SELECT eno, ename, count(*)
+          FROM employee e, dependent d
+          WHERE e.eno = d.eno and count(*) >= 2
+          GROUP BY d.eno;
+      2 SELECT e.eno, e.ename, count(*)
+          FROM employee e, dependent d
+          WHERE EXISTS (SELECT * FROM dependent
+          GROUP BY eno
+          HAVING count(*) >= 2)
+          GROUP BY e.eno, e.ename;
+
+      3 SELECT e.eno, e.ename, t.cnt
+          FROM employee e, (SELECT eno, count(*) as cnt
+          FROM dependent GROUP BY
+          eno HAVING count
+          (*) >= 2) t
+          WHERE e.eno = t.eno;
+
+      4 SELECT e.eno, e.ename, count(*)
+          FROM employee e, dependent d
+          WHERE e.eno = d.eno
+          GROUP BY e.eno, e.ename
+          HAVING count(*) >= 3;
+
+      정답 : 3
+
+40. 데이터를 입력하기 위해 사용하는 SQL 명령어는 무엇인가?
+      1 CREATE
+      2 INSERT
+      3 UPDATE
+      4 ALTER
+
+      정답 : 2
+      데이터를 입력하기 위해서 “INSERT” 명령어를 사용한다.
+
+41. 릴레이션 ‘employee’와 ‘department’에서 다음 SQL 질의문의 수행 결과는?
+
+      1 {(100, 영업, Lee, 90), (200, 개발, Kim, 95), (300, 서비스, Hong, 65)}
+      2 {(100, 영업, Lee, 90), (200, 개발, Kim, 95)}
+      3 {(100, 영업, Lee, 90)}
+      4 {(100, 영업, Hong, 80), (100, 영업, Lee, 90), (200, 개발, Kim, 90), (200, 개발, Kim,
+
+          95), (600, null, Hong, 65)}
+
+      정답 : 1
+42. 다음 각 쿼리의 실행 결과로 옳은 것은?
+
+      [쿼리]
+      [1] SELECT SUM(SAL + BONUS) FROM EMP WHERE DEPTNO = 10;
+      [2] S E L E C T S U M(N V L(S A L, 0) + NVL(BONUS, 0)) FROM EMP;
+      [3] SELECT SUM(SAL) + SUM(BONUS) FROM EMP ;​
+
+      1 NULL, 260, 260
+      2 0, 260, 260
+      3 NULL, 260, 200
+      4 NULL, 240, 260
+
+      정답 : 1
+      • 첫 번째 쿼리 : D E P T N O가 10인 대상의 S A L+B O N U S는 각각 100+NULL ,
+      NULL + 20이므로 둘다 NULL이 되어 SUM의 결과는 NULL이 된다.
+      • 두 번째 쿼리 : NVL(SAL, 0) + NVL(BONUS, 0)은 순서대로 각각 100 + 0, 0 + 20,
+      30 + 10, 50 + 30, 20 + 0이므로 100, 20, 40, 80, 20의 합계를 구하면 260이다.
+      • 세 번째 쿼리 : SUM(SAL)은 100, NULL, 30, 50, 20의 합계이며 집계 함수는 NULL을
+      무시해 100, 30, 50, 20을 더한 200이 출력된다. SUM(BONUS)은 NULL, 20, 10, 30,
+      NULL로 NULL을 제외한 20, 10, 30의 합계인 60이 나오고, 그 결과 200+60 = 260이
+      된다.​
+
+43. 다음 SQL을 ANSI 방식으로 변경한 것으로 옳은 것은?
+
+      SELECT *
+      FROM TAB1, TAB2
+      ORDER BY 1;​
+
+      1 SELECT * FROM TAB1 INNER JOIN TAB2
+          ORDER BY 1 ;​
+
+      2 SELECT * FROM TAB1 NATURAL JOIN
+          TAB2 ORDER BY 1 ;​
+
+      3 SELECT * FROM TAB1 CROSS JOIN TAB2
+          ORDER BY 1 ;​
+
+      4 SELECT * FROM TAB1 INNER JOIN TAB2
+          ON (TAB1.COL1 = TAB2.COL1) ORDER
+          BY 1 ;​
+
+      정답 : 3
+      FROM TAB1, TAB2만 있고 별도의 조인조건은 없으므로 카티션 곱이 발생하며, 이는
+      CROSS JOIN으로 표현할 수 있다. CROSS JOIN은 ON 조인 절을 사용하지 않는다는 점을
+      주의해야 한다.​
+
+44. 다음 중 SQL의 특징으로 가장 적절하지 않은 것은?
+      1 절차적 언어이며 반복문을 포함한다.
+      2 데이터 정의, 조작, 제어 언어를 포함한다.
+      3 관계형 데이터베이스 질의에 사용된다.
+      4 ANSI 표준으로 대부분의 DBMS에서 지원된다.
+      정답 : 1
+      SQL은 비절차적 언어로 어떤(WHAT) 데이터를 필요로 하는지 명시할 뿐, 어떻게(HOW)
+      데이터를 가져올지는 명시하지 않는다.
+      물론, SQL 내의 PL/SQL, T-SQL 등에서도 IF, FOR 문을 활용해서 절차적 언어를 사용할
+      수 있다.
+45. 다음 SQL 실행 결과로 가장 알맞은 것은?
+
+      SELECT NAME, DENSE_RANK() OVER (ORDER
+      BY PRICE DESC) AS RN
+      FROM TB_PRODUCT;​
+
+         1
+
+         2
+
+         3
+
+         4
+
+      정답 : 1
+      DENSE_RANK은 동일한 값에 동일 순위를 부여하고, 그다음 순위를 건너뛰지 않는다. 만
+
+   ② ③ 일 ROW_NUMBER( )였다면 가 답이고, RANK( )였다면 이 답이 된다.
+
+46. 다음 SQL 실행 결과로 출력되는 NAME은?
+
+      SELECT NAME
+      FROM EMPLOYEE
+      WHERE SALARY > ALL ( SELECT SALARY
+      FROM EMPLOYEE WHERE NAME != 'C' );​
+
+      1A
+      2B
+      3C
+      4 A, C
+
+      정답 : 3
+      서브쿼리를 풀이하면 SALARY가 3000, 2000 두 행이 출력된다. ALL은 다중행 연산자로,
+      SALARY > ALL(3000, 2000)은 SALARY가 3000보다 크고, 2000보다도 커야 한다는
+      의미이다. 즉, 실질적으로 SALARY >3000이 되는 조건이다. 이 조건에 부합하는 사람은
+      C뿐이다.​
+
+47. 다음 설명 중 적절한 것은 무엇인가?
+      1 인덱스는 인덱스 구성 칼럼으로 항상 오름차순으로 정렬된다.
+      2 비용 기반 옵티마이저는 인덱스 스캔이 항상 유리하다고 판단한다.
+      3 규칙 기반 옵티마이저는 적절한 인덱스가 존재하면 항상 인덱스를 사용하려고 한다.
+      4 인덱스 범위 스캔은 항상 여러 건의 결과가 반환된다.
+
+      정답 : 3
+      • 인덱스는 내림차순으로 생성 및 정렬된다.
+      • 비용적인 측면에서는 전체 테이블 스캔이 유리할 수 있다.
+      • 규칙 기반 옵티마이저의 규칙에 따라 적절한 인덱스가 존재하면 전체 테이블 스캔보다
+      는 항상 인덱스를 사용하려고 한다.
+      • 인덱스 범위 스캔은 결과 건수만큼 반환한다. 결과가 없으면 한 건도 반환하지 않을 수
+      있다.
+
+48. 다음 SQL 실행 결과로 가장 알맞은 것은?
+
+      SELECT ROUND(456.789, -2) FROM DUAL;
+
+      1 400
+      2 500
+      3 460
+      4 450
+      정답 : 2
+      ROUND는 반올림 함수이며, 두 번째 인자의 값이 마이너스(-)일 경우에는 정수부에서 두
+      자리를 남기고 반올림한다는 의미이다. 즉, 456.789에서 정수부 456중 -2는 56에 해당
+      하고 이 위치에서 반올림하면 500이 된다.
+      • ROUND 자릿수가 양수일 경우 : 소수점 N번째 자리까지 반올림 → ROUND(456.789,
+      1) = 456.8
+      • ROUND 자릿수가 0일 경우 : 정수로 반올림 → ROUND(456.789, 0) = 457
+      • ROUND 자릿수가 음수일 경우 → 정수부의 자릿수를 기준으로 반올림​
+
+49. 다음의 SQL문을 사용할 때, 날짜형 변수를 문자형으로 바꿀 수 있는 것은?
+      SELECT SYSDATE FROM DUAL;
+      1 TO_NUMBER
+      2 TO_DATE
+      3 TO_CHAR
+      4 CONVERT
+      정답 : 3
+      TO_CHAR문을 사용하면 문자형 타입으로 변환한다.
+
+50. 다음 SQL 실행 결과로 가장 알맞은 것은?
+
+      S​ ELECT REGION, AMOUNT, COUNT(*)
+      FROM TB_SALE
+      GROUP BY CUBE(REGION, AMOUNT);​
+
+         1
+
+         2
+
+         3
+4
+
+정답 : 2
+GROUP BY CUBE(REGION, AMOUNT)는 지정된 컬럼들에 대해 가능한 모든 집계 조합
+을 자동으로 생성한다. CUBE는 N개의 컬럼에 대해 2^N개만큼 조합을 만듦으로써 4개의
+조합이 생성된다.
+• GROUP BY REGION, AMOUNT → 두 컬럼을 조합해 GROUP BY 하면 2행 출력
+[(EAST, 1000), (WEST, 2000)]
+• GROUP BY REGION → REGION 컬럼 기준으로 GROUP BY 하면 2행 출력[(EAST),
+(WEST)]
+• GROUP BY AMOUNT → AMOUNT 컬럼 기준으로 GROUP BY 하면 2행 출력
+[(1000), (2000)]
+• GROUP BY( ) → 전체 컬럼 기준으로 GROUP BY 하면 1행 출력
+따라서 7개 행이 출력된다.​
+
+                                                     1/10
+
+                  서울특별시 금천구 디지털로9길 32, 갑을그레이트밸리 B동 1001호 주식회사 영진닷컴 (우)08512 TEL 1588-0789 FAX 02-867-1987
+                                                    대표이사 김길수 사업자등록번호 120-87-14492 통신판매신고 제06555호
+                                                          COPYRIGHT (c) 2016 YOGNJIN.COM. ALL RIGHT RESERVED.
+
