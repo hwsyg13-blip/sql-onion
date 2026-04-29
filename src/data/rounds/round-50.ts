@@ -566,10 +566,10 @@ export const ROUND_50: QuizQuestion[] = [
     "number": 18,
     "title": "아래 집계 결과(소계 행에서 NULL 이 등장하는 패턴) 에 해당하는 GROUP BY 절은?",
     "options": [
-      "`ROLLUP(A, B)`",
-      "`GROUPING SETS((A, B))`",
-      "`GROUP BY A, B`",
-      "`CUBE(A, B)`"
+      "ROLLUP(A, B)",
+      "GROUPING SETS((A, B))",
+      "GROUP BY A, B",
+      "CUBE(A, B)"
     ],
     "correctIndex": 3,
     "explanation": "CUBE 는 (A,B), (A), (B), () 의 모든 부분집합을 반환하므로 (A=A1, B=NULL), (A=NULL, B=B1), (A=NULL, B=NULL) 행이 모두 등장한다. ROLLUP 은 (A) 소계와 () 총계만, GROUPING SETS((A,B)) 는 세부 행만, GROUP BY A,B 는 소계 자체가 없다.",
@@ -630,10 +630,10 @@ export const ROUND_50: QuizQuestion[] = [
     "number": 20,
     "title": "아래 T 테이블에서 NAME 별 그룹의 최소 ID 만 남기고 나머지를 삭제하는 SQL 로 옳은 것은?",
     "options": [
-      "`DELETE FROM T WHERE ID NOT IN (SELECT MIN(ID) FROM T GROUP BY NAME);`",
-      "`DELETE FROM T WHERE ID IN (SELECT MAX(ID) FROM T GROUP BY NAME);`",
-      "`DELETE FROM T WHERE ID = MIN(ID);`",
-      "`DELETE FROM T GROUP BY NAME HAVING ID = MIN(ID);`"
+      "DELETE FROM T WHERE ID NOT IN (SELECT MIN(ID) FROM T GROUP BY NAME);",
+      "DELETE FROM T WHERE ID IN (SELECT MAX(ID) FROM T GROUP BY NAME);",
+      "DELETE FROM T WHERE ID = MIN(ID);",
+      "DELETE FROM T GROUP BY NAME HAVING ID = MIN(ID);"
     ],
     "correctIndex": 0,
     "explanation": "그룹별 MIN(ID) 를 NOT IN 으로 제외하고 나머지를 삭제하면 이름별 최소 ID 만 남는다. ② 는 MAX 만 삭제하고, ③ 은 비집계 컨텍스트에서 MIN 사용 불가, ④ 는 DELETE 에 GROUP BY/HAVING 직접 사용 불가.",
@@ -1019,10 +1019,10 @@ export const ROUND_50: QuizQuestion[] = [
     "number": 37,
     "title": "아래 부서 테이블에서 부서코드 11 → 7 → 2 의 계층 결과를 반환하는 SQL 로 옳은 것은?",
     "options": [
-      "`START WITH 부서코드=2 CONNECT BY 상위부서코드 = PRIOR 부서코드`",
-      "`START WITH 부서코드=2 CONNECT BY PRIOR 상위부서코드 = 부서코드`",
-      "`START WITH 부서코드=11 CONNECT BY 상위부서코드 = PRIOR 부서코드`",
-      "`START WITH 부서코드=11 CONNECT BY PRIOR 상위부서코드 = 부서코드`"
+      "START WITH 부서코드=2 CONNECT BY 상위부서코드 = PRIOR 부서코드",
+      "START WITH 부서코드=2 CONNECT BY PRIOR 상위부서코드 = 부서코드",
+      "START WITH 부서코드=11 CONNECT BY 상위부서코드 = PRIOR 부서코드",
+      "START WITH 부서코드=11 CONNECT BY PRIOR 상위부서코드 = 부서코드"
     ],
     "correctIndex": 3,
     "explanation": "부서 11 에서 시작해 자식→부모 방향(역방향) 으로 2 까지 거슬러 올라간다. PRIOR 상위부서코드 = 부서코드 형태가 자식 행의 상위부서코드 가 부모 행의 부서코드와 매칭되어 역방향 전개가 이루어진다.",

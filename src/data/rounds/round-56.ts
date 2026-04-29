@@ -304,10 +304,10 @@ export const ROUND_56: QuizQuestion[] = [
     "number": 14,
     "title": "다음 WHERE 조건 중 결과가 나머지와 다른 것은?",
     "options": [
-      "`COL3 >= 200 AND COL4 <= 200`",
-      "`NOT (200 < COL3 OR 200 > COL4)`",
-      "`200 BETWEEN COL3 AND COL4`",
-      "`COL3 <= 200 AND COL4 >= 200`"
+      "COL3 >= 200 AND COL4 <= 200",
+      "NOT (200 < COL3 OR 200 > COL4)",
+      "200 BETWEEN COL3 AND COL4",
+      "COL3 <= 200 AND COL4 >= 200"
     ],
     "correctIndex": 0,
     "explanation": "②·③·④ 는 \"200이 COL3 ~ COL4 범위에 포함되는 조건\" 으로 동치이다. ①은 부등호 방향이 반대이므로 결과가 다르다.",
@@ -506,10 +506,10 @@ export const ROUND_56: QuizQuestion[] = [
     "number": 21,
     "title": "아래 EMP 테이블에서 결과(COUNT(*) = 4)를 얻기 위한 쿼리로 가장 적절한 것은?",
     "options": [
-      "`SELECT COUNT(*) FROM EMP WHERE COL2 LIKE '%_%';`",
-      "`SELECT COUNT(*) FROM EMP;`",
-      "`SELECT COUNT(*) FROM EMP WHERE COL2 LIKE '%_';`",
-      "`SELECT COUNT(*) FROM EMP WHERE COL2 LIKE '_%';`"
+      "SELECT COUNT(*) FROM EMP WHERE COL2 LIKE '%_%';",
+      "SELECT COUNT(*) FROM EMP;",
+      "SELECT COUNT(*) FROM EMP WHERE COL2 LIKE '%_';",
+      "SELECT COUNT(*) FROM EMP WHERE COL2 LIKE '_%';"
     ],
     "correctIndex": 1,
     "explanation": "`COUNT(*)` 는 NULL 을 포함한 모든 행을 세므로 조건 없이 전체를 조회해야 4 가 반환된다. ① `LIKE '%_%'` 는 \"한 글자 이상\" 의미로 NULL 행 1 개를 제외한 3 행, ③ `LIKE '%_'` 와 ④ `LIKE '_%'` 도 마찬가지로 NULL 제외 3 행이라 4 를 반환하지 못한다.",
@@ -564,10 +564,10 @@ export const ROUND_56: QuizQuestion[] = [
     "number": 22,
     "title": "다음 중 결과가 나머지와 다른 것은?",
     "options": [
-      "`CASE 칼럼 WHEN NULL THEN -1 ELSE 0 END`",
-      "`CASE WHEN 칼럼 IS NULL THEN -1 ELSE 0 END`",
-      "`DECODE(칼럼, NULL, -1, 0)`",
-      "`NVL(칼럼, -1)`"
+      "CASE 칼럼 WHEN NULL THEN -1 ELSE 0 END",
+      "CASE WHEN 칼럼 IS NULL THEN -1 ELSE 0 END",
+      "DECODE(칼럼, NULL, -1, 0)",
+      "NVL(칼럼, -1)"
     ],
     "correctIndex": 0,
     "explanation": "단순 CASE 는 등치 비교를 위해 = 를 사용하는데, NULL = NULL 은 UNKNOWN 이므로 이 분기가 선택되지 않는다.",
@@ -912,10 +912,10 @@ export const ROUND_56: QuizQuestion[] = [
     "number": 33,
     "title": "아래 TAB1, TAB2 테이블에 대한 UPDATE 쿼리와 동일한 결과를 산출하는 것은?",
     "options": [
-      "`UPDATE TAB1 SET COL1 = (SELECT MAX(COL2) FROM TAB2 T2 WHERE T1.COL1 = T2.COL2 AND T1.COL1 >= 200);`",
-      "`UPDATE TAB1 SET COL1 = (SELECT COALESCE(MAX(NULL), 0) FROM TAB2 T2 WHERE T1.COL1 = T2.COL2);`",
-      "`UPDATE TAB1 SET COL1 = (SELECT MAX(0) FROM TAB2 T2 WHERE T1.COL1 = T2.COL2 AND T1.COL1 >= 200);`",
-      "`UPDATE TAB1 SET COL1 = NULL;`"
+      "UPDATE TAB1 SET COL1 = (SELECT MAX(COL2) FROM TAB2 T2 WHERE T1.COL1 = T2.COL2 AND T1.COL1 >= 200);",
+      "UPDATE TAB1 SET COL1 = (SELECT COALESCE(MAX(NULL), 0) FROM TAB2 T2 WHERE T1.COL1 = T2.COL2);",
+      "UPDATE TAB1 SET COL1 = (SELECT MAX(0) FROM TAB2 T2 WHERE T1.COL1 = T2.COL2 AND T1.COL1 >= 200);",
+      "UPDATE TAB1 SET COL1 = NULL;"
     ],
     "correctIndex": 3,
     "explanation": "서브쿼리가 `SELECT MAX(NULL) FROM TAB2 ...` 이라 항상 NULL 을 반환 (MAX 의 입력이 NULL 상수). WHERE 조건과 무관하게 모든 TAB1 행의 COL1 이 NULL 로 갱신된다 = ④ `UPDATE TAB1 SET COL1 = NULL;` 과 동일.",
@@ -969,13 +969,13 @@ export const ROUND_56: QuizQuestion[] = [
     "number": 34,
     "title": "아래 EMP 테이블에서 사원(A) 과 그 사원이 관리하는 부하 사원(B) 을 함께 출력하되, 부하가 없는 사원도 결과에 포함하려면 가장 적절한 쿼리는?",
     "options": [
-      "`SELECT A.EMP_ID, B.EMP_ID FROM EMP A INNER JOIN EMP B ON A.EMP_ID = B.EMP_ID;`",
-      "`SELECT A.EMP_ID, B.EMP_ID FROM EMP A INNER JOIN EMP B ON A.MGR_ID = B.EMP_ID;`",
-      "`SELECT A.EMP_ID, B.EMP_ID FROM EMP A LEFT OUTER JOIN EMP B ON A.EMP_ID = B.MGR_ID;`",
-      "`SELECT A.EMP_ID, B.EMP_ID FROM EMP A LEFT OUTER JOIN EMP B ON A.EMP_ID = B.EMP_ID;`"
+      "SELECT A.EMP_ID, B.EMP_ID FROM EMP A INNER JOIN EMP B ON A.EMP_ID = B.EMP_ID;",
+      "SELECT A.EMP_ID, B.EMP_ID FROM EMP A INNER JOIN EMP B ON A.MGR_ID = B.EMP_ID;",
+      "SELECT A.EMP_ID, B.EMP_ID FROM EMP A LEFT OUTER JOIN EMP B ON A.EMP_ID = B.MGR_ID;",
+      "SELECT A.EMP_ID, B.EMP_ID FROM EMP A LEFT OUTER JOIN EMP B ON A.EMP_ID = B.EMP_ID;"
     ],
     "correctIndex": 2,
-    "explanation": "셀프 조인으로 \"A 가 관리하는 부하 사원 B\" 를 매칭하려면 `A.EMP_ID = B.MGR_ID` 조건이 필요 (B 의 관리자 = A). LEFT OUTER JOIN 으로 부하가 없는 A 사원(예: 1003, 1004) 도 결과에 NULL 과 함께 포함된다. ① 자기 자신과 매칭, ② 는 \"A 의 상사 = B\" 매칭으로 의미 반대, ④ 자기 자신 LEFT OUTER 라 모두 의도와 다름.",
+    "explanation": "셀프 조인으로 \"A 가 관리하는 부하 사원 B\" 를 매칭하려면 A.EMP_ID = B.MGR_ID 조건이 필요 (B 의 관리자 = A). LEFT OUTER JOIN 으로 부하가 없는 A 사원(예: 1003, 1004) 도 결과에 NULL 과 함께 포함된다. ① 자기 자신과 매칭, ② 는 \"A 의 상사 = B\" 매칭으로 의미 반대, ④ 자기 자신 LEFT OUTER 라 모두 의도와 다름. 본 문항에서 SQL 의 별칭 A, B 는 EMP 테이블 자기 자신을 두 번 참조하는 셀프 조인 기법으로, 동일 EMP 테이블을 \"상사 역할 (A)\" 과 \"부하 역할 (B)\" 두 시점으로 나눠 보는 것이다.",
     "_source": "authored",
     "references": [
       {
@@ -983,23 +983,28 @@ export const ROUND_56: QuizQuestion[] = [
         "caption": "EMP 테이블",
         "headers": [
           "EMP_ID",
+          "EMP_NAME",
           "MGR_ID"
         ],
         "rows": [
           [
             "1001",
+            "홍길동",
             "(NULL)"
           ],
           [
             "1002",
+            "이순신",
             "1001"
           ],
           [
             "1003",
+            "강감찬",
             "1002"
           ],
           [
             "1004",
+            "박지성",
             "1002"
           ]
         ]
@@ -1163,10 +1168,10 @@ export const ROUND_56: QuizQuestion[] = [
     "number": 37,
     "title": "아래 TAB1 테이블에서 결과(COUNT() = 2) 를 산출하는 쿼리는?",
     "options": [
-      "`SELECT COUNT(DISTINCT COL1) FROM TAB1 WHERE COL2 <= 20;`",
-      "`SELECT COUNT(COL1) FROM TAB1 WHERE COL2 <= 20;`",
-      "`SELECT COUNT(COL1) FROM TAB1 WHERE COL2 <= 20 GROUP BY COL1;`",
-      "`SELECT COUNT(COL1) FROM TAB1 WHERE COL2 < 30 GROUP BY COL1;`"
+      "SELECT COUNT(DISTINCT COL1) FROM TAB1 WHERE COL2 <= 20;",
+      "SELECT COUNT(COL1) FROM TAB1 WHERE COL2 <= 20;",
+      "SELECT COUNT(COL1) FROM TAB1 WHERE COL2 <= 20 GROUP BY COL1;",
+      "SELECT COUNT(COL1) FROM TAB1 WHERE COL2 < 30 GROUP BY COL1;"
     ],
     "correctIndex": 0,
     "explanation": "`COL2 <= 20` 만족 행은 (A,10), (A,20), (B,20) 3 행. ① `COUNT(DISTINCT COL1)` = {A, B} = 2 → 결과 2. ② `COUNT(COL1)` = 3 (행 수). ③④ GROUP BY 라 행이 여러 건 반환되어 단일 값 2 안 됨. 정답은 ①.",
@@ -1425,10 +1430,10 @@ export const ROUND_56: QuizQuestion[] = [
     "number": 43,
     "title": "아래 PLAYER 테이블에서 키가 180 이상인 선수를 조회하는 쿼리로 가장 적절한 것은?",
     "options": [
-      "`SELECT * FROM PLAYER HAVING HEIGHT >= 180;`",
-      "`SELECT * FROM PLAYER GROUP BY HEIGHT >= 180;`",
-      "`SELECT * FROM PLAYER WHERE HEIGHT >= 180;`",
-      "`SELECT * FROM PLAYER ORDER BY HEIGHT >= 180;`"
+      "SELECT * FROM PLAYER HAVING HEIGHT >= 180;",
+      "SELECT * FROM PLAYER GROUP BY HEIGHT >= 180;",
+      "SELECT * FROM PLAYER WHERE HEIGHT >= 180;",
+      "SELECT * FROM PLAYER ORDER BY HEIGHT >= 180;"
     ],
     "correctIndex": 2,
     "explanation": "행 단위 필터 조건은 `WHERE` 절에서 처리한다. ① `HAVING` 은 GROUP BY 후 그룹 조건, ② `GROUP BY` 는 그룹화 키 (불리언이 올 수 없음), ④ `ORDER BY` 는 정렬이라 의미 다름.",
@@ -1471,10 +1476,10 @@ export const ROUND_56: QuizQuestion[] = [
     "number": 44,
     "title": "아래 선수 테이블에서 팀별 최단신 선수의 팀명과 키를 출력하는 쿼리와 동일한 결과를 반환하는 것은?",
     "options": [
-      "`SELECT TEAM, MIN(HEIGHT) FROM 선수 WHERE HEIGHT IS NULL GROUP BY TEAM;`",
-      "`SELECT TEAM, HEIGHT FROM 선수 HAVING HEIGHT = MIN(HEIGHT);`",
-      "`SELECT TEAM, HEIGHT FROM 선수 WHERE HEIGHT > (SELECT MIN(HEIGHT) FROM 선수);`",
-      "`SELECT P.TEAM, P.HEIGHT FROM 선수 P INNER JOIN (SELECT TEAM, MIN(HEIGHT) AS H FROM 선수 GROUP BY TEAM) M ON P.TEAM = M.TEAM AND P.HEIGHT = M.H;`"
+      "SELECT TEAM, MIN(HEIGHT) FROM 선수 WHERE HEIGHT IS NULL GROUP BY TEAM;",
+      "SELECT TEAM, HEIGHT FROM 선수 HAVING HEIGHT = MIN(HEIGHT);",
+      "SELECT TEAM, HEIGHT FROM 선수 WHERE HEIGHT > (SELECT MIN(HEIGHT) FROM 선수);",
+      "SELECT P.TEAM, P.HEIGHT FROM 선수 P INNER JOIN (SELECT TEAM, MIN(HEIGHT) AS H FROM 선수 GROUP BY TEAM) M ON P.TEAM = M.TEAM AND P.HEIGHT = M.H;"
     ],
     "correctIndex": 3,
     "explanation": "팀별 최저 신장 선수의 정확한 (TEAM, HEIGHT) 행을 가져오려면 (TEAM, MIN(HEIGHT)) 를 인라인 뷰로 만든 뒤 원본 테이블과 INNER JOIN 해야 한다. ① `WHERE HEIGHT IS NULL` 은 NULL 행만 잡고, ② `HAVING HEIGHT = MIN(HEIGHT)` 는 비집계 컬럼 HEIGHT 사용 오류, ③ `HEIGHT > MIN` 은 최저값을 제외한 행을 반환하므로 모두 오답.",

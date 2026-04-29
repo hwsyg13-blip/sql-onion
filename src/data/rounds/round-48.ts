@@ -298,10 +298,10 @@ export const ROUND_48: QuizQuestion[] = [
     "number": 13,
     "title": "출연료가 8,888 이상인 영화의 영화명·배우명·출연료를 조회하는 SQL 로 적절한 것은?",
     "options": [
-      "`SELECT 출연.영화명, 영화.배우명, 출연.출연료 FROM 배우, 영화, 출연 WHERE 출연.출연료 >= 8888 AND 출연.영화번호 = 영화.영화번호 AND 출연.배우번호 = 배우.배우번호;`",
-      "`SELECT 영화.영화명, 배우.배우명, 출연료 FROM 배우, 영화, 출연 WHERE 출연료 > 8888 AND 출연.영화번호 = 영화.영화번호 AND 출연.배우번호 = 배우.배우번호;`",
-      "`SELECT 영화.영화명, 배우.배우명, 출연료 FROM 배우, 영화, 출연 WHERE 출연료 >= 8888 AND 영화.영화번호 = 출연.영화번호;`",
-      "`SELECT 영화.영화명, 배우.배우명, 출연료 FROM 배우, 영화, 출연 WHERE 출연료 >= 8888 AND 출연.영화번호 = 영화.영화번호 AND 출연.배우번호 = 배우.배우번호;`"
+      "SELECT 출연.영화명, 영화.배우명, 출연.출연료 FROM 배우, 영화, 출연 WHERE 출연.출연료 >= 8888 AND 출연.영화번호 = 영화.영화번호 AND 출연.배우번호 = 배우.배우번호;",
+      "SELECT 영화.영화명, 배우.배우명, 출연료 FROM 배우, 영화, 출연 WHERE 출연료 > 8888 AND 출연.영화번호 = 영화.영화번호 AND 출연.배우번호 = 배우.배우번호;",
+      "SELECT 영화.영화명, 배우.배우명, 출연료 FROM 배우, 영화, 출연 WHERE 출연료 >= 8888 AND 영화.영화번호 = 출연.영화번호;",
+      "SELECT 영화.영화명, 배우.배우명, 출연료 FROM 배우, 영화, 출연 WHERE 출연료 >= 8888 AND 출연.영화번호 = 영화.영화번호 AND 출연.배우번호 = 배우.배우번호;"
     ],
     "correctIndex": 3,
     "explanation": "테이블 구조는 배우(배우번호, 배우명, 성별)·영화(영화번호, 영화명, 제작년도)·출연(배우번호, 영화번호, 출연료)이므로 영화명은 영화 테이블에서, 배우명은 배우 테이블에서, 출연료는 출연 테이블에서 가져와야 합니다. ①·②·③은 컬럼 소유 테이블을 잘못 짚거나 조건 부등호를 잘못 쓴 형태입니다. ④번은 출연·영화·배우 세 테이블을 출연.영화번호 = 영화.영화번호 AND 출연.배우번호 = 배우.배우번호로 정확히 조인하고 출연료 >= 8888 조건까지 올바르게 기술되어 있어 정답입니다.",
@@ -691,10 +691,10 @@ export const ROUND_48: QuizQuestion[] = [
     "number": 18,
     "title": "컬럼을 추가할 때 올바른 ALTER 구문은? (Oracle 환경)",
     "options": [
-      "`ALTER TABLE T COLUMN 컬럼명 DATE DEFAULT '날짜' NOT NULL;`",
-      "`ALTER TABLE T ADD 컬럼명 DATE DEFAULT '날짜' NOT NULL;`",
-      "`ALTER TABLE T ADD COLUMN 컬럼명 DATE DEFAULT '날짜' NOT NULL;`",
-      "`ALTER TABLE T MODIFY 컬럼명 DATE DEFAULT '날짜' NOT NULL;`"
+      "ALTER TABLE T COLUMN 컬럼명 DATE DEFAULT '날짜' NOT NULL;",
+      "ALTER TABLE T ADD 컬럼명 DATE DEFAULT '날짜' NOT NULL;",
+      "ALTER TABLE T ADD COLUMN 컬럼명 DATE DEFAULT '날짜' NOT NULL;",
+      "ALTER TABLE T MODIFY 컬럼명 DATE DEFAULT '날짜' NOT NULL;"
     ],
     "correctIndex": 1,
     "explanation": "Oracle 에서는 ADD 뒤에 COLUMN 키워드를 쓰지 않는다.",
@@ -751,10 +751,10 @@ export const ROUND_48: QuizQuestion[] = [
     "number": 21,
     "title": "아래 EMP 테이블의 HIRE_DT 컬럼에 대해 \"2025-10-21 하루\" 데이터를 조회하려 할 때 결과가 달라지는 조건은?",
     "options": [
-      "`HIRE_DT >= DATE '2025-10-21' AND HIRE_DT < DATE '2025-10-22'`",
-      "`TRUNC(HIRE_DT) = DATE '2025-10-21'`",
-      "`HIRE_DT BETWEEN DATE '2025-10-21' AND DATE '2025-10-22'`",
-      "`HIRE_DT >= DATE '2025-10-21' AND HIRE_DT <= DATE '2025-10-21' + 1 - 1/86400`"
+      "HIRE_DT >= DATE '2025-10-21' AND HIRE_DT < DATE '2025-10-22'",
+      "TRUNC(HIRE_DT) = DATE '2025-10-21'",
+      "HIRE_DT BETWEEN DATE '2025-10-21' AND DATE '2025-10-22'",
+      "HIRE_DT >= DATE '2025-10-21' AND HIRE_DT <= DATE '2025-10-21' + 1 - 1/86400"
     ],
     "correctIndex": 2,
     "explanation": "Oracle DATE 리터럴 비교 시 `DATE '2025-10-22'`는 22일 0시 0분 0초를 의미합니다. ①은 \"21일 0시 ≤ HIRE_DT < 22일 0시\"로 정확히 21일 하루만 잡고, ②는 TRUNC로 시간을 0시로 깎아 21일만 잡으며, ④는 \"21일 0시 ≤ HIRE_DT ≤ 22일 0시 - 1초\"라 21일 23:59:59까지만 잡습니다. 그러나 ③의 BETWEEN은 양 끝값을 포함하므로 22일 0시까지 결과에 들어가 22일 0시 정각의 데이터가 같이 잡힐 수 있습니다. 결과가 달라지는 것은 ③번이라 정답입니다.",
@@ -1001,10 +1001,10 @@ export const ROUND_48: QuizQuestion[] = [
     "number": 27,
     "title": "아래 SQL 들 중 결과 건수가 나머지와 다른 것은? (테이블 T 에는 충분한 행이 존재한다고 가정)",
     "options": [
-      "`SELECT * FROM T WHERE ROWNUM = 2;`",
-      "`SELECT * FROM T WHERE ROWNUM <= 2;`",
-      "`SELECT * FROM T WHERE ROWNUM IN (1, 2);`",
-      "`SELECT * FROM T WHERE ROWNUM = 1 OR ROWNUM = 2;`"
+      "SELECT * FROM T WHERE ROWNUM = 2;",
+      "SELECT * FROM T WHERE ROWNUM <= 2;",
+      "SELECT * FROM T WHERE ROWNUM IN (1, 2);",
+      "SELECT * FROM T WHERE ROWNUM = 1 OR ROWNUM = 2;"
     ],
     "correctIndex": 0,
     "explanation": "Oracle 의 `ROWNUM` 은 fetch 시점에 1 부터 순차 부여되는 의사 컬럼이라 `ROWNUM = 2` 같은 등호 조건(N≥2)은 절대 만족되지 않아 0 건이 된다. ②③④ 는 모두 ROWNUM 1, 2 를 포함하는 조건이라 2 건 반환. 결과가 다른 것은 ①.",
@@ -1414,10 +1414,10 @@ export const ROUND_48: QuizQuestion[] = [
     "number": 43,
     "title": "상위 10건을 조회하는 ROWNUM 기반 SQL 로 옳은 것은? (Oracle 환경)",
     "options": [
-      "`SELECT 컬럼 FROM T WHERE ROWNUM <= 10 ORDER BY 컬럼 DESC;`",
-      "`SELECT 컬럼 FROM T ORDER BY 컬럼 DESC WHERE ROWNUM <= 10;`",
-      "`SELECT * FROM (SELECT 컬럼 FROM T ORDER BY 컬럼 DESC) WHERE ROWNUM <= 10;`",
-      "`SELECT 컬럼 FROM T WHERE ROWNUM = 10 ORDER BY 컬럼 DESC;`"
+      "SELECT 컬럼 FROM T WHERE ROWNUM <= 10 ORDER BY 컬럼 DESC;",
+      "SELECT 컬럼 FROM T ORDER BY 컬럼 DESC WHERE ROWNUM <= 10;",
+      "SELECT * FROM (SELECT 컬럼 FROM T ORDER BY 컬럼 DESC) WHERE ROWNUM <= 10;",
+      "SELECT 컬럼 FROM T WHERE ROWNUM = 10 ORDER BY 컬럼 DESC;"
     ],
     "correctIndex": 2,
     "explanation": "Oracle의 ROWNUM은 ORDER BY가 적용되기 전 단계에서 행에 1부터 부여됩니다. 따라서 같은 SELECT 안에서 `WHERE ROWNUM <= 10 ... ORDER BY ... DESC`처럼 쓰면 정렬되지 않은 임의의 10건이 잡힌 뒤 정렬되어 \"상위 10건\"이 보장되지 않습니다. 안전하게 상위 10건을 얻으려면 인라인 뷰 안에서 먼저 ORDER BY DESC로 정렬한 뒤, 바깥쪽에서 `WHERE ROWNUM <= 10`으로 자르는 ③번 패턴을 써야 합니다. ②는 문법 오류(`WHERE` 가 `ORDER BY` 뒤에 올 수 없음), ④는 `ROWNUM = 10` 이 절대 만족되지 않아 항상 0건이 반환됩니다. 정답은 ③번입니다.",

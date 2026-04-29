@@ -67,11 +67,27 @@
           "mermaid": "erDiagram\n    출판사 ||--o{ 도서 : \"발행\"\n    도서 {\n        string ISBN PK\n        string 제목\n        string 출판사 FK\n    }",
           "instanceTable": {
             "of": "도서",
-            "headers": ["ISBN", "제목", "출판사"],
+            "headers": [
+              "ISBN",
+              "제목",
+              "출판사"
+            ],
             "rows": [
-              ["978-1", "SQL 입문", "A출판사"],
-              ["978-2", "SQL 입문", "B출판사"],
-              ["978-3", "데이터 모델링", "A출판사"]
+              [
+                "978-1",
+                "SQL 입문",
+                "A출판사"
+              ],
+              [
+                "978-2",
+                "SQL 입문",
+                "B출판사"
+              ],
+              [
+                "978-3",
+                "데이터 모델링",
+                "A출판사"
+              ]
             ]
           }
         }
@@ -191,11 +207,27 @@
           "mermaid": "erDiagram\n    학생 ||--o{ 수강 : \"수강\"\n    과목 ||--o{ 수강 : \"개설\"\n    수강 {\n        string 수강번호 PK\n        string 학번 FK\n        string 과목코드 FK\n    }",
           "instanceTable": {
             "of": "수강",
-            "headers": ["수강번호", "학번", "과목코드"],
+            "headers": [
+              "수강번호",
+              "학번",
+              "과목코드"
+            ],
             "rows": [
-              ["S001", "1001", "DB"],
-              ["S002", "1001", "OS"],
-              ["S003", "1002", "DB"]
+              [
+                "S001",
+                "1001",
+                "DB"
+              ],
+              [
+                "S002",
+                "1001",
+                "OS"
+              ],
+              [
+                "S003",
+                "1002",
+                "DB"
+              ]
             ]
           }
         }
@@ -219,10 +251,10 @@
       "number": 11,
       "title": "아래 함수 호출의 결과 중 나머지와 다른 것은? (표준 SQL 기준)",
       "options": [
-        "`LTRIM('xxSQL', 'x')`",
-        "`RTRIM('SQLxx', 'x')`",
-        "`REPLACE('xxSQLxx', 'x', 'Y')`",
-        "`TRIM('x' FROM 'xxSQLxx')`"
+        "LTRIM('xxSQL', 'x')",
+        "RTRIM('SQLxx', 'x')",
+        "REPLACE('xxSQLxx', 'x', 'Y')",
+        "TRIM('x' FROM 'xxSQLxx')"
       ],
       "correctIndex": 2,
       "explanation": "① `LTRIM('xxSQL','x')` → 왼쪽 'x' 제거 → 'SQL'. ② `RTRIM('SQLxx','x')` → 오른쪽 'x' 제거 → 'SQL'. ③ `REPLACE('xxSQLxx','x','Y')` → 'x' 를 모두 'Y' 로 치환 → 'YYSQLYY'. ④ `TRIM('x' FROM 'xxSQLxx')` → 양쪽 'x' 제거 → 'SQL'. ①②④ 는 'SQL' 반환, ③ 만 'YYSQLYY' 로 결과가 다르다.",
@@ -249,12 +281,22 @@
         {
           "type": "table",
           "caption": "T 테이블",
-          "headers": ["COL"],
+          "headers": [
+            "COL"
+          ],
           "rows": [
-            ["a_c"],
-            ["abc"],
-            ["aXc"],
-            ["a c"]
+            [
+              "a_c"
+            ],
+            [
+              "abc"
+            ],
+            [
+              "aXc"
+            ],
+            [
+              "a c"
+            ]
           ]
         },
         {
@@ -465,21 +507,42 @@
         {
           "type": "table",
           "caption": "A 테이블",
-          "headers": ["ID"],
+          "headers": [
+            "ID"
+          ],
           "rows": [
-            ["1"],
-            ["2"]
+            [
+              "1"
+            ],
+            [
+              "2"
+            ]
           ]
         },
         {
           "type": "table",
           "caption": "B 테이블",
-          "headers": ["ID", "V"],
+          "headers": [
+            "ID",
+            "V"
+          ],
           "rows": [
-            ["1", "10"],
-            ["2", "20"],
-            ["3", "30"],
-            ["4", "40"]
+            [
+              "1",
+              "10"
+            ],
+            [
+              "2",
+              "20"
+            ],
+            [
+              "3",
+              "30"
+            ],
+            [
+              "4",
+              "40"
+            ]
           ]
         },
         {
@@ -489,12 +552,27 @@
         {
           "type": "table",
           "caption": "기대 결과 (RIGHT OUTER JOIN)",
-          "headers": ["A.ID", "B.V"],
+          "headers": [
+            "A.ID",
+            "B.V"
+          ],
           "rows": [
-            ["1", "10"],
-            ["2", "20"],
-            ["(NULL)", "30"],
-            ["(NULL)", "40"]
+            [
+              "1",
+              "10"
+            ],
+            [
+              "2",
+              "20"
+            ],
+            [
+              "(NULL)",
+              "30"
+            ],
+            [
+              "(NULL)",
+              "40"
+            ]
           ]
         }
       ]
@@ -534,12 +612,32 @@
         {
           "type": "table",
           "caption": "EMP 테이블",
-          "headers": ["DEPT", "JOB", "SAL"],
+          "headers": [
+            "DEPT",
+            "JOB",
+            "SAL"
+          ],
           "rows": [
-            ["10", "MGR", "5000"],
-            ["10", "DEV", "3000"],
-            ["20", "MGR", "4500"],
-            ["20", "DEV", "3500"]
+            [
+              "10",
+              "MGR",
+              "5000"
+            ],
+            [
+              "10",
+              "DEV",
+              "3000"
+            ],
+            [
+              "20",
+              "MGR",
+              "4500"
+            ],
+            [
+              "20",
+              "DEV",
+              "3500"
+            ]
           ]
         },
         {
@@ -605,22 +703,68 @@
         {
           "type": "table",
           "caption": "A 테이블",
-          "headers": ["A"],
-          "rows": [["1"], ["2"], ["3"]]
+          "headers": [
+            "A"
+          ],
+          "rows": [
+            [
+              "1"
+            ],
+            [
+              "2"
+            ],
+            [
+              "3"
+            ]
+          ]
         },
         {
           "type": "table",
           "caption": "B 테이블",
-          "headers": ["B"],
-          "rows": [["6"], ["7"]]
+          "headers": [
+            "B"
+          ],
+          "rows": [
+            [
+              "6"
+            ],
+            [
+              "7"
+            ]
+          ]
         },
         {
           "type": "table",
           "caption": "결과 C",
-          "headers": ["A", "B"],
+          "headers": [
+            "A",
+            "B"
+          ],
           "rows": [
-            ["1", "6"], ["2", "6"], ["3", "6"],
-            ["1", "7"], ["2", "7"], ["3", "7"]
+            [
+              "1",
+              "6"
+            ],
+            [
+              "2",
+              "6"
+            ],
+            [
+              "3",
+              "6"
+            ],
+            [
+              "1",
+              "7"
+            ],
+            [
+              "2",
+              "7"
+            ],
+            [
+              "3",
+              "7"
+            ]
           ]
         }
       ]
@@ -1069,12 +1213,32 @@
         {
           "type": "table",
           "caption": "EMP 테이블",
-          "headers": ["EMPNO", "DEPTNO", "SAL"],
+          "headers": [
+            "EMPNO",
+            "DEPTNO",
+            "SAL"
+          ],
           "rows": [
-            ["1", "10", "3000"],
-            ["2", "10", "5000"],
-            ["3", "20", "4000"],
-            ["4", "20", "4500"]
+            [
+              "1",
+              "10",
+              "3000"
+            ],
+            [
+              "2",
+              "10",
+              "5000"
+            ],
+            [
+              "3",
+              "20",
+              "4000"
+            ],
+            [
+              "4",
+              "20",
+              "4500"
+            ]
           ]
         },
         {
@@ -1118,14 +1282,35 @@
         {
           "type": "table",
           "caption": "T1 테이블 (부모, PK = ID)",
-          "headers": ["ID"],
-          "rows": [["1"], ["2"]]
+          "headers": [
+            "ID"
+          ],
+          "rows": [
+            [
+              "1"
+            ],
+            [
+              "2"
+            ]
+          ]
         },
         {
           "type": "table",
           "caption": "T2 테이블 (자식, FK: T1_ID → T1.ID)",
-          "headers": ["ID", "T1_ID"],
-          "rows": [["10", "1"], ["20", "2"]]
+          "headers": [
+            "ID",
+            "T1_ID"
+          ],
+          "rows": [
+            [
+              "10",
+              "1"
+            ],
+            [
+              "20",
+              "2"
+            ]
+          ]
         },
         {
           "type": "sql",
@@ -1170,10 +1355,10 @@
       "number": 46,
       "title": "아래 네 개의 NULL 관련 함수 호출 중 결과가 NULL 이 아닌 것은?",
       "options": [
-        "`COALESCE(NULL, NULL)`",
-        "`NVL(NULL, 0)`",
-        "`NVL(NULL, NULL)`",
-        "`NULLIF(1, 1)`"
+        "COALESCE(NULL, NULL)",
+        "NVL(NULL, 0)",
+        "NVL(NULL, NULL)",
+        "NULLIF(1, 1)"
       ],
       "correctIndex": 1,
       "explanation": "② `NVL(NULL, 0)` 만 NULL 을 0 으로 치환하여 0 을 반환한다. ① `COALESCE(NULL, NULL)` 은 모든 인자가 NULL 이라 NULL, ③ `NVL(NULL, NULL)` 도 NULL, ④ `NULLIF(1, 1)` 은 두 인자가 같으면 NULL 반환이라 NULL.",
@@ -1200,12 +1385,32 @@
         {
           "type": "table",
           "caption": "EMP 테이블",
-          "headers": ["EMPNO", "ENAME", "MGR"],
+          "headers": [
+            "EMPNO",
+            "ENAME",
+            "MGR"
+          ],
           "rows": [
-            ["7839", "KING", "(NULL)"],
-            ["7566", "JONES", "7839"],
-            ["7902", "FORD", "7566"],
-            ["7369", "SMITH", "7902"]
+            [
+              "7839",
+              "KING",
+              "(NULL)"
+            ],
+            [
+              "7566",
+              "JONES",
+              "7839"
+            ],
+            [
+              "7902",
+              "FORD",
+              "7566"
+            ],
+            [
+              "7369",
+              "SMITH",
+              "7902"
+            ]
           ]
         },
         {
@@ -1284,12 +1489,37 @@
         {
           "type": "table",
           "caption": "EMP 테이블",
-          "headers": ["EMPNO", "ENAME", "DEPTNO", "SAL"],
+          "headers": [
+            "EMPNO",
+            "ENAME",
+            "DEPTNO",
+            "SAL"
+          ],
           "rows": [
-            ["7839", "KING", "10", "5000"],
-            ["7782", "CLARK", "10", "2450"],
-            ["7698", "BLAKE", "20", "6000"],
-            ["7566", "JONES", "20", "2975"]
+            [
+              "7839",
+              "KING",
+              "10",
+              "5000"
+            ],
+            [
+              "7782",
+              "CLARK",
+              "10",
+              "2450"
+            ],
+            [
+              "7698",
+              "BLAKE",
+              "20",
+              "6000"
+            ],
+            [
+              "7566",
+              "JONES",
+              "20",
+              "2975"
+            ]
           ]
         },
         {

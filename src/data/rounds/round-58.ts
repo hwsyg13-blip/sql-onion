@@ -307,10 +307,10 @@ export const ROUND_58: QuizQuestion[] = [
     "number": 11,
     "title": "아래 함수 호출의 결과 중 나머지와 다른 것은? (표준 SQL 기준)",
     "options": [
-      "`LTRIM('xxSQL', 'x')`",
-      "`RTRIM('SQLxx', 'x')`",
-      "`REPLACE('xxSQLxx', 'x', 'Y')`",
-      "`TRIM('x' FROM 'xxSQLxx')`"
+      "LTRIM('xxSQL', 'x')",
+      "RTRIM('SQLxx', 'x')",
+      "REPLACE('xxSQLxx', 'x', 'Y')",
+      "TRIM('x' FROM 'xxSQLxx')"
     ],
     "correctIndex": 2,
     "explanation": "① `LTRIM('xxSQL','x')` → 왼쪽 'x' 제거 → 'SQL'. ② `RTRIM('SQLxx','x')` → 오른쪽 'x' 제거 → 'SQL'. ③ `REPLACE('xxSQLxx','x','Y')` → 'x' 를 모두 'Y' 로 치환 → 'YYSQLYY'. ④ `TRIM('x' FROM 'xxSQLxx')` → 양쪽 'x' 제거 → 'SQL'. ①②④ 는 'SQL' 반환, ③ 만 'YYSQLYY' 로 결과가 다르다.",
@@ -1586,10 +1586,10 @@ export const ROUND_58: QuizQuestion[] = [
     "number": 46,
     "title": "아래 네 개의 NULL 관련 함수 호출 중 결과가 NULL 이 아닌 것은?",
     "options": [
-      "`COALESCE(NULL, NULL)`",
-      "`NVL(NULL, 0)`",
-      "`NVL(NULL, NULL)`",
-      "`NULLIF(1, 1)`"
+      "COALESCE(NULL, NULL)",
+      "NVL(NULL, 0)",
+      "NVL(NULL, NULL)",
+      "NULLIF(1, 1)"
     ],
     "correctIndex": 1,
     "explanation": "② `NVL(NULL, 0)` 만 NULL 을 0 으로 치환하여 0 을 반환한다. ① `COALESCE(NULL, NULL)` 은 모든 인자가 NULL 이라 NULL, ③ `NVL(NULL, NULL)` 도 NULL, ④ `NULLIF(1, 1)` 은 두 인자가 같으면 NULL 반환이라 NULL.",

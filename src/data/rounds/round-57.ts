@@ -304,10 +304,10 @@ export const ROUND_57: QuizQuestion[] = [
     "number": 12,
     "title": "아래 SUBSTR 함수 실행 결과 중 나머지와 다른 것은?",
     "options": [
-      "`SUBSTR('abcdefgh', 7)`",
-      "`SUBSTR('abcdefgh', -2)`",
-      "`SUBSTR('abcdefgh', 8, -2)`",
-      "`SUBSTR('abcdefgh', INSTR('abcdefgh', 'g'), 2)`"
+      "SUBSTR('abcdefgh', 7)",
+      "SUBSTR('abcdefgh', -2)",
+      "SUBSTR('abcdefgh', 8, -2)",
+      "SUBSTR('abcdefgh', INSTR('abcdefgh', 'g'), 2)"
     ],
     "correctIndex": 2,
     "explanation": "① `SUBSTR('abcdefgh', 7)` = 7번째 문자부터 끝까지 = 'gh'. ② `SUBSTR('abcdefgh', -2)` = 끝에서 2번째부터 = 'gh'. ④ `INSTR('abcdefgh', 'g')` = 7 → `SUBSTR('abcdefgh', 7, 2)` = 'gh'. 모두 'gh' 반환. ③ 만 길이에 음수(-2) 지정되어 Oracle 에서는 NULL 을 반환하므로 결과가 다르다.",
@@ -418,10 +418,10 @@ export const ROUND_57: QuizQuestion[] = [
     "number": 18,
     "title": "아래 두 테이블 A, B 에 대한 네 개의 SQL 중 결과가 나머지와 다른 것은?",
     "options": [
-      "`SELECT * FROM A WHERE A.V <> (SELECT V FROM B);`",
-      "`SELECT * FROM A MINUS SELECT * FROM B;`",
-      "`SELECT * FROM A WHERE A.V NOT IN (SELECT V FROM B);`",
-      "`SELECT * FROM A WHERE NOT EXISTS (SELECT 1 FROM B WHERE B.V = A.V);`"
+      "SELECT * FROM A WHERE A.V <> (SELECT V FROM B);",
+      "SELECT * FROM A MINUS SELECT * FROM B;",
+      "SELECT * FROM A WHERE A.V NOT IN (SELECT V FROM B);",
+      "SELECT * FROM A WHERE NOT EXISTS (SELECT 1 FROM B WHERE B.V = A.V);"
     ],
     "correctIndex": 0,
     "explanation": "②③④ 는 모두 \"A 에는 있지만 B 에는 없는\" V 를 반환 = {1}. ① `<>` 는 단일 값 비교 연산자이므로 서브쿼리가 다중 행(2, 3, 4) 을 반환하면 ORA-01427 오류 발생. 결과가 다른 것은 ①.",
@@ -610,10 +610,10 @@ export const ROUND_57: QuizQuestion[] = [
     "number": 23,
     "title": "아래 EMP 테이블에 대한 SQL 의 빈칸에 들어갈 조건으로 가장 적절한 것은?",
     "options": [
-      "`ORDER BY AVG(SAL) > ANY (SELECT AVG(SAL) FROM EMP GROUP BY DEPTNO)`",
-      "`ORDER BY AVG(SAL) > ALL (SELECT AVG(SAL) FROM EMP GROUP BY DEPTNO)`",
-      "`HAVING AVG(SAL) > ANY (SELECT AVG(SAL) FROM EMP GROUP BY DEPTNO)`",
-      "`HAVING AVG(SAL) > ALL (SELECT AVG(SAL) FROM EMP GROUP BY DEPTNO)`"
+      "ORDER BY AVG(SAL) > ANY (SELECT AVG(SAL) FROM EMP GROUP BY DEPTNO)",
+      "ORDER BY AVG(SAL) > ALL (SELECT AVG(SAL) FROM EMP GROUP BY DEPTNO)",
+      "HAVING AVG(SAL) > ANY (SELECT AVG(SAL) FROM EMP GROUP BY DEPTNO)",
+      "HAVING AVG(SAL) > ALL (SELECT AVG(SAL) FROM EMP GROUP BY DEPTNO)"
     ],
     "correctIndex": 3,
     "explanation": "\"모든 부서의 평균 급여보다 많이 받는\" 조건은 그룹 단위 필터라 `HAVING` 이 필요하고 (정렬용 ORDER BY 가 아님), \"모든 부서 평균보다 큼\" = `> ALL (각 부서별 AVG)` 이므로 ④ `HAVING AVG(SAL) > ALL (...)` 이 정답이다. ①·② 는 절 자체가 ORDER BY 라 필터 기능이 없고, ③ ANY 는 최소 기준(어떤 하나보다만 크면 됨)이라 \"모든 평균보다 큼\" 의 의미와 다르다.",
@@ -1073,10 +1073,10 @@ export const ROUND_57: QuizQuestion[] = [
     "number": 38,
     "title": "아래 NAME 테이블에서 결과가 (Kim, Tim) 으로 나오도록 LIKE 조건을 설정한 것은? (SQL Server)",
     "options": [
-      "`WHERE name LIKE '_im'`",
-      "`WHERE name LIKE '%im'`",
-      "`WHERE name LIKE '[JK]im'`",
-      "`WHERE name LIKE '[KT]im'`"
+      "WHERE name LIKE '_im'",
+      "WHERE name LIKE '%im'",
+      "WHERE name LIKE '[JK]im'",
+      "WHERE name LIKE '[KT]im'"
     ],
     "correctIndex": 3,
     "explanation": "SQL Server LIKE 의 문자 클래스 `[KT]` 는 \"K 또는 T 한 글자\" 를 의미. ④ `[KT]im` 은 Kim 과 Tim 만 매칭. ① `_im` 은 임의 한 글자 + im 이라 Jim/Kim/Tim 모두 매칭. ② `%im` 도 모두 매칭. ③ `[JK]im` 은 Jim/Kim 매칭 (Tim 누락).",

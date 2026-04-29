@@ -218,10 +218,10 @@ export const ROUND_49: QuizQuestion[] = [
     "number": 11,
     "title": "PLAYER 테이블에서 선수명과 팀명은 오름차순, 연봉은 내림차순으로 조회하는 SQL 로 옳은 것은?",
     "options": [
-      "`SELECT 선수명, 팀명, 연봉 FROM PLAYER ORDER BY 선수명 DESC, 팀명 DESC, 연봉 ASC;`",
-      "`SELECT 선수명, 팀명, 연봉 FROM PLAYER ORDER BY 선수명 ASC, 팀명, 3 DESC;`",
-      "`SELECT 선수명, 팀명, 연봉 FROM PLAYER ORDER BY 선수명 ASC, 팀명 ASC, 연봉;`",
-      "`SELECT 선수명, 팀명, 연봉 FROM PLAYER ORDER BY 선수명, 팀명, DESC 연봉;`"
+      "SELECT 선수명, 팀명, 연봉 FROM PLAYER ORDER BY 선수명 DESC, 팀명 DESC, 연봉 ASC;",
+      "SELECT 선수명, 팀명, 연봉 FROM PLAYER ORDER BY 선수명 ASC, 팀명, 3 DESC;",
+      "SELECT 선수명, 팀명, 연봉 FROM PLAYER ORDER BY 선수명 ASC, 팀명 ASC, 연봉;",
+      "SELECT 선수명, 팀명, 연봉 FROM PLAYER ORDER BY 선수명, 팀명, DESC 연봉;"
     ],
     "correctIndex": 1,
     "explanation": "컬럼 번호 3(연봉) 을 DESC 로 지정하고 팀명은 기본 오름차순(ASC) 으로 처리한다. ① 은 모두 DESC 라 선수명/팀명이 내림차순이 되고, ③ 은 연봉도 ASC 가 되며, ④ 는 'DESC 연봉' 위치 오류로 문법 오류이다.",
@@ -272,10 +272,10 @@ export const ROUND_49: QuizQuestion[] = [
     "number": 14,
     "title": "아래 EMP 테이블에 대해 순방향 계층형 쿼리(부모 → 자식)를 구성하는 SQL 로 옳은 것은?",
     "options": [
-      "`SELECT * FROM EMP START WITH MANAGER_NO IS NULL CONNECT BY PRIOR EMP_NO = MANAGER_NO;`",
-      "`SELECT * FROM EMP START WITH MANAGER_NO IS NULL CONNECT BY PRIOR MANAGER_NO = EMP_NO;`",
-      "`SELECT * FROM EMP START WITH MANAGER_NO IS NULL CONNECT BY EMP_NO = MANAGER_NO;`",
-      "`SELECT * FROM EMP START WITH MANAGER_NO IS NULL CONNECT BY PRIOR EMP_NO = PRIOR MANAGER_NO;`"
+      "SELECT * FROM EMP START WITH MANAGER_NO IS NULL CONNECT BY PRIOR EMP_NO = MANAGER_NO;",
+      "SELECT * FROM EMP START WITH MANAGER_NO IS NULL CONNECT BY PRIOR MANAGER_NO = EMP_NO;",
+      "SELECT * FROM EMP START WITH MANAGER_NO IS NULL CONNECT BY EMP_NO = MANAGER_NO;",
+      "SELECT * FROM EMP START WITH MANAGER_NO IS NULL CONNECT BY PRIOR EMP_NO = PRIOR MANAGER_NO;"
     ],
     "correctIndex": 0,
     "explanation": "`PRIOR` 는 \"이전(부모) 행의 컬럼\" 을 의미한다. `PRIOR EMP_NO = MANAGER_NO` 는 \"이전 행의 EMP_NO 가 다음 행의 MANAGER_NO 가 되도록\" 연결 — 즉 부모(EMP_NO) → 자식(MANAGER_NO 가 부모를 가리키는 행) 순방향 전개. ② 는 자식 → 부모 역방향, ③ 은 PRIOR 없어 모든 행이 단일 그룹으로 평가, ④ 는 PRIOR 가 양쪽에 있어 자기 참조라 무한루프 또는 0 건.",
@@ -400,10 +400,10 @@ export const ROUND_49: QuizQuestion[] = [
     "number": 17,
     "title": "아래 두 테이블에 대해 오류가 발생하는 INNER JOIN SQL 은?",
     "options": [
-      "`SELECT * FROM TEAM A INNER JOIN STADIUM B ON A.ID = B.ID;`",
-      "`SELECT * FROM TEAM A INNER JOIN STADIUM B USING(ID);`",
-      "`SELECT * FROM TEAM A NATURAL JOIN STADIUM B;`",
-      "`SELECT * FROM TEAM A INNER JOIN STADIUM B ON (ID);`"
+      "SELECT * FROM TEAM A INNER JOIN STADIUM B ON A.ID = B.ID;",
+      "SELECT * FROM TEAM A INNER JOIN STADIUM B USING(ID);",
+      "SELECT * FROM TEAM A NATURAL JOIN STADIUM B;",
+      "SELECT * FROM TEAM A INNER JOIN STADIUM B ON (ID);"
     ],
     "correctIndex": 3,
     "explanation": "ON 절에는 비교식이 와야 하며, USING 절과 달리 컬럼명만 단독으로 지정할 수 없다.",
@@ -612,10 +612,10 @@ export const ROUND_49: QuizQuestion[] = [
     "number": 20,
     "title": "회원번호·상품별 집계와 회원번호별 소계, 전체 총계를 함께 산출하려 한다. GROUP BY 절로 적절한 것은?",
     "options": [
-      "`GROUP BY ROLLUP(회원번호, 상품)`",
-      "`GROUP BY 회원번호, ROLLUP(상품)`",
-      "`GROUP BY CUBE(회원번호, 상품)`",
-      "`GROUP BY GROUPING SETS(회원번호, 상품)`"
+      "GROUP BY ROLLUP(회원번호, 상품)",
+      "GROUP BY 회원번호, ROLLUP(상품)",
+      "GROUP BY CUBE(회원번호, 상품)",
+      "GROUP BY GROUPING SETS(회원번호, 상품)"
     ],
     "correctIndex": 1,
     "explanation": "`회원번호, ROLLUP(상품)` 은 회원번호를 고정 차원으로 두고 상품 차원에 ROLLUP 을 적용해 (회원번호, 상품) 세부 + (회원번호) 소계를 산출한다. ① 은 (회원번호) 소계 외에 () 총계도 추가, ③ CUBE 는 (상품) 소계까지 추가, ④ GROUPING SETS(회원번호, 상품) 은 세부 행이 빠진다.",
@@ -702,10 +702,10 @@ export const ROUND_49: QuizQuestion[] = [
     "number": 23,
     "title": "Oracle 환경에서 회원별 총 주문 금액이 가장 큰 1건을 조회하는 SQL 로 옳은 것은?",
     "options": [
-      "`SELECT 회원번호, SUM(주문금액) FROM 주문 GROUP BY 회원번호 ORDER BY 2 DESC LIMIT 1;`",
-      "`SELECT * FROM (SELECT 회원번호, SUM(주문금액) AS 총주문금액 FROM 주문 GROUP BY 회원번호 ORDER BY 2 DESC) WHERE ROWNUM = 1;`",
-      "`SELECT 회원번호 FROM 주문 WHERE ROWNUM = 1 ORDER BY 주문금액 DESC;`",
-      "`SELECT TOP 1 * FROM 주문 ORDER BY 주문금액 DESC;`"
+      "SELECT 회원번호, SUM(주문금액) FROM 주문 GROUP BY 회원번호 ORDER BY 2 DESC LIMIT 1;",
+      "SELECT * FROM (SELECT 회원번호, SUM(주문금액) AS 총주문금액 FROM 주문 GROUP BY 회원번호 ORDER BY 2 DESC) WHERE ROWNUM = 1;",
+      "SELECT 회원번호 FROM 주문 WHERE ROWNUM = 1 ORDER BY 주문금액 DESC;",
+      "SELECT TOP 1 * FROM 주문 ORDER BY 주문금액 DESC;"
     ],
     "correctIndex": 1,
     "explanation": "Oracle 에서는 ORDER BY 가 적용된 인라인 뷰를 먼저 만든 뒤 외부 쿼리에서 ROWNUM = 1 로 한 건만 잘라야 '가장 큰 1건' 을 정확히 얻는다. ①은 표준 Oracle 에 LIMIT 가 없고, ③은 ROWNUM 이 ORDER BY 이전에 부여되어 잘못된 결과가 나오며, ④의 TOP 은 SQL Server 문법이고 GROUP BY 도 없다.",
@@ -720,10 +720,10 @@ export const ROUND_49: QuizQuestion[] = [
     "number": 24,
     "title": "아래 결과(첫 행은 0, 그 이후 직전 행 값) 를 반환하는 윈도우 함수로 옳은 것은?",
     "options": [
-      "`LEAD(COL1, 1, 0) OVER(ORDER BY COL1)`",
-      "`LAG(COL1, 1, NULL) OVER(ORDER BY COL1)`",
-      "`LAG(COL1, 1, 0) OVER(ORDER BY COL1)`",
-      "`FIRST_VALUE(COL1) OVER(ORDER BY COL1)`"
+      "LEAD(COL1, 1, 0) OVER(ORDER BY COL1)",
+      "LAG(COL1, 1, NULL) OVER(ORDER BY COL1)",
+      "LAG(COL1, 1, 0) OVER(ORDER BY COL1)",
+      "FIRST_VALUE(COL1) OVER(ORDER BY COL1)"
     ],
     "correctIndex": 2,
     "explanation": "LAG 의 세 번째 인자로 기본값 0 을 지정하면 첫 행의 LAG 결과가 0 으로 반환된다. ① LEAD 는 다음 행 값, ② NULL 기본값이라 첫 행이 NULL, ④ FIRST_VALUE 는 모든 행에서 첫 값(100) 을 반환한다.",
@@ -1365,10 +1365,10 @@ export const ROUND_49: QuizQuestion[] = [
     "number": 40,
     "title": "아래 요구 사항을 만족하는 WHERE 조건으로 옳은 것은?",
     "options": [
-      "`COL1 = 'F' OR COL1 = 'G' AND 금액 BETWEEN 2000 AND 50000`",
-      "`(COL1 = 'F' OR COL1 = 'G') AND 금액 BETWEEN 2000 AND 50000`",
-      "`COL1 IN ('F', 'G') OR 금액 BETWEEN 2000 AND 50000`",
-      "`COL1 = 'F' AND COL1 = 'G' AND 금액 BETWEEN 2000 AND 50000`"
+      "COL1 = 'F' OR COL1 = 'G' AND 금액 BETWEEN 2000 AND 50000",
+      "(COL1 = 'F' OR COL1 = 'G') AND 금액 BETWEEN 2000 AND 50000",
+      "COL1 IN ('F', 'G') OR 금액 BETWEEN 2000 AND 50000",
+      "COL1 = 'F' AND COL1 = 'G' AND 금액 BETWEEN 2000 AND 50000"
     ],
     "correctIndex": 1,
     "explanation": "조건 우선순위는 AND 가 OR 보다 먼저 평가되므로 괄호 없이 `OR ... AND ...` 를 쓰면 의도와 다르게 결합된다. '등급 F 또는 G' 부분에 괄호를 묶고 금액 BETWEEN 조건을 AND 로 결합한 ②가 요구사항을 정확히 표현한다.",

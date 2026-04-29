@@ -232,10 +232,10 @@
       "number": 12,
       "title": "아래 네 SQL 중 COL이 NULL일 때 반환 결과가 나머지와 다른 것은?",
       "options": [
-        "`IFNULL(COL, 'value')`",
-        "`NVL(COL, 'value')`",
-        "`COALESCE(COL, 'value')`",
-        "`NULLIF(COL, 'value')`"
+        "IFNULL(COL, 'value')",
+        "NVL(COL, 'value')",
+        "COALESCE(COL, 'value')",
+        "NULLIF(COL, 'value')"
       ],
       "correctIndex": 3,
       "explanation": "①·②·③은 NULL을 지정한 값으로 치환하지만, NULLIF는 두 값이 같으면 NULL을, 다르면 첫 번째 값을 반환한다.",
@@ -289,10 +289,10 @@
       "number": 15,
       "title": "아래 T 테이블에 대한 네 SQL 중 결과가 다른 것은?",
       "options": [
-        "`SELECT A, SUM(X) FROM T GROUP BY A UNION ALL SELECT NULL, SUM(X) FROM T;`",
-        "`SELECT A, SUM(X) FROM T GROUP BY ROLLUP(A);`",
-        "`SELECT A, SUM(X) FROM T GROUP BY CUBE(A);`",
-        "`SELECT A, SUM(X) FROM T GROUP BY GROUPING SETS(A);`"
+        "SELECT A, SUM(X) FROM T GROUP BY A UNION ALL SELECT NULL, SUM(X) FROM T;",
+        "SELECT A, SUM(X) FROM T GROUP BY ROLLUP(A);",
+        "SELECT A, SUM(X) FROM T GROUP BY CUBE(A);",
+        "SELECT A, SUM(X) FROM T GROUP BY GROUPING SETS(A);"
       ],
       "correctIndex": 3,
       "explanation": "T 의 A 별 합계는 A=1 → 30, A=2 → 70 이고 전체 합계는 100 이다. ① UNION ALL 은 A 별 소계 두 행과 NULL 키 전체 합계 한 행을 더해 (1,30),(2,70),(NULL,100) 을 반환한다. ② ROLLUP(A) 와 ③ CUBE(A) 는 단일 컬럼이므로 A 별 소계와 전체 합계를 함께 반환해 결과가 같다. ④ GROUPING SETS(A) 는 A 단위 소계만 생성하고 전체 합계를 포함하지 않으므로 (1,30),(2,70) 두 행만 반환된다. 따라서 결과가 다른 것은 ④ 이다.",
@@ -354,29 +354,109 @@
         {
           "type": "table",
           "caption": "EMP 매출 테이블 (입력)",
-          "headers": ["매장ID", "매장명", "년도", "매출"],
+          "headers": [
+            "매장ID",
+            "매장명",
+            "년도",
+            "매출"
+          ],
           "rows": [
-            ["S01", "강남점", "2024", "1000"],
-            ["S01", "강남점", "2025", "1500"],
-            ["S02", "수원점", "2024", "800"],
-            ["S02", "수원점", "2025", "1200"]
+            [
+              "S01",
+              "강남점",
+              "2024",
+              "1000"
+            ],
+            [
+              "S01",
+              "강남점",
+              "2025",
+              "1500"
+            ],
+            [
+              "S02",
+              "수원점",
+              "2024",
+              "800"
+            ],
+            [
+              "S02",
+              "수원점",
+              "2025",
+              "1200"
+            ]
           ]
         },
         {
           "type": "table",
           "caption": "출력 결과 — (매장ID, 매장명, 년도) 세부 + (매장ID, 년도) 소계 + (년도) 총계",
-          "headers": ["매장ID", "매장명", "년도", "SUM(매출)"],
+          "headers": [
+            "매장ID",
+            "매장명",
+            "년도",
+            "SUM(매출)"
+          ],
           "rows": [
-            ["S01", "강남점", "2024", "1000"],
-            ["S01", "강남점", "2025", "1500"],
-            ["S01", "(NULL)", "2024", "1000"],
-            ["S01", "(NULL)", "2025", "1500"],
-            ["S02", "수원점", "2024", "800"],
-            ["S02", "수원점", "2025", "1200"],
-            ["S02", "(NULL)", "2024", "800"],
-            ["S02", "(NULL)", "2025", "1200"],
-            ["(NULL)", "(NULL)", "2024", "1800"],
-            ["(NULL)", "(NULL)", "2025", "2700"]
+            [
+              "S01",
+              "강남점",
+              "2024",
+              "1000"
+            ],
+            [
+              "S01",
+              "강남점",
+              "2025",
+              "1500"
+            ],
+            [
+              "S01",
+              "(NULL)",
+              "2024",
+              "1000"
+            ],
+            [
+              "S01",
+              "(NULL)",
+              "2025",
+              "1500"
+            ],
+            [
+              "S02",
+              "수원점",
+              "2024",
+              "800"
+            ],
+            [
+              "S02",
+              "수원점",
+              "2025",
+              "1200"
+            ],
+            [
+              "S02",
+              "(NULL)",
+              "2024",
+              "800"
+            ],
+            [
+              "S02",
+              "(NULL)",
+              "2025",
+              "1200"
+            ],
+            [
+              "(NULL)",
+              "(NULL)",
+              "2024",
+              "1800"
+            ],
+            [
+              "(NULL)",
+              "(NULL)",
+              "2025",
+              "2700"
+            ]
           ]
         },
         {
@@ -401,8 +481,20 @@
         {
           "type": "table",
           "caption": "T 테이블 (어떤 데이터가 있어도 WHERE 1=2 로 모두 공집합)",
-          "headers": ["COL1"],
-          "rows": [["10"], ["20"], ["NULL"]]
+          "headers": [
+            "COL1"
+          ],
+          "rows": [
+            [
+              "10"
+            ],
+            [
+              "20"
+            ],
+            [
+              "NULL"
+            ]
+          ]
         },
         {
           "type": "sql",
@@ -426,20 +518,50 @@
         {
           "type": "table",
           "caption": "T1 테이블",
-          "headers": ["COL"],
-          "rows": [["1"], ["2"], ["3"]]
+          "headers": [
+            "COL"
+          ],
+          "rows": [
+            [
+              "1"
+            ],
+            [
+              "2"
+            ],
+            [
+              "3"
+            ]
+          ]
         },
         {
           "type": "table",
           "caption": "T2 테이블",
-          "headers": ["COL"],
-          "rows": [["3"], ["4"], ["5"]]
+          "headers": [
+            "COL"
+          ],
+          "rows": [
+            [
+              "3"
+            ],
+            [
+              "4"
+            ],
+            [
+              "5"
+            ]
+          ]
         },
         {
           "type": "table",
           "caption": "T3 테이블",
-          "headers": ["COL"],
-          "rows": [["2"]]
+          "headers": [
+            "COL"
+          ],
+          "rows": [
+            [
+              "2"
+            ]
+          ]
         },
         {
           "type": "sql",
@@ -463,20 +585,44 @@
         {
           "type": "table",
           "caption": "TUTOR 테이블",
-          "headers": ["TID", "NAME"],
+          "headers": [
+            "TID",
+            "NAME"
+          ],
           "rows": [
-            ["T01", "홍길동"],
-            ["T02", "이순신"],
-            ["T03", "강감찬"]
+            [
+              "T01",
+              "홍길동"
+            ],
+            [
+              "T02",
+              "이순신"
+            ],
+            [
+              "T03",
+              "강감찬"
+            ]
           ]
         },
         {
           "type": "table",
           "caption": "SESSIONS 테이블",
-          "headers": ["SID", "TID", "DATE"],
+          "headers": [
+            "SID",
+            "TID",
+            "DATE"
+          ],
           "rows": [
-            ["S01", "T01", "2025-10-01"],
-            ["S02", "T02", "2025-10-02"]
+            [
+              "S01",
+              "T01",
+              "2025-10-01"
+            ],
+            [
+              "S02",
+              "T02",
+              "2025-10-02"
+            ]
           ]
         },
         {
@@ -516,10 +662,10 @@
       "number": 23,
       "title": "아래 T 테이블에서 정렬 조건의 중복 값을 동일 합으로 처리하는 윈도우 절은? (기대 결과: (A, 300), (A, 300), (A, 300))",
       "options": [
-        "`ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW`",
-        "`RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW`",
-        "`ROWS BETWEEN 1 PRECEDING AND 1 FOLLOWING`",
-        "`ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING`"
+        "ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW",
+        "RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW",
+        "ROWS BETWEEN 1 PRECEDING AND 1 FOLLOWING",
+        "ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING"
       ],
       "correctIndex": 1,
       "explanation": "ORDER BY 키에 중복이 있을 때 ROWS는 물리적 행 단위로 누적하여 결과가 달라지는 반면, RANGE는 동일 값을 하나의 논리적 범위로 처리해 동일 누적 합을 반환한다.",
@@ -527,11 +673,27 @@
         {
           "type": "table",
           "caption": "T 테이블 (GRP=A 그룹의 AMT 가 모두 동일)",
-          "headers": ["ID", "GRP", "AMT"],
+          "headers": [
+            "ID",
+            "GRP",
+            "AMT"
+          ],
           "rows": [
-            ["1", "A", "100"],
-            ["2", "A", "100"],
-            ["3", "A", "100"]
+            [
+              "1",
+              "A",
+              "100"
+            ],
+            [
+              "2",
+              "A",
+              "100"
+            ],
+            [
+              "3",
+              "A",
+              "100"
+            ]
           ]
         },
         {
@@ -564,10 +726,10 @@
       "number": 25,
       "title": "아래 네 SQL 중 JOB 컬럼의 중복 데이터가 제거되지 않는 것은?",
       "options": [
-        "`SELECT JOB FROM EMP WHERE EXISTS (SELECT 1 FROM DEPT WHERE DEPT.DNO = EMP.DNO);`",
-        "`SELECT DISTINCT JOB FROM EMP;`",
-        "`SELECT JOB FROM EMP GROUP BY JOB;`",
-        "`SELECT JOB FROM EMP UNION SELECT JOB FROM EMP2;`"
+        "SELECT JOB FROM EMP WHERE EXISTS (SELECT 1 FROM DEPT WHERE DEPT.DNO = EMP.DNO);",
+        "SELECT DISTINCT JOB FROM EMP;",
+        "SELECT JOB FROM EMP GROUP BY JOB;",
+        "SELECT JOB FROM EMP UNION SELECT JOB FROM EMP2;"
       ],
       "correctIndex": 0,
       "explanation": "EXISTS는 행의 존재 여부만 판별할 뿐 중복을 제거하지 않는다. 나머지는 DISTINCT, GROUP BY, UNION 모두 중복을 제거한다."
@@ -577,10 +739,10 @@
       "number": 26,
       "title": "평균 키가 180 이상인 부서만 조회하는 SQL로 올바른 것은?",
       "options": [
-        "`SELECT 부서, AVG(키) FROM EMP WHERE AVG(키) >= 180 GROUP BY 부서;`",
-        "`SELECT 부서, AVG(키) FROM EMP GROUP BY 부서 HAVING AVG(키) >= 180;`",
-        "`SELECT 부서, AVG(키) FROM EMP HAVING AVG(키) >= 180;`",
-        "`SELECT 부서, AVG(키) FROM EMP WHERE 키 >= 180 GROUP BY 부서;`"
+        "SELECT 부서, AVG(키) FROM EMP WHERE AVG(키) >= 180 GROUP BY 부서;",
+        "SELECT 부서, AVG(키) FROM EMP GROUP BY 부서 HAVING AVG(키) >= 180;",
+        "SELECT 부서, AVG(키) FROM EMP HAVING AVG(키) >= 180;",
+        "SELECT 부서, AVG(키) FROM EMP WHERE 키 >= 180 GROUP BY 부서;"
       ],
       "correctIndex": 1,
       "explanation": "그룹 함수 결과에 대한 조건은 WHERE가 아닌 HAVING 절에서 지정한다. GROUP BY와 HAVING은 순서가 바뀌어도 동일하게 동작한다."
@@ -640,11 +802,27 @@
         {
           "type": "table",
           "caption": "T 테이블",
-          "headers": ["A", "X", "C"],
+          "headers": [
+            "A",
+            "X",
+            "C"
+          ],
           "rows": [
-            ["a", "10", "p"],
-            ["a", "20", "q"],
-            ["b", "30", "r"]
+            [
+              "a",
+              "10",
+              "p"
+            ],
+            [
+              "a",
+              "20",
+              "q"
+            ],
+            [
+              "b",
+              "30",
+              "r"
+            ]
           ]
         },
         {
@@ -727,14 +905,42 @@
         {
           "type": "table",
           "caption": "DRIVING_LOG 테이블",
-          "headers": ["운행번호", "운전자", "거리"],
+          "headers": [
+            "운행번호",
+            "운전자",
+            "거리"
+          ],
           "rows": [
-            ["D001", "홍길동", "120"],
-            ["D002", "홍길동", "80"],
-            ["D003", "이순신", "200"],
-            ["D004", "강감찬", "150"],
-            ["D005", "강감찬", "90"],
-            ["D006", "강감찬", "70"]
+            [
+              "D001",
+              "홍길동",
+              "120"
+            ],
+            [
+              "D002",
+              "홍길동",
+              "80"
+            ],
+            [
+              "D003",
+              "이순신",
+              "200"
+            ],
+            [
+              "D004",
+              "강감찬",
+              "150"
+            ],
+            [
+              "D005",
+              "강감찬",
+              "90"
+            ],
+            [
+              "D006",
+              "강감찬",
+              "70"
+            ]
           ]
         },
         {
@@ -759,12 +965,32 @@
         {
           "type": "table",
           "caption": "CUSTOMER 테이블",
-          "headers": ["고객ID", "이름", "지역"],
+          "headers": [
+            "고객ID",
+            "이름",
+            "지역"
+          ],
           "rows": [
-            ["C01", "홍길동", "서울"],
-            ["C02", "이순신", "대전"],
-            ["C03", "강감찬", "부산"],
-            ["C04", "박지성", "광주"]
+            [
+              "C01",
+              "홍길동",
+              "서울"
+            ],
+            [
+              "C02",
+              "이순신",
+              "대전"
+            ],
+            [
+              "C03",
+              "강감찬",
+              "부산"
+            ],
+            [
+              "C04",
+              "박지성",
+              "광주"
+            ]
           ]
         },
         {
@@ -872,14 +1098,38 @@
         {
           "type": "table",
           "caption": "T1 테이블",
-          "headers": ["COL1"],
-          "rows": [["1"], ["2"], ["3"]]
+          "headers": [
+            "COL1"
+          ],
+          "rows": [
+            [
+              "1"
+            ],
+            [
+              "2"
+            ],
+            [
+              "3"
+            ]
+          ]
         },
         {
           "type": "table",
           "caption": "T2 테이블 (COL2 에 NULL 포함)",
-          "headers": ["COL2"],
-          "rows": [["2"], ["3"], ["NULL"]]
+          "headers": [
+            "COL2"
+          ],
+          "rows": [
+            [
+              "2"
+            ],
+            [
+              "3"
+            ],
+            [
+              "NULL"
+            ]
+          ]
         },
         {
           "type": "sql",
@@ -1180,12 +1430,32 @@
         {
           "type": "table",
           "caption": "EMP 테이블",
-          "headers": ["GRADE", "JOB", "ENAME"],
+          "headers": [
+            "GRADE",
+            "JOB",
+            "ENAME"
+          ],
           "rows": [
-            ["A", "MANAGER", "홍길동"],
-            ["A", "CLERK", "김철수"],
-            ["B", "MANAGER", "이순신"],
-            ["B", "CLERK", "박지성"]
+            [
+              "A",
+              "MANAGER",
+              "홍길동"
+            ],
+            [
+              "A",
+              "CLERK",
+              "김철수"
+            ],
+            [
+              "B",
+              "MANAGER",
+              "이순신"
+            ],
+            [
+              "B",
+              "CLERK",
+              "박지성"
+            ]
           ]
         },
         {

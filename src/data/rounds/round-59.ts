@@ -285,10 +285,10 @@ export const ROUND_59: QuizQuestion[] = [
     "number": 13,
     "title": "아래 연구소 테이블에서 결과 (A연구소, 화학연구소, 연구소) 를 모두 조회할 수 있는 SQL 로 옳은 것은?",
     "options": [
-      "`SELECT * FROM 연구소 WHERE 명 = '_연구소';`",
-      "`SELECT * FROM 연구소 WHERE 명 = '%연구소';`",
-      "`SELECT * FROM 연구소 WHERE 명 LIKE '%연구소';`",
-      "`SELECT * FROM 연구소 WHERE 명 LIKE '_연구소';`"
+      "SELECT * FROM 연구소 WHERE 명 = '_연구소';",
+      "SELECT * FROM 연구소 WHERE 명 = '%연구소';",
+      "SELECT * FROM 연구소 WHERE 명 LIKE '%연구소';",
+      "SELECT * FROM 연구소 WHERE 명 LIKE '_연구소';"
     ],
     "correctIndex": 2,
     "explanation": "`=` 비교는 정확히 그 문자열이어야 매칭되므로 ① `'_연구소'` 는 \"_연구소\" 라는 문자열만 찾고, ② `'%연구소'` 도 \"%연구소\" 문자열만 찾는다 (모두 매칭 0 건). LIKE 와 함께 써야 와일드카드로 동작. ③ `LIKE '%연구소'` 는 `%` (0 글자 이상) 라 \"연구소\" 단독도 포함해 세 행 모두 매칭. ④ `LIKE '_연구소'` 는 `_` (정확히 1 글자) 라 \"A연구소\" 만 매칭, \"화학연구소\" 와 \"연구소\" 는 누락.",
@@ -347,10 +347,10 @@ export const ROUND_59: QuizQuestion[] = [
     "number": 15,
     "title": "아래 EMP 테이블에서 직원 번호와 해당 직원의 상사 번호를 함께 조회하려 한다. 빈칸에 들어갈 SQL로 가장 적절한 것은?",
     "options": [
-      "`SELECT E.EMPNO, M.EMPNO AS MGR_NO FROM EMP E, EMP M WHERE E.MGR = M.EMPNO;`",
-      "`SELECT E.EMPNO, M.EMPNO AS MGR_NO FROM EMP E JOIN EMP M ON E.EMPNO = M.EMPNO;`",
-      "`SELECT EMPNO, MGR FROM EMP WHERE MGR = EMPNO;`",
-      "`SELECT EMPNO, MGR FROM EMP GROUP BY EMPNO;`"
+      "SELECT E.EMPNO, M.EMPNO AS MGR_NO FROM EMP E, EMP M WHERE E.MGR = M.EMPNO;",
+      "SELECT E.EMPNO, M.EMPNO AS MGR_NO FROM EMP E JOIN EMP M ON E.EMPNO = M.EMPNO;",
+      "SELECT EMPNO, MGR FROM EMP WHERE MGR = EMPNO;",
+      "SELECT EMPNO, MGR FROM EMP GROUP BY EMPNO;"
     ],
     "correctIndex": 0,
     "explanation": "셀프 조인을 통해 동일 EMP 테이블을 두 번 참조하여 직원의 MGR과 다른 행의 EMPNO를 매칭해야 한다. ①은 E.MGR = M.EMPNO 조건으로 직원과 상사를 정확히 연결한다. ②는 동일 EMPNO를 매칭하므로 자기 자신만 반환되고, ③은 MGR이 자신의 EMPNO와 같은 행만 찾으므로 일반적으로 결과가 없으며, ④는 GROUP BY만으로는 상사 정보를 얻을 수 없다.",
@@ -707,10 +707,10 @@ export const ROUND_59: QuizQuestion[] = [
     "number": 22,
     "title": "아래 PHONE 테이블에서 '010' 으로 시작하는 번호만 필터링하려 한다. 정규표현식 패턴으로 올바른 것은?",
     "options": [
-      "`[^010]`",
-      "`^010`",
-      "`$010`",
-      "`02`"
+      "[^010]",
+      "^010",
+      "$010",
+      "02"
     ],
     "correctIndex": 1,
     "explanation": "정규표현식에서 `^` 는 문자열의 시작 위치, `$` 는 끝 위치를 의미한다. ① `[^010]` 은 문자 클래스 부정(0/1 이 아닌 한 글자), ③ `$010` 은 `$` 가 잘못된 자리에 있어 의도와 다른 패턴, ④ `02` 는 02 가 포함된 모든 문자열을 의미한다. `010` 으로 시작하는 패턴은 ② `^010` 이 정답.",
@@ -749,10 +749,10 @@ export const ROUND_59: QuizQuestion[] = [
     "number": 23,
     "title": "아래 두 REGEXP_SUBSTR 호출에서 입력 문자열은 'BCD' 이고 결과가 (첫번째='BCD', 두번째=NULL) 이 되도록 빈칸 두 개에 들어갈 정규식 패턴 조합은?",
     "options": [
-      "`'B.D'`, `'B.D'`",
-      "`'BCD'`, `'BCD'`",
-      "`'B.D'`, `'b.d'`",
-      "`'b.d'`, `'B.D'`"
+      "'B.D'`, `'B.D'",
+      "'BCD'`, `'BCD'",
+      "'B.D'`, `'b.d'",
+      "'b.d'`, `'B.D'"
     ],
     "correctIndex": 2,
     "explanation": "정규식에서 `.` 은 임의의 한 문자를 의미한다. ① 첫번째 빈칸: `'B.D'` 패턴이 입력 'BCD' 의 'B' + 임의문자(C) + 'D' 와 매칭되어 'BCD' 반환. ② 두번째 빈칸: `'b.d'` 는 소문자이므로 Oracle REGEXP 기본 옵션(대소문자 구별) 에서 'BCD' 와 매칭되지 않아 NULL 반환. 정답은 ③ `'B.D'`, `'b.d'`. ① 둘 다 'B.D' 면 둘 다 'BCD' 반환, ② 둘 다 'BCD' 면 둘 다 'BCD', ④ 는 첫번째가 NULL 이라 의도와 반대.",
@@ -835,10 +835,10 @@ export const ROUND_59: QuizQuestion[] = [
     "number": 26,
     "title": "다음 INSERT 문 중 입력 오류가 발생하는 것은?",
     "options": [
-      "`INSERT INTO TABLE1 VALUES (1, SYSDATE, '001');`",
-      "`INSERT INTO TABLE1 VALUES (1, TO_DATE('2024-06-06', 'YYYY-MM-DD'), '001');`",
-      "`INSERT INTO TABLE1 VALUES (1, DATE '2024-06-06', '001');`",
-      "`INSERT INTO TABLE1 VALUES (1, 20240606, '001');`"
+      "INSERT INTO TABLE1 VALUES (1, SYSDATE, '001');",
+      "INSERT INTO TABLE1 VALUES (1, TO_DATE('2024-06-06', 'YYYY-MM-DD'), '001');",
+      "INSERT INTO TABLE1 VALUES (1, DATE '2024-06-06', '001');",
+      "INSERT INTO TABLE1 VALUES (1, 20240606, '001');"
     ],
     "correctIndex": 3,
     "explanation": "B 컬럼은 DATE 타입인데 숫자 리터럴 20240606이 직접 입력되어 자동 변환이 이루어지지 않으므로 타입 불일치 오류가 발생한다.",
@@ -859,10 +859,10 @@ export const ROUND_59: QuizQuestion[] = [
     "number": 27,
     "title": "고객별 주문 금액의 누적 합계를 계산하려 한다. 아래 빈칸에 들어갈 윈도우 절로 가장 적절한 것은?",
     "options": [
-      "`ROWS BETWEEN 1 PRECEDING AND 1 FOLLOWING`",
-      "`ROWS BETWEEN CURRENT ROW AND UNBOUNDED FOLLOWING`",
-      "`ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW`",
-      "`RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW`"
+      "ROWS BETWEEN 1 PRECEDING AND 1 FOLLOWING",
+      "ROWS BETWEEN CURRENT ROW AND UNBOUNDED FOLLOWING",
+      "ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW",
+      "RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW"
     ],
     "correctIndex": 2,
     "explanation": "누적 합계는 첫 행부터 현재 행까지의 합이므로 시작 경계를 UNBOUNDED PRECEDING, 끝 경계를 CURRENT ROW로 지정해야 한다. ①은 이동평균 범위, ②는 현재 이후의 합계, ④는 RANGE 기반으로 동일 정렬 키 값들을 한 번에 묶어 계산하므로 행 단위 누적과는 차이가 있다.",
@@ -909,10 +909,10 @@ export const ROUND_59: QuizQuestion[] = [
     "number": 28,
     "title": "2025년 10월 20일 하루의 데이터만 조회하려 한다. 다음 방법 중 옳지 않은 것은? (HIRE_DT는 DATE 타입이며 시분초를 포함한다.)",
     "options": [
-      "`HIRE_DT >= DATE '2025-10-20' AND HIRE_DT < DATE '2025-10-21'`",
-      "`TRUNC(HIRE_DT) = DATE '2025-10-20'`",
-      "`HIRE_DT BETWEEN DATE '2025-10-20' AND DATE '2025-10-21'`",
-      "`HIRE_DT >= DATE '2025-10-20' AND HIRE_DT <= DATE '2025-10-20' + 1 - 1/86400`"
+      "HIRE_DT >= DATE '2025-10-20' AND HIRE_DT < DATE '2025-10-21'",
+      "TRUNC(HIRE_DT) = DATE '2025-10-20'",
+      "HIRE_DT BETWEEN DATE '2025-10-20' AND DATE '2025-10-21'",
+      "HIRE_DT >= DATE '2025-10-20' AND HIRE_DT <= DATE '2025-10-20' + 1 - 1/86400"
     ],
     "correctIndex": 2,
     "explanation": "BETWEEN은 양 끝점을 포함하므로 21일 00:00:00까지 포함되어 20일 밤 자정 이후의 21일 시작 시각이 결과에 혼입된다.",
@@ -1162,10 +1162,10 @@ export const ROUND_59: QuizQuestion[] = [
     "number": 35,
     "title": "'202505' 문자열에서 월(MM) 부분만 추출하려 한다. 아래 방식 중 해당 목적과 가장 거리가 먼 것은?",
     "options": [
-      "`EXTRACT(YEAR FROM SYSDATE)`",
-      "`EXTRACT(MONTH FROM TO_DATE('202505','YYYYMM'))`",
-      "`SUBSTR('202505', 5, 2)`",
-      "`TO_NUMBER(TO_CHAR(TO_DATE('202505','YYYYMM'),'MM'))`"
+      "EXTRACT(YEAR FROM SYSDATE)",
+      "EXTRACT(MONTH FROM TO_DATE('202505','YYYYMM'))",
+      "SUBSTR('202505', 5, 2)",
+      "TO_NUMBER(TO_CHAR(TO_DATE('202505','YYYYMM'),'MM'))"
     ],
     "correctIndex": 0,
     "explanation": "①은 연도를 추출하는 식이며 월 추출과 무관하다.",
@@ -1503,10 +1503,10 @@ export const ROUND_59: QuizQuestion[] = [
     "number": 43,
     "title": "아래 SQL 들 중 WHERE 절 평가 결과가 나머지와 다른 것은?",
     "options": [
-      "`SELECT * FROM DUAL WHERE 1 <> NULL;`",
-      "`SELECT * FROM DUAL WHERE NULL = NULL;`",
-      "`SELECT * FROM DUAL WHERE NULL IS NULL;`",
-      "`SELECT * FROM DUAL WHERE 1 > NULL;`"
+      "SELECT * FROM DUAL WHERE 1 <> NULL;",
+      "SELECT * FROM DUAL WHERE NULL = NULL;",
+      "SELECT * FROM DUAL WHERE NULL IS NULL;",
+      "SELECT * FROM DUAL WHERE 1 > NULL;"
     ],
     "correctIndex": 2,
     "explanation": "①②④ 의 NULL 비교(`=`, `<>`, `>` 등 일반 연산자) 는 모두 UNKNOWN 으로 평가되어 행이 선택되지 않아 0 건 반환. 그러나 ③ `IS NULL` 은 NULL 판별 전용 연산자로 TRUE 를 반환해 1 건 (DUAL 의 한 행) 반환. 결과가 다른 것은 ③.",

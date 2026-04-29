@@ -384,10 +384,10 @@ export const ROUND_54: QuizQuestion[] = [
     "number": 17,
     "title": "아래 T 테이블에 대한 SQL 과 동일한 결과를 반환하는 함수는?",
     "options": [
-      "`NVL(COL1, 'X')`",
-      "`DECODE(COL1, NULL, 'X')`",
-      "`COALESCE(COL1, 'X')`",
-      "`NULLIF(COL1, 'X')`"
+      "NVL(COL1, 'X')",
+      "DECODE(COL1, NULL, 'X')",
+      "COALESCE(COL1, 'X')",
+      "NULLIF(COL1, 'X')"
     ],
     "correctIndex": 3,
     "explanation": "원본 SQL 의 `CASE WHEN COL1 = 'X' THEN NULL ELSE COL1 END` 는 \"COL1 이 'X' 이면 NULL, 아니면 COL1\" 을 반환. 이건 정확히 `NULLIF(COL1, 'X')` 의 의미. ① NVL 은 NULL → 'X', ② DECODE 도 NULL → 'X', ③ COALESCE 도 NULL → 'X' 라 의미 반대.",
@@ -429,10 +429,10 @@ export const ROUND_54: QuizQuestion[] = [
     "number": 18,
     "title": "아래 TAB 테이블에 대한 SQL 중 Oracle 환경에서 결과가 다른 것은?",
     "options": [
-      "`SELECT COL1, COL2, COL3 FROM TAB WHERE COL1 < 5;`",
-      "`SELECT T.* FROM TAB AS T;`",
-      "`SELECT * FROM TAB;`",
-      "`SELECT * FROM TAB WHERE COL2 IN (2, 3);`"
+      "SELECT COL1, COL2, COL3 FROM TAB WHERE COL1 < 5;",
+      "SELECT T.* FROM TAB AS T;",
+      "SELECT * FROM TAB;",
+      "SELECT * FROM TAB WHERE COL2 IN (2, 3);"
     ],
     "correctIndex": 1,
     "explanation": "Oracle 은 FROM 절에서 테이블 별칭에 `AS` 키워드를 허용하지 않아 ② 는 ORA-00933 오류 발생. ①③④ 는 모두 정상 실행되어 같은 4 행을 반환 (조건이 충분히 넓음).",
@@ -481,9 +481,9 @@ export const ROUND_54: QuizQuestion[] = [
     "title": "아래 설명을 SQL 로 작성했을 때 적절하지 않은 것은? (STADIUM 테이블이 두 개의 다른 스키마에 존재한다고 가정)",
     "options": [
       "`SELECT STADIUM.NAME FROM HR.STADIUM, SPORT.STADIUM;` — 테이블 구분 없이 컬럼 참조",
-      "`SELECT HR.STADIUM.NAME FROM HR.STADIUM;`",
-      "`SELECT S.NAME FROM HR.STADIUM S;`",
-      "`SELECT A.NAME FROM HR.STADIUM A, SPORT.STADIUM B;`"
+      "SELECT HR.STADIUM.NAME FROM HR.STADIUM;",
+      "SELECT S.NAME FROM HR.STADIUM S;",
+      "SELECT A.NAME FROM HR.STADIUM A, SPORT.STADIUM B;"
     ],
     "correctIndex": 0,
     "explanation": "동일한 테이블명이 두 스키마에 존재할 때는 스키마나 별칭으로 구분해야 한다.",
@@ -828,10 +828,10 @@ export const ROUND_54: QuizQuestion[] = [
     "number": 24,
     "title": "아래 네 개의 SQL 중 반환 행 수가 가장 많은 것은?",
     "options": [
-      "`SELECT CODE FROM TAB1 UNION ALL SELECT CODE FROM TAB2;`",
-      "`SELECT * FROM TAB1, TAB2 WHERE TAB1.CODE = TAB2.CODE;`",
-      "`SELECT * FROM TAB1, TAB2 WHERE TAB1.PCOLOR IN ('노랑','파랑','검정') OR TAB2.PSIZE IN ('소','중','대');`",
-      "`SELECT * FROM TAB1 FULL OUTER JOIN TAB2 ON TAB1.CODE = TAB2.CODE;`"
+      "SELECT CODE FROM TAB1 UNION ALL SELECT CODE FROM TAB2;",
+      "SELECT * FROM TAB1, TAB2 WHERE TAB1.CODE = TAB2.CODE;",
+      "SELECT * FROM TAB1, TAB2 WHERE TAB1.PCOLOR IN ('노랑','파랑','검정') OR TAB2.PSIZE IN ('소','중','대');",
+      "SELECT * FROM TAB1 FULL OUTER JOIN TAB2 ON TAB1.CODE = TAB2.CODE;"
     ],
     "correctIndex": 2,
     "explanation": "각 SQL 의 결과 행 수: ① UNION ALL = 4 + 4 = 8건. ② INNER JOIN ON CODE = 매칭 4건. ③ 카티션 곱(4×4=16) 에서 OR 조건 만족 행 = TAB1 의 PCOLOR ∈ {노랑,파랑,검정}(3행) × TAB2(4행) ∪ TAB1(4행) × TAB2 의 PSIZE ∈ {소,중,대}(3행) = 12 + 12 - 9(중복) = 15건. ④ FULL OUTER JOIN ON CODE = 매칭 4건 (양쪽 미매칭 없음). ③ 이 15건으로 가장 많아 정답.",
@@ -918,10 +918,10 @@ export const ROUND_54: QuizQuestion[] = [
     "number": 26,
     "title": "아래 두 테이블 A, B 에 대한 IN 서브쿼리와 동일한 결과를 반환하는 EXISTS 쿼리는?",
     "options": [
-      "`SELECT * FROM A WHERE EXISTS (SELECT 1 FROM B WHERE A.성별 = B.성별 AND A.번호 = B.번호);`",
-      "`SELECT * FROM A WHERE EXISTS (SELECT 1 FROM B WHERE A.번호 = B.번호);`",
-      "`SELECT * FROM A WHERE EXISTS (SELECT 1 FROM B WHERE A.성별 = B.성별);`",
-      "`SELECT * FROM A WHERE NOT EXISTS (SELECT 1 FROM B WHERE A.성별 = B.성별 AND A.번호 = B.번호);`"
+      "SELECT * FROM A WHERE EXISTS (SELECT 1 FROM B WHERE A.성별 = B.성별 AND A.번호 = B.번호);",
+      "SELECT * FROM A WHERE EXISTS (SELECT 1 FROM B WHERE A.번호 = B.번호);",
+      "SELECT * FROM A WHERE EXISTS (SELECT 1 FROM B WHERE A.성별 = B.성별);",
+      "SELECT * FROM A WHERE NOT EXISTS (SELECT 1 FROM B WHERE A.성별 = B.성별 AND A.번호 = B.번호);"
     ],
     "correctIndex": 0,
     "explanation": "원본 IN 서브쿼리 `WHERE 번호 IN (SELECT 번호 FROM B WHERE A.성별 = B.성별)` 은 외부의 `A.번호 = B.번호` 조건과 서브쿼리 안의 `A.성별 = B.성별` 상관 조건을 동시에 요구한다. EXISTS 로 변환하려면 두 조건을 모두 EXISTS 절 안에 옮겨야 한다. ② 성별 조건 누락, ③ 번호 조건 누락, ④ NOT EXISTS 논리 반전.",
@@ -1149,10 +1149,10 @@ export const ROUND_54: QuizQuestion[] = [
     "number": 30,
     "title": "아래 결과(COL2 만 NULL 이 있는 집계) 를 출력하기 위한 GROUPING SETS 로 적절한 것은?",
     "options": [
-      "`GROUPING SETS( (COL1, COL2), COL2 )`",
-      "`GROUPING SETS( COL1, (COL1, COL2) )`",
-      "`GROUPING SETS( (), COL1 )`",
-      "`GROUPING SETS( COL1, COL2 )`"
+      "GROUPING SETS( (COL1, COL2), COL2 )",
+      "GROUPING SETS( COL1, (COL1, COL2) )",
+      "GROUPING SETS( (), COL1 )",
+      "GROUPING SETS( COL1, COL2 )"
     ],
     "correctIndex": 0,
     "explanation": "결과에는 (COL1, COL2) 세부 집계 행과 COL2 만 보이고 COL1 이 NULL 인 소계 행이 함께 있어야 한다. ① `(COL1, COL2)` + `COL2` 조합이 정확히 이 둘을 산출한다. ② 는 COL1 소계가 추가로 나오고 COL2 소계가 빠지며, ③ 은 전체 합계와 COL1 소계만 산출, ④ 는 COL1 소계 + COL2 소계 두 행만 있고 (COL1, COL2) 세부 집계가 없다.",
@@ -1341,10 +1341,10 @@ export const ROUND_54: QuizQuestion[] = [
     "number": 34,
     "title": "아래 수강 테이블에서 강좌번호 100 과 101 을 동시에 수강하는 학번을 조회하는 SQL 로 적절한 것은?",
     "options": [
-      "`SELECT 학번 FROM 수강 WHERE 강의번호 = 100 AND 강의번호 = 101;`",
-      "`SELECT 학번 FROM 수강 WHERE 강의번호=100 INTERSECT SELECT 학번 FROM 수강 WHERE 강의번호=101;`",
-      "`SELECT 학번 FROM 수강 WHERE 강의번호 IN (100, 101);`",
-      "`SELECT 학번 FROM 수강 WHERE 강의번호 = 100 OR 강의번호 = 101;`"
+      "SELECT 학번 FROM 수강 WHERE 강의번호 = 100 AND 강의번호 = 101;",
+      "SELECT 학번 FROM 수강 WHERE 강의번호=100 INTERSECT SELECT 학번 FROM 수강 WHERE 강의번호=101;",
+      "SELECT 학번 FROM 수강 WHERE 강의번호 IN (100, 101);",
+      "SELECT 학번 FROM 수강 WHERE 강의번호 = 100 OR 강의번호 = 101;"
     ],
     "correctIndex": 1,
     "explanation": "AND 는 한 행이 동시에 두 값일 수 없어 공집합, IN/OR 은 둘 중 하나라도 만족하는 학번을 반환한다. INTERSECT 로 두 강좌의 학번 집합을 교집합 처리해야 동시에 수강한 학번을 얻는다.",
@@ -1445,10 +1445,10 @@ export const ROUND_54: QuizQuestion[] = [
     "number": 36,
     "title": "행이 2건인 테이블에 대해 결과가 나머지와 다른 SQL 은?",
     "options": [
-      "`SELECT * FROM T WHERE ROWNUM = 1;`",
-      "`SELECT * FROM T WHERE ROWNUM = 2;`",
-      "`SELECT * FROM T WHERE ROWNUM < 3;`",
-      "`SELECT * FROM T WHERE ROWNUM <= 2;`"
+      "SELECT * FROM T WHERE ROWNUM = 1;",
+      "SELECT * FROM T WHERE ROWNUM = 2;",
+      "SELECT * FROM T WHERE ROWNUM < 3;",
+      "SELECT * FROM T WHERE ROWNUM <= 2;"
     ],
     "correctIndex": 1,
     "explanation": "ROWNUM 은 1부터 순차 부여되므로 첫 행이 ROWNUM=1 을 받고 탈락하면 다음 행에도 1 이 할당되어 2에 도달하지 못한다.",
@@ -1854,10 +1854,10 @@ export const ROUND_54: QuizQuestion[] = [
     "number": 46,
     "title": "아래 T 테이블에 대한 SQL 의 출력 결과(COL1, 함수 결과) 가 다음과 같을 때 빈칸 윈도우 함수로 옳은 것은?",
     "options": [
-      "`LAG(COL1) OVER (ORDER BY COL1)`",
-      "`LEAD(COL1) OVER (ORDER BY COL1)`",
-      "`ROW_NUMBER() OVER (ORDER BY COL1)`",
-      "`RANK() OVER (ORDER BY COL1)`"
+      "LAG(COL1) OVER (ORDER BY COL1)",
+      "LEAD(COL1) OVER (ORDER BY COL1)",
+      "ROW_NUMBER() OVER (ORDER BY COL1)",
+      "RANK() OVER (ORDER BY COL1)"
     ],
     "correctIndex": 0,
     "explanation": "출력 결과가 (1, NULL), (2, 1), (3, 2) 형태 — 두 번째 컬럼이 '직전 행의 COL1 값' 임을 의미. LAG 는 이전 행의 값을 반환하며 첫 행은 NULL. ② LEAD 는 다음 행 값이라 (1, 2), (2, 3), (3, NULL) 가 되어 반대. ③ ROW_NUMBER 는 1, 2, 3 (NULL 없음). ④ RANK 도 동일하게 1, 2, 3. 정답 ① LAG.",

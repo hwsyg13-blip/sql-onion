@@ -50,10 +50,19 @@
         {
           "type": "table",
           "caption": "직원 테이블 (제1정규화 전)",
-          "headers": ["부서코드", "직원명"],
+          "headers": [
+            "부서코드",
+            "직원명"
+          ],
           "rows": [
-            ["D10", "홍길동, 이순신"],
-            ["D20", "강감찬"]
+            [
+              "D10",
+              "홍길동, 이순신"
+            ],
+            [
+              "D20",
+              "강감찬"
+            ]
           ]
         }
       ]
@@ -234,10 +243,10 @@
       "number": 12,
       "title": "아래 SUBSTR 함수 실행 결과 중 나머지와 다른 것은?",
       "options": [
-        "`SUBSTR('abcdefgh', 7)`",
-        "`SUBSTR('abcdefgh', -2)`",
-        "`SUBSTR('abcdefgh', 8, -2)`",
-        "`SUBSTR('abcdefgh', INSTR('abcdefgh', 'g'), 2)`"
+        "SUBSTR('abcdefgh', 7)",
+        "SUBSTR('abcdefgh', -2)",
+        "SUBSTR('abcdefgh', 8, -2)",
+        "SUBSTR('abcdefgh', INSTR('abcdefgh', 'g'), 2)"
       ],
       "correctIndex": 2,
       "explanation": "① `SUBSTR('abcdefgh', 7)` = 7번째 문자부터 끝까지 = 'gh'. ② `SUBSTR('abcdefgh', -2)` = 끝에서 2번째부터 = 'gh'. ④ `INSTR('abcdefgh', 'g')` = 7 → `SUBSTR('abcdefgh', 7, 2)` = 'gh'. 모두 'gh' 반환. ③ 만 길이에 음수(-2) 지정되어 Oracle 에서는 NULL 을 반환하므로 결과가 다르다.",
@@ -318,10 +327,10 @@
       "number": 18,
       "title": "아래 두 테이블 A, B 에 대한 네 개의 SQL 중 결과가 나머지와 다른 것은?",
       "options": [
-        "`SELECT * FROM A WHERE A.V <> (SELECT V FROM B);`",
-        "`SELECT * FROM A MINUS SELECT * FROM B;`",
-        "`SELECT * FROM A WHERE A.V NOT IN (SELECT V FROM B);`",
-        "`SELECT * FROM A WHERE NOT EXISTS (SELECT 1 FROM B WHERE B.V = A.V);`"
+        "SELECT * FROM A WHERE A.V <> (SELECT V FROM B);",
+        "SELECT * FROM A MINUS SELECT * FROM B;",
+        "SELECT * FROM A WHERE A.V NOT IN (SELECT V FROM B);",
+        "SELECT * FROM A WHERE NOT EXISTS (SELECT 1 FROM B WHERE B.V = A.V);"
       ],
       "correctIndex": 0,
       "explanation": "②③④ 는 모두 \"A 에는 있지만 B 에는 없는\" V 를 반환 = {1}. ① `<>` 는 단일 값 비교 연산자이므로 서브쿼리가 다중 행(2, 3, 4) 을 반환하면 ORA-01427 오류 발생. 결과가 다른 것은 ①.",
@@ -329,14 +338,38 @@
         {
           "type": "table",
           "caption": "A 테이블",
-          "headers": ["V"],
-          "rows": [["1"], ["2"], ["3"]]
+          "headers": [
+            "V"
+          ],
+          "rows": [
+            [
+              "1"
+            ],
+            [
+              "2"
+            ],
+            [
+              "3"
+            ]
+          ]
         },
         {
           "type": "table",
           "caption": "B 테이블",
-          "headers": ["V"],
-          "rows": [["2"], ["3"], ["4"]]
+          "headers": [
+            "V"
+          ],
+          "rows": [
+            [
+              "2"
+            ],
+            [
+              "3"
+            ],
+            [
+              "4"
+            ]
+          ]
         }
       ]
     },
@@ -427,11 +460,27 @@
         {
           "type": "table",
           "caption": "부서 테이블",
-          "headers": ["부서", "상위", "부서명"],
+          "headers": [
+            "부서",
+            "상위",
+            "부서명"
+          ],
           "rows": [
-            ["1", "(NULL)", "본사"],
-            ["10", "1", "지역본부"],
-            ["100", "10", "팀A"]
+            [
+              "1",
+              "(NULL)",
+              "본사"
+            ],
+            [
+              "10",
+              "1",
+              "지역본부"
+            ],
+            [
+              "100",
+              "10",
+              "팀A"
+            ]
           ]
         },
         {
@@ -445,10 +494,10 @@
       "number": 23,
       "title": "아래 EMP 테이블에 대한 SQL 의 빈칸에 들어갈 조건으로 가장 적절한 것은?",
       "options": [
-        "`ORDER BY AVG(SAL) > ANY (SELECT AVG(SAL) FROM EMP GROUP BY DEPTNO)`",
-        "`ORDER BY AVG(SAL) > ALL (SELECT AVG(SAL) FROM EMP GROUP BY DEPTNO)`",
-        "`HAVING AVG(SAL) > ANY (SELECT AVG(SAL) FROM EMP GROUP BY DEPTNO)`",
-        "`HAVING AVG(SAL) > ALL (SELECT AVG(SAL) FROM EMP GROUP BY DEPTNO)`"
+        "ORDER BY AVG(SAL) > ANY (SELECT AVG(SAL) FROM EMP GROUP BY DEPTNO)",
+        "ORDER BY AVG(SAL) > ALL (SELECT AVG(SAL) FROM EMP GROUP BY DEPTNO)",
+        "HAVING AVG(SAL) > ANY (SELECT AVG(SAL) FROM EMP GROUP BY DEPTNO)",
+        "HAVING AVG(SAL) > ALL (SELECT AVG(SAL) FROM EMP GROUP BY DEPTNO)"
       ],
       "correctIndex": 3,
       "explanation": "\"모든 부서의 평균 급여보다 많이 받는\" 조건은 그룹 단위 필터라 `HAVING` 이 필요하고 (정렬용 ORDER BY 가 아님), \"모든 부서 평균보다 큼\" = `> ALL (각 부서별 AVG)` 이므로 ④ `HAVING AVG(SAL) > ALL (...)` 이 정답이다. ①·② 는 절 자체가 ORDER BY 라 필터 기능이 없고, ③ ANY 는 최소 기준(어떤 하나보다만 크면 됨)이라 \"모든 평균보다 큼\" 의 의미와 다르다.",
@@ -456,12 +505,32 @@
         {
           "type": "table",
           "caption": "EMP 테이블",
-          "headers": ["EMPNO", "DEPTNO", "SAL"],
+          "headers": [
+            "EMPNO",
+            "DEPTNO",
+            "SAL"
+          ],
           "rows": [
-            ["1", "10", "3000"],
-            ["2", "10", "5000"],
-            ["3", "20", "2500"],
-            ["4", "20", "4500"]
+            [
+              "1",
+              "10",
+              "3000"
+            ],
+            [
+              "2",
+              "10",
+              "5000"
+            ],
+            [
+              "3",
+              "20",
+              "2500"
+            ],
+            [
+              "4",
+              "20",
+              "4500"
+            ]
           ]
         },
         {
@@ -561,15 +630,31 @@
         {
           "type": "table",
           "caption": "요일테이블",
-          "headers": ["요일"],
+          "headers": [
+            "요일"
+          ],
           "rows": [
-            ["Monday"],
-            ["Tuesday"],
-            ["Wednesday"],
-            ["Thursday"],
-            ["Friday"],
-            ["Saturday"],
-            ["Sunday"]
+            [
+              "Monday"
+            ],
+            [
+              "Tuesday"
+            ],
+            [
+              "Wednesday"
+            ],
+            [
+              "Thursday"
+            ],
+            [
+              "Friday"
+            ],
+            [
+              "Saturday"
+            ],
+            [
+              "Sunday"
+            ]
           ]
         },
         {
@@ -646,14 +731,44 @@
         {
           "type": "table",
           "caption": "TAB1 테이블",
-          "headers": ["V"],
-          "rows": [["A"], ["B"], ["C"], ["G"]]
+          "headers": [
+            "V"
+          ],
+          "rows": [
+            [
+              "A"
+            ],
+            [
+              "B"
+            ],
+            [
+              "C"
+            ],
+            [
+              "G"
+            ]
+          ]
         },
         {
           "type": "table",
           "caption": "TAB2 테이블",
-          "headers": ["V"],
-          "rows": [["E"], ["F"], ["D"], ["G"]]
+          "headers": [
+            "V"
+          ],
+          "rows": [
+            [
+              "E"
+            ],
+            [
+              "F"
+            ],
+            [
+              "D"
+            ],
+            [
+              "G"
+            ]
+          ]
         }
       ]
     },
@@ -686,8 +801,20 @@
         {
           "type": "table",
           "caption": "TBL 테이블",
-          "headers": ["COL"],
-          "rows": [["A"], ["B"], ["C"]]
+          "headers": [
+            "COL"
+          ],
+          "rows": [
+            [
+              "A"
+            ],
+            [
+              "B"
+            ],
+            [
+              "C"
+            ]
+          ]
         },
         {
           "type": "sql",
@@ -755,10 +882,10 @@
       "number": 38,
       "title": "아래 NAME 테이블에서 결과가 (Kim, Tim) 으로 나오도록 LIKE 조건을 설정한 것은? (SQL Server)",
       "options": [
-        "`WHERE name LIKE '_im'`",
-        "`WHERE name LIKE '%im'`",
-        "`WHERE name LIKE '[JK]im'`",
-        "`WHERE name LIKE '[KT]im'`"
+        "WHERE name LIKE '_im'",
+        "WHERE name LIKE '%im'",
+        "WHERE name LIKE '[JK]im'",
+        "WHERE name LIKE '[KT]im'"
       ],
       "correctIndex": 3,
       "explanation": "SQL Server LIKE 의 문자 클래스 `[KT]` 는 \"K 또는 T 한 글자\" 를 의미. ④ `[KT]im` 은 Kim 과 Tim 만 매칭. ① `_im` 은 임의 한 글자 + im 이라 Jim/Kim/Tim 모두 매칭. ② `%im` 도 모두 매칭. ③ `[JK]im` 은 Jim/Kim 매칭 (Tim 누락).",
@@ -766,8 +893,20 @@
         {
           "type": "table",
           "caption": "NAME 테이블",
-          "headers": ["name"],
-          "rows": [["Jim"], ["Kim"], ["Tim"]]
+          "headers": [
+            "name"
+          ],
+          "rows": [
+            [
+              "Jim"
+            ],
+            [
+              "Kim"
+            ],
+            [
+              "Tim"
+            ]
+          ]
         },
         {
           "type": "sql",
@@ -776,8 +915,17 @@
         {
           "type": "table",
           "caption": "기대 결과",
-          "headers": ["name"],
-          "rows": [["Kim"], ["Tim"]]
+          "headers": [
+            "name"
+          ],
+          "rows": [
+            [
+              "Kim"
+            ],
+            [
+              "Tim"
+            ]
+          ]
         }
       ]
     },
@@ -816,13 +964,31 @@
         {
           "type": "table",
           "caption": "사원 테이블",
-          "headers": ["사원", "급여"],
+          "headers": [
+            "사원",
+            "급여"
+          ],
           "rows": [
-            ["A", "1,100"],
-            ["B", "1,200"],
-            ["C", "1,300"],
-            ["D", "1,400"],
-            ["E", "1,500"]
+            [
+              "A",
+              "1,100"
+            ],
+            [
+              "B",
+              "1,200"
+            ],
+            [
+              "C",
+              "1,300"
+            ],
+            [
+              "D",
+              "1,400"
+            ],
+            [
+              "E",
+              "1,500"
+            ]
           ]
         },
         {
@@ -847,18 +1013,42 @@
         {
           "type": "table",
           "caption": "TUTOR 테이블",
-          "headers": ["ID"],
-          "rows": [["T1"], ["T2"]]
+          "headers": [
+            "ID"
+          ],
+          "rows": [
+            [
+              "T1"
+            ],
+            [
+              "T2"
+            ]
+          ]
         },
         {
           "type": "table",
           "caption": "CLASS 테이블",
-          "headers": ["NAME", "TUTOR_ID"],
+          "headers": [
+            "NAME",
+            "TUTOR_ID"
+          ],
           "rows": [
-            ["수학", "T1"],
-            ["영어", "T2"],
-            ["과학", "T3"],
-            ["역사", "T4"]
+            [
+              "수학",
+              "T1"
+            ],
+            [
+              "영어",
+              "T2"
+            ],
+            [
+              "과학",
+              "T3"
+            ],
+            [
+              "역사",
+              "T4"
+            ]
           ]
         },
         {
@@ -987,11 +1177,27 @@
         {
           "type": "table",
           "caption": "결과 (집계 연산 출력)",
-          "headers": ["DEPT", "JOB", "SUM(SAL)"],
+          "headers": [
+            "DEPT",
+            "JOB",
+            "SUM(SAL)"
+          ],
           "rows": [
-            ["10", "CLERK", "1000"],
-            ["10", "(NULL)", "2000"],
-            ["(NULL)", "(NULL)", "5000"]
+            [
+              "10",
+              "CLERK",
+              "1000"
+            ],
+            [
+              "10",
+              "(NULL)",
+              "2000"
+            ],
+            [
+              "(NULL)",
+              "(NULL)",
+              "5000"
+            ]
           ]
         }
       ]
@@ -1052,11 +1258,27 @@
         {
           "type": "table",
           "caption": "EMP 테이블",
-          "headers": ["EMPNO", "JOB", "DEPT"],
+          "headers": [
+            "EMPNO",
+            "JOB",
+            "DEPT"
+          ],
           "rows": [
-            ["1", "CLERK", "10"],
-            ["2", "MGR", "10"],
-            ["3", "CLERK", "20"]
+            [
+              "1",
+              "CLERK",
+              "10"
+            ],
+            [
+              "2",
+              "MGR",
+              "10"
+            ],
+            [
+              "3",
+              "CLERK",
+              "20"
+            ]
           ]
         },
         {
@@ -1081,13 +1303,31 @@
         {
           "type": "table",
           "caption": "회원 테이블",
-          "headers": ["ID", "NAME"],
+          "headers": [
+            "ID",
+            "NAME"
+          ],
           "rows": [
-            ["1", "홍길동"],
-            ["2", "김철수"],
-            ["3", "홍길동"],
-            ["4", "홍길동"],
-            ["5", "김철수"]
+            [
+              "1",
+              "홍길동"
+            ],
+            [
+              "2",
+              "김철수"
+            ],
+            [
+              "3",
+              "홍길동"
+            ],
+            [
+              "4",
+              "홍길동"
+            ],
+            [
+              "5",
+              "김철수"
+            ]
           ]
         },
         {
@@ -1097,10 +1337,19 @@
         {
           "type": "table",
           "caption": "삭제 후 회원 테이블",
-          "headers": ["ID", "NAME"],
+          "headers": [
+            "ID",
+            "NAME"
+          ],
           "rows": [
-            ["1", "홍길동"],
-            ["2", "김철수"]
+            [
+              "1",
+              "홍길동"
+            ],
+            [
+              "2",
+              "김철수"
+            ]
           ]
         }
       ]
@@ -1140,11 +1389,27 @@
         {
           "type": "table",
           "caption": "EMP 테이블",
-          "headers": ["DEPT", "JOB", "SAL"],
+          "headers": [
+            "DEPT",
+            "JOB",
+            "SAL"
+          ],
           "rows": [
-            ["10", "MGR", "5000"],
-            ["10", "CLERK", "2000"],
-            ["20", "MGR", "4500"]
+            [
+              "10",
+              "MGR",
+              "5000"
+            ],
+            [
+              "10",
+              "CLERK",
+              "2000"
+            ],
+            [
+              "20",
+              "MGR",
+              "4500"
+            ]
           ]
         },
         {
