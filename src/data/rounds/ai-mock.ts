@@ -1,5 +1,5 @@
 // Auto-generated from scripts/authored/ai-mock.json
-// AI 생성 모의고사 풀 (기출 변형) · 51문항
+// AI 생성 모의고사 풀 (기출 변형) · 101문항
 // ⚠ 직접 편집 금지. ai-mock.json 수정 후 'node scripts/build-quiz-bank.mjs' 재실행.
 import type { QuizQuestion } from '../quizBank';
 
@@ -7,7 +7,7 @@ export const AI_MOCK: QuizQuestion[] = [
   {
     "id": 10800,
     "examSetId": "ai-mock",
-    "examLabel": "기출 변형 (AI 모의)",
+    "examLabel": "모의고사",
     "subject": "2과목",
     "number": 1,
     "title": "다음 중 부서(DEPT) 테이블과 사원(EMP) 테이블을 조인하는 쿼리 결과에 대한 설명으로 올바른 것은 무엇인가?",
@@ -38,7 +38,7 @@ export const AI_MOCK: QuizQuestion[] = [
   {
     "id": 10801,
     "examSetId": "ai-mock",
-    "examLabel": "기출 변형 (AI 모의)",
+    "examLabel": "모의고사",
     "subject": "2과목",
     "number": 2,
     "title": "다음 중 다중 행 서브쿼리와 관련된 쿼리 중 결과가 0건(Empty Set)으로 출력될 가능성이 있는 쿼리는 무엇인가? (단, T1과 T2 테이블에는 각각 10건의 데이터가 존재한다.)",
@@ -57,7 +57,7 @@ export const AI_MOCK: QuizQuestion[] = [
   {
     "id": 10802,
     "examSetId": "ai-mock",
-    "examLabel": "기출 변형 (AI 모의)",
+    "examLabel": "모의고사",
     "subject": "2과목",
     "number": 3,
     "title": "계층형 질의(Hierarchical Query)에 대한 다음 설명 중 가장 거리가 먼 것은?",
@@ -76,7 +76,7 @@ export const AI_MOCK: QuizQuestion[] = [
   {
     "id": 10803,
     "examSetId": "ai-mock",
-    "examLabel": "기출 변형 (AI 모의)",
+    "examLabel": "모의고사",
     "subject": "2과목",
     "number": 4,
     "title": "다음 중 그룹 함수(Group Function)에 대한 설명으로 틀린 것은?",
@@ -95,7 +95,7 @@ export const AI_MOCK: QuizQuestion[] = [
   {
     "id": 10804,
     "examSetId": "ai-mock",
-    "examLabel": "기출 변형 (AI 모의)",
+    "examLabel": "모의고사",
     "subject": "2과목",
     "number": 5,
     "title": "다음 SQL의 실행 결과를 예측한 것으로 올바른 것은?",
@@ -120,7 +120,7 @@ export const AI_MOCK: QuizQuestion[] = [
   {
     "id": 10805,
     "examSetId": "ai-mock",
-    "examLabel": "기출 변형 (AI 모의)",
+    "examLabel": "모의고사",
     "subject": "2과목",
     "number": 6,
     "title": "윈도우 함수(Window Function)에 대한 설명으로 가장 적절하지 않은 것은?",
@@ -139,7 +139,7 @@ export const AI_MOCK: QuizQuestion[] = [
   {
     "id": 10806,
     "examSetId": "ai-mock",
-    "examLabel": "기출 변형 (AI 모의)",
+    "examLabel": "모의고사",
     "subject": "2과목",
     "number": 7,
     "title": "집합 연산자(Set Operator)를 사용한 쿼리의 특징으로 옳지 않은 것은?",
@@ -158,7 +158,7 @@ export const AI_MOCK: QuizQuestion[] = [
   {
     "id": 10807,
     "examSetId": "ai-mock",
-    "examLabel": "기출 변형 (AI 모의)",
+    "examLabel": "모의고사",
     "subject": "2과목",
     "number": 8,
     "title": "MERGE 구문에 대한 다음 설명 중 가장 부적절한 것은?",
@@ -177,7 +177,7 @@ export const AI_MOCK: QuizQuestion[] = [
   {
     "id": 10808,
     "examSetId": "ai-mock",
-    "examLabel": "기출 변형 (AI 모의)",
+    "examLabel": "모의고사",
     "subject": "2과목",
     "number": 9,
     "title": "계층형 질의에서 순방향 전개(Top-Down)를 수행하기 위한 CONNECT BY 절의 올바른 조건은 무엇인가? (단, 부모 컬럼은 PARENT_ID, 자식 컬럼은 CHILD_ID이다.)",
@@ -196,7 +196,7 @@ export const AI_MOCK: QuizQuestion[] = [
   {
     "id": 10809,
     "examSetId": "ai-mock",
-    "examLabel": "기출 변형 (AI 모의)",
+    "examLabel": "모의고사",
     "subject": "2과목",
     "number": 10,
     "title": "계층형 질의의 가상 컬럼인 CONNECT_BY_ISLEAF가 반환하는 값의 의미로 올바른 것은?",
@@ -215,7 +215,7 @@ export const AI_MOCK: QuizQuestion[] = [
   {
     "id": 10810,
     "examSetId": "ai-mock",
-    "examLabel": "기출 변형 (AI 모의)",
+    "examLabel": "모의고사",
     "subject": "2과목",
     "number": 11,
     "title": "다음 중 서브쿼리 결과에 NULL이 포함되어 있을 때, 메인 쿼리의 결과가 항상 0건(Empty)이 되는 연산자는 무엇인가?",
@@ -234,7 +234,7 @@ export const AI_MOCK: QuizQuestion[] = [
   {
     "id": 10811,
     "examSetId": "ai-mock",
-    "examLabel": "기출 변형 (AI 모의)",
+    "examLabel": "모의고사",
     "subject": "2과목",
     "number": 12,
     "title": "GROUPING SETS(A, B, C)를 사용하여 집계를 수행할 때, 생성되는 그룹핑 결과의 조합 수는?",
@@ -253,7 +253,7 @@ export const AI_MOCK: QuizQuestion[] = [
   {
     "id": 10812,
     "examSetId": "ai-mock",
-    "examLabel": "기출 변형 (AI 모의)",
+    "examLabel": "모의고사",
     "subject": "2과목",
     "number": 13,
     "title": "다음 중 NULLIF(A, B) 함수의 올바른 동작을 설명한 것은?",
@@ -272,7 +272,7 @@ export const AI_MOCK: QuizQuestion[] = [
   {
     "id": 10813,
     "examSetId": "ai-mock",
-    "examLabel": "기출 변형 (AI 모의)",
+    "examLabel": "모의고사",
     "subject": "2과목",
     "number": 14,
     "title": "윈도우 함수 중 동일한 값에 대해 같은 순위를 부여하고, 중복된 순위만큼 다음 순위를 건너뛰어 부여하는 함수는? (예: 1등, 1등, 3등)",
@@ -291,7 +291,7 @@ export const AI_MOCK: QuizQuestion[] = [
   {
     "id": 10814,
     "examSetId": "ai-mock",
-    "examLabel": "기출 변형 (AI 모의)",
+    "examLabel": "모의고사",
     "subject": "2과목",
     "number": 15,
     "title": "집합 연산자 MINUS(또는 EXCEPT)에 대한 설명으로 틀린 것은?",
@@ -310,7 +310,7 @@ export const AI_MOCK: QuizQuestion[] = [
   {
     "id": 10815,
     "examSetId": "ai-mock",
-    "examLabel": "기출 변형 (AI 모의)",
+    "examLabel": "모의고사",
     "subject": "2과목",
     "number": 16,
     "title": "MERGE 구문의 특징으로 가장 올바른 것은?",
@@ -329,7 +329,7 @@ export const AI_MOCK: QuizQuestion[] = [
   {
     "id": 10816,
     "examSetId": "ai-mock",
-    "examLabel": "기출 변형 (AI 모의)",
+    "examLabel": "모의고사",
     "subject": "2과목",
     "number": 17,
     "title": "윈도우 함수에서 누적 합계를 구할 때 사용하는 프레임(Frame) 지정 구문 중, 현재 파티션의 첫 번째 행부터 현재 행까지를 의미하는 올바른 구문은?",
@@ -348,7 +348,7 @@ export const AI_MOCK: QuizQuestion[] = [
   {
     "id": 10817,
     "examSetId": "ai-mock",
-    "examLabel": "기출 변형 (AI 모의)",
+    "examLabel": "모의고사",
     "subject": "2과목",
     "number": 18,
     "title": "NATURAL JOIN 사용 시 지켜야 할 문법적 제약 사항으로 올바른 것은?",
@@ -367,7 +367,7 @@ export const AI_MOCK: QuizQuestion[] = [
   {
     "id": 10818,
     "examSetId": "ai-mock",
-    "examLabel": "기출 변형 (AI 모의)",
+    "examLabel": "모의고사",
     "subject": "2과목",
     "number": 19,
     "title": "단일 행 서브쿼리(Single Row Subquery)에 대한 설명으로 틀린 것은?",
@@ -386,7 +386,7 @@ export const AI_MOCK: QuizQuestion[] = [
   {
     "id": 10819,
     "examSetId": "ai-mock",
-    "examLabel": "기출 변형 (AI 모의)",
+    "examLabel": "모의고사",
     "subject": "2과목",
     "number": 20,
     "title": "ROLLUP 함수와 그룹화 묶음 개수에 대한 규칙으로 옳은 것은? (단, n은 ROLLUP에 인자로 지정된 컬럼의 개수이다.)",
@@ -405,7 +405,7 @@ export const AI_MOCK: QuizQuestion[] = [
   {
     "id": 10820,
     "examSetId": "ai-mock",
-    "examLabel": "기출 변형 (AI 모의)",
+    "examLabel": "모의고사",
     "subject": "2과목",
     "number": 21,
     "title": "다음 함수 중 성격이 다른 하나는 무엇인가?",
@@ -424,7 +424,7 @@ export const AI_MOCK: QuizQuestion[] = [
   {
     "id": 10821,
     "examSetId": "ai-mock",
-    "examLabel": "기출 변형 (AI 모의)",
+    "examLabel": "모의고사",
     "subject": "2과목",
     "number": 22,
     "title": "다중 컬럼 서브쿼리(Multi-Column Subquery)에 대한 설명 중 적절하지 않은 것은?",
@@ -443,7 +443,7 @@ export const AI_MOCK: QuizQuestion[] = [
   {
     "id": 10822,
     "examSetId": "ai-mock",
-    "examLabel": "기출 변형 (AI 모의)",
+    "examLabel": "모의고사",
     "subject": "2과목",
     "number": 23,
     "title": "스칼라 서브쿼리(Scalar Subquery)의 특징으로 가장 올바른 것은?",
@@ -462,7 +462,7 @@ export const AI_MOCK: QuizQuestion[] = [
   {
     "id": 10823,
     "examSetId": "ai-mock",
-    "examLabel": "기출 변형 (AI 모의)",
+    "examLabel": "모의고사",
     "subject": "2과목",
     "number": 24,
     "title": "뷰(View)에 대한 설명으로 가장 거리가 먼 것은?",
@@ -481,7 +481,7 @@ export const AI_MOCK: QuizQuestion[] = [
   {
     "id": 10824,
     "examSetId": "ai-mock",
-    "examLabel": "기출 변형 (AI 모의)",
+    "examLabel": "모의고사",
     "subject": "2과목",
     "number": 25,
     "title": "트랜잭션의 격리성(Isolation) 수준에 대한 설명 중 현상과 문제점의 연결이 틀린 것은?",
@@ -500,7 +500,7 @@ export const AI_MOCK: QuizQuestion[] = [
   {
     "id": 10825,
     "examSetId": "ai-mock",
-    "examLabel": "기출 변형 (AI 모의)",
+    "examLabel": "모의고사",
     "subject": "2과목",
     "number": 26,
     "title": "다음 중 DDL(Data Definition Language) 명령어 수행 시 발생하는 트랜잭션의 특징으로 올바른 것은?",
@@ -519,7 +519,7 @@ export const AI_MOCK: QuizQuestion[] = [
   {
     "id": 10826,
     "examSetId": "ai-mock",
-    "examLabel": "기출 변형 (AI 모의)",
+    "examLabel": "모의고사",
     "subject": "2과목",
     "number": 27,
     "title": "TRUNCATE TABLE 명령어와 DELETE 명령어의 차이점을 설명한 것으로 가장 부적절한 것은?",
@@ -538,7 +538,7 @@ export const AI_MOCK: QuizQuestion[] = [
   {
     "id": 10827,
     "examSetId": "ai-mock",
-    "examLabel": "기출 변형 (AI 모의)",
+    "examLabel": "모의고사",
     "subject": "1과목",
     "number": 28,
     "title": "관계형 데이터베이스의 정규화(Normalization)에 대한 설명으로 틀린 것은?",
@@ -557,7 +557,7 @@ export const AI_MOCK: QuizQuestion[] = [
   {
     "id": 10828,
     "examSetId": "ai-mock",
-    "examLabel": "기출 변형 (AI 모의)",
+    "examLabel": "모의고사",
     "subject": "1과목",
     "number": 29,
     "title": "데이터베이스 설계 중 반정규화(De-normalization)를 수행하는 주요 목적으로 가장 거리가 먼 것은?",
@@ -576,7 +576,7 @@ export const AI_MOCK: QuizQuestion[] = [
   {
     "id": 10829,
     "examSetId": "ai-mock",
-    "examLabel": "기출 변형 (AI 모의)",
+    "examLabel": "모의고사",
     "subject": "2과목",
     "number": 30,
     "title": "다음 제약조건(Constraint) 중 테이블의 특정 컬럼에 NULL 값이 들어가는 것은 허용하되, 입력되는 값들은 서로 중복되지 않아야 함을 보장하는 것은?",
@@ -595,7 +595,7 @@ export const AI_MOCK: QuizQuestion[] = [
   {
     "id": 10830,
     "examSetId": "ai-mock",
-    "examLabel": "기출 변형 (AI 모의)",
+    "examLabel": "모의고사",
     "subject": "2과목",
     "number": 31,
     "title": "다음 SQL 실행 결과에 대한 설명으로 올바른 것은? (단, TAB1에는 총 10건의 데이터가 있으며 COL1이 NULL인 행이 2건 있다.)",
@@ -620,7 +620,7 @@ export const AI_MOCK: QuizQuestion[] = [
   {
     "id": 10831,
     "examSetId": "ai-mock",
-    "examLabel": "기출 변형 (AI 모의)",
+    "examLabel": "모의고사",
     "subject": "2과목",
     "number": 32,
     "title": "서브쿼리 내부에 ORDER BY 절을 사용할 수 없는 쿼리의 형태는?",
@@ -639,7 +639,7 @@ export const AI_MOCK: QuizQuestion[] = [
   {
     "id": 10832,
     "examSetId": "ai-mock",
-    "examLabel": "기출 변형 (AI 모의)",
+    "examLabel": "모의고사",
     "subject": "2과목",
     "number": 33,
     "title": "상관 서브쿼리(Correlated Subquery)에 대한 설명으로 가장 정확한 것은?",
@@ -658,7 +658,7 @@ export const AI_MOCK: QuizQuestion[] = [
   {
     "id": 10833,
     "examSetId": "ai-mock",
-    "examLabel": "기출 변형 (AI 모의)",
+    "examLabel": "모의고사",
     "subject": "2과목",
     "number": 34,
     "title": "오라클(Oracle) DBMS에서 시퀀스(Sequence)를 사용할 때 발생하는 현상으로 틀린 것은?",
@@ -677,7 +677,7 @@ export const AI_MOCK: QuizQuestion[] = [
   {
     "id": 10834,
     "examSetId": "ai-mock",
-    "examLabel": "기출 변형 (AI 모의)",
+    "examLabel": "모의고사",
     "subject": "1과목",
     "number": 35,
     "title": "다음 중 트랜잭션의 특성(ACID)에 대한 설명이 올바르게 짝지어진 것은?",
@@ -696,7 +696,7 @@ export const AI_MOCK: QuizQuestion[] = [
   {
     "id": 10835,
     "examSetId": "ai-mock",
-    "examLabel": "기출 변형 (AI 모의)",
+    "examLabel": "모의고사",
     "subject": "2과목",
     "number": 36,
     "title": "다음 중 다중 행 서브쿼리와 연산자에 대한 설명으로 가장 올바른 것은?",
@@ -721,7 +721,7 @@ export const AI_MOCK: QuizQuestion[] = [
   {
     "id": 10836,
     "examSetId": "ai-mock",
-    "examLabel": "기출 변형 (AI 모의)",
+    "examLabel": "모의고사",
     "subject": "2과목",
     "number": 37,
     "title": "다음 계층형 질의(Hierarchical Query)에 대한 설명 중 틀린 것은?",
@@ -740,7 +740,7 @@ export const AI_MOCK: QuizQuestion[] = [
   {
     "id": 10837,
     "examSetId": "ai-mock",
-    "examLabel": "기출 변형 (AI 모의)",
+    "examLabel": "모의고사",
     "subject": "2과목",
     "number": 38,
     "title": "다음 윈도우 함수의 프레임(Frame) 지정 방식 중 그 결과가 나머지 셋과 다를 가능성이 가장 높은 것은? (단, SALARY 컬럼에는 중복된 값이 존재하며 오름차순 정렬한다.)",
@@ -759,7 +759,7 @@ export const AI_MOCK: QuizQuestion[] = [
   {
     "id": 10838,
     "examSetId": "ai-mock",
-    "examLabel": "기출 변형 (AI 모의)",
+    "examLabel": "모의고사",
     "subject": "2과목",
     "number": 39,
     "title": "다음 중 GROUPING_ID 함수에 대한 설명으로 가장 적절한 것은?",
@@ -778,7 +778,7 @@ export const AI_MOCK: QuizQuestion[] = [
   {
     "id": 10839,
     "examSetId": "ai-mock",
-    "examLabel": "기출 변형 (AI 모의)",
+    "examLabel": "모의고사",
     "subject": "2과목",
     "number": 40,
     "title": "스칼라 서브쿼리(Scalar Subquery) 실행 시 런타임 오류(에러)가 발생하는 경우는?",
@@ -797,7 +797,7 @@ export const AI_MOCK: QuizQuestion[] = [
   {
     "id": 10840,
     "examSetId": "ai-mock",
-    "examLabel": "기출 변형 (AI 모의)",
+    "examLabel": "모의고사",
     "subject": "2과목",
     "number": 41,
     "title": "집합 연산자(Set Operator) UNION과 UNION ALL의 차이점에 대한 설명으로 올바른 것은?",
@@ -816,7 +816,7 @@ export const AI_MOCK: QuizQuestion[] = [
   {
     "id": 10841,
     "examSetId": "ai-mock",
-    "examLabel": "기출 변형 (AI 모의)",
+    "examLabel": "모의고사",
     "subject": "2과목",
     "number": 42,
     "title": "NULL 데이터가 포함된 그룹 함수 연산의 결과에 대한 설명으로 틀린 것은? (단, T1 테이블의 COL1 값은 [10, 20, NULL, 30] 이다.)",
@@ -835,7 +835,7 @@ export const AI_MOCK: QuizQuestion[] = [
   {
     "id": 10842,
     "examSetId": "ai-mock",
-    "examLabel": "기출 변형 (AI 모의)",
+    "examLabel": "모의고사",
     "subject": "2과목",
     "number": 43,
     "title": "NATURAL JOIN에 대한 설명으로 가장 거리가 먼 것은?",
@@ -854,7 +854,7 @@ export const AI_MOCK: QuizQuestion[] = [
   {
     "id": 10843,
     "examSetId": "ai-mock",
-    "examLabel": "기출 변형 (AI 모의)",
+    "examLabel": "모의고사",
     "subject": "2과목",
     "number": 44,
     "title": "다음 중 MERGE 구문의 특징으로 틀린 것은?",
@@ -873,7 +873,7 @@ export const AI_MOCK: QuizQuestion[] = [
   {
     "id": 10844,
     "examSetId": "ai-mock",
-    "examLabel": "기출 변형 (AI 모의)",
+    "examLabel": "모의고사",
     "subject": "2과목",
     "number": 45,
     "title": "TRUNCATE 명령어와 DELETE 명령어의 차이에 대한 설명으로 가장 적절하지 않은 것은?",
@@ -892,7 +892,7 @@ export const AI_MOCK: QuizQuestion[] = [
   {
     "id": 10845,
     "examSetId": "ai-mock",
-    "examLabel": "기출 변형 (AI 모의)",
+    "examLabel": "모의고사",
     "subject": "2과목",
     "number": 46,
     "title": "분석 함수 중 KEEP (DENSE_RANK FIRST/LAST ORDER BY ...) 구문의 용도로 올바른 것은?",
@@ -911,7 +911,7 @@ export const AI_MOCK: QuizQuestion[] = [
   {
     "id": 10846,
     "examSetId": "ai-mock",
-    "examLabel": "기출 변형 (AI 모의)",
+    "examLabel": "모의고사",
     "subject": "1과목",
     "number": 47,
     "title": "정규화(Normalization) 과정과 관련된 설명 중 틀린 것은?",
@@ -930,7 +930,7 @@ export const AI_MOCK: QuizQuestion[] = [
   {
     "id": 10847,
     "examSetId": "ai-mock",
-    "examLabel": "기출 변형 (AI 모의)",
+    "examLabel": "모의고사",
     "subject": "2과목",
     "number": 48,
     "title": "다음 중 NULL 값 처리를 위한 함수들의 결과 예측으로 틀린 것은? (모든 함수는 Oracle 기준)",
@@ -949,7 +949,7 @@ export const AI_MOCK: QuizQuestion[] = [
   {
     "id": 10848,
     "examSetId": "ai-mock",
-    "examLabel": "기출 변형 (AI 모의)",
+    "examLabel": "모의고사",
     "subject": "2과목",
     "number": 49,
     "title": "다음 SQL 문의 실행 순서(Logical Processing Order)로 가장 올바른 것은?",
@@ -968,7 +968,7 @@ export const AI_MOCK: QuizQuestion[] = [
   {
     "id": 10849,
     "examSetId": "ai-mock",
-    "examLabel": "기출 변형 (AI 모의)",
+    "examLabel": "모의고사",
     "subject": "1과목",
     "number": 50,
     "title": "트랜잭션의 특징 중 일관성(Consistency)에 대한 설명으로 올바른 것은?",
@@ -987,7 +987,7 @@ export const AI_MOCK: QuizQuestion[] = [
   {
     "id": 10850,
     "examSetId": "ai-mock",
-    "examLabel": "기출 변형 (AI 모의)",
+    "examLabel": "모의고사",
     "subject": "2과목",
     "number": 51,
     "title": "UNIQUE 제약조건에 대한 설명 중 틀린 것은?",
@@ -1002,5 +1002,1767 @@ export const AI_MOCK: QuizQuestion[] = [
     "chapter": "DDL",
     "_source": "ai-mock",
     "_origId": "ai-mock-060"
+  },
+  {
+    "id": 10851,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 52,
+    "title": "다음의 PREV_SAL 은 어떤 윈도우 함수를 사용해야 하는가?",
+    "options": [
+      "LEAD",
+      "LAG",
+      "NTILE",
+      "LAST_VALUE"
+    ],
+    "correctIndex": 1,
+    "explanation": "LAG() 윈도우 함수는 이전 행의 몇 번째 행 값을 가지고 올 수 있다.",
+    "chapter": "윈도우 함수",
+    "_source": "cbt-mock",
+    "_origId": "cbt-001",
+    "_cbtPdf": "cbt1",
+    "_cbtPdfNumber": 1,
+    "references": [
+      {
+        "type": "table",
+        "caption": "결과 테이블",
+        "headers": [
+          "ENAME",
+          "HIREDATE",
+          "SAL",
+          "PREV_SAL"
+        ],
+        "rows": [
+          [
+            "ALLEN",
+            "20-FEB-81",
+            "1600",
+            ""
+          ],
+          [
+            "WARD",
+            "22-FEB-81",
+            "1250",
+            "1600"
+          ],
+          [
+            "TURNER",
+            "08-SEP-81",
+            "1500",
+            "1250"
+          ],
+          [
+            "MARTIN",
+            "28-SEP-81",
+            "1250",
+            "1500"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": 10852,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 53,
+    "title": "다음 SQL 실행 시, 최종 출력되는 결과로 가장 알맞은 것은?",
+    "options": [
+      "103",
+      "101, 104",
+      "102, 103",
+      "102, 103, 104"
+    ],
+    "correctIndex": 2,
+    "explanation": "TB_CUSTOMER 에서 CITY=SEOUL 인 CUST_ID 는 1, 4 이다. WHERE CUST_ID NOT IN (1, 4) 로 TB_ORDER 의 ORDER_ID 102, 103 이 출력된다.",
+    "chapter": "서브쿼리",
+    "_source": "cbt-mock",
+    "_origId": "cbt-002",
+    "_cbtPdf": "cbt1",
+    "_cbtPdfNumber": 2,
+    "references": [
+      {
+        "type": "table",
+        "caption": "[TB_CUSTOMER] 테이블",
+        "headers": [
+          "CUST_ID",
+          "NAME",
+          "CITY"
+        ],
+        "rows": [
+          [
+            "1",
+            "Kim",
+            "SEOUL"
+          ],
+          [
+            "2",
+            "Lee",
+            "BUSAN"
+          ],
+          [
+            "3",
+            "Park",
+            "INCHEON"
+          ],
+          [
+            "4",
+            "Choi",
+            "SEOUL"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "[TB_ORDER] 테이블",
+        "headers": [
+          "ORDER_ID",
+          "CUST_ID",
+          "AMOUNT"
+        ],
+        "rows": [
+          [
+            "101",
+            "1",
+            "1000"
+          ],
+          [
+            "102",
+            "2",
+            "2000"
+          ],
+          [
+            "103",
+            "3",
+            "3000"
+          ],
+          [
+            "104",
+            "4",
+            "4000"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT ORDER_ID\nFROM   TB_ORDER\nWHERE  CUST_ID NOT IN (\n  SELECT CUST_ID\n  FROM   TB_CUSTOMER\n  WHERE  CITY = 'SEOUL'\n);"
+      }
+    ]
+  },
+  {
+    "id": 10853,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 54,
+    "title": "다음 SQL 실행 시 최종 출력되는 결과로 가장 알맞은 것은?",
+    "options": [
+      "Pen",
+      "Pencil",
+      "Book",
+      "모두 출력"
+    ],
+    "correctIndex": 2,
+    "explanation": "WHERE 조건이 서브쿼리의 결과와 같은 데이터를 조회한다. 최고가 1000인 Book 만 조건에 부합.",
+    "chapter": "서브쿼리",
+    "_source": "cbt-mock",
+    "_origId": "cbt-003",
+    "_cbtPdf": "cbt1",
+    "_cbtPdfNumber": 3,
+    "references": [
+      {
+        "type": "table",
+        "caption": "[PRODUCTS] 테이블",
+        "headers": [
+          "NO",
+          "NAME",
+          "PRICE"
+        ],
+        "rows": [
+          [
+            "1",
+            "Pen",
+            "500"
+          ],
+          [
+            "2",
+            "Pencil",
+            "300"
+          ],
+          [
+            "3",
+            "Book",
+            "1000"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT NAME\nFROM   PRODUCTS\nWHERE  PRICE = (SELECT MAX(PRICE) FROM PRODUCTS);"
+      }
+    ]
+  },
+  {
+    "id": 10854,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 55,
+    "title": "두 개 릴레이션 Student 와 Department 가 있을 때, 질의문 \"SELECT * FROM Student s, Department d WHERE s.dept > 100;\" 을 수행하시오. 결과의 차수(Degree) 와 카디널리티(Cardinality) 는 얼마인가? (단, Student 는 5 개 속성, Department 는 3 개 속성을 가진다)",
+    "options": [
+      "차수 5, 카디널리티 3",
+      "차수 5, 카디널리티 2",
+      "차수 8, 카디널리티 9",
+      "차수 8, 카디널리티 3"
+    ],
+    "correctIndex": 2,
+    "explanation": "차수(Degree) 는 결과 컬럼 수 — Student 5 + Department 3 = 8. 카디널리티는 결과 행 수 — 조건 없는 카티션 곱 5×3=15 이지만 WHERE s.dept>100 으로 Student 측이 3 행으로 줄어 3×3=9 행이 된다.",
+    "chapter": "관계형 DB와 SELECT",
+    "_source": "cbt-mock",
+    "_origId": "cbt-004",
+    "_cbtPdf": "cbt1",
+    "_cbtPdfNumber": 4,
+    "references": [
+      {
+        "type": "table",
+        "caption": "[Student] 테이블 (5 행)",
+        "headers": [
+          "학번",
+          "이름",
+          "주소",
+          "점수",
+          "dept"
+        ],
+        "rows": [
+          [
+            "9802",
+            "홍길동",
+            "서울",
+            "90",
+            "100"
+          ],
+          [
+            "9802",
+            "김철수",
+            "인천",
+            "80",
+            "200"
+          ],
+          [
+            "9803",
+            "박지원",
+            "부산",
+            "80",
+            "100"
+          ],
+          [
+            "9804",
+            "이지원",
+            "인천",
+            "70",
+            "300"
+          ],
+          [
+            "9805",
+            "김지원",
+            "서울",
+            "75",
+            "100"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "[Department] 테이블 (3 행)",
+        "headers": [
+          "학과코드",
+          "학과명",
+          "학과위치"
+        ],
+        "rows": [
+          [
+            "100",
+            "전산",
+            "인천관"
+          ],
+          [
+            "200",
+            "영문",
+            "인문관"
+          ],
+          [
+            "300",
+            "수학",
+            "자연관"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": 10855,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 56,
+    "title": "다음 중 자신과 성별이 같은 부양가족을 가진 직원의 이름을 검색하는 질의를 SQL 로 적절하게 표현한 것은?",
+    "options": [
+      "SELECT E.이름 FROM 직원 AS E WHERE E.이름 LIKE (SELECT 이름 FROM 부양가족 WHERE E.사번 = 사번);",
+      "SELECT E.이름 FROM 직원 AS E WHERE NOT EXISTS (SELECT * FROM 부양가족 WHERE E.사번 = 사번);",
+      "SELECT E.이름 FROM 직원 AS E WHERE EXISTS (SELECT * FROM 부양가족 WHERE E.사번 = 사번 AND E.성별 = 성별);",
+      "SELECT E.이름 FROM 직원 AS E WHERE NOT EXISTS (SELECT * FROM 부양가족 WHERE E.사번 = 사번 AND E.성별 = 성별);"
+    ],
+    "correctIndex": 2,
+    "explanation": "EXISTS 와 상관 서브쿼리로 직원과 사번이 같고 성별도 같은 부양가족이 존재하는지 확인. ② NOT EXISTS 는 정반대 의미, ① LIKE 는 부적절, ④ NOT EXISTS 는 \"같은 성별 부양가족이 없는\" 직원 의미라 정반대.",
+    "chapter": "서브쿼리",
+    "_source": "cbt-mock",
+    "_origId": "cbt-005",
+    "_cbtPdf": "cbt1",
+    "_cbtPdfNumber": 5
+  },
+  {
+    "id": 10856,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 57,
+    "title": "다음 테이블과 SQL 을 기준으로 실행 결과가 올바른 것은?",
+    "options": [
+      "Kim, Lee, Park, Jang 4 행 (Kim/Park/Lee 순서)",
+      "Kim, Park, Lee, Jang 4 행 (정답 시나리오)",
+      "Kim, Lee, Park, Jang 4 행 (다른 순서)",
+      "Kim, Jang 2 행만"
+    ],
+    "correctIndex": 1,
+    "explanation": "AND 가 OR 보다 우선순위가 높으므로 GRADE='A' OR (GRADE='B' AND STATUS='ACTIVE') 로 평가된다. GRADE=A 인 Kim·Lee·Park 3 행 + GRADE=B AND STATUS=ACTIVE 인 Jang 1 행 = 총 4 행.",
+    "chapter": "WHERE",
+    "_source": "cbt-mock",
+    "_origId": "cbt-006",
+    "_cbtPdf": "cbt1",
+    "_cbtPdfNumber": 6,
+    "references": [
+      {
+        "type": "table",
+        "caption": "[TB_USER] 테이블",
+        "headers": [
+          "ID",
+          "NAME",
+          "GRADE",
+          "STATUS"
+        ],
+        "rows": [
+          [
+            "1",
+            "Kim",
+            "A",
+            "ACTIVE"
+          ],
+          [
+            "2",
+            "Lee",
+            "A",
+            "INACTIVE"
+          ],
+          [
+            "3",
+            "Park",
+            "A",
+            "INACTIVE"
+          ],
+          [
+            "4",
+            "Choi",
+            "C",
+            "ACTIVE"
+          ],
+          [
+            "5",
+            "Jang",
+            "B",
+            "ACTIVE"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT NAME, GRADE, STATUS\nFROM   TB_USER\nWHERE  GRADE = 'A' OR GRADE = 'B' AND STATUS = 'ACTIVE';"
+      }
+    ]
+  },
+  {
+    "id": 10857,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 58,
+    "title": "다음 SQL 실행 결과로 가장 알맞은 것은?",
+    "options": [
+      "3, 6000, 2000",
+      "4, 6000, 2000",
+      "3, 6000, 1500",
+      "3, NULL, 2000"
+    ],
+    "correctIndex": 0,
+    "explanation": "집계 함수는 NULL 을 무시한다. COUNT(SALARY) 는 NULL 제외 3, SUM(SALARY) = 1000+2000+3000 = 6000, AVG(SALARY) = 6000/3 = 2000.",
+    "chapter": "그룹 함수",
+    "_source": "cbt-mock",
+    "_origId": "cbt-007",
+    "_cbtPdf": "cbt1",
+    "_cbtPdfNumber": 7,
+    "references": [
+      {
+        "type": "table",
+        "caption": "[EMPLOYEE] 테이블",
+        "headers": [
+          "ID",
+          "NAME",
+          "SALARY"
+        ],
+        "rows": [
+          [
+            "1",
+            "A",
+            "1000"
+          ],
+          [
+            "2",
+            "B",
+            "2000"
+          ],
+          [
+            "3",
+            "C",
+            "NULL"
+          ],
+          [
+            "4",
+            "D",
+            "3000"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT COUNT(SALARY), SUM(SALARY), AVG(SALARY)\nFROM   EMPLOYEE;"
+      }
+    ]
+  },
+  {
+    "id": 10858,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "1과목",
+    "number": 59,
+    "title": "데이터 모델링에 대한 설명 중 알맞은 것은?",
+    "options": [
+      "데이터 모델링은 3 가지 구성요소로 Process, Attributes, Relationships 가 있다.",
+      "실제로 데이터베이스를 구축할 때 도구로 사용된다. 객체 지향 데이터 모델링은 객체와 관계로 구성된다.",
+      "물리 모델링 → 논리 모델링 → 개념 모델링 단계로 갈수록 추상적이다.",
+      "논리 모델링은 외부에는 종속적이지만 데이터베이스에 종속적이지 않다."
+    ],
+    "correctIndex": 3,
+    "explanation": "데이터 모델의 3 구성요소는 Things, Attributes, Relationships 이다. 객체 지향 모델링과 별개. 단계는 개념 → 논리 → 물리 순. 논리 모델링은 외부 사용자 관점에서는 종속적이지만 특정 DBMS 에 종속적이지 않다.",
+    "chapter": "데이터 모델 개념",
+    "_source": "cbt-mock",
+    "_origId": "cbt-008",
+    "_cbtPdf": "cbt1",
+    "_cbtPdfNumber": 8
+  },
+  {
+    "id": 10859,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "1과목",
+    "number": 60,
+    "title": "다음 중 정규화의 이점으로 적절하지 않은 것은?",
+    "options": [
+      "데이터 중복 최소화",
+      "자주 갱신 발생",
+      "이상 현상 제거",
+      "무결성 보장"
+    ],
+    "correctIndex": 1,
+    "explanation": "정규화는 데이터 구조 무결성을 통해 효율을 높이며, 자주 갱신은 JOIN 을 증가시켜 성능을 저하시킬 수 있는 단점이다.",
+    "chapter": "정규화",
+    "_source": "cbt-mock",
+    "_origId": "cbt-009",
+    "_cbtPdf": "cbt1",
+    "_cbtPdfNumber": 9
+  },
+  {
+    "id": 10860,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "1과목",
+    "number": 61,
+    "title": "다음은 ERD(Entity Relationship Diagram) 작성 순서이다. 올바른 것을 고르시오.\n\n가) 엔터티를 그린다\n나) 엔터티를 적절하게 배치한다\n다) 엔터티 간의 관계를 설정한다\n라) 관계명을 기술한다\n마) 관계의 참여도를 기술한다\n바) 관계의 필수 여부를 기술한다",
+    "options": [
+      "나) - 가) - 다) - 라) - 마) - 바)",
+      "가) - 나) - 다) - 마) - 라) - 바)",
+      "나) - 가) - 다) - 라) - 마) - 바)",
+      "가) - 나) - 다) - 라) - 마) - 바)"
+    ],
+    "correctIndex": 1,
+    "explanation": "ERD 작성 순서는 엔터티 그리기 → 적절히 배치 → 관계 설정 → 관계 참여도 (카디널리티) 기술 → 관계명 기술 → 관계 필수 여부 (선택사양) 기술 순. 정답 ② 가)나)다)마)라)바).",
+    "chapter": "관계",
+    "_source": "cbt-mock",
+    "_origId": "cbt-010",
+    "_cbtPdf": "cbt1",
+    "_cbtPdfNumber": 10
+  },
+  {
+    "id": 10861,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 62,
+    "title": "다음 중 해시 조인(Hash Join) 에 대한 설명으로 올바르지 않은 것은?",
+    "options": [
+      "해시 조인은 해시 함수를 사용하여 주소를 찾으므로 조인을 수행한다.",
+      "해시 조인을 할 때는 선행 테이블의 크기가 작아야 한다.",
+      "해시 조인은 CPU 연산이 많이 발생한다.",
+      "해시 조인은 랜덤 액세스(Random Access) 로 인해 비효율적이다."
+    ],
+    "correctIndex": 3,
+    "explanation": "해시 조인은 해시 테이블을 메모리에 만들어 매칭하므로 랜덤 액세스가 발생하지 않고 순차 처리된다. 랜덤 액세스가 많은 것은 Nested Loop 조인의 특성이다.",
+    "chapter": "조인",
+    "_source": "cbt-mock",
+    "_origId": "cbt-011",
+    "_cbtPdf": "cbt1",
+    "_cbtPdfNumber": 11
+  },
+  {
+    "id": 10862,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 63,
+    "title": "다음 SQL 실행 결과로 가장 알맞은 것은?",
+    "options": [
+      "NAME, SALARY 컬럼 — Kim 3000, Lee 4000, Park 0",
+      "NAME, SALARY 컬럼 — Kim 3000, Lee 4000, Park NULL",
+      "NAME, SALARY 컬럼 — Kim 0, Lee 0, Park 0",
+      "NAME, NVL(SALARY,0) 컬럼 — Kim 3000, Lee 4000, Park 0"
+    ],
+    "correctIndex": 0,
+    "explanation": "NVL 함수는 NULL 을 대체하므로 Park 의 SALARY 는 0 으로 출력된다. 또한 AS 를 이용해서 별칭을 SALARY 로 주었으므로 컬럼이 각각 NAME, SALARY 로 표현되어야 한다.",
+    "chapter": "함수",
+    "_source": "cbt-mock",
+    "_origId": "cbt-012",
+    "_cbtPdf": "cbt1",
+    "_cbtPdfNumber": 12,
+    "references": [
+      {
+        "type": "table",
+        "caption": "[EMP] 테이블",
+        "headers": [
+          "ID",
+          "NAME",
+          "SALARY"
+        ],
+        "rows": [
+          [
+            "1",
+            "Kim",
+            "3000"
+          ],
+          [
+            "2",
+            "Lee",
+            "4000"
+          ],
+          [
+            "3",
+            "Park",
+            "NULL"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT NAME, NVL(SALARY, 0) AS SALARY\nFROM   EMP;"
+      }
+    ]
+  },
+  {
+    "id": 10863,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 64,
+    "title": "다음 SQL 실행 결과로 가장 알맞은 것은?",
+    "options": [
+      "A=PASS, B=FAIL, C=NO DATA",
+      "A=PASS, B=NO DATA, C=FAIL",
+      "A=FAIL, B=PASS, C=NO DATA",
+      "A=NO DATA, B=PASS, C=FAIL"
+    ],
+    "correctIndex": 0,
+    "explanation": "CASE 식은 위에서 아래로 조건을 순차적으로 평가한다. A(85) ≥ 80 이므로 PASS. B(72) 는 80 미만이고 NULL 이 아니므로 ELSE FAIL. C(NULL) 은 NULL ≥ 80 비교 불가, NULL IS NULL 만족하므로 NO DATA.",
+    "chapter": "함수",
+    "_source": "cbt-mock",
+    "_origId": "cbt-013",
+    "_cbtPdf": "cbt1",
+    "_cbtPdfNumber": 13,
+    "references": [
+      {
+        "type": "table",
+        "caption": "[SCORE] 테이블",
+        "headers": [
+          "STUDENT",
+          "SCORE"
+        ],
+        "rows": [
+          [
+            "A",
+            "85"
+          ],
+          [
+            "B",
+            "72"
+          ],
+          [
+            "C",
+            "NULL"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT STUDENT,\n       CASE\n         WHEN SCORE >= 80 THEN 'PASS'\n         WHEN SCORE IS NULL THEN 'NO DATA'\n         ELSE 'FAIL'\n       END AS RESULT\nFROM   SCORE;"
+      }
+    ]
+  },
+  {
+    "id": 10864,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 65,
+    "title": "다음 중 아래 테이블 정의와 인덱스 구조를 참고하여, 인덱스를 효율적으로 액세스할 수 없는 검색조건을 고르시오.",
+    "options": [
+      "WHERE 주문번호 BETWEEN 1 AND 10",
+      "WHERE 주문자명 LIKE '%홍길동%'",
+      "WHERE 주문일자 >= '20181201'",
+      "WHERE 주문일자 = '20181201'"
+    ],
+    "correctIndex": 1,
+    "explanation": "LIKE 패턴이 '%' 로 시작하면 인덱스의 정렬 순서를 활용할 수 없어 인덱스 풀 스캔 또는 테이블 풀 스캔이 발생한다. =, >=, BETWEEN 은 인덱스 범위 스캔으로 효율적 처리 가능.",
+    "chapter": "WHERE",
+    "_source": "cbt-mock",
+    "_origId": "cbt-014",
+    "_cbtPdf": "cbt1",
+    "_cbtPdfNumber": 14,
+    "references": [
+      {
+        "type": "sql",
+        "code": "CREATE TABLE 주문 (\n  주문번호  INT          NOT NULL,\n  주문자명  VARCHAR(40)  NULL,\n  주문금액  MONEY        NULL,\n  주문일자  VARCHAR(8)   NOT NULL\n);\n\nCREATE UNIQUE INDEX 주문_pk   ON 주문 (주문번호);\nCREATE INDEX        주문_ind1 ON 주문 (주문자명);\nCREATE INDEX        주문_ind2 ON 주문 (주문일자, 주문금액);"
+      }
+    ]
+  },
+  {
+    "id": 10865,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "1과목",
+    "number": 66,
+    "title": "다음 중 식별자(Identifier) 로 가장 부적절한 속성은?",
+    "options": [
+      "사번",
+      "주민등록번호",
+      "학번",
+      "이메일 수신 여부 (Y/N)"
+    ],
+    "correctIndex": 3,
+    "explanation": "식별자는 유일성을 보장해야 한다. 이메일 수신 여부는 Y, N 만 가능해 여러 번 입력될 수 있으므로 식별자로 적합하지 않다.",
+    "chapter": "식별자",
+    "_source": "cbt-mock",
+    "_origId": "cbt-015",
+    "_cbtPdf": "cbt1",
+    "_cbtPdfNumber": 15
+  },
+  {
+    "id": 10866,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 67,
+    "title": "다음 중 절차형 SQL 을 이용하여 주로 만드는 것이 아닌 것은?",
+    "options": [
+      "PROCEDURE",
+      "TRIGGER",
+      "BUILT-IN FUNCTION",
+      "USER DEFINED FUNCTION"
+    ],
+    "correctIndex": 2,
+    "explanation": "절차형 SQL 은 사용자가 작성·정의하는 PROCEDURE, TRIGGER, USER DEFINED FUNCTION 을 만들 수 있다. BUILT-IN FUNCTION 은 시스템 내장 함수로 절차형 SQL 작성 대상이 아니다.",
+    "chapter": "절차형 SQL",
+    "_source": "cbt-mock",
+    "_origId": "cbt-016",
+    "_cbtPdf": "cbt1",
+    "_cbtPdfNumber": 16
+  },
+  {
+    "id": 10867,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 68,
+    "title": "다음 주어진 테이블에 대해서 아래와 같은 결괏값이 반환되도록 아래 SQL 문의 빈칸에 들어갈 것을 고르시오.",
+    "options": [
+      "MAX(COL2), MIN(COL2), SUM(COL1)",
+      "MAX(COL1), MIN(COL2), SUM(COL2)",
+      "MAX(COL1), MIN(COL2), SUM(COL1)",
+      "MIN(COL1), MAX(COL2), MAX(COL1)"
+    ],
+    "correctIndex": 2,
+    "explanation": "A 속성은 COL1 의 최댓값 (12), B 속성은 COL2 의 최솟값 (0), C 속성은 COL1 속성의 합 (NULL+0+10+11+12=33) 이다.",
+    "chapter": "그룹 함수",
+    "_source": "cbt-mock",
+    "_origId": "cbt-017",
+    "_cbtPdf": "cbt1",
+    "_cbtPdfNumber": 17,
+    "references": [
+      {
+        "type": "table",
+        "caption": "[SQLD_29] 테이블",
+        "headers": [
+          "COL1",
+          "COL2",
+          "COL3"
+        ],
+        "rows": [
+          [
+            "NULL",
+            "0",
+            "30"
+          ],
+          [
+            "0",
+            "NULL",
+            "0"
+          ],
+          [
+            "10",
+            "20",
+            "NULL"
+          ],
+          [
+            "11",
+            "21",
+            "31"
+          ],
+          [
+            "12",
+            "22",
+            "32"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "[결과]",
+        "headers": [
+          "A",
+          "B",
+          "C"
+        ],
+        "rows": [
+          [
+            "12",
+            "0",
+            "33"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT (   ) AS A,\n       (   ) AS B,\n       (   ) AS C\nFROM   SQLD_29;"
+      }
+    ]
+  },
+  {
+    "id": 10868,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 69,
+    "title": "다음 SQL 문의 실행 결과는 무엇인가?",
+    "options": [
+      "1",
+      "2",
+      "3",
+      "NULL"
+    ],
+    "correctIndex": 1,
+    "explanation": "COALESCE 함수는 NULL 이 아닌 첫 번째 값을 리턴하는 함수이다. 위 문제에서 첫 번째는 NULL 이고 두 번째는 '2' 이다. 따라서 '2' 가 리턴된다.",
+    "chapter": "함수",
+    "_source": "cbt-mock",
+    "_origId": "cbt-018",
+    "_cbtPdf": "cbt1",
+    "_cbtPdfNumber": 18,
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT COALESCE(NULL, '2', '1') FROM DUAL;"
+      }
+    ]
+  },
+  {
+    "id": 10869,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 70,
+    "title": "다음 트랜잭션 처리 결과로 최종 테이블에 남는 데이터의 개수는? (단, SQL Server 환경이다.)",
+    "options": [
+      "0",
+      "1",
+      "2",
+      "3"
+    ],
+    "correctIndex": 2,
+    "explanation": "INSERT 1 → SAVEPOINT S1 → INSERT 2 → ROLLBACK TO S1 (INSERT 2 취소) → INSERT 3 → COMMIT. 최종 TBL 에 1, 3 두 행 = COUNT 2.",
+    "chapter": "DCL·TCL",
+    "_source": "cbt-mock",
+    "_origId": "cbt-019",
+    "_cbtPdf": "cbt1",
+    "_cbtPdfNumber": 19,
+    "references": [
+      {
+        "type": "sql",
+        "code": "BEGIN TRAN;\nCREATE TABLE TBL (ID INT PRIMARY KEY);\nINSERT INTO TBL VALUES (1);\nSAVE TRAN S1;\nINSERT INTO TBL VALUES (2);\nROLLBACK TRAN S1;\nINSERT INTO TBL VALUES (3);\nCOMMIT;\nSELECT COUNT(*) FROM TBL;"
+      }
+    ]
+  },
+  {
+    "id": 10870,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "1과목",
+    "number": 71,
+    "title": "발생 시점에 따른 엔터티 분류에 의한 중심 엔터티가 아닌 것은?",
+    "options": [
+      "매출",
+      "주문",
+      "사원",
+      "계약"
+    ],
+    "correctIndex": 2,
+    "explanation": "사원, 부서, 고객, 상품, 자재 등이 기본 엔터티가 될 수 있다. 매출·주문·계약은 기본 엔터티에서 발생하는 중심 엔터티에 해당한다.",
+    "chapter": "엔터티",
+    "_source": "cbt-mock",
+    "_origId": "cbt-020",
+    "_cbtPdf": "cbt1",
+    "_cbtPdfNumber": 20
+  },
+  {
+    "id": 10871,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "1과목",
+    "number": 72,
+    "title": "주문과 주문상세 테이블이 1:1 필수관계일 때 이에 대한 설명으로 올바른 것은? (단, 둘 다 PK 로 주문번호를 가지고 있으며 식별관계이다.)",
+    "options": [
+      "주문 테이블의 전체 개수와 주문상세 테이블의 전체 개수는 다르다.",
+      "주문이 입력되어도 주문상세 테이블은 입력되지 않을 수 있다.",
+      "주문 테이블 MINUS 주문상세 테이블의 출력 건수는 0 건이다.",
+      "주문 테이블 INTERSECT 주문상세 테이블의 출력 건수는 주문 테이블 데이터 합계 다음으로 적다."
+    ],
+    "correctIndex": 2,
+    "explanation": "1:1 필수관계이고 주문번호가 양쪽 PK 이므로 두 테이블의 PK 집합이 정확히 같다. 따라서 주문 MINUS 주문상세 결과는 0 건이고, INTERSECT 결과는 두 테이블의 행 수와 같다.",
+    "chapter": "관계",
+    "_source": "cbt-mock",
+    "_origId": "cbt-021",
+    "_cbtPdf": "cbt1",
+    "_cbtPdfNumber": 21
+  },
+  {
+    "id": 10872,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 73,
+    "title": "그룹 내 순위 관련 WINDOW 함수의 특징으로 틀린 것은?",
+    "options": [
+      "RANK 함수는 동일한 값에 대해서는 동일한 순위를 부여한다 (같은 등수에 여럿 존재 시 등수 SKIP 가능).",
+      "DENSE_RANK 함수는 동일한 값에 대해서는 동일한 순위를 부여한다 (같은 등수 여럿 존재해도 등수 SKIP 없음).",
+      "ROW_NUMBER 함수는 동일한 값이라도 고유한 순위를 부여한다.",
+      "CUMM_RANK 함수는 동일한 값에 대해서는 동일한 순위를 부여한다 (같은 등수 여럿 존재해도 등수 SKIP 없음)."
+    ],
+    "correctIndex": 3,
+    "explanation": "그룹 내 순위 관련 WINDOW FUNCTION 은 RANK, DENSE_RANK, ROW_NUMBER 가 있다. CUMM_RANK 라는 함수는 표준 윈도우 함수에 없다. (DENSE_RANK 가 SKIP 없이 순위 부여)",
+    "chapter": "윈도우 함수",
+    "_source": "cbt-mock",
+    "_origId": "cbt-022",
+    "_cbtPdf": "cbt1",
+    "_cbtPdfNumber": 22
+  },
+  {
+    "id": 10873,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 74,
+    "title": "다음 SQL 실행 결과로 가장 알맞은 것은?",
+    "options": [
+      "1",
+      "2",
+      "3",
+      "0"
+    ],
+    "correctIndex": 1,
+    "explanation": "T1 LEFT OUTER JOIN T2 ON T1.COL=T2.COL 결과: (1,1), (2,2), (3,NULL). 다시 LEFT OUTER JOIN T3 ON T1.COL=T3.COL: 행 수는 3 행 유지. WHERE T2.COL IS NOT NULL 조건으로 (1,1), (2,2) 두 행만 남음 → COUNT 2.",
+    "chapter": "조인",
+    "_source": "cbt-mock",
+    "_origId": "cbt-023",
+    "_cbtPdf": "cbt1",
+    "_cbtPdfNumber": 23,
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT COUNT(*) FROM T1\nLEFT OUTER JOIN T2 ON T1.COL = T2.COL\nLEFT OUTER JOIN T3 ON T1.COL = T3.COL\nWHERE T2.COL IS NOT NULL;"
+      }
+    ]
+  },
+  {
+    "id": 10874,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "1과목",
+    "number": 75,
+    "title": "다음 식별관계와 비식별관계에 대해 옳은 것은?",
+    "options": [
+      "비식별관계는 자식 주식별자에 부모의 주식별자를 포함한다.",
+      "비식별관계는 강한 연결 관계를 의미한다.",
+      "식별관계는 자식 측의 카디널리티 선이 점선이다.",
+      "식별관계는 부모 엔터티가 자식 엔터티에 종속되는 관계이다."
+    ],
+    "correctIndex": 3,
+    "explanation": "식별관계는 부모의 주식별자가 자식의 주식별자로 포함되어 강한 연결 관계를 갖는다. ① 비식별관계는 부모 PK 가 자식의 일반 속성으로 상속, ② 비식별관계는 약한 연결, ③ 식별관계는 실선 표기. ④ 가 옳다.",
+    "chapter": "관계",
+    "_source": "cbt-mock",
+    "_origId": "cbt-024",
+    "_cbtPdf": "cbt1",
+    "_cbtPdfNumber": 24
+  },
+  {
+    "id": 10875,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 76,
+    "title": "다음 중 DML 에 해당하지 않는 것은?",
+    "options": [
+      "INSERT",
+      "DELETE",
+      "MERGE",
+      "TRUNCATE"
+    ],
+    "correctIndex": 3,
+    "explanation": "TRUNCATE 는 DDL 에 해당된다 (자동 커밋, ROLLBACK 불가). INSERT/UPDATE/DELETE/MERGE 가 DML.",
+    "chapter": "DML",
+    "_source": "cbt-mock",
+    "_origId": "cbt-025",
+    "_cbtPdf": "cbt1",
+    "_cbtPdfNumber": 25
+  },
+  {
+    "id": 10876,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 77,
+    "title": "다음의 SQL 문과 동일한 것을 고르시오.\n\n`SELECT NVL(Name, '') FROM Emp;`",
+    "options": [
+      "SELECT CASE WHEN Name IS NOT NULL THEN Name ELSE '0' END AS USER_NAME FROM Emp;",
+      "SELECT CASE WHEN Name IS NOT NULL THEN '0' ELSE Name END AS USER_NAME FROM Emp;",
+      "SELECT CASE WHEN Name IS NULL THEN '' ELSE Name END AS USER_NAME FROM Emp;",
+      "SELECT CASE WHEN Name IS NULL THEN '0' ELSE '0' END AS USER_NAME FROM Emp;"
+    ],
+    "correctIndex": 2,
+    "explanation": "NVL(Name, '') 은 Name 이 NULL 이면 '' 로 대체, 아니면 Name 그대로 반환. 동등한 CASE 식은 \"WHEN Name IS NULL THEN '' ELSE Name END\".",
+    "chapter": "함수",
+    "_source": "cbt-mock",
+    "_origId": "cbt-026",
+    "_cbtPdf": "cbt1",
+    "_cbtPdfNumber": 26
+  },
+  {
+    "id": 10877,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 78,
+    "title": "EMP 테이블 7788 번 사원의 SAL 값이 현재 1,000 인 상황에서 아래 TX1, TX2 두 개의 트랜잭션이 동시에 수행된다. 시점 1 에 TX1 이 +100 update, 시점 2 에 TX2 가 +200 update, 시점 3 에 TX1 이 commit 한다. 최종 7788 의 SAL 값은? (Lock 충돌 시 TX2 는 TX1 commit 까지 대기)",
+    "options": [
+      "1000",
+      "1100",
+      "1200",
+      "1300"
+    ],
+    "correctIndex": 3,
+    "explanation": "TX2 의 update 는 Lock 으로 인해 TX1 의 commit 까지 대기한다. TX1 이 1,100 으로 갱신·commit 후 TX2 가 +200 을 더해 1,300 이 된다.",
+    "chapter": "DCL·TCL",
+    "_source": "cbt-mock",
+    "_origId": "cbt-027",
+    "_cbtPdf": "cbt1",
+    "_cbtPdfNumber": 27
+  },
+  {
+    "id": 10878,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 79,
+    "title": "윈도우 함수에 대한 설명으로 올바르지 않은 것은?",
+    "options": [
+      "윈도우 함수는 GROUP BY 와 함께 사용하여 처리하는 방식이다.",
+      "PARTITION BY 절을 사용해 윈도우의 분리 기준을 설정한다.",
+      "WINDOWING 절은 ORDER BY 와 함께 사용된다.",
+      "PARTITION BY 절이 없으면 전체 행이 하나의 윈도우가 된다."
+    ],
+    "correctIndex": 0,
+    "explanation": "GROUP BY 는 그룹 단위로 행을 축약하지만 윈도우 함수는 원본 행을 보존하면서 그룹별 계산만 수행한다. 둘은 별개의 메커니즘이다.",
+    "chapter": "윈도우 함수",
+    "_source": "cbt-mock",
+    "_origId": "cbt-028",
+    "_cbtPdf": "cbt1",
+    "_cbtPdfNumber": 28
+  },
+  {
+    "id": 10879,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 80,
+    "title": "아래의 계층형 SQL 에서 리프 데이터이면 1, 그렇지 않으면 0 을 출력하고 싶을 때 사용하는 키워드로 알맞은 것은?",
+    "options": [
+      "CONNECT_BY_ISLEAF",
+      "CONNECT_BY_ISCYCLE",
+      "SYS_CONNECT_BY_PATH",
+      "CONNECT_BY_ROOT"
+    ],
+    "correctIndex": 0,
+    "explanation": "CONNECT_BY_ISLEAF 는 트리에서 리프 노드 (자식 없음) 이면 1, 아니면 0 을 반환한다.",
+    "chapter": "계층형 질의",
+    "_source": "cbt-mock",
+    "_origId": "cbt-029",
+    "_cbtPdf": "cbt1",
+    "_cbtPdfNumber": 29,
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT LEVEL,\n       LPAD(' ', 4 * (LEVEL - 1)) || EMPNO,\n       MGR,\n       (   ) AS ISLEAF\nFROM   SCOTT.EMP\nSTART WITH MGR IS NULL\nCONNECT BY PRIOR EMPNO = MGR;"
+      }
+    ]
+  },
+  {
+    "id": 10880,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 81,
+    "title": "다음 쿼리 중 의미가 다른 하나는? (단, COL1 은 날짜형 컬럼이다.)",
+    "options": [
+      "WHERE TO_CHAR(COL1, 'YYYYMMDDHH24') = '2025010113' OR TO_CHAR(COL1, 'YYYYMMDDHH24') = '2025010114'",
+      "WHERE COL1 >= TO_DATE('20250101130000', 'YYYYMMDDHH24MISS') AND COL1 <= TO_DATE('20250101145959', 'YYYYMMDDHH24MISS')",
+      "WHERE ((TO_CHAR(COL1, 'YYYYMMDD'), TO_CHAR(COL1, 'HH24')) IN (('20250101', '13'), ('20250101', '14')))",
+      "WHERE COL1 = TO_DATE('2025010113', 'YYYYMMDDHH24') OR COL1 = TO_DATE('2025010114', 'YYYYMMDDHH24')"
+    ],
+    "correctIndex": 3,
+    "explanation": "①·②·③ 은 모두 2025-01-01 13:00:00 부터 14:59:59 까지 1 시간 범위를 포함. ④ 는 정확히 13:00:00 또는 14:00:00 두 시점만 매칭하므로 범위가 좁아 의미가 다르다.",
+    "chapter": "WHERE",
+    "_source": "cbt-mock",
+    "_origId": "cbt-030",
+    "_cbtPdf": "cbt1",
+    "_cbtPdfNumber": 30
+  },
+  {
+    "id": 10881,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 82,
+    "title": "다음 SQL 의 의도와 가장 가까운 설명은? (단, SAL 은 급여를 의미한다.)\n\n`SELECT * FROM EMP WHERE SAL > (SELECT AVG(SAL) FROM EMP);`",
+    "options": [
+      "평균 급여보다 많은 사원 목록을 조회한다.",
+      "평균 급여보다 적은 사원 목록을 조회한다.",
+      "평균 급여를 포함한 전체 사원 목록을 조회한다.",
+      "오류가 발생하는 쿼리이다."
+    ],
+    "correctIndex": 0,
+    "explanation": "서브쿼리가 전체 직원의 평균 급여를 반환하고, 메인 쿼리는 그 평균보다 SAL 이 큰 사원만 조회한다.",
+    "chapter": "서브쿼리",
+    "_source": "cbt-mock",
+    "_origId": "cbt-031",
+    "_cbtPdf": "cbt1",
+    "_cbtPdfNumber": 31
+  },
+  {
+    "id": 10882,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 83,
+    "title": "Subquery 의 종류 중에서 Subquery 가 Mainquery 의 제공자 역할을 하고 Mainquery 의 값이 Subquery 에 주입되지 않는 유형은 무엇인가?",
+    "options": [
+      "Filter형 Subquery",
+      "Early Filter형 Subquery",
+      "Associative Subquery",
+      "Access Subquery"
+    ],
+    "correctIndex": 3,
+    "explanation": "Access Subquery 는 제공자 역할을 하는 서브쿼리이다 (메인쿼리에서 서브쿼리로 값 주입 없음).",
+    "chapter": "서브쿼리",
+    "_source": "cbt-mock",
+    "_origId": "cbt-032",
+    "_cbtPdf": "cbt1",
+    "_cbtPdfNumber": 32
+  },
+  {
+    "id": 10883,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 84,
+    "title": "다음 중 집합 연산자에 대한 설명으로 올바르지 않은 것은?",
+    "options": [
+      "UNION 연산자를 사용할 때 각각의 SELECT 문에 ORDER BY 를 사용할 수 있다.",
+      "UNION 은 중복을 제거하는 데 반해 UNION ALL 은 중복을 제거하지 않는다.",
+      "INTERSECT 는 중복 제거 및 정렬을 수행한다.",
+      "두 집합 간 중복이 없다면 UNION, UNION ALL 모두 동일한 결과를 출력한다."
+    ],
+    "correctIndex": 0,
+    "explanation": "집합 연산자 이용 시 ORDER BY 는 전체 집합 결과에 대해 한 번만 사용해야 하므로 마지막 SELECT 문 뒤에 작성된다. 각 SELECT 별로 ORDER BY 를 쓰면 문법 오류.",
+    "chapter": "집합 연산자",
+    "_source": "cbt-mock",
+    "_origId": "cbt-033",
+    "_cbtPdf": "cbt1",
+    "_cbtPdfNumber": 33
+  },
+  {
+    "id": 10884,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "1과목",
+    "number": 85,
+    "title": "다음 설명 중 맞는 것은 무엇인가?",
+    "options": [
+      "모든 자료는 실질적으로 테이블에 저장되며 테이블에 있는 자료들을 꺼내 볼 수 있다.",
+      "데이터베이스 내에 테이블이란 존재하지 않는다.",
+      "아주 복잡한 자료도 테이블은 하나만 만드는 것이 바람직하다.",
+      "데이터베이스에는 단 한 개의 테이블만 존재할 수 있다."
+    ],
+    "correctIndex": 0,
+    "explanation": "데이터베이스에는 자료의 성격에 따라 N 개의 테이블을 생성한다. 모든 자료들은 테이블에 입력되며 조회·수정·삭제할 수 있다.",
+    "chapter": "데이터 모델 개념",
+    "_source": "cbt-mock",
+    "_origId": "cbt-034",
+    "_cbtPdf": "cbt1",
+    "_cbtPdfNumber": 34
+  },
+  {
+    "id": 10885,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 86,
+    "title": "학생(STUDENT) 테이블에 영문학과 학생 50 명, 법학과 학생 100 명, 수학과 학생 50 명의 정보가 저장되어 있을 때, 다음 SQL 문의 실행 결과 튜플 수는 각각 얼마인가? (단, DEPT 필드는 학과명, NAME 필드는 이름을 의미한다)\n\nㄱ : `SELECT DEPT FROM STUDENT;`\nㄴ : `SELECT DISTINCT DEPT FROM STUDENT;`\nㄷ : `SELECT NAME FROM STUDENT WHERE DEPT='영문학과';`",
+    "options": [
+      "ㄱ : 3, ㄴ : 3, ㄷ : 1",
+      "ㄱ : 200, ㄴ : 3, ㄷ : 1",
+      "ㄱ : 200, ㄴ : 3, ㄷ : 50",
+      "ㄱ : 200, ㄴ : 200, ㄷ : 50"
+    ],
+    "correctIndex": 2,
+    "explanation": "ㄱ 조건없이 전체 200=50+100+50. ㄴ DISTINCT 학과명 3 종 (영문/법/수학). ㄷ WHERE 영문학과 50 명.",
+    "chapter": "관계형 DB와 SELECT",
+    "_source": "cbt-mock",
+    "_origId": "cbt-035",
+    "_cbtPdf": "cbt1",
+    "_cbtPdfNumber": 35
+  },
+  {
+    "id": 10886,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 87,
+    "title": "다음 주어진 테이블에서 아래와 같은 결괏값을 반환하도록 아래의 SQL 문의 빈칸에 들어갈 올바른 것을 고르시오.",
+    "options": [
+      "RANK()",
+      "NTILE()",
+      "ROW_NUMBER()",
+      "DENSE_RANK()"
+    ],
+    "correctIndex": 3,
+    "explanation": "결괏값에서 중복된 등수 2 등 다음에 바로 다음 등수인 3 이 왔으므로 빈칸에는 DENSE_RANK 가 와야 한다.",
+    "chapter": "윈도우 함수",
+    "_source": "cbt-mock",
+    "_origId": "cbt-036",
+    "_cbtPdf": "cbt1",
+    "_cbtPdfNumber": 36,
+    "references": [
+      {
+        "type": "table",
+        "caption": "[SQLD_29] 테이블",
+        "headers": [
+          "이름",
+          "부서",
+          "직책",
+          "급여"
+        ],
+        "rows": [
+          [
+            "조조",
+            "경영지원부",
+            "부장",
+            "300"
+          ],
+          [
+            "유비",
+            "경영지원부",
+            "과장",
+            "250"
+          ],
+          [
+            "제갈량",
+            "인사부",
+            "대리",
+            "250"
+          ],
+          [
+            "사마의",
+            "인사부",
+            "대리",
+            "200"
+          ],
+          [
+            "관우",
+            "영업부",
+            "사원",
+            "150"
+          ],
+          [
+            "장비",
+            "영업부",
+            "사원",
+            "100"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "[결과]",
+        "headers": [
+          "순위",
+          "이름",
+          "부서",
+          "직책",
+          "급여"
+        ],
+        "rows": [
+          [
+            "1",
+            "조조",
+            "경영지원부",
+            "부장",
+            "300"
+          ],
+          [
+            "2",
+            "유비",
+            "경영지원부",
+            "과장",
+            "250"
+          ],
+          [
+            "2",
+            "제갈량",
+            "인사부",
+            "대리",
+            "250"
+          ],
+          [
+            "3",
+            "사마의",
+            "인사부",
+            "대리",
+            "200"
+          ],
+          [
+            "4",
+            "관우",
+            "영업부",
+            "사원",
+            "150"
+          ],
+          [
+            "5",
+            "장비",
+            "영업부",
+            "사원",
+            "100"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT (   ) OVER (ORDER BY 급여 DESC) AS 순위,\n       이름, 부서, 직책, 급여\nFROM   SQLD_29;"
+      }
+    ]
+  },
+  {
+    "id": 10887,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "1과목",
+    "number": 88,
+    "title": "{학번, 과목번호} 는 결정자이면서 기본키이고 {성적, 지도교수명, 학과명} 은 종속자이다. 속성 중 과목번호가 결정자이고 {지도교수명, 학과명} 이 과목번호에만 함수적 종속성을 가진다면 이는 몇 차정규형에 속하고 몇 차정규화의 대상인가?",
+    "options": [
+      "2차정규형 - 3차정규화 대상",
+      "1차정규형 - 2차정규화 대상",
+      "3차정규형 - 보이스-코드 정규화 대상",
+      "보이스-코드 정규화 - 4차정규화 대상"
+    ],
+    "correctIndex": 1,
+    "explanation": "결정자 중 일부 속성에만 함수 종속성을 가지고 있는 'Partial Dependency Attribute' 를 갖는 것은 2차정규형을 위반한 사례에 해당한다. 즉 1차정규형이면서 2차정규화의 대상이 된다.",
+    "chapter": "정규화",
+    "_source": "cbt-mock",
+    "_origId": "cbt-037",
+    "_cbtPdf": "cbt1",
+    "_cbtPdfNumber": 37
+  },
+  {
+    "id": 10888,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 89,
+    "title": "다음 SQL 실행 결과로 가장 알맞은 것은?",
+    "options": [
+      "A=1, C=1, B=3 (RANK 시나리오)",
+      "C=1, A=1, B=2 (DENSE_RANK 시나리오)",
+      "B=1, A=2, C=3",
+      "A=1, C=2, B=3 (정답 — ROW_NUMBER 고유 순번)"
+    ],
+    "correctIndex": 3,
+    "explanation": "ROW_NUMBER() 는 값에 상관없이 고유한 순위를 부여한다. ① 은 RANK() 답, ② 는 DENSE_RANK() 답 (A, C 동점이므로 출력 순서는 A, C 또는 C, A 가능).",
+    "chapter": "윈도우 함수",
+    "_source": "cbt-mock",
+    "_origId": "cbt-038",
+    "_cbtPdf": "cbt1",
+    "_cbtPdfNumber": 38,
+    "references": [
+      {
+        "type": "table",
+        "caption": "[TB_SCORE] 테이블",
+        "headers": [
+          "NAME",
+          "SCORE"
+        ],
+        "rows": [
+          [
+            "A",
+            "90"
+          ],
+          [
+            "B",
+            "85"
+          ],
+          [
+            "C",
+            "90"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT NAME, ROW_NUMBER() OVER (ORDER BY SCORE DESC) AS RN\nFROM   SCORES;"
+      }
+    ]
+  },
+  {
+    "id": 10889,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 90,
+    "title": "다음의 데이터베이스에서 '부양가족을 2 명 이상 가진 사원의 사번(eno), 성명(ename), 부양가족 수를 검색' 하는 질의를 SQL 로 적절하게 표현한 것은?\n\n`employee(eno, ename, address, score, dno)`\n`dependent(eno, ename, birthday, relation)`",
+    "options": [
+      "SELECT eno, ename, count(*) FROM employee e, dependent d WHERE e.eno = d.eno AND count(*) >= 2 GROUP BY d.eno;",
+      "SELECT e.eno, e.ename, count(*) FROM employee e, dependent d WHERE EXISTS (SELECT * FROM dependent GROUP BY eno HAVING count(*) >= 2) GROUP BY e.eno, e.ename;",
+      "SELECT e.eno, e.ename, t.cnt FROM employee e, (SELECT eno, count(*) AS cnt FROM dependent GROUP BY eno HAVING count(*) >= 2) t WHERE e.eno = t.eno;",
+      "SELECT e.eno, e.ename, count(*) FROM employee e, dependent d WHERE e.eno = d.eno GROUP BY e.eno, e.ename HAVING count(*) >= 3;"
+    ],
+    "correctIndex": 2,
+    "explanation": "③ 인라인 뷰로 dependent 에서 eno 별 count 가 2 이상인 결과를 만든 뒤 employee 와 조인하면 정확히 \"부양가족 2 명 이상\" 사원의 정보 + 부양가족 수를 얻는다. ① WHERE 에 집계함수 사용 불가, ② EXISTS 조건이 상관 서브쿼리가 아니라 무의미, ④ HAVING count >=3 조건이 잘못.",
+    "chapter": "서브쿼리",
+    "_source": "cbt-mock",
+    "_origId": "cbt-039",
+    "_cbtPdf": "cbt1",
+    "_cbtPdfNumber": 39
+  },
+  {
+    "id": 10890,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 91,
+    "title": "데이터를 입력하기 위해 사용하는 SQL 명령어는 무엇인가?",
+    "options": [
+      "CREATE",
+      "INSERT",
+      "UPDATE",
+      "ALTER"
+    ],
+    "correctIndex": 1,
+    "explanation": "데이터를 입력하기 위해서 'INSERT' 명령어를 사용한다.",
+    "chapter": "DML",
+    "_source": "cbt-mock",
+    "_origId": "cbt-040",
+    "_cbtPdf": "cbt1",
+    "_cbtPdfNumber": 40
+  },
+  {
+    "id": 10891,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 92,
+    "title": "릴레이션 'employee' 와 'department' 에 대한 다음 SQL 질의문의 수행 결과는?",
+    "options": [
+      "{(100, 영업, Lee, 90), (200, 개발, Kim, 95), (300, 서비스, Hong, 65)}",
+      "{(100, 영업, Lee, 90), (200, 개발, Kim, 95)}",
+      "{(100, 영업, Lee, 90)}",
+      "{(100, 영업, Hong, 80), (100, 영업, Lee, 90), (200, 개발, Kim, 90), (200, 개발, Kim, 95), (600, null, Hong, 65)}"
+    ],
+    "correctIndex": 0,
+    "explanation": "EQUI 조인 결과로 dno 가 일치하는 행만 결합된다. (이 문항의 표·SQL 세부는 PDF 원본 대비 일부 누락 가능 — 정답 키 ① 보존)",
+    "chapter": "조인",
+    "_source": "cbt-mock",
+    "_origId": "cbt-041",
+    "_cbtPdf": "cbt1",
+    "_cbtPdfNumber": 41
+  },
+  {
+    "id": 10892,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 93,
+    "title": "다음 각 쿼리의 실행 결과로 옳은 것은?\n\n[1] `SELECT SUM(SAL + BONUS) FROM EMP WHERE DEPTNO = 10;`\n[2] `SELECT SUM(NVL(SAL, 0) + NVL(BONUS, 0)) FROM EMP;`\n[3] `SELECT SUM(SAL) + SUM(BONUS) FROM EMP;`",
+    "options": [
+      "NULL, 260, 260",
+      "0, 260, 260",
+      "NULL, 260, 200",
+      "NULL, 240, 260"
+    ],
+    "correctIndex": 0,
+    "explanation": "[1] DEPTNO=10 의 SAL+BONUS 가 둘 다 NULL 포함 → 100+NULL=NULL, NULL+20=NULL → SUM=NULL. [2] NVL(SAL,0)+NVL(BONUS,0) 합계 = 100+20+40+80+20 = 260. [3] SUM(SAL) NULL 제외 = 100+30+50+20=200, SUM(BONUS) = 20+10+30=60 → 200+60=260.",
+    "chapter": "그룹 함수",
+    "_source": "cbt-mock",
+    "_origId": "cbt-042",
+    "_cbtPdf": "cbt1",
+    "_cbtPdfNumber": 42,
+    "references": [
+      {
+        "type": "table",
+        "caption": "[EMP] 테이블",
+        "headers": [
+          "ENAME",
+          "SAL",
+          "BONUS",
+          "DEPTNO"
+        ],
+        "rows": [
+          [
+            "A",
+            "100",
+            "NULL",
+            "10"
+          ],
+          [
+            "B",
+            "NULL",
+            "20",
+            "10"
+          ],
+          [
+            "C",
+            "30",
+            "10",
+            "NULL"
+          ],
+          [
+            "D",
+            "50",
+            "30",
+            "20"
+          ],
+          [
+            "E",
+            "20",
+            "NULL",
+            "NULL"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": 10893,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 94,
+    "title": "다음 SQL 을 ANSI 방식으로 변경한 것으로 옳은 것은?\n\n`SELECT * FROM TAB1, TAB2 ORDER BY 1;`",
+    "options": [
+      "SELECT * FROM TAB1 INNER JOIN TAB2 ORDER BY 1;",
+      "SELECT * FROM TAB1 NATURAL JOIN TAB2 ORDER BY 1;",
+      "SELECT * FROM TAB1 CROSS JOIN TAB2 ORDER BY 1;",
+      "SELECT * FROM TAB1 INNER JOIN TAB2 ON (TAB1.COL1 = TAB2.COL1) ORDER BY 1;"
+    ],
+    "correctIndex": 2,
+    "explanation": "FROM TAB1, TAB2 만 있고 별도의 조인조건은 없으므로 카티션 곱이 발생하며, 이는 CROSS JOIN 으로 표현할 수 있다. CROSS JOIN 은 ON 조인절을 사용하지 않는다.",
+    "chapter": "표준 조인",
+    "_source": "cbt-mock",
+    "_origId": "cbt-043",
+    "_cbtPdf": "cbt1",
+    "_cbtPdfNumber": 43
+  },
+  {
+    "id": 10894,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 95,
+    "title": "다음 중 SQL 의 특징으로 가장 적절하지 않은 것은?",
+    "options": [
+      "절차적 언어이며 반복문을 포함한다.",
+      "데이터 정의·조작·제어 언어를 포함한다.",
+      "관계형 데이터베이스 질의에 사용된다.",
+      "ANSI 표준으로 대부분의 DBMS 에서 지원된다."
+    ],
+    "correctIndex": 0,
+    "explanation": "SQL 은 비절차적 언어로 어떤(WHAT) 데이터를 필요로 하는지 명시할 뿐, 어떻게(HOW) 데이터를 가져올지는 명시하지 않는다. SQL 내의 PL/SQL, T-SQL 등에서 IF/FOR 활용해 절차적 언어를 사용할 수 있지만 SQL 자체는 비절차적.",
+    "chapter": "관계형 DB와 SELECT",
+    "_source": "cbt-mock",
+    "_origId": "cbt-044",
+    "_cbtPdf": "cbt1",
+    "_cbtPdfNumber": 44
+  },
+  {
+    "id": 10895,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 96,
+    "title": "다음 SQL 실행 결과로 가장 알맞은 것은?",
+    "options": [
+      "D=1, B=2, A=3, C=3, E=4 (정답 — DENSE_RANK)",
+      "D=1, B=2, A=3, C=4, E=5 (RANK 시나리오)",
+      "D=1, B=2, A=3, C=3, E=5",
+      "D=1, B=2, A=3, C=3, E=3"
+    ],
+    "correctIndex": 0,
+    "explanation": "DENSE_RANK 는 동일한 값에 동일 순위를 부여하고, 그다음 순위를 건너뛰지 않는다. PRICE DESC 정렬: D(300)=1, B(200)=2, A(100)=3, C(100)=3 (동률), E(50)=4. 만일 ROW_NUMBER() 였다면 ② 가 답, RANK() 였다면 ③ 이 답이 된다.",
+    "chapter": "윈도우 함수",
+    "_source": "cbt-mock",
+    "_origId": "cbt-045",
+    "_cbtPdf": "cbt1",
+    "_cbtPdfNumber": 45,
+    "references": [
+      {
+        "type": "table",
+        "caption": "[TB_PRODUCT] 테이블",
+        "headers": [
+          "NAME",
+          "PRICE"
+        ],
+        "rows": [
+          [
+            "A",
+            "100"
+          ],
+          [
+            "B",
+            "200"
+          ],
+          [
+            "C",
+            "100"
+          ],
+          [
+            "D",
+            "300"
+          ],
+          [
+            "E",
+            "50"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT NAME, DENSE_RANK() OVER (ORDER BY PRICE DESC) AS RN\nFROM   TB_PRODUCT;"
+      }
+    ]
+  },
+  {
+    "id": 10896,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 97,
+    "title": "다음 SQL 실행 결과로 출력되는 NAME 은?\n\n`SELECT NAME FROM EMPLOYEE WHERE SALARY > ALL (SELECT SALARY FROM EMPLOYEE WHERE NAME != 'C');`",
+    "options": [
+      "A",
+      "B",
+      "C",
+      "A, C"
+    ],
+    "correctIndex": 2,
+    "explanation": "서브쿼리 SELECT SALARY FROM EMPLOYEE WHERE NAME != 'C' 는 A, B (3000, 2000) 두 행을 반환. ALL 은 다중행 비교 — SALARY > ALL(3000, 2000) 은 3000 보다도 크고 2000 보다도 커야 하므로 사실상 SALARY > 3000. C 만 조건 충족.",
+    "chapter": "서브쿼리",
+    "_source": "cbt-mock",
+    "_origId": "cbt-046",
+    "_cbtPdf": "cbt1",
+    "_cbtPdfNumber": 46,
+    "references": [
+      {
+        "type": "table",
+        "caption": "[EMPLOYEE] 테이블",
+        "headers": [
+          "NAME",
+          "SALARY"
+        ],
+        "rows": [
+          [
+            "A",
+            "3000"
+          ],
+          [
+            "B",
+            "2000"
+          ],
+          [
+            "C",
+            "4000"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": 10897,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 98,
+    "title": "다음 설명 중 적절한 것은 무엇인가?",
+    "options": [
+      "인덱스는 인덱스 구성 컬럼으로 항상 오름차순으로 정렬된다.",
+      "비용 기반 옵티마이저는 인덱스 스캔이 항상 유리하다고 판단한다.",
+      "규칙 기반 옵티마이저는 적절한 인덱스가 존재하면 항상 인덱스를 사용하려고 한다.",
+      "인덱스 범위 스캔은 항상 여러 건의 결과가 반환된다."
+    ],
+    "correctIndex": 2,
+    "explanation": "규칙 기반 옵티마이저는 사전 정의된 규칙 우선순위에 따라 인덱스가 있으면 무조건 인덱스 사용. ① ASC/DESC 지정 가능, ② 비용 기반은 통계에 따라 풀 스캔이 유리할 수 있음, ④ 인덱스 범위 스캔은 0 건 가능.",
+    "chapter": "관계형 DB와 SELECT",
+    "_source": "cbt-mock",
+    "_origId": "cbt-047",
+    "_cbtPdf": "cbt1",
+    "_cbtPdfNumber": 47
+  },
+  {
+    "id": 10898,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 99,
+    "title": "다음 SQL 실행 결과로 가장 알맞은 것은?\n\n`SELECT ROUND(456.789, -2) FROM DUAL;`",
+    "options": [
+      "400",
+      "500",
+      "460",
+      "450"
+    ],
+    "correctIndex": 1,
+    "explanation": "ROUND 의 두 번째 인자가 음수일 경우 정수부에서 자릿수만큼 반올림. -2 는 10 의 자리에서 반올림하므로 456.789 → 500.",
+    "chapter": "함수",
+    "_source": "cbt-mock",
+    "_origId": "cbt-048",
+    "_cbtPdf": "cbt1",
+    "_cbtPdfNumber": 48
+  },
+  {
+    "id": 10899,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 100,
+    "title": "다음의 SQL 문을 사용할 때, 날짜형 변수를 문자형으로 바꿀 수 있는 것은?\n\n`SELECT SYSDATE FROM DUAL;`",
+    "options": [
+      "TO_NUMBER",
+      "TO_DATE",
+      "TO_CHAR",
+      "CONVERT"
+    ],
+    "correctIndex": 2,
+    "explanation": "TO_CHAR 함수를 사용하면 문자형 타입으로 변환한다.",
+    "chapter": "함수",
+    "_source": "cbt-mock",
+    "_origId": "cbt-049",
+    "_cbtPdf": "cbt1",
+    "_cbtPdfNumber": 49
+  },
+  {
+    "id": 10900,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 101,
+    "title": "다음 SQL 실행 결과로 가장 알맞은 것은?\n\n`SELECT REGION, AMOUNT, COUNT(*) FROM TB_SALE GROUP BY CUBE(REGION, AMOUNT);`",
+    "options": [
+      "5 행 — EAST/1000/2, EAST/NULL/2, WEST/2000/1, WEST/NULL/1, NULL/NULL/3",
+      "7 행 — EAST/1000/2, WEST/2000/1, EAST/NULL/2, WEST/NULL/1, NULL/1000/2, NULL/2000/1, NULL/NULL/3 (정답)",
+      "4 행 — EAST/1000/2, WEST/2000/1, EAST/NULL/2, WEST/NULL/1",
+      "2 행 — EAST/1000/2, WEST/2000/1"
+    ],
+    "correctIndex": 1,
+    "explanation": "GROUP BY CUBE(REGION, AMOUNT) 는 모든 가능한 집계 조합을 생성. CUBE 는 N 개 컬럼에 대해 2^N=4 종류 그룹: (REGION, AMOUNT) 2 행 + (REGION) 2 행 + (AMOUNT) 2 행 + () 1 행 = 7 행.",
+    "chapter": "그룹 함수",
+    "_source": "cbt-mock",
+    "_origId": "cbt-050",
+    "_cbtPdf": "cbt1",
+    "_cbtPdfNumber": 50,
+    "references": [
+      {
+        "type": "table",
+        "caption": "[TB_SALE] 테이블",
+        "headers": [
+          "REGION",
+          "AMOUNT"
+        ],
+        "rows": [
+          [
+            "EAST",
+            "1000"
+          ],
+          [
+            "WEST",
+            "2000"
+          ],
+          [
+            "EAST",
+            "1000"
+          ]
+        ]
+      }
+    ]
   }
 ];

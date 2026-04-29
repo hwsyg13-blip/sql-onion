@@ -1,0 +1,807 @@
+{
+  "source": "yongjin-cbt",
+  "version": 1,
+  "notes": "이기적 CBT, 영진닷컴 PDF 모의고사 — pdftoppm 으로 페이지 PNG 추출 후 시각 정독. cbt-001 부터 cbt-NNN 으로 회차 별 ID 부여. ai-mock.json 과 분리하여 별도 관리.",
+  "schema": {
+    "_id": "cbt-001 ~ cbt-NNN (회차별 고유)",
+    "_pdf": "원본 PDF 식별 (cbt1, cbt2, ..., cbt7)",
+    "_pdfNumber": "원본 PDF 내 문제 번호 (1~50)",
+    "subject": "1과목 | 2과목",
+    "chapter": "SQLD 출제 영역 (ai-mock.json 의 chapter_list 와 동일)",
+    "title": "문항 본문",
+    "options": "보기 4개",
+    "correctIndex": "0~3",
+    "explanation": "해설",
+    "references": "표/SQL/도식 객체 배열"
+  },
+  "authored": [
+    {
+      "_id": "cbt-001", "_pdf": "cbt1", "_pdfNumber": 1,
+      "subject": "2과목", "chapter": "윈도우 함수",
+      "title": "다음의 PREV_SAL 은 어떤 윈도우 함수를 사용해야 하는가?",
+      "options": ["LEAD", "LAG", "NTILE", "LAST_VALUE"],
+      "correctIndex": 1,
+      "explanation": "LAG() 윈도우 함수는 이전 행의 몇 번째 행 값을 가지고 올 수 있다.",
+      "references": [
+        {
+          "type": "table",
+          "caption": "결과 테이블",
+          "headers": ["ENAME", "HIREDATE", "SAL", "PREV_SAL"],
+          "rows": [
+            ["ALLEN", "20-FEB-81", "1600", ""],
+            ["WARD", "22-FEB-81", "1250", "1600"],
+            ["TURNER", "08-SEP-81", "1500", "1250"],
+            ["MARTIN", "28-SEP-81", "1250", "1500"]
+          ]
+        }
+      ]
+    },
+    {
+      "_id": "cbt-002", "_pdf": "cbt1", "_pdfNumber": 2,
+      "subject": "2과목", "chapter": "서브쿼리",
+      "title": "다음 SQL 실행 시, 최종 출력되는 결과로 가장 알맞은 것은?",
+      "options": ["103", "101, 104", "102, 103", "102, 103, 104"],
+      "correctIndex": 2,
+      "explanation": "TB_CUSTOMER 에서 CITY=SEOUL 인 CUST_ID 는 1, 4 이다. WHERE CUST_ID NOT IN (1, 4) 로 TB_ORDER 의 ORDER_ID 102, 103 이 출력된다.",
+      "references": [
+        {
+          "type": "table", "caption": "[TB_CUSTOMER] 테이블",
+          "headers": ["CUST_ID", "NAME", "CITY"],
+          "rows": [["1", "Kim", "SEOUL"], ["2", "Lee", "BUSAN"], ["3", "Park", "INCHEON"], ["4", "Choi", "SEOUL"]]
+        },
+        {
+          "type": "table", "caption": "[TB_ORDER] 테이블",
+          "headers": ["ORDER_ID", "CUST_ID", "AMOUNT"],
+          "rows": [["101", "1", "1000"], ["102", "2", "2000"], ["103", "3", "3000"], ["104", "4", "4000"]]
+        },
+        {
+          "type": "sql",
+          "code": "SELECT ORDER_ID\nFROM   TB_ORDER\nWHERE  CUST_ID NOT IN (\n  SELECT CUST_ID\n  FROM   TB_CUSTOMER\n  WHERE  CITY = 'SEOUL'\n);"
+        }
+      ]
+    },
+    {
+      "_id": "cbt-003", "_pdf": "cbt1", "_pdfNumber": 3,
+      "subject": "2과목", "chapter": "서브쿼리",
+      "title": "다음 SQL 실행 시 최종 출력되는 결과로 가장 알맞은 것은?",
+      "options": ["Pen", "Pencil", "Book", "모두 출력"],
+      "correctIndex": 2,
+      "explanation": "WHERE 조건이 서브쿼리의 결과와 같은 데이터를 조회한다. 최고가 1000인 Book 만 조건에 부합.",
+      "references": [
+        {
+          "type": "table", "caption": "[PRODUCTS] 테이블",
+          "headers": ["NO", "NAME", "PRICE"],
+          "rows": [["1", "Pen", "500"], ["2", "Pencil", "300"], ["3", "Book", "1000"]]
+        },
+        {
+          "type": "sql",
+          "code": "SELECT NAME\nFROM   PRODUCTS\nWHERE  PRICE = (SELECT MAX(PRICE) FROM PRODUCTS);"
+        }
+      ]
+    },
+    {
+      "_id": "cbt-004", "_pdf": "cbt1", "_pdfNumber": 4,
+      "subject": "2과목", "chapter": "관계형 DB와 SELECT",
+      "title": "두 개 릴레이션 Student 와 Department 가 있을 때, 질의문 \"SELECT * FROM Student s, Department d WHERE s.dept > 100;\" 을 수행하시오. 결과의 차수(Degree) 와 카디널리티(Cardinality) 는 얼마인가? (단, Student 는 5 개 속성, Department 는 3 개 속성을 가진다)",
+      "options": ["차수 5, 카디널리티 3", "차수 5, 카디널리티 2", "차수 8, 카디널리티 9", "차수 8, 카디널리티 3"],
+      "correctIndex": 2,
+      "explanation": "차수(Degree) 는 결과 컬럼 수 — Student 5 + Department 3 = 8. 카디널리티는 결과 행 수 — 조건 없는 카티션 곱 5×3=15 이지만 WHERE s.dept>100 으로 Student 측이 3 행으로 줄어 3×3=9 행이 된다.",
+      "references": [
+        {
+          "type": "table", "caption": "[Student] 테이블 (5 행)",
+          "headers": ["학번", "이름", "주소", "점수", "dept"],
+          "rows": [
+            ["9802", "홍길동", "서울", "90", "100"],
+            ["9802", "김철수", "인천", "80", "200"],
+            ["9803", "박지원", "부산", "80", "100"],
+            ["9804", "이지원", "인천", "70", "300"],
+            ["9805", "김지원", "서울", "75", "100"]
+          ]
+        },
+        {
+          "type": "table", "caption": "[Department] 테이블 (3 행)",
+          "headers": ["학과코드", "학과명", "학과위치"],
+          "rows": [
+            ["100", "전산", "인천관"],
+            ["200", "영문", "인문관"],
+            ["300", "수학", "자연관"]
+          ]
+        }
+      ]
+    },
+    {
+      "_id": "cbt-005", "_pdf": "cbt1", "_pdfNumber": 5,
+      "subject": "2과목", "chapter": "서브쿼리",
+      "title": "다음 중 자신과 성별이 같은 부양가족을 가진 직원의 이름을 검색하는 질의를 SQL 로 적절하게 표현한 것은?",
+      "options": [
+        "SELECT E.이름 FROM 직원 AS E WHERE E.이름 LIKE (SELECT 이름 FROM 부양가족 WHERE E.사번 = 사번);",
+        "SELECT E.이름 FROM 직원 AS E WHERE NOT EXISTS (SELECT * FROM 부양가족 WHERE E.사번 = 사번);",
+        "SELECT E.이름 FROM 직원 AS E WHERE EXISTS (SELECT * FROM 부양가족 WHERE E.사번 = 사번 AND E.성별 = 성별);",
+        "SELECT E.이름 FROM 직원 AS E WHERE NOT EXISTS (SELECT * FROM 부양가족 WHERE E.사번 = 사번 AND E.성별 = 성별);"
+      ],
+      "correctIndex": 2,
+      "explanation": "EXISTS 와 상관 서브쿼리로 직원과 사번이 같고 성별도 같은 부양가족이 존재하는지 확인. ② NOT EXISTS 는 정반대 의미, ① LIKE 는 부적절, ④ NOT EXISTS 는 \"같은 성별 부양가족이 없는\" 직원 의미라 정반대."
+    },
+    {
+      "_id": "cbt-006", "_pdf": "cbt1", "_pdfNumber": 6,
+      "subject": "2과목", "chapter": "WHERE",
+      "title": "다음 테이블과 SQL 을 기준으로 실행 결과가 올바른 것은?",
+      "options": [
+        "Kim, Lee, Park, Jang 4 행 (Kim/Park/Lee 순서)",
+        "Kim, Park, Lee, Jang 4 행 (정답 시나리오)",
+        "Kim, Lee, Park, Jang 4 행 (다른 순서)",
+        "Kim, Jang 2 행만"
+      ],
+      "correctIndex": 1,
+      "explanation": "AND 가 OR 보다 우선순위가 높으므로 GRADE='A' OR (GRADE='B' AND STATUS='ACTIVE') 로 평가된다. GRADE=A 인 Kim·Lee·Park 3 행 + GRADE=B AND STATUS=ACTIVE 인 Jang 1 행 = 총 4 행.",
+      "references": [
+        {
+          "type": "table", "caption": "[TB_USER] 테이블",
+          "headers": ["ID", "NAME", "GRADE", "STATUS"],
+          "rows": [
+            ["1", "Kim", "A", "ACTIVE"],
+            ["2", "Lee", "A", "INACTIVE"],
+            ["3", "Park", "A", "INACTIVE"],
+            ["4", "Choi", "C", "ACTIVE"],
+            ["5", "Jang", "B", "ACTIVE"]
+          ]
+        },
+        {
+          "type": "sql",
+          "code": "SELECT NAME, GRADE, STATUS\nFROM   TB_USER\nWHERE  GRADE = 'A' OR GRADE = 'B' AND STATUS = 'ACTIVE';"
+        }
+      ]
+    },
+    {
+      "_id": "cbt-007", "_pdf": "cbt1", "_pdfNumber": 7,
+      "subject": "2과목", "chapter": "그룹 함수",
+      "title": "다음 SQL 실행 결과로 가장 알맞은 것은?",
+      "options": ["3, 6000, 2000", "4, 6000, 2000", "3, 6000, 1500", "3, NULL, 2000"],
+      "correctIndex": 0,
+      "explanation": "집계 함수는 NULL 을 무시한다. COUNT(SALARY) 는 NULL 제외 3, SUM(SALARY) = 1000+2000+3000 = 6000, AVG(SALARY) = 6000/3 = 2000.",
+      "references": [
+        {
+          "type": "table", "caption": "[EMPLOYEE] 테이블",
+          "headers": ["ID", "NAME", "SALARY"],
+          "rows": [
+            ["1", "A", "1000"],
+            ["2", "B", "2000"],
+            ["3", "C", "NULL"],
+            ["4", "D", "3000"]
+          ]
+        },
+        {
+          "type": "sql",
+          "code": "SELECT COUNT(SALARY), SUM(SALARY), AVG(SALARY)\nFROM   EMPLOYEE;"
+        }
+      ]
+    },
+    {
+      "_id": "cbt-008", "_pdf": "cbt1", "_pdfNumber": 8,
+      "subject": "1과목", "chapter": "데이터 모델 개념",
+      "title": "데이터 모델링에 대한 설명 중 알맞은 것은?",
+      "options": [
+        "데이터 모델링은 3 가지 구성요소로 Process, Attributes, Relationships 가 있다.",
+        "실제로 데이터베이스를 구축할 때 도구로 사용된다. 객체 지향 데이터 모델링은 객체와 관계로 구성된다.",
+        "물리 모델링 → 논리 모델링 → 개념 모델링 단계로 갈수록 추상적이다.",
+        "논리 모델링은 외부에는 종속적이지만 데이터베이스에 종속적이지 않다."
+      ],
+      "correctIndex": 3,
+      "explanation": "데이터 모델의 3 구성요소는 Things, Attributes, Relationships 이다. 객체 지향 모델링과 별개. 단계는 개념 → 논리 → 물리 순. 논리 모델링은 외부 사용자 관점에서는 종속적이지만 특정 DBMS 에 종속적이지 않다."
+    },
+    {
+      "_id": "cbt-009", "_pdf": "cbt1", "_pdfNumber": 9,
+      "subject": "1과목", "chapter": "정규화",
+      "title": "다음 중 정규화의 이점으로 적절하지 않은 것은?",
+      "options": ["데이터 중복 최소화", "자주 갱신 발생", "이상 현상 제거", "무결성 보장"],
+      "correctIndex": 1,
+      "explanation": "정규화는 데이터 구조 무결성을 통해 효율을 높이며, 자주 갱신은 JOIN 을 증가시켜 성능을 저하시킬 수 있는 단점이다."
+    },
+    {
+      "_id": "cbt-010", "_pdf": "cbt1", "_pdfNumber": 10,
+      "subject": "1과목", "chapter": "관계",
+      "title": "다음은 ERD(Entity Relationship Diagram) 작성 순서이다. 올바른 것을 고르시오.\n\n가) 엔터티를 그린다\n나) 엔터티를 적절하게 배치한다\n다) 엔터티 간의 관계를 설정한다\n라) 관계명을 기술한다\n마) 관계의 참여도를 기술한다\n바) 관계의 필수 여부를 기술한다",
+      "options": [
+        "나) - 가) - 다) - 라) - 마) - 바)",
+        "가) - 나) - 다) - 마) - 라) - 바)",
+        "나) - 가) - 다) - 라) - 마) - 바)",
+        "가) - 나) - 다) - 라) - 마) - 바)"
+      ],
+      "correctIndex": 1,
+      "explanation": "ERD 작성 순서는 엔터티 그리기 → 적절히 배치 → 관계 설정 → 관계 참여도 (카디널리티) 기술 → 관계명 기술 → 관계 필수 여부 (선택사양) 기술 순. 정답 ② 가)나)다)마)라)바)."
+    },
+    {
+      "_id": "cbt-011", "_pdf": "cbt1", "_pdfNumber": 11,
+      "subject": "2과목", "chapter": "조인",
+      "title": "다음 중 해시 조인(Hash Join) 에 대한 설명으로 올바르지 않은 것은?",
+      "options": [
+        "해시 조인은 해시 함수를 사용하여 주소를 찾으므로 조인을 수행한다.",
+        "해시 조인을 할 때는 선행 테이블의 크기가 작아야 한다.",
+        "해시 조인은 CPU 연산이 많이 발생한다.",
+        "해시 조인은 랜덤 액세스(Random Access) 로 인해 비효율적이다."
+      ],
+      "correctIndex": 3,
+      "explanation": "해시 조인은 해시 테이블을 메모리에 만들어 매칭하므로 랜덤 액세스가 발생하지 않고 순차 처리된다. 랜덤 액세스가 많은 것은 Nested Loop 조인의 특성이다."
+    },
+    {
+      "_id": "cbt-012", "_pdf": "cbt1", "_pdfNumber": 12,
+      "subject": "2과목", "chapter": "함수",
+      "title": "다음 SQL 실행 결과로 가장 알맞은 것은?",
+      "options": [
+        "NAME, SALARY 컬럼 — Kim 3000, Lee 4000, Park 0",
+        "NAME, SALARY 컬럼 — Kim 3000, Lee 4000, Park NULL",
+        "NAME, SALARY 컬럼 — Kim 0, Lee 0, Park 0",
+        "NAME, NVL(SALARY,0) 컬럼 — Kim 3000, Lee 4000, Park 0"
+      ],
+      "correctIndex": 0,
+      "explanation": "NVL 함수는 NULL 을 대체하므로 Park 의 SALARY 는 0 으로 출력된다. 또한 AS 를 이용해서 별칭을 SALARY 로 주었으므로 컬럼이 각각 NAME, SALARY 로 표현되어야 한다.",
+      "references": [
+        {
+          "type": "table", "caption": "[EMP] 테이블",
+          "headers": ["ID", "NAME", "SALARY"],
+          "rows": [["1", "Kim", "3000"], ["2", "Lee", "4000"], ["3", "Park", "NULL"]]
+        },
+        {
+          "type": "sql",
+          "code": "SELECT NAME, NVL(SALARY, 0) AS SALARY\nFROM   EMP;"
+        }
+      ]
+    },
+    {
+      "_id": "cbt-013", "_pdf": "cbt1", "_pdfNumber": 13,
+      "subject": "2과목", "chapter": "함수",
+      "title": "다음 SQL 실행 결과로 가장 알맞은 것은?",
+      "options": [
+        "A=PASS, B=FAIL, C=NO DATA",
+        "A=PASS, B=NO DATA, C=FAIL",
+        "A=FAIL, B=PASS, C=NO DATA",
+        "A=NO DATA, B=PASS, C=FAIL"
+      ],
+      "correctIndex": 0,
+      "explanation": "CASE 식은 위에서 아래로 조건을 순차적으로 평가한다. A(85) ≥ 80 이므로 PASS. B(72) 는 80 미만이고 NULL 이 아니므로 ELSE FAIL. C(NULL) 은 NULL ≥ 80 비교 불가, NULL IS NULL 만족하므로 NO DATA.",
+      "references": [
+        {
+          "type": "table", "caption": "[SCORE] 테이블",
+          "headers": ["STUDENT", "SCORE"],
+          "rows": [["A", "85"], ["B", "72"], ["C", "NULL"]]
+        },
+        {
+          "type": "sql",
+          "code": "SELECT STUDENT,\n       CASE\n         WHEN SCORE >= 80 THEN 'PASS'\n         WHEN SCORE IS NULL THEN 'NO DATA'\n         ELSE 'FAIL'\n       END AS RESULT\nFROM   SCORE;"
+        }
+      ]
+    },
+    {
+      "_id": "cbt-014", "_pdf": "cbt1", "_pdfNumber": 14,
+      "subject": "2과목", "chapter": "WHERE",
+      "title": "다음 중 아래 테이블 정의와 인덱스 구조를 참고하여, 인덱스를 효율적으로 액세스할 수 없는 검색조건을 고르시오.",
+      "options": [
+        "WHERE 주문번호 BETWEEN 1 AND 10",
+        "WHERE 주문자명 LIKE '%홍길동%'",
+        "WHERE 주문일자 >= '20181201'",
+        "WHERE 주문일자 = '20181201'"
+      ],
+      "correctIndex": 1,
+      "explanation": "LIKE 패턴이 '%' 로 시작하면 인덱스의 정렬 순서를 활용할 수 없어 인덱스 풀 스캔 또는 테이블 풀 스캔이 발생한다. =, >=, BETWEEN 은 인덱스 범위 스캔으로 효율적 처리 가능.",
+      "references": [
+        {
+          "type": "sql",
+          "code": "CREATE TABLE 주문 (\n  주문번호  INT          NOT NULL,\n  주문자명  VARCHAR(40)  NULL,\n  주문금액  MONEY        NULL,\n  주문일자  VARCHAR(8)   NOT NULL\n);\n\nCREATE UNIQUE INDEX 주문_pk   ON 주문 (주문번호);\nCREATE INDEX        주문_ind1 ON 주문 (주문자명);\nCREATE INDEX        주문_ind2 ON 주문 (주문일자, 주문금액);"
+        }
+      ]
+    },
+    {
+      "_id": "cbt-015", "_pdf": "cbt1", "_pdfNumber": 15,
+      "subject": "1과목", "chapter": "식별자",
+      "title": "다음 중 식별자(Identifier) 로 가장 부적절한 속성은?",
+      "options": ["사번", "주민등록번호", "학번", "이메일 수신 여부 (Y/N)"],
+      "correctIndex": 3,
+      "explanation": "식별자는 유일성을 보장해야 한다. 이메일 수신 여부는 Y, N 만 가능해 여러 번 입력될 수 있으므로 식별자로 적합하지 않다."
+    },
+    {
+      "_id": "cbt-016", "_pdf": "cbt1", "_pdfNumber": 16,
+      "subject": "2과목", "chapter": "절차형 SQL",
+      "title": "다음 중 절차형 SQL 을 이용하여 주로 만드는 것이 아닌 것은?",
+      "options": ["PROCEDURE", "TRIGGER", "BUILT-IN FUNCTION", "USER DEFINED FUNCTION"],
+      "correctIndex": 2,
+      "explanation": "절차형 SQL 은 사용자가 작성·정의하는 PROCEDURE, TRIGGER, USER DEFINED FUNCTION 을 만들 수 있다. BUILT-IN FUNCTION 은 시스템 내장 함수로 절차형 SQL 작성 대상이 아니다."
+    },
+    {
+      "_id": "cbt-017", "_pdf": "cbt1", "_pdfNumber": 17,
+      "subject": "2과목", "chapter": "그룹 함수",
+      "title": "다음 주어진 테이블에 대해서 아래와 같은 결괏값이 반환되도록 아래 SQL 문의 빈칸에 들어갈 것을 고르시오.",
+      "options": [
+        "MAX(COL2), MIN(COL2), SUM(COL1)",
+        "MAX(COL1), MIN(COL2), SUM(COL2)",
+        "MAX(COL1), MIN(COL2), SUM(COL1)",
+        "MIN(COL1), MAX(COL2), MAX(COL1)"
+      ],
+      "correctIndex": 2,
+      "explanation": "A 속성은 COL1 의 최댓값 (12), B 속성은 COL2 의 최솟값 (0), C 속성은 COL1 속성의 합 (NULL+0+10+11+12=33) 이다.",
+      "references": [
+        {
+          "type": "table", "caption": "[SQLD_29] 테이블",
+          "headers": ["COL1", "COL2", "COL3"],
+          "rows": [
+            ["NULL", "0", "30"],
+            ["0", "NULL", "0"],
+            ["10", "20", "NULL"],
+            ["11", "21", "31"],
+            ["12", "22", "32"]
+          ]
+        },
+        {
+          "type": "table", "caption": "[결과]",
+          "headers": ["A", "B", "C"],
+          "rows": [["12", "0", "33"]]
+        },
+        {
+          "type": "sql",
+          "code": "SELECT (   ) AS A,\n       (   ) AS B,\n       (   ) AS C\nFROM   SQLD_29;"
+        }
+      ]
+    },
+    {
+      "_id": "cbt-018", "_pdf": "cbt1", "_pdfNumber": 18,
+      "subject": "2과목", "chapter": "함수",
+      "title": "다음 SQL 문의 실행 결과는 무엇인가?",
+      "options": ["1", "2", "3", "NULL"],
+      "correctIndex": 1,
+      "explanation": "COALESCE 함수는 NULL 이 아닌 첫 번째 값을 리턴하는 함수이다. 위 문제에서 첫 번째는 NULL 이고 두 번째는 '2' 이다. 따라서 '2' 가 리턴된다.",
+      "references": [
+        {
+          "type": "sql",
+          "code": "SELECT COALESCE(NULL, '2', '1') FROM DUAL;"
+        }
+      ]
+    },
+    {
+      "_id": "cbt-019", "_pdf": "cbt1", "_pdfNumber": 19,
+      "subject": "2과목", "chapter": "DCL·TCL",
+      "title": "다음 트랜잭션 처리 결과로 최종 테이블에 남는 데이터의 개수는? (단, SQL Server 환경이다.)",
+      "options": ["0", "1", "2", "3"],
+      "correctIndex": 2,
+      "explanation": "INSERT 1 → SAVEPOINT S1 → INSERT 2 → ROLLBACK TO S1 (INSERT 2 취소) → INSERT 3 → COMMIT. 최종 TBL 에 1, 3 두 행 = COUNT 2.",
+      "references": [
+        {
+          "type": "sql",
+          "code": "BEGIN TRAN;\nCREATE TABLE TBL (ID INT PRIMARY KEY);\nINSERT INTO TBL VALUES (1);\nSAVE TRAN S1;\nINSERT INTO TBL VALUES (2);\nROLLBACK TRAN S1;\nINSERT INTO TBL VALUES (3);\nCOMMIT;\nSELECT COUNT(*) FROM TBL;"
+        }
+      ]
+    },
+    {
+      "_id": "cbt-020", "_pdf": "cbt1", "_pdfNumber": 20,
+      "subject": "1과목", "chapter": "엔터티",
+      "title": "발생 시점에 따른 엔터티 분류에 의한 중심 엔터티가 아닌 것은?",
+      "options": ["매출", "주문", "사원", "계약"],
+      "correctIndex": 2,
+      "explanation": "사원, 부서, 고객, 상품, 자재 등이 기본 엔터티가 될 수 있다. 매출·주문·계약은 기본 엔터티에서 발생하는 중심 엔터티에 해당한다."
+    },
+    {
+      "_id": "cbt-021", "_pdf": "cbt1", "_pdfNumber": 21,
+      "subject": "1과목", "chapter": "관계",
+      "title": "주문과 주문상세 테이블이 1:1 필수관계일 때 이에 대한 설명으로 올바른 것은? (단, 둘 다 PK 로 주문번호를 가지고 있으며 식별관계이다.)",
+      "options": [
+        "주문 테이블의 전체 개수와 주문상세 테이블의 전체 개수는 다르다.",
+        "주문이 입력되어도 주문상세 테이블은 입력되지 않을 수 있다.",
+        "주문 테이블 MINUS 주문상세 테이블의 출력 건수는 0 건이다.",
+        "주문 테이블 INTERSECT 주문상세 테이블의 출력 건수는 주문 테이블 데이터 합계 다음으로 적다."
+      ],
+      "correctIndex": 2,
+      "explanation": "1:1 필수관계이고 주문번호가 양쪽 PK 이므로 두 테이블의 PK 집합이 정확히 같다. 따라서 주문 MINUS 주문상세 결과는 0 건이고, INTERSECT 결과는 두 테이블의 행 수와 같다."
+    },
+    {
+      "_id": "cbt-022", "_pdf": "cbt1", "_pdfNumber": 22,
+      "subject": "2과목", "chapter": "윈도우 함수",
+      "title": "그룹 내 순위 관련 WINDOW 함수의 특징으로 틀린 것은?",
+      "options": [
+        "RANK 함수는 동일한 값에 대해서는 동일한 순위를 부여한다 (같은 등수에 여럿 존재 시 등수 SKIP 가능).",
+        "DENSE_RANK 함수는 동일한 값에 대해서는 동일한 순위를 부여한다 (같은 등수 여럿 존재해도 등수 SKIP 없음).",
+        "ROW_NUMBER 함수는 동일한 값이라도 고유한 순위를 부여한다.",
+        "CUMM_RANK 함수는 동일한 값에 대해서는 동일한 순위를 부여한다 (같은 등수 여럿 존재해도 등수 SKIP 없음)."
+      ],
+      "correctIndex": 3,
+      "explanation": "그룹 내 순위 관련 WINDOW FUNCTION 은 RANK, DENSE_RANK, ROW_NUMBER 가 있다. CUMM_RANK 라는 함수는 표준 윈도우 함수에 없다. (DENSE_RANK 가 SKIP 없이 순위 부여)"
+    },
+    {
+      "_id": "cbt-023", "_pdf": "cbt1", "_pdfNumber": 23,
+      "subject": "2과목", "chapter": "조인",
+      "title": "다음 SQL 실행 결과로 가장 알맞은 것은?",
+      "options": ["1", "2", "3", "0"],
+      "correctIndex": 1,
+      "explanation": "T1 LEFT OUTER JOIN T2 ON T1.COL=T2.COL 결과: (1,1), (2,2), (3,NULL). 다시 LEFT OUTER JOIN T3 ON T1.COL=T3.COL: 행 수는 3 행 유지. WHERE T2.COL IS NOT NULL 조건으로 (1,1), (2,2) 두 행만 남음 → COUNT 2.",
+      "references": [
+        {
+          "type": "sql",
+          "code": "SELECT COUNT(*) FROM T1\nLEFT OUTER JOIN T2 ON T1.COL = T2.COL\nLEFT OUTER JOIN T3 ON T1.COL = T3.COL\nWHERE T2.COL IS NOT NULL;"
+        }
+      ]
+    },
+    {
+      "_id": "cbt-024", "_pdf": "cbt1", "_pdfNumber": 24,
+      "subject": "1과목", "chapter": "관계",
+      "title": "다음 식별관계와 비식별관계에 대해 옳은 것은?",
+      "options": [
+        "비식별관계는 자식 주식별자에 부모의 주식별자를 포함한다.",
+        "비식별관계는 강한 연결 관계를 의미한다.",
+        "식별관계는 자식 측의 카디널리티 선이 점선이다.",
+        "식별관계는 부모 엔터티가 자식 엔터티에 종속되는 관계이다."
+      ],
+      "correctIndex": 3,
+      "explanation": "식별관계는 부모의 주식별자가 자식의 주식별자로 포함되어 강한 연결 관계를 갖는다. ① 비식별관계는 부모 PK 가 자식의 일반 속성으로 상속, ② 비식별관계는 약한 연결, ③ 식별관계는 실선 표기. ④ 가 옳다."
+    },
+    {
+      "_id": "cbt-025", "_pdf": "cbt1", "_pdfNumber": 25,
+      "subject": "2과목", "chapter": "DML",
+      "title": "다음 중 DML 에 해당하지 않는 것은?",
+      "options": ["INSERT", "DELETE", "MERGE", "TRUNCATE"],
+      "correctIndex": 3,
+      "explanation": "TRUNCATE 는 DDL 에 해당된다 (자동 커밋, ROLLBACK 불가). INSERT/UPDATE/DELETE/MERGE 가 DML."
+    },
+    {
+      "_id": "cbt-026", "_pdf": "cbt1", "_pdfNumber": 26,
+      "subject": "2과목", "chapter": "함수",
+      "title": "다음의 SQL 문과 동일한 것을 고르시오.\n\n`SELECT NVL(Name, '') FROM Emp;`",
+      "options": [
+        "SELECT CASE WHEN Name IS NOT NULL THEN Name ELSE '0' END AS USER_NAME FROM Emp;",
+        "SELECT CASE WHEN Name IS NOT NULL THEN '0' ELSE Name END AS USER_NAME FROM Emp;",
+        "SELECT CASE WHEN Name IS NULL THEN '' ELSE Name END AS USER_NAME FROM Emp;",
+        "SELECT CASE WHEN Name IS NULL THEN '0' ELSE '0' END AS USER_NAME FROM Emp;"
+      ],
+      "correctIndex": 2,
+      "explanation": "NVL(Name, '') 은 Name 이 NULL 이면 '' 로 대체, 아니면 Name 그대로 반환. 동등한 CASE 식은 \"WHEN Name IS NULL THEN '' ELSE Name END\"."
+    },
+    {
+      "_id": "cbt-027", "_pdf": "cbt1", "_pdfNumber": 27,
+      "subject": "2과목", "chapter": "DCL·TCL",
+      "title": "EMP 테이블 7788 번 사원의 SAL 값이 현재 1,000 인 상황에서 아래 TX1, TX2 두 개의 트랜잭션이 동시에 수행된다. 시점 1 에 TX1 이 +100 update, 시점 2 에 TX2 가 +200 update, 시점 3 에 TX1 이 commit 한다. 최종 7788 의 SAL 값은? (Lock 충돌 시 TX2 는 TX1 commit 까지 대기)",
+      "options": ["1000", "1100", "1200", "1300"],
+      "correctIndex": 3,
+      "explanation": "TX2 의 update 는 Lock 으로 인해 TX1 의 commit 까지 대기한다. TX1 이 1,100 으로 갱신·commit 후 TX2 가 +200 을 더해 1,300 이 된다."
+    },
+    {
+      "_id": "cbt-028", "_pdf": "cbt1", "_pdfNumber": 28,
+      "subject": "2과목", "chapter": "윈도우 함수",
+      "title": "윈도우 함수에 대한 설명으로 올바르지 않은 것은?",
+      "options": [
+        "윈도우 함수는 GROUP BY 와 함께 사용하여 처리하는 방식이다.",
+        "PARTITION BY 절을 사용해 윈도우의 분리 기준을 설정한다.",
+        "WINDOWING 절은 ORDER BY 와 함께 사용된다.",
+        "PARTITION BY 절이 없으면 전체 행이 하나의 윈도우가 된다."
+      ],
+      "correctIndex": 0,
+      "explanation": "GROUP BY 는 그룹 단위로 행을 축약하지만 윈도우 함수는 원본 행을 보존하면서 그룹별 계산만 수행한다. 둘은 별개의 메커니즘이다."
+    },
+    {
+      "_id": "cbt-029", "_pdf": "cbt1", "_pdfNumber": 29,
+      "subject": "2과목", "chapter": "계층형 질의",
+      "title": "아래의 계층형 SQL 에서 리프 데이터이면 1, 그렇지 않으면 0 을 출력하고 싶을 때 사용하는 키워드로 알맞은 것은?",
+      "options": ["CONNECT_BY_ISLEAF", "CONNECT_BY_ISCYCLE", "SYS_CONNECT_BY_PATH", "CONNECT_BY_ROOT"],
+      "correctIndex": 0,
+      "explanation": "CONNECT_BY_ISLEAF 는 트리에서 리프 노드 (자식 없음) 이면 1, 아니면 0 을 반환한다.",
+      "references": [
+        {
+          "type": "sql",
+          "code": "SELECT LEVEL,\n       LPAD(' ', 4 * (LEVEL - 1)) || EMPNO,\n       MGR,\n       (   ) AS ISLEAF\nFROM   SCOTT.EMP\nSTART WITH MGR IS NULL\nCONNECT BY PRIOR EMPNO = MGR;"
+        }
+      ]
+    },
+    {
+      "_id": "cbt-030", "_pdf": "cbt1", "_pdfNumber": 30,
+      "subject": "2과목", "chapter": "WHERE",
+      "title": "다음 쿼리 중 의미가 다른 하나는? (단, COL1 은 날짜형 컬럼이다.)",
+      "options": [
+        "WHERE TO_CHAR(COL1, 'YYYYMMDDHH24') = '2025010113' OR TO_CHAR(COL1, 'YYYYMMDDHH24') = '2025010114'",
+        "WHERE COL1 >= TO_DATE('20250101130000', 'YYYYMMDDHH24MISS') AND COL1 <= TO_DATE('20250101145959', 'YYYYMMDDHH24MISS')",
+        "WHERE ((TO_CHAR(COL1, 'YYYYMMDD'), TO_CHAR(COL1, 'HH24')) IN (('20250101', '13'), ('20250101', '14')))",
+        "WHERE COL1 = TO_DATE('2025010113', 'YYYYMMDDHH24') OR COL1 = TO_DATE('2025010114', 'YYYYMMDDHH24')"
+      ],
+      "correctIndex": 3,
+      "explanation": "①·②·③ 은 모두 2025-01-01 13:00:00 부터 14:59:59 까지 1 시간 범위를 포함. ④ 는 정확히 13:00:00 또는 14:00:00 두 시점만 매칭하므로 범위가 좁아 의미가 다르다."
+    },
+    {
+      "_id": "cbt-031", "_pdf": "cbt1", "_pdfNumber": 31,
+      "subject": "2과목", "chapter": "서브쿼리",
+      "title": "다음 SQL 의 의도와 가장 가까운 설명은? (단, SAL 은 급여를 의미한다.)\n\n`SELECT * FROM EMP WHERE SAL > (SELECT AVG(SAL) FROM EMP);`",
+      "options": [
+        "평균 급여보다 많은 사원 목록을 조회한다.",
+        "평균 급여보다 적은 사원 목록을 조회한다.",
+        "평균 급여를 포함한 전체 사원 목록을 조회한다.",
+        "오류가 발생하는 쿼리이다."
+      ],
+      "correctIndex": 0,
+      "explanation": "서브쿼리가 전체 직원의 평균 급여를 반환하고, 메인 쿼리는 그 평균보다 SAL 이 큰 사원만 조회한다."
+    },
+    {
+      "_id": "cbt-032", "_pdf": "cbt1", "_pdfNumber": 32,
+      "subject": "2과목", "chapter": "서브쿼리",
+      "title": "Subquery 의 종류 중에서 Subquery 가 Mainquery 의 제공자 역할을 하고 Mainquery 의 값이 Subquery 에 주입되지 않는 유형은 무엇인가?",
+      "options": ["Filter형 Subquery", "Early Filter형 Subquery", "Associative Subquery", "Access Subquery"],
+      "correctIndex": 3,
+      "explanation": "Access Subquery 는 제공자 역할을 하는 서브쿼리이다 (메인쿼리에서 서브쿼리로 값 주입 없음)."
+    },
+    {
+      "_id": "cbt-033", "_pdf": "cbt1", "_pdfNumber": 33,
+      "subject": "2과목", "chapter": "집합 연산자",
+      "title": "다음 중 집합 연산자에 대한 설명으로 올바르지 않은 것은?",
+      "options": [
+        "UNION 연산자를 사용할 때 각각의 SELECT 문에 ORDER BY 를 사용할 수 있다.",
+        "UNION 은 중복을 제거하는 데 반해 UNION ALL 은 중복을 제거하지 않는다.",
+        "INTERSECT 는 중복 제거 및 정렬을 수행한다.",
+        "두 집합 간 중복이 없다면 UNION, UNION ALL 모두 동일한 결과를 출력한다."
+      ],
+      "correctIndex": 0,
+      "explanation": "집합 연산자 이용 시 ORDER BY 는 전체 집합 결과에 대해 한 번만 사용해야 하므로 마지막 SELECT 문 뒤에 작성된다. 각 SELECT 별로 ORDER BY 를 쓰면 문법 오류."
+    },
+    {
+      "_id": "cbt-034", "_pdf": "cbt1", "_pdfNumber": 34,
+      "subject": "1과목", "chapter": "데이터 모델 개념",
+      "title": "다음 설명 중 맞는 것은 무엇인가?",
+      "options": [
+        "모든 자료는 실질적으로 테이블에 저장되며 테이블에 있는 자료들을 꺼내 볼 수 있다.",
+        "데이터베이스 내에 테이블이란 존재하지 않는다.",
+        "아주 복잡한 자료도 테이블은 하나만 만드는 것이 바람직하다.",
+        "데이터베이스에는 단 한 개의 테이블만 존재할 수 있다."
+      ],
+      "correctIndex": 0,
+      "explanation": "데이터베이스에는 자료의 성격에 따라 N 개의 테이블을 생성한다. 모든 자료들은 테이블에 입력되며 조회·수정·삭제할 수 있다."
+    },
+    {
+      "_id": "cbt-035", "_pdf": "cbt1", "_pdfNumber": 35,
+      "subject": "2과목", "chapter": "관계형 DB와 SELECT",
+      "title": "학생(STUDENT) 테이블에 영문학과 학생 50 명, 법학과 학생 100 명, 수학과 학생 50 명의 정보가 저장되어 있을 때, 다음 SQL 문의 실행 결과 튜플 수는 각각 얼마인가? (단, DEPT 필드는 학과명, NAME 필드는 이름을 의미한다)\n\nㄱ : `SELECT DEPT FROM STUDENT;`\nㄴ : `SELECT DISTINCT DEPT FROM STUDENT;`\nㄷ : `SELECT NAME FROM STUDENT WHERE DEPT='영문학과';`",
+      "options": [
+        "ㄱ : 3, ㄴ : 3, ㄷ : 1",
+        "ㄱ : 200, ㄴ : 3, ㄷ : 1",
+        "ㄱ : 200, ㄴ : 3, ㄷ : 50",
+        "ㄱ : 200, ㄴ : 200, ㄷ : 50"
+      ],
+      "correctIndex": 2,
+      "explanation": "ㄱ 조건없이 전체 200=50+100+50. ㄴ DISTINCT 학과명 3 종 (영문/법/수학). ㄷ WHERE 영문학과 50 명."
+    },
+    {
+      "_id": "cbt-036", "_pdf": "cbt1", "_pdfNumber": 36,
+      "subject": "2과목", "chapter": "윈도우 함수",
+      "title": "다음 주어진 테이블에서 아래와 같은 결괏값을 반환하도록 아래의 SQL 문의 빈칸에 들어갈 올바른 것을 고르시오.",
+      "options": ["RANK()", "NTILE()", "ROW_NUMBER()", "DENSE_RANK()"],
+      "correctIndex": 3,
+      "explanation": "결괏값에서 중복된 등수 2 등 다음에 바로 다음 등수인 3 이 왔으므로 빈칸에는 DENSE_RANK 가 와야 한다.",
+      "references": [
+        {
+          "type": "table", "caption": "[SQLD_29] 테이블",
+          "headers": ["이름", "부서", "직책", "급여"],
+          "rows": [
+            ["조조", "경영지원부", "부장", "300"],
+            ["유비", "경영지원부", "과장", "250"],
+            ["제갈량", "인사부", "대리", "250"],
+            ["사마의", "인사부", "대리", "200"],
+            ["관우", "영업부", "사원", "150"],
+            ["장비", "영업부", "사원", "100"]
+          ]
+        },
+        {
+          "type": "table", "caption": "[결과]",
+          "headers": ["순위", "이름", "부서", "직책", "급여"],
+          "rows": [
+            ["1", "조조", "경영지원부", "부장", "300"],
+            ["2", "유비", "경영지원부", "과장", "250"],
+            ["2", "제갈량", "인사부", "대리", "250"],
+            ["3", "사마의", "인사부", "대리", "200"],
+            ["4", "관우", "영업부", "사원", "150"],
+            ["5", "장비", "영업부", "사원", "100"]
+          ]
+        },
+        {
+          "type": "sql",
+          "code": "SELECT (   ) OVER (ORDER BY 급여 DESC) AS 순위,\n       이름, 부서, 직책, 급여\nFROM   SQLD_29;"
+        }
+      ]
+    },
+    {
+      "_id": "cbt-037", "_pdf": "cbt1", "_pdfNumber": 37,
+      "subject": "1과목", "chapter": "정규화",
+      "title": "{학번, 과목번호} 는 결정자이면서 기본키이고 {성적, 지도교수명, 학과명} 은 종속자이다. 속성 중 과목번호가 결정자이고 {지도교수명, 학과명} 이 과목번호에만 함수적 종속성을 가진다면 이는 몇 차정규형에 속하고 몇 차정규화의 대상인가?",
+      "options": [
+        "2차정규형 - 3차정규화 대상",
+        "1차정규형 - 2차정규화 대상",
+        "3차정규형 - 보이스-코드 정규화 대상",
+        "보이스-코드 정규화 - 4차정규화 대상"
+      ],
+      "correctIndex": 1,
+      "explanation": "결정자 중 일부 속성에만 함수 종속성을 가지고 있는 'Partial Dependency Attribute' 를 갖는 것은 2차정규형을 위반한 사례에 해당한다. 즉 1차정규형이면서 2차정규화의 대상이 된다."
+    },
+    {
+      "_id": "cbt-038", "_pdf": "cbt1", "_pdfNumber": 38,
+      "subject": "2과목", "chapter": "윈도우 함수",
+      "title": "다음 SQL 실행 결과로 가장 알맞은 것은?",
+      "options": [
+        "A=1, C=1, B=3 (RANK 시나리오)",
+        "C=1, A=1, B=2 (DENSE_RANK 시나리오)",
+        "B=1, A=2, C=3",
+        "A=1, C=2, B=3 (정답 — ROW_NUMBER 고유 순번)"
+      ],
+      "correctIndex": 3,
+      "explanation": "ROW_NUMBER() 는 값에 상관없이 고유한 순위를 부여한다. ① 은 RANK() 답, ② 는 DENSE_RANK() 답 (A, C 동점이므로 출력 순서는 A, C 또는 C, A 가능).",
+      "references": [
+        {
+          "type": "table", "caption": "[TB_SCORE] 테이블",
+          "headers": ["NAME", "SCORE"],
+          "rows": [["A", "90"], ["B", "85"], ["C", "90"]]
+        },
+        {
+          "type": "sql",
+          "code": "SELECT NAME, ROW_NUMBER() OVER (ORDER BY SCORE DESC) AS RN\nFROM   SCORES;"
+        }
+      ]
+    },
+    {
+      "_id": "cbt-039", "_pdf": "cbt1", "_pdfNumber": 39,
+      "subject": "2과목", "chapter": "서브쿼리",
+      "title": "다음의 데이터베이스에서 '부양가족을 2 명 이상 가진 사원의 사번(eno), 성명(ename), 부양가족 수를 검색' 하는 질의를 SQL 로 적절하게 표현한 것은?\n\n`employee(eno, ename, address, score, dno)`\n`dependent(eno, ename, birthday, relation)`",
+      "options": [
+        "SELECT eno, ename, count(*) FROM employee e, dependent d WHERE e.eno = d.eno AND count(*) >= 2 GROUP BY d.eno;",
+        "SELECT e.eno, e.ename, count(*) FROM employee e, dependent d WHERE EXISTS (SELECT * FROM dependent GROUP BY eno HAVING count(*) >= 2) GROUP BY e.eno, e.ename;",
+        "SELECT e.eno, e.ename, t.cnt FROM employee e, (SELECT eno, count(*) AS cnt FROM dependent GROUP BY eno HAVING count(*) >= 2) t WHERE e.eno = t.eno;",
+        "SELECT e.eno, e.ename, count(*) FROM employee e, dependent d WHERE e.eno = d.eno GROUP BY e.eno, e.ename HAVING count(*) >= 3;"
+      ],
+      "correctIndex": 2,
+      "explanation": "③ 인라인 뷰로 dependent 에서 eno 별 count 가 2 이상인 결과를 만든 뒤 employee 와 조인하면 정확히 \"부양가족 2 명 이상\" 사원의 정보 + 부양가족 수를 얻는다. ① WHERE 에 집계함수 사용 불가, ② EXISTS 조건이 상관 서브쿼리가 아니라 무의미, ④ HAVING count >=3 조건이 잘못."
+    },
+    {
+      "_id": "cbt-040", "_pdf": "cbt1", "_pdfNumber": 40,
+      "subject": "2과목", "chapter": "DML",
+      "title": "데이터를 입력하기 위해 사용하는 SQL 명령어는 무엇인가?",
+      "options": ["CREATE", "INSERT", "UPDATE", "ALTER"],
+      "correctIndex": 1,
+      "explanation": "데이터를 입력하기 위해서 'INSERT' 명령어를 사용한다."
+    },
+    {
+      "_id": "cbt-041", "_pdf": "cbt1", "_pdfNumber": 41,
+      "subject": "2과목", "chapter": "조인",
+      "title": "릴레이션 'employee' 와 'department' 에 대한 다음 SQL 질의문의 수행 결과는?",
+      "options": [
+        "{(100, 영업, Lee, 90), (200, 개발, Kim, 95), (300, 서비스, Hong, 65)}",
+        "{(100, 영업, Lee, 90), (200, 개발, Kim, 95)}",
+        "{(100, 영업, Lee, 90)}",
+        "{(100, 영업, Hong, 80), (100, 영업, Lee, 90), (200, 개발, Kim, 90), (200, 개발, Kim, 95), (600, null, Hong, 65)}"
+      ],
+      "correctIndex": 0,
+      "explanation": "EQUI 조인 결과로 dno 가 일치하는 행만 결합된다. (이 문항의 표·SQL 세부는 PDF 원본 대비 일부 누락 가능 — 정답 키 ① 보존)"
+    },
+    {
+      "_id": "cbt-042", "_pdf": "cbt1", "_pdfNumber": 42,
+      "subject": "2과목", "chapter": "그룹 함수",
+      "title": "다음 각 쿼리의 실행 결과로 옳은 것은?\n\n[1] `SELECT SUM(SAL + BONUS) FROM EMP WHERE DEPTNO = 10;`\n[2] `SELECT SUM(NVL(SAL, 0) + NVL(BONUS, 0)) FROM EMP;`\n[3] `SELECT SUM(SAL) + SUM(BONUS) FROM EMP;`",
+      "options": ["NULL, 260, 260", "0, 260, 260", "NULL, 260, 200", "NULL, 240, 260"],
+      "correctIndex": 0,
+      "explanation": "[1] DEPTNO=10 의 SAL+BONUS 가 둘 다 NULL 포함 → 100+NULL=NULL, NULL+20=NULL → SUM=NULL. [2] NVL(SAL,0)+NVL(BONUS,0) 합계 = 100+20+40+80+20 = 260. [3] SUM(SAL) NULL 제외 = 100+30+50+20=200, SUM(BONUS) = 20+10+30=60 → 200+60=260.",
+      "references": [
+        {
+          "type": "table", "caption": "[EMP] 테이블",
+          "headers": ["ENAME", "SAL", "BONUS", "DEPTNO"],
+          "rows": [
+            ["A", "100", "NULL", "10"],
+            ["B", "NULL", "20", "10"],
+            ["C", "30", "10", "NULL"],
+            ["D", "50", "30", "20"],
+            ["E", "20", "NULL", "NULL"]
+          ]
+        }
+      ]
+    },
+    {
+      "_id": "cbt-043", "_pdf": "cbt1", "_pdfNumber": 43,
+      "subject": "2과목", "chapter": "표준 조인",
+      "title": "다음 SQL 을 ANSI 방식으로 변경한 것으로 옳은 것은?\n\n`SELECT * FROM TAB1, TAB2 ORDER BY 1;`",
+      "options": [
+        "SELECT * FROM TAB1 INNER JOIN TAB2 ORDER BY 1;",
+        "SELECT * FROM TAB1 NATURAL JOIN TAB2 ORDER BY 1;",
+        "SELECT * FROM TAB1 CROSS JOIN TAB2 ORDER BY 1;",
+        "SELECT * FROM TAB1 INNER JOIN TAB2 ON (TAB1.COL1 = TAB2.COL1) ORDER BY 1;"
+      ],
+      "correctIndex": 2,
+      "explanation": "FROM TAB1, TAB2 만 있고 별도의 조인조건은 없으므로 카티션 곱이 발생하며, 이는 CROSS JOIN 으로 표현할 수 있다. CROSS JOIN 은 ON 조인절을 사용하지 않는다."
+    },
+    {
+      "_id": "cbt-044", "_pdf": "cbt1", "_pdfNumber": 44,
+      "subject": "2과목", "chapter": "관계형 DB와 SELECT",
+      "title": "다음 중 SQL 의 특징으로 가장 적절하지 않은 것은?",
+      "options": [
+        "절차적 언어이며 반복문을 포함한다.",
+        "데이터 정의·조작·제어 언어를 포함한다.",
+        "관계형 데이터베이스 질의에 사용된다.",
+        "ANSI 표준으로 대부분의 DBMS 에서 지원된다."
+      ],
+      "correctIndex": 0,
+      "explanation": "SQL 은 비절차적 언어로 어떤(WHAT) 데이터를 필요로 하는지 명시할 뿐, 어떻게(HOW) 데이터를 가져올지는 명시하지 않는다. SQL 내의 PL/SQL, T-SQL 등에서 IF/FOR 활용해 절차적 언어를 사용할 수 있지만 SQL 자체는 비절차적."
+    },
+    {
+      "_id": "cbt-045", "_pdf": "cbt1", "_pdfNumber": 45,
+      "subject": "2과목", "chapter": "윈도우 함수",
+      "title": "다음 SQL 실행 결과로 가장 알맞은 것은?",
+      "options": [
+        "D=1, B=2, A=3, C=3, E=4 (정답 — DENSE_RANK)",
+        "D=1, B=2, A=3, C=4, E=5 (RANK 시나리오)",
+        "D=1, B=2, A=3, C=3, E=5",
+        "D=1, B=2, A=3, C=3, E=3"
+      ],
+      "correctIndex": 0,
+      "explanation": "DENSE_RANK 는 동일한 값에 동일 순위를 부여하고, 그다음 순위를 건너뛰지 않는다. PRICE DESC 정렬: D(300)=1, B(200)=2, A(100)=3, C(100)=3 (동률), E(50)=4. 만일 ROW_NUMBER() 였다면 ② 가 답, RANK() 였다면 ③ 이 답이 된다.",
+      "references": [
+        {
+          "type": "table", "caption": "[TB_PRODUCT] 테이블",
+          "headers": ["NAME", "PRICE"],
+          "rows": [["A", "100"], ["B", "200"], ["C", "100"], ["D", "300"], ["E", "50"]]
+        },
+        {
+          "type": "sql",
+          "code": "SELECT NAME, DENSE_RANK() OVER (ORDER BY PRICE DESC) AS RN\nFROM   TB_PRODUCT;"
+        }
+      ]
+    },
+    {
+      "_id": "cbt-046", "_pdf": "cbt1", "_pdfNumber": 46,
+      "subject": "2과목", "chapter": "서브쿼리",
+      "title": "다음 SQL 실행 결과로 출력되는 NAME 은?\n\n`SELECT NAME FROM EMPLOYEE WHERE SALARY > ALL (SELECT SALARY FROM EMPLOYEE WHERE NAME != 'C');`",
+      "options": ["A", "B", "C", "A, C"],
+      "correctIndex": 2,
+      "explanation": "서브쿼리 SELECT SALARY FROM EMPLOYEE WHERE NAME != 'C' 는 A, B (3000, 2000) 두 행을 반환. ALL 은 다중행 비교 — SALARY > ALL(3000, 2000) 은 3000 보다도 크고 2000 보다도 커야 하므로 사실상 SALARY > 3000. C 만 조건 충족.",
+      "references": [
+        {
+          "type": "table", "caption": "[EMPLOYEE] 테이블",
+          "headers": ["NAME", "SALARY"],
+          "rows": [["A", "3000"], ["B", "2000"], ["C", "4000"]]
+        }
+      ]
+    },
+    {
+      "_id": "cbt-047", "_pdf": "cbt1", "_pdfNumber": 47,
+      "subject": "2과목", "chapter": "관계형 DB와 SELECT",
+      "title": "다음 설명 중 적절한 것은 무엇인가?",
+      "options": [
+        "인덱스는 인덱스 구성 컬럼으로 항상 오름차순으로 정렬된다.",
+        "비용 기반 옵티마이저는 인덱스 스캔이 항상 유리하다고 판단한다.",
+        "규칙 기반 옵티마이저는 적절한 인덱스가 존재하면 항상 인덱스를 사용하려고 한다.",
+        "인덱스 범위 스캔은 항상 여러 건의 결과가 반환된다."
+      ],
+      "correctIndex": 2,
+      "explanation": "규칙 기반 옵티마이저는 사전 정의된 규칙 우선순위에 따라 인덱스가 있으면 무조건 인덱스 사용. ① ASC/DESC 지정 가능, ② 비용 기반은 통계에 따라 풀 스캔이 유리할 수 있음, ④ 인덱스 범위 스캔은 0 건 가능."
+    },
+    {
+      "_id": "cbt-048", "_pdf": "cbt1", "_pdfNumber": 48,
+      "subject": "2과목", "chapter": "함수",
+      "title": "다음 SQL 실행 결과로 가장 알맞은 것은?\n\n`SELECT ROUND(456.789, -2) FROM DUAL;`",
+      "options": ["400", "500", "460", "450"],
+      "correctIndex": 1,
+      "explanation": "ROUND 의 두 번째 인자가 음수일 경우 정수부에서 자릿수만큼 반올림. -2 는 10 의 자리에서 반올림하므로 456.789 → 500."
+    },
+    {
+      "_id": "cbt-049", "_pdf": "cbt1", "_pdfNumber": 49,
+      "subject": "2과목", "chapter": "함수",
+      "title": "다음의 SQL 문을 사용할 때, 날짜형 변수를 문자형으로 바꿀 수 있는 것은?\n\n`SELECT SYSDATE FROM DUAL;`",
+      "options": ["TO_NUMBER", "TO_DATE", "TO_CHAR", "CONVERT"],
+      "correctIndex": 2,
+      "explanation": "TO_CHAR 함수를 사용하면 문자형 타입으로 변환한다."
+    },
+    {
+      "_id": "cbt-050", "_pdf": "cbt1", "_pdfNumber": 50,
+      "subject": "2과목", "chapter": "그룹 함수",
+      "title": "다음 SQL 실행 결과로 가장 알맞은 것은?\n\n`SELECT REGION, AMOUNT, COUNT(*) FROM TB_SALE GROUP BY CUBE(REGION, AMOUNT);`",
+      "options": [
+        "5 행 — EAST/1000/2, EAST/NULL/2, WEST/2000/1, WEST/NULL/1, NULL/NULL/3",
+        "7 행 — EAST/1000/2, WEST/2000/1, EAST/NULL/2, WEST/NULL/1, NULL/1000/2, NULL/2000/1, NULL/NULL/3 (정답)",
+        "4 행 — EAST/1000/2, WEST/2000/1, EAST/NULL/2, WEST/NULL/1",
+        "2 행 — EAST/1000/2, WEST/2000/1"
+      ],
+      "correctIndex": 1,
+      "explanation": "GROUP BY CUBE(REGION, AMOUNT) 는 모든 가능한 집계 조합을 생성. CUBE 는 N 개 컬럼에 대해 2^N=4 종류 그룹: (REGION, AMOUNT) 2 행 + (REGION) 2 행 + (AMOUNT) 2 행 + () 1 행 = 7 행.",
+      "references": [
+        {
+          "type": "table", "caption": "[TB_SALE] 테이블",
+          "headers": ["REGION", "AMOUNT"],
+          "rows": [["EAST", "1000"], ["WEST", "2000"], ["EAST", "1000"]]
+        }
+      ]
+    }
+  ]
+}
