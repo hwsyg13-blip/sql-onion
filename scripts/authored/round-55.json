@@ -943,7 +943,7 @@
     {
       "subject": "2과목",
       "number": 37,
-      "title": "ORDER BY 절에서 NULL 값이 포함된 경우의 기본 정렬 동작으로 옳은 것은?",
+      "title": "Oracle 의 ORDER BY 절에서 NULL 값이 포함된 경우의 기본 정렬 동작으로 옳은 것은?",
       "options": [
         "ASC 시 NULLS FIRST, DESC 시 NULLS LAST",
         "ASC 시 NULLS LAST, DESC 시 NULLS FIRST",
@@ -951,7 +951,7 @@
         "ASC·DESC 모두 NULLS LAST"
       ],
       "correctIndex": 1,
-      "explanation": "Oracle 의 기본 정렬 규칙이다."
+      "explanation": "Oracle 은 NULL 을 정렬 시 \"가장 큰 값\" 으로 취급한다. 따라서 ASC (오름차순) 에서는 NULL 이 마지막에 위치 (NULLS LAST), DESC (내림차순) 에서는 NULL 이 가장 먼저 위치 (NULLS FIRST) 한다 → 정답 ②.\n\n참고 — DBMS 별 기본 동작은 다르다:\n- Oracle / PostgreSQL: NULL 을 큰 값으로 취급 → ASC NULLS LAST, DESC NULLS FIRST (옵션 ②)\n- SQL Server / MySQL: NULL 을 작은 값으로 취급 → ASC NULLS FIRST, DESC NULLS LAST (옵션 ①)\n\n어느 DBMS 든 ORDER BY 컬럼 뒤에 NULLS FIRST 또는 NULLS LAST 를 명시하면 기본 동작과 무관하게 강제할 수 있다 (단, MySQL 은 NULLS FIRST/LAST 키워드 미지원)."
     },
     {
       "subject": "2과목",
