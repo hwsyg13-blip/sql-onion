@@ -217,7 +217,7 @@ export const ROUND_48: QuizQuestion[] = [
     "references": [
       {
         "type": "erd",
-        "caption": "관계차수 표기 예시 — 1:1 / 1:M / M:N (mermaid erDiagram)",
+        "caption": "ERD 에서 1:1 / 1:M / M:N 표기 예시 (mermaid erDiagram)",
         "mermaid": "erDiagram\n    A1 ||--|| B1 : \"1대1\"\n    A2 ||--o{ B2 : \"1대M\"\n    A3 }o--o{ B3 : \"M대N\""
       }
     ]

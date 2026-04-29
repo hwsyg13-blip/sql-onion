@@ -753,10 +753,6 @@
         {
           "type": "sql",
           "code": "SELECT SUM(연봉) FROM (\n  SELECT MAX(연봉) AS 연봉 FROM 사원\n  UNION\n  SELECT MIN(연봉) AS 연봉 FROM 사원\n);"
-        },
-        {
-          "type": "text",
-          "content": "원본 PDF 표기: '문제 34. MAX MIN + union 중복제거 / 정답: 8925' — 원본 본문 SQL 일부가 누락되어, 외부 SUM 으로 합계를 구하는 형태로 재구성하였다."
         }
       ]
     },

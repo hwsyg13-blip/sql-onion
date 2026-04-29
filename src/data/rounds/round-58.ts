@@ -648,7 +648,7 @@ export const ROUND_58: QuizQuestion[] = [
       },
       {
         "type": "table",
-        "caption": "기대 결과 (RIGHT OUTER JOIN)",
+        "caption": "기대 결과 — A 에 없는 B 의 행까지 모두 포함",
         "headers": [
           "A.ID",
           "B.V"
