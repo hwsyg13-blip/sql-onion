@@ -781,7 +781,7 @@ export const ROUND_56: QuizQuestion[] = [
     "references": [
       {
         "type": "table",
-        "caption": "기대 결과 (DENSE_RANK 출력)",
+        "caption": "기대 결과 — SALARY DESC 기준 RANKING 부여",
         "headers": [
           "NAME",
           "SALARY",

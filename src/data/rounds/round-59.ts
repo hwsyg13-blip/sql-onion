@@ -445,7 +445,7 @@ export const ROUND_59: QuizQuestion[] = [
       },
       {
         "type": "table",
-        "caption": "기대 결과 (LEFT OUTER JOIN)",
+        "caption": "기대 결과 — A 의 모든 행이 보존되고 B 매칭 부재 시 NULL",
         "headers": [
           "A.ID",
           "B.ID",
