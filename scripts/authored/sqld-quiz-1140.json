@@ -1,7 +1,7 @@
 {
   "source": "sqld-1140",
   "version": 2,
-  "notes": "SQLD 기출/예상 문제 1140 문항 (외부 출처). 이미지 448 개를 public/sqld-images/ 에 추출 후 path 로 참조. | modern-box-conversions 17개 그룹 일괄 적용 (167/1140 문항 변환). | vision-conversions 32그룹 적용 (43 문항 변환). | vision-conversions 47그룹 적용 (48 문항 변환). | vision-conversions 62그룹 적용 (58 문항 변환). | vision-conversions 77그룹 적용 (61 문항 변환). | vision-conversions 92그룹 적용 (62 문항 변환). | vision-conversions 107그룹 적용 (64 문항 변환). | vision-conversions 15그룹 적용 (15 문항 변환).",
+  "notes": "SQLD 기출/예상 문제 1140 문항 (외부 출처). 이미지 448 개를 public/sqld-images/ 에 추출 후 path 로 참조. | modern-box-conversions 17개 그룹 일괄 적용 (167/1140 문항 변환). | vision-conversions 32그룹 적용 (43 문항 변환). | vision-conversions 47그룹 적용 (48 문항 변환). | vision-conversions 62그룹 적용 (58 문항 변환). | vision-conversions 77그룹 적용 (61 문항 변환). | vision-conversions 92그룹 적용 (62 문항 변환). | vision-conversions 107그룹 적용 (64 문항 변환). | vision-conversions 15그룹 적용 (15 문항 변환). | vision-conversions 107그룹 적용 (50 문항 변환). | vision-conversions 107그룹 적용 (30 문항 변환).",
   "authored": [
     {
       "_id": "sqld-0001",
@@ -142,7 +142,7 @@
       "references": [
         {
           "type": "image",
-          "src": "/sqld-images/j7-1.png",
+          "src": "/sqld-images/j7-erd.png",
           "alt": "고객-주문 ERD",
           "caption": "[ERD]"
         }
@@ -470,7 +470,7 @@
       "references": [
         {
           "type": "image",
-          "src": "/sqld-images/j25-1.png",
+          "src": "/sqld-images/j25-erd.png",
           "alt": "부서-사원 ERD",
           "caption": "[ERD]"
         }
@@ -615,9 +615,14 @@
       "references": [
         {
           "type": "image",
-          "src": "/sqld-images/j33-1.png",
-          "alt": "보관금원장 엔터티 + 함수종속(FD)",
+          "src": "/sqld-images/j33-erd.png",
+          "alt": "보관금원장 엔터티: 식별자 (관서번호, 납부자번호) + 일반 속성 (관리점번호, 관서명, 상태, 관서등록일자, 직급명, 통신번호)",
           "caption": "[보관금원장]"
+        },
+        {
+          "type": "text",
+          "caption": "함수종속성(FD)",
+          "text": "[관서번호, 납부자번호] → [직급명, 통신번호]\n[관서번호] → [관리점번호, 관서명, 상태, 관서등록일자]"
         }
       ]
     },
@@ -640,7 +645,7 @@
       "references": [
         {
           "type": "image",
-          "src": "/sqld-images/j34-1.png",
+          "src": "/sqld-images/j34-erd.png",
           "alt": "매각물건 데이터 모델 (반정규화 속성 포함)",
           "caption": "[데이터 모델]"
         }
@@ -665,9 +670,14 @@
       "references": [
         {
           "type": "image",
-          "src": "/sqld-images/j35-1.png",
-          "alt": "모델 엔터티 + 유형기능분류코드 속성",
+          "src": "/sqld-images/j35-erd.png",
+          "alt": "모델 엔터티 (모델코드, 모델명, 제품분류, 제품원가) + 유형기능분류코드 (A/B/C/D/E/F/G/H 유형분류코드) + 가로형/세로형/구분 속성",
           "caption": "[모델]"
+        },
+        {
+          "type": "text",
+          "caption": "[전제조건]",
+          "text": "유형기능분류코드에 해당하는 속성들은 분포도가 양호하며, SQL Where절에서 각각의 값이 상수값으로 조건 입력될 수 있는 특징을 가진다."
         }
       ]
     },
@@ -690,7 +700,7 @@
       "references": [
         {
           "type": "image",
-          "src": "/sqld-images/j36-1.png",
+          "src": "/sqld-images/j36-erd.png",
           "alt": "일재고 엔터티 속성 (장기재고 등)",
           "caption": "[일재고]"
         }
@@ -715,9 +725,14 @@
       "references": [
         {
           "type": "image",
-          "src": "/sqld-images/j37-1.png",
-          "alt": "수강지도 엔터티 + 함수종속(FD)",
+          "src": "/sqld-images/j37-erd.png",
+          "alt": "수강지도 엔터티: 식별자 (학번, 과목코드) + 일반 속성 (성적, 지도교수명, 학과명)",
           "caption": "[수강지도]"
+        },
+        {
+          "type": "text",
+          "caption": "함수종속성(FD)",
+          "text": "1. 학번 || 과목번호 → 성적\n2. 학번 → 지도교수명\n3. 학번 → 학과명"
         }
       ]
     },
@@ -821,7 +836,7 @@
       "references": [
         {
           "type": "image",
-          "src": "/sqld-images/j43-1.png",
+          "src": "/sqld-images/j43-erd.png",
           "alt": "기관문류 → 기관분류 데이터 타입 변경 (가)→(나)",
           "caption": "[데이터 타입 변경]"
         }
@@ -1046,7 +1061,7 @@
       "references": [
         {
           "type": "image",
-          "src": "/sqld-images/j54-1.png",
+          "src": "/sqld-images/j54-erd.png",
           "alt": "BOARD 엔터티 속성 (BOARD_ID, BOARD_NM, USE_YN, REG_DATE, BOARD_DESC)",
           "caption": "[BOARD]"
         }
@@ -1071,9 +1086,66 @@
       "references": [
         {
           "type": "image",
-          "src": "/sqld-images/j55-1.png",
+          "src": "/sqld-images/j55-erd.png",
           "alt": "고객-주문 ERD (FK_001)",
           "caption": "[ERD]"
+        },
+        {
+          "type": "table",
+          "caption": "[표 : 주문 데이터]",
+          "headers": [
+            "주문번호(PK)",
+            "고객ID(FK)",
+            "주문일시"
+          ],
+          "rows": [
+            [
+              "0001",
+              "C001",
+              "2013-12-24"
+            ],
+            [
+              "0002",
+              "C001",
+              "2013-12-25"
+            ],
+            [
+              "0003",
+              "NULL",
+              "2013-12-26"
+            ],
+            [
+              "0004",
+              "C002",
+              "2013-12-27"
+            ]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "[표 : 고객 데이터]",
+          "headers": [
+            "고객ID(PK)",
+            "고객명",
+            "가입일시"
+          ],
+          "rows": [
+            [
+              "C001",
+              "홍길동",
+              "2013-12-12"
+            ],
+            [
+              "C002",
+              "이순신",
+              "2013-12-13"
+            ]
+          ]
+        },
+        {
+          "type": "sql",
+          "caption": "[SQL]",
+          "code": "ALTER TABLE 주문 ADD CONSTRAINT FK_001 FOREIGN KEY (고객ID)\nREFERENCES 고객 (고객ID) ON DELETE SET NULL;"
         },
         {
           "type": "table",
@@ -1779,7 +1851,7 @@
       "references": [
         {
           "type": "image",
-          "src": "/sqld-images/j68-1.png",
+          "src": "/sqld-images/j68-model.png",
           "alt": "서비스_가입 논리 모델 ↔ SVC_JOIN 물리 모델",
           "caption": "[논리 ↔ 물리 데이터 모델]"
         }
@@ -2336,8 +2408,8 @@
       "references": [
         {
           "type": "image",
-          "src": "/sqld-images/j87-1.png",
-          "alt": "배우(배우번호, 배우명, 성별), 영화(영화번호, 영화명, 제작년도), 출연(배우번호, 영화번호, 출연료) 스키마",
+          "src": "/sqld-images/j87-cropped.png",
+          "alt": "배우(배우번호, 배우명, 성별), 영화(영화번호, 영화명, 제작년도), 출연(배우번호, 영화번호, 출연료) 스키마 — PK 밑줄",
           "caption": "[스키마 정의]"
         }
       ]
@@ -2442,7 +2514,7 @@
       "references": [
         {
           "type": "image",
-          "src": "/sqld-images/j91-1.png",
+          "src": "/sqld-images/j91-erd.png",
           "alt": "제품-생산제품-생산라인 ERD",
           "caption": "[ERD]"
         }
@@ -3028,7 +3100,7 @@
       "references": [
         {
           "type": "image",
-          "src": "/sqld-images/j107-1.png",
+          "src": "/sqld-images/j107-erd.png",
           "alt": "회원기본정보 ─ 회원상세정보 ERD",
           "caption": "[데이터 모델]"
         }
@@ -3394,9 +3466,14 @@
       "references": [
         {
           "type": "image",
-          "src": "/sqld-images/j116-1.png",
+          "src": "/sqld-images/j116-erd.png",
           "alt": "회원-동의항목-약관항목 ERD",
           "caption": "[ERD]"
+        },
+        {
+          "type": "sql",
+          "caption": "[SQL]",
+          "code": "SELECT A.회원번호, A.회원명\nFROM   회원 A, 동의항목 B\nWHERE  A.회원번호 = B.회원번호\nGROUP BY A.회원번호, A.회원명\nHAVING COUNT(CASE WHEN B.동의여부 = 'N' THEN 0 ELSE NULL END) >= 1\nORDER BY A.회원번호;"
         },
         {
           "type": "sql",
@@ -3449,7 +3526,7 @@
       "references": [
         {
           "type": "image",
-          "src": "/sqld-images/j117-1.png",
+          "src": "/sqld-images/j117-erd.png",
           "alt": "회원-메일발송-이벤트 ERD + SQL with 4 blanks",
           "caption": "[ERD + SQL with ㉠/㉡/㉢/㉣ blanks]"
         }
@@ -3514,7 +3591,7 @@
       "references": [
         {
           "type": "image",
-          "src": "/sqld-images/j120-1.png",
+          "src": "/sqld-images/j120-erd.png",
           "alt": "품질평가항목-평가결과-평가대상상품 데이터 모델",
           "caption": "[데이터 모델]"
         }
@@ -3745,9 +3822,70 @@
       "references": [
         {
           "type": "image",
-          "src": "/sqld-images/j125-1.png",
+          "src": "/sqld-images/j125-erd.png",
           "alt": "지역-이용내역 ERD",
           "caption": "[데이터 모델]"
+        },
+        {
+          "type": "table",
+          "caption": "[표 : 지역별 월별 이용량]",
+          "headers": [
+            "지역명",
+            "이용월",
+            "이용량"
+          ],
+          "rows": [
+            [
+              "서울",
+              "2014.01",
+              "1,000"
+            ],
+            [
+              "서울",
+              "2014.02",
+              "1,000"
+            ],
+            [
+              "서울",
+              "월별합계",
+              "2,000"
+            ],
+            [
+              "경기",
+              "2014.01",
+              "1,000"
+            ],
+            [
+              "경기",
+              "2014.03",
+              "2,000"
+            ],
+            [
+              "경기",
+              "월별합계",
+              "3,000"
+            ],
+            [
+              "대전",
+              "2014.05",
+              "1,500"
+            ],
+            [
+              "대전",
+              "2014.06",
+              "1,000"
+            ],
+            [
+              "대전",
+              "월별합계",
+              "2,500"
+            ],
+            [
+              "지역전체",
+              "월별합계",
+              "7,500"
+            ]
+          ]
         },
         {
           "type": "table",
@@ -4677,9 +4815,93 @@
       "references": [
         {
           "type": "image",
-          "src": "/sqld-images/j132-1.png",
-          "alt": "게임상품-고객활동-고객 ERD + 결과 예제 (활동점수/등수)",
-          "caption": "[ERD + 결과 예제]"
+          "src": "/sqld-images/j132-erd.png",
+          "alt": "게임상품-고객활동-고객 ERD",
+          "caption": "[ERD]"
+        },
+        {
+          "type": "table",
+          "caption": "[결과 예제]",
+          "headers": [
+            "게임상품ID",
+            "고객ID",
+            "활동점수",
+            "등수(순위)"
+          ],
+          "rows": [
+            [
+              "001",
+              "121",
+              "150",
+              "1"
+            ],
+            [
+              "001",
+              "111",
+              "150",
+              "1"
+            ],
+            [
+              "001",
+              "234",
+              "110",
+              "3"
+            ],
+            [
+              "001",
+              "212",
+              "100",
+              "4"
+            ],
+            [
+              "001",
+              "455",
+              "100",
+              "4"
+            ],
+            [
+              "001",
+              "182",
+              "90",
+              "6"
+            ],
+            [
+              "001",
+              "199",
+              "80",
+              "7"
+            ],
+            [
+              "001",
+              "109",
+              "70",
+              "8"
+            ],
+            [
+              "001",
+              "876",
+              "70",
+              "8"
+            ],
+            [
+              "001",
+              "232",
+              "40",
+              "10"
+            ],
+            [
+              "001",
+              "901",
+              "40",
+              "10"
+            ],
+            [
+              "001",
+              "......",
+              "......",
+              "......"
+            ]
+          ]
         }
       ]
     },
@@ -7818,10 +8040,35 @@
       "explanation": "TX2의 update 문은 배타적 lock 때문에 대기했다가 TX1 트랜잭션이 commit 한 후에 처리를 계속 한다. TX1에 의해 1100으로 바뀐 값을 읽어 200을 더하므로 최종 결과는 1300이 된다.",
       "references": [
         {
-          "type": "image",
-          "src": "/sqld-images/j262-1.png",
-          "alt": "TX1·시점·TX2 트랜잭션 동시성 시나리오",
-          "caption": "[트랜잭션 시점 비교]"
+          "type": "table",
+          "caption": "[트랜잭션 시점 비교]",
+          "headers": [
+            "<TX1>",
+            "시점",
+            "<TX2>"
+          ],
+          "rows": [
+            [
+              "Update emp set sal = sal +100 Where empno = 7788;",
+              "T1",
+              ""
+            ],
+            [
+              "",
+              "T2",
+              "Update emp set sal = sal +200 Where empno = 7788;"
+            ],
+            [
+              "Commit;",
+              "T3",
+              ""
+            ],
+            [
+              "",
+              "T4",
+              "Commit;"
+            ]
+          ]
         }
       ]
     },

@@ -201,14 +201,39 @@
       ]
     },
     "c0f3aff29de9": {
-      "name": "j262 — TX1·TX2 트랜잭션 시점 비교",
+      "name": "j262 — TX1·TX2 트랜잭션 시점 비교 (표)",
       "imageKey": "j262",
       "refs": [
         {
-          "type": "image",
-          "src": "/sqld-images/j262-1.png",
-          "alt": "TX1·시점·TX2 트랜잭션 동시성 시나리오",
-          "caption": "[트랜잭션 시점 비교]"
+          "type": "table",
+          "caption": "[트랜잭션 시점 비교]",
+          "headers": [
+            "<TX1>",
+            "시점",
+            "<TX2>"
+          ],
+          "rows": [
+            [
+              "Update emp set sal = sal +100 Where empno = 7788;",
+              "T1",
+              ""
+            ],
+            [
+              "",
+              "T2",
+              "Update emp set sal = sal +200 Where empno = 7788;"
+            ],
+            [
+              "Commit;",
+              "T3",
+              ""
+            ],
+            [
+              "",
+              "T4",
+              "Commit;"
+            ]
+          ]
         }
       ]
     },
