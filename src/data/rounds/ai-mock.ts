@@ -22771,7 +22771,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "image",
-        "src": "/sqld-images/j481-1.png",
+        "src": "/sqld-images/j481-erd.png",
         "alt": "상급종합병원(병원ID PK)─의사(교직원번호 PK, 의사명/전공/긴급연락번호/병원ID FK)─진료(진료코드/진료일자/환자번호 식별자, 진료내용/교직원번호 FK) ERD",
         "caption": "[ERD]"
       }
@@ -22821,7 +22821,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "image",
-        "src": "/sqld-images/j484-1.png",
+        "src": "/sqld-images/j484-erd.png",
         "alt": "사원(사원번호 PK, 이름/입사일/근무지/부서코드/주소/전화번호)─이용내역(이용일자/사원번호 FK/콘도번호 FK)─콘도이용정보(콘도번호 PK, 콘도명/위치/풀위치) ERD",
         "caption": "[ERD]"
       }
