@@ -1,0 +1,354 @@
+{
+  "schema": "md5(image content) → 변환된 references 배열. 클래식 한글 시험지 batch 7.",
+  "method": "Claude 시각 정독 (sharp 3x) + 4x audit cross-check",
+  "batchSize": 15,
+  "groups": {
+    "b0e5a53194c9": {
+      "name": "j323 — Mytest DNAME/YEAR/SAL + ROLLUP 결과",
+      "imageKey": "j323",
+      "refs": [
+        {
+          "type": "table",
+          "caption": "[Mytest]",
+          "headers": ["DNAME", "YEAR", "SAL"],
+          "rows": [
+            ["빅데이터팀", "2010", "1000"],
+            ["빅데이터팀", "2011", "2000"],
+            ["빅데이터팀", "2012", "3000"],
+            ["인프라운영팀", "2010", "1000"],
+            ["인프라운영팀", "2011", "2000"],
+            ["인프라운영팀", "2012", "3000"]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "[결과]",
+          "headers": ["DNAME", "YEAR", "SUM(SAL)"],
+          "rows": [
+            ["빅데이터팀", "2010", "1,000"],
+            ["빅데이터팀", "2011", "2,000"],
+            ["빅데이터팀", "2012", "3,000"],
+            ["빅데이터팀", "", "6,000"],
+            ["인프라운영팀", "2010", "1,000"],
+            ["인프라운영팀", "2011", "2,000"],
+            ["인프라운영팀", "2012", "3,000"],
+            ["인프라운영팀", "", "6,000"],
+            ["", "", "12,000"]
+          ]
+        }
+      ]
+    },
+    "1648feef0e90": {
+      "name": "j329 — TEAMSCORE 7행",
+      "imageKey": "j329",
+      "refs": [
+        {
+          "type": "table",
+          "caption": "[TEAMSCORE]",
+          "headers": ["TEAMNAME", "WINCNT", "FAILCNT"],
+          "rows": [
+            ["A팀", "124", "90"],
+            ["B팀", "20", "11"],
+            ["C팀", "12", "21"],
+            ["D팀", "102", "100"],
+            ["E팀", "110", "111"],
+            ["F팀", "100", "200"],
+            ["G팀", "71", "30"]
+          ]
+        }
+      ]
+    },
+    "3c32dc06e280": {
+      "name": "j334 — Mytest MGR/ENAME/HIREDATE/SAL (9행 한글 이름)",
+      "imageKey": "j334",
+      "refs": [
+        {
+          "type": "table",
+          "caption": "[Mytest]",
+          "headers": ["MGR", "ENAME", "HIREDATE", "SAL"],
+          "rows": [
+            ["유비", "관우", "2017", "1000"],
+            ["유비", "조자룡", "2018", "1500"],
+            ["유비", "제갈량", "2015", "2000"],
+            ["조조", "하후돈", "2016", "2000"],
+            ["조조", "하후연", "2017", "3500"],
+            ["조조", "순욱", "2015", "3000"],
+            ["손권", "주유", "2015", "2500"],
+            ["손권", "황개", "2019", "3000"],
+            ["손권", "노숙", "2013", "2000"]
+          ]
+        }
+      ]
+    },
+    "67cfdeb4b475": {
+      "name": "j343 — MytestA 4행 + MytestB 3행 (sparse V1)",
+      "imageKey": "j343",
+      "refs": [
+        {
+          "type": "table",
+          "caption": "[MytestA]",
+          "headers": ["N1", "V1"],
+          "rows": [
+            ["1", "A"],
+            ["2", ""],
+            ["3", "B"],
+            ["4", "C"]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "[MytestB]",
+          "headers": ["N1", "V1"],
+          "rows": [
+            ["1", "A"],
+            ["2", ""],
+            ["3", "B"]
+          ]
+        }
+      ]
+    },
+    "651f9798091f": {
+      "name": "j345 — MytestA·MytestB EMPLOYEE_ID/MANAGER_ID/SALARY (5+5)",
+      "imageKey": "j345",
+      "refs": [
+        {
+          "type": "table",
+          "caption": "[MytestA]",
+          "headers": ["EMPLOYEE_ID", "MANAGER_ID", "SALARY"],
+          "rows": [
+            ["A1", "B1", "400"],
+            ["A2", "B2", "8000"],
+            ["A3", "B3", "9000"],
+            ["A4", "B4", "4000"],
+            ["A5", "B5", "5000"]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "[MytestB]",
+          "headers": ["EMPLOYEE_ID", "MANAGER_ID", "SALARY"],
+          "rows": [
+            ["B1", "C1", "2000"],
+            ["B2", "C2", "7000"],
+            ["B3", "C3", "10000"],
+            ["B4", "C4", "3000"],
+            ["B5", "C5", "6000"]
+          ]
+        }
+      ]
+    },
+    "17b3d883ac29": {
+      "name": "j347 — A·B·C 3 mini tables (referential cascade)",
+      "imageKey": "j347",
+      "refs": [
+        {
+          "type": "table",
+          "caption": "A",
+          "headers": ["C", "D"],
+          "rows": [["1", "1"], ["2", "1"]]
+        },
+        {
+          "type": "table",
+          "caption": "B",
+          "headers": ["B", "C"],
+          "rows": [["3", "1"], ["4", "1"]]
+        },
+        {
+          "type": "table",
+          "caption": "C",
+          "headers": ["A", "B"],
+          "rows": [["1", "3"], ["2", "4"]]
+        }
+      ]
+    },
+    "4c3594f82335": {
+      "name": "j349 — MytestA 6행 + MytestB 6행 (FULL OUTER)",
+      "imageKey": "j349",
+      "refs": [
+        {
+          "type": "table",
+          "caption": "[MytestA]",
+          "headers": ["ID", "NAME"],
+          "rows": [
+            ["1", "A"],
+            ["2", "B"],
+            ["3", "C"],
+            ["4", "D"],
+            ["5", "E"],
+            ["6", "F"]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "[MytestB]",
+          "headers": ["ID", "NAME"],
+          "rows": [
+            ["1", "G"],
+            ["3", "H"],
+            ["5", "I"],
+            ["6", "J"],
+            ["7", "K"],
+            ["8", "L"]
+          ]
+        }
+      ]
+    },
+    "a2f5912c9ba6": {
+      "name": "j350 — Mytest 10행 (AAA~JJJ) + RESULT 빈도",
+      "imageKey": "j350",
+      "refs": [
+        {
+          "type": "table",
+          "caption": "[Mytest]",
+          "headers": ["COL1"],
+          "rows": [
+            ["AAA"], ["BBB"], ["CCC"], ["DDD"], ["EEE"],
+            ["FFF"], ["GGG"], ["HHH"], ["III"], ["JJJ"]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "[RESULT]",
+          "headers": ["VAL", "CNT"],
+          "rows": [
+            ["1", "3"],
+            ["2", "3"],
+            ["3", "2"],
+            ["4", "2"]
+          ]
+        }
+      ]
+    },
+    "736c3b5b8fdf": {
+      "name": "j352 — Mytest 사원 계층 8행 (j279 와 동일 패턴, 별도 md5)",
+      "imageKey": "j352",
+      "refs": [
+        {
+          "type": "table",
+          "caption": "[Mytest]",
+          "headers": ["EMPID", "NAME", "TODAY", "MGRID"],
+          "rows": [
+            ["1000", "조조", "2017-01-01", "NULL"],
+            ["1001", "유비", "2017-01-01", "1000"],
+            ["1002", "관우", "2020-01-01", "1000"],
+            ["1003", "조자룡", "2020-01-01", "1000"],
+            ["1004", "여포", "2020-01-01", "NULL"],
+            ["1005", "동탁", "2022-01-01", "1004"],
+            ["1006", "사마위", "2022-01-01", "1004"],
+            ["1007", "순욱", "2022-01-01", "1004"]
+          ]
+        }
+      ]
+    },
+    "580eabc0adef": {
+      "name": "j353 — 결과 11행 (LIM/KIM/PARK/LEE × 가/나/다/라)",
+      "imageKey": "j353",
+      "refs": [
+        {
+          "type": "table",
+          "caption": "[결과]",
+          "headers": ["COL1", "COL2", "COL3", "Result"],
+          "rows": [
+            ["LIM", "가", "1", "10"],
+            ["LIM", "가", "5", "9"],
+            ["LIM", "다", "10", "9"],
+            ["KIM", "가", "20", "100"],
+            ["KIM", "나", "30", "9"],
+            ["KIM", "나", "100", "9"],
+            ["PARK", "다", "50", "1000"],
+            ["PARK", "나", "100", "9"],
+            ["PARK", "다", "1000", "9"],
+            ["LEE", "라", "1200", "9"],
+            ["LEE", "라", "1400", "9"]
+          ]
+        }
+      ]
+    },
+    "641c1020def9": {
+      "name": "j354 — Mytest 7행 (A/B/C × 가/나/다)",
+      "imageKey": "j354",
+      "refs": [
+        {
+          "type": "table",
+          "caption": "[Mytest]",
+          "headers": ["COL1", "COL2", "COL3"],
+          "rows": [
+            ["A", "가", "100"],
+            ["A", "가", "500"],
+            ["A", "다", "1000"],
+            ["B", "가", "2000"],
+            ["B", "나", "3000"],
+            ["B", "나", "10000"],
+            ["C", "다", "5000"]
+          ]
+        }
+      ]
+    },
+    "5393c1acd9a5": {
+      "name": "j356 — Mytest COL1 (단일행 2020-2-1)",
+      "imageKey": "j356",
+      "refs": [
+        {
+          "type": "table",
+          "caption": "[Mytest]",
+          "headers": ["COL1"],
+          "rows": [
+            ["2020-2-1"]
+          ]
+        }
+      ]
+    },
+    "d3e497559263": {
+      "name": "j358 — Mytest 7행 (j354 와 동일 데이터, 별도 md5)",
+      "imageKey": "j358",
+      "refs": [
+        {
+          "type": "table",
+          "caption": "[Mytest]",
+          "headers": ["COL1", "COL2", "COL3"],
+          "rows": [
+            ["A", "가", "100"],
+            ["A", "가", "500"],
+            ["A", "다", "1000"],
+            ["B", "가", "2000"],
+            ["B", "나", "3000"],
+            ["B", "나", "10000"],
+            ["C", "다", "5000"]
+          ]
+        }
+      ]
+    },
+    "23522ed3c826": {
+      "name": "j359 — Mytest 7행 (j354 와 동일 데이터, 별도 md5)",
+      "imageKey": "j359",
+      "refs": [
+        {
+          "type": "table",
+          "caption": "[Mytest]",
+          "headers": ["COL1", "COL2", "COL3"],
+          "rows": [
+            ["A", "가", "100"],
+            ["A", "가", "500"],
+            ["A", "다", "1000"],
+            ["B", "가", "2000"],
+            ["B", "나", "3000"],
+            ["B", "나", "10000"],
+            ["C", "다", "5000"]
+          ]
+        }
+      ]
+    },
+    "28e98d95f7e5": {
+      "name": "j365 — 고객·제작·제품·배송정보 ERD",
+      "imageKey": "j365",
+      "refs": [
+        {
+          "type": "image",
+          "src": "/sqld-images/j365-1.png",
+          "alt": "고객-제작-제품-배송정보 ERD",
+          "caption": "[ERD]"
+        }
+      ]
+    }
+  }
+}
