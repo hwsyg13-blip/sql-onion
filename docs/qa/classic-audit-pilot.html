@@ -96,7 +96,11 @@ function renderRef(ref) {
     return '<div class="ref">' + cap + '<div class="ref-text">' + escapeHtml(ref.text || '') + '</div></div>';
   }
   if (ref.type === 'image') {
-    return '<div class="ref">' + cap + '<div class="ref-image-info"><strong>image ref:</strong> src=<code>' + escapeHtml(ref.src) + '</code><br><strong>alt:</strong> ' + escapeHtml(ref.alt || '') + '</div></div>';
+    // ref.src 가 "/sqld-images/..." 형태 → docs/qa/ 기준 상대 경로 "../../public/sqld-images/..."
+    const imgSrc = ref.src.startsWith('/') ? '../../public' + ref.src : ref.src;
+    let html = '<div class="ref">' + cap + '<img src="' + escapeHtml(imgSrc) + '" alt="' + escapeHtml(ref.alt || '') + '">';
+    if (ref.alt) html += '<div class="ref-caption" style="margin-top:6px;font-style:italic;">alt: ' + escapeHtml(ref.alt) + '</div>';
+    return html + '</div>';
   }
   if (ref.type === 'erd') {
     return '<div class="ref">' + cap + '<pre class="ref-sql">' + escapeHtml(ref.mermaid || '') + '</pre></div>';
