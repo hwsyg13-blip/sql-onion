@@ -1,0 +1,360 @@
+{
+  "schema": "md5(image content) → 변환된 references 배열. 클래식 한글 시험지 batch 8.",
+  "method": "Claude 시각 정독 (sharp 1x raw — 일부 복잡/절단 이미지는 best-effort, 명시 표기) + 자체 검증",
+  "batchSize": 15,
+  "groups": {
+    "36995e2c9dec": {
+      "name": "j367 — 고객·상품 composite PK 4행",
+      "imageKey": "j367",
+      "refs": [
+        {
+          "type": "table",
+          "caption": "[고객·상품]",
+          "headers": ["고객\n(Primary Key)", "고객명", "상품번호\n(Primary Key)", "상품명", "가격"],
+          "rows": [
+            ["0001", "유비", "1000", "스마트폰", "1000"],
+            ["0002", "관우", "1000", "스마트폰", "1000"],
+            ["0002", "관우", "2000", "노트북", "9000"],
+            ["0003", "장비", "3000", "A카드", "5000"]
+          ]
+        }
+      ]
+    },
+    "b70a0fdced1e": {
+      "name": "j375-1 — Mytest DNAME×JOB×SAL 9행 (3부서 × 3직급)",
+      "imageKey": "j375",
+      "refs": [
+        {
+          "type": "table",
+          "caption": "[Mytest]",
+          "headers": ["DNAME", "JOB", "SAL"],
+          "rows": [
+            ["ACCOUNTING", "CLERK", "1000"],
+            ["ACCOUNTING", "MANAGER", "1500"],
+            ["ACCOUNTING", "PRESIDENT", "2000"],
+            ["RESEARCH", "CLERK", "2500"],
+            ["RESEARCH", "MANAGER", "3000"],
+            ["RESEARCH", "PRESIDENT", "3500"],
+            ["SALES", "CLERK", "4000"],
+            ["SALES", "MANAGER", "4500"],
+            ["SALES", "PRESIDENT", "5000"]
+          ]
+        }
+      ]
+    },
+    "0c7ad7065dcf": {
+      "name": "j375-2 — CUBE 결과 (DNAME×JOB) 16행",
+      "imageKey": "j375",
+      "refs": [
+        {
+          "type": "table",
+          "caption": "[결과]",
+          "headers": ["DNAME", "JOB", "SUM(SAL)"],
+          "rows": [
+            ["", "", "27000"],
+            ["", "CLERK", "7500"],
+            ["", "MANAGER", "9000"],
+            ["", "PRESIDENT", "10500"],
+            ["SALES", "", "13500"],
+            ["SALES", "CLERK", "4000"],
+            ["SALES", "MANAGER", "4500"],
+            ["SALES", "PRESIDENT", "5000"],
+            ["RESEARCH", "", "9000"],
+            ["RESEARCH", "CLERK", "2500"],
+            ["RESEARCH", "MANAGER", "3000"],
+            ["RESEARCH", "PRESIDENT", "3500"],
+            ["ACCOUNTING", "", "4500"],
+            ["ACCOUNTING", "CLERK", "1000"],
+            ["ACCOUNTING", "MANAGER", "1500"],
+            ["ACCOUNTING", "PRESIDENT", "2000"]
+          ]
+        }
+      ]
+    },
+    "a11532114abb": {
+      "name": "j377 — Mytest C1 4행 (1, 2, NULL, 4)",
+      "imageKey": "j377",
+      "refs": [
+        {
+          "type": "table",
+          "caption": "[Mytest]",
+          "headers": ["C1"],
+          "rows": [["1"], ["2"], ["NULL"], ["4"]]
+        }
+      ]
+    },
+    "b50a0beffb4b": {
+      "name": "j379 — mytesta 8행 + mytestb 5행 (UNION/INTERSECT/MINUS 비교용)",
+      "imageKey": "j379",
+      "refs": [
+        {
+          "type": "table",
+          "caption": "[mytesta]",
+          "headers": ["COL1"],
+          "rows": [["10"], ["10"], ["20"], ["20"], ["25"], ["30"], ["50"], ["60"]]
+        },
+        {
+          "type": "table",
+          "caption": "[mytestb]",
+          "headers": ["COL1"],
+          "rows": [["10"], ["20"], ["30"], ["40"], ["50"]]
+        }
+      ]
+    },
+    "d05020a42ef1": {
+      "name": "j381 — EMP RN/DEPTNO/SAL (가시 7행, ※ 이미지 하단 절단 가능 — 인간 재검 권장)",
+      "imageKey": "j381",
+      "refs": [
+        {
+          "type": "table",
+          "caption": "[EMP] (※ 1x 시각상 하단 행 절단 의심 — 원본 PDF 재검 필요)",
+          "headers": ["RN", "DEPTNO", "SAL"],
+          "rows": [
+            ["1", "10", "2450"],
+            ["2", "10", "1300"],
+            ["1", "20", "3000"],
+            ["1", "20", "3000"],
+            ["3", "20", "2975"],
+            ["4", "20", "1100"],
+            ["5", "20", "800"]
+          ]
+        }
+      ]
+    },
+    "8daf9fe273e4": {
+      "name": "j386 — Mytest 6행 + 결과 3행 (DISTINCT/MIN 패턴)",
+      "imageKey": "j386",
+      "refs": [
+        {
+          "type": "table",
+          "caption": "[Mytest]",
+          "headers": ["COL1", "COL2"],
+          "rows": [
+            ["10", "조조"],
+            ["20", "조조"],
+            ["30", "조자룡"],
+            ["40", "조자룡"],
+            ["50", "관우"],
+            ["60", "관우"]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "[결과]",
+          "headers": ["COL1", "COL2"],
+          "rows": [
+            ["10", "조조"],
+            ["30", "조자룡"],
+            ["50", "관우"]
+          ]
+        }
+      ]
+    },
+    "7198a8052e47": {
+      "name": "j392 — T_ORDER 4행 + T_CUST 등급별 가격범위 3행 (BETWEEN JOIN)",
+      "imageKey": "j392",
+      "refs": [
+        {
+          "type": "table",
+          "caption": "[T_ORDER]",
+          "headers": ["JUMUN", "PRICE"],
+          "rows": [
+            ["10", "1100"],
+            ["10", "1600"],
+            ["20", "2000"],
+            ["20", "1500"]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "[T_CUST]",
+          "headers": ["CUSTRANK", "MINPRICE", "MAXPRICE"],
+          "rows": [
+            ["MVP", "3000", "4999"],
+            ["GOLD", "2000", "2999"],
+            ["SILVER", "1000", "1999"]
+          ]
+        }
+      ]
+    },
+    "119ded4a2b82": {
+      "name": "j393 — SQLD01 COL1/COL2/COL3 3행 (NULL 혼재)",
+      "imageKey": "j393",
+      "refs": [
+        {
+          "type": "table",
+          "caption": "[SQLD01]",
+          "headers": ["COL1", "COL2", "COL3"],
+          "rows": [
+            ["30", "NULL", "20"],
+            ["NULL", "40", "0"],
+            ["0", "10", "NULL"]
+          ]
+        }
+      ]
+    },
+    "1acd3ac35892": {
+      "name": "j397 — EMPLOYEES + 결과(BEFORE_SALARY 추가) — ※ 1x 가독성 한계, 인간 재검 권장",
+      "imageKey": "j397",
+      "refs": [
+        {
+          "type": "table",
+          "caption": "[EMPLOYEES] (※ 1x 시각 — 행수·SALARY 정확도 재검 권장)",
+          "headers": ["EMPLOYEE_ID", "DEPARTMENT_ID", "LAST_NAME", "SALARY"],
+          "rows": [
+            ["107", "60", "Lorentz", "4200.00"],
+            ["102", "60", "Patabella", "4800.00"],
+            ["105", "60", "Austin", "4800.00"],
+            ["104", "60", "Ernst", "6000.00"],
+            ["106", "60", "Hunold", "9000.00"],
+            ["101", "90", "De Haan", "17000.00"],
+            ["100", "90", "Kochar", "17000.00"],
+            ["109", "100", "Faviet", "24000.00"],
+            ["108", "100", "Greenberg", "12000.00"]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "[결과] (LAG 윈도우 함수로 BEFORE_SALARY 추가)",
+          "headers": ["EMPLOYEE_ID", "DEPARTMENT_ID", "LAST_NAME", "SALARY", "BEFORE_SALARY"],
+          "rows": [
+            ["107", "60", "Lorentz", "4200.00", ""],
+            ["102", "60", "Patabella", "4800.00", "4200.00"],
+            ["105", "60", "Austin", "4800.00", "4800.00"],
+            ["104", "60", "Ernst", "6000.00", "4800.00"],
+            ["106", "60", "Hunold", "9000.00", "6000.00"],
+            ["101", "90", "De Haan", "17000.00", ""],
+            ["100", "90", "Kochar", "17000.00", "17000.00"],
+            ["109", "100", "Faviet", "24000.00", ""],
+            ["108", "100", "Greenberg", "12000.00", "24000.00"]
+          ]
+        }
+      ]
+    },
+    "455f2cd3f636": {
+      "name": "j401 — EMP 14행(부서×직급×급여) + DEPT 4행 (조인)",
+      "imageKey": "j401",
+      "refs": [
+        {
+          "type": "table",
+          "caption": "[EMP]",
+          "headers": ["DEPTNO", "JOB", "SAL"],
+          "rows": [
+            ["20", "CLERK", "800"],
+            ["30", "SALESMAN", "1600"],
+            ["30", "SALESMAN", "1250"],
+            ["20", "MANAGER", "2975"],
+            ["30", "SALESMAN", "1250"],
+            ["30", "MANAGER", "1850"],
+            ["10", "MANAGER", "1450"],
+            ["20", "ANALYST", "3000"],
+            ["10", "PRESIDENT", "5000"],
+            ["30", "SALESMAN", "1500"],
+            ["20", "CLERK", "1100"],
+            ["30", "CLERK", "950"],
+            ["20", "ANALYST", "3000"],
+            ["10", "CLERK", "1300"]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "[DEPT]",
+          "headers": ["DEPTNO", "DNAME"],
+          "rows": [
+            ["10", "ACCOUNTING"],
+            ["20", "RESEARCH"],
+            ["30", "SALES"],
+            ["40", "OPERATIONS"]
+          ]
+        }
+      ]
+    },
+    "8b2e4ffacd8f": {
+      "name": "j403 — 사원-가족사항·사원-부서 ERD 2개 (관계 차이 비교)",
+      "imageKey": "j403",
+      "refs": [
+        {
+          "type": "image",
+          "src": "/sqld-images/j403-1.png",
+          "caption": "두 ERD 비교 — 위: 사원⇒가족사항(필수 1:1) · 아래: 사원⇒부서(부서 측 까마귀발 + 옵션 표기, 1:N 선택 관계)"
+        }
+      ]
+    },
+    "ee8a56a1160d": {
+      "name": "j406 — 고객 supertype + 개인고객/기업고객 subtype ERD (배타 분기)",
+      "imageKey": "j406",
+      "refs": [
+        {
+          "type": "image",
+          "src": "/sqld-images/j406-1.png",
+          "caption": "고객 supertype(고객번호 PK + 고객구분 + 이름) — 개인고객·기업고객 subtype 으로 배타 분기. subtype 들은 고객번호·고객구분 FK + 연락처 보유"
+        }
+      ]
+    },
+    "effb9ba6e5f1": {
+      "name": "j410 — Mytest NUM/CODE/COL1/COL2 6행 (PARTITION BY CODE 윈도우용)",
+      "imageKey": "j410",
+      "refs": [
+        {
+          "type": "table",
+          "caption": "[Mytest]",
+          "headers": ["NUM", "CODE", "COL1", "COL2"],
+          "rows": [
+            ["1", "A001", "100", "400"],
+            ["2", "A001", "120", "200"],
+            ["3", "B001", "150", "300"],
+            ["4", "A001", "210", "100"],
+            ["5", "B001", "250", "240"],
+            ["6", "A001", "400", "400"]
+          ]
+        }
+      ]
+    },
+    "6b6ac34f1fe2": {
+      "name": "j414 — Mytest 6행 + 결과 3행 (LIKE 와일드/언더스코어 패턴)",
+      "imageKey": "j414",
+      "refs": [
+        {
+          "type": "table",
+          "caption": "[Mytest] (※ NAME 의 '__' 는 표시상 밑줄 두 개 — 원본은 공백 또는 밑줄 패턴 가능)",
+          "headers": ["ID", "NAME"],
+          "rows": [
+            ["1", "__A"],
+            ["2", "B"],
+            ["3", "__C"],
+            ["4", "D"],
+            ["5", "E"],
+            ["6", "__F"]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "[결과]",
+          "headers": ["ID", "NAME"],
+          "rows": [
+            ["1", "__A"],
+            ["3", "__C"],
+            ["6", "__F"]
+          ]
+        }
+      ]
+    },
+    "a83f50596acb": {
+      "name": "j415 — Mytest COL1/COL2/COL3 4행 (NULL 혼재, 집계 연산용)",
+      "imageKey": "j415",
+      "refs": [
+        {
+          "type": "table",
+          "caption": "[Mytest]",
+          "headers": ["COL1", "COL2", "COL3"],
+          "rows": [
+            ["A", "300", "50"],
+            ["B", "300", "150"],
+            ["C", "NULL", "300"],
+            ["D", "300", "100"]
+          ]
+        }
+      ]
+    }
+  }
+}
