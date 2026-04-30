@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>Plan B 데모 — 이미지 references 디자인시스템 정합</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<style>
+  :root {
+    --bg: #fafafa;
+    --card: #fff;
+    --border: #e5e5e5;
+    --border-strong: #bbb;
+    --border-subtle: #ececec;
+    --text: #111;
+    --fg-3: #6b7280;
+    --tag-bg: #eef2ff;
+    --tag-text: #3730a3;
+    --accent: #2563eb;
+    --code-bg: #1e293b;
+    --code-text: #e2e8f0;
+    --raw-badge-bg: #fef3c7;
+    --raw-badge-fg: #92400e;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text); font: 14px/1.55 -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Pretendard Variable", Pretendard, "Segoe UI", Roboto, sans-serif; }
+  header.top { padding: 18px 20px 10px; max-width: 1280px; margin: 0 auto; }
+  header.top h1 { margin: 0 0 6px; font-size: 18px; }
+  header.top p { margin: 0 0 0; color: var(--fg-3); font-size: 13px; }
+  main { max-width: 1280px; margin: 0 auto; padding: 16px 20px 60px; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  @media (max-width: 880px) { main { grid-template-columns: 1fr; } }
+  .col { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 18px; }
+  .col h2 { margin: 0 0 4px; font-size: 14px; }
+  .col h2 .badge { font-size: 10.5px; padding: 2px 8px; border-radius: 4px; margin-left: 8px; vertical-align: 1px; font-weight: 700; }
+  .col h2 .b-now    { background: #fee2e2; color: #991b1b; }
+  .col h2 .b-after  { background: #dcfce7; color: #166534; }
+  .col .desc { color: var(--fg-3); font-size: 12px; margin-bottom: 14px; }
+  .desc ul { margin: 6px 0 0; padding-left: 18px; }
+  .desc li { margin-bottom: 2px; }
+
+  /* ===== 공통 question card 흉내 ===== */
+  .qcard { border: 1px solid var(--border); border-radius: 10px; padding: 14px; background: #fff; }
+  .qhead { font-size: 11.5px; color: var(--fg-3); margin-bottom: 8px; display: flex; gap: 8px; align-items: center; }
+  .qhead .tag { background: var(--tag-bg); color: var(--tag-text); padding: 2px 6px; border-radius: 3px; font-size: 10.5px; font-weight: 600; }
+  .qtitle { font-size: 14px; font-weight: 500; line-height: 1.55; margin-bottom: 12px; }
+
+  /* ===== 현재 (CURRENT) — bare img ===== */
+  .now-img { max-width: 100%; height: auto; border-radius: 6px; border: 1px solid var(--border-subtle); display: block; }
+
+  /* ===== Plan B (AFTER) — designed wrapper ===== */
+  .ref-image-card {
+    border: 1px solid var(--border-subtle);
+    border-radius: 8px;
+    background: #fff;
+    overflow: hidden;
+    margin: 4px 0 0;
+    box-shadow: 0 0 0 1px transparent;
+    transition: box-shadow .15s, border-color .15s;
+  }
+  .ref-image-card:hover { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent); }
+  .ref-image-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    background: linear-gradient(to right, #f8fafc, #f1f5f9);
+    border-bottom: 1px solid var(--border-subtle);
+    font-size: 11.5px;
+    color: var(--fg-3);
+  }
+  .ref-image-bar .raw-badge {
+    background: var(--raw-badge-bg);
+    color: var(--raw-badge-fg);
+    padding: 1px 6px;
+    border-radius: 3px;
+    font-weight: 700;
+    font-size: 10px;
+    letter-spacing: 0.02em;
+  }
+  .ref-image-bar .cap { font-weight: 600; color: #374151; }
+  .ref-image-bar .zoom {
+    margin-left: auto;
+    color: var(--accent);
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+    user-select: none;
+  }
+  .ref-image-body {
+    padding: 12px;
+    background: #fff;
+    text-align: center;
+    cursor: zoom-in;
+  }
+  .ref-image-body img { max-width: 100%; height: auto; display: inline-block; }
+
+  /* ===== Lightbox ===== */
+  .lb {
+    position: fixed; inset: 0; background: rgba(0,0,0,.85);
+    display: none; align-items: center; justify-content: center;
+    z-index: 999; padding: 20px;
+  }
+  .lb.open { display: flex; }
+  .lb img { max-width: 100%; max-height: 100%; cursor: zoom-out; }
+  .lb .lb-close {
+    position: absolute; top: 14px; right: 18px;
+    color: #fff; font-size: 28px; cursor: pointer; user-select: none;
+    background: rgba(0,0,0,.4); border-radius: 50%; width: 40px; height: 40px;
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  /* compare row */
+  .compare-row { display: flex; flex-direction: column; gap: 14px; }
+  .micro { font-size: 11px; color: var(--fg-3); margin-top: 4px; line-height: 1.5; }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <h1>Plan B 데모 — sqld-1140 이미지를 우리 디자인 시스템으로 감싸기</h1>
+  <p>이미지 자체는 그대로 두되 (OCR 누락 위험 회피), 카드/캡션/라이트박스로 우리 스타일과 정합. 실 데이터: <code>j121-1.png</code> (sqld-0121, 1과목·정규화)</p>
+</header>
+
+<main>
+
+  <!-- LEFT: CURRENT -->
+  <section class="col">
+    <h2>현재 (CURRENT) <span class="badge b-now">image type 도입 직후 상태</span></h2>
+    <div class="desc">
+      <ul>
+        <li>그냥 <code>&lt;img&gt;</code> 단일 — 컨텍스트 없음</li>
+        <li>이게 "원본 자료" 인지 "우리가 생성한 자료" 인지 표시 없음</li>
+        <li>이미지 클릭해도 확대 안 됨 → 모바일에서 표 글씨 안 보임</li>
+        <li>호버/포커스 피드백 없음</li>
+      </ul>
+    </div>
+
+    <div class="qcard">
+      <div class="qhead">
+        <span class="tag">sqld-1140</span>
+        <span>sqld-0121 · 1과목 · 정규화</span>
+      </div>
+      <div class="qtitle">[보기]에서 부서 테이블의 정규화 결과로 가장 적절한 것은?</div>
+      <img class="now-img" src="/sqld-images/j121-1.png" alt="문항 이미지 j121">
+    </div>
+  </section>
+
+  <!-- RIGHT: PLAN B -->
+  <section class="col">
+    <h2>Plan B 적용 후 (AFTER) <span class="badge b-after">디자인시스템 정합</span></h2>
+    <div class="desc">
+      <ul>
+        <li>카드 컨테이너 + 상단 메타 바 ("원본자료" 배지 + 캡션)</li>
+        <li>오른쪽 "확대 ⤢" 액션 명시 (호버 시 강조)</li>
+        <li>클릭 시 라이트박스 → 모바일에서도 표 글씨 또렷하게 확인 가능</li>
+        <li>호버 시 액센트 컬러 보더로 클릭 가능 affordance</li>
+      </ul>
+    </div>
+
+    <div class="qcard">
+      <div class="qhead">
+        <span class="tag">sqld-1140</span>
+        <span>sqld-0121 · 1과목 · 정규화</span>
+      </div>
+      <div class="qtitle">[보기]에서 부서 테이블의 정규화 결과로 가장 적절한 것은?</div>
+
+      <figure class="ref-image-card" data-src="/sqld-images/j121-1.png">
+        <div class="ref-image-bar">
+          <span class="raw-badge">원본자료</span>
+          <span class="cap">[테이블 : 부서] · [부서이력] · [결과]</span>
+          <span class="zoom" onclick="openLB(this)">확대 ⤢</span>
+        </div>
+        <div class="ref-image-body" onclick="openLB(this.parentElement.querySelector('.zoom'))">
+          <img src="/sqld-images/j121-1.png" alt="sqld-0121 본문 자료" loading="lazy">
+        </div>
+      </figure>
+      <div class="micro">※ 외부 출처 자료 (1140문항 풀) — 표/SQL 텍스트 변환 시 정답 무결성 위험으로 일단 원본 그대로 표시. 모바일은 클릭 시 전체 화면 확대.</div>
+    </div>
+  </section>
+
+  <!-- 추가 케이스: 모던 박스 -->
+  <section class="col" style="grid-column: 1/-1;">
+    <h2>추가 비교 — 모던 박스 케이스 (j1031: NULL Aggregate Data)</h2>
+    <div class="desc">모던 박스는 정렬/배경이 깔끔해서 Plan B 만으로도 충분히 우리 컴포넌트와 톤이 맞음. 텍스트화 (Plan C) 는 점진 적용해도 OK.</div>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 8px;">
+      <div class="qcard">
+        <div class="qhead"><span class="tag">현재</span></div>
+        <img class="now-img" src="/sqld-images/j1031-1.png" alt="j1031">
+      </div>
+      <div class="qcard">
+        <div class="qhead"><span class="tag">Plan B</span></div>
+        <figure class="ref-image-card" data-src="/sqld-images/j1031-1.png">
+          <div class="ref-image-bar">
+            <span class="raw-badge">원본자료</span>
+            <span class="cap">NULL Aggregate Data</span>
+            <span class="zoom" onclick="openLB(this)">확대 ⤢</span>
+          </div>
+          <div class="ref-image-body" onclick="openLB(this.parentElement.querySelector('.zoom'))">
+            <img src="/sqld-images/j1031-1.png" alt="NULL aggregate data" loading="lazy">
+          </div>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- 모바일 프리뷰 노트 -->
+  <section class="col" style="grid-column: 1/-1; background: #fffbeb; border-color: #fcd34d;">
+    <h2 style="color: #92400e;">모바일 동작 (라이트박스 시뮬)</h2>
+    <div class="desc">
+      위 어떤 이미지든 클릭하면 전체화면 라이트박스 (다크 배경 + 픽셀 확대). 모바일 핀치 줌도 가능. 닫기는 ✕ 또는 이미지 다시 탭.
+    </div>
+  </section>
+
+</main>
+
+<!-- Lightbox overlay -->
+<div class="lb" id="lb" onclick="closeLB(event)">
+  <div class="lb-close" onclick="closeLB(event)">✕</div>
+  <img id="lb-img" src="" alt="">
+</div>
+
+<script>
+  function openLB(triggerEl) {
+    var fig = triggerEl.closest('.ref-image-card');
+    var src = fig && fig.dataset.src;
+    if (!src) return;
+    document.getElementById('lb-img').src = src;
+    document.getElementById('lb').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLB(e) {
+    if (e && e.target.tagName === 'IMG' && e.target.id === 'lb-img') return;
+    document.getElementById('lb').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  document.getElementById('lb-img').addEventListener('click', function () {
+    document.getElementById('lb').classList.remove('open');
+    document.body.style.overflow = '';
+  });
+</script>
+</body>
+</html>
