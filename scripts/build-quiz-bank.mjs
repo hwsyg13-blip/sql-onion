@@ -14,6 +14,8 @@ const PDF_TEXT = 'C:/Users/hwsyg/AppData/Local/Temp/design/sql/project/uploads/s
 const BLOG_RAW = 'scripts/blog-questions-raw.json';
 const AUTHORED_DIR = 'scripts/authored';
 const AI_MOCK_FILE = 'scripts/authored/ai-mock.json';
+const CBT_MOCK_FILE = 'scripts/authored/cbt-mock.json';
+const SQLD_1140_FILE = 'scripts/authored/sqld-quiz-1140.json';
 const ROUNDS_DIR = 'src/data/rounds';
 const INDEX_FILE = 'src/data/quizBank.ts';
 
@@ -86,6 +88,20 @@ let aiMock = [];
 if (existsSync(AI_MOCK_FILE)) {
   const data = JSON.parse(readFileSync(AI_MOCK_FILE, 'utf8'));
   aiMock = data.authored || [];
+}
+
+// CBT mock (영진닷컴 이기적 CBT 등 외부 모의고사 PDF) — ai-mock 풀에 합쳐 노출
+let cbtMock = [];
+if (existsSync(CBT_MOCK_FILE)) {
+  const data = JSON.parse(readFileSync(CBT_MOCK_FILE, 'utf8'));
+  cbtMock = data.authored || [];
+}
+
+// SQLD 1140 외부 출처 모의고사 — ai-mock 풀에 합쳐 노출 (이미지는 public/sqld-images/ 에서 path 로 참조)
+let sqld1140 = [];
+if (existsSync(SQLD_1140_FILE)) {
+  const data = JSON.parse(readFileSync(SQLD_1140_FILE, 'utf8'));
+  sqld1140 = data.authored || [];
 }
 
 const rounds = Object.keys(ROUND_DATES).map(Number).sort((a,b)=>b-a);
@@ -166,11 +182,18 @@ export const ${varName}: QuizQuestion[] = ${JSON.stringify(qs, null, 2)};
 }
 
 // AI mock 풀 별도 파일 생성 (UI에서 자동 노출 — 기출 회차 시험은 round 필터로 제외, 모의고사 모드는 통합 풀에서 셔플)
-const aiMockEntries = aiMock.map((q, i) => {
+// ai-mock.json + cbt-mock.json + sqld-quiz-1140.json 세 출처를 병합. UI 에서는 단일 모의고사 풀로 노출.
+const combinedMock = [
+  ...aiMock.map(q => ({ ...q, _pool: 'ai-mock' })),
+  ...cbtMock.map(q => ({ ...q, _pool: 'cbt-mock' })),
+  ...sqld1140.map(q => ({ ...q, _pool: 'sqld-1140' }))
+];
+
+const aiMockEntries = combinedMock.map((q, i) => {
   const entry = {
     id: nextId++,
     examSetId: 'ai-mock',
-    examLabel: '기출 변형 (AI 모의)',
+    examLabel: '모의고사',
     subject: q.subject,
     number: i + 1,
     title: q.title,
@@ -178,9 +201,17 @@ const aiMockEntries = aiMock.map((q, i) => {
     correctIndex: q.correctIndex,
     explanation: q.explanation || '',
     chapter: q.chapter,
-    _source: 'ai-mock',
+    _source: q._pool || 'ai-mock',
     _origId: q._id,
   };
+  if (q._pool === 'cbt-mock') {
+    entry._cbtPdf = q._pdf;
+    entry._cbtPdfNumber = q._pdfNumber;
+  }
+  if (q._pool === 'sqld-1140') {
+    entry._category = q._category;
+    entry._correctRate = q._correctRate;
+  }
   if (q.references && q.references.length) entry.references = q.references;
   if (q.optionReferences && q.optionReferences.some(r => r && r.length)) {
     entry.optionReferences = q.optionReferences;

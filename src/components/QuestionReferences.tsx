@@ -20,6 +20,7 @@ export type QuestionReference =
   | { type: 'table'; headers: string[]; rows: string[][]; caption?: string }
   | { type: 'ascii'; text: string; caption?: string }
   | { type: 'html'; html: string; caption?: string }
+  | { type: 'image'; src: string; alt?: string; caption?: string }
   /** @deprecated 호환성 유지용. 새 데이터는 'erd' 사용. PR #100 spec 참조. */
   | { type: 'entity-diagram'; entityName: string; preText: string; headers: string[]; rows: string[][] }
   | { type: 'erd'; mermaid: string; caption?: string; instanceTable?: { of: string; headers: string[]; rows: string[][] } };
@@ -395,6 +396,26 @@ function RefHtml({ html, caption }: any) {
   );
 }
 
+function RefImage({ src, alt, caption }: { src: string; alt?: string; caption?: string }) {
+  return (
+    <div>
+      {caption ? <div style={CAPTION_STYLE}>{caption}</div> : null}
+      <img
+        src={src}
+        alt={alt || '문항 이미지'}
+        style={{
+          maxWidth: '100%',
+          height: 'auto',
+          borderRadius: 6,
+          border: '1px solid var(--border-subtle)',
+          display: 'block',
+        }}
+        loading="lazy"
+      />
+    </div>
+  );
+}
+
 function renderBlock(r: QuestionReference, i: number) {
   switch (r.type) {
     case 'text':  return <RefText  key={i} {...r as any}/>;
@@ -402,6 +423,7 @@ function renderBlock(r: QuestionReference, i: number) {
     case 'table': return <RefTable key={i} {...r as any}/>;
     case 'ascii': return <RefAscii key={i} {...r as any}/>;
     case 'html':  return <RefHtml  key={i} {...r as any}/>;
+    case 'image': return <RefImage key={i} {...r as any}/>;
     case 'entity-diagram': return <RefEntityDiagram key={i} {...r as any}/>;
     case 'erd':   return <RefErd   key={i} {...r as any}/>;
     default: return null;
