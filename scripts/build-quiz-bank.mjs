@@ -205,8 +205,8 @@ const aiMockEntries = combinedMock.map((q, i) => {
     _origId: q._id,
   };
   if (q._pool === 'cbt-mock') {
-    entry._cbtPdf = q._pdf;
-    entry._cbtPdfNumber = q._pdfNumber;
+    // 영진닷컴 license_no=73 JSON (v2) — _origNo 사용. PDF 추출 시절의 _pdf/_pdfNumber 는 폐기.
+    entry._cbtOrigNo = q._origNo;
   }
   if (q._pool === 'sqld-1140') {
     entry._category = q._category;
