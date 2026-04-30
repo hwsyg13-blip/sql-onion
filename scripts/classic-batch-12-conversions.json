@@ -1,0 +1,330 @@
+{
+  "schema": "md5(image content) → 변환된 references 배열. 클래식 한글 시험지 batch 12.",
+  "method": "Claude 시각 정독 (sharp 4x lanczos3 처음부터, 모호 항목은 8x crop audit)",
+  "batchSize": 15,
+  "groups": {
+    "87ce8c59d8fa": {
+      "name": "j520 — test48 COL1/COL2 5행 (3행 NULL)",
+      "imageKey": "j520",
+      "refs": [
+        {
+          "type": "table",
+          "caption": "[test48]",
+          "headers": ["COL1", "COL2"],
+          "rows": [
+            ["1", "10"],
+            ["2", "20"],
+            ["3", "NULL"],
+            ["4", "40"],
+            ["5", "50"]
+          ]
+        }
+      ]
+    },
+    "b5322c5825fd": {
+      "name": "j521 — TEST50 COUNT(*) 빈 괄호 inline view 채우기 + 결과 25",
+      "imageKey": "j521",
+      "refs": [
+        {
+          "type": "text",
+          "caption": "[설명]",
+          "text": "TEST50 테이블에는 총 5건의 행이 있다. 그리고 아래의 SQL문을 실행했다."
+        },
+        {
+          "type": "sql",
+          "caption": "[SQL]",
+          "code": "SELECT COUNT(*) FROM test50\n(            ) test50;"
+        },
+        {
+          "type": "table",
+          "caption": "[결과]",
+          "headers": ["COUNT(*)"],
+          "rows": [
+            ["25"]
+          ]
+        }
+      ]
+    },
+    "a8940dce8730": {
+      "name": "j531 — T_TEST DEPTNO/JOB/SAL 5행 + 결과 ROLLUP 8행",
+      "imageKey": "j531",
+      "refs": [
+        {
+          "type": "table",
+          "caption": "[T_TEST]",
+          "headers": ["DEPTNO", "JOB", "SAL"],
+          "rows": [
+            ["10", "CLERK", "1300"],
+            ["10", "MANAGER", "2150"],
+            ["20", "CLERK", "1900"],
+            ["20", "ANALYST", "6000"],
+            ["20", "MANAGER", "2000"]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "[결과]",
+          "headers": ["DEPTNO", "JOB", "SUM(SAL)"],
+          "rows": [
+            ["10", "CLERK", "1300"],
+            ["10", "MANAGER", "2150"],
+            ["10", "", "3450"],
+            ["20", "CLERK", "1900"],
+            ["20", "ANALYST", "6000"],
+            ["20", "MANAGER", "2000"],
+            ["20", "", "9900"],
+            ["", "", "13350"]
+          ]
+        }
+      ]
+    },
+    "9e6968e08fee": {
+      "name": "j533 — TEST10 EMPNO/NAME/MANAGER 3행 (1행 NULL)",
+      "imageKey": "j533",
+      "refs": [
+        {
+          "type": "table",
+          "caption": "[TEST10]",
+          "headers": ["EMPNO", "NAME", "MANAGER"],
+          "rows": [
+            ["1", "LIM", "NULL"],
+            ["2", "PARK", "1"],
+            ["3", "KIM", "2"]
+          ]
+        }
+      ]
+    },
+    "ad3a89243959": {
+      "name": "j536 — TABLE_B A/X 4행 (2행 NULL)",
+      "imageKey": "j536",
+      "refs": [
+        {
+          "type": "table",
+          "caption": "[TABLE_B]",
+          "headers": ["A", "X"],
+          "rows": [
+            ["1", "100"],
+            ["1", "NULL"],
+            ["2", "100"],
+            ["2", "200"]
+          ]
+        }
+      ]
+    },
+    "d6f866994697": {
+      "name": "j538 — test21 USERID/USERCOUNT 4행 (NULL 2행)",
+      "imageKey": "j538",
+      "refs": [
+        {
+          "type": "table",
+          "caption": "[test21]",
+          "headers": ["USERID", "USERCOUNT"],
+          "rows": [
+            ["KIM", "10"],
+            ["PARK", "20"],
+            ["LIM", "NULL"],
+            ["SIN", "NULL"]
+          ]
+        }
+      ]
+    },
+    "c4e63beaf34a": {
+      "name": "j541 — T_ORDER Orderyear/Ordermonth/Price 6행 (2020년 6개월)",
+      "imageKey": "j541",
+      "refs": [
+        {
+          "type": "table",
+          "caption": "[T_ORDER]",
+          "headers": ["Orderyear", "Ordermonth", "Price"],
+          "rows": [
+            ["2020", "01", "1000"],
+            ["2020", "02", "6000"],
+            ["2020", "03", "2000"],
+            ["2020", "04", "3000"],
+            ["2020", "05", "2000"],
+            ["2020", "06", "1500"]
+          ]
+        }
+      ]
+    },
+    "103dd77ee4b8": {
+      "name": "j545 — TEST29_1 COL 4행 + TEST29_2 COL 2행 (NULL 포함)",
+      "imageKey": "j545",
+      "refs": [
+        {
+          "type": "table",
+          "caption": "[TEST29_1]",
+          "headers": ["COL"],
+          "rows": [
+            ["1"],
+            ["2"],
+            ["3"],
+            ["4"]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "[TEST29_2]",
+          "headers": ["COL"],
+          "rows": [
+            ["2"],
+            ["NULL"]
+          ]
+        }
+      ]
+    },
+    "2c2c805e3060": {
+      "name": "j546 — SQLD5 COL1/COL2 5행 (NULL 1행, j496과 동일 데이터/별개 hash)",
+      "imageKey": "j546",
+      "refs": [
+        {
+          "type": "table",
+          "caption": "[SQLD5]",
+          "headers": ["COL1", "COL2"],
+          "rows": [
+            ["NULL", "A"],
+            ["1", "B"],
+            ["2", "C"],
+            ["3", "D"],
+            ["4", "E"]
+          ]
+        }
+      ]
+    },
+    "28ecd01b8598": {
+      "name": "j547 — test31 USERID/USERNAME 4행 + 결과 동일 (LIKE underscore 패턴)",
+      "imageKey": "j547",
+      "refs": [
+        {
+          "type": "table",
+          "caption": "[test31]",
+          "headers": ["USERID", "USERNAME"],
+          "rows": [
+            ["1", "__H"],
+            ["2", "_B_"],
+            ["3", "___"],
+            ["4", "D__"]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "[결과]",
+          "headers": ["USERID", "USERNAME"],
+          "rows": [
+            ["1", "__H"],
+            ["2", "_B_"],
+            ["3", "___"],
+            ["4", "D__"]
+          ]
+        }
+      ]
+    },
+    "074e9a570b21": {
+      "name": "j548 — TEST32 COL1/COL2 4행 ('ABC'/'AbC' 대소문자 혼재 + NULL)",
+      "imageKey": "j548",
+      "refs": [
+        {
+          "type": "table",
+          "caption": "[TEST32]",
+          "headers": ["COL1", "COL2"],
+          "rows": [
+            ["10000", "'ABC'"],
+            ["10000", "NULL"],
+            ["10000", "'AbC'"],
+            ["20000", "'ABC'"]
+          ]
+        }
+      ]
+    },
+    "372e793d9c37": {
+      "name": "j550 — test34_1 JUMUN/PRICE 4행 + test34_2 CUSTRANK/MIN/MAX 3행 (등급 범위)",
+      "imageKey": "j550",
+      "refs": [
+        {
+          "type": "table",
+          "caption": "[test34_1]",
+          "headers": ["JUMUN", "PRICE"],
+          "rows": [
+            ["10", "2000"],
+            ["10", "3000"],
+            ["20", "4000"],
+            ["20", "3500"]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "[test34_2]",
+          "headers": ["CUSTRANK", "MINPRICE", "MAXPRICE"],
+          "rows": [
+            ["VVIP", "6000", "6999"],
+            ["VIP", "5000", "5999"],
+            ["GOLD", "4000", "4999"]
+          ]
+        }
+      ]
+    },
+    "0e95cf8ed3e0": {
+      "name": "j552 — 고객마스터-계좌마스터-일자별주문내역 ERD",
+      "imageKey": "j552",
+      "refs": [
+        {
+          "type": "image",
+          "src": "/sqld-images/j552-1.png",
+          "alt": "고객마스터(회원번호 PK)─계좌마스터(계좌번호 PK, 계좌종류/계좌지점/계좌개설일자/예수금/평균잔고/주문일자/회원번호 FK)─일자별주문내역(주문일자/회원번호 식별자, 종목코드/주문수량/주문금액/주문매체/계좌번호 FK) ERD",
+          "caption": "[ERD]"
+        }
+      ]
+    },
+    "aa15a4e11a33": {
+      "name": "j556 — TEST44_1 STUDENTNO 3행 + TEST44_2 GRADE 3행",
+      "imageKey": "j556",
+      "refs": [
+        {
+          "type": "table",
+          "caption": "[TEST44_1]",
+          "headers": ["STUDENTNO"],
+          "rows": [
+            ["10"],
+            ["20"],
+            ["30"]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "[TEST44_2]",
+          "headers": ["GRADE"],
+          "rows": [
+            ["50"],
+            ["60"],
+            ["70"]
+          ]
+        }
+      ]
+    },
+    "5aef0246c4bc": {
+      "name": "j556-2 — 결과 GRADE/STUDENTNO/SUM(B.GRADE) 12행 ROLLUP",
+      "imageKey": "j556-2",
+      "refs": [
+        {
+          "type": "table",
+          "caption": "[결과]",
+          "headers": ["GRADE", "STUDENTNO", "SUM(B.GRADE)"],
+          "rows": [
+            ["50", "10", "50"],
+            ["50", "20", "50"],
+            ["50", "30", "50"],
+            ["50", "", "150"],
+            ["60", "10", "60"],
+            ["60", "20", "60"],
+            ["60", "30", "60"],
+            ["60", "", "180"],
+            ["70", "10", "70"],
+            ["70", "20", "70"],
+            ["70", "30", "70"],
+            ["70", "", "210"]
+          ]
+        }
+      ]
+    }
+  }
+}
