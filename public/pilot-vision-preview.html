@@ -2,84 +2,192 @@
 <html lang="ko">
 <head>
 <meta charset="utf-8">
-<title>모던 박스 변환 파일럿 — Before/After (Plan A 1차)</title>
+<title>모던/클래식 변환 파일럿 — Before/After (Plan A 1차)</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
 <style>
+  /* 양파 그린 디자인 토큰 (src/index.css 라이트 모드) */
   :root {
-    --bg: #fafafa;
-    --card: #fff;
-    --border: #e5e5e5;
-    --border-subtle: #ececec;
-    --border-default: #d4d4d4;
-    --text: #111;
-    --fg-1: #1f2937;
-    --fg-2: #374151;
-    --fg-3: #6b7280;
-    --bg-card: #fff;
-    --bg-muted: #f3f4f6;
-    --bg-code: #1e293b;
-    --code-fg: #e2e8f0;
-    --accent: #2563eb;
-    --point-100: #dcfce7;
-    --point-600: #2E7D32;
+    --bg-page:      #F5F7F6;
+    --bg-surface:   #FAFAFA;
+    --bg-card:      #FFFFFF;
+    --bg-code:      #EEF1EE;   /* 라이트 그린 SQL 블록 */
+    --bg-muted:     #F3F5F3;
+    --point-600:    #2E7D32;   /* primary 양파 그린 */
+    --point-500:    #4CAF50;
+    --point-300:    #A5D6A7;
+    --point-100:    #EBF5EC;
+    --point-050:    #F0F7F1;
+    --fg-1:         #1F2320;
+    --fg-2:         #333333;
+    --fg-3:         #6B7280;
+    --border-subtle:  #EEF1EE;
+    --border-default: #E5E7EB;
+    --warn-bg:        #FEF3C7;
+    --warn-fg:        #92400E;
+    --code-str:       #A9562E;
+    --code-num:       #2F5D80;
+    --shadow-sm: 0 1px 2px rgba(0,0,0,0.04);
   }
   * { box-sizing: border-box; }
-  body { margin: 0; background: var(--bg); color: var(--text); font: 14px/1.6 -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Pretendard Variable", Pretendard, "Segoe UI", Roboto, sans-serif; }
-  header.top { padding: 18px 20px 10px; max-width: 1400px; margin: 0 auto; }
-  header.top h1 { margin: 0 0 6px; font-size: 18px; }
-  header.top .meta { color: var(--fg-3); font-size: 12.5px; }
-  main { max-width: 1400px; margin: 0 auto; padding: 12px 20px 60px; }
-  .card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 16px; margin-bottom: 18px; }
-  .card header { display: flex; gap: 10px; align-items: center; margin-bottom: 12px; }
-  .seq { font-weight: 700; font-size: 14px; color: var(--accent); }
-  .key { background: var(--bg-muted); color: var(--fg-2); padding: 3px 10px; border-radius: 4px; font: 12px/1 monospace; }
-  .split { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; align-items: start; }
+  body {
+    margin: 0; background: var(--bg-page); color: var(--fg-1);
+    font: 14px/1.6 "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Segoe UI", Roboto, sans-serif;
+  }
+  header.top { padding: 22px 24px 12px; max-width: 1400px; margin: 0 auto; }
+  header.top h1 {
+    margin: 0 0 6px; font-size: 19px; color: var(--fg-1);
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  header.top h1::before {
+    content: ""; display: inline-block; width: 14px; height: 14px;
+    background: var(--point-600); border-radius: 50%;
+  }
+  header.top .meta { color: var(--fg-3); font-size: 12.5px; line-height: 1.6; }
+  main { max-width: 1400px; margin: 0 auto; padding: 8px 24px 80px; }
+
+  .section-head {
+    margin: 30px 0 16px; padding-left: 12px;
+    border-left: 4px solid var(--point-600);
+  }
+  .section-head:first-of-type { margin-top: 12px; }
+  .section-head h2 { margin: 0; font-size: 17px; color: var(--fg-1); }
+  .section-head p { margin: 4px 0 0; font-size: 12.5px; color: var(--fg-3); }
+
+  .card {
+    background: var(--bg-card); border: 1px solid var(--border-subtle);
+    border-radius: 14px; padding: 18px; margin-bottom: 18px;
+    box-shadow: var(--shadow-sm);
+  }
+  .card header { display: flex; gap: 10px; align-items: center; margin-bottom: 14px; flex-wrap: wrap; }
+  .seq { font-weight: 700; font-size: 14px; color: var(--point-600); }
+  .key {
+    background: var(--point-100); color: var(--point-600);
+    padding: 3px 10px; border-radius: 999px;
+    font: 12px/1 "JetBrains Mono", "SF Mono", Menlo, Consolas, monospace;
+    font-weight: 600;
+  }
+  .badge {
+    padding: 2px 8px; border-radius: 4px;
+    font-size: 10.5px; font-weight: 700; letter-spacing: 0.04em;
+  }
+  .badge.modern  { background: var(--point-100); color: var(--point-600); }
+  .badge.classic { background: var(--warn-bg);   color: var(--warn-fg); }
+
+  .split { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; align-items: start; }
   @media (max-width: 980px) { .split { grid-template-columns: 1fr; } }
-  .col-label { font-size: 11px; font-weight: 700; color: var(--fg-3); margin-bottom: 8px; letter-spacing: 0.04em; text-transform: uppercase; }
-  .img-frame { background: #fff; border: 1px solid var(--border-subtle); border-radius: 8px; padding: 12px; text-align: center; }
+  .col-label {
+    font-size: 11px; font-weight: 700; color: var(--fg-3);
+    margin-bottom: 8px; letter-spacing: 0.06em; text-transform: uppercase;
+  }
+  .img-frame {
+    background: var(--bg-card); border: 1px solid var(--border-subtle);
+    border-radius: 10px; padding: 14px; text-align: center;
+  }
   .img-frame img { max-width: 100%; height: auto; }
-  .refs-out { display: flex; flex-direction: column; gap: 12px; }
+
+  .refs-out { display: flex; flex-direction: column; gap: 14px; }
   .ref-block { display: flex; flex-direction: column; gap: 6px; }
-  .caption { font-size: 11.5px; color: var(--fg-3); font-weight: 600; letter-spacing: 0.02em; }
-  pre.sql { background: var(--bg-code); color: var(--code-fg); padding: 12px 14px; border-radius: 8px; margin: 0; overflow-x: auto; font: 12.5px/1.55 "JetBrains Mono", "SF Mono", Menlo, Consolas, monospace; }
+  .caption {
+    font-size: 11.5px; color: var(--fg-3);
+    font-weight: 600; letter-spacing: 0.02em;
+  }
+
+  /* SQL 코드 블록 — 양파 그린 라이트 톤 (실제 .code-block 과 동일) */
+  pre.sql-block {
+    background: var(--bg-code); color: var(--fg-1);
+    padding: 14px 18px; border-radius: 12px;
+    border: 1px solid var(--border-subtle);
+    margin: 0; overflow-x: auto;
+    font: 13px/1.7 "JetBrains Mono", "SF Mono", Menlo, Consolas, monospace;
+    white-space: pre-wrap; word-break: break-word;
+    tab-size: 2;
+  }
+  .hl-kw  { color: var(--point-600); font-weight: 600; }
+  .hl-str { color: var(--code-str); }
+  .hl-num { color: var(--code-num); }
+
+  /* 표 — RefTable 과 동일 스타일 */
   .table-scroll { overflow-x: auto; }
-  table.rt { border-collapse: collapse; min-width: 100%; font-size: 13.5px; font-family: monospace; background: var(--bg-card); border: 1px solid var(--border-default); border-radius: 8px; overflow: hidden; }
-  table.rt th { background: var(--bg-muted); padding: 8px 12px; text-align: left; border-bottom: 1px solid var(--border-default); font-weight: 700; color: var(--fg-1); white-space: nowrap; }
-  table.rt td { padding: 7px 12px; border-bottom: 1px solid var(--border-subtle); color: var(--fg-2); white-space: nowrap; }
+  table.rt {
+    border-collapse: collapse; min-width: 100%; font-size: 13.5px;
+    font-family: "JetBrains Mono", "SF Mono", Menlo, Consolas, monospace;
+    background: var(--bg-card);
+    border: 1px solid var(--border-default); border-radius: 8px;
+    overflow: hidden;
+  }
+  table.rt th {
+    background: var(--bg-muted); padding: 8px 12px; text-align: left;
+    border-bottom: 1px solid var(--border-default);
+    font-weight: 700; color: var(--fg-1); white-space: nowrap;
+  }
+  table.rt td {
+    padding: 7px 12px; border-bottom: 1px solid var(--border-subtle);
+    color: var(--fg-2); white-space: nowrap;
+  }
   table.rt tbody tr:last-child td { border-bottom: none; }
   table.rt .muted { color: #cbd5e1; font-style: italic; }
-  .mermaid { background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: 8px; padding: 12px; min-height: 60px; }
-  .ref-unknown { background: #fffbe6; padding: 8px; font: 11px/1.4 monospace; border-radius: 6px; }
-  .legend { background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 14px 18px; margin-bottom: 16px; }
-  .legend ul { margin: 6px 0 0; padding-left: 18px; font-size: 12.5px; color: var(--fg-2); }
+
+  .erd-frame {
+    background: var(--bg-card); border: 1px solid var(--border-subtle);
+    border-radius: 10px; padding: 14px; min-height: 80px;
+    display: flex; justify-content: center; overflow-x: auto;
+  }
+  .erd-frame svg { max-width: 100%; height: auto; }
+  .erd-frame.failed {
+    color: #b91c1c; font-size: 12px; padding: 10px;
+    background: #fef2f2; border-color: #fecaca;
+  }
+
+  .legend {
+    background: var(--bg-card); border: 1px solid var(--border-subtle);
+    border-radius: 14px; padding: 16px 20px; margin-bottom: 18px;
+    box-shadow: var(--shadow-sm);
+  }
+  .legend strong { color: var(--point-600); font-size: 13px; }
+  .legend ul { margin: 8px 0 0; padding-left: 20px; font-size: 12.5px; color: var(--fg-2); }
   .legend li { margin-bottom: 3px; }
+
+  .ref-text {
+    background: var(--point-050); border-left: 3px solid var(--point-300);
+    padding: 10px 14px; border-radius: 0 8px 8px 0;
+    font-size: 13.5px; color: var(--fg-2);
+  }
 </style>
 </head>
 <body>
 
 <header class="top">
-  <h1>모던 박스 변환 파일럿 — Before/After</h1>
-  <div class="meta">15장 (sqld-1140 의 j10XX~j13XX 영문 헤더 박스). 변환 방식: Claude (직접 시각 정독). 이미지 단위 결정론적 변환 — 동일 콘텐츠 중복 이미지는 동일 ref 출력.</div>
+  <h1>모던/클래식 변환 파일럿 — Before/After</h1>
+  <div class="meta">
+    총 20장 (모던 박스 15 · 클래식 시험지 5) ·
+    양파 그린 디자인 토큰 + 양산 컴포넌트와 동일 톤
+  </div>
 </header>
 
 <main>
   <section class="legend">
-    <strong style="font-size: 13px;">검수 포인트</strong>
+    <strong>검수 포인트</strong>
     <ul>
-      <li><b>정합성</b> — 헤더/행 순서·값이 원본과 동일한가? (특히 빈 셀과 NULL 처리)</li>
-      <li><b>중복 활용</b> — 동일 콘텐츠 이미지 (예: PIVOT Source Data 가 j1071/j1079/j1087/j1117/j1357 5장) → 변환 후 동일 ref → DB 사이즈 절감</li>
-      <li><b>다크모드 적합성</b> — 우리 컴포넌트는 var(--bg-code) 등 토큰 사용 → 다크모드 자동 대응 (이 프리뷰는 라이트만)</li>
-      <li><b>모바일 가독성</b> — 표 가로 스크롤 자연스러운지</li>
-      <li><b>ERD</b> — j1115 의 1:N 카디널리티 + PK/FK 표기가 정확한가? (mermaid erDiagram 으로 변환)</li>
+      <li><b>정합성</b> — 헤더/행 순서·값이 원본과 동일한가? 빈 셀과 NULL 처리 확인</li>
+      <li><b>다중 표 분리</b> — 한 이미지 안의 표 여러 개가 별개 ref 로 깔끔하게 나뉘는가? (j95: 4개, j121: 3개, j131: 3개, j128: 3개)</li>
+      <li><b>SQL 하이라이트</b> — 키워드는 양파 그린, 숫자는 블루, 문자열은 갈색</li>
+      <li><b>ERD</b> — j1115 (영문 모던) + j101 (클래식, 영문 alias) 두 케이스 모두 1:N + PK/FK 정확한가?</li>
+      <li><b>한글 데이터</b> — 클래식 시험지의 한글 컬럼명/값 정확 추출 (특히 부서명·고객명)</li>
+      <li><b>다크모드</b> — 이 프리뷰는 라이트만. 본 사이트는 토큰이 다크모드 자동 대응</li>
     </ul>
   </section>
 
+  <div class="section-head">
+    <h2>1. 모던 박스 (영문 헤더, 깔끔한 격자) · 15장</h2>
+    <p>OCR 자동화로도 신뢰도 높은 케이스. 표/SQL/ERD 명확 구분.</p>
+  </div>
   
     <article class="card">
       <header>
         <span class="seq">#1</span>
         <span class="key">j1001</span>
+        <span class="badge modern">모던</span>
       </header>
       <div class="split">
         <div class="col-left">
@@ -91,8 +199,8 @@
           <div class="refs-out">
         <div class="ref-block">
           <div class="caption">DCL Statements</div>
-          <pre class="sql"><code>GRANT SELECT, INSERT ON emp TO user1;
-REVOKE INSERT ON emp FROM user1;</code></pre>
+          <pre class="sql-block"><code><span class="hl-kw">GRANT</span> <span class="hl-kw">SELECT</span>, <span class="hl-kw">INSERT</span> <span class="hl-kw">ON</span> emp TO user1;
+<span class="hl-kw">REVOKE</span> <span class="hl-kw">INSERT</span> <span class="hl-kw">ON</span> emp <span class="hl-kw">FROM</span> user1;</code></pre>
         </div></div>
         </div>
       </div>
@@ -102,6 +210,7 @@ REVOKE INSERT ON emp FROM user1;</code></pre>
       <header>
         <span class="seq">#2</span>
         <span class="key">j1031</span>
+        <span class="badge modern">모던</span>
       </header>
       <div class="split">
         <div class="col-left">
@@ -125,6 +234,7 @@ REVOKE INSERT ON emp FROM user1;</code></pre>
       <header>
         <span class="seq">#3</span>
         <span class="key">j1041</span>
+        <span class="badge modern">모던</span>
       </header>
       <div class="split">
         <div class="col-left">
@@ -148,6 +258,7 @@ REVOKE INSERT ON emp FROM user1;</code></pre>
       <header>
         <span class="seq">#4</span>
         <span class="key">j1047</span>
+        <span class="badge modern">모던</span>
       </header>
       <div class="split">
         <div class="col-left">
@@ -159,10 +270,10 @@ REVOKE INSERT ON emp FROM user1;</code></pre>
           <div class="refs-out">
         <div class="ref-block">
           <div class="caption">VIEW Definition</div>
-          <pre class="sql"><code>CREATE VIEW v_emp AS
-SELECT emp_id, emp_name, dept
-FROM emp
-WHERE dept = &#39;SALES&#39;;</code></pre>
+          <pre class="sql-block"><code><span class="hl-kw">CREATE</span> <span class="hl-kw">VIEW</span> v_emp <span class="hl-kw">AS</span>
+<span class="hl-kw">SELECT</span> emp_id, emp_name, dept
+<span class="hl-kw">FROM</span> emp
+<span class="hl-kw">WHERE</span> dept = &#<span class="hl-num">39</span>;SALES&#<span class="hl-num">39</span>;;</code></pre>
         </div></div>
         </div>
       </div>
@@ -172,6 +283,7 @@ WHERE dept = &#39;SALES&#39;;</code></pre>
       <header>
         <span class="seq">#5</span>
         <span class="key">j1053</span>
+        <span class="badge modern">모던</span>
       </header>
       <div class="split">
         <div class="col-left">
@@ -195,6 +307,7 @@ WHERE dept = &#39;SALES&#39;;</code></pre>
       <header>
         <span class="seq">#6</span>
         <span class="key">j1071</span>
+        <span class="badge modern">모던</span>
       </header>
       <div class="split">
         <div class="col-left">
@@ -218,6 +331,7 @@ WHERE dept = &#39;SALES&#39;;</code></pre>
       <header>
         <span class="seq">#7</span>
         <span class="key">j1114</span>
+        <span class="badge modern">모던</span>
       </header>
       <div class="split">
         <div class="col-left">
@@ -241,6 +355,7 @@ WHERE dept = &#39;SALES&#39;;</code></pre>
       <header>
         <span class="seq">#8</span>
         <span class="key">j1115</span>
+        <span class="badge modern">모던</span>
       </header>
       <div class="split">
         <div class="col-left">
@@ -252,7 +367,7 @@ WHERE dept = &#39;SALES&#39;;</code></pre>
           <div class="refs-out">
         <div class="ref-block">
           <div class="caption">Sales ERD</div>
-          <div class="mermaid">erDiagram
+          <div class="erd-frame" data-mermaid-source="erDiagram
     CUSTOMER ||--o{ ORDERS : places
     ORDERS ||--o{ ORDER_ITEM : contains
     CUSTOMER {
@@ -271,7 +386,7 @@ WHERE dept = &#39;SALES&#39;;</code></pre>
         int item_seq PK
         string product_id FK
         int qty
-    }</div>
+    }"></div>
         </div></div>
         </div>
       </div>
@@ -281,6 +396,7 @@ WHERE dept = &#39;SALES&#39;;</code></pre>
       <header>
         <span class="seq">#9</span>
         <span class="key">j1116</span>
+        <span class="badge modern">모던</span>
       </header>
       <div class="split">
         <div class="col-left">
@@ -310,6 +426,7 @@ WHERE dept = &#39;SALES&#39;;</code></pre>
       <header>
         <span class="seq">#10</span>
         <span class="key">j1120</span>
+        <span class="badge modern">모던</span>
       </header>
       <div class="split">
         <div class="col-left">
@@ -333,6 +450,7 @@ WHERE dept = &#39;SALES&#39;;</code></pre>
       <header>
         <span class="seq">#11</span>
         <span class="key">j1336</span>
+        <span class="badge modern">모던</span>
       </header>
       <div class="split">
         <div class="col-left">
@@ -356,6 +474,7 @@ WHERE dept = &#39;SALES&#39;;</code></pre>
       <header>
         <span class="seq">#12</span>
         <span class="key">j1342</span>
+        <span class="badge modern">모던</span>
       </header>
       <div class="split">
         <div class="col-left">
@@ -379,6 +498,7 @@ WHERE dept = &#39;SALES&#39;;</code></pre>
       <header>
         <span class="seq">#13</span>
         <span class="key">j1353</span>
+        <span class="badge modern">모던</span>
       </header>
       <div class="split">
         <div class="col-left">
@@ -402,6 +522,7 @@ WHERE dept = &#39;SALES&#39;;</code></pre>
       <header>
         <span class="seq">#14</span>
         <span class="key">j1357</span>
+        <span class="badge modern">모던</span>
       </header>
       <div class="split">
         <div class="col-left">
@@ -425,6 +546,7 @@ WHERE dept = &#39;SALES&#39;;</code></pre>
       <header>
         <span class="seq">#15</span>
         <span class="key">j1366</span>
+        <span class="badge modern">모던</span>
       </header>
       <div class="split">
         <div class="col-left">
@@ -449,16 +571,236 @@ WHERE dept = &#39;SALES&#39;;</code></pre>
         </div>
       </div>
     </article>
+
+  <div class="section-head">
+    <h2>2. 클래식 시험지 (한글 표 + SQL 합쳐진 케이스) · 5장</h2>
+    <p>한 이미지에 표 2~4개 + SQL 이 합쳐진 어려운 케이스. 사람 시각 정독 + 분할 변환.</p>
+  </div>
+  
+    <article class="card">
+      <header>
+        <span class="seq">#16</span>
+        <span class="key">j95</span>
+        <span class="badge classic">클래식</span>
+      </header>
+      <div class="split">
+        <div class="col-left">
+          <div class="col-label">Before — 원본 이미지</div>
+          <div class="img-frame"><img src="/sqld-images/j95-1.png" alt="j95" loading="lazy"></div>
+        </div>
+        <div class="col-right">
+          <div class="col-label">After — 디자인시스템 ref</div>
+          <div class="refs-out">
+        <div class="ref-block">
+          <div class="caption">[테이블 : OS]</div>
+          <div class="table-scroll">
+            <table class="rt"><thead><tr><th>OSID(PK)</th><th>OS명</th></tr></thead><tbody><tr><td>100</td><td>Android</td></tr><tr><td>200</td><td>iOS</td></tr><tr><td>300</td><td>Bada</td></tr></tbody></table>
+          </div>
+        </div>
+        <div class="ref-block">
+          <div class="caption">[테이블 : 단말기]</div>
+          <div class="table-scroll">
+            <table class="rt"><thead><tr><th>단말기ID(PK)</th><th>단말기명</th><th>OSID(FK)</th></tr></thead><tbody><tr><td>1000</td><td>A1000</td><td>100</td></tr><tr><td>2000</td><td>B2000</td><td>100</td></tr><tr><td>3000</td><td>C3000</td><td>200</td></tr><tr><td>4000</td><td>D3000</td><td>300</td></tr></tbody></table>
+          </div>
+        </div>
+        <div class="ref-block">
+          <div class="caption">[테이블 : 고객]</div>
+          <div class="table-scroll">
+            <table class="rt"><thead><tr><th>고객번호(PK)</th><th>단말기ID(FK)</th></tr></thead><tbody><tr><td>11000</td><td>1000</td></tr><tr><td>12000</td><td><span class="muted">·</span></td></tr><tr><td>13000</td><td><span class="muted">·</span></td></tr><tr><td>14000</td><td>3000</td></tr><tr><td>15000</td><td>4000</td></tr><tr><td>16000</td><td>4000</td></tr></tbody></table>
+          </div>
+        </div>
+        <div class="ref-block">
+          <div class="caption">[SQL]</div>
+          <pre class="sql-block"><code><span class="hl-kw">SELECT</span> A.고객번호, A.고객명, B.단말기ID, B.단말기명, C.OSID, C.OS명
+<span class="hl-kw">FROM</span>   고객 A <span class="hl-kw">LEFT</span> <span class="hl-kw">OUTER</span> <span class="hl-kw">JOIN</span> 단말기 B
+<span class="hl-kw">ON</span>     (A.고객번호 <span class="hl-kw">IN</span> (<span class="hl-num">11000</span>, <span class="hl-num">12000</span>) <span class="hl-kw">AND</span> A.단말기ID = B.단말기ID) <span class="hl-kw">LEFT</span> <span class="hl-kw">OUTER</span> <span class="hl-kw">JOIN</span> OS C
+<span class="hl-kw">ON</span>     (B.OSID = C.OSID)
+<span class="hl-kw">ORDER BY</span> A.고객번호;</code></pre>
+        </div></div>
+        </div>
+      </div>
+    </article>
+
+    <article class="card">
+      <header>
+        <span class="seq">#17</span>
+        <span class="key">j121</span>
+        <span class="badge classic">클래식</span>
+      </header>
+      <div class="split">
+        <div class="col-left">
+          <div class="col-label">Before — 원본 이미지</div>
+          <div class="img-frame"><img src="/sqld-images/j121-1.png" alt="j121" loading="lazy"></div>
+        </div>
+        <div class="col-right">
+          <div class="col-label">After — 디자인시스템 ref</div>
+          <div class="refs-out">
+        <div class="ref-block">
+          <div class="caption">[테이블 : 부서]</div>
+          <div class="table-scroll">
+            <table class="rt"><thead><tr><th>부서코드(PK)</th><th>부서명</th><th>상위부서코드</th><th>담당자</th></tr></thead><tbody><tr><td>A001</td><td>대표이사</td><td>NULL</td><td>김대표</td></tr><tr><td>A002</td><td>영업본부</td><td>A001</td><td>홍길동</td></tr><tr><td>A003</td><td>경영지원본부</td><td>A001</td><td>이순신</td></tr><tr><td>A004</td><td>마케팅본부</td><td>A001</td><td>강감찬</td></tr><tr><td>A005</td><td>해외영업팀</td><td>A002</td><td>이정용</td></tr><tr><td>A006</td><td>국내영업팀</td><td>A002</td><td>박지성</td></tr><tr><td>A007</td><td>총무팀</td><td>A003</td><td>차두리</td></tr><tr><td>A008</td><td>인사팀</td><td>A003</td><td>이민정</td></tr><tr><td>A009</td><td>해외마케팅팀</td><td>A004</td><td>이병헌</td></tr><tr><td>A010</td><td>국내마케팅팀</td><td>A004</td><td>차승원</td></tr></tbody></table>
+          </div>
+        </div>
+        <div class="ref-block">
+          <div class="caption">[테이블 : 부서이력]</div>
+          <div class="table-scroll">
+            <table class="rt"><thead><tr><th>변경일자(PK)</th><th>부서코드</th><th>담당자</th></tr></thead><tbody><tr><td>2014_01_23</td><td>A007</td><td>이달자</td></tr><tr><td>2015_01_25</td><td>A007</td><td>홍경만</td></tr><tr><td>2015_05_24</td><td>A008</td><td>유재석</td></tr></tbody></table>
+          </div>
+        </div>
+        <div class="ref-block">
+          <div class="caption">[결과]</div>
+          <div class="table-scroll">
+            <table class="rt"><thead><tr><th>부서코드(PK)</th><th>부서명</th><th>상위부서코드</th><th>담당자</th></tr></thead><tbody><tr><td>A001</td><td>대표이사</td><td>NULL</td><td>김대표</td></tr><tr><td>A002</td><td>영업본부</td><td>A001</td><td>홍길동</td></tr><tr><td>A003</td><td>경영지원본부</td><td>A001</td><td>이순신</td></tr><tr><td>A004</td><td>마케팅본부</td><td>A001</td><td>강감찬</td></tr><tr><td>A005</td><td>해외영업팀</td><td>A002</td><td>이정용</td></tr><tr><td>A006</td><td>국내영업팀</td><td>A002</td><td>박지성</td></tr><tr><td>A007</td><td>총무팀</td><td>A003</td><td>홍경만</td></tr><tr><td>A008</td><td>인사팀</td><td>A003</td><td>유재석</td></tr><tr><td>A009</td><td>해외마케팅팀</td><td>A004</td><td>이병헌</td></tr><tr><td>A010</td><td>국내마케팅팀</td><td>A004</td><td>차승원</td></tr></tbody></table>
+          </div>
+        </div></div>
+        </div>
+      </div>
+    </article>
+
+    <article class="card">
+      <header>
+        <span class="seq">#18</span>
+        <span class="key">j131</span>
+        <span class="badge classic">클래식</span>
+      </header>
+      <div class="split">
+        <div class="col-left">
+          <div class="col-label">Before — 원본 이미지</div>
+          <div class="img-frame"><img src="/sqld-images/j131-1.png" alt="j131" loading="lazy"></div>
+        </div>
+        <div class="col-right">
+          <div class="col-label">After — 디자인시스템 ref</div>
+          <div class="refs-out">
+        <div class="ref-block">
+          <div class="caption">[테이블 : 고객]</div>
+          <div class="table-scroll">
+            <table class="rt"><thead><tr><th>고객번호(PK)</th><th>고객명</th></tr></thead><tbody><tr><td>001</td><td>홍길동</td></tr><tr><td>002</td><td>이순신</td></tr><tr><td>003</td><td>강감찬</td></tr><tr><td>004</td><td>이상해</td></tr><tr><td>005</td><td>이규혁</td></tr></tbody></table>
+          </div>
+        </div>
+        <div class="ref-block">
+          <div class="caption">[테이블 : 월별매출]</div>
+          <div class="table-scroll">
+            <table class="rt"><thead><tr><th>월(PK)</th><th>고객번호(PK)</th><th>매출액</th></tr></thead><tbody><tr><td>201301</td><td>001</td><td>200</td></tr><tr><td>201301</td><td>002</td><td>250</td></tr><tr><td>201301</td><td>003</td><td>200</td></tr><tr><td>201301</td><td>004</td><td>250</td></tr><tr><td>201302</td><td>001</td><td>150</td></tr><tr><td>201302</td><td>002</td><td>100</td></tr><tr><td>201302</td><td>005</td><td>100</td></tr><tr><td>201303</td><td>002</td><td>100</td></tr><tr><td>201303</td><td>003</td><td>150</td></tr></tbody></table>
+          </div>
+        </div>
+        <div class="ref-block">
+          <div class="caption">[SQL]</div>
+          <pre class="sql-block"><code><span class="hl-kw">SELECT</span> 고객번호, 고객명, 매출액
+      ,<span class="hl-kw">RANK</span>() <span class="hl-kw">OVER</span>(<span class="hl-kw">ORDER BY</span> 매출액 <span class="hl-kw">DESC</span>) <span class="hl-kw">AS</span> 순위
+<span class="hl-kw">FROM</span>   (
+        <span class="hl-kw">SELECT</span> A.고객번호, A.고객명
+              ,<span class="hl-kw">MAX</span>(A.고객명) <span class="hl-kw">AS</span> 고객명
+              ,<span class="hl-kw">SUM</span>(B.매출액) <span class="hl-kw">AS</span> 매출액
+        <span class="hl-kw">FROM</span>   고객 A <span class="hl-kw">INNER</span> <span class="hl-kw">JOIN</span> 월별매출 B
+        <span class="hl-kw">ON</span>     (A.고객번호 = B.고객번호)
+        <span class="hl-kw">GROUP BY</span> A.고객번호
+       )
+<span class="hl-kw">ORDER BY</span> RNK;</code></pre>
+        </div></div>
+        </div>
+      </div>
+    </article>
+
+    <article class="card">
+      <header>
+        <span class="seq">#19</span>
+        <span class="key">j101</span>
+        <span class="badge classic">클래식</span>
+      </header>
+      <div class="split">
+        <div class="col-left">
+          <div class="col-label">Before — 원본 이미지</div>
+          <div class="img-frame"><img src="/sqld-images/j101-1.png" alt="j101" loading="lazy"></div>
+        </div>
+        <div class="col-right">
+          <div class="col-label">After — 디자인시스템 ref</div>
+          <div class="refs-out">
+        <div class="ref-block">
+          <div class="caption">ERD</div>
+          <div class="erd-frame" data-mermaid-source="erDiagram
+    SERVICE ||--o{ SERVICE_USE : provides
+    MEMBER ||--o{ SERVICE_USE : uses
+    SERVICE {
+        string serviceId PK
+        string serviceName
+        string serviceURL
+    }
+    MEMBER {
+        string memberId PK
+        string memberName
+    }
+    SERVICE_USE {
+        string memberId FK
+        string serviceId FK
+        date useDate
+    }"></div>
+        </div>
+        <div class="ref-block">
+          <div class="caption">[수행 SQL]</div>
+          <pre class="sql-block"><code><span class="hl-kw">SELECT</span> A.서비스ID, A.서비스명, B.서비스URL
+<span class="hl-kw">FROM</span>   (<span class="hl-kw">SELECT</span> 서비스ID
+        <span class="hl-kw">FROM</span>   서비스
+        <span class="hl-kw">INTERSECT</span>
+        <span class="hl-kw">SELECT</span> 서비스ID
+        <span class="hl-kw">FROM</span>   서비스이용) A, 서비스 B
+<span class="hl-kw">WHERE</span>  A.서비스ID = B.서비스ID;</code></pre>
+        </div></div>
+        </div>
+      </div>
+    </article>
+
+    <article class="card">
+      <header>
+        <span class="seq">#20</span>
+        <span class="key">j128</span>
+        <span class="badge classic">클래식</span>
+      </header>
+      <div class="split">
+        <div class="col-left">
+          <div class="col-label">Before — 원본 이미지</div>
+          <div class="img-frame"><img src="/sqld-images/j128-1.png" alt="j128" loading="lazy"></div>
+        </div>
+        <div class="col-right">
+          <div class="col-label">After — 디자인시스템 ref</div>
+          <div class="refs-out">
+        <div class="ref-block">
+          <div class="caption">[테이블 : 자재발주]</div>
+          <div class="table-scroll">
+            <table class="rt"><thead><tr><th>자재번호</th><th>발주처ID</th><th>발주일자</th><th>발주수량</th></tr></thead><tbody><tr><td>1</td><td>001</td><td>20150102</td><td>100</td></tr><tr><td>1</td><td>001</td><td>20150103</td><td>200</td></tr><tr><td>1</td><td>002</td><td>20150102</td><td>200</td></tr><tr><td>2</td><td>002</td><td>20150102</td><td>200</td></tr><tr><td>2</td><td>001</td><td>20150103</td><td>100</td></tr><tr><td>2</td><td>002</td><td>20150103</td><td>200</td></tr></tbody></table>
+          </div>
+        </div>
+        <div class="ref-block">
+          <div class="caption">[SQL]</div>
+          <pre class="sql-block"><code><span class="hl-kw">SELECT</span> <span class="hl-kw">CASE</span> <span class="hl-kw">WHEN</span> <span class="hl-kw">GROUPING</span>(자재번호) = <span class="hl-num">1</span> <span class="hl-kw">THEN</span> &#<span class="hl-num">39</span>;자재전체&#<span class="hl-num">39</span>;
+            <span class="hl-kw">ELSE</span> 자재번호 <span class="hl-kw">END</span> <span class="hl-kw">AS</span> 자재번호
+      ,<span class="hl-kw">CASE</span> <span class="hl-kw">WHEN</span> <span class="hl-kw">GROUPING</span>(발주처ID) = <span class="hl-num">1</span> <span class="hl-kw">THEN</span> &#<span class="hl-num">39</span>;발주처전체&#<span class="hl-num">39</span>;
+            <span class="hl-kw">ELSE</span> 발주처ID <span class="hl-kw">END</span> <span class="hl-kw">AS</span> 발주처ID
+      ,<span class="hl-kw">CASE</span> <span class="hl-kw">WHEN</span> <span class="hl-kw">GROUPING</span>(발주일자) = <span class="hl-num">1</span> <span class="hl-kw">THEN</span> &#<span class="hl-num">39</span>;발주일자전체&#<span class="hl-num">39</span>;
+            <span class="hl-kw">ELSE</span> 발주일자 <span class="hl-kw">END</span> <span class="hl-kw">AS</span> 발주일자
+      ,<span class="hl-kw">SUM</span>(발주수량) <span class="hl-kw">AS</span> 발주수량합계
+<span class="hl-kw">FROM</span>   자재발주
+[<span class="hl-kw">GROUP BY</span> ?]
+<span class="hl-kw">ORDER BY</span> 자재번호, 발주처ID, 발주일자;</code></pre>
+        </div>
+        <div class="ref-block">
+          <div class="caption">[결과]</div>
+          <div class="table-scroll">
+            <table class="rt"><thead><tr><th>자재번호</th><th>발주처ID</th><th>발주일자</th><th>발주수량합계</th></tr></thead><tbody><tr><td>1</td><td>발주처전체</td><td>발주일자전체</td><td>300</td></tr><tr><td>2</td><td>발주처전체</td><td>발주일자전체</td><td>300</td></tr><tr><td>자재전체</td><td>001</td><td>20150102</td><td>100</td></tr><tr><td>자재전체</td><td>001</td><td>20150103</td><td>200</td></tr><tr><td>자재전체</td><td>002</td><td>20150102</td><td>200</td></tr><tr><td>자재전체</td><td>002</td><td>20150103</td><td>200</td></tr></tbody></table>
+          </div>
+        </div></div>
+        </div>
+      </div>
+    </article>
 </main>
 
 <script type="module">
-  // mermaid CDN — 프로덕션 RefErd 와 동일 themeVariables 적용
   import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+  // RefErd.tsx 와 동일한 양파 그린 themeVariables
   mermaid.initialize({
-    startOnLoad: true,
+    startOnLoad: false,
     theme: 'base',
     themeVariables: {
-      fontFamily: 'Pretendard Variable, -apple-system, sans-serif',
+      fontFamily: '"Pretendard Variable", Pretendard, -apple-system, sans-serif',
       primaryColor: '#EBF5EC',
       primaryTextColor: '#1F2320',
       primaryBorderColor: '#2E7D32',
@@ -472,6 +814,19 @@ WHERE dept = &#39;SALES&#39;;</code></pre>
     },
     securityLevel: 'loose',
   });
+  // 명시적 render — startOnLoad 의 race 회피
+  const frames = document.querySelectorAll('.erd-frame[data-mermaid-source]');
+  for (let i = 0; i < frames.length; i++) {
+    const el = frames[i];
+    const code = el.getAttribute('data-mermaid-source');
+    try {
+      const { svg } = await mermaid.render(`erd-pilot-${i}`, code);
+      el.innerHTML = svg;
+    } catch (err) {
+      el.classList.add('failed');
+      el.innerHTML = `<div>ERD 렌더 실패: ${(err && err.message) || err}</div><pre style="font-size:11px;color:#7f1d1d;margin-top:6px;">${code.replace(/[<>&]/g, '')}</pre>`;
+    }
+  }
 </script>
 </body>
 </html>
