@@ -1,0 +1,278 @@
+{
+  "pilot": "modern-box-batch-1",
+  "exportedAt": "2026-04-30",
+  "method": "Claude (직접 시각 정독). 이미지 단위 결정론적 변환 — 동일 콘텐츠 중복 이미지는 동일 ref 출력.",
+  "scope": "sqld-1140 풀의 모던 박스 (j10XX~j13XX 의 영문 제목 + 깔끔한 격자) 15장",
+  "items": [
+    {
+      "imageKey": "j1001",
+      "src": "/sqld-images/j1001-1.png",
+      "convertedRefs": [
+        {
+          "type": "sql",
+          "caption": "DCL Statements",
+          "code": "GRANT SELECT, INSERT ON emp TO user1;\nREVOKE INSERT ON emp FROM user1;"
+        }
+      ]
+    },
+    {
+      "imageKey": "j1031",
+      "src": "/sqld-images/j1031-1.png",
+      "convertedRefs": [
+        {
+          "type": "table",
+          "caption": "NULL Aggregate Data",
+          "headers": ["EMP ID", "SALARY", "BONUS"],
+          "rows": [
+            ["1", "1000", "100"],
+            ["2", "", "200"],
+            ["3", "2000", ""],
+            ["4", "", ""]
+          ]
+        }
+      ]
+    },
+    {
+      "imageKey": "j1041",
+      "src": "/sqld-images/j1041-1.png",
+      "convertedRefs": [
+        {
+          "type": "table",
+          "caption": "Hierarchy EMP Data",
+          "headers": ["EMP ID", "EMP NAME", "MGR ID"],
+          "rows": [
+            ["1", "CEO", ""],
+            ["2", "SALES_MGR", "1"],
+            ["3", "DEV_MGR", "1"],
+            ["4", "SALES_A", "2"],
+            ["5", "SALES_B", "2"],
+            ["6", "DEV_A", "3"],
+            ["7", "DEV_B", "3"]
+          ]
+        }
+      ]
+    },
+    {
+      "imageKey": "j1047",
+      "src": "/sqld-images/j1047-1.png",
+      "convertedRefs": [
+        {
+          "type": "sql",
+          "caption": "VIEW Definition",
+          "code": "CREATE VIEW v_emp AS\nSELECT emp_id, emp_name, dept\nFROM emp\nWHERE dept = 'SALES';"
+        }
+      ]
+    },
+    {
+      "imageKey": "j1053",
+      "src": "/sqld-images/j1053-1.png",
+      "convertedRefs": [
+        {
+          "type": "table",
+          "caption": "Window Function Data",
+          "headers": ["REGION", "SELLER", "AMOUNT"],
+          "rows": [
+            ["SEOUL", "KIM", "500"],
+            ["SEOUL", "LEE", "300"],
+            ["BUSAN", "PARK", "450"],
+            ["BUSAN", "CHOI", "200"],
+            ["BUSAN", "JUNG", "200"]
+          ]
+        }
+      ]
+    },
+    {
+      "imageKey": "j1071",
+      "src": "/sqld-images/j1071-1.png",
+      "convertedRefs": [
+        {
+          "type": "table",
+          "caption": "PIVOT Source Data",
+          "headers": ["DEPT", "QUARTER CD", "AMOUNT"],
+          "rows": [
+            ["SALES", "Q1", "100"],
+            ["SALES", "Q2", "120"],
+            ["DEV", "Q1", "200"],
+            ["DEV", "Q2", "180"],
+            ["HR", "Q1", "90"],
+            ["HR", "Q2", "110"]
+          ]
+        }
+      ]
+    },
+    {
+      "imageKey": "j1114",
+      "src": "/sqld-images/j1114-1.png",
+      "convertedRefs": [
+        {
+          "type": "table",
+          "caption": "SELECT Result Data",
+          "headers": ["REGION", "AMOUNT", "CATEGORY"],
+          "rows": [
+            ["SEOUL", "150", "A"],
+            ["BUSAN", "100", "A"],
+            ["SEOUL", "100", "B"],
+            ["INCHEON", "80", "B"]
+          ]
+        }
+      ]
+    },
+    {
+      "imageKey": "j1115",
+      "src": "/sqld-images/j1115-1.png",
+      "convertedRefs": [
+        {
+          "type": "erd",
+          "caption": "Sales ERD",
+          "mermaid": "erDiagram\n    CUSTOMER ||--o{ ORDERS : places\n    ORDERS ||--o{ ORDER_ITEM : contains\n    CUSTOMER {\n        string customer_id PK\n        string customer_name\n        string grade\n    }\n    ORDERS {\n        string order_id PK\n        string customer_id FK\n        date order_date\n        string status\n    }\n    ORDER_ITEM {\n        string order_id PK\n        int item_seq PK\n        string product_id FK\n        int qty\n    }"
+        }
+      ]
+    },
+    {
+      "imageKey": "j1116",
+      "src": "/sqld-images/j1116-1.png",
+      "convertedRefs": [
+        {
+          "type": "table",
+          "caption": "JOIN Basic Tables — Table A",
+          "headers": ["ID", "NAME"],
+          "rows": [
+            ["1", "ALPHA"],
+            ["2", "BETA"],
+            ["3", "GAMMA"]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "JOIN Basic Tables — Table B",
+          "headers": ["ID", "VAL"],
+          "rows": [
+            ["2", "X"],
+            ["3", "Y"],
+            ["4", "Z"]
+          ]
+        }
+      ]
+    },
+    {
+      "imageKey": "j1120",
+      "src": "/sqld-images/j1120-1.png",
+      "convertedRefs": [
+        {
+          "type": "table",
+          "caption": "EMP Group Data",
+          "headers": ["EMP ID", "DEPT", "SALARY"],
+          "rows": [
+            ["1", "SALES", "3000"],
+            ["2", "SALES", "2500"],
+            ["3", "SALES", "2000"],
+            ["4", "SALES", "3500"],
+            ["5", "DEV", "5000"],
+            ["6", "DEV", "4200"],
+            ["7", "DEV", "4100"],
+            ["8", "DEV", "3900"],
+            ["9", "DEV", "3700"],
+            ["10", "HR", "2800"]
+          ]
+        }
+      ]
+    },
+    {
+      "imageKey": "j1336",
+      "src": "/sqld-images/j1336-1.png",
+      "convertedRefs": [
+        {
+          "type": "table",
+          "caption": "ROLLUP Data",
+          "headers": ["REGION", "PRODUCT", "AMOUNT"],
+          "rows": [
+            ["SEOUL", "A", "100"],
+            ["SEOUL", "B", "200"],
+            ["BUSAN", "A", "150"],
+            ["BUSAN", "B", "50"]
+          ]
+        }
+      ]
+    },
+    {
+      "imageKey": "j1342",
+      "src": "/sqld-images/j1342-1.png",
+      "convertedRefs": [
+        {
+          "type": "table",
+          "caption": "Correlated Subquery Data",
+          "headers": ["EMP NAME", "DEPT", "SALARY"],
+          "rows": [
+            ["A", "SALES", "3000"],
+            ["B", "SALES", "2000"],
+            ["C", "DEV", "5000"],
+            ["D", "DEV", "3500"]
+          ]
+        }
+      ]
+    },
+    {
+      "imageKey": "j1353",
+      "src": "/sqld-images/j1353-1.png",
+      "convertedRefs": [
+        {
+          "type": "table",
+          "caption": "SELECT Result Data",
+          "headers": ["REGION", "AMOUNT", "CATEGORY"],
+          "rows": [
+            ["SEOUL", "150", "A"],
+            ["BUSAN", "100", "A"],
+            ["SEOUL", "100", "B"],
+            ["INCHEON", "80", "B"]
+          ]
+        }
+      ]
+    },
+    {
+      "imageKey": "j1357",
+      "src": "/sqld-images/j1357-1.png",
+      "convertedRefs": [
+        {
+          "type": "table",
+          "caption": "PIVOT Source Data",
+          "headers": ["DEPT", "QUARTER CD", "AMOUNT"],
+          "rows": [
+            ["SALES", "Q1", "100"],
+            ["SALES", "Q2", "120"],
+            ["DEV", "Q1", "200"],
+            ["DEV", "Q2", "180"],
+            ["HR", "Q1", "90"],
+            ["HR", "Q2", "110"]
+          ]
+        }
+      ]
+    },
+    {
+      "imageKey": "j1366",
+      "src": "/sqld-images/j1366-1.png",
+      "convertedRefs": [
+        {
+          "type": "table",
+          "caption": "CUSTOMER",
+          "headers": ["CUSTOMER ID", "NAME"],
+          "rows": [
+            ["101", "KIM"],
+            ["102", "LEE"],
+            ["103", "PARK"],
+            ["104", "CHOI"]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "ORDERS",
+          "headers": ["ORDER ID", "CUSTOMER ID"],
+          "rows": [
+            ["9001", "101"],
+            ["9002", "101"],
+            ["9003", "103"]
+          ]
+        }
+      ]
+    }
+  ]
+}

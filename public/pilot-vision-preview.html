@@ -1,0 +1,477 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>모던 박스 변환 파일럿 — Before/After (Plan A 1차)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<style>
+  :root {
+    --bg: #fafafa;
+    --card: #fff;
+    --border: #e5e5e5;
+    --border-subtle: #ececec;
+    --border-default: #d4d4d4;
+    --text: #111;
+    --fg-1: #1f2937;
+    --fg-2: #374151;
+    --fg-3: #6b7280;
+    --bg-card: #fff;
+    --bg-muted: #f3f4f6;
+    --bg-code: #1e293b;
+    --code-fg: #e2e8f0;
+    --accent: #2563eb;
+    --point-100: #dcfce7;
+    --point-600: #2E7D32;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text); font: 14px/1.6 -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Pretendard Variable", Pretendard, "Segoe UI", Roboto, sans-serif; }
+  header.top { padding: 18px 20px 10px; max-width: 1400px; margin: 0 auto; }
+  header.top h1 { margin: 0 0 6px; font-size: 18px; }
+  header.top .meta { color: var(--fg-3); font-size: 12.5px; }
+  main { max-width: 1400px; margin: 0 auto; padding: 12px 20px 60px; }
+  .card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 16px; margin-bottom: 18px; }
+  .card header { display: flex; gap: 10px; align-items: center; margin-bottom: 12px; }
+  .seq { font-weight: 700; font-size: 14px; color: var(--accent); }
+  .key { background: var(--bg-muted); color: var(--fg-2); padding: 3px 10px; border-radius: 4px; font: 12px/1 monospace; }
+  .split { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; align-items: start; }
+  @media (max-width: 980px) { .split { grid-template-columns: 1fr; } }
+  .col-label { font-size: 11px; font-weight: 700; color: var(--fg-3); margin-bottom: 8px; letter-spacing: 0.04em; text-transform: uppercase; }
+  .img-frame { background: #fff; border: 1px solid var(--border-subtle); border-radius: 8px; padding: 12px; text-align: center; }
+  .img-frame img { max-width: 100%; height: auto; }
+  .refs-out { display: flex; flex-direction: column; gap: 12px; }
+  .ref-block { display: flex; flex-direction: column; gap: 6px; }
+  .caption { font-size: 11.5px; color: var(--fg-3); font-weight: 600; letter-spacing: 0.02em; }
+  pre.sql { background: var(--bg-code); color: var(--code-fg); padding: 12px 14px; border-radius: 8px; margin: 0; overflow-x: auto; font: 12.5px/1.55 "JetBrains Mono", "SF Mono", Menlo, Consolas, monospace; }
+  .table-scroll { overflow-x: auto; }
+  table.rt { border-collapse: collapse; min-width: 100%; font-size: 13.5px; font-family: monospace; background: var(--bg-card); border: 1px solid var(--border-default); border-radius: 8px; overflow: hidden; }
+  table.rt th { background: var(--bg-muted); padding: 8px 12px; text-align: left; border-bottom: 1px solid var(--border-default); font-weight: 700; color: var(--fg-1); white-space: nowrap; }
+  table.rt td { padding: 7px 12px; border-bottom: 1px solid var(--border-subtle); color: var(--fg-2); white-space: nowrap; }
+  table.rt tbody tr:last-child td { border-bottom: none; }
+  table.rt .muted { color: #cbd5e1; font-style: italic; }
+  .mermaid { background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: 8px; padding: 12px; min-height: 60px; }
+  .ref-unknown { background: #fffbe6; padding: 8px; font: 11px/1.4 monospace; border-radius: 6px; }
+  .legend { background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 14px 18px; margin-bottom: 16px; }
+  .legend ul { margin: 6px 0 0; padding-left: 18px; font-size: 12.5px; color: var(--fg-2); }
+  .legend li { margin-bottom: 3px; }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <h1>모던 박스 변환 파일럿 — Before/After</h1>
+  <div class="meta">15장 (sqld-1140 의 j10XX~j13XX 영문 헤더 박스). 변환 방식: Claude (직접 시각 정독). 이미지 단위 결정론적 변환 — 동일 콘텐츠 중복 이미지는 동일 ref 출력.</div>
+</header>
+
+<main>
+  <section class="legend">
+    <strong style="font-size: 13px;">검수 포인트</strong>
+    <ul>
+      <li><b>정합성</b> — 헤더/행 순서·값이 원본과 동일한가? (특히 빈 셀과 NULL 처리)</li>
+      <li><b>중복 활용</b> — 동일 콘텐츠 이미지 (예: PIVOT Source Data 가 j1071/j1079/j1087/j1117/j1357 5장) → 변환 후 동일 ref → DB 사이즈 절감</li>
+      <li><b>다크모드 적합성</b> — 우리 컴포넌트는 var(--bg-code) 등 토큰 사용 → 다크모드 자동 대응 (이 프리뷰는 라이트만)</li>
+      <li><b>모바일 가독성</b> — 표 가로 스크롤 자연스러운지</li>
+      <li><b>ERD</b> — j1115 의 1:N 카디널리티 + PK/FK 표기가 정확한가? (mermaid erDiagram 으로 변환)</li>
+    </ul>
+  </section>
+
+  
+    <article class="card">
+      <header>
+        <span class="seq">#1</span>
+        <span class="key">j1001</span>
+      </header>
+      <div class="split">
+        <div class="col-left">
+          <div class="col-label">Before — 원본 이미지</div>
+          <div class="img-frame"><img src="/sqld-images/j1001-1.png" alt="j1001" loading="lazy"></div>
+        </div>
+        <div class="col-right">
+          <div class="col-label">After — 디자인시스템 ref</div>
+          <div class="refs-out">
+        <div class="ref-block">
+          <div class="caption">DCL Statements</div>
+          <pre class="sql"><code>GRANT SELECT, INSERT ON emp TO user1;
+REVOKE INSERT ON emp FROM user1;</code></pre>
+        </div></div>
+        </div>
+      </div>
+    </article>
+
+    <article class="card">
+      <header>
+        <span class="seq">#2</span>
+        <span class="key">j1031</span>
+      </header>
+      <div class="split">
+        <div class="col-left">
+          <div class="col-label">Before — 원본 이미지</div>
+          <div class="img-frame"><img src="/sqld-images/j1031-1.png" alt="j1031" loading="lazy"></div>
+        </div>
+        <div class="col-right">
+          <div class="col-label">After — 디자인시스템 ref</div>
+          <div class="refs-out">
+        <div class="ref-block">
+          <div class="caption">NULL Aggregate Data</div>
+          <div class="table-scroll">
+            <table class="rt"><thead><tr><th>EMP ID</th><th>SALARY</th><th>BONUS</th></tr></thead><tbody><tr><td>1</td><td>1000</td><td>100</td></tr><tr><td>2</td><td><span class="muted">·</span></td><td>200</td></tr><tr><td>3</td><td>2000</td><td><span class="muted">·</span></td></tr><tr><td>4</td><td><span class="muted">·</span></td><td><span class="muted">·</span></td></tr></tbody></table>
+          </div>
+        </div></div>
+        </div>
+      </div>
+    </article>
+
+    <article class="card">
+      <header>
+        <span class="seq">#3</span>
+        <span class="key">j1041</span>
+      </header>
+      <div class="split">
+        <div class="col-left">
+          <div class="col-label">Before — 원본 이미지</div>
+          <div class="img-frame"><img src="/sqld-images/j1041-1.png" alt="j1041" loading="lazy"></div>
+        </div>
+        <div class="col-right">
+          <div class="col-label">After — 디자인시스템 ref</div>
+          <div class="refs-out">
+        <div class="ref-block">
+          <div class="caption">Hierarchy EMP Data</div>
+          <div class="table-scroll">
+            <table class="rt"><thead><tr><th>EMP ID</th><th>EMP NAME</th><th>MGR ID</th></tr></thead><tbody><tr><td>1</td><td>CEO</td><td><span class="muted">·</span></td></tr><tr><td>2</td><td>SALES_MGR</td><td>1</td></tr><tr><td>3</td><td>DEV_MGR</td><td>1</td></tr><tr><td>4</td><td>SALES_A</td><td>2</td></tr><tr><td>5</td><td>SALES_B</td><td>2</td></tr><tr><td>6</td><td>DEV_A</td><td>3</td></tr><tr><td>7</td><td>DEV_B</td><td>3</td></tr></tbody></table>
+          </div>
+        </div></div>
+        </div>
+      </div>
+    </article>
+
+    <article class="card">
+      <header>
+        <span class="seq">#4</span>
+        <span class="key">j1047</span>
+      </header>
+      <div class="split">
+        <div class="col-left">
+          <div class="col-label">Before — 원본 이미지</div>
+          <div class="img-frame"><img src="/sqld-images/j1047-1.png" alt="j1047" loading="lazy"></div>
+        </div>
+        <div class="col-right">
+          <div class="col-label">After — 디자인시스템 ref</div>
+          <div class="refs-out">
+        <div class="ref-block">
+          <div class="caption">VIEW Definition</div>
+          <pre class="sql"><code>CREATE VIEW v_emp AS
+SELECT emp_id, emp_name, dept
+FROM emp
+WHERE dept = &#39;SALES&#39;;</code></pre>
+        </div></div>
+        </div>
+      </div>
+    </article>
+
+    <article class="card">
+      <header>
+        <span class="seq">#5</span>
+        <span class="key">j1053</span>
+      </header>
+      <div class="split">
+        <div class="col-left">
+          <div class="col-label">Before — 원본 이미지</div>
+          <div class="img-frame"><img src="/sqld-images/j1053-1.png" alt="j1053" loading="lazy"></div>
+        </div>
+        <div class="col-right">
+          <div class="col-label">After — 디자인시스템 ref</div>
+          <div class="refs-out">
+        <div class="ref-block">
+          <div class="caption">Window Function Data</div>
+          <div class="table-scroll">
+            <table class="rt"><thead><tr><th>REGION</th><th>SELLER</th><th>AMOUNT</th></tr></thead><tbody><tr><td>SEOUL</td><td>KIM</td><td>500</td></tr><tr><td>SEOUL</td><td>LEE</td><td>300</td></tr><tr><td>BUSAN</td><td>PARK</td><td>450</td></tr><tr><td>BUSAN</td><td>CHOI</td><td>200</td></tr><tr><td>BUSAN</td><td>JUNG</td><td>200</td></tr></tbody></table>
+          </div>
+        </div></div>
+        </div>
+      </div>
+    </article>
+
+    <article class="card">
+      <header>
+        <span class="seq">#6</span>
+        <span class="key">j1071</span>
+      </header>
+      <div class="split">
+        <div class="col-left">
+          <div class="col-label">Before — 원본 이미지</div>
+          <div class="img-frame"><img src="/sqld-images/j1071-1.png" alt="j1071" loading="lazy"></div>
+        </div>
+        <div class="col-right">
+          <div class="col-label">After — 디자인시스템 ref</div>
+          <div class="refs-out">
+        <div class="ref-block">
+          <div class="caption">PIVOT Source Data</div>
+          <div class="table-scroll">
+            <table class="rt"><thead><tr><th>DEPT</th><th>QUARTER CD</th><th>AMOUNT</th></tr></thead><tbody><tr><td>SALES</td><td>Q1</td><td>100</td></tr><tr><td>SALES</td><td>Q2</td><td>120</td></tr><tr><td>DEV</td><td>Q1</td><td>200</td></tr><tr><td>DEV</td><td>Q2</td><td>180</td></tr><tr><td>HR</td><td>Q1</td><td>90</td></tr><tr><td>HR</td><td>Q2</td><td>110</td></tr></tbody></table>
+          </div>
+        </div></div>
+        </div>
+      </div>
+    </article>
+
+    <article class="card">
+      <header>
+        <span class="seq">#7</span>
+        <span class="key">j1114</span>
+      </header>
+      <div class="split">
+        <div class="col-left">
+          <div class="col-label">Before — 원본 이미지</div>
+          <div class="img-frame"><img src="/sqld-images/j1114-1.png" alt="j1114" loading="lazy"></div>
+        </div>
+        <div class="col-right">
+          <div class="col-label">After — 디자인시스템 ref</div>
+          <div class="refs-out">
+        <div class="ref-block">
+          <div class="caption">SELECT Result Data</div>
+          <div class="table-scroll">
+            <table class="rt"><thead><tr><th>REGION</th><th>AMOUNT</th><th>CATEGORY</th></tr></thead><tbody><tr><td>SEOUL</td><td>150</td><td>A</td></tr><tr><td>BUSAN</td><td>100</td><td>A</td></tr><tr><td>SEOUL</td><td>100</td><td>B</td></tr><tr><td>INCHEON</td><td>80</td><td>B</td></tr></tbody></table>
+          </div>
+        </div></div>
+        </div>
+      </div>
+    </article>
+
+    <article class="card">
+      <header>
+        <span class="seq">#8</span>
+        <span class="key">j1115</span>
+      </header>
+      <div class="split">
+        <div class="col-left">
+          <div class="col-label">Before — 원본 이미지</div>
+          <div class="img-frame"><img src="/sqld-images/j1115-1.png" alt="j1115" loading="lazy"></div>
+        </div>
+        <div class="col-right">
+          <div class="col-label">After — 디자인시스템 ref</div>
+          <div class="refs-out">
+        <div class="ref-block">
+          <div class="caption">Sales ERD</div>
+          <div class="mermaid">erDiagram
+    CUSTOMER ||--o{ ORDERS : places
+    ORDERS ||--o{ ORDER_ITEM : contains
+    CUSTOMER {
+        string customer_id PK
+        string customer_name
+        string grade
+    }
+    ORDERS {
+        string order_id PK
+        string customer_id FK
+        date order_date
+        string status
+    }
+    ORDER_ITEM {
+        string order_id PK
+        int item_seq PK
+        string product_id FK
+        int qty
+    }</div>
+        </div></div>
+        </div>
+      </div>
+    </article>
+
+    <article class="card">
+      <header>
+        <span class="seq">#9</span>
+        <span class="key">j1116</span>
+      </header>
+      <div class="split">
+        <div class="col-left">
+          <div class="col-label">Before — 원본 이미지</div>
+          <div class="img-frame"><img src="/sqld-images/j1116-1.png" alt="j1116" loading="lazy"></div>
+        </div>
+        <div class="col-right">
+          <div class="col-label">After — 디자인시스템 ref</div>
+          <div class="refs-out">
+        <div class="ref-block">
+          <div class="caption">JOIN Basic Tables — Table A</div>
+          <div class="table-scroll">
+            <table class="rt"><thead><tr><th>ID</th><th>NAME</th></tr></thead><tbody><tr><td>1</td><td>ALPHA</td></tr><tr><td>2</td><td>BETA</td></tr><tr><td>3</td><td>GAMMA</td></tr></tbody></table>
+          </div>
+        </div>
+        <div class="ref-block">
+          <div class="caption">JOIN Basic Tables — Table B</div>
+          <div class="table-scroll">
+            <table class="rt"><thead><tr><th>ID</th><th>VAL</th></tr></thead><tbody><tr><td>2</td><td>X</td></tr><tr><td>3</td><td>Y</td></tr><tr><td>4</td><td>Z</td></tr></tbody></table>
+          </div>
+        </div></div>
+        </div>
+      </div>
+    </article>
+
+    <article class="card">
+      <header>
+        <span class="seq">#10</span>
+        <span class="key">j1120</span>
+      </header>
+      <div class="split">
+        <div class="col-left">
+          <div class="col-label">Before — 원본 이미지</div>
+          <div class="img-frame"><img src="/sqld-images/j1120-1.png" alt="j1120" loading="lazy"></div>
+        </div>
+        <div class="col-right">
+          <div class="col-label">After — 디자인시스템 ref</div>
+          <div class="refs-out">
+        <div class="ref-block">
+          <div class="caption">EMP Group Data</div>
+          <div class="table-scroll">
+            <table class="rt"><thead><tr><th>EMP ID</th><th>DEPT</th><th>SALARY</th></tr></thead><tbody><tr><td>1</td><td>SALES</td><td>3000</td></tr><tr><td>2</td><td>SALES</td><td>2500</td></tr><tr><td>3</td><td>SALES</td><td>2000</td></tr><tr><td>4</td><td>SALES</td><td>3500</td></tr><tr><td>5</td><td>DEV</td><td>5000</td></tr><tr><td>6</td><td>DEV</td><td>4200</td></tr><tr><td>7</td><td>DEV</td><td>4100</td></tr><tr><td>8</td><td>DEV</td><td>3900</td></tr><tr><td>9</td><td>DEV</td><td>3700</td></tr><tr><td>10</td><td>HR</td><td>2800</td></tr></tbody></table>
+          </div>
+        </div></div>
+        </div>
+      </div>
+    </article>
+
+    <article class="card">
+      <header>
+        <span class="seq">#11</span>
+        <span class="key">j1336</span>
+      </header>
+      <div class="split">
+        <div class="col-left">
+          <div class="col-label">Before — 원본 이미지</div>
+          <div class="img-frame"><img src="/sqld-images/j1336-1.png" alt="j1336" loading="lazy"></div>
+        </div>
+        <div class="col-right">
+          <div class="col-label">After — 디자인시스템 ref</div>
+          <div class="refs-out">
+        <div class="ref-block">
+          <div class="caption">ROLLUP Data</div>
+          <div class="table-scroll">
+            <table class="rt"><thead><tr><th>REGION</th><th>PRODUCT</th><th>AMOUNT</th></tr></thead><tbody><tr><td>SEOUL</td><td>A</td><td>100</td></tr><tr><td>SEOUL</td><td>B</td><td>200</td></tr><tr><td>BUSAN</td><td>A</td><td>150</td></tr><tr><td>BUSAN</td><td>B</td><td>50</td></tr></tbody></table>
+          </div>
+        </div></div>
+        </div>
+      </div>
+    </article>
+
+    <article class="card">
+      <header>
+        <span class="seq">#12</span>
+        <span class="key">j1342</span>
+      </header>
+      <div class="split">
+        <div class="col-left">
+          <div class="col-label">Before — 원본 이미지</div>
+          <div class="img-frame"><img src="/sqld-images/j1342-1.png" alt="j1342" loading="lazy"></div>
+        </div>
+        <div class="col-right">
+          <div class="col-label">After — 디자인시스템 ref</div>
+          <div class="refs-out">
+        <div class="ref-block">
+          <div class="caption">Correlated Subquery Data</div>
+          <div class="table-scroll">
+            <table class="rt"><thead><tr><th>EMP NAME</th><th>DEPT</th><th>SALARY</th></tr></thead><tbody><tr><td>A</td><td>SALES</td><td>3000</td></tr><tr><td>B</td><td>SALES</td><td>2000</td></tr><tr><td>C</td><td>DEV</td><td>5000</td></tr><tr><td>D</td><td>DEV</td><td>3500</td></tr></tbody></table>
+          </div>
+        </div></div>
+        </div>
+      </div>
+    </article>
+
+    <article class="card">
+      <header>
+        <span class="seq">#13</span>
+        <span class="key">j1353</span>
+      </header>
+      <div class="split">
+        <div class="col-left">
+          <div class="col-label">Before — 원본 이미지</div>
+          <div class="img-frame"><img src="/sqld-images/j1353-1.png" alt="j1353" loading="lazy"></div>
+        </div>
+        <div class="col-right">
+          <div class="col-label">After — 디자인시스템 ref</div>
+          <div class="refs-out">
+        <div class="ref-block">
+          <div class="caption">SELECT Result Data</div>
+          <div class="table-scroll">
+            <table class="rt"><thead><tr><th>REGION</th><th>AMOUNT</th><th>CATEGORY</th></tr></thead><tbody><tr><td>SEOUL</td><td>150</td><td>A</td></tr><tr><td>BUSAN</td><td>100</td><td>A</td></tr><tr><td>SEOUL</td><td>100</td><td>B</td></tr><tr><td>INCHEON</td><td>80</td><td>B</td></tr></tbody></table>
+          </div>
+        </div></div>
+        </div>
+      </div>
+    </article>
+
+    <article class="card">
+      <header>
+        <span class="seq">#14</span>
+        <span class="key">j1357</span>
+      </header>
+      <div class="split">
+        <div class="col-left">
+          <div class="col-label">Before — 원본 이미지</div>
+          <div class="img-frame"><img src="/sqld-images/j1357-1.png" alt="j1357" loading="lazy"></div>
+        </div>
+        <div class="col-right">
+          <div class="col-label">After — 디자인시스템 ref</div>
+          <div class="refs-out">
+        <div class="ref-block">
+          <div class="caption">PIVOT Source Data</div>
+          <div class="table-scroll">
+            <table class="rt"><thead><tr><th>DEPT</th><th>QUARTER CD</th><th>AMOUNT</th></tr></thead><tbody><tr><td>SALES</td><td>Q1</td><td>100</td></tr><tr><td>SALES</td><td>Q2</td><td>120</td></tr><tr><td>DEV</td><td>Q1</td><td>200</td></tr><tr><td>DEV</td><td>Q2</td><td>180</td></tr><tr><td>HR</td><td>Q1</td><td>90</td></tr><tr><td>HR</td><td>Q2</td><td>110</td></tr></tbody></table>
+          </div>
+        </div></div>
+        </div>
+      </div>
+    </article>
+
+    <article class="card">
+      <header>
+        <span class="seq">#15</span>
+        <span class="key">j1366</span>
+      </header>
+      <div class="split">
+        <div class="col-left">
+          <div class="col-label">Before — 원본 이미지</div>
+          <div class="img-frame"><img src="/sqld-images/j1366-1.png" alt="j1366" loading="lazy"></div>
+        </div>
+        <div class="col-right">
+          <div class="col-label">After — 디자인시스템 ref</div>
+          <div class="refs-out">
+        <div class="ref-block">
+          <div class="caption">CUSTOMER</div>
+          <div class="table-scroll">
+            <table class="rt"><thead><tr><th>CUSTOMER ID</th><th>NAME</th></tr></thead><tbody><tr><td>101</td><td>KIM</td></tr><tr><td>102</td><td>LEE</td></tr><tr><td>103</td><td>PARK</td></tr><tr><td>104</td><td>CHOI</td></tr></tbody></table>
+          </div>
+        </div>
+        <div class="ref-block">
+          <div class="caption">ORDERS</div>
+          <div class="table-scroll">
+            <table class="rt"><thead><tr><th>ORDER ID</th><th>CUSTOMER ID</th></tr></thead><tbody><tr><td>9001</td><td>101</td></tr><tr><td>9002</td><td>101</td></tr><tr><td>9003</td><td>103</td></tr></tbody></table>
+          </div>
+        </div></div>
+        </div>
+      </div>
+    </article>
+</main>
+
+<script type="module">
+  // mermaid CDN — 프로덕션 RefErd 와 동일 themeVariables 적용
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+  mermaid.initialize({
+    startOnLoad: true,
+    theme: 'base',
+    themeVariables: {
+      fontFamily: 'Pretendard Variable, -apple-system, sans-serif',
+      primaryColor: '#EBF5EC',
+      primaryTextColor: '#1F2320',
+      primaryBorderColor: '#2E7D32',
+      lineColor: '#2E7D32',
+      secondaryColor: '#F0F7F1',
+      tertiaryColor: '#FFFFFF',
+      mainBkg: '#EBF5EC',
+      edgeLabelBackground: '#FFFFFF',
+      attributeBackgroundColorOdd: '#FFFFFF',
+      attributeBackgroundColorEven: '#F0F7F1',
+    },
+    securityLevel: 'loose',
+  });
+</script>
+</body>
+</html>
