@@ -1,0 +1,308 @@
+{
+  "schema": "md5(image content) → 변환된 references 배열. 클래식 한글 시험지 batch 3.",
+  "method": "Claude 시각 정독 (sharp 2x 업스케일) + cross-check + validator",
+  "batchSize": 15,
+  "groups": {
+    "d12b4d9e7222": {
+      "name": "j63 — EMP_TBL + WHERE 복합조건",
+      "imageKey": "j63",
+      "refs": [
+        {
+          "type": "table",
+          "caption": "EMP_TBL",
+          "headers": ["EMPNO", "SAL"],
+          "rows": [
+            ["100", "1500"],
+            ["200", "3000"],
+            ["300", "2000"]
+          ]
+        },
+        {
+          "type": "sql",
+          "caption": "[SQL]",
+          "code": "SELECT COUNT(*)\nFROM   EMP_TBL\nWHERE  EMPNO > 100 AND SAL >= 3000 OR EMPNO = 200;"
+        }
+      ]
+    },
+    "bbfc48a5ead4": {
+      "name": "j64 — TAB_A (NULL 다수, 3건)",
+      "imageKey": "j64",
+      "refs": [
+        {
+          "type": "table",
+          "caption": "TAB_A (레코드 3건)",
+          "headers": ["COL1", "COL2", "COL3"],
+          "rows": [
+            ["30", "NULL", "20"],
+            ["NULL", "10", "40"],
+            ["50", "NULL", "NULL"]
+          ]
+        }
+      ]
+    },
+    "b8703b1e1499": {
+      "name": "j67 — 월별매출 10행",
+      "imageKey": "j67",
+      "refs": [
+        {
+          "type": "table",
+          "caption": "[테이블 : 월별매출]",
+          "headers": ["년(PK)", "월(PK)", "매출금액"],
+          "rows": [
+            ["2014", "01", "1000"],
+            ["2014", "02", "2000"],
+            ["2014", "03", "3000"],
+            ["2014", "11", "4000"],
+            ["2014", "12", "5000"],
+            ["2015", "01", "6000"],
+            ["2015", "02", "7000"],
+            ["2015", "03", "8000"],
+            ["2015", "11", "9000"],
+            ["2015", "12", "10000"]
+          ]
+        }
+      ]
+    },
+    "6154460ee14c": {
+      "name": "j68 — 서비스_가입 (논리) ↔ SVC_JOIN (물리)",
+      "imageKey": "j68",
+      "refs": [
+        {
+          "type": "image",
+          "src": "/sqld-images/j68-1.png",
+          "alt": "서비스_가입 논리 모델 ↔ SVC_JOIN 물리 모델",
+          "caption": "[논리 ↔ 물리 데이터 모델]"
+        }
+      ]
+    },
+    "63298c5c1e50": {
+      "name": "j73 — TAB1 (5행, NULL/공백 혼재)",
+      "imageKey": "j73",
+      "refs": [
+        {
+          "type": "table",
+          "caption": "[TAB1]",
+          "headers": ["COL1", "COL2"],
+          "rows": [
+            ["a", "NULL"],
+            ["b", "''"],
+            ["c", "3"],
+            ["d", "4"],
+            ["e", "3"]
+          ]
+        }
+      ]
+    },
+    "7fd4a22eb49d": {
+      "name": "j74 — EMP_Q + SAL/COMM 산술",
+      "imageKey": "j74",
+      "refs": [
+        {
+          "type": "sql",
+          "caption": "[SQL]",
+          "code": "SELECT SAL/COMM FROM EMP_Q WHERE ENAME = 'KING';\nSELECT SAL/COMM FROM EMP_Q WHERE ENAME = 'FORD';\nSELECT SAL/COMM FROM EMP_Q WHERE ENAME = 'SCOTT';\n\n-- 단, SCOTT의 COMM은 NULL 값임"
+        },
+        {
+          "type": "table",
+          "caption": "EMP_Q",
+          "headers": ["ENAME (문자타입)", "SAL (숫자타입)", "COMM (숫자타입)"],
+          "rows": [
+            ["KING", "0", "300"],
+            ["FORD", "5000", "0"],
+            ["SCOTT", "1000", ""]
+          ]
+        }
+      ]
+    },
+    "86ea4aa66496": {
+      "name": "j75 — TAB1 (sparse) + SUM(COALESCE)",
+      "imageKey": "j75",
+      "refs": [
+        {
+          "type": "table",
+          "caption": "TAB1",
+          "headers": ["C1", "C2", "C3"],
+          "rows": [
+            ["1", "2", "3"],
+            ["", "2", "3"],
+            ["", "", "3"]
+          ]
+        },
+        {
+          "type": "sql",
+          "caption": "[SQL]",
+          "code": "SELECT SUM(COALESCE(C1, C2, C3))\nFROM   TAB1"
+        }
+      ]
+    },
+    "9f38c32d8879": {
+      "name": "j76 — TAB_A + 3 AVG(COL3) SQL",
+      "imageKey": "j76",
+      "refs": [
+        {
+          "type": "sql",
+          "caption": "[SQL]",
+          "code": "SELECT AVG(COL3) FROM TAB_A;\nSELECT AVG(COL3) FROM TAB_A WHERE COL1 > 0;\nSELECT AVG(COL3) FROM TAB_A WHERE COL1 IS NOT NULL;"
+        },
+        {
+          "type": "table",
+          "caption": "[TAB_A]",
+          "headers": ["COL1", "COL2", "COL3"],
+          "rows": [
+            ["30", "NULL", "20"],
+            ["NULL", "40", "0"],
+            ["0", "10", "NULL"]
+          ]
+        }
+      ]
+    },
+    "c3adb82d126a": {
+      "name": "j77 — 3 SQL on EMP (COUNT/IN/GROUP BY)",
+      "imageKey": "j77",
+      "refs": [
+        {
+          "type": "sql",
+          "caption": "SQL1",
+          "code": "SELECT COUNT(GRADE) FROM EMP;"
+        },
+        {
+          "type": "sql",
+          "caption": "SQL2",
+          "code": "SELECT GRADE FROM EMP WHERE GRADE IN ('차장', '부장', '널');"
+        },
+        {
+          "type": "sql",
+          "caption": "SQL3",
+          "code": "SELECT GRADE, COUNT(*) FROM EMP GROUP BY GRADE;"
+        }
+      ]
+    },
+    "e3437bbf19f6": {
+      "name": "j81 — TBL(ID 단일컬럼 7행) + GROUP BY/HAVING",
+      "imageKey": "j81",
+      "refs": [
+        {
+          "type": "table",
+          "caption": "TBL",
+          "headers": ["ID"],
+          "rows": [
+            ["100"],
+            ["100"],
+            ["200"],
+            ["200"],
+            ["200"],
+            ["999"],
+            ["999"]
+          ]
+        },
+        {
+          "type": "sql",
+          "caption": "[SQL]",
+          "code": "SELECT ID FROM TBL\nGROUP BY ID\nHAVING COUNT(*) = 2\nORDER BY (CASE WHEN ID = 999 THEN 0 ELSE ID END)"
+        }
+      ]
+    },
+    "427a9bfdd20d": {
+      "name": "j84 — TBL(ID/AMT 4행) + ORDER BY CASE",
+      "imageKey": "j84",
+      "refs": [
+        {
+          "type": "table",
+          "caption": "TBL",
+          "headers": ["ID", "AMT"],
+          "rows": [
+            ["A", "50"],
+            ["A", "200"],
+            ["B", "300"],
+            ["C", "100"]
+          ]
+        },
+        {
+          "type": "sql",
+          "caption": "[SQL]",
+          "code": "SELECT ID, AMT\nFROM   TBL\nORDER BY (CASE WHEN ID = 'A' THEN 1 ELSE 2 END),\n         AMT DESC"
+        }
+      ]
+    },
+    "25534ce1f380": {
+      "name": "j87 — 배우/영화/출연 스키마 정의",
+      "imageKey": "j87",
+      "refs": [
+        {
+          "type": "image",
+          "src": "/sqld-images/j87-1.png",
+          "alt": "배우(배우번호, 배우명, 성별), 영화(영화번호, 영화명, 제작년도), 출연(배우번호, 영화번호, 출연료) 스키마",
+          "caption": "[스키마 정의]"
+        }
+      ]
+    },
+    "051f5a3742e6": {
+      "name": "j89 — EMP_TBL + RULE_TBL + LIKE 조인",
+      "imageKey": "j89",
+      "refs": [
+        {
+          "type": "table",
+          "caption": "[EMP_TBL]",
+          "headers": ["EMPNO", "ENAME"],
+          "rows": [
+            ["1000", "SMITH"],
+            ["1050", "ALLEN"],
+            ["1100", "SCOTT"]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "[RULE_TBL]",
+          "headers": ["RULE_NO", "RULE"],
+          "rows": [
+            ["1", "S%"],
+            ["2", "%T%"]
+          ]
+        },
+        {
+          "type": "sql",
+          "caption": "[SQL]",
+          "code": "SELECT COUNT(*) CNT\nFROM   EMP_TBL A, RULE_TBL B\nWHERE  A.ENAME LIKE B.RULE"
+        }
+      ]
+    },
+    "fd161ca39ef6": {
+      "name": "j91 — 제품·생산제품·생산라인 ERD (M:N)",
+      "imageKey": "j91",
+      "refs": [
+        {
+          "type": "image",
+          "src": "/sqld-images/j91-1.png",
+          "alt": "제품-생산제품-생산라인 ERD",
+          "caption": "[ERD]"
+        }
+      ]
+    },
+    "f38d5a9c49cd": {
+      "name": "j97 — EMP·DEPT 테이블 (조인 키 C)",
+      "imageKey": "j97",
+      "refs": [
+        {
+          "type": "table",
+          "caption": "EMP 테이블",
+          "headers": ["A", "B", "C"],
+          "rows": [
+            ["1", "b", "w"],
+            ["3", "d", "w"],
+            ["5", "y", "y"]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "DEPT 테이블",
+          "headers": ["C", "D", "E"],
+          "rows": [
+            ["w", "1", "10"],
+            ["z", "4", "11"],
+            ["v", "2", "22"]
+          ]
+        }
+      ]
+    }
+  }
+}
