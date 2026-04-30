@@ -26525,9 +26525,56 @@ export const AI_MOCK: QuizQuestion[] = [
         "content": "SELECT COUNT(TAB1.COL1) \nFROM TAB1, TAB2 \nWHERE TAB1.COL2 = TAB2.COL2(+);"
       },
       {
-        "type": "image",
-        "src": "/sqld-images/j646-1.png",
-        "alt": "문항 이미지 j646-1"
+        "type": "table",
+        "caption": "<TAB1>",
+        "headers": [
+          "COL1",
+          "COL2"
+        ],
+        "rows": [
+          [
+            "1",
+            "A"
+          ],
+          [
+            "2",
+            "B"
+          ],
+          [
+            "3",
+            ""
+          ],
+          [
+            "4",
+            "C"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "<TAB2>",
+        "headers": [
+          "COL1",
+          "COL2"
+        ],
+        "rows": [
+          [
+            "1",
+            "A"
+          ],
+          [
+            "2",
+            "B"
+          ],
+          [
+            "3",
+            "B"
+          ],
+          [
+            "4",
+            ""
+          ]
+        ]
       }
     ]
   },
@@ -26557,9 +26604,76 @@ export const AI_MOCK: QuizQuestion[] = [
         "content": "SELECT COUNT(TAB1.NO) FROM TAB1 LEFT OUTER JOIN TAB2 ON TAB1.NO = TAB2.NO; \nSELECT COUNT(DISTINCT TAB1.CODE) FROM TAB1 RIGHT OUTER JOIN TAB2 ON TAB1.NO = TAB2.NO;"
       },
       {
-        "type": "image",
-        "src": "/sqld-images/j648-1.png",
-        "alt": "문항 이미지 j648-1"
+        "type": "table",
+        "caption": "<TAB1>",
+        "headers": [
+          "NO",
+          "CODE"
+        ],
+        "rows": [
+          [
+            "1",
+            "A"
+          ],
+          [
+            "2",
+            "B"
+          ],
+          [
+            "3",
+            ""
+          ],
+          [
+            "4",
+            "B"
+          ],
+          [
+            "6",
+            "D"
+          ],
+          [
+            "7",
+            "E"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "<TAB2>",
+        "headers": [
+          "NO",
+          "QTY"
+        ],
+        "rows": [
+          [
+            "1",
+            "2"
+          ],
+          [
+            "2",
+            "4"
+          ],
+          [
+            "4",
+            "6"
+          ],
+          [
+            "4",
+            "8"
+          ],
+          [
+            "5",
+            "10"
+          ],
+          [
+            "5",
+            "10"
+          ],
+          [
+            "5",
+            "10"
+          ]
+        ]
       }
     ]
   },
@@ -26589,9 +26703,38 @@ export const AI_MOCK: QuizQuestion[] = [
         "content": "SELECT SUM(T1.COL2) \nFROM TAB1 T1 \nWHERE T1.COL2 = (SELECT MAX(COL2) \nFROM TAB1 T2 \nWHERE T1.COL1 = T2.COL1);"
       },
       {
-        "type": "image",
-        "src": "/sqld-images/j649-1.png",
-        "alt": "문항 이미지 j649-1"
+        "type": "table",
+        "caption": "<TAB1>",
+        "headers": [
+          "COL1",
+          "COL2"
+        ],
+        "rows": [
+          [
+            "A",
+            "10"
+          ],
+          [
+            "A",
+            "20"
+          ],
+          [
+            "A",
+            "30"
+          ],
+          [
+            "A",
+            "30"
+          ],
+          [
+            "B",
+            "30"
+          ],
+          [
+            "B",
+            "40"
+          ]
+        ]
       }
     ]
   },
@@ -26623,7 +26766,8 @@ export const AI_MOCK: QuizQuestion[] = [
       {
         "type": "image",
         "src": "/sqld-images/j650-1.png",
-        "alt": "문항 이미지 j650-1"
+        "alt": "CUSTOMERS(CUSTOMER_ID PK / NAME, GENDER, PHONE, WEDDING_TYPE, BIRTHDAY) ─ ORDERS(ORDER_ID PK / ORDER_DATE, CUSTOMER_ID FK, PRMOTION_ID) ERD. PRMOTION_ID 는 PROMOTION 의 원본 오타로 추정",
+        "caption": "[ERD]"
       }
     ]
   },
@@ -26653,9 +26797,45 @@ export const AI_MOCK: QuizQuestion[] = [
         "content": "SELECT E1.EMPNO, E1.ENAME, E1.HIREDATE, COUNT(E2.EMPNO) AS CNT \n  FROM EMP E1 LEFT OUTER JOIN EMP E2 \n     ON E1.HIREDATE > E2.HIREDATE \n GROUP BY E1.EMPNO, E1.ENAME, E1.HIREDATE \n ORDER BY E1.HIREDATE;"
       },
       {
-        "type": "image",
-        "src": "/sqld-images/j651-1.png",
-        "alt": "문항 이미지 j651-1"
+        "type": "table",
+        "caption": "<EMP>",
+        "headers": [
+          "EMPNO",
+          "ENAME",
+          "HIREDATE"
+        ],
+        "rows": [
+          [
+            "7369",
+            "SMITH",
+            "1980/12/17"
+          ],
+          [
+            "7499",
+            "ALLEN",
+            "1981/02/20"
+          ],
+          [
+            "7521",
+            "WARD",
+            "1981/02/22"
+          ],
+          [
+            "7566",
+            "JONES",
+            "1981/04/02"
+          ],
+          [
+            "7698",
+            "BLAKE",
+            "1981/05/01"
+          ],
+          [
+            "7782",
+            "CLARK",
+            "1981/06/09"
+          ]
+        ]
       }
     ]
   },
@@ -26702,9 +26882,97 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "image",
-        "src": "/sqld-images/j653-1.png",
-        "alt": "문항 이미지 j653-1"
+        "type": "table",
+        "caption": "<고객>",
+        "headers": [
+          "고객번호",
+          "이름",
+          "포인트"
+        ],
+        "rows": [
+          [
+            "1000",
+            "홍길동",
+            "10000"
+          ],
+          [
+            "1001",
+            "박길동",
+            "9000"
+          ],
+          [
+            "1002",
+            "최길동",
+            "13000"
+          ],
+          [
+            "1003",
+            "이길동",
+            "2000"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "<상품>",
+        "headers": [
+          "상품번호",
+          "상품명",
+          "최소포인트",
+          "최대포인트"
+        ],
+        "rows": [
+          [
+            "1",
+            "A",
+            "1",
+            "2000"
+          ],
+          [
+            "2",
+            "B",
+            "2001",
+            "8000"
+          ],
+          [
+            "3",
+            "C",
+            "8001",
+            "12000"
+          ],
+          [
+            "4",
+            "D",
+            "12001",
+            "20000"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "[매핑 결과]",
+        "headers": [
+          "고객번호",
+          "상품명"
+        ],
+        "rows": [
+          [
+            "1000",
+            "C"
+          ],
+          [
+            "1001",
+            "C"
+          ],
+          [
+            "1002",
+            "D"
+          ],
+          [
+            "1003",
+            "A"
+          ]
+        ]
       }
     ]
   },
@@ -26734,9 +27002,76 @@ export const AI_MOCK: QuizQuestion[] = [
         "content": "SELECT SUM(COL1) \n  FROM TAB1 T1 \n WHERE COL3 >= (SELECT AVG(COL3) \n                   FROM TAB2 T2 \n                  WHERE T2.COL2 = T1.COL2);"
       },
       {
-        "type": "image",
-        "src": "/sqld-images/j654-1.png",
-        "alt": "문항 이미지 j654-1"
+        "type": "table",
+        "caption": "<TAB1>",
+        "headers": [
+          "COL1",
+          "COL2",
+          "COL3"
+        ],
+        "rows": [
+          [
+            "1",
+            "A",
+            "10"
+          ],
+          [
+            "2",
+            "A",
+            "15"
+          ],
+          [
+            "3",
+            "B",
+            "10"
+          ],
+          [
+            "4",
+            "B",
+            "30"
+          ],
+          [
+            "5",
+            "B",
+            "20"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "<TAB2>",
+        "headers": [
+          "COL1",
+          "COL2",
+          "COL3"
+        ],
+        "rows": [
+          [
+            "6",
+            "A",
+            "10"
+          ],
+          [
+            "7",
+            "A",
+            "30"
+          ],
+          [
+            "8",
+            "B",
+            "10"
+          ],
+          [
+            "9",
+            "B",
+            "30"
+          ],
+          [
+            "10",
+            "A",
+            "20"
+          ]
+        ]
       }
     ]
   },
@@ -26766,9 +27101,86 @@ export const AI_MOCK: QuizQuestion[] = [
         "content": "SELECT * \n  FROM (SELECT COL1, COL2 \n          FROM TAB1 \n          UNION  \n         SELECT COL1, COL2 \n          FROM TAB2) \n MINUS \nSELECT COL1, COL2 \n FROM TAB3;"
       },
       {
-        "type": "image",
-        "src": "/sqld-images/j655-1.png",
-        "alt": "문항 이미지 j655-1"
+        "type": "table",
+        "caption": "<TAB1>",
+        "headers": [
+          "COL1",
+          "COL2"
+        ],
+        "rows": [
+          [
+            "10",
+            "A"
+          ],
+          [
+            "20",
+            "B"
+          ],
+          [
+            "30",
+            "C"
+          ],
+          [
+            "30",
+            "D"
+          ],
+          [
+            "40",
+            "E"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "<TAB2>",
+        "headers": [
+          "COL1",
+          "COL2"
+        ],
+        "rows": [
+          [
+            "10",
+            "A"
+          ],
+          [
+            "20",
+            "A"
+          ],
+          [
+            "50",
+            "F"
+          ],
+          [
+            "NULL",
+            "A"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "<TAB3>",
+        "headers": [
+          "COL1",
+          "COL2"
+        ],
+        "rows": [
+          [
+            "30",
+            "C"
+          ],
+          [
+            "30",
+            "D"
+          ],
+          [
+            "40",
+            "E"
+          ],
+          [
+            "NULL",
+            "A"
+          ]
+        ]
       }
     ]
   },
@@ -26798,9 +27210,52 @@ export const AI_MOCK: QuizQuestion[] = [
         "content": "SELECT PRODUCT_NO, GOGAK_NO, SUM(QTY) AS TOTAL_QTY  \nFROM JUMUN \nGROUP BY GROUPING SETS(PRODUCT_NO, GOGAK_NO, ());"
       },
       {
-        "type": "image",
-        "src": "/sqld-images/j656-1.png",
-        "alt": "문항 이미지 j656-1"
+        "type": "table",
+        "caption": "<JUMUN>",
+        "headers": [
+          "JUMUN_NO",
+          "PRODUCT_NO",
+          "GOGAK_NO",
+          "QTY",
+          "JUMUN_DATE"
+        ],
+        "rows": [
+          [
+            "1000",
+            "1",
+            "0001",
+            "3",
+            "2024/05/24 11:00:56"
+          ],
+          [
+            "1001",
+            "2",
+            "0001",
+            "1",
+            "2024/05/25 12:01:56"
+          ],
+          [
+            "1002",
+            "1",
+            "0002",
+            "2",
+            "2024/05/26 09:13:12"
+          ],
+          [
+            "1003",
+            "1",
+            "0002",
+            "1",
+            "2024/05/27 10:24:30"
+          ],
+          [
+            "1004",
+            "2",
+            "0002",
+            "2",
+            "2024/05/28 13:01:10"
+          ]
+        ]
       }
     ]
   },
@@ -26830,9 +27285,40 @@ export const AI_MOCK: QuizQuestion[] = [
         "content": "SELECT NO, \n        RANK() OVER(ORDER BY JUMSU DESC) AS RANK1, \n        DENSE_RANK() OVER(ORDER BY JUMSU DESC) AS RANK2, \n        ROW_NUMBER() OVER(ORDER BY JUMSU DESC) AS RANK3 \n  FROM STUDENT;"
       },
       {
-        "type": "image",
-        "src": "/sqld-images/j657-1.png",
-        "alt": "문항 이미지 j657-1"
+        "type": "table",
+        "caption": "<STUDENT>",
+        "headers": [
+          "NO",
+          "NAME",
+          "JUMSU"
+        ],
+        "rows": [
+          [
+            "1",
+            "홍길동",
+            "100"
+          ],
+          [
+            "2",
+            "박길동",
+            "90"
+          ],
+          [
+            "3",
+            "최길동",
+            "90"
+          ],
+          [
+            "4",
+            "이길동",
+            "80"
+          ],
+          [
+            "5",
+            "구길동",
+            "70"
+          ]
+        ]
       }
     ]
   },
@@ -26883,9 +27369,60 @@ export const AI_MOCK: QuizQuestion[] = [
         "content": "SELECT 사원번호, 이름, LEVEL \n  FROM 사원 \n  START WITH 사원번호 IN (1006, 1001) \nCONNECT BY PRIOR 상위관리자코드 = 사원번호;"
       },
       {
-        "type": "image",
-        "src": "/sqld-images/j660-1.png",
-        "alt": "문항 이미지 j660-1"
+        "type": "table",
+        "caption": "<사원>",
+        "headers": [
+          "사원번호",
+          "이름",
+          "상위관리자코드"
+        ],
+        "rows": [
+          [
+            "1000",
+            "홍길동",
+            "NULL"
+          ],
+          [
+            "1001",
+            "박길동",
+            "1000"
+          ],
+          [
+            "1002",
+            "최길동",
+            "1001"
+          ],
+          [
+            "1003",
+            "이길동",
+            "1001"
+          ],
+          [
+            "1004",
+            "구길동",
+            "1002"
+          ],
+          [
+            "1005",
+            "안길동",
+            "1003"
+          ],
+          [
+            "1006",
+            "송길동",
+            "1000"
+          ],
+          [
+            "1007",
+            "강길동",
+            "1006"
+          ],
+          [
+            "1008",
+            "공길동",
+            "1006"
+          ]
+        ]
       }
     ]
   },
@@ -26911,9 +27448,61 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "image",
-        "src": "/sqld-images/j662-1.png",
-        "alt": "문항 이미지 j662-1"
+        "type": "table",
+        "caption": "<판매>",
+        "headers": [
+          "지역",
+          "Q1",
+          "Q2"
+        ],
+        "rows": [
+          [
+            "서울",
+            "10",
+            "20"
+          ],
+          [
+            "경기",
+            "30",
+            "40"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "caption": "[SQL]",
+        "code": "SELECT (        )\nFROM 판매"
+      },
+      {
+        "type": "table",
+        "caption": "<결과>",
+        "headers": [
+          "지역",
+          "구분",
+          "판매량"
+        ],
+        "rows": [
+          [
+            "서울",
+            "Q1",
+            "10"
+          ],
+          [
+            "서울",
+            "Q2",
+            "20"
+          ],
+          [
+            "경기",
+            "Q1",
+            "30"
+          ],
+          [
+            "경기",
+            "Q2",
+            "40"
+          ]
+        ]
       }
     ]
   },
@@ -26943,9 +27532,19 @@ export const AI_MOCK: QuizQuestion[] = [
         "content": "SELECT REGEXP_REPLACE(COL1, 'A(X|Y)+\\.') FROM TAB1;"
       },
       {
-        "type": "image",
-        "src": "/sqld-images/j663-1.png",
-        "alt": "문항 이미지 j663-1"
+        "type": "table",
+        "caption": "<TAB1>",
+        "headers": [
+          "COL1"
+        ],
+        "rows": [
+          [
+            "AXXX.AYYY.AXAX."
+          ],
+          [
+            "AAXYXY.XYYY.AXYAXY."
+          ]
+        ]
       }
     ]
   },
@@ -27056,9 +27655,52 @@ export const AI_MOCK: QuizQuestion[] = [
         "content": "ALTER TABLE TAB1 ADD COL4 CHAR(5); \nALTER TABLE TAB1 MODIFY COL4 DEFAULT 'AAA'; \nINSERT INTO TAB1 VALUES(4, 'D', 40, NULL); \nINSERT INTO TAB1(COL1, COL2, COL3) VALUES(5,'E',50);"
       },
       {
-        "type": "image",
-        "src": "/sqld-images/j667-1.png",
-        "alt": "문항 이미지 j667-1"
+        "type": "table",
+        "caption": "<TAB1> 스키마",
+        "headers": [
+          "컬럼명",
+          "타입"
+        ],
+        "rows": [
+          [
+            "COL1",
+            "NUMBER"
+          ],
+          [
+            "COL2",
+            "VARCHAR2(10)"
+          ],
+          [
+            "COL3",
+            "NUMBER"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "<TAB1> 데이터",
+        "headers": [
+          "COL1",
+          "COL2",
+          "COL3"
+        ],
+        "rows": [
+          [
+            "1",
+            "A",
+            "10"
+          ],
+          [
+            "2",
+            "B",
+            "20"
+          ],
+          [
+            "3",
+            "C",
+            "30"
+          ]
+        ]
       }
     ]
   },
@@ -27571,9 +28213,40 @@ export const AI_MOCK: QuizQuestion[] = [
         "content": "SELECT COUNT(COL1) RESULT FROM TAB1 WHERE COL3 < 100 GROUP BY COL1;   \nSELECT COUNT(COL1) RESULT FROM TAB1 WHERE COL1 IS NOT NULL GROUP BY COL1 \nHAVING SUM(COL2) > 500;"
       },
       {
-        "type": "image",
-        "src": "/sqld-images/j690-1.png",
-        "alt": "문항 이미지 j690-1"
+        "type": "table",
+        "caption": "<TAB1>",
+        "headers": [
+          "COL1",
+          "COL2",
+          "COL3"
+        ],
+        "rows": [
+          [
+            "A",
+            "NULL",
+            "100"
+          ],
+          [
+            "A",
+            "200",
+            "300"
+          ],
+          [
+            "B",
+            "100",
+            "NULL"
+          ],
+          [
+            "B",
+            "300",
+            "200"
+          ],
+          [
+            "NULL",
+            "100",
+            "0"
+          ]
+        ]
       }
     ]
   },
