@@ -158,7 +158,7 @@ export const ROUND_46: QuizQuestion[] = [
     "references": [
       {
         "type": "erd",
-        "caption": "컴퓨터-마더보드 ERD (마더보드 → 컴퓨터: 0..1 선택, 컴퓨터 → 마더보드: 1 필수)",
+        "caption": "컴퓨터-마더보드 ERD",
         "mermaid": "erDiagram\n    마더보드 ||--o| 컴퓨터 : \"포함된다\""
       }
     ]
@@ -572,7 +572,7 @@ export const ROUND_46: QuizQuestion[] = [
     "references": [
       {
         "type": "table",
-        "caption": "T 테이블 (어떤 데이터가 있어도 WHERE 1=2 로 모두 공집합)",
+        "caption": "T 테이블",
         "headers": [
           "COL1"
         ],
@@ -923,7 +923,7 @@ export const ROUND_46: QuizQuestion[] = [
     "references": [
       {
         "type": "erd",
-        "caption": "지점-고객 ERD (지점 측 0..1 선택, 고객 측 0..N 선택)",
+        "caption": "지점-고객 ERD",
         "mermaid": "erDiagram\n    지점 |o--o{ 고객 : \"소속\""
       }
     ]
@@ -1312,7 +1312,7 @@ export const ROUND_46: QuizQuestion[] = [
       },
       {
         "type": "table",
-        "caption": "T2 테이블 (COL2 에 NULL 포함)",
+        "caption": "T2 테이블",
         "headers": [
           "COL2"
         ],
@@ -1676,7 +1676,7 @@ export const ROUND_46: QuizQuestion[] = [
       "GRADE, JOB"
     ],
     "correctIndex": 1,
-    "explanation": "GROUPING SETS(A, B)는 GROUP BY (A) UNION ALL GROUP BY (B)와 동치이므로, GRADE 단위와 (GRADE, JOB) 단위의 두 집계 그룹을 동시에 생성한다.",
+    "explanation": "결과 표는 (GRADE, JOB) 세부 4행 + (GRADE) 단위 소계 2행 = 6행이며 (NULL, NULL) 전체 총계 행은 없다.\n- ① ROLLUP(GRADE, JOB) → (GRADE,JOB), (GRADE), () 3단계 → 총계 행이 추가되어 7행 (다름)\n- ② GROUPING SETS(GRADE, (GRADE, JOB)) → (GRADE), (GRADE,JOB) 2단계 → 정확히 6행 (정답)\n- ③ CUBE(GRADE, JOB) → (GRADE,JOB), (GRADE), (JOB), () 4단계 → 행이 더 많음 (다름)\n- ④ GRADE, JOB → (GRADE,JOB) 단일 → 4행 (소계 없음)\n\nGROUPING SETS(A, B) 는 GROUP BY (A) UNION ALL GROUP BY (B) 와 동치이므로 정답은 ②.",
     "_source": "authored",
     "references": [
       {
@@ -1711,12 +1711,49 @@ export const ROUND_46: QuizQuestion[] = [
         ]
       },
       {
-        "type": "text",
-        "content": "GRADE 단위 집계와 (GRADE, JOB) 단위 집계가 결합되어 나타난다."
-      },
-      {
         "type": "sql",
         "code": "SELECT GRADE, JOB, COUNT(*)\nFROM   EMP\nGROUP BY (  ㄱ  );"
+      },
+      {
+        "type": "table",
+        "caption": "기대 결과",
+        "headers": [
+          "GRADE",
+          "JOB",
+          "COUNT(*)"
+        ],
+        "rows": [
+          [
+            "A",
+            "MANAGER",
+            "1"
+          ],
+          [
+            "A",
+            "CLERK",
+            "1"
+          ],
+          [
+            "B",
+            "MANAGER",
+            "1"
+          ],
+          [
+            "B",
+            "CLERK",
+            "1"
+          ],
+          [
+            "A",
+            "(NULL)",
+            "2"
+          ],
+          [
+            "B",
+            "(NULL)",
+            "2"
+          ]
+        ]
       }
     ]
   }
