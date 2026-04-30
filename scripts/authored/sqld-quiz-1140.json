@@ -1,7 +1,7 @@
 {
   "source": "sqld-1140",
   "version": 2,
-  "notes": "SQLD 기출/예상 문제 1140 문항 (외부 출처). 이미지 448 개를 public/sqld-images/ 에 추출 후 path 로 참조. | modern-box-conversions 17개 그룹 일괄 적용 (167/1140 문항 변환). | vision-conversions 32그룹 적용 (43 문항 변환). | vision-conversions 47그룹 적용 (48 문항 변환). | vision-conversions 62그룹 적용 (58 문항 변환). | vision-conversions 77그룹 적용 (61 문항 변환). | vision-conversions 92그룹 적용 (62 문항 변환).",
+  "notes": "SQLD 기출/예상 문제 1140 문항 (외부 출처). 이미지 448 개를 public/sqld-images/ 에 추출 후 path 로 참조. | modern-box-conversions 17개 그룹 일괄 적용 (167/1140 문항 변환). | vision-conversions 32그룹 적용 (43 문항 변환). | vision-conversions 47그룹 적용 (48 문항 변환). | vision-conversions 62그룹 적용 (58 문항 변환). | vision-conversions 77그룹 적용 (61 문항 변환). | vision-conversions 92그룹 적용 (62 문항 변환). | vision-conversions 107그룹 적용 (64 문항 변환).",
   "authored": [
     {
       "_id": "sqld-0001",
@@ -1074,6 +1074,63 @@
           "src": "/sqld-images/j55-1.png",
           "alt": "고객-주문 ERD (FK_001)",
           "caption": "[ERD]"
+        },
+        {
+          "type": "table",
+          "caption": "[표 : 주문 데이터]",
+          "headers": [
+            "주문번호(PK)",
+            "고객ID(FK)",
+            "주문일시"
+          ],
+          "rows": [
+            [
+              "0001",
+              "C001",
+              "2013-12-24"
+            ],
+            [
+              "0002",
+              "C001",
+              "2013-12-25"
+            ],
+            [
+              "0003",
+              "NULL",
+              "2013-12-26"
+            ],
+            [
+              "0004",
+              "C002",
+              "2013-12-27"
+            ]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "[표 : 고객 데이터]",
+          "headers": [
+            "고객ID(PK)",
+            "고객명",
+            "가입일시"
+          ],
+          "rows": [
+            [
+              "C001",
+              "홍길동",
+              "2013-12-12"
+            ],
+            [
+              "C002",
+              "이순신",
+              "2013-12-13"
+            ]
+          ]
+        },
+        {
+          "type": "sql",
+          "caption": "[SQL]",
+          "code": "ALTER TABLE 주문 ADD CONSTRAINT FK_001 FOREIGN KEY (고객ID)\nREFERENCES 고객 (고객ID) ON DELETE SET NULL;"
         },
         {
           "type": "table",
@@ -3365,6 +3422,11 @@
           "type": "sql",
           "caption": "[SQL]",
           "code": "SELECT A.회원번호, A.회원명\nFROM   회원 A, 동의항목 B\nWHERE  A.회원번호 = B.회원번호\nGROUP BY A.회원번호, A.회원명\nHAVING COUNT(CASE WHEN B.동의여부 = 'N' THEN 0 ELSE NULL END) >= 1\nORDER BY A.회원번호;"
+        },
+        {
+          "type": "sql",
+          "caption": "[SQL]",
+          "code": "SELECT A.회원번호, A.회원명\nFROM   회원 A, 동의항목 B\nWHERE  A.회원번호 = B.회원번호\nGROUP BY A.회원번호, A.회원명\nHAVING COUNT(CASE WHEN B.동의여부 = 'N' THEN 0 ELSE NULL END) >= 1\nORDER BY A.회원번호;"
         }
       ]
     },
@@ -3686,6 +3748,67 @@
           "src": "/sqld-images/j125-1.png",
           "alt": "지역-이용내역 ERD",
           "caption": "[데이터 모델]"
+        },
+        {
+          "type": "table",
+          "caption": "[표 : 지역별 월별 이용량]",
+          "headers": [
+            "지역명",
+            "이용월",
+            "이용량"
+          ],
+          "rows": [
+            [
+              "서울",
+              "2014.01",
+              "1,000"
+            ],
+            [
+              "서울",
+              "2014.02",
+              "1,000"
+            ],
+            [
+              "서울",
+              "월별합계",
+              "2,000"
+            ],
+            [
+              "경기",
+              "2014.01",
+              "1,000"
+            ],
+            [
+              "경기",
+              "2014.03",
+              "2,000"
+            ],
+            [
+              "경기",
+              "월별합계",
+              "3,000"
+            ],
+            [
+              "대전",
+              "2014.05",
+              "1,500"
+            ],
+            [
+              "대전",
+              "2014.06",
+              "1,000"
+            ],
+            [
+              "대전",
+              "월별합계",
+              "2,500"
+            ],
+            [
+              "지역전체",
+              "월별합계",
+              "7,500"
+            ]
+          ]
         },
         {
           "type": "table",
@@ -8239,9 +8362,34 @@
       "explanation": "①,③,④ 번 보기는 결괏값 5를 반환하고 ②번 보기만 결괏값 4를 반환한다.",
       "references": [
         {
-          "type": "image",
-          "src": "/sqld-images/j288-1.png",
-          "alt": "문항 이미지 j288-1"
+          "type": "table",
+          "caption": "[Mytest]",
+          "headers": [
+            "ID",
+            "CNT"
+          ],
+          "rows": [
+            [
+              "가",
+              "5"
+            ],
+            [
+              "나",
+              "NULL"
+            ],
+            [
+              "다",
+              "5"
+            ],
+            [
+              "라",
+              "NULL"
+            ],
+            [
+              "마",
+              "10"
+            ]
+          ]
         }
       ]
     },
@@ -8263,9 +8411,64 @@
       "explanation": "③번 보기에서 주어진 테이블을 'CLASS' 속성별로 그룹화한 다음 각 'CLASS' 속성별 행의 수를 count하는데 DISTINCT 인자로 중복되는 NAME 값은 제외하고 count를 수행하여 결괏값이 반환된다.",
       "references": [
         {
-          "type": "image",
-          "src": "/sqld-images/j289-1.png",
-          "alt": "문항 이미지 j289-1"
+          "type": "table",
+          "caption": "[Mytest]",
+          "headers": [
+            "CLASS",
+            "NAME"
+          ],
+          "rows": [
+            [
+              "A",
+              "조조"
+            ],
+            [
+              "A",
+              "조조"
+            ],
+            [
+              "A",
+              "조조"
+            ],
+            [
+              "B",
+              "유비"
+            ],
+            [
+              "B",
+              "관우"
+            ],
+            [
+              "C",
+              "여포"
+            ],
+            [
+              "C",
+              "여포"
+            ]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "[결과]",
+          "headers": [
+            "CLASS",
+            "Result"
+          ],
+          "rows": [
+            [
+              "A",
+              "1"
+            ],
+            [
+              "B",
+              "2"
+            ],
+            [
+              "C",
+              "1"
+            ]
+          ]
         }
       ]
     },
@@ -8291,9 +8494,79 @@
           "content": "SELECT (   ) OVER\n(ORDER BY 급여 desc)\nas 순위, 이름, 급여\nFROM Mytest;"
         },
         {
-          "type": "image",
-          "src": "/sqld-images/j290-1.png",
-          "alt": "문항 이미지 j290-1"
+          "type": "table",
+          "caption": "[Mytest]",
+          "headers": [
+            "이름",
+            "급여"
+          ],
+          "rows": [
+            [
+              "A",
+              "300"
+            ],
+            [
+              "B",
+              "260"
+            ],
+            [
+              "C",
+              "260"
+            ],
+            [
+              "D",
+              "200"
+            ],
+            [
+              "E",
+              "150"
+            ],
+            [
+              "F",
+              "100"
+            ]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "[결과]",
+          "headers": [
+            "순위",
+            "이름",
+            "급여"
+          ],
+          "rows": [
+            [
+              "1",
+              "A",
+              "300"
+            ],
+            [
+              "2",
+              "B",
+              "260"
+            ],
+            [
+              "2",
+              "C",
+              "260"
+            ],
+            [
+              "3",
+              "D",
+              "200"
+            ],
+            [
+              "4",
+              "E",
+              "150"
+            ],
+            [
+              "5",
+              "F",
+              "100"
+            ]
+          ]
         }
       ]
     },
@@ -8349,9 +8622,64 @@
       "explanation": "결괏값은 주어진 테이블에서 JOB_ID 별로 그룹화하였을 때 각 JOB_ID별 salary의 최댓값과 최솟값이 반환되는 결괏값이다. 그런데 JOB_ID 별 salary 값이 하나의 속성값으로 통일되었으므로 union 연산자를 이용한다.",
       "references": [
         {
-          "type": "image",
-          "src": "/sqld-images/j293-1.png",
-          "alt": "문항 이미지 j293-1"
+          "type": "table",
+          "caption": "[Mytest]",
+          "headers": [
+            "JOB_ID",
+            "SALARY"
+          ],
+          "rows": [
+            [
+              "manager",
+              "1300"
+            ],
+            [
+              "manager",
+              "1500"
+            ],
+            [
+              "manager",
+              "1900"
+            ],
+            [
+              "helper",
+              "1000"
+            ],
+            [
+              "helper",
+              "1500"
+            ],
+            [
+              "helper",
+              "2500"
+            ]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "[결과]",
+          "headers": [
+            "JOB_ID",
+            "SALARY"
+          ],
+          "rows": [
+            [
+              "helper",
+              "1000"
+            ],
+            [
+              "helper",
+              "2500"
+            ],
+            [
+              "manager",
+              "1300"
+            ],
+            [
+              "manager",
+              "1900"
+            ]
+          ]
         }
       ]
     },
@@ -8373,9 +8701,28 @@
       "explanation": "나머지 보기는 모두 COL1 값이 NULL일 때 -1을 반환하는데 ④번 보기만 COL1값이 NULL일 때 0 을 반환한다. 즉, CASE문으로 NULL을 비교할 때 알수 없음이 된다.",
       "references": [
         {
-          "type": "image",
-          "src": "/sqld-images/j294-1.png",
-          "alt": "문항 이미지 j294-1"
+          "type": "table",
+          "caption": "[Mytest]",
+          "headers": [
+            "COL1"
+          ],
+          "rows": [
+            [
+              "NULL"
+            ],
+            [
+              "0"
+            ],
+            [
+              "NULL"
+            ],
+            [
+              "0"
+            ],
+            [
+              "NULL"
+            ]
+          ]
         }
       ]
     },
@@ -8397,9 +8744,86 @@
       "explanation": "위의 결괏값은 주어진 테이블에서 회원번호 = 103에 해당하는 ROW를 먼저 선택한 후 선택된 ROW에 대해서 주문금액을 기준으로 내림차순 정렬한 것이다.",
       "references": [
         {
-          "type": "image",
-          "src": "/sqld-images/j295-1.png",
-          "alt": "문항 이미지 j295-1"
+          "type": "table",
+          "caption": "[Mytest]",
+          "headers": [
+            "회원번호",
+            "주문일자",
+            "주문금액"
+          ],
+          "rows": [
+            [
+              "100",
+              "20221101",
+              "10000"
+            ],
+            [
+              "100",
+              "20221102",
+              "20000"
+            ],
+            [
+              "100",
+              "20221103",
+              "30000"
+            ],
+            [
+              "103",
+              "20221101",
+              "10000"
+            ],
+            [
+              "103",
+              "20221102",
+              "30000"
+            ],
+            [
+              "103",
+              "20221110",
+              "15000"
+            ],
+            [
+              "101",
+              "20221201",
+              "18000"
+            ],
+            [
+              "104",
+              "20221201",
+              "5000"
+            ],
+            [
+              "104",
+              "20221103",
+              "1000"
+            ]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "[결과]",
+          "headers": [
+            "회원번호",
+            "주문일자",
+            "주문금액"
+          ],
+          "rows": [
+            [
+              "103",
+              "20221102",
+              "30000"
+            ],
+            [
+              "103",
+              "20221110",
+              "15000"
+            ],
+            [
+              "103",
+              "20221101",
+              "20000"
+            ]
+          ]
         }
       ]
     },
@@ -8448,9 +8872,30 @@
           "content": "select * from Mytest order by COL1 desc,  COL2 desc, COL3 desc;"
         },
         {
-          "type": "image",
-          "src": "/sqld-images/j297-1.png",
-          "alt": "문항 이미지 j297-1"
+          "type": "table",
+          "caption": "[Mytest]",
+          "headers": [
+            "COL1",
+            "COL2",
+            "COL3"
+          ],
+          "rows": [
+            [
+              "1",
+              "Null",
+              "1"
+            ],
+            [
+              "2",
+              "10",
+              "14"
+            ],
+            [
+              "2",
+              "10",
+              "12"
+            ]
+          ]
         }
       ],
       "optionReferences": [
@@ -8482,9 +8927,56 @@
           "content": "SELECT \n(     ) AS A,\n(     ) AS B,\n(     ) AS C\nfrom Mytest"
         },
         {
-          "type": "image",
-          "src": "/sqld-images/j298-1.png",
-          "alt": "문항 이미지 j298-1"
+          "type": "table",
+          "caption": "[Mytest]",
+          "headers": [
+            "COL1",
+            "COL2",
+            "COL3"
+          ],
+          "rows": [
+            [
+              "null",
+              "0",
+              "30"
+            ],
+            [
+              "0",
+              "null",
+              "0"
+            ],
+            [
+              "10",
+              "20",
+              "null"
+            ],
+            [
+              "11",
+              "21",
+              "31"
+            ],
+            [
+              "13",
+              "22",
+              "32"
+            ]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "[결과]",
+          "headers": [
+            "A",
+            "B",
+            "C"
+          ],
+          "rows": [
+            [
+              "13",
+              "0",
+              "34"
+            ]
+          ]
         }
       ]
     },
@@ -8510,9 +9002,55 @@
           "content": "SELECT DEPTNO, JOB, SUM(SAL)\nFROM Mytest\nGROUP BY (   );"
         },
         {
-          "type": "image",
-          "src": "/sqld-images/j299-1.png",
-          "alt": "문항 이미지 j299-1"
+          "type": "table",
+          "caption": "[결과]",
+          "headers": [
+            "DEPTNO",
+            "JOB",
+            "SUM(SAL)"
+          ],
+          "rows": [
+            [
+              "100",
+              "증권사",
+              "1,300"
+            ],
+            [
+              "100",
+              "관리자",
+              "2,400"
+            ],
+            [
+              "100",
+              "",
+              "3,700"
+            ],
+            [
+              "200",
+              "증권사",
+              "1,900"
+            ],
+            [
+              "200",
+              "데이터분석가",
+              "6,000"
+            ],
+            [
+              "200",
+              "관리자",
+              "2,975"
+            ],
+            [
+              "200",
+              "",
+              "10,875"
+            ],
+            [
+              "",
+              "",
+              "14,575"
+            ]
+          ]
         }
       ]
     },
@@ -8561,9 +9099,61 @@
           "content": "SELECT * FROM MytestA A INNER JOIN MytestB B ON (A.KEY1 = B.KEY2);\nSELECT * FROM MytestA A LEFT OUTER JOIN MytestB B ON (A.KEY1 = B.KEY2);\nSELECT * FROM MytestA A RIGHT OUTER JOIN MytestB B ON (A.KEY1 = B.KEY2);\nSELECT * FROM MytestA A FULL OUTER JOIN MytestB B ON (A.KEY1 = B.KEY2);\nSELECT * FROM MytestA A CROSS JOIN MytestB B;"
         },
         {
-          "type": "image",
-          "src": "/sqld-images/j301-1.png",
-          "alt": "문항 이미지 j301-1"
+          "type": "table",
+          "caption": "[MytestA]",
+          "headers": [
+            "COL1",
+            "COL2",
+            "KEY1"
+          ],
+          "rows": [
+            [
+              "관우",
+              "100",
+              "B"
+            ],
+            [
+              "유비",
+              "200",
+              "C"
+            ],
+            [
+              "조자룡",
+              "300",
+              "D"
+            ],
+            [
+              "동탁",
+              "400",
+              "E"
+            ]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "[MytestB]",
+          "headers": [
+            "KEY2",
+            "COL2",
+            "COL3"
+          ],
+          "rows": [
+            [
+              "A",
+              "100",
+              "조조"
+            ],
+            [
+              "B",
+              "200",
+              "관우"
+            ],
+            [
+              "C",
+              "300",
+              "유비"
+            ]
+          ]
         }
       ]
     },
@@ -8606,9 +9196,52 @@
           "content": "SELECT * FROM MytestA (       ) MytestB;"
         },
         {
-          "type": "image",
-          "src": "/sqld-images/j303-1.png",
-          "alt": "문항 이미지 j303-1"
+          "type": "table",
+          "caption": "[MytestA]",
+          "headers": [
+            "COL1",
+            "COL2"
+          ],
+          "rows": [
+            [
+              "1",
+              "A1"
+            ],
+            [
+              "2",
+              ""
+            ],
+            [
+              "3",
+              "B1"
+            ],
+            [
+              "4",
+              "C1"
+            ]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "[MytestB]",
+          "headers": [
+            "COL1",
+            "COL2"
+          ],
+          "rows": [
+            [
+              "1",
+              "A1"
+            ],
+            [
+              "2",
+              ""
+            ],
+            [
+              "3",
+              "B1"
+            ]
+          ]
         }
       ]
     },
@@ -8630,9 +9263,14 @@
       "explanation": "Oracle OUTER JOIN에서 (+)가 왼쪽 테이블 옆에 위치해 있으므로 우측 테이블에서는 조인을 수행하지 않는 테이블의 행들은 그대로 유지되며, 좌측 테이블에서는 조인을 수행하지 않는 테이블의 행들은 null값으로 추가되는 Rights OUTER JOIN이 수행된다.",
       "references": [
         {
-          "type": "image",
-          "src": "/sqld-images/j304-1.png",
-          "alt": "문항 이미지 j304-1"
+          "type": "sql",
+          "caption": "[Oracle OUTER JOIN]",
+          "code": "SELECT *\nFROM EMP, DEPT\nWHERE EMP.부서코드(+) = DEPT.부서코드;"
+        },
+        {
+          "type": "sql",
+          "caption": "[ANSI JOIN]",
+          "code": "SELECT *\nFROM EMP (        ) DEPT\nON (EMP.부서코드 = DEPT.부서코드)"
         }
       ]
     },
@@ -8681,9 +9319,34 @@
           "content": "SELECT SUM(SCORE) / COUNT(NO) FROM Mytest"
         },
         {
-          "type": "image",
-          "src": "/sqld-images/j307-1.png",
-          "alt": "문항 이미지 j307-1"
+          "type": "table",
+          "caption": "[Mytest]",
+          "headers": [
+            "NO",
+            "SCORE"
+          ],
+          "rows": [
+            [
+              "001",
+              "150"
+            ],
+            [
+              "NULL",
+              "250"
+            ],
+            [
+              "003",
+              "50"
+            ],
+            [
+              "004",
+              "150"
+            ],
+            [
+              "NULL",
+              "600"
+            ]
+          ]
         }
       ]
     },
@@ -8751,9 +9414,71 @@
       "explanation": "EXISTS 구문의 뒤의 조건에 일치하는 경우 해당 a테이블의 행을 출력한다.",
       "references": [
         {
-          "type": "image",
-          "src": "/sqld-images/j311-1.png",
-          "alt": "문항 이미지 j311-1"
+          "type": "table",
+          "caption": "[MytestA]",
+          "headers": [
+            "COL1",
+            "COL2"
+          ],
+          "rows": [
+            [
+              "1",
+              "200"
+            ],
+            [
+              "2",
+              "310"
+            ],
+            [
+              "3",
+              "400"
+            ],
+            [
+              "4",
+              "500"
+            ]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "[MytestB]",
+          "headers": [
+            "COL1",
+            "COL2",
+            "COL3"
+          ],
+          "rows": [
+            [
+              "1",
+              "200",
+              "1000"
+            ],
+            [
+              "2",
+              "350",
+              "2000"
+            ],
+            [
+              "3",
+              "400",
+              "3000"
+            ],
+            [
+              "4",
+              "550",
+              "4000"
+            ]
+          ]
+        },
+        {
+          "type": "sql",
+          "caption": "[SQL1]",
+          "code": "SELECT * FROM MytestA a\nWHERE (a.col1, a.col2)\nIN (SELECT b.col1, b.col2 FROM MytestB b\nWHERE b.col3 > 1400);"
+        },
+        {
+          "type": "sql",
+          "caption": "[SQL2]",
+          "code": "SELECT * FROM MytestA a\nWHERE EXISTS (             );"
         }
       ]
     },
@@ -8834,7 +9559,8 @@
         {
           "type": "image",
           "src": "/sqld-images/j315-1.png",
-          "alt": "문항 이미지 j315-1"
+          "alt": "DEPARTMENT-EMPLOYEE ERD (영문 박스)",
+          "caption": "[ERD]"
         }
       ]
     },
