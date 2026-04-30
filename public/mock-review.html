@@ -10956,6 +10956,19 @@ REFERENCES 고객 (고객ID) ON DELETE SET NULL;</code></pre>
           <div class="ref-caption">[SQL]</div>
           <pre><code>ALTER TABLE 주문 ADD CONSTRAINT FK_001 FOREIGN KEY (고객ID)
 REFERENCES 고객 (고객ID) ON DELETE SET NULL;</code></pre>
+        </div>
+        <div class="ref-table">
+          <div class="ref-caption">[표 : 주문 데이터]</div>
+          <table><thead><tr><th>주문번호(PK)</th><th>고객ID(FK)</th><th>주문일시</th></tr></thead><tbody><tr><td>0001</td><td>C001</td><td>2013-12-24</td></tr><tr><td>0002</td><td>C001</td><td>2013-12-25</td></tr><tr><td>0003</td><td>NULL</td><td>2013-12-26</td></tr><tr><td>0004</td><td>C002</td><td>2013-12-27</td></tr></tbody></table>
+        </div>
+        <div class="ref-table">
+          <div class="ref-caption">[표 : 고객 데이터]</div>
+          <table><thead><tr><th>고객ID(PK)</th><th>고객명</th><th>가입일시</th></tr></thead><tbody><tr><td>C001</td><td>홍길동</td><td>2013-12-12</td></tr><tr><td>C002</td><td>이순신</td><td>2013-12-13</td></tr></tbody></table>
+        </div>
+        <div class="ref-sql">
+          <div class="ref-caption">[SQL]</div>
+          <pre><code>ALTER TABLE 주문 ADD CONSTRAINT FK_001 FOREIGN KEY (고객ID)
+REFERENCES 고객 (고객ID) ON DELETE SET NULL;</code></pre>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -12646,9 +12659,19 @@ ORDER BY A.고객번호;</code></pre>
       </header>
       <div class="title">다음 중 아래와 같은 데이터 상황에서 SQL의 수행 결과로 가장 적절한 것은?</div>
       <div class="refs">
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j98-1.png" alt="문항 이미지 j98-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">TAB1</div>
+          <table><thead><tr><th>C1</th><th>C2</th></tr></thead><tbody><tr><td>A</td><td>1</td></tr><tr><td>B</td><td>2</td></tr><tr><td>C</td><td>3</td></tr><tr><td>D</td><td>4</td></tr><tr><td>E</td><td>5</td></tr></tbody></table>
+        </div>
+        <div class="ref-table">
+          <div class="ref-caption">TAB2</div>
+          <table><thead><tr><th>C1</th><th>C2</th></tr></thead><tbody><tr><td>B</td><td>2</td></tr><tr><td>C</td><td>3</td></tr><tr><td>D</td><td>4</td></tr></tbody></table>
+        </div>
+        <div class="ref-sql">
+          <div class="ref-caption">[SQL]</div>
+          <pre><code>SELECT *
+FROM TAB1 A LEFT OUTER JOIN TAB2 B
+  ON ( A.C1 = B.C1 AND B.C2 BETWEEN 1 AND 3)</code></pre>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -13282,6 +13305,15 @@ WHERE  A.회원번호 = B.회원번호
 GROUP BY A.회원번호, A.회원명
 HAVING COUNT(CASE WHEN B.동의여부 = &#39;N&#39; THEN 0 ELSE NULL END) &gt;= 1
 ORDER BY A.회원번호;</code></pre>
+        </div>
+        <div class="ref-sql">
+          <div class="ref-caption">[SQL]</div>
+          <pre><code>SELECT A.회원번호, A.회원명
+FROM   회원 A, 동의항목 B
+WHERE  A.회원번호 = B.회원번호
+GROUP BY A.회원번호, A.회원명
+HAVING COUNT(CASE WHEN B.동의여부 = &#39;N&#39; THEN 0 ELSE NULL END) &gt;= 1
+ORDER BY A.회원번호;</code></pre>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -13591,6 +13623,10 @@ ORDER BY A.회원번호;</code></pre>
         <div class="ref-table">
           <div class="ref-caption">[표 : 지역별 월별 이용량]</div>
           <table><thead><tr><th>지역명</th><th>이용월</th><th>이용량</th></tr></thead><tbody><tr><td>서울</td><td>2014.01</td><td>1,000</td></tr><tr><td>서울</td><td>2014.02</td><td>1,000</td></tr><tr><td>서울</td><td>월별합계</td><td>2,000</td></tr><tr><td>경기</td><td>2014.01</td><td>1,000</td></tr><tr><td>경기</td><td>2014.03</td><td>2,000</td></tr><tr><td>경기</td><td>월별합계</td><td>3,000</td></tr><tr><td>대전</td><td>2014.05</td><td>1,500</td></tr><tr><td>대전</td><td>2014.06</td><td>1,000</td></tr><tr><td>대전</td><td>월별합계</td><td>2,500</td></tr><tr><td>지역전체</td><td>월별합계</td><td>7,500</td></tr></tbody></table>
+        </div>
+        <div class="ref-table">
+          <div class="ref-caption">[표 : 지역별 월별 이용량]</div>
+          <table><thead><tr><th>지역명</th><th>이용월</th><th>이용량</th></tr></thead><tbody><tr><td>서울</td><td>2014.01</td><td>1,000</td></tr><tr><td>서울</td><td>2014.02</td><td>1,000</td></tr><tr><td>서울</td><td>월별합계</td><td>2,000</td></tr><tr><td>경기</td><td>2014.01</td><td>1,000</td></tr><tr><td>경기</td><td>2014.03</td><td>2,000</td></tr><tr><td>경기</td><td>월별합계</td><td>3,000</td></tr><tr><td>대전</td><td>2014.05</td><td>1,500</td></tr><tr><td>대전</td><td>2014.06</td><td>1,000</td></tr><tr><td>대전</td><td>월별합계</td><td>2,500</td></tr><tr><td>지역전체</td><td>월별합계</td><td>7,500</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -13670,9 +13706,17 @@ ORDER BY A.회원번호;</code></pre>
       </header>
       <div class="title">아래와 같이 설비와 에너지사용 테이블을 이용하여 결과를 나타내려할 때 SQL으로 가장 적절한 것을 2개 고르시오.</div>
       <div class="refs">
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j127-1.png" alt="문항 이미지 j127-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">[테이블 : 설비]</div>
+          <table><thead><tr><th>설비ID</th><th>설비명</th></tr></thead><tbody><tr><td>1</td><td>설비1</td></tr><tr><td>2</td><td>설비2</td></tr><tr><td>3</td><td>설비3</td></tr></tbody></table>
+        </div>
+        <div class="ref-table">
+          <div class="ref-caption">[테이블 : 에너지사용]</div>
+          <table><thead><tr><th>설비ID</th><th>에너지코드</th><th>사용량</th></tr></thead><tbody><tr><td>1</td><td>전기</td><td>100</td></tr><tr><td>1</td><td>용수</td><td>200</td></tr><tr><td>1</td><td>바람</td><td>300</td></tr><tr><td>2</td><td>전기</td><td>200</td></tr><tr><td>2</td><td>용수</td><td>300</td></tr><tr><td>3</td><td>전기</td><td>300</td></tr></tbody></table>
+        </div>
+        <div class="ref-table">
+          <div class="ref-caption">[결과]</div>
+          <table><thead><tr><th>설비ID</th><th>에너지코드</th><th>사용량합계</th></tr></thead><tbody><tr><td>1</td><td>바람</td><td>300</td></tr><tr><td>1</td><td>용수</td><td>200</td></tr><tr><td>1</td><td>전기</td><td>100</td></tr><tr><td>1</td><td>NULL</td><td>600</td></tr><tr><td>2</td><td>용수</td><td>300</td></tr><tr><td>2</td><td>전기</td><td>200</td></tr><tr><td>2</td><td>NULL</td><td>500</td></tr><tr><td>3</td><td>전기</td><td>300</td></tr><tr><td>3</td><td>NULL</td><td>300</td></tr><tr><td>NULL</td><td>바람</td><td>300</td></tr><tr><td>NULL</td><td>용수</td><td>500</td></tr><tr><td>NULL</td><td>전기</td><td>600</td></tr><tr><td>NULL</td><td>NULL</td><td>1400</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -13773,9 +13817,16 @@ ORDER BY 자재번호, 발주처ID, 발주일자;</code></pre>
       </header>
       <div class="title">다음 중 월별매출 테이블을 대상으로 아래 SQL을 수행한 결과인 것은?</div>
       <div class="refs">
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j129-1.png" alt="문항 이미지 j129-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">[테이블 : 월별매출]</div>
+          <table><thead><tr><th>상품ID</th><th>월</th><th>매출액</th></tr></thead><tbody><tr><td>P001</td><td>2014.10</td><td>1500</td></tr><tr><td>P001</td><td>2014.11</td><td>1500</td></tr><tr><td>P001</td><td>2014.12</td><td>2500</td></tr><tr><td>P002</td><td>2014.10</td><td>1000</td></tr><tr><td>P002</td><td>2014.11</td><td>2000</td></tr><tr><td>P002</td><td>2014.12</td><td>1500</td></tr><tr><td>P003</td><td>2014.10</td><td>2000</td></tr><tr><td>P003</td><td>2014.11</td><td>1000</td></tr><tr><td>P003</td><td>2014.12</td><td>1000</td></tr></tbody></table>
+        </div>
+        <div class="ref-sql">
+          <div class="ref-caption">[SQL]</div>
+          <pre><code>SELECT 상품ID, 월, SUM(매출액) AS 매출액
+FROM   월별매출
+WHERE  월 BETWEEN &#39;2014.10&#39; AND &#39;2014.12&#39;
+GROUP BY GROUPING SETS((상품ID, 월));</code></pre>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -13917,8 +13968,8 @@ ORDER BY RNK;</code></pre>
       <div class="title">아래 데이터 모델에서 활동점수가 높은 고객을 게임상품ID별로 10등까지 선별하여 사은행사를 진행하려고 한다. 다음 SQL 중 가장 적절한 것은? (단, 활동점수가 동일한 고객은 동일등수로 한다. 아래 결과 예제 참조)</div>
       <div class="refs">
         <div class="ref-image">
-          
-          <img src="/sqld-images/j132-1.png" alt="문항 이미지 j132-1" loading="lazy">
+          <div class="ref-caption">[ERD + 결과 예제]</div>
+          <img src="/sqld-images/j132-1.png" alt="게임상품-고객활동-고객 ERD + 결과 예제 (활동점수/등수)" loading="lazy">
         </div></div>
       <ol class="opts">
         <li class="opt correct">
@@ -13959,9 +14010,18 @@ ORDER BY RNK;</code></pre>
       </header>
       <div class="title">다음 중 추천내역 테이블에서 아래와 같은 SQL을 수행하였을 때의 결과로 가장 적절한 것은?</div>
       <div class="refs">
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j133-1.png" alt="문항 이미지 j133-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">[테이블 : 추천내역]</div>
+          <table><thead><tr><th>추천경로</th><th>추천인</th><th>피추천인</th><th>추천점수</th></tr></thead><tbody><tr><td>SNS</td><td>나한일</td><td>강감찬</td><td>75</td></tr><tr><td>SNS</td><td>이순신</td><td>강감찬</td><td>80</td></tr><tr><td>이벤트응모</td><td>홍길동</td><td>강감찬</td><td>88</td></tr><tr><td>이벤트응모</td><td>저절로</td><td>이순신</td><td>78</td></tr><tr><td>홈페이지</td><td>저절로</td><td>이대로</td><td>93</td></tr><tr><td>홈페이지</td><td>홍두깨</td><td>심청이</td><td>98</td></tr></tbody></table>
+        </div>
+        <div class="ref-sql">
+          <div class="ref-caption">[SQL]</div>
+          <pre><code>SELECT 추천경로, 추천인, 피추천인, 추천점수
+FROM   (SELECT 추천경로, 추천인, 피추천인, 추천점수
+              ,ROW_NUMBER() OVER(PARTITION BY 추천경로
+                                 ORDER BY 추천점수 DESC) AS RNUM
+        FROM   추천내역)
+WHERE  RNUM = 1;</code></pre>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -15640,9 +15700,13 @@ ORDER BY RNK;</code></pre>
       </header>
       <div class="title">다음의 SQL문에 대한 설명으로 올바르지 않은 것은?</div>
       <div class="refs">
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j191-1.png" alt="문항 이미지 j191-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">가. 실제 데이터</div>
+          <table><thead><tr><th>DEPTNO</th><th>SAL</th></tr></thead><tbody><tr><td>10</td><td></td></tr><tr><td>10</td><td>1000</td></tr><tr><td>10</td><td>2000</td></tr><tr><td>20</td><td></td></tr><tr><td>20</td><td>500</td></tr></tbody></table>
+        </div>
+        <div class="ref-sql">
+          <div class="ref-caption">나. SELECT문</div>
+          <pre><code>SELECT DEPTNO, SUM(NVL(SAL,0)) FROM DEPT GROUP BY DEPTNO;</code></pre>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -15800,9 +15864,19 @@ ORDER BY RNK;</code></pre>
       </header>
       <div class="title">다음 주어진 테이블에서 아래와 같은 결과가 반환되도록 SQL문의 빈칸에 들어갈 올바른 것을 고르시오.</div>
       <div class="refs">
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j196-1.png" alt="문항 이미지 j196-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">[SQLD_64]</div>
+          <table><thead><tr><th>남성의류</th><th>여성의류</th><th>의류번호</th></tr></thead><tbody><tr><td>아웃솔더</td><td>양말</td><td>1</td></tr><tr><td>가디건</td><td>아웃솔더</td><td>2</td></tr><tr><td>겨울외투</td><td>가디건</td><td>3</td></tr><tr><td>자켓</td><td>겨울외투</td><td>4</td></tr><tr><td></td><td>자켓</td><td>5</td></tr><tr><td>숏바지</td><td>롱바지</td><td>6</td></tr><tr><td>양말</td><td>숏바지</td><td>7</td></tr></tbody></table>
+        </div>
+        <div class="ref-table">
+          <div class="ref-caption">[결과]</div>
+          <table><thead><tr><th>남성의류</th><th>여성의류</th><th>의류번호</th></tr></thead><tbody><tr><td></td><td>자켓</td><td>5</td></tr><tr><td>자켓</td><td>겨울외투</td><td>4</td></tr><tr><td>겨울외투</td><td>가디건</td><td>3</td></tr><tr><td>가디건</td><td>아웃솔더</td><td>2</td></tr><tr><td>아웃솔더</td><td>양말</td><td>1</td></tr><tr><td>양말</td><td>숏바지</td><td>7</td></tr><tr><td>숏바지</td><td>롱바지</td><td>6</td></tr></tbody></table>
+        </div>
+        <div class="ref-sql">
+          <div class="ref-caption">[SQL]</div>
+          <pre><code>SELECT * FROM SQLD_64
+START WITH ( ㄱ )
+CONNECT BY PRIOR ( ㄴ );</code></pre>
         </div></div>
       <ol class="opts">
         <li class="opt correct">
@@ -15843,9 +15917,17 @@ ORDER BY RNK;</code></pre>
       </header>
       <div class="title">다음 주어진 테이블에서 부서코드 100의 상위부서코드를 찾는 SQL문을 만들도록 빈칸을 채워 넣으시오.</div>
       <div class="refs">
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j197-1.png" alt="문항 이미지 j197-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">[SQLD_65]</div>
+          <table><thead><tr><th>부서id</th><th>부서코드</th><th>상위부서코드</th></tr></thead><tbody><tr><td>10</td><td>50</td><td>0</td></tr><tr><td>20</td><td>100</td><td>50</td></tr><tr><td>30</td><td>150</td><td>100</td></tr><tr><td>40</td><td>200</td><td>150</td></tr><tr><td>50</td><td>250</td><td>200</td></tr></tbody></table>
+        </div>
+        <div class="ref-sql">
+          <div class="ref-caption">[SQL]</div>
+          <pre><code>SELECT 상위부서코드
+FROM SQLD_65
+  ( ㄱ ) 부서코드 = 100
+  ( ㄴ ) 상위부서코드 = 0
+  ( ㄷ ) 부서코드 = 상위부서코드;</code></pre>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -15929,9 +16011,13 @@ ORDER BY RNK;</code></pre>
       </header>
       <div class="title">다음 주어진 테이블에서 아래와 같은 결괏값을 반환하는 SQL문을 고르시오.</div>
       <div class="refs">
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j199-1.png" alt="문항 이미지 j199-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">[SQLD_67]</div>
+          <table><thead><tr><th>반</th><th>이름</th></tr></thead><tbody><tr><td>1</td><td>꽁쥐</td></tr><tr><td>1</td><td>꽁쥐</td></tr><tr><td>1</td><td>꽁쥐</td></tr><tr><td>2</td><td>소태</td></tr><tr><td>2</td><td>롤라</td></tr><tr><td>3</td><td>소희</td></tr><tr><td>3</td><td>소희</td></tr></tbody></table>
+        </div>
+        <div class="ref-table">
+          <div class="ref-caption">[결과]</div>
+          <table><thead><tr><th>반</th><th>결괏값</th></tr></thead><tbody><tr><td>1</td><td>1</td></tr><tr><td>2</td><td>2</td></tr><tr><td>3</td><td>1</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -15972,9 +16058,9 @@ ORDER BY RNK;</code></pre>
       </header>
       <div class="title">다음 주어진 테이블에서 SELECT문을 수행하였을 때 결괏값으로 다른 것을 고르시오.</div>
       <div class="refs">
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j201-1.png" alt="문항 이미지 j201-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">[A]</div>
+          <table><thead><tr><th>COL1</th></tr></thead><tbody><tr><td>NULL</td></tr><tr><td>0</td></tr><tr><td>NULL</td></tr><tr><td>0</td></tr><tr><td>NULL</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -16015,9 +16101,13 @@ ORDER BY RNK;</code></pre>
       </header>
       <div class="title">다음 주어진 테이블에서 아래의 SQL문을 수행하였을 때의 결괏값으로 올바른 것을 고르시오.</div>
       <div class="refs">
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j203-1.png" alt="문항 이미지 j203-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">[SQLD_71]</div>
+          <table><thead><tr><th>COL1</th><th>COL2</th><th>COL3</th></tr></thead><tbody><tr><td>1</td><td>null</td><td>1</td></tr><tr><td>2</td><td>10</td><td>13</td></tr><tr><td>2</td><td>10</td><td>12</td></tr></tbody></table>
+        </div>
+        <div class="ref-sql">
+          <div class="ref-caption">[SQL]</div>
+          <pre><code>select * from SQLD_71 order by COL1 desc, COL2 desc, COL3 desc;</code></pre>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -16058,9 +16148,9 @@ ORDER BY RNK;</code></pre>
       </header>
       <div class="title">아래의 결괏값을 보고 SQL문의 빈칸에 들어 갈 수 있는 내용을 고르시오.</div>
       <div class="refs"><div class="ref-text">SELECT DEPTNO, JOB, SUM(SAL)<br>FROM SQLD_73<br>GROUP BY (     );</div>
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j205-1.png" alt="문항 이미지 j205-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">[결과]</div>
+          <table><thead><tr><th>DEPTNO</th><th>JOB</th><th>SUM(SAL)</th></tr></thead><tbody><tr><td>10</td><td>CLERK</td><td>1300</td></tr><tr><td>10</td><td>MANAGER</td><td>2450</td></tr><tr><td>10</td><td></td><td>3750</td></tr><tr><td>20</td><td>CLERK</td><td>1900</td></tr><tr><td>20</td><td>ANALYST</td><td>6000</td></tr><tr><td>20</td><td>MANAGER</td><td>2975</td></tr><tr><td>20</td><td></td><td>10875</td></tr><tr><td></td><td></td><td>14625</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -16140,9 +16230,33 @@ ORDER BY RNK;</code></pre>
       </header>
       <div class="title">아래와 같은 테이블 TAB1, TAB2가 있을 때 아래 SQL의 결과 건수를 알맞게 나열한 것은?</div>
       <div class="refs">
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j209-1.png" alt="문항 이미지 j209-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">TAB1</div>
+          <table><thead><tr><th>COL1</th><th>COL2</th><th>KEY1</th></tr></thead><tbody><tr><td>BBB</td><td>123</td><td>B</td></tr><tr><td>DDD</td><td>222</td><td>C</td></tr><tr><td>EEE</td><td>233</td><td>D</td></tr><tr><td>FFF</td><td>143</td><td>E</td></tr></tbody></table>
+        </div>
+        <div class="ref-table">
+          <div class="ref-caption">TAB2</div>
+          <table><thead><tr><th>KEY2</th><th>COL1</th><th>COL2</th></tr></thead><tbody><tr><td>A</td><td>10</td><td>BC</td></tr><tr><td>B</td><td>10</td><td>CD</td></tr><tr><td>C</td><td>10</td><td>DE</td></tr></tbody></table>
+        </div>
+        <div class="ref-sql">
+          <div class="ref-caption">INNER JOIN</div>
+          <pre><code>SELECT * FROM TAB1 A INNER JOIN TAB2 B ON (A.KEY1 = B.KEY2);</code></pre>
+        </div>
+        <div class="ref-sql">
+          <div class="ref-caption">LEFT OUTER JOIN</div>
+          <pre><code>SELECT * FROM TAB1 A LEFT OUTER JOIN TAB2 B ON (A.KEY1 = B.KEY2);</code></pre>
+        </div>
+        <div class="ref-sql">
+          <div class="ref-caption">RIGHT OUTER JOIN</div>
+          <pre><code>SELECT * FROM TAB1 A RIGHT OUTER JOIN TAB2 B ON (A.KEY1 = B.KEY2);</code></pre>
+        </div>
+        <div class="ref-sql">
+          <div class="ref-caption">FULL OUTER JOIN</div>
+          <pre><code>SELECT * FROM TAB1 A FULL OUTER JOIN TAB2 B ON (A.KEY1 = B.KEY2);</code></pre>
+        </div>
+        <div class="ref-sql">
+          <div class="ref-caption">CROSS JOIN</div>
+          <pre><code>SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -16183,9 +16297,13 @@ ORDER BY RNK;</code></pre>
       </header>
       <div class="title">아래 SQL에서 출력되는 ROWS의 개수를 구하시오.</div>
       <div class="refs"><div class="ref-text">SELECT DNAME, JOB, COUNT(*) &quot;Total Emp&quot;, SUM(SAL) &quot;Total Sal&quot; FROM SCOTT.EMP A, SCOTT.DEPT B<br>WHERE A.DEPTNO = B.DEPTNO<br>GROUP BY CUBE(DNAME,JOB);</div>
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j210-1.png" alt="문항 이미지 j210-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">[EMP TABLE]</div>
+          <table><thead><tr><th>DEPTNO</th><th>JOB</th><th>SAL</th></tr></thead><tbody><tr><td>20</td><td>CLERK</td><td>800</td></tr><tr><td>30</td><td>SALESMAN</td><td>1600</td></tr><tr><td>30</td><td>SALESMAN</td><td>1250</td></tr><tr><td>20</td><td>MANAGER</td><td>2975</td></tr><tr><td>30</td><td>SALESMAN</td><td>1250</td></tr><tr><td>30</td><td>MANAGER</td><td>2850</td></tr><tr><td>10</td><td>MANAGER</td><td>2450</td></tr><tr><td>20</td><td>ANALYST</td><td>3000</td></tr><tr><td>10</td><td>PRESIDENT</td><td>5000</td></tr><tr><td>30</td><td>SALESMAN</td><td>1500</td></tr><tr><td>20</td><td>CLERK</td><td>1100</td></tr><tr><td>30</td><td>CLERK</td><td>950</td></tr><tr><td>20</td><td>ANALYST</td><td>3000</td></tr><tr><td>10</td><td>CLERK</td><td>1300</td></tr></tbody></table>
+        </div>
+        <div class="ref-table">
+          <div class="ref-caption">[DEPT TABLE]</div>
+          <table><thead><tr><th>DEPTNO</th><th>DNAME</th></tr></thead><tbody><tr><td>10</td><td>ACCOUNTING</td></tr><tr><td>20</td><td>RESEARCH</td></tr><tr><td>30</td><td>SALES</td></tr><tr><td>40</td><td>OPERATIONS</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -16265,9 +16383,18 @@ ORDER BY RNK;</code></pre>
       </header>
       <div class="title">주식의 정보를 조회하는 프로그램이 있다. 이 때, 일자(BASE_DATE)와 종가(LAST_JUKA), 전일대비(DEBI_VAL)를 출력하는  SQL문으로 올바른 것을 고르시오.</div>
       <div class="refs">
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j212-1.png" alt="문항 이미지 j212-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">[결과]</div>
+          <table><thead><tr><th>BASE_DATE</th><th>LAST_JUKA</th><th>DEBI_VAL</th></tr></thead><tbody><tr><td>20230105</td><td>635.99</td><td>-39.18</td></tr><tr><td>20230106</td><td>596.81</td><td>-49.6</td></tr><tr><td>20230107</td><td>547.21</td><td>12.18</td></tr></tbody></table>
+        </div>
+        <div class="ref-table">
+          <div class="ref-caption">[기초 데이터]</div>
+          <table><thead><tr><th>BASE_DATE</th><th>LAST_JUKA</th></tr></thead><tbody><tr><td>20230104</td><td>638.86</td></tr><tr><td>20230105</td><td>635.99</td></tr><tr><td>20230106</td><td>596.81</td></tr><tr><td>20230107</td><td>547.21</td></tr><tr><td>20230108</td><td>559.39</td></tr></tbody></table>
+        </div>
+        <div class="ref-sql">
+          <div class="ref-caption">[SELECT]</div>
+          <pre><code>SELECT BASE_DATE, LAST_JUKA
+FROM TEST_A A;</code></pre>
         </div></div>
       <ol class="opts">
         <li class="opt correct">
