@@ -396,21 +396,153 @@ function RefHtml({ html, caption }: any) {
   );
 }
 
+// 이미지 references — sqld-1140 처럼 외부 출처 자료를 OCR 누락 위험 없이 그대로 노출.
+// 카드 컨테이너 + "원본자료" 배지 + 확대 라이트박스 (모바일 핀치 줌 가능).
+// PR #140 시안 (mock-image-style-demo.html) 적용.
 function RefImage({ src, alt, caption }: { src: string; alt?: string; caption?: string }) {
+  const [open, setOpen] = React.useState(false);
+  const [hover, setHover] = React.useState(false);
+  const labelText = caption || alt || '원본 자료';
+
   return (
-    <div>
-      {caption ? <div style={CAPTION_STYLE}>{caption}</div> : null}
+    <>
+      <figure
+        style={{
+          margin: 0,
+          border: `1px solid ${hover ? 'var(--point-600)' : 'var(--border-subtle)'}`,
+          borderRadius: 10,
+          overflow: 'hidden',
+          background: 'var(--bg-card)',
+          boxShadow: hover ? '0 0 0 1px var(--point-600)' : 'none',
+          transition: 'border-color .15s, box-shadow .15s',
+        }}
+        onMouseEnter={() => setHover(true)}
+        onMouseLeave={() => setHover(false)}
+      >
+        <div style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: 8,
+          padding: '8px 12px',
+          background: 'var(--bg-muted)',
+          borderBottom: '1px solid var(--border-subtle)',
+          fontSize: 11.5,
+          color: 'var(--fg-3)',
+        }}>
+          <span style={{
+            background: 'var(--warn-bg, #fef3c7)',
+            color: 'var(--warn-fg, #92400e)',
+            padding: '1px 6px',
+            borderRadius: 3,
+            fontWeight: 700,
+            fontSize: 10,
+            letterSpacing: '0.02em',
+            whiteSpace: 'nowrap',
+          }}>원본자료</span>
+          <span style={{
+            fontWeight: 600,
+            color: 'var(--fg-2)',
+            overflow: 'hidden',
+            textOverflow: 'ellipsis',
+            whiteSpace: 'nowrap',
+            flex: 1,
+          }}>{labelText}</span>
+          <button
+            type="button"
+            onClick={() => setOpen(true)}
+            style={{
+              marginLeft: 'auto',
+              background: 'transparent',
+              border: 0,
+              color: 'var(--point-600)',
+              fontSize: 11,
+              fontWeight: 600,
+              cursor: 'pointer',
+              padding: '2px 4px',
+              whiteSpace: 'nowrap',
+            }}
+            aria-label="이미지 확대"
+          >확대 ⤢</button>
+        </div>
+        <button
+          type="button"
+          onClick={() => setOpen(true)}
+          style={{
+            display: 'block',
+            width: '100%',
+            padding: 12,
+            background: '#fff',
+            border: 0,
+            cursor: 'zoom-in',
+            textAlign: 'center',
+          }}
+          aria-label="이미지 크게 보기"
+        >
+          <img
+            src={src}
+            alt={alt || '문항 이미지'}
+            style={{
+              maxWidth: '100%',
+              height: 'auto',
+              display: 'inline-block',
+              verticalAlign: 'top',
+            }}
+            loading="lazy"
+          />
+        </button>
+      </figure>
+      {open ? <Lightbox src={src} alt={alt} onClose={() => setOpen(false)}/> : null}
+    </>
+  );
+}
+
+// 라이트박스 — 풀스크린 다크 오버레이 + 이미지 확대. 닫기: ✕ / 배경 / Esc.
+// 모바일은 브라우저 기본 핀치 줌 사용.
+function Lightbox({ src, alt, onClose }: { src: string; alt?: string; onClose: () => void }) {
+  React.useEffect(() => {
+    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') onClose(); };
+    document.addEventListener('keydown', onKey);
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.removeEventListener('keydown', onKey);
+      document.body.style.overflow = prev;
+    };
+  }, [onClose]);
+
+  return (
+    <div
+      onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}
+      style={{
+        position: 'fixed', inset: 0,
+        background: 'rgba(0,0,0,0.85)',
+        display: 'flex', alignItems: 'center', justifyContent: 'center',
+        zIndex: 300, padding: 20,
+      }}
+      role="dialog"
+      aria-modal="true"
+      aria-label="이미지 확대 보기"
+    >
+      <button
+        type="button"
+        onClick={onClose}
+        style={{
+          position: 'absolute', top: 16, right: 18,
+          width: 40, height: 40, borderRadius: '50%',
+          background: 'rgba(0,0,0,0.5)', color: '#fff',
+          border: 0, fontSize: 22, cursor: 'pointer',
+          display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
+        }}
+        aria-label="닫기"
+      >✕</button>
       <img
         src={src}
-        alt={alt || '문항 이미지'}
+        alt={alt || '확대 이미지'}
+        onClick={onClose}
         style={{
-          maxWidth: '100%',
-          height: 'auto',
-          borderRadius: 6,
-          border: '1px solid var(--border-subtle)',
-          display: 'block',
+          maxWidth: '100%', maxHeight: '100%',
+          objectFit: 'contain', cursor: 'zoom-out',
         }}
-        loading="lazy"
       />
     </div>
   );
