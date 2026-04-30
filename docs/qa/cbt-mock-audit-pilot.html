@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>SQLD양파 — CBT 모의고사 이미지 audit 파일럿 (52문항)</title>
+<style>
+  :root {
+    --bg: #0f1419;
+    --fg: #e6e6e6;
+    --muted: #8b9296;
+    --border: #2a3138;
+    --card-bg: #161b22;
+    --hl: #4a9eff;
+    --hl-bg: rgba(74, 158, 255, 0.12);
+    --table-header: #1f2630;
+    --table-row-alt: rgba(255, 255, 255, 0.02);
+    --code-bg: #0d1117;
+    --warn: #d97706;
+  }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", sans-serif; margin: 0; background: var(--bg); color: var(--fg); }
+  header { padding: 16px 24px; border-bottom: 1px solid var(--border); position: sticky; top: 0; background: var(--bg); z-index: 10; }
+  header h1 { margin: 0 0 4px; font-size: 18px; }
+  header .meta { color: var(--muted); font-size: 13px; }
+  .pager { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; padding: 12px 24px; border-bottom: 1px solid var(--border); background: var(--card-bg); }
+  .pager button { background: transparent; color: var(--fg); border: 1px solid var(--border); padding: 6px 10px; border-radius: 4px; cursor: pointer; font-size: 13px; min-width: 32px; }
+  .pager button:hover:not(:disabled) { background: var(--hl-bg); border-color: var(--hl); }
+  .pager button:disabled { opacity: 0.4; cursor: not-allowed; }
+  .pager button.current { background: var(--hl); color: #fff; border-color: var(--hl); }
+  .pager .info { margin-left: auto; color: var(--muted); font-size: 13px; }
+  .pager .nav { display: flex; gap: 4px; }
+  main { padding: 24px; max-width: 1400px; margin: 0 auto; }
+  .entry { border: 1px solid var(--border); border-radius: 8px; margin-bottom: 24px; overflow: hidden; background: var(--card-bg); }
+  .entry-header { padding: 12px 16px; border-bottom: 1px solid var(--border); display: flex; gap: 12px; align-items: center; flex-wrap: wrap; background: var(--table-header); }
+  .entry-header .key { font-weight: 600; color: var(--hl); font-family: monospace; font-size: 14px; }
+  .entry-header .batch { background: var(--hl-bg); color: var(--hl); padding: 2px 8px; border-radius: 4px; font-size: 12px; font-family: monospace; }
+  .entry-header .pending { background: rgba(217, 119, 6, 0.15); color: var(--warn); padding: 2px 8px; border-radius: 4px; font-size: 12px; font-family: monospace; }
+  .entry-header .subject { color: var(--muted); font-family: monospace; font-size: 12px; }
+  .entry-header .title { flex: 1; min-width: 0; color: var(--fg); font-size: 13px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .entry-body { display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
+  @media (max-width: 900px) { .entry-body { grid-template-columns: 1fr; } }
+  .col { padding: 16px; }
+  .col + .col { border-left: 1px solid var(--border); }
+  @media (max-width: 900px) { .col + .col { border-left: none; border-top: 1px solid var(--border); } }
+  .col h3 { margin: 0 0 12px; font-size: 13px; color: var(--muted); font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; }
+  .col img { max-width: 100%; height: auto; border: 1px solid var(--border); border-radius: 4px; image-rendering: pixelated; }
+  .ref { margin-bottom: 16px; }
+  .ref:last-child { margin-bottom: 0; }
+  .ref-caption { font-size: 12px; color: var(--muted); margin-bottom: 6px; font-family: monospace; }
+  table.ref-table { border-collapse: collapse; width: 100%; font-size: 13px; }
+  table.ref-table th, table.ref-table td { border: 1px solid var(--border); padding: 6px 10px; text-align: left; }
+  table.ref-table th { background: var(--table-header); color: var(--fg); font-weight: 600; font-size: 12px; }
+  table.ref-table tr:nth-child(even) td { background: var(--table-row-alt); }
+  table.ref-table td:empty::after { content: "(빈)"; color: var(--muted); font-style: italic; font-size: 11px; }
+  pre.ref-sql { background: var(--code-bg); border: 1px solid var(--border); border-radius: 4px; padding: 10px; font-size: 12px; overflow-x: auto; margin: 0; color: #d4d4d4; white-space: pre-wrap; word-break: break-word; }
+  .ref-text { font-size: 13px; line-height: 1.5; padding: 8px; background: var(--code-bg); border: 1px solid var(--border); border-radius: 4px; }
+  .ref-todo { font-size: 12px; color: var(--warn); padding: 12px; background: var(--code-bg); border: 1px dashed var(--warn); border-radius: 4px; text-align: center; }
+  .ref-unknown { font-size: 12px; color: var(--warn); }
+</style>
+</head>
+<body>
+<header>
+  <h1>SQLD양파 — CBT 모의고사 (이기적 209) 이미지 audit 파일럿</h1>
+  <div class="meta">52문항 / 표 image → 표·sql·text ref 변환 결과 비포·애프터.</div>
+</header>
+<div class="pager" id="pager-top"></div>
+<main id="content"></main>
+<div class="pager" id="pager-bottom"></div>
+<script>
+const ENTRIES = [{"id":"cbt-002","origNo":2,"subject":"2과목","chapter":"윈도우 함수","title":"다음 SQL 실행 결과로 가장 알맞은 것은?","refs":[{"type":"sql","code":"SELECT NAME, ROW_NUMBER() OVER (ORDERBY SCORE DESC) AS RNFROM SCORES;"},{"type":"image","src":"/cbt-images/cbt73-q002-p-1-c129ee1bb9.png","alt":"보기 자료 1"}],"after":null,"batch":null},{"id":"cbt-005","origNo":5,"subject":"2과목","chapter":"그룹 함수","title":"다음 SQL 실행 결과로 가장 알맞은 것은?","refs":[{"type":"sql","code":"SELECT COUNT(SALARY), SUM(SALARY),AVG(SALARY)FROM EMPLOYEE;"},{"type":"image","src":"/cbt-images/cbt73-q005-p-1-0f126e0b43.png","alt":"보기 자료 1"}],"after":null,"batch":null},{"id":"cbt-015","origNo":15,"subject":"2과목","chapter":"GROUP BY·HAVING","title":"다음 SQL 실행 결과, 최종 출력되는 건 수는?","refs":[{"type":"sql","code":"WITH REGION_TOTAL AS (SELECT REGION, SUM(AMOUNT) AS TOTALFROM TB_ORDERGROUP BY REGION)SELECT COUNT(*) FROM REGION_TOTALWHERE TOTAL > 1500;"},{"type":"image","src":"/cbt-images/cbt73-q015-p-1-8f05d3a51b.png","alt":"보기 자료 1"},{"type":"image","src":"/cbt-images/cbt73-q015-e-1-9aaede65ae.png","alt":"해설 자료 1"}],"after":null,"batch":null},{"id":"cbt-018","origNo":18,"subject":"2과목","chapter":"GROUP BY·HAVING","title":"다음 SQL 실행 결과로 가장 알맞은 것은?","refs":[{"type":"sql","code":"SELECT USER_ID, SUM(AMOUNT)FROM TB_PURCHASEGROUP BY USER_ID;"},{"type":"image","src":"/cbt-images/cbt73-q018-p-1-85828baa42.png","alt":"보기 자료 1"}],"after":null,"batch":null},{"id":"cbt-024","origNo":24,"subject":"2과목","chapter":"관계형 DB와 SELECT","title":"다음 student 테이블을 이용하여 아래의 SQL을 수행하였을 때 실행 결과는?","refs":[{"type":"image","src":"/cbt-images/cbt73-q024-p-1-605b855c16.png","alt":"보기 자료 1"}],"after":null,"batch":null},{"id":"cbt-025","origNo":25,"subject":"2과목","chapter":"WHERE","title":"다음 테이블과 SQL을 기준으로 실행 결과가 올바른 것은?","refs":[{"type":"sql","code":"[쿼리]SELECT NAME, GRADE, STATUSFROM TB_USERWHERE GRADE = 'A' OR GRADE = 'B' ANDSTATUS = 'ACTIVE';"},{"type":"image","src":"/cbt-images/cbt73-q025-p-1-bbec4a26bb.png","alt":"보기 자료 1"}],"after":null,"batch":null},{"id":"cbt-029","origNo":29,"subject":"2과목","chapter":"윈도우 함수","title":"다음 EMP 테이블에서 사원들의 입사일을 기준으로 이전 입사자와 다음 입사자의 이름을 함께 조회하려고 한다. 아래 SQL 결과가 나오기 위해 (ㄱ), (ㄴ)에 들어갈 알맞은 함수를 짝지은 것은?","refs":[{"type":"sql","code":"[쿼리] SELECT ENAME,(ㄱ)(ENAME) OVER (ORDER BY HIREDATE)AS PREV_EMP,(ㄴ)(ENAME) OVER (ORDER BY HIREDATE)AS NEXT_EMPFROM EMP;"},{"type":"image","src":"/cbt-images/cbt73-q029-p-1-3ee7810114.png","alt":"보기 자료 1"},{"type":"image","src":"/cbt-images/cbt73-q029-p-2-56440d2f7b.png","alt":"보기 자료 2"},{"type":"image","src":"/cbt-images/cbt73-q029-e-1-671f063eb9.png","alt":"해설 자료 1"}],"after":null,"batch":null},{"id":"cbt-033","origNo":33,"subject":"2과목","chapter":"그룹 함수","title":"다음 각 쿼리의 실행 결과로 옳은 것은?","refs":[{"type":"sql","code":"[쿼리][1] SELECT SUM(SAL + BONUS) FROM EMP WHERE DEPTNO = 10;[2] S E L E C T S U M(N V L(S A L, 0) + NVL(BONUS, 0)) FROM EMP;[3] SELECT SUM(SAL) + SUM(BONUS) FROM EMP ;"},{"type":"image","src":"/cbt-images/cbt73-q033-p-1-5eca2459c5.png","alt":"보기 자료 1"}],"after":null,"batch":null},{"id":"cbt-034","origNo":34,"subject":"2과목","chapter":"정규 표현식","title":"다음 중 USER_ID가 대문자 알파벳으로 시작하고 숫자로 끝나는 사용자만 조회하는 조건으로 알맞은 것은?","refs":[{"type":"image","src":"/cbt-images/cbt73-q034-p-1-328fc10038.png","alt":"보기 자료 1"}],"after":null,"batch":null},{"id":"cbt-040","origNo":40,"subject":"2과목","chapter":"WHERE","title":"다음 SQL 실행 결과로 가장 알맞은 것은?","refs":[{"type":"sql","code":"SELECT *FROM TABWHERE COL1 IN (NULL, 'A', 'A', 'B');"},{"type":"image","src":"/cbt-images/cbt73-q040-p-1-c5dff65b5a.png","alt":"보기 자료 1"}],"after":null,"batch":null},{"id":"cbt-043","origNo":43,"subject":"2과목","chapter":"WHERE","title":"다음 SQL 실행 결과로 가장 알맞은 것은?","refs":[{"type":"sql","code":"SELECT STUDENT,CASEWHEN SCORE >= 80 THEN 'PASS'WHEN SCORE IS NULL THEN 'NO DATA'ELSE 'FAIL'END AS RESULTFROM SCORE;"},{"type":"image","src":"/cbt-images/cbt73-q043-p-1-6319e66a9a.png","alt":"보기 자료 1"}],"after":null,"batch":null},{"id":"cbt-047","origNo":47,"subject":"2과목","chapter":"관계형 DB와 SELECT","title":"다음 SQL문의 실행 결과로 올바른 것을 고르시오.","refs":[{"type":"image","src":"/cbt-images/cbt73-q047-p-1-b00a51c52c.png","alt":"보기 자료 1"}],"after":null,"batch":null},{"id":"cbt-050","origNo":50,"subject":"2과목","chapter":"표준 조인","title":"다음 결과는 2개의 테이블을 어떤 Join으로 진행한 것인가?","refs":[{"type":"image","src":"/cbt-images/cbt73-q050-p-1-0878cc10f6.png","alt":"보기 자료 1"}],"after":null,"batch":null},{"id":"cbt-058","origNo":58,"subject":"2과목","chapter":"함수","title":"다음 SQL 실행 결과로 가장 알맞은 것은?","refs":[{"type":"sql","code":"SELECT NAME, NVL(SALARY, 0) AS SALARYFROM EMP;"},{"type":"image","src":"/cbt-images/cbt73-q058-p-1-ce9b42f7e5.png","alt":"보기 자료 1"}],"after":null,"batch":null},{"id":"cbt-062","origNo":62,"subject":"2과목","chapter":"그룹 함수","title":"다음 테이블을 기준으로, 아래의 SQL을 실행했을 때 그 결과로 올바른 행 개수를 고르시오.","refs":[{"type":"sql","code":"SELECT COUNT(AGE) FROM TB_STUDENTWHERE AGE > 20 ;"},{"type":"image","src":"/cbt-images/cbt73-q062-p-1-4be1f15a0f.png","alt":"보기 자료 1"}],"after":null,"batch":null},{"id":"cbt-064","origNo":64,"subject":"2과목","chapter":"관계형 DB와 SELECT","title":"아래 SQL에서 출력되는 ROWS의 개수를 구하시오.","refs":[{"type":"image","src":"/cbt-images/cbt73-q064-p-1-aa22374204.png","alt":"보기 자료 1"}],"after":null,"batch":null},{"id":"cbt-065","origNo":65,"subject":"2과목","chapter":"관계형 DB와 SELECT","title":"아래와 같은 테이블 TAB1, TAB2가 있을 때 아래 SQL의 결과 건수를 알맞게 나열한 것은?","refs":[{"type":"image","src":"/cbt-images/cbt73-q065-p-1-0f21f55181.png","alt":"보기 자료 1"}],"after":null,"batch":null},{"id":"cbt-066","origNo":66,"subject":"2과목","chapter":"GROUP BY·HAVING","title":"다음 SQL 실행 결과로 가장 알맞은 것은?","refs":[{"type":"sql","code":"SELECT CUSTOMER, TOTALFROM (SELECT CUSTOMER, SUM(AMOUNT) ASTOTALFROM TB_ORDERGROUP BY CUSTOMER)WHERE TOTAL > (SELECT AVG(AMOUNT) FROM TB_ORDER);"},{"type":"image","src":"/cbt-images/cbt73-q066-p-1-1072242cb1.png","alt":"보기 자료 1"},{"type":"image","src":"/cbt-images/cbt73-q066-e-1-92a88a1b51.png","alt":"해설 자료 1"}],"after":null,"batch":null},{"id":"cbt-067","origNo":67,"subject":"2과목","chapter":"조인","title":"다음 모델에 대한 설명으로 옳지 않은 것은?","refs":[{"type":"image","src":"/cbt-images/cbt73-q067-p-1-a8434ce9fc.png","alt":"보기 자료 1"}],"after":null,"batch":null},{"id":"cbt-069","origNo":69,"subject":"2과목","chapter":"표준 조인","title":"다음 SQL 실행 결과는 몇 건인가?","refs":[{"type":"sql","code":"SELECT * FROM AFULL OUTER JOIN B ON A.ID = B.IDWHERE A.ID IS NULLOR B.ID IS NULL;"},{"type":"image","src":"/cbt-images/cbt73-q069-p-1-06a133ad94.png","alt":"보기 자료 1"},{"type":"image","src":"/cbt-images/cbt73-q069-e-1-96acba3c9f.png","alt":"해설 자료 1"}],"after":null,"batch":null},{"id":"cbt-070","origNo":70,"subject":"1과목","chapter":"식별자","title":"다음 ERD를 바탕으로 올바른 설명은 무엇인가?","refs":[{"type":"text","content":"[고객 테이블]PK : CUSTOMER_ID[주문 테이블]PK : ORDER_IDFK : CUSTOMER_ID"},{"type":"image","src":"/cbt-images/cbt73-q070-p-1-c6d2b6edd7.png","alt":"보기 자료 1"}],"after":null,"batch":null},{"id":"cbt-077","origNo":77,"subject":"2과목","chapter":"관계형 DB와 SELECT","title":"다음 SQL 실행 결과, 출력되는 이름으로 올바른 것은?","refs":[{"type":"sql","code":"SELECT NAME FROM STUDENT_AINTERSECTSELECT NAME FROM STUDENT_B;"},{"type":"image","src":"/cbt-images/cbt73-q077-p-1-a4f2478644.png","alt":"보기 자료 1"}],"after":null,"batch":null},{"id":"cbt-080","origNo":80,"subject":"2과목","chapter":"WHERE","title":"다음 중 아래 테이블 정의와 인덱스 구조를 참고하여, 인덱스를 효율적으로 액세스할 수 없는 검색조건을 고르시오.","refs":[{"type":"image","src":"/cbt-images/cbt73-q080-p-1-549936cc85.png","alt":"보기 자료 1"}],"after":null,"batch":null},{"id":"cbt-086","origNo":86,"subject":"2과목","chapter":"GROUP BY·HAVING","title":"다음 SQL 실행 결과로 가장 알맞은 것은?","refs":[{"type":"sql","code":"SELECT REGION, AMOUNT, COUNT(*)FROM TB_SALEGROUP BY CUBE(REGION, AMOUNT);"},{"type":"image","src":"/cbt-images/cbt73-q086-p-1-8ecbede4ab.png","alt":"보기 자료 1"}],"after":null,"batch":null},{"id":"cbt-087","origNo":87,"subject":"1과목","chapter":"식별자","title":"다음 ERD를 해석한 것으로 옳지 않은 것은?","refs":[{"type":"image","src":"/cbt-images/cbt73-q087-p-1-7c298b55f5.png","alt":"보기 자료 1"}],"after":null,"batch":null},{"id":"cbt-096","origNo":96,"subject":"2과목","chapter":"TOP N 쿼리","title":"다음 SQL 실행 결과로 가장 알맞은 것은?","refs":[{"type":"sql","code":"[쿼리]SELECT *FROM (SELECT Player, Game, ScoreFROM TB_GAME_SCORE)PIVOT (MAX(Score) FOR Game IN ('Puzzle' AS Puzzle,'Shooter' AS Shooter,'Racing' AS Racing));"},{"type":"image","src":"/cbt-images/cbt73-q096-p-1-968a15c116.png","alt":"보기 자료 1"}],"after":null,"batch":null},{"id":"cbt-097","origNo":97,"subject":"2과목","chapter":"그룹 함수","title":"다음의 예에서 결괏값이 다른 하나는?","refs":[{"type":"image","src":"/cbt-images/cbt73-q097-p-1-60fa417f1f.png","alt":"보기 자료 1"}],"after":null,"batch":null},{"id":"cbt-107","origNo":107,"subject":"2과목","chapter":"GROUP BY·HAVING","title":"다음 SQL의 실행 결과로 출력되는 행 수는?","refs":[{"type":"sql","code":"SELECT CUSTOMER_ID, SUM(AMOUNT)FROM TB_ORDERGROUP BY CUSTOMER_IDHAVING SUM(AMOUNT) >= 2000;"},{"type":"image","src":"/cbt-images/cbt73-q107-p-1-9352318ef9.png","alt":"보기 자료 1"}],"after":null,"batch":null},{"id":"cbt-109","origNo":109,"subject":"2과목","chapter":"윈도우 함수","title":"다음 SQL 실행 결과로 가장 알맞은 것은?","refs":[{"type":"sql","code":"SELECT NAME, DENSE_RANK() OVER (ORDERBY PRICE DESC) AS RNFROM TB_PRODUCT;"},{"type":"image","src":"/cbt-images/cbt73-q109-p-1-3048a8dcf3.png","alt":"보기 자료 1"}],"after":null,"batch":null},{"id":"cbt-111","origNo":111,"subject":"2과목","chapter":"서브쿼리","title":"다음 SQL 실행 시, 최종 출력되는 결과로 가장 알맞은 것은?","refs":[{"type":"sql","code":"SELECT ORDER_IDFROM TB_ORDERWHERE CUST_ID NOT IN (SELECT CUST_IDFROM TB_CUSTOMERWHERE CITY = 'SEOUL');"},{"type":"image","src":"/cbt-images/cbt73-q111-p-1-fca9b14636.png","alt":"보기 자료 1"}],"after":null,"batch":null},{"id":"cbt-112","origNo":112,"subject":"2과목","chapter":"계층형 질의","title":"다음 SQL 실행 결과에 포함되지 않은 직원의 ENAME은?","refs":[{"type":"sql","code":"SELECT LEVEL, ENAME, MGRFROM EMPSTART WITH ENAME = 'KING'CONNECT BY PRIOR EMPNO = MGR;"},{"type":"image","src":"/cbt-images/cbt73-q112-p-1-2e828facdf.png","alt":"보기 자료 1"},{"type":"image","src":"/cbt-images/cbt73-q112-e-1-dea04d4284.png","alt":"해설 자료 1"}],"after":null,"batch":null},{"id":"cbt-114","origNo":114,"subject":"2과목","chapter":"표준 조인","title":"다음 SQL 실행 결과로 가장 알맞은 것은?","refs":[{"type":"sql","code":"SELECT COUNT(*) FROM T1LEFT OUTER JOIN T2 ON T1.COL = T2.COLLEFT OUTER JOIN T3 ON T1.COL = T3.COLWHERE T2.COL IS NOT NULL ;"},{"type":"image","src":"/cbt-images/cbt73-q114-p-1-0fb12d4079.png","alt":"보기 자료 1"},{"type":"image","src":"/cbt-images/cbt73-q114-e-1-ded4bf737c.png","alt":"해설 자료 1"},{"type":"image","src":"/cbt-images/cbt73-q114-e-2-dbd4cce3d6.png","alt":"해설 자료 2"}],"after":null,"batch":null},{"id":"cbt-117","origNo":117,"subject":"1과목","chapter":"속성","title":"{학번, 과목번호}는 결정자이면서 기본키이고 {성적, 지도교수명, 학과명}은 종속자이다. 속성 중 과목번호가 결정자이고 {지도교수명, 학과명}이 과목번호에만 함수적 종속성을 가진다면 이는 몇 차정규형에 속하고 몇 차정 규화의 대상인가?","refs":[{"type":"image","src":"/cbt-images/cbt73-q117-p-1-20dfa60a01.png","alt":"보기 자료 1"}],"after":null,"batch":null},{"id":"cbt-120","origNo":120,"subject":"2과목","chapter":"관계형 DB와 SELECT","title":"다음 주어진 테이블에 대해서 아래와 같은 SQL문을 수행하였을 때 반환되는 ROW 값의 수는 무엇인가?","refs":[{"type":"image","src":"/cbt-images/cbt73-q120-p-1-0a7ca3b427.png","alt":"보기 자료 1"}],"after":null,"batch":null},{"id":"cbt-121","origNo":121,"subject":"2과목","chapter":"윈도우 함수","title":"다음 주어진 테이블에서 아래와 같은 결괏값을 반환하도록 아래의 SQL문의 빈칸에 들어갈 올바른 것을 고르시오.","refs":[{"type":"image","src":"/cbt-images/cbt73-q121-p-1-b9f0d5e00e.png","alt":"보기 자료 1"}],"after":null,"batch":null},{"id":"cbt-130","origNo":130,"subject":"1과목","chapter":"트랜잭션과 Null","title":"EMP 테이블 7788번 사원의 SAL 값이 현재 1,000인 상황에서 아래 TX1, TX2 두 개의 트랜잭션이 동시에 수행되었다. 양쪽 트랜잭션이 모두 완료된 시점에 7788번 사원의 SAL 값은?","refs":[{"type":"image","src":"/cbt-images/cbt73-q130-p-1-4f03d61a83.png","alt":"보기 자료 1"}],"after":null,"batch":null},{"id":"cbt-136","origNo":136,"subject":"2과목","chapter":"서브쿼리","title":"다음 SQL의 실행 결과로 출력되는 행 수는?","refs":[{"type":"sql","code":"SELECT *FROM EMPLOYEE EWHERE EXISTS (SELECT 1FROM SALARY SWHERE S.EMP_ID = E.EMP_IDAND S.AMOUNT IS NOT NULL);"},{"type":"image","src":"/cbt-images/cbt73-q136-p-1-9c12072437.png","alt":"보기 자료 1"},{"type":"image","src":"/cbt-images/cbt73-q136-e-1-2607bf2896.png","alt":"해설 자료 1"}],"after":null,"batch":null},{"id":"cbt-148","origNo":148,"subject":"2과목","chapter":"WHERE","title":"릴레이션 ‘employee’와 ‘department’에서 다음 SQL 질의문의 수행 결과는?","refs":[{"type":"image","src":"/cbt-images/cbt73-q148-p-1-c643e0dbc5.png","alt":"보기 자료 1"}],"after":null,"batch":null},{"id":"cbt-151","origNo":151,"subject":"2과목","chapter":"표준 조인","title":"다음 데이터를 기준으로 각 고객이 주문한 금액을 함께 조회하되, 주문경험이 없는 고객도 포함되도록 하는 SQL로 알맞은 것은?","refs":[{"type":"image","src":"/cbt-images/cbt73-q151-p-1-2bdaa81252.png","alt":"보기 자료 1"}],"after":null,"batch":null},{"id":"cbt-159","origNo":159,"subject":"2과목","chapter":"표준 조인","title":"다음 SQL의 실행 결과로 출력되는 행의 수를 고르시오.","refs":[{"type":"sql","code":"SELECT COUNT(*)FROM EMPLOYEE ELEFT JOIN DEPARTMENT D ON E.DEPT_ID =D.DEPT_IDWHERE D.LOC = 'SEOUL';"},{"type":"image","src":"/cbt-images/cbt73-q159-p-1-bb991cc08e.png","alt":"보기 자료 1"},{"type":"image","src":"/cbt-images/cbt73-q159-e-1-57e8bc5733.png","alt":"해설 자료 1"}],"after":null,"batch":null},{"id":"cbt-163","origNo":163,"subject":"1과목","chapter":"관계","title":"다음 주어진 ERD 관계에 대한 설명으로 옳은 것을 고르시오.","refs":[{"type":"image","src":"/cbt-images/cbt73-q163-p-1-809d927c85.png","alt":"보기 자료 1"}],"after":null,"batch":null},{"id":"cbt-164","origNo":164,"subject":"2과목","chapter":"ORDER BY","title":"다음 SQL 실행 결과로 가장 알맞은 것은?","refs":[{"type":"sql","code":"SELECT *FROM (SELECT ITEM, PRICEFROM TB_ITEMORDER BY PRICE DESC)WHERE ROWNUM = 1;"},{"type":"image","src":"/cbt-images/cbt73-q164-p-1-bf30034fa9.png","alt":"보기 자료 1"}],"after":null,"batch":null},{"id":"cbt-169","origNo":169,"subject":"2과목","chapter":"DDL","title":"다음 중 EMP 테이블의 DEPTNO에 외래키 제약을 추가하는 SQL은?","refs":[{"type":"image","src":"/cbt-images/cbt73-q169-e-1-a313d23cd8.png","alt":"해설 자료 1"}],"after":null,"batch":null},{"id":"cbt-179","origNo":179,"subject":"2과목","chapter":"그룹 함수","title":"다음 SQL 실행 시 최종 출력되는 결과로 가장 알맞은 것은?","refs":[{"type":"sql","code":"SELECT NAMEFROM PRODUCTSWHERE PRICE = (SELECT MAX(PRICE) FROMPRODUCTS);"},{"type":"image","src":"/cbt-images/cbt73-q179-p-1-96cada2ae9.png","alt":"보기 자료 1"}],"after":null,"batch":null},{"id":"cbt-187","origNo":187,"subject":"2과목","chapter":"WHERE","title":"다음 SQL 실행 결과로 출력되는 행은?","refs":[{"type":"sql","code":"SELECT NAME,(SELECT LOCFROM DEPARTMENT DWHERE D.DEPT_ID = E.DEPT_ID)AS LOCATIONFROM EMPLOYEE E;"},{"type":"image","src":"/cbt-images/cbt73-q187-p-1-0c1daf0392.png","alt":"보기 자료 1"}],"after":null,"batch":null},{"id":"cbt-191","origNo":191,"subject":"2과목","chapter":"관계형 DB와 SELECT","title":"아래의 결괏값을 보고 SQL문의 빈칸에 들어갈 수 있는 내용을 고르시오.","refs":[{"type":"image","src":"/cbt-images/cbt73-q191-p-1-fd2f7804e0.png","alt":"보기 자료 1"}],"after":null,"batch":null},{"id":"cbt-196","origNo":196,"subject":"2과목","chapter":"관계형 DB와 SELECT","title":"SQL 트레이스를 수집한 결과 Row Source Operation이 다음과 같았다. 가장 우선적으로 검토할 사항으로 올바른 것은? (단, 한 달간 주문 건수는 평균 50만 건이다)","refs":[{"type":"image","src":"/cbt-images/cbt73-q196-p-1-10e1adeb07.png","alt":"보기 자료 1"}],"after":null,"batch":null},{"id":"cbt-200","origNo":200,"subject":"2과목","chapter":"서브쿼리","title":"다음 SQL 실행 결과로 출력되는 NAME은?","refs":[{"type":"sql","code":"SELECT NAMEFROM EMPLOYEEWHERE SALARY > ALL ( SELECT SALARYFROM EMPLOYEE WHERE NAME != 'C' );"},{"type":"image","src":"/cbt-images/cbt73-q200-p-1-1289875a5c.png","alt":"보기 자료 1"}],"after":null,"batch":null},{"id":"cbt-202","origNo":202,"subject":"2과목","chapter":"윈도우 함수","title":"다음의 PREV_SAL은 어떤 윈도우 함수를 사용해야 하는가?","refs":[{"type":"image","src":"/cbt-images/cbt73-q202-p-1-6332291392.png","alt":"보기 자료 1"}],"after":null,"batch":null},{"id":"cbt-205","origNo":205,"subject":"2과목","chapter":"관계형 DB와 SELECT","title":"테이블 R과 S가 다음과 같을 때, 아래 SQL문 (SELECT 구문)의 실행 결과로 옳은 것은?","refs":[{"type":"image","src":"/cbt-images/cbt73-q205-p-1-e81b86d8b8.png","alt":"보기 자료 1"}],"after":null,"batch":null},{"id":"cbt-206","origNo":206,"subject":"2과목","chapter":"관계형 DB와 SELECT","title":"부서와 사원 테이블을 생성하는 SQL 문장을 수행한 후 튜플 삽입으로 두 테이블의 상태가 다음과 같을 때, 테이블 연산 수행에 대한 설명으로 올바르지 않은 것은?","refs":[{"type":"image","src":"/cbt-images/cbt73-q206-p-1-f802548799.png","alt":"보기 자료 1"}],"after":null,"batch":null},{"id":"cbt-208","origNo":208,"subject":"2과목","chapter":"그룹 함수","title":"다음 주어진 테이블에 대해서 아래와 같은 결과값이 반환되도록 아래 SQL문의 빈칸에 들어갈 것을 고르시오.","refs":[{"type":"image","src":"/cbt-images/cbt73-q208-p-1-e69f392c17.png","alt":"보기 자료 1"}],"after":null,"batch":null}];
+const PAGE_SIZE = 8;
+const TOTAL_PAGES = Math.ceil(ENTRIES.length / PAGE_SIZE);
+let currentPage = 1;
+
+function renderRef(ref) {
+  const cap = ref.caption ? '<div class="ref-caption">' + escapeHtml(ref.caption) + '</div>' : '';
+  if (ref.type === 'table') {
+    let html = cap + '<table class="ref-table"><thead><tr>';
+    for (const h of ref.headers) html += '<th>' + escapeHtml(h) + '</th>';
+    html += '</tr></thead><tbody>';
+    for (const row of ref.rows) {
+      html += '<tr>';
+      for (const cell of row) html += '<td>' + escapeHtml(cell) + '</td>';
+      html += '</tr>';
+    }
+    html += '</tbody></table>';
+    return '<div class="ref">' + html + '</div>';
+  }
+  if (ref.type === 'sql') {
+    return '<div class="ref">' + cap + '<pre class="ref-sql">' + escapeHtml(ref.code) + '</pre></div>';
+  }
+  if (ref.type === 'text') {
+    return '<div class="ref">' + cap + '<div class="ref-text">' + escapeHtml(ref.text || '') + '</div></div>';
+  }
+  if (ref.type === 'image') {
+    const imgSrc = ref.src.startsWith('/') ? '../../public' + ref.src : ref.src;
+    let html = '<div class="ref">' + cap + '<img src="' + escapeHtml(imgSrc) + '" alt="' + escapeHtml(ref.alt || '') + '">';
+    if (ref.alt) html += '<div class="ref-caption" style="margin-top:6px;font-style:italic;">alt: ' + escapeHtml(ref.alt) + '</div>';
+    return html + '</div>';
+  }
+  return '<div class="ref"><span class="ref-unknown">unknown ref type: ' + ref.type + '</span></div>';
+}
+
+function escapeHtml(s) {
+  if (s === null || s === undefined) return '';
+  return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
+
+function renderPage(page) {
+  currentPage = page;
+  const start = (page - 1) * PAGE_SIZE;
+  const slice = ENTRIES.slice(start, start + PAGE_SIZE);
+  const main = document.getElementById('content');
+  let html = '';
+  for (const e of slice) {
+    const beforeHtml = (e.refs || []).map(renderRef).join('');
+    const afterHtml = e.after
+      ? e.after.map(renderRef).join('')
+      : '<div class="ref-todo">⏳ 미정독 (TODO)</div>';
+    const status = e.after
+      ? '<span class="batch">batch-' + e.batch + '</span>'
+      : '<span class="pending">pending</span>';
+    html += '<div class="entry">' +
+      '<div class="entry-header">' +
+        '<span class="key">' + escapeHtml(e.id) + '</span>' +
+        status +
+        '<span class="subject">' + escapeHtml(e.subject || '') + ' · ' + escapeHtml(e.chapter || '') + '</span>' +
+        '<span class="title">' + escapeHtml('#' + (e.origNo ?? '') + '. ' + (e.title || '')) + '</span>' +
+      '</div>' +
+      '<div class="entry-body">' +
+        '<div class="col"><h3>BEFORE (현재 ref)</h3>' + beforeHtml + '</div>' +
+        '<div class="col"><h3>AFTER (변환 ref)</h3>' + afterHtml + '</div>' +
+      '</div>' +
+    '</div>';
+  }
+  main.innerHTML = html;
+  renderPager();
+  window.scrollTo(0, 0);
+  history.replaceState(null, '', '#page=' + page);
+}
+
+function renderPager() {
+  const total = TOTAL_PAGES;
+  const cur = currentPage;
+  const start = (cur - 1) * PAGE_SIZE + 1;
+  const end = Math.min(cur * PAGE_SIZE, ENTRIES.length);
+
+  let pageBtns = '';
+  const range = [];
+  if (total <= 11) {
+    for (let i = 1; i <= total; i++) range.push(i);
+  } else {
+    range.push(1);
+    if (cur > 4) range.push('...');
+    for (let i = Math.max(2, cur - 2); i <= Math.min(total - 1, cur + 2); i++) range.push(i);
+    if (cur < total - 3) range.push('...');
+    range.push(total);
+  }
+  for (const p of range) {
+    if (p === '...') pageBtns += '<span style="padding: 0 4px; color: var(--muted);">…</span>';
+    else pageBtns += '<button data-page="' + p + '"' + (p === cur ? ' class="current"' : '') + '>' + p + '</button>';
+  }
+
+  const pagerHtml =
+    '<div class="nav">' +
+      '<button data-page="1"' + (cur === 1 ? ' disabled' : '') + '>« 처음</button>' +
+      '<button data-page="' + (cur - 1) + '"' + (cur === 1 ? ' disabled' : '') + '>‹ 이전</button>' +
+    '</div>' +
+    pageBtns +
+    '<div class="nav">' +
+      '<button data-page="' + (cur + 1) + '"' + (cur === total ? ' disabled' : '') + '>다음 ›</button>' +
+      '<button data-page="' + total + '"' + (cur === total ? ' disabled' : '') + '>마지막 »</button>' +
+    '</div>' +
+    '<div class="info">' + start + '–' + end + ' / ' + ENTRIES.length + ' (페이지 ' + cur + '/' + total + ')</div>';
+
+  document.getElementById('pager-top').innerHTML = pagerHtml;
+  document.getElementById('pager-bottom').innerHTML = pagerHtml;
+
+  for (const btn of document.querySelectorAll('.pager button[data-page]')) {
+    btn.addEventListener('click', () => {
+      const p = parseInt(btn.dataset.page, 10);
+      if (!isNaN(p) && p >= 1 && p <= total) renderPage(p);
+    });
+  }
+}
+
+const hashMatch = location.hash.match(/page=(\d+)/);
+const initPage = hashMatch ? Math.max(1, Math.min(TOTAL_PAGES, parseInt(hashMatch[1], 10))) : 1;
+renderPage(initPage);
+</script>
+</body>
+</html>
