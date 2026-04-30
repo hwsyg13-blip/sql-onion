@@ -1,7 +1,7 @@
 {
   "source": "sqld-1140",
   "version": 2,
-  "notes": "SQLD 기출/예상 문제 1140 문항 (외부 출처). 이미지 448 개를 public/sqld-images/ 에 추출 후 path 로 참조. | modern-box-conversions 17개 그룹 일괄 적용 (167/1140 문항 변환). | vision-conversions 32그룹 적용 (43 문항 변환). | vision-conversions 47그룹 적용 (48 문항 변환). | vision-conversions 62그룹 적용 (58 문항 변환).",
+  "notes": "SQLD 기출/예상 문제 1140 문항 (외부 출처). 이미지 448 개를 public/sqld-images/ 에 추출 후 path 로 참조. | modern-box-conversions 17개 그룹 일괄 적용 (167/1140 문항 변환). | vision-conversions 32그룹 적용 (43 문항 변환). | vision-conversions 47그룹 적용 (48 문항 변환). | vision-conversions 62그룹 적용 (58 문항 변환). | vision-conversions 77그룹 적용 (61 문항 변환).",
   "authored": [
     {
       "_id": "sqld-0001",
@@ -1074,6 +1074,63 @@
           "src": "/sqld-images/j55-1.png",
           "alt": "고객-주문 ERD (FK_001)",
           "caption": "[ERD]"
+        },
+        {
+          "type": "table",
+          "caption": "[표 : 주문 데이터]",
+          "headers": [
+            "주문번호(PK)",
+            "고객ID(FK)",
+            "주문일시"
+          ],
+          "rows": [
+            [
+              "0001",
+              "C001",
+              "2013-12-24"
+            ],
+            [
+              "0002",
+              "C001",
+              "2013-12-25"
+            ],
+            [
+              "0003",
+              "NULL",
+              "2013-12-26"
+            ],
+            [
+              "0004",
+              "C002",
+              "2013-12-27"
+            ]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "[표 : 고객 데이터]",
+          "headers": [
+            "고객ID(PK)",
+            "고객명",
+            "가입일시"
+          ],
+          "rows": [
+            [
+              "C001",
+              "홍길동",
+              "2013-12-12"
+            ],
+            [
+              "C002",
+              "이순신",
+              "2013-12-13"
+            ]
+          ]
+        },
+        {
+          "type": "sql",
+          "caption": "[SQL]",
+          "code": "ALTER TABLE 주문 ADD CONSTRAINT FK_001 FOREIGN KEY (고객ID)\nREFERENCES 고객 (고객ID) ON DELETE SET NULL;"
         },
         {
           "type": "table",
@@ -2554,9 +2611,61 @@
       "explanation": "정답은 3 번. (해설 미등록)",
       "references": [
         {
-          "type": "image",
-          "src": "/sqld-images/j98-1.png",
-          "alt": "문항 이미지 j98-1"
+          "type": "table",
+          "caption": "TAB1",
+          "headers": [
+            "C1",
+            "C2"
+          ],
+          "rows": [
+            [
+              "A",
+              "1"
+            ],
+            [
+              "B",
+              "2"
+            ],
+            [
+              "C",
+              "3"
+            ],
+            [
+              "D",
+              "4"
+            ],
+            [
+              "E",
+              "5"
+            ]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "TAB2",
+          "headers": [
+            "C1",
+            "C2"
+          ],
+          "rows": [
+            [
+              "B",
+              "2"
+            ],
+            [
+              "C",
+              "3"
+            ],
+            [
+              "D",
+              "4"
+            ]
+          ]
+        },
+        {
+          "type": "sql",
+          "caption": "[SQL]",
+          "code": "SELECT *\nFROM TAB1 A LEFT OUTER JOIN TAB2 B\n  ON ( A.C1 = B.C1 AND B.C2 BETWEEN 1 AND 3)"
         }
       ],
       "optionReferences": [
@@ -3189,6 +3298,11 @@
           "type": "sql",
           "caption": "[SQL]",
           "code": "SELECT A.회원번호, A.회원명\nFROM   회원 A, 동의항목 B\nWHERE  A.회원번호 = B.회원번호\nGROUP BY A.회원번호, A.회원명\nHAVING COUNT(CASE WHEN B.동의여부 = 'N' THEN 0 ELSE NULL END) >= 1\nORDER BY A.회원번호;"
+        },
+        {
+          "type": "sql",
+          "caption": "[SQL]",
+          "code": "SELECT A.회원번호, A.회원명\nFROM   회원 A, 동의항목 B\nWHERE  A.회원번호 = B.회원번호\nGROUP BY A.회원번호, A.회원명\nHAVING COUNT(CASE WHEN B.동의여부 = 'N' THEN 0 ELSE NULL END) >= 1\nORDER BY A.회원번호;"
         }
       ]
     },
@@ -3693,6 +3807,67 @@
               "7,500"
             ]
           ]
+        },
+        {
+          "type": "table",
+          "caption": "[표 : 지역별 월별 이용량]",
+          "headers": [
+            "지역명",
+            "이용월",
+            "이용량"
+          ],
+          "rows": [
+            [
+              "서울",
+              "2014.01",
+              "1,000"
+            ],
+            [
+              "서울",
+              "2014.02",
+              "1,000"
+            ],
+            [
+              "서울",
+              "월별합계",
+              "2,000"
+            ],
+            [
+              "경기",
+              "2014.01",
+              "1,000"
+            ],
+            [
+              "경기",
+              "2014.03",
+              "2,000"
+            ],
+            [
+              "경기",
+              "월별합계",
+              "3,000"
+            ],
+            [
+              "대전",
+              "2014.05",
+              "1,500"
+            ],
+            [
+              "대전",
+              "2014.06",
+              "1,000"
+            ],
+            [
+              "대전",
+              "월별합계",
+              "2,500"
+            ],
+            [
+              "지역전체",
+              "월별합계",
+              "7,500"
+            ]
+          ]
         }
       ]
     },
@@ -3731,9 +3906,143 @@
       "explanation": "SQL의 결과를 보면 설비ID와 에너지코드의 모든 조합에 대하여 사용량합계를 추출하고 있다. CUBE \n함수는 인수로 나열된 항목의 가능한 모든 조합에 대하여 GROUPING을 수행한다. 또한 GROUPING \nSETS은 사용자가 원하는 다양한 조합을 인수로 사용할 수 있다. 위 문제에서 ③번은 CUBE를 사용하였 \n으므로 CUBE절에 나열된 컬럼의 모든 조합 즉, ((설비ID), (에너지코드), (설비ID, 에너지코드))에 \n대해 SUB TOTAL을 만들게 된다. ②번은 GROUPING SETS를 활용하여 ③번의 모든 조합을 직접 기술 하였다.",
       "references": [
         {
-          "type": "image",
-          "src": "/sqld-images/j127-1.png",
-          "alt": "문항 이미지 j127-1"
+          "type": "table",
+          "caption": "[테이블 : 설비]",
+          "headers": [
+            "설비ID",
+            "설비명"
+          ],
+          "rows": [
+            [
+              "1",
+              "설비1"
+            ],
+            [
+              "2",
+              "설비2"
+            ],
+            [
+              "3",
+              "설비3"
+            ]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "[테이블 : 에너지사용]",
+          "headers": [
+            "설비ID",
+            "에너지코드",
+            "사용량"
+          ],
+          "rows": [
+            [
+              "1",
+              "전기",
+              "100"
+            ],
+            [
+              "1",
+              "용수",
+              "200"
+            ],
+            [
+              "1",
+              "바람",
+              "300"
+            ],
+            [
+              "2",
+              "전기",
+              "200"
+            ],
+            [
+              "2",
+              "용수",
+              "300"
+            ],
+            [
+              "3",
+              "전기",
+              "300"
+            ]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "[결과]",
+          "headers": [
+            "설비ID",
+            "에너지코드",
+            "사용량합계"
+          ],
+          "rows": [
+            [
+              "1",
+              "바람",
+              "300"
+            ],
+            [
+              "1",
+              "용수",
+              "200"
+            ],
+            [
+              "1",
+              "전기",
+              "100"
+            ],
+            [
+              "1",
+              "NULL",
+              "600"
+            ],
+            [
+              "2",
+              "용수",
+              "300"
+            ],
+            [
+              "2",
+              "전기",
+              "200"
+            ],
+            [
+              "2",
+              "NULL",
+              "500"
+            ],
+            [
+              "3",
+              "전기",
+              "300"
+            ],
+            [
+              "3",
+              "NULL",
+              "300"
+            ],
+            [
+              "NULL",
+              "바람",
+              "300"
+            ],
+            [
+              "NULL",
+              "용수",
+              "500"
+            ],
+            [
+              "NULL",
+              "전기",
+              "600"
+            ],
+            [
+              "NULL",
+              "NULL",
+              "1400"
+            ]
+          ]
         }
       ],
       "_multiAnswer": "2,3"
@@ -3882,9 +4191,65 @@
       "explanation": "GROUPPING SETS 함수는 표시된 인수들에 대한 개별 집계를 구하는 기능을 하며, 위의 SQL은 \n(상품ID, 월)별 집계 데이터를 출력한다. 각 보기별 SQL은 아래와 같다.\n① GROUPING SETS에 (월, 상품ID) 별, 월별로 집계되었다.\n SELECT 상품ID, 월, SUM(매출액)  AS 매출액\nFROM 월별매출\nWHERE 월 BETWEEN ’2014.10' AND '2014.12’ \nGROUP BY GROUPING SETS((월, 상품ID), 월);\n② GROUPING SETS에 월별, 상품ID별과 전체가 각각 집계되었다.\n SELECT 상품ID, 월, SUM(매출액) AS 매출액\nFROM 월별매출\nWHERE 월 BETWEEN ’2014.10' AND ’2014.12’\n GROUP BY GROUPING SETS(월, 상품ID, ());\n④ GROUPING SETS에 괄호를 사용하지 않아 월별과 상품ID별로 각각 집계되었다.\n SELECT 상품ID, 월, SUM(매출액) AS 매출액\nFROM 월별매출;\nWHERE 월 BETWEEN '2014.10' AND '2014.12'\n GROUP BY GROUPING SETS (월, 상품ID);",
       "references": [
         {
-          "type": "image",
-          "src": "/sqld-images/j129-1.png",
-          "alt": "문항 이미지 j129-1"
+          "type": "table",
+          "caption": "[테이블 : 월별매출]",
+          "headers": [
+            "상품ID",
+            "월",
+            "매출액"
+          ],
+          "rows": [
+            [
+              "P001",
+              "2014.10",
+              "1500"
+            ],
+            [
+              "P001",
+              "2014.11",
+              "1500"
+            ],
+            [
+              "P001",
+              "2014.12",
+              "2500"
+            ],
+            [
+              "P002",
+              "2014.10",
+              "1000"
+            ],
+            [
+              "P002",
+              "2014.11",
+              "2000"
+            ],
+            [
+              "P002",
+              "2014.12",
+              "1500"
+            ],
+            [
+              "P003",
+              "2014.10",
+              "2000"
+            ],
+            [
+              "P003",
+              "2014.11",
+              "1000"
+            ],
+            [
+              "P003",
+              "2014.12",
+              "1000"
+            ]
+          ]
+        },
+        {
+          "type": "sql",
+          "caption": "[SQL]",
+          "code": "SELECT 상품ID, 월, SUM(매출액) AS 매출액\nFROM   월별매출\nWHERE  월 BETWEEN '2014.10' AND '2014.12'\nGROUP BY GROUPING SETS((상품ID, 월));"
         }
       ],
       "optionReferences": [
@@ -4067,7 +4432,8 @@
         {
           "type": "image",
           "src": "/sqld-images/j132-1.png",
-          "alt": "문항 이미지 j132-1"
+          "alt": "게임상품-고객활동-고객 ERD + 결과 예제 (활동점수/등수)",
+          "caption": "[ERD + 결과 예제]"
         }
       ]
     },
@@ -4089,9 +4455,57 @@
       "explanation": " ROW_NUMBER 함수는 ORDER BY절에 의해 정렬된 데이터에 동일 값이 존재하더라도 유일한 순위를 부여하는 함수로서 데이터 그룹 내에 유일한 순위를 추출할 때 사용할 수 있는 함수이다.\n문제의 SQL은 추천경로별(PARTITION BY 추천경로)로 추천점수가 가장 높은 (ORDER BY 추천점수 \nDESC) 데이터를 한건씩만 출력하지만, \n①은 추천경로별로 추천점수가 가장 낮은 데이터를 각 한건씩 출력하였으며,\n③은 전체에서 추천점수가 가장 높은 데이터 한건만을 출력하였고\n④은 전체 데이터를 그대로 출력하였다.",
       "references": [
         {
-          "type": "image",
-          "src": "/sqld-images/j133-1.png",
-          "alt": "문항 이미지 j133-1"
+          "type": "table",
+          "caption": "[테이블 : 추천내역]",
+          "headers": [
+            "추천경로",
+            "추천인",
+            "피추천인",
+            "추천점수"
+          ],
+          "rows": [
+            [
+              "SNS",
+              "나한일",
+              "강감찬",
+              "75"
+            ],
+            [
+              "SNS",
+              "이순신",
+              "강감찬",
+              "80"
+            ],
+            [
+              "이벤트응모",
+              "홍길동",
+              "강감찬",
+              "88"
+            ],
+            [
+              "이벤트응모",
+              "저절로",
+              "이순신",
+              "78"
+            ],
+            [
+              "홈페이지",
+              "저절로",
+              "이대로",
+              "93"
+            ],
+            [
+              "홈페이지",
+              "홍두깨",
+              "심청이",
+              "98"
+            ]
+          ]
+        },
+        {
+          "type": "sql",
+          "caption": "[SQL]",
+          "code": "SELECT 추천경로, 추천인, 피추천인, 추천점수\nFROM   (SELECT 추천경로, 추천인, 피추천인, 추천점수\n              ,ROW_NUMBER() OVER(PARTITION BY 추천경로\n                                 ORDER BY 추천점수 DESC) AS RNUM\n        FROM   추천내역)\nWHERE  RNUM = 1;"
         }
       ],
       "optionReferences": [
@@ -4900,9 +5314,39 @@
       "explanation": "그룹 함수를 사용하는 경우 NULL 값은 연산에서 제외된다. 그래서 NVL 함수를 사용하는 것은 합계 오류 예방과는 전혀 관계가 없다.",
       "references": [
         {
-          "type": "image",
-          "src": "/sqld-images/j191-1.png",
-          "alt": "문항 이미지 j191-1"
+          "type": "table",
+          "caption": "가. 실제 데이터",
+          "headers": [
+            "DEPTNO",
+            "SAL"
+          ],
+          "rows": [
+            [
+              "10",
+              ""
+            ],
+            [
+              "10",
+              "1000"
+            ],
+            [
+              "10",
+              "2000"
+            ],
+            [
+              "20",
+              ""
+            ],
+            [
+              "20",
+              "500"
+            ]
+          ]
+        },
+        {
+          "type": "sql",
+          "caption": "나. SELECT문",
+          "code": "SELECT DEPTNO, SUM(NVL(SAL,0)) FROM DEPT GROUP BY DEPTNO;"
         }
       ]
     },
@@ -4993,9 +5437,101 @@
       "explanation": "이 문제는 계층형 질의(START WITH ~ CONNECT BY)를 이용하여 데이터 간의 연결 관계를 추적하는 문제이다.\n\n주어진 데이터는 남성의류 → 여성의류로 이어지는 관계를 가지며, 이를 통해 계층 구조를 형성할 수 있다.\n\n1. START WITH 조건 (ㄱ)\n\n계층형 질의에서 START WITH는 계층 구조의 시작점(루트 노드)을 지정하는 구문이다.\n\n제시된 보기 중 남성의류 IS NULL은 부모가 없는 최상위 노드를 의미하므로, 시작 조건으로 적절하다.\n\n2. CONNECT BY 조건 (ㄴ)\n\nCONNECT BY PRIOR A = B는\n이전 행(A)이 다음 행(B)과 연결되는 관계를 의미한다.\n\n따라서\nPRIOR 여성의류 = 남성의류는\n이전 행의 여성의류 값이 다음 행의 남성의류와 같은 경우를 연결하므로,\n데이터 간의 연속적인 계층 구조를 올바르게 구성한다.",
       "references": [
         {
-          "type": "image",
-          "src": "/sqld-images/j196-1.png",
-          "alt": "문항 이미지 j196-1"
+          "type": "table",
+          "caption": "[SQLD_64]",
+          "headers": [
+            "남성의류",
+            "여성의류",
+            "의류번호"
+          ],
+          "rows": [
+            [
+              "아웃솔더",
+              "양말",
+              "1"
+            ],
+            [
+              "가디건",
+              "아웃솔더",
+              "2"
+            ],
+            [
+              "겨울외투",
+              "가디건",
+              "3"
+            ],
+            [
+              "자켓",
+              "겨울외투",
+              "4"
+            ],
+            [
+              "",
+              "자켓",
+              "5"
+            ],
+            [
+              "숏바지",
+              "롱바지",
+              "6"
+            ],
+            [
+              "양말",
+              "숏바지",
+              "7"
+            ]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "[결과]",
+          "headers": [
+            "남성의류",
+            "여성의류",
+            "의류번호"
+          ],
+          "rows": [
+            [
+              "",
+              "자켓",
+              "5"
+            ],
+            [
+              "자켓",
+              "겨울외투",
+              "4"
+            ],
+            [
+              "겨울외투",
+              "가디건",
+              "3"
+            ],
+            [
+              "가디건",
+              "아웃솔더",
+              "2"
+            ],
+            [
+              "아웃솔더",
+              "양말",
+              "1"
+            ],
+            [
+              "양말",
+              "숏바지",
+              "7"
+            ],
+            [
+              "숏바지",
+              "롱바지",
+              "6"
+            ]
+          ]
+        },
+        {
+          "type": "sql",
+          "caption": "[SQL]",
+          "code": "SELECT * FROM SQLD_64\nSTART WITH ( ㄱ )\nCONNECT BY PRIOR ( ㄴ );"
         }
       ]
     },
@@ -5017,9 +5553,45 @@
       "explanation": "부서코드 100부터 시작하여 상위부서코드를 상위계층, 부서코드를 하위계층으로 하여 각 상위부서코드별 부서코드값이 계층적으로 조회되는데 WHERE 조건으로 부서코드 = 100에 대한 상위부서코드값이 조회된다. START WITH 문법으로 상위부서코드가 0인 행부터 전개를 시작한다.",
       "references": [
         {
-          "type": "image",
-          "src": "/sqld-images/j197-1.png",
-          "alt": "문항 이미지 j197-1"
+          "type": "table",
+          "caption": "[SQLD_65]",
+          "headers": [
+            "부서id",
+            "부서코드",
+            "상위부서코드"
+          ],
+          "rows": [
+            [
+              "10",
+              "50",
+              "0"
+            ],
+            [
+              "20",
+              "100",
+              "50"
+            ],
+            [
+              "30",
+              "150",
+              "100"
+            ],
+            [
+              "40",
+              "200",
+              "150"
+            ],
+            [
+              "50",
+              "250",
+              "200"
+            ]
+          ]
+        },
+        {
+          "type": "sql",
+          "caption": "[SQL]",
+          "code": "SELECT 상위부서코드\nFROM SQLD_65\n  ( ㄱ ) 부서코드 = 100\n  ( ㄴ ) 상위부서코드 = 0\n  ( ㄷ ) 부서코드 = 상위부서코드;"
         }
       ]
     },
@@ -5065,9 +5637,64 @@
       "explanation": "② 번에서 주어진 테이블을 '반'속성별로 그룹화한 다음 각 '반' 속성별 행의 수를 count하는데 distinct 인자로 중복되는 이름값은 제외하고 count를 수행하여 결괏값과 같이 반환된다.",
       "references": [
         {
-          "type": "image",
-          "src": "/sqld-images/j199-1.png",
-          "alt": "문항 이미지 j199-1"
+          "type": "table",
+          "caption": "[SQLD_67]",
+          "headers": [
+            "반",
+            "이름"
+          ],
+          "rows": [
+            [
+              "1",
+              "꽁쥐"
+            ],
+            [
+              "1",
+              "꽁쥐"
+            ],
+            [
+              "1",
+              "꽁쥐"
+            ],
+            [
+              "2",
+              "소태"
+            ],
+            [
+              "2",
+              "롤라"
+            ],
+            [
+              "3",
+              "소희"
+            ],
+            [
+              "3",
+              "소희"
+            ]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "[결과]",
+          "headers": [
+            "반",
+            "결괏값"
+          ],
+          "rows": [
+            [
+              "1",
+              "1"
+            ],
+            [
+              "2",
+              "2"
+            ],
+            [
+              "3",
+              "1"
+            ]
+          ]
         }
       ]
     },
@@ -5089,9 +5716,28 @@
       "explanation": "나머지 보기는 모두 COL1 값이 NULL일 때 -1을 반환하는데 ④번 보기만 COL1 값이 NULL일 때 0을 반환한다. null은 어떤 값과 비교하면 알수없음이므로 is null을 사용해야 한다.",
       "references": [
         {
-          "type": "image",
-          "src": "/sqld-images/j201-1.png",
-          "alt": "문항 이미지 j201-1"
+          "type": "table",
+          "caption": "[A]",
+          "headers": [
+            "COL1"
+          ],
+          "rows": [
+            [
+              "NULL"
+            ],
+            [
+              "0"
+            ],
+            [
+              "NULL"
+            ],
+            [
+              "0"
+            ],
+            [
+              "NULL"
+            ]
+          ]
         }
       ]
     },
@@ -5113,9 +5759,35 @@
       "explanation": "해당 SQL문은 주어진 테이블인 SQLD_71에서 COL1, COL2, COL3 속성 순서대로 내림차순 정렬을 수행한다. 그래서 먼저 COL1에 대해서 내림차순 정렬을 수행하고 같은 COL1 값에 대해서는 COL2의 내림차순 정렬을 수행하고 같은 COL2 값에 대해서는 COL3을 기준으로 내림차순 정렬한다.",
       "references": [
         {
-          "type": "image",
-          "src": "/sqld-images/j203-1.png",
-          "alt": "문항 이미지 j203-1"
+          "type": "table",
+          "caption": "[SQLD_71]",
+          "headers": [
+            "COL1",
+            "COL2",
+            "COL3"
+          ],
+          "rows": [
+            [
+              "1",
+              "null",
+              "1"
+            ],
+            [
+              "2",
+              "10",
+              "13"
+            ],
+            [
+              "2",
+              "10",
+              "12"
+            ]
+          ]
+        },
+        {
+          "type": "sql",
+          "caption": "[SQL]",
+          "code": "select * from SQLD_71 order by COL1 desc, COL2 desc, COL3 desc;"
         }
       ],
       "optionReferences": [
@@ -5147,9 +5819,55 @@
           "content": "SELECT DEPTNO, JOB, SUM(SAL)\nFROM SQLD_73\nGROUP BY (     );"
         },
         {
-          "type": "image",
-          "src": "/sqld-images/j205-1.png",
-          "alt": "문항 이미지 j205-1"
+          "type": "table",
+          "caption": "[결과]",
+          "headers": [
+            "DEPTNO",
+            "JOB",
+            "SUM(SAL)"
+          ],
+          "rows": [
+            [
+              "10",
+              "CLERK",
+              "1300"
+            ],
+            [
+              "10",
+              "MANAGER",
+              "2450"
+            ],
+            [
+              "10",
+              "",
+              "3750"
+            ],
+            [
+              "20",
+              "CLERK",
+              "1900"
+            ],
+            [
+              "20",
+              "ANALYST",
+              "6000"
+            ],
+            [
+              "20",
+              "MANAGER",
+              "2975"
+            ],
+            [
+              "20",
+              "",
+              "10875"
+            ],
+            [
+              "",
+              "",
+              "14625"
+            ]
+          ]
         }
       ]
     },
@@ -5194,9 +5912,86 @@
       "explanation": "TAB1 테이블에는 행이 4개, TAB2 테이블에는 행이 3개가 있다. KEY 칼럼을 사용해서 INNER JOIN을 하면 같은 것만 찾는다. 따라서 TAB1와 TAB2 테이블의 KEY 칼럼에서 'B'와 'C'가 같기 때문에 2개의 행이 출력된다.",
       "references": [
         {
-          "type": "image",
-          "src": "/sqld-images/j209-1.png",
-          "alt": "문항 이미지 j209-1"
+          "type": "table",
+          "caption": "TAB1",
+          "headers": [
+            "COL1",
+            "COL2",
+            "KEY1"
+          ],
+          "rows": [
+            [
+              "BBB",
+              "123",
+              "B"
+            ],
+            [
+              "DDD",
+              "222",
+              "C"
+            ],
+            [
+              "EEE",
+              "233",
+              "D"
+            ],
+            [
+              "FFF",
+              "143",
+              "E"
+            ]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "TAB2",
+          "headers": [
+            "KEY2",
+            "COL1",
+            "COL2"
+          ],
+          "rows": [
+            [
+              "A",
+              "10",
+              "BC"
+            ],
+            [
+              "B",
+              "10",
+              "CD"
+            ],
+            [
+              "C",
+              "10",
+              "DE"
+            ]
+          ]
+        },
+        {
+          "type": "sql",
+          "caption": "INNER JOIN",
+          "code": "SELECT * FROM TAB1 A INNER JOIN TAB2 B ON (A.KEY1 = B.KEY2);"
+        },
+        {
+          "type": "sql",
+          "caption": "LEFT OUTER JOIN",
+          "code": "SELECT * FROM TAB1 A LEFT OUTER JOIN TAB2 B ON (A.KEY1 = B.KEY2);"
+        },
+        {
+          "type": "sql",
+          "caption": "RIGHT OUTER JOIN",
+          "code": "SELECT * FROM TAB1 A RIGHT OUTER JOIN TAB2 B ON (A.KEY1 = B.KEY2);"
+        },
+        {
+          "type": "sql",
+          "caption": "FULL OUTER JOIN",
+          "code": "SELECT * FROM TAB1 A FULL OUTER JOIN TAB2 B ON (A.KEY1 = B.KEY2);"
+        },
+        {
+          "type": "sql",
+          "caption": "CROSS JOIN",
+          "code": "SELECT * FROM TAB1 A CROSS JOIN TAB2 B;"
         }
       ]
     },
@@ -5222,9 +6017,111 @@
           "content": "SELECT DNAME, JOB, COUNT(*) \"Total Emp\", SUM(SAL) \"Total Sal\" FROM SCOTT.EMP A, SCOTT.DEPT B\nWHERE A.DEPTNO = B.DEPTNO\nGROUP BY CUBE(DNAME,JOB);"
         },
         {
-          "type": "image",
-          "src": "/sqld-images/j210-1.png",
-          "alt": "문항 이미지 j210-1"
+          "type": "table",
+          "caption": "[EMP TABLE]",
+          "headers": [
+            "DEPTNO",
+            "JOB",
+            "SAL"
+          ],
+          "rows": [
+            [
+              "20",
+              "CLERK",
+              "800"
+            ],
+            [
+              "30",
+              "SALESMAN",
+              "1600"
+            ],
+            [
+              "30",
+              "SALESMAN",
+              "1250"
+            ],
+            [
+              "20",
+              "MANAGER",
+              "2975"
+            ],
+            [
+              "30",
+              "SALESMAN",
+              "1250"
+            ],
+            [
+              "30",
+              "MANAGER",
+              "2850"
+            ],
+            [
+              "10",
+              "MANAGER",
+              "2450"
+            ],
+            [
+              "20",
+              "ANALYST",
+              "3000"
+            ],
+            [
+              "10",
+              "PRESIDENT",
+              "5000"
+            ],
+            [
+              "30",
+              "SALESMAN",
+              "1500"
+            ],
+            [
+              "20",
+              "CLERK",
+              "1100"
+            ],
+            [
+              "30",
+              "CLERK",
+              "950"
+            ],
+            [
+              "20",
+              "ANALYST",
+              "3000"
+            ],
+            [
+              "10",
+              "CLERK",
+              "1300"
+            ]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "[DEPT TABLE]",
+          "headers": [
+            "DEPTNO",
+            "DNAME"
+          ],
+          "rows": [
+            [
+              "10",
+              "ACCOUNTING"
+            ],
+            [
+              "20",
+              "RESEARCH"
+            ],
+            [
+              "30",
+              "SALES"
+            ],
+            [
+              "40",
+              "OPERATIONS"
+            ]
+          ]
         }
       ]
     },
@@ -5263,9 +6160,65 @@
       "explanation": "LAG 및 LEAD 함수를 사용하지 않고 이전 행과 다음 행의 값을 구하는 SQL문이다. 만약 LAG 함수와 LEAD 함수를 사용한다면 좀 더 쉽게 SQL 문을 작성할 수가 있다. LAG 함수는 이전 행의 값을 구하고 LEAD 함수는 다음 행의 값을 구한다.",
       "references": [
         {
-          "type": "image",
-          "src": "/sqld-images/j212-1.png",
-          "alt": "문항 이미지 j212-1"
+          "type": "table",
+          "caption": "[결과]",
+          "headers": [
+            "BASE_DATE",
+            "LAST_JUKA",
+            "DEBI_VAL"
+          ],
+          "rows": [
+            [
+              "20230105",
+              "635.99",
+              "-39.18"
+            ],
+            [
+              "20230106",
+              "596.81",
+              "-49.6"
+            ],
+            [
+              "20230107",
+              "547.21",
+              "12.18"
+            ]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "[기초 데이터]",
+          "headers": [
+            "BASE_DATE",
+            "LAST_JUKA"
+          ],
+          "rows": [
+            [
+              "20230104",
+              "638.86"
+            ],
+            [
+              "20230105",
+              "635.99"
+            ],
+            [
+              "20230106",
+              "596.81"
+            ],
+            [
+              "20230107",
+              "547.21"
+            ],
+            [
+              "20230108",
+              "559.39"
+            ]
+          ]
+        },
+        {
+          "type": "sql",
+          "caption": "[SELECT]",
+          "code": "SELECT BASE_DATE, LAST_JUKA\nFROM TEST_A A;"
         }
       ]
     },
