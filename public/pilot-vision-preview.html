@@ -133,6 +133,11 @@
     border-radius: 10px; padding: 14px; min-height: 80px;
     display: flex; justify-content: center; overflow-x: auto;
   }
+  .img-ref {
+    background: var(--bg-card); border: 1px solid var(--border-subtle);
+    border-radius: 10px; padding: 12px; text-align: center;
+  }
+  .img-ref img { max-width: 100%; height: auto; }
   .erd-frame svg { max-width: 100%; height: auto; }
   .erd-frame.failed {
     color: #b91c1c; font-size: 12px; padding: 10px;
@@ -366,27 +371,8 @@
           <div class="col-label">After — 디자인시스템 ref</div>
           <div class="refs-out">
         <div class="ref-block">
-          <div class="caption">Sales ERD</div>
-          <div class="erd-frame" data-mermaid-source="erDiagram
-    CUSTOMER ||--o{ ORDERS : places
-    ORDERS ||--o{ ORDER_ITEM : contains
-    CUSTOMER {
-        string customer_id PK
-        string customer_name
-        string grade
-    }
-    ORDERS {
-        string order_id PK
-        string customer_id FK
-        date order_date
-        string status
-    }
-    ORDER_ITEM {
-        string order_id PK
-        int item_seq PK
-        string product_id FK
-        int qty
-    }"></div>
+          <div class="caption">Sales ERD (CUSTOMER · ORDERS · ORDER_ITEM, 1:N)</div>
+          <div class="img-ref"><img src="/sqld-images/j1115-1.png" alt="Sales ERD" loading="lazy"></div>
         </div></div>
         </div>
       </div>
@@ -606,7 +592,7 @@
         <div class="ref-block">
           <div class="caption">[테이블 : 고객]</div>
           <div class="table-scroll">
-            <table class="rt"><thead><tr><th>고객번호(PK)</th><th>단말기ID(FK)</th></tr></thead><tbody><tr><td>11000</td><td>1000</td></tr><tr><td>12000</td><td><span class="muted">·</span></td></tr><tr><td>13000</td><td><span class="muted">·</span></td></tr><tr><td>14000</td><td>3000</td></tr><tr><td>15000</td><td>4000</td></tr><tr><td>16000</td><td>4000</td></tr></tbody></table>
+            <table class="rt"><thead><tr><th>고객번호(PK)</th><th>고객명</th><th>단말기ID(FK)</th></tr></thead><tbody><tr><td>11000</td><td>홍길동</td><td>1000</td></tr><tr><td>12000</td><td>강감찬</td><td>NULL</td></tr><tr><td>13000</td><td>이순신</td><td>NULL</td></tr><tr><td>14000</td><td>안중근</td><td>3000</td></tr><tr><td>15000</td><td>고길동</td><td>4000</td></tr><tr><td>16000</td><td>이대로</td><td>4000</td></tr></tbody></table>
           </div>
         </div>
         <div class="ref-block">
@@ -644,7 +630,7 @@
         <div class="ref-block">
           <div class="caption">[테이블 : 부서이력]</div>
           <div class="table-scroll">
-            <table class="rt"><thead><tr><th>변경일자(PK)</th><th>부서코드</th><th>담당자</th></tr></thead><tbody><tr><td>2014_01_23</td><td>A007</td><td>이달자</td></tr><tr><td>2015_01_25</td><td>A007</td><td>홍경만</td></tr><tr><td>2015_05_24</td><td>A008</td><td>유재석</td></tr></tbody></table>
+            <table class="rt"><thead><tr><th>변경일자(PK)</th><th>부서코드</th><th>담당자</th></tr></thead><tbody><tr><td>2014.01.23</td><td>A007</td><td>이달자</td></tr><tr><td>2015.01.25</td><td>A007</td><td>홍경만</td></tr><tr><td>2015.05.24</td><td>A008</td><td>유재석</td></tr></tbody></table>
           </div>
         </div>
         <div class="ref-block">
@@ -674,7 +660,7 @@
         <div class="ref-block">
           <div class="caption">[테이블 : 고객]</div>
           <div class="table-scroll">
-            <table class="rt"><thead><tr><th>고객번호(PK)</th><th>고객명</th></tr></thead><tbody><tr><td>001</td><td>홍길동</td></tr><tr><td>002</td><td>이순신</td></tr><tr><td>003</td><td>강감찬</td></tr><tr><td>004</td><td>이상해</td></tr><tr><td>005</td><td>이규혁</td></tr></tbody></table>
+            <table class="rt"><thead><tr><th>고객번호(PK)</th><th>고객명</th></tr></thead><tbody><tr><td>001</td><td>홍길동</td></tr><tr><td>002</td><td>이순신</td></tr><tr><td>003</td><td>강감찬</td></tr><tr><td>004</td><td>이상혁</td></tr><tr><td>005</td><td>이규혁</td></tr></tbody></table>
           </div>
         </div>
         <div class="ref-block">
@@ -716,24 +702,8 @@
           <div class="col-label">After — 디자인시스템 ref</div>
           <div class="refs-out">
         <div class="ref-block">
-          <div class="caption">ERD</div>
-          <div class="erd-frame" data-mermaid-source="erDiagram
-    SERVICE ||--o{ SERVICE_USE : provides
-    MEMBER ||--o{ SERVICE_USE : uses
-    SERVICE {
-        string serviceId PK
-        string serviceName
-        string serviceURL
-    }
-    MEMBER {
-        string memberId PK
-        string memberName
-    }
-    SERVICE_USE {
-        string memberId FK
-        string serviceId FK
-        date useDate
-    }"></div>
+          <div class="caption">[ERD] 서비스 ─&lt; 서비스이용 &gt;─ 회원 (M:N via 서비스이용)</div>
+          <div class="img-ref"><img src="/sqld-images/j101-erd.png" alt="서비스-서비스이용-회원 ERD" loading="lazy"></div>
         </div>
         <div class="ref-block">
           <div class="caption">[수행 SQL]</div>
@@ -779,7 +749,7 @@
             <span class="hl-kw">ELSE</span> 발주일자 <span class="hl-kw">END</span> <span class="hl-kw">AS</span> 발주일자
       ,<span class="hl-kw">SUM</span>(발주수량) <span class="hl-kw">AS</span> 발주수량합계
 <span class="hl-kw">FROM</span>   자재발주
-[<span class="hl-kw">GROUP BY</span> ?]
+(ㄱ)
 <span class="hl-kw">ORDER BY</span> 자재번호, 발주처ID, 발주일자;</code></pre>
         </div>
         <div class="ref-block">

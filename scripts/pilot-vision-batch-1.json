@@ -122,9 +122,10 @@
       "src": "/sqld-images/j1115-1.png",
       "convertedRefs": [
         {
-          "type": "erd",
-          "caption": "Sales ERD",
-          "mermaid": "erDiagram\n    CUSTOMER ||--o{ ORDERS : places\n    ORDERS ||--o{ ORDER_ITEM : contains\n    CUSTOMER {\n        string customer_id PK\n        string customer_name\n        string grade\n    }\n    ORDERS {\n        string order_id PK\n        string customer_id FK\n        date order_date\n        string status\n    }\n    ORDER_ITEM {\n        string order_id PK\n        int item_seq PK\n        string product_id FK\n        int qty\n    }"
+          "type": "image",
+          "src": "/sqld-images/j1115-1.png",
+          "alt": "Sales ERD",
+          "caption": "Sales ERD (CUSTOMER · ORDERS · ORDER_ITEM, 1:N)"
         }
       ]
     },
@@ -303,14 +304,14 @@
         {
           "type": "table",
           "caption": "[테이블 : 고객]",
-          "headers": ["고객번호(PK)", "단말기ID(FK)"],
+          "headers": ["고객번호(PK)", "고객명", "단말기ID(FK)"],
           "rows": [
-            ["11000", "1000"],
-            ["12000", ""],
-            ["13000", ""],
-            ["14000", "3000"],
-            ["15000", "4000"],
-            ["16000", "4000"]
+            ["11000", "홍길동", "1000"],
+            ["12000", "강감찬", "NULL"],
+            ["13000", "이순신", "NULL"],
+            ["14000", "안중근", "3000"],
+            ["15000", "고길동", "4000"],
+            ["16000", "이대로", "4000"]
           ]
         },
         {
@@ -347,9 +348,9 @@
           "caption": "[테이블 : 부서이력]",
           "headers": ["변경일자(PK)", "부서코드", "담당자"],
           "rows": [
-            ["2014_01_23", "A007", "이달자"],
-            ["2015_01_25", "A007", "홍경만"],
-            ["2015_05_24", "A008", "유재석"]
+            ["2014.01.23", "A007", "이달자"],
+            ["2015.01.25", "A007", "홍경만"],
+            ["2015.05.24", "A008", "유재석"]
           ]
         },
         {
@@ -384,7 +385,7 @@
             ["001", "홍길동"],
             ["002", "이순신"],
             ["003", "강감찬"],
-            ["004", "이상해"],
+            ["004", "이상혁"],
             ["005", "이규혁"]
           ]
         },
@@ -417,9 +418,10 @@
       "_classic": true,
       "convertedRefs": [
         {
-          "type": "erd",
-          "caption": "ERD",
-          "mermaid": "erDiagram\n    SERVICE ||--o{ SERVICE_USE : provides\n    MEMBER ||--o{ SERVICE_USE : uses\n    SERVICE {\n        string serviceId PK\n        string serviceName\n        string serviceURL\n    }\n    MEMBER {\n        string memberId PK\n        string memberName\n    }\n    SERVICE_USE {\n        string memberId FK\n        string serviceId FK\n        date useDate\n    }"
+          "type": "image",
+          "src": "/sqld-images/j101-erd.png",
+          "alt": "서비스-서비스이용-회원 ERD",
+          "caption": "[ERD] 서비스 ─< 서비스이용 >─ 회원 (M:N via 서비스이용)"
         },
         {
           "type": "sql",
@@ -449,7 +451,7 @@
         {
           "type": "sql",
           "caption": "[SQL]",
-          "code": "SELECT CASE WHEN GROUPING(자재번호) = 1 THEN '자재전체'\n            ELSE 자재번호 END AS 자재번호\n      ,CASE WHEN GROUPING(발주처ID) = 1 THEN '발주처전체'\n            ELSE 발주처ID END AS 발주처ID\n      ,CASE WHEN GROUPING(발주일자) = 1 THEN '발주일자전체'\n            ELSE 발주일자 END AS 발주일자\n      ,SUM(발주수량) AS 발주수량합계\nFROM   자재발주\n[GROUP BY ?]\nORDER BY 자재번호, 발주처ID, 발주일자;"
+          "code": "SELECT CASE WHEN GROUPING(자재번호) = 1 THEN '자재전체'\n            ELSE 자재번호 END AS 자재번호\n      ,CASE WHEN GROUPING(발주처ID) = 1 THEN '발주처전체'\n            ELSE 발주처ID END AS 발주처ID\n      ,CASE WHEN GROUPING(발주일자) = 1 THEN '발주일자전체'\n            ELSE 발주일자 END AS 발주일자\n      ,SUM(발주수량) AS 발주수량합계\nFROM   자재발주\n(ㄱ)\nORDER BY 자재번호, 발주처ID, 발주일자;"
         },
         {
           "type": "table",
