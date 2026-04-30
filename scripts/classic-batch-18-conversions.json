@@ -1,0 +1,291 @@
+{
+  "schema": "md5(image content) → 변환된 references 배열. 클래식 한글 시험지 batch 18.",
+  "method": "Claude 시각 정독 (sharp 4x lanczos3 처음부터)",
+  "batchSize": 15,
+  "groups": {
+    "ebbbe2d18750": {
+      "name": "j789 — TAB1 5행 + 결과 CNT10/CNT20 1행 (PIVOT 패턴)",
+      "imageKey": "j789",
+      "refs": [
+        {
+          "type": "table",
+          "caption": "<TAB1>",
+          "headers": ["COL1", "COL2"],
+          "rows": [["A", "10"], ["B", "10"], ["C", "10"], ["D", "20"], ["E", "20"]]
+        },
+        {
+          "type": "table",
+          "caption": "<결과>",
+          "headers": ["CNT10", "CNT20"],
+          "rows": [["3", "2"]]
+        }
+      ]
+    },
+    "57f813241121": {
+      "name": "j790 — EMP ENAME 5행 (SMITH/ALLEN/KING/BLAKE/CLARK)",
+      "imageKey": "j790",
+      "refs": [
+        {
+          "type": "table",
+          "caption": "<EMP>",
+          "headers": ["ENAME"],
+          "rows": [["SMITH"], ["ALLEN"], ["KING"], ["BLAKE"], ["CLARK"]]
+        }
+      ]
+    },
+    "3db04815ff2f": {
+      "name": "j794 — EMP 5행 + 결과 5행 (자기 참조 JOIN, MARTIN MGR/MANAGER_NAME 빈)",
+      "imageKey": "j794",
+      "refs": [
+        {
+          "type": "table",
+          "caption": "<EMP>",
+          "headers": ["EMPNO", "ENAME", "MGR", "DEPTNO"],
+          "rows": [
+            ["7369", "SMITH", "7566", "20"],
+            ["7499", "ALLEN", "7654", "30"],
+            ["7521", "WARD", "7566", "30"],
+            ["7566", "JONES", "7654", "20"],
+            ["7654", "MARTIN", "", "30"]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "<결과>",
+          "headers": ["EMPNO", "ENAME", "MANAGER_NAME"],
+          "rows": [
+            ["7369", "SMITH", "JONES"],
+            ["7499", "ALLEN", "MARTIN"],
+            ["7521", "WARD", "JONES"],
+            ["7566", "JONES", "MARTIN"],
+            ["7654", "MARTIN", ""]
+          ]
+        }
+      ]
+    },
+    "6bef7b77f017": {
+      "name": "j795 — TAB1 COL1/COL2 5행 (E NULL) + TAB2 COL2/COL3 4행 (NULL 1행)",
+      "imageKey": "j795",
+      "refs": [
+        {
+          "type": "table",
+          "caption": "<TAB1>",
+          "headers": ["COL1", "COL2"],
+          "rows": [
+            ["A", "10"],
+            ["B", "20"],
+            ["C", "30"],
+            ["D", "10"],
+            ["E", "NULL"]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "<TAB2>",
+          "headers": ["COL2", "COL3"],
+          "rows": [
+            ["10", "1"],
+            ["20", "2"],
+            ["20", "3"],
+            ["NULL", "4"]
+          ]
+        }
+      ]
+    },
+    "4049c8e32eff": {
+      "name": "j799 — TAB1 COL1/COL2/COL3 3행 (각 행 NULL 1개 대각선)",
+      "imageKey": "j799",
+      "refs": [
+        {
+          "type": "table",
+          "caption": "<TAB1>",
+          "headers": ["COL1", "COL2", "COL3"],
+          "rows": [
+            ["NULL", "1", "1"],
+            ["1", "1", "NULL"],
+            ["1", "NULL", "1"]
+          ]
+        }
+      ]
+    },
+    "5436980e2cb5": {
+      "name": "j825 — 고객-상품-주문-주문상품 4엔티티 ERD",
+      "imageKey": "j825",
+      "refs": [
+        {
+          "type": "image",
+          "src": "/sqld-images/j825-1.png",
+          "alt": "4-엔티티 ERD: 고객(고객번호 PK), 상품(상품번호 PK), 주문(주문번호 PK), 주문상품(주문번호 PK + 상품번호 PK 복합키)",
+          "caption": "[ERD]"
+        }
+      ]
+    },
+    "c0c698934b8a": {
+      "name": "j826 — 병원-의사-수술 ERD (관계 ㄱ/ㄴ/ㄷ 라벨)",
+      "imageKey": "j826",
+      "refs": [
+        {
+          "type": "image",
+          "src": "/sqld-images/j826-1.png",
+          "alt": "병원 ─ 의사 ─ 수술 ERD. 병원-의사 관계 ㄱ, 의사-수술 관계 ㄴ, 병원-수술 관계 ㄷ (3개 관계 라벨)",
+          "caption": "[ERD]"
+        }
+      ]
+    },
+    "e69dd390302a": {
+      "name": "j832 — TAB1 COL1/COL2 7행",
+      "imageKey": "j832",
+      "refs": [
+        {
+          "type": "table",
+          "caption": "<TAB1>",
+          "headers": ["COL1", "COL2"],
+          "rows": [
+            ["1", "A"],
+            ["2", "B"],
+            ["3", "C"],
+            ["4", "D"],
+            ["1", "A"],
+            ["2", "B"],
+            ["3", "A"]
+          ]
+        }
+      ]
+    },
+    "b444b5836e0e": {
+      "name": "j833 — A 테이블 ID/NAME 3행 + B 테이블 ID/SUBJECT 3행",
+      "imageKey": "j833",
+      "refs": [
+        {
+          "type": "table",
+          "caption": "A 테이블",
+          "headers": ["ID", "NAME"],
+          "rows": [["1", "철수"], ["2", "영희"], ["3", "민수"]]
+        },
+        {
+          "type": "table",
+          "caption": "B 테이블",
+          "headers": ["ID", "SUBJECT"],
+          "rows": [["2", "수학"], ["3", "영어"], ["4", "과학"]]
+        }
+      ]
+    },
+    "a3f71bca1be4": {
+      "name": "j835 — TAB1 COL1/COL2 5행",
+      "imageKey": "j835",
+      "refs": [
+        {
+          "type": "table",
+          "caption": "TAB1",
+          "headers": ["COL1", "COL2"],
+          "rows": [
+            ["1", "10"],
+            ["1", "20"],
+            ["2", "30"],
+            ["3", "40"],
+            ["3", "50"]
+          ]
+        }
+      ]
+    },
+    "439f722b6460": {
+      "name": "j839 — YEAR/REGION/AMOUNT 4행 (캡션 없음)",
+      "imageKey": "j839",
+      "refs": [
+        {
+          "type": "table",
+          "caption": "[데이터]",
+          "headers": ["YEAR", "REGION", "AMOUNT"],
+          "rows": [
+            ["2023", "EAST", "100"],
+            ["2023", "WEST", "150"],
+            ["2024", "EAST", "200"],
+            ["2024", "WEST", "250"]
+          ]
+        }
+      ]
+    },
+    "6e950b397d93": {
+      "name": "j840 — ORDER_ID/AMOUNT 5행 (NULL 2행)",
+      "imageKey": "j840",
+      "refs": [
+        {
+          "type": "table",
+          "caption": "[데이터]",
+          "headers": ["ORDER_ID", "AMOUNT"],
+          "rows": [
+            ["1", "100"],
+            ["2", "NULL"],
+            ["3", "200"],
+            ["4", "NULL"],
+            ["5", "300"]
+          ]
+        }
+      ]
+    },
+    "48aee160b095": {
+      "name": "j844 — EMP 테이블 6행 + 부서별 급여 합계 3행 (HR/IT/Sales)",
+      "imageKey": "j844",
+      "refs": [
+        {
+          "type": "table",
+          "caption": "EMP 테이블",
+          "headers": ["EMP_ID", "DEPT_NAME", "SALARY"],
+          "rows": [
+            ["101", "HR", "2500"],
+            ["102", "IT", "3000"],
+            ["103", "IT", "2200"],
+            ["104", "Sales", "1800"],
+            ["105", "Sales", "2200"],
+            ["106", "HR", "2000"]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "집계 결과 (부서별 급여 합계)",
+          "headers": ["DEPT_NAME", "SUM(SALARY)"],
+          "rows": [
+            ["IT", "5200"],
+            ["HR", "4500"],
+            ["Sales", "4000"]
+          ]
+        }
+      ]
+    },
+    "6aaaa8958077": {
+      "name": "j845 — SALES YEAR/REGION/AMOUNT 4행 (j839와 다른 AMOUNT)",
+      "imageKey": "j845",
+      "refs": [
+        {
+          "type": "table",
+          "caption": "<SALES>",
+          "headers": ["YEAR", "REGION", "AMOUNT"],
+          "rows": [
+            ["2023", "EAST", "100"],
+            ["2023", "WEST", "200"],
+            ["2024", "EAST", "150"],
+            ["2024", "WEST", "250"]
+          ]
+        }
+      ]
+    },
+    "1615cbb37e15": {
+      "name": "j848 — 테이블 A 3행 + 테이블 B 4행 (CHOI 중복 2회)",
+      "imageKey": "j848",
+      "refs": [
+        {
+          "type": "table",
+          "caption": "테이블 A",
+          "headers": ["ID", "NAME"],
+          "rows": [["1", "KIM"], ["2", "LEE"], ["3", "PARK"]]
+        },
+        {
+          "type": "table",
+          "caption": "테이블 B",
+          "headers": ["ID", "NAME"],
+          "rows": [["2", "LEE"], ["3", "PARK"], ["4", "CHOI"], ["4", "CHOI"]]
+        }
+      ]
+    }
+  }
+}
