@@ -7992,9 +7992,103 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "image",
-        "src": "/sqld-images/j95-1.png",
-        "alt": "문항 이미지 j95-1"
+        "type": "table",
+        "caption": "[테이블 : OS]",
+        "headers": [
+          "OSID(PK)",
+          "OS명"
+        ],
+        "rows": [
+          [
+            "100",
+            "Android"
+          ],
+          [
+            "200",
+            "iOS"
+          ],
+          [
+            "300",
+            "Bada"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "[테이블 : 단말기]",
+        "headers": [
+          "단말기ID(PK)",
+          "단말기명",
+          "OSID(FK)"
+        ],
+        "rows": [
+          [
+            "1000",
+            "A1000",
+            "100"
+          ],
+          [
+            "2000",
+            "B2000",
+            "100"
+          ],
+          [
+            "3000",
+            "C3000",
+            "200"
+          ],
+          [
+            "4000",
+            "D3000",
+            "300"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "[테이블 : 고객]",
+        "headers": [
+          "고객번호(PK)",
+          "고객명",
+          "단말기ID(FK)"
+        ],
+        "rows": [
+          [
+            "11000",
+            "홍길동",
+            "1000"
+          ],
+          [
+            "12000",
+            "강감찬",
+            "NULL"
+          ],
+          [
+            "13000",
+            "이순신",
+            "NULL"
+          ],
+          [
+            "14000",
+            "안중근",
+            "3000"
+          ],
+          [
+            "15000",
+            "고길동",
+            "4000"
+          ],
+          [
+            "16000",
+            "이대로",
+            "4000"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "caption": "[SQL]",
+        "code": "SELECT A.고객번호, A.고객명, B.단말기ID, B.단말기명, C.OSID, C.OS명\nFROM   고객 A LEFT OUTER JOIN 단말기 B\nON     (A.고객번호 IN (11000, 12000) AND A.단말기ID = B.단말기ID) LEFT OUTER JOIN OS C\nON     (B.OSID = C.OSID)\nORDER BY A.고객번호;"
       }
     ]
   },
@@ -8104,8 +8198,14 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "image",
-        "src": "/sqld-images/j101-1.png",
-        "alt": "문항 이미지 j101-1"
+        "src": "/sqld-images/j101-erd.png",
+        "alt": "ERD",
+        "caption": "ERD"
+      },
+      {
+        "type": "sql",
+        "caption": "[수행 SQL]",
+        "code": "SELECT A.서비스ID, A.서비스명, B.서비스URL\nFROM   (SELECT 서비스ID\n        FROM   서비스\n        INTERSECT\n        SELECT 서비스ID\n        FROM   서비스이용) A, 서비스 B\nWHERE  A.서비스ID = B.서비스ID;"
       }
     ]
   },
@@ -8152,9 +8252,53 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "image",
-        "src": "/sqld-images/j104-1.png",
-        "alt": "문항 이미지 j104-1"
+        "type": "table",
+        "caption": "[테이블 : TBL1]",
+        "headers": [
+          "COL1",
+          "COL2"
+        ],
+        "rows": [
+          [
+            "AA",
+            "A1"
+          ],
+          [
+            "AB",
+            "A2"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "[테이블 : TBL2]",
+        "headers": [
+          "COL1",
+          "COL2"
+        ],
+        "rows": [
+          [
+            "AA",
+            "A1"
+          ],
+          [
+            "AB",
+            "A2"
+          ],
+          [
+            "AC",
+            "A3"
+          ],
+          [
+            "AD",
+            "A4"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "caption": "[SQL]",
+        "code": "SELECT COL1, COL2, COUNT(*) AS CNT\nFROM   (SELECT COL1, COL2\n        FROM   TBL1\n        UNION ALL\n        SELECT COL1, COL2\n        FROM   TBL2\n        UNION\n        SELECT COL1, COL2\n        FROM   TBL1)\nGROUP BY COL1, COL2;"
       }
     ]
   },
@@ -8180,9 +8324,61 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "image",
-        "src": "/sqld-images/j105-1.png",
-        "alt": "문항 이미지 j105-1"
+        "type": "table",
+        "caption": "T1(A, B, C)",
+        "headers": [
+          "A",
+          "B",
+          "C"
+        ],
+        "rows": [
+          [
+            "A3",
+            "B2",
+            "C3"
+          ],
+          [
+            "A1",
+            "B1",
+            "C1"
+          ],
+          [
+            "A2",
+            "B1",
+            "C2"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "T2(A, B, C)",
+        "headers": [
+          "A",
+          "B",
+          "C"
+        ],
+        "rows": [
+          [
+            "A1",
+            "B1",
+            "C1"
+          ],
+          [
+            "A3",
+            "B2",
+            "C3"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "caption": "가.",
+        "code": "SELECT A, B, C FROM R1\nUNION ALL\nSELECT A, B, C FROM R2"
+      },
+      {
+        "type": "sql",
+        "caption": "나.",
+        "code": "SELECT A, B, C FROM R1\nUNION\nSELECT A, B, C FROM R2"
       }
     ]
   },
@@ -8237,7 +8433,8 @@ export const AI_MOCK: QuizQuestion[] = [
       {
         "type": "image",
         "src": "/sqld-images/j107-1.png",
-        "alt": "문항 이미지 j107-1"
+        "alt": "회원기본정보 ─ 회원상세정보 ERD",
+        "caption": "[데이터 모델]"
       }
     ]
   },
@@ -8263,9 +8460,69 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "image",
-        "src": "/sqld-images/j109-1.png",
-        "alt": "문항 이미지 j109-1"
+        "type": "table",
+        "caption": "[테이블 : 사원]",
+        "headers": [
+          "사원번호(PK)",
+          "사원명",
+          "입사일자",
+          "매니저사원번호(FK)"
+        ],
+        "rows": [
+          [
+            "001",
+            "홍길동",
+            "2012-01-01",
+            "NULL"
+          ],
+          [
+            "002",
+            "강감찬",
+            "2012-01-01",
+            "001"
+          ],
+          [
+            "003",
+            "이순신",
+            "2013-01-01",
+            "001"
+          ],
+          [
+            "004",
+            "이민정",
+            "2013-01-01",
+            "001"
+          ],
+          [
+            "005",
+            "이병헌",
+            "2013-01-01",
+            "NULL"
+          ],
+          [
+            "006",
+            "안성기",
+            "2014-01-01",
+            "005"
+          ],
+          [
+            "007",
+            "이수근",
+            "2014-01-01",
+            "005"
+          ],
+          [
+            "008",
+            "김병만",
+            "2014-01-01",
+            "005"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "caption": "[SQL]",
+        "code": "SELECT 사원번호, 사원명, 입사일자, 매니저사원번호\nFROM   사원\nSTART WITH 매니저사원번호 IS NULL\nCONNECT BY PRIOR 사원번호 = 매니저사원번호\nAND 입사일자 BETWEEN '2013-01-01' AND '2013-12-31'\nORDER SIBLINGS BY 사원번호;"
       }
     ]
   },
@@ -8333,9 +8590,104 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "image",
-        "src": "/sqld-images/j112-1.png",
-        "alt": "문항 이미지 j112-1"
+        "type": "table",
+        "caption": "[테이블 : 일자별매출]",
+        "headers": [
+          "일자",
+          "매출액"
+        ],
+        "rows": [
+          [
+            "2015.11.01",
+            "1000"
+          ],
+          [
+            "2015.11.02",
+            "1000"
+          ],
+          [
+            "2015.11.03",
+            "1000"
+          ],
+          [
+            "2015.11.04",
+            "1000"
+          ],
+          [
+            "2015.11.05",
+            "1000"
+          ],
+          [
+            "2015.11.06",
+            "1000"
+          ],
+          [
+            "2015.11.07",
+            "1000"
+          ],
+          [
+            "2015.11.08",
+            "1000"
+          ],
+          [
+            "2015.11.09",
+            "1000"
+          ],
+          [
+            "2015.11.10",
+            "1000"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "[결과 : 일자별 누적매출액]",
+        "headers": [
+          "일자",
+          "누적매출액"
+        ],
+        "rows": [
+          [
+            "2015.11.01",
+            "1000"
+          ],
+          [
+            "2015.11.02",
+            "2000"
+          ],
+          [
+            "2015.11.03",
+            "3000"
+          ],
+          [
+            "2015.11.04",
+            "4000"
+          ],
+          [
+            "2015.11.05",
+            "5000"
+          ],
+          [
+            "2015.11.06",
+            "6000"
+          ],
+          [
+            "2015.11.07",
+            "7000"
+          ],
+          [
+            "2015.11.08",
+            "8000"
+          ],
+          [
+            "2015.11.09",
+            "9000"
+          ],
+          [
+            "2015.11.10",
+            "10000"
+          ]
+        ]
       }
     ]
   },
@@ -8361,9 +8713,60 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "image",
-        "src": "/sqld-images/j113-1.png",
-        "alt": "문항 이미지 j113-1"
+        "type": "sql",
+        "caption": "[SQL]",
+        "code": "SELECT COUNT(DISTINCT A||B)\nFROM   EMP\nWHERE  D = (SELECT D FROM DEPT WHERE E = 'i');"
+      },
+      {
+        "type": "table",
+        "caption": "EMP 테이블",
+        "headers": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ],
+        "rows": [
+          [
+            "1",
+            "a",
+            "1",
+            "x"
+          ],
+          [
+            "2",
+            "a",
+            "1",
+            "x"
+          ],
+          [
+            "3",
+            "b",
+            "2",
+            "y"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "DEPT 테이블",
+        "headers": [
+          "D",
+          "E",
+          "F"
+        ],
+        "rows": [
+          [
+            "x",
+            "i",
+            "5"
+          ],
+          [
+            "y",
+            "m",
+            "6"
+          ]
+        ]
       }
     ]
   },
@@ -8418,7 +8821,13 @@ export const AI_MOCK: QuizQuestion[] = [
       {
         "type": "image",
         "src": "/sqld-images/j116-1.png",
-        "alt": "문항 이미지 j116-1"
+        "alt": "회원-동의항목-약관항목 ERD",
+        "caption": "[ERD]"
+      },
+      {
+        "type": "sql",
+        "caption": "[SQL]",
+        "code": "SELECT A.회원번호, A.회원명\nFROM   회원 A, 동의항목 B\nWHERE  A.회원번호 = B.회원번호\nGROUP BY A.회원번호, A.회원명\nHAVING COUNT(CASE WHEN B.동의여부 = 'N' THEN 0 ELSE NULL END) >= 1\nORDER BY A.회원번호;"
       }
     ]
   },
@@ -8446,7 +8855,8 @@ export const AI_MOCK: QuizQuestion[] = [
       {
         "type": "image",
         "src": "/sqld-images/j117-1.png",
-        "alt": "문항 이미지 j117-1"
+        "alt": "회원-메일발송-이벤트 ERD + SQL with 4 blanks",
+        "caption": "[ERD + SQL with ㉠/㉡/㉢/㉣ blanks]"
       }
     ]
   },
@@ -8522,7 +8932,8 @@ export const AI_MOCK: QuizQuestion[] = [
       {
         "type": "image",
         "src": "/sqld-images/j120-1.png",
-        "alt": "문항 이미지 j120-1"
+        "alt": "품질평가항목-평가결과-평가대상상품 데이터 모델",
+        "caption": "[데이터 모델]"
       }
     ]
   },
@@ -8548,9 +8959,174 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "image",
-        "src": "/sqld-images/j121-1.png",
-        "alt": "문항 이미지 j121-1"
+        "type": "table",
+        "caption": "[테이블 : 부서]",
+        "headers": [
+          "부서코드(PK)",
+          "부서명",
+          "상위부서코드",
+          "담당자"
+        ],
+        "rows": [
+          [
+            "A001",
+            "대표이사",
+            "NULL",
+            "김대표"
+          ],
+          [
+            "A002",
+            "영업본부",
+            "A001",
+            "홍길동"
+          ],
+          [
+            "A003",
+            "경영지원본부",
+            "A001",
+            "이순신"
+          ],
+          [
+            "A004",
+            "마케팅본부",
+            "A001",
+            "강감찬"
+          ],
+          [
+            "A005",
+            "해외영업팀",
+            "A002",
+            "이청용"
+          ],
+          [
+            "A006",
+            "국내영업팀",
+            "A002",
+            "박지성"
+          ],
+          [
+            "A007",
+            "총무팀",
+            "A003",
+            "차두리"
+          ],
+          [
+            "A008",
+            "인사팀",
+            "A003",
+            "이민정"
+          ],
+          [
+            "A009",
+            "해외마케팅팀",
+            "A004",
+            "이병헌"
+          ],
+          [
+            "A010",
+            "국내마케팅팀",
+            "A004",
+            "차승원"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "[테이블 : 부서이력]",
+        "headers": [
+          "변경일자(PK)",
+          "부서코드(PK)",
+          "담당자"
+        ],
+        "rows": [
+          [
+            "2014.01.23",
+            "A007",
+            "이달자"
+          ],
+          [
+            "2015.01.25",
+            "A007",
+            "홍경민"
+          ],
+          [
+            "2015.01.25",
+            "A008",
+            "유재석"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "[결과]",
+        "headers": [
+          "부서코드(PK)",
+          "부서명",
+          "상위부서코드",
+          "담당자"
+        ],
+        "rows": [
+          [
+            "A001",
+            "대표이사",
+            "NULL",
+            "김대표"
+          ],
+          [
+            "A002",
+            "영업본부",
+            "A001",
+            "홍길동"
+          ],
+          [
+            "A003",
+            "경영지원본부",
+            "A001",
+            "이순신"
+          ],
+          [
+            "A004",
+            "마케팅본부",
+            "A001",
+            "강감찬"
+          ],
+          [
+            "A005",
+            "해외영업팀",
+            "A002",
+            "이청용"
+          ],
+          [
+            "A006",
+            "국내영업팀",
+            "A002",
+            "박지성"
+          ],
+          [
+            "A007",
+            "총무팀",
+            "A003",
+            "홍경민"
+          ],
+          [
+            "A008",
+            "인사팀",
+            "A003",
+            "유재석"
+          ],
+          [
+            "A009",
+            "해외마케팅팀",
+            "A004",
+            "이병헌"
+          ],
+          [
+            "A010",
+            "국내마케팅팀",
+            "A004",
+            "차승원"
+          ]
+        ]
       }
     ]
   },
@@ -8599,7 +9175,69 @@ export const AI_MOCK: QuizQuestion[] = [
       {
         "type": "image",
         "src": "/sqld-images/j125-1.png",
-        "alt": "문항 이미지 j125-1"
+        "alt": "지역-이용내역 ERD",
+        "caption": "[데이터 모델]"
+      },
+      {
+        "type": "table",
+        "caption": "[표 : 지역별 월별 이용량]",
+        "headers": [
+          "지역명",
+          "이용월",
+          "이용량"
+        ],
+        "rows": [
+          [
+            "서울",
+            "2014.01",
+            "1,000"
+          ],
+          [
+            "서울",
+            "2014.02",
+            "1,000"
+          ],
+          [
+            "서울",
+            "월별합계",
+            "2,000"
+          ],
+          [
+            "경기",
+            "2014.01",
+            "1,000"
+          ],
+          [
+            "경기",
+            "2014.03",
+            "2,000"
+          ],
+          [
+            "경기",
+            "월별합계",
+            "3,000"
+          ],
+          [
+            "대전",
+            "2014.05",
+            "1,500"
+          ],
+          [
+            "대전",
+            "2014.06",
+            "1,000"
+          ],
+          [
+            "대전",
+            "월별합계",
+            "2,500"
+          ],
+          [
+            "지역전체",
+            "월별합계",
+            "7,500"
+          ]
+        ]
       }
     ]
   },
@@ -8674,9 +9312,111 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "image",
-        "src": "/sqld-images/j128-1.png",
-        "alt": "문항 이미지 j128-1"
+        "type": "table",
+        "caption": "[테이블 : 자재발주]",
+        "headers": [
+          "자재번호",
+          "발주처ID",
+          "발주일자",
+          "발주수량"
+        ],
+        "rows": [
+          [
+            "1",
+            "001",
+            "20150102",
+            "100"
+          ],
+          [
+            "1",
+            "001",
+            "20150103",
+            "200"
+          ],
+          [
+            "2",
+            "001",
+            "20150102",
+            "200"
+          ],
+          [
+            "2",
+            "002",
+            "20150102",
+            "100"
+          ],
+          [
+            "3",
+            "001",
+            "20150103",
+            "100"
+          ],
+          [
+            "3",
+            "002",
+            "20150103",
+            "200"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "caption": "[SQL]",
+        "code": "SELECT CASE WHEN GROUPING(자재번호) = 1 THEN '자재전체'\n            ELSE 자재번호 END AS 자재번호\n      ,CASE WHEN GROUPING(발주처ID) = 1 THEN '발주처전체'\n            ELSE 발주처ID END AS 발주처ID\n      ,CASE WHEN GROUPING(발주일자) = 1 THEN '발주일자전체'\n            ELSE 발주일자 END AS 발주일자\n      ,SUM(발주수량) AS 발주수량합계\nFROM   자재발주\n(ㄱ)\nORDER BY 자재번호, 발주처ID, 발주일자;"
+      },
+      {
+        "type": "table",
+        "caption": "[결과]",
+        "headers": [
+          "자재번호",
+          "발주처ID",
+          "발주일자",
+          "발주수량합계"
+        ],
+        "rows": [
+          [
+            "1",
+            "발주처전체",
+            "발주일자전체",
+            "300"
+          ],
+          [
+            "2",
+            "발주처전체",
+            "발주일자전체",
+            "300"
+          ],
+          [
+            "3",
+            "발주처전체",
+            "발주일자전체",
+            "300"
+          ],
+          [
+            "자재전체",
+            "001",
+            "20150102",
+            "300"
+          ],
+          [
+            "자재전체",
+            "001",
+            "20150103",
+            "300"
+          ],
+          [
+            "자재전체",
+            "002",
+            "20150102",
+            "100"
+          ],
+          [
+            "자재전체",
+            "002",
+            "20150103",
+            "200"
+          ]
+        ]
       }
     ]
   },
@@ -8751,9 +9491,115 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "image",
-        "src": "/sqld-images/j131-1.png",
-        "alt": "문항 이미지 j131-1"
+        "type": "table",
+        "caption": "[테이블 : 고객]",
+        "headers": [
+          "고객번호(PK)",
+          "고객명"
+        ],
+        "rows": [
+          [
+            "001",
+            "홍길동"
+          ],
+          [
+            "002",
+            "이순신"
+          ],
+          [
+            "003",
+            "강감찬"
+          ],
+          [
+            "004",
+            "이상화"
+          ],
+          [
+            "005",
+            "이규혁"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "[테이블 : 월별매출]",
+        "headers": [
+          "월(PK)",
+          "고객번호(PK)",
+          "매출액"
+        ],
+        "rows": [
+          [
+            "201301",
+            "001",
+            "200"
+          ],
+          [
+            "201301",
+            "002",
+            "300"
+          ],
+          [
+            "201301",
+            "003",
+            "250"
+          ],
+          [
+            "201301",
+            "004",
+            "300"
+          ],
+          [
+            "201301",
+            "005",
+            "250"
+          ],
+          [
+            "201302",
+            "001",
+            "150"
+          ],
+          [
+            "201302",
+            "002",
+            "150"
+          ],
+          [
+            "201302",
+            "004",
+            "200"
+          ],
+          [
+            "201302",
+            "005",
+            "100"
+          ],
+          [
+            "201303",
+            "002",
+            "100"
+          ],
+          [
+            "201303",
+            "003",
+            "100"
+          ],
+          [
+            "201303",
+            "004",
+            "200"
+          ],
+          [
+            "201303",
+            "005",
+            "350"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "caption": "[SQL]",
+        "code": "SELECT 고객번호, 고객명, 매출액\n      ,RANK() OVER(ORDER BY 매출액 DESC) AS 순위\nFROM   (\n        SELECT A.고객번호\n              ,MAX(A.고객명) AS 고객명\n              ,SUM(B.매출액) AS 매출액\n        FROM   고객 A INNER JOIN 월별매출 B\n        ON     (A.고객번호 = B.고객번호)\n        GROUP BY A.고객번호\n       )\nORDER BY RNK;"
       }
     ]
   },
