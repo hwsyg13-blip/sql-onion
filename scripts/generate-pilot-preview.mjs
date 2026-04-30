@@ -63,6 +63,14 @@ function renderRef(r, idx) {
           ${r.caption ? `<div class="caption">${esc(r.caption)}</div>` : ''}
           <div class="erd-frame" data-mermaid-source="${esc(r.mermaid || '')}"></div>
         </div>`;
+    case 'image':
+      // 원본 이미지 (또는 잘라낸 부분 이미지) 를 그대로 노출.
+      // ERD 처럼 텍스트 변환이 어려운 케이스에 사용.
+      return `
+        <div class="ref-block">
+          ${r.caption ? `<div class="caption">${esc(r.caption)}</div>` : ''}
+          <div class="img-ref"><img src="${esc(r.src)}" alt="${esc(r.alt || '')}" loading="lazy"></div>
+        </div>`;
     case 'text':
       return `<div class="ref-block"><div class="ref-text">${esc(r.content || '')}</div></div>`;
     default:
@@ -230,6 +238,11 @@ const html = `<!doctype html>
     border-radius: 10px; padding: 14px; min-height: 80px;
     display: flex; justify-content: center; overflow-x: auto;
   }
+  .img-ref {
+    background: var(--bg-card); border: 1px solid var(--border-subtle);
+    border-radius: 10px; padding: 12px; text-align: center;
+  }
+  .img-ref img { max-width: 100%; height: auto; }
   .erd-frame svg { max-width: 100%; height: auto; }
   .erd-frame.failed {
     color: #b91c1c; font-size: 12px; padding: 10px;
