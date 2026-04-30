@@ -64,12 +64,12 @@
       ]
     },
     "6154460ee14c": {
-      "name": "j68 — 서비스_가입 (논리) ↔ SVC_JOIN (물리)",
+      "name": "j68 — 서비스_가입 (논리) ↔ SVC_JOIN (물리) (아래/테두리 crop)",
       "imageKey": "j68",
       "refs": [
         {
           "type": "image",
-          "src": "/sqld-images/j68-1.png",
+          "src": "/sqld-images/j68-model.png",
           "alt": "서비스_가입 논리 모델 ↔ SVC_JOIN 물리 모델",
           "caption": "[논리 ↔ 물리 데이터 모델]"
         }
@@ -225,13 +225,13 @@
       ]
     },
     "25534ce1f380": {
-      "name": "j87 — 배우/영화/출연 스키마 정의",
+      "name": "j87 — 배우/영화/출연 스키마 정의 (아래/테두리 crop)",
       "imageKey": "j87",
       "refs": [
         {
           "type": "image",
-          "src": "/sqld-images/j87-1.png",
-          "alt": "배우(배우번호, 배우명, 성별), 영화(영화번호, 영화명, 제작년도), 출연(배우번호, 영화번호, 출연료) 스키마",
+          "src": "/sqld-images/j87-cropped.png",
+          "alt": "배우(배우번호, 배우명, 성별), 영화(영화번호, 영화명, 제작년도), 출연(배우번호, 영화번호, 출연료) 스키마 — PK 밑줄",
           "caption": "[스키마 정의]"
         }
       ]
@@ -267,12 +267,12 @@
       ]
     },
     "fd161ca39ef6": {
-      "name": "j91 — 제품·생산제품·생산라인 ERD (M:N)",
+      "name": "j91 — 제품·생산제품·생산라인 ERD (M:N) (아래/테두리 crop)",
       "imageKey": "j91",
       "refs": [
         {
           "type": "image",
-          "src": "/sqld-images/j91-1.png",
+          "src": "/sqld-images/j91-erd.png",
           "alt": "제품-생산제품-생산라인 ERD",
           "caption": "[ERD]"
         }

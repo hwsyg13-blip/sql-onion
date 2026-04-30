@@ -208,24 +208,24 @@
       ]
     },
     "21899d3ee230": {
-      "name": "j54 — BOARD 엔터티 속성 박스",
+      "name": "j54 — BOARD 엔터티 속성 박스 (아래/테두리 crop)",
       "imageKey": "j54",
       "refs": [
         {
           "type": "image",
-          "src": "/sqld-images/j54-1.png",
+          "src": "/sqld-images/j54-erd.png",
           "alt": "BOARD 엔터티 속성 (BOARD_ID, BOARD_NM, USE_YN, REG_DATE, BOARD_DESC)",
           "caption": "[BOARD]"
         }
       ]
     },
     "a8f873d150fe": {
-      "name": "j55 — 고객·주문 ERD + 주문데이터·고객데이터 + ALTER FK",
+      "name": "j55 — 고객·주문 ERD + 주문데이터·고객데이터 + ALTER FK (ERD 만 crop)",
       "imageKey": "j55",
       "refs": [
         {
           "type": "image",
-          "src": "/sqld-images/j55-1.png",
+          "src": "/sqld-images/j55-erd.png",
           "alt": "고객-주문 ERD (FK_001)",
           "caption": "[ERD]"
         },
