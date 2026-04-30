@@ -6056,7 +6056,8 @@ export const AI_MOCK: QuizQuestion[] = [
       {
         "type": "image",
         "src": "/sqld-images/j7-1.png",
-        "alt": "문항 이미지 j7-1"
+        "alt": "고객-주문 ERD",
+        "caption": "[ERD]"
       }
     ]
   },
@@ -6450,7 +6451,8 @@ export const AI_MOCK: QuizQuestion[] = [
       {
         "type": "image",
         "src": "/sqld-images/j25-1.png",
-        "alt": "문항 이미지 j25-1"
+        "alt": "부서-사원 ERD",
+        "caption": "[ERD]"
       }
     ]
   },
@@ -6616,7 +6618,8 @@ export const AI_MOCK: QuizQuestion[] = [
       {
         "type": "image",
         "src": "/sqld-images/j33-1.png",
-        "alt": "문항 이미지 j33-1"
+        "alt": "보관금원장 엔터티 + 함수종속(FD)",
+        "caption": "[보관금원장]"
       }
     ]
   },
@@ -6644,7 +6647,8 @@ export const AI_MOCK: QuizQuestion[] = [
       {
         "type": "image",
         "src": "/sqld-images/j34-1.png",
-        "alt": "문항 이미지 j34-1"
+        "alt": "매각물건 데이터 모델 (반정규화 속성 포함)",
+        "caption": "[데이터 모델]"
       }
     ]
   },
@@ -6672,7 +6676,8 @@ export const AI_MOCK: QuizQuestion[] = [
       {
         "type": "image",
         "src": "/sqld-images/j35-1.png",
-        "alt": "문항 이미지 j35-1"
+        "alt": "모델 엔터티 + 유형기능분류코드 속성",
+        "caption": "[모델]"
       }
     ]
   },
@@ -6700,7 +6705,8 @@ export const AI_MOCK: QuizQuestion[] = [
       {
         "type": "image",
         "src": "/sqld-images/j36-1.png",
-        "alt": "문항 이미지 j36-1"
+        "alt": "일재고 엔터티 속성 (장기재고 등)",
+        "caption": "[일재고]"
       }
     ]
   },
@@ -6728,7 +6734,8 @@ export const AI_MOCK: QuizQuestion[] = [
       {
         "type": "image",
         "src": "/sqld-images/j37-1.png",
-        "alt": "문항 이미지 j37-1"
+        "alt": "수강지도 엔터티 + 함수종속(FD)",
+        "caption": "[수강지도]"
       }
     ]
   },
@@ -6853,7 +6860,8 @@ export const AI_MOCK: QuizQuestion[] = [
       {
         "type": "image",
         "src": "/sqld-images/j43-1.png",
-        "alt": "문항 이미지 j43-1"
+        "alt": "기관문류 → 기관분류 데이터 타입 변경 (가)→(나)",
+        "caption": "[데이터 타입 변경]"
       }
     ]
   },
@@ -6900,9 +6908,63 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "image",
-        "src": "/sqld-images/j45-1.png",
-        "alt": "문항 이미지 j45-1"
+        "type": "sql",
+        "caption": "[CREATE]",
+        "code": "CREATE TABLE T\n(C INTEGER PRIMARY KEY,\n D INTEGER);\n\nCREATE TABLE S\n(B INTEGER PRIMARY KEY,\n C INTEGER REFERENCES T(C) ON DELETE CASCADE);\n\nCREATE TABLE R\n(A INTEGER PRIMARY KEY,\n B INTEGER REFERENCES S(B) ON DELETE SET NULL);"
+      },
+      {
+        "type": "table",
+        "caption": "현재 테이블 T",
+        "headers": [
+          "C",
+          "D"
+        ],
+        "rows": [
+          [
+            "1",
+            "1"
+          ],
+          [
+            "2",
+            "2"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "현재 테이블 S",
+        "headers": [
+          "B",
+          "C"
+        ],
+        "rows": [
+          [
+            "1",
+            "1"
+          ],
+          [
+            "2",
+            "2"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "현재 테이블 R",
+        "headers": [
+          "A",
+          "B"
+        ],
+        "rows": [
+          [
+            "1",
+            "1"
+          ],
+          [
+            "2",
+            "2"
+          ]
+        ]
       }
     ]
   },
@@ -6949,9 +7011,14 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "image",
-        "src": "/sqld-images/j48-1.png",
-        "alt": "문항 이미지 j48-1"
+        "type": "sql",
+        "caption": "생성)",
+        "code": "create table 학생 (학번 char(8) primary key,\n               장학금 integer);"
+      },
+      {
+        "type": "sql",
+        "caption": "SQL1·SQL2",
+        "code": "SQL1: select count(*) from 학생\nSQL2: select count(학번) from 학생"
       }
     ]
   },
@@ -7019,9 +7086,9 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "image",
-        "src": "/sqld-images/j53-1.png",
-        "alt": "문항 이미지 j53-1"
+        "type": "sql",
+        "caption": "[SQL]",
+        "code": "CREATE TABLE TBL\n(\n  ID NUMBER PRIMARY KEY,\n  AMT NUMBER NOT NULL,\n  DEGREE VARCHAR2(1)\n);\n\n1. INSERT INTO TBL VALUES(1, 100)\n2. INSERT INTO TBL(ID, AMT, DEGREE) VALUES(2, 200, 'AB')\n3. INSERT INTO TBL(ID, DEGREE) VALUES(4, 'X')\n4. INSERT INTO TBL(ID, AMT) VALUES(3, 300)\n5. INSERT INTO TBL VALUES(5, 500, NULL)"
       }
     ]
   },
@@ -7049,7 +7116,8 @@ export const AI_MOCK: QuizQuestion[] = [
       {
         "type": "image",
         "src": "/sqld-images/j54-1.png",
-        "alt": "문항 이미지 j54-1"
+        "alt": "BOARD 엔터티 속성 (BOARD_ID, BOARD_NM, USE_YN, REG_DATE, BOARD_DESC)",
+        "caption": "[BOARD]"
       }
     ]
   },
@@ -7077,7 +7145,65 @@ export const AI_MOCK: QuizQuestion[] = [
       {
         "type": "image",
         "src": "/sqld-images/j55-1.png",
-        "alt": "문항 이미지 j55-1"
+        "alt": "고객-주문 ERD (FK_001)",
+        "caption": "[ERD]"
+      },
+      {
+        "type": "table",
+        "caption": "[표 : 주문 데이터]",
+        "headers": [
+          "주문번호(PK)",
+          "고객ID(FK)",
+          "주문일시"
+        ],
+        "rows": [
+          [
+            "0001",
+            "C001",
+            "2013-12-24"
+          ],
+          [
+            "0002",
+            "C001",
+            "2013-12-25"
+          ],
+          [
+            "0003",
+            "NULL",
+            "2013-12-26"
+          ],
+          [
+            "0004",
+            "C002",
+            "2013-12-27"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "[표 : 고객 데이터]",
+        "headers": [
+          "고객ID(PK)",
+          "고객명",
+          "가입일시"
+        ],
+        "rows": [
+          [
+            "C001",
+            "홍길동",
+            "2013-12-12"
+          ],
+          [
+            "C002",
+            "이순신",
+            "2013-12-13"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "caption": "[SQL]",
+        "code": "ALTER TABLE 주문 ADD CONSTRAINT FK_001 FOREIGN KEY (고객ID)\nREFERENCES 고객 (고객ID) ON DELETE SET NULL;"
       }
     ]
   },
@@ -7214,9 +7340,27 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "image",
-        "src": "/sqld-images/j61-1.png",
-        "alt": "문항 이미지 j61-1"
+        "type": "table",
+        "caption": "[테이블 : A]",
+        "headers": [
+          "ID(PK)",
+          "VAL"
+        ],
+        "rows": [
+          [
+            "001",
+            "100"
+          ],
+          [
+            "002",
+            "200"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "caption": "[SQL]",
+        "code": "UPDATE A SET VAL = 200 WHERE ID = '001';\nCREATE TABLE B ( ID CHAR(3) PRIMARY KEY);\nROLLBACK;"
       }
     ]
   },
@@ -7242,9 +7386,35 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "image",
-        "src": "/sqld-images/j62-1.png",
-        "alt": "문항 이미지 j62-1"
+        "type": "table",
+        "caption": "[품목]",
+        "headers": [
+          "품목ID",
+          "단가"
+        ],
+        "rows": [
+          [
+            "001",
+            "1000"
+          ],
+          [
+            "002",
+            "2000"
+          ],
+          [
+            "003",
+            "1000"
+          ],
+          [
+            "004",
+            "2000"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "caption": "[SQL구문]",
+        "code": "BEGIN TRANSACTION\nINSERT INTO 품목(품목ID, 단가)\n  VALUES('005', 2000)\nCOMMIT\nBEGIN TRANSACTION\nDELETE 품목 WHERE 품목ID='002'\nUPDATE 품목 SET 단가=2000 WHERE 단가=1000\nROLLBACK\nSELECT COUNT(품목ID) FROM 품목\n  WHERE 단가=2000"
       }
     ]
   },
@@ -8828,6 +8998,11 @@ export const AI_MOCK: QuizQuestion[] = [
         "type": "sql",
         "caption": "[SQL]",
         "code": "SELECT A.회원번호, A.회원명\nFROM   회원 A, 동의항목 B\nWHERE  A.회원번호 = B.회원번호\nGROUP BY A.회원번호, A.회원명\nHAVING COUNT(CASE WHEN B.동의여부 = 'N' THEN 0 ELSE NULL END) >= 1\nORDER BY A.회원번호;"
+      },
+      {
+        "type": "sql",
+        "caption": "[SQL]",
+        "code": "SELECT A.회원번호, A.회원명\nFROM   회원 A, 동의항목 B\nWHERE  A.회원번호 = B.회원번호\nGROUP BY A.회원번호, A.회원명\nHAVING COUNT(CASE WHEN B.동의여부 = 'N' THEN 0 ELSE NULL END) >= 1\nORDER BY A.회원번호;"
       }
     ]
   },
@@ -9177,6 +9352,67 @@ export const AI_MOCK: QuizQuestion[] = [
         "src": "/sqld-images/j125-1.png",
         "alt": "지역-이용내역 ERD",
         "caption": "[데이터 모델]"
+      },
+      {
+        "type": "table",
+        "caption": "[표 : 지역별 월별 이용량]",
+        "headers": [
+          "지역명",
+          "이용월",
+          "이용량"
+        ],
+        "rows": [
+          [
+            "서울",
+            "2014.01",
+            "1,000"
+          ],
+          [
+            "서울",
+            "2014.02",
+            "1,000"
+          ],
+          [
+            "서울",
+            "월별합계",
+            "2,000"
+          ],
+          [
+            "경기",
+            "2014.01",
+            "1,000"
+          ],
+          [
+            "경기",
+            "2014.03",
+            "2,000"
+          ],
+          [
+            "경기",
+            "월별합계",
+            "3,000"
+          ],
+          [
+            "대전",
+            "2014.05",
+            "1,500"
+          ],
+          [
+            "대전",
+            "2014.06",
+            "1,000"
+          ],
+          [
+            "대전",
+            "월별합계",
+            "2,500"
+          ],
+          [
+            "지역전체",
+            "월별합계",
+            "7,500"
+          ]
+        ]
       },
       {
         "type": "table",
