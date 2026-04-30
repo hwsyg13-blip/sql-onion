@@ -1,0 +1,368 @@
+{
+  "schema": "md5(image content) → 변환된 references 배열. 클래식 한글 시험지 batch 6.",
+  "method": "Claude 시각 정독 (sharp 3x 처음부터) + 4x audit cross-check",
+  "batchSize": 15,
+  "groups": {
+    "6c136c4ef017": {
+      "name": "j288 — Mytest ID/CNT (가/나/다/라/마, NULL 혼재)",
+      "imageKey": "j288",
+      "refs": [
+        {
+          "type": "table",
+          "caption": "[Mytest]",
+          "headers": ["ID", "CNT"],
+          "rows": [
+            ["가", "5"],
+            ["나", "NULL"],
+            ["다", "5"],
+            ["라", "NULL"],
+            ["마", "10"]
+          ]
+        }
+      ]
+    },
+    "d1627d332d8b": {
+      "name": "j289 — Mytest CLASS/NAME 7행 + distinct count 결과",
+      "imageKey": "j289",
+      "refs": [
+        {
+          "type": "table",
+          "caption": "[Mytest]",
+          "headers": ["CLASS", "NAME"],
+          "rows": [
+            ["A", "조조"],
+            ["A", "조조"],
+            ["A", "조조"],
+            ["B", "유비"],
+            ["B", "관우"],
+            ["C", "여포"],
+            ["C", "여포"]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "[결과]",
+          "headers": ["CLASS", "Result"],
+          "rows": [
+            ["A", "1"],
+            ["B", "2"],
+            ["C", "1"]
+          ]
+        }
+      ]
+    },
+    "ca48be79cadd": {
+      "name": "j290 — Mytest 이름/급여 + DENSE_RANK 순위",
+      "imageKey": "j290",
+      "refs": [
+        {
+          "type": "table",
+          "caption": "[Mytest]",
+          "headers": ["이름", "급여"],
+          "rows": [
+            ["A", "300"],
+            ["B", "260"],
+            ["C", "260"],
+            ["D", "200"],
+            ["E", "150"],
+            ["F", "100"]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "[결과]",
+          "headers": ["순위", "이름", "급여"],
+          "rows": [
+            ["1", "A", "300"],
+            ["2", "B", "260"],
+            ["2", "C", "260"],
+            ["3", "D", "200"],
+            ["4", "E", "150"],
+            ["5", "F", "100"]
+          ]
+        }
+      ]
+    },
+    "820bb8cb53fa": {
+      "name": "j293 — Mytest JOB_ID/SALARY + 정렬 결과",
+      "imageKey": "j293",
+      "refs": [
+        {
+          "type": "table",
+          "caption": "[Mytest]",
+          "headers": ["JOB_ID", "SALARY"],
+          "rows": [
+            ["manager", "1300"],
+            ["manager", "1500"],
+            ["manager", "1900"],
+            ["helper", "1000"],
+            ["helper", "1500"],
+            ["helper", "2500"]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "[결과]",
+          "headers": ["JOB_ID", "SALARY"],
+          "rows": [
+            ["helper", "1000"],
+            ["helper", "2500"],
+            ["manager", "1300"],
+            ["manager", "1900"]
+          ]
+        }
+      ]
+    },
+    "a7b296697ca2": {
+      "name": "j294 — Mytest COL1 (NULL/0 5행, j201 동일 패턴)",
+      "imageKey": "j294",
+      "refs": [
+        {
+          "type": "table",
+          "caption": "[Mytest]",
+          "headers": ["COL1"],
+          "rows": [
+            ["NULL"],
+            ["0"],
+            ["NULL"],
+            ["0"],
+            ["NULL"]
+          ]
+        }
+      ]
+    },
+    "8ab483393919": {
+      "name": "j295 — Mytest 회원/주문 + 결과 (특정 회원 필터)",
+      "imageKey": "j295",
+      "refs": [
+        {
+          "type": "table",
+          "caption": "[Mytest]",
+          "headers": ["회원번호", "주문일자", "주문금액"],
+          "rows": [
+            ["100", "20221101", "10000"],
+            ["100", "20221102", "20000"],
+            ["100", "20221103", "30000"],
+            ["103", "20221101", "10000"],
+            ["103", "20221102", "30000"],
+            ["103", "20221110", "15000"],
+            ["101", "20221201", "18000"],
+            ["104", "20221201", "5000"],
+            ["104", "20221103", "1000"]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "[결과]",
+          "headers": ["회원번호", "주문일자", "주문금액"],
+          "rows": [
+            ["103", "20221102", "30000"],
+            ["103", "20221110", "15000"],
+            ["103", "20221101", "20000"]
+          ]
+        }
+      ]
+    },
+    "8bd7cb2f767d": {
+      "name": "j297 — Mytest COL1/COL2/COL3 (Null 혼재 3행, j203 유사)",
+      "imageKey": "j297",
+      "refs": [
+        {
+          "type": "table",
+          "caption": "[Mytest]",
+          "headers": ["COL1", "COL2", "COL3"],
+          "rows": [
+            ["1", "Null", "1"],
+            ["2", "10", "14"],
+            ["2", "10", "12"]
+          ]
+        }
+      ]
+    },
+    "4e2ac235b71c": {
+      "name": "j298 — Mytest 5행 + 결과 (집계 A/B/C)",
+      "imageKey": "j298",
+      "refs": [
+        {
+          "type": "table",
+          "caption": "[Mytest]",
+          "headers": ["COL1", "COL2", "COL3"],
+          "rows": [
+            ["null", "0", "30"],
+            ["0", "null", "0"],
+            ["10", "20", "null"],
+            ["11", "21", "31"],
+            ["13", "22", "32"]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "[결과]",
+          "headers": ["A", "B", "C"],
+          "rows": [
+            ["13", "0", "34"]
+          ]
+        }
+      ]
+    },
+    "c6b199a4cfb7": {
+      "name": "j299 — DEPTNO/JOB ROLLUP (한글 직무명) — j205 한글 변종",
+      "imageKey": "j299",
+      "refs": [
+        {
+          "type": "table",
+          "caption": "[결과]",
+          "headers": ["DEPTNO", "JOB", "SUM(SAL)"],
+          "rows": [
+            ["100", "증권사", "1,300"],
+            ["100", "관리자", "2,400"],
+            ["100", "", "3,700"],
+            ["200", "증권사", "1,900"],
+            ["200", "데이터분석가", "6,000"],
+            ["200", "관리자", "2,975"],
+            ["200", "", "10,875"],
+            ["", "", "14,575"]
+          ]
+        }
+      ]
+    },
+    "2fec7387ccdc": {
+      "name": "j301 — MytestA(4행 한글)+ MytestB(3행)",
+      "imageKey": "j301",
+      "refs": [
+        {
+          "type": "table",
+          "caption": "[MytestA]",
+          "headers": ["COL1", "COL2", "KEY1"],
+          "rows": [
+            ["관우", "100", "B"],
+            ["유비", "200", "C"],
+            ["조자룡", "300", "D"],
+            ["동탁", "400", "E"]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "[MytestB]",
+          "headers": ["KEY2", "COL2", "COL3"],
+          "rows": [
+            ["A", "100", "조조"],
+            ["B", "200", "관우"],
+            ["C", "300", "유비"]
+          ]
+        }
+      ]
+    },
+    "2e71c887fab1": {
+      "name": "j303 — MytestA + MytestB (sparse COL2)",
+      "imageKey": "j303",
+      "refs": [
+        {
+          "type": "table",
+          "caption": "[MytestA]",
+          "headers": ["COL1", "COL2"],
+          "rows": [
+            ["1", "A1"],
+            ["2", ""],
+            ["3", "B1"],
+            ["4", "C1"]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "[MytestB]",
+          "headers": ["COL1", "COL2"],
+          "rows": [
+            ["1", "A1"],
+            ["2", ""],
+            ["3", "B1"]
+          ]
+        }
+      ]
+    },
+    "afde6e00a813": {
+      "name": "j304 — Oracle OUTER JOIN (+) ↔ ANSI JOIN (빈칸 SQL)",
+      "imageKey": "j304",
+      "refs": [
+        {
+          "type": "sql",
+          "caption": "[Oracle OUTER JOIN]",
+          "code": "SELECT *\nFROM EMP, DEPT\nWHERE EMP.부서코드(+) = DEPT.부서코드;"
+        },
+        {
+          "type": "sql",
+          "caption": "[ANSI JOIN]",
+          "code": "SELECT *\nFROM EMP (        ) DEPT\nON (EMP.부서코드 = DEPT.부서코드)"
+        }
+      ]
+    },
+    "2e801340b62d": {
+      "name": "j307 — Mytest NO/SCORE (NULL 혼재 5행)",
+      "imageKey": "j307",
+      "refs": [
+        {
+          "type": "table",
+          "caption": "[Mytest]",
+          "headers": ["NO", "SCORE"],
+          "rows": [
+            ["001", "150"],
+            ["NULL", "250"],
+            ["003", "50"],
+            ["004", "150"],
+            ["NULL", "600"]
+          ]
+        }
+      ]
+    },
+    "935fc72464fa": {
+      "name": "j311 — MytestA + MytestB + 2 SQL (IN/EXISTS, 빈칸)",
+      "imageKey": "j311",
+      "refs": [
+        {
+          "type": "table",
+          "caption": "[MytestA]",
+          "headers": ["COL1", "COL2"],
+          "rows": [
+            ["1", "200"],
+            ["2", "310"],
+            ["3", "400"],
+            ["4", "500"]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "[MytestB]",
+          "headers": ["COL1", "COL2", "COL3"],
+          "rows": [
+            ["1", "200", "1000"],
+            ["2", "350", "2000"],
+            ["3", "400", "3000"],
+            ["4", "550", "4000"]
+          ]
+        },
+        {
+          "type": "sql",
+          "caption": "[SQL1]",
+          "code": "SELECT * FROM MytestA a\nWHERE (a.col1, a.col2)\nIN (SELECT b.col1, b.col2 FROM MytestB b\nWHERE b.col3 > 1400);"
+        },
+        {
+          "type": "sql",
+          "caption": "[SQL2]",
+          "code": "SELECT * FROM MytestA a\nWHERE EXISTS (             );"
+        }
+      ]
+    },
+    "429214277e02": {
+      "name": "j315 — DEPARTMENT - EMPLOYEE ERD (영문 박스)",
+      "imageKey": "j315",
+      "refs": [
+        {
+          "type": "image",
+          "src": "/sqld-images/j315-1.png",
+          "alt": "DEPARTMENT-EMPLOYEE ERD (영문 박스)",
+          "caption": "[ERD]"
+        }
+      ]
+    }
+  }
+}

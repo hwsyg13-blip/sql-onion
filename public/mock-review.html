@@ -10982,6 +10982,19 @@ REFERENCES 고객 (고객ID) ON DELETE SET NULL;</code></pre>
           <div class="ref-caption">[SQL]</div>
           <pre><code>ALTER TABLE 주문 ADD CONSTRAINT FK_001 FOREIGN KEY (고객ID)
 REFERENCES 고객 (고객ID) ON DELETE SET NULL;</code></pre>
+        </div>
+        <div class="ref-table">
+          <div class="ref-caption">[표 : 주문 데이터]</div>
+          <table><thead><tr><th>주문번호(PK)</th><th>고객ID(FK)</th><th>주문일시</th></tr></thead><tbody><tr><td>0001</td><td>C001</td><td>2013-12-24</td></tr><tr><td>0002</td><td>C001</td><td>2013-12-25</td></tr><tr><td>0003</td><td>NULL</td><td>2013-12-26</td></tr><tr><td>0004</td><td>C002</td><td>2013-12-27</td></tr></tbody></table>
+        </div>
+        <div class="ref-table">
+          <div class="ref-caption">[표 : 고객 데이터]</div>
+          <table><thead><tr><th>고객ID(PK)</th><th>고객명</th><th>가입일시</th></tr></thead><tbody><tr><td>C001</td><td>홍길동</td><td>2013-12-12</td></tr><tr><td>C002</td><td>이순신</td><td>2013-12-13</td></tr></tbody></table>
+        </div>
+        <div class="ref-sql">
+          <div class="ref-caption">[SQL]</div>
+          <pre><code>ALTER TABLE 주문 ADD CONSTRAINT FK_001 FOREIGN KEY (고객ID)
+REFERENCES 고객 (고객ID) ON DELETE SET NULL;</code></pre>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -13336,6 +13349,15 @@ WHERE  A.회원번호 = B.회원번호
 GROUP BY A.회원번호, A.회원명
 HAVING COUNT(CASE WHEN B.동의여부 = &#39;N&#39; THEN 0 ELSE NULL END) &gt;= 1
 ORDER BY A.회원번호;</code></pre>
+        </div>
+        <div class="ref-sql">
+          <div class="ref-caption">[SQL]</div>
+          <pre><code>SELECT A.회원번호, A.회원명
+FROM   회원 A, 동의항목 B
+WHERE  A.회원번호 = B.회원번호
+GROUP BY A.회원번호, A.회원명
+HAVING COUNT(CASE WHEN B.동의여부 = &#39;N&#39; THEN 0 ELSE NULL END) &gt;= 1
+ORDER BY A.회원번호;</code></pre>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -13633,6 +13655,10 @@ ORDER BY A.회원번호;</code></pre>
         <div class="ref-image">
           <div class="ref-caption">[데이터 모델]</div>
           <img src="/sqld-images/j125-1.png" alt="지역-이용내역 ERD" loading="lazy">
+        </div>
+        <div class="ref-table">
+          <div class="ref-caption">[표 : 지역별 월별 이용량]</div>
+          <table><thead><tr><th>지역명</th><th>이용월</th><th>이용량</th></tr></thead><tbody><tr><td>서울</td><td>2014.01</td><td>1,000</td></tr><tr><td>서울</td><td>2014.02</td><td>1,000</td></tr><tr><td>서울</td><td>월별합계</td><td>2,000</td></tr><tr><td>경기</td><td>2014.01</td><td>1,000</td></tr><tr><td>경기</td><td>2014.03</td><td>2,000</td></tr><tr><td>경기</td><td>월별합계</td><td>3,000</td></tr><tr><td>대전</td><td>2014.05</td><td>1,500</td></tr><tr><td>대전</td><td>2014.06</td><td>1,000</td></tr><tr><td>대전</td><td>월별합계</td><td>2,500</td></tr><tr><td>지역전체</td><td>월별합계</td><td>7,500</td></tr></tbody></table>
         </div>
         <div class="ref-table">
           <div class="ref-caption">[표 : 지역별 월별 이용량]</div>
@@ -18890,9 +18916,9 @@ ON a.DEPTNO = b.DEPTNO;</code></pre>
       </header>
       <div class="title">다음 보기의 SELECT문을 실행했을 때 그 결과가 다른 하나는?</div>
       <div class="refs">
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j288-1.png" alt="문항 이미지 j288-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">[Mytest]</div>
+          <table><thead><tr><th>ID</th><th>CNT</th></tr></thead><tbody><tr><td>가</td><td>5</td></tr><tr><td>나</td><td>NULL</td></tr><tr><td>다</td><td>5</td></tr><tr><td>라</td><td>NULL</td></tr><tr><td>마</td><td>10</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -18933,9 +18959,13 @@ ON a.DEPTNO = b.DEPTNO;</code></pre>
       </header>
       <div class="title">다음 문제에 주어진 결괏값을 반환하는 SQL문은?</div>
       <div class="refs">
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j289-1.png" alt="문항 이미지 j289-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">[Mytest]</div>
+          <table><thead><tr><th>CLASS</th><th>NAME</th></tr></thead><tbody><tr><td>A</td><td>조조</td></tr><tr><td>A</td><td>조조</td></tr><tr><td>A</td><td>조조</td></tr><tr><td>B</td><td>유비</td></tr><tr><td>B</td><td>관우</td></tr><tr><td>C</td><td>여포</td></tr><tr><td>C</td><td>여포</td></tr></tbody></table>
+        </div>
+        <div class="ref-table">
+          <div class="ref-caption">[결과]</div>
+          <table><thead><tr><th>CLASS</th><th>Result</th></tr></thead><tbody><tr><td>A</td><td>1</td></tr><tr><td>B</td><td>2</td></tr><tr><td>C</td><td>1</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -18976,9 +19006,13 @@ ON a.DEPTNO = b.DEPTNO;</code></pre>
       </header>
       <div class="title">다음은 WINDOW 함수를 사용해서 순위를 구한 것이다. 다음 중 빈칸의 내용으로 올바른 것은?</div>
       <div class="refs"><div class="ref-text">SELECT (   ) OVER<br>(ORDER BY 급여 desc)<br>as 순위, 이름, 급여<br>FROM Mytest;</div>
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j290-1.png" alt="문항 이미지 j290-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">[Mytest]</div>
+          <table><thead><tr><th>이름</th><th>급여</th></tr></thead><tbody><tr><td>A</td><td>300</td></tr><tr><td>B</td><td>260</td></tr><tr><td>C</td><td>260</td></tr><tr><td>D</td><td>200</td></tr><tr><td>E</td><td>150</td></tr><tr><td>F</td><td>100</td></tr></tbody></table>
+        </div>
+        <div class="ref-table">
+          <div class="ref-caption">[결과]</div>
+          <table><thead><tr><th>순위</th><th>이름</th><th>급여</th></tr></thead><tbody><tr><td>1</td><td>A</td><td>300</td></tr><tr><td>2</td><td>B</td><td>260</td></tr><tr><td>2</td><td>C</td><td>260</td></tr><tr><td>3</td><td>D</td><td>200</td></tr><tr><td>4</td><td>E</td><td>150</td></tr><tr><td>5</td><td>F</td><td>100</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -19097,9 +19131,13 @@ ON a.DEPTNO = b.DEPTNO;</code></pre>
       </header>
       <div class="title">다음에서 주어진 Mytest 테이블에서 SQL문을 실행했을 때 결괏값과 같은 SQL문은?(단 union은 정렬도 진행하는 것으로 한다)</div>
       <div class="refs">
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j293-1.png" alt="문항 이미지 j293-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">[Mytest]</div>
+          <table><thead><tr><th>JOB_ID</th><th>SALARY</th></tr></thead><tbody><tr><td>manager</td><td>1300</td></tr><tr><td>manager</td><td>1500</td></tr><tr><td>manager</td><td>1900</td></tr><tr><td>helper</td><td>1000</td></tr><tr><td>helper</td><td>1500</td></tr><tr><td>helper</td><td>2500</td></tr></tbody></table>
+        </div>
+        <div class="ref-table">
+          <div class="ref-caption">[결과]</div>
+          <table><thead><tr><th>JOB_ID</th><th>SALARY</th></tr></thead><tbody><tr><td>helper</td><td>1000</td></tr><tr><td>helper</td><td>2500</td></tr><tr><td>manager</td><td>1300</td></tr><tr><td>manager</td><td>1900</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -19140,9 +19178,9 @@ ON a.DEPTNO = b.DEPTNO;</code></pre>
       </header>
       <div class="title">다음 보기의 SQL문을 실행 했을 때 결괏값이 다른 하나는?</div>
       <div class="refs">
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j294-1.png" alt="문항 이미지 j294-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">[Mytest]</div>
+          <table><thead><tr><th>COL1</th></tr></thead><tbody><tr><td>NULL</td></tr><tr><td>0</td></tr><tr><td>NULL</td></tr><tr><td>0</td></tr><tr><td>NULL</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -19183,9 +19221,13 @@ ON a.DEPTNO = b.DEPTNO;</code></pre>
       </header>
       <div class="title">다음 보기의 결과값과 동일하게 반환하는 SQL문은?</div>
       <div class="refs">
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j295-1.png" alt="문항 이미지 j295-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">[Mytest]</div>
+          <table><thead><tr><th>회원번호</th><th>주문일자</th><th>주문금액</th></tr></thead><tbody><tr><td>100</td><td>20221101</td><td>10000</td></tr><tr><td>100</td><td>20221102</td><td>20000</td></tr><tr><td>100</td><td>20221103</td><td>30000</td></tr><tr><td>103</td><td>20221101</td><td>10000</td></tr><tr><td>103</td><td>20221102</td><td>30000</td></tr><tr><td>103</td><td>20221110</td><td>15000</td></tr><tr><td>101</td><td>20221201</td><td>18000</td></tr><tr><td>104</td><td>20221201</td><td>5000</td></tr><tr><td>104</td><td>20221103</td><td>1000</td></tr></tbody></table>
+        </div>
+        <div class="ref-table">
+          <div class="ref-caption">[결과]</div>
+          <table><thead><tr><th>회원번호</th><th>주문일자</th><th>주문금액</th></tr></thead><tbody><tr><td>103</td><td>20221102</td><td>30000</td></tr><tr><td>103</td><td>20221110</td><td>15000</td></tr><tr><td>103</td><td>20221101</td><td>20000</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt correct">
@@ -19265,9 +19307,9 @@ ON a.DEPTNO = b.DEPTNO;</code></pre>
       </header>
       <div class="title">다음의 SQL문이 반환하는 결괏값은?</div>
       <div class="refs"><div class="ref-text">select * from Mytest order by COL1 desc,  COL2 desc, COL3 desc;</div>
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j297-1.png" alt="문항 이미지 j297-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">[Mytest]</div>
+          <table><thead><tr><th>COL1</th><th>COL2</th><th>COL3</th></tr></thead><tbody><tr><td>1</td><td>Null</td><td>1</td></tr><tr><td>2</td><td>10</td><td>14</td></tr><tr><td>2</td><td>10</td><td>12</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -19308,9 +19350,13 @@ ON a.DEPTNO = b.DEPTNO;</code></pre>
       </header>
       <div class="title">다음 보기의 결괏값을 얻기 위한 SQL문을 작성하시오.</div>
       <div class="refs"><div class="ref-text">SELECT <br>(     ) AS A,<br>(     ) AS B,<br>(     ) AS C<br>from Mytest</div>
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j298-1.png" alt="문항 이미지 j298-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">[Mytest]</div>
+          <table><thead><tr><th>COL1</th><th>COL2</th><th>COL3</th></tr></thead><tbody><tr><td>null</td><td>0</td><td>30</td></tr><tr><td>0</td><td>null</td><td>0</td></tr><tr><td>10</td><td>20</td><td>null</td></tr><tr><td>11</td><td>21</td><td>31</td></tr><tr><td>13</td><td>22</td><td>32</td></tr></tbody></table>
+        </div>
+        <div class="ref-table">
+          <div class="ref-caption">[결과]</div>
+          <table><thead><tr><th>A</th><th>B</th><th>C</th></tr></thead><tbody><tr><td>13</td><td>0</td><td>34</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -19351,9 +19397,9 @@ ON a.DEPTNO = b.DEPTNO;</code></pre>
       </header>
       <div class="title">아래의 결괏값을 보고 SQL문의 빈칸에 들어 갈 수 있는 내용을 고르시오.</div>
       <div class="refs"><div class="ref-text">SELECT DEPTNO, JOB, SUM(SAL)<br>FROM Mytest<br>GROUP BY (   );</div>
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j299-1.png" alt="문항 이미지 j299-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">[결과]</div>
+          <table><thead><tr><th>DEPTNO</th><th>JOB</th><th>SUM(SAL)</th></tr></thead><tbody><tr><td>100</td><td>증권사</td><td>1,300</td></tr><tr><td>100</td><td>관리자</td><td>2,400</td></tr><tr><td>100</td><td></td><td>3,700</td></tr><tr><td>200</td><td>증권사</td><td>1,900</td></tr><tr><td>200</td><td>데이터분석가</td><td>6,000</td></tr><tr><td>200</td><td>관리자</td><td>2,975</td></tr><tr><td>200</td><td></td><td>10,875</td></tr><tr><td></td><td></td><td>14,575</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -19433,9 +19479,13 @@ ON a.DEPTNO = b.DEPTNO;</code></pre>
       </header>
       <div class="title">아래와 같은 두개의 테이블이 있을 때 아래의 SQL 결과 건수를 알맞게 나열한 것은?</div>
       <div class="refs"><div class="ref-text">SELECT * FROM MytestA A INNER JOIN MytestB B ON (A.KEY1 = B.KEY2);<br>SELECT * FROM MytestA A LEFT OUTER JOIN MytestB B ON (A.KEY1 = B.KEY2);<br>SELECT * FROM MytestA A RIGHT OUTER JOIN MytestB B ON (A.KEY1 = B.KEY2);<br>SELECT * FROM MytestA A FULL OUTER JOIN MytestB B ON (A.KEY1 = B.KEY2);<br>SELECT * FROM MytestA A CROSS JOIN MytestB B;</div>
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j301-1.png" alt="문항 이미지 j301-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">[MytestA]</div>
+          <table><thead><tr><th>COL1</th><th>COL2</th><th>KEY1</th></tr></thead><tbody><tr><td>관우</td><td>100</td><td>B</td></tr><tr><td>유비</td><td>200</td><td>C</td></tr><tr><td>조자룡</td><td>300</td><td>D</td></tr><tr><td>동탁</td><td>400</td><td>E</td></tr></tbody></table>
+        </div>
+        <div class="ref-table">
+          <div class="ref-caption">[MytestB]</div>
+          <table><thead><tr><th>KEY2</th><th>COL2</th><th>COL3</th></tr></thead><tbody><tr><td>A</td><td>100</td><td>조조</td></tr><tr><td>B</td><td>200</td><td>관우</td></tr><tr><td>C</td><td>300</td><td>유비</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -19515,9 +19565,13 @@ ON a.DEPTNO = b.DEPTNO;</code></pre>
       </header>
       <div class="title">다음 보기의 SQL을 실행하면 총 12개의 행이 조회된다. (    )에 올바른 것은?</div>
       <div class="refs"><div class="ref-text">SELECT * FROM MytestA (       ) MytestB;</div>
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j303-1.png" alt="문항 이미지 j303-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">[MytestA]</div>
+          <table><thead><tr><th>COL1</th><th>COL2</th></tr></thead><tbody><tr><td>1</td><td>A1</td></tr><tr><td>2</td><td></td></tr><tr><td>3</td><td>B1</td></tr><tr><td>4</td><td>C1</td></tr></tbody></table>
+        </div>
+        <div class="ref-table">
+          <div class="ref-caption">[MytestB]</div>
+          <table><thead><tr><th>COL1</th><th>COL2</th></tr></thead><tbody><tr><td>1</td><td>A1</td></tr><tr><td>2</td><td></td></tr><tr><td>3</td><td>B1</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -19558,9 +19612,17 @@ ON a.DEPTNO = b.DEPTNO;</code></pre>
       </header>
       <div class="title">다음은 Oracle 데이터베이스에서 사용하는 Outer Join의 예제이다. 빈칸을 채워 Oracle의 Outer Join을 표준 ANSI SQL로 변경하시오.</div>
       <div class="refs">
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j304-1.png" alt="문항 이미지 j304-1" loading="lazy">
+        <div class="ref-sql">
+          <div class="ref-caption">[Oracle OUTER JOIN]</div>
+          <pre><code>SELECT *
+FROM EMP, DEPT
+WHERE EMP.부서코드(+) = DEPT.부서코드;</code></pre>
+        </div>
+        <div class="ref-sql">
+          <div class="ref-caption">[ANSI JOIN]</div>
+          <pre><code>SELECT *
+FROM EMP (        ) DEPT
+ON (EMP.부서코드 = DEPT.부서코드)</code></pre>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -19640,9 +19702,9 @@ ON a.DEPTNO = b.DEPTNO;</code></pre>
       </header>
       <div class="title">다음 보기의 SQL문을 실행했을 때의 결괏값은?</div>
       <div class="refs"><div class="ref-text">SELECT SUM(SCORE) / COUNT(NO) FROM Mytest</div>
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j307-1.png" alt="문항 이미지 j307-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">[Mytest]</div>
+          <table><thead><tr><th>NO</th><th>SCORE</th></tr></thead><tbody><tr><td>001</td><td>150</td></tr><tr><td>NULL</td><td>250</td></tr><tr><td>003</td><td>50</td></tr><tr><td>004</td><td>150</td></tr><tr><td>NULL</td><td>600</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt correct">
@@ -19761,9 +19823,25 @@ ON a.DEPTNO = b.DEPTNO;</code></pre>
       </header>
       <div class="title">다음에 주어진 두 개의 테이블에 대해서 &quot;SQL1&quot;의 실행 결과와 동일한 &quot;SQL2&quot; 문을 완성하시오.</div>
       <div class="refs">
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j311-1.png" alt="문항 이미지 j311-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">[MytestA]</div>
+          <table><thead><tr><th>COL1</th><th>COL2</th></tr></thead><tbody><tr><td>1</td><td>200</td></tr><tr><td>2</td><td>310</td></tr><tr><td>3</td><td>400</td></tr><tr><td>4</td><td>500</td></tr></tbody></table>
+        </div>
+        <div class="ref-table">
+          <div class="ref-caption">[MytestB]</div>
+          <table><thead><tr><th>COL1</th><th>COL2</th><th>COL3</th></tr></thead><tbody><tr><td>1</td><td>200</td><td>1000</td></tr><tr><td>2</td><td>350</td><td>2000</td></tr><tr><td>3</td><td>400</td><td>3000</td></tr><tr><td>4</td><td>550</td><td>4000</td></tr></tbody></table>
+        </div>
+        <div class="ref-sql">
+          <div class="ref-caption">[SQL1]</div>
+          <pre><code>SELECT * FROM MytestA a
+WHERE (a.col1, a.col2)
+IN (SELECT b.col1, b.col2 FROM MytestB b
+WHERE b.col3 &gt; 1400);</code></pre>
+        </div>
+        <div class="ref-sql">
+          <div class="ref-caption">[SQL2]</div>
+          <pre><code>SELECT * FROM MytestA a
+WHERE EXISTS (             );</code></pre>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -19922,8 +20000,8 @@ ON a.DEPTNO = b.DEPTNO;</code></pre>
       <div class="title">아래 ER 모델링의 표기법은 무엇인가?</div>
       <div class="refs">
         <div class="ref-image">
-          
-          <img src="/sqld-images/j315-1.png" alt="문항 이미지 j315-1" loading="lazy">
+          <div class="ref-caption">[ERD]</div>
+          <img src="/sqld-images/j315-1.png" alt="DEPARTMENT-EMPLOYEE ERD (영문 박스)" loading="lazy">
         </div></div>
       <ol class="opts">
         <li class="opt ">
