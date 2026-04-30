@@ -12329,9 +12329,43 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "image",
-        "src": "/sqld-images/j198-2.png",
-        "alt": "문항 이미지 j198-2"
+        "type": "table",
+        "caption": "[SQLD_66] Correlated Subquery Data",
+        "headers": [
+          "COL1",
+          "COL2"
+        ],
+        "rows": [
+          [
+            "x",
+            "y"
+          ],
+          [
+            "m",
+            "n"
+          ],
+          [
+            "A",
+            "B"
+          ],
+          [
+            "p",
+            "q"
+          ],
+          [
+            "a",
+            "b"
+          ],
+          [
+            "1",
+            "2"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "caption": "[SQL]",
+        "code": "select *\nfrom SQLD_66\nwhere (COL1, COL2) in (('x', 'y'), ('m', 'n'));"
       }
     ]
   },
@@ -14870,9 +14904,64 @@ export const AI_MOCK: QuizQuestion[] = [
         ]
       },
       {
-        "type": "image",
-        "src": "/sqld-images/j279-2.png",
-        "alt": "문항 이미지 j279-2"
+        "type": "table",
+        "caption": "[결과]",
+        "headers": [
+          "EMPID",
+          "NAME",
+          "TODAY",
+          "MGRID"
+        ],
+        "rows": [
+          [
+            "1000",
+            "조조",
+            "2017-01-01",
+            ""
+          ],
+          [
+            "1001",
+            "유비",
+            "2017-01-01",
+            "1000"
+          ],
+          [
+            "1002",
+            "관우",
+            "2020-01-01",
+            "1000"
+          ],
+          [
+            "1003",
+            "조자룡",
+            "2020-01-01",
+            "1000"
+          ],
+          [
+            "1004",
+            "여포",
+            "2020-01-01",
+            ""
+          ],
+          [
+            "1005",
+            "동탁",
+            "2022-01-01",
+            "1004"
+          ],
+          [
+            "1006",
+            "사마의",
+            "2022-01-01",
+            "1004"
+          ],
+          [
+            "1007",
+            "순욱",
+            "2022-01-01",
+            "1004"
+          ]
+        ]
       }
     ]
   },
@@ -16753,9 +16842,70 @@ export const AI_MOCK: QuizQuestion[] = [
         "alt": "문항 이미지 j334-1"
       },
       {
-        "type": "image",
-        "src": "/sqld-images/j334-2.png",
-        "alt": "문항 이미지 j334-2"
+        "type": "table",
+        "caption": "[결과]",
+        "headers": [
+          "MGR",
+          "ENAME",
+          "SAL",
+          "MGR_SUM"
+        ],
+        "rows": [
+          [
+            "손권",
+            "노숙",
+            "2000",
+            "?"
+          ],
+          [
+            "손권",
+            "주유",
+            "2500",
+            "?"
+          ],
+          [
+            "손권",
+            "황개",
+            "3000",
+            "?"
+          ],
+          [
+            "유비",
+            "제갈량",
+            "3000",
+            "?"
+          ],
+          [
+            "유비",
+            "관우",
+            "1000",
+            "?"
+          ],
+          [
+            "유비",
+            "조자룡",
+            "1500",
+            "?"
+          ],
+          [
+            "조조",
+            "순욱",
+            "3000",
+            "?"
+          ],
+          [
+            "조조",
+            "하후돈",
+            "2000",
+            "?"
+          ],
+          [
+            "조조",
+            "하후연",
+            "3500",
+            "?"
+          ]
+        ]
       }
     ]
   },
@@ -17221,9 +17371,26 @@ export const AI_MOCK: QuizQuestion[] = [
         "alt": "문항 이미지 j354-1"
       },
       {
-        "type": "image",
-        "src": "/sqld-images/j354-2.png",
-        "alt": "문항 이미지 j354-2"
+        "type": "table",
+        "caption": "[결과]",
+        "headers": [
+          "NTILE2",
+          "CNT"
+        ],
+        "rows": [
+          [
+            "(㉠)",
+            "(㉡)"
+          ],
+          [
+            "2",
+            "2"
+          ],
+          [
+            "3",
+            "2"
+          ]
+        ]
       }
     ]
   },
@@ -17376,9 +17543,55 @@ export const AI_MOCK: QuizQuestion[] = [
         "alt": "문항 이미지 j359-1"
       },
       {
-        "type": "image",
-        "src": "/sqld-images/j359-2.png",
-        "alt": "문항 이미지 j359-2"
+        "type": "table",
+        "caption": "[결과]",
+        "headers": [
+          "COL1",
+          "COL2",
+          "SUM(COL3)"
+        ],
+        "rows": [
+          [
+            "A",
+            "가",
+            "600"
+          ],
+          [
+            "A",
+            "다",
+            "1000"
+          ],
+          [
+            "A",
+            "",
+            "1600"
+          ],
+          [
+            "B",
+            "가",
+            "2000"
+          ],
+          [
+            "B",
+            "나",
+            "13000"
+          ],
+          [
+            "B",
+            "",
+            "15000"
+          ],
+          [
+            "C",
+            "가",
+            "5000"
+          ],
+          [
+            "C",
+            "",
+            "5000"
+          ]
+        ]
       }
     ]
   },
@@ -19610,9 +19823,61 @@ export const AI_MOCK: QuizQuestion[] = [
         "content": "SELECT 회원ID,\nDENSE_RANK() OVER(ORDER BY (ㄱ)  )\nAS RANK, 주문금액\nFROM SQLD7;"
       },
       {
-        "type": "image",
-        "src": "/sqld-images/j460-1.png",
-        "alt": "문항 이미지 j460-1"
+        "type": "table",
+        "caption": "[SQLD7]",
+        "headers": [
+          "회원ID",
+          "주문금액"
+        ],
+        "rows": [
+          [
+            "B",
+            "255"
+          ],
+          [
+            "C",
+            "255"
+          ],
+          [
+            "A",
+            "450"
+          ],
+          [
+            "D",
+            "100"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "[결과]",
+        "headers": [
+          "회원ID",
+          "RANK",
+          "주문금액"
+        ],
+        "rows": [
+          [
+            "A",
+            "1",
+            "450"
+          ],
+          [
+            "B",
+            "2",
+            "255"
+          ],
+          [
+            "C",
+            "2",
+            "255"
+          ],
+          [
+            "D",
+            "3",
+            "100"
+          ]
+        ]
       }
     ]
   },
@@ -19688,7 +19953,8 @@ export const AI_MOCK: QuizQuestion[] = [
       {
         "type": "image",
         "src": "/sqld-images/j464-1.png",
-        "alt": "문항 이미지 j464-1"
+        "alt": "학생-수강-과목 ERD (학번/과목코드 PK, 수강이 N:M 매핑 엔티티)",
+        "caption": "[ERD]"
       }
     ]
   },
@@ -19745,9 +20011,56 @@ export const AI_MOCK: QuizQuestion[] = [
         "content": "SELECT COUNT(DISTINCT COL1)\nFROM test31_1\nWHERE COL3=\n(SELECT COL3 FROM test31_2 WHERE\nCOL2 = 'A')"
       },
       {
-        "type": "image",
-        "src": "/sqld-images/j466-1.png",
-        "alt": "문항 이미지 j466-1"
+        "type": "table",
+        "caption": "[test31_1]",
+        "headers": [
+          "COL1",
+          "COL2",
+          "COL3"
+        ],
+        "rows": [
+          [
+            "1",
+            "A",
+            "10"
+          ],
+          [
+            "2",
+            "B",
+            "20"
+          ],
+          [
+            "3",
+            "A",
+            "10"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "[test31_2]",
+        "headers": [
+          "COL1",
+          "COL2",
+          "COL3"
+        ],
+        "rows": [
+          [
+            "X",
+            "A",
+            "10"
+          ],
+          [
+            "Y",
+            "B",
+            "20"
+          ],
+          [
+            "Z",
+            "B",
+            "10"
+          ]
+        ]
       }
     ]
   },
@@ -19821,9 +20134,40 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "image",
-        "src": "/sqld-images/j469-1.png",
-        "alt": "문항 이미지 j469-1"
+        "type": "table",
+        "caption": "[KPIPOOL]",
+        "headers": [
+          "subkpi",
+          "kpiname",
+          "mainkpi"
+        ],
+        "rows": [
+          [
+            "10",
+            "고객만족도",
+            "0"
+          ],
+          [
+            "20",
+            "콜센터만족도",
+            "10"
+          ],
+          [
+            "30",
+            "불만건수",
+            "20"
+          ],
+          [
+            "40",
+            "대기시간",
+            "30"
+          ],
+          [
+            "50",
+            "건의건수",
+            "40"
+          ]
+        ]
       }
     ]
   },
@@ -19853,9 +20197,40 @@ export const AI_MOCK: QuizQuestion[] = [
         "content": "select * from kpipool where (subkpi, mainkpi)  in((20,10),(0,30));"
       },
       {
-        "type": "image",
-        "src": "/sqld-images/j470-1.png",
-        "alt": "문항 이미지 j470-1"
+        "type": "table",
+        "caption": "[KPIPOOL]",
+        "headers": [
+          "subkpi",
+          "kpiname",
+          "mainkpi"
+        ],
+        "rows": [
+          [
+            "10",
+            "고객만족도",
+            "0"
+          ],
+          [
+            "20",
+            "콜센터만족도",
+            "10"
+          ],
+          [
+            "30",
+            "불만건수",
+            "20"
+          ],
+          [
+            "40",
+            "대기시간",
+            "30"
+          ],
+          [
+            "50",
+            "건의건수",
+            "40"
+          ]
+        ]
       }
     ]
   },
@@ -19906,9 +20281,40 @@ export const AI_MOCK: QuizQuestion[] = [
         "content": "SELECT C2, SUM(C3)\nFROM SQLD_01\nGROUP BY C2\nHAVING COUNT(*) >= 2;"
       },
       {
-        "type": "image",
-        "src": "/sqld-images/j473-1.png",
-        "alt": "문항 이미지 j473-1"
+        "type": "table",
+        "caption": "[SQLD_01]",
+        "headers": [
+          "C1",
+          "C2",
+          "C3"
+        ],
+        "rows": [
+          [
+            "A",
+            "1",
+            "1"
+          ],
+          [
+            "B",
+            "1",
+            "1"
+          ],
+          [
+            "B",
+            "1",
+            "2"
+          ],
+          [
+            "C",
+            "2",
+            "2"
+          ],
+          [
+            "Z",
+            "",
+            "1"
+          ]
+        ]
       }
     ]
   },
@@ -19936,7 +20342,8 @@ export const AI_MOCK: QuizQuestion[] = [
       {
         "type": "image",
         "src": "/sqld-images/j474-1.png",
-        "alt": "문항 이미지 j474-1"
+        "alt": "학과등록 엔티티 (학번, 코스코드, 평가코드, 평가내역, 코스명, 기간) 종속 화살표 + [조건] 가/나/다 + [참고] 1/2/3차정규형 정의",
+        "caption": "[학과등록 정규화 도해]"
       }
     ]
   },
@@ -19962,9 +20369,39 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "image",
-        "src": "/sqld-images/j475-1.png",
-        "alt": "문항 이미지 j475-1"
+        "type": "table",
+        "caption": "가. 실제 데이터",
+        "headers": [
+          "DEPTNO",
+          "SAL"
+        ],
+        "rows": [
+          [
+            "10",
+            ""
+          ],
+          [
+            "10",
+            "1000"
+          ],
+          [
+            "10",
+            "2000"
+          ],
+          [
+            "20",
+            ""
+          ],
+          [
+            "20",
+            "500"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "caption": "나. SELECT 문",
+        "code": "SELECT DEPTNO, SUM(NVL(SAL, 0)) FROM DEPT GROUP BY DEPTNO;"
       }
     ]
   },
@@ -20021,9 +20458,78 @@ export const AI_MOCK: QuizQuestion[] = [
         "content": "SELECT *\nFROM SQLD27 (       ) SQLD27_2\nON SQLD27.COL1 = SQLD27_2.COL1;"
       },
       {
-        "type": "image",
-        "src": "/sqld-images/j477-1.png",
-        "alt": "문항 이미지 j477-1"
+        "type": "table",
+        "caption": "[SQLD27]",
+        "headers": [
+          "COL1",
+          "COL2"
+        ],
+        "rows": [
+          [
+            "1",
+            "2"
+          ],
+          [
+            "2",
+            "2"
+          ],
+          [
+            "3",
+            "3"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "[SQLD27_2]",
+        "headers": [
+          "COL1",
+          "COL2"
+        ],
+        "rows": [
+          [
+            "1",
+            "2"
+          ],
+          [
+            "2",
+            "4"
+          ],
+          [
+            "4",
+            "5"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "[결과]",
+        "headers": [
+          "SQLD27.COL1",
+          "SQLD27.COL2",
+          "SQLD27_2.COL1",
+          "SQLD27_2.COL2"
+        ],
+        "rows": [
+          [
+            "1",
+            "2",
+            "1",
+            "2"
+          ],
+          [
+            "2",
+            "2",
+            "2",
+            "4"
+          ],
+          [
+            "NULL",
+            "NULL",
+            "4",
+            "5"
+          ]
+        ]
       }
     ]
   },
@@ -20080,9 +20586,76 @@ export const AI_MOCK: QuizQuestion[] = [
         "content": "SELECT COUNT(*)\nFROM SQLD49, SQLD49_2\nWHERE SQLD49.COL1 = SQLD49_2.COL1;"
       },
       {
-        "type": "image",
-        "src": "/sqld-images/j479-1.png",
-        "alt": "문항 이미지 j479-1"
+        "type": "table",
+        "caption": "[SQLD49]",
+        "headers": [
+          "COL1",
+          "COL2",
+          "COL3"
+        ],
+        "rows": [
+          [
+            "1",
+            "1",
+            "3"
+          ],
+          [
+            "1",
+            "2",
+            "3"
+          ],
+          [
+            "2",
+            "1",
+            "3"
+          ],
+          [
+            "3",
+            "1",
+            "3"
+          ],
+          [
+            "3",
+            "2",
+            "3"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "[SQLD49_2]",
+        "headers": [
+          "COL1",
+          "COL2",
+          "COL3"
+        ],
+        "rows": [
+          [
+            "1",
+            "1",
+            "3"
+          ],
+          [
+            "1",
+            "2",
+            "3"
+          ],
+          [
+            "2",
+            "1",
+            "3"
+          ],
+          [
+            "3",
+            "1",
+            "3"
+          ],
+          [
+            "3",
+            "2",
+            "3"
+          ]
+        ]
       }
     ]
   },
