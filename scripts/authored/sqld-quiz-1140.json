@@ -20361,9 +20361,35 @@
           "content": "SELECT SUM(COL2 + COL3) FROM TAB1 WHERE COL1 IS NOT NULL;"
         },
         {
-          "type": "image",
-          "src": "/sqld-images/j691-1.png",
-          "alt": "문항 이미지 j691-1"
+          "type": "table",
+          "caption": "<TAB1>",
+          "headers": [
+            "COL1",
+            "COL2",
+            "COL3"
+          ],
+          "rows": [
+            [
+              "A",
+              "1",
+              "NULL"
+            ],
+            [
+              "B",
+              "2",
+              "10"
+            ],
+            [
+              "B",
+              "NULL",
+              "20"
+            ],
+            [
+              "NULL",
+              "3",
+              "30"
+            ]
+          ]
         }
       ]
     },
@@ -20406,9 +20432,82 @@
           "content": "SELECT EMPNO \n  FROM EMP \n ORDER BY TO_CHAR(TO_NUMBER(SUBSTR(JUMIN, 3, 2)));"
         },
         {
-          "type": "image",
-          "src": "/sqld-images/j694-1.png",
-          "alt": "문항 이미지 j694-1"
+          "type": "table",
+          "caption": "<EMP> 스키마",
+          "headers": [
+            "컬럼명",
+            "타입"
+          ],
+          "rows": [
+            [
+              "EMPNO",
+              "NUMBER"
+            ],
+            [
+              "ENAME",
+              "VARCHAR2(10)"
+            ],
+            [
+              "SAL",
+              "NUMBER"
+            ],
+            [
+              "JUMIN",
+              "CHAR(13)"
+            ],
+            [
+              "DEPTNO",
+              "NUMBER"
+            ]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "<EMP> 데이터",
+          "headers": [
+            "EMPNO",
+            "ENAME",
+            "SAL",
+            "JUMIN",
+            "DEPTNO"
+          ],
+          "rows": [
+            [
+              "1000",
+              "SMITH",
+              "2500",
+              "8012011234567",
+              "10"
+            ],
+            [
+              "1001",
+              "ALLEN",
+              "2000",
+              "9011072212345",
+              "10"
+            ],
+            [
+              "1002",
+              "FORD",
+              "3400",
+              "9506232221234",
+              "20"
+            ],
+            [
+              "1003",
+              "SCOTT",
+              "3800",
+              "9801181112345",
+              "20"
+            ],
+            [
+              "1004",
+              "KING",
+              "4000",
+              "9908091234432",
+              "30"
+            ]
+          ]
         }
       ],
       "optionReferences": [
@@ -20440,9 +20539,45 @@
           "content": "SELECT ENAME, DEPTNO, SAL \n  FROM EMP \n ORDER BY DEPTNO, SAL DESC;"
         },
         {
-          "type": "image",
-          "src": "/sqld-images/j695-1.png",
-          "alt": "문항 이미지 j695-1"
+          "type": "table",
+          "caption": "<EMP>",
+          "headers": [
+            "ENAME",
+            "DEPTNO",
+            "SAL"
+          ],
+          "rows": [
+            [
+              "SMITH",
+              "10",
+              "2000"
+            ],
+            [
+              "SCOTT",
+              "10",
+              "1800"
+            ],
+            [
+              "FORD",
+              "10",
+              "3200"
+            ],
+            [
+              "KING",
+              "20",
+              "4000"
+            ],
+            [
+              "JAMES",
+              "20",
+              "5000"
+            ],
+            [
+              "ADAMS",
+              "20",
+              "NULL"
+            ]
+          ]
         }
       ],
       "optionReferences": [
@@ -20474,9 +20609,60 @@
           "content": "SELECT COUNT(TAB1.COL1) AS CNT  \nFROM TAB1 LEFT OUTER JOIN TAB2 \nON TAB1.COL2 = TAB2.COL2 \nAND TAB1.COL1 = TAB2.COL1;"
         },
         {
-          "type": "image",
-          "src": "/sqld-images/j696-1.png",
-          "alt": "문항 이미지 j696-1"
+          "type": "table",
+          "caption": "<TAB1>",
+          "headers": [
+            "COL1",
+            "COL2"
+          ],
+          "rows": [
+            [
+              "1",
+              "A"
+            ],
+            [
+              "2",
+              "B"
+            ],
+            [
+              "3",
+              "C"
+            ],
+            [
+              "4",
+              "D"
+            ]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "<TAB2>",
+          "headers": [
+            "COL1",
+            "COL2"
+          ],
+          "rows": [
+            [
+              "1",
+              "A"
+            ],
+            [
+              "2",
+              "B"
+            ],
+            [
+              "2",
+              "B"
+            ],
+            [
+              "4",
+              "C"
+            ],
+            [
+              "5",
+              "C"
+            ]
+          ]
         }
       ]
     },
@@ -20519,9 +20705,46 @@
           "content": "SELECT SUM(SAL) \nFROM EMPLOYEES \nWHERE (DEPTNO, SAL) IN (SELECT DEPTNO, MAX(SAL) \nFROM EMPLOYEES \nGROUP BY DEPTNO);"
         },
         {
-          "type": "image",
-          "src": "/sqld-images/j700-1.png",
-          "alt": "문항 이미지 j700-1"
+          "type": "table",
+          "caption": "<EMPLOYEES>",
+          "headers": [
+            "NAME",
+            "HIREDATE",
+            "SAL",
+            "DEPTNO"
+          ],
+          "rows": [
+            [
+              "TURNER",
+              "1981/09/08",
+              "1500",
+              "10"
+            ],
+            [
+              "ADAMS",
+              "1987/05/23",
+              "1100",
+              "10"
+            ],
+            [
+              "JAMES",
+              "1981/10/03",
+              "1000",
+              "20"
+            ],
+            [
+              "FORD",
+              "1981/12/03",
+              "3000",
+              "20"
+            ],
+            [
+              "MILLER",
+              "1982/01/23",
+              "3000",
+              "20"
+            ]
+          ]
         }
       ]
     },
@@ -20547,9 +20770,61 @@
           "content": "DELETE FROM TAB1 \nWHERE CODE IN (SELECT CODE \nFROM TAB2 \nWHERE STATUS = 'OPEN'); \n\nSELECT SUM(FARE) \nFROM TAB1;"
         },
         {
-          "type": "image",
-          "src": "/sqld-images/j702-1.png",
-          "alt": "문항 이미지 j702-1"
+          "type": "table",
+          "caption": "<TAB1>",
+          "headers": [
+            "NAME",
+            "CODE",
+            "FARE"
+          ],
+          "rows": [
+            [
+              "AAA",
+              "0001",
+              "500"
+            ],
+            [
+              "BBB",
+              "0001",
+              "100"
+            ],
+            [
+              "CCC",
+              "0002",
+              "300"
+            ],
+            [
+              "DDD",
+              "0004",
+              "200"
+            ]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "<TAB2>",
+          "headers": [
+            "CODE",
+            "STATUS"
+          ],
+          "rows": [
+            [
+              "0001",
+              "CLOSED"
+            ],
+            [
+              "0002",
+              "OPEN"
+            ],
+            [
+              "0003",
+              "CLOSED"
+            ],
+            [
+              "0004",
+              "OPEN"
+            ]
+          ]
         }
       ]
     },
@@ -20632,9 +20907,133 @@
           "content": "SELECT EMPNO, ENAME, DEPTNO, SAL,  \nSUM(SAL) OVER(PARTITION BY DEPTNO ORDER BY SAL \n____________________) AS RESULT \nFROM EMP;"
         },
         {
-          "type": "image",
-          "src": "/sqld-images/j707-1.png",
-          "alt": "문항 이미지 j707-1"
+          "type": "table",
+          "caption": "<EMP>",
+          "headers": [
+            "EMPNO",
+            "ENAME",
+            "DEPTNO",
+            "SAL"
+          ],
+          "rows": [
+            [
+              "7934",
+              "MILLER",
+              "10",
+              "1300"
+            ],
+            [
+              "7782",
+              "CLARK",
+              "10",
+              "2450"
+            ],
+            [
+              "7839",
+              "KING",
+              "10",
+              "5000"
+            ],
+            [
+              "7369",
+              "SMITH",
+              "20",
+              "800"
+            ],
+            [
+              "7876",
+              "ADAMS",
+              "20",
+              "1100"
+            ],
+            [
+              "7566",
+              "JONES",
+              "20",
+              "2975"
+            ],
+            [
+              "7788",
+              "SCOTT",
+              "20",
+              "3000"
+            ],
+            [
+              "7902",
+              "FORD",
+              "20",
+              "3000"
+            ]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "<RESULT>",
+          "headers": [
+            "EMPNO",
+            "ENAME",
+            "DEPTNO",
+            "SAL",
+            "RESULT"
+          ],
+          "rows": [
+            [
+              "7934",
+              "MILLER",
+              "10",
+              "1300",
+              "3750"
+            ],
+            [
+              "7782",
+              "CLARK",
+              "10",
+              "2450",
+              "8750"
+            ],
+            [
+              "7839",
+              "KING",
+              "10",
+              "5000",
+              "7450"
+            ],
+            [
+              "7369",
+              "SMITH",
+              "20",
+              "800",
+              "1900"
+            ],
+            [
+              "7876",
+              "ADAMS",
+              "20",
+              "1100",
+              "4875"
+            ],
+            [
+              "7566",
+              "JONES",
+              "20",
+              "2975",
+              "7075"
+            ],
+            [
+              "7788",
+              "SCOTT",
+              "20",
+              "3000",
+              "8975"
+            ],
+            [
+              "7902",
+              "FORD",
+              "20",
+              "3000",
+              "6000"
+            ]
+          ]
         }
       ]
     },
@@ -20677,9 +21076,70 @@
           "content": "SELECT 사원번호, 이름, LEVEL \nFROM 사원 \nWHERE 지역 = '경기' \nSTART WITH 상위관리자코드 IS NULL \nCONNECT BY 상위관리자코드 = PRIOR 사원번호;"
         },
         {
-          "type": "image",
-          "src": "/sqld-images/j709-1.png",
-          "alt": "문항 이미지 j709-1"
+          "type": "table",
+          "caption": "<사원>",
+          "headers": [
+            "사원번호",
+            "이름",
+            "상위관리자코드",
+            "지역"
+          ],
+          "rows": [
+            [
+              "1000",
+              "홍길동",
+              "NULL",
+              "서울"
+            ],
+            [
+              "1001",
+              "박길동",
+              "1000",
+              "경기"
+            ],
+            [
+              "1002",
+              "최길동",
+              "1001",
+              "경기"
+            ],
+            [
+              "1003",
+              "이길동",
+              "1001",
+              "인천"
+            ],
+            [
+              "1004",
+              "구길동",
+              "1002",
+              "서울"
+            ],
+            [
+              "1005",
+              "안길동",
+              "1003",
+              "서울"
+            ],
+            [
+              "1006",
+              "송길동",
+              "1000",
+              "경기"
+            ],
+            [
+              "1007",
+              "강길동",
+              "1006",
+              "경기"
+            ],
+            [
+              "1008",
+              "공길동",
+              "1006",
+              "인천"
+            ]
+          ]
         }
       ],
       "optionReferences": [
@@ -20711,9 +21171,88 @@
           "content": "SELECT DEPTNO, DNAME, LEVEL, CONNECT_BY_ROOT(DNAME) AS ROOT \n  FROM DEPARTMENT \n START WITH PART IS NULL \nCONNECT BY PRIOR PART = DEPTNO;"
         },
         {
-          "type": "image",
-          "src": "/sqld-images/j710-1.png",
-          "alt": "문항 이미지 j710-1"
+          "type": "table",
+          "caption": "<DEPARTMENT>",
+          "headers": [
+            "DEPTNO",
+            "DNAME",
+            "PART",
+            "BUILD"
+          ],
+          "rows": [
+            [
+              "101",
+              "컴퓨터공학과",
+              "100",
+              "정보관"
+            ],
+            [
+              "102",
+              "멀티미디어공학과",
+              "100",
+              "멀티미디어관"
+            ],
+            [
+              "103",
+              "소프트웨어공학과",
+              "100",
+              "소프트웨어관"
+            ],
+            [
+              "201",
+              "전자공학과",
+              "200",
+              "전자제어관"
+            ],
+            [
+              "202",
+              "기계공학과",
+              "200",
+              "기계실험관"
+            ],
+            [
+              "203",
+              "화학공학과",
+              "200",
+              "화학실습관"
+            ],
+            [
+              "301",
+              "문헌정보학과",
+              "300",
+              "인문관"
+            ],
+            [
+              "100",
+              "컴퓨터정보학부",
+              "10",
+              ""
+            ],
+            [
+              "200",
+              "메카트로닉스학부",
+              "10",
+              ""
+            ],
+            [
+              "300",
+              "인문사회학부",
+              "20",
+              ""
+            ],
+            [
+              "10",
+              "공과대학",
+              "",
+              ""
+            ],
+            [
+              "20",
+              "인문대학",
+              "",
+              ""
+            ]
+          ]
         }
       ],
       "optionReferences": [
@@ -20745,9 +21284,56 @@
           "content": "SELECT * \n  FROM TAB1 \nUNPIVOT (_____ FOR _____ IN (\"2023\", \"2024\"));"
         },
         {
-          "type": "image",
-          "src": "/sqld-images/j711-1.png",
-          "alt": "문항 이미지 j711-1"
+          "type": "table",
+          "caption": "<TAB1>",
+          "headers": [
+            "성별",
+            "2023",
+            "2024"
+          ],
+          "rows": [
+            [
+              "남자",
+              "10",
+              "20"
+            ],
+            [
+              "여자",
+              "30",
+              "40"
+            ]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "<결과>",
+          "headers": [
+            "성별",
+            "연도",
+            "판매량"
+          ],
+          "rows": [
+            [
+              "남자",
+              "2023",
+              "10"
+            ],
+            [
+              "남자",
+              "2024",
+              "20"
+            ],
+            [
+              "여자",
+              "2023",
+              "30"
+            ],
+            [
+              "여자",
+              "2024",
+              "40"
+            ]
+          ]
         }
       ]
     },
@@ -20887,9 +21473,61 @@
           "content": "ALTER TABLE TAB2 ADD FOREIGN KEY(CLASS_NO) REFERENCES TAB1(NO) ON DELETE SET NULL; \nDELETE FROM TAB1 WHERE NAME = 'C';"
         },
         {
-          "type": "image",
-          "src": "/sqld-images/j718-1.png",
-          "alt": "문항 이미지 j718-1"
+          "type": "table",
+          "caption": "<TAB1>",
+          "headers": [
+            "NO",
+            "NAME"
+          ],
+          "rows": [
+            [
+              "1",
+              "A"
+            ],
+            [
+              "2",
+              "B"
+            ],
+            [
+              "3",
+              "C"
+            ],
+            [
+              "4",
+              "D"
+            ]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "<TAB2>",
+          "headers": [
+            "NO",
+            "NAME",
+            "CLASS_NO"
+          ],
+          "rows": [
+            [
+              "1000",
+              "SMITH",
+              "1"
+            ],
+            [
+              "1001",
+              "ALLEN",
+              "2"
+            ],
+            [
+              "1002",
+              "FORD",
+              "3"
+            ],
+            [
+              "1004",
+              "SCOTT",
+              "3"
+            ]
+          ]
         }
       ],
       "optionReferences": [
@@ -21048,9 +21686,40 @@
       "explanation": "기본키(고객번호+상품명) 중 상품명에 의해 가격이 결정되므로 완전 함수 종속성을 위배하였다. 따라서 제 2 정규화 규칙을 위반하였다.",
       "references": [
         {
-          "type": "image",
-          "src": "/sqld-images/j726-1.png",
-          "alt": "문항 이미지 j726-1"
+          "type": "table",
+          "caption": "<이용이력>",
+          "headers": [
+            "고객번호",
+            "상품명",
+            "가격",
+            "이용날짜"
+          ],
+          "rows": [
+            [
+              "1000",
+              "A",
+              "1000",
+              "2024/01/01"
+            ],
+            [
+              "1000",
+              "B",
+              "1500",
+              "2024/01/31"
+            ],
+            [
+              "1001",
+              "A",
+              "1000",
+              "2024/02/15"
+            ],
+            [
+              "1001",
+              "C",
+              "2000",
+              "2024/03/20"
+            ]
+          ]
         }
       ]
     },
@@ -21195,9 +21864,35 @@
           "content": "SELECT DECODE(DEPTNO, 10, DECODE(JOB, 'CLERK', 'A', 'B'), 'C') AS RESULT FROM EMP ORDER BY EMPNO;"
         },
         {
-          "type": "image",
-          "src": "/sqld-images/j736-1.png",
-          "alt": "문항 이미지 j736-1"
+          "type": "table",
+          "caption": "<EMP>",
+          "headers": [
+            "EMPNO",
+            "DEPTNO",
+            "JOB"
+          ],
+          "rows": [
+            [
+              "0001",
+              "10",
+              "CLERK"
+            ],
+            [
+              "0002",
+              "10",
+              "MANAGER"
+            ],
+            [
+              "0003",
+              "20",
+              "CLERK"
+            ],
+            [
+              "0004",
+              "30",
+              "ANALYST"
+            ]
+          ]
         }
       ],
       "optionReferences": [
@@ -21281,9 +21976,26 @@
           "content": "SELECT SUM(NULLIF(COL1,100) + COL2) FROM TAB1;"
         },
         {
-          "type": "image",
-          "src": "/sqld-images/j739-1.png",
-          "alt": "문항 이미지 j739-1"
+          "type": "table",
+          "caption": "<TAB1>",
+          "headers": [
+            "COL1",
+            "COL2"
+          ],
+          "rows": [
+            [
+              "NULL",
+              "100"
+            ],
+            [
+              "100",
+              "200"
+            ],
+            [
+              "200",
+              "100"
+            ]
+          ]
         }
       ]
     },
@@ -21309,9 +22021,52 @@
           "content": "SELECT COUNT(COL1) FROM TAB1 WHERE NOT EXISTS(SELECT 'X' FROM TAB2 WHERE TAB1.COL2 = TAB2.COL2);"
         },
         {
-          "type": "image",
-          "src": "/sqld-images/j740-1.png",
-          "alt": "문항 이미지 j740-1"
+          "type": "table",
+          "caption": "<TAB1>",
+          "headers": [
+            "COL1",
+            "COL2"
+          ],
+          "rows": [
+            [
+              "A",
+              "1"
+            ],
+            [
+              "B",
+              "2"
+            ],
+            [
+              "C",
+              "3"
+            ],
+            [
+              "D",
+              ""
+            ]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "<TAB2>",
+          "headers": [
+            "COL1",
+            "COL2"
+          ],
+          "rows": [
+            [
+              "A",
+              "2"
+            ],
+            [
+              "B",
+              "3"
+            ],
+            [
+              "C",
+              ""
+            ]
+          ]
         }
       ]
     },
