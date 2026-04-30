@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 340" font-family="Pretendard, -apple-system, system-ui, sans-serif" font-size="14">
+  <defs>
+    <style>
+      .hdr   { font-size: 16px; font-weight: 600; fill: #1F2320; }
+      .col   { fill: #333333; }
+      .typ   { fill: #6B7280; font-family: 'D2Coding', 'JetBrains Mono', monospace; font-size: 13px; }
+      .nn    { fill: #6B7280; font-size: 12px; }
+      .marker{ fill: #2E7D32; font-weight: 600; font-size: 15px; }
+      .label { fill: #333333; font-weight: 500; font-size: 13px; text-anchor: middle; }
+    </style>
+  </defs>
+
+  <!-- IE 표기법 박스 -->
+  <g transform="translate(20, 20)">
+    <rect width="370" height="240" rx="12" ry="12" fill="#FFFFFF" stroke="#E5E7EB" stroke-width="1.5"/>
+    <text x="20" y="32" class="hdr">PRODUCT</text>
+    <line x1="20" y1="52" x2="350" y2="52" stroke="#E5E7EB" stroke-width="1"/>
+
+    <text x="20"  y="84"  class="col">PROD_ID</text>
+    <text x="150" y="84"  class="typ">VARCHAR2(10)</text>
+    <text x="290" y="84"  class="nn">NOT NULL</text>
+
+    <line x1="20" y1="100" x2="350" y2="100" stroke="#D1D5DB" stroke-width="1"/>
+
+    <text x="20"  y="128" class="col">PROD_NM</text>
+    <text x="150" y="128" class="typ">VARCHAR2(100)</text>
+    <text x="290" y="128" class="nn">NOT NULL</text>
+
+    <text x="20"  y="160" class="col">REG_DT</text>
+    <text x="150" y="160" class="typ">DATE</text>
+    <text x="290" y="160" class="nn">NOT NULL</text>
+
+    <text x="20"  y="192" class="col">REGR_NO</text>
+    <text x="150" y="192" class="typ">NUMBER(10)</text>
+    <text x="290" y="192" class="nn">NULL</text>
+  </g>
+  <text x="205" y="295" class="label">[IE 표기법]</text>
+
+  <!-- Barker 표기법 박스 -->
+  <g transform="translate(430, 20)">
+    <rect width="370" height="240" rx="12" ry="12" fill="#FFFFFF" stroke="#E5E7EB" stroke-width="1.5"/>
+    <text x="20" y="32" class="hdr">PRODUCT ()</text>
+    <line x1="20" y1="52" x2="350" y2="52" stroke="#E5E7EB" stroke-width="1"/>
+
+    <text x="20"  y="84"  class="marker">#</text>
+    <text x="42"  y="84"  class="col">PROD_ID</text>
+    <text x="170" y="84"  class="typ">VARCHAR2(10)</text>
+
+    <text x="20"  y="120" class="marker">*</text>
+    <text x="42"  y="120" class="col">PROD_NM</text>
+    <text x="170" y="120" class="typ">VARCHAR2(100)</text>
+
+    <text x="20"  y="156" class="marker">*</text>
+    <text x="42"  y="156" class="col">REG_DT</text>
+    <text x="170" y="156" class="typ">DATE</text>
+
+    <text x="20"  y="192" class="marker">o</text>
+    <text x="42"  y="192" class="col">REGR_NO</text>
+    <text x="170" y="192" class="typ">NUMBER(10)</text>
+  </g>
+  <text x="615" y="295" class="label">[Barker 표기법]</text>
+</svg>
