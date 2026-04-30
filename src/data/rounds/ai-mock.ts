@@ -24577,9 +24577,48 @@ export const AI_MOCK: QuizQuestion[] = [
         "content": "SELECT COUNT(*)\nFROM A a\nLEFT JOIN B b\n  ON a.id = b.id\nWHERE b.id IS NULL\n   OR a.name LIKE 'G%';"
       },
       {
-        "type": "image",
-        "src": "/sqld-images/j872-1.png",
-        "alt": "문항 이미지 j872-1"
+        "type": "table",
+        "caption": "JOIN Basic Tables — Table A",
+        "headers": [
+          "ID",
+          "NAME"
+        ],
+        "rows": [
+          [
+            "1",
+            "ALPHA"
+          ],
+          [
+            "2",
+            "BETA"
+          ],
+          [
+            "3",
+            "GAMMA"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "JOIN Basic Tables — Table B",
+        "headers": [
+          "ID",
+          "VAL"
+        ],
+        "rows": [
+          [
+            "2",
+            "X"
+          ],
+          [
+            "3",
+            "Y"
+          ],
+          [
+            "4",
+            "Z"
+          ]
+        ]
       }
     ]
   },
@@ -24608,9 +24647,48 @@ export const AI_MOCK: QuizQuestion[] = [
         "content": "기존 그림 기준으로 A에 (2, DELTA)가 추가된다."
       },
       {
-        "type": "image",
-        "src": "/sqld-images/j873-1.png",
-        "alt": "문항 이미지 j873-1"
+        "type": "table",
+        "caption": "JOIN Basic Tables — Table A",
+        "headers": [
+          "ID",
+          "NAME"
+        ],
+        "rows": [
+          [
+            "1",
+            "ALPHA"
+          ],
+          [
+            "2",
+            "BETA"
+          ],
+          [
+            "3",
+            "GAMMA"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "JOIN Basic Tables — Table B",
+        "headers": [
+          "ID",
+          "VAL"
+        ],
+        "rows": [
+          [
+            "2",
+            "X"
+          ],
+          [
+            "3",
+            "Y"
+          ],
+          [
+            "4",
+            "Z"
+          ]
+        ]
       }
     ]
   },
@@ -24639,9 +24717,48 @@ export const AI_MOCK: QuizQuestion[] = [
         "content": "SELECT * FROM A JOIN B ON A.ID = B.ID;"
       },
       {
-        "type": "image",
-        "src": "/sqld-images/j874-1.png",
-        "alt": "문항 이미지 j874-1"
+        "type": "table",
+        "caption": "JOIN Basic Tables — Table A",
+        "headers": [
+          "ID",
+          "NAME"
+        ],
+        "rows": [
+          [
+            "1",
+            "ALPHA"
+          ],
+          [
+            "2",
+            "BETA"
+          ],
+          [
+            "3",
+            "GAMMA"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "JOIN Basic Tables — Table B",
+        "headers": [
+          "ID",
+          "VAL"
+        ],
+        "rows": [
+          [
+            "2",
+            "X"
+          ],
+          [
+            "3",
+            "Y"
+          ],
+          [
+            "4",
+            "Z"
+          ]
+        ]
       }
     ]
   },
@@ -24670,9 +24787,48 @@ export const AI_MOCK: QuizQuestion[] = [
         "content": "SELECT COUNT(DISTINCT a.id)\nFROM A a\nJOIN B b\n  ON a.id = b.id\nWHERE a.id IN (\n  SELECT id\n  FROM B\n  WHERE id >= 2\n);"
       },
       {
-        "type": "image",
-        "src": "/sqld-images/j875-1.png",
-        "alt": "문항 이미지 j875-1"
+        "type": "table",
+        "caption": "JOIN Basic Tables — Table A",
+        "headers": [
+          "ID",
+          "NAME"
+        ],
+        "rows": [
+          [
+            "1",
+            "ALPHA"
+          ],
+          [
+            "2",
+            "BETA"
+          ],
+          [
+            "3",
+            "GAMMA"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "JOIN Basic Tables — Table B",
+        "headers": [
+          "ID",
+          "VAL"
+        ],
+        "rows": [
+          [
+            "2",
+            "X"
+          ],
+          [
+            "3",
+            "Y"
+          ],
+          [
+            "4",
+            "Z"
+          ]
+        ]
       }
     ]
   },
@@ -24697,9 +24853,44 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "JOIN",
     "references": [
       {
-        "type": "image",
-        "src": "/sqld-images/j877-1.png",
-        "alt": "문항 이미지 j877-1"
+        "type": "table",
+        "caption": "LEFT OUTER JOIN — Table A",
+        "headers": [
+          "ID",
+          "NAME"
+        ],
+        "rows": [
+          [
+            "1",
+            "SEOUL"
+          ],
+          [
+            "2",
+            "BUSAN"
+          ],
+          [
+            "3",
+            "DAEGU"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "LEFT OUTER JOIN — Table B",
+        "headers": [
+          "ID",
+          "GRADE"
+        ],
+        "rows": [
+          [
+            "2",
+            "SILVER"
+          ],
+          [
+            "4",
+            "GOLD"
+          ]
+        ]
       }
     ]
   },
@@ -24728,9 +24919,44 @@ export const AI_MOCK: QuizQuestion[] = [
         "content": "SELECT NVL(TO_CHAR(a.id), 'NO_A') AS a_id,\n       b.id AS b_id,\n       b.grade\nFROM A a\nRIGHT OUTER JOIN B b\n  ON a.id = b.id\nORDER BY b.id;"
       },
       {
-        "type": "image",
-        "src": "/sqld-images/j878-1.png",
-        "alt": "문항 이미지 j878-1"
+        "type": "table",
+        "caption": "LEFT OUTER JOIN — Table A",
+        "headers": [
+          "ID",
+          "NAME"
+        ],
+        "rows": [
+          [
+            "1",
+            "SEOUL"
+          ],
+          [
+            "2",
+            "BUSAN"
+          ],
+          [
+            "3",
+            "DAEGU"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "LEFT OUTER JOIN — Table B",
+        "headers": [
+          "ID",
+          "GRADE"
+        ],
+        "rows": [
+          [
+            "2",
+            "SILVER"
+          ],
+          [
+            "4",
+            "GOLD"
+          ]
+        ]
       }
     ]
   },
@@ -24759,9 +24985,44 @@ export const AI_MOCK: QuizQuestion[] = [
         "content": "SELECT a.id,\n       COALESCE(b.grade, 'NONE') AS grade\nFROM A a\nLEFT OUTER JOIN B b\n  ON a.id = b.id\nWHERE b.id IS NULL\nORDER BY a.id;"
       },
       {
-        "type": "image",
-        "src": "/sqld-images/j879-1.png",
-        "alt": "문항 이미지 j879-1"
+        "type": "table",
+        "caption": "LEFT OUTER JOIN — Table A",
+        "headers": [
+          "ID",
+          "NAME"
+        ],
+        "rows": [
+          [
+            "1",
+            "SEOUL"
+          ],
+          [
+            "2",
+            "BUSAN"
+          ],
+          [
+            "3",
+            "DAEGU"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "LEFT OUTER JOIN — Table B",
+        "headers": [
+          "ID",
+          "GRADE"
+        ],
+        "rows": [
+          [
+            "2",
+            "SILVER"
+          ],
+          [
+            "4",
+            "GOLD"
+          ]
+        ]
       }
     ]
   },
@@ -24786,9 +25047,44 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "JOIN",
     "references": [
       {
-        "type": "image",
-        "src": "/sqld-images/j880-1.png",
-        "alt": "문항 이미지 j880-1"
+        "type": "table",
+        "caption": "LEFT OUTER JOIN — Table A",
+        "headers": [
+          "ID",
+          "NAME"
+        ],
+        "rows": [
+          [
+            "1",
+            "SEOUL"
+          ],
+          [
+            "2",
+            "BUSAN"
+          ],
+          [
+            "3",
+            "DAEGU"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "LEFT OUTER JOIN — Table B",
+        "headers": [
+          "ID",
+          "GRADE"
+        ],
+        "rows": [
+          [
+            "2",
+            "SILVER"
+          ],
+          [
+            "4",
+            "GOLD"
+          ]
+        ]
       }
     ]
   },
@@ -24817,9 +25113,65 @@ export const AI_MOCK: QuizQuestion[] = [
         "content": "SELECT dept\nFROM emp\nGROUP BY dept\nHAVING COUNT(*) >= 4\n   AND AVG(salary) > 3000\n   AND SUM(CASE WHEN salary >= 4000 THEN 1 ELSE 0 END) >= 2;"
       },
       {
-        "type": "image",
-        "src": "/sqld-images/j881-1.png",
-        "alt": "문항 이미지 j881-1"
+        "type": "table",
+        "caption": "EMP Group Data",
+        "headers": [
+          "EMP ID",
+          "DEPT",
+          "SALARY"
+        ],
+        "rows": [
+          [
+            "1",
+            "SALES",
+            "3000"
+          ],
+          [
+            "2",
+            "SALES",
+            "2500"
+          ],
+          [
+            "3",
+            "SALES",
+            "2000"
+          ],
+          [
+            "4",
+            "SALES",
+            "3500"
+          ],
+          [
+            "5",
+            "DEV",
+            "5000"
+          ],
+          [
+            "6",
+            "DEV",
+            "4200"
+          ],
+          [
+            "7",
+            "DEV",
+            "4100"
+          ],
+          [
+            "8",
+            "DEV",
+            "3900"
+          ],
+          [
+            "9",
+            "DEV",
+            "3700"
+          ],
+          [
+            "10",
+            "HR",
+            "2800"
+          ]
+        ]
       }
     ]
   },
@@ -24848,9 +25200,65 @@ export const AI_MOCK: QuizQuestion[] = [
         "content": "SELECT dept\nFROM emp\nGROUP BY dept\nHAVING MAX(salary) - MIN(salary) >= 1000\n   AND COUNT(*) >= 4\nORDER BY dept;"
       },
       {
-        "type": "image",
-        "src": "/sqld-images/j882-1.png",
-        "alt": "문항 이미지 j882-1"
+        "type": "table",
+        "caption": "EMP Group Data",
+        "headers": [
+          "EMP ID",
+          "DEPT",
+          "SALARY"
+        ],
+        "rows": [
+          [
+            "1",
+            "SALES",
+            "3000"
+          ],
+          [
+            "2",
+            "SALES",
+            "2500"
+          ],
+          [
+            "3",
+            "SALES",
+            "2000"
+          ],
+          [
+            "4",
+            "SALES",
+            "3500"
+          ],
+          [
+            "5",
+            "DEV",
+            "5000"
+          ],
+          [
+            "6",
+            "DEV",
+            "4200"
+          ],
+          [
+            "7",
+            "DEV",
+            "4100"
+          ],
+          [
+            "8",
+            "DEV",
+            "3900"
+          ],
+          [
+            "9",
+            "DEV",
+            "3700"
+          ],
+          [
+            "10",
+            "HR",
+            "2800"
+          ]
+        ]
       }
     ]
   },
@@ -24879,9 +25287,65 @@ export const AI_MOCK: QuizQuestion[] = [
         "content": "SELECT dept, COUNT(*) FROM emp GROUP BY dept HAVING MIN(salary) >= 2500;"
       },
       {
-        "type": "image",
-        "src": "/sqld-images/j883-1.png",
-        "alt": "문항 이미지 j883-1"
+        "type": "table",
+        "caption": "EMP Group Data",
+        "headers": [
+          "EMP ID",
+          "DEPT",
+          "SALARY"
+        ],
+        "rows": [
+          [
+            "1",
+            "SALES",
+            "3000"
+          ],
+          [
+            "2",
+            "SALES",
+            "2500"
+          ],
+          [
+            "3",
+            "SALES",
+            "2000"
+          ],
+          [
+            "4",
+            "SALES",
+            "3500"
+          ],
+          [
+            "5",
+            "DEV",
+            "5000"
+          ],
+          [
+            "6",
+            "DEV",
+            "4200"
+          ],
+          [
+            "7",
+            "DEV",
+            "4100"
+          ],
+          [
+            "8",
+            "DEV",
+            "3900"
+          ],
+          [
+            "9",
+            "DEV",
+            "3700"
+          ],
+          [
+            "10",
+            "HR",
+            "2800"
+          ]
+        ]
       }
     ]
   },
@@ -24906,9 +25370,65 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "그룹 함수",
     "references": [
       {
-        "type": "image",
-        "src": "/sqld-images/j884-1.png",
-        "alt": "문항 이미지 j884-1"
+        "type": "table",
+        "caption": "EMP Group Data",
+        "headers": [
+          "EMP ID",
+          "DEPT",
+          "SALARY"
+        ],
+        "rows": [
+          [
+            "1",
+            "SALES",
+            "3000"
+          ],
+          [
+            "2",
+            "SALES",
+            "2500"
+          ],
+          [
+            "3",
+            "SALES",
+            "2000"
+          ],
+          [
+            "4",
+            "SALES",
+            "3500"
+          ],
+          [
+            "5",
+            "DEV",
+            "5000"
+          ],
+          [
+            "6",
+            "DEV",
+            "4200"
+          ],
+          [
+            "7",
+            "DEV",
+            "4100"
+          ],
+          [
+            "8",
+            "DEV",
+            "3900"
+          ],
+          [
+            "9",
+            "DEV",
+            "3700"
+          ],
+          [
+            "10",
+            "HR",
+            "2800"
+          ]
+        ]
       }
     ]
   },
@@ -24933,9 +25453,65 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "그룹 함수",
     "references": [
       {
-        "type": "image",
-        "src": "/sqld-images/j885-1.png",
-        "alt": "문항 이미지 j885-1"
+        "type": "table",
+        "caption": "EMP Group Data",
+        "headers": [
+          "EMP ID",
+          "DEPT",
+          "SALARY"
+        ],
+        "rows": [
+          [
+            "1",
+            "SALES",
+            "3000"
+          ],
+          [
+            "2",
+            "SALES",
+            "2500"
+          ],
+          [
+            "3",
+            "SALES",
+            "2000"
+          ],
+          [
+            "4",
+            "SALES",
+            "3500"
+          ],
+          [
+            "5",
+            "DEV",
+            "5000"
+          ],
+          [
+            "6",
+            "DEV",
+            "4200"
+          ],
+          [
+            "7",
+            "DEV",
+            "4100"
+          ],
+          [
+            "8",
+            "DEV",
+            "3900"
+          ],
+          [
+            "9",
+            "DEV",
+            "3700"
+          ],
+          [
+            "10",
+            "HR",
+            "2800"
+          ]
+        ]
       }
     ]
   },
@@ -24964,9 +25540,35 @@ export const AI_MOCK: QuizQuestion[] = [
         "content": "SELECT SUM(NVL(bonus, 0)) + COUNT(salary) AS val\nFROM emp_null;"
       },
       {
-        "type": "image",
-        "src": "/sqld-images/j886-1.png",
-        "alt": "문항 이미지 j886-1"
+        "type": "table",
+        "caption": "NULL Aggregate Data",
+        "headers": [
+          "EMP ID",
+          "SALARY",
+          "BONUS"
+        ],
+        "rows": [
+          [
+            "1",
+            "1000",
+            "100"
+          ],
+          [
+            "2",
+            "",
+            "200"
+          ],
+          [
+            "3",
+            "2000",
+            ""
+          ],
+          [
+            "4",
+            "",
+            ""
+          ]
+        ]
       }
     ]
   },
@@ -24991,9 +25593,35 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "집계 함수",
     "references": [
       {
-        "type": "image",
-        "src": "/sqld-images/j888-1.png",
-        "alt": "문항 이미지 j888-1"
+        "type": "table",
+        "caption": "NULL Aggregate Data",
+        "headers": [
+          "EMP ID",
+          "SALARY",
+          "BONUS"
+        ],
+        "rows": [
+          [
+            "1",
+            "1000",
+            "100"
+          ],
+          [
+            "2",
+            "",
+            "200"
+          ],
+          [
+            "3",
+            "2000",
+            ""
+          ],
+          [
+            "4",
+            "",
+            ""
+          ]
+        ]
       }
     ]
   },
@@ -25018,9 +25646,35 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "집계 함수",
     "references": [
       {
-        "type": "image",
-        "src": "/sqld-images/j889-1.png",
-        "alt": "문항 이미지 j889-1"
+        "type": "table",
+        "caption": "NULL Aggregate Data",
+        "headers": [
+          "EMP ID",
+          "SALARY",
+          "BONUS"
+        ],
+        "rows": [
+          [
+            "1",
+            "1000",
+            "100"
+          ],
+          [
+            "2",
+            "",
+            "200"
+          ],
+          [
+            "3",
+            "2000",
+            ""
+          ],
+          [
+            "4",
+            "",
+            ""
+          ]
+        ]
       }
     ]
   },
@@ -25065,9 +25719,52 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "서브쿼리",
     "references": [
       {
-        "type": "image",
-        "src": "/sqld-images/j892-1.png",
-        "alt": "문항 이미지 j892-1"
+        "type": "table",
+        "caption": "CUSTOMER",
+        "headers": [
+          "CUSTOMER ID",
+          "NAME"
+        ],
+        "rows": [
+          [
+            "101",
+            "KIM"
+          ],
+          [
+            "102",
+            "LEE"
+          ],
+          [
+            "103",
+            "PARK"
+          ],
+          [
+            "104",
+            "CHOI"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "ORDERS",
+        "headers": [
+          "ORDER ID",
+          "CUSTOMER ID"
+        ],
+        "rows": [
+          [
+            "9001",
+            "101"
+          ],
+          [
+            "9002",
+            "101"
+          ],
+          [
+            "9003",
+            "103"
+          ]
+        ]
       }
     ]
   },
@@ -25092,9 +25789,52 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "서브쿼리",
     "references": [
       {
-        "type": "image",
-        "src": "/sqld-images/j893-1.png",
-        "alt": "문항 이미지 j893-1"
+        "type": "table",
+        "caption": "CUSTOMER",
+        "headers": [
+          "CUSTOMER ID",
+          "NAME"
+        ],
+        "rows": [
+          [
+            "101",
+            "KIM"
+          ],
+          [
+            "102",
+            "LEE"
+          ],
+          [
+            "103",
+            "PARK"
+          ],
+          [
+            "104",
+            "CHOI"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "ORDERS",
+        "headers": [
+          "ORDER ID",
+          "CUSTOMER ID"
+        ],
+        "rows": [
+          [
+            "9001",
+            "101"
+          ],
+          [
+            "9002",
+            "101"
+          ],
+          [
+            "9003",
+            "103"
+          ]
+        ]
       }
     ]
   },
@@ -25119,9 +25859,52 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "서브쿼리",
     "references": [
       {
-        "type": "image",
-        "src": "/sqld-images/j894-1.png",
-        "alt": "문항 이미지 j894-1"
+        "type": "table",
+        "caption": "CUSTOMER",
+        "headers": [
+          "CUSTOMER ID",
+          "NAME"
+        ],
+        "rows": [
+          [
+            "101",
+            "KIM"
+          ],
+          [
+            "102",
+            "LEE"
+          ],
+          [
+            "103",
+            "PARK"
+          ],
+          [
+            "104",
+            "CHOI"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "ORDERS",
+        "headers": [
+          "ORDER ID",
+          "CUSTOMER ID"
+        ],
+        "rows": [
+          [
+            "9001",
+            "101"
+          ],
+          [
+            "9002",
+            "101"
+          ],
+          [
+            "9003",
+            "103"
+          ]
+        ]
       }
     ]
   },
@@ -25150,9 +25933,52 @@ export const AI_MOCK: QuizQuestion[] = [
         "content": "salary > ANY (10, 20, 30)을 해석한다."
       },
       {
-        "type": "image",
-        "src": "/sqld-images/j895-1.png",
-        "alt": "문항 이미지 j895-1"
+        "type": "table",
+        "caption": "CUSTOMER",
+        "headers": [
+          "CUSTOMER ID",
+          "NAME"
+        ],
+        "rows": [
+          [
+            "101",
+            "KIM"
+          ],
+          [
+            "102",
+            "LEE"
+          ],
+          [
+            "103",
+            "PARK"
+          ],
+          [
+            "104",
+            "CHOI"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "ORDERS",
+        "headers": [
+          "ORDER ID",
+          "CUSTOMER ID"
+        ],
+        "rows": [
+          [
+            "9001",
+            "101"
+          ],
+          [
+            "9002",
+            "101"
+          ],
+          [
+            "9003",
+            "103"
+          ]
+        ]
       }
     ]
   },
@@ -25181,9 +26007,35 @@ export const AI_MOCK: QuizQuestion[] = [
         "content": "SELECT COUNT(*)\nFROM emp e\nWHERE e.salary > (\n        SELECT AVG(s.salary)\n        FROM emp s\n        WHERE s.dept = e.dept\n      )\n  AND e.salary >= (\n        SELECT MAX(s2.salary) - 500\n        FROM emp s2\n        WHERE s2.dept = e.dept\n      );"
       },
       {
-        "type": "image",
-        "src": "/sqld-images/j896-1.png",
-        "alt": "문항 이미지 j896-1"
+        "type": "table",
+        "caption": "Correlated Subquery Data",
+        "headers": [
+          "EMP NAME",
+          "DEPT",
+          "SALARY"
+        ],
+        "rows": [
+          [
+            "A",
+            "SALES",
+            "3000"
+          ],
+          [
+            "B",
+            "SALES",
+            "2000"
+          ],
+          [
+            "C",
+            "DEV",
+            "5000"
+          ],
+          [
+            "D",
+            "DEV",
+            "3500"
+          ]
+        ]
       }
     ]
   },
@@ -25212,9 +26064,35 @@ export const AI_MOCK: QuizQuestion[] = [
         "content": "SELECT EMP_NAME, DEPT, SALARY\nFROM EMP E1\nWHERE SALARY > (\n    SELECT AVG(SALARY)\n    FROM EMP E2\n    WHERE E1.DEPT = E2.DEPT\n);"
       },
       {
-        "type": "image",
-        "src": "/sqld-images/j897-1.png",
-        "alt": "문항 이미지 j897-1"
+        "type": "table",
+        "caption": "Correlated Subquery Data",
+        "headers": [
+          "EMP NAME",
+          "DEPT",
+          "SALARY"
+        ],
+        "rows": [
+          [
+            "A",
+            "SALES",
+            "3000"
+          ],
+          [
+            "B",
+            "SALES",
+            "2000"
+          ],
+          [
+            "C",
+            "DEV",
+            "5000"
+          ],
+          [
+            "D",
+            "DEV",
+            "3500"
+          ]
+        ]
       }
     ]
   },
@@ -25243,9 +26121,35 @@ export const AI_MOCK: QuizQuestion[] = [
         "content": "SELECT AVG(salary) FROM emp s WHERE s.dept = e.dept"
       },
       {
-        "type": "image",
-        "src": "/sqld-images/j899-1.png",
-        "alt": "문항 이미지 j899-1"
+        "type": "table",
+        "caption": "Correlated Subquery Data",
+        "headers": [
+          "EMP NAME",
+          "DEPT",
+          "SALARY"
+        ],
+        "rows": [
+          [
+            "A",
+            "SALES",
+            "3000"
+          ],
+          [
+            "B",
+            "SALES",
+            "2000"
+          ],
+          [
+            "C",
+            "DEV",
+            "5000"
+          ],
+          [
+            "D",
+            "DEV",
+            "3500"
+          ]
+        ]
       }
     ]
   },
@@ -25274,9 +26178,35 @@ export const AI_MOCK: QuizQuestion[] = [
         "content": "SELECT e.emp_name, e.dept, e.salary\nFROM emp e\nWHERE e.salary > (\n  SELECT AVG(salary)\n  FROM emp\n  WHERE dept = e.dept\n);"
       },
       {
-        "type": "image",
-        "src": "/sqld-images/j900-1.png",
-        "alt": "문항 이미지 j900-1"
+        "type": "table",
+        "caption": "Correlated Subquery Data",
+        "headers": [
+          "EMP NAME",
+          "DEPT",
+          "SALARY"
+        ],
+        "rows": [
+          [
+            "A",
+            "SALES",
+            "3000"
+          ],
+          [
+            "B",
+            "SALES",
+            "2000"
+          ],
+          [
+            "C",
+            "DEV",
+            "5000"
+          ],
+          [
+            "D",
+            "DEV",
+            "3500"
+          ]
+        ]
       }
     ]
   },
@@ -25371,9 +26301,50 @@ export const AI_MOCK: QuizQuestion[] = [
         "content": "SELECT emp_name,\n       LEVEL AS lv,\n       CONNECT_BY_ISLEAF AS is_leaf\nFROM emp_tree\nSTART WITH mgr_id IS NULL\nCONNECT BY PRIOR emp_id = mgr_id\nORDER SIBLINGS BY emp_name;"
       },
       {
-        "type": "image",
-        "src": "/sqld-images/j906-1.png",
-        "alt": "문항 이미지 j906-1"
+        "type": "table",
+        "caption": "Hierarchy EMP Data",
+        "headers": [
+          "EMP ID",
+          "EMP NAME",
+          "MGR ID"
+        ],
+        "rows": [
+          [
+            "1",
+            "CEO",
+            ""
+          ],
+          [
+            "2",
+            "SALES_MGR",
+            "1"
+          ],
+          [
+            "3",
+            "DEV_MGR",
+            "1"
+          ],
+          [
+            "4",
+            "SALES_A",
+            "2"
+          ],
+          [
+            "5",
+            "SALES_B",
+            "2"
+          ],
+          [
+            "6",
+            "DEV_A",
+            "3"
+          ],
+          [
+            "7",
+            "DEV_B",
+            "3"
+          ]
+        ]
       }
     ]
   },
@@ -25402,9 +26373,50 @@ export const AI_MOCK: QuizQuestion[] = [
         "content": "SELECT emp_id,\n       emp_name,\n       mgr_id,\n       LEVEL AS lv\nFROM emp_tree\nSTART WITH mgr_id IS NULL\nCONNECT BY PRIOR emp_id = mgr_id\nORDER SIBLINGS BY emp_name;"
       },
       {
-        "type": "image",
-        "src": "/sqld-images/j907-1.png",
-        "alt": "문항 이미지 j907-1"
+        "type": "table",
+        "caption": "Hierarchy EMP Data",
+        "headers": [
+          "EMP ID",
+          "EMP NAME",
+          "MGR ID"
+        ],
+        "rows": [
+          [
+            "1",
+            "CEO",
+            ""
+          ],
+          [
+            "2",
+            "SALES_MGR",
+            "1"
+          ],
+          [
+            "3",
+            "DEV_MGR",
+            "1"
+          ],
+          [
+            "4",
+            "SALES_A",
+            "2"
+          ],
+          [
+            "5",
+            "SALES_B",
+            "2"
+          ],
+          [
+            "6",
+            "DEV_A",
+            "3"
+          ],
+          [
+            "7",
+            "DEV_B",
+            "3"
+          ]
+        ]
       }
     ]
   },
@@ -25433,9 +26445,50 @@ export const AI_MOCK: QuizQuestion[] = [
         "content": "SELECT emp_name,\n       LEVEL AS lv,\n       SYS_CONNECT_BY_PATH(emp_name, ' > ') AS path\nFROM emp_tree\nSTART WITH mgr_id IS NULL\nCONNECT BY PRIOR emp_id = mgr_id\nORDER SIBLINGS BY emp_name;"
       },
       {
-        "type": "image",
-        "src": "/sqld-images/j908-1.png",
-        "alt": "문항 이미지 j908-1"
+        "type": "table",
+        "caption": "Hierarchy EMP Data",
+        "headers": [
+          "EMP ID",
+          "EMP NAME",
+          "MGR ID"
+        ],
+        "rows": [
+          [
+            "1",
+            "CEO",
+            ""
+          ],
+          [
+            "2",
+            "SALES_MGR",
+            "1"
+          ],
+          [
+            "3",
+            "DEV_MGR",
+            "1"
+          ],
+          [
+            "4",
+            "SALES_A",
+            "2"
+          ],
+          [
+            "5",
+            "SALES_B",
+            "2"
+          ],
+          [
+            "6",
+            "DEV_A",
+            "3"
+          ],
+          [
+            "7",
+            "DEV_B",
+            "3"
+          ]
+        ]
       }
     ]
   },
@@ -25464,9 +26517,50 @@ export const AI_MOCK: QuizQuestion[] = [
         "content": "SELECT CONNECT_BY_ROOT emp_name AS root_name,\n       emp_name,\n       LEVEL AS lv\nFROM emp_tree\nSTART WITH mgr_id IS NULL\nCONNECT BY PRIOR emp_id = mgr_id;"
       },
       {
-        "type": "image",
-        "src": "/sqld-images/j909-1.png",
-        "alt": "문항 이미지 j909-1"
+        "type": "table",
+        "caption": "Hierarchy EMP Data",
+        "headers": [
+          "EMP ID",
+          "EMP NAME",
+          "MGR ID"
+        ],
+        "rows": [
+          [
+            "1",
+            "CEO",
+            ""
+          ],
+          [
+            "2",
+            "SALES_MGR",
+            "1"
+          ],
+          [
+            "3",
+            "DEV_MGR",
+            "1"
+          ],
+          [
+            "4",
+            "SALES_A",
+            "2"
+          ],
+          [
+            "5",
+            "SALES_B",
+            "2"
+          ],
+          [
+            "6",
+            "DEV_A",
+            "3"
+          ],
+          [
+            "7",
+            "DEV_B",
+            "3"
+          ]
+        ]
       }
     ]
   },
@@ -25495,9 +26589,45 @@ export const AI_MOCK: QuizQuestion[] = [
         "content": "SELECT dept, Q1, Q2\nFROM (\n  SELECT dept, quarter_cd, amount\n  FROM sales_q\n)\nPIVOT (\n  SUM(amount)\n  FOR quarter_cd IN ('Q1' AS Q1, 'Q2' AS Q2)\n)\nORDER BY dept;"
       },
       {
-        "type": "image",
-        "src": "/sqld-images/j911-1.png",
-        "alt": "문항 이미지 j911-1"
+        "type": "table",
+        "caption": "PIVOT Source Data",
+        "headers": [
+          "DEPT",
+          "QUARTER CD",
+          "AMOUNT"
+        ],
+        "rows": [
+          [
+            "SALES",
+            "Q1",
+            "100"
+          ],
+          [
+            "SALES",
+            "Q2",
+            "120"
+          ],
+          [
+            "DEV",
+            "Q1",
+            "200"
+          ],
+          [
+            "DEV",
+            "Q2",
+            "180"
+          ],
+          [
+            "HR",
+            "Q1",
+            "90"
+          ],
+          [
+            "HR",
+            "Q2",
+            "110"
+          ]
+        ]
       }
     ]
   },
@@ -25526,9 +26656,45 @@ export const AI_MOCK: QuizQuestion[] = [
         "content": "SELECT dept, Q1, Q2\nFROM (\n  SELECT dept, quarter_cd, amount\n  FROM sales_q\n)\nPIVOT (\n  SUM(amount)\n  FOR quarter_cd IN ('Q1' AS Q1, 'Q2' AS Q2)\n);"
       },
       {
-        "type": "image",
-        "src": "/sqld-images/j915-1.png",
-        "alt": "문항 이미지 j915-1"
+        "type": "table",
+        "caption": "PIVOT Source Data",
+        "headers": [
+          "DEPT",
+          "QUARTER CD",
+          "AMOUNT"
+        ],
+        "rows": [
+          [
+            "SALES",
+            "Q1",
+            "100"
+          ],
+          [
+            "SALES",
+            "Q2",
+            "120"
+          ],
+          [
+            "DEV",
+            "Q1",
+            "200"
+          ],
+          [
+            "DEV",
+            "Q2",
+            "180"
+          ],
+          [
+            "HR",
+            "Q1",
+            "90"
+          ],
+          [
+            "HR",
+            "Q2",
+            "110"
+          ]
+        ]
       }
     ]
   },
@@ -25557,9 +26723,35 @@ export const AI_MOCK: QuizQuestion[] = [
         "content": "SELECT region,\n       category,\n       amount,\n       ROW_NUMBER() OVER (\n         ORDER BY category ASC, amount DESC, region ASC\n       ) AS rn\nFROM sales\nWHERE amount >= 100;"
       },
       {
-        "type": "image",
-        "src": "/sqld-images/j916-1.png",
-        "alt": "문항 이미지 j916-1"
+        "type": "table",
+        "caption": "SELECT Result Data",
+        "headers": [
+          "REGION",
+          "AMOUNT",
+          "CATEGORY"
+        ],
+        "rows": [
+          [
+            "SEOUL",
+            "150",
+            "A"
+          ],
+          [
+            "BUSAN",
+            "100",
+            "A"
+          ],
+          [
+            "SEOUL",
+            "100",
+            "B"
+          ],
+          [
+            "INCHEON",
+            "80",
+            "B"
+          ]
+        ]
       }
     ]
   },
@@ -25588,9 +26780,35 @@ export const AI_MOCK: QuizQuestion[] = [
         "content": "SELECT COUNT(*)\nFROM (\n  SELECT DISTINCT region, category\n  FROM sales\n  WHERE amount >= 100\n) x;"
       },
       {
-        "type": "image",
-        "src": "/sqld-images/j917-1.png",
-        "alt": "문항 이미지 j917-1"
+        "type": "table",
+        "caption": "SELECT Result Data",
+        "headers": [
+          "REGION",
+          "AMOUNT",
+          "CATEGORY"
+        ],
+        "rows": [
+          [
+            "SEOUL",
+            "150",
+            "A"
+          ],
+          [
+            "BUSAN",
+            "100",
+            "A"
+          ],
+          [
+            "SEOUL",
+            "100",
+            "B"
+          ],
+          [
+            "INCHEON",
+            "80",
+            "B"
+          ]
+        ]
       }
     ]
   },
@@ -25659,9 +26877,40 @@ export const AI_MOCK: QuizQuestion[] = [
         "content": "SELECT region,\n       seller,\n       amount,\n       ROW_NUMBER() OVER (\n         PARTITION BY region\n         ORDER BY amount DESC, seller ASC\n       ) AS rn,\n       RANK() OVER (\n         PARTITION BY region\n         ORDER BY amount DESC\n       ) AS rnk\nFROM sales_rank;"
       },
       {
-        "type": "image",
-        "src": "/sqld-images/j921-1.png",
-        "alt": "문항 이미지 j921-1"
+        "type": "table",
+        "caption": "Window Function Data",
+        "headers": [
+          "REGION",
+          "SELLER",
+          "AMOUNT"
+        ],
+        "rows": [
+          [
+            "SEOUL",
+            "KIM",
+            "500"
+          ],
+          [
+            "SEOUL",
+            "LEE",
+            "300"
+          ],
+          [
+            "BUSAN",
+            "PARK",
+            "450"
+          ],
+          [
+            "BUSAN",
+            "CHOI",
+            "200"
+          ],
+          [
+            "BUSAN",
+            "JUNG",
+            "200"
+          ]
+        ]
       }
     ]
   },
@@ -25686,9 +26935,40 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "윈도우 함수",
     "references": [
       {
-        "type": "image",
-        "src": "/sqld-images/j922-1.png",
-        "alt": "문항 이미지 j922-1"
+        "type": "table",
+        "caption": "Window Function Data",
+        "headers": [
+          "REGION",
+          "SELLER",
+          "AMOUNT"
+        ],
+        "rows": [
+          [
+            "SEOUL",
+            "KIM",
+            "500"
+          ],
+          [
+            "SEOUL",
+            "LEE",
+            "300"
+          ],
+          [
+            "BUSAN",
+            "PARK",
+            "450"
+          ],
+          [
+            "BUSAN",
+            "CHOI",
+            "200"
+          ],
+          [
+            "BUSAN",
+            "JUNG",
+            "200"
+          ]
+        ]
       }
     ]
   },
@@ -25713,9 +26993,40 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "윈도우 함수",
     "references": [
       {
-        "type": "image",
-        "src": "/sqld-images/j924-1.png",
-        "alt": "문항 이미지 j924-1"
+        "type": "table",
+        "caption": "Window Function Data",
+        "headers": [
+          "REGION",
+          "SELLER",
+          "AMOUNT"
+        ],
+        "rows": [
+          [
+            "SEOUL",
+            "KIM",
+            "500"
+          ],
+          [
+            "SEOUL",
+            "LEE",
+            "300"
+          ],
+          [
+            "BUSAN",
+            "PARK",
+            "450"
+          ],
+          [
+            "BUSAN",
+            "CHOI",
+            "200"
+          ],
+          [
+            "BUSAN",
+            "JUNG",
+            "200"
+          ]
+        ]
       }
     ]
   },
@@ -25740,9 +27051,40 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "윈도우 함수",
     "references": [
       {
-        "type": "image",
-        "src": "/sqld-images/j925-1.png",
-        "alt": "문항 이미지 j925-1"
+        "type": "table",
+        "caption": "Window Function Data",
+        "headers": [
+          "REGION",
+          "SELLER",
+          "AMOUNT"
+        ],
+        "rows": [
+          [
+            "SEOUL",
+            "KIM",
+            "500"
+          ],
+          [
+            "SEOUL",
+            "LEE",
+            "300"
+          ],
+          [
+            "BUSAN",
+            "PARK",
+            "450"
+          ],
+          [
+            "BUSAN",
+            "CHOI",
+            "200"
+          ],
+          [
+            "BUSAN",
+            "JUNG",
+            "200"
+          ]
+        ]
       }
     ]
   },
@@ -25771,9 +27113,35 @@ export const AI_MOCK: QuizQuestion[] = [
         "content": "SELECT region,\n       product,\n       SUM(amount) AS amt,\n       GROUPING(region) AS gr,\n       GROUPING(product) AS gp\nFROM order_amt\nGROUP BY ROLLUP(region, product);"
       },
       {
-        "type": "image",
-        "src": "/sqld-images/j926-1.png",
-        "alt": "문항 이미지 j926-1"
+        "type": "table",
+        "caption": "ROLLUP Data",
+        "headers": [
+          "REGION",
+          "PRODUCT",
+          "AMOUNT"
+        ],
+        "rows": [
+          [
+            "SEOUL",
+            "A",
+            "100"
+          ],
+          [
+            "SEOUL",
+            "B",
+            "200"
+          ],
+          [
+            "BUSAN",
+            "A",
+            "150"
+          ],
+          [
+            "BUSAN",
+            "B",
+            "50"
+          ]
+        ]
       }
     ]
   },
@@ -25798,9 +27166,35 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "그룹 함수",
     "references": [
       {
-        "type": "image",
-        "src": "/sqld-images/j929-1.png",
-        "alt": "문항 이미지 j929-1"
+        "type": "table",
+        "caption": "ROLLUP Data",
+        "headers": [
+          "REGION",
+          "PRODUCT",
+          "AMOUNT"
+        ],
+        "rows": [
+          [
+            "SEOUL",
+            "A",
+            "100"
+          ],
+          [
+            "SEOUL",
+            "B",
+            "200"
+          ],
+          [
+            "BUSAN",
+            "A",
+            "150"
+          ],
+          [
+            "BUSAN",
+            "B",
+            "50"
+          ]
+        ]
       }
     ]
   },
@@ -25825,9 +27219,35 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "그룹 함수",
     "references": [
       {
-        "type": "image",
-        "src": "/sqld-images/j930-1.png",
-        "alt": "문항 이미지 j930-1"
+        "type": "table",
+        "caption": "ROLLUP Data",
+        "headers": [
+          "REGION",
+          "PRODUCT",
+          "AMOUNT"
+        ],
+        "rows": [
+          [
+            "SEOUL",
+            "A",
+            "100"
+          ],
+          [
+            "SEOUL",
+            "B",
+            "200"
+          ],
+          [
+            "BUSAN",
+            "A",
+            "150"
+          ],
+          [
+            "BUSAN",
+            "B",
+            "50"
+          ]
+        ]
       }
     ]
   },
@@ -25925,8 +27345,9 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "image",
-        "src": "/sqld-images/j937-1.png",
-        "alt": "문항 이미지 j937-1"
+        "src": "/sqld-images/j1115-1.png",
+        "alt": "Sales ERD",
+        "caption": "Sales ERD"
       }
     ]
   },
@@ -25952,8 +27373,9 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "image",
-        "src": "/sqld-images/j938-1.png",
-        "alt": "문항 이미지 j938-1"
+        "src": "/sqld-images/j1115-1.png",
+        "alt": "Sales ERD",
+        "caption": "Sales ERD"
       }
     ]
   },
@@ -25979,8 +27401,9 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "image",
-        "src": "/sqld-images/j940-1.png",
-        "alt": "문항 이미지 j940-1"
+        "src": "/sqld-images/j1115-1.png",
+        "alt": "Sales ERD",
+        "caption": "Sales ERD"
       }
     ]
   },
@@ -26010,8 +27433,9 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "image",
-        "src": "/sqld-images/j941-1.png",
-        "alt": "문항 이미지 j941-1"
+        "src": "/sqld-images/j1147-1.png",
+        "alt": "Parent / Child ERD",
+        "caption": "Parent / Child ERD"
       }
     ]
   },
@@ -26037,8 +27461,9 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "image",
-        "src": "/sqld-images/j942-1.png",
-        "alt": "문항 이미지 j942-1"
+        "src": "/sqld-images/j1147-1.png",
+        "alt": "Parent / Child ERD",
+        "caption": "Parent / Child ERD"
       }
     ]
   },
@@ -26068,8 +27493,9 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "image",
-        "src": "/sqld-images/j943-1.png",
-        "alt": "문항 이미지 j943-1"
+        "src": "/sqld-images/j1147-1.png",
+        "alt": "Parent / Child ERD",
+        "caption": "Parent / Child ERD"
       }
     ]
   },
@@ -26095,8 +27521,9 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "image",
-        "src": "/sqld-images/j944-1.png",
-        "alt": "문항 이미지 j944-1"
+        "src": "/sqld-images/j1147-1.png",
+        "alt": "Parent / Child ERD",
+        "caption": "Parent / Child ERD"
       }
     ]
   },
@@ -26122,8 +27549,9 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "image",
-        "src": "/sqld-images/j945-1.png",
-        "alt": "문항 이미지 j945-1"
+        "src": "/sqld-images/j1147-1.png",
+        "alt": "Parent / Child ERD",
+        "caption": "Parent / Child ERD"
       }
     ]
   },
@@ -26152,9 +27580,38 @@ export const AI_MOCK: QuizQuestion[] = [
         "content": "주문번호+상품번호가 기본키라고 가정한다."
       },
       {
-        "type": "image",
-        "src": "/sqld-images/j946-1.png",
-        "alt": "문항 이미지 j946-1"
+        "type": "table",
+        "caption": "Normalization Source Table",
+        "headers": [
+          "ORDER NO",
+          "PRODUCT NO",
+          "PRODUCT NAME",
+          "CUSTOMER NAME",
+          "CUSTOMER GRADE"
+        ],
+        "rows": [
+          [
+            "1001",
+            "P01",
+            "SQL BOOK",
+            "KIM",
+            "VIP"
+          ],
+          [
+            "1001",
+            "P02",
+            "DB BOOK",
+            "KIM",
+            "VIP"
+          ],
+          [
+            "1002",
+            "P03",
+            "NOTE",
+            "LEE",
+            "BASIC"
+          ]
+        ]
       }
     ]
   },
@@ -26179,9 +27636,38 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "정규화",
     "references": [
       {
-        "type": "image",
-        "src": "/sqld-images/j947-1.png",
-        "alt": "문항 이미지 j947-1"
+        "type": "table",
+        "caption": "Normalization Source Table",
+        "headers": [
+          "ORDER NO",
+          "PRODUCT NO",
+          "PRODUCT NAME",
+          "CUSTOMER NAME",
+          "CUSTOMER GRADE"
+        ],
+        "rows": [
+          [
+            "1001",
+            "P01",
+            "SQL BOOK",
+            "KIM",
+            "VIP"
+          ],
+          [
+            "1001",
+            "P02",
+            "DB BOOK",
+            "KIM",
+            "VIP"
+          ],
+          [
+            "1002",
+            "P03",
+            "NOTE",
+            "LEE",
+            "BASIC"
+          ]
+        ]
       }
     ]
   },
@@ -26206,9 +27692,38 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "정규화",
     "references": [
       {
-        "type": "image",
-        "src": "/sqld-images/j949-1.png",
-        "alt": "문항 이미지 j949-1"
+        "type": "table",
+        "caption": "Normalization Source Table",
+        "headers": [
+          "ORDER NO",
+          "PRODUCT NO",
+          "PRODUCT NAME",
+          "CUSTOMER NAME",
+          "CUSTOMER GRADE"
+        ],
+        "rows": [
+          [
+            "1001",
+            "P01",
+            "SQL BOOK",
+            "KIM",
+            "VIP"
+          ],
+          [
+            "1001",
+            "P02",
+            "DB BOOK",
+            "KIM",
+            "VIP"
+          ],
+          [
+            "1002",
+            "P03",
+            "NOTE",
+            "LEE",
+            "BASIC"
+          ]
+        ]
       }
     ]
   },
@@ -26233,9 +27748,38 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "정규화",
     "references": [
       {
-        "type": "image",
-        "src": "/sqld-images/j950-1.png",
-        "alt": "문항 이미지 j950-1"
+        "type": "table",
+        "caption": "Normalization Source Table",
+        "headers": [
+          "ORDER NO",
+          "PRODUCT NO",
+          "PRODUCT NAME",
+          "CUSTOMER NAME",
+          "CUSTOMER GRADE"
+        ],
+        "rows": [
+          [
+            "1001",
+            "P01",
+            "SQL BOOK",
+            "KIM",
+            "VIP"
+          ],
+          [
+            "1001",
+            "P02",
+            "DB BOOK",
+            "KIM",
+            "VIP"
+          ],
+          [
+            "1002",
+            "P03",
+            "NOTE",
+            "LEE",
+            "BASIC"
+          ]
+        ]
       }
     ]
   },
@@ -26969,8 +28513,9 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "image",
-        "src": "/sqld-images/j986-1.png",
-        "alt": "문항 이미지 j986-1"
+        "src": "/sqld-images/j1115-1.png",
+        "alt": "Sales ERD",
+        "caption": "Sales ERD"
       }
     ]
   },
@@ -26996,8 +28541,9 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "image",
-        "src": "/sqld-images/j987-1.png",
-        "alt": "문항 이미지 j987-1"
+        "src": "/sqld-images/j1115-1.png",
+        "alt": "Sales ERD",
+        "caption": "Sales ERD"
       }
     ]
   },
@@ -27023,8 +28569,9 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "image",
-        "src": "/sqld-images/j988-1.png",
-        "alt": "문항 이미지 j988-1"
+        "src": "/sqld-images/j1115-1.png",
+        "alt": "Sales ERD",
+        "caption": "Sales ERD"
       }
     ]
   },
@@ -27050,8 +28597,9 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "image",
-        "src": "/sqld-images/j989-1.png",
-        "alt": "문항 이미지 j989-1"
+        "src": "/sqld-images/j1115-1.png",
+        "alt": "Sales ERD",
+        "caption": "Sales ERD"
       }
     ]
   },
@@ -27077,8 +28625,9 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "image",
-        "src": "/sqld-images/j990-1.png",
-        "alt": "문항 이미지 j990-1"
+        "src": "/sqld-images/j1115-1.png",
+        "alt": "Sales ERD",
+        "caption": "Sales ERD"
       }
     ]
   },
@@ -27107,9 +28656,38 @@ export const AI_MOCK: QuizQuestion[] = [
         "content": "주문번호는 고객명과 고객등급을 결정하고, 상품번호는 상품명을 결정한다고 가정한다."
       },
       {
-        "type": "image",
-        "src": "/sqld-images/j991-1.png",
-        "alt": "문항 이미지 j991-1"
+        "type": "table",
+        "caption": "Normalization Source Table",
+        "headers": [
+          "ORDER NO",
+          "PRODUCT NO",
+          "PRODUCT NAME",
+          "CUSTOMER NAME",
+          "CUSTOMER GRADE"
+        ],
+        "rows": [
+          [
+            "1001",
+            "P01",
+            "SQL BOOK",
+            "KIM",
+            "VIP"
+          ],
+          [
+            "1001",
+            "P02",
+            "DB BOOK",
+            "KIM",
+            "VIP"
+          ],
+          [
+            "1002",
+            "P03",
+            "NOTE",
+            "LEE",
+            "BASIC"
+          ]
+        ]
       }
     ]
   },
@@ -27138,9 +28716,38 @@ export const AI_MOCK: QuizQuestion[] = [
         "content": "주문번호는 고객명과 고객등급을 결정하고, 상품번호는 상품명을 결정한다고 가정한다."
       },
       {
-        "type": "image",
-        "src": "/sqld-images/j992-1.png",
-        "alt": "문항 이미지 j992-1"
+        "type": "table",
+        "caption": "Normalization Source Table",
+        "headers": [
+          "ORDER NO",
+          "PRODUCT NO",
+          "PRODUCT NAME",
+          "CUSTOMER NAME",
+          "CUSTOMER GRADE"
+        ],
+        "rows": [
+          [
+            "1001",
+            "P01",
+            "SQL BOOK",
+            "KIM",
+            "VIP"
+          ],
+          [
+            "1001",
+            "P02",
+            "DB BOOK",
+            "KIM",
+            "VIP"
+          ],
+          [
+            "1002",
+            "P03",
+            "NOTE",
+            "LEE",
+            "BASIC"
+          ]
+        ]
       }
     ]
   },
@@ -27169,9 +28776,38 @@ export const AI_MOCK: QuizQuestion[] = [
         "content": "고객 정보가 주문 데이터와 함께 저장된다고 가정한다."
       },
       {
-        "type": "image",
-        "src": "/sqld-images/j994-1.png",
-        "alt": "문항 이미지 j994-1"
+        "type": "table",
+        "caption": "Normalization Source Table",
+        "headers": [
+          "ORDER NO",
+          "PRODUCT NO",
+          "PRODUCT NAME",
+          "CUSTOMER NAME",
+          "CUSTOMER GRADE"
+        ],
+        "rows": [
+          [
+            "1001",
+            "P01",
+            "SQL BOOK",
+            "KIM",
+            "VIP"
+          ],
+          [
+            "1001",
+            "P02",
+            "DB BOOK",
+            "KIM",
+            "VIP"
+          ],
+          [
+            "1002",
+            "P03",
+            "NOTE",
+            "LEE",
+            "BASIC"
+          ]
+        ]
       }
     ]
   },
@@ -27200,9 +28836,38 @@ export const AI_MOCK: QuizQuestion[] = [
         "content": "고객명은 고객등급을 결정한다고 가정한다."
       },
       {
-        "type": "image",
-        "src": "/sqld-images/j995-1.png",
-        "alt": "문항 이미지 j995-1"
+        "type": "table",
+        "caption": "Normalization Source Table",
+        "headers": [
+          "ORDER NO",
+          "PRODUCT NO",
+          "PRODUCT NAME",
+          "CUSTOMER NAME",
+          "CUSTOMER GRADE"
+        ],
+        "rows": [
+          [
+            "1001",
+            "P01",
+            "SQL BOOK",
+            "KIM",
+            "VIP"
+          ],
+          [
+            "1001",
+            "P02",
+            "DB BOOK",
+            "KIM",
+            "VIP"
+          ],
+          [
+            "1002",
+            "P03",
+            "NOTE",
+            "LEE",
+            "BASIC"
+          ]
+        ]
       }
     ]
   },
@@ -27227,9 +28892,9 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "DDL",
     "references": [
       {
-        "type": "image",
-        "src": "/sqld-images/j996-1.png",
-        "alt": "문항 이미지 j996-1"
+        "type": "sql",
+        "caption": "DDL Statements",
+        "code": "CREATE TABLE emp (\n  emp_id NUMBER PRIMARY KEY,\n  emp_name VARCHAR2(30)\n);\nALTER TABLE emp ADD hire_date DATE;\nDROP TABLE temp_emp;"
       }
     ]
   },
@@ -27254,9 +28919,9 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "DDL",
     "references": [
       {
-        "type": "image",
-        "src": "/sqld-images/j997-1.png",
-        "alt": "문항 이미지 j997-1"
+        "type": "sql",
+        "caption": "DDL Statements",
+        "code": "CREATE TABLE emp (\n  emp_id NUMBER PRIMARY KEY,\n  emp_name VARCHAR2(30)\n);\nALTER TABLE emp ADD hire_date DATE;\nDROP TABLE temp_emp;"
       }
     ]
   },
@@ -27341,9 +29006,9 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "DCL",
     "references": [
       {
-        "type": "image",
-        "src": "/sqld-images/j1001-1.png",
-        "alt": "문항 이미지 j1001-1"
+        "type": "sql",
+        "caption": "DCL Statements",
+        "code": "GRANT SELECT, INSERT ON emp TO user1;\nREVOKE INSERT ON emp FROM user1;"
       }
     ]
   },
@@ -27368,9 +29033,9 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "DCL",
     "references": [
       {
-        "type": "image",
-        "src": "/sqld-images/j1002-1.png",
-        "alt": "문항 이미지 j1002-1"
+        "type": "sql",
+        "caption": "DCL Statements",
+        "code": "GRANT SELECT, INSERT ON emp TO user1;\nREVOKE INSERT ON emp FROM user1;"
       }
     ]
   },
@@ -27905,9 +29570,35 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "집계 함수",
     "references": [
       {
-        "type": "image",
-        "src": "/sqld-images/j1031-1.png",
-        "alt": "문항 이미지 j1031-1"
+        "type": "table",
+        "caption": "NULL Aggregate Data",
+        "headers": [
+          "EMP ID",
+          "SALARY",
+          "BONUS"
+        ],
+        "rows": [
+          [
+            "1",
+            "1000",
+            "100"
+          ],
+          [
+            "2",
+            "",
+            "200"
+          ],
+          [
+            "3",
+            "2000",
+            ""
+          ],
+          [
+            "4",
+            "",
+            ""
+          ]
+        ]
       }
     ]
   },
@@ -27936,9 +29627,35 @@ export const AI_MOCK: QuizQuestion[] = [
         "content": "SELECT SUM(NVL(bonus, 0)) FROM t;"
       },
       {
-        "type": "image",
-        "src": "/sqld-images/j1032-1.png",
-        "alt": "문항 이미지 j1032-1"
+        "type": "table",
+        "caption": "NULL Aggregate Data",
+        "headers": [
+          "EMP ID",
+          "SALARY",
+          "BONUS"
+        ],
+        "rows": [
+          [
+            "1",
+            "1000",
+            "100"
+          ],
+          [
+            "2",
+            "",
+            "200"
+          ],
+          [
+            "3",
+            "2000",
+            ""
+          ],
+          [
+            "4",
+            "",
+            ""
+          ]
+        ]
       }
     ]
   },
@@ -27963,9 +29680,35 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "집계 함수",
     "references": [
       {
-        "type": "image",
-        "src": "/sqld-images/j1033-1.png",
-        "alt": "문항 이미지 j1033-1"
+        "type": "table",
+        "caption": "NULL Aggregate Data",
+        "headers": [
+          "EMP ID",
+          "SALARY",
+          "BONUS"
+        ],
+        "rows": [
+          [
+            "1",
+            "1000",
+            "100"
+          ],
+          [
+            "2",
+            "",
+            "200"
+          ],
+          [
+            "3",
+            "2000",
+            ""
+          ],
+          [
+            "4",
+            "",
+            ""
+          ]
+        ]
       }
     ]
   },
@@ -27994,9 +29737,35 @@ export const AI_MOCK: QuizQuestion[] = [
         "content": "SELECT COUNT(*) - COUNT(salary) FROM t;"
       },
       {
-        "type": "image",
-        "src": "/sqld-images/j1034-1.png",
-        "alt": "문항 이미지 j1034-1"
+        "type": "table",
+        "caption": "NULL Aggregate Data",
+        "headers": [
+          "EMP ID",
+          "SALARY",
+          "BONUS"
+        ],
+        "rows": [
+          [
+            "1",
+            "1000",
+            "100"
+          ],
+          [
+            "2",
+            "",
+            "200"
+          ],
+          [
+            "3",
+            "2000",
+            ""
+          ],
+          [
+            "4",
+            "",
+            ""
+          ]
+        ]
       }
     ]
   },
@@ -28175,9 +29944,50 @@ export const AI_MOCK: QuizQuestion[] = [
         "content": "SELECT emp_name, LEVEL\nFROM emp_tree\nSTART WITH mgr_id IS NULL\nCONNECT BY PRIOR emp_id = mgr_id;"
       },
       {
-        "type": "image",
-        "src": "/sqld-images/j1041-1.png",
-        "alt": "문항 이미지 j1041-1"
+        "type": "table",
+        "caption": "Hierarchy EMP Data",
+        "headers": [
+          "EMP ID",
+          "EMP NAME",
+          "MGR ID"
+        ],
+        "rows": [
+          [
+            "1",
+            "CEO",
+            ""
+          ],
+          [
+            "2",
+            "SALES_MGR",
+            "1"
+          ],
+          [
+            "3",
+            "DEV_MGR",
+            "1"
+          ],
+          [
+            "4",
+            "SALES_A",
+            "2"
+          ],
+          [
+            "5",
+            "SALES_B",
+            "2"
+          ],
+          [
+            "6",
+            "DEV_A",
+            "3"
+          ],
+          [
+            "7",
+            "DEV_B",
+            "3"
+          ]
+        ]
       }
     ]
   },
@@ -28206,9 +30016,50 @@ export const AI_MOCK: QuizQuestion[] = [
         "content": "SELECT COUNT(*)\nFROM (\n  SELECT emp_name, CONNECT_BY_ISLEAF AS is_leaf\n  FROM emp_tree\n  START WITH mgr_id IS NULL\n  CONNECT BY PRIOR emp_id = mgr_id\n) x\nWHERE is_leaf = 1;"
       },
       {
-        "type": "image",
-        "src": "/sqld-images/j1042-1.png",
-        "alt": "문항 이미지 j1042-1"
+        "type": "table",
+        "caption": "Hierarchy EMP Data",
+        "headers": [
+          "EMP ID",
+          "EMP NAME",
+          "MGR ID"
+        ],
+        "rows": [
+          [
+            "1",
+            "CEO",
+            ""
+          ],
+          [
+            "2",
+            "SALES_MGR",
+            "1"
+          ],
+          [
+            "3",
+            "DEV_MGR",
+            "1"
+          ],
+          [
+            "4",
+            "SALES_A",
+            "2"
+          ],
+          [
+            "5",
+            "SALES_B",
+            "2"
+          ],
+          [
+            "6",
+            "DEV_A",
+            "3"
+          ],
+          [
+            "7",
+            "DEV_B",
+            "3"
+          ]
+        ]
       }
     ]
   },
@@ -28237,9 +30088,50 @@ export const AI_MOCK: QuizQuestion[] = [
         "content": "SELECT emp_name,\n       CONNECT_BY_ROOT emp_name AS root_name\nFROM emp_tree\nSTART WITH mgr_id IS NULL\nCONNECT BY PRIOR emp_id = mgr_id;"
       },
       {
-        "type": "image",
-        "src": "/sqld-images/j1044-1.png",
-        "alt": "문항 이미지 j1044-1"
+        "type": "table",
+        "caption": "Hierarchy EMP Data",
+        "headers": [
+          "EMP ID",
+          "EMP NAME",
+          "MGR ID"
+        ],
+        "rows": [
+          [
+            "1",
+            "CEO",
+            ""
+          ],
+          [
+            "2",
+            "SALES_MGR",
+            "1"
+          ],
+          [
+            "3",
+            "DEV_MGR",
+            "1"
+          ],
+          [
+            "4",
+            "SALES_A",
+            "2"
+          ],
+          [
+            "5",
+            "SALES_B",
+            "2"
+          ],
+          [
+            "6",
+            "DEV_A",
+            "3"
+          ],
+          [
+            "7",
+            "DEV_B",
+            "3"
+          ]
+        ]
       }
     ]
   },
@@ -28284,9 +30176,9 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "View",
     "references": [
       {
-        "type": "image",
-        "src": "/sqld-images/j1047-1.png",
-        "alt": "문항 이미지 j1047-1"
+        "type": "sql",
+        "caption": "VIEW Definition",
+        "code": "CREATE VIEW v_emp AS\nSELECT emp_id, emp_name, dept\nFROM emp\nWHERE dept = 'SALES';"
       }
     ]
   },
@@ -28375,9 +30267,40 @@ export const AI_MOCK: QuizQuestion[] = [
         "content": "SELECT region,\n       seller,\n       amount,\n       SUM(amount) OVER (PARTITION BY region) AS region_total\nFROM sales_rank;"
       },
       {
-        "type": "image",
-        "src": "/sqld-images/j1053-1.png",
-        "alt": "문항 이미지 j1053-1"
+        "type": "table",
+        "caption": "Window Function Data",
+        "headers": [
+          "REGION",
+          "SELLER",
+          "AMOUNT"
+        ],
+        "rows": [
+          [
+            "SEOUL",
+            "KIM",
+            "500"
+          ],
+          [
+            "SEOUL",
+            "LEE",
+            "300"
+          ],
+          [
+            "BUSAN",
+            "PARK",
+            "450"
+          ],
+          [
+            "BUSAN",
+            "CHOI",
+            "200"
+          ],
+          [
+            "BUSAN",
+            "JUNG",
+            "200"
+          ]
+        ]
       }
     ]
   },
@@ -28730,9 +30653,45 @@ export const AI_MOCK: QuizQuestion[] = [
         "content": "SELECT dept, Q1, Q2\nFROM (\n  SELECT dept, quarter_cd, amount\n  FROM sales_q\n)\nPIVOT (\n  SUM(amount)\n  FOR quarter_cd IN ('Q1' AS Q1, 'Q2' AS Q2)\n)\nORDER BY dept;"
       },
       {
-        "type": "image",
-        "src": "/sqld-images/j1071-1.png",
-        "alt": "문항 이미지 j1071-1"
+        "type": "table",
+        "caption": "PIVOT Source Data",
+        "headers": [
+          "DEPT",
+          "QUARTER CD",
+          "AMOUNT"
+        ],
+        "rows": [
+          [
+            "SALES",
+            "Q1",
+            "100"
+          ],
+          [
+            "SALES",
+            "Q2",
+            "120"
+          ],
+          [
+            "DEV",
+            "Q1",
+            "200"
+          ],
+          [
+            "DEV",
+            "Q2",
+            "180"
+          ],
+          [
+            "HR",
+            "Q1",
+            "90"
+          ],
+          [
+            "HR",
+            "Q2",
+            "110"
+          ]
+        ]
       }
     ]
   },
@@ -28865,9 +30824,45 @@ export const AI_MOCK: QuizQuestion[] = [
         "content": "SELECT dept, Q1, Q2\nFROM (\n  SELECT dept, quarter_cd, amount\n  FROM sales_q\n)\nPIVOT (\n  SUM(amount)\n  FOR quarter_cd IN ('Q1' AS Q1, 'Q2' AS Q2)\n)\nORDER BY dept;"
       },
       {
-        "type": "image",
-        "src": "/sqld-images/j1079-1.png",
-        "alt": "문항 이미지 j1079-1"
+        "type": "table",
+        "caption": "PIVOT Source Data",
+        "headers": [
+          "DEPT",
+          "QUARTER CD",
+          "AMOUNT"
+        ],
+        "rows": [
+          [
+            "SALES",
+            "Q1",
+            "100"
+          ],
+          [
+            "SALES",
+            "Q2",
+            "120"
+          ],
+          [
+            "DEV",
+            "Q1",
+            "200"
+          ],
+          [
+            "DEV",
+            "Q2",
+            "180"
+          ],
+          [
+            "HR",
+            "Q1",
+            "90"
+          ],
+          [
+            "HR",
+            "Q2",
+            "110"
+          ]
+        ]
       }
     ]
   },
@@ -29026,9 +31021,45 @@ export const AI_MOCK: QuizQuestion[] = [
         "content": "SELECT dept, Q1, Q2\nFROM (\n  SELECT dept, quarter_cd, amount\n  FROM sales_q\n)\nPIVOT (\n  SUM(amount)\n  FOR quarter_cd IN ('Q1' AS Q1, 'Q2' AS Q2)\n);"
       },
       {
-        "type": "image",
-        "src": "/sqld-images/j1087-1.png",
-        "alt": "문항 이미지 j1087-1"
+        "type": "table",
+        "caption": "PIVOT Source Data",
+        "headers": [
+          "DEPT",
+          "QUARTER CD",
+          "AMOUNT"
+        ],
+        "rows": [
+          [
+            "SALES",
+            "Q1",
+            "100"
+          ],
+          [
+            "SALES",
+            "Q2",
+            "120"
+          ],
+          [
+            "DEV",
+            "Q1",
+            "200"
+          ],
+          [
+            "DEV",
+            "Q2",
+            "180"
+          ],
+          [
+            "HR",
+            "Q1",
+            "90"
+          ],
+          [
+            "HR",
+            "Q2",
+            "110"
+          ]
+        ]
       }
     ]
   },
@@ -29499,9 +31530,35 @@ export const AI_MOCK: QuizQuestion[] = [
         "content": "SELECT SUM(NVL(bonus, 0)) + COUNT(salary) AS val\nFROM emp_null;"
       },
       {
-        "type": "image",
-        "src": "/sqld-images/j1111-1.png",
-        "alt": "문항 이미지 j1111-1"
+        "type": "table",
+        "caption": "NULL Aggregate Data",
+        "headers": [
+          "EMP ID",
+          "SALARY",
+          "BONUS"
+        ],
+        "rows": [
+          [
+            "1",
+            "1000",
+            "100"
+          ],
+          [
+            "2",
+            "",
+            "200"
+          ],
+          [
+            "3",
+            "2000",
+            ""
+          ],
+          [
+            "4",
+            "",
+            ""
+          ]
+        ]
       }
     ]
   },
@@ -29582,9 +31639,35 @@ export const AI_MOCK: QuizQuestion[] = [
         "content": "SELECT region,\n       category,\n       amount,\n       ROW_NUMBER() OVER (\n         ORDER BY category ASC, amount DESC, region ASC\n       ) AS rn\nFROM sales\nWHERE amount >= 100;"
       },
       {
-        "type": "image",
-        "src": "/sqld-images/j1114-1.png",
-        "alt": "문항 이미지 j1114-1"
+        "type": "table",
+        "caption": "SELECT Result Data",
+        "headers": [
+          "REGION",
+          "AMOUNT",
+          "CATEGORY"
+        ],
+        "rows": [
+          [
+            "SEOUL",
+            "150",
+            "A"
+          ],
+          [
+            "BUSAN",
+            "100",
+            "A"
+          ],
+          [
+            "SEOUL",
+            "100",
+            "B"
+          ],
+          [
+            "INCHEON",
+            "80",
+            "B"
+          ]
+        ]
       }
     ]
   },
@@ -29611,7 +31694,8 @@ export const AI_MOCK: QuizQuestion[] = [
       {
         "type": "image",
         "src": "/sqld-images/j1115-1.png",
-        "alt": "문항 이미지 j1115-1"
+        "alt": "Sales ERD",
+        "caption": "Sales ERD"
       }
     ]
   },
@@ -29640,9 +31724,48 @@ export const AI_MOCK: QuizQuestion[] = [
         "content": "SELECT a.id,\n       COUNT(*) AS cnt\nFROM A a\nJOIN B b\n  ON a.id = b.id\nGROUP BY a.id\nHAVING COUNT(*) = 1\nORDER BY a.id;"
       },
       {
-        "type": "image",
-        "src": "/sqld-images/j1116-1.png",
-        "alt": "문항 이미지 j1116-1"
+        "type": "table",
+        "caption": "JOIN Basic Tables — Table A",
+        "headers": [
+          "ID",
+          "NAME"
+        ],
+        "rows": [
+          [
+            "1",
+            "ALPHA"
+          ],
+          [
+            "2",
+            "BETA"
+          ],
+          [
+            "3",
+            "GAMMA"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "JOIN Basic Tables — Table B",
+        "headers": [
+          "ID",
+          "VAL"
+        ],
+        "rows": [
+          [
+            "2",
+            "X"
+          ],
+          [
+            "3",
+            "Y"
+          ],
+          [
+            "4",
+            "Z"
+          ]
+        ]
       }
     ]
   },
@@ -29671,9 +31794,45 @@ export const AI_MOCK: QuizQuestion[] = [
         "content": "SELECT dept, Q1, Q2\nFROM (\n  SELECT dept, quarter_cd, amount\n  FROM sales_q\n)\nPIVOT (\n  SUM(amount)\n  FOR quarter_cd IN ('Q1' AS Q1, 'Q2' AS Q2)\n)\nORDER BY dept;"
       },
       {
-        "type": "image",
-        "src": "/sqld-images/j1117-1.png",
-        "alt": "문항 이미지 j1117-1"
+        "type": "table",
+        "caption": "PIVOT Source Data",
+        "headers": [
+          "DEPT",
+          "QUARTER CD",
+          "AMOUNT"
+        ],
+        "rows": [
+          [
+            "SALES",
+            "Q1",
+            "100"
+          ],
+          [
+            "SALES",
+            "Q2",
+            "120"
+          ],
+          [
+            "DEV",
+            "Q1",
+            "200"
+          ],
+          [
+            "DEV",
+            "Q2",
+            "180"
+          ],
+          [
+            "HR",
+            "Q1",
+            "90"
+          ],
+          [
+            "HR",
+            "Q2",
+            "110"
+          ]
+        ]
       }
     ]
   },
@@ -29728,9 +31887,65 @@ export const AI_MOCK: QuizQuestion[] = [
         "content": "SELECT dept\nFROM emp\nGROUP BY dept\nHAVING COUNT(*) >= 4\n   AND AVG(salary) > 3000\n   AND SUM(CASE WHEN salary >= 4000 THEN 1 ELSE 0 END) >= 2;"
       },
       {
-        "type": "image",
-        "src": "/sqld-images/j1120-1.png",
-        "alt": "문항 이미지 j1120-1"
+        "type": "table",
+        "caption": "EMP Group Data",
+        "headers": [
+          "EMP ID",
+          "DEPT",
+          "SALARY"
+        ],
+        "rows": [
+          [
+            "1",
+            "SALES",
+            "3000"
+          ],
+          [
+            "2",
+            "SALES",
+            "2500"
+          ],
+          [
+            "3",
+            "SALES",
+            "2000"
+          ],
+          [
+            "4",
+            "SALES",
+            "3500"
+          ],
+          [
+            "5",
+            "DEV",
+            "5000"
+          ],
+          [
+            "6",
+            "DEV",
+            "4200"
+          ],
+          [
+            "7",
+            "DEV",
+            "4100"
+          ],
+          [
+            "8",
+            "DEV",
+            "3900"
+          ],
+          [
+            "9",
+            "DEV",
+            "3700"
+          ],
+          [
+            "10",
+            "HR",
+            "2800"
+          ]
+        ]
       }
     ]
   },
@@ -29915,9 +32130,38 @@ export const AI_MOCK: QuizQuestion[] = [
         "content": "주문번호+상품번호가 기본키라고 가정한다."
       },
       {
-        "type": "image",
-        "src": "/sqld-images/j1131-1.png",
-        "alt": "문항 이미지 j1131-1"
+        "type": "table",
+        "caption": "Normalization Source Table",
+        "headers": [
+          "ORDER NO",
+          "PRODUCT NO",
+          "PRODUCT NAME",
+          "CUSTOMER NAME",
+          "CUSTOMER GRADE"
+        ],
+        "rows": [
+          [
+            "1001",
+            "P01",
+            "SQL BOOK",
+            "KIM",
+            "VIP"
+          ],
+          [
+            "1001",
+            "P02",
+            "DB BOOK",
+            "KIM",
+            "VIP"
+          ],
+          [
+            "1002",
+            "P03",
+            "NOTE",
+            "LEE",
+            "BASIC"
+          ]
+        ]
       }
     ]
   },
@@ -29946,9 +32190,35 @@ export const AI_MOCK: QuizQuestion[] = [
         "content": "SELECT COUNT(*)\nFROM emp_null\nWHERE NVL(salary, 0) = 0\n   OR bonus IS NULL;"
       },
       {
-        "type": "image",
-        "src": "/sqld-images/j1132-1.png",
-        "alt": "문항 이미지 j1132-1"
+        "type": "table",
+        "caption": "NULL Aggregate Data",
+        "headers": [
+          "EMP ID",
+          "SALARY",
+          "BONUS"
+        ],
+        "rows": [
+          [
+            "1",
+            "1000",
+            "100"
+          ],
+          [
+            "2",
+            "",
+            "200"
+          ],
+          [
+            "3",
+            "2000",
+            ""
+          ],
+          [
+            "4",
+            "",
+            ""
+          ]
+        ]
       }
     ]
   },
@@ -30055,9 +32325,35 @@ export const AI_MOCK: QuizQuestion[] = [
         "content": "SELECT COUNT(*)\nFROM (\n  SELECT DISTINCT region, category\n  FROM sales\n  WHERE amount >= 100\n) x;"
       },
       {
-        "type": "image",
-        "src": "/sqld-images/j1137-1.png",
-        "alt": "문항 이미지 j1137-1"
+        "type": "table",
+        "caption": "SELECT Result Data",
+        "headers": [
+          "REGION",
+          "AMOUNT",
+          "CATEGORY"
+        ],
+        "rows": [
+          [
+            "SEOUL",
+            "150",
+            "A"
+          ],
+          [
+            "BUSAN",
+            "100",
+            "A"
+          ],
+          [
+            "SEOUL",
+            "100",
+            "B"
+          ],
+          [
+            "INCHEON",
+            "80",
+            "B"
+          ]
+        ]
       }
     ]
   },
@@ -30083,8 +32379,9 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "image",
-        "src": "/sqld-images/j1138-1.png",
-        "alt": "문항 이미지 j1138-1"
+        "src": "/sqld-images/j1115-1.png",
+        "alt": "Sales ERD",
+        "caption": "Sales ERD"
       }
     ]
   },
@@ -30113,9 +32410,48 @@ export const AI_MOCK: QuizQuestion[] = [
         "content": "SELECT COUNT(*)\nFROM A a\nLEFT JOIN B b\n  ON a.id = b.id\nWHERE b.id IS NULL\n   OR a.name LIKE 'G%';"
       },
       {
-        "type": "image",
-        "src": "/sqld-images/j1139-1.png",
-        "alt": "문항 이미지 j1139-1"
+        "type": "table",
+        "caption": "JOIN Basic Tables — Table A",
+        "headers": [
+          "ID",
+          "NAME"
+        ],
+        "rows": [
+          [
+            "1",
+            "ALPHA"
+          ],
+          [
+            "2",
+            "BETA"
+          ],
+          [
+            "3",
+            "GAMMA"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "JOIN Basic Tables — Table B",
+        "headers": [
+          "ID",
+          "VAL"
+        ],
+        "rows": [
+          [
+            "2",
+            "X"
+          ],
+          [
+            "3",
+            "Y"
+          ],
+          [
+            "4",
+            "Z"
+          ]
+        ]
       }
     ]
   },
@@ -30170,9 +32506,45 @@ export const AI_MOCK: QuizQuestion[] = [
         "content": "SELECT dept, Q1, Q2\nFROM (\n  SELECT dept, quarter_cd, amount\n  FROM sales_q\n)\nPIVOT (\n  SUM(amount)\n  FOR quarter_cd IN ('Q1' AS Q1, 'Q2' AS Q2)\n)\nORDER BY dept;"
       },
       {
-        "type": "image",
-        "src": "/sqld-images/j1141-1.png",
-        "alt": "문항 이미지 j1141-1"
+        "type": "table",
+        "caption": "PIVOT Source Data",
+        "headers": [
+          "DEPT",
+          "QUARTER CD",
+          "AMOUNT"
+        ],
+        "rows": [
+          [
+            "SALES",
+            "Q1",
+            "100"
+          ],
+          [
+            "SALES",
+            "Q2",
+            "120"
+          ],
+          [
+            "DEV",
+            "Q1",
+            "200"
+          ],
+          [
+            "DEV",
+            "Q2",
+            "180"
+          ],
+          [
+            "HR",
+            "Q1",
+            "90"
+          ],
+          [
+            "HR",
+            "Q2",
+            "110"
+          ]
+        ]
       }
     ]
   },
@@ -30201,9 +32573,50 @@ export const AI_MOCK: QuizQuestion[] = [
         "content": "SELECT emp_id,\n       emp_name,\n       mgr_id,\n       LEVEL AS lv\nFROM emp_tree\nSTART WITH mgr_id IS NULL\nCONNECT BY PRIOR emp_id = mgr_id\nORDER SIBLINGS BY emp_name;"
       },
       {
-        "type": "image",
-        "src": "/sqld-images/j1143-1.png",
-        "alt": "문항 이미지 j1143-1"
+        "type": "table",
+        "caption": "Hierarchy EMP Data",
+        "headers": [
+          "EMP ID",
+          "EMP NAME",
+          "MGR ID"
+        ],
+        "rows": [
+          [
+            "1",
+            "CEO",
+            ""
+          ],
+          [
+            "2",
+            "SALES_MGR",
+            "1"
+          ],
+          [
+            "3",
+            "DEV_MGR",
+            "1"
+          ],
+          [
+            "4",
+            "SALES_A",
+            "2"
+          ],
+          [
+            "5",
+            "SALES_B",
+            "2"
+          ],
+          [
+            "6",
+            "DEV_A",
+            "3"
+          ],
+          [
+            "7",
+            "DEV_B",
+            "3"
+          ]
+        ]
       }
     ]
   },
@@ -30232,9 +32645,65 @@ export const AI_MOCK: QuizQuestion[] = [
         "content": "SELECT dept\nFROM emp\nGROUP BY dept\nHAVING MAX(salary) - MIN(salary) >= 1000\n   AND COUNT(*) >= 4\nORDER BY dept;"
       },
       {
-        "type": "image",
-        "src": "/sqld-images/j1144-1.png",
-        "alt": "문항 이미지 j1144-1"
+        "type": "table",
+        "caption": "EMP Group Data",
+        "headers": [
+          "EMP ID",
+          "DEPT",
+          "SALARY"
+        ],
+        "rows": [
+          [
+            "1",
+            "SALES",
+            "3000"
+          ],
+          [
+            "2",
+            "SALES",
+            "2500"
+          ],
+          [
+            "3",
+            "SALES",
+            "2000"
+          ],
+          [
+            "4",
+            "SALES",
+            "3500"
+          ],
+          [
+            "5",
+            "DEV",
+            "5000"
+          ],
+          [
+            "6",
+            "DEV",
+            "4200"
+          ],
+          [
+            "7",
+            "DEV",
+            "4100"
+          ],
+          [
+            "8",
+            "DEV",
+            "3900"
+          ],
+          [
+            "9",
+            "DEV",
+            "3700"
+          ],
+          [
+            "10",
+            "HR",
+            "2800"
+          ]
+        ]
       }
     ]
   },
@@ -30313,7 +32782,8 @@ export const AI_MOCK: QuizQuestion[] = [
       {
         "type": "image",
         "src": "/sqld-images/j1147-1.png",
-        "alt": "문항 이미지 j1147-1"
+        "alt": "Parent / Child ERD",
+        "caption": "Parent / Child ERD"
       }
     ]
   },
@@ -30416,9 +32886,40 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "윈도우 함수",
     "references": [
       {
-        "type": "image",
-        "src": "/sqld-images/j1152-1.png",
-        "alt": "문항 이미지 j1152-1"
+        "type": "table",
+        "caption": "Window Function Data",
+        "headers": [
+          "REGION",
+          "SELLER",
+          "AMOUNT"
+        ],
+        "rows": [
+          [
+            "SEOUL",
+            "KIM",
+            "500"
+          ],
+          [
+            "SEOUL",
+            "LEE",
+            "300"
+          ],
+          [
+            "BUSAN",
+            "PARK",
+            "450"
+          ],
+          [
+            "BUSAN",
+            "CHOI",
+            "200"
+          ],
+          [
+            "BUSAN",
+            "JUNG",
+            "200"
+          ]
+        ]
       }
     ]
   },
@@ -30495,9 +32996,38 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "정규화",
     "references": [
       {
-        "type": "image",
-        "src": "/sqld-images/j1155-1.png",
-        "alt": "문항 이미지 j1155-1"
+        "type": "table",
+        "caption": "Normalization Source Table",
+        "headers": [
+          "ORDER NO",
+          "PRODUCT NO",
+          "PRODUCT NAME",
+          "CUSTOMER NAME",
+          "CUSTOMER GRADE"
+        ],
+        "rows": [
+          [
+            "1001",
+            "P01",
+            "SQL BOOK",
+            "KIM",
+            "VIP"
+          ],
+          [
+            "1001",
+            "P02",
+            "DB BOOK",
+            "KIM",
+            "VIP"
+          ],
+          [
+            "1002",
+            "P03",
+            "NOTE",
+            "LEE",
+            "BASIC"
+          ]
+        ]
       }
     ]
   },
@@ -30522,9 +33052,35 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "집계 함수",
     "references": [
       {
-        "type": "image",
-        "src": "/sqld-images/j1156-1.png",
-        "alt": "문항 이미지 j1156-1"
+        "type": "table",
+        "caption": "NULL Aggregate Data",
+        "headers": [
+          "EMP ID",
+          "SALARY",
+          "BONUS"
+        ],
+        "rows": [
+          [
+            "1",
+            "1000",
+            "100"
+          ],
+          [
+            "2",
+            "",
+            "200"
+          ],
+          [
+            "3",
+            "2000",
+            ""
+          ],
+          [
+            "4",
+            "",
+            ""
+          ]
+        ]
       }
     ]
   },
@@ -30631,9 +33187,35 @@ export const AI_MOCK: QuizQuestion[] = [
         "content": "SELECT region,\n       category,\n       amount\nFROM sales\nORDER BY CASE WHEN amount >= 100 THEN 1 ELSE 2 END,\n         category DESC,\n         amount ASC,\n         region ASC;"
       },
       {
-        "type": "image",
-        "src": "/sqld-images/j1161-1.png",
-        "alt": "문항 이미지 j1161-1"
+        "type": "table",
+        "caption": "SELECT Result Data",
+        "headers": [
+          "REGION",
+          "AMOUNT",
+          "CATEGORY"
+        ],
+        "rows": [
+          [
+            "SEOUL",
+            "150",
+            "A"
+          ],
+          [
+            "BUSAN",
+            "100",
+            "A"
+          ],
+          [
+            "SEOUL",
+            "100",
+            "B"
+          ],
+          [
+            "INCHEON",
+            "80",
+            "B"
+          ]
+        ]
       }
     ]
   },
@@ -30659,8 +33241,9 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "image",
-        "src": "/sqld-images/j1162-1.png",
-        "alt": "문항 이미지 j1162-1"
+        "src": "/sqld-images/j1115-1.png",
+        "alt": "Sales ERD",
+        "caption": "Sales ERD"
       }
     ]
   },
@@ -30689,9 +33272,48 @@ export const AI_MOCK: QuizQuestion[] = [
         "content": "기존 그림 기준으로 A에 (2, DELTA)가 추가된다."
       },
       {
-        "type": "image",
-        "src": "/sqld-images/j1163-1.png",
-        "alt": "문항 이미지 j1163-1"
+        "type": "table",
+        "caption": "JOIN Basic Tables — Table A",
+        "headers": [
+          "ID",
+          "NAME"
+        ],
+        "rows": [
+          [
+            "1",
+            "ALPHA"
+          ],
+          [
+            "2",
+            "BETA"
+          ],
+          [
+            "3",
+            "GAMMA"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "JOIN Basic Tables — Table B",
+        "headers": [
+          "ID",
+          "VAL"
+        ],
+        "rows": [
+          [
+            "2",
+            "X"
+          ],
+          [
+            "3",
+            "Y"
+          ],
+          [
+            "4",
+            "Z"
+          ]
+        ]
       }
     ]
   },
@@ -30746,9 +33368,45 @@ export const AI_MOCK: QuizQuestion[] = [
         "content": "SELECT dept, Q1, Q2\nFROM (\n  SELECT dept, quarter_cd, amount\n  FROM sales_q\n)\nPIVOT (\n  SUM(amount)\n  FOR quarter_cd IN ('Q1' AS Q1, 'Q2' AS Q2)\n);"
       },
       {
-        "type": "image",
-        "src": "/sqld-images/j1165-1.png",
-        "alt": "문항 이미지 j1165-1"
+        "type": "table",
+        "caption": "PIVOT Source Data",
+        "headers": [
+          "DEPT",
+          "QUARTER CD",
+          "AMOUNT"
+        ],
+        "rows": [
+          [
+            "SALES",
+            "Q1",
+            "100"
+          ],
+          [
+            "SALES",
+            "Q2",
+            "120"
+          ],
+          [
+            "DEV",
+            "Q1",
+            "200"
+          ],
+          [
+            "DEV",
+            "Q2",
+            "180"
+          ],
+          [
+            "HR",
+            "Q1",
+            "90"
+          ],
+          [
+            "HR",
+            "Q2",
+            "110"
+          ]
+        ]
       }
     ]
   },
@@ -30777,9 +33435,50 @@ export const AI_MOCK: QuizQuestion[] = [
         "content": "SELECT emp_name,\n       LEVEL AS lv,\n       SYS_CONNECT_BY_PATH(emp_name, ' > ') AS path\nFROM emp_tree\nSTART WITH mgr_id IS NULL\nCONNECT BY PRIOR emp_id = mgr_id\nORDER SIBLINGS BY emp_name;"
       },
       {
-        "type": "image",
-        "src": "/sqld-images/j1167-1.png",
-        "alt": "문항 이미지 j1167-1"
+        "type": "table",
+        "caption": "Hierarchy EMP Data",
+        "headers": [
+          "EMP ID",
+          "EMP NAME",
+          "MGR ID"
+        ],
+        "rows": [
+          [
+            "1",
+            "CEO",
+            ""
+          ],
+          [
+            "2",
+            "SALES_MGR",
+            "1"
+          ],
+          [
+            "3",
+            "DEV_MGR",
+            "1"
+          ],
+          [
+            "4",
+            "SALES_A",
+            "2"
+          ],
+          [
+            "5",
+            "SALES_B",
+            "2"
+          ],
+          [
+            "6",
+            "DEV_A",
+            "3"
+          ],
+          [
+            "7",
+            "DEV_B",
+            "3"
+          ]
+        ]
       }
     ]
   },
@@ -30808,9 +33507,65 @@ export const AI_MOCK: QuizQuestion[] = [
         "content": "SELECT dept, COUNT(*) FROM emp GROUP BY dept HAVING MIN(salary) >= 2500;"
       },
       {
-        "type": "image",
-        "src": "/sqld-images/j1168-1.png",
-        "alt": "문항 이미지 j1168-1"
+        "type": "table",
+        "caption": "EMP Group Data",
+        "headers": [
+          "EMP ID",
+          "DEPT",
+          "SALARY"
+        ],
+        "rows": [
+          [
+            "1",
+            "SALES",
+            "3000"
+          ],
+          [
+            "2",
+            "SALES",
+            "2500"
+          ],
+          [
+            "3",
+            "SALES",
+            "2000"
+          ],
+          [
+            "4",
+            "SALES",
+            "3500"
+          ],
+          [
+            "5",
+            "DEV",
+            "5000"
+          ],
+          [
+            "6",
+            "DEV",
+            "4200"
+          ],
+          [
+            "7",
+            "DEV",
+            "4100"
+          ],
+          [
+            "8",
+            "DEV",
+            "3900"
+          ],
+          [
+            "9",
+            "DEV",
+            "3700"
+          ],
+          [
+            "10",
+            "HR",
+            "2800"
+          ]
+        ]
       }
     ]
   },
@@ -30892,8 +33647,9 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "image",
-        "src": "/sqld-images/j1171-1.png",
-        "alt": "문항 이미지 j1171-1"
+        "src": "/sqld-images/j1147-1.png",
+        "alt": "Parent / Child ERD",
+        "caption": "Parent / Child ERD"
       }
     ]
   },
@@ -30970,9 +33726,52 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "서브쿼리",
     "references": [
       {
-        "type": "image",
-        "src": "/sqld-images/j1174-1.png",
-        "alt": "문항 이미지 j1174-1"
+        "type": "table",
+        "caption": "CUSTOMER",
+        "headers": [
+          "CUSTOMER ID",
+          "NAME"
+        ],
+        "rows": [
+          [
+            "101",
+            "KIM"
+          ],
+          [
+            "102",
+            "LEE"
+          ],
+          [
+            "103",
+            "PARK"
+          ],
+          [
+            "104",
+            "CHOI"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "ORDERS",
+        "headers": [
+          "ORDER ID",
+          "CUSTOMER ID"
+        ],
+        "rows": [
+          [
+            "9001",
+            "101"
+          ],
+          [
+            "9002",
+            "101"
+          ],
+          [
+            "9003",
+            "103"
+          ]
+        ]
       }
     ]
   },
@@ -31023,9 +33822,40 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "윈도우 함수",
     "references": [
       {
-        "type": "image",
-        "src": "/sqld-images/j1176-1.png",
-        "alt": "문항 이미지 j1176-1"
+        "type": "table",
+        "caption": "Window Function Data",
+        "headers": [
+          "REGION",
+          "SELLER",
+          "AMOUNT"
+        ],
+        "rows": [
+          [
+            "SEOUL",
+            "KIM",
+            "500"
+          ],
+          [
+            "SEOUL",
+            "LEE",
+            "300"
+          ],
+          [
+            "BUSAN",
+            "PARK",
+            "450"
+          ],
+          [
+            "BUSAN",
+            "CHOI",
+            "200"
+          ],
+          [
+            "BUSAN",
+            "JUNG",
+            "200"
+          ]
+        ]
       }
     ]
   },
@@ -31102,9 +33932,38 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "정규화",
     "references": [
       {
-        "type": "image",
-        "src": "/sqld-images/j1179-1.png",
-        "alt": "문항 이미지 j1179-1"
+        "type": "table",
+        "caption": "Normalization Source Table",
+        "headers": [
+          "ORDER NO",
+          "PRODUCT NO",
+          "PRODUCT NAME",
+          "CUSTOMER NAME",
+          "CUSTOMER GRADE"
+        ],
+        "rows": [
+          [
+            "1001",
+            "P01",
+            "SQL BOOK",
+            "KIM",
+            "VIP"
+          ],
+          [
+            "1001",
+            "P02",
+            "DB BOOK",
+            "KIM",
+            "VIP"
+          ],
+          [
+            "1002",
+            "P03",
+            "NOTE",
+            "LEE",
+            "BASIC"
+          ]
+        ]
       }
     ]
   },
@@ -31129,9 +33988,35 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "집계 함수",
     "references": [
       {
-        "type": "image",
-        "src": "/sqld-images/j1180-1.png",
-        "alt": "문항 이미지 j1180-1"
+        "type": "table",
+        "caption": "NULL Aggregate Data",
+        "headers": [
+          "EMP ID",
+          "SALARY",
+          "BONUS"
+        ],
+        "rows": [
+          [
+            "1",
+            "1000",
+            "100"
+          ],
+          [
+            "2",
+            "",
+            "200"
+          ],
+          [
+            "3",
+            "2000",
+            ""
+          ],
+          [
+            "4",
+            "",
+            ""
+          ]
+        ]
       }
     ]
   },
@@ -31281,8 +34166,9 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "image",
-        "src": "/sqld-images/j1186-1.png",
-        "alt": "문항 이미지 j1186-1"
+        "src": "/sqld-images/j1115-1.png",
+        "alt": "Sales ERD",
+        "caption": "Sales ERD"
       }
     ]
   },
@@ -31337,9 +34223,50 @@ export const AI_MOCK: QuizQuestion[] = [
         "content": "SELECT CONNECT_BY_ROOT emp_name AS root_name,\n       emp_name,\n       LEVEL AS lv\nFROM emp_tree\nSTART WITH mgr_id IS NULL\nCONNECT BY PRIOR emp_id = mgr_id;"
       },
       {
-        "type": "image",
-        "src": "/sqld-images/j1191-1.png",
-        "alt": "문항 이미지 j1191-1"
+        "type": "table",
+        "caption": "Hierarchy EMP Data",
+        "headers": [
+          "EMP ID",
+          "EMP NAME",
+          "MGR ID"
+        ],
+        "rows": [
+          [
+            "1",
+            "CEO",
+            ""
+          ],
+          [
+            "2",
+            "SALES_MGR",
+            "1"
+          ],
+          [
+            "3",
+            "DEV_MGR",
+            "1"
+          ],
+          [
+            "4",
+            "SALES_A",
+            "2"
+          ],
+          [
+            "5",
+            "SALES_B",
+            "2"
+          ],
+          [
+            "6",
+            "DEV_A",
+            "3"
+          ],
+          [
+            "7",
+            "DEV_B",
+            "3"
+          ]
+        ]
       }
     ]
   },
@@ -31364,9 +34291,65 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "그룹 함수",
     "references": [
       {
-        "type": "image",
-        "src": "/sqld-images/j1192-1.png",
-        "alt": "문항 이미지 j1192-1"
+        "type": "table",
+        "caption": "EMP Group Data",
+        "headers": [
+          "EMP ID",
+          "DEPT",
+          "SALARY"
+        ],
+        "rows": [
+          [
+            "1",
+            "SALES",
+            "3000"
+          ],
+          [
+            "2",
+            "SALES",
+            "2500"
+          ],
+          [
+            "3",
+            "SALES",
+            "2000"
+          ],
+          [
+            "4",
+            "SALES",
+            "3500"
+          ],
+          [
+            "5",
+            "DEV",
+            "5000"
+          ],
+          [
+            "6",
+            "DEV",
+            "4200"
+          ],
+          [
+            "7",
+            "DEV",
+            "4100"
+          ],
+          [
+            "8",
+            "DEV",
+            "3900"
+          ],
+          [
+            "9",
+            "DEV",
+            "3700"
+          ],
+          [
+            "10",
+            "HR",
+            "2800"
+          ]
+        ]
       }
     ]
   },
@@ -31444,8 +34427,9 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "image",
-        "src": "/sqld-images/j1195-1.png",
-        "alt": "문항 이미지 j1195-1"
+        "src": "/sqld-images/j1147-1.png",
+        "alt": "Parent / Child ERD",
+        "caption": "Parent / Child ERD"
       }
     ]
   },
@@ -31526,9 +34510,52 @@ export const AI_MOCK: QuizQuestion[] = [
         "content": "C.CUSTOMER_ID > ALL (\n    SELECT CUSTOMER_ID \n    FROM ORDERS\n)"
       },
       {
-        "type": "image",
-        "src": "/sqld-images/j1198-1.png",
-        "alt": "문항 이미지 j1198-1"
+        "type": "table",
+        "caption": "CUSTOMER",
+        "headers": [
+          "CUSTOMER ID",
+          "NAME"
+        ],
+        "rows": [
+          [
+            "101",
+            "KIM"
+          ],
+          [
+            "102",
+            "LEE"
+          ],
+          [
+            "103",
+            "PARK"
+          ],
+          [
+            "104",
+            "CHOI"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "ORDERS",
+        "headers": [
+          "ORDER ID",
+          "CUSTOMER ID"
+        ],
+        "rows": [
+          [
+            "9001",
+            "101"
+          ],
+          [
+            "9002",
+            "101"
+          ],
+          [
+            "9003",
+            "103"
+          ]
+        ]
       }
     ]
   },
@@ -31553,9 +34580,40 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "윈도우 함수",
     "references": [
       {
-        "type": "image",
-        "src": "/sqld-images/j1200-1.png",
-        "alt": "문항 이미지 j1200-1"
+        "type": "table",
+        "caption": "Window Function Data",
+        "headers": [
+          "REGION",
+          "SELLER",
+          "AMOUNT"
+        ],
+        "rows": [
+          [
+            "SEOUL",
+            "KIM",
+            "500"
+          ],
+          [
+            "SEOUL",
+            "LEE",
+            "300"
+          ],
+          [
+            "BUSAN",
+            "PARK",
+            "450"
+          ],
+          [
+            "BUSAN",
+            "CHOI",
+            "200"
+          ],
+          [
+            "BUSAN",
+            "JUNG",
+            "200"
+          ]
+        ]
       }
     ]
   },
@@ -31632,9 +34690,35 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "집계 함수",
     "references": [
       {
-        "type": "image",
-        "src": "/sqld-images/j1204-1.png",
-        "alt": "문항 이미지 j1204-1"
+        "type": "table",
+        "caption": "NULL Aggregate Data",
+        "headers": [
+          "EMP ID",
+          "SALARY",
+          "BONUS"
+        ],
+        "rows": [
+          [
+            "1",
+            "1000",
+            "100"
+          ],
+          [
+            "2",
+            "",
+            "200"
+          ],
+          [
+            "3",
+            "2000",
+            ""
+          ],
+          [
+            "4",
+            "",
+            ""
+          ]
+        ]
       }
     ]
   },
@@ -31758,8 +34842,9 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "image",
-        "src": "/sqld-images/j1210-1.png",
-        "alt": "문항 이미지 j1210-1"
+        "src": "/sqld-images/j1115-1.png",
+        "alt": "Sales ERD",
+        "caption": "Sales ERD"
       }
     ]
   },
@@ -31788,9 +34873,45 @@ export const AI_MOCK: QuizQuestion[] = [
         "content": "SELECT dept, Q1, Q2\nFROM (\n  SELECT dept, quarter_cd, amount\n  FROM sales_q\n)\nPIVOT (\n  SUM(amount)\n  FOR quarter_cd IN ('Q1' AS Q1, 'Q2' AS Q2)\n);"
       },
       {
-        "type": "image",
-        "src": "/sqld-images/j1213-1.png",
-        "alt": "문항 이미지 j1213-1"
+        "type": "table",
+        "caption": "PIVOT Source Data",
+        "headers": [
+          "DEPT",
+          "QUARTER CD",
+          "AMOUNT"
+        ],
+        "rows": [
+          [
+            "SALES",
+            "Q1",
+            "100"
+          ],
+          [
+            "SALES",
+            "Q2",
+            "120"
+          ],
+          [
+            "DEV",
+            "Q1",
+            "200"
+          ],
+          [
+            "DEV",
+            "Q2",
+            "180"
+          ],
+          [
+            "HR",
+            "Q1",
+            "90"
+          ],
+          [
+            "HR",
+            "Q2",
+            "110"
+          ]
+        ]
       }
     ]
   },
@@ -31845,9 +34966,50 @@ export const AI_MOCK: QuizQuestion[] = [
         "content": "SELECT emp_id,\n       emp_name,\n       LEVEL AS lv\nFROM emp_tree\nSTART WITH mgr_id IS NULL\nCONNECT BY PRIOR emp_id = mgr_id;"
       },
       {
-        "type": "image",
-        "src": "/sqld-images/j1215-1.png",
-        "alt": "문항 이미지 j1215-1"
+        "type": "table",
+        "caption": "Hierarchy EMP Data",
+        "headers": [
+          "EMP ID",
+          "EMP NAME",
+          "MGR ID"
+        ],
+        "rows": [
+          [
+            "1",
+            "CEO",
+            ""
+          ],
+          [
+            "2",
+            "SALES_MGR",
+            "1"
+          ],
+          [
+            "3",
+            "DEV_MGR",
+            "1"
+          ],
+          [
+            "4",
+            "SALES_A",
+            "2"
+          ],
+          [
+            "5",
+            "SALES_B",
+            "2"
+          ],
+          [
+            "6",
+            "DEV_A",
+            "3"
+          ],
+          [
+            "7",
+            "DEV_B",
+            "3"
+          ]
+        ]
       }
     ]
   },
@@ -31872,9 +35034,65 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "그룹 함수",
     "references": [
       {
-        "type": "image",
-        "src": "/sqld-images/j1216-1.png",
-        "alt": "문항 이미지 j1216-1"
+        "type": "table",
+        "caption": "EMP Group Data",
+        "headers": [
+          "EMP ID",
+          "DEPT",
+          "SALARY"
+        ],
+        "rows": [
+          [
+            "1",
+            "SALES",
+            "3000"
+          ],
+          [
+            "2",
+            "SALES",
+            "2500"
+          ],
+          [
+            "3",
+            "SALES",
+            "2000"
+          ],
+          [
+            "4",
+            "SALES",
+            "3500"
+          ],
+          [
+            "5",
+            "DEV",
+            "5000"
+          ],
+          [
+            "6",
+            "DEV",
+            "4200"
+          ],
+          [
+            "7",
+            "DEV",
+            "4100"
+          ],
+          [
+            "8",
+            "DEV",
+            "3900"
+          ],
+          [
+            "9",
+            "DEV",
+            "3700"
+          ],
+          [
+            "10",
+            "HR",
+            "2800"
+          ]
+        ]
       }
     ]
   },
@@ -31952,8 +35170,9 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "image",
-        "src": "/sqld-images/j1219-1.png",
-        "alt": "문항 이미지 j1219-1"
+        "src": "/sqld-images/j1147-1.png",
+        "alt": "Parent / Child ERD",
+        "caption": "Parent / Child ERD"
       }
     ]
   },
@@ -32034,9 +35253,52 @@ export const AI_MOCK: QuizQuestion[] = [
         "content": "salary > ANY (10, 20, 30)을 해석한다."
       },
       {
-        "type": "image",
-        "src": "/sqld-images/j1222-1.png",
-        "alt": "문항 이미지 j1222-1"
+        "type": "table",
+        "caption": "CUSTOMER",
+        "headers": [
+          "CUSTOMER ID",
+          "NAME"
+        ],
+        "rows": [
+          [
+            "101",
+            "KIM"
+          ],
+          [
+            "102",
+            "LEE"
+          ],
+          [
+            "103",
+            "PARK"
+          ],
+          [
+            "104",
+            "CHOI"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "ORDERS",
+        "headers": [
+          "ORDER ID",
+          "CUSTOMER ID"
+        ],
+        "rows": [
+          [
+            "9001",
+            "101"
+          ],
+          [
+            "9002",
+            "101"
+          ],
+          [
+            "9003",
+            "103"
+          ]
+        ]
       }
     ]
   },
@@ -32087,9 +35349,40 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "윈도우 함수",
     "references": [
       {
-        "type": "image",
-        "src": "/sqld-images/j1224-1.png",
-        "alt": "문항 이미지 j1224-1"
+        "type": "table",
+        "caption": "Window Function Data",
+        "headers": [
+          "REGION",
+          "SELLER",
+          "AMOUNT"
+        ],
+        "rows": [
+          [
+            "SEOUL",
+            "KIM",
+            "500"
+          ],
+          [
+            "SEOUL",
+            "LEE",
+            "300"
+          ],
+          [
+            "BUSAN",
+            "PARK",
+            "450"
+          ],
+          [
+            "BUSAN",
+            "CHOI",
+            "200"
+          ],
+          [
+            "BUSAN",
+            "JUNG",
+            "200"
+          ]
+        ]
       }
     ]
   },
@@ -32170,9 +35463,35 @@ export const AI_MOCK: QuizQuestion[] = [
         "content": "SELECT SUM(NVL(bonus, 0)) FROM t;"
       },
       {
-        "type": "image",
-        "src": "/sqld-images/j1228-1.png",
-        "alt": "문항 이미지 j1228-1"
+        "type": "table",
+        "caption": "NULL Aggregate Data",
+        "headers": [
+          "EMP ID",
+          "SALARY",
+          "BONUS"
+        ],
+        "rows": [
+          [
+            "1",
+            "1000",
+            "100"
+          ],
+          [
+            "2",
+            "",
+            "200"
+          ],
+          [
+            "3",
+            "2000",
+            ""
+          ],
+          [
+            "4",
+            "",
+            ""
+          ]
+        ]
       }
     ]
   },
@@ -32249,9 +35568,9 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "DCL",
     "references": [
       {
-        "type": "image",
-        "src": "/sqld-images/j1231-1.png",
-        "alt": "문항 이미지 j1231-1"
+        "type": "sql",
+        "caption": "DCL Statements",
+        "code": "GRANT SELECT, INSERT ON emp TO user1;\nREVOKE INSERT ON emp FROM user1;"
       }
     ]
   },
@@ -32276,9 +35595,9 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "DDL",
     "references": [
       {
-        "type": "image",
-        "src": "/sqld-images/j1232-1.png",
-        "alt": "문항 이미지 j1232-1"
+        "type": "sql",
+        "caption": "DDL Statements",
+        "code": "CREATE TABLE emp (\n  emp_id NUMBER PRIMARY KEY,\n  emp_name VARCHAR2(30)\n);\nALTER TABLE emp ADD hire_date DATE;\nDROP TABLE temp_emp;"
       }
     ]
   },
@@ -32330,8 +35649,9 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "image",
-        "src": "/sqld-images/j1234-1.png",
-        "alt": "문항 이미지 j1234-1"
+        "src": "/sqld-images/j1115-1.png",
+        "alt": "Sales ERD",
+        "caption": "Sales ERD"
       }
     ]
   },
@@ -32360,9 +35680,44 @@ export const AI_MOCK: QuizQuestion[] = [
         "content": "SELECT A.ID, B.GRADE FROM A LEFT JOIN B ON A.ID = B.ID;"
       },
       {
-        "type": "image",
-        "src": "/sqld-images/j1235-1.png",
-        "alt": "문항 이미지 j1235-1"
+        "type": "table",
+        "caption": "LEFT OUTER JOIN — Table A",
+        "headers": [
+          "ID",
+          "NAME"
+        ],
+        "rows": [
+          [
+            "1",
+            "SEOUL"
+          ],
+          [
+            "2",
+            "BUSAN"
+          ],
+          [
+            "3",
+            "DAEGU"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "LEFT OUTER JOIN — Table B",
+        "headers": [
+          "ID",
+          "GRADE"
+        ],
+        "rows": [
+          [
+            "2",
+            "SILVER"
+          ],
+          [
+            "4",
+            "GOLD"
+          ]
+        ]
       }
     ]
   },
@@ -32437,9 +35792,50 @@ export const AI_MOCK: QuizQuestion[] = [
         "content": "SELECT emp_name, LEVEL\nFROM emp_tree\nSTART WITH mgr_id IS NULL\nCONNECT BY PRIOR emp_id = mgr_id;"
       },
       {
-        "type": "image",
-        "src": "/sqld-images/j1239-1.png",
-        "alt": "문항 이미지 j1239-1"
+        "type": "table",
+        "caption": "Hierarchy EMP Data",
+        "headers": [
+          "EMP ID",
+          "EMP NAME",
+          "MGR ID"
+        ],
+        "rows": [
+          [
+            "1",
+            "CEO",
+            ""
+          ],
+          [
+            "2",
+            "SALES_MGR",
+            "1"
+          ],
+          [
+            "3",
+            "DEV_MGR",
+            "1"
+          ],
+          [
+            "4",
+            "SALES_A",
+            "2"
+          ],
+          [
+            "5",
+            "SALES_B",
+            "2"
+          ],
+          [
+            "6",
+            "DEV_A",
+            "3"
+          ],
+          [
+            "7",
+            "DEV_B",
+            "3"
+          ]
+        ]
       }
     ]
   },
@@ -32468,9 +35864,35 @@ export const AI_MOCK: QuizQuestion[] = [
         "content": "SELECT region,\n       product,\n       SUM(amount) AS amt,\n       GROUPING(region) AS gr,\n       GROUPING(product) AS gp\nFROM order_amt\nGROUP BY ROLLUP(region, product);"
       },
       {
-        "type": "image",
-        "src": "/sqld-images/j1240-1.png",
-        "alt": "문항 이미지 j1240-1"
+        "type": "table",
+        "caption": "ROLLUP Data",
+        "headers": [
+          "REGION",
+          "PRODUCT",
+          "AMOUNT"
+        ],
+        "rows": [
+          [
+            "SEOUL",
+            "A",
+            "100"
+          ],
+          [
+            "SEOUL",
+            "B",
+            "200"
+          ],
+          [
+            "BUSAN",
+            "A",
+            "150"
+          ],
+          [
+            "BUSAN",
+            "B",
+            "50"
+          ]
+        ]
       }
     ]
   },
@@ -32629,9 +36051,35 @@ export const AI_MOCK: QuizQuestion[] = [
         "content": "SELECT COUNT(*)\nFROM emp e\nWHERE e.salary > (\n        SELECT AVG(s.salary)\n        FROM emp s\n        WHERE s.dept = e.dept\n      )\n  AND e.salary >= (\n        SELECT MAX(s2.salary) - 500\n        FROM emp s2\n        WHERE s2.dept = e.dept\n      );"
       },
       {
-        "type": "image",
-        "src": "/sqld-images/j1246-1.png",
-        "alt": "문항 이미지 j1246-1"
+        "type": "table",
+        "caption": "Correlated Subquery Data",
+        "headers": [
+          "EMP NAME",
+          "DEPT",
+          "SALARY"
+        ],
+        "rows": [
+          [
+            "A",
+            "SALES",
+            "3000"
+          ],
+          [
+            "B",
+            "SALES",
+            "2000"
+          ],
+          [
+            "C",
+            "DEV",
+            "5000"
+          ],
+          [
+            "D",
+            "DEV",
+            "3500"
+          ]
+        ]
       }
     ]
   },
@@ -32686,9 +36134,40 @@ export const AI_MOCK: QuizQuestion[] = [
         "content": "SELECT region,\n       seller,\n       amount,\n       ROW_NUMBER() OVER (\n         PARTITION BY region\n         ORDER BY amount DESC, seller ASC\n       ) AS rn\nFROM sales_rank;"
       },
       {
-        "type": "image",
-        "src": "/sqld-images/j1248-1.png",
-        "alt": "문항 이미지 j1248-1"
+        "type": "table",
+        "caption": "Window Function Data",
+        "headers": [
+          "REGION",
+          "SELLER",
+          "AMOUNT"
+        ],
+        "rows": [
+          [
+            "SEOUL",
+            "KIM",
+            "500"
+          ],
+          [
+            "SEOUL",
+            "LEE",
+            "300"
+          ],
+          [
+            "BUSAN",
+            "PARK",
+            "450"
+          ],
+          [
+            "BUSAN",
+            "CHOI",
+            "200"
+          ],
+          [
+            "BUSAN",
+            "JUNG",
+            "200"
+          ]
+        ]
       }
     ]
   },
@@ -32769,9 +36248,38 @@ export const AI_MOCK: QuizQuestion[] = [
         "content": "주문번호는 고객명과 고객등급을 결정하고, 상품번호는 상품명을 결정한다고 가정한다."
       },
       {
-        "type": "image",
-        "src": "/sqld-images/j1251-1.png",
-        "alt": "문항 이미지 j1251-1"
+        "type": "table",
+        "caption": "Normalization Source Table",
+        "headers": [
+          "ORDER NO",
+          "PRODUCT NO",
+          "PRODUCT NAME",
+          "CUSTOMER NAME",
+          "CUSTOMER GRADE"
+        ],
+        "rows": [
+          [
+            "1001",
+            "P01",
+            "SQL BOOK",
+            "KIM",
+            "VIP"
+          ],
+          [
+            "1001",
+            "P02",
+            "DB BOOK",
+            "KIM",
+            "VIP"
+          ],
+          [
+            "1002",
+            "P03",
+            "NOTE",
+            "LEE",
+            "BASIC"
+          ]
+        ]
       }
     ]
   },
@@ -32796,9 +36304,35 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "집계 함수",
     "references": [
       {
-        "type": "image",
-        "src": "/sqld-images/j1252-1.png",
-        "alt": "문항 이미지 j1252-1"
+        "type": "table",
+        "caption": "NULL Aggregate Data",
+        "headers": [
+          "EMP ID",
+          "SALARY",
+          "BONUS"
+        ],
+        "rows": [
+          [
+            "1",
+            "1000",
+            "100"
+          ],
+          [
+            "2",
+            "",
+            "200"
+          ],
+          [
+            "3",
+            "2000",
+            ""
+          ],
+          [
+            "4",
+            "",
+            ""
+          ]
+        ]
       }
     ]
   },
@@ -32875,9 +36409,9 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "DCL",
     "references": [
       {
-        "type": "image",
-        "src": "/sqld-images/j1255-1.png",
-        "alt": "문항 이미지 j1255-1"
+        "type": "sql",
+        "caption": "DCL Statements",
+        "code": "GRANT SELECT, INSERT ON emp TO user1;\nREVOKE INSERT ON emp FROM user1;"
       }
     ]
   },
@@ -32902,9 +36436,9 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "DDL",
     "references": [
       {
-        "type": "image",
-        "src": "/sqld-images/j1256-1.png",
-        "alt": "문항 이미지 j1256-1"
+        "type": "sql",
+        "caption": "DDL Statements",
+        "code": "CREATE TABLE emp (\n  emp_id NUMBER PRIMARY KEY,\n  emp_name VARCHAR2(30)\n);\nALTER TABLE emp ADD hire_date DATE;\nDROP TABLE temp_emp;"
       }
     ]
   },
@@ -32930,8 +36464,9 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "image",
-        "src": "/sqld-images/j1258-1.png",
-        "alt": "문항 이미지 j1258-1"
+        "src": "/sqld-images/j1115-1.png",
+        "alt": "Sales ERD",
+        "caption": "Sales ERD"
       }
     ]
   },
@@ -32956,9 +36491,44 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "JOIN",
     "references": [
       {
-        "type": "image",
-        "src": "/sqld-images/j1259-1.png",
-        "alt": "문항 이미지 j1259-1"
+        "type": "table",
+        "caption": "LEFT OUTER JOIN — Table A",
+        "headers": [
+          "ID",
+          "NAME"
+        ],
+        "rows": [
+          [
+            "1",
+            "SEOUL"
+          ],
+          [
+            "2",
+            "BUSAN"
+          ],
+          [
+            "3",
+            "DAEGU"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "LEFT OUTER JOIN — Table B",
+        "headers": [
+          "ID",
+          "GRADE"
+        ],
+        "rows": [
+          [
+            "2",
+            "SILVER"
+          ],
+          [
+            "4",
+            "GOLD"
+          ]
+        ]
       }
     ]
   },
@@ -33003,9 +36573,9 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "View",
     "references": [
       {
-        "type": "image",
-        "src": "/sqld-images/j1262-1.png",
-        "alt": "문항 이미지 j1262-1"
+        "type": "sql",
+        "caption": "VIEW Definition",
+        "code": "CREATE VIEW v_emp AS\nSELECT emp_id, emp_name, dept\nFROM emp\nWHERE dept = 'SALES';"
       }
     ]
   },
@@ -33034,9 +36604,50 @@ export const AI_MOCK: QuizQuestion[] = [
         "content": "SELECT COUNT(*)\nFROM (\n  SELECT emp_name, CONNECT_BY_ISLEAF AS is_leaf\n  FROM emp_tree\n  START WITH mgr_id IS NULL\n  CONNECT BY PRIOR emp_id = mgr_id\n) x\nWHERE is_leaf = 1;"
       },
       {
-        "type": "image",
-        "src": "/sqld-images/j1263-1.png",
-        "alt": "문항 이미지 j1263-1"
+        "type": "table",
+        "caption": "Hierarchy EMP Data",
+        "headers": [
+          "EMP ID",
+          "EMP NAME",
+          "MGR ID"
+        ],
+        "rows": [
+          [
+            "1",
+            "CEO",
+            ""
+          ],
+          [
+            "2",
+            "SALES_MGR",
+            "1"
+          ],
+          [
+            "3",
+            "DEV_MGR",
+            "1"
+          ],
+          [
+            "4",
+            "SALES_A",
+            "2"
+          ],
+          [
+            "5",
+            "SALES_B",
+            "2"
+          ],
+          [
+            "6",
+            "DEV_A",
+            "3"
+          ],
+          [
+            "7",
+            "DEV_B",
+            "3"
+          ]
+        ]
       }
     ]
   },
@@ -33061,9 +36672,35 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "그룹 함수",
     "references": [
       {
-        "type": "image",
-        "src": "/sqld-images/j1264-1.png",
-        "alt": "문항 이미지 j1264-1"
+        "type": "table",
+        "caption": "ROLLUP Data",
+        "headers": [
+          "REGION",
+          "PRODUCT",
+          "AMOUNT"
+        ],
+        "rows": [
+          [
+            "SEOUL",
+            "A",
+            "100"
+          ],
+          [
+            "SEOUL",
+            "B",
+            "200"
+          ],
+          [
+            "BUSAN",
+            "A",
+            "150"
+          ],
+          [
+            "BUSAN",
+            "B",
+            "50"
+          ]
+        ]
       }
     ]
   },
@@ -33170,9 +36807,35 @@ export const AI_MOCK: QuizQuestion[] = [
         "content": "SELECT *\nFROM EMP e\nWHERE SALARY = (\n    SELECT MAX(SALARY)\n    FROM EMP\n    WHERE DEPT = e.DEPT\n)\nAND SALARY > 4000;"
       },
       {
-        "type": "image",
-        "src": "/sqld-images/j1270-1.png",
-        "alt": "문항 이미지 j1270-1"
+        "type": "table",
+        "caption": "Correlated Subquery Data",
+        "headers": [
+          "EMP NAME",
+          "DEPT",
+          "SALARY"
+        ],
+        "rows": [
+          [
+            "A",
+            "SALES",
+            "3000"
+          ],
+          [
+            "B",
+            "SALES",
+            "2000"
+          ],
+          [
+            "C",
+            "DEV",
+            "5000"
+          ],
+          [
+            "D",
+            "DEV",
+            "3500"
+          ]
+        ]
       }
     ]
   },
@@ -33305,9 +36968,38 @@ export const AI_MOCK: QuizQuestion[] = [
         "content": "주문번호는 고객명과 고객등급을 결정하고, 상품번호는 상품명을 결정한다고 가정한다."
       },
       {
-        "type": "image",
-        "src": "/sqld-images/j1275-1.png",
-        "alt": "문항 이미지 j1275-1"
+        "type": "table",
+        "caption": "Normalization Source Table",
+        "headers": [
+          "ORDER NO",
+          "PRODUCT NO",
+          "PRODUCT NAME",
+          "CUSTOMER NAME",
+          "CUSTOMER GRADE"
+        ],
+        "rows": [
+          [
+            "1001",
+            "P01",
+            "SQL BOOK",
+            "KIM",
+            "VIP"
+          ],
+          [
+            "1001",
+            "P02",
+            "DB BOOK",
+            "KIM",
+            "VIP"
+          ],
+          [
+            "1002",
+            "P03",
+            "NOTE",
+            "LEE",
+            "BASIC"
+          ]
+        ]
       }
     ]
   },
@@ -33336,9 +37028,35 @@ export const AI_MOCK: QuizQuestion[] = [
         "content": "SELECT COUNT(*) - COUNT(salary) FROM t;"
       },
       {
-        "type": "image",
-        "src": "/sqld-images/j1276-1.png",
-        "alt": "문항 이미지 j1276-1"
+        "type": "table",
+        "caption": "NULL Aggregate Data",
+        "headers": [
+          "EMP ID",
+          "SALARY",
+          "BONUS"
+        ],
+        "rows": [
+          [
+            "1",
+            "1000",
+            "100"
+          ],
+          [
+            "2",
+            "",
+            "200"
+          ],
+          [
+            "3",
+            "2000",
+            ""
+          ],
+          [
+            "4",
+            "",
+            ""
+          ]
+        ]
       }
     ]
   },
@@ -33494,8 +37212,9 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "image",
-        "src": "/sqld-images/j1282-1.png",
-        "alt": "문항 이미지 j1282-1"
+        "src": "/sqld-images/j1115-1.png",
+        "alt": "Sales ERD",
+        "caption": "Sales ERD"
       }
     ]
   },
@@ -33550,9 +37269,45 @@ export const AI_MOCK: QuizQuestion[] = [
         "content": "SELECT dept, Q1, Q2\nFROM (\n  SELECT dept, quarter_cd, amount\n  FROM sales_q\n)\nPIVOT (\n  SUM(amount)\n  FOR quarter_cd IN ('Q1' AS Q1, 'Q2' AS Q2)\n);"
       },
       {
-        "type": "image",
-        "src": "/sqld-images/j1285-1.png",
-        "alt": "문항 이미지 j1285-1"
+        "type": "table",
+        "caption": "PIVOT Source Data",
+        "headers": [
+          "DEPT",
+          "QUARTER CD",
+          "AMOUNT"
+        ],
+        "rows": [
+          [
+            "SALES",
+            "Q1",
+            "100"
+          ],
+          [
+            "SALES",
+            "Q2",
+            "120"
+          ],
+          [
+            "DEV",
+            "Q1",
+            "200"
+          ],
+          [
+            "DEV",
+            "Q2",
+            "180"
+          ],
+          [
+            "HR",
+            "Q1",
+            "90"
+          ],
+          [
+            "HR",
+            "Q2",
+            "110"
+          ]
+        ]
       }
     ]
   },
@@ -33581,9 +37336,50 @@ export const AI_MOCK: QuizQuestion[] = [
         "content": "SELECT emp_name,\n       SYS_CONNECT_BY_PATH(emp_name, '/') AS path\nFROM emp_tree\nSTART WITH mgr_id IS NULL\nCONNECT BY PRIOR emp_id = mgr_id;"
       },
       {
-        "type": "image",
-        "src": "/sqld-images/j1287-1.png",
-        "alt": "문항 이미지 j1287-1"
+        "type": "table",
+        "caption": "Hierarchy EMP Data",
+        "headers": [
+          "EMP ID",
+          "EMP NAME",
+          "MGR ID"
+        ],
+        "rows": [
+          [
+            "1",
+            "CEO",
+            ""
+          ],
+          [
+            "2",
+            "SALES_MGR",
+            "1"
+          ],
+          [
+            "3",
+            "DEV_MGR",
+            "1"
+          ],
+          [
+            "4",
+            "SALES_A",
+            "2"
+          ],
+          [
+            "5",
+            "SALES_B",
+            "2"
+          ],
+          [
+            "6",
+            "DEV_A",
+            "3"
+          ],
+          [
+            "7",
+            "DEV_B",
+            "3"
+          ]
+        ]
       }
     ]
   },
@@ -33738,9 +37534,35 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "서브쿼리",
     "references": [
       {
-        "type": "image",
-        "src": "/sqld-images/j1294-1.png",
-        "alt": "문항 이미지 j1294-1"
+        "type": "table",
+        "caption": "Correlated Subquery Data",
+        "headers": [
+          "EMP NAME",
+          "DEPT",
+          "SALARY"
+        ],
+        "rows": [
+          [
+            "A",
+            "SALES",
+            "3000"
+          ],
+          [
+            "B",
+            "SALES",
+            "2000"
+          ],
+          [
+            "C",
+            "DEV",
+            "5000"
+          ],
+          [
+            "D",
+            "DEV",
+            "3500"
+          ]
+        ]
       }
     ]
   },
@@ -33769,9 +37591,40 @@ export const AI_MOCK: QuizQuestion[] = [
         "content": "SELECT region,\n       seller,\n       amount,\n       SUM(amount) OVER (PARTITION BY region) AS region_total\nFROM sales_rank;"
       },
       {
-        "type": "image",
-        "src": "/sqld-images/j1296-1.png",
-        "alt": "문항 이미지 j1296-1"
+        "type": "table",
+        "caption": "Window Function Data",
+        "headers": [
+          "REGION",
+          "SELLER",
+          "AMOUNT"
+        ],
+        "rows": [
+          [
+            "SEOUL",
+            "KIM",
+            "500"
+          ],
+          [
+            "SEOUL",
+            "LEE",
+            "300"
+          ],
+          [
+            "BUSAN",
+            "PARK",
+            "450"
+          ],
+          [
+            "BUSAN",
+            "CHOI",
+            "200"
+          ],
+          [
+            "BUSAN",
+            "JUNG",
+            "200"
+          ]
+        ]
       }
     ]
   },
@@ -33852,9 +37705,38 @@ export const AI_MOCK: QuizQuestion[] = [
         "content": "고객등급은 고객명에 의해 결정된다고 가정한다."
       },
       {
-        "type": "image",
-        "src": "/sqld-images/j1299-1.png",
-        "alt": "문항 이미지 j1299-1"
+        "type": "table",
+        "caption": "Normalization Source Table",
+        "headers": [
+          "ORDER NO",
+          "PRODUCT NO",
+          "PRODUCT NAME",
+          "CUSTOMER NAME",
+          "CUSTOMER GRADE"
+        ],
+        "rows": [
+          [
+            "1001",
+            "P01",
+            "SQL BOOK",
+            "KIM",
+            "VIP"
+          ],
+          [
+            "1001",
+            "P02",
+            "DB BOOK",
+            "KIM",
+            "VIP"
+          ],
+          [
+            "1002",
+            "P03",
+            "NOTE",
+            "LEE",
+            "BASIC"
+          ]
+        ]
       }
     ]
   },
@@ -34010,8 +37892,9 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "image",
-        "src": "/sqld-images/j1306-1.png",
-        "alt": "문항 이미지 j1306-1"
+        "src": "/sqld-images/j1115-1.png",
+        "alt": "Sales ERD",
+        "caption": "Sales ERD"
       }
     ]
   },
@@ -34040,9 +37923,44 @@ export const AI_MOCK: QuizQuestion[] = [
         "content": "SELECT a.id,\n       COALESCE(b.grade, 'NONE') AS grade\nFROM A a\nLEFT OUTER JOIN B b\n  ON a.id = b.id\nWHERE b.id IS NULL\nORDER BY a.id;"
       },
       {
-        "type": "image",
-        "src": "/sqld-images/j1307-1.png",
-        "alt": "문항 이미지 j1307-1"
+        "type": "table",
+        "caption": "LEFT OUTER JOIN — Table A",
+        "headers": [
+          "ID",
+          "NAME"
+        ],
+        "rows": [
+          [
+            "1",
+            "SEOUL"
+          ],
+          [
+            "2",
+            "BUSAN"
+          ],
+          [
+            "3",
+            "DAEGU"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "LEFT OUTER JOIN — Table B",
+        "headers": [
+          "ID",
+          "GRADE"
+        ],
+        "rows": [
+          [
+            "2",
+            "SILVER"
+          ],
+          [
+            "4",
+            "GOLD"
+          ]
+        ]
       }
     ]
   },
@@ -34123,9 +38041,50 @@ export const AI_MOCK: QuizQuestion[] = [
         "content": "SELECT emp_name,\n       CONNECT_BY_ROOT emp_name AS root_name\nFROM emp_tree\nSTART WITH mgr_id IS NULL\nCONNECT BY PRIOR emp_id = mgr_id;"
       },
       {
-        "type": "image",
-        "src": "/sqld-images/j1311-1.png",
-        "alt": "문항 이미지 j1311-1"
+        "type": "table",
+        "caption": "Hierarchy EMP Data",
+        "headers": [
+          "EMP ID",
+          "EMP NAME",
+          "MGR ID"
+        ],
+        "rows": [
+          [
+            "1",
+            "CEO",
+            ""
+          ],
+          [
+            "2",
+            "SALES_MGR",
+            "1"
+          ],
+          [
+            "3",
+            "DEV_MGR",
+            "1"
+          ],
+          [
+            "4",
+            "SALES_A",
+            "2"
+          ],
+          [
+            "5",
+            "SALES_B",
+            "2"
+          ],
+          [
+            "6",
+            "DEV_A",
+            "3"
+          ],
+          [
+            "7",
+            "DEV_B",
+            "3"
+          ]
+        ]
       }
     ]
   },
@@ -34150,9 +38109,35 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "그룹 함수",
     "references": [
       {
-        "type": "image",
-        "src": "/sqld-images/j1312-1.png",
-        "alt": "문항 이미지 j1312-1"
+        "type": "table",
+        "caption": "ROLLUP Data",
+        "headers": [
+          "REGION",
+          "PRODUCT",
+          "AMOUNT"
+        ],
+        "rows": [
+          [
+            "SEOUL",
+            "A",
+            "100"
+          ],
+          [
+            "SEOUL",
+            "B",
+            "200"
+          ],
+          [
+            "BUSAN",
+            "A",
+            "150"
+          ],
+          [
+            "BUSAN",
+            "B",
+            "50"
+          ]
+        ]
       }
     ]
   },
@@ -34415,9 +38400,38 @@ export const AI_MOCK: QuizQuestion[] = [
         "content": "고객 정보가 주문 데이터와 함께 저장된다고 가정한다."
       },
       {
-        "type": "image",
-        "src": "/sqld-images/j1323-1.png",
-        "alt": "문항 이미지 j1323-1"
+        "type": "table",
+        "caption": "Normalization Source Table",
+        "headers": [
+          "ORDER NO",
+          "PRODUCT NO",
+          "PRODUCT NAME",
+          "CUSTOMER NAME",
+          "CUSTOMER GRADE"
+        ],
+        "rows": [
+          [
+            "1001",
+            "P01",
+            "SQL BOOK",
+            "KIM",
+            "VIP"
+          ],
+          [
+            "1001",
+            "P02",
+            "DB BOOK",
+            "KIM",
+            "VIP"
+          ],
+          [
+            "1002",
+            "P03",
+            "NOTE",
+            "LEE",
+            "BASIC"
+          ]
+        ]
       }
     ]
   },
@@ -34446,9 +38460,35 @@ export const AI_MOCK: QuizQuestion[] = [
         "content": "SELECT SUM(NVL(bonus, 0)) + COUNT(salary) AS val\nFROM emp_null;"
       },
       {
-        "type": "image",
-        "src": "/sqld-images/j1324-1.png",
-        "alt": "문항 이미지 j1324-1"
+        "type": "table",
+        "caption": "NULL Aggregate Data",
+        "headers": [
+          "EMP ID",
+          "SALARY",
+          "BONUS"
+        ],
+        "rows": [
+          [
+            "1",
+            "1000",
+            "100"
+          ],
+          [
+            "2",
+            "",
+            "200"
+          ],
+          [
+            "3",
+            "2000",
+            ""
+          ],
+          [
+            "4",
+            "",
+            ""
+          ]
+        ]
       }
     ]
   },
@@ -34607,9 +38647,44 @@ export const AI_MOCK: QuizQuestion[] = [
         "content": "A.ID  ───────────────<  B.ID\n (1)                 (0 or 1)"
       },
       {
-        "type": "image",
-        "src": "/sqld-images/j1331-1.png",
-        "alt": "문항 이미지 j1331-1"
+        "type": "table",
+        "caption": "LEFT OUTER JOIN — Table A",
+        "headers": [
+          "ID",
+          "NAME"
+        ],
+        "rows": [
+          [
+            "1",
+            "SEOUL"
+          ],
+          [
+            "2",
+            "BUSAN"
+          ],
+          [
+            "3",
+            "DAEGU"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "LEFT OUTER JOIN — Table B",
+        "headers": [
+          "ID",
+          "GRADE"
+        ],
+        "rows": [
+          [
+            "2",
+            "SILVER"
+          ],
+          [
+            "4",
+            "GOLD"
+          ]
+        ]
       }
     ]
   },
@@ -34638,9 +38713,45 @@ export const AI_MOCK: QuizQuestion[] = [
         "content": "SELECT dept, Q1, Q2\nFROM (\n  SELECT dept, quarter_cd, amount\n  FROM sales_q\n)\nPIVOT (\n  SUM(amount)\n  FOR quarter_cd IN ('Q1' AS Q1, 'Q2' AS Q2)\n);"
       },
       {
-        "type": "image",
-        "src": "/sqld-images/j1333-1.png",
-        "alt": "문항 이미지 j1333-1"
+        "type": "table",
+        "caption": "PIVOT Source Data",
+        "headers": [
+          "DEPT",
+          "QUARTER CD",
+          "AMOUNT"
+        ],
+        "rows": [
+          [
+            "SALES",
+            "Q1",
+            "100"
+          ],
+          [
+            "SALES",
+            "Q2",
+            "120"
+          ],
+          [
+            "DEV",
+            "Q1",
+            "200"
+          ],
+          [
+            "DEV",
+            "Q2",
+            "180"
+          ],
+          [
+            "HR",
+            "Q1",
+            "90"
+          ],
+          [
+            "HR",
+            "Q2",
+            "110"
+          ]
+        ]
       }
     ]
   },
@@ -34717,9 +38828,35 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "그룹 함수",
     "references": [
       {
-        "type": "image",
-        "src": "/sqld-images/j1336-1.png",
-        "alt": "문항 이미지 j1336-1"
+        "type": "table",
+        "caption": "ROLLUP Data",
+        "headers": [
+          "REGION",
+          "PRODUCT",
+          "AMOUNT"
+        ],
+        "rows": [
+          [
+            "SEOUL",
+            "A",
+            "100"
+          ],
+          [
+            "SEOUL",
+            "B",
+            "200"
+          ],
+          [
+            "BUSAN",
+            "A",
+            "150"
+          ],
+          [
+            "BUSAN",
+            "B",
+            "50"
+          ]
+        ]
       }
     ]
   },
@@ -34848,9 +38985,35 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "서브쿼리",
     "references": [
       {
-        "type": "image",
-        "src": "/sqld-images/j1342-1.png",
-        "alt": "문항 이미지 j1342-1"
+        "type": "table",
+        "caption": "Correlated Subquery Data",
+        "headers": [
+          "EMP NAME",
+          "DEPT",
+          "SALARY"
+        ],
+        "rows": [
+          [
+            "A",
+            "SALES",
+            "3000"
+          ],
+          [
+            "B",
+            "SALES",
+            "2000"
+          ],
+          [
+            "C",
+            "DEV",
+            "5000"
+          ],
+          [
+            "D",
+            "DEV",
+            "3500"
+          ]
+        ]
       }
     ]
   },
@@ -34983,9 +39146,38 @@ export const AI_MOCK: QuizQuestion[] = [
         "content": "고객명은 고객등급을 결정한다고 가정한다."
       },
       {
-        "type": "image",
-        "src": "/sqld-images/j1347-1.png",
-        "alt": "문항 이미지 j1347-1"
+        "type": "table",
+        "caption": "Normalization Source Table",
+        "headers": [
+          "ORDER NO",
+          "PRODUCT NO",
+          "PRODUCT NAME",
+          "CUSTOMER NAME",
+          "CUSTOMER GRADE"
+        ],
+        "rows": [
+          [
+            "1001",
+            "P01",
+            "SQL BOOK",
+            "KIM",
+            "VIP"
+          ],
+          [
+            "1001",
+            "P02",
+            "DB BOOK",
+            "KIM",
+            "VIP"
+          ],
+          [
+            "1002",
+            "P03",
+            "NOTE",
+            "LEE",
+            "BASIC"
+          ]
+        ]
       }
     ]
   },
@@ -35014,9 +39206,35 @@ export const AI_MOCK: QuizQuestion[] = [
         "content": "SELECT COUNT(*)\nFROM emp_null\nWHERE NVL(salary, 0) = 0\n   OR bonus IS NULL;"
       },
       {
-        "type": "image",
-        "src": "/sqld-images/j1348-1.png",
-        "alt": "문항 이미지 j1348-1"
+        "type": "table",
+        "caption": "NULL Aggregate Data",
+        "headers": [
+          "EMP ID",
+          "SALARY",
+          "BONUS"
+        ],
+        "rows": [
+          [
+            "1",
+            "1000",
+            "100"
+          ],
+          [
+            "2",
+            "",
+            "200"
+          ],
+          [
+            "3",
+            "2000",
+            ""
+          ],
+          [
+            "4",
+            "",
+            ""
+          ]
+        ]
       }
     ]
   },
@@ -35149,9 +39367,35 @@ export const AI_MOCK: QuizQuestion[] = [
         "content": "SELECT region,\n       category,\n       amount,\n       ROW_NUMBER() OVER (\n         ORDER BY category ASC, amount DESC, region ASC\n       ) AS rn\nFROM sales\nWHERE amount >= 100;"
       },
       {
-        "type": "image",
-        "src": "/sqld-images/j1353-1.png",
-        "alt": "문항 이미지 j1353-1"
+        "type": "table",
+        "caption": "SELECT Result Data",
+        "headers": [
+          "REGION",
+          "AMOUNT",
+          "CATEGORY"
+        ],
+        "rows": [
+          [
+            "SEOUL",
+            "150",
+            "A"
+          ],
+          [
+            "BUSAN",
+            "100",
+            "A"
+          ],
+          [
+            "SEOUL",
+            "100",
+            "B"
+          ],
+          [
+            "INCHEON",
+            "80",
+            "B"
+          ]
+        ]
       }
     ]
   },
@@ -35177,8 +39421,9 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "image",
-        "src": "/sqld-images/j1354-1.png",
-        "alt": "문항 이미지 j1354-1"
+        "src": "/sqld-images/j1115-1.png",
+        "alt": "Sales ERD",
+        "caption": "Sales ERD"
       }
     ]
   },
@@ -35207,9 +39452,48 @@ export const AI_MOCK: QuizQuestion[] = [
         "content": "SELECT a.id,\n       COUNT(*) AS cnt\nFROM A a\nJOIN B b\n  ON a.id = b.id\nGROUP BY a.id\nHAVING COUNT(*) = 1\nORDER BY a.id;"
       },
       {
-        "type": "image",
-        "src": "/sqld-images/j1355-1.png",
-        "alt": "문항 이미지 j1355-1"
+        "type": "table",
+        "caption": "JOIN Basic Tables — Table A",
+        "headers": [
+          "ID",
+          "NAME"
+        ],
+        "rows": [
+          [
+            "1",
+            "ALPHA"
+          ],
+          [
+            "2",
+            "BETA"
+          ],
+          [
+            "3",
+            "GAMMA"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "JOIN Basic Tables — Table B",
+        "headers": [
+          "ID",
+          "VAL"
+        ],
+        "rows": [
+          [
+            "2",
+            "X"
+          ],
+          [
+            "3",
+            "Y"
+          ],
+          [
+            "4",
+            "Z"
+          ]
+        ]
       }
     ]
   },
@@ -35264,9 +39548,45 @@ export const AI_MOCK: QuizQuestion[] = [
         "content": "SELECT dept, Q1, Q2\nFROM (\n  SELECT dept, quarter_cd, amount\n  FROM sales_q\n)\nPIVOT (\n  SUM(amount)\n  FOR quarter_cd IN ('Q1' AS Q1, 'Q2' AS Q2)\n)\nORDER BY dept;"
       },
       {
-        "type": "image",
-        "src": "/sqld-images/j1357-1.png",
-        "alt": "문항 이미지 j1357-1"
+        "type": "table",
+        "caption": "PIVOT Source Data",
+        "headers": [
+          "DEPT",
+          "QUARTER CD",
+          "AMOUNT"
+        ],
+        "rows": [
+          [
+            "SALES",
+            "Q1",
+            "100"
+          ],
+          [
+            "SALES",
+            "Q2",
+            "120"
+          ],
+          [
+            "DEV",
+            "Q1",
+            "200"
+          ],
+          [
+            "DEV",
+            "Q2",
+            "180"
+          ],
+          [
+            "HR",
+            "Q1",
+            "90"
+          ],
+          [
+            "HR",
+            "Q2",
+            "110"
+          ]
+        ]
       }
     ]
   },
@@ -35321,9 +39641,50 @@ export const AI_MOCK: QuizQuestion[] = [
         "content": "SELECT emp_name,\n       LEVEL AS lv,\n       CONNECT_BY_ISLEAF AS is_leaf\nFROM emp_tree\nSTART WITH mgr_id IS NULL\nCONNECT BY PRIOR emp_id = mgr_id\nORDER SIBLINGS BY emp_name;"
       },
       {
-        "type": "image",
-        "src": "/sqld-images/j1359-1.png",
-        "alt": "문항 이미지 j1359-1"
+        "type": "table",
+        "caption": "Hierarchy EMP Data",
+        "headers": [
+          "EMP ID",
+          "EMP NAME",
+          "MGR ID"
+        ],
+        "rows": [
+          [
+            "1",
+            "CEO",
+            ""
+          ],
+          [
+            "2",
+            "SALES_MGR",
+            "1"
+          ],
+          [
+            "3",
+            "DEV_MGR",
+            "1"
+          ],
+          [
+            "4",
+            "SALES_A",
+            "2"
+          ],
+          [
+            "5",
+            "SALES_B",
+            "2"
+          ],
+          [
+            "6",
+            "DEV_A",
+            "3"
+          ],
+          [
+            "7",
+            "DEV_B",
+            "3"
+          ]
+        ]
       }
     ]
   },
@@ -35352,9 +39713,65 @@ export const AI_MOCK: QuizQuestion[] = [
         "content": "SELECT dept\nFROM emp\nGROUP BY dept\nHAVING COUNT(*) >= 4\n   AND AVG(salary) > 3000\n   AND SUM(CASE WHEN salary >= 4000 THEN 1 ELSE 0 END) >= 2;"
       },
       {
-        "type": "image",
-        "src": "/sqld-images/j1360-1.png",
-        "alt": "문항 이미지 j1360-1"
+        "type": "table",
+        "caption": "EMP Group Data",
+        "headers": [
+          "EMP ID",
+          "DEPT",
+          "SALARY"
+        ],
+        "rows": [
+          [
+            "1",
+            "SALES",
+            "3000"
+          ],
+          [
+            "2",
+            "SALES",
+            "2500"
+          ],
+          [
+            "3",
+            "SALES",
+            "2000"
+          ],
+          [
+            "4",
+            "SALES",
+            "3500"
+          ],
+          [
+            "5",
+            "DEV",
+            "5000"
+          ],
+          [
+            "6",
+            "DEV",
+            "4200"
+          ],
+          [
+            "7",
+            "DEV",
+            "4100"
+          ],
+          [
+            "8",
+            "DEV",
+            "3900"
+          ],
+          [
+            "9",
+            "DEV",
+            "3700"
+          ],
+          [
+            "10",
+            "HR",
+            "2800"
+          ]
+        ]
       }
     ]
   },
@@ -35436,8 +39853,9 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "image",
-        "src": "/sqld-images/j1363-1.png",
-        "alt": "문항 이미지 j1363-1"
+        "src": "/sqld-images/j1147-1.png",
+        "alt": "Parent / Child ERD",
+        "caption": "Parent / Child ERD"
       }
     ]
   },
@@ -35518,9 +39936,52 @@ export const AI_MOCK: QuizQuestion[] = [
         "content": "SELECT COUNT(*)\nFROM customer c\nWHERE EXISTS (\n  SELECT 1\n  FROM orders o\n  WHERE o.customer_id = c.customer_id\n  GROUP BY o.customer_id\n  HAVING COUNT(*) >= 2\n);"
       },
       {
-        "type": "image",
-        "src": "/sqld-images/j1366-1.png",
-        "alt": "문항 이미지 j1366-1"
+        "type": "table",
+        "caption": "CUSTOMER",
+        "headers": [
+          "CUSTOMER ID",
+          "NAME"
+        ],
+        "rows": [
+          [
+            "101",
+            "KIM"
+          ],
+          [
+            "102",
+            "LEE"
+          ],
+          [
+            "103",
+            "PARK"
+          ],
+          [
+            "104",
+            "CHOI"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "ORDERS",
+        "headers": [
+          "ORDER ID",
+          "CUSTOMER ID"
+        ],
+        "rows": [
+          [
+            "9001",
+            "101"
+          ],
+          [
+            "9002",
+            "101"
+          ],
+          [
+            "9003",
+            "103"
+          ]
+        ]
       }
     ]
   },
@@ -35549,9 +40010,40 @@ export const AI_MOCK: QuizQuestion[] = [
         "content": "SELECT region,\n       seller,\n       amount,\n       ROW_NUMBER() OVER (\n         PARTITION BY region\n         ORDER BY amount DESC, seller ASC\n       ) AS rn,\n       RANK() OVER (\n         PARTITION BY region\n         ORDER BY amount DESC\n       ) AS rnk\nFROM sales_rank;"
       },
       {
-        "type": "image",
-        "src": "/sqld-images/j1368-1.png",
-        "alt": "문항 이미지 j1368-1"
+        "type": "table",
+        "caption": "Window Function Data",
+        "headers": [
+          "REGION",
+          "SELLER",
+          "AMOUNT"
+        ],
+        "rows": [
+          [
+            "SEOUL",
+            "KIM",
+            "500"
+          ],
+          [
+            "SEOUL",
+            "LEE",
+            "300"
+          ],
+          [
+            "BUSAN",
+            "PARK",
+            "450"
+          ],
+          [
+            "BUSAN",
+            "CHOI",
+            "200"
+          ],
+          [
+            "BUSAN",
+            "JUNG",
+            "200"
+          ]
+        ]
       }
     ]
   },

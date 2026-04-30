@@ -125,7 +125,7 @@
           "type": "image",
           "src": "/sqld-images/j1115-1.png",
           "alt": "Sales ERD",
-          "caption": "Sales ERD (CUSTOMER · ORDERS · ORDER_ITEM, 1:N)"
+          "caption": "Sales ERD"
         }
       ]
     },
@@ -424,8 +424,8 @@
         {
           "type": "image",
           "src": "/sqld-images/j101-erd.png",
-          "alt": "서비스-서비스이용-회원 ERD",
-          "caption": "[ERD] 서비스 ─< 서비스이용 >─ 회원 (M:N via 서비스이용)"
+          "alt": "ERD",
+          "caption": "ERD"
         },
         {
           "type": "sql",
