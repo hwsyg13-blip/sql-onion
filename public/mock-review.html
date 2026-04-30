@@ -10969,6 +10969,19 @@ REFERENCES 고객 (고객ID) ON DELETE SET NULL;</code></pre>
           <div class="ref-caption">[SQL]</div>
           <pre><code>ALTER TABLE 주문 ADD CONSTRAINT FK_001 FOREIGN KEY (고객ID)
 REFERENCES 고객 (고객ID) ON DELETE SET NULL;</code></pre>
+        </div>
+        <div class="ref-table">
+          <div class="ref-caption">[표 : 주문 데이터]</div>
+          <table><thead><tr><th>주문번호(PK)</th><th>고객ID(FK)</th><th>주문일시</th></tr></thead><tbody><tr><td>0001</td><td>C001</td><td>2013-12-24</td></tr><tr><td>0002</td><td>C001</td><td>2013-12-25</td></tr><tr><td>0003</td><td>NULL</td><td>2013-12-26</td></tr><tr><td>0004</td><td>C002</td><td>2013-12-27</td></tr></tbody></table>
+        </div>
+        <div class="ref-table">
+          <div class="ref-caption">[표 : 고객 데이터]</div>
+          <table><thead><tr><th>고객ID(PK)</th><th>고객명</th><th>가입일시</th></tr></thead><tbody><tr><td>C001</td><td>홍길동</td><td>2013-12-12</td></tr><tr><td>C002</td><td>이순신</td><td>2013-12-13</td></tr></tbody></table>
+        </div>
+        <div class="ref-sql">
+          <div class="ref-caption">[SQL]</div>
+          <pre><code>ALTER TABLE 주문 ADD CONSTRAINT FK_001 FOREIGN KEY (고객ID)
+REFERENCES 고객 (고객ID) ON DELETE SET NULL;</code></pre>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -13314,6 +13327,15 @@ WHERE  A.회원번호 = B.회원번호
 GROUP BY A.회원번호, A.회원명
 HAVING COUNT(CASE WHEN B.동의여부 = &#39;N&#39; THEN 0 ELSE NULL END) &gt;= 1
 ORDER BY A.회원번호;</code></pre>
+        </div>
+        <div class="ref-sql">
+          <div class="ref-caption">[SQL]</div>
+          <pre><code>SELECT A.회원번호, A.회원명
+FROM   회원 A, 동의항목 B
+WHERE  A.회원번호 = B.회원번호
+GROUP BY A.회원번호, A.회원명
+HAVING COUNT(CASE WHEN B.동의여부 = &#39;N&#39; THEN 0 ELSE NULL END) &gt;= 1
+ORDER BY A.회원번호;</code></pre>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -13611,6 +13633,10 @@ ORDER BY A.회원번호;</code></pre>
         <div class="ref-image">
           <div class="ref-caption">[데이터 모델]</div>
           <img src="/sqld-images/j125-1.png" alt="지역-이용내역 ERD" loading="lazy">
+        </div>
+        <div class="ref-table">
+          <div class="ref-caption">[표 : 지역별 월별 이용량]</div>
+          <table><thead><tr><th>지역명</th><th>이용월</th><th>이용량</th></tr></thead><tbody><tr><td>서울</td><td>2014.01</td><td>1,000</td></tr><tr><td>서울</td><td>2014.02</td><td>1,000</td></tr><tr><td>서울</td><td>월별합계</td><td>2,000</td></tr><tr><td>경기</td><td>2014.01</td><td>1,000</td></tr><tr><td>경기</td><td>2014.03</td><td>2,000</td></tr><tr><td>경기</td><td>월별합계</td><td>3,000</td></tr><tr><td>대전</td><td>2014.05</td><td>1,500</td></tr><tr><td>대전</td><td>2014.06</td><td>1,000</td></tr><tr><td>대전</td><td>월별합계</td><td>2,500</td></tr><tr><td>지역전체</td><td>월별합계</td><td>7,500</td></tr></tbody></table>
         </div>
         <div class="ref-table">
           <div class="ref-caption">[표 : 지역별 월별 이용량]</div>
@@ -16513,9 +16539,13 @@ FROM TEST_A A;</code></pre>
       </header>
       <div class="title">릴레이션 &#39;employee&#39;와 &#39;department&#39;에서 다음 SQL 질의문의 수행 결과는?</div>
       <div class="refs"><div class="ref-text">SELECT e.dno, d.dname, e.ename, e.score<br>FROM employee e, department d<br>WHERE e.dno = d.dno and (e.dno, score) IN<br>(SELECT dno, max(score)<br>FROM employee GROUP BY dno);</div>
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j215-1.png" alt="문항 이미지 j215-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">employee</div>
+          <table><thead><tr><th>eno</th><th>ename</th><th>address</th><th>score</th><th>dno</th></tr></thead><tbody><tr><td>10</td><td>Hong</td><td>서울</td><td>60</td><td>100</td></tr><tr><td>20</td><td>Kim</td><td>대전</td><td>90</td><td>200</td></tr><tr><td>30</td><td>Lee</td><td>강릉</td><td>90</td><td>100</td></tr><tr><td>40</td><td>Kim</td><td>대전</td><td>95</td><td>200</td></tr><tr><td>50</td><td>Hong</td><td>서울</td><td>65</td><td>300</td></tr></tbody></table>
+        </div>
+        <div class="ref-table">
+          <div class="ref-caption">department</div>
+          <table><thead><tr><th>dno</th><th>dname</th></tr></thead><tbody><tr><td>100</td><td>영업</td></tr><tr><td>200</td><td>개발</td></tr><tr><td>300</td><td>서비스</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -16595,9 +16625,13 @@ FROM TEST_A A;</code></pre>
       </header>
       <div class="title">다음 테이블에 대한 매출 누적을 구하는 SQL문을 작성하시오.(윈도우 함수 사용)</div>
       <div class="refs">
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j217-1.png" alt="문항 이미지 j217-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">[데이터, 테이블명 : 매출]</div>
+          <table><thead><tr><th>영업사원</th><th>판매월</th><th>매출</th></tr></thead><tbody><tr><td>홍길동</td><td>1</td><td>1000</td></tr><tr><td>홍길동</td><td>2</td><td>2000</td></tr><tr><td>갑순이</td><td>1</td><td>3000</td></tr><tr><td>갑순이</td><td>2</td><td>2000</td></tr></tbody></table>
+        </div>
+        <div class="ref-table">
+          <div class="ref-caption">[결과]</div>
+          <table><thead><tr><th>영업사원</th><th>판매월</th><th>누적매출</th></tr></thead><tbody><tr><td>홍길동</td><td>1</td><td>1000</td></tr><tr><td>홍길동</td><td>2</td><td>3000</td></tr><tr><td>갑순이</td><td>1</td><td>3000</td></tr><tr><td>갑순이</td><td>2</td><td>5000</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -17106,9 +17140,13 @@ FROM TEST_A A;</code></pre>
       </header>
       <div class="title">두 개 릴레이션 Student와 Department가 있을 때, 아래 SQL을 수행한 결과 릴레이션의 차수와 카디널리티는 각각 얼마인가?( 단, 릴레이션 Student의 애트리뷰트 &#39;소속(dept)&#39;은 릴레이션 Department의 애트리뷰트 &#39;코드(dno)&#39;를 외부키로 참조한다)</div>
       <div class="refs"><div class="ref-text">SELECT * FROM Student s, Department d WHERE s.dept &gt; 100;</div>
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j233-1.png" alt="문항 이미지 j233-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">[Student]</div>
+          <table><thead><tr><th>학번(sno)</th><th>성명(sname)</th><th>주소(address)</th><th>성적(score)</th><th>소속(dept)</th></tr></thead><tbody><tr><td>9801</td><td>홍길동</td><td>서울</td><td>80</td><td>100</td></tr><tr><td>9802</td><td>김철수</td><td>대전</td><td>90</td><td>200</td></tr><tr><td>9803</td><td>이순자</td><td>강릉</td><td>90</td><td>100</td></tr><tr><td>9805</td><td>이원명</td><td>부산</td><td>95</td><td>200</td></tr><tr><td>9806</td><td>홍남순</td><td>서울</td><td>65</td><td>300</td></tr></tbody></table>
+        </div>
+        <div class="ref-table">
+          <div class="ref-caption">[Department]</div>
+          <table><thead><tr><th>코드(dno)</th><th>학과명</th><th>학과장(manager)</th></tr></thead><tbody><tr><td>100</td><td>정통</td><td>이순신</td></tr><tr><td>200</td><td>전자</td><td>강유찬</td></tr><tr><td>300</td><td>기계</td><td>김유신</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -17149,9 +17187,9 @@ FROM TEST_A A;</code></pre>
       </header>
       <div class="title">다음  sutdent 테이블을 이용하여 아래의 SQL을 수행하였을 때 실행 결과는?</div>
       <div class="refs"><div class="ref-text">SELECT count(*)<br>FROM student<br>GROUP BY department<br>HAVING count(*) &gt; 2;</div>
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j234-1.png" alt="문항 이미지 j234-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">[student]</div>
+          <table><thead><tr><th>name</th><th>term</th><th>degree</th><th>department</th></tr></thead><tbody><tr><td>Kim</td><td>5</td><td>3.5</td><td>computer</td></tr><tr><td>Lee</td><td>5</td><td>4</td><td>computer</td></tr><tr><td>Park</td><td>7</td><td>2.5</td><td>physics</td></tr><tr><td>Choi</td><td>7</td><td>2.8</td><td>physics</td></tr><tr><td>Ryu</td><td>6</td><td>3</td><td>math</td></tr><tr><td>Jo</td><td>3</td><td>3.5</td><td>math</td></tr><tr><td>Yang</td><td>1</td><td>2</td><td>math</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt correct">
@@ -17348,9 +17386,9 @@ FROM TEST_A A;</code></pre>
       </header>
       <div class="title">다음 결과는 2개의 테이블을 어떤 join으로 진행한 것인가?</div>
       <div class="refs">
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j241-1.png" alt="문항 이미지 j241-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">[EMPNO·DEPTNO]</div>
+          <table><thead><tr><th>EMPNO</th><th>DEPTNO</th></tr></thead><tbody><tr><td>7902</td><td>20</td></tr><tr><td>7934</td><td>10</td></tr><tr><td></td><td>40</td></tr><tr><td>8031</td><td></td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt correct">
@@ -17469,9 +17507,14 @@ FROM TEST_A A;</code></pre>
       </header>
       <div class="title">다음 SQL문에서 ( )에 들어갈 알맞은 명령어는 무엇인가?</div>
       <div class="refs">
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j244-1.png" alt="문항 이미지 j244-1" loading="lazy">
+        <div class="ref-sql">
+          <div class="ref-caption">[SQL]</div>
+          <pre><code>SELECT * FROM EMP a RIGHT JOIN DEPT b
+ON a.DEPTNO = b.DEPTNO;</code></pre>
+        </div>
+        <div class="ref-table">
+          <div class="ref-caption">[결과]</div>
+          <table><thead><tr><th>EMPNO</th><th>ENAME</th><th>JOB</th><th>MGR</th><th>HIREDATE</th><th>SAL</th><th>COMM</th><th>DEPTNO.1</th><th>DEPTNO.2</th><th>DNAME</th><th>LOC</th></tr></thead><tbody><tr><td>7788</td><td>SCOTT</td><td>ANALYST</td><td>7786</td><td>03/1/259</td><td>2800</td><td></td><td>20</td><td>20</td><td>RESEARCH</td><td>DALLAS</td></tr><tr><td>7189</td><td>KING</td><td>PRESIDENT</td><td></td><td>31/11/17</td><td>3600</td><td></td><td>20</td><td>28</td><td>ACCOUNTING</td><td>NEW YORK</td></tr><tr><td>7844</td><td>TURNER</td><td>SILVERMAN</td><td>7788</td><td>01/09/09</td><td>1500</td><td></td><td>20</td><td>28</td><td>SALES</td><td>CHICAGO</td></tr><tr><td>7976</td><td>ADAMS</td><td>CLERK</td><td>7788</td><td>R1/12/03</td><td>1500</td><td></td><td>20</td><td>38</td><td>RESEARCH</td><td>TALLAO</td></tr><tr><td>7960</td><td>JAMES</td><td>CLERK</td><td>7788</td><td>R1/12/03</td><td>956</td><td></td><td>20</td><td>38</td><td>SALES</td><td>CHICAGO</td></tr><tr><td>7902</td><td>FORD</td><td>ANALYST</td><td>7788</td><td>83/01/03</td><td>1500</td><td></td><td>20</td><td>18</td><td>RESEARCH</td><td>DALLAS</td></tr><tr><td>790A</td><td>HELLER</td><td>CLERK</td><td>7788</td><td>83/01/23</td><td>1300</td><td></td><td>10</td><td>18</td><td>ACCOUNTINS</td><td>NEW YORK</td></tr><tr><td>NULL</td><td>NULL</td><td>NULL</td><td>NULL</td><td>NULL</td><td>NULL</td><td>NULL</td><td>NULL</td><td>40</td><td>OPERATIONS</td><td>BOSTON</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -17590,9 +17633,9 @@ FROM TEST_A A;</code></pre>
       </header>
       <div class="title">다음의 PREV_SAL은 어떤 윈도우 함수를 사용해야 하는가?</div>
       <div class="refs">
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j247-1.png" alt="문항 이미지 j247-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">[결과]</div>
+          <table><thead><tr><th>ENAME</th><th>HIREDATE</th><th>SAL</th><th>PREV_SAL</th></tr></thead><tbody><tr><td>ALLEN</td><td>20-FEB-81</td><td>1600</td><td></td></tr><tr><td>WARD</td><td>22-FEB-81</td><td>1250</td><td>1600</td></tr><tr><td>TURNER</td><td>08-SEP-81</td><td>1500</td><td>1250</td></tr><tr><td>MARTIN</td><td>28-SEP-81</td><td>1250</td><td>1500</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -17633,9 +17676,9 @@ FROM TEST_A A;</code></pre>
       </header>
       <div class="title">다음 과일 테이블에 대한 SQL문 내의 비교조건을 해석한 것으로 올바르지 않은 것은?</div>
       <div class="refs">
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j248-1.png" alt="문항 이미지 j248-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">[과일]</div>
+          <table><thead><tr><th>과일코드</th><th>과일명</th></tr></thead><tbody><tr><td>10</td><td>오렌지</td></tr><tr><td>15</td><td>키위</td></tr><tr><td>19</td><td>파인애플</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -17676,9 +17719,9 @@ FROM TEST_A A;</code></pre>
       </header>
       <div class="title">다음의 예에서 결괏값이 다른 하나는?</div>
       <div class="refs">
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j250-1.png" alt="문항 이미지 j250-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">[SQLD_13]</div>
+          <table><thead><tr><th>고객</th><th>거래내역</th></tr></thead><tbody><tr><td>철수</td><td>100</td></tr><tr><td>민정</td><td></td></tr><tr><td>아름</td><td>300</td></tr><tr><td>예진</td><td></td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt correct">
@@ -18032,8 +18075,8 @@ FROM TEST_A A;</code></pre>
       <div class="title">EMP 테이블 7788번 사원의 SAL 값이 현재 1000인 상황에서 아래 TX1, TX2 두 개의 트랜잭션이 동시에 수행되었다. 양쪽 트랜잭션이 모두 완료된 시점에 7788번 사원의 SAL 값은?</div>
       <div class="refs">
         <div class="ref-image">
-          
-          <img src="/sqld-images/j262-1.png" alt="문항 이미지 j262-1" loading="lazy">
+          <div class="ref-caption">[트랜잭션 시점 비교]</div>
+          <img src="/sqld-images/j262-1.png" alt="TX1·시점·TX2 트랜잭션 동시성 시나리오" loading="lazy">
         </div></div>
       <ol class="opts">
         <li class="opt correct">
@@ -18348,8 +18391,8 @@ FROM TEST_A A;</code></pre>
       <div class="title">다음 주어진 ERD 관계에 대한 설명으로 옳은 것을 고르시오.</div>
       <div class="refs">
         <div class="ref-image">
-          
-          <img src="/sqld-images/j271-1.png" alt="문항 이미지 j271-1" loading="lazy">
+          <div class="ref-caption">[ERD]</div>
+          <img src="/sqld-images/j271-1.png" alt="고객-사용자계정-그룹마스터 ERD" loading="lazy">
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -18507,9 +18550,17 @@ FROM TEST_A A;</code></pre>
       </header>
       <div class="title">다음 주어진 테이블에 대해서 아래와 같은 SQL문을 수행하였을 때 반환되는 ROW 값의 수는 무엇인가?</div>
       <div class="refs"><div class="ref-text">select * from A1<br>union<br>select * from B1<br>minus<br>select * from C1;</div>
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j277-1.png" alt="문항 이미지 j277-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">[A1]</div>
+          <table><thead><tr><th>COL1</th></tr></thead><tbody><tr><td>1</td></tr><tr><td>2</td></tr><tr><td>3</td></tr><tr><td>4</td></tr></tbody></table>
+        </div>
+        <div class="ref-table">
+          <div class="ref-caption">[B1]</div>
+          <table><thead><tr><th>COL1</th></tr></thead><tbody><tr><td>3</td></tr><tr><td>5</td></tr></tbody></table>
+        </div>
+        <div class="ref-table">
+          <div class="ref-caption">[C1]</div>
+          <table><thead><tr><th>COL1</th></tr></thead><tbody><tr><td>4</td></tr><tr><td>5</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -18550,9 +18601,9 @@ FROM TEST_A A;</code></pre>
       </header>
       <div class="title">다음은 계층형 쿼리를 수행하는 SQL문이다. (   )에 해당되는 것으로 올바른 것은?</div>
       <div class="refs"><div class="ref-text">SELECT *<br>FROM Mytest<br>START WITH (  ㄱ   ) IS NULL<br>CONNECT BY PRIOR (   ㄴ  )<br>AND today BETWEEN &#39;2017-01-01&#39; AND &#39;2022-12-31&#39;<br>ORDER SIBLINGS BY empid;</div>
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j279-1.png" alt="문항 이미지 j279-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">[Mytest]</div>
+          <table><thead><tr><th>EMPID</th><th>NAME</th><th>TODAY</th><th>MGRID</th></tr></thead><tbody><tr><td>1000</td><td>조조</td><td>2017-01-01</td><td>NULL</td></tr><tr><td>1001</td><td>유비</td><td>2017-01-01</td><td>1000</td></tr><tr><td>1002</td><td>관우</td><td>2020-01-01</td><td>1000</td></tr><tr><td>1003</td><td>조자룡</td><td>2020-01-01</td><td>1000</td></tr><tr><td>1004</td><td>여포</td><td>2020-01-01</td><td>NULL</td></tr><tr><td>1005</td><td>동탁</td><td>2022-01-01</td><td>1004</td></tr><tr><td>1006</td><td>사마위</td><td>2022-01-01</td><td>1004</td></tr><tr><td>1007</td><td>순욱</td><td>2022-01-01</td><td>1004</td></tr></tbody></table>
         </div>
         <div class="ref-image">
           
@@ -18597,9 +18648,9 @@ FROM TEST_A A;</code></pre>
       </header>
       <div class="title">다음 중 Mytest 테이블에서 부서코드 400부터 상위 부서를 찾는 SQL문은?</div>
       <div class="refs">
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j280-1.png" alt="문항 이미지 j280-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">[부서]</div>
+          <table><thead><tr><th>부서id</th><th>부서코드</th><th>상위부서코드</th></tr></thead><tbody><tr><td>10</td><td>50</td><td>0</td></tr><tr><td>20</td><td>400</td><td>50</td></tr><tr><td>30</td><td>150</td><td>400</td></tr><tr><td>40</td><td>200</td><td>150</td></tr><tr><td>50</td><td>250</td><td>200</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt correct">
@@ -18718,9 +18769,9 @@ FROM TEST_A A;</code></pre>
       </header>
       <div class="title">주어진 테이블에서 아래의 SQL문과 다른 값을 반환하는 SQL문을 고르시오.</div>
       <div class="refs"><div class="ref-text">SELECT * FROM Mytest WHERE (COL1, COL2) IN ((&#39;x&#39;,&#39;y&#39;),(&#39;kk&#39;,&#39;BB&#39;))</div>
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j283-1.png" alt="문항 이미지 j283-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">[Mytest]</div>
+          <table><thead><tr><th>COL1</th><th>COL2</th></tr></thead><tbody><tr><td>x</td><td>y</td></tr><tr><td>A</td><td>B</td></tr><tr><td>a</td><td>b</td></tr><tr><td>KK</td><td>BB</td></tr><tr><td>1</td><td>2</td></tr><tr><td>x</td><td>KK</td></tr><tr><td>y</td><td>BB</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt ">
