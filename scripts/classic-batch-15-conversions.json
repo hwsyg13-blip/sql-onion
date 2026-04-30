@@ -1,0 +1,365 @@
+{
+  "schema": "md5(image content) → 변환된 references 배열. 클래식 한글 시험지 batch 15.",
+  "method": "Claude 시각 정독 (sharp 4x lanczos3 처음부터)",
+  "batchSize": 15,
+  "groups": {
+    "1431bc8ebe8e": {
+      "name": "j646 — TAB1 4행 + TAB2 4행 (j645와 동일 패턴 별개 hash)",
+      "imageKey": "j646",
+      "refs": [
+        {
+          "type": "table",
+          "caption": "<TAB1>",
+          "headers": ["COL1", "COL2"],
+          "rows": [["1", "A"], ["2", "B"], ["3", ""], ["4", "C"]]
+        },
+        {
+          "type": "table",
+          "caption": "<TAB2>",
+          "headers": ["COL1", "COL2"],
+          "rows": [["1", "A"], ["2", "B"], ["3", "B"], ["4", ""]]
+        }
+      ]
+    },
+    "f729301b9ff1": {
+      "name": "j648 — TAB1 NO/CODE 6행 (5 결번) + TAB2 NO/QTY 7행",
+      "imageKey": "j648",
+      "refs": [
+        {
+          "type": "table",
+          "caption": "<TAB1>",
+          "headers": ["NO", "CODE"],
+          "rows": [
+            ["1", "A"],
+            ["2", "B"],
+            ["3", ""],
+            ["4", "B"],
+            ["6", "D"],
+            ["7", "E"]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "<TAB2>",
+          "headers": ["NO", "QTY"],
+          "rows": [
+            ["1", "2"],
+            ["2", "4"],
+            ["4", "6"],
+            ["4", "8"],
+            ["5", "10"],
+            ["5", "10"],
+            ["5", "10"]
+          ]
+        }
+      ]
+    },
+    "55bef205dc2b": {
+      "name": "j649 — TAB1 COL1/COL2 6행 (A 4행 + B 2행)",
+      "imageKey": "j649",
+      "refs": [
+        {
+          "type": "table",
+          "caption": "<TAB1>",
+          "headers": ["COL1", "COL2"],
+          "rows": [
+            ["A", "10"],
+            ["A", "20"],
+            ["A", "30"],
+            ["A", "30"],
+            ["B", "30"],
+            ["B", "40"]
+          ]
+        }
+      ]
+    },
+    "ca86fddaff33": {
+      "name": "j650 — CUSTOMERS-ORDERS ERD (PRMOTION_ID 원본 오타 그대로)",
+      "imageKey": "j650",
+      "refs": [
+        {
+          "type": "image",
+          "src": "/sqld-images/j650-1.png",
+          "alt": "CUSTOMERS(CUSTOMER_ID PK / NAME, GENDER, PHONE, WEDDING_TYPE, BIRTHDAY) ─ ORDERS(ORDER_ID PK / ORDER_DATE, CUSTOMER_ID FK, PRMOTION_ID) ERD. PRMOTION_ID 는 PROMOTION 의 원본 오타로 추정",
+          "caption": "[ERD]"
+        }
+      ]
+    },
+    "716c5a7beee7": {
+      "name": "j651 — EMP EMPNO/ENAME/HIREDATE 6행 (표준 EMP 7369~7782)",
+      "imageKey": "j651",
+      "refs": [
+        {
+          "type": "table",
+          "caption": "<EMP>",
+          "headers": ["EMPNO", "ENAME", "HIREDATE"],
+          "rows": [
+            ["7369", "SMITH", "1980/12/17"],
+            ["7499", "ALLEN", "1981/02/20"],
+            ["7521", "WARD", "1981/02/22"],
+            ["7566", "JONES", "1981/04/02"],
+            ["7698", "BLAKE", "1981/05/01"],
+            ["7782", "CLARK", "1981/06/09"]
+          ]
+        }
+      ]
+    },
+    "b6a9fd35c069": {
+      "name": "j653 — 고객 4행 + 상품 4행 + 매핑 결과 4행 (포인트 등급별 상품 매핑)",
+      "imageKey": "j653",
+      "refs": [
+        {
+          "type": "table",
+          "caption": "<고객>",
+          "headers": ["고객번호", "이름", "포인트"],
+          "rows": [
+            ["1000", "홍길동", "10000"],
+            ["1001", "박길동", "9000"],
+            ["1002", "최길동", "13000"],
+            ["1003", "이길동", "2000"]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "<상품>",
+          "headers": ["상품번호", "상품명", "최소포인트", "최대포인트"],
+          "rows": [
+            ["1", "A", "1", "2000"],
+            ["2", "B", "2001", "8000"],
+            ["3", "C", "8001", "12000"],
+            ["4", "D", "12001", "20000"]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "[매핑 결과]",
+          "headers": ["고객번호", "상품명"],
+          "rows": [
+            ["1000", "C"],
+            ["1001", "C"],
+            ["1002", "D"],
+            ["1003", "A"]
+          ]
+        }
+      ]
+    },
+    "e00280208d25": {
+      "name": "j654 — TAB1 5행 + TAB2 5행 (3컬럼 COL1/COL2/COL3)",
+      "imageKey": "j654",
+      "refs": [
+        {
+          "type": "table",
+          "caption": "<TAB1>",
+          "headers": ["COL1", "COL2", "COL3"],
+          "rows": [
+            ["1", "A", "10"],
+            ["2", "A", "15"],
+            ["3", "B", "10"],
+            ["4", "B", "30"],
+            ["5", "B", "20"]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "<TAB2>",
+          "headers": ["COL1", "COL2", "COL3"],
+          "rows": [
+            ["6", "A", "10"],
+            ["7", "A", "30"],
+            ["8", "B", "10"],
+            ["9", "B", "30"],
+            ["10", "A", "20"]
+          ]
+        }
+      ]
+    },
+    "f9de7bb93bfb": {
+      "name": "j655 — TAB1 5행 + TAB2 4행 + TAB3 4행 (UNION/NULL 패턴)",
+      "imageKey": "j655",
+      "refs": [
+        {
+          "type": "table",
+          "caption": "<TAB1>",
+          "headers": ["COL1", "COL2"],
+          "rows": [
+            ["10", "A"],
+            ["20", "B"],
+            ["30", "C"],
+            ["30", "D"],
+            ["40", "E"]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "<TAB2>",
+          "headers": ["COL1", "COL2"],
+          "rows": [
+            ["10", "A"],
+            ["20", "A"],
+            ["50", "F"],
+            ["NULL", "A"]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "<TAB3>",
+          "headers": ["COL1", "COL2"],
+          "rows": [
+            ["30", "C"],
+            ["30", "D"],
+            ["40", "E"],
+            ["NULL", "A"]
+          ]
+        }
+      ]
+    },
+    "fc35e91cf133": {
+      "name": "j656 — JUMUN 5행 (JUMUN_NO/PRODUCT_NO/GOGAK_NO/QTY/JUMUN_DATE)",
+      "imageKey": "j656",
+      "refs": [
+        {
+          "type": "table",
+          "caption": "<JUMUN>",
+          "headers": ["JUMUN_NO", "PRODUCT_NO", "GOGAK_NO", "QTY", "JUMUN_DATE"],
+          "rows": [
+            ["1000", "1", "0001", "3", "2024/05/24 11:00:56"],
+            ["1001", "2", "0001", "1", "2024/05/25 12:01:56"],
+            ["1002", "1", "0002", "2", "2024/05/26 09:13:12"],
+            ["1003", "1", "0002", "1", "2024/05/27 10:24:30"],
+            ["1004", "2", "0002", "2", "2024/05/28 13:01:10"]
+          ]
+        }
+      ]
+    },
+    "3c9372c8f4c5": {
+      "name": "j657 — STUDENT NO/NAME/JUMSU 5행 (홍/박/최/이/구 길동 100~70)",
+      "imageKey": "j657",
+      "refs": [
+        {
+          "type": "table",
+          "caption": "<STUDENT>",
+          "headers": ["NO", "NAME", "JUMSU"],
+          "rows": [
+            ["1", "홍길동", "100"],
+            ["2", "박길동", "90"],
+            ["3", "최길동", "90"],
+            ["4", "이길동", "80"],
+            ["5", "구길동", "70"]
+          ]
+        }
+      ]
+    },
+    "b191511aac9a": {
+      "name": "j660 — 사원 9행 계층 (홍/박/최/이/구/안/송/강/공 길동, NULL 1행 + 상위관리자 FK)",
+      "imageKey": "j660",
+      "refs": [
+        {
+          "type": "table",
+          "caption": "<사원>",
+          "headers": ["사원번호", "이름", "상위관리자코드"],
+          "rows": [
+            ["1000", "홍길동", "NULL"],
+            ["1001", "박길동", "1000"],
+            ["1002", "최길동", "1001"],
+            ["1003", "이길동", "1001"],
+            ["1004", "구길동", "1002"],
+            ["1005", "안길동", "1003"],
+            ["1006", "송길동", "1000"],
+            ["1007", "강길동", "1006"],
+            ["1008", "공길동", "1006"]
+          ]
+        }
+      ]
+    },
+    "730fac6dd2a8": {
+      "name": "j662 — 판매(2행) + 빈 SELECT FROM 판매 + 결과(4행) UNPIVOT 패턴",
+      "imageKey": "j662",
+      "refs": [
+        {
+          "type": "table",
+          "caption": "<판매>",
+          "headers": ["지역", "Q1", "Q2"],
+          "rows": [
+            ["서울", "10", "20"],
+            ["경기", "30", "40"]
+          ]
+        },
+        {
+          "type": "sql",
+          "caption": "[SQL]",
+          "code": "SELECT (        )\nFROM 판매"
+        },
+        {
+          "type": "table",
+          "caption": "<결과>",
+          "headers": ["지역", "구분", "판매량"],
+          "rows": [
+            ["서울", "Q1", "10"],
+            ["서울", "Q2", "20"],
+            ["경기", "Q1", "30"],
+            ["경기", "Q2", "40"]
+          ]
+        }
+      ]
+    },
+    "894a81760fb8": {
+      "name": "j663 — TAB1 COL1 2행 (점 구분 정규식 패턴)",
+      "imageKey": "j663",
+      "refs": [
+        {
+          "type": "table",
+          "caption": "<TAB1>",
+          "headers": ["COL1"],
+          "rows": [
+            ["AXXX.AYYY.AXAX."],
+            ["AAXYXY.XYYY.AXYAXY."]
+          ]
+        }
+      ]
+    },
+    "9ec05a24c134": {
+      "name": "j667 — TAB1 스키마 정의 3행 + TAB1 데이터 3행",
+      "imageKey": "j667",
+      "refs": [
+        {
+          "type": "table",
+          "caption": "<TAB1> 스키마",
+          "headers": ["컬럼명", "타입"],
+          "rows": [
+            ["COL1", "NUMBER"],
+            ["COL2", "VARCHAR2(10)"],
+            ["COL3", "NUMBER"]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "<TAB1> 데이터",
+          "headers": ["COL1", "COL2", "COL3"],
+          "rows": [
+            ["1", "A", "10"],
+            ["2", "B", "20"],
+            ["3", "C", "30"]
+          ]
+        }
+      ]
+    },
+    "f554c91cd826": {
+      "name": "j690 — TAB1 COL1/COL2/COL3 5행 (NULL 다수)",
+      "imageKey": "j690",
+      "refs": [
+        {
+          "type": "table",
+          "caption": "<TAB1>",
+          "headers": ["COL1", "COL2", "COL3"],
+          "rows": [
+            ["A", "NULL", "100"],
+            ["A", "200", "300"],
+            ["B", "100", "NULL"],
+            ["B", "300", "200"],
+            ["NULL", "100", "0"]
+          ]
+        }
+      ]
+    }
+  }
+}
