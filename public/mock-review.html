@@ -10943,6 +10943,19 @@ SQL2: select count(학번) from 학생</code></pre>
           <div class="ref-caption">[SQL]</div>
           <pre><code>ALTER TABLE 주문 ADD CONSTRAINT FK_001 FOREIGN KEY (고객ID)
 REFERENCES 고객 (고객ID) ON DELETE SET NULL;</code></pre>
+        </div>
+        <div class="ref-table">
+          <div class="ref-caption">[표 : 주문 데이터]</div>
+          <table><thead><tr><th>주문번호(PK)</th><th>고객ID(FK)</th><th>주문일시</th></tr></thead><tbody><tr><td>0001</td><td>C001</td><td>2013-12-24</td></tr><tr><td>0002</td><td>C001</td><td>2013-12-25</td></tr><tr><td>0003</td><td>NULL</td><td>2013-12-26</td></tr><tr><td>0004</td><td>C002</td><td>2013-12-27</td></tr></tbody></table>
+        </div>
+        <div class="ref-table">
+          <div class="ref-caption">[표 : 고객 데이터]</div>
+          <table><thead><tr><th>고객ID(PK)</th><th>고객명</th><th>가입일시</th></tr></thead><tbody><tr><td>C001</td><td>홍길동</td><td>2013-12-12</td></tr><tr><td>C002</td><td>이순신</td><td>2013-12-13</td></tr></tbody></table>
+        </div>
+        <div class="ref-sql">
+          <div class="ref-caption">[SQL]</div>
+          <pre><code>ALTER TABLE 주문 ADD CONSTRAINT FK_001 FOREIGN KEY (고객ID)
+REFERENCES 고객 (고객ID) ON DELETE SET NULL;</code></pre>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -11283,9 +11296,15 @@ SELECT COUNT(품목ID) FROM 품목
       </header>
       <div class="title">다음 중 SQL의 실행 결과로 가장 적절한 것은?</div>
       <div class="refs">
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j63-1.png" alt="문항 이미지 j63-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">EMP_TBL</div>
+          <table><thead><tr><th>EMPNO</th><th>SAL</th></tr></thead><tbody><tr><td>100</td><td>1500</td></tr><tr><td>200</td><td>3000</td></tr><tr><td>300</td><td>2000</td></tr></tbody></table>
+        </div>
+        <div class="ref-sql">
+          <div class="ref-caption">[SQL]</div>
+          <pre><code>SELECT COUNT(*)
+FROM   EMP_TBL
+WHERE  EMPNO &gt; 100 AND SAL &gt;= 3000 OR EMPNO = 200;</code></pre>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -11326,9 +11345,9 @@ SELECT COUNT(품목ID) FROM 품목
       </header>
       <div class="title">다음 중 SELECT COL1 + COL3 FROM TAB_A； 의 결과로 가장 적절한 것은?</div>
       <div class="refs">
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j64-1.png" alt="문항 이미지 j64-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">TAB_A (레코드 3건)</div>
+          <table><thead><tr><th>COL1</th><th>COL2</th><th>COL3</th></tr></thead><tbody><tr><td>30</td><td>NULL</td><td>20</td></tr><tr><td>NULL</td><td>10</td><td>40</td></tr><tr><td>50</td><td>NULL</td><td>NULL</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt correct">
@@ -11447,9 +11466,9 @@ SELECT COUNT(품목ID) FROM 품목
       </header>
       <div class="title">아래와 같이 월별매출 테이블에 데이터가 입력되어 있다. 다음 중 2014년 11월 부터 2015년 03월까지의 매출금액 합계를 출력하는 SQL 문장으로 옳은 것은?</div>
       <div class="refs">
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j67-1.png" alt="문항 이미지 j67-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">[테이블 : 월별매출]</div>
+          <table><thead><tr><th>년(PK)</th><th>월(PK)</th><th>매출금액</th></tr></thead><tbody><tr><td>2014</td><td>01</td><td>1000</td></tr><tr><td>2014</td><td>02</td><td>2000</td></tr><tr><td>2014</td><td>03</td><td>3000</td></tr><tr><td>2014</td><td>11</td><td>4000</td></tr><tr><td>2014</td><td>12</td><td>5000</td></tr><tr><td>2015</td><td>01</td><td>6000</td></tr><tr><td>2015</td><td>02</td><td>7000</td></tr><tr><td>2015</td><td>03</td><td>8000</td></tr><tr><td>2015</td><td>11</td><td>9000</td></tr><tr><td>2015</td><td>12</td><td>10000</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt correct">
@@ -11491,8 +11510,8 @@ SELECT COUNT(품목ID) FROM 품목
       <div class="title">아래 테이블 스키마를 참조하여 SQL 문장을 작성하였다. 다음 중 결과가 다른 SQL 문장은?</div>
       <div class="refs">
         <div class="ref-image">
-          
-          <img src="/sqld-images/j68-1.png" alt="문항 이미지 j68-1" loading="lazy">
+          <div class="ref-caption">[논리 ↔ 물리 데이터 모델]</div>
+          <img src="/sqld-images/j68-1.png" alt="서비스_가입 논리 모델 ↔ SVC_JOIN 물리 모델" loading="lazy">
         </div></div>
       <ol class="opts">
         <li class="opt correct">
@@ -11689,9 +11708,9 @@ SELECT COUNT(품목ID) FROM 품목
       </header>
       <div class="title">다음 중 아래 TAB1 을보고 각 SQL 실행결과를 가장 올바르게 설명한 것을 고르시오.</div>
       <div class="refs">
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j73-1.png" alt="문항 이미지 j73-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">[TAB1]</div>
+          <table><thead><tr><th>COL1</th><th>COL2</th></tr></thead><tbody><tr><td>a</td><td>NULL</td></tr><tr><td>b</td><td>&#39;&#39;</td></tr><tr><td>c</td><td>3</td></tr><tr><td>d</td><td>4</td></tr><tr><td>e</td><td>3</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -11732,9 +11751,17 @@ SELECT COUNT(품목ID) FROM 품목
       </header>
       <div class="title">다음 중 아래 데이터를 가지고 있는 EMP_Q 테이블에서 세개의 SQL 결과로 가장 적절한 것은?</div>
       <div class="refs">
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j74-1.png" alt="문항 이미지 j74-1" loading="lazy">
+        <div class="ref-sql">
+          <div class="ref-caption">[SQL]</div>
+          <pre><code>SELECT SAL/COMM FROM EMP_Q WHERE ENAME = &#39;KING&#39;;
+SELECT SAL/COMM FROM EMP_Q WHERE ENAME = &#39;FORD&#39;;
+SELECT SAL/COMM FROM EMP_Q WHERE ENAME = &#39;SCOTT&#39;;
+
+-- 단, SCOTT의 COMM은 NULL 값임</code></pre>
+        </div>
+        <div class="ref-table">
+          <div class="ref-caption">EMP_Q</div>
+          <table><thead><tr><th>ENAME (문자타입)</th><th>SAL (숫자타입)</th><th>COMM (숫자타입)</th></tr></thead><tbody><tr><td>KING</td><td>0</td><td>300</td></tr><tr><td>FORD</td><td>5000</td><td>0</td></tr><tr><td>SCOTT</td><td>1000</td><td></td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt correct">
@@ -11775,9 +11802,14 @@ SELECT COUNT(품목ID) FROM 품목
       </header>
       <div class="title">다음 중 아래와 같은 데이터 상황에서 SQL의 수행 결과로 가장 적절한 것은?</div>
       <div class="refs">
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j75-1.png" alt="문항 이미지 j75-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">TAB1</div>
+          <table><thead><tr><th>C1</th><th>C2</th><th>C3</th></tr></thead><tbody><tr><td>1</td><td>2</td><td>3</td></tr><tr><td></td><td>2</td><td>3</td></tr><tr><td></td><td></td><td>3</td></tr></tbody></table>
+        </div>
+        <div class="ref-sql">
+          <div class="ref-caption">[SQL]</div>
+          <pre><code>SELECT SUM(COALESCE(C1, C2, C3))
+FROM   TAB1</code></pre>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -11818,9 +11850,15 @@ SELECT COUNT(품목ID) FROM 품목
       </header>
       <div class="title">다음 중 아래 각각 3개의 SQL 수행 결과로 가장 적절한 것은?</div>
       <div class="refs">
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j76-1.png" alt="문항 이미지 j76-1" loading="lazy">
+        <div class="ref-sql">
+          <div class="ref-caption">[SQL]</div>
+          <pre><code>SELECT AVG(COL3) FROM TAB_A;
+SELECT AVG(COL3) FROM TAB_A WHERE COL1 &gt; 0;
+SELECT AVG(COL3) FROM TAB_A WHERE COL1 IS NOT NULL;</code></pre>
+        </div>
+        <div class="ref-table">
+          <div class="ref-caption">[TAB_A]</div>
+          <table><thead><tr><th>COL1</th><th>COL2</th><th>COL3</th></tr></thead><tbody><tr><td>30</td><td>NULL</td><td>20</td></tr><tr><td>NULL</td><td>40</td><td>0</td></tr><tr><td>0</td><td>10</td><td>NULL</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -11861,9 +11899,17 @@ SELECT COUNT(품목ID) FROM 품목
       </header>
       <div class="title">어느 기업의 직원 테0|블(EMP)이 직급(GRADE) 별로 사원 500명, 대리 100명, 과장 30명, 차장 10명, 부장 5명, 직급이 정해지지 않은 (NULL) 사람 25명으로 구성되어 았을 때, 다음 중 SQL문을 SQL1)부터 SQL3)까지 순차적으로 실행한 결과 건수를 순서대로 나열한 것으로 가장 적절한 것은?</div>
       <div class="refs">
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j77-1.png" alt="문항 이미지 j77-1" loading="lazy">
+        <div class="ref-sql">
+          <div class="ref-caption">SQL1</div>
+          <pre><code>SELECT COUNT(GRADE) FROM EMP;</code></pre>
+        </div>
+        <div class="ref-sql">
+          <div class="ref-caption">SQL2</div>
+          <pre><code>SELECT GRADE FROM EMP WHERE GRADE IN (&#39;차장&#39;, &#39;부장&#39;, &#39;널&#39;);</code></pre>
+        </div>
+        <div class="ref-sql">
+          <div class="ref-caption">SQL3</div>
+          <pre><code>SELECT GRADE, COUNT(*) FROM EMP GROUP BY GRADE;</code></pre>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -11982,9 +12028,16 @@ SELECT COUNT(품목ID) FROM 품목
       </header>
       <div class="title">다음 중 아래 SQL의 실행결과로 가장 적절한 것은?</div>
       <div class="refs">
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j81-1.png" alt="문항 이미지 j81-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">TBL</div>
+          <table><thead><tr><th>ID</th></tr></thead><tbody><tr><td>100</td></tr><tr><td>100</td></tr><tr><td>200</td></tr><tr><td>200</td></tr><tr><td>200</td></tr><tr><td>999</td></tr><tr><td>999</td></tr></tbody></table>
+        </div>
+        <div class="ref-sql">
+          <div class="ref-caption">[SQL]</div>
+          <pre><code>SELECT ID FROM TBL
+GROUP BY ID
+HAVING COUNT(*) = 2
+ORDER BY (CASE WHEN ID = 999 THEN 0 ELSE ID END)</code></pre>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -12103,9 +12156,16 @@ SELECT COUNT(품목ID) FROM 품목
       </header>
       <div class="title">다음 SQL의 실행 결과로 가장 적절한 것은?</div>
       <div class="refs">
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j84-1.png" alt="문항 이미지 j84-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">TBL</div>
+          <table><thead><tr><th>ID</th><th>AMT</th></tr></thead><tbody><tr><td>A</td><td>50</td></tr><tr><td>A</td><td>200</td></tr><tr><td>B</td><td>300</td></tr><tr><td>C</td><td>100</td></tr></tbody></table>
+        </div>
+        <div class="ref-sql">
+          <div class="ref-caption">[SQL]</div>
+          <pre><code>SELECT ID, AMT
+FROM   TBL
+ORDER BY (CASE WHEN ID = &#39;A&#39; THEN 1 ELSE 2 END),
+         AMT DESC</code></pre>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -12186,8 +12246,8 @@ SELECT COUNT(품목ID) FROM 품목
       <div class="title">아래의 영화 데이터베이스 테이블의 일부에서 밑줄 친 속성들은 테이블의 기본키이며 출연료가 8888 상인 영화명, 배우명, 출연료를 구하는 SQL로 가장 적절한것은?</div>
       <div class="refs">
         <div class="ref-image">
-          
-          <img src="/sqld-images/j87-1.png" alt="문항 이미지 j87-1" loading="lazy">
+          <div class="ref-caption">[스키마 정의]</div>
+          <img src="/sqld-images/j87-1.png" alt="배우(배우번호, 배우명, 성별), 영화(영화번호, 영화명, 제작년도), 출연(배우번호, 영화번호, 출연료) 스키마" loading="lazy">
         </div></div>
       <ol class="opts">
         <li class="opt correct">
@@ -12228,9 +12288,19 @@ SELECT COUNT(품목ID) FROM 품목
       </header>
       <div class="title">다음 SQL의 실행 결과로 맞는 것은?</div>
       <div class="refs">
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j89-1.png" alt="문항 이미지 j89-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">[EMP_TBL]</div>
+          <table><thead><tr><th>EMPNO</th><th>ENAME</th></tr></thead><tbody><tr><td>1000</td><td>SMITH</td></tr><tr><td>1050</td><td>ALLEN</td></tr><tr><td>1100</td><td>SCOTT</td></tr></tbody></table>
+        </div>
+        <div class="ref-table">
+          <div class="ref-caption">[RULE_TBL]</div>
+          <table><thead><tr><th>RULE_NO</th><th>RULE</th></tr></thead><tbody><tr><td>1</td><td>S%</td></tr><tr><td>2</td><td>%T%</td></tr></tbody></table>
+        </div>
+        <div class="ref-sql">
+          <div class="ref-caption">[SQL]</div>
+          <pre><code>SELECT COUNT(*) CNT
+FROM   EMP_TBL A, RULE_TBL B
+WHERE  A.ENAME LIKE B.RULE</code></pre>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -12311,8 +12381,8 @@ SELECT COUNT(품목ID) FROM 품목
       <div class="title">아래는 어느 회사의 생산설비를 위한 데이터 모델의 일부에 대한 설명으로 가장 적절한 것을 2개 고르시오.</div>
       <div class="refs">
         <div class="ref-image">
-          
-          <img src="/sqld-images/j91-1.png" alt="문항 이미지 j91-1" loading="lazy">
+          <div class="ref-caption">[ERD]</div>
+          <img src="/sqld-images/j91-1.png" alt="제품-생산제품-생산라인 ERD" loading="lazy">
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -12529,9 +12599,13 @@ ORDER BY A.고객번호;</code></pre>
       </header>
       <div class="title">아래의 EMP 테이블과 DEPT 테이블에서 밑줄 친 속성은 주키이며 EMP.C는 DEPT와 연결된 외래키이다. EMP 테이블과 DEPT 테이블을 LEFT, FULL, RIGHT 외부조인(outer join)하면 생성되는 결과 건수로 가장 적절한 것은?</div>
       <div class="refs">
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j97-1.png" alt="문항 이미지 j97-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">EMP 테이블</div>
+          <table><thead><tr><th>A</th><th>B</th><th>C</th></tr></thead><tbody><tr><td>1</td><td>b</td><td>w</td></tr><tr><td>3</td><td>d</td><td>w</td></tr><tr><td>5</td><td>y</td><td>y</td></tr></tbody></table>
+        </div>
+        <div class="ref-table">
+          <div class="ref-caption">DEPT 테이블</div>
+          <table><thead><tr><th>C</th><th>D</th><th>E</th></tr></thead><tbody><tr><td>w</td><td>1</td><td>10</td></tr><tr><td>z</td><td>4</td><td>11</td></tr><tr><td>v</td><td>2</td><td>22</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -13199,6 +13273,15 @@ WHERE  A.회원번호 = B.회원번호
 GROUP BY A.회원번호, A.회원명
 HAVING COUNT(CASE WHEN B.동의여부 = &#39;N&#39; THEN 0 ELSE NULL END) &gt;= 1
 ORDER BY A.회원번호;</code></pre>
+        </div>
+        <div class="ref-sql">
+          <div class="ref-caption">[SQL]</div>
+          <pre><code>SELECT A.회원번호, A.회원명
+FROM   회원 A, 동의항목 B
+WHERE  A.회원번호 = B.회원번호
+GROUP BY A.회원번호, A.회원명
+HAVING COUNT(CASE WHEN B.동의여부 = &#39;N&#39; THEN 0 ELSE NULL END) &gt;= 1
+ORDER BY A.회원번호;</code></pre>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -13496,6 +13579,10 @@ ORDER BY A.회원번호;</code></pre>
         <div class="ref-image">
           <div class="ref-caption">[데이터 모델]</div>
           <img src="/sqld-images/j125-1.png" alt="지역-이용내역 ERD" loading="lazy">
+        </div>
+        <div class="ref-table">
+          <div class="ref-caption">[표 : 지역별 월별 이용량]</div>
+          <table><thead><tr><th>지역명</th><th>이용월</th><th>이용량</th></tr></thead><tbody><tr><td>서울</td><td>2014.01</td><td>1,000</td></tr><tr><td>서울</td><td>2014.02</td><td>1,000</td></tr><tr><td>서울</td><td>월별합계</td><td>2,000</td></tr><tr><td>경기</td><td>2014.01</td><td>1,000</td></tr><tr><td>경기</td><td>2014.03</td><td>2,000</td></tr><tr><td>경기</td><td>월별합계</td><td>3,000</td></tr><tr><td>대전</td><td>2014.05</td><td>1,500</td></tr><tr><td>대전</td><td>2014.06</td><td>1,000</td></tr><tr><td>대전</td><td>월별합계</td><td>2,500</td></tr><tr><td>지역전체</td><td>월별합계</td><td>7,500</td></tr></tbody></table>
         </div>
         <div class="ref-table">
           <div class="ref-caption">[표 : 지역별 월별 이용량]</div>
