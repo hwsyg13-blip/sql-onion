@@ -183,11 +183,26 @@ export const ${varName}: QuizQuestion[] = ${JSON.stringify(qs, null, 2)};
 
 // AI mock 풀 별도 파일 생성 (UI에서 자동 노출 — 기출 회차 시험은 round 필터로 제외, 모의고사 모드는 통합 풀에서 셔플)
 // ai-mock.json + cbt-mock.json + sqld-quiz-1140.json 세 출처를 병합. UI 에서는 단일 모의고사 풀로 노출.
-const combinedMock = [
+const combinedMockRaw = [
   ...aiMock.map(q => ({ ...q, _pool: 'ai-mock' })),
   ...cbtMock.map(q => ({ ...q, _pool: 'cbt-mock' })),
   ...sqld1140.map(q => ({ ...q, _pool: 'sqld-1140' }))
 ];
+
+// 외부 출처(sqld-1140, cbt-mock) 일부에 options 가 빈 채로 import 된 항목 다수 (이미지로 옵션이 그려진 원본을
+// 텍스트 추출 시 누락). 풀 수 없는 문제라 노출 단계에서 제외. 향후 vision 변환으로 복원되면 자동 복귀.
+function hasUsableOptions(q) {
+  if (!Array.isArray(q.options) || q.options.length === 0) return false;
+  return q.options.every(o => typeof o === 'string' && o.trim() !== '');
+}
+const skippedEmpty = combinedMockRaw.filter(q => !hasUsableOptions(q));
+const combinedMock = combinedMockRaw.filter(hasUsableOptions);
+if (skippedEmpty.length > 0) {
+  console.log(`\n[빈 options 제외] ${skippedEmpty.length} 문항 (전체 ${combinedMockRaw.length} 중) — 모의고사 풀에서 누락:`);
+  const byPool = {};
+  for (const q of skippedEmpty) (byPool[q._pool] ||= []).push(q._id);
+  for (const [pool, ids] of Object.entries(byPool)) console.log(`  ${pool}: ${ids.length}건`);
+}
 
 const aiMockEntries = combinedMock.map((q, i) => {
   const entry = {

@@ -1,5 +1,5 @@
 // Auto-generated from scripts/authored/ai-mock.json
-// AI 생성 모의고사 풀 (기출 변형) · 1400문항
+// AI 생성 모의고사 풀 (기출 변형) · 1331문항
 // ⚠ 직접 편집 금지. ai-mock.json 수정 후 'node scripts/build-quiz-bank.mjs' 재실행.
 import type { QuizQuestion } from '../quizBank';
 
@@ -1029,67 +1029,6 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 53,
-    "title": "다음 SQL 실행 결과로 가장 알맞은 것은?",
-    "options": [
-      "",
-      "",
-      "",
-      ""
-    ],
-    "correctIndex": 3,
-    "explanation": "ROW_NUMBER( )는 값에 상관없이 고유한 순위를 부여한다.①은 RANK()에 대한 답이고, ②는 DENSE_RANK()에 대한 답이다(A, C는 동점이므로 출력 순서는 A, C 혹은 C, A가 될 수 있다).",
-    "chapter": "윈도우 함수",
-    "_source": "cbt-mock",
-    "_origId": "cbt-002",
-    "_cbtOrigNo": 2,
-    "references": [
-      {
-        "type": "sql",
-        "code": "SELECT NAME, ROW_NUMBER() OVER (ORDERBY SCORE DESC) AS RNFROM SCORES;"
-      },
-      {
-        "type": "image",
-        "src": "/cbt-images/cbt73-q002-p-1-c129ee1bb9.png",
-        "alt": "보기 자료 1"
-      }
-    ],
-    "optionReferences": [
-      [
-        {
-          "type": "image",
-          "src": "/cbt-images/cbt73-q002-c1-1-a193ca4f79.png",
-          "alt": "보기 1 이미지"
-        }
-      ],
-      [
-        {
-          "type": "image",
-          "src": "/cbt-images/cbt73-q002-c2-1-0667d9d3d3.png",
-          "alt": "보기 2 이미지"
-        }
-      ],
-      [
-        {
-          "type": "image",
-          "src": "/cbt-images/cbt73-q002-c3-1-528831a94b.png",
-          "alt": "보기 3 이미지"
-        }
-      ],
-      [
-        {
-          "type": "image",
-          "src": "/cbt-images/cbt73-q002-c4-1-3e5d107cce.png",
-          "alt": "보기 4 이미지"
-        }
-      ]
-    ]
-  },
-  {
-    "id": 10853,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 54,
     "title": "주문과 주문상세 테이블이 1:1 필수관계일 때 이에 대한 설명으로 올바른 것은? (단, 둘 다 PK로 주문번호를 가지고 있으며 식별관계이다.)",
     "options": [
       "주문 테이블의 전체 개수와 주문상세 테이 블의 전체 개수는 다르다.",
@@ -1105,11 +1044,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 3
   },
   {
-    "id": 10854,
+    "id": 10853,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 55,
+    "number": 54,
     "title": "다음 중 SELF JOIN을 수행해야 할 때는 어떤 경우인가?",
     "options": [
       "한 테이블 내에서 두 칼럼이 연관 관계가 있다.",
@@ -1125,11 +1064,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 4
   },
   {
-    "id": 10855,
+    "id": 10854,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 56,
+    "number": 55,
     "title": "다음 SQL 실행 결과로 가장 알맞은 것은?",
     "options": [
       "3, 6000, 2000",
@@ -1156,11 +1095,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 10856,
+    "id": 10855,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 57,
+    "number": 56,
     "title": "서브쿼리에 대한 설명으로 올바르지 않은 것은?",
     "options": [
       "서브쿼리는 괄호를 사용해서 SELECT문을 감싸서 사용하는 것이다.",
@@ -1176,11 +1115,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 6
   },
   {
-    "id": 10857,
+    "id": 10856,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 58,
+    "number": 57,
     "title": "다음 중 절차형 SQL을 이용하여 주로 만드는 것이 아닌 것은?",
     "options": [
       "PROCEDURE",
@@ -1196,11 +1135,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 7
   },
   {
-    "id": 10858,
+    "id": 10857,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 59,
+    "number": 58,
     "title": "숫자형 함수 적용과 그 결괏값이 올바르지 않은 것은?",
     "options": [
       "ABS(-30) = 30",
@@ -1216,11 +1155,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 8
   },
   {
-    "id": 10859,
+    "id": 10858,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 60,
+    "number": 59,
     "title": "다음 쿼리를 실행했을 때 TAB 테이블의 데이터 개수로 알맞은 것은? (단, Oracle 환경이다.)",
     "options": [
       "1",
@@ -1242,11 +1181,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 10860,
+    "id": 10859,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 61,
+    "number": 60,
     "title": "그룹 내 행 순서 관련 함수에 속하지 않는 함수를 모두 고르시오.",
     "options": [
       "FIRST_VALUE",
@@ -1262,11 +1201,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 10
   },
   {
-    "id": 10861,
+    "id": 10860,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 62,
+    "number": 61,
     "title": "다음 SQL 실행 결과로 가장 알맞은 것은? (단, TAB 테이블은 5건의 데이터가 존재한다.)",
     "options": [
       "0, 5, 5",
@@ -1288,11 +1227,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 10862,
+    "id": 10861,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 63,
+    "number": 62,
     "title": "다음 SQL을 ANSI 방식으로 변경한 것으로 옳은 것은?",
     "options": [
       "SELECT * FROM TAB1 INNER JOIN TAB2ORDER BY 1 ;",
@@ -1314,11 +1253,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 10863,
+    "id": 10862,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 64,
+    "number": 63,
     "title": "다음 설명 중 올바르지 않은 것은?",
     "options": [
       "SQL Server는 null 값을 인덱스 맨 뒤에 저장한다.",
@@ -1334,11 +1273,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 13
   },
   {
-    "id": 10864,
+    "id": 10863,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 65,
+    "number": 64,
     "title": "다음 중 식별자(Entity Identifier)의 특징이 아닌 것은?",
     "options": [
       "가변성",
@@ -1354,11 +1293,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 14
   },
   {
-    "id": 10865,
+    "id": 10864,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 66,
+    "number": 65,
     "title": "다음 SQL 실행 결과, 최종 출력되는 건 수는?",
     "options": [
       "1",
@@ -1390,11 +1329,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 10866,
+    "id": 10865,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 67,
+    "number": 66,
     "title": "Subquery의 종류 중에서 Subquery가 Mainquery의 제공자 역할을 하고 Mainquery의 값이 Subquery에 주입되지 않는 유형은 무엇인가?",
     "options": [
       "① Filter형 Subquery",
@@ -1410,11 +1349,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 16
   },
   {
-    "id": 10867,
+    "id": 10866,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 68,
+    "number": 67,
     "title": "사용자 SCOTT에게 EMP 테이블에 대한 SELECT, UPDATE 권한을 부여하려고 한다. 이때 그 권한을 제3자에게 다시 전달할 수 있도록 하려면 적절한 SQL은?",
     "options": [
       "GRANT SELECT, UPDATE ON EMP TO SCOTT;",
@@ -1430,11 +1369,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 17
   },
   {
-    "id": 10868,
+    "id": 10867,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 69,
+    "number": 68,
     "title": "다음 SQL 실행 결과로 가장 알맞은 것은?",
     "options": [
       "U1 : 200, U2 : 150",
@@ -1461,11 +1400,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 10869,
+    "id": 10868,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 70,
+    "number": 69,
     "title": "다음 중 정규화의 주된 목적을 고르시오.",
     "options": [
       "트랜잭션 처리 속도 개선",
@@ -1481,11 +1420,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 19
   },
   {
-    "id": 10870,
+    "id": 10869,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 71,
+    "number": 70,
     "title": "SALARY가 높은 상위 2명만 조회하고자 할 때 올바른 SQL은? (단, Oracle 버전은 11g이다.)",
     "options": [
       "SELECT * FROM EMP WHERE ROWNUM <= 2 ORDER BY SALARY DESC;",
@@ -1501,11 +1440,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 20
   },
   {
-    "id": 10871,
+    "id": 10870,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 72,
+    "number": 71,
     "title": "Sort Merge 방식의 조인이 Nested Loop 방식 조인보다 효율적으로 판단되는 것을 고르시오.",
     "options": [
       "기본키와 외래키 관계에서 외래키에 인덱스가 없을 때",
@@ -1521,11 +1460,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 21
   },
   {
-    "id": 10872,
+    "id": 10871,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 73,
+    "number": 72,
     "title": "윈도우 함수 중에서 윈도우에서 제일 먼저 나오는 것을 0으로 하고 제일 늦게 나오는 것을 1로 해서 행 순서별 백분율을 구하는 것은?",
     "options": [
       "FIRST_VALUE",
@@ -1541,11 +1480,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 22
   },
   {
-    "id": 10873,
+    "id": 10872,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 74,
+    "number": 73,
     "title": "엔터티 - 인스턴스 - 속성 - 속성값에 대한 관계 설명 중 틀린 것을 고르시오.",
     "options": [
       "한 개의 엔터티는 두 개 이상의 인스턴스 집합이어야 한다.",
@@ -1561,11 +1500,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 23
   },
   {
-    "id": 10874,
+    "id": 10873,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 75,
+    "number": 74,
     "title": "다음 student 테이블을 이용하여 아래의 SQL을 수행하였을 때 실행 결과는?",
     "options": [
       "0",
@@ -1588,72 +1527,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 10875,
+    "id": 10874,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 76,
-    "title": "다음 테이블과 SQL을 기준으로 실행 결과가 올바른 것은?",
-    "options": [
-      "",
-      "",
-      "",
-      ""
-    ],
-    "correctIndex": 1,
-    "explanation": "WHERE 절에서 AND와 OR가 함께 사용될 경우, AND가 OR보다 먼저 평가된다. 이는 수학에서 덧셈보다 곱셈이 먼저 계산되는 것과 유사한 개념이다. 따라서 조건문은 다음과 같이 해석된다.• GRADE = ‘A’ OR (GRADE = ‘B’ AND STATUS = ‘ACTIVE’)• GRADE = ‘A’에 해당하는 사람 → Kim, Park• GRADE = ‘B’ AND STATUS = ‘ACTIVE’에 해당하는 사람 → Jang이 세 명이 조건을 만족하므로 총 3행이 출력되며, 정답은 ②가 된다.",
-    "chapter": "WHERE",
-    "_source": "cbt-mock",
-    "_origId": "cbt-025",
-    "_cbtOrigNo": 25,
-    "references": [
-      {
-        "type": "sql",
-        "code": "[쿼리]SELECT NAME, GRADE, STATUSFROM TB_USERWHERE GRADE = 'A' OR GRADE = 'B' ANDSTATUS = 'ACTIVE';"
-      },
-      {
-        "type": "image",
-        "src": "/cbt-images/cbt73-q025-p-1-bbec4a26bb.png",
-        "alt": "보기 자료 1"
-      }
-    ],
-    "optionReferences": [
-      [
-        {
-          "type": "image",
-          "src": "/cbt-images/cbt73-q025-c1-1-c85d80225d.png",
-          "alt": "보기 1 이미지"
-        }
-      ],
-      [
-        {
-          "type": "image",
-          "src": "/cbt-images/cbt73-q025-c2-1-286aa5bb37.png",
-          "alt": "보기 2 이미지"
-        }
-      ],
-      [
-        {
-          "type": "image",
-          "src": "/cbt-images/cbt73-q025-c3-1-f1dc097e1b.png",
-          "alt": "보기 3 이미지"
-        }
-      ],
-      [
-        {
-          "type": "image",
-          "src": "/cbt-images/cbt73-q025-c4-1-8644a56be1.png",
-          "alt": "보기 4 이미지"
-        }
-      ]
-    ]
-  },
-  {
-    "id": 10876,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 77,
+    "number": 75,
     "title": "아래의 계층형 SQL에서 리프 데이터이면 1, 그렇지 않으면 0을 출력하고 싶을 때 사용하는 키워드로 알맞은 것은?",
     "options": [
       "CONNECT_BY_ISLEAF",
@@ -1675,11 +1553,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 10877,
+    "id": 10875,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 78,
+    "number": 76,
     "title": "다음 중 인덱스 튜닝에 대해 잘못 설명하고 있는 것은?",
     "options": [
       "인덱스를 경유한 테이블의 Random 액세스 부하가 심할 때, 클러스터 테이블이나 IOT를 활용하는 방안을 고려할 수 있다.",
@@ -1695,11 +1573,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 27
   },
   {
-    "id": 10878,
+    "id": 10876,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 79,
+    "number": 77,
     "title": "데이터 모델링의 세 가지 중요개념에 속하지 않는 것은?",
     "options": [
       "업무가 관여하는 어떤 것(Things)",
@@ -1715,11 +1593,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 28
   },
   {
-    "id": 10879,
+    "id": 10877,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 80,
+    "number": 78,
     "title": "다음 EMP 테이블에서 사원들의 입사일을 기준으로 이전 입사자와 다음 입사자의 이름을 함께 조회하려고 한다. 아래 SQL 결과가 나오기 위해 (ㄱ), (ㄴ)에 들어갈 알맞은 함수를 짝지은 것은?",
     "options": [
       "(ㄱ) LEAD, (ㄴ) LAG",
@@ -1756,11 +1634,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 10880,
+    "id": 10878,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 81,
+    "number": 79,
     "title": "다음 중 설계 단계에서 데이터 모델의 성능을 고려하는 절차와 방법에 포함되지 않는 것은?",
     "options": [
       "이력모델의 조정, 기본키/외래키 조정, 슈퍼타입/서브타입 조정 등을 수행한다.",
@@ -1776,11 +1654,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 30
   },
   {
-    "id": 10881,
+    "id": 10879,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 82,
+    "number": 80,
     "title": "다음 SQL문에 대한 설명으로 올바른 것은?",
     "options": [
       "테이블의 EMP_NAME이 A 또는 a로 시작하는 모든 ROW",
@@ -1802,11 +1680,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 10882,
+    "id": 10880,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 83,
+    "number": 81,
     "title": "여러 트랜잭션이 서로 영향받지 않고 독립적으로 실행되어야 한다는 특징으로 옳은 것은?",
     "options": [
       "영속성",
@@ -1822,11 +1700,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 32
   },
   {
-    "id": 10883,
+    "id": 10881,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 84,
+    "number": 82,
     "title": "다음 각 쿼리의 실행 결과로 옳은 것은?",
     "options": [
       "NULL, 260, 260",
@@ -1853,11 +1731,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 10884,
+    "id": 10882,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 85,
+    "number": 83,
     "title": "다음 중 USER_ID가 대문자 알파벳으로 시작하고 숫자로 끝나는 사용자만 조회하는 조건으로 알맞은 것은?",
     "options": [
       "WHERE REGEXP_LIKE(USER_ID, '^[A-Z].*[0-9]$')",
@@ -1880,11 +1758,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 10885,
+    "id": 10883,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 86,
+    "number": 84,
     "title": "다음 중 논리적 데이터 독립성(Logical Data Independence)에 대한 설명으로 옳은 것은?",
     "options": [
       "스키마 변경 시 프로그램이 반드시 수정되어야 한다.",
@@ -1900,11 +1778,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 35
   },
   {
-    "id": 10886,
+    "id": 10884,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 87,
+    "number": 85,
     "title": "서브쿼리에 대한 설명으로 올바르지 않은 것은?",
     "options": [
       "서브쿼리는 SELECT, FROM, WHERE 절 등 다양한 위치에서 사용될 수 있다.",
@@ -1920,11 +1798,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 36
   },
   {
-    "id": 10887,
+    "id": 10885,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 88,
+    "number": 86,
     "title": "소계, 중계, 합계처럼 계층적 분류를 포함하고 있는 데이터의 집계에 적합한 GROUP 함수 두 가지는 무엇인가?",
     "options": [
       "ROLLUP, SUM",
@@ -1940,11 +1818,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 37
   },
   {
-    "id": 10888,
+    "id": 10886,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 89,
+    "number": 87,
     "title": "조인에 대한 설명으로 적절하지 않은 것은 다음 중 무엇인가?",
     "options": [
       "Nested Loop Join은 중첩된 반복문과 유사한 형식이다.",
@@ -1960,11 +1838,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 38
   },
   {
-    "id": 10889,
+    "id": 10887,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 90,
+    "number": 88,
     "title": "다음 SQL문의 결과로 출력되는 데이터는 무엇인가?",
     "options": [
       "오늘 날짜로부터 6일 후 첫 번째 월요일을 출력한다.",
@@ -1986,66 +1864,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 10890,
+    "id": 10888,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 91,
-    "title": "다음 SQL 실행 결과로 가장 알맞은 것은?",
-    "options": [
-      "",
-      "아무것도 출력되지 않음",
-      "",
-      ""
-    ],
-    "correctIndex": 3,
-    "explanation": "IN 뒤의 NULL은 무시된다. 또한 IN(‘A’, ‘A’, ‘B’)처럼 중복되는 값이 있어도, SQL 엔진은 중복된 값을 한 번만 판단한다. 따라서 IN(NULL, ‘A’, ‘A’, ‘B’)는 IN(‘A’, ‘B’)와 동일하며 답은 ④가 된다.",
-    "chapter": "WHERE",
-    "_source": "cbt-mock",
-    "_origId": "cbt-040",
-    "_cbtOrigNo": 40,
-    "references": [
-      {
-        "type": "sql",
-        "code": "SELECT *FROM TABWHERE COL1 IN (NULL, 'A', 'A', 'B');"
-      },
-      {
-        "type": "image",
-        "src": "/cbt-images/cbt73-q040-p-1-c5dff65b5a.png",
-        "alt": "보기 자료 1"
-      }
-    ],
-    "optionReferences": [
-      [
-        {
-          "type": "image",
-          "src": "/cbt-images/cbt73-q040-c1-1-4ce3c97ea9.png",
-          "alt": "보기 1 이미지"
-        }
-      ],
-      [],
-      [
-        {
-          "type": "image",
-          "src": "/cbt-images/cbt73-q040-c3-1-71d2c2e75b.png",
-          "alt": "보기 3 이미지"
-        }
-      ],
-      [
-        {
-          "type": "image",
-          "src": "/cbt-images/cbt73-q040-c4-1-6e63ca3c07.png",
-          "alt": "보기 4 이미지"
-        }
-      ]
-    ]
-  },
-  {
-    "id": 10891,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 92,
+    "number": 89,
     "title": "다음 트랜잭션 처리 결과로 최종 테이블에 남는 데이터의 개수는? (단, SQL Server 환경이다.)",
     "options": [
       "0",
@@ -2067,11 +1890,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 10892,
+    "id": 10889,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 93,
+    "number": 90,
     "title": "다음 테이블에 입력될 수 없는 INSERT 문은? (단, 보기의 쿼리는 순차적으로 실행한다.)",
     "options": [
       "INSERT INTO TAB1 (COL1, COL2,COL3) VALUES ('A001', 'Y', 'Z');",
@@ -2093,72 +1916,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 10893,
+    "id": 10890,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 94,
-    "title": "다음 SQL 실행 결과로 가장 알맞은 것은?",
-    "options": [
-      "",
-      "",
-      "",
-      ""
-    ],
-    "correctIndex": 0,
-    "explanation": "이 SQL은 CASE 문을 사용하여 SCORE 값에 따라 각 학생의 결과를 판별한다. CASE 문은 위에서 아래로 조건을 순차적으로 평가하며, 가장 먼저 만족하는 조건에 해당하는 결과를 반환한다.• A (SCORE = 85)일 경우 85 ≥ 80 조건을 만족하므로 결과는 ‘PASS’• B (SCORE = 72)일 경우 72 ≥ 80, 72 IS NULL은 거짓이므로 ELSE가 적용되어 ‘FAIL’• C (SCORE = NULL)일 경우 NULL ≥ 80은 비교 불가, NULL IS NULL 조건이 만족하므로 ‘NO DATA’",
-    "chapter": "WHERE",
-    "_source": "cbt-mock",
-    "_origId": "cbt-043",
-    "_cbtOrigNo": 43,
-    "references": [
-      {
-        "type": "sql",
-        "code": "SELECT STUDENT,CASEWHEN SCORE >= 80 THEN 'PASS'WHEN SCORE IS NULL THEN 'NO DATA'ELSE 'FAIL'END AS RESULTFROM SCORE;"
-      },
-      {
-        "type": "image",
-        "src": "/cbt-images/cbt73-q043-p-1-6319e66a9a.png",
-        "alt": "보기 자료 1"
-      }
-    ],
-    "optionReferences": [
-      [
-        {
-          "type": "image",
-          "src": "/cbt-images/cbt73-q043-c1-1-3fae9f07c6.png",
-          "alt": "보기 1 이미지"
-        }
-      ],
-      [
-        {
-          "type": "image",
-          "src": "/cbt-images/cbt73-q043-c2-1-4e7ec49952.png",
-          "alt": "보기 2 이미지"
-        }
-      ],
-      [
-        {
-          "type": "image",
-          "src": "/cbt-images/cbt73-q043-c3-1-481ec2ac69.png",
-          "alt": "보기 3 이미지"
-        }
-      ],
-      [
-        {
-          "type": "image",
-          "src": "/cbt-images/cbt73-q043-c4-1-94f8c56ec3.png",
-          "alt": "보기 4 이미지"
-        }
-      ]
-    ]
-  },
-  {
-    "id": 10894,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 95,
+    "number": 91,
     "title": "다음 중 역방향 전개가 되기 위한 전개 조건으로 올바른 것은? (단, EMP_ID와 MANAGER_ID는 서로 계층관계가 있으며 EMP_ID가 하위, MANAGER_ID가 상위이다.)",
     "options": [
       "CONNECT BY PRIOR EMP_ID = MANAGER_ID",
@@ -2174,11 +1936,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 44
   },
   {
-    "id": 10895,
+    "id": 10891,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 96,
+    "number": 92,
     "title": "다음 SQL 실행 결과로 가장 알맞은 것은?",
     "options": [
       "78",
@@ -2200,11 +1962,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 10896,
+    "id": 10892,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 97,
+    "number": 93,
     "title": "다음 설명에 해당하는 속성의 종류는 무엇인가?",
     "options": [
       "연관 속성",
@@ -2226,11 +1988,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 10897,
+    "id": 10893,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 98,
+    "number": 94,
     "title": "다음 SQL문의 실행 결과로 올바른 것을 고르시오.",
     "options": [
       "10, 20",
@@ -2253,11 +2015,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 10898,
+    "id": 10894,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 99,
+    "number": 95,
     "title": "다음 중 이름이 ‘이’로 시작하고 전체 글자 수가 세 글자인 대상을 추출하는 SQL로 적절한 것은?",
     "options": [
       "이름 LIKE ' %이% ' ;",
@@ -2273,11 +2035,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 48
   },
   {
-    "id": 10899,
+    "id": 10895,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 100,
+    "number": 96,
     "title": "다음 SQL 실행 결과로 가장 알맞은 것은?",
     "options": [
       "0",
@@ -2299,11 +2061,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 10900,
+    "id": 10896,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 101,
+    "number": 97,
     "title": "다음 결과는 2개의 테이블을 어떤 Join으로 진행한 것인가?",
     "options": [
       "Natural Join",
@@ -2326,11 +2088,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 10901,
+    "id": 10897,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 102,
+    "number": 98,
     "title": "다음의 SQL문에 대한 설명으로 올바르지 않은 것은?",
     "options": [
       "DATA 필드가 가질 수 있는 값의 범위는 0~3까지이다.",
@@ -2352,11 +2114,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 10902,
+    "id": 10898,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 103,
+    "number": 99,
     "title": "학생(STUDENT) 테이블에 영문학과 학생 50명, 법학과 학생 100명, 수학과 학생 50명의 정보가 저장되어 있을 때, 다음 SQL문의 실행 결과 튜플 수는 각각 얼마인가? (단, DEPT필드는 학과명, NAME필드는 이름을 의미한다)",
     "options": [
       "ㄱ : 3, ㄴ : 3, ㄷ : 1",
@@ -2378,11 +2140,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 10903,
+    "id": 10899,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 104,
+    "number": 100,
     "title": "SQL 문장에서 집합별로 집계된 데이터에 대한 조회 조건을 제한하기 위해서 사용하는 절은 어느 것인가?",
     "options": [
       "HAVING절",
@@ -2398,11 +2160,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 53
   },
   {
-    "id": 10904,
+    "id": 10900,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 105,
+    "number": 101,
     "title": "다음 중 EMP 테이블에서 부서가 10번인 사원들만 선택하여 EMP_TEMP 테이블에 삽입하는 쿼리는? (단, EMP_TEMP와 EMP 테이블의 컬럼 개수, 자료형, 순서는 모두 같다.)",
     "options": [
       "INSERT INTO EMP_TEMP SELECT * FROMEMP;",
@@ -2418,11 +2180,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 54
   },
   {
-    "id": 10905,
+    "id": 10901,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 106,
+    "number": 102,
     "title": "서브쿼리의 종류 중에 서브쿼리를 실행하고 한 행, 한 칼럼을 반환하는 서브쿼리를 무엇이라고 하는가?",
     "options": [
       "Looping",
@@ -2438,11 +2200,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 55
   },
   {
-    "id": 10906,
+    "id": 10902,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 107,
+    "number": 103,
     "title": "다음의 SQL문을 사용할 때, 날짜형 변수를 문자형으로 바꿀 수 있는 것은?",
     "options": [
       "TO_NUMBER",
@@ -2464,11 +2226,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 10907,
+    "id": 10903,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 108,
+    "number": 104,
     "title": "다음의 SQL문과 동일한 것을 고르시오.",
     "options": [
       "Select Case When Name IS NOT NULL THEN NAME ELSE ‘0’ END AS USER_NAME From Emp;",
@@ -2490,72 +2252,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 10908,
+    "id": 10904,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 109,
-    "title": "다음 SQL 실행 결과로 가장 알맞은 것은?",
-    "options": [
-      "",
-      "",
-      "",
-      ""
-    ],
-    "correctIndex": 0,
-    "explanation": "NVL 함수는 NULL을 대체하므로 Park의 SALARY는 0으로 출력된다. 또한 AS를 이용해서 다시 별칭을 SALARY로 주었으므로 컬럼이 각각 NAME, SALARY로 표현되어야 한다.",
-    "chapter": "함수",
-    "_source": "cbt-mock",
-    "_origId": "cbt-058",
-    "_cbtOrigNo": 58,
-    "references": [
-      {
-        "type": "sql",
-        "code": "SELECT NAME, NVL(SALARY, 0) AS SALARYFROM EMP;"
-      },
-      {
-        "type": "image",
-        "src": "/cbt-images/cbt73-q058-p-1-ce9b42f7e5.png",
-        "alt": "보기 자료 1"
-      }
-    ],
-    "optionReferences": [
-      [
-        {
-          "type": "image",
-          "src": "/cbt-images/cbt73-q058-c1-1-dbe154b54e.png",
-          "alt": "보기 1 이미지"
-        }
-      ],
-      [
-        {
-          "type": "image",
-          "src": "/cbt-images/cbt73-q058-c2-1-7b9aa2723d.png",
-          "alt": "보기 2 이미지"
-        }
-      ],
-      [
-        {
-          "type": "image",
-          "src": "/cbt-images/cbt73-q058-c3-1-35ded5213b.png",
-          "alt": "보기 3 이미지"
-        }
-      ],
-      [
-        {
-          "type": "image",
-          "src": "/cbt-images/cbt73-q058-c4-1-2b6e526a31.png",
-          "alt": "보기 4 이미지"
-        }
-      ]
-    ]
-  },
-  {
-    "id": 10909,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 110,
+    "number": 105,
     "title": "ANSI/ISO 표준 SQL에서 두 테이블 간에 동일한 칼럼 이름을 가지는 것을 모두 출력하는 조인 방식은 무엇인가?",
     "options": [
       "Inner Join",
@@ -2571,11 +2272,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 59
   },
   {
-    "id": 10910,
+    "id": 10905,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 111,
+    "number": 106,
     "title": "다음 중 순수 관계 연산자가 아닌 것은?",
     "options": [
       "SELECT",
@@ -2591,11 +2292,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 60
   },
   {
-    "id": 10911,
+    "id": 10906,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 112,
+    "number": 107,
     "title": "다음은 ERD(Entity Relationship Diagram) 작성 순서이다. 올바른 것을 고르시오.",
     "options": [
       "나)→가)→다)→라)→마)→바)",
@@ -2617,11 +2318,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 10912,
+    "id": 10907,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 113,
+    "number": 108,
     "title": "다음 테이블을 기준으로, 아래의 SQL을 실행했을 때 그 결과로 올바른 행 개수를 고르시오.",
     "options": [
       "2",
@@ -2648,11 +2349,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 10913,
+    "id": 10908,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 114,
+    "number": 109,
     "title": "다음 SQL 실행 결과로 가장 알맞은 것은?",
     "options": [
       "BC*D",
@@ -2674,11 +2375,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 10914,
+    "id": 10909,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 115,
+    "number": 110,
     "title": "아래 SQL에서 출력되는 ROWS의 개수를 구하시오.",
     "options": [
       "10건",
@@ -2701,11 +2402,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 10915,
+    "id": 10910,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 116,
+    "number": 111,
     "title": "아래와 같은 테이블 TAB1, TAB2가 있을 때 아래 SQL의 결과 건수를 알맞게 나열한 것은?",
     "options": [
       "2, 4, 3, 5, 12",
@@ -2728,77 +2429,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 10916,
+    "id": 10911,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 117,
-    "title": "다음 SQL 실행 결과로 가장 알맞은 것은?",
-    "options": [
-      "",
-      "",
-      "",
-      ""
-    ],
-    "correctIndex": 1,
-    "explanation": "실행 순서상 FROM의 인라인 뷰가 먼저 실행되어 아래와 같은 가상테이블이 생성된다.그다음 WHERE의 서브쿼리를 실행하면 전체 주문의 평균 금액이 20000 / 6 = 3333.33이 된다.즉, WHERE TOTAL > 3333.33..이므로 A와 C가 출력된다.",
-    "chapter": "GROUP BY·HAVING",
-    "_source": "cbt-mock",
-    "_origId": "cbt-066",
-    "_cbtOrigNo": 66,
-    "references": [
-      {
-        "type": "sql",
-        "code": "SELECT CUSTOMER, TOTALFROM (SELECT CUSTOMER, SUM(AMOUNT) ASTOTALFROM TB_ORDERGROUP BY CUSTOMER)WHERE TOTAL > (SELECT AVG(AMOUNT) FROM TB_ORDER);"
-      },
-      {
-        "type": "image",
-        "src": "/cbt-images/cbt73-q066-p-1-1072242cb1.png",
-        "alt": "보기 자료 1"
-      },
-      {
-        "type": "image",
-        "src": "/cbt-images/cbt73-q066-e-1-92a88a1b51.png",
-        "alt": "해설 자료 1"
-      }
-    ],
-    "optionReferences": [
-      [
-        {
-          "type": "image",
-          "src": "/cbt-images/cbt73-q066-c1-1-5e72f18297.png",
-          "alt": "보기 1 이미지"
-        }
-      ],
-      [
-        {
-          "type": "image",
-          "src": "/cbt-images/cbt73-q066-c2-1-703ffbbd82.png",
-          "alt": "보기 2 이미지"
-        }
-      ],
-      [
-        {
-          "type": "image",
-          "src": "/cbt-images/cbt73-q066-c3-1-cdf2d6567c.png",
-          "alt": "보기 3 이미지"
-        }
-      ],
-      [
-        {
-          "type": "image",
-          "src": "/cbt-images/cbt73-q066-c4-1-d3a07040f0.png",
-          "alt": "보기 4 이미지"
-        }
-      ]
-    ]
-  },
-  {
-    "id": 10917,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 118,
+    "number": 112,
     "title": "다음 모델에 대한 설명으로 옳지 않은 것은?",
     "options": [
       "회원ID가 tae123인 회원의 연락처 이력을 알려면 테이블 3개를 조인해야 한다.",
@@ -2821,11 +2456,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 10918,
+    "id": 10912,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 119,
+    "number": 113,
     "title": "다음 설명 중 옳지 않은 것은?",
     "options": [
       "Union과 Union All은 성능 차이가 없다.",
@@ -2841,11 +2476,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 68
   },
   {
-    "id": 10919,
+    "id": 10913,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 120,
+    "number": 114,
     "title": "다음 SQL 실행 결과는 몇 건인가?",
     "options": [
       "1",
@@ -2877,11 +2512,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 10920,
+    "id": 10914,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 121,
+    "number": 115,
     "title": "다음 ERD를 바탕으로 올바른 설명은 무엇인가?",
     "options": [
       "두 테이블은 식별관계이고, 주문은 고객 없이 생성될 수 없다.",
@@ -2908,11 +2543,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 10921,
+    "id": 10915,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 122,
+    "number": 116,
     "title": "다음 중 엔터티(Entity)의 명명 기준으로 가장 적절한 것은?",
     "options": [
       "동사로 시작하는 이름을 사용한다.",
@@ -2928,11 +2563,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 71
   },
   {
-    "id": 10922,
+    "id": 10916,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 123,
+    "number": 117,
     "title": "다음 중 ERD(Entity Relationship Diagram)에서 관계(Relationship)의 구성 요소가 아닌 것은?",
     "options": [
       "Membership",
@@ -2948,11 +2583,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 72
   },
   {
-    "id": 10923,
+    "id": 10917,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 124,
+    "number": 118,
     "title": "다음 주어진 SQL문을 수행한 결과 영구적으로 반영되는 것은 무엇인가?",
     "options": [
       "1, 7, 9",
@@ -2974,11 +2609,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 10924,
+    "id": 10918,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 125,
+    "number": 119,
     "title": "데이터 모델링에 대한 설명 중 알맞은 것은?",
     "options": [
       "데이터 모델링의 3가지 요소는 Process, Attributes, Relationships이다.",
@@ -2994,11 +2629,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 74
   },
   {
-    "id": 10925,
+    "id": 10919,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 126,
+    "number": 120,
     "title": "발생 시점에 따라 구분할 수 있는 엔터티의 유형이 아닌 것은?",
     "options": [
       "행위 엔터티(Active Entity)",
@@ -3014,11 +2649,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 75
   },
   {
-    "id": 10926,
+    "id": 10920,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 127,
+    "number": 121,
     "title": "다음 SQL 문장의 결과로 출력되는 데이터는 무엇인가?",
     "options": [
       "선수의 영문 이름의 두 번째 문자가 A인 선수들의 이름",
@@ -3040,11 +2675,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 10927,
+    "id": 10921,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 128,
+    "number": 122,
     "title": "다음 SQL 실행 결과, 출력되는 이름으로 올바른 것은?",
     "options": [
       "Kim, Lee",
@@ -3071,11 +2706,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 10928,
+    "id": 10922,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 129,
+    "number": 123,
     "title": "다음 SQL 실행 결과로 가장 알맞은 것은?",
     "options": [
       "' Hello SQL'",
@@ -3097,11 +2732,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 10929,
+    "id": 10923,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 130,
+    "number": 124,
     "title": "DELETE, TRUNCATE, DROP 명령을 비교한 것으로 옳은 것은?",
     "options": [
       "DROP, TRUNCATE는 DDL이고 DELETE는 DML이다.",
@@ -3117,11 +2752,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 79
   },
   {
-    "id": 10930,
+    "id": 10924,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 131,
+    "number": 125,
     "title": "다음 중 아래 테이블 정의와 인덱스 구조를 참고하여, 인덱스를 효율적으로 액세스할 수 없는 검색조건을 고르시오.",
     "options": [
       "where 주문번호 between 1 and 10",
@@ -3144,11 +2779,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 10931,
+    "id": 10925,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 132,
+    "number": 126,
     "title": "다음 중 정보시스템을 모델링할 때 세 가지 관점에 해당하지 않는 것은?",
     "options": [
       "업무가 어떤 데이터와 관련이 있는지 분석",
@@ -3164,11 +2799,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 81
   },
   {
-    "id": 10932,
+    "id": 10926,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 133,
+    "number": 127,
     "title": "다음 중 문법적으로 올바른 SQL은?",
     "options": [
       "SELECT * WHERE DEPTNO = 10 FROM EMP;",
@@ -3184,11 +2819,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 82
   },
   {
-    "id": 10933,
+    "id": 10927,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 134,
+    "number": 128,
     "title": "다음 중 개념적 데이터 모델링 단계에서 수행하지 않는 것은?",
     "options": [
       "업무 엔터티 식별",
@@ -3204,11 +2839,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 83
   },
   {
-    "id": 10934,
+    "id": 10928,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 135,
+    "number": 129,
     "title": "Case문에서 ELSE를 생략하면 어떤 현상이 발생되는가?",
     "options": [
       "ELSE를 생략하고 작성하면 실행 시 ELSE 조건이 참이 되며 오류가 발생한다.",
@@ -3224,11 +2859,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 84
   },
   {
-    "id": 10935,
+    "id": 10929,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 136,
+    "number": 130,
     "title": "4개의 테이블로부터 필요한 칼럼을 조회하려고 한다. 최소 몇 개의 JOIN 조건이 필요한가?",
     "options": [
       "2개",
@@ -3244,72 +2879,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 85
   },
   {
-    "id": 10936,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 137,
-    "title": "다음 SQL 실행 결과로 가장 알맞은 것은?",
-    "options": [
-      "",
-      "",
-      "",
-      ""
-    ],
-    "correctIndex": 1,
-    "explanation": "GROUP BY CUBE(REGION, AMOUNT)는 지정된 컬럼들에 대해 가능한 모든 집계 조합을 자동으로 생성한다. CUBE는 N개의 컬럼에 대해 2^N개만큼 조합을 만듦으로써 4개의 조합이 생성된다.• GROUP BY REGION, AMOUNT → 두 컬럼을 조합해 GROUP BY 하면 2행 출력[(EAST, 1000), (WEST, 2000)]• GROUP BY REGION → REGION 컬럼 기준으로 GROUP BY 하면 2행 출력[(EAST), (WEST)]• GROUP BY AMOUNT → AMOUNT 컬럼 기준으로 GROUP BY 하면 2행 출력[(1000), (2000)]• GROUP BY( ) → 전체 컬럼 기준으로 GROUP BY 하면 1행 출력따라서 7개 행이 출력된다.",
-    "chapter": "GROUP BY·HAVING",
-    "_source": "cbt-mock",
-    "_origId": "cbt-086",
-    "_cbtOrigNo": 86,
-    "references": [
-      {
-        "type": "sql",
-        "code": "SELECT REGION, AMOUNT, COUNT(*)FROM TB_SALEGROUP BY CUBE(REGION, AMOUNT);"
-      },
-      {
-        "type": "image",
-        "src": "/cbt-images/cbt73-q086-p-1-8ecbede4ab.png",
-        "alt": "보기 자료 1"
-      }
-    ],
-    "optionReferences": [
-      [
-        {
-          "type": "image",
-          "src": "/cbt-images/cbt73-q086-c1-1-634907af7d.png",
-          "alt": "보기 1 이미지"
-        }
-      ],
-      [
-        {
-          "type": "image",
-          "src": "/cbt-images/cbt73-q086-c2-1-0ae78023bd.png",
-          "alt": "보기 2 이미지"
-        }
-      ],
-      [
-        {
-          "type": "image",
-          "src": "/cbt-images/cbt73-q086-c3-1-5bd6e499e2.png",
-          "alt": "보기 3 이미지"
-        }
-      ],
-      [
-        {
-          "type": "image",
-          "src": "/cbt-images/cbt73-q086-c4-1-419c898bc2.png",
-          "alt": "보기 4 이미지"
-        }
-      ]
-    ]
-  },
-  {
-    "id": 10937,
+    "id": 10930,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 138,
+    "number": 131,
     "title": "다음 ERD를 해석한 것으로 옳지 않은 것은?",
     "options": [
       "고객명은 반드시 입력되어야 한다.",
@@ -3332,11 +2906,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 10938,
+    "id": 10931,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 139,
+    "number": 132,
     "title": "다음 SQL에 대한 설명으로 올바른 것은? (단, COMM은 NULLABLE이다.)",
     "options": [
       "두 COUNT는 항상 같다.",
@@ -3358,11 +2932,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 10939,
+    "id": 10932,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 140,
+    "number": 133,
     "title": "다음과 같은 SQL 문장이 있다. 예제의 ORDER BY절과 같은 결과를 갖는 구문은 어떤 것인가?",
     "options": [
       "ORDER BY 선수명 ASC, 포지션, 3 DESC",
@@ -3384,11 +2958,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 10940,
+    "id": 10933,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 141,
+    "number": 134,
     "title": "실행 계획에 대한 설명으로 적절하지 않은 것은?",
     "options": [
       "실행 계획은 SQL문의 처리를 위한 절차와 방법이 표현된다.",
@@ -3404,11 +2978,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 90
   },
   {
-    "id": 10941,
+    "id": 10934,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 142,
+    "number": 135,
     "title": "다음 설명 중 올바르지 않은 것은?",
     "options": [
       "UNION ALL 연산자는 조회 결과를 정렬하고 중복되는 데이터를 한 번만 표현한다.",
@@ -3424,11 +2998,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 91
   },
   {
-    "id": 10942,
+    "id": 10935,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 143,
+    "number": 136,
     "title": "다음 중 옳은 것은 무엇인가?",
     "options": [
       "유저를 생성하면 생성한 유저로 바로 로그인할 수 있다.",
@@ -3444,11 +3018,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 92
   },
   {
-    "id": 10943,
+    "id": 10936,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 144,
+    "number": 137,
     "title": "데이터 모델링이 최종적으로 완료된 상태라고 정의할 수 있는, 즉 물리적인 스키마 설계를 하기 전 단계를 가리키는 말은?",
     "options": [
       "물리적 데이터 모델링",
@@ -3464,11 +3038,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 93
   },
   {
-    "id": 10944,
+    "id": 10937,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 145,
+    "number": 138,
     "title": "다음 중 해시 조인(Hash Join)에 대한 설명으로 올바르지 않은 것은?",
     "options": [
       "해시 조인은 해시 함수를 사용해서 주소를 계산하고 조인을 수행한다.",
@@ -3484,11 +3058,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 94
   },
   {
-    "id": 10945,
+    "id": 10938,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 146,
+    "number": 139,
     "title": "다음 SQL 실행 결과로 가장 알맞은 것은?",
     "options": [
       "400",
@@ -3510,72 +3084,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 10946,
+    "id": 10939,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 147,
-    "title": "다음 SQL 실행 결과로 가장 알맞은 것은?",
-    "options": [
-      "",
-      "",
-      "",
-      ""
-    ],
-    "correctIndex": 1,
-    "explanation": "GAME 컬럼에 있던 값들 ‘Puzzle’, ‘Shooter’, ‘Racing’을 각각 컬럼으로 전환시키고 해당 값에 연결된 Score는 MAX 값을 찾아 반환해준다. 예를 들어 Alice는 Puzzle 게임은 80, Shooter 게임은 95, Racing은 하지 않았으니 NULL을 반환한다.",
-    "chapter": "TOP N 쿼리",
-    "_source": "cbt-mock",
-    "_origId": "cbt-096",
-    "_cbtOrigNo": 96,
-    "references": [
-      {
-        "type": "sql",
-        "code": "[쿼리]SELECT *FROM (SELECT Player, Game, ScoreFROM TB_GAME_SCORE)PIVOT (MAX(Score) FOR Game IN ('Puzzle' AS Puzzle,'Shooter' AS Shooter,'Racing' AS Racing));"
-      },
-      {
-        "type": "image",
-        "src": "/cbt-images/cbt73-q096-p-1-968a15c116.png",
-        "alt": "보기 자료 1"
-      }
-    ],
-    "optionReferences": [
-      [
-        {
-          "type": "image",
-          "src": "/cbt-images/cbt73-q096-c1-1-e438793817.png",
-          "alt": "보기 1 이미지"
-        }
-      ],
-      [
-        {
-          "type": "image",
-          "src": "/cbt-images/cbt73-q096-c2-1-e570334a58.png",
-          "alt": "보기 2 이미지"
-        }
-      ],
-      [
-        {
-          "type": "image",
-          "src": "/cbt-images/cbt73-q096-c3-1-d37c745d3f.png",
-          "alt": "보기 3 이미지"
-        }
-      ],
-      [
-        {
-          "type": "image",
-          "src": "/cbt-images/cbt73-q096-c4-1-b44f00b3ae.png",
-          "alt": "보기 4 이미지"
-        }
-      ]
-    ]
-  },
-  {
-    "id": 10947,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 148,
+    "number": 140,
     "title": "다음의 예에서 결괏값이 다른 하나는?",
     "options": [
       "SELECT NULL*2 FROM SQLD_13;",
@@ -3598,11 +3111,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 10948,
+    "id": 10940,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 149,
+    "number": 141,
     "title": "윈도우 함수에 대한 설명으로 올바르지 않은 것은?",
     "options": [
       "윈도우 함수는 GROUP BY와 동일하게 처리 건수가 줄어든다.",
@@ -3618,11 +3131,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 98
   },
   {
-    "id": 10949,
+    "id": 10941,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 150,
+    "number": 142,
     "title": "다음의 SQL문에 대한 설명으로 올바른 것은?",
     "options": [
       "위의 SQL문 실행 결과는 A, 1 , 1 A가 조회된다.",
@@ -3644,11 +3157,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 10950,
+    "id": 10942,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 151,
+    "number": 143,
     "title": "다음 중 집합 연산자에 대한 설명으로 올바르지 않은 것은?",
     "options": [
       "UNION 연산자를 사용할 때 각각의 SELECT문에 ORDER BY를 사용할 수 있다.",
@@ -3664,11 +3177,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 100
   },
   {
-    "id": 10951,
+    "id": 10943,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 152,
+    "number": 144,
     "title": "다음 중 일반 속성과 설계 속성에 대한 설명으로 올바른 것은?",
     "options": [
       "설계 속성은 요구사항에서 직접 도출된다.",
@@ -3684,11 +3197,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 101
   },
   {
-    "id": 10952,
+    "id": 10944,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 153,
+    "number": 145,
     "title": "다음 식별관계와 비식별관계에 대해 옳은 것은?",
     "options": [
       "비식별관계는 자식 주식별자 구성에 부모 주식별자를 포함해야 한다.",
@@ -3704,11 +3217,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 102
   },
   {
-    "id": 10953,
+    "id": 10945,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 154,
+    "number": 146,
     "title": "다음 중 뷰(View)에 대한 설명으로 옳지 않은 것은?",
     "options": [
       "뷰는 실행할 쿼리를 저장한 것으로 데이터를 저장하지 않는다.",
@@ -3724,11 +3237,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 103
   },
   {
-    "id": 10954,
+    "id": 10946,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 155,
+    "number": 147,
     "title": "다음은 두 개의 테이블 관계를 보여준다. 아래 중 가장 옳은 설명은?",
     "options": [
       "비식별관계이며 STUDENT는 독립적으로 생성 가능하다.",
@@ -3750,11 +3263,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 10955,
+    "id": 10947,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 156,
+    "number": 148,
     "title": "다음 중 데이터 모델링의 세 가지 단계로 가장 올바르게 나열된 것은?",
     "options": [
       "물리 - 논리 - 개념",
@@ -3770,11 +3283,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 105
   },
   {
-    "id": 10956,
+    "id": 10948,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 157,
+    "number": 149,
     "title": "다음 중에서 DDL(Data Definition Language)에 해당되지 않는 것은?",
     "options": [
       "REVOKE",
@@ -3790,11 +3303,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 106
   },
   {
-    "id": 10957,
+    "id": 10949,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 158,
+    "number": 150,
     "title": "다음 SQL의 실행 결과로 출력되는 행 수는?",
     "options": [
       "1",
@@ -3821,11 +3334,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 10958,
+    "id": 10950,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 159,
+    "number": 151,
     "title": "다음 중 테이블명으로 가능한 것은 무엇인가?",
     "options": [
       "EMP-100",
@@ -3841,72 +3354,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 108
   },
   {
-    "id": 10959,
+    "id": 10951,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 160,
-    "title": "다음 SQL 실행 결과로 가장 알맞은 것은?",
-    "options": [
-      "",
-      "",
-      "",
-      ""
-    ],
-    "correctIndex": 0,
-    "explanation": "DENSE_RANK은 동일한 값에 동일 순위를 부여하고, 그다음 순위를 건너뛰지 않는다. 만일 ROW_NUMBER( )였다면 ②가 답이고, RANK( )였다면 ③이 답이 된다.",
-    "chapter": "윈도우 함수",
-    "_source": "cbt-mock",
-    "_origId": "cbt-109",
-    "_cbtOrigNo": 109,
-    "references": [
-      {
-        "type": "sql",
-        "code": "SELECT NAME, DENSE_RANK() OVER (ORDERBY PRICE DESC) AS RNFROM TB_PRODUCT;"
-      },
-      {
-        "type": "image",
-        "src": "/cbt-images/cbt73-q109-p-1-3048a8dcf3.png",
-        "alt": "보기 자료 1"
-      }
-    ],
-    "optionReferences": [
-      [
-        {
-          "type": "image",
-          "src": "/cbt-images/cbt73-q109-c1-1-a2f268bf30.png",
-          "alt": "보기 1 이미지"
-        }
-      ],
-      [
-        {
-          "type": "image",
-          "src": "/cbt-images/cbt73-q109-c2-1-2a75ba323d.png",
-          "alt": "보기 2 이미지"
-        }
-      ],
-      [
-        {
-          "type": "image",
-          "src": "/cbt-images/cbt73-q109-c3-1-eb9616d1e5.png",
-          "alt": "보기 3 이미지"
-        }
-      ],
-      [
-        {
-          "type": "image",
-          "src": "/cbt-images/cbt73-q109-c4-1-4e0cec66ee.png",
-          "alt": "보기 4 이미지"
-        }
-      ]
-    ]
-  },
-  {
-    "id": 10960,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 161,
+    "number": 152,
     "title": "다음은 Order by에 대한 설명이다. 올바르지 않은 것은?",
     "options": [
       "기본적으로 정렬순서는 오름차순으로 정렬되지만 DESC를 사용하면 내림차순으로 정렬한다.",
@@ -3922,11 +3374,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 110
   },
   {
-    "id": 10961,
+    "id": 10952,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 162,
+    "number": 153,
     "title": "다음 SQL 실행 시, 최종 출력되는 결과로 가장 알맞은 것은?",
     "options": [
       "103",
@@ -3953,11 +3405,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 10962,
+    "id": 10953,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 163,
+    "number": 154,
     "title": "다음 SQL 실행 결과에 포함되지 않은 직원의 ENAME은?",
     "options": [
       "SMITH",
@@ -3989,11 +3441,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 10963,
+    "id": 10954,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 164,
+    "number": 155,
     "title": "다음 SQL 문의 실행 순서로 가장 적절한 것은?",
     "options": [
       "SELECT → WHERE → GROUP BY → HAVING → ORDER BY",
@@ -4015,11 +3467,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 10964,
+    "id": 10955,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 165,
+    "number": 156,
     "title": "다음 SQL 실행 결과로 가장 알맞은 것은?",
     "options": [
       "1",
@@ -4056,11 +3508,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 10965,
+    "id": 10956,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 166,
+    "number": 157,
     "title": "엔터티 간 1:1, 1:M과 같이 관계의 기수성을 나타내는 것을 무엇이라 하는가?",
     "options": [
       "관계 차수(Relationship Degree/Cardinality)",
@@ -4076,11 +3528,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 115
   },
   {
-    "id": 10966,
+    "id": 10957,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 167,
+    "number": 158,
     "title": "Nested Loop 방식의 조인 절차로 옳은 것을 고르시오.",
     "options": [
       "(1) → (2) → (4) → (3)",
@@ -4102,11 +3554,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 10967,
+    "id": 10958,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 168,
+    "number": 159,
     "title": "{학번, 과목번호}는 결정자이면서 기본키이고 {성적, 지도교수명, 학과명}은 종속자이다. 속성 중 과목번호가 결정자이고 {지도교수명, 학과명}이 과목번호에만 함수적 종속성을 가진다면 이는 몇 차정규형에 속하고 몇 차정 규화의 대상인가?",
     "options": [
       "2차정규형 - 3차정규화 대상",
@@ -4129,11 +3581,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 10968,
+    "id": 10959,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 169,
+    "number": 160,
     "title": "자신의 속성이 없어도 다른 속성을 이용하여 결과를 도출할 수 있는 특징을 가진 속성의 이름은?",
     "options": [
       "설계 속성(Designed Attribute)",
@@ -4149,11 +3601,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 118
   },
   {
-    "id": 10969,
+    "id": 10960,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 170,
+    "number": 161,
     "title": "다음 SQL 실행 결과로 가장 알맞은 것은?",
     "options": [
       "75",
@@ -4175,11 +3627,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 10970,
+    "id": 10961,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 171,
+    "number": 162,
     "title": "다음 주어진 테이블에 대해서 아래와 같은 SQL문을 수행하였을 때 반환되는 ROW 값의 수는 무엇인가?",
     "options": [
       "1",
@@ -4202,11 +3654,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 10971,
+    "id": 10962,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 172,
+    "number": 163,
     "title": "다음 주어진 테이블에서 아래와 같은 결괏값을 반환하도록 아래의 SQL문의 빈칸에 들어갈 올바른 것을 고르시오.",
     "options": [
       "RANK()",
@@ -4229,11 +3681,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 10972,
+    "id": 10963,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 173,
+    "number": 164,
     "title": "발생 시점에 따른 엔터티 분류에 의한 중심 엔터티가 아닌 것은?",
     "options": [
       "매출",
@@ -4249,11 +3701,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 122
   },
   {
-    "id": 10973,
+    "id": 10964,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 174,
+    "number": 165,
     "title": "데이터 유형에 대한 설명 중 틀린 것은 무엇인가?",
     "options": [
       "VARCHAR 유형은 가변 길이 숫자형이다.",
@@ -4269,11 +3721,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 123
   },
   {
-    "id": 10974,
+    "id": 10965,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 175,
+    "number": 166,
     "title": "다음 중 식별자(Identifier)로 가장 부적절한 속성은?",
     "options": [
       "주민등록번호",
@@ -4289,11 +3741,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 124
   },
   {
-    "id": 10975,
+    "id": 10966,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 176,
+    "number": 167,
     "title": "그룹 내 순위 관련 WINDOW 함수의 특징으로 틀린 것은?",
     "options": [
       "RANK 함수는 동일한 값에 대해서는 동일한 순위를 부여한다(같은 등수에 여럿이 존재하는 경우 등수가 SKIP될 수 있음).",
@@ -4309,11 +3761,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 125
   },
   {
-    "id": 10976,
+    "id": 10967,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 177,
+    "number": 168,
     "title": "다음 중 개념적 데이터 모델링 단계의 주요 산출물은?",
     "options": [
       "테이블과 인덱스",
@@ -4329,11 +3781,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 126
   },
   {
-    "id": 10977,
+    "id": 10968,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 178,
+    "number": 169,
     "title": "다음 중 NULL 값을 0으로 대체하는 데 사용하는 함수는?",
     "options": [
       "NVL",
@@ -4349,11 +3801,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 127
   },
   {
-    "id": 10978,
+    "id": 10969,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 179,
+    "number": 170,
     "title": "다음 중 GRANT 명령어에 대한 설명으로 옳지 않은 것은?",
     "options": [
       "특정 사용자에게 권한을 부여할 수 있다.",
@@ -4369,11 +3821,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 128
   },
   {
-    "id": 10979,
+    "id": 10970,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 180,
+    "number": 171,
     "title": "일반적으로 FROM절에 정의된 후 먼저 수행되어 SQL 문장 내에서 절차성을 주는 효과를 볼 수 있는 것은 어떤 유형의 서브쿼리 문장인가?",
     "options": [
       "SCALAR SUBQUERY",
@@ -4389,11 +3841,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 129
   },
   {
-    "id": 10980,
+    "id": 10971,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 181,
+    "number": 172,
     "title": "EMP 테이블 7788번 사원의 SAL 값이 현재 1,000인 상황에서 아래 TX1, TX2 두 개의 트랜잭션이 동시에 수행되었다. 양쪽 트랜잭션이 모두 완료된 시점에 7788번 사원의 SAL 값은?",
     "options": [
       "1000",
@@ -4416,11 +3868,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 10981,
+    "id": 10972,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 182,
+    "number": 173,
     "title": "다음 중 트랜잭션 제어문에 해당하는 명령어는?",
     "options": [
       "SELECT",
@@ -4436,11 +3888,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 131
   },
   {
-    "id": 10982,
+    "id": 10973,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 183,
+    "number": 174,
     "title": "식별자의 대체 여부에 따라 분류하는 방식은?",
     "options": [
       "본질 식별자 - 인조 식별자",
@@ -4456,11 +3908,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 132
   },
   {
-    "id": 10983,
+    "id": 10974,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 184,
+    "number": 175,
     "title": "데이터를 입력하기 위해 사용하는 SQL 명령어는 무엇인가?",
     "options": [
       "CREATE",
@@ -4476,11 +3928,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 133
   },
   {
-    "id": 10984,
+    "id": 10975,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 185,
+    "number": 176,
     "title": "3차정규화에 대한 설명으로 옳은 것을 고르시오.",
     "options": [
       "속성 간 종속성을 가지면 안 된다.",
@@ -4496,11 +3948,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 134
   },
   {
-    "id": 10985,
+    "id": 10976,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 186,
+    "number": 177,
     "title": "데이터 모델링에 대한 단계 중 아래에서 설명하는 단계는 어떤 단계의 모델링인가?",
     "options": [
       "물리적 데이터 모델링",
@@ -4522,11 +3974,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 10986,
+    "id": 10977,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 187,
+    "number": 178,
     "title": "다음 SQL의 실행 결과로 출력되는 행 수는?",
     "options": [
       "1",
@@ -4558,11 +4010,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 10987,
+    "id": 10978,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 188,
+    "number": 179,
     "title": "“TEST” 테이블에 있는 NUM2 칼럼의 총 행은 10개이고 2개의 NULL 값이 있다. 다음의 SQL문을 실행할 경우 결괏값은?",
     "options": [
       "ㄱ : 10, ㄴ : 10",
@@ -4584,11 +4036,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 10988,
+    "id": 10979,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 189,
+    "number": 180,
     "title": "다음 중 정규화의 이점으로 적절하지 않은 것은?",
     "options": [
       "데이터 중복 최소화",
@@ -4604,11 +4056,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 138
   },
   {
-    "id": 10989,
+    "id": 10980,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 190,
+    "number": 181,
     "title": "다음의 내용 중에서 ROWNUM을 올바르게 사용하지 않은 것은?",
     "options": [
       "SELECT ROWNUM, ENAME FROM EMP;",
@@ -4624,11 +4076,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 139
   },
   {
-    "id": 10990,
+    "id": 10981,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 191,
+    "number": 182,
     "title": "옵티마이저에 대한 설명으로 적절하지 않은 것은?",
     "options": [
       "옵티마이저는 질의에 대해 실행 계획을 생성한다.",
@@ -4644,11 +4096,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 140
   },
   {
-    "id": 10991,
+    "id": 10982,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 192,
+    "number": 183,
     "title": "JOIN의 종류에 대한 설명으로 틀린 것은 무엇인가?",
     "options": [
       "NON-EQUI JOIN은 등가 조건이 성립되지 않은 테이블에 JOIN을 걸어주는 방법이다.",
@@ -4664,11 +4116,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 141
   },
   {
-    "id": 10992,
+    "id": 10983,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 193,
+    "number": 184,
     "title": "다음의 SQL문에 대한 설명으로 올바르지 않은 것은?",
     "options": [
       "SELECT문에 WHERE 조건이 없으므로 연산에 참여하는 총 행 수는 5개이다.",
@@ -4690,11 +4142,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 10993,
+    "id": 10984,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 194,
+    "number": 185,
     "title": "다음 중 분산 데이터베이스의 특징으로 가장 부적절한 것은?",
     "options": [
       "지역 자치성, 점증적 시스템 용량 확장",
@@ -4710,11 +4162,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 143
   },
   {
-    "id": 10994,
+    "id": 10985,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 195,
+    "number": 186,
     "title": "다음 중 트랜잭션의 ‘일관성(Consistency)’ 특성에 대한 설명으로 가장 적절한 것은?",
     "options": [
       "트랜잭션이 실패하면 중간 상태가 유지된다.",
@@ -4730,11 +4182,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 144
   },
   {
-    "id": 10995,
+    "id": 10986,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 196,
+    "number": 187,
     "title": "다음 설명 중 적절한 것은 무엇인가?",
     "options": [
       "인덱스는 인덱스 구성 칼럼으로 항상 오름차순으로 정렬된다.",
@@ -4750,11 +4202,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 145
   },
   {
-    "id": 10996,
+    "id": 10987,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 197,
+    "number": 188,
     "title": "다음 SQL의 의도와 가장 가까운 설명은? (단, SAL은 급여를 의미한다.)",
     "options": [
       "평균 급여보다 많은 사원 목록을 조회한다.",
@@ -4776,11 +4228,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 10997,
+    "id": 10988,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 198,
+    "number": 189,
     "title": "다음 중 엔터티의 특징에 포함되지 않는 것은?",
     "options": [
       "반드시 해당 업무에서 필요하고 관리하고자 하는 정보이어야 한다.",
@@ -4796,11 +4248,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 147
   },
   {
-    "id": 10998,
+    "id": 10989,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 199,
+    "number": 190,
     "title": "릴레이션 ‘employee’와 ‘department’에서 다음 SQL 질의문의 수행 결과는?",
     "options": [
       "{(100, 영업, Lee, 90), (200, 개발, Kim, 95), (300, 서비스, Hong, 65)}",
@@ -4823,11 +4275,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 10999,
+    "id": 10990,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 200,
+    "number": 191,
     "title": "Commit과 Rollback의 장점으로 적합하지 않은 것은 무엇인가?",
     "options": [
       "데이터 무결성을 보장한다.",
@@ -4843,11 +4295,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 149
   },
   {
-    "id": 11000,
+    "id": 10991,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 201,
+    "number": 192,
     "title": "다음의 SQL문에 대한 설명으로 올바르지 않은 것은?",
     "options": [
       "ㄱ은 부서별 합계를 출력한다.",
@@ -4869,11 +4321,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11001,
+    "id": 10992,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 202,
+    "number": 193,
     "title": "다음 데이터를 기준으로 각 고객이 주문한 금액을 함께 조회하되, 주문경험이 없는 고객도 포함되도록 하는 SQL로 알맞은 것은?",
     "options": [
       "SELECT C.NAME, O.AMOUNTFROM TB_CUSTOMER CJOIN TB_ORDER O ON C.CUST_ID =O.CUST_ID;",
@@ -4896,11 +4348,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11002,
+    "id": 10993,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 203,
+    "number": 194,
     "title": "다음 중 DML(데이터 조작어)에 해당하는 SQL은?",
     "options": [
       "CREATE TABLE",
@@ -4916,11 +4368,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 152
   },
   {
-    "id": 11003,
+    "id": 10994,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 204,
+    "number": 195,
     "title": "다음 쿼리 중 의미가 다른 하나는? (단, COL1은 날짜형 컬럼이다.)",
     "options": [
       "SELECT * FROM TABWHERE TO_CHAR(COL1,'YYYYMMDDHH24') = '2025010113'OR TO_CHAR(COL1,'YYYYMMDDHH24') = '2025010114' ;",
@@ -4936,11 +4388,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 153
   },
   {
-    "id": 11004,
+    "id": 10995,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 205,
+    "number": 196,
     "title": "다음 SQL 문장에서 틀린 부분은 어디인가?",
     "options": [
       "SELECT PLAYER.PLAYER_NAME 선수명, TEAM.TEAM_NAME 팀명",
@@ -4956,11 +4408,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 154
   },
   {
-    "id": 11005,
+    "id": 10996,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 206,
+    "number": 197,
     "title": "다음 SQL문의 실행 결과는 무엇인가?",
     "options": [
       "1",
@@ -4982,11 +4434,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11006,
+    "id": 10997,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 207,
+    "number": 198,
     "title": "다음 설명이 나타내는 데이터 모델의 개념은 무엇인가?",
     "options": [
       "시스템 카탈로그(System Catalog)",
@@ -5008,11 +4460,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11007,
+    "id": 10998,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 208,
+    "number": 199,
     "title": "SELECT문의 처리 순서로 올바른 것은?",
     "options": [
       "WHERE, GROUP BY, ORDER BY, FROM, SELECT",
@@ -5034,11 +4486,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11008,
+    "id": 10999,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 209,
+    "number": 200,
     "title": "다음 주어진 그룹 함수와 동일한 결괏값을 반환하는 그룹 함수를 고르시오.",
     "options": [
       "GROUP BY ROLLUP(DEPTNO, JOB);",
@@ -5060,11 +4512,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11009,
+    "id": 11000,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 210,
+    "number": 201,
     "title": "다음 SQL의 실행 결과로 출력되는 행의 수를 고르시오.",
     "options": [
       "1",
@@ -5096,11 +4548,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11010,
+    "id": 11001,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 211,
+    "number": 202,
     "title": "엔터티에 대한 개념 중 엔터티 정의의 공통점 3가지가 아닌 것은?",
     "options": [
       "데이터베이스 내에서 변별 가능한 객체이다.",
@@ -5116,11 +4568,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 160
   },
   {
-    "id": 11011,
+    "id": 11002,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 212,
+    "number": 203,
     "title": "엔터티에 대한 설명으로 올바르지 않은 것은?",
     "options": [
       "엔터티는 최소 2개 이상의 인스턴스를 보유한다.",
@@ -5136,11 +4588,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 161
   },
   {
-    "id": 11012,
+    "id": 11003,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 213,
+    "number": 204,
     "title": "SQL 처리 흐름도에 대한 설명으로 적절하지 않은 것은?",
     "options": [
       "실행 계획을 시각화한 것이다.",
@@ -5156,11 +4608,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 162
   },
   {
-    "id": 11013,
+    "id": 11004,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 214,
+    "number": 205,
     "title": "다음 주어진 ERD 관계에 대한 설명으로 옳은 것을 고르시오.",
     "options": [
       "계정은 다수의 계정 그룹을 가질 수 있다.",
@@ -5183,11 +4635,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11014,
+    "id": 11005,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 215,
+    "number": 206,
     "title": "다음 SQL 실행 결과로 가장 알맞은 것은?",
     "options": [
       "ITEM A",
@@ -5214,11 +4666,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11015,
+    "id": 11006,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 216,
+    "number": 207,
     "title": "다음 중 DML에 해당하지 않는 것은?",
     "options": [
       "INSERT",
@@ -5234,11 +4686,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 165
   },
   {
-    "id": 11016,
+    "id": 11007,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 217,
+    "number": 208,
     "title": "트랜잭션의 특징에 대한 설명으로 올바르지 않은 것은?",
     "options": [
       "원자성(Atomicity) : 트랜잭션 내의 모든 작업은 모두 수행되거나 모두 수행되지 않아야 한다.",
@@ -5254,11 +4706,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 166
   },
   {
-    "id": 11017,
+    "id": 11008,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 218,
+    "number": 209,
     "title": "다음 SQL의 실행 결과로 올바른 것은? (단, Oracle 환경이다.)",
     "options": [
       "2025/03/02 20:00:02",
@@ -5280,11 +4732,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11018,
+    "id": 11009,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 219,
+    "number": 210,
     "title": "릴레이션 Emp, Dept가 다음과 같이 정의되어 있다. 부서에 사원이 한 명도 없는 부서(deptno)를 검색하는 질의를 작성했을 때, 가장 거리가 먼 것은? (단, Emp의 deptno는 Dept의 deptno를 참조하는 외래키이다)",
     "options": [
       "SELECT deptno FROM Dept WHERE deptno NOT IN (SELECT deptno FROM Emp);",
@@ -5306,11 +4758,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11019,
+    "id": 11010,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 220,
+    "number": 211,
     "title": "다음 중 EMP 테이블의 DEPTNO에 외래키 제약을 추가하는 SQL은?",
     "options": [
       "ALTER EMP ADD FOREIGN KEY (DEPTNO)REFERENCES DEPT(DEPTNO);",
@@ -5333,11 +4785,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11020,
+    "id": 11011,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 221,
+    "number": 212,
     "title": "다음 중 인덱스를 사용할 수 없는 조건에 해당되지 않는 것은?",
     "options": [
       "인덱스가 사용되는 칼럼에 NVL(Key, 0)을 사용했다.",
@@ -5353,11 +4805,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 170
   },
   {
-    "id": 11021,
+    "id": 11012,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 222,
+    "number": 213,
     "title": "다음 중 제3정규형(3NF)이 되기 위한 조건으로 알맞은 것은?",
     "options": [
       "기본키가 아닌 컬럼이 다른 일반 컬럼에 이행적으로 종속되는 경우를 제거한다.",
@@ -5373,11 +4825,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 171
   },
   {
-    "id": 11022,
+    "id": 11013,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 223,
+    "number": 214,
     "title": "다음 중 KEY에 대한 설명으로 올바르지 않은 것은?",
     "options": [
       "슈퍼키는 유일성과 최소성을 만족한다.",
@@ -5393,11 +4845,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 172
   },
   {
-    "id": 11023,
+    "id": 11014,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 224,
+    "number": 215,
     "title": "다음의 데이터베이스에서 ‘부양가족을 2명 이상 가진 사원의 사번(eno), 성명(ename), 부양가족 수를 검색’하는 질의를 SQL로 적절하게 표현한 것은?",
     "options": [
       "SELECT eno, ename, count(*) FROM employee e, dependent d WHERE e.eno = d.eno and count(*) >= 2 GROUP BY d.eno;",
@@ -5419,11 +4871,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11024,
+    "id": 11015,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 225,
+    "number": 216,
     "title": "다음 SQL 실행 결과로 가장 알맞은 것은?",
     "options": [
       "2024/03/05",
@@ -5445,11 +4897,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11025,
+    "id": 11016,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 226,
+    "number": 217,
     "title": "다음 테이블에 아래의 쿼리를 순서대로 실행할 경우, 그 결과에 대한 설명으로 올바른 것을 고르면?",
     "options": [
       "(ㄱ)은 Oracle일 경우 COL2에 NULL이 입력되고, SQL Server는 ‘’(공백)이 입력된다.",
@@ -5471,11 +4923,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11026,
+    "id": 11017,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 227,
+    "number": 218,
     "title": "다음 중 FULL OUTER JOIN에 대한 설명으로 올바르지 않은 것은?",
     "options": [
       "양쪽으로 OUTER JOIN하는 조인 기법을 의미한다.",
@@ -5491,11 +4943,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 176
   },
   {
-    "id": 11027,
+    "id": 11018,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 228,
+    "number": 219,
     "title": "다음 설명 중 맞는 것은 무엇인가?",
     "options": [
       "모든 자료는 실질적으로 테이블에 저장되며 테이블에 있는 자료들을 꺼내 볼 수 있다.",
@@ -5511,11 +4963,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 177
   },
   {
-    "id": 11028,
+    "id": 11019,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 229,
+    "number": 220,
     "title": "우선순위를 계산하는 윈도우 함수에서 동일한 우선순위가 나와도 고유의 값을 부여하기 위한 방법으로 올바른 것은 무엇인가?",
     "options": [
       "Select RANK( ) OVER (PARTITION BY DEPTNO ORDER BY SAL DESC) DEPT_RANK;",
@@ -5531,11 +4983,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 178
   },
   {
-    "id": 11029,
+    "id": 11020,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 230,
+    "number": 221,
     "title": "다음 SQL 실행 시 최종 출력되는 결과로 가장 알맞은 것은?",
     "options": [
       "Pen",
@@ -5562,11 +5014,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11030,
+    "id": 11021,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 231,
+    "number": 222,
     "title": "다음의 SQL문에 대한 설명으로 올바르지 않은 것은?",
     "options": [
       "SAL칼럼은 급여가 큰 순으로 조회된다.",
@@ -5588,11 +5040,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11031,
+    "id": 11022,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 232,
+    "number": 223,
     "title": "다음 중 UNION ALL에 대한 설명으로 옳은 것은?",
     "options": [
       "결과에서 중복을 제거한다.",
@@ -5608,11 +5060,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 181
   },
   {
-    "id": 11032,
+    "id": 11023,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 233,
+    "number": 224,
     "title": "다음 개념에 해당하는 관계는 무엇인가?",
     "options": [
       "식별자 관계(Identifying Relationship)",
@@ -5634,11 +5086,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11033,
+    "id": 11024,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 234,
+    "number": 225,
     "title": "다음 SQL 문 아래에 구문을 추가하여 실행하려 한다. 다음 중 오류가 발생하는 구문은?",
     "options": [
       "FROM EMP",
@@ -5660,11 +5112,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11034,
+    "id": 11025,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 235,
+    "number": 226,
     "title": "다음 테이블에 대한 매출 누적을 구하는 SQL문을 작성하시오. (윈도우 함수 사용)",
     "options": [
       "Select 영업사원, 판매월, sum(매출) over (partition by 영업사원 order by 판매월 range between unbounded preceding and current row) 누적매출 from 매출;",
@@ -5680,11 +5132,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 184
   },
   {
-    "id": 11035,
+    "id": 11026,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 236,
+    "number": 227,
     "title": "다음 중 옳지 않은 것은?",
     "options": [
       "Length(‘YOUNGJIN’) = 9",
@@ -5700,11 +5152,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 185
   },
   {
-    "id": 11036,
+    "id": 11027,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 237,
+    "number": 228,
     "title": "다음 GROUP BY와 UNION ALL 조합과 동일한 효과를 주는 그룹 함수는?",
     "options": [
       "ROLLUP(A, B)",
@@ -5726,72 +5178,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11037,
+    "id": 11028,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 238,
-    "title": "다음 SQL 실행 결과로 출력되는 행은?",
-    "options": [
-      "",
-      "",
-      "",
-      ""
-    ],
-    "correctIndex": 1,
-    "explanation": "이 쿼리는 SELECT 절 내에서 스칼라 서브쿼리를 사용한다. 각 EMPLOYEE 행에 대해 E.DEPT_ID와 동일한 DEPT_ID를 DEPARTMENT 테이블에서 찾아 LOC을 가져온다. 스칼라 서브쿼리는 행마다 1개의 값만 반환해야 하며, 조건이 일치하지 않으면 NULL이 반환된다.• E.EMP_ID가 1일 때 → SELECT LOC FROM DEPARTMENT D WHERE D.DEPT_ID = 1;은 SEOUL 반환• E.EMP_ID가 2일 때 → SELECT LOC FROM DEPARTMENT D WHERE D.DEPT_ID = 2;은 BUSAN 반환• E.EMP_ID가 3일 때 → SELECT LOC FROM DEPARTMENT D WHERE D.DEPT_ID = 3;은 NULL 반환따라서 ②가 답이 된다.",
-    "chapter": "WHERE",
-    "_source": "cbt-mock",
-    "_origId": "cbt-187",
-    "_cbtOrigNo": 187,
-    "references": [
-      {
-        "type": "sql",
-        "code": "SELECT NAME,(SELECT LOCFROM DEPARTMENT DWHERE D.DEPT_ID = E.DEPT_ID)AS LOCATIONFROM EMPLOYEE E;"
-      },
-      {
-        "type": "image",
-        "src": "/cbt-images/cbt73-q187-p-1-0c1daf0392.png",
-        "alt": "보기 자료 1"
-      }
-    ],
-    "optionReferences": [
-      [
-        {
-          "type": "image",
-          "src": "/cbt-images/cbt73-q187-c1-1-fabf1d794b.png",
-          "alt": "보기 1 이미지"
-        }
-      ],
-      [
-        {
-          "type": "image",
-          "src": "/cbt-images/cbt73-q187-c2-1-172af3cbda.png",
-          "alt": "보기 2 이미지"
-        }
-      ],
-      [
-        {
-          "type": "image",
-          "src": "/cbt-images/cbt73-q187-c3-1-c88f215713.png",
-          "alt": "보기 3 이미지"
-        }
-      ],
-      [
-        {
-          "type": "image",
-          "src": "/cbt-images/cbt73-q187-c4-1-322969818e.png",
-          "alt": "보기 4 이미지"
-        }
-      ]
-    ]
-  },
-  {
-    "id": 11038,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 239,
+    "number": 229,
     "title": "다음은 EMP(사원) 테이블이 DEPT(부서) 테이블을 참조하는 관계를 설정하고 있다. DEPT 테이블의 행이 삭제될 때, EMP 테이블의 참조무결성을 유지하기 위해 ON DELETE CASCADE 또는 ON DELETE SET NULL 옵션을 사용할 수 있다. 다음 중 ON DELETE SET NULL과 ON DELETE CASCADE의 동작 설명으로 옳은 것은?",
     "options": [
       "ON DELETE CASCADE는 부모 테이블의 행이 삭제될 때 자식 테이블의 행도 자동으로 삭제된다.",
@@ -5807,11 +5198,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 188
   },
   {
-    "id": 11039,
+    "id": 11029,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 240,
+    "number": 230,
     "title": "다음 쿼리를 ANSI 방식으로 변경한 것으로 옳은 것은?",
     "options": [
       "SELECT ENAME, DNAMEFROM EMPJOIN DEPT USING (EMP.DEPTNO =DEPT.DEPTNO);",
@@ -5833,11 +5224,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11040,
+    "id": 11030,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 241,
+    "number": 231,
     "title": "분산 데이터베이스의 특징 중 저장 장소 명시가 불필요하다는 특성은 무엇인가?",
     "options": [
       "지역 사상 투명성",
@@ -5853,11 +5244,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 190
   },
   {
-    "id": 11041,
+    "id": 11031,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 242,
+    "number": 232,
     "title": "아래의 결괏값을 보고 SQL문의 빈칸에 들어갈 수 있는 내용을 고르시오.",
     "options": [
       "ROLLUP(DEPTNO, JOB)",
@@ -5880,11 +5271,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11042,
+    "id": 11032,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 243,
+    "number": 233,
     "title": "사원 테이블에 사원번호는 기본키로 설정되어 있다. SQL문으로 사원번호 1번을 검색하는데 사원 테이블에는 하나의 ROW만 저장되어 있다. 이때 유리한 스캔 방식은 무엇으로 판단되는가?",
     "options": [
       "Unique Index Scan",
@@ -5900,11 +5291,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 192
   },
   {
-    "id": 11043,
+    "id": 11033,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 244,
+    "number": 234,
     "title": "다음 SQL 문장 중 COLUMN1의 값이 널(NULL)이 아닌 경우를 찾아내는 문장으로 가장 적절한 것은?",
     "options": [
       "SELECT * FROM T_TEST WHERE COLUMN1 IS NOT NULL;",
@@ -5920,11 +5311,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 193
   },
   {
-    "id": 11044,
+    "id": 11034,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 245,
+    "number": 235,
     "title": "다음 중에서 집합 연산자의 종류에 해당되지 않은 것을 고르시오.",
     "options": [
       "Union all",
@@ -5940,11 +5331,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 194
   },
   {
-    "id": 11045,
+    "id": 11035,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 246,
+    "number": 236,
     "title": "다음 중 DEPT 테이블에 존재하지 않는 부서의 사원을 삭제하는 SQL은? (단, DEPTNO은 PK이다.)",
     "options": [
       "DELETE FROM EMP WHERE DEPTNO NOTIN (SELECT DEPTNO FROM DEPT);",
@@ -5960,11 +5351,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 195
   },
   {
-    "id": 11046,
+    "id": 11036,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 247,
+    "number": 237,
     "title": "SQL 트레이스를 수집한 결과 Row Source Operation이 다음과 같았다. 가장 우선적으로 검토할 사항으로 올바른 것은? (단, 한 달간 주문 건수는 평균 50만 건이다)",
     "options": [
       "고객_IDX 인덱스 칼럼 순서를 조정한다.",
@@ -5987,11 +5378,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11047,
+    "id": 11037,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 248,
+    "number": 238,
     "title": "다음의 SQL문은 파티션별 윈도우의 전체건수에서 현재 행보다 작거나 같은 건수에 대해서 누적백분율을 구하는 SQL문이다. ( ㄱ )에 올바른 윈도우 함수는?",
     "options": [
       "NTILE( )",
@@ -6013,11 +5404,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11048,
+    "id": 11038,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 249,
+    "number": 239,
     "title": "어떠한 데이터 타입도 사용이 가능한 집계 함수는 어느 것인가?",
     "options": [
       "AVG",
@@ -6033,11 +5424,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 198
   },
   {
-    "id": 11049,
+    "id": 11039,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 250,
+    "number": 240,
     "title": "다음 중 SQL의 특징으로 가장 적절하지 않은 것은?",
     "options": [
       "절차적 언어이며 반복문을 포함한다.",
@@ -6053,11 +5444,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 199
   },
   {
-    "id": 11050,
+    "id": 11040,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 251,
+    "number": 241,
     "title": "다음 SQL 실행 결과로 출력되는 NAME은?",
     "options": [
       "A",
@@ -6084,11 +5475,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11051,
+    "id": 11041,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 252,
+    "number": 242,
     "title": "도서(도서번호, 도서제목, 출판사명, 발행연도) 테이블에서, 2000년 이후에 10권 이상의 책을 발행한 출판사의 이름을 중복 없이 출력하는 SQL문으로 옳은 것은? (단, 출판사명이 동일한 출판사는 존재하지 않는 것으로 가정한다. 도서번호는 도서 테이블의 기본키이다)",
     "options": [
       "SELECT 출판사명 FROM 도서 WH-ERE 발행연도 >= 2000 ORDER BY COUNT(도서번호) >= 10;",
@@ -6104,11 +5495,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 201
   },
   {
-    "id": 11052,
+    "id": 11042,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 253,
+    "number": 243,
     "title": "다음의 PREV_SAL은 어떤 윈도우 함수를 사용해야 하는가?",
     "options": [
       "LEAD",
@@ -6131,11 +5522,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11053,
+    "id": 11043,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 254,
+    "number": 244,
     "title": "그룹 내 순위 관련 WINDOW 함수의 특징으로 올바르지 않은 것을 고르시오.",
     "options": [
       "RANK 함수는 동일한 값에 대해서는 동일한 순위를 부여한다.",
@@ -6151,11 +5542,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 203
   },
   {
-    "id": 11054,
+    "id": 11044,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 255,
+    "number": 245,
     "title": "다음 설명에 해당하는 모델링 관점은 무엇인가?",
     "options": [
       "프로세스 관점",
@@ -6177,11 +5568,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11055,
+    "id": 11045,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 256,
+    "number": 246,
     "title": "테이블 R과 S가 다음과 같을 때, 아래 SQL문 (SELECT 구문)의 실행 결과로 옳은 것은?",
     "options": [
       "4",
@@ -6204,11 +5595,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11056,
+    "id": 11046,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 257,
+    "number": 247,
     "title": "부서와 사원 테이블을 생성하는 SQL 문장을 수행한 후 튜플 삽입으로 두 테이블의 상태가 다음과 같을 때, 테이블 연산 수행에 대한 설명으로 올바르지 않은 것은?",
     "options": [
       "부서 테이블에서 (2, ‘영업부’) 튜플을 삭제한다면 참조 무결성 제약조건을 위배한다.",
@@ -6231,11 +5622,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11057,
+    "id": 11047,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 258,
+    "number": 248,
     "title": "다음은 윈도우 함수에 대한 설명이다. 현재 행을 기준으로 파티션 내에서 앞의 한 건, 현재행, 뒤의 한 건을 범위를 지정하는 Over의 옵션은?",
     "options": [
       "ROWS BETWEEN 1 PRECEDING AND 1 FOLLOWING",
@@ -6251,11 +5642,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 207
   },
   {
-    "id": 11058,
+    "id": 11048,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 259,
+    "number": 249,
     "title": "다음 주어진 테이블에 대해서 아래와 같은 결과값이 반환되도록 아래 SQL문의 빈칸에 들어갈 것을 고르시오.",
     "options": [
       "max(COL2), min(COL2), sum(COL1)",
@@ -6278,11 +5669,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11059,
+    "id": 11049,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 260,
+    "number": 250,
     "title": "다음 서브쿼리에 대한 설명 중 틀린 것을 고르시오.",
     "options": [
       "상호연관 서브쿼리는 처리 속도가 가장 빠르기 때문에 최대한 활용하는 것이 좋다.",
@@ -6298,11 +5689,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 209
   },
   {
-    "id": 11060,
+    "id": 11050,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 261,
+    "number": 251,
     "title": "모델링은 현실세계에 대해서 표현하는 것으로 이해할 수 있다. 다음 중 모델링의 특징으로 가장 부적절한 것은?",
     "options": [
       "애매모호함을 배제하고 누구나 이해가 가능하도록 정확하게 현상을 기술하는 정확화의 의미를 가짐",
@@ -6319,11 +5710,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11061,
+    "id": 11051,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 262,
+    "number": 252,
     "title": "다음 설명 중 데이터 모델링이 필요한 주요 이유로 가장 부적절한 것은?",
     "options": [
       "데이터모델링 자체로서 업무의 흐름을 설명하고 분석하는 부분에 의미를 가지고 있다.",
@@ -6340,11 +5731,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11062,
+    "id": 11052,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 263,
+    "number": 253,
     "title": "다음 중 데이터모델링을 할 때 유의해야 할 사항으로 가장 부적절한 것은?",
     "options": [
       "데이터간의 상호 연관관계를 명확하게 정의하여 일관성 있게 데이터가 유지되도록 한다.",
@@ -6361,11 +5752,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11063,
+    "id": 11053,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 264,
+    "number": 254,
     "title": "다음 중 아래 설명이 의마하는 데이터모델링의 유의점에 해당히는 특성은 무엇인가?",
     "options": [
       "일관성",
@@ -6388,11 +5779,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11064,
+    "id": 11054,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 265,
+    "number": 255,
     "title": "다음 중 아래 데이터모델링 개념에 대한 설명에서 (ㄱ),(ㄴ) 에 들어갈 단어로 가장 적절한 것은?",
     "options": [
       "ㄱ - 개념적, ㄴ - 논리적",
@@ -6415,11 +5806,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11065,
+    "id": 11055,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 266,
+    "number": 256,
     "title": "다음 중 ANSI-SPARC에서 정의한 3단계구조에서 아래 내용이 설명하는 스키마구조로 가장 적절한 것은?",
     "options": [
       "논리스키마",
@@ -6442,11 +5833,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11066,
+    "id": 11056,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 267,
+    "number": 257,
     "title": "다음 중 고객과 주문의 ERD에 대한 설명으로 가장 부적절한 것은?",
     "options": [
       "고객에 데이터를 입력할 때는 주문데이터가 존재하는 고객만을 입력할 수 있다.",
@@ -6471,11 +5862,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11067,
+    "id": 11057,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 268,
+    "number": 258,
     "title": "다음 중 ERD에 대한 설명으로 가장 부적절한 것은?",
     "options": [
       "가장 중요한 엔터티를 오른쪽 상단에 배치하고 추가 발생되는 엔터티들을 왼쪽 편과 하단에 배치하는 것이 원칙이다.",
@@ -6492,11 +5883,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11068,
+    "id": 11058,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 269,
+    "number": 259,
     "title": "다음 중 아래 시나리오에서 엔터티로 가장 적절한 것은?",
     "options": [
       "주소",
@@ -6519,11 +5910,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11069,
+    "id": 11059,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 270,
+    "number": 260,
     "title": "다음 중 엔터티의 특징으로 가장 부적절한 것은?",
     "options": [
       "데이터로서 존재하지만 업무에서 필요로 하지 않으면 해당 업무의 엔터티로 성립될 수 없다.",
@@ -6540,11 +5931,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11070,
+    "id": 11060,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 271,
+    "number": 261,
     "title": "다음 중 엔터티의 일반적인 특징으로 가장 부적절한 것은?",
     "options": [
       "엔터티는 반드시 속성을 포함해야 한다.",
@@ -6561,11 +5952,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11071,
+    "id": 11061,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 272,
+    "number": 262,
     "title": "다음 중 다른 엔터티로부터 주식별자를 상속받지 않고 자신의 고유한 주식별자를 가지며 사원, 부서, 고객, 상품, 자재 등이 예가 될 수 있는 엔터티로 가장 적절한 것은?",
     "options": [
       "개념 엔터티",
@@ -6582,11 +5973,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11072,
+    "id": 11062,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 273,
+    "number": 263,
     "title": "다음 중 엔터티의 이름을 부여하는 방법으로서 가장 부적절한 것은?",
     "options": [
       "엔터티가 생성되는 의미대로 자연스럽게 부여하도록 한다.",
@@ -6603,11 +5994,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11073,
+    "id": 11063,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 274,
+    "number": 264,
     "title": "다음 중 아래와 같은 사례에서 속성에 대한 설명으로 가장 부적절한 것은?",
     "options": [
       "예금분류는 설계(DESIGNED)속성이다.",
@@ -6630,11 +6021,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11074,
+    "id": 11064,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 275,
+    "number": 265,
     "title": "다음 중 데이터를 조회할 때 빠른 성능을 낼 수있도록 하기 위해 원래 속성의 값을 계산하여 저장할 수 있도록 만든 속성으로 가장 적절한 것은?",
     "options": [
       "PK속성 (Derived Attribute)",
@@ -6651,11 +6042,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11075,
+    "id": 11065,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 276,
+    "number": 266,
     "title": "다음 중 아래 설명이 나타내는 데이터모델의 개념으로 가장 적절한 것은?",
     "options": [
       "도메인(Domain)",
@@ -6678,11 +6069,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11076,
+    "id": 11066,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 277,
+    "number": 267,
     "title": "다음 중 데이터모델링을 할 때 속성의 명칭을 부여하는 방법으로 가장 부적절한 것은?",
     "options": [
       "데이터모델링 대상에서 사용하는 용어도 있고 외부에서 사용하는 용어도 있어 중복이 있을 때, 가급적 해당 업무에서 자주 사용하는 이름을 이용하도록 한다.",
@@ -6699,11 +6090,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11077,
+    "id": 11067,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 278,
+    "number": 268,
     "title": "다음 중 데이터모델링의 관계에 대한 설명으로 가장 부적절한 것을 2개 고르시오.",
     "options": [
       "UML(Unified Modeling Language)에는 클래스다이어그램의 관계 중 연관관계(Association)와 의존관계(Dependency)가 있고 있으나 구분 하지 않고 단일화된 표기법을 사용한다.",
@@ -6720,11 +6111,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 20
   },
   {
-    "id": 11078,
+    "id": 11068,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 279,
+    "number": 269,
     "title": "다음 중 관계에 대한 설명으로 가장 부적절한 것은?",
     "options": [
       "주문과 배송 엔터티 간의 '배송근거' 관계는 행위에 의한 관계의 사례이다.",
@@ -6741,11 +6132,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11079,
+    "id": 11069,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 280,
+    "number": 270,
     "title": "다음 중 엔터티간의 관계어서 1：1, 1：M과 같이 관계의 가수성을 나타내는 것으로 가장 적절한 것은?",
     "options": [
       "관계정의 (Relationship Definition)",
@@ -6762,11 +6153,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11080,
+    "id": 11070,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 281,
+    "number": 271,
     "title": "다음 중 두 개의 엔터티 사이에 정의한 관계를 체크 할 사항으로 가장 부적절한 것은?",
     "options": [
       "업무기술서, 장표에 관계연결에 대한 규칙이 서술되어 있는가?",
@@ -6783,11 +6174,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11081,
+    "id": 11071,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 282,
+    "number": 272,
     "title": "다음 중 두 개의 엔터티 사이에서 관계를 도출 할 때 체크 할 사항을 모두 고른 것은?",
     "options": [
       "가,나다,라",
@@ -6810,11 +6201,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11082,
+    "id": 11072,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 283,
+    "number": 273,
     "title": "다음 중 아래어서 주식별자를 자정할 때 고려해야 할 사항을 묶은 것으로 가장 적절한것은?",
     "options": [
       "가,나,다,라",
@@ -6837,11 +6228,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11083,
+    "id": 11073,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 284,
+    "number": 274,
     "title": "다음 중 사원엔터티에서 식별자의 특성에 해당하지 않는것은 무엇인가?",
     "options": [
       "인조식별자",
@@ -6866,32 +6257,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11084,
+    "id": 11074,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 285,
-    "title": "다음 중 식별자로 가장 부적절한 것은?",
-    "options": [
-      "",
-      "",
-      "",
-      ""
-    ],
-    "correctIndex": 1,
-    "explanation": "정답은 2 번. (해설 미등록)",
-    "chapter": "데이터 모델 개념",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0026",
-    "_category": "데이터베이스 개념",
-    "_correctRate": 10
-  },
-  {
-    "id": 11085,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "1과목",
-    "number": 286,
+    "number": 275,
     "title": "다음 중 아래에서 엔터티 내에 주식별자를 도출하는 가준을 묶은 것으로 가장 적절한 것은?",
     "options": [
       "나, 라",
@@ -6914,11 +6284,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11086,
+    "id": 11075,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 287,
+    "number": 276,
     "title": "다음 중 비식별자 관계로 연결하는것을 고려해야 하는 경우로 가장 부적절한 것은?",
     "options": [
       "자식쪽 엔터티의 주식별자를 부모엔터티와는 별도로 생성하는 것이 더 유리하다고 판단하는 경우",
@@ -6935,11 +6305,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11087,
+    "id": 11076,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 288,
+    "number": 277,
     "title": "다음 중 성능 데이터모델링에 대한 설명으로 가장 부적절한 것은?",
     "options": [
       "분석/설계 단계에서 성능을 고려한 데이터모델링을 수행할 경우 성능 저하에 따른 Rework비용을 최소화 할 수 있는 기회를 가지게 된다.",
@@ -6956,11 +6326,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11088,
+    "id": 11077,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 289,
+    "number": 278,
     "title": "다음중 아래에서 성능을 고려한 데이터 모델링의 순서로 가장 적절한 것은?",
     "options": [
       "가-다-라-나-바-마",
@@ -6983,11 +6353,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11089,
+    "id": 11078,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 290,
+    "number": 279,
     "title": "다음 중 성능데이터 모델링을 할 때 고려사항으로 가장 부적절한 것은?",
     "options": [
       "이력데이터는 시간에 따라 반복적으로 발생이 되기 때문에 대량 데이터일 가능성이 높아 특별히 성능을 고려하여 칼럼 등을 추가하도록 설계해야 한다.",
@@ -7004,11 +6374,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11090,
+    "id": 11079,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 291,
+    "number": 280,
     "title": "아래와 같은 보관금원장 엔터티에서 관서에 대한 정보가 반정규화 되어 있기 때문에 관서정보를 조화할 때 성능저하가 발생하고 있다. 이 엔터티에 대해 몇 차 정규화가 필요한 지와 분리된 스키마 구조를 가장 바르게 짝지은 것은?",
     "options": [
       "3차 정규화 - 정규화테이블{관서번호, 관리점번호, 관서명, 상태, 관서등록일자}",
@@ -7038,11 +6408,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11091,
+    "id": 11080,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 292,
+    "number": 281,
     "title": "다음 중 아래 '일자별매각물건' 엔터티에 대한 설명으로 가장 적절한 것은?",
     "options": [
       "2차 정규화가 필요한 엔터티로서 매각기일과 일자별매각물건으로 1：1 관계가 될 수 있다.",
@@ -7067,11 +6437,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11092,
+    "id": 11081,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 293,
+    "number": 282,
     "title": "아래의 데이터 모델처럼 동일한 유형의 속성이 칼럼단위로 반복돠는 경우가 실제 프로젝트를 하면서 많이 발생 될 수 있다. 다음 중 아래와 같이 전제조건이 있을 때 테아블에서 나타날 수 있는 현상으로 가장 적절한 것은?",
     "options": [
       "유형기능분류코드 각각에 대하여 개별로 Index를 모두 생성할 경우 입력, 수정, 삭제 때 성능이 저하되므로 제1차 정규화를 수행한 후 인덱스를 적용하는 것이 좋다.",
@@ -7101,11 +6471,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11093,
+    "id": 11082,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 294,
+    "number": 283,
     "title": "다음 중 아래 '일재고' 엔터티에 대한 설명으로 가장 적절한 것은?",
     "options": [
       "2차 정규화가 필요한 엔터티로서 매각기일과 일자별매각물건으로 1：1 관계가 될 수 있다.",
@@ -7130,11 +6500,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11094,
+    "id": 11083,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 295,
+    "number": 284,
     "title": "다음 중 아래와 같이 수강지도 엔터티를 만들었을 때 이에 해당하는 정규형과 정규화의 대상으로 가장 바르게 짝지어진 것은?",
     "options": [
       "보이스코드정규형 - 4차 정규화 대상",
@@ -7164,11 +6534,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11095,
+    "id": 11084,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 296,
+    "number": 285,
     "title": "다음 중 데이터 제어어(DCL)에 해당하는 명령어는?",
     "options": [
       "REVOKE",
@@ -7185,11 +6555,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11096,
+    "id": 11085,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 297,
+    "number": 286,
     "title": "다음 중 아래 내용의 범주에 해당하는 SQL 명령어로 옳지 않은 것은?",
     "options": [
       "DROP",
@@ -7212,11 +6582,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11097,
+    "id": 11086,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 298,
+    "number": 287,
     "title": "데이터베이스를 정의하고 접근하기 위해서는 데이터베아스 관리 시스템과의 통신수단이 필요한데 이를 데이터 언어(Data Language) 라고 하며, 그 가능과 사용 목적에 따라 데이터 정의어(DDJ, 데이터 조작어(DML) 데이터 제어어(DCL)로 구분된다. 다음 중 데이터 언어와 SQL 명령어에 대한 설명으로 가장 부적절한 것은? ",
     "options": [
       "호스트 프로그램 속에 삽입되어 사용되는 DML 명령어들을 데이터 부속어 (Data Sub Language) 라고 한다.",
@@ -7233,11 +6603,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11098,
+    "id": 11087,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 299,
+    "number": 288,
     "title": "다음 중 아래 데이터 모델과 같은 테이블 및 제약조건을 생성하는 DDL 문장으로 올바른 것은? (단, DBMS는 Oracle을 기준으로 한다.)",
     "options": [
       "CREATE TABLE PRODUCT\n ( PROD_ID VARCHAR2(10) NOT NULL\n ,PROD_NM VARCHAR2(100) NOT NULL\n ,REG_DT DATE NOT NULL\n ,REGR_NO NUMBER(10)\n ,CONSTRAINT PRODUCT_PK PRIMARY KEY (PROD_ID) );",
@@ -7261,11 +6631,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11099,
+    "id": 11088,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 300,
+    "number": 289,
     "title": "아래와 같이 데이터가 들어있지 않은 왼쪽의 기관분류 테이블 (가) 를 오른쪽 기관분류 테아블 (나) 처럼 변경하고자 할 때 다음 중 올바른 SQL 문장은? (단, DBMS는 SQLServer로 가정한다.)",
     "options": [
       "ALTER TABLE 기관분류 ALTER COLUMN 분류명 VARCHAR(30) \nNOT NULL；\nALTER TABLE 기관분류 ALTER COLUMN 등록일자 DATE NOT NULL;",
@@ -7290,11 +6660,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11100,
+    "id": 11089,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 301,
+    "number": 290,
     "title": "다음 중 NULL의 설명으로 가장 부적절한 것은?",
     "options": [
       "NULL과의 모든 비교 (IS NULL 제외)는 알 수 없음 (Unknown) 을 반환한다.",
@@ -7311,11 +6681,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11101,
+    "id": 11090,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 302,
+    "number": 291,
     "title": "아래 테이블 T, S, R이 각각 다음과 같이 선언되었다. 다음 중 DELETE FROM T;  를 수행한 후에 테이블 R에 남아있는 데이터로 가장 적절한 것은?",
     "options": [
       "(1,1)",
@@ -7393,11 +6763,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11102,
+    "id": 11091,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 303,
+    "number": 292,
     "title": "다음 중 물리적 테이블 명으로 가장 적절한 것은?",
     "options": [
       "100_EMP",
@@ -7414,11 +6784,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11103,
+    "id": 11092,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 304,
+    "number": 293,
     "title": "다음 중 아래와 같은 문장으로 ,학생테이블을 생성한 후,유효한 튜플(Tuple) 들을 삽입하였다. SQL 1, SQL 2 문장의 실행 결과로 가장 적절한 것은?",
     "options": [
       "SQL1, SQL2 문장의 실행 결과는 다를 수 있으며, 그 이유는 학번 속성(Attribute)에 널(Null) 값이 존재할 수 있기 때문이다.",
@@ -7447,11 +6817,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11104,
+    "id": 11093,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 305,
+    "number": 294,
     "title": "다음 중 외래키에 대한 설명으로 가장 부적절한 것을 2개 고르시오.",
     "options": [
       "외래키 값은 참조 무결성 제약을 받을 수 있다.",
@@ -7468,11 +6838,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 20
   },
   {
-    "id": 11105,
+    "id": 11094,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 306,
+    "number": 295,
     "title": "표준 SQL(SQL1999)에서테이블 생성시참조관계를정의하기 위해 외래키 (Foreign Key)를 선언한다. 관계형 데이터베이스에서 Child Table의 FK 데이터 생성시 Parent Table에 PK가 없는 경우, Child Table 데이터 입력을 허용하지 않는 참조동작(Referential Action)인 것은?",
     "options": [
       "DEPENDENT",
@@ -7489,11 +6859,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11106,
+    "id": 11095,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 307,
+    "number": 296,
     "title": "아래와 같은 SQL문에 대해 삽입이 성공하는 SQL문은?",
     "options": [
       "4,5",
@@ -7517,11 +6887,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11107,
+    "id": 11096,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 308,
+    "number": 297,
     "title": "아래와 같은 데이터 모델어서 데이터를 조작히려고 한다. 다음 중 오류가 발생하는 SQL 문장인 것은?",
     "options": [
       "UPDATE BOARD SET BOARD_ID = 200 WHERE BOARD_ID = '100'；",
@@ -7546,11 +6916,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11108,
+    "id": 11097,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 309,
+    "number": 298,
     "title": "아래 데이터 모델과 같이 고객과 주문 테이블이 생성되어 았으며, 고객과 주문 테이블에 입력되어 있는 데이터는 아래 표와 같다. 이 때 FK_001이라는 제약 조건을 아래 SQL과 같이 설정하였다. 다음 중 오류 없이 정상적으로 수행되는 SQL을 2개 고르시오.",
     "options": [
       "DELETE FROM 고객 WHERE 고객ID = 'C002';",
@@ -7917,11 +7287,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11109,
+    "id": 11098,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 310,
+    "number": 299,
     "title": "개발 프로젝트의 표준은 모든 삭제 데이터에 대한 로그를남가는것을 원칙으로 하고, 테이블 삭제의 경우는 허가된 인력만이 정기적으로 수행 가능하도록 정하고 있다. 개발팀에서 사용 용도가 없다고 판단한 STADIUM 테이블의 데이터를 삭제하는 가장 좋은 방법은 무엇인가?",
     "options": [
       "DROP TABLE STADIUM;",
@@ -7938,11 +7308,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11110,
+    "id": 11099,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 311,
+    "number": 300,
     "title": "다음 중 아래와 같은 상황에서 사용할 수 있는 SQL 명령어는?",
     "options": [
       "DELETE TABLE FROM 매출;",
@@ -7965,11 +7335,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11111,
+    "id": 11100,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 312,
+    "number": 301,
     "title": "다음 중 DELETE 와 TRUNCATE, DROP 명령어에 대해 비교한 설명으로 가장 부적절한 것을 2개 고르시오.",
     "options": [
       "DROP은 Auto Commit 되고, DELETE와 TRUNCATE는 사용자 Commit으로 수행된다.",
@@ -7986,11 +7356,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 20
   },
   {
-    "id": 11112,
+    "id": 11101,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 313,
+    "number": 302,
     "title": "데이터베이스 트랜잭션에 대한 설명으로 가장 부적절한 것을 2개 고르시오.",
     "options": [
       "지속성(durability) : 트랜잭션이 실행 되기 전의 데이터베이스 내용이 잘못 되어 있지 않다면 트랜잭션이 실행된 이후에도 데이터베이스의 내용에 잘못이 있으면 안된다.",
@@ -8007,11 +7377,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 20
   },
   {
-    "id": 11113,
+    "id": 11102,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 314,
+    "number": 303,
     "title": "데이터베이스 트랜잭션에 대한 격리성이 낮은 경우 발생할 수 있는 문제점으로 가장 부적절한 것을 2개 고르시오.",
     "options": [
       "isolation : 트랜잭션이 실행되는 도중에 다른 트랜잭션의 영향을 받아 잘못된 결과를 만들어서는 안된다.",
@@ -8028,11 +7398,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 20
   },
   {
-    "id": 11114,
+    "id": 11103,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 315,
+    "number": 304,
     "title": "테이블 A에 대해 아래와 같은 SQL을 수행하였을 때 테이블 A의 ID ’001’에 해당하는 최종 VAL의 값이 ORACLE에서는 200, SQL Server에서는 100이 되었다. 다음 설명 중 가장 부적절한 것은? (단, AUTO COMMIT은 FALSE로 설정되어 있다)",
     "options": [
       "SQL Server에서는 ROLLBACK 실행으로 인하여 UPDATE가 취소되 었으며, 최종적으로 B 테이블은 생성되지 않았다.",
@@ -8074,11 +7444,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11115,
+    "id": 11104,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 316,
+    "number": 305,
     "title": "아래와 같은 테이블에 SQL구문이 실행되었을 경우 최종 출력 값을 작성하시오.",
     "options": [
       "4",
@@ -8128,11 +7498,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11116,
+    "id": 11105,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 317,
+    "number": 306,
     "title": "다음 중 SQL의 실행 결과로 가장 적절한 것은?",
     "options": [
       "3",
@@ -8178,11 +7548,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11117,
+    "id": 11106,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 318,
+    "number": 307,
     "title": "다음 중 SELECT COL1 + COL3 FROM TAB_A； 의 결과로 가장 적절한 것은?",
     "options": [
       "50 \nNULL \nNULL",
@@ -8227,11 +7597,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11118,
+    "id": 11107,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 319,
+    "number": 308,
     "title": "다음 SQL 문장중 COLUMN1의 값이 널(NULL) 이 아닌 경우를 찾아내는 문장으로 가장 적절한 것은? (ANSI 표준 기준)",
     "options": [
       "SELECT * FROM MYTABLE WHERE COLUMN1 NOT NULL",
@@ -8248,11 +7618,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11119,
+    "id": 11108,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 320,
+    "number": 309,
     "title": "아래와 같은 DDL 문장으로 테이블 생성하고, SQL들을 수행하였을 때 다음 설명 중 옳은 것은?",
     "options": [
       "SQL Server에서 (ㄴ)과같이 데이터를 입력하고, (ㄹ)과 같이 조회하였을 때, 데이터는 조회되지 않는다.",
@@ -8275,11 +7645,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11120,
+    "id": 11109,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 321,
+    "number": 310,
     "title": "아래와 같이 월별매출 테이블에 데이터가 입력되어 있다. 다음 중 2014년 11월 부터 2015년 03월까지의 매출금액 합계를 출력하는 SQL 문장으로 옳은 것은?",
     "options": [
       "SELECT SUM(매출금액) AS 매출금액합계\nFROM 월별매출\nWHERE 년 = '2014' AND 월 BETWEEN '11'  AND ’12’\nOR 년 = '2015' AND 월 BETWEEN ’01’ AND ’03’；",
@@ -8359,11 +7729,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11121,
+    "id": 11110,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 322,
+    "number": 311,
     "title": "아래 테이블 스키마를 참조하여 SQL 문장을 작성하였다. 다음 중 결과가 다른 SQL 문장은?",
     "options": [
       "SELECT SVC_ID, COUNT(*) AS CNT\nFROM SVC_JOIN\nWHERE TO_DATE(’201501’, 'YYYYMM') = SVC_END_DATE\nAND JOIN_YMD| |JOIN_HH = '2014120100’\nGROUP BY SVC_ID;",
@@ -8388,11 +7758,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11122,
+    "id": 11111,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 323,
+    "number": 312,
     "title": "아래와 같은 내장 함수에 대한 설명 중에서 옳은 것을 모두 묶은 것은?",
     "options": [
       "가,나,다,라",
@@ -8415,11 +7785,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11123,
+    "id": 11112,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 324,
+    "number": 313,
     "title": "다음 중 아래와 같은 2건의 데이터 상황에서 SQL의 수행 결과로 가장 적절한 것은? (단, 이해를 돕기 위해 ↓ 는 줄바꿈을 의미하며 실제 저장값은 아니고, CHR(10)은 줄바꿈 문자를 의미한다.)",
     "options": [
       "6",
@@ -8442,11 +7812,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11124,
+    "id": 11113,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 325,
+    "number": 314,
     "title": "오라클환경에서 날찌형 데이터를 다룰 경우, 아래 SQL 결과로 가장 적절한 것은?",
     "options": [
       "2015.01.10.10:30:00",
@@ -8469,11 +7839,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11125,
+    "id": 11114,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 326,
+    "number": 315,
     "title": "팀별 포지션별 FW, MF, DF, GK 포지션의 인원수와 팀별 전체 인원수를 SQL을 작성할 때 결과가 다른 것은? (보기 1은 SQL Server 환경이고, 보기 2,3,4는 ORACLE 환경이다.)",
     "options": [
       "SELECT TEAM_ID,\n NVL(SUM(CASE  POSITION WHEN 'FW' THEN 1 ELSE 1 END), 0) FW,\n NVL(SUM(CASE  POSITION WHEN 'MF' THEN 1 ELSE 1 END), 0) MF,\n NVL(SUM(CASE  POSITION WHEN 'DF' THEN 1 ELSE 1 END), 0) DF,\n NVL(SUM(CASE  POSITION WHEN 'GK' THEN 1 ELSE 1 END), 0) GK,\n COUNT(*) SUM \nFROM PLAYER\nGROUP BY TEAM_ID；",
@@ -8490,11 +7860,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11126,
+    "id": 11115,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 327,
+    "number": 316,
     "title": "다음 중 아래 TAB1 을보고 각 SQL 실행결과를 가장 올바르게 설명한 것을 고르시오.",
     "options": [
       "SELECT COUNT(COL2) FROM TABI WHERE COL1 IN (’b’,’c’)； \n-> 실행 결과는 1 이다.",
@@ -8543,11 +7913,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11127,
+    "id": 11116,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 328,
+    "number": 317,
     "title": "다음 중 아래 데이터를 가지고 있는 EMP_Q 테이블에서 세개의 SQL 결과로 가장 적절한 것은?",
     "options": [
       "0,에러 발생, NULL",
@@ -8597,11 +7967,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11128,
+    "id": 11117,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 329,
+    "number": 318,
     "title": "다음 중 아래와 같은 데이터 상황에서 SQL의 수행 결과로 가장 적절한 것은?",
     "options": [
       "14",
@@ -8651,11 +8021,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11129,
+    "id": 11118,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 330,
+    "number": 319,
     "title": "다음 중 아래 각각 3개의 SQL 수행 결과로 가장 적절한 것은?",
     "options": [
       "10, 10, 10",
@@ -8705,11 +8075,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11130,
+    "id": 11119,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 331,
+    "number": 320,
     "title": "어느 기업의 직원 테0|블(EMP)이 직급(GRADE) 별로 사원 500명, 대리 100명, 과장 30명, 차장 10명, 부장 5명, 직급이 정해지지 않은 (NULL) 사람 25명으로 구성되어 았을 때, 다음 중 SQL문을 SQL1)부터 SQL3)까지 순차적으로 실행한 결과 건수를 순서대로 나열한 것으로 가장 적절한 것은?",
     "options": [
       "670, 40, 6",
@@ -8743,11 +8113,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11131,
+    "id": 11120,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 332,
+    "number": 321,
     "title": "다음 중 오류가 발생하는 SQL 문장인 것은?",
     "options": [
       "SELECT 메뉴ID, 사용유형코드, AVG(COUNT(*)) AS AVGCNT\nFROM 시스템사용이력\nGROUP BY 메뉴ID, 사용유형코드;",
@@ -8764,96 +8134,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11132,
+    "id": 11121,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 333,
-    "title": "다음 중 아래와 같은 테이블 A에 대해서 SQL을 수행하였을 때의 결과로 가장 적절한 것은?",
-    "options": [
-      "",
-      "",
-      "",
-      ""
-    ],
-    "correctIndex": 3,
-    "explanation": "정답은 4번이다. GROUP BY 가, 나로 각 행이 가/나 조합별로 묶이고, 주어진 데이터에서는 각 조합이 1건씩만 존재하므로 SUM(다)는 각각 600, 500, 300, 200이 된다. HAVING SUM(다) >= 500 조건을 만족하는 것은 600과 500인 두 행뿐이므로 결과는 (009, A003, 600), (005, A002, 500)이다. 단, ORDER BY가 없으므로 실제 출력 순서는 DBMS 실행 계획에 따라 달라질 수 있고, 핵심은 조건을 만족하는 두 행이 조회된다는 점이다.",
-    "chapter": "그룹 함수",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0080",
-    "_category": "집계 함수",
-    "_correctRate": 10,
-    "references": [
-      {
-        "type": "text",
-        "content": "CREATE TABLE A (\n    가 VARCHAR2(10),\n    나 VARCHAR2(10),\n    다 NUMBER\n);\n\nINSERT INTO A VALUES ('009', 'A003', 600);\nINSERT INTO A VALUES ('005', 'A002', 500);\nINSERT INTO A VALUES ('002', 'A001', 300);\nINSERT INTO A VALUES ('010', 'A004', 200);\n\nCOMMIT;\n\n<SQL>\nSELECT 가, 나, SUM(다) AS 다\nFROM A\nGROUP BY 가, 나\nHAVING SUM(다) >= 500;"
-      }
-    ]
-  },
-  {
-    "id": 11133,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 334,
-    "title": "다음 중 아래 SQL의 실행결과로 가장 적절한 것은?",
-    "options": [
-      "",
-      "",
-      "",
-      ""
-    ],
-    "correctIndex": 2,
-    "explanation": "정답은 3 번. (해설 미등록)",
-    "chapter": "그룹 함수",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0081",
-    "_category": "집계 함수",
-    "_correctRate": 10,
-    "references": [
-      {
-        "type": "table",
-        "caption": "TBL",
-        "headers": [
-          "ID"
-        ],
-        "rows": [
-          [
-            "100"
-          ],
-          [
-            "100"
-          ],
-          [
-            "200"
-          ],
-          [
-            "200"
-          ],
-          [
-            "200"
-          ],
-          [
-            "999"
-          ],
-          [
-            "999"
-          ]
-        ]
-      },
-      {
-        "type": "sql",
-        "caption": "[SQL]",
-        "code": "SELECT ID FROM TBL\nGROUP BY ID\nHAVING COUNT(*) = 2\nORDER BY (CASE WHEN ID = 999 THEN 0 ELSE ID END)"
-      }
-    ]
-  },
-  {
-    "id": 11134,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 335,
+    "number": 322,
     "title": "다음 SQL 중 오류가 발생하는 것은?",
     "options": [
       "SELECT 지역, SUM(매출금액) AS 매출금액\nFROM 지역별매출\nGROUP BY 지역\nHAVING SUM(매출금액) > 1000\nORDER BY COUNT(*) ASC;",
@@ -8870,11 +8155,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11135,
+    "id": 11122,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 336,
+    "number": 323,
     "title": "다음 중 ORDER BY 절에 대한 설명으로 가장 부적절한 것은?",
     "options": [
       "GROUP BY 절을 시용하는 경우 ORDER BY 절에 집계 함수를 사용할 수도 있다.",
@@ -8891,65 +8176,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11136,
+    "id": 11123,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 337,
-    "title": "다음 SQL의 실행 결과로 가장 적절한 것은?",
-    "options": [
-      "",
-      "",
-      "",
-      ""
-    ],
-    "correctIndex": 2,
-    "explanation": "정답은 3 번. (해설 미등록)",
-    "chapter": "DML",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0084",
-    "_category": "DML",
-    "_correctRate": 10,
-    "references": [
-      {
-        "type": "table",
-        "caption": "TBL",
-        "headers": [
-          "ID",
-          "AMT"
-        ],
-        "rows": [
-          [
-            "A",
-            "50"
-          ],
-          [
-            "A",
-            "200"
-          ],
-          [
-            "B",
-            "300"
-          ],
-          [
-            "C",
-            "100"
-          ]
-        ]
-      },
-      {
-        "type": "sql",
-        "caption": "[SQL]",
-        "code": "SELECT ID, AMT\nFROM   TBL\nORDER BY (CASE WHEN ID = 'A' THEN 1 ELSE 2 END),\n         AMT DESC"
-      }
-    ]
-  },
-  {
-    "id": 11137,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 338,
+    "number": 324,
     "title": "다음 중 SELECT 문장의 실행 순서를 올바르게 나열한 것은?",
     "options": [
       "FROM - WHERE - GROUP BY - HAVING - SELECT - ORDER BY",
@@ -8966,11 +8197,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11138,
+    "id": 11124,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 339,
+    "number": 325,
     "title": "아래의 영화 데이터베이스 테이블의 일부에서 밑줄 친 속성들은 테이블의 기본키이며 출연료가 8888 상인 영화명, 배우명, 출연료를 구하는 SQL로 가장 적절한것은?",
     "options": [
       "SELECT 영화.영화명, 배우.배우명, 출연료 \nFROM 배우, 영화, 출연 \nWHERE 출연료 >= 8888\nAND 출연.영화번호 = 영화.영화번호 \nAND 출연.배우번호 = 배우.배우번호;",
@@ -8995,11 +8226,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11139,
+    "id": 11125,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 340,
+    "number": 326,
     "title": "다음 SQL의 실행 결과로 맞는 것은?",
     "options": [
       "6",
@@ -9063,11 +8294,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11140,
+    "id": 11126,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 341,
+    "number": 327,
     "title": "다음 중 순수 관계 연산자에 해당하지 않는 것은?",
     "options": [
       "DIVIDE",
@@ -9084,11 +8315,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11141,
+    "id": 11127,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 342,
+    "number": 328,
     "title": "아래는 어느 회사의 생산설비를 위한 데이터 모델의 일부에 대한 설명으로 가장 적절한 것을 2개 고르시오.",
     "options": [
       "제품과 생산라인은 1:1 관계이며, 하나의 제품은 하나의 생산라인에서만 생산된다.",
@@ -9113,11 +8344,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11142,
+    "id": 11128,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 343,
+    "number": 329,
     "title": "아래의 테이블 스키마 정보를 참고하여, 다음 중  '구매 이력이 있는 고객 중 구매 홧수가 3회 이상인 고객의 이름과 등급을 출력하시오'라는 질의에 대해 아래 SQL 문장의 (ㄱ), (ㄴ) 에 들어 갈 구문으로 가장 적절한 것은?",
     "options": [
       "(ㄱ) : INNER JOIN 구매정보 B ON A.고객번호=B.고객번호\n(ㄴ) : WHERE B.구매번호〉=3",
@@ -9140,11 +8371,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11143,
+    "id": 11129,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 344,
+    "number": 330,
     "title": "다음 중 팀(TEAM) 테이블과 구장(STADIUM) 테이블의 관계를 아용해서 소속팀이 가지고 있는 전용구장의 정보를 팀의 정보와 함께 출력하는 SQL을 작성할 때 결과가 다른 것은?",
     "options": [
       "SELECT TEAM.REGION_NAME, TEAM.TEAM_NAME, \nTEAM.STADIUM_ID, STADIUM.STADIUM_NAME \nFROM TEAM, STADIUM \nWHERE TEAM.STADIUM_ID = STADIUM.STADIUM_ID;",
@@ -9161,133 +8392,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11144,
+    "id": 11130,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 345,
-    "title": "다음 중 아래 테이블들을대상으로 SQL 문장을 수행한 결과로 가장 적절한 것은?",
-    "options": [
-      "",
-      "",
-      "",
-      ""
-    ],
-    "correctIndex": 3,
-    "explanation": "정답은 4 번. (해설 미등록)",
-    "chapter": "조인",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0095",
-    "_category": "JOIN",
-    "_correctRate": 10,
-    "references": [
-      {
-        "type": "table",
-        "caption": "[테이블 : OS]",
-        "headers": [
-          "OSID(PK)",
-          "OS명"
-        ],
-        "rows": [
-          [
-            "100",
-            "Android"
-          ],
-          [
-            "200",
-            "iOS"
-          ],
-          [
-            "300",
-            "Bada"
-          ]
-        ]
-      },
-      {
-        "type": "table",
-        "caption": "[테이블 : 단말기]",
-        "headers": [
-          "단말기ID(PK)",
-          "단말기명",
-          "OSID(FK)"
-        ],
-        "rows": [
-          [
-            "1000",
-            "A1000",
-            "100"
-          ],
-          [
-            "2000",
-            "B2000",
-            "100"
-          ],
-          [
-            "3000",
-            "C3000",
-            "200"
-          ],
-          [
-            "4000",
-            "D3000",
-            "300"
-          ]
-        ]
-      },
-      {
-        "type": "table",
-        "caption": "[테이블 : 고객]",
-        "headers": [
-          "고객번호(PK)",
-          "고객명",
-          "단말기ID(FK)"
-        ],
-        "rows": [
-          [
-            "11000",
-            "홍길동",
-            "1000"
-          ],
-          [
-            "12000",
-            "강감찬",
-            "NULL"
-          ],
-          [
-            "13000",
-            "이순신",
-            "NULL"
-          ],
-          [
-            "14000",
-            "안중근",
-            "3000"
-          ],
-          [
-            "15000",
-            "고길동",
-            "4000"
-          ],
-          [
-            "16000",
-            "이대로",
-            "4000"
-          ]
-        ]
-      },
-      {
-        "type": "sql",
-        "caption": "[SQL]",
-        "code": "SELECT A.고객번호, A.고객명, B.단말기ID, B.단말기명, C.OSID, C.OS명\nFROM   고객 A LEFT OUTER JOIN 단말기 B\nON     (A.고객번호 IN (11000, 12000) AND A.단말기ID = B.단말기ID) LEFT OUTER JOIN OS C\nON     (B.OSID = C.OSID)\nORDER BY A.고객번호;"
-      }
-    ]
-  },
-  {
-    "id": 11145,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 346,
+    "number": 331,
     "title": "다음 중 아래 (1), (2), (3)의 SQL에서 실행결과가 같은 것은?",
     "options": [
       "1,2,3",
@@ -9310,11 +8419,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11146,
+    "id": 11131,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 347,
+    "number": 332,
     "title": "아래의 EMP 테이블과 DEPT 테이블에서 밑줄 친 속성은 주키이며 EMP.C는 DEPT와 연결된 외래키이다. EMP 테이블과 DEPT 테이블을 LEFT, FULL, RIGHT 외부조인(outer join)하면 생성되는 결과 건수로 가장 적절한 것은?",
     "options": [
       "3건,4건,5건",
@@ -9385,91 +8494,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11147,
+    "id": 11132,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 348,
-    "title": "다음 중 아래와 같은 데이터 상황에서 SQL의 수행 결과로 가장 적절한 것은?",
-    "options": [
-      "",
-      "",
-      "",
-      ""
-    ],
-    "correctIndex": 2,
-    "explanation": "정답은 3 번. (해설 미등록)",
-    "chapter": "조인",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0098",
-    "_category": "JOIN",
-    "_correctRate": 10,
-    "references": [
-      {
-        "type": "table",
-        "caption": "TAB1",
-        "headers": [
-          "C1",
-          "C2"
-        ],
-        "rows": [
-          [
-            "A",
-            "1"
-          ],
-          [
-            "B",
-            "2"
-          ],
-          [
-            "C",
-            "3"
-          ],
-          [
-            "D",
-            "4"
-          ],
-          [
-            "E",
-            "5"
-          ]
-        ]
-      },
-      {
-        "type": "table",
-        "caption": "TAB2",
-        "headers": [
-          "C1",
-          "C2"
-        ],
-        "rows": [
-          [
-            "B",
-            "2"
-          ],
-          [
-            "C",
-            "3"
-          ],
-          [
-            "D",
-            "4"
-          ]
-        ]
-      },
-      {
-        "type": "sql",
-        "caption": "[SQL]",
-        "code": "SELECT *\nFROM TAB1 A LEFT OUTER JOIN TAB2 B\n  ON ( A.C1 = B.C1 AND B.C2 BETWEEN 1 AND 3)"
-      }
-    ]
-  },
-  {
-    "id": 11148,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 349,
+    "number": 333,
     "title": "아래와 같은 데이터 모델에 대해 SQL을 수행 하였다. 다음 중 수행된 SQL과 동일한 결과를 도출하는 SQL은?",
     "options": [
       "SELECT A.서비스ID, A.서비스명, A.서비스URL\nFROM 서비스 A\nWHERE 서비스ID IN (SELECT 서비스ID\nFROM 서비스이용\nMINUS\nSELECT 서비스ID\nFROM 서비스);",
@@ -9499,11 +8528,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11149,
+    "id": 11133,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 350,
+    "number": 334,
     "title": "SET OPERATOR 중에서 수학의 교집합과 같은 가능을 하는 연산자로 가장 적절한 것은?",
     "options": [
       "EXCEPT",
@@ -9520,83 +8549,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11150,
+    "id": 11134,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 351,
-    "title": "다음 중 아래 TBL1, TBL2 테이블에 대해 SQL을 수행한 결과인 것은?",
-    "options": [
-      "",
-      "",
-      "",
-      ""
-    ],
-    "correctIndex": 3,
-    "explanation": "집합 연산자는 SQL에서 위에 정의된 연산자가 먼저 수행된다. 그러므로 UNION이 나중에 수행되므로 \r\n결과적으로 중복 데이터가 모두 제거되어 ④과 같은 결과가 도출된다. 만일 UNION과 UNION ALL의 \r\n순서를 바꾼다면 ③과 같은 결과가 도출된다",
-    "chapter": "집합 연산자",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0104",
-    "_category": "집합 연산자",
-    "_correctRate": 10,
-    "references": [
-      {
-        "type": "table",
-        "caption": "[테이블 : TBL1]",
-        "headers": [
-          "COL1",
-          "COL2"
-        ],
-        "rows": [
-          [
-            "AA",
-            "A1"
-          ],
-          [
-            "AB",
-            "A2"
-          ]
-        ]
-      },
-      {
-        "type": "table",
-        "caption": "[테이블 : TBL2]",
-        "headers": [
-          "COL1",
-          "COL2"
-        ],
-        "rows": [
-          [
-            "AA",
-            "A1"
-          ],
-          [
-            "AB",
-            "A2"
-          ],
-          [
-            "AC",
-            "A3"
-          ],
-          [
-            "AD",
-            "A4"
-          ]
-        ]
-      },
-      {
-        "type": "sql",
-        "caption": "[SQL]",
-        "code": "SELECT COL1, COL2, COUNT(*) AS CNT\nFROM   (SELECT COL1, COL2\n        FROM   TBL1\n        UNION ALL\n        SELECT COL1, COL2\n        FROM   TBL2\n        UNION\n        SELECT COL1, COL2\n        FROM   TBL1)\nGROUP BY COL1, COL2;"
-      }
-    ]
-  },
-  {
-    "id": 11151,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 352,
+    "number": 335,
     "title": "다음 중 아래에서 테이블 T1, T2에 대한 가, 나 두 개의 쿼리 결과 조회되는 행의 수로 가장 적절한 것은?",
     "options": [
       "가: 3개, 나: 5개",
@@ -9672,11 +8629,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11152,
+    "id": 11135,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 353,
+    "number": 336,
     "title": "다음 중 아래와 같은 집합이 존재 할 때, 집합 A와 B에 대하여 집합연산을 수행한 결과 집합 C가 돠는 경우 이용돠는 데이터베이스 집합연산은?",
     "options": [
       "Product",
@@ -9699,11 +8656,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11153,
+    "id": 11136,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 354,
+    "number": 337,
     "title": "아래와 같은 데이터 모델에 대한 설명으로 가장 적절한 것은?\r\n(단, 시스템적으로 회원기본정보와 회원상세정보는 1:1, 양쪽 필수 관계임을 보장한다.)\r",
     "options": [
       "회원ID 컬럼을 대상으로 (회원기본정보 INTERSECT 회원상세정보) 연산을 수행한 결과와 (회원기본정보 UNION 회원상세정보) 연산을 수행한 결과는 다르다.",
@@ -9728,99 +8685,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11154,
+    "id": 11137,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 355,
-    "title": "다음 중 아래와 같은 사원 테이블에 대해서 SQL을 수행하였을 때의 결과로 가장 적절한 것은?",
-    "options": [
-      "",
-      "",
-      "",
-      ""
-    ],
-    "correctIndex": 3,
-    "explanation": "CONNECT BY 절에 작성된 조건절은 WHERE 절에 작성된 조건절과 다르다. START WITH 절에서 \r\n필터링된 시작 데이터는 결과목록에 포함되어지며, 이후 CONNECT BY 절에 의해 필터링 된다. 그러 \r\n므로 매니저 사원번호가 NULL인 데이터는 결과목록에 포함되며, 이후 리커시브 조인에 의해 입사일자가 필터링 된다.",
-    "chapter": "계층형 질의",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0109",
-    "_category": "계층형 질의",
-    "_correctRate": 10,
-    "references": [
-      {
-        "type": "table",
-        "caption": "[테이블 : 사원]",
-        "headers": [
-          "사원번호(PK)",
-          "사원명",
-          "입사일자",
-          "매니저사원번호(FK)"
-        ],
-        "rows": [
-          [
-            "001",
-            "홍길동",
-            "2012-01-01",
-            "NULL"
-          ],
-          [
-            "002",
-            "강감찬",
-            "2012-01-01",
-            "001"
-          ],
-          [
-            "003",
-            "이순신",
-            "2013-01-01",
-            "001"
-          ],
-          [
-            "004",
-            "이민정",
-            "2013-01-01",
-            "001"
-          ],
-          [
-            "005",
-            "이병헌",
-            "2013-01-01",
-            "NULL"
-          ],
-          [
-            "006",
-            "안성기",
-            "2014-01-01",
-            "005"
-          ],
-          [
-            "007",
-            "이수근",
-            "2014-01-01",
-            "005"
-          ],
-          [
-            "008",
-            "김병만",
-            "2014-01-01",
-            "005"
-          ]
-        ]
-      },
-      {
-        "type": "sql",
-        "caption": "[SQL]",
-        "code": "SELECT 사원번호, 사원명, 입사일자, 매니저사원번호\nFROM   사원\nSTART WITH 매니저사원번호 IS NULL\nCONNECT BY PRIOR 사원번호 = 매니저사원번호\nAND 입사일자 BETWEEN '2013-01-01' AND '2013-12-31'\nORDER SIBLINGS BY 사원번호;"
-      }
-    ]
-  },
-  {
-    "id": 11155,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 356,
+    "number": 338,
     "title": "다음 중 계층형 질의문에 대한 설명으로 가장 부적절한 것은?",
     "options": [
       "오라클의 계층형 질의문에서 PRIOR 키워드는 CONNECT BY 절에만 사용할 수 있으며 'prior 자식 = 부모' 형태로 사용하면 순방향 전개로 수행 된다.",
@@ -9837,11 +8706,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11156,
+    "id": 11138,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 357,
+    "number": 339,
     "title": "다음 중 SELF JOIN을 수행해야 할 경우로 가장 적절한 것은?",
     "options": [
       "한 테이블 내에서 연관된 칼럼은 없으나 JOIN을 해야 한다.",
@@ -9858,11 +8727,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11157,
+    "id": 11139,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 358,
+    "number": 340,
     "title": "아래와 같이 일자별매출 테아블이 존재할 때 아래 결과처럼 일자별 누적매출액을 SQL로 구하려고 한다. WINDOW FUNCTION을 사용하지 않고 일자별 누적매출액을 구하는 SQL로 옳은 것은?",
     "options": [
       "SELECT A.일자\n,(SELECT SUM(B.매출액)\nFROM 일자별매출 B WHERE B. 일자 >= A. 일자)  AS 누적\n매출액\nFROM 일자별매출 A\nGROUP BY A. 일자\nORDER BY A. 일자;",
@@ -9981,11 +8850,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11158,
+    "id": 11140,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 359,
+    "number": 341,
     "title": "다음 중 아래의 SQL 수행 결과로 가장 적절한 것은?",
     "options": [
       "3",
@@ -10060,11 +8929,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11159,
+    "id": 11141,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 360,
+    "number": 342,
     "title": "아래는 서브쿼리에 대한 설명이다. 다음 중 올바른 것끼리 묶인 것은?",
     "options": [
       "가,나,마",
@@ -10087,11 +8956,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11160,
+    "id": 11142,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 361,
+    "number": 343,
     "title": "다음 중 아래의 ERD를 참조하여 아래 SQL과 동일한 결과를 출력하는 SQL로 가장 부적절한 것은?",
     "options": [
       "SELECT A.회원번호, A.회원명\nFROM 회원 A, 동의항목 B\nWHERE A.회원번호 = B.회원번호 AND B.동의여부 = 'N'\nGROUP BY A.회원번호, A.회원명\nORDER BY A.회원번호;",
@@ -10151,11 +9020,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11161,
+    "id": 11143,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 362,
+    "number": 344,
     "title": "아래의 데이터 모델을 기준으로 SQL을 작성하였다. 다음 중 아래의 SQL에 대해 가장 바르게 설명한 것은?",
     "options": [
       "GROUP BY 및 집계함수를 사용하지 않고 HAVING절을 사용하였으므로 SQL이 실행되지 못하고 오류가 발생한다.",
@@ -10180,11 +9049,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11162,
+    "id": 11144,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 363,
+    "number": 345,
     "title": "다음 중 서브쿼리에 대해 설명으로 가장 적절한 것은?",
     "options": [
       "서브 쿼리는 항상 메인쿼리에서 읽혀진 데이터에 대해 서브쿼리에서 해당 조건이 만족하는지를 확인하는 방식으로 수행된다.",
@@ -10201,11 +9070,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11163,
+    "id": 11145,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 364,
+    "number": 346,
     "title": "다음 중 아래 SQL에 대한 설명으로 가장 부적절한 것은?",
     "options": [
       "FROM 절의 서브쿼리는 동적 뷰(Dynamic View)라고도 하며, SQL문장 중 테이블 명이 올 수 있는 곳에서 사용할 수 있다.",
@@ -10228,11 +9097,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11164,
+    "id": 11146,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 365,
+    "number": 347,
     "title": "아래와 같은 데이터 모델에서 평가대상상품에 대한 품질평기향목별 최종 평가 결과를 추출하는 SQL 문장으로 옳은 것은? (단, 평가항목에 대한 평가(평가등급)가 기대수준에 미치지 못할 경우 해당 평기항목에 대해서만 재평가를 수행한다)",
     "options": [
       "SELECT B.상품ID. B.상품명, C.평가항목ID, C.평가항목명, A.평가회차,\nA.평가등급, A.평가일자\nFROM (SELECT 상품ID, 평가항목ID\n,MAX(평가회차) AS 평가회차\n,MAX(평가등급) AS 평가등급\n,MAX(평가일자) AS 평가일자\nFROM 평가결과\nGROUP BY 상품ID, 평가항목ID)  A, 평가대상상품 B, 품질평가항목 C\nWHERE A.상품ID = B.상품ID\nAND A.평가항목ID = C.평가항목ID；",
@@ -10257,11 +9126,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11165,
+    "id": 11147,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 366,
+    "number": 348,
     "title": "아래 부서 테이블의 담당자 변경을 위해 부서임시 테이블에 입력된 데이터를 활용하여 주기적으로 부서 테이블을 아래 결과와 같이 반영하기 위한 SQL으로 가장 적절한 것은?(단, 부서임시 테이블에서 변경일자를 가준으로 가장 최근에 변경된 데이터를 가준으로 부서 테이블에 반영되어야 한다)",
     "options": [
       "UPDATE 부서 A SET 담당자 = (SELECT B.담당자\nFROM 부서임시 B\nWHERE B.부서코드 = A.부서코드\nAND B.변경일자 = '2015.01.25.') ;",
@@ -10450,11 +9319,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11166,
+    "id": 11148,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 367,
+    "number": 349,
     "title": "다음 중 뷰(View)에 대한 설명으로 가장 부적절한 것은?",
     "options": [
       "실제 데이터를 저장하고 있는 뷰를 생성하는 기능을 지원하는 DBMS도 있다.",
@@ -10471,11 +9340,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11167,
+    "id": 11149,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 368,
+    "number": 350,
     "title": "아래의 데이터 모델에서 SQL을 이용하여 표(지역별 월별 이용량)와 같은 형식의 데이터를 추출하려고 할 때 올바른 SQL 문장은?",
     "options": [
       "SELECT (CASE GROUPING(B.지역ID) WHEN 1 THEN '지역전체'\nELSE MIN(B.지역명) END) AS 지역명\n,(CASE GROUPING(TO_CHAR(A.이용일시, 'YYYY.MM'))\nWHEN 1 THEN '월별합계'\nELSE TO_CHAR(A.이용일시, 'YYYY.MM') END) AS 이용월\n,SUM(A.이용량)  AS 이용량\nFROM 이용내역 A INNER JOIN 지역 B ON (A.지역ID = B.지역ID)\nGROUP BY GROUPING SETS(B.지역ID, TO_CHAR(A.이용일시, 'YYYY.MM'))",
@@ -10927,11 +9796,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11168,
+    "id": 11150,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 369,
+    "number": 351,
     "title": "다음 설명 중 가장 적절한 것은?",
     "options": [
       "CUBE 그룹 함수는 인자로 주어진 컬럼의 결합 가능한 모든 조합에 대해서 집계를 수행하므로 다른 그룹 함수에 비해 시스템에 대한 부하가 크다.",
@@ -10948,11 +9817,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11169,
+    "id": 11151,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 370,
+    "number": 352,
     "title": "아래와 같이 설비와 에너지사용 테이블을 이용하여 결과를 나타내려할 때 SQL으로 가장 적절한 것을 2개 고르시오.",
     "options": [
       "SELECT A.설비ID, B.에너지코드, SUM(B.사용량) AS 사용량합계\nFROM 설비 A INNER JOIN 에너지사용량 B\nON (A.설비ID = B.설비ID)\nGROUP BY GROUPING SETS((A.설비ID), (B 에너지코드),\n(A.설비ID, B.에너지코드))\nORDER BY A.설비ID, B.에너지코드;",
@@ -11110,11 +9979,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11170,
+    "id": 11152,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 371,
+    "number": 353,
     "title": "자재발주 테이블에 SQL을 수행하여 아래와 같은 결과를 얻었다. 다음 중 (ㄱ)에 들어갈 문장으로 옳은 것은?",
     "options": [
       "GROUP BY GROUPING SETS (자재번호, (발주처ID, 발주일자))",
@@ -11240,95 +10109,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11171,
+    "id": 11153,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 372,
-    "title": "다음 중 월별매출 테이블을 대상으로 아래 SQL을 수행한 결과인 것은?",
-    "options": [
-      "",
-      "",
-      "",
-      ""
-    ],
-    "correctIndex": 2,
-    "explanation": "GROUPPING SETS 함수는 표시된 인수들에 대한 개별 집계를 구하는 기능을 하며, 위의 SQL은 \n(상품ID, 월)별 집계 데이터를 출력한다. 각 보기별 SQL은 아래와 같다.\n① GROUPING SETS에 (월, 상품ID) 별, 월별로 집계되었다.\n SELECT 상품ID, 월, SUM(매출액)  AS 매출액\nFROM 월별매출\nWHERE 월 BETWEEN ’2014.10' AND '2014.12’ \nGROUP BY GROUPING SETS((월, 상품ID), 월);\n② GROUPING SETS에 월별, 상품ID별과 전체가 각각 집계되었다.\n SELECT 상품ID, 월, SUM(매출액) AS 매출액\nFROM 월별매출\nWHERE 월 BETWEEN ’2014.10' AND ’2014.12’\n GROUP BY GROUPING SETS(월, 상품ID, ());\n④ GROUPING SETS에 괄호를 사용하지 않아 월별과 상품ID별로 각각 집계되었다.\n SELECT 상품ID, 월, SUM(매출액) AS 매출액\nFROM 월별매출;\nWHERE 월 BETWEEN '2014.10' AND '2014.12'\n GROUP BY GROUPING SETS (월, 상품ID);",
-    "chapter": "그룹 함수",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0129",
-    "_category": "그룹 함수",
-    "_correctRate": 10,
-    "references": [
-      {
-        "type": "table",
-        "caption": "[테이블 : 월별매출]",
-        "headers": [
-          "상품ID",
-          "월",
-          "매출액"
-        ],
-        "rows": [
-          [
-            "P001",
-            "2014.10",
-            "1500"
-          ],
-          [
-            "P001",
-            "2014.11",
-            "1500"
-          ],
-          [
-            "P001",
-            "2014.12",
-            "2500"
-          ],
-          [
-            "P002",
-            "2014.10",
-            "1000"
-          ],
-          [
-            "P002",
-            "2014.11",
-            "2000"
-          ],
-          [
-            "P002",
-            "2014.12",
-            "1500"
-          ],
-          [
-            "P003",
-            "2014.10",
-            "2000"
-          ],
-          [
-            "P003",
-            "2014.11",
-            "1000"
-          ],
-          [
-            "P003",
-            "2014.12",
-            "1000"
-          ]
-        ]
-      },
-      {
-        "type": "sql",
-        "caption": "[SQL]",
-        "code": "SELECT 상품ID, 월, SUM(매출액) AS 매출액\nFROM   월별매출\nWHERE  월 BETWEEN '2014.10' AND '2014.12'\nGROUP BY GROUPING SETS((상품ID, 월));"
-      }
-    ]
-  },
-  {
-    "id": 11172,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 373,
+    "number": 354,
     "title": "다음 중 윈도우 함수 (Window Function, Analytic Function)에 대한 설명으로 가장 부적절한 것은?",
     "options": [
       "윈도우 함수 적용 범위는 Partition을 넘을 수 없다.",
@@ -11345,145 +10130,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11173,
+    "id": 11154,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 374,
-    "title": "다음 중 아래와 같은 테이블에서 SQL을 실행할 때 결과로 가장 적절한 것은?",
-    "options": [
-      "",
-      "",
-      "",
-      ""
-    ],
-    "correctIndex": 3,
-    "explanation": "위의 SQL은 고객별 매출액과 매출 순위를 구하되 동일 순위일 경우 중간 순위를 비워둔 데이터를 \r\n추출한다. 순위를 구하는 함수로는 RANK, DENSE_RANK, ROW_NUMBER 함수가 있다. RANK WINDOW FUNCTION은 동일 값에 대해서는 동일 순위를 부여하고 중간 순위는 비워 두지만, \r\nDENSE_RANK 함수는 동일 순위를 부여하되 중간 순위를 비우지 않는다. ROW_NUMBER 함수는 \r\n동일 값에 대해서도 유일한 순위를 부여한다.",
-    "chapter": "윈도우 함수",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0131",
-    "_category": "윈도우 함수",
-    "_correctRate": 10,
-    "references": [
-      {
-        "type": "table",
-        "caption": "[테이블 : 고객]",
-        "headers": [
-          "고객번호(PK)",
-          "고객명"
-        ],
-        "rows": [
-          [
-            "001",
-            "홍길동"
-          ],
-          [
-            "002",
-            "이순신"
-          ],
-          [
-            "003",
-            "강감찬"
-          ],
-          [
-            "004",
-            "이상화"
-          ],
-          [
-            "005",
-            "이규혁"
-          ]
-        ]
-      },
-      {
-        "type": "table",
-        "caption": "[테이블 : 월별매출]",
-        "headers": [
-          "월(PK)",
-          "고객번호(PK)",
-          "매출액"
-        ],
-        "rows": [
-          [
-            "201301",
-            "001",
-            "200"
-          ],
-          [
-            "201301",
-            "002",
-            "300"
-          ],
-          [
-            "201301",
-            "003",
-            "250"
-          ],
-          [
-            "201301",
-            "004",
-            "300"
-          ],
-          [
-            "201301",
-            "005",
-            "250"
-          ],
-          [
-            "201302",
-            "001",
-            "150"
-          ],
-          [
-            "201302",
-            "002",
-            "150"
-          ],
-          [
-            "201302",
-            "004",
-            "200"
-          ],
-          [
-            "201302",
-            "005",
-            "100"
-          ],
-          [
-            "201303",
-            "002",
-            "100"
-          ],
-          [
-            "201303",
-            "003",
-            "100"
-          ],
-          [
-            "201303",
-            "004",
-            "200"
-          ],
-          [
-            "201303",
-            "005",
-            "350"
-          ]
-        ]
-      },
-      {
-        "type": "sql",
-        "caption": "[SQL]",
-        "code": "SELECT 고객번호, 고객명, 매출액\n      ,RANK() OVER(ORDER BY 매출액 DESC) AS 순위\nFROM   (\n        SELECT A.고객번호\n              ,MAX(A.고객명) AS 고객명\n              ,SUM(B.매출액) AS 매출액\n        FROM   고객 A INNER JOIN 월별매출 B\n        ON     (A.고객번호 = B.고객번호)\n        GROUP BY A.고객번호\n       )\nORDER BY RNK;"
-      }
-    ]
-  },
-  {
-    "id": 11174,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 375,
+    "number": 355,
     "title": "아래 데이터 모델에서 활동점수가 높은 고객을 게임상품ID별로 10등까지 선별하여 사은행사를 진행하려고 한다. 다음 SQL 중 가장 적절한 것은? (단, 활동점수가 동일한 고객은 동일등수로 한다. 아래 결과 예제 참조)",
     "options": [
       "SELECT 게임상품ID, 고객ID, 활동점수, 순위\nFROM (SELECT RANK() OVER(PARTITION BY 게임상품ID\nORDER BY 활동점수 DESC) AS 순위\n,고객ID,게임상품ID, 활동점수\nFROM 고객활동)",
@@ -11592,87 +10243,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11175,
+    "id": 11155,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 376,
-    "title": "다음 중 추천내역 테이블에서 아래와 같은 SQL을 수행하였을 때의 결과로 가장 적절한 것은?",
-    "options": [
-      "",
-      "",
-      "",
-      ""
-    ],
-    "correctIndex": 1,
-    "explanation": " ROW_NUMBER 함수는 ORDER BY절에 의해 정렬된 데이터에 동일 값이 존재하더라도 유일한 순위를 부여하는 함수로서 데이터 그룹 내에 유일한 순위를 추출할 때 사용할 수 있는 함수이다.\n문제의 SQL은 추천경로별(PARTITION BY 추천경로)로 추천점수가 가장 높은 (ORDER BY 추천점수 \nDESC) 데이터를 한건씩만 출력하지만, \n①은 추천경로별로 추천점수가 가장 낮은 데이터를 각 한건씩 출력하였으며,\n③은 전체에서 추천점수가 가장 높은 데이터 한건만을 출력하였고\n④은 전체 데이터를 그대로 출력하였다.",
-    "chapter": "윈도우 함수",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0133",
-    "_category": "윈도우 함수",
-    "_correctRate": 10,
-    "references": [
-      {
-        "type": "table",
-        "caption": "[테이블 : 추천내역]",
-        "headers": [
-          "추천경로",
-          "추천인",
-          "피추천인",
-          "추천점수"
-        ],
-        "rows": [
-          [
-            "SNS",
-            "나한일",
-            "강감찬",
-            "75"
-          ],
-          [
-            "SNS",
-            "이순신",
-            "강감찬",
-            "80"
-          ],
-          [
-            "이벤트응모",
-            "홍길동",
-            "강감찬",
-            "88"
-          ],
-          [
-            "이벤트응모",
-            "저절로",
-            "이순신",
-            "78"
-          ],
-          [
-            "홈페이지",
-            "저절로",
-            "이대로",
-            "93"
-          ],
-          [
-            "홈페이지",
-            "홍두깨",
-            "심청이",
-            "98"
-          ]
-        ]
-      },
-      {
-        "type": "sql",
-        "caption": "[SQL]",
-        "code": "SELECT 추천경로, 추천인, 피추천인, 추천점수\nFROM   (SELECT 추천경로, 추천인, 피추천인, 추천점수\n              ,ROW_NUMBER() OVER(PARTITION BY 추천경로\n                                 ORDER BY 추천점수 DESC) AS RNUM\n        FROM   추천내역)\nWHERE  RNUM = 1;"
-      }
-    ]
-  },
-  {
-    "id": 11176,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 377,
+    "number": 356,
     "title": "다음 중 아래의 SQL에 대한 설명으로 가장 적절한 것은?",
     "options": [
       "유사개수 컬럼은 상품전체의 평균상품가격을 서로 비교하여 -10000 ~ +10000 사이에 존재하는 상품의 개수를 구한 것이다.",
@@ -11695,11 +10270,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11177,
+    "id": 11156,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 378,
+    "number": 357,
     "title": "다음 중 B_User가 아래의 직업을 수행할 수있도록 권한을 부여하는 DCL로 가장 적절한 것은?",
     "options": [
       "GRANT SELECT, UPDATE ON A_User.TB_A TO B_User;",
@@ -11722,11 +10297,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11178,
+    "id": 11157,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 379,
+    "number": 358,
     "title": "사용자 Lee가 릴레이션 R을 생성한 후,이래와 같은 권한부여 SQL문들을 실행하였다. 그 이후에 가능이 실행 가능한 SQL을 2개 고르시오. (단, A, B의 데이터 타입은 정수형이다)",
     "options": [
       "Kim : INSERT INTO R VALUES(500, 600);",
@@ -11749,11 +10324,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11179,
+    "id": 11158,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 380,
+    "number": 359,
     "title": "다음 중 정보시스템을 모델링할 때 세가지 관점에 해당하지 않는 것은?",
     "options": [
       "업무에서 처리하는 일의 방법에 따라 데이터가 어떻게 영향을 받는지 분석",
@@ -11776,11 +10351,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11180,
+    "id": 11159,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 381,
+    "number": 360,
     "title": "데이터 모델링의 세 가지 중요개념에 속하지 않는 것은?",
     "options": [
       "업무가 관여하는 어떤 것의 관계",
@@ -11797,11 +10372,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11181,
+    "id": 11160,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 382,
+    "number": 361,
     "title": "발생 시점에 따라 구분할 수 있는 엔터티의 유형이 아닌 것은?",
     "options": [
       "개념 엔터티",
@@ -11818,11 +10393,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11182,
+    "id": 11161,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 383,
+    "number": 362,
     "title": "자신의 속성이 없어도 다른 속성을 이용하여 결과를 도출할 수 있는 특징을 가진 속성의 이름은?",
     "options": [
       "관계 속성",
@@ -11839,11 +10414,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11183,
+    "id": 11162,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 384,
+    "number": 363,
     "title": "다음 중 엔터티의 특징에 포함되지 않는 것은?",
     "options": [
       "엔터티는 업무 프로세스에 의해 이용되어야 한다.",
@@ -11860,11 +10435,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11184,
+    "id": 11163,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 385,
+    "number": 364,
     "title": "데이터 모델에서 각 속성이 가질 수 있는 데이터 값의 범위, 자료형, 허용값, 기본값, 제약사항 등을 정의하는 개념으로 가장 적절한 것은?",
     "options": [
       "도메인",
@@ -11881,11 +10456,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11185,
+    "id": 11164,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 386,
+    "number": 365,
     "title": "관계를 정의할 때 주요하게 체크해야 하는 사항과 거리가 먼 것은?",
     "options": [
       "두 개의 엔터티 사이에 정보의 조합이 발생되는가?",
@@ -11902,11 +10477,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11186,
+    "id": 11165,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 387,
+    "number": 366,
     "title": "식별자의 대체 여부에 따라 분류하는 방식은?",
     "options": [
       "단일 식별자 - 복합 식별자",
@@ -11923,11 +10498,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11187,
+    "id": 11166,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 388,
+    "number": 367,
     "title": "다음 개념에 해당하는 관계는 무엇인가?",
     "options": [
       "외부 식별 관계",
@@ -11950,11 +10525,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11188,
+    "id": 11167,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 389,
+    "number": 368,
     "title": "데이터 모델링에 대한 설명 중 알맞은 것은?",
     "options": [
       "논리 모델링의 외래키는 물리 모델에서 반드시 구현되지는 않는다.",
@@ -11971,11 +10546,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11189,
+    "id": 11168,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 390,
+    "number": 369,
     "title": "데이터 모델링에 대한 단계 중 아래에서 설명하는 단계는 어떤 단계의 모델링인가?",
     "options": [
       "추상적 데이터 모델링",
@@ -11998,11 +10573,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11190,
+    "id": 11169,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 391,
+    "number": 370,
     "title": "엔터티 - 인스턴스 - 속성 - 속성값에 대한 관계 설명 중 틀린 것을 고르시오.",
     "options": [
       "엔터티 하나의 인스턴스는 다른 엔터티의 인스턴스 간 관계인 Pariring을 가진다.",
@@ -12019,11 +10594,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11191,
+    "id": 11170,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 392,
+    "number": 371,
     "title": "다음 설명에 해당하는 모델링 관점은 무엇인가?",
     "options": [
       "데이터 관점",
@@ -12046,11 +10621,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11192,
+    "id": 11171,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 393,
+    "number": 372,
     "title": "Hash Join 기법에 대한 설명으로 옳은 것은?",
     "options": [
       "Hash Join은 조인 칼럼의 인덱스가 존재하지 않으면 사용할 수 없는 기법이다.",
@@ -12067,11 +10642,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11193,
+    "id": 11172,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 394,
+    "number": 373,
     "title": "다음 설명에 해당하는 속성의 종류는 무엇인가?",
     "options": [
       "파생 속성",
@@ -12094,11 +10669,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11194,
+    "id": 11173,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 395,
+    "number": 374,
     "title": "3차정규화에 대한 설명으로 옳은 것을 고르시오.",
     "options": [
       "다수의 주식별자를 분리시킨다.",
@@ -12115,11 +10690,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11195,
+    "id": 11174,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 396,
+    "number": 375,
     "title": "다음 중 설계 단계에서 데이터 모델의 성능을 고려하는 절차와 방법에 포함되지 않는 것은?",
     "options": [
       "데이터 모델링을 할 때 분석 단계에서부터 반정규화를 수행한다.",
@@ -12136,11 +10711,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11196,
+    "id": 11175,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 397,
+    "number": 376,
     "title": "다음 중 분산 데이터베이스의 투명성에 속하지 않는 것은?",
     "options": [
       "병렬 투명성",
@@ -12157,11 +10732,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11197,
+    "id": 11176,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 398,
+    "number": 377,
     "title": "분산 데이터베이스의 특징 중 저장 장소 명시가 불필요하다는 특성은 무엇인가?",
     "options": [
       "분할 투명성",
@@ -12178,11 +10753,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11198,
+    "id": 11177,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 399,
+    "number": 378,
     "title": "발생 시점에 따른 엔터티 분류에 의한 중심 엔터티가 아닌 것은?",
     "options": [
       "계약",
@@ -12199,11 +10774,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11199,
+    "id": 11178,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 400,
+    "number": 379,
     "title": "데이터 모델링이 최종적으로 완료된 상태라고 정의할 수 있는, 즉 물리적인 스키마 설계를 하기 전 단계를 가리키는 말은?",
     "options": [
       "개념적 데이터 모델링",
@@ -12220,11 +10795,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11200,
+    "id": 11179,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 401,
+    "number": 380,
     "title": "엔터티에 대한 개념 중 엔터티 정의의 공통점 3가지가 아닌 것은?",
     "options": [
       "업무상 관리가 필요한 관심사에 해당된다.",
@@ -12241,11 +10816,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11201,
+    "id": 11180,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 402,
+    "number": 381,
     "title": "다음은 ERD 작성 순서이다. 올바른 것을 고르시오.",
     "options": [
       "가->나->다->마->바->라",
@@ -12268,11 +10843,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11202,
+    "id": 11181,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 403,
+    "number": 382,
     "title": "다음 설명 중 옳은 것은 무엇인가?",
     "options": [
       "데이터베이스에는 단 한 개의 테이블만 존재할 수 있다.",
@@ -12289,11 +10864,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11203,
+    "id": 11182,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 404,
+    "number": 383,
     "title": "데이터 유형에 대한 설명 중 틀린 것은 무엇인가?",
     "options": [
       "DATE 유형은 날짜 데이터를 다룰 때 사용한다.",
@@ -12310,11 +10885,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11204,
+    "id": 11183,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 405,
+    "number": 384,
     "title": "다음 중 테이블명으로 가능한 것은 무엇인가?",
     "options": [
       "100_EMP",
@@ -12331,11 +10906,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11205,
+    "id": 11184,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 406,
+    "number": 385,
     "title": "데이터를 입력하기 위해 사용하는 SQL 명령어는 무엇인가?",
     "options": [
       "ALTER",
@@ -12352,11 +10927,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11206,
+    "id": 11185,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 407,
+    "number": 386,
     "title": "Commit과 Rollback의 장점으로 적합하지 않은 것은 무엇인가?",
     "options": [
       "논리적으로 연관된 작업을 그룹핑하여 처리 가능하다.",
@@ -12373,11 +10948,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11207,
+    "id": 11186,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 408,
+    "number": 387,
     "title": "다음 SQL 문장의 결과로 출력되는 데이터는 무엇인가?",
     "options": [
       "위치에 상관없이 선수의 영문 이름에 A를 포함하는 선수들의 이름",
@@ -12400,11 +10975,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11208,
+    "id": 11187,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 409,
+    "number": 388,
     "title": "어떠한 데이터 타입도 사용이 가능한 집계 함수는 어느 것인가?",
     "options": [
       "STDDEV",
@@ -12421,11 +10996,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11209,
+    "id": 11188,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 410,
+    "number": 389,
     "title": "SQL 문장에서 집합별로 집계된 데이터에 대한 조회 조건을 제한하기 위해서 사용하는 절은 어느 것인가?",
     "options": [
       "FROM절",
@@ -12442,11 +11017,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11210,
+    "id": 11189,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 411,
+    "number": 390,
     "title": "다음 SQL 문장에서 틀린 부분은 어디인가?",
     "options": [
       "SELECT PLAYER, PLAYER_NAME\n선수명, TEAM, TEAM_NAME 팀명",
@@ -12463,11 +11038,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11211,
+    "id": 11190,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 412,
+    "number": 391,
     "title": "JOIN의 종류에 대한 설명으로 틀린 것은 무엇인가?",
     "options": [
       "SELF JOIN은 하나의 테이블을 논리적으로 분리시켜 EQUI JOIN을 이용하는 방법이다.",
@@ -12484,11 +11059,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11212,
+    "id": 11191,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 413,
+    "number": 392,
     "title": "다음 중 SELF JOIN을 수행해야 할 때는 어떤 경우인가?",
     "options": [
       "한 테이블 내에서 연관된 칼럼은 없으나 JOIN을 해야 한다.",
@@ -12505,11 +11080,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11213,
+    "id": 11192,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 414,
+    "number": 393,
     "title": "일반적으로 FROM절에 정의된 후 먼저 수행되어 SQL 문장 내에서 절차성을 주는 효과를 볼 수 있는 것은 어떤 유형의 서브쿼리 문장인가?",
     "options": [
       "NESTED SUBQUERY",
@@ -12526,11 +11101,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11214,
+    "id": 11193,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 415,
+    "number": 394,
     "title": "다음 서브쿼리에 대한 설명 중 틀린 것을 고르시오.",
     "options": [
       "다중행 연산자는 IN, ANY, ALL이 있으며 서브쿼리의 결과로 하나 이상의 데이터가 RETRUN되는 서브쿼리이다.",
@@ -12547,11 +11122,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11215,
+    "id": 11194,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 416,
+    "number": 395,
     "title": "소계, 중계, 합계처럼 계층적 분류를 포함하고 있는 데이터의 집계에 적합한 GROUP 함수 두 가지는 무엇인가?",
     "options": [
       "CUBE, SUM",
@@ -12568,11 +11143,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11216,
+    "id": 11195,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 417,
+    "number": 396,
     "title": "그룹 내 순위 관련 WINDOW 함수의 특징으로 틀린 것은?",
     "options": [
       "CUMM_RANK 함수는 누적된 순위를 부여할 수 있다(등수를 누적 순위로 표현함).",
@@ -12589,11 +11164,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11217,
+    "id": 11196,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 418,
+    "number": 397,
     "title": "SELECT문의 처리 순서로 올바른 것은?",
     "options": [
       "ORDER BY, SELECT, WHERE, GROUP BY, FROM",
@@ -12616,11 +11191,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11218,
+    "id": 11197,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 419,
+    "number": 398,
     "title": "다음의 SQL문에 대한 설명으로 올바르지 않은 것은?",
     "options": [
       "부서별 합계를 계산할 때 NULL값을 만나면 0으로 치환한다.",
@@ -12674,11 +11249,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11219,
+    "id": 11198,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 420,
+    "number": 399,
     "title": "데이터베이스 사용자 AAA에 CREATE TABLE 권한이 부여되었다. ( ) 에 들어가야 하는 것은 무엇인가?",
     "options": [
       "COMMIT",
@@ -12701,11 +11276,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11220,
+    "id": 11199,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 421,
+    "number": 400,
     "title": "다음 주어진 SQL문을 수행한 결과 영구적으로 반영되는 것은 무엇인가?",
     "options": [
       "1,2",
@@ -12728,11 +11303,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11221,
+    "id": 11200,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 422,
+    "number": 401,
     "title": "다음 주어진 그룹 함수와 동일한 결괏값을 반환하는 그룹 함수를 고르시오.",
     "options": [
       "GROUP BY GROUPING SETS(DEPTNO, JOB, (DEPTNO, JOB),());",
@@ -12755,11 +11330,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11222,
+    "id": 11201,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 423,
+    "number": 402,
     "title": "다음 주어진 테이블에서 아래와 같은 결과가 반환되도록 SQL문의 빈칸에 들어갈 올바른 것을 고르시오.",
     "options": [
       "(ㄱ) 남성의류 IS NULL, (ㄴ) 여성의류 = 남성의류;",
@@ -12875,11 +11450,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11223,
+    "id": 11202,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 424,
+    "number": 403,
     "title": "다음 주어진 테이블에서 부서코드 100의 상위부서코드를 찾는 SQL문을 만들도록 빈칸을 채워 넣으시오.",
     "options": [
       "ㄱ: WHERE, ㄴ: END WITH, ㄷ : CONNECT BY PRIOR",
@@ -12939,11 +11514,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11224,
+    "id": 11203,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 425,
+    "number": 404,
     "title": "다음 주어진 테이블에서 아래의 SQL문과 다른 값을 반환하는 SQL문을 고르시오.",
     "options": [
       "select * from SQLD_66 where (COL1 = 'x' or COL1 ='m') and (COL2 ='y' or COL2 ='n');",
@@ -13001,11 +11576,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11225,
+    "id": 11204,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 426,
+    "number": 405,
     "title": "다음 주어진 테이블에서 아래와 같은 결괏값을 반환하는 SQL문을 고르시오.",
     "options": [
       "select\ncount(case when 반=1 then 1 end) as \"결괏값\"\ncount(case when 반=2 then 1 end) as b,\ncount(case when 반=3 then 1 end) as c\nfrom SQLD_67;",
@@ -13084,11 +11659,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11226,
+    "id": 11205,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 427,
+    "number": 406,
     "title": "다음 주어진 테이블에서 SELECT문을 수행하였을 때 결괏값으로 다른 것을 고르시오.",
     "options": [
       "select nvl(A.COL1,-1) as C4 from A;",
@@ -13131,65 +11706,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11227,
+    "id": 11206,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 428,
-    "title": "다음 주어진 테이블에서 아래의 SQL문을 수행하였을 때의 결괏값으로 올바른 것을 고르시오.",
-    "options": [
-      "",
-      "",
-      "",
-      ""
-    ],
-    "correctIndex": 1,
-    "explanation": "해당 SQL문은 주어진 테이블인 SQLD_71에서 COL1, COL2, COL3 속성 순서대로 내림차순 정렬을 수행한다. 그래서 먼저 COL1에 대해서 내림차순 정렬을 수행하고 같은 COL1 값에 대해서는 COL2의 내림차순 정렬을 수행하고 같은 COL2 값에 대해서는 COL3을 기준으로 내림차순 정렬한다.",
-    "chapter": "DML",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0203",
-    "_category": "DML",
-    "_correctRate": 10,
-    "references": [
-      {
-        "type": "table",
-        "caption": "[SQLD_71]",
-        "headers": [
-          "COL1",
-          "COL2",
-          "COL3"
-        ],
-        "rows": [
-          [
-            "1",
-            "null",
-            "1"
-          ],
-          [
-            "2",
-            "10",
-            "13"
-          ],
-          [
-            "2",
-            "10",
-            "12"
-          ]
-        ]
-      },
-      {
-        "type": "sql",
-        "caption": "[SQL]",
-        "code": "select * from SQLD_71 order by COL1 desc, COL2 desc, COL3 desc;"
-      }
-    ]
-  },
-  {
-    "id": 11228,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 429,
+    "number": 407,
     "title": "아래의 결괏값을 보고 SQL문의 빈칸에 들어 갈 수 있는 내용을 고르시오.",
     "options": [
       "CUBE(DEPTNO, JOB)",
@@ -13263,11 +11784,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11229,
+    "id": 11207,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 430,
+    "number": 408,
     "title": "아래의 계층형 SQL에서 리프 데이터면 1, 그렇지 않으면 0을 출력하고 싶을 때 사용하는 키워드로 알맞은 것은?",
     "options": [
       "CONNECT_BY_ROOT",
@@ -13290,11 +11811,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11230,
+    "id": 11208,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 431,
+    "number": 409,
     "title": "아래와 같은 테이블 TAB1, TAB2가 있을 때 아래 SQL의 결과 건수를 알맞게 나열한 것은?",
     "options": [
       "2,4,3,7,12",
@@ -13395,11 +11916,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11231,
+    "id": 11209,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 432,
+    "number": 410,
     "title": "아래 SQL에서 출력되는 ROWS의 개수를 구하시오.",
     "options": [
       "20건",
@@ -13529,11 +12050,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11232,
+    "id": 11210,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 433,
+    "number": 411,
     "title": "다음 중 자신과 성별이 같은 부양가족을 가진 직원의 이름을 검색하는 질의를 SQL로 적절하게 표현한 것을 고르시오.",
     "options": [
       "SELECT E.이름\nFROM 직원 AS E\nWHERE NOT EXISTS (SELECT * FROM 부양가족 WHERE E.직원번호 = 직원번호 AND E.성별 = 성별);",
@@ -13550,11 +12071,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11233,
+    "id": 11211,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 434,
+    "number": 412,
     "title": "주식의 정보를 조회하는 프로그램이 있다. 이 때, 일자(BASE_DATE)와 종가(LAST_JUKA), 전일대비(DEBI_VAL)를 출력하는  SQL문으로 올바른 것을 고르시오.",
     "options": [
       "SELECT A.BASE_DATE, A.LAST_JUKA,\nB.LAST_JUKA-A.LAST_JUKA DEBI_VAL\nFROM\n(SELECT ROWNUM ROW1,\nBASE_DATE, LAST_JUKA\nFROM TEST_A)a,\n(SELECT ROWNUM ROW1, BASE_DATE, LAST_JUKA\nFROM TEST_A\nWHERE BASE_DATE > '20230104')b\nWHERE A.ROW1 = B.ROW1\nAND A.BASE_DATE > '20230104';",
@@ -13634,11 +12155,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11234,
+    "id": 11212,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 435,
+    "number": 413,
     "title": "다음 중 홍길동 사용자에게 아래의 작업을 실행할 수 있도록 권한을 부여한 것으로 올바른 것은 무엇인가?",
     "options": [
       "grant create table on 홍길동 on emp;",
@@ -13661,11 +12182,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11235,
+    "id": 11213,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 436,
+    "number": 414,
     "title": "다음 SQL문에 대한 설명으로 올바른 것은?",
     "options": [
       "테이블의 EMP_NAME이 A 또는 a로 끝나는 모든 ROW",
@@ -13688,11 +12209,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11236,
+    "id": 11214,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 437,
+    "number": 415,
     "title": "릴레이션 'employee'와 'department'에서 다음 SQL 질의문의 수행 결과는?",
     "options": [
       "{(100,영업,Hong,80), (100,영업,Lee,90),(200,개발,Kim,90),(200,개발,Kim,95),(600,null,Hong,65)}",
@@ -13785,11 +12306,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11237,
+    "id": 11215,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 438,
+    "number": 416,
     "title": "다음의 데이터베이스에서 '부양가족을 2명 이상 가진 사원의 사번(eno), 성명(ename), 부양가족 수를 검색'하는 질의를 SQL로 적절하게 표현한 것은?",
     "options": [
       "SELECT e.eno, e.ename, count(*)\nFROM employee e, dependent d\nWHERE e.eno = d.eno\nGROUP BY e.eno, e.name\nHAVING count(*) >= 3;",
@@ -13812,11 +12333,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11238,
+    "id": 11216,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 439,
+    "number": 417,
     "title": "다음 테이블에 대한 매출 누적을 구하는 SQL문을 작성하시오.(윈도우 함수 사용)",
     "options": [
       "SELECT 영업사원, 판매월, sum(매출) from group by 영업사원, 판매월;",
@@ -13897,11 +12418,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11239,
+    "id": 11217,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 440,
+    "number": 418,
     "title": "다음 SQL문의 실행 결과는 무엇인가?",
     "options": [
       "NULL",
@@ -13924,11 +12445,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11240,
+    "id": 11218,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 441,
+    "number": 419,
     "title": "다음의 SQL문 실행 결과는 무엇인가?",
     "options": [
       "공집합",
@@ -13951,11 +12472,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11241,
+    "id": 11219,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 442,
+    "number": 420,
     "title": "다음은 윈도우 함수에 대한 설명이다. 현재 행을 기준으로 파티션 내에서 앞의 한 건, 현재행, 뒤의 한 건을 범위를 지정하는 Over의 옵션은?",
     "options": [
       "ROWS BETWEEN 1 AND 2",
@@ -13972,11 +12493,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11242,
+    "id": 11220,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 443,
+    "number": 421,
     "title": "그룹 내 순위 관련 WINDOW 함수의 특징으로 올바르지 않은 것을 고르시오.",
     "options": [
       "RANK 함수가 동일한 값에 대해서는 동일한 순위를 부여하는 데 반해, ROW_NUMBER 함수는 고유한 순위를 부여한다.",
@@ -13993,11 +12514,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11243,
+    "id": 11221,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 444,
+    "number": 422,
     "title": "다음은 Order by에 대한 설명이다. 올바르지 않은 것은?",
     "options": [
       "날짜형 데이터 타입을 오름차순으로 정렬하면 날짜 값이 가장 늦은 날짜가 먼저 출력된다.",
@@ -14014,11 +12535,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11244,
+    "id": 11222,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 445,
+    "number": 423,
     "title": "CASE문에서 ELSE를 생략하면 어떤 현상이 발생되는가?",
     "options": [
       "ELSE 조건이 만족하게 되면 NULL이 된다.",
@@ -14035,11 +12556,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11245,
+    "id": 11223,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 446,
+    "number": 424,
     "title": "다음의 SQL문과 동일한 것을 고르시오.",
     "options": [
       "Select Case When Name IS NULL THEN '없음' ELSE '0' END AS USER_NAME\nFROM Emp;",
@@ -14062,11 +12583,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11246,
+    "id": 11224,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 447,
+    "number": 425,
     "title": "우선순위를 계산하는 윈도우 함수에서 동일한 우선순위가 나와도 고유의 값을 부여하기 위한 방법으로 올바른 것은 무엇인가?",
     "options": [
       "Select UNIQUE_RANK() OVER \n(PARTITION BY DEPTNO \nORDER BY SAL DESC) \nDEPT_RANK;",
@@ -14083,11 +12604,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11247,
+    "id": 11225,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 448,
+    "number": 426,
     "title": "서브쿼리의 종류 중에 서브쿼리를 실행하고 한 행, 한 칼럼을 반환하는 서브쿼리를 무엇이라고 하는가?",
     "options": [
       "Access Subquery",
@@ -14104,11 +12625,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11248,
+    "id": 11226,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 449,
+    "number": 427,
     "title": "다음의 내용 중에서 ROWNUM을 올바르게 사용하지 않은 것은?",
     "options": [
       "SELECT DEPTNO FROM EMP\nWHERE ROWNUM < 10;",
@@ -14125,11 +12646,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11249,
+    "id": 11227,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 450,
+    "number": 428,
     "title": "다음 중에서 집합 연산자의 종류에 해당되지 않은 것을 고르시오.",
     "options": [
       "Except",
@@ -14146,11 +12667,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11250,
+    "id": 11228,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 451,
+    "number": 429,
     "title": "ANSI/ISO 표준 SQL에서 두 테이블 간에 동일한 칼럼 이름을 가지는 것을 모두 출력하는 조인 방식은 무엇인가?",
     "options": [
       "Using",
@@ -14167,11 +12688,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11251,
+    "id": 11229,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 452,
+    "number": 430,
     "title": "두 개 릴레이션 Student와 Department가 있을 때, 아래 SQL을 수행한 결과 릴레이션의 차수와 카디널리티는 각각 얼마인가?( 단, 릴레이션 Student의 애트리뷰트 '소속(dept)'은 릴레이션 Department의 애트리뷰트 '코드(dno)'를 외부키로 참조한다)",
     "options": [
       "차수=8, 카디널리티=3",
@@ -14268,11 +12789,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11252,
+    "id": 11230,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 453,
+    "number": 431,
     "title": "다음  sutdent 테이블을 이용하여 아래의 SQL을 수행하였을 때 실행 결과는?",
     "options": [
       "3",
@@ -14349,11 +12870,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11253,
+    "id": 11231,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 454,
+    "number": 432,
     "title": "다음과 같은 문장으로 사원 테이블을 생성하였을 때, 사원 테이블에 유효한 데이터를 로드한 후, 아래 두 SQL문을 성공적으로 실행하였다. SQL A와 SQL B의 실행 결과로 옳은 것은?",
     "options": [
       "SQL A와 SQL B의 결과는 다를 수 있으며, 그 이유는 번호 필드에 널(NULL)값이 존재할 수 있기 때문이다.",
@@ -14376,11 +12897,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11254,
+    "id": 11232,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 455,
+    "number": 433,
     "title": "숫자형 함수 적용과 그 결괏값이 올바르지 않은 것은?",
     "options": [
       "CEIL(38,12)=39",
@@ -14397,11 +12918,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11255,
+    "id": 11233,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 456,
+    "number": 434,
     "title": "다음 SQL문의 결과로 출력되는 데이터는 무엇인가?",
     "options": [
       "오늘 날짜로부터 6일 후 두 번째 월요일을 출력한다.",
@@ -14424,11 +12945,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11256,
+    "id": 11234,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 457,
+    "number": 435,
     "title": "다음 중 옳지 않은 것은?",
     "options": [
       "COUNT(표현식)은 표현식의 값이 NULL값인 것을 제외한 행 수를 출력한다.",
@@ -14445,11 +12966,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11257,
+    "id": 11235,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 458,
+    "number": 436,
     "title": "다음 결과는 2개의 테이블을 어떤 join으로 진행한 것인가?",
     "options": [
       "Full Outer Join",
@@ -14494,11 +13015,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11258,
+    "id": 11236,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 459,
+    "number": 437,
     "title": "다음 설명 중 옳지 않은 것은?",
     "options": [
       "서브쿼리는 Order by절에 사용할 수 있다.",
@@ -14515,11 +13036,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11259,
+    "id": 11237,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 460,
+    "number": 438,
     "title": "테이블 3개를 조인하려면 최소 몇 개의 조건절이 필요한가?",
     "options": [
       "4",
@@ -14536,11 +13057,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11260,
+    "id": 11238,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 461,
+    "number": 439,
     "title": "다음 SQL문에서 ( )에 들어갈 알맞은 명령어는 무엇인가?",
     "options": [
       "CROSS JOIN",
@@ -14687,11 +13208,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11261,
+    "id": 11239,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 462,
+    "number": 440,
     "title": "다음의 SQL문에 대한 설명으로 올바르지 않은 것은?",
     "options": [
       "PARTITION문을 사용해서 해당 파티션 내에서 순위를 계산한다.",
@@ -14714,11 +13235,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11262,
+    "id": 11240,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 463,
+    "number": 441,
     "title": "다음의 SQL문에 대한 설명으로 올바르지 않은 것은?",
     "options": [
       "SAL의 마지막 행은 급여가 가장 작은 사람이다.",
@@ -14741,11 +13262,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11263,
+    "id": 11241,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 464,
+    "number": 442,
     "title": "다음의 PREV_SAL은 어떤 윈도우 함수를 사용해야 하는가?",
     "options": [
       "LAST_VALUE",
@@ -14800,11 +13321,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11264,
+    "id": 11242,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 465,
+    "number": 443,
     "title": "다음 과일 테이블에 대한 SQL문 내의 비교조건을 해석한 것으로 올바르지 않은 것은?",
     "options": [
       "where 19=ALL(SELECT 과일코드 FROM 과일)\" 거짓이다.",
@@ -14845,11 +13366,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11265,
+    "id": 11243,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 466,
+    "number": 444,
     "title": "다음의 예에서 결괏값이 다른 하나는?",
     "options": [
       "SELECT count(고객) FROM SQLD_13 WHERE 거래내역 IS NULL;",
@@ -14894,11 +13415,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11266,
+    "id": 11244,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 467,
+    "number": 445,
     "title": "도서(도서번호, 도서제목, 출판사명, 발행연도) 테이블에서, 2000년 이후에 10권 이상의 책을 발행한 출판사의 이름을 중복 없이 출력하는 SQL문으로 옳은 것은?(단, 출판사명이 동일한 출판사는 존재하지 않는 것으로 가정한다. 도서번호는 도서 테이블의 기본키이다)",
     "options": [
       "SELECT 출판사명 FROM 도서\nWHERE 발행연도 >= 2000\nGROUP BY 출판사명\nHAVING  COUNT(도서번호) >= 10;",
@@ -14915,11 +13436,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11267,
+    "id": 11245,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 468,
+    "number": 446,
     "title": "다음의 NOT EXISTS 구문을 동일한 결과가 출력되게 SQL문을 변경하시오.",
     "options": [
       "P.사원번호 IS NULL",
@@ -14942,11 +13463,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11268,
+    "id": 11246,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 469,
+    "number": 447,
     "title": "서브쿼리에 대한 설명으로 올바르지 않은 것은?",
     "options": [
       "서브쿼리는 SELECT, FROM, WHERE 등에서 사용이 가능하다.",
@@ -14963,11 +13484,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11269,
+    "id": 11247,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 470,
+    "number": 448,
     "title": "\"TEST\" 테이블에 있는 NUM2 칼럼의 총 행은 10개이고 2개의 NULL 값이 있다. 다음의 SQL문을 실행할 경우 결괏값은?",
     "options": [
       "ㄱ:8, ㄴ:8",
@@ -14990,11 +13511,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11270,
+    "id": 11248,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 471,
+    "number": 449,
     "title": "다음의 SQL문에 대한 설명으로 올바른 것은?",
     "options": [
       "실행 결과로 아무것도 출력되지 않는다.",
@@ -15017,11 +13538,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11271,
+    "id": 11249,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 472,
+    "number": 450,
     "title": "학생(STUDENT) 테이블에 영문학과 학생 50명, 법학과 학생 100명, 수학과 학생 50명의 정보가 저장되어 있을 때, 다음 SQL문의 실행 결과 튜플 수는 각각 얼마인가? (단, DEPT필드는 학과명, NAME필드는 이름을 의미한다)",
     "options": [
       "ㄱ:200, ㄴ:200, ㄷ:50",
@@ -15044,11 +13565,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11272,
+    "id": 11250,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 473,
+    "number": 451,
     "title": "다음의 SQL문은 파티션별 윈도우의 전체건수에서 현재 행보다 작거나 같은 건수에 대해서 누적백분율을 구하는 SQL문이다. (ㄱ)에 올바른 윈도우 함수는?",
     "options": [
       "CUME_DIST()",
@@ -15071,11 +13592,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11273,
+    "id": 11251,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 474,
+    "number": 452,
     "title": "윈도우 함수 중에서 윈도우에서 제일 먼저 나오는 것을 0으로 하고 제일 늦게 나오는 것을 1로 해서 행 순서별 백분율을 구하는 것은?",
     "options": [
       "CUME_DIST",
@@ -15092,11 +13613,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11274,
+    "id": 11252,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 475,
+    "number": 453,
     "title": "EMP 테이블 7788번 사원의 SAL 값이 현재 1000인 상황에서 아래 TX1, TX2 두 개의 트랜잭션이 동시에 수행되었다. 양쪽 트랜잭션이 모두 완료된 시점에 7788번 사원의 SAL 값은?",
     "options": [
       "1300",
@@ -15146,11 +13667,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11275,
+    "id": 11253,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 476,
+    "number": 454,
     "title": "다음의 SQL문에 대한 설명 중 옳지 않은 것은?",
     "options": [
       "기능상으로는 문제가 없지만 성능 문제가 있다.",
@@ -15173,11 +13694,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11276,
+    "id": 11254,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 477,
+    "number": 455,
     "title": "다음 설명 중 올바르지 않은 것은?",
     "options": [
       "Oracle에서 인덱스 구성 칼럼이 모두 null인 레코드는 인덱스에 저장하지 않는다.",
@@ -15194,11 +13715,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11277,
+    "id": 11255,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 478,
+    "number": 456,
     "title": "데이터베이스 모델링 관점 중에서 CRUD 메트릭스와 관련이 있는 것은?",
     "options": [
       "데이터와 프로세스의 상관 관점",
@@ -15215,11 +13736,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11278,
+    "id": 11256,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 479,
+    "number": 457,
     "title": "고객 엔터티에 고객 ID, 이름, 주소가 있다. 이 때 주소는 어떤 속성인가?",
     "options": [
       "복합 속성",
@@ -15236,11 +13757,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11279,
+    "id": 11257,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 480,
+    "number": 458,
     "title": "데이터베이스 3층 스키마에 해당 되지 않는 것은?",
     "options": [
       "내부 단계",
@@ -15257,11 +13778,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11280,
+    "id": 11258,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 481,
+    "number": 459,
     "title": "다음 중 카디널리티를 계산하는 식으로 올바른 것은?",
     "options": [
       "Blevel * 전체 레코드 수",
@@ -15278,11 +13799,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11281,
+    "id": 11259,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 482,
+    "number": 460,
     "title": "데이터베이스 정규화 중에서 기본키를 제외하고 칼럼 간에 종속성이 발생하면 테이블을 분할하는 것은?",
     "options": [
       "제4정규화",
@@ -15299,11 +13820,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11282,
+    "id": 11260,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 483,
+    "number": 461,
     "title": "다음 주어진 ERD 관계에 대한 설명으로 옳은 것을 고르시오.",
     "options": [
       "그룹 계정에 여러 명의 사용자가 반드시 속해야 한다.",
@@ -15328,11 +13849,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11283,
+    "id": 11261,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 484,
+    "number": 462,
     "title": "다음 중 DDL 문이 아닌 것은?",
     "options": [
       "ALTER",
@@ -15349,11 +13870,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11284,
+    "id": 11262,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 485,
+    "number": 463,
     "title": "다음 중 Mytest 테이블에 JOB 칼럼을 추가하는 방법으로 올바른 것을 고르시오.(단, 데이터타입, 제약조건 등은 따로 고려하지 않음)",
     "options": [
       "ALTER table Mytest add constraint JOB",
@@ -15370,11 +13891,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11285,
+    "id": 11263,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 486,
+    "number": 464,
     "title": "다음 SQL문의 실행 결과로 올바른 것은?",
     "options": [
       "7,7,9",
@@ -15397,11 +13918,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11286,
+    "id": 11264,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 487,
+    "number": 465,
     "title": "다음 주어진 테이블에 대해서 아래와 같은 SQL문을 수행하였을 때 반환되는 ROW 값의 수는 무엇인가?",
     "options": [
       "4",
@@ -15475,11 +13996,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11287,
+    "id": 11265,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 488,
+    "number": 466,
     "title": "다음은 계층형 쿼리를 수행하는 SQL문이다. (   )에 해당되는 것으로 올바른 것은?",
     "options": [
       "(ㄱ) mgrid (ㄴ) mgrid = empid",
@@ -15622,11 +14143,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11288,
+    "id": 11266,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 489,
+    "number": 467,
     "title": "다음 중 Mytest 테이블에서 부서코드 400부터 상위 부서를 찾는 SQL문은?",
     "options": [
       "Select 상위부서코드\nfrom Mytest\nwhere 부서코드 = 400\nstart with 상위부서코드 = 0\nconnect by prior 부서코드 = 상위부서코드;",
@@ -15681,11 +14202,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11289,
+    "id": 11267,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 490,
+    "number": 468,
     "title": "다음 중 계층형 쿼리문의 내장 함수가 아닌 것은 무엇인가?",
     "options": [
       "CONNECT_BY_ROOT",
@@ -15702,11 +14223,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11290,
+    "id": 11268,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 491,
+    "number": 469,
     "title": "다음 중 SQL문의 실행 순서로 올바른 것은?",
     "options": [
       "FROM-WHERE-GROUP BY-HAVING-SELECT-ORDER BY",
@@ -15723,11 +14244,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11291,
+    "id": 11269,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 492,
+    "number": 470,
     "title": "주어진 테이블에서 아래의 SQL문과 다른 값을 반환하는 SQL문을 고르시오.",
     "options": [
       "SELECT * FROM Mytest WHERE\n(COL = 'x' or COL1 = 'KK') and\n(COL2 = 'y' or COL2 ='BB');",
@@ -15788,11 +14309,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11292,
+    "id": 11270,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 493,
+    "number": 471,
     "title": "분산 데이터베이스의 투명성과 관련이 없는 것은?",
     "options": [
       "이행 투명성",
@@ -15809,11 +14330,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11293,
+    "id": 11271,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 494,
+    "number": 472,
     "title": "다음 중 SQL에 대한 설명으로 올바르지 않은 것은?",
     "options": [
       "TCL : 트랜잭션을 제어하면 Commit 과 Rollback이 있다.",
@@ -15830,11 +14351,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11294,
+    "id": 11272,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 495,
+    "number": 473,
     "title": "다음 보기의 SELECT문을 실행했을 때 그 결과가 다른 하나는?",
     "options": [
       "SELECT MIN(nvl(CNT,5)) FROM Mytest;",
@@ -15883,11 +14404,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11295,
+    "id": 11273,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 496,
+    "number": 474,
     "title": "다음 문제에 주어진 결괏값을 반환하는 SQL문은?",
     "options": [
       "SELECT\nCOUNT(CASE WHEN CLASS ='A' THEN 1 END) AS \"Result\"\nCOUNT(CASE WHEN CLASS ='B' THEN 1 END) AS B,\nCOUNT(CASE WHEN CLASS ='C' THEN 1 END) AS C\nFROM Mytest;",
@@ -15966,11 +14487,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11296,
+    "id": 11274,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 497,
+    "number": 475,
     "title": "다음은 WINDOW 함수를 사용해서 순위를 구한 것이다. 다음 중 빈칸의 내용으로 올바른 것은?",
     "options": [
       "ROW()",
@@ -16068,11 +14589,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11297,
+    "id": 11275,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 498,
+    "number": 476,
     "title": "다음 보기는 WINDOW 함수에 대한 사용 방법이다. 가장 올바르지 않은 SQL문은 무엇인가?",
     "options": [
       "SUM(급여) OVER\n(PARTITION BY JOB ORDER BY JOB\nRANGE BETWEEN\nUNBOUNDED PRECEDING\nAND CURRENT ROW) SAL",
@@ -16089,11 +14610,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11298,
+    "id": 11276,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 499,
+    "number": 477,
     "title": "다음 중 파티션에 대한 설명으로 올바르지 않은 것은?",
     "options": [
       "AVG(SAL) OVER\n(PARTITION BY MGR\nORDER BY TODAY\nROWS BETWEEN 1 PRECEDING\nAND 1 FOLLOWING)\n: 각 MGR 별로 앞의 한 건, 현재 행, 뒤의 한 건 사이에서 SAL의 평균을 계산한다.",
@@ -16110,11 +14631,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11299,
+    "id": 11277,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 500,
+    "number": 478,
     "title": "다음에서 주어진 Mytest 테이블에서 SQL문을 실행했을 때 결괏값과 같은 SQL문은?(단 union은 정렬도 진행하는 것으로 한다)",
     "options": [
       "select *\nfrom (select job_id, max(salary) from\nMytest\ngroup by salary\nunion all\nselect job_id, min(salary) from\nMytest\ngroup by salary\n);",
@@ -16193,11 +14714,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11300,
+    "id": 11278,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 501,
+    "number": 479,
     "title": "다음 보기의 SQL문을 실행 했을 때 결괏값이 다른 하나는?",
     "options": [
       "select NVL(a.COL1,-1) as data from Mytest a;",
@@ -16240,11 +14761,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11301,
+    "id": 11279,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 502,
+    "number": 480,
     "title": "다음 보기의 결과값과 동일하게 반환하는 SQL문은?",
     "options": [
       "select * from Mytest where 회원번호 = 103 order by 주문금액 desc;",
@@ -16345,11 +14866,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11302,
+    "id": 11280,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 503,
+    "number": 481,
     "title": "다음의 Mytest 테이블에 데이터를 입력 시 에러가 발생하는 것은?",
     "options": [
       "INSERT into Mytest values(4,32,20220420,'004')",
@@ -16372,64 +14893,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11303,
+    "id": 11281,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 504,
-    "title": "다음의 SQL문이 반환하는 결괏값은?",
-    "options": [
-      "",
-      "",
-      "",
-      ""
-    ],
-    "correctIndex": 1,
-    "explanation": "해당 SQL문은 주어진 테이블인 Mytest에서 CO1, COL2, COL3 속성 순서대로 내림차순 정렬을 수행한다. (1,null,1)은 COL1 desc에 의해 먼저 정렬되므로 마지막 행에 위치한다. COL1을 정렬해서 값이 동일한 행은 COL2 desc를 수행하는데, COL2 열도 동일한 행이 있으므로 그 행들에 대해 COL3 desc를 수행한다.",
-    "chapter": "DML",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0297",
-    "_category": "DML",
-    "_correctRate": 10,
-    "references": [
-      {
-        "type": "text",
-        "content": "select * from Mytest order by COL1 desc,  COL2 desc, COL3 desc;"
-      },
-      {
-        "type": "table",
-        "caption": "[Mytest]",
-        "headers": [
-          "COL1",
-          "COL2",
-          "COL3"
-        ],
-        "rows": [
-          [
-            "1",
-            "Null",
-            "1"
-          ],
-          [
-            "2",
-            "10",
-            "14"
-          ],
-          [
-            "2",
-            "10",
-            "12"
-          ]
-        ]
-      }
-    ]
-  },
-  {
-    "id": 11304,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 505,
+    "number": 482,
     "title": "다음 보기의 결괏값을 얻기 위한 SQL문을 작성하시오.",
     "options": [
       "max(COL1), max(COL2), max(COL1)",
@@ -16504,11 +14972,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11305,
+    "id": 11282,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 506,
+    "number": 483,
     "title": "아래의 결괏값을 보고 SQL문의 빈칸에 들어 갈 수 있는 내용을 고르시오.",
     "options": [
       "CUBE(DEPTNO, JOB)",
@@ -16582,11 +15050,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11306,
+    "id": 11283,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 507,
+    "number": 484,
     "title": "다음의 SQL문을 ANSI 표준 SQL문으로 올바르게 변환한 것은?",
     "options": [
       "SELECT * FROM SCOTT.EMP A\nINNER JOIN SCOTT.DEPT B\nON A.DEPTNO = B.DEPTNO WHERE 1=1\nAND B.DNAME = 'SALES';",
@@ -16609,11 +15077,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11307,
+    "id": 11284,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 508,
+    "number": 485,
     "title": "아래와 같은 두개의 테이블이 있을 때 아래의 SQL 결과 건수를 알맞게 나열한 것은?",
     "options": [
       "2, 4, 3, 7, 12",
@@ -16693,11 +15161,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11308,
+    "id": 11285,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 509,
+    "number": 486,
     "title": "EMP 테이블의 급여합계에 대해서 결합 가능한 모든 조건의 합계를 계산하는 것은?",
     "options": [
       "CUBE(DEPTNO, JOB)",
@@ -16714,11 +15182,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11309,
+    "id": 11286,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 510,
+    "number": 487,
     "title": "다음 보기의 SQL을 실행하면 총 12개의 행이 조회된다. (    )에 올바른 것은?",
     "options": [
       "RIGHT OUTER JOIN",
@@ -16789,11 +15257,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11310,
+    "id": 11287,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 511,
+    "number": 488,
     "title": "다음은 Oracle 데이터베이스에서 사용하는 Outer Join의 예제이다. 빈칸을 채워 Oracle의 Outer Join을 표준 ANSI SQL로 변경하시오.",
     "options": [
       "CROSS JOIN",
@@ -16822,11 +15290,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11311,
+    "id": 11288,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 512,
+    "number": 489,
     "title": "다음 보기에서 설명하고 있는 데이터베이스 키의 종류는 무엇인가?",
     "options": [
       "외래키",
@@ -16849,11 +15317,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11312,
+    "id": 11289,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 513,
+    "number": 490,
     "title": "다음 보기의 SQL문을 실행했을 때의 결괏값은?",
     "options": [
       "400",
@@ -16906,11 +15374,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11313,
+    "id": 11290,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 514,
+    "number": 491,
     "title": "다음 SQL의 실행 결과는?",
     "options": [
       "11",
@@ -16933,11 +15401,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11314,
+    "id": 11291,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 515,
+    "number": 492,
     "title": "다음에서 설명하고 있는 식별자는?",
     "options": [
       "A : 인조 식별자, B : 본질 식별자",
@@ -16960,11 +15428,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11315,
+    "id": 11292,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 516,
+    "number": 493,
     "title": "다음에 주어진 두 개의 테이블에 대해서 \"SQL1\"의 실행 결과와 동일한 \"SQL2\" 문을 완성하시오.",
     "options": [
       "SELECT 1 FROM MytestB b\nWHERE a.col1=b.col1 AND\na.col2=b.col2 AND b.col1 < 1400",
@@ -17050,11 +15518,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11316,
+    "id": 11293,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 517,
+    "number": 494,
     "title": "다음은 데이터베이스 파티션 기법에 대한 설명이다. 보기에서 설명하고 있는 파티션 기법은 무엇인가?",
     "options": [
       "HYBRID PARTITION",
@@ -17077,11 +15545,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11317,
+    "id": 11294,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 518,
+    "number": 495,
     "title": "속성의 특성에 따른 분류로 올바른 것은?",
     "options": [
       "일반 속성, 설계 속성, 파생 속성",
@@ -17098,11 +15566,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11318,
+    "id": 11295,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 519,
+    "number": 496,
     "title": "엔터티 간의 관계 중 비식별 관계에 대한 설명으로 올바르지 않은 것은?",
     "options": [
       "반드시 부모 엔터티에 종속한다.",
@@ -17119,11 +15587,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11319,
+    "id": 11296,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 520,
+    "number": 497,
     "title": "아래 ER 모델링의 표기법은 무엇인가?",
     "options": [
       "IDEFIX 표기법",
@@ -17148,11 +15616,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11320,
+    "id": 11297,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 521,
+    "number": 498,
     "title": "정규화를 수행하지 않고 엔터티에 데이터를 입력할 때 불필요한 데이터를 같이 입력하거나 삭제하면 다른 데이터까지 같이 삭제되는 문제는?",
     "options": [
       "연결 함정",
@@ -17169,11 +15637,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11321,
+    "id": 11298,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 522,
+    "number": 499,
     "title": "다음 중 3차 정규화에 대한 설명으로 가장 올바른 것은?",
     "options": [
       "이행함수 종속성을 제거",
@@ -17190,11 +15658,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11322,
+    "id": 11299,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 523,
+    "number": 500,
     "title": "키 엔터티라고도 하며 발생 시점에 따라서 엔터티를 분류할 때 독립적으로 생성되는 엔터티는 무엇인가?",
     "options": [
       "종결 엔터티",
@@ -17211,11 +15679,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11323,
+    "id": 11300,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 524,
+    "number": 501,
     "title": "데이터베이스 파티션 기법 중 날짜 및 숫자처럼 연속된 값을 기준으로 만드는 파티션 기법은?",
     "options": [
       "Composite Partition",
@@ -17232,11 +15700,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11324,
+    "id": 11301,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 525,
+    "number": 502,
     "title": "다음은 데이터베이스 모델링 단계에 대한 설명이다. 올바르지 않은 것은?",
     "options": [
       "개념적 모델링 이후에 구체적인 업무 중심의 모델링과 정규화를 수행하는 단계가 논리적 모델링 단계이다.",
@@ -17253,11 +15721,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11325,
+    "id": 11302,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 526,
+    "number": 503,
     "title": "다음 중 서브쿼리에 대한 설명으로 올바르지 않은 것은?",
     "options": [
       "서브쿼리에서 메인쿼리의 칼럼을 사용할 수 있고 메인쿼리에서도 서브쿼리의 칼럼을 사용할 수 있다.",
@@ -17274,11 +15742,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11326,
+    "id": 11303,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 527,
+    "number": 504,
     "title": "다음 중 Mytest 테이블에서 주어진 결과를 반환하는 SQL문으로 올바른 것은?",
     "options": [
       "SELECT DNAME, SUM(SAL) FROM Mytest GROUP BY ROLLUP(DNAME, YEAR, (DNAME, YEAR));",
@@ -17394,11 +15862,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11327,
+    "id": 11304,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 528,
+    "number": 505,
     "title": "다음 SQL문의 실행 결과로 올바른 것은?",
     "options": [
       "SELECT TRUNC(35.8) FROM DUAL -> 36",
@@ -17415,11 +15883,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11328,
+    "id": 11305,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 529,
+    "number": 506,
     "title": "다음 중 SQL문의 실행 순서로 올바른 것은?",
     "options": [
       "FROM -> WHERE -> GROUP BY -> SELECT -> HAVING -> ORDER BY",
@@ -17436,11 +15904,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11329,
+    "id": 11306,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 530,
+    "number": 507,
     "title": "다음 SQL문에 대한 실행 계획을 읽는 순서로 올바른 것은?",
     "options": [
       "6,5,4,3,2,1",
@@ -17463,11 +15931,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11330,
+    "id": 11307,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 531,
+    "number": 508,
     "title": "SQL SERVER에 구축된 TEAMSCORE 테이블에서 WINCNT가 가장 높은 4위까지 조회한다. 단, WINCNT에 동일한 순위 팀이 있으면 같이 조회하는 SQL문으로 올바른 것은?",
     "options": [
       "SELECT TOP(4) WITH TIES TEAMNAME, WINCNT\nFROM TEAMSCORE\nORDER BY WINCNT DESC;",
@@ -17532,11 +16000,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11331,
+    "id": 11308,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 532,
+    "number": 509,
     "title": "다음 중 LIKE문에서 세 번째 문자가 'K'인 문자열을 조회하는 것으로 가장 올바른 것은?",
     "options": [
       "SELECT * FROM EMP WHERE like '_ _K%'",
@@ -17553,11 +16021,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11332,
+    "id": 11309,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 533,
+    "number": 510,
     "title": "다음 중 세 번째 문자가 'N'인 문자열을 검색하는  조건으로 적절한 것은?",
     "options": [
       "SELECT * FROM 테이블명 WHERE like '_ _N%'",
@@ -17574,11 +16042,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11333,
+    "id": 11310,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 534,
+    "number": 511,
     "title": "다음 SQL문과 동일한 결과를 반환하는 SQL문은?",
     "options": [
       "select * from Mytest where COL1 = 1 or (COL2 = 3 or COL2 = 4);",
@@ -17601,11 +16069,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11334,
+    "id": 11311,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 535,
+    "number": 512,
     "title": "다음 WINDOW FUNCTION이 포함된 SQL문의 실행 결과로 올바른 것은?",
     "options": [
       "4500, 7500, 7500, 3000, 4500, 4500, 5000, 8500, 8500",
@@ -17760,11 +16228,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11335,
+    "id": 11312,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 536,
+    "number": 513,
     "title": "다음 주어진 SQL문을 수행하였을 때 최종적으로 반영되는 값은 무엇인가?",
     "options": [
       "1,8,9",
@@ -17787,11 +16255,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11336,
+    "id": 11313,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 537,
+    "number": 514,
     "title": "다음 중 B-Tree 인덱스에 대한 설명으로 올바른 것은?",
     "options": [
       "정보계와 같은 Data warehouse 에서 사용하고 많은 양의 데이터를 검색할 때 사용한다.",
@@ -17808,11 +16276,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11337,
+    "id": 11314,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 538,
+    "number": 515,
     "title": "다음 중 해시 조인에 대해서 올바르지 않은 것은?",
     "options": [
       "조인 칼럼에 인덱스가 없어도 사용이 가능하다.",
@@ -17829,11 +16297,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11338,
+    "id": 11315,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 539,
+    "number": 516,
     "title": "다음 중 데이터베이스 관리 언어에 대한 설명으로 올바르지 않은 것은?",
     "options": [
       "DML은 비절차형 언어로 데이터를 조작할 수 있다.",
@@ -17850,11 +16318,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11339,
+    "id": 11316,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 540,
+    "number": 517,
     "title": "SQL문을 ANSI 표준 SQL문으로 변환한 것으로 올바른 것은?",
     "options": [
       "SELECT * FROM SCOTT.EMP A INNER JOIN SCOTT.DEPT B\nON A.DEPTNO = B.DEPTNO WHERE 1=1\nAND B.DNAME = 'KIM';",
@@ -17877,11 +16345,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11340,
+    "id": 11317,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 541,
+    "number": 518,
     "title": "다음의 계층형 질의에서 리프 노드 여부를 출력하려고 한다. (    )에 올바른 것은?",
     "options": [
       "CONNECT_BY_LEAF",
@@ -17904,11 +16372,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11341,
+    "id": 11318,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 542,
+    "number": 519,
     "title": "다음의 SQL문을 실행한 결과로 올바른 것은?",
     "options": [
       "9",
@@ -17979,11 +16447,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11342,
+    "id": 11319,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 543,
+    "number": 520,
     "title": "다음 중 서브쿼리에 대한 설명으로 올바르지 않은 것은?",
     "options": [
       "서브쿼리는 SELECT절, FROM절, WHERE절 등에서 사용 가능하다.",
@@ -18000,11 +16468,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11343,
+    "id": 11320,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 544,
+    "number": 521,
     "title": "다음 중 SQL문을 가장 잘 설명하고 있는 것은?",
     "options": [
       "어떤 상사보다도 연봉이 낮은 부하 직원",
@@ -18099,11 +16567,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11344,
+    "id": 11321,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 545,
+    "number": 522,
     "title": "테이블 A, B, C가 있다. 다음 중 DELETE FROM A 쿼리를 수행한 후에 테이블 C 테이블에 남아 있는 데이터로 가장 올바른 것은?",
     "options": [
       "(1,1)",
@@ -18180,11 +16648,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11345,
+    "id": 11322,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 546,
+    "number": 523,
     "title": "다음은 테이블 생성 시 사용하는 제약조건에 대한 설명이다. 가장 올바르지 않은 것은?",
     "options": [
       "NOT NULL : 칼럼에 NULL 값을 입력할 수 없도록 한다. 기본키의 경우 별도로 지정하지 않아도 된다.",
@@ -18201,11 +16669,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11346,
+    "id": 11323,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 547,
+    "number": 524,
     "title": "다음 중 SQL에서 실행 결과가 같은 것은?",
     "options": [
       "1,2,3",
@@ -18296,11 +16764,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11347,
+    "id": 11324,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 548,
+    "number": 525,
     "title": "다음의 주어진 테이블에서 아래의 SQL문을 수행하였을 때의 결과가 RESULT와 같을 때 SQL문의 (ㄱ)에 들어갈 것은?",
     "options": [
       "LAG",
@@ -18388,11 +16856,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11348,
+    "id": 11325,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 549,
+    "number": 526,
     "title": "다음은 Oracle 데이터베이스의 계층형 질의에 대한 것이다. 올바르지 않은 것은?",
     "options": [
       "루트 노드의 LEVEL 값은 1이 아니다.",
@@ -18409,98 +16877,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11349,
+    "id": 11326,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 550,
-    "title": "Mytest 테이블에 대해서 SQL문을 실행햇을 때 결과로 올바른 것은?",
-    "options": [
-      "",
-      "",
-      "",
-      ""
-    ],
-    "correctIndex": 3,
-    "explanation": "MGRID가 NULL인 값에서 시작해서 EMPID로 조회를 전개하는 순방향 조회를 하고 있다. 순방향 전개를 하면서 EMPID로 정렬한다.",
-    "chapter": "계층형 질의",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0352",
-    "_category": "계층형 질의",
-    "_correctRate": 10,
-    "references": [
-      {
-        "type": "text",
-        "content": "SELECT *\nFROM Mytest\nSTART WITH MGRID IS NULL\nCONNECT BY PRIOR EMPID = MGRID\nAND today BETWEEN '2017-01-01' AND '2022-12-31'\nORDER SIBLINGS BY EMPID;"
-      },
-      {
-        "type": "table",
-        "caption": "[Mytest]",
-        "headers": [
-          "EMPID",
-          "NAME",
-          "TODAY",
-          "MGRID"
-        ],
-        "rows": [
-          [
-            "1000",
-            "조조",
-            "2017-01-01",
-            "NULL"
-          ],
-          [
-            "1001",
-            "유비",
-            "2017-01-01",
-            "1000"
-          ],
-          [
-            "1002",
-            "관우",
-            "2020-01-01",
-            "1000"
-          ],
-          [
-            "1003",
-            "조자룡",
-            "2020-01-01",
-            "1000"
-          ],
-          [
-            "1004",
-            "여포",
-            "2020-01-01",
-            "NULL"
-          ],
-          [
-            "1005",
-            "동탁",
-            "2022-01-01",
-            "1004"
-          ],
-          [
-            "1006",
-            "사마위",
-            "2022-01-01",
-            "1004"
-          ],
-          [
-            "1007",
-            "순욱",
-            "2022-01-01",
-            "1004"
-          ]
-        ]
-      }
-    ]
-  },
-  {
-    "id": 11350,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 551,
+    "number": 527,
     "title": "다음의 SQL문을 실행했을 때 아래 결과가 조회되도록 (ㄱ), (ㄴ)에 들어갈 숫자를 고르시오.",
     "options": [
       "ㄱ : 1, ㄴ : 4",
@@ -18601,11 +16982,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11351,
+    "id": 11327,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 552,
+    "number": 528,
     "title": "다음 SQL문을 실행하여 나오는 결과의 빈칸 (ㄱ),(ㄴ)을 작성하시오.",
     "options": [
       "ㄱ : 3, ㄴ : 2",
@@ -18696,11 +17077,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11352,
+    "id": 11328,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 553,
+    "number": 529,
     "title": "다음 SQL문의 실행 결과는?",
     "options": [
       "400",
@@ -18723,11 +17104,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11353,
+    "id": 11329,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 554,
+    "number": 530,
     "title": "날짜값을 2020, 02와 같이 조회되도록 SQL문을 완성하시오.",
     "options": [
       "ㄱ : 2, ㄴ : '0'",
@@ -18762,11 +17143,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11354,
+    "id": 11330,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 555,
+    "number": 531,
     "title": "DEPT 테이블에는 총4개의 데이터가 있다. 다음의 SQL문을 실행하면 총 몇 개의 행이 조회되는가?",
     "options": [
       "16",
@@ -18789,11 +17170,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11355,
+    "id": 11331,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 556,
+    "number": 532,
     "title": "다음의 SQL문을 실행한 결과를 쓰시오.",
     "options": [
       "4,8",
@@ -18862,11 +17243,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11356,
+    "id": 11332,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 557,
+    "number": 533,
     "title": "다음 주어진 SQL문의 빈칸에 그룹 함수를 쓰시오.",
     "options": [
       "GROUPING SETS(COL1,(COL2,COL1))",
@@ -18986,11 +17367,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11357,
+    "id": 11333,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 558,
+    "number": 534,
     "title": "다음은 도메인에 대한 설명이다. 특징으로 알맞지 않은 것은?",
     "options": [
       "속성을 명사로 분리한다.",
@@ -19007,11 +17388,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11358,
+    "id": 11334,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 559,
+    "number": 535,
     "title": "다음은 주식별자에 대한 설명이다. 올바르지 않은 것은?",
     "options": [
       "자주 변경되는 값을 주식별자로 지정해야 한다.",
@@ -19028,11 +17409,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11359,
+    "id": 11335,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 560,
+    "number": 536,
     "title": "아래 시나리오에서 엔터티로 가장 적절한 것은?",
     "options": [
       "배송지 주소",
@@ -19055,11 +17436,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11360,
+    "id": 11336,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 561,
+    "number": 537,
     "title": "다음 중 주식별자의 특징으로 올바르지 않은 것은?",
     "options": [
       "존재성 : 주식별자로 지정되면 데이터값이 존재하지 않을 수 있다.",
@@ -19076,11 +17457,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11361,
+    "id": 11337,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 562,
+    "number": 538,
     "title": "다음 중 ERD에 대한 설명으로 올바르지 않은 것은?",
     "options": [
       "주문일자는 고객이 주문을 한 일자로 배송이 완료된 후에 갱신되지 않는다.",
@@ -19105,11 +17486,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11362,
+    "id": 11338,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 563,
+    "number": 539,
     "title": "다음 중 아래 테이블에 대한 이상현상을 설명한 것 중 가장 적절하지 않은 것은?",
     "options": [
       "삭제 이상 : 장비의 고객정보가 삭제되면 A카드 상품의 정보도 삭제된다.",
@@ -19133,11 +17514,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11363,
+    "id": 11339,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 564,
+    "number": 540,
     "title": "다음 중 속성에 대한 특징으로 알맞은 것은?",
     "options": [
       "서술식 속성명을 사용할 수 있다.",
@@ -19154,11 +17535,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11364,
+    "id": 11340,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 565,
+    "number": 541,
     "title": "아래의 SQL문을 수행한 후 보기의 쿼리문을 실행할 때 잘못된 것은?",
     "options": [
       "SELECT N1 FROM (SELECT * FROM MYTEST) ORDER BY 2;",
@@ -19181,11 +17562,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11365,
+    "id": 11341,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 566,
+    "number": 542,
     "title": "야구선수 테이블에서 선수명과 팀명은 오름차순, 연봉은 내림차순으로 정렬하는 결괏값을 반환하는 SQL문은?(단, 야구선수 테이블은 칼럼이 선수명, 팀명, 연봉 순으로 구성)",
     "options": [
       "SELECT * FROM 야구선수 ORDER BY 선수명, 팀명, DESC, 연봉 ASC",
@@ -19202,11 +17583,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11366,
+    "id": 11342,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 567,
+    "number": 543,
     "title": "다음 중 NULL 값을 반환하는 쿼리는 어떤 것인가?",
     "options": [
       "SELECT NVL(null,'B') FROM DUAL",
@@ -19223,11 +17604,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11367,
+    "id": 11343,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 568,
+    "number": 544,
     "title": "다음의 SQL문이 실행되었을 때 \"실행 결과\"와 같이 조회되는 것은?",
     "options": [
       "SELECT * FROM MYTEST;",
@@ -19250,11 +17631,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11368,
+    "id": 11344,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 569,
+    "number": 545,
     "title": "다음 주어진 테이블에서 아래의 SQL문을 수행하였을 때의 결과가 RESULT와 같을 때 SQL문의 빈칸으로 올바른 것은?",
     "options": [
       "CUBE(JOB)",
@@ -19287,11 +17668,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11369,
+    "id": 11345,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 570,
+    "number": 546,
     "title": "다음 중 GROUP 함수에 대한 설명으로 올바른 것은?",
     "options": [
       "ROLLUP은 CUBE에 비해서 시스템에 부하를 많이 발생시키므로 반드시 튜닝해야 한다.",
@@ -19308,11 +17689,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11370,
+    "id": 11346,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 571,
+    "number": 547,
     "title": "다음의 SQL문을 실행한 결과로 올바른 것은?",
     "options": [
       "4",
@@ -19340,11 +17721,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11371,
+    "id": 11347,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 572,
+    "number": 548,
     "title": "트랜잭션이 가지는 특징에 해당되지 않는 것은?",
     "options": [
       "통합성",
@@ -19361,11 +17742,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11372,
+    "id": 11348,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 573,
+    "number": 549,
     "title": "다음 주어진 테이블에 대해서 아래의 SQL문을 수행하였을 때의 결과로 알맞은 것은?",
     "options": [
       "11",
@@ -19393,11 +17774,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11373,
+    "id": 11349,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 574,
+    "number": 550,
     "title": "다음의 실행 결과를 조회하는 SQL문은?",
     "options": [
       "SELECT NTITLE() OVER (PARTITION BY DEPTNO ORDER BY SAL DESC) RN, DEPTNO, SAL\nFROM LIMBEST.EMP;",
@@ -19421,11 +17802,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11374,
+    "id": 11350,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 575,
+    "number": 551,
     "title": "동일한 순위에 대해서 동일한 순위를 부여하고 다음 순위를 건너뛰지 않는 것은?",
     "options": [
       "RATIO.....TO REPORT",
@@ -19442,11 +17823,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11375,
+    "id": 11351,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 576,
+    "number": 552,
     "title": "다음의 SQL문을 수행하였을 때의 결과로 알맞은 것은?",
     "options": [
       "200",
@@ -19469,11 +17850,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11376,
+    "id": 11352,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 577,
+    "number": 553,
     "title": "다음의 SQL문과 동일한 결괏값을 보여주는 SQL문은?",
     "options": [
       "SELECT * FROM Mytesta a left\nouter join Mytestb b\non a.col1 = b.col1\nunion\nSELECT * FROM Mytesta a right\nouter join Mytestb b\non a.col1 = b.col1;",
@@ -19496,11 +17877,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11377,
+    "id": 11353,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 578,
+    "number": 554,
     "title": "주어진 테이블에서 중복되는 이름 중 COL1이 제일 작은 것만 반환하는 SQL문을 완성하시오.",
     "options": [
       "SELECT MIN(COL1), COL2 FROM Mytest GROUP BY COL1",
@@ -19524,11 +17905,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11378,
+    "id": 11354,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 579,
+    "number": 555,
     "title": "아래의 SQL문에 대한 설명으로 올바른 것은?",
     "options": [
       "테이블의 EMP_NAME이 A 또는 a로 끝나는 모든 행이 검색된다.",
@@ -19551,11 +17932,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11379,
+    "id": 11355,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 580,
+    "number": 556,
     "title": "다음 중 물리적 테이블 명으로 올바른 것은?",
     "options": [
       "100-ABC",
@@ -19572,11 +17953,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11380,
+    "id": 11356,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 581,
+    "number": 557,
     "title": "다음 중 반올림을 수행하는 함수는?",
     "options": [
       "NULLIF",
@@ -19593,11 +17974,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11381,
+    "id": 11357,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 582,
+    "number": 558,
     "title": "다음 SQL문을 실행했을 때 오류가 발생하는 것은?",
     "options": [
       "UPDATE T_ORDER SET C1=1",
@@ -19620,11 +18001,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11382,
+    "id": 11358,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 583,
+    "number": 559,
     "title": "다음 중 ORDER BY에 대한 특징으로 옳지 않은 것은?",
     "options": [
       "ORDER BY 칼럼명에서 정렬 옵션을 주지 않은 경우에 내림차순이 된다.",
@@ -19641,43 +18022,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11383,
+    "id": 11359,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 584,
-    "title": "다음 테이블에 대해서 주어진 SQL문을 수행한 결과로 알맞은 것은?",
-    "options": [
-      "",
-      "",
-      "",
-      ""
-    ],
-    "correctIndex": 3,
-    "explanation": "위의 SQL문은 1번째 테이블에서 주문자별로 grouping 하였을 때 각 주문자별로 주문금액의 합계를 계산하고 그 값이 두 번째 테이블의 실적범위에 해당하는 곳에서 고객등급과 주문자 정보를 조회한다.",
-    "chapter": "그룹 함수",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0392",
-    "_category": "집계 함수",
-    "_correctRate": 10,
-    "references": [
-      {
-        "type": "text",
-        "content": "SELECT A.JUMIN, B.CUSTRANK\nFROM (SELECT JUMUN, SUM(price)\nAS TOTAL,\nFROM T_ORDER\nGROUP BY JUMUN) A, T_CUST B\nWHERE 1=1\nAND A.TOTAL BETWEEN B.MINPRICE AND B.MAXPRICE;"
-      },
-      {
-        "type": "image",
-        "src": "/sqld-images/j392-1.png",
-        "alt": "문항 이미지 j392-1"
-      }
-    ]
-  },
-  {
-    "id": 11384,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 585,
+    "number": 560,
     "title": "아래 각각 3개의 SQL 수행 결과로 가장 적절한 것은?",
     "options": [
       "10, 10, 10",
@@ -19705,11 +18054,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11385,
+    "id": 11360,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 586,
+    "number": 561,
     "title": "SQL문의 집합 연산자에 대한 설명이다. 다음 중 INTERSECT로 올바른 것은?",
     "options": [
       "양쪽 모두 포함된 행을 검색한다.",
@@ -19726,11 +18075,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11386,
+    "id": 11361,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 587,
+    "number": 562,
     "title": "다음 중 Window Function에 대한 설명으로 알맞은 것은?",
     "options": [
       "GROUP BY와 Window Function은 병행하여 사용할 수 있다.",
@@ -19747,11 +18096,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11387,
+    "id": 11362,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 588,
+    "number": 563,
     "title": "어느 기업의 직원 테이블(EMP)이 직급(GRADE)별로 사원 500명, 대리 100명, 과장 30명, 차장 10명, 부장 5명, 직급이 정해지지 않은(NULL) 사람 25명으로 구성되어 있을 때, 다음 중 SQL문을 SQL1)부터 SQL3)까지 순차적으로 실행한 결과 건수를 순서대로 나열한 것은?",
     "options": [
       "670, 40, 6",
@@ -19774,11 +18123,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11388,
+    "id": 11363,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 589,
+    "number": 564,
     "title": "주어진 테이블에 대해서 아래와 같은 결괏값이 나오도록 SQL 빈칸을 완성하시오.",
     "options": [
       "4",
@@ -19806,11 +18155,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11389,
+    "id": 11364,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 590,
+    "number": 565,
     "title": "다음의 SQL 실행 결과는 무엇인가?",
     "options": [
       "NULL",
@@ -19833,11 +18182,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11390,
+    "id": 11365,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 591,
+    "number": 566,
     "title": "아래 SQL에서 출력되는 ROWS의 개수를 구하시오.",
     "options": [
       "20건",
@@ -19865,11 +18214,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11391,
+    "id": 11366,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 592,
+    "number": 567,
     "title": "다음 보기가 설명하는 3층 스키마는 무엇인가?",
     "options": [
       "논리 스키마",
@@ -19892,11 +18241,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11392,
+    "id": 11367,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 593,
+    "number": 568,
     "title": "다음 보기에서 One to One, One to Many를 표현하고 있다. ERD에서 표현하고 있는 두 엔터티 간의 관계에서 수행되는 인스턴스의 수를 무엇이라고 하나?",
     "options": [
       "관계 분류",
@@ -19920,11 +18269,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11393,
+    "id": 11368,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 594,
+    "number": 569,
     "title": "식별자 분류체계에서 업무에 의해서 만들어지는 식별자로 대체 여부로 분류되는 것은?",
     "options": [
       "단일 식별자",
@@ -19941,11 +18290,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11394,
+    "id": 11369,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 595,
+    "number": 570,
     "title": "다음 중 ERD에 대한 설명으로 가장 올바르지 않은 것은?",
     "options": [
       "고객은 개인고객이면서 동시에 기업고객이 되는 포괄적 관계이다.",
@@ -19969,11 +18318,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11395,
+    "id": 11370,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 596,
+    "number": 571,
     "title": "다음의 ANSI JOIN에서 가장 올바르지 않은 것은?",
     "options": [
       "SELECT E.EMPNO, E.DEPTNO, D.DAME FROM EMP E \nINNER JOIN DEPT D ON (E.DEPTNO = D.DEPTNO);",
@@ -19990,11 +18339,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11396,
+    "id": 11371,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 597,
+    "number": 572,
     "title": "아래의 SQL 구문 중 오류가 발생하는 것은?",
     "options": [
       "SELECT  A.NO, A.C1, B.C2\nFROM MytestA A\nJOIN MytestB B\nON (A.NO = B.NO);",
@@ -20017,11 +18366,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11397,
+    "id": 11372,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 598,
+    "number": 573,
     "title": "다음 중 UNION구에 대한 설명으로 가장 올바른 것은?",
     "options": [
       "정렬을 수행하지 않고 교집합을 생성한다.",
@@ -20038,11 +18387,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11398,
+    "id": 11373,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 599,
+    "number": 574,
     "title": "다음 중 SQL의 결과가 다른 것은?",
     "options": [
       "SELECT * FROM Mytest WHERE \nCOL1 <= 200\nAND COL2 >= 200;",
@@ -20066,11 +18415,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11399,
+    "id": 11374,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 600,
+    "number": 575,
     "title": "다음 중 데이터베이스에서 작업을 처리하는 트랜잭션의 특징에 해당되지 않는 것은?",
     "options": [
       "일관성",
@@ -20087,11 +18436,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11400,
+    "id": 11375,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 601,
+    "number": 576,
     "title": "A 사용자가 \"홍길동\" 데이터를 입력하고 아직 COMMIT 되지 않은 데이터에 대한 설명으로 잘못된 것은?",
     "options": [
       "B 사용자는 홍길동 데이터를 수정할 수 있다.",
@@ -20108,11 +18457,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11401,
+    "id": 11376,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 602,
+    "number": 577,
     "title": "다음 중 COL100에 NULL이 없는 데이터를 찾는 SQL로 올바른 것은?",
     "options": [
       "SELECT COL1 FROM T1 WHERE COL100 NOT IN (NULL)",
@@ -20129,11 +18478,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11402,
+    "id": 11377,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 603,
+    "number": 578,
     "title": "SQL의 LIKE 구문을 사용해서 데이터 내부에 \"_\"이 있는 것을 검색하는 것은?",
     "options": [
       "SELECT * FROM Mytest WHERE NAME LIKE '%_%' ESCAPE '_'",
@@ -20157,11 +18506,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11403,
+    "id": 11378,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 604,
+    "number": 579,
     "title": "다음의 SQL문을 실행했을 때 그 결과가 다른 하나는 무엇인가?",
     "options": [
       "금액D",
@@ -20189,11 +18538,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11404,
+    "id": 11379,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 605,
+    "number": 580,
     "title": "다음 중 차집합을 구할 수 있는 집합 연산자로 올바른 것은?",
     "options": [
       "intersect",
@@ -20210,11 +18559,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11405,
+    "id": 11380,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 606,
+    "number": 581,
     "title": "다음은 WINDOW FUNCTION에 대한 사용 방법이다. 가장 올바르지 않은 SQL문은 무엇인가?",
     "options": [
       "SUM(급여) OVER(PARTITION BY JOB ORDER BY JOB RANGE BETWEEN UNBOUNDED\nPRECEDING AND CURRENT ROW) SAL",
@@ -20231,11 +18580,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11406,
+    "id": 11381,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 607,
+    "number": 582,
     "title": "다음 중 서브쿼리를 올바르게 구분한 것은?",
     "options": [
       "A : 인라인 뷰\nB : 스칼라 서브쿼리\nC : 서브쿼리",
@@ -20258,11 +18607,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11407,
+    "id": 11382,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 608,
+    "number": 583,
     "title": "다음 중 데이터베이스 무결성을 확보하기 위한 방안으로 가장 올바르지 않은 것은?",
     "options": [
       "애플리케이션에서 무결성 검사 로직을 추가한다.",
@@ -20279,11 +18628,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11408,
+    "id": 11383,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 609,
+    "number": 584,
     "title": "아래의 SQL문을 수행하였을 때의 결과가 [결과]와 같을 때 이에 대한 설명으로 올바르지 않은 것은?",
     "options": [
       "LEVEL은 계층의 깊이를 의미하며 TEST1은 최상위 계층이다.",
@@ -20376,11 +18725,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11409,
+    "id": 11384,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 610,
+    "number": 585,
     "title": "다음 주어진 테이블에서 아래의 SQL문의 결과값으로 알맞은 것은?",
     "options": [
       "8건",
@@ -20529,11 +18878,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11410,
+    "id": 11385,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 611,
+    "number": 586,
     "title": "다음의 SQL문의 실행 결과로 올바른 것은?(단,오늘의 날짜는 2022년 4월 30일이고 시간은 무시)",
     "options": [
       "에러가 발생한다.",
@@ -20556,11 +18905,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11411,
+    "id": 11386,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 612,
+    "number": 587,
     "title": "다음 SQL문 중에서 결괏값이 다른 하나는?",
     "options": [
       "SELECT CONCAT('0', '5') FROM DUAL",
@@ -20577,11 +18926,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11412,
+    "id": 11387,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 613,
+    "number": 588,
     "title": "다음 SQL문 중에서 결괏값이 다른 하나는?",
     "options": [
       "SELECT CONCAT('AB', 'CD') FROM DUAL;",
@@ -20598,11 +18947,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11413,
+    "id": 11388,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 614,
+    "number": 589,
     "title": "다음 중 아래 SQL문의 결괏값으로 올바른 것은?",
     "options": [
       "67",
@@ -20625,11 +18974,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11414,
+    "id": 11389,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 615,
+    "number": 590,
     "title": "다음 중 잘못된 SQL문을 고르시오.",
     "options": [
       "SELECT b.dname, a.ename, a.sal\nFROM Limbest.emp a,\nLimbest.dept b\nwhere a.deptno = b.deptno\nand sal IN\n(SELECT SAL from Limbest.emp\nwhere DEPTNO = 10);",
@@ -20729,11 +19078,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11415,
+    "id": 11390,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 616,
+    "number": 591,
     "title": "다음 중 데이터베이스 테이블의 제약조건에 대한 설명으로 올바르지 않은 것은?",
     "options": [
       "고유키로 지정되면 모든 칼럼들은 NULL 값을 가질 수 없다.",
@@ -20750,11 +19099,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11416,
+    "id": 11391,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 617,
+    "number": 592,
     "title": "다음의 테이블이 있을 경우 SQL을 수행하였을 때 출력결과를 순서대로 나열한 것은?",
     "options": [
       "1,2,30",
@@ -20795,11 +19144,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11417,
+    "id": 11392,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 618,
+    "number": 593,
     "title": "다음 중 문자열의 m번째 위치에서 n개의 길이에 해당하는 문자열을 반환하는 함수는?",
     "options": [
       "SUBSTR(문자열,M,N)",
@@ -20816,11 +19165,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11418,
+    "id": 11393,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 619,
+    "number": 594,
     "title": "다음의 SQL문 실행 결과로 올바른 것은?",
     "options": [
       "1,1",
@@ -20869,11 +19218,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11419,
+    "id": 11394,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 620,
+    "number": 595,
     "title": "다음의 SQL문 실행 결과로 조회되는 행의 개수는?",
     "options": [
       "8",
@@ -20922,11 +19271,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11420,
+    "id": 11395,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 621,
+    "number": 596,
     "title": "다음 보기와 동일한 SQL문은?",
     "options": [
       "SELECT * FROM MYTEST\nWHERE COL1 <= :A\nOR COL1 >= B",
@@ -20949,11 +19298,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11421,
+    "id": 11396,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 622,
+    "number": 597,
     "title": "다음 SQL문의 ( )를 완성하시오.",
     "options": [
       "ㄱ: RANK(), ㄴ: DENSE_RANK()",
@@ -21135,11 +19484,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11422,
+    "id": 11397,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 623,
+    "number": 598,
     "title": "다음의 SQL문 실행 결과를 고르시오.",
     "options": [
       "4",
@@ -21162,11 +19511,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11423,
+    "id": 11398,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 624,
+    "number": 599,
     "title": "다음 중 ROWID에 대한 설명으로 올바르지 않은 것은?",
     "options": [
       "오브젝트 번호, 상대파일 번호, 블록 번호, 데이터 번호로 구성된다.",
@@ -21183,11 +19532,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11424,
+    "id": 11399,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 625,
+    "number": 600,
     "title": "다음 2개의 SQL문이 같은 결과를 조회할 수 있도록 빈칸을 작성하시오.",
     "options": [
       "ProductName, ()",
@@ -21261,11 +19610,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11425,
+    "id": 11400,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 626,
+    "number": 601,
     "title": "SELECT문의 결과 집합에 따른 가상의 순번은 무엇인가?",
     "options": [
       "HASH",
@@ -21282,11 +19631,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11426,
+    "id": 11401,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 627,
+    "number": 602,
     "title": "DBA가 데이터를 잘못 수정하여서 COMMIT 하기 전 원래의 값으로 복원하는 SQL구는?",
     "options": [
       "REVOKE",
@@ -21303,11 +19652,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11427,
+    "id": 11402,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 628,
+    "number": 603,
     "title": "다음은 데이터베이스 모델링에 대한 설명으로 가장 올바른 것은?",
     "options": [
       "도메인",
@@ -21330,11 +19679,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11428,
+    "id": 11403,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 629,
+    "number": 604,
     "title": "다음의 정규화 단계에서 주식별자와 관련성이 가장 낮은 것은?",
     "options": [
       "BCNF",
@@ -21351,11 +19700,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11429,
+    "id": 11404,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 630,
+    "number": 605,
     "title": "엔터티의 종류 중 다:다 관계를 해소하려는 목적으로 인위적으로 만들어진 엔터티는 무엇인가?",
     "options": [
       "종속 엔터티",
@@ -21372,11 +19721,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11430,
+    "id": 11405,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 631,
+    "number": 606,
     "title": "다음은 ABC 증권회사의 데이터베이스 모델링이다. 모델링은 고객과 계좌 간의 관계를 표현한 것이다. 보기 중에서 그 설명이 올바르지 않은 것은?",
     "options": [
       "한 명의 고객에게 하나의 고객등급만 부여된다.",
@@ -21400,11 +19749,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11431,
+    "id": 11406,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 632,
+    "number": 607,
     "title": "ERD 작성 순서로 올바른 것을 고르시오.",
     "options": [
       "가->나->다->마->바->라",
@@ -21427,11 +19776,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11432,
+    "id": 11407,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 633,
+    "number": 608,
     "title": "다음의 ERD에서 식별자 분류로 올바른 것은?",
     "options": [
       "ㄱ-내부식별자, ㄴ-단일식별자, ㄷ-보조식별자",
@@ -21459,11 +19808,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11433,
+    "id": 11408,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 634,
+    "number": 609,
     "title": "식별자 중에서 비즈니스 프로세스에 의하여 만들어지는 식별자로 대체 여부로 분리되는 식별자는 무엇인가?",
     "options": [
       "인조 식별자",
@@ -21480,60 +19829,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11434,
+    "id": 11409,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 635,
-    "title": "주어진 데이터에서 아래의 SQL문을 수행된 결과로 옳은 것은?",
-    "options": [
-      "",
-      "",
-      "",
-      ""
-    ],
-    "correctIndex": 3,
-    "explanation": "COALESCE 함수는 함수 내 비교식에서 NULL 값이 아닌 값으로 연산을 수행한다.",
-    "chapter": "함수",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0451",
-    "_category": "NULL",
-    "_correctRate": 10,
-    "references": [
-      {
-        "type": "text",
-        "content": "SELECT COALESCE(COL1, COL2 * 50,50) FROM sqld_12;"
-      },
-      {
-        "type": "table",
-        "caption": "[sqld_12]",
-        "headers": [
-          "COL1",
-          "COL2"
-        ],
-        "rows": [
-          [
-            "100",
-            "100"
-          ],
-          [
-            "NULL",
-            "60"
-          ],
-          [
-            "NULL",
-            "NULL"
-          ]
-        ]
-      }
-    ]
-  },
-  {
-    "id": 11435,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 636,
+    "number": 610,
     "title": "주어진 테이블들에 대해서 아래의 SQL문을 수행하였을 때 반환되는 ROW값의 수는 얼마인가?",
     "options": [
       "5",
@@ -21619,11 +19919,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11436,
+    "id": 11410,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 637,
+    "number": 611,
     "title": "다음의 설명에 해당하는 join은?",
     "options": [
       "INNER JOIN",
@@ -21646,11 +19946,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11437,
+    "id": 11411,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 638,
+    "number": 612,
     "title": "순위 함수에 대한 설명 중 틀린 것은 무엇인가?",
     "options": [
       "순위 함수 사용 시 ORDER BY절은 입력하지 않아도 된다.",
@@ -21667,11 +19967,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11438,
+    "id": 11412,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 639,
+    "number": 613,
     "title": "다음의 GROUP BY문구와 동일한 SQL문을 고르시오.",
     "options": [
       "동일한 보기가 없음",
@@ -21694,11 +19994,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11439,
+    "id": 11413,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 640,
+    "number": 614,
     "title": "주어진 SQL문에서 오류가 발생하지 않는 것은?",
     "options": [
       "4",
@@ -21721,11 +20021,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11440,
+    "id": 11414,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 641,
+    "number": 615,
     "title": "다음 계층형 쿼리문에 대한 설명으로 옳지 않은 것은?",
     "options": [
       "ORDER SIBLINGS BY를 하면 전체 테이블 기준으로 정렬한다.",
@@ -21824,74 +20124,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11441,
+    "id": 11415,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 642,
-    "title": "다음 주어진 테이블에 대해서 아래의 SQL문의 실행 결과로 가장 올바른 것은?",
-    "options": [
-      "",
-      "",
-      "",
-      ""
-    ],
-    "correctIndex": 3,
-    "explanation": "CASE 문을 사용해서 정렬의 순서를 변경했고 그래서 ID가 13, 10번이 가장 먼저 조회된다. 즉, 10과 13번이 먼저 조회되고 AGE로 DESC이므로 13의 AGE가 50이라서 가장먼저 조회된다.",
-    "chapter": "DML",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0459",
-    "_category": "DML",
-    "_correctRate": 10,
-    "references": [
-      {
-        "type": "text",
-        "content": "SELECT ID, AGE\nFROM test20\nORDER BY (CASE WHEN ID = 10 OR\nID=13 THEN 1 ELSE 2 END),  AGE DESC"
-      },
-      {
-        "type": "table",
-        "caption": "[test20]",
-        "headers": [
-          "ID",
-          "AGE",
-          "NAME"
-        ],
-        "rows": [
-          [
-            "10",
-            "20",
-            "A"
-          ],
-          [
-            "11",
-            "30",
-            "B"
-          ],
-          [
-            "12",
-            "40",
-            "C"
-          ],
-          [
-            "13",
-            "50",
-            "D"
-          ],
-          [
-            "14",
-            "60",
-            "E"
-          ]
-        ]
-      }
-    ]
-  },
-  {
-    "id": 11442,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 643,
+    "number": 616,
     "title": "아래와 같은 결과가 나오도록 (ㄱ)에 알맞은 SQL문을 완성하시오.",
     "options": [
       "주문금액 1",
@@ -21971,11 +20208,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11443,
+    "id": 11416,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 644,
+    "number": 617,
     "title": "다음 중 VIEW에 대한 설명으로 올바르지 않은 것은?",
     "options": [
       "보안성 : 직원의 급여정보와 같이 숨기고 싶은 정보가 존재한다면 뷰를 생성할 때 해당 칼럼을 빼고 생성함으로써 사용자에게 정보를 감출 수 있다.",
@@ -21992,11 +20229,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11444,
+    "id": 11417,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 645,
+    "number": 618,
     "title": "다음 SQL문의 (     )에 들어가는 것으로 올바르지 않은 것은?",
     "options": [
       "Deptno 와 Sal",
@@ -22019,11 +20256,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11445,
+    "id": 11418,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 646,
+    "number": 619,
     "title": "다음의 ERD는 교차 엔터티를 보여주고 있다. 교차 엔터티로 올바른 것은?",
     "options": [
       "학생, 과목",
@@ -22048,11 +20285,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11446,
+    "id": 11419,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 647,
+    "number": 620,
     "title": "다음 보기의 Sub Query 유형은 무엇인가?",
     "options": [
       "Looping Sub Query",
@@ -22075,11 +20312,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11447,
+    "id": 11420,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 648,
+    "number": 621,
     "title": "다음 주어진 테이블들에 대해서 아래의 SQL문을 수행한 결과로 가장 적절한 것은?",
     "options": [
       "4",
@@ -22154,11 +20391,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11448,
+    "id": 11421,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 649,
+    "number": 622,
     "title": "테이블의 칼럼을 변경하는 DDL문으로 올바른 것은?",
     "options": [
       "ALTER table TEST add constraint column name NAME varchar(100)",
@@ -22181,11 +20418,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11449,
+    "id": 11422,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 650,
+    "number": 623,
     "title": "다음은 NULL 값에 대한 설명이다. 올바른 것은?",
     "options": [
       "NULL 값은 아직 알려지지 않은 미지의 값이다.",
@@ -22202,11 +20439,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11450,
+    "id": 11423,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 651,
+    "number": 624,
     "title": "BSC는 기업의 성과를 균형있게 관리하는 성과관리 시스템이다. BSC는 KPI를 사용해서 기업을 평가하는데 KPI는 상위, 중위, 하위 등의 KPI로 세분화 된다. 다음의 KPIPOOL 테이블에서 특정 하나의 값에 대한 자신의 상위 KPI를 검색하는 SQL문으로 올바른 것은?(이때, 자신의 KPI는 SUBKPI이고, 상위 KPI는 MAINKPI이다.)",
     "options": [
       "Select *\nfrom kpipool\nwhere subkpi = 30\nstart with mainkpi = 0\nconnect by prior subkpi = mainkpi;",
@@ -22261,11 +20498,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11451,
+    "id": 11424,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 652,
+    "number": 625,
     "title": "다음의 SQL문 중에서 결과가 동일한 하나의 SQL문은?",
     "options": [
       "select * from kpipool where (subkpi, mainkpi) in ((20,30),(30,40));",
@@ -22324,11 +20561,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11452,
+    "id": 11425,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 653,
+    "number": 626,
     "title": "다음 보기 중 WHERE에서 사용되는 서브쿼리에 대한 설명으로 옳지 않은 것은?",
     "options": [
       "EXISTS는 TRUE와 FALSE만 되돌린다.",
@@ -22345,74 +20582,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11453,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 654,
-    "title": "주어진 테이블에서 해당 SQL문을 수행 시 결과값으로 조회되는 테이블은 무엇인가?",
-    "options": [
-      "",
-      "",
-      "",
-      ""
-    ],
-    "correctIndex": 2,
-    "explanation": "주어진 테이블에서 C2 칼럼으로 그룹화 했을 때 C2 칼럼별 튜플의 수가 2개 이상인 C2칼럼에 대해서 C3의 합계를 계산한다.",
-    "chapter": "그룹 함수",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0473",
-    "_category": "그룹 함수",
-    "_correctRate": 10,
-    "references": [
-      {
-        "type": "text",
-        "content": "SELECT C2, SUM(C3)\nFROM SQLD_01\nGROUP BY C2\nHAVING COUNT(*) >= 2;"
-      },
-      {
-        "type": "table",
-        "caption": "[SQLD_01]",
-        "headers": [
-          "C1",
-          "C2",
-          "C3"
-        ],
-        "rows": [
-          [
-            "A",
-            "1",
-            "1"
-          ],
-          [
-            "B",
-            "1",
-            "1"
-          ],
-          [
-            "B",
-            "1",
-            "2"
-          ],
-          [
-            "C",
-            "2",
-            "2"
-          ],
-          [
-            "Z",
-            "",
-            "1"
-          ]
-        ]
-      }
-    ]
-  },
-  {
-    "id": 11454,
+    "id": 11426,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 655,
+    "number": 627,
     "title": "아래의 ERD에서 3차정규형을 만족할 때 엔터티의 개수는 몇 개가 되는가?",
     "options": [
       "4개",
@@ -22437,11 +20611,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11455,
+    "id": 11427,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 656,
+    "number": 628,
     "title": "다음의 SQL문에서 올바르지 않은 것은?",
     "options": [
       "부서별 합계를 계산할 때 NULL 값을 만나면 0으로 치환한다.",
@@ -22495,11 +20669,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11456,
+    "id": 11428,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 657,
+    "number": 629,
     "title": "아래의 SQL문을 순차적으로 수행한 결괏값으로 올바른 것은?",
     "options": [
       "4",
@@ -22522,11 +20696,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11457,
+    "id": 11429,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 658,
+    "number": 630,
     "title": "아래 결괏값은 주어진 2개 테이블을 특정 JOIN하여 나타난 결과이다. 어떤 조인인지 고르시오.",
     "options": [
       "INNER JOIN",
@@ -22623,11 +20797,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11458,
+    "id": 11430,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 659,
+    "number": 631,
     "title": "아래 설명 중 빈칸에 해당하는 내용을 작성하시오.",
     "options": [
       "ㄱ. AUTHORIZE  ㄴ.REMOVE",
@@ -22650,11 +20824,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11459,
+    "id": 11431,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 660,
+    "number": 632,
     "title": "주어진 데이터에서 아래의 SQL문을 실행한 행의 건수로 올바른 것은?",
     "options": [
       "3",
@@ -22749,11 +20923,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11460,
+    "id": 11432,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 661,
+    "number": 633,
     "title": "다음의 ERD에 대한 설명으로 올바르지 않은 것은?",
     "options": [
       "의사가 없이 진료할 수 있다.",
@@ -22777,11 +20951,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11461,
+    "id": 11433,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 662,
+    "number": 634,
     "title": "성능 데이터 모델링에서 고려해야 할 사항으로 올바르지 않은 것은?",
     "options": [
       "데이터베이스 모델링 시에 성능을 고려한 모델링을 수행하면 성능 비용을 감소시킬 수 있다.",
@@ -22798,11 +20972,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11462,
+    "id": 11434,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 663,
+    "number": 635,
     "title": "아래 ERD에 대한 설명으로 가장 올바르지 않은 것은?",
     "options": [
       "여러 사원이 동일한 콘도를 이용할 수 있다.",
@@ -22826,11 +21000,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11463,
+    "id": 11435,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 664,
+    "number": 636,
     "title": "릴레이션을 정규화하는 목적에 관한 설명 중 가장 거리가 먼 것은?",
     "options": [
       "정보의 중복을 막는다.",
@@ -22847,11 +21021,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11464,
+    "id": 11436,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 665,
+    "number": 637,
     "title": "속성에 대한 아래의 설명에서 빈칸에 들어갈 것으로 올바른 것은?",
     "options": [
       "일반속성 - 기본키 속성 - 외래키 속성",
@@ -22874,11 +21048,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11465,
+    "id": 11437,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 666,
+    "number": 638,
     "title": "다음 중 엔터티, 관계, 속성에 대한 설명으로 올바르지 않은 것은?",
     "options": [
       "한 개의 속성은 한 개의 속성값을 갖는다.",
@@ -22895,11 +21069,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11466,
+    "id": 11438,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 667,
+    "number": 639,
     "title": "다음 중 아래 ERD에 대한 설명으로 올바르지 않은 것은?",
     "options": [
       "주문, 상품은 비식별 관계로 부모가 없어도 자식이 생길 수 있다.",
@@ -22923,11 +21097,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11467,
+    "id": 11439,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 668,
+    "number": 640,
     "title": "아래의 내용은 주식별자의 어떤 특징을 설명한 것인가?",
     "options": [
       "존재성",
@@ -22950,11 +21124,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11468,
+    "id": 11440,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 669,
+    "number": 641,
     "title": "주어진 테이블에 대해서 아래의 SQL문을 수행한 결과로 적절한 것은?",
     "options": [
       "3",
@@ -22982,11 +21156,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11469,
+    "id": 11441,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 670,
+    "number": 642,
     "title": "테이블에 대한 권한을 부여하는 DCL 명령어는?",
     "options": [
       "ROLLBACK",
@@ -23003,11 +21177,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11470,
+    "id": 11442,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 671,
+    "number": 643,
     "title": "다음 중 SQL 명령어가 올바르지 않은 것은?",
     "options": [
       "DML : RENAME",
@@ -23024,11 +21198,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11471,
+    "id": 11443,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 672,
+    "number": 644,
     "title": "주어진 테이블에 대해서 아래와 같은 결괏값을 반환하는 SQL문을 고르시오.",
     "options": [
       "SELECT\nCOUNT(CASE WHEN BAN=1 THEN 1 END)\nAS Result,\nCOUNT(CASE WHEN BAN=2 THEN 1 END)\nAS B,\nCOUNT(CASE WHEN BAN=3 THEN 1 END)\nAS C\nFROM TEST15;",
@@ -23052,11 +21226,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11472,
+    "id": 11444,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 673,
+    "number": 645,
     "title": "다음 중 주어진 테이블을 수행하였을 때 결괏값이 다른 것은?",
     "options": [
       "SELECT COUNT(*) FROM TEST16 WHERE MemberID IS NOT NULL;",
@@ -23080,43 +21254,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11473,
+    "id": 11445,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 674,
-    "title": "다음 주어진 테이블에서 해당 SQL문을 실행한 결과로 알맞은 것은?",
-    "options": [
-      "",
-      "",
-      "",
-      ""
-    ],
-    "correctIndex": 3,
-    "explanation": "NULL은 비교에서 애초에 제외되어 IN 연산자 안에 NULL이 있어도 비교 연산을 수행하지 않는다. 주어진 테이블의 COL1 속성값 1,2값을 갖는 튜플만 조회된다.",
-    "chapter": "집합 연산자",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0496",
-    "_category": "집합 연산자",
-    "_correctRate": 10,
-    "references": [
-      {
-        "type": "text",
-        "content": "SELECT * FROM SQLD5 WHERE COL1 IN (1,2,NULL);"
-      },
-      {
-        "type": "image",
-        "src": "/sqld-images/j496-1.png",
-        "alt": "문항 이미지 j496-1"
-      }
-    ]
-  },
-  {
-    "id": 11474,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 675,
+    "number": 646,
     "title": "다음 주어진 테이블에 대해서 [결과]와 같이 반환되게 하는 SQL문을 완성하시오.",
     "options": [
       "CUBE(DNAME)",
@@ -23149,43 +21291,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11475,
+    "id": 11446,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 676,
-    "title": "다음 주어진 테이블에 대해서 아래의 SQL문을 실행하였을 때의 결과로 올바른 것은?",
-    "options": [
-      "",
-      "",
-      "",
-      ""
-    ],
-    "correctIndex": 3,
-    "explanation": "C2 값으로 오름차순 정렬하고 CASE문으로 B,A,S 등급을 부여한다. 전체등급이 300점을 넘는 등급이 없기 때문에 S등급은 없고 C1의 6번만 A등급을 받는다.",
-    "chapter": "DML",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0498",
-    "_category": "DML",
-    "_correctRate": 10,
-    "references": [
-      {
-        "type": "text",
-        "content": "SELECT C1, C2,\nCASE\nWHEN C2 <= 100 THEN 'B'\nWHEN C2 <= 300 THEN 'A'\nELSE 'S'\nEND GRADE\nFROM test19\nORDER BY C2;"
-      },
-      {
-        "type": "image",
-        "src": "/sqld-images/j498-1.png",
-        "alt": "문항 이미지 j498-1"
-      }
-    ]
-  },
-  {
-    "id": 11476,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 677,
+    "number": 647,
     "title": "SELECT NVL(COUNT(*), 9999) FROM TABLE WHERE 1=2의 결괏값은?",
     "options": [
       "1",
@@ -23202,11 +21312,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11477,
+    "id": 11447,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 678,
+    "number": 648,
     "title": "아래의 WINDOW FUNCTION을 사용한 SQL 중 가장 올바르지 않은 것은?",
     "options": [
       "SUM(SAL) OVER(PARTITION BY JOB ORDER BY EMPNO RANGE BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED PRECEDING)  SAL3",
@@ -23223,11 +21333,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11478,
+    "id": 11448,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 679,
+    "number": 649,
     "title": "주어진 SQL문을 수행한 결과로 올바른 것은?",
     "options": [
       "6",
@@ -23250,11 +21360,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11479,
+    "id": 11449,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 680,
+    "number": 650,
     "title": "TEST24 테이블에는 1,2,3의 3개의 행이 있을 때 다음의 SQL 실행 결과로 올바른 것은?",
     "options": [
       "1",
@@ -23277,11 +21387,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11480,
+    "id": 11450,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 681,
+    "number": 651,
     "title": "Orders 테이블의 고객id에는 Customers 테이블에 존재하지 않는 고객id도 있다. Customers  테이블에 존재하지 않는 고객id만 Orders 테이블에서 추출하는 SQL을 (  )를 채워 완성하시오.",
     "options": [
       "ㄱ: NOT EXISTS\nㄴ: Customers. id <> Orders. id",
@@ -23304,11 +21414,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11481,
+    "id": 11451,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 682,
+    "number": 652,
     "title": "릴레이션 Emp, Dept가 다음과 같이 정의 되어 있다. 부서에 사원이 한명도 없는 부서를 검색하는 질의를 작성할 때, 가장 올바르지 않은 것은? (단, Emp 테이블의 deptno는 Dept의 deptno를 참조하는 외래키이며, Emp의 deptno에는 NULL인 값이 없음)",
     "options": [
       "SELECT deptno FROM Dept WHERE deptno <> ANY (SELECT deptno FROM Emp);",
@@ -23331,11 +21441,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11482,
+    "id": 11452,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 683,
+    "number": 653,
     "title": "다음 중 계층형 쿼리에 대한 설명으로 올바르지 않은 것은?",
     "options": [
       "계층형 질의는 하나의 테이블에서 자기 자신을 조인하는 형태를 사용한다.",
@@ -23352,11 +21462,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11483,
+    "id": 11453,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 684,
+    "number": 654,
     "title": "다음 주어진 테이블에 대해서 아래의 SQL문을 수행하였을 때의 결과로 올바른 것은?",
     "options": [
       "25",
@@ -23384,11 +21494,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11484,
+    "id": 11454,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 685,
+    "number": 655,
     "title": "다음 보기 중 SELF JOIN을 수행해야 하는 경우로 가장 올바른 것은?",
     "options": [
       "한 테이블 내에서 서로 연관된 칼럼이 없을 경우 사용하는 방법이다.",
@@ -23405,11 +21515,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11485,
+    "id": 11455,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 686,
+    "number": 656,
     "title": "다음 주어진 테이블들에 대해서 아래의 SQL문을 수행하였을 때 결과의 행수로 올바른 것은?",
     "options": [
       "6",
@@ -23437,11 +21547,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11486,
+    "id": 11456,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 687,
+    "number": 657,
     "title": "주어진 테이블에 대해서 아래의 SQL문을 수행하였을 때의 결과로 올바른 것은?",
     "options": [
       "6",
@@ -23469,11 +21579,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11487,
+    "id": 11457,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 688,
+    "number": 658,
     "title": "다음 중 NUMERIC(숫자) 형이 아닌 하나는?",
     "options": [
       "DECIMAL",
@@ -23490,11 +21600,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11488,
+    "id": 11458,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 689,
+    "number": 659,
     "title": "다음 중 순수 관계 연산자에 해당하지 않는 것은?",
     "options": [
       "DIVIDE",
@@ -23511,11 +21621,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11489,
+    "id": 11459,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 690,
+    "number": 660,
     "title": "주어진 테이블에 대해서 아래와 같이 결과가 반환되도록 주어진 SQL문의 빈칸을 완성하시오.",
     "options": [
       "NTILE()",
@@ -23548,11 +21658,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11490,
+    "id": 11460,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 691,
+    "number": 661,
     "title": "주어진 보기의 SQL(ROLLUP)과 동일한 결과를 반환하도록 아래 SQL문의 괄호 안에 들어갈 내용으로 올바른 것은?",
     "options": [
       "(COL1, COL2), (COL1), ()",
@@ -23575,11 +21685,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11491,
+    "id": 11461,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 692,
+    "number": 662,
     "title": "다음 SQL문의 실행 결과는 무엇인가?",
     "options": [
       "25",
@@ -23607,11 +21717,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11492,
+    "id": 11462,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 693,
+    "number": 663,
     "title": "다음의 (       )에 올바른 것은?",
     "options": [
       "CROSS JOIN",
@@ -23635,11 +21745,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11493,
+    "id": 11463,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 694,
+    "number": 664,
     "title": "다음에서 설명하는 것은 ER 모델 중 어떤 항목에 대한 설명인가?",
     "options": [
       "차수",
@@ -23662,11 +21772,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11494,
+    "id": 11464,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 695,
+    "number": 665,
     "title": "다음 중 데이터베이스 모델링에 대한 특징으로 올바르지 않은 것은?",
     "options": [
       "명확화",
@@ -23683,11 +21793,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11495,
+    "id": 11465,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 696,
+    "number": 666,
     "title": "다음 중 아래 시나리오에서 엔터티로 가장 적절한 것은?",
     "options": [
       "주소",
@@ -23710,11 +21820,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11496,
+    "id": 11466,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 697,
+    "number": 667,
     "title": "다음 설명에 해당하는 속성의 종류는 무엇인가?",
     "options": [
       "연관 속성",
@@ -23737,11 +21847,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11497,
+    "id": 11467,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 698,
+    "number": 668,
     "title": "다음은 데이터베이스 모델링 시에 성능을 고려한 모델링 활동이다. 성능을 고려한 데이터베이스 모델링 단계에서 가장 처음으로 수행해야 할 것과 가장 마지막으로 수행해야 할 것은? ",
     "options": [
       "가,마",
@@ -23764,11 +21874,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11498,
+    "id": 11468,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 699,
+    "number": 669,
     "title": "다음 중 아래에서 엔터티 내에 주식별자를 도출하는 기준을 묶은 것으로 가장 적절한 것은?",
     "options": [
       "가,다",
@@ -23791,11 +21901,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11499,
+    "id": 11469,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 700,
+    "number": 670,
     "title": "다음 주어진 테이블에 대해서 아래와 같은 결과값이 나오도록 SQL문의 빈칸에 들어갈 수 있는 내용을 고르시오.",
     "options": [
       "CUBE(DEPTNO, JOB)",
@@ -23823,11 +21933,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11500,
+    "id": 11470,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 701,
+    "number": 671,
     "title": "다음 중 아래의 TEST10 테이블에 대해서 SQL문을 수행하였을 때의 결과 건수는?",
     "options": [
       "3",
@@ -23855,11 +21965,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11501,
+    "id": 11471,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 702,
+    "number": 672,
     "title": "다음 주어진 SQL문을 수행하였을 때의 결과가 아래와 같을 때 (      )에 들어갈 것으로 알맞은 것은?",
     "options": [
       "COALESCE",
@@ -23882,11 +21992,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11502,
+    "id": 11472,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 703,
+    "number": 673,
     "title": "다음 보기에서 SELECT 결과가 NULL이 아닌 경우는?",
     "options": [
       "SELECT NULLIF('A','A') FROM DUAL;",
@@ -23903,70 +22013,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11503,
+    "id": 11473,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 704,
-    "title": "다음 주어진 데이터에서 해당 SQL문을 실행 했을 때의 결괏값으로 알맞은 것은?",
-    "options": [
-      "",
-      "",
-      "",
-      ""
-    ],
-    "correctIndex": 1,
-    "explanation": "A 칼럼별로 그룹화하고 집계 함수에서 NULL값을 제외하고 연산을 수행한다.",
-    "chapter": "그룹 함수",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0536",
-    "_category": "집계 함수",
-    "_correctRate": 10,
-    "references": [
-      {
-        "type": "text",
-        "content": "SELECT A, SUM(X) AS TAB FROM TABLE_B GROUP BY A;"
-      },
-      {
-        "type": "image",
-        "src": "/sqld-images/j536-1.png",
-        "alt": "문항 이미지 j536-1"
-      }
-    ]
-  },
-  {
-    "id": 11504,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 705,
-    "title": "다음의 SQL문이 순서대로 수행되고 난 후 결과값으로 알맞은 것은?",
-    "options": [
-      "",
-      "",
-      "",
-      ""
-    ],
-    "correctIndex": 1,
-    "explanation": "SAVEPOINT가 동일할 때 ROLLBACK을 수행하면 가장 마지막 시점의 SAVEPOINT 지점으로 ROLLBACK 된다.",
-    "chapter": "트랜잭션 관리",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0537",
-    "_category": "트랜잭션 관리",
-    "_correctRate": 10,
-    "references": [
-      {
-        "type": "text",
-        "content": "Create table test20 (col1 number(10));\nINSERT INTO test20 VALUES(1);\nINSERT INTO test20 VALUES(4);\nSAVEPOINT SV1;\nUPDATE test20 SET COL1=8 WHERE COL1=2;\nSAVEPOINT SV1;\nDELETE test20 WHERE COL1 > =2;\nROLLBACK TO SV1;\nINSERT INTO test20 VALUES(3);\nSELECT MAX(COL1) FROM test20;"
-      }
-    ]
-  },
-  {
-    "id": 11505,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 706,
+    "number": 674,
     "title": "다음 주어진 테이블에서 집계 함수를 수행하였을 때 결괏값으로 다른 것을 고르시오.",
     "options": [
       "select avg(nvl(usercount, 1)) -0.5 from test21;",
@@ -23990,39 +22041,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11506,
+    "id": 11474,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 707,
-    "title": "다음의 테이블을 보고 실행한 SQL문 중에서 그 결과가 올바르지 않은 것은?",
-    "options": [
-      "",
-      "",
-      "",
-      ""
-    ],
-    "correctIndex": 0,
-    "explanation": "①번의 실행 결과는 NULL 이다. DECODE는 2개의 속성을 비교하는 것으로 위의 예에서는 '06'과 0을 비교하므로 NULL이 된다.",
-    "chapter": "DML",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0541",
-    "_category": "DML",
-    "_correctRate": 10,
-    "references": [
-      {
-        "type": "image",
-        "src": "/sqld-images/j541-1.png",
-        "alt": "문항 이미지 j541-1"
-      }
-    ]
-  },
-  {
-    "id": 11507,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 708,
+    "number": 675,
     "title": "다음 보기 중 데이터베이스 테이블의 제약조건에 대한 설명으로 올바르지 않은 것은?",
     "options": [
       "고유키 제약이 설정되면 NULL값을 가질 수 없다.",
@@ -24039,11 +22062,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11508,
+    "id": 11475,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 709,
+    "number": 676,
     "title": "다음 중 아래의 SQL에 대한 설명으로 가장 올바른 것은?",
     "options": [
       "CNT 칼럼은 상품전체의 평균상품가격을 서로 비교하여 -10000 ~ +10000사이에 존재하는 상품의 개수를 구한 것이다.",
@@ -24066,11 +22089,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11509,
+    "id": 11476,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 710,
+    "number": 677,
     "title": "아래의 테이블들에 대해서 SQL문을 수행하였을 때의 결과 값은?",
     "options": [
       "6",
@@ -24098,43 +22121,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11510,
+    "id": 11477,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 711,
-    "title": "다음 주어진 테이블에서 해당 SQL문을 실행한 결과로 알맞은 것은?",
-    "options": [
-      "",
-      "",
-      "",
-      ""
-    ],
-    "correctIndex": 3,
-    "explanation": "NULL은 비교에서 애초에 제외되어 IN()연산자 안에 NULL이 있어도 비교연산을 수행하지 않는다. 주어진 테이블의 COL1 속성값 1,2값을 갖는 튜플만 조회된다.",
-    "chapter": "함수",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0546",
-    "_category": "NULL",
-    "_correctRate": 10,
-    "references": [
-      {
-        "type": "text",
-        "content": "SELECT * FROM SQLD5 WHERE COL1 IN(1,2,NULL);"
-      },
-      {
-        "type": "image",
-        "src": "/sqld-images/j546-1.png",
-        "alt": "문항 이미지 j546-1"
-      }
-    ]
-  },
-  {
-    "id": 11511,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 712,
+    "number": 678,
     "title": "다음 주어진 데이터에 대해서 LIKE문을 사용하여 결괏값에 \"_\"가 들어간 문자열을 찾는 SQL문으로 올바른 것은?",
     "options": [
       "SELECT * FROM test31 WHERE username LIKE '%_%' ESCAPE '_'",
@@ -24158,11 +22149,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11512,
+    "id": 11478,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 713,
+    "number": 679,
     "title": "다음 주어진 테이블에 대해서 아래의 SQL문을 실행하였을 때 결과 행의 수는?",
     "options": [
       "3",
@@ -24190,11 +22181,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11513,
+    "id": 11479,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 714,
+    "number": 680,
     "title": "다음 중 TEST 사용자가 아래의 작업을 수행할 수 있도록 권한을 부여하는 DCL로 올바른 것은?",
     "options": [
       "GRANT SELECT, UPDATE ON A_User, TB_A TO TEST;",
@@ -24217,43 +22208,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11514,
+    "id": 11480,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 715,
-    "title": "아래의 테이블에 대해서 주어진 SQL문을 수행한 결과로 알맞은 것은?",
-    "options": [
-      "",
-      "",
-      "",
-      ""
-    ],
-    "correctIndex": 1,
-    "explanation": "먼저 FROM절에 있는 inline view의 실행 결과는 20, 7500과 10, 5000의 합계가 조회된다. 그리고 test34_2의 BETWEEN구로 조회하면 10번 VIP가 조회된다.",
-    "chapter": "그룹 함수",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0550",
-    "_category": "집계 함수",
-    "_correctRate": 10,
-    "references": [
-      {
-        "type": "text",
-        "content": "SELECT A.jumin as \"주문\", B.custrank as \"고객등급\"\nFROM (SELECT jumun, SUM(price)\nAS Total\nFROM test34_1\nGROUP BY jumun) A, test34_2 B\nWHERE A.Total BETWEEN B.minprice AND B.maxprice;"
-      },
-      {
-        "type": "image",
-        "src": "/sqld-images/j550-1.png",
-        "alt": "문항 이미지 j550-1"
-      }
-    ]
-  },
-  {
-    "id": 11515,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 716,
+    "number": 681,
     "title": "다음 ERD로 작성한 SQL문에서 오류가 발생하는 것은?",
     "options": [
       "SELECT SUM(주문금액) FROM 일자별주문내역\nWHERE EXISTS(SELECT * FROM 고객마스터 UNION ALL SELECT * FROM 일자별주문내역) GROUP BY 회원번호",
@@ -24277,11 +22236,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11516,
+    "id": 11481,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 717,
+    "number": 682,
     "title": "파티션별 윈도우에서 가장 먼저 나온 값을 구하는 WINDOW FUNCTION은 무엇인가?",
     "options": [
       "LEAD",
@@ -24298,11 +22257,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11517,
+    "id": 11482,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 718,
+    "number": 683,
     "title": "주어진 SQL문에서 ORDER BY로 사용할 수 없는 것은?",
     "options": [
       "ORDER BY 3",
@@ -24325,11 +22284,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11518,
+    "id": 11483,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 719,
+    "number": 684,
     "title": "다음 중 트랜잭션의 특징에 대한 설명으로 올바른 것은?",
     "options": [
       "지속성 : COMMIT이 완료되면 영구적으로 저장을 보장해야 한다.",
@@ -24346,11 +22305,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11519,
+    "id": 11484,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 720,
+    "number": 685,
     "title": "다음 주어진 두 개의 테이블에 대해서 아래와 같은 결괏값이 반환되도록 아래의 SQL문의 빈칸에 들어갈 값을 적으시오.",
     "options": [
       "GROUPING SETS(a.studentno, (b.grade, a.studentno));",
@@ -24383,11 +22342,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11520,
+    "id": 11485,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 721,
+    "number": 686,
     "title": "Oracle 환경에서 주어진 테이블을 아래의 결과와 같이 정렬하고자 할 때, SQL문의 빈칸에 들어갈 값을 고르시오.",
     "options": [
       "NULL LAST",
@@ -24478,11 +22437,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11521,
+    "id": 11486,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 722,
+    "number": 687,
     "title": "다음의 JOIN 결과를 보고 빈칸에 들어갈 올바른 것은?",
     "options": [
       "CROSS JOIN",
@@ -24579,11 +22538,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11522,
+    "id": 11487,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 723,
+    "number": 688,
     "title": "아래의 상품 마스터 테이블에 대한 상품ID '001'의 최종 상품명은 무엇인가?",
     "options": [
       "없음",
@@ -24620,11 +22579,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11523,
+    "id": 11488,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 724,
+    "number": 689,
     "title": "테이블을 생성할 수 있는 권한을 부여하는 SQL문을 완성하시오.",
     "options": [
       "ROLLBACK",
@@ -24647,11 +22606,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11524,
+    "id": 11489,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 725,
+    "number": 690,
     "title": "주어진 데이터에 대해서 아래의 SQL문을 수행하였을 때의 결괏값이 아래의 결과와 같을 때 빈칸에 들어갈 값을 고르시오.",
     "options": [
       "3,3",
@@ -24702,11 +22661,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11525,
+    "id": 11490,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 726,
+    "number": 691,
     "title": "스키마에 대한 내용 잘못된 것을 두 개 고르세요.",
     "options": [
       "외부 스키마는 모든 사용자 관점을 통합한 전체적인 하나의 관점으로 구성되어 있다.",
@@ -24723,11 +22682,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 20
   },
   {
-    "id": 11526,
+    "id": 11491,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 727,
+    "number": 692,
     "title": "View 사용시 장점이 아닌 것을 고르시오.",
     "options": [
       "논리적 데이터에 독립성을 제공하지 않는다.",
@@ -24744,11 +22703,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11527,
+    "id": 11492,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 728,
+    "number": 693,
     "title": "다음 중 뷰의 특징 중 틀린 것을 고르시오.",
     "options": [
       "뷰는 물리적으로 구현되어 있다.",
@@ -24765,11 +22724,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11528,
+    "id": 11493,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 729,
+    "number": 694,
     "title": "VIew의 개념 및 정의 중 틀린 것을 고르시오.",
     "options": [
       "뷰는 사용자에게 접근이 허용된 자료만을 제한적으로 보여주기 위해 하나 이상의 기본 테이블로부터 유도된, 이름을 가지는 가상 테이블이다.",
@@ -24786,11 +22745,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11529,
+    "id": 11494,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 730,
+    "number": 695,
     "title": "개념 스키마에 대한 설명으로 틀린 것을 고르시오.",
     "options": [
       "설계자 관점의 스키마다.",
@@ -24807,11 +22766,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11530,
+    "id": 11495,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 731,
+    "number": 696,
     "title": "테이블명 생성시 주의사항으로 틀린 것을 고르시오.",
     "options": [
       "객체를 의미할 수 있는 적절한 이름을 사용한다.",
@@ -24828,11 +22787,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11531,
+    "id": 11496,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 732,
+    "number": 697,
     "title": "3층 스키마의 데이터베이스를 보는 관점이 아닌 사람은?",
     "options": [
       "사용자",
@@ -24849,11 +22808,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11532,
+    "id": 11497,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 733,
+    "number": 698,
     "title": "3층 스키마의 물리적 저장 구조를 의미하는 것은?",
     "options": [
       "외부스키마",
@@ -24870,11 +22829,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11533,
+    "id": 11498,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 734,
+    "number": 699,
     "title": "다음중 엔터티의 특징이 아닌 것은?",
     "options": [
       "정규화 이론에 근간하여 정해진 주식별자는 스스로 함수적 종속성을 가져야 한다.",
@@ -24891,11 +22850,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11534,
+    "id": 11499,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 735,
+    "number": 700,
     "title": "속성의 분류 중 속성의 특성에 따른 분류가 아닌 것은? ",
     "options": [
       "설계속성",
@@ -24912,11 +22871,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11535,
+    "id": 11500,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 736,
+    "number": 701,
     "title": "아래 ERD에 대한 설명으로 가장 적절하지 않은 것은?",
     "options": [
       "하나의 서비스 구매 이력은 고객 정보가 없을 수 있다.",
@@ -24941,11 +22900,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11536,
+    "id": 11501,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 737,
+    "number": 702,
     "title": "다음은 식별자의 특징 중 무엇을 설명하고 있는가? \n",
     "options": [
       "존재성",
@@ -24968,11 +22927,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11537,
+    "id": 11502,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 738,
+    "number": 703,
     "title": "다음 엔터티를 제 3차 정규화를 수행했을 때 도출되는 엔터티의 수는(도서대출 포함)? (단, 하나의 대출자에 대해 하나의 대출번호로 여러 도서를 대출/반납할 수 있다고 가정) ",
     "options": [
       "4",
@@ -24997,11 +22956,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11538,
+    "id": 11503,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 739,
+    "number": 704,
     "title": "관계에 대한 설명으로 가장 적절하지 않은 것은?",
     "options": [
       "개인회원 또는 법인회원 둘 중 하나로 주문 가능할 경우 고객과 주문 엔터티는 상호포함적 관계이다.",
@@ -25024,11 +22983,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11539,
+    "id": 11504,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 740,
+    "number": 705,
     "title": "트랜잭션의 특징 중 보기는 무엇을 설명하고 있는가?",
     "options": [
       "지속성",
@@ -25051,11 +23010,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11540,
+    "id": 11505,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 741,
+    "number": 706,
     "title": "NULL에 대한 설명으로 가장 적절하지 않은 것은?",
     "options": [
       "공백문자 혹은 숫자 0과는 다른 의미를 갖는다.",
@@ -25072,11 +23031,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11541,
+    "id": 11506,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 742,
+    "number": 707,
     "title": "다음 식별자에 대한 설명으로 가장 적절한 것은?",
     "options": [
       "복합식별자",
@@ -25099,11 +23058,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11542,
+    "id": 11507,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 743,
+    "number": 708,
     "title": "SELECT 문에 대한 설명으로 가장 적절하지 않은 것은? ",
     "options": [
       "SELECT절에 DISTINCT는 항상 SELECT 바로 뒤에 위치한다.",
@@ -25120,11 +23079,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11543,
+    "id": 11508,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 744,
+    "number": 709,
     "title": "SQL 문을 실행했을 때 오류가 발생하는 부분으로 가정 적절한 것은?",
     "options": [
       "SELECT DEPTNO, ROUND(AVG(SAL)) AS ROUND_VALUE",
@@ -25141,11 +23100,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11544,
+    "id": 11509,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 745,
+    "number": 710,
     "title": "다음의 함수 실행 결과 중 틀린 것은?",
     "options": [
       "LTRIM('AABABAA', 'A') : 'BABAA'",
@@ -25162,11 +23121,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11545,
+    "id": 11510,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 746,
+    "number": 711,
     "title": "함수의 실행 결과로 적절하지 않은 것은?",
     "options": [
       "SIGN(120) : 1",
@@ -25183,11 +23142,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11546,
+    "id": 11511,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 747,
+    "number": 712,
     "title": "다음 쿼리의 실행 결과로 알맞은 것은?",
     "options": [
       "3",
@@ -25234,11 +23193,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11547,
+    "id": 11512,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 748,
+    "number": 713,
     "title": "다음 SQL 중 실행 결과가 다른 것은? ",
     "options": [
       "SELECT CASE SUBSTR(JUMIN, 7, 1) WHEN '1' THEN '남자' ELSE '여자' END FROM TAB1;",
@@ -25272,11 +23231,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11548,
+    "id": 11513,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 749,
+    "number": 714,
     "title": "아래 SQL의 실행 결과로 가장 적절한 것은?(단, DBMS는 ORACLE로 가정)",
     "options": [
       "2024.08.24 09:59:30",
@@ -25299,11 +23258,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11549,
+    "id": 11514,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 750,
+    "number": 715,
     "title": "다음 SQL 수행 결과로 알맞은 것은? \n",
     "options": [
       "8",
@@ -25353,11 +23312,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11550,
+    "id": 11515,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 751,
+    "number": 716,
     "title": "다음 SQL 문장 중 실행 결과가 다른 하나는? ",
     "options": [
       "SELECT COUNT(*) FROM EMP WHERE (DEPTNO = 10 OR DEPTNO = 20 AND JOB = 'CLERK') ;",
@@ -25374,11 +23333,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11551,
+    "id": 11516,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 752,
+    "number": 717,
     "title": "아래 SQL 수행 결과로 가장 적절한 것은?",
     "options": [
       "1000, NULL, 400, 600",
@@ -25427,11 +23386,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11552,
+    "id": 11517,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 753,
+    "number": 718,
     "title": "다음 중 GROUP BY절 대한 설명 중 틀린 것은?",
     "options": [
       "GROUP BY절에 나열되는 컬럼 순서에 따라 SELECT절의 그룹함수의 연산 결과가 달라질 수 있다.",
@@ -25448,11 +23407,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11553,
+    "id": 11518,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 754,
+    "number": 719,
     "title": "다음 중 실행이 불가한 구문은?",
     "options": [
       "SELECT COL1, COL2, COL3 C1 FROM TAB1 T ORDER BY COL1, COL1, T.C1;",
@@ -25469,11 +23428,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11554,
+    "id": 11519,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 755,
+    "number": 720,
     "title": "다음 SQL 구문의 실행 결과로 가장 적절한 것은?",
     "options": [
       "2500 1300 800 300",
@@ -25517,11 +23476,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11555,
+    "id": 11520,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 756,
+    "number": 721,
     "title": "아래의 SQL 의 결과로 알맞은 것은?",
     "options": [
       "30",
@@ -25592,11 +23551,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11556,
+    "id": 11521,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 757,
+    "number": 722,
     "title": "아래 SQL 실행 결과로 알맞은 것은?",
     "options": [
       "3",
@@ -25663,82 +23622,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11557,
+    "id": 11522,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 758,
-    "title": "아래와 같은 테이블 데이터가 있다. 각 SQL에 대한 결과값이 잘못된 것은? ",
-    "options": [
-      "",
-      "",
-      "",
-      ""
-    ],
-    "correctIndex": 2,
-    "explanation": " 1번. NOT EXISTS 연산자는 반대로 서브쿼리 결과가 거짓이면 출력된다. 따라서 NULL끼리 같은 조건은 항상 거짓이므로 TAB1의 V1이 NULL인 경우와 C가 최종 리턴된다. 2번. EXISTS 연산자는 서브쿼리 결과가 참이면 메인 쿼리 결과가 리턴된다. 따라서 TAB1의 각 행마다 A.V1 = B.V1이 만족하면 TAB1 결과가 출력되므로 V1이 A, B인 행이 선택된다. 3번. NOT IN 연산자는 서브쿼 리 결과에 NULL이 포함될 경우 전체가 거짓이 되므로 아무것도 출력되지 않는다. V1 NOT IN ('A', NULL, 'B', 'C') => NOT (V1 = 'A' OR V1 = NULL OR V1 = 'C') => V1 != 'A' AND V1 != NULL AND V1 != 'C' V1 != NULL은 거짓이므로 이 조건으로 인해 전체 조건이 거짓이 된다. 4번. NULL은 IN 연산자에 의해 출력되지 않기 때문에 V1이 A, B인 경우만 리턴된다. ",
-    "chapter": "서브쿼리",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0601",
-    "_category": "서브쿼리",
-    "_correctRate": 10,
-    "references": [
-      {
-        "type": "table",
-        "caption": "<TAB1>",
-        "headers": [
-          "N1",
-          "V1"
-        ],
-        "rows": [
-          [
-            "1",
-            "A"
-          ],
-          [
-            "2",
-            ""
-          ],
-          [
-            "3",
-            "B"
-          ],
-          [
-            "4",
-            "C"
-          ]
-        ]
-      },
-      {
-        "type": "table",
-        "caption": "<TAB2>",
-        "headers": [
-          "N1",
-          "V1"
-        ],
-        "rows": [
-          [
-            "1",
-            "A"
-          ],
-          [
-            "2",
-            ""
-          ],
-          [
-            "3",
-            "B"
-          ]
-        ]
-      }
-    ]
-  },
-  {
-    "id": 11558,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 759,
+    "number": 723,
     "title": "아래와 같은 테이블이 있다. 다음 SQL 실행 결과로 올바른 것은?",
     "options": [
       "5",
@@ -25802,11 +23690,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11559,
+    "id": 11523,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 760,
+    "number": 724,
     "title": "다음 SQL 중 정상 수행이 불가한 것은? \r",
     "options": [
       "UPDATE TAB1 A \n     SET A.NAME = (SELECT B.NAME \n                     FROM TAB2 B \n                    WHERE A.NO = B.NO);",
@@ -25823,11 +23711,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11560,
+    "id": 11524,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 761,
+    "number": 725,
     "title": "아래의 SQL의 출력 결과 중 알맞은 것은?",
     "options": [
       "3",
@@ -25894,11 +23782,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11561,
+    "id": 11525,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 762,
+    "number": 726,
     "title": "다음 ERD를 보고, 고객의 성별로 서비스 이용횟수와 이용금액의 총합을 출력하는 SQL로 적절하지 않은 것은?",
     "options": [
       "SELECT 고객.성별,  \n            COUNT((SELECT 서비스번호  \n                     FROM 서비스  \n                    WHERE 서비스구매.서비스번호 = 서비스.서비스번호)) AS CNT, \n            SUM((SELECT 가격  \n                   FROM 서비스  \n                  WHERE 서비스구매.서비스번호 = 서비스.서비스번호)) AS SUM_PRICE \n    FROM 고객 INNER JOIN 서비스구매 \n      ON 고객.고객번호= 서비스구매.고객번호 \n   GROUP BY 고객.성별;",
@@ -25923,11 +23811,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11562,
+    "id": 11526,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 763,
+    "number": 727,
     "title": "아래 쿼리중 결과값이 다른 하나는? ",
     "options": [
       "SELECT DNAME, JOB, COUNT(*) AS CNT, SUM(SAL) AS TOTAL_SAL \n    FROM SCOTT.EMP A, SCOTT.DEPT B \n   WHERE A.DEPTNO = B.DEPTNO \n   GROUP BY DNAME, JOB \n   UNION ALL \n  SELECT DNAME, '' AS JOB, COUNT(*) AS CNT, SUM(SAL) AS TOTAL_SAL \n    FROM SCOTT.EMP A, SCOTT.DEPT B \n   WHERE A.DEPTNO = B.DEPTNO \n   GROUP BY DNAME \n   UNION ALL \n  SELECT '' AS DNAME, '' AS JOB, COUNT(*) AS CNT, SUM(SAL) AS TOTAL_SAL \n    FROM SCOTT.EMP A, SCOTT.DEPT B \n   WHERE A.DEPTNO = B.DEPTNO \n   ORDER BY 1, 2;",
@@ -25944,74 +23832,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11563,
+    "id": 11527,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 764,
-    "title": "다음 SQL 실행 결과로 가장 알맞은 것은?",
-    "options": [
-      "",
-      "",
-      "",
-      ""
-    ],
-    "correctIndex": 0,
-    "explanation": "FIRST_VALUE, LAST_VALUE는 ORDER BY 컬럼 순서대로 범위 내 가장 처음 값과 마지막 값을 리턴하는 함수인데, 이때 기본 범위는 RANGE UNBOUNDED PRECEDING AND CURRENT ROW이다. 따라서 같은 DNAME 내 SAL 순서대로 가장 앞에 있는 이름은 아시아지부의 경우 홍길동, 남유럽지부의 경우 김길동이 된다. 하지만 각 행마다 LAST_VALUE를 구할 때 범위가 처음부터 현재 행까지만 고려해서 마지막 값을 리턴하기 때문에 항상 현재 행의 값이 마지막 값이 되므로 각 행의 값이 리턴된다. \n",
-    "chapter": "윈도우 함수",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0609",
-    "_category": "윈도우 함수",
-    "_correctRate": 10,
-    "references": [
-      {
-        "type": "text",
-        "content": "SELECT DNAME, \n FIRST_VALUE(NAME) OVER(PARTITION BY DNAME ORDER BY SAL) AS VALUE1, \n LAST_VALUE(NAME) OVER(PARTITION BY DNAME ORDER BY SAL) AS VALUE2 \n FROM TAB1;"
-      },
-      {
-        "type": "table",
-        "caption": "<TAB1>",
-        "headers": [
-          "NAME",
-          "SAL",
-          "DNAME"
-        ],
-        "rows": [
-          [
-            "홍길동",
-            "300",
-            "아시아지부"
-          ],
-          [
-            "박길동",
-            "400",
-            "아시아지부"
-          ],
-          [
-            "최길동",
-            "500",
-            "아시아지부"
-          ],
-          [
-            "김길동",
-            "450",
-            "남유럽지부"
-          ],
-          [
-            "이길동",
-            "550",
-            "남유럽지부"
-          ]
-        ]
-      }
-    ]
-  },
-  {
-    "id": 11564,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 765,
+    "number": 728,
     "title": "다음 SQL 실행 결과 중 다른 하나는? ",
     "options": [
       "SELECT 성적 FROM (SELECT 성적, ROWNUM AS RN FROM EXAM ORDER BY 성적 DESC) WHERE RN <= 3;",
@@ -26060,11 +23885,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11565,
+    "id": 11528,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 766,
+    "number": 729,
     "title": "아래의 계층형 SQL 에서 리프 데이터이면 1, 그렇지 않으면 0 을 출력하고 싶을 때 사용하는 키워드로 알맞은 것은? \r",
     "options": [
       "CONNECT_BY_ROOT",
@@ -26087,116 +23912,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11566,
+    "id": 11529,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 767,
-    "title": "아래 SQL 실행 결과로 가장 알맞은 것은? ",
-    "options": [
-      "",
-      "",
-      "",
-      ""
-    ],
-    "correctIndex": 2,
-    "explanation": "매니저 사원번호가 NULL인 지점을 시작으로 레벨 1을 부여, 나사장의 사원번호를 매니저 사원번호로 가지면서 하반기 입사자인 행을 찾아 레벨 2를 부여한다. 이렇게 연결된 행으로부터 CONNECT 절의 조건을 만족하는 행을 계속 이어 나간다. 이때, START WITH 절은 CONNECT BY에 있는 조건에 따라 생략되지 않기 때문에 나사장이 상반기 입사자라도 출력된다. ",
-    "chapter": "계층형 질의",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0612",
-    "_category": "계층형 질의",
-    "_correctRate": 10,
-    "references": [
-      {
-        "type": "text",
-        "content": "SELECT E.*, LEVEL \n FROM 사원 E \n START WITH 매니저사원번호 IS NULL \nCONNECT BY PRIOR 사원번호 = 매니저사원번호 AND EXTRACT(MONTH FROM 입사일자) >= 7 \n ORDER SIBLINGS BY 이름;"
-      },
-      {
-        "type": "table",
-        "caption": "<사원>",
-        "headers": [
-          "사원번호",
-          "이름",
-          "입사일자",
-          "매니저사원번호"
-        ],
-        "rows": [
-          [
-            "10000",
-            "나사장",
-            "2010-01-01",
-            ""
-          ],
-          [
-            "10001",
-            "박전무",
-            "2010-01-01",
-            "10000"
-          ],
-          [
-            "10002",
-            "김전무",
-            "2010-12-01",
-            "10000"
-          ],
-          [
-            "10003",
-            "홍상무",
-            "2011-12-01",
-            "10002"
-          ],
-          [
-            "10004",
-            "김상무",
-            "2012-12-01",
-            "10002"
-          ],
-          [
-            "10005",
-            "김사원",
-            "2013-01-01",
-            "10003"
-          ],
-          [
-            "10006",
-            "홍사원",
-            "2014-12-01",
-            "10003"
-          ],
-          [
-            "10007",
-            "박사원",
-            "2015-01-01",
-            "10004"
-          ],
-          [
-            "10008",
-            "최사원",
-            "2016-12-01",
-            "10004"
-          ],
-          [
-            "10009",
-            "박인턴",
-            "2017-01-01",
-            "10007"
-          ],
-          [
-            "10010",
-            "강인턴",
-            "2018-12-01",
-            "10008"
-          ]
-        ]
-      }
-    ]
-  },
-  {
-    "id": 11567,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 768,
+    "number": 730,
     "title": "다음 SQL 구문 결과와 같은 결과를 갖는 SQL은? ",
     "options": [
       "SELECT * FROM EMP \n UNPIVOT (COUNT(*) FOR DEPTNO IN (10,20,30));",
@@ -26219,11 +23939,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11568,
+    "id": 11530,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 769,
+    "number": 731,
     "title": "다음 출력 결과로 가장 알맞은 것은? ",
     "options": [
       "8,3",
@@ -26246,11 +23966,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11569,
+    "id": 11531,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 770,
+    "number": 732,
     "title": "다음 출력 결과로 가장 알맞은 것은? ",
     "options": [
       "5",
@@ -26297,86 +24017,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11570,
+    "id": 11532,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 771,
-    "title": "다음 SQL 실행 결과로 알맞은 것은?",
-    "options": [
-      "",
-      "",
-      "",
-      ""
-    ],
-    "correctIndex": 1,
-    "explanation": "전체 평균(4000)보다 급여가 낮은 직원들의 급여만 수정되므로 김길동 두 명의 급여는 수정되지 않는다. SET절은 각 행의 급여 수정 시 부서명을 확인하여 서브쿼리에서 해당 부서의 최대 급여를 찾아 수정하는 구문이다. 따라서 아시아지부는 모두 3000으로, 남유럽지부는 8000으로 수정된다.",
-    "chapter": "그룹 함수",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0616",
-    "_category": "집계 함수",
-    "_correctRate": 10,
-    "references": [
-      {
-        "type": "text",
-        "content": "UPDATE EMPLOYEE E1 \n SET SAL = (SELECT MAX(SAL) \n FROM EMPLOYEE E2 \n WHERE E1.DNAME = E2.DNAME) \n WHERE SAL <= (SELECT AVG(SAL) \n FROM EMPLOYEE);"
-      },
-      {
-        "type": "table",
-        "caption": "<EMPLOYEE>",
-        "headers": [
-          "ID",
-          "NAME",
-          "SAL",
-          "DNAME"
-        ],
-        "rows": [
-          [
-            "0001",
-            "홍길동",
-            "1000",
-            "아시아지부"
-          ],
-          [
-            "0002",
-            "박길동",
-            "2000",
-            "아시아지부"
-          ],
-          [
-            "0003",
-            "최길동",
-            "3000",
-            "아시아지부"
-          ],
-          [
-            "0004",
-            "이길동",
-            "4000",
-            "남유럽지부"
-          ],
-          [
-            "0005",
-            "김길동",
-            "6000",
-            "남유럽지부"
-          ],
-          [
-            "0006",
-            "김길동",
-            "8000",
-            "남유럽지부"
-          ]
-        ]
-      }
-    ]
-  },
-  {
-    "id": 11571,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 772,
+    "number": 733,
     "title": "아래 SQL 실행 결과로 가장 적절한 것은? ",
     "options": [
       "13",
@@ -26430,11 +24075,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11572,
+    "id": 11533,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 773,
+    "number": 734,
     "title": "비교연산자의 어느 한쪽이 VARCHAR 유형 타입인 경우 문자 유형 비교에 대한 설명 중 가장 알맞지 않은 것은?",
     "options": [
       "길이가 다르다면 작은 쪽에 SPACE 를 추가하여 길이를 같게 한 후에 비교한다",
@@ -26451,11 +24096,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11573,
+    "id": 11534,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 774,
+    "number": 735,
     "title": "다음 중 실행이 불가능한 SQL을 고르시오.",
     "options": [
       "INSERT INTO TAB1 VALUES(1000, 1234.5, '100', ' ');",
@@ -26500,11 +24145,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11574,
+    "id": 11535,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 775,
+    "number": 736,
     "title": "유저와 권한 중 권한에 대한 설명 중 가장 올바르지 않은 것은?",
     "options": [
       "권한 부여를 편리하게 관리하기 위해 만들어진 권한의 집합인 ROLE 이 있다",
@@ -26521,11 +24166,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11575,
+    "id": 11536,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 776,
+    "number": 737,
     "title": "데이터 모델링을 할 때 유의해야 할 사항으로 가장 적절하지 않은 것은?",
     "options": [
       "사용자가 처리하는 프로세스에 따라 매핑이 될 수 있도록 프로그램과 테이블 간의 연계성을 높인다.",
@@ -26542,11 +24187,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11576,
+    "id": 11537,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 777,
+    "number": 738,
     "title": "엔터티 분류 중 발생시점에 따른 분류가 아닌 것은? ",
     "options": [
       "행위엔터티",
@@ -26563,11 +24208,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11577,
+    "id": 11538,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 778,
+    "number": 739,
     "title": "데이터 모델링의 정규화에 대한 설명으로 가장 적절하지 않은 것은?",
     "options": [
       "제3정규형을 만족하는 엔터티의 일반속성은 주식별자 전체에 종속적이다.",
@@ -26584,11 +24229,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11578,
+    "id": 11539,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 779,
+    "number": 740,
     "title": "관계(Relationship)와 조인(Join)에 대한 설명으로 가장 적절하지 않은 것은?  ",
     "options": [
       "관계는 엔터티간의 논리적 연관성을 의미한다.",
@@ -26605,11 +24250,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11579,
+    "id": 11540,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 780,
+    "number": 741,
     "title": "트랜잭션에 대한 설명 중 가장 적절하지 않은 것은?",
     "options": [
       "하나의 트랜잭션으로 구성된 작업은 부분 COMMIT이 불가하다.",
@@ -26626,11 +24271,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11580,
+    "id": 11541,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 781,
+    "number": 742,
     "title": "본질식별자와 인조식별자에 대한 설명으로 가장 적절하지 않은 것은? ",
     "options": [
       "자동으로 증가하는 일련번호 같은 형태는 인조식별자에 해당한다.",
@@ -26647,11 +24292,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11581,
+    "id": 11542,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 782,
+    "number": 743,
     "title": "다음 SQL 중 항상 오류가 발생하는 구문으로 가장 적절한 것은? ",
     "options": [
       "SELECT T.COL1 C1, T.COL2 AS \"C1\" FROM TABLE1 T WHERE T.COL2 IN ('A', 'B') ORDER BY 1, \"C1\";",
@@ -26668,11 +24313,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11582,
+    "id": 11543,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 783,
+    "number": 744,
     "title": "SELECT 문에 대한 설명으로 가장 적절하지 않은 것은? ",
     "options": [
       "SELECT문의 6개 절 중에서 SELECT절이 가장 마지막에 실행된다.",
@@ -26689,11 +24334,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11583,
+    "id": 11544,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 784,
+    "number": 745,
     "title": "SQL 문을 실행했을 때 오류가 발생하는 부분으로 가장 적절한 것은?",
     "options": [
       "SELECT T.COL1, COL2, SUM(COL3) AS \"SUM VALUE\"",
@@ -26710,11 +24355,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11584,
+    "id": 11545,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 785,
+    "number": 746,
     "title": "아래의 SQL 에 대해서 결과값이 다른 것은? ",
     "options": [
       "SELECT 'RDBMS' & ' SQL' FROM DUAL;",
@@ -26731,11 +24376,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11585,
+    "id": 11546,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 786,
+    "number": 747,
     "title": "아래 SQL에서 밑줄 친 자리에 쓰인 함수의 결과가 다른 하나는? ",
     "options": [
       "ROUND",
@@ -26758,11 +24403,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11586,
+    "id": 11547,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 787,
+    "number": 748,
     "title": "다음 SQL의 수행 결과로 가장 적절한 것은?",
     "options": [
       "2075-10-23 0:00:00",
@@ -26797,217 +24442,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11587,
+    "id": 11548,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 788,
-    "title": "아래 SQL의 실행 결과로 알맞은 것은?  (단, 문자타입인 경우 ''를 붙여서 표현, 숫자타입인 경우 숫자만 전달) ",
-    "options": [
-      "",
-      "",
-      "",
-      ""
-    ],
-    "correctIndex": 3,
-    "explanation": "LTRIM 함수에 제거문자열을 전달하지 않을 경우 왼쪽에서 공백을 제거한다. INITCAP 함수는 첫 문자만 대문자로 나머지 문자는 소문자로 반환하는 함수이며, TO_CHAR 함수에 의해 소수점 둘째 자리까지, 정수자리는 세자리로 표현하여 리턴한다. ",
-    "chapter": "함수",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0638",
-    "_category": "단일행 함수",
-    "_correctRate": 10,
-    "references": [
-      {
-        "type": "text",
-        "content": "SELECT LTRIM(' AB DE ') AS C1,   INITCAP('ABCDE') AS C2, TO_CHAR('123', '999.99') AS C3 FROM DUAL;"
-      }
-    ]
-  },
-  {
-    "id": 11588,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 789,
-    "title": "다음 SQL 수행 결과로 가장 알맞은 것은?  ",
-    "options": [
-      "",
-      "",
-      "",
-      ""
-    ],
-    "correctIndex": 2,
-    "explanation": "COALESCE 함수는 대상들 중 널이 아닌 첫 번째 값을 출력하므로 첫 번째 행부터 10, 10, 20 이 출력된다.",
-    "chapter": "함수",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0639",
-    "_category": "NULL",
-    "_correctRate": 10,
-    "references": [
-      {
-        "type": "text",
-        "content": "SELECT COALESCE(COL1, COL2, COL3) RESULT FROM TAB1;"
-      },
-      {
-        "type": "table",
-        "caption": "<TAB1>",
-        "headers": [
-          "COL1",
-          "COL2",
-          "COL3"
-        ],
-        "rows": [
-          [
-            "NULL",
-            "10",
-            "20"
-          ],
-          [
-            "10",
-            "NULL",
-            "30"
-          ],
-          [
-            "20",
-            "30",
-            "NULL"
-          ]
-        ]
-      }
-    ]
-  },
-  {
-    "id": 11589,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 790,
-    "title": "아래 수행 결과로 알맞은 것은? ",
-    "options": [
-      "",
-      "",
-      "",
-      ""
-    ],
-    "correctIndex": 1,
-    "explanation": "WHERE절의 비교 연산 결과 COL2의 30과 40만 해당되고 그에 해당하는 COL1은 모두 NULL이다. GROUP BY에 의해 COL1이 NULL인 한 그룹이 생성되지만 NULL은 COUNT하지 않기 때문에 0이 출력된다.",
-    "chapter": "그룹 함수",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0641",
-    "_category": "집계 함수",
-    "_correctRate": 10,
-    "references": [
-      {
-        "type": "text",
-        "content": "SELECT COUNT(COL1) AS RESULT \n FROM TAB1 \nWHERE COL2 >= 30  GROUP BY COL1;"
-      },
-      {
-        "type": "table",
-        "caption": "<TAB1>",
-        "headers": [
-          "COL1",
-          "COL2"
-        ],
-        "rows": [
-          [
-            "A",
-            "10"
-          ],
-          [
-            "B",
-            "NULL"
-          ],
-          [
-            "B",
-            "20"
-          ],
-          [
-            "NULL",
-            "30"
-          ],
-          [
-            "NULL",
-            "40"
-          ],
-          [
-            "C",
-            "20"
-          ]
-        ]
-      }
-    ]
-  },
-  {
-    "id": 11590,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 791,
-    "title": "다음 SQL 실행 결과로 가장 적절한 것은?",
-    "options": [
-      "",
-      "",
-      "",
-      ""
-    ],
-    "correctIndex": 2,
-    "explanation": "GROUP BY 후 SUM(COL2) 연산 결과 (10, 300), (20, 400), (30, 500), (NULL, 600) 그룹이 출력된다. 이들 중 HAVING 조건에 만족하는 그룹은 (20, 400), (30, 500), (NULL, 600) 이다. ",
-    "chapter": "그룹 함수",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0642",
-    "_category": "집계 함수",
-    "_correctRate": 10,
-    "references": [
-      {
-        "type": "text",
-        "content": "SELECT COL1 AS C1, SUM(COL2) AS C2 \n FROM TAB1 \n GROUP BY COL1 \nHAVING SUM(COL2) >= 400;"
-      },
-      {
-        "type": "table",
-        "caption": "<TAB1>",
-        "headers": [
-          "COL1",
-          "COL2"
-        ],
-        "rows": [
-          [
-            "10",
-            "100"
-          ],
-          [
-            "10",
-            "200"
-          ],
-          [
-            "20",
-            "400"
-          ],
-          [
-            "30",
-            "200"
-          ],
-          [
-            "30",
-            "300"
-          ],
-          [
-            "NULL",
-            "100"
-          ],
-          [
-            "NULL",
-            "500"
-          ]
-        ]
-      }
-    ]
-  },
-  {
-    "id": 11591,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 792,
+    "number": 749,
     "title": "다음 중 틀린 설명은? (단, DBMS는 ORACLE)",
     "options": [
       "ORDER BY COMM DESC NULLS LAST 시 NULL이 맨 앞에 배치된다.",
@@ -27024,64 +24463,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11592,
+    "id": 11549,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 793,
-    "title": "아래 SQL 수행 결과로 가장 알맞은 것은?",
-    "options": [
-      "",
-      "",
-      "",
-      ""
-    ],
-    "correctIndex": 2,
-    "explanation": "CASE문 결과를 1차 정렬로 한 뒤, 이 값이 같을 경우 COL1의 값으로 2차 정렬을 수행한다. 이렇게 정렬된 COL1의 값은 SCOTT, ALLEN, FORD, SMITH 순으로 출력된다.",
-    "chapter": "함수",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0644",
-    "_category": "단일행 함수",
-    "_correctRate": 10,
-    "references": [
-      {
-        "type": "text",
-        "content": "SELECT COL1 \nFROM TAB1 \nORDER BY CASE WHEN MOD(COL2, 3) = 0 THEN 'A' \nELSE 'B' \nEND, COL1;"
-      },
-      {
-        "type": "table",
-        "caption": "<TAB1>",
-        "headers": [
-          "COL1",
-          "COL2"
-        ],
-        "rows": [
-          [
-            "SMITH",
-            "10"
-          ],
-          [
-            "ALLEN",
-            "20"
-          ],
-          [
-            "SCOTT",
-            "30"
-          ],
-          [
-            "FORD",
-            "40"
-          ]
-        ]
-      }
-    ]
-  },
-  {
-    "id": 11593,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 794,
+    "number": 750,
     "title": "다음 SQL 구문의 결과는? ",
     "options": [
       "3",
@@ -27156,11 +24542,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11594,
+    "id": 11550,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 795,
+    "number": 751,
     "title": "다음 SQL 구문의 결과는? ",
     "options": [
       "5",
@@ -27235,11 +24621,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11595,
+    "id": 11551,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 796,
+    "number": 752,
     "title": "SQL의 실행 결과로 가장 적절한 것은?",
     "options": [
       "9, 3",
@@ -27334,11 +24720,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11596,
+    "id": 11552,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 797,
+    "number": 753,
     "title": "아래와 같은 테이블 데이터가 있다. SQL에 대한 결과로 가장 알맞은 것은? ",
     "options": [
       "100",
@@ -27395,11 +24781,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11597,
+    "id": 11553,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 798,
+    "number": 754,
     "title": "아래 ERD를 참고하고, ORDERS.PROMOTION_ID는 NULL이 가능하다고 가정할 때 다음 SQL 중 실행 결과가 다른 하나는?",
     "options": [
       "SELECT C.CUSTOMER_ID \n    FROM CUSTOMERS C \n   WHERE C.WEDDING_TYPE = 'Y' \n      AND C.GENDER = 'F' \n      AND TRUNC((SYSDATE - BIRTHDAY)/365) BETWEEN 40 AND 50 \n      AND EXISTS (SELECT 'X' \n                     FROM ORDERS O \n                   WHERE C.CUSTOMER_ID = O.CUSTOMER_ID);",
@@ -27428,79 +24814,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11598,
+    "id": 11554,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 799,
-    "title": "다음 SQL 수행 결과로 알맞은 것은? \r",
-    "options": [
-      "",
-      "",
-      "",
-      ""
-    ],
-    "correctIndex": 2,
-    "explanation": "셀프조인을 사용하여 EMP에서의 각 직원별로 입사일이 빠른 직원의 수를 계산하는 질의절이다. 이 때, LEFT OUTER JOIN을 수행하였기 때문에 입사일이 가장 빠른 SMITH의 경우도 CNT가 0으로 출력된다. ",
-    "chapter": "조인",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0651",
-    "_category": "JOIN",
-    "_correctRate": 10,
-    "references": [
-      {
-        "type": "text",
-        "content": "SELECT E1.EMPNO, E1.ENAME, E1.HIREDATE, COUNT(E2.EMPNO) AS CNT \n  FROM EMP E1 LEFT OUTER JOIN EMP E2 \n     ON E1.HIREDATE > E2.HIREDATE \n GROUP BY E1.EMPNO, E1.ENAME, E1.HIREDATE \n ORDER BY E1.HIREDATE;"
-      },
-      {
-        "type": "table",
-        "caption": "<EMP>",
-        "headers": [
-          "EMPNO",
-          "ENAME",
-          "HIREDATE"
-        ],
-        "rows": [
-          [
-            "7369",
-            "SMITH",
-            "1980/12/17"
-          ],
-          [
-            "7499",
-            "ALLEN",
-            "1981/02/20"
-          ],
-          [
-            "7521",
-            "WARD",
-            "1981/02/22"
-          ],
-          [
-            "7566",
-            "JONES",
-            "1981/04/02"
-          ],
-          [
-            "7698",
-            "BLAKE",
-            "1981/05/01"
-          ],
-          [
-            "7782",
-            "CLARK",
-            "1981/06/09"
-          ]
-        ]
-      }
-    ]
-  },
-  {
-    "id": 11599,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 800,
+    "number": 755,
     "title": "서브쿼리 설명으로 가장 적절한 것은?",
     "options": [
       "서브 쿼리는 항상 메인쿼리에서 읽힌 데이터에 대해 서브쿼리에서 해당 조건이 만족하는지를 확인하는 방식으로 수행된다.",
@@ -27517,11 +24835,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11600,
+    "id": 11555,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 801,
+    "number": 756,
     "title": "아래 결과를 출력하기 위해 빈칸에 들어갈 문장으로 적절한 것은?",
     "options": [
       "SELECT 고객.고객번호, 상품.상품명 FROM 고객, 상품 ON 고객.포인트 >= 상품.최소포인트(+);",
@@ -27633,11 +24951,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11601,
+    "id": 11556,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 802,
+    "number": 757,
     "title": "다음 SQL 실행 결과로 가장 알맞은 것은?",
     "options": [
       "23",
@@ -27732,258 +25050,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11602,
+    "id": 11557,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 803,
-    "title": "테이블이 아래와 같을 때, 다음 집합연산자 수행 결과로 가장 적절한 것은? ",
-    "options": [
-      "",
-      "",
-      "",
-      ""
-    ],
-    "correctIndex": 2,
-    "explanation": "먼저 TAB1과 TAB2의 UNION 결과는 아래와 같다. 이들 중 TAB3의 결과를 빼면 3번 결과가 같다. ",
-    "chapter": "집합 연산자",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0655",
-    "_category": "집합 연산자",
-    "_correctRate": 10,
-    "references": [
-      {
-        "type": "text",
-        "content": "SELECT * \n  FROM (SELECT COL1, COL2 \n          FROM TAB1 \n          UNION  \n         SELECT COL1, COL2 \n          FROM TAB2) \n MINUS \nSELECT COL1, COL2 \n FROM TAB3;"
-      },
-      {
-        "type": "table",
-        "caption": "<TAB1>",
-        "headers": [
-          "COL1",
-          "COL2"
-        ],
-        "rows": [
-          [
-            "10",
-            "A"
-          ],
-          [
-            "20",
-            "B"
-          ],
-          [
-            "30",
-            "C"
-          ],
-          [
-            "30",
-            "D"
-          ],
-          [
-            "40",
-            "E"
-          ]
-        ]
-      },
-      {
-        "type": "table",
-        "caption": "<TAB2>",
-        "headers": [
-          "COL1",
-          "COL2"
-        ],
-        "rows": [
-          [
-            "10",
-            "A"
-          ],
-          [
-            "20",
-            "A"
-          ],
-          [
-            "50",
-            "F"
-          ],
-          [
-            "NULL",
-            "A"
-          ]
-        ]
-      },
-      {
-        "type": "table",
-        "caption": "<TAB3>",
-        "headers": [
-          "COL1",
-          "COL2"
-        ],
-        "rows": [
-          [
-            "30",
-            "C"
-          ],
-          [
-            "30",
-            "D"
-          ],
-          [
-            "40",
-            "E"
-          ],
-          [
-            "NULL",
-            "A"
-          ]
-        ]
-      }
-    ]
-  },
-  {
-    "id": 11603,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 804,
-    "title": "아래 SQL의 결과로 가장 알맞은 것은?",
-    "options": [
-      "",
-      "",
-      "",
-      ""
-    ],
-    "correctIndex": 3,
-    "explanation": "GROUPING SETS(PRODUCT_NO, GOGAK_NO, ())에서 PRODUCT_NO별 SUM(QTY) 결과, GOGAK_NO별 SUM(QTY)연산 결과가 출력된 것과 ()으로 인해 SUM(QTY)의 전체 총 합이 출력된 것을 찾는 문제이다.",
-    "chapter": "그룹 함수",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0656",
-    "_category": "그룹 함수",
-    "_correctRate": 10,
-    "references": [
-      {
-        "type": "text",
-        "content": "SELECT PRODUCT_NO, GOGAK_NO, SUM(QTY) AS TOTAL_QTY  \nFROM JUMUN \nGROUP BY GROUPING SETS(PRODUCT_NO, GOGAK_NO, ());"
-      },
-      {
-        "type": "table",
-        "caption": "<JUMUN>",
-        "headers": [
-          "JUMUN_NO",
-          "PRODUCT_NO",
-          "GOGAK_NO",
-          "QTY",
-          "JUMUN_DATE"
-        ],
-        "rows": [
-          [
-            "1000",
-            "1",
-            "0001",
-            "3",
-            "2024/05/24 11:00:56"
-          ],
-          [
-            "1001",
-            "2",
-            "0001",
-            "1",
-            "2024/05/25 12:01:56"
-          ],
-          [
-            "1002",
-            "1",
-            "0002",
-            "2",
-            "2024/05/26 09:13:12"
-          ],
-          [
-            "1003",
-            "1",
-            "0002",
-            "1",
-            "2024/05/27 10:24:30"
-          ],
-          [
-            "1004",
-            "2",
-            "0002",
-            "2",
-            "2024/05/28 13:01:10"
-          ]
-        ]
-      }
-    ]
-  },
-  {
-    "id": 11604,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 805,
-    "title": "다음 중 RANK, DENSE_RANK, ROW_NUMBER 결과로 가장 적절한 것은? ",
-    "options": [
-      "",
-      "",
-      "",
-      ""
-    ],
-    "correctIndex": 2,
-    "explanation": "RANK는 동점일 경우 같은 등수로 표시하고 다음 순위는 동점인 순위의 수만큼 밀리므로 12245가 출력되지만 DENSE_RANK는 동점일 경우 동순위를 부여 뒤, 다음 순위가 바로 이어지므로 12234가 리턴된다.  ROW_NUMER는 동점일 경우를 인정하지 않고 순서대로 나열하므로 12345가 최종 출력된다.",
-    "chapter": "윈도우 함수",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0657",
-    "_category": "윈도우 함수",
-    "_correctRate": 10,
-    "references": [
-      {
-        "type": "text",
-        "content": "SELECT NO, \n        RANK() OVER(ORDER BY JUMSU DESC) AS RANK1, \n        DENSE_RANK() OVER(ORDER BY JUMSU DESC) AS RANK2, \n        ROW_NUMBER() OVER(ORDER BY JUMSU DESC) AS RANK3 \n  FROM STUDENT;"
-      },
-      {
-        "type": "table",
-        "caption": "<STUDENT>",
-        "headers": [
-          "NO",
-          "NAME",
-          "JUMSU"
-        ],
-        "rows": [
-          [
-            "1",
-            "홍길동",
-            "100"
-          ],
-          [
-            "2",
-            "박길동",
-            "90"
-          ],
-          [
-            "3",
-            "최길동",
-            "90"
-          ],
-          [
-            "4",
-            "이길동",
-            "80"
-          ],
-          [
-            "5",
-            "구길동",
-            "70"
-          ]
-        ]
-      }
-    ]
-  },
-  {
-    "id": 11605,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 806,
+    "number": 758,
     "title": "부서내에서의 급여의 비율을 출력하는 구문으로 가장 적절하지 않은 것은? ",
     "options": [
       "SELECT ENAME, SAL, DEPTNO, \n         ROUND(PERCENT_RANK() OVER(PARTITION BY DEPTNO ORDER BY SAL) * 100, 2) AS SAL_RATIO \n    FROM EMP E1 \n   ORDER BY DEPTNO, SAL DESC;",
@@ -28000,94 +25071,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11606,
+    "id": 11558,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 807,
-    "title": "아래 실행 결과를 출력하는 SQL로 가장 적절한 것은? ",
-    "options": [
-      "",
-      "",
-      "",
-      ""
-    ],
-    "correctIndex": 1,
-    "explanation": "START WITH 조건이 1006과 1001이므로 두 행이 1레벨이 되고, 해당 행의 상위관리자코드를 사원번호로 갖는 행을 찾으면 둘 다 홍길동이 출력된다. 따라서 정답은 2번이 된다. ",
-    "chapter": "계층형 질의",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0660",
-    "_category": "계층형 질의",
-    "_correctRate": 10,
-    "references": [
-      {
-        "type": "text",
-        "content": "SELECT 사원번호, 이름, LEVEL \n  FROM 사원 \n  START WITH 사원번호 IN (1006, 1001) \nCONNECT BY PRIOR 상위관리자코드 = 사원번호;"
-      },
-      {
-        "type": "table",
-        "caption": "<사원>",
-        "headers": [
-          "사원번호",
-          "이름",
-          "상위관리자코드"
-        ],
-        "rows": [
-          [
-            "1000",
-            "홍길동",
-            "NULL"
-          ],
-          [
-            "1001",
-            "박길동",
-            "1000"
-          ],
-          [
-            "1002",
-            "최길동",
-            "1001"
-          ],
-          [
-            "1003",
-            "이길동",
-            "1001"
-          ],
-          [
-            "1004",
-            "구길동",
-            "1002"
-          ],
-          [
-            "1005",
-            "안길동",
-            "1003"
-          ],
-          [
-            "1006",
-            "송길동",
-            "1000"
-          ],
-          [
-            "1007",
-            "강길동",
-            "1006"
-          ],
-          [
-            "1008",
-            "공길동",
-            "1006"
-          ]
-        ]
-      }
-    ]
-  },
-  {
-    "id": 11607,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 808,
+    "number": 759,
     "title": "다음 빈칸에 들어갈 문장으로 가장 적절한 것은?",
     "options": [
       "PIVOT (판매량 FOR 구분 FOR (Q1, Q2))",
@@ -28163,53 +25151,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11608,
+    "id": 11559,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 809,
-    "title": "다음 SQL 실행 결과로 가장 알맞은 것은?",
-    "options": [
-      "",
-      "",
-      "",
-      ""
-    ],
-    "correctIndex": 2,
-    "explanation": "A 뒤에 X 또는 Y가 여러 개 오며 그 뒤에 .이 오는 문자열을 찾아 모두 지우는 쿼리문이다. ",
-    "chapter": "함수",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0663",
-    "_category": "단일행 함수",
-    "_correctRate": 10,
-    "references": [
-      {
-        "type": "text",
-        "content": "SELECT REGEXP_REPLACE(COL1, 'A(X|Y)+\\.') FROM TAB1;"
-      },
-      {
-        "type": "table",
-        "caption": "<TAB1>",
-        "headers": [
-          "COL1"
-        ],
-        "rows": [
-          [
-            "AXXX.AYYY.AXAX."
-          ],
-          [
-            "AAXYXY.XYYY.AXYAXY."
-          ]
-        ]
-      }
-    ]
-  },
-  {
-    "id": 11609,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 810,
+    "number": 760,
     "title": "다음 SQL 실행 결과로 가장 알맞은 것은?",
     "options": [
       "ORA- Oracle SQL-Server",
@@ -28232,11 +25178,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11610,
+    "id": 11560,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 811,
+    "number": 761,
     "title": "다음 SQL중 입력오류가 발생할 문장으로 가장 적절한 것은?",
     "options": [
       "INSERT INTO TAB1 VALUES('0003', 40, 'CCC', '2024/01/01');",
@@ -28259,11 +25205,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11611,
+    "id": 11561,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 812,
+    "number": 762,
     "title": "아래 SQL 실행 결과로 가장 적절한 것은? ",
     "options": [
       "140",
@@ -28286,86 +25232,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11612,
+    "id": 11562,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 813,
-    "title": "다음 문장이 차례대로 수행된 이후의 데이터 값으로 가장 적절한 것은?",
-    "options": [
-      "",
-      "",
-      "",
-      ""
-    ],
-    "correctIndex": 1,
-    "explanation": "COL4 컬럼 추가 시, 기존 세 개의 행의 값은 NULL이 삽입된다. 그 이후 DEFAULT 값을 변경해도 이전에 삽입된 행은 반영되지 않고, 이후 삽입되는 행에 대해 적용된다. COL3에 DEFAULT 값이 설정되어 있다 하더라도 NULL을 직접 입력하면 NULL이 삽입되며, 마지막 INSERT 문장처럼 COL3의 값이 아예 입력되지 않을 경우만 DEFAULT VAULE로 삽입된다. ",
-    "chapter": "DDL",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0667",
-    "_category": "DDL",
-    "_correctRate": 10,
-    "references": [
-      {
-        "type": "text",
-        "content": "ALTER TABLE TAB1 ADD COL4 CHAR(5); \nALTER TABLE TAB1 MODIFY COL4 DEFAULT 'AAA'; \nINSERT INTO TAB1 VALUES(4, 'D', 40, NULL); \nINSERT INTO TAB1(COL1, COL2, COL3) VALUES(5,'E',50);"
-      },
-      {
-        "type": "table",
-        "caption": "<TAB1> 스키마",
-        "headers": [
-          "컬럼명",
-          "타입"
-        ],
-        "rows": [
-          [
-            "COL1",
-            "NUMBER"
-          ],
-          [
-            "COL2",
-            "VARCHAR2(10)"
-          ],
-          [
-            "COL3",
-            "NUMBER"
-          ]
-        ]
-      },
-      {
-        "type": "table",
-        "caption": "<TAB1> 데이터",
-        "headers": [
-          "COL1",
-          "COL2",
-          "COL3"
-        ],
-        "rows": [
-          [
-            "1",
-            "A",
-            "10"
-          ],
-          [
-            "2",
-            "B",
-            "20"
-          ],
-          [
-            "3",
-            "C",
-            "30"
-          ]
-        ]
-      }
-    ]
-  },
-  {
-    "id": 11613,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 814,
+    "number": 763,
     "title": "다음 설명 중 가장 적절하지 않은 것은? (단, DBMS는 오라클) ",
     "options": [
       "컬럼은 동시에 여러 개를 삭제할 수 없다.",
@@ -28382,11 +25253,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11614,
+    "id": 11563,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 815,
+    "number": 764,
     "title": "제약조건에 대한 설명 중 가장 적절하지 않은 것은?",
     "options": [
       "FOREIGN KEY는 부모-자식 관계 중 자식 테이블에 생성한다.",
@@ -28403,11 +25274,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11615,
+    "id": 11564,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 816,
+    "number": 765,
     "title": "다음 중 유저가 갖는 권한에 대한 설명으로 가장 적절한 것은?",
     "options": [
       "HR 유저에게 부여된 EMP 테이블 입력 권한 회수 시 HONG에게 부여된 권한도 함께 회수되었다.",
@@ -28430,11 +25301,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11616,
+    "id": 11565,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 817,
+    "number": 766,
     "title": "다음 중 아래에서 설명하는 데이터모델의 개념으로 가장 적절한 것은? ",
     "options": [
       "속성사전",
@@ -28457,11 +25328,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11617,
+    "id": 11566,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 818,
+    "number": 767,
     "title": "엔터티  - 인스턴스 - 속성 - 속성값에 대한 관계 설명 중 틀린 것을 고르시오. ",
     "options": [
       "하나의 엔터티의 인스턴스는 다른 엔터티의 인스턴스간의 관계인 Paring을 가진다.",
@@ -28478,11 +25349,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11618,
+    "id": 11567,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 819,
+    "number": 768,
     "title": "속성에 대한 설명으로 가장 적절하지 않은 것은?",
     "options": [
       "엔터티에 속한 속성은 엔터티에 대한 추상적인 값을 갖는다.",
@@ -28499,11 +25370,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11619,
+    "id": 11568,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 820,
+    "number": 769,
     "title": "엔터티간 1:1, 1:M 과 같이 관계의 기수성을 나타내는 것을 무엇이라 하는가? ",
     "options": [
       "관계정의",
@@ -28520,11 +25391,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11620,
+    "id": 11569,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 821,
+    "number": 770,
     "title": "다음 주식별자에 대한 설명 중 가장 적절하지 않은 것은?",
     "options": [
       "지정된 주식별자의 값은 자주 변하지 않는 것이어야 한다.",
@@ -28541,11 +25412,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11621,
+    "id": 11570,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 822,
+    "number": 771,
     "title": "다음이 설명하는 정규화로 가장 적절한 것은?",
     "options": [
       "제 4 정규화",
@@ -28568,11 +25439,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11622,
+    "id": 11571,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 823,
+    "number": 772,
     "title": "다음이 설명하는 관계로 가장 적절한 것은? ",
     "options": [
       "상호일관적",
@@ -28595,11 +25466,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11623,
+    "id": 11572,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 824,
+    "number": 773,
     "title": "다음 중 트랜잭션에 대한 설명으로 가장 적절하지 않은 것은? ",
     "options": [
       "하나의 트랜잭션에는 여러 SELECT, INSERT, DELETE, UPDATE 등이 포함될 수 있다.",
@@ -28616,11 +25487,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11624,
+    "id": 11573,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 825,
+    "number": 774,
     "title": "다음이 설명하는 식별자로 가장 적절한 것은? ",
     "options": [
       "내부식별자",
@@ -28643,11 +25514,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11625,
+    "id": 11574,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 826,
+    "number": 775,
     "title": "다음 중 DBMS 특징이 아닌 것은?",
     "options": [
       "인증된 사용자만이 참조 할 수 있는 보안기능이 제공된다.",
@@ -28664,11 +25535,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11626,
+    "id": 11575,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 827,
+    "number": 776,
     "title": "테이블 생성 시 주의 할 사항으로 적절하지 않은 것은? ",
     "options": [
       "소유자가 다를 경우 같은 이름의 테이블을 생성할 수 있다.",
@@ -28685,11 +25556,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11627,
+    "id": 11576,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 828,
+    "number": 777,
     "title": "다음 설명 중 틀린 하나는? ",
     "options": [
       "SELECT 문은 ORDER BY 절이 가장 나중에 실행된다.",
@@ -28706,11 +25577,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11628,
+    "id": 11577,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 829,
+    "number": 778,
     "title": "다음 중 DISTINCT에 대한 설명으로 가장 적절하지 않은 것은?",
     "options": [
       "DISTINCT 뒤에 * 를 사용할 수 있다.",
@@ -28727,38 +25598,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11629,
+    "id": 11578,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 830,
-    "title": "다음 SQL 수행 결과로 가장 적절한 것은?",
-    "options": [
-      "",
-      "",
-      "",
-      ""
-    ],
-    "correctIndex": 1,
-    "explanation": "ROUND와 TRUNC는 각각 날짜의 반올림과 버림을 수행할 수 있다. 두 번째 인수 생략 시 \"일\" 단위로의 반올림/버림이 진행되며, 'MONTH'의 경우 \"월\" 단위로의 반올림/버림이 진행된다. 즉, \"일\" 단위에서 반올림을 진행하게 된다.",
-    "chapter": "함수",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0685",
-    "_category": "단일행 함수",
-    "_correctRate": 10,
-    "references": [
-      {
-        "type": "text",
-        "content": "SELECT ROUND(TO_DATE('2024-02-20 14:00:00', 'YYYY-MM-DD HH24:MI:SS'), 'MONTH') AS D1, \nTRUNC(TO_DATE('2024-09-12 09:00:00', 'YYYY-MM-DD HH24:MI:SS')) AS D2 FROM DUAL;"
-      }
-    ]
-  },
-  {
-    "id": 11630,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 831,
+    "number": 779,
     "title": "다음 함수 사용시 결과값이 올바르지 않은 것은? ",
     "options": [
       "SIGN(0) = 0",
@@ -28775,38 +25619,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11631,
+    "id": 11579,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 832,
-    "title": "다음 함수의 결과로 가장 적절한 것은?",
-    "options": [
-      "",
-      "",
-      "",
-      ""
-    ],
-    "correctIndex": 1,
-    "explanation": "LTRIM은 왼쪽에서부터 특정 문자열를 지우며, 중간에 있는 문자열은 삭제되지 않는다. 따라서 LTRIM('ORACLE','A'은 왼쪽에 A가 없으므로 ORACLE 그대로 리턴된다. SUBSTR('SQL-SERVER', 3, 3)은 세 번째 위치에서 3개 문자열\n을 추출하기 때문에 L-S가 출력된다. 또한, REPLACE에 의해 E가 삭제된 문자열의 길이는 8이 된다.",
-    "chapter": "함수",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0687",
-    "_category": "단일행 함수",
-    "_correctRate": 10,
-    "references": [
-      {
-        "type": "text",
-        "content": "SELECT LTRIM('ORACLE', 'A') AS C1, \n        SUBSTR('SQL-SERVER', 3, 3) AS C2, \n        LENGTH(REPLACE('SQL-SERVER', 'E')) AS C3 \n FROM DUAL;"
-      }
-    ]
-  },
-  {
-    "id": 11632,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 833,
+    "number": 780,
     "title": "다음 SQL중 실행 결과가 다른 하나는?",
     "options": [
       "SELECT CASE DEPTNO WHEN 10 THEN CASE WHEN JOB = 'CLERK' THEN 'A' ELSE 'B' END \n                          WHEN 20 THEN 'C' ELSE 'D'  \n            END FROM EMP;",
@@ -28823,11 +25640,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11633,
+    "id": 11580,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 834,
+    "number": 781,
     "title": "다음 중 정상적으로 실행되지 않는 문장은? (단, DBMS는 오라클)",
     "options": [
       "SELECT NVL(100, 'NULL') FROM DUAL;",
@@ -28844,74 +25661,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11634,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 835,
-    "title": "다음 SQL 수행 결과로 가장 적절한 것은?",
-    "options": [
-      "",
-      "",
-      "",
-      ""
-    ],
-    "correctIndex": 1,
-    "explanation": "첫 번째 문장은 조건에 만족하는 COL1값이 NULL이므로 NULL 그룹이 리턴된다. 따라서 COUNT를 하면 0이 출력되며, 두 번째 문장은 HAVING 조건에 만족하는 그룹이 없으므로 공집합이 출력되어 COUNT 결과가 NULL이 된다.",
-    "chapter": "그룹 함수",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0690",
-    "_category": "집계 함수",
-    "_correctRate": 10,
-    "references": [
-      {
-        "type": "text",
-        "content": "SELECT COUNT(COL1) RESULT FROM TAB1 WHERE COL3 < 100 GROUP BY COL1;   \nSELECT COUNT(COL1) RESULT FROM TAB1 WHERE COL1 IS NOT NULL GROUP BY COL1 \nHAVING SUM(COL2) > 500;"
-      },
-      {
-        "type": "table",
-        "caption": "<TAB1>",
-        "headers": [
-          "COL1",
-          "COL2",
-          "COL3"
-        ],
-        "rows": [
-          [
-            "A",
-            "NULL",
-            "100"
-          ],
-          [
-            "A",
-            "200",
-            "300"
-          ],
-          [
-            "B",
-            "100",
-            "NULL"
-          ],
-          [
-            "B",
-            "300",
-            "200"
-          ],
-          [
-            "NULL",
-            "100",
-            "0"
-          ]
-        ]
-      }
-    ]
-  },
-  {
-    "id": 11635,
+    "id": 11581,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 836,
+    "number": 782,
     "title": "아래 SQL의 실행 결과로 알맞은 것은?",
     "options": [
       "33",
@@ -28965,11 +25719,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11636,
+    "id": 11582,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 837,
+    "number": 783,
     "title": "다음 SQL 문장 중 COL1 값이 널(NULL)이 아닌 경우를 찾아내는 문장으로 가장 적절한 것은?",
     "options": [
       "SELECT * FROM TAB1 WHERE COL1 NOT NULL;",
@@ -28986,184 +25740,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11637,
+    "id": 11583,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 838,
-    "title": "다음 수행 결과로 가장 적절한 것은?",
-    "options": [
-      "",
-      "",
-      "",
-      ""
-    ],
-    "correctIndex": 2,
-    "explanation": "SUBSTR(JUMIN, 3, 2)은 태어난 월을 추출하기 때문에, 순서대로 12, 11, 06, 01, 08의 문자 유형으로 출력된다. 이를 TO_NUMBER를 사용하여 숫자 형태로 변환하면 12, 11, 6, 1, 8이 되는데, 이를 다시 TO_CHAR로 변환하게 되면 문자값의 비교 규칙에 따라 1 < 11 < 12 < 6 < 8 순서대로 출력된다. (문자는 가장 왼쪽부터 비교하여 값이 작을수록 작은값이 된다) ",
-    "chapter": "DML",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0694",
-    "_category": "DML",
-    "_correctRate": 10,
-    "references": [
-      {
-        "type": "text",
-        "content": "SELECT EMPNO \n  FROM EMP \n ORDER BY TO_CHAR(TO_NUMBER(SUBSTR(JUMIN, 3, 2)));"
-      },
-      {
-        "type": "table",
-        "caption": "<EMP> 스키마",
-        "headers": [
-          "컬럼명",
-          "타입"
-        ],
-        "rows": [
-          [
-            "EMPNO",
-            "NUMBER"
-          ],
-          [
-            "ENAME",
-            "VARCHAR2(10)"
-          ],
-          [
-            "SAL",
-            "NUMBER"
-          ],
-          [
-            "JUMIN",
-            "CHAR(13)"
-          ],
-          [
-            "DEPTNO",
-            "NUMBER"
-          ]
-        ]
-      },
-      {
-        "type": "table",
-        "caption": "<EMP> 데이터",
-        "headers": [
-          "EMPNO",
-          "ENAME",
-          "SAL",
-          "JUMIN",
-          "DEPTNO"
-        ],
-        "rows": [
-          [
-            "1000",
-            "SMITH",
-            "2500",
-            "8012011234567",
-            "10"
-          ],
-          [
-            "1001",
-            "ALLEN",
-            "2000",
-            "9011072212345",
-            "10"
-          ],
-          [
-            "1002",
-            "FORD",
-            "3400",
-            "9506232221234",
-            "20"
-          ],
-          [
-            "1003",
-            "SCOTT",
-            "3800",
-            "9801181112345",
-            "20"
-          ],
-          [
-            "1004",
-            "KING",
-            "4000",
-            "9908091234432",
-            "30"
-          ]
-        ]
-      }
-    ]
-  },
-  {
-    "id": 11638,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 839,
-    "title": "아래 SQL 수행 결과로 가장 적절한 것은? (단, DBMS는 오라클) ",
-    "options": [
-      "",
-      "",
-      "",
-      ""
-    ],
-    "correctIndex": 1,
-    "explanation": "DEPTNO가 작은순서대로, DEPTNO가 같은 경우 SAL이 큰 순서대로 정렬하여 출력한다. NULL이 마지막에 출력되는게 기본 순서이지만DESC로 내림차순 정렬하면 NULL이 젤 먼저 출력된다.",
-    "chapter": "DML",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0695",
-    "_category": "DML",
-    "_correctRate": 10,
-    "references": [
-      {
-        "type": "text",
-        "content": "SELECT ENAME, DEPTNO, SAL \n  FROM EMP \n ORDER BY DEPTNO, SAL DESC;"
-      },
-      {
-        "type": "table",
-        "caption": "<EMP>",
-        "headers": [
-          "ENAME",
-          "DEPTNO",
-          "SAL"
-        ],
-        "rows": [
-          [
-            "SMITH",
-            "10",
-            "2000"
-          ],
-          [
-            "SCOTT",
-            "10",
-            "1800"
-          ],
-          [
-            "FORD",
-            "10",
-            "3200"
-          ],
-          [
-            "KING",
-            "20",
-            "4000"
-          ],
-          [
-            "JAMES",
-            "20",
-            "5000"
-          ],
-          [
-            "ADAMS",
-            "20",
-            "NULL"
-          ]
-        ]
-      }
-    ]
-  },
-  {
-    "id": 11639,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 840,
+    "number": 784,
     "title": "아래 SQL 수행 결과로 가장 적절한 것은?",
     "options": [
       "6",
@@ -29242,11 +25823,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11640,
+    "id": 11584,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 841,
+    "number": 785,
     "title": "다음 FROM 절의 JOIN 형태에 대한 설명 중 올바르지 못한 것은? ",
     "options": [
       "RIGHT OUTER JOIN, LEFT OUTER JOIN에서 OUTER는 생략 가능하다.",
@@ -29263,11 +25844,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11641,
+    "id": 11585,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 842,
+    "number": 786,
     "title": "다음 서브쿼리 결과로 가장 적절한 것은?",
     "options": [
       "7500",
@@ -29332,11 +25913,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11642,
+    "id": 11586,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 843,
+    "number": 787,
     "title": "다음 쿼리의 수행 결과로 적절한 것은?",
     "options": [
       "800",
@@ -29416,11 +25997,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11643,
+    "id": 11587,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 844,
+    "number": 788,
     "title": "다음 집합 연산자에 대한 설명 중 틀린 것은 무엇인가? (단, DBMS는 오라클)  ",
     "options": [
       "MINUS 연산자는 조회 결과에 대한 차집합을 의미한다.",
@@ -29437,11 +26018,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11644,
+    "id": 11588,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 845,
+    "number": 789,
     "title": "아래 쿼리 결과와 같은 결과를 갖는 빈칸에 들어갈 문장으로 가장 적절한 것은? ",
     "options": [
       "ROLLUP(DEPTNO, ())",
@@ -29464,11 +26045,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11645,
+    "id": 11589,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 846,
+    "number": 790,
     "title": "순위관련 WINDOW 함수에 대한 설명 중 가장 적절하지 않은 것은? ",
     "options": [
       "RANK 함수가 동일한 값에 대해서는 동일한 순위를 부여하는데 반해, ROW_NUMBER 함수는 고유한 순위를 부여한다.",
@@ -29485,11 +26066,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11646,
+    "id": 11590,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 847,
+    "number": 791,
     "title": "다음 출력 결과를 갖도록 하는 빈칸의 문장으로 가장 적절한 것은? ",
     "options": [
       "ROWS BETWEEN 1 PRECEDING AND 1 FOLLOWING",
@@ -29641,11 +26222,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11647,
+    "id": 11591,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 848,
+    "number": 792,
     "title": "다음 중 Top N Query에 대한 설명 중 틀린 것은?",
     "options": [
       "SQL-Server의 TOP(N) 쿼리를 사용하면 정렬 순서대로 상위 N개 데이터만 출력 가능하다.",
@@ -29662,215 +26243,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11648,
+    "id": 11592,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 849,
-    "title": "아래 실행 결과를 출력하는 SQL로 가장 적절한 것은? ",
-    "options": [
-      "",
-      "",
-      "",
-      ""
-    ],
-    "correctIndex": 3,
-    "explanation": "WHERE절은 출력 대상을 결정하기 때문에 서울 지역인 홍길동은 출력하지 않는다.",
-    "chapter": "계층형 질의",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0709",
-    "_category": "계층형 질의",
-    "_correctRate": 10,
-    "references": [
-      {
-        "type": "text",
-        "content": "SELECT 사원번호, 이름, LEVEL \nFROM 사원 \nWHERE 지역 = '경기' \nSTART WITH 상위관리자코드 IS NULL \nCONNECT BY 상위관리자코드 = PRIOR 사원번호;"
-      },
-      {
-        "type": "table",
-        "caption": "<사원>",
-        "headers": [
-          "사원번호",
-          "이름",
-          "상위관리자코드",
-          "지역"
-        ],
-        "rows": [
-          [
-            "1000",
-            "홍길동",
-            "NULL",
-            "서울"
-          ],
-          [
-            "1001",
-            "박길동",
-            "1000",
-            "경기"
-          ],
-          [
-            "1002",
-            "최길동",
-            "1001",
-            "경기"
-          ],
-          [
-            "1003",
-            "이길동",
-            "1001",
-            "인천"
-          ],
-          [
-            "1004",
-            "구길동",
-            "1002",
-            "서울"
-          ],
-          [
-            "1005",
-            "안길동",
-            "1003",
-            "서울"
-          ],
-          [
-            "1006",
-            "송길동",
-            "1000",
-            "경기"
-          ],
-          [
-            "1007",
-            "강길동",
-            "1006",
-            "경기"
-          ],
-          [
-            "1008",
-            "공길동",
-            "1006",
-            "인천"
-          ]
-        ]
-      }
-    ]
-  },
-  {
-    "id": 11649,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 850,
-    "title": "다음 수행 결과로 가장 적절한 것은?",
-    "options": [
-      "",
-      "",
-      "",
-      ""
-    ],
-    "correctIndex": 2,
-    "explanation": "PRIOR의 위치가 PART에 있으므로 가장 최상위 학과(PART IS NULL)를 먼저 출력하고, 두 행의 PART를 DEPTNO 로 갖는 행을 찾지만 해당 행이 없으므로 최상위 학과인 공과대학과 인문대학만 출력된다.",
-    "chapter": "계층형 질의",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0710",
-    "_category": "계층형 질의",
-    "_correctRate": 10,
-    "references": [
-      {
-        "type": "text",
-        "content": "SELECT DEPTNO, DNAME, LEVEL, CONNECT_BY_ROOT(DNAME) AS ROOT \n  FROM DEPARTMENT \n START WITH PART IS NULL \nCONNECT BY PRIOR PART = DEPTNO;"
-      },
-      {
-        "type": "table",
-        "caption": "<DEPARTMENT>",
-        "headers": [
-          "DEPTNO",
-          "DNAME",
-          "PART",
-          "BUILD"
-        ],
-        "rows": [
-          [
-            "101",
-            "컴퓨터공학과",
-            "100",
-            "정보관"
-          ],
-          [
-            "102",
-            "멀티미디어공학과",
-            "100",
-            "멀티미디어관"
-          ],
-          [
-            "103",
-            "소프트웨어공학과",
-            "100",
-            "소프트웨어관"
-          ],
-          [
-            "201",
-            "전자공학과",
-            "200",
-            "전자제어관"
-          ],
-          [
-            "202",
-            "기계공학과",
-            "200",
-            "기계실험관"
-          ],
-          [
-            "203",
-            "화학공학과",
-            "200",
-            "화학실습관"
-          ],
-          [
-            "301",
-            "문헌정보학과",
-            "300",
-            "인문관"
-          ],
-          [
-            "100",
-            "컴퓨터정보학부",
-            "10",
-            ""
-          ],
-          [
-            "200",
-            "메카트로닉스학부",
-            "10",
-            ""
-          ],
-          [
-            "300",
-            "인문사회학부",
-            "20",
-            ""
-          ],
-          [
-            "10",
-            "공과대학",
-            "",
-            ""
-          ],
-          [
-            "20",
-            "인문대학",
-            "",
-            ""
-          ]
-        ]
-      }
-    ]
-  },
-  {
-    "id": 11650,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 851,
+    "number": 793,
     "title": "다음 SQL의 실행 결과를 얻기 위한 빈칸에 들어갈 값으로 가장 적절한 것은?",
     "options": [
       "판매량, 판매량",
@@ -29945,11 +26322,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11651,
+    "id": 11593,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 852,
+    "number": 794,
     "title": "다음 SQL 실행 결과로 알맞은 것은?",
     "options": [
       "5",
@@ -29972,11 +26349,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11652,
+    "id": 11594,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 853,
+    "number": 795,
     "title": "DML에 대한 설명으로 가장 적절한 것은?",
     "options": [
       "UPDATE 사용 시 동시에 여러 컬럼 수정은 불가능하다.",
@@ -29993,11 +26370,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11653,
+    "id": 11595,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 854,
+    "number": 796,
     "title": "COMMIT 이후의 데이터 상태로 옳지 않은 것은? ",
     "options": [
       "COMMIT을 수행한 사용자만 결과를 볼 수 있다.",
@@ -30014,11 +26391,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11654,
+    "id": 11596,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 855,
+    "number": 797,
     "title": "컬럼 변경 시 주의 사항으로 옳지 않은 것은? ",
     "options": [
       "컬럼의 DEFAULT 값을 바꾸면 변경 작업 이후 발생하는 행 삽입에만 영향을 미친다.",
@@ -30035,11 +26412,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11655,
+    "id": 11597,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 856,
+    "number": 798,
     "title": "제약조건의 설명 중 가장 적절하지 않은 것은?  ",
     "options": [
       "NOT NULL 은 NULL 값의 삽입을 금지한다.",
@@ -30056,11 +26433,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11656,
+    "id": 11598,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 857,
+    "number": 799,
     "title": "아래와 같이 테이블 및 데이터가 생성된 경우 추가 실행이 불가능한 문장은?  ",
     "options": [
       "ALTER TABLE TAB1 DROP COLUMN COL1;",
@@ -30083,95 +26460,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11657,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 858,
-    "title": "다음 문장의 수행 후 TAB2의 조회 결과로 가장 적절한 것은?",
-    "options": [
-      "",
-      "",
-      "",
-      ""
-    ],
-    "correctIndex": 1,
-    "explanation": "ON DELETE SET NULL 옵션에 의해 TAB1 데이터 삭제 시 자식 데이터의 외래키 컬럼은 NULL로 수정된다. ",
-    "chapter": "DML",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0718",
-    "_category": "DML",
-    "_correctRate": 10,
-    "references": [
-      {
-        "type": "text",
-        "content": "ALTER TABLE TAB2 ADD FOREIGN KEY(CLASS_NO) REFERENCES TAB1(NO) ON DELETE SET NULL; \nDELETE FROM TAB1 WHERE NAME = 'C';"
-      },
-      {
-        "type": "table",
-        "caption": "<TAB1>",
-        "headers": [
-          "NO",
-          "NAME"
-        ],
-        "rows": [
-          [
-            "1",
-            "A"
-          ],
-          [
-            "2",
-            "B"
-          ],
-          [
-            "3",
-            "C"
-          ],
-          [
-            "4",
-            "D"
-          ]
-        ]
-      },
-      {
-        "type": "table",
-        "caption": "<TAB2>",
-        "headers": [
-          "NO",
-          "NAME",
-          "CLASS_NO"
-        ],
-        "rows": [
-          [
-            "1000",
-            "SMITH",
-            "1"
-          ],
-          [
-            "1001",
-            "ALLEN",
-            "2"
-          ],
-          [
-            "1002",
-            "FORD",
-            "3"
-          ],
-          [
-            "1004",
-            "SCOTT",
-            "3"
-          ]
-        ]
-      }
-    ]
-  },
-  {
-    "id": 11658,
+    "id": 11599,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 859,
+    "number": 800,
     "title": "다음 설명 중 가장 적절하지 않은 것은?",
     "options": [
       "NULL값이 삽입되어 있는 경우 UNIQUE 제약조건을 추가할 수 없다.",
@@ -30188,11 +26481,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11659,
+    "id": 11600,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 860,
+    "number": 801,
     "title": "권한에 대한 설명으로 가장 적절한 것은?",
     "options": [
       "WITH ADMIN OPTION을 통해 부여받은 테이블 조회 권한을 다른 유저에게 부여할 수 있다.",
@@ -30209,11 +26502,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11660,
+    "id": 11601,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 861,
+    "number": 802,
     "title": "다음이 설명하는 모델링의 특징으로 가장 적절한 것은?",
     "options": [
       "그룹화",
@@ -30236,11 +26529,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11661,
+    "id": 11602,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 862,
+    "number": 803,
     "title": "엔터티 분류 중 유형과 무형에 따른 분류가 아닌 것은?",
     "options": [
       "행위엔터티",
@@ -30257,11 +26550,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11662,
+    "id": 11603,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 863,
+    "number": 804,
     "title": "다음 중 속성에 대한 설명 중 가장 적절하지 않은 것은?",
     "options": [
       "파생속성은 가급적 많이 정의할수록 좋은 속성이다.",
@@ -30278,11 +26571,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11663,
+    "id": 11604,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 864,
+    "number": 805,
     "title": "다음 중 관계를 구성하는 요소가 아닌 것은?",
     "options": [
       "관계정의",
@@ -30299,11 +26592,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11664,
+    "id": 11605,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 865,
+    "number": 806,
     "title": "다음 중 아래 개념이 설명하는 관계로 가장 적절한 것은?",
     "options": [
       "선택관계",
@@ -30326,11 +26619,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11665,
+    "id": 11606,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 866,
+    "number": 807,
     "title": "다음 엔터티는 어떤 정규화를 위배한 것인가? (단, 고객번호 + 상품명이 PK임)",
     "options": [
       "제 4정규화",
@@ -30385,11 +26678,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11666,
+    "id": 11607,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 867,
+    "number": 808,
     "title": "관계(Relationship)와 조인(Join)에 대한 설명으로 가장 적절하지 않은 것은?",
     "options": [
       "행위 관계는 엔터티 간의 어떤 행위가 있는 것을 의미한다.",
@@ -30406,11 +26699,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11667,
+    "id": 11608,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 868,
+    "number": 809,
     "title": "트랜잭션의 특징 중 옳지 않은 것은?",
     "options": [
       "중복성",
@@ -30427,11 +26720,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11668,
+    "id": 11609,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 869,
+    "number": 810,
     "title": "NULL에 대한 설명으로 틀린 것은?",
     "options": [
       "NULL과의 비교 연산은 FALSE를 리턴한다.",
@@ -30448,11 +26741,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11669,
+    "id": 11610,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 870,
+    "number": 811,
     "title": "테이블에 대한 설명 중 가장 적절한 것은?",
     "options": [
       "테이블 생성 시 각 컬럼의 데이터 유형을 정의할 수 있고, 생성 이후에는 변경이 불가하다.",
@@ -30469,11 +26762,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11670,
+    "id": 11611,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 871,
+    "number": 812,
     "title": "관계형 데이터베이스에 대한 특징 중 가장 적절하지 않은 것은?",
     "options": [
       "데이터베이스의 부하를 분석하기 쉽다.",
@@ -30490,11 +26783,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11671,
+    "id": 11612,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 872,
+    "number": 813,
     "title": "다음 중 오류가 발생하는 문장으로 가장 적절한 것은?",
     "options": [
       "SELECT T.COL2, SUM(T.COL1), SUM(T.COL3) FROM TAB1 T GROUP BY T.COL2 ORDER BY T.COL3;",
@@ -30511,11 +26804,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11672,
+    "id": 11613,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 873,
+    "number": 814,
     "title": "다음 함수의 출력 결과로 가장 적절하지 않은 것은?",
     "options": [
       "LAST_DAY(TO_DATE('2024-01-01','YYYY-MM-DD')) : 2024-01-31",
@@ -30532,96 +26825,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11673,
+    "id": 11614,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 874,
-    "title": "다음 SQL문의 실행 결과로 가장 적절한 것은?",
-    "options": [
-      "",
-      "",
-      "",
-      ""
-    ],
-    "correctIndex": 3,
-    "explanation": "DEPTNO가 10이면서 JOB이 CLERK인 경우 A, DEPTNO가 10이면서 JOB이 CLERK가 아닌 경우는 B를 리턴하며, DEPTNO가 10이 아닌 경우는 모두 C를 리턴한다.",
-    "chapter": "DML",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0736",
-    "_category": "DML",
-    "_correctRate": 10,
-    "references": [
-      {
-        "type": "text",
-        "content": "SELECT DECODE(DEPTNO, 10, DECODE(JOB, 'CLERK', 'A', 'B'), 'C') AS RESULT FROM EMP ORDER BY EMPNO;"
-      },
-      {
-        "type": "table",
-        "caption": "<EMP>",
-        "headers": [
-          "EMPNO",
-          "DEPTNO",
-          "JOB"
-        ],
-        "rows": [
-          [
-            "0001",
-            "10",
-            "CLERK"
-          ],
-          [
-            "0002",
-            "10",
-            "MANAGER"
-          ],
-          [
-            "0003",
-            "20",
-            "CLERK"
-          ],
-          [
-            "0004",
-            "30",
-            "ANALYST"
-          ]
-        ]
-      }
-    ]
-  },
-  {
-    "id": 11674,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 875,
-    "title": "아래 SQL의 결과로 가장 적절한 것은?",
-    "options": [
-      "",
-      "",
-      "",
-      ""
-    ],
-    "correctIndex": 2,
-    "explanation": "HH24는 24시간 표현식이고, HH는 12시간 표현식이다. 시간은 정오를 기준으로 반올림 시 자리수가 바뀌는데, 둘 다 정오를 나타내므로 반올림 시 “일(DAY)”의 자리가 바뀌며 24년 8월 25일이 리턴된다.",
-    "chapter": "함수",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0737",
-    "_category": "단일행 함수",
-    "_correctRate": 10,
-    "references": [
-      {
-        "type": "text",
-        "content": "SELECT ROUND(TO_DATE('2024-08-24 12:00:00','YYYY-MM-DD HH24:MI:SS')) COL1, ROUND(TO_DATE('2024-08-24 12:00:01','YYYY-MM-DD HH:MI:SS')) COL2 FROM DUAL;"
-      }
-    ]
-  },
-  {
-    "id": 11675,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 876,
+    "number": 815,
     "title": "다음 SQL의 실행 결과에 대한 해석으로 가장 적절한 것은?",
     "options": [
       "각 직원의 입사날짜로부터 6개월 후 두 번째 월요일에 해당하는 날짜",
@@ -30644,11 +26852,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11676,
+    "id": 11615,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 877,
+    "number": 816,
     "title": "다음 SQL 실행 결과로 가장 적절한 것은?",
     "options": [
       "600",
@@ -30693,11 +26901,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11677,
+    "id": 11616,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 878,
+    "number": 817,
     "title": "아래 SQL 실행 결과로 가장 적절한 것은?",
     "options": [
       "4",
@@ -30768,11 +26976,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11678,
+    "id": 11617,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 879,
+    "number": 818,
     "title": "아래 SQL 실행 결과로 가장 적절한 것은?",
     "options": [
       "2",
@@ -30836,135 +27044,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11679,
+    "id": 11618,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 880,
-    "title": "아래 SQL 실행 결과로 가장 적절한 것은?",
-    "options": [
-      "",
-      "",
-      "",
-      ""
-    ],
-    "correctIndex": 3,
-    "explanation": "COL1 > 100 조건에 만족하는 값은 COL1이 200, 300, 400, 500, 300인 행이다. 이들을 COL2에 의해 그룹핑을 하면 A, B, NULL그룹이 리턴되며, NULL일 때의 SUM(COL3), MIN(COL3)은 모두 20이 리턴된다.",
-    "chapter": "그룹 함수",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0742",
-    "_category": "집계 함수",
-    "_correctRate": 10,
-    "references": [
-      {
-        "type": "text",
-        "content": "SELECT COL2, SUM(COL3) AS C1, MIN(COL3) AS C2, MAX(COL3) AS C3 FROM TAB1 WHERE COL1 > 100 GROUP BY COL2;"
-      },
-      {
-        "type": "table",
-        "caption": "<TAB1>",
-        "headers": [
-          "COL1",
-          "COL2",
-          "COL3"
-        ],
-        "rows": [
-          [
-            "100",
-            "A",
-            "10"
-          ],
-          [
-            "200",
-            "A",
-            "20"
-          ],
-          [
-            "300",
-            "A",
-            "30"
-          ],
-          [
-            "0",
-            "B",
-            "10"
-          ],
-          [
-            "400",
-            "NULL",
-            "20"
-          ],
-          [
-            "500",
-            "B",
-            "30"
-          ],
-          [
-            "300",
-            "B",
-            "40"
-          ]
-        ]
-      }
-    ]
-  },
-  {
-    "id": 11680,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 881,
-    "title": "다음의 정렬 결과로 가장 적절한 것은?",
-    "options": [
-      "",
-      "",
-      "",
-      ""
-    ],
-    "correctIndex": 1,
-    "explanation": "문자 B보다 큰 ID는 BI와 BAA이다. 따라서 ID 는 CASE문에 의해 순서대로 AA, ABC, A, B, A 변환되어 두번째 정렬 기준인 ID 값과 함께 정렬된다. 문자 정렬은 왼쪽부터 비교하여 값이 같을 때까지 비교하여 더 큰 값이 큰 문자열이 되므로 최종 정렬 결과는 정렬 결과는 A(BAA), A(BI), AA, ABC, B 가 된다.",
-    "chapter": "DML",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0743",
-    "_category": "DML",
-    "_correctRate": 10,
-    "references": [
-      {
-        "type": "text",
-        "content": "SELECT ID FROM TAB1 ORDER BY CASE WHEN ID > 'B' THEN 'A' ELSE ID END, ID;"
-      },
-      {
-        "type": "table",
-        "caption": "<TAB1>",
-        "headers": [
-          "ID"
-        ],
-        "rows": [
-          [
-            "AA"
-          ],
-          [
-            "ABC"
-          ],
-          [
-            "BI"
-          ],
-          [
-            "B"
-          ],
-          [
-            "BAA"
-          ]
-        ]
-      }
-    ]
-  },
-  {
-    "id": 11681,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 882,
+    "number": 819,
     "title": "다음 ERD를 참고하여 모든 회원의 상품 이용횟수와 총 이용가격을 출력하는 SQL로 가장 적절한 것은?",
     "options": [
       "SELECT 회원.회원번호, COUNT(상품.상품번호), SUM(상품.가격) \n    FROM 회원, 이용내역, 상품 \n   WHERE 회원.회원번호 = 이용내역.회원번호(+) \n     AND 이용내역.상품번호 = 상품.상품번호 \n   GROUP BY 회원.회원번호;",
@@ -30989,11 +27073,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11682,
+    "id": 11619,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 883,
+    "number": 820,
     "title": "다음의 오라클 표준을 ANSI로 가장 잘 표현한 것은?",
     "options": [
       "SELECT E.ENAME, E.SAL, E.DEPTNO, D.DNAME FROM EMP E LEFT JOIN DEPT D ON E.DEPTNO = D.DEPTNO WHERE E.SAL > 3000 ORDER BY E.ENAME;",
@@ -31016,11 +27100,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11683,
+    "id": 11620,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 884,
+    "number": 821,
     "title": "다음 중 실행 오류가 발생하는 조인 문법은?",
     "options": [
       "SELECT * FROM TAB1 NATURAL JOIN TAB2 USING (COL1);",
@@ -31037,11 +27121,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11684,
+    "id": 11621,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 885,
+    "number": 822,
     "title": "서브쿼리에 대한 설명으로 가장 적절한 것은?",
     "options": [
       "연관 서브쿼리는 메인쿼리가 먼저 수행된 후에 서브쿼리에서 조건이 맞는지 확인할 때 주로 사용한다.",
@@ -31058,112 +27142,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11685,
+    "id": 11622,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 886,
-    "title": "다음 출력 결과로 가장 알맞은 것은?",
-    "options": [
-      "",
-      "",
-      "",
-      ""
-    ],
-    "correctIndex": 1,
-    "explanation": "RESULT1은 TAB2의 COL1의 값이 TAB2의 COL1과 같은 행의 COL2값을 리턴한다. 하지만 TAB1의 COL2가 NULL 인 경우 조건에 일치하지 않아도 생략되지 않고 NULL로 출력되는데, 이는 메인쿼리의 WHERE절이 정의되지 않아 전체 행이 출력되기 때문이다. 마찬가지로 RESULT2도 TAB1의 COL1이 D인 경우 TAB1.COL1 = TAB3.COL1 조건에 일치하지 않지만 NULL로 출력된다.",
-    "chapter": "그룹 함수",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0748",
-    "_category": "집계 함수",
-    "_correctRate": 10,
-    "references": [
-      {
-        "type": "text",
-        "content": "SELECT COL1, COL2, (SELECT COL2 FROM TAB2 WHERE TAB1.COL2 = TAB2.COL1) AS RESULT1, (SELECT MAX(COL2) FROM TAB3 WHERE TAB1.COL1 = TAB3.COL1) AS RESULT2 FROM TAB1;"
-      },
-      {
-        "type": "table",
-        "caption": "<TAB1>",
-        "headers": [
-          "COL1",
-          "COL2"
-        ],
-        "rows": [
-          [
-            "A",
-            "10"
-          ],
-          [
-            "B",
-            "20"
-          ],
-          [
-            "C",
-            "20"
-          ],
-          [
-            "D",
-            "NULL"
-          ]
-        ]
-      },
-      {
-        "type": "table",
-        "caption": "<TAB2>",
-        "headers": [
-          "COL1",
-          "COL2"
-        ],
-        "rows": [
-          [
-            "10",
-            "AAA"
-          ],
-          [
-            "20",
-            "BBB"
-          ],
-          [
-            "30",
-            "CCC"
-          ]
-        ]
-      },
-      {
-        "type": "table",
-        "caption": "<TAB3>",
-        "headers": [
-          "COL1",
-          "COL2"
-        ],
-        "rows": [
-          [
-            "A",
-            "100"
-          ],
-          [
-            "B",
-            "200"
-          ],
-          [
-            "C",
-            "300"
-          ],
-          [
-            "C",
-            "400"
-          ]
-        ]
-      }
-    ]
-  },
-  {
-    "id": 11686,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 887,
+    "number": 823,
     "title": "아래 SQL 중 결과가 다른 하나는?",
     "options": [
       "SELECT CODE, NAME, (SELECT PRICE FROM PRODUCT WHERE P1.CODE = P2.CODE) FROM PRODUCT P1;",
@@ -31180,11 +27163,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11687,
+    "id": 11623,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 888,
+    "number": 824,
     "title": "아래 SQL에 대한 실행 결과로 가장 알맞은 것은?",
     "options": [
       "900",
@@ -31255,148 +27238,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11688,
+    "id": 11624,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 889,
-    "title": "다음 SQL 수행 결과로 가장 적절한 것은?",
-    "options": [
-      "",
-      "",
-      "",
-      ""
-    ],
-    "correctIndex": 1,
-    "explanation": "셀프조인을 통해 각 행마다 입사일이 작거나 같은 모든 행을 출력하는 쿼리로, 각 행마다의 누적 급여 총 합을 출력 하게 된다.",
-    "chapter": "그룹 함수",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0751",
-    "_category": "집계 함수",
-    "_correctRate": 10,
-    "references": [
-      {
-        "type": "text",
-        "content": "SELECT SUM(E2.SAL) AS RESULT FROM EMP E1, EMP E2 WHERE E1.HIREDATE >= E2.HIREDATE GROUP BY E1.ENAME;"
-      },
-      {
-        "type": "table",
-        "caption": "<EMP>",
-        "headers": [
-          "ENAME",
-          "HIREDATE",
-          "SAL"
-        ],
-        "rows": [
-          [
-            "CLARK",
-            "1981/06/09",
-            "1000"
-          ],
-          [
-            "TURNER",
-            "1981/09/08",
-            "2000"
-          ],
-          [
-            "KING",
-            "1981/11/17",
-            "3000"
-          ],
-          [
-            "SCOTT",
-            "1987/04/19",
-            "4000"
-          ]
-        ]
-      }
-    ]
-  },
-  {
-    "id": 11689,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 890,
-    "title": "다음 수행 결과로 가장 적절한 것은?",
-    "options": [
-      "",
-      "",
-      "",
-      ""
-    ],
-    "correctIndex": 1,
-    "explanation": "스칼라 서브쿼리는 OUTER JOIN을 수행하지 않아도 연결 조건에 만족하지 않는 행도 출력된다. 즉, D가 출력되는데, NVL로 NULL을 100으로 치환하고 있으므로 D의 PRO_FARE는 100으로 리턴된다.",
-    "chapter": "서브쿼리",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0752",
-    "_category": "서브쿼리",
-    "_correctRate": 10,
-    "references": [
-      {
-        "type": "text",
-        "content": "SELECT NAME, NVL((SELECT FARE FROM PROMOTION P2 WHERE P1.CODE = P2.CODE), 100) PRO_FARE FROM PRODUCT P1;"
-      },
-      {
-        "type": "table",
-        "caption": "<PRODUCT>",
-        "headers": [
-          "NAME",
-          "CODE"
-        ],
-        "rows": [
-          [
-            "A",
-            "0001"
-          ],
-          [
-            "B",
-            "0002"
-          ],
-          [
-            "C",
-            "0003"
-          ],
-          [
-            "D",
-            "NULL"
-          ]
-        ]
-      },
-      {
-        "type": "table",
-        "caption": "<PROMOTION>",
-        "headers": [
-          "CODE",
-          "FARE"
-        ],
-        "rows": [
-          [
-            "0001",
-            "100"
-          ],
-          [
-            "0002",
-            "150"
-          ],
-          [
-            "0003",
-            "200"
-          ],
-          [
-            "0004",
-            "250"
-          ]
-        ]
-      }
-    ]
-  },
-  {
-    "id": 11690,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 891,
+    "number": 825,
     "title": "집합 연산자 사용시 주의사항에 대한 설명으로 가장 적절하지 않은 것은?",
     "options": [
       "위 집합의 컬럼의 사이즈보다 아래 집합의 컬럼 사이즈가 큰 경우 연산이 불가하다.",
@@ -31413,98 +27259,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11691,
+    "id": 11625,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 892,
-    "title": "아래 SQL 문장 실행 결과로 가장 적절한 것은?",
-    "options": [
-      "",
-      "",
-      "",
-      ""
-    ],
-    "correctIndex": 2,
-    "explanation": "같은 DEPTNO내에서 SAL이 낮은 순서대로 이전 이전 값을 가져오는 문장이다. 가져올 값이 없을 경우 0으로 리턴 한다.",
-    "chapter": "윈도우 함수",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0755",
-    "_category": "윈도우 함수",
-    "_correctRate": 10,
-    "references": [
-      {
-        "type": "text",
-        "content": "SELECT EMPNO, ENAME, DEPTNO, SAL, LAG(SAL, 2, 0) OVER(PARTITION BY DEPTNO ORDER BY SAL) LAV_VALUE FROM EMP;"
-      },
-      {
-        "type": "table",
-        "caption": "<EMP>",
-        "headers": [
-          "EMPNO",
-          "ENAME",
-          "DEPTNO",
-          "SAL"
-        ],
-        "rows": [
-          [
-            "7934",
-            "MILLER",
-            "10",
-            "1300"
-          ],
-          [
-            "7782",
-            "CLARK",
-            "10",
-            "2450"
-          ],
-          [
-            "7839",
-            "KING",
-            "10",
-            "5000"
-          ],
-          [
-            "7369",
-            "SMITH",
-            "20",
-            "800"
-          ],
-          [
-            "7876",
-            "ADAMS",
-            "20",
-            "1100"
-          ],
-          [
-            "7566",
-            "JONES",
-            "20",
-            "2975"
-          ],
-          [
-            "7788",
-            "SCOTT",
-            "20",
-            "3000"
-          ],
-          [
-            "7902",
-            "FORD",
-            "20",
-            "3000"
-          ]
-        ]
-      }
-    ]
-  },
-  {
-    "id": 11692,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 893,
+    "number": 826,
     "title": "MIN 함수와 동일하게 사용할 수 있는 WINDOW 함수는?",
     "options": [
       "FIRST_VALUE",
@@ -31521,64 +27280,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11693,
+    "id": 11626,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 894,
-    "title": "다음 수행 결과로 가장 적절한 것은?",
-    "options": [
-      "",
-      "",
-      "",
-      ""
-    ],
-    "correctIndex": 3,
-    "explanation": "RATIO_TO_REPORT는 총 합 기준 COL2의 값의 크기에 대한 차지 비율을 출력, CUME_DIST는 COL2 순서대로 각 행의 상대적 누적 위치 출력, PERCENT_RANK는 COL2 순서대로 각 행의 누적 분위수(0~1 사이)를 출력한다.",
-    "chapter": "윈도우 함수",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0757",
-    "_category": "윈도우 함수",
-    "_correctRate": 10,
-    "references": [
-      {
-        "type": "text",
-        "content": "SELECT RATIO_TO_REPORT(COL2) OVER() AS C1, CUME_DIST() OVER(ORDER BY COL2) AS C2, ROUND(PERCENT_RANK() OVER(ORDER BY COL2),2) AS C3 FROM TAB1;"
-      },
-      {
-        "type": "table",
-        "caption": "<TAB1>",
-        "headers": [
-          "COL1",
-          "COL2"
-        ],
-        "rows": [
-          [
-            "A",
-            "10"
-          ],
-          [
-            "B",
-            "20"
-          ],
-          [
-            "C",
-            "30"
-          ],
-          [
-            "D",
-            "40"
-          ]
-        ]
-      }
-    ]
-  },
-  {
-    "id": 11694,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 895,
+    "number": 827,
     "title": "다음 수행 결과로 가장 적절한 것은?",
     "options": [
       "10275",
@@ -31661,11 +27367,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11695,
+    "id": 11627,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 896,
+    "number": 828,
     "title": "다음 결과를 얻기 위한 SQL 문장으로 적절하지 않은 것은?",
     "options": [
       "SELECT 이름, 성적 FROM (SELECT 성적, DENSE_RANK() OVER(ORDER BY 성적 DESC) AS RN FROM EXAM) WHERE RN BETWEEN 2 AND 3;",
@@ -31736,11 +27442,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11696,
+    "id": 11628,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 897,
+    "number": 829,
     "title": "다음과 같은 데이터 상황에서 계층형 질의절을 완성하기 위해 필요한 표현식은?",
     "options": [
       "ORDER SIBLINGS BY",
@@ -31784,11 +27490,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11697,
+    "id": 11629,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 898,
+    "number": 830,
     "title": "다음 수행 결과로 가장 적절한 것은?",
     "options": [
       "-컴퓨터정보학부",
@@ -31859,11 +27565,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11698,
+    "id": 11630,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 899,
+    "number": 831,
     "title": "PIVOT과 UNPIVOT에 대한 설명으로 가장 적절한 것은?",
     "options": [
       "PIVOT 시 FOR 앞에는 반드시 집계함수(SUM, AVG 등)의 형태여야 한다.",
@@ -31880,11 +27586,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11699,
+    "id": 11631,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 900,
+    "number": 832,
     "title": "다음 SQL 실행 결과로 가장 적절한 것은?",
     "options": [
       "4545",
@@ -31907,11 +27613,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11700,
+    "id": 11632,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 901,
+    "number": 833,
     "title": "다음 SQL 중 수행이 불가능 한 것은?",
     "options": [
       "INSERT INTO TAB2 (SELECT NO, NAME, JUMIN FROM TAB1);",
@@ -31978,11 +27684,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11701,
+    "id": 11633,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 902,
+    "number": 834,
     "title": "다음 설명 중 가장 적절하지 않은 것은?",
     "options": [
       "SAVEPOINT 지점이 COMMIT 이전일때 해당 SAVEPOINT까지 ROLLBACK 시도 시 COMMIT이후 까지만 ROLLBACK 된다.",
@@ -31999,11 +27705,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11702,
+    "id": 11634,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 903,
+    "number": 835,
     "title": "테이블 생성 시 주의 사항으로 옳지 않은 것은?",
     "options": [
       "컬럼에 대한 제약조건을 추가하는 경우 CONSTRAINT를 사용한다.",
@@ -32020,11 +27726,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11703,
+    "id": 11635,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 904,
+    "number": 836,
     "title": "테이블 복제에 대한 설명 중 가장 적절하지 않은 것은?",
     "options": [
       "PRIMARY KEY 나 UNIQUE 설정 없이 부여된 NOT NULL 속성은 함께 복제된다.",
@@ -32041,11 +27747,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11704,
+    "id": 11636,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 905,
+    "number": 837,
     "title": "뷰에 대한 설명 중 가장 적절하지 않은 것은?",
     "options": [
       "기본 테이블이 삭제되면 그 테이블을 참조하여 만든 뷰 역시 삭제된다.",
@@ -32062,11 +27768,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11705,
+    "id": 11637,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 906,
+    "number": 838,
     "title": "다음이 설명하는 모델링 개념으로 가장 적절한 것은?",
     "options": [
       "내부 스키마",
@@ -32089,11 +27795,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11706,
+    "id": 11638,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 907,
+    "number": 839,
     "title": "엔터티에 대한 설명으로 가장 적절한 것은?",
     "options": [
       "주로 약어를 사용하여 엔터티 이름을 정한다.",
@@ -32110,11 +27816,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11707,
+    "id": 11639,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 908,
+    "number": 840,
     "title": "다음 중 단일 속성이 아닌 것은?",
     "options": [
       "주소",
@@ -32131,11 +27837,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11708,
+    "id": 11640,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 909,
+    "number": 841,
     "title": "두 개의 엔터티 사이의 관계 도출 시 고려사항이 아닌 것은?",
     "options": [
       "업무기술서, 장표에 관계연결을 가능하게 하는 명사가 있는가?",
@@ -32152,11 +27858,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11709,
+    "id": 11641,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 910,
+    "number": 842,
     "title": "다음 중 주식별자의 특징이 아닌 것은?",
     "options": [
       "종속성",
@@ -32173,11 +27879,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11710,
+    "id": 11642,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 911,
+    "number": 843,
     "title": "다음 정규화에 대한 설명으로 가장 적절한 것은?",
     "options": [
       "제4정규화",
@@ -32200,11 +27906,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11711,
+    "id": 11643,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 912,
+    "number": 844,
     "title": "트랜잭션의 특성 그 의미와 맞는 것은?",
     "options": [
       "연관성 : 트랜잭션이 성공적으로 수행되면 그 트랜잭션이 갱신한 데이터베이스의 내용은 영구적으로 저장된다.",
@@ -32221,11 +27927,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11712,
+    "id": 11644,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 913,
+    "number": 845,
     "title": "다음 중 NULL만으로 구성된 컬럼을 계산하여 NULL이 리턴되지 않는 함수는?",
     "options": [
       "MIN",
@@ -32242,11 +27948,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11713,
+    "id": 11645,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 914,
+    "number": 846,
     "title": "다음 식별자에 대한 설명으로 가장 적절하지 않은 것은?",
     "options": [
       "인조식별자를 사용하면 중복 데이터 발생 가능성이 있어 데이터 품질이 저하된다.",
@@ -32263,11 +27969,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11714,
+    "id": 11646,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 915,
+    "number": 847,
     "title": "다음이 설명하는 용어로 가장 적절한 것은?",
     "options": [
       "키",
@@ -32290,11 +27996,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11715,
+    "id": 11647,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 916,
+    "number": 848,
     "title": "다음 중 SQL 분류로 적절하지 않은 것은?",
     "options": [
       "DML - UPDATE",
@@ -32311,11 +28017,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11716,
+    "id": 11648,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 917,
+    "number": 849,
     "title": "다음 함수의 결과가 다른 것은?",
     "options": [
       "ISNULL(COMM, 100)",
@@ -32332,11 +28038,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11717,
+    "id": 11649,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 918,
+    "number": 850,
     "title": "다음 결과를 출력하는 SQL 문으로 가장 적절한 것은?",
     "options": [
       "SELECT COUNT(DECODE(COL2, 10, 'O', 'X')) AS CNT10, COUNT(DECODE(COL2, 20, 'O', 'X')) AS CNT20 FROM TAB1;",
@@ -32399,11 +28105,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11718,
+    "id": 11650,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 919,
+    "number": 851,
     "title": "아래 SQL 수행 결과로 가장 적절한 것은?",
     "options": [
       "4",
@@ -32450,11 +28156,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11719,
+    "id": 11651,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 920,
+    "number": 852,
     "title": "아래 SQL 중 출력 결과가 다른 것은?",
     "options": [
       "SELECT * FROM EMP WHERE (DEPTNO = 10 OR DEPTNO = 20) AND JOB = 'CLERK' OR SAL > 3000;",
@@ -32471,11 +28177,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11720,
+    "id": 11652,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 921,
+    "number": 853,
     "title": "다음 GROUP BY에 대한 설명 중 가장 적절하지 않은 것은?",
     "options": [
       "GROUP BY 절에 사용하지 않은 컬럼은 SUM과 같은 집계함수와 함께 SELECT절에 사용 가능하다.",
@@ -32492,11 +28198,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11721,
+    "id": 11653,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 922,
+    "number": 854,
     "title": "ORDER BY에 대한 설명으로 가장 적절한 것은?",
     "options": [
       "ORDER BY 절에는 컬럼명과 숫자를 동시에 사용할 수 없다.",
@@ -32513,11 +28219,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11722,
+    "id": 11654,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 923,
+    "number": 855,
     "title": "다음 출력 결과를 얻기 위한 SQL 문장으로 가장 적절한 것은?",
     "options": [
       "SELECT E1.EMPNO, E1.ENAME, E2.ENAME AS MANAGER_NAME FROM EMP E1, EMP E2 WHERE E1.EMPNO = E2.MGR(+) ORDER BY E1.EMPNO;",
@@ -32614,11 +28320,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11723,
+    "id": 11655,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 924,
+    "number": 856,
     "title": "다음 두 테이블의 NATURAL JOIN을 수행한 결과의 출력 건수는?",
     "options": [
       "5",
@@ -32693,11 +28399,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11724,
+    "id": 11656,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 925,
+    "number": 857,
     "title": "다음 ANSI 문법을 오라클 문법으로 바꾼 것으로 가장 적절한 것은? ",
     "options": [
       "SELECT * FROM TAB1, TAB2, TAB3 WHERE TAB1.COL1 = TAB2.COL1(+) AND TAB1.COL2 = TAB3.COL2(+);",
@@ -32720,11 +28426,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11725,
+    "id": 11657,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 926,
+    "number": 858,
     "title": "5개의 테이블 조인 시 조인 조건의 최소 개수는?",
     "options": [
       "4",
@@ -32741,11 +28447,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11726,
+    "id": 11658,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 927,
+    "number": 859,
     "title": "다음 수행 결과를 차례대로 나열한 것은?",
     "options": [
       "3, 2, NULL, NULL",
@@ -32794,11 +28500,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11727,
+    "id": 11659,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 928,
+    "number": 860,
     "title": "다음 중 데이터 모델링의 가장 주요한 목적은 무엇인가?",
     "options": [
       "데이터를 시각화하는 것",
@@ -32815,11 +28521,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11728,
+    "id": 11660,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 929,
+    "number": 861,
     "title": "개념적 데이터 모델링에서 주로 사용되는 모델은 무엇인가?",
     "options": [
       "관계형 모델",
@@ -32836,11 +28542,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11729,
+    "id": 11661,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 930,
+    "number": 862,
     "title": "논리적 데이터 모델링 단계에서 수행하는 주요 작업은 무엇인가?",
     "options": [
       "속성 정제 및 도메인 정의",
@@ -32857,11 +28563,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11730,
+    "id": 11662,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 931,
+    "number": 863,
     "title": "다음 중 관계형 데이터베이스의 특징이 아닌 것은?",
     "options": [
       "테이블 기반 구조",
@@ -32878,11 +28584,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11731,
+    "id": 11663,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 932,
+    "number": 864,
     "title": "엔터티(Entity)의 정의로 옳은 것은?",
     "options": [
       "업무를 수행하는 사람",
@@ -32899,11 +28605,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11732,
+    "id": 11664,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 933,
+    "number": 865,
     "title": "다음 중 정규화의 주요 목적이 아닌 것은?",
     "options": [
       "중복 데이터 제거",
@@ -32920,11 +28626,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11733,
+    "id": 11665,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 934,
+    "number": 866,
     "title": "ERD에서 관계(Relationship)는 어떤 기호로 표현되는가?",
     "options": [
       "원",
@@ -32941,11 +28647,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11734,
+    "id": 11666,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 935,
+    "number": 867,
     "title": "약한 엔터티(Weak Entity)의 특징은?",
     "options": [
       "기본 키가 있음",
@@ -32962,11 +28668,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11735,
+    "id": 11667,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 936,
+    "number": 868,
     "title": "ERD에서 식별자는 무엇을 의미하는가?",
     "options": [
       "속성 이름",
@@ -32983,11 +28689,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11736,
+    "id": 11668,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 937,
+    "number": 869,
     "title": "정규형(Normal Form)의 올바른 순서는?",
     "options": [
       "2NF → 1NF → 3NF",
@@ -33004,11 +28710,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11737,
+    "id": 11669,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 938,
+    "number": 870,
     "title": "제1정규형(1NF)의 조건은?",
     "options": [
       "이행적 종속 제거",
@@ -33025,11 +28731,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11738,
+    "id": 11670,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 939,
+    "number": 871,
     "title": "제2정규형(2NF)에서 제거해야 하는 종속성은?",
     "options": [
       "부분 함수 종속",
@@ -33046,11 +28752,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11739,
+    "id": 11671,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 940,
+    "number": 872,
     "title": "도메인이란 무엇을 의미하는가?",
     "options": [
       "속성의 이름",
@@ -33067,11 +28773,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11740,
+    "id": 11672,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 941,
+    "number": 873,
     "title": "비즈니스 룰(Business Rule)의 역할은?",
     "options": [
       "하드웨어 선택 기준 제공",
@@ -33088,11 +28794,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11741,
+    "id": 11673,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 942,
+    "number": 874,
     "title": "SQL의 주요 기능이 아닌 것은?",
     "options": [
       "데이터 정의(DDL)",
@@ -33109,11 +28815,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11742,
+    "id": 11674,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 943,
+    "number": 875,
     "title": "다음 중 엔터티 생성시점에 따른 분류가 아닌 것은?",
     "options": [
       "기본엔터티",
@@ -33130,11 +28836,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11743,
+    "id": 11675,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 944,
+    "number": 876,
     "title": "스키마의 종류로 옳지 않은 것은?",
     "options": [
       "응용 스키마",
@@ -33151,11 +28857,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11744,
+    "id": 11676,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 945,
+    "number": 877,
     "title": "다음 속성에 관련된 설명 중 옳은 것을 모두 고른것은?",
     "options": [
       "가, 라",
@@ -33178,11 +28884,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11745,
+    "id": 11677,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 946,
+    "number": 878,
     "title": "다음 그림을 보고 옳지 않은 설명을 고르시오.",
     "options": [
       "고객과 상품 엔터티는 기본 엔터티이다.",
@@ -33207,11 +28913,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11746,
+    "id": 11678,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 947,
+    "number": 879,
     "title": "다음 ERD를 참고해서 옳은 않은것 고르시오.",
     "options": [
       "의사는 반드시 하나의 병원에 소속되어야 한다.",
@@ -33236,11 +28942,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11747,
+    "id": 11679,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 948,
+    "number": 880,
     "title": "정규화에 대한 설명으로 옳지 않은 것은?",
     "options": [
       "정규화 시 유연성이 떨어진다.",
@@ -33257,11 +28963,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11748,
+    "id": 11680,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 949,
+    "number": 881,
     "title": "데이터 모델링에 대한 설명으로 옳지 않은 것은?",
     "options": [
       "업무에서 사용되는 모든 데이터를 포함해야 한다.",
@@ -33278,11 +28984,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11749,
+    "id": 11681,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 950,
+    "number": 882,
     "title": "다음 중 식별자(Identifier)에 대한 설명으로 옳지 않은 것은?",
     "options": [
       "주식별자는 엔터티의 개체를 유일하게 식별할 수 있어야 한다.",
@@ -33299,11 +29005,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11750,
+    "id": 11682,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 951,
+    "number": 883,
     "title": "TAB1의 데이터를 바탕으로 SQL의 결과는 무엇인가가?",
     "options": [
       "2, 3",
@@ -33364,11 +29070,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11751,
+    "id": 11683,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 952,
+    "number": 884,
     "title": "다음 중 가장 적은 rows를 반환하는 SQL?",
     "options": [
       "SELECT A.ID, A.NAME, B.SUBJECT\nFROM A INNER JOIN B ON A.ID = B.ID;",
@@ -33431,11 +29137,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11752,
+    "id": 11684,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 953,
+    "number": 885,
     "title": "다음은 TAB1 테이블의 일부이다. 다음 SQL의 결과로 옳은 것은?",
     "options": [
       "10",
@@ -33488,11 +29194,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11753,
+    "id": 11685,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 954,
+    "number": 886,
     "title": "다음 쿼리문의 실행 결과로 옳은 것은?",
     "options": [
       "S",
@@ -33515,11 +29221,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11754,
+    "id": 11686,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 955,
+    "number": 887,
     "title": "다음은 TAB1 테이블에 대한 SQL문이다. 위 쿼리의 실행 결과로 옳은 것은?",
     "options": [
       "3",
@@ -33542,69 +29248,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11755,
+    "id": 11687,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 956,
-    "title": "다음은 SALES 테이블의 일부이다. 아래 SQL의 결과로 올바른 데이터 셋을 고르시오.",
-    "options": [
-      "",
-      "",
-      "",
-      ""
-    ],
-    "correctIndex": 0,
-    "explanation": "ROLLUP(YEAR, REGION)은 계층적 집계를 합니다:\n(YEAR, REGION) 기준으로 상세 집계\nYEAR별 소계 → REGION 생략\n전체 소계 → YEAR, REGION 모두 생략 (NULL)\r",
-    "chapter": "그룹 함수",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0839",
-    "_category": "그룹 함수",
-    "_correctRate": 10,
-    "references": [
-      {
-        "type": "text",
-        "content": "<SQL>\nSELECT YEAR, REGION, SUM(AMOUNT)\nFROM SALES\nGROUP BY ROLLUP(YEAR, REGION);"
-      },
-      {
-        "type": "table",
-        "caption": "[데이터]",
-        "headers": [
-          "YEAR",
-          "REGION",
-          "AMOUNT"
-        ],
-        "rows": [
-          [
-            "2023",
-            "EAST",
-            "100"
-          ],
-          [
-            "2023",
-            "WEST",
-            "150"
-          ],
-          [
-            "2024",
-            "EAST",
-            "200"
-          ],
-          [
-            "2024",
-            "WEST",
-            "250"
-          ]
-        ]
-      }
-    ]
-  },
-  {
-    "id": 11756,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 957,
+    "number": 888,
     "title": "다음은 ORDERS 테이블의 일부이다. 다음 SQL 쿼리의 실행 결과로 옳은 것은?",
     "options": [
       "600, 150",
@@ -33657,11 +29305,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11757,
+    "id": 11688,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 958,
+    "number": 889,
     "title": "다음 SQL문의 실행 결과로 옳은 것은?",
     "options": [
       "1",
@@ -33684,11 +29332,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11758,
+    "id": 11689,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 959,
+    "number": 890,
     "title": "다음 함수의 실행 결과로 옳은 것은?",
     "options": [
       "zzz",
@@ -33711,11 +29359,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11759,
+    "id": 11690,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 960,
+    "number": 891,
     "title": "급여가 2,000이상인 사원 중 부서별 급여의 합계 금액이 높은 순으로 정렬하려고 할 때 아래 쿼리에서 고쳐야할 부분은?",
     "options": [
       "(가)",
@@ -33801,11 +29449,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11760,
+    "id": 11691,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 961,
+    "number": 892,
     "title": "다음은 SALES 테이블의 일부이다.  다음 SQL문의 실행 결과로 옳은 것을 고르시오.",
     "options": [
       "피벗된 결과는 YEAR별로 EAST와 WEST 컬럼으로 금액이 출력된다.",
@@ -33859,11 +29507,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11761,
+    "id": 11692,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 962,
+    "number": 893,
     "title": "다음은 어떤 SQL 쿼리의 실행 흐름에 따라 각 절이 실행되는 순서를 추론하려 한다.\n다음 중 실제 데이터베이스가 SQL을 처리하는 내부 실행 순서(논리적 처리 순서) 와 가장 일치하는 순서는?",
     "options": [
       "SELECT → FROM → WHERE → GROUP BY → HAVING → ORDER BY",
@@ -33886,11 +29534,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11762,
+    "id": 11693,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 963,
+    "number": 894,
     "title": "다음 중 EMP 테이블에 대해 다음 요구사항을 모두 반영하려고 한다.\n이에 대한 SQL문 조합 중 옳지 않은 것은?",
     "options": [
       "ALTER TABLE EMP ADD DEPT_ID NUMBER;",
@@ -33913,11 +29561,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11763,
+    "id": 11694,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 964,
+    "number": 895,
     "title": "다음은 두 테이블의 데이터이다. 다음 SQL 쿼리의 결과로 옳은 것을 고르시오.",
     "options": [
       "공통된 행이 출력된다.",
@@ -33988,11 +29636,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11764,
+    "id": 11695,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 965,
+    "number": 896,
     "title": "다음은 EMP 테이블에서 트랜잭션이 수행된 순서이다. 이 트랜잭션 이후, ROLLBACK TO B 수행 후 COMMIT되었다고 할 때, 최종적으로 반영되는 변경 사항은 무엇인가?",
     "options": [
       "SALES 부서 데이터는 유지되고, IT 급여 인상과 HR 삭제가 반영된다.",
@@ -34015,11 +29663,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11765,
+    "id": 11696,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 966,
+    "number": 897,
     "title": "다음은 사원 테이블 TAB1의 일부 데이터이다. 다음 SQL을 실행한 결과가 아래와 같을 때, 빈칸에 들어갈 함수로 가장 적절한 것은?",
     "options": [
       "ROW_NUMBER()",
@@ -34052,11 +29700,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11766,
+    "id": 11697,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 967,
+    "number": 898,
     "title": "어느 회사의 급여 시스템에서 다음과 같은 상황이 발생하였다. 이 상황에 해당하는 트랜잭션의 특징은 무엇인가?",
     "options": [
       "일관성 (Consistency)",
@@ -34079,11 +29727,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11767,
+    "id": 11698,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 968,
+    "number": 899,
     "title": "다음 쿼리의 실행 결과와 동일한 결과를 보장하는 쿼리는 어느 것인가?",
     "options": [
       "UPDATE EMP\n     SET BONUS = (SELECT MAX(AMOUNT)\n                  FROM BONUS_LOG B\n                 WHERE EMP.EMP_ID = B.EMP_ID\n                   AND B.YEAR = 2024);",
@@ -34106,11 +29754,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11768,
+    "id": 11699,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 969,
+    "number": 900,
     "title": "한 도서관에 TAB1에는 10명의 독자, TAB2에는 10권의 책 정보가 저장되어 있다. 다음 SQL을 실행하면, 도서관에서 가능한 모든 독자-책 조합을 계산할 수 있다. 이 쿼리의 수행 결과로 맞는 값은?",
     "options": [
       "도서관엔 총 10개 정보만 있으므로 10",
@@ -34133,11 +29781,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11769,
+    "id": 11700,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 970,
+    "number": 901,
     "title": "다음 중 별칭(ALIAS) 사용 방법으로 옳지 않은 것은?",
     "options": [
       "SELECT EMP_ID AS 사번 FROM EMP;",
@@ -34154,11 +29802,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11770,
+    "id": 11701,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 971,
+    "number": 902,
     "title": "다음 중 구문 오류가 발생하는 SQL은?",
     "options": [
       "SELECT *  \n   FROM HR.EMPLOYEES A  \n   INNER JOIN HR.DEPARTMENTS B  \n   ON (DEPARTMENT_ID)  \n   WHERE A.DEPARTMENT_ID = 90;",
@@ -34181,11 +29829,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11771,
+    "id": 11702,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 972,
+    "number": 903,
     "title": "다음 중 UNION ALL 연산자와 동일한 결과를 생성하는 동작 방식은?",
     "options": [
       "두 SELECT 결과를 중복 없이 합친다.",
@@ -34202,11 +29850,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11772,
+    "id": 11703,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 973,
+    "number": 904,
     "title": "다음은 SALES 테이블의 일부 데이터이다. 다음 SQL을 실행했을 때 결과로 올바른 값은?",
     "options": [
       "EAST: CNT 2, TOTAL 2200 / WEST: CNT 2, TOTAL 3500",
@@ -34234,11 +29882,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11773,
+    "id": 11704,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 974,
+    "number": 905,
     "title": "다음은 SALES 테이블의 일부 데이터이다. 다음 SQL을 실행했을 때, 결과는 총 몇 행이 출력되는가?",
     "options": [
       "4",
@@ -34266,11 +29914,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11774,
+    "id": 11705,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 975,
+    "number": 906,
     "title": "다음은 두 테이블 간의 관계 설정에 관한 설명이다. 다음 중 이 제약조건 설정(ON UPDATE CASCADE)의 의미로 옳은 것은?",
     "options": [
       "DEPT 테이블의 DEPT_ID 값을 수정할 수 없게 막는다.",
@@ -34293,11 +29941,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11775,
+    "id": 11706,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 976,
+    "number": 907,
     "title": "다음은 도서관의 사서 A와 사서 B가 데이터베이스에서 책 정보를 지우는 방식이다. 이 상황을 SQL에 비유할 때, 다음 중 가장 알맞은 설명은?",
     "options": [
       "A는 TRUNCATE, B는 DELETE를 사용한 것이다.",
@@ -34320,11 +29968,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11776,
+    "id": 11707,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 977,
+    "number": 908,
     "title": "다음 중 데이터 타입에 대한 설명으로 옳지 않은 것은?",
     "options": [
       "CHAR(10)은 고정 길이 문자형으로, 입력값이 짧을 경우 자동으로 공백이 채워진다.",
@@ -34341,11 +29989,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11777,
+    "id": 11708,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 978,
+    "number": 909,
     "title": "다음은 세 개의 테이블과 그 예시 데이터이다. 위 결과를 출력하는 쿼리로 옳은 것은?",
     "options": [
       "SELECT C.NAME, P.PROD_NAME\n     FROM CUSTOMER C\n       LEFT JOIN ORDER_INFO O ON C.CUST_ID = O.CUST_ID\n       RIGHT JOIN PRODUCT P ON O.PROD_ID = P.PROD_ID;",
@@ -34369,11 +30017,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11778,
+    "id": 11709,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 979,
+    "number": 910,
     "title": "다음은 TAB 테이블의 일부 데이터와 해당 SQL 문이다. 다음 SQL을 각각 실행할 때, 실행 결과로 옳은 설명을 고른 것은?",
     "options": [
       "1번은 0이 출력되고, 2번은 오류, 3번은 NULL이 출력된다.",
@@ -34401,11 +30049,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11779,
+    "id": 11710,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 980,
+    "number": 911,
     "title": "아래 CUSTOMER 테이블의 정의를 바탕으로, 다음 중 EMAIL과 PHONE에 대한 유니크 인덱스의 역할에 대한 설명으로 옳은 것은?",
     "options": [
       "이메일과 전화번호가 NULL이어도 무조건 삽입을 막는다.",
@@ -34428,11 +30076,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11780,
+    "id": 11711,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 981,
+    "number": 912,
     "title": "다음 중 실행 시 오류가 발생하지 않는 INSERT 문은?",
     "options": [
       "INSERT INTO EMPLOYEE (EMP_ID, NAME, EMAIL, DEPT_ID)\nVALUES (103, 'PARK', NULL, 20);",
@@ -34460,11 +30108,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11781,
+    "id": 11712,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 982,
+    "number": 913,
     "title": "다음은 STUDENT 테이블의 일부 데이터이다. 다음 중 각 GRADE별로 키가 가장 작은 학생의 이름만 출력하는 SQL은?",
     "options": [
       "SELECT NAME\n  FROM STUDENT\n WHERE HEIGHT = (SELECT MIN(HEIGHT) FROM STUDENT);",
@@ -34488,11 +30136,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11782,
+    "id": 11713,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 983,
+    "number": 914,
     "title": "다음은 EMPLOYEE 테이블의 일부 데이터이다. 그리고 EMPLOYEE 테이블을 이용한 계층형 쿼리이다.\n부하 직원 구조를 트리처럼 출력하며, 루트부터 현재까지의 경로를 /로 연결된 문자열로 보여준다. 아래 쿼리를 완성 시켜라.",
     "options": [
       "MANAGER_ID IS NULL,  PRIOR EMP_ID = MANAGER_ID",
@@ -34525,11 +30173,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11783,
+    "id": 11714,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 984,
+    "number": 915,
     "title": "다음 SQL 실행 결과로 옳은 것은?",
     "options": [
       "1",
@@ -34595,11 +30243,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11784,
+    "id": 11715,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 985,
+    "number": 916,
     "title": "A.ID에 중복값 2가 한 건 더 추가되고 B.ID=2가 1건 존재할 때 INNER JOIN 결과에 추가되는 행 수는?",
     "options": [
       "0",
@@ -34665,11 +30313,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11785,
+    "id": 11716,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 986,
+    "number": 917,
     "title": "INNER JOIN 결과에 포함되지 않는 행에 대한 설명으로 옳은 것은?",
     "options": [
       "매칭되지 않는 A.ID=1과 B.ID=4는 결과에서 제외된다.",
@@ -34735,11 +30383,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11786,
+    "id": 11717,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 987,
+    "number": 918,
     "title": "다음 SQL에서 COUNT(DISTINCT a.id) 값은?",
     "options": [
       "1",
@@ -34805,11 +30453,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11787,
+    "id": 11718,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 988,
+    "number": 919,
     "title": "LEFT OUTER JOIN 결과에서 NULL이 발생하는 이유로 옳은 것은?",
     "options": [
       "A의 PK가 NULL이기 때문이다.",
@@ -34867,11 +30515,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11788,
+    "id": 11719,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 989,
+    "number": 920,
     "title": "다음 SQL에서 RIGHT OUTER JOIN을 수행하면 반드시 유지되는 테이블은?",
     "options": [
       "A",
@@ -34933,11 +30581,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11789,
+    "id": 11720,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 990,
+    "number": 921,
     "title": "다음 SQL에서 반환되는 A.ID 값으로 옳은 것은?",
     "options": [
       "1",
@@ -34999,11 +30647,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11790,
+    "id": 11721,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 991,
+    "number": 922,
     "title": "OUTER JOIN 결과 해석으로 옳은 것은?",
     "options": [
       "INNER JOIN과 동일하게 항상 교집합만 반환한다.",
@@ -35061,11 +30709,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11791,
+    "id": 11722,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 992,
+    "number": 923,
     "title": "다음 SQL 실행 결과로 반환되는 부서 수는?",
     "options": [
       "0",
@@ -35148,11 +30796,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11792,
+    "id": 11723,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 993,
+    "number": 924,
     "title": "다음 SQL 결과로 조회되는 부서명으로 옳은 것은?",
     "options": [
       "SALES",
@@ -35235,11 +30883,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11793,
+    "id": 11724,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 994,
+    "number": 925,
     "title": "다음 SQL 실행 결과 행 수는?",
     "options": [
       "1",
@@ -35322,11 +30970,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11794,
+    "id": 11725,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 995,
+    "number": 926,
     "title": "GROUP BY dept 수행 시 생성되는 그룹 수는?",
     "options": [
       "2",
@@ -35405,11 +31053,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11795,
+    "id": 11726,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 996,
+    "number": 927,
     "title": "다음 중 HAVING 절에 대한 설명으로 옳은 것은?",
     "options": [
       "HAVING은 GROUP BY 이전에 행을 제거한다.",
@@ -35488,11 +31136,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11796,
+    "id": 11727,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 997,
+    "number": 928,
     "title": "다음 SQL 실행 결과 값으로 옳은 것은?",
     "options": [
       "300",
@@ -35545,11 +31193,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11797,
+    "id": 11728,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 998,
+    "number": 929,
     "title": "다음 SALARY 데이터에서 AVG(salary) 값은?",
     "options": [
       "750",
@@ -35598,11 +31246,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11798,
+    "id": 11729,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 999,
+    "number": 930,
     "title": "bonus 값이 100, 200, NULL, NULL일 때 SUM(bonus) 결과는?",
     "options": [
       "100",
@@ -35651,11 +31299,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11799,
+    "id": 11730,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 1000,
+    "number": 931,
     "title": "COUNT(*)와 COUNT(col)의 차이 설명으로 옳은 것은?",
     "options": [
       "COUNT(*)는 전체 행 수를, COUNT(col)은 NULL이 아닌 값 수를 반환한다.",
@@ -35671,11 +31319,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "NULL"
   },
   {
-    "id": 11800,
+    "id": 11731,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1001,
+    "number": 932,
     "title": "IN과 EXISTS 비교로 가장 적절한 것은?",
     "options": [
       "IN은 서브쿼리를 사용할 수 없다.",
@@ -35741,11 +31389,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11801,
+    "id": 11732,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1002,
+    "number": 933,
     "title": "다음 데이터에서 주문이 없는 고객 ID는?",
     "options": [
       "101",
@@ -35811,11 +31459,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11802,
+    "id": 11733,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1003,
+    "number": 934,
     "title": "다음 조건의 의미로 옳은 것은? salary > ALL (SELECT salary FROM emp WHERE dept = 'HR')",
     "options": [
       "HR 부서의 최소 급여보다 큰 값을 찾는다.",
@@ -35881,11 +31529,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11803,
+    "id": 11734,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1004,
+    "number": 935,
     "title": "ANY 비교에 대한 설명으로 옳은 것은?",
     "options": [
       "30보다 커야만 참이다.",
@@ -35955,11 +31603,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11804,
+    "id": 11735,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1005,
+    "number": 936,
     "title": "다음 SQL 결과로 조회되는 사원 수는?",
     "options": [
       "1",
@@ -36012,11 +31660,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11805,
+    "id": 11736,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1006,
+    "number": 937,
     "title": "그림 데이터에서 위 SQL 결과로 조회되는 사원 수는?",
     "options": [
       "1",
@@ -36069,11 +31717,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11806,
+    "id": 11737,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1007,
+    "number": 938,
     "title": "다음 SQL에서 내부 쿼리의 그룹 기준은?",
     "options": [
       "사원별",
@@ -36126,11 +31774,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11807,
+    "id": 11738,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1008,
+    "number": 939,
     "title": "아래 EMP 데이터와 상관 서브쿼리 예시를 보고, 이를 JOIN + GROUP BY 형태로 바꿀 때 핵심 아이디어로 가장 적절한 것은?",
     "options": [
       "원본 테이블을 삭제한다.",
@@ -36183,11 +31831,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11808,
+    "id": 11739,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1009,
+    "number": 940,
     "title": "col1=100, col2=100일 때 다음 표현식 결과로 옳은 것은?",
     "options": [
       "0",
@@ -36209,11 +31857,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11809,
+    "id": 11740,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1010,
+    "number": 941,
     "title": "NVL(col, 0)의 의미로 옳은 것은?",
     "options": [
       "col이 0이면 NULL로 바꾼다.",
@@ -36229,11 +31877,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "NULL"
   },
   {
-    "id": 11810,
+    "id": 11741,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1011,
+    "number": 942,
     "title": "COALESCE(col1, col2, 0)의 설명으로 옳은 것은?",
     "options": [
       "항상 마지막 값 0을 반환한다.",
@@ -36249,11 +31897,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "NULL"
   },
   {
-    "id": 11811,
+    "id": 11742,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1012,
+    "number": 943,
     "title": "다음 계층형 질의 결과에서 CONNECT_BY_ISLEAF = 1 이고 LEVEL = 3 인 행 수는?",
     "options": [
       "2",
@@ -36321,11 +31969,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11812,
+    "id": 11743,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1013,
+    "number": 944,
     "title": "다음 계층형 질의 결과에서 LEVEL = 2인 행 수는?",
     "options": [
       "1",
@@ -36393,11 +32041,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11813,
+    "id": 11744,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1014,
+    "number": 945,
     "title": "다음 계층형 질의 결과에서 DEV_B의 PATH 값으로 옳은 것은?",
     "options": [
       "CEO > SALES_MGR > DEV_B",
@@ -36465,11 +32113,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11814,
+    "id": 11745,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1015,
+    "number": 946,
     "title": "다음 계층형 질의에서 DEV_A 행의 ROOT_NAME 값으로 옳은 것은?",
     "options": [
       "DEV_MGR",
@@ -36537,11 +32185,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11815,
+    "id": 11746,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1016,
+    "number": 947,
     "title": "다음 PIVOT SQL 결과에서 SALES 행의 (Q1 + Q2) 합계는?",
     "options": [
       "200",
@@ -36604,11 +32252,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11816,
+    "id": 11747,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1017,
+    "number": 948,
     "title": "다음 PIVOT SQL에 대한 설명으로 옳은 것은?",
     "options": [
       "dept 값이 열로 전개된다.",
@@ -36671,11 +32319,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11817,
+    "id": 11748,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1018,
+    "number": 949,
     "title": "다음 SQL 결과에서 rn = 1인 행으로 옳은 것은?",
     "options": [
       "BUSAN, A, 100",
@@ -36728,11 +32376,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11818,
+    "id": 11749,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1019,
+    "number": 950,
     "title": "다음 SQL 실행 결과 값으로 옳은 것은?",
     "options": [
       "2",
@@ -36785,11 +32433,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11819,
+    "id": 11750,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1020,
+    "number": 951,
     "title": "ORDER BY dept, salary DESC의 정렬 우선순위는?",
     "options": [
       "salary 내림차순 후 dept 오름차순이다.",
@@ -36805,11 +32453,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "DML"
   },
   {
-    "id": 11820,
+    "id": 11751,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1021,
+    "number": 952,
     "title": "ORDER BY 절에 대한 설명으로 옳은 것은?",
     "options": [
       "WHERE 절보다 먼저 수행된다.",
@@ -36825,11 +32473,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "DML"
   },
   {
-    "id": 11821,
+    "id": 11752,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1022,
+    "number": 953,
     "title": "다음 SQL 결과에서 rn <> rnk 인 행 수는?",
     "options": [
       "0",
@@ -36887,11 +32535,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11822,
+    "id": 11753,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1023,
+    "number": 954,
     "title": "BUSAN 지역 데이터에서 RANK() OVER(PARTITION BY region ORDER BY amount DESC) 결과로 옳은 것은?",
     "options": [
       "1, 2, 3",
@@ -36945,11 +32593,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11823,
+    "id": 11754,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1024,
+    "number": 955,
     "title": "ROW_NUMBER()와 RANK()의 차이로 옳은 것은?",
     "options": [
       "두 함수는 항상 같은 값을 반환한다.",
@@ -37003,11 +32651,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11824,
+    "id": 11755,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1025,
+    "number": 956,
     "title": "OVER(PARTITION BY region)의 의미로 옳은 것은?",
     "options": [
       "출력 결과를 삭제한다.",
@@ -37061,11 +32709,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11825,
+    "id": 11756,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1026,
+    "number": 957,
     "title": "다음 SQL 결과에서 gr = 1 이고 gp = 1 인 행 수는?",
     "options": [
       "0",
@@ -37118,11 +32766,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11826,
+    "id": 11757,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1027,
+    "number": 958,
     "title": "GROUPING SETS((region), (product))의 의미로 옳은 것은?",
     "options": [
       "상세 행만 반환한다.",
@@ -37171,11 +32819,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11827,
+    "id": 11758,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1028,
+    "number": 959,
     "title": "ROLLUP에서 소계 행 판별에 사용되는 함수로 옳은 것은?",
     "options": [
       "SUBTOTAL",
@@ -37224,11 +32872,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11828,
+    "id": 11759,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1029,
+    "number": 960,
     "title": "다음 SQL 실행 결과 행 수는?",
     "options": [
       "1",
@@ -37250,11 +32898,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11829,
+    "id": 11760,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1030,
+    "number": 961,
     "title": "A={1,2,2,3}, B={2,3,4} 일 때 UNION 결과 원소 집합은?",
     "options": [
       "{1,2,2,3,4}",
@@ -37276,11 +32924,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11830,
+    "id": 11761,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1031,
+    "number": 962,
     "title": "INTERSECT의 의미로 옳은 것은?",
     "options": [
       "합집합",
@@ -37296,11 +32944,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "집합 연산자"
   },
   {
-    "id": 11831,
+    "id": 11762,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1032,
+    "number": 963,
     "title": "ORDERS와 ORDER_ITEM의 관계로 옳은 것은?",
     "options": [
       "1:1",
@@ -37324,11 +32972,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11832,
+    "id": 11763,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 1033,
+    "number": 964,
     "title": "주문상품 엔터티의 기본키로 가장 적절한 것은?",
     "options": [
       "product_id",
@@ -37352,11 +33000,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11833,
+    "id": 11764,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 1034,
+    "number": 965,
     "title": "ERD 설계 관점에서 주문일(order_date)이 속해야 할 엔터티는?",
     "options": [
       "CUSTOMER",
@@ -37380,11 +33028,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11834,
+    "id": 11765,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 1035,
+    "number": 966,
     "title": "다음 제약 조건 가정에서 부모 ORDERS 행 삭제에 대한 설명으로 옳은 것은?",
     "options": [
       "자식 FK가 자동으로 NULL로 바뀐다.",
@@ -37412,11 +33060,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11835,
+    "id": 11766,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1036,
+    "number": 967,
     "title": "FK 컬럼의 NULL 허용 여부로 옳은 것은?",
     "options": [
       "외래키는 항상 NULL 불가다.",
@@ -37440,11 +33088,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11836,
+    "id": 11767,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 1037,
+    "number": 968,
     "title": "부모 ORDERS 행을 삭제하려 할 때 자식 ORDER_DETAIL이 존재하면 기본 동작은?",
     "options": [
       "자동으로 자식도 삭제된다.",
@@ -37472,11 +33120,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11837,
+    "id": 11768,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1038,
+    "number": 969,
     "title": "참조 무결성의 의미로 옳은 것은?",
     "options": [
       "모든 컬럼이 UNIQUE여야 한다.",
@@ -37500,11 +33148,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11838,
+    "id": 11769,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 1039,
+    "number": 970,
     "title": "고유성, 엔터티 무결성, 참조 무결성 중 FK와 직접 연결되는 것은?",
     "options": [
       "도메인 무결성",
@@ -37528,11 +33176,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11839,
+    "id": 11770,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 1040,
+    "number": 971,
     "title": "다음 주문 테이블에서 기본키가 (주문번호, 상품번호)일 때 가장 적절한 설명은?",
     "options": [
       "모든 비키 속성이 기본키 전체에만 완전 함수 종속한다.",
@@ -37588,11 +33236,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11840,
+    "id": 11771,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1041,
+    "number": 972,
     "title": "2NF에 대한 설명으로 옳은 것은?",
     "options": [
       "반복 속성만 제거하면 된다.",
@@ -37644,11 +33292,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11841,
+    "id": 11772,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1042,
+    "number": 973,
     "title": "다음 중 수정 이상(update anomaly)의 예로 옳은 것은?",
     "options": [
       "상품 하나를 삭제했더니 고객 정보도 사라지는 상황",
@@ -37700,11 +33348,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11842,
+    "id": 11773,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 1043,
+    "number": 974,
     "title": "삽입 이상(insert anomaly)의 예로 옳은 것은?",
     "options": [
       "한 고객의 등급 변경 시 여러 행을 수정하는 상황",
@@ -37756,11 +33404,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11843,
+    "id": 11774,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 1044,
+    "number": 975,
     "title": "다음 VIEW 정의에 대한 설명으로 옳은 것은?",
     "options": [
       "기본 테이블과 완전히 분리되어 별도 데이터가 자동 저장된다.",
@@ -37782,11 +33430,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11844,
+    "id": 11775,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1045,
+    "number": 976,
     "title": "일반 VIEW의 특징으로 옳은 것은?",
     "options": [
       "항상 인덱스를 가진다.",
@@ -37802,11 +33450,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "View"
   },
   {
-    "id": 11845,
+    "id": 11776,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 1046,
+    "number": 977,
     "title": "다음 VIEW에 WHERE dept='SALES'가 포함된 경우 조회 결과로 옳은 것은?",
     "options": [
       "모든 부서가 조회된다.",
@@ -37828,11 +33476,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11846,
+    "id": 11777,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1047,
+    "number": 978,
     "title": "뷰의 장점으로 적절한 것은?",
     "options": [
       "기본 테이블 없이도 자동으로 데이터가 생성된다.",
@@ -37848,11 +33496,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "View"
   },
   {
-    "id": 11847,
+    "id": 11778,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 1048,
+    "number": 979,
     "title": "기본 테이블 구조가 변경될 때 VIEW 관련 주의점으로 옳은 것은?",
     "options": [
       "뷰는 기본 테이블과 완전히 독립적이다.",
@@ -37868,11 +33516,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "View"
   },
   {
-    "id": 11848,
+    "id": 11779,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1049,
+    "number": 980,
     "title": "다음 DDL 흐름에 대한 설명으로 옳은 것은?",
     "options": [
       "CREATE TABLE emp 문 안에서만 외래키를 추가할 수 있다.",
@@ -37894,11 +33542,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11849,
+    "id": 11780,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1050,
+    "number": 981,
     "title": "CREATE TABLE의 의미로 옳은 것은?",
     "options": [
       "기존 데이터를 조회한다.",
@@ -37914,11 +33562,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "DDL"
   },
   {
-    "id": 11850,
+    "id": 11781,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1051,
+    "number": 982,
     "title": "DROP TABLE의 효과로 옳은 것은?",
     "options": [
       "컬럼만 삭제한다.",
@@ -37934,11 +33582,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "DDL"
   },
   {
-    "id": 11851,
+    "id": 11782,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1052,
+    "number": 983,
     "title": "TRUNCATE TABLE과 DELETE의 차이로 옳은 것은?",
     "options": [
       "TRUNCATE는 WHERE 조건을 사용할 수 있다.",
@@ -37954,11 +33602,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "DDL"
   },
   {
-    "id": 11852,
+    "id": 11783,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1053,
+    "number": 984,
     "title": "ALTER TABLE로 가능한 작업으로 옳은 것은?",
     "options": [
       "데이터만 조회",
@@ -37974,11 +33622,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "DDL"
   },
   {
-    "id": 11853,
+    "id": 11784,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1054,
+    "number": 985,
     "title": "다음 권한 부여/회수 흐름에 대한 설명으로 옳은 것은?",
     "options": [
       "user2 권한은 원래 부여자 회수와 무관하게 영구 유지된다.",
@@ -38000,11 +33648,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11854,
+    "id": 11785,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1055,
+    "number": 986,
     "title": "GRANT SELECT, INSERT ON emp TO user1의 의미로 옳은 것은?",
     "options": [
       "user1을 삭제한다.",
@@ -38020,11 +33668,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "DCL"
   },
   {
-    "id": 11855,
+    "id": 11786,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1056,
+    "number": 987,
     "title": "REVOKE INSERT ON emp FROM user1의 의미로 옳은 것은?",
     "options": [
       "SELECT 권한도 함께 회수된다.",
@@ -38040,11 +33688,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "DCL"
   },
   {
-    "id": 11856,
+    "id": 11787,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1057,
+    "number": 988,
     "title": "WITH GRANT OPTION이 있는 권한의 특징으로 옳은 것은?",
     "options": [
       "권한을 절대 회수할 수 없다.",
@@ -38060,11 +33708,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "DCL"
   },
   {
-    "id": 11857,
+    "id": 11788,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1058,
+    "number": 989,
     "title": "DCL 명령의 범주로 옳은 것은?",
     "options": [
       "데이터 조회",
@@ -38080,11 +33728,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "DCL"
   },
   {
-    "id": 11858,
+    "id": 11789,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1059,
+    "number": 990,
     "title": "다음 트랜잭션 흐름 후 최종 반영되는 작업으로 옳은 것은?",
     "options": [
       "작업1만 반영된다.",
@@ -38106,11 +33754,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11859,
+    "id": 11790,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 1060,
+    "number": 991,
     "title": "다음 트랜잭션 흐름 후 최종 반영되는 작업으로 옳은 것은?",
     "options": [
       "작업1과 작업4만 반영된다.",
@@ -38132,11 +33780,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11860,
+    "id": 11791,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1061,
+    "number": 992,
     "title": "다음 트랜잭션 흐름에 대한 설명으로 옳은 것은?",
     "options": [
       "모든 작업이 취소된다.",
@@ -38158,11 +33806,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11861,
+    "id": 11792,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 1062,
+    "number": 993,
     "title": "다음 트랜잭션 흐름 후 최종 반영되는 작업으로 옳은 것은?",
     "options": [
       "작업1만 반영된다.",
@@ -38184,11 +33832,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11862,
+    "id": 11793,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 1063,
+    "number": 994,
     "title": "ANSI/SPARC 3단계 스키마 구조에 대한 설명으로 옳은 것은?",
     "options": [
       "외부 스키마는 물리 저장 장치를 직접 기술한다.",
@@ -38204,11 +33852,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "데이터베이스 개념"
   },
   {
-    "id": 11863,
+    "id": 11794,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 1064,
+    "number": 995,
     "title": "논리적 데이터 독립성에 대한 설명으로 가장 적절한 것은?",
     "options": [
       "테이블스페이스 위치가 바뀌면 모든 응용 SQL을 수정해야 한다.",
@@ -38224,11 +33872,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "데이터베이스 개념"
   },
   {
-    "id": 11864,
+    "id": 11795,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 1065,
+    "number": 996,
     "title": "데이터 사전(Data Dictionary)에 저장되는 정보로 옳은 것은?",
     "options": [
       "주문 상세 내역과 같은 트랜잭션 데이터",
@@ -38244,11 +33892,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "데이터베이스 개념"
   },
   {
-    "id": 11865,
+    "id": 11796,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 1066,
+    "number": 997,
     "title": "관계형 모델의 릴레이션 특성으로 옳은 것은?",
     "options": [
       "중복 행이 많을수록 릴레이션의 품질이 좋아진다.",
@@ -38264,11 +33912,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "데이터베이스 개념"
   },
   {
-    "id": 11866,
+    "id": 11797,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 1067,
+    "number": 998,
     "title": "데이터베이스 시스템의 장점으로 가장 적절한 것은?",
     "options": [
       "파일 단위 중복을 늘려 응답 속도를 보장한다.",
@@ -38284,11 +33932,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "데이터베이스 개념"
   },
   {
-    "id": 11867,
+    "id": 11798,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 1068,
+    "number": 999,
     "title": "개념 데이터 모델링 단계에서 주로 수행하는 작업으로 옳은 것은?",
     "options": [
       "인덱스와 저장 파라미터를 결정한다.",
@@ -38304,11 +33952,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "데이터 모델링 기법"
   },
   {
-    "id": 11868,
+    "id": 11799,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 1069,
+    "number": 1000,
     "title": "N:M 관계를 논리 모델로 전환할 때 적절한 방법은?",
     "options": [
       "한쪽 엔터티를 삭제한다.",
@@ -38324,11 +33972,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "데이터 모델링 기법"
   },
   {
-    "id": 11869,
+    "id": 11800,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 1070,
+    "number": 1001,
     "title": "슈퍼타입/서브타입 모델링이 적절한 경우로 옳은 것은?",
     "options": [
       "모든 유형이 완전히 동일한 속성만 가질 때",
@@ -38344,11 +33992,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "데이터 모델링 기법"
   },
   {
-    "id": 11870,
+    "id": 11801,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 1071,
+    "number": 1002,
     "title": "속성의 원자성을 높이는 모델링 방식으로 옳은 것은?",
     "options": [
       "전화번호 3개를 하나의 컬럼에 콤마로 저장한다.",
@@ -38364,11 +34012,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "데이터 모델링 기법"
   },
   {
-    "id": 11871,
+    "id": 11802,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 1072,
+    "number": 1003,
     "title": "일반적인 데이터베이스 설계 순서로 옳은 것은?",
     "options": [
       "물리 설계 -> 개념 설계 -> 논리 설계",
@@ -38384,11 +34032,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "데이터베이스 설계"
   },
   {
-    "id": 11872,
+    "id": 11803,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 1073,
+    "number": 1004,
     "title": "물리 설계 단계에서 주로 결정하는 사항으로 옳은 것은?",
     "options": [
       "엔터티와 관계의 후보 목록",
@@ -38404,11 +34052,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "데이터베이스 설계"
   },
   {
-    "id": 11873,
+    "id": 11804,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 1074,
+    "number": 1005,
     "title": "정규화된 논리 모델을 반정규화하는 시점으로 가장 적절한 것은?",
     "options": [
       "업무 분석 전에 무조건 먼저 수행한다.",
@@ -38424,11 +34072,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "데이터베이스 설계"
   },
   {
-    "id": 11874,
+    "id": 11805,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 1075,
+    "number": 1006,
     "title": "트랜잭션 처리량이 매우 큰 테이블에 대해 설계 단계에서 우선 검토할 사항으로 옳은 것은?",
     "options": [
       "모든 컬럼을 PK에 포함하는 방법",
@@ -38444,11 +34092,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "데이터베이스 설계"
   },
   {
-    "id": 11875,
+    "id": 11806,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 1076,
+    "number": 1007,
     "title": "부모-자식 구조를 설계할 때 가장 먼저 확인해야 할 사항으로 옳은 것은?",
     "options": [
       "화면 버튼 색상",
@@ -38464,11 +34112,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "데이터베이스 설계"
   },
   {
-    "id": 11876,
+    "id": 11807,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1077,
+    "number": 1008,
     "title": "다음 ERD 기준 CUSTOMER와 ORDERS의 관계로 옳은 것은?",
     "options": [
       "한 고객은 정확히 한 주문만 가진다.",
@@ -38492,11 +34140,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11877,
+    "id": 11808,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 1078,
+    "number": 1009,
     "title": "다음 ERD 기준 ORDER_ITEM의 식별자로 가장 적절한 것은?",
     "options": [
       "product_id 단일 식별자",
@@ -38520,11 +34168,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11878,
+    "id": 11809,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1079,
+    "number": 1010,
     "title": "다음 ERD 기준 ORDERS와 ORDER_ITEM의 관계 특징으로 옳은 것은?",
     "options": [
       "항상 1:1 관계다.",
@@ -38548,11 +34196,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11879,
+    "id": 11810,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 1080,
+    "number": 1011,
     "title": "다음 ERD 기준 한 주문이 여러 ORDER_ITEM을 가질 수 있다는 사실은 무엇으로 표현되는가?",
     "options": [
       "CUSTOMER와 ORDER_ITEM 사이의 1:1 관계",
@@ -38576,11 +34224,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11880,
+    "id": 11811,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1081,
+    "number": 1012,
     "title": "다음 ERD에서 관계 차수를 잘못 해석한 설명은?",
     "options": [
       "한 고객은 주문이 없을 수도 있다.",
@@ -38604,11 +34252,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11881,
+    "id": 11812,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1082,
+    "number": 1013,
     "title": "다음 테이블과 가정 기준으로 2NF 위반 원인으로 옳은 것은?",
     "options": [
       "모든 속성이 후보키 전체에 완전 함수 종속된다.",
@@ -38664,11 +34312,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11882,
+    "id": 11813,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 1083,
+    "number": 1014,
     "title": "다음 테이블과 가정 기준으로 우선 분리해야 할 대상 조합으로 가장 적절한 것은?",
     "options": [
       "주문 관련 속성과 상품 관련 속성을 분리한다.",
@@ -38724,11 +34372,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11883,
+    "id": 11814,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 1084,
+    "number": 1015,
     "title": "다음 테이블과 가정 기준으로 주문이 없을 때 고객등급 정보를 저장하기 어려운 현상은?",
     "options": [
       "갱신 이상",
@@ -38784,11 +34432,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11884,
+    "id": 11815,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1085,
+    "number": 1016,
     "title": "다음 테이블과 가정 기준으로 3NF 관점에서 추가 분리가 필요한 속성으로 옳은 것은?",
     "options": [
       "주문번호",
@@ -38844,11 +34492,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11885,
+    "id": 11816,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1086,
+    "number": 1017,
     "title": "다음 이미지의 명령 중 테이블 구조를 변경하는 문장으로 옳은 것은?",
     "options": [
       "CREATE TABLE emp (...);",
@@ -38871,11 +34519,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11886,
+    "id": 11817,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1087,
+    "number": 1018,
     "title": "다음 중 객체 자체를 제거하는 DDL 명령으로 옳은 것은?",
     "options": [
       "ALTER TABLE emp ADD hire_date DATE;",
@@ -38898,11 +34546,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11887,
+    "id": 11818,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1088,
+    "number": 1019,
     "title": "다음 설명 중 TRUNCATE TABLE에 대한 설명으로 가장 적절한 것은?",
     "options": [
       "조건절을 사용해 일부 행만 삭제한다.",
@@ -38918,11 +34566,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "DDL"
   },
   {
-    "id": 11888,
+    "id": 11819,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1089,
+    "number": 1020,
     "title": "CREATE TABLE 문의 주된 목적은 무엇인가?",
     "options": [
       "기존 데이터를 조회하는 것",
@@ -38938,11 +34586,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "DDL"
   },
   {
-    "id": 11889,
+    "id": 11820,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1090,
+    "number": 1021,
     "title": "ALTER TABLE로 가능한 작업으로 옳은 것은?",
     "options": [
       "데이터 조회만 수행",
@@ -38958,11 +34606,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "DDL"
   },
   {
-    "id": 11890,
+    "id": 11821,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1091,
+    "number": 1022,
     "title": "다음 이미지 기준으로 user1에게 처음 부여되는 권한으로 옳은 것은?",
     "options": [
       "emp 테이블의 DELETE 권한",
@@ -38985,11 +34633,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11891,
+    "id": 11822,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1092,
+    "number": 1023,
     "title": "다음 이미지 기준으로 회수되는 권한으로 옳은 것은?",
     "options": [
       "emp 테이블의 SELECT 권한",
@@ -39012,11 +34660,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11892,
+    "id": 11823,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1093,
+    "number": 1024,
     "title": "다음 권한 흐름에서 최종 결과로 옳은 것은?",
     "options": [
       "user2 권한은 절대 회수되지 않는다.",
@@ -39038,11 +34686,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11893,
+    "id": 11824,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1094,
+    "number": 1025,
     "title": "DCL이 담당하는 영역으로 옳은 것은?",
     "options": [
       "테이블 생성",
@@ -39058,11 +34706,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "DCL"
   },
   {
-    "id": 11894,
+    "id": 11825,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1095,
+    "number": 1026,
     "title": "다음 SQL문의 의미로 옳은 것은?",
     "options": [
       "emp_backup을 삭제한다.",
@@ -39084,11 +34732,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11895,
+    "id": 11826,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1096,
+    "number": 1027,
     "title": "다음 SQL문의 의미로 옳은 것은?",
     "options": [
       "emp 테이블 구조를 삭제한다.",
@@ -39110,11 +34758,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11896,
+    "id": 11827,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1097,
+    "number": 1028,
     "title": "MERGE 문에 대한 설명으로 옳은 것은?",
     "options": [
       "항상 DELETE만 수행한다.",
@@ -39130,11 +34778,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "DML"
   },
   {
-    "id": 11897,
+    "id": 11828,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1098,
+    "number": 1029,
     "title": "다음 SQL에서 WHERE 절이 없을 때 발생하는 결과로 옳은 것은?",
     "options": [
       "첫 번째 행만 수정된다.",
@@ -39156,11 +34804,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11898,
+    "id": 11829,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 1099,
+    "number": 1030,
     "title": "다음 표현식 결과로 옳은 것은?",
     "options": [
       "0",
@@ -39182,11 +34830,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11899,
+    "id": 11830,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1100,
+    "number": 1031,
     "title": "다음 SQL 결과로 옳은 것은?",
     "options": [
       "comm이 NULL이면 전체 결과가 무조건 NULL이다.",
@@ -39208,11 +34856,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11900,
+    "id": 11831,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1101,
+    "number": 1032,
     "title": "다음 표현식 결과로 옳은 것은?",
     "options": [
       "NULL",
@@ -39234,11 +34882,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11901,
+    "id": 11832,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 1102,
+    "number": 1033,
     "title": "다음 조건으로 올바르게 NULL이 아닌 행만 조회하는 방법은?",
     "options": [
       "WHERE bonus <> NULL",
@@ -39254,11 +34902,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "NULL"
   },
   {
-    "id": 11902,
+    "id": 11833,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1103,
+    "number": 1034,
     "title": "엔터티 무결성(Entity Integrity)에 대한 설명으로 옳은 것은?",
     "options": [
       "외래키는 반드시 NULL이어야 한다.",
@@ -39274,11 +34922,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "데이터 무결성"
   },
   {
-    "id": 11903,
+    "id": 11834,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1104,
+    "number": 1035,
     "title": "도메인 무결성을 보장하는 대표 방법으로 옳은 것은?",
     "options": [
       "외래키만 두 개 이상 둔다.",
@@ -39294,11 +34942,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "데이터 무결성"
   },
   {
-    "id": 11904,
+    "id": 11835,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 1105,
+    "number": 1036,
     "title": "UNIQUE 제약과 PRIMARY KEY의 차이로 옳은 것은?",
     "options": [
       "UNIQUE는 NULL을 절대 허용할 수 없다.",
@@ -39314,11 +34962,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "데이터 무결성"
   },
   {
-    "id": 11905,
+    "id": 11836,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1106,
+    "number": 1037,
     "title": "자식 행이 존재하는 부모 행 삭제 시 일반적으로 발생하는 결과로 옳은 것은?",
     "options": [
       "항상 자동으로 자식도 삭제된다.",
@@ -39340,11 +34988,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11906,
+    "id": 11837,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 1107,
+    "number": 1038,
     "title": "다음 트랜잭션 흐름 후 최종 반영되는 작업으로 옳은 것은?",
     "options": [
       "작업1만 반영된다.",
@@ -39366,11 +35014,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11907,
+    "id": 11838,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1108,
+    "number": 1039,
     "title": "다음 트랜잭션 흐름에 대한 설명으로 옳은 것은?",
     "options": [
       "작업1만 반영된다.",
@@ -39392,11 +35040,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11908,
+    "id": 11839,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 1109,
+    "number": 1040,
     "title": "다음 트랜잭션 흐름에 대한 설명으로 옳은 것은?",
     "options": [
       "모든 작업이 취소된다.",
@@ -39418,11 +35066,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11909,
+    "id": 11840,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1110,
+    "number": 1041,
     "title": "다음 SQL 결과로 옳은 것은?",
     "options": [
       "SQ",
@@ -39444,11 +35092,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11910,
+    "id": 11841,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1111,
+    "number": 1042,
     "title": "다음 SQL 결과로 옳은 것은?",
     "options": [
       "1",
@@ -39470,11 +35118,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11911,
+    "id": 11842,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1112,
+    "number": 1043,
     "title": "다음 SQL 결과로 옳은 것은?",
     "options": [
       "845",
@@ -39496,11 +35144,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11912,
+    "id": 11843,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1113,
+    "number": 1044,
     "title": "다음 SQL 결과로 옳은 것은?",
     "options": [
       "3",
@@ -39522,11 +35170,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11913,
+    "id": 11844,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1114,
+    "number": 1045,
     "title": "다음 BONUS 데이터에서 COUNT(bonus) 값은?",
     "options": [
       "1",
@@ -39575,11 +35223,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11914,
+    "id": 11845,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1115,
+    "number": 1046,
     "title": "다음 BONUS 데이터에서 SUM(NVL(bonus, 0)) 값은?",
     "options": [
       "200",
@@ -39632,11 +35280,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11915,
+    "id": 11846,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1116,
+    "number": 1047,
     "title": "다음 BONUS 데이터에서 MAX(bonus) 값은?",
     "options": [
       "100",
@@ -39685,11 +35333,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11916,
+    "id": 11847,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1117,
+    "number": 1048,
     "title": "다음 SALARY 데이터에서 COUNT(*) - COUNT(salary) 결과는?",
     "options": [
       "0",
@@ -39742,11 +35390,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11917,
+    "id": 11848,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1118,
+    "number": 1049,
     "title": "다음 SQL 결과로 옳은 것은?",
     "options": [
       "전체 행 수를 센다.",
@@ -39768,11 +35416,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11918,
+    "id": 11849,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1119,
+    "number": 1050,
     "title": "다음 SQL 결과 행 수로 옳은 것은?",
     "options": [
       "1",
@@ -39794,11 +35442,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11919,
+    "id": 11850,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1120,
+    "number": 1051,
     "title": "다음 SQL 결과 행 수로 옳은 것은?",
     "options": [
       "1",
@@ -39820,11 +35468,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11920,
+    "id": 11851,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1121,
+    "number": 1052,
     "title": "다음 SQL 결과 값으로 옳은 것은?",
     "options": [
       "1",
@@ -39846,11 +35494,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11921,
+    "id": 11852,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1122,
+    "number": 1053,
     "title": "다음 SQL 결과 값으로 옳은 것은?",
     "options": [
       "1",
@@ -39872,11 +35520,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11922,
+    "id": 11853,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1123,
+    "number": 1054,
     "title": "집합 연산을 사용하기 위한 조건으로 옳은 것은?",
     "options": [
       "각 SELECT의 WHERE 절만 동일하면 된다.",
@@ -39892,11 +35540,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "집합 연산자"
   },
   {
-    "id": 11923,
+    "id": 11854,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1124,
+    "number": 1055,
     "title": "다음 SQL 결과에서 CEO의 LEVEL 값으로 옳은 것은?",
     "options": [
       "0",
@@ -39964,11 +35612,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11924,
+    "id": 11855,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1125,
+    "number": 1056,
     "title": "다음 SQL 결과에서 리프 노드 수로 옳은 것은?",
     "options": [
       "2",
@@ -40036,11 +35684,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11925,
+    "id": 11856,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1126,
+    "number": 1057,
     "title": "다음 SQL 결과에서 SALES_B의 루트 값으로 옳은 것은?",
     "options": [
       "SALES_MGR",
@@ -40108,11 +35756,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11926,
+    "id": 11857,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1127,
+    "number": 1058,
     "title": "뷰(View)에 대한 설명으로 옳은 것은?",
     "options": [
       "뷰는 항상 독립적인 물리 데이터를 가진다.",
@@ -40128,11 +35776,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "View"
   },
   {
-    "id": 11927,
+    "id": 11858,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 1128,
+    "number": 1059,
     "title": "다음 뷰 정의를 기준으로 옳은 설명은?",
     "options": [
       "뷰는 생성 시점의 데이터만 영구 저장한다.",
@@ -40155,11 +35803,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11928,
+    "id": 11859,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1129,
+    "number": 1060,
     "title": "집계 함수와 GROUP BY를 포함한 뷰에 대한 설명으로 가장 적절한 것은?",
     "options": [
       "항상 자유롭게 INSERT, UPDATE가 가능하다.",
@@ -40175,11 +35823,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "View"
   },
   {
-    "id": 11929,
+    "id": 11860,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1130,
+    "number": 1061,
     "title": "뷰를 사용하는 주요 목적로 적절한 것은?",
     "options": [
       "반드시 모든 테이블을 하나로 합치는 것",
@@ -40195,11 +35843,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "View"
   },
   {
-    "id": 11930,
+    "id": 11861,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1131,
+    "number": 1062,
     "title": "다음 SQL에서 동점자가 있을 때 RANK와 DENSE_RANK의 차이로 옳은 것은?",
     "options": [
       "둘 다 항상 동일하다.",
@@ -40215,11 +35863,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "윈도우 함수"
   },
   {
-    "id": 11931,
+    "id": 11862,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1132,
+    "number": 1063,
     "title": "다음 SQL 결과로 옳은 것은?",
     "options": [
       "전체 합계가 한 행만 표시된다.",
@@ -40277,11 +35925,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11932,
+    "id": 11863,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1133,
+    "number": 1064,
     "title": "다음 SQL 결과로 가장 적절한 설명은?",
     "options": [
       "최종 합계만 한 번 계산한다.",
@@ -40303,11 +35951,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11933,
+    "id": 11864,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1134,
+    "number": 1065,
     "title": "ROW_NUMBER() OVER (PARTITION BY dept ORDER BY sal DESC)의 의미로 옳은 것은?",
     "options": [
       "전체 테이블에서 한 번만 번호를 부여한다.",
@@ -40323,11 +35971,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "윈도우 함수"
   },
   {
-    "id": 11934,
+    "id": 11865,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1135,
+    "number": 1066,
     "title": "복합 인덱스 (col1, col2)가 있을 때 일반적으로 인덱스 활용도가 높은 조건으로 옳은 것은?",
     "options": [
       "WHERE col2 = :v2",
@@ -40343,11 +35991,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "인덱스"
   },
   {
-    "id": 11935,
+    "id": 11866,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1136,
+    "number": 1067,
     "title": "인덱스 컬럼에 함수가 적용되면 일반적으로 주의할 점으로 옳은 것은?",
     "options": [
       "인덱스가 더 잘 사용된다.",
@@ -40363,11 +36011,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "인덱스"
   },
   {
-    "id": 11936,
+    "id": 11867,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1137,
+    "number": 1068,
     "title": "선택도가 매우 낮은 컬럼에 단독 인덱스를 두었을 때 기대 효과로 가장 적절한 것은?",
     "options": [
       "항상 압도적으로 빠르다.",
@@ -40383,11 +36031,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "인덱스"
   },
   {
-    "id": 11937,
+    "id": 11868,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1138,
+    "number": 1069,
     "title": "인덱스가 많은 테이블에서 INSERT/UPDATE/DELETE가 느려질 수 있는 이유로 옳은 것은?",
     "options": [
       "인덱스는 변경 작업과 무관하다.",
@@ -40403,11 +36051,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "인덱스"
   },
   {
-    "id": 11938,
+    "id": 11869,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1139,
+    "number": 1070,
     "title": "대량 범위 조회에서 인덱스보다 전체 테이블 스캔이 더 적절할 수 있는 경우로 옳은 것은?",
     "options": [
       "한 건만 조회할 때",
@@ -40423,11 +36071,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "인덱스"
   },
   {
-    "id": 11939,
+    "id": 11870,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 1140,
+    "number": 1071,
     "title": "후보키(Candidate Key)에 대한 설명으로 옳은 것은?",
     "options": [
       "유일성만 만족하면 된다.",
@@ -40443,11 +36091,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "식별자"
   },
   {
-    "id": 11940,
+    "id": 11871,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 1141,
+    "number": 1072,
     "title": "슈퍼키(Super Key)에 대한 설명으로 옳은 것은?",
     "options": [
       "항상 최소성을 만족한다.",
@@ -40463,11 +36111,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "식별자"
   },
   {
-    "id": 11941,
+    "id": 11872,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 1142,
+    "number": 1073,
     "title": "대체키(Alternate Key)에 대한 설명으로 옳은 것은?",
     "options": [
       "기본키와 같은 말이다.",
@@ -40483,11 +36131,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "식별자"
   },
   {
-    "id": 11942,
+    "id": 11873,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 1143,
+    "number": 1074,
     "title": "대리키(Surrogate Key)를 사용하는 주된 이유로 적절한 것은?",
     "options": [
       "업무 규칙을 숨기기 위해서만 사용한다.",
@@ -40503,11 +36151,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "식별자"
   },
   {
-    "id": 11943,
+    "id": 11874,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 1144,
+    "number": 1075,
     "title": "복합 기본키에 대한 설명으로 옳은 것은?",
     "options": [
       "각 컬럼 중 하나만 값이 있으면 된다.",
@@ -40523,11 +36171,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "식별자"
   },
   {
-    "id": 11944,
+    "id": 11875,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1145,
+    "number": 1076,
     "title": "다음 조건을 만족하는 값으로 옳은 것은?",
     "options": [
       "AB12",
@@ -40549,11 +36197,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11945,
+    "id": 11876,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1146,
+    "number": 1077,
     "title": "다음 SQL 결과로 옳은 것은?",
     "options": [
       "010-1234-5678",
@@ -40575,11 +36223,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11946,
+    "id": 11877,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1147,
+    "number": 1078,
     "title": "다음 SQL 결과로 옳은 것은?",
     "options": [
       "user",
@@ -40601,11 +36249,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11947,
+    "id": 11878,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1148,
+    "number": 1079,
     "title": "다음 그림과 SQL을 함께 보고 판단할 때, 다음 PIVOT SQL 결과에서 SALES 행의 (Q1 + Q2) 합계는?",
     "options": [
       "210",
@@ -40668,11 +36316,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11948,
+    "id": 11879,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1149,
+    "number": 1080,
     "title": "SQL문을 단계별로 해석하면, 다음 SQL 결과로 옳은 것은?",
     "options": [
       "QL",
@@ -40694,11 +36342,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11949,
+    "id": 11880,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 1150,
+    "number": 1081,
     "title": "실무 적용 관점에서 보면, 개념 데이터 모델링 단계에서 주로 수행하는 작업으로 옳은 것은?",
     "options": [
       "파티션 키와 병렬도만 결정한다.",
@@ -40720,11 +36368,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11950,
+    "id": 11881,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1151,
+    "number": 1082,
     "title": "실무 적용 관점에서 보면, 복합 인덱스 (col1, col2)가 있을 때 일반적으로 인덱스 활용도가 높은 조건으로 옳은 것은?",
     "options": [
       "WHERE TO_CHAR(col1) = '10'만 사용",
@@ -40746,11 +36394,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11951,
+    "id": 11882,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1152,
+    "number": 1083,
     "title": "SQL문을 단계별로 해석하면, 다음 조건을 만족하는 값으로 옳은 것은?",
     "options": [
       "ABCD12",
@@ -40772,11 +36420,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11952,
+    "id": 11883,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1153,
+    "number": 1084,
     "title": "테이블 그림을 기준으로 SQL문을 해석하면, 다음 PIVOT SQL 결과 행 수는?",
     "options": [
       "3",
@@ -40839,11 +36487,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11953,
+    "id": 11884,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 1154,
+    "number": 1085,
     "title": "업무 규칙과 제약조건을 함께 고려하면, N:M 관계를 논리 모델로 전환할 때 적절한 방법은?",
     "options": [
       "N:M 관계는 논리 모델에서 그대로 유지해야 한다.",
@@ -40865,11 +36513,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11954,
+    "id": 11885,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 1155,
+    "number": 1086,
     "title": "업무 규칙과 제약조건을 함께 고려하면, 논리적 데이터 독립성에 대한 설명으로 가장 적절한 것은?",
     "options": [
       "개념 스키마가 바뀌지 않으면 외부 스키마는 물리 저장 방식 변경의 영향을 적게 받는다.",
@@ -40891,11 +36539,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11955,
+    "id": 11886,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 1156,
+    "number": 1087,
     "title": "업무 규칙과 제약조건을 함께 고려하면, 물리 설계 단계에서 주로 결정하는 사항으로 옳은 것은?",
     "options": [
       "인덱스, 파티션, 저장 구조와 접근 경로",
@@ -40917,11 +36565,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11956,
+    "id": 11887,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 1157,
+    "number": 1088,
     "title": "업무 규칙과 제약조건을 함께 고려하면, 슈퍼키(Super Key)에 대한 설명으로 옳은 것은?",
     "options": [
       "반드시 단일 컬럼이어야 한다.",
@@ -40943,11 +36591,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11957,
+    "id": 11888,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1158,
+    "number": 1089,
     "title": "조건식과 함수 의미를 함께 고려하면, 다음 조건을 만족하는 값으로 옳은 것은?",
     "options": [
       "0101234",
@@ -40969,11 +36617,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11958,
+    "id": 11889,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1159,
+    "number": 1090,
     "title": "그림의 데이터와 조건식을 모두 고려하면, 다음 PIVOT SQL 결과 컬럼 구성으로 옳은 것은?",
     "options": [
       "Q1, Q2만",
@@ -41036,11 +36684,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11959,
+    "id": 11890,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1160,
+    "number": 1091,
     "title": "문장을 그대로 평가하면, 다음 SQL 결과로 옳은 것은?",
     "options": [
       "846",
@@ -41062,11 +36710,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11960,
+    "id": 11891,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 1161,
+    "number": 1092,
     "title": "설계 원칙을 기준으로 판단하면, 슈퍼타입/서브타입 모델링이 적절한 경우로 옳은 것은?",
     "options": [
       "공통 속성과 유형별 속성을 함께 관리해야 할 때",
@@ -41088,11 +36736,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11961,
+    "id": 11892,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 1162,
+    "number": 1093,
     "title": "설계 원칙을 기준으로 판단하면, 데이터 사전(Data Dictionary)에 저장되는 정보로 옳은 것은?",
     "options": [
       "테이블, 컬럼, 제약조건과 같은 메타데이터",
@@ -41114,11 +36762,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11962,
+    "id": 11893,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 1163,
+    "number": 1094,
     "title": "설계 원칙을 기준으로 판단하면, 정규화된 논리 모델을 반정규화하는 시점으로 가장 적절한 것은?",
     "options": [
       "물리 설계와 무관하므로 고려하지 않는다.",
@@ -41140,11 +36788,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11963,
+    "id": 11894,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1164,
+    "number": 1095,
     "title": "설계 원칙을 기준으로 판단하면, 선택도가 매우 낮은 컬럼에 단독 인덱스를 두었을 때 기대 효과로 가장 적절한 것은?",
     "options": [
       "조회 패턴에 따라 테이블 전체 스캔이 더 유리할 수 있다.",
@@ -41166,11 +36814,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11964,
+    "id": 11895,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1165,
+    "number": 1096,
     "title": "문장을 그대로 평가하면, 다음 SQL 결과로 옳은 것은?",
     "options": [
       "01012345678",
@@ -41192,11 +36840,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11965,
+    "id": 11896,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1166,
+    "number": 1097,
     "title": "식과 절의 반환 규칙을 적용하면, 다음 SQL 결과로 옳은 것은?",
     "options": [
       "845.5",
@@ -41218,11 +36866,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11966,
+    "id": 11897,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 1167,
+    "number": 1098,
     "title": "데이터 구조의 목적을 생각하면, 속성의 원자성을 높이는 모델링 방식으로 옳은 것은?",
     "options": [
       "반복 속성을 분리하여 하나의 컬럼에는 하나의 값만 저장한다.",
@@ -41244,11 +36892,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11967,
+    "id": 11898,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 1168,
+    "number": 1099,
     "title": "데이터 구조의 목적을 생각하면, 관계형 모델의 릴레이션 특성으로 옳은 것은?",
     "options": [
       "릴레이션에서는 NULL을 사용할 수 없다.",
@@ -41270,11 +36918,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11968,
+    "id": 11899,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1169,
+    "number": 1100,
     "title": "식과 절의 반환 규칙을 적용하면, 다음 SQL 결과로 옳은 것은?",
     "options": [
       "sqld.kr",
@@ -41296,11 +36944,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11969,
+    "id": 11900,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1170,
+    "number": 1101,
     "title": "SQL 표현식 결과를 계산하면, 다음 SQL 결과로 옳은 것은?",
     "options": [
       "4",
@@ -41322,11 +36970,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11970,
+    "id": 11901,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 1171,
+    "number": 1102,
     "title": "출제 포인트를 복합적으로 적용하면, 데이터 모델링의 주요 목적에 대한 설명으로 옳은 것은?",
     "options": [
       "트랜잭션을 모두 배치 처리로 전환하는 것이다.",
@@ -41348,11 +36996,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11971,
+    "id": 11902,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 1172,
+    "number": 1103,
     "title": "출제 포인트를 복합적으로 적용하면, 데이터베이스 시스템의 장점으로 가장 적절한 것은?",
     "options": [
       "무결성 제약을 제거해 개발 속도만 높인다.",
@@ -41374,11 +37022,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11972,
+    "id": 11903,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 1173,
+    "number": 1104,
     "title": "출제 포인트를 복합적으로 적용하면, 부모-자식 구조를 설계할 때 가장 먼저 확인해야 할 사항으로 옳은 것은?",
     "options": [
       "부모 엔터티와 자식 엔터티의 식별자 및 관계 차수",
@@ -41400,11 +37048,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11973,
+    "id": 11904,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 1174,
+    "number": 1105,
     "title": "출제 포인트를 복합적으로 적용하면, 복합 기본키에 대한 설명으로 옳은 것은?",
     "options": [
       "구성하는 모든 컬럼이 함께 기본키를 이루며 NULL을 허용하지 않는다.",
@@ -41426,11 +37074,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11974,
+    "id": 11905,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1175,
+    "number": 1106,
     "title": "출제 포인트를 복합적으로 적용하면, 대량 범위 조회에서 인덱스보다 전체 테이블 스캔이 더 적절할 수 있는 경우로 옳은 것은?",
     "options": [
       "PK로 정확히 한 행을 찾을 때",
@@ -41452,11 +37100,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11975,
+    "id": 11906,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1176,
+    "number": 1107,
     "title": "SQL 표현식 결과를 계산하면, 다음 조건을 만족하는 값으로 옳은 것은?",
     "options": [
       "SQLDD",
@@ -41478,11 +37126,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11976,
+    "id": 11907,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1177,
+    "number": 1108,
     "title": "다음 그림과 SQL을 함께 보고 판단할 때, 다음 SQL 실행 결과 값으로 옳은 것은?",
     "options": [
       "302",
@@ -41535,11 +37183,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11977,
+    "id": 11908,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1178,
+    "number": 1109,
     "title": "실무 적용 관점에서 보면, 다음 권한 부여/회수 흐름에 대한 설명으로 옳은 것은?",
     "options": [
       "user1을 통해 user2에게 전달된 권한도 함께 회수될 수 있다.",
@@ -41561,11 +37209,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11978,
+    "id": 11909,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1179,
+    "number": 1110,
     "title": "SQL문을 단계별로 해석하면, 다음 DDL 흐름에 대한 설명으로 옳은 것은?",
     "options": [
       "ALTER TABLE 문은 컬럼명 변경에만 사용된다.",
@@ -41587,11 +37235,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11979,
+    "id": 11910,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1180,
+    "number": 1111,
     "title": "다음 그림과 SQL을 함께 보고 판단할 때, 다음 SQL 결과에서 rn = 1인 행으로 옳은 것은?",
     "options": [
       "INCHEON, B, 80",
@@ -41644,11 +37292,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11980,
+    "id": 11911,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 1181,
+    "number": 1112,
     "title": "그림에 제시된 구조와 값을 기준으로 보면, 다음 ERD에 대한 설명으로 옳은 것은?",
     "options": [
       "고객과 주문의 관계는 1:N 관계이다.",
@@ -41672,11 +37320,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11981,
+    "id": 11912,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1182,
+    "number": 1113,
     "title": "다음 그림과 SQL을 함께 보고 판단할 때, 다음 SQL 실행 결과로 반환되는 행 수는?",
     "options": [
       "2",
@@ -41742,11 +37390,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11982,
+    "id": 11913,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1183,
+    "number": 1114,
     "title": "테이블 그림을 기준으로 SQL문을 해석하면, 다음 PIVOT SQL 결과에서 SALES 행의 (Q1 + Q2) 합계는?",
     "options": [
       "300",
@@ -41809,11 +37457,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11983,
+    "id": 11914,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 1184,
+    "number": 1115,
     "title": "실무 적용 관점에서 보면, 다음 VIEW 정의에 대한 설명으로 옳은 것은?",
     "options": [
       "뷰는 WHERE 절을 가질 수 없다.",
@@ -41835,11 +37483,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11984,
+    "id": 11915,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1185,
+    "number": 1116,
     "title": "다음 그림과 SQL을 함께 보고 판단할 때, 다음 SQL 실행 결과로 반환되는 부서 수는?",
     "options": [
       "1",
@@ -41922,11 +37570,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11985,
+    "id": 11916,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1186,
+    "number": 1117,
     "title": "조건식과 함수 의미를 함께 고려하면, 다음 SQL 결과로 옳은 것은?",
     "options": [
       "SQL",
@@ -41948,11 +37596,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11986,
+    "id": 11917,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 1187,
+    "number": 1118,
     "title": "업무 규칙과 제약조건을 함께 고려하면, 개념 데이터 모델링 단계에서 주로 수행하는 작업으로 옳은 것은?",
     "options": [
       "업무에서 필요한 엔터티와 관계를 식별한다.",
@@ -41974,11 +37622,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11987,
+    "id": 11918,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 1188,
+    "number": 1119,
     "title": "업무 규칙과 제약조건을 함께 고려하면, 일반적인 데이터베이스 설계 순서로 옳은 것은?",
     "options": [
       "인덱스 설계 -> 업무 분석 -> 개념 설계",
@@ -42000,11 +37648,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11988,
+    "id": 11919,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 1189,
+    "number": 1120,
     "title": "업무 규칙과 제약조건을 함께 고려하면, 후보키(Candidate Key)에 대한 설명으로 옳은 것은?",
     "options": [
       "유일성과 최소성을 만족하는 식별자 후보",
@@ -42026,11 +37674,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11989,
+    "id": 11920,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1190,
+    "number": 1121,
     "title": "업무 규칙과 제약조건을 함께 고려하면, 복합 인덱스 (col1, col2)가 있을 때 일반적으로 인덱스 활용도가 높은 조건으로 옳은 것은?",
     "options": [
       "WHERE col2 + 1 = 5",
@@ -42052,11 +37700,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11990,
+    "id": 11921,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1191,
+    "number": 1122,
     "title": "조건식과 함수 의미를 함께 고려하면, 다음 조건을 만족하는 값으로 옳은 것은?",
     "options": [
       "abc12",
@@ -42078,11 +37726,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11991,
+    "id": 11922,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 1192,
+    "number": 1123,
     "title": "그림에 제시된 구조와 값을 기준으로 보면, 다음 주문 테이블에서 기본키가 (주문번호, 상품번호)일 때 가장 적절한 설명은?",
     "options": [
       "상품명은 부분 함수 종속, 고객등급은 이행 함수 종속 문제가 될 수 있다.",
@@ -42138,11 +37786,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11992,
+    "id": 11923,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1193,
+    "number": 1124,
     "title": "테이블 그림을 기준으로 SQL문을 해석하면, 다음 SQL 실행 결과 행 수는?",
     "options": [
       "3",
@@ -42195,11 +37843,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11993,
+    "id": 11924,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1194,
+    "number": 1125,
     "title": "SQL문을 단계별로 해석하면, 다음 SQL 실행 결과 행 수는?",
     "options": [
       "3",
@@ -42221,11 +37869,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11994,
+    "id": 11925,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 1195,
+    "number": 1126,
     "title": "처리 순서를 끝까지 반영하면, 다음 트랜잭션 흐름 후 최종 반영되는 작업으로 옳은 것은?",
     "options": [
       "작업1, 작업2, 작업4가 반영된다.",
@@ -42247,11 +37895,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11995,
+    "id": 11926,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1196,
+    "number": 1127,
     "title": "업무 규칙과 제약조건을 함께 고려하면, CREATE TABLE의 의미로 옳은 것은?",
     "options": [
       "행 단위 수정만 수행한다.",
@@ -42273,11 +37921,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11996,
+    "id": 11927,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1197,
+    "number": 1128,
     "title": "테이블 그림을 기준으로 SQL문을 해석하면, 다음 SQL 실행 결과 값으로 옳은 것은?",
     "options": [
       "5",
@@ -42330,11 +37978,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11997,
+    "id": 11928,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1198,
+    "number": 1129,
     "title": "표와 관계를 함께 읽으면, ORDERS와 ORDER_ITEM의 관계로 옳은 것은?",
     "options": [
       "1:N",
@@ -42358,11 +38006,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11998,
+    "id": 11929,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1199,
+    "number": 1130,
     "title": "테이블 그림을 기준으로 SQL문을 해석하면, 다음 SQL 실행 결과로 옳은 것은?",
     "options": [
       "2",
@@ -42428,11 +38076,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11999,
+    "id": 11930,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1200,
+    "number": 1131,
     "title": "실무 적용 관점에서 보면, COUNT(*)와 COUNT(col)의 차이 설명으로 옳은 것은?",
     "options": [
       "두 함수는 항상 같은 값을 반환한다.",
@@ -42454,11 +38102,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12000,
+    "id": 11931,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1201,
+    "number": 1132,
     "title": "그림의 데이터와 조건식을 모두 고려하면, 다음 PIVOT SQL 결과 행 수는?",
     "options": [
       "3",
@@ -42521,11 +38169,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12001,
+    "id": 11932,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1202,
+    "number": 1133,
     "title": "테이블 그림을 기준으로 SQL문을 해석하면, 다음 계층형 질의 결과에서 LEVEL = 2인 행 수는?",
     "options": [
       "2",
@@ -42593,11 +38241,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12002,
+    "id": 11933,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1203,
+    "number": 1134,
     "title": "테이블 그림을 기준으로 SQL문을 해석하면, 다음 SQL 결과로 조회되는 부서명으로 옳은 것은?",
     "options": [
       "SALES, DEV",
@@ -42680,11 +38328,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12003,
+    "id": 11934,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1204,
+    "number": 1135,
     "title": "문장을 그대로 평가하면, 다음 SQL 결과로 옳은 것은?",
     "options": [
       "5",
@@ -42706,11 +38354,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12004,
+    "id": 11935,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 1205,
+    "number": 1136,
     "title": "설계 원칙을 기준으로 판단하면, N:M 관계를 논리 모델로 전환할 때 적절한 방법은?",
     "options": [
       "교차 엔터티를 추가하여 두 개의 1:N 관계로 해소한다.",
@@ -42732,11 +38380,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12005,
+    "id": 11936,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1206,
+    "number": 1137,
     "title": "표와 관계를 함께 읽으면, FK 컬럼의 NULL 허용 여부로 옳은 것은?",
     "options": [
       "NOT NULL 제약이 없다면 NULL 허용이 가능하다.",
@@ -42760,11 +38408,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12006,
+    "id": 11937,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 1207,
+    "number": 1138,
     "title": "설계 원칙을 기준으로 판단하면, 논리적 데이터 독립성에 대한 설명으로 가장 적절한 것은?",
     "options": [
       "논리적 데이터 독립성은 COMMIT과 ROLLBACK의 독립성을 말한다.",
@@ -42786,11 +38434,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12007,
+    "id": 11938,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 1208,
+    "number": 1139,
     "title": "설계 원칙을 기준으로 판단하면, 물리 설계 단계에서 주로 결정하는 사항으로 옳은 것은?",
     "options": [
       "인덱스, 파티션, 저장 구조와 접근 경로",
@@ -42812,11 +38460,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12008,
+    "id": 11939,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 1209,
+    "number": 1140,
     "title": "설계 원칙을 기준으로 판단하면, 슈퍼키(Super Key)에 대한 설명으로 옳은 것은?",
     "options": [
       "반드시 단일 컬럼이어야 한다.",
@@ -42838,11 +38486,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12009,
+    "id": 11940,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1210,
+    "number": 1141,
     "title": "표와 관계를 함께 읽으면, BUSAN 지역 데이터에서 RANK() OVER(PARTITION BY region ORDER BY amount DESC) 결과로 옳은 것은?",
     "options": [
       "1, 1, 2",
@@ -42896,11 +38544,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12010,
+    "id": 11941,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1211,
+    "number": 1142,
     "title": "설계 원칙을 기준으로 판단하면, 인덱스 컬럼에 함수가 적용되면 일반적으로 주의할 점으로 옳은 것은?",
     "options": [
       "일반 인덱스를 그대로 활용하지 못할 수 있다.",
@@ -42922,11 +38570,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12011,
+    "id": 11942,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1212,
+    "number": 1143,
     "title": "문장을 그대로 평가하면, 다음 조건을 만족하는 값으로 옳은 것은?",
     "options": [
       "0101234",
@@ -42948,11 +38596,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12012,
+    "id": 11943,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1213,
+    "number": 1144,
     "title": "표와 관계를 함께 읽으면, 2NF에 대한 설명으로 옳은 것은?",
     "options": [
       "부분 함수 종속을 제거한 상태이다.",
@@ -43004,11 +38652,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12013,
+    "id": 11944,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1214,
+    "number": 1145,
     "title": "제시된 그림만 근거로 판단하면, 다음 SALARY 데이터에서 AVG(salary) 값은?",
     "options": [
       "3000",
@@ -43057,11 +38705,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12014,
+    "id": 11945,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1215,
+    "number": 1146,
     "title": "중간 저장점과 취소 지점까지 고려하면, 다음 트랜잭션 흐름 후 최종 반영되는 작업으로 옳은 것은?",
     "options": [
       "작업1과 작업2만 반영된다.",
@@ -43083,11 +38731,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12015,
+    "id": 11946,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1216,
+    "number": 1147,
     "title": "설계 원칙을 기준으로 판단하면, REVOKE INSERT ON emp FROM user1의 의미로 옳은 것은?",
     "options": [
       "emp 테이블이 삭제된다.",
@@ -43109,11 +38757,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12016,
+    "id": 11947,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1217,
+    "number": 1148,
     "title": "설계 원칙을 기준으로 판단하면, DROP TABLE의 효과로 옳은 것은?",
     "options": [
       "권한만 삭제한다.",
@@ -43135,11 +38783,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12017,
+    "id": 11948,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1218,
+    "number": 1149,
     "title": "그림의 데이터와 조건식을 모두 고려하면, 다음 SQL 결과의 마지막 행으로 옳은 것은?",
     "options": [
       "BUSAN, A, 100",
@@ -43192,11 +38840,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12018,
+    "id": 11949,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 1219,
+    "number": 1150,
     "title": "제시된 그림만 근거로 판단하면, 주문상품 엔터티의 기본키로 가장 적절한 것은?",
     "options": [
       "customer_id",
@@ -43220,11 +38868,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12019,
+    "id": 11950,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1220,
+    "number": 1151,
     "title": "제시된 그림만 근거로 판단하면, A.ID에 중복값 2가 한 건 더 추가되고 B.ID=2가 1건 존재할 때 INNER JOIN 결과에 추가되는 행 수는?",
     "options": [
       "2",
@@ -43290,11 +38938,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12020,
+    "id": 11951,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 1221,
+    "number": 1152,
     "title": "업무 규칙과 제약조건을 함께 고려하면, col1=100, col2=100일 때 다음 표현식 결과로 옳은 것은?",
     "options": [
       "NULL",
@@ -43316,11 +38964,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12021,
+    "id": 11952,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1222,
+    "number": 1153,
     "title": "제시된 표를 바탕으로 SQL문을 그대로 평가하면, 다음 PIVOT SQL 결과 컬럼 구성으로 옳은 것은?",
     "options": [
       "dept, Q1, Q2",
@@ -43383,11 +39031,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12022,
+    "id": 11953,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1223,
+    "number": 1154,
     "title": "그림의 데이터와 조건식을 모두 고려하면, 다음 계층형 질의 결과에서 DEV_B의 PATH 값으로 옳은 것은?",
     "options": [
       "DEV_MGR > DEV_B",
@@ -43455,11 +39103,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12023,
+    "id": 11954,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1224,
+    "number": 1155,
     "title": "그림의 데이터와 조건식을 모두 고려하면, 다음 SQL 실행 결과 행 수는?",
     "options": [
       "4",
@@ -43542,11 +39190,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12024,
+    "id": 11955,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1225,
+    "number": 1156,
     "title": "식과 절의 반환 규칙을 적용하면, 다음 SQL 결과로 옳은 것은?",
     "options": [
       "845",
@@ -43568,11 +39216,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12025,
+    "id": 11956,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 1226,
+    "number": 1157,
     "title": "데이터 구조의 목적을 생각하면, 슈퍼타입/서브타입 모델링이 적절한 경우로 옳은 것은?",
     "options": [
       "PK를 사용하지 않으려 할 때",
@@ -43594,11 +39242,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12026,
+    "id": 11957,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 1227,
+    "number": 1158,
     "title": "제시된 그림만 근거로 판단하면, 부모 ORDERS 행을 삭제하려 할 때 자식 ORDER_DETAIL이 존재하면 기본 동작은?",
     "options": [
       "자식 FK가 0으로 변경된다.",
@@ -43626,11 +39274,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12027,
+    "id": 11958,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 1228,
+    "number": 1159,
     "title": "데이터 구조의 목적을 생각하면, 데이터 사전(Data Dictionary)에 저장되는 정보로 옳은 것은?",
     "options": [
       "테이블, 컬럼, 제약조건과 같은 메타데이터",
@@ -43652,11 +39300,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12028,
+    "id": 11959,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 1229,
+    "number": 1160,
     "title": "데이터 구조의 목적을 생각하면, 정규화된 논리 모델을 반정규화하는 시점으로 가장 적절한 것은?",
     "options": [
       "정규화된 모델을 기준으로 성능 요구를 검토한 뒤 필요할 때",
@@ -43678,11 +39326,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12029,
+    "id": 11960,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1230,
+    "number": 1161,
     "title": "제시된 그림만 근거로 판단하면, 다음 데이터에서 주문이 없는 고객 ID는?",
     "options": [
       "102, 104",
@@ -43748,11 +39396,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12030,
+    "id": 11961,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 1231,
+    "number": 1162,
     "title": "데이터 구조의 목적을 생각하면, 대체키(Alternate Key)에 대한 설명으로 옳은 것은?",
     "options": [
       "조인에 사용할 수 없는 키다.",
@@ -43774,11 +39422,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12031,
+    "id": 11962,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1232,
+    "number": 1163,
     "title": "제시된 그림만 근거로 판단하면, BUSAN 지역 데이터에 DENSE_RANK()를 적용한 결과로 옳은 것은?",
     "options": [
       "1, 3, 3",
@@ -43832,11 +39480,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12032,
+    "id": 11963,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1233,
+    "number": 1164,
     "title": "데이터 구조의 목적을 생각하면, 선택도가 매우 낮은 컬럼에 단독 인덱스를 두었을 때 기대 효과로 가장 적절한 것은?",
     "options": [
       "조회 패턴에 따라 테이블 전체 스캔이 더 유리할 수 있다.",
@@ -43858,11 +39506,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12033,
+    "id": 11964,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1234,
+    "number": 1165,
     "title": "식과 절의 반환 규칙을 적용하면, 다음 SQL 결과로 옳은 것은?",
     "options": [
       "12345678",
@@ -43884,11 +39532,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12034,
+    "id": 11965,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 1235,
+    "number": 1166,
     "title": "제시된 그림만 근거로 판단하면, 3NF에 대한 설명으로 옳은 것은?",
     "options": [
       "복합키가 없어야만 성립한다.",
@@ -43940,11 +39588,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12035,
+    "id": 11966,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1236,
+    "number": 1167,
     "title": "엔터티와 데이터 분포를 함께 보면, bonus 값이 100, 200, NULL, NULL일 때 SUM(bonus) 결과는?",
     "options": [
       "200",
@@ -43993,11 +39641,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12036,
+    "id": 11967,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1237,
+    "number": 1168,
     "title": "설계 원칙을 기준으로 판단하면, A가 4행이고 B가 3행일 때 UNION ALL 결과 행 수는?",
     "options": [
       "5",
@@ -44019,11 +39667,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12037,
+    "id": 11968,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 1238,
+    "number": 1169,
     "title": "명령이 수행된 순서를 따라가면, 다음 트랜잭션 흐름 후 최종 반영되는 작업으로 옳은 것은?",
     "options": [
       "작업1, 작업2, 작업4가 반영된다.",
@@ -44045,11 +39693,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12038,
+    "id": 11969,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1239,
+    "number": 1170,
     "title": "데이터 구조의 목적을 생각하면, WITH GRANT OPTION이 있는 권한의 특징으로 옳은 것은?",
     "options": [
       "트랜잭션이 자동 커밋되지 않는다.",
@@ -44071,11 +39719,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12039,
+    "id": 11970,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1240,
+    "number": 1171,
     "title": "데이터 구조의 목적을 생각하면, TRUNCATE TABLE과 DELETE의 차이로 옳은 것은?",
     "options": [
       "TRUNCATE는 DDL로서 테이블 전체 데이터를 빠르게 비울 때 사용된다.",
@@ -44097,11 +39745,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12040,
+    "id": 11971,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1241,
+    "number": 1172,
     "title": "데이터 구조의 목적을 생각하면, ORDER BY dept, salary DESC의 정렬 우선순위는?",
     "options": [
       "dept 오름차순 후 동일 dept 내에서 salary 내림차순이다.",
@@ -44117,11 +39765,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "DML"
   },
   {
-    "id": 12041,
+    "id": 11972,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1242,
+    "number": 1173,
     "title": "엔터티와 데이터 분포를 함께 보면, 식별 관계에 대한 설명으로 옳은 것은?",
     "options": [
       "외래키가 존재하지 않는다.",
@@ -44145,11 +39793,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12042,
+    "id": 11973,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1243,
+    "number": 1174,
     "title": "데이터 구조의 목적을 생각하면, 뷰의 장점으로 적절한 것은?",
     "options": [
       "항상 성능이 원본보다 빠르다.",
@@ -44171,11 +39819,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12043,
+    "id": 11974,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1244,
+    "number": 1175,
     "title": "제시된 표를 바탕으로 SQL문을 그대로 평가하면, 다음 계층형 질의에서 DEV_A 행의 ROOT_NAME 값으로 옳은 것은?",
     "options": [
       "NULL",
@@ -44243,11 +39891,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12044,
+    "id": 11975,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1245,
+    "number": 1176,
     "title": "엔터티와 데이터 분포를 함께 보면, GROUP BY dept 수행 시 생성되는 그룹 수는?",
     "options": [
       "3",
@@ -44326,11 +39974,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12045,
+    "id": 11976,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1246,
+    "number": 1177,
     "title": "SQL 표현식 결과를 계산하면, 다음 SQL 결과로 옳은 것은?",
     "options": [
       "845.6",
@@ -44352,11 +40000,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12046,
+    "id": 11977,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 1247,
+    "number": 1178,
     "title": "출제 포인트를 복합적으로 적용하면, 속성의 원자성을 높이는 모델링 방식으로 옳은 것은?",
     "options": [
       "조인 감소를 위해 모든 속성을 VARCHAR 하나에 직렬화한다.",
@@ -44378,11 +40026,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12047,
+    "id": 11978,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1248,
+    "number": 1179,
     "title": "엔터티와 데이터 분포를 함께 보면, 참조 무결성의 의미로 옳은 것은?",
     "options": [
       "NULL이 하나라도 있으면 위반이다.",
@@ -44406,11 +40054,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12048,
+    "id": 11979,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 1249,
+    "number": 1180,
     "title": "출제 포인트를 복합적으로 적용하면, 관계형 모델의 릴레이션 특성으로 옳은 것은?",
     "options": [
       "행의 논리적 순서는 보장되지 않으므로 ORDER BY 없이 특정 순서를 기대하면 안 된다.",
@@ -44432,11 +40080,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12049,
+    "id": 11980,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 1250,
+    "number": 1181,
     "title": "출제 포인트를 복합적으로 적용하면, 트랜잭션 처리량이 매우 큰 테이블에 대해 설계 단계에서 우선 검토할 사항으로 옳은 것은?",
     "options": [
       "모든 제약조건 제거",
@@ -44458,11 +40106,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12050,
+    "id": 11981,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1251,
+    "number": 1182,
     "title": "엔터티와 데이터 분포를 참고할 때, 다음 SQL 조건의 의미로 가장 적절한 것은?",
     "options": [
       "ORDERS에 있는 고객 중 하나보다 크면 된다.",
@@ -44532,11 +40180,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12051,
+    "id": 11982,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1252,
+    "number": 1183,
     "title": "엔터티와 데이터 분포를 함께 보면, ROW_NUMBER()와 RANK()의 차이로 옳은 것은?",
     "options": [
       "ROW_NUMBER는 동점이어도 고유한 순번을 부여한다.",
@@ -44590,11 +40238,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12052,
+    "id": 11983,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1253,
+    "number": 1184,
     "title": "출제 포인트를 복합적으로 적용하면, 인덱스가 많은 테이블에서 INSERT/UPDATE/DELETE가 느려질 수 있는 이유로 옳은 것은?",
     "options": [
       "인덱스가 있으면 COMMIT이 불가능하다.",
@@ -44616,11 +40264,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12053,
+    "id": 11984,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1254,
+    "number": 1185,
     "title": "SQL 표현식 결과를 계산하면, 다음 SQL 결과로 옳은 것은?",
     "options": [
       "user@sqld.kr",
@@ -44642,11 +40290,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12054,
+    "id": 11985,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1255,
+    "number": 1186,
     "title": "그림의 각 행과 관계선을 기준으로 해석하면, 다음 BONUS 데이터에서 COUNT(bonus) 값은?",
     "options": [
       "2",
@@ -44695,11 +40343,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12055,
+    "id": 11986,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1256,
+    "number": 1187,
     "title": "데이터 구조의 목적을 생각하면, INTERSECT의 의미로 옳은 것은?",
     "options": [
       "차집합",
@@ -44721,11 +40369,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12056,
+    "id": 11987,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1257,
+    "number": 1188,
     "title": "COMMIT/ROLLBACK 시점을 기준으로 보면, 다음 트랜잭션 흐름에 대한 설명으로 옳은 것은?",
     "options": [
       "작업1과 CREATE TABLE은 유지되고, 작업3만 취소된다.",
@@ -44747,11 +40395,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12057,
+    "id": 11988,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1258,
+    "number": 1189,
     "title": "출제 포인트를 복합적으로 적용하면, ALTER TABLE로 가능한 작업으로 옳은 것은?",
     "options": [
       "컬럼 추가, 수정, 삭제 등 구조 변경",
@@ -44773,11 +40421,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12058,
+    "id": 11989,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1259,
+    "number": 1190,
     "title": "출제 포인트를 복합적으로 적용하면, ORDER BY 절에 대한 설명으로 옳은 것은?",
     "options": [
       "집계 함수와 함께 사용할 수 없다.",
@@ -44793,11 +40441,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "DML"
   },
   {
-    "id": 12059,
+    "id": 11990,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 1260,
+    "number": 1191,
     "title": "그림의 각 행과 관계선을 기준으로 해석하면, ERD 설계 관점에서 주문일(order_date)이 속해야 할 엔터티는?",
     "options": [
       "PRODUCT가 반드시 있어야만 가능하다.",
@@ -44821,11 +40469,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12060,
+    "id": 11991,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1261,
+    "number": 1192,
     "title": "다음 그림과 SQL을 함께 보고 판단할 때, 다음 PIVOT SQL에 대한 설명으로 옳은 것은?",
     "options": [
       "PIVOT은 집계 함수를 사용할 수 없다.",
@@ -44888,11 +40536,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12061,
+    "id": 11992,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 1262,
+    "number": 1193,
     "title": "출제 포인트를 복합적으로 적용하면, 기본 테이블 구조가 변경될 때 VIEW 관련 주의점으로 옳은 것은?",
     "options": [
       "뷰는 SELECT 문을 포함할 수 없다.",
@@ -44914,11 +40562,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12062,
+    "id": 11993,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1263,
+    "number": 1194,
     "title": "그림과 SQL 조건을 동시에 읽으면, 다음 계층형 질의에서 START WITH mgr_id IS NULL 의미로 옳은 것은?",
     "options": [
       "최상위 사원부터 탐색을 시작한다.",
@@ -44986,11 +40634,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12063,
+    "id": 11994,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1264,
+    "number": 1195,
     "title": "그림의 각 행과 관계선을 기준으로 해석하면, 다음 중 HAVING 절에 대한 설명으로 옳은 것은?",
     "options": [
       "HAVING은 GROUP BY 이후 생성된 그룹에 대해 조건을 적용한다.",
@@ -45069,11 +40717,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12064,
+    "id": 11995,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1265,
+    "number": 1196,
     "title": "SQL문을 단계별로 해석하면, 다음 SQL 결과로 옳은 것은?",
     "options": [
       "6",
@@ -45095,11 +40743,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12065,
+    "id": 11996,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 1266,
+    "number": 1197,
     "title": "실무 적용 관점에서 보면, 데이터 모델링의 주요 목적에 대한 설명으로 옳은 것은?",
     "options": [
       "현실 세계의 업무 규칙을 데이터 구조로 명확하게 표현하는 것이다.",
@@ -45121,11 +40769,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12066,
+    "id": 11997,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 1267,
+    "number": 1198,
     "title": "그림의 각 행과 관계선을 기준으로 해석하면, 고유성, 엔터티 무결성, 참조 무결성 중 FK와 직접 연결되는 것은?",
     "options": [
       "엔터티 무결성",
@@ -45149,11 +40797,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12067,
+    "id": 11998,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 1268,
+    "number": 1199,
     "title": "실무 적용 관점에서 보면, 데이터베이스 시스템의 장점으로 가장 적절한 것은?",
     "options": [
       "응용 프로그램마다 별도 정의를 강제하여 독립성을 낮춘다.",
@@ -45175,11 +40823,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12068,
+    "id": 11999,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 1269,
+    "number": 1200,
     "title": "실무 적용 관점에서 보면, 부모-자식 구조를 설계할 때 가장 먼저 확인해야 할 사항으로 옳은 것은?",
     "options": [
       "반드시 모든 FK를 NULL 허용으로 만드는 것",
@@ -45201,11 +40849,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12069,
+    "id": 12000,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1270,
+    "number": 1201,
     "title": "그림의 각 행과 관계선을 기준으로 해석하면, ANY 비교에 대한 설명으로 옳은 것은?",
     "options": [
       "NULL과 동일한 의미다.",
@@ -45275,11 +40923,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12070,
+    "id": 12001,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 1271,
+    "number": 1202,
     "title": "실무 적용 관점에서 보면, 복합 기본키에 대한 설명으로 옳은 것은?",
     "options": [
       "구성하는 모든 컬럼이 함께 기본키를 이루며 NULL을 허용하지 않는다.",
@@ -45301,11 +40949,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12071,
+    "id": 12002,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1272,
+    "number": 1203,
     "title": "그림의 각 행과 관계선을 기준으로 해석하면, OVER(PARTITION BY region)의 의미로 옳은 것은?",
     "options": [
       "region 값별로 분석 구간을 나눈다.",
@@ -45359,11 +41007,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12072,
+    "id": 12003,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1273,
+    "number": 1204,
     "title": "실무 적용 관점에서 보면, 대량 범위 조회에서 인덱스보다 전체 테이블 스캔이 더 적절할 수 있는 경우로 옳은 것은?",
     "options": [
       "조인 조건이 있을 때는 항상 인덱스만 사용한다.",
@@ -45385,11 +41033,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12073,
+    "id": 12004,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1274,
+    "number": 1205,
     "title": "SQL문을 단계별로 해석하면, 다음 조건을 만족하는 값으로 옳은 것은?",
     "options": [
       "DBSQL",
@@ -45411,11 +41059,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12074,
+    "id": 12005,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1275,
+    "number": 1206,
     "title": "다음 그림과 SQL을 함께 보고 판단할 때, 다음 BONUS 데이터에서 SUM(NVL(bonus, 0)) 값은?",
     "options": [
       "400",
@@ -45468,11 +41116,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12075,
+    "id": 12006,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1276,
+    "number": 1207,
     "title": "출제 포인트를 복합적으로 적용하면, MINUS(A, B)의 의미로 옳은 것은?",
     "options": [
       "A에만 존재하는 차집합",
@@ -45494,11 +41142,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12076,
+    "id": 12007,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 1277,
+    "number": 1208,
     "title": "트랜잭션 흐름을 단계별로 해석하면, 다음 트랜잭션 흐름 후 최종 반영되는 작업으로 옳은 것은?",
     "options": [
       "작업1과 작업3만 반영된다.",
@@ -45520,11 +41168,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12077,
+    "id": 12008,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1278,
+    "number": 1209,
     "title": "그림에 제시된 구조와 값을 기준으로 보면, 다음 이미지 기준으로 user1에게 처음 부여되는 권한으로 옳은 것은?",
     "options": [
       "emp 테이블의 SELECT와 INSERT 권한",
@@ -45547,11 +41195,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12078,
+    "id": 12009,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1279,
+    "number": 1210,
     "title": "그림에 제시된 구조와 값을 기준으로 보면, 다음 이미지의 명령 중 테이블 구조를 변경하는 문장으로 옳은 것은?",
     "options": [
       "DROP TABLE temp_emp;",
@@ -45574,11 +41222,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12079,
+    "id": 12010,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1280,
+    "number": 1211,
     "title": "SQL문을 단계별로 해석하면, 다음 SQL문의 의미로 옳은 것은?",
     "options": [
       "권한을 부여한다.",
@@ -45600,11 +41248,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12080,
+    "id": 12011,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1281,
+    "number": 1212,
     "title": "그림에 제시된 구조와 값을 기준으로 보면, 다음 ERD 기준 CUSTOMER와 ORDERS의 관계로 옳은 것은?",
     "options": [
       "한 고객은 여러 주문을 가질 수 있다.",
@@ -45628,11 +41276,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12081,
+    "id": 12012,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1282,
+    "number": 1213,
     "title": "다음 그림과 SQL을 함께 보고 판단할 때, 다음 그림을 기준으로 LEFT OUTER JOIN을 수행할 때 반환 행 수는?",
     "options": [
       "3",
@@ -45694,11 +41342,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12082,
+    "id": 12013,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1283,
+    "number": 1214,
     "title": "출제 포인트를 복합적으로 적용하면, 다음 표현식의 결과는? NULLIF(100, 100)",
     "options": [
       "100",
@@ -45714,11 +41362,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "NULL"
   },
   {
-    "id": 12083,
+    "id": 12014,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1284,
+    "number": 1215,
     "title": "실무 적용 관점에서 보면, 뷰(View)에 대한 설명으로 옳은 것은?",
     "options": [
       "기본 테이블의 데이터를 이용해 가상 테이블처럼 조회할 수 있다.",
@@ -45740,11 +41388,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12084,
+    "id": 12015,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1285,
+    "number": 1216,
     "title": "다음 그림과 SQL을 함께 보고 판단할 때, 다음 SQL 결과에서 CEO의 LEVEL 값으로 옳은 것은?",
     "options": [
       "1",
@@ -45812,11 +41460,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12085,
+    "id": 12016,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1286,
+    "number": 1217,
     "title": "다음 그림과 SQL을 함께 보고 판단할 때, 다음 SQL 결과에서 gr = 1 이고 gp = 1 인 행 수는?",
     "options": [
       "2",
@@ -45869,11 +41517,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12086,
+    "id": 12017,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1287,
+    "number": 1218,
     "title": "문장을 그대로 평가하면, 다음 SQL 결과로 옳은 것은?",
     "options": [
       "QL",
@@ -45895,11 +41543,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12087,
+    "id": 12018,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 1288,
+    "number": 1219,
     "title": "설계 원칙을 기준으로 판단하면, 개념 데이터 모델링 단계에서 주로 수행하는 작업으로 옳은 것은?",
     "options": [
       "업무에서 필요한 엔터티와 관계를 식별한다.",
@@ -45921,11 +41569,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12088,
+    "id": 12019,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1289,
+    "number": 1220,
     "title": "실무 적용 관점에서 보면, 엔터티 무결성(Entity Integrity)에 대한 설명으로 옳은 것은?",
     "options": [
       "기본키는 NULL일 수 없다.",
@@ -45947,11 +41595,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12089,
+    "id": 12020,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 1290,
+    "number": 1221,
     "title": "설계 원칙을 기준으로 판단하면, ANSI/SPARC 3단계 스키마 구조에 대한 설명으로 옳은 것은?",
     "options": [
       "내부 스키마는 사용자별 보기를 각각 정의한다.",
@@ -45973,11 +41621,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12090,
+    "id": 12021,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 1291,
+    "number": 1222,
     "title": "설계 원칙을 기준으로 판단하면, 일반적인 데이터베이스 설계 순서로 옳은 것은?",
     "options": [
       "개념 설계 -> 논리 설계 -> 물리 설계",
@@ -45999,11 +41647,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12091,
+    "id": 12022,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1292,
+    "number": 1223,
     "title": "다음 그림과 SQL을 함께 보고 판단할 때, 다음 SQL 결과로 조회되는 사원 수는?",
     "options": [
       "2",
@@ -46056,11 +41704,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12092,
+    "id": 12023,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 1293,
+    "number": 1224,
     "title": "설계 원칙을 기준으로 판단하면, 후보키(Candidate Key)에 대한 설명으로 옳은 것은?",
     "options": [
       "반드시 외래키여야 한다.",
@@ -46082,11 +41730,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12093,
+    "id": 12024,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1294,
+    "number": 1225,
     "title": "다음 그림과 SQL을 함께 보고 판단할 때, 다음 SQL 결과에서 SEOUL 지역의 rn = 1 인 판매자로 옳은 것은?",
     "options": [
       "PARK",
@@ -46144,11 +41792,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12094,
+    "id": 12025,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1295,
+    "number": 1226,
     "title": "설계 원칙을 기준으로 판단하면, 복합 인덱스 (col1, col2)가 있을 때 일반적으로 인덱스 활용도가 높은 조건으로 옳은 것은?",
     "options": [
       "WHERE col1 = :v1 AND col2 BETWEEN :v2 AND :v3",
@@ -46170,11 +41818,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12095,
+    "id": 12026,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1296,
+    "number": 1227,
     "title": "문장을 그대로 평가하면, 다음 조건을 만족하는 값으로 옳은 것은?",
     "options": [
       "abc12",
@@ -46196,11 +41844,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12096,
+    "id": 12027,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1297,
+    "number": 1228,
     "title": "그림에 제시된 구조와 값을 기준으로 보면, 다음 테이블과 가정 기준으로 2NF 위반 원인으로 옳은 것은?",
     "options": [
       "복합키의 일부인 주문번호와 상품번호에만 종속되는 속성이 함께 존재한다.",
@@ -46256,11 +41904,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12097,
+    "id": 12028,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1298,
+    "number": 1229,
     "title": "표와 관계를 함께 읽으면, 다음 BONUS 데이터에서 MAX(bonus) 값은?",
     "options": [
       "NULL",
@@ -46309,11 +41957,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12098,
+    "id": 12029,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1299,
+    "number": 1230,
     "title": "SQL문을 단계별로 해석하면, 다음 SQL 결과 행 수로 옳은 것은?",
     "options": [
       "4",
@@ -46335,11 +41983,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12099,
+    "id": 12030,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1300,
+    "number": 1231,
     "title": "처리 순서를 끝까지 반영하면, 다음 트랜잭션 흐름 후 최종 반영되는 작업으로 옳은 것은?",
     "options": [
       "작업1과 작업2만 반영된다.",
@@ -46361,11 +42009,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12100,
+    "id": 12031,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1301,
+    "number": 1232,
     "title": "표와 관계를 함께 읽으면, 다음 이미지 기준으로 회수되는 권한으로 옳은 것은?",
     "options": [
       "emp 테이블의 모든 권한",
@@ -46388,11 +42036,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12101,
+    "id": 12032,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1302,
+    "number": 1233,
     "title": "표와 관계를 함께 읽으면, 다음 중 객체 자체를 제거하는 DDL 명령으로 옳은 것은?",
     "options": [
       "COMMIT;",
@@ -46415,11 +42063,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12102,
+    "id": 12033,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 1303,
+    "number": 1234,
     "title": "표와 관계를 함께 읽으면, 다음 ERD 기준 ORDER_ITEM의 식별자로 가장 적절한 것은?",
     "options": [
       "order_id와 item_seq의 복합 식별자",
@@ -46443,11 +42091,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12103,
+    "id": 12034,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1304,
+    "number": 1235,
     "title": "표와 관계를 함께 읽으면, LEFT OUTER JOIN 결과에서 NULL이 발생하는 이유로 옳은 것은?",
     "options": [
       "JOIN이 실패하면 0을 저장하기 때문이다.",
@@ -46505,11 +42153,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12104,
+    "id": 12035,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 1305,
+    "number": 1236,
     "title": "실무 적용 관점에서 보면, COALESCE(col1, col2, 0)의 설명으로 옳은 것은?",
     "options": [
       "모든 값이 같아야 동작한다.",
@@ -46525,11 +42173,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "NULL"
   },
   {
-    "id": 12105,
+    "id": 12036,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 1306,
+    "number": 1237,
     "title": "표와 관계를 함께 읽으면, 다음 뷰 정의를 기준으로 옳은 설명은?",
     "options": [
       "기본 테이블 데이터가 바뀌면 뷰 조회 결과도 달라질 수 있다.",
@@ -46552,11 +42200,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12106,
+    "id": 12037,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1307,
+    "number": 1238,
     "title": "테이블 그림을 기준으로 SQL문을 해석하면, 다음 SQL 결과에서 리프 노드 수로 옳은 것은?",
     "options": [
       "4",
@@ -46624,11 +42272,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12107,
+    "id": 12038,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1308,
+    "number": 1239,
     "title": "표와 관계를 함께 읽으면, ROLLUP(region, product) 결과에서 가장 마지막 행의 의미는?",
     "options": [
       "중복 제거 결과",
@@ -46677,11 +42325,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12108,
+    "id": 12039,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 1309,
+    "number": 1240,
     "title": "업무 규칙과 제약조건을 함께 고려하면, 참조 무결성(Referential Integrity)에 대한 설명으로 옳은 것은?",
     "options": [
       "외래키는 중복될 수 없다.",
@@ -46703,11 +42351,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12109,
+    "id": 12040,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 1310,
+    "number": 1241,
     "title": "데이터 구조의 목적을 생각하면, 논리적 데이터 독립성에 대한 설명으로 가장 적절한 것은?",
     "options": [
       "개념 스키마가 바뀌지 않으면 외부 스키마는 물리 저장 방식 변경의 영향을 적게 받는다.",
@@ -46729,11 +42377,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12110,
+    "id": 12041,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 1311,
+    "number": 1242,
     "title": "데이터 구조의 목적을 생각하면, 물리 설계 단계에서 주로 결정하는 사항으로 옳은 것은?",
     "options": [
       "인덱스, 파티션, 저장 구조와 접근 경로",
@@ -46755,11 +42403,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12111,
+    "id": 12042,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1312,
+    "number": 1243,
     "title": "표와 관계를 함께 읽으면, 그림 데이터에서 위 SQL 결과로 조회되는 사원 수는?",
     "options": [
       "2",
@@ -46812,11 +42460,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12112,
+    "id": 12043,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 1313,
+    "number": 1244,
     "title": "데이터 구조의 목적을 생각하면, 슈퍼키(Super Key)에 대한 설명으로 옳은 것은?",
     "options": [
       "외래키와 동일한 개념이다.",
@@ -46838,11 +42486,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12113,
+    "id": 12044,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1314,
+    "number": 1245,
     "title": "업무 규칙과 제약조건을 함께 고려하면, 다음 SQL에서 동점자가 있을 때 RANK와 DENSE_RANK의 차이로 옳은 것은?",
     "options": [
       "ROW_NUMBER와 완전히 동일하다.",
@@ -46864,11 +42512,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12114,
+    "id": 12045,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1315,
+    "number": 1246,
     "title": "데이터 구조의 목적을 생각하면, 인덱스 컬럼에 함수가 적용되면 일반적으로 주의할 점으로 옳은 것은?",
     "options": [
       "일반 인덱스를 그대로 활용하지 못할 수 있다.",
@@ -46890,11 +42538,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12115,
+    "id": 12046,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1316,
+    "number": 1247,
     "title": "식과 절의 반환 규칙을 적용하면, 다음 조건을 만족하는 값으로 옳은 것은?",
     "options": [
       "010-1234",
@@ -46916,11 +42564,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12116,
+    "id": 12047,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 1317,
+    "number": 1248,
     "title": "표와 관계를 함께 읽으면, 다음 테이블과 가정 기준으로 우선 분리해야 할 대상 조합으로 가장 적절한 것은?",
     "options": [
       "모든 컬럼을 하나의 코드 테이블로 이동한다.",
@@ -46976,11 +42624,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12117,
+    "id": 12048,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1318,
+    "number": 1249,
     "title": "그림의 데이터와 조건식을 모두 고려하면, 다음 SALARY 데이터에서 COUNT(*) - COUNT(salary) 결과는?",
     "options": [
       "1",
@@ -47033,11 +42681,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12118,
+    "id": 12049,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1319,
+    "number": 1250,
     "title": "조건식과 함수 의미를 함께 고려하면, 다음 SQL 결과 행 수로 옳은 것은?",
     "options": [
       "2",
@@ -47059,11 +42707,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12119,
+    "id": 12050,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 1320,
+    "number": 1251,
     "title": "중간 저장점과 취소 지점까지 고려하면, 다음 트랜잭션 흐름 후 최종 반영되는 작업으로 옳은 것은?",
     "options": [
       "작업2만 반영된다.",
@@ -47085,11 +42733,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12120,
+    "id": 12051,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1321,
+    "number": 1252,
     "title": "설계 원칙을 기준으로 판단하면, WITH GRANT OPTION이 있는 권한의 특징으로 옳은 것은?",
     "options": [
       "트랜잭션이 자동 커밋된다.",
@@ -47111,11 +42759,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12121,
+    "id": 12052,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1322,
+    "number": 1253,
     "title": "설계 원칙을 기준으로 판단하면, 다음 설명 중 TRUNCATE TABLE에 대한 설명으로 가장 적절한 것은?",
     "options": [
       "테이블 전체 데이터를 빠르게 비우는 DDL이다.",
@@ -47137,11 +42785,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12122,
+    "id": 12053,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1323,
+    "number": 1254,
     "title": "문장을 그대로 평가하면, 다음 SQL문의 의미로 옳은 것은?",
     "options": [
       "부서가 지정되지 않은 사원 행만 삭제한다.",
@@ -47163,11 +42811,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12123,
+    "id": 12054,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1324,
+    "number": 1255,
     "title": "제시된 그림만 근거로 판단하면, 다음 ERD 기준 ORDERS와 ORDER_ITEM의 관계 특징으로 옳은 것은?",
     "options": [
       "외래키가 없으므로 관계가 성립하지 않는다.",
@@ -47191,11 +42839,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12124,
+    "id": 12055,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1325,
+    "number": 1256,
     "title": "조건식과 함수 의미를 함께 고려하면, 다음 표현식 결과로 옳은 것은?",
     "options": [
       "에러",
@@ -47217,11 +42865,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12125,
+    "id": 12056,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1326,
+    "number": 1257,
     "title": "그림과 SQL 조건을 동시에 읽으면, 다음 PIVOT SQL 결과 컬럼 구성으로 옳은 것은?",
     "options": [
       "Q1, Q2만",
@@ -47284,11 +42932,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12126,
+    "id": 12057,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1327,
+    "number": 1258,
     "title": "그림의 데이터와 조건식을 모두 고려하면, 다음 SQL 결과에서 DEV_A의 경로로 옳은 것은?",
     "options": [
       "/CEO/DEV_A",
@@ -47356,11 +43004,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12127,
+    "id": 12058,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1328,
+    "number": 1259,
     "title": "SQL 표현식 결과를 계산하면, 다음 SQL 결과로 옳은 것은?",
     "options": [
       "850",
@@ -47382,11 +43030,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12128,
+    "id": 12059,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 1329,
+    "number": 1260,
     "title": "출제 포인트를 복합적으로 적용하면, 슈퍼타입/서브타입 모델링이 적절한 경우로 옳은 것은?",
     "options": [
       "조인을 없애기 위해 모든 엔터티를 하나로 합칠 때",
@@ -47408,11 +43056,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12129,
+    "id": 12060,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1330,
+    "number": 1261,
     "title": "설계 원칙을 기준으로 판단하면, 도메인 무결성을 보장하는 대표 방법으로 옳은 것은?",
     "options": [
       "테이블명을 표준화한다.",
@@ -47434,11 +43082,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12130,
+    "id": 12061,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 1331,
+    "number": 1262,
     "title": "출제 포인트를 복합적으로 적용하면, 데이터 사전(Data Dictionary)에 저장되는 정보로 옳은 것은?",
     "options": [
       "테이블, 컬럼, 제약조건과 같은 메타데이터",
@@ -47460,11 +43108,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12131,
+    "id": 12062,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 1332,
+    "number": 1263,
     "title": "출제 포인트를 복합적으로 적용하면, 정규화된 논리 모델을 반정규화하는 시점으로 가장 적절한 것은?",
     "options": [
       "물리 설계와 무관하므로 고려하지 않는다.",
@@ -47486,11 +43134,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12132,
+    "id": 12063,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1333,
+    "number": 1264,
     "title": "제시된 그림만 근거로 판단하면, 상관 서브쿼리의 특징으로 옳은 것은?",
     "options": [
       "FROM 절에서만 작성 가능하다.",
@@ -47539,11 +43187,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12133,
+    "id": 12064,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1334,
+    "number": 1265,
     "title": "그림의 데이터와 조건식을 모두 고려하면, 다음 SQL 결과로 옳은 것은?",
     "options": [
       "같은 지역의 각 행에 지역 합계가 반복 표시된다.",
@@ -47601,11 +43249,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12134,
+    "id": 12065,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1335,
+    "number": 1266,
     "title": "출제 포인트를 복합적으로 적용하면, 선택도가 매우 낮은 컬럼에 단독 인덱스를 두었을 때 기대 효과로 가장 적절한 것은?",
     "options": [
       "반드시 UNIQUE가 된다.",
@@ -47627,11 +43275,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12135,
+    "id": 12066,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1336,
+    "number": 1267,
     "title": "SQL 표현식 결과를 계산하면, 다음 SQL 결과로 옳은 것은?",
     "options": [
       "010-12345678",
@@ -47653,11 +43301,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12136,
+    "id": 12067,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1337,
+    "number": 1268,
     "title": "제시된 그림만 근거로 판단하면, 다음 테이블과 가정 기준으로 발생 가능한 이상 현상으로 옳은 것은?",
     "options": [
       "집계 함수 사용이 금지된다.",
@@ -47713,11 +43361,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12137,
+    "id": 12068,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1338,
+    "number": 1269,
     "title": "식과 절의 반환 규칙을 적용하면, 다음 SQL 결과로 옳은 것은?",
     "options": [
       "중복되지 않는 부서 수를 센다.",
@@ -47739,11 +43387,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12138,
+    "id": 12069,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1339,
+    "number": 1270,
     "title": "문장을 그대로 평가하면, 다음 SQL 결과 값으로 옳은 것은?",
     "options": [
       "2",
@@ -47765,11 +43413,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12139,
+    "id": 12070,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1340,
+    "number": 1271,
     "title": "명령이 수행된 순서를 따라가면, 다음 트랜잭션 흐름에 대한 설명으로 옳은 것은?",
     "options": [
       "작업2와 작업3만 반영된다.",
@@ -47791,11 +43439,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12140,
+    "id": 12071,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1341,
+    "number": 1272,
     "title": "데이터 구조의 목적을 생각하면, 다음 권한 흐름에서 최종 결과로 옳은 것은?",
     "options": [
       "user1을 통해 전파된 user2 권한도 함께 회수될 수 있다.",
@@ -47817,11 +43465,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12141,
+    "id": 12072,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1342,
+    "number": 1273,
     "title": "데이터 구조의 목적을 생각하면, MERGE 문에 대한 설명으로 옳은 것은?",
     "options": [
       "DDL이므로 구조를 바꾼다.",
@@ -47843,11 +43491,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12142,
+    "id": 12073,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 1343,
+    "number": 1274,
     "title": "엔터티와 데이터 분포를 함께 보면, 다음 ERD 기준 한 주문이 여러 ORDER_ITEM을 가질 수 있다는 사실은 무엇으로 표현되는가?",
     "options": [
       "ORDER_DATE의 데이터 타입",
@@ -47871,11 +43519,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12143,
+    "id": 12074,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1344,
+    "number": 1275,
     "title": "제시된 표를 바탕으로 SQL문을 그대로 평가하면, 다음 SQL에서 반환되는 A.ID 값으로 옳은 것은?",
     "options": [
       "2",
@@ -47937,11 +43585,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12144,
+    "id": 12075,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 1345,
+    "number": 1276,
     "title": "문장을 그대로 평가하면, 다음 SQL 결과로 옳은 것은?",
     "options": [
       "comm이 NULL이면 0으로 대체한 뒤 sal과 더한다.",
@@ -47963,11 +43611,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12145,
+    "id": 12076,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 1346,
+    "number": 1277,
     "title": "식과 절의 반환 규칙을 적용하면, WITH CHECK OPTION을 부여한 뷰의 특징으로 옳은 것은?",
     "options": [
       "조회 성능만 높이는 옵션이다.",
@@ -47989,11 +43637,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12146,
+    "id": 12077,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1347,
+    "number": 1278,
     "title": "제시된 표를 바탕으로 SQL문을 그대로 평가하면, 다음 SQL 결과에서 SALES_B의 루트 값으로 옳은 것은?",
     "options": [
       "CEO",
@@ -48061,11 +43709,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12147,
+    "id": 12078,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1348,
+    "number": 1279,
     "title": "엔터티와 데이터 분포를 함께 보면, GROUPING SETS((region), (product))의 의미로 옳은 것은?",
     "options": [
       "지역별 집계와 상품별 집계를 각각 구한다.",
@@ -48114,11 +43762,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12148,
+    "id": 12079,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1349,
+    "number": 1280,
     "title": "SQL문을 단계별로 해석하면, 다음 SQL 결과로 옳은 것은?",
     "options": [
       "846.0",
@@ -48140,11 +43788,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12149,
+    "id": 12080,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 1350,
+    "number": 1281,
     "title": "실무 적용 관점에서 보면, 속성의 원자성을 높이는 모델링 방식으로 옳은 것은?",
     "options": [
       "반복 속성을 분리하여 하나의 컬럼에는 하나의 값만 저장한다.",
@@ -48166,11 +43814,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12150,
+    "id": 12081,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 1351,
+    "number": 1282,
     "title": "데이터 구조의 목적을 생각하면, UNIQUE 제약과 PRIMARY KEY의 차이로 옳은 것은?",
     "options": [
       "PRIMARY KEY는 테이블당 하나이며 NULL을 허용하지 않는다.",
@@ -48192,11 +43840,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12151,
+    "id": 12082,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 1352,
+    "number": 1283,
     "title": "실무 적용 관점에서 보면, 관계형 모델의 릴레이션 특성으로 옳은 것은?",
     "options": [
       "릴레이션에서는 NULL을 사용할 수 없다.",
@@ -48218,11 +43866,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12152,
+    "id": 12083,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 1353,
+    "number": 1284,
     "title": "실무 적용 관점에서 보면, 트랜잭션 처리량이 매우 큰 테이블에 대해 설계 단계에서 우선 검토할 사항으로 옳은 것은?",
     "options": [
       "엔터티명을 길게 변경하는 작업",
@@ -48244,11 +43892,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12153,
+    "id": 12084,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 1354,
+    "number": 1285,
     "title": "실무 적용 관점에서 보면, 대리키(Surrogate Key)를 사용하는 주된 이유로 적절한 것은?",
     "options": [
       "업무 식별자가 변경될 가능성이 크거나 길이가 길 때 안정적인 식별자를 두기 위해서",
@@ -48270,11 +43918,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12154,
+    "id": 12085,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1355,
+    "number": 1286,
     "title": "식과 절의 반환 규칙을 적용하면, 다음 SQL 결과로 가장 적절한 설명은?",
     "options": [
       "지역별 정렬 순서에 따른 누적 합계를 계산한다.",
@@ -48296,11 +43944,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12155,
+    "id": 12086,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1356,
+    "number": 1287,
     "title": "실무 적용 관점에서 보면, 인덱스가 많은 테이블에서 INSERT/UPDATE/DELETE가 느려질 수 있는 이유로 옳은 것은?",
     "options": [
       "인덱스는 무조건 메모리에서만 관리된다.",
@@ -48322,11 +43970,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12156,
+    "id": 12087,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1357,
+    "number": 1288,
     "title": "SQL문을 단계별로 해석하면, 다음 SQL 결과로 옳은 것은?",
     "options": [
       "@sqld.kr",
@@ -48348,11 +43996,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12157,
+    "id": 12088,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 1358,
+    "number": 1289,
     "title": "엔터티와 데이터 분포를 함께 보면, 다음 테이블과 가정 기준으로 주문이 없을 때 고객등급 정보를 저장하기 어려운 현상은?",
     "options": [
       "삭제 이상",
@@ -48408,11 +44056,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12158,
+    "id": 12089,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1359,
+    "number": 1290,
     "title": "테이블 그림을 기준으로 SQL문을 해석하면, 다음 SQL 실행 결과 값으로 옳은 것은?",
     "options": [
       "304",
@@ -48465,11 +44113,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12159,
+    "id": 12090,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1360,
+    "number": 1291,
     "title": "식과 절의 반환 규칙을 적용하면, 다음 SQL 결과 값으로 옳은 것은?",
     "options": [
       "1과 2",
@@ -48491,11 +44139,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12160,
+    "id": 12091,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 1361,
+    "number": 1292,
     "title": "COMMIT/ROLLBACK 시점을 기준으로 보면, 다음 트랜잭션 흐름에 대한 설명으로 옳은 것은?",
     "options": [
       "작업3만 유지된다.",
@@ -48517,11 +44165,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12161,
+    "id": 12092,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1362,
+    "number": 1293,
     "title": "출제 포인트를 복합적으로 적용하면, DCL이 담당하는 영역으로 옳은 것은?",
     "options": [
       "데이터 조회",
@@ -48543,11 +44191,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12162,
+    "id": 12093,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1363,
+    "number": 1294,
     "title": "출제 포인트를 복합적으로 적용하면, ALTER TABLE로 가능한 작업으로 옳은 것은?",
     "options": [
       "권한 회수만 수행",
@@ -48569,11 +44217,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12163,
+    "id": 12094,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1364,
+    "number": 1295,
     "title": "SQL 표현식 결과를 계산하면, 다음 SQL에서 WHERE 절이 없을 때 발생하는 결과로 옳은 것은?",
     "options": [
       "테이블 구조가 변경된다.",
@@ -48595,11 +44243,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12164,
+    "id": 12095,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1365,
+    "number": 1296,
     "title": "그림의 각 행과 관계선을 기준으로 해석하면, OUTER JOIN 결과 해석으로 옳은 것은?",
     "options": [
       "보존되지 않는 쪽에 매칭 행이 없으면 해당 컬럼은 NULL이 된다.",
@@ -48661,11 +44309,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12165,
+    "id": 12096,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1366,
+    "number": 1297,
     "title": "테이블 그림을 기준으로 SQL문을 해석하면, 다음 PIVOT SQL에 대한 설명으로 옳은 것은?",
     "options": [
       "amount 값이 행 이름으로 전개된다.",
@@ -48728,11 +44376,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12166,
+    "id": 12097,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1367,
+    "number": 1298,
     "title": "출제 포인트를 복합적으로 적용하면, 뷰를 사용하는 주요 목적로 적절한 것은?",
     "options": [
       "복잡한 SQL을 단순화하고 필요한 컬럼만 노출하는 것",
@@ -48754,11 +44402,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12167,
+    "id": 12098,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1368,
+    "number": 1299,
     "title": "출제 포인트를 복합적으로 적용하면, 계층형 질의에서 루트 행을 지정하는 절로 옳은 것은?",
     "options": [
       "START WITH",
@@ -48780,11 +44428,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12168,
+    "id": 12099,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1369,
+    "number": 1300,
     "title": "그림의 각 행과 관계선을 기준으로 해석하면, ROLLUP에서 소계 행 판별에 사용되는 함수로 옳은 것은?",
     "options": [
       "ROW_NUMBER",
@@ -48833,11 +44481,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12169,
+    "id": 12100,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1370,
+    "number": 1301,
     "title": "조건식과 함수 의미를 함께 고려하면, 다음 SQL 결과로 옳은 것은?",
     "options": [
       "4",
@@ -48859,11 +44507,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12170,
+    "id": 12101,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 1371,
+    "number": 1302,
     "title": "업무 규칙과 제약조건을 함께 고려하면, 데이터 모델링의 주요 목적에 대한 설명으로 옳은 것은?",
     "options": [
       "현실 세계의 업무 규칙을 데이터 구조로 명확하게 표현하는 것이다.",
@@ -48885,11 +44533,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12171,
+    "id": 12102,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 1372,
+    "number": 1303,
     "title": "업무 규칙과 제약조건을 함께 고려하면, 데이터베이스 시스템의 장점으로 가장 적절한 것은?",
     "options": [
       "무결성 제약을 제거해 개발 속도만 높인다.",
@@ -48911,11 +44559,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12172,
+    "id": 12103,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 1373,
+    "number": 1304,
     "title": "업무 규칙과 제약조건을 함께 고려하면, 부모-자식 구조를 설계할 때 가장 먼저 확인해야 할 사항으로 옳은 것은?",
     "options": [
       "부모 엔터티와 자식 엔터티의 식별자 및 관계 차수",
@@ -48937,11 +44585,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12173,
+    "id": 12104,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1374,
+    "number": 1305,
     "title": "그림의 각 행과 관계선을 기준으로 해석하면, 상관 서브쿼리를 JOIN + GROUP BY로 바꿀 때 핵심 아이디어는?",
     "options": [
       "부서 평균 집합을 만든 뒤 원본 EMP와 부서 기준으로 조인한다.",
@@ -48990,11 +44638,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12174,
+    "id": 12105,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 1375,
+    "number": 1306,
     "title": "업무 규칙과 제약조건을 함께 고려하면, 복합 기본키에 대한 설명으로 옳은 것은?",
     "options": [
       "UNIQUE 제약보다 약한 제약이다.",
@@ -49016,11 +44664,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12175,
+    "id": 12106,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1376,
+    "number": 1307,
     "title": "출제 포인트를 복합적으로 적용하면, ROW_NUMBER() OVER (PARTITION BY dept ORDER BY sal DESC)의 의미로 옳은 것은?",
     "options": [
       "부서별 합계를 계산한다.",
@@ -49042,11 +44690,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12176,
+    "id": 12107,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1377,
+    "number": 1308,
     "title": "업무 규칙과 제약조건을 함께 고려하면, 대량 범위 조회에서 인덱스보다 전체 테이블 스캔이 더 적절할 수 있는 경우로 옳은 것은?",
     "options": [
       "선택 비율이 매우 높아 대부분의 행을 읽어야 할 때",
@@ -49068,11 +44716,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12177,
+    "id": 12108,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1378,
+    "number": 1309,
     "title": "조건식과 함수 의미를 함께 고려하면, 다음 조건을 만족하는 값으로 옳은 것은?",
     "options": [
       "DBSQL",
@@ -49094,11 +44742,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12178,
+    "id": 12109,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1379,
+    "number": 1310,
     "title": "그림의 각 행과 관계선을 기준으로 해석하면, 다음 테이블과 가정 기준으로 3NF 관점에서 추가 분리가 필요한 속성으로 옳은 것은?",
     "options": [
       "상품번호",
@@ -49154,11 +44802,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12179,
+    "id": 12110,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1380,
+    "number": 1311,
     "title": "그림의 데이터와 조건식을 모두 고려하면, 다음 SQL 실행 결과 행 수는?",
     "options": [
       "4",
@@ -49211,11 +44859,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12180,
+    "id": 12111,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1381,
+    "number": 1312,
     "title": "출제 포인트를 복합적으로 적용하면, 집합 연산을 사용하기 위한 조건으로 옳은 것은?",
     "options": [
       "JOIN 조건이 반드시 필요하다.",
@@ -49237,11 +44885,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12181,
+    "id": 12112,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1382,
+    "number": 1313,
     "title": "트랜잭션 흐름을 단계별로 해석하면, 다음 트랜잭션 흐름 후 최종 반영되는 작업으로 옳은 것은?",
     "options": [
       "작업1과 작업3만 반영된다.",
@@ -49263,11 +44911,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12182,
+    "id": 12113,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1383,
+    "number": 1314,
     "title": "업무 규칙과 제약조건을 함께 고려하면, 다음 권한 부여/회수 흐름에 대한 설명으로 옳은 것은?",
     "options": [
       "user1을 통해 user2에게 전달된 권한도 함께 회수될 수 있다.",
@@ -49289,11 +44937,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12183,
+    "id": 12114,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1384,
+    "number": 1315,
     "title": "조건식과 함수 의미를 함께 고려하면, 다음 DDL 흐름에 대한 설명으로 옳은 것은?",
     "options": [
       "ALTER TABLE 문은 컬럼명 변경에만 사용된다.",
@@ -49315,11 +44963,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12184,
+    "id": 12115,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1385,
+    "number": 1316,
     "title": "테이블 그림을 기준으로 SQL문을 해석하면, 다음 SQL 결과에서 rn = 1인 행으로 옳은 것은?",
     "options": [
       "INCHEON, B, 80",
@@ -49372,11 +45020,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12185,
+    "id": 12116,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 1386,
+    "number": 1317,
     "title": "표와 관계를 함께 읽으면, 다음 ERD에 대한 설명으로 옳은 것은?",
     "options": [
       "고객과 주문의 관계는 1:N 관계이다.",
@@ -49400,11 +45048,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12186,
+    "id": 12117,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1387,
+    "number": 1318,
     "title": "테이블 그림을 기준으로 SQL문을 해석하면, 다음 SQL 실행 결과로 반환되는 행 수는?",
     "options": [
       "2",
@@ -49470,11 +45118,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12187,
+    "id": 12118,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 1388,
+    "number": 1319,
     "title": "SQL 표현식 결과를 계산하면, 다음 표현식 결과로 옳은 것은?",
     "options": [
       "5",
@@ -49496,11 +45144,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12188,
+    "id": 12119,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1389,
+    "number": 1320,
     "title": "제시된 표를 바탕으로 SQL문을 그대로 평가하면, 다음 PIVOT SQL 결과에서 SALES 행의 (Q1 + Q2) 합계는?",
     "options": [
       "210",
@@ -49563,11 +45211,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12189,
+    "id": 12120,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 1390,
+    "number": 1321,
     "title": "업무 규칙과 제약조건을 함께 고려하면, 다음 VIEW 정의에 대한 설명으로 옳은 것은?",
     "options": [
       "집계 함수가 포함되어 일반적인 단순 뷰보다 갱신 제약이 크다.",
@@ -49589,11 +45237,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12190,
+    "id": 12121,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1391,
+    "number": 1322,
     "title": "테이블 그림을 기준으로 SQL문을 해석하면, 다음 계층형 질의 결과에서 CONNECT_BY_ISLEAF = 1 이고 LEVEL = 3 인 행 수는?",
     "options": [
       "3",
@@ -49661,11 +45309,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12191,
+    "id": 12122,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1392,
+    "number": 1323,
     "title": "테이블 그림을 기준으로 SQL문을 해석하면, 다음 SQL 실행 결과로 반환되는 부서 수는?",
     "options": [
       "2",
@@ -49748,11 +45396,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12192,
+    "id": 12123,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1393,
+    "number": 1324,
     "title": "식과 절의 반환 규칙을 적용하면, 다음 SQL 결과로 옳은 것은?",
     "options": [
       "QL",
@@ -49774,11 +45422,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12193,
+    "id": 12124,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 1394,
+    "number": 1325,
     "title": "데이터 구조의 목적을 생각하면, 개념 데이터 모델링 단계에서 주로 수행하는 작업으로 옳은 것은?",
     "options": [
       "파티션 키와 병렬도만 결정한다.",
@@ -49800,11 +45448,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12194,
+    "id": 12125,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 1395,
+    "number": 1326,
     "title": "표와 관계를 함께 읽으면, 다음 제약 조건 가정에서 부모 ORDERS 행 삭제에 대한 설명으로 옳은 것은?",
     "options": [
       "자식이 부모를 참조 중이면 부모 삭제는 거부될 수 있다.",
@@ -49832,11 +45480,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12195,
+    "id": 12126,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 1396,
+    "number": 1327,
     "title": "데이터 구조의 목적을 생각하면, ANSI/SPARC 3단계 스키마 구조에 대한 설명으로 옳은 것은?",
     "options": [
       "외부 스키마는 사용자 관점의 뷰를 정의한다.",
@@ -49858,11 +45506,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12196,
+    "id": 12127,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 1397,
+    "number": 1328,
     "title": "데이터 구조의 목적을 생각하면, 일반적인 데이터베이스 설계 순서로 옳은 것은?",
     "options": [
       "개념 설계 -> 논리 설계 -> 물리 설계",
@@ -49884,11 +45532,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12197,
+    "id": 12128,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1398,
+    "number": 1329,
     "title": "테이블 그림을 기준으로 SQL문을 해석하면, 다음 SQL 실행 결과로 조회되는 고객 수는?",
     "options": [
       "2",
@@ -49958,11 +45606,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12198,
+    "id": 12129,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1399,
+    "number": 1330,
     "title": "테이블 그림을 기준으로 SQL문을 해석하면, 다음 SQL 결과에서 rn <> rnk 인 행 수는?",
     "options": [
       "2",
@@ -50020,11 +45668,11 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12199,
+    "id": 12130,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "2과목",
-    "number": 1400,
+    "number": 1331,
     "title": "데이터 구조의 목적을 생각하면, 복합 인덱스 (col1, col2)가 있을 때 일반적으로 인덱스 활용도가 높은 조건으로 옳은 것은?",
     "options": [
       "WHERE col1 = :v1 AND col2 BETWEEN :v2 AND :v3",
