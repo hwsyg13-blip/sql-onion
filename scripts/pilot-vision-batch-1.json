@@ -273,6 +273,198 @@
           ]
         }
       ]
+    },
+    {
+      "imageKey": "j95",
+      "src": "/sqld-images/j95-1.png",
+      "_classic": true,
+      "convertedRefs": [
+        {
+          "type": "table",
+          "caption": "[테이블 : OS]",
+          "headers": ["OSID(PK)", "OS명"],
+          "rows": [
+            ["100", "Android"],
+            ["200", "iOS"],
+            ["300", "Bada"]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "[테이블 : 단말기]",
+          "headers": ["단말기ID(PK)", "단말기명", "OSID(FK)"],
+          "rows": [
+            ["1000", "A1000", "100"],
+            ["2000", "B2000", "100"],
+            ["3000", "C3000", "200"],
+            ["4000", "D3000", "300"]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "[테이블 : 고객]",
+          "headers": ["고객번호(PK)", "단말기ID(FK)"],
+          "rows": [
+            ["11000", "1000"],
+            ["12000", ""],
+            ["13000", ""],
+            ["14000", "3000"],
+            ["15000", "4000"],
+            ["16000", "4000"]
+          ]
+        },
+        {
+          "type": "sql",
+          "caption": "[SQL]",
+          "code": "SELECT A.고객번호, A.고객명, B.단말기ID, B.단말기명, C.OSID, C.OS명\nFROM   고객 A LEFT OUTER JOIN 단말기 B\nON     (A.고객번호 IN (11000, 12000) AND A.단말기ID = B.단말기ID) LEFT OUTER JOIN OS C\nON     (B.OSID = C.OSID)\nORDER BY A.고객번호;"
+        }
+      ]
+    },
+    {
+      "imageKey": "j121",
+      "src": "/sqld-images/j121-1.png",
+      "_classic": true,
+      "convertedRefs": [
+        {
+          "type": "table",
+          "caption": "[테이블 : 부서]",
+          "headers": ["부서코드(PK)", "부서명", "상위부서코드", "담당자"],
+          "rows": [
+            ["A001", "대표이사", "NULL", "김대표"],
+            ["A002", "영업본부", "A001", "홍길동"],
+            ["A003", "경영지원본부", "A001", "이순신"],
+            ["A004", "마케팅본부", "A001", "강감찬"],
+            ["A005", "해외영업팀", "A002", "이정용"],
+            ["A006", "국내영업팀", "A002", "박지성"],
+            ["A007", "총무팀", "A003", "차두리"],
+            ["A008", "인사팀", "A003", "이민정"],
+            ["A009", "해외마케팅팀", "A004", "이병헌"],
+            ["A010", "국내마케팅팀", "A004", "차승원"]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "[테이블 : 부서이력]",
+          "headers": ["변경일자(PK)", "부서코드", "담당자"],
+          "rows": [
+            ["2014_01_23", "A007", "이달자"],
+            ["2015_01_25", "A007", "홍경만"],
+            ["2015_05_24", "A008", "유재석"]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "[결과]",
+          "headers": ["부서코드(PK)", "부서명", "상위부서코드", "담당자"],
+          "rows": [
+            ["A001", "대표이사", "NULL", "김대표"],
+            ["A002", "영업본부", "A001", "홍길동"],
+            ["A003", "경영지원본부", "A001", "이순신"],
+            ["A004", "마케팅본부", "A001", "강감찬"],
+            ["A005", "해외영업팀", "A002", "이정용"],
+            ["A006", "국내영업팀", "A002", "박지성"],
+            ["A007", "총무팀", "A003", "홍경만"],
+            ["A008", "인사팀", "A003", "유재석"],
+            ["A009", "해외마케팅팀", "A004", "이병헌"],
+            ["A010", "국내마케팅팀", "A004", "차승원"]
+          ]
+        }
+      ]
+    },
+    {
+      "imageKey": "j131",
+      "src": "/sqld-images/j131-1.png",
+      "_classic": true,
+      "convertedRefs": [
+        {
+          "type": "table",
+          "caption": "[테이블 : 고객]",
+          "headers": ["고객번호(PK)", "고객명"],
+          "rows": [
+            ["001", "홍길동"],
+            ["002", "이순신"],
+            ["003", "강감찬"],
+            ["004", "이상해"],
+            ["005", "이규혁"]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "[테이블 : 월별매출]",
+          "headers": ["월(PK)", "고객번호(PK)", "매출액"],
+          "rows": [
+            ["201301", "001", "200"],
+            ["201301", "002", "250"],
+            ["201301", "003", "200"],
+            ["201301", "004", "250"],
+            ["201302", "001", "150"],
+            ["201302", "002", "100"],
+            ["201302", "005", "100"],
+            ["201303", "002", "100"],
+            ["201303", "003", "150"]
+          ]
+        },
+        {
+          "type": "sql",
+          "caption": "[SQL]",
+          "code": "SELECT 고객번호, 고객명, 매출액\n      ,RANK() OVER(ORDER BY 매출액 DESC) AS 순위\nFROM   (\n        SELECT A.고객번호, A.고객명\n              ,MAX(A.고객명) AS 고객명\n              ,SUM(B.매출액) AS 매출액\n        FROM   고객 A INNER JOIN 월별매출 B\n        ON     (A.고객번호 = B.고객번호)\n        GROUP BY A.고객번호\n       )\nORDER BY RNK;"
+        }
+      ]
+    },
+    {
+      "imageKey": "j101",
+      "src": "/sqld-images/j101-1.png",
+      "_classic": true,
+      "convertedRefs": [
+        {
+          "type": "erd",
+          "caption": "ERD",
+          "mermaid": "erDiagram\n    SERVICE ||--o{ SERVICE_USE : provides\n    MEMBER ||--o{ SERVICE_USE : uses\n    SERVICE {\n        string serviceId PK\n        string serviceName\n        string serviceURL\n    }\n    MEMBER {\n        string memberId PK\n        string memberName\n    }\n    SERVICE_USE {\n        string memberId FK\n        string serviceId FK\n        date useDate\n    }"
+        },
+        {
+          "type": "sql",
+          "caption": "[수행 SQL]",
+          "code": "SELECT A.서비스ID, A.서비스명, B.서비스URL\nFROM   (SELECT 서비스ID\n        FROM   서비스\n        INTERSECT\n        SELECT 서비스ID\n        FROM   서비스이용) A, 서비스 B\nWHERE  A.서비스ID = B.서비스ID;"
+        }
+      ]
+    },
+    {
+      "imageKey": "j128",
+      "src": "/sqld-images/j128-1.png",
+      "_classic": true,
+      "convertedRefs": [
+        {
+          "type": "table",
+          "caption": "[테이블 : 자재발주]",
+          "headers": ["자재번호", "발주처ID", "발주일자", "발주수량"],
+          "rows": [
+            ["1", "001", "20150102", "100"],
+            ["1", "001", "20150103", "200"],
+            ["1", "002", "20150102", "200"],
+            ["2", "002", "20150102", "200"],
+            ["2", "001", "20150103", "100"],
+            ["2", "002", "20150103", "200"]
+          ]
+        },
+        {
+          "type": "sql",
+          "caption": "[SQL]",
+          "code": "SELECT CASE WHEN GROUPING(자재번호) = 1 THEN '자재전체'\n            ELSE 자재번호 END AS 자재번호\n      ,CASE WHEN GROUPING(발주처ID) = 1 THEN '발주처전체'\n            ELSE 발주처ID END AS 발주처ID\n      ,CASE WHEN GROUPING(발주일자) = 1 THEN '발주일자전체'\n            ELSE 발주일자 END AS 발주일자\n      ,SUM(발주수량) AS 발주수량합계\nFROM   자재발주\n[GROUP BY ?]\nORDER BY 자재번호, 발주처ID, 발주일자;"
+        },
+        {
+          "type": "table",
+          "caption": "[결과]",
+          "headers": ["자재번호", "발주처ID", "발주일자", "발주수량합계"],
+          "rows": [
+            ["1", "발주처전체", "발주일자전체", "300"],
+            ["2", "발주처전체", "발주일자전체", "300"],
+            ["자재전체", "001", "20150102", "100"],
+            ["자재전체", "001", "20150103", "200"],
+            ["자재전체", "002", "20150102", "200"],
+            ["자재전체", "002", "20150103", "200"]
+          ]
+        }
+      ]
     }
   ]
 }
