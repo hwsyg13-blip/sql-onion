@@ -217,8 +217,9 @@
       "refs": [
         {
           "type": "image",
-          "src": "/sqld-images/j42-4-erd.png",
-          "caption": "두 ERD 표기법 비교 (PRODUCT 엔터티 동일 속성). [IE 표기법] 테이블 박스에 NOT NULL/NULL 표시: PROD_ID/PROD_NM/REG_DT NOT NULL, REGR_NO NULL. [Barker 표기법] 속성 앞 기호로 표시: # PROD_ID(PK), * PROD_NM(필수), * REG_DT(필수), o REGR_NO(선택)."
+          "src": "/sqld-images/j42-4-erd.svg",
+          "alt": "두 ERD 표기법 비교 (PRODUCT 엔터티 동일 속성). [IE 표기법] 테이블 박스에 NOT NULL/NULL 표시. [Barker 표기법] 속성 앞 기호 # (PK), * (필수), o (선택)",
+          "caption": "[IE 표기법 vs Barker 표기법]"
         }
       ]
     },
