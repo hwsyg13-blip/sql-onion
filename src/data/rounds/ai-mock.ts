@@ -19428,7 +19428,7 @@ export const AI_MOCK: QuizQuestion[] = [
           [
             "RESEARCH",
             "MANAGER",
-            "3000"
+            ""
           ],
           [
             "RESEARCH",
@@ -19656,7 +19656,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "table",
-        "caption": "[EMP] (※ 1x 시각상 하단 행 절단 의심 — 원본 PDF 재검 필요)",
+        "caption": "[EMP] (※ 원본 PNG 하단 절단 — 3x 업스케일에도 동일하게 7행만 가시. 원본 PDF 재크롭 필요)",
         "headers": [
           "RN",
           "DEPTNO",
@@ -20201,7 +20201,7 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "table",
-        "caption": "[EMPLOYEES] (※ 1x 시각 — 행수·SALARY 정확도 재검 권장)",
+        "caption": "[EMPLOYEES]",
         "headers": [
           "EMPLOYEE_ID",
           "DEPARTMENT_ID",
@@ -20216,7 +20216,7 @@ export const AI_MOCK: QuizQuestion[] = [
             "4200.00"
           ],
           [
-            "102",
+            "106",
             "60",
             "Patabella",
             "4800.00"
@@ -20234,40 +20234,58 @@ export const AI_MOCK: QuizQuestion[] = [
             "6000.00"
           ],
           [
-            "106",
+            "103",
             "60",
             "Hunold",
             "9000.00"
           ],
           [
-            "101",
+            "102",
             "90",
             "De Haan",
             "17000.00"
           ],
           [
-            "100",
+            "101",
             "90",
             "Kochar",
             "17000.00"
           ],
           [
+            "100",
+            "90",
+            "King",
+            "24000.00"
+          ],
+          [
             "109",
             "100",
             "Faviet",
-            "24000.00"
+            "9000.00"
           ],
           [
             "108",
             "100",
             "Greenberg",
             "12000.00"
+          ],
+          [
+            "201",
+            "200",
+            "ALEX",
+            "8000"
+          ],
+          [
+            "202",
+            "200",
+            "SMITH",
+            "7000"
           ]
         ]
       },
       {
         "type": "table",
-        "caption": "[결과] (LAG 윈도우 함수로 BEFORE_SALARY 추가)",
+        "caption": "[결과] — LAG/윈도우 BEFORE_SALARY 컬럼 추가 (DEPT 200 제외 또는 이미지 하단 미가시)",
         "headers": [
           "EMPLOYEE_ID",
           "DEPARTMENT_ID",
@@ -20284,52 +20302,59 @@ export const AI_MOCK: QuizQuestion[] = [
             ""
           ],
           [
-            "102",
+            "106",
             "60",
             "Patabella",
             "4800.00",
-            "4200.00"
+            "4200"
           ],
           [
             "105",
             "60",
             "Austin",
             "4800.00",
-            "4800.00"
+            "4800"
           ],
           [
             "104",
             "60",
             "Ernst",
             "6000.00",
-            "4800.00"
+            "4800"
           ],
           [
-            "106",
+            "103",
             "60",
             "Hunold",
             "9000.00",
-            "6000.00"
+            ""
           ],
           [
-            "101",
+            "102",
             "90",
             "De Haan",
             "17000.00",
             ""
           ],
           [
-            "100",
+            "101",
             "90",
             "Kochar",
             "17000.00",
-            "17000.00"
+            ""
+          ],
+          [
+            "100",
+            "90",
+            "King",
+            "24000.00",
+            "17000"
           ],
           [
             "109",
             "100",
             "Faviet",
-            "24000.00",
+            "9000.00",
             ""
           ],
           [
@@ -20337,7 +20362,7 @@ export const AI_MOCK: QuizQuestion[] = [
             "100",
             "Greenberg",
             "12000.00",
-            "24000.00"
+            ""
           ]
         ]
       }
@@ -20834,7 +20859,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "table",
-        "caption": "[Mytest] (※ NAME 의 '__' 는 표시상 밑줄 두 개 — 원본은 공백 또는 밑줄 패턴 가능)",
+        "caption": "[Mytest]",
         "headers": [
           "ID",
           "NAME"
@@ -20842,7 +20867,7 @@ export const AI_MOCK: QuizQuestion[] = [
         "rows": [
           [
             "1",
-            "__A"
+            "_A"
           ],
           [
             "2",
@@ -20850,7 +20875,7 @@ export const AI_MOCK: QuizQuestion[] = [
           ],
           [
             "3",
-            "__C"
+            "_C"
           ],
           [
             "4",
@@ -20862,7 +20887,7 @@ export const AI_MOCK: QuizQuestion[] = [
           ],
           [
             "6",
-            "__F"
+            "_F"
           ]
         ]
       },
@@ -20876,15 +20901,15 @@ export const AI_MOCK: QuizQuestion[] = [
         "rows": [
           [
             "1",
-            "__A"
+            "_A"
           ],
           [
             "3",
-            "__C"
+            "_C"
           ],
           [
             "6",
-            "__F"
+            "_F"
           ]
         ]
       }
