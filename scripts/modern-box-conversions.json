@@ -1,0 +1,322 @@
+{
+  "schema": "md5(image content) → 변환된 references 배열",
+  "method": "Claude 시각 정독. 동일 콘텐츠 17개 그룹 (총 167 파일 = sqld-1140 이미지 36%) 일괄 변환.",
+  "groups": {
+    "678de902dc39": {
+      "name": "Sales ERD",
+      "count": 18,
+      "type": "image",
+      "refs": [
+        {
+          "type": "image",
+          "src": "/sqld-images/j1115-1.png",
+          "alt": "Sales ERD",
+          "caption": "Sales ERD"
+        }
+      ]
+    },
+    "0d0b39eb095d": {
+      "name": "NULL Aggregate Data",
+      "count": 17,
+      "type": "table",
+      "refs": [
+        {
+          "type": "table",
+          "caption": "NULL Aggregate Data",
+          "headers": ["EMP ID", "SALARY", "BONUS"],
+          "rows": [
+            ["1", "1000", "100"],
+            ["2", "", "200"],
+            ["3", "2000", ""],
+            ["4", "", ""]
+          ]
+        }
+      ]
+    },
+    "fffcd9c32998": {
+      "name": "Hierarchy EMP Data",
+      "count": 16,
+      "type": "table",
+      "refs": [
+        {
+          "type": "table",
+          "caption": "Hierarchy EMP Data",
+          "headers": ["EMP ID", "EMP NAME", "MGR ID"],
+          "rows": [
+            ["1", "CEO", ""],
+            ["2", "SALES_MGR", "1"],
+            ["3", "DEV_MGR", "1"],
+            ["4", "SALES_A", "2"],
+            ["5", "SALES_B", "2"],
+            ["6", "DEV_A", "3"],
+            ["7", "DEV_B", "3"]
+          ]
+        }
+      ]
+    },
+    "a08476e33243": {
+      "name": "Normalization Source Table",
+      "count": 16,
+      "type": "table",
+      "refs": [
+        {
+          "type": "table",
+          "caption": "Normalization Source Table",
+          "headers": ["ORDER NO", "PRODUCT NO", "PRODUCT NAME", "CUSTOMER NAME", "CUSTOMER GRADE"],
+          "rows": [
+            ["1001", "P01", "SQL BOOK", "KIM", "VIP"],
+            ["1001", "P02", "DB BOOK", "KIM", "VIP"],
+            ["1002", "P03", "NOTE", "LEE", "BASIC"]
+          ]
+        }
+      ]
+    },
+    "6375e31bbc73": {
+      "name": "Window Function Data",
+      "count": 12,
+      "type": "table",
+      "refs": [
+        {
+          "type": "table",
+          "caption": "Window Function Data",
+          "headers": ["REGION", "SELLER", "AMOUNT"],
+          "rows": [
+            ["SEOUL", "KIM", "500"],
+            ["SEOUL", "LEE", "300"],
+            ["BUSAN", "PARK", "450"],
+            ["BUSAN", "CHOI", "200"],
+            ["BUSAN", "JUNG", "200"]
+          ]
+        }
+      ]
+    },
+    "9c75a161ebec": {
+      "name": "PIVOT Source Data",
+      "count": 12,
+      "type": "table",
+      "refs": [
+        {
+          "type": "table",
+          "caption": "PIVOT Source Data",
+          "headers": ["DEPT", "QUARTER CD", "AMOUNT"],
+          "rows": [
+            ["SALES", "Q1", "100"],
+            ["SALES", "Q2", "120"],
+            ["DEV", "Q1", "200"],
+            ["DEV", "Q2", "180"],
+            ["HR", "Q1", "90"],
+            ["HR", "Q2", "110"]
+          ]
+        }
+      ]
+    },
+    "50439cf0faa4": {
+      "name": "EMP Group Data",
+      "count": 11,
+      "type": "table",
+      "refs": [
+        {
+          "type": "table",
+          "caption": "EMP Group Data",
+          "headers": ["EMP ID", "DEPT", "SALARY"],
+          "rows": [
+            ["1", "SALES", "3000"],
+            ["2", "SALES", "2500"],
+            ["3", "SALES", "2000"],
+            ["4", "SALES", "3500"],
+            ["5", "DEV", "5000"],
+            ["6", "DEV", "4200"],
+            ["7", "DEV", "4100"],
+            ["8", "DEV", "3900"],
+            ["9", "DEV", "3700"],
+            ["10", "HR", "2800"]
+          ]
+        }
+      ]
+    },
+    "08ca014c9b8b": {
+      "name": "Parent / Child ERD",
+      "count": 10,
+      "type": "image",
+      "refs": [
+        {
+          "type": "image",
+          "src": "/sqld-images/j1147-1.png",
+          "alt": "Parent / Child ERD",
+          "caption": "Parent / Child ERD"
+        }
+      ]
+    },
+    "09a829721a9b": {
+      "name": "JOIN Basic Tables",
+      "count": 8,
+      "type": "table",
+      "refs": [
+        {
+          "type": "table",
+          "caption": "JOIN Basic Tables — Table A",
+          "headers": ["ID", "NAME"],
+          "rows": [
+            ["1", "ALPHA"],
+            ["2", "BETA"],
+            ["3", "GAMMA"]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "JOIN Basic Tables — Table B",
+          "headers": ["ID", "VAL"],
+          "rows": [
+            ["2", "X"],
+            ["3", "Y"],
+            ["4", "Z"]
+          ]
+        }
+      ]
+    },
+    "a8927aaa4bc7": {
+      "name": "CUSTOMER / ORDERS",
+      "count": 8,
+      "type": "table",
+      "refs": [
+        {
+          "type": "table",
+          "caption": "CUSTOMER",
+          "headers": ["CUSTOMER ID", "NAME"],
+          "rows": [
+            ["101", "KIM"],
+            ["102", "LEE"],
+            ["103", "PARK"],
+            ["104", "CHOI"]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "ORDERS",
+          "headers": ["ORDER ID", "CUSTOMER ID"],
+          "rows": [
+            ["9001", "101"],
+            ["9002", "101"],
+            ["9003", "103"]
+          ]
+        }
+      ]
+    },
+    "ac9b674a1251": {
+      "name": "LEFT OUTER JOIN Tables",
+      "count": 8,
+      "type": "table",
+      "refs": [
+        {
+          "type": "table",
+          "caption": "LEFT OUTER JOIN — Table A",
+          "headers": ["ID", "NAME"],
+          "rows": [
+            ["1", "SEOUL"],
+            ["2", "BUSAN"],
+            ["3", "DAEGU"]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "LEFT OUTER JOIN — Table B",
+          "headers": ["ID", "GRADE"],
+          "rows": [
+            ["2", "SILVER"],
+            ["4", "GOLD"]
+          ]
+        }
+      ]
+    },
+    "6e3dbcfb9c6e": {
+      "name": "Correlated Subquery Data",
+      "count": 8,
+      "type": "table",
+      "refs": [
+        {
+          "type": "table",
+          "caption": "Correlated Subquery Data",
+          "headers": ["EMP NAME", "DEPT", "SALARY"],
+          "rows": [
+            ["A", "SALES", "3000"],
+            ["B", "SALES", "2000"],
+            ["C", "DEV", "5000"],
+            ["D", "DEV", "3500"]
+          ]
+        }
+      ]
+    },
+    "0d5bfd40a3ac": {
+      "name": "ROLLUP Data",
+      "count": 7,
+      "type": "table",
+      "refs": [
+        {
+          "type": "table",
+          "caption": "ROLLUP Data",
+          "headers": ["REGION", "PRODUCT", "AMOUNT"],
+          "rows": [
+            ["SEOUL", "A", "100"],
+            ["SEOUL", "B", "200"],
+            ["BUSAN", "A", "150"],
+            ["BUSAN", "B", "50"]
+          ]
+        }
+      ]
+    },
+    "70c933babeb1": {
+      "name": "SELECT Result Data",
+      "count": 6,
+      "type": "table",
+      "refs": [
+        {
+          "type": "table",
+          "caption": "SELECT Result Data",
+          "headers": ["REGION", "AMOUNT", "CATEGORY"],
+          "rows": [
+            ["SEOUL", "150", "A"],
+            ["BUSAN", "100", "A"],
+            ["SEOUL", "100", "B"],
+            ["INCHEON", "80", "B"]
+          ]
+        }
+      ]
+    },
+    "0ec86d075079": {
+      "name": "DCL Statements",
+      "count": 4,
+      "type": "sql",
+      "refs": [
+        {
+          "type": "sql",
+          "caption": "DCL Statements",
+          "code": "GRANT SELECT, INSERT ON emp TO user1;\nREVOKE INSERT ON emp FROM user1;"
+        }
+      ]
+    },
+    "34602fc7228e": {
+      "name": "DDL Statements",
+      "count": 4,
+      "type": "sql",
+      "refs": [
+        {
+          "type": "sql",
+          "caption": "DDL Statements",
+          "code": "CREATE TABLE emp (\n  emp_id NUMBER PRIMARY KEY,\n  emp_name VARCHAR2(30)\n);\nALTER TABLE emp ADD hire_date DATE;\nDROP TABLE temp_emp;"
+        }
+      ]
+    },
+    "5dc2a85416c0": {
+      "name": "VIEW Definition",
+      "count": 2,
+      "type": "sql",
+      "refs": [
+        {
+          "type": "sql",
+          "caption": "VIEW Definition",
+          "code": "CREATE VIEW v_emp AS\nSELECT emp_id, emp_name, dept\nFROM emp\nWHERE dept = 'SALES';"
+        }
+      ]
+    }
+  }
+}

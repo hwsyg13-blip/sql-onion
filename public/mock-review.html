@@ -38291,9 +38291,13 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">다음 SQL 실행 결과로 옳은 것은?</div>
       <div class="refs"><div class="ref-text">SELECT COUNT(*)<br>FROM A a<br>LEFT JOIN B b<br>  ON a.id = b.id<br>WHERE b.id IS NULL<br>   OR a.name LIKE &#39;G%&#39;;</div>
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j872-1.png" alt="문항 이미지 j872-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">JOIN Basic Tables — Table A</div>
+          <table><thead><tr><th>ID</th><th>NAME</th></tr></thead><tbody><tr><td>1</td><td>ALPHA</td></tr><tr><td>2</td><td>BETA</td></tr><tr><td>3</td><td>GAMMA</td></tr></tbody></table>
+        </div>
+        <div class="ref-table">
+          <div class="ref-caption">JOIN Basic Tables — Table B</div>
+          <table><thead><tr><th>ID</th><th>VAL</th></tr></thead><tbody><tr><td>2</td><td>X</td></tr><tr><td>3</td><td>Y</td></tr><tr><td>4</td><td>Z</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -38334,9 +38338,13 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">A.ID에 중복값 2가 한 건 더 추가되고 B.ID=2가 1건 존재할 때 INNER JOIN 결과에 추가되는 행 수는?</div>
       <div class="refs"><div class="ref-text">기존 그림 기준으로 A에 (2, DELTA)가 추가된다.</div>
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j873-1.png" alt="문항 이미지 j873-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">JOIN Basic Tables — Table A</div>
+          <table><thead><tr><th>ID</th><th>NAME</th></tr></thead><tbody><tr><td>1</td><td>ALPHA</td></tr><tr><td>2</td><td>BETA</td></tr><tr><td>3</td><td>GAMMA</td></tr></tbody></table>
+        </div>
+        <div class="ref-table">
+          <div class="ref-caption">JOIN Basic Tables — Table B</div>
+          <table><thead><tr><th>ID</th><th>VAL</th></tr></thead><tbody><tr><td>2</td><td>X</td></tr><tr><td>3</td><td>Y</td></tr><tr><td>4</td><td>Z</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -38377,9 +38385,13 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">INNER JOIN 결과에 포함되지 않는 행에 대한 설명으로 옳은 것은?</div>
       <div class="refs"><div class="ref-text">SELECT * FROM A JOIN B ON A.ID = B.ID;</div>
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j874-1.png" alt="문항 이미지 j874-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">JOIN Basic Tables — Table A</div>
+          <table><thead><tr><th>ID</th><th>NAME</th></tr></thead><tbody><tr><td>1</td><td>ALPHA</td></tr><tr><td>2</td><td>BETA</td></tr><tr><td>3</td><td>GAMMA</td></tr></tbody></table>
+        </div>
+        <div class="ref-table">
+          <div class="ref-caption">JOIN Basic Tables — Table B</div>
+          <table><thead><tr><th>ID</th><th>VAL</th></tr></thead><tbody><tr><td>2</td><td>X</td></tr><tr><td>3</td><td>Y</td></tr><tr><td>4</td><td>Z</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt correct">
@@ -38420,9 +38432,13 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">다음 SQL에서 COUNT(DISTINCT a.id) 값은?</div>
       <div class="refs"><div class="ref-text">SELECT COUNT(DISTINCT a.id)<br>FROM A a<br>JOIN B b<br>  ON a.id = b.id<br>WHERE a.id IN (<br>  SELECT id<br>  FROM B<br>  WHERE id &gt;= 2<br>);</div>
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j875-1.png" alt="문항 이미지 j875-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">JOIN Basic Tables — Table A</div>
+          <table><thead><tr><th>ID</th><th>NAME</th></tr></thead><tbody><tr><td>1</td><td>ALPHA</td></tr><tr><td>2</td><td>BETA</td></tr><tr><td>3</td><td>GAMMA</td></tr></tbody></table>
+        </div>
+        <div class="ref-table">
+          <div class="ref-caption">JOIN Basic Tables — Table B</div>
+          <table><thead><tr><th>ID</th><th>VAL</th></tr></thead><tbody><tr><td>2</td><td>X</td></tr><tr><td>3</td><td>Y</td></tr><tr><td>4</td><td>Z</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -38463,9 +38479,13 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">LEFT OUTER JOIN 결과에서 NULL이 발생하는 이유로 옳은 것은?</div>
       <div class="refs">
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j877-1.png" alt="문항 이미지 j877-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">LEFT OUTER JOIN — Table A</div>
+          <table><thead><tr><th>ID</th><th>NAME</th></tr></thead><tbody><tr><td>1</td><td>SEOUL</td></tr><tr><td>2</td><td>BUSAN</td></tr><tr><td>3</td><td>DAEGU</td></tr></tbody></table>
+        </div>
+        <div class="ref-table">
+          <div class="ref-caption">LEFT OUTER JOIN — Table B</div>
+          <table><thead><tr><th>ID</th><th>GRADE</th></tr></thead><tbody><tr><td>2</td><td>SILVER</td></tr><tr><td>4</td><td>GOLD</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -38506,9 +38526,13 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">다음 SQL에서 RIGHT OUTER JOIN을 수행하면 반드시 유지되는 테이블은?</div>
       <div class="refs"><div class="ref-text">SELECT NVL(TO_CHAR(a.id), &#39;NO_A&#39;) AS a_id,<br>       b.id AS b_id,<br>       b.grade<br>FROM A a<br>RIGHT OUTER JOIN B b<br>  ON a.id = b.id<br>ORDER BY b.id;</div>
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j878-1.png" alt="문항 이미지 j878-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">LEFT OUTER JOIN — Table A</div>
+          <table><thead><tr><th>ID</th><th>NAME</th></tr></thead><tbody><tr><td>1</td><td>SEOUL</td></tr><tr><td>2</td><td>BUSAN</td></tr><tr><td>3</td><td>DAEGU</td></tr></tbody></table>
+        </div>
+        <div class="ref-table">
+          <div class="ref-caption">LEFT OUTER JOIN — Table B</div>
+          <table><thead><tr><th>ID</th><th>GRADE</th></tr></thead><tbody><tr><td>2</td><td>SILVER</td></tr><tr><td>4</td><td>GOLD</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -38549,9 +38573,13 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">다음 SQL에서 반환되는 A.ID 값으로 옳은 것은?</div>
       <div class="refs"><div class="ref-text">SELECT a.id,<br>       COALESCE(b.grade, &#39;NONE&#39;) AS grade<br>FROM A a<br>LEFT OUTER JOIN B b<br>  ON a.id = b.id<br>WHERE b.id IS NULL<br>ORDER BY a.id;</div>
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j879-1.png" alt="문항 이미지 j879-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">LEFT OUTER JOIN — Table A</div>
+          <table><thead><tr><th>ID</th><th>NAME</th></tr></thead><tbody><tr><td>1</td><td>SEOUL</td></tr><tr><td>2</td><td>BUSAN</td></tr><tr><td>3</td><td>DAEGU</td></tr></tbody></table>
+        </div>
+        <div class="ref-table">
+          <div class="ref-caption">LEFT OUTER JOIN — Table B</div>
+          <table><thead><tr><th>ID</th><th>GRADE</th></tr></thead><tbody><tr><td>2</td><td>SILVER</td></tr><tr><td>4</td><td>GOLD</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -38592,9 +38620,13 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">OUTER JOIN 결과 해석으로 옳은 것은?</div>
       <div class="refs">
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j880-1.png" alt="문항 이미지 j880-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">LEFT OUTER JOIN — Table A</div>
+          <table><thead><tr><th>ID</th><th>NAME</th></tr></thead><tbody><tr><td>1</td><td>SEOUL</td></tr><tr><td>2</td><td>BUSAN</td></tr><tr><td>3</td><td>DAEGU</td></tr></tbody></table>
+        </div>
+        <div class="ref-table">
+          <div class="ref-caption">LEFT OUTER JOIN — Table B</div>
+          <table><thead><tr><th>ID</th><th>GRADE</th></tr></thead><tbody><tr><td>2</td><td>SILVER</td></tr><tr><td>4</td><td>GOLD</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -38635,9 +38667,9 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">다음 SQL 실행 결과로 반환되는 부서 수는?</div>
       <div class="refs"><div class="ref-text">SELECT dept<br>FROM emp<br>GROUP BY dept<br>HAVING COUNT(*) &gt;= 4<br>   AND AVG(salary) &gt; 3000<br>   AND SUM(CASE WHEN salary &gt;= 4000 THEN 1 ELSE 0 END) &gt;= 2;</div>
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j881-1.png" alt="문항 이미지 j881-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">EMP Group Data</div>
+          <table><thead><tr><th>EMP ID</th><th>DEPT</th><th>SALARY</th></tr></thead><tbody><tr><td>1</td><td>SALES</td><td>3000</td></tr><tr><td>2</td><td>SALES</td><td>2500</td></tr><tr><td>3</td><td>SALES</td><td>2000</td></tr><tr><td>4</td><td>SALES</td><td>3500</td></tr><tr><td>5</td><td>DEV</td><td>5000</td></tr><tr><td>6</td><td>DEV</td><td>4200</td></tr><tr><td>7</td><td>DEV</td><td>4100</td></tr><tr><td>8</td><td>DEV</td><td>3900</td></tr><tr><td>9</td><td>DEV</td><td>3700</td></tr><tr><td>10</td><td>HR</td><td>2800</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -38678,9 +38710,9 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">다음 SQL 결과로 조회되는 부서명으로 옳은 것은?</div>
       <div class="refs"><div class="ref-text">SELECT dept<br>FROM emp<br>GROUP BY dept<br>HAVING MAX(salary) - MIN(salary) &gt;= 1000<br>   AND COUNT(*) &gt;= 4<br>ORDER BY dept;</div>
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j882-1.png" alt="문항 이미지 j882-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">EMP Group Data</div>
+          <table><thead><tr><th>EMP ID</th><th>DEPT</th><th>SALARY</th></tr></thead><tbody><tr><td>1</td><td>SALES</td><td>3000</td></tr><tr><td>2</td><td>SALES</td><td>2500</td></tr><tr><td>3</td><td>SALES</td><td>2000</td></tr><tr><td>4</td><td>SALES</td><td>3500</td></tr><tr><td>5</td><td>DEV</td><td>5000</td></tr><tr><td>6</td><td>DEV</td><td>4200</td></tr><tr><td>7</td><td>DEV</td><td>4100</td></tr><tr><td>8</td><td>DEV</td><td>3900</td></tr><tr><td>9</td><td>DEV</td><td>3700</td></tr><tr><td>10</td><td>HR</td><td>2800</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -38721,9 +38753,9 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">다음 SQL 실행 결과 행 수는?</div>
       <div class="refs"><div class="ref-text">SELECT dept, COUNT(*) FROM emp GROUP BY dept HAVING MIN(salary) &gt;= 2500;</div>
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j883-1.png" alt="문항 이미지 j883-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">EMP Group Data</div>
+          <table><thead><tr><th>EMP ID</th><th>DEPT</th><th>SALARY</th></tr></thead><tbody><tr><td>1</td><td>SALES</td><td>3000</td></tr><tr><td>2</td><td>SALES</td><td>2500</td></tr><tr><td>3</td><td>SALES</td><td>2000</td></tr><tr><td>4</td><td>SALES</td><td>3500</td></tr><tr><td>5</td><td>DEV</td><td>5000</td></tr><tr><td>6</td><td>DEV</td><td>4200</td></tr><tr><td>7</td><td>DEV</td><td>4100</td></tr><tr><td>8</td><td>DEV</td><td>3900</td></tr><tr><td>9</td><td>DEV</td><td>3700</td></tr><tr><td>10</td><td>HR</td><td>2800</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -38764,9 +38796,9 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">GROUP BY dept 수행 시 생성되는 그룹 수는?</div>
       <div class="refs">
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j884-1.png" alt="문항 이미지 j884-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">EMP Group Data</div>
+          <table><thead><tr><th>EMP ID</th><th>DEPT</th><th>SALARY</th></tr></thead><tbody><tr><td>1</td><td>SALES</td><td>3000</td></tr><tr><td>2</td><td>SALES</td><td>2500</td></tr><tr><td>3</td><td>SALES</td><td>2000</td></tr><tr><td>4</td><td>SALES</td><td>3500</td></tr><tr><td>5</td><td>DEV</td><td>5000</td></tr><tr><td>6</td><td>DEV</td><td>4200</td></tr><tr><td>7</td><td>DEV</td><td>4100</td></tr><tr><td>8</td><td>DEV</td><td>3900</td></tr><tr><td>9</td><td>DEV</td><td>3700</td></tr><tr><td>10</td><td>HR</td><td>2800</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -38807,9 +38839,9 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">다음 중 HAVING 절에 대한 설명으로 옳은 것은?</div>
       <div class="refs">
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j885-1.png" alt="문항 이미지 j885-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">EMP Group Data</div>
+          <table><thead><tr><th>EMP ID</th><th>DEPT</th><th>SALARY</th></tr></thead><tbody><tr><td>1</td><td>SALES</td><td>3000</td></tr><tr><td>2</td><td>SALES</td><td>2500</td></tr><tr><td>3</td><td>SALES</td><td>2000</td></tr><tr><td>4</td><td>SALES</td><td>3500</td></tr><tr><td>5</td><td>DEV</td><td>5000</td></tr><tr><td>6</td><td>DEV</td><td>4200</td></tr><tr><td>7</td><td>DEV</td><td>4100</td></tr><tr><td>8</td><td>DEV</td><td>3900</td></tr><tr><td>9</td><td>DEV</td><td>3700</td></tr><tr><td>10</td><td>HR</td><td>2800</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -38850,9 +38882,9 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">다음 SQL 실행 결과 값으로 옳은 것은?</div>
       <div class="refs"><div class="ref-text">SELECT SUM(NVL(bonus, 0)) + COUNT(salary) AS val<br>FROM emp_null;</div>
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j886-1.png" alt="문항 이미지 j886-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">NULL Aggregate Data</div>
+          <table><thead><tr><th>EMP ID</th><th>SALARY</th><th>BONUS</th></tr></thead><tbody><tr><td>1</td><td>1000</td><td>100</td></tr><tr><td>2</td><td></td><td>200</td></tr><tr><td>3</td><td>2000</td><td></td></tr><tr><td>4</td><td></td><td></td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -38893,9 +38925,9 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">다음 SALARY 데이터에서 AVG(salary) 값은?</div>
       <div class="refs">
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j888-1.png" alt="문항 이미지 j888-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">NULL Aggregate Data</div>
+          <table><thead><tr><th>EMP ID</th><th>SALARY</th><th>BONUS</th></tr></thead><tbody><tr><td>1</td><td>1000</td><td>100</td></tr><tr><td>2</td><td></td><td>200</td></tr><tr><td>3</td><td>2000</td><td></td></tr><tr><td>4</td><td></td><td></td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -38936,9 +38968,9 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">bonus 값이 100, 200, NULL, NULL일 때 SUM(bonus) 결과는?</div>
       <div class="refs">
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j889-1.png" alt="문항 이미지 j889-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">NULL Aggregate Data</div>
+          <table><thead><tr><th>EMP ID</th><th>SALARY</th><th>BONUS</th></tr></thead><tbody><tr><td>1</td><td>1000</td><td>100</td></tr><tr><td>2</td><td></td><td>200</td></tr><tr><td>3</td><td>2000</td><td></td></tr><tr><td>4</td><td></td><td></td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -39018,9 +39050,13 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">IN과 EXISTS 비교로 가장 적절한 것은?</div>
       <div class="refs">
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j892-1.png" alt="문항 이미지 j892-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">CUSTOMER</div>
+          <table><thead><tr><th>CUSTOMER ID</th><th>NAME</th></tr></thead><tbody><tr><td>101</td><td>KIM</td></tr><tr><td>102</td><td>LEE</td></tr><tr><td>103</td><td>PARK</td></tr><tr><td>104</td><td>CHOI</td></tr></tbody></table>
+        </div>
+        <div class="ref-table">
+          <div class="ref-caption">ORDERS</div>
+          <table><thead><tr><th>ORDER ID</th><th>CUSTOMER ID</th></tr></thead><tbody><tr><td>9001</td><td>101</td></tr><tr><td>9002</td><td>101</td></tr><tr><td>9003</td><td>103</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -39061,9 +39097,13 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">다음 데이터에서 주문이 없는 고객 ID는?</div>
       <div class="refs">
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j893-1.png" alt="문항 이미지 j893-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">CUSTOMER</div>
+          <table><thead><tr><th>CUSTOMER ID</th><th>NAME</th></tr></thead><tbody><tr><td>101</td><td>KIM</td></tr><tr><td>102</td><td>LEE</td></tr><tr><td>103</td><td>PARK</td></tr><tr><td>104</td><td>CHOI</td></tr></tbody></table>
+        </div>
+        <div class="ref-table">
+          <div class="ref-caption">ORDERS</div>
+          <table><thead><tr><th>ORDER ID</th><th>CUSTOMER ID</th></tr></thead><tbody><tr><td>9001</td><td>101</td></tr><tr><td>9002</td><td>101</td></tr><tr><td>9003</td><td>103</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -39104,9 +39144,13 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">다음 조건의 의미로 옳은 것은? salary &gt; ALL (SELECT salary FROM emp WHERE dept = &#39;HR&#39;)</div>
       <div class="refs">
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j894-1.png" alt="문항 이미지 j894-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">CUSTOMER</div>
+          <table><thead><tr><th>CUSTOMER ID</th><th>NAME</th></tr></thead><tbody><tr><td>101</td><td>KIM</td></tr><tr><td>102</td><td>LEE</td></tr><tr><td>103</td><td>PARK</td></tr><tr><td>104</td><td>CHOI</td></tr></tbody></table>
+        </div>
+        <div class="ref-table">
+          <div class="ref-caption">ORDERS</div>
+          <table><thead><tr><th>ORDER ID</th><th>CUSTOMER ID</th></tr></thead><tbody><tr><td>9001</td><td>101</td></tr><tr><td>9002</td><td>101</td></tr><tr><td>9003</td><td>103</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -39147,9 +39191,13 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">ANY 비교에 대한 설명으로 옳은 것은?</div>
       <div class="refs"><div class="ref-text">salary &gt; ANY (10, 20, 30)을 해석한다.</div>
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j895-1.png" alt="문항 이미지 j895-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">CUSTOMER</div>
+          <table><thead><tr><th>CUSTOMER ID</th><th>NAME</th></tr></thead><tbody><tr><td>101</td><td>KIM</td></tr><tr><td>102</td><td>LEE</td></tr><tr><td>103</td><td>PARK</td></tr><tr><td>104</td><td>CHOI</td></tr></tbody></table>
+        </div>
+        <div class="ref-table">
+          <div class="ref-caption">ORDERS</div>
+          <table><thead><tr><th>ORDER ID</th><th>CUSTOMER ID</th></tr></thead><tbody><tr><td>9001</td><td>101</td></tr><tr><td>9002</td><td>101</td></tr><tr><td>9003</td><td>103</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -39190,9 +39238,9 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">다음 SQL 결과로 조회되는 사원 수는?</div>
       <div class="refs"><div class="ref-text">SELECT COUNT(*)<br>FROM emp e<br>WHERE e.salary &gt; (<br>        SELECT AVG(s.salary)<br>        FROM emp s<br>        WHERE s.dept = e.dept<br>      )<br>  AND e.salary &gt;= (<br>        SELECT MAX(s2.salary) - 500<br>        FROM emp s2<br>        WHERE s2.dept = e.dept<br>      );</div>
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j896-1.png" alt="문항 이미지 j896-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">Correlated Subquery Data</div>
+          <table><thead><tr><th>EMP NAME</th><th>DEPT</th><th>SALARY</th></tr></thead><tbody><tr><td>A</td><td>SALES</td><td>3000</td></tr><tr><td>B</td><td>SALES</td><td>2000</td></tr><tr><td>C</td><td>DEV</td><td>5000</td></tr><tr><td>D</td><td>DEV</td><td>3500</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -39233,9 +39281,9 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">그림 데이터에서 위 SQL 결과로 조회되는 사원 수는?</div>
       <div class="refs"><div class="ref-text">SELECT EMP_NAME, DEPT, SALARY<br>FROM EMP E1<br>WHERE SALARY &gt; (<br>    SELECT AVG(SALARY)<br>    FROM EMP E2<br>    WHERE E1.DEPT = E2.DEPT<br>);</div>
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j897-1.png" alt="문항 이미지 j897-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">Correlated Subquery Data</div>
+          <table><thead><tr><th>EMP NAME</th><th>DEPT</th><th>SALARY</th></tr></thead><tbody><tr><td>A</td><td>SALES</td><td>3000</td></tr><tr><td>B</td><td>SALES</td><td>2000</td></tr><tr><td>C</td><td>DEV</td><td>5000</td></tr><tr><td>D</td><td>DEV</td><td>3500</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -39276,9 +39324,9 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">다음 SQL에서 내부 쿼리의 그룹 기준은?</div>
       <div class="refs"><div class="ref-text">SELECT AVG(salary) FROM emp s WHERE s.dept = e.dept</div>
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j899-1.png" alt="문항 이미지 j899-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">Correlated Subquery Data</div>
+          <table><thead><tr><th>EMP NAME</th><th>DEPT</th><th>SALARY</th></tr></thead><tbody><tr><td>A</td><td>SALES</td><td>3000</td></tr><tr><td>B</td><td>SALES</td><td>2000</td></tr><tr><td>C</td><td>DEV</td><td>5000</td></tr><tr><td>D</td><td>DEV</td><td>3500</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -39319,9 +39367,9 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">아래 EMP 데이터와 상관 서브쿼리 예시를 보고, 이를 JOIN + GROUP BY 형태로 바꿀 때 핵심 아이디어로 가장 적절한 것은?</div>
       <div class="refs"><div class="ref-text">SELECT e.emp_name, e.dept, e.salary<br>FROM emp e<br>WHERE e.salary &gt; (<br>  SELECT AVG(salary)<br>  FROM emp<br>  WHERE dept = e.dept<br>);</div>
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j900-1.png" alt="문항 이미지 j900-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">Correlated Subquery Data</div>
+          <table><thead><tr><th>EMP NAME</th><th>DEPT</th><th>SALARY</th></tr></thead><tbody><tr><td>A</td><td>SALES</td><td>3000</td></tr><tr><td>B</td><td>SALES</td><td>2000</td></tr><tr><td>C</td><td>DEV</td><td>5000</td></tr><tr><td>D</td><td>DEV</td><td>3500</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -39479,9 +39527,9 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">다음 계층형 질의 결과에서 CONNECT_BY_ISLEAF = 1 이고 LEVEL = 3 인 행 수는?</div>
       <div class="refs"><div class="ref-text">SELECT emp_name,<br>       LEVEL AS lv,<br>       CONNECT_BY_ISLEAF AS is_leaf<br>FROM emp_tree<br>START WITH mgr_id IS NULL<br>CONNECT BY PRIOR emp_id = mgr_id<br>ORDER SIBLINGS BY emp_name;</div>
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j906-1.png" alt="문항 이미지 j906-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">Hierarchy EMP Data</div>
+          <table><thead><tr><th>EMP ID</th><th>EMP NAME</th><th>MGR ID</th></tr></thead><tbody><tr><td>1</td><td>CEO</td><td></td></tr><tr><td>2</td><td>SALES_MGR</td><td>1</td></tr><tr><td>3</td><td>DEV_MGR</td><td>1</td></tr><tr><td>4</td><td>SALES_A</td><td>2</td></tr><tr><td>5</td><td>SALES_B</td><td>2</td></tr><tr><td>6</td><td>DEV_A</td><td>3</td></tr><tr><td>7</td><td>DEV_B</td><td>3</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -39522,9 +39570,9 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">다음 계층형 질의 결과에서 LEVEL = 2인 행 수는?</div>
       <div class="refs"><div class="ref-text">SELECT emp_id,<br>       emp_name,<br>       mgr_id,<br>       LEVEL AS lv<br>FROM emp_tree<br>START WITH mgr_id IS NULL<br>CONNECT BY PRIOR emp_id = mgr_id<br>ORDER SIBLINGS BY emp_name;</div>
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j907-1.png" alt="문항 이미지 j907-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">Hierarchy EMP Data</div>
+          <table><thead><tr><th>EMP ID</th><th>EMP NAME</th><th>MGR ID</th></tr></thead><tbody><tr><td>1</td><td>CEO</td><td></td></tr><tr><td>2</td><td>SALES_MGR</td><td>1</td></tr><tr><td>3</td><td>DEV_MGR</td><td>1</td></tr><tr><td>4</td><td>SALES_A</td><td>2</td></tr><tr><td>5</td><td>SALES_B</td><td>2</td></tr><tr><td>6</td><td>DEV_A</td><td>3</td></tr><tr><td>7</td><td>DEV_B</td><td>3</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -39565,9 +39613,9 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">다음 계층형 질의 결과에서 DEV_B의 PATH 값으로 옳은 것은?</div>
       <div class="refs"><div class="ref-text">SELECT emp_name,<br>       LEVEL AS lv,<br>       SYS_CONNECT_BY_PATH(emp_name, &#39; &gt; &#39;) AS path<br>FROM emp_tree<br>START WITH mgr_id IS NULL<br>CONNECT BY PRIOR emp_id = mgr_id<br>ORDER SIBLINGS BY emp_name;</div>
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j908-1.png" alt="문항 이미지 j908-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">Hierarchy EMP Data</div>
+          <table><thead><tr><th>EMP ID</th><th>EMP NAME</th><th>MGR ID</th></tr></thead><tbody><tr><td>1</td><td>CEO</td><td></td></tr><tr><td>2</td><td>SALES_MGR</td><td>1</td></tr><tr><td>3</td><td>DEV_MGR</td><td>1</td></tr><tr><td>4</td><td>SALES_A</td><td>2</td></tr><tr><td>5</td><td>SALES_B</td><td>2</td></tr><tr><td>6</td><td>DEV_A</td><td>3</td></tr><tr><td>7</td><td>DEV_B</td><td>3</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -39608,9 +39656,9 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">다음 계층형 질의에서 DEV_A 행의 ROOT_NAME 값으로 옳은 것은?</div>
       <div class="refs"><div class="ref-text">SELECT CONNECT_BY_ROOT emp_name AS root_name,<br>       emp_name,<br>       LEVEL AS lv<br>FROM emp_tree<br>START WITH mgr_id IS NULL<br>CONNECT BY PRIOR emp_id = mgr_id;</div>
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j909-1.png" alt="문항 이미지 j909-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">Hierarchy EMP Data</div>
+          <table><thead><tr><th>EMP ID</th><th>EMP NAME</th><th>MGR ID</th></tr></thead><tbody><tr><td>1</td><td>CEO</td><td></td></tr><tr><td>2</td><td>SALES_MGR</td><td>1</td></tr><tr><td>3</td><td>DEV_MGR</td><td>1</td></tr><tr><td>4</td><td>SALES_A</td><td>2</td></tr><tr><td>5</td><td>SALES_B</td><td>2</td></tr><tr><td>6</td><td>DEV_A</td><td>3</td></tr><tr><td>7</td><td>DEV_B</td><td>3</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -39651,9 +39699,9 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">다음 PIVOT SQL 결과에서 SALES 행의 (Q1 + Q2) 합계는?</div>
       <div class="refs"><div class="ref-text">SELECT dept, Q1, Q2<br>FROM (<br>  SELECT dept, quarter_cd, amount<br>  FROM sales_q<br>)<br>PIVOT (<br>  SUM(amount)<br>  FOR quarter_cd IN (&#39;Q1&#39; AS Q1, &#39;Q2&#39; AS Q2)<br>)<br>ORDER BY dept;</div>
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j911-1.png" alt="문항 이미지 j911-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">PIVOT Source Data</div>
+          <table><thead><tr><th>DEPT</th><th>QUARTER CD</th><th>AMOUNT</th></tr></thead><tbody><tr><td>SALES</td><td>Q1</td><td>100</td></tr><tr><td>SALES</td><td>Q2</td><td>120</td></tr><tr><td>DEV</td><td>Q1</td><td>200</td></tr><tr><td>DEV</td><td>Q2</td><td>180</td></tr><tr><td>HR</td><td>Q1</td><td>90</td></tr><tr><td>HR</td><td>Q2</td><td>110</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -39694,9 +39742,9 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">다음 PIVOT SQL에 대한 설명으로 옳은 것은?</div>
       <div class="refs"><div class="ref-text">SELECT dept, Q1, Q2<br>FROM (<br>  SELECT dept, quarter_cd, amount<br>  FROM sales_q<br>)<br>PIVOT (<br>  SUM(amount)<br>  FOR quarter_cd IN (&#39;Q1&#39; AS Q1, &#39;Q2&#39; AS Q2)<br>);</div>
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j915-1.png" alt="문항 이미지 j915-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">PIVOT Source Data</div>
+          <table><thead><tr><th>DEPT</th><th>QUARTER CD</th><th>AMOUNT</th></tr></thead><tbody><tr><td>SALES</td><td>Q1</td><td>100</td></tr><tr><td>SALES</td><td>Q2</td><td>120</td></tr><tr><td>DEV</td><td>Q1</td><td>200</td></tr><tr><td>DEV</td><td>Q2</td><td>180</td></tr><tr><td>HR</td><td>Q1</td><td>90</td></tr><tr><td>HR</td><td>Q2</td><td>110</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -39737,9 +39785,9 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">다음 SQL 결과에서 rn = 1인 행으로 옳은 것은?</div>
       <div class="refs"><div class="ref-text">SELECT region,<br>       category,<br>       amount,<br>       ROW_NUMBER() OVER (<br>         ORDER BY category ASC, amount DESC, region ASC<br>       ) AS rn<br>FROM sales<br>WHERE amount &gt;= 100;</div>
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j916-1.png" alt="문항 이미지 j916-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">SELECT Result Data</div>
+          <table><thead><tr><th>REGION</th><th>AMOUNT</th><th>CATEGORY</th></tr></thead><tbody><tr><td>SEOUL</td><td>150</td><td>A</td></tr><tr><td>BUSAN</td><td>100</td><td>A</td></tr><tr><td>SEOUL</td><td>100</td><td>B</td></tr><tr><td>INCHEON</td><td>80</td><td>B</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -39780,9 +39828,9 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">다음 SQL 실행 결과 값으로 옳은 것은?</div>
       <div class="refs"><div class="ref-text">SELECT COUNT(*)<br>FROM (<br>  SELECT DISTINCT region, category<br>  FROM sales<br>  WHERE amount &gt;= 100<br>) x;</div>
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j917-1.png" alt="문항 이미지 j917-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">SELECT Result Data</div>
+          <table><thead><tr><th>REGION</th><th>AMOUNT</th><th>CATEGORY</th></tr></thead><tbody><tr><td>SEOUL</td><td>150</td><td>A</td></tr><tr><td>BUSAN</td><td>100</td><td>A</td></tr><tr><td>SEOUL</td><td>100</td><td>B</td></tr><tr><td>INCHEON</td><td>80</td><td>B</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -39901,9 +39949,9 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">다음 SQL 결과에서 rn &lt;&gt; rnk 인 행 수는?</div>
       <div class="refs"><div class="ref-text">SELECT region,<br>       seller,<br>       amount,<br>       ROW_NUMBER() OVER (<br>         PARTITION BY region<br>         ORDER BY amount DESC, seller ASC<br>       ) AS rn,<br>       RANK() OVER (<br>         PARTITION BY region<br>         ORDER BY amount DESC<br>       ) AS rnk<br>FROM sales_rank;</div>
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j921-1.png" alt="문항 이미지 j921-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">Window Function Data</div>
+          <table><thead><tr><th>REGION</th><th>SELLER</th><th>AMOUNT</th></tr></thead><tbody><tr><td>SEOUL</td><td>KIM</td><td>500</td></tr><tr><td>SEOUL</td><td>LEE</td><td>300</td></tr><tr><td>BUSAN</td><td>PARK</td><td>450</td></tr><tr><td>BUSAN</td><td>CHOI</td><td>200</td></tr><tr><td>BUSAN</td><td>JUNG</td><td>200</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -39944,9 +39992,9 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">BUSAN 지역 데이터에서 RANK() OVER(PARTITION BY region ORDER BY amount DESC) 결과로 옳은 것은?</div>
       <div class="refs">
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j922-1.png" alt="문항 이미지 j922-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">Window Function Data</div>
+          <table><thead><tr><th>REGION</th><th>SELLER</th><th>AMOUNT</th></tr></thead><tbody><tr><td>SEOUL</td><td>KIM</td><td>500</td></tr><tr><td>SEOUL</td><td>LEE</td><td>300</td></tr><tr><td>BUSAN</td><td>PARK</td><td>450</td></tr><tr><td>BUSAN</td><td>CHOI</td><td>200</td></tr><tr><td>BUSAN</td><td>JUNG</td><td>200</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -39987,9 +40035,9 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">ROW_NUMBER()와 RANK()의 차이로 옳은 것은?</div>
       <div class="refs">
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j924-1.png" alt="문항 이미지 j924-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">Window Function Data</div>
+          <table><thead><tr><th>REGION</th><th>SELLER</th><th>AMOUNT</th></tr></thead><tbody><tr><td>SEOUL</td><td>KIM</td><td>500</td></tr><tr><td>SEOUL</td><td>LEE</td><td>300</td></tr><tr><td>BUSAN</td><td>PARK</td><td>450</td></tr><tr><td>BUSAN</td><td>CHOI</td><td>200</td></tr><tr><td>BUSAN</td><td>JUNG</td><td>200</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -40030,9 +40078,9 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">OVER(PARTITION BY region)의 의미로 옳은 것은?</div>
       <div class="refs">
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j925-1.png" alt="문항 이미지 j925-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">Window Function Data</div>
+          <table><thead><tr><th>REGION</th><th>SELLER</th><th>AMOUNT</th></tr></thead><tbody><tr><td>SEOUL</td><td>KIM</td><td>500</td></tr><tr><td>SEOUL</td><td>LEE</td><td>300</td></tr><tr><td>BUSAN</td><td>PARK</td><td>450</td></tr><tr><td>BUSAN</td><td>CHOI</td><td>200</td></tr><tr><td>BUSAN</td><td>JUNG</td><td>200</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -40073,9 +40121,9 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">다음 SQL 결과에서 gr = 1 이고 gp = 1 인 행 수는?</div>
       <div class="refs"><div class="ref-text">SELECT region,<br>       product,<br>       SUM(amount) AS amt,<br>       GROUPING(region) AS gr,<br>       GROUPING(product) AS gp<br>FROM order_amt<br>GROUP BY ROLLUP(region, product);</div>
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j926-1.png" alt="문항 이미지 j926-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">ROLLUP Data</div>
+          <table><thead><tr><th>REGION</th><th>PRODUCT</th><th>AMOUNT</th></tr></thead><tbody><tr><td>SEOUL</td><td>A</td><td>100</td></tr><tr><td>SEOUL</td><td>B</td><td>200</td></tr><tr><td>BUSAN</td><td>A</td><td>150</td></tr><tr><td>BUSAN</td><td>B</td><td>50</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -40116,9 +40164,9 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">GROUPING SETS((region), (product))의 의미로 옳은 것은?</div>
       <div class="refs">
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j929-1.png" alt="문항 이미지 j929-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">ROLLUP Data</div>
+          <table><thead><tr><th>REGION</th><th>PRODUCT</th><th>AMOUNT</th></tr></thead><tbody><tr><td>SEOUL</td><td>A</td><td>100</td></tr><tr><td>SEOUL</td><td>B</td><td>200</td></tr><tr><td>BUSAN</td><td>A</td><td>150</td></tr><tr><td>BUSAN</td><td>B</td><td>50</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -40159,9 +40207,9 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">ROLLUP에서 소계 행 판별에 사용되는 함수로 옳은 것은?</div>
       <div class="refs">
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j930-1.png" alt="문항 이미지 j930-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">ROLLUP Data</div>
+          <table><thead><tr><th>REGION</th><th>PRODUCT</th><th>AMOUNT</th></tr></thead><tbody><tr><td>SEOUL</td><td>A</td><td>100</td></tr><tr><td>SEOUL</td><td>B</td><td>200</td></tr><tr><td>BUSAN</td><td>A</td><td>150</td></tr><tr><td>BUSAN</td><td>B</td><td>50</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -40320,8 +40368,8 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       <div class="title">ORDERS와 ORDER_ITEM의 관계로 옳은 것은?</div>
       <div class="refs">
         <div class="ref-image">
-          
-          <img src="/sqld-images/j937-1.png" alt="문항 이미지 j937-1" loading="lazy">
+          <div class="ref-caption">Sales ERD</div>
+          <img src="/sqld-images/j1115-1.png" alt="Sales ERD" loading="lazy">
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -40363,8 +40411,8 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       <div class="title">주문상품 엔터티의 기본키로 가장 적절한 것은?</div>
       <div class="refs">
         <div class="ref-image">
-          
-          <img src="/sqld-images/j938-1.png" alt="문항 이미지 j938-1" loading="lazy">
+          <div class="ref-caption">Sales ERD</div>
+          <img src="/sqld-images/j1115-1.png" alt="Sales ERD" loading="lazy">
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -40406,8 +40454,8 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       <div class="title">ERD 설계 관점에서 주문일(order_date)이 속해야 할 엔터티는?</div>
       <div class="refs">
         <div class="ref-image">
-          
-          <img src="/sqld-images/j940-1.png" alt="문항 이미지 j940-1" loading="lazy">
+          <div class="ref-caption">Sales ERD</div>
+          <img src="/sqld-images/j1115-1.png" alt="Sales ERD" loading="lazy">
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -40449,8 +40497,8 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       <div class="title">다음 제약 조건 가정에서 부모 ORDERS 행 삭제에 대한 설명으로 옳은 것은?</div>
       <div class="refs"><div class="ref-text">ORDER_DETAIL.order_id는 ORDERS.order_id를 참조하고, FK는 NULL 허용이며 ON DELETE CASCADE는 없다고 가정한다.</div>
         <div class="ref-image">
-          
-          <img src="/sqld-images/j941-1.png" alt="문항 이미지 j941-1" loading="lazy">
+          <div class="ref-caption">Parent / Child ERD</div>
+          <img src="/sqld-images/j1147-1.png" alt="Parent / Child ERD" loading="lazy">
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -40492,8 +40540,8 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       <div class="title">FK 컬럼의 NULL 허용 여부로 옳은 것은?</div>
       <div class="refs">
         <div class="ref-image">
-          
-          <img src="/sqld-images/j942-1.png" alt="문항 이미지 j942-1" loading="lazy">
+          <div class="ref-caption">Parent / Child ERD</div>
+          <img src="/sqld-images/j1147-1.png" alt="Parent / Child ERD" loading="lazy">
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -40535,8 +40583,8 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       <div class="title">부모 ORDERS 행을 삭제하려 할 때 자식 ORDER_DETAIL이 존재하면 기본 동작은?</div>
       <div class="refs"><div class="ref-text">별도 ON DELETE CASCADE 옵션이 없다고 가정한다.</div>
         <div class="ref-image">
-          
-          <img src="/sqld-images/j943-1.png" alt="문항 이미지 j943-1" loading="lazy">
+          <div class="ref-caption">Parent / Child ERD</div>
+          <img src="/sqld-images/j1147-1.png" alt="Parent / Child ERD" loading="lazy">
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -40578,8 +40626,8 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       <div class="title">참조 무결성의 의미로 옳은 것은?</div>
       <div class="refs">
         <div class="ref-image">
-          
-          <img src="/sqld-images/j944-1.png" alt="문항 이미지 j944-1" loading="lazy">
+          <div class="ref-caption">Parent / Child ERD</div>
+          <img src="/sqld-images/j1147-1.png" alt="Parent / Child ERD" loading="lazy">
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -40621,8 +40669,8 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       <div class="title">고유성, 엔터티 무결성, 참조 무결성 중 FK와 직접 연결되는 것은?</div>
       <div class="refs">
         <div class="ref-image">
-          
-          <img src="/sqld-images/j945-1.png" alt="문항 이미지 j945-1" loading="lazy">
+          <div class="ref-caption">Parent / Child ERD</div>
+          <img src="/sqld-images/j1147-1.png" alt="Parent / Child ERD" loading="lazy">
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -40663,9 +40711,9 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">다음 주문 테이블에서 기본키가 (주문번호, 상품번호)일 때 가장 적절한 설명은?</div>
       <div class="refs"><div class="ref-text">주문번호+상품번호가 기본키라고 가정한다.</div>
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j946-1.png" alt="문항 이미지 j946-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">Normalization Source Table</div>
+          <table><thead><tr><th>ORDER NO</th><th>PRODUCT NO</th><th>PRODUCT NAME</th><th>CUSTOMER NAME</th><th>CUSTOMER GRADE</th></tr></thead><tbody><tr><td>1001</td><td>P01</td><td>SQL BOOK</td><td>KIM</td><td>VIP</td></tr><tr><td>1001</td><td>P02</td><td>DB BOOK</td><td>KIM</td><td>VIP</td></tr><tr><td>1002</td><td>P03</td><td>NOTE</td><td>LEE</td><td>BASIC</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -40706,9 +40754,9 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">2NF에 대한 설명으로 옳은 것은?</div>
       <div class="refs">
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j947-1.png" alt="문항 이미지 j947-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">Normalization Source Table</div>
+          <table><thead><tr><th>ORDER NO</th><th>PRODUCT NO</th><th>PRODUCT NAME</th><th>CUSTOMER NAME</th><th>CUSTOMER GRADE</th></tr></thead><tbody><tr><td>1001</td><td>P01</td><td>SQL BOOK</td><td>KIM</td><td>VIP</td></tr><tr><td>1001</td><td>P02</td><td>DB BOOK</td><td>KIM</td><td>VIP</td></tr><tr><td>1002</td><td>P03</td><td>NOTE</td><td>LEE</td><td>BASIC</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -40749,9 +40797,9 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">다음 중 수정 이상(update anomaly)의 예로 옳은 것은?</div>
       <div class="refs">
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j949-1.png" alt="문항 이미지 j949-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">Normalization Source Table</div>
+          <table><thead><tr><th>ORDER NO</th><th>PRODUCT NO</th><th>PRODUCT NAME</th><th>CUSTOMER NAME</th><th>CUSTOMER GRADE</th></tr></thead><tbody><tr><td>1001</td><td>P01</td><td>SQL BOOK</td><td>KIM</td><td>VIP</td></tr><tr><td>1001</td><td>P02</td><td>DB BOOK</td><td>KIM</td><td>VIP</td></tr><tr><td>1002</td><td>P03</td><td>NOTE</td><td>LEE</td><td>BASIC</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -40792,9 +40840,9 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">삽입 이상(insert anomaly)의 예로 옳은 것은?</div>
       <div class="refs">
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j950-1.png" alt="문항 이미지 j950-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">Normalization Source Table</div>
+          <table><thead><tr><th>ORDER NO</th><th>PRODUCT NO</th><th>PRODUCT NAME</th><th>CUSTOMER NAME</th><th>CUSTOMER GRADE</th></tr></thead><tbody><tr><td>1001</td><td>P01</td><td>SQL BOOK</td><td>KIM</td><td>VIP</td></tr><tr><td>1001</td><td>P02</td><td>DB BOOK</td><td>KIM</td><td>VIP</td></tr><tr><td>1002</td><td>P03</td><td>NOTE</td><td>LEE</td><td>BASIC</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -42123,8 +42171,8 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       <div class="title">다음 ERD 기준 CUSTOMER와 ORDERS의 관계로 옳은 것은?</div>
       <div class="refs">
         <div class="ref-image">
-          
-          <img src="/sqld-images/j986-1.png" alt="문항 이미지 j986-1" loading="lazy">
+          <div class="ref-caption">Sales ERD</div>
+          <img src="/sqld-images/j1115-1.png" alt="Sales ERD" loading="lazy">
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -42166,8 +42214,8 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       <div class="title">다음 ERD 기준 ORDER_ITEM의 식별자로 가장 적절한 것은?</div>
       <div class="refs">
         <div class="ref-image">
-          
-          <img src="/sqld-images/j987-1.png" alt="문항 이미지 j987-1" loading="lazy">
+          <div class="ref-caption">Sales ERD</div>
+          <img src="/sqld-images/j1115-1.png" alt="Sales ERD" loading="lazy">
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -42209,8 +42257,8 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       <div class="title">다음 ERD 기준 ORDERS와 ORDER_ITEM의 관계 특징으로 옳은 것은?</div>
       <div class="refs">
         <div class="ref-image">
-          
-          <img src="/sqld-images/j988-1.png" alt="문항 이미지 j988-1" loading="lazy">
+          <div class="ref-caption">Sales ERD</div>
+          <img src="/sqld-images/j1115-1.png" alt="Sales ERD" loading="lazy">
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -42252,8 +42300,8 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       <div class="title">다음 ERD 기준 한 주문이 여러 ORDER_ITEM을 가질 수 있다는 사실은 무엇으로 표현되는가?</div>
       <div class="refs">
         <div class="ref-image">
-          
-          <img src="/sqld-images/j989-1.png" alt="문항 이미지 j989-1" loading="lazy">
+          <div class="ref-caption">Sales ERD</div>
+          <img src="/sqld-images/j1115-1.png" alt="Sales ERD" loading="lazy">
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -42295,8 +42343,8 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       <div class="title">다음 ERD에서 관계 차수를 잘못 해석한 설명은?</div>
       <div class="refs">
         <div class="ref-image">
-          
-          <img src="/sqld-images/j990-1.png" alt="문항 이미지 j990-1" loading="lazy">
+          <div class="ref-caption">Sales ERD</div>
+          <img src="/sqld-images/j1115-1.png" alt="Sales ERD" loading="lazy">
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -42337,9 +42385,9 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">다음 테이블과 가정 기준으로 2NF 위반 원인으로 옳은 것은?</div>
       <div class="refs"><div class="ref-text">주문번호는 고객명과 고객등급을 결정하고, 상품번호는 상품명을 결정한다고 가정한다.</div>
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j991-1.png" alt="문항 이미지 j991-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">Normalization Source Table</div>
+          <table><thead><tr><th>ORDER NO</th><th>PRODUCT NO</th><th>PRODUCT NAME</th><th>CUSTOMER NAME</th><th>CUSTOMER GRADE</th></tr></thead><tbody><tr><td>1001</td><td>P01</td><td>SQL BOOK</td><td>KIM</td><td>VIP</td></tr><tr><td>1001</td><td>P02</td><td>DB BOOK</td><td>KIM</td><td>VIP</td></tr><tr><td>1002</td><td>P03</td><td>NOTE</td><td>LEE</td><td>BASIC</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -42380,9 +42428,9 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">다음 테이블과 가정 기준으로 우선 분리해야 할 대상 조합으로 가장 적절한 것은?</div>
       <div class="refs"><div class="ref-text">주문번호는 고객명과 고객등급을 결정하고, 상품번호는 상품명을 결정한다고 가정한다.</div>
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j992-1.png" alt="문항 이미지 j992-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">Normalization Source Table</div>
+          <table><thead><tr><th>ORDER NO</th><th>PRODUCT NO</th><th>PRODUCT NAME</th><th>CUSTOMER NAME</th><th>CUSTOMER GRADE</th></tr></thead><tbody><tr><td>1001</td><td>P01</td><td>SQL BOOK</td><td>KIM</td><td>VIP</td></tr><tr><td>1001</td><td>P02</td><td>DB BOOK</td><td>KIM</td><td>VIP</td></tr><tr><td>1002</td><td>P03</td><td>NOTE</td><td>LEE</td><td>BASIC</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt correct">
@@ -42423,9 +42471,9 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">다음 테이블과 가정 기준으로 주문이 없을 때 고객등급 정보를 저장하기 어려운 현상은?</div>
       <div class="refs"><div class="ref-text">고객 정보가 주문 데이터와 함께 저장된다고 가정한다.</div>
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j994-1.png" alt="문항 이미지 j994-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">Normalization Source Table</div>
+          <table><thead><tr><th>ORDER NO</th><th>PRODUCT NO</th><th>PRODUCT NAME</th><th>CUSTOMER NAME</th><th>CUSTOMER GRADE</th></tr></thead><tbody><tr><td>1001</td><td>P01</td><td>SQL BOOK</td><td>KIM</td><td>VIP</td></tr><tr><td>1001</td><td>P02</td><td>DB BOOK</td><td>KIM</td><td>VIP</td></tr><tr><td>1002</td><td>P03</td><td>NOTE</td><td>LEE</td><td>BASIC</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -42466,9 +42514,9 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">다음 테이블과 가정 기준으로 3NF 관점에서 추가 분리가 필요한 속성으로 옳은 것은?</div>
       <div class="refs"><div class="ref-text">고객명은 고객등급을 결정한다고 가정한다.</div>
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j995-1.png" alt="문항 이미지 j995-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">Normalization Source Table</div>
+          <table><thead><tr><th>ORDER NO</th><th>PRODUCT NO</th><th>PRODUCT NAME</th><th>CUSTOMER NAME</th><th>CUSTOMER GRADE</th></tr></thead><tbody><tr><td>1001</td><td>P01</td><td>SQL BOOK</td><td>KIM</td><td>VIP</td></tr><tr><td>1001</td><td>P02</td><td>DB BOOK</td><td>KIM</td><td>VIP</td></tr><tr><td>1002</td><td>P03</td><td>NOTE</td><td>LEE</td><td>BASIC</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -42509,9 +42557,14 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">다음 이미지의 명령 중 테이블 구조를 변경하는 문장으로 옳은 것은?</div>
       <div class="refs">
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j996-1.png" alt="문항 이미지 j996-1" loading="lazy">
+        <div class="ref-sql">
+          <div class="ref-caption">DDL Statements</div>
+          <pre><code>CREATE TABLE emp (
+  emp_id NUMBER PRIMARY KEY,
+  emp_name VARCHAR2(30)
+);
+ALTER TABLE emp ADD hire_date DATE;
+DROP TABLE temp_emp;</code></pre>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -42552,9 +42605,14 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">다음 중 객체 자체를 제거하는 DDL 명령으로 옳은 것은?</div>
       <div class="refs">
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j997-1.png" alt="문항 이미지 j997-1" loading="lazy">
+        <div class="ref-sql">
+          <div class="ref-caption">DDL Statements</div>
+          <pre><code>CREATE TABLE emp (
+  emp_id NUMBER PRIMARY KEY,
+  emp_name VARCHAR2(30)
+);
+ALTER TABLE emp ADD hire_date DATE;
+DROP TABLE temp_emp;</code></pre>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -42712,9 +42770,10 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">다음 이미지 기준으로 user1에게 처음 부여되는 권한으로 옳은 것은?</div>
       <div class="refs">
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j1001-1.png" alt="문항 이미지 j1001-1" loading="lazy">
+        <div class="ref-sql">
+          <div class="ref-caption">DCL Statements</div>
+          <pre><code>GRANT SELECT, INSERT ON emp TO user1;
+REVOKE INSERT ON emp FROM user1;</code></pre>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -42755,9 +42814,10 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">다음 이미지 기준으로 회수되는 권한으로 옳은 것은?</div>
       <div class="refs">
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j1002-1.png" alt="문항 이미지 j1002-1" loading="lazy">
+        <div class="ref-sql">
+          <div class="ref-caption">DCL Statements</div>
+          <pre><code>GRANT SELECT, INSERT ON emp TO user1;
+REVOKE INSERT ON emp FROM user1;</code></pre>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -43617,9 +43677,9 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">다음 BONUS 데이터에서 COUNT(bonus) 값은?</div>
       <div class="refs">
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j1031-1.png" alt="문항 이미지 j1031-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">NULL Aggregate Data</div>
+          <table><thead><tr><th>EMP ID</th><th>SALARY</th><th>BONUS</th></tr></thead><tbody><tr><td>1</td><td>1000</td><td>100</td></tr><tr><td>2</td><td></td><td>200</td></tr><tr><td>3</td><td>2000</td><td></td></tr><tr><td>4</td><td></td><td></td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -43660,9 +43720,9 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">다음 BONUS 데이터에서 SUM(NVL(bonus, 0)) 값은?</div>
       <div class="refs"><div class="ref-text">SELECT SUM(NVL(bonus, 0)) FROM t;</div>
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j1032-1.png" alt="문항 이미지 j1032-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">NULL Aggregate Data</div>
+          <table><thead><tr><th>EMP ID</th><th>SALARY</th><th>BONUS</th></tr></thead><tbody><tr><td>1</td><td>1000</td><td>100</td></tr><tr><td>2</td><td></td><td>200</td></tr><tr><td>3</td><td>2000</td><td></td></tr><tr><td>4</td><td></td><td></td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -43703,9 +43763,9 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">다음 BONUS 데이터에서 MAX(bonus) 값은?</div>
       <div class="refs">
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j1033-1.png" alt="문항 이미지 j1033-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">NULL Aggregate Data</div>
+          <table><thead><tr><th>EMP ID</th><th>SALARY</th><th>BONUS</th></tr></thead><tbody><tr><td>1</td><td>1000</td><td>100</td></tr><tr><td>2</td><td></td><td>200</td></tr><tr><td>3</td><td>2000</td><td></td></tr><tr><td>4</td><td></td><td></td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -43746,9 +43806,9 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">다음 SALARY 데이터에서 COUNT(*) - COUNT(salary) 결과는?</div>
       <div class="refs"><div class="ref-text">SELECT COUNT(*) - COUNT(salary) FROM t;</div>
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j1034-1.png" alt="문항 이미지 j1034-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">NULL Aggregate Data</div>
+          <table><thead><tr><th>EMP ID</th><th>SALARY</th><th>BONUS</th></tr></thead><tbody><tr><td>1</td><td>1000</td><td>100</td></tr><tr><td>2</td><td></td><td>200</td></tr><tr><td>3</td><td>2000</td><td></td></tr><tr><td>4</td><td></td><td></td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -44023,9 +44083,9 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">다음 SQL 결과에서 CEO의 LEVEL 값으로 옳은 것은?</div>
       <div class="refs"><div class="ref-text">SELECT emp_name, LEVEL<br>FROM emp_tree<br>START WITH mgr_id IS NULL<br>CONNECT BY PRIOR emp_id = mgr_id;</div>
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j1041-1.png" alt="문항 이미지 j1041-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">Hierarchy EMP Data</div>
+          <table><thead><tr><th>EMP ID</th><th>EMP NAME</th><th>MGR ID</th></tr></thead><tbody><tr><td>1</td><td>CEO</td><td></td></tr><tr><td>2</td><td>SALES_MGR</td><td>1</td></tr><tr><td>3</td><td>DEV_MGR</td><td>1</td></tr><tr><td>4</td><td>SALES_A</td><td>2</td></tr><tr><td>5</td><td>SALES_B</td><td>2</td></tr><tr><td>6</td><td>DEV_A</td><td>3</td></tr><tr><td>7</td><td>DEV_B</td><td>3</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -44066,9 +44126,9 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">다음 SQL 결과에서 리프 노드 수로 옳은 것은?</div>
       <div class="refs"><div class="ref-text">SELECT COUNT(*)<br>FROM (<br>  SELECT emp_name, CONNECT_BY_ISLEAF AS is_leaf<br>  FROM emp_tree<br>  START WITH mgr_id IS NULL<br>  CONNECT BY PRIOR emp_id = mgr_id<br>) x<br>WHERE is_leaf = 1;</div>
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j1042-1.png" alt="문항 이미지 j1042-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">Hierarchy EMP Data</div>
+          <table><thead><tr><th>EMP ID</th><th>EMP NAME</th><th>MGR ID</th></tr></thead><tbody><tr><td>1</td><td>CEO</td><td></td></tr><tr><td>2</td><td>SALES_MGR</td><td>1</td></tr><tr><td>3</td><td>DEV_MGR</td><td>1</td></tr><tr><td>4</td><td>SALES_A</td><td>2</td></tr><tr><td>5</td><td>SALES_B</td><td>2</td></tr><tr><td>6</td><td>DEV_A</td><td>3</td></tr><tr><td>7</td><td>DEV_B</td><td>3</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -44109,9 +44169,9 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">다음 SQL 결과에서 SALES_B의 루트 값으로 옳은 것은?</div>
       <div class="refs"><div class="ref-text">SELECT emp_name,<br>       CONNECT_BY_ROOT emp_name AS root_name<br>FROM emp_tree<br>START WITH mgr_id IS NULL<br>CONNECT BY PRIOR emp_id = mgr_id;</div>
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j1044-1.png" alt="문항 이미지 j1044-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">Hierarchy EMP Data</div>
+          <table><thead><tr><th>EMP ID</th><th>EMP NAME</th><th>MGR ID</th></tr></thead><tbody><tr><td>1</td><td>CEO</td><td></td></tr><tr><td>2</td><td>SALES_MGR</td><td>1</td></tr><tr><td>3</td><td>DEV_MGR</td><td>1</td></tr><tr><td>4</td><td>SALES_A</td><td>2</td></tr><tr><td>5</td><td>SALES_B</td><td>2</td></tr><tr><td>6</td><td>DEV_A</td><td>3</td></tr><tr><td>7</td><td>DEV_B</td><td>3</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -44191,9 +44251,12 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">다음 뷰 정의를 기준으로 옳은 설명은?</div>
       <div class="refs">
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j1047-1.png" alt="문항 이미지 j1047-1" loading="lazy">
+        <div class="ref-sql">
+          <div class="ref-caption">VIEW Definition</div>
+          <pre><code>CREATE VIEW v_emp AS
+SELECT emp_id, emp_name, dept
+FROM emp
+WHERE dept = &#39;SALES&#39;;</code></pre>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -44351,9 +44414,9 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">다음 SQL 결과로 옳은 것은?</div>
       <div class="refs"><div class="ref-text">SELECT region,<br>       seller,<br>       amount,<br>       SUM(amount) OVER (PARTITION BY region) AS region_total<br>FROM sales_rank;</div>
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j1053-1.png" alt="문항 이미지 j1053-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">Window Function Data</div>
+          <table><thead><tr><th>REGION</th><th>SELLER</th><th>AMOUNT</th></tr></thead><tbody><tr><td>SEOUL</td><td>KIM</td><td>500</td></tr><tr><td>SEOUL</td><td>LEE</td><td>300</td></tr><tr><td>BUSAN</td><td>PARK</td><td>450</td></tr><tr><td>BUSAN</td><td>CHOI</td><td>200</td></tr><tr><td>BUSAN</td><td>JUNG</td><td>200</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -44979,9 +45042,9 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">다음 그림과 SQL을 함께 보고 판단할 때, 다음 PIVOT SQL 결과에서 SALES 행의 (Q1 + Q2) 합계는?</div>
       <div class="refs"><div class="ref-text">SELECT dept, Q1, Q2<br>FROM (<br>  SELECT dept, quarter_cd, amount<br>  FROM sales_q<br>)<br>PIVOT (<br>  SUM(amount)<br>  FOR quarter_cd IN (&#39;Q1&#39; AS Q1, &#39;Q2&#39; AS Q2)<br>)<br>ORDER BY dept;</div>
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j1071-1.png" alt="문항 이미지 j1071-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">PIVOT Source Data</div>
+          <table><thead><tr><th>DEPT</th><th>QUARTER CD</th><th>AMOUNT</th></tr></thead><tbody><tr><td>SALES</td><td>Q1</td><td>100</td></tr><tr><td>SALES</td><td>Q2</td><td>120</td></tr><tr><td>DEV</td><td>Q1</td><td>200</td></tr><tr><td>DEV</td><td>Q2</td><td>180</td></tr><tr><td>HR</td><td>Q1</td><td>90</td></tr><tr><td>HR</td><td>Q2</td><td>110</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -45178,9 +45241,9 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">테이블 그림을 기준으로 SQL문을 해석하면, 다음 PIVOT SQL 결과 행 수는?</div>
       <div class="refs"><div class="ref-text">SELECT dept, Q1, Q2<br>FROM (<br>  SELECT dept, quarter_cd, amount<br>  FROM sales_q<br>)<br>PIVOT (<br>  SUM(amount)<br>  FOR quarter_cd IN (&#39;Q1&#39; AS Q1, &#39;Q2&#39; AS Q2)<br>)<br>ORDER BY dept;</div>
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j1079-1.png" alt="문항 이미지 j1079-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">PIVOT Source Data</div>
+          <table><thead><tr><th>DEPT</th><th>QUARTER CD</th><th>AMOUNT</th></tr></thead><tbody><tr><td>SALES</td><td>Q1</td><td>100</td></tr><tr><td>SALES</td><td>Q2</td><td>120</td></tr><tr><td>DEV</td><td>Q1</td><td>200</td></tr><tr><td>DEV</td><td>Q2</td><td>180</td></tr><tr><td>HR</td><td>Q1</td><td>90</td></tr><tr><td>HR</td><td>Q2</td><td>110</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt correct">
@@ -45416,9 +45479,9 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">그림의 데이터와 조건식을 모두 고려하면, 다음 PIVOT SQL 결과 컬럼 구성으로 옳은 것은?</div>
       <div class="refs"><div class="ref-text">SELECT dept, Q1, Q2<br>FROM (<br>  SELECT dept, quarter_cd, amount<br>  FROM sales_q<br>)<br>PIVOT (<br>  SUM(amount)<br>  FOR quarter_cd IN (&#39;Q1&#39; AS Q1, &#39;Q2&#39; AS Q2)<br>);</div>
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j1087-1.png" alt="문항 이미지 j1087-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">PIVOT Source Data</div>
+          <table><thead><tr><th>DEPT</th><th>QUARTER CD</th><th>AMOUNT</th></tr></thead><tbody><tr><td>SALES</td><td>Q1</td><td>100</td></tr><tr><td>SALES</td><td>Q2</td><td>120</td></tr><tr><td>DEV</td><td>Q1</td><td>200</td></tr><tr><td>DEV</td><td>Q2</td><td>180</td></tr><tr><td>HR</td><td>Q1</td><td>90</td></tr><tr><td>HR</td><td>Q2</td><td>110</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -46122,9 +46185,9 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">다음 그림과 SQL을 함께 보고 판단할 때, 다음 SQL 실행 결과 값으로 옳은 것은?</div>
       <div class="refs"><div class="ref-text">SELECT SUM(NVL(bonus, 0)) + COUNT(salary) AS val<br>FROM emp_null;</div>
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j1111-1.png" alt="문항 이미지 j1111-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">NULL Aggregate Data</div>
+          <table><thead><tr><th>EMP ID</th><th>SALARY</th><th>BONUS</th></tr></thead><tbody><tr><td>1</td><td>1000</td><td>100</td></tr><tr><td>2</td><td></td><td>200</td></tr><tr><td>3</td><td>2000</td><td></td></tr><tr><td>4</td><td></td><td></td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt correct">
@@ -46243,9 +46306,9 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">다음 그림과 SQL을 함께 보고 판단할 때, 다음 SQL 결과에서 rn = 1인 행으로 옳은 것은?</div>
       <div class="refs"><div class="ref-text">SELECT region,<br>       category,<br>       amount,<br>       ROW_NUMBER() OVER (<br>         ORDER BY category ASC, amount DESC, region ASC<br>       ) AS rn<br>FROM sales<br>WHERE amount &gt;= 100;</div>
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j1114-1.png" alt="문항 이미지 j1114-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">SELECT Result Data</div>
+          <table><thead><tr><th>REGION</th><th>AMOUNT</th><th>CATEGORY</th></tr></thead><tbody><tr><td>SEOUL</td><td>150</td><td>A</td></tr><tr><td>BUSAN</td><td>100</td><td>A</td></tr><tr><td>SEOUL</td><td>100</td><td>B</td></tr><tr><td>INCHEON</td><td>80</td><td>B</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -46287,8 +46350,8 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       <div class="title">그림에 제시된 구조와 값을 기준으로 보면, 다음 ERD에 대한 설명으로 옳은 것은?</div>
       <div class="refs">
         <div class="ref-image">
-          
-          <img src="/sqld-images/j1115-1.png" alt="문항 이미지 j1115-1" loading="lazy">
+          <div class="ref-caption">Sales ERD</div>
+          <img src="/sqld-images/j1115-1.png" alt="Sales ERD" loading="lazy">
         </div></div>
       <ol class="opts">
         <li class="opt correct">
@@ -46329,9 +46392,13 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">다음 그림과 SQL을 함께 보고 판단할 때, 다음 SQL 실행 결과로 반환되는 행 수는?</div>
       <div class="refs"><div class="ref-text">SELECT a.id,<br>       COUNT(*) AS cnt<br>FROM A a<br>JOIN B b<br>  ON a.id = b.id<br>GROUP BY a.id<br>HAVING COUNT(*) = 1<br>ORDER BY a.id;</div>
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j1116-1.png" alt="문항 이미지 j1116-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">JOIN Basic Tables — Table A</div>
+          <table><thead><tr><th>ID</th><th>NAME</th></tr></thead><tbody><tr><td>1</td><td>ALPHA</td></tr><tr><td>2</td><td>BETA</td></tr><tr><td>3</td><td>GAMMA</td></tr></tbody></table>
+        </div>
+        <div class="ref-table">
+          <div class="ref-caption">JOIN Basic Tables — Table B</div>
+          <table><thead><tr><th>ID</th><th>VAL</th></tr></thead><tbody><tr><td>2</td><td>X</td></tr><tr><td>3</td><td>Y</td></tr><tr><td>4</td><td>Z</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt correct">
@@ -46372,9 +46439,9 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">테이블 그림을 기준으로 SQL문을 해석하면, 다음 PIVOT SQL 결과에서 SALES 행의 (Q1 + Q2) 합계는?</div>
       <div class="refs"><div class="ref-text">SELECT dept, Q1, Q2<br>FROM (<br>  SELECT dept, quarter_cd, amount<br>  FROM sales_q<br>)<br>PIVOT (<br>  SUM(amount)<br>  FOR quarter_cd IN (&#39;Q1&#39; AS Q1, &#39;Q2&#39; AS Q2)<br>)<br>ORDER BY dept;</div>
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j1117-1.png" alt="문항 이미지 j1117-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">PIVOT Source Data</div>
+          <table><thead><tr><th>DEPT</th><th>QUARTER CD</th><th>AMOUNT</th></tr></thead><tbody><tr><td>SALES</td><td>Q1</td><td>100</td></tr><tr><td>SALES</td><td>Q2</td><td>120</td></tr><tr><td>DEV</td><td>Q1</td><td>200</td></tr><tr><td>DEV</td><td>Q2</td><td>180</td></tr><tr><td>HR</td><td>Q1</td><td>90</td></tr><tr><td>HR</td><td>Q2</td><td>110</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -46454,9 +46521,9 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">다음 그림과 SQL을 함께 보고 판단할 때, 다음 SQL 실행 결과로 반환되는 부서 수는?</div>
       <div class="refs"><div class="ref-text">SELECT dept<br>FROM emp<br>GROUP BY dept<br>HAVING COUNT(*) &gt;= 4<br>   AND AVG(salary) &gt; 3000<br>   AND SUM(CASE WHEN salary &gt;= 4000 THEN 1 ELSE 0 END) &gt;= 2;</div>
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j1120-1.png" alt="문항 이미지 j1120-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">EMP Group Data</div>
+          <table><thead><tr><th>EMP ID</th><th>DEPT</th><th>SALARY</th></tr></thead><tbody><tr><td>1</td><td>SALES</td><td>3000</td></tr><tr><td>2</td><td>SALES</td><td>2500</td></tr><tr><td>3</td><td>SALES</td><td>2000</td></tr><tr><td>4</td><td>SALES</td><td>3500</td></tr><tr><td>5</td><td>DEV</td><td>5000</td></tr><tr><td>6</td><td>DEV</td><td>4200</td></tr><tr><td>7</td><td>DEV</td><td>4100</td></tr><tr><td>8</td><td>DEV</td><td>3900</td></tr><tr><td>9</td><td>DEV</td><td>3700</td></tr><tr><td>10</td><td>HR</td><td>2800</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt correct">
@@ -46731,9 +46798,9 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">그림에 제시된 구조와 값을 기준으로 보면, 다음 주문 테이블에서 기본키가 (주문번호, 상품번호)일 때 가장 적절한 설명은?</div>
       <div class="refs"><div class="ref-text">주문번호+상품번호가 기본키라고 가정한다.</div>
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j1131-1.png" alt="문항 이미지 j1131-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">Normalization Source Table</div>
+          <table><thead><tr><th>ORDER NO</th><th>PRODUCT NO</th><th>PRODUCT NAME</th><th>CUSTOMER NAME</th><th>CUSTOMER GRADE</th></tr></thead><tbody><tr><td>1001</td><td>P01</td><td>SQL BOOK</td><td>KIM</td><td>VIP</td></tr><tr><td>1001</td><td>P02</td><td>DB BOOK</td><td>KIM</td><td>VIP</td></tr><tr><td>1002</td><td>P03</td><td>NOTE</td><td>LEE</td><td>BASIC</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt correct">
@@ -46774,9 +46841,9 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">테이블 그림을 기준으로 SQL문을 해석하면, 다음 SQL 실행 결과 행 수는?</div>
       <div class="refs"><div class="ref-text">SELECT COUNT(*)<br>FROM emp_null<br>WHERE NVL(salary, 0) = 0<br>   OR bonus IS NULL;</div>
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j1132-1.png" alt="문항 이미지 j1132-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">NULL Aggregate Data</div>
+          <table><thead><tr><th>EMP ID</th><th>SALARY</th><th>BONUS</th></tr></thead><tbody><tr><td>1</td><td>1000</td><td>100</td></tr><tr><td>2</td><td></td><td>200</td></tr><tr><td>3</td><td>2000</td><td></td></tr><tr><td>4</td><td></td><td></td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt correct">
@@ -46934,9 +47001,9 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">테이블 그림을 기준으로 SQL문을 해석하면, 다음 SQL 실행 결과 값으로 옳은 것은?</div>
       <div class="refs"><div class="ref-text">SELECT COUNT(*)<br>FROM (<br>  SELECT DISTINCT region, category<br>  FROM sales<br>  WHERE amount &gt;= 100<br>) x;</div>
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j1137-1.png" alt="문항 이미지 j1137-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">SELECT Result Data</div>
+          <table><thead><tr><th>REGION</th><th>AMOUNT</th><th>CATEGORY</th></tr></thead><tbody><tr><td>SEOUL</td><td>150</td><td>A</td></tr><tr><td>BUSAN</td><td>100</td><td>A</td></tr><tr><td>SEOUL</td><td>100</td><td>B</td></tr><tr><td>INCHEON</td><td>80</td><td>B</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -46978,8 +47045,8 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       <div class="title">표와 관계를 함께 읽으면, ORDERS와 ORDER_ITEM의 관계로 옳은 것은?</div>
       <div class="refs">
         <div class="ref-image">
-          
-          <img src="/sqld-images/j1138-1.png" alt="문항 이미지 j1138-1" loading="lazy">
+          <div class="ref-caption">Sales ERD</div>
+          <img src="/sqld-images/j1115-1.png" alt="Sales ERD" loading="lazy">
         </div></div>
       <ol class="opts">
         <li class="opt correct">
@@ -47020,9 +47087,13 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">테이블 그림을 기준으로 SQL문을 해석하면, 다음 SQL 실행 결과로 옳은 것은?</div>
       <div class="refs"><div class="ref-text">SELECT COUNT(*)<br>FROM A a<br>LEFT JOIN B b<br>  ON a.id = b.id<br>WHERE b.id IS NULL<br>   OR a.name LIKE &#39;G%&#39;;</div>
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j1139-1.png" alt="문항 이미지 j1139-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">JOIN Basic Tables — Table A</div>
+          <table><thead><tr><th>ID</th><th>NAME</th></tr></thead><tbody><tr><td>1</td><td>ALPHA</td></tr><tr><td>2</td><td>BETA</td></tr><tr><td>3</td><td>GAMMA</td></tr></tbody></table>
+        </div>
+        <div class="ref-table">
+          <div class="ref-caption">JOIN Basic Tables — Table B</div>
+          <table><thead><tr><th>ID</th><th>VAL</th></tr></thead><tbody><tr><td>2</td><td>X</td></tr><tr><td>3</td><td>Y</td></tr><tr><td>4</td><td>Z</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt correct">
@@ -47102,9 +47173,9 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">그림의 데이터와 조건식을 모두 고려하면, 다음 PIVOT SQL 결과 행 수는?</div>
       <div class="refs"><div class="ref-text">SELECT dept, Q1, Q2<br>FROM (<br>  SELECT dept, quarter_cd, amount<br>  FROM sales_q<br>)<br>PIVOT (<br>  SUM(amount)<br>  FOR quarter_cd IN (&#39;Q1&#39; AS Q1, &#39;Q2&#39; AS Q2)<br>)<br>ORDER BY dept;</div>
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j1141-1.png" alt="문항 이미지 j1141-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">PIVOT Source Data</div>
+          <table><thead><tr><th>DEPT</th><th>QUARTER CD</th><th>AMOUNT</th></tr></thead><tbody><tr><td>SALES</td><td>Q1</td><td>100</td></tr><tr><td>SALES</td><td>Q2</td><td>120</td></tr><tr><td>DEV</td><td>Q1</td><td>200</td></tr><tr><td>DEV</td><td>Q2</td><td>180</td></tr><tr><td>HR</td><td>Q1</td><td>90</td></tr><tr><td>HR</td><td>Q2</td><td>110</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt correct">
@@ -47145,9 +47216,9 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">테이블 그림을 기준으로 SQL문을 해석하면, 다음 계층형 질의 결과에서 LEVEL = 2인 행 수는?</div>
       <div class="refs"><div class="ref-text">SELECT emp_id,<br>       emp_name,<br>       mgr_id,<br>       LEVEL AS lv<br>FROM emp_tree<br>START WITH mgr_id IS NULL<br>CONNECT BY PRIOR emp_id = mgr_id<br>ORDER SIBLINGS BY emp_name;</div>
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j1143-1.png" alt="문항 이미지 j1143-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">Hierarchy EMP Data</div>
+          <table><thead><tr><th>EMP ID</th><th>EMP NAME</th><th>MGR ID</th></tr></thead><tbody><tr><td>1</td><td>CEO</td><td></td></tr><tr><td>2</td><td>SALES_MGR</td><td>1</td></tr><tr><td>3</td><td>DEV_MGR</td><td>1</td></tr><tr><td>4</td><td>SALES_A</td><td>2</td></tr><tr><td>5</td><td>SALES_B</td><td>2</td></tr><tr><td>6</td><td>DEV_A</td><td>3</td></tr><tr><td>7</td><td>DEV_B</td><td>3</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt correct">
@@ -47188,9 +47259,9 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">테이블 그림을 기준으로 SQL문을 해석하면, 다음 SQL 결과로 조회되는 부서명으로 옳은 것은?</div>
       <div class="refs"><div class="ref-text">SELECT dept<br>FROM emp<br>GROUP BY dept<br>HAVING MAX(salary) - MIN(salary) &gt;= 1000<br>   AND COUNT(*) &gt;= 4<br>ORDER BY dept;</div>
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j1144-1.png" alt="문항 이미지 j1144-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">EMP Group Data</div>
+          <table><thead><tr><th>EMP ID</th><th>DEPT</th><th>SALARY</th></tr></thead><tbody><tr><td>1</td><td>SALES</td><td>3000</td></tr><tr><td>2</td><td>SALES</td><td>2500</td></tr><tr><td>3</td><td>SALES</td><td>2000</td></tr><tr><td>4</td><td>SALES</td><td>3500</td></tr><tr><td>5</td><td>DEV</td><td>5000</td></tr><tr><td>6</td><td>DEV</td><td>4200</td></tr><tr><td>7</td><td>DEV</td><td>4100</td></tr><tr><td>8</td><td>DEV</td><td>3900</td></tr><tr><td>9</td><td>DEV</td><td>3700</td></tr><tr><td>10</td><td>HR</td><td>2800</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt correct">
@@ -47310,8 +47381,8 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       <div class="title">표와 관계를 함께 읽으면, FK 컬럼의 NULL 허용 여부로 옳은 것은?</div>
       <div class="refs">
         <div class="ref-image">
-          
-          <img src="/sqld-images/j1147-1.png" alt="문항 이미지 j1147-1" loading="lazy">
+          <div class="ref-caption">Parent / Child ERD</div>
+          <img src="/sqld-images/j1147-1.png" alt="Parent / Child ERD" loading="lazy">
         </div></div>
       <ol class="opts">
         <li class="opt correct">
@@ -47469,9 +47540,9 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">표와 관계를 함께 읽으면, BUSAN 지역 데이터에서 RANK() OVER(PARTITION BY region ORDER BY amount DESC) 결과로 옳은 것은?</div>
       <div class="refs">
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j1152-1.png" alt="문항 이미지 j1152-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">Window Function Data</div>
+          <table><thead><tr><th>REGION</th><th>SELLER</th><th>AMOUNT</th></tr></thead><tbody><tr><td>SEOUL</td><td>KIM</td><td>500</td></tr><tr><td>SEOUL</td><td>LEE</td><td>300</td></tr><tr><td>BUSAN</td><td>PARK</td><td>450</td></tr><tr><td>BUSAN</td><td>CHOI</td><td>200</td></tr><tr><td>BUSAN</td><td>JUNG</td><td>200</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -47590,9 +47661,9 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">표와 관계를 함께 읽으면, 2NF에 대한 설명으로 옳은 것은?</div>
       <div class="refs">
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j1155-1.png" alt="문항 이미지 j1155-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">Normalization Source Table</div>
+          <table><thead><tr><th>ORDER NO</th><th>PRODUCT NO</th><th>PRODUCT NAME</th><th>CUSTOMER NAME</th><th>CUSTOMER GRADE</th></tr></thead><tbody><tr><td>1001</td><td>P01</td><td>SQL BOOK</td><td>KIM</td><td>VIP</td></tr><tr><td>1001</td><td>P02</td><td>DB BOOK</td><td>KIM</td><td>VIP</td></tr><tr><td>1002</td><td>P03</td><td>NOTE</td><td>LEE</td><td>BASIC</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt correct">
@@ -47633,9 +47704,9 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">제시된 그림만 근거로 판단하면, 다음 SALARY 데이터에서 AVG(salary) 값은?</div>
       <div class="refs">
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j1156-1.png" alt="문항 이미지 j1156-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">NULL Aggregate Data</div>
+          <table><thead><tr><th>EMP ID</th><th>SALARY</th><th>BONUS</th></tr></thead><tbody><tr><td>1</td><td>1000</td><td>100</td></tr><tr><td>2</td><td></td><td>200</td></tr><tr><td>3</td><td>2000</td><td></td></tr><tr><td>4</td><td></td><td></td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -47793,9 +47864,9 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">그림의 데이터와 조건식을 모두 고려하면, 다음 SQL 결과의 마지막 행으로 옳은 것은?</div>
       <div class="refs"><div class="ref-text">SELECT region,<br>       category,<br>       amount<br>FROM sales<br>ORDER BY CASE WHEN amount &gt;= 100 THEN 1 ELSE 2 END,<br>         category DESC,<br>         amount ASC,<br>         region ASC;</div>
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j1161-1.png" alt="문항 이미지 j1161-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">SELECT Result Data</div>
+          <table><thead><tr><th>REGION</th><th>AMOUNT</th><th>CATEGORY</th></tr></thead><tbody><tr><td>SEOUL</td><td>150</td><td>A</td></tr><tr><td>BUSAN</td><td>100</td><td>A</td></tr><tr><td>SEOUL</td><td>100</td><td>B</td></tr><tr><td>INCHEON</td><td>80</td><td>B</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -47837,8 +47908,8 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       <div class="title">제시된 그림만 근거로 판단하면, 주문상품 엔터티의 기본키로 가장 적절한 것은?</div>
       <div class="refs">
         <div class="ref-image">
-          
-          <img src="/sqld-images/j1162-1.png" alt="문항 이미지 j1162-1" loading="lazy">
+          <div class="ref-caption">Sales ERD</div>
+          <img src="/sqld-images/j1115-1.png" alt="Sales ERD" loading="lazy">
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -47879,9 +47950,13 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">제시된 그림만 근거로 판단하면, A.ID에 중복값 2가 한 건 더 추가되고 B.ID=2가 1건 존재할 때 INNER JOIN 결과에 추가되는 행 수는?</div>
       <div class="refs"><div class="ref-text">기존 그림 기준으로 A에 (2, DELTA)가 추가된다.</div>
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j1163-1.png" alt="문항 이미지 j1163-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">JOIN Basic Tables — Table A</div>
+          <table><thead><tr><th>ID</th><th>NAME</th></tr></thead><tbody><tr><td>1</td><td>ALPHA</td></tr><tr><td>2</td><td>BETA</td></tr><tr><td>3</td><td>GAMMA</td></tr></tbody></table>
+        </div>
+        <div class="ref-table">
+          <div class="ref-caption">JOIN Basic Tables — Table B</div>
+          <table><thead><tr><th>ID</th><th>VAL</th></tr></thead><tbody><tr><td>2</td><td>X</td></tr><tr><td>3</td><td>Y</td></tr><tr><td>4</td><td>Z</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -47961,9 +48036,9 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">제시된 표를 바탕으로 SQL문을 그대로 평가하면, 다음 PIVOT SQL 결과 컬럼 구성으로 옳은 것은?</div>
       <div class="refs"><div class="ref-text">SELECT dept, Q1, Q2<br>FROM (<br>  SELECT dept, quarter_cd, amount<br>  FROM sales_q<br>)<br>PIVOT (<br>  SUM(amount)<br>  FOR quarter_cd IN (&#39;Q1&#39; AS Q1, &#39;Q2&#39; AS Q2)<br>);</div>
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j1165-1.png" alt="문항 이미지 j1165-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">PIVOT Source Data</div>
+          <table><thead><tr><th>DEPT</th><th>QUARTER CD</th><th>AMOUNT</th></tr></thead><tbody><tr><td>SALES</td><td>Q1</td><td>100</td></tr><tr><td>SALES</td><td>Q2</td><td>120</td></tr><tr><td>DEV</td><td>Q1</td><td>200</td></tr><tr><td>DEV</td><td>Q2</td><td>180</td></tr><tr><td>HR</td><td>Q1</td><td>90</td></tr><tr><td>HR</td><td>Q2</td><td>110</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt correct">
@@ -48004,9 +48079,9 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">그림의 데이터와 조건식을 모두 고려하면, 다음 계층형 질의 결과에서 DEV_B의 PATH 값으로 옳은 것은?</div>
       <div class="refs"><div class="ref-text">SELECT emp_name,<br>       LEVEL AS lv,<br>       SYS_CONNECT_BY_PATH(emp_name, &#39; &gt; &#39;) AS path<br>FROM emp_tree<br>START WITH mgr_id IS NULL<br>CONNECT BY PRIOR emp_id = mgr_id<br>ORDER SIBLINGS BY emp_name;</div>
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j1167-1.png" alt="문항 이미지 j1167-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">Hierarchy EMP Data</div>
+          <table><thead><tr><th>EMP ID</th><th>EMP NAME</th><th>MGR ID</th></tr></thead><tbody><tr><td>1</td><td>CEO</td><td></td></tr><tr><td>2</td><td>SALES_MGR</td><td>1</td></tr><tr><td>3</td><td>DEV_MGR</td><td>1</td></tr><tr><td>4</td><td>SALES_A</td><td>2</td></tr><tr><td>5</td><td>SALES_B</td><td>2</td></tr><tr><td>6</td><td>DEV_A</td><td>3</td></tr><tr><td>7</td><td>DEV_B</td><td>3</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -48047,9 +48122,9 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">그림의 데이터와 조건식을 모두 고려하면, 다음 SQL 실행 결과 행 수는?</div>
       <div class="refs"><div class="ref-text">SELECT dept, COUNT(*) FROM emp GROUP BY dept HAVING MIN(salary) &gt;= 2500;</div>
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j1168-1.png" alt="문항 이미지 j1168-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">EMP Group Data</div>
+          <table><thead><tr><th>EMP ID</th><th>DEPT</th><th>SALARY</th></tr></thead><tbody><tr><td>1</td><td>SALES</td><td>3000</td></tr><tr><td>2</td><td>SALES</td><td>2500</td></tr><tr><td>3</td><td>SALES</td><td>2000</td></tr><tr><td>4</td><td>SALES</td><td>3500</td></tr><tr><td>5</td><td>DEV</td><td>5000</td></tr><tr><td>6</td><td>DEV</td><td>4200</td></tr><tr><td>7</td><td>DEV</td><td>4100</td></tr><tr><td>8</td><td>DEV</td><td>3900</td></tr><tr><td>9</td><td>DEV</td><td>3700</td></tr><tr><td>10</td><td>HR</td><td>2800</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -48169,8 +48244,8 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       <div class="title">제시된 그림만 근거로 판단하면, 부모 ORDERS 행을 삭제하려 할 때 자식 ORDER_DETAIL이 존재하면 기본 동작은?</div>
       <div class="refs"><div class="ref-text">별도 ON DELETE CASCADE 옵션이 없다고 가정한다.</div>
         <div class="ref-image">
-          
-          <img src="/sqld-images/j1171-1.png" alt="문항 이미지 j1171-1" loading="lazy">
+          <div class="ref-caption">Parent / Child ERD</div>
+          <img src="/sqld-images/j1147-1.png" alt="Parent / Child ERD" loading="lazy">
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -48289,9 +48364,13 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">제시된 그림만 근거로 판단하면, 다음 데이터에서 주문이 없는 고객 ID는?</div>
       <div class="refs">
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j1174-1.png" alt="문항 이미지 j1174-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">CUSTOMER</div>
+          <table><thead><tr><th>CUSTOMER ID</th><th>NAME</th></tr></thead><tbody><tr><td>101</td><td>KIM</td></tr><tr><td>102</td><td>LEE</td></tr><tr><td>103</td><td>PARK</td></tr><tr><td>104</td><td>CHOI</td></tr></tbody></table>
+        </div>
+        <div class="ref-table">
+          <div class="ref-caption">ORDERS</div>
+          <table><thead><tr><th>ORDER ID</th><th>CUSTOMER ID</th></tr></thead><tbody><tr><td>9001</td><td>101</td></tr><tr><td>9002</td><td>101</td></tr><tr><td>9003</td><td>103</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt correct">
@@ -48371,9 +48450,9 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">제시된 그림만 근거로 판단하면, BUSAN 지역 데이터에 DENSE_RANK()를 적용한 결과로 옳은 것은?</div>
       <div class="refs">
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j1176-1.png" alt="문항 이미지 j1176-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">Window Function Data</div>
+          <table><thead><tr><th>REGION</th><th>SELLER</th><th>AMOUNT</th></tr></thead><tbody><tr><td>SEOUL</td><td>KIM</td><td>500</td></tr><tr><td>SEOUL</td><td>LEE</td><td>300</td></tr><tr><td>BUSAN</td><td>PARK</td><td>450</td></tr><tr><td>BUSAN</td><td>CHOI</td><td>200</td></tr><tr><td>BUSAN</td><td>JUNG</td><td>200</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -48492,9 +48571,9 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">제시된 그림만 근거로 판단하면, 3NF에 대한 설명으로 옳은 것은?</div>
       <div class="refs">
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j1179-1.png" alt="문항 이미지 j1179-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">Normalization Source Table</div>
+          <table><thead><tr><th>ORDER NO</th><th>PRODUCT NO</th><th>PRODUCT NAME</th><th>CUSTOMER NAME</th><th>CUSTOMER GRADE</th></tr></thead><tbody><tr><td>1001</td><td>P01</td><td>SQL BOOK</td><td>KIM</td><td>VIP</td></tr><tr><td>1001</td><td>P02</td><td>DB BOOK</td><td>KIM</td><td>VIP</td></tr><tr><td>1002</td><td>P03</td><td>NOTE</td><td>LEE</td><td>BASIC</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -48535,9 +48614,9 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">엔터티와 데이터 분포를 함께 보면, bonus 값이 100, 200, NULL, NULL일 때 SUM(bonus) 결과는?</div>
       <div class="refs">
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j1180-1.png" alt="문항 이미지 j1180-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">NULL Aggregate Data</div>
+          <table><thead><tr><th>EMP ID</th><th>SALARY</th><th>BONUS</th></tr></thead><tbody><tr><td>1</td><td>1000</td><td>100</td></tr><tr><td>2</td><td></td><td>200</td></tr><tr><td>3</td><td>2000</td><td></td></tr><tr><td>4</td><td></td><td></td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -48774,8 +48853,8 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       <div class="title">엔터티와 데이터 분포를 함께 보면, 식별 관계에 대한 설명으로 옳은 것은?</div>
       <div class="refs">
         <div class="ref-image">
-          
-          <img src="/sqld-images/j1186-1.png" alt="문항 이미지 j1186-1" loading="lazy">
+          <div class="ref-caption">Sales ERD</div>
+          <img src="/sqld-images/j1115-1.png" alt="Sales ERD" loading="lazy">
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -48855,9 +48934,9 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">제시된 표를 바탕으로 SQL문을 그대로 평가하면, 다음 계층형 질의에서 DEV_A 행의 ROOT_NAME 값으로 옳은 것은?</div>
       <div class="refs"><div class="ref-text">SELECT CONNECT_BY_ROOT emp_name AS root_name,<br>       emp_name,<br>       LEVEL AS lv<br>FROM emp_tree<br>START WITH mgr_id IS NULL<br>CONNECT BY PRIOR emp_id = mgr_id;</div>
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j1191-1.png" alt="문항 이미지 j1191-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">Hierarchy EMP Data</div>
+          <table><thead><tr><th>EMP ID</th><th>EMP NAME</th><th>MGR ID</th></tr></thead><tbody><tr><td>1</td><td>CEO</td><td></td></tr><tr><td>2</td><td>SALES_MGR</td><td>1</td></tr><tr><td>3</td><td>DEV_MGR</td><td>1</td></tr><tr><td>4</td><td>SALES_A</td><td>2</td></tr><tr><td>5</td><td>SALES_B</td><td>2</td></tr><tr><td>6</td><td>DEV_A</td><td>3</td></tr><tr><td>7</td><td>DEV_B</td><td>3</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -48898,9 +48977,9 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">엔터티와 데이터 분포를 함께 보면, GROUP BY dept 수행 시 생성되는 그룹 수는?</div>
       <div class="refs">
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j1192-1.png" alt="문항 이미지 j1192-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">EMP Group Data</div>
+          <table><thead><tr><th>EMP ID</th><th>DEPT</th><th>SALARY</th></tr></thead><tbody><tr><td>1</td><td>SALES</td><td>3000</td></tr><tr><td>2</td><td>SALES</td><td>2500</td></tr><tr><td>3</td><td>SALES</td><td>2000</td></tr><tr><td>4</td><td>SALES</td><td>3500</td></tr><tr><td>5</td><td>DEV</td><td>5000</td></tr><tr><td>6</td><td>DEV</td><td>4200</td></tr><tr><td>7</td><td>DEV</td><td>4100</td></tr><tr><td>8</td><td>DEV</td><td>3900</td></tr><tr><td>9</td><td>DEV</td><td>3700</td></tr><tr><td>10</td><td>HR</td><td>2800</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt correct">
@@ -49020,8 +49099,8 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       <div class="title">엔터티와 데이터 분포를 함께 보면, 참조 무결성의 의미로 옳은 것은?</div>
       <div class="refs">
         <div class="ref-image">
-          
-          <img src="/sqld-images/j1195-1.png" alt="문항 이미지 j1195-1" loading="lazy">
+          <div class="ref-caption">Parent / Child ERD</div>
+          <img src="/sqld-images/j1147-1.png" alt="Parent / Child ERD" loading="lazy">
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -49140,9 +49219,13 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">엔터티와 데이터 분포를 참고할 때, 다음 SQL 조건의 의미로 가장 적절한 것은?</div>
       <div class="refs"><div class="ref-text">C.CUSTOMER_ID &gt; ALL (<br>    SELECT CUSTOMER_ID <br>    FROM ORDERS<br>)</div>
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j1198-1.png" alt="문항 이미지 j1198-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">CUSTOMER</div>
+          <table><thead><tr><th>CUSTOMER ID</th><th>NAME</th></tr></thead><tbody><tr><td>101</td><td>KIM</td></tr><tr><td>102</td><td>LEE</td></tr><tr><td>103</td><td>PARK</td></tr><tr><td>104</td><td>CHOI</td></tr></tbody></table>
+        </div>
+        <div class="ref-table">
+          <div class="ref-caption">ORDERS</div>
+          <table><thead><tr><th>ORDER ID</th><th>CUSTOMER ID</th></tr></thead><tbody><tr><td>9001</td><td>101</td></tr><tr><td>9002</td><td>101</td></tr><tr><td>9003</td><td>103</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -49183,9 +49266,9 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">엔터티와 데이터 분포를 함께 보면, ROW_NUMBER()와 RANK()의 차이로 옳은 것은?</div>
       <div class="refs">
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j1200-1.png" alt="문항 이미지 j1200-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">Window Function Data</div>
+          <table><thead><tr><th>REGION</th><th>SELLER</th><th>AMOUNT</th></tr></thead><tbody><tr><td>SEOUL</td><td>KIM</td><td>500</td></tr><tr><td>SEOUL</td><td>LEE</td><td>300</td></tr><tr><td>BUSAN</td><td>PARK</td><td>450</td></tr><tr><td>BUSAN</td><td>CHOI</td><td>200</td></tr><tr><td>BUSAN</td><td>JUNG</td><td>200</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt correct">
@@ -49304,9 +49387,9 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">그림의 각 행과 관계선을 기준으로 해석하면, 다음 BONUS 데이터에서 COUNT(bonus) 값은?</div>
       <div class="refs">
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j1204-1.png" alt="문항 이미지 j1204-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">NULL Aggregate Data</div>
+          <table><thead><tr><th>EMP ID</th><th>SALARY</th><th>BONUS</th></tr></thead><tbody><tr><td>1</td><td>1000</td><td>100</td></tr><tr><td>2</td><td></td><td>200</td></tr><tr><td>3</td><td>2000</td><td></td></tr><tr><td>4</td><td></td><td></td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt correct">
@@ -49504,8 +49587,8 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       <div class="title">그림의 각 행과 관계선을 기준으로 해석하면, ERD 설계 관점에서 주문일(order_date)이 속해야 할 엔터티는?</div>
       <div class="refs">
         <div class="ref-image">
-          
-          <img src="/sqld-images/j1210-1.png" alt="문항 이미지 j1210-1" loading="lazy">
+          <div class="ref-caption">Sales ERD</div>
+          <img src="/sqld-images/j1115-1.png" alt="Sales ERD" loading="lazy">
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -49546,9 +49629,9 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">다음 그림과 SQL을 함께 보고 판단할 때, 다음 PIVOT SQL에 대한 설명으로 옳은 것은?</div>
       <div class="refs"><div class="ref-text">SELECT dept, Q1, Q2<br>FROM (<br>  SELECT dept, quarter_cd, amount<br>  FROM sales_q<br>)<br>PIVOT (<br>  SUM(amount)<br>  FOR quarter_cd IN (&#39;Q1&#39; AS Q1, &#39;Q2&#39; AS Q2)<br>);</div>
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j1213-1.png" alt="문항 이미지 j1213-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">PIVOT Source Data</div>
+          <table><thead><tr><th>DEPT</th><th>QUARTER CD</th><th>AMOUNT</th></tr></thead><tbody><tr><td>SALES</td><td>Q1</td><td>100</td></tr><tr><td>SALES</td><td>Q2</td><td>120</td></tr><tr><td>DEV</td><td>Q1</td><td>200</td></tr><tr><td>DEV</td><td>Q2</td><td>180</td></tr><tr><td>HR</td><td>Q1</td><td>90</td></tr><tr><td>HR</td><td>Q2</td><td>110</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -49628,9 +49711,9 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">그림과 SQL 조건을 동시에 읽으면, 다음 계층형 질의에서 START WITH mgr_id IS NULL 의미로 옳은 것은?</div>
       <div class="refs"><div class="ref-text">SELECT emp_id,<br>       emp_name,<br>       LEVEL AS lv<br>FROM emp_tree<br>START WITH mgr_id IS NULL<br>CONNECT BY PRIOR emp_id = mgr_id;</div>
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j1215-1.png" alt="문항 이미지 j1215-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">Hierarchy EMP Data</div>
+          <table><thead><tr><th>EMP ID</th><th>EMP NAME</th><th>MGR ID</th></tr></thead><tbody><tr><td>1</td><td>CEO</td><td></td></tr><tr><td>2</td><td>SALES_MGR</td><td>1</td></tr><tr><td>3</td><td>DEV_MGR</td><td>1</td></tr><tr><td>4</td><td>SALES_A</td><td>2</td></tr><tr><td>5</td><td>SALES_B</td><td>2</td></tr><tr><td>6</td><td>DEV_A</td><td>3</td></tr><tr><td>7</td><td>DEV_B</td><td>3</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt correct">
@@ -49671,9 +49754,9 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">그림의 각 행과 관계선을 기준으로 해석하면, 다음 중 HAVING 절에 대한 설명으로 옳은 것은?</div>
       <div class="refs">
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j1216-1.png" alt="문항 이미지 j1216-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">EMP Group Data</div>
+          <table><thead><tr><th>EMP ID</th><th>DEPT</th><th>SALARY</th></tr></thead><tbody><tr><td>1</td><td>SALES</td><td>3000</td></tr><tr><td>2</td><td>SALES</td><td>2500</td></tr><tr><td>3</td><td>SALES</td><td>2000</td></tr><tr><td>4</td><td>SALES</td><td>3500</td></tr><tr><td>5</td><td>DEV</td><td>5000</td></tr><tr><td>6</td><td>DEV</td><td>4200</td></tr><tr><td>7</td><td>DEV</td><td>4100</td></tr><tr><td>8</td><td>DEV</td><td>3900</td></tr><tr><td>9</td><td>DEV</td><td>3700</td></tr><tr><td>10</td><td>HR</td><td>2800</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt correct">
@@ -49793,8 +49876,8 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       <div class="title">그림의 각 행과 관계선을 기준으로 해석하면, 고유성, 엔터티 무결성, 참조 무결성 중 FK와 직접 연결되는 것은?</div>
       <div class="refs">
         <div class="ref-image">
-          
-          <img src="/sqld-images/j1219-1.png" alt="문항 이미지 j1219-1" loading="lazy">
+          <div class="ref-caption">Parent / Child ERD</div>
+          <img src="/sqld-images/j1147-1.png" alt="Parent / Child ERD" loading="lazy">
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -49913,9 +49996,13 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">그림의 각 행과 관계선을 기준으로 해석하면, ANY 비교에 대한 설명으로 옳은 것은?</div>
       <div class="refs"><div class="ref-text">salary &gt; ANY (10, 20, 30)을 해석한다.</div>
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j1222-1.png" alt="문항 이미지 j1222-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">CUSTOMER</div>
+          <table><thead><tr><th>CUSTOMER ID</th><th>NAME</th></tr></thead><tbody><tr><td>101</td><td>KIM</td></tr><tr><td>102</td><td>LEE</td></tr><tr><td>103</td><td>PARK</td></tr><tr><td>104</td><td>CHOI</td></tr></tbody></table>
+        </div>
+        <div class="ref-table">
+          <div class="ref-caption">ORDERS</div>
+          <table><thead><tr><th>ORDER ID</th><th>CUSTOMER ID</th></tr></thead><tbody><tr><td>9001</td><td>101</td></tr><tr><td>9002</td><td>101</td></tr><tr><td>9003</td><td>103</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -49995,9 +50082,9 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">그림의 각 행과 관계선을 기준으로 해석하면, OVER(PARTITION BY region)의 의미로 옳은 것은?</div>
       <div class="refs">
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j1224-1.png" alt="문항 이미지 j1224-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">Window Function Data</div>
+          <table><thead><tr><th>REGION</th><th>SELLER</th><th>AMOUNT</th></tr></thead><tbody><tr><td>SEOUL</td><td>KIM</td><td>500</td></tr><tr><td>SEOUL</td><td>LEE</td><td>300</td></tr><tr><td>BUSAN</td><td>PARK</td><td>450</td></tr><tr><td>BUSAN</td><td>CHOI</td><td>200</td></tr><tr><td>BUSAN</td><td>JUNG</td><td>200</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt correct">
@@ -50116,9 +50203,9 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">다음 그림과 SQL을 함께 보고 판단할 때, 다음 BONUS 데이터에서 SUM(NVL(bonus, 0)) 값은?</div>
       <div class="refs"><div class="ref-text">SELECT SUM(NVL(bonus, 0)) FROM t;</div>
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j1228-1.png" alt="문항 이미지 j1228-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">NULL Aggregate Data</div>
+          <table><thead><tr><th>EMP ID</th><th>SALARY</th><th>BONUS</th></tr></thead><tbody><tr><td>1</td><td>1000</td><td>100</td></tr><tr><td>2</td><td></td><td>200</td></tr><tr><td>3</td><td>2000</td><td></td></tr><tr><td>4</td><td></td><td></td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -50237,9 +50324,10 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">그림에 제시된 구조와 값을 기준으로 보면, 다음 이미지 기준으로 user1에게 처음 부여되는 권한으로 옳은 것은?</div>
       <div class="refs">
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j1231-1.png" alt="문항 이미지 j1231-1" loading="lazy">
+        <div class="ref-sql">
+          <div class="ref-caption">DCL Statements</div>
+          <pre><code>GRANT SELECT, INSERT ON emp TO user1;
+REVOKE INSERT ON emp FROM user1;</code></pre>
         </div></div>
       <ol class="opts">
         <li class="opt correct">
@@ -50280,9 +50368,14 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">그림에 제시된 구조와 값을 기준으로 보면, 다음 이미지의 명령 중 테이블 구조를 변경하는 문장으로 옳은 것은?</div>
       <div class="refs">
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j1232-1.png" alt="문항 이미지 j1232-1" loading="lazy">
+        <div class="ref-sql">
+          <div class="ref-caption">DDL Statements</div>
+          <pre><code>CREATE TABLE emp (
+  emp_id NUMBER PRIMARY KEY,
+  emp_name VARCHAR2(30)
+);
+ALTER TABLE emp ADD hire_date DATE;
+DROP TABLE temp_emp;</code></pre>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -50363,8 +50456,8 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       <div class="title">그림에 제시된 구조와 값을 기준으로 보면, 다음 ERD 기준 CUSTOMER와 ORDERS의 관계로 옳은 것은?</div>
       <div class="refs">
         <div class="ref-image">
-          
-          <img src="/sqld-images/j1234-1.png" alt="문항 이미지 j1234-1" loading="lazy">
+          <div class="ref-caption">Sales ERD</div>
+          <img src="/sqld-images/j1115-1.png" alt="Sales ERD" loading="lazy">
         </div></div>
       <ol class="opts">
         <li class="opt correct">
@@ -50405,9 +50498,13 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">다음 그림과 SQL을 함께 보고 판단할 때, 다음 그림을 기준으로 LEFT OUTER JOIN을 수행할 때 반환 행 수는?</div>
       <div class="refs"><div class="ref-text">SELECT A.ID, B.GRADE FROM A LEFT JOIN B ON A.ID = B.ID;</div>
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j1235-1.png" alt="문항 이미지 j1235-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">LEFT OUTER JOIN — Table A</div>
+          <table><thead><tr><th>ID</th><th>NAME</th></tr></thead><tbody><tr><td>1</td><td>SEOUL</td></tr><tr><td>2</td><td>BUSAN</td></tr><tr><td>3</td><td>DAEGU</td></tr></tbody></table>
+        </div>
+        <div class="ref-table">
+          <div class="ref-caption">LEFT OUTER JOIN — Table B</div>
+          <table><thead><tr><th>ID</th><th>GRADE</th></tr></thead><tbody><tr><td>2</td><td>SILVER</td></tr><tr><td>4</td><td>GOLD</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt correct">
@@ -50526,9 +50623,9 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">다음 그림과 SQL을 함께 보고 판단할 때, 다음 SQL 결과에서 CEO의 LEVEL 값으로 옳은 것은?</div>
       <div class="refs"><div class="ref-text">SELECT emp_name, LEVEL<br>FROM emp_tree<br>START WITH mgr_id IS NULL<br>CONNECT BY PRIOR emp_id = mgr_id;</div>
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j1239-1.png" alt="문항 이미지 j1239-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">Hierarchy EMP Data</div>
+          <table><thead><tr><th>EMP ID</th><th>EMP NAME</th><th>MGR ID</th></tr></thead><tbody><tr><td>1</td><td>CEO</td><td></td></tr><tr><td>2</td><td>SALES_MGR</td><td>1</td></tr><tr><td>3</td><td>DEV_MGR</td><td>1</td></tr><tr><td>4</td><td>SALES_A</td><td>2</td></tr><tr><td>5</td><td>SALES_B</td><td>2</td></tr><tr><td>6</td><td>DEV_A</td><td>3</td></tr><tr><td>7</td><td>DEV_B</td><td>3</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt correct">
@@ -50569,9 +50666,9 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">다음 그림과 SQL을 함께 보고 판단할 때, 다음 SQL 결과에서 gr = 1 이고 gp = 1 인 행 수는?</div>
       <div class="refs"><div class="ref-text">SELECT region,<br>       product,<br>       SUM(amount) AS amt,<br>       GROUPING(region) AS gr,<br>       GROUPING(product) AS gp<br>FROM order_amt<br>GROUP BY ROLLUP(region, product);</div>
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j1240-1.png" alt="문항 이미지 j1240-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">ROLLUP Data</div>
+          <table><thead><tr><th>REGION</th><th>PRODUCT</th><th>AMOUNT</th></tr></thead><tbody><tr><td>SEOUL</td><td>A</td><td>100</td></tr><tr><td>SEOUL</td><td>B</td><td>200</td></tr><tr><td>BUSAN</td><td>A</td><td>150</td></tr><tr><td>BUSAN</td><td>B</td><td>50</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -50807,9 +50904,9 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">다음 그림과 SQL을 함께 보고 판단할 때, 다음 SQL 결과로 조회되는 사원 수는?</div>
       <div class="refs"><div class="ref-text">SELECT COUNT(*)<br>FROM emp e<br>WHERE e.salary &gt; (<br>        SELECT AVG(s.salary)<br>        FROM emp s<br>        WHERE s.dept = e.dept<br>      )<br>  AND e.salary &gt;= (<br>        SELECT MAX(s2.salary) - 500<br>        FROM emp s2<br>        WHERE s2.dept = e.dept<br>      );</div>
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j1246-1.png" alt="문항 이미지 j1246-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">Correlated Subquery Data</div>
+          <table><thead><tr><th>EMP NAME</th><th>DEPT</th><th>SALARY</th></tr></thead><tbody><tr><td>A</td><td>SALES</td><td>3000</td></tr><tr><td>B</td><td>SALES</td><td>2000</td></tr><tr><td>C</td><td>DEV</td><td>5000</td></tr><tr><td>D</td><td>DEV</td><td>3500</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt correct">
@@ -50889,9 +50986,9 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">다음 그림과 SQL을 함께 보고 판단할 때, 다음 SQL 결과에서 SEOUL 지역의 rn = 1 인 판매자로 옳은 것은?</div>
       <div class="refs"><div class="ref-text">SELECT region,<br>       seller,<br>       amount,<br>       ROW_NUMBER() OVER (<br>         PARTITION BY region<br>         ORDER BY amount DESC, seller ASC<br>       ) AS rn<br>FROM sales_rank;</div>
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j1248-1.png" alt="문항 이미지 j1248-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">Window Function Data</div>
+          <table><thead><tr><th>REGION</th><th>SELLER</th><th>AMOUNT</th></tr></thead><tbody><tr><td>SEOUL</td><td>KIM</td><td>500</td></tr><tr><td>SEOUL</td><td>LEE</td><td>300</td></tr><tr><td>BUSAN</td><td>PARK</td><td>450</td></tr><tr><td>BUSAN</td><td>CHOI</td><td>200</td></tr><tr><td>BUSAN</td><td>JUNG</td><td>200</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -51010,9 +51107,9 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">그림에 제시된 구조와 값을 기준으로 보면, 다음 테이블과 가정 기준으로 2NF 위반 원인으로 옳은 것은?</div>
       <div class="refs"><div class="ref-text">주문번호는 고객명과 고객등급을 결정하고, 상품번호는 상품명을 결정한다고 가정한다.</div>
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j1251-1.png" alt="문항 이미지 j1251-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">Normalization Source Table</div>
+          <table><thead><tr><th>ORDER NO</th><th>PRODUCT NO</th><th>PRODUCT NAME</th><th>CUSTOMER NAME</th><th>CUSTOMER GRADE</th></tr></thead><tbody><tr><td>1001</td><td>P01</td><td>SQL BOOK</td><td>KIM</td><td>VIP</td></tr><tr><td>1001</td><td>P02</td><td>DB BOOK</td><td>KIM</td><td>VIP</td></tr><tr><td>1002</td><td>P03</td><td>NOTE</td><td>LEE</td><td>BASIC</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt correct">
@@ -51053,9 +51150,9 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">표와 관계를 함께 읽으면, 다음 BONUS 데이터에서 MAX(bonus) 값은?</div>
       <div class="refs">
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j1252-1.png" alt="문항 이미지 j1252-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">NULL Aggregate Data</div>
+          <table><thead><tr><th>EMP ID</th><th>SALARY</th><th>BONUS</th></tr></thead><tbody><tr><td>1</td><td>1000</td><td>100</td></tr><tr><td>2</td><td></td><td>200</td></tr><tr><td>3</td><td>2000</td><td></td></tr><tr><td>4</td><td></td><td></td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -51174,9 +51271,10 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">표와 관계를 함께 읽으면, 다음 이미지 기준으로 회수되는 권한으로 옳은 것은?</div>
       <div class="refs">
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j1255-1.png" alt="문항 이미지 j1255-1" loading="lazy">
+        <div class="ref-sql">
+          <div class="ref-caption">DCL Statements</div>
+          <pre><code>GRANT SELECT, INSERT ON emp TO user1;
+REVOKE INSERT ON emp FROM user1;</code></pre>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -51217,9 +51315,14 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">표와 관계를 함께 읽으면, 다음 중 객체 자체를 제거하는 DDL 명령으로 옳은 것은?</div>
       <div class="refs">
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j1256-1.png" alt="문항 이미지 j1256-1" loading="lazy">
+        <div class="ref-sql">
+          <div class="ref-caption">DDL Statements</div>
+          <pre><code>CREATE TABLE emp (
+  emp_id NUMBER PRIMARY KEY,
+  emp_name VARCHAR2(30)
+);
+ALTER TABLE emp ADD hire_date DATE;
+DROP TABLE temp_emp;</code></pre>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -51261,8 +51364,8 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       <div class="title">표와 관계를 함께 읽으면, 다음 ERD 기준 ORDER_ITEM의 식별자로 가장 적절한 것은?</div>
       <div class="refs">
         <div class="ref-image">
-          
-          <img src="/sqld-images/j1258-1.png" alt="문항 이미지 j1258-1" loading="lazy">
+          <div class="ref-caption">Sales ERD</div>
+          <img src="/sqld-images/j1115-1.png" alt="Sales ERD" loading="lazy">
         </div></div>
       <ol class="opts">
         <li class="opt correct">
@@ -51303,9 +51406,13 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">표와 관계를 함께 읽으면, LEFT OUTER JOIN 결과에서 NULL이 발생하는 이유로 옳은 것은?</div>
       <div class="refs">
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j1259-1.png" alt="문항 이미지 j1259-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">LEFT OUTER JOIN — Table A</div>
+          <table><thead><tr><th>ID</th><th>NAME</th></tr></thead><tbody><tr><td>1</td><td>SEOUL</td></tr><tr><td>2</td><td>BUSAN</td></tr><tr><td>3</td><td>DAEGU</td></tr></tbody></table>
+        </div>
+        <div class="ref-table">
+          <div class="ref-caption">LEFT OUTER JOIN — Table B</div>
+          <table><thead><tr><th>ID</th><th>GRADE</th></tr></thead><tbody><tr><td>2</td><td>SILVER</td></tr><tr><td>4</td><td>GOLD</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -51385,9 +51492,12 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">표와 관계를 함께 읽으면, 다음 뷰 정의를 기준으로 옳은 설명은?</div>
       <div class="refs">
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j1262-1.png" alt="문항 이미지 j1262-1" loading="lazy">
+        <div class="ref-sql">
+          <div class="ref-caption">VIEW Definition</div>
+          <pre><code>CREATE VIEW v_emp AS
+SELECT emp_id, emp_name, dept
+FROM emp
+WHERE dept = &#39;SALES&#39;;</code></pre>
         </div></div>
       <ol class="opts">
         <li class="opt correct">
@@ -51428,9 +51538,9 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">테이블 그림을 기준으로 SQL문을 해석하면, 다음 SQL 결과에서 리프 노드 수로 옳은 것은?</div>
       <div class="refs"><div class="ref-text">SELECT COUNT(*)<br>FROM (<br>  SELECT emp_name, CONNECT_BY_ISLEAF AS is_leaf<br>  FROM emp_tree<br>  START WITH mgr_id IS NULL<br>  CONNECT BY PRIOR emp_id = mgr_id<br>) x<br>WHERE is_leaf = 1;</div>
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j1263-1.png" alt="문항 이미지 j1263-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">Hierarchy EMP Data</div>
+          <table><thead><tr><th>EMP ID</th><th>EMP NAME</th><th>MGR ID</th></tr></thead><tbody><tr><td>1</td><td>CEO</td><td></td></tr><tr><td>2</td><td>SALES_MGR</td><td>1</td></tr><tr><td>3</td><td>DEV_MGR</td><td>1</td></tr><tr><td>4</td><td>SALES_A</td><td>2</td></tr><tr><td>5</td><td>SALES_B</td><td>2</td></tr><tr><td>6</td><td>DEV_A</td><td>3</td></tr><tr><td>7</td><td>DEV_B</td><td>3</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt correct">
@@ -51471,9 +51581,9 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">표와 관계를 함께 읽으면, ROLLUP(region, product) 결과에서 가장 마지막 행의 의미는?</div>
       <div class="refs">
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j1264-1.png" alt="문항 이미지 j1264-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">ROLLUP Data</div>
+          <table><thead><tr><th>REGION</th><th>PRODUCT</th><th>AMOUNT</th></tr></thead><tbody><tr><td>SEOUL</td><td>A</td><td>100</td></tr><tr><td>SEOUL</td><td>B</td><td>200</td></tr><tr><td>BUSAN</td><td>A</td><td>150</td></tr><tr><td>BUSAN</td><td>B</td><td>50</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -51631,9 +51741,9 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">표와 관계를 함께 읽으면, 그림 데이터에서 위 SQL 결과로 조회되는 사원 수는?</div>
       <div class="refs"><div class="ref-text">SELECT *<br>FROM EMP e<br>WHERE SALARY = (<br>    SELECT MAX(SALARY)<br>    FROM EMP<br>    WHERE DEPT = e.DEPT<br>)<br>AND SALARY &gt; 4000;</div>
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j1270-1.png" alt="문항 이미지 j1270-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">Correlated Subquery Data</div>
+          <table><thead><tr><th>EMP NAME</th><th>DEPT</th><th>SALARY</th></tr></thead><tbody><tr><td>A</td><td>SALES</td><td>3000</td></tr><tr><td>B</td><td>SALES</td><td>2000</td></tr><tr><td>C</td><td>DEV</td><td>5000</td></tr><tr><td>D</td><td>DEV</td><td>3500</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -51830,9 +51940,9 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">표와 관계를 함께 읽으면, 다음 테이블과 가정 기준으로 우선 분리해야 할 대상 조합으로 가장 적절한 것은?</div>
       <div class="refs"><div class="ref-text">주문번호는 고객명과 고객등급을 결정하고, 상품번호는 상품명을 결정한다고 가정한다.</div>
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j1275-1.png" alt="문항 이미지 j1275-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">Normalization Source Table</div>
+          <table><thead><tr><th>ORDER NO</th><th>PRODUCT NO</th><th>PRODUCT NAME</th><th>CUSTOMER NAME</th><th>CUSTOMER GRADE</th></tr></thead><tbody><tr><td>1001</td><td>P01</td><td>SQL BOOK</td><td>KIM</td><td>VIP</td></tr><tr><td>1001</td><td>P02</td><td>DB BOOK</td><td>KIM</td><td>VIP</td></tr><tr><td>1002</td><td>P03</td><td>NOTE</td><td>LEE</td><td>BASIC</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -51873,9 +51983,9 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">그림의 데이터와 조건식을 모두 고려하면, 다음 SALARY 데이터에서 COUNT(*) - COUNT(salary) 결과는?</div>
       <div class="refs"><div class="ref-text">SELECT COUNT(*) - COUNT(salary) FROM t;</div>
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j1276-1.png" alt="문항 이미지 j1276-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">NULL Aggregate Data</div>
+          <table><thead><tr><th>EMP ID</th><th>SALARY</th><th>BONUS</th></tr></thead><tbody><tr><td>1</td><td>1000</td><td>100</td></tr><tr><td>2</td><td></td><td>200</td></tr><tr><td>3</td><td>2000</td><td></td></tr><tr><td>4</td><td></td><td></td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -52112,8 +52222,8 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       <div class="title">제시된 그림만 근거로 판단하면, 다음 ERD 기준 ORDERS와 ORDER_ITEM의 관계 특징으로 옳은 것은?</div>
       <div class="refs">
         <div class="ref-image">
-          
-          <img src="/sqld-images/j1282-1.png" alt="문항 이미지 j1282-1" loading="lazy">
+          <div class="ref-caption">Sales ERD</div>
+          <img src="/sqld-images/j1115-1.png" alt="Sales ERD" loading="lazy">
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -52193,9 +52303,9 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">그림과 SQL 조건을 동시에 읽으면, 다음 PIVOT SQL 결과 컬럼 구성으로 옳은 것은?</div>
       <div class="refs"><div class="ref-text">SELECT dept, Q1, Q2<br>FROM (<br>  SELECT dept, quarter_cd, amount<br>  FROM sales_q<br>)<br>PIVOT (<br>  SUM(amount)<br>  FOR quarter_cd IN (&#39;Q1&#39; AS Q1, &#39;Q2&#39; AS Q2)<br>);</div>
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j1285-1.png" alt="문항 이미지 j1285-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">PIVOT Source Data</div>
+          <table><thead><tr><th>DEPT</th><th>QUARTER CD</th><th>AMOUNT</th></tr></thead><tbody><tr><td>SALES</td><td>Q1</td><td>100</td></tr><tr><td>SALES</td><td>Q2</td><td>120</td></tr><tr><td>DEV</td><td>Q1</td><td>200</td></tr><tr><td>DEV</td><td>Q2</td><td>180</td></tr><tr><td>HR</td><td>Q1</td><td>90</td></tr><tr><td>HR</td><td>Q2</td><td>110</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -52236,9 +52346,9 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">그림의 데이터와 조건식을 모두 고려하면, 다음 SQL 결과에서 DEV_A의 경로로 옳은 것은?</div>
       <div class="refs"><div class="ref-text">SELECT emp_name,<br>       SYS_CONNECT_BY_PATH(emp_name, &#39;/&#39;) AS path<br>FROM emp_tree<br>START WITH mgr_id IS NULL<br>CONNECT BY PRIOR emp_id = mgr_id;</div>
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j1287-1.png" alt="문항 이미지 j1287-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">Hierarchy EMP Data</div>
+          <table><thead><tr><th>EMP ID</th><th>EMP NAME</th><th>MGR ID</th></tr></thead><tbody><tr><td>1</td><td>CEO</td><td></td></tr><tr><td>2</td><td>SALES_MGR</td><td>1</td></tr><tr><td>3</td><td>DEV_MGR</td><td>1</td></tr><tr><td>4</td><td>SALES_A</td><td>2</td></tr><tr><td>5</td><td>SALES_B</td><td>2</td></tr><tr><td>6</td><td>DEV_A</td><td>3</td></tr><tr><td>7</td><td>DEV_B</td><td>3</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -52474,9 +52584,9 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">제시된 그림만 근거로 판단하면, 상관 서브쿼리의 특징으로 옳은 것은?</div>
       <div class="refs">
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j1294-1.png" alt="문항 이미지 j1294-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">Correlated Subquery Data</div>
+          <table><thead><tr><th>EMP NAME</th><th>DEPT</th><th>SALARY</th></tr></thead><tbody><tr><td>A</td><td>SALES</td><td>3000</td></tr><tr><td>B</td><td>SALES</td><td>2000</td></tr><tr><td>C</td><td>DEV</td><td>5000</td></tr><tr><td>D</td><td>DEV</td><td>3500</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -52517,9 +52627,9 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">그림의 데이터와 조건식을 모두 고려하면, 다음 SQL 결과로 옳은 것은?</div>
       <div class="refs"><div class="ref-text">SELECT region,<br>       seller,<br>       amount,<br>       SUM(amount) OVER (PARTITION BY region) AS region_total<br>FROM sales_rank;</div>
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j1296-1.png" alt="문항 이미지 j1296-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">Window Function Data</div>
+          <table><thead><tr><th>REGION</th><th>SELLER</th><th>AMOUNT</th></tr></thead><tbody><tr><td>SEOUL</td><td>KIM</td><td>500</td></tr><tr><td>SEOUL</td><td>LEE</td><td>300</td></tr><tr><td>BUSAN</td><td>PARK</td><td>450</td></tr><tr><td>BUSAN</td><td>CHOI</td><td>200</td></tr><tr><td>BUSAN</td><td>JUNG</td><td>200</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt correct">
@@ -52638,9 +52748,9 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">제시된 그림만 근거로 판단하면, 다음 테이블과 가정 기준으로 발생 가능한 이상 현상으로 옳은 것은?</div>
       <div class="refs"><div class="ref-text">고객등급은 고객명에 의해 결정된다고 가정한다.</div>
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j1299-1.png" alt="문항 이미지 j1299-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">Normalization Source Table</div>
+          <table><thead><tr><th>ORDER NO</th><th>PRODUCT NO</th><th>PRODUCT NAME</th><th>CUSTOMER NAME</th><th>CUSTOMER GRADE</th></tr></thead><tbody><tr><td>1001</td><td>P01</td><td>SQL BOOK</td><td>KIM</td><td>VIP</td></tr><tr><td>1001</td><td>P02</td><td>DB BOOK</td><td>KIM</td><td>VIP</td></tr><tr><td>1002</td><td>P03</td><td>NOTE</td><td>LEE</td><td>BASIC</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -52877,8 +52987,8 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       <div class="title">엔터티와 데이터 분포를 함께 보면, 다음 ERD 기준 한 주문이 여러 ORDER_ITEM을 가질 수 있다는 사실은 무엇으로 표현되는가?</div>
       <div class="refs">
         <div class="ref-image">
-          
-          <img src="/sqld-images/j1306-1.png" alt="문항 이미지 j1306-1" loading="lazy">
+          <div class="ref-caption">Sales ERD</div>
+          <img src="/sqld-images/j1115-1.png" alt="Sales ERD" loading="lazy">
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -52919,9 +53029,13 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">제시된 표를 바탕으로 SQL문을 그대로 평가하면, 다음 SQL에서 반환되는 A.ID 값으로 옳은 것은?</div>
       <div class="refs"><div class="ref-text">SELECT a.id,<br>       COALESCE(b.grade, &#39;NONE&#39;) AS grade<br>FROM A a<br>LEFT OUTER JOIN B b<br>  ON a.id = b.id<br>WHERE b.id IS NULL<br>ORDER BY a.id;</div>
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j1307-1.png" alt="문항 이미지 j1307-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">LEFT OUTER JOIN — Table A</div>
+          <table><thead><tr><th>ID</th><th>NAME</th></tr></thead><tbody><tr><td>1</td><td>SEOUL</td></tr><tr><td>2</td><td>BUSAN</td></tr><tr><td>3</td><td>DAEGU</td></tr></tbody></table>
+        </div>
+        <div class="ref-table">
+          <div class="ref-caption">LEFT OUTER JOIN — Table B</div>
+          <table><thead><tr><th>ID</th><th>GRADE</th></tr></thead><tbody><tr><td>2</td><td>SILVER</td></tr><tr><td>4</td><td>GOLD</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -53040,9 +53154,9 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">제시된 표를 바탕으로 SQL문을 그대로 평가하면, 다음 SQL 결과에서 SALES_B의 루트 값으로 옳은 것은?</div>
       <div class="refs"><div class="ref-text">SELECT emp_name,<br>       CONNECT_BY_ROOT emp_name AS root_name<br>FROM emp_tree<br>START WITH mgr_id IS NULL<br>CONNECT BY PRIOR emp_id = mgr_id;</div>
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j1311-1.png" alt="문항 이미지 j1311-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">Hierarchy EMP Data</div>
+          <table><thead><tr><th>EMP ID</th><th>EMP NAME</th><th>MGR ID</th></tr></thead><tbody><tr><td>1</td><td>CEO</td><td></td></tr><tr><td>2</td><td>SALES_MGR</td><td>1</td></tr><tr><td>3</td><td>DEV_MGR</td><td>1</td></tr><tr><td>4</td><td>SALES_A</td><td>2</td></tr><tr><td>5</td><td>SALES_B</td><td>2</td></tr><tr><td>6</td><td>DEV_A</td><td>3</td></tr><tr><td>7</td><td>DEV_B</td><td>3</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt correct">
@@ -53083,9 +53197,9 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">엔터티와 데이터 분포를 함께 보면, GROUPING SETS((region), (product))의 의미로 옳은 것은?</div>
       <div class="refs">
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j1312-1.png" alt="문항 이미지 j1312-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">ROLLUP Data</div>
+          <table><thead><tr><th>REGION</th><th>PRODUCT</th><th>AMOUNT</th></tr></thead><tbody><tr><td>SEOUL</td><td>A</td><td>100</td></tr><tr><td>SEOUL</td><td>B</td><td>200</td></tr><tr><td>BUSAN</td><td>A</td><td>150</td></tr><tr><td>BUSAN</td><td>B</td><td>50</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt correct">
@@ -53477,9 +53591,9 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">엔터티와 데이터 분포를 함께 보면, 다음 테이블과 가정 기준으로 주문이 없을 때 고객등급 정보를 저장하기 어려운 현상은?</div>
       <div class="refs"><div class="ref-text">고객 정보가 주문 데이터와 함께 저장된다고 가정한다.</div>
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j1323-1.png" alt="문항 이미지 j1323-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">Normalization Source Table</div>
+          <table><thead><tr><th>ORDER NO</th><th>PRODUCT NO</th><th>PRODUCT NAME</th><th>CUSTOMER NAME</th><th>CUSTOMER GRADE</th></tr></thead><tbody><tr><td>1001</td><td>P01</td><td>SQL BOOK</td><td>KIM</td><td>VIP</td></tr><tr><td>1001</td><td>P02</td><td>DB BOOK</td><td>KIM</td><td>VIP</td></tr><tr><td>1002</td><td>P03</td><td>NOTE</td><td>LEE</td><td>BASIC</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -53520,9 +53634,9 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">테이블 그림을 기준으로 SQL문을 해석하면, 다음 SQL 실행 결과 값으로 옳은 것은?</div>
       <div class="refs"><div class="ref-text">SELECT SUM(NVL(bonus, 0)) + COUNT(salary) AS val<br>FROM emp_null;</div>
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j1324-1.png" alt="문항 이미지 j1324-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">NULL Aggregate Data</div>
+          <table><thead><tr><th>EMP ID</th><th>SALARY</th><th>BONUS</th></tr></thead><tbody><tr><td>1</td><td>1000</td><td>100</td></tr><tr><td>2</td><td></td><td>200</td></tr><tr><td>3</td><td>2000</td><td></td></tr><tr><td>4</td><td></td><td></td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -53758,9 +53872,13 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">그림의 각 행과 관계선을 기준으로 해석하면, OUTER JOIN 결과 해석으로 옳은 것은?</div>
       <div class="refs"><div class="ref-text">A.ID  ───────────────&lt;  B.ID<br> (1)                 (0 or 1)</div>
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j1331-1.png" alt="문항 이미지 j1331-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">LEFT OUTER JOIN — Table A</div>
+          <table><thead><tr><th>ID</th><th>NAME</th></tr></thead><tbody><tr><td>1</td><td>SEOUL</td></tr><tr><td>2</td><td>BUSAN</td></tr><tr><td>3</td><td>DAEGU</td></tr></tbody></table>
+        </div>
+        <div class="ref-table">
+          <div class="ref-caption">LEFT OUTER JOIN — Table B</div>
+          <table><thead><tr><th>ID</th><th>GRADE</th></tr></thead><tbody><tr><td>2</td><td>SILVER</td></tr><tr><td>4</td><td>GOLD</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt correct">
@@ -53801,9 +53919,9 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">테이블 그림을 기준으로 SQL문을 해석하면, 다음 PIVOT SQL에 대한 설명으로 옳은 것은?</div>
       <div class="refs"><div class="ref-text">SELECT dept, Q1, Q2<br>FROM (<br>  SELECT dept, quarter_cd, amount<br>  FROM sales_q<br>)<br>PIVOT (<br>  SUM(amount)<br>  FOR quarter_cd IN (&#39;Q1&#39; AS Q1, &#39;Q2&#39; AS Q2)<br>);</div>
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j1333-1.png" alt="문항 이미지 j1333-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">PIVOT Source Data</div>
+          <table><thead><tr><th>DEPT</th><th>QUARTER CD</th><th>AMOUNT</th></tr></thead><tbody><tr><td>SALES</td><td>Q1</td><td>100</td></tr><tr><td>SALES</td><td>Q2</td><td>120</td></tr><tr><td>DEV</td><td>Q1</td><td>200</td></tr><tr><td>DEV</td><td>Q2</td><td>180</td></tr><tr><td>HR</td><td>Q1</td><td>90</td></tr><tr><td>HR</td><td>Q2</td><td>110</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -53922,9 +54040,9 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">그림의 각 행과 관계선을 기준으로 해석하면, ROLLUP에서 소계 행 판별에 사용되는 함수로 옳은 것은?</div>
       <div class="refs">
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j1336-1.png" alt="문항 이미지 j1336-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">ROLLUP Data</div>
+          <table><thead><tr><th>REGION</th><th>PRODUCT</th><th>AMOUNT</th></tr></thead><tbody><tr><td>SEOUL</td><td>A</td><td>100</td></tr><tr><td>SEOUL</td><td>B</td><td>200</td></tr><tr><td>BUSAN</td><td>A</td><td>150</td></tr><tr><td>BUSAN</td><td>B</td><td>50</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -54121,9 +54239,9 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">그림의 각 행과 관계선을 기준으로 해석하면, 상관 서브쿼리를 JOIN + GROUP BY로 바꿀 때 핵심 아이디어는?</div>
       <div class="refs">
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j1342-1.png" alt="문항 이미지 j1342-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">Correlated Subquery Data</div>
+          <table><thead><tr><th>EMP NAME</th><th>DEPT</th><th>SALARY</th></tr></thead><tbody><tr><td>A</td><td>SALES</td><td>3000</td></tr><tr><td>B</td><td>SALES</td><td>2000</td></tr><tr><td>C</td><td>DEV</td><td>5000</td></tr><tr><td>D</td><td>DEV</td><td>3500</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt correct">
@@ -54320,9 +54438,9 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">그림의 각 행과 관계선을 기준으로 해석하면, 다음 테이블과 가정 기준으로 3NF 관점에서 추가 분리가 필요한 속성으로 옳은 것은?</div>
       <div class="refs"><div class="ref-text">고객명은 고객등급을 결정한다고 가정한다.</div>
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j1347-1.png" alt="문항 이미지 j1347-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">Normalization Source Table</div>
+          <table><thead><tr><th>ORDER NO</th><th>PRODUCT NO</th><th>PRODUCT NAME</th><th>CUSTOMER NAME</th><th>CUSTOMER GRADE</th></tr></thead><tbody><tr><td>1001</td><td>P01</td><td>SQL BOOK</td><td>KIM</td><td>VIP</td></tr><tr><td>1001</td><td>P02</td><td>DB BOOK</td><td>KIM</td><td>VIP</td></tr><tr><td>1002</td><td>P03</td><td>NOTE</td><td>LEE</td><td>BASIC</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -54363,9 +54481,9 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">그림의 데이터와 조건식을 모두 고려하면, 다음 SQL 실행 결과 행 수는?</div>
       <div class="refs"><div class="ref-text">SELECT COUNT(*)<br>FROM emp_null<br>WHERE NVL(salary, 0) = 0<br>   OR bonus IS NULL;</div>
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j1348-1.png" alt="문항 이미지 j1348-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">NULL Aggregate Data</div>
+          <table><thead><tr><th>EMP ID</th><th>SALARY</th><th>BONUS</th></tr></thead><tbody><tr><td>1</td><td>1000</td><td>100</td></tr><tr><td>2</td><td></td><td>200</td></tr><tr><td>3</td><td>2000</td><td></td></tr><tr><td>4</td><td></td><td></td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -54562,9 +54680,9 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">테이블 그림을 기준으로 SQL문을 해석하면, 다음 SQL 결과에서 rn = 1인 행으로 옳은 것은?</div>
       <div class="refs"><div class="ref-text">SELECT region,<br>       category,<br>       amount,<br>       ROW_NUMBER() OVER (<br>         ORDER BY category ASC, amount DESC, region ASC<br>       ) AS rn<br>FROM sales<br>WHERE amount &gt;= 100;</div>
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j1353-1.png" alt="문항 이미지 j1353-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">SELECT Result Data</div>
+          <table><thead><tr><th>REGION</th><th>AMOUNT</th><th>CATEGORY</th></tr></thead><tbody><tr><td>SEOUL</td><td>150</td><td>A</td></tr><tr><td>BUSAN</td><td>100</td><td>A</td></tr><tr><td>SEOUL</td><td>100</td><td>B</td></tr><tr><td>INCHEON</td><td>80</td><td>B</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -54606,8 +54724,8 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       <div class="title">표와 관계를 함께 읽으면, 다음 ERD에 대한 설명으로 옳은 것은?</div>
       <div class="refs">
         <div class="ref-image">
-          
-          <img src="/sqld-images/j1354-1.png" alt="문항 이미지 j1354-1" loading="lazy">
+          <div class="ref-caption">Sales ERD</div>
+          <img src="/sqld-images/j1115-1.png" alt="Sales ERD" loading="lazy">
         </div></div>
       <ol class="opts">
         <li class="opt correct">
@@ -54648,9 +54766,13 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">테이블 그림을 기준으로 SQL문을 해석하면, 다음 SQL 실행 결과로 반환되는 행 수는?</div>
       <div class="refs"><div class="ref-text">SELECT a.id,<br>       COUNT(*) AS cnt<br>FROM A a<br>JOIN B b<br>  ON a.id = b.id<br>GROUP BY a.id<br>HAVING COUNT(*) = 1<br>ORDER BY a.id;</div>
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j1355-1.png" alt="문항 이미지 j1355-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">JOIN Basic Tables — Table A</div>
+          <table><thead><tr><th>ID</th><th>NAME</th></tr></thead><tbody><tr><td>1</td><td>ALPHA</td></tr><tr><td>2</td><td>BETA</td></tr><tr><td>3</td><td>GAMMA</td></tr></tbody></table>
+        </div>
+        <div class="ref-table">
+          <div class="ref-caption">JOIN Basic Tables — Table B</div>
+          <table><thead><tr><th>ID</th><th>VAL</th></tr></thead><tbody><tr><td>2</td><td>X</td></tr><tr><td>3</td><td>Y</td></tr><tr><td>4</td><td>Z</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt correct">
@@ -54730,9 +54852,9 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">제시된 표를 바탕으로 SQL문을 그대로 평가하면, 다음 PIVOT SQL 결과에서 SALES 행의 (Q1 + Q2) 합계는?</div>
       <div class="refs"><div class="ref-text">SELECT dept, Q1, Q2<br>FROM (<br>  SELECT dept, quarter_cd, amount<br>  FROM sales_q<br>)<br>PIVOT (<br>  SUM(amount)<br>  FOR quarter_cd IN (&#39;Q1&#39; AS Q1, &#39;Q2&#39; AS Q2)<br>)<br>ORDER BY dept;</div>
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j1357-1.png" alt="문항 이미지 j1357-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">PIVOT Source Data</div>
+          <table><thead><tr><th>DEPT</th><th>QUARTER CD</th><th>AMOUNT</th></tr></thead><tbody><tr><td>SALES</td><td>Q1</td><td>100</td></tr><tr><td>SALES</td><td>Q2</td><td>120</td></tr><tr><td>DEV</td><td>Q1</td><td>200</td></tr><tr><td>DEV</td><td>Q2</td><td>180</td></tr><tr><td>HR</td><td>Q1</td><td>90</td></tr><tr><td>HR</td><td>Q2</td><td>110</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -54812,9 +54934,9 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">테이블 그림을 기준으로 SQL문을 해석하면, 다음 계층형 질의 결과에서 CONNECT_BY_ISLEAF = 1 이고 LEVEL = 3 인 행 수는?</div>
       <div class="refs"><div class="ref-text">SELECT emp_name,<br>       LEVEL AS lv,<br>       CONNECT_BY_ISLEAF AS is_leaf<br>FROM emp_tree<br>START WITH mgr_id IS NULL<br>CONNECT BY PRIOR emp_id = mgr_id<br>ORDER SIBLINGS BY emp_name;</div>
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j1359-1.png" alt="문항 이미지 j1359-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">Hierarchy EMP Data</div>
+          <table><thead><tr><th>EMP ID</th><th>EMP NAME</th><th>MGR ID</th></tr></thead><tbody><tr><td>1</td><td>CEO</td><td></td></tr><tr><td>2</td><td>SALES_MGR</td><td>1</td></tr><tr><td>3</td><td>DEV_MGR</td><td>1</td></tr><tr><td>4</td><td>SALES_A</td><td>2</td></tr><tr><td>5</td><td>SALES_B</td><td>2</td></tr><tr><td>6</td><td>DEV_A</td><td>3</td></tr><tr><td>7</td><td>DEV_B</td><td>3</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -54855,9 +54977,9 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">테이블 그림을 기준으로 SQL문을 해석하면, 다음 SQL 실행 결과로 반환되는 부서 수는?</div>
       <div class="refs"><div class="ref-text">SELECT dept<br>FROM emp<br>GROUP BY dept<br>HAVING COUNT(*) &gt;= 4<br>   AND AVG(salary) &gt; 3000<br>   AND SUM(CASE WHEN salary &gt;= 4000 THEN 1 ELSE 0 END) &gt;= 2;</div>
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j1360-1.png" alt="문항 이미지 j1360-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">EMP Group Data</div>
+          <table><thead><tr><th>EMP ID</th><th>DEPT</th><th>SALARY</th></tr></thead><tbody><tr><td>1</td><td>SALES</td><td>3000</td></tr><tr><td>2</td><td>SALES</td><td>2500</td></tr><tr><td>3</td><td>SALES</td><td>2000</td></tr><tr><td>4</td><td>SALES</td><td>3500</td></tr><tr><td>5</td><td>DEV</td><td>5000</td></tr><tr><td>6</td><td>DEV</td><td>4200</td></tr><tr><td>7</td><td>DEV</td><td>4100</td></tr><tr><td>8</td><td>DEV</td><td>3900</td></tr><tr><td>9</td><td>DEV</td><td>3700</td></tr><tr><td>10</td><td>HR</td><td>2800</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -54977,8 +55099,8 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       <div class="title">표와 관계를 함께 읽으면, 다음 제약 조건 가정에서 부모 ORDERS 행 삭제에 대한 설명으로 옳은 것은?</div>
       <div class="refs"><div class="ref-text">ORDER_DETAIL.order_id는 ORDERS.order_id를 참조하고, FK는 NULL 허용이며 ON DELETE CASCADE는 없다고 가정한다.</div>
         <div class="ref-image">
-          
-          <img src="/sqld-images/j1363-1.png" alt="문항 이미지 j1363-1" loading="lazy">
+          <div class="ref-caption">Parent / Child ERD</div>
+          <img src="/sqld-images/j1147-1.png" alt="Parent / Child ERD" loading="lazy">
         </div></div>
       <ol class="opts">
         <li class="opt correct">
@@ -55097,9 +55219,13 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">테이블 그림을 기준으로 SQL문을 해석하면, 다음 SQL 실행 결과로 조회되는 고객 수는?</div>
       <div class="refs"><div class="ref-text">SELECT COUNT(*)<br>FROM customer c<br>WHERE EXISTS (<br>  SELECT 1<br>  FROM orders o<br>  WHERE o.customer_id = c.customer_id<br>  GROUP BY o.customer_id<br>  HAVING COUNT(*) &gt;= 2<br>);</div>
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j1366-1.png" alt="문항 이미지 j1366-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">CUSTOMER</div>
+          <table><thead><tr><th>CUSTOMER ID</th><th>NAME</th></tr></thead><tbody><tr><td>101</td><td>KIM</td></tr><tr><td>102</td><td>LEE</td></tr><tr><td>103</td><td>PARK</td></tr><tr><td>104</td><td>CHOI</td></tr></tbody></table>
+        </div>
+        <div class="ref-table">
+          <div class="ref-caption">ORDERS</div>
+          <table><thead><tr><th>ORDER ID</th><th>CUSTOMER ID</th></tr></thead><tbody><tr><td>9001</td><td>101</td></tr><tr><td>9002</td><td>101</td></tr><tr><td>9003</td><td>103</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt ">
@@ -55140,9 +55266,9 @@ SELECT * FROM TAB1 A CROSS JOIN TAB2 B;</code></pre>
       </header>
       <div class="title">테이블 그림을 기준으로 SQL문을 해석하면, 다음 SQL 결과에서 rn &lt;&gt; rnk 인 행 수는?</div>
       <div class="refs"><div class="ref-text">SELECT region,<br>       seller,<br>       amount,<br>       ROW_NUMBER() OVER (<br>         PARTITION BY region<br>         ORDER BY amount DESC, seller ASC<br>       ) AS rn,<br>       RANK() OVER (<br>         PARTITION BY region<br>         ORDER BY amount DESC<br>       ) AS rnk<br>FROM sales_rank;</div>
-        <div class="ref-image">
-          
-          <img src="/sqld-images/j1368-1.png" alt="문항 이미지 j1368-1" loading="lazy">
+        <div class="ref-table">
+          <div class="ref-caption">Window Function Data</div>
+          <table><thead><tr><th>REGION</th><th>SELLER</th><th>AMOUNT</th></tr></thead><tbody><tr><td>SEOUL</td><td>KIM</td><td>500</td></tr><tr><td>SEOUL</td><td>LEE</td><td>300</td></tr><tr><td>BUSAN</td><td>PARK</td><td>450</td></tr><tr><td>BUSAN</td><td>CHOI</td><td>200</td></tr><tr><td>BUSAN</td><td>JUNG</td><td>200</td></tr></tbody></table>
         </div></div>
       <ol class="opts">
         <li class="opt ">
