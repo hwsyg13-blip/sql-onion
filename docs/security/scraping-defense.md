@@ -9,7 +9,29 @@ SPA + 무료 접근 모델에선 **100% 차단 불가능**. 코드 + 인프라 �
 
 ---
 
-## 1. 현재 적용 (이 PR)
+## 1. 현재 적용 (이 PR + Vercel Firewall)
+
+### 1-0. Vercel Firewall (Pro plan, 대시보드/CLI) ★ 활성
+
+3개 룰 게시됨 (`vercel firewall overview` 로 확인):
+
+| 룰 | 조건 | 액션 |
+|---|---|---|
+| `general-rate-limit` | path starts with `/` | Rate limit **200 req/60s/IP** → 초과 시 challenge |
+| `bundle-bombing-block` | path startsWith `/assets/` AND endsWith `.js` | Rate limit **30 req/60s/IP** → 초과 시 deny |
+| `scraper-ua-deny` | User-Agent regex (curl/wget/python/scrapy/headless 등) | **Deny** |
+
+라이브 검증 (2026-04-30):
+```
+curl -A "curl/8.0" sqldyangpa.com           → 403 ✓
+curl -A "Mozilla Chrome 121" sqldyangpa.com → 200 ✓
+curl -A "Googlebot/2.1" sqldyangpa.com      → 200 ✓
+```
+
+**관리**:
+- 룰 추가/수정: `vercel firewall rules add/edit/disable <name>` → `vercel firewall publish`
+- 차단 통계: Vercel 대시보드 → 프로젝트 → Firewall → Activity
+- false positive 발견 시: `vercel firewall rules disable <name>` 즉시 비활성
 
 ### 1-1. `middleware.ts` (Vercel Edge)
 
@@ -45,22 +67,11 @@ SPA + 무료 접근 모델에선 **100% 차단 불가능**. 코드 + 인프라 �
 
 ## 2. 권장 후속 조치 (인프라 — 사용자 작업 필요)
 
-### A. Vercel Firewall — 5분 작업, 무료 ★ 권장
+### A. Vercel Firewall — ✅ 이미 적용됨 (2026-04-30)
 
-본격 분산 rate limit 은 코드로 못 함. Vercel 대시보드에서:
+위 1-0 섹션 참조. 3개 룰 라이브.
 
-1. https://vercel.com/dashboard → 프로젝트 → **Firewall**
-2. Rate Limit 룰 추가:
-   - Match: `Path matches /assets/.*\\.js$` (번들 폭격 방지) 또는 `All requests`
-   - Limit: `60 requests per minute per IP`
-   - Action: `Deny` (또는 `Challenge` — captcha)
-3. 추가 룰 (선택):
-   - `User-Agent contains scrapy/curl/wget/python` → Deny
-   - `Request count > 200 per 5min per IP` → Challenge
-
-**무료 티어 제한**: 룰 5개까지. 충분.
-
-### B. Cloudflare 앞단 — 15분 작업, 무료 ★★ 가장 강력
+### B. Cloudflare 앞단 — 15분 작업, 무료 ★ 추가 보호 검토 가능
 
 Vercel 앞에 Cloudflare proxy 두면 WAF + Bot Fight Mode + 분산 rate limit 모두 무료:
 
@@ -134,3 +145,4 @@ Cloudflare (적용 후):
 | 일자 | 변경 | PR |
 |---|---|---|
 | 2026-04-28 | middleware.ts UA blocklist + 분당 80 rate limit, robots.txt 강화 | (이 PR) |
+| 2026-04-30 | Vercel Firewall 3룰 라이브 — general-rate-limit / bundle-bombing-block / scraper-ua-deny | (이 PR 후속) |
