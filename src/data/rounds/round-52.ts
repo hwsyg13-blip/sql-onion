@@ -347,10 +347,10 @@ export const ROUND_52: QuizQuestion[] = [
     "number": 12,
     "title": "아래 T 테이블 (VAL, OPT) 에 대해 결과 값이 나머지와 다른 함수는?",
     "options": [
-      "`NVL(VAL, OPT)`",
-      "`COALESCE(VAL, OPT)`",
-      "`NULLIF(VAL, OPT)`",
-      "`CASE WHEN VAL IS NOT NULL THEN VAL ELSE OPT END`"
+      "NVL(VAL, OPT)",
+      "COALESCE(VAL, OPT)",
+      "NULLIF(VAL, OPT)",
+      "CASE WHEN VAL IS NOT NULL THEN VAL ELSE OPT END"
     ],
     "correctIndex": 2,
     "explanation": "NULLIF 는 두 인자가 같으면 NULL, 다르면 첫 번째 값을 반환하므로 나머지와 결과가 다르다. ① NVL/② COALESCE/④ CASE 는 VAL 이 NULL 일 때 OPT 로 대체하고 그 외에는 VAL 을 그대로 반환하므로 동일한 결과를 낸다.",
@@ -663,10 +663,10 @@ export const ROUND_52: QuizQuestion[] = [
     "number": 22,
     "title": "아래 NAMES 테이블에서 세 번째 문자가 'L' 인 단어를 찾는 LIKE 패턴으로 옳은 것은?",
     "options": [
-      "`'L%'`",
-      "`'%L'`",
-      "`'__L%'`",
-      "`'L__%'`"
+      "'L%'",
+      "'%L'",
+      "'__L%'",
+      "'L__%'"
     ],
     "correctIndex": 2,
     "explanation": "LIKE 패턴에서 `_` 는 임의의 한 문자, `%` 는 0개 이상의 임의 문자를 의미한다. 따라서 \"세 번째 문자가 'L'\" 을 표현하려면 앞에 `_` 두 개를 두어 임의의 두 문자를 건너뛴 뒤 'L', 그 뒤에 `%` 로 임의 길이 문자열을 잇는 `'__L%'` 가 된다. ① 은 'L' 로 시작, ② 는 'L' 로 끝남, ④ 는 첫 글자가 'L' 이고 네 번째에 임의 문자열이 와 의미가 다르다.",
@@ -780,10 +780,10 @@ export const ROUND_52: QuizQuestion[] = [
     "number": 25,
     "title": "아래 EMP 테이블에 대해 두 컬럼 A, B 의 값이 서로 다른 결과가 되는 SQL 은?",
     "options": [
-      "`SELECT SUM(SAL) AS A, SUM(SAL) AS B FROM EMP;`",
-      "`SELECT AVG(SAL) AS A, AVG(SAL) AS B FROM EMP;`",
-      "`SELECT MAX(SAL) AS A, MIN(SAL) AS B FROM EMP;`",
-      "`SELECT COUNT(SAL) AS A, COUNT(SAL) AS B FROM EMP;`"
+      "SELECT SUM(SAL) AS A, SUM(SAL) AS B FROM EMP;",
+      "SELECT AVG(SAL) AS A, AVG(SAL) AS B FROM EMP;",
+      "SELECT MAX(SAL) AS A, MIN(SAL) AS B FROM EMP;",
+      "SELECT COUNT(SAL) AS A, COUNT(SAL) AS B FROM EMP;"
     ],
     "correctIndex": 2,
     "explanation": "MAX 와 MIN 은 각각 최댓값(5000)·최솟값(2000) 을 반환하므로 A 와 B 결과가 다르다. ① SUM/② AVG/④ COUNT 는 동일 함수를 두 번 호출하므로 A 와 B 가 같다.",
@@ -851,10 +851,10 @@ export const ROUND_52: QuizQuestion[] = [
     "number": 27,
     "title": "주문한 이력이 없는 회원을 조회하는 SQL 로 옳은 것은?",
     "options": [
-      "`SELECT * FROM 회원 WHERE EXISTS (SELECT 1 FROM 주문 WHERE 주문.회원ID = 회원.회원ID);`",
-      "`SELECT * FROM 회원 WHERE 회원ID IN (SELECT 회원ID FROM 주문);`",
-      "`SELECT * FROM 회원 M WHERE NOT EXISTS (SELECT 1 FROM 주문 O WHERE O.회원ID = M.회원ID);`",
-      "`SELECT * FROM 회원 INNER JOIN 주문 ON 회원.회원ID = 주문.회원ID;`"
+      "SELECT * FROM 회원 WHERE EXISTS (SELECT 1 FROM 주문 WHERE 주문.회원ID = 회원.회원ID);",
+      "SELECT * FROM 회원 WHERE 회원ID IN (SELECT 회원ID FROM 주문);",
+      "SELECT * FROM 회원 M WHERE NOT EXISTS (SELECT 1 FROM 주문 O WHERE O.회원ID = M.회원ID);",
+      "SELECT * FROM 회원 INNER JOIN 주문 ON 회원.회원ID = 주문.회원ID;"
     ],
     "correctIndex": 2,
     "explanation": "주문 이력이 없는 회원은 주문 테이블에 매칭 행이 없는 회원이므로 NOT EXISTS 또는 LEFT OUTER JOIN ... IS NULL 패턴이 정답이다. ① EXISTS 는 주문 있는 회원, ② IN 도 주문 있는 회원, ④ INNER JOIN 은 매칭만 — 모두 의도와 반대. 정답 ③ NOT EXISTS.",
@@ -1033,10 +1033,10 @@ export const ROUND_52: QuizQuestion[] = [
     "number": 35,
     "title": "아래 T 테이블에서 소계 없이 (A, B) 세부 집계와 () 총계만 한 번에 나타내기 위해 괄호를 중첩한 ROLLUP 구문으로 옳은 것은?",
     "options": [
-      "`ROLLUP(A, B)`",
-      "`ROLLUP((A), B)`",
-      "`ROLLUP((A, B))`",
-      "`ROLLUP(A, (B))`"
+      "ROLLUP(A, B)",
+      "ROLLUP((A), B)",
+      "ROLLUP((A, B))",
+      "ROLLUP(A, (B))"
     ],
     "correctIndex": 2,
     "explanation": "중첩 괄호 `((A, B))` 는 (A, B) 를 하나의 그룹 단위로 취급하므로 (A, B) 세부 집계와 () 총계 두 가지만 반환된다. ① `ROLLUP(A, B)` 는 (A, B), (A), () 세 그룹, ② `ROLLUP((A), B)` 는 (A, B), (A), () 와 동일, ④ `ROLLUP(A, (B))` 는 (A, B), (A), () 와 동일하게 (A) 소계가 추가된다.",
@@ -1230,10 +1230,10 @@ export const ROUND_52: QuizQuestion[] = [
     "number": 41,
     "title": "아래 두 테이블 T1(3행), T2(3행) 에 대한 네 가지 JOIN SQL 중 결과 행 수가 나머지와 다른 것은? (단, 모든 행이 매칭되는 데이터)",
     "options": [
-      "`SELECT * FROM T1 INNER JOIN T2 ON T1.ID = T2.ID;`",
-      "`SELECT * FROM T1 LEFT OUTER JOIN T2 ON T1.ID = T2.ID;`",
-      "`SELECT * FROM T1 RIGHT OUTER JOIN T2 ON T1.ID = T2.ID;`",
-      "`SELECT * FROM T1 CROSS JOIN T2;`"
+      "SELECT * FROM T1 INNER JOIN T2 ON T1.ID = T2.ID;",
+      "SELECT * FROM T1 LEFT OUTER JOIN T2 ON T1.ID = T2.ID;",
+      "SELECT * FROM T1 RIGHT OUTER JOIN T2 ON T1.ID = T2.ID;",
+      "SELECT * FROM T1 CROSS JOIN T2;"
     ],
     "correctIndex": 3,
     "explanation": "INNER/LEFT/RIGHT OUTER JOIN 은 모두 ON 조건으로 ID 가 매칭되는 행만 반환하므로 (모든 행이 매칭되는 가정에서) 결과는 3 행으로 동일하다. CROSS JOIN 은 조인 조건 없이 모든 조합을 반환하므로 3 × 3 = 9 행으로 결과 행 수가 가장 많다.",
@@ -1337,10 +1337,10 @@ export const ROUND_52: QuizQuestion[] = [
     "number": 44,
     "title": "아래 T 테이블에 대한 네 개의 AVG 계산식 중 결과가 서로 다른 것은?",
     "options": [
-      "`SUM(NVL(COL, 0)) / COUNT(*)`",
-      "`SUM(COL) / COUNT(*)`",
-      "`AVG(NVL(COL, 0))`",
-      "`AVG(COL)`"
+      "SUM(NVL(COL, 0)) / COUNT(*)",
+      "SUM(COL) / COUNT(*)",
+      "AVG(NVL(COL, 0))",
+      "AVG(COL)"
     ],
     "correctIndex": 3,
     "explanation": "AVG(COL) 은 NULL 을 자동 제외하여 (10+20)/2 = 15 를 반환한다. ① ② ③ 은 모두 NULL 을 0 으로 취급하거나 분모가 전체 행이라 (10+0+20)/3 = 10 으로 같은 값이 나온다.",

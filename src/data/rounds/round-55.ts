@@ -511,10 +511,10 @@ export const ROUND_55: QuizQuestion[] = [
     "number": 16,
     "title": "아래 T 테이블에 대한 SQL 들 중 집계 결과 집합이 나머지와 다른 것은?",
     "options": [
-      "`SELECT A, B, SUM(VAL) FROM T GROUP BY ROLLUP(A, B);`",
-      "`SELECT A, B, SUM(VAL) FROM T GROUP BY GROUPING SETS((A, B), (A), ());`",
-      "`SELECT A, B, SUM(VAL) FROM T GROUP BY GROUPING SETS((A, B), (A), (B));`",
-      "`SELECT A, B, SUM(VAL) FROM T GROUP BY GROUPING SETS((), (A), (A, B));`"
+      "SELECT A, B, SUM(VAL) FROM T GROUP BY ROLLUP(A, B);",
+      "SELECT A, B, SUM(VAL) FROM T GROUP BY GROUPING SETS((A, B), (A), ());",
+      "SELECT A, B, SUM(VAL) FROM T GROUP BY GROUPING SETS((A, B), (A), (B));",
+      "SELECT A, B, SUM(VAL) FROM T GROUP BY GROUPING SETS((), (A), (A, B));"
     ],
     "correctIndex": 2,
     "explanation": "① ROLLUP(A, B) 은 (A, B), (A), () 세 집계 레벨을 산출. ② 와 ④ 도 같은 세 레벨을 명시적으로 나열했을 뿐 결과 집합 동일. 그러나 ③ 은 () 총계 대신 (B) 레벨이 포함되어 결과 집합이 다르다.",
@@ -557,10 +557,10 @@ export const ROUND_55: QuizQuestion[] = [
     "number": 17,
     "title": "아래 T 테이블에 대한 SQL 과 동일한 결과를 반환하는 GROUP BY 절은?",
     "options": [
-      "`GROUPING SETS(A, B)`",
-      "`GROUPING SETS((A, B), ())`",
-      "`GROUPING SETS((A, B), (A))`",
-      "`GROUPING SETS(A, B, ())`"
+      "GROUPING SETS(A, B)",
+      "GROUPING SETS((A, B), ())",
+      "GROUPING SETS((A, B), (A))",
+      "GROUPING SETS(A, B, ())"
     ],
     "correctIndex": 3,
     "explanation": "`ROLLUP(A)` 는 (A), () 를 산출. 여기에 B 를 GROUPING SETS 로 합치면 (A), (B), () 의 세 조합이 된다 — ④ 와 같다.",
@@ -1036,10 +1036,10 @@ export const ROUND_55: QuizQuestion[] = [
     "number": 29,
     "title": "아래 EMP 테이블에서 '홍길동' 의 자식의 자식 노드를 셀프 조인으로 조회하는 SQL 로 옳은 것은?",
     "options": [
-      "`SELECT C.EMPNO, C.ENAME, C.MGR FROM EMP A, EMP B, EMP C WHERE A.ENAME='홍길동' AND B.MGR=A.EMPNO AND C.MGR=B.EMPNO;`",
-      "`SELECT A.EMPNO, A.ENAME FROM EMP A WHERE A.ENAME='홍길동';`",
-      "`SELECT B.EMPNO, B.ENAME FROM EMP A, EMP B WHERE A.ENAME='홍길동' AND B.MGR=A.EMPNO;`",
-      "`SELECT * FROM EMP WHERE MGR = '홍길동';`"
+      "SELECT C.EMPNO, C.ENAME, C.MGR FROM EMP A, EMP B, EMP C WHERE A.ENAME='홍길동' AND B.MGR=A.EMPNO AND C.MGR=B.EMPNO;",
+      "SELECT A.EMPNO, A.ENAME FROM EMP A WHERE A.ENAME='홍길동';",
+      "SELECT B.EMPNO, B.ENAME FROM EMP A, EMP B WHERE A.ENAME='홍길동' AND B.MGR=A.EMPNO;",
+      "SELECT * FROM EMP WHERE MGR = '홍길동';"
     ],
     "correctIndex": 0,
     "explanation": "'홍길동' 을 A 로, 자식을 B(`B.MGR = A.EMPNO`), 자식의 자식을 C(`C.MGR = B.EMPNO`) 로 두고 EMP 를 세 번 셀프 조인해 C 를 조회. ② 는 홍길동 본인만, ③ 은 자식까지만, ④ 는 ENAME 을 MGR 로 비교(ENAME 은 이름, MGR 은 매니저 번호)라 잘못된 비교.",
@@ -1092,10 +1092,10 @@ export const ROUND_55: QuizQuestion[] = [
     "number": 30,
     "title": "아래 EMP, DEPT 테이블 조인 SQL 중 결과가 다른 것은?",
     "options": [
-      "`SELECT * FROM EMP A INNER JOIN DEPT B ON (DEPT_NO);`",
-      "`SELECT * FROM EMP A INNER JOIN DEPT B ON A.DEPT_NO = B.DEPT_NO;`",
-      "`SELECT * FROM EMP A INNER JOIN DEPT B USING (DEPT_NO);`",
-      "`SELECT * FROM EMP A NATURAL JOIN DEPT B;`"
+      "SELECT * FROM EMP A INNER JOIN DEPT B ON (DEPT_NO);",
+      "SELECT * FROM EMP A INNER JOIN DEPT B ON A.DEPT_NO = B.DEPT_NO;",
+      "SELECT * FROM EMP A INNER JOIN DEPT B USING (DEPT_NO);",
+      "SELECT * FROM EMP A NATURAL JOIN DEPT B;"
     ],
     "correctIndex": 0,
     "explanation": "① `ON` 절에는 컬럼 비교식 (예: `A.DEPT_NO = B.DEPT_NO`) 이 와야 한다. `ON (DEPT_NO)` 처럼 컬럼명만 쓰면 구문 오류 (USING 절과 다름). ②③④ 는 모두 동일 컬럼명 `DEPT_NO` 로 정상 INNER JOIN 을 수행해 같은 결과를 낸다. 결과가 다른 (오류 발생) 것은 ①.",
@@ -1151,10 +1151,10 @@ export const ROUND_55: QuizQuestion[] = [
     "number": 31,
     "title": "계약이 없는 고객을 조회하는 SQL 로 적절한 것은?",
     "options": [
-      "`INNER JOIN`",
-      "`EXISTS`",
-      "`NOT EXISTS`",
-      "`COALESCE`"
+      "INNER JOIN",
+      "EXISTS",
+      "NOT EXISTS",
+      "COALESCE"
     ],
     "correctIndex": 2,
     "explanation": "계약 테이블에 매칭되는 행이 없는 고객만 선택해야 하므로 NOT EXISTS 구문이 적절하다.",
@@ -1262,10 +1262,10 @@ export const ROUND_55: QuizQuestion[] = [
     "number": 34,
     "title": "아래 주문 테이블에서 3 회 이상 주문한 고객을 조회하는 HAVING 절로 옳은 것은?",
     "options": [
-      "`HAVING COUNT(구매번호) >= 3`",
-      "`HAVING SUM(구매번호) >= 3`",
-      "`WHERE COUNT(구매번호) >= 3`",
-      "`HAVING 구매번호 = 3`"
+      "HAVING COUNT(구매번호) >= 3",
+      "HAVING SUM(구매번호) >= 3",
+      "WHERE COUNT(구매번호) >= 3",
+      "HAVING 구매번호 = 3"
     ],
     "correctIndex": 0,
     "explanation": "그룹 함수 결과를 필터링할 때는 `HAVING` 을 사용. 3 회 이상 주문 조건은 `COUNT(구매번호) >= 3`. ② SUM 은 합계라 의미 다름, ③ WHERE 절에는 집계 함수를 직접 쓸 수 없음, ④ 는 그룹 함수 없이 비교라 의미 안 맞음.",
@@ -1464,10 +1464,10 @@ export const ROUND_55: QuizQuestion[] = [
     "number": 40,
     "title": "아래 EMP 테이블에서 전체 합계와 부서별 합계를 함께 출력하는 윈도우 함수 조합으로 옳은 것은?",
     "options": [
-      "`SUM(SAL) OVER (), SUM(SAL) OVER (PARTITION BY DEPT)`",
-      "`SUM(SAL) OVER (PARTITION BY DEPT), SUM(SAL) OVER ()`",
-      "`SUM(SAL) OVER (ORDER BY DEPT), SUM(SAL) OVER ()`",
-      "`SUM(SAL), SUM(SAL) OVER (PARTITION BY DEPT)`"
+      "SUM(SAL) OVER (), SUM(SAL) OVER (PARTITION BY DEPT)",
+      "SUM(SAL) OVER (PARTITION BY DEPT), SUM(SAL) OVER ()",
+      "SUM(SAL) OVER (ORDER BY DEPT), SUM(SAL) OVER ()",
+      "SUM(SAL), SUM(SAL) OVER (PARTITION BY DEPT)"
     ],
     "correctIndex": 0,
     "explanation": "`OVER ()` 는 파티션 없이 전체 행에 대한 합계 = 전체 합계. `OVER (PARTITION BY DEPT)` 는 부서별 합계. 문제 순서가 \"전체 합계 → 부서별 합계\" 라 ① 이 정답. ② 는 순서 반대, ③ ORDER BY 는 누적합 의미, ④ `SUM(SAL)` 만 쓰면 일반 집계라 GROUP BY 필요.",

@@ -37,29 +37,49 @@
         {
           "type": "table",
           "caption": "고객 엔터티",
-          "headers": ["컬럼"],
+          "headers": [
+            "컬럼"
+          ],
           "rows": [
-            ["고객번호 (PK)"],
-            ["고객명"]
+            [
+              "고객번호 (PK)"
+            ],
+            [
+              "고객명"
+            ]
           ]
         },
         {
           "type": "table",
           "caption": "서비스이용 엔터티",
-          "headers": ["컬럼"],
+          "headers": [
+            "컬럼"
+          ],
           "rows": [
-            ["고객번호 (PK, FK)"],
-            ["서비스번호 (PK, FK)"],
-            ["이용일자 (PK)"]
+            [
+              "고객번호 (PK, FK)"
+            ],
+            [
+              "서비스번호 (PK, FK)"
+            ],
+            [
+              "이용일자 (PK)"
+            ]
           ]
         },
         {
           "type": "table",
           "caption": "서비스 엔터티",
-          "headers": ["컬럼"],
+          "headers": [
+            "컬럼"
+          ],
           "rows": [
-            ["서비스번호 (PK)"],
-            ["서비스명"]
+            [
+              "서비스번호 (PK)"
+            ],
+            [
+              "서비스명"
+            ]
           ]
         }
       ]
@@ -185,10 +205,10 @@
       "number": 11,
       "title": "ONLINE·OFFLINE 두 컬럼에 대해 첫 번째·두 번째 컬럼 집계와 두 컬럼 조합, 전체 집계가 모두 필요한 SQL 로 적절한 것은?",
       "options": [
-        "`CUBE(주문일자, 주문방법)`",
-        "`ROLLUP(주문일자, 주문방법)`",
-        "`GROUPING SETS(주문일자, 주문방법)`",
-        "`GROUP BY 주문일자, 주문방법`"
+        "CUBE(주문일자, 주문방법)",
+        "ROLLUP(주문일자, 주문방법)",
+        "GROUPING SETS(주문일자, 주문방법)",
+        "GROUP BY 주문일자, 주문방법"
       ],
       "correctIndex": 0,
       "explanation": "CUBE는 지정한 컬럼들로 만들 수 있는 모든 조합의 소계와 총계를 한 번에 만들어 줍니다. CUBE(A, B)는 (A, B), (A), (B), () 네 가지 그룹을 모두 반환합니다. 문제는 첫 컬럼·두 번째 컬럼 각각 집계, 두 컬럼 조합 집계, 전체 집계까지 모두 필요하다고 했으므로 CUBE가 적합합니다. ROLLUP은 (A, B), (A), ()만 만들고 (B) 단독은 만들지 않으며, GROUPING SETS는 명시한 그룹만 만들고, 단순 GROUP BY는 (A, B) 한 종류만 만듭니다. 정답은 ①번입니다."
@@ -198,10 +218,10 @@
       "number": 12,
       "title": "첫 번째 컬럼 집계, 첫 번째+두 번째 컬럼 집계, 전체 집계가 필요한 SQL 로 적절한 것은?",
       "options": [
-        "`CUBE(평가항목, 평가)`",
-        "`ROLLUP(평가항목, 평가)`",
-        "`GROUPING SETS((평가항목, 평가), (평가항목), (평가))`",
-        "`GROUP BY 평가항목`"
+        "CUBE(평가항목, 평가)",
+        "ROLLUP(평가항목, 평가)",
+        "GROUPING SETS((평가항목, 평가), (평가항목), (평가))",
+        "GROUP BY 평가항목"
       ],
       "correctIndex": 1,
       "explanation": "ROLLUP(A, B)는 왼쪽부터 점차 줄여가며 (A, B), (A), () 세 가지 그룹을 만듭니다. 문제는 첫 컬럼 집계, 두 컬럼 조합 집계, 전체 집계가 필요하므로 정확히 ROLLUP이 만드는 세 가지 그룹과 일치합니다. CUBE는 (B) 단독까지 추가로 만들어 결과 행이 더 많아 의도에 맞지 않습니다. 정답은 ②번입니다."
@@ -263,10 +283,10 @@
       "number": 17,
       "title": "번호가 없으면 1을 반환하고 있으면 MAX(번호)+1 을 반환하는 SQL 로 동일한 결과의 쿼리는?",
       "options": [
-        "`SELECT COALESCE(MAX(번호), 1) FROM T;`",
-        "`SELECT COALESCE(MAX(번호) + 1, 1) FROM T;`",
-        "`SELECT NVL(MAX(번호) + 1, 0) FROM T;`",
-        "`SELECT NULLIF(MAX(번호), 1) FROM T;`"
+        "SELECT COALESCE(MAX(번호), 1) FROM T;",
+        "SELECT COALESCE(MAX(번호) + 1, 1) FROM T;",
+        "SELECT NVL(MAX(번호) + 1, 0) FROM T;",
+        "SELECT NULLIF(MAX(번호), 1) FROM T;"
       ],
       "correctIndex": 1,
       "explanation": "원본 SQL `NVL(MAX(번호), 1) + 1`은 데이터가 없으면 NVL이 1을 반환하고 +1이 더해져 결과는 2가, 데이터가 있으면 MAX(번호)+1이 됩니다. 같은 형태를 만들려면 `+1`을 안쪽에 넣어 NULL일 때 1을 반환하도록 한 ②번 `COALESCE(MAX(번호)+1, 1)`이 가장 가깝습니다. ① COALESCE(MAX, 1)은 +1이 빠져 있고, ③ NVL(MAX+1, 0)은 NULL일 때 0, ④ NULLIF는 의미 자체가 다릅니다. 시험 문항 의도상 ②가 정답입니다. 다만 데이터가 없을 때 원본은 2를, ②는 1을 돌려준다는 미세한 차이가 있어 엄밀히 동일하지는 않다는 점을 함께 기억해 두면 좋습니다.",
@@ -295,10 +315,10 @@
       "number": 19,
       "title": "아래 두 테이블 A, B 조인 결과가 나머지와 다른 SQL 은?",
       "options": [
-        "`SELECT * FROM A NATURAL JOIN B;`",
-        "`SELECT * FROM A JOIN B USING(SRN_NO);`",
-        "`SELECT * FROM A INNER JOIN B;`",
-        "`SELECT * FROM A, B WHERE A.SRN_NO = B.SRN_NO;`"
+        "SELECT * FROM A NATURAL JOIN B;",
+        "SELECT * FROM A JOIN B USING(SRN_NO);",
+        "SELECT * FROM A INNER JOIN B;",
+        "SELECT * FROM A, B WHERE A.SRN_NO = B.SRN_NO;"
       ],
       "correctIndex": 2,
       "explanation": "① `NATURAL JOIN` 과 ② `USING` 은 동일 컬럼명을 자동·수동으로 잡아 INNER JOIN 을 수행하므로 결과가 같다. ④ 는 같은 조건을 명시한 동등 조인. 그러나 ③ 은 `ON` 절이 빠진 `INNER JOIN` 으로 Oracle 에서는 구문 오류가 나거나 일부 환경에서는 CROSS JOIN 형태로 해석되어 결과 행이 폭증한다. 결과가 다른 것은 ③."
@@ -334,10 +354,10 @@
       "number": 22,
       "title": "아래 PLAYER 테이블에 대한 SQL 과 다른 결과를 반환하는 것은? (각 팀의 최단신 선수의 PNAME 을 조회)",
       "options": [
-        "`SELECT P.PNAME FROM PLAYER P WHERE EXISTS (SELECT 1 FROM PLAYER X WHERE X.TEAM_ID = P.TEAM_ID AND X.HEIGHT = P.HEIGHT AND X.HEIGHT = (SELECT MIN(HEIGHT) FROM PLAYER WHERE TEAM_ID = P.TEAM_ID));`",
-        "`SELECT P.PNAME FROM PLAYER P, (SELECT TEAM_ID, MIN(HEIGHT) AS MH FROM PLAYER GROUP BY TEAM_ID) M WHERE P.TEAM_ID = M.TEAM_ID AND P.HEIGHT = M.MH;`",
-        "`SELECT P.PNAME FROM PLAYER P JOIN PLAYER X ON P.TEAM_ID = X.TEAM_ID GROUP BY P.PNAME, P.TEAM_ID, P.HEIGHT HAVING P.HEIGHT = MIN(X.HEIGHT);`",
-        "`SELECT P.PNAME FROM PLAYER P WHERE EXISTS (SELECT 1 FROM PLAYER X WHERE X.TEAM_ID = P.TEAM_ID);`"
+        "SELECT P.PNAME FROM PLAYER P WHERE EXISTS (SELECT 1 FROM PLAYER X WHERE X.TEAM_ID = P.TEAM_ID AND X.HEIGHT = P.HEIGHT AND X.HEIGHT = (SELECT MIN(HEIGHT) FROM PLAYER WHERE TEAM_ID = P.TEAM_ID));",
+        "SELECT P.PNAME FROM PLAYER P, (SELECT TEAM_ID, MIN(HEIGHT) AS MH FROM PLAYER GROUP BY TEAM_ID) M WHERE P.TEAM_ID = M.TEAM_ID AND P.HEIGHT = M.MH;",
+        "SELECT P.PNAME FROM PLAYER P JOIN PLAYER X ON P.TEAM_ID = X.TEAM_ID GROUP BY P.PNAME, P.TEAM_ID, P.HEIGHT HAVING P.HEIGHT = MIN(X.HEIGHT);",
+        "SELECT P.PNAME FROM PLAYER P WHERE EXISTS (SELECT 1 FROM PLAYER X WHERE X.TEAM_ID = P.TEAM_ID);"
       ],
       "correctIndex": 3,
       "explanation": "원본 SQL 은 `(TEAM_ID, HEIGHT) IN (SELECT TEAM_ID, MIN(HEIGHT) ...)` 으로 \"각 팀의 최단신 선수\" 를 조회한다. ① 상관 서브쿼리, ② 인라인 뷰 조인, ③ JOIN + HAVING 형태로 모두 같은 결과를 낸다. ④ 는 단순히 \"같은 TEAM_ID 행이 존재하는지\" 만 확인하므로 PLAYER 테이블의 거의 모든 선수가 반환되어 결과가 다르다.",
@@ -551,20 +571,56 @@
         {
           "type": "table",
           "caption": "A 테이블",
-          "headers": ["COL1"],
-          "rows": [["1"], ["2"], ["3"]]
+          "headers": [
+            "COL1"
+          ],
+          "rows": [
+            [
+              "1"
+            ],
+            [
+              "2"
+            ],
+            [
+              "3"
+            ]
+          ]
         },
         {
           "type": "table",
           "caption": "B 테이블",
-          "headers": ["COL1"],
-          "rows": [["3"], ["4"], ["5"]]
+          "headers": [
+            "COL1"
+          ],
+          "rows": [
+            [
+              "3"
+            ],
+            [
+              "4"
+            ],
+            [
+              "5"
+            ]
+          ]
         },
         {
           "type": "table",
           "caption": "C 테이블",
-          "headers": ["COL1"],
-          "rows": [["2"], ["4"], ["6"]]
+          "headers": [
+            "COL1"
+          ],
+          "rows": [
+            [
+              "2"
+            ],
+            [
+              "4"
+            ],
+            [
+              "6"
+            ]
+          ]
         },
         {
           "type": "sql",
@@ -588,19 +644,37 @@
         {
           "type": "table",
           "caption": "A 테이블 (TGT)",
-          "headers": ["ID", "V"],
+          "headers": [
+            "ID",
+            "V"
+          ],
           "rows": [
-            ["1", "0"],
-            ["2", "0"]
+            [
+              "1",
+              "0"
+            ],
+            [
+              "2",
+              "0"
+            ]
           ]
         },
         {
           "type": "table",
           "caption": "B 테이블 (SRC)",
-          "headers": ["ID", "V"],
+          "headers": [
+            "ID",
+            "V"
+          ],
           "rows": [
-            ["1", "5"],
-            ["3", "7"]
+            [
+              "1",
+              "5"
+            ],
+            [
+              "3",
+              "7"
+            ]
           ]
         },
         {
@@ -614,10 +688,10 @@
       "number": 30,
       "title": "최대값을 조회하는 SQL 로 옳은 것은?",
       "options": [
-        "`SELECT MAX(COL) FROM T WHERE ROWNUM = 1;`",
-        "`SELECT * FROM (SELECT COL FROM T ORDER BY COL DESC) WHERE ROWNUM = 1;`",
-        "`SELECT COL FROM T ORDER BY COL DESC WHERE ROWNUM = 1;`",
-        "`SELECT COL FROM T WHERE ROWNUM = (SELECT MAX(COL) FROM T);`"
+        "SELECT MAX(COL) FROM T WHERE ROWNUM = 1;",
+        "SELECT * FROM (SELECT COL FROM T ORDER BY COL DESC) WHERE ROWNUM = 1;",
+        "SELECT COL FROM T ORDER BY COL DESC WHERE ROWNUM = 1;",
+        "SELECT COL FROM T WHERE ROWNUM = (SELECT MAX(COL) FROM T);"
       ],
       "correctIndex": 1,
       "explanation": "ROWNUM은 결과 행에 1부터 차례로 번호를 매기는 가상 컬럼입니다. 그러나 ROWNUM은 ORDER BY가 적용되기 전에 매겨지므로 단순히 `WHERE ROWNUM = 1`만 쓰면 정렬이 무시된 첫 행이 나와 최대값이 보장되지 않습니다. 따라서 인라인 뷰 안에서 먼저 ORDER BY DESC로 정렬해 둔 뒤, 바깥에서 ROWNUM = 1로 첫 행을 잘라야 안전하게 최대값을 얻습니다. 정답은 ②번입니다. ① MAX 함수만으로도 가능하지만, 본 문항이 묻는 것은 ROWNUM 사용 패턴입니다."
@@ -816,10 +890,10 @@
       "number": 38,
       "title": "사원과 차상위 매니저 정보를 함께 조회하는 SQL 로 옳은 것은?",
       "options": [
-        "`EMP A INNER JOIN EMP B ON A.MGR_NO = B.EMP_NO`",
-        "`EMP A INNER JOIN EMP B ON A.EMP_NO = B.EMP_NO`",
-        "`EMP A LEFT OUTER JOIN EMP B ON A.MGR_NO = B.EMP_NO`",
-        "`EMP A RIGHT OUTER JOIN EMP B ON A.MGR_NO = B.EMP_NO`"
+        "EMP A INNER JOIN EMP B ON A.MGR_NO = B.EMP_NO",
+        "EMP A INNER JOIN EMP B ON A.EMP_NO = B.EMP_NO",
+        "EMP A LEFT OUTER JOIN EMP B ON A.MGR_NO = B.EMP_NO",
+        "EMP A RIGHT OUTER JOIN EMP B ON A.MGR_NO = B.EMP_NO"
       ],
       "correctIndex": 2,
       "explanation": "사원 자신과 그 매니저 정보를 함께 보려면 EMP 테이블을 자기 자신과 조인하는 셀프 조인을 합니다. 이때 사원 A의 매니저 번호(A.MGR_NO)가 매니저 B의 사원 번호(B.EMP_NO)와 일치해야 하므로 ON 조건이 정해집니다. 매니저가 없는 사원(예: CEO)도 결과에 포함시키려면 LEFT OUTER JOIN을 써야 합니다. 정답은 ③번입니다."
@@ -849,10 +923,10 @@
       "number": 40,
       "title": "아래 네 SQL 중 결과가 나머지와 다른 것은?",
       "options": [
-        "`LPAD('BCD', 3, 'A')`",
-        "`RTRIM('EBCDE', 'E')`",
-        "`SUBSTR('ABCDE', 2, 3)`",
-        "`CONCAT(CONCAT(NULL, 'BC'), 'E')`"
+        "LPAD('BCD', 3, 'A')",
+        "RTRIM('EBCDE', 'E')",
+        "SUBSTR('ABCDE', 2, 3)",
+        "CONCAT(CONCAT(NULL, 'BC'), 'E')"
       ],
       "correctIndex": 1,
       "explanation": "각 함수의 결과를 따져 봅니다. ① LPAD('BCD', 3, 'A')는 이미 길이가 3이라 패딩 없이 'BCD'를 그대로 반환. ③ SUBSTR('ABCDE', 2, 3) = 'BCD'. ④ CONCAT(CONCAT(NULL, 'BC'), 'E') = 'BCE' (NULL은 빈 문자열로 처리). 그러나 ② RTRIM('EBCDE', 'E')는 오른쪽 끝의 'E'만 잘라 'EBCD'가 되고 앞쪽 'E'는 그대로 남습니다. 결과 형태가 명확히 다른 것은 ②번입니다."
@@ -899,10 +973,10 @@
       "number": 42,
       "title": "아래 고객·주문 테이블에 대해 외래키 참조 무결성 오류가 발생하는 구문은?",
       "options": [
-        "`INSERT INTO 주문 (주문ID, 고객ID) VALUES (501, 'C001');`",
-        "`INSERT INTO 고객 VALUES ('C004', '신규'); INSERT INTO 주문 VALUES (502, 'C004');`",
-        "`UPDATE 주문 SET 주문일 = SYSDATE WHERE 주문ID = 501;`",
-        "`UPDATE 주문 SET 고객ID = 'C999' WHERE 주문ID = 501;`"
+        "INSERT INTO 주문 (주문ID, 고객ID) VALUES (501, 'C001');",
+        "INSERT INTO 고객 VALUES ('C004', '신규'); INSERT INTO 주문 VALUES (502, 'C004');",
+        "UPDATE 주문 SET 주문일 = SYSDATE WHERE 주문ID = 501;",
+        "UPDATE 주문 SET 고객ID = 'C999' WHERE 주문ID = 501;"
       ],
       "correctIndex": 3,
       "explanation": "외래키 (FK) 는 부모 테이블 (고객) 의 PK 를 참조한다는 제약이라, 자식 테이블 (주문) 의 `고객ID` 값은 반드시 고객 테이블에 존재해야 한다. ① C001 은 고객에 존재 → 정상, ② 새 고객 C004 추가 후 그 ID 참조 → 정상, ③ 고객ID 는 그대로 두고 주문일만 변경 → FK 무관. ④ 'C999' 는 고객 테이블에 없어 ORA-02291 (참조 무결성 위배) 오류 발생.",
@@ -910,20 +984,44 @@
         {
           "type": "table",
           "caption": "고객 테이블 (PK: 고객ID)",
-          "headers": ["고객ID", "이름"],
+          "headers": [
+            "고객ID",
+            "이름"
+          ],
           "rows": [
-            ["C001", "홍길동"],
-            ["C002", "이순신"],
-            ["C003", "강감찬"]
+            [
+              "C001",
+              "홍길동"
+            ],
+            [
+              "C002",
+              "이순신"
+            ],
+            [
+              "C003",
+              "강감찬"
+            ]
           ]
         },
         {
           "type": "table",
           "caption": "주문 테이블 (PK: 주문ID, FK: 고객ID → 고객.고객ID)",
-          "headers": ["주문ID", "고객ID", "주문일"],
+          "headers": [
+            "주문ID",
+            "고객ID",
+            "주문일"
+          ],
           "rows": [
-            ["501", "C001", "2026-04-10"],
-            ["502", "C002", "2026-04-12"]
+            [
+              "501",
+              "C001",
+              "2026-04-10"
+            ],
+            [
+              "502",
+              "C002",
+              "2026-04-12"
+            ]
           ]
         }
       ]
@@ -935,7 +1033,7 @@
       "options": [
         "공집합 (행 0건)",
         "ID 별 COUNT 가 모두 표시된 다중 행",
-        "`COUNT(*) = 300` 인 한 행",
+        "COUNT(*) = 300 인 한 행",
         "ORA-00937 등 그룹 함수 오류"
       ],
       "correctIndex": 2,
@@ -943,11 +1041,23 @@
         {
           "type": "table",
           "caption": "T 테이블 (ID 별 행 수 요약)",
-          "headers": ["ID", "행 수"],
+          "headers": [
+            "ID",
+            "행 수"
+          ],
           "rows": [
-            ["A", "300"],
-            ["B", "1"],
-            ["C", "1"]
+            [
+              "A",
+              "300"
+            ],
+            [
+              "B",
+              "1"
+            ],
+            [
+              "C",
+              "1"
+            ]
           ]
         },
         {

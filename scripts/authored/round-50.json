@@ -160,20 +160,53 @@
         {
           "type": "table",
           "caption": "STUDENT 테이블",
-          "headers": ["컬럼"],
-          "rows": [["학과"], ["학번 (PK)"], ["강좌"]]
+          "headers": [
+            "컬럼"
+          ],
+          "rows": [
+            [
+              "학과"
+            ],
+            [
+              "학번 (PK)"
+            ],
+            [
+              "강좌"
+            ]
+          ]
         },
         {
           "type": "table",
           "caption": "CLASS 테이블",
-          "headers": ["컬럼"],
-          "rows": [["강좌번호 (PK)"], ["..."]]
+          "headers": [
+            "컬럼"
+          ],
+          "rows": [
+            [
+              "강좌번호 (PK)"
+            ],
+            [
+              "..."
+            ]
+          ]
         },
         {
           "type": "table",
           "caption": "ENROLL 테이블",
-          "headers": ["컬럼"],
-          "rows": [["학번 (PK, FK)"], ["강좌번호 (PK, FK)"], ["학점"]]
+          "headers": [
+            "컬럼"
+          ],
+          "rows": [
+            [
+              "학번 (PK, FK)"
+            ],
+            [
+              "강좌번호 (PK, FK)"
+            ],
+            [
+              "학점"
+            ]
+          ]
         }
       ]
     },
@@ -193,12 +226,27 @@
         {
           "type": "table",
           "caption": "TBL 테이블",
-          "headers": ["C1", "C2"],
+          "headers": [
+            "C1",
+            "C2"
+          ],
           "rows": [
-            ["A", "100"],
-            ["B", "200"],
-            ["B", "100"],
-            ["NULL", "200"]
+            [
+              "A",
+              "100"
+            ],
+            [
+              "B",
+              "200"
+            ],
+            [
+              "B",
+              "100"
+            ],
+            [
+              "NULL",
+              "200"
+            ]
           ]
         },
         {
@@ -294,9 +342,13 @@
         {
           "type": "table",
           "caption": "T 테이블",
-          "headers": ["STR"],
+          "headers": [
+            "STR"
+          ],
           "rows": [
-            ["abcdefg"]
+            [
+              "abcdefg"
+            ]
           ]
         },
         {
@@ -353,12 +405,32 @@
         {
           "type": "table",
           "caption": "카테고리 테이블",
-          "headers": ["카테고리번호", "카테고리명", "상위카테고리번호"],
+          "headers": [
+            "카테고리번호",
+            "카테고리명",
+            "상위카테고리번호"
+          ],
           "rows": [
-            ["1", "전체", "NULL"],
-            ["2", "디지털", "1"],
-            ["5", "노트북", "2"],
-            ["11", "게이밍 노트북", "5"]
+            [
+              "1",
+              "전체",
+              "NULL"
+            ],
+            [
+              "2",
+              "디지털",
+              "1"
+            ],
+            [
+              "5",
+              "노트북",
+              "2"
+            ],
+            [
+              "11",
+              "게이밍 노트북",
+              "5"
+            ]
           ]
         },
         {
@@ -368,12 +440,32 @@
         {
           "type": "table",
           "caption": "출력 결과 (역방향 전개)",
-          "headers": ["카테고리번호", "카테고리명", "LEVEL"],
+          "headers": [
+            "카테고리번호",
+            "카테고리명",
+            "LEVEL"
+          ],
           "rows": [
-            ["11", "게이밍 노트북", "1"],
-            ["5", "노트북", "2"],
-            ["2", "디지털", "3"],
-            ["1", "전체", "4"]
+            [
+              "11",
+              "게이밍 노트북",
+              "1"
+            ],
+            [
+              "5",
+              "노트북",
+              "2"
+            ],
+            [
+              "2",
+              "디지털",
+              "3"
+            ],
+            [
+              "1",
+              "전체",
+              "4"
+            ]
           ]
         }
       ]
@@ -383,10 +475,10 @@
       "number": 18,
       "title": "아래 집계 결과(소계 행에서 NULL 이 등장하는 패턴) 에 해당하는 GROUP BY 절은?",
       "options": [
-        "`ROLLUP(A, B)`",
-        "`GROUPING SETS((A, B))`",
-        "`GROUP BY A, B`",
-        "`CUBE(A, B)`"
+        "ROLLUP(A, B)",
+        "GROUPING SETS((A, B))",
+        "GROUP BY A, B",
+        "CUBE(A, B)"
       ],
       "correctIndex": 3,
       "explanation": "CUBE 는 (A,B), (A), (B), () 의 모든 부분집합을 반환하므로 (A=A1, B=NULL), (A=NULL, B=B1), (A=NULL, B=NULL) 행이 모두 등장한다. ROLLUP 은 (A) 소계와 () 총계만, GROUPING SETS((A,B)) 는 세부 행만, GROUP BY A,B 는 소계 자체가 없다.",
@@ -394,12 +486,27 @@
         {
           "type": "table",
           "caption": "출력 결과 (A, B 그룹 키)",
-          "headers": ["A", "B"],
+          "headers": [
+            "A",
+            "B"
+          ],
           "rows": [
-            ["A1", "B1"],
-            ["A1", "NULL"],
-            ["NULL", "B1"],
-            ["NULL", "NULL"]
+            [
+              "A1",
+              "B1"
+            ],
+            [
+              "A1",
+              "NULL"
+            ],
+            [
+              "NULL",
+              "B1"
+            ],
+            [
+              "NULL",
+              "NULL"
+            ]
           ]
         }
       ]
@@ -422,10 +529,10 @@
       "number": 20,
       "title": "아래 T 테이블에서 NAME 별 그룹의 최소 ID 만 남기고 나머지를 삭제하는 SQL 로 옳은 것은?",
       "options": [
-        "`DELETE FROM T WHERE ID NOT IN (SELECT MIN(ID) FROM T GROUP BY NAME);`",
-        "`DELETE FROM T WHERE ID IN (SELECT MAX(ID) FROM T GROUP BY NAME);`",
-        "`DELETE FROM T WHERE ID = MIN(ID);`",
-        "`DELETE FROM T GROUP BY NAME HAVING ID = MIN(ID);`"
+        "DELETE FROM T WHERE ID NOT IN (SELECT MIN(ID) FROM T GROUP BY NAME);",
+        "DELETE FROM T WHERE ID IN (SELECT MAX(ID) FROM T GROUP BY NAME);",
+        "DELETE FROM T WHERE ID = MIN(ID);",
+        "DELETE FROM T GROUP BY NAME HAVING ID = MIN(ID);"
       ],
       "correctIndex": 0,
       "explanation": "그룹별 MIN(ID) 를 NOT IN 으로 제외하고 나머지를 삭제하면 이름별 최소 ID 만 남는다. ② 는 MAX 만 삭제하고, ③ 은 비집계 컨텍스트에서 MIN 사용 불가, ④ 는 DELETE 에 GROUP BY/HAVING 직접 사용 불가.",
@@ -433,13 +540,31 @@
         {
           "type": "table",
           "caption": "T 테이블",
-          "headers": ["ID", "NAME"],
+          "headers": [
+            "ID",
+            "NAME"
+          ],
           "rows": [
-            ["100", "KIM"],
-            ["200", "PARK"],
-            ["300", "KANG"],
-            ["400", "KIM"],
-            ["500", "KANG"]
+            [
+              "100",
+              "KIM"
+            ],
+            [
+              "200",
+              "PARK"
+            ],
+            [
+              "300",
+              "KANG"
+            ],
+            [
+              "400",
+              "KIM"
+            ],
+            [
+              "500",
+              "KANG"
+            ]
           ]
         }
       ]
@@ -708,10 +833,10 @@
       "number": 37,
       "title": "아래 부서 테이블에서 부서코드 11 → 7 → 2 의 계층 결과를 반환하는 SQL 로 옳은 것은?",
       "options": [
-        "`START WITH 부서코드=2 CONNECT BY 상위부서코드 = PRIOR 부서코드`",
-        "`START WITH 부서코드=2 CONNECT BY PRIOR 상위부서코드 = 부서코드`",
-        "`START WITH 부서코드=11 CONNECT BY 상위부서코드 = PRIOR 부서코드`",
-        "`START WITH 부서코드=11 CONNECT BY PRIOR 상위부서코드 = 부서코드`"
+        "START WITH 부서코드=2 CONNECT BY 상위부서코드 = PRIOR 부서코드",
+        "START WITH 부서코드=2 CONNECT BY PRIOR 상위부서코드 = 부서코드",
+        "START WITH 부서코드=11 CONNECT BY 상위부서코드 = PRIOR 부서코드",
+        "START WITH 부서코드=11 CONNECT BY PRIOR 상위부서코드 = 부서코드"
       ],
       "correctIndex": 3,
       "explanation": "부서 11 에서 시작해 자식→부모 방향(역방향) 으로 2 까지 거슬러 올라간다. PRIOR 상위부서코드 = 부서코드 형태가 자식 행의 상위부서코드 가 부모 행의 부서코드와 매칭되어 역방향 전개가 이루어진다.",
@@ -719,11 +844,23 @@
         {
           "type": "table",
           "caption": "부서 테이블",
-          "headers": ["부서코드", "상위부서코드"],
+          "headers": [
+            "부서코드",
+            "상위부서코드"
+          ],
           "rows": [
-            ["11", "7"],
-            ["7", "2"],
-            ["2", "NULL"]
+            [
+              "11",
+              "7"
+            ],
+            [
+              "7",
+              "2"
+            ],
+            [
+              "2",
+              "NULL"
+            ]
           ]
         }
       ]
@@ -744,20 +881,56 @@
         {
           "type": "table",
           "caption": "배우 테이블",
-          "headers": ["컬럼"],
-          "rows": [["배우번호 (PK)"], ["배우명"], ["성별"]]
+          "headers": [
+            "컬럼"
+          ],
+          "rows": [
+            [
+              "배우번호 (PK)"
+            ],
+            [
+              "배우명"
+            ],
+            [
+              "성별"
+            ]
+          ]
         },
         {
           "type": "table",
           "caption": "영화 테이블",
-          "headers": ["컬럼"],
-          "rows": [["영화번호 (PK)"], ["영화명"], ["제작년도"]]
+          "headers": [
+            "컬럼"
+          ],
+          "rows": [
+            [
+              "영화번호 (PK)"
+            ],
+            [
+              "영화명"
+            ],
+            [
+              "제작년도"
+            ]
+          ]
         },
         {
           "type": "table",
           "caption": "출연 테이블",
-          "headers": ["컬럼"],
-          "rows": [["배우번호 (PK, FK)"], ["영화번호 (PK, FK)"], ["출연료"]]
+          "headers": [
+            "컬럼"
+          ],
+          "rows": [
+            [
+              "배우번호 (PK, FK)"
+            ],
+            [
+              "영화번호 (PK, FK)"
+            ],
+            [
+              "출연료"
+            ]
+          ]
         }
       ]
     },
@@ -777,13 +950,31 @@
         {
           "type": "table",
           "caption": "EMP 테이블",
-          "headers": ["ID", "급여"],
+          "headers": [
+            "ID",
+            "급여"
+          ],
           "rows": [
-            ["101", "30000"],
-            ["102", "35000"],
-            ["103", "4000"],
-            ["104", "35000"],
-            ["105", "4000"]
+            [
+              "101",
+              "30000"
+            ],
+            [
+              "102",
+              "35000"
+            ],
+            [
+              "103",
+              "4000"
+            ],
+            [
+              "104",
+              "35000"
+            ],
+            [
+              "105",
+              "4000"
+            ]
           ]
         },
         {
@@ -821,12 +1012,27 @@
         {
           "type": "table",
           "caption": "TBL 테이블",
-          "headers": ["C1", "C2"],
+          "headers": [
+            "C1",
+            "C2"
+          ],
           "rows": [
-            ["A", "100"],
-            ["B", "200"],
-            ["B", "100"],
-            ["NULL", "200"]
+            [
+              "A",
+              "100"
+            ],
+            [
+              "B",
+              "200"
+            ],
+            [
+              "B",
+              "100"
+            ],
+            [
+              "NULL",
+              "200"
+            ]
           ]
         },
         {
@@ -851,20 +1057,41 @@
         {
           "type": "table",
           "caption": "T1",
-          "headers": ["COL", "VAL1"],
+          "headers": [
+            "COL",
+            "VAL1"
+          ],
           "rows": [
-            ["A", "10"],
-            ["B", "20"],
-            ["C", "30"]
+            [
+              "A",
+              "10"
+            ],
+            [
+              "B",
+              "20"
+            ],
+            [
+              "C",
+              "30"
+            ]
           ]
         },
         {
           "type": "table",
           "caption": "T2",
-          "headers": ["COL", "VAL2"],
+          "headers": [
+            "COL",
+            "VAL2"
+          ],
           "rows": [
-            ["A", "100"],
-            ["B", "200"]
+            [
+              "A",
+              "100"
+            ],
+            [
+              "B",
+              "200"
+            ]
           ]
         }
       ]
@@ -885,12 +1112,37 @@
         {
           "type": "table",
           "caption": "주문 테이블",
-          "headers": ["회원번호", "회원코드", "물건", "금액"],
+          "headers": [
+            "회원번호",
+            "회원코드",
+            "물건",
+            "금액"
+          ],
           "rows": [
-            ["1001", "A", "1", "100"],
-            ["1001", "B", "1", "200"],
-            ["2102", "A", "1", "NULL"],
-            ["2102", "B", "NULL", "300"]
+            [
+              "1001",
+              "A",
+              "1",
+              "100"
+            ],
+            [
+              "1001",
+              "B",
+              "1",
+              "200"
+            ],
+            [
+              "2102",
+              "A",
+              "1",
+              "NULL"
+            ],
+            [
+              "2102",
+              "B",
+              "NULL",
+              "300"
+            ]
           ]
         },
         {
@@ -915,9 +1167,13 @@
         {
           "type": "table",
           "caption": "T 테이블 (초기 상태)",
-          "headers": ["VAL"],
+          "headers": [
+            "VAL"
+          ],
           "rows": [
-            ["(empty)"]
+            [
+              "(empty)"
+            ]
           ]
         },
         {
@@ -927,11 +1183,19 @@
         {
           "type": "table",
           "caption": "최종 T 상태",
-          "headers": ["VAL"],
+          "headers": [
+            "VAL"
+          ],
           "rows": [
-            ["4"],
-            ["2"],
-            ["3"]
+            [
+              "4"
+            ],
+            [
+              "2"
+            ],
+            [
+              "3"
+            ]
           ]
         }
       ]
@@ -952,20 +1216,41 @@
         {
           "type": "table",
           "caption": "T1",
-          "headers": ["COL", "VAL1"],
+          "headers": [
+            "COL",
+            "VAL1"
+          ],
           "rows": [
-            ["A", "10"],
-            ["B", "20"],
-            ["C", "30"]
+            [
+              "A",
+              "10"
+            ],
+            [
+              "B",
+              "20"
+            ],
+            [
+              "C",
+              "30"
+            ]
           ]
         },
         {
           "type": "table",
           "caption": "T2",
-          "headers": ["COL", "VAL2"],
+          "headers": [
+            "COL",
+            "VAL2"
+          ],
           "rows": [
-            ["A", "100"],
-            ["B", "200"]
+            [
+              "A",
+              "100"
+            ],
+            [
+              "B",
+              "200"
+            ]
           ]
         }
       ]
@@ -1031,11 +1316,23 @@
         {
           "type": "table",
           "caption": "매출 테이블",
-          "headers": ["행", "금액"],
+          "headers": [
+            "행",
+            "금액"
+          ],
           "rows": [
-            ["1", "2"],
-            ["2", "700"],
-            ["3", "600"]
+            [
+              "1",
+              "2"
+            ],
+            [
+              "2",
+              "700"
+            ],
+            [
+              "3",
+              "600"
+            ]
           ]
         },
         {
@@ -1045,11 +1342,27 @@
         {
           "type": "table",
           "caption": "출력 결과 (LAG 컬럼이 정답의 ㄱ/ㄴ 위치)",
-          "headers": ["행", "금액", "LAG(금액, 1)"],
+          "headers": [
+            "행",
+            "금액",
+            "LAG(금액, 1)"
+          ],
           "rows": [
-            ["1", "2", "NULL"],
-            ["2", "700", "(ㄱ)"],
-            ["3", "600", "(ㄴ)"]
+            [
+              "1",
+              "2",
+              "NULL"
+            ],
+            [
+              "2",
+              "700",
+              "(ㄱ)"
+            ],
+            [
+              "3",
+              "600",
+              "(ㄴ)"
+            ]
           ]
         }
       ]

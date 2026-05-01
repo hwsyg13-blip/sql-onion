@@ -218,9 +218,9 @@ export const ROUND_51: QuizQuestion[] = [
     "number": 12,
     "title": "아래 일자별 매출 데이터에 대한 누적합 쿼리 중 \"일자별\" 누적합을 얻을 수 없는 것은?",
     "options": [
-      "`SUM(금액) OVER (ORDER BY 일자)`",
-      "`SUM(금액) OVER (ORDER BY 일자 ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW)`",
-      "`SUM(금액) OVER (ORDER BY 일자 RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW)`",
+      "SUM(금액) OVER (ORDER BY 일자)",
+      "SUM(금액) OVER (ORDER BY 일자 ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW)",
+      "SUM(금액) OVER (ORDER BY 일자 RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW)",
       "서브쿼리를 이용한 일자별 누적합 계산"
     ],
     "correctIndex": 1,
@@ -845,10 +845,10 @@ export const ROUND_51: QuizQuestion[] = [
     "number": 29,
     "title": "아래 EMP 테이블에 대해 다음 네 SQL 을 수행한 RNK 결과 중 나머지와 다른 것은?",
     "options": [
-      "`RANK() OVER (ORDER BY SAL DESC)`",
-      "`DENSE_RANK() OVER (ORDER BY SAL DESC)`",
-      "`ROW_NUMBER() OVER (ORDER BY SAL DESC)`",
-      "`NTILE(4) OVER (ORDER BY SAL DESC)`"
+      "RANK() OVER (ORDER BY SAL DESC)",
+      "DENSE_RANK() OVER (ORDER BY SAL DESC)",
+      "ROW_NUMBER() OVER (ORDER BY SAL DESC)",
+      "NTILE(4) OVER (ORDER BY SAL DESC)"
     ],
     "correctIndex": 1,
     "explanation": "EMP 데이터에 동일 SAL이 두 행 있을 때:\n- RANK: 1, 2, 2, 4 (동률 다음 순위 건너뜀)\n- DENSE_RANK: 1, 2, 2, 3 (다음 순위 건너뛰지 않음)\n- ROW_NUMBER: 1, 2, 3, 4 (동률 무관 순차)\n- NTILE(4): 1, 2, 3, 4 (4개 그룹 균등 분배)\n\n결과: ②(DENSE_RANK)만 1, 2, 2, 3을 반환하고 나머지는 모두 4라는 마지막 값을 가진다.",
@@ -891,10 +891,10 @@ export const ROUND_51: QuizQuestion[] = [
     "number": 30,
     "title": "아래 두 테이블에 대한 네 SQL 중 결과가 다른 하나는?",
     "options": [
-      "`SELECT COL1 FROM T1 MINUS SELECT COL1 FROM T2;`",
-      "`SELECT T1.COL1 FROM T1, T2 WHERE T1.COL1 <> T2.COL1;`",
-      "`SELECT COL1 FROM T1 WHERE COL1 NOT IN (SELECT COL1 FROM T2);`",
-      "`SELECT T1.COL1 FROM T1 LEFT JOIN T2 ON T1.COL1 = T2.COL1 WHERE T2.COL1 IS NULL;`"
+      "SELECT COL1 FROM T1 MINUS SELECT COL1 FROM T2;",
+      "SELECT T1.COL1 FROM T1, T2 WHERE T1.COL1 <> T2.COL1;",
+      "SELECT COL1 FROM T1 WHERE COL1 NOT IN (SELECT COL1 FROM T2);",
+      "SELECT T1.COL1 FROM T1 LEFT JOIN T2 ON T1.COL1 = T2.COL1 WHERE T2.COL1 IS NULL;"
     ],
     "correctIndex": 1,
     "explanation": "MINUS·NOT IN·LEFT JOIN+IS NULL 은 모두 'T1 에는 있고 T2 에는 없는 값 (D, E)' 을 반환하지만, T1, T2 카티션 곱에 `<>` 조건을 적용하면 비교 대상이 다른 모든 행과 매칭되어 중복된 결과가 나오므로 다른 답이 된다.",
@@ -977,10 +977,10 @@ export const ROUND_51: QuizQuestion[] = [
     "number": 32,
     "title": "아래 SQL 의 WHERE 조건과 동일한 의미를 가지는 것은?",
     "options": [
-      "`SELECT * FROM T WHERE (COL1 = 'A' AND COL2 = 1000) OR (COL1 = 'B' AND COL2 = 2000);`",
-      "`SELECT * FROM T WHERE COL1 = 'A' AND COL2 = 1000 AND COL1 = 'B' AND COL2 = 2000;`",
-      "`SELECT * FROM T WHERE COL1 IN ('A', 'B') AND COL2 IN (1000, 2000);`",
-      "`SELECT * FROM T WHERE COL1 = 'A' OR COL2 = 2000;`"
+      "SELECT * FROM T WHERE (COL1 = 'A' AND COL2 = 1000) OR (COL1 = 'B' AND COL2 = 2000);",
+      "SELECT * FROM T WHERE COL1 = 'A' AND COL2 = 1000 AND COL1 = 'B' AND COL2 = 2000;",
+      "SELECT * FROM T WHERE COL1 IN ('A', 'B') AND COL2 IN (1000, 2000);",
+      "SELECT * FROM T WHERE COL1 = 'A' OR COL2 = 2000;"
     ],
     "correctIndex": 0,
     "explanation": "다중 컬럼 IN `(COL1, COL2) IN (('A', 1000), ('B', 2000))` 은 각 튜플 안에서는 컬럼끼리 AND 로 묶고, 튜플 간에는 OR 로 결합한 형태와 동일하다. 즉 `(COL1='A' AND COL2=1000) OR (COL1='B' AND COL2=2000)` 으로 풀어쓸 수 있다. ② 는 모순(같은 행이 동시에 'A'/'B' 일 수 없음), ③ 은 (A, 2000) (B, 1000) 도 매칭하므로 더 넓다, ④ 는 의미 자체가 다름.",
@@ -1407,10 +1407,10 @@ export const ROUND_51: QuizQuestion[] = [
     "number": 44,
     "title": "아래 T 테이블에서 \"문자열에 리터럴 '_' 을 포함하는 행\" 을 찾는 LIKE 조건으로 옳은 것은? (기대 결과: AB_C, A_BD)",
     "options": [
-      "`WHERE COL2 LIKE '%_%'`",
-      "`WHERE COL2 LIKE 'A%'`",
-      "`WHERE COL2 LIKE 'A_B%'`",
-      "`WHERE COL2 LIKE '%@_%' ESCAPE '@'`"
+      "WHERE COL2 LIKE '%_%'",
+      "WHERE COL2 LIKE 'A%'",
+      "WHERE COL2 LIKE 'A_B%'",
+      "WHERE COL2 LIKE '%@_%' ESCAPE '@'"
     ],
     "correctIndex": 3,
     "explanation": "LIKE 패턴에서 '_' 은 임의의 한 문자를 의미하므로 ① 처럼 그대로 쓰면 모든 행이 매칭된다. 리터럴 '_' 자체를 검색하려면 ESCAPE 문자를 지정하고 그 뒤에 '_' 을 두어야 한다. ④ 의 `%@_%` ESCAPE '@' 는 '@_' 를 리터럴 '_' 로 해석해 'AB_C', 'A_BD' 만 매칭한다.",
