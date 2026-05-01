@@ -1,0 +1,214 @@
+{
+  "schema": "md5(image content) → 변환된 references 배열. 클래식 한글 시험지 batch 19 (마지막 10장).",
+  "method": "Claude 시각 정독 (sharp 4x lanczos3 처음부터)",
+  "batchSize": 10,
+  "groups": {
+    "875b87990734": {
+      "name": "j850 — NAME/SALARY 5행 (KIM/LEE/PARK/CHOI/JUNG, RANK 입력)",
+      "imageKey": "j850",
+      "refs": [
+        {
+          "type": "table",
+          "caption": "[데이터]",
+          "headers": ["NAME", "SALARY"],
+          "rows": [
+            ["KIM", "5000"],
+            ["LEE", "6000"],
+            ["PARK", "6000"],
+            ["CHOI", "4500"],
+            ["JUNG", "4000"]
+          ]
+        }
+      ]
+    },
+    "93ec4f8ea97e": {
+      "name": "j850-2 — NAME/SALARY/RANKING 5행 (RANK 동순위 1,1,3 패턴)",
+      "imageKey": "j850-2",
+      "refs": [
+        {
+          "type": "table",
+          "caption": "[결과]",
+          "headers": ["NAME", "SALARY", "RANKING"],
+          "rows": [
+            ["LEE", "6000", "1"],
+            ["PARK", "6000", "1"],
+            ["KIM", "5000", "3"],
+            ["CHOI", "4500", "4"],
+            ["JUNG", "4000", "5"]
+          ]
+        }
+      ]
+    },
+    "cd954e53770a": {
+      "name": "j859 — CUST_ID/REGION/AMOUNT 9행 (NULL 2행, EAST/WEST/SOUTH)",
+      "imageKey": "j859",
+      "refs": [
+        {
+          "type": "table",
+          "caption": "[데이터]",
+          "headers": ["CUST_ID", "REGION", "AMOUNT"],
+          "rows": [
+            ["A001", "EAST", "1000"],
+            ["A002", "EAST", "NULL"],
+            ["A003", "WEST", "2000"],
+            ["A004", "WEST", "1500"],
+            ["A005", "EAST", "1200"],
+            ["A006", "EAST", "800"],
+            ["A007", "WEST", "NULL"],
+            ["A008", "SOUTH", "1800"],
+            ["A009", "SOUTH", "2200"]
+          ]
+        }
+      ]
+    },
+    "be259ff26020": {
+      "name": "j860 — REGION/PRODUCT/AMOUNT 4행 (EAST/WEST × A/B)",
+      "imageKey": "j860",
+      "refs": [
+        {
+          "type": "table",
+          "caption": "[데이터]",
+          "headers": ["REGION", "PRODUCT", "AMOUNT"],
+          "rows": [
+            ["EAST", "A", "1000"],
+            ["EAST", "B", "1500"],
+            ["WEST", "A", "1200"],
+            ["WEST", "B", "1300"]
+          ]
+        }
+      ]
+    },
+    "4071a9418643": {
+      "name": "j864 — CUSTOMER + ORDER_INFO + PRODUCT + 출력 결과 (3-table JOIN)",
+      "imageKey": "j864",
+      "refs": [
+        {
+          "type": "table",
+          "caption": "테이블 CUSTOMER",
+          "headers": ["CUST_ID", "NAME"],
+          "rows": [
+            ["C001", "KIM"],
+            ["C002", "LEE"],
+            ["C003", "PARK"]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "테이블 ORDER_INFO",
+          "headers": ["ORDER_ID", "CUST_ID", "PROD_ID"],
+          "rows": [
+            ["O1001", "C001", "P01"],
+            ["O1002", "C002", "P02"],
+            ["O1003", "C001", "P02"]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "테이블 PRODUCT",
+          "headers": ["PROD_ID", "PROD_NAME"],
+          "rows": [
+            ["P01", "Pen"],
+            ["P02", "Book"]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "원하는 출력 결과",
+          "headers": ["NAME", "PROD_NAME"],
+          "rows": [
+            ["KIM", "Pen"],
+            ["KIM", "Book"],
+            ["LEE", "Book"]
+          ]
+        }
+      ]
+    },
+    "0f25327002c1": {
+      "name": "j865 — COL1/COL2 3행 (0/300, 300/0, 100/NULL)",
+      "imageKey": "j865",
+      "refs": [
+        {
+          "type": "table",
+          "caption": "[데이터]",
+          "headers": ["COL1", "COL2"],
+          "rows": [
+            ["0", "300"],
+            ["300", "0"],
+            ["100", "NULL"]
+          ]
+        }
+      ]
+    },
+    "9b965461b44c": {
+      "name": "j867 — EMP_ID/NAME/EMAIL/DEPT_ID 2행 (kim@/lee@corp.com)",
+      "imageKey": "j867",
+      "refs": [
+        {
+          "type": "table",
+          "caption": "현재 저장된 데이터",
+          "headers": ["EMP_ID", "NAME", "EMAIL", "DEPT_ID"],
+          "rows": [
+            ["101", "KIM", "kim@corp.com", "10"],
+            ["102", "LEE", "lee@corp.com", "NULL"]
+          ]
+        }
+      ]
+    },
+    "7a43a8d1db42": {
+      "name": "j869 — STUDENT_ID/NAME/GRADE/HEIGHT 5행 (KIM/LEE/PARK 1학년 + CHOI/JUNG 2학년)",
+      "imageKey": "j869",
+      "refs": [
+        {
+          "type": "table",
+          "caption": "[데이터]",
+          "headers": ["STUDENT_ID", "NAME", "GRADE", "HEIGHT"],
+          "rows": [
+            ["101", "KIM", "1", "160"],
+            ["102", "LEE", "1", "158"],
+            ["103", "PARK", "1", "158"],
+            ["104", "CHOI", "2", "170"],
+            ["105", "JUNG", "2", "168"]
+          ]
+        }
+      ]
+    },
+    "10f366dfcf89": {
+      "name": "j870 — EMP_ID/EMP_NAME/MANAGER_ID 6행 (CEO/Kim/Lee/Park/Choi/Jung 계층 입력)",
+      "imageKey": "j870",
+      "refs": [
+        {
+          "type": "table",
+          "caption": "[데이터]",
+          "headers": ["EMP_ID", "EMP_NAME", "MANAGER_ID"],
+          "rows": [
+            ["100", "CEO", "NULL"],
+            ["101", "Kim", "100"],
+            ["102", "Lee", "101"],
+            ["103", "Park", "101"],
+            ["104", "Choi", "102"],
+            ["105", "Jung", "100"]
+          ]
+        }
+      ]
+    },
+    "164be76fb732": {
+      "name": "j870-2 — EMP_NAME/INDENTED_NAME/PATH 6행 (계층 쿼리 출력 예시)",
+      "imageKey": "j870-2",
+      "refs": [
+        {
+          "type": "table",
+          "caption": "위 쿼리의 출력 예시",
+          "headers": ["EMP_NAME", "INDENTED_NAME", "PATH"],
+          "rows": [
+            ["CEO", "CEO", "/CEO"],
+            ["Jung", "Jung", "/CEO/Jung"],
+            ["Kim", "Kim", "/CEO/Kim"],
+            ["Lee", "Lee", "/CEO/Kim/Lee"],
+            ["Choi", "Choi", "/CEO/Kim/Lee/Choi"],
+            ["Park", "Park", "/CEO/Kim/Park"]
+          ]
+        }
+      ]
+    }
+  }
+}

@@ -29688,14 +29688,70 @@ export const AI_MOCK: QuizQuestion[] = [
         "content": "<SQL>\nSELECT NAME, SALARY, ________ OVER (ORDER BY SALARY DESC) AS RANKING FROM TAB1;"
       },
       {
-        "type": "image",
-        "src": "/sqld-images/j850-1.png",
-        "alt": "문항 이미지 j850-1"
+        "type": "table",
+        "caption": "[데이터]",
+        "headers": [
+          "NAME",
+          "SALARY"
+        ],
+        "rows": [
+          [
+            "KIM",
+            "5000"
+          ],
+          [
+            "LEE",
+            "6000"
+          ],
+          [
+            "PARK",
+            "6000"
+          ],
+          [
+            "CHOI",
+            "4500"
+          ],
+          [
+            "JUNG",
+            "4000"
+          ]
+        ]
       },
       {
-        "type": "image",
-        "src": "/sqld-images/j850-2.png",
-        "alt": "문항 이미지 j850-2"
+        "type": "table",
+        "caption": "[결과]",
+        "headers": [
+          "NAME",
+          "SALARY",
+          "RANKING"
+        ],
+        "rows": [
+          [
+            "LEE",
+            "6000",
+            "1"
+          ],
+          [
+            "PARK",
+            "6000",
+            "1"
+          ],
+          [
+            "KIM",
+            "5000",
+            "3"
+          ],
+          [
+            "CHOI",
+            "4500",
+            "4"
+          ],
+          [
+            "JUNG",
+            "4000",
+            "5"
+          ]
+        ]
       }
     ]
   },
@@ -29875,9 +29931,60 @@ export const AI_MOCK: QuizQuestion[] = [
         "content": "<SQL>\nSELECT REGION, COUNT(AMOUNT) AS CNT, SUM(AMOUNT) AS TOTAL\n  FROM SALES\n WHERE AMOUNT >= 1000\n GROUP BY REGION\nHAVING SUM(AMOUNT) > 2500;"
       },
       {
-        "type": "image",
-        "src": "/sqld-images/j859-1.png",
-        "alt": "문항 이미지 j859-1"
+        "type": "table",
+        "caption": "[데이터]",
+        "headers": [
+          "CUST_ID",
+          "REGION",
+          "AMOUNT"
+        ],
+        "rows": [
+          [
+            "A001",
+            "EAST",
+            "1000"
+          ],
+          [
+            "A002",
+            "EAST",
+            "NULL"
+          ],
+          [
+            "A003",
+            "WEST",
+            "2000"
+          ],
+          [
+            "A004",
+            "WEST",
+            "1500"
+          ],
+          [
+            "A005",
+            "EAST",
+            "1200"
+          ],
+          [
+            "A006",
+            "EAST",
+            "800"
+          ],
+          [
+            "A007",
+            "WEST",
+            "NULL"
+          ],
+          [
+            "A008",
+            "SOUTH",
+            "1800"
+          ],
+          [
+            "A009",
+            "SOUTH",
+            "2200"
+          ]
+        ]
       }
     ]
   },
@@ -29907,9 +30014,35 @@ export const AI_MOCK: QuizQuestion[] = [
         "content": "<SQL>\nSELECT REGION, PRODUCT, SUM(AMOUNT)\n  FROM SALES\n GROUP BY CUBE(REGION, PRODUCT);"
       },
       {
-        "type": "image",
-        "src": "/sqld-images/j860-1.png",
-        "alt": "문항 이미지 j860-1"
+        "type": "table",
+        "caption": "[데이터]",
+        "headers": [
+          "REGION",
+          "PRODUCT",
+          "AMOUNT"
+        ],
+        "rows": [
+          [
+            "EAST",
+            "A",
+            "1000"
+          ],
+          [
+            "EAST",
+            "B",
+            "1500"
+          ],
+          [
+            "WEST",
+            "A",
+            "1200"
+          ],
+          [
+            "WEST",
+            "B",
+            "1300"
+          ]
+        ]
       }
     ]
   },
@@ -30010,9 +30143,92 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "image",
-        "src": "/sqld-images/j864-1.png",
-        "alt": "문항 이미지 j864-1"
+        "type": "table",
+        "caption": "테이블 CUSTOMER",
+        "headers": [
+          "CUST_ID",
+          "NAME"
+        ],
+        "rows": [
+          [
+            "C001",
+            "KIM"
+          ],
+          [
+            "C002",
+            "LEE"
+          ],
+          [
+            "C003",
+            "PARK"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "테이블 ORDER_INFO",
+        "headers": [
+          "ORDER_ID",
+          "CUST_ID",
+          "PROD_ID"
+        ],
+        "rows": [
+          [
+            "O1001",
+            "C001",
+            "P01"
+          ],
+          [
+            "O1002",
+            "C002",
+            "P02"
+          ],
+          [
+            "O1003",
+            "C001",
+            "P02"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "테이블 PRODUCT",
+        "headers": [
+          "PROD_ID",
+          "PROD_NAME"
+        ],
+        "rows": [
+          [
+            "P01",
+            "Pen"
+          ],
+          [
+            "P02",
+            "Book"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "원하는 출력 결과",
+        "headers": [
+          "NAME",
+          "PROD_NAME"
+        ],
+        "rows": [
+          [
+            "KIM",
+            "Pen"
+          ],
+          [
+            "KIM",
+            "Book"
+          ],
+          [
+            "LEE",
+            "Book"
+          ]
+        ]
       }
     ]
   },
@@ -30042,9 +30258,26 @@ export const AI_MOCK: QuizQuestion[] = [
         "content": "<SQL>\n1) SELECT COL1 / COL2 FROM TAB WHERE COL1 = 0 AND COL2 = 300;\n2) SELECT COL1 / COL2 FROM TAB WHERE COL1 = 300 AND COL2 = 0;\n3) SELECT COL1 / COL2 FROM TAB WHERE COL1 = 100 AND COL2 IS NULL;"
       },
       {
-        "type": "image",
-        "src": "/sqld-images/j865-1.png",
-        "alt": "문항 이미지 j865-1"
+        "type": "table",
+        "caption": "[데이터]",
+        "headers": [
+          "COL1",
+          "COL2"
+        ],
+        "rows": [
+          [
+            "0",
+            "300"
+          ],
+          [
+            "300",
+            "0"
+          ],
+          [
+            "100",
+            "NULL"
+          ]
+        ]
       }
     ]
   },
@@ -30101,9 +30334,28 @@ export const AI_MOCK: QuizQuestion[] = [
         "content": "<SQL>\nCREATE TABLE EMPLOYEE (\n  EMP_ID     NUMBER PRIMARY KEY,\n  NAME       VARCHAR2(50) NOT NULL,\n  EMAIL      VARCHAR2(100),\n  DEPT_ID    NUMBER,\n  CONSTRAINT UQ_EMP_EMAIL UNIQUE (EMAIL)\n);"
       },
       {
-        "type": "image",
-        "src": "/sqld-images/j867-1.png",
-        "alt": "문항 이미지 j867-1"
+        "type": "table",
+        "caption": "현재 저장된 데이터",
+        "headers": [
+          "EMP_ID",
+          "NAME",
+          "EMAIL",
+          "DEPT_ID"
+        ],
+        "rows": [
+          [
+            "101",
+            "KIM",
+            "kim@corp.com",
+            "10"
+          ],
+          [
+            "102",
+            "LEE",
+            "lee@corp.com",
+            "NULL"
+          ]
+        ]
       }
     ]
   },
@@ -30129,9 +30381,46 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "image",
-        "src": "/sqld-images/j869-1.png",
-        "alt": "문항 이미지 j869-1"
+        "type": "table",
+        "caption": "[데이터]",
+        "headers": [
+          "STUDENT_ID",
+          "NAME",
+          "GRADE",
+          "HEIGHT"
+        ],
+        "rows": [
+          [
+            "101",
+            "KIM",
+            "1",
+            "160"
+          ],
+          [
+            "102",
+            "LEE",
+            "1",
+            "158"
+          ],
+          [
+            "103",
+            "PARK",
+            "1",
+            "158"
+          ],
+          [
+            "104",
+            "CHOI",
+            "2",
+            "170"
+          ],
+          [
+            "105",
+            "JUNG",
+            "2",
+            "168"
+          ]
+        ]
       }
     ]
   },
@@ -30161,14 +30450,86 @@ export const AI_MOCK: QuizQuestion[] = [
         "content": "<SQL>\nSELECT EMP_NAME,\n       LPAD(' ', LEVEL * 2) || EMP_NAME AS INDENTED_NAME,\n       SYS_CONNECT_BY_PATH(EMP_NAME, '/') AS PATH\n  FROM EMPLOYEE\n WHERE ________      -- (빈칸 ①)\nCONNECT BY ________  -- (빈칸 ②)\n ORDER SIBLINGS BY EMP_NAME;"
       },
       {
-        "type": "image",
-        "src": "/sqld-images/j870-1.png",
-        "alt": "문항 이미지 j870-1"
+        "type": "table",
+        "caption": "[데이터]",
+        "headers": [
+          "EMP_ID",
+          "EMP_NAME",
+          "MANAGER_ID"
+        ],
+        "rows": [
+          [
+            "100",
+            "CEO",
+            "NULL"
+          ],
+          [
+            "101",
+            "Kim",
+            "100"
+          ],
+          [
+            "102",
+            "Lee",
+            "101"
+          ],
+          [
+            "103",
+            "Park",
+            "101"
+          ],
+          [
+            "104",
+            "Choi",
+            "102"
+          ],
+          [
+            "105",
+            "Jung",
+            "100"
+          ]
+        ]
       },
       {
-        "type": "image",
-        "src": "/sqld-images/j870-2.png",
-        "alt": "문항 이미지 j870-2"
+        "type": "table",
+        "caption": "위 쿼리의 출력 예시",
+        "headers": [
+          "EMP_NAME",
+          "INDENTED_NAME",
+          "PATH"
+        ],
+        "rows": [
+          [
+            "CEO",
+            "CEO",
+            "/CEO"
+          ],
+          [
+            "Jung",
+            "Jung",
+            "/CEO/Jung"
+          ],
+          [
+            "Kim",
+            "Kim",
+            "/CEO/Kim"
+          ],
+          [
+            "Lee",
+            "Lee",
+            "/CEO/Kim/Lee"
+          ],
+          [
+            "Choi",
+            "Choi",
+            "/CEO/Kim/Lee/Choi"
+          ],
+          [
+            "Park",
+            "Park",
+            "/CEO/Kim/Park"
+          ]
+        ]
       }
     ]
   },
