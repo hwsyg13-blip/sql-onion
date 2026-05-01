@@ -1156,7 +1156,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 58,
-    "title": "숫자형 함수 적용과 그 결괏값이 올바르지 않은 것은?",
+    "title": "숫자형 함수 적용과 그 결과값이 올바르지 않은 것은?",
     "options": [
       "ABS(-30) = 30",
       "SIGN(-50) = -1",
@@ -3678,7 +3678,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 140,
-    "title": "다음의 예에서 결괏값이 다른 하나는?",
+    "title": "다음의 예에서 결과값이 다른 하나는?",
     "options": [
       "SELECT NULL*2 FROM SQLD_13;",
       "SELECT NULL*3 FROM SQLD_13;",
@@ -4576,7 +4576,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 163,
-    "title": "다음 주어진 테이블에서 아래와 같은 결괏값을 반환하도록 아래의 SQL문의 빈칸에 들어갈 올바른 것을 고르시오.",
+    "title": "다음 주어진 테이블에서 아래와 같은 결과값을 반환하도록 아래의 SQL문의 빈칸에 들어갈 올바른 것을 고르시오.",
     "options": [
       "RANK()",
       "NTILE()",
@@ -4584,7 +4584,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "DENSE_RANK()"
     ],
     "correctIndex": 3,
-    "explanation": "결괏값에서 중복된 등수 2등 다음에 바로 다음 등수인 3이 왔으므로 빈칸에는 DENSE_RANK가 와야 한다.",
+    "explanation": "결과값에서 중복된 등수 2등 다음에 바로 다음 등수인 3이 왔으므로 빈칸에는 DENSE_RANK가 와야 한다.",
     "chapter": "윈도우 함수",
     "_source": "cbt-mock",
     "_origId": "cbt-121",
@@ -5102,7 +5102,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 179,
-    "title": "“TEST” 테이블에 있는 NUM2 칼럼의 총 행은 10개이고 2개의 NULL 값이 있다. 다음의 SQL문을 실행할 경우 결괏값은?",
+    "title": "“TEST” 테이블에 있는 NUM2 칼럼의 총 행은 10개이고 2개의 NULL 값이 있다. 다음의 SQL문을 실행할 경우 결과값은?",
     "options": [
       "ㄱ : 10, ㄴ : 10",
       "ㄱ : 10, ㄴ : 8",
@@ -5685,7 +5685,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 200,
-    "title": "다음 주어진 그룹 함수와 동일한 결괏값을 반환하는 그룹 함수를 고르시오.",
+    "title": "다음 주어진 그룹 함수와 동일한 결과값을 반환하는 그룹 함수를 고르시오.",
     "options": [
       "GROUP BY ROLLUP(DEPTNO, JOB);",
       "GROUP BY (DEPTNO, JOB, (DEPTNO, JOB), ());",
@@ -6540,7 +6540,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 232,
-    "title": "아래의 결괏값을 보고 SQL문의 빈칸에 들어갈 수 있는 내용을 고르시오.",
+    "title": "아래의 결과값을 보고 SQL문의 빈칸에 들어갈 수 있는 내용을 고르시오.",
     "options": [
       "ROLLUP(DEPTNO, JOB)",
       "GROUPING SETS(DEPTNO, JOB)",
@@ -6548,7 +6548,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "CUBE(DEPTNO, JOB)"
     ],
     "correctIndex": 0,
-    "explanation": "주어진 결괏값을 보면 1. DEPTNO별 합계, 2. DEPTNO, JOB별 합계, 3. 전체 합계가 조회되므로 빈칸에는 그룹 함수 중 ROLLUP이 와야 한다.",
+    "explanation": "주어진 결과값을 보면 1. DEPTNO별 합계, 2. DEPTNO, JOB별 합계, 3. 전체 합계가 조회되므로 빈칸에는 그룹 함수 중 ROLLUP이 와야 한다.",
     "chapter": "관계형 DB와 SELECT",
     "_source": "cbt-mock",
     "_origId": "cbt-191",
@@ -12889,7 +12889,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 401,
-    "title": "다음 주어진 그룹 함수와 동일한 결괏값을 반환하는 그룹 함수를 고르시오.",
+    "title": "다음 주어진 그룹 함수와 동일한 결과값을 반환하는 그룹 함수를 고르시오.",
     "options": [
       "GROUP BY GROUPING SETS(DEPTNO, JOB, (DEPTNO, JOB),());",
       "GROUP BY DEPTNO UNION ALL GROUP BY JOB UNION ALL GROUP BY (DEPTNO, JOB);",
@@ -13162,15 +13162,15 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 405,
-    "title": "다음 주어진 테이블에서 아래와 같은 결괏값을 반환하는 SQL문을 고르시오.",
+    "title": "다음 주어진 테이블에서 아래와 같은 결과값을 반환하는 SQL문을 고르시오.",
     "options": [
-      "select\ncount(case when 반=1 then 1 end) as \"결괏값\"\ncount(case when 반=2 then 1 end) as b,\ncount(case when 반=3 then 1 end) as c\nfrom SQLD_67;",
-      "select 반,\ncount(distinct 이름) AS \"결괏값\"\nFROM SQLD_67\ngroup by 반;",
-      "select 반,\ncount(1) AS \"결괏값\"\nFROM SQLD_67\ngroup by 반;",
-      "select 반,\ncount(*) AS \"결괏값\"\nFROM SQLD_67\ngroup by 반;"
+      "select\ncount(case when 반=1 then 1 end) as \"결과값\"\ncount(case when 반=2 then 1 end) as b,\ncount(case when 반=3 then 1 end) as c\nfrom SQLD_67;",
+      "select 반,\ncount(distinct 이름) AS \"결과값\"\nFROM SQLD_67\ngroup by 반;",
+      "select 반,\ncount(1) AS \"결과값\"\nFROM SQLD_67\ngroup by 반;",
+      "select 반,\ncount(*) AS \"결과값\"\nFROM SQLD_67\ngroup by 반;"
     ],
     "correctIndex": 1,
-    "explanation": "② 번에서 주어진 테이블을 '반'속성별로 그룹화한 다음 각 '반' 속성별 행의 수를 count하는데 distinct 인자로 중복되는 이름값은 제외하고 count를 수행하여 결괏값과 같이 반환된다.",
+    "explanation": "② 번에서 주어진 테이블을 '반'속성별로 그룹화한 다음 각 '반' 속성별 행의 수를 count하는데 distinct 인자로 중복되는 이름값은 제외하고 count를 수행하여 결과값과 같이 반환된다.",
     "chapter": "그룹 함수",
     "_source": "sqld-1140",
     "_origId": "sqld-0199",
@@ -13220,7 +13220,7 @@ export const AI_MOCK: QuizQuestion[] = [
         "caption": "[결과]",
         "headers": [
           "반",
-          "결괏값"
+          "결과값"
         ],
         "rows": [
           [
@@ -13245,7 +13245,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 406,
-    "title": "다음 주어진 테이블에서 SELECT문을 수행하였을 때 결괏값으로 다른 것을 고르시오.",
+    "title": "다음 주어진 테이블에서 SELECT문을 수행하였을 때 결과값으로 다른 것을 고르시오.",
     "options": [
       "select nvl(A.COL1,-1) as C4 from A;",
       "select decode(A.COL1, null, -1, A, COL1) as C3 from A;",
@@ -13292,7 +13292,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 407,
-    "title": "아래의 결괏값을 보고 SQL문의 빈칸에 들어 갈 수 있는 내용을 고르시오.",
+    "title": "아래의 결과값을 보고 SQL문의 빈칸에 들어 갈 수 있는 내용을 고르시오.",
     "options": [
       "CUBE(DEPTNO, JOB)",
       "DEPTNO, JOB",
@@ -13300,7 +13300,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "ROLLUP(DEPTNO, JOB)"
     ],
     "correctIndex": 3,
-    "explanation": "주어진 결괏값을 보면 1.DEPTNO별 합계, 2.DEPTNO, JOB별 합계, 3.전체 합계가 조회되므로 빈칸에는 그룹 함수 중 ROLLUP이 와야 한다.",
+    "explanation": "주어진 결과값을 보면 1.DEPTNO별 합계, 2.DEPTNO, JOB별 합계, 3.전체 합계가 조회되므로 빈칸에는 그룹 함수 중 ROLLUP이 와야 한다.",
     "chapter": "그룹 함수",
     "_source": "sqld-1140",
     "_origId": "sqld-0205",
@@ -14483,7 +14483,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 433,
-    "title": "숫자형 함수 적용과 그 결괏값이 올바르지 않은 것은?",
+    "title": "숫자형 함수 적용과 그 결과값이 올바르지 않은 것은?",
     "options": [
       "CEIL(38,12)=39",
       "MOD(7,3)=2",
@@ -14952,7 +14952,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 444,
-    "title": "다음의 예에서 결괏값이 다른 하나는?",
+    "title": "다음의 예에서 결과값이 다른 하나는?",
     "options": [
       "SELECT count(고객) FROM SQLD_13 WHERE 거래내역 IS NULL;",
       "SELECT NULL*NULL FROM SQLD_13;",
@@ -14960,7 +14960,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "SELECT NULL*2 FROM SQLD_13;"
     ],
     "correctIndex": 0,
-    "explanation": "②③④ 번은 모두 SELECT NULL FROM SQLD_13; 과 같은 SQL문으로 모두 NULL을 반환하는데 ①번은 거래내역이 NULL인 고객의 수를 구하는 SQL문으로 결괏값 2를 반환한다.",
+    "explanation": "②③④ 번은 모두 SELECT NULL FROM SQLD_13; 과 같은 SQL문으로 모두 NULL을 반환하는데 ①번은 거래내역이 NULL인 고객의 수를 구하는 SQL문으로 결과값 2를 반환한다.",
     "chapter": "함수",
     "_source": "sqld-1140",
     "_origId": "sqld-0250",
@@ -15070,7 +15070,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 448,
-    "title": "\"TEST\" 테이블에 있는 NUM2 칼럼의 총 행은 10개이고 2개의 NULL 값이 있다. 다음의 SQL문을 실행할 경우 결괏값은?",
+    "title": "\"TEST\" 테이블에 있는 NUM2 칼럼의 총 행은 10개이고 2개의 NULL 값이 있다. 다음의 SQL문을 실행할 경우 결과값은?",
     "options": [
       "ㄱ:8, ㄴ:8",
       "ㄱ:8, ㄴ:10",
@@ -15945,7 +15945,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "SELECT COUNT(nvl(CNT,0)) FROM Mytest;"
     ],
     "correctIndex": 1,
-    "explanation": "①,③,④ 번 보기는 결괏값 5를 반환하고 ②번 보기만 결괏값 4를 반환한다.",
+    "explanation": "①,③,④ 번 보기는 결과값 5를 반환하고 ②번 보기만 결과값 4를 반환한다.",
     "chapter": "DML",
     "_source": "sqld-1140",
     "_origId": "sqld-0288",
@@ -15990,7 +15990,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 474,
-    "title": "다음 문제에 주어진 결괏값을 반환하는 SQL문은?",
+    "title": "다음 문제에 주어진 결과값을 반환하는 SQL문은?",
     "options": [
       "SELECT\nCOUNT(CASE WHEN CLASS ='A' THEN 1 END) AS \"Result\"\nCOUNT(CASE WHEN CLASS ='B' THEN 1 END) AS B,\nCOUNT(CASE WHEN CLASS ='C' THEN 1 END) AS C\nFROM Mytest;",
       "SELECT CLASS,\ncount(1) AS \"Result\"\nFROM Mytest\nGROUP BY CLASS;",
@@ -15998,7 +15998,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "SELECT CLASS,\ncount(*) AS \"Result\"\nFROM Mytest\nGROUP BY CLASS;"
     ],
     "correctIndex": 2,
-    "explanation": "③번 보기에서 주어진 테이블을 'CLASS' 속성별로 그룹화한 다음 각 'CLASS' 속성별 행의 수를 count하는데 DISTINCT 인자로 중복되는 NAME 값은 제외하고 count를 수행하여 결괏값이 반환된다.",
+    "explanation": "③번 보기에서 주어진 테이블을 'CLASS' 속성별로 그룹화한 다음 각 'CLASS' 속성별 행의 수를 count하는데 DISTINCT 인자로 중복되는 NAME 값은 제외하고 count를 수행하여 결과값이 반환된다.",
     "chapter": "그룹 함수",
     "_source": "sqld-1140",
     "_origId": "sqld-0289",
@@ -16081,7 +16081,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "RANK()"
     ],
     "correctIndex": 2,
-    "explanation": "결괏값에서 중복된 등수 2등 다음에 바로 다음 등수인 3등이 왔으므로 빈칸에는 DENSE_RANK가 와야 한다.",
+    "explanation": "결과값에서 중복된 등수 2등 다음에 바로 다음 등수인 3등이 왔으므로 빈칸에는 DENSE_RANK가 와야 한다.",
     "chapter": "윈도우 함수",
     "_source": "sqld-1140",
     "_origId": "sqld-0290",
@@ -16217,7 +16217,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 478,
-    "title": "다음에서 주어진 Mytest 테이블에서 SQL문을 실행했을 때 결괏값과 같은 SQL문은?(단 union은 정렬도 진행하는 것으로 한다)",
+    "title": "다음에서 주어진 Mytest 테이블에서 SQL문을 실행했을 때 결과값과 같은 SQL문은?(단 union은 정렬도 진행하는 것으로 한다)",
     "options": [
       "select *\nfrom (select job_id, max(salary) from\nMytest\ngroup by salary\nunion all\nselect job_id, min(salary) from\nMytest\ngroup by salary\n);",
       "select *\nfrom (select job_id, max(salary) from\nMytest\ngroup by job_id\nunion all\nselect job_id, min(salary) from\nMytest\ngroup by job_id\n);",
@@ -16225,7 +16225,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "select *\nfrom (select job_id, max(salary) from\nMytest\ngroup by job_id\nunion\nselect job_id, min(salary) from\nMytest\ngroup by job_id\n);"
     ],
     "correctIndex": 3,
-    "explanation": "결괏값은 주어진 테이블에서 JOB_ID 별로 그룹화하였을 때 각 JOB_ID별 salary의 최댓값과 최솟값이 반환되는 결괏값이다. 그런데 JOB_ID 별 salary 값이 하나의 속성값으로 통일되었으므로 union 연산자를 이용한다.",
+    "explanation": "결과값은 주어진 테이블에서 JOB_ID 별로 그룹화하였을 때 각 JOB_ID별 salary의 최댓값과 최솟값이 반환되는 결과값이다. 그런데 JOB_ID 별 salary 값이 하나의 속성값으로 통일되었으므로 union 연산자를 이용한다.",
     "chapter": "집합 연산자",
     "_source": "sqld-1140",
     "_origId": "sqld-0293",
@@ -16300,7 +16300,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 479,
-    "title": "다음 보기의 SQL문을 실행 했을 때 결괏값이 다른 하나는?",
+    "title": "다음 보기의 SQL문을 실행 했을 때 결과값이 다른 하나는?",
     "options": [
       "select NVL(a.COL1,-1) as data from Mytest a;",
       "select DECODE(a.COL1, null,-1,a.col1) as data from Mytest a;",
@@ -16355,7 +16355,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "select * from Mytest where order by 주문금액 asc"
     ],
     "correctIndex": 0,
-    "explanation": "위의 결괏값은 주어진 테이블에서 회원번호 = 103에 해당하는 ROW를 먼저 선택한 후 선택된 ROW에 대해서 주문금액을 기준으로 내림차순 정렬한 것이다.",
+    "explanation": "위의 결과값은 주어진 테이블에서 회원번호 = 103에 해당하는 ROW를 먼저 선택한 후 선택된 ROW에 대해서 주문금액을 기준으로 내림차순 정렬한 것이다.",
     "chapter": "DML",
     "_source": "sqld-1140",
     "_origId": "sqld-0295",
@@ -16479,7 +16479,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 482,
-    "title": "다음 보기의 결괏값을 얻기 위한 SQL문을 작성하시오.",
+    "title": "다음 보기의 결과값을 얻기 위한 SQL문을 작성하시오.",
     "options": [
       "max(COL1), max(COL2), max(COL1)",
       "max(COL1), min(COL2), sum(COL2)",
@@ -16558,7 +16558,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 483,
-    "title": "아래의 결괏값을 보고 SQL문의 빈칸에 들어 갈 수 있는 내용을 고르시오.",
+    "title": "아래의 결과값을 보고 SQL문의 빈칸에 들어 갈 수 있는 내용을 고르시오.",
     "options": [
       "CUBE(DEPTNO, JOB)",
       "ROLLUP(DEPTNO, JOB)",
@@ -16566,7 +16566,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "DEPTNO, JOB"
     ],
     "correctIndex": 1,
-    "explanation": "주어진 결괏값을 보면 1, DEPTNO별 합계, 2.DEPTNO,JOB별 합계, 3.전체 합계가 조회되므로 빈칸에는 그룹 함수 중 ROLLUP이 와야 한다.",
+    "explanation": "주어진 결과값을 보면 1, DEPTNO별 합계, 2.DEPTNO,JOB별 합계, 3.전체 합계가 조회되므로 빈칸에는 그룹 함수 중 ROLLUP이 와야 한다.",
     "chapter": "그룹 함수",
     "_source": "sqld-1140",
     "_origId": "sqld-0299",
@@ -16903,7 +16903,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 490,
-    "title": "다음 보기의 SQL문을 실행했을 때의 결괏값은?",
+    "title": "다음 보기의 SQL문을 실행했을 때의 결과값은?",
     "options": [
       "400",
       "300",
@@ -19148,7 +19148,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 542,
-    "title": "야구선수 테이블에서 선수명과 팀명은 오름차순, 연봉은 내림차순으로 정렬하는 결괏값을 반환하는 SQL문은?(단, 야구선수 테이블은 칼럼이 선수명, 팀명, 연봉 순으로 구성)",
+    "title": "야구선수 테이블에서 선수명과 팀명은 오름차순, 연봉은 내림차순으로 정렬하는 결과값을 반환하는 SQL문은?(단, 야구선수 테이블은 칼럼이 선수명, 팀명, 연봉 순으로 구성)",
     "options": [
       "SELECT * FROM 야구선수 ORDER BY 선수명, 팀명, DESC, 연봉 ASC",
       "SELECT * FROM 야구선수 ORDER BY 선수명 ASC, 팀명, ASC, 연봉 ASC",
@@ -19225,7 +19225,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "CUBE(DNAME,JOB)"
     ],
     "correctIndex": 3,
-    "explanation": "결괏값을 보면\n1.DNAME, JOB별 소계\n2.DNAME별 소계\n3.JOB별 소계\n4.전체 집계 등 모든 조합 가능한 소계와 집계가 조회되었으므로 빈칸에 들어갈 그룹 함수는 CUBE이다.",
+    "explanation": "결과값을 보면\n1.DNAME, JOB별 소계\n2.DNAME별 소계\n3.JOB별 소계\n4.전체 집계 등 모든 조합 가능한 소계와 집계가 조회되었으므로 빈칸에 들어갈 그룹 함수는 CUBE이다.",
     "chapter": "그룹 함수",
     "_source": "sqld-1140",
     "_origId": "sqld-0375",
@@ -19436,7 +19436,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 553,
-    "title": "다음의 SQL문과 동일한 결괏값을 보여주는 SQL문은?",
+    "title": "다음의 SQL문과 동일한 결과값을 보여주는 SQL문은?",
     "options": [
       "SELECT * FROM Mytesta a left\nouter join Mytestb b\non a.col1 = b.col1\nunion\nSELECT * FROM Mytesta a right\nouter join Mytestb b\non a.col1 = b.col1;",
       "SELECT * FROM Mytesta a cross\n join Mytestb b\non a.col1 = b.col1",
@@ -19444,7 +19444,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "SELECT * FROM Mytesta group by col1;"
     ],
     "correctIndex": 0,
-    "explanation": "위의 SQL문에서 FULL OUTER JOIN의 결과값은 'LEFT OUTER JOIN' 결과와 'RIGHT OUTER JOIN'결과를 UNION 연산하는 결괏값과 동일하다.",
+    "explanation": "위의 SQL문에서 FULL OUTER JOIN의 결과값은 'LEFT OUTER JOIN' 결과와 'RIGHT OUTER JOIN'결과를 UNION 연산하는 결과값과 동일하다.",
     "chapter": "조인",
     "_source": "sqld-1140",
     "_origId": "sqld-0385",
@@ -19709,7 +19709,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 564,
-    "title": "주어진 테이블에 대해서 아래와 같은 결괏값이 나오도록 SQL 빈칸을 완성하시오.",
+    "title": "주어진 테이블에 대해서 아래와 같은 결과값이 나오도록 SQL 빈칸을 완성하시오.",
     "options": [
       "4",
       "3",
@@ -20491,7 +20491,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 587,
-    "title": "다음 SQL문 중에서 결괏값이 다른 하나는?",
+    "title": "다음 SQL문 중에서 결과값이 다른 하나는?",
     "options": [
       "SELECT CONCAT('0', '5') FROM DUAL",
       "SELECT TRIM('05') FROM DUAL",
@@ -20512,7 +20512,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 588,
-    "title": "다음 SQL문 중에서 결괏값이 다른 하나는?",
+    "title": "다음 SQL문 중에서 결과값이 다른 하나는?",
     "options": [
       "SELECT CONCAT('AB', 'CD') FROM DUAL;",
       "SELECT SUBSTR('ABCABCDED', 4, 4) FROM DUAL;",
@@ -20533,7 +20533,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 589,
-    "title": "다음 중 아래 SQL문의 결괏값으로 올바른 것은?",
+    "title": "다음 중 아래 SQL문의 결과값으로 올바른 것은?",
     "options": [
       "67",
       "65",
@@ -22255,7 +22255,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 629,
-    "title": "아래의 SQL문을 순차적으로 수행한 결괏값으로 올바른 것은?",
+    "title": "아래의 SQL문을 순차적으로 수행한 결과값으로 올바른 것은?",
     "options": [
       "4",
       "3",
@@ -22282,7 +22282,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 630,
-    "title": "아래 결괏값은 주어진 2개 테이블을 특정 JOIN하여 나타난 결과이다. 어떤 조인인지 고르시오.",
+    "title": "아래 결과값은 주어진 2개 테이블을 특정 JOIN하여 나타난 결과이다. 어떤 조인인지 고르시오.",
     "options": [
       "INNER JOIN",
       "FULL OUTER  JOIN",
@@ -22784,7 +22784,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 644,
-    "title": "주어진 테이블에 대해서 아래와 같은 결괏값을 반환하는 SQL문을 고르시오.",
+    "title": "주어진 테이블에 대해서 아래와 같은 결과값을 반환하는 SQL문을 고르시오.",
     "options": [
       "SELECT\nCOUNT(CASE WHEN BAN=1 THEN 1 END)\nAS Result,\nCOUNT(CASE WHEN BAN=2 THEN 1 END)\nAS B,\nCOUNT(CASE WHEN BAN=3 THEN 1 END)\nAS C\nFROM TEST15;",
       "SELECT BAN, COUNT(DISTINCT NAME)\nAS RESULT\nFROM TEST15\nGROUP BY BAN;",
@@ -22812,7 +22812,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 645,
-    "title": "다음 중 주어진 테이블을 수행하였을 때 결괏값이 다른 것은?",
+    "title": "다음 중 주어진 테이블을 수행하였을 때 결과값이 다른 것은?",
     "options": [
       "SELECT COUNT(*) FROM TEST16 WHERE MemberID IS NOT NULL;",
       "SELECT COUNT (NULLIF(MemberID, NULL)) FROM TEST16;",
@@ -22848,7 +22848,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "CUBE(DNAME,JOB)"
     ],
     "correctIndex": 3,
-    "explanation": "결괏값을 보면 1.DNAME, JOB별 소계 2.DNMAE 별 소계 3.JOB별 소계 4.전체 집계 등 모든 조합 가능한 소계와 집계가 조회되었으므로 빈칸에 들어갈 그룹 함수는 CUBE이다.",
+    "explanation": "결과값을 보면 1.DNAME, JOB별 소계 2.DNMAE 별 소계 3.JOB별 소계 4.전체 집계 등 모든 조합 가능한 소계와 집계가 조회되었으므로 빈칸에 들어갈 그룹 함수는 CUBE이다.",
     "chapter": "그룹 함수",
     "_source": "sqld-1140",
     "_origId": "sqld-0497",
@@ -22877,7 +22877,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 647,
-    "title": "SELECT NVL(COUNT(*), 9999) FROM TABLE WHERE 1=2의 결괏값은?",
+    "title": "SELECT NVL(COUNT(*), 9999) FROM TABLE WHERE 1=2의 결과값은?",
     "options": [
       "1",
       "NULL",
@@ -23215,7 +23215,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "RANK()"
     ],
     "correctIndex": 1,
-    "explanation": "위의 결괏값에 동일한 RANK가 없으므로 ROW_NUMBER()가 되어야 한다.",
+    "explanation": "위의 결과값에 동일한 RANK가 없으므로 ROW_NUMBER()가 되어야 한다.",
     "chapter": "윈도우 함수",
     "_source": "sqld-1140",
     "_origId": "sqld-0517",
@@ -23599,7 +23599,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 674,
-    "title": "다음 주어진 테이블에서 집계 함수를 수행하였을 때 결괏값으로 다른 것을 고르시오.",
+    "title": "다음 주어진 테이블에서 집계 함수를 수행하였을 때 결과값으로 다른 것을 고르시오.",
     "options": [
       "select avg(nvl(usercount, 1)) -0.5 from test21;",
       "select avg(nvl(usercount, 0)) from test21;",
@@ -23707,7 +23707,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 678,
-    "title": "다음 주어진 데이터에 대해서 LIKE문을 사용하여 결괏값에 \"_\"가 들어간 문자열을 찾는 SQL문으로 올바른 것은?",
+    "title": "다음 주어진 데이터에 대해서 LIKE문을 사용하여 결과값에 \"_\"가 들어간 문자열을 찾는 SQL문으로 올바른 것은?",
     "options": [
       "SELECT * FROM test31 WHERE username LIKE '%_%' ESCAPE '_'",
       "SELECT * FROM test31 WHERE username LIKE '%@_%' ESCAPE '@'",
@@ -23891,7 +23891,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 685,
-    "title": "다음 주어진 두 개의 테이블에 대해서 아래와 같은 결괏값이 반환되도록 아래의 SQL문의 빈칸에 들어갈 값을 적으시오.",
+    "title": "다음 주어진 두 개의 테이블에 대해서 아래와 같은 결과값이 반환되도록 아래의 SQL문의 빈칸에 들어갈 값을 적으시오.",
     "options": [
       "GROUPING SETS(a.studentno, (b.grade, a.studentno));",
       "GROUPING SETS(b.grade, (b.grade, a.studentno));",
@@ -23899,7 +23899,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "GROUPING SETS(b.grade, (a.studentno));"
     ],
     "correctIndex": 1,
-    "explanation": "결괏값을 보면 1.b.Grade, a.StudentNo에 대한 집계,\n2.b.grade에 대한 집계가 있고 전체 집계는 없다.",
+    "explanation": "결과값을 보면 1.b.Grade, a.StudentNo에 대한 집계,\n2.b.grade에 대한 집계가 있고 전체 집계는 없다.",
     "chapter": "그룹 함수",
     "_source": "sqld-1140",
     "_origId": "sqld-0556",
@@ -24192,7 +24192,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 690,
-    "title": "주어진 데이터에 대해서 아래의 SQL문을 수행하였을 때의 결괏값이 아래의 결과와 같을 때 빈칸에 들어갈 값을 고르시오.",
+    "title": "주어진 데이터에 대해서 아래의 SQL문을 수행하였을 때의 결과값이 아래의 결과와 같을 때 빈칸에 들어갈 값을 고르시오.",
     "options": [
       "3,3",
       "2,2",

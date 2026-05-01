@@ -283,7 +283,7 @@
       "_origNo": 8,
       "subject": "2과목",
       "chapter": "함수",
-      "title": "숫자형 함수 적용과 그 결괏값이 올바르지 않은 것은?",
+      "title": "숫자형 함수 적용과 그 결과값이 올바르지 않은 것은?",
       "options": [
         "ABS(-30) = 30",
         "SIGN(-50) = -1",
@@ -3567,7 +3567,7 @@
       "_origNo": 97,
       "subject": "2과목",
       "chapter": "그룹 함수",
-      "title": "다음의 예에서 결괏값이 다른 하나는?",
+      "title": "다음의 예에서 결과값이 다른 하나는?",
       "options": [
         "SELECT NULL*2 FROM SQLD_13;",
         "SELECT NULL*3 FROM SQLD_13;",
@@ -4551,7 +4551,7 @@
       "_origNo": 121,
       "subject": "2과목",
       "chapter": "윈도우 함수",
-      "title": "다음 주어진 테이블에서 아래와 같은 결괏값을 반환하도록 아래의 SQL문의 빈칸에 들어갈 올바른 것을 고르시오.",
+      "title": "다음 주어진 테이블에서 아래와 같은 결과값을 반환하도록 아래의 SQL문의 빈칸에 들어갈 올바른 것을 고르시오.",
       "options": [
         "RANK()",
         "NTILE()",
@@ -4559,7 +4559,7 @@
         "DENSE_RANK()"
       ],
       "correctIndex": 3,
-      "explanation": "결괏값에서 중복된 등수 2등 다음에 바로 다음 등수인 3이 왔으므로 빈칸에는 DENSE_RANK가 와야 한다.",
+      "explanation": "결과값에서 중복된 등수 2등 다음에 바로 다음 등수인 3이 왔으므로 빈칸에는 DENSE_RANK가 와야 한다.",
       "references": [
         {
           "type": "table",
@@ -5013,7 +5013,7 @@
       "_origNo": 137,
       "subject": "2과목",
       "chapter": "그룹 함수",
-      "title": "“TEST” 테이블에 있는 NUM2 칼럼의 총 행은 10개이고 2개의 NULL 값이 있다. 다음의 SQL문을 실행할 경우 결괏값은?",
+      "title": "“TEST” 테이블에 있는 NUM2 칼럼의 총 행은 10개이고 2개의 NULL 값이 있다. 다음의 SQL문을 실행할 경우 결과값은?",
       "options": [
         "ㄱ : 10, ㄴ : 10",
         "ㄱ : 10, ㄴ : 8",
@@ -5512,7 +5512,7 @@
       "_origNo": 158,
       "subject": "2과목",
       "chapter": "GROUP BY·HAVING",
-      "title": "다음 주어진 그룹 함수와 동일한 결괏값을 반환하는 그룹 함수를 고르시오.",
+      "title": "다음 주어진 그룹 함수와 동일한 결과값을 반환하는 그룹 함수를 고르시오.",
       "options": [
         "GROUP BY ROLLUP(DEPTNO, JOB);",
         "GROUP BY (DEPTNO, JOB, (DEPTNO, JOB), ());",
@@ -6399,7 +6399,7 @@
       "_origNo": 191,
       "subject": "2과목",
       "chapter": "관계형 DB와 SELECT",
-      "title": "아래의 결괏값을 보고 SQL문의 빈칸에 들어갈 수 있는 내용을 고르시오.",
+      "title": "아래의 결과값을 보고 SQL문의 빈칸에 들어갈 수 있는 내용을 고르시오.",
       "options": [
         "ROLLUP(DEPTNO, JOB)",
         "GROUPING SETS(DEPTNO, JOB)",
@@ -6407,7 +6407,7 @@
         "CUBE(DEPTNO, JOB)"
       ],
       "correctIndex": 0,
-      "explanation": "주어진 결괏값을 보면 1. DEPTNO별 합계, 2. DEPTNO, JOB별 합계, 3. 전체 합계가 조회되므로 빈칸에는 그룹 함수 중 ROLLUP이 와야 한다.",
+      "explanation": "주어진 결과값을 보면 1. DEPTNO별 합계, 2. DEPTNO, JOB별 합계, 3. 전체 합계가 조회되므로 빈칸에는 그룹 함수 중 ROLLUP이 와야 한다.",
       "references": [
         {
           "type": "table",
