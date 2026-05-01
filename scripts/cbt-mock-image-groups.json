@@ -1,0 +1,937 @@
+{
+  "totalImages": 62,
+  "uniqueGroups": 62,
+  "dupeGroups": 0,
+  "groups": [
+    {
+      "hash": "c129ee1bb9c2",
+      "size": 7565,
+      "srcs": [
+        "/cbt-images/cbt73-q002-p-1-c129ee1bb9.png"
+      ],
+      "questions": [
+        {
+          "_id": "cbt-002",
+          "_origNo": 2,
+          "alt": "보기 자료 1",
+          "caption": null
+        }
+      ]
+    },
+    {
+      "hash": "0f126e0b431d",
+      "size": 6382,
+      "srcs": [
+        "/cbt-images/cbt73-q005-p-1-0f126e0b43.png"
+      ],
+      "questions": [
+        {
+          "_id": "cbt-005",
+          "_origNo": 5,
+          "alt": "보기 자료 1",
+          "caption": null
+        }
+      ]
+    },
+    {
+      "hash": "8f05d3a51bb1",
+      "size": 9783,
+      "srcs": [
+        "/cbt-images/cbt73-q015-p-1-8f05d3a51b.png"
+      ],
+      "questions": [
+        {
+          "_id": "cbt-015",
+          "_origNo": 15,
+          "alt": "보기 자료 1",
+          "caption": null
+        }
+      ]
+    },
+    {
+      "hash": "9aaede65ae45",
+      "size": 4310,
+      "srcs": [
+        "/cbt-images/cbt73-q015-e-1-9aaede65ae.png"
+      ],
+      "questions": [
+        {
+          "_id": "cbt-015",
+          "_origNo": 15,
+          "alt": "해설 자료 1",
+          "caption": null
+        }
+      ]
+    },
+    {
+      "hash": "85828baa421d",
+      "size": 8096,
+      "srcs": [
+        "/cbt-images/cbt73-q018-p-1-85828baa42.png"
+      ],
+      "questions": [
+        {
+          "_id": "cbt-018",
+          "_origNo": 18,
+          "alt": "보기 자료 1",
+          "caption": null
+        }
+      ]
+    },
+    {
+      "hash": "605b855c16a2",
+      "size": 27130,
+      "srcs": [
+        "/cbt-images/cbt73-q024-p-1-605b855c16.png"
+      ],
+      "questions": [
+        {
+          "_id": "cbt-024",
+          "_origNo": 24,
+          "alt": "보기 자료 1",
+          "caption": null
+        }
+      ]
+    },
+    {
+      "hash": "bbec4a26bb71",
+      "size": 13947,
+      "srcs": [
+        "/cbt-images/cbt73-q025-p-1-bbec4a26bb.png"
+      ],
+      "questions": [
+        {
+          "_id": "cbt-025",
+          "_origNo": 25,
+          "alt": "보기 자료 1",
+          "caption": null
+        }
+      ]
+    },
+    {
+      "hash": "3ee781011404",
+      "size": 11330,
+      "srcs": [
+        "/cbt-images/cbt73-q029-p-1-3ee7810114.png"
+      ],
+      "questions": [
+        {
+          "_id": "cbt-029",
+          "_origNo": 29,
+          "alt": "보기 자료 1",
+          "caption": null
+        }
+      ]
+    },
+    {
+      "hash": "56440d2f7be7",
+      "size": 10840,
+      "srcs": [
+        "/cbt-images/cbt73-q029-p-2-56440d2f7b.png"
+      ],
+      "questions": [
+        {
+          "_id": "cbt-029",
+          "_origNo": 29,
+          "alt": "보기 자료 2",
+          "caption": null
+        }
+      ]
+    },
+    {
+      "hash": "671f063eb9ac",
+      "size": 9155,
+      "srcs": [
+        "/cbt-images/cbt73-q029-e-1-671f063eb9.png"
+      ],
+      "questions": [
+        {
+          "_id": "cbt-029",
+          "_origNo": 29,
+          "alt": "해설 자료 1",
+          "caption": null
+        }
+      ]
+    },
+    {
+      "hash": "5eca2459c5fe",
+      "size": 11211,
+      "srcs": [
+        "/cbt-images/cbt73-q033-p-1-5eca2459c5.png"
+      ],
+      "questions": [
+        {
+          "_id": "cbt-033",
+          "_origNo": 33,
+          "alt": "보기 자료 1",
+          "caption": null
+        }
+      ]
+    },
+    {
+      "hash": "328fc1003837",
+      "size": 8019,
+      "srcs": [
+        "/cbt-images/cbt73-q034-p-1-328fc10038.png"
+      ],
+      "questions": [
+        {
+          "_id": "cbt-034",
+          "_origNo": 34,
+          "alt": "보기 자료 1",
+          "caption": null
+        }
+      ]
+    },
+    {
+      "hash": "c5dff65b5aa6",
+      "size": 4304,
+      "srcs": [
+        "/cbt-images/cbt73-q040-p-1-c5dff65b5a.png"
+      ],
+      "questions": [
+        {
+          "_id": "cbt-040",
+          "_origNo": 40,
+          "alt": "보기 자료 1",
+          "caption": null
+        }
+      ]
+    },
+    {
+      "hash": "6319e66a9adb",
+      "size": 7567,
+      "srcs": [
+        "/cbt-images/cbt73-q043-p-1-6319e66a9a.png"
+      ],
+      "questions": [
+        {
+          "_id": "cbt-043",
+          "_origNo": 43,
+          "alt": "보기 자료 1",
+          "caption": null
+        }
+      ]
+    },
+    {
+      "hash": "b00a51c52cce",
+      "size": 15782,
+      "srcs": [
+        "/cbt-images/cbt73-q047-p-1-b00a51c52c.png"
+      ],
+      "questions": [
+        {
+          "_id": "cbt-047",
+          "_origNo": 47,
+          "alt": "보기 자료 1",
+          "caption": null
+        }
+      ]
+    },
+    {
+      "hash": "0878cc10f6b4",
+      "size": 4592,
+      "srcs": [
+        "/cbt-images/cbt73-q050-p-1-0878cc10f6.png"
+      ],
+      "questions": [
+        {
+          "_id": "cbt-050",
+          "_origNo": 50,
+          "alt": "보기 자료 1",
+          "caption": null
+        }
+      ]
+    },
+    {
+      "hash": "ce9b42f7e549",
+      "size": 8397,
+      "srcs": [
+        "/cbt-images/cbt73-q058-p-1-ce9b42f7e5.png"
+      ],
+      "questions": [
+        {
+          "_id": "cbt-058",
+          "_origNo": 58,
+          "alt": "보기 자료 1",
+          "caption": null
+        }
+      ]
+    },
+    {
+      "hash": "4be1f15a0ff2",
+      "size": 9679,
+      "srcs": [
+        "/cbt-images/cbt73-q062-p-1-4be1f15a0f.png"
+      ],
+      "questions": [
+        {
+          "_id": "cbt-062",
+          "_origNo": 62,
+          "alt": "보기 자료 1",
+          "caption": null
+        }
+      ]
+    },
+    {
+      "hash": "aa223742046e",
+      "size": 31868,
+      "srcs": [
+        "/cbt-images/cbt73-q064-p-1-aa22374204.png"
+      ],
+      "questions": [
+        {
+          "_id": "cbt-064",
+          "_origNo": 64,
+          "alt": "보기 자료 1",
+          "caption": null
+        }
+      ]
+    },
+    {
+      "hash": "0f21f5518117",
+      "size": 39075,
+      "srcs": [
+        "/cbt-images/cbt73-q065-p-1-0f21f55181.png"
+      ],
+      "questions": [
+        {
+          "_id": "cbt-065",
+          "_origNo": 65,
+          "alt": "보기 자료 1",
+          "caption": null
+        }
+      ]
+    },
+    {
+      "hash": "1072242cb136",
+      "size": 12641,
+      "srcs": [
+        "/cbt-images/cbt73-q066-p-1-1072242cb1.png"
+      ],
+      "questions": [
+        {
+          "_id": "cbt-066",
+          "_origNo": 66,
+          "alt": "보기 자료 1",
+          "caption": null
+        }
+      ]
+    },
+    {
+      "hash": "92a88a1b517f",
+      "size": 5007,
+      "srcs": [
+        "/cbt-images/cbt73-q066-e-1-92a88a1b51.png"
+      ],
+      "questions": [
+        {
+          "_id": "cbt-066",
+          "_origNo": 66,
+          "alt": "해설 자료 1",
+          "caption": null
+        }
+      ]
+    },
+    {
+      "hash": "a8434ce9fcd2",
+      "size": 46886,
+      "srcs": [
+        "/cbt-images/cbt73-q067-p-1-a8434ce9fc.png"
+      ],
+      "questions": [
+        {
+          "_id": "cbt-067",
+          "_origNo": 67,
+          "alt": "보기 자료 1",
+          "caption": null
+        }
+      ]
+    },
+    {
+      "hash": "06a133ad949a",
+      "size": 4296,
+      "srcs": [
+        "/cbt-images/cbt73-q069-p-1-06a133ad94.png"
+      ],
+      "questions": [
+        {
+          "_id": "cbt-069",
+          "_origNo": 69,
+          "alt": "보기 자료 1",
+          "caption": null
+        }
+      ]
+    },
+    {
+      "hash": "96acba3c9f78",
+      "size": 4985,
+      "srcs": [
+        "/cbt-images/cbt73-q069-e-1-96acba3c9f.png"
+      ],
+      "questions": [
+        {
+          "_id": "cbt-069",
+          "_origNo": 69,
+          "alt": "해설 자료 1",
+          "caption": null
+        }
+      ]
+    },
+    {
+      "hash": "c6d2b6edd72e",
+      "size": 2289,
+      "srcs": [
+        "/cbt-images/cbt73-q070-p-1-c6d2b6edd7.png"
+      ],
+      "questions": [
+        {
+          "_id": "cbt-070",
+          "_origNo": 70,
+          "alt": "보기 자료 1",
+          "caption": null
+        }
+      ]
+    },
+    {
+      "hash": "a4f247864493",
+      "size": 7955,
+      "srcs": [
+        "/cbt-images/cbt73-q077-p-1-a4f2478644.png"
+      ],
+      "questions": [
+        {
+          "_id": "cbt-077",
+          "_origNo": 77,
+          "alt": "보기 자료 1",
+          "caption": null
+        }
+      ]
+    },
+    {
+      "hash": "549936cc8541",
+      "size": 24909,
+      "srcs": [
+        "/cbt-images/cbt73-q080-p-1-549936cc85.png"
+      ],
+      "questions": [
+        {
+          "_id": "cbt-080",
+          "_origNo": 80,
+          "alt": "보기 자료 1",
+          "caption": null
+        }
+      ]
+    },
+    {
+      "hash": "8ecbede4ab01",
+      "size": 7512,
+      "srcs": [
+        "/cbt-images/cbt73-q086-p-1-8ecbede4ab.png"
+      ],
+      "questions": [
+        {
+          "_id": "cbt-086",
+          "_origNo": 86,
+          "alt": "보기 자료 1",
+          "caption": null
+        }
+      ]
+    },
+    {
+      "hash": "7c298b55f5f3",
+      "size": 7244,
+      "srcs": [
+        "/cbt-images/cbt73-q087-p-1-7c298b55f5.png"
+      ],
+      "questions": [
+        {
+          "_id": "cbt-087",
+          "_origNo": 87,
+          "alt": "보기 자료 1",
+          "caption": null
+        }
+      ]
+    },
+    {
+      "hash": "968a15c1162e",
+      "size": 17247,
+      "srcs": [
+        "/cbt-images/cbt73-q096-p-1-968a15c116.png"
+      ],
+      "questions": [
+        {
+          "_id": "cbt-096",
+          "_origNo": 96,
+          "alt": "보기 자료 1",
+          "caption": null
+        }
+      ]
+    },
+    {
+      "hash": "60fa417f1ff0",
+      "size": 6835,
+      "srcs": [
+        "/cbt-images/cbt73-q097-p-1-60fa417f1f.png"
+      ],
+      "questions": [
+        {
+          "_id": "cbt-097",
+          "_origNo": 97,
+          "alt": "보기 자료 1",
+          "caption": null
+        }
+      ]
+    },
+    {
+      "hash": "9352318ef9ed",
+      "size": 12137,
+      "srcs": [
+        "/cbt-images/cbt73-q107-p-1-9352318ef9.png"
+      ],
+      "questions": [
+        {
+          "_id": "cbt-107",
+          "_origNo": 107,
+          "alt": "보기 자료 1",
+          "caption": null
+        }
+      ]
+    },
+    {
+      "hash": "3048a8dcf308",
+      "size": 8574,
+      "srcs": [
+        "/cbt-images/cbt73-q109-p-1-3048a8dcf3.png"
+      ],
+      "questions": [
+        {
+          "_id": "cbt-109",
+          "_origNo": 109,
+          "alt": "보기 자료 1",
+          "caption": null
+        }
+      ]
+    },
+    {
+      "hash": "fca9b1463652",
+      "size": 22099,
+      "srcs": [
+        "/cbt-images/cbt73-q111-p-1-fca9b14636.png"
+      ],
+      "questions": [
+        {
+          "_id": "cbt-111",
+          "_origNo": 111,
+          "alt": "보기 자료 1",
+          "caption": null
+        }
+      ]
+    },
+    {
+      "hash": "2e828facdfb5",
+      "size": 17666,
+      "srcs": [
+        "/cbt-images/cbt73-q112-p-1-2e828facdf.png"
+      ],
+      "questions": [
+        {
+          "_id": "cbt-112",
+          "_origNo": 112,
+          "alt": "보기 자료 1",
+          "caption": null
+        }
+      ]
+    },
+    {
+      "hash": "dea04d4284ff",
+      "size": 10870,
+      "srcs": [
+        "/cbt-images/cbt73-q112-e-1-dea04d4284.png"
+      ],
+      "questions": [
+        {
+          "_id": "cbt-112",
+          "_origNo": 112,
+          "alt": "해설 자료 1",
+          "caption": null
+        }
+      ]
+    },
+    {
+      "hash": "0fb12d407949",
+      "size": 5891,
+      "srcs": [
+        "/cbt-images/cbt73-q114-p-1-0fb12d4079.png"
+      ],
+      "questions": [
+        {
+          "_id": "cbt-114",
+          "_origNo": 114,
+          "alt": "보기 자료 1",
+          "caption": null
+        }
+      ]
+    },
+    {
+      "hash": "ded4bf737ce5",
+      "size": 2998,
+      "srcs": [
+        "/cbt-images/cbt73-q114-e-1-ded4bf737c.png"
+      ],
+      "questions": [
+        {
+          "_id": "cbt-114",
+          "_origNo": 114,
+          "alt": "해설 자료 1",
+          "caption": null
+        }
+      ]
+    },
+    {
+      "hash": "dbd4cce3d62c",
+      "size": 3631,
+      "srcs": [
+        "/cbt-images/cbt73-q114-e-2-dbd4cce3d6.png"
+      ],
+      "questions": [
+        {
+          "_id": "cbt-114",
+          "_origNo": 114,
+          "alt": "해설 자료 2",
+          "caption": null
+        }
+      ]
+    },
+    {
+      "hash": "20dfa60a014d",
+      "size": 5081,
+      "srcs": [
+        "/cbt-images/cbt73-q117-p-1-20dfa60a01.png"
+      ],
+      "questions": [
+        {
+          "_id": "cbt-117",
+          "_origNo": 117,
+          "alt": "보기 자료 1",
+          "caption": null
+        }
+      ]
+    },
+    {
+      "hash": "0a7ca3b427e2",
+      "size": 8627,
+      "srcs": [
+        "/cbt-images/cbt73-q120-p-1-0a7ca3b427.png"
+      ],
+      "questions": [
+        {
+          "_id": "cbt-120",
+          "_origNo": 120,
+          "alt": "보기 자료 1",
+          "caption": null
+        }
+      ]
+    },
+    {
+      "hash": "b9f0d5e00ef4",
+      "size": 47092,
+      "srcs": [
+        "/cbt-images/cbt73-q121-p-1-b9f0d5e00e.png"
+      ],
+      "questions": [
+        {
+          "_id": "cbt-121",
+          "_origNo": 121,
+          "alt": "보기 자료 1",
+          "caption": null
+        }
+      ]
+    },
+    {
+      "hash": "4f03d61a83e0",
+      "size": 13480,
+      "srcs": [
+        "/cbt-images/cbt73-q130-p-1-4f03d61a83.png"
+      ],
+      "questions": [
+        {
+          "_id": "cbt-130",
+          "_origNo": 130,
+          "alt": "보기 자료 1",
+          "caption": null
+        }
+      ]
+    },
+    {
+      "hash": "9c120724374a",
+      "size": 13248,
+      "srcs": [
+        "/cbt-images/cbt73-q136-p-1-9c12072437.png"
+      ],
+      "questions": [
+        {
+          "_id": "cbt-136",
+          "_origNo": 136,
+          "alt": "보기 자료 1",
+          "caption": null
+        }
+      ]
+    },
+    {
+      "hash": "2607bf28965e",
+      "size": 2339,
+      "srcs": [
+        "/cbt-images/cbt73-q136-e-1-2607bf2896.png"
+      ],
+      "questions": [
+        {
+          "_id": "cbt-136",
+          "_origNo": 136,
+          "alt": "해설 자료 1",
+          "caption": null
+        }
+      ]
+    },
+    {
+      "hash": "c643e0dbc583",
+      "size": 48004,
+      "srcs": [
+        "/cbt-images/cbt73-q148-p-1-c643e0dbc5.png"
+      ],
+      "questions": [
+        {
+          "_id": "cbt-148",
+          "_origNo": 148,
+          "alt": "보기 자료 1",
+          "caption": null
+        }
+      ]
+    },
+    {
+      "hash": "2bdaa812523c",
+      "size": 16168,
+      "srcs": [
+        "/cbt-images/cbt73-q151-p-1-2bdaa81252.png"
+      ],
+      "questions": [
+        {
+          "_id": "cbt-151",
+          "_origNo": 151,
+          "alt": "보기 자료 1",
+          "caption": null
+        }
+      ]
+    },
+    {
+      "hash": "bb991cc08ed8",
+      "size": 12439,
+      "srcs": [
+        "/cbt-images/cbt73-q159-p-1-bb991cc08e.png"
+      ],
+      "questions": [
+        {
+          "_id": "cbt-159",
+          "_origNo": 159,
+          "alt": "보기 자료 1",
+          "caption": null
+        }
+      ]
+    },
+    {
+      "hash": "57e8bc5733e8",
+      "size": 6327,
+      "srcs": [
+        "/cbt-images/cbt73-q159-e-1-57e8bc5733.png"
+      ],
+      "questions": [
+        {
+          "_id": "cbt-159",
+          "_origNo": 159,
+          "alt": "해설 자료 1",
+          "caption": null
+        }
+      ]
+    },
+    {
+      "hash": "809d927c85eb",
+      "size": 7391,
+      "srcs": [
+        "/cbt-images/cbt73-q163-p-1-809d927c85.png"
+      ],
+      "questions": [
+        {
+          "_id": "cbt-163",
+          "_origNo": 163,
+          "alt": "보기 자료 1",
+          "caption": null
+        }
+      ]
+    },
+    {
+      "hash": "bf30034fa971",
+      "size": 6460,
+      "srcs": [
+        "/cbt-images/cbt73-q164-p-1-bf30034fa9.png"
+      ],
+      "questions": [
+        {
+          "_id": "cbt-164",
+          "_origNo": 164,
+          "alt": "보기 자료 1",
+          "caption": null
+        }
+      ]
+    },
+    {
+      "hash": "a313d23cd85a",
+      "size": 15195,
+      "srcs": [
+        "/cbt-images/cbt73-q169-e-1-a313d23cd8.png"
+      ],
+      "questions": [
+        {
+          "_id": "cbt-169",
+          "_origNo": 169,
+          "alt": "해설 자료 1",
+          "caption": null
+        }
+      ]
+    },
+    {
+      "hash": "96cada2ae95f",
+      "size": 8691,
+      "srcs": [
+        "/cbt-images/cbt73-q179-p-1-96cada2ae9.png"
+      ],
+      "questions": [
+        {
+          "_id": "cbt-179",
+          "_origNo": 179,
+          "alt": "보기 자료 1",
+          "caption": null
+        }
+      ]
+    },
+    {
+      "hash": "0c1daf0392f1",
+      "size": 15259,
+      "srcs": [
+        "/cbt-images/cbt73-q187-p-1-0c1daf0392.png"
+      ],
+      "questions": [
+        {
+          "_id": "cbt-187",
+          "_origNo": 187,
+          "alt": "보기 자료 1",
+          "caption": null
+        }
+      ]
+    },
+    {
+      "hash": "fd2f7804e049",
+      "size": 24728,
+      "srcs": [
+        "/cbt-images/cbt73-q191-p-1-fd2f7804e0.png"
+      ],
+      "questions": [
+        {
+          "_id": "cbt-191",
+          "_origNo": 191,
+          "alt": "보기 자료 1",
+          "caption": null
+        }
+      ]
+    },
+    {
+      "hash": "10e1adeb0702",
+      "size": 42638,
+      "srcs": [
+        "/cbt-images/cbt73-q196-p-1-10e1adeb07.png"
+      ],
+      "questions": [
+        {
+          "_id": "cbt-196",
+          "_origNo": 196,
+          "alt": "보기 자료 1",
+          "caption": null
+        }
+      ]
+    },
+    {
+      "hash": "1289875a5caf",
+      "size": 7262,
+      "srcs": [
+        "/cbt-images/cbt73-q200-p-1-1289875a5c.png"
+      ],
+      "questions": [
+        {
+          "_id": "cbt-200",
+          "_origNo": 200,
+          "alt": "보기 자료 1",
+          "caption": null
+        }
+      ]
+    },
+    {
+      "hash": "633229139233",
+      "size": 13863,
+      "srcs": [
+        "/cbt-images/cbt73-q202-p-1-6332291392.png"
+      ],
+      "questions": [
+        {
+          "_id": "cbt-202",
+          "_origNo": 202,
+          "alt": "보기 자료 1",
+          "caption": null
+        }
+      ]
+    },
+    {
+      "hash": "e81b86d8b867",
+      "size": 27058,
+      "srcs": [
+        "/cbt-images/cbt73-q205-p-1-e81b86d8b8.png"
+      ],
+      "questions": [
+        {
+          "_id": "cbt-205",
+          "_origNo": 205,
+          "alt": "보기 자료 1",
+          "caption": null
+        }
+      ]
+    },
+    {
+      "hash": "f8025487990f",
+      "size": 34586,
+      "srcs": [
+        "/cbt-images/cbt73-q206-p-1-f802548799.png"
+      ],
+      "questions": [
+        {
+          "_id": "cbt-206",
+          "_origNo": 206,
+          "alt": "보기 자료 1",
+          "caption": null
+        }
+      ]
+    },
+    {
+      "hash": "e69f392c1706",
+      "size": 18440,
+      "srcs": [
+        "/cbt-images/cbt73-q208-p-1-e69f392c17.png"
+      ],
+      "questions": [
+        {
+          "_id": "cbt-208",
+          "_origNo": 208,
+          "alt": "보기 자료 1",
+          "caption": null
+        }
+      ]
+    }
+  ]
+}
