@@ -1,21 +1,20 @@
 // CBT 모의고사 (이기적 209문항) 이미지 audit 파일럿 페이지 생성기.
-// 52문항 / 62 image refs 의 비포 → 표/sql/text ref 변환 결과 비포·애프터 시각화.
+// 52문항 / 101 image refs (main 62 + option 39) 의 비포 → 표/sql/text ref 변환 결과 비포·애프터 시각화.
 // docs/qa/cbt-mock-audit-pilot.html 단일 파일.
 
 import fs from 'node:fs';
 import path from 'node:path';
+import crypto from 'node:crypto';
 
 const HERE = path.resolve('.');
 const SRC = path.join(HERE, 'scripts/authored/cbt-mock.json');
 
-// 변환 JSON 위치 (배치별 worktree).
-// imageKey hash → refs 매핑 (modern-box-conversions.json 과 동일 schema 기대).
-// 처음에는 비어 있고, batch 가 진행되며 추가됨.
+// 단일 batch (cbt-mock-batch-1) 컨버전 파일. 같은 worktree 내부 파일.
 const conversionFiles = [
-  // ...[1, 2, 3, 4, 5].map((n) => ({ batch: n, file: path.resolve(HERE, `../양파단-wt-cs-cbt-mock-batch-${n}/scripts/cbt-mock-batch-${n}-conversions.json`) })),
+  { batch: 1, file: path.join(HERE, 'scripts/cbt-mock-batch-1-conversions.json') },
 ];
 
-const conversions = {}; // hash → refs[]
+const conversions = {}; // hash → { batch, refs[], name, scope }
 for (const { batch, file } of conversionFiles) {
   if (!fs.existsSync(file)) {
     console.warn(`SKIP missing: ${file}`);
@@ -27,6 +26,38 @@ for (const { batch, file } of conversionFiles) {
   }
 }
 
+function hashOf(src) {
+  const fp = path.join('public', src.replace(/^\//, ''));
+  if (!fs.existsSync(fp)) return null;
+  return crypto.createHash('md5').update(fs.readFileSync(fp)).digest('hex').slice(0, 12);
+}
+
+// hash 매칭으로 image ref → 변환 후 refs 로 교체. 미매칭/_todo 인 경우 원본 유지.
+function transformRefs(refs) {
+  if (!Array.isArray(refs)) return { refs, hasPending: false, hasDone: false };
+  const out = [];
+  let hasPending = false, hasDone = false;
+  for (const r of refs) {
+    if (r && r.type === 'image' && r.src) {
+      const h = hashOf(r.src);
+      const conv = h ? conversions[h] : null;
+      if (conv) {
+        const allTodo = conv.refs.every((cr) => cr._todo === true);
+        if (allTodo) {
+          out.push(r);
+          hasPending = true;
+        } else {
+          for (const cr of conv.refs) out.push(cr);
+          hasDone = true;
+        }
+        continue;
+      }
+    }
+    out.push(r);
+  }
+  return { refs: out, hasPending, hasDone };
+}
+
 // cbt-mock.json 로드 → image ref 가진 문항만 entry 화
 const data = JSON.parse(fs.readFileSync(SRC, 'utf-8'));
 const questions = data.authored || [];
@@ -34,12 +65,21 @@ const questions = data.authored || [];
 const entries = [];
 for (const q of questions) {
   const refs = q.references || [];
-  const imageRefs = refs.filter((r) => r.type === 'image');
-  if (imageRefs.length === 0) continue;
+  const optRefs = q.optionReferences || [];
+  const hasMainImg = refs.some((r) => r.type === 'image');
+  const hasOptImg = optRefs.some((arr) => (arr || []).some((r) => r.type === 'image'));
+  if (!hasMainImg && !hasOptImg) continue;
 
-  // 변환된 ref 가 있는지: 첫 image src 의 md5(상대경로) 로 conversion 매칭 (단순)
-  // 일단은 question id 로 매핑, 추후 batch 진행 시 hash 기반으로 정교화.
-  const after = conversions[q._id] ? conversions[q._id].refs : null;
+  const beforeRefs = refs;
+  const beforeOpt = optRefs;
+  const afterMain = transformRefs(refs);
+  const afterOpt = optRefs.map((arr) => transformRefs(arr || []));
+
+  const anyDone = afterMain.hasDone || afterOpt.some((x) => x.hasDone);
+  const anyPending = afterMain.hasPending || afterOpt.some((x) => x.hasPending);
+  let status = 'pending';
+  if (anyDone && !anyPending) status = 'done';
+  else if (anyDone && anyPending) status = 'partial';
 
   entries.push({
     id: q._id,
@@ -47,9 +87,14 @@ for (const q of questions) {
     subject: q.subject,
     chapter: q.chapter,
     title: q.title,
-    refs, // 전체 (sql + image + ...)
-    after, // null = 미정독, [] = batch 진행중
-    batch: conversions[q._id]?.batch ?? null,
+    options: q.options || [],
+    correctIndex: typeof q.correctIndex === 'number' ? q.correctIndex : null,
+    beforeRefs,
+    beforeOpt,
+    afterRefs: afterMain.refs,
+    afterOpt: afterOpt.map((x) => x.refs),
+    status,
+    batch: 1,
   });
 }
 
@@ -115,6 +160,11 @@ const html = `<!doctype html>
   .ref-text { font-size: 13px; line-height: 1.5; padding: 8px; background: var(--code-bg); border: 1px solid var(--border); border-radius: 4px; }
   .ref-todo { font-size: 12px; color: var(--warn); padding: 12px; background: var(--code-bg); border: 1px dashed var(--warn); border-radius: 4px; text-align: center; }
   .ref-unknown { font-size: 12px; color: var(--warn); }
+  .opt-block { margin-top: 12px; padding-top: 10px; border-top: 1px dashed var(--border); }
+  .opt-label { font-size: 12px; color: var(--muted); margin-bottom: 6px; font-family: monospace; }
+  .opt-label.correct { color: #4ade80; font-weight: 600; }
+  .entry-header .partial { background: rgba(217, 119, 6, 0.15); color: var(--warn); padding: 2px 8px; border-radius: 4px; font-size: 12px; font-family: monospace; }
+  .entry-header .done { background: rgba(74, 222, 128, 0.15); color: #4ade80; padding: 2px 8px; border-radius: 4px; font-size: 12px; font-family: monospace; }
 </style>
 </head>
 <body>
@@ -152,8 +202,10 @@ function renderRef(ref) {
     return '<div class="ref">' + cap + '<div class="ref-text">' + escapeHtml(ref.text || '') + '</div></div>';
   }
   if (ref.type === 'image') {
-    const imgSrc = ref.src.startsWith('/') ? '../../public' + ref.src : ref.src;
-    let html = '<div class="ref">' + cap + '<img src="' + escapeHtml(imgSrc) + '" alt="' + escapeHtml(ref.alt || '') + '">';
+    // 정적 서버 (scripts/serve-audit-pilot.mjs, 5174) 가 /cbt-images/* → public/cbt-images/* 로 매핑.
+    // file:// 직접 접근 시에는 ../../public 으로 자동 대체.
+    const imgSrc = ref.src;
+    let html = '<div class="ref">' + cap + '<img src="' + escapeHtml(imgSrc) + '" alt="' + escapeHtml(ref.alt || '') + '" data-fallback="../../public' + escapeHtml(ref.src) + '">';
     if (ref.alt) html += '<div class="ref-caption" style="margin-top:6px;font-style:italic;">alt: ' + escapeHtml(ref.alt) + '</div>';
     return html + '</div>';
   }
@@ -165,6 +217,21 @@ function escapeHtml(s) {
   return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
 
+function renderSide(mainRefs, optRefsArr, optionLabels, correctIndex) {
+  let html = (mainRefs || []).map(renderRef).join('');
+  if (Array.isArray(optRefsArr) && optRefsArr.length > 0) {
+    optRefsArr.forEach((arr, i) => {
+      if (!arr || arr.length === 0) return;
+      const isCorrect = i === correctIndex;
+      const labelText = '보기 ' + (i + 1) + (isCorrect ? ' ✓' : '');
+      const labelCls = 'opt-label' + (isCorrect ? ' correct' : '');
+      html += '<div class="opt-block"><div class="' + labelCls + '">' + escapeHtml(labelText) + '</div>' +
+        arr.map(renderRef).join('') + '</div>';
+    });
+  }
+  return html || '<div class="ref-todo">(refs 없음)</div>';
+}
+
 function renderPage(page) {
   currentPage = page;
   const start = (page - 1) * PAGE_SIZE;
@@ -172,17 +239,16 @@ function renderPage(page) {
   const main = document.getElementById('content');
   let html = '';
   for (const e of slice) {
-    const beforeHtml = (e.refs || []).map(renderRef).join('');
-    const afterHtml = e.after
-      ? e.after.map(renderRef).join('')
-      : '<div class="ref-todo">⏳ 미정독 (TODO)</div>';
-    const status = e.after
-      ? '<span class="batch">batch-' + e.batch + '</span>'
-      : '<span class="pending">pending</span>';
+    const beforeHtml = renderSide(e.beforeRefs, e.beforeOpt, e.options, e.correctIndex);
+    const afterHtml = renderSide(e.afterRefs, e.afterOpt, e.options, e.correctIndex);
+    let statusBadge;
+    if (e.status === 'done') statusBadge = '<span class="done">done</span>';
+    else if (e.status === 'partial') statusBadge = '<span class="partial">partial</span>';
+    else statusBadge = '<span class="pending">pending</span>';
     html += '<div class="entry">' +
       '<div class="entry-header">' +
         '<span class="key">' + escapeHtml(e.id) + '</span>' +
-        status +
+        statusBadge +
         '<span class="subject">' + escapeHtml(e.subject || '') + ' · ' + escapeHtml(e.chapter || '') + '</span>' +
         '<span class="title">' + escapeHtml('#' + (e.origNo ?? '') + '. ' + (e.title || '')) + '</span>' +
       '</div>' +
@@ -246,6 +312,17 @@ function renderPager() {
 const hashMatch = location.hash.match(/page=(\\d+)/);
 const initPage = hashMatch ? Math.max(1, Math.min(TOTAL_PAGES, parseInt(hashMatch[1], 10))) : 1;
 renderPage(initPage);
+
+// file:// 직접 접근 시 /cbt-images/... 로딩 실패 → ../../public/... 로 폴백.
+if (location.protocol === 'file:') {
+  document.addEventListener('error', (ev) => {
+    const t = ev.target;
+    if (t && t.tagName === 'IMG' && t.dataset.fallback && !t.dataset.fellback) {
+      t.dataset.fellback = '1';
+      t.src = t.dataset.fallback;
+    }
+  }, true);
+}
 </script>
 </body>
 </html>

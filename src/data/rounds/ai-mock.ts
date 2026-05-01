@@ -1088,9 +1088,25 @@ export const AI_MOCK: QuizQuestion[] = [
         "code": "SELECT COUNT(SALARY), SUM(SALARY),AVG(SALARY)FROM EMPLOYEE;"
       },
       {
-        "type": "image",
-        "src": "/cbt-images/cbt73-q005-p-1-0f126e0b43.png",
-        "alt": "보기 자료 1"
+        "type": "table",
+        "caption": "[EMPLOYEE] 테이블",
+        "headers": [
+          "SALARY"
+        ],
+        "rows": [
+          [
+            "1000"
+          ],
+          [
+            "2000"
+          ],
+          [
+            "NULL"
+          ],
+          [
+            "3000"
+          ]
+        ]
       }
     ]
   },
@@ -1317,14 +1333,48 @@ export const AI_MOCK: QuizQuestion[] = [
         "code": "WITH REGION_TOTAL AS (SELECT REGION, SUM(AMOUNT) AS TOTALFROM TB_ORDERGROUP BY REGION)SELECT COUNT(*) FROM REGION_TOTALWHERE TOTAL > 1500;"
       },
       {
-        "type": "image",
-        "src": "/cbt-images/cbt73-q015-p-1-8f05d3a51b.png",
-        "alt": "보기 자료 1"
+        "type": "table",
+        "caption": "[TB_ORDER] 테이블",
+        "headers": [
+          "ORDER_ID",
+          "REGION",
+          "AMOUNT"
+        ],
+        "rows": [
+          [
+            "1",
+            "EAST",
+            "1000"
+          ],
+          [
+            "2",
+            "EAST",
+            "2000"
+          ],
+          [
+            "3",
+            "WEST",
+            "500"
+          ]
+        ]
       },
       {
-        "type": "image",
-        "src": "/cbt-images/cbt73-q015-e-1-9aaede65ae.png",
-        "alt": "해설 자료 1"
+        "type": "table",
+        "caption": "[REGION_TOTAL]",
+        "headers": [
+          "REGION",
+          "TOTAL"
+        ],
+        "rows": [
+          [
+            "EAST",
+            "3000"
+          ],
+          [
+            "WEST",
+            "500"
+          ]
+        ]
       }
     ]
   },
@@ -1393,9 +1443,26 @@ export const AI_MOCK: QuizQuestion[] = [
         "code": "SELECT USER_ID, SUM(AMOUNT)FROM TB_PURCHASEGROUP BY USER_ID;"
       },
       {
-        "type": "image",
-        "src": "/cbt-images/cbt73-q018-p-1-85828baa42.png",
-        "alt": "보기 자료 1"
+        "type": "table",
+        "caption": "[TB_PURCHASE] 테이블",
+        "headers": [
+          "USER_ID",
+          "AMOUNT"
+        ],
+        "rows": [
+          [
+            "U1",
+            "100"
+          ],
+          [
+            "U2",
+            "150"
+          ],
+          [
+            "U1",
+            "200"
+          ]
+        ]
       }
     ]
   },
@@ -1520,9 +1587,62 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 24,
     "references": [
       {
-        "type": "image",
-        "src": "/cbt-images/cbt73-q024-p-1-605b855c16.png",
-        "alt": "보기 자료 1"
+        "type": "table",
+        "caption": "[student]",
+        "headers": [
+          "name",
+          "term",
+          "degree",
+          "department"
+        ],
+        "rows": [
+          [
+            "Kim",
+            "5",
+            "3.5",
+            "computer"
+          ],
+          [
+            "Lee",
+            "5",
+            "4",
+            "computer"
+          ],
+          [
+            "Park",
+            "7",
+            "2.5",
+            "physics"
+          ],
+          [
+            "Choi",
+            "7",
+            "2.8",
+            "physics"
+          ],
+          [
+            "Ryu",
+            "6",
+            "3",
+            "math"
+          ],
+          [
+            "Jo",
+            "3",
+            "3.5",
+            "math"
+          ],
+          [
+            "Yang",
+            "1",
+            "2",
+            "math"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT count(*)\nFROM student\nGROUP BY department\nHAVING count(*) > 2;"
       }
     ]
   },
@@ -1617,19 +1737,86 @@ export const AI_MOCK: QuizQuestion[] = [
         "code": "[쿼리] SELECT ENAME,(ㄱ)(ENAME) OVER (ORDER BY HIREDATE)AS PREV_EMP,(ㄴ)(ENAME) OVER (ORDER BY HIREDATE)AS NEXT_EMPFROM EMP;"
       },
       {
-        "type": "image",
-        "src": "/cbt-images/cbt73-q029-p-1-3ee7810114.png",
-        "alt": "보기 자료 1"
+        "type": "table",
+        "caption": "[EMP] 테이블",
+        "headers": [
+          "ENAME",
+          "HIREDATE"
+        ],
+        "rows": [
+          [
+            "KING",
+            "1981-11-17"
+          ],
+          [
+            "CLARK",
+            "1981-06-09"
+          ],
+          [
+            "MILLER",
+            "1982-01-23"
+          ],
+          [
+            "JONES",
+            "1981-04-02"
+          ]
+        ]
       },
       {
-        "type": "image",
-        "src": "/cbt-images/cbt73-q029-p-2-56440d2f7b.png",
-        "alt": "보기 자료 2"
+        "type": "table",
+        "caption": "[실행 결과]",
+        "headers": [
+          "ENAME",
+          "PREV_EMP",
+          "NEXT_EMP"
+        ],
+        "rows": [
+          [
+            "JONES",
+            "NULL",
+            "CLARK"
+          ],
+          [
+            "CLARK",
+            "JONES",
+            "KING"
+          ],
+          [
+            "KING",
+            "CLARK",
+            "MILLER"
+          ],
+          [
+            "MILLER",
+            "KING",
+            "NULL"
+          ]
+        ]
       },
       {
-        "type": "image",
-        "src": "/cbt-images/cbt73-q029-e-1-671f063eb9.png",
-        "alt": "해설 자료 1"
+        "type": "table",
+        "headers": [
+          "ENAME",
+          "HIREDATE"
+        ],
+        "rows": [
+          [
+            "JONES",
+            "1981-04-02"
+          ],
+          [
+            "CLARK",
+            "1981-06-09"
+          ],
+          [
+            "KING",
+            "1981-11-17"
+          ],
+          [
+            "MILLER",
+            "1982-01-23"
+          ]
+        ]
       }
     ]
   },
@@ -1724,9 +1911,46 @@ export const AI_MOCK: QuizQuestion[] = [
         "code": "[쿼리][1] SELECT SUM(SAL + BONUS) FROM EMP WHERE DEPTNO = 10;[2] S E L E C T S U M(N V L(S A L, 0) + NVL(BONUS, 0)) FROM EMP;[3] SELECT SUM(SAL) + SUM(BONUS) FROM EMP ;"
       },
       {
-        "type": "image",
-        "src": "/cbt-images/cbt73-q033-p-1-5eca2459c5.png",
-        "alt": "보기 자료 1"
+        "type": "table",
+        "caption": "[EMP] 테이블",
+        "headers": [
+          "ENAME",
+          "SAL",
+          "BONUS",
+          "DEPTNO"
+        ],
+        "rows": [
+          [
+            "A",
+            "100",
+            "NULL",
+            "10"
+          ],
+          [
+            "B",
+            "NULL",
+            "20",
+            "10"
+          ],
+          [
+            "C",
+            "30",
+            "10",
+            "NULL"
+          ],
+          [
+            "D",
+            "50",
+            "30",
+            "20"
+          ],
+          [
+            "E",
+            "20",
+            "NULL",
+            "NULL"
+          ]
+        ]
       }
     ]
   },
@@ -1751,9 +1975,31 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 34,
     "references": [
       {
-        "type": "image",
-        "src": "/cbt-images/cbt73-q034-p-1-328fc10038.png",
-        "alt": "보기 자료 1"
+        "type": "table",
+        "caption": "[TB_USER] 테이블",
+        "headers": [
+          "USER_ID"
+        ],
+        "rows": [
+          [
+            "A123"
+          ],
+          [
+            "1ABC"
+          ],
+          [
+            "B5"
+          ],
+          [
+            "C_99"
+          ],
+          [
+            "DEND"
+          ],
+          [
+            "Z8"
+          ]
+        ]
       }
     ]
   },
@@ -2008,9 +2254,40 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 47,
     "references": [
       {
-        "type": "image",
-        "src": "/cbt-images/cbt73-q047-p-1-b00a51c52c.png",
-        "alt": "보기 자료 1"
+        "type": "table",
+        "headers": [
+          "DEPARTMENT_ID"
+        ],
+        "rows": [
+          [
+            "NULL"
+          ],
+          [
+            "10"
+          ],
+          [
+            "20"
+          ],
+          [
+            "30"
+          ],
+          [
+            "40"
+          ],
+          [
+            "50"
+          ],
+          [
+            "220"
+          ],
+          [
+            "230"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT DISTINCT DEPARTMENT_ID\nFROM HR.EMPLOYEES A\nWHERE A.DEPARTMENT_ID <= ALL (30, 50);"
       }
     ]
   },
@@ -2081,9 +2358,29 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 50,
     "references": [
       {
-        "type": "image",
-        "src": "/cbt-images/cbt73-q050-p-1-0878cc10f6.png",
-        "alt": "보기 자료 1"
+        "type": "table",
+        "headers": [
+          "EMPNO",
+          "DEPTNO"
+        ],
+        "rows": [
+          [
+            "7902",
+            "20"
+          ],
+          [
+            "7934",
+            "10"
+          ],
+          [
+            "",
+            "40"
+          ],
+          [
+            "8031",
+            ""
+          ]
+        ]
       }
     ]
   },
@@ -2342,9 +2639,35 @@ export const AI_MOCK: QuizQuestion[] = [
         "code": "SELECT COUNT(AGE) FROM TB_STUDENTWHERE AGE > 20 ;"
       },
       {
-        "type": "image",
-        "src": "/cbt-images/cbt73-q062-p-1-4be1f15a0f.png",
-        "alt": "보기 자료 1"
+        "type": "table",
+        "caption": "[TB_STUDENT] 테이블",
+        "headers": [
+          "ID",
+          "NAME",
+          "AGE"
+        ],
+        "rows": [
+          [
+            "1",
+            "Kim",
+            "20"
+          ],
+          [
+            "2",
+            "Lee",
+            "22"
+          ],
+          [
+            "3",
+            "Park",
+            "NULL"
+          ],
+          [
+            "4",
+            "Choi",
+            "21"
+          ]
+        ]
       }
     ]
   },
@@ -2395,9 +2718,115 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 64,
     "references": [
       {
-        "type": "image",
-        "src": "/cbt-images/cbt73-q064-p-1-aa22374204.png",
-        "alt": "보기 자료 1"
+        "type": "table",
+        "caption": "[EMP TABLE]",
+        "headers": [
+          "DEPTNO",
+          "JOB",
+          "SAL"
+        ],
+        "rows": [
+          [
+            "20",
+            "CLERK",
+            "800"
+          ],
+          [
+            "30",
+            "SALESMAN",
+            "1600"
+          ],
+          [
+            "30",
+            "SALESMAN",
+            "1250"
+          ],
+          [
+            "20",
+            "MANAGER",
+            "2975"
+          ],
+          [
+            "30",
+            "SALESMAN",
+            "1250"
+          ],
+          [
+            "30",
+            "MANAGER",
+            "2850"
+          ],
+          [
+            "10",
+            "MANAGER",
+            "2450"
+          ],
+          [
+            "20",
+            "ANALYST",
+            "3000"
+          ],
+          [
+            "10",
+            "PRESIDENT",
+            "5000"
+          ],
+          [
+            "30",
+            "SALESMAN",
+            "1500"
+          ],
+          [
+            "20",
+            "CLERK",
+            "1100"
+          ],
+          [
+            "30",
+            "CLERK",
+            "950"
+          ],
+          [
+            "20",
+            "ANALYST",
+            "3000"
+          ],
+          [
+            "10",
+            "CLERK",
+            "1300"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "[DEPT TABLE]",
+        "headers": [
+          "DEPTNO",
+          "DNAME"
+        ],
+        "rows": [
+          [
+            "10",
+            "ACCOUNTING"
+          ],
+          [
+            "20",
+            "RESEARCH"
+          ],
+          [
+            "30",
+            "SALES"
+          ],
+          [
+            "40",
+            "OPERATIONS"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT DNAME, JOB, COUNT(*) \"Total Emp\", SUM(SAL) \"Total Sal\"\nFROM SCOTT.EMP A, SCOTT.DEPT B\nWHERE A.DEPTNO = B.DEPTNO\nGROUP BY CUBE(DNAME, JOB);"
       }
     ]
   },
@@ -2422,9 +2851,81 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 65,
     "references": [
       {
-        "type": "image",
-        "src": "/cbt-images/cbt73-q065-p-1-0f21f55181.png",
-        "alt": "보기 자료 1"
+        "type": "table",
+        "caption": "[TAB1]",
+        "headers": [
+          "COL1",
+          "COL2",
+          "KEY1"
+        ],
+        "rows": [
+          [
+            "BBB",
+            "123",
+            "B"
+          ],
+          [
+            "DDD",
+            "222",
+            "C"
+          ],
+          [
+            "EEE",
+            "233",
+            "D"
+          ],
+          [
+            "FFF",
+            "143",
+            "E"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "[TAB2]",
+        "headers": [
+          "KEY2",
+          "COL1",
+          "COL2"
+        ],
+        "rows": [
+          [
+            "A",
+            "10",
+            "BC"
+          ],
+          [
+            "B",
+            "10",
+            "CD"
+          ],
+          [
+            "C",
+            "10",
+            "DE"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT * FROM TAB1 A INNER JOIN TAB2 B ON (A.KEY1 = B.KEY2);"
+      },
+      {
+        "type": "sql",
+        "code": "SELECT * FROM TAB1 A LEFT OUTER JOIN TAB2 B ON (A.KEY1 = B.KEY2);"
+      },
+      {
+        "type": "sql",
+        "code": "SELECT * FROM TAB1 A RIGHT OUTER JOIN TAB2 B ON (A.KEY1 = B.KEY2);"
+      },
+      {
+        "type": "sql",
+        "code": "SELECT * FROM TAB1 A FULL OUTER JOIN TAB2 B ON (A.KEY1 = B.KEY2);"
+      },
+      {
+        "type": "sql",
+        "code": "SELECT * FROM TAB1 A CROSS JOIN TAB2 B;"
       }
     ]
   },
@@ -2451,7 +2952,8 @@ export const AI_MOCK: QuizQuestion[] = [
       {
         "type": "image",
         "src": "/cbt-images/cbt73-q067-p-1-a8434ce9fc.png",
-        "alt": "보기 자료 1"
+        "alt": "회원/회원연락처/회원연락처이력 ERD + 샘플 데이터",
+        "caption": null
       }
     ]
   },
@@ -2500,14 +3002,65 @@ export const AI_MOCK: QuizQuestion[] = [
         "code": "SELECT * FROM AFULL OUTER JOIN B ON A.ID = B.IDWHERE A.ID IS NULLOR B.ID IS NULL;"
       },
       {
-        "type": "image",
-        "src": "/cbt-images/cbt73-q069-p-1-06a133ad94.png",
-        "alt": "보기 자료 1"
+        "type": "table",
+        "caption": "[A] 테이블",
+        "headers": [
+          "ID"
+        ],
+        "rows": [
+          [
+            "1"
+          ],
+          [
+            "2"
+          ],
+          [
+            "3"
+          ]
+        ]
       },
       {
-        "type": "image",
-        "src": "/cbt-images/cbt73-q069-e-1-96acba3c9f.png",
-        "alt": "해설 자료 1"
+        "type": "table",
+        "caption": "[B] 테이블",
+        "headers": [
+          "ID"
+        ],
+        "rows": [
+          [
+            "2"
+          ],
+          [
+            "3"
+          ],
+          [
+            "4"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "headers": [
+          "ID(A 테이블)",
+          "ID(B 테이블)"
+        ],
+        "rows": [
+          [
+            "1",
+            "NULL"
+          ],
+          [
+            "2",
+            "2"
+          ],
+          [
+            "3",
+            "3"
+          ],
+          [
+            "NULL",
+            "4"
+          ]
+        ]
       }
     ]
   },
@@ -2538,7 +3091,8 @@ export const AI_MOCK: QuizQuestion[] = [
       {
         "type": "image",
         "src": "/cbt-images/cbt73-q070-p-1-c6d2b6edd7.png",
-        "alt": "보기 자료 1"
+        "alt": "고객-주문 ERD (점선 = 비식별 관계)",
+        "caption": null
       }
     ]
   },
@@ -2699,9 +3253,40 @@ export const AI_MOCK: QuizQuestion[] = [
         "code": "SELECT NAME FROM STUDENT_AINTERSECTSELECT NAME FROM STUDENT_B;"
       },
       {
-        "type": "image",
-        "src": "/cbt-images/cbt73-q077-p-1-a4f2478644.png",
-        "alt": "보기 자료 1"
+        "type": "table",
+        "caption": "[STUDENT_A] 테이블",
+        "headers": [
+          "NAME"
+        ],
+        "rows": [
+          [
+            "Kim"
+          ],
+          [
+            "Lee"
+          ],
+          [
+            "Park"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "[STUDENT_B] 테이블",
+        "headers": [
+          "NAME"
+        ],
+        "rows": [
+          [
+            "Lee"
+          ],
+          [
+            "Choi"
+          ],
+          [
+            "Park"
+          ]
+        ]
       }
     ]
   },
@@ -2772,9 +3357,12 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 80,
     "references": [
       {
-        "type": "image",
-        "src": "/cbt-images/cbt73-q080-p-1-549936cc85.png",
-        "alt": "보기 자료 1"
+        "type": "sql",
+        "code": "create table 주문 (\n    주문번호    int            not null,\n    주문자명    varchar(40)    null,\n    주문금액    money          null,\n    주문일자    varchar(8)     null );"
+      },
+      {
+        "type": "sql",
+        "code": "create unique index 주문_pk on 주문 (주문번호);\ncreate index 주문_ind11 on 주문 (주문자명);\ncreate index 주문_ind12 on 주문 (주문일자, 주문금액);"
       }
     ]
   },
@@ -2901,7 +3489,8 @@ export const AI_MOCK: QuizQuestion[] = [
       {
         "type": "image",
         "src": "/cbt-images/cbt73-q087-p-1-7c298b55f5.png",
-        "alt": "보기 자료 1"
+        "alt": "고객-리뷰 ERD (Barker 표기법)",
+        "caption": null
       }
     ]
   },
@@ -3104,9 +3693,30 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 97,
     "references": [
       {
-        "type": "image",
-        "src": "/cbt-images/cbt73-q097-p-1-60fa417f1f.png",
-        "alt": "보기 자료 1"
+        "type": "table",
+        "caption": "[SQLD_13]",
+        "headers": [
+          "고객",
+          "거래내역"
+        ],
+        "rows": [
+          [
+            "철수",
+            "100"
+          ],
+          [
+            "민정",
+            ""
+          ],
+          [
+            "아름",
+            "300"
+          ],
+          [
+            "예진",
+            ""
+          ]
+        ]
       }
     ]
   },
@@ -3327,9 +3937,40 @@ export const AI_MOCK: QuizQuestion[] = [
         "code": "SELECT CUSTOMER_ID, SUM(AMOUNT)FROM TB_ORDERGROUP BY CUSTOMER_IDHAVING SUM(AMOUNT) >= 2000;"
       },
       {
-        "type": "image",
-        "src": "/cbt-images/cbt73-q107-p-1-9352318ef9.png",
-        "alt": "보기 자료 1"
+        "type": "table",
+        "caption": "[TB_ORDER] 테이블",
+        "headers": [
+          "ORDER_ID",
+          "CUSTOMER_ID",
+          "AMOUNT"
+        ],
+        "rows": [
+          [
+            "1",
+            "A",
+            "1000"
+          ],
+          [
+            "2",
+            "A",
+            "1500"
+          ],
+          [
+            "3",
+            "B",
+            "700"
+          ],
+          [
+            "4",
+            "B",
+            "800"
+          ],
+          [
+            "5",
+            "C",
+            "NULL"
+          ]
+        ]
       }
     ]
   },
@@ -3398,9 +4039,66 @@ export const AI_MOCK: QuizQuestion[] = [
         "code": "SELECT ORDER_IDFROM TB_ORDERWHERE CUST_ID NOT IN (SELECT CUST_IDFROM TB_CUSTOMERWHERE CITY = 'SEOUL');"
       },
       {
-        "type": "image",
-        "src": "/cbt-images/cbt73-q111-p-1-fca9b14636.png",
-        "alt": "보기 자료 1"
+        "type": "table",
+        "caption": "[TB_CUSTOMER] 테이블",
+        "headers": [
+          "CUST_ID",
+          "NAME",
+          "CITY"
+        ],
+        "rows": [
+          [
+            "1",
+            "Kim",
+            "SEOUL"
+          ],
+          [
+            "2",
+            "Lee",
+            "BUSAN"
+          ],
+          [
+            "3",
+            "Park",
+            "INCHEON"
+          ],
+          [
+            "4",
+            "Choi",
+            "SEOUL"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "[TB_ORDER] 테이블",
+        "headers": [
+          "ORDER_ID",
+          "CUST_ID",
+          "AMOUNT"
+        ],
+        "rows": [
+          [
+            "101",
+            "1",
+            "1000"
+          ],
+          [
+            "102",
+            "2",
+            "2000"
+          ],
+          [
+            "103",
+            "3",
+            "3000"
+          ],
+          [
+            "104",
+            "4",
+            "4000"
+          ]
+        ]
       }
     ]
   },
@@ -3429,14 +4127,100 @@ export const AI_MOCK: QuizQuestion[] = [
         "code": "SELECT LEVEL, ENAME, MGRFROM EMPSTART WITH ENAME = 'KING'CONNECT BY PRIOR EMPNO = MGR;"
       },
       {
-        "type": "image",
-        "src": "/cbt-images/cbt73-q112-p-1-2e828facdf.png",
-        "alt": "보기 자료 1"
+        "type": "table",
+        "caption": "[EMP] 테이블",
+        "headers": [
+          "EMPNO",
+          "ENAME",
+          "MGR"
+        ],
+        "rows": [
+          [
+            "1001",
+            "KING",
+            "NULL"
+          ],
+          [
+            "1002",
+            "BLAKE",
+            "1001"
+          ],
+          [
+            "1003",
+            "CLARK",
+            "1001"
+          ],
+          [
+            "1004",
+            "JONES",
+            "1003"
+          ],
+          [
+            "1005",
+            "SMITH",
+            "1004"
+          ],
+          [
+            "1006",
+            "SCOTT",
+            "1002"
+          ],
+          [
+            "1007",
+            "JAMES",
+            "1006"
+          ],
+          [
+            "1008",
+            "FORD",
+            "NULL"
+          ]
+        ]
       },
       {
-        "type": "image",
-        "src": "/cbt-images/cbt73-q112-e-1-dea04d4284.png",
-        "alt": "해설 자료 1"
+        "type": "table",
+        "headers": [
+          "LEVEL",
+          "ENAME",
+          "MGR"
+        ],
+        "rows": [
+          [
+            "1",
+            "KING",
+            "NULL"
+          ],
+          [
+            "2",
+            "BLAKE",
+            "1001"
+          ],
+          [
+            "2",
+            "CLARK",
+            "1001"
+          ],
+          [
+            "3",
+            "SCOTT",
+            "1002"
+          ],
+          [
+            "3",
+            "JONES",
+            "1003"
+          ],
+          [
+            "4",
+            "JAMES",
+            "1006"
+          ],
+          [
+            "4",
+            "SMITH",
+            "1004"
+          ]
+        ]
       }
     ]
   },
@@ -3491,19 +4275,104 @@ export const AI_MOCK: QuizQuestion[] = [
         "code": "SELECT COUNT(*) FROM T1LEFT OUTER JOIN T2 ON T1.COL = T2.COLLEFT OUTER JOIN T3 ON T1.COL = T3.COLWHERE T2.COL IS NOT NULL ;"
       },
       {
-        "type": "image",
-        "src": "/cbt-images/cbt73-q114-p-1-0fb12d4079.png",
-        "alt": "보기 자료 1"
+        "type": "table",
+        "caption": "[T1] 테이블",
+        "headers": [
+          "COL"
+        ],
+        "rows": [
+          [
+            "1"
+          ],
+          [
+            "2"
+          ],
+          [
+            "3"
+          ]
+        ]
       },
       {
-        "type": "image",
-        "src": "/cbt-images/cbt73-q114-e-1-ded4bf737c.png",
-        "alt": "해설 자료 1"
+        "type": "table",
+        "caption": "[T2] 테이블",
+        "headers": [
+          "COL"
+        ],
+        "rows": [
+          [
+            "1"
+          ],
+          [
+            "2"
+          ],
+          [
+            "NULL"
+          ]
+        ]
       },
       {
-        "type": "image",
-        "src": "/cbt-images/cbt73-q114-e-2-dbd4cce3d6.png",
-        "alt": "해설 자료 2"
+        "type": "table",
+        "caption": "[T3] 테이블",
+        "headers": [
+          "COL"
+        ],
+        "rows": [
+          [
+            "1"
+          ],
+          [
+            "NULL"
+          ],
+          [
+            "NULL"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "headers": [
+          "T1.COL",
+          "T2.COL"
+        ],
+        "rows": [
+          [
+            "1",
+            "1"
+          ],
+          [
+            "2",
+            "2"
+          ],
+          [
+            "3",
+            "NULL"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "headers": [
+          "T1.COL",
+          "T2.COL",
+          "T3.COL"
+        ],
+        "rows": [
+          [
+            "1",
+            "1",
+            "1"
+          ],
+          [
+            "2",
+            "2",
+            "NULL"
+          ],
+          [
+            "3",
+            "NULL",
+            "NULL"
+          ]
+        ]
       }
     ]
   },
@@ -3576,7 +4445,8 @@ export const AI_MOCK: QuizQuestion[] = [
       {
         "type": "image",
         "src": "/cbt-images/cbt73-q117-p-1-20dfa60a01.png",
-        "alt": "보기 자료 1"
+        "alt": "수강_지도 — 결정자 {학번, 과목번호} → 종속자 {성적, 지도교수명, 학과명} (과목번호 → {지도교수명, 학과명})",
+        "caption": null
       }
     ]
   },
@@ -3647,9 +4517,56 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 120,
     "references": [
       {
-        "type": "image",
-        "src": "/cbt-images/cbt73-q120-p-1-0a7ca3b427.png",
-        "alt": "보기 자료 1"
+        "type": "table",
+        "caption": "[A]",
+        "headers": [
+          "COL1"
+        ],
+        "rows": [
+          [
+            "1"
+          ],
+          [
+            "2"
+          ],
+          [
+            "3"
+          ],
+          [
+            "4"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "[B]",
+        "headers": [
+          "COL1"
+        ],
+        "rows": [
+          [
+            "4"
+          ],
+          [
+            "5"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "[C]",
+        "headers": [
+          "COL1"
+        ],
+        "rows": [
+          [
+            "2"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT * FROM A\nUNION SELECT * FROM B\nMINUS SELECT * FROM C;"
       }
     ]
   },
@@ -3674,9 +4591,111 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 121,
     "references": [
       {
-        "type": "image",
-        "src": "/cbt-images/cbt73-q121-p-1-b9f0d5e00e.png",
-        "alt": "보기 자료 1"
+        "type": "table",
+        "caption": "[SQLD_29]",
+        "headers": [
+          "이름",
+          "부서",
+          "직책",
+          "급여"
+        ],
+        "rows": [
+          [
+            "조조",
+            "경영지원부",
+            "부장",
+            "300"
+          ],
+          [
+            "유비",
+            "경영지원부",
+            "과장",
+            "250"
+          ],
+          [
+            "제갈량",
+            "인사부",
+            "대리",
+            "250"
+          ],
+          [
+            "사마의",
+            "인사부",
+            "대리",
+            "200"
+          ],
+          [
+            "관우",
+            "영업부",
+            "사원",
+            "150"
+          ],
+          [
+            "장비",
+            "영업부",
+            "사원",
+            "100"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "[결과]",
+        "headers": [
+          "순위",
+          "이름",
+          "부서",
+          "직책",
+          "급여"
+        ],
+        "rows": [
+          [
+            "1",
+            "조조",
+            "경영지원부",
+            "부장",
+            "300"
+          ],
+          [
+            "2",
+            "유비",
+            "경영지원부",
+            "과장",
+            "250"
+          ],
+          [
+            "2",
+            "제갈량",
+            "인사부",
+            "대리",
+            "250"
+          ],
+          [
+            "3",
+            "사마의",
+            "인사부",
+            "대리",
+            "200"
+          ],
+          [
+            "4",
+            "관우",
+            "영업부",
+            "사원",
+            "150"
+          ],
+          [
+            "5",
+            "장비",
+            "영업부",
+            "사원",
+            "100"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT (    ) OVER (ORDER BY 급여 desc) as 순위,\n       이름, 부서, 직책, 급여\nFROM SQLD_29;"
       }
     ]
   },
@@ -3861,9 +4880,34 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 130,
     "references": [
       {
-        "type": "image",
-        "src": "/cbt-images/cbt73-q130-p-1-4f03d61a83.png",
-        "alt": "보기 자료 1"
+        "type": "table",
+        "headers": [
+          "⟨TX1⟩",
+          "시점",
+          "⟨TX2⟩"
+        ],
+        "rows": [
+          [
+            "Update emp set sal = sal +100\nWhere empno = 7788;",
+            "T1",
+            ""
+          ],
+          [
+            "",
+            "T2",
+            "Update emp set sal = sal +200\nWhere empno = 7788;"
+          ],
+          [
+            "Commit;",
+            "T3",
+            ""
+          ],
+          [
+            "",
+            "T4",
+            "Commit;"
+          ]
+        ]
       }
     ]
   },
@@ -3998,14 +5042,57 @@ export const AI_MOCK: QuizQuestion[] = [
         "code": "SELECT *FROM EMPLOYEE EWHERE EXISTS (SELECT 1FROM SALARY SWHERE S.EMP_ID = E.EMP_IDAND S.AMOUNT IS NOT NULL);"
       },
       {
-        "type": "image",
-        "src": "/cbt-images/cbt73-q136-p-1-9c12072437.png",
-        "alt": "보기 자료 1"
+        "type": "table",
+        "caption": "[EMPLOYEE] 테이블",
+        "headers": [
+          "EMP_ID",
+          "NAME"
+        ],
+        "rows": [
+          [
+            "1",
+            "Kim"
+          ],
+          [
+            "2",
+            "Lee"
+          ],
+          [
+            "3",
+            "Park"
+          ]
+        ]
       },
       {
-        "type": "image",
-        "src": "/cbt-images/cbt73-q136-e-1-2607bf2896.png",
-        "alt": "해설 자료 1"
+        "type": "table",
+        "caption": "[SALARY] 테이블",
+        "headers": [
+          "EMP_ID",
+          "AMOUNT"
+        ],
+        "rows": [
+          [
+            "1",
+            "3000"
+          ],
+          [
+            "2",
+            "NULL"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "headers": [
+          "EMP_ID",
+          "NAME"
+        ],
+        "rows": [
+          [
+            "1",
+            "Kim"
+          ]
+        ]
       }
     ]
   },
@@ -4268,9 +5355,78 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 148,
     "references": [
       {
-        "type": "image",
-        "src": "/cbt-images/cbt73-q148-p-1-c643e0dbc5.png",
-        "alt": "보기 자료 1"
+        "type": "table",
+        "caption": "[employee]",
+        "headers": [
+          "eno",
+          "ename",
+          "address",
+          "score",
+          "dno"
+        ],
+        "rows": [
+          [
+            "10",
+            "Hong",
+            "서울",
+            "80",
+            "100"
+          ],
+          [
+            "20",
+            "Kim",
+            "대전",
+            "90",
+            "100"
+          ],
+          [
+            "30",
+            "Lee",
+            "강릉",
+            "90",
+            "100"
+          ],
+          [
+            "40",
+            "Kim",
+            "대전",
+            "95",
+            "200"
+          ],
+          [
+            "50",
+            "Hong",
+            "서울",
+            "65",
+            "300"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "[department]",
+        "headers": [
+          "dno",
+          "dname"
+        ],
+        "rows": [
+          [
+            "100",
+            "영업"
+          ],
+          [
+            "200",
+            "개발"
+          ],
+          [
+            "300",
+            "서비스"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "/* 질의문 */\nSELECT e.dno, d.dname, e.ename, e.score\nFROM employee e, department d\nWHERE e.dno = d.dno and (e.dno, score) IN\n      (SELECT dno, max(score)\n       FROM employee GROUP BY dno);"
       }
     ]
   },
@@ -4341,9 +5497,47 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 151,
     "references": [
       {
-        "type": "image",
-        "src": "/cbt-images/cbt73-q151-p-1-2bdaa81252.png",
-        "alt": "보기 자료 1"
+        "type": "table",
+        "caption": "[TB_CUSTOMER] 테이블",
+        "headers": [
+          "CUST_ID",
+          "NAME"
+        ],
+        "rows": [
+          [
+            "1",
+            "Kim"
+          ],
+          [
+            "2",
+            "Lee"
+          ],
+          [
+            "3",
+            "Park"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "[TB_ORDER] 테이블",
+        "headers": [
+          "ORDER_ID",
+          "CUST_ID",
+          "AMOUNT"
+        ],
+        "rows": [
+          [
+            "101",
+            "1",
+            "10000"
+          ],
+          [
+            "102",
+            "2",
+            "12000"
+          ]
+        ]
       }
     ]
   },
@@ -4536,14 +5730,73 @@ export const AI_MOCK: QuizQuestion[] = [
         "code": "SELECT COUNT(*)FROM EMPLOYEE ELEFT JOIN DEPARTMENT D ON E.DEPT_ID =D.DEPT_IDWHERE D.LOC = 'SEOUL';"
       },
       {
-        "type": "image",
-        "src": "/cbt-images/cbt73-q159-p-1-bb991cc08e.png",
-        "alt": "보기 자료 1"
+        "type": "table",
+        "caption": "[EMPLOYEE] 테이블",
+        "headers": [
+          "ID",
+          "DEPT_ID"
+        ],
+        "rows": [
+          [
+            "1",
+            "10"
+          ],
+          [
+            "2",
+            "20"
+          ],
+          [
+            "3",
+            "30"
+          ]
+        ]
       },
       {
-        "type": "image",
-        "src": "/cbt-images/cbt73-q159-e-1-57e8bc5733.png",
-        "alt": "해설 자료 1"
+        "type": "table",
+        "caption": "[DEPARTMENT] 테이블",
+        "headers": [
+          "DEPT_ID",
+          "LOC"
+        ],
+        "rows": [
+          [
+            "10",
+            "SEOUL"
+          ],
+          [
+            "30",
+            "BUSAN"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "headers": [
+          "E.ID",
+          "E.DEPT_ID",
+          "D.DEPT_ID",
+          "D.LOC"
+        ],
+        "rows": [
+          [
+            "1",
+            "10",
+            "10",
+            "SEOUL"
+          ],
+          [
+            "2",
+            "20",
+            "NULL",
+            "NULL"
+          ],
+          [
+            "3",
+            "30",
+            "30",
+            "BUSAN"
+          ]
+        ]
       }
     ]
   },
@@ -4630,7 +5883,8 @@ export const AI_MOCK: QuizQuestion[] = [
       {
         "type": "image",
         "src": "/cbt-images/cbt73-q163-p-1-809d927c85.png",
-        "alt": "보기 자료 1"
+        "alt": "계정그룹(1) — 계정(N) 비식별 관계 ERD (점선 + 0/N)",
+        "caption": null
       }
     ]
   },
@@ -4659,9 +5913,26 @@ export const AI_MOCK: QuizQuestion[] = [
         "code": "SELECT *FROM (SELECT ITEM, PRICEFROM TB_ITEMORDER BY PRICE DESC)WHERE ROWNUM = 1;"
       },
       {
-        "type": "image",
-        "src": "/cbt-images/cbt73-q164-p-1-bf30034fa9.png",
-        "alt": "보기 자료 1"
+        "type": "table",
+        "caption": "[TB_ITEM] 테이블",
+        "headers": [
+          "NAME",
+          "PRICE"
+        ],
+        "rows": [
+          [
+            "A",
+            "100"
+          ],
+          [
+            "B",
+            "150"
+          ],
+          [
+            "C",
+            "200"
+          ]
+        ]
       }
     ]
   },
@@ -4778,9 +6049,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 169,
     "references": [
       {
-        "type": "image",
-        "src": "/cbt-images/cbt73-q169-e-1-a313d23cd8.png",
-        "alt": "해설 자료 1"
+        "type": "sql",
+        "code": "ALTER TABLE 테이블명 ADD CONSTRAINT 제약조건명 FOREIGN KEY(컬럼) REFERENCES 참조할테이블(컬럼);"
       }
     ]
   },
@@ -5007,9 +6277,30 @@ export const AI_MOCK: QuizQuestion[] = [
         "code": "SELECT NAMEFROM PRODUCTSWHERE PRICE = (SELECT MAX(PRICE) FROMPRODUCTS);"
       },
       {
-        "type": "image",
-        "src": "/cbt-images/cbt73-q179-p-1-96cada2ae9.png",
-        "alt": "보기 자료 1"
+        "type": "table",
+        "caption": "[TB_PRODUCT] 테이블",
+        "headers": [
+          "ID",
+          "NAME",
+          "PRICE"
+        ],
+        "rows": [
+          [
+            "1",
+            "Pen",
+            "500"
+          ],
+          [
+            "2",
+            "Pencil",
+            "300"
+          ],
+          [
+            "3",
+            "Book",
+            "1000"
+          ]
+        ]
       }
     ]
   },
@@ -5264,9 +6555,59 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 191,
     "references": [
       {
-        "type": "image",
-        "src": "/cbt-images/cbt73-q191-p-1-fd2f7804e0.png",
-        "alt": "보기 자료 1"
+        "type": "table",
+        "caption": "[결과]",
+        "headers": [
+          "DEPTNO",
+          "JOB",
+          "SUM(SAL)"
+        ],
+        "rows": [
+          [
+            "10",
+            "CLERK",
+            "1300"
+          ],
+          [
+            "10",
+            "MANAGER",
+            "2450"
+          ],
+          [
+            "10",
+            "",
+            "3750"
+          ],
+          [
+            "20",
+            "CLEK",
+            "1900"
+          ],
+          [
+            "20",
+            "ANALYST",
+            "6000"
+          ],
+          [
+            "20",
+            "MANAGER",
+            "2975"
+          ],
+          [
+            "20",
+            "",
+            "9174"
+          ],
+          [
+            "",
+            "",
+            "27549"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT DEPTNO, JOB, SUM(SAL)\nFROM SQLD_3\nGROUP BY (    );"
       }
     ]
   },
@@ -5371,9 +6712,37 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 196,
     "references": [
       {
-        "type": "image",
-        "src": "/cbt-images/cbt73-q196-p-1-10e1adeb07.png",
-        "alt": "보기 자료 1"
+        "type": "sql",
+        "code": "Select c.고객명, c.연령, c.전화번호, o.주문일자,\n       o.주문총금액, o.배송지주소\nFrom 고객 c, 주문 o\nWhere o.고객번호 = c.주문번호\nAnd c.고객등급 = 'A'\nAnd c.연령 between 51 and 60\nAnd o.주문일자 between '20101201' and '20101231'"
+      },
+      {
+        "type": "table",
+        "headers": [
+          "Rows",
+          "Row Source Operation"
+        ],
+        "rows": [
+          [
+            "10",
+            "NESTED LOOPS"
+          ],
+          [
+            "23",
+            "TABLE ACCESS BY INDEX ROWID 고객"
+          ],
+          [
+            "2978",
+            "INDEX RANGE SCAN 고객_IDX"
+          ],
+          [
+            "10",
+            "TABLE ACCESS BY INDEX ROWID 주문"
+          ],
+          [
+            "28",
+            "INDEX RANGE SCAN 주문_IDX"
+          ]
+        ]
       }
     ]
   },
@@ -5468,9 +6837,26 @@ export const AI_MOCK: QuizQuestion[] = [
         "code": "SELECT NAMEFROM EMPLOYEEWHERE SALARY > ALL ( SELECT SALARYFROM EMPLOYEE WHERE NAME != 'C' );"
       },
       {
-        "type": "image",
-        "src": "/cbt-images/cbt73-q200-p-1-1289875a5c.png",
-        "alt": "보기 자료 1"
+        "type": "table",
+        "caption": "[EMPLOYEE] 테이블",
+        "headers": [
+          "NAME",
+          "SALARY"
+        ],
+        "rows": [
+          [
+            "A",
+            "3000"
+          ],
+          [
+            "B",
+            "2000"
+          ],
+          [
+            "C",
+            "4000"
+          ]
+        ]
       }
     ]
   },
@@ -5515,9 +6901,39 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 202,
     "references": [
       {
-        "type": "image",
-        "src": "/cbt-images/cbt73-q202-p-1-6332291392.png",
-        "alt": "보기 자료 1"
+        "type": "table",
+        "headers": [
+          "ENAME",
+          "HIREDATE",
+          "SAL",
+          "PREV_SAL"
+        ],
+        "rows": [
+          [
+            "ALLEN",
+            "20-FEB-81",
+            "1600",
+            ""
+          ],
+          [
+            "WARD",
+            "22-FEB-81",
+            "1250",
+            "1600"
+          ],
+          [
+            "TURNER",
+            "08-SEP-81",
+            "1500",
+            "1250"
+          ],
+          [
+            "MARTIN",
+            "28-SEP-81",
+            "1250",
+            "1500"
+          ]
+        ]
       }
     ]
   },
@@ -5588,9 +7004,85 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 205,
     "references": [
       {
-        "type": "image",
-        "src": "/cbt-images/cbt73-q205-p-1-e81b86d8b8.png",
-        "alt": "보기 자료 1"
+        "type": "table",
+        "caption": "[R]",
+        "headers": [
+          "EID",
+          "ENAME",
+          "PHONE",
+          "SEX",
+          "DID"
+        ],
+        "rows": [
+          [
+            "823",
+            "Kim",
+            "8491",
+            "M",
+            "100"
+          ],
+          [
+            "434",
+            "Park",
+            "8488",
+            "F",
+            "101"
+          ],
+          [
+            "180",
+            "Lee",
+            "8592",
+            "M",
+            "101"
+          ],
+          [
+            "510",
+            "Choi",
+            "8598",
+            "F",
+            "100"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "[S]",
+        "headers": [
+          "DID",
+          "DNAME",
+          "ROOM"
+        ],
+        "rows": [
+          [
+            "100",
+            "Head",
+            "A403"
+          ],
+          [
+            "101",
+            "Sales",
+            "A401"
+          ],
+          [
+            "102",
+            "Proj1",
+            "A301"
+          ],
+          [
+            "103",
+            "Proj2",
+            "B101"
+          ],
+          [
+            "104",
+            "AS",
+            "B102"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT COUNT(*) FROM R, S;"
       }
     ]
   },
@@ -5615,9 +7107,47 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 206,
     "references": [
       {
-        "type": "image",
-        "src": "/cbt-images/cbt73-q206-p-1-f802548799.png",
-        "alt": "보기 자료 1"
+        "type": "sql",
+        "code": "CREATE TABLE 부서 (\n  부서번호 INT NOT NULL,\n  부서명 VARCHAR(20),\n  PRIMARY KEY(부서번호));\n\nCREATE TABLE 사원 (\n  사번 INT NOT NULL,\n  이름 VARCHAR(20),\n  부서번호 INT,\n  PRIMARY KEY(사번),\n  FOREIGN KEY(부서번호) REFERENCES 부서(부서번호));"
+      },
+      {
+        "type": "table",
+        "caption": "[부서]",
+        "headers": [
+          "부서번호",
+          "부서명"
+        ],
+        "rows": [
+          [
+            "1",
+            "자재부"
+          ],
+          [
+            "2",
+            "영업부"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "[사원]",
+        "headers": [
+          "사번",
+          "이름",
+          "부서번호"
+        ],
+        "rows": [
+          [
+            "11",
+            "홍길동",
+            "1"
+          ],
+          [
+            "12",
+            "이순신",
+            "2"
+          ]
+        ]
       }
     ]
   },
@@ -5662,9 +7192,60 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 208,
     "references": [
       {
-        "type": "image",
-        "src": "/cbt-images/cbt73-q208-p-1-e69f392c17.png",
-        "alt": "보기 자료 1"
+        "type": "table",
+        "caption": "[SQLD_37]",
+        "headers": [
+          "COL1",
+          "COL2",
+          "COL3"
+        ],
+        "rows": [
+          [
+            "null",
+            "0",
+            "30"
+          ],
+          [
+            "0",
+            "null",
+            "0"
+          ],
+          [
+            "10",
+            "20",
+            "null"
+          ],
+          [
+            "11",
+            "21",
+            "31"
+          ],
+          [
+            "12",
+            "22",
+            "32"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "[결과]",
+        "headers": [
+          "A",
+          "B",
+          "C"
+        ],
+        "rows": [
+          [
+            "12",
+            "0",
+            "33"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "select\n  (    ) AS A,\n  (    ) AS B,\n  (    ) AS C\nfrom SQLD_37;"
       }
     ]
   },

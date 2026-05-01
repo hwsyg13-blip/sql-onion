@@ -1,0 +1,2533 @@
+{
+  "schema": "md5(image content) → 변환된 references 배열. CBT 모의고사 (이기적 209) batch 1 (단일 배치, main 62 + option 39 = 101 image).",
+  "method": "Claude 시각 정독 (sharp 3x lanczos3 업스케일) + cross-check + apply-cbt-mock-conversions",
+  "policy": "표 image → table ref. SQL/text 는 sql/text ref 분리. PK 밑줄 등 보존 필요한 경우 image crop 유지.",
+  "totalGroups": 101,
+  "groups": {
+    "c129ee1bb9c2": {
+      "name": "cbt-002 #2 — TB_SCORE 테이블",
+      "imageKey": "cbt73-q002-p-1-c129ee1bb9",
+      "scope": "main",
+      "origQuestion": {
+        "id": "cbt-002",
+        "origNo": 2,
+        "subject": "2과목",
+        "chapter": "윈도우 함수"
+      },
+      "refs": [
+        {
+          "type": "table",
+          "caption": "[TB_SCORE] 테이블",
+          "headers": ["NAME", "SCORE"],
+          "rows": [
+            ["A", "90"],
+            ["B", "85"],
+            ["C", "90"]
+          ]
+        }
+      ]
+    },
+    "a193ca4f79a3": {
+      "name": "cbt-002 #2 — 보기 1 (RANK 결과)",
+      "imageKey": "cbt73-q002-c1-1-a193ca4f79",
+      "scope": "option-1",
+      "origQuestion": {
+        "id": "cbt-002",
+        "origNo": 2,
+        "subject": "2과목",
+        "chapter": "윈도우 함수"
+      },
+      "refs": [
+        {
+          "type": "table",
+          "headers": ["NAME", "RN"],
+          "rows": [
+            ["A", "1"],
+            ["C", "1"],
+            ["B", "3"]
+          ]
+        }
+      ]
+    },
+    "0667d9d3d37a": {
+      "name": "cbt-002 #2 — 보기 2 (DENSE_RANK 결과)",
+      "imageKey": "cbt73-q002-c2-1-0667d9d3d3",
+      "scope": "option-2",
+      "origQuestion": {
+        "id": "cbt-002",
+        "origNo": 2,
+        "subject": "2과목",
+        "chapter": "윈도우 함수"
+      },
+      "refs": [
+        {
+          "type": "table",
+          "headers": ["NAME", "RN"],
+          "rows": [
+            ["C", "1"],
+            ["A", "1"],
+            ["B", "2"]
+          ]
+        }
+      ]
+    },
+    "528831a94b3f": {
+      "name": "cbt-002 #2 — 보기 3",
+      "imageKey": "cbt73-q002-c3-1-528831a94b",
+      "scope": "option-3",
+      "origQuestion": {
+        "id": "cbt-002",
+        "origNo": 2,
+        "subject": "2과목",
+        "chapter": "윈도우 함수"
+      },
+      "refs": [
+        {
+          "type": "table",
+          "headers": ["NAME", "RN"],
+          "rows": [
+            ["B", "1"],
+            ["A", "2"],
+            ["C", "3"]
+          ]
+        }
+      ]
+    },
+    "3e5d107cced0": {
+      "name": "cbt-002 #2 — 보기 4 (ROW_NUMBER 결과, 정답)",
+      "imageKey": "cbt73-q002-c4-1-3e5d107cce",
+      "scope": "option-4",
+      "origQuestion": {
+        "id": "cbt-002",
+        "origNo": 2,
+        "subject": "2과목",
+        "chapter": "윈도우 함수"
+      },
+      "refs": [
+        {
+          "type": "table",
+          "headers": ["NAME", "RN"],
+          "rows": [
+            ["A", "1"],
+            ["C", "2"],
+            ["B", "3"]
+          ]
+        }
+      ]
+    },
+    "0f126e0b431d": {
+      "name": "cbt-005 #5 — EMPLOYEE 테이블 (SALARY 단일 컬럼)",
+      "imageKey": "cbt73-q005-p-1-0f126e0b43",
+      "scope": "main",
+      "origQuestion": {
+        "id": "cbt-005",
+        "origNo": 5,
+        "subject": "2과목",
+        "chapter": "그룹 함수"
+      },
+      "refs": [
+        {
+          "type": "table",
+          "caption": "[EMPLOYEE] 테이블",
+          "headers": ["SALARY"],
+          "rows": [
+            ["1000"],
+            ["2000"],
+            ["NULL"],
+            ["3000"]
+          ]
+        }
+      ]
+    },
+    "8f05d3a51bb1": {
+      "name": "cbt-015 #15 — TB_ORDER 테이블",
+      "imageKey": "cbt73-q015-p-1-8f05d3a51b",
+      "scope": "main",
+      "origQuestion": {
+        "id": "cbt-015",
+        "origNo": 15,
+        "subject": "2과목",
+        "chapter": "GROUP BY·HAVING"
+      },
+      "refs": [
+        {
+          "type": "table",
+          "caption": "[TB_ORDER] 테이블",
+          "headers": ["ORDER_ID", "REGION", "AMOUNT"],
+          "rows": [
+            ["1", "EAST", "1000"],
+            ["2", "EAST", "2000"],
+            ["3", "WEST", "500"]
+          ]
+        }
+      ]
+    },
+    "9aaede65ae45": {
+      "name": "cbt-015 #15 — REGION_TOTAL CTE 결과 (해설)",
+      "imageKey": "cbt73-q015-e-1-9aaede65ae",
+      "scope": "main",
+      "origQuestion": {
+        "id": "cbt-015",
+        "origNo": 15,
+        "subject": "2과목",
+        "chapter": "GROUP BY·HAVING"
+      },
+      "refs": [
+        {
+          "type": "table",
+          "caption": "[REGION_TOTAL]",
+          "headers": ["REGION", "TOTAL"],
+          "rows": [
+            ["EAST", "3000"],
+            ["WEST", "500"]
+          ]
+        }
+      ]
+    },
+    "85828baa421d": {
+      "name": "cbt-018 #18 — TB_PURCHASE 테이블",
+      "imageKey": "cbt73-q018-p-1-85828baa42",
+      "scope": "main",
+      "origQuestion": {
+        "id": "cbt-018",
+        "origNo": 18,
+        "subject": "2과목",
+        "chapter": "GROUP BY·HAVING"
+      },
+      "refs": [
+        {
+          "type": "table",
+          "caption": "[TB_PURCHASE] 테이블",
+          "headers": ["USER_ID", "AMOUNT"],
+          "rows": [
+            ["U1", "100"],
+            ["U2", "150"],
+            ["U1", "200"]
+          ]
+        }
+      ]
+    },
+    "605b855c16a2": {
+      "name": "cbt-024 #24 — student 테이블 + SELECT SQL (합본 이미지 분리)",
+      "imageKey": "cbt73-q024-p-1-605b855c16",
+      "scope": "main",
+      "origQuestion": {
+        "id": "cbt-024",
+        "origNo": 24,
+        "subject": "2과목",
+        "chapter": "관계형 DB와 SELECT"
+      },
+      "refs": [
+        {
+          "type": "table",
+          "caption": "[student]",
+          "headers": ["name", "term", "degree", "department"],
+          "rows": [
+            ["Kim", "5", "3.5", "computer"],
+            ["Lee", "5", "4", "computer"],
+            ["Park", "7", "2.5", "physics"],
+            ["Choi", "7", "2.8", "physics"],
+            ["Ryu", "6", "3", "math"],
+            ["Jo", "3", "3.5", "math"],
+            ["Yang", "1", "2", "math"]
+          ]
+        },
+        {
+          "type": "sql",
+          "code": "SELECT count(*)\nFROM student\nGROUP BY department\nHAVING count(*) > 2;"
+        }
+      ]
+    },
+    "bbec4a26bb71": {
+      "name": "cbt-025 #25 — TB_USER 테이블",
+      "imageKey": "cbt73-q025-p-1-bbec4a26bb",
+      "scope": "main",
+      "origQuestion": {
+        "id": "cbt-025",
+        "origNo": 25,
+        "subject": "2과목",
+        "chapter": "WHERE"
+      },
+      "refs": [
+        {
+          "type": "table",
+          "caption": "[TB_USER] 테이블",
+          "headers": ["ID", "NAME", "GRADE", "STATUS"],
+          "rows": [
+            ["1", "Kim", "A", "ACTIVE"],
+            ["2", "Lee", "B", "INACTIVE"],
+            ["3", "Park", "A", "INACTIVE"],
+            ["4", "Choi", "C", "ACTIVE"],
+            ["5", "Jang", "B", "ACTIVE"]
+          ]
+        }
+      ]
+    },
+    "c85d80225dc5": {
+      "name": "cbt-025 #25 — 보기 1",
+      "imageKey": "cbt73-q025-c1-1-c85d80225d",
+      "scope": "option-1",
+      "origQuestion": {
+        "id": "cbt-025",
+        "origNo": 25,
+        "subject": "2과목",
+        "chapter": "WHERE"
+      },
+      "refs": [
+        {
+          "type": "table",
+          "headers": ["NAME", "GRADE", "STATUS"],
+          "rows": [
+            ["Kim", "A", "ACTIVE"],
+            ["Jang", "B", "ACTIVE"]
+          ]
+        }
+      ]
+    },
+    "286aa5bb375a": {
+      "name": "cbt-025 #25 — 보기 2 (정답)",
+      "imageKey": "cbt73-q025-c2-1-286aa5bb37",
+      "scope": "option-2",
+      "origQuestion": {
+        "id": "cbt-025",
+        "origNo": 25,
+        "subject": "2과목",
+        "chapter": "WHERE"
+      },
+      "refs": [
+        {
+          "type": "table",
+          "headers": ["NAME", "GRADE", "STATUS"],
+          "rows": [
+            ["Kim", "A", "ACTIVE"],
+            ["Park", "A", "INACTIVE"],
+            ["Jang", "B", "ACTIVE"]
+          ]
+        }
+      ]
+    },
+    "f1dc097e1b3f": {
+      "name": "cbt-025 #25 — 보기 3",
+      "imageKey": "cbt73-q025-c3-1-f1dc097e1b",
+      "scope": "option-3",
+      "origQuestion": {
+        "id": "cbt-025",
+        "origNo": 25,
+        "subject": "2과목",
+        "chapter": "WHERE"
+      },
+      "refs": [
+        {
+          "type": "table",
+          "headers": ["NAME", "GRADE", "STATUS"],
+          "rows": [
+            ["Kim", "A", "ACTIVE"],
+            ["Lee", "B", "INACTIVE"],
+            ["Park", "A", "INACTIVE"],
+            ["Jang", "B", "ACTIVE"]
+          ]
+        }
+      ]
+    },
+    "8644a56be115": {
+      "name": "cbt-025 #25 — 보기 4",
+      "imageKey": "cbt73-q025-c4-1-8644a56be1",
+      "scope": "option-4",
+      "origQuestion": {
+        "id": "cbt-025",
+        "origNo": 25,
+        "subject": "2과목",
+        "chapter": "WHERE"
+      },
+      "refs": [
+        {
+          "type": "table",
+          "headers": ["NAME", "GRADE", "STATUS"],
+          "rows": [
+            ["Jang", "B", "ACTIVE"]
+          ]
+        }
+      ]
+    },
+    "3ee781011404": {
+      "name": "cbt-029 #29 — EMP 테이블",
+      "imageKey": "cbt73-q029-p-1-3ee7810114",
+      "scope": "main",
+      "origQuestion": {
+        "id": "cbt-029",
+        "origNo": 29,
+        "subject": "2과목",
+        "chapter": "윈도우 함수"
+      },
+      "refs": [
+        {
+          "type": "table",
+          "caption": "[EMP] 테이블",
+          "headers": ["ENAME", "HIREDATE"],
+          "rows": [
+            ["KING", "1981-11-17"],
+            ["CLARK", "1981-06-09"],
+            ["MILLER", "1982-01-23"],
+            ["JONES", "1981-04-02"]
+          ]
+        }
+      ]
+    },
+    "56440d2f7be7": {
+      "name": "cbt-029 #29 — 실행 결과",
+      "imageKey": "cbt73-q029-p-2-56440d2f7b",
+      "scope": "main",
+      "origQuestion": {
+        "id": "cbt-029",
+        "origNo": 29,
+        "subject": "2과목",
+        "chapter": "윈도우 함수"
+      },
+      "refs": [
+        {
+          "type": "table",
+          "caption": "[실행 결과]",
+          "headers": ["ENAME", "PREV_EMP", "NEXT_EMP"],
+          "rows": [
+            ["JONES", "NULL", "CLARK"],
+            ["CLARK", "JONES", "KING"],
+            ["KING", "CLARK", "MILLER"],
+            ["MILLER", "KING", "NULL"]
+          ]
+        }
+      ]
+    },
+    "671f063eb9ac": {
+      "name": "cbt-029 #29 — HIREDATE 정렬 (해설)",
+      "imageKey": "cbt73-q029-e-1-671f063eb9",
+      "scope": "main",
+      "origQuestion": {
+        "id": "cbt-029",
+        "origNo": 29,
+        "subject": "2과목",
+        "chapter": "윈도우 함수"
+      },
+      "refs": [
+        {
+          "type": "table",
+          "headers": ["ENAME", "HIREDATE"],
+          "rows": [
+            ["JONES", "1981-04-02"],
+            ["CLARK", "1981-06-09"],
+            ["KING", "1981-11-17"],
+            ["MILLER", "1982-01-23"]
+          ]
+        }
+      ]
+    },
+    "5eca2459c5fe": {
+      "name": "cbt-033 #33 — EMP 테이블 (SAL/BONUS/DEPTNO)",
+      "imageKey": "cbt73-q033-p-1-5eca2459c5",
+      "scope": "main",
+      "origQuestion": {
+        "id": "cbt-033",
+        "origNo": 33,
+        "subject": "2과목",
+        "chapter": "그룹 함수"
+      },
+      "refs": [
+        {
+          "type": "table",
+          "caption": "[EMP] 테이블",
+          "headers": ["ENAME", "SAL", "BONUS", "DEPTNO"],
+          "rows": [
+            ["A", "100", "NULL", "10"],
+            ["B", "NULL", "20", "10"],
+            ["C", "30", "10", "NULL"],
+            ["D", "50", "30", "20"],
+            ["E", "20", "NULL", "NULL"]
+          ]
+        }
+      ]
+    },
+    "328fc1003837": {
+      "name": "cbt-034 #34 — TB_USER 테이블",
+      "imageKey": "cbt73-q034-p-1-328fc10038",
+      "scope": "main",
+      "origQuestion": {
+        "id": "cbt-034",
+        "origNo": 34,
+        "subject": "2과목",
+        "chapter": "정규 표현식"
+      },
+      "refs": [
+        {
+          "type": "table",
+          "caption": "[TB_USER] 테이블",
+          "headers": ["USER_ID"],
+          "rows": [
+            ["A123"],
+            ["1ABC"],
+            ["B5"],
+            ["C_99"],
+            ["DEND"],
+            ["Z8"]
+          ]
+        }
+      ]
+    },
+    "c5dff65b5aa6": {
+      "name": "cbt-040 #40 — TAB 테이블",
+      "imageKey": "cbt73-q040-p-1-c5dff65b5a",
+      "scope": "main",
+      "origQuestion": {
+        "id": "cbt-040",
+        "origNo": 40,
+        "subject": "2과목",
+        "chapter": "WHERE"
+      },
+      "refs": [
+        {
+          "type": "table",
+          "caption": "[TAB] 테이블",
+          "headers": ["COL1"],
+          "rows": [
+            ["A"],
+            ["B"],
+            ["NULL"],
+            ["C"]
+          ]
+        }
+      ]
+    },
+    "4ce3c97ea968": {
+      "name": "cbt-040 #40 — 보기 1",
+      "imageKey": "cbt73-q040-c1-1-4ce3c97ea9",
+      "scope": "option-1",
+      "origQuestion": {
+        "id": "cbt-040",
+        "origNo": 40,
+        "subject": "2과목",
+        "chapter": "WHERE"
+      },
+      "refs": [
+        {
+          "type": "table",
+          "headers": ["COL1"],
+          "rows": [
+            ["A"],
+            ["A"],
+            ["B"],
+            ["NULL"]
+          ]
+        }
+      ]
+    },
+    "71d2c2e75b33": {
+      "name": "cbt-040 #40 — 보기 3",
+      "imageKey": "cbt73-q040-c3-1-71d2c2e75b",
+      "scope": "option-3",
+      "origQuestion": {
+        "id": "cbt-040",
+        "origNo": 40,
+        "subject": "2과목",
+        "chapter": "WHERE"
+      },
+      "refs": [
+        {
+          "type": "table",
+          "headers": ["COL1"],
+          "rows": [
+            ["A"],
+            ["B"],
+            ["NULL"]
+          ]
+        }
+      ]
+    },
+    "6e63ca3c07f3": {
+      "name": "cbt-040 #40 — 보기 4 (정답)",
+      "imageKey": "cbt73-q040-c4-1-6e63ca3c07",
+      "scope": "option-4",
+      "origQuestion": {
+        "id": "cbt-040",
+        "origNo": 40,
+        "subject": "2과목",
+        "chapter": "WHERE"
+      },
+      "refs": [
+        {
+          "type": "table",
+          "headers": ["COL1"],
+          "rows": [
+            ["A"],
+            ["B"]
+          ]
+        }
+      ]
+    },
+    "6319e66a9adb": {
+      "name": "cbt-043 #43 — SCORE 테이블",
+      "imageKey": "cbt73-q043-p-1-6319e66a9a",
+      "scope": "main",
+      "origQuestion": {
+        "id": "cbt-043",
+        "origNo": 43,
+        "subject": "2과목",
+        "chapter": "WHERE"
+      },
+      "refs": [
+        {
+          "type": "table",
+          "caption": "[SCORE] 테이블",
+          "headers": ["STUDENT", "SCORE"],
+          "rows": [
+            ["A", "85"],
+            ["B", "72"],
+            ["C", "NULL"]
+          ]
+        }
+      ]
+    },
+    "3fae9f07c641": {
+      "name": "cbt-043 #43 — 보기 1 (정답)",
+      "imageKey": "cbt73-q043-c1-1-3fae9f07c6",
+      "scope": "option-1",
+      "origQuestion": {
+        "id": "cbt-043",
+        "origNo": 43,
+        "subject": "2과목",
+        "chapter": "WHERE"
+      },
+      "refs": [
+        {
+          "type": "table",
+          "headers": ["STUDENT", "RESULT"],
+          "rows": [
+            ["A", "PASS"],
+            ["B", "FAIL"],
+            ["C", "NO DATA"]
+          ]
+        }
+      ]
+    },
+    "4e7ec4995276": {
+      "name": "cbt-043 #43 — 보기 2",
+      "imageKey": "cbt73-q043-c2-1-4e7ec49952",
+      "scope": "option-2",
+      "origQuestion": {
+        "id": "cbt-043",
+        "origNo": 43,
+        "subject": "2과목",
+        "chapter": "WHERE"
+      },
+      "refs": [
+        {
+          "type": "table",
+          "headers": ["STUDENT", "RESULT"],
+          "rows": [
+            ["A", "PASS"],
+            ["B", "NO DATA"],
+            ["C", "FAIL"]
+          ]
+        }
+      ]
+    },
+    "481ec2ac696e": {
+      "name": "cbt-043 #43 — 보기 3",
+      "imageKey": "cbt73-q043-c3-1-481ec2ac69",
+      "scope": "option-3",
+      "origQuestion": {
+        "id": "cbt-043",
+        "origNo": 43,
+        "subject": "2과목",
+        "chapter": "WHERE"
+      },
+      "refs": [
+        {
+          "type": "table",
+          "headers": ["STUDENT", "RESULT"],
+          "rows": [
+            ["A", "FAIL"],
+            ["B", "PASS"],
+            ["C", "NO DATA"]
+          ]
+        }
+      ]
+    },
+    "94f8c56ec37c": {
+      "name": "cbt-043 #43 — 보기 4",
+      "imageKey": "cbt73-q043-c4-1-94f8c56ec3",
+      "scope": "option-4",
+      "origQuestion": {
+        "id": "cbt-043",
+        "origNo": 43,
+        "subject": "2과목",
+        "chapter": "WHERE"
+      },
+      "refs": [
+        {
+          "type": "table",
+          "headers": ["STUDENT", "RESULT"],
+          "rows": [
+            ["A", "NO DATA"],
+            ["B", "PASS"],
+            ["C", "FAIL"]
+          ]
+        }
+      ]
+    },
+    "b00a51c52cce": {
+      "name": "cbt-047 #47 — DEPARTMENT_ID 결과 + SELECT SQL (합본 분리)",
+      "imageKey": "cbt73-q047-p-1-b00a51c52c",
+      "scope": "main",
+      "origQuestion": {
+        "id": "cbt-047",
+        "origNo": 47,
+        "subject": "2과목",
+        "chapter": "관계형 DB와 SELECT"
+      },
+      "refs": [
+        {
+          "type": "table",
+          "headers": ["DEPARTMENT_ID"],
+          "rows": [
+            ["NULL"],
+            ["10"],
+            ["20"],
+            ["30"],
+            ["40"],
+            ["50"],
+            ["220"],
+            ["230"]
+          ]
+        },
+        {
+          "type": "sql",
+          "code": "SELECT DISTINCT DEPARTMENT_ID\nFROM HR.EMPLOYEES A\nWHERE A.DEPARTMENT_ID <= ALL (30, 50);"
+        }
+      ]
+    },
+    "0878cc10f6b4": {
+      "name": "cbt-050 #50 — JOIN 결과 (FULL OUTER 형태, 빈 셀 보존)",
+      "imageKey": "cbt73-q050-p-1-0878cc10f6",
+      "scope": "main",
+      "origQuestion": {
+        "id": "cbt-050",
+        "origNo": 50,
+        "subject": "2과목",
+        "chapter": "표준 조인"
+      },
+      "refs": [
+        {
+          "type": "table",
+          "headers": ["EMPNO", "DEPTNO"],
+          "rows": [
+            ["7902", "20"],
+            ["7934", "10"],
+            ["", "40"],
+            ["8031", ""]
+          ]
+        }
+      ]
+    },
+    "ce9b42f7e549": {
+      "name": "cbt-058 #58 — EMP 테이블",
+      "imageKey": "cbt73-q058-p-1-ce9b42f7e5",
+      "scope": "main",
+      "origQuestion": {
+        "id": "cbt-058",
+        "origNo": 58,
+        "subject": "2과목",
+        "chapter": "함수"
+      },
+      "refs": [
+        {
+          "type": "table",
+          "caption": "[EMP] 테이블",
+          "headers": ["ID", "NAME", "SALARY"],
+          "rows": [
+            ["1", "Kim", "3000"],
+            ["2", "Lee", "4000"],
+            ["3", "Park", "NULL"]
+          ]
+        }
+      ]
+    },
+    "dbe154b54e05": {
+      "name": "cbt-058 #58 — 보기 1 (정답)",
+      "imageKey": "cbt73-q058-c1-1-dbe154b54e",
+      "scope": "option-1",
+      "origQuestion": {
+        "id": "cbt-058",
+        "origNo": 58,
+        "subject": "2과목",
+        "chapter": "함수"
+      },
+      "refs": [
+        {
+          "type": "table",
+          "headers": ["NAME", "SALARY"],
+          "rows": [
+            ["Kim", "3000"],
+            ["Lee", "4000"],
+            ["Park", "0"]
+          ]
+        }
+      ]
+    },
+    "7b9aa2723dc1": {
+      "name": "cbt-058 #58 — 보기 2",
+      "imageKey": "cbt73-q058-c2-1-7b9aa2723d",
+      "scope": "option-2",
+      "origQuestion": {
+        "id": "cbt-058",
+        "origNo": 58,
+        "subject": "2과목",
+        "chapter": "함수"
+      },
+      "refs": [
+        {
+          "type": "table",
+          "headers": ["NAME", "SALARY"],
+          "rows": [
+            ["Kim", "3000"],
+            ["Lee", "4000"],
+            ["Park", "NULL"]
+          ]
+        }
+      ]
+    },
+    "35ded5213bd2": {
+      "name": "cbt-058 #58 — 보기 3",
+      "imageKey": "cbt73-q058-c3-1-35ded5213b",
+      "scope": "option-3",
+      "origQuestion": {
+        "id": "cbt-058",
+        "origNo": 58,
+        "subject": "2과목",
+        "chapter": "함수"
+      },
+      "refs": [
+        {
+          "type": "table",
+          "headers": ["NAME", "SALARY"],
+          "rows": [
+            ["Kim", "0"],
+            ["Lee", "0"],
+            ["Park", "0"]
+          ]
+        }
+      ]
+    },
+    "2b6e526a3109": {
+      "name": "cbt-058 #58 — 보기 4 (별칭 미적용 — NVL(SALARY, 0))",
+      "imageKey": "cbt73-q058-c4-1-2b6e526a31",
+      "scope": "option-4",
+      "origQuestion": {
+        "id": "cbt-058",
+        "origNo": 58,
+        "subject": "2과목",
+        "chapter": "함수"
+      },
+      "refs": [
+        {
+          "type": "table",
+          "headers": ["NAME", "NVL(SALARY, 0)"],
+          "rows": [
+            ["Kim", "3000"],
+            ["Lee", "4000"],
+            ["Park", "0"]
+          ]
+        }
+      ]
+    },
+    "4be1f15a0ff2": {
+      "name": "cbt-062 #62 — TB_STUDENT 테이블",
+      "imageKey": "cbt73-q062-p-1-4be1f15a0f",
+      "scope": "main",
+      "origQuestion": {
+        "id": "cbt-062",
+        "origNo": 62,
+        "subject": "2과목",
+        "chapter": "그룹 함수"
+      },
+      "refs": [
+        {
+          "type": "table",
+          "caption": "[TB_STUDENT] 테이블",
+          "headers": ["ID", "NAME", "AGE"],
+          "rows": [
+            ["1", "Kim", "20"],
+            ["2", "Lee", "22"],
+            ["3", "Park", "NULL"],
+            ["4", "Choi", "21"]
+          ]
+        }
+      ]
+    },
+    "aa223742046e": {
+      "name": "cbt-064 #64 — EMP/DEPT 테이블 + CUBE SQL (합본 분리)",
+      "imageKey": "cbt73-q064-p-1-aa22374204",
+      "scope": "main",
+      "origQuestion": {
+        "id": "cbt-064",
+        "origNo": 64,
+        "subject": "2과목",
+        "chapter": "관계형 DB와 SELECT"
+      },
+      "refs": [
+        {
+          "type": "table",
+          "caption": "[EMP TABLE]",
+          "headers": ["DEPTNO", "JOB", "SAL"],
+          "rows": [
+            ["20", "CLERK", "800"],
+            ["30", "SALESMAN", "1600"],
+            ["30", "SALESMAN", "1250"],
+            ["20", "MANAGER", "2975"],
+            ["30", "SALESMAN", "1250"],
+            ["30", "MANAGER", "2850"],
+            ["10", "MANAGER", "2450"],
+            ["20", "ANALYST", "3000"],
+            ["10", "PRESIDENT", "5000"],
+            ["30", "SALESMAN", "1500"],
+            ["20", "CLERK", "1100"],
+            ["30", "CLERK", "950"],
+            ["20", "ANALYST", "3000"],
+            ["10", "CLERK", "1300"]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "[DEPT TABLE]",
+          "headers": ["DEPTNO", "DNAME"],
+          "rows": [
+            ["10", "ACCOUNTING"],
+            ["20", "RESEARCH"],
+            ["30", "SALES"],
+            ["40", "OPERATIONS"]
+          ]
+        },
+        {
+          "type": "sql",
+          "code": "SELECT DNAME, JOB, COUNT(*) \"Total Emp\", SUM(SAL) \"Total Sal\"\nFROM SCOTT.EMP A, SCOTT.DEPT B\nWHERE A.DEPTNO = B.DEPTNO\nGROUP BY CUBE(DNAME, JOB);"
+        }
+      ]
+    },
+    "0f21f5518117": {
+      "name": "cbt-065 #65 — TAB1/TAB2 + 5 JOIN SQL (합본 분리)",
+      "imageKey": "cbt73-q065-p-1-0f21f55181",
+      "scope": "main",
+      "origQuestion": {
+        "id": "cbt-065",
+        "origNo": 65,
+        "subject": "2과목",
+        "chapter": "관계형 DB와 SELECT"
+      },
+      "refs": [
+        {
+          "type": "table",
+          "caption": "[TAB1]",
+          "headers": ["COL1", "COL2", "KEY1"],
+          "rows": [
+            ["BBB", "123", "B"],
+            ["DDD", "222", "C"],
+            ["EEE", "233", "D"],
+            ["FFF", "143", "E"]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "[TAB2]",
+          "headers": ["KEY2", "COL1", "COL2"],
+          "rows": [
+            ["A", "10", "BC"],
+            ["B", "10", "CD"],
+            ["C", "10", "DE"]
+          ]
+        },
+        {
+          "type": "sql",
+          "code": "SELECT * FROM TAB1 A INNER JOIN TAB2 B ON (A.KEY1 = B.KEY2);"
+        },
+        {
+          "type": "sql",
+          "code": "SELECT * FROM TAB1 A LEFT OUTER JOIN TAB2 B ON (A.KEY1 = B.KEY2);"
+        },
+        {
+          "type": "sql",
+          "code": "SELECT * FROM TAB1 A RIGHT OUTER JOIN TAB2 B ON (A.KEY1 = B.KEY2);"
+        },
+        {
+          "type": "sql",
+          "code": "SELECT * FROM TAB1 A FULL OUTER JOIN TAB2 B ON (A.KEY1 = B.KEY2);"
+        },
+        {
+          "type": "sql",
+          "code": "SELECT * FROM TAB1 A CROSS JOIN TAB2 B;"
+        }
+      ]
+    },
+    "1072242cb136": {
+      "name": "cbt-066 #66 — TB_ORDER 테이블",
+      "imageKey": "cbt73-q066-p-1-1072242cb1",
+      "scope": "main",
+      "origQuestion": {
+        "id": "cbt-066",
+        "origNo": 66,
+        "subject": "2과목",
+        "chapter": "GROUP BY·HAVING"
+      },
+      "refs": [
+        {
+          "type": "table",
+          "caption": "[TB_ORDER] 테이블",
+          "headers": ["ORDER_ID", "CUSTOMER", "AMOUNT"],
+          "rows": [
+            ["1", "A", "3000"],
+            ["2", "A", "4000"],
+            ["3", "B", "1000"],
+            ["4", "C", "5000"],
+            ["5", "C", "6000"],
+            ["6", "D", "1000"]
+          ]
+        }
+      ]
+    },
+    "92a88a1b517f": {
+      "name": "cbt-066 #66 — 인라인 뷰 가상 테이블 (해설)",
+      "imageKey": "cbt73-q066-e-1-92a88a1b51",
+      "scope": "main",
+      "origQuestion": {
+        "id": "cbt-066",
+        "origNo": 66,
+        "subject": "2과목",
+        "chapter": "GROUP BY·HAVING"
+      },
+      "refs": [
+        {
+          "type": "table",
+          "headers": ["CUSTOMER", "TOTAL"],
+          "rows": [
+            ["A", "7000"],
+            ["B", "1000"],
+            ["C", "11000"],
+            ["D", "1000"]
+          ]
+        }
+      ]
+    },
+    "5e72f1829742": {
+      "name": "cbt-066 #66 — 보기 1",
+      "imageKey": "cbt73-q066-c1-1-5e72f18297",
+      "scope": "option-1",
+      "origQuestion": {
+        "id": "cbt-066",
+        "origNo": 66,
+        "subject": "2과목",
+        "chapter": "GROUP BY·HAVING"
+      },
+      "refs": [
+        {
+          "type": "table",
+          "headers": ["CUSTOMER", "TOTAL"],
+          "rows": [
+            ["A", "7000"],
+            ["B", "1000"]
+          ]
+        }
+      ]
+    },
+    "703ffbbd82c9": {
+      "name": "cbt-066 #66 — 보기 2 (정답)",
+      "imageKey": "cbt73-q066-c2-1-703ffbbd82",
+      "scope": "option-2",
+      "origQuestion": {
+        "id": "cbt-066",
+        "origNo": 66,
+        "subject": "2과목",
+        "chapter": "GROUP BY·HAVING"
+      },
+      "refs": [
+        {
+          "type": "table",
+          "headers": ["CUSTOMER", "TOTAL"],
+          "rows": [
+            ["A", "7000"],
+            ["C", "11000"]
+          ]
+        }
+      ]
+    },
+    "cdf2d6567c6c": {
+      "name": "cbt-066 #66 — 보기 3",
+      "imageKey": "cbt73-q066-c3-1-cdf2d6567c",
+      "scope": "option-3",
+      "origQuestion": {
+        "id": "cbt-066",
+        "origNo": 66,
+        "subject": "2과목",
+        "chapter": "GROUP BY·HAVING"
+      },
+      "refs": [
+        {
+          "type": "table",
+          "headers": ["CUSTOMER", "TOTAL"],
+          "rows": [
+            ["C", "11000"],
+            ["D", "1000"]
+          ]
+        }
+      ]
+    },
+    "d3a07040f085": {
+      "name": "cbt-066 #66 — 보기 4",
+      "imageKey": "cbt73-q066-c4-1-d3a07040f0",
+      "scope": "option-4",
+      "origQuestion": {
+        "id": "cbt-066",
+        "origNo": 66,
+        "subject": "2과목",
+        "chapter": "GROUP BY·HAVING"
+      },
+      "refs": [
+        {
+          "type": "table",
+          "headers": ["CUSTOMER", "TOTAL"],
+          "rows": [
+            ["A", "7000"],
+            ["B", "1000"],
+            ["C", "11000"]
+          ]
+        }
+      ]
+    },
+    "a8434ce9fcd2": {
+      "name": "cbt-067 #67 — 회원/회원연락처/회원연락처이력 ERD + 샘플 (image 유지)",
+      "imageKey": "cbt73-q067-p-1-a8434ce9fc",
+      "scope": "main",
+      "origQuestion": {
+        "id": "cbt-067",
+        "origNo": 67,
+        "subject": "2과목",
+        "chapter": "조인"
+      },
+      "refs": [
+        {
+          "type": "image",
+          "src": "/cbt-images/cbt73-q067-p-1-a8434ce9fc.png",
+          "alt": "회원/회원연락처/회원연락처이력 ERD + 샘플 데이터",
+          "caption": null
+        }
+      ]
+    },
+    "06a133ad949a": {
+      "name": "cbt-069 #69 — A/B 테이블 (병렬 분리)",
+      "imageKey": "cbt73-q069-p-1-06a133ad94",
+      "scope": "main",
+      "origQuestion": {
+        "id": "cbt-069",
+        "origNo": 69,
+        "subject": "2과목",
+        "chapter": "표준 조인"
+      },
+      "refs": [
+        {
+          "type": "table",
+          "caption": "[A] 테이블",
+          "headers": ["ID"],
+          "rows": [["1"], ["2"], ["3"]]
+        },
+        {
+          "type": "table",
+          "caption": "[B] 테이블",
+          "headers": ["ID"],
+          "rows": [["2"], ["3"], ["4"]]
+        }
+      ]
+    },
+    "96acba3c9f78": {
+      "name": "cbt-069 #69 — FULL OUTER JOIN 결과 (해설)",
+      "imageKey": "cbt73-q069-e-1-96acba3c9f",
+      "scope": "main",
+      "origQuestion": {
+        "id": "cbt-069",
+        "origNo": 69,
+        "subject": "2과목",
+        "chapter": "표준 조인"
+      },
+      "refs": [
+        {
+          "type": "table",
+          "headers": ["ID(A 테이블)", "ID(B 테이블)"],
+          "rows": [
+            ["1", "NULL"],
+            ["2", "2"],
+            ["3", "3"],
+            ["NULL", "4"]
+          ]
+        }
+      ]
+    },
+    "c6d2b6edd72e": {
+      "name": "cbt-070 #70 — 고객-주문 ERD (image 유지)",
+      "imageKey": "cbt73-q070-p-1-c6d2b6edd7",
+      "scope": "main",
+      "origQuestion": {
+        "id": "cbt-070",
+        "origNo": 70,
+        "subject": "1과목",
+        "chapter": "식별자"
+      },
+      "refs": [
+        {
+          "type": "image",
+          "src": "/cbt-images/cbt73-q070-p-1-c6d2b6edd7.png",
+          "alt": "고객-주문 ERD (점선 = 비식별 관계)",
+          "caption": null
+        }
+      ]
+    },
+    "a4f247864493": {
+      "name": "cbt-077 #77 — STUDENT_A/STUDENT_B 테이블 (병렬 분리)",
+      "imageKey": "cbt73-q077-p-1-a4f2478644",
+      "scope": "main",
+      "origQuestion": {
+        "id": "cbt-077",
+        "origNo": 77,
+        "subject": "2과목",
+        "chapter": "관계형 DB와 SELECT"
+      },
+      "refs": [
+        {
+          "type": "table",
+          "caption": "[STUDENT_A] 테이블",
+          "headers": ["NAME"],
+          "rows": [["Kim"], ["Lee"], ["Park"]]
+        },
+        {
+          "type": "table",
+          "caption": "[STUDENT_B] 테이블",
+          "headers": ["NAME"],
+          "rows": [["Lee"], ["Choi"], ["Park"]]
+        }
+      ]
+    },
+    "549936cc8541": {
+      "name": "cbt-080 #80 — DDL + index SQL (분리)",
+      "imageKey": "cbt73-q080-p-1-549936cc85",
+      "scope": "main",
+      "origQuestion": {
+        "id": "cbt-080",
+        "origNo": 80,
+        "subject": "2과목",
+        "chapter": "WHERE"
+      },
+      "refs": [
+        {
+          "type": "sql",
+          "code": "create table 주문 (\n    주문번호    int            not null,\n    주문자명    varchar(40)    null,\n    주문금액    money          null,\n    주문일자    varchar(8)     null );"
+        },
+        {
+          "type": "sql",
+          "code": "create unique index 주문_pk on 주문 (주문번호);\ncreate index 주문_ind11 on 주문 (주문자명);\ncreate index 주문_ind12 on 주문 (주문일자, 주문금액);"
+        }
+      ]
+    },
+    "8ecbede4ab01": {
+      "name": "cbt-086 #86 — TB_SALE 테이블",
+      "imageKey": "cbt73-q086-p-1-8ecbede4ab",
+      "scope": "main",
+      "origQuestion": {
+        "id": "cbt-086",
+        "origNo": 86,
+        "subject": "2과목",
+        "chapter": "GROUP BY·HAVING"
+      },
+      "refs": [
+        {
+          "type": "table",
+          "caption": "[TB_SALE] 테이블",
+          "headers": ["REGION", "AMOUNT"],
+          "rows": [
+            ["EAST", "1000"],
+            ["WEST", "2000"],
+            ["EAST", "1000"]
+          ]
+        }
+      ]
+    },
+    "634907af7d49": {
+      "name": "cbt-086 #86 — 보기 1",
+      "imageKey": "cbt73-q086-c1-1-634907af7d",
+      "scope": "option-1",
+      "origQuestion": {
+        "id": "cbt-086",
+        "origNo": 86,
+        "subject": "2과목",
+        "chapter": "GROUP BY·HAVING"
+      },
+      "refs": [
+        {
+          "type": "table",
+          "headers": ["REGION", "AMOUNT", "COUNT(*)"],
+          "rows": [
+            ["EAST", "1000", "2"],
+            ["EAST", "NULL", "2"],
+            ["WEST", "2000", "1"],
+            ["WEST", "NULL", "1"],
+            ["NULL", "NULL", "3"]
+          ]
+        }
+      ]
+    },
+    "0ae78023bdec": {
+      "name": "cbt-086 #86 — 보기 2 (정답)",
+      "imageKey": "cbt73-q086-c2-1-0ae78023bd",
+      "scope": "option-2",
+      "origQuestion": {
+        "id": "cbt-086",
+        "origNo": 86,
+        "subject": "2과목",
+        "chapter": "GROUP BY·HAVING"
+      },
+      "refs": [
+        {
+          "type": "table",
+          "headers": ["REGION", "AMOUNT", "COUNT(*)"],
+          "rows": [
+            ["EAST", "1000", "2"],
+            ["WEST", "2000", "1"],
+            ["EAST", "NULL", "2"],
+            ["WEST", "NULL", "1"],
+            ["NULL", "1000", "2"],
+            ["NULL", "2000", "1"],
+            ["NULL", "NULL", "3"]
+          ]
+        }
+      ]
+    },
+    "5bd6e499e2c7": {
+      "name": "cbt-086 #86 — 보기 3",
+      "imageKey": "cbt73-q086-c3-1-5bd6e499e2",
+      "scope": "option-3",
+      "origQuestion": {
+        "id": "cbt-086",
+        "origNo": 86,
+        "subject": "2과목",
+        "chapter": "GROUP BY·HAVING"
+      },
+      "refs": [
+        {
+          "type": "table",
+          "headers": ["REGION", "AMOUNT", "COUNT(*)"],
+          "rows": [
+            ["EAST", "1000", "2"],
+            ["WEST", "2000", "1"],
+            ["EAST", "NULL", "2"],
+            ["WEST", "NULL", "1"]
+          ]
+        }
+      ]
+    },
+    "419c898bc283": {
+      "name": "cbt-086 #86 — 보기 4",
+      "imageKey": "cbt73-q086-c4-1-419c898bc2",
+      "scope": "option-4",
+      "origQuestion": {
+        "id": "cbt-086",
+        "origNo": 86,
+        "subject": "2과목",
+        "chapter": "GROUP BY·HAVING"
+      },
+      "refs": [
+        {
+          "type": "table",
+          "headers": ["REGION", "AMOUNT", "COUNT(*)"],
+          "rows": [
+            ["EAST", "1000", "2"],
+            ["WEST", "2000", "1"]
+          ]
+        }
+      ]
+    },
+    "7c298b55f5f3": {
+      "name": "cbt-087 #87 — 고객-리뷰 ERD (Barker, image 유지)",
+      "imageKey": "cbt73-q087-p-1-7c298b55f5",
+      "scope": "main",
+      "origQuestion": {
+        "id": "cbt-087",
+        "origNo": 87,
+        "subject": "1과목",
+        "chapter": "식별자"
+      },
+      "refs": [
+        {
+          "type": "image",
+          "src": "/cbt-images/cbt73-q087-p-1-7c298b55f5.png",
+          "alt": "고객-리뷰 ERD (Barker 표기법)",
+          "caption": null
+        }
+      ]
+    },
+    "968a15c1162e": {
+      "name": "cbt-096 #96 — TB_GAME_SCORE 테이블",
+      "imageKey": "cbt73-q096-p-1-968a15c116",
+      "scope": "main",
+      "origQuestion": {
+        "id": "cbt-096",
+        "origNo": 96,
+        "subject": "2과목",
+        "chapter": "TOP N 쿼리"
+      },
+      "refs": [
+        {
+          "type": "table",
+          "caption": "[TB_GAME_SCORE] 테이블",
+          "headers": ["Player", "Game", "Score"],
+          "rows": [
+            ["Alice", "Puzzle", "80"],
+            ["Alice", "Shooter", "95"],
+            ["Bob", "Puzzle", "70"],
+            ["Bob", "Racing", "88"],
+            ["Charlie", "Shooter", "90"],
+            ["Charlie", "Racing", "85"]
+          ]
+        }
+      ]
+    },
+    "e43879381781": {
+      "name": "cbt-096 #96 — 보기 1",
+      "imageKey": "cbt73-q096-c1-1-e438793817",
+      "scope": "option-1",
+      "origQuestion": {
+        "id": "cbt-096",
+        "origNo": 96,
+        "subject": "2과목",
+        "chapter": "TOP N 쿼리"
+      },
+      "refs": [
+        {
+          "type": "table",
+          "headers": ["Player", "Puzzle", "Shooter", "Racing"],
+          "rows": [
+            ["Alice", "NULL", "80", "95"],
+            ["Bob", "NULL", "70", "88"],
+            ["Charlie", "85", "90", "NULL"]
+          ]
+        }
+      ]
+    },
+    "e570334a58c2": {
+      "name": "cbt-096 #96 — 보기 2 (정답)",
+      "imageKey": "cbt73-q096-c2-1-e570334a58",
+      "scope": "option-2",
+      "origQuestion": {
+        "id": "cbt-096",
+        "origNo": 96,
+        "subject": "2과목",
+        "chapter": "TOP N 쿼리"
+      },
+      "refs": [
+        {
+          "type": "table",
+          "headers": ["Player", "Puzzle", "Shooter", "Racing"],
+          "rows": [
+            ["Alice", "80", "95", "NULL"],
+            ["Bob", "70", "NULL", "88"],
+            ["Charlie", "NULL", "90", "85"]
+          ]
+        }
+      ]
+    },
+    "d37c745d3f1f": {
+      "name": "cbt-096 #96 — 보기 3",
+      "imageKey": "cbt73-q096-c3-1-d37c745d3f",
+      "scope": "option-3",
+      "origQuestion": {
+        "id": "cbt-096",
+        "origNo": 96,
+        "subject": "2과목",
+        "chapter": "TOP N 쿼리"
+      },
+      "refs": [
+        {
+          "type": "table",
+          "headers": ["Player", "Puzzle", "Shooter", "Racing"],
+          "rows": [
+            ["Alice", "80", "NULL", "95"],
+            ["Bob", "NULL", "70", "88"],
+            ["Charlie", "NULL", "NULL", "NULL"]
+          ]
+        }
+      ]
+    },
+    "b44f00b3ae59": {
+      "name": "cbt-096 #96 — 보기 4",
+      "imageKey": "cbt73-q096-c4-1-b44f00b3ae",
+      "scope": "option-4",
+      "origQuestion": {
+        "id": "cbt-096",
+        "origNo": 96,
+        "subject": "2과목",
+        "chapter": "TOP N 쿼리"
+      },
+      "refs": [
+        {
+          "type": "table",
+          "headers": ["Player", "Puzzle", "Shooter", "Racing"],
+          "rows": [
+            ["Alice", "95", "80", "NULL"],
+            ["Bob", "88", "70", "NULL"],
+            ["Charlie", "85", "90", "NULL"]
+          ]
+        }
+      ]
+    },
+    "60fa417f1ff0": {
+      "name": "cbt-097 #97 — SQLD_13 테이블 (빈 셀 보존)",
+      "imageKey": "cbt73-q097-p-1-60fa417f1f",
+      "scope": "main",
+      "origQuestion": {
+        "id": "cbt-097",
+        "origNo": 97,
+        "subject": "2과목",
+        "chapter": "그룹 함수"
+      },
+      "refs": [
+        {
+          "type": "table",
+          "caption": "[SQLD_13]",
+          "headers": ["고객", "거래내역"],
+          "rows": [
+            ["철수", "100"],
+            ["민정", ""],
+            ["아름", "300"],
+            ["예진", ""]
+          ]
+        }
+      ]
+    },
+    "9352318ef9ed": {
+      "name": "cbt-107 #107 — TB_ORDER 테이블",
+      "imageKey": "cbt73-q107-p-1-9352318ef9",
+      "scope": "main",
+      "origQuestion": {
+        "id": "cbt-107",
+        "origNo": 107,
+        "subject": "2과목",
+        "chapter": "GROUP BY·HAVING"
+      },
+      "refs": [
+        {
+          "type": "table",
+          "caption": "[TB_ORDER] 테이블",
+          "headers": ["ORDER_ID", "CUSTOMER_ID", "AMOUNT"],
+          "rows": [
+            ["1", "A", "1000"],
+            ["2", "A", "1500"],
+            ["3", "B", "700"],
+            ["4", "B", "800"],
+            ["5", "C", "NULL"]
+          ]
+        }
+      ]
+    },
+    "3048a8dcf308": {
+      "name": "cbt-109 #109 — TB_PRODUCT 테이블",
+      "imageKey": "cbt73-q109-p-1-3048a8dcf3",
+      "scope": "main",
+      "origQuestion": {
+        "id": "cbt-109",
+        "origNo": 109,
+        "subject": "2과목",
+        "chapter": "윈도우 함수"
+      },
+      "refs": [
+        {
+          "type": "table",
+          "caption": "[TB_PRODUCT] 테이블",
+          "headers": ["NAME", "PRICE"],
+          "rows": [
+            ["A", "100"],
+            ["B", "200"],
+            ["C", "100"],
+            ["D", "300"],
+            ["E", "50"]
+          ]
+        }
+      ]
+    },
+    "a2f268bf30f1": {
+      "name": "cbt-109 #109 — 보기 1 (정답, DENSE_RANK)",
+      "imageKey": "cbt73-q109-c1-1-a2f268bf30",
+      "scope": "option-1",
+      "origQuestion": {
+        "id": "cbt-109",
+        "origNo": 109,
+        "subject": "2과목",
+        "chapter": "윈도우 함수"
+      },
+      "refs": [
+        {
+          "type": "table",
+          "headers": ["NAME", "RN"],
+          "rows": [
+            ["D", "1"],
+            ["B", "2"],
+            ["A", "3"],
+            ["C", "3"],
+            ["E", "4"]
+          ]
+        }
+      ]
+    },
+    "2a75ba323d02": {
+      "name": "cbt-109 #109 — 보기 2 (ROW_NUMBER)",
+      "imageKey": "cbt73-q109-c2-1-2a75ba323d",
+      "scope": "option-2",
+      "origQuestion": {
+        "id": "cbt-109",
+        "origNo": 109,
+        "subject": "2과목",
+        "chapter": "윈도우 함수"
+      },
+      "refs": [
+        {
+          "type": "table",
+          "headers": ["NAME", "RN"],
+          "rows": [
+            ["D", "1"],
+            ["B", "2"],
+            ["A", "3"],
+            ["C", "4"],
+            ["E", "5"]
+          ]
+        }
+      ]
+    },
+    "eb9616d1e568": {
+      "name": "cbt-109 #109 — 보기 3 (RANK)",
+      "imageKey": "cbt73-q109-c3-1-eb9616d1e5",
+      "scope": "option-3",
+      "origQuestion": {
+        "id": "cbt-109",
+        "origNo": 109,
+        "subject": "2과목",
+        "chapter": "윈도우 함수"
+      },
+      "refs": [
+        {
+          "type": "table",
+          "headers": ["NAME", "RN"],
+          "rows": [
+            ["D", "1"],
+            ["B", "2"],
+            ["A", "3"],
+            ["C", "3"],
+            ["E", "5"]
+          ]
+        }
+      ]
+    },
+    "4e0cec66ee3d": {
+      "name": "cbt-109 #109 — 보기 4",
+      "imageKey": "cbt73-q109-c4-1-4e0cec66ee",
+      "scope": "option-4",
+      "origQuestion": {
+        "id": "cbt-109",
+        "origNo": 109,
+        "subject": "2과목",
+        "chapter": "윈도우 함수"
+      },
+      "refs": [
+        {
+          "type": "table",
+          "headers": ["NAME", "RN"],
+          "rows": [
+            ["D", "1"],
+            ["B", "2"],
+            ["A", "3"],
+            ["C", "3"],
+            ["E", "3"]
+          ]
+        }
+      ]
+    },
+    "fca9b1463652": {
+      "name": "cbt-111 #111 — TB_CUSTOMER + TB_ORDER (병렬 분리)",
+      "imageKey": "cbt73-q111-p-1-fca9b14636",
+      "scope": "main",
+      "origQuestion": {
+        "id": "cbt-111",
+        "origNo": 111,
+        "subject": "2과목",
+        "chapter": "서브쿼리"
+      },
+      "refs": [
+        {
+          "type": "table",
+          "caption": "[TB_CUSTOMER] 테이블",
+          "headers": ["CUST_ID", "NAME", "CITY"],
+          "rows": [
+            ["1", "Kim", "SEOUL"],
+            ["2", "Lee", "BUSAN"],
+            ["3", "Park", "INCHEON"],
+            ["4", "Choi", "SEOUL"]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "[TB_ORDER] 테이블",
+          "headers": ["ORDER_ID", "CUST_ID", "AMOUNT"],
+          "rows": [
+            ["101", "1", "1000"],
+            ["102", "2", "2000"],
+            ["103", "3", "3000"],
+            ["104", "4", "4000"]
+          ]
+        }
+      ]
+    },
+    "2e828facdfb5": {
+      "name": "cbt-112 #112 — EMP 테이블",
+      "imageKey": "cbt73-q112-p-1-2e828facdf",
+      "scope": "main",
+      "origQuestion": {
+        "id": "cbt-112",
+        "origNo": 112,
+        "subject": "2과목",
+        "chapter": "계층형 질의"
+      },
+      "refs": [
+        {
+          "type": "table",
+          "caption": "[EMP] 테이블",
+          "headers": ["EMPNO", "ENAME", "MGR"],
+          "rows": [
+            ["1001", "KING", "NULL"],
+            ["1002", "BLAKE", "1001"],
+            ["1003", "CLARK", "1001"],
+            ["1004", "JONES", "1003"],
+            ["1005", "SMITH", "1004"],
+            ["1006", "SCOTT", "1002"],
+            ["1007", "JAMES", "1006"],
+            ["1008", "FORD", "NULL"]
+          ]
+        }
+      ]
+    },
+    "dea04d4284ff": {
+      "name": "cbt-112 #112 — 계층 전개 결과 (해설)",
+      "imageKey": "cbt73-q112-e-1-dea04d4284",
+      "scope": "main",
+      "origQuestion": {
+        "id": "cbt-112",
+        "origNo": 112,
+        "subject": "2과목",
+        "chapter": "계층형 질의"
+      },
+      "refs": [
+        {
+          "type": "table",
+          "headers": ["LEVEL", "ENAME", "MGR"],
+          "rows": [
+            ["1", "KING", "NULL"],
+            ["2", "BLAKE", "1001"],
+            ["2", "CLARK", "1001"],
+            ["3", "SCOTT", "1002"],
+            ["3", "JONES", "1003"],
+            ["4", "JAMES", "1006"],
+            ["4", "SMITH", "1004"]
+          ]
+        }
+      ]
+    },
+    "0fb12d407949": {
+      "name": "cbt-114 #114 — T1/T2/T3 테이블 (병렬 분리)",
+      "imageKey": "cbt73-q114-p-1-0fb12d4079",
+      "scope": "main",
+      "origQuestion": {
+        "id": "cbt-114",
+        "origNo": 114,
+        "subject": "2과목",
+        "chapter": "표준 조인"
+      },
+      "refs": [
+        {
+          "type": "table",
+          "caption": "[T1] 테이블",
+          "headers": ["COL"],
+          "rows": [["1"], ["2"], ["3"]]
+        },
+        {
+          "type": "table",
+          "caption": "[T2] 테이블",
+          "headers": ["COL"],
+          "rows": [["1"], ["2"], ["NULL"]]
+        },
+        {
+          "type": "table",
+          "caption": "[T3] 테이블",
+          "headers": ["COL"],
+          "rows": [["1"], ["NULL"], ["NULL"]]
+        }
+      ]
+    },
+    "ded4bf737ce5": {
+      "name": "cbt-114 #114 — T1 LEFT JOIN T2 (해설)",
+      "imageKey": "cbt73-q114-e-1-ded4bf737c",
+      "scope": "main",
+      "origQuestion": {
+        "id": "cbt-114",
+        "origNo": 114,
+        "subject": "2과목",
+        "chapter": "표준 조인"
+      },
+      "refs": [
+        {
+          "type": "table",
+          "headers": ["T1.COL", "T2.COL"],
+          "rows": [
+            ["1", "1"],
+            ["2", "2"],
+            ["3", "NULL"]
+          ]
+        }
+      ]
+    },
+    "dbd4cce3d62c": {
+      "name": "cbt-114 #114 — 3-way LEFT JOIN 결과 (해설)",
+      "imageKey": "cbt73-q114-e-2-dbd4cce3d6",
+      "scope": "main",
+      "origQuestion": {
+        "id": "cbt-114",
+        "origNo": 114,
+        "subject": "2과목",
+        "chapter": "표준 조인"
+      },
+      "refs": [
+        {
+          "type": "table",
+          "headers": ["T1.COL", "T2.COL", "T3.COL"],
+          "rows": [
+            ["1", "1", "1"],
+            ["2", "2", "NULL"],
+            ["3", "NULL", "NULL"]
+          ]
+        }
+      ]
+    },
+    "20dfa60a014d": {
+      "name": "cbt-117 #117 — 수강_지도 함수 종속성 다이어그램 (image 유지)",
+      "imageKey": "cbt73-q117-p-1-20dfa60a01",
+      "scope": "main",
+      "origQuestion": {
+        "id": "cbt-117",
+        "origNo": 117,
+        "subject": "1과목",
+        "chapter": "속성"
+      },
+      "refs": [
+        {
+          "type": "image",
+          "src": "/cbt-images/cbt73-q117-p-1-20dfa60a01.png",
+          "alt": "수강_지도 — 결정자 {학번, 과목번호} → 종속자 {성적, 지도교수명, 학과명} (과목번호 → {지도교수명, 학과명})",
+          "caption": null
+        }
+      ]
+    },
+    "0a7ca3b427e2": {
+      "name": "cbt-120 #120 — A/B/C 테이블 + UNION/MINUS SQL (분리)",
+      "imageKey": "cbt73-q120-p-1-0a7ca3b427",
+      "scope": "main",
+      "origQuestion": {
+        "id": "cbt-120",
+        "origNo": 120,
+        "subject": "2과목",
+        "chapter": "관계형 DB와 SELECT"
+      },
+      "refs": [
+        {
+          "type": "table",
+          "caption": "[A]",
+          "headers": ["COL1"],
+          "rows": [["1"], ["2"], ["3"], ["4"]]
+        },
+        {
+          "type": "table",
+          "caption": "[B]",
+          "headers": ["COL1"],
+          "rows": [["4"], ["5"]]
+        },
+        {
+          "type": "table",
+          "caption": "[C]",
+          "headers": ["COL1"],
+          "rows": [["2"]]
+        },
+        {
+          "type": "sql",
+          "code": "SELECT * FROM A\nUNION SELECT * FROM B\nMINUS SELECT * FROM C;"
+        }
+      ]
+    },
+    "b9f0d5e00ef4": {
+      "name": "cbt-121 #121 — SQLD_29 + 결과 + SQL (분리)",
+      "imageKey": "cbt73-q121-p-1-b9f0d5e00e",
+      "scope": "main",
+      "origQuestion": {
+        "id": "cbt-121",
+        "origNo": 121,
+        "subject": "2과목",
+        "chapter": "윈도우 함수"
+      },
+      "refs": [
+        {
+          "type": "table",
+          "caption": "[SQLD_29]",
+          "headers": ["이름", "부서", "직책", "급여"],
+          "rows": [
+            ["조조", "경영지원부", "부장", "300"],
+            ["유비", "경영지원부", "과장", "250"],
+            ["제갈량", "인사부", "대리", "250"],
+            ["사마의", "인사부", "대리", "200"],
+            ["관우", "영업부", "사원", "150"],
+            ["장비", "영업부", "사원", "100"]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "[결과]",
+          "headers": ["순위", "이름", "부서", "직책", "급여"],
+          "rows": [
+            ["1", "조조", "경영지원부", "부장", "300"],
+            ["2", "유비", "경영지원부", "과장", "250"],
+            ["2", "제갈량", "인사부", "대리", "250"],
+            ["3", "사마의", "인사부", "대리", "200"],
+            ["4", "관우", "영업부", "사원", "150"],
+            ["5", "장비", "영업부", "사원", "100"]
+          ]
+        },
+        {
+          "type": "sql",
+          "code": "SELECT (    ) OVER (ORDER BY 급여 desc) as 순위,\n       이름, 부서, 직책, 급여\nFROM SQLD_29;"
+        }
+      ]
+    },
+    "4f03d61a83e0": {
+      "name": "cbt-130 #130 — TX1/TX2 시점별 트랜잭션 시나리오",
+      "imageKey": "cbt73-q130-p-1-4f03d61a83",
+      "scope": "main",
+      "origQuestion": {
+        "id": "cbt-130",
+        "origNo": 130,
+        "subject": "1과목",
+        "chapter": "트랜잭션과 Null"
+      },
+      "refs": [
+        {
+          "type": "table",
+          "headers": ["⟨TX1⟩", "시점", "⟨TX2⟩"],
+          "rows": [
+            ["Update emp set sal = sal +100\nWhere empno = 7788;", "T1", ""],
+            ["", "T2", "Update emp set sal = sal +200\nWhere empno = 7788;"],
+            ["Commit;", "T3", ""],
+            ["", "T4", "Commit;"]
+          ]
+        }
+      ]
+    },
+    "9c120724374a": {
+      "name": "cbt-136 #136 — EMPLOYEE + SALARY (병렬 분리)",
+      "imageKey": "cbt73-q136-p-1-9c12072437",
+      "scope": "main",
+      "origQuestion": {
+        "id": "cbt-136",
+        "origNo": 136,
+        "subject": "2과목",
+        "chapter": "서브쿼리"
+      },
+      "refs": [
+        {
+          "type": "table",
+          "caption": "[EMPLOYEE] 테이블",
+          "headers": ["EMP_ID", "NAME"],
+          "rows": [
+            ["1", "Kim"],
+            ["2", "Lee"],
+            ["3", "Park"]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "[SALARY] 테이블",
+          "headers": ["EMP_ID", "AMOUNT"],
+          "rows": [
+            ["1", "3000"],
+            ["2", "NULL"]
+          ]
+        }
+      ]
+    },
+    "2607bf28965e": {
+      "name": "cbt-136 #136 — EXISTS 결과 (해설)",
+      "imageKey": "cbt73-q136-e-1-2607bf2896",
+      "scope": "main",
+      "origQuestion": {
+        "id": "cbt-136",
+        "origNo": 136,
+        "subject": "2과목",
+        "chapter": "서브쿼리"
+      },
+      "refs": [
+        {
+          "type": "table",
+          "headers": ["EMP_ID", "NAME"],
+          "rows": [
+            ["1", "Kim"]
+          ]
+        }
+      ]
+    },
+    "c643e0dbc583": {
+      "name": "cbt-148 #148 — employee + department + 질의문 (분리)",
+      "imageKey": "cbt73-q148-p-1-c643e0dbc5",
+      "scope": "main",
+      "origQuestion": {
+        "id": "cbt-148",
+        "origNo": 148,
+        "subject": "2과목",
+        "chapter": "WHERE"
+      },
+      "refs": [
+        {
+          "type": "table",
+          "caption": "[employee]",
+          "headers": ["eno", "ename", "address", "score", "dno"],
+          "rows": [
+            ["10", "Hong", "서울", "80", "100"],
+            ["20", "Kim", "대전", "90", "100"],
+            ["30", "Lee", "강릉", "90", "100"],
+            ["40", "Kim", "대전", "95", "200"],
+            ["50", "Hong", "서울", "65", "300"]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "[department]",
+          "headers": ["dno", "dname"],
+          "rows": [
+            ["100", "영업"],
+            ["200", "개발"],
+            ["300", "서비스"]
+          ]
+        },
+        {
+          "type": "sql",
+          "code": "/* 질의문 */\nSELECT e.dno, d.dname, e.ename, e.score\nFROM employee e, department d\nWHERE e.dno = d.dno and (e.dno, score) IN\n      (SELECT dno, max(score)\n       FROM employee GROUP BY dno);"
+        }
+      ]
+    },
+    "2bdaa812523c": {
+      "name": "cbt-151 #151 — TB_CUSTOMER + TB_ORDER (병렬 분리)",
+      "imageKey": "cbt73-q151-p-1-2bdaa81252",
+      "scope": "main",
+      "origQuestion": {
+        "id": "cbt-151",
+        "origNo": 151,
+        "subject": "2과목",
+        "chapter": "표준 조인"
+      },
+      "refs": [
+        {
+          "type": "table",
+          "caption": "[TB_CUSTOMER] 테이블",
+          "headers": ["CUST_ID", "NAME"],
+          "rows": [
+            ["1", "Kim"],
+            ["2", "Lee"],
+            ["3", "Park"]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "[TB_ORDER] 테이블",
+          "headers": ["ORDER_ID", "CUST_ID", "AMOUNT"],
+          "rows": [
+            ["101", "1", "10000"],
+            ["102", "2", "12000"]
+          ]
+        }
+      ]
+    },
+    "bb991cc08ed8": {
+      "name": "cbt-159 #159 — EMPLOYEE + DEPARTMENT (병렬 분리)",
+      "imageKey": "cbt73-q159-p-1-bb991cc08e",
+      "scope": "main",
+      "origQuestion": {
+        "id": "cbt-159",
+        "origNo": 159,
+        "subject": "2과목",
+        "chapter": "표준 조인"
+      },
+      "refs": [
+        {
+          "type": "table",
+          "caption": "[EMPLOYEE] 테이블",
+          "headers": ["ID", "DEPT_ID"],
+          "rows": [
+            ["1", "10"],
+            ["2", "20"],
+            ["3", "30"]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "[DEPARTMENT] 테이블",
+          "headers": ["DEPT_ID", "LOC"],
+          "rows": [
+            ["10", "SEOUL"],
+            ["30", "BUSAN"]
+          ]
+        }
+      ]
+    },
+    "57e8bc5733e8": {
+      "name": "cbt-159 #159 — LEFT JOIN 결과 (해설)",
+      "imageKey": "cbt73-q159-e-1-57e8bc5733",
+      "scope": "main",
+      "origQuestion": {
+        "id": "cbt-159",
+        "origNo": 159,
+        "subject": "2과목",
+        "chapter": "표준 조인"
+      },
+      "refs": [
+        {
+          "type": "table",
+          "headers": ["E.ID", "E.DEPT_ID", "D.DEPT_ID", "D.LOC"],
+          "rows": [
+            ["1", "10", "10", "SEOUL"],
+            ["2", "20", "NULL", "NULL"],
+            ["3", "30", "30", "BUSAN"]
+          ]
+        }
+      ]
+    },
+    "809d927c85eb": {
+      "name": "cbt-163 #163 — 계정그룹-계정 ERD (image 유지)",
+      "imageKey": "cbt73-q163-p-1-809d927c85",
+      "scope": "main",
+      "origQuestion": {
+        "id": "cbt-163",
+        "origNo": 163,
+        "subject": "1과목",
+        "chapter": "관계"
+      },
+      "refs": [
+        {
+          "type": "image",
+          "src": "/cbt-images/cbt73-q163-p-1-809d927c85.png",
+          "alt": "계정그룹(1) — 계정(N) 비식별 관계 ERD (점선 + 0/N)",
+          "caption": null
+        }
+      ]
+    },
+    "bf30034fa971": {
+      "name": "cbt-164 #164 — TB_ITEM 테이블",
+      "imageKey": "cbt73-q164-p-1-bf30034fa9",
+      "scope": "main",
+      "origQuestion": {
+        "id": "cbt-164",
+        "origNo": 164,
+        "subject": "2과목",
+        "chapter": "ORDER BY"
+      },
+      "refs": [
+        {
+          "type": "table",
+          "caption": "[TB_ITEM] 테이블",
+          "headers": ["NAME", "PRICE"],
+          "rows": [
+            ["A", "100"],
+            ["B", "150"],
+            ["C", "200"]
+          ]
+        }
+      ]
+    },
+    "a313d23cd85a": {
+      "name": "cbt-169 #169 — FK 추가 SQL 문법 (해설)",
+      "imageKey": "cbt73-q169-e-1-a313d23cd8",
+      "scope": "main",
+      "origQuestion": {
+        "id": "cbt-169",
+        "origNo": 169,
+        "subject": "2과목",
+        "chapter": "DDL"
+      },
+      "refs": [
+        {
+          "type": "sql",
+          "code": "ALTER TABLE 테이블명 ADD CONSTRAINT 제약조건명 FOREIGN KEY(컬럼) REFERENCES 참조할테이블(컬럼);"
+        }
+      ]
+    },
+    "96cada2ae95f": {
+      "name": "cbt-179 #179 — TB_PRODUCT 테이블",
+      "imageKey": "cbt73-q179-p-1-96cada2ae9",
+      "scope": "main",
+      "origQuestion": {
+        "id": "cbt-179",
+        "origNo": 179,
+        "subject": "2과목",
+        "chapter": "그룹 함수"
+      },
+      "refs": [
+        {
+          "type": "table",
+          "caption": "[TB_PRODUCT] 테이블",
+          "headers": ["ID", "NAME", "PRICE"],
+          "rows": [
+            ["1", "Pen", "500"],
+            ["2", "Pencil", "300"],
+            ["3", "Book", "1000"]
+          ]
+        }
+      ]
+    },
+    "0c1daf0392f1": {
+      "name": "cbt-187 #187 — EMPLOYEE + DEPARTMENT (병렬 분리)",
+      "imageKey": "cbt73-q187-p-1-0c1daf0392",
+      "scope": "main",
+      "origQuestion": {
+        "id": "cbt-187",
+        "origNo": 187,
+        "subject": "2과목",
+        "chapter": "WHERE"
+      },
+      "refs": [
+        {
+          "type": "table",
+          "caption": "[EMPLOYEE] 테이블",
+          "headers": ["EMP_ID", "NAME", "DEPT_ID"],
+          "rows": [
+            ["1", "Kim", "10"],
+            ["2", "Lee", "20"],
+            ["3", "Park", "30"]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "[DEPARTMENT] 테이블",
+          "headers": ["DEPT_ID", "LOC"],
+          "rows": [
+            ["10", "SEOUL"],
+            ["20", "BUSAN"]
+          ]
+        }
+      ]
+    },
+    "fabf1d794ba0": {
+      "name": "cbt-187 #187 — 보기 1",
+      "imageKey": "cbt73-q187-c1-1-fabf1d794b",
+      "scope": "option-1",
+      "origQuestion": {
+        "id": "cbt-187",
+        "origNo": 187,
+        "subject": "2과목",
+        "chapter": "WHERE"
+      },
+      "refs": [
+        {
+          "type": "table",
+          "headers": ["NAME", "LOCATION"],
+          "rows": [
+            ["Kim", "SEOUL"],
+            ["Lee", "BUSAN"],
+            ["Park", "BUSAN"]
+          ]
+        }
+      ]
+    },
+    "172af3cbda40": {
+      "name": "cbt-187 #187 — 보기 2 (정답)",
+      "imageKey": "cbt73-q187-c2-1-172af3cbda",
+      "scope": "option-2",
+      "origQuestion": {
+        "id": "cbt-187",
+        "origNo": 187,
+        "subject": "2과목",
+        "chapter": "WHERE"
+      },
+      "refs": [
+        {
+          "type": "table",
+          "headers": ["NAME", "LOCATION"],
+          "rows": [
+            ["Kim", "SEOUL"],
+            ["Lee", "BUSAN"],
+            ["Park", "NULL"]
+          ]
+        }
+      ]
+    },
+    "c88f21571356": {
+      "name": "cbt-187 #187 — 보기 3",
+      "imageKey": "cbt73-q187-c3-1-c88f215713",
+      "scope": "option-3",
+      "origQuestion": {
+        "id": "cbt-187",
+        "origNo": 187,
+        "subject": "2과목",
+        "chapter": "WHERE"
+      },
+      "refs": [
+        {
+          "type": "table",
+          "headers": ["NAME", "LOCATION"],
+          "rows": [
+            ["Kim", "SEOUL"],
+            ["Lee", "NULL"],
+            ["Park", "NULL"]
+          ]
+        }
+      ]
+    },
+    "322969818e2a": {
+      "name": "cbt-187 #187 — 보기 4",
+      "imageKey": "cbt73-q187-c4-1-322969818e",
+      "scope": "option-4",
+      "origQuestion": {
+        "id": "cbt-187",
+        "origNo": 187,
+        "subject": "2과목",
+        "chapter": "WHERE"
+      },
+      "refs": [
+        {
+          "type": "table",
+          "headers": ["NAME", "LOCATION"],
+          "rows": [
+            ["Kim", "NULL"],
+            ["Lee", "NULL"],
+            ["Park", "NULL"]
+          ]
+        }
+      ]
+    },
+    "fd2f7804e049": {
+      "name": "cbt-191 #191 — ROLLUP 결과 + 빈칸 SQL (분리, 빈 셀 보존)",
+      "imageKey": "cbt73-q191-p-1-fd2f7804e0",
+      "scope": "main",
+      "origQuestion": {
+        "id": "cbt-191",
+        "origNo": 191,
+        "subject": "2과목",
+        "chapter": "관계형 DB와 SELECT"
+      },
+      "refs": [
+        {
+          "type": "table",
+          "caption": "[결과]",
+          "headers": ["DEPTNO", "JOB", "SUM(SAL)"],
+          "rows": [
+            ["10", "CLERK", "1300"],
+            ["10", "MANAGER", "2450"],
+            ["10", "", "3750"],
+            ["20", "CLEK", "1900"],
+            ["20", "ANALYST", "6000"],
+            ["20", "MANAGER", "2975"],
+            ["20", "", "9174"],
+            ["", "", "27549"]
+          ]
+        },
+        {
+          "type": "sql",
+          "code": "SELECT DEPTNO, JOB, SUM(SAL)\nFROM SQLD_3\nGROUP BY (    );"
+        }
+      ]
+    },
+    "10e1adeb0702": {
+      "name": "cbt-196 #196 — SQL + Row Source Operation (분리)",
+      "imageKey": "cbt73-q196-p-1-10e1adeb07",
+      "scope": "main",
+      "origQuestion": {
+        "id": "cbt-196",
+        "origNo": 196,
+        "subject": "2과목",
+        "chapter": "관계형 DB와 SELECT"
+      },
+      "refs": [
+        {
+          "type": "sql",
+          "code": "Select c.고객명, c.연령, c.전화번호, o.주문일자,\n       o.주문총금액, o.배송지주소\nFrom 고객 c, 주문 o\nWhere o.고객번호 = c.주문번호\nAnd c.고객등급 = 'A'\nAnd c.연령 between 51 and 60\nAnd o.주문일자 between '20101201' and '20101231'"
+        },
+        {
+          "type": "table",
+          "headers": ["Rows", "Row Source Operation"],
+          "rows": [
+            ["10", "NESTED LOOPS"],
+            ["23", "TABLE ACCESS BY INDEX ROWID 고객"],
+            ["2978", "INDEX RANGE SCAN 고객_IDX"],
+            ["10", "TABLE ACCESS BY INDEX ROWID 주문"],
+            ["28", "INDEX RANGE SCAN 주문_IDX"]
+          ]
+        }
+      ]
+    },
+    "1289875a5caf": {
+      "name": "cbt-200 #200 — EMPLOYEE 테이블",
+      "imageKey": "cbt73-q200-p-1-1289875a5c",
+      "scope": "main",
+      "origQuestion": {
+        "id": "cbt-200",
+        "origNo": 200,
+        "subject": "2과목",
+        "chapter": "서브쿼리"
+      },
+      "refs": [
+        {
+          "type": "table",
+          "caption": "[EMPLOYEE] 테이블",
+          "headers": ["NAME", "SALARY"],
+          "rows": [
+            ["A", "3000"],
+            ["B", "2000"],
+            ["C", "4000"]
+          ]
+        }
+      ]
+    },
+    "633229139233": {
+      "name": "cbt-202 #202 — ENAME/HIREDATE/SAL/PREV_SAL 결과 (빈 셀 보존)",
+      "imageKey": "cbt73-q202-p-1-6332291392",
+      "scope": "main",
+      "origQuestion": {
+        "id": "cbt-202",
+        "origNo": 202,
+        "subject": "2과목",
+        "chapter": "윈도우 함수"
+      },
+      "refs": [
+        {
+          "type": "table",
+          "headers": ["ENAME", "HIREDATE", "SAL", "PREV_SAL"],
+          "rows": [
+            ["ALLEN", "20-FEB-81", "1600", ""],
+            ["WARD", "22-FEB-81", "1250", "1600"],
+            ["TURNER", "08-SEP-81", "1500", "1250"],
+            ["MARTIN", "28-SEP-81", "1250", "1500"]
+          ]
+        }
+      ]
+    },
+    "e81b86d8b867": {
+      "name": "cbt-205 #205 — R/S 테이블 + COUNT SQL (분리)",
+      "imageKey": "cbt73-q205-p-1-e81b86d8b8",
+      "scope": "main",
+      "origQuestion": {
+        "id": "cbt-205",
+        "origNo": 205,
+        "subject": "2과목",
+        "chapter": "관계형 DB와 SELECT"
+      },
+      "refs": [
+        {
+          "type": "table",
+          "caption": "[R]",
+          "headers": ["EID", "ENAME", "PHONE", "SEX", "DID"],
+          "rows": [
+            ["823", "Kim", "8491", "M", "100"],
+            ["434", "Park", "8488", "F", "101"],
+            ["180", "Lee", "8592", "M", "101"],
+            ["510", "Choi", "8598", "F", "100"]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "[S]",
+          "headers": ["DID", "DNAME", "ROOM"],
+          "rows": [
+            ["100", "Head", "A403"],
+            ["101", "Sales", "A401"],
+            ["102", "Proj1", "A301"],
+            ["103", "Proj2", "B101"],
+            ["104", "AS", "B102"]
+          ]
+        },
+        {
+          "type": "sql",
+          "code": "SELECT COUNT(*) FROM R, S;"
+        }
+      ]
+    },
+    "f8025487990f": {
+      "name": "cbt-206 #206 — DDL + 부서/사원 테이블 (분리)",
+      "imageKey": "cbt73-q206-p-1-f802548799",
+      "scope": "main",
+      "origQuestion": {
+        "id": "cbt-206",
+        "origNo": 206,
+        "subject": "2과목",
+        "chapter": "관계형 DB와 SELECT"
+      },
+      "refs": [
+        {
+          "type": "sql",
+          "code": "CREATE TABLE 부서 (\n  부서번호 INT NOT NULL,\n  부서명 VARCHAR(20),\n  PRIMARY KEY(부서번호));\n\nCREATE TABLE 사원 (\n  사번 INT NOT NULL,\n  이름 VARCHAR(20),\n  부서번호 INT,\n  PRIMARY KEY(사번),\n  FOREIGN KEY(부서번호) REFERENCES 부서(부서번호));"
+        },
+        {
+          "type": "table",
+          "caption": "[부서]",
+          "headers": ["부서번호", "부서명"],
+          "rows": [
+            ["1", "자재부"],
+            ["2", "영업부"]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "[사원]",
+          "headers": ["사번", "이름", "부서번호"],
+          "rows": [
+            ["11", "홍길동", "1"],
+            ["12", "이순신", "2"]
+          ]
+        }
+      ]
+    },
+    "e69f392c1706": {
+      "name": "cbt-208 #208 — SQLD_37 + 결과 + 빈칸 SQL (분리)",
+      "imageKey": "cbt73-q208-p-1-e69f392c17",
+      "scope": "main",
+      "origQuestion": {
+        "id": "cbt-208",
+        "origNo": 208,
+        "subject": "2과목",
+        "chapter": "그룹 함수"
+      },
+      "refs": [
+        {
+          "type": "table",
+          "caption": "[SQLD_37]",
+          "headers": ["COL1", "COL2", "COL3"],
+          "rows": [
+            ["null", "0", "30"],
+            ["0", "null", "0"],
+            ["10", "20", "null"],
+            ["11", "21", "31"],
+            ["12", "22", "32"]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "[결과]",
+          "headers": ["A", "B", "C"],
+          "rows": [["12", "0", "33"]]
+        },
+        {
+          "type": "sql",
+          "code": "select\n  (    ) AS A,\n  (    ) AS B,\n  (    ) AS C\nfrom SQLD_37;"
+        }
+      ]
+    }
+  }
+}

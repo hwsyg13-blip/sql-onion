@@ -10,3 +10,4 @@ dist
 .vercel
 scripts/cbt-pages/
 scripts/cbt-text/
+scripts/.upscale-cbt-mock/
