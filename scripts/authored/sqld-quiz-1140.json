@@ -1747,8 +1747,8 @@
       "explanation": "정답은 1 번. (해설 미등록)",
       "references": [
         {
-          "type": "text",
-          "content": "CREATE TABLE 서비스\n(서비스번호 VARCHAR2(10) PRIMARY KEY, \n서비스명 VARCHAR2(100) NULL,\n개시일자 DATE NOT NULL  ); \n [SQL]\n(ㄱ)SELECT * FROM 서비스 WHERE 서비스번호 = 1；\n(ㄴ)INSERT INTO 서비스 VALUES ('999', \", '2015-11-11')；\n(ㄷ)SELECT * FROM 서비스 WHERE 서비스명 = ''；\n(ㄹ) SELECT * FROM 서비스 WHERE 서비스명 IS NULL；"
+          "type": "sql",
+          "code": "CREATE TABLE 서비스\n(서비스번호 VARCHAR2(10) PRIMARY KEY, \n서비스명 VARCHAR2(100) NULL,\n개시일자 DATE NOT NULL  ); \n [SQL]\n(ㄱ)SELECT * FROM 서비스 WHERE 서비스번호 = 1；\n(ㄴ)INSERT INTO 서비스 VALUES ('999', \", '2015-11-11')；\n(ㄷ)SELECT * FROM 서비스 WHERE 서비스명 = ''；\n(ㄹ) SELECT * FROM 서비스 WHERE 서비스명 IS NULL；"
         }
       ]
     },
@@ -1898,8 +1898,8 @@
       "explanation": "정답은 4번이다. 각 행에는 'A'와 'B' 사이, 'C'와 'D' 사이에 CHR(10) 줄바꿈 문자가 1개씩 포함된다. 따라서 각 문자열의 LENGTH(COL)은 3이고, 두 행의 합은 6이다. 여기서 COUNT(*) = 2를 빼면 최종 결과는 4가 된다.",
       "references": [
         {
-          "type": "text",
-          "content": "CREATE TABLE T (\n    COL VARCHAR2(10)\n);\n\nINSERT INTO T VALUES ('A' || CHR(10) || 'B');\nINSERT INTO T VALUES ('C' || CHR(10) || 'D');\n\nCOMMIT;\n\n\n<SQL>\nSELECT SUM(LENGTH(COL)) - COUNT(*)\nFROM T;"
+          "type": "sql",
+          "code": "CREATE TABLE T (\n    COL VARCHAR2(10)\n);\n\nINSERT INTO T VALUES ('A' || CHR(10) || 'B');\nINSERT INTO T VALUES ('C' || CHR(10) || 'D');\n\nCOMMIT;\n\n\n<SQL>\nSELECT SUM(LENGTH(COL)) - COUNT(*)\nFROM T;"
         }
       ]
     },
@@ -1921,8 +1921,8 @@
       "explanation": "정답은 2 번. (해설 미등록)",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT TO_CHAR(TO_DATE('2015.01.10 10', 'YYYY,MM,DD HH24') + 1/24/(60/10), 'YYYY,MM,DD HH24:MI:SS') FROM DUAL;"
+          "type": "sql",
+          "code": "SELECT TO_CHAR(TO_DATE('2015.01.10 10', 'YYYY,MM,DD HH24') + 1/24/(60/10), 'YYYY,MM,DD HH24:MI:SS') FROM DUAL;"
         }
       ]
     },
@@ -2211,8 +2211,8 @@
       "explanation": "정답은 4번이다. GROUP BY 가, 나로 각 행이 가/나 조합별로 묶이고, 주어진 데이터에서는 각 조합이 1건씩만 존재하므로 SUM(다)는 각각 600, 500, 300, 200이 된다. HAVING SUM(다) >= 500 조건을 만족하는 것은 600과 500인 두 행뿐이므로 결과는 (009, A003, 600), (005, A002, 500)이다. 단, ORDER BY가 없으므로 실제 출력 순서는 DBMS 실행 계획에 따라 달라질 수 있고, 핵심은 조건을 만족하는 두 행이 조회된다는 점이다.",
       "references": [
         {
-          "type": "text",
-          "content": "CREATE TABLE A (\n    가 VARCHAR2(10),\n    나 VARCHAR2(10),\n    다 NUMBER\n);\n\nINSERT INTO A VALUES ('009', 'A003', 600);\nINSERT INTO A VALUES ('005', 'A002', 500);\nINSERT INTO A VALUES ('002', 'A001', 300);\nINSERT INTO A VALUES ('010', 'A004', 200);\n\nCOMMIT;\n\n<SQL>\nSELECT 가, 나, SUM(다) AS 다\nFROM A\nGROUP BY 가, 나\nHAVING SUM(다) >= 500;"
+          "type": "sql",
+          "code": "CREATE TABLE A (\n    가 VARCHAR2(10),\n    나 VARCHAR2(10),\n    다 NUMBER\n);\n\nINSERT INTO A VALUES ('009', 'A003', 600);\nINSERT INTO A VALUES ('005', 'A002', 500);\nINSERT INTO A VALUES ('002', 'A001', 300);\nINSERT INTO A VALUES ('010', 'A004', 200);\n\nCOMMIT;\n\n<SQL>\nSELECT 가, 나, SUM(다) AS 다\nFROM A\nGROUP BY 가, 나\nHAVING SUM(다) >= 500;"
         }
       ],
       "optionReferences": [
@@ -5024,8 +5024,8 @@
       "explanation": "권한을 부여하는 명령어는 GRANT이며, WHERE 조건의 데이터를 찾기 위한 SELECT 권한과 데이터 변경을 위한 UPDATE 권한이 필요하다.",
       "references": [
         {
-          "type": "text",
-          "content": "UPDATE A_User.TB_A \r\nSET col1='AAA' \r\nWHERE col2=3"
+          "type": "sql",
+          "code": "UPDATE A_User.TB_A \r\nSET col1='AAA' \r\nWHERE col2=3"
         }
       ]
     },
@@ -5583,8 +5583,8 @@
       "explanation": "\"_\"와 \"%\"는 와일드카드로 하나의 글자 또는 모든 문자를 대신하여 사용이 되므로 두 번째 문자가 대문자 A인 경우만 출력된다.\t",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT PLAYER_NAME 선수명, E_PLAYER_NAME 선수영문명\nFROM PLAYER\nWHERE E_PLAYER_NMAE_LIKE '_A%';"
+          "type": "sql",
+          "code": "SELECT PLAYER_NAME 선수명, E_PLAYER_NAME 선수영문명\nFROM PLAYER\nWHERE E_PLAYER_NMAE_LIKE '_A%';"
         }
       ]
     },
@@ -5759,8 +5759,8 @@
       "explanation": "정답은 3 번. (해설 미등록)",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT deptno,sum(sal)\nFROM dept\nWHERE deptno > 10\nGROUP BY deptno\nORDER BY deptno;"
+          "type": "sql",
+          "code": "SELECT deptno,sum(sal)\nFROM dept\nWHERE deptno > 10\nGROUP BY deptno\nORDER BY deptno;"
         }
       ]
     },
@@ -5859,8 +5859,8 @@
       "explanation": "SQL문의 맨 하단에서 ROLLBACK TO SV2명령어를 수행하면 SAVEPOINT SV2 지점까지 변경 된 것을 모두 취소한다.",
       "references": [
         {
-          "type": "text",
-          "content": "INSERT INTO TAB1 VALUES(1);\nINSERT INTO TAB1 VALUES(2);\nSAVEPOINT SV1;\nUPDATE TAB1 SET COL1=7 WHERE COL1=2;\nINSERT INTO TAB1 VALUES(9);\nSAVEPOINT SV2;\nDELETE TAB1 WHERE COL1=7;\nINSERT INTO TAB1 VALUES(11);\nSAVEPOINT SV3;\nINSERT INTO TAB1 VALUES(9);\nROLLBACK TO SV2;\nCOMMIT;"
+          "type": "sql",
+          "code": "INSERT INTO TAB1 VALUES(1);\nINSERT INTO TAB1 VALUES(2);\nSAVEPOINT SV1;\nUPDATE TAB1 SET COL1=7 WHERE COL1=2;\nINSERT INTO TAB1 VALUES(9);\nSAVEPOINT SV2;\nDELETE TAB1 WHERE COL1=7;\nINSERT INTO TAB1 VALUES(11);\nSAVEPOINT SV3;\nINSERT INTO TAB1 VALUES(9);\nROLLBACK TO SV2;\nCOMMIT;"
         }
       ]
     },
@@ -6317,8 +6317,8 @@
       "explanation": "주어진 결과값을 보면 1.DEPTNO별 합계, 2.DEPTNO, JOB별 합계, 3.전체 합계가 조회되므로 빈칸에는 그룹 함수 중 ROLLUP이 와야 한다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT DEPTNO, JOB, SUM(SAL)\nFROM SQLD_73\nGROUP BY (     );"
+          "type": "sql",
+          "code": "SELECT DEPTNO, JOB, SUM(SAL)\nFROM SQLD_73\nGROUP BY (     );"
         },
         {
           "type": "table",
@@ -6391,8 +6391,8 @@
       "explanation": "정답은 4 번. (해설 미등록)",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT LEVEL,\nLPAD(' '.4 * (LEVEL-1) || EMPNO,\nMGR, () AS ISLEAF FROM SCOTT.EMP\nSTART WITH MGR IS NULL\nCONNECT BY PRIOR EMPNO = MGR;"
+          "type": "sql",
+          "code": "SELECT LEVEL,\nLPAD(' '.4 * (LEVEL-1) || EMPNO,\nMGR, () AS ISLEAF FROM SCOTT.EMP\nSTART WITH MGR IS NULL\nCONNECT BY PRIOR EMPNO = MGR;"
         }
       ]
     },
@@ -6515,8 +6515,8 @@
       "explanation": "DEPTNO로 조인을 하고 DNAME과 JOB으로 CUBE를 실행했다. CUBE는 전체합계와 각 칼럼별로 부분합계를 출력한다. CUBE는 입력된 칼럼들의 모든 조합으로 집계를 출력한다. ",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT DNAME, JOB, COUNT(*) \"Total Emp\", SUM(SAL) \"Total Sal\" FROM SCOTT.EMP A, SCOTT.DEPT B\nWHERE A.DEPTNO = B.DEPTNO\nGROUP BY CUBE(DNAME,JOB);"
+          "type": "sql",
+          "code": "SELECT DNAME, JOB, COUNT(*) \"Total Emp\", SUM(SAL) \"Total Sal\" FROM SCOTT.EMP A, SCOTT.DEPT B\nWHERE A.DEPTNO = B.DEPTNO\nGROUP BY CUBE(DNAME,JOB);"
         },
         {
           "type": "table",
@@ -6742,8 +6742,8 @@
       "explanation": "grant는 권한을 부여하는 SQL문이고 revoke는 권한을 삭제하는 SQL문이다. grant구의 문법은 grant 권한 on 테이블 to 사용자이다.",
       "references": [
         {
-          "type": "text",
-          "content": "Update emp set sal=1000\nwhere deptno=100;"
+          "type": "sql",
+          "code": "Update emp set sal=1000\nwhere deptno=100;"
         }
       ]
     },
@@ -6765,8 +6765,8 @@
       "explanation": "특정 문자로 시작하는 것을 조회하기 위해서는 like문을 사용해야 한다. 그리고 'A%'는 A로 시작하는 것을 조회한다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT *\nFROM SQLD_33\nWHERE EMP_NAME LIKE 'A%'"
+          "type": "sql",
+          "code": "SELECT *\nFROM SQLD_33\nWHERE EMP_NAME LIKE 'A%'"
         }
       ]
     },
@@ -6788,8 +6788,8 @@
       "explanation": "서브쿼리만 실행하면 DNO와 MAX(SCORE) 값이 {100,90},{300,65},{200,95} 이다. IN 문을 사용해서 조인을 하므로 {(100,영업,Lee,90),(200,개발,Kim,95),(300,서비스,Hong,65)}가 조회된다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT e.dno, d.dname, e.ename, e.score\nFROM employee e, department d\nWHERE e.dno = d.dno and (e.dno, score) IN\n(SELECT dno, max(score)\nFROM employee GROUP BY dno);"
+          "type": "sql",
+          "code": "SELECT e.dno, d.dname, e.ename, e.score\nFROM employee e, department d\nWHERE e.dno = d.dno and (e.dno, score) IN\n(SELECT dno, max(score)\nFROM employee GROUP BY dno);"
         },
         {
           "type": "table",
@@ -6985,8 +6985,8 @@
       "explanation": "COALESCE 함수는 NULL이 아닌 첫 번째 값을 리턴하는 함수이다. 즉, 위의 문제에서 첫 번째는 NULL이고 두 번째는 '2'이다. 따라서 '2'가 리턴된다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT COALESCE(NULL,'2','1') FROM DUAL;"
+          "type": "sql",
+          "code": "SELECT COALESCE(NULL,'2','1') FROM DUAL;"
         }
       ]
     },
@@ -7008,8 +7008,8 @@
       "explanation": "SQL문에서 NULL과 NULL을 비교할 수가 없다. 만약 NULL 값을 조회하려면 is null을 사용해야 하고 NULL이 아닌 것을 조회하려면 is not null을 사용해야 한다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT * FROM dual WHERE NULL = NULL;"
+          "type": "sql",
+          "code": "SELECT * FROM dual WHERE NULL = NULL;"
         }
       ]
     },
@@ -7099,8 +7099,8 @@
       "explanation": "IS NULL 함수는 만약 NULL이면 \"없음\"을 출력하고 그렇지 않으면 NAME 칼럼의 값을 출력하는 것이다.",
       "references": [
         {
-          "type": "text",
-          "content": "Select NVL(Name,'없음') From Emp;"
+          "type": "sql",
+          "code": "Select NVL(Name,'없음') From Emp;"
         }
       ]
     },
@@ -7207,8 +7207,8 @@
       "explanation": "정답은 2번이다. SELECT * 이므로 결과 릴레이션의 차수는 Student의 5개 컬럼과 Department의 3개 컬럼을 합한 8이다. 또한 WHERE 절에는 s.dept > 100 조건만 있고 s.dept = d.dno 같은 조인 조건이 없으므로, dept 값이 200 또는 300인 Student 3행과 Department 3행이 카티션 곱을 이루어 카디널리티는 9가 된다. 외래키 관계가 있어도 조인 조건을 따로 주지 않으면 자동으로 조인되지 않는다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT * FROM Student s, Department d WHERE s.dept > 100;"
+          "type": "sql",
+          "code": "SELECT * FROM Student s, Department d WHERE s.dept > 100;"
         },
         {
           "type": "table",
@@ -7304,8 +7304,8 @@
       "explanation": "SELECT문을 보면 department로  GROUP BY한다. 그러면 총 3개의 그룹이 만들어진다. computer, physics, math이다. 3개의 그룹 중에서 개수가 2개 초과인 것을 조회하기 위해서 \"HAVING count(*) >2\" 문을 사용했다. 따라서 2개 초과인 것은 math이고 math는 총 3개가 있으므로 3이 된다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT count(*)\nFROM student\nGROUP BY department\nHAVING count(*) > 2;"
+          "type": "sql",
+          "code": "SELECT count(*)\nFROM student\nGROUP BY department\nHAVING count(*) > 2;"
         },
         {
           "type": "table",
@@ -7381,8 +7381,8 @@
       "explanation": "count()는 행 수를 계산하는 집계함수이다. 집계함수의 특성은 NULL 값을 제외한다는 것이다. 그래서 NULL 값이 존재하는 경우 집계 결과는 달라질 수 있다. 번호 칼럼은 PK이므로 값이 무조건 들어있다. 즉, COUNT(번호)는 모든 행의 개수를 출력한다. 반면에 월급 칼럼에 NULL이 들어있을 경우에는 WHERE 월급>=100000 OR 월급<100000 이 부분에서 NULL은 정상적인 비교가 되지않아 행이 조회되지 않는다. 즉 출력되는 행의 개수가 달라질 수 있다는 의미이다.",
       "references": [
         {
-          "type": "text",
-          "content": "create table 사원(번호 char(10) primary key, 월급 integer);\n\nSQL A : select count(번호) from 사원 where 월급 > = 100000 or 월급 < 100000;\nSQL B : select count(번호) from 사원;"
+          "type": "sql",
+          "code": "create table 사원(번호 char(10) primary key, 월급 integer);\n\nSQL A : select count(번호) from 사원 where 월급 > = 100000 or 월급 < 100000;\nSQL B : select count(번호) from 사원;"
         }
       ]
     },
@@ -7421,8 +7421,8 @@
       "explanation": "ADD_MONTHS 함수는 6개월을 더하고 NEXT_DAY 함수는 지정된 요일의 첫 번째 날짜를 출력한다. 즉, 문제에서는 6개월 후 첫 번째 월요일을 출력한다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT NEXT_DAY\n(ADD_MONTHS(sysdate,6),'월요일)\nFROM dual;"
+          "type": "sql",
+          "code": "SELECT NEXT_DAY\n(ADD_MONTHS(sysdate,6),'월요일)\nFROM dual;"
         }
       ]
     },
@@ -7687,8 +7687,8 @@
       "explanation": "RANK()함수를 사용할 경우 급여가 동일한 사람이 있을 때 같은 등수로 조회된다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT JOB, ENAME, SAL,\nRANK() OVER(ORDER BY SAL DESC)\nALL_RANK,\nRANK() OVER (PARTITION BY JOB ORDER BY SAL DESC) JOB_RANK \nFROM EMP;"
+          "type": "sql",
+          "code": "SELECT JOB, ENAME, SAL,\nRANK() OVER(ORDER BY SAL DESC)\nALL_RANK,\nRANK() OVER (PARTITION BY JOB ORDER BY SAL DESC) JOB_RANK \nFROM EMP;"
         }
       ]
     },
@@ -7710,8 +7710,8 @@
       "explanation": "NTILE 윈도우 함수는 데이터를 ARGUMENT 값으로 N등분하는 함수이다. 위의 예처럼 NTILE(4)는 1부터 4까지 4등분한다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT ENAME,SAL, NTILE(4) OVER (ORDER BY SAL DESC) as DATA\nFROM EMP;"
+          "type": "sql",
+          "code": "SELECT ENAME,SAL, NTILE(4) OVER (ORDER BY SAL DESC) as DATA\nFROM EMP;"
         }
       ]
     },
@@ -7891,8 +7891,8 @@
       "explanation": "NOT EXISTS는 OUTER JOIN으로 변경할 경우 NOT NULL칼럼에 대해서 IS NULL로 검사하여 NOT EXISTS를 구현한다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT ... FROM 급여이력 S\nWHERE NOT EXISTS\n(SELECT 'X' FROM 사원 P\nWHERE P.사원번호 = S.사원번호)\n\n[SQL문]\nSELECT .... FROM 급여이력 S\nLEFT OUTER JOIN 사원 P\nON(S.사원번호=P.사원번호) WHERE (         );"
+          "type": "sql",
+          "code": "SELECT ... FROM 급여이력 S\nWHERE NOT EXISTS\n(SELECT 'X' FROM 사원 P\nWHERE P.사원번호 = S.사원번호)\n\n[SQL문]\nSELECT .... FROM 급여이력 S\nLEFT OUTER JOIN 사원 P\nON(S.사원번호=P.사원번호) WHERE (         );"
         }
       ]
     },
@@ -7954,8 +7954,8 @@
       "explanation": "①오류 발생으로 실행되지 않는다.\n③UNION의 설명이다.\n④조회되는 데이터의 구조가 다르기 때문에 오류가 발생한다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT 'A', 1 FROM DUAL\nUNION ALL\nSELECT 1, 'A' FROM DUAL;"
+          "type": "sql",
+          "code": "SELECT 'A', 1 FROM DUAL\nUNION ALL\nSELECT 1, 'A' FROM DUAL;"
         }
       ]
     },
@@ -8000,8 +8000,8 @@
       "explanation": "CUME_DIST 함수는 주어진 그룹에 대한 상대적인 누적분포도 값을 반환하는 것으로 분포도 값은 0 초과 1 이하 사이의 값이다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT DEPTNO, ENAME, SAL, ( ㄱ ) OVER(PARTITION BY DEPTNO ORDER BY SAL DESC) as PCT\nFROM EMP;"
+          "type": "sql",
+          "code": "SELECT DEPTNO, ENAME, SAL, ( ㄱ ) OVER(PARTITION BY DEPTNO ORDER BY SAL DESC) as PCT\nFROM EMP;"
         }
       ]
     },
@@ -8090,8 +8090,8 @@
       "explanation": "EMPNO는 기본키이므로 자동으로 인덱스가 생성된다. FULL SCAN이 된 것은 LIKE 조건에서 숫자 칼럼과 문자값 간에 형 변환이 발생해서이다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT * FROM EMP\nWHERE EMPNO LIKE '100%';"
+          "type": "sql",
+          "code": "SELECT * FROM EMP\nWHERE EMPNO LIKE '100%';"
         }
       ]
     },
@@ -8274,8 +8274,8 @@
       "explanation": "위의 SQL문 면 하단에서 ROLLBACK TO SV2 명령어를 수행하면, SAVEPOINT SV2 지점까지 변경된 것을 모두 취소한다.",
       "references": [
         {
-          "type": "text",
-          "content": "Create table Mytest(COL1 number(10));\nINSERT INTO Mytest VALUES(2);\nINSERT INTO Mytest VALUES(2);\nSAVEPOINT SV1;\nUPDATE Mytest SET COL1=7 WHERE COL1=2;\nINSERT INTO Mytest VALUES(9);\nSAVEPOINT SV2;\nDELETE Mytest WHERE CO1=7;\nINSERT INTO Mytest VALUES(11);\nSAVEPOINT SV3;\nINSERT INTO Mytest VALUES(20);\nROLLBACK TO SV2;\nCOMMIT;\nSELECT * FROM mytest;"
+          "type": "sql",
+          "code": "Create table Mytest(COL1 number(10));\nINSERT INTO Mytest VALUES(2);\nINSERT INTO Mytest VALUES(2);\nSAVEPOINT SV1;\nUPDATE Mytest SET COL1=7 WHERE COL1=2;\nINSERT INTO Mytest VALUES(9);\nSAVEPOINT SV2;\nDELETE Mytest WHERE CO1=7;\nINSERT INTO Mytest VALUES(11);\nSAVEPOINT SV3;\nINSERT INTO Mytest VALUES(20);\nROLLBACK TO SV2;\nCOMMIT;\nSELECT * FROM mytest;"
         }
       ]
     },
@@ -8297,8 +8297,8 @@
       "explanation": "select * from A union select * from B를 실행하면 1,2,3,4,5가 반환된다. 해당 결과에 MINUS 조인을 하면 4,5가 빠지기 때문에 최종적으로 1,2,3 이 된다.",
       "references": [
         {
-          "type": "text",
-          "content": "select * from A1\nunion\nselect * from B1\nminus\nselect * from C1;"
+          "type": "sql",
+          "code": "select * from A1\nunion\nselect * from B1\nminus\nselect * from C1;"
         },
         {
           "type": "table",
@@ -8371,8 +8371,8 @@
       "explanation": "mgrid가 NULL인 값을 시작해서 empid로 조회를 전개하는 순방향 조회를 하고 있다. 순방향 전개를 하면서 empid로 정렬한다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT *\nFROM Mytest\nSTART WITH (  ㄱ   ) IS NULL\nCONNECT BY PRIOR (   ㄴ  )\nAND today BETWEEN '2017-01-01' AND '2022-12-31'\nORDER SIBLINGS BY empid;"
+          "type": "sql",
+          "code": "SELECT *\nFROM Mytest\nSTART WITH (  ㄱ   ) IS NULL\nCONNECT BY PRIOR (   ㄴ  )\nAND today BETWEEN '2017-01-01' AND '2022-12-31'\nORDER SIBLINGS BY empid;"
         },
         {
           "type": "table",
@@ -8603,8 +8603,8 @@
       "explanation": "위의 SQL문은 COL1과 COL2값으로 각각 (x,y),(KK,BB)를 갖는 행들이 반환되지만 ②번 보기는 COL1 과 COL2 값으로 각각 (x,KK),(y,BB)값을 갖는 행들이 반환된다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT * FROM Mytest WHERE (COL1, COL2) IN (('x','y'),('kk','BB'))"
+          "type": "sql",
+          "code": "SELECT * FROM Mytest WHERE (COL1, COL2) IN (('x','y'),('kk','BB'))"
         },
         {
           "type": "table",
@@ -8826,8 +8826,8 @@
       "explanation": "결과값에서 중복된 등수 2등 다음에 바로 다음 등수인 3등이 왔으므로 빈칸에는 DENSE_RANK가 와야 한다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT (   ) OVER\n(ORDER BY 급여 desc)\nas 순위, 이름, 급여\nFROM Mytest;"
+          "type": "sql",
+          "code": "SELECT (   ) OVER\n(ORDER BY 급여 desc)\nas 순위, 이름, 급여\nFROM Mytest;"
         },
         {
           "type": "table",
@@ -9181,8 +9181,8 @@
       "explanation": "①의 경우 20220420이라는 숫자형 값을 바로 DATE에 넣어 데이터타입 불일치 에러가 발생한다. TO_DATE(20220420)으로 바꾸어야 한다.\n",
       "references": [
         {
-          "type": "text",
-          "content": "Create table Mytest\n(\nA number(10)  primary key,\nB number(10),\nC date,\nD varchar2(10)\n);"
+          "type": "sql",
+          "code": "Create table Mytest\n(\nA number(10)  primary key,\nB number(10),\nC date,\nD varchar2(10)\n);"
         }
       ]
     },
@@ -9204,8 +9204,8 @@
       "explanation": "해당 SQL문은 주어진 테이블인 Mytest에서 CO1, COL2, COL3 속성 순서대로 내림차순 정렬을 수행한다. (1,null,1)은 COL1 desc에 의해 먼저 정렬되므로 마지막 행에 위치한다. COL1을 정렬해서 값이 동일한 행은 COL2 desc를 수행하는데, COL2 열도 동일한 행이 있으므로 그 행들에 대해 COL3 desc를 수행한다.",
       "references": [
         {
-          "type": "text",
-          "content": "select * from Mytest order by COL1 desc,  COL2 desc, COL3 desc;"
+          "type": "sql",
+          "code": "select * from Mytest order by COL1 desc,  COL2 desc, COL3 desc;"
         },
         {
           "type": "table",
@@ -9259,8 +9259,8 @@
       "explanation": "A 속성은 COL1의 최댓값, B 속성은 COL2의 최솟값, C 속성은 COL1 속성의 합이다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT \n(     ) AS A,\n(     ) AS B,\n(     ) AS C\nfrom Mytest"
+          "type": "sql",
+          "code": "SELECT \n(     ) AS A,\n(     ) AS B,\n(     ) AS C\nfrom Mytest"
         },
         {
           "type": "table",
@@ -9334,8 +9334,8 @@
       "explanation": "주어진 결과값을 보면 1, DEPTNO별 합계, 2.DEPTNO,JOB별 합계, 3.전체 합계가 조회되므로 빈칸에는 그룹 함수 중 ROLLUP이 와야 한다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT DEPTNO, JOB, SUM(SAL)\nFROM Mytest\nGROUP BY (   );"
+          "type": "sql",
+          "code": "SELECT DEPTNO, JOB, SUM(SAL)\nFROM Mytest\nGROUP BY (   );"
         },
         {
           "type": "table",
@@ -9408,8 +9408,8 @@
       "explanation": "OUTER JOIN 혹은 CROSS JOIN이 아닌 INNER JOIN이므로 ①번이 된다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT * FROM SCOTT.EMP A, SCOTT.DEPT B\nWHERE A.DEPTNO = B.DEPTNO\nAND B.DNAME = 'SALES';"
+          "type": "sql",
+          "code": "SELECT * FROM SCOTT.EMP A, SCOTT.DEPT B\nWHERE A.DEPTNO = B.DEPTNO\nAND B.DNAME = 'SALES';"
         }
       ]
     },
@@ -9431,8 +9431,8 @@
       "explanation": "-INNER JOIN은 B와 C가 같기 때문에 2건이다.\n-LEFT OUTER JOIN은 같은 것 2건과 D,E까지 포함해서 4건이 된다.\n-RIGHT OUTER JOIN은 같은 것 2건과 MytestB의 A까지 조회되어서 3건이 된다.\n-FULL OUTER JOIN은 같은 것 2건과 MytestA의 2건, MytestB의 1건 포함해서 5건이 된다.\n-CROSS JOIN은 MytestA의 4개의 행과 MytestB의 3개의 행을 곱해서 4*3=12건이다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT * FROM MytestA A INNER JOIN MytestB B ON (A.KEY1 = B.KEY2);\nSELECT * FROM MytestA A LEFT OUTER JOIN MytestB B ON (A.KEY1 = B.KEY2);\nSELECT * FROM MytestA A RIGHT OUTER JOIN MytestB B ON (A.KEY1 = B.KEY2);\nSELECT * FROM MytestA A FULL OUTER JOIN MytestB B ON (A.KEY1 = B.KEY2);\nSELECT * FROM MytestA A CROSS JOIN MytestB B;"
+          "type": "sql",
+          "code": "SELECT * FROM MytestA A INNER JOIN MytestB B ON (A.KEY1 = B.KEY2);\nSELECT * FROM MytestA A LEFT OUTER JOIN MytestB B ON (A.KEY1 = B.KEY2);\nSELECT * FROM MytestA A RIGHT OUTER JOIN MytestB B ON (A.KEY1 = B.KEY2);\nSELECT * FROM MytestA A FULL OUTER JOIN MytestB B ON (A.KEY1 = B.KEY2);\nSELECT * FROM MytestA A CROSS JOIN MytestB B;"
         },
         {
           "type": "table",
@@ -9505,22 +9505,82 @@
         {
           "type": "table",
           "caption": "[EMP] 테이블",
-          "headers": ["DEPTNO", "JOB", "SAL"],
+          "headers": [
+            "DEPTNO",
+            "JOB",
+            "SAL"
+          ],
           "rows": [
-            ["10", "MANAGER", "2450"],
-            ["10", "PRESIDENT", "5000"],
-            ["10", "CLERK", "1300"],
-            ["20", "CLERK", "800"],
-            ["20", "MANAGER", "2975"],
-            ["20", "ANALYST", "3000"],
-            ["20", "ANALYST", "3000"],
-            ["20", "CLERK", "1100"],
-            ["30", "SALESMAN", "1600"],
-            ["30", "SALESMAN", "1250"],
-            ["30", "SALESMAN", "1250"],
-            ["30", "MANAGER", "2850"],
-            ["30", "SALESMAN", "1500"],
-            ["30", "CLERK", "950"]
+            [
+              "10",
+              "MANAGER",
+              "2450"
+            ],
+            [
+              "10",
+              "PRESIDENT",
+              "5000"
+            ],
+            [
+              "10",
+              "CLERK",
+              "1300"
+            ],
+            [
+              "20",
+              "CLERK",
+              "800"
+            ],
+            [
+              "20",
+              "MANAGER",
+              "2975"
+            ],
+            [
+              "20",
+              "ANALYST",
+              "3000"
+            ],
+            [
+              "20",
+              "ANALYST",
+              "3000"
+            ],
+            [
+              "20",
+              "CLERK",
+              "1100"
+            ],
+            [
+              "30",
+              "SALESMAN",
+              "1600"
+            ],
+            [
+              "30",
+              "SALESMAN",
+              "1250"
+            ],
+            [
+              "30",
+              "SALESMAN",
+              "1250"
+            ],
+            [
+              "30",
+              "MANAGER",
+              "2850"
+            ],
+            [
+              "30",
+              "SALESMAN",
+              "1500"
+            ],
+            [
+              "30",
+              "CLERK",
+              "950"
+            ]
           ]
         }
       ],
@@ -9551,8 +9611,8 @@
       "explanation": "CROSS JOIN은 MytestA 테이블이 4행, MytestB 테이블이 3행이므로 4*3=12가 된다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT * FROM MytestA (       ) MytestB;"
+          "type": "sql",
+          "code": "SELECT * FROM MytestA (       ) MytestB;"
         },
         {
           "type": "table",
@@ -9674,8 +9734,8 @@
       "explanation": "COUNT(칼럼명)으로 조회를 하는 경우는 NULL 값이 제외된다. 따라서 3이 된다. 즉, 합계 1200/3=400이다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT SUM(SCORE) / COUNT(NO) FROM Mytest"
+          "type": "sql",
+          "code": "SELECT SUM(SCORE) / COUNT(NO) FROM Mytest"
         },
         {
           "type": "table",
@@ -9727,8 +9787,8 @@
       "explanation": "ROUND(숫자, 반올림 소수 자리)는 반올림하는 함수이다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT ROUND(10.51234, 1) FROM DUAL;"
+          "type": "sql",
+          "code": "SELECT ROUND(10.51234, 1) FROM DUAL;"
         }
       ]
     },
@@ -10315,8 +10375,8 @@
       "explanation": "주어진 SQL문은 COL1, COL2 값이 각각(1,3) (1,4)인 행들만 조회되는 SQL문이다.\n이와 같은 값을 반환하는 보기는 COL1이 1이면서 COL2가 3 또는 4인 값을 조회하는 ④번 보기이다.",
       "references": [
         {
-          "type": "text",
-          "content": "select * from Mytest\nwhere (COL1 = 1 and COL2 = 3) or (COL1 = 1 and COL2 = 4);"
+          "type": "sql",
+          "code": "select * from Mytest\nwhere (COL1 = 1 and COL2 = 3) or (COL1 = 1 and COL2 = 4);"
         }
       ]
     },
@@ -10338,8 +10398,8 @@
       "explanation": "위의 Mytest 테이블에서 MGR 속성별로 파티션을 분할했을 때 각각의 파티션 내에서 HIREDATE 속성값 기준으로 오름차순 정렬하고 그때 같은 파티션 내에서 현재 행을 기준으로 바로 이전 행부터 바로 다음 행까지의 급여의 합계를 계산하여 MGR_SUM 속성값으로 조회한다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT MGR, ENAME, SAL, SUM(SAL) OVER (PARTITION BY MGR ORDER BY HIREDATE ROWS BETWEEN 1 PRECEDING AND 1 FOLLOWING) AS MGR_SUM FROM Mytest;"
+          "type": "sql",
+          "code": "SELECT MGR, ENAME, SAL, SUM(SAL) OVER (PARTITION BY MGR ORDER BY HIREDATE ROWS BETWEEN 1 PRECEDING AND 1 FOLLOWING) AS MGR_SUM FROM Mytest;"
         },
         {
           "type": "table",
@@ -10493,8 +10553,8 @@
       "explanation": "위의 SQL문의 맨 하단의 ROLLBACK TO SV2 명령어를 수행하면 SAVEPOINT SV2 지점까지 변경된 것을 모두 취소한다.",
       "references": [
         {
-          "type": "text",
-          "content": "INSERT INTO Mytest VALUES(1);\nINSERT INTO Mytest VALUES(2);\nSAVEPOINT SV1;\nUPDATE Mytest SET CO1=8 WHERE COL1=2;\nINSERT INTO Mytest VALUES(9);\nSAVEPOINT SV2;\nDELETE Mytest WHERE COL1=8;\nINSERT INTO Mytest VALUES(11);\nSAVEPOINT SV3;\nINSERT INTO Mytest VALUES(9);\nROLLBACK TO SV2;\nCOMMIT;"
+          "type": "sql",
+          "code": "INSERT INTO Mytest VALUES(1);\nINSERT INTO Mytest VALUES(2);\nSAVEPOINT SV1;\nUPDATE Mytest SET CO1=8 WHERE COL1=2;\nINSERT INTO Mytest VALUES(9);\nSAVEPOINT SV2;\nDELETE Mytest WHERE COL1=8;\nINSERT INTO Mytest VALUES(11);\nSAVEPOINT SV3;\nINSERT INTO Mytest VALUES(9);\nROLLBACK TO SV2;\nCOMMIT;"
         }
       ]
     },
@@ -10567,8 +10627,8 @@
       "explanation": "조인 조건과 조회 조건이 분리되어야 하므로 조회 조건은 WHERE절로 분리되어야 한다. OUTER JOIN이 아닌 INNER JOIN이므로 INNER JOIN에 조회 조건 분리가 된 ①번이 맞다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT *\nFROM SCOTT.EMP A, SCOTT.DEPT B\nWHERE A.DEPTNO = B.DEPTNO\nAND B.DNMAE ='KIM'"
+          "type": "sql",
+          "code": "SELECT *\nFROM SCOTT.EMP A, SCOTT.DEPT B\nWHERE A.DEPTNO = B.DEPTNO\nAND B.DNMAE ='KIM'"
         }
       ]
     },
@@ -10590,8 +10650,8 @@
       "explanation": "-CONNECT_BY_ISLEAF : 전개 과정에서 해당 데이터가 리프 데이터면 1, 아니면 0을 반환한다.\n-CONNECT_BY_ISCYCLE : 전개 과정에서 자식을 갖는데, 해당 데이터가 조상으로 존재하면1, 그렇지 않으면 0을 반환한다. 여기서 조상이란 자신으로부터 루트까지의 경로에 존재하는 데이터를 말한다.\n-SYS_CONNECT_BY_PATH : 하위 레벨의 칼럼까지 모두 표시해준다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT LEVEL, LPAD(' ',4 + (LEVEL -1) )|| EMPNO, MGR, (    ) AS ISLEAF\nFROM Mytest\nSTART WITH MGR IS NULL\nCONNECT BY PRIOR EMPNO = MGR;"
+          "type": "sql",
+          "code": "SELECT LEVEL, LPAD(' ',4 + (LEVEL -1) )|| EMPNO, MGR, (    ) AS ISLEAF\nFROM Mytest\nSTART WITH MGR IS NULL\nCONNECT BY PRIOR EMPNO = MGR;"
         }
       ]
     },
@@ -10613,8 +10673,8 @@
       "explanation": "정답은 2 번. (해설 미등록)",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT SUM(A.N1)\nFROM MytestA A, MytestB B\nWHERE A.V1 <> B.V1;"
+          "type": "sql",
+          "code": "SELECT SUM(A.N1)\nFROM MytestA A, MytestB B\nWHERE A.V1 <> B.V1;"
         },
         {
           "type": "table",
@@ -10701,8 +10761,8 @@
       "explanation": "A테이블의 매니저 아이디가 B테이블의 직원 아이디이므로 A가 부하직원, B가 상사라고 볼 수 있다. 그러므로 상단의 SQL문은 어떤 부하직원보다도 연봉이 높은 상사의 데이터를 조회하는 SQL문이라 할 수 있다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT A.* FROM MytestA A, MytestB B WHERE A.MANAGER_ID = B.EMPLOYEE_ID AND B.SALARY >= ANY A.SALARY;"
+          "type": "sql",
+          "code": "SELECT A.* FROM MytestA A, MytestB B WHERE A.MANAGER_ID = B.EMPLOYEE_ID AND B.SALARY >= ANY A.SALARY;"
         },
         {
           "type": "table",
@@ -10796,8 +10856,8 @@
       "explanation": "DELETE FROM A 이후 A 테이블은 모두 삭제된다. C 테이블은 Cascade 옵션에 의해서 A의 첫번째 행을 참조하는 두 건 모두 삭제된다. 그리고 B 테이블이 삭제됨에 따라 B 테이블의 B칼럼을 참조하는 C 테이블의 B 칼럼값은 SET NULL 옵션에 의해서 NULL 값으로 변경된다.",
       "references": [
         {
-          "type": "text",
-          "content": "CREATE TABLE A\n(C INTEGER PRIMARY KEY,\nD INTEGER);\n\nCREATE TABLE B\n(B INTEGER PRIMARY KEY,\nC INTEGER REFERENCES A(C) ON DELETE CASCADE);\n\nCREATE TABLE C\n(A INTEGER PRIMARY KEY,\nB INTEGER REFERENCES B(B) ON DELETE SET NULL);"
+          "type": "sql",
+          "code": "CREATE TABLE A\n(C INTEGER PRIMARY KEY,\nD INTEGER);\n\nCREATE TABLE B\n(B INTEGER PRIMARY KEY,\nC INTEGER REFERENCES A(C) ON DELETE CASCADE);\n\nCREATE TABLE C\n(A INTEGER PRIMARY KEY,\nB INTEGER REFERENCES B(B) ON DELETE SET NULL);"
         },
         {
           "type": "table",
@@ -10981,8 +11041,8 @@
       "explanation": "NTILE 함수는 expr에 명시된 값만큼 파티션을 균등하게 분할하는 함수로 expr에 명시된 숫자가 4이고 order by가 1이니 오름차순 정렬로 총 4개의 VAL속성값으로 파티션이 분할되며 각 파티션별로 행의 수가 균등하게 분할되어 3,3,2,2의 행의 수로 각각 분할된다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT VAL, COUNT(*) AS CNT\nFROM(\n             SELECT( ㄱ )(4) over (ORDER BY COL1) AS VAL\n             FROM Mytest\n)\nWHERE 1=1\nGROUP BY VAL ORDER BY 1;"
+          "type": "sql",
+          "code": "SELECT VAL, COUNT(*) AS CNT\nFROM(\n             SELECT( ㄱ )(4) over (ORDER BY COL1) AS VAL\n             FROM Mytest\n)\nWHERE 1=1\nGROUP BY VAL ORDER BY 1;"
         },
         {
           "type": "table",
@@ -11086,8 +11146,8 @@
       "explanation": "MGRID가 NULL인 값에서 시작해서 EMPID로 조회를 전개하는 순방향 조회를 하고 있다. 순방향 전개를 하면서 EMPID로 정렬한다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT *\nFROM Mytest\nSTART WITH MGRID IS NULL\nCONNECT BY PRIOR EMPID = MGRID\nAND today BETWEEN '2017-01-01' AND '2022-12-31'\nORDER SIBLINGS BY EMPID;"
+          "type": "sql",
+          "code": "SELECT *\nFROM Mytest\nSTART WITH MGRID IS NULL\nCONNECT BY PRIOR EMPID = MGRID\nAND today BETWEEN '2017-01-01' AND '2022-12-31'\nORDER SIBLINGS BY EMPID;"
         },
         {
           "type": "table",
@@ -11175,8 +11235,8 @@
       "explanation": "COL3 값에서 두 번째 다음값이 Result 값으로 출력되니 (ㄱ)에는 숫자 2가 와야 하고, 현재 COL3값의 두번째 다음값이 해당 파티션내에서 존재하지 않을 경우에는 기본값으로 9를 출력하니 (ㄴ)에는 숫자 9가 와야한다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT COL1, COL2, COL3,\nLEAD(COL3, (ㄱ), (ㄴ)) OVER(PARTITION BY COL1 ORDER BY COL3 ) AS Result FROM Mytest"
+          "type": "sql",
+          "code": "SELECT COL1, COL2, COL3,\nLEAD(COL3, (ㄱ), (ㄴ)) OVER(PARTITION BY COL1 ORDER BY COL3 ) AS Result FROM Mytest"
         },
         {
           "type": "table",
@@ -11276,8 +11336,8 @@
       "explanation": "주어진 테이블에서 COL3 속성의 값 7개를 2,2,2로 균등하게 3등분하고 남은 값을 앞에서부터 순차적으로 할당하므로 3,2,2개씩 파티션이 분할된다. 그러면 NTILE2에서는 각각 분할된 파티션별 번호인 1,2,3이 할당되고 CNT에서는 각각에 분할된 파티션별 행의 수가 카운트 되어 3,2,2가 반환된다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT NTILE2, COUNT(*) AS CNT\nFROM(\nSELECT COL1, COL2, COL3, NTILE(3)\nOVER(ORDER BY COL3) AS NTILE2\nFROM Mytest )\nGROUP BY NTILE2;"
+          "type": "sql",
+          "code": "SELECT NTILE2, COUNT(*) AS CNT\nFROM(\nSELECT COL1, COL2, COL3, NTILE(3)\nOVER(ORDER BY COL3) AS NTILE2\nFROM Mytest )\nGROUP BY NTILE2;"
         },
         {
           "type": "table",
@@ -11367,8 +11427,8 @@
       "explanation": "nullif(1,1)에서 NULL을 반환하고 COALESCE(NULL,200,300)에서 200을 반환한다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT COALESCE(nullif(1,1),200,300) as data from dual;"
+          "type": "sql",
+          "code": "SELECT COALESCE(nullif(1,1),200,300) as data from dual;"
         }
       ]
     },
@@ -11390,8 +11450,8 @@
       "explanation": "COL1 값에서 Month값이 1이 두 자릿수 01로 출력되어야 하므로 LPAD 함수의 두 번째 인자 값에는 숫자 2이다. 세 번째 인자 값에는 문자 '0'이 와야 한다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT EXTRACT\n(YEAR FROM SYSDATE),\nLPAD(EXTRACT(month from sysdate), (ㄱ), (ㄴ))\nFROM Mytest;"
+          "type": "sql",
+          "code": "SELECT EXTRACT\n(YEAR FROM SYSDATE),\nLPAD(EXTRACT(month from sysdate), (ㄱ), (ㄴ))\nFROM Mytest;"
         },
         {
           "type": "table",
@@ -11425,8 +11485,8 @@
       "explanation": "CROSS JOIN으로 DEPT에 행이 4건이다. 즉 4*4=16행이 조회된다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT * FROM DEPT CROSS JOIN DEPT;"
+          "type": "sql",
+          "code": "SELECT * FROM DEPT CROSS JOIN DEPT;"
         }
       ]
     },
@@ -11448,8 +11508,8 @@
       "explanation": "SUM1은 COL1 ='A'조건을 만족하는 1,2,3행을 각각 1로 되돌리고 합계를 계산하기 때문에 3이 된다. COL2 < 20000 조건은 모든 행이 만족하고 1을 되돌리므로 합계는 7이 된다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT SUM(CASE WHEN COL1 ='A'\nTHEN 1 END) AS SUM1,\nSUM(CASE WHEN COL3 < 20000 THEN 1 END) AS SUM2\nFROM Mytest;"
+          "type": "sql",
+          "code": "SELECT SUM(CASE WHEN COL1 ='A'\nTHEN 1 END) AS SUM1,\nSUM(CASE WHEN COL3 < 20000 THEN 1 END) AS SUM2\nFROM Mytest;"
         },
         {
           "type": "table",
@@ -11517,8 +11577,8 @@
       "explanation": "정답은 4 번. (해설 미등록)",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT COL1, COL2, SUM(COL3)\nFROM Mytest\nGROUP BY (        );"
+          "type": "sql",
+          "code": "SELECT COL1, COL2, SUM(COL3)\nFROM Mytest\nGROUP BY (        );"
         },
         {
           "type": "table",
@@ -11777,8 +11837,8 @@
       "explanation": "①번 보기에서 ORDER BY 항목은 반드시 SELECT 목록에 있는 칼럼의 자릿수를 사용해야 한다.",
       "references": [
         {
-          "type": "text",
-          "content": "CREATE TABLE MYTEST (N1 NUMBER(20), N2 NUMBER(20) );\nINSERT INTO MYTEST VALUES(1,100);\nINSERT INTO MYTEST VALUES(2,200);\nCOMMIT;"
+          "type": "sql",
+          "code": "CREATE TABLE MYTEST (N1 NUMBER(20), N2 NUMBER(20) );\nINSERT INTO MYTEST VALUES(1,100);\nINSERT INTO MYTEST VALUES(2,200);\nCOMMIT;"
         }
       ]
     },
@@ -11857,8 +11917,8 @@
       "explanation": "결과값을 보면\n1.DNAME, JOB별 소계\n2.DNAME별 소계\n3.JOB별 소계\n4.전체 집계 등 모든 조합 가능한 소계와 집계가 조회되었으므로 빈칸에 들어갈 그룹 함수는 CUBE이다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT DNMAE,JOB,SUM(SAL)\nFROM Mytest\nGROUP BY (          )"
+          "type": "sql",
+          "code": "SELECT DNMAE,JOB,SUM(SAL)\nFROM Mytest\nGROUP BY (          )"
         },
         {
           "type": "image",
@@ -11907,8 +11967,8 @@
       "explanation": "COUNT(C1)은 NULL 값은 제외된다. 따라서 3개가 된다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT COUNT(C1)\nFROM Mytest"
+          "type": "sql",
+          "code": "SELECT COUNT(C1)\nFROM Mytest"
         },
         {
           "type": "image",
@@ -11952,8 +12012,8 @@
       "explanation": "1번째 테이블에서 10,20,25,30,50,60이 반환되고 2번째 테이블에서 10,20,30,40,50이 반환되기 때문에 총 행 수는 11이 된다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT Count(*) FROM(\nSELECT DISTINCT COL1\nFROM mytesta\nUNION ALL\nSELECT COL1\nFRM mytestb );"
+          "type": "sql",
+          "code": "SELECT Count(*) FROM(\nSELECT DISTINCT COL1\nFROM mytesta\nUNION ALL\nSELECT COL1\nFRM mytestb );"
         },
         {
           "type": "image",
@@ -12021,8 +12081,8 @@
       "explanation": "SAVEPOINT가 중복될 경우 ROLLBACK TO SAVEPOINT을 수행하면, 중복된 SAVEPOINT 중 맨 뒤에 있는 SAVEPOINT 지점으로 ROLLBACK 된다. ",
       "references": [
         {
-          "type": "text",
-          "content": "CREATE TABLE MYTEST (N1 NUMBER(10), N2 NUMBER(10));\nINSERT INTO MyTEST VALUES (100, 200);\nINSERT INTO MyTEST VALUES (200, 300);\nSAVEPOINT T1;\nUPDATE MYTEST SET N1=300 WHERE N2=200;\nSAVEPOINT T1;\nDELETE MYTEST WHERE N1>=200;\nROLLBACK TO SAVEPOINT T1;\nSELECT MAX(N1) FROM MYTEST;"
+          "type": "sql",
+          "code": "CREATE TABLE MYTEST (N1 NUMBER(10), N2 NUMBER(10));\nINSERT INTO MyTEST VALUES (100, 200);\nINSERT INTO MyTEST VALUES (200, 300);\nSAVEPOINT T1;\nUPDATE MYTEST SET N1=300 WHERE N2=200;\nSAVEPOINT T1;\nDELETE MYTEST WHERE N1>=200;\nROLLBACK TO SAVEPOINT T1;\nSELECT MAX(N1) FROM MYTEST;"
         }
       ]
     },
@@ -12044,8 +12104,8 @@
       "explanation": "위의 SQL문에서 FULL OUTER JOIN의 결과값은 'LEFT OUTER JOIN' 결과와 'RIGHT OUTER JOIN'결과를 UNION 연산하는 결과값과 동일하다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT * FROM Mytesta a full outer join Mytestb b\non a.col1 = b.col1;"
+          "type": "sql",
+          "code": "SELECT * FROM Mytesta a full outer join Mytestb b\non a.col1 = b.col1;"
         }
       ]
     },
@@ -12091,8 +12151,8 @@
       "explanation": "LIKE문의 'K%'는 K로 시작하는 모든 행을 검색하는 것이다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT * FROM EMP\nWHERE EMP_NAME LIKE 'K%';"
+          "type": "sql",
+          "code": "SELECT * FROM EMP\nWHERE EMP_NAME LIKE 'K%';"
         }
       ]
     },
@@ -12148,8 +12208,8 @@
       "explanation": "④번 보기는 T_ORDER 테이블명 뒤에 특정 속성들을 지정하지 않았다. VALUES 뒤에는 테이블의 전체 속성값들이 부여되어야 하는데 VALUES 뒤에 속성값 중 하나가 모자라 에러가 뜬다.",
       "references": [
         {
-          "type": "text",
-          "content": "CREATE TABLE T_ORDER(\nC1 NUMBER(10),\nC2 DATE,\nC3 VARCHAR(10),\nC4 NUMBER DEFAULT 1000\n);"
+          "type": "sql",
+          "code": "CREATE TABLE T_ORDER(\nC1 NUMBER(10),\nC2 DATE,\nC3 VARCHAR(10),\nC4 NUMBER DEFAULT 1000\n);"
         }
       ]
     },
@@ -12188,8 +12248,8 @@
       "explanation": "위의 SQL문은 1번째 테이블에서 주문자별로 grouping 하였을 때 각 주문자별로 주문금액의 합계를 계산하고 그 값이 두 번째 테이블의 실적범위에 해당하는 곳에서 고객등급과 주문자 정보를 조회한다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT A.JUMIN, B.CUSTRANK\nFROM (SELECT JUMUN, SUM(price)\nAS TOTAL,\nFROM T_ORDER\nGROUP BY JUMUN) A, T_CUST B\nWHERE 1=1\nAND A.TOTAL BETWEEN B.MINPRICE AND B.MAXPRICE;"
+          "type": "sql",
+          "code": "SELECT A.JUMIN, B.CUSTRANK\nFROM (SELECT JUMUN, SUM(price)\nAS TOTAL,\nFROM T_ORDER\nGROUP BY JUMUN) A, T_CUST B\nWHERE 1=1\nAND A.TOTAL BETWEEN B.MINPRICE AND B.MAXPRICE;"
         },
         {
           "type": "image",
@@ -12222,8 +12282,8 @@
       "explanation": "이 문제의 핵심은 그룹 함수(SUM, AVG, MAX, MIN)는 실행 시에 NULL이 제외된다는 것이다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT AVG(COL3) FROM SQLD01;\nSELECT AVG(COL3) FROM SQLD01 WHERE COL1 > 0;\nSELECT AVG(COL3) FROM SQLD01 WHERE COL1 IS NOT NULL;"
+          "type": "sql",
+          "code": "SELECT AVG(COL3) FROM SQLD01;\nSELECT AVG(COL3) FROM SQLD01 WHERE COL1 > 0;\nSELECT AVG(COL3) FROM SQLD01 WHERE COL1 IS NOT NULL;"
         },
         {
           "type": "image",
@@ -12307,8 +12367,8 @@
       "explanation": "LAG 함수는 이전 행의 값을 반환하는 함수이다. LAG(SALARY, 2)라고 하면 이전 두 번째 행 값을 반환하게 된다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT EMPLOYEE_ID,\nDEPARTMENT_ID, LAST_NAME, SALARY, LAG(SALARY,( )) OVER(PARTITION BY DEPARTMENT_ID ORDER BY SALARY) AS BEFORE_SALARAY\nFROM EMPLOYEES\nWHERE EMPLOYEE_ID < 110;"
+          "type": "sql",
+          "code": "SELECT EMPLOYEE_ID,\nDEPARTMENT_ID, LAST_NAME, SALARY, LAG(SALARY,( )) OVER(PARTITION BY DEPARTMENT_ID ORDER BY SALARY) AS BEFORE_SALARAY\nFROM EMPLOYEES\nWHERE EMPLOYEE_ID < 110;"
         },
         {
           "type": "image",
@@ -12335,8 +12395,8 @@
       "explanation": "날짜형 데이터와 NULL을 더하면 NULL이 된다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT sysdate + NULL FROM DUAL;"
+          "type": "sql",
+          "code": "SELECT sysdate + NULL FROM DUAL;"
         }
       ]
     },
@@ -12358,8 +12418,8 @@
       "explanation": "두 개의 테이블을 조인하면 14개의 행이 나오게 된다. 이를 CUBE로 집계를 하면 전체합계 1건, JOB별 집계 5건, DEPTNO별 집계 3건, DEPTNO에서의 JOB별 집계가 3건씩 9건으로 총 18건이 출력된다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT DNAME, JOB, COUNT(*) \"Total EMP\", SUM(SAL) \"Total Sal\" FROM SCOTT.EMP A, SCOTT.DEPT B WHERE A.DEPTNO = B.DEPTNO\nGROUP BY CUBE(DNAME,JOB);"
+          "type": "sql",
+          "code": "SELECT DNAME, JOB, COUNT(*) \"Total EMP\", SUM(SAL) \"Total Sal\" FROM SCOTT.EMP A, SCOTT.DEPT B WHERE A.DEPTNO = B.DEPTNO\nGROUP BY CUBE(DNAME,JOB);"
         },
         {
           "type": "image",
@@ -12630,8 +12690,8 @@
       "explanation": "②번 보기에서의 연산자인 NULLIF는 COL2와 COL3이 동일하면 NULL을, 동일하지 않으면 COL2를 반환하는데 3번째 행에서 COL2, COL3 값이 다르므로 해당 행에서의 COL2 값인 NULL 값을 반환한다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT NVL(COL2,COL3) AS 금액A,\nCOALESCE(COL2,COL3) AS 금액B,\nNULLIF(COL2,COL3) AS 금액C,\nCASE WHEN COL2 IS NOT NULL\nTHEN COL2 ELSE COL3 END AS 금액D\nFROM Mytest"
+          "type": "sql",
+          "code": "SELECT NVL(COL2,COL3) AS 금액A,\nCOALESCE(COL2,COL3) AS 금액B,\nNULLIF(COL2,COL3) AS 금액C,\nCASE WHEN COL2 IS NOT NULL\nTHEN COL2 ELSE COL3 END AS 금액D\nFROM Mytest"
         },
         {
           "type": "image",
@@ -12692,8 +12752,8 @@
       "explanation": "큰 의미에서는 모두 서브쿼리이다. SELECT구에 사용하면 스칼라 서브쿼리, FROM구에 사용하면 인라인 뷰, WHERE구에 사용하면 서브쿼리로 구분한다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT (A)\nFROM (B) a\nWHERE a.col = (C)"
+          "type": "sql",
+          "code": "SELECT (A)\nFROM (B) a\nWHERE a.col = (C)"
         }
       ]
     },
@@ -12732,8 +12792,8 @@
       "explanation": "위의 계층형 조회는 최상위 계층에서 하위 계층으로 검색하는 정방향 조회이다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT mgr, empno, ename, LEVEL, CONNECT_BY_ISLEAF, SYS_CONNECT_BY_PATH(ENAME,'-') \"PATH\"\nFROM limbest.EMP\nSTART WITH mgr is null\nConnect by prior empno = mgr;"
+          "type": "sql",
+          "code": "SELECT mgr, empno, ename, LEVEL, CONNECT_BY_ISLEAF, SYS_CONNECT_BY_PATH(ENAME,'-') \"PATH\"\nFROM limbest.EMP\nSTART WITH mgr is null\nConnect by prior empno = mgr;"
         },
         {
           "type": "table",
@@ -12825,8 +12885,8 @@
       "explanation": "ENAME은 모두 \"T\"로 시작한다. 따라서 SAL이 3000이상인 사람이 3건이고 JOB이 \"CLERK\"은 4건이다. 따라서 총 7건이 조회된다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT COUNT(*)\nFROM limbest.emp\nWHERE JOB = 'CLERK'\nOR (ENAME LIKE 'T%' AND SAL >= 3000);"
+          "type": "sql",
+          "code": "SELECT COUNT(*)\nFROM limbest.emp\nWHERE JOB = 'CLERK'\nOR (ENAME LIKE 'T%' AND SAL >= 3000);"
         },
         {
           "type": "table",
@@ -12974,8 +13034,8 @@
       "explanation": "SYSDATE는 Oracle에서 오늘의 날짜와 시간을 가지고 있는 Date 타입이다.따라서 Date 타입을 다시 TO_DATE로 형 변환을 하면 동일 타입을 변환하기 때문에 오류가 발생한다. 즉 이러한 경우는 TO_CHAR를 사용해서 문자형 타입으로 변환해야 한다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT SYSDATE,\nTO_DATE(SYSDATE,'YYYY')\nFROM DUAL;"
+          "type": "sql",
+          "code": "SELECT SYSDATE,\nTO_DATE(SYSDATE,'YYYY')\nFROM DUAL;"
         }
       ]
     },
@@ -13031,8 +13091,8 @@
       "explanation": "substr 함수의 입력값에 음수를 주면 뒤에서 시작하게 된다. 즉, 뒤에서 4번째 자릿값인 6부터 두 개의 글자인 67이 반환된다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT SUBSTR('123456789123456789', -4,2) FROM DUAL;"
+          "type": "sql",
+          "code": "SELECT SUBSTR('123456789123456789', -4,2) FROM DUAL;"
         }
       ]
     },
@@ -13171,8 +13231,8 @@
       "explanation": "CASE 문의 조건문에 따라서 1은 10으로 2는 20으로 입력된다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT CASE\nWHEN C1=1 THEN 10\nWHEN C1=2 THEN 20\nELSE C1 END\nFROM Mytest;"
+          "type": "sql",
+          "code": "SELECT CASE\nWHEN C1=1 THEN 10\nWHEN C1=2 THEN 20\nELSE C1 END\nFROM Mytest;"
         },
         {
           "type": "table",
@@ -13229,8 +13289,8 @@
       "explanation": "인라인 뷰에 있는 DISTINCT구는 중복을 제거하기 때문에 1,A 와 1,B 두개의 행이 조회된다. 따라서 행 수를 계산하는 COUNT는 2,2가 조회된다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT COUNT(DATA1), COUNT(DATA2) \nFROM (SELECT DISTINCT DATA1, DATA2 FROM Mytest);"
+          "type": "sql",
+          "code": "SELECT COUNT(DATA1), COUNT(DATA2) \nFROM (SELECT DISTINCT DATA1, DATA2 FROM Mytest);"
         },
         {
           "type": "table",
@@ -13278,8 +13338,8 @@
       "explanation": "총 행 수는 8개 조회된다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT COUNT(*) FROM(\nSELECT COUNT(*)\nFROM Mytest\nGROUP BY ROLLUP(DATA1), DATA2);"
+          "type": "sql",
+          "code": "SELECT COUNT(*) FROM(\nSELECT COUNT(*)\nFROM Mytest\nGROUP BY ROLLUP(DATA1), DATA2);"
         },
         {
           "type": "table",
@@ -13327,8 +13387,8 @@
       "explanation": "BETWEEN은 같은 것도 포함된다. 즉, 크거나 같은 것이 조회된다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT * FROM MYTEST WHERE COL1 BETWEEN :A AND :B"
+          "type": "sql",
+          "code": "SELECT * FROM MYTEST WHERE COL1 BETWEEN :A AND :B"
         }
       ]
     },
@@ -13532,8 +13592,8 @@
       "explanation": "ROUND 함수의 첫 번째 인자값인 3.47을 소수 첫째 자리까지 반올림한다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT ROUND(3.47,1)\nAS DATA1 FROM DUAL;"
+          "type": "sql",
+          "code": "SELECT ROUND(3.47,1)\nAS DATA1 FROM DUAL;"
         }
       ]
     },
@@ -13572,8 +13632,8 @@
       "explanation": "두 SQL문은 모두 ProductName '비디오'에 대한 집계이다. ProductName '비디오' 에 대한 전체 합계가 조회되어야 한다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT ProductName, SUM(Price)\nFROM Mytest\nWHERE ProductName = '비디오'\nGROUP BY ROLLUP(ProductName);\n\nSELECT ProductName, SUM(Price)\nFROM Mytest\nWHERE ProductName = '비디오'\nGROUP BY GROUPING SETS(       );"
+          "type": "sql",
+          "code": "SELECT ProductName, SUM(Price)\nFROM Mytest\nWHERE ProductName = '비디오'\nGROUP BY ROLLUP(ProductName);\n\nSELECT ProductName, SUM(Price)\nFROM Mytest\nWHERE ProductName = '비디오'\nGROUP BY GROUPING SETS(       );"
         },
         {
           "type": "table",
@@ -13829,8 +13889,8 @@
       "explanation": "COALESCE 함수는 함수 내 비교식에서 NULL 값이 아닌 값으로 연산을 수행한다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT COALESCE(COL1, COL2 * 50,50) FROM sqld_12;"
+          "type": "sql",
+          "code": "SELECT COALESCE(COL1, COL2 * 50,50) FROM sqld_12;"
         },
         {
           "type": "table",
@@ -13880,8 +13940,8 @@
       "explanation": "UNION ALL에 의해서 총 9개의 행이 반환된다. 그리고 MINUS로 차집합을 만든다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT * FROM TEST1\nUNION ALL\nSELECT * FROM TEST2\nMINUS\nSELECT * FROM TEST3;"
+          "type": "sql",
+          "code": "SELECT * FROM TEST1\nUNION ALL\nSELECT * FROM TEST2\nMINUS\nSELECT * FROM TEST3;"
         },
         {
           "type": "table",
@@ -14029,8 +14089,8 @@
       "explanation": "(1)번은 NAME에 DATE 타입의 데이터를 입력하여 오류가 발생한다.\n(2)번은 AGE가 NOT NULL인데 null을 입력하여 오류가 발생한다.\n(3)번은 ID의 기본키 값을 입력하지 않아서 오류가 발생한다.",
       "references": [
         {
-          "type": "text",
-          "content": "CREATE TABLE TEST20\n(\nID NUMBER PRIMARY KEY,\nAGE NUMBER NOT NULL,\nNAME VARCHAR2(1)\n);\n\n(1) insert into test20 values(10,20,sysdate);\n(2)insert into test20 values(20,null,'a');\n(3)insert into test20(age, name) values(20,'a');\n(4)insert into test20(id,age,name) values(20,10,null);"
+          "type": "sql",
+          "code": "CREATE TABLE TEST20\n(\nID NUMBER PRIMARY KEY,\nAGE NUMBER NOT NULL,\nNAME VARCHAR2(1)\n);\n\n(1) insert into test20 values(10,20,sysdate);\n(2)insert into test20 values(20,null,'a');\n(3)insert into test20(age, name) values(20,'a');\n(4)insert into test20(id,age,name) values(20,10,null);"
         }
       ]
     },
@@ -14052,8 +14112,8 @@
       "explanation": "④의 경우, 계층쿼리는 일단 START WITH_CONNECT BY로 전개를 수행한 후에 WHERE로 필터링을 한다. 만약 CONNECT BY에 AND 조건을 PARENT_ID != 3 식이었다면 전개 중에 멈추겠지만 WHERE에서 필터링을 하는 것이므로 일단 전개를 완료한 후에 WHERE가 실행되는 것으로 볼 수 있다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT ID, PARENT_ID, NAME,\nPARENT_NAME\nFROM SQLD_13\nWHERE PARENT_ID NOT IN (3)\nSTART WITH PARENT_ID = 0\nCONNECT BY PRIOR ID = PARENT_ID\nORDER SIBLINGS BY PARENT_ID ASC, ID ASC;"
+          "type": "sql",
+          "code": "SELECT ID, PARENT_ID, NAME,\nPARENT_NAME\nFROM SQLD_13\nWHERE PARENT_ID NOT IN (3)\nSTART WITH PARENT_ID = 0\nCONNECT BY PRIOR ID = PARENT_ID\nORDER SIBLINGS BY PARENT_ID ASC, ID ASC;"
         },
         {
           "type": "table",
@@ -14151,8 +14211,8 @@
       "explanation": "CASE 문을 사용해서 정렬의 순서를 변경했고 그래서 ID가 13, 10번이 가장 먼저 조회된다. 즉, 10과 13번이 먼저 조회되고 AGE로 DESC이므로 13의 AGE가 50이라서 가장먼저 조회된다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT ID, AGE\nFROM test20\nORDER BY (CASE WHEN ID = 10 OR\nID=13 THEN 1 ELSE 2 END),  AGE DESC"
+          "type": "sql",
+          "code": "SELECT ID, AGE\nFROM test20\nORDER BY (CASE WHEN ID = 10 OR\nID=13 THEN 1 ELSE 2 END),  AGE DESC"
         },
         {
           "type": "table",
@@ -14216,8 +14276,8 @@
       "explanation": "결과 테이블은 주문금액이 큰 순서대로 순위를 부여하는 테이블로 주문금액 속성을 내림차순 정렬했을 때의 순위이고 같은 등수 다음에는 바로 다음 등수가 부여되었으므로 DENSE 랭크 함수가 들어가야 한다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT 회원ID,\nDENSE_RANK() OVER(ORDER BY (ㄱ)  )\nAS RANK, 주문금액\nFROM SQLD7;"
+          "type": "sql",
+          "code": "SELECT 회원ID,\nDENSE_RANK() OVER(ORDER BY (ㄱ)  )\nAS RANK, 주문금액\nFROM SQLD7;"
         },
         {
           "type": "table",
@@ -14313,8 +14373,8 @@
       "explanation": "SELECT구에는 GROUP BY절에 있는 칼럼만 나와야 한다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT (         ), Count(Empno)\nFROM EMP\nWHERE EMPNO > 0\nGROUP BY DEPTNO, SAL;"
+          "type": "sql",
+          "code": "SELECT (         ), Count(Empno)\nFROM EMP\nWHERE EMPNO > 0\nGROUP BY DEPTNO, SAL;"
         }
       ]
     },
@@ -14361,8 +14421,8 @@
       "explanation": "상호연관 서브쿼리는 메인쿼리 값을 서브쿼리가 사용하고 서브쿼리의 값을 받아서 메인쿼리가 계산되는 쿼리이다. 문제에 나온 SQL문에서 EMP 테이블은 메인쿼리이고 EMP_T 부분은 서브쿼리이다. 즉, EMP_T의 서브쿼리가 실행되어서 1이 나오면 메인쿼리의 WHERE절 조건과 비교된다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT A.EMPNO, A.ENAME\nFROM EMP A\nWHERE A.EMPNO=(SELECT 1 FROM EMP_T B WHERE A.EMPNO = B.EMPNO);"
+          "type": "sql",
+          "code": "SELECT A.EMPNO, A.ENAME\nFROM EMP A\nWHERE A.EMPNO=(SELECT 1 FROM EMP_T B WHERE A.EMPNO = B.EMPNO);"
         }
       ]
     },
@@ -14384,8 +14444,8 @@
       "explanation": "서브쿼리는 COL2가 'A'인 것을 조회하므로 10이 나온다. 그리고 test31_1 테이블에서 COL3가 10인 것을 조회한다. 그러면 2건이 조회된다. 왜냐하면 DISTINCT는 COL1로 수행하므로 중복된 것이 없다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT COUNT(DISTINCT COL1)\nFROM test31_1\nWHERE COL3=\n(SELECT COL3 FROM test31_2 WHERE\nCOL2 = 'A')"
+          "type": "sql",
+          "code": "SELECT COUNT(DISTINCT COL1)\nFROM test31_1\nWHERE COL3=\n(SELECT COL3 FROM test31_2 WHERE\nCOL2 = 'A')"
         },
         {
           "type": "table",
@@ -14554,8 +14614,8 @@
       "explanation": "④번의 SQL문 subkpi가 20번인 행을 조회한다. 그리고 문제에서 제시한 SQL문도 in구로 (20,10)을 사용했으므로 똑같이 subkpi가 20인 행이 조회된다.",
       "references": [
         {
-          "type": "text",
-          "content": "select * from kpipool where (subkpi, mainkpi)  in((20,10),(0,30));"
+          "type": "sql",
+          "code": "select * from kpipool where (subkpi, mainkpi)  in((20,10),(0,30));"
         },
         {
           "type": "table",
@@ -14630,8 +14690,8 @@
       "explanation": "주어진 테이블에서 C2 칼럼으로 그룹화 했을 때 C2 칼럼별 튜플의 수가 2개 이상인 C2칼럼에 대해서 C3의 합계를 계산한다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT C2, SUM(C3)\nFROM SQLD_01\nGROUP BY C2\nHAVING COUNT(*) >= 2;"
+          "type": "sql",
+          "code": "SELECT C2, SUM(C3)\nFROM SQLD_01\nGROUP BY C2\nHAVING COUNT(*) >= 2;"
         },
         {
           "type": "table",
@@ -14774,8 +14834,8 @@
       "explanation": "CREATE, TRUNCATE 같은 DDL은 묵시적으로 COMMIT을 수행하므로 ROLLBACK 명령어를 수행하면 마지막 COMMIT을 수행한 6번째 행으로 이동한다.",
       "references": [
         {
-          "type": "text",
-          "content": "CREATE TABLE SQLD_29 (N1 NUMBER);\nINSERT INTO SQLD_29 VALUES(1);\nINSERT INTO SQLD_29 VALUES(2);\nCREATE TABLE TMP_SQLD_29 (N1 NUMBER);\nINSERT INTO TMP_SQLD_29 VALUES(1);\nTRUNCATE TABLE TMP_SQLD_29;\nROLLBACK;\nCOMMIT;\nSELECT SUM(N1) FROM SQLD_29;"
+          "type": "sql",
+          "code": "CREATE TABLE SQLD_29 (N1 NUMBER);\nINSERT INTO SQLD_29 VALUES(1);\nINSERT INTO SQLD_29 VALUES(2);\nCREATE TABLE TMP_SQLD_29 (N1 NUMBER);\nINSERT INTO TMP_SQLD_29 VALUES(1);\nTRUNCATE TABLE TMP_SQLD_29;\nROLLBACK;\nCOMMIT;\nSELECT SUM(N1) FROM SQLD_29;"
         }
       ]
     },
@@ -14797,8 +14857,8 @@
       "explanation": "주어진 두 개의 테이블에서는 같은 COL1 값을 갖는 튜플을 조회하고 우측 테이블에만 있는 값들이 추가로 조회되므로 RIGHT OUTER JOIN이다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT *\nFROM SQLD27 (       ) SQLD27_2\nON SQLD27.COL1 = SQLD27_2.COL1;"
+          "type": "sql",
+          "code": "SELECT *\nFROM SQLD27 (       ) SQLD27_2\nON SQLD27.COL1 = SQLD27_2.COL1;"
         },
         {
           "type": "table",
@@ -14917,8 +14977,8 @@
       "explanation": "INNER JOIN이므로 JOIN조건을 만족하는 행만 가져와서 조건을 수행한다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT COUNT(*)\nFROM SQLD49, SQLD49_2\nWHERE SQLD49.COL1 = SQLD49_2.COL1;"
+          "type": "sql",
+          "code": "SELECT COUNT(*)\nFROM SQLD49, SQLD49_2\nWHERE SQLD49.COL1 = SQLD49_2.COL1;"
         },
         {
           "type": "table",
@@ -15181,8 +15241,8 @@
       "explanation": "정답은 1 번. (해설 미등록)",
       "references": [
         {
-          "type": "text",
-          "content": "select count(*) from TEST11\nwhere COL3 <> 3\nstart with COL3 = 4\nconnect by COL1 = prior COL2;"
+          "type": "sql",
+          "code": "select count(*) from TEST11\nwhere COL3 <> 3\nstart with COL3 = 4\nconnect by COL1 = prior COL2;"
         },
         {
           "type": "image",
@@ -15291,8 +15351,8 @@
       "explanation": "NULL은 비교에서 애초에 제외되어 IN 연산자 안에 NULL이 있어도 비교 연산을 수행하지 않는다. 주어진 테이블의 COL1 속성값 1,2값을 갖는 튜플만 조회된다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT * FROM SQLD5 WHERE COL1 IN (1,2,NULL);"
+          "type": "sql",
+          "code": "SELECT * FROM SQLD5 WHERE COL1 IN (1,2,NULL);"
         },
         {
           "type": "image",
@@ -15325,8 +15385,8 @@
       "explanation": "결과값을 보면 1.DNAME, JOB별 소계 2.DNMAE 별 소계 3.JOB별 소계 4.전체 집계 등 모든 조합 가능한 소계와 집계가 조회되었으므로 빈칸에 들어갈 그룹 함수는 CUBE이다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT DNAME, JOB, SUM(SAL)\nFROM TEST18\nGROUP BY (       )"
+          "type": "sql",
+          "code": "SELECT DNAME, JOB, SUM(SAL)\nFROM TEST18\nGROUP BY (       )"
         },
         {
           "type": "image",
@@ -15358,8 +15418,8 @@
       "explanation": "C2 값으로 오름차순 정렬하고 CASE문으로 B,A,S 등급을 부여한다. 전체등급이 300점을 넘는 등급이 없기 때문에 S등급은 없고 C1의 6번만 A등급을 받는다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT C1, C2,\nCASE\nWHEN C2 <= 100 THEN 'B'\nWHEN C2 <= 300 THEN 'A'\nELSE 'S'\nEND GRADE\nFROM test19\nORDER BY C2;"
+          "type": "sql",
+          "code": "SELECT C1, C2,\nCASE\nWHEN C2 <= 100 THEN 'B'\nWHEN C2 <= 300 THEN 'A'\nELSE 'S'\nEND GRADE\nFROM test19\nORDER BY C2;"
         },
         {
           "type": "image",
@@ -15426,8 +15486,8 @@
       "explanation": "정답은 3 번. (해설 미등록)",
       "references": [
         {
-          "type": "text",
-          "content": "INSERT INTO test24 VALUES (1);\nINSERT INTO test24 VALUES (2);\nCOMMIT;\nINSERT INTO test24 VALUES (3);\nSAVEPOINT SP;\nINSERT INTO test24 VALUES (4);\nROLLBACK to SP;\nSELECT COUNT(*) FROM test24;"
+          "type": "sql",
+          "code": "INSERT INTO test24 VALUES (1);\nINSERT INTO test24 VALUES (2);\nCOMMIT;\nINSERT INTO test24 VALUES (3);\nSAVEPOINT SP;\nINSERT INTO test24 VALUES (4);\nROLLBACK to SP;\nSELECT COUNT(*) FROM test24;"
         }
       ]
     },
@@ -15449,8 +15509,8 @@
       "explanation": "MINUS는 Oracle에서 차집합을 구하는 것이다. 즉 위의 SQL에서 1을 제외하게 되므로 2,3이 된다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT * FROM test24\nminus\nSELECT 1 FROM DUAL;"
+          "type": "sql",
+          "code": "SELECT * FROM test24\nminus\nSELECT 1 FROM DUAL;"
         }
       ]
     },
@@ -15472,8 +15532,8 @@
       "explanation": "Customers 테이블에서 존재하지 않은 고객id를 식별하기 위해서는 NOT EXISTS를 사용하고 WHERE구에 \"Customers. id = Orders. id\"를 사용해야 한다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT * FROM Orders\nWHERE ( ㄱ ) (SELECT * FROM Customers WHERE (  ㄴ  ));"
+          "type": "sql",
+          "code": "SELECT * FROM Orders\nWHERE ( ㄱ ) (SELECT * FROM Customers WHERE (  ㄴ  ));"
         }
       ]
     },
@@ -15535,8 +15595,8 @@
       "explanation": "정답은 2 번. (해설 미등록)",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT CASE WHEN SUM (COL1 + COL2)\nIS NULL THEN 0\nELSE SUM(COL1 + COL2)\nEND AS 합계\nFROM TEST32;"
+          "type": "sql",
+          "code": "SELECT CASE WHEN SUM (COL1 + COL2)\nIS NULL THEN 0\nELSE SUM(COL1 + COL2)\nEND AS 합계\nFROM TEST32;"
         },
         {
           "type": "image",
@@ -15580,8 +15640,8 @@
       "explanation": "정답은 3 번. (해설 미등록)",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT COUNT(*) ROWCNT\nFROM test36_1 a,test36_2 b\nWHERE a.ename LIKE b.condition;"
+          "type": "sql",
+          "code": "SELECT COUNT(*) ROWCNT\nFROM test36_1 a,test36_2 b\nWHERE a.ename LIKE b.condition;"
         },
         {
           "type": "image",
@@ -15608,8 +15668,8 @@
       "explanation": "COL1 칼럼으로 GROUP BY를 할 경우 행 수가 2건 보다 많은 것은 4,5,6행이다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT COUNT(*) FROM TEST39 GROUP BY COL1\nHAVING COUNT(*)>2;"
+          "type": "sql",
+          "code": "SELECT COUNT(*) FROM TEST39 GROUP BY COL1\nHAVING COUNT(*)>2;"
         },
         {
           "type": "image",
@@ -15670,8 +15730,8 @@
       "explanation": "위의 결과값에 동일한 RANK가 없으므로 ROW_NUMBER()가 되어야 한다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT\n(             ) OVER(ORDER BY sal desc)\nas rank, name, deptname, position, sal FROM test44;"
+          "type": "sql",
+          "code": "SELECT\n(             ) OVER(ORDER BY sal desc)\nas rank, name, deptname, position, sal FROM test44;"
         },
         {
           "type": "image",
@@ -15703,8 +15763,8 @@
       "explanation": "ROLLUP(COL1, COL2)는 GROUPING SETS ((COL1, COL2), (COL1), ())와 같다. 즉 COL1, COL2 상세 집계 후 COL1 기준 소계를 만들고 마지막에 전체 합계를 만든다. 2번은 COL2 기준 소계를 포함해 결과가 달라지고, 3번은 상세 집계 (COL1, COL2)가 없으며, 4번은 COL1 소계가 빠져 동일한 결과가 아니다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT COL1, COL2, COUNT(*)\nFROM TEST46\nGROUP BY ROLLUP (COL1, COL2);\n\nSELECT COL1, COL2, COUNT(*)\nFROM TEST46\nGROUP BY GROUPING SETS (      )"
+          "type": "sql",
+          "code": "SELECT COL1, COL2, COUNT(*)\nFROM TEST46\nGROUP BY ROLLUP (COL1, COL2);\n\nSELECT COL1, COL2, COUNT(*)\nFROM TEST46\nGROUP BY GROUPING SETS (      )"
         }
       ]
     },
@@ -15726,8 +15786,8 @@
       "explanation": "NVL 함수로 NULL은 0으로 대체되고 평균이 계산된다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT AVG(NVL(COL2,0)) FROM test48;"
+          "type": "sql",
+          "code": "SELECT AVG(NVL(COL2,0)) FROM test48;"
         },
         {
           "type": "image",
@@ -15910,8 +15970,8 @@
       "explanation": "집계결과는 DEPTNO별 합계, JOB별 합계, DEPTNO 및 JOB별 합계, 전체합계가 조회되고 Rollup이 와야 한다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT DEPTNO, JOB, SUM(SAL)\nFROM T_TEST\nGROUP BY (           );"
+          "type": "sql",
+          "code": "SELECT DEPTNO, JOB, SUM(SAL)\nFROM T_TEST\nGROUP BY (           );"
         },
         {
           "type": "image",
@@ -15938,8 +15998,8 @@
       "explanation": "위의 SQL에서 WHERE 조건에 의하여 EMPNO 3번은 조회에서 제외된다. 그리고 EMPNO가 3번으로 시작하여 계층형 조회를 한다. 따라서 EMPNO 1번과 2번 2개의 행이 조회된다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT LPAD('**', (LEVEL-1)*2, '   ')||\nEMPNO AS EMP, NAME\nFROM TEST10\nWHERE EMPNO <> 3\nSTART WITH EMPNO = 3\nCONNECT BY EMPNO = PRIOR MANAGER;"
+          "type": "sql",
+          "code": "SELECT LPAD('**', (LEVEL-1)*2, '   ')||\nEMPNO AS EMP, NAME\nFROM TEST10\nWHERE EMPNO <> 3\nSTART WITH EMPNO = 3\nCONNECT BY EMPNO = PRIOR MANAGER;"
         },
         {
           "type": "image",
@@ -15966,8 +16026,8 @@
       "explanation": "위의 SQL문에서 NVL2 함수의 첫 번째 인자값이 NULL이기 때문에 0.2를 반환한다. 그리고 10+20*0.2가 되어 14를 반환한다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT 10 + 20 * ((      )NULL, 0.1, 0.2))\nFROM DUAL;\n결과 : 14"
+          "type": "sql",
+          "code": "SELECT 10 + 20 * ((      )NULL, 0.1, 0.2))\nFROM DUAL;\n결과 : 14"
         }
       ]
     },
@@ -16006,8 +16066,8 @@
       "explanation": "A 칼럼별로 그룹화하고 집계 함수에서 NULL값을 제외하고 연산을 수행한다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT A, SUM(X) AS TAB FROM TABLE_B GROUP BY A;"
+          "type": "sql",
+          "code": "SELECT A, SUM(X) AS TAB FROM TABLE_B GROUP BY A;"
         },
         {
           "type": "image",
@@ -16040,8 +16100,8 @@
       "explanation": "SAVEPOINT가 동일할 때 ROLLBACK을 수행하면 가장 마지막 시점의 SAVEPOINT 지점으로 ROLLBACK 된다.",
       "references": [
         {
-          "type": "text",
-          "content": "Create table test20 (col1 number(10));\nINSERT INTO test20 VALUES(1);\nINSERT INTO test20 VALUES(4);\nSAVEPOINT SV1;\nUPDATE test20 SET COL1=8 WHERE COL1=2;\nSAVEPOINT SV1;\nDELETE test20 WHERE COL1 > =2;\nROLLBACK TO SV1;\nINSERT INTO test20 VALUES(3);\nSELECT MAX(COL1) FROM test20;"
+          "type": "sql",
+          "code": "Create table test20 (col1 number(10));\nINSERT INTO test20 VALUES(1);\nINSERT INTO test20 VALUES(4);\nSAVEPOINT SV1;\nUPDATE test20 SET COL1=8 WHERE COL1=2;\nSAVEPOINT SV1;\nDELETE test20 WHERE COL1 > =2;\nROLLBACK TO SV1;\nINSERT INTO test20 VALUES(3);\nSELECT MAX(COL1) FROM test20;"
         }
       ],
       "optionReferences": [
@@ -16140,8 +16200,8 @@
       "explanation": "CNT 칼럼은 분류코드를 GROUPING된 집합을 원본집합으로 하여 분류코드별 평균상품가격을 서로 비교하고 현재 읽혀진 상품분류코드의 평균가격 대비 -10000 ~ +10000 사이에 존재하는 분류코드의 개수를 구한 것이다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT 분류코드\nAVG(상품가격) AS 상품가격,\nCOUNT(*) OVER(ORDER BY AVG(상품가격)\nRANGE BETWEEN 10000 PRECEDING AND 10000 FOLLOWING) AS CNT\nFROM 상품\nGROUP BY 분류코드;"
+          "type": "sql",
+          "code": "SELECT 분류코드\nAVG(상품가격) AS 상품가격,\nCOUNT(*) OVER(ORDER BY AVG(상품가격)\nRANGE BETWEEN 10000 PRECEDING AND 10000 FOLLOWING) AS CNT\nFROM 상품\nGROUP BY 분류코드;"
         }
       ]
     },
@@ -16163,8 +16223,8 @@
       "explanation": "NOT IN 안에 NULL이 들어가면 아무것도 출력되지 않는다. 이 때 COUNT는 0을 출력하게 된다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT COUNT(*)\nFROM TEST29_1 A\nWHERE A.COL NOT IN(SELECT COL FROM TEST29_2);"
+          "type": "sql",
+          "code": "SELECT COUNT(*)\nFROM TEST29_1 A\nWHERE A.COL NOT IN(SELECT COL FROM TEST29_2);"
         },
         {
           "type": "image",
@@ -16191,8 +16251,8 @@
       "explanation": "NULL은 비교에서 애초에 제외되어 IN()연산자 안에 NULL이 있어도 비교연산을 수행하지 않는다. 주어진 테이블의 COL1 속성값 1,2값을 갖는 튜플만 조회된다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT * FROM SQLD5 WHERE COL1 IN(1,2,NULL);"
+          "type": "sql",
+          "code": "SELECT * FROM SQLD5 WHERE COL1 IN(1,2,NULL);"
         },
         {
           "type": "image",
@@ -16249,8 +16309,8 @@
       "explanation": "보기의 SQL문은 COL1, COL2가 각각 10000, 'ABC'인 행만을 조회하는 SQL문으로 1번째 행만 조회된다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT * FROM TEST32 WHERE (COL1,COL2) IN (10000,'ABC'));"
+          "type": "sql",
+          "code": "SELECT * FROM TEST32 WHERE (COL1,COL2) IN (10000,'ABC'));"
         },
         {
           "type": "image",
@@ -16277,8 +16337,8 @@
       "explanation": "GRANT privileges ON object TO user;",
       "references": [
         {
-          "type": "text",
-          "content": "UPDATE A_User.TB_A\nSET col1='TEST'\nWHERE col2=100;"
+          "type": "sql",
+          "code": "UPDATE A_User.TB_A\nSET col1='TEST'\nWHERE col2=100;"
         }
       ]
     },
@@ -16300,8 +16360,8 @@
       "explanation": "먼저 FROM절에 있는 inline view의 실행 결과는 20, 7500과 10, 5000의 합계가 조회된다. 그리고 test34_2의 BETWEEN구로 조회하면 10번 VIP가 조회된다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT A.jumin as \"주문\", B.custrank as \"고객등급\"\nFROM (SELECT jumun, SUM(price)\nAS Total\nFROM test34_1\nGROUP BY jumun) A, test34_2 B\nWHERE A.Total BETWEEN B.minprice AND B.maxprice;"
+          "type": "sql",
+          "code": "SELECT A.jumin as \"주문\", B.custrank as \"고객등급\"\nFROM (SELECT jumun, SUM(price)\nAS Total\nFROM test34_1\nGROUP BY jumun) A, test34_2 B\nWHERE A.Total BETWEEN B.minprice AND B.maxprice;"
         },
         {
           "type": "image",
@@ -16375,8 +16435,8 @@
       "explanation": "지문의 SQL문은 SELECT구에 칼럼(JOB,ROWCNT)이 2개 있다. ①번은 칼럼의 수가 2개뿐인데 3번째 칼럼이 존재하지 않기 때문에 사용할 수 없다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT JOB, COUNT(*) AS ROWCNT\nFROM TEST40\nGROUP BY JOB;"
+          "type": "sql",
+          "code": "SELECT JOB, COUNT(*) AS ROWCNT\nFROM TEST40\nGROUP BY JOB;"
         }
       ]
     },
@@ -16415,8 +16475,8 @@
       "explanation": "결과값을 보면 1.b.Grade, a.StudentNo에 대한 집계,\n2.b.grade에 대한 집계가 있고 전체 집계는 없다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT b.grade, a.StudentNo, SUM(b.grade)\nFROM TEST44_1 a, TEST44_2 b\nGROUP by\n(                       );"
+          "type": "sql",
+          "code": "SELECT b.grade, a.StudentNo, SUM(b.grade)\nFROM TEST44_1 a, TEST44_2 b\nGROUP by\n(                       );"
         },
         {
           "type": "image",
@@ -16448,8 +16508,8 @@
       "explanation": "NULLS LAST는 NULL 값을 마지막에 정렬시키는 것이다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT C1,C2\nFROM SQLD_02\nORDER BY C1,C2 DESC (       );"
+          "type": "sql",
+          "code": "SELECT C1,C2\nFROM SQLD_02\nORDER BY C1,C2 DESC (       );"
         },
         {
           "type": "table",
@@ -16539,8 +16599,8 @@
       "explanation": "결과 테이블을 보면 TEST46_1 테이블에만 있는 3번행(COL1, COL2)만 조회되고 TEST46_2 테이블에는 3번행이 없으므로 NULL로 조회되었다. 따라서 LEFT OUTER JOIN을 실행한 것이다. ",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT * \nFROM TEST46_1 (            ) TEST46_2\nON TEST46_1.COL1 = TEST46_2.COL1;"
+          "type": "sql",
+          "code": "SELECT * \nFROM TEST46_1 (            ) TEST46_2\nON TEST46_1.COL1 = TEST46_2.COL1;"
         },
         {
           "type": "table",
@@ -17145,8 +17205,8 @@
       "explanation": "SAL > 4000 이면 SAL - 4000 은 양수이므로 SIGN 을 취한 값이 1 이 리턴된다. DECODE 문을 해석하면 결국 SAL 이 4000 보다 큰 경우 1 을, 그렇지 않은 경우 0 을 리턴하므로 최종 출력값은 2 이다. ",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT SUM(DECODE(SIGN(SAL-4000), 1, 1, 0)) FROM TAB1;"
+          "type": "sql",
+          "code": "SELECT SUM(DECODE(SIGN(SAL-4000), 1, 1, 0)) FROM TAB1;"
         },
         {
           "type": "table",
@@ -17226,8 +17286,8 @@
       "explanation": "오라클에서 날짜 연산 단위는 DAY(일)이다. 따라서 30/24/60 은 30*1/24/60 인데 1/24/60 는 1 분을 의미한다. (1(하루)를 24 로 나누면 1 시간, 다시 60 으로 나누면 1 분이 된다.) 따라서 30 분 이전을 출력하되, TO_CHAR 에서 요구하는 날짜 포맷으로 출력하면 2024.08.24 09:30:00 이 된다. ",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT TO_CHAR(TO_DATE('2024/08/24 10:00', 'YYYY/MM/DD HH24:MI') - 30/24/60, 'YYYY.MM.DD HH24:MI:SS') FROM DUAL;"
+          "type": "sql",
+          "code": "SELECT TO_CHAR(TO_DATE('2024/08/24 10:00', 'YYYY/MM/DD HH24:MI') - 30/24/60, 'YYYY.MM.DD HH24:MI:SS') FROM DUAL;"
         }
       ]
     },
@@ -17249,8 +17309,8 @@
       "explanation": "_1%' 조건은 두 번째 값이 1 인 문자열을 나타내므로 A1C1, B1A0, C1A1, D1B2 총 4 개이고, '%A%' 조건은 A 를 포함하는 문자열이므로 A1C1, A2C2, B1A0, C1A1 총 4 개이다. OR 조건은 두 집합의 합집합(중복값은 한 번만)이므로 총 8 개에서 두 조건을 모두 만족하는 A1C1, B1A0, C1A1 을 제외하면 총 5 개이다. ",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT COUNT(CODE) \nFROM TAB1 \nWHERE CODE LIKE '_1%' OR CODE LIKE '%A%';"
+          "type": "sql",
+          "code": "SELECT COUNT(CODE) \nFROM TAB1 \nWHERE CODE LIKE '_1%' OR CODE LIKE '%A%';"
         },
         {
           "type": "table",
@@ -17316,8 +17376,8 @@
       "explanation": "SUM(COL2)는 NULL 만 제외하고 총합을 리턴하므로 500 이 출력된다. 하지만 2 번 지문의 경우 COL1 > 0 조건에 \n만족하는 행은 첫 번째 행 하나이므로 SUM(COL2) + SUM(COL3) = NULL + 100 이 되며, 이때는 NULL 이 리턴된다. ",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT SUM(COL2) + SUM(COL3) FROM TAB1; \nSELECT SUM(COL2) + SUM(COL3) FROM TAB1 WHERE COL1 > 0; \nSELECT SUM(COL2) + SUM(COL3) FROM TAB1 WHERE COL1 IS NOT NULL; \nSELECT SUM(COL2) + SUM(COL3) FROM TAB1 WHERE COL1 IS NULL;"
+          "type": "sql",
+          "code": "SELECT SUM(COL2) + SUM(COL3) FROM TAB1; \nSELECT SUM(COL2) + SUM(COL3) FROM TAB1 WHERE COL1 > 0; \nSELECT SUM(COL2) + SUM(COL3) FROM TAB1 WHERE COL1 IS NOT NULL; \nSELECT SUM(COL2) + SUM(COL3) FROM TAB1 WHERE COL1 IS NULL;"
         },
         {
           "type": "table",
@@ -17399,8 +17459,8 @@
       "explanation": "TO_CHAR에 의해 SAL 값이 문자로 변환되며, 문자 값의 대소 비교는 값의 왼쪽부터 비교하므로 왼쪽 값이 가장 작은 값의 크기가 제일 작다. 따라서 1300 < 2500 < 300 < 800 순이 되며, 오름차순 정렬은 1300, 2500, 300, 800 순서로 배치된다. ",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT SAL FROM TAB1 ORDER BY TO_CHAR(SAL);"
+          "type": "sql",
+          "code": "SELECT SAL FROM TAB1 ORDER BY TO_CHAR(SAL);"
         },
         {
           "type": "table",
@@ -17443,8 +17503,8 @@
       "explanation": "NULL은 같지 않다에 참이 리턴되지 않는다. 따라서 TAB1 기준 COL2가 A인 경우는 1개, NULL인 경우 0개, B인 경우 1개, C인 경우 2개가 리턴된다. 따라서 이들의 COL1에 대한 총 합은 12가 된다. ",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT SUM(A.COL1) \nFROM TAB1 A, TAB2 B WHERE A.COL2 <> B.COL2;"
+          "type": "sql",
+          "code": "SELECT SUM(A.COL1) \nFROM TAB1 A, TAB2 B WHERE A.COL2 <> B.COL2;"
         },
         {
           "type": "table",
@@ -17514,8 +17574,8 @@
       "explanation": "TAB1을 RULE_NAME에 매핑되는 규칙으로 TAB2에 조인을 수행했기 때문에, 각 행마다 LIKE 조건이 일치하면 TAB2 값이 출력된다. 즉, SCOTT은 %O%와, FORD는 %O%와 F% 둘 다 매핑되어 행이 두 개로 출력된다. 따라서 총 행의 수는 3건이 리턴된다. ",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT COUNT(*) \nFROM TAB1, TAB2 \nWHERE NAME LIKE RULE_NAME;"
+          "type": "sql",
+          "code": "SELECT COUNT(*) \nFROM TAB1, TAB2 \nWHERE NAME LIKE RULE_NAME;"
         },
         {
           "type": "table",
@@ -17654,8 +17714,8 @@
       "explanation": "서브쿼리 결과가 먼저 실행되어 2020년 2월 1일보다 입사일이 큰 행의 DEPTNO(30, 40, 50)가 출력되고 ALL이 작다와 결합되어 이들 중 30보다 작거나 같은 조건으로 전달된다. 따라서 DEPTNO가 10, 20, 30인 EMPNO의 수는 총 3개이다. ",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT COUNT(DEPTNO) \n FROM EMPLOYEES \n WHERE DEPTNO <= ALL(SELECT DEPTNO \n FROM EMPLOYEES \n WHERE HIREDATE >= TO_DATE('2020/02', 'YYYY/MM'));"
+          "type": "sql",
+          "code": "SELECT COUNT(DEPTNO) \n FROM EMPLOYEES \n WHERE DEPTNO <= ALL(SELECT DEPTNO \n FROM EMPLOYEES \n WHERE HIREDATE >= TO_DATE('2020/02', 'YYYY/MM'));"
         },
         {
           "type": "table",
@@ -17735,8 +17795,8 @@
       "explanation": "서브쿼리 결과가 항상 거짓이므로 조건에 만족하는 행이 없다. 이 경우 COUNT는 NULL이 아닌 0을 리턴한다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT COUNT(*)\n FROM TAB1\n WHERE EXISTS (SELECT 1\n FROM TAB2\n WHERE TAB2.COL1 = 'A');"
+          "type": "sql",
+          "code": "SELECT COUNT(*)\n FROM TAB1\n WHERE EXISTS (SELECT 1\n FROM TAB2\n WHERE TAB2.COL1 = 'A');"
         },
         {
           "type": "table",
@@ -17844,8 +17904,8 @@
       "explanation": "FIRST_VALUE, LAST_VALUE는 ORDER BY 컬럼 순서대로 범위 내 가장 처음 값과 마지막 값을 리턴하는 함수인데, 이때 기본 범위는 RANGE UNBOUNDED PRECEDING AND CURRENT ROW이다. 따라서 같은 DNAME 내 SAL 순서대로 가장 앞에 있는 이름은 아시아지부의 경우 홍길동, 남유럽지부의 경우 김길동이 된다. 하지만 각 행마다 LAST_VALUE를 구할 때 범위가 처음부터 현재 행까지만 고려해서 마지막 값을 리턴하기 때문에 항상 현재 행의 값이 마지막 값이 되므로 각 행의 값이 리턴된다. \n",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT DNAME, \n FIRST_VALUE(NAME) OVER(PARTITION BY DNAME ORDER BY SAL) AS VALUE1, \n LAST_VALUE(NAME) OVER(PARTITION BY DNAME ORDER BY SAL) AS VALUE2 \n FROM TAB1;"
+          "type": "sql",
+          "code": "SELECT DNAME, \n FIRST_VALUE(NAME) OVER(PARTITION BY DNAME ORDER BY SAL) AS VALUE1, \n LAST_VALUE(NAME) OVER(PARTITION BY DNAME ORDER BY SAL) AS VALUE2 \n FROM TAB1;"
         },
         {
           "type": "table",
@@ -17958,8 +18018,8 @@
       "explanation": "각 행이 리프 노드 데이터인지 여부를 출력해주는 계층형 질의절의 가상 함수 CONNECT_BY_ISLEAF이다. ",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT LEVEL, \n EMPNO, \n MGR, \n _____________ AS 리프노드여부 \n FROM SCOTT.EMP \n START WITH MGR IS NULL \nCONNECT BY PRIOR EMPNO = MGR;"
+          "type": "sql",
+          "code": "SELECT LEVEL, \n EMPNO, \n MGR, \n _____________ AS 리프노드여부 \n FROM SCOTT.EMP \n START WITH MGR IS NULL \nCONNECT BY PRIOR EMPNO = MGR;"
         }
       ]
     },
@@ -17981,8 +18041,8 @@
       "explanation": "매니저 사원번호가 NULL인 지점을 시작으로 레벨 1을 부여, 나사장의 사원번호를 매니저 사원번호로 가지면서 하반기 입사자인 행을 찾아 레벨 2를 부여한다. 이렇게 연결된 행으로부터 CONNECT 절의 조건을 만족하는 행을 계속 이어 나간다. 이때, START WITH 절은 CONNECT BY에 있는 조건에 따라 생략되지 않기 때문에 나사장이 상반기 입사자라도 출력된다. ",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT E.*, LEVEL \n FROM 사원 E \n START WITH 매니저사원번호 IS NULL \nCONNECT BY PRIOR 사원번호 = 매니저사원번호 AND EXTRACT(MONTH FROM 입사일자) >= 7 \n ORDER SIBLINGS BY 이름;"
+          "type": "sql",
+          "code": "SELECT E.*, LEVEL \n FROM 사원 E \n START WITH 매니저사원번호 IS NULL \nCONNECT BY PRIOR 사원번호 = 매니저사원번호 AND EXTRACT(MONTH FROM 입사일자) >= 7 \n ORDER SIBLINGS BY 이름;"
         },
         {
           "type": "table",
@@ -18088,8 +18148,8 @@
       "explanation": "10, 20, 30번 부서원의 수를 각 컬럼별로 표현한 것은 LONG -> WIDE로의 변환을 수행하는 PIVOT의 결과로 대체할 수 있다. PIVOT 절에서 IN 앞의 컬럼은 서로 다른 컬럼으로 분해할 대상이 명시되어야 하므로 DEPTNO가 들어가야 한다. ",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT COUNT(DECODE(DEPTNO,10,1)) AS \"10\", \nCOUNT(DECODE(DEPTNO,20,1)) AS \"20\", \nCOUNT(DECODE(DEPTNO,30,1)) AS \"30\" \n FROM EMP;"
+          "type": "sql",
+          "code": "SELECT COUNT(DECODE(DEPTNO,10,1)) AS \"10\", \nCOUNT(DECODE(DEPTNO,20,1)) AS \"20\", \nCOUNT(DECODE(DEPTNO,30,1)) AS \"30\" \n FROM EMP;"
         }
       ]
     },
@@ -18111,8 +18171,8 @@
       "explanation": "둘 다 숫자(\\d)가 2회 이상 나열된 단어의 수를 찾는 문제이므로 C1은 2, C2는 3개가 리턴된다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT REGEXP_COUNT('abc1004 zz1234', '\\d{2}+') AS C1, REGEXP_COUNT('abc1004-zz1234-100', '\\d{2,}+') AS C2 \n FROM DUAL;"
+          "type": "sql",
+          "code": "SELECT REGEXP_COUNT('abc1004 zz1234', '\\d{2}+') AS C1, REGEXP_COUNT('abc1004-zz1234-100', '\\d{2,}+') AS C2 \n FROM DUAL;"
         }
       ]
     },
@@ -18134,8 +18194,8 @@
       "explanation": "[XY-]는 X 또는 Y 또는 -와 같다. 따라서 X, Y, - 중 하나가 여러 번 반복되면서 그 뒤에 Z값이 오거나 오지 않는 문자열 배열을 갖는 행은 전체이므로 총 5개가 출력된다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT COUNT(COL1) \nFROM TAB1 WHERE REGEXP_LIKE(COL1, '[XY-]+Z?');"
+          "type": "sql",
+          "code": "SELECT COUNT(COL1) \nFROM TAB1 WHERE REGEXP_LIKE(COL1, '[XY-]+Z?');"
         },
         {
           "type": "table",
@@ -18181,8 +18241,8 @@
       "explanation": "전체 평균(4000)보다 급여가 낮은 직원들의 급여만 수정되므로 김길동 두 명의 급여는 수정되지 않는다. SET절은 각 행의 급여 수정 시 부서명을 확인하여 서브쿼리에서 해당 부서의 최대 급여를 찾아 수정하는 구문이다. 따라서 아시아지부는 모두 3000으로, 남유럽지부는 8000으로 수정된다.",
       "references": [
         {
-          "type": "text",
-          "content": "UPDATE EMPLOYEE E1 \n SET SAL = (SELECT MAX(SAL) \n FROM EMPLOYEE E2 \n WHERE E1.DNAME = E2.DNAME) \n WHERE SAL <= (SELECT AVG(SAL) \n FROM EMPLOYEE);"
+          "type": "sql",
+          "code": "UPDATE EMPLOYEE E1 \n SET SAL = (SELECT MAX(SAL) \n FROM EMPLOYEE E2 \n WHERE E1.DNAME = E2.DNAME) \n WHERE SAL <= (SELECT AVG(SAL) \n FROM EMPLOYEE);"
         },
         {
           "type": "table",
@@ -18258,8 +18318,8 @@
       "explanation": "첫 INSERT문장은 COMMIT했기 때문에 영구 저장된다. 그 이후 UPDATE, INSERT, DELETE를 차례대로 하지만 SAVE1 지점으로 롤백하므로 INSERT와 DELETE는 실행 취소된다. 첫 UPDATE문장과 마지막 UPDATE문장은 모두 롤백되어 결과적으로는 첫 INSERT문장만 실행된다. 따라서 남은 행의 SUM(COL2) 결과는 11이다. ",
       "references": [
         {
-          "type": "text",
-          "content": "INSERT INTO TAB1 VALUES(5, 'E', 3); \nCOMMIT; \nUPDATE TAB1 SET COL2 = 3 WHERE NO = 2; \nSAVEPOINT SAVE1; \nINSERT INTO TAB1 VALUES(6, 'F', 5); \nDELETE TAB1 WHERE NO = 4; \nROLLBACK TO SAVE1; \nUPDATE TAB1 SET COL2 = 2 WHERE NO = 1; \nROLLBACK; \nCOMMIT; \nSELECT SUM(COL2) FROM TAB1;"
+          "type": "sql",
+          "code": "INSERT INTO TAB1 VALUES(5, 'E', 3); \nCOMMIT; \nUPDATE TAB1 SET COL2 = 3 WHERE NO = 2; \nSAVEPOINT SAVE1; \nINSERT INTO TAB1 VALUES(6, 'F', 5); \nDELETE TAB1 WHERE NO = 4; \nROLLBACK TO SAVE1; \nUPDATE TAB1 SET COL2 = 2 WHERE NO = 1; \nROLLBACK; \nCOMMIT; \nSELECT SUM(COL2) FROM TAB1;"
         },
         {
           "type": "table",
@@ -18561,8 +18621,8 @@
       "explanation": "TRUNC는 소수점 이하 버림으로 결과값인 5, CEIL은 값보다 큰 최소정수로 6이 출력된다. FLOOR는 값보다 작은 최대 정수가 리턴되므로 5, ROUND는 소수점 첫번째 자리에서 반올림하여 5가 출력된다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT _________(5.47) FROM DUAL;"
+          "type": "sql",
+          "code": "SELECT _________(5.47) FROM DUAL;"
         }
       ]
     },
@@ -18584,8 +18644,8 @@
       "explanation": "주민번호의 앞 6자리를 사용하여 날짜변환 시 RR 포맷을 사용하면 두 자리 연도가 1~49 사이면 2000년대를, 50~99이면 1900년도의 4자리 연도로 출력, YY를 사용하면 2000년대를 출력한다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT TO_CHAR(TO_DATE(SUBSTR(JUMIN, 1, 6), 'RRMMDD'), 'YYYY-MM-DD') FROM TAB1;"
+          "type": "sql",
+          "code": "SELECT TO_CHAR(TO_DATE(SUBSTR(JUMIN, 1, 6), 'RRMMDD'), 'YYYY-MM-DD') FROM TAB1;"
         },
         {
           "type": "table",
@@ -18619,8 +18679,8 @@
       "explanation": "LTRIM 함수에 제거문자열을 전달하지 않을 경우 왼쪽에서 공백을 제거한다. INITCAP 함수는 첫 문자만 대문자로 나머지 문자는 소문자로 반환하는 함수이며, TO_CHAR 함수에 의해 소수점 둘째 자리까지, 정수자리는 세자리로 표현하여 리턴한다. ",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT LTRIM(' AB DE ') AS C1,   INITCAP('ABCDE') AS C2, TO_CHAR('123', '999.99') AS C3 FROM DUAL;"
+          "type": "sql",
+          "code": "SELECT LTRIM(' AB DE ') AS C1,   INITCAP('ABCDE') AS C2, TO_CHAR('123', '999.99') AS C3 FROM DUAL;"
         }
       ],
       "optionReferences": [
@@ -18648,8 +18708,8 @@
       "explanation": "COALESCE 함수는 대상들 중 널이 아닌 첫 번째 값을 출력하므로 첫 번째 행부터 10, 10, 20 이 출력된다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT COALESCE(COL1, COL2, COL3) RESULT FROM TAB1;"
+          "type": "sql",
+          "code": "SELECT COALESCE(COL1, COL2, COL3) RESULT FROM TAB1;"
         },
         {
           "type": "table",
@@ -18703,8 +18763,8 @@
       "explanation": "WHERE절의 비교 연산 결과 COL2의 30과 40만 해당되고 그에 해당하는 COL1은 모두 NULL이다. GROUP BY에 의해 COL1이 NULL인 한 그룹이 생성되지만 NULL은 COUNT하지 않기 때문에 0이 출력된다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT COUNT(COL1) AS RESULT \n FROM TAB1 \nWHERE COL2 >= 30  GROUP BY COL1;"
+          "type": "sql",
+          "code": "SELECT COUNT(COL1) AS RESULT \n FROM TAB1 \nWHERE COL2 >= 30  GROUP BY COL1;"
         },
         {
           "type": "table",
@@ -18766,8 +18826,8 @@
       "explanation": "GROUP BY 후 SUM(COL2) 연산 결과 (10, 300), (20, 400), (30, 500), (NULL, 600) 그룹이 출력된다. 이들 중 HAVING 조건에 만족하는 그룹은 (20, 400), (30, 500), (NULL, 600) 이다. ",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT COL1 AS C1, SUM(COL2) AS C2 \n FROM TAB1 \n GROUP BY COL1 \nHAVING SUM(COL2) >= 400;"
+          "type": "sql",
+          "code": "SELECT COL1 AS C1, SUM(COL2) AS C2 \n FROM TAB1 \n GROUP BY COL1 \nHAVING SUM(COL2) >= 400;"
         },
         {
           "type": "table",
@@ -18850,8 +18910,8 @@
       "explanation": "CASE문 결과를 1차 정렬로 한 뒤, 이 값이 같을 경우 COL1의 값으로 2차 정렬을 수행한다. 이렇게 정렬된 COL1의 값은 SCOTT, ALLEN, FORD, SMITH 순으로 출력된다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT COL1 \nFROM TAB1 \nORDER BY CASE WHEN MOD(COL2, 3) = 0 THEN 'A' \nELSE 'B' \nEND, COL1;"
+          "type": "sql",
+          "code": "SELECT COL1 \nFROM TAB1 \nORDER BY CASE WHEN MOD(COL2, 3) = 0 THEN 'A' \nELSE 'B' \nEND, COL1;"
         },
         {
           "type": "table",
@@ -18905,8 +18965,8 @@
       "explanation": "NULL 끼리는 동등비교 조건에 참으로 리턴되지 않는다. TAB1의 COL2값이 A인 경우 TAB2의 1건, B인 경우 2건, C의 경우 조건에 만족하는 값이 없으므로 INNER JOIN에서는 생략된다. 따라서 총 3건이 출력된다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT COUNT(A.COL2) \nFROM TAB1 A JOIN TAB2 B \nON A.COL2 = B.COL2;"
+          "type": "sql",
+          "code": "SELECT COUNT(A.COL2) \nFROM TAB1 A JOIN TAB2 B \nON A.COL2 = B.COL2;"
         },
         {
           "type": "table",
@@ -18980,8 +19040,8 @@
       "explanation": "(+) 가 붙은 반대편 테이블이 기준이 되는 테이블로 TAB1 테이블을 기준 테이블로 LEFT OUTER JOIN이 수행된다. 즉, 조인 조건이 일치하지 않아도 TAB1은 생략되서는 안되므로 INNER JOIN의 결과에 TAB1의 COL2가 NULL, C인 경우 추가적으로 출력되므로 총 5건이 나온다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT COUNT(TAB1.COL1) \nFROM TAB1, TAB2 \nWHERE TAB1.COL2 = TAB2.COL2(+);"
+          "type": "sql",
+          "code": "SELECT COUNT(TAB1.COL1) \nFROM TAB1, TAB2 \nWHERE TAB1.COL2 = TAB2.COL2(+);"
         },
         {
           "type": "table",
@@ -19055,8 +19115,8 @@
       "explanation": "LEFT OUTER JOIN의 결과 TAB1의 NO값이 1, 2, 4, 4, 6, 7, 3인 총 7개의 행이 나오게 되고,  RIGHT OUTER JOIN의 결과로 TAB1의 CODE값이 A, B, B, B, NULL, NULL, NULL이 출력되어 DISTINCT 수는 총 2건이다.(NULL은 세지 않는다)",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT COUNT(TAB1.NO) FROM TAB1 LEFT OUTER JOIN TAB2 ON TAB1.NO = TAB2.NO; \nSELECT COUNT(DISTINCT TAB1.CODE) FROM TAB1 RIGHT OUTER JOIN TAB2 ON TAB1.NO = TAB2.NO;"
+          "type": "sql",
+          "code": "SELECT COUNT(TAB1.NO) FROM TAB1 LEFT OUTER JOIN TAB2 ON TAB1.NO = TAB2.NO; \nSELECT COUNT(DISTINCT TAB1.CODE) FROM TAB1 RIGHT OUTER JOIN TAB2 ON TAB1.NO = TAB2.NO;"
         },
         {
           "type": "table",
@@ -19150,8 +19210,8 @@
       "explanation": "서브쿼리 조건절은 TAB1의 각 행의 COL1을 확인하여 같은 값을 갖는 행들 중 COL2의 최대값과 일치하는 행을 찾아 COL2의 총 합을 묻는 질의절이다. 즉, COL1별 COL2 값이 최대인 행들의 COL2의 총 합을 리턴하는 문장이므로 A그룹에서는 30,30, B그룹에서는 40이 리턴되어 총 100이 출력된다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT SUM(T1.COL2) \nFROM TAB1 T1 \nWHERE T1.COL2 = (SELECT MAX(COL2) \nFROM TAB1 T2 \nWHERE T1.COL1 = T2.COL1);"
+          "type": "sql",
+          "code": "SELECT SUM(T1.COL2) \nFROM TAB1 T1 \nWHERE T1.COL2 = (SELECT MAX(COL2) \nFROM TAB1 T2 \nWHERE T1.COL1 = T2.COL1);"
         },
         {
           "type": "table",
@@ -19236,8 +19296,8 @@
       "explanation": "셀프조인을 사용하여 EMP에서의 각 직원별로 입사일이 빠른 직원의 수를 계산하는 질의절이다. 이 때, LEFT OUTER JOIN을 수행하였기 때문에 입사일이 가장 빠른 SMITH의 경우도 CNT가 0으로 출력된다. ",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT E1.EMPNO, E1.ENAME, E1.HIREDATE, COUNT(E2.EMPNO) AS CNT \n  FROM EMP E1 LEFT OUTER JOIN EMP E2 \n     ON E1.HIREDATE > E2.HIREDATE \n GROUP BY E1.EMPNO, E1.ENAME, E1.HIREDATE \n ORDER BY E1.HIREDATE;"
+          "type": "sql",
+          "code": "SELECT E1.EMPNO, E1.ENAME, E1.HIREDATE, COUNT(E2.EMPNO) AS CNT \n  FROM EMP E1 LEFT OUTER JOIN EMP E2 \n     ON E1.HIREDATE > E2.HIREDATE \n GROUP BY E1.EMPNO, E1.ENAME, E1.HIREDATE \n ORDER BY E1.HIREDATE;"
         },
         {
           "type": "table",
@@ -19435,8 +19495,8 @@
       "explanation": "T2.COL2 값의 그룹별로 COL3의 평균보다 T1.COL3의 값이 큰 행을 찾고, 이들의 T1.COL1의 총 합을 구하는 질의절이다. T2에서 COL2의 값이 A인 그룹의 AVG(COL3)은 20이므로 T1에서 A그룹이면서 COL3의 값이 20보다 크거나 같은 대상을 찾으면 0건이 출력된다. 마찬가지로 T2에서 B그룹의AVG(COL3)을 구하면 20이고, T1의 B그룹중 COL3\n의 값이 20보다 크거나 같은 행은 COL1의 값이 4,5인 행이므로 최종 결과는 9가 리턴된다. ",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT SUM(COL1) \n  FROM TAB1 T1 \n WHERE COL3 >= (SELECT AVG(COL3) \n                   FROM TAB2 T2 \n                  WHERE T2.COL2 = T1.COL2);"
+          "type": "sql",
+          "code": "SELECT SUM(COL1) \n  FROM TAB1 T1 \n WHERE COL3 >= (SELECT AVG(COL3) \n                   FROM TAB2 T2 \n                  WHERE T2.COL2 = T1.COL2);"
         },
         {
           "type": "table",
@@ -19530,8 +19590,8 @@
       "explanation": "먼저 TAB1과 TAB2의 UNION 결과는 아래와 같다. 이들 중 TAB3의 결과를 빼면 3번 결과가 같다. ",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT * \n  FROM (SELECT COL1, COL2 \n          FROM TAB1 \n          UNION  \n         SELECT COL1, COL2 \n          FROM TAB2) \n MINUS \nSELECT COL1, COL2 \n FROM TAB3;"
+          "type": "sql",
+          "code": "SELECT * \n  FROM (SELECT COL1, COL2 \n          FROM TAB1 \n          UNION  \n         SELECT COL1, COL2 \n          FROM TAB2) \n MINUS \nSELECT COL1, COL2 \n FROM TAB3;"
         },
         {
           "type": "table",
@@ -19641,8 +19701,8 @@
       "explanation": "GROUPING SETS(PRODUCT_NO, GOGAK_NO, ())에서 PRODUCT_NO별 SUM(QTY) 결과, GOGAK_NO별 SUM(QTY)연산 결과가 출력된 것과 ()으로 인해 SUM(QTY)의 전체 총 합이 출력된 것을 찾는 문제이다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT PRODUCT_NO, GOGAK_NO, SUM(QTY) AS TOTAL_QTY  \nFROM JUMUN \nGROUP BY GROUPING SETS(PRODUCT_NO, GOGAK_NO, ());"
+          "type": "sql",
+          "code": "SELECT PRODUCT_NO, GOGAK_NO, SUM(QTY) AS TOTAL_QTY  \nFROM JUMUN \nGROUP BY GROUPING SETS(PRODUCT_NO, GOGAK_NO, ());"
         },
         {
           "type": "table",
@@ -19718,8 +19778,8 @@
       "explanation": "RANK는 동점일 경우 같은 등수로 표시하고 다음 순위는 동점인 순위의 수만큼 밀리므로 12245가 출력되지만 DENSE_RANK는 동점일 경우 동순위를 부여 뒤, 다음 순위가 바로 이어지므로 12234가 리턴된다.  ROW_NUMER는 동점일 경우를 인정하지 않고 순서대로 나열하므로 12345가 최종 출력된다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT NO, \n        RANK() OVER(ORDER BY JUMSU DESC) AS RANK1, \n        DENSE_RANK() OVER(ORDER BY JUMSU DESC) AS RANK2, \n        ROW_NUMBER() OVER(ORDER BY JUMSU DESC) AS RANK3 \n  FROM STUDENT;"
+          "type": "sql",
+          "code": "SELECT NO, \n        RANK() OVER(ORDER BY JUMSU DESC) AS RANK1, \n        DENSE_RANK() OVER(ORDER BY JUMSU DESC) AS RANK2, \n        ROW_NUMBER() OVER(ORDER BY JUMSU DESC) AS RANK3 \n  FROM STUDENT;"
         },
         {
           "type": "table",
@@ -19800,8 +19860,8 @@
       "explanation": "START WITH 조건이 1006과 1001이므로 두 행이 1레벨이 되고, 해당 행의 상위관리자코드를 사원번호로 갖는 행을 찾으면 둘 다 홍길동이 출력된다. 따라서 정답은 2번이 된다. ",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT 사원번호, 이름, LEVEL \n  FROM 사원 \n  START WITH 사원번호 IN (1006, 1001) \nCONNECT BY PRIOR 상위관리자코드 = 사원번호;"
+          "type": "sql",
+          "code": "SELECT 사원번호, 이름, LEVEL \n  FROM 사원 \n  START WITH 사원번호 IN (1006, 1001) \nCONNECT BY PRIOR 상위관리자코드 = 사원번호;"
         },
         {
           "type": "table",
@@ -19961,8 +20021,8 @@
       "explanation": "A 뒤에 X 또는 Y가 여러 개 오며 그 뒤에 .이 오는 문자열을 찾아 모두 지우는 쿼리문이다. ",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT REGEXP_REPLACE(COL1, 'A(X|Y)+\\.') FROM TAB1;"
+          "type": "sql",
+          "code": "SELECT REGEXP_REPLACE(COL1, 'A(X|Y)+\\.') FROM TAB1;"
         },
         {
           "type": "table",
@@ -20005,8 +20065,8 @@
       "explanation": "[^0-9]+ 는 숫자가 아닌 값이 여러 개 반복되는 문자열을 의미한다. REGEXP_SUBSTR은 이 패턴에 해당하는 값을 처음부터 찾아 단 하나의 문자열을 추출하므로 ORA-만 추출된다. ",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT REGEXP_SUBSTR('ORA-00600 Oracle SQL-Server 50', '[^0-9]+') \"REGEXPR_SUBSTR\" \nFROM DUAL;"
+          "type": "sql",
+          "code": "SELECT REGEXP_SUBSTR('ORA-00600 Oracle SQL-Server 50', '[^0-9]+') \"REGEXPR_SUBSTR\" \nFROM DUAL;"
         }
       ]
     },
@@ -20028,8 +20088,8 @@
       "explanation": "1번에서 COL4의 값은 문자상수이므로 날짜 변환 후 입력을 해야 한다. DBMS의 기본 날짜 포맷이 YYYY/MM/DD가 아닌 경우는 이 문장은 에러가 발생한다. ",
       "references": [
         {
-          "type": "text",
-          "content": "CREATE TABLE TAB1( \nCOL1    VARCHAR(10) PRIMARY KEY, \nCOL2 NUMBER NOT NULL,    \nCOL3 CHAR(10) NOT NULL,     \nCOL4   DATE NOT NULL);"
+          "type": "sql",
+          "code": "CREATE TABLE TAB1( \nCOL1    VARCHAR(10) PRIMARY KEY, \nCOL2 NUMBER NOT NULL,    \nCOL3 CHAR(10) NOT NULL,     \nCOL4   DATE NOT NULL);"
         }
       ]
     },
@@ -20051,8 +20111,8 @@
       "explanation": "처음 INSERT 3개의 문장은 COMMIT을 수행했으므로 영구 저장된다. 이후 COL3을 추가하면 이미 입력된 세 개의 행에 대해 NULL을 갖게 된다. 그 뒤 수행하는 INSERT, UPDATE, DELETE 문장은 이어서 실행하는 ALTER TABLE DROP COLUMN 문장으로 인해 자동 확정된다.(DDL AUTO COMMIT). 따라서 ROLLBACK을 수행해도 취소되지 않는다. ",
       "references": [
         {
-          "type": "text",
-          "content": "CREATE TABLE TAB1(COL1 NUMBER, COL2 NUMBER); \n \nINSERT INTO TAB1 VALUES(1,10); \nINSERT INTO TAB1 VALUES(2,20); \nINSERT INTO TAB1 VALUES(3,30); \nCOMMIT; \n \nALTER TABLE TAB1 ADD (COL3 NUMBER); \n \nINSERT INTO TAB1 VALUES(4,40,100); \nUPDATE TAB1 SET COL2 = 50 WHERE COL1 = 1; \nDELETE TAB1 WHERE COL1 = 3; \n \nALTER TABLE TAB1 DROP COLUMN COL1; \n \nROLLBACK; \n \nSELECT SUM(COL2 + COL3) FROM TAB1;"
+          "type": "sql",
+          "code": "CREATE TABLE TAB1(COL1 NUMBER, COL2 NUMBER); \n \nINSERT INTO TAB1 VALUES(1,10); \nINSERT INTO TAB1 VALUES(2,20); \nINSERT INTO TAB1 VALUES(3,30); \nCOMMIT; \n \nALTER TABLE TAB1 ADD (COL3 NUMBER); \n \nINSERT INTO TAB1 VALUES(4,40,100); \nUPDATE TAB1 SET COL2 = 50 WHERE COL1 = 1; \nDELETE TAB1 WHERE COL1 = 3; \n \nALTER TABLE TAB1 DROP COLUMN COL1; \n \nROLLBACK; \n \nSELECT SUM(COL2 + COL3) FROM TAB1;"
         }
       ]
     },
@@ -20074,8 +20134,8 @@
       "explanation": "COL4 컬럼 추가 시, 기존 세 개의 행의 값은 NULL이 삽입된다. 그 이후 DEFAULT 값을 변경해도 이전에 삽입된 행은 반영되지 않고, 이후 삽입되는 행에 대해 적용된다. COL3에 DEFAULT 값이 설정되어 있다 하더라도 NULL을 직접 입력하면 NULL이 삽입되며, 마지막 INSERT 문장처럼 COL3의 값이 아예 입력되지 않을 경우만 DEFAULT VAULE로 삽입된다. ",
       "references": [
         {
-          "type": "text",
-          "content": "ALTER TABLE TAB1 ADD COL4 CHAR(5); \nALTER TABLE TAB1 MODIFY COL4 DEFAULT 'AAA'; \nINSERT INTO TAB1 VALUES(4, 'D', 40, NULL); \nINSERT INTO TAB1(COL1, COL2, COL3) VALUES(5,'E',50);"
+          "type": "sql",
+          "code": "ALTER TABLE TAB1 ADD COL4 CHAR(5); \nALTER TABLE TAB1 MODIFY COL4 DEFAULT 'AAA'; \nINSERT INTO TAB1 VALUES(4, 'D', 40, NULL); \nINSERT INTO TAB1(COL1, COL2, COL3) VALUES(5,'E',50);"
         },
         {
           "type": "table",
@@ -20453,8 +20513,8 @@
       "explanation": "ROUND와 TRUNC는 각각 날짜의 반올림과 버림을 수행할 수 있다. 두 번째 인수 생략 시 \"일\" 단위로의 반올림/버림이 진행되며, 'MONTH'의 경우 \"월\" 단위로의 반올림/버림이 진행된다. 즉, \"일\" 단위에서 반올림을 진행하게 된다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT ROUND(TO_DATE('2024-02-20 14:00:00', 'YYYY-MM-DD HH24:MI:SS'), 'MONTH') AS D1, \nTRUNC(TO_DATE('2024-09-12 09:00:00', 'YYYY-MM-DD HH24:MI:SS')) AS D2 FROM DUAL;"
+          "type": "sql",
+          "code": "SELECT ROUND(TO_DATE('2024-02-20 14:00:00', 'YYYY-MM-DD HH24:MI:SS'), 'MONTH') AS D1, \nTRUNC(TO_DATE('2024-09-12 09:00:00', 'YYYY-MM-DD HH24:MI:SS')) AS D2 FROM DUAL;"
         }
       ],
       "optionReferences": [
@@ -20499,8 +20559,8 @@
       "explanation": "LTRIM은 왼쪽에서부터 특정 문자열를 지우며, 중간에 있는 문자열은 삭제되지 않는다. 따라서 LTRIM('ORACLE','A'은 왼쪽에 A가 없으므로 ORACLE 그대로 리턴된다. SUBSTR('SQL-SERVER', 3, 3)은 세 번째 위치에서 3개 문자열\n을 추출하기 때문에 L-S가 출력된다. 또한, REPLACE에 의해 E가 삭제된 문자열의 길이는 8이 된다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT LTRIM('ORACLE', 'A') AS C1, \n        SUBSTR('SQL-SERVER', 3, 3) AS C2, \n        LENGTH(REPLACE('SQL-SERVER', 'E')) AS C3 \n FROM DUAL;"
+          "type": "sql",
+          "code": "SELECT LTRIM('ORACLE', 'A') AS C1, \n        SUBSTR('SQL-SERVER', 3, 3) AS C2, \n        LENGTH(REPLACE('SQL-SERVER', 'E')) AS C3 \n FROM DUAL;"
         }
       ],
       "optionReferences": [
@@ -20562,8 +20622,8 @@
       "explanation": "첫 번째 문장은 조건에 만족하는 COL1값이 NULL이므로 NULL 그룹이 리턴된다. 따라서 COUNT를 하면 0이 출력되며, 두 번째 문장은 HAVING 조건에 만족하는 그룹이 없으므로 공집합이 출력되어 COUNT 결과가 NULL이 된다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT COUNT(COL1) RESULT FROM TAB1 WHERE COL3 < 100 GROUP BY COL1;   \nSELECT COUNT(COL1) RESULT FROM TAB1 WHERE COL1 IS NOT NULL GROUP BY COL1 \nHAVING SUM(COL2) > 500;"
+          "type": "sql",
+          "code": "SELECT COUNT(COL1) RESULT FROM TAB1 WHERE COL3 < 100 GROUP BY COL1;   \nSELECT COUNT(COL1) RESULT FROM TAB1 WHERE COL1 IS NOT NULL GROUP BY COL1 \nHAVING SUM(COL2) > 500;"
         },
         {
           "type": "table",
@@ -20627,8 +20687,8 @@
       "explanation": "COL1이 NULL이 아닌 값은 위의 세 행인데, 이들의 COL2+COL3의 값은 순서대로 NULL, 12, NULL이 된다. 따라서 총합은 12가 출력된다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT SUM(COL2 + COL3) FROM TAB1 WHERE COL1 IS NOT NULL;"
+          "type": "sql",
+          "code": "SELECT SUM(COL2 + COL3) FROM TAB1 WHERE COL1 IS NOT NULL;"
         },
         {
           "type": "table",
@@ -20698,8 +20758,8 @@
       "explanation": "SUBSTR(JUMIN, 3, 2)은 태어난 월을 추출하기 때문에, 순서대로 12, 11, 06, 01, 08의 문자 유형으로 출력된다. 이를 TO_NUMBER를 사용하여 숫자 형태로 변환하면 12, 11, 6, 1, 8이 되는데, 이를 다시 TO_CHAR로 변환하게 되면 문자값의 비교 규칙에 따라 1 < 11 < 12 < 6 < 8 순서대로 출력된다. (문자는 가장 왼쪽부터 비교하여 값이 작을수록 작은값이 된다) ",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT EMPNO \n  FROM EMP \n ORDER BY TO_CHAR(TO_NUMBER(SUBSTR(JUMIN, 3, 2)));"
+          "type": "sql",
+          "code": "SELECT EMPNO \n  FROM EMP \n ORDER BY TO_CHAR(TO_NUMBER(SUBSTR(JUMIN, 3, 2)));"
         },
         {
           "type": "table",
@@ -20805,8 +20865,8 @@
       "explanation": "DEPTNO가 작은순서대로, DEPTNO가 같은 경우 SAL이 큰 순서대로 정렬하여 출력한다. NULL이 마지막에 출력되는게 기본 순서이지만DESC로 내림차순 정렬하면 NULL이 젤 먼저 출력된다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT ENAME, DEPTNO, SAL \n  FROM EMP \n ORDER BY DEPTNO, SAL DESC;"
+          "type": "sql",
+          "code": "SELECT ENAME, DEPTNO, SAL \n  FROM EMP \n ORDER BY DEPTNO, SAL DESC;"
         },
         {
           "type": "table",
@@ -20875,8 +20935,8 @@
       "explanation": "정답은 2 번. (해설 미등록)",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT COUNT(TAB1.COL1) AS CNT  \nFROM TAB1 LEFT OUTER JOIN TAB2 \nON TAB1.COL2 = TAB2.COL2 \nAND TAB1.COL1 = TAB2.COL1;"
+          "type": "sql",
+          "code": "SELECT COUNT(TAB1.COL1) AS CNT  \nFROM TAB1 LEFT OUTER JOIN TAB2 \nON TAB1.COL2 = TAB2.COL2 \nAND TAB1.COL1 = TAB2.COL1;"
         },
         {
           "type": "table",
@@ -20971,8 +21031,8 @@
       "explanation": "다중컬럼 서브쿼리를 사용하여 각 부서별로 최대급여를 받는 직원들의 급여 총합을 출력하고 있다. 10번 부서는 1500, 20번 부서는 3000이지만 FORD와 MILLER 둘 다 출력되므로 총 합은 7500이다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT SUM(SAL) \nFROM EMPLOYEES \nWHERE (DEPTNO, SAL) IN (SELECT DEPTNO, MAX(SAL) \nFROM EMPLOYEES \nGROUP BY DEPTNO);"
+          "type": "sql",
+          "code": "SELECT SUM(SAL) \nFROM EMPLOYEES \nWHERE (DEPTNO, SAL) IN (SELECT DEPTNO, MAX(SAL) \nFROM EMPLOYEES \nGROUP BY DEPTNO);"
         },
         {
           "type": "table",
@@ -21036,8 +21096,8 @@
       "explanation": "TAB2의 STATUS가 OPEN인 CODE는 0002와 0004이므로 TAB1에서 이들을 삭제하면 AAA,BBB만 남는다.  \n이들의 FARE 총합은 600이다. ",
       "references": [
         {
-          "type": "text",
-          "content": "DELETE FROM TAB1 \nWHERE CODE IN (SELECT CODE \nFROM TAB2 \nWHERE STATUS = 'OPEN'); \n\nSELECT SUM(FARE) \nFROM TAB1;"
+          "type": "sql",
+          "code": "DELETE FROM TAB1 \nWHERE CODE IN (SELECT CODE \nFROM TAB2 \nWHERE STATUS = 'OPEN'); \n\nSELECT SUM(FARE) \nFROM TAB1;"
         },
         {
           "type": "table",
@@ -21133,8 +21193,8 @@
       "explanation": "ROLLUP은 전체 소계를 함께 출력한다. 즉, ROLLUP(A) => GROUP BY A 결과에 전체 소계 출력",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT DEPTNO, SUM(SAL) AS SUM_SAL \nFROM EMP \nGROUP BY DEPTNO \nUNION ALL \nSELECT NULL DEPTNO, SUM(SAL) AS SUM_SAL \nFROM EMP; \nSELECT DEPTNO, SUM(SAL) AS SUM_SAL \nFROM EMP \nGROUP BY _______________;"
+          "type": "sql",
+          "code": "SELECT DEPTNO, SUM(SAL) AS SUM_SAL \nFROM EMP \nGROUP BY DEPTNO \nUNION ALL \nSELECT NULL DEPTNO, SUM(SAL) AS SUM_SAL \nFROM EMP; \nSELECT DEPTNO, SUM(SAL) AS SUM_SAL \nFROM EMP \nGROUP BY _______________;"
         }
       ]
     },
@@ -21173,8 +21233,8 @@
       "explanation": "누적합의 범위가 각 행마다 이전행과 현재행, 다음행을 연산하고 있으므로(JONES 기준 1100 + 2975 + 3000 = 7075) \n1 PRECEDING AND 1 FOLLOWING 이며, SAL이 같은 SCOTT과 FORD의 누적합이 각각 다르게 계산되었으므로 \nROWS가 적절하다. ",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT EMPNO, ENAME, DEPTNO, SAL,  \nSUM(SAL) OVER(PARTITION BY DEPTNO ORDER BY SAL \n____________________) AS RESULT \nFROM EMP;"
+          "type": "sql",
+          "code": "SELECT EMPNO, ENAME, DEPTNO, SAL,  \nSUM(SAL) OVER(PARTITION BY DEPTNO ORDER BY SAL \n____________________) AS RESULT \nFROM EMP;"
         },
         {
           "type": "table",
@@ -21342,8 +21402,8 @@
       "explanation": "WHERE절은 출력 대상을 결정하기 때문에 서울 지역인 홍길동은 출력하지 않는다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT 사원번호, 이름, LEVEL \nFROM 사원 \nWHERE 지역 = '경기' \nSTART WITH 상위관리자코드 IS NULL \nCONNECT BY 상위관리자코드 = PRIOR 사원번호;"
+          "type": "sql",
+          "code": "SELECT 사원번호, 이름, LEVEL \nFROM 사원 \nWHERE 지역 = '경기' \nSTART WITH 상위관리자코드 IS NULL \nCONNECT BY 상위관리자코드 = PRIOR 사원번호;"
         },
         {
           "type": "table",
@@ -21437,8 +21497,8 @@
       "explanation": "PRIOR의 위치가 PART에 있으므로 가장 최상위 학과(PART IS NULL)를 먼저 출력하고, 두 행의 PART를 DEPTNO 로 갖는 행을 찾지만 해당 행이 없으므로 최상위 학과인 공과대학과 인문대학만 출력된다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT DEPTNO, DNAME, LEVEL, CONNECT_BY_ROOT(DNAME) AS ROOT \n  FROM DEPARTMENT \n START WITH PART IS NULL \nCONNECT BY PRIOR PART = DEPTNO;"
+          "type": "sql",
+          "code": "SELECT DEPTNO, DNAME, LEVEL, CONNECT_BY_ROOT(DNAME) AS ROOT \n  FROM DEPARTMENT \n START WITH PART IS NULL \nCONNECT BY PRIOR PART = DEPTNO;"
         },
         {
           "type": "table",
@@ -21550,8 +21610,8 @@
       "explanation": "첫 번째 밑줄은 10, 20, 30, 40 값이 쌓여 하나의 컬럼을 이룰 때 컬럼명을 나타내는 자리이므로 판매량,  두 번째 밑줄은 2023, 2024를 넣을 컬럼명을 의미하므로 연도가 적절하다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT * \n  FROM TAB1 \nUNPIVOT (_____ FOR _____ IN (\"2023\", \"2024\"));"
+          "type": "sql",
+          "code": "SELECT * \n  FROM TAB1 \nUNPIVOT (_____ FOR _____ IN (\"2023\", \"2024\"));"
         },
         {
           "type": "table",
@@ -21625,8 +21685,8 @@
       "explanation": "[A-z|0-9\\. ] 패턴은 영문 또는 | 또는 숫자 또는 \\ 또는 . 그리고 공백을 모두 지칭하는 패턴이다. 따라서 이들을 모두 지우면 ,과 :만 남게 된다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT LENGTH(REGEXP_REPLACE('REGEXP \\. ESCAPE CHARACTER, A|B : A OR B', '[A-z|0-9\\. ]'))  FROM DUAL;"
+          "type": "sql",
+          "code": "SELECT LENGTH(REGEXP_REPLACE('REGEXP \\. ESCAPE CHARACTER, A|B : A OR B', '[A-z|0-9\\. ]'))  FROM DUAL;"
         }
       ]
     },
@@ -21716,8 +21776,8 @@
       "explanation": "새로운 컬럼 추가 시 기존 데이터의 새 컬럼 데이터는 NULL로 삽입된다. 따라서 DEFAULT 값 선언 없이는 NOT NULL 속성을 갖는 컬럼 추가는 불가능하다.",
       "references": [
         {
-          "type": "text",
-          "content": "CREATE TABLE TAB1(COL1 NUMBER, COL2 NUMBER); \nINSERT INTO TAB1 VALUES(100, 100); \nCOMMIT;"
+          "type": "sql",
+          "code": "CREATE TABLE TAB1(COL1 NUMBER, COL2 NUMBER); \nINSERT INTO TAB1 VALUES(100, 100); \nCOMMIT;"
         }
       ]
     },
@@ -21739,8 +21799,8 @@
       "explanation": "ON DELETE SET NULL 옵션에 의해 TAB1 데이터 삭제 시 자식 데이터의 외래키 컬럼은 NULL로 수정된다. ",
       "references": [
         {
-          "type": "text",
-          "content": "ALTER TABLE TAB2 ADD FOREIGN KEY(CLASS_NO) REFERENCES TAB1(NO) ON DELETE SET NULL; \nDELETE FROM TAB1 WHERE NAME = 'C';"
+          "type": "sql",
+          "code": "ALTER TABLE TAB2 ADD FOREIGN KEY(CLASS_NO) REFERENCES TAB1(NO) ON DELETE SET NULL; \nDELETE FROM TAB1 WHERE NAME = 'C';"
         },
         {
           "type": "table",
@@ -22130,8 +22190,8 @@
       "explanation": "DEPTNO가 10이면서 JOB이 CLERK인 경우 A, DEPTNO가 10이면서 JOB이 CLERK가 아닌 경우는 B를 리턴하며, DEPTNO가 10이 아닌 경우는 모두 C를 리턴한다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT DECODE(DEPTNO, 10, DECODE(JOB, 'CLERK', 'A', 'B'), 'C') AS RESULT FROM EMP ORDER BY EMPNO;"
+          "type": "sql",
+          "code": "SELECT DECODE(DEPTNO, 10, DECODE(JOB, 'CLERK', 'A', 'B'), 'C') AS RESULT FROM EMP ORDER BY EMPNO;"
         },
         {
           "type": "table",
@@ -22190,8 +22250,8 @@
       "explanation": "HH24는 24시간 표현식이고, HH는 12시간 표현식이다. 시간은 정오를 기준으로 반올림 시 자리수가 바뀌는데, 둘 다 정오를 나타내므로 반올림 시 “일(DAY)”의 자리가 바뀌며 24년 8월 25일이 리턴된다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT ROUND(TO_DATE('2024-08-24 12:00:00','YYYY-MM-DD HH24:MI:SS')) COL1, ROUND(TO_DATE('2024-08-24 12:00:01','YYYY-MM-DD HH:MI:SS')) COL2 FROM DUAL;"
+          "type": "sql",
+          "code": "SELECT ROUND(TO_DATE('2024-08-24 12:00:00','YYYY-MM-DD HH24:MI:SS')) COL1, ROUND(TO_DATE('2024-08-24 12:00:01','YYYY-MM-DD HH:MI:SS')) COL2 FROM DUAL;"
         }
       ],
       "optionReferences": [
@@ -22219,8 +22279,8 @@
       "explanation": "ADD_MONTHS는 지정한 날짜에서 n개월 이후 날짜를 출력하는 함수이다. NEXT_DAY(날짜,요일) 는 지정한 날짜 뒤 의 첫 번째 지정요일에 해당하는 날짜를 리턴한다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT NEXT_DAY(ADD_MONTHS(HIREDATE, 6),'월요일') FROM EMP;"
+          "type": "sql",
+          "code": "SELECT NEXT_DAY(ADD_MONTHS(HIREDATE, 6),'월요일') FROM EMP;"
         }
       ]
     },
@@ -22242,8 +22302,8 @@
       "explanation": "NULLIF(COL1, 100)은 COL1 값이 100이면 NULL을 리턴하고, 같지 않으면 COL1값을 리턴한다. 따라서 COL1값은 순서대로 NULL, NULL, 200이 리턴되므로 COL2와의 합은 순서대로 NULL, NULL, 300이 되어 총 300이 출력된다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT SUM(NULLIF(COL1,100) + COL2) FROM TAB1;"
+          "type": "sql",
+          "code": "SELECT SUM(NULLIF(COL1,100) + COL2) FROM TAB1;"
         },
         {
           "type": "table",
@@ -22287,8 +22347,8 @@
       "explanation": "NOT EXISTS는 서브쿼리 조건이 거짓인 경우 메인쿼리의 결과가 출력된다. 따라서 TAB2의 COL2와 일치하지 않는 값은 1이며, NULL은 TAB1과 TAB2가 모두 존재하지만 EQUAL(=) 연산 결과가 항상 거짓이므로, NOT EXISTS에 의 해 출력된다. 따라서 COUNT 결과는 2이다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT COUNT(COL1) FROM TAB1 WHERE NOT EXISTS(SELECT 'X' FROM TAB2 WHERE TAB1.COL2 = TAB2.COL2);"
+          "type": "sql",
+          "code": "SELECT COUNT(COL1) FROM TAB1 WHERE NOT EXISTS(SELECT 'X' FROM TAB2 WHERE TAB1.COL2 = TAB2.COL2);"
         },
         {
           "type": "table",
@@ -22358,8 +22418,8 @@
       "explanation": "2000과 3000사이 값이 아니면 2000미만, 3000초과가 된다. 이들 중 COL3이 10, 20과 일치하지 않는 행은 존재하지 않는다. 따라서 COUNT 결과는 0이다. 조건에 만족하지 않더라도 COUNT는 NULL이 아닌 0을 리턴한다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT COUNT(COL1) FROM TAB1 WHERE COL2 NOT BETWEEN 2000 AND 3000 AND COL3 NOT IN (10, 20);"
+          "type": "sql",
+          "code": "SELECT COUNT(COL1) FROM TAB1 WHERE COL2 NOT BETWEEN 2000 AND 3000 AND COL3 NOT IN (10, 20);"
         },
         {
           "type": "table",
@@ -22422,8 +22482,8 @@
       "explanation": "COL1 > 100 조건에 만족하는 값은 COL1이 200, 300, 400, 500, 300인 행이다. 이들을 COL2에 의해 그룹핑을 하면 A, B, NULL그룹이 리턴되며, NULL일 때의 SUM(COL3), MIN(COL3)은 모두 20이 리턴된다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT COL2, SUM(COL3) AS C1, MIN(COL3) AS C2, MAX(COL3) AS C3 FROM TAB1 WHERE COL1 > 100 GROUP BY COL2;"
+          "type": "sql",
+          "code": "SELECT COL2, SUM(COL3) AS C1, MIN(COL3) AS C2, MAX(COL3) AS C3 FROM TAB1 WHERE COL1 > 100 GROUP BY COL2;"
         },
         {
           "type": "table",
@@ -22497,8 +22557,8 @@
       "explanation": "문자 B보다 큰 ID는 BI와 BAA이다. 따라서 ID 는 CASE문에 의해 순서대로 AA, ABC, A, B, A 변환되어 두번째 정렬 기준인 ID 값과 함께 정렬된다. 문자 정렬은 왼쪽부터 비교하여 값이 같을 때까지 비교하여 더 큰 값이 큰 문자열이 되므로 최종 정렬 결과는 정렬 결과는 A(BAA), A(BI), AA, ABC, B 가 된다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT ID FROM TAB1 ORDER BY CASE WHEN ID > 'B' THEN 'A' ELSE ID END, ID;"
+          "type": "sql",
+          "code": "SELECT ID FROM TAB1 ORDER BY CASE WHEN ID > 'B' THEN 'A' ELSE ID END, ID;"
         },
         {
           "type": "table",
@@ -22575,8 +22635,8 @@
       "explanation": "조인 조건에 성립하는 행만 출력하는 INNER JOIN이 수행되었으므로 조인조건을 ON절에, 일반조건을 WHERE절에 각각 명시하면 된다. USING을 사용하는 경우 반드시 괄호로 묶어서 전달해야 한다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT E.ENAME, E.SAL, E.DEPTNO, D.DNAME FROM EMP E, DEPT D WHERE E.DEPTNO = D.DEPTNO AND E.SAL > 3000 ORDER BY E.ENAME;"
+          "type": "sql",
+          "code": "SELECT E.ENAME, E.SAL, E.DEPTNO, D.DNAME FROM EMP E, DEPT D WHERE E.DEPTNO = D.DEPTNO AND E.SAL > 3000 ORDER BY E.ENAME;"
         }
       ]
     },
@@ -22632,8 +22692,8 @@
       "explanation": "RESULT1은 TAB2의 COL1의 값이 TAB2의 COL1과 같은 행의 COL2값을 리턴한다. 하지만 TAB1의 COL2가 NULL 인 경우 조건에 일치하지 않아도 생략되지 않고 NULL로 출력되는데, 이는 메인쿼리의 WHERE절이 정의되지 않아 전체 행이 출력되기 때문이다. 마찬가지로 RESULT2도 TAB1의 COL1이 D인 경우 TAB1.COL1 = TAB3.COL1 조건에 일치하지 않지만 NULL로 출력된다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT COL1, COL2, (SELECT COL2 FROM TAB2 WHERE TAB1.COL2 = TAB2.COL1) AS RESULT1, (SELECT MAX(COL2) FROM TAB3 WHERE TAB1.COL1 = TAB3.COL1) AS RESULT2 FROM TAB1;"
+          "type": "sql",
+          "code": "SELECT COL1, COL2, (SELECT COL2 FROM TAB2 WHERE TAB1.COL2 = TAB2.COL1) AS RESULT1, (SELECT MAX(COL2) FROM TAB3 WHERE TAB1.COL1 = TAB3.COL1) AS RESULT2 FROM TAB1;"
         },
         {
           "type": "table",
@@ -22752,8 +22812,8 @@
       "explanation": "A는 100, 200을 B는 300, C는 300을 리턴한다. 따라서 총 합은 900 이다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT SUM(TAB2.COL2) FROM TAB1, TAB2 WHERE TAB1.COL2 = TAB2.COL1;"
+          "type": "sql",
+          "code": "SELECT SUM(TAB2.COL2) FROM TAB1, TAB2 WHERE TAB1.COL2 = TAB2.COL1;"
         },
         {
           "type": "table",
@@ -22823,8 +22883,8 @@
       "explanation": "셀프조인을 통해 각 행마다 입사일이 작거나 같은 모든 행을 출력하는 쿼리로, 각 행마다의 누적 급여 총 합을 출력 하게 된다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT SUM(E2.SAL) AS RESULT FROM EMP E1, EMP E2 WHERE E1.HIREDATE >= E2.HIREDATE GROUP BY E1.ENAME;"
+          "type": "sql",
+          "code": "SELECT SUM(E2.SAL) AS RESULT FROM EMP E1, EMP E2 WHERE E1.HIREDATE >= E2.HIREDATE GROUP BY E1.ENAME;"
         },
         {
           "type": "table",
@@ -22883,8 +22943,8 @@
       "explanation": "스칼라 서브쿼리는 OUTER JOIN을 수행하지 않아도 연결 조건에 만족하지 않는 행도 출력된다. 즉, D가 출력되는데, NVL로 NULL을 100으로 치환하고 있으므로 D의 PRO_FARE는 100으로 리턴된다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT NAME, NVL((SELECT FARE FROM PROMOTION P2 WHERE P1.CODE = P2.CODE), 100) PRO_FARE FROM PRODUCT P1;"
+          "type": "sql",
+          "code": "SELECT NAME, NVL((SELECT FARE FROM PROMOTION P2 WHERE P1.CODE = P2.CODE), 100) PRO_FARE FROM PRODUCT P1;"
         },
         {
           "type": "table",
@@ -22981,8 +23041,8 @@
       "explanation": "같은 DEPTNO내에서 SAL이 낮은 순서대로 이전 이전 값을 가져오는 문장이다. 가져올 값이 없을 경우 0으로 리턴 한다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT EMPNO, ENAME, DEPTNO, SAL, LAG(SAL, 2, 0) OVER(PARTITION BY DEPTNO ORDER BY SAL) LAV_VALUE FROM EMP;"
+          "type": "sql",
+          "code": "SELECT EMPNO, ENAME, DEPTNO, SAL, LAG(SAL, 2, 0) OVER(PARTITION BY DEPTNO ORDER BY SAL) LAV_VALUE FROM EMP;"
         },
         {
           "type": "table",
@@ -23087,8 +23147,8 @@
       "explanation": "RATIO_TO_REPORT는 총 합 기준 COL2의 값의 크기에 대한 차지 비율을 출력, CUME_DIST는 COL2 순서대로 각 행의 상대적 누적 위치 출력, PERCENT_RANK는 COL2 순서대로 각 행의 누적 분위수(0~1 사이)를 출력한다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT RATIO_TO_REPORT(COL2) OVER() AS C1, CUME_DIST() OVER(ORDER BY COL2) AS C2, ROUND(PERCENT_RANK() OVER(ORDER BY COL2),2) AS C3 FROM TAB1;"
+          "type": "sql",
+          "code": "SELECT RATIO_TO_REPORT(COL2) OVER() AS C1, CUME_DIST() OVER(ORDER BY COL2) AS C2, ROUND(PERCENT_RANK() OVER(ORDER BY COL2),2) AS C3 FROM TAB1;"
         },
         {
           "type": "table",
@@ -23142,8 +23202,8 @@
       "explanation": "그룹으로 나눌 때 명학히 나눠지지 않으면 앞 그룹의 크기를 더 크게 나누므로 10번 부서의 1번 그룹원은 MILLER, CLARK이며, 20번 부서의 2번 그룹원은 SCOTT과 FORD 이므로 1300 + 2450 + 3000 + 3000 = 9750 이 된다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT SUM(SAL) FROM (SELECT ENAME, DEPTNO, SAL, NTILE(2) OVER(PARTITION BY DEPTNO ORDER BY SAL) AS GN FROM EMP) WHERE (DEPTNO = 10 AND GN = 1) OR (DEPTNO = 20 AND GN = 2);"
+          "type": "sql",
+          "code": "SELECT SUM(SAL) FROM (SELECT ENAME, DEPTNO, SAL, NTILE(2) OVER(PARTITION BY DEPTNO ORDER BY SAL) AS GN FROM EMP) WHERE (DEPTNO = 10 AND GN = 1) OR (DEPTNO = 20 AND GN = 2);"
         },
         {
           "type": "table",
@@ -23296,8 +23356,8 @@
       "explanation": "위 데이터는 SMITH와 ALLEN이 서로 순환구조를 가지기 때문에 출력이 불가하다. 따라서 출력을 원할 경우 CONNECT BY 뒤에 NOCYCLE 옵션을 전달해야 한다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT * FROM EMP START WITH EMPNO = '0001' CONNECT BY MGR = PRIOR EMPNO;"
+          "type": "sql",
+          "code": "SELECT * FROM EMP START WITH EMPNO = '0001' CONNECT BY MGR = PRIOR EMPNO;"
         },
         {
           "type": "table",
@@ -23340,8 +23400,8 @@
       "explanation": "최상위 학과인 컴퓨터정보학부와 인문사회학부로부터 시작하여 하위 학과들을 연결한 후 루트노드로부터의 연결과 정을 '-'로 이어서 출력하는 과정이다. DEPTNO가 103번인 소프트웨어공학과의 상위학과는 컴퓨터정보학부이다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT SYS_CONNECT_BY_PATH(DNAME, '-') FROM DEPARTMENT WHERE DEPTNO = 103 START WITH PART IS NULL CONNECT BY PART = PRIOR DEPTNO ;"
+          "type": "sql",
+          "code": "SELECT SYS_CONNECT_BY_PATH(DNAME, '-') FROM DEPARTMENT WHERE DEPTNO = 103 START WITH PART IS NULL CONNECT BY PART = PRIOR DEPTNO ;"
         },
         {
           "type": "table",
@@ -23428,8 +23488,8 @@
       "explanation": "서브그룹을 추출하는 문제이다. 서브그룹 순서는 ((A)-(B))-((C)-(D))에서 A-B -> A -> B -> C-D -> C -> D 순서대로 정해진다. 따라서 4번째 서브그룹은 뒤에 두 숫자집합의 결합인 4545-233 가 된다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT REGEXP_SUBSTR('123-234-4545-233', '((\\d+)-(\\d+))-((\\d+)-(\\d+))', 1, 1, NULL, 4) FROM DUAL;"
+          "type": "sql",
+          "code": "SELECT REGEXP_SUBSTR('123-234-4545-233', '((\\d+)-(\\d+))-((\\d+)-(\\d+))', 1, 1, NULL, 4) FROM DUAL;"
         }
       ]
     },
@@ -23871,8 +23931,8 @@
       "explanation": "두 번째 글자가 L이면서 그 뒤에 E를 하나 포함하는 이름을 제외하면 SMITH, KING, CLARK 가 출력된다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT COUNT(ENAME) FROM EMP WHERE ENAME NOT LIKE '_L%E%';"
+          "type": "sql",
+          "code": "SELECT COUNT(ENAME) FROM EMP WHERE ENAME NOT LIKE '_L%E%';"
         },
         {
           "type": "table",
@@ -24141,8 +24201,8 @@
       "explanation": "TAB1과 LEFT OUTER JOIN인 테이블은 TAB3이므로 TAB1과 TAB3의 관계에만 TAB3의 컬럼에 (+)를 붙여주면 된다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT * \n  FROM TAB1 JOIN TAB2 \n     ON TAB1.COL1 = TAB2.COL1 \n        LEFT OUTER JOIN TAB3 \n     ON TAB1.COL2 = TAB3.COL2;"
+          "type": "sql",
+          "code": "SELECT * \n  FROM TAB1 JOIN TAB2 \n     ON TAB1.COL1 = TAB2.COL1 \n        LEFT OUTER JOIN TAB3 \n     ON TAB1.COL2 = TAB3.COL2;"
         }
       ]
     },
@@ -24181,8 +24241,8 @@
       "explanation": "COUNT(*)는 모든 컬럼의 값이 NULL일 때만 제외한다. COL1+COL2+COL3은 각 행마다 NULL을 포함하므로 모든 행이 값이 NULL이 된다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT COUNT(*) C1, COUNT(COL1) C2, SUM(COL2) C3 , SUM(COL1+COL2+COL3) C4 FROM TAB1;"
+          "type": "sql",
+          "code": "SELECT COUNT(*) C1, COUNT(COL1) C2, SUM(COL2) C3 , SUM(COL1+COL2+COL3) C4 FROM TAB1;"
         },
         {
           "type": "table",
@@ -26103,8 +26163,8 @@
       "explanation": "A.ID=1은 LEFT JOIN 후 B가 없어 조건을 만족하고, A.ID=3은 이름이 G로 시작하므로 조건을 만족한다. 총 2행이다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT COUNT(*)\nFROM A a\nLEFT JOIN B b\n  ON a.id = b.id\nWHERE b.id IS NULL\n   OR a.name LIKE 'G%';"
+          "type": "sql",
+          "code": "SELECT COUNT(*)\nFROM A a\nLEFT JOIN B b\n  ON a.id = b.id\nWHERE b.id IS NULL\n   OR a.name LIKE 'G%';"
         },
         {
           "type": "table",
@@ -26235,8 +26295,8 @@
       "explanation": "INNER JOIN은 조인 조건에 일치하는 행만 반환한다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT * FROM A JOIN B ON A.ID = B.ID;"
+          "type": "sql",
+          "code": "SELECT * FROM A JOIN B ON A.ID = B.ID;"
         },
         {
           "type": "table",
@@ -26301,8 +26361,8 @@
       "explanation": "조건을 만족하며 JOIN되는 A.ID는 2와 3 두 개이므로 DISTINCT 개수는 2다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT COUNT(DISTINCT a.id)\nFROM A a\nJOIN B b\n  ON a.id = b.id\nWHERE a.id IN (\n  SELECT id\n  FROM B\n  WHERE id >= 2\n);"
+          "type": "sql",
+          "code": "SELECT COUNT(DISTINCT a.id)\nFROM A a\nJOIN B b\n  ON a.id = b.id\nWHERE a.id IN (\n  SELECT id\n  FROM B\n  WHERE id >= 2\n);"
         },
         {
           "type": "table",
@@ -26425,8 +26485,8 @@
       "explanation": "RIGHT JOIN은 오른쪽 테이블 B의 모든 행을 유지한다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT NVL(TO_CHAR(a.id), 'NO_A') AS a_id,\n       b.id AS b_id,\n       b.grade\nFROM A a\nRIGHT OUTER JOIN B b\n  ON a.id = b.id\nORDER BY b.id;"
+          "type": "sql",
+          "code": "SELECT NVL(TO_CHAR(a.id), 'NO_A') AS a_id,\n       b.id AS b_id,\n       b.grade\nFROM A a\nRIGHT OUTER JOIN B b\n  ON a.id = b.id\nORDER BY b.id;"
         },
         {
           "type": "table",
@@ -26487,8 +26547,8 @@
       "explanation": "B와 매칭되지 않는 A 행만 남으므로 A.ID는 1과 3이다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT a.id,\n       COALESCE(b.grade, 'NONE') AS grade\nFROM A a\nLEFT OUTER JOIN B b\n  ON a.id = b.id\nWHERE b.id IS NULL\nORDER BY a.id;"
+          "type": "sql",
+          "code": "SELECT a.id,\n       COALESCE(b.grade, 'NONE') AS grade\nFROM A a\nLEFT OUTER JOIN B b\n  ON a.id = b.id\nWHERE b.id IS NULL\nORDER BY a.id;"
         },
         {
           "type": "table",
@@ -26607,8 +26667,8 @@
       "explanation": "DEV만 인원 수, 평균 급여, 고액 급여자 수 조건을 모두 만족한다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT dept\nFROM emp\nGROUP BY dept\nHAVING COUNT(*) >= 4\n   AND AVG(salary) > 3000\n   AND SUM(CASE WHEN salary >= 4000 THEN 1 ELSE 0 END) >= 2;"
+          "type": "sql",
+          "code": "SELECT dept\nFROM emp\nGROUP BY dept\nHAVING COUNT(*) >= 4\n   AND AVG(salary) > 3000\n   AND SUM(CASE WHEN salary >= 4000 THEN 1 ELSE 0 END) >= 2;"
         },
         {
           "type": "table",
@@ -26690,8 +26750,8 @@
       "explanation": "SALES와 DEV는 모두 급여 범위가 1000 이상이고 인원 수가 4명 이상이다. HR은 인원 수 조건을 만족하지 못한다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT dept\nFROM emp\nGROUP BY dept\nHAVING MAX(salary) - MIN(salary) >= 1000\n   AND COUNT(*) >= 4\nORDER BY dept;"
+          "type": "sql",
+          "code": "SELECT dept\nFROM emp\nGROUP BY dept\nHAVING MAX(salary) - MIN(salary) >= 1000\n   AND COUNT(*) >= 4\nORDER BY dept;"
         },
         {
           "type": "table",
@@ -26773,8 +26833,8 @@
       "explanation": "SALES의 최저급여는 2000이어서 제외되고 DEV와 HR만 남는다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT dept, COUNT(*) FROM emp GROUP BY dept HAVING MIN(salary) >= 2500;"
+          "type": "sql",
+          "code": "SELECT dept, COUNT(*) FROM emp GROUP BY dept HAVING MIN(salary) >= 2500;"
         },
         {
           "type": "table",
@@ -27014,8 +27074,8 @@
       "explanation": "NVL 적용 후 bonus 합계는 300이고, NULL이 아닌 salary 개수는 2이므로 결과는 302다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT SUM(NVL(bonus, 0)) + COUNT(salary) AS val\nFROM emp_null;"
+          "type": "sql",
+          "code": "SELECT SUM(NVL(bonus, 0)) + COUNT(salary) AS val\nFROM emp_null;"
         },
         {
           "type": "table",
@@ -27449,8 +27509,8 @@
       "explanation": "SALES에서는 3000, DEV에서는 5000만 두 조건을 모두 만족하므로 총 2명이다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT COUNT(*)\nFROM emp e\nWHERE e.salary > (\n        SELECT AVG(s.salary)\n        FROM emp s\n        WHERE s.dept = e.dept\n      )\n  AND e.salary >= (\n        SELECT MAX(s2.salary) - 500\n        FROM emp s2\n        WHERE s2.dept = e.dept\n      );"
+          "type": "sql",
+          "code": "SELECT COUNT(*)\nFROM emp e\nWHERE e.salary > (\n        SELECT AVG(s.salary)\n        FROM emp s\n        WHERE s.dept = e.dept\n      )\n  AND e.salary >= (\n        SELECT MAX(s2.salary) - 500\n        FROM emp s2\n        WHERE s2.dept = e.dept\n      );"
         },
         {
           "type": "table",
@@ -27502,8 +27562,8 @@
       "explanation": "SALES에서는 A(3000), DEV에서는 C(5000)만 평균보다 높다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT EMP_NAME, DEPT, SALARY\nFROM EMP E1\nWHERE SALARY > (\n    SELECT AVG(SALARY)\n    FROM EMP E2\n    WHERE E1.DEPT = E2.DEPT\n);"
+          "type": "sql",
+          "code": "SELECT EMP_NAME, DEPT, SALARY\nFROM EMP E1\nWHERE SALARY > (\n    SELECT AVG(SALARY)\n    FROM EMP E2\n    WHERE E1.DEPT = E2.DEPT\n);"
         },
         {
           "type": "table",
@@ -27555,8 +27615,8 @@
       "explanation": "WHERE s.dept = e.dept 조건에 따라 외부 행과 같은 부서만 집계된다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT AVG(salary) FROM emp s WHERE s.dept = e.dept"
+          "type": "sql",
+          "code": "SELECT AVG(salary) FROM emp s WHERE s.dept = e.dept"
         },
         {
           "type": "table",
@@ -27608,8 +27668,8 @@
       "explanation": "정답은 2번이다. 상관 서브쿼리는 부서별 평균처럼 먼저 집계 가능한 값을 파생 집합으로 만든 뒤, 원본 EMP와 부서 기준으로 조인하는 방식으로 자주 변환된다. 이 예시에서는 부서별 AVG(salary)를 구한 결과를 만든 뒤 EMP와 dept로 조인하고, 각 직원의 salary가 그 평균보다 큰 행만 고르면 된다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT e.emp_name, e.dept, e.salary\nFROM emp e\nWHERE e.salary > (\n  SELECT AVG(salary)\n  FROM emp\n  WHERE dept = e.dept\n);"
+          "type": "sql",
+          "code": "SELECT e.emp_name, e.dept, e.salary\nFROM emp e\nWHERE e.salary > (\n  SELECT AVG(salary)\n  FROM emp\n  WHERE dept = e.dept\n);"
         },
         {
           "type": "table",
@@ -27715,8 +27775,8 @@
       "explanation": "LEVEL 3의 말단 노드는 SALES_A, SALES_B, DEV_A, DEV_B 총 4개다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT emp_name,\n       LEVEL AS lv,\n       CONNECT_BY_ISLEAF AS is_leaf\nFROM emp_tree\nSTART WITH mgr_id IS NULL\nCONNECT BY PRIOR emp_id = mgr_id\nORDER SIBLINGS BY emp_name;"
+          "type": "sql",
+          "code": "SELECT emp_name,\n       LEVEL AS lv,\n       CONNECT_BY_ISLEAF AS is_leaf\nFROM emp_tree\nSTART WITH mgr_id IS NULL\nCONNECT BY PRIOR emp_id = mgr_id\nORDER SIBLINGS BY emp_name;"
         },
         {
           "type": "table",
@@ -27783,8 +27843,8 @@
       "explanation": "CEO 바로 아래 단계의 SALES_MGR와 DEV_MGR 두 행이 LEVEL 2다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT emp_id,\n       emp_name,\n       mgr_id,\n       LEVEL AS lv\nFROM emp_tree\nSTART WITH mgr_id IS NULL\nCONNECT BY PRIOR emp_id = mgr_id\nORDER SIBLINGS BY emp_name;"
+          "type": "sql",
+          "code": "SELECT emp_id,\n       emp_name,\n       mgr_id,\n       LEVEL AS lv\nFROM emp_tree\nSTART WITH mgr_id IS NULL\nCONNECT BY PRIOR emp_id = mgr_id\nORDER SIBLINGS BY emp_name;"
         },
         {
           "type": "table",
@@ -27851,8 +27911,8 @@
       "explanation": "루트 CEO에서 DEV_MGR을 거쳐 DEV_B로 내려가므로 경로는 CEO > DEV_MGR > DEV_B다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT emp_name,\n       LEVEL AS lv,\n       SYS_CONNECT_BY_PATH(emp_name, ' > ') AS path\nFROM emp_tree\nSTART WITH mgr_id IS NULL\nCONNECT BY PRIOR emp_id = mgr_id\nORDER SIBLINGS BY emp_name;"
+          "type": "sql",
+          "code": "SELECT emp_name,\n       LEVEL AS lv,\n       SYS_CONNECT_BY_PATH(emp_name, ' > ') AS path\nFROM emp_tree\nSTART WITH mgr_id IS NULL\nCONNECT BY PRIOR emp_id = mgr_id\nORDER SIBLINGS BY emp_name;"
         },
         {
           "type": "table",
@@ -27919,8 +27979,8 @@
       "explanation": "CONNECT_BY_ROOT는 현재 행이 속한 계층의 최상위 값을 반환하므로 DEV_A의 root_name은 CEO다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT CONNECT_BY_ROOT emp_name AS root_name,\n       emp_name,\n       LEVEL AS lv\nFROM emp_tree\nSTART WITH mgr_id IS NULL\nCONNECT BY PRIOR emp_id = mgr_id;"
+          "type": "sql",
+          "code": "SELECT CONNECT_BY_ROOT emp_name AS root_name,\n       emp_name,\n       LEVEL AS lv\nFROM emp_tree\nSTART WITH mgr_id IS NULL\nCONNECT BY PRIOR emp_id = mgr_id;"
         },
         {
           "type": "table",
@@ -27987,8 +28047,8 @@
       "explanation": "SALES의 Q1은 100, Q2는 120이므로 합계는 220이다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT dept, Q1, Q2\nFROM (\n  SELECT dept, quarter_cd, amount\n  FROM sales_q\n)\nPIVOT (\n  SUM(amount)\n  FOR quarter_cd IN ('Q1' AS Q1, 'Q2' AS Q2)\n)\nORDER BY dept;"
+          "type": "sql",
+          "code": "SELECT dept, Q1, Q2\nFROM (\n  SELECT dept, quarter_cd, amount\n  FROM sales_q\n)\nPIVOT (\n  SUM(amount)\n  FOR quarter_cd IN ('Q1' AS Q1, 'Q2' AS Q2)\n)\nORDER BY dept;"
         },
         {
           "type": "table",
@@ -28050,8 +28110,8 @@
       "explanation": "PIVOT은 quarter_cd 값(Q1, Q2)을 열 이름으로 바꾸고 amount를 집계해 표시한다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT dept, Q1, Q2\nFROM (\n  SELECT dept, quarter_cd, amount\n  FROM sales_q\n)\nPIVOT (\n  SUM(amount)\n  FOR quarter_cd IN ('Q1' AS Q1, 'Q2' AS Q2)\n);"
+          "type": "sql",
+          "code": "SELECT dept, Q1, Q2\nFROM (\n  SELECT dept, quarter_cd, amount\n  FROM sales_q\n)\nPIVOT (\n  SUM(amount)\n  FOR quarter_cd IN ('Q1' AS Q1, 'Q2' AS Q2)\n);"
         },
         {
           "type": "table",
@@ -28113,8 +28173,8 @@
       "explanation": "조건을 만족하는 행을 category 오름차순, amount 내림차순으로 정렬하면 가장 먼저 오는 행은 SEOUL, A, 150이다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT region,\n       category,\n       amount,\n       ROW_NUMBER() OVER (\n         ORDER BY category ASC, amount DESC, region ASC\n       ) AS rn\nFROM sales\nWHERE amount >= 100;"
+          "type": "sql",
+          "code": "SELECT region,\n       category,\n       amount,\n       ROW_NUMBER() OVER (\n         ORDER BY category ASC, amount DESC, region ASC\n       ) AS rn\nFROM sales\nWHERE amount >= 100;"
         },
         {
           "type": "table",
@@ -28166,8 +28226,8 @@
       "explanation": "조건을 만족하는 (region, category) 조합은 (SEOUL,A), (BUSAN,A), (SEOUL,B) 세 가지다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT COUNT(*)\nFROM (\n  SELECT DISTINCT region, category\n  FROM sales\n  WHERE amount >= 100\n) x;"
+          "type": "sql",
+          "code": "SELECT COUNT(*)\nFROM (\n  SELECT DISTINCT region, category\n  FROM sales\n  WHERE amount >= 100\n) x;"
         },
         {
           "type": "table",
@@ -28251,8 +28311,8 @@
       "explanation": "BUSAN 지역의 200점 두 행 중 두 번째 행만 ROW_NUMBER=3, RANK=2가 되어 rn과 rnk가 달라진다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT region,\n       seller,\n       amount,\n       ROW_NUMBER() OVER (\n         PARTITION BY region\n         ORDER BY amount DESC, seller ASC\n       ) AS rn,\n       RANK() OVER (\n         PARTITION BY region\n         ORDER BY amount DESC\n       ) AS rnk\nFROM sales_rank;"
+          "type": "sql",
+          "code": "SELECT region,\n       seller,\n       amount,\n       ROW_NUMBER() OVER (\n         PARTITION BY region\n         ORDER BY amount DESC, seller ASC\n       ) AS rn,\n       RANK() OVER (\n         PARTITION BY region\n         ORDER BY amount DESC\n       ) AS rnk\nFROM sales_rank;"
         },
         {
           "type": "table",
@@ -28471,8 +28531,8 @@
       "explanation": "ROLLUP의 최종 총계 행 한 건에서만 region과 product가 모두 집계 컬럼으로 처리되어 GROUPING 값이 1이 된다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT region,\n       product,\n       SUM(amount) AS amt,\n       GROUPING(region) AS gr,\n       GROUPING(product) AS gp\nFROM order_amt\nGROUP BY ROLLUP(region, product);"
+          "type": "sql",
+          "code": "SELECT region,\n       product,\n       SUM(amount) AS amt,\n       GROUPING(region) AS gr,\n       GROUPING(product) AS gp\nFROM order_amt\nGROUP BY ROLLUP(region, product);"
         },
         {
           "type": "table",
@@ -28622,8 +28682,8 @@
       "explanation": "MINUS는 중복 제거 후 차집합을 반환하므로 결과는 1과 3 두 행이다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT val\nFROM (\n  SELECT 1 AS val UNION ALL\n  SELECT 2 UNION ALL\n  SELECT 2 UNION ALL\n  SELECT 3\n) a\nMINUS\nSELECT val\nFROM (\n  SELECT 2 AS val UNION\n  SELECT 4\n) b;"
+          "type": "sql",
+          "code": "SELECT val\nFROM (\n  SELECT 1 AS val UNION ALL\n  SELECT 2 UNION ALL\n  SELECT 2 UNION ALL\n  SELECT 3\n) a\nMINUS\nSELECT val\nFROM (\n  SELECT 2 AS val UNION\n  SELECT 4\n) b;"
         }
       ]
     },
@@ -29186,8 +29246,8 @@
       "explanation": "먼저 두 테이블을 만든 뒤 ALTER TABLE로 EMP의 dept_id에 외래키를 추가하는 흐름이다.",
       "references": [
         {
-          "type": "text",
-          "content": "CREATE TABLE dept (\n  dept_id NUMBER PRIMARY KEY\n);\nCREATE TABLE emp (\n  emp_id NUMBER PRIMARY KEY,\n  dept_id NUMBER\n);\nALTER TABLE emp\nADD CONSTRAINT fk_emp_dept\nFOREIGN KEY (dept_id) REFERENCES dept(dept_id);"
+          "type": "sql",
+          "code": "CREATE TABLE dept (\n  dept_id NUMBER PRIMARY KEY\n);\nCREATE TABLE emp (\n  emp_id NUMBER PRIMARY KEY,\n  dept_id NUMBER\n);\nALTER TABLE emp\nADD CONSTRAINT fk_emp_dept\nFOREIGN KEY (dept_id) REFERENCES dept(dept_id);"
         }
       ]
     },
@@ -30192,8 +30252,8 @@
       "explanation": "INSERT ... SELECT는 조회 결과를 다른 테이블에 입력하는 DML이다.",
       "references": [
         {
-          "type": "text",
-          "content": "INSERT INTO emp_backup (emp_id, emp_name)\nSELECT emp_id, emp_name\nFROM emp\nWHERE dept = 'SALES';"
+          "type": "sql",
+          "code": "INSERT INTO emp_backup (emp_id, emp_name)\nSELECT emp_id, emp_name\nFROM emp\nWHERE dept = 'SALES';"
         }
       ]
     },
@@ -30214,8 +30274,8 @@
       "explanation": "DELETE는 WHERE 조건을 만족하는 행만 제거한다.",
       "references": [
         {
-          "type": "text",
-          "content": "DELETE FROM emp\nWHERE dept_id IS NULL;"
+          "type": "sql",
+          "code": "DELETE FROM emp\nWHERE dept_id IS NULL;"
         }
       ]
     },
@@ -30252,8 +30312,8 @@
       "explanation": "UPDATE는 WHERE 절이 없으면 전체 행에 적용된다.",
       "references": [
         {
-          "type": "text",
-          "content": "UPDATE emp\nSET status = 'Y';"
+          "type": "sql",
+          "code": "UPDATE emp\nSET status = 'Y';"
         }
       ]
     },
@@ -30274,8 +30334,8 @@
       "explanation": "산술 연산에 NULL이 포함되면 결과는 일반적으로 NULL이다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT 100 + NULL FROM dual;"
+          "type": "sql",
+          "code": "SELECT 100 + NULL FROM dual;"
         }
       ]
     },
@@ -30296,8 +30356,8 @@
       "explanation": "NVL은 NULL을 지정한 값으로 대체한다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT NVL(comm, 0) + sal FROM emp WHERE emp_id = 1;"
+          "type": "sql",
+          "code": "SELECT NVL(comm, 0) + sal FROM emp WHERE emp_id = 1;"
         }
       ]
     },
@@ -30318,8 +30378,8 @@
       "explanation": "COALESCE는 첫 번째 NULL이 아닌 값을 반환한다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT COALESCE(NULL, NULL, 5, 10) FROM dual;"
+          "type": "sql",
+          "code": "SELECT COALESCE(NULL, NULL, 5, 10) FROM dual;"
         }
       ]
     },
@@ -30492,8 +30552,8 @@
       "explanation": "SUBSTR는 시작 위치부터 지정한 길이만큼 문자열을 반환한다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT SUBSTR('SQLD', 2, 2) FROM dual;"
+          "type": "sql",
+          "code": "SELECT SUBSTR('SQLD', 2, 2) FROM dual;"
         }
       ]
     },
@@ -30514,8 +30574,8 @@
       "explanation": "INSTR의 네 번째 인수는 몇 번째 발생 위치를 찾을지 지정한다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT INSTR('SQLD SQL', 'SQL', 1, 2) FROM dual;"
+          "type": "sql",
+          "code": "SELECT INSTR('SQLD SQL', 'SQL', 1, 2) FROM dual;"
         }
       ]
     },
@@ -30536,8 +30596,8 @@
       "explanation": "TRUNC는 지정 자릿수 아래를 버린다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT TRUNC(845.56, 1) FROM dual;"
+          "type": "sql",
+          "code": "SELECT TRUNC(845.56, 1) FROM dual;"
         }
       ]
     },
@@ -30558,8 +30618,8 @@
       "explanation": "양쪽 공백 제거 후 SQLD의 길이는 4다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT LENGTH(TRIM(' SQLD ')) FROM dual;"
+          "type": "sql",
+          "code": "SELECT LENGTH(TRIM(' SQLD ')) FROM dual;"
         }
       ]
     },
@@ -30629,8 +30689,8 @@
       "explanation": "NULL을 0으로 바꾸면 100 + 200 + 0 + 0 이다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT SUM(NVL(bonus, 0)) FROM t;"
+          "type": "sql",
+          "code": "SELECT SUM(NVL(bonus, 0)) FROM t;"
         },
         {
           "type": "table",
@@ -30731,8 +30791,8 @@
       "explanation": "전체 4건 중 SALARY가 NULL이 아닌 값은 2건이므로 차이는 2다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT COUNT(*) - COUNT(salary) FROM t;"
+          "type": "sql",
+          "code": "SELECT COUNT(*) - COUNT(salary) FROM t;"
         },
         {
           "type": "table",
@@ -30784,8 +30844,8 @@
       "explanation": "COUNT(DISTINCT col)은 NULL을 제외한 서로 다른 값의 개수를 계산한다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT COUNT(DISTINCT dept) FROM emp;"
+          "type": "sql",
+          "code": "SELECT COUNT(DISTINCT dept) FROM emp;"
         }
       ]
     },
@@ -30806,8 +30866,8 @@
       "explanation": "UNION은 중복을 제거하므로 결과는 1, 2 두 행이다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT 1 AS n UNION\nSELECT 1 UNION\nSELECT 2;"
+          "type": "sql",
+          "code": "SELECT 1 AS n UNION\nSELECT 1 UNION\nSELECT 2;"
         }
       ]
     },
@@ -30828,8 +30888,8 @@
       "explanation": "UNION ALL은 중복을 제거하지 않으므로 세 행이 모두 유지된다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT 1 AS n UNION ALL\nSELECT 1 UNION ALL\nSELECT 2;"
+          "type": "sql",
+          "code": "SELECT 1 AS n UNION ALL\nSELECT 1 UNION ALL\nSELECT 2;"
         }
       ]
     },
@@ -30850,8 +30910,8 @@
       "explanation": "INTERSECT는 공통 집합만 반환하므로 2만 남는다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT 1 AS n UNION\nSELECT 2\nINTERSECT\nSELECT 2 AS n;"
+          "type": "sql",
+          "code": "SELECT 1 AS n UNION\nSELECT 2\nINTERSECT\nSELECT 2 AS n;"
         }
       ]
     },
@@ -30872,8 +30932,8 @@
       "explanation": "MINUS는 앞 집합에서 뒤 집합을 뺀 결과이므로 1만 남는다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT 1 AS n UNION\nSELECT 2\nMINUS\nSELECT 2 AS n;"
+          "type": "sql",
+          "code": "SELECT 1 AS n UNION\nSELECT 2\nMINUS\nSELECT 2 AS n;"
         }
       ]
     },
@@ -30910,8 +30970,8 @@
       "explanation": "루트 행은 LEVEL 1부터 시작한다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT emp_name, LEVEL\nFROM emp_tree\nSTART WITH mgr_id IS NULL\nCONNECT BY PRIOR emp_id = mgr_id;"
+          "type": "sql",
+          "code": "SELECT emp_name, LEVEL\nFROM emp_tree\nSTART WITH mgr_id IS NULL\nCONNECT BY PRIOR emp_id = mgr_id;"
         },
         {
           "type": "table",
@@ -30978,8 +31038,8 @@
       "explanation": "SALES_A, SALES_B, DEV_A, DEV_B 네 명이 리프 노드다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT COUNT(*)\nFROM (\n  SELECT emp_name, CONNECT_BY_ISLEAF AS is_leaf\n  FROM emp_tree\n  START WITH mgr_id IS NULL\n  CONNECT BY PRIOR emp_id = mgr_id\n) x\nWHERE is_leaf = 1;"
+          "type": "sql",
+          "code": "SELECT COUNT(*)\nFROM (\n  SELECT emp_name, CONNECT_BY_ISLEAF AS is_leaf\n  FROM emp_tree\n  START WITH mgr_id IS NULL\n  CONNECT BY PRIOR emp_id = mgr_id\n) x\nWHERE is_leaf = 1;"
         },
         {
           "type": "table",
@@ -31046,8 +31106,8 @@
       "explanation": "CONNECT_BY_ROOT는 현재 행이 속한 계층의 루트 값을 보여준다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT emp_name,\n       CONNECT_BY_ROOT emp_name AS root_name\nFROM emp_tree\nSTART WITH mgr_id IS NULL\nCONNECT BY PRIOR emp_id = mgr_id;"
+          "type": "sql",
+          "code": "SELECT emp_name,\n       CONNECT_BY_ROOT emp_name AS root_name\nFROM emp_tree\nSTART WITH mgr_id IS NULL\nCONNECT BY PRIOR emp_id = mgr_id;"
         },
         {
           "type": "table",
@@ -31201,8 +31261,8 @@
       "explanation": "PARTITION BY region은 지역별 합계를 같은 파티션의 모든 행에 보여준다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT region,\n       seller,\n       amount,\n       SUM(amount) OVER (PARTITION BY region) AS region_total\nFROM sales_rank;"
+          "type": "sql",
+          "code": "SELECT region,\n       seller,\n       amount,\n       SUM(amount) OVER (PARTITION BY region) AS region_total\nFROM sales_rank;"
         },
         {
           "type": "table",
@@ -31259,8 +31319,8 @@
       "explanation": "ORDER BY와 프레임 절을 함께 쓰면 누적 합계 같은 분석 계산이 가능하다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT region,\n       seller,\n       amount,\n       SUM(amount) OVER (\n         PARTITION BY region\n         ORDER BY amount DESC\n         ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW\n       ) AS run_amt\nFROM sales_rank;"
+          "type": "sql",
+          "code": "SELECT region,\n       seller,\n       amount,\n       SUM(amount) OVER (\n         PARTITION BY region\n         ORDER BY amount DESC\n         ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW\n       ) AS run_amt\nFROM sales_rank;"
         }
       ]
     },
@@ -31479,8 +31539,8 @@
       "explanation": "숫자가 아닌 문자를 모두 제거하면 하이픈 없는 숫자만 남는다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT REGEXP_REPLACE('010-1234-5678', '[^0-9]', '') FROM dual;"
+          "type": "sql",
+          "code": "SELECT REGEXP_REPLACE('010-1234-5678', '[^0-9]', '') FROM dual;"
         }
       ]
     },
@@ -31501,8 +31561,8 @@
       "explanation": "캡처 그룹 1을 반환하므로 @ 뒤의 도메인 부분만 추출된다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT REGEXP_SUBSTR('user@sqld.kr', '@(.+)$', 1, 1, NULL, 1) FROM dual;"
+          "type": "sql",
+          "code": "SELECT REGEXP_SUBSTR('user@sqld.kr', '@(.+)$', 1, 1, NULL, 1) FROM dual;"
         }
       ]
     },
@@ -31523,8 +31583,8 @@
       "explanation": "SALES의 Q1은 100, Q2는 120이므로 합계는 220이다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT dept, Q1, Q2\nFROM (\n  SELECT dept, quarter_cd, amount\n  FROM sales_q\n)\nPIVOT (\n  SUM(amount)\n  FOR quarter_cd IN ('Q1' AS Q1, 'Q2' AS Q2)\n)\nORDER BY dept;"
+          "type": "sql",
+          "code": "SELECT dept, Q1, Q2\nFROM (\n  SELECT dept, quarter_cd, amount\n  FROM sales_q\n)\nPIVOT (\n  SUM(amount)\n  FOR quarter_cd IN ('Q1' AS Q1, 'Q2' AS Q2)\n)\nORDER BY dept;"
         },
         {
           "type": "table",
@@ -31586,8 +31646,8 @@
       "explanation": "SUBSTR는 시작 위치부터 지정한 길이만큼 문자열을 반환한다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT SUBSTR('SQLD', 2, 2) FROM dual;"
+          "type": "sql",
+          "code": "SELECT SUBSTR('SQLD', 2, 2) FROM dual;"
         }
       ]
     },
@@ -31674,8 +31734,8 @@
       "explanation": "부서값은 SALES, DEV, HR 세 종류이므로 PIVOT 결과도 3행이다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT dept, Q1, Q2\nFROM (\n  SELECT dept, quarter_cd, amount\n  FROM sales_q\n)\nPIVOT (\n  SUM(amount)\n  FOR quarter_cd IN ('Q1' AS Q1, 'Q2' AS Q2)\n)\nORDER BY dept;"
+          "type": "sql",
+          "code": "SELECT dept, Q1, Q2\nFROM (\n  SELECT dept, quarter_cd, amount\n  FROM sales_q\n)\nPIVOT (\n  SUM(amount)\n  FOR quarter_cd IN ('Q1' AS Q1, 'Q2' AS Q2)\n)\nORDER BY dept;"
         },
         {
           "type": "table",
@@ -31847,8 +31907,8 @@
       "explanation": "행 기준 컬럼인 dept와 PIVOT으로 전개된 Q1, Q2 컬럼이 결과에 나타난다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT dept, Q1, Q2\nFROM (\n  SELECT dept, quarter_cd, amount\n  FROM sales_q\n)\nPIVOT (\n  SUM(amount)\n  FOR quarter_cd IN ('Q1' AS Q1, 'Q2' AS Q2)\n);"
+          "type": "sql",
+          "code": "SELECT dept, Q1, Q2\nFROM (\n  SELECT dept, quarter_cd, amount\n  FROM sales_q\n)\nPIVOT (\n  SUM(amount)\n  FOR quarter_cd IN ('Q1' AS Q1, 'Q2' AS Q2)\n);"
         },
         {
           "type": "table",
@@ -31910,8 +31970,8 @@
       "explanation": "ROUND(숫자, -1)은 일의 자리에서 반올림해 십의 자리까지 남긴다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT ROUND(845.56, -1) FROM dual;"
+          "type": "sql",
+          "code": "SELECT ROUND(845.56, -1) FROM dual;"
         }
       ]
     },
@@ -32020,8 +32080,8 @@
       "explanation": "숫자가 아닌 문자를 모두 제거하면 하이픈 없는 숫자만 남는다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT REGEXP_REPLACE('010-1234-5678', '[^0-9]', '') FROM dual;"
+          "type": "sql",
+          "code": "SELECT REGEXP_REPLACE('010-1234-5678', '[^0-9]', '') FROM dual;"
         }
       ]
     },
@@ -32042,8 +32102,8 @@
       "explanation": "TRUNC는 지정 자릿수 아래를 버린다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT TRUNC(845.56, 1) FROM dual;"
+          "type": "sql",
+          "code": "SELECT TRUNC(845.56, 1) FROM dual;"
         }
       ]
     },
@@ -32108,8 +32168,8 @@
       "explanation": "캡처 그룹 1을 반환하므로 @ 뒤의 도메인 부분만 추출된다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT REGEXP_SUBSTR('user@sqld.kr', '@(.+)$', 1, 1, NULL, 1) FROM dual;"
+          "type": "sql",
+          "code": "SELECT REGEXP_SUBSTR('user@sqld.kr', '@(.+)$', 1, 1, NULL, 1) FROM dual;"
         }
       ]
     },
@@ -32130,8 +32190,8 @@
       "explanation": "양쪽 공백 제거 후 SQLD의 길이는 4다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT LENGTH(TRIM(' SQLD ')) FROM dual;"
+          "type": "sql",
+          "code": "SELECT LENGTH(TRIM(' SQLD ')) FROM dual;"
         }
       ]
     },
@@ -32284,8 +32344,8 @@
       "explanation": "NVL 적용 후 bonus 합계는 300이고, NULL이 아닌 salary 개수는 2이므로 결과는 302다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT SUM(NVL(bonus, 0)) + COUNT(salary) AS val\nFROM emp_null;"
+          "type": "sql",
+          "code": "SELECT SUM(NVL(bonus, 0)) + COUNT(salary) AS val\nFROM emp_null;"
         },
         {
           "type": "table",
@@ -32359,8 +32419,8 @@
       "explanation": "먼저 두 테이블을 만든 뒤 ALTER TABLE로 EMP의 dept_id에 외래키를 추가하는 흐름이다.",
       "references": [
         {
-          "type": "text",
-          "content": "CREATE TABLE dept (\n  dept_id NUMBER PRIMARY KEY\n);\nCREATE TABLE emp (\n  emp_id NUMBER PRIMARY KEY,\n  dept_id NUMBER\n);\nALTER TABLE emp\nADD CONSTRAINT fk_emp_dept\nFOREIGN KEY (dept_id) REFERENCES dept(dept_id);"
+          "type": "sql",
+          "code": "CREATE TABLE dept (\n  dept_id NUMBER PRIMARY KEY\n);\nCREATE TABLE emp (\n  emp_id NUMBER PRIMARY KEY,\n  dept_id NUMBER\n);\nALTER TABLE emp\nADD CONSTRAINT fk_emp_dept\nFOREIGN KEY (dept_id) REFERENCES dept(dept_id);"
         }
       ]
     },
@@ -32381,8 +32441,8 @@
       "explanation": "조건을 만족하는 행을 category 오름차순, amount 내림차순으로 정렬하면 가장 먼저 오는 행은 SEOUL, A, 150이다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT region,\n       category,\n       amount,\n       ROW_NUMBER() OVER (\n         ORDER BY category ASC, amount DESC, region ASC\n       ) AS rn\nFROM sales\nWHERE amount >= 100;"
+          "type": "sql",
+          "code": "SELECT region,\n       category,\n       amount,\n       ROW_NUMBER() OVER (\n         ORDER BY category ASC, amount DESC, region ASC\n       ) AS rn\nFROM sales\nWHERE amount >= 100;"
         },
         {
           "type": "table",
@@ -32458,8 +32518,8 @@
       "explanation": "INNER JOIN으로 매칭되는 ID는 2와 3뿐이고 각 ID별 매칭 건수도 1건씩이므로 결과는 2행이다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT a.id,\n       COUNT(*) AS cnt\nFROM A a\nJOIN B b\n  ON a.id = b.id\nGROUP BY a.id\nHAVING COUNT(*) = 1\nORDER BY a.id;"
+          "type": "sql",
+          "code": "SELECT a.id,\n       COUNT(*) AS cnt\nFROM A a\nJOIN B b\n  ON a.id = b.id\nGROUP BY a.id\nHAVING COUNT(*) = 1\nORDER BY a.id;"
         },
         {
           "type": "table",
@@ -32524,8 +32584,8 @@
       "explanation": "SALES의 Q1은 100, Q2는 120이므로 합계는 220이다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT dept, Q1, Q2\nFROM (\n  SELECT dept, quarter_cd, amount\n  FROM sales_q\n)\nPIVOT (\n  SUM(amount)\n  FOR quarter_cd IN ('Q1' AS Q1, 'Q2' AS Q2)\n)\nORDER BY dept;"
+          "type": "sql",
+          "code": "SELECT dept, Q1, Q2\nFROM (\n  SELECT dept, quarter_cd, amount\n  FROM sales_q\n)\nPIVOT (\n  SUM(amount)\n  FOR quarter_cd IN ('Q1' AS Q1, 'Q2' AS Q2)\n)\nORDER BY dept;"
         },
         {
           "type": "table",
@@ -32609,8 +32669,8 @@
       "explanation": "DEV만 인원 수, 평균 급여, 고액 급여자 수 조건을 모두 만족한다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT dept\nFROM emp\nGROUP BY dept\nHAVING COUNT(*) >= 4\n   AND AVG(salary) > 3000\n   AND SUM(CASE WHEN salary >= 4000 THEN 1 ELSE 0 END) >= 2;"
+          "type": "sql",
+          "code": "SELECT dept\nFROM emp\nGROUP BY dept\nHAVING COUNT(*) >= 4\n   AND AVG(salary) > 3000\n   AND SUM(CASE WHEN salary >= 4000 THEN 1 ELSE 0 END) >= 2;"
         },
         {
           "type": "table",
@@ -32692,8 +32752,8 @@
       "explanation": "SUBSTR는 시작 위치부터 지정한 길이만큼 문자열을 반환한다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT SUBSTR('SQLD', 2, 2) FROM dual;"
+          "type": "sql",
+          "code": "SELECT SUBSTR('SQLD', 2, 2) FROM dual;"
         }
       ]
     },
@@ -32880,8 +32940,8 @@
       "explanation": "salary가 NULL인 행은 2,4번이고 bonus가 NULL인 행은 3,4번이므로 조건을 만족하는 행은 2,3,4번 총 3행이다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT COUNT(*)\nFROM emp_null\nWHERE NVL(salary, 0) = 0\n   OR bonus IS NULL;"
+          "type": "sql",
+          "code": "SELECT COUNT(*)\nFROM emp_null\nWHERE NVL(salary, 0) = 0\n   OR bonus IS NULL;"
         },
         {
           "type": "table",
@@ -32933,8 +32993,8 @@
       "explanation": "MINUS는 중복 제거 후 차집합을 반환하므로 결과는 1과 3 두 행이다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT val\nFROM (\n  SELECT 1 AS val UNION ALL\n  SELECT 2 UNION ALL\n  SELECT 2 UNION ALL\n  SELECT 3\n) a\nMINUS\nSELECT val\nFROM (\n  SELECT 2 AS val UNION\n  SELECT 4\n) b;"
+          "type": "sql",
+          "code": "SELECT val\nFROM (\n  SELECT 1 AS val UNION ALL\n  SELECT 2 UNION ALL\n  SELECT 2 UNION ALL\n  SELECT 3\n) a\nMINUS\nSELECT val\nFROM (\n  SELECT 2 AS val UNION\n  SELECT 4\n) b;"
         }
       ]
     },
@@ -32999,8 +33059,8 @@
       "explanation": "조건을 만족하는 (region, category) 조합은 (SEOUL,A), (BUSAN,A), (SEOUL,B) 세 가지다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT COUNT(*)\nFROM (\n  SELECT DISTINCT region, category\n  FROM sales\n  WHERE amount >= 100\n) x;"
+          "type": "sql",
+          "code": "SELECT COUNT(*)\nFROM (\n  SELECT DISTINCT region, category\n  FROM sales\n  WHERE amount >= 100\n) x;"
         },
         {
           "type": "table",
@@ -33076,8 +33136,8 @@
       "explanation": "A.ID=1은 LEFT JOIN 후 B가 없어 조건을 만족하고, A.ID=3은 이름이 G로 시작하므로 조건을 만족한다. 총 2행이다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT COUNT(*)\nFROM A a\nLEFT JOIN B b\n  ON a.id = b.id\nWHERE b.id IS NULL\n   OR a.name LIKE 'G%';"
+          "type": "sql",
+          "code": "SELECT COUNT(*)\nFROM A a\nLEFT JOIN B b\n  ON a.id = b.id\nWHERE b.id IS NULL\n   OR a.name LIKE 'G%';"
         },
         {
           "type": "table",
@@ -33164,8 +33224,8 @@
       "explanation": "부서값은 SALES, DEV, HR 세 종류이므로 PIVOT 결과도 3행이다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT dept, Q1, Q2\nFROM (\n  SELECT dept, quarter_cd, amount\n  FROM sales_q\n)\nPIVOT (\n  SUM(amount)\n  FOR quarter_cd IN ('Q1' AS Q1, 'Q2' AS Q2)\n)\nORDER BY dept;"
+          "type": "sql",
+          "code": "SELECT dept, Q1, Q2\nFROM (\n  SELECT dept, quarter_cd, amount\n  FROM sales_q\n)\nPIVOT (\n  SUM(amount)\n  FOR quarter_cd IN ('Q1' AS Q1, 'Q2' AS Q2)\n)\nORDER BY dept;"
         },
         {
           "type": "table",
@@ -33227,8 +33287,8 @@
       "explanation": "CEO 바로 아래 단계의 SALES_MGR와 DEV_MGR 두 행이 LEVEL 2다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT emp_id,\n       emp_name,\n       mgr_id,\n       LEVEL AS lv\nFROM emp_tree\nSTART WITH mgr_id IS NULL\nCONNECT BY PRIOR emp_id = mgr_id\nORDER SIBLINGS BY emp_name;"
+          "type": "sql",
+          "code": "SELECT emp_id,\n       emp_name,\n       mgr_id,\n       LEVEL AS lv\nFROM emp_tree\nSTART WITH mgr_id IS NULL\nCONNECT BY PRIOR emp_id = mgr_id\nORDER SIBLINGS BY emp_name;"
         },
         {
           "type": "table",
@@ -33295,8 +33355,8 @@
       "explanation": "SALES와 DEV는 모두 급여 범위가 1000 이상이고 인원 수가 4명 이상이다. HR은 인원 수 조건을 만족하지 못한다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT dept\nFROM emp\nGROUP BY dept\nHAVING MAX(salary) - MIN(salary) >= 1000\n   AND COUNT(*) >= 4\nORDER BY dept;"
+          "type": "sql",
+          "code": "SELECT dept\nFROM emp\nGROUP BY dept\nHAVING MAX(salary) - MIN(salary) >= 1000\n   AND COUNT(*) >= 4\nORDER BY dept;"
         },
         {
           "type": "table",
@@ -33378,8 +33438,8 @@
       "explanation": "INSTR의 네 번째 인수는 몇 번째 발생 위치를 찾을지 지정한다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT INSTR('SQLD SQL', 'SQL', 1, 2) FROM dual;"
+          "type": "sql",
+          "code": "SELECT INSTR('SQLD SQL', 'SQL', 1, 2) FROM dual;"
         }
       ]
     },
@@ -33777,8 +33837,8 @@
       "explanation": "amount가 100 미만인 행은 가장 뒤로 밀리며, 해당 조건에 해당하는 행은 INCHEON, B, 80 한 건뿐이다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT region,\n       category,\n       amount\nFROM sales\nORDER BY CASE WHEN amount >= 100 THEN 1 ELSE 2 END,\n         category DESC,\n         amount ASC,\n         region ASC;"
+          "type": "sql",
+          "code": "SELECT region,\n       category,\n       amount\nFROM sales\nORDER BY CASE WHEN amount >= 100 THEN 1 ELSE 2 END,\n         category DESC,\n         amount ASC,\n         region ASC;"
         },
         {
           "type": "table",
@@ -33942,8 +34002,8 @@
       "explanation": "행 기준 컬럼인 dept와 PIVOT으로 전개된 Q1, Q2 컬럼이 결과에 나타난다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT dept, Q1, Q2\nFROM (\n  SELECT dept, quarter_cd, amount\n  FROM sales_q\n)\nPIVOT (\n  SUM(amount)\n  FOR quarter_cd IN ('Q1' AS Q1, 'Q2' AS Q2)\n);"
+          "type": "sql",
+          "code": "SELECT dept, Q1, Q2\nFROM (\n  SELECT dept, quarter_cd, amount\n  FROM sales_q\n)\nPIVOT (\n  SUM(amount)\n  FOR quarter_cd IN ('Q1' AS Q1, 'Q2' AS Q2)\n);"
         },
         {
           "type": "table",
@@ -34005,8 +34065,8 @@
       "explanation": "루트 CEO에서 DEV_MGR을 거쳐 DEV_B로 내려가므로 경로는 CEO > DEV_MGR > DEV_B다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT emp_name,\n       LEVEL AS lv,\n       SYS_CONNECT_BY_PATH(emp_name, ' > ') AS path\nFROM emp_tree\nSTART WITH mgr_id IS NULL\nCONNECT BY PRIOR emp_id = mgr_id\nORDER SIBLINGS BY emp_name;"
+          "type": "sql",
+          "code": "SELECT emp_name,\n       LEVEL AS lv,\n       SYS_CONNECT_BY_PATH(emp_name, ' > ') AS path\nFROM emp_tree\nSTART WITH mgr_id IS NULL\nCONNECT BY PRIOR emp_id = mgr_id\nORDER SIBLINGS BY emp_name;"
         },
         {
           "type": "table",
@@ -34073,8 +34133,8 @@
       "explanation": "SALES의 최저급여는 2000이어서 제외되고 DEV와 HR만 남는다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT dept, COUNT(*) FROM emp GROUP BY dept HAVING MIN(salary) >= 2500;"
+          "type": "sql",
+          "code": "SELECT dept, COUNT(*) FROM emp GROUP BY dept HAVING MIN(salary) >= 2500;"
         },
         {
           "type": "table",
@@ -34156,8 +34216,8 @@
       "explanation": "ROUND(숫자, -1)은 일의 자리에서 반올림해 십의 자리까지 남긴다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT ROUND(845.56, -1) FROM dual;"
+          "type": "sql",
+          "code": "SELECT ROUND(845.56, -1) FROM dual;"
         }
       ]
     },
@@ -34436,8 +34496,8 @@
       "explanation": "숫자가 아닌 문자를 모두 제거하면 하이픈 없는 숫자만 남는다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT REGEXP_REPLACE('010-1234-5678', '[^0-9]', '') FROM dual;"
+          "type": "sql",
+          "code": "SELECT REGEXP_REPLACE('010-1234-5678', '[^0-9]', '') FROM dual;"
         }
       ]
     },
@@ -34709,8 +34769,8 @@
       "explanation": "CONNECT_BY_ROOT는 현재 행이 속한 계층의 최상위 값을 반환하므로 DEV_A의 root_name은 CEO다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT CONNECT_BY_ROOT emp_name AS root_name,\n       emp_name,\n       LEVEL AS lv\nFROM emp_tree\nSTART WITH mgr_id IS NULL\nCONNECT BY PRIOR emp_id = mgr_id;"
+          "type": "sql",
+          "code": "SELECT CONNECT_BY_ROOT emp_name AS root_name,\n       emp_name,\n       LEVEL AS lv\nFROM emp_tree\nSTART WITH mgr_id IS NULL\nCONNECT BY PRIOR emp_id = mgr_id;"
         },
         {
           "type": "table",
@@ -34856,8 +34916,8 @@
       "explanation": "TRUNC는 지정 자릿수 아래를 버린다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT TRUNC(845.56, 1) FROM dual;"
+          "type": "sql",
+          "code": "SELECT TRUNC(845.56, 1) FROM dual;"
         }
       ]
     },
@@ -35114,8 +35174,8 @@
       "explanation": "캡처 그룹 1을 반환하므로 @ 뒤의 도메인 부분만 추출된다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT REGEXP_SUBSTR('user@sqld.kr', '@(.+)$', 1, 1, NULL, 1) FROM dual;"
+          "type": "sql",
+          "code": "SELECT REGEXP_SUBSTR('user@sqld.kr', '@(.+)$', 1, 1, NULL, 1) FROM dual;"
         }
       ]
     },
@@ -35291,8 +35351,8 @@
       "explanation": "PIVOT은 quarter_cd 값(Q1, Q2)을 열 이름으로 바꾸고 amount를 집계해 표시한다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT dept, Q1, Q2\nFROM (\n  SELECT dept, quarter_cd, amount\n  FROM sales_q\n)\nPIVOT (\n  SUM(amount)\n  FOR quarter_cd IN ('Q1' AS Q1, 'Q2' AS Q2)\n);"
+          "type": "sql",
+          "code": "SELECT dept, Q1, Q2\nFROM (\n  SELECT dept, quarter_cd, amount\n  FROM sales_q\n)\nPIVOT (\n  SUM(amount)\n  FOR quarter_cd IN ('Q1' AS Q1, 'Q2' AS Q2)\n);"
         },
         {
           "type": "table",
@@ -35376,8 +35436,8 @@
       "explanation": "START WITH 절은 계층 탐색의 시작 행을 지정한다. mgr_id가 NULL인 CEO부터 트리가 전개된다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT emp_id,\n       emp_name,\n       LEVEL AS lv\nFROM emp_tree\nSTART WITH mgr_id IS NULL\nCONNECT BY PRIOR emp_id = mgr_id;"
+          "type": "sql",
+          "code": "SELECT emp_id,\n       emp_name,\n       LEVEL AS lv\nFROM emp_tree\nSTART WITH mgr_id IS NULL\nCONNECT BY PRIOR emp_id = mgr_id;"
         },
         {
           "type": "table",
@@ -35523,8 +35583,8 @@
       "explanation": "양쪽 공백 제거 후 SQLD의 길이는 4다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT LENGTH(TRIM(' SQLD ')) FROM dual;"
+          "type": "sql",
+          "code": "SELECT LENGTH(TRIM(' SQLD ')) FROM dual;"
         }
       ]
     },
@@ -35825,8 +35885,8 @@
       "explanation": "NULL을 0으로 바꾸면 100 + 200 + 0 + 0 이다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT SUM(NVL(bonus, 0)) FROM t;"
+          "type": "sql",
+          "code": "SELECT SUM(NVL(bonus, 0)) FROM t;"
         },
         {
           "type": "table",
@@ -35968,8 +36028,8 @@
       "explanation": "INSERT ... SELECT는 조회 결과를 다른 테이블에 입력하는 DML이다.",
       "references": [
         {
-          "type": "text",
-          "content": "INSERT INTO emp_backup (emp_id, emp_name)\nSELECT emp_id, emp_name\nFROM emp\nWHERE dept = 'SALES';"
+          "type": "sql",
+          "code": "INSERT INTO emp_backup (emp_id, emp_name)\nSELECT emp_id, emp_name\nFROM emp\nWHERE dept = 'SALES';"
         }
       ]
     },
@@ -36014,8 +36074,8 @@
       "explanation": "왼쪽 테이블 A의 3행이 모두 유지된다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT A.ID, B.GRADE FROM A LEFT JOIN B ON A.ID = B.ID;"
+          "type": "sql",
+          "code": "SELECT A.ID, B.GRADE FROM A LEFT JOIN B ON A.ID = B.ID;"
         },
         {
           "type": "table",
@@ -36114,8 +36174,8 @@
       "explanation": "루트 행은 LEVEL 1부터 시작한다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT emp_name, LEVEL\nFROM emp_tree\nSTART WITH mgr_id IS NULL\nCONNECT BY PRIOR emp_id = mgr_id;"
+          "type": "sql",
+          "code": "SELECT emp_name, LEVEL\nFROM emp_tree\nSTART WITH mgr_id IS NULL\nCONNECT BY PRIOR emp_id = mgr_id;"
         },
         {
           "type": "table",
@@ -36182,8 +36242,8 @@
       "explanation": "ROLLUP의 최종 총계 행 한 건에서만 region과 product가 모두 집계 컬럼으로 처리되어 GROUPING 값이 1이 된다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT region,\n       product,\n       SUM(amount) AS amt,\n       GROUPING(region) AS gr,\n       GROUPING(product) AS gp\nFROM order_amt\nGROUP BY ROLLUP(region, product);"
+          "type": "sql",
+          "code": "SELECT region,\n       product,\n       SUM(amount) AS amt,\n       GROUPING(region) AS gr,\n       GROUPING(product) AS gp\nFROM order_amt\nGROUP BY ROLLUP(region, product);"
         },
         {
           "type": "table",
@@ -36235,8 +36295,8 @@
       "explanation": "SUBSTR는 시작 위치부터 지정한 길이만큼 문자열을 반환한다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT SUBSTR('SQLD', 2, 2) FROM dual;"
+          "type": "sql",
+          "code": "SELECT SUBSTR('SQLD', 2, 2) FROM dual;"
         }
       ]
     },
@@ -36345,8 +36405,8 @@
       "explanation": "SALES에서는 3000, DEV에서는 5000만 두 조건을 모두 만족하므로 총 2명이다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT COUNT(*)\nFROM emp e\nWHERE e.salary > (\n        SELECT AVG(s.salary)\n        FROM emp s\n        WHERE s.dept = e.dept\n      )\n  AND e.salary >= (\n        SELECT MAX(s2.salary) - 500\n        FROM emp s2\n        WHERE s2.dept = e.dept\n      );"
+          "type": "sql",
+          "code": "SELECT COUNT(*)\nFROM emp e\nWHERE e.salary > (\n        SELECT AVG(s.salary)\n        FROM emp s\n        WHERE s.dept = e.dept\n      )\n  AND e.salary >= (\n        SELECT MAX(s2.salary) - 500\n        FROM emp s2\n        WHERE s2.dept = e.dept\n      );"
         },
         {
           "type": "table",
@@ -36420,8 +36480,8 @@
       "explanation": "SEOUL 지역에서 amount가 가장 큰 판매자는 KIM(500)이다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT region,\n       seller,\n       amount,\n       ROW_NUMBER() OVER (\n         PARTITION BY region\n         ORDER BY amount DESC, seller ASC\n       ) AS rn\nFROM sales_rank;"
+          "type": "sql",
+          "code": "SELECT region,\n       seller,\n       amount,\n       ROW_NUMBER() OVER (\n         PARTITION BY region\n         ORDER BY amount DESC, seller ASC\n       ) AS rn\nFROM sales_rank;"
         },
         {
           "type": "table",
@@ -36627,8 +36687,8 @@
       "explanation": "UNION은 중복을 제거하므로 결과는 1, 2 두 행이다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT 1 AS n UNION\nSELECT 1 UNION\nSELECT 2;"
+          "type": "sql",
+          "code": "SELECT 1 AS n UNION\nSELECT 1 UNION\nSELECT 2;"
         }
       ]
     },
@@ -36838,8 +36898,8 @@
       "explanation": "SALES_A, SALES_B, DEV_A, DEV_B 네 명이 리프 노드다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT COUNT(*)\nFROM (\n  SELECT emp_name, CONNECT_BY_ISLEAF AS is_leaf\n  FROM emp_tree\n  START WITH mgr_id IS NULL\n  CONNECT BY PRIOR emp_id = mgr_id\n) x\nWHERE is_leaf = 1;"
+          "type": "sql",
+          "code": "SELECT COUNT(*)\nFROM (\n  SELECT emp_name, CONNECT_BY_ISLEAF AS is_leaf\n  FROM emp_tree\n  START WITH mgr_id IS NULL\n  CONNECT BY PRIOR emp_id = mgr_id\n) x\nWHERE is_leaf = 1;"
         },
         {
           "type": "table",
@@ -37021,8 +37081,8 @@
       "explanation": "상관 서브쿼리는 각 사원의 부서별 최대 급여를 구한다. SALES 부서의 최대 급여는 3000(A)이고 DEV 부서의 최대 급여는 5000(C)이다. 여기에 AND SALARY > 4000 조건이 추가되므로 SALES의 A는 제외되고 DEV의 C만 남는다. 따라서 조회되는 사원 수는 1명이며 정답은 4번이다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT *\nFROM EMP e\nWHERE SALARY = (\n    SELECT MAX(SALARY)\n    FROM EMP\n    WHERE DEPT = e.DEPT\n)\nAND SALARY > 4000;"
+          "type": "sql",
+          "code": "SELECT *\nFROM EMP e\nWHERE SALARY = (\n    SELECT MAX(SALARY)\n    FROM EMP\n    WHERE DEPT = e.DEPT\n)\nAND SALARY > 4000;"
         },
         {
           "type": "table",
@@ -37218,8 +37278,8 @@
       "explanation": "전체 4건 중 SALARY가 NULL이 아닌 값은 2건이므로 차이는 2다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT COUNT(*) - COUNT(salary) FROM t;"
+          "type": "sql",
+          "code": "SELECT COUNT(*) - COUNT(salary) FROM t;"
         },
         {
           "type": "table",
@@ -37271,8 +37331,8 @@
       "explanation": "UNION ALL은 중복을 제거하지 않으므로 세 행이 모두 유지된다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT 1 AS n UNION ALL\nSELECT 1 UNION ALL\nSELECT 2;"
+          "type": "sql",
+          "code": "SELECT 1 AS n UNION ALL\nSELECT 1 UNION ALL\nSELECT 2;"
         }
       ]
     },
@@ -37359,8 +37419,8 @@
       "explanation": "DELETE는 WHERE 조건을 만족하는 행만 제거한다.",
       "references": [
         {
-          "type": "text",
-          "content": "DELETE FROM emp\nWHERE dept_id IS NULL;"
+          "type": "sql",
+          "code": "DELETE FROM emp\nWHERE dept_id IS NULL;"
         }
       ]
     },
@@ -37405,8 +37465,8 @@
       "explanation": "산술 연산에 NULL이 포함되면 결과는 일반적으로 NULL이다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT 100 + NULL FROM dual;"
+          "type": "sql",
+          "code": "SELECT 100 + NULL FROM dual;"
         }
       ]
     },
@@ -37427,8 +37487,8 @@
       "explanation": "행 기준 컬럼인 dept와 PIVOT으로 전개된 Q1, Q2 컬럼이 결과에 나타난다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT dept, Q1, Q2\nFROM (\n  SELECT dept, quarter_cd, amount\n  FROM sales_q\n)\nPIVOT (\n  SUM(amount)\n  FOR quarter_cd IN ('Q1' AS Q1, 'Q2' AS Q2)\n);"
+          "type": "sql",
+          "code": "SELECT dept, Q1, Q2\nFROM (\n  SELECT dept, quarter_cd, amount\n  FROM sales_q\n)\nPIVOT (\n  SUM(amount)\n  FOR quarter_cd IN ('Q1' AS Q1, 'Q2' AS Q2)\n);"
         },
         {
           "type": "table",
@@ -37490,8 +37550,8 @@
       "explanation": "SYS_CONNECT_BY_PATH는 루트부터 현재 노드까지의 경로를 문자열로 반환한다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT emp_name,\n       SYS_CONNECT_BY_PATH(emp_name, '/') AS path\nFROM emp_tree\nSTART WITH mgr_id IS NULL\nCONNECT BY PRIOR emp_id = mgr_id;"
+          "type": "sql",
+          "code": "SELECT emp_name,\n       SYS_CONNECT_BY_PATH(emp_name, '/') AS path\nFROM emp_tree\nSTART WITH mgr_id IS NULL\nCONNECT BY PRIOR emp_id = mgr_id;"
         },
         {
           "type": "table",
@@ -37558,8 +37618,8 @@
       "explanation": "ROUND(숫자, -1)은 일의 자리에서 반올림해 십의 자리까지 남긴다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT ROUND(845.56, -1) FROM dual;"
+          "type": "sql",
+          "code": "SELECT ROUND(845.56, -1) FROM dual;"
         }
       ]
     },
@@ -37717,8 +37777,8 @@
       "explanation": "PARTITION BY region은 지역별 합계를 같은 파티션의 모든 행에 보여준다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT region,\n       seller,\n       amount,\n       SUM(amount) OVER (PARTITION BY region) AS region_total\nFROM sales_rank;"
+          "type": "sql",
+          "code": "SELECT region,\n       seller,\n       amount,\n       SUM(amount) OVER (PARTITION BY region) AS region_total\nFROM sales_rank;"
         },
         {
           "type": "table",
@@ -37797,8 +37857,8 @@
       "explanation": "숫자가 아닌 문자를 모두 제거하면 하이픈 없는 숫자만 남는다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT REGEXP_REPLACE('010-1234-5678', '[^0-9]', '') FROM dual;"
+          "type": "sql",
+          "code": "SELECT REGEXP_REPLACE('010-1234-5678', '[^0-9]', '') FROM dual;"
         }
       ]
     },
@@ -37875,8 +37935,8 @@
       "explanation": "COUNT(DISTINCT col)은 NULL을 제외한 서로 다른 값의 개수를 계산한다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT COUNT(DISTINCT dept) FROM emp;"
+          "type": "sql",
+          "code": "SELECT COUNT(DISTINCT dept) FROM emp;"
         }
       ]
     },
@@ -37897,8 +37957,8 @@
       "explanation": "INTERSECT는 공통 집합만 반환하므로 2만 남는다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT 1 AS n UNION\nSELECT 2\nINTERSECT\nSELECT 2 AS n;"
+          "type": "sql",
+          "code": "SELECT 1 AS n UNION\nSELECT 2\nINTERSECT\nSELECT 2 AS n;"
         }
       ]
     },
@@ -38009,8 +38069,8 @@
       "explanation": "B와 매칭되지 않는 A 행만 남으므로 A.ID는 1과 3이다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT a.id,\n       COALESCE(b.grade, 'NONE') AS grade\nFROM A a\nLEFT OUTER JOIN B b\n  ON a.id = b.id\nWHERE b.id IS NULL\nORDER BY a.id;"
+          "type": "sql",
+          "code": "SELECT a.id,\n       COALESCE(b.grade, 'NONE') AS grade\nFROM A a\nLEFT OUTER JOIN B b\n  ON a.id = b.id\nWHERE b.id IS NULL\nORDER BY a.id;"
         },
         {
           "type": "table",
@@ -38071,8 +38131,8 @@
       "explanation": "NVL은 NULL을 지정한 값으로 대체한다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT NVL(comm, 0) + sal FROM emp WHERE emp_id = 1;"
+          "type": "sql",
+          "code": "SELECT NVL(comm, 0) + sal FROM emp WHERE emp_id = 1;"
         }
       ]
     },
@@ -38115,8 +38175,8 @@
       "explanation": "CONNECT_BY_ROOT는 현재 행이 속한 계층의 루트 값을 보여준다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT emp_name,\n       CONNECT_BY_ROOT emp_name AS root_name\nFROM emp_tree\nSTART WITH mgr_id IS NULL\nCONNECT BY PRIOR emp_id = mgr_id;"
+          "type": "sql",
+          "code": "SELECT emp_name,\n       CONNECT_BY_ROOT emp_name AS root_name\nFROM emp_tree\nSTART WITH mgr_id IS NULL\nCONNECT BY PRIOR emp_id = mgr_id;"
         },
         {
           "type": "table",
@@ -38232,8 +38292,8 @@
       "explanation": "TRUNC는 지정 자릿수 아래를 버린다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT TRUNC(845.56, 1) FROM dual;"
+          "type": "sql",
+          "code": "SELECT TRUNC(845.56, 1) FROM dual;"
         }
       ]
     },
@@ -38364,8 +38424,8 @@
       "explanation": "ORDER BY와 프레임 절을 함께 쓰면 누적 합계 같은 분석 계산이 가능하다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT region,\n       seller,\n       amount,\n       SUM(amount) OVER (\n         PARTITION BY region\n         ORDER BY amount DESC\n         ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW\n       ) AS run_amt\nFROM sales_rank;"
+          "type": "sql",
+          "code": "SELECT region,\n       seller,\n       amount,\n       SUM(amount) OVER (\n         PARTITION BY region\n         ORDER BY amount DESC\n         ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW\n       ) AS run_amt\nFROM sales_rank;"
         }
       ]
     },
@@ -38408,8 +38468,8 @@
       "explanation": "캡처 그룹 1을 반환하므로 @ 뒤의 도메인 부분만 추출된다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT REGEXP_SUBSTR('user@sqld.kr', '@(.+)$', 1, 1, NULL, 1) FROM dual;"
+          "type": "sql",
+          "code": "SELECT REGEXP_SUBSTR('user@sqld.kr', '@(.+)$', 1, 1, NULL, 1) FROM dual;"
         }
       ]
     },
@@ -38486,8 +38546,8 @@
       "explanation": "NVL 적용 후 bonus 합계는 300이고, NULL이 아닌 salary 개수는 2이므로 결과는 302다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT SUM(NVL(bonus, 0)) + COUNT(salary) AS val\nFROM emp_null;"
+          "type": "sql",
+          "code": "SELECT SUM(NVL(bonus, 0)) + COUNT(salary) AS val\nFROM emp_null;"
         },
         {
           "type": "table",
@@ -38539,8 +38599,8 @@
       "explanation": "MINUS는 앞 집합에서 뒤 집합을 뺀 결과이므로 1만 남는다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT 1 AS n UNION\nSELECT 2\nMINUS\nSELECT 2 AS n;"
+          "type": "sql",
+          "code": "SELECT 1 AS n UNION\nSELECT 2\nMINUS\nSELECT 2 AS n;"
         }
       ]
     },
@@ -38627,8 +38687,8 @@
       "explanation": "UPDATE는 WHERE 절이 없으면 전체 행에 적용된다.",
       "references": [
         {
-          "type": "text",
-          "content": "UPDATE emp\nSET status = 'Y';"
+          "type": "sql",
+          "code": "UPDATE emp\nSET status = 'Y';"
         }
       ]
     },
@@ -38711,8 +38771,8 @@
       "explanation": "PIVOT은 quarter_cd 값(Q1, Q2)을 열 이름으로 바꾸고 amount를 집계해 표시한다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT dept, Q1, Q2\nFROM (\n  SELECT dept, quarter_cd, amount\n  FROM sales_q\n)\nPIVOT (\n  SUM(amount)\n  FOR quarter_cd IN ('Q1' AS Q1, 'Q2' AS Q2)\n);"
+          "type": "sql",
+          "code": "SELECT dept, Q1, Q2\nFROM (\n  SELECT dept, quarter_cd, amount\n  FROM sales_q\n)\nPIVOT (\n  SUM(amount)\n  FOR quarter_cd IN ('Q1' AS Q1, 'Q2' AS Q2)\n);"
         },
         {
           "type": "table",
@@ -38867,8 +38927,8 @@
       "explanation": "양쪽 공백 제거 후 SQLD의 길이는 4다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT LENGTH(TRIM(' SQLD ')) FROM dual;"
+          "type": "sql",
+          "code": "SELECT LENGTH(TRIM(' SQLD ')) FROM dual;"
         }
       ]
     },
@@ -39148,8 +39208,8 @@
       "explanation": "salary가 NULL인 행은 2,4번이고 bonus가 NULL인 행은 3,4번이므로 조건을 만족하는 행은 2,3,4번 총 3행이다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT COUNT(*)\nFROM emp_null\nWHERE NVL(salary, 0) = 0\n   OR bonus IS NULL;"
+          "type": "sql",
+          "code": "SELECT COUNT(*)\nFROM emp_null\nWHERE NVL(salary, 0) = 0\n   OR bonus IS NULL;"
         },
         {
           "type": "table",
@@ -39267,8 +39327,8 @@
       "explanation": "먼저 두 테이블을 만든 뒤 ALTER TABLE로 EMP의 dept_id에 외래키를 추가하는 흐름이다.",
       "references": [
         {
-          "type": "text",
-          "content": "CREATE TABLE dept (\n  dept_id NUMBER PRIMARY KEY\n);\nCREATE TABLE emp (\n  emp_id NUMBER PRIMARY KEY,\n  dept_id NUMBER\n);\nALTER TABLE emp\nADD CONSTRAINT fk_emp_dept\nFOREIGN KEY (dept_id) REFERENCES dept(dept_id);"
+          "type": "sql",
+          "code": "CREATE TABLE dept (\n  dept_id NUMBER PRIMARY KEY\n);\nCREATE TABLE emp (\n  emp_id NUMBER PRIMARY KEY,\n  dept_id NUMBER\n);\nALTER TABLE emp\nADD CONSTRAINT fk_emp_dept\nFOREIGN KEY (dept_id) REFERENCES dept(dept_id);"
         }
       ]
     },
@@ -39289,8 +39349,8 @@
       "explanation": "조건을 만족하는 행을 category 오름차순, amount 내림차순으로 정렬하면 가장 먼저 오는 행은 SEOUL, A, 150이다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT region,\n       category,\n       amount,\n       ROW_NUMBER() OVER (\n         ORDER BY category ASC, amount DESC, region ASC\n       ) AS rn\nFROM sales\nWHERE amount >= 100;"
+          "type": "sql",
+          "code": "SELECT region,\n       category,\n       amount,\n       ROW_NUMBER() OVER (\n         ORDER BY category ASC, amount DESC, region ASC\n       ) AS rn\nFROM sales\nWHERE amount >= 100;"
         },
         {
           "type": "table",
@@ -39366,8 +39426,8 @@
       "explanation": "INNER JOIN으로 매칭되는 ID는 2와 3뿐이고 각 ID별 매칭 건수도 1건씩이므로 결과는 2행이다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT a.id,\n       COUNT(*) AS cnt\nFROM A a\nJOIN B b\n  ON a.id = b.id\nGROUP BY a.id\nHAVING COUNT(*) = 1\nORDER BY a.id;"
+          "type": "sql",
+          "code": "SELECT a.id,\n       COUNT(*) AS cnt\nFROM A a\nJOIN B b\n  ON a.id = b.id\nGROUP BY a.id\nHAVING COUNT(*) = 1\nORDER BY a.id;"
         },
         {
           "type": "table",
@@ -39432,8 +39492,8 @@
       "explanation": "COALESCE는 첫 번째 NULL이 아닌 값을 반환한다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT COALESCE(NULL, NULL, 5, 10) FROM dual;"
+          "type": "sql",
+          "code": "SELECT COALESCE(NULL, NULL, 5, 10) FROM dual;"
         }
       ]
     },
@@ -39454,8 +39514,8 @@
       "explanation": "SALES의 Q1은 100, Q2는 120이므로 합계는 220이다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT dept, Q1, Q2\nFROM (\n  SELECT dept, quarter_cd, amount\n  FROM sales_q\n)\nPIVOT (\n  SUM(amount)\n  FOR quarter_cd IN ('Q1' AS Q1, 'Q2' AS Q2)\n)\nORDER BY dept;"
+          "type": "sql",
+          "code": "SELECT dept, Q1, Q2\nFROM (\n  SELECT dept, quarter_cd, amount\n  FROM sales_q\n)\nPIVOT (\n  SUM(amount)\n  FOR quarter_cd IN ('Q1' AS Q1, 'Q2' AS Q2)\n)\nORDER BY dept;"
         },
         {
           "type": "table",
@@ -39539,8 +39599,8 @@
       "explanation": "LEVEL 3의 말단 노드는 SALES_A, SALES_B, DEV_A, DEV_B 총 4개다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT emp_name,\n       LEVEL AS lv,\n       CONNECT_BY_ISLEAF AS is_leaf\nFROM emp_tree\nSTART WITH mgr_id IS NULL\nCONNECT BY PRIOR emp_id = mgr_id\nORDER SIBLINGS BY emp_name;"
+          "type": "sql",
+          "code": "SELECT emp_name,\n       LEVEL AS lv,\n       CONNECT_BY_ISLEAF AS is_leaf\nFROM emp_tree\nSTART WITH mgr_id IS NULL\nCONNECT BY PRIOR emp_id = mgr_id\nORDER SIBLINGS BY emp_name;"
         },
         {
           "type": "table",
@@ -39607,8 +39667,8 @@
       "explanation": "DEV만 인원 수, 평균 급여, 고액 급여자 수 조건을 모두 만족한다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT dept\nFROM emp\nGROUP BY dept\nHAVING COUNT(*) >= 4\n   AND AVG(salary) > 3000\n   AND SUM(CASE WHEN salary >= 4000 THEN 1 ELSE 0 END) >= 2;"
+          "type": "sql",
+          "code": "SELECT dept\nFROM emp\nGROUP BY dept\nHAVING COUNT(*) >= 4\n   AND AVG(salary) > 3000\n   AND SUM(CASE WHEN salary >= 4000 THEN 1 ELSE 0 END) >= 2;"
         },
         {
           "type": "table",
@@ -39690,8 +39750,8 @@
       "explanation": "SUBSTR는 시작 위치부터 지정한 길이만큼 문자열을 반환한다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT SUBSTR('SQLD', 2, 2) FROM dual;"
+          "type": "sql",
+          "code": "SELECT SUBSTR('SQLD', 2, 2) FROM dual;"
         }
       ]
     },
@@ -39806,8 +39866,8 @@
       "explanation": "주문 건수가 2건 이상인 고객은 101 한 명뿐이므로 결과는 1이다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT COUNT(*)\nFROM customer c\nWHERE EXISTS (\n  SELECT 1\n  FROM orders o\n  WHERE o.customer_id = c.customer_id\n  GROUP BY o.customer_id\n  HAVING COUNT(*) >= 2\n);"
+          "type": "sql",
+          "code": "SELECT COUNT(*)\nFROM customer c\nWHERE EXISTS (\n  SELECT 1\n  FROM orders o\n  WHERE o.customer_id = c.customer_id\n  GROUP BY o.customer_id\n  HAVING COUNT(*) >= 2\n);"
         },
         {
           "type": "table",
@@ -39876,8 +39936,8 @@
       "explanation": "BUSAN 지역의 200점 두 행 중 두 번째 행만 ROW_NUMBER=3, RANK=2가 되어 rn과 rnk가 달라진다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT region,\n       seller,\n       amount,\n       ROW_NUMBER() OVER (\n         PARTITION BY region\n         ORDER BY amount DESC, seller ASC\n       ) AS rn,\n       RANK() OVER (\n         PARTITION BY region\n         ORDER BY amount DESC\n       ) AS rnk\nFROM sales_rank;"
+          "type": "sql",
+          "code": "SELECT region,\n       seller,\n       amount,\n       ROW_NUMBER() OVER (\n         PARTITION BY region\n         ORDER BY amount DESC, seller ASC\n       ) AS rn,\n       RANK() OVER (\n         PARTITION BY region\n         ORDER BY amount DESC\n       ) AS rnk\nFROM sales_rank;"
         },
         {
           "type": "table",
