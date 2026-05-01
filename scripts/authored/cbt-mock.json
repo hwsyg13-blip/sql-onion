@@ -1,7 +1,7 @@
 {
   "source": "cbt-yongjin-209",
   "version": 2,
-  "notes": "이기적 CBT, 영진닷컴 SQL 개발자 필기 모의고사 (license_no=73). 209문항 중 209건 변환 / 0건 스킵. 이미지 101장 → public/cbt-images/. PDF 기반 cbt-mock (v1, 162문항) 을 완전 교체.",
+  "notes": "이기적 CBT, 영진닷컴 SQL 개발자 필기 모의고사 (license_no=73). 209문항 중 209건 변환 / 0건 스킵. 이미지 101장 → public/cbt-images/. PDF 기반 cbt-mock (v1, 162문항) 을 완전 교체. | cbt-mock-conversions 101그룹 적용 (52 문항 변환). | cbt-mock-conversions 101그룹 적용 (5 문항 변환).",
   "schema": {
     "_id": "cbt-001 ~ cbt-NNN",
     "_source": "cbt-yongjin-209",
@@ -53,38 +53,119 @@
           "code": "SELECT NAME, ROW_NUMBER() OVER (ORDERBY SCORE DESC) AS RNFROM SCORES;"
         },
         {
-          "type": "image",
-          "src": "/cbt-images/cbt73-q002-p-1-c129ee1bb9.png",
-          "alt": "보기 자료 1"
+          "type": "table",
+          "caption": "[TB_SCORE] 테이블",
+          "headers": [
+            "NAME",
+            "SCORE"
+          ],
+          "rows": [
+            [
+              "A",
+              "90"
+            ],
+            [
+              "B",
+              "85"
+            ],
+            [
+              "C",
+              "90"
+            ]
+          ]
         }
       ],
       "optionReferences": [
         [
           {
-            "type": "image",
-            "src": "/cbt-images/cbt73-q002-c1-1-a193ca4f79.png",
-            "alt": "보기 1 이미지"
+            "type": "table",
+            "headers": [
+              "NAME",
+              "RN"
+            ],
+            "rows": [
+              [
+                "A",
+                "1"
+              ],
+              [
+                "C",
+                "1"
+              ],
+              [
+                "B",
+                "3"
+              ]
+            ]
           }
         ],
         [
           {
-            "type": "image",
-            "src": "/cbt-images/cbt73-q002-c2-1-0667d9d3d3.png",
-            "alt": "보기 2 이미지"
+            "type": "table",
+            "headers": [
+              "NAME",
+              "RN"
+            ],
+            "rows": [
+              [
+                "C",
+                "1"
+              ],
+              [
+                "A",
+                "1"
+              ],
+              [
+                "B",
+                "2"
+              ]
+            ]
           }
         ],
         [
           {
-            "type": "image",
-            "src": "/cbt-images/cbt73-q002-c3-1-528831a94b.png",
-            "alt": "보기 3 이미지"
+            "type": "table",
+            "headers": [
+              "NAME",
+              "RN"
+            ],
+            "rows": [
+              [
+                "B",
+                "1"
+              ],
+              [
+                "A",
+                "2"
+              ],
+              [
+                "C",
+                "3"
+              ]
+            ]
           }
         ],
         [
           {
-            "type": "image",
-            "src": "/cbt-images/cbt73-q002-c4-1-3e5d107cce.png",
-            "alt": "보기 4 이미지"
+            "type": "table",
+            "headers": [
+              "NAME",
+              "RN"
+            ],
+            "rows": [
+              [
+                "A",
+                "1"
+              ],
+              [
+                "C",
+                "2"
+              ],
+              [
+                "B",
+                "3"
+              ]
+            ]
           }
         ]
       ]
@@ -142,9 +223,25 @@
           "code": "SELECT COUNT(SALARY), SUM(SALARY),AVG(SALARY)FROM EMPLOYEE;"
         },
         {
-          "type": "image",
-          "src": "/cbt-images/cbt73-q005-p-1-0f126e0b43.png",
-          "alt": "보기 자료 1"
+          "type": "table",
+          "caption": "[EMPLOYEE] 테이블",
+          "headers": [
+            "SALARY"
+          ],
+          "rows": [
+            [
+              "1000"
+            ],
+            [
+              "2000"
+            ],
+            [
+              "NULL"
+            ],
+            [
+              "3000"
+            ]
+          ]
         }
       ]
     },
@@ -331,14 +428,48 @@
           "code": "WITH REGION_TOTAL AS (SELECT REGION, SUM(AMOUNT) AS TOTALFROM TB_ORDERGROUP BY REGION)SELECT COUNT(*) FROM REGION_TOTALWHERE TOTAL > 1500;"
         },
         {
-          "type": "image",
-          "src": "/cbt-images/cbt73-q015-p-1-8f05d3a51b.png",
-          "alt": "보기 자료 1"
+          "type": "table",
+          "caption": "[TB_ORDER] 테이블",
+          "headers": [
+            "ORDER_ID",
+            "REGION",
+            "AMOUNT"
+          ],
+          "rows": [
+            [
+              "1",
+              "EAST",
+              "1000"
+            ],
+            [
+              "2",
+              "EAST",
+              "2000"
+            ],
+            [
+              "3",
+              "WEST",
+              "500"
+            ]
+          ]
         },
         {
-          "type": "image",
-          "src": "/cbt-images/cbt73-q015-e-1-9aaede65ae.png",
-          "alt": "해설 자료 1"
+          "type": "table",
+          "caption": "[REGION_TOTAL]",
+          "headers": [
+            "REGION",
+            "TOTAL"
+          ],
+          "rows": [
+            [
+              "EAST",
+              "3000"
+            ],
+            [
+              "WEST",
+              "500"
+            ]
+          ]
         }
       ]
     },
@@ -395,9 +526,26 @@
           "code": "SELECT USER_ID, SUM(AMOUNT)FROM TB_PURCHASEGROUP BY USER_ID;"
         },
         {
-          "type": "image",
-          "src": "/cbt-images/cbt73-q018-p-1-85828baa42.png",
-          "alt": "보기 자료 1"
+          "type": "table",
+          "caption": "[TB_PURCHASE] 테이블",
+          "headers": [
+            "USER_ID",
+            "AMOUNT"
+          ],
+          "rows": [
+            [
+              "U1",
+              "100"
+            ],
+            [
+              "U2",
+              "150"
+            ],
+            [
+              "U1",
+              "200"
+            ]
+          ]
         }
       ]
     },
@@ -498,9 +646,62 @@
       "explanation": "SELECT문을 보면 department로 GROUP BY한다. 그리면 총 3개의 그룹이 만들어진다. computer, physics, math이다. 3개의 그룹 중에서 개수가 2개 초과인 것을 조회하기 위해서 “HAVING count(*) > 2”문을 사용했다. 따라서 2개 초과인 것은 math이고 math는 총 3개가 있으므로 3이 된다.",
       "references": [
         {
-          "type": "image",
-          "src": "/cbt-images/cbt73-q024-p-1-605b855c16.png",
-          "alt": "보기 자료 1"
+          "type": "table",
+          "caption": "[student]",
+          "headers": [
+            "name",
+            "term",
+            "degree",
+            "department"
+          ],
+          "rows": [
+            [
+              "Kim",
+              "5",
+              "3.5",
+              "computer"
+            ],
+            [
+              "Lee",
+              "5",
+              "4",
+              "computer"
+            ],
+            [
+              "Park",
+              "7",
+              "2.5",
+              "physics"
+            ],
+            [
+              "Choi",
+              "7",
+              "2.8",
+              "physics"
+            ],
+            [
+              "Ryu",
+              "6",
+              "3",
+              "math"
+            ],
+            [
+              "Jo",
+              "3",
+              "3.5",
+              "math"
+            ],
+            [
+              "Yang",
+              "1",
+              "2",
+              "math"
+            ]
+          ]
+        },
+        {
+          "type": "sql",
+          "code": "SELECT count(*)\nFROM student\nGROUP BY department\nHAVING count(*) > 2;"
         }
       ]
     },
@@ -525,38 +726,145 @@
           "code": "[쿼리]SELECT NAME, GRADE, STATUSFROM TB_USERWHERE GRADE = 'A' OR GRADE = 'B' ANDSTATUS = 'ACTIVE';"
         },
         {
-          "type": "image",
-          "src": "/cbt-images/cbt73-q025-p-1-bbec4a26bb.png",
-          "alt": "보기 자료 1"
+          "type": "table",
+          "caption": "[TB_USER] 테이블",
+          "headers": [
+            "ID",
+            "NAME",
+            "GRADE",
+            "STATUS"
+          ],
+          "rows": [
+            [
+              "1",
+              "Kim",
+              "A",
+              "ACTIVE"
+            ],
+            [
+              "2",
+              "Lee",
+              "B",
+              "INACTIVE"
+            ],
+            [
+              "3",
+              "Park",
+              "A",
+              "INACTIVE"
+            ],
+            [
+              "4",
+              "Choi",
+              "C",
+              "ACTIVE"
+            ],
+            [
+              "5",
+              "Jang",
+              "B",
+              "ACTIVE"
+            ]
+          ]
         }
       ],
       "optionReferences": [
         [
           {
-            "type": "image",
-            "src": "/cbt-images/cbt73-q025-c1-1-c85d80225d.png",
-            "alt": "보기 1 이미지"
+            "type": "table",
+            "headers": [
+              "NAME",
+              "GRADE",
+              "STATUS"
+            ],
+            "rows": [
+              [
+                "Kim",
+                "A",
+                "ACTIVE"
+              ],
+              [
+                "Jang",
+                "B",
+                "ACTIVE"
+              ]
+            ]
           }
         ],
         [
           {
-            "type": "image",
-            "src": "/cbt-images/cbt73-q025-c2-1-286aa5bb37.png",
-            "alt": "보기 2 이미지"
+            "type": "table",
+            "headers": [
+              "NAME",
+              "GRADE",
+              "STATUS"
+            ],
+            "rows": [
+              [
+                "Kim",
+                "A",
+                "ACTIVE"
+              ],
+              [
+                "Park",
+                "A",
+                "INACTIVE"
+              ],
+              [
+                "Jang",
+                "B",
+                "ACTIVE"
+              ]
+            ]
           }
         ],
         [
           {
-            "type": "image",
-            "src": "/cbt-images/cbt73-q025-c3-1-f1dc097e1b.png",
-            "alt": "보기 3 이미지"
+            "type": "table",
+            "headers": [
+              "NAME",
+              "GRADE",
+              "STATUS"
+            ],
+            "rows": [
+              [
+                "Kim",
+                "A",
+                "ACTIVE"
+              ],
+              [
+                "Lee",
+                "B",
+                "INACTIVE"
+              ],
+              [
+                "Park",
+                "A",
+                "INACTIVE"
+              ],
+              [
+                "Jang",
+                "B",
+                "ACTIVE"
+              ]
+            ]
           }
         ],
         [
           {
-            "type": "image",
-            "src": "/cbt-images/cbt73-q025-c4-1-8644a56be1.png",
-            "alt": "보기 4 이미지"
+            "type": "table",
+            "headers": [
+              "NAME",
+              "GRADE",
+              "STATUS"
+            ],
+            "rows": [
+              [
+                "Jang",
+                "B",
+                "ACTIVE"
+              ]
+            ]
           }
         ]
       ]
@@ -636,19 +944,86 @@
           "code": "[쿼리] SELECT ENAME,(ㄱ)(ENAME) OVER (ORDER BY HIREDATE)AS PREV_EMP,(ㄴ)(ENAME) OVER (ORDER BY HIREDATE)AS NEXT_EMPFROM EMP;"
         },
         {
-          "type": "image",
-          "src": "/cbt-images/cbt73-q029-p-1-3ee7810114.png",
-          "alt": "보기 자료 1"
+          "type": "table",
+          "caption": "[EMP] 테이블",
+          "headers": [
+            "ENAME",
+            "HIREDATE"
+          ],
+          "rows": [
+            [
+              "KING",
+              "1981-11-17"
+            ],
+            [
+              "CLARK",
+              "1981-06-09"
+            ],
+            [
+              "MILLER",
+              "1982-01-23"
+            ],
+            [
+              "JONES",
+              "1981-04-02"
+            ]
+          ]
         },
         {
-          "type": "image",
-          "src": "/cbt-images/cbt73-q029-p-2-56440d2f7b.png",
-          "alt": "보기 자료 2"
+          "type": "table",
+          "caption": "[실행 결과]",
+          "headers": [
+            "ENAME",
+            "PREV_EMP",
+            "NEXT_EMP"
+          ],
+          "rows": [
+            [
+              "JONES",
+              "NULL",
+              "CLARK"
+            ],
+            [
+              "CLARK",
+              "JONES",
+              "KING"
+            ],
+            [
+              "KING",
+              "CLARK",
+              "MILLER"
+            ],
+            [
+              "MILLER",
+              "KING",
+              "NULL"
+            ]
+          ]
         },
         {
-          "type": "image",
-          "src": "/cbt-images/cbt73-q029-e-1-671f063eb9.png",
-          "alt": "해설 자료 1"
+          "type": "table",
+          "headers": [
+            "ENAME",
+            "HIREDATE"
+          ],
+          "rows": [
+            [
+              "JONES",
+              "1981-04-02"
+            ],
+            [
+              "CLARK",
+              "1981-06-09"
+            ],
+            [
+              "KING",
+              "1981-11-17"
+            ],
+            [
+              "MILLER",
+              "1982-01-23"
+            ]
+          ]
         }
       ]
     },
@@ -727,9 +1102,46 @@
           "code": "[쿼리][1] SELECT SUM(SAL + BONUS) FROM EMP WHERE DEPTNO = 10;[2] S E L E C T S U M(N V L(S A L, 0) + NVL(BONUS, 0)) FROM EMP;[3] SELECT SUM(SAL) + SUM(BONUS) FROM EMP ;"
         },
         {
-          "type": "image",
-          "src": "/cbt-images/cbt73-q033-p-1-5eca2459c5.png",
-          "alt": "보기 자료 1"
+          "type": "table",
+          "caption": "[EMP] 테이블",
+          "headers": [
+            "ENAME",
+            "SAL",
+            "BONUS",
+            "DEPTNO"
+          ],
+          "rows": [
+            [
+              "A",
+              "100",
+              "NULL",
+              "10"
+            ],
+            [
+              "B",
+              "NULL",
+              "20",
+              "10"
+            ],
+            [
+              "C",
+              "30",
+              "10",
+              "NULL"
+            ],
+            [
+              "D",
+              "50",
+              "30",
+              "20"
+            ],
+            [
+              "E",
+              "20",
+              "NULL",
+              "NULL"
+            ]
+          ]
         }
       ]
     },
@@ -750,9 +1162,31 @@
       "explanation": "정규 표현식을 사용할 때 ^는 시작을 의미, $는 끝을 의미한다. ‘^[AZ].*[0-9]$’는 대문자 알파벳으로 시작하고, 숫자로 끝나는 문자열을 의미한다. Oracle에서는 복잡한 문자열 패턴 매칭이 필요한 경우 REGEXP_LIKE를 반드시 사용해야 하며, LIKE는 단순한 와일드카드 (%, _)만 지원한다.",
       "references": [
         {
-          "type": "image",
-          "src": "/cbt-images/cbt73-q034-p-1-328fc10038.png",
-          "alt": "보기 자료 1"
+          "type": "table",
+          "caption": "[TB_USER] 테이블",
+          "headers": [
+            "USER_ID"
+          ],
+          "rows": [
+            [
+              "A123"
+            ],
+            [
+              "1ABC"
+            ],
+            [
+              "B5"
+            ],
+            [
+              "C_99"
+            ],
+            [
+              "DEND"
+            ],
+            [
+              "Z8"
+            ]
+          ]
         }
       ]
     },
@@ -863,32 +1297,84 @@
           "code": "SELECT *FROM TABWHERE COL1 IN (NULL, 'A', 'A', 'B');"
         },
         {
-          "type": "image",
-          "src": "/cbt-images/cbt73-q040-p-1-c5dff65b5a.png",
-          "alt": "보기 자료 1"
+          "type": "table",
+          "caption": "[TAB] 테이블",
+          "headers": [
+            "COL1"
+          ],
+          "rows": [
+            [
+              "A"
+            ],
+            [
+              "B"
+            ],
+            [
+              "NULL"
+            ],
+            [
+              "C"
+            ]
+          ]
         }
       ],
       "optionReferences": [
         [
           {
-            "type": "image",
-            "src": "/cbt-images/cbt73-q040-c1-1-4ce3c97ea9.png",
-            "alt": "보기 1 이미지"
+            "type": "table",
+            "headers": [
+              "COL1"
+            ],
+            "rows": [
+              [
+                "A"
+              ],
+              [
+                "A"
+              ],
+              [
+                "B"
+              ],
+              [
+                "NULL"
+              ]
+            ]
           }
         ],
         [],
         [
           {
-            "type": "image",
-            "src": "/cbt-images/cbt73-q040-c3-1-71d2c2e75b.png",
-            "alt": "보기 3 이미지"
+            "type": "table",
+            "headers": [
+              "COL1"
+            ],
+            "rows": [
+              [
+                "A"
+              ],
+              [
+                "B"
+              ],
+              [
+                "NULL"
+              ]
+            ]
           }
         ],
         [
           {
-            "type": "image",
-            "src": "/cbt-images/cbt73-q040-c4-1-6e63ca3c07.png",
-            "alt": "보기 4 이미지"
+            "type": "table",
+            "headers": [
+              "COL1"
+            ],
+            "rows": [
+              [
+                "A"
+              ],
+              [
+                "B"
+              ]
+            ]
           }
         ]
       ]
@@ -958,38 +1444,119 @@
           "code": "SELECT STUDENT,CASEWHEN SCORE >= 80 THEN 'PASS'WHEN SCORE IS NULL THEN 'NO DATA'ELSE 'FAIL'END AS RESULTFROM SCORE;"
         },
         {
-          "type": "image",
-          "src": "/cbt-images/cbt73-q043-p-1-6319e66a9a.png",
-          "alt": "보기 자료 1"
+          "type": "table",
+          "caption": "[SCORE] 테이블",
+          "headers": [
+            "STUDENT",
+            "SCORE"
+          ],
+          "rows": [
+            [
+              "A",
+              "85"
+            ],
+            [
+              "B",
+              "72"
+            ],
+            [
+              "C",
+              "NULL"
+            ]
+          ]
         }
       ],
       "optionReferences": [
         [
           {
-            "type": "image",
-            "src": "/cbt-images/cbt73-q043-c1-1-3fae9f07c6.png",
-            "alt": "보기 1 이미지"
+            "type": "table",
+            "headers": [
+              "STUDENT",
+              "RESULT"
+            ],
+            "rows": [
+              [
+                "A",
+                "PASS"
+              ],
+              [
+                "B",
+                "FAIL"
+              ],
+              [
+                "C",
+                "NO DATA"
+              ]
+            ]
           }
         ],
         [
           {
-            "type": "image",
-            "src": "/cbt-images/cbt73-q043-c2-1-4e7ec49952.png",
-            "alt": "보기 2 이미지"
+            "type": "table",
+            "headers": [
+              "STUDENT",
+              "RESULT"
+            ],
+            "rows": [
+              [
+                "A",
+                "PASS"
+              ],
+              [
+                "B",
+                "NO DATA"
+              ],
+              [
+                "C",
+                "FAIL"
+              ]
+            ]
           }
         ],
         [
           {
-            "type": "image",
-            "src": "/cbt-images/cbt73-q043-c3-1-481ec2ac69.png",
-            "alt": "보기 3 이미지"
+            "type": "table",
+            "headers": [
+              "STUDENT",
+              "RESULT"
+            ],
+            "rows": [
+              [
+                "A",
+                "FAIL"
+              ],
+              [
+                "B",
+                "PASS"
+              ],
+              [
+                "C",
+                "NO DATA"
+              ]
+            ]
           }
         ],
         [
           {
-            "type": "image",
-            "src": "/cbt-images/cbt73-q043-c4-1-94f8c56ec3.png",
-            "alt": "보기 4 이미지"
+            "type": "table",
+            "headers": [
+              "STUDENT",
+              "RESULT"
+            ],
+            "rows": [
+              [
+                "A",
+                "NO DATA"
+              ],
+              [
+                "B",
+                "PASS"
+              ],
+              [
+                "C",
+                "FAIL"
+              ]
+            ]
           }
         ]
       ]
@@ -1071,9 +1638,40 @@
       "explanation": "ALL 연산자는 서브쿼리(Subquery) 값 모두가 조건에 만족하면 True를 반환한다.",
       "references": [
         {
-          "type": "image",
-          "src": "/cbt-images/cbt73-q047-p-1-b00a51c52c.png",
-          "alt": "보기 자료 1"
+          "type": "table",
+          "headers": [
+            "DEPARTMENT_ID"
+          ],
+          "rows": [
+            [
+              "NULL"
+            ],
+            [
+              "10"
+            ],
+            [
+              "20"
+            ],
+            [
+              "30"
+            ],
+            [
+              "40"
+            ],
+            [
+              "50"
+            ],
+            [
+              "220"
+            ],
+            [
+              "230"
+            ]
+          ]
+        },
+        {
+          "type": "sql",
+          "code": "SELECT DISTINCT DEPARTMENT_ID\nFROM HR.EMPLOYEES A\nWHERE A.DEPARTMENT_ID <= ALL (30, 50);"
         }
       ]
     },
@@ -1132,9 +1730,29 @@
       "explanation": "위의 결과를 보면 EMPNO와 DEPTNO 각각에 서로 없는 것이 있다. 그래서 FULL OUTER JOIN이 된다.",
       "references": [
         {
-          "type": "image",
-          "src": "/cbt-images/cbt73-q050-p-1-0878cc10f6.png",
-          "alt": "보기 자료 1"
+          "type": "table",
+          "headers": [
+            "EMPNO",
+            "DEPTNO"
+          ],
+          "rows": [
+            [
+              "7902",
+              "20"
+            ],
+            [
+              "7934",
+              "10"
+            ],
+            [
+              "",
+              "40"
+            ],
+            [
+              "8031",
+              ""
+            ]
+          ]
         }
       ]
     },
@@ -1295,38 +1913,123 @@
           "code": "SELECT NAME, NVL(SALARY, 0) AS SALARYFROM EMP;"
         },
         {
-          "type": "image",
-          "src": "/cbt-images/cbt73-q058-p-1-ce9b42f7e5.png",
-          "alt": "보기 자료 1"
+          "type": "table",
+          "caption": "[EMP] 테이블",
+          "headers": [
+            "ID",
+            "NAME",
+            "SALARY"
+          ],
+          "rows": [
+            [
+              "1",
+              "Kim",
+              "3000"
+            ],
+            [
+              "2",
+              "Lee",
+              "4000"
+            ],
+            [
+              "3",
+              "Park",
+              "NULL"
+            ]
+          ]
         }
       ],
       "optionReferences": [
         [
           {
-            "type": "image",
-            "src": "/cbt-images/cbt73-q058-c1-1-dbe154b54e.png",
-            "alt": "보기 1 이미지"
+            "type": "table",
+            "headers": [
+              "NAME",
+              "SALARY"
+            ],
+            "rows": [
+              [
+                "Kim",
+                "3000"
+              ],
+              [
+                "Lee",
+                "4000"
+              ],
+              [
+                "Park",
+                "0"
+              ]
+            ]
           }
         ],
         [
           {
-            "type": "image",
-            "src": "/cbt-images/cbt73-q058-c2-1-7b9aa2723d.png",
-            "alt": "보기 2 이미지"
+            "type": "table",
+            "headers": [
+              "NAME",
+              "SALARY"
+            ],
+            "rows": [
+              [
+                "Kim",
+                "3000"
+              ],
+              [
+                "Lee",
+                "4000"
+              ],
+              [
+                "Park",
+                "NULL"
+              ]
+            ]
           }
         ],
         [
           {
-            "type": "image",
-            "src": "/cbt-images/cbt73-q058-c3-1-35ded5213b.png",
-            "alt": "보기 3 이미지"
+            "type": "table",
+            "headers": [
+              "NAME",
+              "SALARY"
+            ],
+            "rows": [
+              [
+                "Kim",
+                "0"
+              ],
+              [
+                "Lee",
+                "0"
+              ],
+              [
+                "Park",
+                "0"
+              ]
+            ]
           }
         ],
         [
           {
-            "type": "image",
-            "src": "/cbt-images/cbt73-q058-c4-1-2b6e526a31.png",
-            "alt": "보기 4 이미지"
+            "type": "table",
+            "headers": [
+              "NAME",
+              "NVL(SALARY, 0)"
+            ],
+            "rows": [
+              [
+                "Kim",
+                "3000"
+              ],
+              [
+                "Lee",
+                "4000"
+              ],
+              [
+                "Park",
+                "0"
+              ]
+            ]
           }
         ]
       ]
@@ -1406,9 +2109,35 @@
           "code": "SELECT COUNT(AGE) FROM TB_STUDENTWHERE AGE > 20 ;"
         },
         {
-          "type": "image",
-          "src": "/cbt-images/cbt73-q062-p-1-4be1f15a0f.png",
-          "alt": "보기 자료 1"
+          "type": "table",
+          "caption": "[TB_STUDENT] 테이블",
+          "headers": [
+            "ID",
+            "NAME",
+            "AGE"
+          ],
+          "rows": [
+            [
+              "1",
+              "Kim",
+              "20"
+            ],
+            [
+              "2",
+              "Lee",
+              "22"
+            ],
+            [
+              "3",
+              "Park",
+              "NULL"
+            ],
+            [
+              "4",
+              "Choi",
+              "21"
+            ]
+          ]
         }
       ]
     },
@@ -1451,9 +2180,115 @@
       "explanation": "DEPTNO로 조인을 하고 DNAME과 JOB으로 CUBE를 실행했다. CUBE는 전체합계와 각 칼럼별로 부분합계를 출력한다.",
       "references": [
         {
-          "type": "image",
-          "src": "/cbt-images/cbt73-q064-p-1-aa22374204.png",
-          "alt": "보기 자료 1"
+          "type": "table",
+          "caption": "[EMP TABLE]",
+          "headers": [
+            "DEPTNO",
+            "JOB",
+            "SAL"
+          ],
+          "rows": [
+            [
+              "20",
+              "CLERK",
+              "800"
+            ],
+            [
+              "30",
+              "SALESMAN",
+              "1600"
+            ],
+            [
+              "30",
+              "SALESMAN",
+              "1250"
+            ],
+            [
+              "20",
+              "MANAGER",
+              "2975"
+            ],
+            [
+              "30",
+              "SALESMAN",
+              "1250"
+            ],
+            [
+              "30",
+              "MANAGER",
+              "2850"
+            ],
+            [
+              "10",
+              "MANAGER",
+              "2450"
+            ],
+            [
+              "20",
+              "ANALYST",
+              "3000"
+            ],
+            [
+              "10",
+              "PRESIDENT",
+              "5000"
+            ],
+            [
+              "30",
+              "SALESMAN",
+              "1500"
+            ],
+            [
+              "20",
+              "CLERK",
+              "1100"
+            ],
+            [
+              "30",
+              "CLERK",
+              "950"
+            ],
+            [
+              "20",
+              "ANALYST",
+              "3000"
+            ],
+            [
+              "10",
+              "CLERK",
+              "1300"
+            ]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "[DEPT TABLE]",
+          "headers": [
+            "DEPTNO",
+            "DNAME"
+          ],
+          "rows": [
+            [
+              "10",
+              "ACCOUNTING"
+            ],
+            [
+              "20",
+              "RESEARCH"
+            ],
+            [
+              "30",
+              "SALES"
+            ],
+            [
+              "40",
+              "OPERATIONS"
+            ]
+          ]
+        },
+        {
+          "type": "sql",
+          "code": "SELECT DNAME, JOB, COUNT(*) \"Total Emp\", SUM(SAL) \"Total Sal\"\nFROM SCOTT.EMP A, SCOTT.DEPT B\nWHERE A.DEPTNO = B.DEPTNO\nGROUP BY CUBE(DNAME, JOB);"
         }
       ]
     },
@@ -1474,9 +2309,81 @@
       "explanation": "TAB1 테이블에는 행이 4개, TAB2 테이블에는 행이 3개가 있다. KEY 칼럼을 사용해서 INNER JOIN을 하면 같은 것만 찾는다. 따라서 TAB1와 TAB2 테이블의 KEY 칼럼에서 ‘B’와 ‘C’가 같기 때문에 2개의 행이 출력된다.",
       "references": [
         {
-          "type": "image",
-          "src": "/cbt-images/cbt73-q065-p-1-0f21f55181.png",
-          "alt": "보기 자료 1"
+          "type": "table",
+          "caption": "[TAB1]",
+          "headers": [
+            "COL1",
+            "COL2",
+            "KEY1"
+          ],
+          "rows": [
+            [
+              "BBB",
+              "123",
+              "B"
+            ],
+            [
+              "DDD",
+              "222",
+              "C"
+            ],
+            [
+              "EEE",
+              "233",
+              "D"
+            ],
+            [
+              "FFF",
+              "143",
+              "E"
+            ]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "[TAB2]",
+          "headers": [
+            "KEY2",
+            "COL1",
+            "COL2"
+          ],
+          "rows": [
+            [
+              "A",
+              "10",
+              "BC"
+            ],
+            [
+              "B",
+              "10",
+              "CD"
+            ],
+            [
+              "C",
+              "10",
+              "DE"
+            ]
+          ]
+        },
+        {
+          "type": "sql",
+          "code": "SELECT * FROM TAB1 A INNER JOIN TAB2 B ON (A.KEY1 = B.KEY2);"
+        },
+        {
+          "type": "sql",
+          "code": "SELECT * FROM TAB1 A LEFT OUTER JOIN TAB2 B ON (A.KEY1 = B.KEY2);"
+        },
+        {
+          "type": "sql",
+          "code": "SELECT * FROM TAB1 A RIGHT OUTER JOIN TAB2 B ON (A.KEY1 = B.KEY2);"
+        },
+        {
+          "type": "sql",
+          "code": "SELECT * FROM TAB1 A FULL OUTER JOIN TAB2 B ON (A.KEY1 = B.KEY2);"
+        },
+        {
+          "type": "sql",
+          "code": "SELECT * FROM TAB1 A CROSS JOIN TAB2 B;"
         }
       ]
     },
@@ -1501,43 +2408,151 @@
           "code": "SELECT CUSTOMER, TOTALFROM (SELECT CUSTOMER, SUM(AMOUNT) ASTOTALFROM TB_ORDERGROUP BY CUSTOMER)WHERE TOTAL > (SELECT AVG(AMOUNT) FROM TB_ORDER);"
         },
         {
-          "type": "image",
-          "src": "/cbt-images/cbt73-q066-p-1-1072242cb1.png",
-          "alt": "보기 자료 1"
+          "type": "table",
+          "caption": "[TB_ORDER] 테이블",
+          "headers": [
+            "ORDER_ID",
+            "CUSTOMER",
+            "AMOUNT"
+          ],
+          "rows": [
+            [
+              "1",
+              "A",
+              "3000"
+            ],
+            [
+              "2",
+              "A",
+              "4000"
+            ],
+            [
+              "3",
+              "B",
+              "1000"
+            ],
+            [
+              "4",
+              "C",
+              "5000"
+            ],
+            [
+              "5",
+              "C",
+              "6000"
+            ],
+            [
+              "6",
+              "D",
+              "1000"
+            ]
+          ]
         },
         {
-          "type": "image",
-          "src": "/cbt-images/cbt73-q066-e-1-92a88a1b51.png",
-          "alt": "해설 자료 1"
+          "type": "table",
+          "headers": [
+            "CUSTOMER",
+            "TOTAL"
+          ],
+          "rows": [
+            [
+              "A",
+              "7000"
+            ],
+            [
+              "B",
+              "1000"
+            ],
+            [
+              "C",
+              "11000"
+            ],
+            [
+              "D",
+              "1000"
+            ]
+          ]
         }
       ],
       "optionReferences": [
         [
           {
-            "type": "image",
-            "src": "/cbt-images/cbt73-q066-c1-1-5e72f18297.png",
-            "alt": "보기 1 이미지"
+            "type": "table",
+            "headers": [
+              "CUSTOMER",
+              "TOTAL"
+            ],
+            "rows": [
+              [
+                "A",
+                "7000"
+              ],
+              [
+                "B",
+                "1000"
+              ]
+            ]
           }
         ],
         [
           {
-            "type": "image",
-            "src": "/cbt-images/cbt73-q066-c2-1-703ffbbd82.png",
-            "alt": "보기 2 이미지"
+            "type": "table",
+            "headers": [
+              "CUSTOMER",
+              "TOTAL"
+            ],
+            "rows": [
+              [
+                "A",
+                "7000"
+              ],
+              [
+                "C",
+                "11000"
+              ]
+            ]
           }
         ],
         [
           {
-            "type": "image",
-            "src": "/cbt-images/cbt73-q066-c3-1-cdf2d6567c.png",
-            "alt": "보기 3 이미지"
+            "type": "table",
+            "headers": [
+              "CUSTOMER",
+              "TOTAL"
+            ],
+            "rows": [
+              [
+                "C",
+                "11000"
+              ],
+              [
+                "D",
+                "1000"
+              ]
+            ]
           }
         ],
         [
           {
-            "type": "image",
-            "src": "/cbt-images/cbt73-q066-c4-1-d3a07040f0.png",
-            "alt": "보기 4 이미지"
+            "type": "table",
+            "headers": [
+              "CUSTOMER",
+              "TOTAL"
+            ],
+            "rows": [
+              [
+                "A",
+                "7000"
+              ],
+              [
+                "B",
+                "1000"
+              ],
+              [
+                "C",
+                "11000"
+              ]
+            ]
           }
         ]
       ]
@@ -1561,7 +2576,8 @@
         {
           "type": "image",
           "src": "/cbt-images/cbt73-q067-p-1-a8434ce9fc.png",
-          "alt": "보기 자료 1"
+          "alt": "회원/회원연락처/회원연락처이력 ERD + 샘플 데이터",
+          "caption": null
         }
       ]
     },
@@ -1602,14 +2618,65 @@
           "code": "SELECT * FROM AFULL OUTER JOIN B ON A.ID = B.IDWHERE A.ID IS NULLOR B.ID IS NULL;"
         },
         {
-          "type": "image",
-          "src": "/cbt-images/cbt73-q069-p-1-06a133ad94.png",
-          "alt": "보기 자료 1"
+          "type": "table",
+          "caption": "[A] 테이블",
+          "headers": [
+            "ID"
+          ],
+          "rows": [
+            [
+              "1"
+            ],
+            [
+              "2"
+            ],
+            [
+              "3"
+            ]
+          ]
         },
         {
-          "type": "image",
-          "src": "/cbt-images/cbt73-q069-e-1-96acba3c9f.png",
-          "alt": "해설 자료 1"
+          "type": "table",
+          "caption": "[B] 테이블",
+          "headers": [
+            "ID"
+          ],
+          "rows": [
+            [
+              "2"
+            ],
+            [
+              "3"
+            ],
+            [
+              "4"
+            ]
+          ]
+        },
+        {
+          "type": "table",
+          "headers": [
+            "ID(A 테이블)",
+            "ID(B 테이블)"
+          ],
+          "rows": [
+            [
+              "1",
+              "NULL"
+            ],
+            [
+              "2",
+              "2"
+            ],
+            [
+              "3",
+              "3"
+            ],
+            [
+              "NULL",
+              "4"
+            ]
+          ]
         }
       ]
     },
@@ -1636,7 +2703,8 @@
         {
           "type": "image",
           "src": "/cbt-images/cbt73-q070-p-1-c6d2b6edd7.png",
-          "alt": "보기 자료 1"
+          "alt": "고객-주문 ERD (점선 = 비식별 관계)",
+          "caption": null
         }
       ]
     },
@@ -1769,9 +2837,40 @@
           "code": "SELECT NAME FROM STUDENT_AINTERSECTSELECT NAME FROM STUDENT_B;"
         },
         {
-          "type": "image",
-          "src": "/cbt-images/cbt73-q077-p-1-a4f2478644.png",
-          "alt": "보기 자료 1"
+          "type": "table",
+          "caption": "[STUDENT_A] 테이블",
+          "headers": [
+            "NAME"
+          ],
+          "rows": [
+            [
+              "Kim"
+            ],
+            [
+              "Lee"
+            ],
+            [
+              "Park"
+            ]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "[STUDENT_B] 테이블",
+          "headers": [
+            "NAME"
+          ],
+          "rows": [
+            [
+              "Lee"
+            ],
+            [
+              "Choi"
+            ],
+            [
+              "Park"
+            ]
+          ]
         }
       ]
     },
@@ -1830,9 +2929,12 @@
       "explanation": "정답은 2 번. (해설 미등록)",
       "references": [
         {
-          "type": "image",
-          "src": "/cbt-images/cbt73-q080-p-1-549936cc85.png",
-          "alt": "보기 자료 1"
+          "type": "sql",
+          "code": "create table 주문 (\n    주문번호    int            not null,\n    주문자명    varchar(40)    null,\n    주문금액    money          null,\n    주문일자    varchar(8)     null );"
+        },
+        {
+          "type": "sql",
+          "code": "create unique index 주문_pk on 주문 (주문번호);\ncreate index 주문_ind11 on 주문 (주문자명);\ncreate index 주문_ind12 on 주문 (주문일자, 주문금액);"
         }
       ]
     },
@@ -1937,38 +3039,165 @@
           "code": "SELECT REGION, AMOUNT, COUNT(*)FROM TB_SALEGROUP BY CUBE(REGION, AMOUNT);"
         },
         {
-          "type": "image",
-          "src": "/cbt-images/cbt73-q086-p-1-8ecbede4ab.png",
-          "alt": "보기 자료 1"
+          "type": "table",
+          "caption": "[TB_SALE] 테이블",
+          "headers": [
+            "REGION",
+            "AMOUNT"
+          ],
+          "rows": [
+            [
+              "EAST",
+              "1000"
+            ],
+            [
+              "WEST",
+              "2000"
+            ],
+            [
+              "EAST",
+              "1000"
+            ]
+          ]
         }
       ],
       "optionReferences": [
         [
           {
-            "type": "image",
-            "src": "/cbt-images/cbt73-q086-c1-1-634907af7d.png",
-            "alt": "보기 1 이미지"
+            "type": "table",
+            "headers": [
+              "REGION",
+              "AMOUNT",
+              "COUNT(*)"
+            ],
+            "rows": [
+              [
+                "EAST",
+                "1000",
+                "2"
+              ],
+              [
+                "EAST",
+                "NULL",
+                "2"
+              ],
+              [
+                "WEST",
+                "2000",
+                "1"
+              ],
+              [
+                "WEST",
+                "NULL",
+                "1"
+              ],
+              [
+                "NULL",
+                "NULL",
+                "3"
+              ]
+            ]
           }
         ],
         [
           {
-            "type": "image",
-            "src": "/cbt-images/cbt73-q086-c2-1-0ae78023bd.png",
-            "alt": "보기 2 이미지"
+            "type": "table",
+            "headers": [
+              "REGION",
+              "AMOUNT",
+              "COUNT(*)"
+            ],
+            "rows": [
+              [
+                "EAST",
+                "1000",
+                "2"
+              ],
+              [
+                "WEST",
+                "2000",
+                "1"
+              ],
+              [
+                "EAST",
+                "NULL",
+                "2"
+              ],
+              [
+                "WEST",
+                "NULL",
+                "1"
+              ],
+              [
+                "NULL",
+                "1000",
+                "2"
+              ],
+              [
+                "NULL",
+                "2000",
+                "1"
+              ],
+              [
+                "NULL",
+                "NULL",
+                "3"
+              ]
+            ]
           }
         ],
         [
           {
-            "type": "image",
-            "src": "/cbt-images/cbt73-q086-c3-1-5bd6e499e2.png",
-            "alt": "보기 3 이미지"
+            "type": "table",
+            "headers": [
+              "REGION",
+              "AMOUNT",
+              "COUNT(*)"
+            ],
+            "rows": [
+              [
+                "EAST",
+                "1000",
+                "2"
+              ],
+              [
+                "WEST",
+                "2000",
+                "1"
+              ],
+              [
+                "EAST",
+                "NULL",
+                "2"
+              ],
+              [
+                "WEST",
+                "NULL",
+                "1"
+              ]
+            ]
           }
         ],
         [
           {
-            "type": "image",
-            "src": "/cbt-images/cbt73-q086-c4-1-419c898bc2.png",
-            "alt": "보기 4 이미지"
+            "type": "table",
+            "headers": [
+              "REGION",
+              "AMOUNT",
+              "COUNT(*)"
+            ],
+            "rows": [
+              [
+                "EAST",
+                "1000",
+                "2"
+              ],
+              [
+                "WEST",
+                "2000",
+                "1"
+              ]
+            ]
           }
         ]
       ]
@@ -1992,7 +3221,8 @@
         {
           "type": "image",
           "src": "/cbt-images/cbt73-q087-p-1-7c298b55f5.png",
-          "alt": "보기 자료 1"
+          "alt": "고객-리뷰 ERD (Barker 표기법)",
+          "caption": null
         }
       ]
     },
@@ -2163,38 +3393,170 @@
           "code": "[쿼리]SELECT *FROM (SELECT Player, Game, ScoreFROM TB_GAME_SCORE)PIVOT (MAX(Score) FOR Game IN ('Puzzle' AS Puzzle,'Shooter' AS Shooter,'Racing' AS Racing));"
         },
         {
-          "type": "image",
-          "src": "/cbt-images/cbt73-q096-p-1-968a15c116.png",
-          "alt": "보기 자료 1"
+          "type": "table",
+          "caption": "[TB_GAME_SCORE] 테이블",
+          "headers": [
+            "Player",
+            "Game",
+            "Score"
+          ],
+          "rows": [
+            [
+              "Alice",
+              "Puzzle",
+              "80"
+            ],
+            [
+              "Alice",
+              "Shooter",
+              "95"
+            ],
+            [
+              "Bob",
+              "Puzzle",
+              "70"
+            ],
+            [
+              "Bob",
+              "Racing",
+              "88"
+            ],
+            [
+              "Charlie",
+              "Shooter",
+              "90"
+            ],
+            [
+              "Charlie",
+              "Racing",
+              "85"
+            ]
+          ]
         }
       ],
       "optionReferences": [
         [
           {
-            "type": "image",
-            "src": "/cbt-images/cbt73-q096-c1-1-e438793817.png",
-            "alt": "보기 1 이미지"
+            "type": "table",
+            "headers": [
+              "Player",
+              "Puzzle",
+              "Shooter",
+              "Racing"
+            ],
+            "rows": [
+              [
+                "Alice",
+                "NULL",
+                "80",
+                "95"
+              ],
+              [
+                "Bob",
+                "NULL",
+                "70",
+                "88"
+              ],
+              [
+                "Charlie",
+                "85",
+                "90",
+                "NULL"
+              ]
+            ]
           }
         ],
         [
           {
-            "type": "image",
-            "src": "/cbt-images/cbt73-q096-c2-1-e570334a58.png",
-            "alt": "보기 2 이미지"
+            "type": "table",
+            "headers": [
+              "Player",
+              "Puzzle",
+              "Shooter",
+              "Racing"
+            ],
+            "rows": [
+              [
+                "Alice",
+                "80",
+                "95",
+                "NULL"
+              ],
+              [
+                "Bob",
+                "70",
+                "NULL",
+                "88"
+              ],
+              [
+                "Charlie",
+                "NULL",
+                "90",
+                "85"
+              ]
+            ]
           }
         ],
         [
           {
-            "type": "image",
-            "src": "/cbt-images/cbt73-q096-c3-1-d37c745d3f.png",
-            "alt": "보기 3 이미지"
+            "type": "table",
+            "headers": [
+              "Player",
+              "Puzzle",
+              "Shooter",
+              "Racing"
+            ],
+            "rows": [
+              [
+                "Alice",
+                "80",
+                "NULL",
+                "95"
+              ],
+              [
+                "Bob",
+                "NULL",
+                "70",
+                "88"
+              ],
+              [
+                "Charlie",
+                "NULL",
+                "NULL",
+                "NULL"
+              ]
+            ]
           }
         ],
         [
           {
-            "type": "image",
-            "src": "/cbt-images/cbt73-q096-c4-1-b44f00b3ae.png",
-            "alt": "보기 4 이미지"
+            "type": "table",
+            "headers": [
+              "Player",
+              "Puzzle",
+              "Shooter",
+              "Racing"
+            ],
+            "rows": [
+              [
+                "Alice",
+                "95",
+                "80",
+                "NULL"
+              ],
+              [
+                "Bob",
+                "88",
+                "70",
+                "NULL"
+              ],
+              [
+                "Charlie",
+                "85",
+                "90",
+                "NULL"
+              ]
+            ]
           }
         ]
       ]
@@ -2216,9 +3578,30 @@
       "explanation": "다른 것은 모두 NULL을 반환하는데 거래내역이 NULL인 고객의 수를 구해서 2를 반환한다.",
       "references": [
         {
-          "type": "image",
-          "src": "/cbt-images/cbt73-q097-p-1-60fa417f1f.png",
-          "alt": "보기 자료 1"
+          "type": "table",
+          "caption": "[SQLD_13]",
+          "headers": [
+            "고객",
+            "거래내역"
+          ],
+          "rows": [
+            [
+              "철수",
+              "100"
+            ],
+            [
+              "민정",
+              ""
+            ],
+            [
+              "아름",
+              "300"
+            ],
+            [
+              "예진",
+              ""
+            ]
+          ]
         }
       ]
     },
@@ -2399,9 +3782,40 @@
           "code": "SELECT CUSTOMER_ID, SUM(AMOUNT)FROM TB_ORDERGROUP BY CUSTOMER_IDHAVING SUM(AMOUNT) >= 2000;"
         },
         {
-          "type": "image",
-          "src": "/cbt-images/cbt73-q107-p-1-9352318ef9.png",
-          "alt": "보기 자료 1"
+          "type": "table",
+          "caption": "[TB_ORDER] 테이블",
+          "headers": [
+            "ORDER_ID",
+            "CUSTOMER_ID",
+            "AMOUNT"
+          ],
+          "rows": [
+            [
+              "1",
+              "A",
+              "1000"
+            ],
+            [
+              "2",
+              "A",
+              "1500"
+            ],
+            [
+              "3",
+              "B",
+              "700"
+            ],
+            [
+              "4",
+              "B",
+              "800"
+            ],
+            [
+              "5",
+              "C",
+              "NULL"
+            ]
+          ]
         }
       ]
     },
@@ -2442,38 +3856,159 @@
           "code": "SELECT NAME, DENSE_RANK() OVER (ORDERBY PRICE DESC) AS RNFROM TB_PRODUCT;"
         },
         {
-          "type": "image",
-          "src": "/cbt-images/cbt73-q109-p-1-3048a8dcf3.png",
-          "alt": "보기 자료 1"
+          "type": "table",
+          "caption": "[TB_PRODUCT] 테이블",
+          "headers": [
+            "NAME",
+            "PRICE"
+          ],
+          "rows": [
+            [
+              "A",
+              "100"
+            ],
+            [
+              "B",
+              "200"
+            ],
+            [
+              "C",
+              "100"
+            ],
+            [
+              "D",
+              "300"
+            ],
+            [
+              "E",
+              "50"
+            ]
+          ]
         }
       ],
       "optionReferences": [
         [
           {
-            "type": "image",
-            "src": "/cbt-images/cbt73-q109-c1-1-a2f268bf30.png",
-            "alt": "보기 1 이미지"
+            "type": "table",
+            "headers": [
+              "NAME",
+              "RN"
+            ],
+            "rows": [
+              [
+                "D",
+                "1"
+              ],
+              [
+                "B",
+                "2"
+              ],
+              [
+                "A",
+                "3"
+              ],
+              [
+                "C",
+                "3"
+              ],
+              [
+                "E",
+                "4"
+              ]
+            ]
           }
         ],
         [
           {
-            "type": "image",
-            "src": "/cbt-images/cbt73-q109-c2-1-2a75ba323d.png",
-            "alt": "보기 2 이미지"
+            "type": "table",
+            "headers": [
+              "NAME",
+              "RN"
+            ],
+            "rows": [
+              [
+                "D",
+                "1"
+              ],
+              [
+                "B",
+                "2"
+              ],
+              [
+                "A",
+                "3"
+              ],
+              [
+                "C",
+                "4"
+              ],
+              [
+                "E",
+                "5"
+              ]
+            ]
           }
         ],
         [
           {
-            "type": "image",
-            "src": "/cbt-images/cbt73-q109-c3-1-eb9616d1e5.png",
-            "alt": "보기 3 이미지"
+            "type": "table",
+            "headers": [
+              "NAME",
+              "RN"
+            ],
+            "rows": [
+              [
+                "D",
+                "1"
+              ],
+              [
+                "B",
+                "2"
+              ],
+              [
+                "A",
+                "3"
+              ],
+              [
+                "C",
+                "3"
+              ],
+              [
+                "E",
+                "5"
+              ]
+            ]
           }
         ],
         [
           {
-            "type": "image",
-            "src": "/cbt-images/cbt73-q109-c4-1-4e0cec66ee.png",
-            "alt": "보기 4 이미지"
+            "type": "table",
+            "headers": [
+              "NAME",
+              "RN"
+            ],
+            "rows": [
+              [
+                "D",
+                "1"
+              ],
+              [
+                "B",
+                "2"
+              ],
+              [
+                "A",
+                "3"
+              ],
+              [
+                "C",
+                "3"
+              ],
+              [
+                "E",
+                "3"
+              ]
+            ]
           }
         ]
       ]
@@ -2515,9 +4050,66 @@
           "code": "SELECT ORDER_IDFROM TB_ORDERWHERE CUST_ID NOT IN (SELECT CUST_IDFROM TB_CUSTOMERWHERE CITY = 'SEOUL');"
         },
         {
-          "type": "image",
-          "src": "/cbt-images/cbt73-q111-p-1-fca9b14636.png",
-          "alt": "보기 자료 1"
+          "type": "table",
+          "caption": "[TB_CUSTOMER] 테이블",
+          "headers": [
+            "CUST_ID",
+            "NAME",
+            "CITY"
+          ],
+          "rows": [
+            [
+              "1",
+              "Kim",
+              "SEOUL"
+            ],
+            [
+              "2",
+              "Lee",
+              "BUSAN"
+            ],
+            [
+              "3",
+              "Park",
+              "INCHEON"
+            ],
+            [
+              "4",
+              "Choi",
+              "SEOUL"
+            ]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "[TB_ORDER] 테이블",
+          "headers": [
+            "ORDER_ID",
+            "CUST_ID",
+            "AMOUNT"
+          ],
+          "rows": [
+            [
+              "101",
+              "1",
+              "1000"
+            ],
+            [
+              "102",
+              "2",
+              "2000"
+            ],
+            [
+              "103",
+              "3",
+              "3000"
+            ],
+            [
+              "104",
+              "4",
+              "4000"
+            ]
+          ]
         }
       ]
     },
@@ -2542,14 +4134,100 @@
           "code": "SELECT LEVEL, ENAME, MGRFROM EMPSTART WITH ENAME = 'KING'CONNECT BY PRIOR EMPNO = MGR;"
         },
         {
-          "type": "image",
-          "src": "/cbt-images/cbt73-q112-p-1-2e828facdf.png",
-          "alt": "보기 자료 1"
+          "type": "table",
+          "caption": "[EMP] 테이블",
+          "headers": [
+            "EMPNO",
+            "ENAME",
+            "MGR"
+          ],
+          "rows": [
+            [
+              "1001",
+              "KING",
+              "NULL"
+            ],
+            [
+              "1002",
+              "BLAKE",
+              "1001"
+            ],
+            [
+              "1003",
+              "CLARK",
+              "1001"
+            ],
+            [
+              "1004",
+              "JONES",
+              "1003"
+            ],
+            [
+              "1005",
+              "SMITH",
+              "1004"
+            ],
+            [
+              "1006",
+              "SCOTT",
+              "1002"
+            ],
+            [
+              "1007",
+              "JAMES",
+              "1006"
+            ],
+            [
+              "1008",
+              "FORD",
+              "NULL"
+            ]
+          ]
         },
         {
-          "type": "image",
-          "src": "/cbt-images/cbt73-q112-e-1-dea04d4284.png",
-          "alt": "해설 자료 1"
+          "type": "table",
+          "headers": [
+            "LEVEL",
+            "ENAME",
+            "MGR"
+          ],
+          "rows": [
+            [
+              "1",
+              "KING",
+              "NULL"
+            ],
+            [
+              "2",
+              "BLAKE",
+              "1001"
+            ],
+            [
+              "2",
+              "CLARK",
+              "1001"
+            ],
+            [
+              "3",
+              "SCOTT",
+              "1002"
+            ],
+            [
+              "3",
+              "JONES",
+              "1003"
+            ],
+            [
+              "4",
+              "JAMES",
+              "1006"
+            ],
+            [
+              "4",
+              "SMITH",
+              "1004"
+            ]
+          ]
         }
       ]
     },
@@ -2596,19 +4274,104 @@
           "code": "SELECT COUNT(*) FROM T1LEFT OUTER JOIN T2 ON T1.COL = T2.COLLEFT OUTER JOIN T3 ON T1.COL = T3.COLWHERE T2.COL IS NOT NULL ;"
         },
         {
-          "type": "image",
-          "src": "/cbt-images/cbt73-q114-p-1-0fb12d4079.png",
-          "alt": "보기 자료 1"
+          "type": "table",
+          "caption": "[T1] 테이블",
+          "headers": [
+            "COL"
+          ],
+          "rows": [
+            [
+              "1"
+            ],
+            [
+              "2"
+            ],
+            [
+              "3"
+            ]
+          ]
         },
         {
-          "type": "image",
-          "src": "/cbt-images/cbt73-q114-e-1-ded4bf737c.png",
-          "alt": "해설 자료 1"
+          "type": "table",
+          "caption": "[T2] 테이블",
+          "headers": [
+            "COL"
+          ],
+          "rows": [
+            [
+              "1"
+            ],
+            [
+              "2"
+            ],
+            [
+              "NULL"
+            ]
+          ]
         },
         {
-          "type": "image",
-          "src": "/cbt-images/cbt73-q114-e-2-dbd4cce3d6.png",
-          "alt": "해설 자료 2"
+          "type": "table",
+          "caption": "[T3] 테이블",
+          "headers": [
+            "COL"
+          ],
+          "rows": [
+            [
+              "1"
+            ],
+            [
+              "NULL"
+            ],
+            [
+              "NULL"
+            ]
+          ]
+        },
+        {
+          "type": "table",
+          "headers": [
+            "T1.COL",
+            "T2.COL"
+          ],
+          "rows": [
+            [
+              "1",
+              "1"
+            ],
+            [
+              "2",
+              "2"
+            ],
+            [
+              "3",
+              "NULL"
+            ]
+          ]
+        },
+        {
+          "type": "table",
+          "headers": [
+            "T1.COL",
+            "T2.COL",
+            "T3.COL"
+          ],
+          "rows": [
+            [
+              "1",
+              "1",
+              "1"
+            ],
+            [
+              "2",
+              "2",
+              "NULL"
+            ],
+            [
+              "3",
+              "NULL",
+              "NULL"
+            ]
+          ]
         }
       ]
     },
@@ -2669,7 +4432,8 @@
         {
           "type": "image",
           "src": "/cbt-images/cbt73-q117-p-1-20dfa60a01.png",
-          "alt": "보기 자료 1"
+          "alt": "수강_지도 — 결정자 {학번, 과목번호} → 종속자 {성적, 지도교수명, 학과명} (과목번호 → {지도교수명, 학과명})",
+          "caption": null
         }
       ]
     },
@@ -2728,9 +4492,56 @@
       "explanation": "주어진 SQL문에서 앞에 UNION 연산을 수행하면 1, 2, 3, 4, 5가 반환되고 이어서 minus를 수행하면 1, 3, 4, 5가 반환된다.",
       "references": [
         {
-          "type": "image",
-          "src": "/cbt-images/cbt73-q120-p-1-0a7ca3b427.png",
-          "alt": "보기 자료 1"
+          "type": "table",
+          "caption": "[A]",
+          "headers": [
+            "COL1"
+          ],
+          "rows": [
+            [
+              "1"
+            ],
+            [
+              "2"
+            ],
+            [
+              "3"
+            ],
+            [
+              "4"
+            ]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "[B]",
+          "headers": [
+            "COL1"
+          ],
+          "rows": [
+            [
+              "4"
+            ],
+            [
+              "5"
+            ]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "[C]",
+          "headers": [
+            "COL1"
+          ],
+          "rows": [
+            [
+              "2"
+            ]
+          ]
+        },
+        {
+          "type": "sql",
+          "code": "SELECT * FROM A\nUNION SELECT * FROM B\nMINUS SELECT * FROM C;"
         }
       ]
     },
@@ -2751,9 +4562,111 @@
       "explanation": "결괏값에서 중복된 등수 2등 다음에 바로 다음 등수인 3이 왔으므로 빈칸에는 DENSE_RANK가 와야 한다.",
       "references": [
         {
-          "type": "image",
-          "src": "/cbt-images/cbt73-q121-p-1-b9f0d5e00e.png",
-          "alt": "보기 자료 1"
+          "type": "table",
+          "caption": "[SQLD_29]",
+          "headers": [
+            "이름",
+            "부서",
+            "직책",
+            "급여"
+          ],
+          "rows": [
+            [
+              "조조",
+              "경영지원부",
+              "부장",
+              "300"
+            ],
+            [
+              "유비",
+              "경영지원부",
+              "과장",
+              "250"
+            ],
+            [
+              "제갈량",
+              "인사부",
+              "대리",
+              "250"
+            ],
+            [
+              "사마의",
+              "인사부",
+              "대리",
+              "200"
+            ],
+            [
+              "관우",
+              "영업부",
+              "사원",
+              "150"
+            ],
+            [
+              "장비",
+              "영업부",
+              "사원",
+              "100"
+            ]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "[결과]",
+          "headers": [
+            "순위",
+            "이름",
+            "부서",
+            "직책",
+            "급여"
+          ],
+          "rows": [
+            [
+              "1",
+              "조조",
+              "경영지원부",
+              "부장",
+              "300"
+            ],
+            [
+              "2",
+              "유비",
+              "경영지원부",
+              "과장",
+              "250"
+            ],
+            [
+              "2",
+              "제갈량",
+              "인사부",
+              "대리",
+              "250"
+            ],
+            [
+              "3",
+              "사마의",
+              "인사부",
+              "대리",
+              "200"
+            ],
+            [
+              "4",
+              "관우",
+              "영업부",
+              "사원",
+              "150"
+            ],
+            [
+              "5",
+              "장비",
+              "영업부",
+              "사원",
+              "100"
+            ]
+          ]
+        },
+        {
+          "type": "sql",
+          "code": "SELECT (    ) OVER (ORDER BY 급여 desc) as 순위,\n       이름, 부서, 직책, 급여\nFROM SQLD_29;"
         }
       ]
     },
@@ -2902,9 +4815,34 @@
       "explanation": "TX2의 update 문은 베타적 Lock 때문에 대기했다가 TX1 트랜잭션이 commit 한 후에 처리를 계속한다. TX1에 의해 1,100으로 바뀐 값을 읽어 200을 더하므로 최종 결과는 1,300이 된다.",
       "references": [
         {
-          "type": "image",
-          "src": "/cbt-images/cbt73-q130-p-1-4f03d61a83.png",
-          "alt": "보기 자료 1"
+          "type": "table",
+          "headers": [
+            "⟨TX1⟩",
+            "시점",
+            "⟨TX2⟩"
+          ],
+          "rows": [
+            [
+              "Update emp set sal = sal +100\nWhere empno = 7788;",
+              "T1",
+              ""
+            ],
+            [
+              "",
+              "T2",
+              "Update emp set sal = sal +200\nWhere empno = 7788;"
+            ],
+            [
+              "Commit;",
+              "T3",
+              ""
+            ],
+            [
+              "",
+              "T4",
+              "Commit;"
+            ]
+          ]
         }
       ]
     },
@@ -3015,14 +4953,57 @@
           "code": "SELECT *FROM EMPLOYEE EWHERE EXISTS (SELECT 1FROM SALARY SWHERE S.EMP_ID = E.EMP_IDAND S.AMOUNT IS NOT NULL);"
         },
         {
-          "type": "image",
-          "src": "/cbt-images/cbt73-q136-p-1-9c12072437.png",
-          "alt": "보기 자료 1"
+          "type": "table",
+          "caption": "[EMPLOYEE] 테이블",
+          "headers": [
+            "EMP_ID",
+            "NAME"
+          ],
+          "rows": [
+            [
+              "1",
+              "Kim"
+            ],
+            [
+              "2",
+              "Lee"
+            ],
+            [
+              "3",
+              "Park"
+            ]
+          ]
         },
         {
-          "type": "image",
-          "src": "/cbt-images/cbt73-q136-e-1-2607bf2896.png",
-          "alt": "해설 자료 1"
+          "type": "table",
+          "caption": "[SALARY] 테이블",
+          "headers": [
+            "EMP_ID",
+            "AMOUNT"
+          ],
+          "rows": [
+            [
+              "1",
+              "3000"
+            ],
+            [
+              "2",
+              "NULL"
+            ]
+          ]
+        },
+        {
+          "type": "table",
+          "headers": [
+            "EMP_ID",
+            "NAME"
+          ],
+          "rows": [
+            [
+              "1",
+              "Kim"
+            ]
+          ]
         }
       ]
     },
@@ -3237,9 +5218,78 @@
       "explanation": "정답은 1 번. (해설 미등록)",
       "references": [
         {
-          "type": "image",
-          "src": "/cbt-images/cbt73-q148-p-1-c643e0dbc5.png",
-          "alt": "보기 자료 1"
+          "type": "table",
+          "caption": "[employee]",
+          "headers": [
+            "eno",
+            "ename",
+            "address",
+            "score",
+            "dno"
+          ],
+          "rows": [
+            [
+              "10",
+              "Hong",
+              "서울",
+              "80",
+              "100"
+            ],
+            [
+              "20",
+              "Kim",
+              "대전",
+              "90",
+              "100"
+            ],
+            [
+              "30",
+              "Lee",
+              "강릉",
+              "90",
+              "100"
+            ],
+            [
+              "40",
+              "Kim",
+              "대전",
+              "95",
+              "200"
+            ],
+            [
+              "50",
+              "Hong",
+              "서울",
+              "65",
+              "300"
+            ]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "[department]",
+          "headers": [
+            "dno",
+            "dname"
+          ],
+          "rows": [
+            [
+              "100",
+              "영업"
+            ],
+            [
+              "200",
+              "개발"
+            ],
+            [
+              "300",
+              "서비스"
+            ]
+          ]
+        },
+        {
+          "type": "sql",
+          "code": "/* 질의문 */\nSELECT e.dno, d.dname, e.ename, e.score\nFROM employee e, department d\nWHERE e.dno = d.dno and (e.dno, score) IN\n      (SELECT dno, max(score)\n       FROM employee GROUP BY dno);"
         }
       ]
     },
@@ -3298,9 +5348,47 @@
       "explanation": "이 문제는 고객 정보를 기준으로 주문 금액을 조회하면서, 주문이 없는 고객도 포함해야 한다. 이는 LEFT OUTER JOIN을 통해 해결하며, 기준 테이블이 고객 테이블이어야 하므로 정답은 ④이다.",
       "references": [
         {
-          "type": "image",
-          "src": "/cbt-images/cbt73-q151-p-1-2bdaa81252.png",
-          "alt": "보기 자료 1"
+          "type": "table",
+          "caption": "[TB_CUSTOMER] 테이블",
+          "headers": [
+            "CUST_ID",
+            "NAME"
+          ],
+          "rows": [
+            [
+              "1",
+              "Kim"
+            ],
+            [
+              "2",
+              "Lee"
+            ],
+            [
+              "3",
+              "Park"
+            ]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "[TB_ORDER] 테이블",
+          "headers": [
+            "ORDER_ID",
+            "CUST_ID",
+            "AMOUNT"
+          ],
+          "rows": [
+            [
+              "101",
+              "1",
+              "10000"
+            ],
+            [
+              "102",
+              "2",
+              "12000"
+            ]
+          ]
         }
       ]
     },
@@ -3461,14 +5549,73 @@
           "code": "SELECT COUNT(*)FROM EMPLOYEE ELEFT JOIN DEPARTMENT D ON E.DEPT_ID =D.DEPT_IDWHERE D.LOC = 'SEOUL';"
         },
         {
-          "type": "image",
-          "src": "/cbt-images/cbt73-q159-p-1-bb991cc08e.png",
-          "alt": "보기 자료 1"
+          "type": "table",
+          "caption": "[EMPLOYEE] 테이블",
+          "headers": [
+            "ID",
+            "DEPT_ID"
+          ],
+          "rows": [
+            [
+              "1",
+              "10"
+            ],
+            [
+              "2",
+              "20"
+            ],
+            [
+              "3",
+              "30"
+            ]
+          ]
         },
         {
-          "type": "image",
-          "src": "/cbt-images/cbt73-q159-e-1-57e8bc5733.png",
-          "alt": "해설 자료 1"
+          "type": "table",
+          "caption": "[DEPARTMENT] 테이블",
+          "headers": [
+            "DEPT_ID",
+            "LOC"
+          ],
+          "rows": [
+            [
+              "10",
+              "SEOUL"
+            ],
+            [
+              "30",
+              "BUSAN"
+            ]
+          ]
+        },
+        {
+          "type": "table",
+          "headers": [
+            "E.ID",
+            "E.DEPT_ID",
+            "D.DEPT_ID",
+            "D.LOC"
+          ],
+          "rows": [
+            [
+              "1",
+              "10",
+              "10",
+              "SEOUL"
+            ],
+            [
+              "2",
+              "20",
+              "NULL",
+              "NULL"
+            ],
+            [
+              "3",
+              "30",
+              "30",
+              "BUSAN"
+            ]
+          ]
         }
       ]
     },
@@ -3539,7 +5686,8 @@
         {
           "type": "image",
           "src": "/cbt-images/cbt73-q163-p-1-809d927c85.png",
-          "alt": "보기 자료 1"
+          "alt": "계정그룹(1) — 계정(N) 비식별 관계 ERD (점선 + 0/N)",
+          "caption": null
         }
       ]
     },
@@ -3564,9 +5712,26 @@
           "code": "SELECT *FROM (SELECT ITEM, PRICEFROM TB_ITEMORDER BY PRICE DESC)WHERE ROWNUM = 1;"
         },
         {
-          "type": "image",
-          "src": "/cbt-images/cbt73-q164-p-1-bf30034fa9.png",
-          "alt": "보기 자료 1"
+          "type": "table",
+          "caption": "[TB_ITEM] 테이블",
+          "headers": [
+            "NAME",
+            "PRICE"
+          ],
+          "rows": [
+            [
+              "A",
+              "100"
+            ],
+            [
+              "B",
+              "150"
+            ],
+            [
+              "C",
+              "200"
+            ]
+          ]
         }
       ]
     },
@@ -3663,9 +5828,8 @@
       "explanation": "이 문제는 기존 테이블(EMP)에 외래키(Foreign Key) 제약조건을 추가하는 SQL 문법을 묻는 문제이다. 외래키는 다른 테이블(여기서는 DEPT)의 기본키를 참조해야 하며, 다음과 같은 문법을 사용한다.",
       "references": [
         {
-          "type": "image",
-          "src": "/cbt-images/cbt73-q169-e-1-a313d23cd8.png",
-          "alt": "해설 자료 1"
+          "type": "sql",
+          "code": "ALTER TABLE 테이블명 ADD CONSTRAINT 제약조건명 FOREIGN KEY(컬럼) REFERENCES 참조할테이블(컬럼);"
         }
       ]
     },
@@ -3852,9 +6016,30 @@
           "code": "SELECT NAMEFROM PRODUCTSWHERE PRICE = (SELECT MAX(PRICE) FROMPRODUCTS);"
         },
         {
-          "type": "image",
-          "src": "/cbt-images/cbt73-q179-p-1-96cada2ae9.png",
-          "alt": "보기 자료 1"
+          "type": "table",
+          "caption": "[TB_PRODUCT] 테이블",
+          "headers": [
+            "ID",
+            "NAME",
+            "PRICE"
+          ],
+          "rows": [
+            [
+              "1",
+              "Pen",
+              "500"
+            ],
+            [
+              "2",
+              "Pencil",
+              "300"
+            ],
+            [
+              "3",
+              "Book",
+              "1000"
+            ]
+          ]
         }
       ]
     },
@@ -4015,38 +6200,141 @@
           "code": "SELECT NAME,(SELECT LOCFROM DEPARTMENT DWHERE D.DEPT_ID = E.DEPT_ID)AS LOCATIONFROM EMPLOYEE E;"
         },
         {
-          "type": "image",
-          "src": "/cbt-images/cbt73-q187-p-1-0c1daf0392.png",
-          "alt": "보기 자료 1"
+          "type": "table",
+          "caption": "[EMPLOYEE] 테이블",
+          "headers": [
+            "EMP_ID",
+            "NAME",
+            "DEPT_ID"
+          ],
+          "rows": [
+            [
+              "1",
+              "Kim",
+              "10"
+            ],
+            [
+              "2",
+              "Lee",
+              "20"
+            ],
+            [
+              "3",
+              "Park",
+              "30"
+            ]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "[DEPARTMENT] 테이블",
+          "headers": [
+            "DEPT_ID",
+            "LOC"
+          ],
+          "rows": [
+            [
+              "10",
+              "SEOUL"
+            ],
+            [
+              "20",
+              "BUSAN"
+            ]
+          ]
         }
       ],
       "optionReferences": [
         [
           {
-            "type": "image",
-            "src": "/cbt-images/cbt73-q187-c1-1-fabf1d794b.png",
-            "alt": "보기 1 이미지"
+            "type": "table",
+            "headers": [
+              "NAME",
+              "LOCATION"
+            ],
+            "rows": [
+              [
+                "Kim",
+                "SEOUL"
+              ],
+              [
+                "Lee",
+                "BUSAN"
+              ],
+              [
+                "Park",
+                "BUSAN"
+              ]
+            ]
           }
         ],
         [
           {
-            "type": "image",
-            "src": "/cbt-images/cbt73-q187-c2-1-172af3cbda.png",
-            "alt": "보기 2 이미지"
+            "type": "table",
+            "headers": [
+              "NAME",
+              "LOCATION"
+            ],
+            "rows": [
+              [
+                "Kim",
+                "SEOUL"
+              ],
+              [
+                "Lee",
+                "BUSAN"
+              ],
+              [
+                "Park",
+                "NULL"
+              ]
+            ]
           }
         ],
         [
           {
-            "type": "image",
-            "src": "/cbt-images/cbt73-q187-c3-1-c88f215713.png",
-            "alt": "보기 3 이미지"
+            "type": "table",
+            "headers": [
+              "NAME",
+              "LOCATION"
+            ],
+            "rows": [
+              [
+                "Kim",
+                "SEOUL"
+              ],
+              [
+                "Lee",
+                "NULL"
+              ],
+              [
+                "Park",
+                "NULL"
+              ]
+            ]
           }
         ],
         [
           {
-            "type": "image",
-            "src": "/cbt-images/cbt73-q187-c4-1-322969818e.png",
-            "alt": "보기 4 이미지"
+            "type": "table",
+            "headers": [
+              "NAME",
+              "LOCATION"
+            ],
+            "rows": [
+              [
+                "Kim",
+                "NULL"
+              ],
+              [
+                "Lee",
+                "NULL"
+              ],
+              [
+                "Park",
+                "NULL"
+              ]
+            ]
           }
         ]
       ]
@@ -4122,9 +6410,59 @@
       "explanation": "주어진 결괏값을 보면 1. DEPTNO별 합계, 2. DEPTNO, JOB별 합계, 3. 전체 합계가 조회되므로 빈칸에는 그룹 함수 중 ROLLUP이 와야 한다.",
       "references": [
         {
-          "type": "image",
-          "src": "/cbt-images/cbt73-q191-p-1-fd2f7804e0.png",
-          "alt": "보기 자료 1"
+          "type": "table",
+          "caption": "[결과]",
+          "headers": [
+            "DEPTNO",
+            "JOB",
+            "SUM(SAL)"
+          ],
+          "rows": [
+            [
+              "10",
+              "CLERK",
+              "1300"
+            ],
+            [
+              "10",
+              "MANAGER",
+              "2450"
+            ],
+            [
+              "10",
+              "",
+              "3750"
+            ],
+            [
+              "20",
+              "CLEK",
+              "1900"
+            ],
+            [
+              "20",
+              "ANALYST",
+              "6000"
+            ],
+            [
+              "20",
+              "MANAGER",
+              "2975"
+            ],
+            [
+              "20",
+              "",
+              "9174"
+            ],
+            [
+              "",
+              "",
+              "27549"
+            ]
+          ]
+        },
+        {
+          "type": "sql",
+          "code": "SELECT DEPTNO, JOB, SUM(SAL)\nFROM SQLD_3\nGROUP BY (    );"
         }
       ]
     },
@@ -4209,9 +6547,37 @@
       "explanation": "• 고객_IDX 인덱스를 읽고 나서 고객 테이블을 액세스하는 횟수는 많으나 대부분 필터링되고 있다. • 고객에 대한 조건절로 사용된 고객등급이나 연령 칼럼이 인덱스에 포함돼 있지 않아 생기는 현상이므로 고객_IDX에 칼럼을 추가해 주어야 한다.",
       "references": [
         {
-          "type": "image",
-          "src": "/cbt-images/cbt73-q196-p-1-10e1adeb07.png",
-          "alt": "보기 자료 1"
+          "type": "sql",
+          "code": "Select c.고객명, c.연령, c.전화번호, o.주문일자,\n       o.주문총금액, o.배송지주소\nFrom 고객 c, 주문 o\nWhere o.고객번호 = c.주문번호\nAnd c.고객등급 = 'A'\nAnd c.연령 between 51 and 60\nAnd o.주문일자 between '20101201' and '20101231'"
+        },
+        {
+          "type": "table",
+          "headers": [
+            "Rows",
+            "Row Source Operation"
+          ],
+          "rows": [
+            [
+              "10",
+              "NESTED LOOPS"
+            ],
+            [
+              "23",
+              "TABLE ACCESS BY INDEX ROWID 고객"
+            ],
+            [
+              "2978",
+              "INDEX RANGE SCAN 고객_IDX"
+            ],
+            [
+              "10",
+              "TABLE ACCESS BY INDEX ROWID 주문"
+            ],
+            [
+              "28",
+              "INDEX RANGE SCAN 주문_IDX"
+            ]
+          ]
         }
       ]
     },
@@ -4290,9 +6656,26 @@
           "code": "SELECT NAMEFROM EMPLOYEEWHERE SALARY > ALL ( SELECT SALARYFROM EMPLOYEE WHERE NAME != 'C' );"
         },
         {
-          "type": "image",
-          "src": "/cbt-images/cbt73-q200-p-1-1289875a5c.png",
-          "alt": "보기 자료 1"
+          "type": "table",
+          "caption": "[EMPLOYEE] 테이블",
+          "headers": [
+            "NAME",
+            "SALARY"
+          ],
+          "rows": [
+            [
+              "A",
+              "3000"
+            ],
+            [
+              "B",
+              "2000"
+            ],
+            [
+              "C",
+              "4000"
+            ]
+          ]
         }
       ]
     },
@@ -4329,9 +6712,39 @@
       "explanation": "LAG() 윈도우 함수는 이전 행의 몇 번째 행 값을 가지고 올 수 있다.",
       "references": [
         {
-          "type": "image",
-          "src": "/cbt-images/cbt73-q202-p-1-6332291392.png",
-          "alt": "보기 자료 1"
+          "type": "table",
+          "headers": [
+            "ENAME",
+            "HIREDATE",
+            "SAL",
+            "PREV_SAL"
+          ],
+          "rows": [
+            [
+              "ALLEN",
+              "20-FEB-81",
+              "1600",
+              ""
+            ],
+            [
+              "WARD",
+              "22-FEB-81",
+              "1250",
+              "1600"
+            ],
+            [
+              "TURNER",
+              "08-SEP-81",
+              "1500",
+              "1250"
+            ],
+            [
+              "MARTIN",
+              "28-SEP-81",
+              "1250",
+              "1500"
+            ]
+          ]
         }
       ]
     },
@@ -4390,9 +6803,85 @@
       "explanation": "SQL문에서 COUNT() 함수는 행 수를 확인하는 집계 함수이다. 그런데 R 테이블과 S 테이블에 조인 조건이 없어서 카텐시안 곱이 발생한다. 즉, R 테이블의 행 수가 4개이고 S 테이블의 행 수가 5개이므로 4*5=20이 조회된다.",
       "references": [
         {
-          "type": "image",
-          "src": "/cbt-images/cbt73-q205-p-1-e81b86d8b8.png",
-          "alt": "보기 자료 1"
+          "type": "table",
+          "caption": "[R]",
+          "headers": [
+            "EID",
+            "ENAME",
+            "PHONE",
+            "SEX",
+            "DID"
+          ],
+          "rows": [
+            [
+              "823",
+              "Kim",
+              "8491",
+              "M",
+              "100"
+            ],
+            [
+              "434",
+              "Park",
+              "8488",
+              "F",
+              "101"
+            ],
+            [
+              "180",
+              "Lee",
+              "8592",
+              "M",
+              "101"
+            ],
+            [
+              "510",
+              "Choi",
+              "8598",
+              "F",
+              "100"
+            ]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "[S]",
+          "headers": [
+            "DID",
+            "DNAME",
+            "ROOM"
+          ],
+          "rows": [
+            [
+              "100",
+              "Head",
+              "A403"
+            ],
+            [
+              "101",
+              "Sales",
+              "A401"
+            ],
+            [
+              "102",
+              "Proj1",
+              "A301"
+            ],
+            [
+              "103",
+              "Proj2",
+              "B101"
+            ],
+            [
+              "104",
+              "AS",
+              "B102"
+            ]
+          ]
+        },
+        {
+          "type": "sql",
+          "code": "SELECT COUNT(*) FROM R, S;"
         }
       ]
     },
@@ -4413,9 +6902,47 @@
       "explanation": "부서 테이블은 마스터 테이블이므로 사원 테이블에 없는 부서번호 등을 자유롭게 입력할 수 있다. 따라서 부서 테이블에 (1, ‘연구부’)을 입력하는 것은 참조 무결성 위배가 아니다.",
       "references": [
         {
-          "type": "image",
-          "src": "/cbt-images/cbt73-q206-p-1-f802548799.png",
-          "alt": "보기 자료 1"
+          "type": "sql",
+          "code": "CREATE TABLE 부서 (\n  부서번호 INT NOT NULL,\n  부서명 VARCHAR(20),\n  PRIMARY KEY(부서번호));\n\nCREATE TABLE 사원 (\n  사번 INT NOT NULL,\n  이름 VARCHAR(20),\n  부서번호 INT,\n  PRIMARY KEY(사번),\n  FOREIGN KEY(부서번호) REFERENCES 부서(부서번호));"
+        },
+        {
+          "type": "table",
+          "caption": "[부서]",
+          "headers": [
+            "부서번호",
+            "부서명"
+          ],
+          "rows": [
+            [
+              "1",
+              "자재부"
+            ],
+            [
+              "2",
+              "영업부"
+            ]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "[사원]",
+          "headers": [
+            "사번",
+            "이름",
+            "부서번호"
+          ],
+          "rows": [
+            [
+              "11",
+              "홍길동",
+              "1"
+            ],
+            [
+              "12",
+              "이순신",
+              "2"
+            ]
+          ]
         }
       ]
     },
@@ -4452,9 +6979,60 @@
       "explanation": "A 속성은 COL1의 최댓값, B 속성은 COL2의 최솟값, C 속성은 COL1 속성의 합이다.",
       "references": [
         {
-          "type": "image",
-          "src": "/cbt-images/cbt73-q208-p-1-e69f392c17.png",
-          "alt": "보기 자료 1"
+          "type": "table",
+          "caption": "[SQLD_37]",
+          "headers": [
+            "COL1",
+            "COL2",
+            "COL3"
+          ],
+          "rows": [
+            [
+              "null",
+              "0",
+              "30"
+            ],
+            [
+              "0",
+              "null",
+              "0"
+            ],
+            [
+              "10",
+              "20",
+              "null"
+            ],
+            [
+              "11",
+              "21",
+              "31"
+            ],
+            [
+              "12",
+              "22",
+              "32"
+            ]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "[결과]",
+          "headers": [
+            "A",
+            "B",
+            "C"
+          ],
+          "rows": [
+            [
+              "12",
+              "0",
+              "33"
+            ]
+          ]
+        },
+        {
+          "type": "sql",
+          "code": "select\n  (    ) AS A,\n  (    ) AS B,\n  (    ) AS C\nfrom SQLD_37;"
         }
       ]
     },
