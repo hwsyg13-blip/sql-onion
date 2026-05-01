@@ -324,10 +324,10 @@ export const ROUND_60: QuizQuestion[] = [
     "number": 13,
     "title": "아래 결과를 얻기 위해 빈칸에 들어갈 SQL로 가장 적절한 것은?",
     "options": [
-      "`GROUP BY 부서 HAVING 직급 IN ('사원','대리','팀장','부장')`",
-      "`PIVOT (SUM(연봉) FOR 직급 IN ('사원','대리','팀장','부장'))`",
-      "`WHERE 직급 LIKE '%사원%' OR 직급 LIKE '%부장%'`",
-      "`UNPIVOT (연봉 FOR 직급 IN (사원, 대리, 팀장, 부장))`"
+      "GROUP BY 부서 HAVING 직급 IN ('사원','대리','팀장','부장')",
+      "PIVOT (SUM(연봉) FOR 직급 IN ('사원','대리','팀장','부장'))",
+      "WHERE 직급 LIKE '%사원%' OR 직급 LIKE '%부장%'",
+      "UNPIVOT (연봉 FOR 직급 IN (사원, 대리, 팀장, 부장))"
     ],
     "correctIndex": 1,
     "explanation": "결과 표는 부서를 행으로, 직급(사원·대리·팀장·부장)을 열로 가지는 가로형 표이다. 직급 컬럼의 값을 컬럼명으로 펼치고 연봉을 집계하는 PIVOT 절이 정확히 부합한다. ① GROUP BY는 직급별 집계를 하나의 행으로 만들지 못하고, ③ LIKE는 행 필터에 불과하며, ④ UNPIVOT은 가로 → 세로 변환이라 방향이 반대다.",
@@ -424,10 +424,10 @@ export const ROUND_60: QuizQuestion[] = [
     "number": 15,
     "title": "아래 SQL과 동일한 의미를 가지는 조건식은?",
     "options": [
-      "`(사번 = 10005) OR (회원번호 = 2003)`",
-      "`(사번 = 10005) AND (회원번호 = 2003)`",
-      "`(사번 = 10005) OR (회원번호 <> 2003)`",
-      "`NOT ((사번 = 10005) AND (회원번호 = 2003))`"
+      "(사번 = 10005) OR (회원번호 = 2003)",
+      "(사번 = 10005) AND (회원번호 = 2003)",
+      "(사번 = 10005) OR (회원번호 <> 2003)",
+      "NOT ((사번 = 10005) AND (회원번호 = 2003))"
     ],
     "correctIndex": 1,
     "explanation": "튜플 IN 절 `(A, B) IN ((x, y))` 는 `(A = x AND B = y)` 와 동등하다. 두 컬럼이 동시에 매칭되어야 한다는 뜻이므로 OR가 아닌 AND이다. 위 데이터에 원 SQL을 적용하면 (10005, 2003) 행 두 건만 통과한다. 보기 ① OR로 바꾸면 사번이 10005인 모든 행과 회원번호가 2003인 모든 행이 통과하여 4건이 나오므로 결과가 달라진다. 보기 ④ NOT은 정반대 결과(나머지 행)를 반환한다.",
@@ -535,10 +535,10 @@ export const ROUND_60: QuizQuestion[] = [
     "number": 17,
     "title": "아래 두 테이블을 조인하여 양쪽의 모든 행을 포함하되 NULL 값은 0으로 치환한 결과를 얻으려 한다. 가장 적절한 SQL은?",
     "options": [
-      "`SELECT NVL(T1.VAL,0), NVL(T2.VAL,0) FROM T1 CROSS JOIN T2;`",
-      "`SELECT NVL(T1.VAL,0), NVL(T2.VAL,0) FROM T1 FULL OUTER JOIN T2 ON T1.ID = T2.ID;`",
-      "`SELECT T1.VAL, T2.VAL FROM T1 FULL OUTER JOIN T2 ON T1.ID = T2.ID;`",
-      "`SELECT T1.VAL, T2.VAL FROM T1 UNION T2;`"
+      "SELECT NVL(T1.VAL,0), NVL(T2.VAL,0) FROM T1 CROSS JOIN T2;",
+      "SELECT NVL(T1.VAL,0), NVL(T2.VAL,0) FROM T1 FULL OUTER JOIN T2 ON T1.ID = T2.ID;",
+      "SELECT T1.VAL, T2.VAL FROM T1 FULL OUTER JOIN T2 ON T1.ID = T2.ID;",
+      "SELECT T1.VAL, T2.VAL FROM T1 UNION T2;"
     ],
     "correctIndex": 1,
     "explanation": "양쪽 테이블의 모든 행을 빠짐없이 보존하려면 FULL OUTER JOIN을 사용해야 한다. 매칭되지 않은 행은 NULL로 채워지며, NVL 함수를 통해 0으로 치환할 수 있다. ① CROSS JOIN은 양쪽 모든 행의 조합을 생성하므로 결과가 폭증하고, ③은 NVL이 빠져 NULL이 그대로 노출되며, ④ UNION은 두 결과를 위아래로 합치는 연산이라 이 문제의 의도와 맞지 않는다.",
@@ -681,10 +681,10 @@ export const ROUND_60: QuizQuestion[] = [
     "number": 21,
     "title": "아래 T 테이블에 대해 SQL 들 중 결과 행 수가 나머지와 다른 하나는?",
     "options": [
-      "`SELECT * FROM T WHERE ROWNUM IN (1, 2);`",
-      "`SELECT * FROM T WHERE ROWNUM < 1;`",
-      "`SELECT * FROM T WHERE ROWNUM > 1;`",
-      "`SELECT * FROM T WHERE ROWNUM = 2;`"
+      "SELECT * FROM T WHERE ROWNUM IN (1, 2);",
+      "SELECT * FROM T WHERE ROWNUM < 1;",
+      "SELECT * FROM T WHERE ROWNUM > 1;",
+      "SELECT * FROM T WHERE ROWNUM = 2;"
     ],
     "correctIndex": 0,
     "explanation": "Oracle 의 `ROWNUM` 은 `WHERE` 조건이 통과된 행에 대해서만 순차적으로 부여된다. ① 은 첫 행에 ROWNUM=1, 두 번째 행에 ROWNUM=2 가 부여되어 모두 조건을 만족 → 2 건 반환. ② `ROWNUM < 1` 은 어떤 행도 만족 못 함 → 0 건. ③ `ROWNUM > 1` 은 첫 행이 ROWNUM=1 로 탈락한 뒤 다음 행에도 계속 1 이 부여되어 0 건. ④ `ROWNUM = 2` 도 ROWNUM 값이 2 로 올라가지 못해 0 건. 결과가 다른 것은 ①.",
@@ -723,10 +723,10 @@ export const ROUND_60: QuizQuestion[] = [
     "number": 22,
     "title": "아래 SQL에서 `WHERE 1 = 2` 조건에 의해 어떤 데이터도 선택되지 않았을 때, 반환 값이 NULL이 아닌 집계 함수는?",
     "options": [
-      "`SUM(SAL)`",
-      "`AVG(SAL)`",
-      "`MIN(SAL)`",
-      "`COUNT(*)`"
+      "SUM(SAL)",
+      "AVG(SAL)",
+      "MIN(SAL)",
+      "COUNT(*)"
     ],
     "correctIndex": 3,
     "explanation": "공집합에 대한 집계 함수 중 COUNT(*)만 0을 반환하고, SUM·AVG·MIN·MAX는 모두 NULL을 반환한다.",
@@ -747,10 +747,10 @@ export const ROUND_60: QuizQuestion[] = [
     "number": 23,
     "title": "아래 네 개의 SQL 중 결과가 나머지와 다른 하나는? (A, B 테이블은 동일하며 B.FLG 값은 일부 행에만 'Y'이다.)",
     "options": [
-      "`SELECT * FROM A, B WHERE A.ID = B.ID(+) AND B.FLG(+) = 'Y';`",
-      "`SELECT * FROM A LEFT OUTER JOIN B ON (A.ID = B.ID) WHERE B.FLG = 'Y';`",
-      "`SELECT * FROM A LEFT OUTER JOIN B ON (A.ID = B.ID AND B.FLG = 'Y');`",
-      "`SELECT * FROM A LEFT OUTER JOIN (SELECT * FROM B WHERE FLG = 'Y') B ON A.ID = B.ID;`"
+      "SELECT * FROM A, B WHERE A.ID = B.ID(+) AND B.FLG(+) = 'Y';",
+      "SELECT * FROM A LEFT OUTER JOIN B ON (A.ID = B.ID) WHERE B.FLG = 'Y';",
+      "SELECT * FROM A LEFT OUTER JOIN B ON (A.ID = B.ID AND B.FLG = 'Y');",
+      "SELECT * FROM A LEFT OUTER JOIN (SELECT * FROM B WHERE FLG = 'Y') B ON A.ID = B.ID;"
     ],
     "correctIndex": 1,
     "explanation": "①·③·④는 B에 대한 FLG 조건이 조인 단계(아우터 조인의 ON 절 또는 인라인 뷰 내부)에서 처리되어 매칭되지 않은 A의 행이 NULL로 보존된다. 반면 ②는 조인 후 WHERE 절에서 B.FLG = 'Y'를 적용하므로 NULL 값이 제거되어 내부 조인과 같은 결과가 된다. 따라서 ②만 결과가 다르다.",
@@ -810,10 +810,10 @@ export const ROUND_60: QuizQuestion[] = [
     "number": 24,
     "title": "아래 결과를 출력하기 위해 가장 적절한 SQL은?",
     "options": [
-      "`SELECT 지역, SUM(CASE WHEN 월='1월' THEN 매출 END) FROM 매출 GROUP BY 지역;`",
-      "`SELECT * FROM 매출 UNPIVOT (매출 FOR 월 IN ('1월','2월','3월','4월'));`",
-      "`SELECT * FROM 매출 PIVOT (SUM(매출) FOR 월 IN ('1월' AS \"1월\", '2월' AS \"2월\", '3월' AS \"3월\", '4월' AS \"4월\"));`",
-      "`SELECT 지역, AVG(매출) FROM 매출 GROUP BY CUBE(지역, 월);`"
+      "SELECT 지역, SUM(CASE WHEN 월='1월' THEN 매출 END) FROM 매출 GROUP BY 지역;",
+      "SELECT * FROM 매출 UNPIVOT (매출 FOR 월 IN ('1월','2월','3월','4월'));",
+      "SELECT * FROM 매출 PIVOT (SUM(매출) FOR 월 IN ('1월' AS \"1월\", '2월' AS \"2월\", '3월' AS \"3월\", '4월' AS \"4월\"));",
+      "SELECT 지역, AVG(매출) FROM 매출 GROUP BY CUBE(지역, 월);"
     ],
     "correctIndex": 2,
     "explanation": "결과는 지역을 행으로, 1월~4월을 열로 가지는 가로형 매출표이다. 월 컬럼을 열로 펼치면서 매출을 SUM 집계하는 PIVOT 절이 정확히 부합한다. ① CASE+GROUP BY는 단일 컬럼만 펼쳐 1월 외의 컬럼이 누락되고, ② UNPIVOT은 가로 → 세로 변환으로 방향이 반대이며, ④ CUBE는 소계·총계 행이 추가되어 결과 형태가 달라진다.",
@@ -999,10 +999,10 @@ export const ROUND_60: QuizQuestion[] = [
     "number": 26,
     "title": "아래 쿼리의 `ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW` 절과 동등한 의미를 가진 절은?",
     "options": [
-      "`ROWS UNBOUNDED PRECEDING`",
-      "`ROWS BETWEEN UNBOUNDED PRECEDING AND 1 PRECEDING`",
-      "`RANGE UNBOUNDED PRECEDING`",
-      "`RANGE BETWEEN CURRENT ROW AND UNBOUNDED FOLLOWING`"
+      "ROWS UNBOUNDED PRECEDING",
+      "ROWS BETWEEN UNBOUNDED PRECEDING AND 1 PRECEDING",
+      "RANGE UNBOUNDED PRECEDING",
+      "RANGE BETWEEN CURRENT ROW AND UNBOUNDED FOLLOWING"
     ],
     "correctIndex": 0,
     "explanation": "ROWS UNBOUNDED PRECEDING은 윈도우 시작점만 명시한 축약형으로, 종료점이 생략되면 기본값인 CURRENT ROW가 적용된다. 즉 ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW와 동등하다. ②는 종료점이 1 PRECEDING이라 누적합 의미가 다르고, ③·④는 RANGE 모드라 동일 정렬 키를 가진 행을 묶어 처리하므로 ROWS 기반과 결과가 다를 수 있다.",
@@ -1059,10 +1059,10 @@ export const ROUND_60: QuizQuestion[] = [
     "number": 29,
     "title": "아래 EMP 테이블에서 사원과 매니저 관계의 계층 트리를 조회하기 위한 CONNECT BY 절로 옳은 것은?",
     "options": [
-      "`PRIOR 매니저 = 사원`",
-      "`PRIOR 사원 = 매니저`",
-      "`사원 = 매니저`",
-      "`PRIOR 사원 = PRIOR 매니저`"
+      "PRIOR 매니저 = 사원",
+      "PRIOR 사원 = 매니저",
+      "사원 = 매니저",
+      "PRIOR 사원 = PRIOR 매니저"
     ],
     "correctIndex": 1,
     "explanation": "부모의 사원번호가 자식의 매니저번호가 되어야 루트(매니저 IS NULL)에서 아래 방향으로 트리가 확장된다. `PRIOR 사원 = 매니저` 는 \"이전(부모) 행의 사원번호 = 다음 행의 매니저번호\" 를 의미하여 부모 → 자식 정방향 전개. ① 은 자식 → 부모 역방향, ③ 은 PRIOR 없어 트리 미구성, ④ 는 PRIOR 가 양쪽에 있어 자기 참조라 의미 없음.",
@@ -1604,10 +1604,10 @@ export const ROUND_60: QuizQuestion[] = [
     "number": 41,
     "title": "아래 SQL 들 중 결과가 나머지와 다른 하나는?",
     "options": [
-      "`SELECT * FROM DUAL WHERE 1 > NULL;`",
-      "`SELECT NULL + 1 FROM DUAL;`",
-      "`SELECT NULL * 1 FROM DUAL;`",
-      "`SELECT NULL * NULL FROM DUAL;`"
+      "SELECT * FROM DUAL WHERE 1 > NULL;",
+      "SELECT NULL + 1 FROM DUAL;",
+      "SELECT NULL * 1 FROM DUAL;",
+      "SELECT NULL * NULL FROM DUAL;"
     ],
     "correctIndex": 0,
     "explanation": "②③④ 는 산술 연산 결과로 NULL 을 한 행 반환한다 (DUAL 의 한 행 + NULL 컬럼). ① 의 `WHERE 1 > NULL` 은 UNKNOWN 으로 평가되어 행이 필터링되므로 0 건(공집합) 이 반환된다. 즉 ① 만 반환 행 수가 다르다.",
@@ -1622,10 +1622,10 @@ export const ROUND_60: QuizQuestion[] = [
     "number": 42,
     "title": "다음 SELECT 문 중 반환 값이 나머지와 다른 것은?",
     "options": [
-      "`SELECT 1 + NULL FROM DUAL;`",
-      "`SELECT 'X' FROM DUAL;`",
-      "`SELECT 1 * NULL FROM DUAL;`",
-      "`SELECT NULL, NULL FROM DUAL;`"
+      "SELECT 1 + NULL FROM DUAL;",
+      "SELECT 'X' FROM DUAL;",
+      "SELECT 1 * NULL FROM DUAL;",
+      "SELECT NULL, NULL FROM DUAL;"
     ],
     "correctIndex": 1,
     "explanation": "①, ③, ④는 결과에 NULL이 포함되지만 ②만 문자 상수 'X'를 반환한다.",
@@ -1765,10 +1765,10 @@ export const ROUND_60: QuizQuestion[] = [
     "number": 47,
     "title": "어느 부서에도 속하지 않는 직원을 조회하는 SQL로 가장 적절한 것은?",
     "options": [
-      "`SELECT * FROM EMP E, DEPT D WHERE E.DEPTNO = D.DEPTNO;`",
-      "`SELECT * FROM EMP WHERE DEPTNO IS NULL OR DEPTNO NOT IN (SELECT DEPTNO FROM DEPT);`",
-      "`SELECT * FROM EMP E LEFT JOIN DEPT D ON E.DEPTNO = D.DEPTNO WHERE D.DEPTNO IS NOT NULL;`",
-      "`SELECT * FROM EMP WHERE DEPTNO NOT IN (SELECT DEPTNO FROM DEPT);`"
+      "SELECT * FROM EMP E, DEPT D WHERE E.DEPTNO = D.DEPTNO;",
+      "SELECT * FROM EMP WHERE DEPTNO IS NULL OR DEPTNO NOT IN (SELECT DEPTNO FROM DEPT);",
+      "SELECT * FROM EMP E LEFT JOIN DEPT D ON E.DEPTNO = D.DEPTNO WHERE D.DEPTNO IS NOT NULL;",
+      "SELECT * FROM EMP WHERE DEPTNO NOT IN (SELECT DEPTNO FROM DEPT);"
     ],
     "correctIndex": 1,
     "explanation": "\"어떤 부서에도 속하지 않는다\"는 두 가지 경우를 모두 포함한다. (a) DEPTNO 자체가 NULL인 경우, (b) DEPTNO 값이 있지만 DEPT 테이블에 등록되지 않은 경우(예: 99번). ②는 OR로 두 경우를 모두 잡으므로 가장 적절하다. ① 일반 조인은 부서가 매칭된 직원만 조회한다. ③ LEFT JOIN + IS NOT NULL은 매칭된 직원만 남기므로 정답과 정반대다. ④ NOT IN 단독은 DEPTNO 값이 있는 행 중 DEPT에 없는 외래값(예: 99)은 잡지만, DEPTNO가 NULL인 행은 NULL 비교가 UNKNOWN이라 결과에서 누락된다. (a) NULL 케이스를 함께 잡으려면 ②의 OR 조합이 필요하다.",

@@ -256,10 +256,10 @@ export const ROUND_45: QuizQuestion[] = [
     "number": 12,
     "title": "아래 네 SQL 중 수행 결과가 나머지와 다른 것은?",
     "options": [
-      "`CEIL(22.14)`",
-      "`FLOOR(22.14)`",
-      "`TRUNC(22.14)`",
-      "`ROUND(22.14)`"
+      "CEIL(22.14)",
+      "FLOOR(22.14)",
+      "TRUNC(22.14)",
+      "ROUND(22.14)"
     ],
     "correctIndex": 0,
     "explanation": "CEIL은 정수부를 올림하므로 23을 반환한다. FLOOR·TRUNC·ROUND(22.14)는 모두 22를 반환한다.",
@@ -280,10 +280,10 @@ export const ROUND_45: QuizQuestion[] = [
     "number": 13,
     "title": "선수 테이블에서 손흥민 선수가 소속된 팀의 모든 선수 포지션을 'FW'로 변경하는 SQL로 올바른 것은?",
     "options": [
-      "`UPDATE 선수 SET 포지션 = 'FW' WHERE 이름 = '손흥민';`",
-      "`UPDATE 선수 SET 팀ID = 'FW' WHERE 이름 = '손흥민';`",
-      "`UPDATE 선수 SET 포지션 = 'FW' WHERE 팀ID = '손흥민';`",
-      "`UPDATE 선수 SET 포지션 = 'FW' WHERE 팀ID = (SELECT 팀ID FROM 선수 WHERE 이름 = '손흥민');`"
+      "UPDATE 선수 SET 포지션 = 'FW' WHERE 이름 = '손흥민';",
+      "UPDATE 선수 SET 팀ID = 'FW' WHERE 이름 = '손흥민';",
+      "UPDATE 선수 SET 포지션 = 'FW' WHERE 팀ID = '손흥민';",
+      "UPDATE 선수 SET 포지션 = 'FW' WHERE 팀ID = (SELECT 팀ID FROM 선수 WHERE 이름 = '손흥민');"
     ],
     "correctIndex": 3,
     "explanation": "손흥민이 속한 팀의 팀ID를 서브쿼리로 조회하여, 해당 팀의 모든 선수의 포지션을 일괄 변경한다.",
@@ -330,10 +330,10 @@ export const ROUND_45: QuizQuestion[] = [
     "number": 14,
     "title": "SNS별 추천점수를 집계하여 추출하는 함수로 올바른 것은?",
     "options": [
-      "`SELECT SUM(추천점수) FROM SNS_LOG;`",
-      "`SELECT 추천점수 FROM SNS_LOG GROUP BY SNS;`",
-      "`SELECT SNS, SUM(추천점수) FROM SNS_LOG GROUP BY SNS;`",
-      "`SELECT SNS, 추천점수 FROM SNS_LOG ORDER BY SNS;`"
+      "SELECT SUM(추천점수) FROM SNS_LOG;",
+      "SELECT 추천점수 FROM SNS_LOG GROUP BY SNS;",
+      "SELECT SNS, SUM(추천점수) FROM SNS_LOG GROUP BY SNS;",
+      "SELECT SNS, 추천점수 FROM SNS_LOG ORDER BY SNS;"
     ],
     "correctIndex": 2,
     "explanation": "SNS별 합계를 구해야 하므로 GROUP BY SNS와 집계함수 SUM을 함께 사용한다.",
@@ -448,10 +448,10 @@ export const ROUND_45: QuizQuestion[] = [
     "number": 19,
     "title": "직급 인원이 9명 이상인 직급 중 나이가 가장 많은 직원의 이름을 조회하는 SQL로 올바른 것은?",
     "options": [
-      "`SELECT 이름 FROM EMP WHERE COUNT(*) >= 9 GROUP BY 직급 ORDER BY 나이 DESC FETCH FIRST 1 ROWS ONLY;`",
-      "`SELECT 이름 FROM EMP GROUP BY 직급 HAVING COUNT(*) >= 9 ORDER BY 나이 DESC FETCH FIRST 1 ROWS ONLY;`",
-      "`SELECT 이름 FROM EMP WHERE 직급 IN (SELECT 직급 FROM EMP GROUP BY 직급 HAVING COUNT(*) >= 9) ORDER BY 나이 DESC FETCH FIRST 1 ROWS ONLY;`",
-      "`SELECT 이름 FROM EMP GROUP BY 직급 HAVING 나이 = MAX(나이) AND COUNT(*) >= 9 ORDER BY 나이 DESC FETCH FIRST 1 ROWS ONLY;`"
+      "SELECT 이름 FROM EMP WHERE COUNT(*) >= 9 GROUP BY 직급 ORDER BY 나이 DESC FETCH FIRST 1 ROWS ONLY;",
+      "SELECT 이름 FROM EMP GROUP BY 직급 HAVING COUNT(*) >= 9 ORDER BY 나이 DESC FETCH FIRST 1 ROWS ONLY;",
+      "SELECT 이름 FROM EMP WHERE 직급 IN (SELECT 직급 FROM EMP GROUP BY 직급 HAVING COUNT(*) >= 9) ORDER BY 나이 DESC FETCH FIRST 1 ROWS ONLY;",
+      "SELECT 이름 FROM EMP GROUP BY 직급 HAVING 나이 = MAX(나이) AND COUNT(*) >= 9 ORDER BY 나이 DESC FETCH FIRST 1 ROWS ONLY;"
     ],
     "correctIndex": 2,
     "explanation": "HAVING COUNT(*) >= 9 조건으로 9명 이상 직급을 먼저 추출하고, 해당 직급 직원 중 나이가 가장 많은 사람을 반환한다.",
@@ -508,10 +508,10 @@ export const ROUND_45: QuizQuestion[] = [
     "number": 22,
     "title": "아래 네 SUBSTR 호출 중 결과가 나머지와 다른 것은?",
     "options": [
-      "`SUBSTR('DATABASE', 7)`",
-      "`SUBSTR('DATABASE', -2)`",
-      "`SUBSTR('DATABASE', 8, -2)`",
-      "`SUBSTR('DATABASE', INSTR('DATABASE','S'), 2)`"
+      "SUBSTR('DATABASE', 7)",
+      "SUBSTR('DATABASE', -2)",
+      "SUBSTR('DATABASE', 8, -2)",
+      "SUBSTR('DATABASE', INSTR('DATABASE','S'), 2)"
     ],
     "correctIndex": 2,
     "explanation": "각 호출의 결과는 다음과 같다. ① `SUBSTR('DATABASE', 7)` 은 7번째 문자부터 끝까지 → 'SE'. ② `SUBSTR('DATABASE', -2)` 는 끝에서 2번째 문자부터 끝까지 → 'SE'. ③ `SUBSTR('DATABASE', 8, -2)` 는 길이 인자가 음수라 Oracle 에서 빈 문자열(NULL) 을 반환. ④ `INSTR('DATABASE','S')` = 7 이므로 `SUBSTR('DATABASE', 7, 2)` = 'SE'. ①②④ 가 모두 'SE' 인 반면 ③ 만 NULL/빈 문자열로 결과가 다르다.",
@@ -532,10 +532,10 @@ export const ROUND_45: QuizQuestion[] = [
     "number": 23,
     "title": "아래 결과를 얻기 위해 A 테이블과 B 테이블에 적용할 조건절로 올바른 것은?",
     "options": [
-      "`NOT EXISTS (SELECT 1 FROM T2 B WHERE B.COL1 = A.COL1)`",
-      "`EXISTS (SELECT 1 FROM T2 B WHERE B.COL1 = A.COL1)`",
-      "`COL1 IN (SELECT COL1 FROM T2)`",
-      "`COL1 > (SELECT MAX(COL1) FROM T2)`"
+      "NOT EXISTS (SELECT 1 FROM T2 B WHERE B.COL1 = A.COL1)",
+      "EXISTS (SELECT 1 FROM T2 B WHERE B.COL1 = A.COL1)",
+      "COL1 IN (SELECT COL1 FROM T2)",
+      "COL1 > (SELECT MAX(COL1) FROM T2)"
     ],
     "correctIndex": 0,
     "explanation": "T1에만 존재하고 T2에는 존재하지 않는 COL1 값을 추출하려면 상관 서브쿼리와 NOT EXISTS를 조합한다.",
@@ -642,10 +642,10 @@ export const ROUND_45: QuizQuestion[] = [
     "number": 26,
     "title": "아래 두 테이블 A, B 에 대한 네 SQL 중 FULL OUTER JOIN 의 결과와 다른 것은?",
     "options": [
-      "`SELECT * FROM A FULL OUTER JOIN B ON A.KEY = B.KEY;`",
-      "`SELECT * FROM A FULL JOIN B ON A.KEY = B.KEY;`",
-      "`(A LEFT OUTER JOIN B) UNION (A RIGHT OUTER JOIN B)`",
-      "`(A LEFT OUTER JOIN B) UNION ALL (A RIGHT OUTER JOIN B)`"
+      "SELECT * FROM A FULL OUTER JOIN B ON A.KEY = B.KEY;",
+      "SELECT * FROM A FULL JOIN B ON A.KEY = B.KEY;",
+      "(A LEFT OUTER JOIN B) UNION (A RIGHT OUTER JOIN B)",
+      "(A LEFT OUTER JOIN B) UNION ALL (A RIGHT OUTER JOIN B)"
     ],
     "correctIndex": 3,
     "explanation": "UNION ALL 은 중복을 제거하지 않아 교집합 부분(양쪽에 모두 매칭되는 행) 이 두 번 반환되므로, 중복을 제거하는 FULL OUTER JOIN 과 결과가 다르다. ① FULL OUTER JOIN 과 ② FULL JOIN 은 동의어이며, ③ LEFT UNION RIGHT 는 중복 제거하므로 FULL OUTER JOIN 과 동일.",
@@ -706,10 +706,10 @@ export const ROUND_45: QuizQuestion[] = [
     "number": 27,
     "title": "아래 고객/주문 테이블에서 특정 기간 고객의 주문금액을 구하되, 현재 고객 테이블에 존재하는 고객 데이터(주문 없는 고객 포함) 만으로 집계하려 한다. 동일 기간의 주문 금액 합계를 구하는 SQL 로 가장 적절한 것은?",
     "options": [
-      "`SELECT C.고객ID, SUM(O.금액) FROM 고객 C, 주문 O WHERE O.주문일 BETWEEN :시작 AND :종료 GROUP BY C.고객ID;`",
-      "`SELECT C.고객ID, SUM(O.금액) FROM 주문 O, 고객 C WHERE C.고객ID = O.고객ID(+) GROUP BY C.고객ID;`",
-      "`SELECT C.고객ID, (SELECT SUM(금액) FROM 주문 WHERE 고객ID = C.고객ID) FROM 고객 C;`",
-      "`SELECT C.고객ID, SUM(O.금액) FROM 고객 C LEFT OUTER JOIN 주문 O ON C.고객ID = O.고객ID AND O.주문일 BETWEEN :시작 AND :종료 GROUP BY C.고객ID;`"
+      "SELECT C.고객ID, SUM(O.금액) FROM 고객 C, 주문 O WHERE O.주문일 BETWEEN :시작 AND :종료 GROUP BY C.고객ID;",
+      "SELECT C.고객ID, SUM(O.금액) FROM 주문 O, 고객 C WHERE C.고객ID = O.고객ID(+) GROUP BY C.고객ID;",
+      "SELECT C.고객ID, (SELECT SUM(금액) FROM 주문 WHERE 고객ID = C.고객ID) FROM 고객 C;",
+      "SELECT C.고객ID, SUM(O.금액) FROM 고객 C LEFT OUTER JOIN 주문 O ON C.고객ID = O.고객ID AND O.주문일 BETWEEN :시작 AND :종료 GROUP BY C.고객ID;"
     ],
     "correctIndex": 3,
     "explanation": "현재 고객 전체를 기준으로 주문을 결합하되 기간 필터를 ON 절에 두어야 주문이 없는 고객도 누락되지 않고, 기간 제약이 조인 이후 WHERE 필터로 동작해 결과를 왜곡하지 않는다. ① 기간 조건이 WHERE 에 있어 주문 없는 고객은 모두 제외, ② 표준 SQL 이 아닌 Oracle (+) 외부조인이지만 기간 필터 없음, ③ 스칼라 서브쿼리는 기간 필터가 없어 전체 기간을 합산.",
@@ -778,10 +778,10 @@ export const ROUND_45: QuizQuestion[] = [
     "number": 28,
     "title": "아래 T1 테이블 정의에 대한 INSERT 구문 수행 시 오류가 발생하지 않는 것은?",
     "options": [
-      "`INSERT INTO T1 VALUES (NULL, 1, 2, 3);`",
-      "`INSERT INTO T1 VALUES (1, NULL, 2, 3);`",
-      "`INSERT INTO T1 VALUES (1, 2, NULL, 3);`",
-      "`INSERT INTO T1 VALUES (1, 2, 3, NULL);`"
+      "INSERT INTO T1 VALUES (NULL, 1, 2, 3);",
+      "INSERT INTO T1 VALUES (1, NULL, 2, 3);",
+      "INSERT INTO T1 VALUES (1, 2, NULL, 3);",
+      "INSERT INTO T1 VALUES (1, 2, 3, NULL);"
     ],
     "correctIndex": 2,
     "explanation": "UNIQUE 제약은 NULL 을 허용하므로 ③ C3 에 NULL 이 입력되어도 오류가 발생하지 않는다. ① C1 PRIMARY KEY 위반, ② C2 NOT NULL 위반, ④ C4 CHECK(C4 IS NOT NULL) 위반.",
@@ -970,10 +970,10 @@ export const ROUND_45: QuizQuestion[] = [
     "number": 32,
     "title": "아래 네 SQL 중 반환 행 수가 1건이 아닌 것은? (테이블 T 에는 충분한 행이 존재한다고 가정)",
     "options": [
-      "`SELECT * FROM T WHERE ROWNUM = 1;`",
-      "`SELECT * FROM T WHERE ROWNUM < 2;`",
-      "`SELECT * FROM T WHERE ROWNUM <= 2;`",
-      "`SELECT * FROM T WHERE ROWNUM <= 2 - 1;`"
+      "SELECT * FROM T WHERE ROWNUM = 1;",
+      "SELECT * FROM T WHERE ROWNUM < 2;",
+      "SELECT * FROM T WHERE ROWNUM <= 2;",
+      "SELECT * FROM T WHERE ROWNUM <= 2 - 1;"
     ],
     "correctIndex": 2,
     "explanation": "Oracle ROWNUM 은 fetch 시점에 1 부터 부여된다. ① ROWNUM = 1 은 첫 행만 반환, ② ROWNUM < 2 도 1 건 (ROWNUM=1), ④ ROWNUM <= 1 도 1 건. 그러나 ③ `ROWNUM <= 2` 는 2 건을 반환하므로 결과가 다르다.",
@@ -1144,10 +1144,10 @@ export const ROUND_45: QuizQuestion[] = [
     "number": 36,
     "title": "아래 SQLD49 테이블에 대한 네 SQL 중 결과가 다른 것은? (괄호 우선순위 문제)",
     "options": [
-      "`SELECT * FROM SQLD49 WHERE V1 = 'A' AND V2 IN ('T1','T2','T3');`",
-      "`SELECT * FROM SQLD49 WHERE V1 = 'A' AND V2 = 'T1' OR V2 = 'T2' OR V2 = 'T3';`",
-      "`SELECT * FROM SQLD49 WHERE (V1, V2) IN (('A','T1'), ('A','T2'), ('A','T3'));`",
-      "`SELECT * FROM SQLD49 WHERE V1 = 'A' AND (V2 = 'T1' OR V2 = 'T2' OR V2 = 'T3');`"
+      "SELECT * FROM SQLD49 WHERE V1 = 'A' AND V2 IN ('T1','T2','T3');",
+      "SELECT * FROM SQLD49 WHERE V1 = 'A' AND V2 = 'T1' OR V2 = 'T2' OR V2 = 'T3';",
+      "SELECT * FROM SQLD49 WHERE (V1, V2) IN (('A','T1'), ('A','T2'), ('A','T3'));",
+      "SELECT * FROM SQLD49 WHERE V1 = 'A' AND (V2 = 'T1' OR V2 = 'T2' OR V2 = 'T3');"
     ],
     "correctIndex": 1,
     "explanation": "② 는 AND 가 OR 보다 우선순위가 높아 `(V1='A' AND V2='T1') OR V2='T2' OR V2='T3'` 로 해석되므로 V1 이 'A' 가 아닌 행도 포함된다. 나머지 ①·③·④ 는 모두 V1='A' 인 행만 대상으로 V2 가 T1/T2/T3 인 경우를 조회한다.",
@@ -1200,10 +1200,10 @@ export const ROUND_45: QuizQuestion[] = [
     "number": 37,
     "title": "수강, 학생, 과목 테이블에서 특정 과목의 학점이 4.0 이상인 학생의 이름을 구하는 SQL로 올바른 것은?",
     "options": [
-      "`SELECT 이름 FROM 수강, 학생 WHERE 수강.학번 = 학생.학번 GROUP BY 이름 HAVING MAX(학점) > 4;`",
-      "`SELECT 이름 FROM 수강, 학생 WHERE 수강.학번 = 학생.학번 GROUP BY 학번, 이름 HAVING MAX(학점) > 4;`",
-      "`SELECT 이름 FROM 수강, 학생 WHERE 수강.학번 = 학생.학번 AND 학점 > 4;`",
-      "`SELECT 이름 FROM 수강 GROUP BY 학번 HAVING MAX(학점) > 4;`"
+      "SELECT 이름 FROM 수강, 학생 WHERE 수강.학번 = 학생.학번 GROUP BY 이름 HAVING MAX(학점) > 4;",
+      "SELECT 이름 FROM 수강, 학생 WHERE 수강.학번 = 학생.학번 GROUP BY 학번, 이름 HAVING MAX(학점) > 4;",
+      "SELECT 이름 FROM 수강, 학생 WHERE 수강.학번 = 학생.학번 AND 학점 > 4;",
+      "SELECT 이름 FROM 수강 GROUP BY 학번 HAVING MAX(학점) > 4;"
     ],
     "correctIndex": 1,
     "explanation": "이름이 중복될 수 있어 그룹 기준으로 이름만 사용하면 유일성이 보장되지 않는다. 학번과 이름을 함께 GROUP BY에 포함해야 학생 단위로 유일하게 구분된다.",

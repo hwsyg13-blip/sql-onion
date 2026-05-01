@@ -307,10 +307,10 @@ export const ROUND_58: QuizQuestion[] = [
     "number": 11,
     "title": "아래 함수 호출의 결과 중 나머지와 다른 것은? (표준 SQL 기준)",
     "options": [
-      "`LTRIM('xxSQL', 'x')`",
-      "`RTRIM('SQLxx', 'x')`",
-      "`REPLACE('xxSQLxx', 'x', 'Y')`",
-      "`TRIM('x' FROM 'xxSQLxx')`"
+      "LTRIM('xxSQL', 'x')",
+      "RTRIM('SQLxx', 'x')",
+      "REPLACE('xxSQLxx', 'x', 'Y')",
+      "TRIM('x' FROM 'xxSQLxx')"
     ],
     "correctIndex": 2,
     "explanation": "① `LTRIM('xxSQL','x')` → 왼쪽 'x' 제거 → 'SQL'. ② `RTRIM('SQLxx','x')` → 오른쪽 'x' 제거 → 'SQL'. ③ `REPLACE('xxSQLxx','x','Y')` → 'x' 를 모두 'Y' 로 치환 → 'YYSQLYY'. ④ `TRIM('x' FROM 'xxSQLxx')` → 양쪽 'x' 제거 → 'SQL'. ①②④ 는 'SQL' 반환, ③ 만 'YYSQLYY' 로 결과가 다르다.",
@@ -895,10 +895,10 @@ export const ROUND_58: QuizQuestion[] = [
     "number": 24,
     "title": "아래 네 개의 조인/조회 방식 중 나머지와 결과가 다른 하나는? (두 테이블 A, B 모두 ID 외에도 동일 이름 컬럼 NAME 을 추가로 가진다고 가정)",
     "options": [
-      "`A NATURAL JOIN B` (동일 이름 컬럼 모두로 자동 조인)",
-      "`A INNER JOIN B USING (ID)` (USING 으로 ID 만 명시)",
-      "`A JOIN B ON A.ID = B.ID` (ON 으로 ID 만 명시)",
-      "`SELECT * FROM A WHERE A.ID IN (SELECT ID FROM B)` (WHERE IN 서브쿼리)"
+      "A NATURAL JOIN B (동일 이름 컬럼 모두로 자동 조인)",
+      "A INNER JOIN B USING (ID) (USING 으로 ID 만 명시)",
+      "A JOIN B ON A.ID = B.ID (ON 으로 ID 만 명시)",
+      "SELECT * FROM A WHERE A.ID IN (SELECT ID FROM B) (WHERE IN 서브쿼리)"
     ],
     "correctIndex": 0,
     "explanation": "두 테이블에 동일 이름 컬럼이 ID 외에 NAME 도 있다고 가정. ① NATURAL JOIN 은 ID 와 NAME 모두를 자동 조인 조건으로 사용 → ID 가 같아도 NAME 이 다르면 매칭 실패. ②③ 은 ID 만 조인 조건이라 NAME 무관. ④ 는 A 의 ID 가 B 의 ID 에 존재하는지만 확인. 결과적으로 ① 만 NAME 까지 매칭이 필요해 다른 셋과 결과가 달라질 수 있다.",
@@ -1586,10 +1586,10 @@ export const ROUND_58: QuizQuestion[] = [
     "number": 46,
     "title": "아래 네 개의 NULL 관련 함수 호출 중 결과가 NULL 이 아닌 것은?",
     "options": [
-      "`COALESCE(NULL, NULL)`",
-      "`NVL(NULL, 0)`",
-      "`NVL(NULL, NULL)`",
-      "`NULLIF(1, 1)`"
+      "COALESCE(NULL, NULL)",
+      "NVL(NULL, 0)",
+      "NVL(NULL, NULL)",
+      "NULLIF(1, 1)"
     ],
     "correctIndex": 1,
     "explanation": "② `NVL(NULL, 0)` 만 NULL 을 0 으로 치환하여 0 을 반환한다. ① `COALESCE(NULL, NULL)` 은 모든 인자가 NULL 이라 NULL, ③ `NVL(NULL, NULL)` 도 NULL, ④ `NULLIF(1, 1)` 은 두 인자가 같으면 NULL 반환이라 NULL.",

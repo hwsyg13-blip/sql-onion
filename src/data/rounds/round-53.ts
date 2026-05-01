@@ -395,10 +395,10 @@ export const ROUND_53: QuizQuestion[] = [
     "number": 17,
     "title": "아래 주문 테이블에 대한 SELECT 의 ORDER BY 절로 가장 적절한 것은? (요구사항: 주문번호 DESC → 4번 컬럼 DESC → 1번 컬럼 ASC)",
     "options": [
-      "`ORDER BY 주문번호 DESC, 금액 ASC`",
-      "`ORDER BY 주문번호 DESC, 금액테이블번호 ASC`",
-      "`ORDER BY 주문번호 DESC, 4 DESC, 1 ASC`",
-      "`ORDER BY 주문번호 DESC, 4 DESC, 1 DESC`"
+      "ORDER BY 주문번호 DESC, 금액 ASC",
+      "ORDER BY 주문번호 DESC, 금액테이블번호 ASC",
+      "ORDER BY 주문번호 DESC, 4 DESC, 1 ASC",
+      "ORDER BY 주문번호 DESC, 4 DESC, 1 DESC"
     ],
     "correctIndex": 2,
     "explanation": "주문번호 DESC, 4번 컬럼 DESC, 1번 컬럼 ASC 형태로 ORDER BY 절에 컬럼 순번을 사용할 수 있다.",
@@ -619,10 +619,10 @@ export const ROUND_53: QuizQuestion[] = [
     "number": 24,
     "title": "아래 SQL 의 WHERE 조건과 동일한 의미를 가지는 것은?",
     "options": [
-      "`SELECT * FROM T WHERE COL1 = 1 AND COL2 = 3;`",
-      "`SELECT * FROM T WHERE COL1 = 1 OR COL2 IN (3, 4);`",
-      "`SELECT * FROM T WHERE COL1 IN (1) AND COL2 IN (3, 4);`",
-      "`SELECT * FROM T WHERE COL1 = 1 AND (COL2 = 3 OR COL2 = 4);`"
+      "SELECT * FROM T WHERE COL1 = 1 AND COL2 = 3;",
+      "SELECT * FROM T WHERE COL1 = 1 OR COL2 IN (3, 4);",
+      "SELECT * FROM T WHERE COL1 IN (1) AND COL2 IN (3, 4);",
+      "SELECT * FROM T WHERE COL1 = 1 AND (COL2 = 3 OR COL2 = 4);"
     ],
     "correctIndex": 3,
     "explanation": "다중 컬럼 IN `(COL1, COL2) IN ((1, 3), (1, 4))` 는 `(COL1=1 AND COL2=3) OR (COL1=1 AND COL2=4)` 와 동일하다. COL1 이 두 튜플에서 모두 1 이라 공통 인수로 묶으면 `COL1=1 AND (COL2=3 OR COL2=4)` 로 정리된다. ① 은 한 조건만, ② 는 OR 결합으로 더 넓고, ③ 은 (1, 3) (1, 4) 가 아닌 다른 조합도 매칭하므로 의미가 다르다.",
@@ -995,10 +995,10 @@ export const ROUND_53: QuizQuestion[] = [
     "number": 36,
     "title": "아래 EMP 테이블에서 SAL 상위 5순위 사원을 조회하는 SQL 로 옳은 것은?",
     "options": [
-      "`SELECT * FROM EMP WHERE ROWNUM <= 5 ORDER BY SAL DESC;`",
-      "`SELECT DISTINCT SAL FROM EMP ORDER BY SAL DESC;`",
-      "`SELECT * FROM (SELECT * FROM EMP ORDER BY SAL DESC) WHERE ROWNUM <= 5;`",
-      "`SELECT * FROM EMP FETCH FIRST 5 ROWS ONLY;`"
+      "SELECT * FROM EMP WHERE ROWNUM <= 5 ORDER BY SAL DESC;",
+      "SELECT DISTINCT SAL FROM EMP ORDER BY SAL DESC;",
+      "SELECT * FROM (SELECT * FROM EMP ORDER BY SAL DESC) WHERE ROWNUM <= 5;",
+      "SELECT * FROM EMP FETCH FIRST 5 ROWS ONLY;"
     ],
     "correctIndex": 2,
     "explanation": "Oracle 의 `ROWNUM` 은 `ORDER BY` 가 적용되기 전에 행에 1 부터 부여된다. ① 처럼 `WHERE ROWNUM <= 5` 와 `ORDER BY` 를 한 SELECT 안에 두면 정렬되지 않은 임의의 5 건이 잡힌 뒤 정렬되어 \"상위 5 건\" 이 보장되지 않는다. ② `DISTINCT` 는 중복 제거일 뿐 행 수를 5 로 제한하지 않는다. ④ 는 `ORDER BY` 가 없어 어떤 5 건이 나올지 보장되지 않는다. 정답은 인라인 뷰에서 먼저 정렬한 뒤 외부 쿼리에서 `ROWNUM <= 5` 를 적용하는 ③ 번 패턴이다.",
