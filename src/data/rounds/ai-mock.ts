@@ -16747,7 +16747,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 486,
-    "title": "EMP 테이블의 급여합계에 대해서 결합 가능한 모든 조건의 합계를 계산하는 것은?",
+    "title": "EMP 테이블의 급여합계에 대해서 DEPTNO와 JOB 두 칼럼의 결합 가능한 모든 조건별 부분합·총합을 계산하는 그룹 함수는?",
     "options": [
       "CUBE(DEPTNO, JOB)",
       "ROLLUP(DEPTNO, JOB)",
@@ -16755,12 +16755,95 @@ export const AI_MOCK: QuizQuestion[] = [
       "GROUP BY DEPTNO, JOB"
     ],
     "correctIndex": 0,
-    "explanation": "CUBE는 CUBE 함수에 제시한 칼럼에 대해서 결합 가능한 모든 집계를 계산한다.",
+    "explanation": "CUBE는 CUBE 함수에 제시한 칼럼에 대해서 결합 가능한 모든 집계를 계산한다. (DEPTNO, JOB) 결합 → 4가지 그룹: GROUP BY DEPTNO·JOB / GROUP BY DEPTNO / GROUP BY JOB / 전체 합계.",
     "chapter": "그룹 함수",
     "_source": "sqld-1140",
     "_origId": "sqld-0302",
     "_category": "그룹 함수",
-    "_correctRate": 10
+    "_correctRate": 10,
+    "references": [
+      {
+        "type": "table",
+        "caption": "[EMP] 테이블",
+        "headers": [
+          "DEPTNO",
+          "JOB",
+          "SAL"
+        ],
+        "rows": [
+          [
+            "10",
+            "MANAGER",
+            "2450"
+          ],
+          [
+            "10",
+            "PRESIDENT",
+            "5000"
+          ],
+          [
+            "10",
+            "CLERK",
+            "1300"
+          ],
+          [
+            "20",
+            "CLERK",
+            "800"
+          ],
+          [
+            "20",
+            "MANAGER",
+            "2975"
+          ],
+          [
+            "20",
+            "ANALYST",
+            "3000"
+          ],
+          [
+            "20",
+            "ANALYST",
+            "3000"
+          ],
+          [
+            "20",
+            "CLERK",
+            "1100"
+          ],
+          [
+            "30",
+            "SALESMAN",
+            "1600"
+          ],
+          [
+            "30",
+            "SALESMAN",
+            "1250"
+          ],
+          [
+            "30",
+            "SALESMAN",
+            "1250"
+          ],
+          [
+            "30",
+            "MANAGER",
+            "2850"
+          ],
+          [
+            "30",
+            "SALESMAN",
+            "1500"
+          ],
+          [
+            "30",
+            "CLERK",
+            "950"
+          ]
+        ]
+      }
+    ]
   },
   {
     "id": 11286,

@@ -21710,13 +21710,17 @@ ON a.DEPTNO = b.DEPTNO;</code></pre>
              data-pool="sqld-1140"
              data-subject="2과목"
              data-chapter="그룹 함수"
-             data-search="emp 테이블의 급여합계에 대해서 결합 가능한 모든 조건의 합계를 계산하는 것은?">
+             data-search="emp 테이블의 급여합계에 대해서 deptno와 job 두 칼럼의 결합 가능한 모든 조건별 부분합·총합을 계산하는 그룹 함수는?">
       <header class="card-head">
         <span class="seq">#509</span>
         <span class="tag">sqld-1140</span><span class="tag">sqld-0302</span><span class="tag">2과목</span><span class="tag">그룹 함수</span><span class="tag">cat: 그룹 함수</span><span class="tag">정답률 10%</span>
       </header>
-      <div class="title">EMP 테이블의 급여합계에 대해서 결합 가능한 모든 조건의 합계를 계산하는 것은?</div>
-      
+      <div class="title">EMP 테이블의 급여합계에 대해서 DEPTNO와 JOB 두 칼럼의 결합 가능한 모든 조건별 부분합·총합을 계산하는 그룹 함수는?</div>
+      <div class="refs">
+        <div class="ref-table">
+          <div class="ref-caption">[EMP] 테이블</div>
+          <table><thead><tr><th>DEPTNO</th><th>JOB</th><th>SAL</th></tr></thead><tbody><tr><td>10</td><td>MANAGER</td><td>2450</td></tr><tr><td>10</td><td>PRESIDENT</td><td>5000</td></tr><tr><td>10</td><td>CLERK</td><td>1300</td></tr><tr><td>20</td><td>CLERK</td><td>800</td></tr><tr><td>20</td><td>MANAGER</td><td>2975</td></tr><tr><td>20</td><td>ANALYST</td><td>3000</td></tr><tr><td>20</td><td>ANALYST</td><td>3000</td></tr><tr><td>20</td><td>CLERK</td><td>1100</td></tr><tr><td>30</td><td>SALESMAN</td><td>1600</td></tr><tr><td>30</td><td>SALESMAN</td><td>1250</td></tr><tr><td>30</td><td>SALESMAN</td><td>1250</td></tr><tr><td>30</td><td>MANAGER</td><td>2850</td></tr><tr><td>30</td><td>SALESMAN</td><td>1500</td></tr><tr><td>30</td><td>CLERK</td><td>950</td></tr></tbody></table>
+        </div></div>
       <ol class="opts">
         <li class="opt correct">
           <span class="opt-num">1</span>
@@ -21742,7 +21746,7 @@ ON a.DEPTNO = b.DEPTNO;</code></pre>
           
           
         </li></ol>
-      <details class="explain"><summary>해설 펼치기</summary><div class="explain-body">CUBE는 CUBE 함수에 제시한 칼럼에 대해서 결합 가능한 모든 집계를 계산한다.</div></details>
+      <details class="explain"><summary>해설 펼치기</summary><div class="explain-body">CUBE는 CUBE 함수에 제시한 칼럼에 대해서 결합 가능한 모든 집계를 계산한다. (DEPTNO, JOB) 결합 → 4가지 그룹: GROUP BY DEPTNO·JOB / GROUP BY DEPTNO / GROUP BY JOB / 전체 합계.</div></details>
     </article>
 
     <article class="card"
