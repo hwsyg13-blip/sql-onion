@@ -191,9 +191,14 @@ const combinedMockRaw = [
 
 // 외부 출처(sqld-1140, cbt-mock) 일부에 options 가 빈 채로 import 된 항목 다수 (이미지로 옵션이 그려진 원본을
 // 텍스트 추출 시 누락). 풀 수 없는 문제라 노출 단계에서 제외. 향후 vision 변환으로 복원되면 자동 복귀.
+//
+// 단, options 가 비어 있어도 optionReferences 에 보기 image/table 등이 있으면 학생이 보기를 볼 수 있으므로 유효.
+// (cbt-002 처럼 보기 1~4 가 image refs 인 정상 패턴을 제외하지 않기 위함.)
 function hasUsableOptions(q) {
-  if (!Array.isArray(q.options) || q.options.length === 0) return false;
-  return q.options.every(o => typeof o === 'string' && o.trim() !== '');
+  const hasTextOptions = Array.isArray(q.options) && q.options.length > 0 && q.options.every(o => typeof o === 'string' && o.trim() !== '');
+  if (hasTextOptions) return true;
+  const hasOptionRefs = Array.isArray(q.optionReferences) && q.optionReferences.some(arr => Array.isArray(arr) && arr.length > 0);
+  return hasOptionRefs;
 }
 const skippedEmpty = combinedMockRaw.filter(q => !hasUsableOptions(q));
 const combinedMock = combinedMockRaw.filter(hasUsableOptions);

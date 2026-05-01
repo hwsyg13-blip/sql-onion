@@ -57,7 +57,19 @@ const CATEGORY_TO_CHAPTER = {
 };
 
 // Save image data URL to file. Returns relative path /sqld-images/{key}.png
-function saveImage(key, dataUrl) {
+// 입력 형태 2가지:
+//   - { key, dataUrl } 객체 (questionImages, explanationImage)
+//   - 'data:image/png;base64,...' 문자열 그대로 (choiceImages, key 없음 → fallbackKey 필수)
+function saveImage(keyOrObj, dataUrlOrUndef, fallbackKey) {
+  let key, dataUrl;
+  if (typeof keyOrObj === 'string' && keyOrObj.startsWith('data:image/')) {
+    // string 직접: keyOrObj 가 data URL
+    dataUrl = keyOrObj;
+    key = fallbackKey;
+  } else {
+    key = keyOrObj;
+    dataUrl = dataUrlOrUndef;
+  }
   if (!key || !dataUrl) return null;
   const m = dataUrl.match(/^data:image\/(\w+);base64,(.+)$/);
   if (!m) return null;
@@ -94,10 +106,15 @@ for (const q of raw) {
   }
 
   // Build options. Each option may have an associated image.
+  // q.choiceImages[i] 는 { key, dataUrl } 객체 또는 'data:image/...' 문자열 둘 다 가능.
+  // 후자(문자열)인 경우 key 가 없어 fallback 으로 'sqld-{id}-c{i+1}' 사용.
   const optionReferences = q.choiceImages && q.choiceImages.some(c => c)
     ? q.choiceImages.map((ci, idx) => {
         if (!ci) return [];
-        const src = saveImage(ci.key, ci.dataUrl);
+        const fallback = `sqld-${String(q.id).padStart(4, '0')}-c${idx + 1}`;
+        const src = typeof ci === 'string'
+          ? saveImage(ci, undefined, fallback)
+          : saveImage(ci.key || fallback, ci.dataUrl);
         if (!src) return [];
         imgCount++;
         return [{ type: 'image', src, alt: `보기 ${idx + 1} 이미지` }];
