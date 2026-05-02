@@ -420,15 +420,24 @@ export const TheoryDetailScreen = ({ chapterId, onNavigate }) => {
           </div>
         </article>
 
-        {/* Right rail: 미니 테스트 + ToC + 광고 */}
-        <aside style={{ position: 'relative' }}>
-          <div style={{ position: 'sticky', top: 80, display: 'flex', flexDirection: 'column', gap: 14 }}>
-            {(OX_QUIZ[chapterId]?.length || EXAM_MAPPING[chapterId]?.length) ? (
-              <MiniTestSidebar chapterId={chapterId} chapterLabel={`${sub.code} ${ch.title}`} />
-            ) : null}
-            {toc.length > 0 && <TocCard toc={toc} />}
-            <AdSlot slot="THEORY_DETAIL_AFTER_MINITEST" format="rectangle" />
-          </div>
+        {/* Right rail: 미니 테스트 + ToC + 광고
+            — aside 자체를 sticky 로 만들어 스크롤 시 OX 퀴즈 박스가 따라오도록 */}
+        <aside style={{
+          position: 'sticky',
+          top: 80,
+          alignSelf: 'start',                 // 그리드 stretch 대신 콘텐츠 높이만 차지 (sticky 제대로 작동)
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 14,
+          maxHeight: 'calc(100vh - 96px)',    // 헤더 + 여유 → viewport 초과 시 자체 스크롤
+          overflowY: 'auto',
+          overscrollBehavior: 'contain',      // 사이드바 스크롤이 페이지로 전파 X
+        }}>
+          {(OX_QUIZ[chapterId]?.length || EXAM_MAPPING[chapterId]?.length) ? (
+            <MiniTestSidebar chapterId={chapterId} chapterLabel={`${sub.code} ${ch.title}`} />
+          ) : null}
+          {toc.length > 0 && <TocCard toc={toc} />}
+          <AdSlot slot="THEORY_DETAIL_AFTER_MINITEST" format="rectangle" />
         </aside>
       </div>
     </div>
