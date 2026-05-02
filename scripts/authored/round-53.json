@@ -307,7 +307,7 @@
     {
       "subject": "2과목",
       "number": 17,
-      "title": "아래 주문 테이블에 대한 SELECT 의 ORDER BY 절로 가장 적절한 것은? (요구사항: 주문번호 DESC → 4번 컬럼 DESC → 1번 컬럼 ASC)",
+      "title": "아래 요구사항을 만족하는 ORDER BY 절로 가장 적절한 것은?",
       "options": [
         "ORDER BY 주문번호 DESC, 금액 ASC",
         "ORDER BY 주문번호 DESC, 금액테이블번호 ASC",
@@ -927,7 +927,7 @@
     {
       "subject": "2과목",
       "number": 40,
-      "title": "아래 윈도우 절 중 `BETWEEN 1 PRECEDING AND 1 FOLLOWING` 과 동등한 것은?",
+      "title": "아래 윈도우 절과 동등한 의미를 가진 절은?",
       "options": [
         "RANGE BETWEEN 50 PRECEDING AND 150 FOLLOWING",
         "ROWS BETWEEN 1 PRECEDING AND 1 FOLLOWING",
@@ -935,7 +935,13 @@
         "RANGE BETWEEN CURRENT ROW AND UNBOUNDED FOLLOWING"
       ],
       "correctIndex": 1,
-      "explanation": "축약형 `BETWEEN 1 PRECEDING AND 1 FOLLOWING` 은 기본 단위 `ROWS` 로 해석되어 `ROWS BETWEEN 1 PRECEDING AND 1 FOLLOWING` 과 동등하다. RANGE 는 값 범위 기준이라 단위가 다르고, UNBOUNDED 는 한쪽이 무한이라 1·1 과 다르다."
+      "explanation": "축약형 윈도우 절에서 단위 키워드(ROWS/RANGE) 가 생략되면 기본 단위 ROWS 로 해석된다. 따라서 `BETWEEN 1 PRECEDING AND 1 FOLLOWING` 은 `ROWS BETWEEN 1 PRECEDING AND 1 FOLLOWING` 과 동등하다. RANGE 는 값 범위 기준이라 단위 자체가 다르고, UNBOUNDED 는 한쪽이 무한이라 1·1 과 다르다.",
+      "references": [
+        {
+          "type": "text",
+          "content": "기준 절: `BETWEEN 1 PRECEDING AND 1 FOLLOWING` (ROWS/RANGE 단위 키워드를 생략한 형태)"
+        }
+      ]
     },
     {
       "subject": "2과목",

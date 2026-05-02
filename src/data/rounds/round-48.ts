@@ -1221,7 +1221,7 @@ export const ROUND_48: QuizQuestion[] = [
     "round": 48,
     "subject": "2과목",
     "number": 36,
-    "title": "UNION·UNION ALL 의 결과 건수가 (9, 10) 이 되는 경우로 옳은 것은?",
+    "title": "두 SELECT 결과를 결합할 때 UNION 결과보다 UNION ALL 결과 행 수가 더 많은 경우의 (UNION 행 수, UNION ALL 행 수) 조합으로 옳은 것은?",
     "options": [
       "UNION 10, UNION ALL 9",
       "UNION 9, UNION ALL 9",
@@ -1229,7 +1229,7 @@ export const ROUND_48: QuizQuestion[] = [
       "UNION 9, UNION ALL 10"
     ],
     "correctIndex": 3,
-    "explanation": "두 SELECT 결과를 합쳤을 때 한 쪽이 9건, 다른 쪽이 10건이 나오는 경우는 \"한 행이 중복되어 있을 때\"입니다. 이때 UNION은 중복을 제거하므로 9건, UNION ALL은 중복을 그대로 유지하므로 10건이 나옵니다. 따라서 (UNION, UNION ALL) = (9, 10)이 되는 ④번이 정답입니다.",
+    "explanation": "UNION 은 중복을 제거하고 UNION ALL 은 중복을 유지하므로 UNION ALL 의 결과 행 수는 항상 UNION 결과보다 같거나 크다. 두 결과의 차이는 두 SELECT 사이의 중복 행 수와 같다.\n- ① UNION > UNION ALL — 불가능\n- ②③ 두 결과가 같음 — 두 SELECT 결과에 중복 0건일 때\n- ④ UNION ALL 이 1 더 많음 — 두 SELECT 결과에 중복 1건일 때 (정답)",
     "_source": "authored"
   },
   {
