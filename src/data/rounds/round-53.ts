@@ -1128,7 +1128,7 @@ export const ROUND_53: QuizQuestion[] = [
     "round": 53,
     "subject": "2과목",
     "number": 40,
-    "title": "아래 윈도우 절 중 `BETWEEN 1 PRECEDING AND 1 FOLLOWING` 과 동등한 것은?",
+    "title": "아래 윈도우 절과 동등한 의미를 가진 절은?",
     "options": [
       "RANGE BETWEEN 50 PRECEDING AND 150 FOLLOWING",
       "ROWS BETWEEN 1 PRECEDING AND 1 FOLLOWING",
@@ -1136,8 +1136,14 @@ export const ROUND_53: QuizQuestion[] = [
       "RANGE BETWEEN CURRENT ROW AND UNBOUNDED FOLLOWING"
     ],
     "correctIndex": 1,
-    "explanation": "축약형 `BETWEEN 1 PRECEDING AND 1 FOLLOWING` 은 기본 단위 `ROWS` 로 해석되어 `ROWS BETWEEN 1 PRECEDING AND 1 FOLLOWING` 과 동등하다. RANGE 는 값 범위 기준이라 단위가 다르고, UNBOUNDED 는 한쪽이 무한이라 1·1 과 다르다.",
-    "_source": "authored"
+    "explanation": "축약형 윈도우 절에서 단위 키워드(ROWS/RANGE) 가 생략되면 기본 단위 ROWS 로 해석된다. 따라서 `BETWEEN 1 PRECEDING AND 1 FOLLOWING` 은 `ROWS BETWEEN 1 PRECEDING AND 1 FOLLOWING` 과 동등하다. RANGE 는 값 범위 기준이라 단위 자체가 다르고, UNBOUNDED 는 한쪽이 무한이라 1·1 과 다르다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "text",
+        "content": "기준 절: `BETWEEN 1 PRECEDING AND 1 FOLLOWING` (ROWS/RANGE 단위 키워드를 생략한 형태)"
+      }
+    ]
   },
   {
     "id": 10390,
