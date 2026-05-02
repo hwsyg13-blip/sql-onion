@@ -779,7 +779,7 @@
     {
       "subject": "2과목",
       "number": 29,
-      "title": "아래 구문의 빈칸에 들어갈 NULL 관련 함수 조합 중, 결과가 첫 행부터 30, 60, 60 순서로 출력되는 것은?",
+      "title": "아래 SQL 의 실행 결과로 옳은 것은? (첫 행부터 순서대로 출력)",
       "options": [
         "30 60 30",
         "NULL 30 60",
@@ -787,7 +787,7 @@
         "30 60 60"
       ],
       "correctIndex": 3,
-      "explanation": "COALESCE는 인자를 순서대로 평가하여 가장 먼저 NULL이 아닌 값을 반환한다. 행별로 30, 60, 60 이 반환된다.",
+      "explanation": "COALESCE 는 인자를 왼쪽부터 순서대로 평가하여 가장 먼저 NULL 이 아닌 값을 반환한다.\n- 행 1 (30, NULL, 60): COALESCE → 30 (V1 이 NULL 아님)\n- 행 2 (NULL, 60, 90): COALESCE → 60 (V2)\n- 행 3 (NULL, NULL, 60): COALESCE → 60 (V3)\n\n따라서 결과는 30, 60, 60 → 정답 ④.",
       "references": [
         {
           "type": "table",
