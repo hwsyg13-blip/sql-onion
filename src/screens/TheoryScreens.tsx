@@ -186,6 +186,18 @@ export const TheoryDetailScreen = ({ chapterId, onNavigate }) => {
   const [zoomedSvg, setZoomedSvg] = React.useState<string | null>(null);
   const [bugOpen, setBugOpen] = React.useState(false);
 
+  // 모바일 레이아웃 감지 — OX 퀴즈를 hero 아래로 이동시키기 위함
+  // (theory-detail-grid 의 1fr 전환 breakpoint 와 동일: 900px)
+  const [isMobileLayout, setIsMobileLayout] = React.useState(false);
+  React.useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const mq = window.matchMedia('(max-width: 900px)');
+    setIsMobileLayout(mq.matches);
+    const handler = (e: MediaQueryListEvent) => setIsMobileLayout(e.matches);
+    mq.addEventListener('change', handler);
+    return () => mq.removeEventListener('change', handler);
+  }, []);
+
   if (!ctx || (!newHtml && !md)) return <TheoryStub chapterId={chapterId} onNavigate={onNavigate} />;
 
   const { sub, sec, ch } = ctx;
@@ -402,6 +414,14 @@ export const TheoryDetailScreen = ({ chapterId, onNavigate }) => {
             <p style={{ fontSize: 14.5, color: 'var(--fg-2)', margin: 0, lineHeight: 1.6 }}>{ch.oneLine}</p>
           </div>
 
+          {/* 모바일 한정: hero(챕터 타이틀) 바로 아래 OX 퀴즈
+              — 데스크톱은 우측 sticky aside 에서 마운트 (조건부) */}
+          {isMobileLayout && (OX_QUIZ[chapterId]?.length || EXAM_MAPPING[chapterId]?.length) ? (
+            <div style={{ marginBottom: 28 }}>
+              <MiniTestSidebar chapterId={chapterId} chapterLabel={`${sub.code} ${ch.title}`} />
+            </div>
+          ) : null}
+
           {/* 마크다운 본문 — .theory-md 가 디자인 시스템 적용 */}
           <div ref={bodyRef} className="theory-md" dangerouslySetInnerHTML={{ __html: html }} />
 
@@ -433,7 +453,8 @@ export const TheoryDetailScreen = ({ chapterId, onNavigate }) => {
           overflowY: 'auto',
           overscrollBehavior: 'contain',      // 사이드바 스크롤이 페이지로 전파 X
         }}>
-          {(OX_QUIZ[chapterId]?.length || EXAM_MAPPING[chapterId]?.length) ? (
+          {/* 데스크톱 한정: 모바일에서는 위 article 안 hero 아래에 inline 으로 마운트됨 */}
+          {!isMobileLayout && (OX_QUIZ[chapterId]?.length || EXAM_MAPPING[chapterId]?.length) ? (
             <MiniTestSidebar chapterId={chapterId} chapterLabel={`${sub.code} ${ch.title}`} />
           ) : null}
           {toc.length > 0 && <TocCard toc={toc} />}
