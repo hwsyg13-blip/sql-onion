@@ -186,6 +186,18 @@ export const TheoryDetailScreen = ({ chapterId, onNavigate }) => {
   const [zoomedSvg, setZoomedSvg] = React.useState<string | null>(null);
   const [bugOpen, setBugOpen] = React.useState(false);
 
+  // 모바일 레이아웃 감지 — OX 퀴즈를 hero 아래로 이동시키기 위함
+  // (theory-detail-grid 의 1fr 전환 breakpoint 와 동일: 900px)
+  const [isMobileLayout, setIsMobileLayout] = React.useState(false);
+  React.useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const mq = window.matchMedia('(max-width: 900px)');
+    setIsMobileLayout(mq.matches);
+    const handler = (e: MediaQueryListEvent) => setIsMobileLayout(e.matches);
+    mq.addEventListener('change', handler);
+    return () => mq.removeEventListener('change', handler);
+  }, []);
+
   if (!ctx || (!newHtml && !md)) return <TheoryStub chapterId={chapterId} onNavigate={onNavigate} />;
 
   const { sub, sec, ch } = ctx;
@@ -402,6 +414,14 @@ export const TheoryDetailScreen = ({ chapterId, onNavigate }) => {
             <p style={{ fontSize: 14.5, color: 'var(--fg-2)', margin: 0, lineHeight: 1.6 }}>{ch.oneLine}</p>
           </div>
 
+          {/* 모바일 한정: hero(챕터 타이틀) 바로 아래 OX 퀴즈
+              — 데스크톱은 우측 sticky aside 에서 마운트 (조건부) */}
+          {isMobileLayout && (OX_QUIZ[chapterId]?.length || EXAM_MAPPING[chapterId]?.length) ? (
+            <div style={{ marginBottom: 28 }}>
+              <MiniTestSidebar chapterId={chapterId} chapterLabel={`${sub.code} ${ch.title}`} />
+            </div>
+          ) : null}
+
           {/* 마크다운 본문 — .theory-md 가 디자인 시스템 적용 */}
           <div ref={bodyRef} className="theory-md" dangerouslySetInnerHTML={{ __html: html }} />
 
@@ -420,15 +440,25 @@ export const TheoryDetailScreen = ({ chapterId, onNavigate }) => {
           </div>
         </article>
 
-        {/* Right rail: 미니 테스트 + ToC + 광고 */}
-        <aside style={{ position: 'relative' }}>
-          <div style={{ position: 'sticky', top: 80, display: 'flex', flexDirection: 'column', gap: 14 }}>
-            {(OX_QUIZ[chapterId]?.length || EXAM_MAPPING[chapterId]?.length) ? (
-              <MiniTestSidebar chapterId={chapterId} chapterLabel={`${sub.code} ${ch.title}`} />
-            ) : null}
-            {toc.length > 0 && <TocCard toc={toc} />}
-            <AdSlot slot="THEORY_DETAIL_AFTER_MINITEST" format="rectangle" />
-          </div>
+        {/* Right rail: 미니 테스트 + ToC + 광고
+            — aside 자체를 sticky 로 만들어 스크롤 시 OX 퀴즈 박스가 따라오도록 */}
+        <aside style={{
+          position: 'sticky',
+          top: 80,
+          alignSelf: 'start',                 // 그리드 stretch 대신 콘텐츠 높이만 차지 (sticky 제대로 작동)
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 14,
+          maxHeight: 'calc(100vh - 96px)',    // 헤더 + 여유 → viewport 초과 시 자체 스크롤
+          overflowY: 'auto',
+          overscrollBehavior: 'contain',      // 사이드바 스크롤이 페이지로 전파 X
+        }}>
+          {/* 데스크톱 한정: 모바일에서는 위 article 안 hero 아래에 inline 으로 마운트됨 */}
+          {!isMobileLayout && (OX_QUIZ[chapterId]?.length || EXAM_MAPPING[chapterId]?.length) ? (
+            <MiniTestSidebar chapterId={chapterId} chapterLabel={`${sub.code} ${ch.title}`} />
+          ) : null}
+          {toc.length > 0 && <TocCard toc={toc} />}
+          <AdSlot slot="THEORY_DETAIL_AFTER_MINITEST" format="rectangle" />
         </aside>
       </div>
     </div>
