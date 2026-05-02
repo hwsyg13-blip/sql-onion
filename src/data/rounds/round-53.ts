@@ -393,7 +393,7 @@ export const ROUND_53: QuizQuestion[] = [
     "round": 53,
     "subject": "2과목",
     "number": 17,
-    "title": "아래 주문 테이블에 대한 SELECT 의 ORDER BY 절로 가장 적절한 것은? (요구사항: 주문번호 DESC → 4번 컬럼 DESC → 1번 컬럼 ASC)",
+    "title": "아래 요구사항을 만족하는 ORDER BY 절로 가장 적절한 것은?",
     "options": [
       "ORDER BY 주문번호 DESC, 금액 ASC",
       "ORDER BY 주문번호 DESC, 금액테이블번호 ASC",
