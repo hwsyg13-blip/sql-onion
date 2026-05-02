@@ -441,20 +441,25 @@ export const TheoryDetailScreen = ({ chapterId, onNavigate }) => {
         </article>
 
         {/* Right rail: 미니 테스트 + ToC + 광고
-            — aside 자체를 sticky 로 만들어 스크롤 시 OX 퀴즈 박스가 따라오도록 */}
-        <aside style={{
-          position: 'sticky',
+            데스크톱: position: fixed 로 viewport 우측에 고정 (스크롤과 무관하게 따라옴)
+            - sticky 가 부모 chain 의 transform/contain 영향을 받을 수 있어 fixed 로 변경
+            - grid-template-columns 의 320px 셀은 fixed aside 영역과 시각적 정렬되어 article 좌측 1fr 만 차지
+            모바일(≤900px): aside 자체를 숨기고 article 안 hero 아래에서 inline 으로 마운트 */}
+        <aside style={isMobileLayout ? { display: 'none' } : {
+          position: 'fixed',
           top: 80,
-          alignSelf: 'start',                 // 그리드 stretch 대신 콘텐츠 높이만 차지 (sticky 제대로 작동)
+          // 페이지 wrapper(max-width 1180, padding 28) 우측과 정렬
+          // 화면이 1180 이상이면 wrapper 우측 28px 안쪽, 미만이면 화면 우측 28px
+          right: 'max(28px, calc((100vw - 1180px) / 2 + 28px))',
+          width: 320,
+          maxHeight: 'calc(100vh - 96px)',
+          overflowY: 'auto',
+          overscrollBehavior: 'contain',
           display: 'flex',
           flexDirection: 'column',
           gap: 14,
-          maxHeight: 'calc(100vh - 96px)',    // 헤더 + 여유 → viewport 초과 시 자체 스크롤
-          overflowY: 'auto',
-          overscrollBehavior: 'contain',      // 사이드바 스크롤이 페이지로 전파 X
         }}>
-          {/* 데스크톱 한정: 모바일에서는 위 article 안 hero 아래에 inline 으로 마운트됨 */}
-          {!isMobileLayout && (OX_QUIZ[chapterId]?.length || EXAM_MAPPING[chapterId]?.length) ? (
+          {(OX_QUIZ[chapterId]?.length || EXAM_MAPPING[chapterId]?.length) ? (
             <MiniTestSidebar chapterId={chapterId} chapterLabel={`${sub.code} ${ch.title}`} />
           ) : null}
           {toc.length > 0 && <TocCard toc={toc} />}
