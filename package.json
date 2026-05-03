@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "watch:theory": "node scripts/watch-theory.mjs",
     "build": "vite build && node scripts/build-static-pages.mjs",
     "preview": "vite preview"
   },
