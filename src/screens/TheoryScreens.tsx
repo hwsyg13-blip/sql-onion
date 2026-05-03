@@ -180,9 +180,11 @@ export const TheoryDetailScreen = ({ chapterId, onNavigate }) => {
 
   const ctx = findChapter(chapterId);
   // markdown-first 챕터 — user가 직접 markdown으로 작성/수정 중인 챕터.
-  // 이 목록에 들어간 챕터는 HTML 시안(theoryHtml.ts)을 무시하고
-  // 항상 markdown(theoryContent.ts)으로 렌더링한다.
-  const MARKDOWN_FIRST_CHAPTERS = new Set(['c111']);
+  // 이 set 에 들어간 챕터는 HTML 시안(theoryHtml.ts)을 무시하고
+  // 항상 markdown(theoryContent.ts)으로 렌더링.
+  // 비어 있으면 모든 챕터가 HTML 시안 그대로. user 가 markdown 재작성을
+  // 시작하는 챕터가 생기면 이 set 에 추가.
+  const MARKDOWN_FIRST_CHAPTERS = new Set<string>([]);
   const useMarkdownFirst = MARKDOWN_FIRST_CHAPTERS.has(chapterId);
   // 새 시안 HTML 우선, 없으면 기존 마크다운 fallback (markdown-first 챕터는 HTML 무시)
   const newHtml = useMarkdownFirst ? null : THEORY_HTML[chapterId];

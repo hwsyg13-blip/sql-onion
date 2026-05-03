@@ -1300,8 +1300,13 @@ img, svg {
 
 /* =============================================================
    미니 테스트 사이드바 — 이론 챕터 우측 (PC ≥ 1024px)
-   한 블럭 안에서 OX → 연관 기출(MC) 시퀀스
+   OX 블럭 + 4지선다 블럭 두 개 (각 .mt-block) 가 .mt-sidebar 아래 차례로
    ============================================================= */
+.mt-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
 .mt-block {
   background: var(--bg-card);
   border: 1px solid var(--border-subtle);
