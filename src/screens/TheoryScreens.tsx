@@ -179,8 +179,13 @@ export const TheoryDetailScreen = ({ chapterId, onNavigate }) => {
   }, [chapterId]);
 
   const ctx = findChapter(chapterId);
-  // 새 시안 HTML 우선, 없으면 기존 마크다운 fallback
-  const newHtml = THEORY_HTML[chapterId];
+  // markdown-first 챕터 — user가 직접 markdown으로 작성/수정 중인 챕터.
+  // 이 목록에 들어간 챕터는 HTML 시안(theoryHtml.ts)을 무시하고
+  // 항상 markdown(theoryContent.ts)으로 렌더링한다.
+  const MARKDOWN_FIRST_CHAPTERS = new Set(['c111']);
+  const useMarkdownFirst = MARKDOWN_FIRST_CHAPTERS.has(chapterId);
+  // 새 시안 HTML 우선, 없으면 기존 마크다운 fallback (markdown-first 챕터는 HTML 무시)
+  const newHtml = useMarkdownFirst ? null : THEORY_HTML[chapterId];
   const md = THEORY_BODY[chapterId];
   const bodyRef = React.useRef<HTMLDivElement>(null);
   const [zoomedSvg, setZoomedSvg] = React.useState<string | null>(null);
