@@ -252,6 +252,8 @@ const QuizBlock = ({ kind, items, chapterLabel, chapterId, blockId }: any) => {
 
 // ─────────────────────────────────────────────────────────────
 // 사이드바 외곽 — OX 블럭 + MC 블럭 두 개를 차례로 렌더
+// 토글 한 번으로 두 블럭 모두 접고/펼치기 — 중간 사이즈 화면에서 본문 가림 방지.
+// 접힘 상태는 localStorage 에 보존.
 // ─────────────────────────────────────────────────────────────
 export const MiniTestSidebar = ({ chapterId, chapterLabel }: any) => {
   // OX 리스트 (챕터 단위 셔플)
@@ -266,27 +268,58 @@ export const MiniTestSidebar = ({ chapterId, chapterLabel }: any) => {
     [chapterId]
   );
 
+  // 접힘 상태 — localStorage 보존
+  const [collapsed, setCollapsed] = React.useState<boolean>(() => {
+    try { return localStorage.getItem('sqlo_mt_collapsed') === '1'; }
+    catch { return false; }
+  });
+  React.useEffect(() => {
+    try { localStorage.setItem('sqlo_mt_collapsed', collapsed ? '1' : '0'); }
+    catch {}
+  }, [collapsed]);
+
   if (oxList.length === 0 && mcList.length === 0) return null;
 
+  const totalCount = oxList.length + mcList.length;
+
   return (
-    <aside className="mt-sidebar">
-      {oxList.length > 0 && (
-        <QuizBlock
-          kind="ox"
-          items={oxList}
-          chapterLabel={chapterLabel}
-          chapterId={chapterId}
-          blockId="ox"
-        />
-      )}
-      {mcList.length > 0 && (
-        <QuizBlock
-          kind="mc"
-          items={mcList}
-          chapterLabel={chapterLabel}
-          chapterId={chapterId}
-          blockId="mc"
-        />
+    <aside className={`mt-sidebar ${collapsed ? 'mt-sidebar-collapsed' : ''}`}>
+      <button
+        type="button"
+        className="mt-toggle"
+        onClick={() => setCollapsed((v) => !v)}
+        aria-expanded={!collapsed}
+        aria-label={collapsed ? '미니 테스트 펼치기' : '미니 테스트 접기'}
+        title={collapsed ? '미니 테스트 펼치기' : '미니 테스트 접기'}
+      >
+        <span className="mt-toggle-label">
+          미니 테스트 <span className="mt-toggle-count">{totalCount}</span>
+        </span>
+        <span className={`mt-toggle-icon ${collapsed ? 'is-collapsed' : ''}`}>
+          <Ic.ChevronDown size={16}/>
+        </span>
+      </button>
+      {!collapsed && (
+        <>
+          {oxList.length > 0 && (
+            <QuizBlock
+              kind="ox"
+              items={oxList}
+              chapterLabel={chapterLabel}
+              chapterId={chapterId}
+              blockId="ox"
+            />
+          )}
+          {mcList.length > 0 && (
+            <QuizBlock
+              kind="mc"
+              items={mcList}
+              chapterLabel={chapterLabel}
+              chapterId={chapterId}
+              blockId="mc"
+            />
+          )}
+        </>
       )}
     </aside>
   );

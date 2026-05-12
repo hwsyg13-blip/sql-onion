@@ -1300,12 +1300,67 @@ img, svg {
 
 /* =============================================================
    미니 테스트 사이드바 — 이론 챕터 우측 (PC ≥ 1024px)
-   OX 블럭 + 4지선다 블럭 두 개 (각 .mt-block) 가 .mt-sidebar 아래 차례로
+   OX 블럭 + 4지선다 블럭 두 개 (각 .mt-block) 가 .mt-sidebar 아래 차례로.
+   상단 토글 한 번으로 두 블럭 모두 접기/펼치기 (mid-size 화면 본문 가림 방지).
    ============================================================= */
 .mt-sidebar {
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: 12px;
+}
+.mt-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 10px 14px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 10px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--fg-1);
+  box-shadow: var(--shadow-sm);
+  transition: background 120ms, border-color 120ms;
+}
+.mt-toggle:hover {
+  background: var(--bg-muted);
+  border-color: var(--border-default);
+}
+.mt-toggle-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.mt-toggle-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 22px;
+  height: 18px;
+  padding: 0 6px;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--point-600);
+  background: var(--point-100);
+  border-radius: 999px;
+}
+.mt-toggle-icon {
+  display: inline-flex;
+  align-items: center;
+  color: var(--fg-3);
+  transition: transform 180ms ease;
+}
+.mt-toggle-icon.is-collapsed {
+  transform: rotate(-90deg);
+}
+.mt-sidebar-collapsed {
+  gap: 0;
+}
+.mt-sidebar-collapsed .mt-toggle {
+  background: var(--bg-muted);
 }
 .mt-block {
   background: var(--bg-card);
