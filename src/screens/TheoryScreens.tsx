@@ -193,6 +193,16 @@ export const TheoryDetailScreen = ({ chapterId, onNavigate }) => {
   const [zoomedSvg, setZoomedSvg] = React.useState<string | null>(null);
   const [bugOpen, setBugOpen] = React.useState(false);
 
+  // ?edit=1 dev 인라인 편집 모드 — contentEditable + 자동 저장
+  const isEditMode = React.useMemo(() => {
+    try {
+      return new URLSearchParams(window.location.search).get('edit') === '1';
+    } catch { return false; }
+  }, []);
+  const [saveStatus, setSaveStatus] = React.useState<'idle' | 'saving' | 'saved' | 'error'>('idle');
+  const [dirty, setDirty] = React.useState(false);
+  const saveTimerRef = React.useRef<any>(null);
+
   // 모바일 레이아웃 감지 — OX 퀴즈를 hero 아래로 이동시키기 위함
   // (theory-detail-grid 의 1fr 전환 breakpoint 와 동일: 900px)
   const [isMobileLayout, setIsMobileLayout] = React.useState(false);
@@ -443,7 +453,98 @@ export const TheoryDetailScreen = ({ chapterId, onNavigate }) => {
           ) : null}
 
           {/* 마크다운 본문 — .theory-md 가 디자인 시스템 적용 */}
-          <div ref={bodyRef} className="theory-md" dangerouslySetInnerHTML={{ __html: html }} />
+          <div
+            ref={bodyRef}
+            className={`theory-md ${isEditMode ? 'theory-md-editing' : ''}`}
+            contentEditable={isEditMode}
+            suppressContentEditableWarning
+            spellCheck={false}
+            onInput={isEditMode ? () => {
+              setDirty(true);
+              if (saveTimerRef.current) clearTimeout(saveTimerRef.current);
+              saveTimerRef.current = setTimeout(async () => {
+                if (!bodyRef.current) return;
+                setSaveStatus('saving');
+                try {
+                  const res = await fetch('/api/save-theory', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ chapterId, articleHtml: bodyRef.current.innerHTML }),
+                  });
+                  if (res.ok) { setSaveStatus('saved'); setDirty(false); }
+                  else setSaveStatus('error');
+                } catch { setSaveStatus('error'); }
+              }, 1200);
+            } : undefined}
+            dangerouslySetInnerHTML={{ __html: html }}
+          />
+
+          {/* Edit mode 상태 표시 + 수동 저장 버튼 */}
+          {isEditMode && (
+            <div style={{
+              position: 'fixed',
+              right: 20,
+              bottom: 20,
+              zIndex: 9999,
+              display: 'flex',
+              gap: 8,
+              alignItems: 'center',
+              background: 'var(--bg-card)',
+              border: '1px solid var(--border-subtle)',
+              borderRadius: 999,
+              padding: '8px 14px',
+              boxShadow: '0 6px 20px rgba(0,0,0,0.18)',
+              fontSize: 13,
+              fontWeight: 700,
+            }}>
+              <span style={{
+                display: 'inline-block', width: 8, height: 8, borderRadius: 999,
+                background:
+                  saveStatus === 'saving' ? '#F59E0B'
+                  : saveStatus === 'error' ? '#DC2626'
+                  : dirty ? '#F59E0B'
+                  : '#16A34A',
+              }} />
+              <span style={{ color: 'var(--fg-1)' }}>
+                편집 모드 — {
+                  saveStatus === 'saving' ? '저장 중…'
+                  : saveStatus === 'error' ? '저장 실패'
+                  : dirty ? '수정됨 (자동 저장 대기)'
+                  : saveStatus === 'saved' ? '저장됨'
+                  : '대기'
+                }
+              </span>
+              <button
+                type="button"
+                onClick={async () => {
+                  if (!bodyRef.current) return;
+                  setSaveStatus('saving');
+                  try {
+                    const res = await fetch('/api/save-theory', {
+                      method: 'POST',
+                      headers: { 'Content-Type': 'application/json' },
+                      body: JSON.stringify({ chapterId, articleHtml: bodyRef.current.innerHTML }),
+                    });
+                    if (res.ok) { setSaveStatus('saved'); setDirty(false); }
+                    else setSaveStatus('error');
+                  } catch { setSaveStatus('error'); }
+                }}
+                style={{
+                  padding: '6px 12px',
+                  background: 'var(--point-600)',
+                  color: '#fff',
+                  border: 'none',
+                  borderRadius: 999,
+                  fontFamily: 'inherit',
+                  fontSize: 12,
+                  fontWeight: 700,
+                  cursor: 'pointer',
+                }}
+              >
+                지금 저장
+              </button>
+            </div>
+          )}
 
           {/* Nav footer */}
           <div style={{ display: 'flex', justifyContent: 'space-between', gap: 10, marginTop: 40, paddingTop: 24, borderTop: '1px solid var(--border-subtle)' }}>
