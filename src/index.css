@@ -336,6 +336,11 @@ img, svg {
    .theory-md — 양파 디자인 시스템 적용 마크다운 렌더
    ============================================================= */
 .theory-md { color: var(--fg-2); font-size: 15.5px; line-height: 1.8; }
+
+/* ?edit=1 dev 인라인 편집 모드 — contentEditable + 시각 단서 */
+.theory-md-editing { outline: 2px dashed var(--point-300); outline-offset: 6px; border-radius: 4px; }
+.theory-md-editing :focus { outline: 2px solid var(--point-500); outline-offset: 2px; background: var(--point-100); border-radius: 4px; }
+
 .theory-md > *:first-child { margin-top: 0 !important; }
 .theory-md p { font-size: 15.5px; color: var(--fg-2); line-height: 1.8; margin: 0 0 14px; }
 .theory-md strong { color: var(--fg-1); font-weight: 700; }
