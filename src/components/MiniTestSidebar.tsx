@@ -289,15 +289,26 @@ export const MiniTestSidebar = ({ chapterId, chapterLabel }: any) => {
         className="mt-toggle"
         onClick={() => setCollapsed((v) => !v)}
         aria-expanded={!collapsed}
-        aria-label={collapsed ? '미니 테스트 펼치기' : '미니 테스트 접기'}
-        title={collapsed ? '미니 테스트 펼치기' : '미니 테스트 접기'}
+        aria-label={collapsed ? `미니 테스트 펼치기 (${totalCount}문항)` : '미니 테스트 접기'}
+        title={collapsed ? `미니 테스트 펼치기 (${totalCount}문항)` : '미니 테스트 접기'}
       >
-        <span className="mt-toggle-label">
-          미니 테스트 <span className="mt-toggle-count">{totalCount}</span>
-        </span>
-        <span className={`mt-toggle-icon ${collapsed ? 'is-collapsed' : ''}`}>
-          <Ic.ChevronDown size={16}/>
-        </span>
+        {collapsed ? (
+          // 컴팩트 모드 — 초록 pill (아이콘 + 카운트만)
+          <>
+            <Ic.ListChecks size={16}/>
+            <span className="mt-toggle-count">{totalCount}</span>
+          </>
+        ) : (
+          // 펼친 모드 — 카드 톤 바 (라벨 + 카운트 + chevron)
+          <>
+            <span className="mt-toggle-label">
+              미니 테스트 <span className="mt-toggle-count">{totalCount}</span>
+            </span>
+            <span className="mt-toggle-icon">
+              <Ic.ChevronDown size={16}/>
+            </span>
+          </>
+        )}
       </button>
       {!collapsed && (
         <>

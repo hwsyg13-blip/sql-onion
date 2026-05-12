@@ -1353,14 +1353,29 @@ img, svg {
   color: var(--fg-3);
   transition: transform 180ms ease;
 }
-.mt-toggle-icon.is-collapsed {
-  transform: rotate(-90deg);
-}
+/* 접힘 상태 — 사이드바가 작은 초록 pill 하나로 축소 */
 .mt-sidebar-collapsed {
   gap: 0;
+  align-items: flex-end;  /* 토글을 우측 정렬 */
 }
 .mt-sidebar-collapsed .mt-toggle {
-  background: var(--bg-muted);
+  width: auto;
+  padding: 8px 14px;
+  background: var(--point-600);
+  color: #fff;
+  border-color: var(--point-600);
+  border-radius: 999px;
+  box-shadow: 0 4px 14px rgba(46, 125, 50, 0.28);
+  gap: 8px;
+}
+.mt-sidebar-collapsed .mt-toggle:hover {
+  background: var(--point-700, #1b5e20);
+  border-color: var(--point-700, #1b5e20);
+  box-shadow: 0 6px 18px rgba(46, 125, 50, 0.36);
+}
+.mt-sidebar-collapsed .mt-toggle-count {
+  background: rgba(255, 255, 255, 0.22);
+  color: #fff;
 }
 .mt-block {
   background: var(--bg-card);
