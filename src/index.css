@@ -854,6 +854,116 @@ img, svg {
 }
 .step-card:last-child .arrow-next { display: none; }
 
+/* (C-1) 데이터 모델링 세계 흐름 — 현실세계 ↔ 개념세계 ↔ 물리세계 */
+.modeling-worlds {
+  display: grid;
+  grid-template-columns: 1fr auto 1.2fr auto 1fr;
+  gap: 14px;
+  align-items: center;
+  margin: 18px 0 26px;
+  padding: 22px 20px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 14px;
+  box-shadow: var(--shadow-sm);
+}
+.mw-zone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  text-align: center;
+}
+.mw-zone-tag {
+  display: inline-block;
+  padding: 3px 10px;
+  background: var(--bg-muted);
+  color: var(--fg-3);
+  border-radius: 999px;
+  font-size: 10.5px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+}
+.mw-zone-concept .mw-zone-tag {
+  background: var(--point-100);
+  color: var(--point-600);
+}
+.mw-cloud,
+.mw-db {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 14px 18px;
+  background: linear-gradient(180deg, #FFFFFF, #F8F9F5);
+  border: 1px solid var(--border-subtle);
+  border-radius: 14px;
+  min-width: 96px;
+}
+.mw-cloud-icon,
+.mw-db-icon { font-size: 28px; line-height: 1; }
+.mw-cloud-text,
+.mw-db-text { font-size: 13px; font-weight: 800; color: var(--fg-1); line-height: 1.3; }
+.mw-stack {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 6px;
+  width: 100%;
+  max-width: 220px;
+}
+.mw-stage {
+  padding: 11px 14px;
+  background: var(--bg-card);
+  border: 1px solid var(--point-300);
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--fg-1);
+  text-align: center;
+}
+.mw-stage-arrow {
+  font-size: 11px;
+  color: var(--point-600);
+  font-weight: 700;
+  text-align: center;
+  padding: 2px 0;
+}
+.mw-arrow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  font-size: 10.5px;
+  color: var(--fg-3);
+  font-weight: 700;
+  line-height: 1.25;
+  text-align: center;
+}
+.mw-arrow-label { white-space: nowrap; }
+.mw-arrow-glyph {
+  font-size: 22px;
+  color: var(--point-500);
+  line-height: 1;
+  margin-top: 4px;
+}
+/* 모바일 — 세로 스택 */
+@media (max-width: 720px) {
+  .modeling-worlds {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+  .mw-arrow {
+    flex-direction: row;
+    gap: 8px;
+  }
+  .mw-arrow-glyph {
+    transform: rotate(90deg);
+    margin-top: 0;
+  }
+  .mw-stack { max-width: none; }
+}
+
 /* (D) 분류/카테고리 카드 — 3열 배지 카드 */
 .cls-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 16px 0 22px; }
 .cls-row.cols-2 { grid-template-columns: repeat(2, 1fr); }
