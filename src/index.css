@@ -1380,6 +1380,23 @@ img, svg {
   opacity: 0;
   pointer-events: none;
 }
+
+/* 모바일 — bottom-right floating wrapper 안에서 column-reverse
+   (DOM 순서는 toggle → blocks 이지만, 시각적으로 blocks 가 위로 펼쳐지고
+   toggle pill 은 항상 하단에 고정. wrapper 가 bottom: 76 으로 anchor 되어
+   확장은 위로 일어남.) */
+.mt-mobile-floating .mt-sidebar {
+  flex-direction: column-reverse;
+  width: 100%;
+}
+.mt-mobile-floating .mt-blocks {
+  max-height: calc(100vh - 220px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+.mt-mobile-floating .mt-sidebar-collapsed .mt-blocks {
+  max-height: 0;
+}
 .mt-block {
   background: var(--bg-card);
   border: 1px solid var(--border-subtle);
