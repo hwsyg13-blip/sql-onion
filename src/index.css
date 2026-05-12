@@ -1397,6 +1397,27 @@ img, svg {
 .mt-mobile-floating .mt-sidebar-collapsed .mt-blocks {
   max-height: 0;
 }
+
+/* Backdrop — 모바일에서만 보임. 펼침 상태에서 본문 dim + 탭으로 닫기 */
+.mt-backdrop {
+  display: none;
+}
+@media (max-width: 900px) {
+  .mt-backdrop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    opacity: 1;
+    transition: opacity 220ms ease;
+    cursor: pointer;
+    z-index: -1;  /* mt-mobile-floating 의 stacking context 안에서 pill/blocks 보다 뒤 */
+  }
+  .mt-backdrop.is-collapsed {
+    opacity: 0;
+    pointer-events: none;
+  }
+}
 .mt-block {
   background: var(--bg-card);
   border: 1px solid var(--border-subtle);

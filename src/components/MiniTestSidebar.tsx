@@ -268,10 +268,17 @@ export const MiniTestSidebar = ({ chapterId, chapterLabel }: any) => {
     [chapterId]
   );
 
-  // 접힘 상태 — localStorage 보존
+  // 접힘 상태 — localStorage 보존. 첫 진입 디폴트는 모바일=접힘 / 데스크탑=펼침.
   const [collapsed, setCollapsed] = React.useState<boolean>(() => {
-    try { return localStorage.getItem('sqlo_mt_collapsed') === '1'; }
-    catch { return false; }
+    try {
+      const stored = localStorage.getItem('sqlo_mt_collapsed');
+      if (stored === '1') return true;
+      if (stored === '0') return false;
+      if (typeof window !== 'undefined') {
+        return window.matchMedia('(max-width: 900px)').matches;
+      }
+      return false;
+    } catch { return false; }
   });
   React.useEffect(() => {
     try { localStorage.setItem('sqlo_mt_collapsed', collapsed ? '1' : '0'); }
@@ -281,7 +288,14 @@ export const MiniTestSidebar = ({ chapterId, chapterLabel }: any) => {
   if (oxList.length === 0 && mcList.length === 0) return null;
 
   return (
-    <aside className={`mt-sidebar ${collapsed ? 'mt-sidebar-collapsed' : ''}`}>
+    <>
+      {/* 모바일에서만 보이는 backdrop — 펼침 상태일 때 본문 dim + 외부 탭으로 닫기 */}
+      <div
+        className={`mt-backdrop ${collapsed ? 'is-collapsed' : ''}`}
+        onClick={() => setCollapsed(true)}
+        aria-hidden={collapsed}
+      />
+      <aside className={`mt-sidebar ${collapsed ? 'mt-sidebar-collapsed' : ''}`}>
       <button
         type="button"
         className="mt-toggle"
@@ -317,5 +331,6 @@ export const MiniTestSidebar = ({ chapterId, chapterLabel }: any) => {
         )}
       </div>
     </aside>
+    </>
   );
 };
