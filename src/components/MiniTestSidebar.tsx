@@ -280,8 +280,6 @@ export const MiniTestSidebar = ({ chapterId, chapterLabel }: any) => {
 
   if (oxList.length === 0 && mcList.length === 0) return null;
 
-  const totalCount = oxList.length + mcList.length;
-
   return (
     <aside className={`mt-sidebar ${collapsed ? 'mt-sidebar-collapsed' : ''}`}>
       <button
@@ -289,49 +287,35 @@ export const MiniTestSidebar = ({ chapterId, chapterLabel }: any) => {
         className="mt-toggle"
         onClick={() => setCollapsed((v) => !v)}
         aria-expanded={!collapsed}
-        aria-label={collapsed ? `미니 테스트 펼치기 (${totalCount}문항)` : '미니 테스트 접기'}
-        title={collapsed ? `미니 테스트 펼치기 (${totalCount}문항)` : '미니 테스트 접기'}
+        aria-label={collapsed ? 'Quiz 펼치기' : 'Quiz 접기'}
+        title={collapsed ? 'Quiz 펼치기' : 'Quiz 접기'}
       >
-        {collapsed ? (
-          // 컴팩트 모드 — 초록 pill (아이콘 + 카운트만)
-          <>
-            <Ic.ListChecks size={16}/>
-            <span className="mt-toggle-count">{totalCount}</span>
-          </>
-        ) : (
-          // 펼친 모드 — 카드 톤 바 (라벨 + 카운트 + chevron)
-          <>
-            <span className="mt-toggle-label">
-              미니 테스트 <span className="mt-toggle-count">{totalCount}</span>
-            </span>
-            <span className="mt-toggle-icon">
-              <Ic.ChevronDown size={16}/>
-            </span>
-          </>
-        )}
+        <span className="mt-toggle-label">Quiz</span>
+        <span className="mt-toggle-icon">
+          <Ic.ChevronDown size={16}/>
+        </span>
       </button>
-      {!collapsed && (
-        <>
-          {oxList.length > 0 && (
-            <QuizBlock
-              kind="ox"
-              items={oxList}
-              chapterLabel={chapterLabel}
-              chapterId={chapterId}
-              blockId="ox"
-            />
-          )}
-          {mcList.length > 0 && (
-            <QuizBlock
-              kind="mc"
-              items={mcList}
-              chapterLabel={chapterLabel}
-              chapterId={chapterId}
-              blockId="mc"
-            />
-          )}
-        </>
-      )}
+      {/* 블럭은 항상 렌더 — 접힘은 CSS max-height/opacity transition 으로 자연스럽게 */}
+      <div className="mt-blocks" aria-hidden={collapsed}>
+        {oxList.length > 0 && (
+          <QuizBlock
+            kind="ox"
+            items={oxList}
+            chapterLabel={chapterLabel}
+            chapterId={chapterId}
+            blockId="ox"
+          />
+        )}
+        {mcList.length > 0 && (
+          <QuizBlock
+            kind="mc"
+            items={mcList}
+            chapterLabel={chapterLabel}
+            chapterId={chapterId}
+            blockId="mc"
+          />
+        )}
+      </div>
     </aside>
   );
 };

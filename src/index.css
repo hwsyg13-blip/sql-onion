@@ -1306,24 +1306,27 @@ img, svg {
 .mt-sidebar {
   display: flex;
   flex-direction: column;
+  align-items: flex-end;  /* 토글 항상 우측 정렬 — 정렬 점프 방지 */
   gap: 12px;
 }
 .mt-toggle {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-  padding: 10px 14px;
+  gap: 8px;
+  padding: 8px 14px;
+  width: auto;
   background: var(--bg-card);
   border: 1px solid var(--border-subtle);
-  border-radius: 10px;
+  border-radius: 999px;  /* 항상 pill */
   cursor: pointer;
   font-family: inherit;
   font-size: 13px;
   font-weight: 700;
   color: var(--fg-1);
   box-shadow: var(--shadow-sm);
-  transition: background 120ms, border-color 120ms;
+  /* 자연스러운 morph — 카드 톤 pill ↔ 초록 pill */
+  transition: background 260ms ease, color 260ms ease,
+              border-color 260ms ease, box-shadow 260ms ease;
 }
 .mt-toggle:hover {
   background: var(--bg-muted);
@@ -1332,50 +1335,50 @@ img, svg {
 .mt-toggle-label {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-}
-.mt-toggle-count {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 22px;
-  height: 18px;
-  padding: 0 6px;
-  font-size: 11px;
-  font-weight: 700;
-  color: var(--point-600);
-  background: var(--point-100);
-  border-radius: 999px;
 }
 .mt-toggle-icon {
   display: inline-flex;
   align-items: center;
-  color: var(--fg-3);
-  transition: transform 180ms ease;
+  color: currentColor;
+  opacity: 0.7;
+  transition: transform 260ms ease, opacity 200ms ease, max-width 260ms ease;
+  max-width: 24px;
+  overflow: hidden;
 }
-/* 접힘 상태 — 사이드바가 작은 초록 pill 하나로 축소 */
+/* 블럭 래퍼 — width 100% 로 우측 정렬 영향 안 받음, max-height 트랜지션 */
+.mt-blocks {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  max-height: 4000px;
+  opacity: 1;
+  overflow: hidden;
+  transition: max-height 360ms ease, opacity 220ms ease;
+}
+/* 접힘 상태 — 토글 색·그림자만 변경, 블럭은 shrink */
 .mt-sidebar-collapsed {
   gap: 0;
-  align-items: flex-end;  /* 토글을 우측 정렬 */
 }
 .mt-sidebar-collapsed .mt-toggle {
-  width: auto;
-  padding: 8px 14px;
   background: var(--point-600);
   color: #fff;
   border-color: var(--point-600);
-  border-radius: 999px;
   box-shadow: 0 4px 14px rgba(46, 125, 50, 0.28);
-  gap: 8px;
 }
 .mt-sidebar-collapsed .mt-toggle:hover {
   background: var(--point-700, #1b5e20);
   border-color: var(--point-700, #1b5e20);
   box-shadow: 0 6px 18px rgba(46, 125, 50, 0.36);
 }
-.mt-sidebar-collapsed .mt-toggle-count {
-  background: rgba(255, 255, 255, 0.22);
-  color: #fff;
+.mt-sidebar-collapsed .mt-toggle-icon {
+  max-width: 0;
+  opacity: 0;
+}
+.mt-sidebar-collapsed .mt-blocks {
+  max-height: 0;
+  opacity: 0;
+  pointer-events: none;
 }
 .mt-block {
   background: var(--bg-card);
