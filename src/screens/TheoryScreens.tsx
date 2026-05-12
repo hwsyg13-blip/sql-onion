@@ -421,11 +421,24 @@ export const TheoryDetailScreen = ({ chapterId, onNavigate }) => {
             <p style={{ fontSize: 14.5, color: 'var(--fg-2)', margin: 0, lineHeight: 1.6 }}>{ch.oneLine}</p>
           </div>
 
-          {/* 모바일 한정: hero(챕터 타이틀) 바로 아래 OX 퀴즈
-              — 데스크톱은 우측 sticky aside 에서 마운트 (조건부) */}
+          {/* 모바일 한정: bottom-right floating (스크롤 따라 따라옴)
+              — 데스크톱은 우측 fixed aside 에서 마운트 (조건부) */}
           {isMobileLayout && (OX_QUIZ[chapterId]?.length || EXAM_MAPPING[chapterId]?.length) ? (
-            <div style={{ marginBottom: 28 }}>
-              <MiniTestSidebar chapterId={chapterId} chapterLabel={`${sub.code} ${ch.title}`} />
+            <div
+              className="mt-mobile-floating"
+              style={{
+                position: 'fixed',
+                right: 12,
+                bottom: 76,  // 모바일 하단 nav 위에 띄움
+                zIndex: 50,
+                width: 'calc(100vw - 24px)',
+                maxWidth: 360,
+                pointerEvents: 'none',  // wrapper 자체는 클릭 통과 — 자식만 클릭 가능
+              }}
+            >
+              <div style={{ pointerEvents: 'auto' }}>
+                <MiniTestSidebar chapterId={chapterId} chapterLabel={`${sub.code} ${ch.title}`} />
+              </div>
             </div>
           ) : null}
 

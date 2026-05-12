@@ -1300,12 +1300,123 @@ img, svg {
 
 /* =============================================================
    미니 테스트 사이드바 — 이론 챕터 우측 (PC ≥ 1024px)
-   OX 블럭 + 4지선다 블럭 두 개 (각 .mt-block) 가 .mt-sidebar 아래 차례로
+   OX 블럭 + 4지선다 블럭 두 개 (각 .mt-block) 가 .mt-sidebar 아래 차례로.
+   상단 토글 한 번으로 두 블럭 모두 접기/펼치기 (mid-size 화면 본문 가림 방지).
    ============================================================= */
 .mt-sidebar {
   display: flex;
   flex-direction: column;
+  align-items: flex-end;  /* 토글 항상 우측 정렬 — 정렬 점프 방지 */
+  gap: 12px;
+}
+.mt-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  width: auto;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 999px;  /* 항상 pill */
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--fg-1);
+  box-shadow: var(--shadow-sm);
+  /* 자연스러운 morph — 카드 톤 pill ↔ 초록 pill */
+  transition: background 260ms ease, color 260ms ease,
+              border-color 260ms ease, box-shadow 260ms ease;
+}
+.mt-toggle:hover {
+  background: var(--bg-muted);
+  border-color: var(--border-default);
+}
+.mt-toggle-label {
+  display: inline-flex;
+  align-items: center;
+}
+.mt-toggle-icon {
+  display: inline-flex;
+  align-items: center;
+  color: currentColor;
+  opacity: 0.7;
+  transition: transform 260ms ease, opacity 200ms ease, max-width 260ms ease;
+  max-width: 24px;
+  overflow: hidden;
+}
+/* 블럭 래퍼 — width 100% 로 우측 정렬 영향 안 받음, max-height 트랜지션 */
+.mt-blocks {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
   gap: 18px;
+  max-height: 4000px;
+  opacity: 1;
+  overflow: hidden;
+  transition: max-height 360ms ease, opacity 220ms ease;
+}
+/* 접힘 상태 — 토글 색·그림자만 변경, 블럭은 shrink */
+.mt-sidebar-collapsed {
+  gap: 0;
+}
+.mt-sidebar-collapsed .mt-toggle {
+  background: var(--point-600);
+  color: #fff;
+  border-color: var(--point-600);
+  box-shadow: 0 4px 14px rgba(46, 125, 50, 0.28);
+}
+.mt-sidebar-collapsed .mt-toggle:hover {
+  background: var(--point-700, #1b5e20);
+  border-color: var(--point-700, #1b5e20);
+  box-shadow: 0 6px 18px rgba(46, 125, 50, 0.36);
+}
+.mt-sidebar-collapsed .mt-toggle-icon {
+  max-width: 0;
+  opacity: 0;
+}
+.mt-sidebar-collapsed .mt-blocks {
+  max-height: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* 모바일 — bottom-right floating wrapper 안에서 column-reverse
+   (DOM 순서는 toggle → blocks 이지만, 시각적으로 blocks 가 위로 펼쳐지고
+   toggle pill 은 항상 하단에 고정. wrapper 가 bottom: 76 으로 anchor 되어
+   확장은 위로 일어남.) */
+.mt-mobile-floating .mt-sidebar {
+  flex-direction: column-reverse;
+  width: 100%;
+}
+.mt-mobile-floating .mt-blocks {
+  max-height: calc(100vh - 220px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+.mt-mobile-floating .mt-sidebar-collapsed .mt-blocks {
+  max-height: 0;
+}
+
+/* Backdrop — 모바일에서만 보임. 펼침 상태에서 본문 dim + 탭으로 닫기 */
+.mt-backdrop {
+  display: none;
+}
+@media (max-width: 900px) {
+  .mt-backdrop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    opacity: 1;
+    transition: opacity 220ms ease;
+    cursor: pointer;
+    z-index: -1;  /* mt-mobile-floating 의 stacking context 안에서 pill/blocks 보다 뒤 */
+  }
+  .mt-backdrop.is-collapsed {
+    opacity: 0;
+    pointer-events: none;
+  }
 }
 .mt-block {
   background: var(--bg-card);
