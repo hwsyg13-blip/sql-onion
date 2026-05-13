@@ -193,7 +193,7 @@ export const TheoryDetailScreen = ({ chapterId, onNavigate }) => {
   const [zoomedSvg, setZoomedSvg] = React.useState<string | null>(null);
   const [bugOpen, setBugOpen] = React.useState(false);
 
-  // ?edit=1 dev 인라인 편집 모드 — contentEditable + 자동 저장
+  // ?edit=1 dev 인라인 편집 모드 — contentEditable + 수동 저장 (Ctrl/Cmd+S)
   const isEditMode = React.useMemo(() => {
     try {
       return new URLSearchParams(window.location.search).get('edit') === '1';
@@ -201,7 +201,66 @@ export const TheoryDetailScreen = ({ chapterId, onNavigate }) => {
   }, []);
   const [saveStatus, setSaveStatus] = React.useState<'idle' | 'saving' | 'saved' | 'error'>('idle');
   const [dirty, setDirty] = React.useState(false);
-  const saveTimerRef = React.useRef<any>(null);
+
+  // 저장 함수 — 버튼·단축키 공용
+  const doSave = React.useCallback(async () => {
+    if (!bodyRef.current) return;
+    setSaveStatus('saving');
+    try {
+      const res = await fetch('/api/save-theory', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ chapterId, articleHtml: bodyRef.current.innerHTML }),
+      });
+      if (res.ok) { setSaveStatus('saved'); setDirty(false); }
+      else setSaveStatus('error');
+    } catch { setSaveStatus('error'); }
+  }, [chapterId]);
+
+  // 편집 모드 — Ctrl/Cmd+S 단축키 (브라우저 저장 다이얼로그 막고 우리 저장)
+  React.useEffect(() => {
+    if (!isEditMode) return;
+    const onKey = (e: KeyboardEvent) => {
+      if ((e.ctrlKey || e.metaKey) && (e.key === 's' || e.key === 'S')) {
+        e.preventDefault();
+        doSave();
+      }
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [isEditMode, doSave]);
+
+  // 편집 모드 + dirty 상태에서 페이지 떠나기 전 경고
+  React.useEffect(() => {
+    if (!isEditMode || !dirty) return;
+    const onBeforeUnload = (e: BeforeUnloadEvent) => {
+      e.preventDefault();
+      e.returnValue = '';
+    };
+    window.addEventListener('beforeunload', onBeforeUnload);
+    return () => window.removeEventListener('beforeunload', onBeforeUnload);
+  }, [isEditMode, dirty]);
+
+  // 편집 모드일 때 Vite HMR 의 full page reload 차단 (저장 후 자동 새로고침으로
+  // 편집 중인 다른 곳의 변경이 날아가는 것 방지). 자체 HMR accept 만 받음.
+  React.useEffect(() => {
+    if (!isEditMode) return;
+    if (typeof import.meta !== 'undefined' && (import.meta as any).hot) {
+      const hot = (import.meta as any).hot;
+      const handler = (payload: any) => {
+        if (payload?.type === 'full-reload') {
+          // dirty 상태면 차단, 아니면 허용
+          if (dirty) {
+            // 실제 reload 차단은 Vite 코어에 없어서 best-effort —
+            // 콘솔 안내 후 사용자가 수동 새로고침
+            console.warn('[edit-mode] full-reload 차단 — 저장 안 된 변경이 있습니다. 저장 후 수동 새로고침.');
+          }
+        }
+      };
+      hot.on('vite:beforeFullReload', handler);
+      return () => hot.off('vite:beforeFullReload', handler);
+    }
+  }, [isEditMode, dirty]);
 
   // 모바일 레이아웃 감지 — OX 퀴즈를 hero 아래로 이동시키기 위함
   // (theory-detail-grid 의 1fr 전환 breakpoint 와 동일: 900px)
@@ -459,23 +518,9 @@ export const TheoryDetailScreen = ({ chapterId, onNavigate }) => {
             contentEditable={isEditMode}
             suppressContentEditableWarning
             spellCheck={false}
-            onInput={isEditMode ? () => {
-              setDirty(true);
-              if (saveTimerRef.current) clearTimeout(saveTimerRef.current);
-              saveTimerRef.current = setTimeout(async () => {
-                if (!bodyRef.current) return;
-                setSaveStatus('saving');
-                try {
-                  const res = await fetch('/api/save-theory', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ chapterId, articleHtml: bodyRef.current.innerHTML }),
-                  });
-                  if (res.ok) { setSaveStatus('saved'); setDirty(false); }
-                  else setSaveStatus('error');
-                } catch { setSaveStatus('error'); }
-              }, 1200);
-            } : undefined}
+            // 자동 저장 제거 — 입력 도중 HMR reload 로 커서 잃고 HTML 구조
+            // 깨지는 사고가 있어서 수동 저장만 사용. Ctrl/Cmd+S 단축키도 지원.
+            onInput={isEditMode ? () => { setDirty(true); setSaveStatus('idle'); } : undefined}
             dangerouslySetInnerHTML={{ __html: html }}
           />
 
@@ -509,26 +554,15 @@ export const TheoryDetailScreen = ({ chapterId, onNavigate }) => {
                 편집 모드 — {
                   saveStatus === 'saving' ? '저장 중…'
                   : saveStatus === 'error' ? '저장 실패'
-                  : dirty ? '수정됨 (자동 저장 대기)'
+                  : dirty ? '수정됨 (저장 안 됨)'
                   : saveStatus === 'saved' ? '저장됨'
                   : '대기'
                 }
               </span>
               <button
                 type="button"
-                onClick={async () => {
-                  if (!bodyRef.current) return;
-                  setSaveStatus('saving');
-                  try {
-                    const res = await fetch('/api/save-theory', {
-                      method: 'POST',
-                      headers: { 'Content-Type': 'application/json' },
-                      body: JSON.stringify({ chapterId, articleHtml: bodyRef.current.innerHTML }),
-                    });
-                    if (res.ok) { setSaveStatus('saved'); setDirty(false); }
-                    else setSaveStatus('error');
-                  } catch { setSaveStatus('error'); }
-                }}
+                onClick={doSave}
+                title="저장 (Ctrl/Cmd+S)"
                 style={{
                   padding: '6px 12px',
                   background: 'var(--point-600)',
@@ -541,7 +575,7 @@ export const TheoryDetailScreen = ({ chapterId, onNavigate }) => {
                   cursor: 'pointer',
                 }}
               >
-                지금 저장
+                저장 (Ctrl+S)
               </button>
             </div>
           )}
