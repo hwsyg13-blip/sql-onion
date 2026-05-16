@@ -1389,8 +1389,8 @@ export const ROUND_58: QuizQuestion[] = [
       "3",
       "4"
     ],
-    "correctIndex": 2,
-    "explanation": "문자열 '13123123123' 에서 '312' 패턴이 처음 등장하는 위치는 세 번째 문자이다.",
+    "correctIndex": 1,
+    "explanation": "REGEXP_INSTR 은 패턴이 처음 매칭되는 시작 위치(1-base)를 반환한다. 문자열 '13123123123' 의 2번째 문자부터 '3','1','2' 가 이어지므로 '312' 패턴의 첫 매칭 위치는 2 이다.",
     "_source": "authored",
     "references": [
       {
