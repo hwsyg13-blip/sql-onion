@@ -738,16 +738,58 @@ export const ROUND_50: QuizQuestion[] = [
     "round": 50,
     "subject": "2과목",
     "number": 24,
-    "title": "SQL 집합 연산자 중 교집합을 반환하는 것은?",
+    "title": "아래 두 테이블에 대해 UNION 과 UNION ALL 을 각각 수행했을 때 결과 행 수로 옳은 것은?",
     "options": [
-      "UNION ALL",
-      "EXCEPT",
-      "INTERSECT",
-      "UNION"
+      "UNION 4건, UNION ALL 6건",
+      "UNION 6건, UNION ALL 6건",
+      "UNION 4건, UNION ALL 4건",
+      "UNION 3건, UNION ALL 6건"
     ],
-    "correctIndex": 2,
-    "explanation": "`INTERSECT` 는 두 결과 집합에 공통으로 존재하는 행만 반환하는 교집합 연산자이다. `UNION` 은 합집합(중복 제거), `UNION ALL` 은 중복 유지 합집합, `EXCEPT`(MINUS)는 차집합이다.",
-    "_source": "authored"
+    "correctIndex": 0,
+    "explanation": "UNION 은 두 결과를 합친 뒤 중복을 제거하므로 A·B·C·D 네 건이 된다. UNION ALL 은 중복 제거 없이 그대로 이어 붙이므로 3 + 3 = 6 건이 된다. 중복 제거를 위해 정렬 작업이 더해지는 만큼 UNION 이 UNION ALL 보다 비용이 크다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "caption": "T1 테이블",
+        "headers": [
+          "V"
+        ],
+        "rows": [
+          [
+            "A"
+          ],
+          [
+            "B"
+          ],
+          [
+            "C"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "T2 테이블",
+        "headers": [
+          "V"
+        ],
+        "rows": [
+          [
+            "B"
+          ],
+          [
+            "C"
+          ],
+          [
+            "D"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT V FROM T1 UNION     SELECT V FROM T2;\nSELECT V FROM T1 UNION ALL SELECT V FROM T2;"
+      }
+    ]
   },
   {
     "id": 10524,
@@ -963,16 +1005,54 @@ export const ROUND_50: QuizQuestion[] = [
     "round": 50,
     "subject": "2과목",
     "number": 34,
-    "title": "아래 네 개의 SQL 중 실행 결과가 다른 것은?",
+    "title": "아래 두 테이블에 대한 네 SQL 중 결과 행 수가 나머지와 다른 것은?",
     "options": [
-      "LEFT OUTER JOIN",
-      "UNION ALL + RIGHT OUTER JOIN",
-      "FULL OUTER JOIN",
-      "INNER JOIN 만 수행"
+      "SELECT * FROM A LEFT OUTER JOIN B ON A.ID = B.ID;",
+      "SELECT * FROM A RIGHT OUTER JOIN B ON A.ID = B.ID;",
+      "SELECT * FROM A FULL OUTER JOIN B ON A.ID = B.ID;",
+      "SELECT * FROM A INNER JOIN B ON A.ID = B.ID;"
     ],
     "correctIndex": 3,
-    "explanation": "①·②·③ 은 외부 조인으로 미매칭 행을 보존하지만, ④ INNER JOIN 은 매칭되지 않는 행을 제외하므로 결과가 다르다.",
-    "_source": "authored"
+    "explanation": "공통 행은 2·3 두 건이다. LEFT 는 여기에 A 에만 있는 1 을 더해 3 건, RIGHT 는 B 에만 있는 4 를 더해 3 건, FULL 은 양쪽 미매칭을 모두 더해 4 건이 된다. INNER 만 매칭된 2 건을 반환하므로 ④ 가 나머지와 다르다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "caption": "A 테이블",
+        "headers": [
+          "ID"
+        ],
+        "rows": [
+          [
+            "1"
+          ],
+          [
+            "2"
+          ],
+          [
+            "3"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "B 테이블",
+        "headers": [
+          "ID"
+        ],
+        "rows": [
+          [
+            "2"
+          ],
+          [
+            "3"
+          ],
+          [
+            "4"
+          ]
+        ]
+      }
+    ]
   },
   {
     "id": 10534,
@@ -1489,16 +1569,48 @@ export const ROUND_50: QuizQuestion[] = [
     "round": 50,
     "subject": "2과목",
     "number": 46,
-    "title": "1, 2, 3, 4, 5 와 같이 동순위 없이 연속 번호를 부여하는 윈도우 함수는?",
+    "title": "아래 SQL 의 RN 컬럼 값을 위에서부터 순서대로 나열한 것은?",
     "options": [
-      "RANK",
-      "ROW_NUMBER",
-      "DENSE_RANK",
-      "NTILE"
+      "1, 2, 3, 4",
+      "1, 2, 2, 4",
+      "1, 2, 2, 3",
+      "1, 1, 2, 3"
     ],
-    "correctIndex": 1,
-    "explanation": "ROW_NUMBER 는 동일 값이 존재해도 순위를 공유하지 않고 1부터 연속된 번호를 부여한다.",
-    "_source": "authored"
+    "correctIndex": 0,
+    "explanation": "ROW_NUMBER 는 정렬 결과에 동률이 있어도 각 행에 고유한 순번을 차례로 부여한다. VAL 이 20 인 두 행에도 서로 다른 2 와 3 이 매겨지므로 결과는 1, 2, 3, 4 이다. 동률에 같은 값을 주려면 RANK 나 DENSE_RANK 를 써야 한다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "caption": "T 테이블",
+        "headers": [
+          "ID",
+          "VAL"
+        ],
+        "rows": [
+          [
+            "1",
+            "10"
+          ],
+          [
+            "2",
+            "20"
+          ],
+          [
+            "3",
+            "20"
+          ],
+          [
+            "4",
+            "30"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT ID, VAL,\n       ROW_NUMBER() OVER (ORDER BY VAL) AS RN\nFROM   T;"
+      }
+    ]
   },
   {
     "id": 10546,
@@ -1588,7 +1700,7 @@ export const ROUND_50: QuizQuestion[] = [
       },
       {
         "type": "table",
-        "caption": "출력 결과 (LAG 컬럼이 정답의 ㄱ/ㄴ 위치)",
+        "caption": "출력 결과",
         "headers": [
           "행",
           "금액",

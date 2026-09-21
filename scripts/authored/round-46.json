@@ -634,15 +634,47 @@
     {
       "subject": "2과목",
       "number": 21,
-      "title": "아래 네 윈도우 함수 중 동일 키 데이터 [10, 20, 20, 30, 40]에 대해 결과가 다른 것은?",
+      "title": "아래 데이터에 네 윈도우 함수를 적용했을 때, 마지막 행의 값이 나머지와 다른 것은?",
       "options": [
-        "RANK() → 1, 2, 2, 4, 5",
-        "DENSE_RANK() → 1, 2, 2, 3, 4",
-        "ROW_NUMBER() → 1, 2, 3, 4, 5",
-        "RANK() 와 ROW_NUMBER() 는 결과가 항상 같다."
+        "RANK() OVER (ORDER BY VAL)",
+        "DENSE_RANK() OVER (ORDER BY VAL)",
+        "ROW_NUMBER() OVER (ORDER BY VAL)",
+        "NTILE(5) OVER (ORDER BY VAL)"
       ],
-      "correctIndex": 3,
-      "explanation": "동일 값이 존재하면 RANK는 공동 순위 뒤 번호를 건너뛰지만 ROW_NUMBER는 유일한 순번을 부여하므로 두 함수는 일반적으로 같지 않다."
+      "correctIndex": 1,
+      "explanation": "VAL 이 20 인 행이 두 개라 동률이 생긴다. RANK 는 1, 2, 2, 4, 5 로 동률 다음 순위를 건너뛰고 DENSE_RANK 는 1, 2, 2, 3, 4 로 건너뛰지 않는다. ROW_NUMBER 는 동률과 무관하게 1, 2, 3, 4, 5 이고 NTILE(5) 도 다섯 그룹으로 나누어 1, 2, 3, 4, 5 가 된다. 마지막 행의 값이 4 인 DENSE_RANK 만 나머지(5)와 다르다.",
+      "references": [
+        {
+          "type": "table",
+          "caption": "T 테이블",
+          "headers": [
+            "ID",
+            "VAL"
+          ],
+          "rows": [
+            [
+              "1",
+              "10"
+            ],
+            [
+              "2",
+              "20"
+            ],
+            [
+              "3",
+              "20"
+            ],
+            [
+              "4",
+              "30"
+            ],
+            [
+              "5",
+              "40"
+            ]
+          ]
+        }
+      ]
     },
     {
       "subject": "2과목",

@@ -128,20 +128,20 @@
     {
       "subject": "1과목",
       "number": 9,
-      "title": "엔터티 간 관계에서 1:1, 1:M 과 같이 관계의 기수성을 나타내는 것은?",
+      "title": "아래 ERD 의 관계 표기에서 관계 차수(Cardinality)와 관계 선택 사양(Optionality)을 올바르게 읽은 것은?",
       "options": [
-        "관계명(Relationship Membership)",
-        "관계차수(Relationship Degree/Cardinality)",
-        "관계선택사양(Relationship Optionality)",
-        "관계정의(Relationship Definition)"
+        "차수 1:M, 사원 측 선택",
+        "차수 1:M, 사원 측 필수",
+        "차수 M:N, 사원 측 선택",
+        "차수 1:1, 사원 측 필수"
       ],
-      "correctIndex": 1,
-      "explanation": "1:1, 1:M, M:N처럼 두 엔터티 간 관계가 몇 대 몇인지 표시하는 것을 관계차수(Cardinality)라고 한다. 관계명은 관계 자체의 이름, 관계선택사양은 필수/선택 여부를 나타내므로 의미가 다르다. 정답은 ②번이다.",
+      "correctIndex": 0,
+      "explanation": "관계선 끝의 까마귀발은 다(多)를 뜻하므로 한 부서에 여러 사원이 속하는 1:M 관계다. 사원 쪽 끝의 ○ 는 선택 참여를 뜻해 사원이 한 명도 없는 부서도 존재할 수 있다. 관계 차수는 참여하는 인스턴스의 수를, 선택 사양은 필수 참여인지 선택 참여인지를 나타낸다.",
       "references": [
         {
           "type": "erd",
-          "caption": "ERD 에서 1:1 / 1:M / M:N 표기 예시 (mermaid erDiagram)",
-          "mermaid": "erDiagram\n    A1 ||--|| B1 : \"1대1\"\n    A2 ||--o{ B2 : \"1대M\"\n    A3 }o--o{ B3 : \"M대N\""
+          "caption": "부서-사원 ERD",
+          "mermaid": "erDiagram\n    부서 ||--o{ 사원 : \"소속\""
         }
       ]
     },
