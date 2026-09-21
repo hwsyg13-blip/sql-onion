@@ -525,7 +525,7 @@ export const ROUND_59: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "-- 빈칸에 EXISTS 또는 INTERSECT 사용\nSELECT * FROM STUDENT S\nWHERE  ( ? ) (SELECT 1 FROM LECTURE L WHERE L.SID = S.SID);\n\n-- 또는\nSELECT SID FROM STUDENT\n( ? )\nSELECT SID FROM LECTURE;"
+        "code": "SELECT * FROM STUDENT S\nWHERE  ( ? ) (SELECT 1 FROM LECTURE L WHERE L.SID = S.SID);\n\n-- 또는\nSELECT SID FROM STUDENT\n( ? )\nSELECT SID FROM LECTURE;"
       }
     ]
   },

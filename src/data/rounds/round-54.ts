@@ -605,7 +605,7 @@ export const ROUND_54: QuizQuestion[] = [
       [
         {
           "type": "table",
-          "caption": "보기 ① 3건 — COL1·COL2 매칭 결과 (정답 시나리오)",
+          "caption": "보기 ① 결과",
           "headers": [
             "COL1",
             "COL2",
@@ -637,7 +637,7 @@ export const ROUND_54: QuizQuestion[] = [
       [
         {
           "type": "table",
-          "caption": "보기 ② 2건 — (A,가) 그룹만 헤아린 경우 (부분 카운트 오류)",
+          "caption": "보기 ② 결과",
           "headers": [
             "COL1",
             "COL2",
@@ -663,7 +663,7 @@ export const ROUND_54: QuizQuestion[] = [
       [
         {
           "type": "table",
-          "caption": "보기 ③ 1건 — KEYA = KEYB 까지 비교했다고 가정한 경우 (조인 조건 오해)",
+          "caption": "보기 ③ 결과",
           "headers": [
             "COL1",
             "COL2",
@@ -683,7 +683,7 @@ export const ROUND_54: QuizQuestion[] = [
       [
         {
           "type": "table",
-          "caption": "보기 ④ 공집합 — 동일명 컬럼이 전혀 없다고 잘못 판단한 경우 (NATURAL JOIN 의 의미 오해)",
+          "caption": "보기 ④ 결과",
           "headers": [
             "COL1",
             "COL2",
@@ -1547,7 +1547,7 @@ export const ROUND_54: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "INSERT INTO T VALUES (1, 380);   -- 정상\nUPDATE T SET COL2 = 600 WHERE COL1 = 1;   -- CHECK 조건 위반\nINSERT INTO T VALUES (1, 200);   -- PK 조건 위반\nINSERT INTO T VALUES (2, 390);   -- 정상\n\nSELECT SUM(COL2) FROM T;"
+        "code": "INSERT INTO T VALUES (1, 380);\nUPDATE T SET COL2 = 600 WHERE COL1 = 1;\nINSERT INTO T VALUES (1, 200);\nINSERT INTO T VALUES (2, 390);\n\nSELECT SUM(COL2) FROM T;"
       }
     ]
   },

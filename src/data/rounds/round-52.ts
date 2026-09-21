@@ -948,13 +948,7 @@ export const ROUND_52: QuizQuestion[] = [
     ],
     "correctIndex": 3,
     "explanation": "원본 기출에서 구체적 SQL 표기는 유실되었고 정답 번호(④)만 복원되어 있다. ①·②·③ 은 모두 COL2 가 NULL 이 아닌 행에 한정한 합과 동치이지만, ④ 는 NULL 행까지 포함한 전체 SUM 이라 결과가 다르다.",
-    "_source": "authored",
-    "references": [
-      {
-        "type": "text",
-        "content": "원본 PDF 표기: '문제 32. A결과와 B결과 답 다른 것 고르는 거 / 정답: 4번' — 본문 SQL 4 개와 선지 텍스트가 원본 복원 메모에서 누락되었으며, 정답 번호만 보존되어 있다."
-      }
-    ]
+    "_source": "authored"
   },
   {
     "id": 10432,
