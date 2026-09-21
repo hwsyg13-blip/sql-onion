@@ -1762,33 +1762,7 @@ export const ROUND_56: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "CREATE TABLE TAB1 (COL1 NUMBER, COL2 NUMBER);\nINSERT INTO TAB1 VALUES (1, 2);\nINSERT INTO TAB1 VALUES (2, 1);\nINSERT INTO TAB1 VALUES (3, 4);\nSAVEPOINT SP1;\n\nUPDATE TAB1 SET COL1 = 4 WHERE COL2 <= 2;   -- (4,2),(4,1),(3,4)\nSAVEPOINT SP2;\n\nDELETE FROM TAB1 WHERE COL2 = 2;\nROLLBACK TO SAVEPOINT SP2;                  -- (4,2),(4,1),(3,4) 복원\n\nINSERT INTO TAB1 VALUES (4, 1);             -- (4,2),(4,1),(3,4),(4,1)\nCOMMIT;\n\nSELECT COUNT(*) FROM TAB1 WHERE COL1 = 4;   -- 3"
-      },
-      {
-        "type": "table",
-        "caption": "최종 TAB1 상태",
-        "headers": [
-          "COL1",
-          "COL2"
-        ],
-        "rows": [
-          [
-            "4",
-            "2"
-          ],
-          [
-            "4",
-            "1"
-          ],
-          [
-            "3",
-            "4"
-          ],
-          [
-            "4",
-            "1"
-          ]
-        ]
+        "code": "CREATE TABLE TAB1 (COL1 NUMBER, COL2 NUMBER);\nINSERT INTO TAB1 VALUES (1, 2);\nINSERT INTO TAB1 VALUES (2, 1);\nINSERT INTO TAB1 VALUES (3, 4);\nSAVEPOINT SP1;\n\nUPDATE TAB1 SET COL1 = 4 WHERE COL2 <= 2;\nSAVEPOINT SP2;\n\nDELETE FROM TAB1 WHERE COL2 = 2;\nROLLBACK TO SAVEPOINT SP2;\n\nINSERT INTO TAB1 VALUES (4, 1);\nCOMMIT;\n\nSELECT COUNT(*) FROM TAB1 WHERE COL1 = 4;"
       }
     ]
   }

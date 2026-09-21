@@ -89,37 +89,7 @@
         {
           "type": "erd",
           "caption": "부서·사원·교육이력·구매신청 ERD (식별자 위치 ①②③④)",
-          "mermaid": "erDiagram\n    부서 ||--o{ 사원 : \"소속\"\n    사원 ||--o{ 교육이력 : \"이수\"\n    사원 ||--o{ 구매신청 : \"신청\"\n    부서 {\n        string 부서번호 PK \"①\"\n    }\n    사원 {\n        string 사원번호 PK\n        string 부서번호 FK\n        string 주민등록번호 \"② AK1_1\"\n    }\n    교육이력 {\n        string 사원번호 FK\n        string 수강일자 PK \"③\"\n    }\n    구매신청 {\n        string 주문번호 PK \"④\"\n        string 사원번호 FK\n        string 주문일자\n    }",
-          "instanceTable": {
-            "of": "식별자 위치 매핑 (옵션 정답 순서와 일치)",
-            "headers": [
-              "위치",
-              "속성",
-              "분류"
-            ],
-            "rows": [
-              [
-                "①",
-                "부서.부서번호 (PK)",
-                "주식별자"
-              ],
-              [
-                "②",
-                "사원.주민등록번호 (AK)",
-                "보조식별자"
-              ],
-              [
-                "③",
-                "교육이력.수강일자 (PK)",
-                "본질식별자"
-              ],
-              [
-                "④",
-                "구매신청.주문번호 (PK)",
-                "복합식별자"
-              ]
-            ]
-          }
+          "mermaid": "erDiagram\n    부서 ||--o{ 사원 : \"소속\"\n    사원 ||--o{ 교육이력 : \"이수\"\n    사원 ||--o{ 구매신청 : \"신청\"\n    부서 {\n        string 부서번호 PK \"①\"\n    }\n    사원 {\n        string 사원번호 PK\n        string 부서번호 FK\n        string 주민등록번호 \"② AK1_1\"\n    }\n    교육이력 {\n        string 사원번호 FK\n        string 수강일자 PK \"③\"\n    }\n    구매신청 {\n        string 주문번호 PK \"④\"\n        string 사원번호 FK\n        string 주문일자\n    }"
         }
       ]
     },

@@ -269,7 +269,7 @@
     {
       "subject": "2과목",
       "number": 15,
-      "title": "아래 EMP 테이블에서 직원 번호와 해당 직원의 상사 번호를 함께 조회하려 한다. 빈칸에 들어갈 SQL로 가장 적절한 것은?",
+      "title": "아래 EMP 테이블에서 직원 번호와 해당 직원의 상사 번호를 함께 조회하려 한다. 가장 적절한 SQL은?",
       "options": [
         "SELECT E.EMPNO, M.EMPNO AS MGR_NO FROM EMP E, EMP M WHERE E.MGR = M.EMPNO;",
         "SELECT E.EMPNO, M.EMPNO AS MGR_NO FROM EMP E JOIN EMP M ON E.EMPNO = M.EMPNO;",
@@ -524,7 +524,7 @@
         },
         {
           "type": "sql",
-          "code": "-- T 테이블 초기 상태: 0건\n\nINSERT INTO T ... 15건;        -- 15건, 미커밋\nCOMMIT;                         -- 15건 확정\n\nINSERT INTO T ... 15건;        -- 30건, 미커밋\nCREATE INDEX IDX_T ON T(COL);   -- DDL → 묵시적 커밋 (30건 확정)\n\nINSERT INTO T ... 20건;        -- 50건, 미커밋\nROLLBACK;                       -- 마지막 INSERT 취소\n\nSELECT COUNT(*) FROM T;"
+          "code": "-- T 테이블 초기 상태: 0건\n\nINSERT INTO T ... 15건;\nCOMMIT;\n\nINSERT INTO T ... 15건;\nCREATE INDEX IDX_T ON T(COL);\n\nINSERT INTO T ... 20건;\nROLLBACK;\n\nSELECT COUNT(*) FROM T;"
         }
       ]
     },
@@ -1386,7 +1386,7 @@
         },
         {
           "type": "table",
-          "caption": "DEPT 테이블 ('없는부서' 라는 DNAME 은 존재하지 않음)",
+          "caption": "DEPT 테이블",
           "headers": [
             "DEPTNO",
             "DNAME"
@@ -1408,7 +1408,7 @@
         },
         {
           "type": "sql",
-          "code": "SELECT *\nFROM   EMP\nWHERE  DEPTNO = (SELECT DEPTNO FROM DEPT WHERE DNAME = '없는부서');\n-- 서브쿼리 결과: NULL\n-- 메인 쿼리: DEPTNO = NULL → UNKNOWN → 공집합"
+          "code": "SELECT *\nFROM   EMP\nWHERE  DEPTNO = (SELECT DEPTNO FROM DEPT WHERE DNAME = '없는부서');"
         }
       ]
     },
