@@ -843,7 +843,7 @@ export const ROUND_51: QuizQuestion[] = [
     "round": 51,
     "subject": "2과목",
     "number": 29,
-    "title": "아래 EMP 테이블에 대해 다음 네 SQL 을 수행한 RNK 결과 중 나머지와 다른 것은?",
+    "title": "아래 EMP 테이블에 대해 다음 네 SQL 을 수행한 RNK 결과 중 마지막 행의 값이 나머지와 다른 것은?",
     "options": [
       "RANK() OVER (ORDER BY SAL DESC)",
       "DENSE_RANK() OVER (ORDER BY SAL DESC)",

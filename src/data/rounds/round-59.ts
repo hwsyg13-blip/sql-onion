@@ -330,13 +330,7 @@ export const ROUND_59: QuizQuestion[] = [
     ],
     "correctIndex": 1,
     "explanation": "NVL2(expr, a, b)는 expr이 NULL이면 b를, NOT NULL이면 a를 반환한다. 따라서 NVL2(NULL, a, b)는 b를 반환하는 것이 맞다. ①은 SAL이 NULL이면 SAL(NULL)을 반환하므로 0이 아니며, ③ NULLIF는 두 값이 같으면 NULL을 반환하는 별개 함수이고, ④ NVL2는 반드시 인자 3개가 필요하다.",
-    "_source": "authored",
-    "references": [
-      {
-        "type": "sql",
-        "code": "NVL2(expr, a, b)\n-- expr이 NULL이면 b를 반환, NOT NULL이면 a를 반환"
-      }
-    ]
+    "_source": "authored"
   },
   {
     "id": 10064,
