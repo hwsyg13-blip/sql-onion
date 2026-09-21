@@ -927,7 +927,7 @@
     {
       "subject": "2과목",
       "number": 36,
-      "title": "매출 상위 1·2위를 조회하는 SQL 로 옳은 것은?",
+      "title": "Oracle 에서 매출 상위 1·2위를 조회하는 SQL 로 옳은 것은?",
       "options": [
         "SELECT 영업, 매출 FROM SALES ORDER BY 매출 DESC LIMIT 2;",
         "SELECT TOP 2 영업, 매출 FROM SALES ORDER BY 매출 DESC;",

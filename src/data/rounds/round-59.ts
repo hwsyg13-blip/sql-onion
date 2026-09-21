@@ -1156,7 +1156,7 @@ export const ROUND_59: QuizQuestion[] = [
     "options": [
       "A",
       "A B",
-      "A B B C",
+      "A B C B",
       "B B C"
     ],
     "correctIndex": 2,

@@ -1366,7 +1366,7 @@ export const ROUND_55: QuizQuestion[] = [
     "round": 55,
     "subject": "2과목",
     "number": 37,
-    "title": "ORDER BY 절에서 NULL 값이 포함된 경우의 기본 정렬 동작으로 옳은 것은?",
+    "title": "Oracle 에서 ORDER BY 절에 NULL 값이 포함된 경우의 기본 정렬 동작으로 옳은 것은?",
     "options": [
       "ASC 시 NULLS FIRST, DESC 시 NULLS LAST",
       "ASC 시 NULLS LAST, DESC 시 NULLS FIRST",

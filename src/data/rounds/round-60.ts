@@ -963,7 +963,7 @@ export const ROUND_60: QuizQuestion[] = [
       },
       {
         "type": "table",
-        "caption": "기대 결과 (PIVOT 후)",
+        "caption": "기대 결과",
         "headers": [
           "지역",
           "1월",

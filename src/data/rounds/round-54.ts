@@ -1393,7 +1393,7 @@ export const ROUND_54: QuizQuestion[] = [
     "round": 54,
     "subject": "2과목",
     "number": 35,
-    "title": "아래 T1 테이블에 대한 SELF JOIN 등수 쿼리에서 빈칸 ⓐ, ⓑ 에 들어갈 내용으로 옳은 것은?",
+    "title": "아래 T1 테이블에 대한 SELF JOIN 등수 쿼리(T2 는 T1 의 별칭)에서 빈칸 ⓐ, ⓑ 에 들어갈 내용으로 옳은 것은?",
     "options": [
       "ⓐ COUNT(*) + 1 / ⓑ T1.점수 < T2.점수",
       "ⓐ COUNT(*) / ⓑ T1.점수 = T2.점수",
