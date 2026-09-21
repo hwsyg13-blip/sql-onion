@@ -267,42 +267,42 @@ export const OX_QUIZ: Record<string, OxQuestion[]> = {
   ],
   c124: [
     {
-      "q": "<code>WHERE COL = NULL</code>은 NULL인 행을 찾아준다.",
+      "q": "`WHERE COL = NULL`은 NULL인 행을 찾아준다.",
       "answer": false,
       "explanation": "결과 없음(0건). NULL 비교는 IS NULL을 사용한다."
     },
     {
-      "q": "<code>NULL + 100</code>의 결과는 100이다.",
+      "q": "`NULL + 100`의 결과는 100이다.",
       "answer": false,
       "explanation": "결과는 **NULL**. NULL과의 산술 연산은 모두 NULL이다."
     },
     {
-      "q": "<code>AVG(컬럼)</code>의 분모는 NULL을 제외한 개수이다.",
+      "q": "`AVG(컬럼)`의 분모는 NULL을 제외한 개수이다.",
       "answer": true,
       "explanation": "NULL 제외 개수가 분모이므로 **분모도 줄어든다**."
     },
     {
-      "q": "<code>COUNT(*)</code>는 NULL을 포함하고, <code>COUNT(컬럼)</code>은 NULL을 제외한다.",
+      "q": "`COUNT(*)`는 NULL을 포함하고, `COUNT(컬럼)`은 NULL을 제외한다.",
       "answer": true,
       "explanation": "*는 **NULL 포함** / 컬럼명은 **NULL 제외**."
     },
     {
-      "q": "<code>NULL = NULL</code>의 결과는 TRUE이다.",
+      "q": "`NULL = NULL`의 결과는 TRUE이다.",
       "answer": false,
       "explanation": "결과는 **UNKNOWN**. WHERE 절에서는 FALSE처럼 동작해 행이 제외된다."
     },
     {
-      "q": "Oracle에서 <code>ORDER BY ASC</code>의 기본 NULL 위치는 마지막(NULLS LAST)이다.",
+      "q": "Oracle에서 `ORDER BY ASC`의 기본 NULL 위치는 마지막(NULLS LAST)이다.",
       "answer": true,
       "explanation": "Oracle ASC 기본 = **NULLS LAST** (마지막)."
     },
     {
-      "q": "<code>NULLIF(10, 10)</code>의 결과는 10이다.",
+      "q": "`NULLIF(10, 10)`의 결과는 10이다.",
       "answer": false,
       "explanation": "두 값이 같으면 **NULL**을 반환한다."
     },
     {
-      "q": "<code>COALESCE(NULL, NULL, 'X')</code>의 결과는 'X'이다.",
+      "q": "`COALESCE(NULL, NULL, 'X')`의 결과는 'X'이다.",
       "answer": true,
       "explanation": "NULL이 아닌 **첫 번째 값**인 'X'를 반환한다."
     }
@@ -336,22 +336,22 @@ export const OX_QUIZ: Record<string, OxQuestion[]> = {
   ],
   c211: [
     {
-      "q": "<code>TRUNCATE</code>는 DML이며 롤백이 가능하다.",
+      "q": "`TRUNCATE`는 DML이며 롤백이 가능하다.",
       "answer": false,
       "explanation": "**DDL**이며 롤백 불가(자동 COMMIT)."
     },
     {
-      "q": "<code>DELETE</code>는 DML이며 롤백이 가능하다.",
+      "q": "`DELETE`는 DML이며 롤백이 가능하다.",
       "answer": true,
       "explanation": "**DML**이라 트랜잭션 제어로 롤백 가능."
     },
     {
-      "q": "<code>COMMIT</code>은 TCL에 속한다.",
+      "q": "`COMMIT`은 TCL에 속한다.",
       "answer": true,
       "explanation": "TCL = **COMMIT / ROLLBACK / SAVEPOINT**."
     },
     {
-      "q": "<code>GRANT</code>와 <code>REVOKE</code>는 DDL에 속한다.",
+      "q": "`GRANT`와 `REVOKE`는 DDL에 속한다.",
       "answer": false,
       "explanation": "권한을 다루는 **DCL**이다."
     },
@@ -393,39 +393,39 @@ export const OX_QUIZ: Record<string, OxQuestion[]> = {
       "explanation": "SELECT 절 전체(여러 컬럼이면 **조합 단위**)에 적용된다."
     },
     {
-      "q": "Oracle에서 테이블 별칭에 <code>AS</code>를 사용할 수 있다.",
+      "q": "Oracle에서 테이블 별칭에 `AS`를 사용할 수 있다.",
       "answer": false,
       "explanation": "Oracle 테이블 별칭에는 AS **사용 불가**(컬럼 별칭은 가능)."
     },
     {
-      "q": "<code>SELECT * FROM DUAL</code> 결과는 1행 1컬럼('X')이다.",
+      "q": "`SELECT * FROM DUAL` 결과는 1행 1컬럼('X')이다.",
       "answer": true,
       "explanation": "DUAL은 Oracle의 1행 1컬럼 가짜 테이블."
     }
   ],
   c213: [
     {
-      "q": "<code>SUBSTR('ABCDE', 2, 3)</code>의 결과는 'BCD'이다.",
+      "q": "`SUBSTR('ABCDE', 2, 3)`의 결과는 'BCD'이다.",
       "answer": true,
       "explanation": "Oracle 인덱스는 **1부터**, 2번째부터 3글자 → 'BCD'."
     },
     {
-      "q": "Oracle <code>LENGTH('한글')</code>의 결과는 6이다.",
+      "q": "Oracle `LENGTH('한글')`의 결과는 6이다.",
       "answer": false,
       "explanation": "LENGTH는 **글자 수(=2)**. 바이트 수(6)는 **LENGTHB**."
     },
     {
-      "q": "<code>MOD(10, 3)</code>의 결과는 1이다.",
+      "q": "`MOD(10, 3)`의 결과는 1이다.",
       "answer": true,
       "explanation": "10을 3으로 나눈 나머지 = 1."
     },
     {
-      "q": "<code>ROUND(3.456, 2)</code>의 결과는 3.46이다.",
+      "q": "`ROUND(3.456, 2)`의 결과는 3.46이다.",
       "answer": true,
       "explanation": "소수점 2자리에서 반올림 → 3.46."
     },
     {
-      "q": "<code>TRUNC(3.456, 2)</code>의 결과는 3.46이다.",
+      "q": "`TRUNC(3.456, 2)`의 결과는 3.46이다.",
       "answer": false,
       "explanation": "TRUNC는 **버림** → 3.45."
     },
@@ -440,7 +440,7 @@ export const OX_QUIZ: Record<string, OxQuestion[]> = {
       "explanation": "두 날짜의 차이는 **일수(숫자)**로 반환."
     },
     {
-      "q": "<code>NVL2(NULL, 'A', 'B')</code>의 결과는 'A'이다.",
+      "q": "`NVL2(NULL, 'A', 'B')`의 결과는 'A'이다.",
       "answer": false,
       "explanation": "NVL2(expr, A, B)는 expr이 NULL이면 **B**, 아니면 A → 결과는 'B'."
     },
@@ -452,22 +452,22 @@ export const OX_QUIZ: Record<string, OxQuestion[]> = {
   ],
   c214: [
     {
-      "q": "<code>WHERE COMM = NULL</code>은 COMM이 NULL인 행을 반환한다.",
+      "q": "`WHERE COMM = NULL`은 COMM이 NULL인 행을 반환한다.",
       "answer": false,
       "explanation": "= NULL은 항상 거짓이라 **0건**. IS NULL을 사용해야 한다."
     },
     {
-      "q": "<code>BETWEEN 100 AND 200</code>은 100과 200을 포함한다.",
+      "q": "`BETWEEN 100 AND 200`은 100과 200을 포함한다.",
       "answer": true,
       "explanation": "BETWEEN은 **양 끝 포함**(100 ≤ x ≤ 200)."
     },
     {
-      "q": "<code>LIKE '_김%'</code>은 첫 글자가 '김'인 문자열을 찾는다.",
+      "q": "`LIKE '_김%'`은 첫 글자가 '김'인 문자열을 찾는다.",
       "answer": false,
       "explanation": "_은 임의 1글자이므로 **두 번째 글자가 '김'**인 문자열을 찾는다."
     },
     {
-      "q": "<code>IN (a, b, c)</code>은 OR의 단축형과 같다.",
+      "q": "`IN (a, b, c)`은 OR의 단축형과 같다.",
       "answer": true,
       "explanation": "IN (a,b,c) ≡ = a OR = b OR = c."
     },
@@ -477,12 +477,12 @@ export const OX_QUIZ: Record<string, OxQuestion[]> = {
       "explanation": "A=1 OR B=2 AND C=3 = A=1 OR (B=2 AND C=3)."
     },
     {
-      "q": "<code>NOT IN</code> 목록에 NULL이 포함돼도 결과는 정상이다.",
+      "q": "`NOT IN` 목록에 NULL이 포함돼도 결과는 정상이다.",
       "answer": false,
       "explanation": "NOT IN (..., NULL)은 항상 거짓 → **결과가 비어버린다**."
     },
     {
-      "q": "LIKE의 <code>_</code>는 1글자, <code>%</code>는 0개 이상의 임의 문자에 매칭된다.",
+      "q": "LIKE의 `_`는 1글자, `%`는 0개 이상의 임의 문자에 매칭된다.",
       "answer": true,
       "explanation": "_ = 정확히 1글자 / % = 0개 이상."
     }
@@ -509,12 +509,12 @@ export const OX_QUIZ: Record<string, OxQuestion[]> = {
       "explanation": "이 순서가 정답(WHERE는 행 단위, HAVING은 그룹 단위 필터)."
     },
     {
-      "q": "<code>COUNT(*)</code>와 <code>COUNT(컬럼)</code>의 결과는 항상 같다.",
+      "q": "`COUNT(*)`와 `COUNT(컬럼)`의 결과는 항상 같다.",
       "answer": false,
       "explanation": "COUNT(*)는 NULL 포함, COUNT(컬럼)은 **NULL 제외**."
     },
     {
-      "q": "<code>GROUP BY (A, B)</code> 결과 행 수는 A, B 컬럼 조합의 개수다.",
+      "q": "`GROUP BY (A, B)` 결과 행 수는 A, B 컬럼 조합의 개수다.",
       "answer": true,
       "explanation": "GROUP BY 결과 행 수 = **그룹화 컬럼 조합의 개수**."
     }
@@ -536,17 +536,17 @@ export const OX_QUIZ: Record<string, OxQuestion[]> = {
       "explanation": "컬럼명 / 별칭 / **컬럼 번호** 모두 가능."
     },
     {
-      "q": "Oracle에서 <code>ORDER BY ASC</code> 시 NULL은 맨 처음에 나온다.",
+      "q": "Oracle에서 `ORDER BY ASC` 시 NULL은 맨 처음에 나온다.",
       "answer": false,
       "explanation": "Oracle ASC = **NULL 마지막**(NULLS LAST)."
     },
     {
-      "q": "MS-SQL에서 <code>ORDER BY ASC</code> 시 NULL은 맨 처음에 나온다.",
+      "q": "MS-SQL에서 `ORDER BY ASC` 시 NULL은 맨 처음에 나온다.",
       "answer": true,
       "explanation": "MS-SQL ASC = **NULL 처음**(NULLS FIRST)."
     },
     {
-      "q": "<code>ORDER BY DEPT, SAL DESC</code>는 두 컬럼 모두 DESC로 정렬된다.",
+      "q": "`ORDER BY DEPT, SAL DESC`는 두 컬럼 모두 DESC로 정렬된다.",
       "answer": false,
       "explanation": "DEPT는 ASC(생략값), **SAL만 DESC**. 정렬 방향은 컬럼별로 따로 적용."
     },
@@ -563,7 +563,7 @@ export const OX_QUIZ: Record<string, OxQuestion[]> = {
       "explanation": "조건 누락 시 행 수 폭발(**A행 × B행**)."
     },
     {
-      "q": "Oracle 외부조인 표기 <code>(+)</code>는 행이 살아남을 쪽에 붙인다.",
+      "q": "Oracle 외부조인 표기 `(+)`는 행이 살아남을 쪽에 붙인다.",
       "answer": false,
       "explanation": "(+)는 **NULL을 채울 쪽**(없을 수 있는 쪽)에 붙인다."
     },
@@ -590,12 +590,12 @@ export const OX_QUIZ: Record<string, OxQuestion[]> = {
   ],
   c218: [
     {
-      "q": "<code>JOIN ... ON</code>에서 INNER 키워드는 생략할 수 있다.",
+      "q": "`JOIN ... ON`에서 INNER 키워드는 생략할 수 있다.",
       "answer": true,
       "explanation": "INNER 생략 시 기본이 INNER JOIN."
     },
     {
-      "q": "<code>LEFT JOIN</code>에서 OUTER 키워드는 생략할 수 있다.",
+      "q": "`LEFT JOIN`에서 OUTER 키워드는 생략할 수 있다.",
       "answer": true,
       "explanation": "LEFT JOIN = LEFT OUTER JOIN."
     },
@@ -632,17 +632,17 @@ export const OX_QUIZ: Record<string, OxQuestion[]> = {
   ],
   c221: [
     {
-      "q": "다중행 서브쿼리에 <code>=</code> 연산자를 사용할 수 있다.",
+      "q": "다중행 서브쿼리에 `=` 연산자를 사용할 수 있다.",
       "answer": false,
       "explanation": "다중행에는 에러 → IN을 사용해야 한다."
     },
     {
-      "q": "<code>&gt; ANY(...)</code>는 <strong>최솟값보다</strong> 크면 통과한다 (헐거운 조건).",
+      "q": "`&gt; ANY(...)`는 **최솟값보다** 크면 통과한다 (헐거운 조건).",
       "answer": true,
       "explanation": "&gt; ANY = 최솟값 기준, &gt; ALL = 최댓값 기준."
     },
     {
-      "q": "<code>&gt; ALL(...)</code>은 최솟값보다만 크면 통과한다.",
+      "q": "`&gt; ALL(...)`은 최솟값보다만 크면 통과한다.",
       "answer": false,
       "explanation": "&gt; ALL은 **최댓값보다 커야** 통과한다 (엄격한 조건)."
     },
@@ -652,7 +652,7 @@ export const OX_QUIZ: Record<string, OxQuestion[]> = {
       "explanation": "스칼라 서브쿼리는 **1행 1값**만 허용 — 여러 행이면 에러."
     },
     {
-      "q": "인라인 뷰는 <strong>FROM 절</strong>에 위치하며 별칭이 필수다.",
+      "q": "인라인 뷰는 **FROM 절**에 위치하며 별칭이 필수다.",
       "answer": true,
       "explanation": "FROM 절 서브쿼리이며 **별칭 필수**."
     },
@@ -662,7 +662,7 @@ export const OX_QUIZ: Record<string, OxQuestion[]> = {
       "explanation": "EXISTS는 결과 값이 아니라 **존재 여부만** 확인한다."
     },
     {
-      "q": "연관 서브쿼리는 메인쿼리 컬럼을 참조하며 <strong>행마다 반복 실행</strong>된다.",
+      "q": "연관 서브쿼리는 메인쿼리 컬럼을 참조하며 **행마다 반복 실행**된다.",
       "answer": true,
       "explanation": "메인 컬럼 참조 + 각 행마다 반복 (성능 주의)."
     }
@@ -689,7 +689,7 @@ export const OX_QUIZ: Record<string, OxQuestion[]> = {
       "explanation": "ORDER BY는 **마지막에 한 번**만 작성한다."
     },
     {
-      "q": "UNION/INTERSECT/MINUS는 중복 제거를 위해 <strong>정렬이 발생</strong>한다.",
+      "q": "UNION/INTERSECT/MINUS는 중복 제거를 위해 **정렬이 발생**한다.",
       "answer": true,
       "explanation": "중복 제거 과정에서 정렬이 일어난다 (UNION ALL은 정렬 없음)."
     },
@@ -699,19 +699,19 @@ export const OX_QUIZ: Record<string, OxQuestion[]> = {
       "explanation": "MINUS는 **Oracle 전용**. 표준은 EXCEPT다."
     },
     {
-      "q": "집합 연산자에서는 <code>NULL = NULL</code>로 간주되어 중복 제거 대상이 된다.",
+      "q": "집합 연산자에서는 `NULL = NULL`로 간주되어 중복 제거 대상이 된다.",
       "answer": true,
       "explanation": "일반 비교와 달리 NULL끼리 같다고 보고 중복으로 취급한다."
     }
   ],
   c223: [
     {
-      "q": "<code>ROLLUP(A, B)</code>는 <strong>(A, B) → (A) → ()</strong> 3단계의 소계를 만든다.",
+      "q": "`ROLLUP(A, B)`는 **(A, B) → (A) → ()** 3단계의 소계를 만든다.",
       "answer": true,
       "explanation": "ROLLUP은 **N+1 단계**의 계층적 소계를 만든다."
     },
     {
-      "q": "<code>CUBE(A, B)</code>는 (A, B), (A), () 3단계만 만든다.",
+      "q": "`CUBE(A, B)`는 (A, B), (A), () 3단계만 만든다.",
       "answer": false,
       "explanation": "CUBE는 **(A, B), (A), (B), ()** — 모든 조합 (2^N 단계)."
     },
@@ -721,7 +721,7 @@ export const OX_QUIZ: Record<string, OxQuestion[]> = {
       "explanation": "NULL 행은 **소계 행**이거나 **원래 NULL**인 경우 둘 다 가능하다."
     },
     {
-      "q": "<code>GROUPING</code> 함수의 결과가 <strong>1이면 소계 행</strong>이다.",
+      "q": "`GROUPING` 함수의 결과가 **1이면 소계 행**이다.",
       "answer": true,
       "explanation": "1 = 소계 / 0 = 일반 행. 데이터 NULL과 소계 NULL을 구분할 때 사용."
     },
@@ -731,24 +731,24 @@ export const OX_QUIZ: Record<string, OxQuestion[]> = {
       "explanation": "CUBE 조합 수는 **2^N**이다 (N+1은 ROLLUP)."
     },
     {
-      "q": "소계 NULL과 데이터 NULL을 구분하려면 <strong>GROUPING 함수</strong>를 사용한다.",
+      "q": "소계 NULL과 데이터 NULL을 구분하려면 **GROUPING 함수**를 사용한다.",
       "answer": true,
       "explanation": "GROUPING(컬럼) = 1이면 소계, 0이면 일반."
     }
   ],
   c224: [
     {
-      "q": "동점이 있을 때 <strong>RANK</strong>는 다음 순위를 건너뛰고, <strong>DENSE_RANK</strong>는 연속, <strong>ROW_NUMBER</strong>는 모두 다른 순위를 매긴다.",
+      "q": "동점이 있을 때 **RANK**는 다음 순위를 건너뛰고, **DENSE_RANK**는 연속, **ROW_NUMBER**는 모두 다른 순위를 매긴다.",
       "answer": true,
       "explanation": "RANK(1,1,3) / DENSE_RANK(1,1,2) / ROW_NUMBER(모두 다름)."
     },
     {
-      "q": "<code>OVER ()</code>처럼 괄호를 비우면 에러가 난다.",
+      "q": "`OVER ()`처럼 괄호를 비우면 에러가 난다.",
       "answer": false,
       "explanation": "빈 괄호는 **전체를 한 윈도우**로 간주한다 (정상 동작)."
     },
     {
-      "q": "PARTITION BY를 생략하면 <strong>전체 행을 하나의 그룹</strong>으로 본다.",
+      "q": "PARTITION BY를 생략하면 **전체 행을 하나의 그룹**으로 본다.",
       "answer": true,
       "explanation": "생략 = 전체가 단일 윈도우."
     },
@@ -758,7 +758,7 @@ export const OX_QUIZ: Record<string, OxQuestion[]> = {
       "explanation": "WHERE에 직접 사용 불가 → **인라인뷰/서브쿼리**로 감싸야 한다."
     },
     {
-      "q": "LAG/LEAD의 기본 오프셋은 <strong>1</strong>이다.",
+      "q": "LAG/LEAD의 기본 오프셋은 **1**이다.",
       "answer": true,
       "explanation": "인자를 생략하면 1행 앞/뒤를 본다."
     },
@@ -770,7 +770,7 @@ export const OX_QUIZ: Record<string, OxQuestion[]> = {
   ],
   c225: [
     {
-      "q": "<code>WHERE ROWNUM = 5</code>는 5번째 행을 반환한다.",
+      "q": "`WHERE ROWNUM = 5`는 5번째 행을 반환한다.",
       "answer": false,
       "explanation": "결과 없음. ROWNUM은 **=1만 매칭**되고 &gt;n은 항상 거짓이다."
     },
@@ -780,44 +780,44 @@ export const OX_QUIZ: Record<string, OxQuestion[]> = {
       "explanation": "ROWNUM이 정렬 **전**에 매겨지므로, **인라인 뷰로 정렬 먼저** 수행하고 ROWNUM은 나중에 적용해야 한다."
     },
     {
-      "q": "동률을 포함해 Top N을 뽑으려면 <code>WITH TIES</code> 또는 <code>RANK()</code>를 쓴다.",
+      "q": "동률을 포함해 Top N을 뽑으려면 `WITH TIES` 또는 `RANK()`를 쓴다.",
       "answer": true,
       "explanation": "정확히 N개만 = **ROW_NUMBER**, 동률 포함 = **WITH TIES · RANK**."
     },
     {
-      "q": "부서별 Top N은 <code>ROW_NUMBER() OVER (PARTITION BY ...)</code> 윈도우 함수로 처리한다.",
+      "q": "부서별 Top N은 `ROW_NUMBER() OVER (PARTITION BY ...)` 윈도우 함수로 처리한다.",
       "answer": true,
       "explanation": "**ROW_NUMBER + PARTITION BY** 후 인라인뷰에서 N 이하 필터."
     },
     {
-      "q": "페이징 표준 문법은 <code>OFFSET ... FETCH NEXT ...</code>이다.",
+      "q": "페이징 표준 문법은 `OFFSET ... FETCH NEXT ...`이다.",
       "answer": true,
       "explanation": "OFFSET n ROWS FETCH NEXT m ROWS ONLY가 표준."
     }
   ],
   c226: [
     {
-      "q": "<code>START WITH</code>는 루트(최상위) 조건을 지정한다.",
+      "q": "`START WITH`는 루트(최상위) 조건을 지정한다.",
       "answer": true,
       "explanation": "보통 MGR_ID IS NULL처럼 **루트 조건**을 명시한다."
     },
     {
-      "q": "<code>CONNECT BY PRIOR EMP_ID = MGR_ID</code>는 역방향(자식→부모) 전개이다.",
+      "q": "`CONNECT BY PRIOR EMP_ID = MGR_ID`는 역방향(자식→부모) 전개이다.",
       "answer": false,
       "explanation": "**순방향(부모→자식)**이다. 역방향은 PRIOR MGR_ID = EMP_ID."
     },
     {
-      "q": "<code>LEVEL</code>은 루트에서 0부터 시작한다.",
+      "q": "`LEVEL`은 루트에서 0부터 시작한다.",
       "answer": false,
       "explanation": "루트가 **1**부터 시작한다."
     },
     {
-      "q": "계층형 결과의 형제 정렬은 일반 <code>ORDER BY</code>로 처리한다.",
+      "q": "계층형 결과의 형제 정렬은 일반 `ORDER BY`로 처리한다.",
       "answer": false,
       "explanation": "일반 ORDER BY는 트리가 깨진다. **ORDER SIBLINGS BY**를 써야 한다."
     },
     {
-      "q": "<code>SYS_CONNECT_BY_PATH</code>는 루트에서 현재 노드까지의 경로 문자열을 반환한다.",
+      "q": "`SYS_CONNECT_BY_PATH`는 루트에서 현재 노드까지의 경로 문자열을 반환한다.",
       "answer": true,
       "explanation": "루트→현재까지의 **경로 문자열**을 만들어 준다."
     },
@@ -827,7 +827,7 @@ export const OX_QUIZ: Record<string, OxQuestion[]> = {
       "explanation": "같은 테이블을 두 번 참조하므로 **별칭은 필수**다."
     },
     {
-      "q": "Oracle의 <code>CONNECT BY</code> 구문은 ANSI 표준이다.",
+      "q": "Oracle의 `CONNECT BY` 구문은 ANSI 표준이다.",
       "answer": false,
       "explanation": "**Oracle 전용**이다. 표준은 WITH RECURSIVE ... UNION ALL 재귀 CTE."
     }
@@ -844,7 +844,7 @@ export const OX_QUIZ: Record<string, OxQuestion[]> = {
       "explanation": "**컬럼 → 행**(가로 → 세로)으로 변환한다."
     },
     {
-      "q": "PIVOT의 <code>IN</code> 절에는 변환할 값들을 나열한다.",
+      "q": "PIVOT의 `IN` 절에는 변환할 값들을 나열한다.",
       "answer": true,
       "explanation": "새 **컬럼이 될 값들**을 IN으로 나열한다."
     },
@@ -854,49 +854,49 @@ export const OX_QUIZ: Record<string, OxQuestion[]> = {
       "explanation": "매칭이 없는 칸은 **NULL**이다."
     },
     {
-      "q": "UNPIVOT은 기본적으로 NULL 행을 제외하며, <code>INCLUDE NULLS</code>로 포함시킬 수 있다.",
+      "q": "UNPIVOT은 기본적으로 NULL 행을 제외하며, `INCLUDE NULLS`로 포함시킬 수 있다.",
       "answer": true,
       "explanation": "기본 **제외**, INCLUDE NULLS로 포함 가능."
     },
     {
-      "q": "PIVOT 절 없이 <code>CASE WHEN + GROUP BY</code>로도 같은 결과를 만들 수 있다.",
+      "q": "PIVOT 절 없이 `CASE WHEN + GROUP BY`로도 같은 결과를 만들 수 있다.",
       "answer": true,
       "explanation": "가능하다. **CASE WHEN + GROUP BY** 조합은 시험 단골."
     }
   ],
   c228: [
     {
-      "q": "<code>^</code>은 <code>[]</code> 밖에서 문자열의 시작을, 안에서는 부정을 의미한다.",
+      "q": "`^`은 `[]` 밖에서 문자열의 시작을, 안에서는 부정을 의미한다.",
       "answer": true,
       "explanation": "[] **밖**이면 시작, [^abc]처럼 **안**이면 부정."
     },
     {
-      "q": "<code>$</code>는 문자열의 끝을 의미한다.",
+      "q": "`$`는 문자열의 끝을 의미한다.",
       "answer": true,
       "explanation": "**문자열의 끝**을 의미한다."
     },
     {
-      "q": "<code>*</code>은 1개 이상, <code>+</code>은 0개 이상의 반복을 의미한다.",
+      "q": "`*`은 1개 이상, `+`은 0개 이상의 반복을 의미한다.",
       "answer": false,
       "explanation": "반대다. *은 **0개 이상**, +은 **1개 이상**."
     },
     {
-      "q": "<code>.</code>은 임의의 한 글자를 뜻하며 LIKE의 <code>_</code>와 같은 역할이다.",
+      "q": "`.`은 임의의 한 글자를 뜻하며 LIKE의 `_`와 같은 역할이다.",
       "answer": true,
       "explanation": "**임의의 한 글자**. LIKE의 _에 대응."
     },
     {
-      "q": "<code>\\d</code>는 숫자 한 글자(<code>[0-9]</code>)를 의미한다.",
+      "q": "`\\d`는 숫자 한 글자(`[0-9]`)를 의미한다.",
       "answer": true,
       "explanation": "**숫자 [0-9]**를 의미한다."
     },
     {
-      "q": "<code>[가-힣]</code>은 한글 한 글자를 의미한다.",
+      "q": "`[가-힣]`은 한글 한 글자를 의미한다.",
       "answer": true,
       "explanation": "**한글 1자**를 매칭한다."
     },
     {
-      "q": "LIKE는 다양한 메타문자를 지원하지만 REGEXP_LIKE는 <code>%</code>·<code>_</code>만 지원한다.",
+      "q": "LIKE는 다양한 메타문자를 지원하지만 REGEXP_LIKE는 `%`·`_`만 지원한다.",
       "answer": false,
       "explanation": "반대다. **LIKE는 %·_만**, **REGEXP는 다양한 메타문자**를 지원한다."
     }
@@ -913,17 +913,17 @@ export const OX_QUIZ: Record<string, OxQuestion[]> = {
       "explanation": "DELETE는 DML이므로 ROLLBACK으로 취소 가능하다."
     },
     {
-      "q": "<code>INSERT INTO ... VALUES</code>로 한 번에 여러 행을 입력할 수 있다.",
+      "q": "`INSERT INTO ... VALUES`로 한 번에 여러 행을 입력할 수 있다.",
       "answer": false,
       "explanation": "일반 INSERT는 1행만. 다중행은 INSERT ALL 또는 INSERT INTO ... SELECT를 사용한다."
     },
     {
-      "q": "<code>UPDATE ... WHERE</code>에서 WHERE 절을 누락하면 에러가 발생한다.",
+      "q": "`UPDATE ... WHERE`에서 WHERE 절을 누락하면 에러가 발생한다.",
       "answer": false,
       "explanation": "에러 없이 **모든 행이 수정**된다 (위험)."
     },
     {
-      "q": "MERGE의 두 가지 절은 <code>WHEN MATCHED</code>와 <code>WHEN NOT MATCHED</code>이다.",
+      "q": "MERGE의 두 가지 절은 `WHEN MATCHED`와 `WHEN NOT MATCHED`이다.",
       "answer": true,
       "explanation": "MATCHED → UPDATE, NOT MATCHED → INSERT (UPSERT)."
     },
@@ -935,7 +935,7 @@ export const OX_QUIZ: Record<string, OxQuestion[]> = {
   ],
   c232: [
     {
-      "q": "TCL 명령어는 <code>COMMIT</code>, <code>ROLLBACK</code>, <code>SAVEPOINT</code>이다.",
+      "q": "TCL 명령어는 `COMMIT`, `ROLLBACK`, `SAVEPOINT`이다.",
       "answer": true,
       "explanation": "이 3가지가 TCL의 전부."
     },
@@ -955,7 +955,7 @@ export const OX_QUIZ: Record<string, OxQuestion[]> = {
       "explanation": "ROLLBACK TO sp로 부분 취소 가능."
     },
     {
-      "q": "<code>ROLLBACK TO SP1</code> 실행 후 SP1 이전 작업도 함께 취소된다.",
+      "q": "`ROLLBACK TO SP1` 실행 후 SP1 이전 작업도 함께 취소된다.",
       "answer": false,
       "explanation": "SP1 이전 작업은 **유지**되고 SP1 이후만 취소된다."
     },
@@ -1002,34 +1002,34 @@ export const OX_QUIZ: Record<string, OxQuestion[]> = {
       "explanation": "참조 대상은 PK 또는 UNIQUE 제약을 가진 컬럼이어야 한다."
     },
     {
-      "q": "<code>CHECK (SAL &gt; 0)</code>은 올바른 CHECK 제약 예시이다.",
+      "q": "`CHECK (SAL &gt; 0)`은 올바른 CHECK 제약 예시이다.",
       "answer": true,
       "explanation": "조건식을 만족하는 값만 허용하는 CHECK 제약."
     },
     {
-      "q": "<code>ON DELETE CASCADE</code>는 부모 삭제 시 자식도 함께 삭제된다는 뜻이다.",
+      "q": "`ON DELETE CASCADE`는 부모 삭제 시 자식도 함께 삭제된다는 뜻이다.",
       "answer": true,
       "explanation": "부모 삭제 → 자식 자동 삭제."
     },
     {
-      "q": "<code>ALTER TABLE ... DROP COLUMN</code> 실행 후 ROLLBACK이 가능하다.",
+      "q": "`ALTER TABLE ... DROP COLUMN` 실행 후 ROLLBACK이 가능하다.",
       "answer": false,
       "explanation": "불가 (DDL이므로 자동 COMMIT)."
     }
   ],
   c234: [
     {
-      "q": "DCL 명령어는 <code>GRANT</code>와 <code>REVOKE</code>이다.",
+      "q": "DCL 명령어는 `GRANT`와 `REVOKE`이다.",
       "answer": true,
       "explanation": "권한 부여 / 회수 두 가지가 DCL."
     },
     {
-      "q": "시스템 권한 부여 시 옵션은 <strong>WITH GRANT OPTION</strong>이다.",
+      "q": "시스템 권한 부여 시 옵션은 **WITH GRANT OPTION**이다.",
       "answer": false,
       "explanation": "시스템 권한은 **WITH ADMIN OPTION**. (WITH GRANT OPTION은 객체 권한)"
     },
     {
-      "q": "객체 권한 부여 시 옵션은 <strong>WITH GRANT OPTION</strong>이다.",
+      "q": "객체 권한 부여 시 옵션은 **WITH GRANT OPTION**이다.",
       "answer": true,
       "explanation": "객체 권한 = WITH GRANT OPTION, 시스템 권한 = WITH ADMIN OPTION."
     },
@@ -1039,12 +1039,12 @@ export const OX_QUIZ: Record<string, OxQuestion[]> = {
       "explanation": "여러 권한을 ROLE에 묶어 사용자에 일괄 부여."
     },
     {
-      "q": "<code>GRANT DEV_ROLE TO USER1</code>은 DDL로 분류된다.",
+      "q": "`GRANT DEV_ROLE TO USER1`은 DDL로 분류된다.",
       "answer": false,
       "explanation": "GRANT 이므로 **DCL**이다."
     },
     {
-      "q": "모든 사용자에게 권한을 부여하려면 <code>TO PUBLIC</code>을 사용한다.",
+      "q": "모든 사용자에게 권한을 부여하려면 `TO PUBLIC`을 사용한다.",
       "answer": true,
       "explanation": "TO PUBLIC은 모든 사용자 대상."
     },
