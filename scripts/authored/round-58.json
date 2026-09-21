@@ -257,13 +257,7 @@
         "TRIM('x' FROM 'xxSQLxx')"
       ],
       "correctIndex": 2,
-      "explanation": "① `LTRIM('xxSQL','x')` → 왼쪽 'x' 제거 → 'SQL'. ② `RTRIM('SQLxx','x')` → 오른쪽 'x' 제거 → 'SQL'. ③ `REPLACE('xxSQLxx','x','Y')` → 'x' 를 모두 'Y' 로 치환 → 'YYSQLYY'. ④ `TRIM('x' FROM 'xxSQLxx')` → 양쪽 'x' 제거 → 'SQL'. ①②④ 는 'SQL' 반환, ③ 만 'YYSQLYY' 로 결과가 다르다.",
-      "references": [
-        {
-          "type": "sql",
-          "code": "-- 대상 문자열: 'xxSQLxx'\n-- 기준 문자: 'x'\n-- ① LTRIM('xxSQL','x')           → 'SQL'\n-- ② RTRIM('SQLxx','x')           → 'SQL'\n-- ③ REPLACE('xxSQLxx','x','Y')   → 'YYSQLYY'\n-- ④ TRIM('x' FROM 'xxSQLxx')     → 'SQL'"
-        }
-      ]
+      "explanation": "① `LTRIM('xxSQL','x')` → 왼쪽 'x' 제거 → 'SQL'. ② `RTRIM('SQLxx','x')` → 오른쪽 'x' 제거 → 'SQL'. ③ `REPLACE('xxSQLxx','x','Y')` → 'x' 를 모두 'Y' 로 치환 → 'YYSQLYY'. ④ `TRIM('x' FROM 'xxSQLxx')` → 양쪽 'x' 제거 → 'SQL'. ①②④ 는 'SQL' 반환, ③ 만 'YYSQLYY' 로 결과가 다르다."
     },
     {
       "subject": "2과목",
