@@ -1368,12 +1368,12 @@ export const ROUND_59: QuizQuestion[] = [
     "title": "NATURAL JOIN과 USING 절에 대한 설명 중 옳은 것은?",
     "options": [
       "NATURAL JOIN은 동일한 컬럼명을 자동으로 조인 조건으로 사용한다.",
-      "USING 절에서는 별칭을 부여한 테이블의 컬럼이라도 USING 의 컬럼에는 별칭을 붙일 수 없다.",
+      "USING 절의 조인 컬럼에는 테이블 별칭을 붙여 참조할 수 있다.",
       "NATURAL JOIN과 USING은 동시에 함께 사용할 수 있다.",
       "NATURAL JOIN 결과에는 두 테이블의 동일 이름 컬럼이 각각 두 번씩 표시된다."
     ],
     "correctIndex": 0,
-    "explanation": "① NATURAL JOIN 은 동일 컬럼명을 자동 조인 조건으로 사용 — 옳음. ② USING 의 컬럼은 별칭을 붙일 수 없음 — 사실이지만, 본 문항은 일반적으로 ① 의 정의를 묻는 케이스이므로 ① 이 가장 대표적 답. ③ NATURAL JOIN 과 USING 은 동시 사용 불가 — 옳지 않음. ④ NATURAL JOIN 은 동일 컬럼을 한 번만 표시함 (USING 과 동일) — 두 번 표시된다는 진술은 옳지 않음.",
+    "explanation": "① NATURAL JOIN 은 동일 컬럼명을 자동 조인 조건으로 사용 — 옳음. ② USING 의 조인 컬럼에는 테이블 별칭을 붙일 수 없으므로 옳지 않음. ③ NATURAL JOIN 과 USING 은 동시 사용 불가 — 옳지 않음. ④ NATURAL JOIN 은 동일 컬럼을 한 번만 표시함 (USING 과 동일) — 두 번 표시된다는 진술은 옳지 않음.",
     "_source": "authored"
   },
   {
@@ -1662,13 +1662,13 @@ export const ROUND_59: QuizQuestion[] = [
     "number": 47,
     "title": "아래 T 테이블 (모든 VAL=100, 6행) 에 대한 SQL 의 M, S, F 컬럼 값으로 가장 적절한 것은?",
     "options": [
-      "M = 누적 (100, 200, ..., 600), S = 100 (모든 행), F = 100 (모든 행)",
+      "M = 100 (모든 행), S = 누적 (100, 200, ..., 600), F = 100 (모든 행)",
       "M = NULL, S = 600 (모든 행), F = NULL",
       "M = 100, 200, 300, 400, 500, 600 (S 와 동일)",
       "M = S = F = 100 (세 컬럼 모두 모든 행에서 100)"
     ],
-    "correctIndex": 3,
-    "explanation": "모든 VAL=100 이므로: M = `MAX(VAL) OVER ()` 는 전체 윈도우 최대값 → 100. S = `SUM(VAL) OVER (ORDER BY ID)` 는 누적합인데 모든 값이 100 이라 (100, 200, 300, …) 가 되지만 본 문제 의도(가장 대표 답)는 \"모든 컬럼이 어떤 윈도우 범위에서도 100 (단순 비교)\". F = `FIRST_VALUE` 도 첫 값 100. ① M·F 표기 잘못, ② NULL 반환 안 됨, ③ M=MAX 인데 누적 식으로 표기됨 — 모두 부정확. ④ 가장 대표적 답.",
+    "correctIndex": 0,
+    "explanation": "M = MAX(VAL) OVER () 는 전체 최대값이라 모든 행에서 100 이다. S = SUM(VAL) OVER (ORDER BY ID) 는 기본 윈도우(처음~현재 행)의 누적합이라 100, 200, ..., 600 이다. F = FIRST_VALUE(VAL) OVER (... ROWS BETWEEN 200 PRECEDING AND 200 FOLLOWING) 는 프레임의 첫 값이 모두 100 이라 모든 행에서 100 이다. 따라서 M 과 F 는 100 으로 고정이고 S 만 누적값인 ①이 옳다.",
     "_source": "authored",
     "references": [
       {

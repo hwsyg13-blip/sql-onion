@@ -377,8 +377,8 @@
         "ㄱ·ㄴ 위치 모두",
         "위치 어디도 아님"
       ],
-      "correctIndex": 1,
-      "explanation": "PRIOR 는 '이전 행' 의 컬럼을 참조하는 연산자이므로 PRIOR 매니저 ↔ 현재 사원이 아니라, PRIOR 사원 ↔ 현재 매니저 형태로 부모 사원의 사번이 자식 매니저와 매칭되도록 배치된다. 따라서 ㄴ 위치에 PRIOR 가 들어가야 한다.",
+      "correctIndex": 0,
+      "explanation": "루트(START WITH 매니저 IS NULL)에서 시작해 부모 행의 사원 값과 자식 행의 매니저 값이 일치하는 행을 따라 내려가는 순방향 전개이므로 PRIOR 는 사원 앞(ㄱ)에 온다. 즉 CONNECT BY PRIOR 사원 = 매니저 형태이다.",
       "references": [
         {
           "type": "table",
@@ -521,12 +521,12 @@
       "title": "명령어와 분류가 올바르게 짝지어지지 않은 것은?",
       "options": [
         "INSERT — DCL",
-        "SELECT — DQL",
+        "SELECT — DML",
         "CREATE — DDL",
         "GRANT — DCL"
       ],
       "correctIndex": 0,
-      "explanation": "INSERT 는 DML 이다."
+      "explanation": "INSERT 는 DML 이므로 DCL 과 짝지어지지 않는다. SELECT 도 SQLD 에서는 DML(데이터 조회)로 분류한다."
     },
     {
       "subject": "2과목",
@@ -1229,8 +1229,8 @@
         "ㄷ",
         "ㄹ"
       ],
-      "correctIndex": 2,
-      "explanation": "PRIOR 는 CONNECT BY 조건식의 좌측에 위치해 이전(부모) 행을 지정한다. `PRIOR mgr = empno` 는 \"이전 행의 mgr 가 다음 행의 empno 와 같다\" 는 의미가 되어 자식→부모 역방향 전개가 이루어진다. ㄱ·ㄴ 은 FROM·START WITH 위치라 PRIOR 가 올 수 없고, ㄹ 위치(empno 좌측) 에 PRIOR 가 오면 부모→자식 순방향이 되어 본 SQL 의 의도와 다르다.",
+      "correctIndex": 3,
+      "explanation": "`mgr = PRIOR empno` 는 이전(부모) 행의 empno 가 현재 행의 mgr 와 같다는 뜻으로 부모→자식 순방향 전개이다. START WITH mgr IS NULL 로 루트(100)에서 시작하므로 PRIOR 는 ㄹ(empno 앞)에 와야 한다. ㄷ(mgr 앞)에 오면 역방향이라 루트 한 행만 조회된다. ㄱ·ㄴ 은 FROM·START WITH 위치라 PRIOR 가 올 수 없다.",
       "references": [
         {
           "type": "table",
@@ -1260,7 +1260,7 @@
         },
         {
           "type": "sql",
-          "code": "SELECT 사원, 매니저\nFROM   EMP  -- (ㄱ)\nSTART WITH 매니저 IS NULL  -- (ㄴ)\nCONNECT BY ( ㄷ ) mgr = ( ㄹ ) empno;"
+          "code": "SELECT empno, mgr\nFROM   EMP  -- (ㄱ)\nSTART WITH mgr IS NULL  -- (ㄴ)\nCONNECT BY ( ㄷ ) mgr = ( ㄹ ) empno;"
         }
       ]
     },

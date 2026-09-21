@@ -139,7 +139,7 @@ export const ROUND_56: QuizQuestion[] = [
       {
         "type": "erd",
         "caption": "병원·의사·수술 ERD — 관계 라벨 ㄱ(병원-의사), ㄴ(의사-수술), ㄷ(병원-수술 직접)",
-        "mermaid": "erDiagram\n    병원 ||--o| 의사 : \"ㄱ\"\n    의사 ||--o| 수술 : \"ㄴ\"\n    병원 ||--o| 수술 : \"ㄷ\""
+        "mermaid": "erDiagram\n    병원 ||--o| 의사 : \"ㄱ\"\n    의사 |o--o| 수술 : \"ㄴ\"\n    병원 ||--o| 수술 : \"ㄷ\""
       }
     ]
   },
@@ -567,10 +567,10 @@ export const ROUND_56: QuizQuestion[] = [
       "CASE 칼럼 WHEN NULL THEN -1 ELSE 0 END",
       "CASE WHEN 칼럼 IS NULL THEN -1 ELSE 0 END",
       "DECODE(칼럼, NULL, -1, 0)",
-      "NVL(칼럼, -1)"
+      "NVL2(칼럼, 0, -1)"
     ],
     "correctIndex": 0,
-    "explanation": "단순 CASE 는 등치 비교를 위해 = 를 사용하는데, NULL = NULL 은 UNKNOWN 이므로 이 분기가 선택되지 않는다.",
+    "explanation": "① 단순 CASE 는 NULL 을 = 로 비교해 항상 UNKNOWN 이라 ELSE 로 넘어가 항상 0 을 반환한다. ②③④ 는 칼럼이 NULL 이면 -1, 아니면 0 을 반환하므로(DECODE 는 NULL 끼리 같다고 보고, NVL2(expr, a, b) 는 NULL 이 아니면 a, NULL 이면 b 를 반환한다) 서로 같다. 따라서 결과가 다른 것은 ①이다.",
     "_source": "authored"
   },
   {
@@ -842,15 +842,15 @@ export const ROUND_56: QuizQuestion[] = [
     "round": 56,
     "subject": "2과목",
     "number": 32,
-    "title": "아래 쿼리의 결과 행 수는?",
+    "title": "아래 쿼리 결과 행의 COL2 값은?",
     "options": [
       "0",
       "10",
       "20",
       "40"
     ],
-    "correctIndex": 0,
-    "explanation": "서브쿼리에 NULL 이 포함되어 있으므로 NOT IN 비교 결과가 모두 UNKNOWN 으로 평가되어 공집합이 반환된다.",
+    "correctIndex": 1,
+    "explanation": "(A,10) 은 TAB2 의 모든 행과 비교해 확정적으로 불일치이므로 NOT IN 이 참이라 반환된다. (B,20) 은 일치하여 제외되고, (C,30) 은 (C,NULL) 과의 비교가 UNKNOWN 이라 제외된다. 따라서 결과는 (A,10) 한 행이고 COL2 는 10 이다.",
     "_source": "authored",
     "references": [
       {

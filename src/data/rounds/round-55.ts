@@ -1197,7 +1197,7 @@ export const ROUND_55: QuizQuestion[] = [
       "AAB, BBA",
       "BBA, AAB",
       "COL1, COL2",
-      "첫 번째 SELECT 별칭만 유효"
+      "두 번째 SELECT 의 별칭이 우선 적용된다"
     ],
     "correctIndex": 0,
     "explanation": "UNION/UNION ALL 등 집합 연산 결과의 컬럼명은 첫 번째 SELECT 절에서 부여한 별칭을 따른다. 두 번째 SELECT 가 동일 컬럼에 다른 별칭(BBA, AAB)을 붙여도 무시되므로, 결과 컬럼명은 (AAB, BBA) 순서로 출력된다. 정답은 ①.",

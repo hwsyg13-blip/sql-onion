@@ -174,8 +174,8 @@
         "컬럼이 추가될 때 뷰를 변경하지 않아도 응용 프로그램에 영향을 미치지 않는다.",
         "뷰는 다른 테이블의 데이터를 참조한다."
       ],
-      "correctIndex": 2,
-      "explanation": "뷰 정의 이후 참조 테이블에 컬럼이 추가되면 뷰를 다시 컴파일해야 하며 응용 프로그램의 SELECT * 영향도 발생할 수 있다."
+      "correctIndex": 0,
+      "explanation": "뷰는 조회 속도를 높이려고 쓰는 객체가 아니라 논리적 독립성, 질의 단순화, 보안(접근 제어)을 위해 사용한다. 뷰는 실제 데이터를 저장하지 않고 다른 테이블을 참조하며, 기본 테이블에 컬럼이 추가되어도 뷰 정의를 바꾸지 않으면 응용 프로그램에 영향이 없다. 따라서 적절하지 않은 것은 ①이다."
     },
     {
       "subject": "2과목",
@@ -1113,8 +1113,8 @@
         "PARTITION BY DEPT_ID 만 지정",
         "ORDER BY SALARY RANGE BETWEEN 100 PRECEDING AND 200 FOLLOWING (전체 파티션 없음)"
       ],
-      "correctIndex": 1,
-      "explanation": "연봉 값 기준으로 논리적 범위(RANGE) 를 지정하여 -100~200 범위의 건수를 집계한다."
+      "correctIndex": 3,
+      "explanation": "값 범위 기준 RANGE 윈도우는 정렬 기준 컬럼이 필요하므로 ORDER BY 가 있어야 한다. ② 는 ORDER BY 가 없어 성립하지 않고 ④ 가 연봉 오름차순 정렬(ORDER BY SALARY)과 RANGE 범위를 함께 지정하여 -100~200 범위의 건수를 집계한다."
     },
     {
       "subject": "2과목",

@@ -621,11 +621,11 @@ export const ROUND_53: QuizQuestion[] = [
     "options": [
       "SELECT * FROM T WHERE COL1 = 1 AND COL2 = 3;",
       "SELECT * FROM T WHERE COL1 = 1 OR COL2 IN (3, 4);",
-      "SELECT * FROM T WHERE COL1 IN (1) AND COL2 IN (3, 4);",
+      "SELECT * FROM T WHERE COL1 IN (1, 2) AND COL2 IN (3, 4);",
       "SELECT * FROM T WHERE COL1 = 1 AND (COL2 = 3 OR COL2 = 4);"
     ],
     "correctIndex": 3,
-    "explanation": "다중 컬럼 IN `(COL1, COL2) IN ((1, 3), (1, 4))` 는 `(COL1=1 AND COL2=3) OR (COL1=1 AND COL2=4)` 와 동일하다. COL1 이 두 튜플에서 모두 1 이라 공통 인수로 묶으면 `COL1=1 AND (COL2=3 OR COL2=4)` 로 정리된다. ① 은 한 조건만, ② 는 OR 결합으로 더 넓고, ③ 은 (1, 3) (1, 4) 가 아닌 다른 조합도 매칭하므로 의미가 다르다.",
+    "explanation": "다중 컬럼 IN `(COL1, COL2) IN ((1, 3), (1, 4))` 는 `(COL1=1 AND COL2=3) OR (COL1=1 AND COL2=4)` 와 동일하다. COL1 이 두 튜플에서 모두 1 이라 공통 인수로 묶으면 `COL1=1 AND (COL2=3 OR COL2=4)` 로 정리된다. ① 은 한 조건만, ② 는 OR 결합으로 더 넓고, ③ 은 COL1 이 2 인 행 (2, 3), (2, 4) 도 매칭하므로 의미가 다르다.",
     "_source": "authored",
     "references": [
       {
