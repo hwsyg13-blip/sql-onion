@@ -219,7 +219,7 @@ export const ROUND_56: QuizQuestion[] = [
       "OR"
     ],
     "correctIndex": 1,
-    "explanation": "괄호는 모든 연산자에 우선한다.",
+    "explanation": "괄호는 모든 연산자보다 먼저 평가되므로 우선순위가 가장 높다. 이어서 비교 연산자, NOT, AND, OR 순으로 적용되며 AND 가 OR 보다 먼저 묶인다.",
     "_source": "authored"
   },
   {
@@ -1358,7 +1358,7 @@ export const ROUND_56: QuizQuestion[] = [
       "1500, NULL"
     ],
     "correctIndex": 2,
-    "explanation": "두 집계의 NULL 처리 방식이 다른 점이 핵심입니다. AVG(NVL(SAL, 0))는 NULL을 0으로 치환해 모든 4행이 평균에 포함되어 (1000+1000+2500+0)÷4 = 1125. MIN(SAL)은 NVL이 적용되지 않아 NULL을 자동 제외하고 1000, 1000, 2500 중 최솟값 1000. 따라서 결과는 (1125, 1000)으로 정답은 ③번입니다.",
+    "explanation": "두 집계의 NULL 처리 방식이 다른 점이 핵심이다. AVG(NVL(SAL, 0))는 NULL을 0으로 치환해 모든 4행이 평균에 포함되어 (1000+1000+2500+0)÷4 = 1125. MIN(SAL)은 NVL이 적용되지 않아 NULL을 자동 제외하고 1000, 1000, 2500 중 최솟값 1000. 따라서 결과는 (1125, 1000)으로 정답은 ③번이다.",
     "_source": "authored",
     "references": [
       {
@@ -1403,7 +1403,7 @@ export const ROUND_56: QuizQuestion[] = [
       "등급이 NULL 인 사원도 결과에 포함된다."
     ],
     "correctIndex": 1,
-    "explanation": "FROM 부서 D, 사원 E + WHERE D.부서ID = E.부서ID 는 INNER JOIN 으로 동작 (부서ID 일치 행만 결합). 추가 조건 E.등급 >= 2 가 등급 2 미만 행을 걸러낸다.\n\n행별 분석:\n- 사원 1 (부서ID=10, 등급=3): 부서 매칭 ✓ 등급≥2 ✓ → 출력\n- 사원 2 (부서ID=10, 등급=1): 부서 매칭 ✓ 그러나 등급<2 → 제외\n- 사원 3 (부서ID=20, 등급=2): 부서 매칭 ✓ 등급≥2 ✓ → 출력\n- 사원 4 (부서ID=NULL, 등급=5): 부서 미매칭 → 제외 (등급은 충족하지만 INNER JOIN 으로 탈락)\n\n결과: 사원 1·3 두 행만 출력. ① 은 \"모든\" 부분이 거짓 (사원 4 는 등급 5 이지만 부서 NULL 이라 제외). ② 는 두 제외 조건 (부서 미소속 + 등급<2) 을 정확히 진술 → 정답. ③ 은 INNER JOIN 특성과 모순. ④ 는 등급 NULL 자체가 데이터에 없으며 NULL 이라도 등급≥2 비교가 UNKNOWN 으로 평가되어 제외된다.",
+    "explanation": "`FROM 부서 D, 사원 E` 에 `WHERE D.부서ID = E.부서ID` 를 건 형태는 INNER JOIN 과 같아 부서ID 가 일치하는 행만 남는다. 여기에 등급 조건이 더해지므로 부서ID 가 NULL 인 사원은 조인 단계에서, 등급이 2 미만인 사원은 조건 단계에서 각각 걸러진다. ① 은 부서가 없는 사원도 포함된다고 보아 틀리고, ③④ 는 INNER JOIN 에서 매칭되지 않은 행이 남는다고 본 설명이라 옳지 않다.",
     "_source": "authored",
     "references": [
       {

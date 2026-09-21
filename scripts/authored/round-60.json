@@ -1276,7 +1276,7 @@
         "GRANT, REVOKE는 DCL이다."
       ],
       "correctIndex": 0,
-      "explanation": "TRUNCATE는 DDL에 속한다."
+      "explanation": "TRUNCATE 는 테이블의 모든 행을 삭제하면서 저장 공간까지 초기화하는 명령으로 DDL 에 속한다. 행 단위로 삭제하고 롤백할 수 있는 DELETE 와 달리 자동 커밋되는 점이 DDL 의 특징이다."
     },
     {
       "subject": "2과목",

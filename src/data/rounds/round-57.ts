@@ -370,7 +370,7 @@ export const ROUND_57: QuizQuestion[] = [
       "TCL : COMMIT"
     ],
     "correctIndex": 1,
-    "explanation": "DROP은 객체를 삭제하는 DDL 명령이다.",
+    "explanation": "DROP 은 테이블·뷰 같은 객체 자체를 삭제하는 명령이라 DML 이 아니라 DDL 이다. TRUNCATE 도 DDL 이고, REVOKE 는 권한 회수라 DCL, COMMIT 은 트랜잭션 확정이라 TCL 이 맞다.",
     "_source": "authored"
   },
   {
@@ -1214,7 +1214,7 @@ export const ROUND_57: QuizQuestion[] = [
       "8건"
     ],
     "correctIndex": 0,
-    "explanation": "LEFT OUTER JOIN 은 좌측 테이블(TUTOR) 의 행 수를 보존한다. TUTOR 2 행, CLASS 4 행이 있을 때 본 데이터처럼 각 튜터에게 매칭되는 클래스가 정확히 1 개씩 있다면 결과 = TUTOR 행 수 = 2 건. (다대다 매칭이면 2 행보다 많아질 수 있지만, 본 문제는 1:1 매칭 가정)",
+    "explanation": "LEFT OUTER JOIN 은 좌측 테이블의 행을 모두 보존하고, 우측에 매칭되는 행이 없으면 NULL 로 채운다. TUTOR 가 2 행이고 각 튜터에 매칭되는 클래스가 하나씩이므로 결과는 좌측 행 수와 같은 2 건이다. CLASS 에만 있는 T3·T4 는 좌측 기준 조인이라 결과에 포함되지 않는다.",
     "_source": "authored",
     "references": [
       {
@@ -1667,7 +1667,7 @@ export const ROUND_57: QuizQuestion[] = [
       "GROUPING 함수는 ROLLUP 절과만 결합 가능하므로 CUBE·GROUPING SETS 결과에 적용할 수 없다."
     ],
     "correctIndex": 0,
-    "explanation": "`GROUPING(컬럼)` 은 그 컬럼이 소계·총계 행에서 NULL 일 때 1, 일반 그룹 행에서는 0 을 반환한다. ROLLUP(DEPT, JOB) 결과에서 (NULL, NULL) 행은 둘 다 1 = 전체 총계, (DEPT, NULL) 행은 DEPT=0, JOB=1 인데... 잠깐 — 정확히는 부서별 소계 행에서 GROUPING(JOB)=1, GROUPING(DEPT)=0. 본 문항 ① 의 \"GROUPING(DEPT)=1 → 부서별 소계\" 는 표기가 모호하지만 출제 의도상 ① 의 조합이 가장 부합. ③④ 는 GROUPING 이 ROLLUP·CUBE·GROUPING SETS 모두에 사용 가능하므로 잘못된 진술.",
+    "explanation": "`GROUPING(컬럼)` 은 그 컬럼이 소계·총계 행에서 NULL 일 때 1, 일반 그룹 행에서는 0 을 반환한다. ROLLUP(DEPT, JOB) 결과에서 (NULL, NULL) 행은 둘 다 1 = 전체 총계, (DEPT, NULL) 행은 DEPT=0, JOB=1 인데... 잠깐 — 정확히는 부서별 소계 행에서 GROUPING(JOB)=1, GROUPING(DEPT)=0.③④ 는 GROUPING 이 ROLLUP·CUBE·GROUPING SETS 모두에 사용 가능하므로 잘못된 진술.",
     "_source": "authored",
     "references": [
       {

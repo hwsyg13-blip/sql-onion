@@ -499,7 +499,7 @@ export const ROUND_52: QuizQuestion[] = [
       "4번 행 (NVL 로 0 출력)"
     ],
     "correctIndex": 2,
-    "explanation": "NVL(금액, 0) 적용 후 출력값: ID=1 → 1000, ID=2 → 0 (NVL 적용), ID=3 → 3000, ID=4 → 0 (NVL 적용). 가장 큰 값은 ID=3 의 3000. 정답 ③.\n\n보충: 원본 기출이 \"올바르게 출력되는 행\" 표현을 사용해 모호함이 있었으나 (NULL 이 아닌 행은 ① ③ 둘 다 그대로 출력), 출제 의도는 \"NVL 적용 후 가장 큰 금액\" 으로 해석하는 것이 정답 ③ 과 일치한다.",
+    "explanation": "NVL(금액, 0) 적용 후 출력값: ID=1 → 1000, ID=2 → 0 (NVL 적용), ID=3 → 3000, ID=4 → 0 (NVL 적용). 가장 큰 값은 ID=3 의 3000. 정답 ③.",
     "_source": "authored",
     "references": [
       {
@@ -985,7 +985,7 @@ export const ROUND_52: QuizQuestion[] = [
       "선언적(Declarative)"
     ],
     "correctIndex": 0,
-    "explanation": "SQL 은 비절차적 언어이다.",
+    "explanation": "SQL 은 원하는 결과를 기술하면 처리 방법은 DBMS 가 결정하는 비절차적·선언적 언어다. 집합 단위로 데이터를 다루고 정해진 구문 구조를 따르므로 ②③④ 는 SQL 의 특징이 맞다.",
     "_source": "authored"
   },
   {

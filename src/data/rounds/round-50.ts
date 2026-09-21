@@ -522,7 +522,7 @@ export const ROUND_50: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "-- 11 에서 시작하여 1 까지 거슬러 올라가기 (자식→부모)\nSELECT 카테고리번호, 카테고리명, 상위카테고리번호, LEVEL\nFROM   카테고리\nSTART WITH 카테고리번호 = 11\nCONNECT BY 카테고리번호 = PRIOR 상위카테고리번호;"
+        "code": "SELECT 카테고리번호, 카테고리명, 상위카테고리번호, LEVEL\nFROM   카테고리\nSTART WITH 카테고리번호 = 11\nCONNECT BY 카테고리번호 = PRIOR 상위카테고리번호;"
       },
       {
         "type": "table",
@@ -728,7 +728,7 @@ export const ROUND_50: QuizQuestion[] = [
       "ALTER"
     ],
     "correctIndex": 3,
-    "explanation": "ALTER 는 DDL 에 속한다.",
+    "explanation": "GRANT·REVOKE 는 권한을 제어하는 DCL 이고 ROLLBACK 은 트랜잭션을 되돌리는 TCL 이다. ALTER 는 테이블 구조를 변경하는 DDL 이므로 두 분류 어디에도 속하지 않는다.",
     "_source": "authored"
   },
   {

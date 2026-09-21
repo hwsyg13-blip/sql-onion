@@ -242,7 +242,7 @@ export const ROUND_49: QuizQuestion[] = [
       "DML: RENAME"
     ],
     "correctIndex": 3,
-    "explanation": "RENAME 은 DDL 에 해당한다.",
+    "explanation": "RENAME 은 객체의 이름을 바꾸는 명령이라 DDL 에 속한다. DML 은 INSERT·UPDATE·DELETE·SELECT 처럼 데이터를 조작하는 명령을 말한다.",
     "_source": "authored"
   },
   {
@@ -1347,7 +1347,7 @@ export const ROUND_49: QuizQuestion[] = [
       "7"
     ],
     "correctIndex": 1,
-    "explanation": "공백을 포함하여 10 글자이다.",
+    "explanation": "LENGTH 는 공백을 포함한 문자 수를 반환한다. 'SQL EXPERT' 는 SQL 3 자, 공백 1 자, EXPERT 6 자로 모두 10 자이다.",
     "_source": "authored",
     "references": [
       {
@@ -1561,7 +1561,7 @@ export const ROUND_49: QuizQuestion[] = [
     "round": 49,
     "subject": "2과목",
     "number": 47,
-    "title": "아래 SQL 의 결과를 작성하시오.",
+    "title": "아래 SQL 의 결과로 옳은 것은?",
     "options": [
       "1",
       "2",
@@ -1569,7 +1569,7 @@ export const ROUND_49: QuizQuestion[] = [
       "4"
     ],
     "correctIndex": 2,
-    "explanation": "C 그룹이 3건으로 유일하게 HAVING COUNT(*) > 2 를 만족한다.",
+    "explanation": "GROUP BY ID 로 묶으면 A 2건, B 2건, C 3건, D 1건이 된다. HAVING COUNT(*) > 2 를 만족하는 그룹은 C 하나뿐이므로 COUNT(*) 값 3 이 반환된다.",
     "_source": "authored",
     "references": [
       {

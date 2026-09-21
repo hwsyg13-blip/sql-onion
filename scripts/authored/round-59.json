@@ -637,7 +637,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT REGEXP_SUBSTR('BCD', ( ? )) AS 첫번째,\n       REGEXP_SUBSTR('BCD', ( ? )) AS 두번째\nFROM DUAL;\n-- 목표 결과: 첫번째 = 'BCD', 두번째 = NULL"
+          "code": "SELECT REGEXP_SUBSTR('BCD', ( ? )) AS 첫번째,\n       REGEXP_SUBSTR('BCD', ( ? )) AS 두번째\nFROM DUAL;"
         }
       ]
     },
@@ -760,7 +760,7 @@
         "30 60 60"
       ],
       "correctIndex": 3,
-      "explanation": "COALESCE 는 인자를 왼쪽부터 순서대로 평가하여 가장 먼저 NULL 이 아닌 값을 반환한다.\n- 행 1 (30, NULL, 60): COALESCE → 30 (V1 이 NULL 아님)\n- 행 2 (NULL, 60, 90): COALESCE → 60 (V2)\n- 행 3 (NULL, NULL, 60): COALESCE → 60 (V3)\n\n따라서 결과는 30, 60, 60 → 정답 ④.",
+      "explanation": "COALESCE 는 인자를 왼쪽부터 평가해 가장 먼저 NULL 이 아닌 값을 돌려준다. 첫 행은 V1 이 30 이라 30, 둘째 행은 V1 이 NULL 이고 V2 가 60 이라 60, 셋째 행은 V1·V2 가 모두 NULL 이고 V3 가 60 이라 60 이 된다. 따라서 결과는 30, 60, 60 순이다.",
       "references": [
         {
           "type": "table",
