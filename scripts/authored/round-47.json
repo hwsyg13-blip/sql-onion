@@ -633,13 +633,13 @@
       "number": 29,
       "title": "아래 MERGE 구문 수행 후 결과로 옳은 것은?",
       "options": [
-        "0, 0, 0",
+        "100, 100, 100",
         "100, 0, 100",
-        "NULL, NULL, NULL",
-        "오류"
+        "5, 0, 7",
+        "100, 0"
       ],
       "correctIndex": 1,
-      "explanation": "MERGE 는 ON 조건으로 대상(A)과 원본(B)을 매칭해, 매칭되면 UPDATE, 매칭되지 않으면 INSERT 를 수행한다. ID 1 은 A 와 B 에 모두 있어 UPDATE 로 V=100 이 되고, ID 2 는 B 에 없어 변경되지 않고 V=0 으로 남으며, ID 3 은 A 에 없어 INSERT 로 V=100 이 추가된다. 따라서 결과 V 는 100, 0, 100 이다.",
+      "explanation": "MERGE 는 ON 조건으로 대상(A)과 원본(B)을 매칭해, 매칭되면 UPDATE, 매칭되지 않으면 INSERT 를 수행한다. ID 1 은 A·B 에 모두 있어 UPDATE 로 V=100 이 되고, ID 2 는 B 에 없어 매칭 대상이 아니므로 V=0 으로 남으며, ID 3 은 A 에 없어 INSERT 로 V=100 이 추가된다. 따라서 A 의 V 는 100, 0, 100 이다. ① 은 모든 행이 UPDATE 된다고 본 경우, ③ 은 B 의 값이 그대로 반영된다고 본 경우, ④ 는 WHEN NOT MATCHED 가 INSERT 를 수행하지 않는다고 본 경우이다.",
       "references": [
         {
           "type": "table",

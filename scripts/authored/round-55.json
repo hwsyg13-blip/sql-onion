@@ -815,7 +815,39 @@
         "DISTINCT 사용 시 중복된 로그인 이력은 하나로 집계된다."
       ],
       "correctIndex": 2,
-      "explanation": "ORDER BY 절은 SELECT 절 이후에 평가되므로 별칭을 참조할 수 있다."
+      "explanation": "ORDER BY 절은 SELECT 절이 평가된 뒤에 수행되므로 SELECT 절에서 부여한 별칭을 그대로 참조할 수 있다. 따라서 별칭을 참조할 수 없다는 ③ 이 적절하지 않다. ② 는 같은 이유로 정상 동작하고, ① 은 5 × 3 = 15 회로 옳으며, ④ DISTINCT 는 중복 행을 하나로 묶는다.",
+      "references": [
+        {
+          "type": "table",
+          "caption": "로그인이력 테이블",
+          "headers": [
+            "회원ID",
+            "로그인일시"
+          ],
+          "rows": [
+            [
+              "M001",
+              "2025-05-01 09:10"
+            ],
+            [
+              "M001",
+              "2025-05-01 13:20"
+            ],
+            [
+              "M001",
+              "2025-05-02 10:05"
+            ],
+            [
+              "M002",
+              "2025-05-01 11:00"
+            ]
+          ]
+        },
+        {
+          "type": "sql",
+          "code": "SELECT   회원ID AS ALIAS1,\n         TRUNC(로그인일시) AS ALIAS2,\n         COUNT(*) AS 로그인횟수\nFROM     로그인이력\nGROUP BY 회원ID, TRUNC(로그인일시)\nORDER BY ALIAS1, ALIAS2;"
+        }
+      ]
     },
     {
       "subject": "2과목",
@@ -1031,10 +1063,10 @@
         "AAB, BBA",
         "BBA, AAB",
         "COL1, COL2",
-        "두 번째 SELECT 의 별칭이 우선 적용된다"
+        "오류가 발생한다"
       ],
       "correctIndex": 0,
-      "explanation": "UNION/UNION ALL 등 집합 연산 결과의 컬럼명은 첫 번째 SELECT 절에서 부여한 별칭을 따른다. 두 번째 SELECT 가 동일 컬럼에 다른 별칭(BBA, AAB)을 붙여도 무시되므로, 결과 컬럼명은 (AAB, BBA) 순서로 출력된다. 정답은 ①.",
+      "explanation": "UNION·UNION ALL 등 집합 연산 결과의 컬럼명은 첫 번째 SELECT 절의 별칭을 따른다. 두 번째 SELECT 가 같은 컬럼에 다른 별칭(BBA, AAB)을 붙여도 무시되므로 결과 컬럼명은 AAB, BBA 가 된다. ② 는 두 번째 SELECT 의 별칭이 적용된다고 본 경우, ③ 은 별칭이 모두 무시된다고 본 경우, ④ 는 양쪽 별칭이 다르면 오류가 난다고 본 경우이다.",
       "references": [
         {
           "type": "table",

@@ -126,16 +126,22 @@ export const ROUND_51: QuizQuestion[] = [
     "round": 51,
     "subject": "1과목",
     "number": 7,
-    "title": "식별자의 분류가 올바르게 짝지어진 것은?",
+    "title": "아래 식별자 분류 기준 ㉠~㉢ 에 해당하는 식별자를 올바르게 짝지은 것은?",
     "options": [
-      "후보 식별자 - 대체 식별자 - 인조 식별자 - 기본 식별자",
-      "대표 식별자 - 후보 식별자 - 복합 식별자 - 단일 식별자",
-      "주 식별자 - 외부 식별자 - 대체 식별자 - 인조 식별자",
-      "주 식별자 - 보조 식별자 - 본질 식별자 - 외부 식별자"
+      "㉠ 본질식별자·인조식별자 / ㉡ 주식별자·보조식별자 / ㉢ 내부식별자·외부식별자",
+      "㉠ 단일식별자·복합식별자 / ㉡ 본질식별자·인조식별자 / ㉢ 주식별자·보조식별자",
+      "㉠ 내부식별자·외부식별자 / ㉡ 단일식별자·복합식별자 / ㉢ 본질식별자·인조식별자",
+      "㉠ 주식별자·보조식별자 / ㉡ 내부식별자·외부식별자 / ㉢ 단일식별자·복합식별자"
     ],
     "correctIndex": 3,
-    "explanation": "주 식별자 - 보조 식별자 - 본질 식별자 - 외부 식별자 가 식별자 분류의 올바른 짝이다. 주/보조는 대표성 기준, 본질/인조는 속성의 업무적 발생 여부 기준, 내부/외부는 엔터티 내·외 발생 여부 기준이다.",
-    "_source": "authored"
+    "explanation": "식별자는 대표성 여부에 따라 주식별자와 보조식별자로, 엔터티 내에서 스스로 만들어지는지 여부에 따라 내부식별자와 외부식별자(다른 엔터티로부터 상속받은 FK)로, 주식별자를 구성하는 속성의 개수에 따라 단일식별자와 복합식별자로 나눈다. 이 밖에 업무에 원래 존재하는 속성인지 여부로 본질식별자와 인조식별자를 구분한다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "text",
+        "content": "㉠ 엔터티를 대표하는 식별자인지 여부에 따른 분류\n㉡ 엔터티 내에서 스스로 만들어지는지 여부에 따른 분류\n㉢ 주식별자를 구성하는 속성의 개수에 따른 분류"
+      }
+    ]
   },
   {
     "id": 10457,
@@ -1168,15 +1174,15 @@ export const ROUND_51: QuizQuestion[] = [
     "round": 51,
     "subject": "2과목",
     "number": 38,
-    "title": "SQL Server 에서 ORDER BY 절의 NULL 정렬에 대한 설명 중 결과가 다른 하나는?",
+    "title": "Oracle 에서 COL 에 NULL 이 포함되어 있을 때, 아래 ORDER BY 절 중 NULL 의 정렬 위치가 나머지와 다른 것은?",
     "options": [
-      "ORDER BY COL (기본 오름차순)",
-      "ORDER BY NVL(COL, 0) 처럼 NULL 을 0 으로 치환",
-      "ORDER BY COL NULLS FIRST",
+      "ORDER BY COL",
+      "ORDER BY COL DESC",
+      "ORDER BY COL ASC",
       "ORDER BY COL NULLS LAST"
     ],
     "correctIndex": 1,
-    "explanation": "SQL Server 의 ORDER BY 기본 동작에서 NULL 은 가장 앞에 정렬된다(NULLS FIRST 와 동일). NVL/ISNULL 로 NULL 을 0 으로 치환하면 0 의 정렬 위치를 따르므로 다른 결과가 나온다.",
+    "explanation": "Oracle 은 오름차순 정렬에서 NULL 을 가장 마지막에(NULLS LAST), 내림차순 정렬에서 가장 앞에(NULLS FIRST) 배치한다. ①·③ 은 오름차순이고 ④ 는 NULLS LAST 를 명시했으므로 모두 NULL 이 마지막에 오지만, ② 는 내림차순이라 NULL 이 가장 앞에 오므로 정렬 위치가 다르다.",
     "_source": "authored"
   },
   {

@@ -295,7 +295,7 @@ export const ROUND_52: QuizQuestion[] = [
     "round": 52,
     "subject": "2과목",
     "number": 11,
-    "title": "아래 T 테이블에 대한 SQL 의 결과로 출제 의도상 옳은 것은? (원본 기출 정답 보존)",
+    "title": "아래 T 테이블에 대한 SQL 의 결과로 옳은 것은?",
     "options": [
       "모든 행 반환",
       "COL1 = NULL, COL2 = A",
@@ -303,7 +303,7 @@ export const ROUND_52: QuizQuestion[] = [
       "COL1 = 4, COL2 = D"
     ],
     "correctIndex": 3,
-    "explanation": "원본 기출 정답은 ④ COL1=4, COL2=D 로 보존한다. 출제 의도는 'COL2 = NULL' 비교를 'COL2 IS NULL' 로 의역해 COL1≠1 이고 COL2≠NULL 인 행을 찾는 것 — 이때 (4, D) 가 정답이 된다.\n\n다만 SQL 표준 NULL 처리 규칙으로 엄격히 평가하면 'COL2 = NULL' 은 모든 행에서 UNKNOWN 을 반환하므로 NOT (X OR UNKNOWN) 도 모든 행에서 UNKNOWN 또는 FALSE 가 되어 결과는 공집합이 되어야 한다. 이 점은 원본 기출의 모호한 케이스로 알려져 있다.",
+    "explanation": "COL1 이 NULL 인 첫 행은 `COL1 <= 3` 이 UNKNOWN, `COL2 IS NULL` 이 FALSE 이므로 OR 결과가 UNKNOWN 이고 NOT UNKNOWN 도 UNKNOWN 이라 조건을 만족하지 못해 제외된다. COL1 이 1·3 인 행은 `COL1 <= 3` 이 참이므로 NOT 에 의해 제외된다. COL1 이 4 인 행만 두 조건이 모두 거짓이어서 NOT 이 참이 되므로 (4, D) 한 행이 반환된다.",
     "_source": "authored",
     "references": [
       {
@@ -334,7 +334,7 @@ export const ROUND_52: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT COL1, COL2\nFROM   T\nWHERE  NOT (COL1 = 1 OR COL2 = NULL);"
+        "code": "SELECT COL1, COL2\nFROM   T\nWHERE  NOT (COL1 <= 3 OR COL2 IS NULL);"
       }
     ]
   },
@@ -941,14 +941,34 @@ export const ROUND_52: QuizQuestion[] = [
     "number": 32,
     "title": "아래 네 개의 SQL 중 결과가 나머지와 다른 것은?",
     "options": [
-      "SELECT SUM(COL1) FROM T WHERE COL2 IS NOT NULL;",
-      "SELECT AVG(COL1) * COUNT(COL2) FROM T;",
-      "SELECT COUNT(COL2) * (SUM(COL1) / COUNT(COL2)) FROM T;",
-      "SELECT SUM(COL1) FROM T;"
+      "SELECT SUM(COL1) FROM T;",
+      "SELECT SUM(NVL(COL1, 0)) FROM T;",
+      "SELECT AVG(COL1) * COUNT(COL1) FROM T;",
+      "SELECT AVG(COL1) * COUNT(*) FROM T;"
     ],
     "correctIndex": 3,
-    "explanation": "원본 기출에서 구체적 SQL 표기는 유실되었고 정답 번호(④)만 복원되어 있다. ①·②·③ 은 모두 COL2 가 NULL 이 아닌 행에 한정한 합과 동치이지만, ④ 는 NULL 행까지 포함한 전체 SUM 이라 결과가 다르다.",
-    "_source": "authored"
+    "explanation": "집계 함수는 NULL 을 제외하고 계산한다. ① SUM(COL1) 은 10 + 20 = 30. ② NVL 로 NULL 을 0 으로 바꿔도 합은 30 으로 같다. ③ AVG(COL1) 은 NULL 을 뺀 두 건의 평균이라 15, COUNT(COL1) 도 NULL 을 뺀 2 이므로 15 × 2 = 30. ④ 는 COUNT(*) 가 NULL 행까지 포함한 3 이므로 15 × 3 = 45 가 되어 나머지와 다르다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "caption": "T 테이블",
+        "headers": [
+          "COL1"
+        ],
+        "rows": [
+          [
+            "10"
+          ],
+          [
+            "(NULL)"
+          ],
+          [
+            "20"
+          ]
+        ]
+      }
+    ]
   },
   {
     "id": 10432,

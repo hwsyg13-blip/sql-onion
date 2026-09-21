@@ -65,16 +65,23 @@ export const ROUND_56: QuizQuestion[] = [
     "round": 56,
     "subject": "1과목",
     "number": 4,
-    "title": "아래 설명 중 옳지 않은 것은?",
+    "title": "아래 ERD 의 엔터티 분류에 대한 설명 중 옳지 않은 것은?",
     "options": [
-      "고객과 상품은 기본 엔터티이다.",
-      "주문은 사건 엔터티이다.",
-      "주문 상품 엔터티는 주문과 상품의 관계에 의해 생성된다.",
-      "주문 상품 엔터티는 주문과 상품 간 M:N 관계의 중간 엔터티이다."
+      "고객과 상품은 업무에 원래부터 존재하는 기본 엔터티이다.",
+      "주문은 기본 엔터티로부터 발생하는 중심 엔터티이다.",
+      "주문상품은 다른 엔터티로부터 발생하지 않는 기본 엔터티이다.",
+      "주문상품은 주문과 상품의 M:N 관계를 해소하는 행위 엔터티이다."
     ],
     "correctIndex": 2,
-    "explanation": "주문 상품은 주문 발생이라는 업무 행위에 의해 생성되는 행위 엔터티이다. 주문과 상품의 관계 자체에 의해 자동 생성되는 것이 아니다.",
-    "_source": "authored"
+    "explanation": "기본(키) 엔터티는 업무에 원래부터 존재하며 다른 엔터티로부터 발생하지 않는 엔터티로 고객·상품이 해당한다. 중심 엔터티는 기본 엔터티로부터 발생해 업무의 중심이 되는 엔터티로 주문이 해당한다. 행위 엔터티는 두 개 이상의 엔터티로부터 발생하는 엔터티로, 주문상품은 주문과 상품의 M:N 관계를 해소하는 교차 엔터티이자 행위 엔터티이다. 따라서 주문상품을 기본 엔터티라고 한 ③ 이 옳지 않다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "erd",
+        "caption": "고객·주문·상품·주문상품 ERD",
+        "mermaid": "erDiagram\n    고객 ||--o{ 주문 : \"한다\"\n    주문 ||--o{ 주문상품 : \"포함\"\n    상품 ||--o{ 주문상품 : \"대상\""
+      }
+    ]
   },
   {
     "id": 10204,
@@ -133,13 +140,13 @@ export const ROUND_56: QuizQuestion[] = [
       "의사가 집도하지 않는 수술이 있을 수 있다."
     ],
     "correctIndex": 0,
-    "explanation": "세 관계는 각각 독립적인 의미를 가지며 단순 합성으로 대체할 수 없다.",
+    "explanation": "병원·의사·수술 세 관계는 각각 독립적인 의미를 가진다. 의사 없이 진행된 수술도 병원에는 속하므로, 병원-수술 직접 관계(ㄷ)로 연결되는 집합과 병원-의사-수술 경로(ㄱ+ㄴ)로 연결되는 집합이 일치하지 않는다. 따라서 ①이 옳지 않다. ② 병원 측에서 의사는 0..N 이므로 참, ③ 의사 측에서 수술은 0..N 이므로 참, ④ 수술 측에서 의사는 선택 참여이므로 참이다.",
     "_source": "authored",
     "references": [
       {
         "type": "erd",
-        "caption": "병원·의사·수술 ERD — 관계 라벨 ㄱ(병원-의사), ㄴ(의사-수술), ㄷ(병원-수술 직접)",
-        "mermaid": "erDiagram\n    병원 ||--o| 의사 : \"ㄱ\"\n    의사 |o--o| 수술 : \"ㄴ\"\n    병원 ||--o| 수술 : \"ㄷ\""
+        "caption": "병원·의사·수술 ERD — ㄱ(병원-의사), ㄴ(의사-수술), ㄷ(병원-수술)",
+        "mermaid": "erDiagram\n    병원 ||--o{ 의사 : \"ㄱ\"\n    의사 |o--o{ 수술 : \"ㄴ\"\n    병원 ||--o{ 수술 : \"ㄷ\""
       }
     ]
   },
@@ -284,7 +291,7 @@ export const ROUND_56: QuizQuestion[] = [
     "round": 56,
     "subject": "2과목",
     "number": 13,
-    "title": "다음 네 가지 조인 중 결과 행의 수가 나머지와 다른 것은? (양쪽 테이블에 매칭되지 않는 행이 존재한다고 가정)",
+    "title": "아래 두 테이블에 대해 네 가지 조인을 각각 수행할 때 결과 행 수가 가장 많은 것은?",
     "options": [
       "INNER JOIN",
       "LEFT OUTER JOIN",
@@ -292,8 +299,46 @@ export const ROUND_56: QuizQuestion[] = [
       "FULL OUTER JOIN"
     ],
     "correctIndex": 3,
-    "explanation": "FULL OUTER JOIN 만이 양쪽에서 매칭되지 않는 모든 행을 포함하여 다른 조인보다 행이 더 많아진다.",
-    "_source": "authored"
+    "explanation": "INNER JOIN 은 양쪽에 모두 있는 B·C 두 건만 반환한다. LEFT OUTER JOIN 은 여기에 TAB1 에만 있는 A 를 더해 3 건, RIGHT OUTER JOIN 은 TAB2 에만 있는 D 를 더해 3 건이다. FULL OUTER JOIN 은 매칭 2 건에 양쪽 미매칭 A·D 를 모두 더해 4 건이므로 결과 행 수가 가장 많다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "caption": "TAB1 테이블",
+        "headers": [
+          "V"
+        ],
+        "rows": [
+          [
+            "A"
+          ],
+          [
+            "B"
+          ],
+          [
+            "C"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "TAB2 테이블",
+        "headers": [
+          "V"
+        ],
+        "rows": [
+          [
+            "B"
+          ],
+          [
+            "C"
+          ],
+          [
+            "D"
+          ]
+        ]
+      }
+    ]
   },
   {
     "id": 10213,
@@ -844,13 +889,13 @@ export const ROUND_56: QuizQuestion[] = [
     "number": 32,
     "title": "아래 쿼리 결과 행의 COL2 값은?",
     "options": [
-      "0",
       "10",
       "20",
-      "40"
+      "30",
+      "결과가 없다 (공집합)"
     ],
-    "correctIndex": 1,
-    "explanation": "(A,10) 은 TAB2 의 모든 행과 비교해 확정적으로 불일치이므로 NOT IN 이 참이라 반환된다. (B,20) 은 일치하여 제외되고, (C,30) 은 (C,NULL) 과의 비교가 UNKNOWN 이라 제외된다. 따라서 결과는 (A,10) 한 행이고 COL2 는 10 이다.",
+    "correctIndex": 0,
+    "explanation": "(A, 10) 은 TAB2 의 어느 행과 비교해도 COL1 또는 COL2 가 확정적으로 다르므로 NOT IN 이 참이 되어 반환된다. (B, 20) 은 TAB2 의 (B, 20) 과 일치하여 제외된다. (C, 30) 은 (C, NULL) 과의 비교에서 COL1 은 같고 COL2 비교가 UNKNOWN 이 되어 NOT IN 이 UNKNOWN 이므로 제외된다. 따라서 결과는 (A, 10) 한 행이고 COL2 는 10 이다. 서브쿼리에 NULL 이 있다고 해서 항상 공집합이 되는 것은 아니며, 비교 대상 중 하나라도 확정적으로 다르면 NOT IN 은 참이 된다.",
     "_source": "authored",
     "references": [
       {
