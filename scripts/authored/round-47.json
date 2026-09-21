@@ -1162,7 +1162,7 @@
     {
       "subject": "2과목",
       "number": 48,
-      "title": "아래 SQL 의 빈칸에 들어갈 키워드 조합으로 옳은 것은?",
+      "title": "부서별 연봉 합계를 구해 합계가 큰 순서대로 조회하려 한다. 아래 SQL 의 빈칸에 들어갈 키워드 조합으로 옳은 것은?",
       "options": [
         "GROUP BY, DESC",
         "HAVING, ASC",

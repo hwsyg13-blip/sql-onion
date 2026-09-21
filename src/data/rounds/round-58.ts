@@ -1262,7 +1262,7 @@ export const ROUND_58: QuizQuestion[] = [
     "round": 58,
     "subject": "2과목",
     "number": 35,
-    "title": "아래 SQL의 결과로 옳은 것은?",
+    "title": "아래 SQL(Oracle)의 결과로 옳은 것은?",
     "options": [
       "ABCXYZ",
       "NULL",

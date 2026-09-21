@@ -453,7 +453,7 @@ export const ROUND_56: QuizQuestion[] = [
             "50"
           ]
         ],
-        "caption": "업체 테이블"
+        "caption": "업체 테이블 (물품별 행 개수)"
       },
       {
         "type": "sql",

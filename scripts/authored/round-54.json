@@ -276,7 +276,7 @@
         },
         {
           "type": "sql",
-          "code": "-- emp_no : 하위 사원 번호, mgr_no : 상위 관리자 번호\nSELECT *\nFROM   EMP\nCONNECT BY PRIOR emp_no = mgr_no;\n-- 100(KING) → 200(JONES) → 300(SCOTT)/400(FORD) 순방향 전개"
+          "code": "-- emp_no : 하위 사원 번호, mgr_no : 상위 관리자 번호\nSELECT *\nFROM   EMP\nCONNECT BY PRIOR emp_no = mgr_no;"
         }
       ]
     },
@@ -384,7 +384,7 @@
       "number": 19,
       "title": "아래 설명을 SQL 로 작성했을 때 적절하지 않은 것은? (STADIUM 테이블이 두 개의 다른 스키마에 존재한다고 가정)",
       "options": [
-        "SELECT STADIUM.NAME FROM HR.STADIUM, SPORT.STADIUM; — 테이블 구분 없이 컬럼 참조",
+        "SELECT STADIUM.NAME FROM HR.STADIUM, SPORT.STADIUM;",
         "SELECT HR.STADIUM.NAME FROM HR.STADIUM;",
         "SELECT S.NAME FROM HR.STADIUM S;",
         "SELECT A.NAME FROM HR.STADIUM A, SPORT.STADIUM B;"
