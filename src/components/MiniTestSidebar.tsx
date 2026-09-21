@@ -15,7 +15,7 @@ import { MOCK_CHAPTERS_FOR } from '../data/miniTest/mockMapping';
 import { QUIZ_BANK } from '../data/quizBank';
 import { AI_MOCK } from '../data/rounds/ai-mock';
 import { Ic, Tag } from './Atoms';
-import { renderInlineMd } from './QuestionReferences';
+import { renderInlineMd, QuestionReferences } from './QuestionReferences';
 import { BugReportModal } from './BugReportModal';
 
 // 랜덤 셔플 — Fisher-Yates
@@ -172,12 +172,8 @@ const QuizBlock = ({ kind, items, chapterLabel, chapterId, blockId }: any) => {
       </div>
 
       {kind === 'mc' && cur.references?.length > 0 && (
-        <div className="mt-refs">
-          {cur.references.map((r: any, i: number) => (
-            r.type === 'text' ? (
-              <p key={i} className="mt-refs-text">{renderInlineMd(r.content)}</p>
-            ) : null
-          ))}
+        <div className="mt-refs mt-refs-rich">
+          <QuestionReferences refs={cur.references} />
         </div>
       )}
 
