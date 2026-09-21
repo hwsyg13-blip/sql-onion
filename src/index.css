@@ -607,7 +607,8 @@ img, svg {
   .topnav-links { display: none !important; }
   .mobile-nav { display: flex !important; }
   .theory-detail-grid { grid-template-columns: 1fr !important; }
-  .cbt-grid { grid-template-columns: 1fr !important; }
+  /* 1fr 은 min-width:auto 라 넓은 표·코드가 열을 밀어내 다음 버튼이 화면 밖으로 나감 */
+  .cbt-grid { grid-template-columns: minmax(0, 1fr) !important; }
   .cbt-omr { display: none !important; }
   body { padding-bottom: 64px; }
 }
