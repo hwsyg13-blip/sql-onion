@@ -1173,49 +1173,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "-- 트랜잭션 시작\n(가) SQL1   -- 첫 번째 변경\nSAVEPOINT A;\n(나) SQL2   -- A 이후 변경\nSAVEPOINT B;\n(다) SQL3   -- B 이후 변경\nROLLBACK TO SAVEPOINT A;   -- (나)·(다) 취소, (가) 는 유지\n(라) SQL4   -- 다시 변경 시작\n(마) SQL5\nCOMMIT;     -- 누적된 (가)·(라)·(마) 영구 반영"
-        },
-        {
-          "type": "table",
-          "caption": "각 SQL 의 최종 운명",
-          "headers": [
-            "라벨",
-            "실행 시점",
-            "ROLLBACK 영향",
-            "COMMIT 반영"
-          ],
-          "rows": [
-            [
-              "(가)",
-              "트랜잭션 시작 직후",
-              "받지 않음 (SAVEPOINT A 이전)",
-              "✓"
-            ],
-            [
-              "(나)",
-              "SAVEPOINT A 이후",
-              "취소됨",
-              "✗"
-            ],
-            [
-              "(다)",
-              "SAVEPOINT B 이후",
-              "취소됨",
-              "✗"
-            ],
-            [
-              "(라)",
-              "ROLLBACK 이후",
-              "받지 않음 (이후 실행)",
-              "✓"
-            ],
-            [
-              "(마)",
-              "ROLLBACK 이후",
-              "받지 않음 (이후 실행)",
-              "✓"
-            ]
-          ]
+          "code": "-- 트랜잭션 시작\n(가) SQL1\nSAVEPOINT A;\n(나) SQL2\nSAVEPOINT B;\n(다) SQL3\nROLLBACK TO SAVEPOINT A;\n(라) SQL4\n(마) SQL5\nCOMMIT;"
         }
       ]
     },

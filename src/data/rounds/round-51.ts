@@ -825,7 +825,7 @@ export const ROUND_51: QuizQuestion[] = [
     "round": 51,
     "subject": "2과목",
     "number": 28,
-    "title": "'현재 행부터 이전 행까지의 누적합' 을 구하는 윈도우 절로 옳은 것은?",
+    "title": "'첫 행부터 현재 행까지의 누적합' 을 구하는 윈도우 절로 옳은 것은?",
     "options": [
       "ROWS UNBOUNDED PRECEDING",
       "RANGE UNBOUNDED PRECEDING",

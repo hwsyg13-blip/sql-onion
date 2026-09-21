@@ -1015,13 +1015,13 @@
       "number": 33,
       "title": "아래 ROLLUP 결과에 대한 설명으로 옳은 것은?",
       "options": [
-        "a a a a b b null",
-        "a a b b null",
-        "a a b b",
-        "a b"
+        "A A A A B B NULL",
+        "A A B B NULL",
+        "A A B B",
+        "A B"
       ],
       "correctIndex": 1,
-      "explanation": "HAVING GROUPING(ID) + GROUPING(TYPE) != 1 조건은 (ID, TYPE) 세부 집계 네 건과 전체 총계 한 건만 남긴다. 결과 ID 컬럼은 a, a, b, b, NULL 순으로 출력된다.",
+      "explanation": "HAVING GROUPING(ID) + GROUPING(TYPE) != 1 조건은 (ID, TYPE) 세부 집계 네 건과 전체 총계 한 건만 남긴다. 결과 ID 컬럼은 A, A, B, B, NULL 순으로 출력된다.",
       "references": [
         {
           "type": "table",

@@ -941,7 +941,7 @@ export const ROUND_57: QuizQuestion[] = [
     "round": 57,
     "subject": "2과목",
     "number": 33,
-    "title": "아래 데이터에서 상위 N건을 조회하는 방법 중 가장 일반적으로 사용되는 방식은?",
+    "title": "Oracle 에서 상위 N건을 조회하는 방법 중 가장 일반적으로 사용되는 방식은?",
     "options": [
       "SELECT * FROM EMP WHERE ROWNUM <= 10 ORDER BY SAL DESC;",
       "SELECT * FROM EMP ORDER BY SAL DESC LIMIT 10;",

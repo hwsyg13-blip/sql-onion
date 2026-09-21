@@ -1295,7 +1295,7 @@ export const ROUND_60: QuizQuestion[] = [
     "number": 32,
     "title": "다음 중 ALTER TABLE 수행 시 오류가 발생하지 않는 것은?",
     "options": [
-      "이미 값이 들어 있는 NOT NULL 제약을 추가하는 경우",
+      "이미 NULL 값이 들어 있는 컬럼에 NOT NULL 제약을 추가하는 경우",
       "기존 자릿수보다 짧게 NUMBER 크기를 변경하는 경우",
       "중복 값이 있는 컬럼에 PRIMARY KEY를 추가하는 경우",
       "TIMESTAMP 컬럼을 추가하는 경우"
