@@ -247,7 +247,7 @@ export const ROUND_53: QuizQuestion[] = [
       "SUBSTR('Gangneung Wonju', 8, 4) = 'g Wo'"
     ],
     "correctIndex": 3,
-    "explanation": "8번째 문자부터 4글자는 'ng W' 이다.",
+    "explanation": "SUBSTR('Gangneung Wonju', 8, 4) 는 8 번째 문자부터 4 글자를 잘라내므로 'ng W' 가 된다. 'g Wo' 는 9 번째부터 잘랐을 때의 결과라 ④ 가 적절하지 않다.",
     "_source": "authored"
   },
   {
@@ -649,7 +649,7 @@ export const ROUND_53: QuizQuestion[] = [
       "INT"
     ],
     "correctIndex": 0,
-    "explanation": "CEIL 은 올림 함수이다.",
+    "explanation": "CEIL 은 소수점을 올리는 함수이므로 내림 함수에 해당하지 않는다. FLOOR 는 내림, TRUNC 는 지정한 자리에서 버림, INT 는 정수부만 취하므로 모두 내림 계열이다.",
     "_source": "authored"
   },
   {
@@ -905,7 +905,7 @@ export const ROUND_53: QuizQuestion[] = [
       "라 — ORDER BY 에서 집계 함수를 사용했으므로 오류"
     ],
     "correctIndex": 3,
-    "explanation": "참조 텍스트의 단서대로 본 문항은 `GROUP BY` 없는 일반 `SELECT` 컨텍스트로 한정한다. 이 경우 ④ `ORDER BY SUM(SAL)` 은 집계 그룹이 형성되지 않아 ORA-00937(단일 그룹의 그룹 함수가 아닙니다) 오류가 발생한다. ① 스칼라 서브쿼리 안의 집계는 정상, ② 는 다중 행 서브쿼리 + `=` (ORA-01427), ③ 은 `WHERE` 에 집계 함수 사용 오류로 분류 자체가 부적절하다.",
+    "explanation": "참조 텍스트의 단서대로 본 문항은 `GROUP BY` 없는 일반 `SELECT` 컨텍스트로 한정한다. 이 경우 ④ `ORDER BY SUM(SAL)` 은 집계 그룹이 형성되지 않아 ORA-00937(단일 그룹의 그룹 함수가 아니다) 오류가 발생한다. ① 스칼라 서브쿼리 안의 집계는 정상, ② 는 다중 행 서브쿼리 + `=` (ORA-01427), ③ 은 `WHERE` 에 집계 함수 사용 오류로 분류 자체가 부적절하다.",
     "_source": "authored",
     "references": [
       {
@@ -1384,7 +1384,7 @@ export const ROUND_53: QuizQuestion[] = [
       "2개"
     ],
     "correctIndex": 0,
-    "explanation": "1·2·3·4·5·6 의 6개 값만 남는다.",
+    "explanation": "UNION 은 두 집합을 합친 뒤 중복을 제거한다. A 의 1·2·3·4 와 B 의 3·4·5·6 을 합치면 3·4 가 중복되어 한 번씩만 남아 1·2·3·4·5·6 의 6 건이 된다. 중복을 그대로 두는 UNION ALL 이라면 8 건이다.",
     "_source": "authored",
     "references": [
       {

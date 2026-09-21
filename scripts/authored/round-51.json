@@ -711,7 +711,7 @@
         "NTILE(4) OVER (ORDER BY SAL DESC)"
       ],
       "correctIndex": 1,
-      "explanation": "EMP 데이터에 동일 SAL이 두 행 있을 때:\n- RANK: 1, 2, 2, 4 (동률 다음 순위 건너뜀)\n- DENSE_RANK: 1, 2, 2, 3 (다음 순위 건너뛰지 않음)\n- ROW_NUMBER: 1, 2, 3, 4 (동률 무관 순차)\n- NTILE(4): 1, 2, 3, 4 (4개 그룹 균등 분배)\n\n결과: ②(DENSE_RANK)만 1, 2, 2, 3을 반환하고 나머지는 모두 4라는 마지막 값을 가진다.",
+      "explanation": "SAL 이 같은 행이 두 개 있을 때 RANK 는 1, 2, 2, 4 로 동률 다음 순위를 건너뛰고 DENSE_RANK 는 1, 2, 2, 3 으로 건너뛰지 않는다. ROW_NUMBER 는 동률과 무관하게 1, 2, 3, 4 를 부여하고 NTILE(4) 도 네 그룹으로 나누어 1, 2, 3, 4 가 된다. 마지막 행의 값이 3 인 DENSE_RANK 만 나머지(4)와 다르다.",
       "references": [
         {
           "type": "table",
@@ -1059,7 +1059,7 @@
         "모두 같다"
       ],
       "correctIndex": 3,
-      "explanation": "원본 기출의 정답 표기를 보존한다. 데이터가 NULL 을 포함하지 않는 전제에서 세 방식 모두 같은 결과를 낸다.",
+      "explanation": "데이터가 NULL 을 포함하지 않는 전제에서 세 방식 모두 같은 결과를 낸다.",
       "references": [
         {
           "type": "table",

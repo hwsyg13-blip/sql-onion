@@ -1136,7 +1136,7 @@ export const ROUND_46: QuizQuestion[] = [
       "지역이 NULL인 행도 포함하여 조회한다."
     ],
     "correctIndex": 1,
-    "explanation": "IN은 OR 조건의 축약 표현이다.",
+    "explanation": "IN 은 여러 값 중 하나라도 일치하면 참이 되는 연산자로 OR 조건을 묶은 축약형이다. 따라서 지역이 서울·대전·부산 중 하나인 행이 조회된다. ① 은 AND 로 묶은 해석이라 어떤 행도 만족할 수 없고, ④ NULL 은 IN 비교에서 참이 되지 않아 제외된다.",
     "_source": "authored",
     "references": [
       {
@@ -1676,7 +1676,7 @@ export const ROUND_46: QuizQuestion[] = [
       "GRADE, JOB"
     ],
     "correctIndex": 1,
-    "explanation": "결과 표는 (GRADE, JOB) 세부 4행 + (GRADE) 단위 소계 2행 = 6행이며 (NULL, NULL) 전체 총계 행은 없다.\n- ① ROLLUP(GRADE, JOB) → (GRADE,JOB), (GRADE), () 3단계 → 총계 행이 추가되어 7행 (다름)\n- ② GROUPING SETS(GRADE, (GRADE, JOB)) → (GRADE), (GRADE,JOB) 2단계 → 정확히 6행 (정답)\n- ③ CUBE(GRADE, JOB) → (GRADE,JOB), (GRADE), (JOB), () 4단계 → 행이 더 많음 (다름)\n- ④ GRADE, JOB → (GRADE,JOB) 단일 → 4행 (소계 없음)\n\nGROUPING SETS(A, B) 는 GROUP BY (A) UNION ALL GROUP BY (B) 와 동치이므로 정답은 ②.",
+    "explanation": "결과 표는 (GRADE, JOB) 세부 4행에 GRADE 단위 소계 2행만 더해진 6행이고 전체 총계 행이 없다. GROUPING SETS 는 필요한 집계 조합만 골라 지정하므로 (GRADE) 와 (GRADE, JOB) 두 조합이 정확히 이 결과를 만든다. ROLLUP 은 전체 총계까지 붙어 7행이 되고, CUBE 는 JOB 단위 소계까지 추가되며, 일반 GROUP BY 는 소계 자체가 없어 4행에 그친다.",
     "_source": "authored",
     "references": [
       {
