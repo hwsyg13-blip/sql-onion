@@ -1328,7 +1328,7 @@ export const ROUND_58: QuizQuestion[] = [
     "round": 58,
     "subject": "2과목",
     "number": 38,
-    "title": "아래 SQL의 반환 행 수는?",
+    "title": "아래 SQL의 실행 결과(COUNT(*) 값)로 옳은 것은?",
     "options": [
       "0",
       "1",

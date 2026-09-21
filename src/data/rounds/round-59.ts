@@ -753,32 +753,6 @@ export const ROUND_59: QuizQuestion[] = [
     "_source": "authored",
     "references": [
       {
-        "type": "table",
-        "caption": "정규식 패턴 매칭 규칙 (Oracle REGEXP_SUBSTR, 기본 옵션)",
-        "headers": [
-          "패턴",
-          "의미",
-          "입력 'BCD' 매칭 결과"
-        ],
-        "rows": [
-          [
-            "`B.D`",
-            "B + 임의 한 문자 + D",
-            "'BCD'"
-          ],
-          [
-            "`BCD`",
-            "정확히 'BCD'",
-            "'BCD'"
-          ],
-          [
-            "`b.d`",
-            "b + 임의 한 문자 + d (소문자)",
-            "NULL (대소문자 다름)"
-          ]
-        ]
-      },
-      {
         "type": "sql",
         "code": "SELECT REGEXP_SUBSTR('BCD', ( ? )) AS 첫번째,\n       REGEXP_SUBSTR('BCD', ( ? )) AS 두번째\nFROM DUAL;\n-- 목표 결과: 첫번째 = 'BCD', 두번째 = NULL"
       }
