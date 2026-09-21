@@ -168,7 +168,7 @@ const QuizBlock = ({ kind, items, chapterLabel, chapterId, blockId }: any) => {
       )}
 
       <div className="mt-question">
-        {kind === 'ox' ? cur.q : renderInlineMd(cur.title)}
+        {renderInlineMd(kind === 'ox' ? cur.q : cur.title)}
       </div>
 
       {kind === 'mc' && cur.references?.length > 0 && (
