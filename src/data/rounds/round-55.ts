@@ -1622,16 +1622,44 @@ export const ROUND_55: QuizQuestion[] = [
     "round": 55,
     "subject": "2과목",
     "number": 45,
-    "title": "NULL 이 아닌 값을 조회하는 조건으로 적절한 것은?",
+    "title": "아래 T 테이블에 대한 SQL 의 결과 행 수로 옳은 것은?",
     "options": [
-      "IS NOT NULL",
-      "<> NULL",
-      "!= NULL",
-      "NOT NULL"
+      "1건",
+      "2건",
+      "3건",
+      "0건"
     ],
-    "correctIndex": 0,
-    "explanation": "NULL은 비교 연산자(=, <>, !=)로 비교할 수 없으며 IS NULL / IS NOT NULL 만 사용해야 한다.",
-    "_source": "authored"
+    "correctIndex": 1,
+    "explanation": "NULL 은 값이 없음을 뜻하므로 = 나 <> 로 비교할 수 없고 IS NULL / IS NOT NULL 로만 판별한다. VAL 이 NULL 이 아닌 행은 ID 1 과 3 이므로 2 건이 반환된다. 같은 의도로 `VAL <> NULL` 을 쓰면 비교가 UNKNOWN 이 되어 0 건이 된다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "caption": "T 테이블",
+        "headers": [
+          "ID",
+          "VAL"
+        ],
+        "rows": [
+          [
+            "1",
+            "10"
+          ],
+          [
+            "2",
+            "(NULL)"
+          ],
+          [
+            "3",
+            "30"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT * FROM T WHERE VAL IS NOT NULL;"
+      }
+    ]
   },
   {
     "id": 10295,

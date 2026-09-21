@@ -11,20 +11,20 @@ export const ROUND_60: QuizQuestion[] = [
     "round": 60,
     "subject": "1과목",
     "number": 1,
-    "title": "다음 설명에 해당하는 엔터티 분류는?",
+    "title": "아래 [주문] 엔터티의 성격으로 가장 적절한 것은?",
     "options": [
-      "행위 엔터티",
-      "개념 엔터티",
+      "기본 엔터티",
       "중심 엔터티",
-      "기본 엔터티"
+      "행위 엔터티",
+      "개념 엔터티"
     ],
-    "correctIndex": 0,
-    "explanation": "행위 엔터티는 업무 수행 과정에서 이벤트가 지속적으로 발생하여 데이터가 자주 변경·축적되는 엔터티이다. 주문, 청구, 납부처럼 업무 행위의 결과로 데이터가 쌓이는 대상이 이에 해당한다. 개념·기본 엔터티는 비교적 정적이며 행위 엔터티의 모태가 된다.",
+    "correctIndex": 1,
+    "explanation": "기본 엔터티인 고객·상품으로부터 발생하면서, 다시 주문상세·결제·배송 같은 여러 엔터티의 부모가 되어 업무의 중심 역할을 하는 엔터티를 중심 엔터티라 한다. 다른 엔터티로부터 발생하지 않으면 기본 엔터티, 두 엔터티의 관계나 업무 행위로만 생기면 행위 엔터티로 분류한다.",
     "_source": "authored",
     "references": [
       {
         "type": "text",
-        "content": "해당 엔터티는 업무 수행 과정에서 지속적으로 이벤트가 쌓이므로 데이터가 자주 변경되고 저장되는 양 또한 매우 많다."
+        "content": "고객과 상품이 이미 등록되어 있는 상태에서, 고객이 상품을 구매할 때마다 한 건씩 생성된다. 이후 주문상세·결제·배송 등 여러 엔터티가 이 엔터티로부터 파생된다."
       }
     ]
   },
@@ -1110,16 +1110,40 @@ export const ROUND_60: QuizQuestion[] = [
     "round": 60,
     "subject": "2과목",
     "number": 28,
-    "title": "기본키(Primary Key) 컬럼이 반드시 만족해야 하는 제약 조건의 조합은?",
+    "title": "아래 테이블에 대해 수행할 때 오류가 발생하는 INSERT 문은?",
     "options": [
-      "NULL 허용 + UNIQUE",
-      "NULL 허용 + NOT NULL",
-      "NOT NULL + UNIQUE",
-      "NOT NULL 단독"
+      "INSERT INTO T VALUES (3, 'C');",
+      "INSERT INTO T VALUES (1, 'D');",
+      "INSERT INTO T VALUES (4, NULL);",
+      "INSERT INTO T (ID, NAME) VALUES (5, 'E');"
     ],
-    "correctIndex": 2,
-    "explanation": "기본키는 행을 유일하게 식별해야 하므로 중복 불가 `UNIQUE` 와 NULL 불가 `NOT NULL` 을 동시에 만족해야 한다. NULL 을 허용하면 식별 불가능하고, `NOT NULL` 만으로는 중복이 생길 수 있어 식별자 역할을 할 수 없다.",
-    "_source": "authored"
+    "correctIndex": 1,
+    "explanation": "PRIMARY KEY 는 유일성과 NOT NULL 을 동시에 강제한다. ID 가 이미 1 인 행이 있으므로 ② 는 기본키 중복으로 오류가 난다. ③ 의 NAME 은 기본키가 아니라 NULL 을 넣어도 문제가 없고, ①④ 는 중복되지 않는 새 ID 라 정상 입력된다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "CREATE TABLE T (\n    ID    NUMBER      PRIMARY KEY,\n    NAME  VARCHAR2(10)\n);"
+      },
+      {
+        "type": "table",
+        "caption": "T 테이블 (현재 데이터)",
+        "headers": [
+          "ID",
+          "NAME"
+        ],
+        "rows": [
+          [
+            "1",
+            "A"
+          ],
+          [
+            "2",
+            "B"
+          ]
+        ]
+      }
+    ]
   },
   {
     "id": 10028,

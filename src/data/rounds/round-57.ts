@@ -11,20 +11,20 @@ export const ROUND_57: QuizQuestion[] = [
     "round": 57,
     "subject": "1과목",
     "number": 1,
-    "title": "아래 설명에 해당하는 스키마 구조로 가장 적절한 것은?",
+    "title": "아래 세 가지 산출물을 3층 스키마 구조에 맞게 짝지은 것은?",
     "options": [
-      "외부 스키마",
-      "개념 스키마",
-      "내부 스키마",
-      "논리 스키마"
+      "㉠ 외부 ㉡ 개념 ㉢ 내부",
+      "㉠ 개념 ㉡ 외부 ㉢ 내부",
+      "㉠ 외부 ㉡ 내부 ㉢ 개념",
+      "㉠ 내부 ㉡ 개념 ㉢ 외부"
     ],
-    "correctIndex": 1,
-    "explanation": "외부 스키마는 사용자 관점, 내부 스키마는 물리적 저장 관점이며, 전체 조직 관점의 통합 표현은 개념 스키마이다.",
+    "correctIndex": 0,
+    "explanation": "외부 스키마는 사용자나 응용 프로그램이 보는 관점이라 VIEW 가 해당하고, 개념 스키마는 조직 전체가 공유하는 단 하나의 통합 설계도라 전사 ERD 가 해당한다. 내부 스키마는 실제 저장 구조를 다루므로 테이블스페이스·인덱스·파티션 설계가 여기에 속한다.",
     "_source": "authored",
     "references": [
       {
         "type": "text",
-        "content": "모든 사용자 관점을 통합한 조직 전체 관점의 통합적 표현"
+        "content": "㉠ 사용자별로 필요한 컬럼만 보여주기 위해 만든 VIEW\n㉡ 전사가 공유하는 통합 ERD\n㉢ 테이블스페이스·인덱스·파티션 설계서"
       }
     ]
   },
@@ -398,16 +398,48 @@ export const ROUND_57: QuizQuestion[] = [
     "round": 57,
     "subject": "2과목",
     "number": 17,
-    "title": "서브쿼리의 결과로 여러 개의 컬럼이 반환되고 메인 쿼리의 조건절에서 동시에 비교되는 서브쿼리 유형은?",
+    "title": "아래 SQL 에 사용된 서브쿼리의 유형으로 옳은 것은?",
     "options": [
       "단일 행 서브쿼리",
       "다중 행 서브쿼리",
-      "단일 컬럼 서브쿼리",
-      "다중 컬럼 서브쿼리"
+      "다중 컬럼 서브쿼리",
+      "연관(상관) 서브쿼리"
     ],
-    "correctIndex": 3,
-    "explanation": "다중 컬럼 서브쿼리는 서브쿼리 결과로 둘 이상의 컬럼이 함께 반환되어 메인 쿼리의 (col1, col2, ...) IN (서브쿼리) 형태로 동시에 비교되는 유형이다.",
-    "_source": "authored"
+    "correctIndex": 2,
+    "explanation": "서브쿼리가 DEPTNO 와 MAX(SAL) 두 개의 컬럼을 반환하고 메인 쿼리가 두 컬럼을 한 쌍으로 묶어 비교하므로 다중 컬럼 서브쿼리다. 서브쿼리가 메인 쿼리의 컬럼을 참조하지 않으므로 연관 서브쿼리는 아니며, 부서별 최고 급여자를 뽑는 대표적인 패턴이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "caption": "EMP 테이블",
+        "headers": [
+          "EMPNO",
+          "DEPTNO",
+          "SAL"
+        ],
+        "rows": [
+          [
+            "1",
+            "10",
+            "300"
+          ],
+          [
+            "2",
+            "10",
+            "500"
+          ],
+          [
+            "3",
+            "20",
+            "400"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT *\nFROM   EMP\nWHERE  (DEPTNO, SAL) IN ( SELECT DEPTNO, MAX(SAL)\n                          FROM   EMP\n                          GROUP BY DEPTNO );"
+      }
+    ]
   },
   {
     "id": 10167,

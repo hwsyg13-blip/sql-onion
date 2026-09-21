@@ -300,7 +300,7 @@
     {
       "subject": "2과목",
       "number": 18,
-      "title": "아래 데이터에 대해 이전 행 값을 반환하는 윈도우 함수는?",
+      "title": "아래 SQL 의 PREV 컬럼을 채우는 데 사용된 윈도우 함수는?",
       "options": [
         "SUM",
         "ROW_NUMBER",
@@ -308,7 +308,61 @@
         "LAG"
       ],
       "correctIndex": 3,
-      "explanation": "윈도우 함수에서 행을 앞뒤로 들춰보는 함수가 두 가지 있다. LAG는 정해진 정렬 안에서 \"앞 행\"의 값을 가져오고, LEAD는 \"뒤 행\"의 값을 가져온다. \"이전 행 값\"을 반환한다고 했으므로 LAG가 정답이다. SUM·ROW_NUMBER는 의미가 다르다. 정답은 ④번이다."
+      "explanation": "PREV 컬럼에 직전 행의 VAL 이 들어가 있고 첫 행은 이전 행이 없어 NULL 이다. 이렇게 앞선 행의 값을 가져오는 함수가 LAG 이다. LEAD 는 반대로 다음 행의 값을 가져오고, ROW_NUMBER 는 순번을, SUM 은 누적·합계를 반환하므로 이 결과를 만들 수 없다.",
+      "references": [
+        {
+          "type": "table",
+          "caption": "매출 테이블",
+          "headers": [
+            "ID",
+            "VAL"
+          ],
+          "rows": [
+            [
+              "1",
+              "100"
+            ],
+            [
+              "2",
+              "200"
+            ],
+            [
+              "3",
+              "300"
+            ]
+          ]
+        },
+        {
+          "type": "sql",
+          "code": "SELECT ID, VAL,\n       (  ?  ) OVER (ORDER BY ID) AS PREV\nFROM   매출;"
+        },
+        {
+          "type": "table",
+          "caption": "실행 결과",
+          "headers": [
+            "ID",
+            "VAL",
+            "PREV"
+          ],
+          "rows": [
+            [
+              "1",
+              "100",
+              "(NULL)"
+            ],
+            [
+              "2",
+              "200",
+              "100"
+            ],
+            [
+              "3",
+              "300",
+              "200"
+            ]
+          ]
+        }
+      ]
     },
     {
       "subject": "2과목",
@@ -321,7 +375,45 @@
         "SELECT * FROM A, B WHERE A.SRN_NO = B.SRN_NO;"
       ],
       "correctIndex": 2,
-      "explanation": "① `NATURAL JOIN` 과 ② `USING` 은 동일 컬럼명을 자동·수동으로 잡아 INNER JOIN 을 수행하므로 결과가 같다. ④ 는 같은 조건을 명시한 동등 조인. 그러나 ③ 은 `ON` 절이 빠진 `INNER JOIN` 으로 Oracle 에서는 구문 오류가 나거나 일부 환경에서는 CROSS JOIN 형태로 해석되어 결과 행이 폭증한다. 결과가 다른 것은 ③."
+      "explanation": "A 와 B 의 공통 컬럼은 SRN_NO 하나뿐이므로 ① NATURAL JOIN, ② USING(SRN_NO), ④ WHERE 조인은 모두 SRN_NO 가 같은 1 건을 반환한다. 반면 ③ 은 INNER JOIN 을 쓰면서 ON 이나 USING 으로 조인 조건을 주지 않아 문법 오류가 발생하므로 결과가 다르다.",
+      "references": [
+        {
+          "type": "table",
+          "caption": "A 테이블",
+          "headers": [
+            "SRN_NO",
+            "NAME"
+          ],
+          "rows": [
+            [
+              "1",
+              "가"
+            ],
+            [
+              "2",
+              "나"
+            ]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "B 테이블",
+          "headers": [
+            "SRN_NO",
+            "GRADE"
+          ],
+          "rows": [
+            [
+              "1",
+              "X"
+            ],
+            [
+              "3",
+              "Y"
+            ]
+          ]
+        }
+      ]
     },
     {
       "subject": "2과목",

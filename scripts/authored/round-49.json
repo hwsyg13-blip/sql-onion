@@ -769,15 +769,47 @@
     {
       "subject": "2과목",
       "number": 26,
-      "title": "동순위가 있을 때 결과가 1, 1, 2 가 되는 순위 함수는?",
+      "title": "아래 EMP 테이블에 RANK 와 DENSE_RANK 를 적용했을 때 마지막 행의 두 값으로 옳은 것은?",
       "options": [
-        "DENSE_RANK",
-        "RANK",
-        "ROW_NUMBER",
-        "NTILE"
+        "RANK 4, DENSE_RANK 3",
+        "RANK 3, DENSE_RANK 3",
+        "RANK 4, DENSE_RANK 4",
+        "RANK 5, DENSE_RANK 4"
       ],
       "correctIndex": 0,
-      "explanation": "DENSE_RANK 는 동순위에 동일 순위를 부여하되 다음 순위를 건너뛰지 않으므로 1, 1, 2 가 된다. RANK 는 동순위 후 다음 순위를 건너뛰어 1, 1, 3 이 되고, ROW_NUMBER 는 1, 2, 3, NTILE 은 그룹 번호를 반환하는 함수이다."
+      "explanation": "SAL 내림차순으로 500, 400, 400, 300 이 되어 400 두 건이 공동 2 위가 된다. RANK 는 공동 순위가 차지한 자리를 건너뛰어 다음을 4 위로 매기고, DENSE_RANK 는 건너뛰지 않아 3 위로 매긴다. 따라서 마지막 행(300)은 RANK 4, DENSE_RANK 3 이다.",
+      "references": [
+        {
+          "type": "table",
+          "caption": "EMP 테이블",
+          "headers": [
+            "ENAME",
+            "SAL"
+          ],
+          "rows": [
+            [
+              "A",
+              "500"
+            ],
+            [
+              "B",
+              "400"
+            ],
+            [
+              "C",
+              "400"
+            ],
+            [
+              "D",
+              "300"
+            ]
+          ]
+        },
+        {
+          "type": "sql",
+          "code": "SELECT ENAME, SAL,\n       RANK()       OVER (ORDER BY SAL DESC) AS R1,\n       DENSE_RANK() OVER (ORDER BY SAL DESC) AS R2\nFROM   EMP;"
+        }
+      ]
     },
     {
       "subject": "2과목",
@@ -1194,15 +1226,57 @@
     {
       "subject": "2과목",
       "number": 42,
-      "title": "SQL 집합 연산자 중 교집합을 반환하는 것은?",
+      "title": "아래 두 테이블에 대한 SQL 의 결과로 옳은 것은?",
       "options": [
-        "UNION ALL",
-        "UNION",
-        "INTERSECT",
-        "EXCEPT"
+        "A, B, C, D",
+        "B, C",
+        "A, D",
+        "A, B, B, C, C, D"
       ],
-      "correctIndex": 2,
-      "explanation": "INTERSECT 는 두 결과 집합의 공통 행만 반환하는 교집합 연산자이다. UNION 은 합집합(중복 제거), UNION ALL 은 합집합(중복 유지), EXCEPT(MINUS) 는 차집합이다."
+      "correctIndex": 1,
+      "explanation": "INTERSECT 는 두 집합에 모두 존재하는 행만 남기는 교집합 연산이다. T1 과 T2 에 공통으로 있는 값은 B 와 C 이므로 두 건이 반환되며 결과는 기본적으로 오름차순 정렬된다. 합집합이면 A·B·C·D, 차집합(MINUS)이면 A 가 나온다.",
+      "references": [
+        {
+          "type": "table",
+          "caption": "T1 테이블",
+          "headers": [
+            "V"
+          ],
+          "rows": [
+            [
+              "A"
+            ],
+            [
+              "B"
+            ],
+            [
+              "C"
+            ]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "T2 테이블",
+          "headers": [
+            "V"
+          ],
+          "rows": [
+            [
+              "B"
+            ],
+            [
+              "C"
+            ],
+            [
+              "D"
+            ]
+          ]
+        },
+        {
+          "type": "sql",
+          "code": "SELECT V FROM T1\nINTERSECT\nSELECT V FROM T2;"
+        }
+      ]
     },
     {
       "subject": "2과목",
