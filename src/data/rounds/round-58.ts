@@ -1593,13 +1593,7 @@ export const ROUND_58: QuizQuestion[] = [
     ],
     "correctIndex": 1,
     "explanation": "② `NVL(NULL, 0)` 만 NULL 을 0 으로 치환하여 0 을 반환한다. ① `COALESCE(NULL, NULL)` 은 모든 인자가 NULL 이라 NULL, ③ `NVL(NULL, NULL)` 도 NULL, ④ `NULLIF(1, 1)` 은 두 인자가 같으면 NULL 반환이라 NULL.",
-    "_source": "authored",
-    "references": [
-      {
-        "type": "sql",
-        "code": "-- 각 호출의 결과:\n-- ① COALESCE(NULL, NULL) → NULL\n-- ② NVL(NULL, 0)        → 0      ← 정답\n-- ③ NVL(NULL, NULL)     → NULL\n-- ④ NULLIF(1, 1)        → NULL"
-      }
-    ]
+    "_source": "authored"
   },
   {
     "id": 10146,
