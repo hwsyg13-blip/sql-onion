@@ -911,8 +911,8 @@
         "10 1002 / 11 1002 / 11 1004",
         "11 1004 / 10 1002 / 11 1002"
       ],
-      "correctIndex": 1,
-      "explanation": "EMPNO 내림차순으로 11이 먼저 오고 그중 DEPTNO 오름차순으로 1002가 뒤에 온다. 이후 10, NULL 순서이며 상위 3건만 반환된다.",
+      "correctIndex": 0,
+      "explanation": "EMPNO 내림차순(NULLS LAST)이므로 11, 11, 10 순이고, EMPNO가 같은 11 중에서는 DEPTNO 오름차순이라 1002가 먼저, 1004가 나중에 온다. 상위 3건은 (11, 1002), (11, 1004), (10, 1002)로 ①번이다.",
       "references": [
         {
           "type": "table",
@@ -1008,11 +1008,11 @@
         "㉢과 ㉣"
       ],
       "correctIndex": 0,
-      "explanation": "NVL과 COALESCE는 NULL 대체 기능이 동일하므로 'X'를 반환한다. NULLIF는 두 인자가 같으면 NULL, 다르면 첫 번째 값을 반환한다.",
+      "explanation": "㉠ NVL(NULL, 'X')와 ㉡ COALESCE(NULL, 'X')는 NULL 대체 기능이 동일하므로 모두 'X'를 반환한다. ㉢ NULLIF('X', 'X')는 두 인자가 같으므로 NULL을 반환하고, ㉣ NVL('Y', 'X')는 첫 번째 인자가 NULL이 아니므로 'Y'를 반환한다. 따라서 결과가 같은 쌍은 ㉠과 ㉡뿐이다.",
       "references": [
         {
           "type": "sql",
-          "code": "-- ㉠ SELECT NVL(NULL, 'X')\n-- ㉡ SELECT COALESCE(NULL, 'X')\n-- ㉢ SELECT NULLIF('X', 'X')\n-- ㉣ SELECT NULLIF('X', 'Y')"
+          "code": "-- ㉠ SELECT NVL(NULL, 'X')\n-- ㉡ SELECT COALESCE(NULL, 'X')\n-- ㉢ SELECT NULLIF('X', 'X')\n-- ㉣ SELECT NVL('Y', 'X')"
         }
       ]
     },
@@ -1325,11 +1325,11 @@
       "options": [
         "윈도우 함수는 GROUP BY 절과 동시에 사용할 수 없다.",
         "ROW_NUMBER는 동일 값에도 항상 서로 다른 순번을 부여한다.",
-        "RANK와 DENSE_RANK는 동일 값에 동일 순위를 부여한다는 점은 같다.",
+        "RANK와 DENSE_RANK는 동일 값 다음 순위를 건너뛴다는 점이 같다.",
         "윈도우 함수는 SELECT 절에서만 사용할 수 있다."
       ],
       "correctIndex": 1,
-      "explanation": "RANK/DENSE_RANK는 동일 값에 동일 순위를 부여하나 ROW_NUMBER는 행마다 고유 순번을 부여한다."
+      "explanation": "RANK/DENSE_RANK는 동일 값에 동일 순위를 부여하나 ROW_NUMBER는 행마다 고유 순번을 부여한다. 또한 RANK는 동일 순위 다음 순위를 건너뛰지만 DENSE_RANK는 건너뛰지 않고 연속된 순위를 부여한다."
     },
     {
       "subject": "2과목",

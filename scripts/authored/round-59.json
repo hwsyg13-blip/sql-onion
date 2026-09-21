@@ -689,15 +689,15 @@
     {
       "subject": "2과목",
       "number": 25,
-      "title": "CTAS(CREATE TABLE AS SELECT)에 대한 설명 중 옳지 않은 것은?",
+      "title": "CTAS(CREATE TABLE AS SELECT)에 대한 설명 중 옳은 것은?",
       "options": [
         "데이터 속성을 재정의해야 한다.",
         "NOT NULL은 전달되지 않는다.",
         "기본키, 외래키 등 제약사항은 전달되지 않는다.",
         "컬럼 타입은 전달되지 않는다."
       ],
-      "correctIndex": 0,
-      "explanation": "CTAS는 컬럼 타입과 NOT NULL 제약을 그대로 전달하므로 데이터 속성을 일일이 재정의할 필요가 없다."
+      "correctIndex": 2,
+      "explanation": "CTAS는 컬럼 타입과 NOT NULL 제약은 그대로 전달하므로 데이터 속성을 일일이 재정의할 필요가 없다. 반면 기본키·외래키 등 다른 제약사항은 전달되지 않는다. 따라서 ③이 옳은 설명이다."
     },
     {
       "subject": "2과목",
