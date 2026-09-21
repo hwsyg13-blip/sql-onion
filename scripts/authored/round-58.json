@@ -13,12 +13,12 @@
         "부서"
       ],
       "correctIndex": 1,
-      "explanation": "회사·부서·사원은 업무에 원래부터 존재하여 독립적으로 생성되는 기본(키) 엔터티이다. 반면 프로젝트는 사원의 업무 수행을 통해 발생하는 중심 엔터티로, 기본 엔터티로부터 파생되어 업무의 주 대상이 된다. 따라서 키 엔터티(기본 엔터티)에 해당하지 않는 것은 프로젝트이다.",
+      "explanation": "키(기본) 엔터티는 다른 엔터티로부터 주식별자를 상속받지 않고 독립적으로 생성되는 엔터티이다. 회사·부서·사원은 각각 고유한 주식별자를 가지고 부모의 키를 일반 속성(FK)으로만 참조하는 비식별자 관계이므로 모두 키 엔터티이다. 반면 프로젝트는 사원과 식별자 관계로 연결되어 사원번호를 자신의 주식별자에 포함하므로 키 엔터티에 해당하지 않는다.",
       "references": [
         {
           "type": "erd",
-          "caption": "회사·부서·사원·프로젝트 ERD (모두 1:M 식별자 관계)",
-          "mermaid": "erDiagram\n    회사 ||--o{ 부서 : \"보유\"\n    부서 ||--o{ 사원 : \"소속\"\n    사원 ||--o{ 프로젝트 : \"참여\""
+          "caption": "회사·부서·사원은 비식별자 관계, 사원-프로젝트는 식별자 관계",
+          "mermaid": "erDiagram\n    회사 ||--o{ 부서 : \"보유\"\n    부서 ||--o{ 사원 : \"소속\"\n    사원 ||--o{ 프로젝트 : \"수행\"\n    회사 {\n        string 회사번호 PK\n    }\n    부서 {\n        string 부서번호 PK\n        string 회사번호 FK\n    }\n    사원 {\n        string 사원번호 PK\n        string 부서번호 FK\n    }\n    프로젝트 {\n        string 사원번호 PK\n        string 프로젝트번호 PK\n    }"
         }
       ]
     },
@@ -104,12 +104,12 @@
         "마더보드의 주식별자는 컴퓨터 번호와 별개로 구성된다."
       ],
       "correctIndex": 1,
-      "explanation": "양쪽 참여가 필수(1:1 필수)인 ERD 에서 컴퓨터 인스턴스는 반드시 마더보드를 가진다. ② '마더보드 사용 여부 선택' 서술은 ERD 의 양쪽 필수 카디널리티(컴퓨터 측 1)와 정면으로 어긋남 — 옳지 않은 정답. ① 1:1 이라 한 마더보드는 한 컴퓨터에만 장착, 옳음. ③ '마더보드 독립 존재'는 식별자/모델링 측면(별도 PK 보유, 비식별 관계)으로 해석하면 옳음 — 마더보드 PK 가 컴퓨터 PK 와 분리되어 있어 식별자 측면 독립 가능. (인스턴스 측면에서는 양쪽 필수라 동반 존재하지만, 출제 의도는 식별자 독립성으로 해석.) ④ ERD 컬럼 정의에서 마더보드 PK = '마더보드번호' 로 컴퓨터번호와 별개 식별자, 옳음.",
+      "explanation": "ERD 에서 컴퓨터 측 참여는 필수 1 이므로 모든 컴퓨터는 반드시 하나의 마더보드를 가진다. 따라서 마더보드를 사용하지 않을 수도 있다는 ② 가 옳지 않다. ① 마더보드 하나는 최대 한 대의 컴퓨터에만 장착되므로 옳고, ③ 마더보드 측 참여는 선택(0..1) 이라 아직 장착되지 않은 마더보드도 존재할 수 있어 옳으며, ④ 마더보드의 주식별자는 마더보드번호로 컴퓨터번호와 별개이므로 옳다.",
       "references": [
         {
           "type": "erd",
-          "caption": "컴퓨터-마더보드 ERD (1:1 필수 — 양쪽 모두 필수 1, 별도 PK)",
-          "mermaid": "erDiagram\n    컴퓨터 ||--|| 마더보드 : \"포함\"\n    컴퓨터 {\n        string 컴퓨터번호 PK\n        string 모델명\n    }\n    마더보드 {\n        string 마더보드번호 PK\n        string 컴퓨터번호 FK\n    }"
+          "caption": "컴퓨터-마더보드 ERD (컴퓨터는 마더보드를 반드시 가지며, 마더보드는 별도 주식별자를 가진다)",
+          "mermaid": "erDiagram\n    마더보드 ||--o| 컴퓨터 : \"장착\"\n    컴퓨터 {\n        string 컴퓨터번호 PK\n        string 모델명\n    }\n    마더보드 {\n        string 마더보드번호 PK\n        string 컴퓨터번호 FK\n    }"
         }
       ]
     },
@@ -156,34 +156,34 @@
         "보기 ④"
       ],
       "correctIndex": 3,
-      "explanation": "하나의 엔터티가 복수의 엔터티 중 반드시 하나와만 연결되고 서로 공존할 수 없는 관계를 상호배타적(Arc) 관계라 한다. 분기되는 두 관계선을 가로지르는 반원(◠)과 \"Arc\" 라벨로 표기한다. ①은 1:1 관계, ②는 1:N 관계, ③은 자기 자신을 참조하는 재귀 관계를 의미하며, ④ 는 두 관계선을 가로지르는 반원과 Arc 라벨로 상호배타적 관계를 표현 — 정답.",
+      "explanation": "하나의 엔터티가 복수의 엔터티 중 반드시 하나와만 연결되고 서로 공존할 수 없는 관계를 상호배타적(Arc) 관계라 한다. 분기되는 두 관계선을 가로지르는 반원(◠)으로 표기한다. ①은 1:1 관계, ②는 1:N 관계, ③은 자기 자신을 참조하는 재귀 관계를 의미하며, ④ 는 차량이 법인소유자·개인소유자 두 엔터티로 분기되는 관계선을 가지며 이 둘 중 하나와만 연결되는 구조로 상호배타적 관계를 표현 — 정답.",
       "optionReferences": [
         [
           {
             "type": "erd",
-            "caption": "보기 ① — 1:1 관계 (차량과 소유자가 1:1 필수)",
+            "caption": "보기 ①",
             "mermaid": "erDiagram\n    차량 ||--|| 소유자 : \"보유\""
           }
         ],
         [
           {
             "type": "erd",
-            "caption": "보기 ② — 1:N 관계 (한 부서에 여러 사원)",
+            "caption": "보기 ②",
             "mermaid": "erDiagram\n    부서 ||--o{ 사원 : \"소속\""
           }
         ],
         [
           {
             "type": "erd",
-            "caption": "보기 ③ — 자기 참조(재귀) 관계 (사원이 다른 사원을 매니저로 가짐)",
+            "caption": "보기 ③",
             "mermaid": "erDiagram\n    사원 ||--o{ 사원 : \"관리\""
           }
         ],
         [
           {
             "type": "erd",
-            "caption": "보기 ④ — Arc(상호배타적) 관계 — 차량은 [법인 소유자] 또는 [개인 소유자] 중 하나에만 연결",
-            "mermaid": "erDiagram\n    차량 }o--|| 법인소유자 : \"보유 (Arc)\"\n    차량 }o--|| 개인소유자 : \"보유 (Arc)\""
+            "caption": "보기 ④",
+            "mermaid": "erDiagram\n    차량 }o--|| 법인소유자 : \"보유\"\n    차량 }o--|| 개인소유자 : \"보유\""
           }
         ]
       ]
@@ -257,13 +257,7 @@
         "TRIM('x' FROM 'xxSQLxx')"
       ],
       "correctIndex": 2,
-      "explanation": "① `LTRIM('xxSQL','x')` → 왼쪽 'x' 제거 → 'SQL'. ② `RTRIM('SQLxx','x')` → 오른쪽 'x' 제거 → 'SQL'. ③ `REPLACE('xxSQLxx','x','Y')` → 'x' 를 모두 'Y' 로 치환 → 'YYSQLYY'. ④ `TRIM('x' FROM 'xxSQLxx')` → 양쪽 'x' 제거 → 'SQL'. ①②④ 는 'SQL' 반환, ③ 만 'YYSQLYY' 로 결과가 다르다.",
-      "references": [
-        {
-          "type": "sql",
-          "code": "-- 대상 문자열: 'xxSQLxx'\n-- 기준 문자: 'x'\n-- ① LTRIM('xxSQL','x')           → 'SQL'\n-- ② RTRIM('SQLxx','x')           → 'SQL'\n-- ③ REPLACE('xxSQLxx','x','Y')   → 'YYSQLYY'\n-- ④ TRIM('x' FROM 'xxSQLxx')     → 'SQL'"
-        }
-      ]
+      "explanation": "① `LTRIM('xxSQL','x')` → 왼쪽 'x' 제거 → 'SQL'. ② `RTRIM('SQLxx','x')` → 오른쪽 'x' 제거 → 'SQL'. ③ `REPLACE('xxSQLxx','x','Y')` → 'x' 를 모두 'Y' 로 치환 → 'YYSQLYY'. ④ `TRIM('x' FROM 'xxSQLxx')` → 양쪽 'x' 제거 → 'SQL'. ①②④ 는 'SQL' 반환, ③ 만 'YYSQLYY' 로 결과가 다르다."
     },
     {
       "subject": "2과목",
@@ -346,7 +340,7 @@
     {
       "subject": "2과목",
       "number": 15,
-      "title": "아래 세 JOIN의 결과 행 개수를 모두 합한 값은? 합산 대상 세 JOIN은 다음과 같다. * ㄱ. CROSS JOIN 결과 행 수 * ㄴ. INNER JOIN 결과 행 수 (ID 기준) * ㄷ. FULL OUTER JOIN 결과 행 수 (ID 기준)",
+      "title": "아래 세 JOIN의 결과 행 개수를 모두 합한 값은? 합산 대상 세 JOIN은 다음과 같다. ㄱ. CROSS JOIN 결과 행 수, ㄴ. INNER JOIN 결과 행 수 (ID 기준), ㄷ. FULL OUTER JOIN 결과 행 수 (ID 기준)",
       "options": [
         "17",
         "18",
@@ -440,7 +434,7 @@
         "SQL Server의 계층형 질의문은 CTE(Common Table Expression)를 재귀 호출함으로써 계층 구조를 전개한다."
       ],
       "correctIndex": 0,
-      "explanation": "'PRIOR 자식 = 부모' 형태는 순방향 전개만 수행한다. 역방향 전개는 'PRIOR 부모 = 자식' 형태를 사용한다."
+      "explanation": "'PRIOR 부모 = 자식' 형태(예: PRIOR EMPNO = MGR)는 순방향 전개를, 'PRIOR 자식 = 부모' 형태(예: PRIOR MGR = EMPNO)는 역방향 전개를 수행한다. 하나의 조건으로 순방향과 역방향이 동시에 전개되지는 않으므로 ①은 옳지 않은 설명이다."
     },
     {
       "subject": "2과목",
@@ -911,8 +905,8 @@
         "10 1002 / 11 1002 / 11 1004",
         "11 1004 / 10 1002 / 11 1002"
       ],
-      "correctIndex": 1,
-      "explanation": "EMPNO 내림차순으로 11이 먼저 오고 그중 DEPTNO 오름차순으로 1002가 뒤에 온다. 이후 10, NULL 순서이며 상위 3건만 반환된다.",
+      "correctIndex": 0,
+      "explanation": "EMPNO 내림차순(NULLS LAST)이므로 11, 11, 10 순이고, EMPNO가 같은 11 중에서는 DEPTNO 오름차순이라 1002가 먼저, 1004가 나중에 온다. 상위 3건은 (11, 1002), (11, 1004), (10, 1002)로 ①번이다.",
       "references": [
         {
           "type": "table",
@@ -1008,11 +1002,11 @@
         "㉢과 ㉣"
       ],
       "correctIndex": 0,
-      "explanation": "NVL과 COALESCE는 NULL 대체 기능이 동일하므로 'X'를 반환한다. NULLIF는 두 인자가 같으면 NULL, 다르면 첫 번째 값을 반환한다.",
+      "explanation": "㉠ NVL(NULL, 'X')와 ㉡ COALESCE(NULL, 'X')는 NULL 대체 기능이 동일하므로 모두 'X'를 반환한다. ㉢ NULLIF('X', 'X')는 두 인자가 같으므로 NULL을 반환하고, ㉣ NVL('Y', 'X')는 첫 번째 인자가 NULL이 아니므로 'Y'를 반환한다. 따라서 결과가 같은 쌍은 ㉠과 ㉡뿐이다.",
       "references": [
         {
           "type": "sql",
-          "code": "-- ㉠ SELECT NVL(NULL, 'X')\n-- ㉡ SELECT COALESCE(NULL, 'X')\n-- ㉢ SELECT NULLIF('X', 'X')\n-- ㉣ SELECT NULLIF('X', 'Y')"
+          "code": "-- ㉠ SELECT NVL(NULL, 'X')\n-- ㉡ SELECT COALESCE(NULL, 'X')\n-- ㉢ SELECT NULLIF('X', 'X')\n-- ㉣ SELECT NVL('Y', 'X')"
         }
       ]
     },
@@ -1021,13 +1015,13 @@
       "number": 33,
       "title": "아래 ROLLUP 결과에 대한 설명으로 옳은 것은?",
       "options": [
-        "a a a a b b null",
-        "a a b b null",
-        "a a b b",
-        "a b"
+        "A A A A B B NULL",
+        "A A B B NULL",
+        "A A B B",
+        "A B"
       ],
       "correctIndex": 1,
-      "explanation": "HAVING GROUPING(ID) + GROUPING(TYPE) != 1 조건은 (ID, TYPE) 세부 집계 네 건과 전체 총계 한 건만 남긴다. 결과 ID 컬럼은 a, a, b, b, NULL 순으로 출력된다.",
+      "explanation": "HAVING GROUPING(ID) + GROUPING(TYPE) != 1 조건은 (ID, TYPE) 세부 집계 네 건과 전체 총계 한 건만 남긴다. 결과 ID 컬럼은 A, A, B, B, NULL 순으로 출력된다.",
       "references": [
         {
           "type": "table",
@@ -1092,7 +1086,7 @@
     {
       "subject": "2과목",
       "number": 35,
-      "title": "아래 SQL의 결과로 옳은 것은?",
+      "title": "아래 SQL(Oracle)의 결과로 옳은 것은?",
       "options": [
         "ABCXYZ",
         "NULL",
@@ -1143,7 +1137,7 @@
     {
       "subject": "2과목",
       "number": 38,
-      "title": "아래 SQL의 반환 행 수는?",
+      "title": "아래 SQL의 실행 결과(COUNT(*) 값)로 옳은 것은?",
       "options": [
         "0",
         "1",
@@ -1314,7 +1308,7 @@
         },
         {
           "type": "sql",
-          "code": "DROP TABLE T1 CASCADE CONSTRAINTS;\n-- 결과: T1 삭제 + T2 의 FK 제약 삭제\n-- T2 테이블 자체는 그대로 남음"
+          "code": "DROP TABLE T1 CASCADE CONSTRAINTS;"
         }
       ]
     },
@@ -1325,11 +1319,11 @@
       "options": [
         "윈도우 함수는 GROUP BY 절과 동시에 사용할 수 없다.",
         "ROW_NUMBER는 동일 값에도 항상 서로 다른 순번을 부여한다.",
-        "RANK와 DENSE_RANK는 동일 값에 동일 순위를 부여한다는 점은 같다.",
+        "RANK와 DENSE_RANK는 동일 값 다음 순위를 건너뛴다는 점이 같다.",
         "윈도우 함수는 SELECT 절에서만 사용할 수 있다."
       ],
       "correctIndex": 1,
-      "explanation": "RANK/DENSE_RANK는 동일 값에 동일 순위를 부여하나 ROW_NUMBER는 행마다 고유 순번을 부여한다."
+      "explanation": "RANK/DENSE_RANK는 동일 값에 동일 순위를 부여하나 ROW_NUMBER는 행마다 고유 순번을 부여한다. 또한 RANK는 동일 순위 다음 순위를 건너뛰지만 DENSE_RANK는 건너뛰지 않고 연속된 순위를 부여한다."
     },
     {
       "subject": "2과목",
@@ -1361,13 +1355,7 @@
         "NULLIF(1, 1)"
       ],
       "correctIndex": 1,
-      "explanation": "② `NVL(NULL, 0)` 만 NULL 을 0 으로 치환하여 0 을 반환한다. ① `COALESCE(NULL, NULL)` 은 모든 인자가 NULL 이라 NULL, ③ `NVL(NULL, NULL)` 도 NULL, ④ `NULLIF(1, 1)` 은 두 인자가 같으면 NULL 반환이라 NULL.",
-      "references": [
-        {
-          "type": "sql",
-          "code": "-- 각 호출의 결과:\n-- ① COALESCE(NULL, NULL) → NULL\n-- ② NVL(NULL, 0)        → 0      ← 정답\n-- ③ NVL(NULL, NULL)     → NULL\n-- ④ NULLIF(1, 1)        → NULL"
-        }
-      ]
+      "explanation": "② `NVL(NULL, 0)` 만 NULL 을 0 으로 치환하여 0 을 반환한다. ① `COALESCE(NULL, NULL)` 은 모든 인자가 NULL 이라 NULL, ③ `NVL(NULL, NULL)` 도 NULL, ④ `NULLIF(1, 1)` 은 두 인자가 같으면 NULL 반환이라 NULL."
     },
     {
       "subject": "2과목",
@@ -1415,7 +1403,7 @@
         },
         {
           "type": "sql",
-          "code": "SELECT *\nFROM   EMP\nSTART WITH EMPNO = 7902\nCONNECT BY (  ?  );\n-- 7902(FORD) → 7566(JONES) → 7839(KING) 순으로 거슬러 올라감"
+          "code": "SELECT *\nFROM   EMP\nSTART WITH EMPNO = 7902\nCONNECT BY (  ?  );"
         }
       ]
     },

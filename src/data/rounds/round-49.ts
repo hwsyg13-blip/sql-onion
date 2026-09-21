@@ -617,8 +617,8 @@ export const ROUND_49: QuizQuestion[] = [
       "GROUP BY CUBE(회원번호, 상품)",
       "GROUP BY GROUPING SETS(회원번호, 상품)"
     ],
-    "correctIndex": 1,
-    "explanation": "`회원번호, ROLLUP(상품)` 은 회원번호를 고정 차원으로 두고 상품 차원에 ROLLUP 을 적용해 (회원번호, 상품) 세부 + (회원번호) 소계를 산출한다. ① 은 (회원번호) 소계 외에 () 총계도 추가, ③ CUBE 는 (상품) 소계까지 추가, ④ GROUPING SETS(회원번호, 상품) 은 세부 행이 빠진다.",
+    "correctIndex": 0,
+    "explanation": "회원번호·상품별 세부 (회원번호, 상품), 회원번호별 소계 (회원번호), 전체 총계 () 를 모두 산출하는 것은 `ROLLUP(회원번호, 상품)` 이다. ② `회원번호, ROLLUP(상품)` 는 전체 총계가 빠지고, ③ CUBE 는 (상품) 소계까지 추가하며, ④ GROUPING SETS(회원번호, 상품) 은 세부 행이 없다.",
     "_source": "authored"
   },
   {
@@ -818,17 +818,17 @@ export const ROUND_49: QuizQuestion[] = [
           [
             "002",
             "202201",
-            "300"
+            "200"
           ],
           [
             "003",
             "202201",
-            "250"
+            "100"
           ],
           [
             "004",
             "202201",
-            "300"
+            "150"
           ],
           [
             "005",
@@ -848,7 +848,7 @@ export const ROUND_49: QuizQuestion[] = [
           [
             "003",
             "202202",
-            "200"
+            "150"
           ],
           [
             "004",
@@ -868,7 +868,7 @@ export const ROUND_49: QuizQuestion[] = [
           [
             "002",
             "202203",
-            "250"
+            "200"
           ],
           [
             "003",
@@ -878,7 +878,7 @@ export const ROUND_49: QuizQuestion[] = [
           [
             "004",
             "202203",
-            "200"
+            "100"
           ],
           [
             "005",
@@ -900,7 +900,7 @@ export const ROUND_49: QuizQuestion[] = [
     "round": 49,
     "subject": "2과목",
     "number": 26,
-    "title": "아래 결과가 1, 1, 2 가 되는 순위 함수는?",
+    "title": "동순위가 있을 때 결과가 1, 1, 2 가 되는 순위 함수는?",
     "options": [
       "DENSE_RANK",
       "RANK",

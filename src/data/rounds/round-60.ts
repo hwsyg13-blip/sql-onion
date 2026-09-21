@@ -84,12 +84,12 @@ export const ROUND_60: QuizQuestion[] = [
     "title": "엔터티·인스턴스·속성에 대한 설명 중 옳지 않은 것은?",
     "options": [
       "엔터티는 두 개 이상의 인스턴스를 가진다.",
-      "하나의 속성에는 두 개 이상의 값이 들어갈 수 있다.",
+      "하나의 속성에는 하나의 값만 들어갈 수 있다.",
       "인스턴스는 두 가지의 속성값을 가진다.",
       "하나의 엔터티는 두 개 이상의 속성을 가진다."
     ],
     "correctIndex": 2,
-    "explanation": "인스턴스가 가지는 속성 값의 수는 엔터티가 설계한 속성의 개수에 따라 달라진다. 특정 숫자로 고정되지 않는다.",
+    "explanation": "인스턴스가 가지는 속성 값의 수는 엔터티가 설계한 속성의 개수에 따라 달라진다. 특정 숫자로 고정되지 않는다. 한편 하나의 속성에는 하나의 속성값(원자값)만 들어갈 수 있다.",
     "_source": "authored"
   },
   {
@@ -210,7 +210,7 @@ export const ROUND_60: QuizQuestion[] = [
       "BCNF"
     ],
     "correctIndex": 2,
-    "explanation": "1·2정규화와 BCNF는 모두 키(결정자)를 기준으로 수행하지만, 3정규화는 비주식별자 간의 이행적 종속을 제거하는 단계로 주식별자 자체와의 관련성이 가장 낮다.",
+    "explanation": "1정규화는 반복되는 속성을 분리하면서 식별자 구성이 달라지고, 2정규화는 주식별자의 일부에만 종속되는 부분 함수 종속을 제거하며, BCNF 는 결정자가 후보키인지를 따지므로 모두 주식별자와 직접 관련된다. 반면 3정규화는 주식별자가 아닌 일반 속성 사이의 이행 함수 종속을 제거하는 단계이므로 주식별자 선정과 가장 관련이 적다.",
     "_source": "authored"
   },
   {
@@ -337,6 +337,81 @@ export const ROUND_60: QuizQuestion[] = [
         "type": "table",
         "headers": [
           "부서",
+          "직급",
+          "연봉"
+        ],
+        "rows": [
+          [
+            "인사팀",
+            "사원",
+            "3,500"
+          ],
+          [
+            "인사팀",
+            "대리",
+            "4,500"
+          ],
+          [
+            "인사팀",
+            "팀장",
+            "6,000"
+          ],
+          [
+            "인사팀",
+            "부장",
+            "8,000"
+          ],
+          [
+            "IT팀",
+            "사원",
+            "4,000"
+          ],
+          [
+            "IT팀",
+            "대리",
+            "5,000"
+          ],
+          [
+            "IT팀",
+            "팀장",
+            "7,000"
+          ],
+          [
+            "IT팀",
+            "부장",
+            "9,000"
+          ],
+          [
+            "행정팀",
+            "사원",
+            "3,200"
+          ],
+          [
+            "행정팀",
+            "대리",
+            "4,200"
+          ],
+          [
+            "행정팀",
+            "팀장",
+            "5,800"
+          ],
+          [
+            "행정팀",
+            "부장",
+            "7,500"
+          ]
+        ],
+        "caption": "급여 테이블"
+      },
+      {
+        "type": "sql",
+        "code": "SELECT *\nFROM   급여\n(  ?  );"
+      },
+      {
+        "type": "table",
+        "headers": [
+          "부서",
           "사원",
           "대리",
           "팀장",
@@ -365,11 +440,7 @@ export const ROUND_60: QuizQuestion[] = [
             "7,500"
           ]
         ],
-        "caption": "급여 테이블"
-      },
-      {
-        "type": "sql",
-        "code": "SELECT *\nFROM   급여\n(  ?  );"
+        "caption": "결과"
       }
     ]
   },
@@ -380,7 +451,7 @@ export const ROUND_60: QuizQuestion[] = [
     "round": 60,
     "subject": "2과목",
     "number": 14,
-    "title": "아래 데이터와 SQL의 결과로 올바른 것은?",
+    "title": "아래 데이터와 SQL 실행 결과의 MIN_SAL 컬럼 값(행 순서대로)으로 올바른 것은?",
     "options": [
       "1000 1000 1000",
       "1000 2000 3000",
@@ -892,7 +963,7 @@ export const ROUND_60: QuizQuestion[] = [
       },
       {
         "type": "table",
-        "caption": "기대 결과 (PIVOT 후)",
+        "caption": "기대 결과",
         "headers": [
           "지역",
           "1월",
@@ -1010,7 +1081,7 @@ export const ROUND_60: QuizQuestion[] = [
     "references": [
       {
         "type": "sql",
-        "code": "SELECT SAL,\n       SUM(SAL) OVER (ORDER BY SAL ROWS UNBOUNDED PRECEDING) AS 누적합계\nFROM   EMP;"
+        "code": "SELECT SAL,\n       SUM(SAL) OVER (ORDER BY SAL ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS 누적합계\nFROM   EMP;"
       }
     ]
   },
@@ -1224,7 +1295,7 @@ export const ROUND_60: QuizQuestion[] = [
     "number": 32,
     "title": "다음 중 ALTER TABLE 수행 시 오류가 발생하지 않는 것은?",
     "options": [
-      "이미 값이 들어 있는 NOT NULL 제약을 추가하는 경우",
+      "이미 NULL 값이 들어 있는 컬럼에 NOT NULL 제약을 추가하는 경우",
       "기존 자릿수보다 짧게 NUMBER 크기를 변경하는 경우",
       "중복 값이 있는 컬럼에 PRIMARY KEY를 추가하는 경우",
       "TIMESTAMP 컬럼을 추가하는 경우"
@@ -1625,7 +1696,7 @@ export const ROUND_60: QuizQuestion[] = [
       "SELECT 1 + NULL FROM DUAL;",
       "SELECT 'X' FROM DUAL;",
       "SELECT 1 * NULL FROM DUAL;",
-      "SELECT NULL, NULL FROM DUAL;"
+      "SELECT NULL FROM DUAL;"
     ],
     "correctIndex": 1,
     "explanation": "①, ③, ④는 결과에 NULL이 포함되지만 ②만 문자 상수 'X'를 반환한다.",
@@ -1698,7 +1769,7 @@ export const ROUND_60: QuizQuestion[] = [
     "round": 60,
     "subject": "2과목",
     "number": 46,
-    "title": "아래 EMP 테이블에서 부서별 급여 상위 3 명을 조회하려 한다. 빈칸에 들어갈 분석 함수로 가장 적절한 것은?",
+    "title": "아래 EMP 테이블에서 부서별 급여 상위 3위까지 조회하려 한다. 빈칸에 들어갈 분석 함수로 가장 적절한 것은?",
     "options": [
       "DENSE_RANK",
       "ROWNUM",
@@ -1706,7 +1777,7 @@ export const ROUND_60: QuizQuestion[] = [
       "CUME_DIST"
     ],
     "correctIndex": 0,
-    "explanation": "부서 내 동률을 같은 순위로 매기되 다음 순위를 건너뛰지 않는 `DENSE_RANK` 가 \"상위 N 명\" 조회에 가장 적합하다. 예: 부서 A 의 급여가 (5000, 4000, 4000, 3000) 일 때 DENSE_RANK 는 (1, 2, 2, 3) 을 부여해 RNK ≤ 3 으로 4 명 모두 조회 가능. ② `ROWNUM` 은 분석 함수가 아니며 `PARTITION BY` 와 함께 쓸 수 없고, ③ `NTILE` 은 등분 그룹을 매기는 용도, ④ `CUME_DIST` 는 누적 분포 비율(0~1) 을 반환하므로 상위 3 명 필터링에 부적합.",
+    "explanation": "부서 내 동률을 같은 순위로 매기되 다음 순위를 건너뛰지 않는 `DENSE_RANK` 가 \"상위 N 위까지\" 조회에 가장 적합하다. 예: 부서 A 의 급여가 (5000, 4000, 4000, 3000) 일 때 DENSE_RANK 는 (1, 2, 2, 3) 을 부여해 RNK ≤ 3 으로 4 명 모두 조회 가능. ② `ROWNUM` 은 분석 함수가 아니며 `PARTITION BY` 와 함께 쓸 수 없고, ③ `NTILE` 은 등분 그룹을 매기는 용도, ④ `CUME_DIST` 는 누적 분포 비율(0~1) 을 반환하므로 상위 3 명 필터링에 부적합.",
     "_source": "authored",
     "references": [
       {

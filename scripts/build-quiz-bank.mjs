@@ -30,6 +30,11 @@ const ROUND_DATES = {
 const CIRCLED = { '①': 0, '②': 1, '③': 2, '④': 3 };
 
 function parsePdf() {
+  // 원본 PDF 추출 텍스트는 임시 폴더에 있어 사라질 수 있음 — 없으면 authored/blog 데이터만으로 빌드
+  if (!existsSync(PDF_TEXT)) {
+    console.warn(`[build-quiz-bank] PDF 텍스트 없음 (${PDF_TEXT}) — authored/blog 데이터만 사용`);
+    return {};
+  }
   const raw = readFileSync(PDF_TEXT, 'utf8');
   const lines = raw.split(/\r?\n/).filter(l => !/^-- \d+ of \d+ --\s*$/.test(l));
   const sections = [];

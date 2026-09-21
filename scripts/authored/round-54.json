@@ -130,13 +130,13 @@
       "number": 9,
       "title": "ERD 표기법(IE·Barker)에 대한 설명으로 적절하지 않은 것은?",
       "options": [
-        "IE 표기법은 관계선의 끝에 까마귀 발 모양으로 카디널리티를 표시한다.",
-        "IE 표기법에서 실선은 식별 관계, Barker 표기법에서는 원(○) 으로 필수 여부를 표기한다.",
-        "Barker 표기법은 식별 관계를 점선, 비식별 관계를 실선으로 표기한다.",
-        "Barker 표기법은 선택 사양을 실선 점선과 O 기호로 구분한다."
+        "IE 표기법은 관계선 끝의 까마귀발(crow’s foot) 로 다(多) 카디널리티를 표시한다.",
+        "Barker 표기법은 관계선의 실선과 점선으로 식별 관계와 비식별 관계를 구분한다.",
+        "IE 표기법에서 관계선의 실선은 식별 관계를, 점선은 비식별 관계를 나타낸다.",
+        "Barker 표기법은 관계선의 실선과 점선으로 필수 참여와 선택 참여를 구분한다."
       ],
       "correctIndex": 1,
-      "explanation": "② 가 옳지 않은 진술이다. IE 표기법에서 실선이 식별 관계인 것은 옳지만, Barker 표기법의 원(○) 은 '필수 여부' 가 아니라 '선택 참여(Optional)' 를 표기한다 — 두 진술이 한 문장에 뒤섞임. ① IE 까마귀발 카디널리티 표기는 옳음. ③ Barker 식별 관계는 실선이 아닌 점선으로 표기 — 일부 자료에서는 반대로 기술하기도 하나 본 시험에서는 정답 ② 를 기준으로 보존. ④ Barker 선택 사양은 실선·점선·O 기호로 구분 — 옳음."
+      "explanation": "Barker(오라클) 표기법에서 관계선의 실선·점선은 필수 참여와 선택 참여를 나타내며, 식별 관계는 관계선 위의 UID bar 로 표시한다. 실선·점선으로 식별·비식별 관계를 구분하는 것은 IE 표기법이므로 ② 가 적절하지 않다."
     },
     {
       "subject": "1과목",
@@ -174,8 +174,8 @@
         "컬럼이 추가될 때 뷰를 변경하지 않아도 응용 프로그램에 영향을 미치지 않는다.",
         "뷰는 다른 테이블의 데이터를 참조한다."
       ],
-      "correctIndex": 2,
-      "explanation": "뷰 정의 이후 참조 테이블에 컬럼이 추가되면 뷰를 다시 컴파일해야 하며 응용 프로그램의 SELECT * 영향도 발생할 수 있다."
+      "correctIndex": 0,
+      "explanation": "뷰는 조회 속도를 높이려고 쓰는 객체가 아니라 논리적 독립성, 질의 단순화, 보안(접근 제어)을 위해 사용한다. 뷰는 실제 데이터를 저장하지 않고 다른 테이블을 참조하며, 기본 테이블에 컬럼이 추가되어도 뷰 정의를 바꾸지 않으면 응용 프로그램에 영향이 없다. 따라서 적절하지 않은 것은 ①이다."
     },
     {
       "subject": "2과목",
@@ -276,7 +276,7 @@
         },
         {
           "type": "sql",
-          "code": "-- emp_no : 하위 사원 번호, mgr_no : 상위 관리자 번호\nSELECT *\nFROM   EMP\nCONNECT BY PRIOR emp_no = mgr_no;\n-- 100(KING) → 200(JONES) → 300(SCOTT)/400(FORD) 순방향 전개"
+          "code": "-- emp_no : 하위 사원 번호, mgr_no : 상위 관리자 번호\nSELECT *\nFROM   EMP\nCONNECT BY PRIOR emp_no = mgr_no;"
         }
       ]
     },
@@ -384,7 +384,7 @@
       "number": 19,
       "title": "아래 설명을 SQL 로 작성했을 때 적절하지 않은 것은? (STADIUM 테이블이 두 개의 다른 스키마에 존재한다고 가정)",
       "options": [
-        "SELECT STADIUM.NAME FROM HR.STADIUM, SPORT.STADIUM; — 테이블 구분 없이 컬럼 참조",
+        "SELECT STADIUM.NAME FROM HR.STADIUM, SPORT.STADIUM;",
         "SELECT HR.STADIUM.NAME FROM HR.STADIUM;",
         "SELECT S.NAME FROM HR.STADIUM S;",
         "SELECT A.NAME FROM HR.STADIUM A, SPORT.STADIUM B;"
@@ -498,7 +498,7 @@
         [
           {
             "type": "table",
-            "caption": "보기 ① 3건 — COL1·COL2 매칭 결과 (정답 시나리오)",
+            "caption": "보기 ① 결과",
             "headers": [
               "COL1",
               "COL2",
@@ -530,7 +530,7 @@
         [
           {
             "type": "table",
-            "caption": "보기 ② 2건 — (A,가) 그룹만 헤아린 경우 (부분 카운트 오류)",
+            "caption": "보기 ② 결과",
             "headers": [
               "COL1",
               "COL2",
@@ -556,7 +556,7 @@
         [
           {
             "type": "table",
-            "caption": "보기 ③ 1건 — KEYA = KEYB 까지 비교했다고 가정한 경우 (조인 조건 오해)",
+            "caption": "보기 ③ 결과",
             "headers": [
               "COL1",
               "COL2",
@@ -576,7 +576,7 @@
         [
           {
             "type": "table",
-            "caption": "보기 ④ 공집합 — 동일명 컬럼이 전혀 없다고 잘못 판단한 경우 (NATURAL JOIN 의 의미 오해)",
+            "caption": "보기 ④ 결과",
             "headers": [
               "COL1",
               "COL2",
@@ -996,7 +996,7 @@
     {
       "subject": "2과목",
       "number": 30,
-      "title": "아래 결과(COL2 만 NULL 이 있는 집계) 를 출력하기 위한 GROUPING SETS 로 적절한 것은?",
+      "title": "아래 결과(COL1 에만 NULL 이 있는 집계) 를 출력하기 위한 GROUPING SETS 로 적절한 것은?",
       "options": [
         "GROUPING SETS( (COL1, COL2), COL2 )",
         "GROUPING SETS( COL1, (COL1, COL2) )",
@@ -1043,7 +1043,7 @@
         },
         {
           "type": "table",
-          "caption": "출력 결과 — COL2 별 소계 행에서 COL1 만 NULL 로 표시 (COL2 자리에는 NULL 없음)",
+          "caption": "출력 결과",
           "headers": [
             "COL1",
             "COL2",
@@ -1113,8 +1113,8 @@
         "PARTITION BY DEPT_ID 만 지정",
         "ORDER BY SALARY RANGE BETWEEN 100 PRECEDING AND 200 FOLLOWING (전체 파티션 없음)"
       ],
-      "correctIndex": 1,
-      "explanation": "연봉 값 기준으로 논리적 범위(RANGE) 를 지정하여 -100~200 범위의 건수를 집계한다."
+      "correctIndex": 3,
+      "explanation": "값 범위 기준 RANGE 윈도우는 정렬 기준 컬럼이 필요하므로 ORDER BY 가 있어야 한다. ② 는 ORDER BY 가 없어 성립하지 않고 ④ 가 연봉 오름차순 정렬(ORDER BY SALARY)과 RANGE 범위를 함께 지정하여 -100~200 범위의 건수를 집계한다."
     },
     {
       "subject": "2과목",
@@ -1217,7 +1217,7 @@
     {
       "subject": "2과목",
       "number": 35,
-      "title": "아래 T1 테이블에 대한 SELF JOIN 등수 쿼리에서 빈칸 ⓐ, ⓑ 에 들어갈 내용으로 옳은 것은?",
+      "title": "아래 T1 테이블에 대한 SELF JOIN 등수 쿼리(T2 는 T1 의 별칭)에서 빈칸 ⓐ, ⓑ 에 들어갈 내용으로 옳은 것은?",
       "options": [
         "ⓐ COUNT(*) + 1 / ⓑ T1.점수 < T2.점수",
         "ⓐ COUNT(*) / ⓑ T1.점수 = T2.점수",
@@ -1264,13 +1264,13 @@
       "number": 36,
       "title": "행이 2건인 테이블에 대해 결과가 나머지와 다른 SQL 은?",
       "options": [
-        "SELECT * FROM T WHERE ROWNUM = 1;",
+        "SELECT * FROM T WHERE ROWNUM > 0;",
         "SELECT * FROM T WHERE ROWNUM = 2;",
         "SELECT * FROM T WHERE ROWNUM < 3;",
         "SELECT * FROM T WHERE ROWNUM <= 2;"
       ],
       "correctIndex": 1,
-      "explanation": "ROWNUM 은 1부터 순차 부여되므로 첫 행이 ROWNUM=1 을 받고 탈락하면 다음 행에도 1 이 할당되어 2에 도달하지 못한다."
+      "explanation": "ROWNUM 은 1부터 순차 부여되므로 첫 행이 ROWNUM=1 을 받고 탈락하면 다음 행에도 1 이 할당되어 2에 도달하지 못한다. 따라서 ROWNUM = 2 는 0건을 반환하고, ROWNUM > 0, ROWNUM < 3, ROWNUM <= 2 는 모두 2건을 반환한다."
     },
     {
       "subject": "2과목",
@@ -1355,7 +1355,7 @@
         },
         {
           "type": "sql",
-          "code": "INSERT INTO T VALUES (1, 380);   -- 정상\nUPDATE T SET COL2 = 600 WHERE COL1 = 1;   -- CHECK 조건 위반\nINSERT INTO T VALUES (1, 200);   -- PK 조건 위반\nINSERT INTO T VALUES (2, 390);   -- 정상\n\nSELECT SUM(COL2) FROM T;"
+          "code": "INSERT INTO T VALUES (1, 380);\nUPDATE T SET COL2 = 600 WHERE COL1 = 1;\nINSERT INTO T VALUES (1, 200);\nINSERT INTO T VALUES (2, 390);\n\nSELECT SUM(COL2) FROM T;"
         }
       ]
     },

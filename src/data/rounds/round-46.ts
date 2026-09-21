@@ -476,7 +476,7 @@ export const ROUND_46: QuizQuestion[] = [
       },
       {
         "type": "table",
-        "caption": "출력 결과 — (매장ID, 매장명, 년도) 세부 + (매장ID, 년도) 소계 + (년도) 총계",
+        "caption": "출력 결과",
         "headers": [
           "매장ID",
           "매장명",
@@ -548,7 +548,7 @@ export const ROUND_46: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT 매장ID, 매장명, 년도, SUM(매출)\nFROM   매출\nGROUP BY ROLLUP(매장ID, 매장명), 년도;"
+        "code": "SELECT 매장ID, 매장명, 년도, SUM(매출)\nFROM   매출\n(  ?  );"
       }
     ]
   },

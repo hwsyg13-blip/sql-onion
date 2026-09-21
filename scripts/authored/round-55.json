@@ -263,7 +263,7 @@
         [
           {
             "type": "table",
-            "caption": "보기 ② 1, 1, 2, 1 (정답 시나리오)",
+            "caption": "보기 ② 1, 1, 2, 1 ",
             "headers": [
               "DEPT",
               "SAL",
@@ -296,7 +296,7 @@
         [
           {
             "type": "table",
-            "caption": "보기 ③ 1, 2, 3, 1 — ROW_NUMBER 적용 시 결과",
+            "caption": "보기 ③ 1, 2, 3, 1 ",
             "headers": [
               "DEPT",
               "SAL",
@@ -329,7 +329,7 @@
         [
           {
             "type": "table",
-            "caption": "보기 ④ 1, 1, 3, 1 — RANK 적용 시 결과",
+            "caption": "보기 ④ 1, 1, 3, 1 ",
             "headers": [
               "DEPT",
               "SAL",
@@ -815,7 +815,39 @@
         "DISTINCT 사용 시 중복된 로그인 이력은 하나로 집계된다."
       ],
       "correctIndex": 2,
-      "explanation": "ORDER BY 절은 SELECT 절 이후에 평가되므로 별칭을 참조할 수 있다."
+      "explanation": "ORDER BY 절은 SELECT 절이 평가된 뒤에 수행되므로 SELECT 절에서 부여한 별칭을 그대로 참조할 수 있다. 따라서 별칭을 참조할 수 없다는 ③ 이 적절하지 않다. ② 는 같은 이유로 정상 동작하고, ① 은 5 × 3 = 15 회로 옳으며, ④ DISTINCT 는 중복 행을 하나로 묶는다.",
+      "references": [
+        {
+          "type": "table",
+          "caption": "로그인이력 테이블",
+          "headers": [
+            "회원ID",
+            "로그인일시"
+          ],
+          "rows": [
+            [
+              "M001",
+              "2025-05-01 09:10"
+            ],
+            [
+              "M001",
+              "2025-05-01 13:20"
+            ],
+            [
+              "M001",
+              "2025-05-02 10:05"
+            ],
+            [
+              "M002",
+              "2025-05-01 11:00"
+            ]
+          ]
+        },
+        {
+          "type": "sql",
+          "code": "SELECT   회원ID AS ALIAS1,\n         TRUNC(로그인일시) AS ALIAS2,\n         COUNT(*) AS 로그인횟수\nFROM     로그인이력\nGROUP BY 회원ID, TRUNC(로그인일시)\nORDER BY ALIAS1, ALIAS2;"
+        }
+      ]
     },
     {
       "subject": "2과목",
@@ -1031,10 +1063,10 @@
         "AAB, BBA",
         "BBA, AAB",
         "COL1, COL2",
-        "첫 번째 SELECT 별칭만 유효"
+        "오류가 발생한다"
       ],
       "correctIndex": 0,
-      "explanation": "UNION/UNION ALL 등 집합 연산 결과의 컬럼명은 첫 번째 SELECT 절에서 부여한 별칭을 따른다. 두 번째 SELECT 가 동일 컬럼에 다른 별칭(BBA, AAB)을 붙여도 무시되므로, 결과 컬럼명은 (AAB, BBA) 순서로 출력된다. 정답은 ①.",
+      "explanation": "UNION·UNION ALL 등 집합 연산 결과의 컬럼명은 첫 번째 SELECT 절의 별칭을 따른다. 두 번째 SELECT 가 같은 컬럼에 다른 별칭(BBA, AAB)을 붙여도 무시되므로 결과 컬럼명은 AAB, BBA 가 된다. ② 는 두 번째 SELECT 의 별칭이 적용된다고 본 경우, ③ 은 별칭이 모두 무시된다고 본 경우, ④ 는 양쪽 별칭이 다르면 오류가 난다고 본 경우이다.",
       "references": [
         {
           "type": "table",
@@ -1173,56 +1205,14 @@
       "references": [
         {
           "type": "sql",
-          "code": "-- 트랜잭션 시작\n(가) SQL1   -- 첫 번째 변경\nSAVEPOINT A;\n(나) SQL2   -- A 이후 변경\nSAVEPOINT B;\n(다) SQL3   -- B 이후 변경\nROLLBACK TO SAVEPOINT A;   -- (나)·(다) 취소, (가) 는 유지\n(라) SQL4   -- 다시 변경 시작\n(마) SQL5\nCOMMIT;     -- 누적된 (가)·(라)·(마) 영구 반영"
-        },
-        {
-          "type": "table",
-          "caption": "각 SQL 의 최종 운명",
-          "headers": [
-            "라벨",
-            "실행 시점",
-            "ROLLBACK 영향",
-            "COMMIT 반영"
-          ],
-          "rows": [
-            [
-              "(가)",
-              "트랜잭션 시작 직후",
-              "받지 않음 (SAVEPOINT A 이전)",
-              "✓"
-            ],
-            [
-              "(나)",
-              "SAVEPOINT A 이후",
-              "취소됨",
-              "✗"
-            ],
-            [
-              "(다)",
-              "SAVEPOINT B 이후",
-              "취소됨",
-              "✗"
-            ],
-            [
-              "(라)",
-              "ROLLBACK 이후",
-              "받지 않음 (이후 실행)",
-              "✓"
-            ],
-            [
-              "(마)",
-              "ROLLBACK 이후",
-              "받지 않음 (이후 실행)",
-              "✓"
-            ]
-          ]
+          "code": "-- 트랜잭션 시작\n(가) SQL1\nSAVEPOINT A;\n(나) SQL2\nSAVEPOINT B;\n(다) SQL3\nROLLBACK TO SAVEPOINT A;\n(라) SQL4\n(마) SQL5\nCOMMIT;"
         }
       ]
     },
     {
       "subject": "2과목",
       "number": 37,
-      "title": "ORDER BY 절에서 NULL 값이 포함된 경우의 기본 정렬 동작으로 옳은 것은?",
+      "title": "Oracle 에서 ORDER BY 절에 NULL 값이 포함된 경우의 기본 정렬 동작으로 옳은 것은?",
       "options": [
         "ASC 시 NULLS FIRST, DESC 시 NULLS LAST",
         "ASC 시 NULLS LAST, DESC 시 NULLS FIRST",
@@ -1302,7 +1292,7 @@
     {
       "subject": "2과목",
       "number": 41,
-      "title": "SQL 집합 연산자 UNION ALL 과 의미가 동일한 조합은?",
+      "title": "A, B 에 각각 중복 행이 없다고 가정할 때, SQL 집합 연산자 UNION ALL 과 의미가 동일한 조합은?",
       "options": [
         "(A UNION B) UNION ALL (A INTERSECT B)",
         "(A UNION B) UNION (A UNION B)",

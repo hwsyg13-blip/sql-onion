@@ -185,7 +185,7 @@ export const ROUND_53: QuizQuestion[] = [
     "round": 53,
     "subject": "1과목",
     "number": 10,
-    "title": "바커 표기법에서 인스턴스(엔터티) 존재를 표현하는 선의 형태는?",
+    "title": "바커 표기법에서 필수 참여(인스턴스가 반드시 존재해야 함)를 표현하는 선의 형태는?",
     "options": [
       "직선",
       "점선",
@@ -445,7 +445,7 @@ export const ROUND_53: QuizQuestion[] = [
     "round": 53,
     "subject": "2과목",
     "number": 19,
-    "title": "SAL 기준 상위 3순위까지 동순위를 포함하여 조회하는 함수로 적절한 것은?",
+    "title": "SAL 기준 상위 3순위까지 동순위를 포함하되, 동순위 다음 순위를 건너뛰지 않고 부여하는 함수로 적절한 것은?",
     "options": [
       "DENSE_RANK",
       "ROW_NUMBER",
@@ -621,11 +621,11 @@ export const ROUND_53: QuizQuestion[] = [
     "options": [
       "SELECT * FROM T WHERE COL1 = 1 AND COL2 = 3;",
       "SELECT * FROM T WHERE COL1 = 1 OR COL2 IN (3, 4);",
-      "SELECT * FROM T WHERE COL1 IN (1) AND COL2 IN (3, 4);",
+      "SELECT * FROM T WHERE COL1 IN (1, 2) AND COL2 IN (3, 4);",
       "SELECT * FROM T WHERE COL1 = 1 AND (COL2 = 3 OR COL2 = 4);"
     ],
     "correctIndex": 3,
-    "explanation": "다중 컬럼 IN `(COL1, COL2) IN ((1, 3), (1, 4))` 는 `(COL1=1 AND COL2=3) OR (COL1=1 AND COL2=4)` 와 동일하다. COL1 이 두 튜플에서 모두 1 이라 공통 인수로 묶으면 `COL1=1 AND (COL2=3 OR COL2=4)` 로 정리된다. ① 은 한 조건만, ② 는 OR 결합으로 더 넓고, ③ 은 (1, 3) (1, 4) 가 아닌 다른 조합도 매칭하므로 의미가 다르다.",
+    "explanation": "다중 컬럼 IN `(COL1, COL2) IN ((1, 3), (1, 4))` 는 `(COL1=1 AND COL2=3) OR (COL1=1 AND COL2=4)` 와 동일하다. COL1 이 두 튜플에서 모두 1 이라 공통 인수로 묶으면 `COL1=1 AND (COL2=3 OR COL2=4)` 로 정리된다. ① 은 한 조건만, ② 는 OR 결합으로 더 넓고, ③ 은 COL1 이 2 인 행 (2, 3), (2, 4) 도 매칭하므로 의미가 다르다.",
     "_source": "authored",
     "references": [
       {
@@ -704,12 +704,12 @@ export const ROUND_53: QuizQuestion[] = [
     "title": "아래 NATURAL JOIN SQL 의 결과로 옳은 것은?",
     "options": [
       "공집합 (0건)",
-      "60",
-      "90",
-      "225"
+      "1건",
+      "2건",
+      "오류가 발생한다"
     ],
     "correctIndex": 0,
-    "explanation": "동일 컬럼명이 여러 개이면서 값이 다르면 NATURAL JOIN 은 매칭 실패로 결과가 비거나 경우에 따라 예상과 다른 결과를 낸다.",
+    "explanation": "NATURAL JOIN 은 두 테이블에서 이름이 같은 모든 컬럼을 조인 조건으로 사용한다. A 와 B 는 ID 와 COL1 이 모두 같은 이름이므로 두 컬럼이 동시에 일치해야 한다. ID 는 1 로 같지만 COL1 은 X 와 Y 로 다르므로 매칭되는 행이 없어 결과는 공집합이다. ② 는 ID 만 조인 조건이라고 본 경우, ③ 은 카티션 곱으로 본 경우, ④ 는 동일 이름 컬럼이 여러 개면 오류가 난다고 본 경우이다.",
     "_source": "authored",
     "references": [
       {
@@ -811,7 +811,7 @@ export const ROUND_53: QuizQuestion[] = [
     "options": [
       "10, 12, 15",
       "10, 12",
-      "15 이하의 모든 값",
+      "50 이하의 모든 값",
       "공집합"
     ],
     "correctIndex": 0,
@@ -1112,14 +1112,20 @@ export const ROUND_53: QuizQuestion[] = [
     "number": 39,
     "title": "REGEXP_SUBSTR 로 'aabbc' 중 일부를 추출하는 SQL 의 결과로 옳은 것은?",
     "options": [
-      "aabbc abbc",
-      "abbc bc",
-      "aab bbc",
-      "빈 문자열"
+      "aabbc, bbc",
+      "abbc, bc",
+      "aab, bbc",
+      "두 결과 모두 빈 문자열"
     ],
     "correctIndex": 1,
-    "explanation": "원본 기출에서 구체적 SQL 표기와 선지 텍스트가 유실되어 정답 번호(②) 만 보존한다.",
-    "_source": "authored"
+    "explanation": "REGEXP_SUBSTR(문자열, 패턴, 시작위치) 의 세 번째 인자는 검색을 시작할 위치다. 'aabbc' 의 2 번째 문자부터 'a.*' 를 찾으면 2 번째 'a' 에서 시작해 끝까지 이어지는 'abbc' 가 반환된다. 4 번째 문자부터 'b.*' 를 찾으면 4 번째 'b' 에서 시작하는 'bc' 가 반환된다. ① 은 시작 위치를 무시하고 1 번째부터 검색한 경우이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT REGEXP_SUBSTR('aabbc', 'a.*', 2) AS 첫번째,\n       REGEXP_SUBSTR('aabbc', 'b.*', 4) AS 두번째\nFROM   DUAL;"
+      }
+    ]
   },
   {
     "id": 10389,
@@ -1128,7 +1134,7 @@ export const ROUND_53: QuizQuestion[] = [
     "round": 53,
     "subject": "2과목",
     "number": 40,
-    "title": "아래 윈도우 절과 동등한 의미를 가진 절은?",
+    "title": "아래 설명에 해당하는 윈도우 절로 옳은 것은?",
     "options": [
       "RANGE BETWEEN 50 PRECEDING AND 150 FOLLOWING",
       "ROWS BETWEEN 1 PRECEDING AND 1 FOLLOWING",
@@ -1136,12 +1142,12 @@ export const ROUND_53: QuizQuestion[] = [
       "RANGE BETWEEN CURRENT ROW AND UNBOUNDED FOLLOWING"
     ],
     "correctIndex": 1,
-    "explanation": "축약형 윈도우 절에서 단위 키워드(ROWS/RANGE) 가 생략되면 기본 단위 ROWS 로 해석된다. 따라서 `BETWEEN 1 PRECEDING AND 1 FOLLOWING` 은 `ROWS BETWEEN 1 PRECEDING AND 1 FOLLOWING` 과 동등하다. RANGE 는 값 범위 기준이라 단위 자체가 다르고, UNBOUNDED 는 한쪽이 무한이라 1·1 과 다르다.",
+    "explanation": "행 단위로 윈도우 범위를 지정하는 것은 ROWS 이고, 현재 행의 앞뒤 한 행씩을 포함하려면 시작을 1 PRECEDING, 끝을 1 FOLLOWING 으로 지정한다. ① RANGE 는 행이 아니라 정렬 키의 값 범위를 기준으로 하므로 동일 값이 있으면 결과가 달라지고, ③ 은 첫 행부터 현재 행까지, ④ 는 현재 행부터 마지막 행까지라 범위가 다르다.",
     "_source": "authored",
     "references": [
       {
         "type": "text",
-        "content": "기준 절: `BETWEEN 1 PRECEDING AND 1 FOLLOWING` (ROWS/RANGE 단위 키워드를 생략한 형태)"
+        "content": "정렬 기준에서 현재 행과 바로 앞 한 행, 바로 뒤 한 행을 합한 세 개의 행을 윈도우 범위로 지정한다."
       }
     ]
   },

@@ -850,7 +850,7 @@ export const ROUND_50: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT SUM(급여)/3, COUNT(*), COUNT(급여) FROM T;\n-- SUM(급여)/3 = 12000/3 = 4000\n-- COUNT(*) = 4 (NULL 포함)\n-- COUNT(급여) = 3 (NULL 제외)"
+        "code": "SELECT SUM(급여)/3, COUNT(*), COUNT(급여) FROM T;"
       }
     ]
   },

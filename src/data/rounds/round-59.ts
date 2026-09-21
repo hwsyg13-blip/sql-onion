@@ -116,12 +116,12 @@ export const ROUND_59: QuizQuestion[] = [
     "title": "아래 네 개의 테이블이 1:M 관계로 연결된 모델에서 식별자·비식별자 관계에 대한 설명 중 옳지 않은 것은?",
     "options": [
       "1:M으로 연결되어 있다.",
-      "비식별로 바꾸면 조회가 빠르다.",
+      "비식별자 관계로 바꾸면 자식은 부모의 주식별자를 상속받지 않고 일반 속성으로 참조한다.",
       "A테이블 키는 내부식별자, B테이블은 외부식별자이다.",
       "B테이블의 FK를 비식별자로 바꾸면 C테이블에서 조인할 때 더 편하다."
     ],
     "correctIndex": 3,
-    "explanation": "비식별자 관계로 바꾸면 부모의 키가 자식의 PK에 포함되지 않아 하위 테이블까지 키가 전파되지 않는다. 이로 인해 상위 조상까지 접근하려면 추가 조인이 필요해져 조인이 더 복잡해진다.",
+    "explanation": "비식별자 관계로 바꾸면 부모의 키가 자식의 주식별자에 포함되지 않고 일반 속성(FK)으로만 전이된다(② 는 옳은 설명). 이 때문에 손자 엔터티까지 키가 전파되지 않아 상위 엔터티에 접근하려면 중간 엔터티를 거치는 조인이 추가로 필요해진다. 따라서 조인이 더 편해진다는 ④ 가 옳지 않다.",
     "_source": "authored",
     "references": [
       {
@@ -330,13 +330,7 @@ export const ROUND_59: QuizQuestion[] = [
     ],
     "correctIndex": 1,
     "explanation": "NVL2(expr, a, b)는 expr이 NULL이면 b를, NOT NULL이면 a를 반환한다. 따라서 NVL2(NULL, a, b)는 b를 반환하는 것이 맞다. ①은 SAL이 NULL이면 SAL(NULL)을 반환하므로 0이 아니며, ③ NULLIF는 두 값이 같으면 NULL을 반환하는 별개 함수이고, ④ NVL2는 반드시 인자 3개가 필요하다.",
-    "_source": "authored",
-    "references": [
-      {
-        "type": "sql",
-        "code": "NVL2(expr, a, b)\n-- expr이 NULL이면 b를 반환, NOT NULL이면 a를 반환"
-      }
-    ]
+    "_source": "authored"
   },
   {
     "id": 10064,
@@ -345,7 +339,7 @@ export const ROUND_59: QuizQuestion[] = [
     "round": 59,
     "subject": "2과목",
     "number": 15,
-    "title": "아래 EMP 테이블에서 직원 번호와 해당 직원의 상사 번호를 함께 조회하려 한다. 빈칸에 들어갈 SQL로 가장 적절한 것은?",
+    "title": "아래 EMP 테이블에서 직원 번호와 해당 직원의 상사 번호를 함께 조회하려 한다. 가장 적절한 SQL은?",
     "options": [
       "SELECT E.EMPNO, M.EMPNO AS MGR_NO FROM EMP E, EMP M WHERE E.MGR = M.EMPNO;",
       "SELECT E.EMPNO, M.EMPNO AS MGR_NO FROM EMP E JOIN EMP M ON E.EMPNO = M.EMPNO;",
@@ -445,7 +439,7 @@ export const ROUND_59: QuizQuestion[] = [
       },
       {
         "type": "table",
-        "caption": "기대 결과 — A 의 모든 행이 보존되고 B 매칭 부재 시 NULL",
+        "caption": "기대 결과",
         "headers": [
           "A.ID",
           "B.ID",
@@ -531,7 +525,7 @@ export const ROUND_59: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "-- 빈칸에 EXISTS 또는 INTERSECT 사용\nSELECT * FROM STUDENT S\nWHERE  ( ? ) (SELECT 1 FROM LECTURE L WHERE L.SID = S.SID);\n\n-- 또는\nSELECT SID FROM STUDENT\n( ? )\nSELECT SID FROM LECTURE;"
+        "code": "SELECT * FROM STUDENT S\nWHERE  ( ? ) (SELECT 1 FROM LECTURE L WHERE L.SID = S.SID);\n\n-- 또는\nSELECT SID FROM STUDENT\n( ? )\nSELECT SID FROM LECTURE;"
       }
     ]
   },
@@ -621,7 +615,7 @@ export const ROUND_59: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "-- T 테이블 초기 상태: 0건\n\nINSERT INTO T ... 15건;        -- 15건, 미커밋\nCOMMIT;                         -- 15건 확정\n\nINSERT INTO T ... 15건;        -- 30건, 미커밋\nCREATE INDEX IDX_T ON T(COL);   -- DDL → 묵시적 커밋 (30건 확정)\n\nINSERT INTO T ... 20건;        -- 50건, 미커밋\nROLLBACK;                       -- 마지막 INSERT 취소\n\nSELECT COUNT(*) FROM T;"
+        "code": "-- T 테이블 초기 상태: 0건\n\nINSERT INTO T ... 15건;\nCOMMIT;\n\nINSERT INTO T ... 15건;\nCREATE INDEX IDX_T ON T(COL);\n\nINSERT INTO T ... 20건;\nROLLBACK;\n\nSELECT COUNT(*) FROM T;"
       }
     ]
   },
@@ -759,32 +753,6 @@ export const ROUND_59: QuizQuestion[] = [
     "_source": "authored",
     "references": [
       {
-        "type": "table",
-        "caption": "정규식 패턴 매칭 규칙 (Oracle REGEXP_SUBSTR, 기본 옵션)",
-        "headers": [
-          "패턴",
-          "의미",
-          "입력 'BCD' 매칭 결과"
-        ],
-        "rows": [
-          [
-            "`B.D`",
-            "B + 임의 한 문자 + D",
-            "'BCD'"
-          ],
-          [
-            "`BCD`",
-            "정확히 'BCD'",
-            "'BCD'"
-          ],
-          [
-            "`b.d`",
-            "b + 임의 한 문자 + d (소문자)",
-            "NULL (대소문자 다름)"
-          ]
-        ]
-      },
-      {
         "type": "sql",
         "code": "SELECT REGEXP_SUBSTR('BCD', ( ? )) AS 첫번째,\n       REGEXP_SUBSTR('BCD', ( ? )) AS 두번째\nFROM DUAL;\n-- 목표 결과: 첫번째 = 'BCD', 두번째 = NULL"
       }
@@ -815,15 +783,15 @@ export const ROUND_59: QuizQuestion[] = [
     "round": 59,
     "subject": "2과목",
     "number": 25,
-    "title": "CTAS(CREATE TABLE AS SELECT)에 대한 설명 중 옳지 않은 것은?",
+    "title": "CTAS(CREATE TABLE AS SELECT)에 대한 설명 중 옳은 것은?",
     "options": [
       "데이터 속성을 재정의해야 한다.",
       "NOT NULL은 전달되지 않는다.",
       "기본키, 외래키 등 제약사항은 전달되지 않는다.",
       "컬럼 타입은 전달되지 않는다."
     ],
-    "correctIndex": 0,
-    "explanation": "CTAS는 컬럼 타입과 NOT NULL 제약을 그대로 전달하므로 데이터 속성을 일일이 재정의할 필요가 없다.",
+    "correctIndex": 2,
+    "explanation": "CTAS는 컬럼 타입과 NOT NULL 제약은 그대로 전달하므로 데이터 속성을 일일이 재정의할 필요가 없다. 반면 기본키·외래키 등 다른 제약사항은 전달되지 않는다. 따라서 ③이 옳은 설명이다.",
     "_source": "authored"
   },
   {
@@ -885,6 +853,11 @@ export const ROUND_59: QuizQuestion[] = [
             "C001",
             "2025-01-08",
             "20,000"
+          ],
+          [
+            "C001",
+            "2025-01-08",
+            "3,000"
           ],
           [
             "C001",
@@ -1071,7 +1044,7 @@ export const ROUND_59: QuizQuestion[] = [
       "ALL로 바꿔도 동일하다."
     ],
     "correctIndex": 1,
-    "explanation": "연관 서브쿼리는 외부 쿼리의 각 행마다 한 번씩 실행되며, 각 부서별 `MAX(SAL)` 은 단일 값을 반환하므로 다중 행 반환 오류는 발생하지 않는다. ② 는 부서 수와 무관하게 항상 단일 값을 반환하므로 옳지 않은 진술. ③ ANY 는 의미가 다르고(어떤 한 값보다 크면), ④ ALL 도 의미가 다르다(모든 값보다 크면).",
+    "explanation": "연관 서브쿼리는 외부 쿼리의 각 행마다 한 번씩 실행되며, 각 부서별 `MAX(SAL)` 은 단일 값을 반환하므로 다중 행 반환 오류는 발생하지 않는다. ② 는 부서 수와 무관하게 항상 단일 값을 반환하므로 오류가 발생한다는 진술은 옳지 않다. ③④ 서브쿼리가 부서별 MAX(SAL) 하나만 반환하므로 ANY 나 ALL 로 바꿔도 비교 대상이 하나뿐이어서 결과는 동일하다(옳은 설명). 참고로 어떤 사원도 자기 부서 최고 급여보다 클 수 없으므로 이 SQL 의 최종 결과는 공집합이다.",
     "_source": "authored",
     "references": [
       {
@@ -1144,7 +1117,7 @@ export const ROUND_59: QuizQuestion[] = [
       "나, 다"
     ],
     "correctIndex": 2,
-    "explanation": "ROUND(136.2, -1)은 일의 자리에서 반올림되어 140이다. ROUND(-7.532, 2)는 소수 둘째 자리까지 반올림되어 -7.53이다. ROUND(3.561, 0)은 소수 첫째 자리에서 반올림되어 4이므로 (다)는 틀리다.",
+    "explanation": "ROUND(136.2, -1)은 십의 자리로 반올림되어 140이다. ROUND(-7.532, 2)는 소수 둘째 자리까지 반올림되어 -7.53이다. ROUND(3.561, 0)은 소수 첫째 자리에서 반올림되어 4이므로 (다)는 틀리다.",
     "_source": "authored",
     "references": [
       {
@@ -1188,7 +1161,7 @@ export const ROUND_59: QuizQuestion[] = [
     "options": [
       "A",
       "A B",
-      "A B B C",
+      "A B C B",
       "B B C"
     ],
     "correctIndex": 2,
@@ -1400,12 +1373,12 @@ export const ROUND_59: QuizQuestion[] = [
     "title": "NATURAL JOIN과 USING 절에 대한 설명 중 옳은 것은?",
     "options": [
       "NATURAL JOIN은 동일한 컬럼명을 자동으로 조인 조건으로 사용한다.",
-      "USING 절에서는 별칭을 부여한 테이블의 컬럼이라도 USING 의 컬럼에는 별칭을 붙일 수 없다.",
+      "USING 절의 조인 컬럼에는 테이블 별칭을 붙여 참조할 수 있다.",
       "NATURAL JOIN과 USING은 동시에 함께 사용할 수 있다.",
       "NATURAL JOIN 결과에는 두 테이블의 동일 이름 컬럼이 각각 두 번씩 표시된다."
     ],
     "correctIndex": 0,
-    "explanation": "① NATURAL JOIN 은 동일 컬럼명을 자동 조인 조건으로 사용 — 옳음. ② USING 의 컬럼은 별칭을 붙일 수 없음 — 사실이지만, 본 문항은 일반적으로 ① 의 정의를 묻는 케이스이므로 ① 이 가장 대표적 답. ③ NATURAL JOIN 과 USING 은 동시 사용 불가 — 옳지 않음. ④ NATURAL JOIN 은 동일 컬럼을 한 번만 표시함 (USING 과 동일) — 두 번 표시된다는 진술은 옳지 않음.",
+    "explanation": "① NATURAL JOIN 은 동일 컬럼명을 자동 조인 조건으로 사용 — 옳음. ② USING 의 조인 컬럼에는 테이블 별칭을 붙일 수 없으므로 옳지 않음. ③ NATURAL JOIN 과 USING 은 동시 사용 불가 — 옳지 않음. ④ NATURAL JOIN 은 동일 컬럼을 한 번만 표시함 (USING 과 동일) — 두 번 표시된다는 진술은 옳지 않음.",
     "_source": "authored"
   },
   {
@@ -1613,7 +1586,7 @@ export const ROUND_59: QuizQuestion[] = [
       },
       {
         "type": "table",
-        "caption": "DEPT 테이블 ('없는부서' 라는 DNAME 은 존재하지 않음)",
+        "caption": "DEPT 테이블",
         "headers": [
           "DEPTNO",
           "DNAME"
@@ -1635,7 +1608,7 @@ export const ROUND_59: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT *\nFROM   EMP\nWHERE  DEPTNO = (SELECT DEPTNO FROM DEPT WHERE DNAME = '없는부서');\n-- 서브쿼리 결과: NULL\n-- 메인 쿼리: DEPTNO = NULL → UNKNOWN → 공집합"
+        "code": "SELECT *\nFROM   EMP\nWHERE  DEPTNO = (SELECT DEPTNO FROM DEPT WHERE DNAME = '없는부서');"
       }
     ]
   },
@@ -1694,13 +1667,13 @@ export const ROUND_59: QuizQuestion[] = [
     "number": 47,
     "title": "아래 T 테이블 (모든 VAL=100, 6행) 에 대한 SQL 의 M, S, F 컬럼 값으로 가장 적절한 것은?",
     "options": [
-      "M = 누적 (100, 200, ..., 600), S = 100 (모든 행), F = 100 (모든 행)",
+      "M = 100 (모든 행), S = 누적 (100, 200, ..., 600), F = 100 (모든 행)",
       "M = NULL, S = 600 (모든 행), F = NULL",
       "M = 100, 200, 300, 400, 500, 600 (S 와 동일)",
       "M = S = F = 100 (세 컬럼 모두 모든 행에서 100)"
     ],
-    "correctIndex": 3,
-    "explanation": "모든 VAL=100 이므로: M = `MAX(VAL) OVER ()` 는 전체 윈도우 최대값 → 100. S = `SUM(VAL) OVER (ORDER BY ID)` 는 누적합인데 모든 값이 100 이라 (100, 200, 300, …) 가 되지만 본 문제 의도(가장 대표 답)는 \"모든 컬럼이 어떤 윈도우 범위에서도 100 (단순 비교)\". F = `FIRST_VALUE` 도 첫 값 100. ① M·F 표기 잘못, ② NULL 반환 안 됨, ③ M=MAX 인데 누적 식으로 표기됨 — 모두 부정확. ④ 가장 대표적 답.",
+    "correctIndex": 0,
+    "explanation": "M = MAX(VAL) OVER () 는 전체 최대값이라 모든 행에서 100 이다. S = SUM(VAL) OVER (ORDER BY ID) 는 기본 윈도우(처음~현재 행)의 누적합이라 100, 200, ..., 600 이다. F = FIRST_VALUE(VAL) OVER (... ROWS BETWEEN 200 PRECEDING AND 200 FOLLOWING) 는 프레임의 첫 값이 모두 100 이라 모든 행에서 100 이다. 따라서 M 과 F 는 100 으로 고정이고 S 만 누적값인 ①이 옳다.",
     "_source": "authored",
     "references": [
       {
