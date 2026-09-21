@@ -451,7 +451,7 @@ export const ROUND_60: QuizQuestion[] = [
     "round": 60,
     "subject": "2과목",
     "number": 14,
-    "title": "아래 데이터와 SQL의 결과로 올바른 것은?",
+    "title": "아래 데이터와 SQL 실행 결과의 MIN_SAL 컬럼 값(행 순서대로)으로 올바른 것은?",
     "options": [
       "1000 1000 1000",
       "1000 2000 3000",
