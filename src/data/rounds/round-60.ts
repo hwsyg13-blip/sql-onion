@@ -1696,7 +1696,7 @@ export const ROUND_60: QuizQuestion[] = [
       "SELECT 1 + NULL FROM DUAL;",
       "SELECT 'X' FROM DUAL;",
       "SELECT 1 * NULL FROM DUAL;",
-      "SELECT NULL, NULL FROM DUAL;"
+      "SELECT NULL FROM DUAL;"
     ],
     "correctIndex": 1,
     "explanation": "①, ③, ④는 결과에 NULL이 포함되지만 ②만 문자 상수 'X'를 반환한다.",

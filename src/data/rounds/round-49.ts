@@ -900,7 +900,7 @@ export const ROUND_49: QuizQuestion[] = [
     "round": 49,
     "subject": "2과목",
     "number": 26,
-    "title": "아래 결과가 1, 1, 2 가 되는 순위 함수는?",
+    "title": "동순위가 있을 때 결과가 1, 1, 2 가 되는 순위 함수는?",
     "options": [
       "DENSE_RANK",
       "RANK",

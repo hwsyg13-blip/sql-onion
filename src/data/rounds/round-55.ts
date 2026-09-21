@@ -330,7 +330,7 @@ export const ROUND_55: QuizQuestion[] = [
       [
         {
           "type": "table",
-          "caption": "보기 ② 1, 1, 2, 1 (정답 시나리오)",
+          "caption": "보기 ② 1, 1, 2, 1 ",
           "headers": [
             "DEPT",
             "SAL",
@@ -363,7 +363,7 @@ export const ROUND_55: QuizQuestion[] = [
       [
         {
           "type": "table",
-          "caption": "보기 ③ 1, 2, 3, 1 — ROW_NUMBER 적용 시 결과",
+          "caption": "보기 ③ 1, 2, 3, 1 ",
           "headers": [
             "DEPT",
             "SAL",
@@ -396,7 +396,7 @@ export const ROUND_55: QuizQuestion[] = [
       [
         {
           "type": "table",
-          "caption": "보기 ④ 1, 1, 3, 1 — RANK 적용 시 결과",
+          "caption": "보기 ④ 1, 1, 3, 1 ",
           "headers": [
             "DEPT",
             "SAL",
@@ -1466,7 +1466,7 @@ export const ROUND_55: QuizQuestion[] = [
     "round": 55,
     "subject": "2과목",
     "number": 41,
-    "title": "SQL 집합 연산자 UNION ALL 과 의미가 동일한 조합은?",
+    "title": "A, B 에 각각 중복 행이 없다고 가정할 때, SQL 집합 연산자 UNION ALL 과 의미가 동일한 조합은?",
     "options": [
       "(A UNION B) UNION ALL (A INTERSECT B)",
       "(A UNION B) UNION (A UNION B)",

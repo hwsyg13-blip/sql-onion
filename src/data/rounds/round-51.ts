@@ -1126,7 +1126,7 @@ export const ROUND_51: QuizQuestion[] = [
     "round": 51,
     "subject": "2과목",
     "number": 37,
-    "title": "아래 SQL 의 결과로 옳은 것은?",
+    "title": "아래 SQL 의 결과 건수로 옳은 것은?",
     "options": [
       "1건",
       "2건",
@@ -1246,7 +1246,7 @@ export const ROUND_51: QuizQuestion[] = [
     "round": 51,
     "subject": "2과목",
     "number": 40,
-    "title": "아래 SQL 중 NULL 이 포함된 상황에서 결과가 같은 것은?",
+    "title": "아래 SQL 중 NULL 이 포함되지 않은 상황에서 결과가 같은 것은?",
     "options": [
       "NOT EXISTS",
       "NOT IN",

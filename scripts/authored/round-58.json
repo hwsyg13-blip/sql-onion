@@ -340,7 +340,7 @@
     {
       "subject": "2과목",
       "number": 15,
-      "title": "아래 세 JOIN의 결과 행 개수를 모두 합한 값은? 합산 대상 세 JOIN은 다음과 같다. * ㄱ. CROSS JOIN 결과 행 수 * ㄴ. INNER JOIN 결과 행 수 (ID 기준) * ㄷ. FULL OUTER JOIN 결과 행 수 (ID 기준)",
+      "title": "아래 세 JOIN의 결과 행 개수를 모두 합한 값은? 합산 대상 세 JOIN은 다음과 같다. ㄱ. CROSS JOIN 결과 행 수, ㄴ. INNER JOIN 결과 행 수 (ID 기준), ㄷ. FULL OUTER JOIN 결과 행 수 (ID 기준)",
       "options": [
         "17",
         "18",
@@ -1403,7 +1403,7 @@
         },
         {
           "type": "sql",
-          "code": "SELECT *\nFROM   EMP\nSTART WITH EMPNO = 7902\nCONNECT BY (  ?  );\n-- 7902(FORD) → 7566(JONES) → 7839(KING) 순으로 거슬러 올라감"
+          "code": "SELECT *\nFROM   EMP\nSTART WITH EMPNO = 7902\nCONNECT BY (  ?  );"
         }
       ]
     },

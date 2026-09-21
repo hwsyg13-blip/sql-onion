@@ -185,7 +185,7 @@ export const ROUND_53: QuizQuestion[] = [
     "round": 53,
     "subject": "1과목",
     "number": 10,
-    "title": "바커 표기법에서 인스턴스(엔터티) 존재를 표현하는 선의 형태는?",
+    "title": "바커 표기법에서 필수 참여(인스턴스가 반드시 존재해야 함)를 표현하는 선의 형태는?",
     "options": [
       "직선",
       "점선",
@@ -811,7 +811,7 @@ export const ROUND_53: QuizQuestion[] = [
     "options": [
       "10, 12, 15",
       "10, 12",
-      "15 이하의 모든 값",
+      "50 이하의 모든 값",
       "공집합"
     ],
     "correctIndex": 0,

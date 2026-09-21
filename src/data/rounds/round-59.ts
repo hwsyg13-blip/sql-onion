@@ -439,7 +439,7 @@ export const ROUND_59: QuizQuestion[] = [
       },
       {
         "type": "table",
-        "caption": "기대 결과 — A 의 모든 행이 보존되고 B 매칭 부재 시 NULL",
+        "caption": "기대 결과",
         "headers": [
           "A.ID",
           "B.ID",
@@ -856,6 +856,11 @@ export const ROUND_59: QuizQuestion[] = [
           ],
           [
             "C001",
+            "2025-01-08",
+            "3,000"
+          ],
+          [
+            "C001",
             "2025-01-12",
             "5,000"
           ]
@@ -1112,7 +1117,7 @@ export const ROUND_59: QuizQuestion[] = [
       "나, 다"
     ],
     "correctIndex": 2,
-    "explanation": "ROUND(136.2, -1)은 일의 자리에서 반올림되어 140이다. ROUND(-7.532, 2)는 소수 둘째 자리까지 반올림되어 -7.53이다. ROUND(3.561, 0)은 소수 첫째 자리에서 반올림되어 4이므로 (다)는 틀리다.",
+    "explanation": "ROUND(136.2, -1)은 십의 자리로 반올림되어 140이다. ROUND(-7.532, 2)는 소수 둘째 자리까지 반올림되어 -7.53이다. ROUND(3.561, 0)은 소수 첫째 자리에서 반올림되어 4이므로 (다)는 틀리다.",
     "_source": "authored",
     "references": [
       {
