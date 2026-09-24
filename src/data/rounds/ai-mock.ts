@@ -1,5 +1,5 @@
 // Auto-generated from scripts/authored/ai-mock.json
-// AI 생성 모의고사 풀 (기출 변형) · 1363문항
+// AI 생성 모의고사 풀 (기출 변형) · 1407문항
 // ⚠ 직접 편집 금지. ai-mock.json 수정 후 'node scripts/build-quiz-bank.mjs' 재실행.
 import type { QuizQuestion } from '../quizBank';
 
@@ -49159,5 +49159,2171 @@ export const AI_MOCK: QuizQuestion[] = [
     "chapter": "트랜잭션과 Null",
     "_source": "hard-mock",
     "_origId": "hard-032"
+  },
+  {
+    "id": 12163,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 1364,
+    "title": "다음 UPDATE 문을 실행한 결과로 옳은 것은?",
+    "options": [
+      "오류가 발생한다. (단일 행 서브쿼리가 2행을 반환)",
+      "김민재와 같은 팀 선수 1명의 포지션이 FW로 바뀐다.",
+      "김민재라는 이름의 선수 2명의 포지션이 FW로 바뀐다.",
+      "0건이 갱신된다."
+    ],
+    "correctIndex": 0,
+    "explanation": "= 비교에 사용한 서브쿼리는 결과가 1행이어야 한다. 이름이 '김민재'인 선수가 2명(NAP, BAY)이라 서브쿼리가 2행을 반환해 오류(ORA-01427)가 발생한다. 원본처럼 이름이 유일하다면 정상 동작하지만, 동명이인이 있을 수 있으면 = 대신 IN을 사용해야 한다.",
+    "chapter": "DML",
+    "_source": "hard-mock",
+    "_origId": "hard-033",
+    "references": [
+      {
+        "type": "table",
+        "caption": "선수 테이블",
+        "headers": [
+          "선수번호",
+          "이름",
+          "팀ID",
+          "포지션"
+        ],
+        "rows": [
+          [
+            "1",
+            "김민재",
+            "NAP",
+            "DF"
+          ],
+          [
+            "2",
+            "김민재",
+            "BAY",
+            "DF"
+          ],
+          [
+            "3",
+            "이강인",
+            "PSG",
+            "MF"
+          ],
+          [
+            "4",
+            "이재성",
+            "MNZ",
+            "MF"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "UPDATE 선수\nSET    포지션 = 'FW'\nWHERE  팀ID = (SELECT 팀ID FROM 선수 WHERE 이름 = '김민재');"
+      }
+    ]
+  },
+  {
+    "id": 12164,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 1365,
+    "title": "다음 두 SQL의 결과 행 수를 순서대로 나열한 것으로 옳은 것은? (T1.COL1에 NULL이 있다.)",
+    "options": [
+      "1, 1",
+      "2, 2",
+      "1, 2",
+      "2, 1"
+    ],
+    "correctIndex": 3,
+    "explanation": "NOT EXISTS는 T2에 같은 값이 없으면 참이므로 3과 NULL 행이 모두 남아 2건이다. NOT IN은 NULL이 (1, 2)에 속하는지 알 수 없어(UNKNOWN) NULL 행이 제외되므로 3 한 건뿐이다. 이때 서브쿼리(T2)에는 NULL이 없으므로 앞선 NOT IN 함정과는 반대로 '바깥 테이블의 NULL'이 문제가 된다.",
+    "chapter": "서브쿼리",
+    "_source": "hard-mock",
+    "_origId": "hard-034",
+    "references": [
+      {
+        "type": "table",
+        "caption": "T1 테이블",
+        "headers": [
+          "COL1"
+        ],
+        "rows": [
+          [
+            "1"
+          ],
+          [
+            "2"
+          ],
+          [
+            "3"
+          ],
+          [
+            "NULL"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "T2 테이블",
+        "headers": [
+          "COL1"
+        ],
+        "rows": [
+          [
+            "1"
+          ],
+          [
+            "2"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT (SELECT COUNT(*) FROM T1 A\n        WHERE NOT EXISTS (SELECT 1 FROM T2 B WHERE B.COL1 = A.COL1)),\n       (SELECT COUNT(*) FROM T1\n        WHERE COL1 NOT IN (SELECT COL1 FROM T2))\nFROM   DUAL;"
+      }
+    ]
+  },
+  {
+    "id": 12165,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 1366,
+    "title": "다음 SQL의 수행 결과로 옳은 것은? (AVG(COL1 + COL2), AVG(NVL(COL1, 0) + NVL(COL2, 0)) 순서)",
+    "options": [
+      "65, 50",
+      "50, 65",
+      "65, 65",
+      "47.5, 50"
+    ],
+    "correctIndex": 0,
+    "explanation": "COL1 + COL2는 (10,20)→30, (NULL,30)→NULL, (40,NULL)→NULL, (50,50)→100이다. AVG는 NULL 행을 제외한 2건(30, 100) 기준이라 65이다. NVL로 각 컬럼의 NULL을 0으로 바꾸면 30, 30, 40, 100의 4건 기준이라 200 / 4 = 50이다. 산술 연산의 NULL 전파와 집계 함수의 NULL 제외가 함께 작용한다.",
+    "chapter": "함수",
+    "_source": "hard-mock",
+    "_origId": "hard-035",
+    "references": [
+      {
+        "type": "table",
+        "caption": "T 테이블",
+        "headers": [
+          "COL1",
+          "COL2"
+        ],
+        "rows": [
+          [
+            "10",
+            "20"
+          ],
+          [
+            "NULL",
+            "30"
+          ],
+          [
+            "40",
+            "NULL"
+          ],
+          [
+            "50",
+            "50"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT AVG(COL1 + COL2),\n       AVG(NVL(COL1, 0) + NVL(COL2, 0))\nFROM   T;"
+      }
+    ]
+  },
+  {
+    "id": 12166,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 1367,
+    "title": "다음 SQL의 결과에 대한 설명으로 옳은 것은?",
+    "options": [
+      "CEIL과 ROUND의 결과가 같고, FLOOR와 TRUNC의 결과가 같다.",
+      "네 함수의 결과가 모두 다르다.",
+      "CEIL과 TRUNC의 결과가 같고, FLOOR와 ROUND의 결과가 같다.",
+      "FLOOR, TRUNC, ROUND의 결과가 모두 같다."
+    ],
+    "correctIndex": 2,
+    "explanation": "음수에서는 함수마다 방향이 달라진다. CEIL(-22.5)은 큰 쪽인 -22, FLOOR(-22.5)는 작은 쪽인 -23이다. TRUNC는 0 방향으로 버려 -22, ROUND는 0에서 멀어지는 방향으로 반올림해 -23이다. 양수(22.14)에서는 보이지 않던 차이이다.",
+    "chapter": "함수",
+    "_source": "hard-mock",
+    "_origId": "hard-036",
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT CEIL(-22.5), FLOOR(-22.5), TRUNC(-22.5), ROUND(-22.5)\nFROM   DUAL;"
+      }
+    ]
+  },
+  {
+    "id": 12167,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 1368,
+    "title": "다음 SQL의 수행 결과로 옳은 것은? (네 컬럼 순서대로)",
+    "options": [
+      "DAT, AS, BASE, NULL",
+      "DA, ASE, BASE, (빈 문자열)",
+      "DAT, AS, BASE, (빈 문자열)",
+      "오류가 발생한다."
+    ],
+    "correctIndex": 0,
+    "explanation": "Oracle의 SUBSTR에서 시작 위치 0은 1과 같아 SUBSTR('DATABASE', 0, 3)은 'DAT'이다. 음수 시작 위치는 끝에서부터 세므로 -3은 뒤에서 세 번째 문자 'A'부터 두 글자인 'AS'이다. 길이를 생략하면 끝까지라 'BASE'이다. 길이가 0이면 Oracle은 빈 문자열이 아니라 NULL을 반환한다.",
+    "chapter": "함수",
+    "_source": "hard-mock",
+    "_origId": "hard-037",
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT SUBSTR('DATABASE', 0, 3),\n       SUBSTR('DATABASE', -3, 2),\n       SUBSTR('DATABASE', 5),\n       SUBSTR('DATABASE', 3, 0)\nFROM   DUAL;"
+      }
+    ]
+  },
+  {
+    "id": 12168,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 1369,
+    "title": "다음 세 SQL의 결과 행 수를 순서대로 나열한 것으로 옳은 것은? (FULL OUTER JOIN, UNION, UNION ALL)",
+    "options": [
+      "5, 5, 6",
+      "5, 4, 6",
+      "4, 4, 6",
+      "5, 4, 5"
+    ],
+    "correctIndex": 1,
+    "explanation": "조인 키가 NULL인 행끼리는 매칭되지 않아, FULL OUTER JOIN은 매칭 1건 + A 단독 2건(1, NULL) + B 단독 2건(NULL, 4) = 5건이다. LEFT JOIN 3건과 RIGHT JOIN 3건을 합치면 UNION ALL은 6건이다. UNION은 중복을 제거하는데, 집합 연산에서는 NULL끼리 같은 값으로 보므로 (2, 2)와 (NULL, NULL)이 각각 중복으로 제거되어 4건이 된다.",
+    "chapter": "조인",
+    "_source": "hard-mock",
+    "_origId": "hard-038",
+    "references": [
+      {
+        "type": "table",
+        "caption": "A 테이블",
+        "headers": [
+          "ID"
+        ],
+        "rows": [
+          [
+            "1"
+          ],
+          [
+            "2"
+          ],
+          [
+            "NULL"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "B 테이블",
+        "headers": [
+          "ID"
+        ],
+        "rows": [
+          [
+            "2"
+          ],
+          [
+            "NULL"
+          ],
+          [
+            "4"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT (SELECT COUNT(*) FROM A FULL OUTER JOIN B ON A.ID = B.ID),\n       (SELECT COUNT(*) FROM (\n          SELECT A.ID AS X, B.ID AS Y FROM A LEFT JOIN B ON A.ID = B.ID\n          UNION\n          SELECT A.ID, B.ID FROM A RIGHT JOIN B ON A.ID = B.ID)),\n       (SELECT COUNT(*) FROM (\n          SELECT A.ID AS X, B.ID AS Y FROM A LEFT JOIN B ON A.ID = B.ID\n          UNION ALL\n          SELECT A.ID, B.ID FROM A RIGHT JOIN B ON A.ID = B.ID))\nFROM   DUAL;"
+      }
+    ]
+  },
+  {
+    "id": 12169,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 1370,
+    "title": "다음 SQL의 수행 결과로 옳은 것은?",
+    "options": [
+      "2",
+      "3",
+      "5",
+      "6"
+    ],
+    "correctIndex": 0,
+    "explanation": "LIKE '_L%'는 두 번째 글자가 L인 값(ALX, CLARE, BLX)이다. NOT LIKE는 그 반대인 SMITH, JOHN 2건이다. V1이 NULL인 행은 LIKE 비교 결과가 UNKNOWN이므로 NOT LIKE에서도 참이 되지 못하고 제외된다. NULL 행을 '일치하지 않는 행'으로 착각하면 3건으로 잘못 센다.",
+    "chapter": "WHERE",
+    "_source": "hard-mock",
+    "_origId": "hard-039",
+    "references": [
+      {
+        "type": "table",
+        "caption": "SQLD50 테이블",
+        "headers": [
+          "N1",
+          "V1"
+        ],
+        "rows": [
+          [
+            "1",
+            "SMITH"
+          ],
+          [
+            "2",
+            "JOHN"
+          ],
+          [
+            "3",
+            "ALX"
+          ],
+          [
+            "4",
+            "CLARE"
+          ],
+          [
+            "5",
+            "BLX"
+          ],
+          [
+            "6",
+            "NULL"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT COUNT(*)\nFROM   SQLD50\nWHERE  V1 NOT LIKE '_L%';"
+      }
+    ]
+  },
+  {
+    "id": 12170,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 1371,
+    "title": "다음 세 SQL의 결과 행 수를 순서대로 나열한 것으로 옳은 것은? (OR 조건, UNION ALL, UNION)",
+    "options": [
+      "3, 5, 3",
+      "3, 3, 3",
+      "3, 5, 5",
+      "5, 5, 3"
+    ],
+    "correctIndex": 0,
+    "explanation": "OR 조건은 행 단위로 한 번만 평가되어 A, B, D 3건이다. UNION ALL은 두 조건의 결과를 그대로 이어 붙이므로 COL1 IN ('A','B') 2건 + COL2 <> 'c' 3건(A, B, D) = 5건으로 A와 B가 중복된다. UNION은 중복을 제거해 3건이다. 같은 조건도 OR와 UNION ALL은 행 수가 다를 수 있다.",
+    "chapter": "집합 연산자",
+    "_source": "hard-mock",
+    "_origId": "hard-040",
+    "references": [
+      {
+        "type": "table",
+        "caption": "T 테이블",
+        "headers": [
+          "COL1",
+          "COL2"
+        ],
+        "rows": [
+          [
+            "A",
+            "a"
+          ],
+          [
+            "B",
+            "b"
+          ],
+          [
+            "C",
+            "c"
+          ],
+          [
+            "D",
+            "d"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT (SELECT COUNT(*) FROM T WHERE COL1 IN ('A','B') OR COL2 <> 'c'),\n       (SELECT COUNT(*) FROM (SELECT COL1 FROM T WHERE COL1 IN ('A','B')\n                              UNION ALL\n                              SELECT COL1 FROM T WHERE COL2 <> 'c')),\n       (SELECT COUNT(*) FROM (SELECT COL1 FROM T WHERE COL1 IN ('A','B')\n                              UNION\n                              SELECT COL1 FROM T WHERE COL2 <> 'c'))\nFROM   DUAL;"
+      }
+    ]
+  },
+  {
+    "id": 12171,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 1372,
+    "title": "다음 다중 테이블 INSERT를 실행한 후 (TABLE1, TABLE2, TABLE3)의 행 수로 옳은 것은?",
+    "options": [
+      "(2, 0, 1)",
+      "(2, 1, 1)",
+      "(3, 1, 0)",
+      "(1, 1, 1)"
+    ],
+    "correctIndex": 1,
+    "explanation": "INSERT ALL은 조건을 만족하는 모든 WHEN 절에 삽입한다. N1이 2인 행은 TABLE1, 5인 행은 TABLE1과 TABLE2 두 곳에 들어가고, ELSE는 어떤 WHEN도 만족하지 않은 1인 행만 TABLE3에 들어간다. 결과는 (2, 1, 1)이다. INSERT FIRST였다면 첫 번째로 만족한 WHEN에만 삽입해 (2, 0, 1)이 된다.",
+    "chapter": "DML",
+    "_source": "hard-mock",
+    "_origId": "hard-041",
+    "references": [
+      {
+        "type": "table",
+        "caption": "TABLE0 테이블",
+        "headers": [
+          "N1"
+        ],
+        "rows": [
+          [
+            "1"
+          ],
+          [
+            "2"
+          ],
+          [
+            "5"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "INSERT ALL\n   WHEN N1 >= 2 THEN INTO TABLE1 (N1) VALUES (N1)\n   WHEN N1 >= 3 THEN INTO TABLE2 (N1) VALUES (N1)\n   ELSE              INTO TABLE3 (N1) VALUES (N1)\nSELECT N1 FROM TABLE0;"
+      }
+    ]
+  },
+  {
+    "id": 12172,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 1373,
+    "title": "다음 두 계층형 SQL의 결과 행 수를 순서대로 나열한 것으로 옳은 것은? (역방향 전개)",
+    "options": [
+      "2, 2",
+      "1, 1",
+      "2, 1",
+      "3, 1"
+    ],
+    "correctIndex": 2,
+    "explanation": "START WITH C1 = 3에서 CONNECT BY C1 = PRIOR C2는 SCOTT → JOHN → KING 순으로 부모를 따라 올라간다. 첫 번째는 전개를 모두 마친 뒤 WHERE로 JOHN만 걸러 내므로 SCOTT, KING 2건이다. 두 번째는 CONNECT BY 안의 조건 C3 <> 'JOHN'이 전개 과정에서 적용되어 JOHN 노드가 제외되는 순간 그 위쪽 KING까지 이어지지 못해 SCOTT 1건만 남는다.",
+    "chapter": "계층형 질의",
+    "_source": "hard-mock",
+    "_origId": "hard-042",
+    "references": [
+      {
+        "type": "table",
+        "caption": "SQLD45 테이블",
+        "headers": [
+          "C1",
+          "C2",
+          "C3"
+        ],
+        "rows": [
+          [
+            "1",
+            "NULL",
+            "KING"
+          ],
+          [
+            "2",
+            "1",
+            "JOHN"
+          ],
+          [
+            "3",
+            "2",
+            "SCOTT"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "-- 첫 번째\nSELECT C3 FROM SQLD45\nWHERE  C3 <> 'JOHN'\nSTART WITH C1 = 3\nCONNECT BY C1 = PRIOR C2;\n\n-- 두 번째\nSELECT C3 FROM SQLD45\nSTART WITH C1 = 3\nCONNECT BY C1 = PRIOR C2 AND C3 <> 'JOHN';"
+      }
+    ]
+  },
+  {
+    "id": 12173,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 1374,
+    "title": "다음 SQL의 수행 결과(V1 순서대로 CNT)로 옳은 것은?",
+    "options": [
+      "3, 3, 3, 1, 2",
+      "3, 2, 2, 1, 2",
+      "4, 3, 3, 1, 2",
+      "4, 2, 3, 1, 2"
+    ],
+    "correctIndex": 2,
+    "explanation": "RANGE는 정렬 기준 값의 범위로 윈도우를 정한다. A(100)는 50~150 범위의 50, 100, 150, 150 네 행이 들어와 4이고, B와 C(150)는 100~200 범위의 100, 150, 150 세 행이라 둘 다 3이다. D(450)는 자기 자신뿐이라 1, E(50)는 0~100 범위의 50, 100으로 2이다. 값이 같은 행(B, C)이 서로를 항상 포함한다는 점이 ROWS와 다르다.",
+    "chapter": "윈도우 함수",
+    "_source": "hard-mock",
+    "_origId": "hard-043",
+    "references": [
+      {
+        "type": "table",
+        "caption": "T 테이블",
+        "headers": [
+          "V1",
+          "N1"
+        ],
+        "rows": [
+          [
+            "A",
+            "100"
+          ],
+          [
+            "B",
+            "150"
+          ],
+          [
+            "C",
+            "150"
+          ],
+          [
+            "D",
+            "450"
+          ],
+          [
+            "E",
+            "50"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT V1,\n       COUNT(*) OVER (ORDER BY N1\n                      RANGE BETWEEN 50 PRECEDING AND 50 FOLLOWING) AS CNT\nFROM   T\nORDER  BY V1;"
+      }
+    ]
+  },
+  {
+    "id": 12174,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 1375,
+    "title": "T1에 다음 INSERT 문을 순서대로 실행했을 때 오류 없이 저장되는 행의 수는? (오류가 나는 문장은 저장되지 않고 이후 문장은 계속 실행한다.)",
+    "options": [
+      "2",
+      "3",
+      "4",
+      "1"
+    ],
+    "correctIndex": 1,
+    "explanation": "UNIQUE 제약은 NULL을 허용하고 NULL끼리는 중복으로 보지 않으므로 C3가 NULL인 두 행(1, 2번째)이 모두 저장된다. 세 번째 행(C3 = 5)도 저장되지만 네 번째 행은 C3 = 5가 중복이라 오류가 발생한다. 따라서 3건이 저장된다.",
+    "chapter": "DDL",
+    "_source": "hard-mock",
+    "_origId": "hard-044",
+    "references": [
+      {
+        "type": "sql",
+        "code": "CREATE TABLE T1 (\n  C1 NUMBER PRIMARY KEY,\n  C2 NUMBER NOT NULL,\n  C3 NUMBER UNIQUE,\n  C4 NUMBER CHECK (C4 IS NOT NULL)\n);\n\nINSERT INTO T1 VALUES (1, 1, NULL, 1);\nINSERT INTO T1 VALUES (2, 1, NULL, 1);\nINSERT INTO T1 VALUES (3, 1, 5, 1);\nINSERT INTO T1 VALUES (4, 1, 5, 1);"
+      }
+    ]
+  },
+  {
+    "id": 12175,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 1376,
+    "title": "다음과 같이 CTAS로 COPY 테이블을 만들었다. COPY에 (1, 'a', 'A')가 이미 저장되어 있을 때 오류가 발생하는 INSERT 문은?",
+    "options": [
+      "INSERT INTO COPY VALUES (1, 'b', 'B');",
+      "INSERT INTO COPY VALUES (2, NULL, 'A');",
+      "INSERT INTO COPY VALUES (3, 'c', 'Z');",
+      "INSERT INTO COPY VALUES (1, 'a', 'A');"
+    ],
+    "correctIndex": 1,
+    "explanation": "CTAS는 컬럼의 데이터 타입과 NOT NULL 제약만 복사하고 PRIMARY KEY, CHECK 등 나머지 제약은 복사하지 않는다. 그래서 COPY에는 ID 중복(1)과 CHECK 위반('Z')이 허용되고, NAME의 NOT NULL만 유지되어 NULL을 넣는 문장만 오류가 발생한다.",
+    "chapter": "DDL",
+    "_source": "hard-mock",
+    "_origId": "hard-045",
+    "references": [
+      {
+        "type": "sql",
+        "code": "CREATE TABLE ORIG (\n  ID    NUMBER PRIMARY KEY,\n  NAME  VARCHAR2(10) NOT NULL,\n  GRADE CHAR(1) CHECK (GRADE IN ('A', 'B'))\n);\n\nCREATE TABLE COPY AS SELECT * FROM ORIG;"
+      }
+    ]
+  },
+  {
+    "id": 12176,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 1377,
+    "title": "TBL에 1, 2, 3이 커밋되어 있을 때 다음 SQL을 순서대로 실행한 뒤 SELECT COUNT(*) FROM TBL;의 결과로 옳은 것은?",
+    "options": [
+      "3",
+      "1",
+      "0",
+      "오류가 발생한다."
+    ],
+    "correctIndex": 2,
+    "explanation": "DELETE는 DML이라 ROLLBACK으로 되돌려 3건이 복구된다. 그러나 TRUNCATE는 DDL이라 실행 즉시 자동 커밋되어 이후의 ROLLBACK으로 되돌릴 수 없다. 따라서 테이블은 비어 있어 0건이다. DELETE와 TRUNCATE를 같은 삭제로 착각하기 쉽다.",
+    "chapter": "DCL·TCL",
+    "_source": "hard-mock",
+    "_origId": "hard-046",
+    "references": [
+      {
+        "type": "sql",
+        "code": "DELETE FROM TBL;\nROLLBACK;\nTRUNCATE TABLE TBL;\nROLLBACK;\n\nSELECT COUNT(*) FROM TBL;"
+      }
+    ]
+  },
+  {
+    "id": 12177,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 1378,
+    "title": "다음 SQL의 수행 결과로 옳은 것은?",
+    "options": [
+      "1",
+      "3",
+      "2",
+      "4"
+    ],
+    "correctIndex": 2,
+    "explanation": "NOT (V1 = 'A' AND V2 = 'T1')에서 1번 행은 참이라 NOT으로 거짓, 2번 행은 (거짓 AND 참)이라 거짓 → NOT으로 참이다. 3번 행은 (UNKNOWN AND 거짓) = 거짓이므로 NOT으로 참이 되어 포함된다(NULL이 있어도 AND의 한쪽이 거짓이면 전체가 거짓). 4번 행은 (참 AND UNKNOWN) = UNKNOWN이고 NOT UNKNOWN도 UNKNOWN이라 제외된다. 따라서 2, 3번 행 2건이다.",
+    "chapter": "WHERE",
+    "_source": "hard-mock",
+    "_origId": "hard-047",
+    "references": [
+      {
+        "type": "table",
+        "caption": "SQLD49 테이블",
+        "headers": [
+          "N1",
+          "V1",
+          "V2"
+        ],
+        "rows": [
+          [
+            "1",
+            "A",
+            "T1"
+          ],
+          [
+            "2",
+            "B",
+            "T2"
+          ],
+          [
+            "3",
+            "NULL",
+            "T3"
+          ],
+          [
+            "4",
+            "A",
+            "NULL"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT COUNT(*)\nFROM   SQLD49\nWHERE  NOT (V1 = 'A' AND V2 = 'T1');"
+      }
+    ]
+  },
+  {
+    "id": 12178,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "1과목",
+    "number": 1379,
+    "title": "다음 릴레이션에 대한 설명으로 옳은 것은? (주식별자는 주문번호이고, 고객번호 → 고객명 종속이 존재한다.)",
+    "options": [
+      "주식별자가 단일 속성이라 제3정규형까지 모두 만족한다.",
+      "제2정규형은 만족하지만 이행 함수 종속이 있어 제3정규형은 위배한다.",
+      "부분 함수 종속이 있어 제2정규형을 위배한다.",
+      "복합 속성이 있어 제1정규형을 위배한다."
+    ],
+    "correctIndex": 1,
+    "explanation": "주식별자가 단일 속성(주문번호)이면 부분 함수 종속이 있을 수 없어 제2정규형은 자동으로 만족한다. 그러나 주문번호 → 고객번호 → 고객명처럼 일반 속성(고객번호)이 다른 일반 속성(고객명)을 결정하는 이행 함수 종속이 있으므로 제3정규형을 위배한다.",
+    "chapter": "정규화",
+    "_source": "hard-mock",
+    "_origId": "hard-048",
+    "references": [
+      {
+        "type": "table",
+        "caption": "주문 릴레이션",
+        "headers": [
+          "주문번호 (PK)",
+          "고객번호",
+          "고객명",
+          "주문일자"
+        ],
+        "rows": [
+          [
+            "O1",
+            "C1",
+            "김철수",
+            "2026-01-01"
+          ],
+          [
+            "O2",
+            "C1",
+            "김철수",
+            "2026-01-05"
+          ],
+          [
+            "O3",
+            "C2",
+            "이영희",
+            "2026-01-07"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": 12179,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "1과목",
+    "number": 1380,
+    "title": "다음 ERD에 대한 설명으로 옳지 않은 것은?",
+    "options": [
+      "고객은 주문을 최소 1건 이상 가져야 한다.",
+      "주문상세는 반드시 하나의 주문에 속한다.",
+      "하나의 주문은 최소 1건의 주문상세를 가진다.",
+      "상품은 주문상세가 한 건도 없을 수 있다."
+    ],
+    "correctIndex": 0,
+    "explanation": "ERD 표기에서 고객 ||--o{ 주문의 오른쪽 o{는 '0개 이상'이므로 고객은 주문이 없어도 된다(선택 참여). 주문 ||--|{ 주문상세의 |{는 '1개 이상'이라 주문은 주문상세를 최소 1건 가지고, 상품 ||--o{ 주문상세의 o{는 상품에 주문상세가 없을 수 있음을 뜻한다.",
+    "chapter": "관계",
+    "_source": "hard-mock",
+    "_origId": "hard-049",
+    "references": [
+      {
+        "type": "erd",
+        "caption": "고객-주문-주문상세-상품 ERD",
+        "mermaid": "erDiagram\n    고객 ||--o{ 주문 : \"한다\"\n    주문 ||--|{ 주문상세 : \"포함\"\n    상품 ||--o{ 주문상세 : \"판매\""
+      }
+    ]
+  },
+  {
+    "id": 12180,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "1과목",
+    "number": 1381,
+    "title": "다음 [상품] 엔터티의 속성 중 파생 속성과 설계 속성을 순서대로 짝지은 것으로 옳은 것은?",
+    "options": [
+      "할인율, 재고상태코드",
+      "단가, 할인가",
+      "할인가, 재고상태코드",
+      "재고상태코드, 할인가"
+    ],
+    "correctIndex": 2,
+    "explanation": "할인가는 단가와 할인율로 계산되어 나오는 값이라 파생 속성이다. 재고상태코드(1: 정상, 2: 품절 등)는 업무에서 원래 주어진 값이 아니라 관리 편의를 위해 모델러가 만든 코드라 설계 속성이다. 단가·할인율은 업무에서 정해지는 기본 속성이다.",
+    "chapter": "속성",
+    "_source": "hard-mock",
+    "_origId": "hard-050",
+    "references": [
+      {
+        "type": "table",
+        "caption": "상품 엔터티",
+        "headers": [
+          "속성명",
+          "설명"
+        ],
+        "rows": [
+          [
+            "상품명",
+            "업무에서 정해진 상품 이름"
+          ],
+          [
+            "단가",
+            "상품의 정가"
+          ],
+          [
+            "할인율",
+            "이벤트에서 정해진 할인 비율"
+          ],
+          [
+            "할인가",
+            "단가 × (1 - 할인율)로 계산한 판매가"
+          ],
+          [
+            "재고상태코드",
+            "재고 관리를 위해 만든 코드 (1: 정상, 2: 품절)"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": 12181,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 1382,
+    "title": "다음 두 계층형 SQL의 수행 결과로 옳은 것은? (EMP에는 순환 데이터가 저장되어 있다.)",
+    "options": [
+      "두 SQL 모두 3건이 조회된다.",
+      "첫 번째는 무한히 반복 조회된다.",
+      "첫 번째는 오류가 발생하고, 두 번째는 3건이 조회된다.",
+      "두 SQL 모두 오류가 발생한다."
+    ],
+    "correctIndex": 2,
+    "explanation": "사원 1의 상사는 3, 2의 상사는 1, 3의 상사는 2로 순환 구조이다. 순환을 감지하면 CONNECT BY는 오류(ORA-01436: CONNECT BY loop in user data)를 낸다. NOCYCLE 옵션을 주면 순환이 발생하는 지점에서 전개를 멈추고 이미 방문한 1, 2, 3 세 행을 반환한다.",
+    "chapter": "계층형 질의",
+    "_source": "hard-mock",
+    "_origId": "hard-051",
+    "references": [
+      {
+        "type": "table",
+        "caption": "EMP 테이블",
+        "headers": [
+          "EMPNO",
+          "MGR"
+        ],
+        "rows": [
+          [
+            "1",
+            "3"
+          ],
+          [
+            "2",
+            "1"
+          ],
+          [
+            "3",
+            "2"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "-- 첫 번째\nSELECT EMPNO FROM EMP\nSTART WITH EMPNO = 1\nCONNECT BY PRIOR EMPNO = MGR;\n\n-- 두 번째\nSELECT EMPNO FROM EMP\nSTART WITH EMPNO = 1\nCONNECT BY NOCYCLE PRIOR EMPNO = MGR;"
+      }
+    ]
+  },
+  {
+    "id": 12182,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 1383,
+    "title": "다음 SQL의 수행 결과로 옳은 것은? (A, GROUPING(A), SUM(X) 순서로 행마다 출력)",
+    "options": [
+      "a 0 40, NULL 1 20, NULL 1 60",
+      "a 0 40, NULL 0 60",
+      "a 0 40, NULL 0 20",
+      "a 0 40, NULL 0 20, NULL 1 60"
+    ],
+    "correctIndex": 3,
+    "explanation": "ROLLUP의 총계 행은 A가 NULL로 표시되는데, 원본 데이터에도 A가 NULL인 행이 있어 NULL만으로는 구분할 수 없다. GROUPING(A)는 소계·총계 때문에 만들어진 NULL이면 1, 실제 데이터의 NULL이면 0을 반환한다. 데이터 NULL 그룹은 (NULL, 0, 20)이고 총계는 (NULL, 1, 60)이다.",
+    "chapter": "그룹 함수",
+    "_source": "hard-mock",
+    "_origId": "hard-052",
+    "references": [
+      {
+        "type": "table",
+        "caption": "T 테이블",
+        "headers": [
+          "A",
+          "X"
+        ],
+        "rows": [
+          [
+            "a",
+            "10"
+          ],
+          [
+            "NULL",
+            "20"
+          ],
+          [
+            "a",
+            "30"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT A, GROUPING(A) AS G, SUM(X)\nFROM   T\nGROUP  BY ROLLUP(A)\nORDER  BY G, A;"
+      }
+    ]
+  },
+  {
+    "id": 12183,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 1384,
+    "title": "T에 저장된 행이 하나도 조건을 만족하지 않을 때, 다음 세 SQL이 반환하는 행 수를 순서대로 나열한 것으로 옳은 것은?",
+    "options": [
+      "1, 1, 1",
+      "0, 0, 0",
+      "1, 0, 1",
+      "1, 0, 0"
+    ],
+    "correctIndex": 2,
+    "explanation": "GROUP BY가 없는 집계는 입력이 0행이어도 결과가 항상 1행이다(COUNT(*)는 0, MAX는 NULL). GROUP BY가 있으면 그룹이 하나도 만들어지지 않으므로 결과가 0행이다. 그래서 ①은 1행(0), ②는 0행, ③은 1행(NULL)이다.",
+    "chapter": "함수",
+    "_source": "hard-mock",
+    "_origId": "hard-053",
+    "references": [
+      {
+        "type": "sql",
+        "code": "-- ①\nSELECT COUNT(*) FROM T WHERE 1 = 2;\n\n-- ②\nSELECT COUNT(*) FROM T WHERE 1 = 2 GROUP BY DEPT;\n\n-- ③\nSELECT MAX(SAL) FROM T WHERE 1 = 2;"
+      }
+    ]
+  },
+  {
+    "id": 12184,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 1385,
+    "title": "다음 SQL의 수행 결과로 옳은 것은? (VAL, R 순서로 행마다 출력)",
+    "options": [
+      "20 1, 10 2, 10 2, NULL 4",
+      "NULL 1, 20 2, 10 3, 10 4",
+      "20 1, 10 2, 10 2, NULL 3",
+      "NULL 1, 20 2, 10 3, 10 3"
+    ],
+    "correctIndex": 3,
+    "explanation": "Oracle에서 NULL은 정렬에서 가장 큰 값으로 취급되어 내림차순에서는 맨 앞에 온다. 따라서 NULL이 1위, 20이 2위이고, 동순위인 10 두 건은 둘 다 3위(RANK는 동순위 뒤에서 순위를 건너뛴다)이다. ROW_NUMBER였다면 10이 3위, 4위로 나뉜다.",
+    "chapter": "윈도우 함수",
+    "_source": "hard-mock",
+    "_origId": "hard-054",
+    "references": [
+      {
+        "type": "table",
+        "caption": "T 테이블",
+        "headers": [
+          "VAL"
+        ],
+        "rows": [
+          [
+            "10"
+          ],
+          [
+            "NULL"
+          ],
+          [
+            "10"
+          ],
+          [
+            "20"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT VAL, RANK() OVER (ORDER BY VAL DESC) AS R\nFROM   T\nORDER  BY R;"
+      }
+    ]
+  },
+  {
+    "id": 12185,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 1386,
+    "title": "다음 SQL의 수행 결과(ID 순서대로 LV)로 옳은 것은?",
+    "options": [
+      "40, 40, 40, 40",
+      "10, 20, 30, 40",
+      "10, 10, 10, 10",
+      "NULL, 10, 20, 30"
+    ],
+    "correctIndex": 1,
+    "explanation": "ORDER BY만 있고 윈도우 절이 없으면 기본 범위는 처음부터 현재 행까지이다. 그 범위의 마지막 값은 현재 행 자신의 값이라 LAST_VALUE는 각 행의 VAL 그대로 나온다. 전체의 마지막 값(40)을 얻으려면 ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING을 명시해야 한다.",
+    "chapter": "윈도우 함수",
+    "_source": "hard-mock",
+    "_origId": "hard-055",
+    "references": [
+      {
+        "type": "table",
+        "caption": "T 테이블",
+        "headers": [
+          "ID",
+          "VAL"
+        ],
+        "rows": [
+          [
+            "1",
+            "10"
+          ],
+          [
+            "2",
+            "20"
+          ],
+          [
+            "3",
+            "30"
+          ],
+          [
+            "4",
+            "40"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT ID, LAST_VALUE(VAL) OVER (ORDER BY ID) AS LV\nFROM   T\nORDER  BY ID;"
+      }
+    ]
+  },
+  {
+    "id": 12186,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 1387,
+    "title": "다음 두 SQL이 반환하는 직원 이름으로 옳은 것은? (① >= ALL, ② >= ANY 순서)",
+    "options": [
+      "① c, ② a, c, e",
+      "① a, c, e, ② c",
+      "① c, ② c",
+      "① a, b, c, e, ② c"
+    ],
+    "correctIndex": 0,
+    "explanation": "서브쿼리는 부서별 최대 급여 300, 500, 250을 반환한다. >= ALL은 세 값 모두 이상이어야 하므로 최댓값 500 이상인 c 한 명이다. >= ANY는 하나라도 이상이면 되므로 최솟값 250 이상인 a(300), c(500), e(250)이다. 다중 행 서브쿼리에서는 단일 행 비교 연산자 대신 ANY/ALL/IN 등을 사용해야 오류가 나지 않는다.",
+    "chapter": "서브쿼리",
+    "_source": "hard-mock",
+    "_origId": "hard-056",
+    "references": [
+      {
+        "type": "table",
+        "caption": "EMP 테이블",
+        "headers": [
+          "이름",
+          "부서",
+          "급여"
+        ],
+        "rows": [
+          [
+            "a",
+            "10",
+            "300"
+          ],
+          [
+            "b",
+            "10",
+            "200"
+          ],
+          [
+            "c",
+            "20",
+            "500"
+          ],
+          [
+            "d",
+            "20",
+            "100"
+          ],
+          [
+            "e",
+            "30",
+            "250"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "-- ①\nSELECT 이름 FROM EMP\nWHERE  급여 >= ALL (SELECT MAX(급여) FROM EMP GROUP BY 부서);\n\n-- ②\nSELECT 이름 FROM EMP\nWHERE  급여 >= ANY (SELECT MAX(급여) FROM EMP GROUP BY 부서);"
+      }
+    ]
+  },
+  {
+    "id": 12187,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 1388,
+    "title": "다음 SQL의 수행 결과(행 순서대로)로 옳은 것은?",
+    "options": [
+      "B, B, A, S",
+      "A, A, B, S",
+      "A, B, A, S",
+      "B, A, A, S"
+    ],
+    "correctIndex": 2,
+    "explanation": "CASE는 위에서부터 차례로 평가해 처음 참이 되는 WHEN에서 결과가 결정된다. (50, 150)은 COL2 <= 200이 먼저 참이라 A(COL1 <= 100이어도 B가 아님), (100, 250)은 COL2 <= 200이 거짓이고 COL1 <= 100이 참이라 B, (200, 150)은 A, (300, 400)은 둘 다 거짓이라 S이다. WHEN 순서를 바꾸면 결과가 달라진다.",
+    "chapter": "함수",
+    "_source": "hard-mock",
+    "_origId": "hard-057",
+    "references": [
+      {
+        "type": "table",
+        "caption": "T 테이블",
+        "headers": [
+          "COL1",
+          "COL2"
+        ],
+        "rows": [
+          [
+            "50",
+            "150"
+          ],
+          [
+            "100",
+            "250"
+          ],
+          [
+            "200",
+            "150"
+          ],
+          [
+            "300",
+            "400"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT CASE WHEN COL2 <= 200 THEN 'A'\n            WHEN COL1 <= 100 THEN 'B'\n            ELSE 'S'\n       END\nFROM   T;"
+      }
+    ]
+  },
+  {
+    "id": 12188,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 1389,
+    "title": "다음 세 SQL의 결과 행 수를 순서대로 나열한 것으로 옳은 것은? (ROW_NUMBER, RANK, DENSE_RANK 각각 순위 <= 2)",
+    "options": [
+      "2, 2, 3",
+      "2, 3, 3",
+      "2, 2, 2",
+      "3, 3, 3"
+    ],
+    "correctIndex": 0,
+    "explanation": "급여 내림차순에서 A와 B가 150으로 동점이다. ROW_NUMBER는 동점에도 1, 2, 3, 4를 부여해 상위 2건이 2행이다. RANK는 1, 1, 3, 4라 <= 2인 행이 A, B 2건이다. DENSE_RANK는 1, 1, 2, 3으로 순위가 건너뛰지 않아 C(140)까지 포함되어 3건이다. 같은 상위 N이라도 순위 함수에 따라 행 수가 달라진다.",
+    "chapter": "TOP N 쿼리",
+    "_source": "hard-mock",
+    "_origId": "hard-058",
+    "references": [
+      {
+        "type": "table",
+        "caption": "T 테이블",
+        "headers": [
+          "이름",
+          "급여"
+        ],
+        "rows": [
+          [
+            "A",
+            "150"
+          ],
+          [
+            "B",
+            "150"
+          ],
+          [
+            "C",
+            "140"
+          ],
+          [
+            "D",
+            "130"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT (SELECT COUNT(*) FROM (SELECT ROW_NUMBER() OVER (ORDER BY 급여 DESC) AS R FROM T) WHERE R <= 2),\n       (SELECT COUNT(*) FROM (SELECT RANK()       OVER (ORDER BY 급여 DESC) AS R FROM T) WHERE R <= 2),\n       (SELECT COUNT(*) FROM (SELECT DENSE_RANK() OVER (ORDER BY 급여 DESC) AS R FROM T) WHERE R <= 2)\nFROM   DUAL;"
+      }
+    ]
+  },
+  {
+    "id": 12189,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "1과목",
+    "number": 1390,
+    "title": "다음 [사원] 엔터티에서 주식별자로 가장 적절한 속성은?",
+    "options": [
+      "이메일",
+      "휴대폰번호",
+      "이름",
+      "사원번호"
+    ],
+    "correctIndex": 3,
+    "explanation": "주식별자는 유일성, 최소성, 불변성, 존재성(NOT NULL)을 만족해야 한다. 이름은 동명이인이 있어 유일하지 않고, 이메일은 NULL이 허용되어 존재성을 만족하지 못하며, 휴대폰번호는 변경될 수 있어 불변성에 위배된다. 사원번호만 네 가지를 모두 만족한다.",
+    "chapter": "식별자",
+    "_source": "hard-mock",
+    "_origId": "hard-059",
+    "references": [
+      {
+        "type": "table",
+        "caption": "사원 엔터티의 후보 속성",
+        "headers": [
+          "속성",
+          "특징"
+        ],
+        "rows": [
+          [
+            "사원번호",
+            "입사 시 부여되며 퇴사 전까지 바뀌지 않음, 항상 존재"
+          ],
+          [
+            "이름",
+            "동명이인이 있을 수 있음"
+          ],
+          [
+            "이메일",
+            "값은 유일하지만 입력하지 않은 사원이 있음(NULL 허용)"
+          ],
+          [
+            "휴대폰번호",
+            "값은 유일하지만 번호를 변경하는 경우가 있음"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": 12190,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "1과목",
+    "number": 1391,
+    "title": "다음 ERD에 대한 설명으로 옳지 않은 것은?",
+    "options": [
+      "사원증은 여러 직원이 공유할 수 있다.",
+      "직원은 사원증이 없을 수 있다.",
+      "사원증은 직원과 연결되지 않은 채 존재할 수 있다.",
+      "직원 한 명은 사원증을 최대 한 개까지 가진다."
+    ],
+    "correctIndex": 0,
+    "explanation": "|o--o| 표기는 양쪽 모두 '0 또는 1'이다. 따라서 직원은 사원증이 없거나 하나이고, 사원증도 직원이 없거나 한 명이다. 사원증 하나를 여러 직원이 공유하는 것(1:N)은 표기에 맞지 않는다.",
+    "chapter": "관계",
+    "_source": "hard-mock",
+    "_origId": "hard-060",
+    "references": [
+      {
+        "type": "erd",
+        "caption": "직원-사원증 ERD",
+        "mermaid": "erDiagram\n    직원 |o--o| 사원증 : \"소지\""
+      }
+    ]
+  },
+  {
+    "id": 12191,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 1392,
+    "title": "다음 SQL의 수행 결과로 옳은 것은?",
+    "options": [
+      "BRONZE",
+      "SILVER",
+      "공집합",
+      "오류가 발생한다."
+    ],
+    "correctIndex": 2,
+    "explanation": "최고 점수 MAX_SCORE는 49.5이다. BRONZE 구간은 0~49, SILVER 구간은 50~79라 49.5는 어느 구간의 LO ≤ 점수 ≤ HI 조건도 만족하지 못해 결과가 공집합이다. 정수 경계만 정의된 구간 테이블에서 소수 점수가 구간 사이 틈에 빠지는 경우를 조심해야 한다.",
+    "chapter": "조인",
+    "_source": "hard-mock",
+    "_origId": "hard-061",
+    "references": [
+      {
+        "type": "table",
+        "caption": "GRADE_TABLE 테이블",
+        "headers": [
+          "GRADE",
+          "LO",
+          "HI"
+        ],
+        "rows": [
+          [
+            "BRONZE",
+            "0",
+            "49"
+          ],
+          [
+            "SILVER",
+            "50",
+            "79"
+          ],
+          [
+            "GOLD",
+            "80",
+            "100"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "PLAYER 테이블",
+        "headers": [
+          "PLAYER_ID",
+          "SCORE"
+        ],
+        "rows": [
+          [
+            "P01",
+            "30"
+          ],
+          [
+            "P02",
+            "49.5"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT GRADE\nFROM   GRADE_TABLE A,\n       (SELECT MAX(SCORE) AS MAX_SCORE FROM PLAYER) B\nWHERE  A.LO <= B.MAX_SCORE\nAND    A.HI >= B.MAX_SCORE;"
+      }
+    ]
+  },
+  {
+    "id": 12192,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 1393,
+    "title": "다음 두 SQL의 결과 행 수를 순서대로 나열한 것으로 옳은 것은? (괄호가 있으면 괄호 안을 먼저 수행한다.)",
+    "options": [
+      "3, 5",
+      "3, 3",
+      "5, 5",
+      "5, 3"
+    ],
+    "correctIndex": 0,
+    "explanation": "첫 번째는 (A UNION ALL B)를 먼저 수행해 1, 2, 3, 3, 4, 5를 만든 뒤 MINUS로 C(2, 4, 6)를 빼고 중복을 제거하므로 1, 3, 5의 3건이다. 두 번째는 (B MINUS C) = {3, 5}를 먼저 만든 뒤 A와 UNION ALL하므로 1, 2, 3, 3, 5의 5건이다. 집합 연산의 수행 순서(괄호)에 따라 결과가 달라진다.",
+    "chapter": "집합 연산자",
+    "_source": "hard-mock",
+    "_origId": "hard-062",
+    "references": [
+      {
+        "type": "table",
+        "caption": "A 테이블",
+        "headers": [
+          "COL1"
+        ],
+        "rows": [
+          [
+            "1"
+          ],
+          [
+            "2"
+          ],
+          [
+            "3"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "B 테이블",
+        "headers": [
+          "COL1"
+        ],
+        "rows": [
+          [
+            "3"
+          ],
+          [
+            "4"
+          ],
+          [
+            "5"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "C 테이블",
+        "headers": [
+          "COL1"
+        ],
+        "rows": [
+          [
+            "2"
+          ],
+          [
+            "4"
+          ],
+          [
+            "6"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "-- 첫 번째\n(SELECT COL1 FROM A UNION ALL SELECT COL1 FROM B)\nMINUS\nSELECT COL1 FROM C;\n\n-- 두 번째\nSELECT COL1 FROM A\nUNION ALL\n(SELECT COL1 FROM B MINUS SELECT COL1 FROM C);"
+      }
+    ]
+  },
+  {
+    "id": 12193,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 1394,
+    "title": "다음 MERGE 구문을 실행한 결과로 옳은 것은? (B에는 ID 1이 두 건 있다.)",
+    "options": [
+      "A의 ID 1 행이 100으로 두 번 갱신되어 정상 종료한다.",
+      "A의 ID 1 행이 100으로 갱신되고 ID 3이 삽입된다.",
+      "ID 1은 갱신되지 않고 ID 3만 삽입된다.",
+      "오류가 발생한다. (ORA-30926: 원본 테이블에서 안정적인 행 집합을 얻을 수 없음)"
+    ],
+    "correctIndex": 3,
+    "explanation": "MERGE는 대상(A)의 한 행에 원본(B)의 행이 2건 이상 매칭되면 어느 값으로 갱신해야 할지 정할 수 없어 오류(ORA-30926)가 발생한다. 원본에서 조인 키가 유일하도록 미리 중복을 제거하거나 집계해야 한다.",
+    "chapter": "DML",
+    "_source": "hard-mock",
+    "_origId": "hard-063",
+    "references": [
+      {
+        "type": "table",
+        "caption": "A 테이블 (TGT)",
+        "headers": [
+          "ID",
+          "V"
+        ],
+        "rows": [
+          [
+            "1",
+            "0"
+          ],
+          [
+            "2",
+            "0"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "B 테이블 (SRC)",
+        "headers": [
+          "ID",
+          "V"
+        ],
+        "rows": [
+          [
+            "1",
+            "5"
+          ],
+          [
+            "1",
+            "7"
+          ],
+          [
+            "3",
+            "9"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "MERGE INTO A\nUSING B ON (A.ID = B.ID)\nWHEN MATCHED THEN\n  UPDATE SET A.V = B.V\nWHEN NOT MATCHED THEN\n  INSERT (ID, V) VALUES (B.ID, B.V);"
+      }
+    ]
+  },
+  {
+    "id": 12194,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 1395,
+    "title": "다음 SQL의 수행 결과로 옳은 것은?",
+    "options": [
+      "10, 30",
+      "20, 10",
+      "30, 10",
+      "20, 30"
+    ],
+    "correctIndex": 3,
+    "explanation": "KEEP (DENSE_RANK FIRST ORDER BY COL2)은 COL2를 기준으로 첫 번째 순위(가장 작은 값 1)인 행 집합 {10, 20}만 골라 집계하므로 MAX는 20이다. LAST는 마지막 순위(가장 큰 값 2)인 행 집합 {30}만 골라 MIN을 구하므로 30이다.",
+    "chapter": "그룹 함수",
+    "_source": "hard-mock",
+    "_origId": "hard-064",
+    "references": [
+      {
+        "type": "table",
+        "caption": "T 테이블",
+        "headers": [
+          "COL1",
+          "COL2"
+        ],
+        "rows": [
+          [
+            "10",
+            "1"
+          ],
+          [
+            "20",
+            "1"
+          ],
+          [
+            "30",
+            "2"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT MAX(COL1) KEEP (DENSE_RANK FIRST ORDER BY COL2),\n       MIN(COL1) KEEP (DENSE_RANK LAST  ORDER BY COL2)\nFROM   T;"
+      }
+    ]
+  },
+  {
+    "id": 12195,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 1396,
+    "title": "고객 C001에게 주문 2건, C002에게 1건이 있을 때 `DELETE FROM 고객 WHERE 고객ID = 'C001';`을 실행한 결과를 (①, ②, ③) 순서대로 나열한 것으로 옳은 것은?",
+    "options": [
+      "① 주문 1건 남음, ② 오류, ③ 주문 3건 유지",
+      "① 오류, ② 주문 3건 유지, ③ 주문 1건 남음",
+      "① 오류, ② 오류, ③ 주문 3건 유지",
+      "① 오류, ② 주문 1건 남음, ③ 주문 3건 유지(고객ID NULL)"
+    ],
+    "correctIndex": 3,
+    "explanation": "① 옵션 없는 FK는 자식이 있는 부모를 삭제할 수 없어 오류(ORA-02292)가 난다. ② ON DELETE CASCADE는 부모 삭제 시 자식 행(C001의 주문 2건)도 함께 삭제해 C002의 주문 1건만 남는다. ③ ON DELETE SET NULL은 자식 행을 지우지 않고 FK 컬럼만 NULL로 바꾸므로 주문 3건이 유지된다.",
+    "chapter": "DDL",
+    "_source": "hard-mock",
+    "_origId": "hard-065",
+    "references": [
+      {
+        "type": "table",
+        "caption": "고객 테이블",
+        "headers": [
+          "고객ID",
+          "이름"
+        ],
+        "rows": [
+          [
+            "C001",
+            "홍길동"
+          ],
+          [
+            "C002",
+            "이순신"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "주문 테이블",
+        "headers": [
+          "주문ID",
+          "고객ID"
+        ],
+        "rows": [
+          [
+            "501",
+            "C001"
+          ],
+          [
+            "502",
+            "C001"
+          ],
+          [
+            "503",
+            "C002"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "-- ① 주문.고객ID REFERENCES 고객(고객ID)\n-- ② 주문.고객ID REFERENCES 고객(고객ID) ON DELETE CASCADE\n-- ③ 주문.고객ID REFERENCES 고객(고객ID) ON DELETE SET NULL"
+      }
+    ]
+  },
+  {
+    "id": 12196,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 1397,
+    "title": "다음 세 SQL의 결과 값을 순서대로 나열한 것으로 옳은 것은? (리프 노드 수, LEVEL 2인 행 수, 전체 행 수)",
+    "options": [
+      "4, 4, 7",
+      "3, 4, 7",
+      "4, 3, 7",
+      "4, 4, 5"
+    ],
+    "correctIndex": 0,
+    "explanation": "START WITH COL2 IS NULL이면 1과 2가 루트(LEVEL 1)이다. 1의 자식은 3, 4, 2의 자식은 5, 6이므로 LEVEL 2는 4건, 3의 자식 7이 LEVEL 3이다. 자식이 없는 리프 노드(CONNECT_BY_ISLEAF = 1)는 4, 5, 6, 7의 4건이고 전체는 7건이다.",
+    "chapter": "계층형 질의",
+    "_source": "hard-mock",
+    "_origId": "hard-066",
+    "references": [
+      {
+        "type": "table",
+        "caption": "T 테이블",
+        "headers": [
+          "COL1",
+          "COL2"
+        ],
+        "rows": [
+          [
+            "1",
+            "NULL"
+          ],
+          [
+            "2",
+            "NULL"
+          ],
+          [
+            "3",
+            "1"
+          ],
+          [
+            "4",
+            "1"
+          ],
+          [
+            "5",
+            "2"
+          ],
+          [
+            "6",
+            "2"
+          ],
+          [
+            "7",
+            "3"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "-- 리프 노드 수\nSELECT COUNT(*) FROM T\nWHERE  CONNECT_BY_ISLEAF = 1\nSTART WITH COL2 IS NULL\nCONNECT BY PRIOR COL1 = COL2;\n\n-- LEVEL 2인 행 수\nSELECT COUNT(*) FROM T\nWHERE  LEVEL = 2\nSTART WITH COL2 IS NULL\nCONNECT BY PRIOR COL1 = COL2;\n\n-- 전체 행 수\nSELECT COUNT(*) FROM T\nSTART WITH COL2 IS NULL\nCONNECT BY PRIOR COL1 = COL2;"
+      }
+    ]
+  },
+  {
+    "id": 12197,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 1398,
+    "title": "다음 SQL의 수행 결과(ID, L2, N1 순서로 행마다 출력)로 옳은 것은?",
+    "options": [
+      "1 NULL 200, 2 NULL 300, 3 100 400, 4 200 NULL",
+      "1 0 200, 2 100 300, 3 200 400, 4 300 -1",
+      "1 0 200, 2 0 300, 3 100 400, 4 200 -1",
+      "1 0 0, 2 0 100, 3 100 200, 4 200 300"
+    ],
+    "correctIndex": 2,
+    "explanation": "LAG(VAL, 2, 0)은 두 행 앞의 값을, 없으면 기본값 0을 반환한다(1, 2번째 행은 앞에 두 행이 없어 0). LEAD(VAL, 1, -1)은 한 행 뒤의 값을, 없으면 -1을 반환한다(마지막 행). 세 번째 인수를 생략하면 기본값은 NULL이다.",
+    "chapter": "윈도우 함수",
+    "_source": "hard-mock",
+    "_origId": "hard-067",
+    "references": [
+      {
+        "type": "table",
+        "caption": "매출 테이블",
+        "headers": [
+          "ID",
+          "VAL"
+        ],
+        "rows": [
+          [
+            "1",
+            "100"
+          ],
+          [
+            "2",
+            "200"
+          ],
+          [
+            "3",
+            "300"
+          ],
+          [
+            "4",
+            "400"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT ID,\n       LAG(VAL, 2, 0)   OVER (ORDER BY ID) AS L2,\n       LEAD(VAL, 1, -1) OVER (ORDER BY ID) AS N1\nFROM   매출\nORDER  BY ID;"
+      }
+    ]
+  },
+  {
+    "id": 12198,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 1399,
+    "title": "다음 SQL의 결과 행 수를 순서대로 나열한 것으로 옳은 것은? (NATURAL JOIN, JOIN ... USING (SRN_NO))",
+    "options": [
+      "1, 1",
+      "1, 2",
+      "2, 2",
+      "2, 1"
+    ],
+    "correctIndex": 1,
+    "explanation": "NATURAL JOIN은 이름이 같은 모든 컬럼(SRN_NO와 NAME)을 조인 조건으로 사용한다. A와 B에서 SRN_NO와 NAME이 모두 같은 행은 (1, 가) 한 건뿐이다. USING (SRN_NO)는 지정한 컬럼만 조건으로 쓰므로 SRN_NO가 1인 B의 두 행이 모두 매칭되어 2건이다.",
+    "chapter": "조인",
+    "_source": "hard-mock",
+    "_origId": "hard-068",
+    "references": [
+      {
+        "type": "table",
+        "caption": "A 테이블",
+        "headers": [
+          "SRN_NO",
+          "NAME"
+        ],
+        "rows": [
+          [
+            "1",
+            "가"
+          ],
+          [
+            "2",
+            "나"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "B 테이블",
+        "headers": [
+          "SRN_NO",
+          "NAME"
+        ],
+        "rows": [
+          [
+            "1",
+            "가"
+          ],
+          [
+            "1",
+            "다"
+          ],
+          [
+            "3",
+            "라"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT (SELECT COUNT(*) FROM A NATURAL JOIN B),\n       (SELECT COUNT(*) FROM A JOIN B USING (SRN_NO))\nFROM   DUAL;"
+      }
+    ]
+  },
+  {
+    "id": 12199,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "1과목",
+    "number": 1400,
+    "title": "다음 [서비스이용] 엔터티의 주식별자가 (고객번호, 서비스번호)뿐일 때, 고객 C1이 서비스 S1을 해지했다가 나중에 다시 이용하려고 하면 발생하는 문제는?",
+    "options": [
+      "고객 C1의 다른 서비스 이용 이력이 모두 삭제된다.",
+      "서비스 S1이 서비스 엔터티에서 삭제된다.",
+      "문제가 없다. 같은 키의 행을 여러 개 저장할 수 있다.",
+      "이미 같은 키의 행이 있어 재이용 이력을 새 행으로 저장할 수 없다."
+    ],
+    "correctIndex": 3,
+    "explanation": "주식별자가 (고객번호, 서비스번호)이면 같은 고객이 같은 서비스를 다시 이용하는 행이 기존 행과 식별자가 같아 중복이 되어 저장할 수 없다. 이력이 필요하면 이용일자(또는 이용 순번)를 주식별자에 포함해 (고객번호, 서비스번호, 이용일자)로 구성해야 한다.",
+    "chapter": "식별자",
+    "_source": "hard-mock",
+    "_origId": "hard-069",
+    "references": [
+      {
+        "type": "table",
+        "caption": "서비스이용 엔터티",
+        "headers": [
+          "고객번호 (PK, FK)",
+          "서비스번호 (PK, FK)",
+          "이용일자"
+        ],
+        "rows": [
+          [
+            "C1",
+            "S1",
+            "2025-01-10"
+          ],
+          [
+            "C1",
+            "S2",
+            "2025-03-02"
+          ],
+          [
+            "C2",
+            "S1",
+            "2025-04-15"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": 12200,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 1401,
+    "title": "다음 SQL의 수행 결과 행 수로 옳은 것은?",
+    "options": [
+      "3건",
+      "4건",
+      "2건",
+      "6건"
+    ],
+    "correctIndex": 1,
+    "explanation": "인라인 뷰에서 MAX(연봉) OVER (PARTITION BY 부서ID)로 각 사원에게 소속 부서의 최고 연봉을 붙이고, 사원 테이블과 조인하여 본인 연봉이 부서 최고 연봉과 같은 사원만 남긴다. 부서 100은 강감찬 1명, 부서 200은 김유신과 김선달이 4,500으로 동점이라 2명, 부서 300은 변사또 1명이라 모두 4건이다. 동점자가 있으면 부서 수보다 결과 행 수가 많아진다.",
+    "chapter": "윈도우 함수",
+    "_source": "hard-mock",
+    "_origId": "hard-070",
+    "references": [
+      {
+        "type": "table",
+        "caption": "사원 테이블",
+        "headers": [
+          "사원ID",
+          "부서ID",
+          "사원명",
+          "연봉"
+        ],
+        "rows": [
+          [
+            "001",
+            "100",
+            "홍길동",
+            "2500"
+          ],
+          [
+            "002",
+            "100",
+            "강감찬",
+            "3000"
+          ],
+          [
+            "003",
+            "200",
+            "김유신",
+            "4500"
+          ],
+          [
+            "004",
+            "200",
+            "김선달",
+            "4500"
+          ],
+          [
+            "005",
+            "200",
+            "유학생",
+            "2500"
+          ],
+          [
+            "006",
+            "300",
+            "변사또",
+            "3500"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT COUNT(*)\nFROM  (SELECT 사원ID,\n              MAX(연봉) OVER (PARTITION BY 부서ID) AS 최고연봉\n       FROM   사원) X, 사원 Y\nWHERE  X.사원ID = Y.사원ID\nAND    X.최고연봉 = Y.연봉;"
+      }
+    ]
+  },
+  {
+    "id": 12201,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 1402,
+    "title": "다음 SQL의 수행 결과로 옳은 것은?",
+    "options": [
+      "2",
+      "3",
+      "5",
+      "6"
+    ],
+    "correctIndex": 3,
+    "explanation": "CONNECT BY LEVEL <= n을 이용하면 DUAL 한 행에서 n개의 행을 만들어 낼 수 있다. 첫 번째 인라인 뷰는 3행, 두 번째는 2행이며 조인 조건이 없어 카티션 곱으로 3 × 2 = 6행이 된다.",
+    "chapter": "계층형 질의",
+    "_source": "hard-mock",
+    "_origId": "hard-071",
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT COUNT(*)\nFROM  (SELECT LEVEL AS L FROM DUAL CONNECT BY LEVEL <= 3),\n      (SELECT LEVEL AS M FROM DUAL CONNECT BY LEVEL <= 2);"
+      }
+    ]
+  },
+  {
+    "id": 12202,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 1403,
+    "title": "다음 두 SQL의 결과를 순서대로 나열한 것으로 옳은 것은? (ESCAPE '@' 사용, ESCAPE 미사용)",
+    "options": [
+      "3, 3",
+      "5, 5",
+      "3, 5",
+      "5, 3"
+    ],
+    "correctIndex": 2,
+    "explanation": "LIKE에서 _는 임의의 한 글자를 뜻하는 와일드카드이다. ESCAPE '@'를 지정하고 @_로 쓰면 _를 문자 그대로 찾으므로 밑줄이 실제로 들어 있는 A_B, E_, _F 3건이 조회된다. 이스케이프 없이 '%_%'로 쓰면 _가 와일드카드라 한 글자 이상인 모든 문자열 5건이 조회된다.",
+    "chapter": "WHERE",
+    "_source": "hard-mock",
+    "_origId": "hard-072",
+    "references": [
+      {
+        "type": "table",
+        "caption": "T 테이블",
+        "headers": [
+          "COL"
+        ],
+        "rows": [
+          [
+            "A_B"
+          ],
+          [
+            "CD"
+          ],
+          [
+            "E_"
+          ],
+          [
+            "_F"
+          ],
+          [
+            "GH"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT (SELECT COUNT(*) FROM T WHERE COL LIKE '%@_%' ESCAPE '@'),\n       (SELECT COUNT(*) FROM T WHERE COL LIKE '%_%')\nFROM   DUAL;"
+      }
+    ]
+  },
+  {
+    "id": 12203,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 1404,
+    "title": "다음 SQL의 수행 결과(출력 순서대로 사원명)로 옳은 것은?",
+    "options": [
+      "홍길동, 박영희, 김철수, 이순신",
+      "홍길동, 김철수, 박영희, 이순신",
+      "이순신, 김철수, 박영희, 홍길동",
+      "홍길동, 이순신, 박영희, 김철수"
+    ],
+    "correctIndex": 0,
+    "explanation": "ORDER BY 숫자는 SELECT 목록의 위치를 뜻한다. 2는 연봉(두 번째 컬럼)이라 연봉 내림차순이고, 연봉이 같은 김철수와 박영희는 두 번째 정렬 기준인 1(사원명) 내림차순으로 정해진다. '박영희'가 '김철수'보다 사전순으로 뒤라 내림차순에서 먼저 나온다.",
+    "chapter": "ORDER BY",
+    "_source": "hard-mock",
+    "_origId": "hard-073",
+    "references": [
+      {
+        "type": "table",
+        "caption": "EMP 테이블",
+        "headers": [
+          "사원명",
+          "연봉"
+        ],
+        "rows": [
+          [
+            "홍길동",
+            "5000"
+          ],
+          [
+            "김철수",
+            "4500"
+          ],
+          [
+            "박영희",
+            "4500"
+          ],
+          [
+            "이순신",
+            "4000"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT 사원명, 연봉\nFROM   EMP\nORDER  BY 2 DESC, 1 DESC;"
+      }
+    ]
+  },
+  {
+    "id": 12204,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 1405,
+    "title": "다음 SQL의 사원 출력 순서로 옳은 것은? (LEVEL은 3 이하만 전개)",
+    "options": [
+      "A, B, C, D, E, F, G",
+      "A, D, C, B, G, F, E",
+      "A, B, E, F, C, D, G",
+      "A, D, G, C, B, F, E"
+    ],
+    "correctIndex": 3,
+    "explanation": "ORDER SIBLINGS BY는 계층 구조를 유지한 채 같은 부모를 가진 형제끼리만 정렬한다. A가 루트이고 자식은 B, C, D를 사원명 내림차순으로 D, C, B 순서로 놓되, 각 노드 바로 아래에 그 자식을 깊이 우선으로 배치한다. D 아래에 G, B 아래에 F, E(내림차순)가 붙어 A, D, G, C, B, F, E가 된다. 일반 ORDER BY를 쓰면 계층 구조가 깨진다.",
+    "chapter": "계층형 질의",
+    "_source": "hard-mock",
+    "_origId": "hard-074",
+    "references": [
+      {
+        "type": "table",
+        "caption": "EMP 테이블",
+        "headers": [
+          "사원",
+          "매니저"
+        ],
+        "rows": [
+          [
+            "A",
+            "NULL"
+          ],
+          [
+            "B",
+            "A"
+          ],
+          [
+            "C",
+            "A"
+          ],
+          [
+            "D",
+            "A"
+          ],
+          [
+            "E",
+            "B"
+          ],
+          [
+            "F",
+            "B"
+          ],
+          [
+            "G",
+            "D"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT 사원\nFROM   EMP\nSTART WITH 매니저 IS NULL\nCONNECT BY PRIOR 사원 = 매니저 AND LEVEL <= 3\nORDER SIBLINGS BY 사원 DESC;"
+      }
+    ]
+  },
+  {
+    "id": 12205,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 1406,
+    "title": "다음 세 조건으로 조회했을 때 결과 행 수를 순서대로 나열한 것으로 옳은 것은? (HIRE_DT는 시·분·초를 포함한 DATE)",
+    "options": [
+      "2, 2, 3",
+      "2, 2, 2",
+      "2, 3, 3",
+      "3, 2, 3"
+    ],
+    "correctIndex": 0,
+    "explanation": "①은 21일 0시 이상 22일 0시 미만이라 7002, 7003의 2건이다. ②는 시간을 잘라 낸 날짜가 21일인 행이라 같은 2건이다. ③ BETWEEN은 양 끝을 포함하므로 22일 00:00:00 정각인 7004까지 포함해 3건이 된다. DATE 컬럼에서 '하루'를 BETWEEN으로 조회할 때 다음 날 자정이 섞이는 것을 조심해야 한다.",
+    "chapter": "WHERE",
+    "_source": "hard-mock",
+    "_origId": "hard-075",
+    "references": [
+      {
+        "type": "table",
+        "caption": "EMP 테이블 (HIRE_DT: DATE)",
+        "headers": [
+          "EMPNO",
+          "HIRE_DT"
+        ],
+        "rows": [
+          [
+            "7001",
+            "2025-10-20 17:30:00"
+          ],
+          [
+            "7002",
+            "2025-10-21 09:00:00"
+          ],
+          [
+            "7003",
+            "2025-10-21 18:45:00"
+          ],
+          [
+            "7004",
+            "2025-10-22 00:00:00"
+          ],
+          [
+            "7005",
+            "2025-10-22 08:00:00"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "-- ①\nWHERE HIRE_DT >= DATE '2025-10-21' AND HIRE_DT < DATE '2025-10-22'\n\n-- ②\nWHERE TRUNC(HIRE_DT) = DATE '2025-10-21'\n\n-- ③\nWHERE HIRE_DT BETWEEN DATE '2025-10-21' AND DATE '2025-10-22'"
+      }
+    ]
+  },
+  {
+    "id": 12206,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "1과목",
+    "number": 1407,
+    "title": "주문 엔터티에 파생 속성인 총금액(단가 × 수량)을 저장하도록 반정규화했을 때 발생할 수 있는 가장 대표적인 문제는?",
+    "options": [
+      "총금액을 조회하려면 항상 조인이 필요해진다.",
+      "수량이나 단가가 변경되었을 때 총금액을 함께 갱신하지 않으면 데이터가 불일치한다.",
+      "주식별자가 복합 식별자로 바뀌어야 한다.",
+      "엔터티의 인스턴스 수가 반으로 줄어든다."
+    ],
+    "correctIndex": 1,
+    "explanation": "파생 속성을 저장하면 조회 시 계산이 필요 없어 성능은 좋아지지만, 원천 값(단가, 수량)이 바뀔 때 저장된 값을 같이 갱신해야 하는 데이터 일관성(정합성) 문제가 생긴다. 이를 보완하려면 트리거 등으로 함께 갱신하거나, 정규화를 먼저 하고 성능이 문제될 때에만 반정규화를 적용한다.",
+    "chapter": "데이터 모델 개념",
+    "_source": "hard-mock",
+    "_origId": "hard-076",
+    "references": [
+      {
+        "type": "table",
+        "caption": "주문 엔터티",
+        "headers": [
+          "주문번호 (PK)",
+          "단가",
+          "수량",
+          "총금액 (파생)"
+        ],
+        "rows": [
+          [
+            "O1",
+            "1000",
+            "3",
+            "3000"
+          ],
+          [
+            "O2",
+            "2500",
+            "2",
+            "5000"
+          ]
+        ]
+      }
+    ]
   }
 ];
