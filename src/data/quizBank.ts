@@ -1,5 +1,5 @@
 // Auto-generated index. Do not edit by hand — re-run scripts/build-quiz-bank.mjs.
-// 총 800문항, 제45회 ~ 제60회
+// 총 850문항, 제45회 ~ 제61회
 
 /** 문항에 딸린 보기(지문·표·SQL·ERD 도식) 블록 */
 export type QuestionReference =
@@ -34,6 +34,7 @@ export type QuizQuestion = {
   _origId?: string;
 };
 
+import { ROUND_61 } from './rounds/round-61';
 import { ROUND_60 } from './rounds/round-60';
 import { ROUND_59 } from './rounds/round-59';
 import { ROUND_58 } from './rounds/round-58';
@@ -53,6 +54,13 @@ import { ROUND_45 } from './rounds/round-45';
 import { AI_MOCK } from './rounds/ai-mock';
 
 export const EXAM_SETS: { id: string; round: number; label: string; date: string; count: number }[] = [
+  {
+    "id": "round-61",
+    "round": 61,
+    "label": "제61회",
+    "date": "2026년 5월",
+    "count": 50
+  },
   {
     "id": "round-60",
     "round": 60,
@@ -169,6 +177,7 @@ export const EXAM_SETS: { id: string; round: number; label: string; date: string
 
 /** 기출 회차 풀 (45회~60회) — 회차 시험·모의고사 출제 풀 */
 export const QUIZ_BANK_EXAM: QuizQuestion[] = [
+  ...ROUND_61,
   ...ROUND_60,
   ...ROUND_59,
   ...ROUND_58,
