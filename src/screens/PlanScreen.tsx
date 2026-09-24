@@ -3,7 +3,7 @@ import React from 'react';
 import { Btn, Tag, Ic, Mascot, MascotGuide, OnionMark, Progress } from '../components/Atoms';
 import { useProgress, isPlanDayDone } from '../lib/progress';
 import { AdSlot } from '../components/AdSlot';
-import { NEXT_EXAM, daysUntilExam } from '../lib/examDate';
+import { getNextExam, daysUntilExam, planStartDate } from '../lib/examDate';
 
 // 3-week plan v3 — actions 배열 (한 Day 안에 여러 활동 → 각각 따로 버튼).
 // 명세: 사용자 요청 (2026-04-27)
@@ -146,10 +146,11 @@ export const PLAN_DATA = [
     concept:["함정·정리 한 번에","준비물·컨디션"], est:60, final:true},
 ];
 
-// 권장 시작일 = 시험일 - 21일 = 2026-05-11 (월).  Day N 권장 날짜 = 시작일 + (N-1)일.
-const PLAN_START = '2026-05-11';
+// 권장 시작일 = 다음 시험일 - 21일 (src/lib/examDate.ts 에서 자동 계산).  Day N 권장 날짜 = 시작일 + (N-1)일.
 function recommendedDateLabel(dayN: number): string {
-  const start = new Date(PLAN_START + 'T00:00:00+09:00');
+  const startStr = planStartDate();
+  if (!startStr) return '';  // 다음 시험 일정이 아직 없으면 날짜를 표시하지 않는다
+  const start = new Date(startStr + 'T00:00:00+09:00');
   const d = new Date(start);
   d.setDate(d.getDate() + (dayN - 1));
   const m = d.getMonth() + 1, dd = d.getDate();
@@ -197,11 +198,12 @@ export const PlanScreen = ({onNavigate}: any) => {
     try { sessionStorage.setItem('sqlo_plan_week', String(week)); } catch {}
   }, [week]);
 
+  const nextExam = getNextExam();
   const dDay = daysUntilExam();
   const dDayLabel =
-    dDay > 0 ? `시험까지 ${dDay}일`
+    dDay === null ? '다음 시험 일정 발표 예정'
     : dDay === 0 ? '시험 당일'
-    : `시험 ${-dDay}일 지남`;
+    : `시험까지 ${dDay}일`;
 
   const handleAction = (a: any) => {
     const [route, params] = actionRoute(a);
@@ -217,9 +219,11 @@ export const PlanScreen = ({onNavigate}: any) => {
           </div>
           <h1 style={{fontSize:32,fontWeight:800,color:"var(--fg-1)",margin:"6px 0 6px",letterSpacing:"-0.02em"}}>3주 공부계획</h1>
           <div style={{display:"flex",alignItems:"center",gap:10,fontSize:14,color:"var(--fg-3)",flexWrap:"wrap"}}>
-            <span>{NEXT_EXAM.label} : {(() => { const [, m, d] = NEXT_EXAM.date.split('-'); return `${+m}월 ${+d}일`; })()}({NEXT_EXAM.weekday})</span>
-            <span style={{color:'var(--border-strong)'}}>·</span>
-            <strong style={{color:dDay <= 7 ? 'var(--wrong-fg)' : 'var(--point-600)',fontWeight:700,fontFamily:'var(--font-mono)'}}>{dDayLabel}</strong>
+            {nextExam && <>
+              <span>{nextExam.label} : {nextExam.month}월 {nextExam.day}일({nextExam.weekday})</span>
+              <span style={{color:'var(--border-strong)'}}>·</span>
+            </>}
+            <strong style={{color:dDay !== null && dDay <= 7 ? 'var(--wrong-fg)' : 'var(--point-600)',fontWeight:700,fontFamily:'var(--font-mono)'}}>{dDayLabel}</strong>
           </div>
         </div>
       </div>
