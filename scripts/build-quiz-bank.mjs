@@ -16,6 +16,7 @@ const AUTHORED_DIR = 'scripts/authored';
 const AI_MOCK_FILE = 'scripts/authored/ai-mock.json';
 const CBT_MOCK_FILE = 'scripts/authored/cbt-mock.json';
 const SQLD_1140_FILE = 'scripts/authored/sqld-quiz-1140.json';
+const HARD_MOCK_FILE = 'scripts/authored/hard-mock.json';
 const ROUNDS_DIR = 'src/data/rounds';
 const INDEX_FILE = 'src/data/quizBank.ts';
 
@@ -109,6 +110,13 @@ if (existsSync(SQLD_1140_FILE)) {
   sqld1140 = data.authored || [];
 }
 
+// 61회형 심화 세트 (신규 창작 문항) — 기존 문제 ID 가 밀리지 않도록 풀의 맨 뒤에 추가
+let hardMock = [];
+if (existsSync(HARD_MOCK_FILE)) {
+  const data = JSON.parse(readFileSync(HARD_MOCK_FILE, 'utf8'));
+  hardMock = data.authored || [];
+}
+
 const rounds = Object.keys(ROUND_DATES).map(Number).sort((a,b)=>b-a);
 const merged = {};
 for (const r of rounds) {
@@ -195,7 +203,8 @@ export const ${varName}: QuizQuestion[] = ${JSON.stringify(qs, null, 2)};
 const combinedMockRaw = [
   ...aiMock.map(q => ({ ...q, _pool: 'ai-mock' })),
   ...cbtMock.map(q => ({ ...q, _pool: 'cbt-mock' })),
-  ...sqld1140.map(q => ({ ...q, _pool: 'sqld-1140' }))
+  ...sqld1140.map(q => ({ ...q, _pool: 'sqld-1140' })),
+  ...hardMock.map(q => ({ ...q, _pool: 'hard-mock' }))
 ];
 
 // 외부 출처(sqld-1140, cbt-mock) 일부에 options 가 빈 채로 import 된 항목 다수 (이미지로 옵션이 그려진 원본을

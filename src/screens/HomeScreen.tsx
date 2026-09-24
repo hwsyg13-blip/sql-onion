@@ -116,10 +116,12 @@ export const HomeScreen = ({onNavigate, user}) => {
         </div>
         <div className="home-stats-grid" style={{display:"grid",gridTemplateColumns:"repeat(4,1fr)",gap:14}}>
           {(() => {
+            // 다음 시험은 src/lib/examDate.ts 의 일정에서 오늘 날짜 기준으로 자동 선택된다.
             const dDay = daysUntilExam();
-            const dDayValue = dDay > 0 ? `D-${dDay}` : dDay === 0 ? 'D-DAY' : `D+${-dDay}`;
-            const dDayUnit  = dDay > 0 ? '남음' : dDay === 0 ? '오늘' : '경과';
-            const dDayColor = dDay <= 7 ? 'var(--wrong-fg)' : 'var(--point-600)';
+            const noSchedule = dDay === null;
+            const dDayValue = noSchedule ? '미정' : dDay === 0 ? 'D-DAY' : `D-${dDay}`;
+            const dDayUnit  = noSchedule ? '일정 발표 예정' : dDay === 0 ? '오늘' : '남음';
+            const dDayColor = !noSchedule && dDay <= 7 ? 'var(--wrong-fg)' : 'var(--point-600)';
             return [
               {l:"학습 진도", v:String(dayProgress),         u:"/ 21일", c:"var(--point-600)"},
               {l:"푼 문항",   v:String(stats.totalAttempts), u:"문항",   c:"var(--info-fg)"},
