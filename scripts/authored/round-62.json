@@ -1,0 +1,1554 @@
+{
+  "round": 62,
+  "notes": "62회(2026-08-22 시행) 복원 — 1과목: 데이널 62회 1과목 복원 영상(Xd7tYhb6VII) 기준, 2과목: recall.sqld.kr 응시자 복원 초안(비공식) 기반이며 SQL·표 원문은 sqldpass.com(문어CBT) 정리본으로 보완. 모든 SQL 결과는 직접 검산. 10번은 recall/문어CBT는 원자성(②), 데이널 영상은 ③(데이터 범위 규정)이라 영상 기준으로 채택.",
+  "authored": [
+    {
+      "subject": "1과목",
+      "number": 1,
+      "title": "발생 시점에 따른 엔터티 분류에서 성격이 다른 하나는?",
+      "options": [
+        "주문 엔터티 (주문내역과 고객 사이에서 발생)",
+        "사원 엔터티 (인적자원 관리)",
+        "계약 엔터티 (기업 간 계약 내용 기록)",
+        "매출 엔터티 (월별 매출 집계)"
+      ],
+      "correctIndex": 1,
+      "explanation": "발생 시점 기준으로 엔터티는 기본·중심·행위 엔터티로 나뉜다. 사원은 업무에 원래부터 존재하는 기본 엔터티이고, 주문·계약·매출은 기본 엔터티로부터 업무 수행 중 파생되어 발생하는 중심(행위) 엔터티이다."
+    },
+    {
+      "subject": "1과목",
+      "number": 2,
+      "title": "엔터티의 특징으로 옳지 않은 것은?",
+      "options": [
+        "엔터티는 유일한 식별자로 구분되어야 한다.",
+        "엔터티는 최소 한 개 이상의 속성을 가져야 한다.",
+        "주식별자와 일반 속성이 없어도 엔터티는 존재할 수 있다.",
+        "엔터티는 업무 프로세스에서 반드시 사용되어야 한다."
+      ],
+      "correctIndex": 2,
+      "explanation": "엔터티는 유일한 식별자와 최소 하나 이상의 속성을 가져야 하며, 업무 프로세스에서 사용되지 않는 엔터티는 도출할 필요가 없다. ③은 ①과 반대되는 설명이다. 테이블은 PK를 지워도 존재할 수 있지만 여기서는 엔터티를 묻고 있다."
+    },
+    {
+      "subject": "1과목",
+      "number": 3,
+      "title": "속성명 부여 원칙으로 옳지 않은 것은?",
+      "options": [
+        "가급적 서술적 속성명을 사용한다.",
+        "가능한 약어를 사용하지 않는다.",
+        "전체 데이터 모델에서 유일성과 일관성을 확보한다.",
+        "업무에서 실제 사용하는 용어를 사용한다."
+      ],
+      "correctIndex": 0,
+      "explanation": "속성명은 군더더기 없이 간결한 명사형으로 짓는 것이 원칙이므로 서술적(긴 서술형) 이름은 옳지 않다. 약어 사용 최소화, 현업 용어 반영, 모델 전체에서의 유일성 확보는 모두 옳은 원칙이다."
+    },
+    {
+      "subject": "1과목",
+      "number": 4,
+      "title": "다음 ERD의 관계에 대한 설명으로 옳은 것은?",
+      "options": [
+        "고객과 주문은 일대일 관계이며 모두 필수 참여이다.",
+        "일대다 관계이고 고객 쪽은 필수 참여, 주문 쪽은 선택 참여이다.",
+        "일대다 관계이고 고객 쪽은 선택 참여, 주문 쪽은 필수 참여이다.",
+        "고객과 주문은 다대다 관계이며 둘 다 선택적 참여이다."
+      ],
+      "correctIndex": 2,
+      "explanation": "ERD에서는 상대 엔터티 쪽 기호가 나의 참여 조건이다. 고객 입장에서 주문 쪽에는 동그라미(○)가 있어 주문을 한 건도 하지 않을 수 있는 선택 참여이고, 주문 입장에서 고객 쪽에는 수직선(┼)이 있어 반드시 고객이 존재해야 하는 필수 참여이다. 주문 쪽 까마귀발은 1:N을 뜻한다.",
+      "references": [
+        {
+          "type": "ascii",
+          "text": "[고객] ──┼────────○─< [주문]",
+          "caption": "고객 쪽 끝: 수직선(┼) / 주문 쪽 끝: 동그라미(○)와 까마귀발(<)"
+        },
+        {
+          "type": "text",
+          "content": "고객은 주문을 한 건도 가지지 않을 수 있고, 주문은 반드시 하나의 고객이 있어야 한다."
+        }
+      ]
+    },
+    {
+      "subject": "1과목",
+      "number": 5,
+      "title": "다음 중 틀린 것은?",
+      "options": [
+        "관계는 두 엔터티 사이의 연관성을 표현한다.",
+        "식별 관계에서는 부모의 식별자가 자식의 주식별자에 포함된다.",
+        "I/E 표기법에서 식별 관계는 점선, 비식별 관계는 실선으로 표현한다.",
+        "비식별 관계에서는 부모의 식별자가 자식의 일반 속성이 된다."
+      ],
+      "correctIndex": 2,
+      "explanation": "식별 관계는 강한 연결이므로 실선, 비식별 관계는 느슨한 연결이므로 점선으로 표현한다. ③은 반대로 서술했다. (바커 표기법에서는 실선·점선이 식별 여부가 아니라 필수·선택 참여를 나타낸다.)"
+    },
+    {
+      "subject": "1과목",
+      "number": 6,
+      "title": "다음 설명에 해당하는 것은?",
+      "options": [
+        "식별 관계",
+        "비식별 관계",
+        "제약 조건",
+        "상호 배타적 관계"
+      ],
+      "correctIndex": 3,
+      "explanation": "하나의 엔터티가 둘 이상의 부모와 관계를 맺을 때 한 시점에는 오직 하나의 부모와만 관계를 가지며, 하나가 선택되면 다른 쪽 외래키는 NULL이어야 하는 구조는 상호 배타적 관계(Exclusive Relationship)이다. 예를 들어 결제는 개인 회원의 결제이거나 법인 회원의 결제이지 동시에 둘일 수 없다.",
+      "references": [
+        {
+          "type": "text",
+          "content": "하나의 엔터티가 두 개 이상의 부모 엔터티와 관계를 맺을 때, 어느 한 시점에는 오직 하나의 부모와만 관계를 가져야 하는 제약 조건이다. 즉, A 관계를 선택하면 B 관계의 외래키는 NULL이어야 하고, B 관계를 선택하면 A 관계의 외래키는 NULL이어야 한다."
+        }
+      ]
+    },
+    {
+      "subject": "1과목",
+      "number": 7,
+      "title": "다음 부서·사원 ERD에 대한 설명으로 옳지 않은 것은?",
+      "options": [
+        "유일성만 놓고 보면 사원번호 대신 주민등록번호를 주식별자로 사용할 수 있다.",
+        "사원 테이블의 부서번호는 반드시 부서 테이블에 존재하는 값이어야 한다.",
+        "부서번호를 알면 부서위치를 알 수 있다.",
+        "부서는 반드시 한 명 이상의 사원을 가져야 한다."
+      ],
+      "correctIndex": 3,
+      "explanation": "부서 쪽에서 사원 방향에 동그라미(○)가 있으므로 사원이 한 명도 없는 신설 부서도 존재할 수 있는 선택 참여이다. 따라서 ④는 옳지 않다. 사원은 부서에 필수 참여이므로 외래키 부서번호는 부서 테이블에 존재하는 값이어야 한다.",
+      "references": [
+        {
+          "type": "ascii",
+          "text": "[부서] ──┼────────○─< [사원]",
+          "caption": "부서 쪽 끝: 수직선(┼) / 사원 쪽 끝: 동그라미(○)와 까마귀발(<)"
+        },
+        {
+          "type": "text",
+          "content": "부서 테이블 - PK 부서번호, 부서위치\n사원 테이블 - PK 사원번호, FK 부서번호, 주민등록번호"
+        }
+      ]
+    },
+    {
+      "subject": "1과목",
+      "number": 8,
+      "title": "주식별자에 대한 설명으로 옳지 않은 것은?",
+      "options": [
+        "주식별자는 해당 엔터티의 모든 인스턴스를 유일하게 구분할 수 있어야 한다.",
+        "주식별자를 구성하는 속성의 수는 가능한 한 적게 구성한다.",
+        "주식별자는 NULL 값을 가질 수 없다.",
+        "이미 정의된 주식별자라도 업무 변화에 따라 유연하게 변경할 수 있다."
+      ],
+      "correctIndex": 3,
+      "explanation": "주식별자는 유일성·최소성·존재성(NOT NULL)과 함께 불변성을 만족해야 한다. 한 번 정해지면 업무 환경이 바뀌어도 쉽게 변하지 않아야 하며, 값이 변하면 이를 물려받은 자식 엔터티의 키까지 모두 수정해야 하므로 ④는 옳지 않다."
+    },
+    {
+      "subject": "1과목",
+      "number": 9,
+      "title": "다중값 속성을 분리하는 올바른 방법은?",
+      "options": [
+        "같은 컬럼을 여러 개 만들어 나열한다.",
+        "별도의 엔터티로 분리하여 관리한다.",
+        "행의 수를 제한한다.",
+        "구분자로 이어서 하나의 컬럼에 저장한다."
+      ],
+      "correctIndex": 1,
+      "explanation": "한 컬럼에 두 개 이상의 값을 담는 다중값 속성은 제1정규형 위반이다. 다중값을 별도 엔터티로 분리하고 각 값을 개별 행으로 저장해야 한다. 컬럼 반복이나 구분자 사용은 SQL 성능을 떨어뜨리고 원자성을 해친다."
+    },
+    {
+      "subject": "1과목",
+      "number": 10,
+      "title": "데이터 모델링 관점에서 트랜잭션의 역할로 가장 적절한 것은?",
+      "options": [
+        "여러 사용자가 동시에 접근해도 서로 간섭하지 않도록 한다.",
+        "하나의 작업이 전부 반영되거나 전부 취소되도록 한다.",
+        "함께 처리되어야 하는 데이터의 범위를 하나의 단위로 규정하여 무결성이 지켜지도록 한다.",
+        "데이터를 백업하고 장애 시 복구한다."
+      ],
+      "correctIndex": 2,
+      "explanation": "데이터 모델을 설계하는 관점에서 트랜잭션은 출금과 입금처럼 절대 나눠지면 안 되는 하나의 업무 흐름, 즉 함께 처리되어야 하는 데이터의 논리적 범위를 규정하여 무결성을 보장하기 위한 개념이다. ①②④는 고립성·원자성·복구와 같은 물리적(기술적) 특징에 가깝다."
+    },
+    {
+      "subject": "2과목",
+      "number": 11,
+      "title": "다음 중 SQL의 특징으로 옳지 않은 것은?",
+      "options": [
+        "절차적 언어이다.",
+        "구조적 언어이다.",
+        "선언적 언어이다.",
+        "집합적 언어이다."
+      ],
+      "correctIndex": 0,
+      "explanation": "SQL은 어떻게 처리할지가 아니라 무엇을 원하는지를 기술하는 선언적(비절차적)·집합적·구조적 언어이다. 절차적 언어라는 설명은 옳지 않다."
+    },
+    {
+      "subject": "2과목",
+      "number": 12,
+      "title": "다음과 같이 CTAS로 테이블을 복제할 때에 대한 설명으로 옳은 것은?",
+      "options": [
+        "PK는 적용되지 않는다.",
+        "NOT NULL은 적용되지 않는다.",
+        "CHECK 제약은 적용된다.",
+        "DEFAULT 값은 적용된다."
+      ],
+      "correctIndex": 0,
+      "explanation": "CREATE TABLE ... AS SELECT로 복제하면 컬럼의 데이터 타입과 NOT NULL 제약만 복사되고, PK·UNIQUE·FK·CHECK 제약과 기본 인덱스는 복사되지 않는다.",
+      "references": [
+        {
+          "type": "sql",
+          "code": "CREATE TABLE student_backup AS\nSELECT * FROM student;"
+        }
+      ]
+    },
+    {
+      "subject": "2과목",
+      "number": 13,
+      "title": "NULL 값의 처리에 대한 설명으로 가장 적절하지 않은 것은?",
+      "options": [
+        "DISTINCT를 쓰면 중복된 NULL도 하나만 반영한다.",
+        "COUNT(DISTINCT num) 형태로 쓸 수 있다.",
+        "SUM(표현식), COUNT(표현식) 형태로 작성하면 NULL을 연산에서 제외한다.",
+        "GROUP BY의 기준 컬럼에 NULL이 포함되어 있으면 NULL을 제외한 행만 출력된다."
+      ],
+      "correctIndex": 3,
+      "explanation": "GROUP BY는 기준 컬럼이 NULL인 행도 하나의 그룹으로 묶어 결과에 출력한다. NULL이 자동으로 제외되지 않는다."
+    },
+    {
+      "subject": "2과목",
+      "number": 14,
+      "title": "다음 SQL의 수행 결과는?",
+      "options": [
+        "2",
+        "3",
+        "4",
+        "5"
+      ],
+      "correctIndex": 2,
+      "explanation": "REGEXP_COUNT(문자열, 패턴, 시작위치)는 패턴이 일치하는 횟수를 센다. 'abcd'가 4번 반복되므로 'ab'는 4번 나타난다.",
+      "references": [
+        {
+          "type": "sql",
+          "code": "SELECT REGEXP_COUNT('abcdabcdabcdabcd', 'ab', 1)\nFROM   DUAL;"
+        }
+      ]
+    },
+    {
+      "subject": "2과목",
+      "number": 15,
+      "title": "다음 중 NULL이 반환되지 않는 것은?",
+      "options": [
+        "CASE 'AB' WHEN 'CD' THEN 'EF' END",
+        "DECODE('AB', 'CD', 'EF', NULL)",
+        "COALESCE('AB', 'CD', NULL)",
+        "NULLIF('A', 'A')"
+      ],
+      "correctIndex": 2,
+      "explanation": "COALESCE는 인자를 순서대로 평가해 처음으로 NULL이 아닌 값 'AB'를 반환한다. ①은 일치하는 WHEN이 없고 ELSE가 없어 NULL, ②는 매칭 실패 시 기본값 NULL, ④는 두 인자가 같으면 NULL을 반환한다."
+    },
+    {
+      "subject": "2과목",
+      "number": 17,
+      "title": "다음 UPDATE 문으로 급여가 갱신되는 행의 범위는?",
+      "options": [
+        "서울 부서 소속(홍길동, 이몽룡)만 급여 * 1.1",
+        "전체(3명) 급여 * 1.1",
+        "갱신되는 행이 없다.",
+        "단일 행이 반환되지 않아 오류가 발생한다."
+      ],
+      "correctIndex": 1,
+      "explanation": "EXISTS 서브쿼리가 메인 쿼리와 연결(상관)되어 있지 않아 부서 테이블에 지역이 '서울'인 행이 존재하기만 하면 모든 직원 행에 대해 항상 참이 된다. 따라서 3명 모두 갱신된다.",
+      "references": [
+        {
+          "type": "table",
+          "caption": "직원",
+          "headers": [
+            "이름",
+            "부서번호",
+            "급여"
+          ],
+          "rows": [
+            [
+              "홍길동",
+              "10",
+              "3000"
+            ],
+            [
+              "이몽룡",
+              "11",
+              "3500"
+            ],
+            [
+              "이영희",
+              "20",
+              "4000"
+            ]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "부서",
+          "headers": [
+            "부서번호",
+            "지역"
+          ],
+          "rows": [
+            [
+              "10",
+              "서울"
+            ],
+            [
+              "11",
+              "서울"
+            ],
+            [
+              "20",
+              "부산"
+            ]
+          ]
+        },
+        {
+          "type": "sql",
+          "code": "UPDATE 직원 A\nSET    급여 = 급여 * 1.1\nWHERE  EXISTS (SELECT 1\n               FROM   부서 B\n               WHERE  지역 = '서울');"
+        }
+      ]
+    },
+    {
+      "subject": "2과목",
+      "number": 18,
+      "title": "다음 SQL의 수행 결과는?",
+      "options": [
+        "10",
+        "100",
+        "120",
+        "오류가 발생한다."
+      ],
+      "correctIndex": 1,
+      "explanation": "TO_CHAR로 값이 문자열('100', '90', '80')이 되므로 MAX는 문자열 비교로 '90'을 반환한다(첫 글자 9 > 1). 이후 MIN(COL_A)=10과 더할 때 문자 '90'이 숫자 90으로 묵시적 형변환되어 10 + 90 = 100이 된다.",
+      "references": [
+        {
+          "type": "table",
+          "caption": "TBL",
+          "headers": [
+            "COL_A",
+            "COL_B"
+          ],
+          "rows": [
+            [
+              "10",
+              "100"
+            ],
+            [
+              "20",
+              "90"
+            ],
+            [
+              "30",
+              "80"
+            ]
+          ]
+        },
+        {
+          "type": "sql",
+          "code": "SELECT MIN(COL_A) + MAX(TO_CHAR(COL_B))\nFROM   TBL;"
+        }
+      ]
+    },
+    {
+      "subject": "2과목",
+      "number": 19,
+      "title": "다음 중 결과 행 수가 가장 많은 쿼리는?",
+      "options": [
+        "SELECT * FROM 테이블1 A LEFT JOIN 테이블2 B\nON A.ID = B.ID AND B.COUNTRY = 'UK';",
+        "SELECT * FROM 테이블1 A LEFT JOIN 테이블2 B\nON A.ID = B.ID\nWHERE B.COUNTRY = 'UK';",
+        "SELECT * FROM 테이블1 A INNER JOIN 테이블2 B\nON A.ID = B.ID\nWHERE B.COUNTRY = 'UK';",
+        "SELECT * FROM 테이블1 A RIGHT OUTER JOIN 테이블2 B\nON A.ID = B.ID\nWHERE B.COUNTRY = 'UK';"
+      ],
+      "correctIndex": 0,
+      "explanation": "아우터 조인에서 ON 절의 조건은 조인 과정에서 적용되므로 기준 테이블(왼쪽)의 4행이 모두 보존된다(①은 4행). 반면 WHERE 절의 B.COUNTRY = 'UK' 조건은 조인 이후에 적용되어 ②③④는 모두 Shakespeare(200) 1행만 남는다.",
+      "references": [
+        {
+          "type": "table",
+          "caption": "테이블1",
+          "headers": [
+            "ID"
+          ],
+          "rows": [
+            [
+              "100"
+            ],
+            [
+              "200"
+            ],
+            [
+              "100"
+            ],
+            [
+              "300"
+            ]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "테이블2",
+          "headers": [
+            "ID",
+            "NAME",
+            "COUNTRY"
+          ],
+          "rows": [
+            [
+              "100",
+              "Hugo",
+              "FR"
+            ],
+            [
+              "200",
+              "Shakespeare",
+              "UK"
+            ],
+            [
+              "300",
+              "Goethe",
+              "DE"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "subject": "2과목",
+      "number": 20,
+      "title": "다음 테이블에서 NULL을 입력할 수 있는 행으로 가장 적절한 것은? (값은 가, 나, 다, 라 순서)",
+      "options": [
+        "NULL, b, c, d",
+        "a, NULL, c, d",
+        "a, b, NULL, d",
+        "a, b, c, NULL"
+      ],
+      "correctIndex": 2,
+      "explanation": "가는 PRIMARY KEY이므로 NULL이 불가하고, 나는 NOT NULL, 라는 CHECK (라 IS NOT NULL)로 NULL이 불가하다. UNIQUE 제약은 NULL을 허용하므로 다에만 NULL을 입력할 수 있다.",
+      "references": [
+        {
+          "type": "sql",
+          "code": "CREATE TABLE T (\n    가  CHAR(3),\n    나  VARCHAR2(10) NOT NULL,\n    다  VARCHAR2(10) UNIQUE,\n    라  VARCHAR2(10) CHECK (라 IS NOT NULL),\n    PRIMARY KEY (가)\n);"
+        }
+      ]
+    },
+    {
+      "subject": "2과목",
+      "number": 21,
+      "title": "다음 SQL의 수행 결과는?",
+      "options": [
+        "1",
+        "2",
+        "3",
+        "4"
+      ],
+      "correctIndex": 1,
+      "explanation": "NOT BETWEEN 100 AND 200은 값 < 100 또는 값 > 200과 같다. 50과 350 두 건이 조건을 만족하고, NULL은 비교 결과가 UNKNOWN이라 제외된다. 100과 200은 경계값이라 BETWEEN에 포함되므로 NOT BETWEEN에서는 제외된다.",
+      "references": [
+        {
+          "type": "table",
+          "caption": "TBL",
+          "headers": [
+            "값"
+          ],
+          "rows": [
+            [
+              "100"
+            ],
+            [
+              "110"
+            ],
+            [
+              "NULL"
+            ],
+            [
+              "50"
+            ],
+            [
+              "350"
+            ],
+            [
+              "200"
+            ]
+          ]
+        },
+        {
+          "type": "sql",
+          "code": "SELECT COUNT(*)\nFROM   TBL\nWHERE  값 NOT BETWEEN 100 AND 200;"
+        }
+      ]
+    },
+    {
+      "subject": "2과목",
+      "number": 22,
+      "title": "다음 SQL의 수행 결과는?",
+      "options": [
+        "100",
+        "300",
+        "100, 200",
+        "100, 200, 300"
+      ],
+      "correctIndex": 1,
+      "explanation": "사용자와 구매일로 그룹핑하므로 사용자 100은 20260101 그룹(품목 A뿐)과 20260201 그룹(품목 B뿐)으로 나뉘어 각 그룹의 품목 종류가 1개라 탈락한다. 200은 품목 A, B 2종에 합계 1000이지만 MAX가 500이라 MAX < 500 조건에서 탈락한다. 300은 품목 2종, 합계 700, MAX 400으로 모두 만족한다.",
+      "references": [
+        {
+          "type": "table",
+          "caption": "TBL",
+          "headers": [
+            "사용자",
+            "구매항목",
+            "구매일",
+            "구매금액"
+          ],
+          "rows": [
+            [
+              "100",
+              "A",
+              "20260101",
+              "100"
+            ],
+            [
+              "100",
+              "A",
+              "20260101",
+              "200"
+            ],
+            [
+              "100",
+              "B",
+              "20260201",
+              "300"
+            ],
+            [
+              "100",
+              "A",
+              "20260101",
+              "400"
+            ],
+            [
+              "200",
+              "A",
+              "20260101",
+              "200"
+            ],
+            [
+              "200",
+              "A",
+              "20260101",
+              "300"
+            ],
+            [
+              "200",
+              "B",
+              "20260101",
+              "500"
+            ],
+            [
+              "300",
+              "A",
+              "20260101",
+              "300"
+            ],
+            [
+              "300",
+              "B",
+              "20260101",
+              "400"
+            ]
+          ]
+        },
+        {
+          "type": "sql",
+          "code": "SELECT 사용자\nFROM   TBL\nGROUP  BY 사용자, 구매일\nHAVING COUNT(DISTINCT 구매항목) >= 2\n   AND SUM(구매금액) >= 700\n   AND MAX(구매금액) < 500;"
+        }
+      ]
+    },
+    {
+      "subject": "2과목",
+      "number": 23,
+      "title": "다음 MERGE 수행 후 테이블1의 total_pay 합계는?",
+      "options": [
+        "10000",
+        "13000",
+        "16000",
+        "19000"
+      ],
+      "correctIndex": 1,
+      "explanation": "num이 일치하는 1001은 total_pay가 5000+1000=6000, 1002는 3000+0=3000이 되는데 DELETE WHERE total_pay < 4000에 의해 삭제된다. 1003은 테이블2에 없어 4000 그대로이고, 일치하지 않는 1004는 (1004, 3000, 3000)으로 삽입된다. 합계는 6000 + 4000 + 3000 = 13000이다.",
+      "references": [
+        {
+          "type": "table",
+          "caption": "테이블1",
+          "headers": [
+            "num",
+            "salary",
+            "total_pay"
+          ],
+          "rows": [
+            [
+              "1001",
+              "5000",
+              "5000"
+            ],
+            [
+              "1002",
+              "3000",
+              "3000"
+            ],
+            [
+              "1003",
+              "4000",
+              "4000"
+            ]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "테이블2",
+          "headers": [
+            "num",
+            "comm"
+          ],
+          "rows": [
+            [
+              "1001",
+              "1000"
+            ],
+            [
+              "1002",
+              "0"
+            ],
+            [
+              "1004",
+              "1000"
+            ]
+          ]
+        },
+        {
+          "type": "sql",
+          "code": "MERGE INTO 테이블1 T1\nUSING 테이블2 T2\nON (T1.num = T2.num)\nWHEN MATCHED THEN\n    UPDATE SET T1.total_pay = T1.salary + T2.comm\n    DELETE WHERE T1.total_pay < 4000\nWHEN NOT MATCHED THEN\n    INSERT (T1.num, T1.salary, T1.total_pay)\n    VALUES (T2.num, 3000, 3000);"
+        }
+      ]
+    },
+    {
+      "subject": "2과목",
+      "number": 25,
+      "title": "동일한 두 테이블을 ID 컬럼 기준으로 조인할 때, 다음 중 결과 행의 개수가 다른 것은?",
+      "options": [
+        "NATURAL JOIN",
+        "JOIN ... USING (ID)",
+        "CROSS JOIN",
+        "JOIN ... ON (조건 AND 조건)"
+      ],
+      "correctIndex": 2,
+      "explanation": "NATURAL JOIN, USING, ON 조건 조인은 모두 조건에 맞는 행만 연결하지만, CROSS JOIN은 조인 조건 없이 모든 행의 조합(카티션 곱)을 만들어 행 수가 다르다."
+    },
+    {
+      "subject": "2과목",
+      "number": 26,
+      "title": "주문을 하지 않은 고객을 찾으려 할 때, 다음 중 결과가 다른 것은? (주문 테이블의 NULL은 비회원 주문이다.)",
+      "options": [
+        "SELECT * FROM 고객\nWHERE 고객번호 NOT IN (SELECT 고객번호 FROM 주문 WHERE 고객번호 IS NOT NULL);",
+        "SELECT * FROM 고객\nWHERE 고객번호 NOT IN (SELECT NVL(고객번호, 9999) FROM 주문);",
+        "SELECT * FROM 고객 C\nWHERE EXISTS (SELECT 1 FROM 주문 O WHERE O.고객번호 <> C.고객번호);",
+        "SELECT * FROM 고객 C\nWHERE NOT EXISTS (SELECT 1 FROM 주문 O WHERE O.고객번호 = C.고객번호);"
+      ],
+      "correctIndex": 2,
+      "explanation": "①②④는 NULL의 영향을 제거했거나 받지 않아 모두 주문하지 않은 고객(2번)만 조회한다. ③은 '다른 고객번호의 주문이 존재하는' 고객을 찾는 조건이라 모든 고객이 조회되어 결과가 다르다. NOT IN은 서브쿼리에 NULL이 있으면 결과가 나오지 않으므로 반드시 NULL을 걸러야 한다.",
+      "references": [
+        {
+          "type": "table",
+          "caption": "고객",
+          "headers": [
+            "고객번호",
+            "고객명"
+          ],
+          "rows": [
+            [
+              "1",
+              "김철수"
+            ],
+            [
+              "2",
+              "이영희"
+            ],
+            [
+              "3",
+              "박민수"
+            ]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "주문",
+          "headers": [
+            "고객번호"
+          ],
+          "rows": [
+            [
+              "1"
+            ],
+            [
+              "NULL"
+            ],
+            [
+              "NULL"
+            ],
+            [
+              "3"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "subject": "2과목",
+      "number": 28,
+      "title": "다음 SQL의 수행 결과는?",
+      "options": [
+        "JONES",
+        "ALLEN, JONES, MARTIN",
+        "ALLEN, MARTIN",
+        "결과 없음"
+      ],
+      "correctIndex": 2,
+      "explanation": "LIKE '%N'은 N으로 끝나는 문자열만 매칭한다. ALLEN과 MARTIN이 해당하며, JONES는 N이 중간에 포함될 뿐 S로 끝나므로 제외된다.",
+      "references": [
+        {
+          "type": "table",
+          "caption": "EMP",
+          "headers": [
+            "ENAME"
+          ],
+          "rows": [
+            [
+              "SMITH"
+            ],
+            [
+              "ALLEN"
+            ],
+            [
+              "JONES"
+            ],
+            [
+              "MARTIN"
+            ],
+            [
+              "KING"
+            ],
+            [
+              "BLAKE"
+            ]
+          ]
+        },
+        {
+          "type": "sql",
+          "code": "SELECT ENAME\nFROM   EMP\nWHERE  ENAME LIKE '%N';"
+        }
+      ]
+    },
+    {
+      "subject": "2과목",
+      "number": 29,
+      "title": "NULL 값을 0으로 출력하는 함수로 옳은 것은?",
+      "options": [
+        "COALESCE(PRICE, 0)",
+        "NULL(PRICE, 0)",
+        "IFNULL(PRICE, 0)",
+        "NULLIF(0, PRICE)"
+      ],
+      "correctIndex": 0,
+      "explanation": "COALESCE(PRICE, 0)은 PRICE가 NULL이면 0을 반환한다. NULL(PRICE, 0)이라는 함수는 없고, IFNULL은 MySQL 전용이며, NULLIF(a, b)는 두 값이 같으면 NULL을 반환하는 함수이다.",
+      "references": [
+        {
+          "type": "table",
+          "caption": "TABLE",
+          "headers": [
+            "PRICE"
+          ],
+          "rows": [
+            [
+              "1000"
+            ],
+            [
+              "2000"
+            ],
+            [
+              "NULL"
+            ]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "결과",
+          "headers": [
+            "PRICE"
+          ],
+          "rows": [
+            [
+              "1000"
+            ],
+            [
+              "2000"
+            ],
+            [
+              "0"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "subject": "2과목",
+      "number": 30,
+      "title": "다음 중 CROSS JOIN에 대한 설명으로 가장 적절한 것은?",
+      "options": [
+        "한 테이블의 각 행을 다른 테이블의 모든 행과 연결한다.",
+        "두 테이블에서 이름이 같은 컬럼을 기준으로 자동으로 연결한다.",
+        "조인 조건을 만족하는 행만 연결한다.",
+        "조인 조건을 만족하지 않는 쪽의 행도 NULL로 채워 연결한다."
+      ],
+      "correctIndex": 0,
+      "explanation": "CROSS JOIN은 조인 조건 없이 두 테이블의 모든 행의 조합을 만드는 카티션 곱이다. ②는 NATURAL JOIN, ③은 INNER JOIN, ④는 OUTER JOIN에 대한 설명이다."
+    },
+    {
+      "subject": "2과목",
+      "number": 32,
+      "title": "A INTERSECT B의 결과가 1행이고, 테이블 C가 3행(NULL 포함)일 때, (A INTERSECT B) UNION ALL C의 최종 행 수는?",
+      "options": [
+        "2",
+        "3",
+        "4",
+        "5"
+      ],
+      "correctIndex": 2,
+      "explanation": "UNION ALL은 중복과 NULL을 제거하지 않고 두 결과를 그대로 합친다. 따라서 1행 + 3행 = 4행이다."
+    },
+    {
+      "subject": "2과목",
+      "number": 33,
+      "title": "계층형 쿼리에 대한 설명으로 옳지 않은 것은?",
+      "options": [
+        "리프 노드의 레벨은 반드시 1이다.",
+        "START WITH 절로 시작 위치를 지정한다.",
+        "순방향 전개에서는 CONNECT BY 상위부서코드 = PRIOR 부서코드로 작성한다.",
+        "CONNECT BY 절로 자식 노드를 지정한다."
+      ],
+      "correctIndex": 0,
+      "explanation": "LEVEL 1은 루트 노드이고 리프 노드는 트리의 가장 아래 노드로 하위 레벨을 가진다. 따라서 리프 노드의 레벨이 반드시 1이라는 설명은 옳지 않다."
+    },
+    {
+      "subject": "2과목",
+      "number": 34,
+      "title": "다음 표에서 SUM(컬럼1) / COUNT(컬럼1)의 결과는?",
+      "options": [
+        "150",
+        "200",
+        "250",
+        "오류가 발생한다."
+      ],
+      "correctIndex": 1,
+      "explanation": "SUM(컬럼1)은 NULL을 제외한 100 + 200 + 300 = 600이고, COUNT(컬럼1)도 NULL을 제외한 3이므로 600 / 3 = 200이다.",
+      "references": [
+        {
+          "type": "table",
+          "caption": "TBL",
+          "headers": [
+            "컬럼1"
+          ],
+          "rows": [
+            [
+              "100"
+            ],
+            [
+              "200"
+            ],
+            [
+              "NULL"
+            ],
+            [
+              "300"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "subject": "2과목",
+      "number": 35,
+      "title": "다음 SQL을 4건이 저장된 테이블에 실행했을 때 출력 결과는?",
+      "options": [
+        "2개 행이 출력된다 (1, 2번째 행)",
+        "3개 행이 출력된다 (1, 2, 4번째 행)",
+        "전체 행이 출력된다.",
+        "아무 행도 출력되지 않는다."
+      ],
+      "correctIndex": 0,
+      "explanation": "ROWNUM은 조건을 통과한 행에 순차적으로 부여된다. 1, 2번째 행은 ROWNUM이 1, 2로 조건(<> 3)을 통과하지만, 3번째 행은 ROWNUM 3이라 탈락하고 그다음 행도 다시 ROWNUM 3이 부여되어 계속 탈락한다. 따라서 1, 2번째 행만 출력된다.",
+      "references": [
+        {
+          "type": "table",
+          "caption": "TBL",
+          "headers": [
+            "COL"
+          ],
+          "rows": [
+            [
+              "A"
+            ],
+            [
+              "B"
+            ],
+            [
+              "C"
+            ],
+            [
+              "D"
+            ]
+          ]
+        },
+        {
+          "type": "sql",
+          "code": "SELECT *\nFROM   TBL\nWHERE  ROWNUM <> 3;"
+        }
+      ]
+    },
+    {
+      "subject": "2과목",
+      "number": 36,
+      "title": "다음 중 틀린 것은?",
+      "options": [
+        "CUBE는 가능한 모든 조합의 집계를 생성한다.",
+        "GROUPING SETS는 지정한 그룹핑 조합만 집계한다.",
+        "ROLLUP은 계층 구조의 소계와 총계를 생성한다.",
+        "ROLLUP은 인자의 순서가 달라져도 결과가 동일하다."
+      ],
+      "correctIndex": 3,
+      "explanation": "ROLLUP은 인자 순서에 따라 소계의 단위가 달라져 결과가 달라진다. 인자 순서와 무관하게 결과가 같은 것은 모든 조합을 만드는 CUBE이다."
+    },
+    {
+      "subject": "2과목",
+      "number": 37,
+      "title": "뷰(VIEW)에 대한 설명으로 틀린 것은? (Materialized View는 제외)",
+      "options": [
+        "복잡한 쿼리를 뷰로 정의해 두기 때문에 다른 복잡한 조회의 성능이 좋아진다.",
+        "테이블에 변경 사항이 있어도 뷰를 사용하는 응용 프로그램은 수정하지 않아도 되는 경우가 있다.",
+        "뷰는 물리적 저장 공간을 사용하지 않는다.",
+        "선택적으로 일부 데이터만 뷰로 노출할 수 있다."
+      ],
+      "correctIndex": 0,
+      "explanation": "일반 뷰는 쿼리 정의만 저장하는 가상 테이블이라 조회할 때마다 정의된 쿼리가 실행되므로 성능을 개선하지 않는다. 뷰는 독립성·편리성·보안(일부 데이터만 노출) 장점이 있다."
+    },
+    {
+      "subject": "2과목",
+      "number": 38,
+      "title": "다음 두 테이블에 각각 COUNT(DISTINCT 칼럼)을 적용한 결과는? (테이블1, 테이블2 순서)",
+      "options": [
+        "2, 3",
+        "3, 4",
+        "3, 3",
+        "6, 6"
+      ],
+      "correctIndex": 0,
+      "explanation": "COUNT(DISTINCT 칼럼)은 NULL을 제외하고 서로 다른 값의 개수를 센다. 테이블1은 A, B 2종, 테이블2는 1, 2, 3 3종이므로 2, 3이다.",
+      "references": [
+        {
+          "type": "table",
+          "caption": "테이블1",
+          "headers": [
+            "칼럼"
+          ],
+          "rows": [
+            [
+              "A"
+            ],
+            [
+              "A"
+            ],
+            [
+              "A"
+            ],
+            [
+              "B"
+            ],
+            [
+              "B"
+            ],
+            [
+              "NULL"
+            ],
+            [
+              "NULL"
+            ]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "테이블2",
+          "headers": [
+            "칼럼"
+          ],
+          "rows": [
+            [
+              "1"
+            ],
+            [
+              "1"
+            ],
+            [
+              "2"
+            ],
+            [
+              "2"
+            ],
+            [
+              "2"
+            ],
+            [
+              "3"
+            ],
+            [
+              "NULL"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "subject": "2과목",
+      "number": 39,
+      "title": "집합 연산자 사용에 대한 설명으로 옳은 것은?",
+      "options": [
+        "첫 번째 SELECT에 정의된 칼럼을 ORDER BY에 사용하면 오류가 난다.",
+        "두 번째 SELECT에서 정의된 컬럼명으로 ORDER BY 하면 오류가 난다.",
+        "ORDER BY 절에는 컬럼명과 별칭만 사용할 수 있으며 숫자(위치)를 쓰면 오류가 난다.",
+        "칼럼 간 데이터 타입이 서로 호환되더라도 타입이 다르면 오류가 발생한다."
+      ],
+      "correctIndex": 1,
+      "explanation": "집합 연산자에서 ORDER BY는 마지막에 한 번만 쓰며, 결과 컬럼명은 첫 번째 SELECT의 컬럼명을 따르므로 두 번째 SELECT에서 정의된 컬럼명은 사용할 수 없다. 숫자(위치)로 정렬하는 것도 가능하고, 타입이 서로 호환되면 오류 없이 처리된다."
+    },
+    {
+      "subject": "2과목",
+      "number": 40,
+      "title": "다음 중 문법이 틀린 것은?",
+      "options": [
+        "INSERT INTO ... VALUES",
+        "UPDATE ... SET",
+        "INSERT ... AS SELECT",
+        "CREATE TABLE ... AS SELECT"
+      ],
+      "correctIndex": 2,
+      "explanation": "서브쿼리로 데이터를 삽입할 때는 INSERT INTO 테이블 SELECT ... 로 작성하며 AS를 쓰지 않는다. AS SELECT는 CREATE TABLE ... AS SELECT(CTAS)에서 사용한다."
+    },
+    {
+      "subject": "2과목",
+      "number": 41,
+      "title": "다음 SQL의 결과가 아래와 같을 때 괄호 (ㄱ)에 들어갈 것은?",
+      "options": [
+        "COLA",
+        "COLB",
+        "COLC",
+        "COLA, COLB"
+      ],
+      "correctIndex": 1,
+      "explanation": "USING 절에 지정한 컬럼은 결과의 맨 앞에 한 번만 나오고, 이어서 TBL1의 나머지 컬럼, TBL2의 나머지 컬럼 순으로 출력된다. 결과 컬럼 순서가 COLB, COLA, COLA, COLC이므로 USING (COLB)이다.",
+      "references": [
+        {
+          "type": "table",
+          "caption": "TBL1",
+          "headers": [
+            "COLA",
+            "COLB"
+          ],
+          "rows": [
+            [
+              "KOREAN",
+              "KIM"
+            ],
+            [
+              "MATH",
+              "LEE"
+            ],
+            [
+              "ENGLISH",
+              "PARK"
+            ]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "TBL2",
+          "headers": [
+            "COLA",
+            "COLB",
+            "COLC"
+          ],
+          "rows": [
+            [
+              "KOREAN",
+              "KIM",
+              "17"
+            ],
+            [
+              "KOREAN",
+              "KIM",
+              "25"
+            ],
+            [
+              "ENGLISH",
+              "PARK",
+              "32"
+            ]
+          ]
+        },
+        {
+          "type": "sql",
+          "code": "SELECT *\nFROM   TBL1 RIGHT OUTER JOIN TBL2 USING ( ㄱ )\nWHERE  COLC >= 20;"
+        },
+        {
+          "type": "table",
+          "caption": "결과",
+          "headers": [
+            "COLB",
+            "COLA",
+            "COLA",
+            "COLC"
+          ],
+          "rows": [
+            [
+              "KIM",
+              "KOREAN",
+              "KOREAN",
+              "25"
+            ],
+            [
+              "PARK",
+              "ENGLISH",
+              "ENGLISH",
+              "32"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "subject": "2과목",
+      "number": 42,
+      "title": "다음 INSERT FIRST 수행 후 t1, t2, t3의 행 수는? (t1, t2, t3 순서)",
+      "options": [
+        "2, 0, 0",
+        "2, 0, 1",
+        "2, 1, 0",
+        "2, 1, 1"
+      ],
+      "correctIndex": 1,
+      "explanation": "INSERT FIRST는 각 행에 대해 처음으로 만족하는 WHEN 절에만 삽입한다. c1이 2와 5인 행은 첫 번째 조건(>= 2)을 만족해 t1에 들어가고(두 번째 조건은 평가되지 않음), 1은 어떤 WHEN도 만족하지 않아 ELSE의 t3에 들어간다. 따라서 2, 0, 1이다.",
+      "references": [
+        {
+          "type": "table",
+          "caption": "ts",
+          "headers": [
+            "c1"
+          ],
+          "rows": [
+            [
+              "1"
+            ],
+            [
+              "2"
+            ],
+            [
+              "5"
+            ]
+          ]
+        },
+        {
+          "type": "sql",
+          "code": "INSERT FIRST\n  WHEN c1 >= 2 THEN INTO t1\n  WHEN c1 >= 3 THEN INTO t2\n  ELSE INTO t3\nSELECT c1 FROM ts;"
+        }
+      ]
+    },
+    {
+      "subject": "2과목",
+      "number": 43,
+      "title": "다음 SQL의 결과로 옳은 것은?",
+      "options": [
+        "공집합",
+        "40, 'D' 한 행",
+        "NULL, 'A' 한 행",
+        "30, 40 두 행"
+      ],
+      "correctIndex": 1,
+      "explanation": "조건은 NOT (COL1 = 1 OR COL2 IS NULL)이다. (NULL, 'A')는 COL1 = 1이 UNKNOWN이고 COL2 IS NULL이 거짓이라 전체가 UNKNOWN이 되어 제외된다. (1, NULL)과 (30, NULL)은 COL2 IS NULL이 참이라 제외된다. (40, 'D')만 조건을 만족한다.",
+      "references": [
+        {
+          "type": "table",
+          "caption": "T",
+          "headers": [
+            "COL1",
+            "COL2"
+          ],
+          "rows": [
+            [
+              "NULL",
+              "'A'"
+            ],
+            [
+              "1",
+              "NULL"
+            ],
+            [
+              "30",
+              "NULL"
+            ],
+            [
+              "40",
+              "'D'"
+            ]
+          ]
+        },
+        {
+          "type": "sql",
+          "code": "SELECT *\nFROM   T\nWHERE  NOT ( COL1 = 1 OR COL2 IS NULL );"
+        }
+      ]
+    },
+    {
+      "subject": "2과목",
+      "number": 45,
+      "title": "다음 UNPIVOT 구문에서 괄호 (ㄱ)에 들어갈 것은?",
+      "options": [
+        "40, 30, 20",
+        "AMOUNT_3, AMOUNT_2, AMOUNT_1",
+        "AMOUNT, AMOUNT, AMOUNT",
+        "ID, 구분, AMOUNT"
+      ],
+      "correctIndex": 1,
+      "explanation": "UNPIVOT의 IN 절에는 행으로 풀어낼 원본 컬럼명(AMOUNT_3, AMOUNT_2, AMOUNT_1)을 나열한다. 이 컬럼명이 구분 컬럼의 값이 되고, 컬럼 값이 AMOUNT에 담긴다.",
+      "references": [
+        {
+          "type": "table",
+          "caption": "SALES",
+          "headers": [
+            "ID",
+            "AMOUNT_3",
+            "AMOUNT_2",
+            "AMOUNT_1"
+          ],
+          "rows": [
+            [
+              "100",
+              "20",
+              "30",
+              "40"
+            ],
+            [
+              "200",
+              "50",
+              "60",
+              "45"
+            ]
+          ]
+        },
+        {
+          "type": "sql",
+          "code": "SELECT ID, 구분, AMOUNT\nFROM   SALES\nUNPIVOT ( AMOUNT FOR 구분 IN ( ㄱ ) )\nWHERE  AMOUNT <= 40;"
+        }
+      ]
+    },
+    {
+      "subject": "2과목",
+      "number": 46,
+      "title": "다음 SQL에 대한 설명으로 가장 적절한 것은?",
+      "options": [
+        "아래 쿼리와 결과가 동일하다.\nSELECT 사용자명, 로그인횟수\nFROM (SELECT 사용자명, COUNT(*) AS 로그인횟수\n      FROM 로그인기록\n      GROUP BY 사용자명)\nWHERE 사용자명 = '이순신' AND 로그인횟수 > 10;",
+        "SELECT 절에 '이순신' 같은 문자 리터럴을 넣으면 오류가 난다.",
+        "HAVING COUNT(*) > 10 대신 HAVING 로그인횟수 > 10으로 써도 된다.",
+        "HAVING 절을 WHERE 절로 옮겨도 결과가 같다."
+      ],
+      "correctIndex": 0,
+      "explanation": "인라인 뷰에서 먼저 그룹핑하고 별칭 로그인횟수를 만든 뒤 바깥 WHERE로 필터링하면 원 쿼리와 결과가 같다. ③ HAVING에서는 SELECT 절 별칭을 쓸 수 없고, ④ WHERE 절에는 집계 함수를 쓸 수 없어 옮길 수 없다.",
+      "references": [
+        {
+          "type": "sql",
+          "code": "SELECT 사용자명, COUNT(*) AS 로그인횟수\nFROM   로그인기록\nGROUP  BY 사용자명\nHAVING 사용자명 = '이순신' AND COUNT(*) > 10;"
+        }
+      ]
+    },
+    {
+      "subject": "2과목",
+      "number": 47,
+      "title": "다음 SQL의 수행 결과는?",
+      "options": [
+        "4",
+        "6",
+        "10",
+        "결과 없음"
+      ],
+      "correctIndex": 2,
+      "explanation": "A.COL1 <= B.COL1을 만족하는 (A, B) 조합의 개수를 센다. A=1은 B가 1, 2, 3, 4로 4건, A=2는 3건, A=3은 2건, A=4는 1건이므로 4 + 3 + 2 + 1 = 10건이다.",
+      "references": [
+        {
+          "type": "table",
+          "caption": "TAB",
+          "headers": [
+            "COL1"
+          ],
+          "rows": [
+            [
+              "1"
+            ],
+            [
+              "2"
+            ],
+            [
+              "3"
+            ],
+            [
+              "4"
+            ]
+          ]
+        },
+        {
+          "type": "sql",
+          "code": "SELECT COUNT(*)\nFROM   TAB A, TAB B\nWHERE  A.COL1 <= B.COL1;"
+        }
+      ]
+    },
+    {
+      "subject": "2과목",
+      "number": 48,
+      "title": "TAB1에 3건이 저장된 상태에서 다음 SQL을 순서대로 수행한 뒤 SELECT COUNT(*) FROM TAB1;의 결과는?",
+      "options": [
+        "4",
+        "5",
+        "6",
+        "7"
+      ],
+      "correctIndex": 2,
+      "explanation": "COMMIT이 수행되면 그 이전에 지정된 SAVEPOINT는 모두 사라진다. 따라서 ROLLBACK TO S1은 오류가 발생하고 아무 것도 취소되지 않아 마지막 INSERT까지 모두 반영된다. 3 + 1 + 1 + 1 = 6건이다.",
+      "references": [
+        {
+          "type": "sql",
+          "code": "INSERT INTO TAB1 VALUES (...);   -- 1건 추가\nSAVEPOINT S1;\nINSERT INTO TAB1 VALUES (...);   -- 1건 추가\nCOMMIT;\nINSERT INTO TAB1 VALUES (...);   -- 1건 추가\nROLLBACK TO S1;"
+        }
+      ]
+    },
+    {
+      "subject": "2과목",
+      "number": 50,
+      "title": "다음 권한 부여·회수 내역에 대해 옳은 것은?",
+      "options": [
+        "DROP ROLE STAFF를 하면 철수의 SELECT 권한이 사라진다.",
+        "철수는 STAFF 권한이 없어서 SELECT를 할 수 없다.",
+        "영희는 DELETE 권한을 사용할 수 있다.",
+        "철수의 INSERT 권한을 박탈하려면 STAFF와 MGR 둘 다에서 박탈해야 한다."
+      ],
+      "correctIndex": 0,
+      "explanation": "STAFF 롤은 MGR 롤에 부여되고 MGR 롤은 철수에게 부여되었으므로 철수는 MGR을 통해 STAFF의 권한(SELECT 등)을 갖는다. STAFF 롤을 삭제하면 MGR을 거쳐 받은 철수의 SELECT 권한도 함께 사라진다. 영희는 STAFF만 받았으므로 DELETE 권한이 없고, INSERT 권한은 STAFF에서 회수하면 된다.",
+      "references": [
+        {
+          "type": "text",
+          "content": "SELECT, INSERT 권한 → STAFF 롤에 부여\nDELETE, UPDATE 권한 → MGR 롤에 부여\nSTAFF 롤 → MGR 롤에 부여\nMGR 롤 → 철수에게 부여\nSTAFF 롤 → 영희에게 부여\nREVOKE INSERT FROM STAFF"
+        }
+      ]
+    },
+    {
+      "subject": "2과목",
+      "number": 16,
+      "title": "급여 값이 모두 서로 다른 EMP 테이블에서 급여가 가장 적은 직원 5명을 조회하려고 한다. 다음 중 실행 순서 때문에 의도와 다른 결과를 낼 수 있는 SQL은?",
+      "options": [
+        "(가) SQL Server\nSELECT TOP 5 * FROM EMP ORDER BY SAL ASC;",
+        "(나) SQL Server\nSELECT TOP 5 WITH TIES * FROM EMP ORDER BY SAL ASC;",
+        "(다) Oracle\nSELECT * FROM EMP WHERE ROWNUM <= 5 ORDER BY SAL ASC;",
+        "(라) 표준 SQL\nSELECT * FROM EMP ORDER BY SAL ASC FETCH FIRST 5 ROWS ONLY;"
+      ],
+      "correctIndex": 2,
+      "explanation": "Oracle에서 같은 쿼리 블록의 ROWNUM <= 5는 ORDER BY 정렬보다 먼저 적용된다. 임의로 뽑힌 5행만 정렬될 뿐 급여가 가장 적은 5명이 보장되지 않는다. TOP 5와 FETCH FIRST는 정렬 결과의 앞 5행을 제한하고, WITH TIES는 경계값과 같은 행을 추가로 포함하지만 급여가 모두 다르다고 했으므로 정확히 5행이 나온다. (다)를 고치려면 인라인 뷰 안에서 먼저 정렬한 뒤 바깥에서 ROWNUM을 적용해야 한다."
+    },
+    {
+      "subject": "2과목",
+      "number": 24,
+      "title": "테이블 T에서 COL = 9를 만족하는 행이 없을 때, 다음 SQL의 수행 결과로 옳은 것은?",
+      "options": [
+        "Y",
+        "N",
+        "NULL",
+        "공집합"
+      ],
+      "correctIndex": 3,
+      "explanation": "WHERE를 통과한 행이 0건이고 GROUP BY가 있으므로 만들어지는 그룹 자체가 없어 결과가 0행(공집합)이다. NVL이 NULL을 'N'으로 바꿀 대상 행이 없다. GROUP BY가 없는 전체 집계였다면 MAX가 NULL인 1행이 만들어져 'N'이 출력되므로 이 차이를 구분해야 한다.",
+      "references": [
+        {
+          "type": "sql",
+          "code": "SELECT NVL(MAX('Y'), 'N')\nFROM   T\nWHERE  COL = 9\nGROUP  BY C1;"
+        }
+      ]
+    },
+    {
+      "subject": "2과목",
+      "number": 27,
+      "title": "다음 DEPT 테이블에 대한 (가)~(라) SQL 중 실행 시 오류가 발생하는 것은?",
+      "options": [
+        "(가)\nSELECT DNAME\nFROM DEPT;",
+        "(나)\nSELECT b.DEPTNO\nFROM (\n  SELECT b.DEPTNO\n  FROM DEPT b\n) a;",
+        "(다)\nSELECT SUBSTR(DNAME, 1, 3)\nFROM DEPT;",
+        "(라)\nSELECT RTRIM(DNAME)\nFROM DEPT;"
+      ],
+      "correctIndex": 1,
+      "explanation": "(나)는 인라인 뷰 안에서 정의한 테이블 별칭 b를 바깥 SELECT 절에서 참조하므로 오류가 발생한다. b의 유효 범위는 괄호 안의 쿼리 블록뿐이며 바깥에서는 인라인 뷰 별칭 a를 사용해야 한다(SELECT a.DEPTNO). (가), (다), (라)는 각각 컬럼 조회, 문자열 자르기, 오른쪽 공백 제거로 모두 정상 실행된다.",
+      "references": [
+        {
+          "type": "table",
+          "caption": "DEPT",
+          "headers": [
+            "DEPTNO",
+            "DNAME"
+          ],
+          "rows": [
+            [
+              "10",
+              "SQL Developer"
+            ],
+            [
+              "20",
+              "SQR Master"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "subject": "2과목",
+      "number": 31,
+      "title": "다음은 식별 관계로 연결된 네 테이블의 키 구성이다. 네 테이블을 상속된 키 전체로 조인하여 카티션 곱이 발생하지 않게 할 때, ON 절에 필요한 등호(=) 조건식의 총 개수는?",
+      "options": [
+        "3개",
+        "4개",
+        "5개",
+        "6개"
+      ],
+      "correctIndex": 3,
+      "explanation": "식별 관계에서는 부모의 PK가 자식의 PK와 FK로 상속되므로 복합키 전체를 조인 조건에 포함해야 한다. A-B는 A_ID 1개, B-C는 A_ID·B_ID 2개, C-D는 A_ID·B_ID·C_ID 3개로 1 + 2 + 3 = 6개이다. 3개는 조인 연산의 횟수일 뿐이고, 4·5개는 복합 외래키의 일부 조건을 누락한 값이다.",
+      "references": [
+        {
+          "type": "table",
+          "caption": "테이블 키 구성",
+          "headers": [
+            "테이블",
+            "기본키(PK)",
+            "상위 테이블을 참조하는 외래키(FK)"
+          ],
+          "rows": [
+            [
+              "A",
+              "A_ID",
+              "-"
+            ],
+            [
+              "B",
+              "A_ID, B_ID",
+              "A_ID"
+            ],
+            [
+              "C",
+              "A_ID, B_ID, C_ID",
+              "A_ID, B_ID"
+            ],
+            [
+              "D",
+              "A_ID, B_ID, C_ID, D_ID",
+              "A_ID, B_ID, C_ID"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "subject": "2과목",
+      "number": 44,
+      "title": "다음 EMP 테이블과 계층형 질의를 실행했을 때, 실행 결과의 괄호 안(ㄱ)에 들어갈 값은?",
+      "options": [
+        "2",
+        "3",
+        "4",
+        "5"
+      ],
+      "correctIndex": 1,
+      "explanation": "START WITH MGR IS NULL로 7782와 7839가 각각 루트가 되고, CONNECT BY MGR = PRIOR EMPNO로 자식 방향으로 전개한다. 7839를 루트로 하는 계층에는 루트인 KING 자신과 직속 자식 7876, 7900이 포함되어 COUNT(*)는 3이다. (7782 계층은 루트 자신과 7844로 2건이라 제시된 결과와 일치한다.)",
+      "references": [
+        {
+          "type": "table",
+          "caption": "EMP",
+          "headers": [
+            "EMPNO",
+            "NAME",
+            "MGR"
+          ],
+          "rows": [
+            [
+              "7782",
+              "CLARK",
+              "NULL"
+            ],
+            [
+              "7839",
+              "KING",
+              "NULL"
+            ],
+            [
+              "7844",
+              "ALLEN",
+              "7782"
+            ],
+            [
+              "7876",
+              "ALLEN",
+              "7839"
+            ],
+            [
+              "7900",
+              "SMITH",
+              "7839"
+            ]
+          ]
+        },
+        {
+          "type": "sql",
+          "code": "SELECT CONNECT_BY_ROOT EMPNO AS ROOT_EMPNO, COUNT(*) AS CNT\nFROM   EMP\nSTART WITH MGR IS NULL\nCONNECT BY MGR = PRIOR EMPNO\nGROUP  BY CONNECT_BY_ROOT EMPNO\nORDER  BY ROOT_EMPNO;"
+        },
+        {
+          "type": "table",
+          "caption": "실행 결과",
+          "headers": [
+            "ROOT_EMPNO",
+            "CNT"
+          ],
+          "rows": [
+            [
+              "7782",
+              "2"
+            ],
+            [
+              "7839",
+              "( ㄱ )"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "subject": "2과목",
+      "number": 49,
+      "title": "Oracle에서 다음과 같이 테이블을 생성하였다. 제시된 ALTER TABLE 문을 각각 독립적으로 실행할 때 문법 오류가 발생하는 것은? (다른 테이블에서 EMP.EMPNO를 참조하는 외래키는 없다.)",
+      "options": [
+        "ALTER TABLE EMP DROP PRIMARY KEY;",
+        "ALTER TABLE EMP DROP FOREIGN KEY;",
+        "ALTER TABLE EMP DROP COLUMN DEPTNO;",
+        "ALTER TABLE EMP ADD HIREDATE DATE DEFAULT SYSDATE;"
+      ],
+      "correctIndex": 1,
+      "explanation": "Oracle에는 DROP FOREIGN KEY라는 독립 구문이 없다(MySQL 문법). 외래키는 제약조건 이름을 지정해 ALTER TABLE EMP DROP CONSTRAINT EMP_FK로 제거해야 한다. DROP PRIMARY KEY는 Oracle에서 사용할 수 있고, DEPTNO는 EMP가 부모를 참조하는 단일 외래키 컬럼이라 DROP COLUMN이 가능하며, 기본값이 있는 DATE 컬럼 추가도 정상 문법이다.",
+      "references": [
+        {
+          "type": "sql",
+          "code": "CREATE TABLE DEPT (\n  DEPTNO NUMBER PRIMARY KEY\n);\n\nCREATE TABLE EMP (\n  EMPNO  NUMBER CONSTRAINT EMP_PK PRIMARY KEY,\n  DEPTNO NUMBER CONSTRAINT EMP_FK REFERENCES DEPT(DEPTNO)\n);"
+        }
+      ]
+    }
+  ]
+}
