@@ -24,7 +24,7 @@ const ROUND_DATES = {
   48: '2023년 3월', 49: '2023년 6월', 50: '2023년 9월', 51: '2023년 11월',
   52: '2024년 3월', 53: '2024년 5월', 54: '2024년 8월', 55: '2024년 11월',
   56: '2025년 3월', 57: '2025년 5월', 58: '2025년 8월', 59: '2025년 11월',
-  60: '2026년 3월',
+  60: '2026년 3월', 61: '2026년 5월',
 };
 
 const CIRCLED = { '①': 0, '②': 1, '③': 2, '④': 3 };
@@ -150,10 +150,14 @@ mkdirSync(ROUNDS_DIR, { recursive: true });
 let nextId = 10000;
 const roundFileNames = [];
 let totalCount = 0;
+// 제60회 이하는 기존 ID(10000~) 를 그대로 유지해야 진도·오답 기록이 깨지지 않는다.
+// 제61회 이후는 10000 바로 아래 블록(61회 = 9950~9999, 62회 = 9900~9949 ...)을 회차당 50개씩 할당.
+const LEGACY_MAX_ROUND = 60;
 for (const r of rounds) {
+  let newRoundId = r > LEGACY_MAX_ROUND ? 10000 - (r - LEGACY_MAX_ROUND) * 50 : null;
   const qs = merged[r].map(q => {
     const entry = {
-      id: nextId++,
+      id: newRoundId !== null ? newRoundId++ : nextId++,
       examSetId: `round-${r}`,
       examLabel: `제${r}회 (${ROUND_DATES[r] || ''})`,
       round: r,
@@ -261,7 +265,7 @@ const importLines = roundFileNames.map(({ r, varName }) => `import { ${varName} 
 const bankJoin = roundFileNames.map(({ varName }) => `  ...${varName},`).join('\n');
 
 const indexBody = `// Auto-generated index. Do not edit by hand — re-run scripts/build-quiz-bank.mjs.
-// 총 ${totalCount}문항, 제45회 ~ 제60회
+// 총 ${totalCount}문항, 제45회 ~ 제${Math.max(...rounds)}회
 
 /** 문항에 딸린 보기(지문·표·SQL·ERD 도식) 블록 */
 export type QuestionReference =
