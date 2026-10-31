@@ -459,10 +459,10 @@ export const ROUND_49: QuizQuestion[] = [
       "SELECT A.* FROM EMP A WHERE EXISTS (SELECT 1 FROM EMP B WHERE A.MGR_NO = B.EMP_NO AND B.SAL <= 3000);",
       "SELECT A.* FROM EMP A WHERE A.MGR_NO IN (SELECT B.EMP_NO FROM EMP B WHERE B.SAL <= 3000);",
       "SELECT A.* FROM EMP A INNER JOIN EMP B ON A.MGR_NO = B.EMP_NO WHERE B.SAL <= 3000;",
-      "NOT EXISTS (SELECT 'X' FROM EMP B WHERE A.MGR_NO = B.EMP_NO AND B.SAL > 3000)"
+      "SELECT A.* FROM EMP A WHERE NOT EXISTS (SELECT 1 FROM EMP B WHERE A.MGR_NO = B.EMP_NO AND B.SAL > 3000);"
     ],
     "correctIndex": 3,
-    "explanation": "NOT EXISTS 는 매니저 연봉이 3,000 초과가 아닌 경우이므로 '이하' 의미와는 다르고 NULL 처리에서도 차이가 발생한다.",
+    "explanation": "①②③은 매니저 행(B)과 연결되면서 B.SAL <= 3000 인 사원만 반환한다. ④의 NOT EXISTS 는 \"연봉이 3,000을 초과하는 매니저가 존재하지 않는\" 사원을 반환하므로, 매니저가 없는 사원(MGR_NO 가 NULL)과 매니저의 SAL 이 NULL 인 사원까지 결과에 포함된다. B.SAL > 3000 이 거짓이 아니라 UNKNOWN 이어도 서브쿼리 행이 없게 되기 때문이다. 따라서 ④만 \"매니저 연봉이 3,000 이하\"인 결과와 다르다.",
     "_source": "authored",
     "references": [
       {
