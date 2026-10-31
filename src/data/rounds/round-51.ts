@@ -80,7 +80,7 @@ export const ROUND_51: QuizQuestion[] = [
       "행위 엔터티"
     ],
     "correctIndex": 1,
-    "explanation": "발생 시점 기준 분류는 기본·중심·행위 세 가지이다.",
+    "explanation": "발생 시점에 따른 엔터티 분류는 기본(키)·중심·행위 세 가지이다. 사건 엔터티는 유무형에 따른 분류(유형·개념·사건)에 속하므로 발생 시점 분류에 해당하지 않는다. 정답은 ② 이다.",
     "_source": "authored"
   },
   {
@@ -1013,7 +1013,7 @@ export const ROUND_51: QuizQuestion[] = [
       "뷰에는 물리적인 데이터가 저장된다."
     ],
     "correctIndex": 3,
-    "explanation": "뷰는 저장된 쿼리이며 실제 데이터를 저장하지 않는다.",
+    "explanation": "뷰는 SELECT 문에 이름을 붙여 저장한 논리적(가상) 테이블이라 데이터를 따로 저장하지 않는다. 조회할 때마다 참조 테이블을 읽으므로 ② 가 맞고, 참조 테이블의 구조가 바뀌면(컬럼 삭제 등) 뷰도 영향을 받으므로 ③ 도 맞다. 물리적인 데이터가 저장된다는 ④ 가 옳지 않다.",
     "_source": "authored"
   },
   {
@@ -1457,7 +1457,7 @@ export const ROUND_51: QuizQuestion[] = [
       "CHECK 제약은 TRUE/FALSE 로 판별 가능한 식이어야 한다."
     ],
     "correctIndex": 2,
-    "explanation": "UNIQUE 제약은 NULL 여러 개를 허용한다.",
+    "explanation": "UNIQUE 제약은 같은 값의 중복만 막는다. NULL 은 값이 아니라서 Oracle 에서는 여러 행에 NULL 이 들어가도 위반이 아니다(SQL Server 는 NULL 을 하나만 허용). PRIMARY KEY = NOT NULL + UNIQUE(②), CHECK 는 참·거짓을 판별하는 식(④) 이라는 설명은 맞으므로 정답은 ③ 이다.",
     "_source": "authored"
   },
   {

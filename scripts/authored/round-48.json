@@ -1009,7 +1009,7 @@
         "TRIM"
       ],
       "correctIndex": 3,
-      "explanation": "TRIM 은 문자열 양쪽 끝의 공백을 제거한다."
+      "explanation": "TRIM 은 문자열 양쪽 끝의 공백(또는 지정 문자)을 제거한다. LTRIM 은 왼쪽만, RTRIM 은 오른쪽만 지운다. REPLACE 는 문자열 안의 특정 문자열을 다른 문자열로 바꾸는 함수라 공백을 바꾸면 가운데 공백까지 사라진다. 양쪽 공백만 지우는 함수는 ④ TRIM 이다."
     },
     {
       "subject": "2과목",

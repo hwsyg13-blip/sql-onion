@@ -478,7 +478,7 @@ export const ROUND_53: QuizQuestion[] = [
       "공집합"
     ],
     "correctIndex": 3,
-    "explanation": "조건을 만족하는 행이 없으므로 공집합이 반환된다.",
+    "explanation": "주문 테이블의 주문월은 '201001' 한 건뿐이라 주문월 = '201010' 을 만족하는 행이 없다. 조건을 만족하는 행이 없으면 결과는 0건, 즉 공집합이다. NULL 이 담긴 한 행이 나오는 것과는 다르다. 정답은 ④ 이다.",
     "_source": "authored",
     "references": [
       {
@@ -608,7 +608,7 @@ export const ROUND_53: QuizQuestion[] = [
       "NULL"
     ],
     "correctIndex": 0,
-    "explanation": "LTRIM 은 왼쪽에서 지정된 문자를 모두 제거한다.",
+    "explanation": "LTRIM(문자열, 'x') 은 왼쪽부터 'x' 가 아닌 문자가 나올 때까지 지정 문자를 한 번이 아니라 모두 제거한다. 앞의 'xxxxxx' 가 전부 지워져 'abcd' 가 된다. 정답은 ① 이다.",
     "_source": "authored",
     "references": [
       {
