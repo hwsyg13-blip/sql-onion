@@ -159,12 +159,12 @@
         {
           "type": "erd",
           "caption": "학생·수강·과목 ERD — [수강] 교차 엔터티 (학생/과목 측 0..N 선택)",
-          "mermaid": "erDiagram\n    학생 ||--o{ 수강 : \"수강\"\n    과목 ||--o{ 수강 : \"개설\"\n    수강 {\n        string 수강번호 PK\n        string 학번 FK\n        string 과목코드 FK\n    }",
+          "mermaid": "erDiagram\n    학생 ||..o{ 수강 : \"수강\"\n    과목 ||..o{ 수강 : \"개설\"\n    수강 {\n        string 수강번호 PK\n        string 학생ID FK\n        string 과목코드 FK\n    }",
           "instanceTable": {
             "of": "수강",
             "headers": [
               "수강번호",
-              "학번",
+              "학생ID",
               "과목코드"
             ],
             "rows": [
