@@ -31,7 +31,7 @@
         {
           "type": "erd",
           "caption": "학생·학과 ERD — 학과 1, 학생 0..N (FK: 학생.학과코드 → 학과.학과코드, ON DELETE CASCADE)",
-          "mermaid": "erDiagram\n    학과 ||--o{ 학생 : \"소속\"\n    학과 {\n        string 학과코드 PK\n        string 학과명\n    }\n    학생 {\n        string 학번 PK\n        string 이름\n        string 학과코드 FK\n    }"
+          "mermaid": "erDiagram\n    학과 ||..o{ 학생 : \"소속\"\n    학과 {\n        string 학과코드 PK\n        string 학과명\n    }\n    학생 {\n        string 학번 PK\n        string 이름\n        string 학과코드 FK\n    }"
         },
         {
           "type": "table",
@@ -1338,7 +1338,7 @@
         {
           "type": "erd",
           "caption": "부서-사원 ERD — 사원의 부서번호 FK 에 ON DELETE CASCADE 설정",
-          "mermaid": "erDiagram\n    부서 ||--o{ 사원 : \"소속\"\n    부서 {\n        string 부서번호 PK\n    }\n    사원 {\n        string 사원번호 PK\n        string 부서번호 FK \"ON DELETE CASCADE\"\n    }"
+          "mermaid": "erDiagram\n    부서 ||..o{ 사원 : \"소속\"\n    부서 {\n        string 부서번호 PK\n    }\n    사원 {\n        string 사원번호 PK\n        string 부서번호 FK \"ON DELETE CASCADE\"\n    }"
         },
         {
           "type": "sql",
