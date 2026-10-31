@@ -1,6 +1,8 @@
 {
   "last_processed_row": null,
   "last_run": "2026-10-31T15:34:36Z",
-  "last_gate_result": 0.02,
-  "last_theme": null
+  "last_gate": { "five_hour": 0.02, "seven_day": 0 },
+  "current_mission": null,
+  "my_prs": [195],
+  "merges_today": { "date": null, "count": 0 }
 }
