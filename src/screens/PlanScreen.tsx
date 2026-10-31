@@ -22,7 +22,7 @@ export const PLAN_DATA = [
   // ─ Week 1 Day 1~4 (4일): 1과목 10챕터 압축 — 출제 비중 10/50 으로 빠르게 보고 2과목에 시간 배분
   {week:1, day:1,  subj:"1과목", title:"데이터 모델 + 엔터티",
     actions:[{kind:'theory',label:'데이터 모델의 이해',chapterId:'c111'},{kind:'theory',label:'엔터티',chapterId:'c112'}],
-    concept:["3층 스키마","엔터티 5대 특징"], est:60},
+    concept:["3층 스키마","엔터티 6대 특징"], est:60},
   {week:1, day:2,  subj:"1과목", title:"속성 + 관계 + 식별자",
     actions:[
       {kind:'theory',label:'속성',chapterId:'c113'},
