@@ -166,6 +166,10 @@ function detectAbstractOptions(q) {
   const hasSqlKeyword = q.options.some(o => sqlKeywords.test(o || ''));
   const hasLong = q.options.some(o => (o || '').length >= 30);
   if (hasCodeMarker || hasSqlKeyword || hasLong) return null;
+  // 선택지가 함수 호출(CEIL(22.14) 등)이거나, "①·②" 같은 번호이고 실제 SQL 이 참고 블록에 있으면 추상 아님
+  const optionsAreCalls = q.options.every(o => /\b[A-Z_][A-Z0-9_]*\s*\(/i.test(o || ''));
+  const refsHaveSql = (q.references || []).some(r => r.type === 'sql' && (r.code || '').trim().length >= 20);
+  if (optionsAreCalls || refsHaveSql) return null;
 
   const lengths = q.options.map(o => (o || '').length);
   const avg = lengths.reduce((a, b) => a + b, 0) / lengths.length;
