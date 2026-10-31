@@ -9,7 +9,12 @@
 3. **PR은 REST API로 만든다.** `gh pr create`는 GraphQL 403이 난다. `gh api repos/hwsyg13-blip/sql-onion/pulls -X POST ...`를 쓴다.
 4. **npm 레지스트리 접속이 ENOTFOUND로 실패하면**, 이 환경의 npm 설정이 `registry.npmjs.org`를 프록시 예외로 두기 때문이다. 그 명령에만 `env -u NO_PROXY -u no_proxy -u npm_config_noproxy npm <cmd> --https-proxy="$HTTPS_PROXY"`로 실행한다. 전역 설정은 바꾸지 않는다. 새 세션에서는 그냥 `npm ci`가 되는 경우도 있으니 먼저 그대로 시도한다.
 5. **푸시 후 원격 추적 ref를 갱신한다.** 얕은 클론이라 푸시 뒤에도 `origin/<branch>`가 옛 값으로 남을 수 있다. `git fetch origin <branch>:refs/remotes/origin/<branch>`로 맞춘다.
-6. **생성 파일은 직접 고치지 않는다.** `src/data/rounds/*.ts`는 `scripts/authored/*.json`에서, 이론 HTML은 `scripts/build-theory*.mjs`에서 만든다.
+6. **생성 파일은 직접 고치지 않는다.** `src/data/rounds/*.ts`는 `scripts/authored/*.json`에서, 이론은 예외다 (규칙 7).
+7. **이론은 `src/data/theoryHtml.ts`를 직접 고친다.** 원본 HTML/마크다운은 사용자 PC의 OneDrive에만 있어 이 환경에서 재생성할 수 없고, 9/22 커밋(`dcd87be`)도 이 파일을 직접 고쳤다. 챕터는 한 줄짜리 JSON 문자열이므로 줄 단위로 파싱해 원문이 정확히 한 번 나오는지 확인한 뒤 치환한다 (scratchpad의 `apply.cjs` 방식).
+8. **`build-quiz-bank.mjs`는 PDF 없이 돌려도 안전하다.** PDF 경로가 없으면 authored/blog만 쓰고, 재생성 후 바뀐 회차 파일만 diff에 남는지 확인한다 (#197에서 `round-49.ts` 2줄만 바뀜).
+9. **사용량 이벤트는 페이지 필터라 최신 값이 빈 페이지로 올 수 있다.** `list_events(kinds=["rate_limit_event"])`가 빈 결과면 `before_id=first_id`로 한 페이지 더 읽는다.
+10. **화면 확인은 로컬 미리보기로 한다.** `npm run build` 후 `npx vite preview --port 4173`. 이론 화면은 `history.pushState({sqlo:true, route:'theory-detail', params:'c111'})` 후 popstate 이벤트, CBT는 `/?cbt=round-NN`. OMR 번호 버튼은 텍스트가 섞여 있어 "다음" 버튼으로 이동한다.
+11. **확신이 없는 사실은 고치지 않는다.** c214 연산자 우선순위(NOT vs 비교)는 가이드 원문을 확인할 수 없어 그대로 뒀다. 웹 검색이 개인 블로그뿐이면 근거로 쓰지 않는다.
 
 ## 회고
 
@@ -18,3 +23,23 @@
 - 잘 된 것: 제보와 실제 데이터를 대조해 오래된 제보를 걸러냈다.
 - 막힌 것과 해결: 사이트 접근이 막혀 배포 버전을 확인할 수 없었다. GitHub deployments API로 운영 배포 커밋을 확인해 해결했다.
 - 다음에 다르게 할 것: 제보 판단 전에 해당 문항의 수정 이력부터 본다 (규칙 1).
+
+### 2026-11-01 정답 노출 의심 정리 (#197, 머지·배포 성공)
+- 결과: 17건 → 미검토 0건. 실제 노출은 R49 2과목 18번 1건(정답만 조각 형식이라 형식으로 정답이 드러남).
+- 잘 된 것: 검사기에 "모든 선택지가 같은 블록에 있으면 제외" 규칙과 검토 목록을 넣어 다음부터 경고가 실제 문제만 가리킨다.
+- 다음에 다르게 할 것: 문자열 일치 경고는 선택지 전체를 함께 보고 판정한다.
+
+### 2026-11-01 1과목 이론 재검토 (#198 1장, #199 2장, 머지·배포 성공)
+- 결과: 엔터티 6특징 누락, Oracle에서 실행 불가한 가상 컬럼 SQL, 관계 표기 4요소(실제 3), mermaid 식별 관계 설명 오류, DISTINCT 오조언 등 수정.
+- 잘 된 것: 이론과 문제은행의 불일치(엔터티 특징)를 문제은행 문장으로 근거를 삼았다. 화면은 로컬 미리보기 스크린샷으로 확인했다.
+- 막힌 것과 해결: 이론 원본이 저장소에 없음 → `theoryHtml.ts` 직접 수정(규칙 7).
+- 다음에 다르게 할 것: 같은 개념이 다른 화면(examDaySummary, theory.ts oneLine, PlanScreen)에도 있는지 grep으로 먼저 찾는다.
+
+### 2026-11-01 2과목 이론 재검토 (#200 SQL 기본, #201 SQL 활용, #202 관리 구문, 머지·배포 성공)
+- 결과: 한글 별칭 따옴표 오류, GROUP BY 표현식 규칙, WITH RECURSIVE의 Oracle 표기, 그대로는 결과가 안 나오던 PIVOT 예제, 정규식 \d·\w·\s 지원 버전, ORA-00942 의미 등 수정.
+- 잘 된 것: 예제 결과값을 직접 계산해 맞는지 확인했다. 작은 변경은 묶어서 배포 횟수를 아꼈다.
+- 다음에 다르게 할 것: 예제 데이터 카드와 SQL이 같은 테이블을 쓰는지 함께 본다 (c232 ACCOUNT/EMP 불일치).
+
+### 2026-11-01 렌더링 결함 제보 재현 (코드 변경 없음)
+- 결과: R47 1과목 9번, R55 2과목 26번은 9/22 데이터 수정분. R45 2과목 20번은 Chromium에서 SQL 정상 표시. 제보자는 Firefox라 이 환경에서 확인 불가.
+- 다음에 다르게 할 것: 렌더링 제보는 User-Agent(브라우저)를 먼저 확인한다.

@@ -1,8 +1,9 @@
 {
   "last_processed_row": null,
-  "last_run": "2026-10-31T15:34:36Z",
-  "last_gate": { "five_hour": 0.02, "seven_day": 0 },
-  "current_mission": null,
+  "last_run": "2026-10-31T17:29:00Z",
+  "last_gate": { "five_hour": 0.63, "seven_day": 0.09 },
+  "current_mission": "backlog #6 기출 경고 항목 보강",
   "my_prs": [195],
-  "merges_today": { "date": null, "count": 0 }
+  "merged_prs": [197, 198, 199, 200, 201, 202],
+  "merges_today": { "date": "2026-11-01", "count": 6 }
 }
