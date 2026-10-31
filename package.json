@@ -12,6 +12,7 @@
   "dependencies": {
     "@portone/browser-sdk": "^0.0.10",
     "@supabase/supabase-js": "^2.45.4",
+    "ai": "^7.0.159",
     "highlight.js": "^11.11.1",
     "marked": "^18.0.2",
     "marked-highlight": "^2.2.4",
