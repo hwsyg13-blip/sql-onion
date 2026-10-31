@@ -1045,7 +1045,7 @@ export const ROUND_48: QuizQuestion[] = [
       "(A, B), (A), (B), () 모든 조합"
     ],
     "correctIndex": 1,
-    "explanation": "ROLLUP(A, B)는 왼쪽부터 단계적으로 그룹 키를 줄여가며 (A, B), (A), () 세 가지 수준의 집계만 반환한다. (B) 단독 그룹은 만들지 않다. CUBE(A, B)가 (A, B), (A), (B), () 모든 조합을 만드는 것과 구분해야 한다. 정답은 ②번이다.",
+    "explanation": "ROLLUP(A, B)는 왼쪽부터 단계적으로 그룹 키를 줄여가며 (A, B), (A), () 세 가지 수준의 집계만 반환한다. (B) 단독 그룹은 만들지 않는다. CUBE(A, B)가 (A, B), (A), (B), () 모든 조합을 만드는 것과 구분해야 한다. 정답은 ②번이다.",
     "_source": "authored"
   },
   {
@@ -1282,7 +1282,7 @@ export const ROUND_48: QuizQuestion[] = [
       "오류가 발생한다."
     ],
     "correctIndex": 1,
-    "explanation": "계층형 쿼리에서 `CONNECT BY PRIOR 자식 = 부모`로 트리를 전개할 때, 다음에 따라가야 할 부모 키 값이 NULL이면 \"매칭되는 부모가 없다\"는 의미가 되어 그 가지의 전개가 거기서 멈춥니다. 무한 전개·역방향 전환·오류는 발생하지 않다. 정답은 ②번이다.",
+    "explanation": "계층형 쿼리에서 `CONNECT BY PRIOR 자식 = 부모`로 트리를 전개할 때, 다음에 따라가야 할 부모 키 값이 NULL이면 \"매칭되는 부모가 없다\"는 의미가 되어 그 가지의 전개가 거기서 멈춥니다. 무한 전개·역방향 전환·오류는 발생하지 않는다. 정답은 ②번이다.",
     "_source": "authored"
   },
   {
@@ -1368,7 +1368,7 @@ export const ROUND_48: QuizQuestion[] = [
       "SELECT 컬럼 FROM T WHERE ROWNUM = 10 ORDER BY 컬럼 DESC;"
     ],
     "correctIndex": 2,
-    "explanation": "Oracle의 ROWNUM은 ORDER BY가 적용되기 전 단계에서 행에 1부터 부여된다. 따라서 같은 SELECT 안에서 `WHERE ROWNUM <= 10 ... ORDER BY ... DESC`처럼 쓰면 정렬되지 않은 임의의 10건이 잡힌 뒤 정렬되어 \"상위 10건\"이 보장되지 않다. 안전하게 상위 10건을 얻으려면 인라인 뷰 안에서 먼저 ORDER BY DESC로 정렬한 뒤, 바깥쪽에서 `WHERE ROWNUM <= 10`으로 자르는 ③번 패턴을 써야 한다. ②는 문법 오류(`WHERE` 가 `ORDER BY` 뒤에 올 수 없음), ④는 `ROWNUM = 10` 이 절대 만족되지 않아 항상 0건이 반환된다. 정답은 ③번이다.",
+    "explanation": "Oracle의 ROWNUM은 ORDER BY가 적용되기 전 단계에서 행에 1부터 부여된다. 따라서 같은 SELECT 안에서 `WHERE ROWNUM <= 10 ... ORDER BY ... DESC`처럼 쓰면 정렬되지 않은 임의의 10건이 잡힌 뒤 정렬되어 \"상위 10건\"이 보장되지 않는다. 안전하게 상위 10건을 얻으려면 인라인 뷰 안에서 먼저 ORDER BY DESC로 정렬한 뒤, 바깥쪽에서 `WHERE ROWNUM <= 10`으로 자르는 ③번 패턴을 써야 한다. ②는 문법 오류(`WHERE` 가 `ORDER BY` 뒤에 올 수 없음), ④는 `ROWNUM = 10` 이 절대 만족되지 않아 항상 0건이 반환된다. 정답은 ③번이다.",
     "_source": "authored"
   },
   {

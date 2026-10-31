@@ -453,7 +453,7 @@
         "TOP"
       ],
       "correctIndex": 0,
-      "explanation": "Oracle 에서 가장 일반적인 TOP-N 기법은 인라인 뷰에서 정렬한 뒤 외부에서 `ROWNUM` 으로 행 개수를 제한하는 방식. ② `FETCH FIRST` 는 12c 이상 지원하는 ANSI 형식이지만 빈칸 위치(`( ? ) = 1`) 와 맞지 않다. ③④ `TOP` 은 SQL Server 문법이라 Oracle 에서 동작하지 않는다.",
+      "explanation": "Oracle 에서 가장 일반적인 TOP-N 기법은 인라인 뷰에서 정렬한 뒤 외부에서 `ROWNUM` 으로 행 개수를 제한하는 방식. ② `FETCH FIRST` 는 12c 이상 지원하는 ANSI 형식이지만 빈칸 위치(`( ? ) = 1`) 와 맞지 않는다. ③④ `TOP` 은 SQL Server 문법이라 Oracle 에서 동작하지 않는다.",
       "references": [
         {
           "type": "table",
