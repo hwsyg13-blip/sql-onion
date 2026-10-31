@@ -224,7 +224,7 @@
         "GROUP BY 평가항목"
       ],
       "correctIndex": 1,
-      "explanation": "ROLLUP(A, B)는 왼쪽부터 점차 줄여가며 (A, B), (A), () 세 가지 그룹을 만든다. 문제는 첫 컬럼 집계, 두 컬럼 조합 집계, 전체 집계가 필요하므로 정확히 ROLLUP이 만드는 세 가지 그룹과 일치한다. CUBE는 (B) 단독까지 추가로 만들어 결과 행이 더 많아 의도에 맞지 않다. 정답은 ②번이다."
+      "explanation": "ROLLUP(A, B)는 왼쪽부터 점차 줄여가며 (A, B), (A), () 세 가지 그룹을 만든다. 문제는 첫 컬럼 집계, 두 컬럼 조합 집계, 전체 집계가 필요하므로 정확히 ROLLUP이 만드는 세 가지 그룹과 일치한다. CUBE는 (B) 단독까지 추가로 만들어 결과 행이 더 많아 의도에 맞지 않는다. 정답은 ②번이다."
     },
     {
       "subject": "2과목",
@@ -250,7 +250,7 @@
         "유저 정의 함수는 반드시 RETURN 이 필요하다."
       ],
       "correctIndex": 2,
-      "explanation": "저장 프로시저는 미리 만들어 둔 SQL 묶음으로 호출만 하면 일괄 실행되어 네트워크 트래픽과 응답 시간을 줄여 준다. 트리거는 INSERT·UPDATE·DELETE 같은 이벤트가 발생하면 자동으로 실행되는 코드인데, 트리거 안에서는 COMMIT·ROLLBACK이 허용되지 않다. 호출한 트랜잭션의 일부로 함께 동작해야 하기 때문이다. 따라서 \"프로시저와 트리거 모두에서 COMMIT·ROLLBACK 을 사용할 수 있다\"는 ③번 설명이 잘못되어 정답이다. ④의 유저 정의 함수가 RETURN을 반드시 가져야 한다는 설명은 옳다."
+      "explanation": "저장 프로시저는 미리 만들어 둔 SQL 묶음으로 호출만 하면 일괄 실행되어 네트워크 트래픽과 응답 시간을 줄여 준다. 트리거는 INSERT·UPDATE·DELETE 같은 이벤트가 발생하면 자동으로 실행되는 코드인데, 트리거 안에서는 COMMIT·ROLLBACK이 허용되지 않는다. 호출한 트랜잭션의 일부로 함께 동작해야 하기 때문이다. 따라서 \"프로시저와 트리거 모두에서 COMMIT·ROLLBACK 을 사용할 수 있다\"는 ③번 설명이 잘못되어 정답이다. ④의 유저 정의 함수가 RETURN을 반드시 가져야 한다는 설명은 옳다."
     },
     {
       "subject": "2과목",
@@ -786,7 +786,7 @@
         "SELECT COL FROM T WHERE ROWNUM = (SELECT MAX(COL) FROM T);"
       ],
       "correctIndex": 1,
-      "explanation": "ROWNUM은 결과 행에 1부터 차례로 번호를 매기는 가상 컬럼이다. 그러나 ROWNUM은 ORDER BY가 적용되기 전에 매겨지므로 단순히 `WHERE ROWNUM = 1`만 쓰면 정렬이 무시된 첫 행이 나와 최대값이 보장되지 않다. 따라서 인라인 뷰 안에서 먼저 ORDER BY DESC로 정렬해 둔 뒤, 바깥에서 ROWNUM = 1로 첫 행을 잘라야 안전하게 최대값을 얻다. 정답은 ②번이다. ① MAX 함수만으로도 가능하지만, 본 문항이 묻는 것은 ROWNUM 사용 패턴이다."
+      "explanation": "ROWNUM은 결과 행에 1부터 차례로 번호를 매기는 가상 컬럼이다. 그러나 ROWNUM은 ORDER BY가 적용되기 전에 매겨지므로 단순히 `WHERE ROWNUM = 1`만 쓰면 정렬이 무시된 첫 행이 나와 최대값이 보장되지 않는다. 따라서 인라인 뷰 안에서 먼저 ORDER BY DESC로 정렬해 둔 뒤, 바깥에서 ROWNUM = 1로 첫 행을 잘라야 안전하게 최대값을 얻다. 정답은 ②번이다. ① MAX 함수만으로도 가능하지만, 본 문항이 묻는 것은 ROWNUM 사용 패턴이다."
     },
     {
       "subject": "2과목",
@@ -1021,7 +1021,7 @@
         "CONCAT(CONCAT(NULL, 'BC'), 'D')"
       ],
       "correctIndex": 1,
-      "explanation": "① LPAD('BCD', 3, 'A')는 이미 길이가 3이라 패딩 없이 'BCD'를 그대로 반환. ③ SUBSTR('ABCDE', 2, 3) = 'BCD'. ④ CONCAT(CONCAT(NULL, 'BC'), 'D') = 'BCD' (NULL은 빈 문자열로 처리). 그러나 ② RTRIM('EBCDE', 'E')는 오른쪽 끝의 'E'만 잘라 'EBCD'가 되고 앞쪽 'E'는 그대로 남다. 결과 형태가 명확히 다른 것은 ②번이다."
+      "explanation": "① LPAD('BCD', 3, 'A')는 이미 길이가 3이라 패딩 없이 'BCD'를 그대로 반환. ③ SUBSTR('ABCDE', 2, 3) = 'BCD'. ④ CONCAT(CONCAT(NULL, 'BC'), 'D') = 'BCD' (NULL은 빈 문자열로 처리). 그러나 ② RTRIM('EBCDE', 'E')는 오른쪽 끝의 'E'만 잘라 'EBCD'가 되고 앞쪽 'E'는 그대로 남는다. 결과 형태가 명확히 다른 것은 ②번이다."
     },
     {
       "subject": "2과목",
@@ -1170,7 +1170,7 @@
         "AVG 연산 오류"
       ],
       "correctIndex": 2,
-      "explanation": "WHERE COL2 IS NOT NULL로 (10, 20)과 (10, 0) 두 행만 남다. AVG(COL1) = (10 + 10) ÷ 2 = 10, AVG(COL2) = (20 + 0) ÷ 2 = 10이 된다. AVG는 NULL을 자동으로 빼지만 0은 정상 값으로 포함된다는 점이 함정이다. 정답은 ③번이다.",
+      "explanation": "WHERE COL2 IS NOT NULL로 (10, 20)과 (10, 0) 두 행만 남는다. AVG(COL1) = (10 + 10) ÷ 2 = 10, AVG(COL2) = (20 + 0) ÷ 2 = 10이 된다. AVG는 NULL을 자동으로 빼지만 0은 정상 값으로 포함된다는 점이 함정이다. 정답은 ③번이다.",
       "references": [
         {
           "type": "table",

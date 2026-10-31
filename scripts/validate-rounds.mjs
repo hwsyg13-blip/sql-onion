@@ -176,8 +176,10 @@ function detectAbstractOptions(q) {
 function detectRownumEqualGteTwo(q) {
   const blob = questionAllText(q);
   const m = blob.match(/ROWNUM\s*=\s*(\d+)/i);
-  if (m && Number(m[1]) >= 2) return { value: Number(m[1]) };
-  return null;
+  if (!m || Number(m[1]) < 2) return null;
+  // 함정 자체를 묻는 문항: 해설이 "0건/만족되지 않음"을 설명하면 의도된 출제다
+  if (/0\s*건|만족되지\s*않|반환되지\s*않/.test(q.explanation || '')) return null;
+  return { value: Number(m[1]) };
 }
 
 // NOT IN (서브쿼리) 와 NULL 트랩 — 해설에 NULL 언급 없으면 점검 권장
@@ -220,7 +222,9 @@ function detectMissingReferences(q) {
   const titleAsksResult = RESULT_TITLE_HINT.test(q.title || '');
   // 옵션에 데이터/숫자 결과를 보임 (예: "100, 200, 300")
   const optionsLookLikeData = q.options.some(o => /\d+\s*,\s*\d+/.test(o || ''));
-  if (titleAsksResult && optionsLookLikeData) {
+  // 선택지 대부분이 SELECT 문이나 함수 호출이면 선택지만으로 풀 수 있는 문항이다
+  const selfContained = q.options.filter(o => /^\s*(SELECT|CASE)\b|\b[A-Z_][A-Z0-9_]*\s*\(/i.test(o || '')).length >= q.options.length - 1;
+  if (titleAsksResult && optionsLookLikeData && !selfContained) {
     return { hint: 'title asks "결과/반환/값" but no references' };
   }
   return null;
