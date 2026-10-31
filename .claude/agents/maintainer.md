@@ -42,6 +42,7 @@ model: sonnet
 ### 1-2. 열린 PR 상한
 - 이 에이전트가 만든 열린 PR(자동 머지 제외 영역이거나 검증을 통과하지 못해 남은 것)이 **5개 이상**이면 새 기능·콘텐츠 미션을 시작하지 않습니다.
 - 대신 열린 PR을 다듬는 일(충돌 해결, 리뷰 반영, 설명 보강)을 하거나, 사용자에게 검토를 요청하고 멈춥니다. PR이 쌓이면 서로 충돌하고 검토 부담만 커집니다.
+- 머지 대기 PR(5-5 조건 충족, 묶음 머지 기다림) 때문에 상한에 닿았다면, 그 자리에서 5-5 묶음 머지를 한 번 하고 계속합니다. 같은 파일을 고칠 미션은 앞 PR이 `main`에 들어간 뒤 시작합니다.
 
 ## 2. 시작할 때 읽는 것
 
@@ -101,10 +102,17 @@ model: sonnet
 - 변경이 **자동 머지 제외 영역**(아래)에 닿지 않는다.
 - 콘텐츠 변경의 근거가 PR 본문에 적혀 있다. `correctIndex` 변경은 원문 근거가 명확할 때만이다.
 
-머지 절차:
-1. 드래프트면 ready로 바꾸고 (`POST /repos/{owner}/{repo}/pulls/{n}/ccr/ready_for_review`), squash 머지합니다 (`gh api -X PUT repos/hwsyg13-blip/sql-onion/pulls/<n>/merge -f merge_method=squash`).
-2. 머지 후 운영 배포를 확인합니다: GitHub deployments API(environment=Production)에서 머지 커밋의 배포 상태가 `success`가 될 때까지 기다립니다 (최대 15분).
-3. 배포가 실패하거나, 배포 후 빌드·핵심 화면에 문제가 보이면 **즉시 되돌립니다**: `origin/main`에서 `revert/<원래 브랜치>` 브랜치를 만들어 머지 커밋을 `git revert`하고, PR을 만들어 바로 머지합니다. 그다음 원인을 learnings.md에 기록합니다.
+머지 절차 — **묶음 머지** (사용자 지시, 2026-11-01): `main`에 들어갈 때마다 운영 배포가 1회 일어나므로, 머지할 PR은 모아서 한 번에 `main`에 넣습니다.
+1. 미션 PR은 만들 때 바로 머지하지 않고, 위 조건을 충족한 상태로 열어 둡니다. 실행이 끝날 때(보고 직전, 또는 게이트·열린 PR 상한으로 멈출 때) 한 번에 머지합니다.
+2. 머지할 PR이 **1개**면 그 PR을 바로 squash 머지합니다 (`gh api -X PUT repos/hwsyg13-blip/sql-onion/pulls/<n>/merge -f merge_method=squash`). 드래프트면 먼저 ready로 바꿉니다 (`POST /repos/{owner}/{repo}/pulls/{n}/ccr/ready_for_review`).
+3. **2개 이상**이면 릴리스 브랜치로 묶습니다.
+   - `origin/main`에서 `release/<YYYY-MM-DD-HHMM>`(KST)을 만들어 푸시합니다.
+   - 각 PR의 base를 릴리스 브랜치로 바꾸고 (`gh api -X PATCH repos/hwsyg13-blip/sql-onion/pulls/<n> -f base=release/...`), 하나씩 squash 머지합니다. 충돌 나는 PR은 빼고 다음 실행으로 넘깁니다.
+   - 릴리스 브랜치를 받아 `npm run build`, `validate-rounds`, `check-answer-leak`를 다시 돌립니다. 하나라도 나빠지면 `main`에 넣지 않고 원인 PR을 찾아 보고합니다.
+   - 릴리스 PR(`release/...` → `main`)을 만들고 **merge commit 방식**으로 머지합니다 (`-f merge_method=merge`). PR별 squash 커밋이 `main`에 그대로 남아 하나만 되돌리기 쉽습니다. 릴리스 PR 본문에는 묶인 PR 번호와 한 줄 요약을 적습니다.
+4. 머지 후 운영 배포를 확인합니다: GitHub deployments API(environment=Production)에서 `main`에 들어간 커밋의 배포 상태가 `success`가 될 때까지 기다립니다 (최대 15분).
+5. 배포가 실패하거나, 배포 후 빌드·핵심 화면에 문제가 보이면 **즉시 되돌립니다**: `origin/main`에서 `revert/<원래 브랜치>` 브랜치를 만들어 문제 커밋(릴리스면 원인 PR의 squash 커밋, 원인을 모르면 릴리스 merge commit 전체를 `git revert -m 1`)을 되돌리고, PR을 만들어 바로 머지합니다. 그다음 원인을 learnings.md에 기록합니다.
+6. 사용자가 "지금 머지해"처럼 바로 머지를 지시하면 그때 모인 PR로 위 절차를 바로 진행합니다.
 
 자동 머지 제외 영역 (PR만 만들고 사용자 확인을 받습니다):
 - 결제·인증: `src/lib/portone.ts`, `src/lib/auth.ts`, `src/lib/supabase.ts`, `src/lib/gating.ts`, `App.tsx`의 `BETA_NO_AUTH`
@@ -116,7 +124,7 @@ model: sonnet
 배포 한도: 머지 횟수 상한은 없습니다 (사용자 지시, 2026-11-01). 다만 Vercel 무료 플랜은 24시간에 배포 100회가 한도라(Preview 포함, 2026-04-27 초과 사고), 머지 직전마다 실제 사용량을 확인합니다.
 - `gh api "repos/hwsyg13-blip/sql-onion/deployments?per_page=100"`에서 최근 24시간 `created_at` 건수(Preview + Production)를 셉니다.
 - **80건 이상이면 머지를 멈추고** 남은 PR은 다음 실행으로 넘깁니다. 사용자 몫 여유를 남기기 위해서입니다.
-- PR마다 Preview 빌드도 한도를 쓰므로, 작은 변경은 한 PR로 묶습니다.
+- PR마다 Preview 빌드도 한도를 쓰므로, 작은 변경은 한 PR로 묶습니다. 운영 배포는 위 묶음 머지로 실행당 1회를 목표로 합니다.
 
 ## 6. 회고와 성장
 
