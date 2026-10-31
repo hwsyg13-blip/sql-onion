@@ -1,14 +1,16 @@
 {
   "last_processed_row": null,
-  "last_run": "2026-10-31T18:05:00Z",
+  "last_run": "2026-10-31T21:30:00Z",
   "last_gate": {
-    "five_hour": 0.9,
-    "seven_day": 0.12
+    "five_hour": 0.2,
+    "seven_day": 0.15
   },
   "current_mission": null,
   "my_prs": [
     195,
-    207
+    207,
+    208,
+    209
   ],
   "merged_prs": [
     197,
@@ -26,5 +28,5 @@
     "date": "2026-11-01",
     "count": 10
   },
-  "stop_reason": "하루 머지 상한(10) 도달 — #207 은 11-02 KST 실행에서 머지"
+  "stop_reason": "열린 PR 상한(5: #195 #196 #207 #208 #209) + 하루 머지 상한(11-01 KST 10/10). 11-02 06시 실행에서 #207→#208→#209 순 머지"
 }

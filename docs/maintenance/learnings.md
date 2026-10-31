@@ -15,6 +15,8 @@
 9. **사용량 이벤트는 페이지 필터라 최신 값이 빈 페이지로 올 수 있다.** `list_events(kinds=["rate_limit_event"])`가 빈 결과면 `before_id=first_id`로 한 페이지 더 읽는다.
 10. **화면 확인은 로컬 미리보기로 한다.** `npm run build` 후 `npx vite preview --port 4173`. 이론 화면은 `history.pushState({sqlo:true, route:'theory-detail', params:'c111'})` 후 popstate 이벤트, CBT는 `/?cbt=round-NN`. OMR 번호 버튼은 텍스트가 섞여 있어 "다음" 버튼으로 이동한다.
 11. **확신이 없는 사실은 고치지 않는다.** c214 연산자 우선순위(NOT vs 비교)는 가이드 원문을 확인할 수 없어 그대로 뒀다. 웹 검색이 개인 블로그뿐이면 근거로 쓰지 않는다.
+12. **봇 차단 규칙을 바꾸거나 점검할 때는 Google 크롤러 UA 전체로 시험한다.** `middleware.ts`의 `BLOCK_BOT`은 `bot` 한 글자만 있어도 막으므로, `+http://www.google.com/bot.html` 이 붙은 Google 크롤러는 `ALLOWED_BOT`에 없으면 모두 403이다. `node --experimental-strip-types`로 미들웨어 함수를 직접 호출해 확인한다.
+13. **developers.google.com 은 이 환경에서 열리지 않는다.** UA 문자열 같은 사실은 Google 문서를 인용하는 공개 목록(`monperrus/crawler-user-agents`, raw.githubusercontent.com)으로 교차 확인한다.
 
 ## 회고
 
@@ -59,4 +61,11 @@
 - 잘 된 것: 고칠 게 없다는 결론도 판정표로 남겨 사용자가 시트를 한 번에 정리할 수 있게 했다.
 - 막힌 것: Drive 커넥터가 시트 1,503행 중 앞부분만 돌려줬다. 다음엔 행 범위를 나눠 읽는 방법을 찾는다.
 - 다음에 다르게 할 것: 머지 상한은 KST 날짜 기준이라, 새벽에 상한을 다 쓰면 그날 낮 실행은 머지를 못 한다. 머지는 하루 전체에 나눠 쓴다.
+
+### 2026-11-01 06시 실행 — 기출 ERD 선 모양 (#208), AdSense 크롤러 차단 해제 (#209)
+- PR 결과: #207 열림·충돌 없음 (머지 상한으로 대기). 리뷰·코멘트 없음.
+- 결과: 속성(PK/FK)이 그려진 기출 ERD 중 FK 가 PK 에 포함되지 않은 4문항을 점선으로. R58 1과목 9번 학번/학생ID 불일치도 정리. AdSense 재심사 준비 중 `middleware.ts` 가 AdSense 크롤러에 403 을 주는 것을 찾아 수정.
+- 잘 된 것: 그림에서 판단할 수 없는 ERD(속성 없음, 원본 확인 불가)는 손대지 않았다. 미들웨어는 수정 전 403·수정 후 통과를 함수 호출로 둘 다 확인했다.
+- 막힌 것: developers.google.com 이 네트워크 정책에 막힘 → 공개 UA 목록으로 교차 확인 (규칙 13).
+- 다음에 다르게 할 것: 수익(광고) 미션은 콘텐츠보다 먼저 "크롤러가 페이지를 읽을 수 있나"부터 본다. 열린 PR 상한에 빨리 닿으므로 머지 가능한 날에 PR 을 몰아 만든다.
 
