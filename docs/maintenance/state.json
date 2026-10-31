@@ -1,10 +1,30 @@
 {
   "last_processed_row": null,
-  "last_run": "2026-10-31T17:50:00Z",
-  "last_gate": { "five_hour": 0.7, "seven_day": 0.1 },
+  "last_run": "2026-10-31T18:05:00Z",
+  "last_gate": {
+    "five_hour": 0.9,
+    "seven_day": 0.12
+  },
   "current_mission": null,
-  "my_prs": [195],
-  "merged_prs": [197, 198, 199, 200, 201, 202, 203, 204, 205],
-  "merges_today": { "date": "2026-11-01", "count": 9 },
-  "stop_reason": "하루 머지 상한(10) 근접 — 되돌리기용 1회 남김"
+  "my_prs": [
+    195,
+    207
+  ],
+  "merged_prs": [
+    197,
+    198,
+    199,
+    200,
+    201,
+    202,
+    203,
+    204,
+    205,
+    206
+  ],
+  "merges_today": {
+    "date": "2026-11-01",
+    "count": 10
+  },
+  "stop_reason": "하루 머지 상한(10) 도달 — #207 은 11-02 KST 실행에서 머지"
 }
