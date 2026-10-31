@@ -79,7 +79,7 @@ export const ROUND_55: QuizQuestion[] = [
       "BCNF"
     ],
     "correctIndex": 1,
-    "explanation": "부분 함수 종속을 제거하는 단계가 제2 정규화이다.",
+    "explanation": "주식별자가 두 컬럼인 복합키에서 일반 속성이 그중 하나에만 종속되는 것이 부분 함수 종속이고, 이를 테이블 분리로 없애는 단계가 제2 정규화이다. 제1 정규화는 원자값, 제3 정규화는 이행 종속, BCNF 는 모든 결정자가 후보키가 되도록 하는 단계다. 정답은 ② 이다.",
     "_source": "authored",
     "references": [
       {
@@ -223,7 +223,7 @@ export const ROUND_55: QuizQuestion[] = [
       "스칼라 서브쿼리는 단일 값을 반환해야 한다."
     ],
     "correctIndex": 2,
-    "explanation": "IN 절은 다중 행 서브쿼리를 사용할 수 있다.",
+    "explanation": "IN 은 단일 행·다중 행 서브쿼리 모두에 쓸 수 있다. 다중 행 결과에 = 같은 단일 행 연산자를 쓸 때 오류가 난다. 서브쿼리 사용 위치(①), EXISTS 의 존재 여부 확인(②), 스칼라 서브쿼리의 단일 값 반환(④) 은 맞으므로 정답은 ③ 이다.",
     "_source": "authored"
   },
   {
