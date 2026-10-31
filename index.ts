@@ -4,7 +4,7 @@
 import { generateText } from 'ai';
 
 const { text } = await generateText({
-  model: 'moonshotai/kimi-k3',
+  model: 'nvidia/nemotron-3.5-lightning-free',
   prompt: 'Invent a new holiday and describe its traditions.',
 });
 
