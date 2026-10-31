@@ -19,7 +19,8 @@ model: sonnet
 | 소스 | 용도 | 접근 |
 |---|---|---|
 | 문의 시트 "SQLD양파 CS" (파일 ID `1ZetajcAO8lDHTbYF0EwfKoytJnDjI-SAqk8510XOIDg`, 시트1, A1:K 열) | 사용자 제보·문의 | Google Drive 커넥터 `mcp__Google_Drive__read_file_content`로 읽기. 읽은 행 수가 시트의 마지막 행과 맞는지 확인하고, 안 맞으면 실패로 보고 |
-| 사이트 (`https://sqldyangpa.com/`) | 실제 노출 화면 확인 (재현용) | 네트워크 허용 필요 |
+| 사이트 (`https://sqldyangpa.com/`) | 선택 확인용. 필수 입력이 아님 | Vercel 방화벽이 이 세션을 차단할 수 있음. 막히면 건너뜀 |
+| 로컬 빌드 (`npm run build` 후 `npm run preview`) | 렌더링 결함(해설·그림 미표시 등) 재현 | 로컬, 세션에 설치된 Chromium 사용 |
 | 저장소 `scripts/authored/round-NN.json` | 기출 원본 데이터(수동 저작) | 로컬 |
 | 저장소 `src/data/theory*.ts` | 이론 콘텐츠 | 로컬 |
 | 저장소 `docs/maintenance/state.json` | 마지막 처리 제보 행 번호 등 실행 상태 | 로컬 |
