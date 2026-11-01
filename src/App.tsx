@@ -102,8 +102,11 @@ export const App = () => {
   React.useEffect(() => {
     document.documentElement.dataset.theme = tweaks.theme;
     const accent = ACCENT_PRESETS[tweaks.accent] || ACCENT_PRESETS.green;
+    // 강조색 프리셋은 라이트 모드 값이다. 다크 모드에서 인라인으로 넣으면 CSS 의 다크 토큰(--point-050 등)을
+    // 덮어써 밝은 배경에 밝은 글씨가 된다(2026-11-02 확인: 이론 요약 상자·표 머리 등이 안 보임). 다크에서는 빼 준다.
     for (const [k, v] of Object.entries(accent)) {
-      document.documentElement.style.setProperty(k, v as string);
+      if (tweaks.theme === 'dark') document.documentElement.style.removeProperty(k);
+      else document.documentElement.style.setProperty(k, v as string);
     }
   }, [tweaks.theme, tweaks.accent]);
 
@@ -120,7 +123,7 @@ export const App = () => {
       'theory-detail': `이론 상세 · ${base}`,
       mock: `모의고사 · ${base}`,
       endless: `랜덤 퀴즈 · ${base}`,
-      'mock-exam': `AI 모의고사 진행 · ${base}`,
+      'mock-exam': `실전 모의고사 진행 · ${base}`,
       exams: `기출문제 · ${base}`,
       cbt: `CBT 진행 · ${base}`,
       'cbt-result': `CBT 결과 · ${base}`,

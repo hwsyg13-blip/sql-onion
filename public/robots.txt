@@ -46,7 +46,7 @@ Allow: /
 Allow: /privacy.html
 Allow: /ads.txt
 
-# 파비콘·로고·OG 이미지 — Google 검색 결과 표시에 필요. /assets/ 차단보다 먼저 선언해 우선 적용.
+# 파비콘·로고·OG 이미지 — Google 검색 결과 표시에 필요.
 Allow: /assets/favicon-32.png
 Allow: /assets/favicon-48.png
 Allow: /assets/favicon-96.png
@@ -62,8 +62,8 @@ Allow: /assets/og-cover.svg
 Allow: /assets/onion-mark.svg
 Allow: /assets/onion-mascot.svg
 
-# Vite 빌드 산출물(JS/CSS chunk) — 사용자 페이지가 아니므로 색인 제외
-Disallow: /assets/
+# Vite 빌드 산출물(JS/CSS)은 막지 않는다. Google 이 화면을 그리려면 이 파일들을 받아야 한다.
+# (2026-11-02: Disallow: /assets/ 때문에 크롤러에게 앱이 빈 화면으로 보였다 — 애드센스 '콘텐츠 없음' 판정 원인)
 
 # 사이트맵
 Sitemap: https://sqldyangpa.com/sitemap.xml

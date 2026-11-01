@@ -222,13 +222,50 @@ if (skippedEmpty.length > 0) {
   for (const [pool, ids] of Object.entries(byPool)) console.log(`  ${pool}: ${ids.length}건`);
 }
 
-const aiMockEntries = combinedMock.map((q, i) => {
+// ── 같은 문제 중복 제거 (2026-11-01) ─────────────────────────────────────────
+// 출처가 다른 풀(cbt-mock ↔ sqld-1140 등)에 같은 문제가 들어 있어 한 모의고사에서 같은 문제를 두 번 만날 수 있었다.
+// 제목(기계적으로 붙은 앞 문구 제외)·보기 집합·참고자료가 모두 같으면 같은 문제로 보고, 해설이 더 긴 쪽 하나만 남긴다.
+// 원본 JSON 은 그대로 두므로 이 블록을 지우면 되돌릴 수 있다.
+const FILLER_PREFIX = /^(출제 포인트를 복합적으로 적용하면|데이터 구조의 목적을 생각하면|설계 원칙을 기준으로 판단하면|업무 규칙과 제약조건을 함께 고려하면|실무 적용 관점에서 보면|표와 관계를 함께 읽으면|SQL문을 단계별로 해석하면|식과 절의 반환 규칙을 적용하면|문장을 그대로 평가하면|조건식과 함수 의미를 함께 고려하면|SQL 표현식 결과를 계산하면|엔터티와 데이터 분포를 함께 보면|제시된 표를 바탕으로 SQL문을 그대로 평가하면), /;
+const refKey = q => (q.references || []).map(r =>
+  r.type === 'table' ? JSON.stringify(r.rows) : r.type === 'sql' ? r.code : r.type === 'text' ? r.content
+  : r.type === 'erd' ? r.mermaid : (r.src || '')).join('#');
+const dupKey = q => (q.title.replace(FILLER_PREFIX, '') + '|' + [...q.options].sort().join('|') + '|' + refKey(q))
+  .replace(/[\s,.]+/g, '').toLowerCase();
+const keptByKey = new Map();
+for (const q of combinedMock) {
+  const k = dupKey(q);
+  const prev = keptByKey.get(k);
+  if (!prev || (q.explanation || '').length > (prev.explanation || '').length) keptByKey.set(k, q);
+}
+const keptSet = new Set(keptByKey.values());
+const droppedDup = combinedMock.filter(q => !keptSet.has(q));
+const uniqueMock = combinedMock.filter(q => keptSet.has(q));
+if (droppedDup.length) console.log(`[중복 제외] ${droppedDup.length} 문항 — 같은 문제의 사본 (남은 풀 ${uniqueMock.length})`);
+
+// ── 모의고사 번호 고정 (2026-11-01) ───────────────────────────────────────────
+// 번호는 오류 제보·문의 시트가 '모의고사 1209번' 처럼 참조한다. 예전에는 필터 뒤 순번(i + 1)이라
+// 문항을 빼거나 되살리면 뒤 번호가 모두 밀렸다. scripts/mock-numbers.json(_id → 번호)에 고정하고,
+// 새 문항만 가장 큰 번호 다음을 받는다. id 도 번호에서 정한다(10799 + 번호, 기존 값과 같음).
+const NUM_FILE = 'scripts/mock-numbers.json';
+const mockNumbers = existsSync(NUM_FILE) ? JSON.parse(readFileSync(NUM_FILE, 'utf8')) : {};
+let maxNumber = Math.max(0, ...Object.values(mockNumbers));
+let newNumbers = 0;
+for (const q of uniqueMock) if (!(q._id in mockNumbers)) { mockNumbers[q._id] = ++maxNumber; newNumbers++; }
+if (newNumbers) {
+  writeFileSync(NUM_FILE, JSON.stringify(mockNumbers, null, 0).replace(/,"/g, ',\n"') + '\n', 'utf8');
+  console.log(`[모의고사 번호] 새 문항 ${newNumbers}개에 번호 부여 (최대 ${maxNumber})`);
+}
+const MOCK_ID_BASE = 10799;
+if (nextId > MOCK_ID_BASE + 1) throw new Error(`기출 문항 id(${nextId})가 모의고사 고정 id 범위(${MOCK_ID_BASE + 1}~)와 겹친다. MOCK_ID_BASE 를 올리고 mock-numbers 정책을 다시 정할 것`);
+
+const aiMockEntries = uniqueMock.map(q => {
   const entry = {
-    id: nextId++,
+    id: MOCK_ID_BASE + mockNumbers[q._id],
     examSetId: 'ai-mock',
     examLabel: '모의고사',
     subject: q.subject,
-    number: i + 1,
+    number: mockNumbers[q._id],
     title: q.title,
     options: q.options.slice(0, 4),
     correctIndex: q.correctIndex,
@@ -250,7 +287,7 @@ const aiMockEntries = combinedMock.map((q, i) => {
     entry.optionReferences = q.optionReferences;
   }
   return entry;
-});
+}).sort((a, b) => a.number - b.number);
 
 writeFileSync(resolve(ROUNDS_DIR, 'ai-mock.ts'), `// Auto-generated from scripts/authored/ai-mock.json
 // AI 생성 모의고사 풀 (기출 변형) · ${aiMockEntries.length}문항

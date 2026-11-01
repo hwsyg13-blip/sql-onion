@@ -19,7 +19,7 @@ export const ROUND_48: QuizQuestion[] = [
       "반드시 모든 데이터를 정규화해야 한다."
     ],
     "correctIndex": 3,
-    "explanation": "성능·업무 요건에 따라 반정규화를 수행하기도 하므로 정규화가 필수 절대 조건은 아니다.",
+    "explanation": "데이터 모델링은 현실 세계를 추상화·단순화해 표현하고(①), 업무 규칙을 반영하며(②), 엔터티 간 관계를 정의한다(③). 정규화는 중복을 줄이는 기본 원칙이지만, 조회 성능 등 업무 요건에 따라 반정규화를 하기도 하므로 '반드시 모든 데이터를 정규화해야 한다' 는 ④ 가 옳지 않다.",
     "_source": "authored"
   },
   {
@@ -79,7 +79,7 @@ export const ROUND_48: QuizQuestion[] = [
       "존재적 관계는 엔터티 간의 상태를, 행위적 관계는 엔터티 간 행위로 발생하는 관계를 나타낸다."
     ],
     "correctIndex": 2,
-    "explanation": "ERD 표기법은 존재·행위 관계를 구분하지 않으며, UML 만 연관·의존 관계를 실선·점선으로 구분한다.",
+    "explanation": "관계는 존재에 의한 관계(예: 부서-사원)와 행위에 의한 관계(예: 고객-주문)로 나눌 수 있지만, ERD 에서는 둘을 구분하지 않고 같은 표기법으로 그린다(①). 반면 UML 클래스 다이어그램은 연관관계(실선)와 의존관계(점선)를 구분한다(②). 따라서 ERD 에서 존재·행위 관계를 실선·점선으로 구분한다는 ③ 이 옳지 않다. ④ 는 두 관계의 뜻을 바르게 설명했다.",
     "_source": "authored"
   },
   {
@@ -599,7 +599,7 @@ export const ROUND_48: QuizQuestion[] = [
       "B 300 / A 200 / A 50 / C 100"
     ],
     "correctIndex": 1,
-    "explanation": "ID=A 는 순위 1, 나머지는 순위 2 로 정렬된 뒤 AMT DESC 로 내부 정렬된다.",
+    "explanation": "첫 정렬 키 CASE 식은 ID = 'A' 면 1, 나머지는 2 라서 A 행들이 먼저 나온다. 같은 키 안에서는 AMT DESC 로 정렬하므로 A 200, A 50, 그다음 B 300, C 100 순이다(②). ① 과 ④ 는 AMT 만으로 정렬한 순서, ③ 은 AMT 오름차순 순서다.",
     "_source": "authored",
     "references": [
       {
@@ -667,7 +667,7 @@ export const ROUND_48: QuizQuestion[] = [
       "ALTER TABLE T MODIFY 컬럼명 DATE DEFAULT '날짜' NOT NULL;"
     ],
     "correctIndex": 1,
-    "explanation": "Oracle 에서는 ADD 뒤에 COLUMN 키워드를 쓰지 않는다.",
+    "explanation": "Oracle 에서 컬럼 추가는 ALTER TABLE 테이블명 ADD 컬럼명 타입 형식이며 COLUMN 키워드를 쓰지 않는다(②). ① 은 ADD 가 없고, ③ 의 ADD COLUMN 은 SQL Server·MySQL 등의 문법이며, ④ MODIFY 는 이미 있는 컬럼을 변경할 때 쓴다.",
     "_source": "authored"
   },
   {
@@ -1115,15 +1115,15 @@ export const ROUND_48: QuizQuestion[] = [
     "round": 48,
     "subject": "2과목",
     "number": 33,
-    "title": "소계·총계를 포함한 결과에서 NULL 이 아닌 빈 문자열이 출력되도록 하는 처리는?",
+    "title": "ROLLUP 결과에서 데이터 자체의 NULL 과 구분하여, 소계·총계 행에만 '합계' 가 출력되도록 하는 처리로 가장 적절한 것은?",
     "options": [
-      "CASE WHEN GROUPING() = 1 THEN '' ELSE 컬럼 END",
-      "NVL(컬럼, '')",
+      "CASE WHEN GROUPING(컬럼) = 1 THEN '합계' ELSE 컬럼 END",
+      "NVL(컬럼, '합계')",
       "COALESCE(컬럼, 0)",
-      "NULLIF(컬럼, '')"
+      "NULLIF(컬럼, '합계')"
     ],
     "correctIndex": 0,
-    "explanation": "ROLLUP·CUBE 결과의 소계·총계 행에서는 그룹 키 컬럼이 NULL로 표시된다. 이 NULL은 \"진짜 데이터의 NULL\"이 아니라 \"소계 행임을 나타내는 표식\"이라 구분이 필요한다. GROUPING(컬럼) 함수는 해당 컬럼이 소계·총계 행이면 1, 일반 행이면 0을 반환하므로 `CASE WHEN GROUPING(컬럼) = 1 THEN '' ELSE 컬럼 END` 형태로 빈 문자열을 출력할 수 있다. ②·④는 데이터의 NULL과 소계 NULL을 구분하지 못하고, ③은 NULL을 0으로 바꾸므로 의도와 다르다. 정답은 ①번이다.",
+    "explanation": "ROLLUP·CUBE 의 소계·총계 행에서는 그룹 기준 컬럼이 NULL 로 표시되는데, 이 NULL 은 데이터의 NULL 이 아니라 '소계 행' 이라는 표식이다. GROUPING(컬럼) 은 그 컬럼이 소계·총계로 집계된 행이면 1, 일반 행이면 0 을 반환하므로 CASE WHEN GROUPING(컬럼) = 1 THEN '합계' ELSE 컬럼 END 로 소계 행에만 '합계' 를 출력할 수 있다(①). ② NVL 은 원래 데이터가 NULL 인 행까지 '합계' 로 바꿔 구분하지 못하고, ③ 은 NULL 을 0 으로 바꾸며, ④ NULLIF 는 값이 '합계' 와 같을 때 NULL 을 반환하는 함수라 의도와 반대다. 참고로 Oracle 에서는 빈 문자열 '' 이 NULL 로 처리된다.",
     "_source": "authored"
   },
   {
@@ -1141,7 +1141,7 @@ export const ROUND_48: QuizQuestion[] = [
       "CASE 바로 뒤에 비교 대상 컬럼을 기술해야 한다."
     ],
     "correctIndex": 3,
-    "explanation": "SEARCHED CASE 는 CASE 뒤에 컬럼을 쓰지 않고 WHEN 조건식에서 비교한다.",
+    "explanation": "SEARCHED CASE 는 CASE WHEN 조건식 THEN 값 형태로 WHEN 마다 조건을 따로 쓰고(①), 위에서부터 평가해 처음 참이 되는 값을 반환하며(②), ELSE 를 생략하면 NULL 이다(③). CASE 바로 뒤에 비교 대상 컬럼을 쓰는 것은 SIMPLE CASE(CASE 컬럼 WHEN 값 THEN …)이므로 ④ 가 옳지 않다.",
     "_source": "authored"
   },
   {
@@ -1159,7 +1159,7 @@ export const ROUND_48: QuizQuestion[] = [
       "뷰는 참조 테이블 구조 변경에 영향을 받지 않는다."
     ],
     "correctIndex": 0,
-    "explanation": "뷰를 변경하려면 CREATE OR REPLACE VIEW 를 사용해야 한다.",
+    "explanation": "Oracle 의 ALTER VIEW 는 재컴파일이나 제약 조건 관리에만 쓰이고, 뷰의 정의(SELECT 문)는 바꿀 수 없다. 정의를 바꾸려면 CREATE OR REPLACE VIEW 로 다시 만든다. 따라서 ① 이 옳다. 뷰는 데이터를 저장하지 않는 가상 테이블이고(②), DROP VIEW 로 삭제할 수 있으며(③), 참조하는 테이블의 컬럼이 바뀌면 뷰가 무효화되는 등 영향을 받는다(④).",
     "_source": "authored"
   },
   {
@@ -1504,7 +1504,7 @@ export const ROUND_48: QuizQuestion[] = [
       "2"
     ],
     "correctIndex": 2,
-    "explanation": "정렬 키는 3*3=9, 1*3=3, 4, 2 순으로 3, 4, 1, 2 가 출력된다. 세 번째는 1 이다.",
+    "explanation": "정렬 키는 ID 가 1, 3 이면 ID × 3, 아니면 ID 다. ID 1 → 3, ID 2 → 2, ID 3 → 9, ID 4 → 4 이고, 키 내림차순(9, 4, 3, 2)으로 출력하면 ID 는 3, 4, 1, 2 순이다. 세 번째로 출력되는 값은 1 이다(③).",
     "_source": "authored",
     "references": [
       {
@@ -1611,7 +1611,7 @@ export const ROUND_48: QuizQuestion[] = [
       "LAG"
     ],
     "correctIndex": 3,
-    "explanation": "LAG 는 파티션 내에서 현재 행으로부터 지정한 오프셋만큼 이전 행의 값을 반환한다.",
+    "explanation": "LAG 는 현재 행 기준으로 지정한 오프셋(기본 1)만큼 앞(이전) 행의 값을 반환한다(④). LEAD(①)는 반대로 다음 행의 값, FIRST_VALUE(②)는 윈도우의 첫 행 값, NTILE(③)은 행을 N 개 그룹으로 나눈 그룹 번호를 반환한다.",
     "_source": "authored"
   },
   {
@@ -1629,7 +1629,7 @@ export const ROUND_48: QuizQuestion[] = [
       "IN, TO"
     ],
     "correctIndex": 1,
-    "explanation": "GRANT 구문은 `GRANT 권한 ON 객체 TO 사용자` 형식을 따른다.",
+    "explanation": "권한 부여 구문은 GRANT 권한 ON 객체 TO 사용자 이므로 빈칸에는 차례로 ON, TO 가 들어간다(②). 권한 회수는 REVOKE 권한 ON 객체 FROM 사용자 처럼 FROM 을 쓴다.",
     "_source": "authored",
     "references": [
       {

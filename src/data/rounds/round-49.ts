@@ -104,7 +104,7 @@ export const ROUND_49: QuizQuestion[] = [
       "FOREIGN KEY 제약 조건을 정의한다."
     ],
     "correctIndex": 3,
-    "explanation": "외래키 제약은 테이블 간 참조 관계에서 정의되며 도메인의 속성에 포함되지 않는다.",
+    "explanation": "도메인은 속성이 가질 수 있는 값의 범위로, 데이터 타입(①)·크기와 범위(②)·NOT NULL 여부(③)·CHECK 조건 같은 값의 제약을 정의한다. 외래키(FOREIGN KEY)는 한 속성의 값 범위가 아니라 두 테이블 사이의 참조 관계를 정의하는 제약이므로 도메인의 특징이 아니다(④).",
     "_source": "authored"
   },
   {
@@ -122,7 +122,7 @@ export const ROUND_49: QuizQuestion[] = [
       "식별자 관계는 자식의 주식별자가 부모로부터 독립되어 있고, 비식별자 관계는 자식의 주식별자가 부모에게 종속되어 있다."
     ],
     "correctIndex": 3,
-    "explanation": "설명이 반대로 기술되어 있다. 식별자 관계는 자식의 주식별자가 부모에 종속되고, 비식별자 관계는 독립적이다.",
+    "explanation": "식별자 관계는 부모의 주식별자가 자식의 주식별자에 포함되는 관계라(①) 자식은 부모 없이 존재할 수 없다(②). 비식별자 관계는 부모의 주식별자가 자식의 일반 속성(FK)으로만 들어가 자식이 독립적으로 존재할 수 있다(③). ④ 는 두 관계의 설명을 서로 바꿔 놓아 옳지 않다.",
     "_source": "authored"
   },
   {
@@ -188,7 +188,7 @@ export const ROUND_49: QuizQuestion[] = [
       "순차 시퀀스"
     ],
     "correctIndex": 2,
-    "explanation": "주민등록번호는 업무상 이미 존재하는 값으로 본질 식별자에 해당한다.",
+    "explanation": "본질 식별자는 업무에 의해 원래부터 만들어지는 식별자로, 주민등록번호처럼 업무상 이미 존재하는 값이 해당한다(③). 시스템이 부여한 일련번호(①), 자동 증가 숫자(②), 순차 시퀀스(④)는 업무와 관계없이 편의를 위해 인위적으로 만든 인조 식별자다.",
     "_source": "authored"
   },
   {
@@ -260,7 +260,7 @@ export const ROUND_49: QuizQuestion[] = [
       "다른 유저가 커밋 이전의 변경 내용을 수정할 수 있다."
     ],
     "correctIndex": 3,
-    "explanation": "고립성(Isolation) 에 따라 커밋 이전의 변경은 다른 세션이 수정하거나 조회할 수 없다.",
+    "explanation": "커밋 전 변경 중인 행에는 잠금(Lock)이 걸려 있어 다른 사용자는 그 행을 수정할 수 없고(④ 가 옳지 않음), 조회하더라도 변경 전(마지막으로 커밋된) 데이터만 보인다. 본인 세션에서는 변경된 내용을 조회할 수 있고(①), ROLLBACK 으로 취소할 수 있으며(②), Oracle 에서는 DDL 을 수행하면 그 전에 묵시적 COMMIT 이 일어난다(③).",
     "_source": "authored"
   },
   {
@@ -352,7 +352,7 @@ export const ROUND_49: QuizQuestion[] = [
       "999, 200, 100"
     ],
     "correctIndex": 1,
-    "explanation": "CASE 식은 ID=999 일 때 0 을 반환해 999 가 가장 먼저 정렬되고, 이어서 ID=100 이 반환된다.",
+    "explanation": "HAVING COUNT(*) = 2 로 두 번 나오는 ID 만 남기면 100 과 999 다(200 은 3번). 정렬 키 CASE 식은 999 면 0, 나머지는 ID 그대로라 999(0) → 100(100) 순으로 출력된다(②). ① 은 ID 값 그대로 정렬한 결과이고, ③④ 는 HAVING 조건을 무시해 200 이 포함됐다.",
     "_source": "authored",
     "references": [
       {
@@ -406,7 +406,7 @@ export const ROUND_49: QuizQuestion[] = [
       "SELECT * FROM TEAM A INNER JOIN STADIUM B ON (ID);"
     ],
     "correctIndex": 3,
-    "explanation": "ON 절에는 비교식이 와야 하며, USING 절과 달리 컬럼명만 단독으로 지정할 수 없다.",
+    "explanation": "ON 절에는 A.ID = B.ID 같은 조건식을 써야 하며, ON (ID) 처럼 컬럼명만 쓰면 문법 오류다(④). 컬럼명만 쓰는 것은 USING(ID)(②)이고, ON A.ID = B.ID(①)와 NATURAL JOIN(③, 같은 이름 컬럼 ID 로 자동 조인)은 정상 실행된다.",
     "_source": "authored",
     "references": [
       {
@@ -958,7 +958,7 @@ export const ROUND_49: QuizQuestion[] = [
       "CROSS"
     ],
     "correctIndex": 0,
-    "explanation": "부서(B) 를 기준으로 유지해야 하므로 B 쪽이 오른쪽에 있다면 RIGHT OUTER JOIN 이다.",
+    "explanation": "사원이 없는 부서도 결과에 나오려면 부서(DEPT B) 쪽 행을 모두 보존해야 한다. DEPT 가 JOIN 키워드의 오른쪽에 있으므로 RIGHT OUTER JOIN 이다(①). 이때 사원이 없는 부서는 COUNT(사원번호) 가 NULL 을 세지 않아 0 으로 나온다. LEFT OUTER 는 사원 쪽 보존, INNER 는 사원 없는 부서 제외, CROSS 는 카티션 곱이다.",
     "_source": "authored",
     "references": [
       {
@@ -982,7 +982,7 @@ export const ROUND_49: QuizQuestion[] = [
       "GRANT SELECT, UPDATE ON A_USER.TB_A TO B_USER;"
     ],
     "correctIndex": 3,
-    "explanation": "UPDATE 는 WHERE 조건 평가를 위한 SELECT 와 실제 UPDATE 권한이 모두 필요하다.",
+    "explanation": "UPDATE ... WHERE COL2 = 3 은 조건을 평가하려고 테이블을 읽어야 하므로 UPDATE 권한과 함께 SELECT 권한도 필요하다. 객체 권한은 GRANT 권한 ON 소유자.객체 TO 사용자 형식으로 준다(④). ① 은 ON 객체가 없어 문법 오류, ② 는 권한을 회수하는 구문, ③ DENY 는 Oracle 문법이 아니며 권한을 막는 쪽이다.",
     "_source": "authored",
     "references": [
       {
@@ -1006,7 +1006,7 @@ export const ROUND_49: QuizQuestion[] = [
       "DBA, U1, U2, U3"
     ],
     "correctIndex": 3,
-    "explanation": "RESTRICT 옵션은 U3 가 권한을 이미 가진 상황에서 REVOKE 가 거부되므로 모든 사용자의 권한이 유지된다.",
+    "explanation": "U2 는 WITH GRANT OPTION 으로 받은 권한을 U3 에게 넘겼다. RESTRICT 로 REVOKE 하면 회수할 권한에 의존하는 권한(U3 의 권한)이 있을 때 회수 자체가 거부된다. 따라서 아무 권한도 회수되지 않아 DBA, U1, U2, U3 모두 SELECT 권한을 가진다(④). CASCADE 였다면 U2 와 U3 의 권한이 함께 회수되어 DBA, U1 만 남는다(②).",
     "_source": "authored",
     "references": [
       {
@@ -1030,7 +1030,7 @@ export const ROUND_49: QuizQuestion[] = [
       "INSERT INTO T1 (B, C) VALUES (9, 1);"
     ],
     "correctIndex": 3,
-    "explanation": "A 는 DEFAULT 9 가 지정되어 있으므로 생략해도 9 가 할당되고 PK 조건을 만족한다.",
+    "explanation": "④ 는 A 를 생략했으므로 DEFAULT 9 가 들어가 PK 를 만족하고, NOT NULL 인 B 에 9 가 들어가 정상 입력된다. ① 은 컬럼 목록 없이 값 2개만 주어 컬럼 수(3개)와 맞지 않아 오류, ② 는 NOT NULL 인 B 가 빠져 NULL 이 들어가므로 오류, ③ 은 PK 인 A 에 NULL 을 명시적으로 넣어 오류다 (DEFAULT 는 값을 생략했을 때만 적용되고, NULL 을 직접 넣으면 적용되지 않는다).",
     "_source": "authored",
     "references": [
       {
@@ -1054,7 +1054,7 @@ export const ROUND_49: QuizQuestion[] = [
       "NULL"
     ],
     "correctIndex": 1,
-    "explanation": "ROLLBACK 으로 UPDATE·DELETE 가 취소되어 VAL 은 (1, 2, 3) 이 되며 평균은 2 이다.",
+    "explanation": "INSERT 1, 2 뒤에 SAVEPOINT X 를 만들었다. 이후 UPDATE(10, 20)와 DELETE(20 삭제)는 ROLLBACK TO SAVEPOINT X 로 취소되어 VAL 은 다시 (1, 2) 가 된다. 여기에 3 을 넣으면 (1, 2, 3) 이므로 AVG = 2 다(②). ROLLBACK TO SAVEPOINT 는 저장점 이전의 INSERT 까지 취소하지 않는다.",
     "_source": "authored",
     "references": [
       {
@@ -1108,7 +1108,7 @@ export const ROUND_49: QuizQuestion[] = [
       "MAX: 700, 700, 700, 700, 700, 700, 700"
     ],
     "correctIndex": 0,
-    "explanation": "각 윈도우 정의에 따른 계산 결과를 직접 산출하여 얻는다.",
+    "explanation": "MAX(COL1) 의 윈도우는 ROWS BETWEEN UNBOUNDED PRECEDING AND 2 FOLLOWING 이므로 COL1 오름차순으로 \"첫 행부터 현재 행의 두 행 뒤까지\" 의 최댓값이다. 1행은 1~3행 → 300, 2행은 1~4행 → 400, 3행 → 500, 4행 → 600, 5행은 1~7행 → 700, 6행·7행은 뒤에 두 행이 없어 마지막 행까지 → 700, 700. 따라서 ① 300, 400, 500, 600, 700, 700, 700 이다. ② 는 마지막 행 값을 잘못 계산했고, ③ 은 현재 행까지만(CURRENT ROW) 본 결과, ④ 는 전체 행을 윈도우로 본 결과다.",
     "_source": "authored",
     "references": [
       {
@@ -1178,7 +1178,7 @@ export const ROUND_49: QuizQuestion[] = [
       "2, 1"
     ],
     "correctIndex": 0,
-    "explanation": "DISTINCT 결과 (1,A), (1,B) 의 2 건이므로 각 COUNT 는 2 이다.",
+    "explanation": "인라인 뷰의 DISTINCT COL1, COL2 는 중복 행을 없애 (1, A), (1, B) 두 행을 만든다. 바깥 쿼리의 COUNT(COL1), COUNT(COL2) 는 이 두 행을 세므로 둘 다 2 다(①). DISTINCT 전 4행을 세면 4, 4(②)이고, COUNT 는 행 수를 세므로 COL1 값이 같아도 1 이 되지 않는다(③④).",
     "_source": "authored",
     "references": [
       {
@@ -1273,7 +1273,7 @@ export const ROUND_49: QuizQuestion[] = [
       "조건을 만족하는 행이 없어 공집합이 반환된다."
     ],
     "correctIndex": 0,
-    "explanation": "'S%' 는 SMITH 와 SCOTT 에 매칭되고, '%T%' 도 두 이름 모두에 매칭된다.",
+    "explanation": "조인 조건 A.NAME LIKE B.RULE 은 TAB2 의 RULE 값을 패턴으로 쓴다. 'S%' 는 S 로 시작하는 SMITH, SCOTT 에, '%T%' 는 T 를 포함하는 SMITH, SCOTT 에 매칭되고 ALICE 는 어디에도 매칭되지 않는다. 그래서 4행이 나온다(①). 조인 조건이 있으므로 카티션 곱(③)이 아니다.",
     "_source": "authored",
     "references": [
       {
@@ -1355,7 +1355,7 @@ export const ROUND_49: QuizQuestion[] = [
       "89"
     ],
     "correctIndex": 1,
-    "explanation": "뒤에서 네 번째 문자부터 2 글자(6, 7) 를 반환한다.",
+    "explanation": "SUBSTR 의 시작 위치가 음수면 문자열 끝에서부터 센다. '123456789' 에서 -4 는 뒤에서 네 번째 문자 6 이고, 거기서 2 글자를 잘라 '67' 이다(②).",
     "_source": "authored",
     "references": [
       {
@@ -1597,7 +1597,7 @@ export const ROUND_49: QuizQuestion[] = [
       "라, 마"
     ],
     "correctIndex": 3,
-    "explanation": "가는 컬럼 개수 불일치, 나는 DEGREE 길이 초과, 다는 NOT NULL 위반으로 실패한다.",
+    "explanation": "가 는 컬럼 목록 없이 값 2개만 넣어 컬럼 수(3개)와 맞지 않고, 나 는 VARCHAR2(1) 인 DEGREE 에 2 글자 'AB' 를 넣어 길이 초과, 다 는 NOT NULL 인 AMT 를 빼서 실패한다. 라 는 DEGREE 만 생략해 NULL 이 들어가고, 마 는 세 컬럼 값을 모두 주고 DEGREE 에 NULL 을 명시해 성공한다. 정답은 ④ 라, 마 다.",
     "_source": "authored",
     "references": [
       {
