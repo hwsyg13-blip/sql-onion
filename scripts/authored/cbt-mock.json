@@ -321,7 +321,7 @@
       "_origNo": 10,
       "subject": "2과목",
       "chapter": "윈도우 함수",
-      "title": "그룹 내 행 순서 관련 함수에 속하지 않는 함수를 모두 고르시오.",
+      "title": "그룹 내 행 순서 관련 함수에 속하지 않는 함수는?",
       "options": [
         "FIRST_VALUE",
         "LAST_VALUE",
