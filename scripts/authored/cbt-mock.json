@@ -1878,10 +1878,10 @@
       "chapter": "함수",
       "title": "다음의 SQL문과 동일한 것을 고르시오.",
       "options": [
-        "Select Case When Name IS NOT NULL THEN NAME ELSE ‘0’ END AS USER_NAME From Emp;",
-        "Select Case When Name IS NOT NULL THEN ‘0’ ELSE NAME END AS USER_NAME From Emp;",
-        "Select Case When Name IS NULL THEN ‘없음’ ELSE NAME END AS USER_NAME From Emp;",
-        "Select Case When Name IS NULL THEN ‘없음’ ELSE ‘0’ END AS USER_NAME From Emp;"
+        "Select Case When Name IS NOT NULL THEN NAME ELSE '0' END AS USER_NAME From Emp;",
+        "Select Case When Name IS NOT NULL THEN '0' ELSE NAME END AS USER_NAME From Emp;",
+        "Select Case When Name IS NULL THEN '없음' ELSE NAME END AS USER_NAME From Emp;",
+        "Select Case When Name IS NULL THEN '없음' ELSE '0' END AS USER_NAME From Emp;"
       ],
       "correctIndex": 2,
       "explanation": "IS NULL 함수는 만약 NULL이면 “없음”을 출력하고 그렇지 않으면 NAME 칼럼의 값을 출력하는 것이다.",
