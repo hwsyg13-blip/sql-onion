@@ -73,7 +73,7 @@ export const HomeScreen = ({onNavigate, user}) => {
     <section style={{marginTop: 28, display:"grid", gridTemplateColumns:"repeat(auto-fit, minmax(260px, 1fr))", gap: 14}}>
       {[
         {id:"exams",   tone:"point", title:"기출문제 CBT", sub:"실제 시험처럼 OMR 답안지로", icon: Ic.ListChecks, cta:"회차 선택"},
-        {id:"endless", tone:"blue",  title:"무한 퀴즈",   sub:"AI가 만드는 단일 문제 · 즉시 채점", badge:"추천", icon: Ic.Shuffle, cta:"시작하기"},
+        {id:"endless", tone:"blue",  title:"무한 퀴즈",   sub:"검수된 문제 은행에서 한 문제씩 · 즉시 채점", badge:"추천", icon: Ic.Shuffle, cta:"시작하기"},
         {id:"mock-exam",tone:"peach", title:"실전 모의고사", sub:"50문항 · 90분 · 합격 판정", icon: Ic.Clock, cta:"응시하기"},
       ].map(card => {
         const I = card.icon;

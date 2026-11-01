@@ -45,7 +45,7 @@
         "파생 속성은 많을수록 좋다."
       ],
       "correctIndex": 3,
-      "explanation": "파생 속성은 중복을 야기할 수 있으므로 가능한 한 최소화하는 것이 원칙이다."
+      "explanation": "속성은 엔터티의 특성을 나타내며(①), 기본 속성·설계 속성·파생 속성으로 나뉘고(②), 파생 속성은 다른 속성에서 계산된다(③). 파생 속성은 원본이 바뀔 때 함께 갱신해야 해 정합성을 해치기 쉬우므로 꼭 필요한 만큼만 최소로 정의한다. 많을수록 좋다는 ④ 가 옳지 않다."
     },
     {
       "subject": "1과목",
@@ -58,7 +58,7 @@
         "주식별자의 값은 자주 변경될 수 있다."
       ],
       "correctIndex": 3,
-      "explanation": "주식별자는 변하지 않아야 한다는 '불변성' 을 특징으로 가진다."
+      "explanation": "식별자는 인스턴스의 유일성을 보장하고(①③), 유일성을 만족하는 최소한의 속성으로 구성되어야 한다(②, 최소성). 주식별자는 한 번 정해지면 값이 바뀌지 않아야 하므로(불변성) 자주 변경될 수 있다는 ④ 가 옳지 않다."
     },
     {
       "subject": "1과목",
@@ -71,7 +71,7 @@
         "비식별자 관계는 자식 엔터티가 독립적으로 존재할 수 있다."
       ],
       "correctIndex": 1,
-      "explanation": "비식별자 관계는 선택적(Optional) 참여가 가능하며 부모가 필수 조건이 아니다."
+      "explanation": "식별자 관계는 부모의 식별자를 자식에게 전달해 자식 주식별자의 일부가 되므로 부모에 종속적이다(①③). 비식별자 관계는 부모 식별자가 자식의 일반 속성으로만 들어가 자식이 독립적으로 존재할 수 있다(④). 비식별자 관계에서는 부모와의 관계가 선택(Optional)일 수 있으므로 반드시 필수라는 ② 가 옳지 않다."
     },
     {
       "subject": "1과목",
@@ -104,7 +104,7 @@
         "완전 함수 종속이 제거된 상태를 보이스-코드 정규형이라 한다."
       ],
       "correctIndex": 0,
-      "explanation": "제2정규형은 부분 함수 종속을 제거하여 일반 속성이 주식별자 전체에 종속되도록 한 상태이다."
+      "explanation": "일반 속성이 주식별자 전체에 함수 종속(완전 함수 종속)되어 부분 함수 종속이 없으면 2정규형이다(①). ② 이행 함수 종속을 제거하면 3정규형이 되고, ③ 상품번호 → 상품명 이라고 해서 상품명 → 상품번호 가 성립하지는 않으며(같은 이름의 상품이 있을 수 있음), ④ BCNF 는 결정자가 모두 후보키가 되도록 한 상태다."
     },
     {
       "subject": "1과목",
@@ -162,7 +162,7 @@
         "일부 제약 조건은 별도로 추가할 수 있다."
       ],
       "correctIndex": 1,
-      "explanation": "CTAS 는 NOT NULL 과 컬럼 타입만 전달하며 PK·FK·UNIQUE·CHECK 제약은 복사되지 않는다."
+      "explanation": "CTAS 는 SELECT 결과를 기준으로 새 테이블의 컬럼 구조를 만들고 데이터를 복사한다(①③). 이때 원본의 제약 조건 중 NOT NULL 만 따라오고 PK·FK·UNIQUE·CHECK·DEFAULT 는 복사되지 않아, 필요하면 ALTER TABLE 로 따로 추가한다(④). 제약 조건이 모두 복사된다는 ② 가 옳지 않다."
     },
     {
       "subject": "2과목",
@@ -291,7 +291,7 @@
         "인라인 뷰는 FROM 절에서 사용한다."
       ],
       "correctIndex": 0,
-      "explanation": "서브쿼리의 결과 레벨은 서브쿼리의 위치와 관계없이 메인 쿼리 레벨을 따르므로 항상 M 레벨로 집계된다고 할 수 없다."
+      "explanation": "서브쿼리는 메인쿼리의 컬럼을 사용할 수 있지만 결과 집합은 항상 메인쿼리의 레벨로 만들어진다. 메인쿼리와 서브쿼리가 1:M 관계여도 결과는 메인쿼리(1) 레벨이므로 \"항상 M 레벨로 집계된다\" 는 ① 이 옳지 않다. ② 서브쿼리 컬럼은 메인쿼리에서 직접 쓸 수 없고(인라인 뷰 제외), ③ 스칼라 서브쿼리는 한 행·한 컬럼만 반환해야 하며, ④ 인라인 뷰는 FROM 절의 서브쿼리다."
     },
     {
       "subject": "2과목",
@@ -390,7 +390,7 @@
         "SELECT A.NAME FROM HR.STADIUM A, SPORT.STADIUM B;"
       ],
       "correctIndex": 0,
-      "explanation": "동일한 테이블명이 두 스키마에 존재할 때는 스키마나 별칭으로 구분해야 한다."
+      "explanation": "같은 이름의 STADIUM 이 두 스키마에 있을 때 FROM 절에 둘 다 쓰면, SELECT 절의 STADIUM.NAME 이 어느 테이블인지 알 수 없어 오류(열의 정의가 애매함)가 난다(①). ② 처럼 스키마명을 붙이거나 ③④ 처럼 테이블 별칭을 주면 구분된다."
     },
     {
       "subject": "2과목",
@@ -403,7 +403,7 @@
         "A 가 NULL 이 아닐 경우 A 값을 반환한다."
       ],
       "correctIndex": 3,
-      "explanation": "COALESCE 는 왼쪽부터 NULL 이 아닌 첫 번째 값을 반환한다.",
+      "explanation": "COALESCE(A, 50*B, '50') 은 왼쪽부터 처음으로 NULL 이 아닌 값을 반환한다. A 가 NULL 이 아니면 A(①행 10)이고(④), A 가 NULL 이고 B 가 있으면 50*B(②행 250), 둘 다 NULL 이면 '50' 이다. ① 은 A 가 있으면 A 가 먼저라 틀리고, ② 는 100 이 아니라 50, ③ 은 B 가 NULL 이면 50*B 가 아니라 '50' 이라 틀리다.",
       "references": [
         {
           "type": "table",
@@ -599,7 +599,7 @@
         "중복 없이 각 한 번만 출력된다."
       ],
       "correctIndex": 0,
-      "explanation": "KIM 의 EMPNO 가 DEPT_EMP 에 두 번 등장하므로 조인 결과에서도 두 번 출력된다.",
+      "explanation": "INNER JOIN 은 EMPNO 가 같은 행끼리 짝을 짓는다. KIM(1)은 DEPT_EMP 에 1 이 두 번(10, 20) 있어 두 행이 나오고, LEE(2)는 한 번, PARK(3)은 짝이 없어 빠진다. 따라서 KIM 이 두 번 출력된다(①).",
       "references": [
         {
           "type": "table",
@@ -658,7 +658,7 @@
         "모든 행이 NULL 없이 출력된다."
       ],
       "correctIndex": 0,
-      "explanation": "SMITH 의 EMPNO 는 DEPT_EMP 에 매칭되는 행이 없어 DEPT 컬럼이 NULL 로 표시된다.",
+      "explanation": "LEFT OUTER JOIN 은 왼쪽 EMP 의 모든 행을 보존한다. KIM(1)과 LEE(3)는 DEPT_EMP 에 짝이 있어 DEPT 가 10, 20 으로 나오고, SMITH(2)는 짝이 없어 DEPT 가 NULL 로 출력된다(①).",
       "references": [
         {
           "type": "table",
@@ -907,7 +907,7 @@
         "NULL"
       ],
       "correctIndex": 1,
-      "explanation": "IN 절의 NULL 은 어떤 값과도 비교되지 않아 결과에 포함되지 않는다.",
+      "explanation": "COL IN ('A', 'B', NULL) 은 COL = 'A' OR COL = 'B' OR COL = NULL 과 같다. COL = NULL 은 어떤 값이든 UNKNOWN 이라 참이 되지 않으므로, COL 이 NULL 인 행도 포함되지 않고 A, B 만 반환된다(②). NULL 행을 찾으려면 IS NULL 을 써야 한다.",
       "references": [
         {
           "type": "table",
@@ -947,7 +947,7 @@
         "10, 20, 20"
       ],
       "correctIndex": 2,
-      "explanation": "AVG 함수는 NULL 을 자동으로 제외하므로 나이_그룹=3 에서는 (30+30)/2 = 30 이 산출된다.",
+      "explanation": "AVG 는 NULL 을 제외하고 평균을 구한다. 나이_그룹 1 은 (10+10)/2 = 10, 2 는 (20+20)/2 = 20, 3 은 NULL 을 빼고 (30+30)/2 = 30 이다(③). NULL 을 0 으로 보고 세 행으로 나누면 20(④)이 되지만 AVG 는 그렇게 계산하지 않는다.",
       "references": [
         {
           "type": "table",
@@ -1419,7 +1419,7 @@
         "B 와 C 행의 SUM 은 NULL 반환"
       ],
       "correctIndex": 3,
-      "explanation": "COL2+COL3 중 어느 한쪽이 NULL 이면 덧셈 결과가 NULL 이 되어 SUM 도 NULL 로 반환된다.",
+      "explanation": "A 행은 10 + 1 = 11 이라 SUM 이 11 이다. B 행은 20 + NULL, C 행은 NULL + 3 으로 덧셈 결과가 NULL 이고, 그룹에 행이 하나뿐이라 SUM 도 NULL 이다(④). 오류는 나지 않고(③), MIN·MAX(COL2) 는 B 가 20, C 는 NULL 이다.",
       "references": [
         {
           "type": "table",
@@ -1546,7 +1546,7 @@
     {
       "subject": "2과목",
       "number": 43,
-      "title": "테이블의 데이터와 종속된 테이블을 함께 삭제하는 명령어는?",
+      "title": "부서 테이블을 삭제하면서 부서 테이블을 참조하는 외래키 제약 조건도 함께 삭제하는 명령어는?",
       "options": [
         "TRUNCATE TABLE 부서;",
         "DROP TABLE 부서 CASCADE CONSTRAINTS;",
@@ -1554,7 +1554,7 @@
         "ALTER TABLE 부서 DROP COLUMN 부서명;"
       ],
       "correctIndex": 1,
-      "explanation": "CASCADE 옵션으로 종속 제약 조건 및 관련 객체가 함께 삭제된다."
+      "explanation": "DROP TABLE 부서 CASCADE CONSTRAINTS 는 부서 테이블을 삭제하면서, 부서 테이블을 참조하던 다른 테이블의 외래키 제약 조건도 함께 삭제한다(②, 참조하던 테이블 자체는 남는다). TRUNCATE(①)·DELETE(③)는 데이터만 지우고 테이블은 남기며, 참조하는 자식 행이 있으면 실패할 수 있다. ④ 는 컬럼 하나만 삭제한다."
     },
     {
       "subject": "2과목",
@@ -1567,7 +1567,7 @@
         "분류 가 NULL 인 경우에만"
       ],
       "correctIndex": 2,
-      "explanation": "IN 조건을 만족하지 않는 값은 ELSE 절로 분기되어 '취급안함' 이 반환된다.",
+      "explanation": "CASE WHEN 분류 IN ('A', 'B') THEN '취급' ELSE '취급안함' 이므로 A, B 는 '취급'(①②), 그 밖의 값인 C 는 '취급안함' 이다(③). NULL 도 IN 조건이 참이 아니라 ELSE 로 가서 '취급안함' 이 되지만, NULL 인 경우에'만' 그렇다는 ④ 는 틀리다.",
       "references": [
         {
           "type": "sql",
@@ -1737,7 +1737,7 @@
         "GROUP BY 절에는 사용할 수 없다."
       ],
       "correctIndex": 3,
-      "explanation": "단일 행 함수는 GROUP BY 절에서도 사용 가능하다."
+      "explanation": "단일 행 함수는 각 행마다 하나의 결과를 돌려주며(①), 여러 인자를 받을 수 있고(②, 예: SUBSTR), 함수 안에 함수를 중첩해 쓸 수 있다(③). SELECT·WHERE·ORDER BY 뿐 아니라 GROUP BY 절에도 쓸 수 있으므로(예: GROUP BY SUBSTR(입사일, 1, 4)) ④ 가 옳지 않다."
     },
     {
       "subject": "2과목",
@@ -1750,7 +1750,7 @@
         "조인으로 사용되는 컬럼은 반드시 컬럼명이 같아야 한다."
       ],
       "correctIndex": 3,
-      "explanation": "컬럼명이 달라도 ON 절로 조인 조건을 명시할 수 있다."
+      "explanation": "INNER JOIN 은 조인 조건이 일치하는 행만 반환하며(①), ON 절에 조건을 쓰거나(②) 같은 이름의 컬럼이면 USING 으로 간단히 쓸 수 있다(③). ON A.DEPTNO = B.DNO 처럼 컬럼명이 달라도 조인할 수 있으므로 반드시 같아야 한다는 ④ 가 옳지 않다."
     },
     {
       "subject": "2과목",

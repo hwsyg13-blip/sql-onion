@@ -5,7 +5,6 @@ import { QUIZ_BANK } from '../data/quizBank';
 import { sqloUsage } from './PricingScreen';
 import { BETA_NO_AUTH } from '../App';
 import { QuestionReferences, OptionReferences, renderInlineMd } from '../components/QuestionReferences';
-import { AdSlot } from '../components/AdSlot';
 import { BugReportModal } from '../components/BugReportModal';
 import { trackEvent } from '../lib/analytics';
 import { recordQuizAttempt } from '../lib/progress';
@@ -16,10 +15,10 @@ import { recordQuizAttempt } from '../lib/progress';
 export const MockLanding = ({onNavigate}) => (
   <div style={{maxWidth:820,margin:"0 auto",padding:"32px 28px 80px"}}>
     <div style={{display:"flex",alignItems:"center",gap:8,color:"var(--point-600)",fontSize:12,fontWeight:700,letterSpacing:"0.04em"}}>
-      <Ic.Sparkles size={14}/> AI 생성형 모의고사
+      <Ic.Sparkles size={14}/> 실전 모의고사
     </div>
     <h1 style={{fontSize:32,fontWeight:800,color:"var(--fg-1)",margin:"6px 0 6px",letterSpacing:"-0.02em"}}>모의고사</h1>
-    <p style={{fontSize:14,color:"var(--fg-3)",margin:"0 0 28px"}}>AI가 실제 시험 출제 비율대로 새로운 문제를 만들어요.</p>
+    <p style={{fontSize:14,color:"var(--fg-3)",margin:"0 0 28px"}}>검수한 문제 은행에서 실제 시험 출제 비율(1과목 10 · 2과목 40)대로 문제를 골라 구성해요.</p>
     <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit, minmax(300px, 1fr))",gap:16}}>
       {[
         {id:"endless",   t:"랜덤 퀴즈 모드",   s:"한문항씩 즉시 채점 · 해설 보기 · 무한 ", cta:"시작하기", icon:Ic.Shuffle, tone:"blue"},
@@ -45,10 +44,7 @@ export const MockLanding = ({onNavigate}) => (
       })}
     </div>
 
-    {/* 광고 슬롯 — 모의고사 메뉴 하단 */}
-    <div style={{marginTop:32}}>
-      <AdSlot slot="MOCK_LANDING_BOTTOM" format="horizontal"/>
-    </div>
+    {/* 광고 자리 없음 — 메뉴·목록·결과처럼 게시자 콘텐츠가 없는 화면에는 광고를 두지 않는다 (애드센스 정책, 2026-11-02) */}
   </div>
 );
 
@@ -115,7 +111,7 @@ export const EndlessScreen = ({onNavigate}) => {
       <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",gap:12,flexWrap:"wrap",marginBottom:18}}>
         <div style={{display:"flex",alignItems:"center",gap:12}}>
           <div style={{display:"flex",alignItems:"center",gap:6,color:"var(--info-fg)",fontSize:12,fontWeight:700,letterSpacing:"0.04em"}}>
-            <Ic.Shuffle size={14}/> 무한 퀴즈 · AI 생성
+            <Ic.Shuffle size={14}/> 무한 퀴즈 · 랜덤 출제
           </div>
           <Tag tone="blue" size="sm">{q.subject}</Tag>
           <Tag tone="neutral" size="sm">{q.concept}</Tag>

@@ -19,7 +19,7 @@ export const ROUND_59: QuizQuestion[] = [
       "최적화"
     ],
     "correctIndex": 3,
-    "explanation": "데이터 모델링의 세 가지 특징은 추상화, 단순화, 명확화이다. 최적화는 포함되지 않는다.",
+    "explanation": "데이터 모델링의 세 가지 특징은 추상화(현실 세계를 일정한 형식으로 표현), 단순화(제한된 표기법과 언어로 쉽게 이해하도록 표현), 명확화(애매함을 없애고 정확하게 표현)다(①②③). 최적화는 이 세 특징에 들지 않는다(④).",
     "_source": "authored"
   },
   {
@@ -95,15 +95,15 @@ export const ROUND_59: QuizQuestion[] = [
     "round": 59,
     "subject": "1과목",
     "number": 5,
-    "title": "집합 연산자에 대한 설명 중 옳지 않은 것은?",
+    "title": "속성의 특성에 따른 분류(기본·설계·파생 속성)에 대한 설명 중 옳지 않은 것은?",
     "options": [
-      "집합연산자에서 호환이 가능해도 무조건 데이터 타입을 일치시켜야 한다.",
-      "UNION, INTERSECT, MINUS(EXCEPT), UNION ALL이 집합 연산자에 해당한다.",
-      "각 SELECT 절의 컬럼 개수가 일치해야 한다.",
-      "UNION ALL은 중복을 제거하지 않고 정렬 부담이 적다."
+      "기본 속성은 업무로부터 추출한 일반적인 속성이다.",
+      "설계 속성은 원래 업무상 필요한 속성은 아니지만 코드나 일련번호처럼 설계하면서 새로 만들거나 변형한 속성이다.",
+      "파생 속성은 다른 속성으로부터 계산·변형되어 생성되는 속성이다.",
+      "파생 속성은 원본 값이 바뀌어도 자동으로 일관성이 유지되므로 가능한 한 많이 정의하는 것이 좋다."
     ],
-    "correctIndex": 0,
-    "explanation": "숫자와 숫자처럼 상호 호환이 가능한 경우에는 암시적 변환이 허용되므로 반드시 동일한 타입일 필요는 없다.",
+    "correctIndex": 3,
+    "explanation": "파생 속성은 다른 속성 값으로 계산한 값이라, 원본이 바뀔 때 함께 갱신하지 않으면 값이 어긋난다. 그래서 데이터 정합성을 위해 꼭 필요한 경우에만 최소한으로 정의한다(④ 가 옳지 않음). ①②③ 은 속성의 특성에 따른 분류(기본·설계·파생)를 바르게 설명했다. ※ 복원 자료에서 이 번호가 2과목 24번과 같은 집합 연산자 문제로 들어가 있어, 1과목 범위의 문제로 대체했다.",
     "_source": "authored"
   },
   {
@@ -200,7 +200,7 @@ export const ROUND_59: QuizQuestion[] = [
       "학생은 반드시 한 개 이상의 수강 이력을 가져야 한다."
     ],
     "correctIndex": 3,
-    "explanation": "ERD의 선택사양이 Optional(원)으로 표기되어 있으므로 학생은 수강을 하지 않아도 존재할 수 있다.",
+    "explanation": "ERD 는 학생(||) 1 : 수강(o{) 0..N 이므로 학생과 수강은 1:M 이고(①), 수강 쪽이 선택(o)이라 학생은 수강하지 않아도 존재할 수 있다(②). 과목도 수강과 1:M 이라 한 과목을 여러 학생이 수강할 수 있다(③). 학생이 반드시 수강 이력을 하나 이상 가져야 한다는 ④ 는 선택 표기와 맞지 않아 옳지 않다.",
     "_source": "authored",
     "references": [
       {
@@ -689,7 +689,7 @@ export const ROUND_59: QuizQuestion[] = [
       "단일 속성 값을 가지면 1정규형을 만족한다."
     ],
     "correctIndex": 0,
-    "explanation": "정규화는 중복을 최소화하고 유연성을 향상시키는 것이 목적이다. 유연성까지 최소화한다는 설명은 옳지 않다.",
+    "explanation": "정규화를 하면 테이블이 주제별로 나뉘어 독립성이 높아지고(②), 정규형에는 1·2·3정규형과 BCNF 등이 있으며(③), 모든 속성이 단일 값(원자값)을 가지면 1정규형이다(④). 정규화의 목적은 중복을 최소화하고 구조의 유연성을 높이는 것이므로 유연성까지 최소화한다는 ① 이 옳지 않다.",
     "_source": "authored"
   },
   {
@@ -773,7 +773,7 @@ export const ROUND_59: QuizQuestion[] = [
       "EXCEPT(MINUS)는 첫 번째 집합에서 두 번째 집합의 행을 제외한 결과를 반환한다."
     ],
     "correctIndex": 0,
-    "explanation": "숫자-숫자, 문자-문자처럼 상호 호환이 가능한 경우에는 암시적 타입 변환이 허용된다.",
+    "explanation": "UNION 은 중복을 제거하느라 정렬 부담이 있고(②), INTERSECT 는 공통 행만(③), EXCEPT(MINUS)는 첫 집합에서 둘째 집합 행을 뺀 결과를 반환한다(④). 집합 연산은 대응하는 컬럼의 타입이 같은 계열(숫자-숫자, 문자-문자)로 호환되면 되고 완전히 같은 타입일 필요는 없으므로 ① 이 옳지 않다.",
     "_source": "authored"
   },
   {
@@ -1026,7 +1026,7 @@ export const ROUND_59: QuizQuestion[] = [
       "두 연산자는 괄호 없이는 동시에 사용할 수 없다."
     ],
     "correctIndex": 0,
-    "explanation": "SQL의 논리 연산자 우선순위는 NOT > AND > OR 이다. 의도한 우선순위가 이와 다르면 괄호를 사용해야 한다.",
+    "explanation": "논리 연산자의 우선순위는 NOT > AND > OR 이라 AND 가 OR 보다 먼저 평가된다(①). 따라서 ② 와 ③ 은 틀리고, 괄호 없이 함께 쓸 수 있지만(④ 틀림) 의도한 순서가 다르면 괄호로 묶어야 한다. 예: A OR B AND C 는 A OR (B AND C) 로 처리된다.",
     "_source": "authored"
   },
   {
@@ -1091,15 +1091,15 @@ export const ROUND_59: QuizQuestion[] = [
     "round": 59,
     "subject": "2과목",
     "number": 33,
-    "title": "아래 GROUP BY 절 중 '전체 집계, 특정 컬럼별 집계' 같이 개별 집계 조합만 선택적으로 산출하려 할 때 가장 적합한 것은?",
+    "title": "주문 테이블에서 '전체 합계', '월별 합계', '고객별 합계' 만 한 번에 구하고 '월·고객 조합별 합계' 는 제외하려 한다. 가장 적합한 GROUP BY 절은? (월 = SUBSTR(주문일자, 1, 6))",
     "options": [
-      "CUBE(( ), SUBSTR())",
-      "ROLLUP(( ), SUBSTR())",
-      "ROLLUP(SUBSTR())",
-      "GROUPING SETS"
+      "GROUP BY CUBE(SUBSTR(주문일자, 1, 6), 고객번호)",
+      "GROUP BY ROLLUP(SUBSTR(주문일자, 1, 6), 고객번호)",
+      "GROUP BY SUBSTR(주문일자, 1, 6), 고객번호",
+      "GROUP BY GROUPING SETS((), SUBSTR(주문일자, 1, 6), 고객번호)"
     ],
     "correctIndex": 3,
-    "explanation": "GROUPING SETS는 필요한 집계 조합을 사용자가 직접 나열할 수 있어 가장 유연하다.",
+    "explanation": "GROUPING SETS 는 필요한 집계 단위만 골라 나열할 수 있어 (), (월), (고객번호) 세 가지만 만든다(④). ① CUBE 는 (월, 고객), (월), (고객), () 네 가지를 모두 만들어 제외하려던 월·고객 조합이 포함되고, ② ROLLUP 은 (월, 고객), (월), () 라서 조합이 포함되고 고객별 합계가 빠지며, ③ 은 월·고객 조합별 합계만 만든다. ※ 복원 자료의 보기에서 함수 인수가 빠져(CUBE(( ), SUBSTR()) 등) 뜻이 통하지 않아, 같은 개념을 묻도록 조건과 보기를 복원했다.",
     "_source": "authored"
   },
   {
@@ -1286,7 +1286,7 @@ export const ROUND_59: QuizQuestion[] = [
       "오류"
     ],
     "correctIndex": 0,
-    "explanation": "EXISTS는 내부 쿼리의 존재 여부만 평가하므로 A의 모든 행이 반환된다.",
+    "explanation": "EXISTS 는 서브쿼리가 한 행이라도 반환하면 참이다. 서브쿼리 SELECT NULL FROM A 는 A 의 행 수만큼(3행) NULL 값을 반환하는데, EXISTS 는 값이 아니라 행의 존재만 보므로 참이 된다. 바깥 쿼리와 연관도 없어 A 의 3행이 모두 반환된다(①).",
     "_source": "authored",
     "references": [
       {
@@ -1396,7 +1396,7 @@ export const ROUND_59: QuizQuestion[] = [
       "가, 나, 다"
     ],
     "correctIndex": 3,
-    "explanation": "세 진술 모두 TCL과 트랜잭션 기본 개념에 부합한다.",
+    "explanation": "가: Oracle 에서 DDL 은 실행 전후로 묵시적 COMMIT 이 일어난다. 나: 트랜잭션은 여러 SQL 문장을 하나의 논리 단위로 묶을 수 있다. 다: SAVEPOINT 를 지정하면 그 지점까지만 부분 롤백할 수 있다. 세 설명이 모두 옳으므로 ④ 가, 나, 다 이다.",
     "_source": "authored",
     "references": [
       {
@@ -1731,7 +1731,7 @@ export const ROUND_59: QuizQuestion[] = [
       "오류"
     ],
     "correctIndex": 0,
-    "explanation": "CASE 문은 위에서부터 첫 번째로 참인 조건의 결과를 반환한다.",
+    "explanation": "CASE 는 WHEN 조건을 위에서부터 차례로 평가해 처음 참이 되는 THEN 값을 반환하고 나머지는 보지 않는다. 첫 조건 1 = 1 이 참이므로 'A' 다(①). 두 번째 조건도 참이지만 평가되지 않으며, 조건이 겹쳐도 오류는 나지 않는다(④).",
     "_source": "authored",
     "references": [
       {
@@ -1779,7 +1779,7 @@ export const ROUND_59: QuizQuestion[] = [
       "공집합"
     ],
     "correctIndex": 3,
-    "explanation": "WHERE 1=0 은 어떤 행도 만족할 수 없는 조건이므로 결과가 공집합이 된다.",
+    "explanation": "WHERE 1 = 0 은 어떤 행에서도 거짓인 조건이라 선택되는 행이 없어 공집합이다(④). 문법상 문제가 없으므로 오류는 나지 않는다(②③). 데이터 없이 테이블 구조만 복사할 때(CREATE TABLE ... AS SELECT ... WHERE 1 = 0) 이 방식을 쓴다.",
     "_source": "authored",
     "references": [
       {

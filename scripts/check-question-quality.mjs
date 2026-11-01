@@ -52,7 +52,6 @@ for (const f of readdirSync(DIR).filter(f => f.endsWith('.json')).sort()) {
 
 // 사람이 검토해 그대로 두기로 한 항목 (사유와 함께)
 const KNOWN = {
-  'sqld-quiz-1140 sqld-0474|NO_EXPLANATION': '3정규형 엔터티 수 정답 키(3개)가 도해 조건(4개)과 달라 원문 확인 대기 — 2026-11-01',
 };
 const open = issues.filter(x => !KNOWN[`${x.id}|${x.code}`]);
 const known = issues.filter(x => KNOWN[`${x.id}|${x.code}`]);
