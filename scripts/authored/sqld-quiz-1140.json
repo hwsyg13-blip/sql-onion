@@ -803,9 +803,9 @@
       "title": "다음 중 아래 데이터 모델과 같은 테이블 및 제약조건을 생성하는 DDL 문장으로 올바른 것은? (단, DBMS는 Oracle을 기준으로 한다.)",
       "options": [
         "CREATE TABLE PRODUCT\n ( PROD_ID VARCHAR2(10) NOT NULL\n ,PROD_NM VARCHAR2(100) NOT NULL\n ,REG_DT DATE NOT NULL\n ,REGR_NO NUMBER(10)\n ,CONSTRAINT PRODUCT_PK PRIMARY KEY (PROD_ID) );",
-        "CREATE TABLE PRODUCT\n ( PROD_ID VARCHAR2(10) NOT NULL\n ,PROD_NM VARCHAR2(100) NOT NULL\n ,REG_DT DATE NOT NULL\n ,REGR_NO NUMBER(IO) NULL\n ,ADD CONSTRAINT PRIMARY KEY (PROD_ID) )；",
-        "CREATE TABLE PRODUCT\n ( PROD_ID VARCHAR2(10)\n ,PROD_NM VARCHAR2(100)\n ,REG_DT DATE\n ,REGR_NO NUMBER(10) )；\nALTER TABLE PRODUCT ADD CONSTRAINT PRODUCT_PK \nPRIMARY KEY (PROD_ID)；",
-        "CREATE TABLE PRODUCT\n( PROD_ID VARCHAR2(10) NOT NULL\n ,PROD_NM VARCHAR2(100) NOT NULL\n ,REG_DT DATE NOT NULL\n ,REGR_NO NUMBER(10) NULL)；\nALTER TABLE PRODUCT ADD PRIMARY KEY PRODUCT_PK ON \n(PROD_ID)；"
+        "CREATE TABLE PRODUCT\n ( PROD_ID VARCHAR2(10) NOT NULL\n ,PROD_NM VARCHAR2(100) NOT NULL\n ,REG_DT DATE NOT NULL\n ,REGR_NO NUMBER(10) NULL\n ,ADD CONSTRAINT PRIMARY KEY (PROD_ID) );",
+        "CREATE TABLE PRODUCT\n ( PROD_ID VARCHAR2(10)\n ,PROD_NM VARCHAR2(100)\n ,REG_DT DATE\n ,REGR_NO NUMBER(10) );\nALTER TABLE PRODUCT ADD CONSTRAINT PRODUCT_PK \nPRIMARY KEY (PROD_ID);",
+        "CREATE TABLE PRODUCT\n( PROD_ID VARCHAR2(10) NOT NULL\n ,PROD_NM VARCHAR2(100) NOT NULL\n ,REG_DT DATE NOT NULL\n ,REGR_NO NUMBER(10) NULL);\nALTER TABLE PRODUCT ADD PRIMARY KEY PRODUCT_PK ON \n(PROD_ID);"
       ],
       "correctIndex": 0,
       "explanation": "정답은 1번이다. PRODUCT 테이블은 PROD_ID가 기본키이므로 NOT NULL과 PRIMARY KEY 제약이 필요하고, PROD_NM과 REG_DT도 NOT NULL이어야 하며 REGR_NO는 NULL 허용이다. Oracle에서는 CREATE TABLE 문 안에서 CONSTRAINT PRODUCT_PK PRIMARY KEY (PROD_ID) 형태로 테이블 수준 제약조건을 선언할 수 있으므로 1번이 데이터 모델과 일치한다.",
@@ -826,10 +826,10 @@
       "chapter": "DDL",
       "title": "아래와 같이 데이터가 들어있지 않은 왼쪽의 기관분류 테이블 (가) 를 오른쪽 기관분류 테이블 (나) 처럼 변경하고자 할 때 다음 중 올바른 SQL 문장은? (단, DBMS는 SQLServer로 가정한다.)",
       "options": [
-        "ALTER TABLE 기관분류 ALTER COLUMN 분류명 VARCHAR(30) \nNOT NULL；\nALTER TABLE 기관분류 ALTER COLUMN 등록일자 DATE NOT NULL;",
-        "ALTER TABLE 기관분류 ALTER COLUMN 분류명 VARCHAR(30)； \nALTER TABLE 기관분류 ALTER COLUMN 등록일자 DATE NOT NULL；",
-        "ALTER TABLE 기관분류 ALTER COLUMN (분류명 VARCHAR(30) NOT NULL, 등록일자 DATE NOT NULL)；",
-        "ALTER TABLE 기관분류 ALTER COLUMN (분류명 VARCHAR(30), 등록일자 DATE NOT NULL)；"
+        "ALTER TABLE 기관분류 ALTER COLUMN 분류명 VARCHAR(30) \nNOT NULL;\nALTER TABLE 기관분류 ALTER COLUMN 등록일자 DATE NOT NULL;",
+        "ALTER TABLE 기관분류 ALTER COLUMN 분류명 VARCHAR(30); \nALTER TABLE 기관분류 ALTER COLUMN 등록일자 DATE NOT NULL;",
+        "ALTER TABLE 기관분류 ALTER COLUMN (분류명 VARCHAR(30) NOT NULL, 등록일자 DATE NOT NULL);",
+        "ALTER TABLE 기관분류 ALTER COLUMN (분류명 VARCHAR(30), 등록일자 DATE NOT NULL);"
       ],
       "correctIndex": 0,
       "explanation": "SQL Server 는 ALTER TABLE ... ALTER COLUMN 으로 한 번에 컬럼 하나만 변경할 수 있고, 괄호로 여러 컬럼을 묶을 수 없다(③④ 오류). (나) 처럼 분류명도 NOT NULL 이 되어야 하므로 두 컬럼 모두 NOT NULL 을 지정한 ① 이 정답이다.",
@@ -1051,8 +1051,8 @@
       "chapter": "DML",
       "title": "아래와 같은 데이터 모델에서 데이터를 조작하려고 한다. 다음 중 오류가 발생하는 SQL 문장인 것은?",
       "options": [
-        "UPDATE BOARD SET BOARD_ID = 200 WHERE BOARD_ID = '100'；",
-        "UPDATE BOARD SET USE_YN = 'N' WHERE BOARD_ID = '1'；",
+        "UPDATE BOARD SET BOARD_ID = 200 WHERE BOARD_ID = '100';",
+        "UPDATE BOARD SET USE_YN = 'N' WHERE BOARD_ID = '1';",
         "INSERT INTO BOARD (BOARD_ID, BOARD_NM, USE_YN, BOARD_DESC) VALUES ('100', 'FAQ', 'Y', 'FAQ 게시판');",
         "INSERT INTO BOARD VALUES (1, 'Q&A', 'Y', SYSDATE, 'Q&A 게시판');"
       ],
@@ -1077,8 +1077,8 @@
       "title": "아래 데이터 모델과 같이 고객과 주문 테이블이 생성되어 있으며, 고객과 주문 테이블에 입력되어 있는 데이터는 아래 표와 같다. 이 때 FK_001이라는 제약 조건을 아래 SQL과 같이 설정하였다. 다음 중 오류가 발생하는 SQL은?",
       "options": [
         "DELETE FROM 고객 WHERE 고객ID = 'C002';",
-        "DELETE FROM 주문 WHERE 주문번호 IN ('0001', '0002')；",
-        "INSERT INTO 주문 VALUES ('0005', 'C003', '2013-12-28')；",
+        "DELETE FROM 주문 WHERE 주문번호 IN ('0001', '0002');",
+        "INSERT INTO 주문 VALUES ('0005', 'C003', '2013-12-28');",
         "INSERT INTO 고객 VALUES ('C003', '강감찬', '2014-01-01');"
       ],
       "correctIndex": 2,
@@ -1438,7 +1438,7 @@
       "options": [
         "SELECT * FROM MYTABLE WHERE COLUMN1 NOT NULL",
         "SELECT * FROM MYTABLE WHERE COLUMN1 != NULL",
-        "SELECT * FROM MYTABLE WHERE COLUMN1〈〉NULL",
+        "SELECT * FROM MYTABLE WHERE COLUMN1<>NULL",
         "SELECT * FROM MYTABLE WHERE COLUMN1 IS NOT NULL"
       ],
       "correctIndex": 3,
@@ -1463,7 +1463,7 @@
       "references": [
         {
           "type": "text",
-          "content": "CREATE TABLE 서비스\n(서비스번호 VARCHAR2(10) PRIMARY KEY, \n서비스명 VARCHAR2(100) NULL,\n개시일자 DATE NOT NULL  ); \n [SQL]\n(ㄱ)SELECT * FROM 서비스 WHERE 서비스번호 = 1；\n(ㄴ)INSERT INTO 서비스 VALUES ('999', '', '2015-11-11')；\n(ㄷ)SELECT * FROM 서비스 WHERE 서비스명 = ''；\n(ㄹ) SELECT * FROM 서비스 WHERE 서비스명 IS NULL；"
+          "content": "CREATE TABLE 서비스\n(서비스번호 VARCHAR2(10) PRIMARY KEY, \n서비스명 VARCHAR2(100) NULL,\n개시일자 DATE NOT NULL  ); \n [SQL]\n(ㄱ)SELECT * FROM 서비스 WHERE 서비스번호 = 1;\n(ㄴ)INSERT INTO 서비스 VALUES ('999', '', '2015-11-11');\n(ㄷ)SELECT * FROM 서비스 WHERE 서비스명 = '';\n(ㄹ) SELECT * FROM 서비스 WHERE 서비스명 IS NULL;"
         }
       ]
     },
@@ -1476,10 +1476,10 @@
       "chapter": "DML",
       "title": "아래와 같이 월별매출 테이블에 데이터가 입력되어 있다. 다음 중 2014년 11월 부터 2015년 03월까지의 매출금액 합계를 출력하는 SQL 문장으로 옳은 것은?",
       "options": [
-        "SELECT SUM(매출금액) AS 매출금액합계\nFROM 월별매출\nWHERE 년 = '2014' AND 월 BETWEEN '11'  AND '12'\nOR 년 = '2015' AND 월 BETWEEN '01' AND '03'；",
-        "SELECT SUM(매출금액) AS 매출금액합계\nFROM 월별매출\nWHERE (년 = '2014' OR 년 = '2015')\nAND (월 BETWEEN '01' AND '03' OR 월 BETWEEN '11' AND '12')；",
-        "SELECT SUM(매출금액) AS 매출금액합계\nFROM 월별매출\nWHERE 년 IN ('2014', '2015')\nAND 월 IN ('11', '12', '03', '04', '05')；",
-        "SELECT SUM(매출금액) AS 매출금액합계\nFROM 월별매출\nWHERE 년 BETWEEN '2014' AND '2015'\nAND 월 BETWEEN '03' AND '12'；"
+        "SELECT SUM(매출금액) AS 매출금액합계\nFROM 월별매출\nWHERE 년 = '2014' AND 월 BETWEEN '11'  AND '12'\nOR 년 = '2015' AND 월 BETWEEN '01' AND '03';",
+        "SELECT SUM(매출금액) AS 매출금액합계\nFROM 월별매출\nWHERE (년 = '2014' OR 년 = '2015')\nAND (월 BETWEEN '01' AND '03' OR 월 BETWEEN '11' AND '12');",
+        "SELECT SUM(매출금액) AS 매출금액합계\nFROM 월별매출\nWHERE 년 IN ('2014', '2015')\nAND 월 IN ('11', '12', '03', '04', '05');",
+        "SELECT SUM(매출금액) AS 매출금액합계\nFROM 월별매출\nWHERE 년 BETWEEN '2014' AND '2015'\nAND 월 BETWEEN '03' AND '12';"
       ],
       "correctIndex": 0,
       "explanation": "AND 가 OR 보다 우선하므로 ① 은 (2014년 11~12월) OR (2015년 1~3월) 로 4000 + 5000 + 6000 + 7000 + 8000 을 정확히 더한다. ② 는 2014년 1~3월·2015년 11~12월까지, ③ 은 03~05월 조합, ④ 는 두 해의 3~12월을 모두 포함해 범위가 틀린다. 정답은 ① 이다.",
@@ -1559,7 +1559,7 @@
         "SELECT SVC_ID, COUNT(*) AS CNT\nFROM SVC_JOIN\nWHERE TO_DATE('201501', 'YYYYMM') = SVC_END_DATE\nAND JOIN_YMD || JOIN_HH = '2014120100'\nGROUP BY SVC_ID;",
         "SELECT SVC_ID, COUNT(*) AS CNT\nFROM SVC_JOIN\nWHERE '201501' = TO_CHAR(SVC_END_DATE, 'YYYYMM')\nAND JOIN_YMD = '20141201'\nAND JOIN_HH = '00'\nGROUP BY SVC_ID;",
         "SELECT SVC_ID, COUNT(*) AS CNT\nFROM SVC_JOIN\nWHERE SVC_END_DATE>= TO_DATE('20150101', 'YYYYMMDD')\nAND SVC_END_DATE < TO_DATE('20150201', 'YYYYMMDD')\nAND (JOIN_YMD, JOIN_HH) IN (('20141201', '00'))\nGROUP BY SVC_ID;",
-        "SELECT SVC_ID, COUNT(*) AS CNT\nFROM SVC_JOIN\nWHERE SVC_END_DATE >= TO_DATE('20150101000000',\n 'YYYYMMDDHH24MISS')\n AND SVC_END_DATE <= TO_DATE('20150131235959',\n 'YYYYMMDDHH24MISS')\n AND CONCAT(JOIN_YMD, JOIN_HH) = '2014120100'\n GROUP BY SVC_ID；"
+        "SELECT SVC_ID, COUNT(*) AS CNT\nFROM SVC_JOIN\nWHERE SVC_END_DATE >= TO_DATE('20150101000000',\n 'YYYYMMDDHH24MISS')\n AND SVC_END_DATE <= TO_DATE('20150131235959',\n 'YYYYMMDDHH24MISS')\n AND CONCAT(JOIN_YMD, JOIN_HH) = '2014120100'\n GROUP BY SVC_ID;"
       ],
       "correctIndex": 0,
       "explanation": "① 의 TO_DATE('201501', 'YYYYMM') 은 2015-01-01 00:00:00 한 시점이라 SVC_END_DATE 가 정확히 그 시각인 행만 찾는다. ②③④ 는 2015년 1월 한 달 전체를 범위로 비교하고 가입 일시 조건도 같으므로 결과가 같다. 결과가 다른 것은 ① 이다.",
@@ -1650,10 +1650,10 @@
       "chapter": "그룹 함수",
       "title": "팀별 포지션별 FW, MF, DF, GK 포지션의 인원수와 팀별 전체 인원수를 SQL을 작성할 때 결과가 다른 것은? (보기 1, 2, 3은 ORACLE 환경이고, 보기 4는 SQL Server 환경이다.)",
       "options": [
-        "SELECT TEAM_ID,\n NVL(SUM(CASE  POSITION WHEN 'FW' THEN 1 ELSE 1 END), 0) FW,\n NVL(SUM(CASE  POSITION WHEN 'MF' THEN 1 ELSE 1 END), 0) MF,\n NVL(SUM(CASE  POSITION WHEN 'DF' THEN 1 ELSE 1 END), 0) DF,\n NVL(SUM(CASE  POSITION WHEN 'GK' THEN 1 ELSE 1 END), 0) GK,\n COUNT(*) SUM \nFROM PLAYER\nGROUP BY TEAM_ID；",
-        "SELECT TEAM_ID,\n NVL(SUM(CASE  WHEN POSITION = 'FW' THEN 1  END), 0) FW,\n NVL(SUM(CASE  WHEN POSITION = 'MF' THEN 1  END), 0) MF,\n NVL(SUM(CASE  WHEN POSITION = 'DF' THEN 1  END), 0) DF,\n NVL(SUM(CASE  WHEN POSITION = 'GK' THEN 1  END), 0) GK,\n COUNT(*) SUM \nFROM PLAYER\nGROUP BY TEAM_ID；",
-        "SELECT TEAM_ID,\n NVL(SUM(CASE  POSITION WHEN 'FW' THEN 1  END), 0) FW,\n NVL(SUM(CASE  POSITION WHEN 'MF' THEN 1  END), 0) MF,\n NVL(SUM(CASE  POSITION WHEN 'DF' THEN 1  END), 0) DF,\n NVL(SUM(CASE  POSITION WHEN 'GK' THEN 1  END), 0) GK,\n COUNT(*) SUM \nFROM PLAYER\nGROUP BY TEAM_ID；",
-        "SELECT TEAM_ID,\n ISNULL(SUM(CASE WHEN POSITION = 'FW' THEN 1 END), 0) FW,\n ISNULL(SUM(CASE WHEN POSITION = 'MF' THEN 1 END), 0) MF,\n ISNULL(SUM(CASE WHEN POSITION = 'DF' THEN 1 END), 0) DF,\n ISNULL(SUM(CASE WHEN POSITION = 'GK' THEN 1 END), 0) GK,\n COUNT(*) SUM \nFROM PLAYER\nGROUP BY TEAM_ID；"
+        "SELECT TEAM_ID,\n NVL(SUM(CASE  POSITION WHEN 'FW' THEN 1 ELSE 1 END), 0) FW,\n NVL(SUM(CASE  POSITION WHEN 'MF' THEN 1 ELSE 1 END), 0) MF,\n NVL(SUM(CASE  POSITION WHEN 'DF' THEN 1 ELSE 1 END), 0) DF,\n NVL(SUM(CASE  POSITION WHEN 'GK' THEN 1 ELSE 1 END), 0) GK,\n COUNT(*) SUM \nFROM PLAYER\nGROUP BY TEAM_ID;",
+        "SELECT TEAM_ID,\n NVL(SUM(CASE  WHEN POSITION = 'FW' THEN 1  END), 0) FW,\n NVL(SUM(CASE  WHEN POSITION = 'MF' THEN 1  END), 0) MF,\n NVL(SUM(CASE  WHEN POSITION = 'DF' THEN 1  END), 0) DF,\n NVL(SUM(CASE  WHEN POSITION = 'GK' THEN 1  END), 0) GK,\n COUNT(*) SUM \nFROM PLAYER\nGROUP BY TEAM_ID;",
+        "SELECT TEAM_ID,\n NVL(SUM(CASE  POSITION WHEN 'FW' THEN 1  END), 0) FW,\n NVL(SUM(CASE  POSITION WHEN 'MF' THEN 1  END), 0) MF,\n NVL(SUM(CASE  POSITION WHEN 'DF' THEN 1  END), 0) DF,\n NVL(SUM(CASE  POSITION WHEN 'GK' THEN 1  END), 0) GK,\n COUNT(*) SUM \nFROM PLAYER\nGROUP BY TEAM_ID;",
+        "SELECT TEAM_ID,\n ISNULL(SUM(CASE WHEN POSITION = 'FW' THEN 1 END), 0) FW,\n ISNULL(SUM(CASE WHEN POSITION = 'MF' THEN 1 END), 0) MF,\n ISNULL(SUM(CASE WHEN POSITION = 'DF' THEN 1 END), 0) DF,\n ISNULL(SUM(CASE WHEN POSITION = 'GK' THEN 1 END), 0) GK,\n COUNT(*) SUM \nFROM PLAYER\nGROUP BY TEAM_ID;"
       ],
       "correctIndex": 0,
       "explanation": "① 은 CASE 의 ELSE 를 1 로 두어 포지션과 관계없이 모든 행을 1 로 세므로 FW·MF·DF·GK 가 모두 팀 전체 인원수가 된다. ②③ 은 CASE 의 두 형식(검색형·단순형), ④ 는 SQL Server 의 ISNULL 로 같은 결과를 낸다. 결과가 다른 것은 ① 이다."
@@ -1667,10 +1667,10 @@
       "chapter": "함수",
       "title": "다음 중 아래 TAB1 을보고 각 SQL 실행결과를 가장 올바르게 설명한 것을 고르시오.",
       "options": [
-        "SELECT COUNT(COL2) FROM TAB1 WHERE COL1 IN (’b’,’c’)； \n-> 실행 결과는 1 이다.",
-        "SELECT COUNT(COL1) FROM TAB1 WHERE COL2 = NULL； \n-> 실행 결과는 1 이다.",
-        "SELECT ISNULL(COL2,’X’) FROM TAB1 WHERE COL1 = 'a' ； \n-> 실행 결과로 'X'를 반환한다.",
-        "SELECT COL2 FROM TAB1 WHERE COL1 = 'b' ；\n-> 실행 결과가 없다.(공집합)"
+        "SELECT COUNT(COL2) FROM TAB1 WHERE COL1 IN ('b','c'); \n-> 실행 결과는 1 이다.",
+        "SELECT COUNT(COL1) FROM TAB1 WHERE COL2 = NULL; \n-> 실행 결과는 1 이다.",
+        "SELECT ISNULL(COL2,'X') FROM TAB1 WHERE COL1 = 'a' ; \n-> 실행 결과로 'X'를 반환한다.",
+        "SELECT COL2 FROM TAB1 WHERE COL1 = 'b' ;\n-> 실행 결과가 없다.(공집합)"
       ],
       "correctIndex": 2,
       "explanation": "COL1 = 'a' 인 행의 COL2 는 NULL 이라 ISNULL(COL2, 'X') 는 'X' 를 반환한다(SQL Server 의 ISNULL 은 Oracle 의 NVL 과 같다). ① 'b' 의 COL2 는 빈 문자열('')로 SQL Server 에서는 값이므로 COUNT 는 2, ② = NULL 비교는 항상 UNKNOWN 이라 0, ④ 'b' 행은 빈 문자열이 조회된다. 정답은 ③ 이다.",
@@ -1901,9 +1901,9 @@
       "title": "다음 중 오류가 발생하는 SQL 문장인 것은?",
       "options": [
         "SELECT 메뉴ID, 사용유형코드, AVG(COUNT(*)) AS AVGCNT\nFROM 시스템사용이력\nGROUP BY 메뉴ID, 사용유형코드;",
-        "SELECT 메뉴ID, 사용유형코드, COUNT(*)  AS CNT\nFROM 시스템사용이력\nWHERE 사용일시 BETWEEN SYSDATE - 1 AND SYSDATE\nGROUP BY 메뉴ID, 사용유형코드\nHAVING 메뉴ID = 3 AND 사용유형코드 = 100；",
-        "SELECT SUM(주문금액) AS 합계\nFROM 주문\nHAVING AVG(주문금액) > 100；",
-        "SELECT 회원ID, SUM(주문금액) AS 합계\nFROM 주문\nGROUP BY 회원ID\nHAVING COUNT(*) > 1；"
+        "SELECT 메뉴ID, 사용유형코드, COUNT(*)  AS CNT\nFROM 시스템사용이력\nWHERE 사용일시 BETWEEN SYSDATE - 1 AND SYSDATE\nGROUP BY 메뉴ID, 사용유형코드\nHAVING 메뉴ID = 3 AND 사용유형코드 = 100;",
+        "SELECT SUM(주문금액) AS 합계\nFROM 주문\nHAVING AVG(주문금액) > 100;",
+        "SELECT 회원ID, SUM(주문금액) AS 합계\nFROM 주문\nGROUP BY 회원ID\nHAVING COUNT(*) > 1;"
       ],
       "correctIndex": 0,
       "explanation": "집계 함수를 중첩한 AVG(COUNT(*)) 는 GROUP BY 결과 전체를 다시 하나로 모으므로, SELECT 절에 메뉴ID·사용유형코드 같은 GROUP BY 컬럼을 함께 쓸 수 없어 오류가 난다. ② HAVING 에 GROUP BY 컬럼 조건, ③ GROUP BY 없는 HAVING 은 모두 가능하다. 정답은 ① 이다."
@@ -2419,7 +2419,7 @@
       "references": [
         {
           "type": "text",
-          "content": "(1) SELECT A.ID, B.ID\n FROM TBL1 A FULL OUTER JOIN TBL2 B\nON A.ID = B.ID\n(2)  SELECT A.ID, B.ID\n FROM TBL1 A LEFT OUTER JOIN TBL2 B\n ON A.ID = B.ID\n UNION\n SELECT A.ID, B.ID\n FROM TBL1 A RIGHT OUTER JOIN TBL2 B\n ON A.ID = B.ID\n(3)  SELECT A.ID, B.ID\n FROM TBL1 A, TBL2 B\n WHERE A.ID = B.ID\n UNION ALL\n SELECT A. ID, NULL\n FROM TBL1 A\n WHERE NOT EXISTS (SELECT 1 FROM TBL2 B WHERE A.ID = B.ID)\n UNION ALL\n SELECT NULL, B.ID\n FROM TBL2 B\n WHERE NOT EXISTS (SELECT 1 FROM TBL1 A WHERE B.ID = A.ID)"
+          "content": "(1) SELECT A.ID, B.ID\n FROM TBL1 A FULL OUTER JOIN TBL2 B\nON A.ID = B.ID\n(2)  SELECT A.ID, B.ID\n FROM TBL1 A LEFT OUTER JOIN TBL2 B\n ON A.ID = B.ID\n UNION\n SELECT A.ID, B.ID\n FROM TBL1 A RIGHT OUTER JOIN TBL2 B\n ON A.ID = B.ID\n(3)  SELECT A.ID, B.ID\n FROM TBL1 A, TBL2 B\n WHERE A.ID = B.ID\n UNION ALL\n SELECT A.ID, NULL\n FROM TBL1 A\n WHERE NOT EXISTS (SELECT 1 FROM TBL2 B WHERE A.ID = B.ID)\n UNION ALL\n SELECT NULL, B.ID\n FROM TBL2 B\n WHERE NOT EXISTS (SELECT 1 FROM TBL1 A WHERE B.ID = A.ID)"
         }
       ]
     },
@@ -2954,9 +2954,9 @@
       "chapter": "조인",
       "title": "아래와 같이 일자별매출 테아블이 존재할 때 아래 결과처럼 일자별 누적매출액을 SQL로 구하려고 한다. WINDOW FUNCTION을 사용하지 않고 일자별 누적매출액을 구하는 SQL로 옳은 것은?",
       "options": [
-        "SELECT A.일자\n,(SELECT SUM(B.매출액)\nFROM 일자별매출 B WHERE B. 일자 >= A. 일자)  AS 누적\n매출액\nFROM 일자별매출 A\nGROUP BY A. 일자\nORDER BY A. 일자;",
-        "SELECT A. 일자, SUM(B.매출액) AS 누적매출액\nFROM 일자별매출 A JOIN 일자별매출 B ON (A. 일자〉= B. 일자)\nGROUP BY A. 일자\nORDER BY A. 일자;",
-        "SELECT B. 일자, SUM(B.매출액) AS 누적매출액\nFROM 일자별매출 A JOIN 일자별매출 B ON (A. 일자〉= B. 일자)\nGROUP BY B. 일자\nORDER BY B. 일자;",
+        "SELECT A.일자\n,(SELECT SUM(B.매출액)\nFROM 일자별매출 B WHERE B.일자 >= A.일자)  AS 누적\n매출액\nFROM 일자별매출 A\nGROUP BY A.일자\nORDER BY A.일자;",
+        "SELECT A.일자, SUM(B.매출액) AS 누적매출액\nFROM 일자별매출 A JOIN 일자별매출 B ON (A.일자>= B.일자)\nGROUP BY A.일자\nORDER BY A.일자;",
+        "SELECT B.일자, SUM(B.매출액) AS 누적매출액\nFROM 일자별매출 A JOIN 일자별매출 B ON (A.일자>= B.일자)\nGROUP BY B.일자\nORDER BY B.일자;",
         "SELECT A.일자, SUM(A.매출액) AS 누적매출액\nFROM 일자별매출 A\nGROUP BY A.일자\nORDER BY A.일자;"
       ],
       "correctIndex": 1,
@@ -3158,7 +3158,7 @@
       "references": [
         {
           "type": "text",
-          "content": "가) 서브쿼리는 단일 행(Single Row) 또는 복수 행 (Multi Row) 비교연산자와 함께 사용할 수 있다.\n나) 서브쿼리는 SELECT 절, FROM 절, HAVING 절, ORDER BY 절 등에서 사용이 가능하다.\n다) 서브쿼리의 결과가 복수 행(Multi Row) 결과를 반환하는 경우에는\n'=', '<=', '=〉' 등의 연산자와 함께 사용이 가능하다.\n라) 연관(Correlated) 서브쿼리는 서브쿼리가 메인쿼리 컬럼을 포함하고 있는 형태의 서브쿼리이다.\n마) 다중 컬럼 서브쿼리는 서브쿼리의 결과로 여러 개의 컬럼이 반환되어 메인쿼리의 조건과 동시에 비교되는 것을 의미하며 Oracle 및 SQL Server 등의 DBMS에서 사용 할 수 있다."
+          "content": "가) 서브쿼리는 단일 행(Single Row) 또는 복수 행 (Multi Row) 비교연산자와 함께 사용할 수 있다.\n나) 서브쿼리는 SELECT 절, FROM 절, HAVING 절, ORDER BY 절 등에서 사용이 가능하다.\n다) 서브쿼리의 결과가 복수 행(Multi Row) 결과를 반환하는 경우에는\n'=', '<=', '=>' 등의 연산자와 함께 사용이 가능하다.\n라) 연관(Correlated) 서브쿼리는 서브쿼리가 메인쿼리 컬럼을 포함하고 있는 형태의 서브쿼리이다.\n마) 다중 컬럼 서브쿼리는 서브쿼리의 결과로 여러 개의 컬럼이 반환되어 메인쿼리의 조건과 동시에 비교되는 것을 의미하며 Oracle 및 SQL Server 등의 DBMS에서 사용 할 수 있다."
         }
       ]
     },
@@ -3172,9 +3172,9 @@
       "title": "다음 중 아래의 ERD를 참조하여 아래 SQL과 동일한 결과를 출력하는 SQL로 가장 부적절한 것은?",
       "options": [
         "SELECT A.회원번호, A.회원명\nFROM 회원 A, 동의항목 B\nWHERE A.회원번호 = B.회원번호 AND B.동의여부 = 'N'\nGROUP BY A.회원번호, A.회원명\nORDER BY A.회원번호;",
-        "SELECT A.회원번호, A.회원명\nFROM 회원 A\nWHERE 0 < (SELECT COUNT(*)\nFROM 동의항목 B WHERE B.동의여부 = ‘N’)\nORDER BY A. 회원번호;",
-        "SELECT A.회원번호, A.회원명\nFROM 회원 A\nWHERE A. 회원번호 IN (SELECT B.회원번호 FROM 동의항목 B\nWHERE B. 동의여부 = 'N')\nORDER BY A. 회원번호;",
-        "SELECT A.회원번호, A.회원명\nFROM 회원 A\nWHERE EXISTS (SELECT 1 FROM 동의항목 B\nWHERE A.회원번호 = B.회원번호 AND\nB. 동의여부 = 'N')\nORDER BY A. 회원번호;"
+        "SELECT A.회원번호, A.회원명\nFROM 회원 A\nWHERE 0 < (SELECT COUNT(*)\nFROM 동의항목 B WHERE B.동의여부 = 'N')\nORDER BY A.회원번호;",
+        "SELECT A.회원번호, A.회원명\nFROM 회원 A\nWHERE A.회원번호 IN (SELECT B.회원번호 FROM 동의항목 B\nWHERE B.동의여부 = 'N')\nORDER BY A.회원번호;",
+        "SELECT A.회원번호, A.회원명\nFROM 회원 A\nWHERE EXISTS (SELECT 1 FROM 동의항목 B\nWHERE A.회원번호 = B.회원번호 AND\nB.동의여부 = 'N')\nORDER BY A.회원번호;"
       ],
       "correctIndex": 1,
       "explanation": "위의 SQL은 약관항목 중 단 하나라도 동의를 하지 않은 회원을 구하는 SQL이다. HAVING 절에서 \r\n동의여부가 N인 데이터가 한 건이라도 존재하는 데이터를 추출한다.\n①는 HAVING절로 처리되던 조건을 WHERE절에 위치시켜 더 간편하게 Join으로 처리하였다. 또한 \r\n회원과 동의항목은 1:N 관계이므로 JOIN된 결과는 N건으로 발생됨에 따라 GROUP BY를 추가하여 \r\n중복을 제거 하였다.\n②의 회원 테이블과 동의항목 테이블간에 회원번호 컬럼으로 연관 서브쿼리로 처리되어야 정상적으로 \r\n처리할 수 있다.\n③는 동의항목 테이블에서 동의여부가 N인 한 건이라도 존재하는 회원을 추출하여 회원테이블과 IN \r\n연산을 수행한다.\r\n④은 회원 테이블과 동의항목 테이블의 회원번호 컬럼으로 연관 서브쿼리를 수행하여 동의여부 컬럼의 \r\n값이 N인 데이터가 한 건이라도 존재하면 회원 데이터를 출력하게 된다.",
@@ -3296,7 +3296,7 @@
       "chapter": "서브쿼리",
       "title": "아래와 같은 데이터 모델에서 평가대상상품에 대한 품질평기향목별 최종 평가 결과를 추출하는 SQL 문장으로 옳은 것은? (단, 평가항목에 대한 평가(평가등급)가 기대수준에 미치지 못할 경우 해당 평기항목에 대해서만 재평가를 수행한다)",
       "options": [
-        "SELECT B.상품ID. B.상품명, C.평가항목ID, C.평가항목명, A.평가회차,\nA.평가등급, A.평가일자\nFROM (SELECT 상품ID, 평가항목ID\n,MAX(평가회차) AS 평가회차\n,MAX(평가등급) AS 평가등급\n,MAX(평가일자) AS 평가일자\nFROM 평가결과\nGROUP BY 상품ID, 평가항목ID)  A, 평가대상상품 B, 품질평가항목 C\nWHERE A.상품ID = B.상품ID\nAND A.평가항목ID = C.평가항목ID；",
+        "SELECT B.상품ID. B.상품명, C.평가항목ID, C.평가항목명, A.평가회차,\nA.평가등급, A.평가일자\nFROM (SELECT 상품ID, 평가항목ID\n,MAX(평가회차) AS 평가회차\n,MAX(평가등급) AS 평가등급\n,MAX(평가일자) AS 평가일자\nFROM 평가결과\nGROUP BY 상품ID, 평가항목ID)  A, 평가대상상품 B, 품질평가항목 C\nWHERE A.상품ID = B.상품ID\nAND A.평가항목ID = C.평가항목ID;",
         "SELECT B.상품ID, B.상품명, C.평가항목ID, C.평가항목명\n,MAX(A.평가회차) AS 평가회차\n,MAX(A.평가등급) AS 평가등급\n,MAX(A.평가일자) AS 평가일자\nFROM 평가결과 A, 평가대상상품 B, 품질평가항목 C\nWHERE A.상품ID = B.상품ID\nAND A.평가항목ID = C.평가항목ID\nGROUP BY B.상품ID, B.상품명, C.평가항목ID, C.평가항목명;",
         "SELECT B.상품ID, B.상품명, C.평가항목ID, C.평가항목명, A.평가회차,\nA.평가등급, A.평가일자\nFROM 평가결과 A, 평가대상상품 B, 품질평가항목 C\nWHERE A.상품ID = B.상품ID\nAND A.평가항목ID = C.평가항목ID\nAND A.평가회차 = (SELECT MAX(X.평가회차)\nFROM 평가결과 X\nWHERE X.상품ID = B.상품ID\nAND X.평가항목ID = C.평가항목ID);",
         "SELECT B.상품ID, B.상품명, C.평가항목ID, C.평가항목명, A.평가회차,\nA.평가등급, A.평가일자\nFROM 평가결과 A, 평가대상상품 B, 품질평가항목 C,\n(SELECT MAX(평가회차) AS 평가회차 FROM 평가결과) D\nWHERE A.상품ID = B.상품ID\nAND A.평가항목ID = C.평가항목ID\nAND A.평가회차 = D.평가회차;"
@@ -3322,8 +3322,8 @@
       "title": "아래 부서 테이블의 담당자 변경을 위해 부서임시 테이블에 입력된 데이터를 활용하여 주기적으로 부서 테이블을 아래 결과와 같이 반영하기 위한 SQL으로 가장 적절한 것은?(단, 부서임시 테이블에서 변경일자를 가준으로 가장 최근에 변경된 데이터를 가준으로 부서 테이블에 반영되어야 한다)",
       "options": [
         "UPDATE 부서 A SET 담당자 = (SELECT B.담당자\nFROM 부서임시 B\nWHERE B.부서코드 = A.부서코드\nAND B.변경일자 = '2015.01.25.') ;",
-        "UPDATE 부서 A SET 담당자 = (SELECT B.담당자\nFROM 부서임시 B\nWHERE B.부서코드 = A.부서코드\nAND B.변경 일자 = (SELECT MAX(C.변경일자)\nFROM 부서임시 C WHERE\nC. 부서코드 = B. 부서코드))\nWHERE 부서코드 IN (SELECT 부서코드 FROM 부서임시);",
-        "UPDATE 부서 A SET 담당자 = (SELECT C.부서코드\nFROM (SELECT 부서코드, MAX(변경일자) AS 변경일자\nFROM 부서임시\nGROUP BY 부서코드) B, 부서임시 C\nWHERE B. 부서코드 = C. 부서코드\nAND B. 변경일자 = C.변경일자\nAND A. 부서코드 = C. 부서코드)\nWHERE EXISTS (SELECT 1 FROM 부서 X WHERE A.부서코드 =\nX.부서코드);",
+        "UPDATE 부서 A SET 담당자 = (SELECT B.담당자\nFROM 부서임시 B\nWHERE B.부서코드 = A.부서코드\nAND B.변경 일자 = (SELECT MAX(C.변경일자)\nFROM 부서임시 C WHERE\nC.부서코드 = B.부서코드))\nWHERE 부서코드 IN (SELECT 부서코드 FROM 부서임시);",
+        "UPDATE 부서 A SET 담당자 = (SELECT C.부서코드\nFROM (SELECT 부서코드, MAX(변경일자) AS 변경일자\nFROM 부서임시\nGROUP BY 부서코드) B, 부서임시 C\nWHERE B.부서코드 = C.부서코드\nAND B.변경일자 = C.변경일자\nAND A.부서코드 = C.부서코드)\nWHERE EXISTS (SELECT 1 FROM 부서 X WHERE A.부서코드 =\nX.부서코드);",
         "UPDATE 부서 A SET 담당자 = (SELECT C.부서코드\nFROM (SELECT 부서코드, MAX(변경일자) AS 변경일자\nFROM 부서임시\nGROUP BY 부서코드) B, 부서임시 C\nWHERE B.부서코드 = C.부서코드\nAND B.변경일자 = C.변경일자\nAND A.부서코드 = C.부서코드)"
       ],
       "correctIndex": 1,
@@ -3530,7 +3530,7 @@
         "SELECT (CASE GROUPING(B.지역ID) WHEN 1 THEN '지역전체'\nELSE MIN(B.지역명) END) AS 지역명\n,(CASE GROUPING(TO_CHAR(A.이용일시, 'YYYY.MM'))\nWHEN 1 THEN '월별합계'\nELSE TO_CHAR(A.이용일시, 'YYYY.MM') END) AS 이용월\n,SUM(A.이용량)  AS 이용량\nFROM 이용내역 A INNER JOIN 지역 B ON (A.지역ID = B.지역ID)\nGROUP BY GROUPING SETS(B.지역ID, TO_CHAR(A.이용일시, 'YYYY.MM'))",
         "SELECT (CASE GROUPINGS(B.지역명) WHEN 1 THEN '지역전체'\nELSE B.지역명 END) AS 지역명\n,(CASE GROUPING(TO_CHAR(A.이용일시,  'YYYY.MM'))\nWHEN 1 THEN '월별합계'\nELSE TO_CHAR(A.이용일시, 'YYYY.MM') END) AS 이용월\n,SUM(A.이용량) AS 이용량\nFROM 이용내역 A INNER JOIN 지역 B ON (A.지역ID = B.지역ID)\nGROUP BY CUBE(B.지역명, TO_CHAR(A.이용일시, 'YYYY.MM'))",
         "SELECT (CASE GROUPINGS(B.지역ID) WHEN 1 THEN '지역전체'\nELSE MIN(B.지역명) END) AS 지역명\n,(CASE GROUPING(TO_CHAR(A.이용일시, 'YYYY.MM'))\nWHEN 1 THEN '월별합계'\nELSE TO_CHAR(A.이용일시, 'YYYY.MM') END) AS 이용월\n,SUM(A.이용량) AS 이용량\nFROM 이용내역 A INNER JOIN 지역 B ON (A.지역ID = B.지역ID)\nGROUP BY ROLLUP(B.지역ID, TO_CHAR(A.이용일시, 'YYYY.MM'))",
-        "SELECT (CASE GROUPING(B.지역명) WHEN 0 THEN '지역전체'\nELSE B.지역명 END) AS 지역명\n,(CASE GROUPING(TO_CHAR(A.이용일시, ’YYYY.MM'))\nWHEN 0 THEN '월별합계'\nELSE TO_CHAR(A.이용일시, 'YYYY.MM') END) AS 이용월\n,SUM(A.이용량) AS 이용량\nFROM 이용내역 A INNER JOIN 지역 B ON (A.지역ID = B.지역ID)\nGROUP BY ROLLUP(B.지역명, TO_CHAR(A.이용일시, 'YYYY.MM'))"
+        "SELECT (CASE GROUPING(B.지역명) WHEN 0 THEN '지역전체'\nELSE B.지역명 END) AS 지역명\n,(CASE GROUPING(TO_CHAR(A.이용일시, 'YYYY.MM'))\nWHEN 0 THEN '월별합계'\nELSE TO_CHAR(A.이용일시, 'YYYY.MM') END) AS 이용월\n,SUM(A.이용량) AS 이용량\nFROM 이용내역 A INNER JOIN 지역 B ON (A.지역ID = B.지역ID)\nGROUP BY ROLLUP(B.지역명, TO_CHAR(A.이용일시, 'YYYY.MM'))"
       ],
       "correctIndex": 2,
       "explanation": "위의 결과 데이터는 지역에 대해서 월별 이용량 및 소계와 전체 이용량을 출력하였으므로, ROLLUP \n함수를 활용할 수 있다. ROLLUP 집계 그룹 함수는 나열된 컬럼에 대해 계층 구조로 집계를 출력하는 \n함수로서 ROLLUP(A, B)를 수행하면 (A, B)별 집계, A별 집계와 전체 집계를 출력할 수 있다. \n④번 보기의 경우 CASE 절의 GROUPING 함수의 사용이 잘못 (0이 아닌 1이 되어야 함) 되었으며, \n②번 보기처럼 CUBE를 사용하게 되면, 결합 가능한 모든 값에 대하여 다차원 집계를 생성하게 된다. \n①번 보기처럼 GROUPING SETS를 사용하게 되면 계층구조 없이 지역에 대한 합계와 월별 합계를 \n각각 생성하게 된다.",
@@ -3994,15 +3994,15 @@
       "_correctRate": 20,
       "subject": "2과목",
       "chapter": "그룹 함수",
-      "title": "아래와 같이 설비와 에너지사용 테이블을 이용하여 결과를 나타내려할 때 SQL으로 가장 적절한 것을 2개 고르시오.",
+      "title": "아래와 같이 설비와 에너지사용 테이블을 이용하여 결과를 나타내려할 때 SQL으로 가장 적절한 것은?",
       "options": [
-        "SELECT A.설비ID, B.에너지코드, SUM(B.사용량) AS 사용량합계\nFROM 설비 A INNER JOIN 에너지사용량 B\nON (A.설비ID = B.설비ID)\nGROUP BY GROUPING SETS((A.설비ID), (B 에너지코드),\n(A.설비ID, B.에너지코드))\nORDER BY A.설비ID, B.에너지코드;",
-        "SELECT A.설비ID, B.에너지코드, SUM(B.사용량) AS 사용량합계\nFROM 설비 A INNER JOIN 에너지사용량 B\nON (A.설비ID = B.설비ID)\nGROUP BY GROUPING SETS((A.설비ID), (B.에너지코드),\n(A.설비ID, B.에너지코드),0)\nORDER BY A.설비ID, B.에너지코드;",
-        "SELECT A.설비ID, B.에너지코드, SUM(B.사용량) AS 사용량합계\nFROM 설비 A INNER JOIN 에너지사용량 B\nON (A.설비ID = B.설비ID)\nGROUP BY CUBE (A.설비ID, B.에너지코드)\nORDER BY A.설비ID, B.에너지코드;",
+        "SELECT A.설비ID, B.에너지코드, SUM(B.사용량) AS 사용량합계\nFROM 설비 A INNER JOIN 에너지사용량 B\nON (A.설비ID = B.설비ID)\nGROUP BY GROUPING SETS((A.설비ID), (B.에너지코드),\n(A.설비ID, B.에너지코드))\nORDER BY A.설비ID, B.에너지코드;",
+        "SELECT A.설비ID, B.에너지코드, SUM(B.사용량) AS 사용량합계\nFROM 설비 A INNER JOIN 에너지사용량 B\nON (A.설비ID = B.설비ID)\nGROUP BY GROUPING SETS((A.설비ID), (B.에너지코드),\n(A.설비ID, B.에너지코드), ())\nORDER BY A.설비ID, B.에너지코드;",
+        "SELECT A.설비ID, B.에너지코드, SUM(B.사용량) AS 사용량합계\nFROM 설비 A INNER JOIN 에너지사용량 B\nON (A.설비ID = B.설비ID)\nGROUP BY ROLLUP (A.설비ID, B.에너지코드)\nORDER BY A.설비ID, B.에너지코드;",
         "SELECT A.설비ID, B.에너지코드, SUM(B.사용량) AS 사용량합계\nFROM 설비 A INNER JOIN 에너지사용량 B\nON (A.설비ID = B.설비ID)\nGROUP BY CUBE ((A.설비ID), (B.에너지코드), (A.설비ID,\nB.에너지코드))\nORDER BY A.설비ID, B.에너지코드;"
       ],
       "correctIndex": 1,
-      "explanation": "SQL의 결과를 보면 설비ID와 에너지코드의 모든 조합에 대하여 사용량합계를 추출하고 있다. CUBE \n함수는 인수로 나열된 항목의 가능한 모든 조합에 대하여 GROUPING을 수행한다. 또한 GROUPING \nSETS은 사용자가 원하는 다양한 조합을 인수로 사용할 수 있다. 위 문제에서 ③번은 CUBE를 사용하였 \n으므로 CUBE절에 나열된 컬럼의 모든 조합 즉, ((설비ID), (에너지코드), (설비ID, 에너지코드))에 \n대해 SUB TOTAL을 만들게 된다. ②번은 GROUPING SETS를 활용하여 ③번의 모든 조합을 직접 기술 하였다.",
+      "explanation": "결과에는 (설비ID, 에너지코드) 별 합계, 설비ID 별 소계, 에너지코드 별 소계(설비ID 가 NULL 인 행), 전체 합계가 모두 있다. ② GROUPING SETS((설비ID), (에너지코드), (설비ID, 에너지코드), ()) 는 이 네 그룹을 직접 지정해 같은 결과를 만든다(CUBE(설비ID, 에너지코드) 와 같다). ① 은 전체 합계 () 가 빠지고, ③ ROLLUP 은 에너지코드 별 소계가 빠지며, ④ 는 CUBE 안에 같은 컬럼 조합을 중복으로 나열해 불필요한 중복 그룹이 생긴다. 정답은 ② 이다.",
       "references": [
         {
           "type": "table",
@@ -4522,7 +4522,7 @@
       "options": [
         "SELECT 게임상품ID, 고객ID, 활동점수, 순위\nFROM (SELECT RANK() OVER(PARTITION BY 게임상품ID\nORDER BY 활동점수 DESC) AS 순위\n,고객ID,게임상품ID, 활동점수\nFROM 고객활동)",
         "SELECT 게임상품ID, 고객ID, 활동점수, 순위\nFROM (SELECT RANK() OVER(ORDER BY 활동점수 DESC)  AS 순위\n,고객ID, 게임상품ID, 활동점수\nFROM 고객활동)\nWHERE 순위 <= 10;",
-        "SELECT 게임상품ID, 고객ID, 활동점수, 순위\nFROM (SELECT DENSE_RANK() OVER(PARTITION BY 게임상품ID\nORDER BY 활동점수 DESC) AS 순위\n,고객ID, 게임상품ID, 활동점수\nFROM 고객활동)\nWHERE 순위〈= 10;",
+        "SELECT 게임상품ID, 고객ID, 활동점수, 순위\nFROM (SELECT DENSE_RANK() OVER(PARTITION BY 게임상품ID\nORDER BY 활동점수 DESC) AS 순위\n,고객ID, 게임상품ID, 활동점수\nFROM 고객활동)\nWHERE 순위<= 10;",
         "SELECT 게임상품ID, 고객ID, 활동점수, 순위\nFROM (SELECT DENSE_RANK() OVER(ORDER BY 활동점수 DESC) AS 순위\n.고객ID, 게임상품ID, 활동점수\nFROM 고객활동)\nWHERE 순위 <= 10;"
       ],
       "correctIndex": 0,
@@ -4751,19 +4751,19 @@
       "_correctRate": 20,
       "subject": "2과목",
       "chapter": "DCL·TCL",
-      "title": "사용자 Lee가 릴레이션 R을 생성한 후,이래와 같은 권한부여 SQL문들을 실행하였다. 그 이후에 가능이 실행 가능한 SQL을 2개 고르시오. (단, A, B의 데이터 타입은 정수형이다)",
+      "title": "사용자 Lee가 릴레이션 R을 생성한 후,아래와 같은 권한부여 SQL문들을 실행하였다. 그 이후에 실행 가능한 SQL은? (단, A, B의 데이터 타입은 정수형이며, CASCADE 를 명시하지 않은 REVOKE 는 지정한 사용자의 권한만 회수한다고 가정한다)",
       "options": [
         "Kim : INSERT INTO R VALUES(500, 600);",
         "Park : DELETE FROM R WHERE B = 800;",
         "Park : INSERT INTO R VALUES(400, 600);",
-        "Park : SELECT * FROM R WHERE A = 400;"
+        "Park : GRANT SELECT ON R TO Choi;"
       ],
       "correctIndex": 1,
-      "explanation": " 1. Lee : GRANT SELECT, INSERT, DELETE ON R TO Kim WITH GRANT OPTION;\n-> Kim에게 테이블 R에 SELECT, INSERT, DELETE 권한을 주면서, Kim 이 다른 유저에게 테이블 R에 동일한 권한을 줄 수 있다.\n 2. Kim : GRANT SELECT, INSERT, DELETE ON R TO Park;\n->  Kim이 테이블 R에 Lee에게 받은 권한을 Park에게 준다.\n 3.Lee : REVOKE DELETE ON R FROM Kim;\n-> Kim에서 테이블 R의 DELETE 권한을 취소한다. \n4. Lee :  REVOKE INSERT ON R FROM Kim CASCADE;\n-> Kim과 Park에서 INSERT 권한을 취소한다. WITH GRANT OPTION으로 Kim으로부터 받은 \nPark의 권한은 CASCADE 명령어로 받은 권한을 취소 할 수 있다.",
+      "explanation": "Lee 가 Kim 에게 SELECT·INSERT·DELETE 를 WITH GRANT OPTION 으로 주고, Kim 이 같은 권한을 Park 에게 넘겼다. REVOKE DELETE ... FROM Kim 은 CASCADE 가 없으므로(문제 전제) Kim 의 DELETE 만 회수되고 Park 의 DELETE 는 남는다. REVOKE INSERT ... CASCADE 는 Kim 과 Kim 이 넘긴 Park 의 INSERT 까지 회수한다. 따라서 Park 의 DELETE(②)만 실행된다. ① Kim·③ Park 은 INSERT 권한이 없고, ④ Park 은 WITH GRANT OPTION 없이 받아 다른 사용자에게 권한을 줄 수 없다. 참고로 Oracle 은 GRANT OPTION 으로 넘긴 객체 권한을 회수하면 CASCADE 없이도 연쇄 회수된다.",
       "references": [
         {
           "type": "text",
-          "content": "Lee :GRANT SELECT, INSERT, DELETE ON R TO Kim WITH\r\n GRANT OPTION;\r\nkim :GRANT SELECT, INSERT, DELETE ON R TO Park；\r\nLee: REVOKE DELETE ON R FROM Kim;\r\nLee:REVOKE INSERT ON R FROM Kim CASCADE;"
+          "content": "Lee :GRANT SELECT, INSERT, DELETE ON R TO Kim WITH\r\n GRANT OPTION;\r\nkim :GRANT SELECT, INSERT, DELETE ON R TO Park;\r\nLee: REVOKE DELETE ON R FROM Kim;\r\nLee:REVOKE INSERT ON R FROM Kim CASCADE;"
         }
       ],
       "_multiAnswer": "2,4"
@@ -16428,15 +16428,15 @@
       "_correctRate": 20,
       "subject": "1과목",
       "chapter": "데이터베이스 설계",
-      "title": "스키마에 대한 내용 잘못된 것을 두 개 고르세요.",
+      "title": "스키마에 대한 내용 잘못된 것은?",
       "options": [
         "외부 스키마는 모든 사용자 관점을 통합한 전체적인 하나의 관점으로 구성되어 있다.",
-        "개념 스키마는 View 단계 여러 개의 사용자 관점으로 구성되며, 개개 사용자 단계로서 개개 사용자나 응용프로그래머가 접근하는 DB 정의이다.",
+        "개념 스키마는 모든 사용자 관점을 통합한 조직 전체 관점의 DB 구조로, 저장되는 데이터와 그들 간의 관계를 표현한다.",
         "내부스키마는 DB가 물리적으로 저장된 형식을 말한다.",
         "외부스키마는 사용자 관점이며, 접근하는 특성에 따른 스키마로 구성되어 있다."
       ],
       "correctIndex": 0,
-      "explanation": "모든 사용자 관점을 통합하는 스키마는 개념 스키마이다.",
+      "explanation": "모든 사용자 관점을 통합한 전체 관점은 개념 스키마이므로, 이를 외부 스키마라고 한 ① 이 잘못됐다. 외부 스키마는 개별 사용자 관점(사용자 뷰)으로 접근 특성에 따라 여러 개가 있고(④), 내부 스키마는 물리적 저장 형식이다(③).",
       "_multiAnswer": "1,2"
     },
     {
