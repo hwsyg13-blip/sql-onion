@@ -148,6 +148,10 @@ html, body {
   line-height: var(--leading-reading);
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+  /* 코딩 글꼴(D2Coding ligature) 합자 끄기 — <> 가 ◇, >= 가 ≥ 처럼 바뀌면
+     실제 시험지(글자 그대로)와 달라 수험자가 연산자를 잘못 읽는다. 인라인 스타일까지 상속되게 html 에 둔다. */
+  font-variant-ligatures: none;
+  font-feature-settings: "liga" 0, "calt" 0;
 }
 
 h1, .h1 {

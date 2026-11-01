@@ -1285,15 +1285,15 @@ export const ROUND_50: QuizQuestion[] = [
     "round": 50,
     "subject": "2과목",
     "number": 41,
-    "title": "아래 TBL 테이블에 대해 뷰를 만들고 외부 조회 조건을 적용한 결과로 옳은 것은?",
+    "title": "아래 TBL 테이블과 뷰 V_TBL 이 있을 때, 조회 SQL 의 실행 결과로 옳은 것은?",
     "options": [
-      "0",
-      "200",
       "300",
-      "NULL"
+      "600",
+      "800",
+      "900"
     ],
     "correctIndex": 1,
-    "explanation": "뷰 조건과 외부 조회 조건이 AND 로 결합되어 C1='B' 이고 C2 >= 200 인 (B, 200) 한 건의 SUM 이 200 이다.",
+    "explanation": "뷰 조건 C1 <> 'A' 에서 C1 이 NULL 인 행은 비교 결과가 UNKNOWN 이라 참이 아니므로 뷰에 포함되지 않는다. 뷰에는 (B, 200), (B, 100), (C, 300) 만 남아 SUM(C2) = 600 이다. NULL 행까지 포함한다고 착각하면 800(③), 전체 합계는 900(④)이다. ※ 복원 자료에서 이 번호가 2과목 12번과 같은 문제로 중복되어 있어, 같은 범위(뷰·NULL 비교)의 다른 문제로 대체했다.",
     "_source": "authored",
     "references": [
       {
@@ -1319,12 +1319,16 @@ export const ROUND_50: QuizQuestion[] = [
           [
             "NULL",
             "200"
+          ],
+          [
+            "C",
+            "300"
           ]
         ]
       },
       {
         "type": "sql",
-        "code": "CREATE VIEW V_TBL AS\nSELECT * FROM TBL WHERE C1 = 'B' OR C1 IS NULL;\n\nSELECT SUM(C2) FROM V_TBL\nWHERE C2 >= 200 AND C1 = 'B';"
+        "code": "CREATE VIEW V_TBL AS\nSELECT * FROM TBL WHERE C1 <> 'A';\n\nSELECT SUM(C2) FROM V_TBL;"
       }
     ]
   },
