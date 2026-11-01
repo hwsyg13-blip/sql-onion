@@ -1777,6 +1777,7 @@ html, body { overflow-x: hidden; }
   /* 머리글은 한 줄, 본문 칸은 줄바꿈 — 글로 된 표가 옆으로 밀리지 않게 (2026-11-02, 열이 많은 표는 여전히 스크롤) */
   .theory-md table th { white-space: nowrap; }
   .theory-md table td { white-space: normal; min-width: 72px; word-break: keep-all; overflow-wrap: anywhere; }
+  .theory-md table td:first-child { overflow-wrap: break-word; }
 
   /* mermaid SVG — viewport 안에 맞춰 비례 축소 */
   .theory-md .mermaid svg { max-width: 100% !important; height: auto !important; }
