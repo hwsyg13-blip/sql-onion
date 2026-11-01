@@ -291,7 +291,7 @@
         "CEIL(38.12) = 39"
       ],
       "correctIndex": 2,
-      "explanation": "정답은 3 번. (해설 미등록)"
+      "explanation": "MOD(7, 3) 은 7 을 3 으로 나눈 나머지라 1 이다(2 가 아니다). ABS(-30) = 30, SIGN(-50) = -1(음수면 -1), CEIL(38.12) = 39(올림) 는 모두 맞다. 따라서 결괏값이 올바르지 않은 것은 ③ 이다."
     },
     {
       "_id": "cbt-009",
@@ -883,7 +883,7 @@
         "CONNECT_BY_ROOT"
       ],
       "correctIndex": 0,
-      "explanation": "정답은 1 번. (해설 미등록)",
+      "explanation": "CONNECT_BY_ISLEAF 는 현재 행이 자식이 없는 리프 노드면 1, 아니면 0 을 반환한다. CONNECT_BY_ISCYCLE 은 순환(사이클) 여부(NOCYCLE 과 함께 사용), SYS_CONNECT_BY_PATH 는 루트부터 현재 행까지의 경로 문자열, CONNECT_BY_ROOT 는 루트 행의 값을 반환한다. 정답은 ① 이다.",
       "references": [
         {
           "type": "sql",
@@ -2080,7 +2080,7 @@
         "가)→나)→다)→마)→바)→라)"
       ],
       "correctIndex": 1,
-      "explanation": "정답은 2 번. (해설 미등록)",
+      "explanation": "ERD 는 엔터티를 그리고(가) 적절히 배치한 뒤(나), 엔터티 간 관계를 설정하고(다), 관계명을 적고(라), 관계의 참여도(차수)(마)와 필수 여부(선택성)(바)를 기술하는 순서로 작성한다. 정답은 ② 이다.",
       "references": [
         {
           "type": "text",
@@ -2921,12 +2921,12 @@
       "title": "다음 중 아래 테이블 정의와 인덱스 구조를 참고하여, 인덱스를 효율적으로 액세스할 수 없는 검색조건을 고르시오.",
       "options": [
         "where 주문번호 between 1 and 10",
-        "where 주문자명 like ‘%홍길동%’",
-        "where 주문일자 >= ‘20181201’",
-        "where 주문일자 = ‘20181201’"
+        "where 주문자명 like '%홍길동%'",
+        "where 주문일자 >= '20181201'",
+        "where 주문일자 = '20181201'"
       ],
       "correctIndex": 1,
-      "explanation": "정답은 2 번. (해설 미등록)",
+      "explanation": "B-Tree 인덱스는 값의 앞부분부터 정렬되어 있어 LIKE '%홍길동%' 처럼 앞에 와일드카드(%)가 오면 시작 위치를 정할 수 없어 인덱스 범위 검색을 할 수 없다. ① 주문번호는 주문_pk, ③④ 주문일자는 주문_ind12 의 선두 컬럼이라 범위·동등 조건 모두 인덱스를 효율적으로 쓸 수 있다. 정답은 ② 이다.",
       "references": [
         {
           "type": "sql",
@@ -3635,7 +3635,7 @@
         "실행 결과로 아무것도 출력되지 않는다."
       ],
       "correctIndex": 2,
-      "explanation": "정답은 3 번. (해설 미등록)",
+      "explanation": "UNION ALL 로 합치는 두 SELECT 는 같은 위치의 컬럼 데이터 타입이 같아야 한다. 첫 SELECT 는 (문자 'A', 숫자 1), 두 번째는 (숫자 1, 문자 'A') 라 타입이 맞지 않아 Oracle 에서 ORA-01790(대응하는 식과 같은 데이터 유형이어야 한다) 오류가 나고 실행되지 않는다. ② UNION ALL 은 중복을 제거하지 않는다. 정답은 ③ 이다.",
       "references": [
         {
           "type": "sql",
@@ -4405,7 +4405,7 @@
         "(4) → (3) → (2) → (1)"
       ],
       "correctIndex": 2,
-      "explanation": "정답은 3 번. (해설 미등록)",
+      "explanation": "Nested Loop 조인은 선행(driving) 테이블에서 조건을 만족하는 행을 하나 찾고(4), 그 행의 조인 키로 후행 테이블에 조인을 시도한다(2). 이때 후행 테이블의 인덱스에서 조인 키를 찾고(3), 인덱스가 준 레코드 식별자(ROWID)로 후행 테이블을 액세스한다(1). 이 과정을 선행 테이블의 다음 행마다 반복한다. 정답은 ③ 이다.",
       "references": [
         {
           "type": "text",
@@ -5215,7 +5215,7 @@
         "{(100, 영업, Hong, 80), (100, 영업, Lee, 90), (200, 개발, Kim, 90), (200, 개발, Kim, 95), (600, null, Hong, 65)}"
       ],
       "correctIndex": 0,
-      "explanation": "정답은 1 번. (해설 미등록)",
+      "explanation": "서브쿼리는 부서(dno)별 최고 점수 (100, 90), (200, 95), (300, 65) 를 만들고, IN 조건으로 (dno, score) 쌍이 이와 같은 사원만 남긴다. 부서 100 에서는 Lee(90), 200 에서는 Kim(95), 300 에서는 Hong(65) 이 최고 점수이고 department 와 조인해 부서명을 붙이면 ① 과 같다.",
       "references": [
         {
           "type": "table",
@@ -5240,7 +5240,7 @@
               "Kim",
               "대전",
               "90",
-              "100"
+              "200"
             ],
             [
               "30",
@@ -5498,7 +5498,7 @@
         "ORDER BY, SELECT, WHERE, GROUP BY, FROM"
       ],
       "correctIndex": 1,
-      "explanation": "정답은 2 번. (해설 미등록)",
+      "explanation": "SELECT 문은 FROM(대상 테이블) → WHERE(행 필터) → GROUP BY(그룹화) → HAVING(그룹 필터) → SELECT(컬럼 산출) → ORDER BY(정렬) 순으로 처리된다. 이 SQL 에는 HAVING 이 없으므로 FROM, WHERE, GROUP BY, SELECT, ORDER BY 인 ② 가 정답이다.",
       "references": [
         {
           "type": "sql",
@@ -5800,10 +5800,10 @@
         "SELECT deptno FROM Dept WHERE deptno NOT IN (SELECT deptno FROM Emp);",
         "SELECT deptno FROM Dept a WHERE NOT EXISTS (SELECT * FROM Emp b WHERE a.deptno =b.deptno);",
         "SELECT b.deptno FROM Emp a RIGHT OUTER JOIN Dept b ON a.deptno = b.deptno WHERE empno IS NULL;",
-        "SELECT deptno FROM Dept WHERE deptno < > ANY (SELECT deptno FROM Emp);"
+        "SELECT deptno FROM Dept WHERE deptno <> ANY (SELECT deptno FROM Emp);"
       ],
       "correctIndex": 3,
-      "explanation": "정답은 4 번. (해설 미등록)",
+      "explanation": "① NOT IN, ② NOT EXISTS, ③ RIGHT OUTER JOIN 후 사원 쪽이 NULL 인 행 고르기는 모두 사원이 없는 부서를 찾는다(① 은 Emp.deptno 에 NULL 이 있으면 결과가 비므로 주의). ④ `<> ANY` 는 서브쿼리 값 중 하나라도 다르면 참이라, 사원이 있는 부서도 다른 부서 번호와 비교되어 대부분 참이 된다. 가장 거리가 먼 것은 ④ 이다.",
       "references": [
         {
           "type": "text",
@@ -5842,12 +5842,12 @@
       "title": "다음 중 인덱스를 사용할 수 없는 조건에 해당되지 않는 것은?",
       "options": [
         "인덱스가 사용되는 칼럼에 NVL(Key, 0)을 사용했다.",
-        "인덱스가 사용되는 칼럼에 to_char(vin tagedate, ‘yyyymmdd’) = sysdate를 사용했다.",
-        "인덱스가 사용되는 칼럼에 vintageyear = to_char(sysdate, ‘yyyy’)를 사용했다.",
-        "인덱스가 사용되는 칼럼에 name||‘ ’ = ‘lim’을 사용했다."
+        "인덱스가 사용되는 칼럼에 to_char(vintagedate, 'yyyymmdd') = sysdate를 사용했다.",
+        "인덱스가 사용되는 칼럼에 vintageyear = to_char(sysdate, 'yyyy')를 사용했다.",
+        "인덱스가 사용되는 칼럼에 name||' ' = 'lim'을 사용했다."
       ],
       "correctIndex": 2,
-      "explanation": "정답은 3 번. (해설 미등록)"
+      "explanation": "인덱스 컬럼을 함수나 연산으로 가공하면(NVL(Key, 0), TO_CHAR(vintagedate, ...), name || ' ') 인덱스에 저장된 값과 비교할 수 없어 인덱스를 쓰지 못한다. ③ 은 인덱스 컬럼 vintageyear 는 그대로 두고 비교 대상인 SYSDATE 쪽만 TO_CHAR 로 가공했으므로 인덱스를 사용할 수 있다. 정답은 ③ 이다."
     },
     {
       "_id": "cbt-171",
@@ -5895,11 +5895,11 @@
         "SELECT e.eno, e.ename, count(*) FROM employee e, dependent d WHERE e.eno = d.eno GROUP BY e.eno, e.ename HAVING count(*) >= 3;"
       ],
       "correctIndex": 2,
-      "explanation": "정답은 3 번. (해설 미등록)",
+      "explanation": "③ 은 인라인 뷰에서 dependent 를 eno 별로 묶어 부양가족 수가 2 명 이상인 사원만 남긴 뒤(HAVING COUNT(*) >= 2) employee 와 조인하므로 요구사항을 정확히 표현한다. ① 은 WHERE 절에 집계 함수를 써서 오류, ② 는 EXISTS 서브쿼리가 사원과 연결되지 않고 조인 조건도 없어 잘못된 결과, ④ 는 3 명 이상(>= 3)을 찾는다.",
       "references": [
         {
           "type": "text",
-          "content": "employee(eno, ename, adddress, score, dno) dependent(eno, ename, birthday, relation)"
+          "content": "employee(eno, ename, address, score, dno) dependent(eno, ename, birthday, relation)"
         }
       ]
     },
@@ -6960,7 +6960,7 @@
         "ROWS BETWEEN 1 AND 2"
       ],
       "correctIndex": 0,
-      "explanation": "정답은 1 번. (해설 미등록)"
+      "explanation": "ROWS BETWEEN 1 PRECEDING AND 1 FOLLOWING 은 현재 행 기준 앞 1행, 현재 행, 뒤 1행을 윈도우로 지정한다. RANGE UNBOUNDED PRECEDING 은 처음부터 현재 행(값 기준)까지, ROWS BETWEEN CURRENT ROW AND UNBOUNDED FOLLOWING 은 현재 행부터 끝까지이고, ROWS BETWEEN 1 AND 2 는 PRECEDING/FOLLOWING 이 없어 잘못된 구문이다. 정답은 ① 이다."
     },
     {
       "_id": "cbt-208",
