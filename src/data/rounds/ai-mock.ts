@@ -1,5 +1,5 @@
 // Auto-generated from scripts/authored/ai-mock.json
-// AI 생성 모의고사 풀 (기출 변형) · 1247문항
+// AI 생성 모의고사 풀 (기출 변형) · 1257문항
 // ⚠ 직접 편집 금지. ai-mock.json 수정 후 'node scripts/build-quiz-bank.mjs' 재실행.
 import type { QuizQuestion } from '../quizBank';
 
@@ -44715,6 +44715,536 @@ export const AI_MOCK: QuizQuestion[] = [
             "2500",
             "2",
             "5000"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": 12207,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 1408,
+    "title": "다음 SQL 실행 결과로 가장 알맞은 것은?",
+    "options": [
+      "(A, 1), (C, 1), (B, 3)",
+      "(A, 1), (C, 1), (B, 2)",
+      "(B, 1), (A, 2), (C, 3)",
+      "(A, 1), (C, 2), (B, 3)"
+    ],
+    "correctIndex": 3,
+    "explanation": "ROW_NUMBER() 는 값이 같아도 서로 다른 순번을 매긴다. SCORE 내림차순으로 A(90), C(90), B(85) 이므로 1, 2, 3 이 붙어 (A, 1), (C, 2), (B, 3) 이다(④, 동점인 A·C 의 순서는 바뀔 수 있다). ① 은 동점에 같은 순위를 주고 다음을 건너뛰는 RANK(), ② 는 건너뛰지 않는 DENSE_RANK() 의 결과이고, ③ 은 오름차순으로 매긴 결과다. ※ 원본의 보기(결과 표 그림)가 누락되어, 같은 개념을 묻는 모의고사 형태로 보기를 재구성했다.",
+    "chapter": "윈도우 함수",
+    "_source": "cbt-mock",
+    "_origId": "cbt-002",
+    "_cbtOrigNo": 2,
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT NAME, ROW_NUMBER() OVER (ORDER BY SCORE DESC) AS RN\nFROM TB_SCORE;"
+      },
+      {
+        "type": "table",
+        "caption": "[TB_SCORE] 테이블",
+        "headers": [
+          "NAME",
+          "SCORE"
+        ],
+        "rows": [
+          [
+            "A",
+            "90"
+          ],
+          [
+            "B",
+            "85"
+          ],
+          [
+            "C",
+            "90"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": 12208,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 1409,
+    "title": "다음 테이블과 SQL을 기준으로 실행 결과가 올바른 것은?",
+    "options": [
+      "(Kim, A, ACTIVE), (Jang, B, ACTIVE)",
+      "(Kim, A, ACTIVE), (Park, A, INACTIVE), (Jang, B, ACTIVE)",
+      "(Kim, A, ACTIVE), (Park, A, INACTIVE)",
+      "(Kim, A, ACTIVE), (Lee, B, INACTIVE), (Park, A, INACTIVE), (Jang, B, ACTIVE)"
+    ],
+    "correctIndex": 1,
+    "explanation": "AND 가 OR 보다 먼저 평가되므로 조건은 GRADE = 'A' OR (GRADE = 'B' AND STATUS = 'ACTIVE') 다. GRADE 가 A 인 Kim, Park 과 B 이면서 ACTIVE 인 Jang 이 나와 3행이다(②). ① 은 (GRADE = 'A' OR GRADE = 'B') AND STATUS = 'ACTIVE' 로 괄호를 친 것처럼 해석한 결과, ③ 은 A 만, ④ 는 STATUS 조건을 무시한 결과다. ※ 원본의 보기(결과 표 그림)가 누락되어, 같은 개념을 묻는 모의고사 형태로 보기를 재구성했다.",
+    "chapter": "WHERE",
+    "_source": "cbt-mock",
+    "_origId": "cbt-025",
+    "_cbtOrigNo": 25,
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT NAME, GRADE, STATUS\nFROM TB_USER\nWHERE GRADE = 'A' OR GRADE = 'B' AND STATUS = 'ACTIVE';"
+      },
+      {
+        "type": "table",
+        "caption": "[TB_USER] 테이블",
+        "headers": [
+          "ID",
+          "NAME",
+          "GRADE",
+          "STATUS"
+        ],
+        "rows": [
+          [
+            "1",
+            "Kim",
+            "A",
+            "ACTIVE"
+          ],
+          [
+            "2",
+            "Lee",
+            "B",
+            "INACTIVE"
+          ],
+          [
+            "3",
+            "Park",
+            "A",
+            "INACTIVE"
+          ],
+          [
+            "4",
+            "Choi",
+            "C",
+            "ACTIVE"
+          ],
+          [
+            "5",
+            "Jang",
+            "B",
+            "ACTIVE"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": 12209,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 1410,
+    "title": "다음 SQL 실행 결과로 가장 알맞은 것은?",
+    "options": [
+      "A, B, NULL",
+      "A, A, B",
+      "오류가 발생한다.",
+      "A, B"
+    ],
+    "correctIndex": 3,
+    "explanation": "COL1 IN (NULL, 'A', 'A', 'B') 는 COL1 = NULL OR COL1 = 'A' OR COL1 = 'A' OR COL1 = 'B' 와 같다. COL1 = NULL 은 어떤 행에서도 참이 아니라 NULL 행은 나오지 않고, 목록의 중복 값('A' 두 번)은 결과에 영향이 없으며 오류도 나지 않는다. 따라서 A, B 두 행이다(④). ※ 원본의 보기(결과 표 그림)가 누락되어, 같은 개념을 묻는 모의고사 형태로 보기를 재구성했다.",
+    "chapter": "WHERE",
+    "_source": "cbt-mock",
+    "_origId": "cbt-040",
+    "_cbtOrigNo": 40,
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT *\nFROM TAB\nWHERE COL1 IN (NULL, 'A', 'A', 'B');"
+      },
+      {
+        "type": "table",
+        "caption": "[TAB] 테이블",
+        "headers": [
+          "COL1"
+        ],
+        "rows": [
+          [
+            "A"
+          ],
+          [
+            "B"
+          ],
+          [
+            "NULL"
+          ],
+          [
+            "C"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": 12210,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 1411,
+    "title": "다음 SQL 실행 결과로 가장 알맞은 것은?",
+    "options": [
+      "(A, PASS), (B, FAIL), (C, NO DATA)",
+      "(A, PASS), (B, FAIL), (C, FAIL)",
+      "(A, PASS), (B, FAIL), (C, NULL)",
+      "(A, PASS), (B, NO DATA), (C, FAIL)"
+    ],
+    "correctIndex": 0,
+    "explanation": "CASE 는 위에서부터 처음 참이 되는 조건의 값을 반환한다. A(85)는 SCORE >= 80 이 참이라 PASS, B(72)는 두 조건이 모두 거짓이라 ELSE 의 FAIL, C(NULL)는 NULL >= 80 이 참이 아니고 SCORE IS NULL 이 참이라 NO DATA 다(①). ② 는 NULL 행이 ELSE 로 간다고, ③ 은 NULL 이 그대로 나온다고 본 결과이며, ④ 는 B 와 C 의 판정을 바꿨다. ※ 원본의 보기(결과 표 그림)가 누락되어, 같은 개념을 묻는 모의고사 형태로 보기를 재구성했다.",
+    "chapter": "WHERE",
+    "_source": "cbt-mock",
+    "_origId": "cbt-043",
+    "_cbtOrigNo": 43,
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT STUDENT,CASE\nWHEN SCORE >= 80 THEN 'PASS'\nWHEN SCORE IS NULL THEN 'NO DATA'\nELSE 'FAIL'\nEND AS RESULT\nFROM SCORE;"
+      },
+      {
+        "type": "table",
+        "caption": "[SCORE] 테이블",
+        "headers": [
+          "STUDENT",
+          "SCORE"
+        ],
+        "rows": [
+          [
+            "A",
+            "85"
+          ],
+          [
+            "B",
+            "72"
+          ],
+          [
+            "C",
+            "NULL"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": 12211,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 1412,
+    "title": "다음 SQL 실행 결과로 가장 알맞은 것은?",
+    "options": [
+      "(Kim, 3000), (Lee, 4000), (Park, 0)",
+      "(Kim, 3000), (Lee, 4000), (Park, NULL)",
+      "(Kim, 3000), (Lee, 4000)",
+      "별칭이 원래 컬럼명과 같아 오류가 발생한다."
+    ],
+    "correctIndex": 0,
+    "explanation": "NVL(SALARY, 0) 은 SALARY 가 NULL 이면 0 을 반환하므로 Park 의 SALARY 는 0 으로 출력된다(①). NVL 을 쓰지 않았다면 NULL(②)이 나오고, NVL 은 행을 걸러내지 않으므로 Park 이 빠지지 않는다(③). 계산식에 원래 컬럼명과 같은 별칭(AS SALARY)을 붙이는 것도 허용되어 오류가 나지 않는다(④). ※ 원본의 보기(결과 표 그림)가 누락되어, 같은 개념을 묻는 모의고사 형태로 보기를 재구성했다.",
+    "chapter": "함수",
+    "_source": "cbt-mock",
+    "_origId": "cbt-058",
+    "_cbtOrigNo": 58,
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT NAME, NVL(SALARY, 0) AS SALARY\nFROM EMP;"
+      },
+      {
+        "type": "table",
+        "caption": "[EMP] 테이블",
+        "headers": [
+          "ID",
+          "NAME",
+          "SALARY"
+        ],
+        "rows": [
+          [
+            "1",
+            "Kim",
+            "3000"
+          ],
+          [
+            "2",
+            "Lee",
+            "4000"
+          ],
+          [
+            "3",
+            "Park",
+            "NULL"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": 12212,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 1413,
+    "title": "다음 SQL 실행 결과로 가장 알맞은 것은?",
+    "options": [
+      "(C, 11000)",
+      "(A, 7000), (C, 11000)",
+      "(A, 7000), (B, 1000), (C, 11000), (D, 1000)",
+      "결과가 없다(공집합)."
+    ],
+    "correctIndex": 1,
+    "explanation": "FROM 절의 인라인 뷰가 먼저 고객별 합계를 만든다: A 7000, B 1000, C 11000, D 1000. WHERE 절의 서브쿼리 AVG(AMOUNT) 는 주문 6건의 평균이라 20000 / 6 ≈ 3333.3 이다. TOTAL 이 이보다 큰 A(7000)와 C(11000)가 출력된다(②). ① 은 A(7000)까지 기준 이하로 잘못 본 결과, ③ 은 WHERE 조건을 무시한 결과다. ※ 원본의 보기(결과 표 그림)가 누락되어, 같은 개념을 묻는 모의고사 형태로 보기를 재구성했다.",
+    "chapter": "GROUP BY·HAVING",
+    "_source": "cbt-mock",
+    "_origId": "cbt-066",
+    "_cbtOrigNo": 66,
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT CUSTOMER, TOTAL\nFROM (SELECT CUSTOMER, SUM(AMOUNT) AS TOTAL\nFROM TB_ORDER\nGROUP BY CUSTOMER)\nWHERE TOTAL > (SELECT AVG(AMOUNT) FROM TB_ORDER);"
+      }
+    ]
+  },
+  {
+    "id": 12213,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 1414,
+    "title": "다음 SQL 실행 결과로 출력되는 행 수는?",
+    "options": [
+      "5",
+      "7",
+      "8",
+      "3"
+    ],
+    "correctIndex": 1,
+    "explanation": "CUBE(REGION, AMOUNT) 는 (REGION, AMOUNT), (REGION), (AMOUNT), () 네 조합을 모두 집계한다. (REGION, AMOUNT) 는 (EAST, 1000), (WEST, 2000) 2행, (REGION) 은 EAST, WEST 2행, (AMOUNT) 는 1000, 2000 2행, () 전체 합계 1행이라 모두 7행이다(②). ROLLUP(REGION, AMOUNT) 였다면 (AMOUNT) 단독 집계가 빠져 5행(①)이다. ※ 원본의 보기(결과 표 그림)가 누락되어, 같은 개념을 묻는 모의고사 형태로 보기를 재구성했다.",
+    "chapter": "GROUP BY·HAVING",
+    "_source": "cbt-mock",
+    "_origId": "cbt-086",
+    "_cbtOrigNo": 86,
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT REGION, AMOUNT, COUNT(*)\nFROM TB_SALE\nGROUP BY CUBE(REGION, AMOUNT);"
+      },
+      {
+        "type": "table",
+        "caption": "[TB_SALE] 테이블",
+        "headers": [
+          "REGION",
+          "AMOUNT"
+        ],
+        "rows": [
+          [
+            "EAST",
+            "1000"
+          ],
+          [
+            "WEST",
+            "2000"
+          ],
+          [
+            "EAST",
+            "1000"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": 12214,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 1415,
+    "title": "다음 SQL 실행 결과로 가장 알맞은 것은? (출력 컬럼 순서: PLAYER, PUZZLE, SHOOTER, RACING)",
+    "options": [
+      "Alice: 80, 95, 0 / Bob: 70, 0, 88 / Charlie: 0, 90, 85",
+      "Alice: 80, 95, NULL / Bob: 70, NULL, 88 / Charlie: NULL, 90, 85",
+      "Alice: 80, 95 / Bob: 70, 88 / Charlie: 90, 85",
+      "Alice: 80, NULL, 95 / Bob: 70, 88, NULL / Charlie: NULL, 85, 90"
+    ],
+    "correctIndex": 1,
+    "explanation": "PIVOT 은 Game 값 'Puzzle', 'Shooter', 'Racing' 을 각각 컬럼으로 바꾸고, 그 칸에 MAX(Score) 를 넣는다. 해당 게임 기록이 없으면 집계할 값이 없어 NULL 이다. 그래서 Alice 는 80, 95, NULL / Bob 은 70, NULL, 88 / Charlie 는 NULL, 90, 85 다(②). PIVOT 은 NULL 을 0 으로 바꾸지 않고(①), 빈 칸을 생략하지 않으며(③), ④ 는 SHOOTER 와 RACING 컬럼을 바꿔 넣었다. ※ 원본의 보기(결과 표 그림)가 누락되어, 같은 개념을 묻는 모의고사 형태로 보기를 재구성했다.",
+    "chapter": "TOP N 쿼리",
+    "_source": "cbt-mock",
+    "_origId": "cbt-096",
+    "_cbtOrigNo": 96,
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT *\nFROM (SELECT Player, Game, Score\nFROM TB_GAME_SCORE)\nPIVOT (MAX(Score) FOR Game IN ('Puzzle' AS Puzzle,'Shooter' AS Shooter,'Racing' AS Racing));"
+      },
+      {
+        "type": "table",
+        "caption": "[TB_GAME_SCORE] 테이블",
+        "headers": [
+          "Player",
+          "Game",
+          "Score"
+        ],
+        "rows": [
+          [
+            "Alice",
+            "Puzzle",
+            "80"
+          ],
+          [
+            "Alice",
+            "Shooter",
+            "95"
+          ],
+          [
+            "Bob",
+            "Puzzle",
+            "70"
+          ],
+          [
+            "Bob",
+            "Racing",
+            "88"
+          ],
+          [
+            "Charlie",
+            "Shooter",
+            "90"
+          ],
+          [
+            "Charlie",
+            "Racing",
+            "85"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": 12215,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 1416,
+    "title": "다음 SQL 실행 결과로 가장 알맞은 것은?",
+    "options": [
+      "D 1, B 2, A 3, C 3, E 4",
+      "D 1, B 2, A 3, C 4, E 5",
+      "D 1, B 2, A 3, C 3, E 5",
+      "E 1, A 2, C 2, B 3, D 4"
+    ],
+    "correctIndex": 0,
+    "explanation": "DENSE_RANK 는 같은 값에 같은 순위를 주고 다음 순위를 건너뛰지 않는다. PRICE 내림차순으로 D(300) 1, B(200) 2, A·C(100) 3, E(50) 4 다(①). ② 는 동점에도 다른 번호를 주는 ROW_NUMBER, ③ 은 동점 수만큼 건너뛰는 RANK 의 결과이고, ④ 는 오름차순으로 매긴 결과다. ※ 원본의 보기(결과 표 그림)가 누락되어, 같은 개념을 묻는 모의고사 형태로 보기를 재구성했다.",
+    "chapter": "윈도우 함수",
+    "_source": "cbt-mock",
+    "_origId": "cbt-109",
+    "_cbtOrigNo": 109,
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT NAME, DENSE_RANK() OVER (ORDER BY PRICE DESC) AS RN\nFROM TB_PRODUCT;"
+      },
+      {
+        "type": "table",
+        "caption": "[TB_PRODUCT] 테이블",
+        "headers": [
+          "NAME",
+          "PRICE"
+        ],
+        "rows": [
+          [
+            "A",
+            "100"
+          ],
+          [
+            "B",
+            "200"
+          ],
+          [
+            "C",
+            "100"
+          ],
+          [
+            "D",
+            "300"
+          ],
+          [
+            "E",
+            "50"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": 12216,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 1417,
+    "title": "다음 SQL 실행 결과로 출력되는 행은?",
+    "options": [
+      "(Kim, SEOUL), (Lee, BUSAN)",
+      "(Kim, SEOUL), (Lee, BUSAN), (Park, NULL)",
+      "Park 에 해당하는 부서가 없어 오류가 발생한다.",
+      "(Kim, NULL), (Lee, NULL), (Park, NULL)"
+    ],
+    "correctIndex": 1,
+    "explanation": "SELECT 절의 스칼라 서브쿼리는 EMPLOYEE 행마다 실행되어 DEPT_ID 가 같은 부서의 LOC 를 가져온다. Kim(10)은 SEOUL, Lee(20)는 BUSAN, Park(30)은 DEPARTMENT 에 30 이 없어 서브쿼리 결과가 없으므로 NULL 이다(②). 스칼라 서브쿼리는 결과가 없으면 NULL 을 반환할 뿐 행을 빼거나(①) 오류를 내지 않는다(③). 오류는 두 행 이상을 반환할 때 난다. ※ 원본의 보기(결과 표 그림)가 누락되어, 같은 개념을 묻는 모의고사 형태로 보기를 재구성했다.",
+    "chapter": "WHERE",
+    "_source": "cbt-mock",
+    "_origId": "cbt-187",
+    "_cbtOrigNo": 187,
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT NAME,(SELECT LOC\nFROM DEPARTMENT D\nWHERE D.DEPT_ID = E.DEPT_ID) AS LOCATION\nFROM EMPLOYEE E;"
+      },
+      {
+        "type": "table",
+        "caption": "[EMPLOYEE] 테이블",
+        "headers": [
+          "EMP_ID",
+          "NAME",
+          "DEPT_ID"
+        ],
+        "rows": [
+          [
+            "1",
+            "Kim",
+            "10"
+          ],
+          [
+            "2",
+            "Lee",
+            "20"
+          ],
+          [
+            "3",
+            "Park",
+            "30"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "[DEPARTMENT] 테이블",
+        "headers": [
+          "DEPT_ID",
+          "LOC"
+        ],
+        "rows": [
+          [
+            "10",
+            "SEOUL"
+          ],
+          [
+            "20",
+            "BUSAN"
           ]
         ]
       }

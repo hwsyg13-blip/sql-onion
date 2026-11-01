@@ -40,17 +40,17 @@
       "chapter": "윈도우 함수",
       "title": "다음 SQL 실행 결과로 가장 알맞은 것은?",
       "options": [
-        "",
-        "",
-        "",
-        ""
+        "(A, 1), (C, 1), (B, 3)",
+        "(A, 1), (C, 1), (B, 2)",
+        "(B, 1), (A, 2), (C, 3)",
+        "(A, 1), (C, 2), (B, 3)"
       ],
       "correctIndex": 3,
-      "explanation": "ROW_NUMBER( )는 값에 상관없이 고유한 순위를 부여한다.①은 RANK()에 대한 답이고, ②는 DENSE_RANK()에 대한 답이다(A, C는 동점이므로 출력 순서는 A, C 혹은 C, A가 될 수 있다).",
+      "explanation": "ROW_NUMBER() 는 값이 같아도 서로 다른 순번을 매긴다. SCORE 내림차순으로 A(90), C(90), B(85) 이므로 1, 2, 3 이 붙어 (A, 1), (C, 2), (B, 3) 이다(④, 동점인 A·C 의 순서는 바뀔 수 있다). ① 은 동점에 같은 순위를 주고 다음을 건너뛰는 RANK(), ② 는 건너뛰지 않는 DENSE_RANK() 의 결과이고, ③ 은 오름차순으로 매긴 결과다. ※ 원본의 보기(결과 표 그림)가 누락되어, 같은 개념을 묻는 모의고사 형태로 보기를 재구성했다.",
       "references": [
         {
           "type": "sql",
-          "code": "SELECT NAME, ROW_NUMBER() OVER (ORDER BY SCORE DESC) AS RN\nFROM SCORES;"
+          "code": "SELECT NAME, ROW_NUMBER() OVER (ORDER BY SCORE DESC) AS RN\nFROM TB_SCORE;"
         },
         {
           "type": "table",
@@ -74,100 +74,6 @@
             ]
           ]
         }
-      ],
-      "optionReferences": [
-        [
-          {
-            "type": "table",
-            "headers": [
-              "NAME",
-              "RN"
-            ],
-            "rows": [
-              [
-                "A",
-                "1"
-              ],
-              [
-                "C",
-                "1"
-              ],
-              [
-                "B",
-                "3"
-              ]
-            ]
-          }
-        ],
-        [
-          {
-            "type": "table",
-            "headers": [
-              "NAME",
-              "RN"
-            ],
-            "rows": [
-              [
-                "C",
-                "1"
-              ],
-              [
-                "A",
-                "1"
-              ],
-              [
-                "B",
-                "2"
-              ]
-            ]
-          }
-        ],
-        [
-          {
-            "type": "table",
-            "headers": [
-              "NAME",
-              "RN"
-            ],
-            "rows": [
-              [
-                "B",
-                "1"
-              ],
-              [
-                "A",
-                "2"
-              ],
-              [
-                "C",
-                "3"
-              ]
-            ]
-          }
-        ],
-        [
-          {
-            "type": "table",
-            "headers": [
-              "NAME",
-              "RN"
-            ],
-            "rows": [
-              [
-                "A",
-                "1"
-              ],
-              [
-                "C",
-                "2"
-              ],
-              [
-                "B",
-                "3"
-              ]
-            ]
-          }
-        ]
       ]
     },
     {
@@ -713,13 +619,13 @@
       "chapter": "WHERE",
       "title": "다음 테이블과 SQL을 기준으로 실행 결과가 올바른 것은?",
       "options": [
-        "",
-        "",
-        "",
-        ""
+        "(Kim, A, ACTIVE), (Jang, B, ACTIVE)",
+        "(Kim, A, ACTIVE), (Park, A, INACTIVE), (Jang, B, ACTIVE)",
+        "(Kim, A, ACTIVE), (Park, A, INACTIVE)",
+        "(Kim, A, ACTIVE), (Lee, B, INACTIVE), (Park, A, INACTIVE), (Jang, B, ACTIVE)"
       ],
       "correctIndex": 1,
-      "explanation": "WHERE 절에서 AND와 OR가 함께 사용될 경우, AND가 OR보다 먼저 평가된다. 이는 수학에서 덧셈보다 곱셈이 먼저 계산되는 것과 유사한 개념이다. 따라서 조건문은 다음과 같이 해석된다.• GRADE = ‘A’ OR (GRADE = ‘B’ AND STATUS = ‘ACTIVE’)• GRADE = ‘A’에 해당하는 사람 → Kim, Park• GRADE = ‘B’ AND STATUS = ‘ACTIVE’에 해당하는 사람 → Jang이 세 명이 조건을 만족하므로 총 3행이 출력되며, 정답은 ②가 된다.",
+      "explanation": "AND 가 OR 보다 먼저 평가되므로 조건은 GRADE = 'A' OR (GRADE = 'B' AND STATUS = 'ACTIVE') 다. GRADE 가 A 인 Kim, Park 과 B 이면서 ACTIVE 인 Jang 이 나와 3행이다(②). ① 은 (GRADE = 'A' OR GRADE = 'B') AND STATUS = 'ACTIVE' 로 괄호를 친 것처럼 해석한 결과, ③ 은 A 만, ④ 는 STATUS 조건을 무시한 결과다. ※ 원본의 보기(결과 표 그림)가 누락되어, 같은 개념을 묻는 모의고사 형태로 보기를 재구성했다.",
       "references": [
         {
           "type": "sql",
@@ -767,106 +673,6 @@
             ]
           ]
         }
-      ],
-      "optionReferences": [
-        [
-          {
-            "type": "table",
-            "headers": [
-              "NAME",
-              "GRADE",
-              "STATUS"
-            ],
-            "rows": [
-              [
-                "Kim",
-                "A",
-                "ACTIVE"
-              ],
-              [
-                "Jang",
-                "B",
-                "ACTIVE"
-              ]
-            ]
-          }
-        ],
-        [
-          {
-            "type": "table",
-            "headers": [
-              "NAME",
-              "GRADE",
-              "STATUS"
-            ],
-            "rows": [
-              [
-                "Kim",
-                "A",
-                "ACTIVE"
-              ],
-              [
-                "Park",
-                "A",
-                "INACTIVE"
-              ],
-              [
-                "Jang",
-                "B",
-                "ACTIVE"
-              ]
-            ]
-          }
-        ],
-        [
-          {
-            "type": "table",
-            "headers": [
-              "NAME",
-              "GRADE",
-              "STATUS"
-            ],
-            "rows": [
-              [
-                "Kim",
-                "A",
-                "ACTIVE"
-              ],
-              [
-                "Lee",
-                "B",
-                "INACTIVE"
-              ],
-              [
-                "Park",
-                "A",
-                "INACTIVE"
-              ],
-              [
-                "Jang",
-                "B",
-                "ACTIVE"
-              ]
-            ]
-          }
-        ],
-        [
-          {
-            "type": "table",
-            "headers": [
-              "NAME",
-              "GRADE",
-              "STATUS"
-            ],
-            "rows": [
-              [
-                "Jang",
-                "B",
-                "ACTIVE"
-              ]
-            ]
-          }
-        ]
       ]
     },
     {
@@ -1284,13 +1090,13 @@
       "chapter": "WHERE",
       "title": "다음 SQL 실행 결과로 가장 알맞은 것은?",
       "options": [
-        "",
-        "아무것도 출력되지 않음",
-        "",
-        ""
+        "A, B, NULL",
+        "A, A, B",
+        "오류가 발생한다.",
+        "A, B"
       ],
       "correctIndex": 3,
-      "explanation": "IN 뒤의 NULL은 무시된다. 또한 IN(‘A’, ‘A’, ‘B’)처럼 중복되는 값이 있어도, SQL 엔진은 중복된 값을 한 번만 판단한다. 따라서 IN(NULL, ‘A’, ‘A’, ‘B’)는 IN(‘A’, ‘B’)와 동일하며 답은 ④가 된다.",
+      "explanation": "COL1 IN (NULL, 'A', 'A', 'B') 는 COL1 = NULL OR COL1 = 'A' OR COL1 = 'A' OR COL1 = 'B' 와 같다. COL1 = NULL 은 어떤 행에서도 참이 아니라 NULL 행은 나오지 않고, 목록의 중복 값('A' 두 번)은 결과에 영향이 없으며 오류도 나지 않는다. 따라서 A, B 두 행이다(④). ※ 원본의 보기(결과 표 그림)가 누락되어, 같은 개념을 묻는 모의고사 형태로 보기를 재구성했다.",
       "references": [
         {
           "type": "sql",
@@ -1317,66 +1123,6 @@
             ]
           ]
         }
-      ],
-      "optionReferences": [
-        [
-          {
-            "type": "table",
-            "headers": [
-              "COL1"
-            ],
-            "rows": [
-              [
-                "A"
-              ],
-              [
-                "A"
-              ],
-              [
-                "B"
-              ],
-              [
-                "NULL"
-              ]
-            ]
-          }
-        ],
-        [],
-        [
-          {
-            "type": "table",
-            "headers": [
-              "COL1"
-            ],
-            "rows": [
-              [
-                "A"
-              ],
-              [
-                "B"
-              ],
-              [
-                "NULL"
-              ]
-            ]
-          }
-        ],
-        [
-          {
-            "type": "table",
-            "headers": [
-              "COL1"
-            ],
-            "rows": [
-              [
-                "A"
-              ],
-              [
-                "B"
-              ]
-            ]
-          }
-        ]
       ]
     },
     {
@@ -1431,13 +1177,13 @@
       "chapter": "WHERE",
       "title": "다음 SQL 실행 결과로 가장 알맞은 것은?",
       "options": [
-        "",
-        "",
-        "",
-        ""
+        "(A, PASS), (B, FAIL), (C, NO DATA)",
+        "(A, PASS), (B, FAIL), (C, FAIL)",
+        "(A, PASS), (B, FAIL), (C, NULL)",
+        "(A, PASS), (B, NO DATA), (C, FAIL)"
       ],
       "correctIndex": 0,
-      "explanation": "이 SQL은 CASE 문을 사용하여 SCORE 값에 따라 각 학생의 결과를 판별한다. CASE 문은 위에서 아래로 조건을 순차적으로 평가하며, 가장 먼저 만족하는 조건에 해당하는 결과를 반환한다.• A (SCORE = 85)일 경우 85 ≥ 80 조건을 만족하므로 결과는 ‘PASS’• B (SCORE = 72)일 경우 72 ≥ 80, 72 IS NULL은 거짓이므로 ELSE가 적용되어 ‘FAIL’• C (SCORE = NULL)일 경우 NULL ≥ 80은 비교 불가, NULL IS NULL 조건이 만족하므로 ‘NO DATA’",
+      "explanation": "CASE 는 위에서부터 처음 참이 되는 조건의 값을 반환한다. A(85)는 SCORE >= 80 이 참이라 PASS, B(72)는 두 조건이 모두 거짓이라 ELSE 의 FAIL, C(NULL)는 NULL >= 80 이 참이 아니고 SCORE IS NULL 이 참이라 NO DATA 다(①). ② 는 NULL 행이 ELSE 로 간다고, ③ 은 NULL 이 그대로 나온다고 본 결과이며, ④ 는 B 와 C 의 판정을 바꿨다. ※ 원본의 보기(결과 표 그림)가 누락되어, 같은 개념을 묻는 모의고사 형태로 보기를 재구성했다.",
       "references": [
         {
           "type": "sql",
@@ -1465,100 +1211,6 @@
             ]
           ]
         }
-      ],
-      "optionReferences": [
-        [
-          {
-            "type": "table",
-            "headers": [
-              "STUDENT",
-              "RESULT"
-            ],
-            "rows": [
-              [
-                "A",
-                "PASS"
-              ],
-              [
-                "B",
-                "FAIL"
-              ],
-              [
-                "C",
-                "NO DATA"
-              ]
-            ]
-          }
-        ],
-        [
-          {
-            "type": "table",
-            "headers": [
-              "STUDENT",
-              "RESULT"
-            ],
-            "rows": [
-              [
-                "A",
-                "PASS"
-              ],
-              [
-                "B",
-                "NO DATA"
-              ],
-              [
-                "C",
-                "FAIL"
-              ]
-            ]
-          }
-        ],
-        [
-          {
-            "type": "table",
-            "headers": [
-              "STUDENT",
-              "RESULT"
-            ],
-            "rows": [
-              [
-                "A",
-                "FAIL"
-              ],
-              [
-                "B",
-                "PASS"
-              ],
-              [
-                "C",
-                "NO DATA"
-              ]
-            ]
-          }
-        ],
-        [
-          {
-            "type": "table",
-            "headers": [
-              "STUDENT",
-              "RESULT"
-            ],
-            "rows": [
-              [
-                "A",
-                "NO DATA"
-              ],
-              [
-                "B",
-                "PASS"
-              ],
-              [
-                "C",
-                "FAIL"
-              ]
-            ]
-          }
-        ]
       ]
     },
     {
@@ -1900,13 +1552,13 @@
       "chapter": "함수",
       "title": "다음 SQL 실행 결과로 가장 알맞은 것은?",
       "options": [
-        "",
-        "",
-        "",
-        ""
+        "(Kim, 3000), (Lee, 4000), (Park, 0)",
+        "(Kim, 3000), (Lee, 4000), (Park, NULL)",
+        "(Kim, 3000), (Lee, 4000)",
+        "별칭이 원래 컬럼명과 같아 오류가 발생한다."
       ],
       "correctIndex": 0,
-      "explanation": "NVL 함수는 NULL을 대체하므로 Park의 SALARY는 0으로 출력된다. 또한 AS를 이용해서 다시 별칭을 SALARY로 주었으므로 컬럼이 각각 NAME, SALARY로 표현되어야 한다.",
+      "explanation": "NVL(SALARY, 0) 은 SALARY 가 NULL 이면 0 을 반환하므로 Park 의 SALARY 는 0 으로 출력된다(①). NVL 을 쓰지 않았다면 NULL(②)이 나오고, NVL 은 행을 걸러내지 않으므로 Park 이 빠지지 않는다(③). 계산식에 원래 컬럼명과 같은 별칭(AS SALARY)을 붙이는 것도 허용되어 오류가 나지 않는다(④). ※ 원본의 보기(결과 표 그림)가 누락되어, 같은 개념을 묻는 모의고사 형태로 보기를 재구성했다.",
       "references": [
         {
           "type": "sql",
@@ -1938,100 +1590,6 @@
             ]
           ]
         }
-      ],
-      "optionReferences": [
-        [
-          {
-            "type": "table",
-            "headers": [
-              "NAME",
-              "SALARY"
-            ],
-            "rows": [
-              [
-                "Kim",
-                "3000"
-              ],
-              [
-                "Lee",
-                "4000"
-              ],
-              [
-                "Park",
-                "0"
-              ]
-            ]
-          }
-        ],
-        [
-          {
-            "type": "table",
-            "headers": [
-              "NAME",
-              "SALARY"
-            ],
-            "rows": [
-              [
-                "Kim",
-                "3000"
-              ],
-              [
-                "Lee",
-                "4000"
-              ],
-              [
-                "Park",
-                "NULL"
-              ]
-            ]
-          }
-        ],
-        [
-          {
-            "type": "table",
-            "headers": [
-              "NAME",
-              "SALARY"
-            ],
-            "rows": [
-              [
-                "Kim",
-                "0"
-              ],
-              [
-                "Lee",
-                "0"
-              ],
-              [
-                "Park",
-                "0"
-              ]
-            ]
-          }
-        ],
-        [
-          {
-            "type": "table",
-            "headers": [
-              "NAME",
-              "NVL(SALARY, 0)"
-            ],
-            "rows": [
-              [
-                "Kim",
-                "3000"
-              ],
-              [
-                "Lee",
-                "4000"
-              ],
-              [
-                "Park",
-                "0"
-              ]
-            ]
-          }
-        ]
       ]
     },
     {
@@ -2395,166 +1953,18 @@
       "chapter": "GROUP BY·HAVING",
       "title": "다음 SQL 실행 결과로 가장 알맞은 것은?",
       "options": [
-        "",
-        "",
-        "",
-        ""
+        "(C, 11000)",
+        "(A, 7000), (C, 11000)",
+        "(A, 7000), (B, 1000), (C, 11000), (D, 1000)",
+        "결과가 없다(공집합)."
       ],
       "correctIndex": 1,
-      "explanation": "실행 순서상 FROM의 인라인 뷰가 먼저 실행되어 아래와 같은 가상테이블이 생성된다.그다음 WHERE의 서브쿼리를 실행하면 전체 주문의 평균 금액이 20000 / 6 = 3333.33이 된다.즉, WHERE TOTAL > 3333.33..이므로 A와 C가 출력된다.",
+      "explanation": "FROM 절의 인라인 뷰가 먼저 고객별 합계를 만든다: A 7000, B 1000, C 11000, D 1000. WHERE 절의 서브쿼리 AVG(AMOUNT) 는 주문 6건의 평균이라 20000 / 6 ≈ 3333.3 이다. TOTAL 이 이보다 큰 A(7000)와 C(11000)가 출력된다(②). ① 은 A(7000)까지 기준 이하로 잘못 본 결과, ③ 은 WHERE 조건을 무시한 결과다. ※ 원본의 보기(결과 표 그림)가 누락되어, 같은 개념을 묻는 모의고사 형태로 보기를 재구성했다.",
       "references": [
         {
           "type": "sql",
           "code": "SELECT CUSTOMER, TOTAL\nFROM (SELECT CUSTOMER, SUM(AMOUNT) AS TOTAL\nFROM TB_ORDER\nGROUP BY CUSTOMER)\nWHERE TOTAL > (SELECT AVG(AMOUNT) FROM TB_ORDER);"
-        },
-        {
-          "type": "table",
-          "caption": "[TB_ORDER] 테이블",
-          "headers": [
-            "ORDER_ID",
-            "CUSTOMER",
-            "AMOUNT"
-          ],
-          "rows": [
-            [
-              "1",
-              "A",
-              "3000"
-            ],
-            [
-              "2",
-              "A",
-              "4000"
-            ],
-            [
-              "3",
-              "B",
-              "1000"
-            ],
-            [
-              "4",
-              "C",
-              "5000"
-            ],
-            [
-              "5",
-              "C",
-              "6000"
-            ],
-            [
-              "6",
-              "D",
-              "1000"
-            ]
-          ]
-        },
-        {
-          "type": "table",
-          "headers": [
-            "CUSTOMER",
-            "TOTAL"
-          ],
-          "rows": [
-            [
-              "A",
-              "7000"
-            ],
-            [
-              "B",
-              "1000"
-            ],
-            [
-              "C",
-              "11000"
-            ],
-            [
-              "D",
-              "1000"
-            ]
-          ]
         }
-      ],
-      "optionReferences": [
-        [
-          {
-            "type": "table",
-            "headers": [
-              "CUSTOMER",
-              "TOTAL"
-            ],
-            "rows": [
-              [
-                "A",
-                "7000"
-              ],
-              [
-                "B",
-                "1000"
-              ]
-            ]
-          }
-        ],
-        [
-          {
-            "type": "table",
-            "headers": [
-              "CUSTOMER",
-              "TOTAL"
-            ],
-            "rows": [
-              [
-                "A",
-                "7000"
-              ],
-              [
-                "C",
-                "11000"
-              ]
-            ]
-          }
-        ],
-        [
-          {
-            "type": "table",
-            "headers": [
-              "CUSTOMER",
-              "TOTAL"
-            ],
-            "rows": [
-              [
-                "C",
-                "11000"
-              ],
-              [
-                "D",
-                "1000"
-              ]
-            ]
-          }
-        ],
-        [
-          {
-            "type": "table",
-            "headers": [
-              "CUSTOMER",
-              "TOTAL"
-            ],
-            "rows": [
-              [
-                "A",
-                "7000"
-              ],
-              [
-                "B",
-                "1000"
-              ],
-              [
-                "C",
-                "11000"
-              ]
-            ]
-          }
-        ]
       ]
     },
     {
@@ -3024,15 +2434,15 @@
       "_origNo": 86,
       "subject": "2과목",
       "chapter": "GROUP BY·HAVING",
-      "title": "다음 SQL 실행 결과로 가장 알맞은 것은?",
+      "title": "다음 SQL 실행 결과로 출력되는 행 수는?",
       "options": [
-        "",
-        "",
-        "",
-        ""
+        "5",
+        "7",
+        "8",
+        "3"
       ],
       "correctIndex": 1,
-      "explanation": "GROUP BY CUBE(REGION, AMOUNT)는 지정된 컬럼들에 대해 가능한 모든 집계 조합을 자동으로 생성한다. CUBE는 N개의 컬럼에 대해 2^N개만큼 조합을 만듦으로써 4개의 조합이 생성된다.• GROUP BY REGION, AMOUNT → 두 컬럼을 조합해 GROUP BY 하면 2행 출력[(EAST, 1000), (WEST, 2000)]• GROUP BY REGION → REGION 컬럼 기준으로 GROUP BY 하면 2행 출력[(EAST), (WEST)]• GROUP BY AMOUNT → AMOUNT 컬럼 기준으로 GROUP BY 하면 2행 출력[(1000), (2000)]• GROUP BY( ) → 전체 컬럼 기준으로 GROUP BY 하면 1행 출력따라서 7개 행이 출력된다.",
+      "explanation": "CUBE(REGION, AMOUNT) 는 (REGION, AMOUNT), (REGION), (AMOUNT), () 네 조합을 모두 집계한다. (REGION, AMOUNT) 는 (EAST, 1000), (WEST, 2000) 2행, (REGION) 은 EAST, WEST 2행, (AMOUNT) 는 1000, 2000 2행, () 전체 합계 1행이라 모두 7행이다(②). ROLLUP(REGION, AMOUNT) 였다면 (AMOUNT) 단독 집계가 빠져 5행(①)이다. ※ 원본의 보기(결과 표 그림)가 누락되어, 같은 개념을 묻는 모의고사 형태로 보기를 재구성했다.",
       "references": [
         {
           "type": "sql",
@@ -3060,146 +2470,6 @@
             ]
           ]
         }
-      ],
-      "optionReferences": [
-        [
-          {
-            "type": "table",
-            "headers": [
-              "REGION",
-              "AMOUNT",
-              "COUNT(*)"
-            ],
-            "rows": [
-              [
-                "EAST",
-                "1000",
-                "2"
-              ],
-              [
-                "EAST",
-                "NULL",
-                "2"
-              ],
-              [
-                "WEST",
-                "2000",
-                "1"
-              ],
-              [
-                "WEST",
-                "NULL",
-                "1"
-              ],
-              [
-                "NULL",
-                "NULL",
-                "3"
-              ]
-            ]
-          }
-        ],
-        [
-          {
-            "type": "table",
-            "headers": [
-              "REGION",
-              "AMOUNT",
-              "COUNT(*)"
-            ],
-            "rows": [
-              [
-                "EAST",
-                "1000",
-                "2"
-              ],
-              [
-                "WEST",
-                "2000",
-                "1"
-              ],
-              [
-                "EAST",
-                "NULL",
-                "2"
-              ],
-              [
-                "WEST",
-                "NULL",
-                "1"
-              ],
-              [
-                "NULL",
-                "1000",
-                "2"
-              ],
-              [
-                "NULL",
-                "2000",
-                "1"
-              ],
-              [
-                "NULL",
-                "NULL",
-                "3"
-              ]
-            ]
-          }
-        ],
-        [
-          {
-            "type": "table",
-            "headers": [
-              "REGION",
-              "AMOUNT",
-              "COUNT(*)"
-            ],
-            "rows": [
-              [
-                "EAST",
-                "1000",
-                "2"
-              ],
-              [
-                "WEST",
-                "2000",
-                "1"
-              ],
-              [
-                "EAST",
-                "NULL",
-                "2"
-              ],
-              [
-                "WEST",
-                "NULL",
-                "1"
-              ]
-            ]
-          }
-        ],
-        [
-          {
-            "type": "table",
-            "headers": [
-              "REGION",
-              "AMOUNT",
-              "COUNT(*)"
-            ],
-            "rows": [
-              [
-                "EAST",
-                "1000",
-                "2"
-              ],
-              [
-                "WEST",
-                "2000",
-                "1"
-              ]
-            ]
-          }
-        ]
       ]
     },
     {
@@ -3378,15 +2648,15 @@
       "_origNo": 96,
       "subject": "2과목",
       "chapter": "TOP N 쿼리",
-      "title": "다음 SQL 실행 결과로 가장 알맞은 것은?",
+      "title": "다음 SQL 실행 결과로 가장 알맞은 것은? (출력 컬럼 순서: PLAYER, PUZZLE, SHOOTER, RACING)",
       "options": [
-        "",
-        "",
-        "",
-        ""
+        "Alice: 80, 95, 0 / Bob: 70, 0, 88 / Charlie: 0, 90, 85",
+        "Alice: 80, 95, NULL / Bob: 70, NULL, 88 / Charlie: NULL, 90, 85",
+        "Alice: 80, 95 / Bob: 70, 88 / Charlie: 90, 85",
+        "Alice: 80, NULL, 95 / Bob: 70, 88, NULL / Charlie: NULL, 85, 90"
       ],
       "correctIndex": 1,
-      "explanation": "GAME 컬럼에 있던 값들 ‘Puzzle’, ‘Shooter’, ‘Racing’을 각각 컬럼으로 전환시키고 해당 값에 연결된 Score는 MAX 값을 찾아 반환해준다. 예를 들어 Alice는 Puzzle 게임은 80, Shooter 게임은 95, Racing은 하지 않았으니 NULL을 반환한다.",
+      "explanation": "PIVOT 은 Game 값 'Puzzle', 'Shooter', 'Racing' 을 각각 컬럼으로 바꾸고, 그 칸에 MAX(Score) 를 넣는다. 해당 게임 기록이 없으면 집계할 값이 없어 NULL 이다. 그래서 Alice 는 80, 95, NULL / Bob 은 70, NULL, 88 / Charlie 는 NULL, 90, 85 다(②). PIVOT 은 NULL 을 0 으로 바꾸지 않고(①), 빈 칸을 생략하지 않으며(③), ④ 는 SHOOTER 와 RACING 컬럼을 바꿔 넣었다. ※ 원본의 보기(결과 표 그림)가 누락되어, 같은 개념을 묻는 모의고사 형태로 보기를 재구성했다.",
       "references": [
         {
           "type": "sql",
@@ -3433,132 +2703,6 @@
             ]
           ]
         }
-      ],
-      "optionReferences": [
-        [
-          {
-            "type": "table",
-            "headers": [
-              "Player",
-              "Puzzle",
-              "Shooter",
-              "Racing"
-            ],
-            "rows": [
-              [
-                "Alice",
-                "NULL",
-                "80",
-                "95"
-              ],
-              [
-                "Bob",
-                "NULL",
-                "70",
-                "88"
-              ],
-              [
-                "Charlie",
-                "85",
-                "90",
-                "NULL"
-              ]
-            ]
-          }
-        ],
-        [
-          {
-            "type": "table",
-            "headers": [
-              "Player",
-              "Puzzle",
-              "Shooter",
-              "Racing"
-            ],
-            "rows": [
-              [
-                "Alice",
-                "80",
-                "95",
-                "NULL"
-              ],
-              [
-                "Bob",
-                "70",
-                "NULL",
-                "88"
-              ],
-              [
-                "Charlie",
-                "NULL",
-                "90",
-                "85"
-              ]
-            ]
-          }
-        ],
-        [
-          {
-            "type": "table",
-            "headers": [
-              "Player",
-              "Puzzle",
-              "Shooter",
-              "Racing"
-            ],
-            "rows": [
-              [
-                "Alice",
-                "80",
-                "NULL",
-                "95"
-              ],
-              [
-                "Bob",
-                "NULL",
-                "70",
-                "88"
-              ],
-              [
-                "Charlie",
-                "NULL",
-                "NULL",
-                "NULL"
-              ]
-            ]
-          }
-        ],
-        [
-          {
-            "type": "table",
-            "headers": [
-              "Player",
-              "Puzzle",
-              "Shooter",
-              "Racing"
-            ],
-            "rows": [
-              [
-                "Alice",
-                "95",
-                "80",
-                "NULL"
-              ],
-              [
-                "Bob",
-                "88",
-                "70",
-                "NULL"
-              ],
-              [
-                "Charlie",
-                "85",
-                "90",
-                "NULL"
-              ]
-            ]
-          }
-        ]
       ]
     },
     {
@@ -3843,13 +2987,13 @@
       "chapter": "윈도우 함수",
       "title": "다음 SQL 실행 결과로 가장 알맞은 것은?",
       "options": [
-        "",
-        "",
-        "",
-        ""
+        "D 1, B 2, A 3, C 3, E 4",
+        "D 1, B 2, A 3, C 4, E 5",
+        "D 1, B 2, A 3, C 3, E 5",
+        "E 1, A 2, C 2, B 3, D 4"
       ],
       "correctIndex": 0,
-      "explanation": "DENSE_RANK은 동일한 값에 동일 순위를 부여하고, 그다음 순위를 건너뛰지 않는다. 만일 ROW_NUMBER( )였다면 ②가 답이고, RANK( )였다면 ③이 답이 된다.",
+      "explanation": "DENSE_RANK 는 같은 값에 같은 순위를 주고 다음 순위를 건너뛰지 않는다. PRICE 내림차순으로 D(300) 1, B(200) 2, A·C(100) 3, E(50) 4 다(①). ② 는 동점에도 다른 번호를 주는 ROW_NUMBER, ③ 은 동점 수만큼 건너뛰는 RANK 의 결과이고, ④ 는 오름차순으로 매긴 결과다. ※ 원본의 보기(결과 표 그림)가 누락되어, 같은 개념을 묻는 모의고사 형태로 보기를 재구성했다.",
       "references": [
         {
           "type": "sql",
@@ -3885,132 +3029,6 @@
             ]
           ]
         }
-      ],
-      "optionReferences": [
-        [
-          {
-            "type": "table",
-            "headers": [
-              "NAME",
-              "RN"
-            ],
-            "rows": [
-              [
-                "D",
-                "1"
-              ],
-              [
-                "B",
-                "2"
-              ],
-              [
-                "A",
-                "3"
-              ],
-              [
-                "C",
-                "3"
-              ],
-              [
-                "E",
-                "4"
-              ]
-            ]
-          }
-        ],
-        [
-          {
-            "type": "table",
-            "headers": [
-              "NAME",
-              "RN"
-            ],
-            "rows": [
-              [
-                "D",
-                "1"
-              ],
-              [
-                "B",
-                "2"
-              ],
-              [
-                "A",
-                "3"
-              ],
-              [
-                "C",
-                "4"
-              ],
-              [
-                "E",
-                "5"
-              ]
-            ]
-          }
-        ],
-        [
-          {
-            "type": "table",
-            "headers": [
-              "NAME",
-              "RN"
-            ],
-            "rows": [
-              [
-                "D",
-                "1"
-              ],
-              [
-                "B",
-                "2"
-              ],
-              [
-                "A",
-                "3"
-              ],
-              [
-                "C",
-                "3"
-              ],
-              [
-                "E",
-                "5"
-              ]
-            ]
-          }
-        ],
-        [
-          {
-            "type": "table",
-            "headers": [
-              "NAME",
-              "RN"
-            ],
-            "rows": [
-              [
-                "D",
-                "1"
-              ],
-              [
-                "B",
-                "2"
-              ],
-              [
-                "A",
-                "3"
-              ],
-              [
-                "C",
-                "3"
-              ],
-              [
-                "E",
-                "3"
-              ]
-            ]
-          }
-        ]
       ]
     },
     {
@@ -6187,13 +5205,13 @@
       "chapter": "WHERE",
       "title": "다음 SQL 실행 결과로 출력되는 행은?",
       "options": [
-        "",
-        "",
-        "",
-        ""
+        "(Kim, SEOUL), (Lee, BUSAN)",
+        "(Kim, SEOUL), (Lee, BUSAN), (Park, NULL)",
+        "Park 에 해당하는 부서가 없어 오류가 발생한다.",
+        "(Kim, NULL), (Lee, NULL), (Park, NULL)"
       ],
       "correctIndex": 1,
-      "explanation": "이 쿼리는 SELECT 절 내에서 스칼라 서브쿼리를 사용한다. 각 EMPLOYEE 행에 대해 E.DEPT_ID와 동일한 DEPT_ID를 DEPARTMENT 테이블에서 찾아 LOC을 가져온다. 스칼라 서브쿼리는 행마다 1개의 값만 반환해야 하며, 조건이 일치하지 않으면 NULL이 반환된다.• E.EMP_ID가 1일 때 → SELECT LOC FROM DEPARTMENT D WHERE D.DEPT_ID = 1;은 SEOUL 반환• E.EMP_ID가 2일 때 → SELECT LOC FROM DEPARTMENT D WHERE D.DEPT_ID = 2;은 BUSAN 반환• E.EMP_ID가 3일 때 → SELECT LOC FROM DEPARTMENT D WHERE D.DEPT_ID = 3;은 NULL 반환따라서 ②가 답이 된다.",
+      "explanation": "SELECT 절의 스칼라 서브쿼리는 EMPLOYEE 행마다 실행되어 DEPT_ID 가 같은 부서의 LOC 를 가져온다. Kim(10)은 SEOUL, Lee(20)는 BUSAN, Park(30)은 DEPARTMENT 에 30 이 없어 서브쿼리 결과가 없으므로 NULL 이다(②). 스칼라 서브쿼리는 결과가 없으면 NULL 을 반환할 뿐 행을 빼거나(①) 오류를 내지 않는다(③). 오류는 두 행 이상을 반환할 때 난다. ※ 원본의 보기(결과 표 그림)가 누락되어, 같은 개념을 묻는 모의고사 형태로 보기를 재구성했다.",
       "references": [
         {
           "type": "sql",
@@ -6243,100 +5261,6 @@
             ]
           ]
         }
-      ],
-      "optionReferences": [
-        [
-          {
-            "type": "table",
-            "headers": [
-              "NAME",
-              "LOCATION"
-            ],
-            "rows": [
-              [
-                "Kim",
-                "SEOUL"
-              ],
-              [
-                "Lee",
-                "BUSAN"
-              ],
-              [
-                "Park",
-                "BUSAN"
-              ]
-            ]
-          }
-        ],
-        [
-          {
-            "type": "table",
-            "headers": [
-              "NAME",
-              "LOCATION"
-            ],
-            "rows": [
-              [
-                "Kim",
-                "SEOUL"
-              ],
-              [
-                "Lee",
-                "BUSAN"
-              ],
-              [
-                "Park",
-                "NULL"
-              ]
-            ]
-          }
-        ],
-        [
-          {
-            "type": "table",
-            "headers": [
-              "NAME",
-              "LOCATION"
-            ],
-            "rows": [
-              [
-                "Kim",
-                "SEOUL"
-              ],
-              [
-                "Lee",
-                "NULL"
-              ],
-              [
-                "Park",
-                "NULL"
-              ]
-            ]
-          }
-        ],
-        [
-          {
-            "type": "table",
-            "headers": [
-              "NAME",
-              "LOCATION"
-            ],
-            "rows": [
-              [
-                "Kim",
-                "NULL"
-              ],
-              [
-                "Lee",
-                "NULL"
-              ],
-              [
-                "Park",
-                "NULL"
-              ]
-            ]
-          }
-        ]
       ]
     },
     {
