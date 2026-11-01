@@ -2,8 +2,8 @@
 
 대화 창이 바뀌거나 앞 내용이 요약되어도 이 파일만 보고 이어서 일할 수 있도록 유지한다. 미션 하나가 끝날 때마다 갱신한다 (명세 7-1).
 
-- 마지막 갱신: 2026-11-01 15:00 KST
-- 예약된 일회성 작업: 11-02 00:35 KST #229 머지 재시도 (`trig_01E7L5ac9BTHc5DjPg4jSt16`)
+- 마지막 갱신: 2026-11-01 21:00 KST
+- 예약된 일회성 작업: 11-02 00:35 KST #229·#230 묶음 머지 (`trig_01E7L5ac9BTHc5DjPg4jSt16`, 24시간 배포 80 미만일 때)
 - 다음 정기 실행: 매일 06:02 · 14:02 · 22:02 KST (예약 작업 `trig_01NEnGo6t7G964P5UXn7ZA2m`, 이 대화 세션으로 실행)
 
 ## 1. 누적 사용자 지시 (최신 기준)
@@ -32,8 +32,9 @@
 |---|---|---|
 | #195 | 에이전트 명세·상태 파일 (`maintenance/maintainer-agent`) | 드래프트 유지. `.claude/` 라 머지하지 않음. 이 브랜치가 에이전트의 기억 저장소 |
 | #229 | 보류 문항 3개 정리(sqld-0474 정답 4개, R50 2-41 대체, R46 1-2 재작성) + SQL 연산자 합자 해제 (`content/2026-11-01-user-delegated`) | 검사기 4개·빌드·화면 확인 완료. 24시간 배포 82건(≥80)이라 머지 보류 → 11-02 00:35 재시도 (80 미만이면 draft 해제 후 머지) |
+| #230 | 기출 해설 정확성 2차 점검 10문항 (`content/2026-11-01-explanation-audit`) — 백로그 17 완료 | 검사기 4개·빌드·모바일 화면 확인 완료. #229 와 함께 00:35 묶음 머지 |
 
-진행 중인 미션 없음. 백로그 다음 후보: #16 보기 빈 sqld-1140 59문항, #17 기출 해설 정확성 2차 점검 (backlog.md).
+진행 중인 미션 없음. 백로그 다음 후보: #18 짧은 해설 보강(약 230건, 오답 이유 추가), #16 보기 빈 sqld-1140 59문항 (backlog.md).
 
 ## 3. 사용자 답을 기다리는 질문
 
@@ -43,6 +44,8 @@
 해결됨(11-01 15:00): #196 닫음, sqld-0474·R50 2-41·R46 1-2 는 #229, 61회 날짜는 2026-05-31(일) 맞음(공지 일치, 수정 없음).
 
 ## 4. 최근 실행 요약
+
+- **11-01 20:00 (사용자 지시 "미션 설정하고 업무 시작")**: 미션 17 기출 해설 2차 점검 → #230 (10문항: 정답 둘 R52 2-31, 모순 키 R51 1-5, 원칙 위배 R52 1-1, 중복 R59 1-5, 표기 R50 2-40, 해설 5건). SQL 실행 대조 141건은 정답 오류 0. 배포 80건이라 머지는 00:35 묶음.
 
 - **11-01 15:00 (사용자 위임)**: #196 닫음. #229 생성(위 표). 61회 날짜 확인. 문의 시트는 커넥터 부재로 보류. 24시간 배포 82건(Preview 61 + Production 21) — 00:27 KST 이후 80 미만 → 00:35 머지 재시도 예약.
 
@@ -60,4 +63,5 @@
 - 콘텐츠 원본: `scripts/authored/*.json` → `node scripts/build-quiz-bank.mjs` 로 `src/data/rounds/*.ts` 생성. 이론은 `src/data/theoryHtml.ts`, OX 는 `src/data/miniTest/ox.ts` 를 직접 고친다.
 - 검사기 4개 모두 통과해야 머지: `validate-rounds.mjs --strict`, `check-answer-leak.mjs`, `verify-sql-results.mjs`, `check-question-quality.mjs`.
 - 문의 시트 전체: Drive 커넥터 `download_file_content(fileId=1ZetajcAO8lDHTbYF0EwfKoytJnDjI-SAqk8510XOIDg, exportMimeType=text/csv)`.
+- 기록 브랜치는 fetch 설정이 main 만 받아 추적 참조가 낡는다. push 뒤 `git fetch origin +maintenance/maintainer-agent:refs/remotes/origin/maintenance/maintainer-agent`.
 - PR 은 REST API(`gh api .../pulls -X POST`), 사용량은 `list_events(kinds=["rate_limit_event"])`, 배포 확인은 GitHub deployments API.

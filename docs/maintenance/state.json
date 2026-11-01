@@ -8,7 +8,8 @@
   "current_mission": null,
   "my_prs": [
     195,
-    229
+    229,
+    230
   ],
   "merged_prs": [
     197,
@@ -54,7 +55,10 @@
     196
   ],
   "pending_merge": {
-    "pr": 229,
-    "reason": "24시간 배포 82건(≥80) — 11-02 00:35 KST 재시도 예약 trig_01E7L5ac9BTHc5DjPg4jSt16"
+    "prs": [
+      229,
+      230
+    ],
+    "reason": "24시간 배포 80건(≥80) — 11-02 00:35 KST 묶음 머지 예약 trig_01E7L5ac9BTHc5DjPg4jSt16"
   }
 }
