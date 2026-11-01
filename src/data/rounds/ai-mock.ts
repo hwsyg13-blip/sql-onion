@@ -1,5 +1,5 @@
 // Auto-generated from scripts/authored/ai-mock.json
-// AI 생성 모의고사 풀 (기출 변형) · 1280문항
+// AI 생성 모의고사 풀 (기출 변형) · 1292문항
 // ⚠ 직접 편집 금지. ai-mock.json 수정 후 'node scripts/build-quiz-bank.mjs' 재실행.
 import type { QuizQuestion } from '../quizBank';
 
@@ -46771,6 +46771,835 @@ export const AI_MOCK: QuizQuestion[] = [
             "2020",
             "06",
             "1500"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": 12240,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 1441,
+    "title": "아래의 테이블에 대해서 주어진 SQL문을 수행한 결과로 알맞은 것은?",
+    "options": [
+      "(10, VIP), (20, VVIP)",
+      "(10, VIP)",
+      "(20, VVIP)",
+      "(10, VIP), (20, NULL)"
+    ],
+    "correctIndex": 1,
+    "explanation": "인라인 뷰에서 주문별 합계는 10 이 2000 + 3000 = 5000, 20 이 4000 + 3500 = 7500 이다. 5000 은 VIP(5000~5999) 범위에 들지만 7500 은 어느 등급 범위(최대 6999)에도 들지 않아 조인되는 행이 없다. 따라서 (10, VIP) 한 행만 나온다(②). 일반 조인이라 짝이 없는 20 이 NULL 로 남지 않고(④), 7500 을 VVIP 로 본 ①③ 은 범위를 잘못 읽은 결과다. (원본 SQL 의 오타 'jumin', 쉼표를 바로잡았다.) ※ 원본의 보기(그림)가 누락되어, 같은 개념을 묻는 모의고사 형태로 보기를 재구성했다.",
+    "chapter": "그룹 함수",
+    "_source": "sqld-1140",
+    "_origId": "sqld-0550",
+    "_category": "집계 함수",
+    "_correctRate": 10,
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT A.JUMUN AS \"주문\", B.CUSTRANK AS \"고객등급\"\nFROM   (SELECT JUMUN, SUM(PRICE) AS TOTAL\n        FROM   test34_1\n        GROUP BY JUMUN) A, test34_2 B\nWHERE  A.TOTAL BETWEEN B.MINPRICE AND B.MAXPRICE;"
+      },
+      {
+        "type": "table",
+        "caption": "test34_1",
+        "headers": [
+          "JUMUN",
+          "PRICE"
+        ],
+        "rows": [
+          [
+            "10",
+            "2000"
+          ],
+          [
+            "10",
+            "3000"
+          ],
+          [
+            "20",
+            "4000"
+          ],
+          [
+            "20",
+            "3500"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "test34_2",
+        "headers": [
+          "CUSTRANK",
+          "MINPRICE",
+          "MAXPRICE"
+        ],
+        "rows": [
+          [
+            "VVIP",
+            "6000",
+            "6999"
+          ],
+          [
+            "VIP",
+            "5000",
+            "5999"
+          ],
+          [
+            "GOLD",
+            "4000",
+            "4999"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": 12241,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 1442,
+    "title": "아래와 같은 테이블 데이터가 있다(빈칸은 NULL). 각 SQL 에 대한 결과값이 잘못된 것은?",
+    "options": [
+      "SELECT * FROM TAB1 A WHERE NOT EXISTS (SELECT 1 FROM TAB2 B WHERE A.V1 = B.V1); → (2, NULL), (4, C)",
+      "SELECT * FROM TAB1 A WHERE EXISTS (SELECT 1 FROM TAB2 B WHERE A.V1 = B.V1); → (1, A), (3, B)",
+      "SELECT * FROM TAB1 WHERE V1 NOT IN (SELECT V1 FROM TAB2); → (4, C)",
+      "SELECT * FROM TAB1 WHERE V1 IN (SELECT V1 FROM TAB2); → (1, A), (3, B)"
+    ],
+    "correctIndex": 2,
+    "explanation": "③ NOT IN 의 서브쿼리 결과(A, NULL, B)에 NULL 이 있으면 V1 <> NULL 이 UNKNOWN 이 되어 어떤 행도 참이 되지 않으므로 결과는 공집합이다. (4, C) 라고 한 ③ 이 잘못되었다. ① NOT EXISTS 는 같은 값이 없는 행을 남기며 NULL 끼리는 같지 않으므로 (2, NULL) 과 (4, C) 가 나오고, ② EXISTS 와 ④ IN 은 같은 값이 있는 A, B 행만 나온다. ※ 원본의 보기(그림)가 누락되어, 같은 개념을 묻는 모의고사 형태로 보기를 재구성했다.",
+    "chapter": "서브쿼리",
+    "_source": "sqld-1140",
+    "_origId": "sqld-0601",
+    "_category": "서브쿼리",
+    "_correctRate": 10,
+    "references": [
+      {
+        "type": "table",
+        "caption": "<TAB1>",
+        "headers": [
+          "N1",
+          "V1"
+        ],
+        "rows": [
+          [
+            "1",
+            "A"
+          ],
+          [
+            "2",
+            ""
+          ],
+          [
+            "3",
+            "B"
+          ],
+          [
+            "4",
+            "C"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "<TAB2>",
+        "headers": [
+          "N1",
+          "V1"
+        ],
+        "rows": [
+          [
+            "1",
+            "A"
+          ],
+          [
+            "2",
+            ""
+          ],
+          [
+            "3",
+            "B"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": 12242,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 1443,
+    "title": "다음 SQL 실행 결과로 가장 알맞은 것은? (각 행은 NAME: VALUE1/VALUE2 형식)",
+    "options": [
+      "아시아지부 — 홍길동: 홍길동/홍길동, 박길동: 홍길동/박길동, 최길동: 홍길동/최길동 · 남유럽지부 — 김길동: 김길동/김길동, 이길동: 김길동/이길동",
+      "아시아지부 — 홍길동: 홍길동/최길동, 박길동: 홍길동/최길동, 최길동: 홍길동/최길동 · 남유럽지부 — 김길동: 김길동/이길동, 이길동: 김길동/이길동",
+      "아시아지부 — 홍길동: 홍길동/홍길동, 박길동: 박길동/박길동, 최길동: 최길동/최길동 · 남유럽지부 — 김길동: 김길동/김길동, 이길동: 이길동/이길동",
+      "아시아지부 — 홍길동: 최길동/홍길동, 박길동: 최길동/박길동, 최길동: 최길동/최길동 · 남유럽지부 — 김길동: 이길동/김길동, 이길동: 이길동/이길동"
+    ],
+    "correctIndex": 0,
+    "explanation": "OVER 절에 ORDER BY 만 있고 윈도우 범위가 없으면 기본 범위는 RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW(파티션 처음부터 현재 행까지)다. FIRST_VALUE 는 그 범위의 첫 행이라 지부마다 SAL 이 가장 낮은 홍길동·김길동이고, LAST_VALUE 는 범위의 마지막 행인 현재 행 자신이다(①). 파티션 전체의 마지막 값(②)을 얻으려면 ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING 처럼 범위를 지정해야 한다. ※ 원본의 보기(그림)가 누락되어, 같은 개념을 묻는 모의고사 형태로 보기를 재구성했다.",
+    "chapter": "윈도우 함수",
+    "_source": "sqld-1140",
+    "_origId": "sqld-0609",
+    "_category": "윈도우 함수",
+    "_correctRate": 10,
+    "references": [
+      {
+        "type": "text",
+        "content": "SELECT DNAME, \n FIRST_VALUE(NAME) OVER(PARTITION BY DNAME ORDER BY SAL) AS VALUE1, \n LAST_VALUE(NAME) OVER(PARTITION BY DNAME ORDER BY SAL) AS VALUE2 \n FROM TAB1;"
+      },
+      {
+        "type": "table",
+        "caption": "<TAB1>",
+        "headers": [
+          "NAME",
+          "SAL",
+          "DNAME"
+        ],
+        "rows": [
+          [
+            "홍길동",
+            "300",
+            "아시아지부"
+          ],
+          [
+            "박길동",
+            "400",
+            "아시아지부"
+          ],
+          [
+            "최길동",
+            "500",
+            "아시아지부"
+          ],
+          [
+            "김길동",
+            "450",
+            "남유럽지부"
+          ],
+          [
+            "이길동",
+            "550",
+            "남유럽지부"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": 12243,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 1444,
+    "title": "아래 SQL 실행 결과의 이름(LEVEL) 순서로 가장 알맞은 것은?",
+    "options": [
+      "나사장(1), 김전무(2), 김상무(3), 최사원(4), 강인턴(5), 홍상무(3), 홍사원(4), 박전무(2)",
+      "김전무(1), 김상무(2), 최사원(3), 강인턴(4), 홍상무(2), 홍사원(3)",
+      "나사장(1), 김전무(2), 김상무(3), 최사원(4), 강인턴(5), 홍상무(3), 홍사원(4)",
+      "나사장(1), 김전무(2), 홍상무(3), 홍사원(4), 김상무(3), 최사원(4), 강인턴(5)"
+    ],
+    "correctIndex": 2,
+    "explanation": "START WITH 로 고른 루트 나사장은 1월 입사여도 CONNECT BY 조건과 관계없이 LEVEL 1 로 나온다. 이후 자식은 입사월이 7월 이상일 때만 이어진다: 나사장 아래 김전무(12월)만 붙고 박전무(1월)는 빠진다. 김전무 아래 홍상무·김상무, 홍상무 아래 홍사원(김사원 1월 제외), 김상무 아래 최사원(박사원 1월 제외), 최사원 아래 강인턴이 이어진다. ORDER SIBLINGS BY 이름으로 형제끼리 가나다순이라 김상무 쪽이 홍상무보다 먼저다(③). ① 은 박전무를 포함했고, ② 는 조건을 루트에도 적용했으며, ④ 는 형제 정렬을 반대로 했다. ※ 원본의 보기(그림)가 누락되어, 같은 개념을 묻는 모의고사 형태로 보기를 재구성했다.",
+    "chapter": "계층형 질의",
+    "_source": "sqld-1140",
+    "_origId": "sqld-0612",
+    "_category": "계층형 질의",
+    "_correctRate": 10,
+    "references": [
+      {
+        "type": "text",
+        "content": "SELECT E.*, LEVEL \n FROM 사원 E \n START WITH 매니저사원번호 IS NULL \nCONNECT BY PRIOR 사원번호 = 매니저사원번호 AND EXTRACT(MONTH FROM 입사일자) >= 7 \n ORDER SIBLINGS BY 이름;"
+      },
+      {
+        "type": "table",
+        "caption": "<사원>",
+        "headers": [
+          "사원번호",
+          "이름",
+          "입사일자",
+          "매니저사원번호"
+        ],
+        "rows": [
+          [
+            "10000",
+            "나사장",
+            "2010-01-01",
+            ""
+          ],
+          [
+            "10001",
+            "박전무",
+            "2010-01-01",
+            "10000"
+          ],
+          [
+            "10002",
+            "김전무",
+            "2010-12-01",
+            "10000"
+          ],
+          [
+            "10003",
+            "홍상무",
+            "2011-12-01",
+            "10002"
+          ],
+          [
+            "10004",
+            "김상무",
+            "2012-12-01",
+            "10002"
+          ],
+          [
+            "10005",
+            "김사원",
+            "2013-01-01",
+            "10003"
+          ],
+          [
+            "10006",
+            "홍사원",
+            "2014-12-01",
+            "10003"
+          ],
+          [
+            "10007",
+            "박사원",
+            "2015-01-01",
+            "10004"
+          ],
+          [
+            "10008",
+            "최사원",
+            "2016-12-01",
+            "10004"
+          ],
+          [
+            "10009",
+            "박인턴",
+            "2017-01-01",
+            "10007"
+          ],
+          [
+            "10010",
+            "강인턴",
+            "2018-12-01",
+            "10008"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": 12244,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 1445,
+    "title": "다음 SQL 실행 후 ID 순서대로 조회한 SAL 값으로 알맞은 것은?",
+    "options": [
+      "3000, 3000, 3000, 4000, 6000, 8000",
+      "3000, 3000, 3000, 8000, 6000, 8000",
+      "3000, 3000, 3000, 8000, 8000, 8000",
+      "8000, 8000, 8000, 8000, 6000, 8000"
+    ],
+    "correctIndex": 1,
+    "explanation": "WHERE 절의 전체 평균은 (1000 + 2000 + 3000 + 4000 + 6000 + 8000) / 6 = 4000 이다. SAL <= 4000 인 홍길동·박길동·최길동·이길동(4000 도 포함)만 수정되고, SET 절의 연관 서브쿼리가 각자 부서의 최대 급여로 바꾼다. 아시아지부는 3000, 남유럽지부의 이길동은 8000 이 되고, 6000·8000 인 두 김길동은 그대로다(②). ① 은 < 로 본 결과(이길동 미수정), ③ 은 6000 인 김길동까지 바꿨고, ④ 는 부서 구분 없이 전체 최대값을 넣은 결과다. ※ 원본의 보기(그림)가 누락되어, 같은 개념을 묻는 모의고사 형태로 보기를 재구성했다.",
+    "chapter": "그룹 함수",
+    "_source": "sqld-1140",
+    "_origId": "sqld-0616",
+    "_category": "집계 함수",
+    "_correctRate": 10,
+    "references": [
+      {
+        "type": "text",
+        "content": "UPDATE EMPLOYEE E1 \n SET SAL = (SELECT MAX(SAL) \n FROM EMPLOYEE E2 \n WHERE E1.DNAME = E2.DNAME) \n WHERE SAL <= (SELECT AVG(SAL) \n FROM EMPLOYEE);"
+      },
+      {
+        "type": "table",
+        "caption": "<EMPLOYEE>",
+        "headers": [
+          "ID",
+          "NAME",
+          "SAL",
+          "DNAME"
+        ],
+        "rows": [
+          [
+            "0001",
+            "홍길동",
+            "1000",
+            "아시아지부"
+          ],
+          [
+            "0002",
+            "박길동",
+            "2000",
+            "아시아지부"
+          ],
+          [
+            "0003",
+            "최길동",
+            "3000",
+            "아시아지부"
+          ],
+          [
+            "0004",
+            "이길동",
+            "4000",
+            "남유럽지부"
+          ],
+          [
+            "0005",
+            "김길동",
+            "6000",
+            "남유럽지부"
+          ],
+          [
+            "0006",
+            "김길동",
+            "8000",
+            "남유럽지부"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": 12245,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 1446,
+    "title": "아래 SQL의 실행 결과로 알맞은 것은?  (단, 문자타입인 경우 ''를 붙여서 표현, 숫자타입인 경우 숫자만 전달) ",
+    "options": [
+      "'AB DE', 'ABCDE', 123",
+      "' AB DE ', 'Abcde', '123.00'",
+      "'AB DE ', 'Abcde', 123.00",
+      "'AB DE ', 'Abcde', ' 123.00'"
+    ],
+    "correctIndex": 3,
+    "explanation": "LTRIM 은 제거할 문자를 주지 않으면 왼쪽 공백만 지워 'AB DE ' 가 된다(오른쪽 공백은 남는다). INITCAP 은 단어의 첫 글자만 대문자, 나머지는 소문자로 바꿔 'Abcde' 다. TO_CHAR('123', '999.99') 는 '123' 을 숫자로 바꾼 뒤 정수 세 자리·소수 두 자리 형식의 문자로 만들며, 부호 자리로 앞에 공백 한 칸이 붙어 ' 123.00' 이다(④). ① 은 양쪽 공백을 지우고 INITCAP 을 무시했고, ② 는 LTRIM 을 적용하지 않았으며, ③ 은 TO_CHAR 결과를 숫자로 표현했다. ※ 원본의 보기(그림)가 누락되어, 같은 개념을 묻는 모의고사 형태로 보기를 재구성했다.",
+    "chapter": "함수",
+    "_source": "sqld-1140",
+    "_origId": "sqld-0638",
+    "_category": "단일행 함수",
+    "_correctRate": 10,
+    "references": [
+      {
+        "type": "text",
+        "content": "SELECT LTRIM(' AB DE ') AS C1,   INITCAP('ABCDE') AS C2, TO_CHAR('123', '999.99') AS C3 FROM DUAL;"
+      }
+    ]
+  },
+  {
+    "id": 12246,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 1447,
+    "title": "다음 SQL 수행 결과로 가장 알맞은 것은?  ",
+    "options": [
+      "NULL, 10, 20",
+      "20, 30, 30",
+      "10, 10, 20",
+      "10, 30, 30"
+    ],
+    "correctIndex": 2,
+    "explanation": "COALESCE 는 인수를 왼쪽부터 보며 처음 NULL 이 아닌 값을 반환한다. 1행은 COL1 이 NULL 이라 COL2 = 10, 2행은 COL1 = 10, 3행은 COL1 = 20 이다(③). ② 는 마지막 NULL 아닌 값을, ④ 는 2·3행에서 COL3 를 고른 잘못된 결과다. ※ 원본의 보기(그림)가 누락되어, 같은 개념을 묻는 모의고사 형태로 보기를 재구성했다.",
+    "chapter": "함수",
+    "_source": "sqld-1140",
+    "_origId": "sqld-0639",
+    "_category": "NULL",
+    "_correctRate": 10,
+    "references": [
+      {
+        "type": "text",
+        "content": "SELECT COALESCE(COL1, COL2, COL3) RESULT FROM TAB1;"
+      },
+      {
+        "type": "table",
+        "caption": "<TAB1>",
+        "headers": [
+          "COL1",
+          "COL2",
+          "COL3"
+        ],
+        "rows": [
+          [
+            "NULL",
+            "10",
+            "20"
+          ],
+          [
+            "10",
+            "NULL",
+            "30"
+          ],
+          [
+            "20",
+            "30",
+            "NULL"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": 12247,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 1448,
+    "title": "아래 수행 결과로 알맞은 것은? ",
+    "options": [
+      "2",
+      "0",
+      "결과가 없다(공집합).",
+      "1"
+    ],
+    "correctIndex": 1,
+    "explanation": "WHERE COL2 >= 30 을 만족하는 행은 (NULL, 30), (NULL, 40) 두 개뿐이고, GROUP BY COL1 로 묶으면 COL1 이 NULL 인 그룹 하나가 된다. COUNT(COL1) 은 NULL 을 세지 않으므로 이 그룹의 결과는 0 이다(②). 그룹이 하나 있으므로 공집합이 아니고(③), COUNT(*) 였다면 2(①)가 나온다. ※ 원본의 보기(그림)가 누락되어, 같은 개념을 묻는 모의고사 형태로 보기를 재구성했다.",
+    "chapter": "그룹 함수",
+    "_source": "sqld-1140",
+    "_origId": "sqld-0641",
+    "_category": "집계 함수",
+    "_correctRate": 10,
+    "references": [
+      {
+        "type": "text",
+        "content": "SELECT COUNT(COL1) AS RESULT \n FROM TAB1 \nWHERE COL2 >= 30  GROUP BY COL1;"
+      },
+      {
+        "type": "table",
+        "caption": "<TAB1>",
+        "headers": [
+          "COL1",
+          "COL2"
+        ],
+        "rows": [
+          [
+            "A",
+            "10"
+          ],
+          [
+            "B",
+            "NULL"
+          ],
+          [
+            "B",
+            "20"
+          ],
+          [
+            "NULL",
+            "30"
+          ],
+          [
+            "NULL",
+            "40"
+          ],
+          [
+            "C",
+            "20"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": 12248,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 1449,
+    "title": "다음 SQL 실행 결과로 가장 적절한 것은?",
+    "options": [
+      "(20, 400), (30, 500)",
+      "(NULL, 600)",
+      "(20, 400), (30, 500), (NULL, 600)",
+      "(10, 300), (20, 400), (30, 500), (NULL, 600)"
+    ],
+    "correctIndex": 2,
+    "explanation": "GROUP BY COL1 로 묶은 합계는 10 이 300, 20 이 400, 30 이 500, NULL 그룹이 100 + 500 = 600 이다. GROUP BY 는 NULL 도 하나의 그룹으로 만들므로, HAVING SUM(COL2) >= 400 을 만족하는 (20, 400), (30, 500), (NULL, 600) 세 행이 나온다(③). ① 은 NULL 그룹을 빠뜨렸고, ④ 는 HAVING 조건을 무시한 결과다. ※ 원본의 보기(그림)가 누락되어, 같은 개념을 묻는 모의고사 형태로 보기를 재구성했다.",
+    "chapter": "그룹 함수",
+    "_source": "sqld-1140",
+    "_origId": "sqld-0642",
+    "_category": "집계 함수",
+    "_correctRate": 10,
+    "references": [
+      {
+        "type": "text",
+        "content": "SELECT COL1 AS C1, SUM(COL2) AS C2 \n FROM TAB1 \n GROUP BY COL1 \nHAVING SUM(COL2) >= 400;"
+      },
+      {
+        "type": "table",
+        "caption": "<TAB1>",
+        "headers": [
+          "COL1",
+          "COL2"
+        ],
+        "rows": [
+          [
+            "10",
+            "100"
+          ],
+          [
+            "10",
+            "200"
+          ],
+          [
+            "20",
+            "400"
+          ],
+          [
+            "30",
+            "200"
+          ],
+          [
+            "30",
+            "300"
+          ],
+          [
+            "NULL",
+            "100"
+          ],
+          [
+            "NULL",
+            "500"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": 12249,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 1450,
+    "title": "아래 SQL 수행 결과로 가장 알맞은 것은?",
+    "options": [
+      "ALLEN, FORD, SCOTT, SMITH",
+      "ALLEN, FORD, SMITH, SCOTT",
+      "SCOTT, ALLEN, FORD, SMITH",
+      "SMITH, ALLEN, SCOTT, FORD"
+    ],
+    "correctIndex": 2,
+    "explanation": "첫 정렬 키는 COL2 가 3 의 배수면 'A', 아니면 'B' 다. 30 인 SCOTT 만 'A' 라 맨 앞에 오고, 나머지 'B' 그룹은 COL1 오름차순으로 ALLEN, FORD, SMITH 다(③). ① 은 CASE 키를 무시하고 이름순으로, ② 는 A·B 순서를 반대로 했으며, ④ 는 입력 순서 그대로다. ※ 원본의 보기(그림)가 누락되어, 같은 개념을 묻는 모의고사 형태로 보기를 재구성했다.",
+    "chapter": "함수",
+    "_source": "sqld-1140",
+    "_origId": "sqld-0644",
+    "_category": "단일행 함수",
+    "_correctRate": 10,
+    "references": [
+      {
+        "type": "text",
+        "content": "SELECT COL1 \nFROM TAB1 \nORDER BY CASE WHEN MOD(COL2, 3) = 0 THEN 'A' \nELSE 'B' \nEND, COL1;"
+      },
+      {
+        "type": "table",
+        "caption": "<TAB1>",
+        "headers": [
+          "COL1",
+          "COL2"
+        ],
+        "rows": [
+          [
+            "SMITH",
+            "10"
+          ],
+          [
+            "ALLEN",
+            "20"
+          ],
+          [
+            "SCOTT",
+            "30"
+          ],
+          [
+            "FORD",
+            "40"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": 12250,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 1451,
+    "title": "다음 SQL 수행 결과의 ENAME(CNT) 로 알맞은 것은?",
+    "options": [
+      "ALLEN(1), WARD(2), JONES(3), BLAKE(4), CLARK(5)",
+      "SMITH(1), ALLEN(2), WARD(3), JONES(4), BLAKE(5), CLARK(6)",
+      "SMITH(0), ALLEN(1), WARD(2), JONES(3), BLAKE(4), CLARK(5)",
+      "SMITH(5), ALLEN(4), WARD(3), JONES(2), BLAKE(1), CLARK(0)"
+    ],
+    "correctIndex": 2,
+    "explanation": "셀프 조인 조건 E1.HIREDATE > E2.HIREDATE 는 각 직원보다 먼저 입사한 직원을 붙인다. 가장 먼저 입사한 SMITH 는 짝이 없지만 LEFT OUTER JOIN 이라 행이 남고, COUNT(E2.EMPNO) 가 NULL 을 세지 않아 0 이다. 이후 입사 순서대로 1, 2, 3, 4, 5 다(③). ① 은 INNER JOIN 처럼 SMITH 를 뺐고, ② 는 자기 자신까지 센(>=) 결과, ④ 는 나중에 입사한 직원을 센(<) 결과다. ※ 원본의 보기(그림)가 누락되어, 같은 개념을 묻는 모의고사 형태로 보기를 재구성했다.",
+    "chapter": "조인",
+    "_source": "sqld-1140",
+    "_origId": "sqld-0651",
+    "_category": "JOIN",
+    "_correctRate": 10,
+    "references": [
+      {
+        "type": "text",
+        "content": "SELECT E1.EMPNO, E1.ENAME, E1.HIREDATE, COUNT(E2.EMPNO) AS CNT \n  FROM EMP E1 LEFT OUTER JOIN EMP E2 \n     ON E1.HIREDATE > E2.HIREDATE \n GROUP BY E1.EMPNO, E1.ENAME, E1.HIREDATE \n ORDER BY E1.HIREDATE;"
+      },
+      {
+        "type": "table",
+        "caption": "<EMP>",
+        "headers": [
+          "EMPNO",
+          "ENAME",
+          "HIREDATE"
+        ],
+        "rows": [
+          [
+            "7369",
+            "SMITH",
+            "1980/12/17"
+          ],
+          [
+            "7499",
+            "ALLEN",
+            "1981/02/20"
+          ],
+          [
+            "7521",
+            "WARD",
+            "1981/02/22"
+          ],
+          [
+            "7566",
+            "JONES",
+            "1981/04/02"
+          ],
+          [
+            "7698",
+            "BLAKE",
+            "1981/05/01"
+          ],
+          [
+            "7782",
+            "CLARK",
+            "1981/06/09"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": 12251,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 1452,
+    "title": "테이블이 아래와 같을 때, 다음 집합연산자 수행 결과로 가장 적절한 것은? ",
+    "options": [
+      "(10, A), (20, A), (20, B), (50, F), (NULL, A)",
+      "(10, A), (20, B), (50, F)",
+      "(10, A), (20, A), (20, B), (50, F)",
+      "(10, A), (10, A), (20, A), (20, B), (50, F)"
+    ],
+    "correctIndex": 2,
+    "explanation": "TAB1 UNION TAB2 는 중복 (10, A) 를 하나로 합쳐 (10, A), (20, B), (30, C), (30, D), (40, E), (20, A), (50, F), (NULL, A) 가 된다. 여기서 TAB3 의 (30, C), (30, D), (40, E), (NULL, A) 를 MINUS 로 빼면 (10, A), (20, A), (20, B), (50, F) 가 남는다(③). 집합 연산자는 NULL 끼리도 같은 값으로 보므로 (NULL, A) 도 빠진다(① 틀림). ② 는 (20, A) 를 빠뜨렸고, ④ 는 UNION ALL 처럼 중복을 남겼다. ※ 원본의 보기(그림)가 누락되어, 같은 개념을 묻는 모의고사 형태로 보기를 재구성했다.",
+    "chapter": "집합 연산자",
+    "_source": "sqld-1140",
+    "_origId": "sqld-0655",
+    "_category": "집합 연산자",
+    "_correctRate": 10,
+    "references": [
+      {
+        "type": "text",
+        "content": "SELECT * \n  FROM (SELECT COL1, COL2 \n          FROM TAB1 \n          UNION  \n         SELECT COL1, COL2 \n          FROM TAB2) \n MINUS \nSELECT COL1, COL2 \n FROM TAB3;"
+      },
+      {
+        "type": "table",
+        "caption": "<TAB1>",
+        "headers": [
+          "COL1",
+          "COL2"
+        ],
+        "rows": [
+          [
+            "10",
+            "A"
+          ],
+          [
+            "20",
+            "B"
+          ],
+          [
+            "30",
+            "C"
+          ],
+          [
+            "30",
+            "D"
+          ],
+          [
+            "40",
+            "E"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "<TAB2>",
+        "headers": [
+          "COL1",
+          "COL2"
+        ],
+        "rows": [
+          [
+            "10",
+            "A"
+          ],
+          [
+            "20",
+            "A"
+          ],
+          [
+            "50",
+            "F"
+          ],
+          [
+            "NULL",
+            "A"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "<TAB3>",
+        "headers": [
+          "COL1",
+          "COL2"
+        ],
+        "rows": [
+          [
+            "30",
+            "C"
+          ],
+          [
+            "30",
+            "D"
+          ],
+          [
+            "40",
+            "E"
+          ],
+          [
+            "NULL",
+            "A"
           ]
         ]
       }

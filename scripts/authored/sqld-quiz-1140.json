@@ -16022,29 +16022,70 @@
       "chapter": "그룹 함수",
       "title": "아래의 테이블에 대해서 주어진 SQL문을 수행한 결과로 알맞은 것은?",
       "options": [
-        "",
-        "",
-        "",
-        ""
+        "(10, VIP), (20, VVIP)",
+        "(10, VIP)",
+        "(20, VVIP)",
+        "(10, VIP), (20, NULL)"
       ],
       "correctIndex": 1,
-      "explanation": "먼저 FROM절에 있는 inline view의 실행 결과는 20, 7500과 10, 5000의 합계가 조회된다. 그리고 test34_2의 BETWEEN구로 조회하면 10번 VIP가 조회된다.",
+      "explanation": "인라인 뷰에서 주문별 합계는 10 이 2000 + 3000 = 5000, 20 이 4000 + 3500 = 7500 이다. 5000 은 VIP(5000~5999) 범위에 들지만 7500 은 어느 등급 범위(최대 6999)에도 들지 않아 조인되는 행이 없다. 따라서 (10, VIP) 한 행만 나온다(②). 일반 조인이라 짝이 없는 20 이 NULL 로 남지 않고(④), 7500 을 VVIP 로 본 ①③ 은 범위를 잘못 읽은 결과다. (원본 SQL 의 오타 'jumin', 쉼표를 바로잡았다.) ※ 원본의 보기(그림)가 누락되어, 같은 개념을 묻는 모의고사 형태로 보기를 재구성했다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT A.jumin as \"주문\", B.custrank as \"고객등급\"\nFROM (SELECT jumun, SUM(price)\nAS Total\nFROM test34_1\nGROUP BY jumun) A, test34_2 B\nWHERE A.Total BETWEEN B.minprice AND B.maxprice;"
+          "type": "sql",
+          "code": "SELECT A.JUMUN AS \"주문\", B.CUSTRANK AS \"고객등급\"\nFROM   (SELECT JUMUN, SUM(PRICE) AS TOTAL\n        FROM   test34_1\n        GROUP BY JUMUN) A, test34_2 B\nWHERE  A.TOTAL BETWEEN B.MINPRICE AND B.MAXPRICE;"
         },
         {
-          "type": "image",
-          "src": "/sqld-images/j550-1.png",
-          "alt": "문항 이미지 j550-1"
+          "type": "table",
+          "caption": "test34_1",
+          "headers": [
+            "JUMUN",
+            "PRICE"
+          ],
+          "rows": [
+            [
+              "10",
+              "2000"
+            ],
+            [
+              "10",
+              "3000"
+            ],
+            [
+              "20",
+              "4000"
+            ],
+            [
+              "20",
+              "3500"
+            ]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "test34_2",
+          "headers": [
+            "CUSTRANK",
+            "MINPRICE",
+            "MAXPRICE"
+          ],
+          "rows": [
+            [
+              "VVIP",
+              "6000",
+              "6999"
+            ],
+            [
+              "VIP",
+              "5000",
+              "5999"
+            ],
+            [
+              "GOLD",
+              "4000",
+              "4999"
+            ]
+          ]
         }
-      ],
-      "optionReferences": [
-        [],
-        [],
-        [],
-        []
       ]
     },
     {
@@ -17301,15 +17342,15 @@
       "_correctRate": 10,
       "subject": "2과목",
       "chapter": "서브쿼리",
-      "title": "아래와 같은 테이블 데이터가 있다. 각 SQL에 대한 결과값이 잘못된 것은? ",
+      "title": "아래와 같은 테이블 데이터가 있다(빈칸은 NULL). 각 SQL 에 대한 결과값이 잘못된 것은?",
       "options": [
-        "",
-        "",
-        "",
-        ""
+        "SELECT * FROM TAB1 A WHERE NOT EXISTS (SELECT 1 FROM TAB2 B WHERE A.V1 = B.V1); → (2, NULL), (4, C)",
+        "SELECT * FROM TAB1 A WHERE EXISTS (SELECT 1 FROM TAB2 B WHERE A.V1 = B.V1); → (1, A), (3, B)",
+        "SELECT * FROM TAB1 WHERE V1 NOT IN (SELECT V1 FROM TAB2); → (4, C)",
+        "SELECT * FROM TAB1 WHERE V1 IN (SELECT V1 FROM TAB2); → (1, A), (3, B)"
       ],
       "correctIndex": 2,
-      "explanation": " 1번. NOT EXISTS 연산자는 반대로 서브쿼리 결과가 거짓이면 출력된다. 따라서 NULL끼리 같은 조건은 항상 거짓이므로 TAB1의 V1이 NULL인 경우와 C가 최종 리턴된다. 2번. EXISTS 연산자는 서브쿼리 결과가 참이면 메인 쿼리 결과가 리턴된다. 따라서 TAB1의 각 행마다 A.V1 = B.V1이 만족하면 TAB1 결과가 출력되므로 V1이 A, B인 행이 선택된다. 3번. NOT IN 연산자는 서브쿼 리 결과에 NULL이 포함될 경우 전체가 거짓이 되므로 아무것도 출력되지 않는다. V1 NOT IN ('A', NULL, 'B', 'C') => NOT (V1 = 'A' OR V1 = NULL OR V1 = 'C') => V1 != 'A' AND V1 != NULL AND V1 != 'C' V1 != NULL은 거짓이므로 이 조건으로 인해 전체 조건이 거짓이 된다. 4번. NULL은 IN 연산자에 의해 출력되지 않기 때문에 V1이 A, B인 경우만 리턴된다. ",
+      "explanation": "③ NOT IN 의 서브쿼리 결과(A, NULL, B)에 NULL 이 있으면 V1 <> NULL 이 UNKNOWN 이 되어 어떤 행도 참이 되지 않으므로 결과는 공집합이다. (4, C) 라고 한 ③ 이 잘못되었다. ① NOT EXISTS 는 같은 값이 없는 행을 남기며 NULL 끼리는 같지 않으므로 (2, NULL) 과 (4, C) 가 나오고, ② EXISTS 와 ④ IN 은 같은 값이 있는 A, B 행만 나온다. ※ 원본의 보기(그림)가 누락되어, 같은 개념을 묻는 모의고사 형태로 보기를 재구성했다.",
       "references": [
         {
           "type": "table",
@@ -17359,12 +17400,6 @@
             ]
           ]
         }
-      ],
-      "optionReferences": [
-        [],
-        [],
-        [],
-        []
       ]
     },
     {
@@ -17564,15 +17599,15 @@
       "_correctRate": 10,
       "subject": "2과목",
       "chapter": "윈도우 함수",
-      "title": "다음 SQL 실행 결과로 가장 알맞은 것은?",
+      "title": "다음 SQL 실행 결과로 가장 알맞은 것은? (각 행은 NAME: VALUE1/VALUE2 형식)",
       "options": [
-        "",
-        "",
-        "",
-        ""
+        "아시아지부 — 홍길동: 홍길동/홍길동, 박길동: 홍길동/박길동, 최길동: 홍길동/최길동 · 남유럽지부 — 김길동: 김길동/김길동, 이길동: 김길동/이길동",
+        "아시아지부 — 홍길동: 홍길동/최길동, 박길동: 홍길동/최길동, 최길동: 홍길동/최길동 · 남유럽지부 — 김길동: 김길동/이길동, 이길동: 김길동/이길동",
+        "아시아지부 — 홍길동: 홍길동/홍길동, 박길동: 박길동/박길동, 최길동: 최길동/최길동 · 남유럽지부 — 김길동: 김길동/김길동, 이길동: 이길동/이길동",
+        "아시아지부 — 홍길동: 최길동/홍길동, 박길동: 최길동/박길동, 최길동: 최길동/최길동 · 남유럽지부 — 김길동: 이길동/김길동, 이길동: 이길동/이길동"
       ],
       "correctIndex": 0,
-      "explanation": "FIRST_VALUE, LAST_VALUE는 ORDER BY 컬럼 순서대로 범위 내 가장 처음 값과 마지막 값을 리턴하는 함수인데, 이때 기본 범위는 RANGE UNBOUNDED PRECEDING AND CURRENT ROW이다. 따라서 같은 DNAME 내 SAL 순서대로 가장 앞에 있는 이름은 아시아지부의 경우 홍길동, 남유럽지부의 경우 김길동이 된다. 하지만 각 행마다 LAST_VALUE를 구할 때 범위가 처음부터 현재 행까지만 고려해서 마지막 값을 리턴하기 때문에 항상 현재 행의 값이 마지막 값이 되므로 각 행의 값이 리턴된다. \n",
+      "explanation": "OVER 절에 ORDER BY 만 있고 윈도우 범위가 없으면 기본 범위는 RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW(파티션 처음부터 현재 행까지)다. FIRST_VALUE 는 그 범위의 첫 행이라 지부마다 SAL 이 가장 낮은 홍길동·김길동이고, LAST_VALUE 는 범위의 마지막 행인 현재 행 자신이다(①). 파티션 전체의 마지막 값(②)을 얻으려면 ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING 처럼 범위를 지정해야 한다. ※ 원본의 보기(그림)가 누락되어, 같은 개념을 묻는 모의고사 형태로 보기를 재구성했다.",
       "references": [
         {
           "type": "text",
@@ -17614,12 +17649,6 @@
             ]
           ]
         }
-      ],
-      "optionReferences": [
-        [],
-        [],
-        [],
-        []
       ]
     },
     {
@@ -17701,15 +17730,15 @@
       "_correctRate": 10,
       "subject": "2과목",
       "chapter": "계층형 질의",
-      "title": "아래 SQL 실행 결과로 가장 알맞은 것은? ",
+      "title": "아래 SQL 실행 결과의 이름(LEVEL) 순서로 가장 알맞은 것은?",
       "options": [
-        "",
-        "",
-        "",
-        ""
+        "나사장(1), 김전무(2), 김상무(3), 최사원(4), 강인턴(5), 홍상무(3), 홍사원(4), 박전무(2)",
+        "김전무(1), 김상무(2), 최사원(3), 강인턴(4), 홍상무(2), 홍사원(3)",
+        "나사장(1), 김전무(2), 김상무(3), 최사원(4), 강인턴(5), 홍상무(3), 홍사원(4)",
+        "나사장(1), 김전무(2), 홍상무(3), 홍사원(4), 김상무(3), 최사원(4), 강인턴(5)"
       ],
       "correctIndex": 2,
-      "explanation": "매니저 사원번호가 NULL인 지점을 시작으로 레벨 1을 부여, 나사장의 사원번호를 매니저 사원번호로 가지면서 하반기 입사자인 행을 찾아 레벨 2를 부여한다. 이렇게 연결된 행으로부터 CONNECT 절의 조건을 만족하는 행을 계속 이어 나간다. 이때, START WITH 절은 CONNECT BY에 있는 조건에 따라 생략되지 않기 때문에 나사장이 상반기 입사자라도 출력된다. ",
+      "explanation": "START WITH 로 고른 루트 나사장은 1월 입사여도 CONNECT BY 조건과 관계없이 LEVEL 1 로 나온다. 이후 자식은 입사월이 7월 이상일 때만 이어진다: 나사장 아래 김전무(12월)만 붙고 박전무(1월)는 빠진다. 김전무 아래 홍상무·김상무, 홍상무 아래 홍사원(김사원 1월 제외), 김상무 아래 최사원(박사원 1월 제외), 최사원 아래 강인턴이 이어진다. ORDER SIBLINGS BY 이름으로 형제끼리 가나다순이라 김상무 쪽이 홍상무보다 먼저다(③). ① 은 박전무를 포함했고, ② 는 조건을 루트에도 적용했으며, ④ 는 형제 정렬을 반대로 했다. ※ 원본의 보기(그림)가 누락되어, 같은 개념을 묻는 모의고사 형태로 보기를 재구성했다.",
       "references": [
         {
           "type": "text",
@@ -17793,12 +17822,6 @@
             ]
           ]
         }
-      ],
-      "optionReferences": [
-        [],
-        [],
-        [],
-        []
       ]
     },
     {
@@ -17901,15 +17924,15 @@
       "_correctRate": 10,
       "subject": "2과목",
       "chapter": "그룹 함수",
-      "title": "다음 SQL 실행 결과로 알맞은 것은?",
+      "title": "다음 SQL 실행 후 ID 순서대로 조회한 SAL 값으로 알맞은 것은?",
       "options": [
-        "",
-        "",
-        "",
-        ""
+        "3000, 3000, 3000, 4000, 6000, 8000",
+        "3000, 3000, 3000, 8000, 6000, 8000",
+        "3000, 3000, 3000, 8000, 8000, 8000",
+        "8000, 8000, 8000, 8000, 6000, 8000"
       ],
       "correctIndex": 1,
-      "explanation": "전체 평균(4000)보다 급여가 낮은 직원들의 급여만 수정되므로 김길동 두 명의 급여는 수정되지 않는다. SET절은 각 행의 급여 수정 시 부서명을 확인하여 서브쿼리에서 해당 부서의 최대 급여를 찾아 수정하는 구문이다. 따라서 아시아지부는 모두 3000으로, 남유럽지부는 8000으로 수정된다.",
+      "explanation": "WHERE 절의 전체 평균은 (1000 + 2000 + 3000 + 4000 + 6000 + 8000) / 6 = 4000 이다. SAL <= 4000 인 홍길동·박길동·최길동·이길동(4000 도 포함)만 수정되고, SET 절의 연관 서브쿼리가 각자 부서의 최대 급여로 바꾼다. 아시아지부는 3000, 남유럽지부의 이길동은 8000 이 되고, 6000·8000 인 두 김길동은 그대로다(②). ① 은 < 로 본 결과(이길동 미수정), ③ 은 6000 인 김길동까지 바꿨고, ④ 는 부서 구분 없이 전체 최대값을 넣은 결과다. ※ 원본의 보기(그림)가 누락되어, 같은 개념을 묻는 모의고사 형태로 보기를 재구성했다.",
       "references": [
         {
           "type": "text",
@@ -17963,12 +17986,6 @@
             ]
           ]
         }
-      ],
-      "optionReferences": [
-        [],
-        [],
-        [],
-        []
       ]
     },
     {
@@ -18341,24 +18358,18 @@
       "chapter": "함수",
       "title": "아래 SQL의 실행 결과로 알맞은 것은?  (단, 문자타입인 경우 ''를 붙여서 표현, 숫자타입인 경우 숫자만 전달) ",
       "options": [
-        "",
-        "",
-        "",
-        ""
+        "'AB DE', 'ABCDE', 123",
+        "' AB DE ', 'Abcde', '123.00'",
+        "'AB DE ', 'Abcde', 123.00",
+        "'AB DE ', 'Abcde', ' 123.00'"
       ],
       "correctIndex": 3,
-      "explanation": "LTRIM 함수에 제거문자열을 전달하지 않을 경우 왼쪽에서 공백을 제거한다. INITCAP 함수는 첫 문자만 대문자로 나머지 문자는 소문자로 반환하는 함수이며, TO_CHAR 함수에 의해 소수점 둘째 자리까지, 정수자리는 세자리로 표현하여 리턴한다. ",
+      "explanation": "LTRIM 은 제거할 문자를 주지 않으면 왼쪽 공백만 지워 'AB DE ' 가 된다(오른쪽 공백은 남는다). INITCAP 은 단어의 첫 글자만 대문자, 나머지는 소문자로 바꿔 'Abcde' 다. TO_CHAR('123', '999.99') 는 '123' 을 숫자로 바꾼 뒤 정수 세 자리·소수 두 자리 형식의 문자로 만들며, 부호 자리로 앞에 공백 한 칸이 붙어 ' 123.00' 이다(④). ① 은 양쪽 공백을 지우고 INITCAP 을 무시했고, ② 는 LTRIM 을 적용하지 않았으며, ③ 은 TO_CHAR 결과를 숫자로 표현했다. ※ 원본의 보기(그림)가 누락되어, 같은 개념을 묻는 모의고사 형태로 보기를 재구성했다.",
       "references": [
         {
           "type": "text",
           "content": "SELECT LTRIM(' AB DE ') AS C1,   INITCAP('ABCDE') AS C2, TO_CHAR('123', '999.99') AS C3 FROM DUAL;"
         }
-      ],
-      "optionReferences": [
-        [],
-        [],
-        [],
-        []
       ]
     },
     {
@@ -18370,13 +18381,13 @@
       "chapter": "함수",
       "title": "다음 SQL 수행 결과로 가장 알맞은 것은?  ",
       "options": [
-        "",
-        "",
-        "",
-        ""
+        "NULL, 10, 20",
+        "20, 30, 30",
+        "10, 10, 20",
+        "10, 30, 30"
       ],
       "correctIndex": 2,
-      "explanation": "COALESCE 함수는 대상들 중 널이 아닌 첫 번째 값을 출력하므로 첫 번째 행부터 10, 10, 20 이 출력된다.",
+      "explanation": "COALESCE 는 인수를 왼쪽부터 보며 처음 NULL 이 아닌 값을 반환한다. 1행은 COL1 이 NULL 이라 COL2 = 10, 2행은 COL1 = 10, 3행은 COL1 = 20 이다(③). ② 는 마지막 NULL 아닌 값을, ④ 는 2·3행에서 COL3 를 고른 잘못된 결과다. ※ 원본의 보기(그림)가 누락되어, 같은 개념을 묻는 모의고사 형태로 보기를 재구성했다.",
       "references": [
         {
           "type": "text",
@@ -18408,12 +18419,6 @@
             ]
           ]
         }
-      ],
-      "optionReferences": [
-        [],
-        [],
-        [],
-        []
       ]
     },
     {
@@ -18425,13 +18430,13 @@
       "chapter": "그룹 함수",
       "title": "아래 수행 결과로 알맞은 것은? ",
       "options": [
-        "",
-        "",
-        "",
-        ""
+        "2",
+        "0",
+        "결과가 없다(공집합).",
+        "1"
       ],
       "correctIndex": 1,
-      "explanation": "WHERE절의 비교 연산 결과 COL2의 30과 40만 해당되고 그에 해당하는 COL1은 모두 NULL이다. GROUP BY에 의해 COL1이 NULL인 한 그룹이 생성되지만 NULL은 COUNT하지 않기 때문에 0이 출력된다.",
+      "explanation": "WHERE COL2 >= 30 을 만족하는 행은 (NULL, 30), (NULL, 40) 두 개뿐이고, GROUP BY COL1 로 묶으면 COL1 이 NULL 인 그룹 하나가 된다. COUNT(COL1) 은 NULL 을 세지 않으므로 이 그룹의 결과는 0 이다(②). 그룹이 하나 있으므로 공집합이 아니고(③), COUNT(*) 였다면 2(①)가 나온다. ※ 원본의 보기(그림)가 누락되어, 같은 개념을 묻는 모의고사 형태로 보기를 재구성했다.",
       "references": [
         {
           "type": "text",
@@ -18471,12 +18476,6 @@
             ]
           ]
         }
-      ],
-      "optionReferences": [
-        [],
-        [],
-        [],
-        []
       ]
     },
     {
@@ -18488,13 +18487,13 @@
       "chapter": "그룹 함수",
       "title": "다음 SQL 실행 결과로 가장 적절한 것은?",
       "options": [
-        "",
-        "",
-        "",
-        ""
+        "(20, 400), (30, 500)",
+        "(NULL, 600)",
+        "(20, 400), (30, 500), (NULL, 600)",
+        "(10, 300), (20, 400), (30, 500), (NULL, 600)"
       ],
       "correctIndex": 2,
-      "explanation": "GROUP BY 후 SUM(COL2) 연산 결과 (10, 300), (20, 400), (30, 500), (NULL, 600) 그룹이 출력된다. 이들 중 HAVING 조건에 만족하는 그룹은 (20, 400), (30, 500), (NULL, 600) 이다. ",
+      "explanation": "GROUP BY COL1 로 묶은 합계는 10 이 300, 20 이 400, 30 이 500, NULL 그룹이 100 + 500 = 600 이다. GROUP BY 는 NULL 도 하나의 그룹으로 만들므로, HAVING SUM(COL2) >= 400 을 만족하는 (20, 400), (30, 500), (NULL, 600) 세 행이 나온다(③). ① 은 NULL 그룹을 빠뜨렸고, ④ 는 HAVING 조건을 무시한 결과다. ※ 원본의 보기(그림)가 누락되어, 같은 개념을 묻는 모의고사 형태로 보기를 재구성했다.",
       "references": [
         {
           "type": "text",
@@ -18538,12 +18537,6 @@
             ]
           ]
         }
-      ],
-      "optionReferences": [
-        [],
-        [],
-        [],
-        []
       ]
     },
     {
@@ -18572,13 +18565,13 @@
       "chapter": "함수",
       "title": "아래 SQL 수행 결과로 가장 알맞은 것은?",
       "options": [
-        "",
-        "",
-        "",
-        ""
+        "ALLEN, FORD, SCOTT, SMITH",
+        "ALLEN, FORD, SMITH, SCOTT",
+        "SCOTT, ALLEN, FORD, SMITH",
+        "SMITH, ALLEN, SCOTT, FORD"
       ],
       "correctIndex": 2,
-      "explanation": "CASE문 결과를 1차 정렬로 한 뒤, 이 값이 같을 경우 COL1의 값으로 2차 정렬을 수행한다. 이렇게 정렬된 COL1의 값은 SCOTT, ALLEN, FORD, SMITH 순으로 출력된다.",
+      "explanation": "첫 정렬 키는 COL2 가 3 의 배수면 'A', 아니면 'B' 다. 30 인 SCOTT 만 'A' 라 맨 앞에 오고, 나머지 'B' 그룹은 COL1 오름차순으로 ALLEN, FORD, SMITH 다(③). ① 은 CASE 키를 무시하고 이름순으로, ② 는 A·B 순서를 반대로 했으며, ④ 는 입력 순서 그대로다. ※ 원본의 보기(그림)가 누락되어, 같은 개념을 묻는 모의고사 형태로 보기를 재구성했다.",
       "references": [
         {
           "type": "text",
@@ -18610,12 +18603,6 @@
             ]
           ]
         }
-      ],
-      "optionReferences": [
-        [],
-        [],
-        [],
-        []
       ]
     },
     {
@@ -18956,15 +18943,15 @@
       "_correctRate": 10,
       "subject": "2과목",
       "chapter": "조인",
-      "title": "다음 SQL 수행 결과로 알맞은 것은? \r",
+      "title": "다음 SQL 수행 결과의 ENAME(CNT) 로 알맞은 것은?",
       "options": [
-        "",
-        "",
-        "",
-        ""
+        "ALLEN(1), WARD(2), JONES(3), BLAKE(4), CLARK(5)",
+        "SMITH(1), ALLEN(2), WARD(3), JONES(4), BLAKE(5), CLARK(6)",
+        "SMITH(0), ALLEN(1), WARD(2), JONES(3), BLAKE(4), CLARK(5)",
+        "SMITH(5), ALLEN(4), WARD(3), JONES(2), BLAKE(1), CLARK(0)"
       ],
       "correctIndex": 2,
-      "explanation": "셀프조인을 사용하여 EMP에서의 각 직원별로 입사일이 빠른 직원의 수를 계산하는 질의절이다. 이 때, LEFT OUTER JOIN을 수행하였기 때문에 입사일이 가장 빠른 SMITH의 경우도 CNT가 0으로 출력된다. ",
+      "explanation": "셀프 조인 조건 E1.HIREDATE > E2.HIREDATE 는 각 직원보다 먼저 입사한 직원을 붙인다. 가장 먼저 입사한 SMITH 는 짝이 없지만 LEFT OUTER JOIN 이라 행이 남고, COUNT(E2.EMPNO) 가 NULL 을 세지 않아 0 이다. 이후 입사 순서대로 1, 2, 3, 4, 5 다(③). ① 은 INNER JOIN 처럼 SMITH 를 뺐고, ② 는 자기 자신까지 센(>=) 결과, ④ 는 나중에 입사한 직원을 센(<) 결과다. ※ 원본의 보기(그림)가 누락되어, 같은 개념을 묻는 모의고사 형태로 보기를 재구성했다.",
       "references": [
         {
           "type": "text",
@@ -19011,12 +18998,6 @@
             ]
           ]
         }
-      ],
-      "optionReferences": [
-        [],
-        [],
-        [],
-        []
       ]
     },
     {
@@ -19252,13 +19233,13 @@
       "chapter": "집합 연산자",
       "title": "테이블이 아래와 같을 때, 다음 집합연산자 수행 결과로 가장 적절한 것은? ",
       "options": [
-        "",
-        "",
-        "",
-        ""
+        "(10, A), (20, A), (20, B), (50, F), (NULL, A)",
+        "(10, A), (20, B), (50, F)",
+        "(10, A), (20, A), (20, B), (50, F)",
+        "(10, A), (10, A), (20, A), (20, B), (50, F)"
       ],
       "correctIndex": 2,
-      "explanation": "먼저 TAB1과 TAB2의 UNION 결과는 아래와 같다. 이들 중 TAB3의 결과를 빼면 3번 결과가 같다. ",
+      "explanation": "TAB1 UNION TAB2 는 중복 (10, A) 를 하나로 합쳐 (10, A), (20, B), (30, C), (30, D), (40, E), (20, A), (50, F), (NULL, A) 가 된다. 여기서 TAB3 의 (30, C), (30, D), (40, E), (NULL, A) 를 MINUS 로 빼면 (10, A), (20, A), (20, B), (50, F) 가 남는다(③). 집합 연산자는 NULL 끼리도 같은 값으로 보므로 (NULL, A) 도 빠진다(① 틀림). ② 는 (20, A) 를 빠뜨렸고, ④ 는 UNION ALL 처럼 중복을 남겼다. ※ 원본의 보기(그림)가 누락되어, 같은 개념을 묻는 모의고사 형태로 보기를 재구성했다.",
       "references": [
         {
           "type": "text",
@@ -19346,12 +19327,6 @@
             ]
           ]
         }
-      ],
-      "optionReferences": [
-        [],
-        [],
-        [],
-        []
       ]
     },
     {
