@@ -194,7 +194,7 @@
         "다른 유저가 커밋 이전의 변경 내용을 수정할 수 있다."
       ],
       "correctIndex": 3,
-      "explanation": "고립성(Isolation) 에 따라 커밋 이전의 변경은 다른 세션이 수정하거나 조회할 수 없다."
+      "explanation": "커밋 전 변경 중인 행에는 잠금(Lock)이 걸려 있어 다른 사용자는 그 행을 수정할 수 없고(④ 가 옳지 않음), 조회하더라도 변경 전(마지막으로 커밋된) 데이터만 보인다. 본인 세션에서는 변경된 내용을 조회할 수 있고(①), ROLLBACK 으로 취소할 수 있으며(②), Oracle 에서는 DDL 을 수행하면 그 전에 묵시적 COMMIT 이 일어난다(③)."
     },
     {
       "subject": "2과목",
@@ -879,7 +879,7 @@
         "INSERT INTO T1 (B, C) VALUES (9, 1);"
       ],
       "correctIndex": 3,
-      "explanation": "A 는 DEFAULT 9 가 지정되어 있으므로 생략해도 9 가 할당되고 PK 조건을 만족한다.",
+      "explanation": "④ 는 A 를 생략했으므로 DEFAULT 9 가 들어가 PK 를 만족하고, NOT NULL 인 B 에 9 가 들어가 정상 입력된다. ① 은 컬럼 목록 없이 값 2개만 주어 컬럼 수(3개)와 맞지 않아 오류, ② 는 NOT NULL 인 B 가 빠져 NULL 이 들어가므로 오류, ③ 은 PK 인 A 에 NULL 을 명시적으로 넣어 오류다 (DEFAULT 는 값을 생략했을 때만 적용되고, NULL 을 직접 넣으면 적용되지 않는다).",
       "references": [
         {
           "type": "sql",
@@ -942,7 +942,7 @@
         "MAX: 700, 700, 700, 700, 700, 700, 700"
       ],
       "correctIndex": 0,
-      "explanation": "각 윈도우 정의에 따른 계산 결과를 직접 산출하여 얻는다.",
+      "explanation": "MAX(COL1) 의 윈도우는 ROWS BETWEEN UNBOUNDED PRECEDING AND 2 FOLLOWING 이므로 COL1 오름차순으로 \"첫 행부터 현재 행의 두 행 뒤까지\" 의 최댓값이다. 1행은 1~3행 → 300, 2행은 1~4행 → 400, 3행 → 500, 4행 → 600, 5행은 1~7행 → 700, 6행·7행은 뒤에 두 행이 없어 마지막 행까지 → 700, 700. 따라서 ① 300, 400, 500, 600, 700, 700, 700 이다. ② 는 마지막 행 값을 잘못 계산했고, ③ 은 현재 행까지만(CURRENT ROW) 본 결과, ④ 는 전체 행을 윈도우로 본 결과다.",
       "references": [
         {
           "type": "table",

@@ -1345,7 +1345,7 @@ export const ROUND_47: QuizQuestion[] = [
       "ORA-00937 등 그룹 함수 오류"
     ],
     "correctIndex": 2,
-    "explanation": "`GROUP BY ID`로 같은 ID끼리 묶고, `HAVING COUNT(*) >= 2`로 행 수가 2 이상인 그룹만 남길다. 살아남은 그룹마다 한 행씩 결과로 나오며 각 행에는 그 그룹의 COUNT 값이 표시된다. 예를 들어 행이 300건인 ID 그룹 하나가 조건을 통과하면 결과로 300이 1건 반환된다. 정답은 ③번이다.",
+    "explanation": "`GROUP BY ID`로 같은 ID끼리 묶고, `HAVING COUNT(*) >= 2`로 행 수가 2 이상인 그룹만 남긴다. 살아남은 그룹마다 한 행씩 결과로 나오며 각 행에는 그 그룹의 COUNT 값이 표시된다. 예를 들어 행이 300건인 ID 그룹 하나가 조건을 통과하면 결과로 300이 1건 반환된다. 정답은 ③번이다.",
     "_source": "authored",
     "references": [
       {

@@ -11,7 +11,7 @@ export const ROUND_52: QuizQuestion[] = [
     "round": 52,
     "subject": "1과목",
     "number": 1,
-    "title": "엔터티의 주식별자가 없어도 되는 예외적 경우는?",
+    "title": "M:N 관계를 해소하기 위해 만들어지며, 양쪽 부모 엔터티의 주식별자를 상속받아 조합한 복합 식별자를 주식별자로 갖는 경우가 많은 엔터티는?",
     "options": [
       "기본 엔터티",
       "중심 엔터티",
@@ -19,7 +19,7 @@ export const ROUND_52: QuizQuestion[] = [
       "관계 엔터티"
     ],
     "correctIndex": 3,
-    "explanation": "관계 엔터티는 양쪽 부모의 키 조합으로 식별되므로 별도의 주식별자 정의가 생략되는 경우가 있다.",
+    "explanation": "M:N 관계를 두 개의 1:M 관계로 풀기 위해 가운데 두는 엔터티가 관계(교차) 엔터티이며, 보통 양쪽 부모의 주식별자를 상속받아 복합 식별자로 삼는다. 기본 엔터티는 다른 엔터티에 의존하지 않고 고유한 주식별자를 가지며, 중심 엔터티는 기본 엔터티로부터 발생해 업무의 중심이 되고, 행위 엔터티는 두 개 이상의 부모로부터 발생해 데이터가 자주 바뀌거나 늘어나는 엔터티다. 참고로 모든 엔터티는 반드시 식별자를 가져야 하며 \"주식별자가 없어도 되는 엔터티\" 는 없다. ※ 복원 자료의 문제 문장이 이 원칙과 어긋나 문장을 바로잡았다.",
     "_source": "authored"
   },
   {
@@ -962,12 +962,12 @@ export const ROUND_52: QuizQuestion[] = [
     "title": "총 월급 2,000 이상인 직원을 기준으로 조건을 만족하지 않는 경우 NULL 을 반환하도록 하는 CASE 문으로 옳은 것은?",
     "options": [
       "CASE WHEN 총월급 >= 2000 THEN 총월급 ELSE 0 END",
-      "CASE WHEN 총월급 >= 2000 THEN 총월급 END",
+      "CASE WHEN 총월급 > 2000 THEN 총월급 ELSE NULL END",
       "CASE WHEN 총월급 < 2000 THEN NULL END",
       "CASE WHEN 총월급 >= 2000 THEN 총월급 ELSE NULL END"
     ],
     "correctIndex": 3,
-    "explanation": "조건을 만족하지 않을 때 NULL 을 반환하려면 ELSE NULL 을 명시해야 한다. ELSE 를 생략하면 동일하게 NULL 이 반환되지만, 명시적으로 NULL 반환을 묻는 보기는 ④ 이다.",
+    "explanation": "④ 는 총월급이 2,000 이상이면 총월급을, 아니면 NULL 을 반환한다. ① 은 조건을 만족하지 않을 때 0 을 반환하고, ② 는 > 라서 총월급이 정확히 2,000 인 직원도 NULL 이 되며, ③ 은 THEN 에서도 NULL 이고 ELSE 가 없어 모든 행이 NULL 이다. 참고로 ELSE 를 생략하면 ELSE NULL 과 같다 (CASE WHEN 총월급 >= 2000 THEN 총월급 END 도 같은 결과).",
     "_source": "authored"
   },
   {
