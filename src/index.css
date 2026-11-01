@@ -590,7 +590,7 @@ img, svg {
 /* 모바일 — 표 가로 스크롤 + 헤딩 축소 + 도식 카드 패딩 */
 @media (max-width: 720px) {
   .theory-md { font-size: 15px; }
-  .theory-md table { display: block; overflow-x: auto; white-space: nowrap; }
+  .theory-md table { display: block; overflow-x: auto; }
   .theory-md h2 { font-size: 18px; margin: 32px 0 12px; }
   .theory-md h2.section-label { font-size: 17px; gap: 10px; flex-wrap: wrap; }
   .theory-md h2.section-label .label-tag { font-size: 11px; padding: 5px 10px; }
@@ -697,6 +697,22 @@ img, svg {
   content: 'ex)'; display: inline-block; margin-right: 8px;
   color: var(--point-600); font-weight: 800; font-family: var(--font-mono); font-size: 13px;
 }
+
+/* ★ 시험 포인트 — 강사가 짚어 주는 한 줄 (2026-11 이론 개편) */
+.theory-md .point {
+  margin: 12px 0 18px; padding: 12px 16px;
+  background: var(--point-100); border-left: 4px solid var(--point-600);
+  border-radius: 10px; color: var(--fg-1); font-size: 14.5px; line-height: 1.7;
+}
+.theory-md .point::before {
+  content: '★ 시험 포인트'; display: block; margin-bottom: 2px;
+  color: var(--point-600); font-weight: 800; font-size: 12.5px; letter-spacing: -0.01em;
+}
+html[data-theme="dark"] .theory-md .point { background: rgba(123, 196, 127, 0.12); }
+/* 시안에 흰색이 박혀 있던 도식 상자 — 다크 모드 배경 */
+html[data-theme="dark"] .mw-cloud,
+html[data-theme="dark"] .mw-db { background: var(--bg-card); }
+html[data-theme="dark"] .theory-md table tbody tr:nth-child(even) { background: rgba(255, 255, 255, 0.03); }
 
 /* 인라인 코드 */
 .theory-md :not(pre) > code {
@@ -1754,7 +1770,9 @@ html, body { overflow-x: hidden; }
     width: max-content;
     max-width: 100%;
   }
-  .theory-md table th, .theory-md table td { white-space: nowrap; }
+  /* 머리글은 한 줄, 본문 칸은 줄바꿈 — 글로 된 표가 옆으로 밀리지 않게 (2026-11-02, 열이 많은 표는 여전히 스크롤) */
+  .theory-md table th { white-space: nowrap; }
+  .theory-md table td { white-space: normal; min-width: 72px; }
 
   /* mermaid SVG — viewport 안에 맞춰 비례 축소 */
   .theory-md .mermaid svg { max-width: 100% !important; height: auto !important; }
