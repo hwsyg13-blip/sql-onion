@@ -52,6 +52,24 @@ const scheduleItems = EXAM_SCHEDULE.slice(-5).map(e => {
   return `<li>제${e.round}회: ${e.y}년 ${e.m}월 ${e.d}일${upcoming}</li>`;
 }).join('\n        ');
 
+// 이론 본문 HTML (앱의 이론 상세 화면과 같은 원문) — 정적 페이지에 그대로 싣는다.
+// 2026-11-02: 예전 정적 이론 페이지는 제목 + 섹션명 + 모든 페이지 같은 안내 문구뿐이라
+// 애드센스 '가치가 별로 없는 콘텐츠' 판정의 원인이 됐다. 크롤러가 실제 본문을 읽을 수 있게 한다.
+const theoryHtmlTs = readFileSync('src/data/theoryHtml.ts', 'utf8');
+const THEORY_HTML = new Function(theoryHtmlTs.replace(/^\/\/.*$/mg, '').replace(/export const THEORY_HTML[^=]*=/, 'return'))();
+// 앱 빌드 CSS (이론 본문의 .theory-md 스타일·디자인 토큰) — vite build 산출물에서 찾는다
+const APP_CSS = (() => {
+  try { const f = readdirSync(join(DIST, 'assets')).find(n => /^index-.*\.css$/.test(n)); return f ? `/assets/${f}` : null; } catch { return null; }
+})();
+
+/** 앱 전용 요소 정리: 죽은 복사 버튼 제거, mermaid(자바스크립트로 그리는 도식)는 학습 화면 안내로 대체 */
+function staticTheoryBody(html) {
+  return html
+    .replace(/<button[^>]*class="copy-btn"[^>]*>[\s\S]*?<\/button>/g, '')
+    .replace(/<div class="mermaid"[^>]*>[\s\S]*?<\/div>/g,
+      '<p class="diagram-note">이 도식은 <a href="/">SQLD양파 학습 화면</a>에서 그림으로 볼 수 있어요.</p>');
+}
+
 // THEORY 메타 — eval로 객체 추출
 const theoryTs = readFileSync('src/data/theory.ts', 'utf8');
 const theoryCode = theoryTs.match(/export const THEORY[^=]*=\s*({[\s\S]*?});/)[1];
@@ -66,7 +84,7 @@ const esc = (s) => String(s ?? '')
 
 const CIRCLED = ['①', '②', '③', '④'];
 
-function head({ title, desc, path, type = 'article' }) {
+function head({ title, desc, path, type = 'article', ads = false, appCss = false }) {
   const url = `${SITE}${path}`;
   const ogImg = `${SITE}/assets/og-cover.png`;
   return `<!doctype html>
@@ -96,7 +114,8 @@ function head({ title, desc, path, type = 'article' }) {
   <meta name="twitter:description" content="${esc(desc)}" />
   <meta name="twitter:image" content="${ogImg}" />
   <meta name="theme-color" content="#2E7D32" />
-
+  <meta name="google-adsense-account" content="${ADSENSE_CLIENT}" />
+${appCss && APP_CSS ? `  <link rel="stylesheet" href="${APP_CSS}" />\n` : ''}
   <style>
     :root{--bg:#F5F7F6;--surface:#FFFFFF;--fg-1:#1F2320;--fg-2:#333;--fg-3:#6B7280;--border:#EEF1EE;--accent:#2E7D32;--accent-bg:#EBF5EC;--correct-bg:#E6F3E7;--correct-fg:#256B29}
     *{box-sizing:border-box}
@@ -141,10 +160,13 @@ function head({ title, desc, path, type = 'article' }) {
     .footer a:hover{color:var(--accent)}
     p,li{font-size:14.5px}
     code{background:#F0F0F0;padding:1px 5px;border-radius:4px;font-family:'D2Coding','Consolas',monospace;font-size:0.92em}
+    .static-theory .reveal{opacity:1!important;transform:none!important}
+    .diagram-note{background:#F8F9FA;border:1px dashed #CFD8CF;border-radius:10px;padding:12px 14px;font-size:13.5px;color:var(--fg-3)}
+    .chapter-nav{display:flex;justify-content:space-between;gap:12px;margin-top:8px;font-size:14px}
+    .chapter-nav a{color:var(--accent);text-decoration:none;font-weight:600}
   </style>
 
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_CLIENT}" crossorigin="anonymous"></script>
-  <script async src="https://www.googletagmanager.com/gtag/js?id=${GA_ID}"></script>
+${ads ? `  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_CLIENT}" crossorigin="anonymous"></script>\n` : ''}  <script async src="https://www.googletagmanager.com/gtag/js?id=${GA_ID}"></script>
   <script>
     window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
     gtag('js',new Date());gtag('config','${GA_ID}');
@@ -273,19 +295,21 @@ function buildExamIndexPage() {
 function buildTheoryChapterPage(subject, ch) {
   const path = `/theory/${ch.id}/`;
   const title = `${ch.title} — ${subject.code} ${subject.title} · SQLD 이론 — SQLD양파`;
-  const desc = `SQLD 자격증 ${subject.code} '${subject.title}'의 핵심 챕터 '${ch.title}' 학습 노트. 출제 범위와 핵심 섹션 정리.`;
-  const sectionsHtml = (ch.sections || []).map(s => `<li>${esc(s)}</li>`).join('');
+  const body = THEORY_HTML[ch.id];
+  const plain = body ? body.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim() : '';
+  const desc = plain ? `${ch.title} — ${plain.slice(0, 110)}…` : `SQLD ${subject.code} '${ch.title}' 이론 정리.`;
+  const all = THEORY.subjects.flatMap(s => s.chapters.map(c => ({ ...c, code: s.code })));
+  const i = all.findIndex(c => c.id === ch.id);
+  const prev = all[i - 1], next = all[i + 1];
+  const nav = `<nav class="chapter-nav">${prev ? `<a href="/theory/${prev.id}/">← ${esc(prev.title)}</a>` : '<span></span>'}${next ? `<a href="/theory/${next.id}/">${esc(next.title)} →</a>` : ''}</nav>`;
 
-  return head({ title, desc, path }) + `
+  return head({ title, desc, path, ads: Boolean(body), appCss: Boolean(body) }) + `
     <div class="crumb"><a href="/">홈</a> · <a href="/theory/">이론</a> · ${esc(subject.code)} · ${esc(ch.title)}</div>
     <h1>${esc(ch.title)}</h1>
-    <p class="lead">${esc(subject.code)} ${esc(subject.title)} · 챕터 ${ch.id.replace(/^c/, '')}</p>
-    <a class="cta" href="/">전체 본문 + 미니테스트 보기 →</a>
-    <h2>핵심 섹션</h2>
-    <ul>${sectionsHtml}</ul>
-    <h2>학습 가이드</h2>
-    <p>본 챕터는 SQLD 시험에서 반복적으로 출제되는 핵심 영역입니다. SQLD양파 사이트에서 본문 + 도식 + 미니 테스트로 빠르게 정리할 수 있습니다.</p>
-    <a class="cta cta-secondary" href="/">SQLD양파 홈에서 학습 시작 →</a>
+    <p class="lead">${esc(subject.code)} ${esc(subject.title)}</p>
+    ${body ? `<article class="theory-md static-theory">${staticTheoryBody(body)}</article>` : `<ul>${(ch.sections || []).map(s => `<li>${esc(s)}</li>`).join('')}</ul>`}
+    <a class="cta" href="/">미니테스트로 바로 확인하기 →</a>
+    ${nav}
 ` + tail;
 }
 

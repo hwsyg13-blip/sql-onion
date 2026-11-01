@@ -160,7 +160,7 @@ export const TrustRow = () => (
       <Ic.ListChecks size={13}/> 기출 10회차 CBT
     </span>
     <span style={{display:"inline-flex",alignItems:"center",gap:6,padding:"6px 10px",background:"var(--bg-muted)",borderRadius:999,fontSize:12,color:"var(--fg-3)"}}>
-      <Ic.Sparkles size={13}/> AI 무한 퀴즈
+      <Ic.Sparkles size={13}/> 무한 퀴즈
     </span>
   </div>
 );
@@ -301,7 +301,7 @@ export const LoginScreen = ({onNavigate, onLogin, layout = "centered"}: any) => 
               양파처럼<br/>한 겹씩 벗겨가며<br/>합격하자
             </h1>
             <p style={{fontSize:15.5,opacity:0.85,lineHeight:1.7,maxWidth:400,margin:0}}>
-              매일 1시간, 3주면 충분해요. 기출 10회차 CBT와 AI 무한 퀴즈로 실전 감각까지.
+              매일 1시간, 3주면 충분해요. 기출 18회차 CBT와 무한 퀴즈로 실전 감각까지.
             </p>
           </div>
           <div style={{display:"flex",gap:28,position:"relative"}}>

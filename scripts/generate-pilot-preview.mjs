@@ -1,12 +1,12 @@
 // Generate Before/After preview page for the pilot vision conversion batch.
 // 양파 그린 디자인 토큰 (src/index.css 기반) + 명시적 mermaid 렌더 (RefErd 와 동일 패턴).
 //
-// Output: public/pilot-vision-preview.html
+// Output: docs/internal/pilot-vision-preview.html (내부 검토용 — 배포하지 않는다, 2026-11-02 애드센스 정비)
 
 import fs from 'node:fs';
 
 const SRC = 'scripts/pilot-vision-batch-1.json';
-const OUT = 'public/pilot-vision-preview.html';
+const OUT = 'docs/internal/pilot-vision-preview.html';
 
 const data = JSON.parse(fs.readFileSync(SRC, 'utf-8'));
 console.log(`Loaded ${data.items.length} pilot items from ${SRC}`);
