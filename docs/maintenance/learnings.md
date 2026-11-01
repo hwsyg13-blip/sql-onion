@@ -35,6 +35,8 @@
 23. **목록을 빼거나 더하기 전에 "번호가 밀리는가" 부터 본다.** 모의고사 번호는 필터 뒤 순번이라 중복 제거·복원이 제보 번호를 모두 어긋나게 할 뻔했다. 고정 번호표(mock-numbers.json)를 먼저 만들고 작업했다.
 24. **보기를 새로 만들 때는 정답을 계산으로 정하고, 오답은 "흔한 착각" 으로 만든다** (NULL 처리, 정렬 방향, ON vs WHERE, ROLLUP vs CUBE, RANK vs DENSE_RANK). 검증할 수 없는 DBMS 동작(HH 12시 해석 등)에 기대는 문항은 같은 개념의 검증 가능한 문항으로 바꾼다.
 
+25. **묶음 머지 절차 (이 환경)**: release 브랜치는 `git push origin origin/main:refs/heads/release/…` (REST refs 쓰기 불가), 드래프트 해제는 `POST /repos/{o}/{r}/pulls/{n}/ccr/ready_for_review` (GraphQL 불가). 쌓인 PR(base 가 다른 PR 브랜치)은 앞 PR 이 squash 되면 생성 파일이 충돌하므로 release 를 그 브랜치에 merge 하고 생성 파일은 재빌드로 해결.
+
 ## 회고
 
 ### 2026-10-31 첫 수동 실행 (기본 점검)
