@@ -1085,7 +1085,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "sql",
-        "code": "SELECT COUNT(SALARY), SUM(SALARY),AVG(SALARY)FROM EMPLOYEE;"
+        "code": "SELECT COUNT(SALARY), SUM(SALARY),AVG(SALARY)\nFROM EMPLOYEE;"
       },
       {
         "type": "table",
@@ -1192,7 +1192,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "sql",
-        "code": "CREATE TABLE TAB (COL1 VARCHAR2(10)PRIMARY KEY, COL2 NUMBER ) ;INSERT INTO TAB VALUES ('A', 1 ) ;INSERT INTO TAB VALUES ('B', 2 ) ;INSERT INTO TAB VALUES ('C', 3 ) ;SAVEPOINT SV1 ;UPDATE TAB SET COL2 = 3 WHERE COL1 IN('A', 'B') ;SAVEPOINT SV2;INSERT INTO TAB VALUES ('D', 5) ;DELETE FROM TAB WHERE COL2 = 3 ;SAVEPOINT SV3;ROLLBACK TO SV2;COMMIT;SELECT COUNT(*) TAB;"
+        "code": "CREATE TABLE TAB (COL1 VARCHAR2(10)PRIMARY KEY, COL2 NUMBER ) ;\nINSERT INTO TAB VALUES ('A', 1 ) ;\nINSERT INTO TAB VALUES ('B', 2 ) ;\nINSERT INTO TAB VALUES ('C', 3 ) ;\nSAVEPOINT SV1 ;\nUPDATE TAB SET COL2 = 3 WHERE COL1 IN('A', 'B') ;\nSAVEPOINT SV2;\nINSERT INTO TAB VALUES ('D', 5) ;\nDELETE FROM TAB WHERE COL2 = 3 ;\nSAVEPOINT SV3;\nROLLBACK TO SV2;\nCOMMIT;\nSELECT COUNT(*) FROM TAB;"
       }
     ]
   },
@@ -1250,10 +1250,10 @@ export const AI_MOCK: QuizQuestion[] = [
     "number": 62,
     "title": "다음 SQL을 ANSI 방식으로 변경한 것으로 옳은 것은?",
     "options": [
-      "SELECT * FROM TAB1 INNER JOIN TAB2ORDER BY 1 ;",
-      "SELECT * FROM TAB1 NATURAL JOINTAB2 ORDER BY 1 ;",
-      "SELECT * FROM TAB1 CROSS JOIN TAB2ORDER BY 1 ;",
-      "SELECT * FROM TAB1 INNER JOIN TAB2ON (TAB1.COL1 = TAB2.COL1) ORDERBY 1 ;"
+      "SELECT * FROM TAB1 INNER JOIN TAB2 ORDER BY 1 ;",
+      "SELECT * FROM TAB1 NATURAL JOIN TAB2 ORDER BY 1 ;",
+      "SELECT * FROM TAB1 CROSS JOIN TAB2 ORDER BY 1 ;",
+      "SELECT * FROM TAB1 INNER JOIN TAB2 ON (TAB1.COL1 = TAB2.COL1) ORDER BY 1 ;"
     ],
     "correctIndex": 2,
     "explanation": "FROM TAB1, TAB2만 있고 별도의 조인조건은 없으므로 카티션 곱이 발생하며, 이는 CROSS JOIN으로 표현할 수 있다. CROSS JOIN은 ON 조인 절을 사용하지 않는다는 점을 주의해야 한다.",
@@ -1264,7 +1264,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "sql",
-        "code": "SELECT *FROM TAB1, TAB2ORDER BY 1;"
+        "code": "SELECT *\nFROM TAB1, TAB2\nORDER BY 1;"
       }
     ]
   },
@@ -1330,7 +1330,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "sql",
-        "code": "WITH REGION_TOTAL AS (SELECT REGION, SUM(AMOUNT) AS TOTALFROM TB_ORDERGROUP BY REGION)SELECT COUNT(*) FROM REGION_TOTALWHERE TOTAL > 1500;"
+        "code": "WITH REGION_TOTAL AS (SELECT REGION, SUM(AMOUNT) AS TOTAL\nFROM TB_ORDER\nGROUP BY REGION)\nSELECT COUNT(*) FROM REGION_TOTAL\nWHERE TOTAL > 1500;"
       },
       {
         "type": "table",
@@ -1440,7 +1440,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "sql",
-        "code": "SELECT USER_ID, SUM(AMOUNT)FROM TB_PURCHASEGROUP BY USER_ID;"
+        "code": "SELECT USER_ID, SUM(AMOUNT)\nFROM TB_PURCHASE\nGROUP BY USER_ID;"
       },
       {
         "type": "table",
@@ -1668,7 +1668,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "sql",
-        "code": "SELECT LEVEL, LPAD(‘ ’,4 * (LEVEL -1) || EMPNO, MGR, ( ) AS ISLEAF FROM SCOTT.EMP START WITH MGR IS NULL CONNECT BY PRIOR EMPNO = MGR;"
+        "code": "SELECT LEVEL, LPAD(' ', 4 * (LEVEL - 1)) || EMPNO, MGR, ( ) AS ISLEAF FROM SCOTT.EMP START WITH MGR IS NULL CONNECT BY PRIOR EMPNO = MGR;"
       }
     ]
   },
@@ -1734,7 +1734,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "sql",
-        "code": "[쿼리] SELECT ENAME,(ㄱ)(ENAME) OVER (ORDER BY HIREDATE)AS PREV_EMP,(ㄴ)(ENAME) OVER (ORDER BY HIREDATE)AS NEXT_EMPFROM EMP;"
+        "code": "SELECT ENAME,(ㄱ)(ENAME) OVER (ORDER BY HIREDATE) AS PREV_EMP,(ㄴ)(ENAME) OVER (ORDER BY HIREDATE) AS NEXT_EMP\nFROM EMP;"
       },
       {
         "type": "table",
@@ -1862,7 +1862,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "sql",
-        "code": "SELECT * FROM SQLD_33 WHERE EMP_NAME LIKE ‘A%’"
+        "code": "SELECT * FROM SQLD_33 WHERE EMP_NAME LIKE 'A%'"
       }
     ]
   },
@@ -1900,7 +1900,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "NULL, 240, 260"
     ],
     "correctIndex": 0,
-    "explanation": "• 첫 번째 쿼리 : D E P T N O가 10인 대상의 S A L+B O N U S는 각각 100+NULL , NULL + 20이므로 둘다 NULL이 되어 SUM의 결과는 NULL이 된다.• 두 번째 쿼리 : NVL(SAL, 0) + NVL(BONUS, 0)은 순서대로 각각 100 + 0, 0 + 20, 30 + 10, 50 + 30, 20 + 0이므로 100, 20, 40, 80, 20의 합계를 구하면 260이다.• 세 번째 쿼리 : SUM(SAL)은 100, NULL, 30, 50, 20의 합계이며 집계 함수는 NULL을 무시해 100, 30, 50, 20을 더한 200이 출력된다. SUM(BONUS)은 NULL, 20, 10, 30, NULL로 NULL을 제외한 20, 10, 30의 합계인 60이 나오고, 그 결과 200+60 = 260이 된다.",
+    "explanation": "• 첫 번째 쿼리 : DEPTNO가 10인 대상의 SAL+BONUS는 각각 100+NULL , NULL + 20이므로 둘다 NULL이 되어 SUM의 결과는 NULL이 된다.• 두 번째 쿼리 : NVL(SAL, 0) + NVL(BONUS, 0)은 순서대로 각각 100 + 0, 0 + 20, 30 + 10, 50 + 30, 20 + 0이므로 100, 20, 40, 80, 20의 합계를 구하면 260이다.• 세 번째 쿼리 : SUM(SAL)은 100, NULL, 30, 50, 20의 합계이며 집계 함수는 NULL을 무시해 100, 30, 50, 20을 더한 200이 출력된다. SUM(BONUS)은 NULL, 20, 10, 30, NULL로 NULL을 제외한 20, 10, 30의 합계인 60이 나오고, 그 결과 200+60 = 260이 된다.",
     "chapter": "그룹 함수",
     "_source": "cbt-mock",
     "_origId": "cbt-033",
@@ -1908,7 +1908,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "sql",
-        "code": "[쿼리][1] SELECT SUM(SAL + BONUS) FROM EMP WHERE DEPTNO = 10;[2] S E L E C T S U M(N V L(S A L, 0) + NVL(BONUS, 0)) FROM EMP;[3] SELECT SUM(SAL) + SUM(BONUS) FROM EMP ;"
+        "code": "[1] SELECT SUM(SAL + BONUS) FROM EMP WHERE DEPTNO = 10;\n[2] SELECT SUM(NVL(SAL, 0) + NVL(BONUS, 0)) FROM EMP;\n[3] SELECT SUM(SAL) + SUM(BONUS) FROM EMP ;"
       },
       {
         "type": "table",
@@ -2105,7 +2105,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "sql",
-        "code": "SELECT NEXT_DAY(ADD_MONTHS (sysdate,6),‘월요일’) FROM dual;"
+        "code": "SELECT NEXT_DAY(ADD_MONTHS (sysdate,6),'월요일') FROM dual;"
       }
     ]
   },
@@ -2131,7 +2131,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "sql",
-        "code": "BEGIN TRAN;CREATE TABLE TBL (ID INT PRIMARY KEY);INSERT INTO TBL VALUES (1);SAVE TRAN S1;INSERT INTO TBL VALUES (2);ROLLBACK TRAN S1;INSERT INTO TBL VALUES (3);COMMIT;SELECT COUNT(*) FROM TBL;"
+        "code": "BEGIN TRAN;\nCREATE TABLE TBL (ID INT PRIMARY KEY);\nINSERT INTO TBL VALUES (1);\nSAVE TRAN S1;\nINSERT INTO TBL VALUES (2);\nROLLBACK TRAN S1;\nINSERT INTO TBL VALUES (3);\nCOMMIT;\nSELECT COUNT(*) FROM TBL;"
       }
     ]
   },
@@ -2157,7 +2157,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "sql",
-        "code": "CREATE TABLE TAB1 (COL1 VARCHAR2(10) PRIMARY KEY,COL2 VARCHAR2(10) NOT NULL,COL3 VARCHAR2(10));CREATE TABLE TAB2 (COL1 VARCHAR2(10) PRIMARY KEY,COL2 VARCHAR2(10) REFERENCESTAB1(COL1),COL3 NUMBER);"
+        "code": "CREATE TABLE TAB1 (COL1 VARCHAR2(10) PRIMARY KEY,COL2 VARCHAR2(10) NOT NULL,COL3 VARCHAR2(10));\nCREATE TABLE TAB2 (COL1 VARCHAR2(10) PRIMARY KEY,COL2 VARCHAR2(10) REFERENCES TAB1(COL1),COL3 NUMBER);"
       }
     ]
   },
@@ -2333,7 +2333,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "sql",
-        "code": "CREATE TABLE TAB1 (COL1 INTEGER PRIMARY KEY,COL2 INTEGER) ;CREATE TABLE TAB2 (COL3 INTEGER PRIMARY KEY,COL4 INTEGER REFERENCES TAB1(COL1)ON DELETE CASCADE;) ;INSERT INTO TAB1 VALUES(1, 1);INSERT INTO TAB1 VALUES(2, 2);INSERT INTO TAB1 VALUES(3, 3);INSERT INTO TAB2 VALUES(4, 3);INSERT INTO TAB2 VALUES(5, 2);DELETE FROM TAB1 WHERE COL2 IN (3);SELECT COUNT(*) FROM TAB2;"
+        "code": "CREATE TABLE TAB1 (COL1 INTEGER PRIMARY KEY,COL2 INTEGER) ;\nCREATE TABLE TAB2 (COL3 INTEGER PRIMARY KEY,COL4 INTEGER REFERENCES TAB1(COL1)ON DELETE CASCADE);\nINSERT INTO TAB1 VALUES(1, 1);\nINSERT INTO TAB1 VALUES(2, 2);\nINSERT INTO TAB1 VALUES(3, 3);\nINSERT INTO TAB2 VALUES(4, 3);\nINSERT INTO TAB2 VALUES(5, 2);\nDELETE FROM TAB1 WHERE COL2 IN (3);\nSELECT COUNT(*) FROM TAB2;"
       }
     ]
   },
@@ -2432,7 +2432,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "sql",
-        "code": "ㄱ : SELECT DEPT FROM STUDENT; ㄴ : SELECT DISTINCT DEPT FROM STUDENT; ㄷ : SELECT NAME FROM STUDENT WHERE DEPT=‘영문학과’;"
+        "code": "ㄱ : SELECT DEPT FROM STUDENT; ㄴ : SELECT DISTINCT DEPT FROM STUDENT; ㄷ : SELECT NAME FROM STUDENT WHERE DEPT='영문학과';"
       }
     ]
   },
@@ -2467,7 +2467,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "INSERT INTO EMP_TEMP SELECT * FROMEMP;",
       "INSERT INTO EMP_TEMP VALUES(SELECT * FROM EMP WHERE DEPTNO =10);",
       "INSERT INTO EMP_TEMP SELECT * FROMEMP WHERE DEPTNO = 10;",
-      "INSERT * INTO EMP_TEMP FROM EMPWHERE DEPTNO = 10;"
+      "INSERT * INTO EMP_TEMP FROM EMP WHERE DEPTNO = 10;"
     ],
     "correctIndex": 2,
     "explanation": "이 문제는 INSERT INTO ... SELECT 문법을 묻는 문제이다. 이 구문은 한테이블에서 조건에 맞는 여러 행을 다른 테이블에 삽입할 때 사용한다.① 모든 직원의 정보를 EMP_TEMP에 삽입하는 문항이므로 오답이다.②, ④ 문법이 잘못되었다. INSERT INTO EMP_TEMP SELECT * FROMEMP WHERE DEPTNO = 10; 사용 시, 두 테이블(EMP_TEMP, EMP)의 컬럼 수와 자료형 순서가 정확히 일치해야 한다.",
@@ -2544,7 +2544,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "sql",
-        "code": "Select NVL(Name,‘없음’) From Emp;"
+        "code": "Select NVL(Name,'없음') From Emp;"
       }
     ]
   },
@@ -2636,7 +2636,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "sql",
-        "code": "SELECT COUNT(AGE) FROM TB_STUDENTWHERE AGE > 20 ;"
+        "code": "SELECT COUNT(AGE) FROM TB_STUDENT\nWHERE AGE > 20 ;"
       },
       {
         "type": "table",
@@ -2999,7 +2999,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "sql",
-        "code": "SELECT * FROM AFULL OUTER JOIN B ON A.ID = B.IDWHERE A.ID IS NULLOR B.ID IS NULL;"
+        "code": "SELECT * FROM A\nFULL OUTER JOIN B ON A.ID = B.ID\nWHERE A.ID IS NULL\nOR B.ID IS NULL;"
       },
       {
         "type": "table",
@@ -3078,7 +3078,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "CUSTOMER_ID는 주문 테이블의 보조식별자이다."
     ],
     "correctIndex": 1,
-    "explanation": "이 E R D 에서 고객 테이블은 부모, 주문 테이블은 자식이며, 주문.CUSTOMER_ID는 고객.CUSTOMER_ID를 참조하는 외래키(FK)이다. 관계선이 점선으로 표현된 것은 비식별 관계(Non-Identifying Relationship)임을 의미한다. 비식별 관계는 자식 테이블이 부모의 PK를 참조는 하지만, 자신의 PK에는 포함하지 않는 관계이다. 따라서 ②가 올바른 설명이며, 나머지는 의미를 잘못 해석한 설명이다.",
+    "explanation": "이 ERD 에서 고객 테이블은 부모, 주문 테이블은 자식이며, 주문.CUSTOMER_ID는 고객.CUSTOMER_ID를 참조하는 외래키(FK)이다. 관계선이 점선으로 표현된 것은 비식별 관계(Non-Identifying Relationship)임을 의미한다. 비식별 관계는 자식 테이블이 부모의 PK를 참조는 하지만, 자신의 PK에는 포함하지 않는 관계이다. 따라서 ②가 올바른 설명이며, 나머지는 의미를 잘못 해석한 설명이다.",
     "chapter": "식별자",
     "_source": "cbt-mock",
     "_origId": "cbt-070",
@@ -3224,7 +3224,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "sql",
-        "code": "SELECT PLAYER_NAME 선수명, E_PLAYER_NAME 선수영문명 FROM PLAYER WHERE E_PLAYER_NAME LIKE ‘_A%’;"
+        "code": "SELECT PLAYER_NAME 선수명, E_PLAYER_NAME 선수영문명 FROM PLAYER WHERE E_PLAYER_NAME LIKE '_A%';"
       }
     ]
   },
@@ -3250,7 +3250,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "sql",
-        "code": "SELECT NAME FROM STUDENT_AINTERSECTSELECT NAME FROM STUDENT_B;"
+        "code": "SELECT NAME FROM STUDENT_A\nINTERSECT\nSELECT NAME FROM STUDENT_B;"
       },
       {
         "type": "table",
@@ -3312,7 +3312,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "sql",
-        "code": "SELECT TRIM(' Hello SQL ') AS RESULTFROM DUAL;"
+        "code": "SELECT TRIM(' Hello SQL ') AS RESULT\nFROM DUAL;"
       }
     ]
   },
@@ -3516,7 +3516,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "sql",
-        "code": "SELECT COUNT(*), COUNT(COMM)FROM EMP;"
+        "code": "SELECT COUNT(*), COUNT(COMM)\nFROM EMP;"
       }
     ]
   },
@@ -3762,7 +3762,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "sql",
-        "code": "SELECT ‘A’, 1 FROM DUAL UNION ALL SELECT 1, ‘A’ FROM DUAL;"
+        "code": "SELECT 'A', 1 FROM DUAL UNION ALL SELECT 1, 'A' FROM DUAL;"
       }
     ]
   },
@@ -3775,7 +3775,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "title": "다음 중 집합 연산자에 대한 설명으로 올바르지 않은 것은?",
     "options": [
       "UNION 연산자를 사용할 때 각각의 SELECT문에 ORDER BY를 사용할 수 있다.",
-      "U N I O N 은 중복을 제거하는 데 반해 UNION ALL은 중복을 제거하지 않는다.",
+      "UNION 은 중복을 제거하는 데 반해 UNION ALL은 중복을 제거하지 않는다.",
       "INTERSECT는 중복 제거 및 정렬을 수행한다.",
       "두 집합 간 중복이 없다면 UNION, UNION ALL 모두 동일한 결과를 출력한다."
     ],
@@ -3855,9 +3855,9 @@ export const AI_MOCK: QuizQuestion[] = [
     "title": "다음은 두 개의 테이블 관계를 보여준다. 아래 중 가장 옳은 설명은?",
     "options": [
       "비식별관계이며 STUDENT는 독립적으로 생성 가능하다.",
-      "식별관계이며 S T U D E N T 테이블의 DEPT_ID는 반드시 입력되어야 한다",
+      "식별관계이며 STUDENT 테이블의 DEPT_ID는 반드시 입력되어야 한다",
       "식별관계이며 STUDENT는 DEPARTMENT의 DEPT_ID 없이 생성될 수 있다.",
-      "비식별관계이며 D E P A R T M E N T 는 STUDENT의 보조식별자이다."
+      "비식별관계이며 DEPARTMENT 는 STUDENT의 보조식별자이다."
     ],
     "correctIndex": 1,
     "explanation": "DEPARTMENT와 STUDENT 테이블은 식별 관계이며, 이는 IE 표기법에서는 두 엔터티 사이의 관계선을 실선으로 표현하고, Barker 표기법에서는 자식 엔터티(STUDENT) 쪽에 bar(|) 기호로 나타낸다.식별 관계란 부모 테이블의 식별자(PK)가 자식 테이블의 식별자(PK)의 일부로 사용되는 관계를 의미한다. 이때 자식 테이블의 식별자(PK)는 NOT NULL이며 UNIQUE한 특성을 가지므로, 해당 값은 반드시 입력되어야 한다.",
@@ -3934,7 +3934,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "sql",
-        "code": "SELECT CUSTOMER_ID, SUM(AMOUNT)FROM TB_ORDERGROUP BY CUSTOMER_IDHAVING SUM(AMOUNT) >= 2000;"
+        "code": "SELECT CUSTOMER_ID, SUM(AMOUNT)\nFROM TB_ORDER\nGROUP BY CUSTOMER_ID\nHAVING SUM(AMOUNT) >= 2000;"
       },
       {
         "type": "table",
@@ -4036,7 +4036,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "sql",
-        "code": "SELECT ORDER_IDFROM TB_ORDERWHERE CUST_ID NOT IN (SELECT CUST_IDFROM TB_CUSTOMERWHERE CITY = 'SEOUL');"
+        "code": "SELECT ORDER_ID\nFROM TB_ORDER\nWHERE CUST_ID NOT IN (SELECT CUST_ID\nFROM TB_CUSTOMER\nWHERE CITY = 'SEOUL');"
       },
       {
         "type": "table",
@@ -4124,7 +4124,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "sql",
-        "code": "SELECT LEVEL, ENAME, MGRFROM EMPSTART WITH ENAME = 'KING'CONNECT BY PRIOR EMPNO = MGR;"
+        "code": "SELECT LEVEL, ENAME, MGR\nFROM EMP\nSTART WITH ENAME = 'KING'\nCONNECT BY PRIOR EMPNO = MGR;"
       },
       {
         "type": "table",
@@ -4246,7 +4246,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "sql",
-        "code": "SELECT DEPT, COUNT(*)FROM EMPWHERE SAL > 3000GROUP BY DEPTHAVING COUNT(*) > 1ORDER BY DEPT;"
+        "code": "SELECT DEPT, COUNT(*)\nFROM EMP\nWHERE SAL > 3000\nGROUP BY DEPT\nHAVING COUNT(*) > 1\nORDER BY DEPT;"
       }
     ]
   },
@@ -4272,7 +4272,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "sql",
-        "code": "SELECT COUNT(*) FROM T1LEFT OUTER JOIN T2 ON T1.COL = T2.COLLEFT OUTER JOIN T3 ON T1.COL = T3.COLWHERE T2.COL IS NOT NULL ;"
+        "code": "SELECT COUNT(*) FROM T1\nLEFT OUTER JOIN T2 ON T1.COL = T2.COL\nLEFT OUTER JOIN T3 ON T1.COL = T3.COL\nWHERE T2.COL IS NOT NULL ;"
       },
       {
         "type": "table",
@@ -5039,7 +5039,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "sql",
-        "code": "SELECT *FROM EMPLOYEE EWHERE EXISTS (SELECT 1FROM SALARY SWHERE S.EMP_ID = E.EMP_IDAND S.AMOUNT IS NOT NULL);"
+        "code": "SELECT *\nFROM EMPLOYEE E\nWHERE EXISTS (SELECT 1\nFROM SALARY S\nWHERE S.EMP_ID = E.EMP_ID\nAND S.AMOUNT IS NOT NULL);"
       },
       {
         "type": "table",
@@ -5310,7 +5310,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "sql",
-        "code": "SELECT *FROM EMPWHERE SAL > (SELECT AVG(SAL) FROM EMP);"
+        "code": "SELECT *\nFROM EMP\nWHERE SAL > (SELECT AVG(SAL) FROM EMP);"
       }
     ]
   },
@@ -5484,10 +5484,10 @@ export const AI_MOCK: QuizQuestion[] = [
     "number": 193,
     "title": "다음 데이터를 기준으로 각 고객이 주문한 금액을 함께 조회하되, 주문경험이 없는 고객도 포함되도록 하는 SQL로 알맞은 것은?",
     "options": [
-      "SELECT C.NAME, O.AMOUNTFROM TB_CUSTOMER CJOIN TB_ORDER O ON C.CUST_ID =O.CUST_ID;",
-      "SELECT C.NAME, O.AMOUNTFROM TB_ORDER OLEFT JOIN TB_CUSTOMER C ON C.CUST_ID = O.CUST_ID;",
-      "SELECT C.NAME, O.AMOUNTFROM TB_CUSTOMER CRIGHT JOIN TB_ORDER O ON C.CUST_ID= O.CUST_ID;",
-      "SELECT C.NAME, O.AMOUNTFROM TB_CUSTOMER CLEFT JOIN TB_ORDER O ON C.CUST_ID= O.CUST_ID;"
+      "SELECT C.NAME, O.AMOUNT FROM TB_CUSTOMER C JOIN TB_ORDER O ON C.CUST_ID =O.CUST_ID;",
+      "SELECT C.NAME, O.AMOUNT FROM TB_ORDER O LEFT JOIN TB_CUSTOMER C ON C.CUST_ID = O.CUST_ID;",
+      "SELECT C.NAME, O.AMOUNT FROM TB_CUSTOMER C RIGHT JOIN TB_ORDER O ON C.CUST_ID= O.CUST_ID;",
+      "SELECT C.NAME, O.AMOUNT FROM TB_CUSTOMER C LEFT JOIN TB_ORDER O ON C.CUST_ID= O.CUST_ID;"
     ],
     "correctIndex": 3,
     "explanation": "이 문제는 고객 정보를 기준으로 주문 금액을 조회하면서, 주문이 없는 고객도 포함해야 한다. 이는 LEFT OUTER JOIN을 통해 해결하며, 기준 테이블이 고객 테이블이어야 하므로 정답은 ④이다.",
@@ -5569,10 +5569,10 @@ export const AI_MOCK: QuizQuestion[] = [
     "number": 195,
     "title": "다음 쿼리 중 의미가 다른 하나는? (단, COL1은 날짜형 컬럼이다.)",
     "options": [
-      "SELECT * FROM TABWHERE TO_CHAR(COL1,'YYYYMMDDHH24') = '2025010113'OR TO_CHAR(COL1,'YYYYMMDDHH24') = '2025010114' ;",
-      "SELECT * FROM TABWHERE COL1 >= TO_DATE('20250101130000', 'YYYYMMDDHH24MISS')AND COL1 <= TO_DATE('20250101145959', 'YYYYMMDDHH24MISS') ;",
-      "SELECT * FROM TABWHERE ((TO_CHAR(COL1, 'YYYYMMDD'),(TO_CHAR(COL1, 'HH24') )IN (('20250101', '13'),('20250101', '14')) ;",
-      "SELECT * FROM TABWHERE COL1 = TO_DATE('2025010113','YYYYMMDDHH24')OR COL1 = TO_DATE('2025010114','YYYYMMDDHH24');"
+      "SELECT * FROM TAB WHERE TO_CHAR(COL1,'YYYYMMDDHH24') = '2025010113' OR TO_CHAR(COL1,'YYYYMMDDHH24') = '2025010114' ;",
+      "SELECT * FROM TAB WHERE COL1 >= TO_DATE('20250101130000', 'YYYYMMDDHH24MISS') AND COL1 <= TO_DATE('20250101145959', 'YYYYMMDDHH24MISS') ;",
+      "SELECT * FROM TAB WHERE ((TO_CHAR(COL1, 'YYYYMMDD'),(TO_CHAR(COL1, 'HH24') ) IN (('20250101', '13'),('20250101', '14')) ;",
+      "SELECT * FROM TAB WHERE COL1 = TO_DATE('2025010113','YYYYMMDDHH24') OR COL1 = TO_DATE('2025010114','YYYYMMDDHH24');"
     ],
     "correctIndex": 3,
     "explanation": "①~③은 모두 2025년 1월 1일 13시 00분 00초부터 2025년 1월 1일 14시 59분 59초까지 범위를 대상으로 필터링하고 있다.④는 COL1이 2025년 1월 1일 13시 00분 00초이거나 2025년 1월 1일 14시 00분 00초인 대상만 정확하게 추출하므로 ①~③보다 조건 범위가 좁아 의미가 다르다.",
@@ -5623,7 +5623,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "sql",
-        "code": "SELECT COALESCE(NULL, ‘2’, ‘1’) FROM DUAL;"
+        "code": "SELECT COALESCE(NULL, '2', '1') FROM DUAL;"
       }
     ]
   },
@@ -5727,7 +5727,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "sql",
-        "code": "SELECT COUNT(*)FROM EMPLOYEE ELEFT JOIN DEPARTMENT D ON E.DEPT_ID =D.DEPT_IDWHERE D.LOC = 'SEOUL';"
+        "code": "SELECT COUNT(*)\nFROM EMPLOYEE E\nLEFT JOIN DEPARTMENT D ON E.DEPT_ID =D.DEPT_ID\nWHERE D.LOC = 'SEOUL';"
       },
       {
         "type": "table",
@@ -5910,7 +5910,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "sql",
-        "code": "SELECT *FROM (SELECT ITEM, PRICEFROM TB_ITEMORDER BY PRICE DESC)WHERE ROWNUM = 1;"
+        "code": "SELECT *\nFROM (SELECT ITEM, PRICE\nFROM TB_ITEM\nORDER BY PRICE DESC)\nWHERE ROWNUM = 1;"
       },
       {
         "type": "table",
@@ -5998,7 +5998,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "sql",
-        "code": "SELECT TO_CHAR(TO_DATE('2025030220','YYYYMMDDHH24') + 2/24/60/60,'YYYY-MM-DD HH24:MI:SS')FROM DUAL;"
+        "code": "SELECT TO_CHAR(TO_DATE('2025030220','YYYYMMDDHH24') + 2/24/60/60,'YYYY-MM-DD HH24:MI:SS')\nFROM DUAL;"
       }
     ]
   },
@@ -6188,7 +6188,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "sql",
-        "code": "CREATE TABLE TAB (COL1 NUMBER PRIMARY KEY,COL2 VARCHAR2(10),COL3 DATE DEFAULT SYSDATE); [쿼리](ㄱ) INSERT INTO TAB(COL1,COL2) VALUES(1, '');(ㄴ) SELECT * FROM TAB WHERE COL2 ='';(ㄷ) UPDATE TAB SET COL2 = 'X' WHERE COL2 IS NULL;(ㄹ) DELETE FROM TAB;"
+        "code": "CREATE TABLE TAB (COL1 NUMBER PRIMARY KEY,COL2 VARCHAR2(10),COL3 DATE DEFAULT SYSDATE);\n(ㄱ) INSERT INTO TAB(COL1,COL2) VALUES(1, '');\n(ㄴ) SELECT * FROM TAB WHERE COL2 ='';\n(ㄷ) UPDATE TAB SET COL2 = 'X' WHERE COL2 IS NULL;\n(ㄹ) DELETE FROM TAB;"
       }
     ]
   },
@@ -6274,7 +6274,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "sql",
-        "code": "SELECT NAMEFROM PRODUCTSWHERE PRICE = (SELECT MAX(PRICE) FROMPRODUCTS);"
+        "code": "SELECT NAME\nFROM PRODUCTS\nWHERE PRICE = (SELECT MAX(PRICE) FROM PRODUCTS);"
       },
       {
         "type": "table",
@@ -6398,7 +6398,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "sql",
-        "code": "SELECT DEPTNO, ROUND(AVG(SAL), 1) ASDEPTNO_AVG_SAL"
+        "code": "SELECT DEPTNO, ROUND(AVG(SAL), 1) AS DEPTNO_AVG_SAL"
       }
     ]
   },
@@ -6496,10 +6496,10 @@ export const AI_MOCK: QuizQuestion[] = [
     "number": 230,
     "title": "다음 쿼리를 ANSI 방식으로 변경한 것으로 옳은 것은?",
     "options": [
-      "SELECT ENAME, DNAMEFROM EMPJOIN DEPT USING (EMP.DEPTNO =DEPT.DEPTNO);",
-      "SELECT ENAME, DNAMEFROM EMP EINNER JOIN DEPT D ON E.DEPTNO =D.DEPTNO;",
-      "SELECT ENAME, DNAMEFROM EMP ELEFT JOIN DEPT D ON D.DEPTNO =E.DEPTNO;",
-      "SELECT ENAME, DNAMEFROM EMP ECROSS JOIN DEPT D;"
+      "SELECT ENAME, DNAME FROM EMP JOIN DEPT USING (EMP.DEPTNO =DEPT.DEPTNO);",
+      "SELECT ENAME, DNAME FROM EMP E INNER JOIN DEPT D ON E.DEPTNO =D.DEPTNO;",
+      "SELECT ENAME, DNAME FROM EMP E LEFT JOIN DEPT D ON D.DEPTNO =E.DEPTNO;",
+      "SELECT ENAME, DNAME FROM EMP E CROSS JOIN DEPT D;"
     ],
     "correctIndex": 1,
     "explanation": "해당 쿼리는 Oracle 전통 조인 방식으로, EMP와 DEPT를 DEPTNO 기준으로 조인하고 있다.조인조건이 명시되어 있고 외부 조인이 없으므로 이는 내부 조인(INNERJOIN)에 해당한다. ANSI 방식에서는 INNER JOIN ... ON 절을 사용해야 하며, 정답은 ②이다.USING은 조인하는 두 테이블에 같은 컬럼이 있고 이를 명시하면 자동으로 동등 조인을 해준다. 따라서 USING(컬럼) 형태로 사용하며 조인조건을 작성하지 않는다.",
@@ -6510,7 +6510,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "sql",
-        "code": "SELECT E.ENAME, D.DNAMEFROM EMP E, DEPT DWHERE E.DEPTNO = D.DEPTNO;"
+        "code": "SELECT E.ENAME, D.DNAME\nFROM EMP E, DEPT D\nWHERE E.DEPTNO = D.DEPTNO;"
       }
     ]
   },
@@ -6834,7 +6834,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "sql",
-        "code": "SELECT NAMEFROM EMPLOYEEWHERE SALARY > ALL ( SELECT SALARYFROM EMPLOYEE WHERE NAME != 'C' );"
+        "code": "SELECT NAME\nFROM EMPLOYEE\nWHERE SALARY > ALL ( SELECT SALARY\nFROM EMPLOYEE WHERE NAME != 'C' );"
       },
       {
         "type": "table",
@@ -6868,10 +6868,10 @@ export const AI_MOCK: QuizQuestion[] = [
     "number": 242,
     "title": "도서(도서번호, 도서제목, 출판사명, 발행연도) 테이블에서, 2000년 이후에 10권 이상의 책을 발행한 출판사의 이름을 중복 없이 출력하는 SQL문으로 옳은 것은? (단, 출판사명이 동일한 출판사는 존재하지 않는 것으로 가정한다. 도서번호는 도서 테이블의 기본키이다)",
     "options": [
-      "SELECT 출판사명 FROM 도서 WH-ERE 발행연도 >= 2000 ORDER BY COUNT(도서번호) >= 10;",
-      "SELECT 출판사명 FROM 도서 WH-ERE 발행연도 >= 2000 AND COUNT(도서번호) >= 10 GR-OUP BY 출판사명;",
-      "SELECT 출판사명 FROM 도서 WH-ERE COUNT(도서번호) >= 10 GROUP BY 출판사명 HAVING 발행연도 >= 2000;",
-      "SELECT 출판사명 FROM 도서 WH-ERE 발행연도 >= 2000 GROUP BY 출판사명 HAVING CO-UNT(도서번호) >= 10;"
+      "SELECT 출판사명 FROM 도서 WHERE 발행연도 >= 2000 ORDER BY COUNT(도서번호) >= 10;",
+      "SELECT 출판사명 FROM 도서 WHERE 발행연도 >= 2000 AND COUNT(도서번호) >= 10 GROUP BY 출판사명;",
+      "SELECT 출판사명 FROM 도서 WHERE COUNT(도서번호) >= 10 GROUP BY 출판사명 HAVING 발행연도 >= 2000;",
+      "SELECT 출판사명 FROM 도서 WHERE 발행연도 >= 2000 GROUP BY 출판사명 HAVING COUNT(도서번호) >= 10;"
     ],
     "correctIndex": 3,
     "explanation": "문제에서 10권 이상 구매한 사람을 출력하기 위해서 “HAVING COUNT(도서번호)>=10”의 HAVING절을 추가하고 발행연도가 2000 이후 이므로 WHERE절에 “발행연도 >=2000”을 넣어야 한다. 또한 출판사명은 이름에 중복이 없어야 하므로 GROUP BY구로 “출판사명”을 추가하면 된다.",

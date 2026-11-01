@@ -866,7 +866,7 @@
     {
       "subject": "2과목",
       "number": 30,
-      "title": "오라클과 SQL Server에서 아래 DML·DDL이 순차 수행된 후 ROLLBACK의 효과로 적절하지 않은 것은?",
+      "title": "오라클과 SQL Server에서 아래 DML·DDL이 하나의 트랜잭션으로 순차 수행된 후 (SQL Server 는 BEGIN TRANSACTION 으로 명시적 트랜잭션을 시작한 상태) ROLLBACK의 효과로 적절하지 않은 것은?",
       "options": [
         "오라클에서는 CREATE 시 UPDATE가 자동 커밋되어 UPDATE 결과는 유지된다.",
         "오라클에서는 CREATE로 생성된 테이블 TAB_NEW는 유지된다.",
@@ -874,11 +874,11 @@
         "오라클에서는 ROLLBACK이 실행되면 테이블 TAB_NEW도 함께 삭제된다."
       ],
       "correctIndex": 3,
-      "explanation": "오라클의 DDL은 자동 커밋을 동반하므로 ROLLBACK으로 취소되지 않는다. SQL Server는 DDL도 트랜잭션 범위에 포함된다.",
+      "explanation": "오라클의 DDL 은 실행 전후로 자동 커밋을 동반하므로, CREATE 시점에 앞선 UPDATE 까지 커밋되고 ROLLBACK 으로 취소되지 않는다(①②는 옳다). 따라서 ROLLBACK 으로 TAB_NEW 가 삭제된다는 ④ 가 적절하지 않다. SQL Server 는 명시적 트랜잭션 안에서는 DDL 도 트랜잭션 범위에 포함되어 UPDATE 와 CREATE 가 함께 롤백된다(③). 단, SQL Server 의 기본값인 자동 커밋 모드에서는 각 문장이 바로 커밋되므로 이 전제가 필요하다.",
       "references": [
         {
           "type": "sql",
-          "code": "UPDATE T1 SET COL2 = 200;\nCREATE TABLE TAB_NEW ( C1 NUMBER );\nROLLBACK;"
+          "code": "UPDATE T1 SET COL2 = 200;\nCREATE TABLE TAB_NEW ( C1 INT );\nROLLBACK;"
         }
       ]
     },
