@@ -453,7 +453,7 @@
         "TOP"
       ],
       "correctIndex": 0,
-      "explanation": "Oracle 에서 가장 일반적인 TOP-N 기법은 인라인 뷰에서 정렬한 뒤 외부에서 `ROWNUM` 으로 행 개수를 제한하는 방식. ② `FETCH FIRST` 는 12c 이상 지원하는 ANSI 형식이지만 빈칸 위치(`( ? ) = 1`) 와 맞지 않다. ③④ `TOP` 은 SQL Server 문법이라 Oracle 에서 동작하지 않는다.",
+      "explanation": "Oracle 에서 가장 일반적인 TOP-N 기법은 인라인 뷰에서 정렬한 뒤 외부에서 `ROWNUM` 으로 행 개수를 제한하는 방식. ② `FETCH FIRST` 는 12c 이상 지원하는 ANSI 형식이지만 빈칸 위치(`( ? ) = 1`) 와 맞지 않는다. ③④ `TOP` 은 SQL Server 문법이라 Oracle 에서 동작하지 않는다.",
       "references": [
         {
           "type": "table",
@@ -965,7 +965,7 @@
         "TO_NUMBER(TO_CHAR(TO_DATE('202505','YYYYMM'),'MM'))"
       ],
       "correctIndex": 0,
-      "explanation": "①은 연도를 추출하는 식이며 월 추출과 무관하다.",
+      "explanation": "① 은 현재 날짜(SYSDATE)에서 연도를 추출하므로 '202505' 와도, 월과도 무관하다. ② 는 문자열을 날짜로 바꾼 뒤 월을 추출해 5, ③ 은 5번째 문자부터 2글자를 잘라 '05', ④ 는 날짜로 바꾼 뒤 'MM' 형식 문자로 바꿔 숫자 5 를 얻는다. 목적과 가장 거리가 먼 것은 ① 이다.",
       "references": [
         {
           "type": "sql",

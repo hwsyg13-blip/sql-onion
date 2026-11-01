@@ -43,7 +43,7 @@ export const ROUND_54: QuizQuestion[] = [
       "속성이 없는 엔터티가 있을 수 있다."
     ],
     "correctIndex": 3,
-    "explanation": "엔터티는 반드시 두 개 이상의 속성을 가져야 한다.",
+    "explanation": "엔터티는 반드시 속성을 가져야 하며 일반적으로 두 개 이상의 속성을 갖는다(③ 은 맞다). 고유 식별자로 인스턴스를 구분하고(①) 데이터 저장의 기본 단위라는 설명(②) 도 맞다. 속성이 없는 엔터티가 있을 수 있다는 ④ 가 적절하지 않다.",
     "_source": "authored"
   },
   {
@@ -121,7 +121,7 @@ export const ROUND_54: QuizQuestion[] = [
       {
         "type": "erd",
         "caption": "고객-주문 ERD (고객 측 1 필수, 주문 측 0..N — 까마귀발 다)",
-        "mermaid": "erDiagram\n    고객 ||--o{ 주문 : \"한다\"\n    고객 {\n        string 고객번호 PK\n        string 고객명\n    }\n    주문 {\n        string 주문번호 PK\n        string 고객번호 FK\n        date 주문일자\n    }"
+        "mermaid": "erDiagram\n    고객 ||..o{ 주문 : \"한다\"\n    고객 {\n        string 고객번호 PK\n        string 고객명\n    }\n    주문 {\n        string 주문번호 PK\n        string 고객번호 FK\n        date 주문일자\n    }"
       }
     ]
   },
@@ -1339,7 +1339,7 @@ export const ROUND_54: QuizQuestion[] = [
     "round": 54,
     "subject": "2과목",
     "number": 34,
-    "title": "아래 수강 테이블에서 강좌번호 100 과 101 을 동시에 수강하는 학번을 조회하는 SQL 로 적절한 것은?",
+    "title": "아래 수강 테이블에서 강의번호 100 과 101 을 동시에 수강하는 학번을 조회하는 SQL 로 적절한 것은?",
     "options": [
       "SELECT 학번 FROM 수강 WHERE 강의번호 = 100 AND 강의번호 = 101;",
       "SELECT 학번 FROM 수강 WHERE 강의번호=100 INTERSECT SELECT 학번 FROM 수강 WHERE 강의번호=101;",
@@ -1347,7 +1347,7 @@ export const ROUND_54: QuizQuestion[] = [
       "SELECT 학번 FROM 수강 WHERE 강의번호 = 100 OR 강의번호 = 101;"
     ],
     "correctIndex": 1,
-    "explanation": "AND 는 한 행이 동시에 두 값일 수 없어 공집합, IN/OR 은 둘 중 하나라도 만족하는 학번을 반환한다. INTERSECT 로 두 강좌의 학번 집합을 교집합 처리해야 동시에 수강한 학번을 얻는다.",
+    "explanation": "AND 는 한 행이 동시에 두 값일 수 없어 공집합, IN/OR 은 둘 중 하나라도 만족하는 학번을 반환한다. INTERSECT 로 두 강의의 학번 집합을 교집합 처리해야 동시에 수강한 학번을 얻는다.",
     "_source": "authored",
     "references": [
       {

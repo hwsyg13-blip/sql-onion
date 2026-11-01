@@ -19,7 +19,9 @@ export const config = {
 };
 
 // 정상 검색엔진 — SEO 보호 위해 통과
-const ALLOWED_BOT = /(?:googlebot|bingbot|naverbot|yeti|daum|yandex|baiduspider|adsbot-google|google-inspectiontool|facebookexternalhit|twitterbot|slackbot|linkedinbot|telegrambot|whatsapp|discordbot|kakaotalk-scrap|kakao-)/i;
+// mediapartners-google: AdSense 크롤러. 모바일 UA 끝에 "+http://www.google.com/bot.html" 이 붙어
+// BLOCK_BOT 의 "bot" 에 걸리므로 반드시 여기서 먼저 통과시킨다 (광고 심사·광고 매칭이 이 크롤러로 페이지를 읽음).
+const ALLOWED_BOT = /(?:googlebot|mediapartners-google|bingbot|naverbot|yeti|daum|yandex|baiduspider|adsbot-google|google-inspectiontool|facebookexternalhit|twitterbot|slackbot|linkedinbot|telegrambot|whatsapp|discordbot|kakaotalk-scrap|kakao-)/i;
 
 // 알려진 스크래퍼/HTTP 클라이언트 — 차단
 const BLOCK_BOT = /(?:bot|crawler|spider|scraper|scrapy|curl|wget|python(?:-requests|-urllib)?|libwww-perl|httpclient|java\/|go-http|node-fetch|axios|got\/|httpie|http_request|headlesschrome|phantomjs|puppeteer|playwright|selenium|nightmare|jsdom|cheerio|beautifulsoup)/i;

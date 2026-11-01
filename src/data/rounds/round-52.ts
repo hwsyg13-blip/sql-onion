@@ -43,7 +43,7 @@ export const ROUND_52: QuizQuestion[] = [
       {
         "type": "erd",
         "caption": "학생·학과 ERD — 학과 1, 학생 0..N (FK: 학생.학과코드 → 학과.학과코드, ON DELETE CASCADE)",
-        "mermaid": "erDiagram\n    학과 ||--o{ 학생 : \"소속\"\n    학과 {\n        string 학과코드 PK\n        string 학과명\n    }\n    학생 {\n        string 학번 PK\n        string 이름\n        string 학과코드 FK\n    }"
+        "mermaid": "erDiagram\n    학과 ||..o{ 학생 : \"소속\"\n    학과 {\n        string 학과코드 PK\n        string 학과명\n    }\n    학생 {\n        string 학번 PK\n        string 이름\n        string 학과코드 FK\n    }"
       },
       {
         "type": "table",
@@ -549,7 +549,7 @@ export const ROUND_52: QuizQuestion[] = [
       "LEVEL"
     ],
     "correctIndex": 0,
-    "explanation": "PRIOR 의 위치가 부모-자식 관계를 결정한다.",
+    "explanation": "CONNECT BY 절에서 PRIOR 가 붙은 쪽이 이전(부모) 행이 된다. PRIOR 사원번호 = 매니저번호 는 부모에서 자식으로 내려가는 순방향, PRIOR 매니저번호 = 사원번호 는 자식에서 부모로 올라가는 역방향이다. START WITH 는 시작 행, CONNECT BY 는 연결 조건을 쓰는 절, LEVEL 은 깊이를 나타낼 뿐 방향을 정하지 않는다. 정답은 ① 이다.",
     "_source": "authored"
   },
   {
@@ -591,7 +591,7 @@ export const ROUND_52: QuizQuestion[] = [
       "스칼라 서브쿼리는 단일 값을 반환한다."
     ],
     "correctIndex": 1,
-    "explanation": "메인 쿼리는 서브쿼리의 컬럼을 직접 참조할 수 없다.",
+    "explanation": "서브쿼리는 메인 쿼리의 컬럼을 참조할 수 있지만(연관 서브쿼리, ③), 메인 쿼리는 WHERE·SELECT 절 서브쿼리 안의 컬럼을 직접 쓸 수 없다. 서브쿼리 컬럼은 서브쿼리 안에서만 유효하기 때문이다(FROM 절 인라인 뷰는 테이블처럼 취급되어 예외). 따라서 ② 가 적절하지 않다.",
     "_source": "authored"
   },
   {
@@ -1204,7 +1204,7 @@ export const ROUND_52: QuizQuestion[] = [
       "DEFAULT 는 값이 지정되면 기존 데이터에도 소급 적용된다."
     ],
     "correctIndex": 3,
-    "explanation": "DEFAULT 변경은 과거 데이터에 적용되지 않는다.",
+    "explanation": "DEFAULT 는 이후 INSERT 할 때 값을 주지 않은 경우에만 적용되고, 이미 저장된 행에는 소급되지 않는다. 기본키는 테이블당 하나(①), UNIQUE 는 NULL 허용(②), CHECK 는 참·거짓을 판별하는 식(③) 은 모두 맞으므로 정답은 ④ 이다.",
     "_source": "authored"
   },
   {
@@ -1585,7 +1585,7 @@ export const ROUND_52: QuizQuestion[] = [
       {
         "type": "erd",
         "caption": "부서-사원 ERD — 사원의 부서번호 FK 에 ON DELETE CASCADE 설정",
-        "mermaid": "erDiagram\n    부서 ||--o{ 사원 : \"소속\"\n    부서 {\n        string 부서번호 PK\n    }\n    사원 {\n        string 사원번호 PK\n        string 부서번호 FK \"ON DELETE CASCADE\"\n    }"
+        "mermaid": "erDiagram\n    부서 ||..o{ 사원 : \"소속\"\n    부서 {\n        string 부서번호 PK\n    }\n    사원 {\n        string 사원번호 PK\n        string 부서번호 FK \"ON DELETE CASCADE\"\n    }"
       },
       {
         "type": "sql",

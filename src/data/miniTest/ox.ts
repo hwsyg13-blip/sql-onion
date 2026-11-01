@@ -108,8 +108,8 @@ export const OX_QUIZ: Record<string, OxQuestion[]> = {
     },
     {
       "q": "관계의 4가지 표기 요소는 관계명 / 차수 / 선택성 / 방향성이다.",
-      "answer": true,
-      "explanation": "**관계명 · 차수 · 선택성 · 방향성** 4가지가 정답."
+      "answer": false,
+      "explanation": "관계 표기 요소는 **관계명 · 관계차수 · 관계선택사양(선택성)** 3가지다. 방향성은 표기 요소가 아니다."
     },
     {
       "q": "관계차수의 3종류는 1:1, 1:N, M:N이다.",
@@ -913,9 +913,9 @@ export const OX_QUIZ: Record<string, OxQuestion[]> = {
       "explanation": "DELETE는 DML이므로 ROLLBACK으로 취소 가능하다."
     },
     {
-      "q": "`INSERT INTO ... VALUES`로 한 번에 여러 행을 입력할 수 있다.",
+      "q": "(Oracle 기준) `INSERT INTO ... VALUES`로 한 번에 여러 행을 입력할 수 있다.",
       "answer": false,
-      "explanation": "일반 INSERT는 1행만. 다중행은 INSERT ALL 또는 INSERT INTO ... SELECT를 사용한다."
+      "explanation": "Oracle의 일반 INSERT ... VALUES는 1행만. 다중행은 INSERT ALL 또는 INSERT INTO ... SELECT를 사용한다. (SQL Server·MySQL 등은 VALUES (...), (...) 형태의 다중행 입력을 지원한다.)"
     },
     {
       "q": "`UPDATE ... WHERE`에서 WHERE 절을 누락하면 에러가 발생한다.",

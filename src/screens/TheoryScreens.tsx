@@ -10,6 +10,7 @@ import { THEORY, THEORY_BODY } from '../data/theory';
 import { QUIZ_BANK } from '../data/quizBank';
 import { CONCEPT_QUIZ } from '../data/conceptQuiz';
 import { recordTheoryView } from '../lib/progress';
+import { loadMermaid, mermaidLoadFailedHtml } from '../lib/loadMermaid';
 import { AdSlot } from '../components/AdSlot';
 import { MiniTestSidebar } from '../components/MiniTestSidebar';
 import { OX_QUIZ } from '../data/miniTest/ox';
@@ -308,7 +309,7 @@ export const TheoryDetailScreen = ({ chapterId, onNavigate }) => {
     const nodes = bodyRef.current.querySelectorAll('.mermaid');
     if (!nodes.length) return;
     let cancelled = false;
-    import('mermaid').then(({ default: mermaid }) => {
+    loadMermaid().then(({ default: mermaid }) => {
       if (cancelled) return;
       try {
         mermaid.initialize({
@@ -350,7 +351,11 @@ export const TheoryDetailScreen = ({ chapterId, onNavigate }) => {
           });
         });
       } catch (e) { console.warn('[mermaid] render failed', e); }
-    }).catch((e) => console.warn('[mermaid] load failed', e));
+    }).catch((e) => {
+      console.warn('[mermaid] load failed', e);
+      // 다이어그램 원문 코드가 그대로 보이지 않게 안내로 바꾼다 (배포 직후 옛 청크 404 등)
+      if (!cancelled) nodes.forEach((n) => { (n as HTMLElement).innerHTML = mermaidLoadFailedHtml(); });
+    });
     return () => { cancelled = true; };
   }, [html]);
 

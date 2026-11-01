@@ -60,6 +60,8 @@ export const EndlessScreen = ({onNavigate}) => {
   const [checked, setChecked] = React.useState(false);
   const [open, setOpen] = React.useState(false);
   const [stats, setStats] = React.useState({correct:0, wrong:0});
+  // 연속 정답 수 — 오답이면 0 으로 초기화 (stats.correct 는 누적 정답 수)
+  const [streak, setStreak] = React.useState(0);
   const [limitHit, setLimitHit] = React.useState(false);
 
   // GA 이벤트: 랜덤(엔드리스) 퀴즈 시작
@@ -74,6 +76,7 @@ export const EndlessScreen = ({onNavigate}) => {
     const isCorrect = selected === q.correctIndex;
     setChecked(true); setOpen(true);
     setStats(s => isCorrect ? {...s, correct: s.correct+1} : {...s, wrong: s.wrong+1});
+    setStreak(n => isCorrect ? n + 1 : 0);
     // 홈 학습 현황(푼 문항·정답률) 에 반영. 같은 문항 재출제 시도 카운트 위해
     // 시간 포함 unique 키 사용.
     recordQuizAttempt(`endless-q${q.id}-${Date.now()}`, {
@@ -120,7 +123,7 @@ export const EndlessScreen = ({onNavigate}) => {
         <div style={{display:"flex",gap:16,fontSize:12,color:"var(--fg-3)"}}>
           <span>푼 문항 <strong style={{color:"var(--fg-1)",fontFamily:"var(--font-mono)"}}>{total}</strong></span>
           <span>정답률 <strong style={{color:"var(--point-600)",fontFamily:"var(--font-mono)"}}>{rate}%</strong></span>
-          <span>연속 <strong style={{color:"var(--wrong-fg)",fontFamily:"var(--font-mono)"}}><Ic.Flame size={12}/> {stats.correct > 0 && !checked ? stats.correct : 0}</strong></span>
+          <span>연속 <strong style={{color:"var(--wrong-fg)",fontFamily:"var(--font-mono)"}}><Ic.Flame size={12}/> {streak}</strong></span>
         </div>
       </div>
 
@@ -146,10 +149,10 @@ export const EndlessScreen = ({onNavigate}) => {
       </div>
 
       {/* Mascot guide when user gets streak */}
-      {checked && selected === q.correctIndex && stats.correct > 0 && stats.correct % 3 === 0 && !limitHit && (
+      {checked && selected === q.correctIndex && streak > 0 && streak % 3 === 0 && !limitHit && (
         <div style={{marginTop:20,display:"flex",justifyContent:"center"}}>
           <MascotGuide size={56}>
-            <strong style={{color:"var(--point-600)"}}>좋아요, {stats.correct}문제 연속!</strong><br/>
+            <strong style={{color:"var(--point-600)"}}>좋아요, {streak}문제 연속!</strong><br/>
             이 기세로 다음 문제도 가볍게 풀어봐요.
           </MascotGuide>
         </div>
