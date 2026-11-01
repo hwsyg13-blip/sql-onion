@@ -1,5 +1,5 @@
 // Auto-generated from scripts/authored/ai-mock.json
-// AI 생성 모의고사 풀 (기출 변형) · 1292문항
+// AI 생성 모의고사 풀 (기출 변형) · 1304문항
 // ⚠ 직접 편집 금지. ai-mock.json 수정 후 'node scripts/build-quiz-bank.mjs' 재실행.
 import type { QuizQuestion } from '../quizBank';
 
@@ -47600,6 +47600,838 @@ export const AI_MOCK: QuizQuestion[] = [
           [
             "NULL",
             "A"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": 12252,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 1453,
+    "title": "아래 SQL의 결과로 가장 알맞은 것은?",
+    "options": [
+      "(1, NULL, 6), (2, NULL, 3), (NULL, 0001, 4), (NULL, 0002, 5)",
+      "(1, NULL, 6), (2, NULL, 3), (NULL, NULL, 9)",
+      "(NULL, 0001, 4), (NULL, 0002, 5), (NULL, NULL, 9)",
+      "(1, NULL, 6), (2, NULL, 3), (NULL, 0001, 4), (NULL, 0002, 5), (NULL, NULL, 9)"
+    ],
+    "correctIndex": 3,
+    "explanation": "GROUPING SETS(PRODUCT_NO, GOGAK_NO, ()) 는 상품별, 고객별, 전체 합계를 각각 구해 합친다. 상품 1 은 3 + 2 + 1 = 6, 상품 2 는 1 + 2 = 3, 고객 0001 은 3 + 1 = 4, 고객 0002 는 2 + 1 + 2 = 5, 전체는 9 다(④). 집계 기준이 아닌 컬럼은 NULL 로 표시된다. ① 은 전체 합계 () 를, ② 는 고객별 집계를, ③ 은 상품별 집계를 빠뜨렸다. ※ 원본의 보기(그림)가 누락되어, 같은 개념을 묻는 모의고사 형태로 보기를 재구성했다.",
+    "chapter": "그룹 함수",
+    "_source": "sqld-1140",
+    "_origId": "sqld-0656",
+    "_category": "그룹 함수",
+    "_correctRate": 10,
+    "references": [
+      {
+        "type": "text",
+        "content": "SELECT PRODUCT_NO, GOGAK_NO, SUM(QTY) AS TOTAL_QTY  \nFROM JUMUN \nGROUP BY GROUPING SETS(PRODUCT_NO, GOGAK_NO, ());"
+      },
+      {
+        "type": "table",
+        "caption": "<JUMUN>",
+        "headers": [
+          "JUMUN_NO",
+          "PRODUCT_NO",
+          "GOGAK_NO",
+          "QTY",
+          "JUMUN_DATE"
+        ],
+        "rows": [
+          [
+            "1000",
+            "1",
+            "0001",
+            "3",
+            "2024/05/24 11:00:56"
+          ],
+          [
+            "1001",
+            "2",
+            "0001",
+            "1",
+            "2024/05/25 12:01:56"
+          ],
+          [
+            "1002",
+            "1",
+            "0002",
+            "2",
+            "2024/05/26 09:13:12"
+          ],
+          [
+            "1003",
+            "1",
+            "0002",
+            "1",
+            "2024/05/27 10:24:30"
+          ],
+          [
+            "1004",
+            "2",
+            "0002",
+            "2",
+            "2024/05/28 13:01:10"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": 12253,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 1454,
+    "title": "다음 SQL 의 RANK1 / RANK2 / RANK3 결과(NO 1~5 순서)로 가장 적절한 것은?",
+    "options": [
+      "1, 2, 2, 4, 5 / 1, 2, 3, 4, 5 / 1, 2, 2, 3, 4",
+      "1, 2, 2, 3, 4 / 1, 2, 2, 4, 5 / 1, 2, 3, 4, 5",
+      "1, 2, 2, 4, 5 / 1, 2, 2, 3, 4 / 1, 2, 3, 4, 5",
+      "1, 2, 3, 4, 5 / 1, 2, 2, 3, 4 / 1, 2, 2, 4, 5"
+    ],
+    "correctIndex": 2,
+    "explanation": "JUMSU 내림차순으로 100, 90, 90, 80, 70 이다. RANK 는 동점에 같은 순위를 주고 그 수만큼 건너뛰어 1, 2, 2, 4, 5, DENSE_RANK 는 건너뛰지 않아 1, 2, 2, 3, 4, ROW_NUMBER 는 동점에도 서로 다른 번호를 매겨 1, 2, 3, 4, 5 다(③, 동점인 2·3 의 ROW_NUMBER 순서는 바뀔 수 있다). 나머지 보기는 세 함수의 결과를 서로 바꿔 놓았다. ※ 원본의 보기(그림)가 누락되어, 같은 개념을 묻는 모의고사 형태로 보기를 재구성했다.",
+    "chapter": "윈도우 함수",
+    "_source": "sqld-1140",
+    "_origId": "sqld-0657",
+    "_category": "윈도우 함수",
+    "_correctRate": 10,
+    "references": [
+      {
+        "type": "text",
+        "content": "SELECT NO, \n        RANK() OVER(ORDER BY JUMSU DESC) AS RANK1, \n        DENSE_RANK() OVER(ORDER BY JUMSU DESC) AS RANK2, \n        ROW_NUMBER() OVER(ORDER BY JUMSU DESC) AS RANK3 \n  FROM STUDENT;"
+      },
+      {
+        "type": "table",
+        "caption": "<STUDENT>",
+        "headers": [
+          "NO",
+          "NAME",
+          "JUMSU"
+        ],
+        "rows": [
+          [
+            "1",
+            "홍길동",
+            "100"
+          ],
+          [
+            "2",
+            "박길동",
+            "90"
+          ],
+          [
+            "3",
+            "최길동",
+            "90"
+          ],
+          [
+            "4",
+            "이길동",
+            "80"
+          ],
+          [
+            "5",
+            "구길동",
+            "70"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": 12254,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 1455,
+    "title": "아래 SQL 실행 결과(사원번호 이름 LEVEL)로 가장 적절한 것은?",
+    "options": [
+      "1001 박길동 1, 1002 최길동 2, 1004 구길동 3, 1003 이길동 2, 1005 안길동 3, 1006 송길동 1, 1007 강길동 2, 1008 공길동 2",
+      "1001 박길동 1, 1000 홍길동 2, 1006 송길동 1, 1000 홍길동 2",
+      "1001 박길동 1, 1006 송길동 1",
+      "1000 홍길동 1, 1001 박길동 2, 1006 송길동 2"
+    ],
+    "correctIndex": 1,
+    "explanation": "START WITH 사원번호 IN (1006, 1001) 로 두 사원이 각각 LEVEL 1 이 된다. CONNECT BY PRIOR 상위관리자코드 = 사원번호 는 '앞 행의 상위관리자코드' 를 사원번호로 가진 행, 즉 상사 쪽으로 거슬러 올라가는 역방향 전개다. 박길동(1001)과 송길동(1006)의 상위관리자는 모두 홍길동(1000)이라 각각 아래에 홍길동이 LEVEL 2 로 붙고, 홍길동은 상위관리자가 NULL 이라 전개가 끝난다(②). ① 은 부하 쪽으로 내려가는 순방향 전개 결과, ④ 는 홍길동을 루트로 본 결과다. ※ 원본의 보기(그림)가 누락되어, 같은 개념을 묻는 모의고사 형태로 보기를 재구성했다.",
+    "chapter": "계층형 질의",
+    "_source": "sqld-1140",
+    "_origId": "sqld-0660",
+    "_category": "계층형 질의",
+    "_correctRate": 10,
+    "references": [
+      {
+        "type": "text",
+        "content": "SELECT 사원번호, 이름, LEVEL \n  FROM 사원 \n  START WITH 사원번호 IN (1006, 1001) \nCONNECT BY PRIOR 상위관리자코드 = 사원번호;"
+      },
+      {
+        "type": "table",
+        "caption": "<사원>",
+        "headers": [
+          "사원번호",
+          "이름",
+          "상위관리자코드"
+        ],
+        "rows": [
+          [
+            "1000",
+            "홍길동",
+            "NULL"
+          ],
+          [
+            "1001",
+            "박길동",
+            "1000"
+          ],
+          [
+            "1002",
+            "최길동",
+            "1001"
+          ],
+          [
+            "1003",
+            "이길동",
+            "1001"
+          ],
+          [
+            "1004",
+            "구길동",
+            "1002"
+          ],
+          [
+            "1005",
+            "안길동",
+            "1003"
+          ],
+          [
+            "1006",
+            "송길동",
+            "1000"
+          ],
+          [
+            "1007",
+            "강길동",
+            "1006"
+          ],
+          [
+            "1008",
+            "공길동",
+            "1006"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": 12255,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 1456,
+    "title": "다음 SQL 실행 결과로 가장 알맞은 것은?",
+    "options": [
+      "'', ''",
+      "'AXXX.AYYY.AXAX.', 'AAXYXY.XYYY.AXYAXY.'",
+      "'AX', 'AXYYY.AXY'",
+      "'AXAX.', 'AXYYY.AXYAXY.'"
+    ],
+    "correctIndex": 2,
+    "explanation": "패턴 A(X|Y)+\\. 은 'A 다음에 X 또는 Y 가 한 번 이상 오고 마침표로 끝나는 부분' 이고, 바꿀 문자열을 생략했으므로 찾은 부분을 모두 지운다. 1행은 AXXX., AYYY. 가 지워지고 AXAX. 에서는 A 뒤에 바로 A 가 와서 앞 AX 는 매칭되지 않고 뒤의 AX. 만 지워져 'AX' 가 남는다. 2행은 맨 앞 A 다음이 A 라 건너뛰고 AXYXY. 를 지운 뒤, A 로 시작하지 않는 XYYY. 는 남기며, AXYAXY. 에서는 뒤의 AXY. 만 지워 'AXYYY.AXY' 다(③). ④ 는 각 행에서 첫 매칭만 지운 결과다. ※ 원본의 보기(그림)가 누락되어, 같은 개념을 묻는 모의고사 형태로 보기를 재구성했다.",
+    "chapter": "함수",
+    "_source": "sqld-1140",
+    "_origId": "sqld-0663",
+    "_category": "단일행 함수",
+    "_correctRate": 10,
+    "references": [
+      {
+        "type": "text",
+        "content": "SELECT REGEXP_REPLACE(COL1, 'A(X|Y)+\\.') FROM TAB1;"
+      },
+      {
+        "type": "table",
+        "caption": "<TAB1>",
+        "headers": [
+          "COL1"
+        ],
+        "rows": [
+          [
+            "AXXX.AYYY.AXAX."
+          ],
+          [
+            "AAXYXY.XYYY.AXYAXY."
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": 12256,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 1457,
+    "title": "다음 문장이 차례대로 수행된 이후 COL1 = 1~5 행의 COL4 값으로 가장 적절한 것은?",
+    "options": [
+      "NULL, NULL, NULL, 'AAA', 'AAA'",
+      "NULL, NULL, NULL, NULL, 'AAA'",
+      "'AAA', 'AAA', 'AAA', NULL, 'AAA'",
+      "NULL, NULL, NULL, NULL, NULL"
+    ],
+    "correctIndex": 1,
+    "explanation": "COL4 를 추가하면 기존 1~3 행에는 NULL 이 들어간다. 그 뒤 DEFAULT 'AAA' 를 지정해도 이미 있는 행에는 소급 적용되지 않는다(③ 틀림). 4행은 VALUES(4, 'D', 40, NULL) 로 NULL 을 직접 넣었으므로 DEFAULT 가 아니라 NULL 이 저장되고(① 틀림), 5행은 COL4 를 생략했으므로 DEFAULT 'AAA' 가 들어간다(②, CHAR(5) 라 실제로는 'AAA  ' 처럼 공백이 채워진다). ※ 원본의 보기(그림)가 누락되어, 같은 개념을 묻는 모의고사 형태로 보기를 재구성했다.",
+    "chapter": "DDL",
+    "_source": "sqld-1140",
+    "_origId": "sqld-0667",
+    "_category": "DDL",
+    "_correctRate": 10,
+    "references": [
+      {
+        "type": "text",
+        "content": "ALTER TABLE TAB1 ADD COL4 CHAR(5); \nALTER TABLE TAB1 MODIFY COL4 DEFAULT 'AAA'; \nINSERT INTO TAB1 VALUES(4, 'D', 40, NULL); \nINSERT INTO TAB1(COL1, COL2, COL3) VALUES(5,'E',50);"
+      },
+      {
+        "type": "table",
+        "caption": "<TAB1> 스키마",
+        "headers": [
+          "컬럼명",
+          "타입"
+        ],
+        "rows": [
+          [
+            "COL1",
+            "NUMBER"
+          ],
+          [
+            "COL2",
+            "VARCHAR2(10)"
+          ],
+          [
+            "COL3",
+            "NUMBER"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "<TAB1> 데이터",
+        "headers": [
+          "COL1",
+          "COL2",
+          "COL3"
+        ],
+        "rows": [
+          [
+            "1",
+            "A",
+            "10"
+          ],
+          [
+            "2",
+            "B",
+            "20"
+          ],
+          [
+            "3",
+            "C",
+            "30"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": 12257,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 1458,
+    "title": "다음 SQL 수행 결과로 가장 적절한 것은?",
+    "options": [
+      "2024-02-01 00:00:00, 2024-09-12 09:00:00",
+      "2024-03-01 00:00:00, 2024-09-12 00:00:00",
+      "2024-02-01 00:00:00, 2024-09-01 00:00:00",
+      "2024-03-01 00:00:00, 2024-09-13 00:00:00"
+    ],
+    "correctIndex": 1,
+    "explanation": "ROUND(날짜, 'MONTH') 는 16일 0시부터 다음 달 1일로 올리고 그 전은 그 달 1일로 내린다. 2월 20일 14시는 16일 이후라 2024-03-01 이다. TRUNC(날짜) 는 형식을 생략하면 일 단위로 버려 시각을 00:00:00 으로 만들므로 2024-09-12 00:00:00 이다(②). ① 은 ROUND 를 버림으로, ③ 은 TRUNC 를 월 단위로, ④ 는 TRUNC 를 반올림으로 처리한 결과다. ※ 원본의 보기(그림)가 누락되어, 같은 개념을 묻는 모의고사 형태로 보기를 재구성했다.",
+    "chapter": "함수",
+    "_source": "sqld-1140",
+    "_origId": "sqld-0685",
+    "_category": "단일행 함수",
+    "_correctRate": 10,
+    "references": [
+      {
+        "type": "text",
+        "content": "SELECT ROUND(TO_DATE('2024-02-20 14:00:00', 'YYYY-MM-DD HH24:MI:SS'), 'MONTH') AS D1, \nTRUNC(TO_DATE('2024-09-12 09:00:00', 'YYYY-MM-DD HH24:MI:SS')) AS D2 FROM DUAL;"
+      }
+    ]
+  },
+  {
+    "id": 12258,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 1459,
+    "title": "다음 함수의 결과로 가장 적절한 것은?",
+    "options": [
+      "'ORCLE', 'L-S', 8",
+      "'ORACLE', 'L-S', 8",
+      "'ORACLE', 'QL-', 8",
+      "'ORACLE', 'L-S', 10"
+    ],
+    "correctIndex": 1,
+    "explanation": "LTRIM('ORACLE', 'A') 는 왼쪽 끝에서부터 'A' 를 지우는데 첫 글자가 O 라 지울 것이 없어 'ORACLE' 그대로다(가운데 A 는 지우지 않는다, ① 틀림). SUBSTR('SQL-SERVER', 3, 3) 은 3번째 글자부터 3글자인 'L-S' 다(③ 은 2번째부터). REPLACE('SQL-SERVER', 'E') 는 E 를 모두 지워 'SQL-SRVR' 가 되므로 LENGTH 는 8 이다(②, ④ 의 10 은 지우기 전 길이). ※ 원본의 보기(그림)가 누락되어, 같은 개념을 묻는 모의고사 형태로 보기를 재구성했다.",
+    "chapter": "함수",
+    "_source": "sqld-1140",
+    "_origId": "sqld-0687",
+    "_category": "단일행 함수",
+    "_correctRate": 10,
+    "references": [
+      {
+        "type": "text",
+        "content": "SELECT LTRIM('ORACLE', 'A') AS C1, \n        SUBSTR('SQL-SERVER', 3, 3) AS C2, \n        LENGTH(REPLACE('SQL-SERVER', 'E')) AS C3 \n FROM DUAL;"
+      }
+    ]
+  },
+  {
+    "id": 12259,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 1460,
+    "title": "다음 두 SQL 의 수행 결과로 가장 적절한 것은? (첫 번째 결과 / 두 번째 결과)",
+    "options": [
+      "1 / 0",
+      "0 / 결과 행 없음(공집합)",
+      "결과 행 없음 / 결과 행 없음",
+      "0 / 1"
+    ],
+    "correctIndex": 1,
+    "explanation": "첫 번째 SQL 은 COL3 < 100 인 행이 (NULL, 100, 0) 하나뿐이다(COL3 가 NULL 인 행은 비교 결과가 참이 아니라 빠진다). COL1 이 NULL 인 그룹 하나가 생기고 COUNT(COL1) 은 NULL 을 세지 않아 0 이다. 두 번째 SQL 은 A 그룹 SUM(COL2) = 200(NULL 제외), B 그룹 = 400 으로 HAVING SUM(COL2) > 500 을 만족하는 그룹이 없어 행이 하나도 나오지 않는다(②). GROUP BY 가 있으면 그룹이 없을 때 0 이 아니라 공집합이 된다. ※ 원본의 보기(그림)가 누락되어, 같은 개념을 묻는 모의고사 형태로 보기를 재구성했다.",
+    "chapter": "그룹 함수",
+    "_source": "sqld-1140",
+    "_origId": "sqld-0690",
+    "_category": "집계 함수",
+    "_correctRate": 10,
+    "references": [
+      {
+        "type": "text",
+        "content": "SELECT COUNT(COL1) RESULT FROM TAB1 WHERE COL3 < 100 GROUP BY COL1;   \nSELECT COUNT(COL1) RESULT FROM TAB1 WHERE COL1 IS NOT NULL GROUP BY COL1 \nHAVING SUM(COL2) > 500;"
+      },
+      {
+        "type": "table",
+        "caption": "<TAB1>",
+        "headers": [
+          "COL1",
+          "COL2",
+          "COL3"
+        ],
+        "rows": [
+          [
+            "A",
+            "NULL",
+            "100"
+          ],
+          [
+            "A",
+            "200",
+            "300"
+          ],
+          [
+            "B",
+            "100",
+            "NULL"
+          ],
+          [
+            "B",
+            "300",
+            "200"
+          ],
+          [
+            "NULL",
+            "100",
+            "0"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": 12260,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 1461,
+    "title": "다음 수행 결과로 가장 적절한 것은?",
+    "options": [
+      "1003, 1002, 1004, 1001, 1000",
+      "1000, 1001, 1002, 1003, 1004",
+      "1003, 1001, 1000, 1002, 1004",
+      "1004, 1002, 1000, 1001, 1003"
+    ],
+    "correctIndex": 2,
+    "explanation": "SUBSTR(JUMIN, 3, 2) 는 생월 '12', '11', '06', '01', '08' 이고, TO_NUMBER 로 12, 11, 6, 1, 8 이 된 뒤 TO_CHAR 로 다시 문자 '12', '11', '6', '1', '8' 이 된다. 정렬 키가 문자라 왼쪽 글자부터 비교해 '1' < '11' < '12' < '6' < '8' 순이므로 1003(01), 1001(11), 1000(12), 1002(06), 1004(08) 이다(③). ① 은 숫자로 정렬한 결과, ④ 는 문자 내림차순 결과다. ※ 원본의 보기(그림)가 누락되어, 같은 개념을 묻는 모의고사 형태로 보기를 재구성했다.",
+    "chapter": "DML",
+    "_source": "sqld-1140",
+    "_origId": "sqld-0694",
+    "_category": "DML",
+    "_correctRate": 10,
+    "references": [
+      {
+        "type": "text",
+        "content": "SELECT EMPNO \n  FROM EMP \n ORDER BY TO_CHAR(TO_NUMBER(SUBSTR(JUMIN, 3, 2)));"
+      },
+      {
+        "type": "table",
+        "caption": "<EMP> 스키마",
+        "headers": [
+          "컬럼명",
+          "타입"
+        ],
+        "rows": [
+          [
+            "EMPNO",
+            "NUMBER"
+          ],
+          [
+            "ENAME",
+            "VARCHAR2(10)"
+          ],
+          [
+            "SAL",
+            "NUMBER"
+          ],
+          [
+            "JUMIN",
+            "CHAR(13)"
+          ],
+          [
+            "DEPTNO",
+            "NUMBER"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "<EMP> 데이터",
+        "headers": [
+          "EMPNO",
+          "ENAME",
+          "SAL",
+          "JUMIN",
+          "DEPTNO"
+        ],
+        "rows": [
+          [
+            "1000",
+            "SMITH",
+            "2500",
+            "8012011234567",
+            "10"
+          ],
+          [
+            "1001",
+            "ALLEN",
+            "2000",
+            "9011072212345",
+            "10"
+          ],
+          [
+            "1002",
+            "FORD",
+            "3400",
+            "9506232221234",
+            "20"
+          ],
+          [
+            "1003",
+            "SCOTT",
+            "3800",
+            "9801181112345",
+            "20"
+          ],
+          [
+            "1004",
+            "KING",
+            "4000",
+            "9908091234432",
+            "30"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": 12261,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 1462,
+    "title": "아래 SQL 수행 결과의 ENAME 순서로 가장 적절한 것은? (단, DBMS는 오라클)",
+    "options": [
+      "FORD, SMITH, SCOTT, JAMES, KING, ADAMS",
+      "FORD, SMITH, SCOTT, ADAMS, JAMES, KING",
+      "SCOTT, SMITH, FORD, KING, JAMES, ADAMS",
+      "ADAMS, JAMES, KING, FORD, SMITH, SCOTT"
+    ],
+    "correctIndex": 1,
+    "explanation": "DEPTNO 오름차순으로 10 부서가 먼저, 같은 부서 안에서는 SAL 내림차순이다. 10 부서는 FORD(3200), SMITH(2000), SCOTT(1800). Oracle 은 NULL 을 가장 큰 값으로 보므로 DESC 정렬에서 NULL 이 맨 앞에 와서 20 부서는 ADAMS(NULL), JAMES(5000), KING(4000) 순이다(②). ① 은 NULL 을 마지막에 둔 SQL Server 방식, ③ 은 SAL 오름차순, ④ 는 DEPTNO 를 내림차순으로 정렬한 결과다. ※ 원본의 보기(그림)가 누락되어, 같은 개념을 묻는 모의고사 형태로 보기를 재구성했다.",
+    "chapter": "DML",
+    "_source": "sqld-1140",
+    "_origId": "sqld-0695",
+    "_category": "DML",
+    "_correctRate": 10,
+    "references": [
+      {
+        "type": "text",
+        "content": "SELECT ENAME, DEPTNO, SAL \n  FROM EMP \n ORDER BY DEPTNO, SAL DESC;"
+      },
+      {
+        "type": "table",
+        "caption": "<EMP>",
+        "headers": [
+          "ENAME",
+          "DEPTNO",
+          "SAL"
+        ],
+        "rows": [
+          [
+            "SMITH",
+            "10",
+            "2000"
+          ],
+          [
+            "SCOTT",
+            "10",
+            "1800"
+          ],
+          [
+            "FORD",
+            "10",
+            "3200"
+          ],
+          [
+            "KING",
+            "20",
+            "4000"
+          ],
+          [
+            "JAMES",
+            "20",
+            "5000"
+          ],
+          [
+            "ADAMS",
+            "20",
+            "NULL"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": 12262,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 1463,
+    "title": "아래 SQL 실행 결과(사원번호 이름 LEVEL)로 가장 적절한 것은?",
+    "options": [
+      "1000 홍길동 1, 1001 박길동 2, 1002 최길동 3, 1006 송길동 2, 1007 강길동 3",
+      "1001 박길동 1, 1002 최길동 2, 1006 송길동 1, 1007 강길동 2",
+      "결과 행 없음(공집합)",
+      "1001 박길동 2, 1002 최길동 3, 1006 송길동 2, 1007 강길동 3"
+    ],
+    "correctIndex": 3,
+    "explanation": "계층형 질의에서 WHERE 절은 계층 전개(START WITH·CONNECT BY)가 모두 끝난 뒤 결과에서 출력할 행을 거르는 조건이다. 홍길동을 루트로 전체 트리가 먼저 만들어지고, 그중 지역이 경기인 박길동(2), 최길동(3), 송길동(2), 강길동(3)만 출력되며 LEVEL 값은 전개할 때 정해진 그대로다(④). ① 은 서울인 홍길동까지 출력했고, ② 는 LEVEL 을 다시 매겼으며, ③ 은 WHERE 조건이 루트부터 잘라 전개가 안 된다고 본 결과다. ※ 원본의 보기(그림)가 누락되어, 같은 개념을 묻는 모의고사 형태로 보기를 재구성했다.",
+    "chapter": "계층형 질의",
+    "_source": "sqld-1140",
+    "_origId": "sqld-0709",
+    "_category": "계층형 질의",
+    "_correctRate": 10,
+    "references": [
+      {
+        "type": "text",
+        "content": "SELECT 사원번호, 이름, LEVEL \nFROM 사원 \nWHERE 지역 = '경기' \nSTART WITH 상위관리자코드 IS NULL \nCONNECT BY 상위관리자코드 = PRIOR 사원번호;"
+      },
+      {
+        "type": "table",
+        "caption": "<사원>",
+        "headers": [
+          "사원번호",
+          "이름",
+          "상위관리자코드",
+          "지역"
+        ],
+        "rows": [
+          [
+            "1000",
+            "홍길동",
+            "NULL",
+            "서울"
+          ],
+          [
+            "1001",
+            "박길동",
+            "1000",
+            "경기"
+          ],
+          [
+            "1002",
+            "최길동",
+            "1001",
+            "경기"
+          ],
+          [
+            "1003",
+            "이길동",
+            "1001",
+            "인천"
+          ],
+          [
+            "1004",
+            "구길동",
+            "1002",
+            "서울"
+          ],
+          [
+            "1005",
+            "안길동",
+            "1003",
+            "서울"
+          ],
+          [
+            "1006",
+            "송길동",
+            "1000",
+            "경기"
+          ],
+          [
+            "1007",
+            "강길동",
+            "1006",
+            "경기"
+          ],
+          [
+            "1008",
+            "공길동",
+            "1006",
+            "인천"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": 12263,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 1464,
+    "title": "다음 수행 결과로 가장 적절한 것은?",
+    "options": [
+      "공과대학·인문대학을 루트로 학부(LEVEL 2)와 학과(LEVEL 3)까지 12행이 모두 출력되고 ROOT 는 각 대학명이다.",
+      "결과 행 없음(공집합)",
+      "(10, 공과대학, 1, 공과대학), (20, 인문대학, 1, 인문대학)",
+      "(10, 공과대학, 1, NULL), (20, 인문대학, 1, NULL)"
+    ],
+    "correctIndex": 2,
+    "explanation": "START WITH PART IS NULL 로 공과대학(10)과 인문대학(20)이 루트(LEVEL 1)가 된다. CONNECT BY PRIOR PART = DEPTNO 는 '앞 행의 PART' 를 DEPTNO 로 가진 행, 즉 상위 조직 쪽으로 올라가는데, 루트의 PART 가 NULL 이라 이어지는 행이 없다. 따라서 루트 두 행만 나오고 CONNECT_BY_ROOT(DNAME) 은 자기 자신이다(③). 학부·학과까지 내려가려면 CONNECT BY PRIOR DEPTNO = PART 로 써야 한다(①). 루트 행은 START WITH 로 항상 출력되므로 공집합이 아니다(②). ※ 원본의 보기(그림)가 누락되어, 같은 개념을 묻는 모의고사 형태로 보기를 재구성했다.",
+    "chapter": "계층형 질의",
+    "_source": "sqld-1140",
+    "_origId": "sqld-0710",
+    "_category": "계층형 질의",
+    "_correctRate": 10,
+    "references": [
+      {
+        "type": "text",
+        "content": "SELECT DEPTNO, DNAME, LEVEL, CONNECT_BY_ROOT(DNAME) AS ROOT \n  FROM DEPARTMENT \n START WITH PART IS NULL \nCONNECT BY PRIOR PART = DEPTNO;"
+      },
+      {
+        "type": "table",
+        "caption": "<DEPARTMENT>",
+        "headers": [
+          "DEPTNO",
+          "DNAME",
+          "PART",
+          "BUILD"
+        ],
+        "rows": [
+          [
+            "101",
+            "컴퓨터공학과",
+            "100",
+            "정보관"
+          ],
+          [
+            "102",
+            "멀티미디어공학과",
+            "100",
+            "멀티미디어관"
+          ],
+          [
+            "103",
+            "소프트웨어공학과",
+            "100",
+            "소프트웨어관"
+          ],
+          [
+            "201",
+            "전자공학과",
+            "200",
+            "전자제어관"
+          ],
+          [
+            "202",
+            "기계공학과",
+            "200",
+            "기계실험관"
+          ],
+          [
+            "203",
+            "화학공학과",
+            "200",
+            "화학실습관"
+          ],
+          [
+            "301",
+            "문헌정보학과",
+            "300",
+            "인문관"
+          ],
+          [
+            "100",
+            "컴퓨터정보학부",
+            "10",
+            ""
+          ],
+          [
+            "200",
+            "메카트로닉스학부",
+            "10",
+            ""
+          ],
+          [
+            "300",
+            "인문사회학부",
+            "20",
+            ""
+          ],
+          [
+            "10",
+            "공과대학",
+            "",
+            ""
+          ],
+          [
+            "20",
+            "인문대학",
+            "",
+            ""
           ]
         ]
       }
