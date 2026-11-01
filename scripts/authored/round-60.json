@@ -474,7 +474,7 @@
         "3 3 3 2 2 2 1 1"
       ],
       "correctIndex": 0,
-      "explanation": "8건을 3그룹으로 나누면 앞쪽 그룹부터 3, 3, 2건으로 배정된다.",
+      "explanation": "NTILE(3) 은 정렬된 8행을 3개 그룹으로 나누고 나머지 2행을 앞 그룹부터 한 행씩 더 준다. 8 = 3 + 3 + 2 이므로 1 1 1 2 2 2 3 3 이다(①). ② 는 나머지를 뒤 그룹에, ③ 은 돌아가며 배정했고, ④ 는 순서가 반대다.",
       "references": [
         {
           "type": "table",
@@ -590,7 +590,7 @@
         "2026-02-25"
       ],
       "correctIndex": 1,
-      "explanation": "정규표현식으로 연/월/일을 캡처하여 일/월/연 순으로 재배열한다.",
+      "explanation": "패턴의 세 괄호가 각각 연(2026), 월(02), 일(25)을 캡처하고, 바꿀 문자열 '\\3/\\2/\\1' 은 셋째·둘째·첫째 그룹 순서로 이어 붙인다. 따라서 '25/02/2026' 이다(②). ① 은 그대로, ③ 은 월/일/연, ④ 는 구분자를 바꾼 것으로 패턴과 맞지 않다.",
       "references": [
         {
           "type": "sql",
@@ -689,7 +689,7 @@
         "COUNT(*)"
       ],
       "correctIndex": 3,
-      "explanation": "공집합에 대한 집계 함수 중 COUNT(*)만 0을 반환하고, SUM·AVG·MIN·MAX는 모두 NULL을 반환한다.",
+      "explanation": "선택된 행이 없는 공집합에 집계 함수를 쓰면 SUM·AVG·MIN·MAX 는 계산할 값이 없어 NULL 을 반환하고(①②③), COUNT(*) 는 행 수 0 을 반환한다(④). 그래서 NULL 이 아닌 값을 반환하는 것은 COUNT(*) 다.",
       "references": [
         {
           "type": "sql",
@@ -964,7 +964,7 @@
         "커밋된 결과는 시스템 장애에도 보존된다."
       ],
       "correctIndex": 0,
-      "explanation": "고립성은 실행 중인 트랜잭션의 중간 결과가 다른 트랜잭션의 영향을 받지 않음을 보장한다."
+      "explanation": "고립성은 실행 중인 트랜잭션이 다른 트랜잭션의 영향을 받지 않고, 중간 결과를 다른 트랜잭션이 볼 수 없는 성질이다(①). ② 는 일관성, ③ 은 원자성, ④ 는 지속성(영속성)에 대한 설명이다."
     },
     {
       "subject": "2과목",
@@ -1164,7 +1164,7 @@
         "TIMESTAMP 컬럼을 추가하는 경우"
       ],
       "correctIndex": 3,
-      "explanation": "컬럼 추가는 기존 데이터에 영향을 주지 않으므로 TIMESTAMP 컬럼 추가는 오류 없이 수행된다."
+      "explanation": "이미 NULL 이 있는 컬럼에 NOT NULL 을 추가하면(①), 기존 값보다 짧게 NUMBER 자릿수를 줄이면(②), 중복 값이 있는 컬럼에 PRIMARY KEY 를 추가하면(③) 기존 데이터가 제약을 어겨 오류가 난다. 새 TIMESTAMP 컬럼 추가(④)는 기존 행에 NULL 이 채워질 뿐이라 오류가 없다."
     },
     {
       "subject": "2과목",
@@ -1313,7 +1313,7 @@
         "NULL"
       ],
       "correctIndex": 0,
-      "explanation": "조인 키(컬럼1)가 일치하는 4건의 행이 매칭되고 컬럼2 값의 합은 10 + 20 + 30 + 40 = 100이 된다.",
+      "explanation": "WHERE A.컬럼1 = B.컬럼1 로 등가 조인하면 테이블1 의 1~4 가 테이블2 의 1~4 와 한 번씩 매칭되고, 테이블2 의 5 는 짝이 없어 빠진다. 매칭된 행의 컬럼2 합은 10 + 20 + 30 + 40 = 100 이다(①).",
       "references": [
         {
           "type": "table",
@@ -1480,7 +1480,7 @@
         "ORDER BY 절의 제품코드 별칭 사용"
       ],
       "correctIndex": 2,
-      "explanation": "SELECT 절에서 부여한 별칭은 WHERE 절에서 참조할 수 없다. ORDER BY 절에서는 참조가 가능하다.",
+      "explanation": "SQL 처리 순서는 FROM → WHERE → … → SELECT → ORDER BY 다. WHERE 절은 SELECT 보다 먼저 처리되어 SELECT 절에서 붙인 별칭 '제품코드' 를 알 수 없으므로 오류가 난다(③). ORDER BY 는 SELECT 이후에 처리되어 별칭을 쓸 수 있다(④). SELECT 절과 FROM 절 자체에는 문제가 없다.",
       "references": [
         {
           "type": "sql",
@@ -1512,7 +1512,7 @@
         "SELECT NULL FROM DUAL;"
       ],
       "correctIndex": 1,
-      "explanation": "①, ③, ④는 결과에 NULL이 포함되지만 ②만 문자 상수 'X'를 반환한다."
+      "explanation": "NULL 이 포함된 산술 연산은 결과가 NULL 이다. 1 + NULL(①), 1 * NULL(③)은 NULL 이고, SELECT NULL(④)도 NULL 이다. ② 만 문자 상수 'X' 를 반환하므로 결과가 다르다."
     },
     {
       "subject": "2과목",
@@ -1525,7 +1525,7 @@
         "3"
       ],
       "correctIndex": 1,
-      "explanation": "CHECK 제약을 통과한 행은 VAL=1 한 건뿐이므로 COUNT 결과는 1이다.",
+      "explanation": "VAL 에 CHECK (VAL > 0) 제약이 있으므로 -1 과 0 을 넣는 INSERT 는 제약 위반으로 실패하고, 1 만 들어간다. ID 는 IDENTITY 로 자동 생성된다. 실패한 문장은 그 문장만 취소되고 COMMIT 으로 1 이 확정되어 COUNT(*) = 1 이다(②).",
       "references": [
         {
           "type": "sql",
@@ -1544,7 +1544,7 @@
         "뷰가 먼저 삭제된 뒤 테이블이 삭제된다."
       ],
       "correctIndex": 0,
-      "explanation": "RESTRICT 옵션은 참조하는 객체가 있으면 삭제를 거부한다. 오류가 발생하고 아무 것도 삭제되지 않는다."
+      "explanation": "RESTRICT 는 삭제하려는 테이블을 참조하는 다른 객체(뷰, 외래키 등)가 있으면 삭제를 거부하는 옵션이다. 그래서 오류가 나고 테이블도 뷰도 삭제되지 않는다(①). 참조 객체까지 함께 삭제하는 것은 CASCADE 옵션이다(③④)."
     },
     {
       "subject": "2과목",

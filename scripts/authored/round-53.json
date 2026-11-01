@@ -242,7 +242,7 @@
         "CASE WHEN 1=2 THEN 'Y' END"
       ],
       "correctIndex": 2,
-      "explanation": "COALESCE 는 NULL 이 아닌 첫 번째 값인 'AB' 를 반환한다."
+      "explanation": "COALESCE('AB', 'CD') 는 처음 NULL 이 아닌 값 'AB' 를 반환한다(③). NVL(NULL, NULL)(①)은 대체값도 NULL 이라 NULL, NULLIF('A', 'A')(②)는 두 값이 같아 NULL, ELSE 없는 CASE(④)는 조건 1 = 2 가 거짓이라 NULL 을 반환한다."
     },
     {
       "subject": "2과목",
@@ -322,7 +322,7 @@
         "ORDER BY 주문번호 DESC, 4 DESC, 1 DESC"
       ],
       "correctIndex": 2,
-      "explanation": "주문번호 DESC, 4번 컬럼 DESC, 1번 컬럼 ASC 형태로 ORDER BY 절에 컬럼 순번을 사용할 수 있다.",
+      "explanation": "요구사항은 주문번호 내림차순 → 4번 컬럼(금액) 내림차순 → 1번 컬럼(회원번호) 오름차순이다. ORDER BY 에는 SELECT 절 컬럼의 순번을 쓸 수 있으므로 ORDER BY 주문번호 DESC, 4 DESC, 1 ASC 가 맞다(③). ① 은 금액을 오름차순으로, ② 는 없는 컬럼으로, ④ 는 회원번호를 내림차순으로 정렬한다.",
       "references": [
         {
           "type": "sql",
@@ -345,7 +345,7 @@
         "DEFAULT 때문에 101·102·103 학생 번호로 입력해도 학번에는 NULL 이 들어간다."
       ],
       "correctIndex": 3,
-      "explanation": "DEFAULT 는 값 미지정 시 기본값을 적용할 뿐 값이 입력되면 그 값이 그대로 저장된다.",
+      "explanation": "학번에는 DEFAULT 100 이 지정되어 있고(①), 이름은 NOT NULL 이며(②), 학과번호는 학과 테이블을 참조한다(③). DEFAULT 는 INSERT 에서 값을 생략했을 때만 쓰이고, 101·102·103 처럼 값을 넣으면 그 값이 그대로 저장되므로 ④ 가 옳지 않다.",
       "references": [
         {
           "type": "sql",
@@ -479,7 +479,7 @@
         "DROP 과 TRUNCATE 는 Auto Commit 이고 DELETE 는 사용자 COMMIT 이 필요하다."
       ],
       "correctIndex": 0,
-      "explanation": "WHERE 없는 DELETE 는 모든 행을 삭제하지만 테이블 구조는 유지되므로 DROP TABLE 과 결과가 다르다."
+      "explanation": "DROP 은 테이블 정의까지 삭제하고 TRUNCATE 는 테이블을 처음 상태로 만들며(②), TRUNCATE 는 UNDO 를 거의 만들지 않아 대량 삭제 시 빠르고(③), DROP·TRUNCATE 는 DDL 이라 자동 커밋되지만 DELETE 는 COMMIT 이 필요하다(④). WHERE 없는 DELETE 는 모든 행을 지울 뿐 테이블 구조는 남으므로 DROP TABLE 과 결과가 같다는 ① 이 옳지 않다."
     },
     {
       "subject": "2과목",
@@ -543,7 +543,7 @@
         "(4)"
       ],
       "correctIndex": 1,
-      "explanation": "서브쿼리가 다중 행을 반환할 수 있음에도 단일 행 비교 연산자 '=' 를 사용하여 런타임 오류가 발생할 수 있다.",
+      "explanation": "(2) 의 서브쿼리 SELECT ID FROM A WHERE ~ 는 여러 행을 반환할 수 있는데, 단일 행 비교 연산자 = 와 함께 쓰여 여러 행이 나오면 ORA-01427 오류가 난다(②). 여러 행을 받으려면 IN 을 써야 한다. SUM(SAL)(①), GROUP BY ID(③), HAVING SUM(SAL) > 5000(④)은 문법상 문제가 없다.",
       "references": [
         {
           "type": "sql",
@@ -562,7 +562,7 @@
         "ORDER BY 절에서는 SELECT 절의 별칭을 참조할 수 있다."
       ],
       "correctIndex": 2,
-      "explanation": "테이블 별칭을 지정하면 SELECT 절에서 원본 테이블명을 직접 참조할 수 없다."
+      "explanation": "컬럼 별칭은 AS 를 생략할 수 있고(①), 테이블 별칭은 FROM 절에서 지정하며(②), ORDER BY 는 SELECT 이후에 처리되어 SELECT 절 별칭을 쓸 수 있다(④). FROM 절에서 테이블 별칭(A)을 지정하면 그 쿼리 안에서는 별칭으로만 참조해야 하므로, 원래 이름 U1.T1.C1 을 쓰면 오류다. ③ 이 옳지 않다."
     },
     {
       "subject": "2과목",

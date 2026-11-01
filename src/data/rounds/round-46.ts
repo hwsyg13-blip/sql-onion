@@ -62,7 +62,7 @@ export const ROUND_46: QuizQuestion[] = [
       "D는 A, B, C의 PK를 모두 상속받는다."
     ],
     "correctIndex": 2,
-    "explanation": "A-B가 비식별자 관계가 되면 A의 PK가 C로 상속되지 않아, A와 C의 조인은 반드시 B를 경유해야 한다.",
+    "explanation": "모든 관계가 식별자 관계면 A 의 PK 가 B → C → D 의 PK 로 차례로 전파되어(①, ④) C 에도 A 의 PK 컬럼이 있으므로 B 를 거치지 않고 A 와 C 를 바로 조인할 수 있다(②). 반대로 A-B 가 비식별자 관계로 바뀌면 A 의 PK 는 B 의 일반 속성(FK)이 될 뿐 C 로 상속되지 않아, A 와 C 를 조인하려면 반드시 B 를 경유해야 한다. 조인이 더 쉬워진다는 ③ 이 옳지 않다.",
     "_source": "authored",
     "references": [
       {
@@ -299,7 +299,7 @@ export const ROUND_46: QuizQuestion[] = [
       "NULLIF(COL, 'value')"
     ],
     "correctIndex": 3,
-    "explanation": "①·②·③은 NULL을 지정한 값으로 치환하지만, NULLIF는 두 값이 같으면 NULL을, 다르면 첫 번째 값을 반환한다.",
+    "explanation": "COL 이 NULL 이면 IFNULL·NVL·COALESCE(①②③)는 모두 대체값 'value' 를 반환한다. NULLIF(COL, 'value') 는 두 값이 같으면 NULL, 다르면 첫 번째 값을 반환하므로 COL 이 NULL 이면 NULL 을 반환한다(④). 결과가 다른 것은 ④ 다.",
     "_source": "authored",
     "references": [
       {
@@ -417,7 +417,7 @@ export const ROUND_46: QuizQuestion[] = [
       "DCL은 CREATE, ALTER, DROP이다."
     ],
     "correctIndex": 3,
-    "explanation": "CREATE, ALTER, DROP은 DDL(Data Definition Language)에 속한다.",
+    "explanation": "DML 은 SELECT·INSERT·UPDATE·DELETE(①), TCL 은 COMMIT·ROLLBACK·SAVEPOINT(②), DCL 은 GRANT·REVOKE(③)다. CREATE·ALTER·DROP 은 객체 구조를 정의하는 DDL 이므로 이를 DCL 이라고 한 ④ 가 옳지 않다.",
     "_source": "authored"
   },
   {
@@ -798,7 +798,7 @@ export const ROUND_46: QuizQuestion[] = [
       "RATIO_TO_REPORT()"
     ],
     "correctIndex": 3,
-    "explanation": "RATIO_TO_REPORT는 전체 합계 대비 현재 값의 비율을 반환하는 비율 함수이다.",
+    "explanation": "RANK·DENSE_RANK·ROW_NUMBER(①②③)는 순위 함수다. RATIO_TO_REPORT 는 파티션 전체 합계에 대한 현재 값의 비율을 구하는 비율 함수이므로 순위 함수가 아니다(④).",
     "_source": "authored"
   },
   {
@@ -926,7 +926,7 @@ export const ROUND_46: QuizQuestion[] = [
       "\"single-row subquery returns more than one row\" 오류가 발생한다."
     ],
     "correctIndex": 3,
-    "explanation": "단일행 비교 연산자(>=)의 우변 서브쿼리가 GROUP BY에 의해 여러 행을 반환하므로 오류가 발생한다.",
+    "explanation": "서브쿼리 SELECT MAX(급여) FROM EMP GROUP BY 부서 는 부서마다 한 행씩, 여러 행을 반환한다. 그런데 비교 연산자 >= 는 단일 행만 받을 수 있어 \"single-row subquery returns more than one row\"(ORA-01427) 오류가 난다(④). 부서별 최고 급여와 비교하려면 >= ALL 이나 IN, 연관 서브쿼리를 써야 한다.",
     "_source": "authored",
     "references": [
       {
@@ -1049,7 +1049,7 @@ export const ROUND_46: QuizQuestion[] = [
       "SAVEPOINT를 사용하면 ROLLBACK의 되돌림 범위를 부분적으로 지정할 수 있다."
     ],
     "correctIndex": 2,
-    "explanation": "오라클의 DDL은 암시적 커밋을 수반하므로 ROLLBACK으로 되돌릴 수 없다.",
+    "explanation": "ROLLBACK 은 트랜잭션 안에서 변경한 데이터를 이전 상태로 되돌리며(①), COMMIT 전의 DML 은 취소할 수 있고(②), SAVEPOINT 로 되돌릴 지점을 정할 수 있다(④). Oracle 에서 CREATE TABLE 같은 DDL 은 실행 전후로 자동 커밋되므로 ROLLBACK 으로 취소되지 않는다. ③ 이 옳지 않다.",
     "_source": "authored"
   },
   {
@@ -1067,7 +1067,7 @@ export const ROUND_46: QuizQuestion[] = [
       "30"
     ],
     "correctIndex": 2,
-    "explanation": "CROSS JOIN(카테시안 곱)의 결과 행 수는 두 집합의 행 수의 곱이다. 5 × 3 = 15.",
+    "explanation": "CROSS JOIN 은 조인 조건 없이 두 테이블의 모든 행을 조합하므로 결과 행 수는 두 테이블 행 수의 곱이다. 5 × 3 = 15 행(③).",
     "_source": "authored"
   },
   {
@@ -1473,7 +1473,7 @@ export const ROUND_46: QuizQuestion[] = [
       "COM이 NULL이 아니면 SAL을 반환한다."
     ],
     "correctIndex": 0,
-    "explanation": "COALESCE(a, b, ...)는 인수 목록에서 NULL이 아닌 첫 번째 값을 반환한다.",
+    "explanation": "COALESCE 는 인수를 왼쪽부터 보며 처음으로 NULL 이 아닌 값을 반환한다. COALESCE(COM, SAL) 은 COM 이 NULL 이 아니면 COM, NULL 이면 SAL 이다(①). 합(②)이나 큰 값(③)을 구하지 않으며, ④ 는 반대로 설명했다.",
     "_source": "authored",
     "references": [
       {
@@ -1497,7 +1497,7 @@ export const ROUND_46: QuizQuestion[] = [
       "(A,150), (D,120)"
     ],
     "correctIndex": 0,
-    "explanation": "급여 내림차순으로 순번을 부여하면 상위 2명이 A(150), B(140)이 된다.",
+    "explanation": "인라인 뷰에서 급여 내림차순으로 ROW_NUMBER 를 매기면 A(150)=1, B(140)=2, C(130)=3, D(120)=4 이다. 바깥 쿼리에서 RN <= 2 인 행만 남기므로 (A,150), (B,140) 이다(①).",
     "_source": "authored",
     "references": [
       {
@@ -1597,7 +1597,7 @@ export const ROUND_46: QuizQuestion[] = [
       "SORT MERGE JOIN은 두 테이블을 정렬하지 않고 수행된다."
     ],
     "correctIndex": 2,
-    "explanation": "HASH JOIN은 인덱스 없이도 수행 가능하며, SORT MERGE JOIN은 두 집합을 모두 정렬한 뒤 병합한다.",
+    "explanation": "NESTED LOOP JOIN 은 선행 테이블 행마다 후행 테이블을 찾으므로, 선행 처리 건수가 적고 후행 테이블 조인 키에 인덱스가 있을 때 유리하다(③). 후행 인덱스가 없으면 매번 전체를 읽어 비효율적이고(①), HASH JOIN 은 인덱스 없이 해시 테이블로 조인하며(②), SORT MERGE JOIN 은 두 집합을 정렬한 뒤 병합한다(④).",
     "_source": "authored"
   },
   {
@@ -1615,7 +1615,7 @@ export const ROUND_46: QuizQuestion[] = [
       "RBO는 통계 정보를 참조하므로 CBO보다 정확도가 항상 높다."
     ],
     "correctIndex": 3,
-    "explanation": "RBO는 통계 정보를 이용하지 않고 규칙만으로 실행계획을 생성하므로 일반적으로 CBO의 정확도가 더 높다.",
+    "explanation": "RBO 는 미리 정한 규칙의 우선순위로 실행계획을 정하고(①), CBO 는 테이블·인덱스·컬럼 통계 정보로 비용을 계산해 최저 비용 계획을 고른다(②③). RBO 는 통계 정보를 쓰지 않으므로 '통계를 참조해 CBO 보다 항상 정확하다' 는 ④ 가 옳지 않다. 일반적으로 데이터 분포를 반영하는 CBO 가 더 나은 계획을 만든다.",
     "_source": "authored"
   },
   {
@@ -1684,7 +1684,7 @@ export const ROUND_46: QuizQuestion[] = [
       "CROSS JOIN"
     ],
     "correctIndex": 0,
-    "explanation": "부서 테이블이 FROM 절의 우측에 위치하므로, 부서의 결측 행까지 보존하려면 RIGHT OUTER JOIN을 사용한다.",
+    "explanation": "사원이 없는 부서까지 모두 보려면 부서 테이블의 행을 모두 보존해야 한다. 부서(DEPT)가 JOIN 키워드의 오른쪽에 있으므로 오른쪽 테이블을 보존하는 RIGHT OUTER JOIN 이다(①). LEFT OUTER JOIN 은 사원 쪽을 보존하고, INNER JOIN 은 사원이 없는 부서가 빠지며, CROSS JOIN 은 조건 없는 카티션 곱이다.",
     "_source": "authored",
     "references": [
       {

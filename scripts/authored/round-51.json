@@ -156,7 +156,7 @@
         "트랜잭션은 원자성·일관성·고립성·지속성 (ACID) 을 보장해야 한다."
       ],
       "correctIndex": 0,
-      "explanation": "고립성(Isolation) 에 따라 진행 중인 트랜잭션의 변경은 다른 트랜잭션과 격리되어야 한다."
+      "explanation": "트랜잭션은 논리적 작업 단위이고(②), COMMIT 이나 ROLLBACK 으로 끝나며(③), 원자성·일관성·고립성·지속성(ACID)을 보장해야 한다(④). 고립성에 따라 한 트랜잭션이 처리 중인 데이터는 다른 트랜잭션이 끼어들어 변경할 수 없으므로(잠금) ① 이 옳지 않다."
     },
     {
       "subject": "2과목",
@@ -236,7 +236,7 @@
         "3,3,3,2,2,2,1,1"
       ],
       "correctIndex": 0,
-      "explanation": "8 건을 세 그룹으로 나누면 앞부터 3, 3, 2 건이 배정된다.",
+      "explanation": "NTILE(3) 은 정렬된 8행을 3개 그룹으로 최대한 고르게 나누고, 나누어떨어지지 않는 나머지는 앞 그룹부터 1행씩 더 준다. 8 = 3 + 3 + 2 이므로 1,1,1,2,2,2,3,3 이다(①). ② 는 나머지를 뒤에 몰았고, ③ 은 순서대로 돌아가며 배정했으며, ④ 는 역순이다.",
       "references": [
         {
           "type": "table",
@@ -288,7 +288,7 @@
         "GROUPING SETS((A, B))"
       ],
       "correctIndex": 2,
-      "explanation": "CUBE 는 (A,B), (A), (B), () 의 네 조합을 모두 반환한다.",
+      "explanation": "A 별 소계, B 별 소계, 총계를 모두 보려면 (A, B), (A), (B), () 네 그룹이 필요하고 이를 한 번에 만드는 것은 CUBE(A, B) 다(③). ROLLUP(A, B)(①)는 (A, B), (A), () 만 만들어 B 별 소계가 없고, GROUP BY A, B(②)와 GROUPING SETS((A, B))(④)는 (A, B) 그룹만 만든다.",
       "references": [
         {
           "type": "sql",
@@ -307,7 +307,7 @@
         "DECODE"
       ],
       "correctIndex": 1,
-      "explanation": "NULLIF(COL2, 0) 은 COL2 가 0 이면 NULL 을 반환하여 오류 대신 NULL 연산으로 이어진다.",
+      "explanation": "NULLIF(COL2, 0) 은 COL2 가 0 이면 NULL, 아니면 COL2 를 반환한다. 숫자를 NULL 로 나누면 오류 대신 NULL 이 되므로 0 나누기 오류를 피할 수 있다(②). NVL(COL2, 0)(①)과 COALESCE(③)는 NULL 을 0 으로 바꿔 오히려 0 으로 나누게 되고, DECODE(④)는 인수가 최소 3개 필요해 DECODE(COL2, 0) 형태로는 오류가 난다.",
       "references": [
         {
           "type": "sql",
@@ -418,7 +418,7 @@
         "ALTER TABLE TAB1 MODIFY COL4 NUMBER;"
       ],
       "correctIndex": 2,
-      "explanation": "DATE 를 TIMESTAMP 로 변경하는 것은 호환 가능한 변환이므로 오류가 발생하지 않는다.",
+      "explanation": "Oracle 에서 데이터가 들어 있는 컬럼의 데이터 타입을 다른 타입으로 바꾸면 '컬럼이 비어 있어야 한다' 는 오류가 난다. COL1(NUMBER → VARCHAR2), COL2(VARCHAR2 → NUMBER), COL4(값이 있는 VARCHAR2 → NUMBER)는 모두 이 경우다(①②④). DATE → TIMESTAMP 는 값을 그대로 담을 수 있는 확장이라 데이터가 있어도 허용된다(③).",
       "references": [
         {
           "type": "sql",
@@ -437,7 +437,7 @@
         "NULL"
       ],
       "correctIndex": 0,
-      "explanation": "T1.COL1=20 은 T2 에 매칭되는 값이 없어 NOT EXISTS 조건을 만족하여 1 건이 반환된다.",
+      "explanation": "NOT EXISTS 는 서브쿼리 결과가 한 건도 없을 때 참이다. T1 의 10 은 T2 에 10 이 있어 제외되고, 20 은 T2 에 같은 값이 없어(NULL 과의 비교는 참이 아님) 남는다. 따라서 COUNT(*) = 1 이다(①). NOT IN 과 달리 NOT EXISTS 는 T2 의 NULL 때문에 결과가 0 이 되지 않는다.",
       "references": [
         {
           "type": "table",
@@ -486,7 +486,7 @@
         "NULL, NULL"
       ],
       "correctIndex": 1,
-      "explanation": "NULL 과의 나눗셈은 NULL, 0 으로 나누면 'divisor is equal to zero' 오류가 발생한다.",
+      "explanation": "NULL 이 포함된 산술 연산 결과는 NULL 이므로 10 / NULL 은 NULL 이다. 10 / 0 은 Oracle 에서 '제수가 0' 오류(ORA-01476)가 난다. 따라서 NULL, ERROR 다(②). 0 으로 나누기를 NULL 이나 0 으로 처리해 주지 않는다(③④).",
       "references": [
         {
           "type": "sql",
@@ -550,7 +550,7 @@
         "12"
       ],
       "correctIndex": 1,
-      "explanation": "T3 기준 조인 결과에서 매칭된 C1 값(1, 2, 3) 의 합이 반환된다.",
+      "explanation": "T1 LEFT JOIN T2 의 결과는 (1,1), (2,2), (3,NULL) 이다. 여기에 T3 를 RIGHT OUTER JOIN 하면 T3 의 모든 행(1, 2, 3)이 보존되고 C1 = 3 은 짝이 없어도 남는다. 따라서 SUM(C.C1) = 1 + 2 + 3 = 6 이다(②). T2 에만 있는 4 는 결과에 들어오지 않는다.",
       "references": [
         {
           "type": "table",
@@ -809,7 +809,7 @@
         "0"
       ],
       "correctIndex": 0,
-      "explanation": "CHECK 조건을 통과한 행은 VALUE=3 한 건이다.",
+      "explanation": "VALUE 에 CHECK (VALUE >= 3) 제약이 있어 1, 2 를 넣는 INSERT 는 제약 위반으로 실패하고, 3 만 들어간다. IDENTITY 컬럼 MAIN 은 자동으로 채워진다. 따라서 COUNT(*) = 1 이다(①).",
       "references": [
         {
           "type": "sql",
@@ -860,7 +860,7 @@
         "공집합"
       ],
       "correctIndex": 0,
-      "explanation": "SAVEPOINT P1 이후의 INSERT (4) 는 롤백되어 반영되지 않는다.",
+      "explanation": "1, 2, 3 을 넣고 SAVEPOINT P1 을 만든 뒤 4 를 넣었다. ROLLBACK TO SAVEPOINT P1 은 저장점 이후의 작업(4 삽입)만 취소하므로 1, 2, 3 이 남는다(①). 저장점 이전 작업까지 취소되지는 않는다(④).",
       "references": [
         {
           "type": "table",
@@ -954,7 +954,7 @@
         "4건"
       ],
       "correctIndex": 1,
-      "explanation": "IN 절의 중복 값은 무시되어 100, 200 두 행만 반환된다.",
+      "explanation": "IN (100, 200, 100) 은 COL1 = 100 OR COL1 = 200 OR COL1 = 100 과 같아 목록의 중복 값은 결과에 영향을 주지 않는다. 100, 200 인 행이 한 건씩이므로 2건이다(②). 오류도 나지 않는다.",
       "references": [
         {
           "type": "table",
@@ -1059,7 +1059,7 @@
         "모두 같다"
       ],
       "correctIndex": 3,
-      "explanation": "데이터가 NULL 을 포함하지 않는 전제에서 세 방식 모두 같은 결과를 낸다.",
+      "explanation": "목표는 A 에는 있고 B 에는 없는 값(1, 4)이다. NOT EXISTS, NOT IN, LEFT OUTER JOIN 후 B.COL1 IS NULL 은 모두 1, 4 를 반환하므로 결과가 같다(④). 단, B 쪽 비교 컬럼에 NULL 이 있으면 NOT IN 은 결과가 공집합이 되어 달라지므로 문제에서 NULL 이 없다는 전제를 두었다.",
       "references": [
         {
           "type": "table",
@@ -1129,7 +1129,7 @@
         "2023-05-10"
       ],
       "correctIndex": 1,
-      "explanation": "TO_DATE('2023', 'YYYY') 는 시스템의 현재 월과 1일을 조합한 값으로 해석된다.",
+      "explanation": "Oracle 의 TO_DATE 는 포맷에 없는 요소를 기본값으로 채운다. 연도만 주면 월은 현재 월, 일은 1일이 된다. SYSDATE 가 2023-05-10 이므로 2023-05-01 이다(②). 연도의 첫날(③)이나 오늘 날짜(④)가 되지 않는다.",
       "references": [
         {
           "type": "sql",
@@ -1244,7 +1244,7 @@
         "1000, 2300, 2000"
       ],
       "correctIndex": 1,
-      "explanation": "1일까지 1000, 2일까지 1000+300=1300, 3일까지 1300+1000=2300 으로 누적된다.",
+      "explanation": "ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW 는 첫 행부터 현재 행까지의 합이다. 1일 1000, 2일 1000 + 300 = 1300, 3일 1300 + 1000 = 2300 이다(②). ① 은 누적하지 않은 값이고, ③④ 는 순서를 잘못 더한 결과다.",
       "references": [
         {
           "type": "table",
@@ -1323,7 +1323,7 @@
         "DCL (Data Control Language)"
       ],
       "correctIndex": 3,
-      "explanation": "DCL 은 GRANT·REVOKE 를 통해 데이터베이스 접근 권한과 객체 접근 권한을 제어하는 언어이다."
+      "explanation": "GRANT·REVOKE 로 데이터베이스와 객체에 대한 접근 권한을 주고 회수하는 언어는 DCL 이다(④). DDL(①)은 CREATE·ALTER·DROP 등 구조 정의, DML(②)은 SELECT·INSERT·UPDATE·DELETE, TCL(③)은 COMMIT·ROLLBACK·SAVEPOINT 다."
     },
     {
       "subject": "2과목",
@@ -1336,7 +1336,7 @@
         "11, -2"
       ],
       "correctIndex": 1,
-      "explanation": "FLOOR 함수는 실수를 그보다 작거나 같은 최대 정수로 내림한다. 음수의 경우 더 작은 쪽(-3) 으로 내려간다.",
+      "explanation": "FLOOR 는 주어진 수보다 작거나 같은 정수 중 가장 큰 값으로 내림한다. FLOOR(10.4) = 10, 음수 FLOOR(-2.4) 는 -2.4 보다 작거나 같은 가장 큰 정수인 -3 이다(②). 소수점만 버리는 TRUNC(-2.4) 라면 -2 가 되며(①), 11(③④)은 CEIL 의 결과다.",
       "references": [
         {
           "type": "sql",

@@ -693,7 +693,7 @@
         "TBL_2023#"
       ],
       "correctIndex": 3,
-      "explanation": "테이블명은 문자로 시작해야 하고 $, #, _ 특수문자는 허용된다."
+      "explanation": "Oracle 테이블명은 문자로 시작해야 하고, 문자·숫자와 특수문자 _, $, # 만 쓸 수 있다. ④ TBL_2023# 은 문자로 시작하고 허용된 _ 와 # 만 써서 올바르다. ①② 는 숫자로 시작하고, ②③ 의 하이픈(-)은 허용되지 않는 문자다."
     },
     {
       "subject": "2과목",
@@ -706,7 +706,7 @@
         "WHERE 부서"
       ],
       "correctIndex": 0,
-      "explanation": "그룹 함수 MAX 를 비집계 컬럼 부서와 함께 사용하려면 GROUP BY 부서 가 필요하다.",
+      "explanation": "SELECT 절에 집계 함수 MAX(연봉) 과 일반 컬럼 부서를 함께 쓰려면 부서를 GROUP BY 로 묶어야 부서별 최고 연봉이 나온다(①). HAVING(②)은 그룹에 대한 조건, ORDER BY(③)는 정렬, WHERE(④)는 행 조건이라 '부서' 만 쓰면 문법에 맞지 않고 그룹도 만들어지지 않는다.",
       "references": [
         {
           "type": "sql",
@@ -765,7 +765,7 @@
         "LAST_VALUE"
       ],
       "correctIndex": 1,
-      "explanation": "LAG 는 현재 행 기준 이전 행의 값을 참조하는 윈도우 함수이다.",
+      "explanation": "현재 행 기준으로 이전 행의 값을 가져오는 함수는 LAG 다(②). LEAD(①)는 다음 행의 값, FIRST_VALUE(③)·LAST_VALUE(④)는 윈도우의 첫 행·마지막 행 값을 반환한다.",
       "references": [
         {
           "type": "text",
@@ -797,7 +797,7 @@
         "NOCYCLE 옵션은 사이클 발생 시 전개를 중단한다."
       ],
       "correctIndex": 0,
-      "explanation": "LEVEL 은 루트에서 1, 하위로 내려갈수록 1씩 증가한다. 리프 노드의 LEVEL 이 항상 1이라는 설명은 잘못되었다."
+      "explanation": "CONNECT_BY_ISLEAF 는 리프 노드면 1, 아니면 0 을 반환하고(②), ORDER SIBLINGS BY 는 같은 부모를 가진 형제 노드끼리 정렬하며(③), NOCYCLE 은 순환이 생기면 그 지점에서 더 전개하지 않고 오류 없이 진행한다(④). LEVEL 은 루트가 1 이고 아래로 내려갈수록 1씩 커지므로 리프 노드의 LEVEL 이 항상 1 이라는 ① 이 옳지 않다."
     },
     {
       "subject": "2과목",
@@ -810,7 +810,7 @@
         "ALTER TABLE T UPDATE COL VARCHAR2(10);"
       ],
       "correctIndex": 0,
-      "explanation": "Oracle 문법상 컬럼 타입 변경은 MODIFY 키워드를 사용한다."
+      "explanation": "Oracle 에서 이미 있는 컬럼의 타입·크기를 바꿀 때는 ALTER TABLE 테이블명 MODIFY (컬럼명 타입) 을 쓴다(①). CHANGE(②)는 MySQL 문법, ALTER COLUMN(③ 은 COLUMN 도 빠짐)은 SQL Server 문법이며, UPDATE(④)는 데이터를 바꾸는 DML 이다."
     },
     {
       "subject": "2과목",
@@ -823,7 +823,7 @@
         "+2시간"
       ],
       "correctIndex": 2,
-      "explanation": "1/24/60 = 1분이며, 1/12/2 = 1/24 = 1시간에 해당한다.",
+      "explanation": "날짜에 더하는 숫자는 '일' 단위다. 60/30 = 2 이므로 1/12/2 = 1/24 일이고, 하루의 1/24 은 1시간이다(③). 참고로 1/24/60 은 1분, 1/24/2 는 30분이다.",
       "references": [
         {
           "type": "sql",
@@ -893,7 +893,7 @@
         "일반 집합 연산은 ORDER BY 구문으로 사용할 수 없다."
       ],
       "correctIndex": 3,
-      "explanation": "UNION, INTERSECT 등도 최종 결과에 ORDER BY 를 적용할 수 있다."
+      "explanation": "INTERSECT 는 교집합(①), UNION 은 중복을 제거한 합집합(②), EXCEPT(Oracle 의 MINUS)는 차집합(③)이다. 집합 연산 결과에도 마지막 SELECT 뒤에 ORDER BY 를 한 번 써서 정렬할 수 있으므로 ④ 가 옳지 않다."
     },
     {
       "subject": "2과목",
@@ -906,7 +906,7 @@
         "CROSS JOIN"
       ],
       "correctIndex": 1,
-      "explanation": "사원이 없는 부서까지 포함하려면 부서 테이블을 좌측에 두고 LEFT OUTER JOIN 으로 사원 테이블을 결합한다."
+      "explanation": "사원이 없는 부서까지 나오려면 부서 테이블의 모든 행을 보존해야 한다. 부서를 왼쪽에 두고 LEFT OUTER JOIN 으로 사원을 붙이면 된다(②). INNER JOIN 은 사원이 없는 부서가 빠지고, 사원을 보존하는 조인(③)은 반대로 부서가 없는 사원을 남기며, CROSS JOIN 은 조건 없는 카티션 곱이다."
     },
     {
       "subject": "2과목",
@@ -1025,7 +1025,7 @@
         "2"
       ],
       "correctIndex": 1,
-      "explanation": "서로 다른 급여 값은 30000, 35000, 4000 의 3개이다.",
+      "explanation": "COUNT(DISTINCT 급여) 는 서로 다른 급여 값의 개수를 센다. 급여는 30000, 35000, 4000 세 종류(35000 과 4000 이 두 번씩)이므로 3 이다(②). 행 수를 그대로 세면 5(①)다.",
       "references": [
         {
           "type": "table",
@@ -1373,7 +1373,7 @@
         "4"
       ],
       "correctIndex": 2,
-      "explanation": "ROUND(3.45, 1) 은 소수점 둘째 자리에서 반올림하여 3.5 를 반환한다."
+      "explanation": "ROUND(3.45, 1) 은 소수 첫째 자리까지 남기도록 둘째 자리(5)에서 반올림하므로 3.5 다(③). TRUNC(3.45, 1) 이라면 버림으로 3.4(①), ROUND(3.45) 라면 정수로 반올림해 3 이 된다."
     },
     {
       "subject": "2과목",
@@ -1386,7 +1386,7 @@
         "CROSS JOIN"
       ],
       "correctIndex": 3,
-      "explanation": "조인 조건 없이 두 테이블을 결합하면 모든 행의 조합을 생성하는 카티션 곱(CROSS JOIN) 이 된다.",
+      "explanation": "FROM TABLE1, TABLE2 처럼 조인 조건 없이 테이블을 나열하면 두 테이블의 모든 행 조합(카티션 곱)이 나오며, 이를 ANSI 문법으로 쓴 것이 CROSS JOIN 이다(④). INNER·OUTER JOIN 은 조인 조건이 필요하고, NATURAL JOIN 은 같은 이름 컬럼으로 자동 등가 조인한다.",
       "references": [
         {
           "type": "sql",
@@ -1472,7 +1472,7 @@
         "GRANT"
       ],
       "correctIndex": 1,
-      "explanation": "ROLLBACK 은 트랜잭션 내의 모든 변경 작업을 취소하고 직전 COMMIT 시점의 상태로 복원한다.",
+      "explanation": "트랜잭션 중 문제가 생겼을 때 커밋되지 않은 모든 변경을 취소하고 이전 상태로 되돌리는 명령은 ROLLBACK 이다(②). COMMIT(①)은 변경을 확정, SAVEPOINT(③)는 되돌아갈 저장점 지정, GRANT(④)는 권한 부여 명령이다.",
       "references": [
         {
           "type": "text",
