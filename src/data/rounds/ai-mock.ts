@@ -6408,7 +6408,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 226,
-    "title": "다음 테이블에 대한 매출 누적을 구하는 SQL문을 작성하시오. (윈도우 함수 사용)",
+    "title": "영업사원별로 판매월 순서에 따라 매출 누적 합계를 구하는 SQL 로 옳은 것은? (윈도우 함수 사용)",
     "options": [
       "Select 영업사원, 판매월, sum(매출) over (partition by 영업사원 order by 판매월 range between unbounded preceding and current row) 누적매출 from 매출;",
       "Select 영업사원, 판매월, sum(매출) over (partition by 영업사원 order by 판매월 range between unbounded preceding) 누적매출 from 매출;",
@@ -33322,7 +33322,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 937,
-    "title": "그림 데이터에서 위 SQL 결과로 조회되는 사원 수는?",
+    "title": "아래 데이터에서 SQL 결과로 조회되는 사원 수는?",
     "options": [
       "1",
       "2",
@@ -36154,7 +36154,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 1017,
-    "title": "다음 이미지의 명령 중 테이블 구조를 변경하는 문장으로 옳은 것은?",
+    "title": "아래 명령 중 테이블 구조를 변경하는 문장으로 옳은 것은?",
     "options": [
       "CREATE TABLE emp (...);",
       "ALTER TABLE emp ADD hire_date DATE;",
@@ -36268,7 +36268,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 1022,
-    "title": "다음 이미지 기준으로 user1에게 처음 부여되는 권한으로 옳은 것은?",
+    "title": "아래 자료 기준으로 user1에게 처음 부여되는 권한으로 옳은 것은?",
     "options": [
       "emp 테이블의 DELETE 권한",
       "emp 테이블의 SELECT와 INSERT 권한",
@@ -36295,7 +36295,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 1023,
-    "title": "다음 이미지 기준으로 회수되는 권한으로 옳은 것은?",
+    "title": "아래 자료 기준으로 회수되는 권한으로 옳은 것은?",
     "options": [
       "emp 테이블의 SELECT 권한",
       "emp 테이블의 INSERT 권한",
@@ -37911,7 +37911,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 1079,
-    "title": "다음 그림과 SQL을 함께 보고 판단할 때, 다음 PIVOT SQL 결과에서 SALES 행의 (Q1 + Q2) 합계는?",
+    "title": "다음 PIVOT SQL 결과에서 SALES 행의 (Q1 + Q2) 합계는?",
     "options": [
       "210",
       "220",
@@ -38082,7 +38082,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 1084,
-    "title": "테이블 그림을 기준으로 SQL문을 해석하면, 다음 PIVOT SQL 결과 행 수는?",
+    "title": "다음 PIVOT SQL 결과 행 수는?",
     "options": [
       "3",
       "4",
@@ -38279,7 +38279,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 1090,
-    "title": "그림의 데이터와 조건식을 모두 고려하면, 다음 PIVOT SQL 결과 컬럼 구성으로 옳은 것은?",
+    "title": "다음 PIVOT SQL 결과 컬럼 구성으로 옳은 것은?",
     "options": [
       "Q1, Q2만",
       "dept, amount",
@@ -38788,7 +38788,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 1108,
-    "title": "다음 그림과 SQL을 함께 보고 판단할 때, 다음 SQL 실행 결과 값으로 옳은 것은?",
+    "title": "다음 SQL 실행 결과 값으로 옳은 것은?",
     "options": [
       "302",
       "304",
@@ -38897,7 +38897,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 1111,
-    "title": "다음 그림과 SQL을 함께 보고 판단할 때, 다음 SQL 결과에서 rn = 1인 행으로 옳은 것은?",
+    "title": "다음 SQL 결과에서 rn = 1인 행으로 옳은 것은?",
     "options": [
       "INCHEON, B, 80",
       "BUSAN, A, 100",
@@ -38982,7 +38982,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 1113,
-    "title": "다음 그림과 SQL을 함께 보고 판단할 때, 다음 SQL 실행 결과로 반환되는 행 수는?",
+    "title": "다음 SQL 실행 결과로 반환되는 행 수는?",
     "options": [
       "2",
       "3",
@@ -39052,7 +39052,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 1114,
-    "title": "테이블 그림을 기준으로 SQL문을 해석하면, 다음 PIVOT SQL 결과에서 SALES 행의 (Q1 + Q2) 합계는?",
+    "title": "다음 PIVOT SQL 결과에서 SALES 행의 (Q1 + Q2) 합계는?",
     "options": [
       "300",
       "200",
@@ -39145,7 +39145,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 1116,
-    "title": "다음 그림과 SQL을 함께 보고 판단할 때, 다음 SQL 실행 결과로 반환되는 부서 수는?",
+    "title": "다음 SQL 실행 결과로 반환되는 부서 수는?",
     "options": [
       "1",
       "2",
@@ -39388,7 +39388,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "1과목",
     "number": 1123,
-    "title": "그림에 제시된 구조와 값을 기준으로 보면, 다음 주문 테이블에서 기본키가 (주문번호, 상품번호)일 때 가장 적절한 설명은?",
+    "title": "다음 주문 테이블에서 기본키가 (주문번호, 상품번호)일 때 가장 적절한 설명은?",
     "options": [
       "상품명은 부분 함수 종속, 고객등급은 이행 함수 종속 문제가 될 수 있다.",
       "기본키가 복합키면 3NF는 자동으로 만족한다.",
@@ -39448,7 +39448,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 1124,
-    "title": "테이블 그림을 기준으로 SQL문을 해석하면, 다음 SQL 실행 결과 행 수는?",
+    "title": "다음 SQL 실행 결과 행 수는?",
     "options": [
       "3",
       "4",
@@ -39583,7 +39583,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 1128,
-    "title": "테이블 그림을 기준으로 SQL문을 해석하면, 다음 SQL 실행 결과 값으로 옳은 것은?",
+    "title": "다음 SQL 실행 결과 값으로 옳은 것은?",
     "options": [
       "5",
       "2",
@@ -39668,7 +39668,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 1130,
-    "title": "테이블 그림을 기준으로 SQL문을 해석하면, 다음 SQL 실행 결과로 옳은 것은?",
+    "title": "다음 SQL 실행 결과로 옳은 것은?",
     "options": [
       "2",
       "3",
@@ -39764,7 +39764,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 1132,
-    "title": "그림의 데이터와 조건식을 모두 고려하면, 다음 PIVOT SQL 결과 행 수는?",
+    "title": "다음 PIVOT SQL 결과 행 수는?",
     "options": [
       "3",
       "4",
@@ -39831,7 +39831,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 1133,
-    "title": "테이블 그림을 기준으로 SQL문을 해석하면, 다음 계층형 질의 결과에서 LEVEL = 2인 행 수는?",
+    "title": "다음 계층형 질의 결과에서 LEVEL = 2인 행 수는?",
     "options": [
       "2",
       "3",
@@ -39903,7 +39903,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 1134,
-    "title": "테이블 그림을 기준으로 SQL문을 해석하면, 다음 SQL 결과로 조회되는 부서명으로 옳은 것은?",
+    "title": "다음 SQL 결과로 조회되는 부서명으로 옳은 것은?",
     "options": [
       "SALES, DEV",
       "HR",
@@ -40314,7 +40314,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 1145,
-    "title": "제시된 그림만 근거로 판단하면, 다음 SALARY 데이터에서 AVG(salary) 값은?",
+    "title": "다음 SALARY 데이터에서 AVG(salary) 값은?",
     "options": [
       "3000",
       "750",
@@ -40445,7 +40445,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 1149,
-    "title": "그림의 데이터와 조건식을 모두 고려하면, 다음 SQL 결과의 마지막 행으로 옳은 것은?",
+    "title": "다음 SQL 결과의 마지막 행으로 옳은 것은?",
     "options": [
       "BUSAN, A, 100",
       "SEOUL, A, 150",
@@ -40530,7 +40530,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 1151,
-    "title": "제시된 그림만 근거로 판단하면, A.ID에 중복값 2가 한 건 더 추가되고 B.ID=2가 1건 존재할 때 INNER JOIN 결과에 추가되는 행 수는?",
+    "title": "A.ID에 중복값 2가 한 건 더 추가되고 B.ID=2가 1건 존재할 때 INNER JOIN 결과에 추가되는 행 수는?",
     "options": [
       "2",
       "3",
@@ -40693,7 +40693,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 1154,
-    "title": "그림의 데이터와 조건식을 모두 고려하면, 다음 계층형 질의 결과에서 DEV_B의 PATH 값으로 옳은 것은?",
+    "title": "다음 계층형 질의 결과에서 DEV_B의 PATH 값으로 옳은 것은?",
     "options": [
       "DEV_MGR > DEV_B",
       "CEO > DEV_B",
@@ -40765,7 +40765,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 1155,
-    "title": "그림의 데이터와 조건식을 모두 고려하면, 다음 SQL 실행 결과 행 수는?",
+    "title": "다음 SQL 실행 결과 행 수는?",
     "options": [
       "4",
       "1",
@@ -40988,7 +40988,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 1161,
-    "title": "제시된 그림만 근거로 판단하면, 다음 데이터에서 주문이 없는 고객 ID는?",
+    "title": "다음 데이터에서 주문이 없는 고객 ID는?",
     "options": [
       "102, 104",
       "103, 104",
@@ -41084,7 +41084,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 1163,
-    "title": "제시된 그림만 근거로 판단하면, BUSAN 지역 데이터에 DENSE_RANK()를 적용한 결과로 옳은 것은?",
+    "title": "BUSAN 지역 데이터에 DENSE_RANK()를 적용한 결과로 옳은 것은?",
     "options": [
       "1, 3, 3",
       "1, 2, 2",
@@ -41194,7 +41194,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "1과목",
     "number": 1166,
-    "title": "제시된 그림만 근거로 판단하면, 3NF에 대한 설명으로 옳은 것은?",
+    "title": "3NF에 대한 설명으로 옳은 것은?",
     "options": [
       "복합키가 없어야만 성립한다.",
       "PK가 두 개 이상이어야 한다.",
@@ -41952,7 +41952,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 1186,
-    "title": "그림의 각 행과 관계선을 기준으로 해석하면, 다음 BONUS 데이터에서 COUNT(bonus) 값은?",
+    "title": "다음 BONUS 데이터에서 COUNT(bonus) 값은?",
     "options": [
       "2",
       "3",
@@ -42131,7 +42131,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 1192,
-    "title": "다음 그림과 SQL을 함께 보고 판단할 때, 다음 PIVOT SQL에 대한 설명으로 옳은 것은?",
+    "title": "다음 PIVOT SQL에 대한 설명으로 옳은 것은?",
     "options": [
       "PIVOT은 집계 함수를 사용할 수 없다.",
       "dept 값이 열로 전개된다.",
@@ -42224,7 +42224,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 1194,
-    "title": "그림과 SQL 조건을 동시에 읽으면, 다음 계층형 질의에서 START WITH mgr_id IS NULL 의미로 옳은 것은?",
+    "title": "다음 계층형 질의에서 START WITH mgr_id IS NULL 의미로 옳은 것은?",
     "options": [
       "최상위 사원부터 탐색을 시작한다.",
       "동일 LEVEL끼리만 조인한다.",
@@ -42296,7 +42296,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 1195,
-    "title": "그림의 각 행과 관계선을 기준으로 해석하면, 다음 중 HAVING 절에 대한 설명으로 옳은 것은?",
+    "title": "다음 중 HAVING 절에 대한 설명으로 옳은 것은?",
     "options": [
       "HAVING은 GROUP BY 이후 생성된 그룹에 대해 조건을 적용한다.",
       "HAVING에는 집계 함수를 사용할 수 없다.",
@@ -42511,7 +42511,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 1201,
-    "title": "그림의 각 행과 관계선을 기준으로 해석하면, ANY 비교에 대한 설명으로 옳은 것은?",
+    "title": "ANY 비교에 대한 설명으로 옳은 것은?",
     "options": [
       "NULL과 동일한 의미다.",
       "30보다 커야만 참이다.",
@@ -42611,7 +42611,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 1203,
-    "title": "그림의 각 행과 관계선을 기준으로 해석하면, OVER(PARTITION BY region)의 의미로 옳은 것은?",
+    "title": "OVER(PARTITION BY region)의 의미로 옳은 것은?",
     "options": [
       "region 값별로 분석 구간을 나눈다.",
       "GROUP BY와 완전히 같은 결과만 낸다.",
@@ -42721,7 +42721,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 1206,
-    "title": "다음 그림과 SQL을 함께 보고 판단할 때, 다음 BONUS 데이터에서 SUM(NVL(bonus, 0)) 값은?",
+    "title": "다음 BONUS 데이터에서 SUM(NVL(bonus, 0)) 값은?",
     "options": [
       "400",
       "NULL",
@@ -42830,7 +42830,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 1209,
-    "title": "그림에 제시된 구조와 값을 기준으로 보면, 다음 이미지 기준으로 user1에게 처음 부여되는 권한으로 옳은 것은?",
+    "title": "아래 자료 기준으로 user1에게 처음 부여되는 권한으로 옳은 것은?",
     "options": [
       "emp 테이블의 SELECT와 INSERT 권한",
       "데이터베이스 생성 권한",
@@ -42857,7 +42857,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 1210,
-    "title": "그림에 제시된 구조와 값을 기준으로 보면, 다음 이미지의 명령 중 테이블 구조를 변경하는 문장으로 옳은 것은?",
+    "title": "아래 명령 중 테이블 구조를 변경하는 문장으로 옳은 것은?",
     "options": [
       "DROP TABLE temp_emp;",
       "SELECT * FROM emp;",
@@ -42938,7 +42938,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 1213,
-    "title": "다음 그림과 SQL을 함께 보고 판단할 때, 다음 그림을 기준으로 LEFT OUTER JOIN을 수행할 때 반환 행 수는?",
+    "title": "아래 테이블을 기준으로 LEFT OUTER JOIN을 수행할 때 반환 행 수는?",
     "options": [
       "3",
       "4",
@@ -43050,7 +43050,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 1216,
-    "title": "다음 그림과 SQL을 함께 보고 판단할 때, 다음 SQL 결과에서 CEO의 LEVEL 값으로 옳은 것은?",
+    "title": "다음 SQL 결과에서 CEO의 LEVEL 값으로 옳은 것은?",
     "options": [
       "1",
       "2",
@@ -43122,7 +43122,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 1217,
-    "title": "다음 그림과 SQL을 함께 보고 판단할 때, 다음 SQL 결과에서 gr = 1 이고 gp = 1 인 행 수는?",
+    "title": "다음 SQL 결과에서 gr = 1 이고 gp = 1 인 행 수는?",
     "options": [
       "2",
       "3",
@@ -43309,7 +43309,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 1223,
-    "title": "다음 그림과 SQL을 함께 보고 판단할 때, 다음 SQL 결과로 조회되는 사원 수는?",
+    "title": "다음 SQL 결과로 조회되는 사원 수는?",
     "options": [
       "2",
       "3",
@@ -43392,7 +43392,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 1225,
-    "title": "다음 그림과 SQL을 함께 보고 판단할 때, 다음 SQL 결과에서 SEOUL 지역의 rn = 1 인 판매자로 옳은 것은?",
+    "title": "다음 SQL 결과에서 SEOUL 지역의 rn = 1 인 판매자로 옳은 것은?",
     "options": [
       "PARK",
       "CHOI",
@@ -43506,7 +43506,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 1228,
-    "title": "그림에 제시된 구조와 값을 기준으로 보면, 다음 테이블과 가정 기준으로 2NF 위반 원인으로 옳은 것은?",
+    "title": "다음 테이블과 가정 기준으로 2NF 위반 원인으로 옳은 것은?",
     "options": [
       "복합키의 일부인 주문번호와 상품번호에만 종속되는 속성이 함께 존재한다.",
       "이행 종속만 존재한다.",
@@ -43671,7 +43671,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 1232,
-    "title": "표와 관계를 함께 읽으면, 다음 이미지 기준으로 회수되는 권한으로 옳은 것은?",
+    "title": "아래 자료 기준으로 회수되는 권한으로 옳은 것은?",
     "options": [
       "emp 테이블의 모든 권한",
       "user1 계정 자체",
@@ -43862,7 +43862,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 1238,
-    "title": "테이블 그림을 기준으로 SQL문을 해석하면, 다음 SQL 결과에서 리프 노드 수로 옳은 것은?",
+    "title": "다음 SQL 결과에서 리프 노드 수로 옳은 것은?",
     "options": [
       "4",
       "5",
@@ -44065,7 +44065,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 1243,
-    "title": "표와 관계를 함께 읽으면, 그림 데이터에서 위 SQL 결과로 조회되는 사원 수는?",
+    "title": "아래 데이터에서 SQL 결과로 조회되는 사원 수는?",
     "options": [
       "2",
       "3",
@@ -44286,7 +44286,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 1249,
-    "title": "그림의 데이터와 조건식을 모두 고려하면, 다음 SALARY 데이터에서 COUNT(*) - COUNT(salary) 결과는?",
+    "title": "다음 SALARY 데이터에서 COUNT(*) - COUNT(salary) 결과는?",
     "options": [
       "1",
       "2",
@@ -44527,7 +44527,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 1257,
-    "title": "그림과 SQL 조건을 동시에 읽으면, 다음 PIVOT SQL 결과 컬럼 구성으로 옳은 것은?",
+    "title": "다음 PIVOT SQL 결과 컬럼 구성으로 옳은 것은?",
     "options": [
       "Q1, Q2만",
       "dept, amount",
@@ -44594,7 +44594,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 1258,
-    "title": "그림의 데이터와 조건식을 모두 고려하면, 다음 SQL 결과에서 DEV_A의 경로로 옳은 것은?",
+    "title": "다음 SQL 결과에서 DEV_A의 경로로 옳은 것은?",
     "options": [
       "/CEO/DEV_A",
       "/CEO/SALES_MGR/DEV_A",
@@ -44796,7 +44796,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 1264,
-    "title": "제시된 그림만 근거로 판단하면, 상관 서브쿼리의 특징으로 옳은 것은?",
+    "title": "상관 서브쿼리의 특징으로 옳은 것은?",
     "options": [
       "FROM 절에서만 작성 가능하다.",
       "JOIN으로 절대 변환할 수 없다.",
@@ -44849,7 +44849,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 1265,
-    "title": "그림의 데이터와 조건식을 모두 고려하면, 다음 SQL 결과로 옳은 것은?",
+    "title": "다음 SQL 결과로 옳은 것은?",
     "options": [
       "같은 지역의 각 행에 지역 합계가 반복 표시된다.",
       "집계 결과는 행 수를 줄인다.",
@@ -44963,7 +44963,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 1268,
-    "title": "제시된 그림만 근거로 판단하면, 다음 테이블과 가정 기준으로 발생 가능한 이상 현상으로 옳은 것은?",
+    "title": "다음 테이블과 가정 기준으로 발생 가능한 이상 현상으로 옳은 것은?",
     "options": [
       "집계 함수 사용이 금지된다.",
       "한 행만 수정하면 항상 모든 고객등급이 자동 갱신된다.",
@@ -45718,7 +45718,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 1290,
-    "title": "테이블 그림을 기준으로 SQL문을 해석하면, 다음 SQL 실행 결과 값으로 옳은 것은?",
+    "title": "다음 SQL 실행 결과 값으로 옳은 것은?",
     "options": [
       "304",
       "NULL",
@@ -45905,7 +45905,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 1296,
-    "title": "그림의 각 행과 관계선을 기준으로 해석하면, OUTER JOIN 결과 해석으로 옳은 것은?",
+    "title": "OUTER JOIN 결과 해석으로 옳은 것은?",
     "options": [
       "보존되지 않는 쪽에 매칭 행이 없으면 해당 컬럼은 NULL이 된다.",
       "NULL 대신 빈 문자열이 자동 입력된다.",
@@ -45971,7 +45971,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 1297,
-    "title": "테이블 그림을 기준으로 SQL문을 해석하면, 다음 PIVOT SQL에 대한 설명으로 옳은 것은?",
+    "title": "다음 PIVOT SQL에 대한 설명으로 옳은 것은?",
     "options": [
       "amount 값이 행 이름으로 전개된다.",
       "quarter_cd 값이 열로 전개된다.",
@@ -46090,7 +46090,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 1300,
-    "title": "그림의 각 행과 관계선을 기준으로 해석하면, ROLLUP에서 소계 행 판별에 사용되는 함수로 옳은 것은?",
+    "title": "ROLLUP에서 소계 행 판별에 사용되는 함수로 옳은 것은?",
     "options": [
       "ROW_NUMBER",
       "NVL2",
@@ -46247,7 +46247,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 1305,
-    "title": "그림의 각 행과 관계선을 기준으로 해석하면, 상관 서브쿼리를 JOIN + GROUP BY로 바꿀 때 핵심 아이디어는?",
+    "title": "상관 서브쿼리를 JOIN + GROUP BY로 바꿀 때 핵심 아이디어는?",
     "options": [
       "부서 평균 집합을 만든 뒤 원본 EMP와 부서 기준으로 조인한다.",
       "GROUP BY를 제거한다.",
@@ -46404,7 +46404,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 1310,
-    "title": "그림의 각 행과 관계선을 기준으로 해석하면, 다음 테이블과 가정 기준으로 3NF 관점에서 추가 분리가 필요한 속성으로 옳은 것은?",
+    "title": "다음 테이블과 가정 기준으로 3NF 관점에서 추가 분리가 필요한 속성으로 옳은 것은?",
     "options": [
       "상품번호",
       "고객등급",
@@ -46464,7 +46464,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 1311,
-    "title": "그림의 데이터와 조건식을 모두 고려하면, 다음 SQL 실행 결과 행 수는?",
+    "title": "다음 SQL 실행 결과 행 수는?",
     "options": [
       "4",
       "1",
@@ -46625,7 +46625,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 1316,
-    "title": "테이블 그림을 기준으로 SQL문을 해석하면, 다음 SQL 결과에서 rn = 1인 행으로 옳은 것은?",
+    "title": "다음 SQL 결과에서 rn = 1인 행으로 옳은 것은?",
     "options": [
       "INCHEON, B, 80",
       "BUSAN, A, 100",
@@ -46710,7 +46710,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 1318,
-    "title": "테이블 그림을 기준으로 SQL문을 해석하면, 다음 SQL 실행 결과로 반환되는 행 수는?",
+    "title": "다음 SQL 실행 결과로 반환되는 행 수는?",
     "options": [
       "2",
       "3",
@@ -46899,7 +46899,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 1322,
-    "title": "테이블 그림을 기준으로 SQL문을 해석하면, 다음 계층형 질의 결과에서 CONNECT_BY_ISLEAF = 1 이고 LEVEL = 3 인 행 수는?",
+    "title": "다음 계층형 질의 결과에서 CONNECT_BY_ISLEAF = 1 이고 LEVEL = 3 인 행 수는?",
     "options": [
       "3",
       "4",
@@ -46971,7 +46971,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 1323,
-    "title": "테이블 그림을 기준으로 SQL문을 해석하면, 다음 SQL 실행 결과로 반환되는 부서 수는?",
+    "title": "다음 SQL 실행 결과로 반환되는 부서 수는?",
     "options": [
       "2",
       "3",
@@ -47194,7 +47194,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 1329,
-    "title": "테이블 그림을 기준으로 SQL문을 해석하면, 다음 SQL 실행 결과로 조회되는 고객 수는?",
+    "title": "다음 SQL 실행 결과로 조회되는 고객 수는?",
     "options": [
       "2",
       "3",
@@ -47268,7 +47268,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 1330,
-    "title": "테이블 그림을 기준으로 SQL문을 해석하면, 다음 SQL 결과에서 rn <> rnk 인 행 수는?",
+    "title": "다음 SQL 결과에서 rn <> rnk 인 행 수는?",
     "options": [
       "2",
       "3",

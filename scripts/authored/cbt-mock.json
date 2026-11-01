@@ -6131,7 +6131,7 @@
       "_origNo": 184,
       "subject": "2과목",
       "chapter": "윈도우 함수",
-      "title": "다음 테이블에 대한 매출 누적을 구하는 SQL문을 작성하시오. (윈도우 함수 사용)",
+      "title": "영업사원별로 판매월 순서에 따라 매출 누적 합계를 구하는 SQL 로 옳은 것은? (윈도우 함수 사용)",
       "options": [
         "Select 영업사원, 판매월, sum(매출) over (partition by 영업사원 order by 판매월 range between unbounded preceding and current row) 누적매출 from 매출;",
         "Select 영업사원, 판매월, sum(매출) over (partition by 영업사원 order by 판매월 range between unbounded preceding) 누적매출 from 매출;",
