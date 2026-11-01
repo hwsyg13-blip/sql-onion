@@ -368,7 +368,7 @@
         "ERROR"
       ],
       "correctIndex": 0,
-      "explanation": "COUNT(*) 는 행이 없어도 0 을 반환하므로 NVL 의 대체 값이 적용되지 않는다.",
+      "explanation": "COUNT(*) 는 조건을 만족하는 행이 없어도 NULL 이 아니라 0 을 반환한다. 그래서 NVL(0, 9999) = 0 이다(①). 대체값 9999 가 나오려면 SUM·MAX 처럼 공집합에서 NULL 을 반환하는 집계 함수여야 한다.",
       "references": [
         {
           "type": "sql",
@@ -387,7 +387,7 @@
         "양쪽을 모두 포함하는 FULL OUTER JOIN"
       ],
       "correctIndex": 3,
-      "explanation": "양쪽 모두에 매칭되지 않는 행까지 포함해야 하므로 FULL OUTER JOIN 이 적합하다."
+      "explanation": "클래스와 튜터 양쪽 모두에서 짝이 없는 행까지 빠짐없이 나오려면 두 테이블의 행을 모두 보존하는 FULL OUTER JOIN 을 쓴다(④). INNER JOIN 은 양쪽 모두 매칭된 행만, 클래스 기준 LEFT JOIN 은 튜터가 없는 클래스만, 튜터 기준 RIGHT JOIN 은 클래스가 없는 튜터만 보존한다."
     },
     {
       "subject": "2과목",
@@ -522,7 +522,7 @@
         "ON 절과 함께 사용할 수 없다."
       ],
       "correctIndex": 1,
-      "explanation": "NATURAL JOIN 은 동일 이름 컬럼에 대해 등가 조인만 수행한다."
+      "explanation": "NATURAL JOIN 은 두 테이블에서 이름이 같은 모든 컬럼을 자동으로 찾아 등가(=) 조인만 수행하며(①), USING 절이나 ON 절과 함께 쓸 수 없다(③④). 비등가 조인(BETWEEN, > 등)은 할 수 없으므로 ② 가 옳지 않다."
     },
     {
       "subject": "2과목",
@@ -680,7 +680,7 @@
         "DROP 은 Auto Commit 이고 DELETE 와 TRUNCATE 는 사용자 COMMIT 으로 수행된다."
       ],
       "correctIndex": 3,
-      "explanation": "TRUNCATE 도 Auto Commit 이 수행된다. 사용자 COMMIT 이 필요한 것은 DELETE 뿐이다."
+      "explanation": "DROP 은 테이블 정의와 데이터를 모두 삭제하고(①), TRUNCATE 는 데이터를 모두 지우고 저장 공간을 해제해 테이블을 처음 상태로 만들며(②), UNDO 를 거의 만들지 않아 DELETE 보다 빠르다(③). TRUNCATE 는 DDL 이라 DROP 과 마찬가지로 자동 커밋되고, 사용자 COMMIT 이 필요한 것은 DML 인 DELETE 뿐이다. ④ 가 옳지 않다."
     },
     {
       "subject": "2과목",

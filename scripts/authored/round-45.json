@@ -201,7 +201,7 @@
         "ROUND(22.14)"
       ],
       "correctIndex": 0,
-      "explanation": "CEIL은 정수부를 올림하므로 23을 반환한다. FLOOR·TRUNC·ROUND(22.14)는 모두 22를 반환한다.",
+      "explanation": "CEIL 은 주어진 수보다 크거나 같은 가장 작은 정수로 올림하므로 CEIL(22.14) = 23 이다(①). FLOOR 는 작거나 같은 가장 큰 정수로 내림해 22, TRUNC 는 소수점 이하를 버려 22, ROUND 는 소수 첫째 자리(1)에서 반올림해 22 다. 결과가 다른 것은 ① 이다.",
       "references": [
         {
           "type": "sql",
@@ -220,7 +220,7 @@
         "UPDATE 선수 SET 포지션 = 'FW' WHERE 팀ID = (SELECT 팀ID FROM 선수 WHERE 이름 = '손흥민');"
       ],
       "correctIndex": 3,
-      "explanation": "손흥민이 속한 팀의 팀ID를 서브쿼리로 조회하여, 해당 팀의 모든 선수의 포지션을 일괄 변경한다.",
+      "explanation": "손흥민이 속한 팀(TOT)의 모든 선수를 바꾸려면, 서브쿼리로 손흥민의 팀ID 를 구해 그 팀ID 를 가진 행을 모두 UPDATE 해야 한다(④). ① 은 손흥민 한 명만 바꾸고, ② 는 포지션이 아니라 팀ID 를 'FW' 로 바꾸며, ③ 은 팀ID 를 선수 이름('손흥민')과 비교해 바뀌는 행이 없다.",
       "references": [
         {
           "type": "table",
@@ -265,7 +265,7 @@
         "SELECT SNS, 추천점수 FROM SNS_LOG ORDER BY SNS;"
       ],
       "correctIndex": 2,
-      "explanation": "SNS별 합계를 구해야 하므로 GROUP BY SNS와 집계함수 SUM을 함께 사용한다.",
+      "explanation": "SNS 별 합계를 보려면 GROUP BY SNS 로 묶고 SELECT 절에 그룹 기준 컬럼 SNS 와 집계 함수 SUM(추천점수)를 함께 쓴다(③ → FB 9, IG 3). ① 은 전체 합계 한 행만 나오고, ② 는 GROUP BY 에 없는 일반 컬럼(추천점수)을 집계 없이 SELECT 해 오류, ④ 는 집계 없이 정렬만 한다.",
       "references": [
         {
           "type": "table",
@@ -485,7 +485,7 @@
         "10"
       ],
       "correctIndex": 1,
-      "explanation": "N개의 테이블을 모두 연결하기 위한 최소 조인의 수는 N-1이다. 5-1 = 4."
+      "explanation": "테이블 N 개를 모두 연결하려면 최소 N-1 개의 조인 조건이 필요하다(테이블 둘을 잇는 데 조건 하나). 5개면 5 - 1 = 4 이므로 ② 이다."
     },
     {
       "subject": "2과목",
@@ -498,7 +498,7 @@
         "GROUP BY GROUPING SETS( (A), (A, B) )"
       ],
       "correctIndex": 3,
-      "explanation": "이 구성은 A 단위와 (A, B) 단위 집계만 생성하고 전체 합계 그룹을 포함하지 않으므로 기대 결과와 다르다.",
+      "explanation": "필요한 결과는 A 소계, (A, B) 합계, 전체 합계 세 가지다. ROLLUP(A, B)(①)는 (A, B), (A), () 를 만들고, ② GROUPING SETS((A), (A, B), ()) 와 ③ 세 GROUP BY 결과를 UNION ALL 한 것도 같은 세 그룹을 만든다. ④ GROUPING SETS((A), (A, B)) 는 전체 합계 그룹 () 가 빠져 결과가 다르다.",
       "references": [
         {
           "type": "text",
@@ -1080,7 +1080,7 @@
         "오류가 발생한다."
       ],
       "correctIndex": 2,
-      "explanation": "WHERE 1=2는 항상 거짓이므로 선택되는 행이 없다.",
+      "explanation": "WHERE 1 = 2 는 어떤 행에 대해서도 거짓이라 조건을 만족하는 행이 없다. 따라서 결과는 0건(공집합)이다(③). 오류가 나지도 않고(④), NULL 한 행이 나오는 것도 아니다(②, 집계 함수를 썼을 때만 한 행이 나온다).",
       "references": [
         {
           "type": "sql",
@@ -1167,7 +1167,7 @@
         "TABLE ACCESS FULL → HASH JOIN"
       ],
       "correctIndex": 1,
-      "explanation": "힌트에 지정된 인덱스를 사용해 조건에 해당하는 ROWID를 수집한 후, 테이블에 ROWID로 접근하여 컬럼 값을 읽는다.",
+      "explanation": "INDEX 힌트로 EMP_DEPT_IDX 를 쓰도록 했으므로, 먼저 인덱스에서 DEPT_NO = 10 인 범위를 읽어 ROWID 를 얻고(INDEX RANGE SCAN), 그 ROWID 로 테이블에서 나머지 컬럼을 읽는다(TABLE ACCESS BY INDEX ROWID). ② 가 맞다. ①④ 는 인덱스를 쓰지 않는 전체 스캔이고, ③④ 의 조인 연산은 테이블이 하나뿐인 이 SQL 에 없다.",
       "references": [
         {
           "type": "sql",
@@ -1205,7 +1205,7 @@
         "FULL OUTER JOIN"
       ],
       "correctIndex": 0,
-      "explanation": "콤마로 연결한 FROM A, B 는 조인 조건이 없는 카티션 곱(CROSS JOIN)과 동치이다.",
+      "explanation": "FROM A, B 처럼 조인 조건 없이 테이블을 나열하면 두 테이블의 모든 행 조합(카티션 곱)이 나온다. ANSI 문법에서 이와 같은 것은 CROSS JOIN 이다(①). INNER JOIN 은 ON 조건이 필요하고, NATURAL JOIN 은 같은 이름 컬럼으로 등가 조인하며, FULL OUTER JOIN 도 조인 조건이 있어야 한다.",
       "references": [
         {
           "type": "sql",
