@@ -1,5 +1,5 @@
 // Auto-generated from scripts/authored/ai-mock.json
-// AI 생성 모의고사 풀 (기출 변형) · 1257문항
+// AI 생성 모의고사 풀 (기출 변형) · 1269문항
 // ⚠ 직접 편집 금지. ai-mock.json 수정 후 'node scripts/build-quiz-bank.mjs' 재실행.
 import type { QuizQuestion } from '../quizBank';
 
@@ -45247,6 +45247,876 @@ export const AI_MOCK: QuizQuestion[] = [
             "BUSAN"
           ]
         ]
+      }
+    ]
+  },
+  {
+    "id": 12217,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "1과목",
+    "number": 1418,
+    "title": "다음 중 식별자로 가장 부적절한 것은?",
+    "options": [
+      "주민등록번호",
+      "고객명",
+      "사원번호",
+      "주문번호"
+    ],
+    "correctIndex": 1,
+    "explanation": "식별자는 인스턴스마다 값이 유일하고 잘 바뀌지 않아야 한다. 고객명은 같은 이름의 고객이 있을 수 있고 개명 등으로 바뀔 수도 있어 식별자로 가장 부적절하다(②). 주민등록번호(①)는 사람마다 유일한 본질 식별자이고, 사원번호(③)·주문번호(④)도 업무에서 유일하게 부여되는 값이다. ※ 원본의 보기(그림)가 누락되어, 같은 개념을 묻는 모의고사 형태로 보기를 재구성했다.",
+    "chapter": "데이터 모델 개념",
+    "_source": "sqld-1140",
+    "_origId": "sqld-0026",
+    "_category": "데이터베이스 개념",
+    "_correctRate": 10
+  },
+  {
+    "id": 12218,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 1419,
+    "title": "다음 중 아래와 같은 테이블 A에 대해서 SQL을 수행하였을 때의 결과로 가장 적절한 것은?",
+    "options": [
+      "(009, A003, 600)",
+      "(009, A003, 600), (005, A002, 500), (002, A001, 300)",
+      "결과가 없다(공집합).",
+      "(009, A003, 600), (005, A002, 500)"
+    ],
+    "correctIndex": 3,
+    "explanation": "GROUP BY 가, 나 로 묶으면 조합마다 행이 하나씩이라 SUM(다) 는 600, 500, 300, 200 이다. HAVING SUM(다) >= 500 을 만족하는 것은 600, 500 두 그룹이므로 (009, A003, 600), (005, A002, 500) 이 조회된다(④, ORDER BY 가 없어 순서는 달라질 수 있다). ① 은 > 500 으로 본 결과, ② 는 300 까지 포함한 결과다. ※ 원본의 보기(그림)가 누락되어, 같은 개념을 묻는 모의고사 형태로 보기를 재구성했다.",
+    "chapter": "그룹 함수",
+    "_source": "sqld-1140",
+    "_origId": "sqld-0080",
+    "_category": "집계 함수",
+    "_correctRate": 10,
+    "references": [
+      {
+        "type": "text",
+        "content": "CREATE TABLE A (\n    가 VARCHAR2(10),\n    나 VARCHAR2(10),\n    다 NUMBER\n);\n\nINSERT INTO A VALUES ('009', 'A003', 600);\nINSERT INTO A VALUES ('005', 'A002', 500);\nINSERT INTO A VALUES ('002', 'A001', 300);\nINSERT INTO A VALUES ('010', 'A004', 200);\n\nCOMMIT;\n\n<SQL>\nSELECT 가, 나, SUM(다) AS 다\nFROM A\nGROUP BY 가, 나\nHAVING SUM(다) >= 500;"
+      }
+    ]
+  },
+  {
+    "id": 12219,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 1420,
+    "title": "다음 중 아래 SQL의 실행결과로 가장 적절한 것은?",
+    "options": [
+      "100, 999",
+      "999, 100, 200",
+      "999, 100",
+      "100, 200, 999"
+    ],
+    "correctIndex": 2,
+    "explanation": "HAVING COUNT(*) = 2 로 두 번 나오는 ID 만 남기면 100 과 999 다(200 은 세 번). 정렬 키 CASE 식은 999 이면 0, 나머지는 ID 그대로라 999(0) → 100(100) 순이다(③). ① 은 ID 값으로 정렬한 결과, ②④ 는 HAVING 조건을 무시해 200 이 들어갔다. ※ 원본의 보기(그림)가 누락되어, 같은 개념을 묻는 모의고사 형태로 보기를 재구성했다.",
+    "chapter": "그룹 함수",
+    "_source": "sqld-1140",
+    "_origId": "sqld-0081",
+    "_category": "집계 함수",
+    "_correctRate": 10,
+    "references": [
+      {
+        "type": "table",
+        "caption": "TBL",
+        "headers": [
+          "ID"
+        ],
+        "rows": [
+          [
+            "100"
+          ],
+          [
+            "100"
+          ],
+          [
+            "200"
+          ],
+          [
+            "200"
+          ],
+          [
+            "200"
+          ],
+          [
+            "999"
+          ],
+          [
+            "999"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "caption": "[SQL]",
+        "code": "SELECT ID FROM TBL\nGROUP BY ID\nHAVING COUNT(*) = 2\nORDER BY (CASE WHEN ID = 999 THEN 0 ELSE ID END)"
+      }
+    ]
+  },
+  {
+    "id": 12220,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 1421,
+    "title": "다음 SQL의 실행 결과로 가장 적절한 것은?",
+    "options": [
+      "B 300 / A 200 / C 100 / A 50",
+      "A 50 / A 200 / B 300 / C 100",
+      "A 200 / A 50 / B 300 / C 100",
+      "A 200 / A 50 / C 100 / B 300"
+    ],
+    "correctIndex": 2,
+    "explanation": "첫 정렬 키는 ID 가 'A' 면 1, 나머지는 2 라서 A 행들이 먼저 나온다. 같은 키 안에서는 AMT DESC 로 정렬하므로 A 200, A 50 다음에 B 300, C 100 순이다(③). ① 은 AMT 만으로 정렬한 결과, ② 는 A 안에서 오름차순, ④ 는 B·C 를 오름차순으로 정렬한 결과다. ※ 원본의 보기(그림)가 누락되어, 같은 개념을 묻는 모의고사 형태로 보기를 재구성했다.",
+    "chapter": "DML",
+    "_source": "sqld-1140",
+    "_origId": "sqld-0084",
+    "_category": "DML",
+    "_correctRate": 10,
+    "references": [
+      {
+        "type": "table",
+        "caption": "TBL",
+        "headers": [
+          "ID",
+          "AMT"
+        ],
+        "rows": [
+          [
+            "A",
+            "50"
+          ],
+          [
+            "A",
+            "200"
+          ],
+          [
+            "B",
+            "300"
+          ],
+          [
+            "C",
+            "100"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "caption": "[SQL]",
+        "code": "SELECT ID, AMT\nFROM   TBL\nORDER BY (CASE WHEN ID = 'A' THEN 1 ELSE 2 END),\n         AMT DESC"
+      }
+    ]
+  },
+  {
+    "id": 12221,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 1422,
+    "title": "다음 중 아래 테이블들을대상으로 SQL 문장을 수행한 결과로 가장 적절한 것은?",
+    "options": [
+      "홍길동, 안중근, 고길동, 이대로 4명만 출력되고 모두 단말기·OS 정보가 채워진다.",
+      "고객 6명이 모두 출력되고 단말기가 있는 홍길동·안중근·고길동·이대로는 단말기·OS 정보가 채워진다.",
+      "홍길동, 강감찬 2명만 출력되고 강감찬의 단말기·OS 정보는 NULL 이다.",
+      "고객 6명이 모두 출력되고 홍길동만 단말기(A1000)·OS(Android) 정보가 있으며 나머지 5명은 NULL 이다."
+    ],
+    "correctIndex": 3,
+    "explanation": "LEFT OUTER JOIN 의 ON 절 조건은 오른쪽 테이블을 붙일지 정하는 조건일 뿐 왼쪽(고객) 행을 걸러내지 않는다. 그래서 고객 6명은 모두 출력된다. ON (A.고객번호 IN (11000, 12000) AND A.단말기ID = B.단말기ID) 를 만족하는 것은 홍길동(11000, 단말기 1000)뿐이고, 강감찬은 단말기ID 가 NULL, 나머지는 고객번호 조건이 거짓이라 단말기·OS 컬럼이 NULL 이다(④). ② 는 ON 의 고객번호 조건을 무시한 결과, ③ 은 ON 조건을 WHERE 처럼 행 필터로 본 결과, ① 은 INNER JOIN 결과다. ※ 원본의 보기(그림)가 누락되어, 같은 개념을 묻는 모의고사 형태로 보기를 재구성했다.",
+    "chapter": "조인",
+    "_source": "sqld-1140",
+    "_origId": "sqld-0095",
+    "_category": "JOIN",
+    "_correctRate": 10,
+    "references": [
+      {
+        "type": "table",
+        "caption": "[테이블 : OS]",
+        "headers": [
+          "OSID(PK)",
+          "OS명"
+        ],
+        "rows": [
+          [
+            "100",
+            "Android"
+          ],
+          [
+            "200",
+            "iOS"
+          ],
+          [
+            "300",
+            "Bada"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "[테이블 : 단말기]",
+        "headers": [
+          "단말기ID(PK)",
+          "단말기명",
+          "OSID(FK)"
+        ],
+        "rows": [
+          [
+            "1000",
+            "A1000",
+            "100"
+          ],
+          [
+            "2000",
+            "B2000",
+            "100"
+          ],
+          [
+            "3000",
+            "C3000",
+            "200"
+          ],
+          [
+            "4000",
+            "D3000",
+            "300"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "[테이블 : 고객]",
+        "headers": [
+          "고객번호(PK)",
+          "고객명",
+          "단말기ID(FK)"
+        ],
+        "rows": [
+          [
+            "11000",
+            "홍길동",
+            "1000"
+          ],
+          [
+            "12000",
+            "강감찬",
+            "NULL"
+          ],
+          [
+            "13000",
+            "이순신",
+            "NULL"
+          ],
+          [
+            "14000",
+            "안중근",
+            "3000"
+          ],
+          [
+            "15000",
+            "고길동",
+            "4000"
+          ],
+          [
+            "16000",
+            "이대로",
+            "4000"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "caption": "[SQL]",
+        "code": "SELECT A.고객번호, A.고객명, B.단말기ID, B.단말기명, C.OSID, C.OS명\nFROM   고객 A LEFT OUTER JOIN 단말기 B\nON     (A.고객번호 IN (11000, 12000) AND A.단말기ID = B.단말기ID) LEFT OUTER JOIN OS C\nON     (B.OSID = C.OSID)\nORDER BY A.고객번호;"
+      }
+    ]
+  },
+  {
+    "id": 12222,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 1423,
+    "title": "다음 중 아래와 같은 데이터 상황에서 SQL의 수행 결과로 가장 적절한 것은?",
+    "options": [
+      "(B, 2, B, 2), (C, 3, C, 3) 2행",
+      "(A, 1, NULL, NULL), (B, 2, B, 2), (C, 3, C, 3), (D, 4, D, 4), (E, 5, NULL, NULL) 5행",
+      "(A, 1, NULL, NULL), (B, 2, B, 2), (C, 3, C, 3), (D, 4, NULL, NULL), (E, 5, NULL, NULL) 5행",
+      "(A, 1, NULL, NULL), (B, 2, B, 2), (C, 3, C, 3) 3행"
+    ],
+    "correctIndex": 2,
+    "explanation": "LEFT OUTER JOIN 은 TAB1 의 5행을 모두 보존한다. ON 절의 B.C2 BETWEEN 1 AND 3 은 붙일 TAB2 행을 고르는 조건이라, B(2)·C(3)만 짝이 붙고 D 는 TAB2 의 C2 가 4 라서 조건을 만족하지 못해 NULL 로 붙는다. A, E 는 TAB2 에 짝이 없다(③). ① 은 INNER JOIN, ② 는 BETWEEN 조건을 무시한 결과, ④ 는 조건을 WHERE 처럼 TAB1 행까지 걸러낸 결과다. ※ 원본의 보기(그림)가 누락되어, 같은 개념을 묻는 모의고사 형태로 보기를 재구성했다.",
+    "chapter": "조인",
+    "_source": "sqld-1140",
+    "_origId": "sqld-0098",
+    "_category": "JOIN",
+    "_correctRate": 10,
+    "references": [
+      {
+        "type": "table",
+        "caption": "TAB1",
+        "headers": [
+          "C1",
+          "C2"
+        ],
+        "rows": [
+          [
+            "A",
+            "1"
+          ],
+          [
+            "B",
+            "2"
+          ],
+          [
+            "C",
+            "3"
+          ],
+          [
+            "D",
+            "4"
+          ],
+          [
+            "E",
+            "5"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "TAB2",
+        "headers": [
+          "C1",
+          "C2"
+        ],
+        "rows": [
+          [
+            "B",
+            "2"
+          ],
+          [
+            "C",
+            "3"
+          ],
+          [
+            "D",
+            "4"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "caption": "[SQL]",
+        "code": "SELECT *\nFROM TAB1 A LEFT OUTER JOIN TAB2 B\n  ON ( A.C1 = B.C1 AND B.C2 BETWEEN 1 AND 3)"
+      }
+    ]
+  },
+  {
+    "id": 12223,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 1424,
+    "title": "다음 중 아래 TBL1, TBL2 테이블에 대해 SQL을 수행한 결과인 것은?",
+    "options": [
+      "(AA, A1, 2), (AB, A2, 2)",
+      "(AA, A1, 3), (AB, A2, 3), (AC, A3, 1), (AD, A4, 1)",
+      "(AA, A1, 2), (AB, A2, 2), (AC, A3, 1), (AD, A4, 1)",
+      "(AA, A1, 1), (AB, A2, 1), (AC, A3, 1), (AD, A4, 1)"
+    ],
+    "correctIndex": 3,
+    "explanation": "집합 연산자는 위에서부터 차례로 수행된다. TBL1 UNION ALL TBL2 로 6행(AA·AB 두 번씩)이 된 뒤, 마지막 UNION TBL1 에서 중복이 모두 제거되어 서로 다른 4행만 남는다. 그래서 각 그룹의 COUNT(*) 는 1 이다(④). 순서를 바꿔 UNION 을 먼저, UNION ALL 을 나중에 하면 ③, 중복 제거 없이 모두 UNION ALL 이면 ② 가 된다. ※ 원본의 보기(그림)가 누락되어, 같은 개념을 묻는 모의고사 형태로 보기를 재구성했다.",
+    "chapter": "집합 연산자",
+    "_source": "sqld-1140",
+    "_origId": "sqld-0104",
+    "_category": "집합 연산자",
+    "_correctRate": 10,
+    "references": [
+      {
+        "type": "table",
+        "caption": "[테이블 : TBL1]",
+        "headers": [
+          "COL1",
+          "COL2"
+        ],
+        "rows": [
+          [
+            "AA",
+            "A1"
+          ],
+          [
+            "AB",
+            "A2"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "[테이블 : TBL2]",
+        "headers": [
+          "COL1",
+          "COL2"
+        ],
+        "rows": [
+          [
+            "AA",
+            "A1"
+          ],
+          [
+            "AB",
+            "A2"
+          ],
+          [
+            "AC",
+            "A3"
+          ],
+          [
+            "AD",
+            "A4"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "caption": "[SQL]",
+        "code": "SELECT COL1, COL2, COUNT(*) AS CNT\nFROM   (SELECT COL1, COL2\n        FROM   TBL1\n        UNION ALL\n        SELECT COL1, COL2\n        FROM   TBL2\n        UNION\n        SELECT COL1, COL2\n        FROM   TBL1)\nGROUP BY COL1, COL2;"
+      }
+    ]
+  },
+  {
+    "id": 12224,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 1425,
+    "title": "다음 중 아래와 같은 사원 테이블에 대해서 SQL을 수행하였을 때의 결과로 가장 적절한 것은?",
+    "options": [
+      "001 홍길동, 002 강감찬, 003 이순신, 004 이민정",
+      "003 이순신, 004 이민정, 005 이병헌",
+      "001 홍길동, 003 이순신, 004 이민정, 005 이병헌, 006 안성기, 007 이수근, 008 김병만",
+      "001 홍길동, 003 이순신, 004 이민정, 005 이병헌"
+    ],
+    "correctIndex": 3,
+    "explanation": "START WITH 로 고른 루트(매니저가 NULL 인 001 홍길동, 005 이병헌)는 CONNECT BY 의 입사일자 조건과 관계없이 결과에 포함된다. CONNECT BY 의 AND 입사일자 BETWEEN '2013-01-01' AND '2013-12-31' 은 자식으로 내려갈 때만 적용되어, 001 의 자식 중 2013년 입사자 003·004 만 붙고 002(2012년)는 빠지며, 005 의 자식 006~008 은 2014년이라 모두 빠진다. ORDER SIBLINGS BY 로 001 → 003 → 004 → 005 순이다(④). ② 는 조건을 WHERE 처럼 루트에도 적용한 결과, ③ 은 날짜 조건을 무시한 결과다. ※ 원본의 보기(그림)가 누락되어, 같은 개념을 묻는 모의고사 형태로 보기를 재구성했다.",
+    "chapter": "계층형 질의",
+    "_source": "sqld-1140",
+    "_origId": "sqld-0109",
+    "_category": "계층형 질의",
+    "_correctRate": 10,
+    "references": [
+      {
+        "type": "table",
+        "caption": "[테이블 : 사원]",
+        "headers": [
+          "사원번호(PK)",
+          "사원명",
+          "입사일자",
+          "매니저사원번호(FK)"
+        ],
+        "rows": [
+          [
+            "001",
+            "홍길동",
+            "2012-01-01",
+            "NULL"
+          ],
+          [
+            "002",
+            "강감찬",
+            "2012-01-01",
+            "001"
+          ],
+          [
+            "003",
+            "이순신",
+            "2013-01-01",
+            "001"
+          ],
+          [
+            "004",
+            "이민정",
+            "2013-01-01",
+            "001"
+          ],
+          [
+            "005",
+            "이병헌",
+            "2013-01-01",
+            "NULL"
+          ],
+          [
+            "006",
+            "안성기",
+            "2014-01-01",
+            "005"
+          ],
+          [
+            "007",
+            "이수근",
+            "2014-01-01",
+            "005"
+          ],
+          [
+            "008",
+            "김병만",
+            "2014-01-01",
+            "005"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "caption": "[SQL]",
+        "code": "SELECT 사원번호, 사원명, 입사일자, 매니저사원번호\nFROM   사원\nSTART WITH 매니저사원번호 IS NULL\nCONNECT BY PRIOR 사원번호 = 매니저사원번호\nAND 입사일자 BETWEEN '2013-01-01' AND '2013-12-31'\nORDER SIBLINGS BY 사원번호;"
+      }
+    ]
+  },
+  {
+    "id": 12225,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 1426,
+    "title": "다음 중 월별매출 테이블을 대상으로 아래 SQL을 수행한 결과인 것은?",
+    "options": [
+      "상품ID·월별 9행에 월별 소계 3행이 더해져 12행이 나온다.",
+      "월별 합계 3행, 상품ID별 합계 3행, 전체 합계 1행으로 7행이 나온다.",
+      "상품ID·월별 9행이 나오며 값은 월별매출 테이블과 같다.",
+      "월별 합계 3행과 상품ID별 합계 3행으로 6행이 나온다."
+    ],
+    "correctIndex": 2,
+    "explanation": "GROUPING SETS((상품ID, 월)) 처럼 괄호로 묶은 조합 하나만 지정하면 GROUP BY 상품ID, 월 과 같다. 상품ID·월 조합마다 행이 하나씩이라 9행이 나오고 값도 원래 테이블과 같다(③). ① 은 GROUPING SETS((월, 상품ID), 월), ② 는 GROUPING SETS(월, 상품ID, ()), ④ 는 괄호 없이 GROUPING SETS(월, 상품ID) 로 썼을 때의 결과다. ※ 원본의 보기(그림)가 누락되어, 같은 개념을 묻는 모의고사 형태로 보기를 재구성했다.",
+    "chapter": "그룹 함수",
+    "_source": "sqld-1140",
+    "_origId": "sqld-0129",
+    "_category": "그룹 함수",
+    "_correctRate": 10,
+    "references": [
+      {
+        "type": "table",
+        "caption": "[테이블 : 월별매출]",
+        "headers": [
+          "상품ID",
+          "월",
+          "매출액"
+        ],
+        "rows": [
+          [
+            "P001",
+            "2014.10",
+            "1500"
+          ],
+          [
+            "P001",
+            "2014.11",
+            "1500"
+          ],
+          [
+            "P001",
+            "2014.12",
+            "2500"
+          ],
+          [
+            "P002",
+            "2014.10",
+            "1000"
+          ],
+          [
+            "P002",
+            "2014.11",
+            "2000"
+          ],
+          [
+            "P002",
+            "2014.12",
+            "1500"
+          ],
+          [
+            "P003",
+            "2014.10",
+            "2000"
+          ],
+          [
+            "P003",
+            "2014.11",
+            "1000"
+          ],
+          [
+            "P003",
+            "2014.12",
+            "1000"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "caption": "[SQL]",
+        "code": "SELECT 상품ID, 월, SUM(매출액) AS 매출액\nFROM   월별매출\nWHERE  월 BETWEEN '2014.10' AND '2014.12'\nGROUP BY GROUPING SETS((상품ID, 월));"
+      }
+    ]
+  },
+  {
+    "id": 12226,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 1427,
+    "title": "다음 중 아래와 같은 테이블에서 SQL을 실행할 때 결과로 가장 적절한 것은?",
+    "options": [
+      "이상화 700 1 / 이규혁 700 2 / 이순신 550 3 / 홍길동 350 4 / 강감찬 350 5",
+      "이상화 700 1 / 이규혁 700 1 / 이순신 550 2 / 홍길동 350 3 / 강감찬 350 3",
+      "홍길동 350 1 / 강감찬 350 1 / 이순신 550 3 / 이상화 700 4 / 이규혁 700 4",
+      "이상화 700 1 / 이규혁 700 1 / 이순신 550 3 / 홍길동 350 4 / 강감찬 350 4"
+    ],
+    "correctIndex": 3,
+    "explanation": "고객별 매출 합계는 홍길동 350, 이순신 550, 강감찬 350, 이상화 700, 이규혁 700 이다. RANK 는 같은 값에 같은 순위를 주고 그 수만큼 다음 순위를 건너뛰므로 이상화·이규혁 1, 이순신 3, 홍길동·강감찬 4 다(④). ① 은 동점에도 다른 순번을 주는 ROW_NUMBER, ② 는 건너뛰지 않는 DENSE_RANK, ③ 은 오름차순으로 매긴 결과다. ※ 원본의 보기(그림)가 누락되어, 같은 개념을 묻는 모의고사 형태로 보기를 재구성했다.",
+    "chapter": "윈도우 함수",
+    "_source": "sqld-1140",
+    "_origId": "sqld-0131",
+    "_category": "윈도우 함수",
+    "_correctRate": 10,
+    "references": [
+      {
+        "type": "table",
+        "caption": "[테이블 : 고객]",
+        "headers": [
+          "고객번호(PK)",
+          "고객명"
+        ],
+        "rows": [
+          [
+            "001",
+            "홍길동"
+          ],
+          [
+            "002",
+            "이순신"
+          ],
+          [
+            "003",
+            "강감찬"
+          ],
+          [
+            "004",
+            "이상화"
+          ],
+          [
+            "005",
+            "이규혁"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "[테이블 : 월별매출]",
+        "headers": [
+          "월(PK)",
+          "고객번호(PK)",
+          "매출액"
+        ],
+        "rows": [
+          [
+            "201301",
+            "001",
+            "200"
+          ],
+          [
+            "201301",
+            "002",
+            "300"
+          ],
+          [
+            "201301",
+            "003",
+            "250"
+          ],
+          [
+            "201301",
+            "004",
+            "300"
+          ],
+          [
+            "201301",
+            "005",
+            "250"
+          ],
+          [
+            "201302",
+            "001",
+            "150"
+          ],
+          [
+            "201302",
+            "002",
+            "150"
+          ],
+          [
+            "201302",
+            "004",
+            "200"
+          ],
+          [
+            "201302",
+            "005",
+            "100"
+          ],
+          [
+            "201303",
+            "002",
+            "100"
+          ],
+          [
+            "201303",
+            "003",
+            "100"
+          ],
+          [
+            "201303",
+            "004",
+            "200"
+          ],
+          [
+            "201303",
+            "005",
+            "350"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "caption": "[SQL]",
+        "code": "SELECT 고객번호, 고객명, 매출액\n      ,RANK() OVER(ORDER BY 매출액 DESC) AS 순위\nFROM   (\n        SELECT A.고객번호\n              ,MAX(A.고객명) AS 고객명\n              ,SUM(B.매출액) AS 매출액\n        FROM   고객 A INNER JOIN 월별매출 B\n        ON     (A.고객번호 = B.고객번호)\n        GROUP BY A.고객번호\n       )\nORDER BY 순위;"
+      }
+    ]
+  },
+  {
+    "id": 12227,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 1428,
+    "title": "다음 중 추천내역 테이블에서 아래와 같은 SQL을 수행하였을 때의 결과로 가장 적절한 것은?",
+    "options": [
+      "(SNS, 나한일, 강감찬, 75), (이벤트응모, 저절로, 이순신, 78), (홈페이지, 저절로, 이대로, 93)",
+      "(SNS, 이순신, 강감찬, 80), (이벤트응모, 홍길동, 강감찬, 88), (홈페이지, 홍두깨, 심청이, 98)",
+      "(홈페이지, 홍두깨, 심청이, 98)",
+      "추천내역 6행이 모두 출력된다."
+    ],
+    "correctIndex": 1,
+    "explanation": "ROW_NUMBER() OVER (PARTITION BY 추천경로 ORDER BY 추천점수 DESC) 는 추천경로마다 점수가 높은 순으로 1, 2, … 를 매기고, RNUM = 1 은 경로별 최고점 한 건씩만 남긴다. SNS 80(이순신), 이벤트응모 88(홍길동), 홈페이지 98(홍두깨)이다(②). ① 은 경로별 최저점, ③ 은 PARTITION 없이 전체 최고점 한 건, ④ 는 필터를 무시한 결과다. ※ 원본의 보기(그림)가 누락되어, 같은 개념을 묻는 모의고사 형태로 보기를 재구성했다.",
+    "chapter": "윈도우 함수",
+    "_source": "sqld-1140",
+    "_origId": "sqld-0133",
+    "_category": "윈도우 함수",
+    "_correctRate": 10,
+    "references": [
+      {
+        "type": "table",
+        "caption": "[테이블 : 추천내역]",
+        "headers": [
+          "추천경로",
+          "추천인",
+          "피추천인",
+          "추천점수"
+        ],
+        "rows": [
+          [
+            "SNS",
+            "나한일",
+            "강감찬",
+            "75"
+          ],
+          [
+            "SNS",
+            "이순신",
+            "강감찬",
+            "80"
+          ],
+          [
+            "이벤트응모",
+            "홍길동",
+            "강감찬",
+            "88"
+          ],
+          [
+            "이벤트응모",
+            "저절로",
+            "이순신",
+            "78"
+          ],
+          [
+            "홈페이지",
+            "저절로",
+            "이대로",
+            "93"
+          ],
+          [
+            "홈페이지",
+            "홍두깨",
+            "심청이",
+            "98"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "caption": "[SQL]",
+        "code": "SELECT 추천경로, 추천인, 피추천인, 추천점수\nFROM   (SELECT 추천경로, 추천인, 피추천인, 추천점수\n              ,ROW_NUMBER() OVER(PARTITION BY 추천경로\n                                 ORDER BY 추천점수 DESC) AS RNUM\n        FROM   추천내역)\nWHERE  RNUM = 1;"
+      }
+    ]
+  },
+  {
+    "id": 12228,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 1429,
+    "title": "다음 주어진 테이블에서 아래의 SQL문을 수행하였을 때의 결괏값으로 올바른 것을 고르시오.",
+    "options": [
+      "(1, NULL, 1), (2, 10, 12), (2, 10, 13)",
+      "(2, 10, 13), (2, 10, 12), (1, NULL, 1)",
+      "(2, 10, 12), (2, 10, 13), (1, NULL, 1)",
+      "(1, NULL, 1), (2, 10, 13), (2, 10, 12)"
+    ],
+    "correctIndex": 1,
+    "explanation": "COL1 DESC 로 2 인 행이 먼저, 1 인 행이 나중에 온다. COL1 이 같은 두 행은 COL2(10)도 같으므로 COL3 DESC 로 13, 12 순이다. 따라서 (2, 10, 13), (2, 10, 12), (1, NULL, 1) 이다(②). Oracle 에서 DESC 정렬 시 NULL 은 앞에 오지만, 이는 COL1 이 같은 행들 안에서 COL2 를 비교할 때만 영향을 주므로 COL1 = 1 인 행을 맨 앞으로 올리지 않는다(④). ① 은 오름차순, ③ 은 COL3 를 오름차순으로 정렬한 결과다. ※ 원본의 보기(그림)가 누락되어, 같은 개념을 묻는 모의고사 형태로 보기를 재구성했다.",
+    "chapter": "DML",
+    "_source": "sqld-1140",
+    "_origId": "sqld-0203",
+    "_category": "DML",
+    "_correctRate": 10,
+    "references": [
+      {
+        "type": "table",
+        "caption": "[SQLD_71]",
+        "headers": [
+          "COL1",
+          "COL2",
+          "COL3"
+        ],
+        "rows": [
+          [
+            "1",
+            "null",
+            "1"
+          ],
+          [
+            "2",
+            "10",
+            "13"
+          ],
+          [
+            "2",
+            "10",
+            "12"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "caption": "[SQL]",
+        "code": "select * from SQLD_71 order by COL1 desc, COL2 desc, COL3 desc;"
       }
     ]
   }

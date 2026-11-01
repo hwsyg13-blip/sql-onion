@@ -485,19 +485,13 @@
       "chapter": "데이터 모델 개념",
       "title": "다음 중 식별자로 가장 부적절한 것은?",
       "options": [
-        "",
-        "",
-        "",
-        ""
+        "주민등록번호",
+        "고객명",
+        "사원번호",
+        "주문번호"
       ],
       "correctIndex": 1,
-      "explanation": "정답은 2 번. (해설 미등록)",
-      "optionReferences": [
-        [],
-        [],
-        [],
-        []
-      ]
+      "explanation": "식별자는 인스턴스마다 값이 유일하고 잘 바뀌지 않아야 한다. 고객명은 같은 이름의 고객이 있을 수 있고 개명 등으로 바뀔 수도 있어 식별자로 가장 부적절하다(②). 주민등록번호(①)는 사람마다 유일한 본질 식별자이고, 사원번호(③)·주문번호(④)도 업무에서 유일하게 부여되는 값이다. ※ 원본의 보기(그림)가 누락되어, 같은 개념을 묻는 모의고사 형태로 보기를 재구성했다."
     },
     {
       "_id": "sqld-0027",
@@ -1917,24 +1911,18 @@
       "chapter": "그룹 함수",
       "title": "다음 중 아래와 같은 테이블 A에 대해서 SQL을 수행하였을 때의 결과로 가장 적절한 것은?",
       "options": [
-        "",
-        "",
-        "",
-        ""
+        "(009, A003, 600)",
+        "(009, A003, 600), (005, A002, 500), (002, A001, 300)",
+        "결과가 없다(공집합).",
+        "(009, A003, 600), (005, A002, 500)"
       ],
       "correctIndex": 3,
-      "explanation": "정답은 4번이다. GROUP BY 가, 나로 각 행이 가/나 조합별로 묶이고, 주어진 데이터에서는 각 조합이 1건씩만 존재하므로 SUM(다)는 각각 600, 500, 300, 200이 된다. HAVING SUM(다) >= 500 조건을 만족하는 것은 600과 500인 두 행뿐이므로 결과는 (009, A003, 600), (005, A002, 500)이다. 단, ORDER BY가 없으므로 실제 출력 순서는 DBMS 실행 계획에 따라 달라질 수 있고, 핵심은 조건을 만족하는 두 행이 조회된다는 점이다.",
+      "explanation": "GROUP BY 가, 나 로 묶으면 조합마다 행이 하나씩이라 SUM(다) 는 600, 500, 300, 200 이다. HAVING SUM(다) >= 500 을 만족하는 것은 600, 500 두 그룹이므로 (009, A003, 600), (005, A002, 500) 이 조회된다(④, ORDER BY 가 없어 순서는 달라질 수 있다). ① 은 > 500 으로 본 결과, ② 는 300 까지 포함한 결과다. ※ 원본의 보기(그림)가 누락되어, 같은 개념을 묻는 모의고사 형태로 보기를 재구성했다.",
       "references": [
         {
           "type": "text",
           "content": "CREATE TABLE A (\n    가 VARCHAR2(10),\n    나 VARCHAR2(10),\n    다 NUMBER\n);\n\nINSERT INTO A VALUES ('009', 'A003', 600);\nINSERT INTO A VALUES ('005', 'A002', 500);\nINSERT INTO A VALUES ('002', 'A001', 300);\nINSERT INTO A VALUES ('010', 'A004', 200);\n\nCOMMIT;\n\n<SQL>\nSELECT 가, 나, SUM(다) AS 다\nFROM A\nGROUP BY 가, 나\nHAVING SUM(다) >= 500;"
         }
-      ],
-      "optionReferences": [
-        [],
-        [],
-        [],
-        []
       ]
     },
     {
@@ -1946,13 +1934,13 @@
       "chapter": "그룹 함수",
       "title": "다음 중 아래 SQL의 실행결과로 가장 적절한 것은?",
       "options": [
-        "",
-        "",
-        "",
-        ""
+        "100, 999",
+        "999, 100, 200",
+        "999, 100",
+        "100, 200, 999"
       ],
       "correctIndex": 2,
-      "explanation": "정답은 3 번. (해설 미등록)",
+      "explanation": "HAVING COUNT(*) = 2 로 두 번 나오는 ID 만 남기면 100 과 999 다(200 은 세 번). 정렬 키 CASE 식은 999 이면 0, 나머지는 ID 그대로라 999(0) → 100(100) 순이다(③). ① 은 ID 값으로 정렬한 결과, ②④ 는 HAVING 조건을 무시해 200 이 들어갔다. ※ 원본의 보기(그림)가 누락되어, 같은 개념을 묻는 모의고사 형태로 보기를 재구성했다.",
       "references": [
         {
           "type": "table",
@@ -1989,12 +1977,6 @@
           "caption": "[SQL]",
           "code": "SELECT ID FROM TBL\nGROUP BY ID\nHAVING COUNT(*) = 2\nORDER BY (CASE WHEN ID = 999 THEN 0 ELSE ID END)"
         }
-      ],
-      "optionReferences": [
-        [],
-        [],
-        [],
-        []
       ]
     },
     {
@@ -2040,13 +2022,13 @@
       "chapter": "DML",
       "title": "다음 SQL의 실행 결과로 가장 적절한 것은?",
       "options": [
-        "",
-        "",
-        "",
-        ""
+        "B 300 / A 200 / C 100 / A 50",
+        "A 50 / A 200 / B 300 / C 100",
+        "A 200 / A 50 / B 300 / C 100",
+        "A 200 / A 50 / C 100 / B 300"
       ],
       "correctIndex": 2,
-      "explanation": "정답은 3 번. (해설 미등록)",
+      "explanation": "첫 정렬 키는 ID 가 'A' 면 1, 나머지는 2 라서 A 행들이 먼저 나온다. 같은 키 안에서는 AMT DESC 로 정렬하므로 A 200, A 50 다음에 B 300, C 100 순이다(③). ① 은 AMT 만으로 정렬한 결과, ② 는 A 안에서 오름차순, ④ 는 B·C 를 오름차순으로 정렬한 결과다. ※ 원본의 보기(그림)가 누락되어, 같은 개념을 묻는 모의고사 형태로 보기를 재구성했다.",
       "references": [
         {
           "type": "table",
@@ -2079,12 +2061,6 @@
           "caption": "[SQL]",
           "code": "SELECT ID, AMT\nFROM   TBL\nORDER BY (CASE WHEN ID = 'A' THEN 1 ELSE 2 END),\n         AMT DESC"
         }
-      ],
-      "optionReferences": [
-        [],
-        [],
-        [],
-        []
       ]
     },
     {
@@ -2285,13 +2261,13 @@
       "chapter": "조인",
       "title": "다음 중 아래 테이블들을대상으로 SQL 문장을 수행한 결과로 가장 적절한 것은?",
       "options": [
-        "",
-        "",
-        "",
-        ""
+        "홍길동, 안중근, 고길동, 이대로 4명만 출력되고 모두 단말기·OS 정보가 채워진다.",
+        "고객 6명이 모두 출력되고 단말기가 있는 홍길동·안중근·고길동·이대로는 단말기·OS 정보가 채워진다.",
+        "홍길동, 강감찬 2명만 출력되고 강감찬의 단말기·OS 정보는 NULL 이다.",
+        "고객 6명이 모두 출력되고 홍길동만 단말기(A1000)·OS(Android) 정보가 있으며 나머지 5명은 NULL 이다."
       ],
       "correctIndex": 3,
-      "explanation": "정답은 4 번. (해설 미등록)",
+      "explanation": "LEFT OUTER JOIN 의 ON 절 조건은 오른쪽 테이블을 붙일지 정하는 조건일 뿐 왼쪽(고객) 행을 걸러내지 않는다. 그래서 고객 6명은 모두 출력된다. ON (A.고객번호 IN (11000, 12000) AND A.단말기ID = B.단말기ID) 를 만족하는 것은 홍길동(11000, 단말기 1000)뿐이고, 강감찬은 단말기ID 가 NULL, 나머지는 고객번호 조건이 거짓이라 단말기·OS 컬럼이 NULL 이다(④). ② 는 ON 의 고객번호 조건을 무시한 결과, ③ 은 ON 조건을 WHERE 처럼 행 필터로 본 결과, ① 은 INNER JOIN 결과다. ※ 원본의 보기(그림)가 누락되어, 같은 개념을 묻는 모의고사 형태로 보기를 재구성했다.",
       "references": [
         {
           "type": "table",
@@ -2392,12 +2368,6 @@
           "caption": "[SQL]",
           "code": "SELECT A.고객번호, A.고객명, B.단말기ID, B.단말기명, C.OSID, C.OS명\nFROM   고객 A LEFT OUTER JOIN 단말기 B\nON     (A.고객번호 IN (11000, 12000) AND A.단말기ID = B.단말기ID) LEFT OUTER JOIN OS C\nON     (B.OSID = C.OSID)\nORDER BY A.고객번호;"
         }
-      ],
-      "optionReferences": [
-        [],
-        [],
-        [],
-        []
       ]
     },
     {
@@ -2503,13 +2473,13 @@
       "chapter": "조인",
       "title": "다음 중 아래와 같은 데이터 상황에서 SQL의 수행 결과로 가장 적절한 것은?",
       "options": [
-        "",
-        "",
-        "",
-        ""
+        "(B, 2, B, 2), (C, 3, C, 3) 2행",
+        "(A, 1, NULL, NULL), (B, 2, B, 2), (C, 3, C, 3), (D, 4, D, 4), (E, 5, NULL, NULL) 5행",
+        "(A, 1, NULL, NULL), (B, 2, B, 2), (C, 3, C, 3), (D, 4, NULL, NULL), (E, 5, NULL, NULL) 5행",
+        "(A, 1, NULL, NULL), (B, 2, B, 2), (C, 3, C, 3) 3행"
       ],
       "correctIndex": 2,
-      "explanation": "정답은 3 번. (해설 미등록)",
+      "explanation": "LEFT OUTER JOIN 은 TAB1 의 5행을 모두 보존한다. ON 절의 B.C2 BETWEEN 1 AND 3 은 붙일 TAB2 행을 고르는 조건이라, B(2)·C(3)만 짝이 붙고 D 는 TAB2 의 C2 가 4 라서 조건을 만족하지 못해 NULL 로 붙는다. A, E 는 TAB2 에 짝이 없다(③). ① 은 INNER JOIN, ② 는 BETWEEN 조건을 무시한 결과, ④ 는 조건을 WHERE 처럼 TAB1 행까지 걸러낸 결과다. ※ 원본의 보기(그림)가 누락되어, 같은 개념을 묻는 모의고사 형태로 보기를 재구성했다.",
       "references": [
         {
           "type": "table",
@@ -2568,12 +2538,6 @@
           "caption": "[SQL]",
           "code": "SELECT *\nFROM TAB1 A LEFT OUTER JOIN TAB2 B\n  ON ( A.C1 = B.C1 AND B.C2 BETWEEN 1 AND 3)"
         }
-      ],
-      "optionReferences": [
-        [],
-        [],
-        [],
-        []
       ]
     },
     {
@@ -2632,13 +2596,13 @@
       "chapter": "집합 연산자",
       "title": "다음 중 아래 TBL1, TBL2 테이블에 대해 SQL을 수행한 결과인 것은?",
       "options": [
-        "",
-        "",
-        "",
-        ""
+        "(AA, A1, 2), (AB, A2, 2)",
+        "(AA, A1, 3), (AB, A2, 3), (AC, A3, 1), (AD, A4, 1)",
+        "(AA, A1, 2), (AB, A2, 2), (AC, A3, 1), (AD, A4, 1)",
+        "(AA, A1, 1), (AB, A2, 1), (AC, A3, 1), (AD, A4, 1)"
       ],
       "correctIndex": 3,
-      "explanation": "집합 연산자는 SQL에서 위에 정의된 연산자가 먼저 수행된다. 그러므로 UNION이 나중에 수행되므로 \r\n결과적으로 중복 데이터가 모두 제거되어 ④과 같은 결과가 도출된다. 만일 UNION과 UNION ALL의 \r\n순서를 바꾼다면 ③과 같은 결과가 도출된다",
+      "explanation": "집합 연산자는 위에서부터 차례로 수행된다. TBL1 UNION ALL TBL2 로 6행(AA·AB 두 번씩)이 된 뒤, 마지막 UNION TBL1 에서 중복이 모두 제거되어 서로 다른 4행만 남는다. 그래서 각 그룹의 COUNT(*) 는 1 이다(④). 순서를 바꿔 UNION 을 먼저, UNION ALL 을 나중에 하면 ③, 중복 제거 없이 모두 UNION ALL 이면 ② 가 된다. ※ 원본의 보기(그림)가 누락되어, 같은 개념을 묻는 모의고사 형태로 보기를 재구성했다.",
       "references": [
         {
           "type": "table",
@@ -2689,12 +2653,6 @@
           "caption": "[SQL]",
           "code": "SELECT COL1, COL2, COUNT(*) AS CNT\nFROM   (SELECT COL1, COL2\n        FROM   TBL1\n        UNION ALL\n        SELECT COL1, COL2\n        FROM   TBL2\n        UNION\n        SELECT COL1, COL2\n        FROM   TBL1)\nGROUP BY COL1, COL2;"
         }
-      ],
-      "optionReferences": [
-        [],
-        [],
-        [],
-        []
       ]
     },
     {
@@ -2830,13 +2788,13 @@
       "chapter": "계층형 질의",
       "title": "다음 중 아래와 같은 사원 테이블에 대해서 SQL을 수행하였을 때의 결과로 가장 적절한 것은?",
       "options": [
-        "",
-        "",
-        "",
-        ""
+        "001 홍길동, 002 강감찬, 003 이순신, 004 이민정",
+        "003 이순신, 004 이민정, 005 이병헌",
+        "001 홍길동, 003 이순신, 004 이민정, 005 이병헌, 006 안성기, 007 이수근, 008 김병만",
+        "001 홍길동, 003 이순신, 004 이민정, 005 이병헌"
       ],
       "correctIndex": 3,
-      "explanation": "CONNECT BY 절에 작성된 조건절은 WHERE 절에 작성된 조건절과 다르다. START WITH 절에서 \r\n필터링된 시작 데이터는 결과목록에 포함되어지며, 이후 CONNECT BY 절에 의해 필터링 된다. 그러 \r\n므로 매니저 사원번호가 NULL인 데이터는 결과목록에 포함되며, 이후 리커시브 조인에 의해 입사일자가 필터링 된다.",
+      "explanation": "START WITH 로 고른 루트(매니저가 NULL 인 001 홍길동, 005 이병헌)는 CONNECT BY 의 입사일자 조건과 관계없이 결과에 포함된다. CONNECT BY 의 AND 입사일자 BETWEEN '2013-01-01' AND '2013-12-31' 은 자식으로 내려갈 때만 적용되어, 001 의 자식 중 2013년 입사자 003·004 만 붙고 002(2012년)는 빠지며, 005 의 자식 006~008 은 2014년이라 모두 빠진다. ORDER SIBLINGS BY 로 001 → 003 → 004 → 005 순이다(④). ② 는 조건을 WHERE 처럼 루트에도 적용한 결과, ③ 은 날짜 조건을 무시한 결과다. ※ 원본의 보기(그림)가 누락되어, 같은 개념을 묻는 모의고사 형태로 보기를 재구성했다.",
       "references": [
         {
           "type": "table",
@@ -2903,12 +2861,6 @@
           "caption": "[SQL]",
           "code": "SELECT 사원번호, 사원명, 입사일자, 매니저사원번호\nFROM   사원\nSTART WITH 매니저사원번호 IS NULL\nCONNECT BY PRIOR 사원번호 = 매니저사원번호\nAND 입사일자 BETWEEN '2013-01-01' AND '2013-12-31'\nORDER SIBLINGS BY 사원번호;"
         }
-      ],
-      "optionReferences": [
-        [],
-        [],
-        [],
-        []
       ]
     },
     {
@@ -4281,13 +4233,13 @@
       "chapter": "그룹 함수",
       "title": "다음 중 월별매출 테이블을 대상으로 아래 SQL을 수행한 결과인 것은?",
       "options": [
-        "",
-        "",
-        "",
-        ""
+        "상품ID·월별 9행에 월별 소계 3행이 더해져 12행이 나온다.",
+        "월별 합계 3행, 상품ID별 합계 3행, 전체 합계 1행으로 7행이 나온다.",
+        "상품ID·월별 9행이 나오며 값은 월별매출 테이블과 같다.",
+        "월별 합계 3행과 상품ID별 합계 3행으로 6행이 나온다."
       ],
       "correctIndex": 2,
-      "explanation": "GROUPPING SETS 함수는 표시된 인수들에 대한 개별 집계를 구하는 기능을 하며, 위의 SQL은 \n(상품ID, 월)별 집계 데이터를 출력한다. 각 보기별 SQL은 아래와 같다.\n① GROUPING SETS에 (월, 상품ID) 별, 월별로 집계되었다.\n SELECT 상품ID, 월, SUM(매출액)  AS 매출액\nFROM 월별매출\nWHERE 월 BETWEEN ’2014.10' AND '2014.12’ \nGROUP BY GROUPING SETS((월, 상품ID), 월);\n② GROUPING SETS에 월별, 상품ID별과 전체가 각각 집계되었다.\n SELECT 상품ID, 월, SUM(매출액) AS 매출액\nFROM 월별매출\nWHERE 월 BETWEEN ’2014.10' AND ’2014.12’\n GROUP BY GROUPING SETS(월, 상품ID, ());\n④ GROUPING SETS에 괄호를 사용하지 않아 월별과 상품ID별로 각각 집계되었다.\n SELECT 상품ID, 월, SUM(매출액) AS 매출액\nFROM 월별매출;\nWHERE 월 BETWEEN '2014.10' AND '2014.12'\n GROUP BY GROUPING SETS (월, 상품ID);",
+      "explanation": "GROUPING SETS((상품ID, 월)) 처럼 괄호로 묶은 조합 하나만 지정하면 GROUP BY 상품ID, 월 과 같다. 상품ID·월 조합마다 행이 하나씩이라 9행이 나오고 값도 원래 테이블과 같다(③). ① 은 GROUPING SETS((월, 상품ID), 월), ② 는 GROUPING SETS(월, 상품ID, ()), ④ 는 괄호 없이 GROUPING SETS(월, 상품ID) 로 썼을 때의 결과다. ※ 원본의 보기(그림)가 누락되어, 같은 개념을 묻는 모의고사 형태로 보기를 재구성했다.",
       "references": [
         {
           "type": "table",
@@ -4350,12 +4302,6 @@
           "caption": "[SQL]",
           "code": "SELECT 상품ID, 월, SUM(매출액) AS 매출액\nFROM   월별매출\nWHERE  월 BETWEEN '2014.10' AND '2014.12'\nGROUP BY GROUPING SETS((상품ID, 월));"
         }
-      ],
-      "optionReferences": [
-        [],
-        [],
-        [],
-        []
       ]
     },
     {
@@ -4384,13 +4330,13 @@
       "chapter": "윈도우 함수",
       "title": "다음 중 아래와 같은 테이블에서 SQL을 실행할 때 결과로 가장 적절한 것은?",
       "options": [
-        "",
-        "",
-        "",
-        ""
+        "이상화 700 1 / 이규혁 700 2 / 이순신 550 3 / 홍길동 350 4 / 강감찬 350 5",
+        "이상화 700 1 / 이규혁 700 1 / 이순신 550 2 / 홍길동 350 3 / 강감찬 350 3",
+        "홍길동 350 1 / 강감찬 350 1 / 이순신 550 3 / 이상화 700 4 / 이규혁 700 4",
+        "이상화 700 1 / 이규혁 700 1 / 이순신 550 3 / 홍길동 350 4 / 강감찬 350 4"
       ],
       "correctIndex": 3,
-      "explanation": "위의 SQL은 고객별 매출액과 매출 순위를 구하되 동일 순위일 경우 중간 순위를 비워둔 데이터를 \r\n추출한다. 순위를 구하는 함수로는 RANK, DENSE_RANK, ROW_NUMBER 함수가 있다. RANK WINDOW FUNCTION은 동일 값에 대해서는 동일 순위를 부여하고 중간 순위는 비워 두지만, \r\nDENSE_RANK 함수는 동일 순위를 부여하되 중간 순위를 비우지 않는다. ROW_NUMBER 함수는 \r\n동일 값에 대해서도 유일한 순위를 부여한다.",
+      "explanation": "고객별 매출 합계는 홍길동 350, 이순신 550, 강감찬 350, 이상화 700, 이규혁 700 이다. RANK 는 같은 값에 같은 순위를 주고 그 수만큼 다음 순위를 건너뛰므로 이상화·이규혁 1, 이순신 3, 홍길동·강감찬 4 다(④). ① 은 동점에도 다른 순번을 주는 ROW_NUMBER, ② 는 건너뛰지 않는 DENSE_RANK, ③ 은 오름차순으로 매긴 결과다. ※ 원본의 보기(그림)가 누락되어, 같은 개념을 묻는 모의고사 형태로 보기를 재구성했다.",
       "references": [
         {
           "type": "table",
@@ -4501,14 +4447,8 @@
         {
           "type": "sql",
           "caption": "[SQL]",
-          "code": "SELECT 고객번호, 고객명, 매출액\n      ,RANK() OVER(ORDER BY 매출액 DESC) AS 순위\nFROM   (\n        SELECT A.고객번호\n              ,MAX(A.고객명) AS 고객명\n              ,SUM(B.매출액) AS 매출액\n        FROM   고객 A INNER JOIN 월별매출 B\n        ON     (A.고객번호 = B.고객번호)\n        GROUP BY A.고객번호\n       )\nORDER BY RNK;"
+          "code": "SELECT 고객번호, 고객명, 매출액\n      ,RANK() OVER(ORDER BY 매출액 DESC) AS 순위\nFROM   (\n        SELECT A.고객번호\n              ,MAX(A.고객명) AS 고객명\n              ,SUM(B.매출액) AS 매출액\n        FROM   고객 A INNER JOIN 월별매출 B\n        ON     (A.고객번호 = B.고객번호)\n        GROUP BY A.고객번호\n       )\nORDER BY 순위;"
         }
-      ],
-      "optionReferences": [
-        [],
-        [],
-        [],
-        []
       ]
     },
     {
@@ -4629,13 +4569,13 @@
       "chapter": "윈도우 함수",
       "title": "다음 중 추천내역 테이블에서 아래와 같은 SQL을 수행하였을 때의 결과로 가장 적절한 것은?",
       "options": [
-        "",
-        "",
-        "",
-        ""
+        "(SNS, 나한일, 강감찬, 75), (이벤트응모, 저절로, 이순신, 78), (홈페이지, 저절로, 이대로, 93)",
+        "(SNS, 이순신, 강감찬, 80), (이벤트응모, 홍길동, 강감찬, 88), (홈페이지, 홍두깨, 심청이, 98)",
+        "(홈페이지, 홍두깨, 심청이, 98)",
+        "추천내역 6행이 모두 출력된다."
       ],
       "correctIndex": 1,
-      "explanation": " ROW_NUMBER 함수는 ORDER BY절에 의해 정렬된 데이터에 동일 값이 존재하더라도 유일한 순위를 부여하는 함수로서 데이터 그룹 내에 유일한 순위를 추출할 때 사용할 수 있는 함수이다.\n문제의 SQL은 추천경로별(PARTITION BY 추천경로)로 추천점수가 가장 높은 (ORDER BY 추천점수 \nDESC) 데이터를 한건씩만 출력하지만, \n①은 추천경로별로 추천점수가 가장 낮은 데이터를 각 한건씩 출력하였으며,\n③은 전체에서 추천점수가 가장 높은 데이터 한건만을 출력하였고\n④은 전체 데이터를 그대로 출력하였다.",
+      "explanation": "ROW_NUMBER() OVER (PARTITION BY 추천경로 ORDER BY 추천점수 DESC) 는 추천경로마다 점수가 높은 순으로 1, 2, … 를 매기고, RNUM = 1 은 경로별 최고점 한 건씩만 남긴다. SNS 80(이순신), 이벤트응모 88(홍길동), 홈페이지 98(홍두깨)이다(②). ① 은 경로별 최저점, ③ 은 PARTITION 없이 전체 최고점 한 건, ④ 는 필터를 무시한 결과다. ※ 원본의 보기(그림)가 누락되어, 같은 개념을 묻는 모의고사 형태로 보기를 재구성했다.",
       "references": [
         {
           "type": "table",
@@ -4690,12 +4630,6 @@
           "caption": "[SQL]",
           "code": "SELECT 추천경로, 추천인, 피추천인, 추천점수\nFROM   (SELECT 추천경로, 추천인, 피추천인, 추천점수\n              ,ROW_NUMBER() OVER(PARTITION BY 추천경로\n                                 ORDER BY 추천점수 DESC) AS RNUM\n        FROM   추천내역)\nWHERE  RNUM = 1;"
         }
-      ],
-      "optionReferences": [
-        [],
-        [],
-        [],
-        []
       ]
     },
     {
@@ -5967,13 +5901,13 @@
       "chapter": "DML",
       "title": "다음 주어진 테이블에서 아래의 SQL문을 수행하였을 때의 결괏값으로 올바른 것을 고르시오.",
       "options": [
-        "",
-        "",
-        "",
-        ""
+        "(1, NULL, 1), (2, 10, 12), (2, 10, 13)",
+        "(2, 10, 13), (2, 10, 12), (1, NULL, 1)",
+        "(2, 10, 12), (2, 10, 13), (1, NULL, 1)",
+        "(1, NULL, 1), (2, 10, 13), (2, 10, 12)"
       ],
       "correctIndex": 1,
-      "explanation": "해당 SQL문은 주어진 테이블인 SQLD_71에서 COL1, COL2, COL3 속성 순서대로 내림차순 정렬을 수행한다. 그래서 먼저 COL1에 대해서 내림차순 정렬을 수행하고 같은 COL1 값에 대해서는 COL2의 내림차순 정렬을 수행하고 같은 COL2 값에 대해서는 COL3을 기준으로 내림차순 정렬한다.",
+      "explanation": "COL1 DESC 로 2 인 행이 먼저, 1 인 행이 나중에 온다. COL1 이 같은 두 행은 COL2(10)도 같으므로 COL3 DESC 로 13, 12 순이다. 따라서 (2, 10, 13), (2, 10, 12), (1, NULL, 1) 이다(②). Oracle 에서 DESC 정렬 시 NULL 은 앞에 오지만, 이는 COL1 이 같은 행들 안에서 COL2 를 비교할 때만 영향을 주므로 COL1 = 1 인 행을 맨 앞으로 올리지 않는다(④). ① 은 오름차순, ③ 은 COL3 를 오름차순으로 정렬한 결과다. ※ 원본의 보기(그림)가 누락되어, 같은 개념을 묻는 모의고사 형태로 보기를 재구성했다.",
       "references": [
         {
           "type": "table",
@@ -6006,12 +5940,6 @@
           "caption": "[SQL]",
           "code": "select * from SQLD_71 order by COL1 desc, COL2 desc, COL3 desc;"
         }
-      ],
-      "optionReferences": [
-        [],
-        [],
-        [],
-        []
       ]
     },
     {
