@@ -2,8 +2,8 @@
 // 빌드 후 실행: dist/ 안에 회차/이론/콘텐츠 페이지 생성 + sitemap 갱신
 //
 // 출력 페이지 구조:
-//   /exam/round-NN/           회차별 50문항 + 정답·해설 (16개)
-//   /theory/cXX/              이론 챕터별 섹션 목록 + 본문 요약 (13개)
+//   /exam/                    회차 목록 (회차 상세 /exam/round-NN/ 은 콘텐츠 보호로 생성하지 않음 — 아래 참고)
+//   /theory/cXX/              이론 챕터별 섹션 목록 (챕터 수는 src/data/theory.ts 기준)
 //   /guide/sqld-overview/     SQLD 자격증 안내
 //   /guide/sqld-application/  시험 응시·일정·접수 안내
 //   /guide/sqld-3-week-plan/  3주 합격 학습 계획
@@ -29,15 +29,28 @@ const ROUND_DATES = {
   48: { ko: '2023년 3월', y: 2023 }, 49: { ko: '2023년 6월', y: 2023 }, 50: { ko: '2023년 9월', y: 2023 }, 51: { ko: '2023년 11월', y: 2023 },
   52: { ko: '2024년 3월', y: 2024 }, 53: { ko: '2024년 5월', y: 2024 }, 54: { ko: '2024년 8월', y: 2024 }, 55: { ko: '2024년 11월', y: 2024 },
   56: { ko: '2025년 3월', y: 2025 }, 57: { ko: '2025년 5월', y: 2025 }, 58: { ko: '2025년 8월', y: 2025 }, 59: { ko: '2025년 11월', y: 2025 },
-  60: { ko: '2026년 3월', y: 2026 },
+  60: { ko: '2026년 3월', y: 2026 }, 61: { ko: '2026년 5월', y: 2026 }, 62: { ko: '2026년 8월', y: 2026 },
 };
+// 새 회차를 추가하면 ROUND_DATES 에 한 줄 추가한다 (날짜 없는 회차는 건너뛴다 — 아래 rounds 참고).
 
 const rounds = [];
-for (let n = 45; n <= 60; n++) {
+for (const n of Object.keys(ROUND_DATES).map(Number).sort((a, b) => a - b)) {
   const path = `scripts/authored/round-${n}.json`;
   if (!existsSync(path)) continue;
   rounds.push({ round: n, ...JSON.parse(readFileSync(path, 'utf8')), date: ROUND_DATES[n] });
 }
+
+const firstRound = rounds[0], lastRound = rounds[rounds.length - 1];
+const totalQuestions = rounds.reduce((n, r) => n + (r.authored || r.items || r.questions || []).length, 0);
+const shortDate = (ko) => ko.replace(/(\d{4})년 (\d+)월/, (_, y, m) => `${y}.${String(m).padStart(2, '0')}`);
+
+// 시험 일정 — 앱 D-day 와 같은 원본(src/lib/examDate.ts)을 읽는다.
+const EXAM_SCHEDULE = [...readFileSync('src/lib/examDate.ts', 'utf8').matchAll(/\{\s*round:\s*(\d+),\s*date:\s*'(\d{4})-(\d{2})-(\d{2})'\s*\}/g)]
+  .map(([, r, y, m, d]) => ({ round: +r, y: +y, m: +m, d: +d, iso: `${y}-${m}-${d}` }));
+const scheduleItems = EXAM_SCHEDULE.slice(-5).map(e => {
+  const upcoming = e.iso >= NOW ? ' — 다음 시험' : '';
+  return `<li>제${e.round}회: ${e.y}년 ${e.m}월 ${e.d}일${upcoming}</li>`;
+}).join('\n        ');
 
 // THEORY 메타 — eval로 객체 추출
 const theoryTs = readFileSync('src/data/theory.ts', 'utf8');
@@ -234,8 +247,8 @@ function buildRoundPage(r) {
 // ============================================================
 function buildExamIndexPage() {
   const path = '/exam/';
-  const title = `SQLD 기출 복원문제 — 제45회~60회 800문항 무료 — SQLD양파`;
-  const desc = `SQLD 자격증 기출 복원문제를 회차별로 정리. 제45회(2022.05)부터 제60회(2026.03)까지 16개 회차 800문항을 회원가입 없이 무료로 풀이.`;
+  const title = `SQLD 기출 복원문제 — 제${firstRound.round}회~${lastRound.round}회 ${totalQuestions}문항 무료 — SQLD양파`;
+  const desc = `SQLD 자격증 기출 복원문제를 회차별로 정리. 제${firstRound.round}회(${shortDate(firstRound.date.ko)})부터 제${lastRound.round}회(${shortDate(lastRound.date.ko)})까지 ${rounds.length}개 회차 ${totalQuestions}문항을 회원가입 없이 무료로 풀이.`;
 
   const items = rounds.slice().sort((a, b) => b.round - a.round).map(r => {
     return `<li>
@@ -247,7 +260,7 @@ function buildExamIndexPage() {
   return head({ title, desc, path }) + `
     <div class="crumb"><a href="/">홈</a> · 기출문제</div>
     <h1>SQLD 회차별 기출 복원문제</h1>
-    <p class="lead">제45회(2022년 5월)부터 제60회(2026년 3월)까지 16개 회차, 총 800문항.</p>
+    <p class="lead">제${firstRound.round}회(${firstRound.date.ko})부터 제${lastRound.round}회(${lastRound.date.ko})까지 ${rounds.length}개 회차, 총 ${totalQuestions}문항.</p>
     <a class="cta" href="/">랜덤 문제 풀이 시작하기 →</a>
     <h2>회차별 문제집 (${rounds.length}개)</h2>
     <ul class="chapters">${items}</ul>
@@ -279,7 +292,8 @@ function buildTheoryChapterPage(subject, ch) {
 function buildTheoryIndexPage() {
   const path = '/theory/';
   const title = `SQLD 이론 정리 · 데이터모델링·SQL활용 핵심 챕터 — SQLD양파`;
-  const desc = `SQLD 자격증 1과목 데이터 모델링의 이해 6챕터 + 2과목 SQL 기본 및 활용 7챕터를 한눈에. 회원가입 없이 무료.`;
+  const [s1, s2] = THEORY.subjects;
+  const desc = `SQLD 자격증 1과목 ${s1.title} ${s1.chapters.length}챕터 + 2과목 ${s2.title} ${s2.chapters.length}챕터를 한눈에. 회원가입 없이 무료.`;
 
   const subjects = THEORY.subjects.map(s => {
     const items = s.chapters.map(c => `<li>
@@ -292,7 +306,7 @@ function buildTheoryIndexPage() {
   return head({ title, desc, path }) + `
     <div class="crumb"><a href="/">홈</a> · 이론</div>
     <h1>SQLD 이론 — 전 범위 챕터 정리</h1>
-    <p class="lead">데이터모델링 6챕터 + SQL 활용 7챕터. SQLD 출제 범위를 한 페이지로 한눈에.</p>
+    <p class="lead">${s1.title} ${s1.chapters.length}챕터 + ${s2.title} ${s2.chapters.length}챕터. SQLD 출제 범위를 한 페이지로 한눈에.</p>
     <a class="cta" href="/">본문 + 미니테스트 모드로 학습 시작 →</a>
     ${subjects}
 ` + tail;
@@ -359,13 +373,11 @@ const guides = [
       <h2>시험 일정</h2>
       <p>SQLD는 연 4회 정기 시행 (보통 3월·5월·8월·11월). 정확한 일정은 <a href="https://www.dataq.or.kr" target="_blank" rel="noopener">한국데이터산업진흥원 데이터자격검정</a>에서 확인할 수 있습니다.</p>
 
-      <h3>최근 회차 일정 (참고)</h3>
+      <h3>최근·다음 회차 시험일 (참고)</h3>
       <ul>
-        <li>제57회: 2025년 5월</li>
-        <li>제58회: 2025년 8월</li>
-        <li>제59회: 2025년 11월</li>
-        <li>제60회: 2026년 3월</li>
+        ${scheduleItems}
       </ul>
+      <p>접수 기간·고사장은 회차마다 달라지므로 반드시 공식 사이트 공지를 확인하세요.</p>
 
       <h2>접수 방법</h2>
       <ol>
