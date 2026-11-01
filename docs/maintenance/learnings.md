@@ -37,6 +37,8 @@
 
 25. **묶음 머지 절차 (이 환경)**: release 브랜치는 `git push origin origin/main:refs/heads/release/…` (REST refs 쓰기 불가), 드래프트 해제는 `POST /repos/{o}/{r}/pulls/{n}/ccr/ready_for_review` (GraphQL 불가). 쌓인 PR(base 가 다른 PR 브랜치)은 앞 PR 이 squash 되면 생성 파일이 충돌하므로 release 를 그 브랜치에 merge 하고 생성 파일은 재빌드로 해결.
 
+26. **브랜치는 `git fetch origin main` 바로 뒤에 만든다.** 머지 직후 로컬 origin/main 이 낡은 채로 브랜치를 만들어 방금 배포한 CSS 가 빠진 화면을 보고 헷갈렸다 (11-02 06시).
+
 ## 회고
 
 ### 2026-10-31 첫 수동 실행 (기본 점검)
