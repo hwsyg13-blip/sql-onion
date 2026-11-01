@@ -8,8 +8,7 @@
   "current_mission": null,
   "my_prs": [
     195,
-    196,
-    210
+    229
   ],
   "merged_prs": [
     197,
@@ -48,13 +47,14 @@
     228
   ],
   "awaiting_user": [
-    "#210 vercel.json 머지 승인",
-    "#196 AI Gateway 머지 여부",
-    "sqld-0474 정답(3 vs 4개) 원문 확인",
-    "R50 2과목 41 중복 문항 처리",
-    "R46 1과목 2 정답 해석",
-    "examDate.ts 61회 날짜(일요일)",
-    "AdSense 재심사 요청",
-    "문의 시트 상태 갱신(docs/support/2026-11-01-cs-recent-reports.md)"
-  ]
+    "AdSense 재심사 요청 (콘솔)",
+    "문의 시트 상태 칸 갱신 — Google Sheets 커넥터를 이 대화에서 켜면 에이전트가 직접 (판정표: docs/support/2026-11-01-cs-recent-reports.md)"
+  ],
+  "closed_prs": [
+    196
+  ],
+  "pending_merge": {
+    "pr": 229,
+    "reason": "24시간 배포 82건(≥80) — 11-02 00:35 KST 재시도 예약 trig_01E7L5ac9BTHc5DjPg4jSt16"
+  }
 }
