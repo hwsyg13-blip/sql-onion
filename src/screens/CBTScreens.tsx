@@ -261,7 +261,7 @@ export const CBTExam = ({examId = "round-60", onFinish, onNavigate, onExit, mock
           </button>
         )}
         <div style={{display:"flex",alignItems:"center",gap:8}}>
-          <Tag tone={mockMode ? "peach" : "blue"}>{mockMode ? "AI 모의고사" : `${EXAM_SETS.find(s=>s.id===examId)?.label || examId} 기출`}</Tag>
+          <Tag tone={mockMode ? "peach" : "blue"}>{mockMode ? "실전 모의고사" : `${EXAM_SETS.find(s=>s.id===examId)?.label || examId} 기출`}</Tag>
           <span style={{fontSize:13,color:"var(--fg-3)"}}>{reviewMode ? "복습 · 해설 보기" : "CBT · 50문항"}</span>
         </div>
         <div style={{marginLeft:"auto",display:"flex",alignItems:"center",gap:16,flexWrap:"wrap"}}>
@@ -468,7 +468,7 @@ export const CBTExam = ({examId = "round-60", onFinish, onNavigate, onExit, mock
               <Mascot size={64} variant={grading.pass ? "smile" : "sad"}/>
               <div style={{flex:1,minWidth:0}}>
                 <div style={{fontSize:11,fontWeight:700,color:grading.pass?"var(--point-600)":"var(--wrong-fg)",letterSpacing:"0.04em"}}>
-                  {mockMode ? "AI 모의고사" : `${EXAM_SETS.find(s=>s.id===examId)?.label || examId} 기출`} · 채점 완료
+                  {mockMode ? "실전 모의고사" : `${EXAM_SETS.find(s=>s.id===examId)?.label || examId} 기출`} · 채점 완료
                 </div>
                 <div style={{fontSize:20,fontWeight:800,color:"var(--fg-1)",marginTop:4,letterSpacing:"-0.01em"}}>
                   {grading.pass ? "합격 기준 통과" : grading.fail40 ? "과락 발생" : "한 걸음 남았어요"}
@@ -602,7 +602,7 @@ export const CBTResult = ({result, onNavigate}) => {
         <Mascot size={128} variant={pass ? "smile" : "sad"}/>
         <div style={{flex:"1 1 320px"}}>
           <div style={{fontSize:12,fontWeight:700,color: pass ? "var(--point-600)" : "var(--wrong-fg)",letterSpacing:"0.04em"}}>
-            {mockMode ? "AI 모의고사" : `${EXAM_SETS.find(s=>s.id===examId)?.label || examId} 기출`} · 결과
+            {mockMode ? "실전 모의고사" : `${EXAM_SETS.find(s=>s.id===examId)?.label || examId} 기출`} · 결과
           </div>
           <h1 style={{fontSize:36,fontWeight:800,color:"var(--fg-1)",margin:"6px 0 6px",letterSpacing:"-0.02em"}}>
             {pass ? "축하해요, 합격 기준 통과!" : fail40 ? "아쉬워요, 과락 발생" : "한 걸음 남았어요"}

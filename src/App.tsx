@@ -120,7 +120,7 @@ export const App = () => {
       'theory-detail': `이론 상세 · ${base}`,
       mock: `모의고사 · ${base}`,
       endless: `랜덤 퀴즈 · ${base}`,
-      'mock-exam': `AI 모의고사 진행 · ${base}`,
+      'mock-exam': `실전 모의고사 진행 · ${base}`,
       exams: `기출문제 · ${base}`,
       cbt: `CBT 진행 · ${base}`,
       'cbt-result': `CBT 결과 · ${base}`,
