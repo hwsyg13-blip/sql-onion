@@ -12,6 +12,7 @@
 //   ]
 
 import React from 'react';
+import { loadMermaid, mermaidLoadFailedHtml } from '../lib/loadMermaid';
 import { CodeBlock } from './Atoms';
 
 export type QuestionReference =
@@ -310,7 +311,7 @@ function RefErd({ mermaid: code, caption, instanceTable }: any) {
   React.useEffect(() => {
     if (!code) return;
     let cancelled = false;
-    import('mermaid').then(({ default: mermaid }) => {
+    loadMermaid().then(({ default: mermaid }) => {
       if (cancelled) return;
       const isDark = theme === 'dark';
       mermaid.initialize({
@@ -342,6 +343,8 @@ function RefErd({ mermaid: code, caption, instanceTable }: any) {
       });
     }).catch(err => {
       console.warn('[RefErd] mermaid load failed', err);
+      // 빈 상자로 두지 않고 안내 (배포 직후 옛 청크 404 등)
+      if (!cancelled && ref.current) ref.current.innerHTML = mermaidLoadFailedHtml();
     });
     return () => { cancelled = true; };
   }, [code, theme, reactId]);
