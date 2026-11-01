@@ -1394,7 +1394,7 @@
         "WHERE 절을 `WHERE 회원ID NOT IN (SELECT 회원ID FROM 탈퇴)` 로 바꿔도 결과가 동일하다.",
         "WHERE 절을 `WHERE EXISTS (SELECT 1 FROM 탈퇴 T WHERE T.회원ID = M.회원ID)` 로 바꿔도 결과가 동일하다.",
         "WHERE 절을 `WHERE 회원ID NOT IN T.회원ID` 로 바꿔도 결과가 동일하다.",
-        "서브쿼리의 `SELECT X` 를 `SELECT NULL` 로 바꿔도 결과가 동일하다."
+        "서브쿼리의 `SELECT 'X'` 를 `SELECT NULL` 로 바꿔도 결과가 동일하다."
       ],
       "correctIndex": 3,
       "explanation": "NOT EXISTS 는 서브쿼리가 행을 반환하는지 여부만 판정하므로 서브쿼리의 SELECT 절에 컬럼·상수·NULL 중 무엇을 써도 결과가 같다. 따라서 ④ 가 옳다. ① NOT IN 은 비교 대상에 NULL 이 하나라도 있으면 어떤 행도 참이 되지 못하는데, 탈퇴 테이블에 NULL 이 있으므로 결과가 공집합이 되어 달라진다. ② EXISTS 는 NOT EXISTS 와 반대로 탈퇴 이력이 있는 회원만 남긴다. ③ 은 부속 질의 없이 컬럼을 비교하는 잘못된 구문이다.",
@@ -1438,7 +1438,7 @@
         },
         {
           "type": "sql",
-          "code": "SELECT *\nFROM   회원 M\nWHERE  NOT EXISTS ( SELECT X\n                    FROM   탈퇴 T\n                    WHERE  T.회원ID = M.회원ID );"
+          "code": "SELECT *\nFROM   회원 M\nWHERE  NOT EXISTS ( SELECT 'X'\n                    FROM   탈퇴 T\n                    WHERE  T.회원ID = M.회원ID );"
         }
       ]
     },
