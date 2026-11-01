@@ -5,7 +5,6 @@ import { QUIZ_BANK } from '../data/quizBank';
 import { sqloUsage } from './PricingScreen';
 import { BETA_NO_AUTH } from '../App';
 import { QuestionReferences, OptionReferences, renderInlineMd } from '../components/QuestionReferences';
-import { AdSlot } from '../components/AdSlot';
 import { BugReportModal } from '../components/BugReportModal';
 import { trackEvent } from '../lib/analytics';
 import { recordQuizAttempt } from '../lib/progress';
@@ -45,10 +44,7 @@ export const MockLanding = ({onNavigate}) => (
       })}
     </div>
 
-    {/* 광고 슬롯 — 모의고사 메뉴 하단 */}
-    <div style={{marginTop:32}}>
-      <AdSlot slot="MOCK_LANDING_BOTTOM" format="horizontal"/>
-    </div>
+    {/* 광고 자리 없음 — 메뉴·목록·결과처럼 게시자 콘텐츠가 없는 화면에는 광고를 두지 않는다 (애드센스 정책, 2026-11-02) */}
   </div>
 );
 

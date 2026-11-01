@@ -4,7 +4,6 @@ import { Btn, Tag, Ic, CodeBlock, Mascot, MascotGuide, OnionMark, Progress, Divi
 import { QUIZ_BANK, EXAM_SETS } from '../data/quizBank';
 import { QuestionBody } from './MockScreens';
 import { renderInlineMd, OptionReferences } from '../components/QuestionReferences';
-import { AdSlot } from '../components/AdSlot';
 import { recordExamComplete, recordQuizAttempt } from '../lib/progress';
 import { trackEvent } from '../lib/analytics';
 
@@ -59,10 +58,7 @@ export const ExamListScreen = ({onNavigate}) => {
         </section>
       ))}
 
-      {/* 광고 슬롯 — 기출 목록 하단 */}
-      <div style={{marginTop: 32}}>
-        <AdSlot slot="EXAMS_BOTTOM" format="horizontal"/>
-      </div>
+      {/* 광고 자리 없음 — 메뉴·목록·결과처럼 게시자 콘텐츠가 없는 화면에는 광고를 두지 않는다 (애드센스 정책, 2026-11-02) */}
     </div>
   );
 };
@@ -642,10 +638,7 @@ export const CBTResult = ({result, onNavigate}) => {
         )}
       </div>
 
-      {/* 광고 슬롯 — 점수 직후 */}
-      <div style={{marginTop: 28}}>
-        <AdSlot slot="RESULT_TOP" format="horizontal"/>
-      </div>
+      {/* 광고 자리 없음 — 메뉴·목록·결과처럼 게시자 콘텐츠가 없는 화면에는 광고를 두지 않는다 (애드센스 정책, 2026-11-02) */}
 
       {/* Detailed question list with explanations */}
       <section style={{marginTop:28}}>

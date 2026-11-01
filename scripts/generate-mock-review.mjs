@@ -2,8 +2,8 @@
 // (ai-mock + cbt-mock + sqld-1140) with options, correct answer, references,
 // and explanation — used for QA review only.
 //
-// Output: public/mock-review.html
-// Access: https://sqldyangpa.com/mock-review.html (after main deploy)
+// Output: docs/internal/mock-review.html (내부 검토용 — 배포하지 않는다, 2026-11-02 애드센스 정비)
+// Access: 로컬에서 파일을 직접 연다
 
 import fs from 'node:fs';
 
@@ -13,7 +13,7 @@ const SRC_FILES = [
   { path: 'scripts/authored/sqld-quiz-1140.json', pool: 'sqld-1140' },
 ];
 
-const OUT = 'public/mock-review.html';
+const OUT = 'docs/internal/mock-review.html';
 
 function loadPool(srcPath, pool) {
   const raw = JSON.parse(fs.readFileSync(srcPath, 'utf-8'));
