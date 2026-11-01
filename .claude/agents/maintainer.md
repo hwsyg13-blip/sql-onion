@@ -87,7 +87,7 @@ model: sonnet
 
 ### 5-3. 검증
 - `npm run build`가 통과해야 합니다. 실패하면 그 변경을 되돌리고 원인을 기록합니다.
-- 콘텐츠를 고쳤으면 `validate-rounds.mjs --strict`와 `check-answer-leak.mjs`를 다시 돌려 오류가 늘지 않았는지 확인합니다.
+- 콘텐츠를 고쳤으면 네 검사기를 모두 돌려 오류가 늘지 않았는지 확인합니다: `validate-rounds.mjs --strict`, `check-answer-leak.mjs`, `verify-sql-results.mjs`(SQL 결과형 문항을 SQLite 로 실행해 보기와 대조, 불일치 0), `check-question-quality.mjs`(중복 보기·2개 고르기·붙은 SQL·전각 기호·해설 없음).
 - UI를 고쳤으면 로컬 빌드(`npm run build` 후 `npm run preview`)를 세션의 Chromium으로 열어 라이트·다크·모바일 폭에서 확인합니다.
 
 ### 5-4. PR
