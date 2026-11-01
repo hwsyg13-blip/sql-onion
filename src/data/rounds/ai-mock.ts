@@ -1,5 +1,5 @@
 // Auto-generated from scripts/authored/ai-mock.json
-// AI 생성 모의고사 풀 (기출 변형) · 1304문항
+// AI 생성 모의고사 풀 (기출 변형) · 1315문항
 // ⚠ 직접 편집 금지. ai-mock.json 수정 후 'node scripts/build-quiz-bank.mjs' 재실행.
 import type { QuizQuestion } from '../quizBank';
 
@@ -48432,6 +48432,735 @@ export const AI_MOCK: QuizQuestion[] = [
             "인문대학",
             "",
             ""
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": 12264,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 1465,
+    "title": "다음 문장의 수행 후 TAB2의 조회 결과로 가장 적절한 것은?",
+    "options": [
+      "(1000, SMITH, 1), (1001, ALLEN, 2) — FORD·SCOTT 행이 함께 삭제된다.",
+      "(1000, SMITH, 1), (1001, ALLEN, 2), (1002, FORD, NULL), (1004, SCOTT, NULL)",
+      "자식 행이 있어 DELETE 가 실패하므로 TAB2 는 그대로다.",
+      "(1000, SMITH, NULL), (1001, ALLEN, NULL), (1002, FORD, NULL), (1004, SCOTT, NULL)"
+    ],
+    "correctIndex": 1,
+    "explanation": "외래키에 ON DELETE SET NULL 을 지정하면 부모 행이 삭제될 때 그 행을 참조하던 자식 행의 외래키 값이 NULL 로 바뀐다. TAB1 에서 NO = 3(C)을 지우면 CLASS_NO = 3 인 FORD·SCOTT 의 CLASS_NO 만 NULL 이 된다(②). 자식 행을 함께 지우는 것은 ON DELETE CASCADE(①), 삭제를 막는 것은 옵션을 지정하지 않은 기본 동작(③)이며, 삭제된 부모와 관계없는 행은 바뀌지 않는다(④). ※ 원본의 보기(그림)가 누락되어, 같은 개념을 묻는 모의고사 형태로 보기를 재구성했다.",
+    "chapter": "DML",
+    "_source": "sqld-1140",
+    "_origId": "sqld-0718",
+    "_category": "DML",
+    "_correctRate": 10,
+    "references": [
+      {
+        "type": "text",
+        "content": "ALTER TABLE TAB2 ADD FOREIGN KEY(CLASS_NO) REFERENCES TAB1(NO) ON DELETE SET NULL; \nDELETE FROM TAB1 WHERE NAME = 'C';"
+      },
+      {
+        "type": "table",
+        "caption": "<TAB1>",
+        "headers": [
+          "NO",
+          "NAME"
+        ],
+        "rows": [
+          [
+            "1",
+            "A"
+          ],
+          [
+            "2",
+            "B"
+          ],
+          [
+            "3",
+            "C"
+          ],
+          [
+            "4",
+            "D"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "<TAB2>",
+        "headers": [
+          "NO",
+          "NAME",
+          "CLASS_NO"
+        ],
+        "rows": [
+          [
+            "1000",
+            "SMITH",
+            "1"
+          ],
+          [
+            "1001",
+            "ALLEN",
+            "2"
+          ],
+          [
+            "1002",
+            "FORD",
+            "3"
+          ],
+          [
+            "1004",
+            "SCOTT",
+            "3"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": 12265,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 1466,
+    "title": "다음 SQL문의 실행 결과(EMPNO 순)로 가장 적절한 것은?",
+    "options": [
+      "A, B, A, C",
+      "A, B, C, NULL",
+      "A, C, C, C",
+      "A, B, C, C"
+    ],
+    "correctIndex": 3,
+    "explanation": "바깥 DECODE 는 DEPTNO 가 10 이면 안쪽 DECODE 결과를, 아니면 기본값 'C' 를 반환한다. 안쪽 DECODE 는 JOB 이 'CLERK' 이면 'A', 아니면 'B' 다. 0001(10, CLERK) A, 0002(10, MANAGER) B, 0003(20) C, 0004(30) C 이다(④). ① 은 20 부서의 CLERK 에도 안쪽 DECODE 를 적용했고, ② 는 기본값 'C' 를 무시했으며, ③ 은 안쪽 DECODE 의 기본값 'B' 를 무시했다. ※ 원본의 보기(그림)가 누락되어, 같은 개념을 묻는 모의고사 형태로 보기를 재구성했다.",
+    "chapter": "DML",
+    "_source": "sqld-1140",
+    "_origId": "sqld-0736",
+    "_category": "DML",
+    "_correctRate": 10,
+    "references": [
+      {
+        "type": "text",
+        "content": "SELECT DECODE(DEPTNO, 10, DECODE(JOB, 'CLERK', 'A', 'B'), 'C') AS RESULT FROM EMP ORDER BY EMPNO;"
+      },
+      {
+        "type": "table",
+        "caption": "<EMP>",
+        "headers": [
+          "EMPNO",
+          "DEPTNO",
+          "JOB"
+        ],
+        "rows": [
+          [
+            "0001",
+            "10",
+            "CLERK"
+          ],
+          [
+            "0002",
+            "10",
+            "MANAGER"
+          ],
+          [
+            "0003",
+            "20",
+            "CLERK"
+          ],
+          [
+            "0004",
+            "30",
+            "ANALYST"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": 12266,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 1467,
+    "title": "아래 SQL의 결과로 가장 적절한 것은?",
+    "options": [
+      "2024-08-24, 2024-08-24",
+      "2024-08-25, 2024-08-25",
+      "2024-08-25, 2024-08-24",
+      "2024-08-24, 2024-08-25"
+    ],
+    "correctIndex": 2,
+    "explanation": "형식을 생략한 ROUND(날짜) 는 일 단위로 반올림하며, 정오(12:00:00)부터는 다음 날 0시로 올리고 그 전은 그날 0시로 내린다. COL1 은 정확히 정오라 2024-08-25, COL2 는 정오 1초 전이라 2024-08-24 다(③). ② 는 11:59:59 까지 올린 결과, ① 은 정오를 내림으로 본 결과다. (원본은 12시간제 HH 형식이 섞여 해석이 모호해, 같은 개념을 HH24 로 묻도록 바꿨다.) ※ 원본의 보기(그림)가 누락되어, 같은 개념을 묻는 모의고사 형태로 보기를 재구성했다.",
+    "chapter": "함수",
+    "_source": "sqld-1140",
+    "_origId": "sqld-0737",
+    "_category": "단일행 함수",
+    "_correctRate": 10,
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT ROUND(TO_DATE('2024-08-24 12:00:00', 'YYYY-MM-DD HH24:MI:SS')) AS COL1,\n       ROUND(TO_DATE('2024-08-24 11:59:59', 'YYYY-MM-DD HH24:MI:SS')) AS COL2\nFROM   DUAL;"
+      }
+    ]
+  },
+  {
+    "id": 12267,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 1468,
+    "title": "아래 SQL 실행 결과로 가장 적절한 것은?",
+    "options": [
+      "(A, 60, 10, 30), (B, 70, 30, 40), (NULL, 20, 20, 20)",
+      "(A, 50, 20, 30), (B, 70, 30, 40)",
+      "(A, 50, 20, 30), (B, 80, 10, 40), (NULL, 20, 20, 20)",
+      "(A, 50, 20, 30), (B, 70, 30, 40), (NULL, 20, 20, 20)"
+    ],
+    "correctIndex": 3,
+    "explanation": "WHERE COL1 > 100 으로 (100, A, 10) 과 (0, B, 10) 이 빠진다. 남은 행을 COL2 로 묶으면 A 는 20·30 → (50, 20, 30), B 는 30·40 → (70, 30, 40), COL2 가 NULL 인 행도 하나의 그룹이 되어 20 → (20, 20, 20) 이다(④). ① 은 COL1 = 100 인 행을 포함했고(>= 로 본 결과), ② 는 NULL 그룹을 빠뜨렸으며, ③ 은 COL1 = 0 인 B 행을 포함했다. ※ 원본의 보기(그림)가 누락되어, 같은 개념을 묻는 모의고사 형태로 보기를 재구성했다.",
+    "chapter": "그룹 함수",
+    "_source": "sqld-1140",
+    "_origId": "sqld-0742",
+    "_category": "집계 함수",
+    "_correctRate": 10,
+    "references": [
+      {
+        "type": "text",
+        "content": "SELECT COL2, SUM(COL3) AS C1, MIN(COL3) AS C2, MAX(COL3) AS C3 FROM TAB1 WHERE COL1 > 100 GROUP BY COL2;"
+      },
+      {
+        "type": "table",
+        "caption": "<TAB1>",
+        "headers": [
+          "COL1",
+          "COL2",
+          "COL3"
+        ],
+        "rows": [
+          [
+            "100",
+            "A",
+            "10"
+          ],
+          [
+            "200",
+            "A",
+            "20"
+          ],
+          [
+            "300",
+            "A",
+            "30"
+          ],
+          [
+            "0",
+            "B",
+            "10"
+          ],
+          [
+            "400",
+            "NULL",
+            "20"
+          ],
+          [
+            "500",
+            "B",
+            "30"
+          ],
+          [
+            "300",
+            "B",
+            "40"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": 12268,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 1469,
+    "title": "다음의 정렬 결과로 가장 적절한 것은?",
+    "options": [
+      "AA, ABC, B, BAA, BI",
+      "BAA, BI, AA, ABC, B",
+      "BI, BAA, AA, ABC, B",
+      "AA, ABC, BAA, BI, B"
+    ],
+    "correctIndex": 1,
+    "explanation": "첫 정렬 키는 ID 가 'B' 보다 크면 'A', 아니면 ID 자신이다. 문자열은 왼쪽부터 비교하므로 'BI', 'BAA' 는 'B' 보다 커서 'A' 가 되고, AA·ABC·B 는 그대로다. 키 순서는 'A'(BAA, BI) < 'AA' < 'ABC' < 'B' 이고, 키가 같은 BAA·BI 는 두 번째 키 ID 로 'BAA' < 'BI' 다. 따라서 BAA, BI, AA, ABC, B 다(②). ① 은 CASE 키를 무시한 결과, ③ 은 두 번째 키를 내림차순으로 본 결과다. ※ 원본의 보기(그림)가 누락되어, 같은 개념을 묻는 모의고사 형태로 보기를 재구성했다.",
+    "chapter": "DML",
+    "_source": "sqld-1140",
+    "_origId": "sqld-0743",
+    "_category": "DML",
+    "_correctRate": 10,
+    "references": [
+      {
+        "type": "text",
+        "content": "SELECT ID FROM TAB1 ORDER BY CASE WHEN ID > 'B' THEN 'A' ELSE ID END, ID;"
+      },
+      {
+        "type": "table",
+        "caption": "<TAB1>",
+        "headers": [
+          "ID"
+        ],
+        "rows": [
+          [
+            "AA"
+          ],
+          [
+            "ABC"
+          ],
+          [
+            "BI"
+          ],
+          [
+            "B"
+          ],
+          [
+            "BAA"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": 12269,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 1470,
+    "title": "다음 출력 결과로 가장 알맞은 것은?",
+    "options": [
+      "(A, 10, AAA, 100), (B, 20, BBB, 200), (C, 20, BBB, 400)",
+      "(A, 10, AAA, 100), (B, 20, BBB, 200), (C, 20, BBB, 400), (D, NULL, NULL, NULL)",
+      "(A, 10, AAA, 100), (B, 20, BBB, 200), (C, 20, BBB, 300), (D, NULL, NULL, NULL)",
+      "TAB3 에 C 가 두 행이라 오류가 발생한다."
+    ],
+    "correctIndex": 1,
+    "explanation": "SELECT 절의 스칼라 서브쿼리는 메인쿼리 행마다 실행되며, 일치하는 행이 없으면 NULL 을 반환할 뿐 메인쿼리 행을 없애지 않는다. RESULT1 은 COL2 가 10 이면 AAA, 20 이면 BBB, D 는 COL2 가 NULL 이라 NULL 이다. RESULT2 는 MAX 로 한 값만 반환하므로 C 는 300·400 중 400, D 는 TAB3 에 없어 NULL 이다(②). ① 은 D 행을 뺐고, ③ 은 MIN 으로 계산했으며, 집계 함수 MAX 덕분에 두 행이어도 오류가 나지 않는다(④). ※ 원본의 보기(그림)가 누락되어, 같은 개념을 묻는 모의고사 형태로 보기를 재구성했다.",
+    "chapter": "그룹 함수",
+    "_source": "sqld-1140",
+    "_origId": "sqld-0748",
+    "_category": "집계 함수",
+    "_correctRate": 10,
+    "references": [
+      {
+        "type": "text",
+        "content": "SELECT COL1, COL2, (SELECT COL2 FROM TAB2 WHERE TAB1.COL2 = TAB2.COL1) AS RESULT1, (SELECT MAX(COL2) FROM TAB3 WHERE TAB1.COL1 = TAB3.COL1) AS RESULT2 FROM TAB1;"
+      },
+      {
+        "type": "table",
+        "caption": "<TAB1>",
+        "headers": [
+          "COL1",
+          "COL2"
+        ],
+        "rows": [
+          [
+            "A",
+            "10"
+          ],
+          [
+            "B",
+            "20"
+          ],
+          [
+            "C",
+            "20"
+          ],
+          [
+            "D",
+            "NULL"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "<TAB2>",
+        "headers": [
+          "COL1",
+          "COL2"
+        ],
+        "rows": [
+          [
+            "10",
+            "AAA"
+          ],
+          [
+            "20",
+            "BBB"
+          ],
+          [
+            "30",
+            "CCC"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "<TAB3>",
+        "headers": [
+          "COL1",
+          "COL2"
+        ],
+        "rows": [
+          [
+            "A",
+            "100"
+          ],
+          [
+            "B",
+            "200"
+          ],
+          [
+            "C",
+            "300"
+          ],
+          [
+            "C",
+            "400"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": 12270,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 1471,
+    "title": "다음 SQL 수행 결과로 나오는 RESULT 값들로 가장 적절한 것은? (출력 순서는 무시)",
+    "options": [
+      "1000, 2000, 3000, 4000",
+      "1000, 3000, 6000, 10000",
+      "10000, 9000, 7000, 4000",
+      "0, 1000, 3000, 6000"
+    ],
+    "correctIndex": 1,
+    "explanation": "셀프 조인 조건 E1.HIREDATE >= E2.HIREDATE 는 각 직원(E1)에 자기 자신과 그보다 먼저 입사한 직원(E2)을 붙인다. ENAME 별로 E2.SAL 을 더하면 입사일 순 누적 급여가 된다: CLARK 1000, TURNER 1000 + 2000 = 3000, KING 6000, SCOTT 10000 이다(②). ③ 은 조건을 <= 로, ④ 는 > 로 본 결과(단, > 면 CLARK 은 짝이 없어 행이 나오지 않는다), ① 은 조인 없이 자기 급여만 본 결과다. ※ 원본의 보기(그림)가 누락되어, 같은 개념을 묻는 모의고사 형태로 보기를 재구성했다.",
+    "chapter": "그룹 함수",
+    "_source": "sqld-1140",
+    "_origId": "sqld-0751",
+    "_category": "집계 함수",
+    "_correctRate": 10,
+    "references": [
+      {
+        "type": "text",
+        "content": "SELECT SUM(E2.SAL) AS RESULT FROM EMP E1, EMP E2 WHERE E1.HIREDATE >= E2.HIREDATE GROUP BY E1.ENAME;"
+      },
+      {
+        "type": "table",
+        "caption": "<EMP>",
+        "headers": [
+          "ENAME",
+          "HIREDATE",
+          "SAL"
+        ],
+        "rows": [
+          [
+            "CLARK",
+            "1981/06/09",
+            "1000"
+          ],
+          [
+            "TURNER",
+            "1981/09/08",
+            "2000"
+          ],
+          [
+            "KING",
+            "1981/11/17",
+            "3000"
+          ],
+          [
+            "SCOTT",
+            "1987/04/19",
+            "4000"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": 12271,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 1472,
+    "title": "다음 수행 결과로 가장 적절한 것은?",
+    "options": [
+      "(A, 100), (B, 150), (C, 200)",
+      "(A, 100), (B, 150), (C, 200), (D, 100)",
+      "(A, 100), (B, 150), (C, 200), (D, NULL)",
+      "(A, 100), (B, 150), (C, 200), (D, 250)"
+    ],
+    "correctIndex": 1,
+    "explanation": "스칼라 서브쿼리는 연결 조건을 만족하는 행이 없어도 메인쿼리 행을 유지하고 NULL 을 반환한다(OUTER JOIN 과 비슷한 효과). D 는 CODE 가 NULL 이라 PROMOTION 과 일치하는 행이 없어 서브쿼리가 NULL 이고, NVL 로 100 이 된다(②). ① 은 D 가 빠진다고 본 결과, ③ 은 NVL 을 무시했고, ④ 는 PROMOTION 에만 있는 0004 를 잘못 연결했다. ※ 원본의 보기(그림)가 누락되어, 같은 개념을 묻는 모의고사 형태로 보기를 재구성했다.",
+    "chapter": "서브쿼리",
+    "_source": "sqld-1140",
+    "_origId": "sqld-0752",
+    "_category": "서브쿼리",
+    "_correctRate": 10,
+    "references": [
+      {
+        "type": "text",
+        "content": "SELECT NAME, NVL((SELECT FARE FROM PROMOTION P2 WHERE P1.CODE = P2.CODE), 100) PRO_FARE FROM PRODUCT P1;"
+      },
+      {
+        "type": "table",
+        "caption": "<PRODUCT>",
+        "headers": [
+          "NAME",
+          "CODE"
+        ],
+        "rows": [
+          [
+            "A",
+            "0001"
+          ],
+          [
+            "B",
+            "0002"
+          ],
+          [
+            "C",
+            "0003"
+          ],
+          [
+            "D",
+            "NULL"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "<PROMOTION>",
+        "headers": [
+          "CODE",
+          "FARE"
+        ],
+        "rows": [
+          [
+            "0001",
+            "100"
+          ],
+          [
+            "0002",
+            "150"
+          ],
+          [
+            "0003",
+            "200"
+          ],
+          [
+            "0004",
+            "250"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": 12272,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 1473,
+    "title": "아래 SQL 실행 결과의 LAV_VALUE 를 부서별 SAL 오름차순으로 나열한 것으로 가장 적절한 것은?",
+    "options": [
+      "10: 0, 1300, 2450 / 20: 0, 800, 1100, 2975, 3000",
+      "10: 5000, 0, 0 / 20: 2975, 3000, 3000, 0, 0",
+      "10: 0, 0, 1300 / 20: 0, 0, 800, 1100, 2975",
+      "10: NULL, NULL, 1300 / 20: NULL, NULL, 800, 1100, 2975"
+    ],
+    "correctIndex": 2,
+    "explanation": "LAG(SAL, 2, 0) 은 같은 부서 안에서 SAL 오름차순으로 두 행 앞의 SAL 을 가져오고, 두 행 앞이 없으면 기본값 0 을 쓴다. 10 부서는 MILLER 0, CLARK 0, KING 1300, 20 부서는 SMITH 0, ADAMS 0, JONES 800, SCOTT 1100, FORD 2975 다(③, SAL 이 같은 SCOTT·FORD 순서에 따라 마지막 두 값은 바뀔 수 있다). ① 은 한 행 앞(LAG 1), ② 는 두 행 뒤(LEAD), ④ 는 기본값 0 을 무시한 결과다. ※ 원본의 보기(그림)가 누락되어, 같은 개념을 묻는 모의고사 형태로 보기를 재구성했다.",
+    "chapter": "윈도우 함수",
+    "_source": "sqld-1140",
+    "_origId": "sqld-0755",
+    "_category": "윈도우 함수",
+    "_correctRate": 10,
+    "references": [
+      {
+        "type": "text",
+        "content": "SELECT EMPNO, ENAME, DEPTNO, SAL, LAG(SAL, 2, 0) OVER(PARTITION BY DEPTNO ORDER BY SAL) LAV_VALUE FROM EMP;"
+      },
+      {
+        "type": "table",
+        "caption": "<EMP>",
+        "headers": [
+          "EMPNO",
+          "ENAME",
+          "DEPTNO",
+          "SAL"
+        ],
+        "rows": [
+          [
+            "7934",
+            "MILLER",
+            "10",
+            "1300"
+          ],
+          [
+            "7782",
+            "CLARK",
+            "10",
+            "2450"
+          ],
+          [
+            "7839",
+            "KING",
+            "10",
+            "5000"
+          ],
+          [
+            "7369",
+            "SMITH",
+            "20",
+            "800"
+          ],
+          [
+            "7876",
+            "ADAMS",
+            "20",
+            "1100"
+          ],
+          [
+            "7566",
+            "JONES",
+            "20",
+            "2975"
+          ],
+          [
+            "7788",
+            "SCOTT",
+            "20",
+            "3000"
+          ],
+          [
+            "7902",
+            "FORD",
+            "20",
+            "3000"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": 12273,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 1474,
+    "title": "다음 수행 결과로 가장 적절한 것은?",
+    "options": [
+      "C1: 0.1, 0.2, 0.3, 0.4 / C2: 0, 0.33, 0.67, 1 / C3: 0.25, 0.5, 0.75, 1",
+      "C1: 0.1, 0.3, 0.6, 1 / C2: 0.25, 0.5, 0.75, 1 / C3: 0, 0.33, 0.67, 1",
+      "C1: 0.1, 0.2, 0.3, 0.4 / C2: 0.25, 0.5, 0.75, 1 / C3: 0.25, 0.5, 0.75, 1",
+      "C1: 0.1, 0.2, 0.3, 0.4 / C2: 0.25, 0.5, 0.75, 1 / C3: 0, 0.33, 0.67, 1"
+    ],
+    "correctIndex": 3,
+    "explanation": "RATIO_TO_REPORT(COL2) OVER() 는 전체 합계(100)에 대한 각 값의 비율이라 0.1, 0.2, 0.3, 0.4 다. CUME_DIST 는 현재 값 이하인 행의 비율이라 1/4, 2/4, 3/4, 4/4 = 0.25, 0.5, 0.75, 1 이다. PERCENT_RANK 는 (순위 - 1) / (전체 행 수 - 1) 이라 0, 1/3, 2/3, 1 → 반올림해 0, 0.33, 0.67, 1 이다(④). ① 은 C2 와 C3 를 바꿨고, ② 는 C1 을 누적 비율로, ③ 은 C3 를 CUME_DIST 로 계산했다. ※ 원본의 보기(그림)가 누락되어, 같은 개념을 묻는 모의고사 형태로 보기를 재구성했다.",
+    "chapter": "윈도우 함수",
+    "_source": "sqld-1140",
+    "_origId": "sqld-0757",
+    "_category": "윈도우 함수",
+    "_correctRate": 10,
+    "references": [
+      {
+        "type": "text",
+        "content": "SELECT RATIO_TO_REPORT(COL2) OVER() AS C1, CUME_DIST() OVER(ORDER BY COL2) AS C2, ROUND(PERCENT_RANK() OVER(ORDER BY COL2),2) AS C3 FROM TAB1;"
+      },
+      {
+        "type": "table",
+        "caption": "<TAB1>",
+        "headers": [
+          "COL1",
+          "COL2"
+        ],
+        "rows": [
+          [
+            "A",
+            "10"
+          ],
+          [
+            "B",
+            "20"
+          ],
+          [
+            "C",
+            "30"
+          ],
+          [
+            "D",
+            "40"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": 12274,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 1475,
+    "title": "다음은 SALES 테이블의 일부이다. 아래 SQL의 결과로 올바른 데이터 셋을 고르시오.",
+    "options": [
+      "(2023, EAST, 100), (2023, WEST, 150), (2023, NULL, 250), (2024, EAST, 200), (2024, WEST, 250), (2024, NULL, 450), (NULL, NULL, 700)",
+      "(2023, EAST, 100), (2023, WEST, 150), (2023, NULL, 250), (2024, EAST, 200), (2024, WEST, 250), (2024, NULL, 450)",
+      "앞의 7행에 (NULL, EAST, 300), (NULL, WEST, 400) 이 더해진 9행",
+      "(2023, NULL, 250), (2024, NULL, 450), (NULL, NULL, 700)"
+    ],
+    "correctIndex": 0,
+    "explanation": "ROLLUP(YEAR, REGION) 은 (YEAR, REGION) 상세 집계, YEAR 별 소계(REGION 이 NULL), 전체 합계(둘 다 NULL)를 만든다. 2023 은 100 + 150 = 250, 2024 는 200 + 250 = 450, 전체는 700 이다(①). ② 는 전체 합계가 빠졌고, ③ 은 REGION 별 소계까지 만드는 CUBE 의 결과이며, ④ 는 상세 집계 행을 빠뜨렸다. ※ 원본의 보기(그림)가 누락되어, 같은 개념을 묻는 모의고사 형태로 보기를 재구성했다.",
+    "chapter": "그룹 함수",
+    "_source": "sqld-1140",
+    "_origId": "sqld-0839",
+    "_category": "그룹 함수",
+    "_correctRate": 10,
+    "references": [
+      {
+        "type": "text",
+        "content": "<SQL>\nSELECT YEAR, REGION, SUM(AMOUNT)\nFROM SALES\nGROUP BY ROLLUP(YEAR, REGION);"
+      },
+      {
+        "type": "table",
+        "caption": "[데이터]",
+        "headers": [
+          "YEAR",
+          "REGION",
+          "AMOUNT"
+        ],
+        "rows": [
+          [
+            "2023",
+            "EAST",
+            "100"
+          ],
+          [
+            "2023",
+            "WEST",
+            "150"
+          ],
+          [
+            "2024",
+            "EAST",
+            "200"
+          ],
+          [
+            "2024",
+            "WEST",
+            "250"
           ]
         ]
       }
