@@ -1,5 +1,5 @@
 // Auto-generated from scripts/authored/ai-mock.json
-// AI 생성 모의고사 풀 (기출 변형) · 1269문항
+// AI 생성 모의고사 풀 (기출 변형) · 1280문항
 // ⚠ 직접 편집 금지. ai-mock.json 수정 후 'node scripts/build-quiz-bank.mjs' 재실행.
 import type { QuizQuestion } from '../quizBank';
 
@@ -46117,6 +46117,662 @@ export const AI_MOCK: QuizQuestion[] = [
         "type": "sql",
         "caption": "[SQL]",
         "code": "select * from SQLD_71 order by COL1 desc, COL2 desc, COL3 desc;"
+      }
+    ]
+  },
+  {
+    "id": 12229,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 1430,
+    "title": "다음의 SQL문이 반환하는 결괏값은?",
+    "options": [
+      "(1, NULL, 1), (2, 10, 12), (2, 10, 14)",
+      "(2, 10, 14), (2, 10, 12), (1, NULL, 1)",
+      "(2, 10, 12), (2, 10, 14), (1, NULL, 1)",
+      "(1, NULL, 1), (2, 10, 14), (2, 10, 12)"
+    ],
+    "correctIndex": 1,
+    "explanation": "COL1 DESC 로 2 인 행이 먼저, 1 인 행이 나중에 온다. COL1 이 같은 두 행은 COL2(10)도 같으므로 COL3 DESC 로 14, 12 순이다. 따라서 (2, 10, 14), (2, 10, 12), (1, NULL, 1) 이다(②). Oracle 은 DESC 정렬에서 NULL 을 앞에 두지만, 이는 COL1 이 같은 행들 안에서 COL2 를 비교할 때만 적용되므로 COL1 = 1 인 행이 맨 앞에 오지 않는다(④). ① 은 오름차순, ③ 은 COL3 를 오름차순으로 정렬한 결과다. ※ 원본의 보기(그림)가 누락되어, 같은 개념을 묻는 모의고사 형태로 보기를 재구성했다.",
+    "chapter": "DML",
+    "_source": "sqld-1140",
+    "_origId": "sqld-0297",
+    "_category": "DML",
+    "_correctRate": 10,
+    "references": [
+      {
+        "type": "text",
+        "content": "select * from Mytest order by COL1 desc,  COL2 desc, COL3 desc;"
+      },
+      {
+        "type": "table",
+        "caption": "[Mytest]",
+        "headers": [
+          "COL1",
+          "COL2",
+          "COL3"
+        ],
+        "rows": [
+          [
+            "1",
+            "Null",
+            "1"
+          ],
+          [
+            "2",
+            "10",
+            "14"
+          ],
+          [
+            "2",
+            "10",
+            "12"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": 12230,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 1431,
+    "title": "Mytest 테이블에 대해서 SQL문을 실행햇을 때 결과로 올바른 것은?",
+    "options": [
+      "1000 조조, 1004 여포",
+      "1001 유비, 1002 관우, 1003 조자룡, 1005 동탁, 1006 사마위, 1007 순욱",
+      "1000 조조, 1004 여포, 1001 유비, 1002 관우, 1003 조자룡, 1005 동탁, 1006 사마위, 1007 순욱",
+      "1000 조조, 1001 유비, 1002 관우, 1003 조자룡, 1004 여포, 1005 동탁, 1006 사마위, 1007 순욱"
+    ],
+    "correctIndex": 3,
+    "explanation": "START WITH MGRID IS NULL 로 조조(1000)와 여포(1004)가 루트가 되고, CONNECT BY PRIOR EMPID = MGRID 로 각자의 부하가 아래로 전개된다. CONNECT BY 의 TODAY BETWEEN '2017-01-01' AND '2022-12-31' 조건은 자식으로 내려갈 때 적용되는데 모든 부하의 날짜가 이 범위에 있어 빠지는 행이 없다. 계층 순서(부모 바로 아래 자식)를 유지하며 ORDER SIBLINGS BY EMPID 로 형제끼리 정렬하므로 1000 → 1001 → 1002 → 1003 → 1004 → 1005 → 1006 → 1007 이다(④). ③ 은 계층 순서가 아니라 레벨별로 나열한 결과다. ※ 원본의 보기(그림)가 누락되어, 같은 개념을 묻는 모의고사 형태로 보기를 재구성했다.",
+    "chapter": "계층형 질의",
+    "_source": "sqld-1140",
+    "_origId": "sqld-0352",
+    "_category": "계층형 질의",
+    "_correctRate": 10,
+    "references": [
+      {
+        "type": "text",
+        "content": "SELECT *\nFROM Mytest\nSTART WITH MGRID IS NULL\nCONNECT BY PRIOR EMPID = MGRID\nAND today BETWEEN '2017-01-01' AND '2022-12-31'\nORDER SIBLINGS BY EMPID;"
+      },
+      {
+        "type": "table",
+        "caption": "[Mytest]",
+        "headers": [
+          "EMPID",
+          "NAME",
+          "TODAY",
+          "MGRID"
+        ],
+        "rows": [
+          [
+            "1000",
+            "조조",
+            "2017-01-01",
+            "NULL"
+          ],
+          [
+            "1001",
+            "유비",
+            "2017-01-01",
+            "1000"
+          ],
+          [
+            "1002",
+            "관우",
+            "2020-01-01",
+            "1000"
+          ],
+          [
+            "1003",
+            "조자룡",
+            "2020-01-01",
+            "1000"
+          ],
+          [
+            "1004",
+            "여포",
+            "2020-01-01",
+            "NULL"
+          ],
+          [
+            "1005",
+            "동탁",
+            "2022-01-01",
+            "1004"
+          ],
+          [
+            "1006",
+            "사마위",
+            "2022-01-01",
+            "1004"
+          ],
+          [
+            "1007",
+            "순욱",
+            "2022-01-01",
+            "1004"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": 12231,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 1432,
+    "title": "다음 테이블에 대해서 주어진 SQL문을 수행한 결과로 알맞은 것은?",
+    "options": [
+      "(10, MVP), (20, GOLD)",
+      "(10, GOLD)",
+      "(10, SILVER), (10, SILVER), (20, GOLD), (20, SILVER)",
+      "(10, GOLD), (20, MVP)"
+    ],
+    "correctIndex": 3,
+    "explanation": "인라인 뷰가 주문자(JUMUN)별 합계를 먼저 구한다: 10 은 1100 + 1600 = 2700, 20 은 2000 + 1500 = 3500. 이 합계가 T_CUST 의 MINPRICE~MAXPRICE 범위에 드는 등급과 비등가 조인되어 10 은 GOLD(2000~2999), 20 은 MVP(3000~4999) 다(④). ① 은 두 등급을 바꿨고, ③ 은 합계를 내지 않고 주문 한 건씩 등급을 매긴 결과다. (원본 SQL 의 오타 'AS TOTAL,' 와 JUMIN/JUMUN 표기를 바로잡았다.) ※ 원본의 보기(그림)가 누락되어, 같은 개념을 묻는 모의고사 형태로 보기를 재구성했다.",
+    "chapter": "그룹 함수",
+    "_source": "sqld-1140",
+    "_origId": "sqld-0392",
+    "_category": "집계 함수",
+    "_correctRate": 10,
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT A.JUMUN, B.CUSTRANK\nFROM   (SELECT JUMUN, SUM(PRICE) AS TOTAL\n        FROM   T_ORDER\n        GROUP BY JUMUN) A, T_CUST B\nWHERE  A.TOTAL BETWEEN B.MINPRICE AND B.MAXPRICE;"
+      },
+      {
+        "type": "table",
+        "caption": "T_ORDER",
+        "headers": [
+          "JUMUN",
+          "PRICE"
+        ],
+        "rows": [
+          [
+            "10",
+            "1100"
+          ],
+          [
+            "10",
+            "1600"
+          ],
+          [
+            "20",
+            "2000"
+          ],
+          [
+            "20",
+            "1500"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "T_CUST",
+        "headers": [
+          "CUSTRANK",
+          "MINPRICE",
+          "MAXPRICE"
+        ],
+        "rows": [
+          [
+            "MVP",
+            "3000",
+            "4999"
+          ],
+          [
+            "GOLD",
+            "2000",
+            "2999"
+          ],
+          [
+            "SILVER",
+            "1000",
+            "1999"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": 12232,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 1433,
+    "title": "주어진 데이터에서 아래의 SQL문을 수행된 결과로 옳은 것은?",
+    "options": [
+      "100, NULL, NULL",
+      "100, 60, 50",
+      "100, 3000, NULL",
+      "100, 3000, 50"
+    ],
+    "correctIndex": 3,
+    "explanation": "COALESCE 는 인수를 왼쪽부터 보며 처음 NULL 이 아닌 값을 반환한다. 1행은 COL1 = 100, 2행은 COL1 이 NULL 이라 COL2 * 50 = 3000, 3행은 COL1·COL2 가 모두 NULL 이라 COL2 * 50 도 NULL 이 되어 마지막 50 이다. 따라서 100, 3000, 50 이다(④). ② 는 COL2 에 50 을 곱하지 않았고, ③ 은 마지막 대체값 50 을 빠뜨렸다. ※ 원본의 보기(그림)가 누락되어, 같은 개념을 묻는 모의고사 형태로 보기를 재구성했다.",
+    "chapter": "함수",
+    "_source": "sqld-1140",
+    "_origId": "sqld-0451",
+    "_category": "NULL",
+    "_correctRate": 10,
+    "references": [
+      {
+        "type": "text",
+        "content": "SELECT COALESCE(COL1, COL2 * 50,50) FROM sqld_12;"
+      },
+      {
+        "type": "table",
+        "caption": "[sqld_12]",
+        "headers": [
+          "COL1",
+          "COL2"
+        ],
+        "rows": [
+          [
+            "100",
+            "100"
+          ],
+          [
+            "NULL",
+            "60"
+          ],
+          [
+            "NULL",
+            "NULL"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": 12233,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 1434,
+    "title": "다음 주어진 테이블에 대해서 아래의 SQL문의 실행 결과로 가장 올바른 것은?",
+    "options": [
+      "(10, 20), (13, 50), (11, 30), (12, 40), (14, 60)",
+      "(14, 60), (13, 50), (12, 40), (11, 30), (10, 20)",
+      "(14, 60), (12, 40), (11, 30), (13, 50), (10, 20)",
+      "(13, 50), (10, 20), (14, 60), (12, 40), (11, 30)"
+    ],
+    "correctIndex": 3,
+    "explanation": "첫 정렬 키 CASE 식은 ID 가 10 또는 13 이면 1, 나머지는 2 라서 10·13 이 먼저 나온다. 같은 키 안에서는 AGE DESC 로 정렬하므로 13(50) → 10(20), 그다음 14(60) → 12(40) → 11(30) 이다(④). ① 은 AGE 를 오름차순으로, ② 는 CASE 키를 무시하고 AGE 로만, ③ 은 CASE 키를 반대로 적용한 결과다. ※ 원본의 보기(그림)가 누락되어, 같은 개념을 묻는 모의고사 형태로 보기를 재구성했다.",
+    "chapter": "DML",
+    "_source": "sqld-1140",
+    "_origId": "sqld-0459",
+    "_category": "DML",
+    "_correctRate": 10,
+    "references": [
+      {
+        "type": "text",
+        "content": "SELECT ID, AGE\nFROM test20\nORDER BY (CASE WHEN ID = 10 OR\nID=13 THEN 1 ELSE 2 END),  AGE DESC"
+      },
+      {
+        "type": "table",
+        "caption": "[test20]",
+        "headers": [
+          "ID",
+          "AGE",
+          "NAME"
+        ],
+        "rows": [
+          [
+            "10",
+            "20",
+            "A"
+          ],
+          [
+            "11",
+            "30",
+            "B"
+          ],
+          [
+            "12",
+            "40",
+            "C"
+          ],
+          [
+            "13",
+            "50",
+            "D"
+          ],
+          [
+            "14",
+            "60",
+            "E"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": 12234,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 1435,
+    "title": "주어진 테이블에서 해당 SQL문을 수행 시 결과값으로 조회되는 테이블은 무엇인가?",
+    "options": [
+      "(1, 4), (2, 2)",
+      "(1, 3)",
+      "(1, 4)",
+      "(1, 4), (NULL, 1)"
+    ],
+    "correctIndex": 2,
+    "explanation": "C2 로 묶으면 1 인 그룹 3행(C3 합 1 + 1 + 2 = 4), 2 인 그룹 1행, C2 가 비어 있는(NULL) 그룹 1행이다. HAVING COUNT(*) >= 2 를 만족하는 것은 C2 = 1 그룹뿐이라 (1, 4) 다(③). NULL 도 하나의 그룹이 되지만 행이 1개라 걸러지고(④), ② 는 합계 대신 행 수를 쓴 결과다. ※ 원본의 보기(그림)가 누락되어, 같은 개념을 묻는 모의고사 형태로 보기를 재구성했다.",
+    "chapter": "그룹 함수",
+    "_source": "sqld-1140",
+    "_origId": "sqld-0473",
+    "_category": "그룹 함수",
+    "_correctRate": 10,
+    "references": [
+      {
+        "type": "text",
+        "content": "SELECT C2, SUM(C3)\nFROM SQLD_01\nGROUP BY C2\nHAVING COUNT(*) >= 2;"
+      },
+      {
+        "type": "table",
+        "caption": "[SQLD_01]",
+        "headers": [
+          "C1",
+          "C2",
+          "C3"
+        ],
+        "rows": [
+          [
+            "A",
+            "1",
+            "1"
+          ],
+          [
+            "B",
+            "1",
+            "1"
+          ],
+          [
+            "B",
+            "1",
+            "2"
+          ],
+          [
+            "C",
+            "2",
+            "2"
+          ],
+          [
+            "Z",
+            "",
+            "1"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": 12235,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 1436,
+    "title": "다음 주어진 테이블에서 해당 SQL문을 실행한 결과로 알맞은 것은?",
+    "options": [
+      "(NULL, A), (1, B), (2, C)",
+      "IN 목록에 NULL 이 있어 오류가 발생한다.",
+      "결과가 없다(공집합).",
+      "(1, B), (2, C)"
+    ],
+    "correctIndex": 3,
+    "explanation": "COL1 IN (1, 2, NULL) 은 COL1 = 1 OR COL1 = 2 OR COL1 = NULL 과 같다. COL1 = NULL 은 어떤 행에서도 참이 아니므로 COL1 이 NULL 인 행은 나오지 않고, 1·2 인 행만 조회된다(④). IN 목록에 NULL 이 있어도 오류가 나지 않으며(②), NULL 행을 찾으려면 IS NULL 을 써야 한다. ※ 원본의 보기(그림)가 누락되어, 같은 개념을 묻는 모의고사 형태로 보기를 재구성했다.",
+    "chapter": "집합 연산자",
+    "_source": "sqld-1140",
+    "_origId": "sqld-0496",
+    "_category": "집합 연산자",
+    "_correctRate": 10,
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT * FROM SQLD5 WHERE COL1 IN (1, 2, NULL);"
+      },
+      {
+        "type": "table",
+        "caption": "SQLD5",
+        "headers": [
+          "COL1",
+          "COL2"
+        ],
+        "rows": [
+          [
+            "NULL",
+            "A"
+          ],
+          [
+            "1",
+            "B"
+          ],
+          [
+            "2",
+            "C"
+          ],
+          [
+            "3",
+            "D"
+          ],
+          [
+            "4",
+            "E"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": 12236,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 1437,
+    "title": "다음 주어진 테이블에 대해서 아래의 SQL문을 실행하였을 때의 결과로 올바른 것은? (C1(C2, GRADE) 형식, C2 가 같은 행의 순서는 C1 순으로 가정)",
+    "options": [
+      "2(70, B), 1(80, B), 3(80, B), 4(90, B), 5(100, A), 6(110, A)",
+      "2(70, B), 1(80, B), 3(80, B), 4(90, B), 5(100, B), 6(110, S)",
+      "1(80, B), 2(70, B), 3(80, B), 4(90, B), 5(100, B), 6(110, A)",
+      "2(70, B), 1(80, B), 3(80, B), 4(90, B), 5(100, B), 6(110, A)"
+    ],
+    "correctIndex": 3,
+    "explanation": "CASE 는 위에서부터 처음 참인 조건을 쓴다. C2 가 100 이하면 'B', 100 초과 300 이하면 'A', 그보다 크면 'S' 라서 110 인 6번만 A, 나머지는 B 다(경계값 100 도 <= 100 이라 B). ORDER BY C2 로 70 → 80 → 80 → 90 → 100 → 110 순이다(④). ① 은 100 을 A 로, ② 는 110 을 S 로 잘못 판정했고, ③ 은 C1 순으로 정렬한 결과다. ※ 원본의 보기(그림)가 누락되어, 같은 개념을 묻는 모의고사 형태로 보기를 재구성했다.",
+    "chapter": "DML",
+    "_source": "sqld-1140",
+    "_origId": "sqld-0498",
+    "_category": "DML",
+    "_correctRate": 10,
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT C1, C2,\n       CASE WHEN C2 <= 100 THEN 'B'\n            WHEN C2 <= 300 THEN 'A'\n            ELSE 'S'\n       END GRADE\nFROM   test19\nORDER BY C2;"
+      },
+      {
+        "type": "table",
+        "caption": "test19",
+        "headers": [
+          "C1",
+          "C2"
+        ],
+        "rows": [
+          [
+            "1",
+            "80"
+          ],
+          [
+            "2",
+            "70"
+          ],
+          [
+            "3",
+            "80"
+          ],
+          [
+            "4",
+            "90"
+          ],
+          [
+            "5",
+            "100"
+          ],
+          [
+            "6",
+            "110"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": 12237,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 1438,
+    "title": "다음 주어진 데이터에서 해당 SQL문을 실행 했을 때의 결괏값으로 알맞은 것은?",
+    "options": [
+      "(1, NULL), (2, 300)",
+      "(1, 100), (2, 300)",
+      "(1, 100), (1, NULL), (2, 300)",
+      "NULL 이 있어 오류가 발생한다."
+    ],
+    "correctIndex": 1,
+    "explanation": "SUM 은 NULL 을 제외하고 더한다. A = 1 그룹은 100 과 NULL 중 100 만 더해 100, A = 2 그룹은 100 + 200 = 300 이다(②). 산술식 100 + NULL 은 NULL 이지만 집계 함수 SUM 은 NULL 행을 건너뛰므로 ① 처럼 되지 않고, 오류도 나지 않는다(④). ※ 원본의 보기(그림)가 누락되어, 같은 개념을 묻는 모의고사 형태로 보기를 재구성했다.",
+    "chapter": "그룹 함수",
+    "_source": "sqld-1140",
+    "_origId": "sqld-0536",
+    "_category": "집계 함수",
+    "_correctRate": 10,
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT A, SUM(X) AS TAB FROM TABLE_B GROUP BY A;"
+      },
+      {
+        "type": "table",
+        "caption": "TABLE_B",
+        "headers": [
+          "A",
+          "X"
+        ],
+        "rows": [
+          [
+            "1",
+            "100"
+          ],
+          [
+            "1",
+            "NULL"
+          ],
+          [
+            "2",
+            "100"
+          ],
+          [
+            "2",
+            "200"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": 12238,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 1439,
+    "title": "다음의 SQL문이 순서대로 수행되고 난 후 결과값으로 알맞은 것은?",
+    "options": [
+      "3",
+      "4",
+      "8",
+      "1"
+    ],
+    "correctIndex": 1,
+    "explanation": "1, 4 를 넣고 SAVEPOINT SV1 을 만든다. UPDATE ... WHERE COL1 = 2 는 해당 행이 없어 아무것도 바뀌지 않고, 같은 이름으로 SAVEPOINT SV1 을 다시 만들면 저장점이 이 위치로 옮겨진다. DELETE 로 4 가 지워졌다가 ROLLBACK TO SV1 으로 다시 살아나고, 3 을 넣으면 1, 4, 3 이 남아 MAX(COL1) = 4 다(②). ① 은 4 의 삭제가 취소되지 않았다고 본 결과, ③ 은 UPDATE 로 8 이 생겼다고 본 결과다. ※ 원본의 보기(그림)가 누락되어, 같은 개념을 묻는 모의고사 형태로 보기를 재구성했다.",
+    "chapter": "트랜잭션 관리",
+    "_source": "sqld-1140",
+    "_origId": "sqld-0537",
+    "_category": "트랜잭션 관리",
+    "_correctRate": 10,
+    "references": [
+      {
+        "type": "text",
+        "content": "Create table test20 (col1 number(10));\nINSERT INTO test20 VALUES(1);\nINSERT INTO test20 VALUES(4);\nSAVEPOINT SV1;\nUPDATE test20 SET COL1=8 WHERE COL1=2;\nSAVEPOINT SV1;\nDELETE test20 WHERE COL1 >= 2;\nROLLBACK TO SV1;\nINSERT INTO test20 VALUES(3);\nSELECT MAX(COL1) FROM test20;"
+      }
+    ]
+  },
+  {
+    "id": 12239,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 1440,
+    "title": "다음의 테이블을 보고 실행한 SQL문 중에서 그 결과가 올바르지 않은 것은?",
+    "options": [
+      "SELECT DECODE(Ordermonth, 0, 'Y') FROM T_ORDER WHERE Ordermonth = '06'; → 결과: 'Y'",
+      "SELECT SUM(Price) FROM T_ORDER WHERE Ordermonth BETWEEN '01' AND '03'; → 결과: 9000",
+      "SELECT MAX(Price) FROM T_ORDER; → 결과: 6000",
+      "SELECT COUNT(*) FROM T_ORDER WHERE Price >= 2000; → 결과: 4"
+    ],
+    "correctIndex": 0,
+    "explanation": "① DECODE(Ordermonth, 0, 'Y') 는 Ordermonth 가 0 과 같으면 'Y', 아니면 기본값(생략 시 NULL)을 반환한다. '06' 은 숫자로 바꿔도 6 이라 0 과 같지 않으므로 결과는 'Y' 가 아니라 NULL 이다. 따라서 결과가 올바르지 않은 것은 ① 이다. ② 1000 + 6000 + 2000 = 9000, ③ 최댓값 6000, ④ 2000 이상인 행은 6000·2000·3000·2000 의 4건으로 모두 맞다. ※ 원본의 보기(그림)가 누락되어, 같은 개념을 묻는 모의고사 형태로 보기를 재구성했다.",
+    "chapter": "DML",
+    "_source": "sqld-1140",
+    "_origId": "sqld-0541",
+    "_category": "DML",
+    "_correctRate": 10,
+    "references": [
+      {
+        "type": "table",
+        "caption": "T_ORDER (Ordermonth 는 문자 타입)",
+        "headers": [
+          "Orderyear",
+          "Ordermonth",
+          "Price"
+        ],
+        "rows": [
+          [
+            "2020",
+            "01",
+            "1000"
+          ],
+          [
+            "2020",
+            "02",
+            "6000"
+          ],
+          [
+            "2020",
+            "03",
+            "2000"
+          ],
+          [
+            "2020",
+            "04",
+            "3000"
+          ],
+          [
+            "2020",
+            "05",
+            "2000"
+          ],
+          [
+            "2020",
+            "06",
+            "1500"
+          ]
+        ]
       }
     ]
   }
