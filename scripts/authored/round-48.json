@@ -949,15 +949,15 @@
     {
       "subject": "2과목",
       "number": 33,
-      "title": "소계·총계를 포함한 결과에서 NULL 이 아닌 빈 문자열이 출력되도록 하는 처리는?",
+      "title": "ROLLUP 결과에서 데이터 자체의 NULL 과 구분하여, 소계·총계 행에만 '합계' 가 출력되도록 하는 처리로 가장 적절한 것은?",
       "options": [
-        "CASE WHEN GROUPING() = 1 THEN '' ELSE 컬럼 END",
-        "NVL(컬럼, '')",
+        "CASE WHEN GROUPING(컬럼) = 1 THEN '합계' ELSE 컬럼 END",
+        "NVL(컬럼, '합계')",
         "COALESCE(컬럼, 0)",
-        "NULLIF(컬럼, '')"
+        "NULLIF(컬럼, '합계')"
       ],
       "correctIndex": 0,
-      "explanation": "ROLLUP·CUBE 결과의 소계·총계 행에서는 그룹 키 컬럼이 NULL로 표시된다. 이 NULL은 \"진짜 데이터의 NULL\"이 아니라 \"소계 행임을 나타내는 표식\"이라 구분이 필요한다. GROUPING(컬럼) 함수는 해당 컬럼이 소계·총계 행이면 1, 일반 행이면 0을 반환하므로 `CASE WHEN GROUPING(컬럼) = 1 THEN '' ELSE 컬럼 END` 형태로 빈 문자열을 출력할 수 있다. ②·④는 데이터의 NULL과 소계 NULL을 구분하지 못하고, ③은 NULL을 0으로 바꾸므로 의도와 다르다. 정답은 ①번이다."
+      "explanation": "ROLLUP·CUBE 의 소계·총계 행에서는 그룹 기준 컬럼이 NULL 로 표시되는데, 이 NULL 은 데이터의 NULL 이 아니라 '소계 행' 이라는 표식이다. GROUPING(컬럼) 은 그 컬럼이 소계·총계로 집계된 행이면 1, 일반 행이면 0 을 반환하므로 CASE WHEN GROUPING(컬럼) = 1 THEN '합계' ELSE 컬럼 END 로 소계 행에만 '합계' 를 출력할 수 있다(①). ② NVL 은 원래 데이터가 NULL 인 행까지 '합계' 로 바꿔 구분하지 못하고, ③ 은 NULL 을 0 으로 바꾸며, ④ NULLIF 는 값이 '합계' 와 같을 때 NULL 을 반환하는 함수라 의도와 반대다. 참고로 Oracle 에서는 빈 문자열 '' 이 NULL 로 처리된다."
     },
     {
       "subject": "2과목",

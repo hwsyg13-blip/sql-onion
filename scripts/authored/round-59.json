@@ -925,15 +925,15 @@
     {
       "subject": "2과목",
       "number": 33,
-      "title": "아래 GROUP BY 절 중 '전체 집계, 특정 컬럼별 집계' 같이 개별 집계 조합만 선택적으로 산출하려 할 때 가장 적합한 것은?",
+      "title": "주문 테이블에서 '전체 합계', '월별 합계', '고객별 합계' 만 한 번에 구하고 '월·고객 조합별 합계' 는 제외하려 한다. 가장 적합한 GROUP BY 절은? (월 = SUBSTR(주문일자, 1, 6))",
       "options": [
-        "CUBE(( ), SUBSTR())",
-        "ROLLUP(( ), SUBSTR())",
-        "ROLLUP(SUBSTR())",
-        "GROUPING SETS"
+        "GROUP BY CUBE(SUBSTR(주문일자, 1, 6), 고객번호)",
+        "GROUP BY ROLLUP(SUBSTR(주문일자, 1, 6), 고객번호)",
+        "GROUP BY SUBSTR(주문일자, 1, 6), 고객번호",
+        "GROUP BY GROUPING SETS((), SUBSTR(주문일자, 1, 6), 고객번호)"
       ],
       "correctIndex": 3,
-      "explanation": "전체 집계와 특정 컬럼별 집계처럼 필요한 집계 조합만 골라서 나열하려면 GROUPING SETS 를 쓴다(④, 예: GROUPING SETS((), (SUBSTR(...)))). CUBE 는 모든 조합을, ROLLUP 은 계층 순서의 소계·총계를 자동으로 만들어 원하는 조합만 고를 수 없다(①②③)."
+      "explanation": "GROUPING SETS 는 필요한 집계 단위만 골라 나열할 수 있어 (), (월), (고객번호) 세 가지만 만든다(④). ① CUBE 는 (월, 고객), (월), (고객), () 네 가지를 모두 만들어 제외하려던 월·고객 조합이 포함되고, ② ROLLUP 은 (월, 고객), (월), () 라서 조합이 포함되고 고객별 합계가 빠지며, ③ 은 월·고객 조합별 합계만 만든다. ※ 복원 자료의 보기에서 함수 인수가 빠져(CUBE(( ), SUBSTR()) 등) 뜻이 통하지 않아, 같은 개념을 묻도록 조건과 보기를 복원했다."
     },
     {
       "subject": "2과목",
