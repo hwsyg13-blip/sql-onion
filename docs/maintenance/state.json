@@ -1,9 +1,9 @@
 {
   "last_processed_row": null,
-  "last_run": "2026-11-01T00:50:00Z",
+  "last_run": "2026-11-01T05:20:00Z",
   "last_gate": {
-    "five_hour": 0.85,
-    "seven_day": 0.23
+    "five_hour": 0.25,
+    "seven_day": 0.3
   },
   "current_mission": null,
   "my_prs": [
@@ -35,14 +35,17 @@
     221,
     222,
     223,
-    225
+    225,
+    226,
+    227
   ],
-  "stop_reason": "사용자 지시 실행 마무리 — 5시간 창 0.85, 남은 몫은 보고·다음 정기 실행용",
+  "stop_reason": "낮 실행 — 미션 2개 후 묶음 머지로 마무리. 24시간 배포 76건(기준 80 근접)",
   "releases": [
     214,
     217,
     220,
-    224
+    224,
+    228
   ],
   "awaiting_user": [
     "#210 vercel.json 머지 승인",
