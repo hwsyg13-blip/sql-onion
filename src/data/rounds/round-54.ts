@@ -1339,7 +1339,7 @@ export const ROUND_54: QuizQuestion[] = [
     "round": 54,
     "subject": "2과목",
     "number": 34,
-    "title": "아래 수강 테이블에서 강좌번호 100 과 101 을 동시에 수강하는 학번을 조회하는 SQL 로 적절한 것은?",
+    "title": "아래 수강 테이블에서 강의번호 100 과 101 을 동시에 수강하는 학번을 조회하는 SQL 로 적절한 것은?",
     "options": [
       "SELECT 학번 FROM 수강 WHERE 강의번호 = 100 AND 강의번호 = 101;",
       "SELECT 학번 FROM 수강 WHERE 강의번호=100 INTERSECT SELECT 학번 FROM 수강 WHERE 강의번호=101;",
@@ -1347,7 +1347,7 @@ export const ROUND_54: QuizQuestion[] = [
       "SELECT 학번 FROM 수강 WHERE 강의번호 = 100 OR 강의번호 = 101;"
     ],
     "correctIndex": 1,
-    "explanation": "AND 는 한 행이 동시에 두 값일 수 없어 공집합, IN/OR 은 둘 중 하나라도 만족하는 학번을 반환한다. INTERSECT 로 두 강좌의 학번 집합을 교집합 처리해야 동시에 수강한 학번을 얻는다.",
+    "explanation": "AND 는 한 행이 동시에 두 값일 수 없어 공집합, IN/OR 은 둘 중 하나라도 만족하는 학번을 반환한다. INTERSECT 로 두 강의의 학번 집합을 교집합 처리해야 동시에 수강한 학번을 얻는다.",
     "_source": "authored",
     "references": [
       {

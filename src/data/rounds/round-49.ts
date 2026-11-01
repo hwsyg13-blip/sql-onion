@@ -1746,7 +1746,7 @@ export const ROUND_49: QuizQuestion[] = [
     "round": 49,
     "subject": "2과목",
     "number": 49,
-    "title": "소계와 총계를 포함한 집계를 생성하는 GROUP BY 확장 연산자는?",
+    "title": "GROUP BY 에 나열한 컬럼 순서대로 계층적인 소계와 총계를 생성하는 확장 연산자는?",
     "options": [
       "CUBE",
       "ROLLUP",
@@ -1754,7 +1754,7 @@ export const ROUND_49: QuizQuestion[] = [
       "PIVOT"
     ],
     "correctIndex": 1,
-    "explanation": "ROLLUP 은 GROUP BY 컬럼을 좌측부터 점진적으로 줄여가며 소계와 총계까지 함께 산출하는 확장 연산자이다. CUBE 는 모든 차원 조합의 소계를, GROUPING SETS 는 지정한 그룹들만 산출하며, PIVOT 은 행을 열로 전환하는 연산이다.",
+    "explanation": "ROLLUP(A, B) 는 (A, B) → (A) → () 처럼 GROUP BY 컬럼을 오른쪽부터 하나씩 줄여 가며 계층적인 소계와 총계를 만든다. CUBE 도 소계와 총계를 만들지만 컬럼 순서와 무관하게 모든 조합((A, B), (A), (B), ())을 만들고, GROUPING SETS 는 지정한 그룹만 집계하며, PIVOT 은 행을 열로 바꾸는 연산이다.",
     "_source": "authored"
   },
   {
