@@ -19,7 +19,7 @@ export const ROUND_50: QuizQuestion[] = [
       "복합으로 주식별자를 구성할 경우 너무 많은 속성을 포함하지 않도록 한다."
     ],
     "correctIndex": 2,
-    "explanation": "명칭·내역 등 서술형 속성은 자주 변경되며 주식별자로 부적합하다.",
+    "explanation": "주식별자는 해당 업무에서 자주 이용되는 속성으로 지정하고(①), 값이 자주 바뀌지 않아야 하며(②), 복합 식별자는 너무 많은 속성을 넣지 않는다(④). 이름·명칭·내역처럼 이름으로 기술되는 속성은 같은 이름이 있을 수 있고 바뀌기도 쉬워 주식별자로 지정하지 않으므로 ③ 이 옳지 않다.",
     "_source": "authored"
   },
   {
@@ -37,7 +37,7 @@ export const ROUND_50: QuizQuestion[] = [
       "관계분류"
     ],
     "correctIndex": 3,
-    "explanation": "관계 표기법은 관계명·관계차수·관계선택사양 세 요소로 구성된다.",
+    "explanation": "관계의 표기법은 관계명(관계의 이름), 관계차수(1:1, 1:M, M:N), 관계선택사양(필수·선택) 세 가지다(①②③). '관계분류' 는 표기법 요소가 아니다(④).",
     "_source": "authored"
   },
   {
@@ -55,7 +55,7 @@ export const ROUND_50: QuizQuestion[] = [
       "식별자"
     ],
     "correctIndex": 3,
-    "explanation": "식별자는 엔터티 내 여러 속성 가운데 인스턴스를 대표·구분하는 속성이다.",
+    "explanation": "엔터티를 대표하고 각 인스턴스를 구분하는 속성은 식별자다(④). 파생속성(①)은 다른 속성에서 계산된 속성, 복합속성(②)은 주소처럼 여러 세부 속성으로 나눌 수 있는 속성, 단일속성(③)은 하나의 값만 갖는 속성으로, 모두 엔터티를 대표하는 개념이 아니다.",
     "_source": "authored"
   },
   {
@@ -73,7 +73,7 @@ export const ROUND_50: QuizQuestion[] = [
       "로그인, 알림"
     ],
     "correctIndex": 0,
-    "explanation": "개념 엔터티는 실체는 없으나 업무상 정의된 추상 개념을 다룬다.",
+    "explanation": "유무형에 따른 분류에서 개념 엔터티는 물리적 형태는 없지만 관리할 가치가 있는 개념적 정보로, 조직·보험상품이 대표적이다(①). 주문·입금(②), 청구·결제(③), 로그인·알림(④)은 업무 수행 중에 발생하는 사건 엔터티에 해당한다.",
     "_source": "authored"
   },
   {
@@ -115,7 +115,7 @@ export const ROUND_50: QuizQuestion[] = [
       "프로젝트별로 상이한 엔터티를 별도의 제약 없이 통합하여 저장한다."
     ],
     "correctIndex": 3,
-    "explanation": "업무 성격이 상이한 데이터를 무조건 합치면 데이터 무결성과 관리 효율이 떨어진다.",
+    "explanation": "데이터 모델링은 중복 데이터를 최소화하고(①), 업무 규칙을 반영하며(②), 엔터티 간 관계를 명확히 표현해야 한다(③). 업무 성격이 다른 엔터티를 아무 제약 없이 하나로 통합하면 의미가 섞이고 데이터 무결성과 관리 효율이 떨어지므로 ④ 가 옳지 않다.",
     "_source": "authored"
   },
   {
@@ -133,7 +133,7 @@ export const ROUND_50: QuizQuestion[] = [
       "식별자"
     ],
     "correctIndex": 3,
-    "explanation": "식별자는 엔터티의 인스턴스를 유일하게 구분할 수 있게 하는 하나 또는 그 이상의 속성 집합이다.",
+    "explanation": "엔터티의 인스턴스를 유일하게 구분하는 하나 또는 그 이상의 속성 집합은 식별자다(④). 관계(①)는 엔터티 사이의 연관, 속성(②)은 엔터티를 구성하는 더 이상 분리되지 않는 데이터 단위, 도메인(③)은 속성이 가질 수 있는 값의 범위다.",
     "_source": "authored",
     "references": [
       {
@@ -157,7 +157,7 @@ export const ROUND_50: QuizQuestion[] = [
       "응용 스키마"
     ],
     "correctIndex": 3,
-    "explanation": "데이터베이스 스키마는 외부·개념·내부 3계층으로 구성되며 응용 스키마는 표준 분류에 포함되지 않는다.",
+    "explanation": "ANSI/SPARC 3단계 구조의 스키마는 사용자 관점의 외부 스키마(①), 조직 전체 관점의 개념 스키마(③), 물리적 저장 구조의 내부 스키마(②) 세 가지다. 응용 스키마는 이 분류에 없다(④).",
     "_source": "authored"
   },
   {
@@ -175,7 +175,7 @@ export const ROUND_50: QuizQuestion[] = [
       "물리적 모델링"
     ],
     "correctIndex": 2,
-    "explanation": "M:N 관계 해소·정규화 등 업무 규칙을 상세화하는 단계는 논리적 모델링이다.",
+    "explanation": "M:N 관계를 1:M, M:1 로 해소하고 정규화를 수행해 업무 데이터 구조를 상세하게 정의하는 단계는 논리적 모델링이다(③). 개념적 모델링(②)은 핵심 엔터티와 관계를 추상적으로 도출하는 단계, 물리적 모델링(④)은 테이블·인덱스 등 실제 저장 구조를 설계하는 단계이며, '개괄적 모델링'(①)은 표준 단계가 아니다.",
     "_source": "authored"
   },
   {
@@ -193,7 +193,7 @@ export const ROUND_50: QuizQuestion[] = [
       "인스턴스"
     ],
     "correctIndex": 0,
-    "explanation": "도메인은 속성이 취할 수 있는 값의 범위·데이터 타입·크기를 정의한 집합이다.",
+    "explanation": "속성이 가질 수 있는 값의 범위(데이터 타입·크기·제약)를 정의한 것은 도메인이다(①). 엔터티(②)는 관리할 대상 집합, 식별자(③)는 인스턴스를 구분하는 속성, 인스턴스(④)는 엔터티에 속한 개별 데이터 한 건이다.",
     "_source": "authored"
   },
   {
@@ -444,7 +444,7 @@ export const ROUND_50: QuizQuestion[] = [
       "ERROR"
     ],
     "correctIndex": 0,
-    "explanation": "COUNT(*) 는 행이 없어도 0 을 반환하므로 NVL 의 대체 값이 적용되지 않는다.",
+    "explanation": "COUNT(*) 는 조건을 만족하는 행이 없어도 NULL 이 아니라 0 을 반환한다. 그래서 NVL(0, 9999) = 0 이다(①). 대체값 9999 가 나오려면 SUM·MAX 처럼 공집합에서 NULL 을 반환하는 집계 함수여야 한다.",
     "_source": "authored",
     "references": [
       {
@@ -468,7 +468,7 @@ export const ROUND_50: QuizQuestion[] = [
       "양쪽을 모두 포함하는 FULL OUTER JOIN"
     ],
     "correctIndex": 3,
-    "explanation": "양쪽 모두에 매칭되지 않는 행까지 포함해야 하므로 FULL OUTER JOIN 이 적합하다.",
+    "explanation": "클래스와 튜터 양쪽 모두에서 짝이 없는 행까지 빠짐없이 나오려면 두 테이블의 행을 모두 보존하는 FULL OUTER JOIN 을 쓴다(④). INNER JOIN 은 양쪽 모두 매칭된 행만, 클래스 기준 LEFT JOIN 은 튜터가 없는 클래스만, 튜터 기준 RIGHT JOIN 은 클래스가 없는 튜터만 보존한다.",
     "_source": "authored"
   },
   {
@@ -618,7 +618,7 @@ export const ROUND_50: QuizQuestion[] = [
       "ON 절과 함께 사용할 수 없다."
     ],
     "correctIndex": 1,
-    "explanation": "NATURAL JOIN 은 동일 이름 컬럼에 대해 등가 조인만 수행한다.",
+    "explanation": "NATURAL JOIN 은 두 테이블에서 이름이 같은 모든 컬럼을 자동으로 찾아 등가(=) 조인만 수행하며(①), USING 절이나 ON 절과 함께 쓸 수 없다(③④). 비등가 조인(BETWEEN, > 등)은 할 수 없으므로 ② 가 옳지 않다.",
     "_source": "authored"
   },
   {
@@ -806,7 +806,7 @@ export const ROUND_50: QuizQuestion[] = [
       "DROP 은 Auto Commit 이고 DELETE 와 TRUNCATE 는 사용자 COMMIT 으로 수행된다."
     ],
     "correctIndex": 3,
-    "explanation": "TRUNCATE 도 Auto Commit 이 수행된다. 사용자 COMMIT 이 필요한 것은 DELETE 뿐이다.",
+    "explanation": "DROP 은 테이블 정의와 데이터를 모두 삭제하고(①), TRUNCATE 는 데이터를 모두 지우고 저장 공간을 해제해 테이블을 처음 상태로 만들며(②), UNDO 를 거의 만들지 않아 DELETE 보다 빠르다(③). TRUNCATE 는 DDL 이라 DROP 과 마찬가지로 자동 커밋되고, 사용자 COMMIT 이 필요한 것은 DML 인 DELETE 뿐이다. ④ 가 옳지 않다.",
     "_source": "authored"
   },
   {
@@ -824,7 +824,7 @@ export const ROUND_50: QuizQuestion[] = [
       "TBL_2023#"
     ],
     "correctIndex": 3,
-    "explanation": "테이블명은 문자로 시작해야 하고 $, #, _ 특수문자는 허용된다.",
+    "explanation": "Oracle 테이블명은 문자로 시작해야 하고, 문자·숫자와 특수문자 _, $, # 만 쓸 수 있다. ④ TBL_2023# 은 문자로 시작하고 허용된 _ 와 # 만 써서 올바르다. ①② 는 숫자로 시작하고, ②③ 의 하이픈(-)은 허용되지 않는 문자다.",
     "_source": "authored"
   },
   {
@@ -842,7 +842,7 @@ export const ROUND_50: QuizQuestion[] = [
       "WHERE 부서"
     ],
     "correctIndex": 0,
-    "explanation": "그룹 함수 MAX 를 비집계 컬럼 부서와 함께 사용하려면 GROUP BY 부서 가 필요하다.",
+    "explanation": "SELECT 절에 집계 함수 MAX(연봉) 과 일반 컬럼 부서를 함께 쓰려면 부서를 GROUP BY 로 묶어야 부서별 최고 연봉이 나온다(①). HAVING(②)은 그룹에 대한 조건, ORDER BY(③)는 정렬, WHERE(④)는 행 조건이라 '부서' 만 쓰면 문법에 맞지 않고 그룹도 만들어지지 않는다.",
     "_source": "authored",
     "references": [
       {
@@ -911,7 +911,7 @@ export const ROUND_50: QuizQuestion[] = [
       "LAST_VALUE"
     ],
     "correctIndex": 1,
-    "explanation": "LAG 는 현재 행 기준 이전 행의 값을 참조하는 윈도우 함수이다.",
+    "explanation": "현재 행 기준으로 이전 행의 값을 가져오는 함수는 LAG 다(②). LEAD(①)는 다음 행의 값, FIRST_VALUE(③)·LAST_VALUE(④)는 윈도우의 첫 행·마지막 행 값을 반환한다.",
     "_source": "authored",
     "references": [
       {
@@ -953,7 +953,7 @@ export const ROUND_50: QuizQuestion[] = [
       "NOCYCLE 옵션은 사이클 발생 시 전개를 중단한다."
     ],
     "correctIndex": 0,
-    "explanation": "LEVEL 은 루트에서 1, 하위로 내려갈수록 1씩 증가한다. 리프 노드의 LEVEL 이 항상 1이라는 설명은 잘못되었다.",
+    "explanation": "CONNECT_BY_ISLEAF 는 리프 노드면 1, 아니면 0 을 반환하고(②), ORDER SIBLINGS BY 는 같은 부모를 가진 형제 노드끼리 정렬하며(③), NOCYCLE 은 순환이 생기면 그 지점에서 더 전개하지 않고 오류 없이 진행한다(④). LEVEL 은 루트가 1 이고 아래로 내려갈수록 1씩 커지므로 리프 노드의 LEVEL 이 항상 1 이라는 ① 이 옳지 않다.",
     "_source": "authored"
   },
   {
@@ -971,7 +971,7 @@ export const ROUND_50: QuizQuestion[] = [
       "ALTER TABLE T UPDATE COL VARCHAR2(10);"
     ],
     "correctIndex": 0,
-    "explanation": "Oracle 문법상 컬럼 타입 변경은 MODIFY 키워드를 사용한다.",
+    "explanation": "Oracle 에서 이미 있는 컬럼의 타입·크기를 바꿀 때는 ALTER TABLE 테이블명 MODIFY (컬럼명 타입) 을 쓴다(①). CHANGE(②)는 MySQL 문법, ALTER COLUMN(③ 은 COLUMN 도 빠짐)은 SQL Server 문법이며, UPDATE(④)는 데이터를 바꾸는 DML 이다.",
     "_source": "authored"
   },
   {
@@ -989,7 +989,7 @@ export const ROUND_50: QuizQuestion[] = [
       "+2시간"
     ],
     "correctIndex": 2,
-    "explanation": "1/24/60 = 1분이며, 1/12/2 = 1/24 = 1시간에 해당한다.",
+    "explanation": "날짜에 더하는 숫자는 '일' 단위다. 60/30 = 2 이므로 1/12/2 = 1/24 일이고, 하루의 1/24 은 1시간이다(③). 참고로 1/24/60 은 1분, 1/24/2 는 30분이다.",
     "_source": "authored",
     "references": [
       {
@@ -1069,7 +1069,7 @@ export const ROUND_50: QuizQuestion[] = [
       "일반 집합 연산은 ORDER BY 구문으로 사용할 수 없다."
     ],
     "correctIndex": 3,
-    "explanation": "UNION, INTERSECT 등도 최종 결과에 ORDER BY 를 적용할 수 있다.",
+    "explanation": "INTERSECT 는 교집합(①), UNION 은 중복을 제거한 합집합(②), EXCEPT(Oracle 의 MINUS)는 차집합(③)이다. 집합 연산 결과에도 마지막 SELECT 뒤에 ORDER BY 를 한 번 써서 정렬할 수 있으므로 ④ 가 옳지 않다.",
     "_source": "authored"
   },
   {
@@ -1087,7 +1087,7 @@ export const ROUND_50: QuizQuestion[] = [
       "CROSS JOIN"
     ],
     "correctIndex": 1,
-    "explanation": "사원이 없는 부서까지 포함하려면 부서 테이블을 좌측에 두고 LEFT OUTER JOIN 으로 사원 테이블을 결합한다.",
+    "explanation": "사원이 없는 부서까지 나오려면 부서 테이블의 모든 행을 보존해야 한다. 부서를 왼쪽에 두고 LEFT OUTER JOIN 으로 사원을 붙이면 된다(②). INNER JOIN 은 사원이 없는 부서가 빠지고, 사원을 보존하는 조인(③)은 반대로 부서가 없는 사원을 남기며, CROSS JOIN 은 조건 없는 카티션 곱이다.",
     "_source": "authored"
   },
   {
@@ -1221,7 +1221,7 @@ export const ROUND_50: QuizQuestion[] = [
       "2"
     ],
     "correctIndex": 1,
-    "explanation": "서로 다른 급여 값은 30000, 35000, 4000 의 3개이다.",
+    "explanation": "COUNT(DISTINCT 급여) 는 서로 다른 급여 값의 개수를 센다. 급여는 30000, 35000, 4000 세 종류(35000 과 4000 이 두 번씩)이므로 3 이다(②). 행 수를 그대로 세면 5(①)다.",
     "_source": "authored",
     "references": [
       {
@@ -1613,7 +1613,7 @@ export const ROUND_50: QuizQuestion[] = [
       "4"
     ],
     "correctIndex": 2,
-    "explanation": "ROUND(3.45, 1) 은 소수점 둘째 자리에서 반올림하여 3.5 를 반환한다.",
+    "explanation": "ROUND(3.45, 1) 은 소수 첫째 자리까지 남기도록 둘째 자리(5)에서 반올림하므로 3.5 다(③). TRUNC(3.45, 1) 이라면 버림으로 3.4(①), ROUND(3.45) 라면 정수로 반올림해 3 이 된다.",
     "_source": "authored"
   },
   {
@@ -1631,7 +1631,7 @@ export const ROUND_50: QuizQuestion[] = [
       "CROSS JOIN"
     ],
     "correctIndex": 3,
-    "explanation": "조인 조건 없이 두 테이블을 결합하면 모든 행의 조합을 생성하는 카티션 곱(CROSS JOIN) 이 된다.",
+    "explanation": "FROM TABLE1, TABLE2 처럼 조인 조건 없이 테이블을 나열하면 두 테이블의 모든 행 조합(카티션 곱)이 나오며, 이를 ANSI 문법으로 쓴 것이 CROSS JOIN 이다(④). INNER·OUTER JOIN 은 조인 조건이 필요하고, NATURAL JOIN 은 같은 이름 컬럼으로 자동 등가 조인한다.",
     "_source": "authored",
     "references": [
       {
@@ -1727,7 +1727,7 @@ export const ROUND_50: QuizQuestion[] = [
       "GRANT"
     ],
     "correctIndex": 1,
-    "explanation": "ROLLBACK 은 트랜잭션 내의 모든 변경 작업을 취소하고 직전 COMMIT 시점의 상태로 복원한다.",
+    "explanation": "트랜잭션 중 문제가 생겼을 때 커밋되지 않은 모든 변경을 취소하고 이전 상태로 되돌리는 명령은 ROLLBACK 이다(②). COMMIT(①)은 변경을 확정, SAVEPOINT(③)는 되돌아갈 저장점 지정, GRANT(④)는 권한 부여 명령이다.",
     "_source": "authored",
     "references": [
       {

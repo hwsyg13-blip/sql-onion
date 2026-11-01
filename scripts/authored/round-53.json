@@ -13,7 +13,7 @@
         "인프라 관점"
       ],
       "correctIndex": 0,
-      "explanation": "데이터 모델링의 세 가지 관점은 데이터 관점, 프로세스 관점, 상관 관점이다."
+      "explanation": "데이터 모델링의 세 가지 관점은 데이터 관점(무엇을 관리하는가), 프로세스 관점(무엇을 하는가), 데이터와 프로세스의 상관 관점(업무 처리가 데이터에 어떤 영향을 주는가)이다. 보기 중에는 데이터 관점(①)만 해당하며, 보안·성능·인프라 관점(②③④)은 세 관점에 들지 않는다."
     },
     {
       "subject": "1과목",
@@ -26,7 +26,7 @@
         "데이터 구조와 관계를 명확히 정의한다."
       ],
       "correctIndex": 1,
-      "explanation": "물리 데이터 모델링 단계에서 데이터 용량 산정도 수행된다."
+      "explanation": "데이터 모델링은 현실 세계를 단순화·추상화해 표현하고(①), 업무 흐름을 이해하고 소통하는 도구가 되며(③), 데이터 구조와 관계를 정의한다(④). 물리 데이터 모델링 단계에서는 테이블별 데이터 건수·크기 같은 용량 산정도 수행하므로 '데이터 용량 산정은 산출물이 아니다' 는 ② 가 옳지 않다."
     },
     {
       "subject": "1과목",
@@ -59,7 +59,7 @@
         "BCNF"
       ],
       "correctIndex": 2,
-      "explanation": "주식별자에 일반 속성이 모두 함수 종속하면서 이행 함수 종속까지 제거된 상태는 3정규형이다.",
+      "explanation": "일반 속성이 모두 주식별자에 함수 종속하고(2정규형까지 만족), 일반 속성 사이의 이행 함수 종속까지 제거한 상태는 3정규형이다(③). 1정규형(①)은 원자값, 2정규형(②)은 부분 함수 종속 제거까지이며, BCNF(④)는 결정자가 모두 후보키가 되도록 한 단계다.",
       "references": [
         {
           "type": "text",
@@ -78,7 +78,7 @@
         "일련번호 형태로 단순하게 부여되는 경우가 많다."
       ],
       "correctIndex": 0,
-      "explanation": "속성의 수는 인조 식별자 사용의 절대적인 기준이 아니다."
+      "explanation": "인조 식별자는 업무와 무관하게 시스템이 부여하는 식별자로(②), 본질 식별자가 너무 복잡할 때 대신 써서 관리를 쉽게 하고(③), 일련번호 형태가 많다(④). 인조 식별자를 쓸지는 본질 식별자가 복잡한지, 중복 데이터를 막을 수 있는지 등을 따져 정하며 속성 수가 적다고 반드시 써야 하는 것은 아니므로 ① 이 옳지 않다."
     },
     {
       "subject": "1과목",
@@ -91,7 +91,7 @@
         "BCNF"
       ],
       "correctIndex": 1,
-      "explanation": "부분 함수 종속을 분리하여 해결하는 정규화 단계는 2정규화이다.",
+      "explanation": "주식별자의 일부에만 종속된 속성(부분 함수 종속)을 분리하는 것은 2정규화다(②). 1정규화(①)는 반복 그룹·다중 값을 없애 원자값으로 만드는 것, 3정규화(③)는 이행 함수 종속 제거, BCNF(④)는 후보키가 아닌 결정자를 제거하는 것이다.",
       "references": [
         {
           "type": "text",
@@ -110,7 +110,7 @@
         "ERD 상에서 아크(Arc) 기호로 표현된다."
       ],
       "correctIndex": 0,
-      "explanation": "상호 배타적 관계에서도 배타적 상속이 가능하며 오히려 그 특성이 본질이다."
+      "explanation": "상호 배타적 관계(아크 관계)는 한 엔터티가 여러 부모 엔터티 중 하나와만 관계를 맺는 것으로(②), 차량의 소유자가 법인 또는 개인 중 하나인 경우가 대표적이며(③) ERD 에서 아크 기호로 표시한다(④). 이런 배타적 관계는 부모 쪽을 슈퍼타입-서브타입(배타적 서브타입) 구조로 설계해 표현할 수도 있으므로 '배타적 상속이 불가능하다' 는 ① 이 옳지 않다."
     },
     {
       "subject": "1과목",
@@ -123,12 +123,12 @@
         "대체키"
       ],
       "correctIndex": 0,
-      "explanation": "외래키(FK)는 다른 엔터티(부모 테이블)의 주식별자를 참조하여 참조 무결성을 보장한다."
+      "explanation": "다른 엔터티의 주식별자를 참조해 가져온 키는 외래키(FK)로, 참조 무결성을 보장한다(①). 기본키(②)는 자기 엔터티의 인스턴스를 구분하는 대표 키, 후보키(③)는 유일성과 최소성을 만족해 기본키가 될 수 있는 키, 대체키(④)는 후보키 중 기본키로 선택되지 않은 키다."
     },
     {
       "subject": "1과목",
       "number": 9,
-      "title": "데이터 모델링에 대한 설명 중 옳지 않은 것은?",
+      "title": "트랜잭션에 대한 설명 중 옳지 않은 것은?",
       "options": [
         "논리적 연산의 단위이다.",
         "트랜잭션을 모델에 표현할 수 없다.",
@@ -136,7 +136,7 @@
         "데이터 정합성을 확보하는 수단이다."
       ],
       "correctIndex": 1,
-      "explanation": "데이터 모델링 단계에서 트랜잭션도 분석·표현 대상이 된다."
+      "explanation": "트랜잭션은 논리적인 작업(연산)의 단위이고(①), 연관된 업무를 하나의 커밋 단위로 묶으며(③), 데이터 정합성을 확보하는 수단이다(④). 데이터 모델에서도 함께 처리되어야 하는 업무는 필수 관계 등으로 트랜잭션을 표현할 수 있으므로 '트랜잭션을 모델에 표현할 수 없다' 는 ② 가 옳지 않다."
     },
     {
       "subject": "1과목",
@@ -149,7 +149,7 @@
         "파선"
       ],
       "correctIndex": 0,
-      "explanation": "바커 표기법은 필수 참여를 직선, 선택 참여를 점선으로 표기한다."
+      "explanation": "바커 표기법은 관계선택사양을 선 모양으로 구분해, 필수 참여는 직선(실선), 선택 참여는 점선으로 그린다(①). 점선(②)·파선(④)은 선택 참여를 뜻하고, 이중선(③)은 바커 표기법의 참여 표기가 아니다."
     },
     {
       "subject": "2과목",
@@ -242,7 +242,7 @@
         "CASE WHEN 1=2 THEN 'Y' END"
       ],
       "correctIndex": 2,
-      "explanation": "COALESCE 는 NULL 이 아닌 첫 번째 값인 'AB' 를 반환한다."
+      "explanation": "COALESCE('AB', 'CD') 는 처음 NULL 이 아닌 값 'AB' 를 반환한다(③). NVL(NULL, NULL)(①)은 대체값도 NULL 이라 NULL, NULLIF('A', 'A')(②)는 두 값이 같아 NULL, ELSE 없는 CASE(④)는 조건 1 = 2 가 거짓이라 NULL 을 반환한다."
     },
     {
       "subject": "2과목",
@@ -322,7 +322,7 @@
         "ORDER BY 주문번호 DESC, 4 DESC, 1 DESC"
       ],
       "correctIndex": 2,
-      "explanation": "주문번호 DESC, 4번 컬럼 DESC, 1번 컬럼 ASC 형태로 ORDER BY 절에 컬럼 순번을 사용할 수 있다.",
+      "explanation": "요구사항은 주문번호 내림차순 → 4번 컬럼(금액) 내림차순 → 1번 컬럼(회원번호) 오름차순이다. ORDER BY 에는 SELECT 절 컬럼의 순번을 쓸 수 있으므로 ORDER BY 주문번호 DESC, 4 DESC, 1 ASC 가 맞다(③). ① 은 금액을 오름차순으로, ② 는 없는 컬럼으로, ④ 는 회원번호를 내림차순으로 정렬한다.",
       "references": [
         {
           "type": "sql",
@@ -345,7 +345,7 @@
         "DEFAULT 때문에 101·102·103 학생 번호로 입력해도 학번에는 NULL 이 들어간다."
       ],
       "correctIndex": 3,
-      "explanation": "DEFAULT 는 값 미지정 시 기본값을 적용할 뿐 값이 입력되면 그 값이 그대로 저장된다.",
+      "explanation": "학번에는 DEFAULT 100 이 지정되어 있고(①), 이름은 NOT NULL 이며(②), 학과번호는 학과 테이블을 참조한다(③). DEFAULT 는 INSERT 에서 값을 생략했을 때만 쓰이고, 101·102·103 처럼 값을 넣으면 그 값이 그대로 저장되므로 ④ 가 옳지 않다.",
       "references": [
         {
           "type": "sql",
@@ -479,7 +479,7 @@
         "DROP 과 TRUNCATE 는 Auto Commit 이고 DELETE 는 사용자 COMMIT 이 필요하다."
       ],
       "correctIndex": 0,
-      "explanation": "WHERE 없는 DELETE 는 모든 행을 삭제하지만 테이블 구조는 유지되므로 DROP TABLE 과 결과가 다르다."
+      "explanation": "DROP 은 테이블 정의까지 삭제하고 TRUNCATE 는 테이블을 처음 상태로 만들며(②), TRUNCATE 는 UNDO 를 거의 만들지 않아 대량 삭제 시 빠르고(③), DROP·TRUNCATE 는 DDL 이라 자동 커밋되지만 DELETE 는 COMMIT 이 필요하다(④). WHERE 없는 DELETE 는 모든 행을 지울 뿐 테이블 구조는 남으므로 DROP TABLE 과 결과가 같다는 ① 이 옳지 않다."
     },
     {
       "subject": "2과목",
@@ -543,7 +543,7 @@
         "(4)"
       ],
       "correctIndex": 1,
-      "explanation": "서브쿼리가 다중 행을 반환할 수 있음에도 단일 행 비교 연산자 '=' 를 사용하여 런타임 오류가 발생할 수 있다.",
+      "explanation": "(2) 의 서브쿼리 SELECT ID FROM A WHERE ~ 는 여러 행을 반환할 수 있는데, 단일 행 비교 연산자 = 와 함께 쓰여 여러 행이 나오면 ORA-01427 오류가 난다(②). 여러 행을 받으려면 IN 을 써야 한다. SUM(SAL)(①), GROUP BY ID(③), HAVING SUM(SAL) > 5000(④)은 문법상 문제가 없다.",
       "references": [
         {
           "type": "sql",
@@ -562,7 +562,7 @@
         "ORDER BY 절에서는 SELECT 절의 별칭을 참조할 수 있다."
       ],
       "correctIndex": 2,
-      "explanation": "테이블 별칭을 지정하면 SELECT 절에서 원본 테이블명을 직접 참조할 수 없다."
+      "explanation": "컬럼 별칭은 AS 를 생략할 수 있고(①), 테이블 별칭은 FROM 절에서 지정하며(②), ORDER BY 는 SELECT 이후에 처리되어 SELECT 절 별칭을 쓸 수 있다(④). FROM 절에서 테이블 별칭(A)을 지정하면 그 쿼리 안에서는 별칭으로만 참조해야 하므로, 원래 이름 U1.T1.C1 을 쓰면 오류다. ③ 이 옳지 않다."
     },
     {
       "subject": "2과목",
@@ -671,7 +671,7 @@
         "공집합"
       ],
       "correctIndex": 0,
-      "explanation": "`<= ALL(50, 15)` 은 두 값 모두와 비교하여 최소값 15 이하를 만족하는 행을 반환한다.",
+      "explanation": "COL <= ALL(50, 15) 는 목록의 모든 값보다 작거나 같아야 하므로 가장 작은 값 15 이하인 행만 참이다. T 에서 10, 12, 15 가 해당한다(①). ② 는 15 를 빠뜨렸고, ③ 은 ANY(가장 큰 값 50 이하)로 착각한 결과다.",
       "references": [
         {
           "type": "sql",
@@ -714,7 +714,7 @@
         "MINUS"
       ],
       "correctIndex": 3,
-      "explanation": "MINUS 는 첫 번째 집합에서 두 번째 집합에 존재하는 행을 제외한 차집합을 반환한다.",
+      "explanation": "첫 번째 집합에서 두 번째 집합에 있는 행을 뺀 차집합은 MINUS(SQL Server 는 EXCEPT)다(④). UNION 은 중복을 제거한 합집합, UNION ALL 은 중복을 포함한 합집합, INTERSECT 는 교집합이다.",
       "references": [
         {
           "type": "text",
@@ -733,7 +733,7 @@
         "UNION 연산자를 사용한 SQL 은 각각의 집합에 ORDER BY 절을 사용할 수 있다."
       ],
       "correctIndex": 3,
-      "explanation": "ORDER BY 는 최종 결과 집합에만 적용할 수 있다."
+      "explanation": "UNION 은 합집합에서 중복 행을 하나로 만들고(①), 중복이 없으면 UNION ALL 과 결과가 같다(②). 각 SELECT 에는 WHERE·GROUP BY·HAVING 을 따로 쓸 수 있지만(③), ORDER BY 는 집합 연산이 끝난 최종 결과에 한 번만, 마지막 SELECT 뒤에 쓸 수 있다. 각 집합에 ORDER BY 를 쓸 수 있다는 ④ 가 옳지 않다."
     },
     {
       "subject": "2과목",
@@ -781,7 +781,7 @@
         "ROLLUP·CUBE·GROUPING SETS 은 내부에서 정렬을 수행하지 못한다."
       ],
       "correctIndex": 3,
-      "explanation": "필요 시 ORDER BY 절을 함께 사용하여 정렬할 수 있다."
+      "explanation": "ROLLUP 은 계층 순서대로 소계·총계를(①), CUBE 는 모든 컬럼 조합의 집계를(②), GROUPING SETS 는 원하는 조합만 골라 집계한다(③). 이 함수들은 그룹을 만들기 위해 내부적으로 정렬·그룹화를 수행하며, 결과 순서를 원하는 대로 보장하려면 ORDER BY 를 함께 쓴다. 정렬을 수행하지 못한다는 ④ 가 옳지 않다."
     },
     {
       "subject": "2과목",
@@ -794,7 +794,7 @@
         "3"
       ],
       "correctIndex": 0,
-      "explanation": "CROSS JOIN 의 결과 행 수는 두 테이블의 카디널리티 곱이므로 3 × 5 = 15 이다.",
+      "explanation": "CROSS JOIN 은 조인 조건 없이 두 테이블의 모든 행을 조합하므로 결과 행 수는 M × N 이다. M = 3, N = 5 이면 15 행이다(①). 8 은 M + N 을 더한 잘못된 계산이다.",
       "references": [
         {
           "type": "table",
@@ -916,7 +916,7 @@
         "user1@example.com"
       ],
       "correctIndex": 2,
-      "explanation": "도메인에 '.' 이 없어 이메일 검증 패턴과 매칭되지 않는다."
+      "explanation": "도메인에 점(.) 이 있는지 검사하는 패턴이라면 name@domain.com, test@naver.co.kr, user1@example.com 은 모두 '@' 뒤 도메인에 점이 있어 정상으로 판정된다. hello@nodot 은 도메인에 점이 없어 패턴과 매칭되지 않고 NULL(빈 결과)이 나오므로 부적절한 결과가 나오는 경우는 ③ 이다."
     },
     {
       "subject": "2과목",
@@ -1017,7 +1017,7 @@
         "0명"
       ],
       "correctIndex": 1,
-      "explanation": "'n' 으로 끝나는 이름은 Kevin, Jason 의 두 명이다.",
+      "explanation": "LIKE '%n' 은 앞에 무엇이 와도 되고 마지막 글자가 소문자 n 인 문자열과 매칭된다. Kevin, Jason 은 n 으로 끝나고 Tom 은 m 으로 끝나므로 2명이다(②).",
       "references": [
         {
           "type": "table",
@@ -1054,7 +1054,7 @@
         "DEFAULT 값을 NULL 로 변경하면 기존 NULL 데이터에도 새로운 DEFAULT 가 소급 적용된다."
       ],
       "correctIndex": 3,
-      "explanation": "DEFAULT 변경은 과거 데이터에 소급 적용되지 않는다."
+      "explanation": "기존 데이터가 있으면 그보다 작게 컬럼 크기를 줄일 수 없고(①), 값이 모두 NULL 인 컬럼은 줄일 수 있다(②). DEFAULT 값을 바꾸면 변경 이후에 입력되는 행에만 적용되며(③) 이미 저장된 데이터(NULL 포함)에는 소급 적용되지 않는다. 따라서 ④ 가 옳지 않다."
     },
     {
       "subject": "2과목",
@@ -1067,7 +1067,7 @@
         "INSERT INTO TEST45 (COL1, COL2, COL3, COL4) VALUES (1, 2, 3, 4);"
       ],
       "correctIndex": 0,
-      "explanation": "컬럼 목록을 명시하지 않은 INSERT 는 모든 컬럼에 값을 채워야 한다.",
+      "explanation": "TEST45 는 컬럼이 4개다. 컬럼 목록을 생략한 INSERT 는 모든 컬럼에 순서대로 값을 줘야 하는데, ① 은 값이 3개뿐이라 '값의 수가 충분하지 않다' 는 오류가 난다. ② 는 4개를 모두 줬고, ③ 은 컬럼 3개를 명시해 COL4 에 NULL 이 들어가며, ④ 는 4개 컬럼을 명시했으므로 모두 정상이다.",
       "references": [
         {
           "type": "sql",
@@ -1216,7 +1216,7 @@
         "50"
       ],
       "correctIndex": 1,
-      "explanation": "MIN(COLB)=5, MAX(COLC)=10, SUM(NVL(SCORE,0))=0 이므로 5+10+0 = 15 이다.",
+      "explanation": "MIN(COLB) = 5, MAX(COLC) 는 NULL 을 제외하고 10, SUM(NVL(SCORE, 0)) 은 두 행 모두 0 으로 바뀌어 0 이다. 바깥 NVL 은 각 값이 NULL 이 아니라 그대로 쓰이므로 5 + 10 + 0 = 15 다(②). ① 은 MAX(COLC) 를 NULL→0 으로 잘못 본 결과다.",
       "references": [
         {
           "type": "table",
@@ -1256,7 +1256,7 @@
         "제약 조건 NOT NULL 추가 시 이미 NULL 값이 존재하면 오류 없이 수행된다."
       ],
       "correctIndex": 3,
-      "explanation": "기존에 NULL 값이 존재하면 NOT NULL 제약 추가가 실패한다."
+      "explanation": "PK 는 NOT NULL 과 UNIQUE 를 합친 제약이고(①), FK 는 참조할 테이블의 PK·UNIQUE 가 있어야 추가할 수 있으며(②), CHECK 제약을 추가하면 기본적으로 기존 데이터도 위반 여부를 검사한다(③). 이미 NULL 이 있는 컬럼에 NOT NULL 을 추가하면 기존 데이터가 제약을 위반해 오류가 나므로 ④ 가 옳지 않다."
     },
     {
       "subject": "2과목",
