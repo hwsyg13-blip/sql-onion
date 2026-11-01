@@ -522,7 +522,7 @@ export const ROUND_50: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT 카테고리번호, 카테고리명, 상위카테고리번호, LEVEL\nFROM   카테고리\nSTART WITH 카테고리번호 = 11\nCONNECT BY 카테고리번호 = PRIOR 상위카테고리번호;"
+        "code": "SELECT 카테고리번호, 카테고리명, LEVEL\nFROM   카테고리\n(   ?   );   -- START WITH ... CONNECT BY ... (보기에서 고르기)"
       },
       {
         "type": "table",
@@ -1005,7 +1005,7 @@ export const ROUND_50: QuizQuestion[] = [
     "round": 50,
     "subject": "2과목",
     "number": 34,
-    "title": "아래 두 테이블에 대한 네 SQL 중 결과 행 수가 나머지와 다른 것은?",
+    "title": "아래 두 테이블에 대한 네 SQL 중 결과 행 수가 가장 적은 것은?",
     "options": [
       "SELECT * FROM A LEFT OUTER JOIN B ON A.ID = B.ID;",
       "SELECT * FROM A RIGHT OUTER JOIN B ON A.ID = B.ID;",
@@ -1013,7 +1013,7 @@ export const ROUND_50: QuizQuestion[] = [
       "SELECT * FROM A INNER JOIN B ON A.ID = B.ID;"
     ],
     "correctIndex": 3,
-    "explanation": "공통 행은 2·3 두 건이다. LEFT 는 여기에 A 에만 있는 1 을 더해 3 건, RIGHT 는 B 에만 있는 4 를 더해 3 건, FULL 은 양쪽 미매칭을 모두 더해 4 건이 된다. INNER 만 매칭된 2 건을 반환하므로 ④ 가 나머지와 다르다.",
+    "explanation": "공통 행은 2·3 두 건이다. LEFT 는 여기에 A 에만 있는 1 을 더해 3 건, RIGHT 는 B 에만 있는 4 를 더해 3 건, FULL 은 양쪽 미매칭을 모두 더해 4 건이다. INNER 는 매칭된 2 건만 반환하므로 행 수가 가장 적은 것은 ④ 다.",
     "_source": "authored",
     "references": [
       {
@@ -1481,24 +1481,6 @@ export const ROUND_50: QuizQuestion[] = [
       {
         "type": "sql",
         "code": "INSERT INTO T VALUES (1);\nINSERT INTO T VALUES (2);\nSAVEPOINT SV1;\nUPDATE T SET VAL = 4 WHERE VAL = 1;\nSAVEPOINT SV1;          -- 덮어쓰기 (이전 SV1 폐기)\nDELETE FROM T WHERE VAL = 2;\nROLLBACK TO SAVEPOINT SV1;\nINSERT INTO T VALUES (3);\nCOMMIT;\nSELECT MAX(VAL) FROM T;"
-      },
-      {
-        "type": "table",
-        "caption": "최종 T 상태",
-        "headers": [
-          "VAL"
-        ],
-        "rows": [
-          [
-            "4"
-          ],
-          [
-            "2"
-          ],
-          [
-            "3"
-          ]
-        ]
       }
     ]
   },

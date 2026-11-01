@@ -19,6 +19,7 @@ function normalize(s) {
   return s
     .replace(/[`'"]/g, '')   // 따옴표류 제거
     .replace(/\s+/g, ' ')    // 공백 정규화
+    .replace(/\s*([=<>!(),;+*\/-])\s*/g, '$1')  // 연산자·괄호 주변 공백 무시 (예: "번호=11" vs "번호 = 11", R50 2과목 17)
     .trim();
 }
 
