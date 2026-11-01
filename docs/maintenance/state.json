@@ -1,9 +1,9 @@
 {
   "last_processed_row": null,
-  "last_run": "2026-11-01T00:40:00Z",
+  "last_run": "2026-11-01T00:50:00Z",
   "last_gate": {
-    "five_hour": 0.74,
-    "seven_day": 0.22
+    "five_hour": 0.85,
+    "seven_day": 0.23
   },
   "current_mission": null,
   "my_prs": [
@@ -32,12 +32,26 @@
     216,
     218,
     219,
-    221
+    221,
+    222,
+    223,
+    225
   ],
-  "stop_reason": null,
+  "stop_reason": "사용자 지시 실행 마무리 — 5시간 창 0.85, 남은 몫은 보고·다음 정기 실행용",
   "releases": [
     214,
     217,
-    220
+    220,
+    224
+  ],
+  "awaiting_user": [
+    "#210 vercel.json 머지 승인",
+    "#196 AI Gateway 머지 여부",
+    "sqld-0474 정답(3 vs 4개) 원문 확인",
+    "R50 2과목 41 중복 문항 처리",
+    "R46 1과목 2 정답 해석",
+    "examDate.ts 61회 날짜(일요일)",
+    "AdSense 재심사 요청",
+    "문의 시트 상태 갱신(docs/support/2026-11-01-cs-recent-reports.md)"
   ]
 }
