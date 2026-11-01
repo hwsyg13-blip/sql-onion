@@ -7,6 +7,7 @@
 //   GLUED_SQL       줄바꿈이 사라져 키워드가 앞 단어에 붙음 (TB_ORDERGROUP BY, ASTOTALFROM)
 //   FULLWIDTH_SQL   SQL 안의 전각 기호·둥근 따옴표 (〈〉, ；, ‘’) — 그대로는 실행되지 않는다
 //   NO_EXPLANATION  "(해설 미등록)" — 보기가 다 있는데 해설이 없다
+//   STALE_IMAGE_TITLE 제목은 '그림·이미지' 를 가리키는데 이미지 자료가 없다 (5/1 이미지를 표·SQL 로 바꾸며 제목을 안 고친 64문항, 11-01 수험자 제보)
 // 보기가 4개 미만인 문항은 빌드에서 제외되므로 검사하지 않는다. 하나라도 걸리면 exit 1.
 import { readFileSync, readdirSync } from 'node:fs';
 
@@ -44,6 +45,8 @@ for (const f of readdirSync(DIR).filter(f => f.endsWith('.json')).sort()) {
     }
 
     if (!q.explanation || /해설 미등록/.test(q.explanation)) add('NO_EXPLANATION', (q.title || '').slice(0, 50));
+
+    if (/이미지|그림/.test(q.title || '') && !(q.references || []).some(r => r.type === 'image')) add('STALE_IMAGE_TITLE', (q.title || '').slice(0, 60));
   });
 }
 

@@ -1017,7 +1017,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "두 개의 엔터티 사이에 정보의 조합이 발생되는가?"
     ],
     "correctIndex": 1,
-    "explanation": "관계를 정의할 때 주요하게 체크해야 하는 사항은 업무기술서, 장표에 관계연결을 가능하게 하는 동사(Verb)가 있는가이다.",
+    "explanation": "관계를 정의할 때는 두 엔터티 사이에 관심 있는 연관 규칙이 있는지(①), 정보의 조합이 발생하는지(④), 업무기술서·장표에 관계 연결 규칙이 서술되어 있는지(③), 그리고 관계 연결을 가능하게 하는 '동사(Verb)' 가 있는지를 확인한다. 명사는 엔터티·속성을 찾을 때의 단서이므로 '명사가 있는가' 라고 한 ② 가 거리가 멀다.",
     "chapter": "엔터티",
     "_source": "cbt-mock",
     "_origId": "cbt-001",
@@ -1057,7 +1057,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "한 테이블 내에서 연관된 칼럼은 없으나 JOIN을 해야 한다."
     ],
     "correctIndex": 0,
-    "explanation": "SELF JOIN은 하나의 테이블에서 두 개의 칼럼이 연관 관계를 가지고 있는 경우에 사용한다.",
+    "explanation": "SELF JOIN 은 한 테이블 안에서 두 컬럼이 연관 관계를 가질 때(예: 사원의 관리자번호가 같은 테이블의 사원번호를 참조) 같은 테이블을 별칭을 달리해 조인하는 방식이다(①). ②③ 은 두 테이블 사이의 조인이고, ④ 처럼 연관된 컬럼이 없으면 SELF JOIN 할 이유가 없다.",
     "chapter": "관계",
     "_source": "cbt-mock",
     "_origId": "cbt-004",
@@ -1124,7 +1124,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "서브쿼리는 SELECT절, FROM절, WHERE절 등에서 사용이 가능하다."
     ],
     "correctIndex": 2,
-    "explanation": "서브쿼리의 한 종류인 인라인뷰(Inline view)의 칼럼을 메인 쿼리에서 사용이 가능하다.",
+    "explanation": "서브쿼리는 괄호로 감싼 SELECT 문이고(①), 비교 연산자와 함께 쓸 수 있으며(②), SELECT·FROM·WHERE 절 등에 쓸 수 있다(④). WHERE 절 서브쿼리의 컬럼은 메인쿼리에서 쓸 수 없지만, FROM 절의 인라인 뷰 컬럼은 메인쿼리에서 사용할 수 있으므로 '메인쿼리는 서브쿼리의 칼럼을 쓸 수 없다' 고 단정한 ③ 이 올바르지 않다.",
     "chapter": "서브쿼리",
     "_source": "cbt-mock",
     "_origId": "cbt-006",
@@ -1144,7 +1144,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "USER DEFINED FUNCTION"
     ],
     "correctIndex": 2,
-    "explanation": "절차형 SQL을 이용하여 PROCEDURE, TRIGGER, USER DEFINED FUNCTION을 만들 수 있다.",
+    "explanation": "절차형 SQL(PL/SQL 등)로는 저장 프로시저(PROCEDURE), 트리거(TRIGGER), 사용자 정의 함수(USER DEFINED FUNCTION)를 만든다(①②④). 내장 함수(BUILT-IN FUNCTION)는 SUM·SUBSTR 처럼 DBMS 가 기본으로 제공하는 함수라 사용자가 절차형 SQL 로 만드는 대상이 아니다(③).",
     "chapter": "절차형 SQL",
     "_source": "cbt-mock",
     "_origId": "cbt-007",
@@ -1210,7 +1210,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "LAG"
     ],
     "correctIndex": 2,
-    "explanation": "RANK 함수는 순위를 구하는 윈도우 함수로 행의 순서와는 관련이 없다.",
+    "explanation": "그룹 내 행 순서 관련 함수는 FIRST_VALUE(①), LAST_VALUE(②), LAG(④), LEAD 처럼 정렬된 윈도우에서 특정 위치 행의 값을 가져오는 함수다. RANK 는 순위를 매기는 그룹 내 순위 함수이므로 행 순서 함수에 속하지 않는다(③).",
     "chapter": "윈도우 함수",
     "_source": "cbt-mock",
     "_origId": "cbt-010",
@@ -1282,7 +1282,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "Oracle에서 인덱스 구성 칼럼이 모두 null인 레코드는 인덱스에 저장하지 않는다."
     ],
     "correctIndex": 0,
-    "explanation": "SQL Server는 null 값을 인덱스 맨 앞에 저장하고, Oracle은 맨 뒤에 저장한다.",
+    "explanation": "Oracle 은 인덱스 구성 컬럼이 모두 NULL 인 레코드는 인덱스에 저장하지 않고(④) 하나라도 NULL 이 아니면 저장하며(②), NULL 을 가장 큰 값으로 보아 인덱스 맨 뒤에 둔다. SQL Server 는 모두 NULL 인 레코드도 인덱스에 저장하고(③) NULL 을 맨 앞에 둔다. 따라서 SQL Server 가 NULL 을 맨 뒤에 저장한다는 ① 이 올바르지 않다.",
     "chapter": "WHERE",
     "_source": "cbt-mock",
     "_origId": "cbt-013",
@@ -1386,13 +1386,13 @@ export const AI_MOCK: QuizQuestion[] = [
     "number": 66,
     "title": "Subquery의 종류 중에서 Subquery가 Mainquery의 제공자 역할을 하고 Mainquery의 값이 Subquery에 주입되지 않는 유형은 무엇인가?",
     "options": [
-      "① Filter형 Subquery",
+      "Filter형 Subquery",
       "Early Filter형 Subquery",
       "Associative Subquery",
       "Access Subquery"
     ],
     "correctIndex": 3,
-    "explanation": "Access Subquery는 제공자 역할을 하는 서브쿼리이다.",
+    "explanation": "서브쿼리가 메인쿼리에 값을 제공하는 제공자 역할만 하고, 메인쿼리의 값이 서브쿼리로 들어가지 않는 유형은 Access Subquery 다(④). Filter 형(①)은 반대로 메인쿼리의 값을 받아 서브쿼리가 확인자 역할을 하고, Early Filter 형(②)은 서브쿼리가 먼저 실행되어 데이터를 걸러내며, Associative Subquery(③)는 연관 서브쿼리를 뜻한다.",
     "chapter": "서브쿼리",
     "_source": "cbt-mock",
     "_origId": "cbt-016",
@@ -1432,7 +1432,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "U1 : 150, U2 : 200"
     ],
     "correctIndex": 1,
-    "explanation": "U1의 합계는 100+200 = 300이고, U2는 150이므로 답은 ②이다.",
+    "explanation": "GROUP BY USER_ID 로 사용자별 AMOUNT 를 합한다. U1 은 100 + 200 = 300, U2 는 150 이므로 ② 이다. ① 은 U1 의 한 행(200)만, ③④ 는 합계를 잘못 더한 값이다.",
     "chapter": "GROUP BY·HAVING",
     "_source": "cbt-mock",
     "_origId": "cbt-018",
@@ -1540,7 +1540,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "CUME_DIST"
     ],
     "correctIndex": 2,
-    "explanation": "위의 문제는 PERCENT_RANK()라는 윈도우 함수에 대한 것이다.",
+    "explanation": "윈도우에서 처음 나오는 행을 0, 마지막 행을 1 로 두고 순서별 백분율 순위를 구하는 함수는 PERCENT_RANK 다(③, (순위 - 1) / (전체 행 수 - 1)). CUME_DIST(④)는 현재 행 이하인 행의 누적 비율이라 첫 행이 0 이 아니고, FIRST_VALUE(①)·LAST_VALUE(②)는 첫 행·마지막 행의 값을 반환한다.",
     "chapter": "윈도우 함수",
     "_source": "cbt-mock",
     "_origId": "cbt-022",
@@ -1560,7 +1560,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "엔터티 하나의 인스턴스는 다른 엔터티의 인스턴스 간 관계인 Pairing을 가진다."
     ],
     "correctIndex": 1,
-    "explanation": "하나의 속성은 하나의 속성값을 가지며 하나 이상의 속성값을 가지는 경우 정규화가 필요하다.",
+    "explanation": "한 엔터티는 두 개 이상의 인스턴스 집합이고(①), 두 개 이상의 속성을 가지며(③), 엔터티의 인스턴스는 다른 엔터티 인스턴스와 관계(Pairing)를 맺는다(④). 하나의 속성은 하나의 속성값만 가지며, 여러 값을 가지면 정규화(1정규형) 대상이므로 ② 가 틀리다.",
     "chapter": "엔터티",
     "_source": "cbt-mock",
     "_origId": "cbt-023",
@@ -1686,7 +1686,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "인덱스 튜닝의 핵심 요소 중 하나는 불필요한 테이블 Random 액세스가 발생하지 않도록 하는 데에 있다. 이를 위해 인덱스 칼럼 순서를 바꿔주는 것도 큰 효과가 있다."
     ],
     "correctIndex": 3,
-    "explanation": "인덱스 칼럼 순서를 아무리 바꾸어도 테이블 Random 액세스 횟수는 줄지 않는다.",
+    "explanation": "인덱스를 거친 테이블 Random 액세스 부하가 크면 클러스터 테이블·IOT 를 고려할 수 있고(①), 인덱스 구성에 따라 스캔 효율이 달라져 컬럼 순서를 바꾸기도 하며(②), 두 컬럼이 모두 '=' 조건이면 [deptno + ename] 과 [ename + deptno] 의 스캔 효율은 같다(③). 그러나 테이블 Random 액세스 횟수는 조건을 만족하는 행 수로 정해져 인덱스 컬럼 순서를 바꿔도 줄지 않으므로 ④ 가 잘못되었다(줄이려면 인덱스에 필요한 컬럼을 추가해야 한다).",
     "chapter": "WHERE",
     "_source": "cbt-mock",
     "_origId": "cbt-027",
@@ -1834,7 +1834,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "데이터 모델링을 할 때 분석 단계에서부터 반정규화를 수행한다."
     ],
     "correctIndex": 3,
-    "explanation": "성능을 고려한 데이터 모델링을 할 때 첫 번째 단계는 정규화를 적용한 데이터 모델을 만드는 것이다.",
+    "explanation": "성능을 고려한 데이터 모델링은 먼저 정규화를 정확히 수행한 뒤, 용량 산정(②)과 트랜잭션 유형 파악(③)을 바탕으로 반정규화·이력모델·기본키/외래키·슈퍼타입/서브타입을 조정한다(①). 분석 단계부터 반정규화를 하는 것은 순서가 맞지 않아 ④ 가 포함되지 않는다.",
     "chapter": "식별자",
     "_source": "cbt-mock",
     "_origId": "cbt-030",
@@ -1854,7 +1854,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "테이블의 EMP_NAME이 A 또는 a로 끝나는 모든 ROW"
     ],
     "correctIndex": 1,
-    "explanation": "특정 문자로 시작하는 것을 조회하기 위해서는 LIKE문을 사용해야 한다. 그리고 ‘A%’는 A로 시작하는 것을 조회한다.",
+    "explanation": "LIKE 'A%' 는 첫 글자가 A 이고 그 뒤는 어떤 문자열이어도 되는 값과 매칭되므로 EMP_NAME 이 A 로 시작하는 행이다(②). Oracle 의 문자 비교는 대소문자를 구분해 a 로 시작하는 값은 포함되지 않으며(①), A 로 끝나는 값을 찾으려면 '%A' 를 써야 한다(③④).",
     "chapter": "WHERE",
     "_source": "cbt-mock",
     "_origId": "cbt-031",
@@ -2195,7 +2195,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "79"
     ],
     "correctIndex": 1,
-    "explanation": "ROUND 함수는 두 번째 인자의 수까지 반올림한다. 즉, 78.34에서 첫 번째 자리까지 반올림하면 78.3이 된다.",
+    "explanation": "ROUND(78.34, 1) 은 소수 첫째 자리까지 남기도록 둘째 자리(4)에서 반올림하므로 78.3 이다(②). 78(①)은 ROUND(78.34), 78.4(③)는 올림, 79(④)는 CEIL 을 했을 때의 값이다.",
     "chapter": "함수",
     "_source": "cbt-mock",
     "_origId": "cbt-045",
@@ -2247,7 +2247,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "10, 20, 30, 40, 50"
     ],
     "correctIndex": 1,
-    "explanation": "ALL 연산자는 서브쿼리(Subquery) 값 모두가 조건에 만족하면 True를 반환한다.",
+    "explanation": "<= ALL (30, 50) 은 목록의 모든 값보다 작거나 같아야 하므로 가장 작은 30 이하인 값만 참이다. 10, 20, 30 이 해당하고, NULL 은 비교 결과가 UNKNOWN 이라 제외된다(②). ③④ 는 ANY(50 이하)로 착각한 결과다.",
     "chapter": "관계형 DB와 SELECT",
     "_source": "cbt-mock",
     "_origId": "cbt-047",
@@ -2351,7 +2351,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "Full Outer Join"
     ],
     "correctIndex": 3,
-    "explanation": "위의 결과를 보면 EMPNO와 DEPTNO 각각에 서로 없는 것이 있다. 그래서 FULL OUTER JOIN이 된다.",
+    "explanation": "결과에 EMPNO 는 있지만 DEPTNO 가 비어 있는 행(8031)과, DEPTNO 는 있지만 EMPNO 가 비어 있는 행(40)이 함께 있다. 양쪽 테이블에서 짝이 없는 행을 모두 보존한 것이므로 FULL OUTER JOIN 이다(④). LEFT·RIGHT OUTER JOIN 은 한쪽만 보존하고, NATURAL JOIN 은 짝이 있는 행만 남긴다.",
     "chapter": "표준 조인",
     "_source": "cbt-mock",
     "_origId": "cbt-050",
@@ -2485,12 +2485,12 @@ export const AI_MOCK: QuizQuestion[] = [
     "title": "서브쿼리의 종류 중에 서브쿼리를 실행하고 한 행, 한 칼럼을 반환하는 서브쿼리를 무엇이라고 하는가?",
     "options": [
       "Looping",
-      "Scala Subquery",
+      "Scalar Subquery",
       "Associative Subquery",
       "Access Subquery"
     ],
     "correctIndex": 1,
-    "explanation": "스칼라 서브쿼리(Scala Subquery)는 SELECT문에서 사용하는 서브쿼리로 한 행만 반환한다.",
+    "explanation": "한 행·한 컬럼, 즉 값 하나만 반환하는 서브쿼리는 스칼라 서브쿼리(Scalar Subquery)이며 주로 SELECT 절에 쓴다(②). 두 행 이상이 반환되면 오류가 난다. Associative Subquery(③)는 연관 서브쿼리, Access Subquery(④)는 메인쿼리에 값을 제공하는 서브쿼리이고, Looping(①)은 서브쿼리 종류가 아니다.",
     "chapter": "서브쿼리",
     "_source": "cbt-mock",
     "_origId": "cbt-055",
@@ -2510,7 +2510,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "CONVERT"
     ],
     "correctIndex": 2,
-    "explanation": "TO_CHAR문을 사용하면 문자형 타입으로 변환한다.",
+    "explanation": "날짜형을 문자형으로 바꾸는 함수는 TO_CHAR 다(③, 예: TO_CHAR(SYSDATE, 'YYYY-MM-DD')). TO_NUMBER(①)는 문자를 숫자로, TO_DATE(②)는 문자를 날짜로 바꾸고, CONVERT(④)는 SQL Server 의 변환 함수다.",
     "chapter": "함수",
     "_source": "cbt-mock",
     "_origId": "cbt-056",
@@ -2536,7 +2536,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "Select Case When Name IS NULL THEN '없음' ELSE '0' END AS USER_NAME From Emp;"
     ],
     "correctIndex": 2,
-    "explanation": "IS NULL 함수는 만약 NULL이면 “없음”을 출력하고 그렇지 않으면 NAME 칼럼의 값을 출력하는 것이다.",
+    "explanation": "NVL(Name, '없음') 은 Name 이 NULL 이면 '없음', 아니면 Name 을 반환한다. 이와 같은 CASE 식은 CASE WHEN Name IS NULL THEN '없음' ELSE Name END 다(③). ①② 는 대체값이 '0' 이고, ④ 는 NULL 이 아닐 때도 '0' 을 반환해 다르다.",
     "chapter": "함수",
     "_source": "cbt-mock",
     "_origId": "cbt-057",
@@ -2562,7 +2562,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "Using"
     ],
     "correctIndex": 2,
-    "explanation": "NATURAL JOIN은 두 테이블 간에 동일한 칼럼 이름을 가진 것을 모두 출력하는 조인 방법이다.",
+    "explanation": "두 테이블에서 이름이 같은 컬럼을 모두 찾아 자동으로 등가 조인하는 방식은 NATURAL JOIN 이다(③). INNER JOIN(①)은 ON 이나 USING 으로 조건을 직접 지정해야 하고, CROSS JOIN(②)은 조건 없는 카티션 곱이며, USING(④)은 조인 방식이 아니라 같은 이름 컬럼을 지정하는 절이다.",
     "chapter": "표준 조인",
     "_source": "cbt-mock",
     "_origId": "cbt-059",
@@ -2582,7 +2582,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "PROJECT"
     ],
     "correctIndex": 2,
-    "explanation": "UNION은 일반 집합 연산자이며, 순수 관계 연산자는 SELECT, PROJECT, JOIN, DIVIDE 등이 있다.",
+    "explanation": "순수 관계 연산자는 관계형 데이터베이스에 맞게 새로 만든 SELECT, PROJECT, JOIN, DIVIDE 다(①②④). UNION 은 수학의 집합 개념을 가져온 일반 집합 연산자(UNION, INTERSECTION, DIFFERENCE, PRODUCT)에 속하므로 순수 관계 연산자가 아니다(③).",
     "chapter": "집합 연산자",
     "_source": "cbt-mock",
     "_origId": "cbt-060",
@@ -2971,7 +2971,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "서브쿼리는 Order by절에 사용할 수 있다."
     ],
     "correctIndex": 0,
-    "explanation": "성능 측면에서는 Union보다 Union All이 우수하다. Union은 내부적으로 SORT가 발생하기 때문이다.",
+    "explanation": "NATURAL JOIN 은 컬럼명이 같은 컬럼으로 조인하고(②), 뷰는 실제 데이터를 저장하지 않는 가상 테이블이며(③), ORDER BY 절에도 스칼라 서브쿼리를 쓸 수 있다(④). UNION 은 중복을 제거하려고 정렬 작업을 하지만 UNION ALL 은 그대로 합치기만 해 일반적으로 더 빠르므로, 성능 차이가 없다는 ① 이 옳지 않다.",
     "chapter": "ORDER BY",
     "_source": "cbt-mock",
     "_origId": "cbt-068",
@@ -3110,7 +3110,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "내부식별자 값을 포함한다."
     ],
     "correctIndex": 2,
-    "explanation": "엔터티는 업무 용어 기반의 단수형 명사를 사용하는 것이 원칙이다.",
+    "explanation": "엔터티 이름은 현업에서 쓰는 용어로, 가능한 한 단수형 명사를 쓴다(③). 동사로 시작하는 이름(①)이나 뜻이 모호해지는 약어(②)는 피하고, 식별자 값 같은 데이터를 이름에 넣지 않는다(④).",
     "chapter": "엔터티",
     "_source": "cbt-mock",
     "_origId": "cbt-071",
@@ -3242,7 +3242,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "Kim, Choi"
     ],
     "correctIndex": 2,
-    "explanation": "INTERSECT는 두 테이블에 공통으로 있는 값을 출력한다",
+    "explanation": "INTERSECT 는 두 SELECT 결과에 모두 있는 행(교집합)을 반환한다. STUDENT_A(Kim, Lee, Park)와 STUDENT_B(Lee, Choi, Park)에 공통으로 있는 이름은 Lee, Park 이다(③).",
     "chapter": "관계형 DB와 SELECT",
     "_source": "cbt-mock",
     "_origId": "cbt-077",
@@ -3304,7 +3304,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "'HelloSQL'"
     ],
     "correctIndex": 2,
-    "explanation": "TRIM은 별도의 설정을 하지 않으면 앞뒤 공백을 제거하므로 ‘Hello SQL’이 출력된다.",
+    "explanation": "TRIM 은 별도의 제거 문자를 지정하지 않으면 문자열 앞뒤의 공백을 모두 제거한다. 가운데 공백은 남으므로 'Hello SQL' 이다(③). ① 은 오른쪽만(RTRIM), ② 는 왼쪽만(LTRIM) 지운 결과이고, ④ 처럼 가운데 공백까지 지우지는 않는다.",
     "chapter": "관계형 DB와 SELECT",
     "_source": "cbt-mock",
     "_origId": "cbt-078",
@@ -3400,7 +3400,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "SELECT WHERE NAME = 'A' * FROM EMP;"
     ],
     "correctIndex": 2,
-    "explanation": "③을 제외한 나머지 보기는 모두 문법 오류가 발생한다.",
+    "explanation": "SELECT 문은 SELECT 컬럼 FROM 테이블 WHERE 조건 순서로 써야 한다. ③ 은 이 순서를 지켜 올바르다. ① 은 WHERE 가 FROM 보다 앞에 있고, ② 는 '테이블명, *' 처럼 존재하지 않는 컬럼 EMP 와 * 를 나열하는 형태라 오류이며, ④ 는 절의 순서가 뒤섞여 있다.",
     "chapter": "WHERE",
     "_source": "cbt-mock",
     "_origId": "cbt-082",
@@ -3420,7 +3420,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "관계 설정"
     ],
     "correctIndex": 2,
-    "explanation": "인덱스는 물리 모델링에서 다루며, 개념 모델에서는 등장하지 않는다.",
+    "explanation": "개념적 데이터 모델링은 업무의 핵심 엔터티를 식별하고(①), 주요 속성을 추출하며(②), 엔터티 간 관계를 설정하는(④) 추상적인 단계다. 인덱스 구성은 성능을 위해 실제 저장 구조를 설계하는 물리적 모델링 단계에서 한다(③).",
     "chapter": "엔터티",
     "_source": "cbt-mock",
     "_origId": "cbt-083",
@@ -3460,7 +3460,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "5개"
     ],
     "correctIndex": 1,
-    "explanation": "여러 테이블로부터 원하는 데이터를 조회하기 위해서는 전체 테이블 개수에서 최소 N-1개 만큼의 JOIN 조건이 필요하다.",
+    "explanation": "테이블 N 개를 모두 연결하려면 최소 N - 1 개의 조인 조건이 필요하다(테이블 둘을 잇는 데 조건 하나). 4개면 4 - 1 = 3 개다(②). 조건이 그보다 적으면 일부 테이블이 카티션 곱으로 결합된다.",
     "chapter": "표준 조인",
     "_source": "cbt-mock",
     "_origId": "cbt-085",
@@ -3560,7 +3560,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "최적화 정보는 실행 계획의 단계별 예상 비용을 표시한 것이다."
     ],
     "correctIndex": 1,
-    "explanation": "동일 SQL문에 대해 실행 계획이 다르다고 결과가 달라지지는 않는다. 그러나 실행 계획의 차이로 성능이 달라질 수 있다.",
+    "explanation": "실행 계획은 SQL 을 처리하는 절차와 방법을 표현한 것으로(①), 액세스 기법·조인 순서·조인 방법 등으로 구성되고(③), 최적화 정보는 단계별 예상 비용 등을 보여 준다(④). 같은 SQL 은 실행 계획이 달라도 결과는 같고 성능만 달라지므로 결과가 달라질 수 있다는 ② 가 적절하지 않다.",
     "chapter": "조인",
     "_source": "cbt-mock",
     "_origId": "cbt-090",
@@ -3686,7 +3686,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "SELECT count(고객) FROM SQLD_13 WHERE 거래내역 IS NULL;"
     ],
     "correctIndex": 3,
-    "explanation": "다른 것은 모두 NULL을 반환하는데 거래내역이 NULL인 고객의 수를 구해서 2를 반환한다.",
+    "explanation": "NULL 이 포함된 산술 연산은 결과가 NULL 이므로 NULL*2(①), NULL*3(②), NULL*NULL(③)은 모두 NULL 이다. ④ 는 거래내역이 NULL 인 고객(민정, 예진)의 수를 세어 2 를 반환하므로 결과가 다르다.",
     "chapter": "그룹 함수",
     "_source": "cbt-mock",
     "_origId": "cbt-097",
@@ -3886,7 +3886,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "개념 - 물리 - 논리"
     ],
     "correctIndex": 1,
-    "explanation": "데이터 모델링은 개념(비즈니스 중심) → 논리(정규화 등 구조화) → 물리(구현 최적화) 순으로 수행된다.",
+    "explanation": "데이터 모델링은 업무 중심으로 핵심 엔터티와 관계를 도출하는 개념적 모델링 → 정규화 등으로 상세 구조를 정하는 논리적 모델링 → DBMS 에 맞게 테이블·인덱스를 설계하는 물리적 모델링 순서로 진행한다(②). 나머지는 순서가 뒤바뀌었다.",
     "chapter": "데이터 모델 개념",
     "_source": "cbt-mock",
     "_origId": "cbt-105",
@@ -3988,7 +3988,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "100_EMP"
     ],
     "correctIndex": 2,
-    "explanation": "테이블명과 칼럼명은 반드시 문자로 시작해야 한다.",
+    "explanation": "테이블명은 문자로 시작해야 하고 문자·숫자와 _, $, # 만 쓸 수 있다. EMP100 은 문자로 시작하고 영문·숫자만 써서 올바르다(③). ① 의 하이픈(-)은 허용되지 않고, ②④ 는 숫자로 시작한다.",
     "chapter": "관계형 DB와 SELECT",
     "_source": "cbt-mock",
     "_origId": "cbt-108",
@@ -4238,7 +4238,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "FROM → WHERE → GROUP BY → HAVING → SELECT → ORDER BY"
     ],
     "correctIndex": 3,
-    "explanation": "SQL 실행 순서는 FROM → WHERE → GROUP BY → HAVING → SELECT → ORDER BY이다.",
+    "explanation": "SELECT 문의 논리적 실행 순서는 FROM(대상 테이블) → WHERE(행 걸러내기) → GROUP BY(그룹화) → HAVING(그룹 걸러내기) → SELECT(컬럼 선택) → ORDER BY(정렬) 이다(④). 그래서 WHERE 에서는 SELECT 별칭을 쓸 수 없고 ORDER BY 에서는 쓸 수 있다.",
     "chapter": "GROUP BY·HAVING",
     "_source": "cbt-mock",
     "_origId": "cbt-113",
@@ -4390,7 +4390,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "관계정의(Relationship Definition)"
     ],
     "correctIndex": 0,
-    "explanation": "엔터티 간 1:1, 1:M 등과 같이 관계참여 인스턴스의 수를 지칭하는 것은 관계 차수이다.",
+    "explanation": "엔터티 간 1:1, 1:M, M:N 처럼 관계에 참여하는 인스턴스의 수(기수성)를 나타내는 것은 관계 차수(Cardinality)다(①). 관계명(②)은 관계의 이름, 관계선택성(③)은 필수·선택 참여 여부이며, 관계정의(④)는 관계 표기법 요소가 아니다.",
     "chapter": "엔터티",
     "_source": "cbt-mock",
     "_origId": "cbt-115",
@@ -4484,7 +4484,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "‘75’"
     ],
     "correctIndex": 0,
-    "explanation": "‘0050’을 숫자로 변환하면 50이 된다. 여기에 25를 더해 75가 출력된다.",
+    "explanation": "TO_NUMBER('0050') 은 문자열을 숫자 50 으로 바꾸므로 50 + 25 = 75 이고 결과는 숫자형이다(①). 문자열 연결이 아니라서 5025(②)가 되지 않고, 오류도 나지 않으며(③), 문자열 '75'(④)도 아니다.",
     "chapter": "함수",
     "_source": "cbt-mock",
     "_origId": "cbt-119",
@@ -4584,7 +4584,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "DENSE_RANK()"
     ],
     "correctIndex": 3,
-    "explanation": "결괏값에서 중복된 등수 2등 다음에 바로 다음 등수인 3이 왔으므로 빈칸에는 DENSE_RANK가 와야 한다.",
+    "explanation": "결과를 보면 급여 250 인 두 사람이 공동 2위이고, 바로 다음 사람이 3위다. 동점이면 같은 순위를 주고 다음 순위를 건너뛰지 않는 함수는 DENSE_RANK 다(④). RANK(①)였다면 다음이 4위, ROW_NUMBER(③)였다면 동점자도 2, 3 으로 달랐을 것이고, NTILE(②)은 그룹 번호를 매긴다.",
     "chapter": "윈도우 함수",
     "_source": "cbt-mock",
     "_origId": "cbt-121",
@@ -4713,7 +4713,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "계약"
     ],
     "correctIndex": 2,
-    "explanation": "사원, 부서, 고객, 상품, 자재 등이 기본 엔터티가 될 수 있다.",
+    "explanation": "발생 시점에 따른 분류에서 중심 엔터티는 기본 엔터티로부터 발생해 업무의 중심이 되는 엔터티로, 매출·주문·계약 등이 해당한다(①②④). 사원은 다른 엔터티에 의존하지 않고 원래 존재하는 기본 엔터티이므로 중심 엔터티가 아니다(③).",
     "chapter": "엔터티",
     "_source": "cbt-mock",
     "_origId": "cbt-122",
@@ -4733,7 +4733,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "DATE 유형은 날짜 데이터를 다룰 때 사용한다."
     ],
     "correctIndex": 0,
-    "explanation": "VARCHAR 유형은 가변 길이 문자형이다.",
+    "explanation": "VARCHAR 는 가변 길이 '문자형' 이므로 숫자형이라고 한 ① 이 틀리다. CHAR 는 고정 길이 문자형(②), NUMERIC 은 숫자형(③), DATE 는 날짜형(④)으로 맞다.",
     "chapter": "관계형 DB와 SELECT",
     "_source": "cbt-mock",
     "_origId": "cbt-123",
@@ -4753,7 +4753,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "이메일 수신 여부(Y/N)"
     ],
     "correctIndex": 3,
-    "explanation": "식별자는 유일성을 보장해야 한다. 이메일 수신 여부는 Y, N이 여러 번 입력될 수 있으므로 식별자로는 적합하지 않다.",
+    "explanation": "식별자는 인스턴스를 유일하게 구분해야 한다. 주민등록번호(①)·사원번호(②)·학번(③)은 사람마다 값이 달라 식별자로 쓸 수 있지만, 이메일 수신 여부(Y/N)는 두 값만 반복되어 인스턴스를 구분할 수 없으므로 가장 부적절하다(④).",
     "chapter": "속성",
     "_source": "cbt-mock",
     "_origId": "cbt-124",
@@ -4793,7 +4793,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "실행 계획(Execution Plan)"
     ],
     "correctIndex": 1,
-    "explanation": "개념적 모델링에서는 주로 ERD를 통해 실세계의 개체, 관계 등을 도식화한다.",
+    "explanation": "개념적 데이터 모델링은 업무의 핵심 엔터티와 관계를 도출해 ERD 로 표현하는 것이 주요 산출물이다(②). 테이블·인덱스(①)와 SQL 스크립트(③)는 물리적 모델링·구현 단계, 실행 계획(④)은 SQL 실행 시점의 산출물이다.",
     "chapter": "엔터티",
     "_source": "cbt-mock",
     "_origId": "cbt-126",
@@ -4813,7 +4813,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "ROUND"
     ],
     "correctIndex": 0,
-    "explanation": "NVL(expr, value) → expr이 NULL일 경우 value를 반환한다.",
+    "explanation": "NVL(expr, 0) 은 expr 이 NULL 이면 0 을, 아니면 expr 을 반환해 NULL 을 0 으로 대체한다(①). UPPER(②)는 대문자 변환, MOD(③)는 나머지, ROUND(④)는 반올림 함수다.",
     "chapter": "함수",
     "_source": "cbt-mock",
     "_origId": "cbt-127",
@@ -4833,7 +4833,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "GRANT는 반드시 DBA만 사용할 수 있다."
     ],
     "correctIndex": 3,
-    "explanation": "일반 사용자 계정도 WITH GRANT OPTION 등으로 권한을 부여받아 GRANT할 수 있다.",
+    "explanation": "GRANT 는 특정 사용자에게 권한을 주며(①), SELECT, INSERT 처럼 여러 권한을 한 번에 줄 수 있고(③), WITH GRANT OPTION 을 붙이면 받은 사람이 다른 사용자에게 다시 줄 수 있다(②). 객체 소유자나 WITH GRANT OPTION 으로 권한을 받은 일반 사용자도 GRANT 를 쓸 수 있으므로 반드시 DBA 만 쓸 수 있다는 ④ 가 옳지 않다.",
     "chapter": "DCL·TCL",
     "_source": "cbt-mock",
     "_origId": "cbt-128",
@@ -4925,7 +4925,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "GRANT"
     ],
     "correctIndex": 1,
-    "explanation": "COMMIT은 트랜잭션을 확정하는 제어문이다.",
+    "explanation": "트랜잭션 제어문(TCL)은 COMMIT, ROLLBACK, SAVEPOINT 다(②). SELECT(①)는 DML(또는 DQL), CREATE(③)는 DDL, GRANT(④)는 DCL 이다.",
     "chapter": "DCL·TCL",
     "_source": "cbt-mock",
     "_origId": "cbt-131",
@@ -4945,7 +4945,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "단일 식별자 - 복합 식별자"
     ],
     "correctIndex": 0,
-    "explanation": "식별자를 대체할 수 있는 성격에 따라 구분한 개념은 본질 식별자 - 인조 식별자이다.",
+    "explanation": "식별자를 대체 여부에 따라 나누면, 업무에 의해 만들어진 본질 식별자와 이를 대신하려고 인위적으로 만든 인조 식별자다(①). 내부·외부 식별자(②)는 스스로 생성했는지, 주·보조 식별자(③)는 대표성, 단일·복합 식별자(④)는 속성의 수에 따른 분류다.",
     "chapter": "식별자",
     "_source": "cbt-mock",
     "_origId": "cbt-132",
@@ -4965,7 +4965,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "ALTER"
     ],
     "correctIndex": 1,
-    "explanation": "데이터를 입력하기 위해서 “INSERT” 명령어를 사용한다.",
+    "explanation": "테이블에 새 데이터를 입력하는 명령어는 DML 인 INSERT 다(②). UPDATE(③)는 이미 있는 데이터를 수정하고, CREATE(①)·ALTER(④)는 테이블 같은 객체의 구조를 만들거나 바꾸는 DDL 이다.",
     "chapter": "DML",
     "_source": "cbt-mock",
     "_origId": "cbt-133",
@@ -4985,7 +4985,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "다수의 주식별자를 분리시킨다."
     ],
     "correctIndex": 0,
-    "explanation": "식별자를 제외한 일반 속성 간 종속을 제거한다.",
+    "explanation": "3정규화는 2정규형에서 식별자가 아닌 일반 속성끼리의 종속(이행 함수 종속)을 제거하는 것이다(①). ② 는 2정규화(부분 함수 종속 제거), ③ 은 1정규화(원자값) 설명이고, ④ 는 정규화 단계 설명이 아니다.",
     "chapter": "속성",
     "_source": "cbt-mock",
     "_origId": "cbt-134",
@@ -5110,7 +5110,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "ㄱ : 8, ㄴ : 8"
     ],
     "correctIndex": 1,
-    "explanation": "COUNT(칼럼명)을 실행하면 NULL 값은 제외된다.",
+    "explanation": "COUNT(*) 는 NULL 여부와 관계없이 전체 행 수를 세므로 10 이고(ㄱ), COUNT(NUM2) 는 NUM2 가 NULL 인 2행을 빼고 세므로 8 이다(ㄴ). 따라서 ② 이다.",
     "chapter": "그룹 함수",
     "_source": "cbt-mock",
     "_origId": "cbt-137",
@@ -5136,7 +5136,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "무결성 보장"
     ],
     "correctIndex": 1,
-    "explanation": "정규화는 데이터 구조적 안정성 확보에 초점을 두며, 지나친 정규화는 JOIN을 증가시켜 성능을 저하시킬 수 있다.",
+    "explanation": "정규화는 데이터 중복을 최소화하고(①), 입력·수정·삭제 이상 현상을 없애며(③), 무결성을 지키는 데(④) 이점이 있다. 반면 테이블이 나뉘어 조회 시 조인이 늘어나 성능이 오히려 떨어질 수 있으므로 처리 성능 향상은 정규화의 이점으로 적절하지 않다(②).",
     "chapter": "정규화",
     "_source": "cbt-mock",
     "_origId": "cbt-138",
@@ -5242,7 +5242,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "처리 비용의 감소"
     ],
     "correctIndex": 3,
-    "explanation": "분산 데이터베이스는 네트워크에 떨어져 있는 데이터베이스를 구축하고 관리해야 하기 때문에 처리비용이 증가한다.",
+    "explanation": "분산 데이터베이스는 지역 자치성과 점진적인 용량 확장(①), 가까운 곳의 데이터를 써서 빠른 응답과 통신 비용 절감(②)이 장점이지만, 구조가 복잡해 오류의 잠재성이 커진다(③). 여러 지역의 데이터베이스를 관리하고 통제해야 하므로 처리 비용은 오히려 증가해, 처리 비용 감소라고 한 ④ 가 부적절하다.",
     "chapter": "관계형 DB와 SELECT",
     "_source": "cbt-mock",
     "_origId": "cbt-143",
@@ -5302,7 +5302,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "오류가 발생하는 쿼리이다."
     ],
     "correctIndex": 0,
-    "explanation": "서브쿼리를 풀면 전체 직원의 평균 금액이 나오고, 이보다 큰 SAL(급여)를 가지고 있는 대상을 찾는 쿼리이다.",
+    "explanation": "서브쿼리 SELECT AVG(SAL) FROM EMP 는 전체 사원의 평균 급여 한 값을 반환하고, 메인쿼리는 SAL 이 그 값보다 큰 사원을 조회한다(①). 단일 값을 반환하므로 > 와 함께 써도 오류가 나지 않는다(④).",
     "chapter": "그룹 함수",
     "_source": "cbt-mock",
     "_origId": "cbt-146",
@@ -5323,12 +5323,12 @@ export const AI_MOCK: QuizQuestion[] = [
     "title": "다음 중 엔터티의 특징에 포함되지 않는 것은?",
     "options": [
       "반드시 해당 업무에서 필요하고 관리하고자 하는 정보이어야 한다.",
-      "유리한 식별자에 의해 식별이 가능해야 한다.",
+      "유일한 식별자에 의해 식별이 가능해야 한다.",
       "엔터티는 속성이 없어도 된다.",
       "엔터티는 업무 프로세스에 의해 이용되어야 한다."
     ],
     "correctIndex": 2,
-    "explanation": "엔터티는 속성을 2개 이상 가지고 있어야 한다.",
+    "explanation": "엔터티는 업무에서 필요하고 관리할 정보여야 하고(①), 유일한 식별자로 구분할 수 있어야 하며(②), 업무 프로세스에서 이용되어야 한다(④). 또한 엔터티는 반드시 속성을 가져야 하므로(두 개 이상) 속성이 없어도 된다는 ③ 이 엔터티의 특징이 아니다.",
     "chapter": "엔터티",
     "_source": "cbt-mock",
     "_origId": "cbt-147",
@@ -5464,7 +5464,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "ㄱ의 SQL문은 전체합계는 출력되지 않는다."
     ],
     "correctIndex": 1,
-    "explanation": "ㄱ과 ㄴ의 SQL문의 행 수는 다르다. 왜냐하면 ROLLUP은 전체합계가 추가적으로 출력된다.",
+    "explanation": "ㄱ GROUP BY DEPTNO 는 부서별 합계만 출력하고 전체 합계는 없다(①④). ㄴ ROLLUP(DEPTNO) 는 부서별 합계에 전체 합계 1행이 더해진다(③). 따라서 ㄴ 이 ㄱ 보다 한 행 많아 결과 행 수가 같다는 ② 가 올바르지 않다.",
     "chapter": "GROUP BY·HAVING",
     "_source": "cbt-mock",
     "_origId": "cbt-150",
@@ -5595,7 +5595,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "ORDER BY 선수명;"
     ],
     "correctIndex": 0,
-    "explanation": "FROM절에 테이블에 대한 ALIAS를 사용했을 때 SELECT절에서는 반드시 테이블명 아닌 ALIAS명을 사용해야 한다.",
+    "explanation": "FROM 절에서 PLAYER P, TEAM T 처럼 테이블 별칭을 지정하면 SELECT 절에서도 별칭으로 써야 한다. ① 은 PLAYER.PLAYER_NAME, TEAM.TEAM_NAME 처럼 원래 테이블명을 써서 오류가 난다. ③ 의 조인 조건은 별칭을 바르게 썼고, ④ 의 ORDER BY 는 SELECT 절 컬럼 별칭(선수명)을 쓸 수 있다.",
     "chapter": "ORDER BY",
     "_source": "cbt-mock",
     "_origId": "cbt-154",
@@ -5637,11 +5637,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "options": [
       "시스템 카탈로그(System Catalog)",
       "용어 사전(Word Dictionary)",
-      "성 사전(Attribute Dictionary)",
+      "속성 사전(Attribute Dictionary)",
       "도메인(Domain)"
     ],
     "correctIndex": 3,
-    "explanation": "도메인(Domain)은 속성에 대한 값의 범위 등 제약사항을 기술할 수 있다.",
+    "explanation": "학점은 0.0~4.0 사이의 실수, 주소는 20자리 이내 문자열처럼 속성이 가질 수 있는 값의 타입·범위·길이를 정의한 것은 도메인이다(④). 시스템 카탈로그(①)는 DB 객체 정보를 담은 시스템 테이블, 용어 사전(②)은 업무 용어 정의, 속성 사전(③)은 속성의 이름과 뜻을 정리한 문서다.",
     "chapter": "엔터티",
     "_source": "cbt-mock",
     "_origId": "cbt-156",
@@ -5693,7 +5693,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "GROUP BY GROUPING SETS (DEPTNO, JOB, (DEPTNO, JOB), ());"
     ],
     "correctIndex": 3,
-    "explanation": "그룹 함수 중 CUBE는 CUBE 함수에 제시된 칼럼에 대해서 결합 가능한 모든 집계를 계산한다.",
+    "explanation": "CUBE(DEPTNO, JOB) 은 가능한 모든 조합 (DEPTNO, JOB), (DEPTNO), (JOB), () 를 집계한다. 이를 직접 나열한 GROUPING SETS (DEPTNO, JOB, (DEPTNO, JOB), ()) 가 같은 결과다(④). ROLLUP(DEPTNO, JOB)(①)은 (JOB) 단독 집계가 없고, ② 는 문법에 맞지 않으며, ③ 은 전체 합계 () 가 빠졌다.",
     "chapter": "GROUP BY·HAVING",
     "_source": "cbt-mock",
     "_origId": "cbt-158",
@@ -5950,7 +5950,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "TRUNCATE"
     ],
     "correctIndex": 3,
-    "explanation": "TRUNCATE는 DDL에 해당한다.",
+    "explanation": "DML 은 데이터를 조작하는 INSERT(①), DELETE(②), MERGE(③), UPDATE, SELECT 다. TRUNCATE 는 테이블 데이터를 통째로 지우고 저장 공간을 초기화하는 DDL 이라 자동 커밋되며 DML 이 아니다(④).",
     "chapter": "DDL",
     "_source": "cbt-mock",
     "_origId": "cbt-165",
@@ -6206,7 +6206,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "내부적으로 LEFT JOIN, RIGHT JOIN을 한 후 UNION한 것과 동일하다."
     ],
     "correctIndex": 2,
-    "explanation": "오라클은 (+) 기호를 양쪽에서 사용할 수 없다. 따라서 FULL OUTER JOIN을 사용해야 한다.",
+    "explanation": "FULL OUTER JOIN 은 양쪽 테이블을 모두 보존하는 조인으로(①), 조인 조건이 있어야 하며(②), LEFT 와 RIGHT OUTER JOIN 결과를 합쳐 중복을 없앤 것과 같다(④). Oracle 의 (+) 표기는 한쪽에만 쓸 수 있고 양쪽에 쓰면 오류가 나므로, ANSI 의 FULL OUTER JOIN 을 써야 한다. ③ 이 올바르지 않다.",
     "chapter": "집합 연산자",
     "_source": "cbt-mock",
     "_origId": "cbt-176",
@@ -6246,7 +6246,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "Select UNIQUE_RANK( ) OVER (PARTITION BY DEPTNO ORDER BY SAL DESC) DEPT_RANK;"
     ],
     "correctIndex": 2,
-    "explanation": "윈도우 ROW_NUMBER() 함수는 동일한 우선순위가 나올 때 고유 값을 부여한다.",
+    "explanation": "ROW_NUMBER 는 값이 같아도 1, 2, 3 처럼 서로 다른 고유 순번을 매긴다(③). RANK(①)와 DENSE_RANK(②)는 같은 값에 같은 순위를 주고, UNIQUE_RANK(④)라는 함수는 없다.",
     "chapter": "윈도우 함수",
     "_source": "cbt-mock",
     "_origId": "cbt-178",
@@ -6318,7 +6318,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "PARTITION문을 사용해서 해당 파티션 내에서 순위를 계산한다."
     ],
     "correctIndex": 2,
-    "explanation": "RANK() 함수를 사용할 경우 급여가 동일한 사람이 있을 때 같은 등수로 조회된다.",
+    "explanation": "ALL_RANK 는 전체에서 SAL 내림차순으로, JOB_RANK 는 PARTITION BY JOB 으로 직무 안에서 SAL 내림차순 순위를 매긴다(①②④). RANK 는 급여가 같으면 같은 순위를 주고 다음 순위를 건너뛰므로(예: 1, 1, 3), 조회 순서에 따라 1등과 2등으로 나뉜다는 ③ 이 올바르지 않다. 그렇게 나누는 것은 ROW_NUMBER 다.",
     "chapter": "윈도우 함수",
     "_source": "cbt-mock",
     "_origId": "cbt-180",
@@ -6344,7 +6344,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "두 SELECT 결과의 교집합을 구한다."
     ],
     "correctIndex": 2,
-    "explanation": "UNION ALL은 중복 제거 없이 모든 행을 반환한다.",
+    "explanation": "UNION ALL 은 두 SELECT 결과를 중복 제거나 정렬 없이 그대로 모두 합쳐 출력한다(③). 중복을 제거하는 것은 UNION(①), 교집합은 INTERSECT(④)이며, UNION ALL 은 정렬된 결과를 보장하지 않는다(②).",
     "chapter": "집합 연산자",
     "_source": "cbt-mock",
     "_origId": "cbt-181",
@@ -6408,7 +6408,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 226,
-    "title": "다음 테이블에 대한 매출 누적을 구하는 SQL문을 작성하시오. (윈도우 함수 사용)",
+    "title": "영업사원별로 판매월 순서에 따라 매출 누적 합계를 구하는 SQL 로 옳은 것은? (윈도우 함수 사용)",
     "options": [
       "Select 영업사원, 판매월, sum(매출) over (partition by 영업사원 order by 판매월 range between unbounded preceding and current row) 누적매출 from 매출;",
       "Select 영업사원, 판매월, sum(매출) over (partition by 영업사원 order by 판매월 range between unbounded preceding) 누적매출 from 매출;",
@@ -6436,7 +6436,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "COUNT(표현식)은 표현식의 값이 NULL 값인 것을 제외한 행 수를 출력한다."
     ],
     "correctIndex": 0,
-    "explanation": "9가 아닌 8이다.",
+    "explanation": "LENGTH('YOUNGJIN') 은 Y·O·U·N·G·J·I·N 8글자라 8 이므로 9 라고 한 ① 이 옳지 않다. CASE 문은 IF-THEN-ELSE 를 구현하고(②), 날짜끼리 빼면 일수가 나오며(③), COUNT(표현식)은 NULL 인 행을 빼고 센다(④).",
     "chapter": "그룹 함수",
     "_source": "cbt-mock",
     "_origId": "cbt-185",
@@ -6665,7 +6665,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "Except"
     ],
     "correctIndex": 2,
-    "explanation": "집합 연산자(SET OPERATOR)는 두 개 이상의 테이블에서 조인을 하지 않고 관련된 데이터를 조회한다.",
+    "explanation": "집합 연산자는 UNION ALL(①), UNION(②), EXCEPT(MINUS)(④), INTERSECT 처럼 두 SELECT 결과를 집합으로 결합한다. PROJECT 는 원하는 컬럼만 고르는 순수 관계 연산자이므로 집합 연산자가 아니다(③).",
     "chapter": "집합 연산자",
     "_source": "cbt-mock",
     "_origId": "cbt-194",
@@ -6894,7 +6894,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "LAST_VALUE"
     ],
     "correctIndex": 1,
-    "explanation": "LAG() 윈도우 함수는 이전 행의 몇 번째 행 값을 가지고 올 수 있다.",
+    "explanation": "PREV_SAL 은 입사일 순으로 바로 앞 사원의 SAL 이다(ALLEN 은 앞 행이 없어 비어 있고, WARD 는 ALLEN 의 1600). 이전 행의 값을 가져오는 함수는 LAG 다(②). LEAD(①)는 다음 행의 값, NTILE(③)은 그룹 번호, LAST_VALUE(④)는 윈도우 마지막 행의 값이다.",
     "chapter": "윈도우 함수",
     "_source": "cbt-mock",
     "_origId": "cbt-202",
@@ -6951,7 +6951,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "RANK 함수가 동일한 값에 대해서는 동일한 순위를 부여하는 데 반해, ROW_NUMBER 함수는 고유한 순위를 부여한다."
     ],
     "correctIndex": 2,
-    "explanation": "RCUMM_RANK는 존재하지 않는 함수이다.",
+    "explanation": "RANK 는 같은 값에 같은 순위를 주고(①), DENSE_RANK 는 같은 순위를 하나의 건수로 보아 다음 순위를 건너뛰지 않으며(②), ROW_NUMBER 는 같은 값이어도 고유한 순번을 준다(④). RCUMM_RANK 라는 함수는 없으므로 ③ 이 올바르지 않다. 누적 비율은 CUME_DIST 로 구한다.",
     "chapter": "윈도우 함수",
     "_source": "cbt-mock",
     "_origId": "cbt-203",
@@ -7185,7 +7185,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "min(COL1), max(COL2), max(COL1)"
     ],
     "correctIndex": 2,
-    "explanation": "A 속성은 COL1의 최댓값, B 속성은 COL2의 최솟값, C 속성은 COL1 속성의 합이다.",
+    "explanation": "집계 함수는 NULL 을 제외하고 계산한다. COL1 은 NULL, 0, 10, 11, 12 라서 MAX = 12, SUM = 33 이고, COL2 는 0, NULL, 20, 21, 22 라서 MIN = 0 이다. 결과 12, 0, 33 과 같은 것은 max(COL1), min(COL2), sum(COL1) 이다(③). ① 은 A 가 22, ② 는 C 가 63, ④ 는 A 가 0 이 된다.",
     "chapter": "그룹 함수",
     "_source": "cbt-mock",
     "_origId": "cbt-208",
@@ -33322,7 +33322,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 937,
-    "title": "그림 데이터에서 위 SQL 결과로 조회되는 사원 수는?",
+    "title": "아래 데이터에서 SQL 결과로 조회되는 사원 수는?",
     "options": [
       "1",
       "2",
@@ -36154,7 +36154,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 1017,
-    "title": "다음 이미지의 명령 중 테이블 구조를 변경하는 문장으로 옳은 것은?",
+    "title": "아래 명령 중 테이블 구조를 변경하는 문장으로 옳은 것은?",
     "options": [
       "CREATE TABLE emp (...);",
       "ALTER TABLE emp ADD hire_date DATE;",
@@ -36268,7 +36268,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 1022,
-    "title": "다음 이미지 기준으로 user1에게 처음 부여되는 권한으로 옳은 것은?",
+    "title": "아래 자료 기준으로 user1에게 처음 부여되는 권한으로 옳은 것은?",
     "options": [
       "emp 테이블의 DELETE 권한",
       "emp 테이블의 SELECT와 INSERT 권한",
@@ -36295,7 +36295,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 1023,
-    "title": "다음 이미지 기준으로 회수되는 권한으로 옳은 것은?",
+    "title": "아래 자료 기준으로 회수되는 권한으로 옳은 것은?",
     "options": [
       "emp 테이블의 SELECT 권한",
       "emp 테이블의 INSERT 권한",
@@ -37911,7 +37911,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 1079,
-    "title": "다음 그림과 SQL을 함께 보고 판단할 때, 다음 PIVOT SQL 결과에서 SALES 행의 (Q1 + Q2) 합계는?",
+    "title": "다음 PIVOT SQL 결과에서 SALES 행의 (Q1 + Q2) 합계는?",
     "options": [
       "210",
       "220",
@@ -38082,7 +38082,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 1084,
-    "title": "테이블 그림을 기준으로 SQL문을 해석하면, 다음 PIVOT SQL 결과 행 수는?",
+    "title": "다음 PIVOT SQL 결과 행 수는?",
     "options": [
       "3",
       "4",
@@ -38279,7 +38279,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 1090,
-    "title": "그림의 데이터와 조건식을 모두 고려하면, 다음 PIVOT SQL 결과 컬럼 구성으로 옳은 것은?",
+    "title": "다음 PIVOT SQL 결과 컬럼 구성으로 옳은 것은?",
     "options": [
       "Q1, Q2만",
       "dept, amount",
@@ -38788,7 +38788,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 1108,
-    "title": "다음 그림과 SQL을 함께 보고 판단할 때, 다음 SQL 실행 결과 값으로 옳은 것은?",
+    "title": "다음 SQL 실행 결과 값으로 옳은 것은?",
     "options": [
       "302",
       "304",
@@ -38897,7 +38897,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 1111,
-    "title": "다음 그림과 SQL을 함께 보고 판단할 때, 다음 SQL 결과에서 rn = 1인 행으로 옳은 것은?",
+    "title": "다음 SQL 결과에서 rn = 1인 행으로 옳은 것은?",
     "options": [
       "INCHEON, B, 80",
       "BUSAN, A, 100",
@@ -38982,7 +38982,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 1113,
-    "title": "다음 그림과 SQL을 함께 보고 판단할 때, 다음 SQL 실행 결과로 반환되는 행 수는?",
+    "title": "다음 SQL 실행 결과로 반환되는 행 수는?",
     "options": [
       "2",
       "3",
@@ -39052,7 +39052,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 1114,
-    "title": "테이블 그림을 기준으로 SQL문을 해석하면, 다음 PIVOT SQL 결과에서 SALES 행의 (Q1 + Q2) 합계는?",
+    "title": "다음 PIVOT SQL 결과에서 SALES 행의 (Q1 + Q2) 합계는?",
     "options": [
       "300",
       "200",
@@ -39145,7 +39145,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 1116,
-    "title": "다음 그림과 SQL을 함께 보고 판단할 때, 다음 SQL 실행 결과로 반환되는 부서 수는?",
+    "title": "다음 SQL 실행 결과로 반환되는 부서 수는?",
     "options": [
       "1",
       "2",
@@ -39388,7 +39388,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "1과목",
     "number": 1123,
-    "title": "그림에 제시된 구조와 값을 기준으로 보면, 다음 주문 테이블에서 기본키가 (주문번호, 상품번호)일 때 가장 적절한 설명은?",
+    "title": "다음 주문 테이블에서 기본키가 (주문번호, 상품번호)일 때 가장 적절한 설명은?",
     "options": [
       "상품명은 부분 함수 종속, 고객등급은 이행 함수 종속 문제가 될 수 있다.",
       "기본키가 복합키면 3NF는 자동으로 만족한다.",
@@ -39448,7 +39448,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 1124,
-    "title": "테이블 그림을 기준으로 SQL문을 해석하면, 다음 SQL 실행 결과 행 수는?",
+    "title": "다음 SQL 실행 결과 행 수는?",
     "options": [
       "3",
       "4",
@@ -39583,7 +39583,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 1128,
-    "title": "테이블 그림을 기준으로 SQL문을 해석하면, 다음 SQL 실행 결과 값으로 옳은 것은?",
+    "title": "다음 SQL 실행 결과 값으로 옳은 것은?",
     "options": [
       "5",
       "2",
@@ -39668,7 +39668,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 1130,
-    "title": "테이블 그림을 기준으로 SQL문을 해석하면, 다음 SQL 실행 결과로 옳은 것은?",
+    "title": "다음 SQL 실행 결과로 옳은 것은?",
     "options": [
       "2",
       "3",
@@ -39764,7 +39764,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 1132,
-    "title": "그림의 데이터와 조건식을 모두 고려하면, 다음 PIVOT SQL 결과 행 수는?",
+    "title": "다음 PIVOT SQL 결과 행 수는?",
     "options": [
       "3",
       "4",
@@ -39831,7 +39831,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 1133,
-    "title": "테이블 그림을 기준으로 SQL문을 해석하면, 다음 계층형 질의 결과에서 LEVEL = 2인 행 수는?",
+    "title": "다음 계층형 질의 결과에서 LEVEL = 2인 행 수는?",
     "options": [
       "2",
       "3",
@@ -39903,7 +39903,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 1134,
-    "title": "테이블 그림을 기준으로 SQL문을 해석하면, 다음 SQL 결과로 조회되는 부서명으로 옳은 것은?",
+    "title": "다음 SQL 결과로 조회되는 부서명으로 옳은 것은?",
     "options": [
       "SALES, DEV",
       "HR",
@@ -40314,7 +40314,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 1145,
-    "title": "제시된 그림만 근거로 판단하면, 다음 SALARY 데이터에서 AVG(salary) 값은?",
+    "title": "다음 SALARY 데이터에서 AVG(salary) 값은?",
     "options": [
       "3000",
       "750",
@@ -40445,7 +40445,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 1149,
-    "title": "그림의 데이터와 조건식을 모두 고려하면, 다음 SQL 결과의 마지막 행으로 옳은 것은?",
+    "title": "다음 SQL 결과의 마지막 행으로 옳은 것은?",
     "options": [
       "BUSAN, A, 100",
       "SEOUL, A, 150",
@@ -40530,7 +40530,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 1151,
-    "title": "제시된 그림만 근거로 판단하면, A.ID에 중복값 2가 한 건 더 추가되고 B.ID=2가 1건 존재할 때 INNER JOIN 결과에 추가되는 행 수는?",
+    "title": "A.ID에 중복값 2가 한 건 더 추가되고 B.ID=2가 1건 존재할 때 INNER JOIN 결과에 추가되는 행 수는?",
     "options": [
       "2",
       "3",
@@ -40693,7 +40693,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 1154,
-    "title": "그림의 데이터와 조건식을 모두 고려하면, 다음 계층형 질의 결과에서 DEV_B의 PATH 값으로 옳은 것은?",
+    "title": "다음 계층형 질의 결과에서 DEV_B의 PATH 값으로 옳은 것은?",
     "options": [
       "DEV_MGR > DEV_B",
       "CEO > DEV_B",
@@ -40765,7 +40765,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 1155,
-    "title": "그림의 데이터와 조건식을 모두 고려하면, 다음 SQL 실행 결과 행 수는?",
+    "title": "다음 SQL 실행 결과 행 수는?",
     "options": [
       "4",
       "1",
@@ -40988,7 +40988,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 1161,
-    "title": "제시된 그림만 근거로 판단하면, 다음 데이터에서 주문이 없는 고객 ID는?",
+    "title": "다음 데이터에서 주문이 없는 고객 ID는?",
     "options": [
       "102, 104",
       "103, 104",
@@ -41084,7 +41084,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 1163,
-    "title": "제시된 그림만 근거로 판단하면, BUSAN 지역 데이터에 DENSE_RANK()를 적용한 결과로 옳은 것은?",
+    "title": "BUSAN 지역 데이터에 DENSE_RANK()를 적용한 결과로 옳은 것은?",
     "options": [
       "1, 3, 3",
       "1, 2, 2",
@@ -41194,7 +41194,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "1과목",
     "number": 1166,
-    "title": "제시된 그림만 근거로 판단하면, 3NF에 대한 설명으로 옳은 것은?",
+    "title": "3NF에 대한 설명으로 옳은 것은?",
     "options": [
       "복합키가 없어야만 성립한다.",
       "PK가 두 개 이상이어야 한다.",
@@ -41952,7 +41952,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 1186,
-    "title": "그림의 각 행과 관계선을 기준으로 해석하면, 다음 BONUS 데이터에서 COUNT(bonus) 값은?",
+    "title": "다음 BONUS 데이터에서 COUNT(bonus) 값은?",
     "options": [
       "2",
       "3",
@@ -42131,7 +42131,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 1192,
-    "title": "다음 그림과 SQL을 함께 보고 판단할 때, 다음 PIVOT SQL에 대한 설명으로 옳은 것은?",
+    "title": "다음 PIVOT SQL에 대한 설명으로 옳은 것은?",
     "options": [
       "PIVOT은 집계 함수를 사용할 수 없다.",
       "dept 값이 열로 전개된다.",
@@ -42224,7 +42224,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 1194,
-    "title": "그림과 SQL 조건을 동시에 읽으면, 다음 계층형 질의에서 START WITH mgr_id IS NULL 의미로 옳은 것은?",
+    "title": "다음 계층형 질의에서 START WITH mgr_id IS NULL 의미로 옳은 것은?",
     "options": [
       "최상위 사원부터 탐색을 시작한다.",
       "동일 LEVEL끼리만 조인한다.",
@@ -42296,7 +42296,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 1195,
-    "title": "그림의 각 행과 관계선을 기준으로 해석하면, 다음 중 HAVING 절에 대한 설명으로 옳은 것은?",
+    "title": "다음 중 HAVING 절에 대한 설명으로 옳은 것은?",
     "options": [
       "HAVING은 GROUP BY 이후 생성된 그룹에 대해 조건을 적용한다.",
       "HAVING에는 집계 함수를 사용할 수 없다.",
@@ -42511,7 +42511,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 1201,
-    "title": "그림의 각 행과 관계선을 기준으로 해석하면, ANY 비교에 대한 설명으로 옳은 것은?",
+    "title": "ANY 비교에 대한 설명으로 옳은 것은?",
     "options": [
       "NULL과 동일한 의미다.",
       "30보다 커야만 참이다.",
@@ -42611,7 +42611,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 1203,
-    "title": "그림의 각 행과 관계선을 기준으로 해석하면, OVER(PARTITION BY region)의 의미로 옳은 것은?",
+    "title": "OVER(PARTITION BY region)의 의미로 옳은 것은?",
     "options": [
       "region 값별로 분석 구간을 나눈다.",
       "GROUP BY와 완전히 같은 결과만 낸다.",
@@ -42721,7 +42721,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 1206,
-    "title": "다음 그림과 SQL을 함께 보고 판단할 때, 다음 BONUS 데이터에서 SUM(NVL(bonus, 0)) 값은?",
+    "title": "다음 BONUS 데이터에서 SUM(NVL(bonus, 0)) 값은?",
     "options": [
       "400",
       "NULL",
@@ -42830,7 +42830,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 1209,
-    "title": "그림에 제시된 구조와 값을 기준으로 보면, 다음 이미지 기준으로 user1에게 처음 부여되는 권한으로 옳은 것은?",
+    "title": "아래 자료 기준으로 user1에게 처음 부여되는 권한으로 옳은 것은?",
     "options": [
       "emp 테이블의 SELECT와 INSERT 권한",
       "데이터베이스 생성 권한",
@@ -42857,7 +42857,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 1210,
-    "title": "그림에 제시된 구조와 값을 기준으로 보면, 다음 이미지의 명령 중 테이블 구조를 변경하는 문장으로 옳은 것은?",
+    "title": "아래 명령 중 테이블 구조를 변경하는 문장으로 옳은 것은?",
     "options": [
       "DROP TABLE temp_emp;",
       "SELECT * FROM emp;",
@@ -42938,7 +42938,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 1213,
-    "title": "다음 그림과 SQL을 함께 보고 판단할 때, 다음 그림을 기준으로 LEFT OUTER JOIN을 수행할 때 반환 행 수는?",
+    "title": "아래 테이블을 기준으로 LEFT OUTER JOIN을 수행할 때 반환 행 수는?",
     "options": [
       "3",
       "4",
@@ -43050,7 +43050,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 1216,
-    "title": "다음 그림과 SQL을 함께 보고 판단할 때, 다음 SQL 결과에서 CEO의 LEVEL 값으로 옳은 것은?",
+    "title": "다음 SQL 결과에서 CEO의 LEVEL 값으로 옳은 것은?",
     "options": [
       "1",
       "2",
@@ -43122,7 +43122,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 1217,
-    "title": "다음 그림과 SQL을 함께 보고 판단할 때, 다음 SQL 결과에서 gr = 1 이고 gp = 1 인 행 수는?",
+    "title": "다음 SQL 결과에서 gr = 1 이고 gp = 1 인 행 수는?",
     "options": [
       "2",
       "3",
@@ -43309,7 +43309,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 1223,
-    "title": "다음 그림과 SQL을 함께 보고 판단할 때, 다음 SQL 결과로 조회되는 사원 수는?",
+    "title": "다음 SQL 결과로 조회되는 사원 수는?",
     "options": [
       "2",
       "3",
@@ -43392,7 +43392,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 1225,
-    "title": "다음 그림과 SQL을 함께 보고 판단할 때, 다음 SQL 결과에서 SEOUL 지역의 rn = 1 인 판매자로 옳은 것은?",
+    "title": "다음 SQL 결과에서 SEOUL 지역의 rn = 1 인 판매자로 옳은 것은?",
     "options": [
       "PARK",
       "CHOI",
@@ -43506,7 +43506,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 1228,
-    "title": "그림에 제시된 구조와 값을 기준으로 보면, 다음 테이블과 가정 기준으로 2NF 위반 원인으로 옳은 것은?",
+    "title": "다음 테이블과 가정 기준으로 2NF 위반 원인으로 옳은 것은?",
     "options": [
       "복합키의 일부인 주문번호와 상품번호에만 종속되는 속성이 함께 존재한다.",
       "이행 종속만 존재한다.",
@@ -43671,7 +43671,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 1232,
-    "title": "표와 관계를 함께 읽으면, 다음 이미지 기준으로 회수되는 권한으로 옳은 것은?",
+    "title": "아래 자료 기준으로 회수되는 권한으로 옳은 것은?",
     "options": [
       "emp 테이블의 모든 권한",
       "user1 계정 자체",
@@ -43862,7 +43862,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 1238,
-    "title": "테이블 그림을 기준으로 SQL문을 해석하면, 다음 SQL 결과에서 리프 노드 수로 옳은 것은?",
+    "title": "다음 SQL 결과에서 리프 노드 수로 옳은 것은?",
     "options": [
       "4",
       "5",
@@ -44065,7 +44065,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 1243,
-    "title": "표와 관계를 함께 읽으면, 그림 데이터에서 위 SQL 결과로 조회되는 사원 수는?",
+    "title": "아래 데이터에서 SQL 결과로 조회되는 사원 수는?",
     "options": [
       "2",
       "3",
@@ -44286,7 +44286,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 1249,
-    "title": "그림의 데이터와 조건식을 모두 고려하면, 다음 SALARY 데이터에서 COUNT(*) - COUNT(salary) 결과는?",
+    "title": "다음 SALARY 데이터에서 COUNT(*) - COUNT(salary) 결과는?",
     "options": [
       "1",
       "2",
@@ -44527,7 +44527,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 1257,
-    "title": "그림과 SQL 조건을 동시에 읽으면, 다음 PIVOT SQL 결과 컬럼 구성으로 옳은 것은?",
+    "title": "다음 PIVOT SQL 결과 컬럼 구성으로 옳은 것은?",
     "options": [
       "Q1, Q2만",
       "dept, amount",
@@ -44594,7 +44594,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 1258,
-    "title": "그림의 데이터와 조건식을 모두 고려하면, 다음 SQL 결과에서 DEV_A의 경로로 옳은 것은?",
+    "title": "다음 SQL 결과에서 DEV_A의 경로로 옳은 것은?",
     "options": [
       "/CEO/DEV_A",
       "/CEO/SALES_MGR/DEV_A",
@@ -44796,7 +44796,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 1264,
-    "title": "제시된 그림만 근거로 판단하면, 상관 서브쿼리의 특징으로 옳은 것은?",
+    "title": "상관 서브쿼리의 특징으로 옳은 것은?",
     "options": [
       "FROM 절에서만 작성 가능하다.",
       "JOIN으로 절대 변환할 수 없다.",
@@ -44849,7 +44849,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 1265,
-    "title": "그림의 데이터와 조건식을 모두 고려하면, 다음 SQL 결과로 옳은 것은?",
+    "title": "다음 SQL 결과로 옳은 것은?",
     "options": [
       "같은 지역의 각 행에 지역 합계가 반복 표시된다.",
       "집계 결과는 행 수를 줄인다.",
@@ -44963,7 +44963,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 1268,
-    "title": "제시된 그림만 근거로 판단하면, 다음 테이블과 가정 기준으로 발생 가능한 이상 현상으로 옳은 것은?",
+    "title": "다음 테이블과 가정 기준으로 발생 가능한 이상 현상으로 옳은 것은?",
     "options": [
       "집계 함수 사용이 금지된다.",
       "한 행만 수정하면 항상 모든 고객등급이 자동 갱신된다.",
@@ -45718,7 +45718,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 1290,
-    "title": "테이블 그림을 기준으로 SQL문을 해석하면, 다음 SQL 실행 결과 값으로 옳은 것은?",
+    "title": "다음 SQL 실행 결과 값으로 옳은 것은?",
     "options": [
       "304",
       "NULL",
@@ -45905,7 +45905,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 1296,
-    "title": "그림의 각 행과 관계선을 기준으로 해석하면, OUTER JOIN 결과 해석으로 옳은 것은?",
+    "title": "OUTER JOIN 결과 해석으로 옳은 것은?",
     "options": [
       "보존되지 않는 쪽에 매칭 행이 없으면 해당 컬럼은 NULL이 된다.",
       "NULL 대신 빈 문자열이 자동 입력된다.",
@@ -45971,7 +45971,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 1297,
-    "title": "테이블 그림을 기준으로 SQL문을 해석하면, 다음 PIVOT SQL에 대한 설명으로 옳은 것은?",
+    "title": "다음 PIVOT SQL에 대한 설명으로 옳은 것은?",
     "options": [
       "amount 값이 행 이름으로 전개된다.",
       "quarter_cd 값이 열로 전개된다.",
@@ -46090,7 +46090,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 1300,
-    "title": "그림의 각 행과 관계선을 기준으로 해석하면, ROLLUP에서 소계 행 판별에 사용되는 함수로 옳은 것은?",
+    "title": "ROLLUP에서 소계 행 판별에 사용되는 함수로 옳은 것은?",
     "options": [
       "ROW_NUMBER",
       "NVL2",
@@ -46247,7 +46247,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 1305,
-    "title": "그림의 각 행과 관계선을 기준으로 해석하면, 상관 서브쿼리를 JOIN + GROUP BY로 바꿀 때 핵심 아이디어는?",
+    "title": "상관 서브쿼리를 JOIN + GROUP BY로 바꿀 때 핵심 아이디어는?",
     "options": [
       "부서 평균 집합을 만든 뒤 원본 EMP와 부서 기준으로 조인한다.",
       "GROUP BY를 제거한다.",
@@ -46404,7 +46404,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 1310,
-    "title": "그림의 각 행과 관계선을 기준으로 해석하면, 다음 테이블과 가정 기준으로 3NF 관점에서 추가 분리가 필요한 속성으로 옳은 것은?",
+    "title": "다음 테이블과 가정 기준으로 3NF 관점에서 추가 분리가 필요한 속성으로 옳은 것은?",
     "options": [
       "상품번호",
       "고객등급",
@@ -46464,7 +46464,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 1311,
-    "title": "그림의 데이터와 조건식을 모두 고려하면, 다음 SQL 실행 결과 행 수는?",
+    "title": "다음 SQL 실행 결과 행 수는?",
     "options": [
       "4",
       "1",
@@ -46625,7 +46625,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 1316,
-    "title": "테이블 그림을 기준으로 SQL문을 해석하면, 다음 SQL 결과에서 rn = 1인 행으로 옳은 것은?",
+    "title": "다음 SQL 결과에서 rn = 1인 행으로 옳은 것은?",
     "options": [
       "INCHEON, B, 80",
       "BUSAN, A, 100",
@@ -46710,7 +46710,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 1318,
-    "title": "테이블 그림을 기준으로 SQL문을 해석하면, 다음 SQL 실행 결과로 반환되는 행 수는?",
+    "title": "다음 SQL 실행 결과로 반환되는 행 수는?",
     "options": [
       "2",
       "3",
@@ -46899,7 +46899,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 1322,
-    "title": "테이블 그림을 기준으로 SQL문을 해석하면, 다음 계층형 질의 결과에서 CONNECT_BY_ISLEAF = 1 이고 LEVEL = 3 인 행 수는?",
+    "title": "다음 계층형 질의 결과에서 CONNECT_BY_ISLEAF = 1 이고 LEVEL = 3 인 행 수는?",
     "options": [
       "3",
       "4",
@@ -46971,7 +46971,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 1323,
-    "title": "테이블 그림을 기준으로 SQL문을 해석하면, 다음 SQL 실행 결과로 반환되는 부서 수는?",
+    "title": "다음 SQL 실행 결과로 반환되는 부서 수는?",
     "options": [
       "2",
       "3",
@@ -47194,7 +47194,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 1329,
-    "title": "테이블 그림을 기준으로 SQL문을 해석하면, 다음 SQL 실행 결과로 조회되는 고객 수는?",
+    "title": "다음 SQL 실행 결과로 조회되는 고객 수는?",
     "options": [
       "2",
       "3",
@@ -47268,7 +47268,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 1330,
-    "title": "테이블 그림을 기준으로 SQL문을 해석하면, 다음 SQL 결과에서 rn <> rnk 인 행 수는?",
+    "title": "다음 SQL 결과에서 rn <> rnk 인 행 수는?",
     "options": [
       "2",
       "3",
