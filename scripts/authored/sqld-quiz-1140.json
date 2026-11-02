@@ -22167,10 +22167,10 @@
         "SELECT E.ENAME, E.SAL, E.DEPTNO, D.DNAME FROM EMP E LEFT JOIN DEPT D ON E.DEPTNO = D.DEPTNO WHERE E.SAL > 3000 ORDER BY E.ENAME;",
         "SELECT E.ENAME, E.SAL, E.DEPTNO, D.DNAME FROM EMP E INNER JOIN DEPT D ON E.DEPTNO = D.DEPTNO WHERE E.SAL > 3000 ORDER BY E.ENAME;",
         "SELECT E.ENAME, E.SAL, E.DEPTNO, D.DNAME FROM EMP E INNER JOIN DEPT D USING DEPTNO AND E.SAL > 3000 ORDER BY E.ENAME;",
-        "SELECT E.ENAME, E.SAL, E.DEPTNO, D.DNAME FROM EMP E JOIN DEPT D ON E.DEPTNO = D.DEPTNO AND E.SAL > 3000 ORDER BY E.ENAME;"
+        "SELECT E.ENAME, E.SAL, E.DEPTNO, D.DNAME FROM EMP E RIGHT JOIN DEPT D ON E.DEPTNO = D.DEPTNO AND E.SAL > 3000 ORDER BY E.ENAME;"
       ],
       "correctIndex": 1,
-      "explanation": "조인 조건에 성립하는 행만 출력하는 INNER JOIN이 수행되었으므로 조인조건을 ON절에, 일반조건을 WHERE절에 각각 명시하면 된다. USING을 사용하는 경우 반드시 괄호로 묶어서 전달해야 한다.",
+      "explanation": "원래 SQL 은 짝이 맞는 행만 남기는 INNER JOIN 이므로 조인 조건은 ON, 나머지 조건(SAL > 3000)은 WHERE 에 두면 된다(②). ① LEFT JOIN 은 부서가 없는 사원까지 남기므로 같은 SQL 이 아니고, ③ USING 은 USING (DEPTNO) 처럼 괄호가 필요하며 뒤에 AND 조건을 붙일 수 없고, ④ RIGHT JOIN 은 조건에 맞는 사원이 없는 부서까지 NULL 로 남아 결과가 다르다.",
       "references": [
         {
           "type": "sql",
@@ -23746,7 +23746,7 @@
         "0, 2, 2, 0"
       ],
       "correctIndex": 1,
-      "explanation": "COUNT(*)는 모든 컬럼의 값이 NULL일 때만 제외한다. COL1+COL2+COL3은 각 행마다 NULL을 포함하므로 모든 행이 값이 NULL이 된다.",
+      "explanation": "C1: COUNT(*) 는 값과 상관없이 행 수를 세므로 3(모든 컬럼이 NULL 인 행도 센다). C2: COUNT(COL1) 은 NULL 을 빼고 세므로 2. C3: SUM(COL2) 는 NULL 을 빼고 1 + 1 = 2. C4: COL1 + COL2 + COL3 은 행마다 NULL 이 하나씩 섞여 세 행 모두 NULL 이고, 더할 값이 없으므로 SUM 결과도 NULL 이다(②).",
       "references": [
         {
           "type": "sql",
@@ -24211,8 +24211,8 @@
       "explanation": "ALL은 기본 동작과 동일하며, 중복을 제거하지 않음\ndistinct는 COL1의 중복을 제거한 고유 값 개수",
       "references": [
         {
-          "type": "text",
-          "content": "<SQL>\nSELECT COUNT(ALL COL1) FROM TAB1 WHERE COL2='A';\nSELECT COUNT(DISTINCT COL1) FROM TAB1;"
+          "type": "sql",
+          "code": "SELECT COUNT(ALL COL1) FROM TAB1 WHERE COL2='A';\nSELECT COUNT(DISTINCT COL1) FROM TAB1;"
         },
         {
           "type": "table",
@@ -24335,8 +24335,8 @@
       "explanation": "서브쿼리: SELECT MIN(COL1) → 1\n메인쿼리: COL1 = 1인 행 → COL2 = 10, 20\n그 중 MAX(COL2) → 20",
       "references": [
         {
-          "type": "text",
-          "content": "<SQL>\nSELECT MAX(COL2)\nFROM ( SELECT COL1, COL2\n              FROM TAB1\n              WHERE COL1 = (SELECT MIN(COL1) FROM TAB1)\n             );"
+          "type": "sql",
+          "code": "SELECT MAX(COL2)\nFROM ( SELECT COL1, COL2\n              FROM TAB1\n              WHERE COL1 = (SELECT MIN(COL1) FROM TAB1)\n             );"
         },
         {
           "type": "table",
@@ -24388,8 +24388,8 @@
       "explanation": "COALESCE는 왼쪽부터 차례로 NULL이 아닌 값을 찾는다.\n'S'는 첫 번째로 만나는 NULL이 아닌 값이므로 그 값이 반환된다.",
       "references": [
         {
-          "type": "text",
-          "content": "<SQL>\nSELECT COALESCE(NULL, NULL, 'S', NULL, 'QL') FROM DUAL;"
+          "type": "sql",
+          "code": "SELECT COALESCE(NULL, NULL, 'S', NULL, 'QL') FROM DUAL;"
         }
       ]
     },
@@ -24411,8 +24411,8 @@
       "explanation": "ROLLUP(COL1) 자체가\n→ GROUP BY COL1\n→ + 전체 소계 (GROUP BY ())\n\n그런데 ROLLUP(COL1), COL1 이라고 하면,\n→ 마치 GROUP BY COL1, COL1 또는\n→ GROUPING SETS ((COL1), (COL1), ()) 과 같은 효과를 줍니다.\n\n즉, COL1로 그룹핑한 결과가 중복으로 2번 나오고,\n전체 합계(ROLLUP)가 1번 더 추가됨\n\n→ 하지만 Oracle은 중복된 GROUP BY COL1 구문을 자동으로 제거하지 않고 모두 집계로 처리합니다.\n→ 이로 인해 총 7건이 나와야 할 것 같지만, 실제 쿼리 결과는 6건입니다.\n",
       "references": [
         {
-          "type": "text",
-          "content": "<SQL>\nINSERT INTO TAB1 VALUES('A',100);\nINSERT INTO TAB1 VALUES('B',200);\nINSERT INTO TAB1 VALUES('C',300);\nINSERT INTO TAB1 VALUES('C',400);\nSELECT COUNT(*)\nFROM (\n    SELECT COL1, SUM(COL2)\n    FROM TAB1\n    GROUP BY ROLLUP(COL1), COL1\n) SUB;"
+          "type": "sql",
+          "code": "INSERT INTO TAB1 VALUES('A',100);\nINSERT INTO TAB1 VALUES('B',200);\nINSERT INTO TAB1 VALUES('C',300);\nINSERT INTO TAB1 VALUES('C',400);\nSELECT COUNT(*)\nFROM (\n    SELECT COL1, SUM(COL2)\n    FROM TAB1\n    GROUP BY ROLLUP(COL1), COL1\n) SUB;"
         }
       ]
     },
@@ -24434,8 +24434,8 @@
       "explanation": "ROLLUP(YEAR, REGION) 은 (YEAR, REGION) 상세 집계, YEAR 별 소계(REGION 이 NULL), 전체 합계(둘 다 NULL)를 만든다. 2023 은 100 + 150 = 250, 2024 는 200 + 250 = 450, 전체는 700 이다(①). ② 는 전체 합계가 빠졌고, ③ 은 REGION 별 소계까지 만드는 CUBE 의 결과이며, ④ 는 상세 집계 행을 빠뜨렸다. ※ 원본의 보기(그림)가 누락되어, 같은 개념을 묻는 모의고사 형태로 보기를 재구성했다.",
       "references": [
         {
-          "type": "text",
-          "content": "<SQL>\nSELECT YEAR, REGION, SUM(AMOUNT)\nFROM SALES\nGROUP BY ROLLUP(YEAR, REGION);"
+          "type": "sql",
+          "code": "SELECT YEAR, REGION, SUM(AMOUNT)\nFROM SALES\nGROUP BY ROLLUP(YEAR, REGION);"
         },
         {
           "type": "table",
@@ -24488,8 +24488,8 @@
       "explanation": "SUM(AMOUNT) → 100 + 200 + 300 = 600\nAVG(NVL(AMOUNT, 0)) → (100 + 0 + 200 + 0 + 300) / 5 = 120",
       "references": [
         {
-          "type": "text",
-          "content": "<SQL>\nSELECT SUM(AMOUNT), AVG(NVL(AMOUNT, 0))\nFROM ORDERS;"
+          "type": "sql",
+          "code": "SELECT SUM(AMOUNT), AVG(NVL(AMOUNT, 0))\nFROM ORDERS;"
         },
         {
           "type": "table",
@@ -24541,8 +24541,8 @@
       "explanation": "REGEXP_INSTR(\n  문자열,        -- '12345678'\n  정규표현식,     -- '(123)(4(56)(78))'\n  시작위치,       -- 1\n  발생순번,       -- 1 (첫 번째 일치)\n  반환옵션,       -- 0 (일치 시작 위치 반환)\n  'i',            -- 대소문자 구분 없음\n  서브표현식 인덱스 -- **2번 그룹의 시작 위치 반환**\n)\n\n(123) → 그룹 1\n(4(56)(78)) → 그룹 2\n56 → 그룹 3\n78 → 그룹 4\n→ 즉, 2번째 그룹은 \"45678\" 전체 중 \"4\"부터 시작\n→ '12345678'에서 두 번째 그룹(45678)은 4번 인덱스에서 시작\r",
       "references": [
         {
-          "type": "text",
-          "content": "<SQL>\nSELECT REGEXP_INSTR('12345678', '(123)(4(56)(78))', 1, 1, 0, 'i', 2)  FROM DUAL;"
+          "type": "sql",
+          "code": "SELECT REGEXP_INSTR('12345678', '(123)(4(56)(78))', 1, 1, 0, 'i', 2)  FROM DUAL;"
         }
       ]
     },
@@ -24564,8 +24564,8 @@
       "explanation": "정규표현식 'z{3,4}'는:\n문자 'z'가 3번 이상, 4번 이하 연속해서 반복되는 패턴을 찾음\nOracle의 REGEXP_SUBSTR는 기본적으로 greedy(가장 긴 매칭 우선) 방식\n\n대상 문자열: 'kkkkkzzzz'\n'kkkkk'는 무시되고\n\n'zzzz'에서 'z'가 4번 연속으로 등장\n\n→ 'z{3,4}' 조건에 정확히 부합함\n→ 그 중 가능한 가장 긴 문자열 'zzzz' 를 반환\r",
       "references": [
         {
-          "type": "text",
-          "content": "<SQL>\nSELECT REGEXP_SUBSTR('kkkkkzzzz', z{3, 4}) FROM DUAL;"
+          "type": "sql",
+          "code": "SELECT REGEXP_SUBSTR('kkkkkzzzz', z{3, 4}) FROM DUAL;"
         }
       ]
     },
@@ -24587,8 +24587,8 @@
       "explanation": "정렬 방향(ORDER BY)은 SQL에서 기본값이 오름차순(ASC) 이며,\n내림차순 정렬이 필요한 경우 반드시 DESC를 명시해야 합니다.",
       "references": [
         {
-          "type": "text",
-          "content": "<SQL>\nSELECT DEPT_NAME, SUM(SALARY) → (가)\n  FROM EMP\n WHERE SALARY >= 2000          → (나)\nGROUP BY DEPT_NAME            → (다)\nORDER BY SUM(SALARY)          → (라)"
+          "type": "sql",
+          "code": "SELECT DEPT_NAME, SUM(SALARY) → (가)\n  FROM EMP\n WHERE SALARY >= 2000          → (나)\nGROUP BY DEPT_NAME            → (다)\nORDER BY SUM(SALARY)          → (라)"
         },
         {
           "type": "table",
@@ -24673,8 +24673,8 @@
       "explanation": "REGION 값을 기준으로 열(EAST, WEST)을 만들고\n각 REGION별 AMOUNT를 집계(SUM)\n자동으로 GROUP BY YEAR가 적용됨",
       "references": [
         {
-          "type": "text",
-          "content": "<SQL>\nSELECT *\nFROM (\n  SELECT YEAR, REGION, AMOUNT\n  FROM SALES\n)\nPIVOT (\n  SUM(AMOUNT)\n  FOR REGION IN ('EAST' AS EAST, 'WEST' AS WEST)\n);"
+          "type": "sql",
+          "code": "SELECT *\nFROM (\n  SELECT YEAR, REGION, AMOUNT\n  FROM SALES\n)\nPIVOT (\n  SUM(AMOUNT)\n  FOR REGION IN ('EAST' AS EAST, 'WEST' AS WEST)\n);"
         },
         {
           "type": "table",
@@ -24727,8 +24727,8 @@
       "explanation": "SQL은 작성 순서와 실행 순서가 다릅니다.\n실행 순서는 다음과 같습니다:\n\nFROM\nWHERE\nGROUP BY\nHAVING\nSELECT\nORDER BY\r",
       "references": [
         {
-          "type": "text",
-          "content": "<SQL>\nSELECT DEPT_NAME, COUNT(*)\nFROM EMP\nWHERE SALARY > 2000\nGROUP BY DEPT_NAME\nHAVING COUNT(*) >= 2\nORDER BY DEPT_NAME;"
+          "type": "sql",
+          "code": "SELECT DEPT_NAME, COUNT(*)\nFROM EMP\nWHERE SALARY > 2000\nGROUP BY DEPT_NAME\nHAVING COUNT(*) >= 2\nORDER BY DEPT_NAME;"
         }
       ]
     },
@@ -24867,8 +24867,8 @@
       "explanation": "같은 급여(6000)는 같은 순위 1을 부여\n그 다음 등수는 2를 건너뛰고 3부터 시작 → RANK()의 특징\nROW_NUMBER()는 1, 2, 3, 4, 5\nDENSE_RANK()는 1, 1, 2, 3, 4\r",
       "references": [
         {
-          "type": "text",
-          "content": "<SQL>\nSELECT NAME, SALARY, ________ OVER (ORDER BY SALARY DESC) AS RANKING FROM TAB1;"
+          "type": "sql",
+          "code": "SELECT NAME, SALARY, ________ OVER (ORDER BY SALARY DESC) AS RANKING FROM TAB1;"
         },
         {
           "type": "table",
@@ -24979,8 +24979,8 @@
       "explanation": "MAX(NULL)은 항상 결과가 NULL → 비교 조건과 무관하게 NULL 반환\n따라서 SET BONUS = (SELECT MAX(NULL)...) 은 결국\n→ 모든 대상 행의 BONUS 컬럼을 NULL로 업데이트\n보기 ④는 바로 NULL을 할당하므로 동일한 결과\n",
       "references": [
         {
-          "type": "text",
-          "content": "<SQL>\nUPDATE EMP\n   SET BONUS = (SELECT MAX(NULL)\n                  FROM BONUS_LOG B\n                 WHERE EMP.EMP_ID = B.EMP_ID\n                   AND B.YEAR = 2024);"
+          "type": "sql",
+          "code": "UPDATE EMP\n   SET BONUS = (SELECT MAX(NULL)\n                  FROM BONUS_LOG B\n                 WHERE EMP.EMP_ID = B.EMP_ID\n                   AND B.YEAR = 2024);"
         }
       ]
     },
@@ -25002,8 +25002,8 @@
       "explanation": "FROM TAB1, TAB2는 CROSS JOIN과 동일\n모든 행이 곱집합(Cartesian Product)으로 조합됨\n즉, 10 × 10 = 100행 생성\r",
       "references": [
         {
-          "type": "text",
-          "content": "<SQL>\nSELECT COUNT(*)  FROM TAB1, TAB2;"
+          "type": "sql",
+          "code": "SELECT COUNT(*)  FROM TAB1, TAB2;"
         }
       ]
     },
@@ -25082,8 +25082,8 @@
       "explanation": "WHERE AMOUNT >= 1000 → NULL과 1000 미만 제외\n\n남는 행:\nEAST: A001(1000), A005(1200)\nWEST: A003(2000), A004(1500)\nSOUTH: A008(1800), A009(2200)\nGROUP BY REGION + COUNT(AMOUNT):\nEAST: 2건, SUM=2200\nWEST: 2건, SUM=3500\nSOUTH: 2건, SUM=4000\nHAVING SUM(AMOUNT) > 2500 → EAST는 탈락",
       "references": [
         {
-          "type": "text",
-          "content": "<SQL>\nSELECT REGION, COUNT(AMOUNT) AS CNT, SUM(AMOUNT) AS TOTAL\n  FROM SALES\n WHERE AMOUNT >= 1000\n GROUP BY REGION\nHAVING SUM(AMOUNT) > 2500;"
+          "type": "sql",
+          "code": "SELECT REGION, COUNT(AMOUNT) AS CNT, SUM(AMOUNT) AS TOTAL\n  FROM SALES\n WHERE AMOUNT >= 1000\n GROUP BY REGION\nHAVING SUM(AMOUNT) > 2500;"
         },
         {
           "type": "table",
@@ -25161,8 +25161,8 @@
       "explanation": "CUBE(REGION, PRODUCT)는 가능한 모든 조합의 집계를 구함:\n(REGION, PRODUCT) 조합 → 2 × 2 = 4건 (EAST-A, EAST-B, WEST-A, WEST-B)\nREGION별 합계 (PRODUCT NULL): EAST, WEST → 2건\nPRODUCT별 합계 (REGION NULL): A, B → 2건\n전체 합계 (REGION NULL, PRODUCT NULL) → 1건\n→ 총: 4 + 2 + 2 + 1 = 9건\n❗️ 하지만 원 테이블에 없는 조합은 생략되지 않고 무조건 생성됨\n→ 따라서 **③번의 보기(8)**는 오답, 정답은 ④번 (9) 이 되어야 정확합니다.\r",
       "references": [
         {
-          "type": "text",
-          "content": "<SQL>\nSELECT REGION, PRODUCT, SUM(AMOUNT)\n  FROM SALES\n GROUP BY CUBE(REGION, PRODUCT);"
+          "type": "sql",
+          "code": "SELECT REGION, PRODUCT, SUM(AMOUNT)\n  FROM SALES\n GROUP BY CUBE(REGION, PRODUCT);"
         },
         {
           "type": "table",
@@ -25215,8 +25215,8 @@
       "explanation": "ON UPDATE CASCADE: 부모 테이블의 기본 키가 변경되면, 자식 테이블의 외래 키도 자동으로 함께 변경됨\r",
       "references": [
         {
-          "type": "text",
-          "content": "<SQL>\nCREATE TABLE DEPT (\n  DEPT_ID   NUMBER PRIMARY KEY,\n  DEPT_NAME VARCHAR2(50)\n);\nCREATE TABLE EMP (\n  EMP_ID    NUMBER PRIMARY KEY,\n  EMP_NAME  VARCHAR2(50),\n  DEPT_ID   NUMBER,\n  CONSTRAINT FK_DEPT\n    FOREIGN KEY (DEPT_ID)\n    REFERENCES DEPT (DEPT_ID)\n    ON UPDATE CASCADE\n);"
+          "type": "sql",
+          "code": "CREATE TABLE DEPT (\n  DEPT_ID   NUMBER PRIMARY KEY,\n  DEPT_NAME VARCHAR2(50)\n);\nCREATE TABLE EMP (\n  EMP_ID    NUMBER PRIMARY KEY,\n  EMP_NAME  VARCHAR2(50),\n  DEPT_ID   NUMBER,\n  CONSTRAINT FK_DEPT\n    FOREIGN KEY (DEPT_ID)\n    REFERENCES DEPT (DEPT_ID)\n    ON UPDATE CASCADE\n);"
         }
       ]
     },
@@ -25453,8 +25453,8 @@
       "explanation": "② EMAIL='kim@corp.com' → 기존에 이미 있음 → UNIQUE 위반\n③ EMP_ID=101 이미 존재 → PRIMARY KEY 위반\n④ NAME은 NOT NULL인데 NULL 입력됨 → NOT NULL 제약 위반\r",
       "references": [
         {
-          "type": "text",
-          "content": "<SQL>\nCREATE TABLE EMPLOYEE (\n  EMP_ID     NUMBER PRIMARY KEY,\n  NAME       VARCHAR2(50) NOT NULL,\n  EMAIL      VARCHAR2(100),\n  DEPT_ID    NUMBER,\n  CONSTRAINT UQ_EMP_EMAIL UNIQUE (EMAIL)\n);"
+          "type": "sql",
+          "code": "CREATE TABLE EMPLOYEE (\n  EMP_ID     NUMBER PRIMARY KEY,\n  NAME       VARCHAR2(50) NOT NULL,\n  EMAIL      VARCHAR2(100),\n  DEPT_ID    NUMBER,\n  CONSTRAINT UQ_EMP_EMAIL UNIQUE (EMAIL)\n);"
         },
         {
           "type": "table",
@@ -25561,8 +25561,8 @@
       "explanation": "MANAGER_ID IS NULL → 루트 노드(CLIENT/CEO)를 정확히 지정\nPRIOR EMP_ID = MANAGER_ID → 상위 → 하위 관계 정확히 표현\r",
       "references": [
         {
-          "type": "text",
-          "content": "<SQL>\nSELECT EMP_NAME,\n       LPAD(' ', LEVEL * 2) || EMP_NAME AS INDENTED_NAME,\n       SYS_CONNECT_BY_PATH(EMP_NAME, '/') AS PATH\n  FROM EMPLOYEE\n WHERE ________      -- (빈칸 ①)\nCONNECT BY ________  -- (빈칸 ②)\n ORDER SIBLINGS BY EMP_NAME;"
+          "type": "sql",
+          "code": "SELECT EMP_NAME,\n       LPAD(' ', LEVEL * 2) || EMP_NAME AS INDENTED_NAME,\n       SYS_CONNECT_BY_PATH(EMP_NAME, '/') AS PATH\n  FROM EMPLOYEE\n WHERE ________      -- (빈칸 ①)\nCONNECT BY ________  -- (빈칸 ②)\n ORDER SIBLINGS BY EMP_NAME;"
         },
         {
           "type": "table",

@@ -27018,10 +27018,10 @@ export const AI_MOCK: QuizQuestion[] = [
       "SELECT E.ENAME, E.SAL, E.DEPTNO, D.DNAME FROM EMP E LEFT JOIN DEPT D ON E.DEPTNO = D.DEPTNO WHERE E.SAL > 3000 ORDER BY E.ENAME;",
       "SELECT E.ENAME, E.SAL, E.DEPTNO, D.DNAME FROM EMP E INNER JOIN DEPT D ON E.DEPTNO = D.DEPTNO WHERE E.SAL > 3000 ORDER BY E.ENAME;",
       "SELECT E.ENAME, E.SAL, E.DEPTNO, D.DNAME FROM EMP E INNER JOIN DEPT D USING DEPTNO AND E.SAL > 3000 ORDER BY E.ENAME;",
-      "SELECT E.ENAME, E.SAL, E.DEPTNO, D.DNAME FROM EMP E JOIN DEPT D ON E.DEPTNO = D.DEPTNO AND E.SAL > 3000 ORDER BY E.ENAME;"
+      "SELECT E.ENAME, E.SAL, E.DEPTNO, D.DNAME FROM EMP E RIGHT JOIN DEPT D ON E.DEPTNO = D.DEPTNO AND E.SAL > 3000 ORDER BY E.ENAME;"
     ],
     "correctIndex": 1,
-    "explanation": "조인 조건에 성립하는 행만 출력하는 INNER JOIN이 수행되었으므로 조인조건을 ON절에, 일반조건을 WHERE절에 각각 명시하면 된다. USING을 사용하는 경우 반드시 괄호로 묶어서 전달해야 한다.",
+    "explanation": "원래 SQL 은 짝이 맞는 행만 남기는 INNER JOIN 이므로 조인 조건은 ON, 나머지 조건(SAL > 3000)은 WHERE 에 두면 된다(②). ① LEFT JOIN 은 부서가 없는 사원까지 남기므로 같은 SQL 이 아니고, ③ USING 은 USING (DEPTNO) 처럼 괄호가 필요하며 뒤에 AND 조건을 붙일 수 없고, ④ RIGHT JOIN 은 조건에 맞는 사원이 없는 부서까지 NULL 로 남아 결과가 다르다.",
     "chapter": "조인",
     "_source": "sqld-1140",
     "_origId": "sqld-0745",
@@ -28395,7 +28395,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "0, 2, 2, 0"
     ],
     "correctIndex": 1,
-    "explanation": "COUNT(*)는 모든 컬럼의 값이 NULL일 때만 제외한다. COL1+COL2+COL3은 각 행마다 NULL을 포함하므로 모든 행이 값이 NULL이 된다.",
+    "explanation": "C1: COUNT(*) 는 값과 상관없이 행 수를 세므로 3(모든 컬럼이 NULL 인 행도 센다). C2: COUNT(COL1) 은 NULL 을 빼고 세므로 2. C3: SUM(COL2) 는 NULL 을 빼고 1 + 1 = 2. C4: COL1 + COL2 + COL3 은 행마다 NULL 이 하나씩 섞여 세 행 모두 NULL 이고, 더할 값이 없으므로 SUM 결과도 NULL 이다(②).",
     "chapter": "그룹 함수",
     "_source": "sqld-1140",
     "_origId": "sqld-0799",
@@ -28961,8 +28961,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "<SQL>\nSELECT COUNT(ALL COL1) FROM TAB1 WHERE COL2='A';\nSELECT COUNT(DISTINCT COL1) FROM TAB1;"
+        "type": "sql",
+        "code": "SELECT COUNT(ALL COL1) FROM TAB1 WHERE COL2='A';\nSELECT COUNT(DISTINCT COL1) FROM TAB1;"
       },
       {
         "type": "table",
@@ -29093,8 +29093,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "<SQL>\nSELECT MAX(COL2)\nFROM ( SELECT COL1, COL2\n              FROM TAB1\n              WHERE COL1 = (SELECT MIN(COL1) FROM TAB1)\n             );"
+        "type": "sql",
+        "code": "SELECT MAX(COL2)\nFROM ( SELECT COL1, COL2\n              FROM TAB1\n              WHERE COL1 = (SELECT MIN(COL1) FROM TAB1)\n             );"
       },
       {
         "type": "table",
@@ -29150,8 +29150,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "<SQL>\nSELECT COALESCE(NULL, NULL, 'S', NULL, 'QL') FROM DUAL;"
+        "type": "sql",
+        "code": "SELECT COALESCE(NULL, NULL, 'S', NULL, 'QL') FROM DUAL;"
       }
     ]
   },
@@ -29177,8 +29177,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "<SQL>\nINSERT INTO TAB1 VALUES('A',100);\nINSERT INTO TAB1 VALUES('B',200);\nINSERT INTO TAB1 VALUES('C',300);\nINSERT INTO TAB1 VALUES('C',400);\nSELECT COUNT(*)\nFROM (\n    SELECT COL1, SUM(COL2)\n    FROM TAB1\n    GROUP BY ROLLUP(COL1), COL1\n) SUB;"
+        "type": "sql",
+        "code": "INSERT INTO TAB1 VALUES('A',100);\nINSERT INTO TAB1 VALUES('B',200);\nINSERT INTO TAB1 VALUES('C',300);\nINSERT INTO TAB1 VALUES('C',400);\nSELECT COUNT(*)\nFROM (\n    SELECT COL1, SUM(COL2)\n    FROM TAB1\n    GROUP BY ROLLUP(COL1), COL1\n) SUB;"
       }
     ]
   },
@@ -29204,8 +29204,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "<SQL>\nSELECT SUM(AMOUNT), AVG(NVL(AMOUNT, 0))\nFROM ORDERS;"
+        "type": "sql",
+        "code": "SELECT SUM(AMOUNT), AVG(NVL(AMOUNT, 0))\nFROM ORDERS;"
       },
       {
         "type": "table",
@@ -29261,8 +29261,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "<SQL>\nSELECT REGEXP_INSTR('12345678', '(123)(4(56)(78))', 1, 1, 0, 'i', 2)  FROM DUAL;"
+        "type": "sql",
+        "code": "SELECT REGEXP_INSTR('12345678', '(123)(4(56)(78))', 1, 1, 0, 'i', 2)  FROM DUAL;"
       }
     ]
   },
@@ -29288,8 +29288,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "<SQL>\nSELECT REGEXP_SUBSTR('kkkkkzzzz', z{3, 4}) FROM DUAL;"
+        "type": "sql",
+        "code": "SELECT REGEXP_SUBSTR('kkkkkzzzz', z{3, 4}) FROM DUAL;"
       }
     ]
   },
@@ -29315,8 +29315,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "<SQL>\nSELECT DEPT_NAME, SUM(SALARY) → (가)\n  FROM EMP\n WHERE SALARY >= 2000          → (나)\nGROUP BY DEPT_NAME            → (다)\nORDER BY SUM(SALARY)          → (라)"
+        "type": "sql",
+        "code": "SELECT DEPT_NAME, SUM(SALARY) → (가)\n  FROM EMP\n WHERE SALARY >= 2000          → (나)\nGROUP BY DEPT_NAME            → (다)\nORDER BY SUM(SALARY)          → (라)"
       },
       {
         "type": "table",
@@ -29405,8 +29405,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "<SQL>\nSELECT *\nFROM (\n  SELECT YEAR, REGION, AMOUNT\n  FROM SALES\n)\nPIVOT (\n  SUM(AMOUNT)\n  FOR REGION IN ('EAST' AS EAST, 'WEST' AS WEST)\n);"
+        "type": "sql",
+        "code": "SELECT *\nFROM (\n  SELECT YEAR, REGION, AMOUNT\n  FROM SALES\n)\nPIVOT (\n  SUM(AMOUNT)\n  FOR REGION IN ('EAST' AS EAST, 'WEST' AS WEST)\n);"
       },
       {
         "type": "table",
@@ -29463,8 +29463,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "<SQL>\nSELECT DEPT_NAME, COUNT(*)\nFROM EMP\nWHERE SALARY > 2000\nGROUP BY DEPT_NAME\nHAVING COUNT(*) >= 2\nORDER BY DEPT_NAME;"
+        "type": "sql",
+        "code": "SELECT DEPT_NAME, COUNT(*)\nFROM EMP\nWHERE SALARY > 2000\nGROUP BY DEPT_NAME\nHAVING COUNT(*) >= 2\nORDER BY DEPT_NAME;"
       }
     ]
   },
@@ -29619,8 +29619,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "<SQL>\nSELECT NAME, SALARY, ________ OVER (ORDER BY SALARY DESC) AS RANKING FROM TAB1;"
+        "type": "sql",
+        "code": "SELECT NAME, SALARY, ________ OVER (ORDER BY SALARY DESC) AS RANKING FROM TAB1;"
       },
       {
         "type": "table",
@@ -29739,8 +29739,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "<SQL>\nUPDATE EMP\n   SET BONUS = (SELECT MAX(NULL)\n                  FROM BONUS_LOG B\n                 WHERE EMP.EMP_ID = B.EMP_ID\n                   AND B.YEAR = 2024);"
+        "type": "sql",
+        "code": "UPDATE EMP\n   SET BONUS = (SELECT MAX(NULL)\n                  FROM BONUS_LOG B\n                 WHERE EMP.EMP_ID = B.EMP_ID\n                   AND B.YEAR = 2024);"
       }
     ]
   },
@@ -29766,8 +29766,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "<SQL>\nSELECT COUNT(*)  FROM TAB1, TAB2;"
+        "type": "sql",
+        "code": "SELECT COUNT(*)  FROM TAB1, TAB2;"
       }
     ]
   },
@@ -29862,8 +29862,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "<SQL>\nSELECT REGION, COUNT(AMOUNT) AS CNT, SUM(AMOUNT) AS TOTAL\n  FROM SALES\n WHERE AMOUNT >= 1000\n GROUP BY REGION\nHAVING SUM(AMOUNT) > 2500;"
+        "type": "sql",
+        "code": "SELECT REGION, COUNT(AMOUNT) AS CNT, SUM(AMOUNT) AS TOTAL\n  FROM SALES\n WHERE AMOUNT >= 1000\n GROUP BY REGION\nHAVING SUM(AMOUNT) > 2500;"
       },
       {
         "type": "table",
@@ -29945,8 +29945,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "<SQL>\nSELECT REGION, PRODUCT, SUM(AMOUNT)\n  FROM SALES\n GROUP BY CUBE(REGION, PRODUCT);"
+        "type": "sql",
+        "code": "SELECT REGION, PRODUCT, SUM(AMOUNT)\n  FROM SALES\n GROUP BY CUBE(REGION, PRODUCT);"
       },
       {
         "type": "table",
@@ -30003,8 +30003,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "<SQL>\nCREATE TABLE DEPT (\n  DEPT_ID   NUMBER PRIMARY KEY,\n  DEPT_NAME VARCHAR2(50)\n);\nCREATE TABLE EMP (\n  EMP_ID    NUMBER PRIMARY KEY,\n  EMP_NAME  VARCHAR2(50),\n  DEPT_ID   NUMBER,\n  CONSTRAINT FK_DEPT\n    FOREIGN KEY (DEPT_ID)\n    REFERENCES DEPT (DEPT_ID)\n    ON UPDATE CASCADE\n);"
+        "type": "sql",
+        "code": "CREATE TABLE DEPT (\n  DEPT_ID   NUMBER PRIMARY KEY,\n  DEPT_NAME VARCHAR2(50)\n);\nCREATE TABLE EMP (\n  EMP_ID    NUMBER PRIMARY KEY,\n  EMP_NAME  VARCHAR2(50),\n  DEPT_ID   NUMBER,\n  CONSTRAINT FK_DEPT\n    FOREIGN KEY (DEPT_ID)\n    REFERENCES DEPT (DEPT_ID)\n    ON UPDATE CASCADE\n);"
       }
     ]
   },
@@ -30265,8 +30265,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "<SQL>\nCREATE TABLE EMPLOYEE (\n  EMP_ID     NUMBER PRIMARY KEY,\n  NAME       VARCHAR2(50) NOT NULL,\n  EMAIL      VARCHAR2(100),\n  DEPT_ID    NUMBER,\n  CONSTRAINT UQ_EMP_EMAIL UNIQUE (EMAIL)\n);"
+        "type": "sql",
+        "code": "CREATE TABLE EMPLOYEE (\n  EMP_ID     NUMBER PRIMARY KEY,\n  NAME       VARCHAR2(50) NOT NULL,\n  EMAIL      VARCHAR2(100),\n  DEPT_ID    NUMBER,\n  CONSTRAINT UQ_EMP_EMAIL UNIQUE (EMAIL)\n);"
       },
       {
         "type": "table",
@@ -30381,8 +30381,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "<SQL>\nSELECT EMP_NAME,\n       LPAD(' ', LEVEL * 2) || EMP_NAME AS INDENTED_NAME,\n       SYS_CONNECT_BY_PATH(EMP_NAME, '/') AS PATH\n  FROM EMPLOYEE\n WHERE ________      -- (빈칸 ①)\nCONNECT BY ________  -- (빈칸 ②)\n ORDER SIBLINGS BY EMP_NAME;"
+        "type": "sql",
+        "code": "SELECT EMP_NAME,\n       LPAD(' ', LEVEL * 2) || EMP_NAME AS INDENTED_NAME,\n       SYS_CONNECT_BY_PATH(EMP_NAME, '/') AS PATH\n  FROM EMPLOYEE\n WHERE ________      -- (빈칸 ①)\nCONNECT BY ________  -- (빈칸 ②)\n ORDER SIBLINGS BY EMP_NAME;"
       },
       {
         "type": "table",
@@ -48843,8 +48843,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "<SQL>\nSELECT YEAR, REGION, SUM(AMOUNT)\nFROM SALES\nGROUP BY ROLLUP(YEAR, REGION);"
+        "type": "sql",
+        "code": "SELECT YEAR, REGION, SUM(AMOUNT)\nFROM SALES\nGROUP BY ROLLUP(YEAR, REGION);"
       },
       {
         "type": "table",
