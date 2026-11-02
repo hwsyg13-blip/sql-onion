@@ -1,5 +1,5 @@
 // Auto-generated from scripts/authored/ai-mock.json
-// AI 생성 모의고사 풀 (기출 변형) · 1315문항
+// AI 생성 모의고사 풀 (기출 변형) · 1314문항
 // ⚠ 직접 편집 금지. ai-mock.json 수정 후 'node scripts/build-quiz-bank.mjs' 재실행.
 import type { QuizQuestion } from '../quizBank';
 
@@ -1037,7 +1037,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "주문 테이블 INTERSECT 주문상세 테이블의 데이터 합계와 주문 테이블 데이터 합계는 다르다."
     ],
     "correctIndex": 2,
-    "explanation": "1:1 필수관계라면 주문에 있는 하나의 주문번호가 반드시 주문상세 테이블에도 하나만 존재한다는 뜻이다.예를 들어 주문 테이블에 (1, 2, 3)이 있다면 주문상세 테이블에도 반드시 (1, 2, 3)이 있다. 따라서 주문 테이블에서 주문상세 테이블을 MINUS하면 0건이 남게 된다.",
+    "explanation": "1:1 필수관계라면 주문에 있는 하나의 주문번호가 반드시 주문상세 테이블에도 하나만 존재한다는 뜻이다. 예를 들어 주문 테이블에 (1, 2, 3)이 있다면 주문상세 테이블에도 반드시 (1, 2, 3)이 있다. 따라서 주문 테이블에서 주문상세 테이블을 MINUS하면 0건이 남게 된다.",
     "chapter": "집합 연산자",
     "_source": "cbt-mock",
     "_origId": "cbt-003",
@@ -1184,7 +1184,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "4"
     ],
     "correctIndex": 2,
-    "explanation": "• SV1 시점 : TAB 테이블에 [(‘A’, 1), (‘B’ , 2), (‘C’, 3)]• SV2 시점 : TAB 테이블에 [(‘A’, 3), (B’, 3), (‘C’, 3)]• SV3 시점 : TAB 테이블에 [(‘D’, 5)]• ROLLBACK TO SV2 후 COMMIT할 때 TAB 테이블 : [(‘A’, 3), (‘B’, 3), (‘C’, 3)]따라서 총 3건이 존재한다.",
+    "explanation": "• SV1 시점 : TAB 테이블에 [('A', 1), ('B' , 2), ('C', 3)] • SV2 시점 : TAB 테이블에 [('A', 3), (B', 3), ('C', 3)] • SV3 시점 : TAB 테이블에 [('D', 5)] • ROLLBACK TO SV2 후 COMMIT할 때 TAB 테이블 : [('A', 3), ('B', 3), ('C', 3)]따라서 총 3건이 존재한다.",
     "chapter": "DCL·TCL",
     "_source": "cbt-mock",
     "_origId": "cbt-009",
@@ -1322,7 +1322,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "0"
     ],
     "correctIndex": 0,
-    "explanation": "WITH 절(CTE, Common Table Expression)은 SELECT 문 시작 전에 미리 정의된 가상의 테이블(임시 결과셋)을 생성하는 문법이다. 이는 마치 FROM 절에 인라인 뷰를 사용하는 것과 유사한 개념이며, 복잡한 쿼리를 구조화하고 가독성을 높이는 데 유리하다. 또한, 같은 CTE를 여러 번 재사용할 수 있는 장점이 있다. 만약 한 번만 사용할 용도라면 인라인 뷰로 작성해도 무방하다. 이 문제에서 CTE REGION_TOTAL은 TB_ORDER 테이블을 REGION 별로 그룹화한 뒤, 각 지역의 주문 금액 합계를 계산한다.REGION_TOTAL의 결과는 다음과 같다.이후 메인 쿼리에서는 TOTAL > 1500 조건을 만족하는 지역만 필터링하여 COUNT(*)를 수행한다. 조건을 만족하는 지역은 EAST 하나뿐이므로, 최종 결과는 1건이다.",
+    "explanation": "WITH 절(CTE, Common Table Expression)은 SELECT 문 시작 전에 미리 정의된 가상의 테이블(임시 결과셋)을 생성하는 문법이다. 이는 마치 FROM 절에 인라인 뷰를 사용하는 것과 유사한 개념이며, 복잡한 쿼리를 구조화하고 가독성을 높이는 데 유리하다. 또한, 같은 CTE를 여러 번 재사용할 수 있는 장점이 있다. 만약 한 번만 사용할 용도라면 인라인 뷰로 작성해도 무방하다. 이 문제에서 CTE REGION_TOTAL은 TB_ORDER 테이블을 REGION 별로 그룹화한 뒤, 각 지역의 주문 금액 합계를 계산한다. REGION_TOTAL의 결과는 다음과 같다. 이후 메인 쿼리에서는 TOTAL > 1500 조건을 만족하는 지역만 필터링하여 COUNT(*)를 수행한다. 조건을 만족하는 지역은 EAST 하나뿐이므로, 최종 결과는 1건이다.",
     "chapter": "GROUP BY·HAVING",
     "_source": "cbt-mock",
     "_origId": "cbt-015",
@@ -1580,7 +1580,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "3"
     ],
     "correctIndex": 3,
-    "explanation": "SELECT문을 보면 department로 GROUP BY한다. 그리면 총 3개의 그룹이 만들어진다. computer, physics, math이다. 3개의 그룹 중에서 개수가 2개 초과인 것을 조회하기 위해서 “HAVING count(*) > 2”문을 사용했다. 따라서 2개 초과인 것은 math이고 math는 총 3개가 있으므로 3이 된다.",
+    "explanation": "SELECT문을 보면 department로 GROUP BY한다. 그리면 총 3개의 그룹이 만들어진다. computer, physics, math이다. 3개의 그룹 중에서 개수가 2개 초과인 것을 조회하기 위해서 \"HAVING count(*) > 2\"문을 사용했다. 따라서 2개 초과인 것은 math이고 math는 총 3개가 있으므로 3이 된다.",
     "chapter": "관계형 DB와 SELECT",
     "_source": "cbt-mock",
     "_origId": "cbt-024",
@@ -1682,7 +1682,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "options": [
       "인덱스를 경유한 테이블의 Random 액세스 부하가 심할 때, 클러스터 테이블이나 IOT를 활용하는 방안을 고려할 수 있다.",
       "인덱스를 경유한 테이블 액세스 횟수가 같더라도 인덱스 구성에 따라 스캔 효율이 달라진다. 따라서 인덱스 스캔 효율을 높이기 위해 인덱스 칼럼 순서를 바꿔야 할 때가 종종 있다.",
-      "조건절이 Where deptno = 10 and ename = ‘SCOTT’일 때 인덱스를 [deptno + ename] 순으로 구성하나 [ename + deptno] 순으로 구성하나 인덱스 스캔 효율에 차이가 없다.",
+      "조건절이 Where deptno = 10 and ename = 'SCOTT'일 때 인덱스를 [deptno + ename] 순으로 구성하나 [ename + deptno] 순으로 구성하나 인덱스 스캔 효율에 차이가 없다.",
       "인덱스 튜닝의 핵심 요소 중 하나는 불필요한 테이블 Random 액세스가 발생하지 않도록 하는 데에 있다. 이를 위해 인덱스 칼럼 순서를 바꿔주는 것도 큰 효과가 있다."
     ],
     "correctIndex": 3,
@@ -1726,7 +1726,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "(ㄱ) FIRST_VALUE, (ㄴ) LAST_VALUE"
     ],
     "correctIndex": 1,
-    "explanation": "LAG는 현재 행 기준 이전 행의 값을 가져오고 LEAD는 현재 행 기준 다음 행의 값을 가져온다.• LAG(컬럼, 오프셋, 디폴트) : 컬럼의 오프셋만큼 이전의 행을 가져오고, 없으면 디폴트 값을 출력한다(오프셋 기본값 : 1, 디폴트 기본값 : NULL).• LEAD(컬럼, 오프셋, 디폴트) : 컬럼의 오프셋만큼 다음의 행을 가져오고, 없으면 디폴트 값을 출력한다(오프셋 기본값 : 1, 디폴트 기본값 : NULL).먼저 HIREDATE를 기준으로 오름차 정렬할 때의 테이블은 다음과 같다.• JONES : LAG일 때 이전값이 없으므로 NULL을 반환, LEAD일 때 다음 값은 CLARK이므로 CLARK 반환• CLARK : LAG일 때 이전값인 JONES 반환, LEAD일 때 다음 값인 KING 반환• KING : LAG일 때 이전값인 CLARK 반환, LEAD일 때 다음 값인 MILLER 반환• MILLER : LAG일 때 이전값인 KING 반환, LEAD일 때 다음 값은 없으므로 NULL 반환",
+    "explanation": "입사일 순서로 놓으면 JONES(81-04-02) → CLARK(81-06-09) → KING(81-11-17) → MILLER(82-01-23)이다. PREV_EMP 는 바로 앞 행(이전 입사자), NEXT_EMP 는 바로 다음 행(다음 입사자)이므로 (ㄱ) LAG, (ㄴ) LEAD 다(②). LAG(컬럼, n, 기본값)은 n행 앞, LEAD 는 n행 뒤의 값을 가져오고 n 을 생략하면 1, 해당 행이 없으면 NULL 이다. PREV·NEXT 라는 함수는 없고(③), FIRST_VALUE·LAST_VALUE 는 범위의 처음·마지막 값이다(④).",
     "chapter": "윈도우 함수",
     "_source": "cbt-mock",
     "_origId": "cbt-029",
@@ -1790,31 +1790,6 @@ export const AI_MOCK: QuizQuestion[] = [
             "MILLER",
             "KING",
             "NULL"
-          ]
-        ]
-      },
-      {
-        "type": "table",
-        "headers": [
-          "ENAME",
-          "HIREDATE"
-        ],
-        "rows": [
-          [
-            "JONES",
-            "1981-04-02"
-          ],
-          [
-            "CLARK",
-            "1981-06-09"
-          ],
-          [
-            "KING",
-            "1981-11-17"
-          ],
-          [
-            "MILLER",
-            "1982-01-23"
           ]
         ]
       }
@@ -1900,7 +1875,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "NULL, 240, 260"
     ],
     "correctIndex": 0,
-    "explanation": "• 첫 번째 쿼리 : DEPTNO가 10인 대상의 SAL+BONUS는 각각 100+NULL , NULL + 20이므로 둘다 NULL이 되어 SUM의 결과는 NULL이 된다.• 두 번째 쿼리 : NVL(SAL, 0) + NVL(BONUS, 0)은 순서대로 각각 100 + 0, 0 + 20, 30 + 10, 50 + 30, 20 + 0이므로 100, 20, 40, 80, 20의 합계를 구하면 260이다.• 세 번째 쿼리 : SUM(SAL)은 100, NULL, 30, 50, 20의 합계이며 집계 함수는 NULL을 무시해 100, 30, 50, 20을 더한 200이 출력된다. SUM(BONUS)은 NULL, 20, 10, 30, NULL로 NULL을 제외한 20, 10, 30의 합계인 60이 나오고, 그 결과 200+60 = 260이 된다.",
+    "explanation": "• 첫 번째 쿼리 : DEPTNO가 10인 대상의 SAL+BONUS는 각각 100+NULL , NULL + 20이므로 둘다 NULL이 되어 SUM의 결과는 NULL이 된다. • 두 번째 쿼리 : NVL(SAL, 0) + NVL(BONUS, 0)은 순서대로 각각 100 + 0, 0 + 20, 30 + 10, 50 + 30, 20 + 0이므로 100, 20, 40, 80, 20의 합계를 구하면 260이다. • 세 번째 쿼리 : SUM(SAL)은 100, NULL, 30, 50, 20의 합계이며 집계 함수는 NULL을 무시해 100, 30, 50, 20을 더한 200이 출력된다. SUM(BONUS)은 NULL, 20, 10, 30, NULL로 NULL을 제외한 20, 10, 30의 합계인 60이 나오고, 그 결과 200+60 = 260이 된다.",
     "chapter": "그룹 함수",
     "_source": "cbt-mock",
     "_origId": "cbt-033",
@@ -1968,7 +1943,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "WHERE REGEXP_LIKE(USER_ID, '[0-9].*[A-Z]$')"
     ],
     "correctIndex": 0,
-    "explanation": "정규 표현식을 사용할 때 ^는 시작을 의미, $는 끝을 의미한다. ‘^[AZ].*[0-9]$’는 대문자 알파벳으로 시작하고, 숫자로 끝나는 문자열을 의미한다. Oracle에서는 복잡한 문자열 패턴 매칭이 필요한 경우 REGEXP_LIKE를 반드시 사용해야 하며, LIKE는 단순한 와일드카드 (%, _)만 지원한다.",
+    "explanation": "정규 표현식을 사용할 때 ^는 시작을 의미, $는 끝을 의미한다. '^[AZ].*[0-9]$'는 대문자 알파벳으로 시작하고, 숫자로 끝나는 문자열을 의미한다. Oracle에서는 복잡한 문자열 패턴 매칭이 필요한 경우 REGEXP_LIKE를 반드시 사용해야 하며, LIKE는 단순한 와일드카드 (%, _)만 지원한다.",
     "chapter": "정규 표현식",
     "_source": "cbt-mock",
     "_origId": "cbt-034",
@@ -2129,7 +2104,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "INSERT INTO TAB2 (COL1, COL2,COL3) VALUES('K002', 'A001', 100);"
     ],
     "correctIndex": 1,
-    "explanation": "①은 각 컬럼의 자료형과 NOT NULL 제약 조건을 만족하므로 정상적으로 입력된다.②는 COL2 값을 입력하지 않았고, 해당 컬럼에는 DEFAULT 설정도 없으므로 자동으로 NULL이 입력되려고 한다. 하지만 COL2는 NOT NULL 제약이 있어 NULL 값이 허용되지 않기 때문에 오류가 발생한다.③과 ④는 TAB2 테이블에서 외래키인 COL2에 ‘A001’ 값을 입력하는데, 이 값은 ①에서 TAB1 테이블에 이미 등록된 값이므로 외래키 조건을 만족하며 정상적으로 입력된다.",
+    "explanation": "①은 각 컬럼의 자료형과 NOT NULL 제약 조건을 만족하므로 정상적으로 입력된다.②는 COL2 값을 입력하지 않았고, 해당 컬럼에는 DEFAULT 설정도 없으므로 자동으로 NULL이 입력되려고 한다. 하지만 COL2는 NOT NULL 제약이 있어 NULL 값이 허용되지 않기 때문에 오류가 발생한다.③과 ④는 TAB2 테이블에서 외래키인 COL2에 'A001' 값을 입력하는데, 이 값은 ①에서 TAB1 테이블에 이미 등록된 값이므로 외래키 조건을 만족하며 정상적으로 입력된다.",
     "chapter": "DDL",
     "_source": "cbt-mock",
     "_origId": "cbt-042",
@@ -2285,7 +2260,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "이름 LIKE '이_%';"
     ],
     "correctIndex": 2,
-    "explanation": "“이”로 시작하면서 언더바( _ )가 하나의 문자를 매칭하므로 두 개를 붙여서 세글자를 추출할 수 있다.① “이”를 포함하는 모든 대상이 출력된다.② “이”로 시작하지만 뒤에 %가 붙어 0개 이상의 문자를 매칭하므로 세 글자를 보장할 수 없다.④ “이”로 시작하고 뒤에 한 문자가 나오고 그다음에 0개 이상 문자가 매칭되므로 세글자를 보장할 수 없다.",
+    "explanation": "\"이\"로 시작하면서 언더바( _ )가 하나의 문자를 매칭하므로 두 개를 붙여서 세글자를 추출할 수 있다.① \"이\"를 포함하는 모든 대상이 출력된다.② \"이\"로 시작하지만 뒤에 %가 붙어 0개 이상의 문자를 매칭하므로 세 글자를 보장할 수 없다.④ \"이\"로 시작하고 뒤에 한 문자가 나오고 그다음에 0개 이상 문자가 매칭되므로 세글자를 보장할 수 없다.",
     "chapter": "관계형 DB와 SELECT",
     "_source": "cbt-mock",
     "_origId": "cbt-048",
@@ -2305,7 +2280,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "3"
     ],
     "correctIndex": 1,
-    "explanation": "외래키에 ON DELETE CASCADE를 지정하면, 참조하는 부모 테이블의 행이 삭제될 때 자식 테이블의 관련 행도 연쇄적으로 삭제된다.예를 들어, TAB1에 데이터가 [(1, 1), (2, 2), (3, 3)]이며, TAB2에 데이터가 [(4, 3), (5, 2)]인 상태에서, TAB1에서 COL2 = 3인 행을 삭제하면, 해당 행의 COL1 = 3이 삭제되고, 이를 참조하고 있는 TAB2의 (4, 3)도 함께 삭제된다.따라서 TAB2에는 (5, 2)만 남게 되어, SELECT COUNT(*) FROM TAB2의 결과는 1이 된다.반면, 외래키에 ON DELETE SET NULL을 지정한 경우에는 부모 테이블의 행이 삭제될 때 자식 테이블의 해당 외래키 값이 NULL로 변경된다.같은 상황에서 TAB1.COL2 = 3을 삭제하면, TAB2는 [(4, NULL), (5, 2)]가 되며, 해당 외래키만 NULL로 남고 행 자체는 유지된다.",
+    "explanation": "외래키에 ON DELETE CASCADE를 지정하면, 참조하는 부모 테이블의 행이 삭제될 때 자식 테이블의 관련 행도 연쇄적으로 삭제된다. 예를 들어, TAB1에 데이터가 [(1, 1), (2, 2), (3, 3)]이며, TAB2에 데이터가 [(4, 3), (5, 2)]인 상태에서, TAB1에서 COL2 = 3인 행을 삭제하면, 해당 행의 COL1 = 3이 삭제되고, 이를 참조하고 있는 TAB2의 (4, 3)도 함께 삭제된다. 따라서 TAB2에는 (5, 2)만 남게 되어, SELECT COUNT(*) FROM TAB2의 결과는 1이 된다. 반면, 외래키에 ON DELETE SET NULL을 지정한 경우에는 부모 테이블의 행이 삭제될 때 자식 테이블의 해당 외래키 값이 NULL로 변경된다. 같은 상황에서 TAB1.COL2 = 3을 삭제하면, TAB2는 [(4, NULL), (5, 2)]가 되며, 해당 외래키만 NULL로 남고 행 자체는 유지된다.",
     "chapter": "DDL",
     "_source": "cbt-mock",
     "_origId": "cbt-049",
@@ -2404,7 +2379,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "ㄱ : 200, ㄴ : 200, ㄷ : 50"
     ],
     "correctIndex": 2,
-    "explanation": "ㄱ은 STUDENT 테이블을 조건없이 조회하는 것이므로 200=50+100+50이 된다. 그리고 ㄴ은 “DISTINCT”를 사용했으므로 학과명이 중복되면 한 번만 출력한다. 문제에서는 영문학과, 법학과, 수학과가 있으므로 3이 되고 ㄷ은 WHERE절에 “영문학과”만 조회하므로 50이 된다.",
+    "explanation": "ㄱ은 STUDENT 테이블을 조건없이 조회하는 것이므로 200=50+100+50이 된다. 그리고 ㄴ은 \"DISTINCT\"를 사용했으므로 학과명이 중복되면 한 번만 출력한다. 문제에서는 영문학과, 법학과, 수학과가 있으므로 3이 되고 ㄷ은 WHERE절에 \"영문학과\"만 조회하므로 50이 된다.",
     "chapter": "WHERE",
     "_source": "cbt-mock",
     "_origId": "cbt-052",
@@ -2665,7 +2640,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "B*DX"
     ],
     "correctIndex": 3,
-    "explanation": "먼저 SUBSTR 함수는 문자열 ‘ABCDXYZ’에서 두 번째 문자부터 4개의 문자를 잘라내므로 결과는 ‘BCDX’가 된다. 이어서 REPLACE 함수는 이 결과에서 문자 ‘C’를 ‘*’로 바꾸기 때문에 최종 결과는 ‘B*DX’가 된다.",
+    "explanation": "먼저 SUBSTR 함수는 문자열 'ABCDXYZ'에서 두 번째 문자부터 4개의 문자를 잘라내므로 결과는 'BCDX'가 된다. 이어서 REPLACE 함수는 이 결과에서 문자 'C'를 '*'로 바꾸기 때문에 최종 결과는 'B*DX'가 된다.",
     "chapter": "함수",
     "_source": "cbt-mock",
     "_origId": "cbt-063",
@@ -2824,7 +2799,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "2, 4, 3, 7, 12"
     ],
     "correctIndex": 0,
-    "explanation": "TAB1 테이블에는 행이 4개, TAB2 테이블에는 행이 3개가 있다. KEY 칼럼을 사용해서 INNER JOIN을 하면 같은 것만 찾는다. 따라서 TAB1와 TAB2 테이블의 KEY 칼럼에서 ‘B’와 ‘C’가 같기 때문에 2개의 행이 출력된다.",
+    "explanation": "TAB1 테이블에는 행이 4개, TAB2 테이블에는 행이 3개가 있다. KEY 칼럼을 사용해서 INNER JOIN을 하면 같은 것만 찾는다. 따라서 TAB1와 TAB2 테이블의 KEY 칼럼에서 'B'와 'C'가 같기 때문에 2개의 행이 출력된다.",
     "chapter": "관계형 DB와 SELECT",
     "_source": "cbt-mock",
     "_origId": "cbt-065",
@@ -2923,7 +2898,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "특정 회원ID의 이름과 집전화를 알려면 회원과 회원연락처 테이블만 조인하면 된다."
     ],
     "correctIndex": 0,
-    "explanation": "특정 회원ID를 토대로 회원연락처와 회원연락처이력만 조인해도 원하는 결과를 얻을 수 있다. 단, 회원명이나 나이가 추가로 필요하다면 회원 테이블도 조인을 해야 한다.회원과 회원연락처이력 테이블 사이에는 적절한 조인 컬럼이 없기 때문에 카티션 곱이 발생할 수 있다.IE 표기법에서 비식별관계는 점선으로 확인할 수 있다.",
+    "explanation": "특정 회원ID를 토대로 회원연락처와 회원연락처이력만 조인해도 원하는 결과를 얻을 수 있다. 단, 회원명이나 나이가 추가로 필요하다면 회원 테이블도 조인을 해야 한다. 회원과 회원연락처이력 테이블 사이에는 적절한 조인 컬럼이 없기 때문에 카티션 곱이 발생할 수 있다. IE 표기법에서 비식별관계는 점선으로 확인할 수 있다.",
     "chapter": "조인",
     "_source": "cbt-mock",
     "_origId": "cbt-067",
@@ -2971,7 +2946,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "4"
     ],
     "correctIndex": 1,
-    "explanation": "두 테이블을 FULL OUTER JOIN ON (A.ID = B.ID)한 결과는 다음과 같다. 그다음 WHERE 절에 의해 (1, NULL)과 (NULL, 4)가 반환되므로 답은 2건이 된다.",
+    "explanation": "FULL OUTER JOIN 결과는 (1, NULL), (2, 2), (3, 3), (NULL, 4) 네 행이다. WHERE 에서 A.ID 나 B.ID 가 NULL 인 행, 즉 한쪽에만 있는 (1, NULL) 과 (NULL, 4) 만 남으므로 2건이다(②).",
     "chapter": "표준 조인",
     "_source": "cbt-mock",
     "_origId": "cbt-069",
@@ -3013,31 +2988,6 @@ export const AI_MOCK: QuizQuestion[] = [
             "3"
           ],
           [
-            "4"
-          ]
-        ]
-      },
-      {
-        "type": "table",
-        "headers": [
-          "ID(A 테이블)",
-          "ID(B 테이블)"
-        ],
-        "rows": [
-          [
-            "1",
-            "NULL"
-          ],
-          [
-            "2",
-            "2"
-          ],
-          [
-            "3",
-            "3"
-          ],
-          [
-            "NULL",
             "4"
           ]
         ]
@@ -3196,7 +3146,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "위치에 상관없이 선수의 영문 이름에 A를 포함하는 선수들의 이름"
     ],
     "correctIndex": 0,
-    "explanation": "“_” 와 “%”는 와일드카드(WILD CARD)로 하나의 글자 또는 모든 문자를 대신하여 사용이 되므로 두 번째 문자가 대문자 A인 경우만 출력된다.",
+    "explanation": "\"_\" 와 \"%\"는 와일드카드(WILD CARD)로 하나의 글자 또는 모든 문자를 대신하여 사용이 되므로 두 번째 문자가 대문자 A인 경우만 출력된다.",
     "chapter": "WHERE",
     "_source": "cbt-mock",
     "_origId": "cbt-076",
@@ -3310,7 +3260,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "DELETE는 ROLLBACK이 불가능하다."
     ],
     "correctIndex": 0,
-    "explanation": "• DELETE는 DML로 ROLLBACK이 가능하며 실행 시 테이블 자체는 남아있다.• TRUNCATE는 DDL로 ROLLBACK이 불가하며, 실행 시 테이블을 초기 상태로 되돌린다(테이블 구조 자체는 남아있음).• DROP은 DDL로 ROLLBACK도 불가능하고 테이블 구조 자체를 삭제한다.",
+    "explanation": "• DELETE는 DML로 ROLLBACK이 가능하며 실행 시 테이블 자체는 남아있다. • TRUNCATE는 DDL로 ROLLBACK이 불가하며, 실행 시 테이블을 초기 상태로 되돌린다(테이블 구조 자체는 남아있음). • DROP은 DDL로 ROLLBACK도 불가능하고 테이블 구조 자체를 삭제한다.",
     "chapter": "DCL·TCL",
     "_source": "cbt-mock",
     "_origId": "cbt-079",
@@ -3345,26 +3295,6 @@ export const AI_MOCK: QuizQuestion[] = [
         "code": "create unique index 주문_pk on 주문 (주문번호);\ncreate index 주문_ind11 on 주문 (주문자명);\ncreate index 주문_ind12 on 주문 (주문일자, 주문금액);"
       }
     ]
-  },
-  {
-    "id": 10925,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "1과목",
-    "number": 126,
-    "title": "다음 중 정보시스템을 모델링할 때 세 가지 관점에 해당하지 않는 것은?",
-    "options": [
-      "업무가 어떤 데이터와 관련이 있는지 분석",
-      "업무에서 실제로 하는 일은 무엇인지 또는 무엇을 해야 하는지 분석",
-      "업무를 처리할 수 있는 프로그램 구성을 어떻게 해야 하는지 분석",
-      "업무에서 처리하는 일의 방법에 따라 데이터가 어떻게 영향을 받는지 분석"
-    ],
-    "correctIndex": 2,
-    "explanation": "모델링을 할 때의 세 가지 관점은 데이터에 대한 관점, 프로세스에 대한 관점, 그리고 데이터와 프로세스가 서로 연관성이 표현되는 상관 관점이다",
-    "chapter": "데이터 모델 개념",
-    "_source": "cbt-mock",
-    "_origId": "cbt-081",
-    "_cbtOrigNo": 81
   },
   {
     "id": 10926,
@@ -3460,7 +3390,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "리뷰 테이블의 식별자는 고객ID + 리뷰번호 조합이다."
     ],
     "correctIndex": 2,
-    "explanation": "리뷰 테이블의 식별자는 고객ID + 리뷰번호 조합으로 구성된 복합 식별자이다. 이 중 고객ID는 외래키로 다른 엔터티(CUSTOMER)의 PK를 참조하는 외부 식별자이며, 리뷰번호는 REVIEW 테이블 내부에서 생성된 값으로 내부 식별자이다. 따라서 “고객ID가 내부 식별자”라는 ③의 설명은 잘못되었다.",
+    "explanation": "리뷰 테이블의 식별자는 고객ID + 리뷰번호 조합으로 구성된 복합 식별자이다. 이 중 고객ID는 외래키로 다른 엔터티(CUSTOMER)의 PK를 참조하는 외부 식별자이며, 리뷰번호는 REVIEW 테이블 내부에서 생성된 값으로 내부 식별자이다. 따라서 \"고객ID가 내부 식별자\"라는 ③의 설명은 잘못되었다.",
     "chapter": "식별자",
     "_source": "cbt-mock",
     "_origId": "cbt-087",
@@ -3600,7 +3530,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "데이터 모델링"
     ],
     "correctIndex": 1,
-    "explanation": "논리적 데이터 모델링의 결과로 얻어지는 논리 데이터 모델은 데이터 모델링이 최종적으로 완료된 상태라고 정의할 수 있다. 즉 물리적인 스키마 설계를 하기 전 단계의 ‘데이터 모델’ 상태를 일컫는 말이다.",
+    "explanation": "논리적 데이터 모델링의 결과로 얻어지는 논리 데이터 모델은 데이터 모델링이 최종적으로 완료된 상태라고 정의할 수 있다. 즉 물리적인 스키마 설계를 하기 전 단계의 '데이터 모델' 상태를 일컫는 말이다.",
     "chapter": "데이터 모델 개념",
     "_source": "cbt-mock",
     "_origId": "cbt-093",
@@ -3640,7 +3570,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "450"
     ],
     "correctIndex": 1,
-    "explanation": "ROUND는 반올림 함수이며, 두 번째 인자의 값이 마이너스(-)일 경우에는 정수부에서 두 자리를 남기고 반올림한다는 의미이다. 즉, 456.789에서 정수부 456중 -2는 56에 해당하고 이 위치에서 반올림하면 500이 된다.• ROUND 자릿수가 양수일 경우 : 소수점 N번째 자리까지 반올림 → ROUND(456.789, 1) = 456.8• ROUND 자릿수가 0일 경우 : 정수로 반올림 → ROUND(456.789, 0) = 457• ROUND 자릿수가 음수일 경우 → 정수부의 자릿수를 기준으로 반올림",
+    "explanation": "ROUND는 반올림 함수이며, 두 번째 인자의 값이 마이너스(-)일 경우에는 정수부에서 두 자리를 남기고 반올림한다는 의미이다. 즉, 456.789에서 정수부 456중 -2는 56에 해당하고 이 위치에서 반올림하면 500이 된다. • ROUND 자릿수가 양수일 경우 : 소수점 N번째 자리까지 반올림 → ROUND(456.789, 1) = 456.8 • ROUND 자릿수가 0일 경우 : 정수로 반올림 → ROUND(456.789, 0) = 457 • ROUND 자릿수가 음수일 경우 → 정수부의 자릿수를 기준으로 반올림",
     "chapter": "함수",
     "_source": "cbt-mock",
     "_origId": "cbt-095",
@@ -3714,7 +3644,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "PARTITION BY 절이 없으면 전체 행을 대상으로 진행한다."
     ],
     "correctIndex": 0,
-    "explanation": "GROUP BY는 특정 컬럼 값을 기준으로 행을 그룹화하여, 집계된 결과만 출력하므로 출력 행 수가 줄어든다.반면, 윈도우 함수는 행 수를 줄이지 않고, 각 행에 대해 집계 결과나 순위 등의 값을 추가로 계산한다.즉, PARTITION BY는 GROUP BY처럼 데이터를 그룹으로 나누는 역할을 하지만, 출력 행 수는 유지된다는 점에서 GROUP BY와는 처리 방식이 다르다.",
+    "explanation": "GROUP BY는 특정 컬럼 값을 기준으로 행을 그룹화하여, 집계된 결과만 출력하므로 출력 행 수가 줄어든다. 반면, 윈도우 함수는 행 수를 줄이지 않고, 각 행에 대해 집계 결과나 순위 등의 값을 추가로 계산한다. 즉, PARTITION BY는 GROUP BY처럼 데이터를 그룹으로 나누는 역할을 하지만, 출력 행 수는 유지된다는 점에서 GROUP BY와는 처리 방식이 다르다.",
     "chapter": "윈도우 함수",
     "_source": "cbt-mock",
     "_origId": "cbt-098",
@@ -3760,7 +3690,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "두 집합 간 중복이 없다면 UNION, UNION ALL 모두 동일한 결과를 출력한다."
     ],
     "correctIndex": 0,
-    "explanation": "집합 연산자 이용 시 ORDER BY는 전체 집합 결과에 대해 한 번만 사용해야 하므로 마지막 SELECT 문 뒤에 작성된다.UNION ALL은 중복 제거 및 정렬을 수행하지 않지만, 나머지 UNION, MINUS, INTERSECT 집합 연산자는 모두 중복 제거 및 정렬을 수행한다.",
+    "explanation": "집합 연산자 이용 시 ORDER BY는 전체 집합 결과에 대해 한 번만 사용해야 하므로 마지막 SELECT 문 뒤에 작성된다. UNION ALL은 중복 제거 및 정렬을 수행하지 않지만, 나머지 UNION, MINUS, INTERSECT 집합 연산자는 모두 중복 제거 및 정렬을 수행한다.",
     "chapter": "ORDER BY",
     "_source": "cbt-mock",
     "_origId": "cbt-100",
@@ -3800,7 +3730,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "식별관계는 부모 엔터티의 주식별자 속성을 자식 엔터티의 식별자에 포함한다."
     ],
     "correctIndex": 3,
-    "explanation": "①, ②, ④는 식별관계에 대한 설명이고 ③은 비식별관계에 대한 설명이다. 교재에서는 식별자의 특징으로 다른 엔터티에 “이전”이 필요하다고 설명하고 있으며, 비식별자의 특징으로는 다른 엔터티에 “차단”이 필요하다고설명하고 있다.",
+    "explanation": "①, ②, ④는 식별관계에 대한 설명이고 ③은 비식별관계에 대한 설명이다. 교재에서는 식별자의 특징으로 다른 엔터티에 \"이전\"이 필요하다고 설명하고 있으며, 비식별자의 특징으로는 다른 엔터티에 \"차단\"이 필요하다고설명하고 있다.",
     "chapter": "엔터티",
     "_source": "cbt-mock",
     "_origId": "cbt-102",
@@ -3820,7 +3750,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "테이블이 삭제되어도 뷰는 정상 실행된다."
     ],
     "correctIndex": 3,
-    "explanation": "뷰(View)는 가상 테이블로 데이터를 저장하지 않으며, SELECT 문을 통해정의된다.단일 테이블 기반의 단순 뷰는 DML(INSERT, UPDATE, DELETE) 작업이 가능하지만, 복합 뷰는 제약이 있어 일부 또는 모든 DML 작업이 제한된다. 기본 테이블이 삭제되면 뷰는 더이상 정상적으로 작동하지 않으며, 실행 시 오류가 발생한다. 따라서 ④는 뷰의 특성에 어긋나므로 옳지 않은 설명이다.",
+    "explanation": "뷰(View)는 가상 테이블로 데이터를 저장하지 않으며, SELECT 문을 통해정의된다. 단일 테이블 기반의 단순 뷰는 DML(INSERT, UPDATE, DELETE) 작업이 가능하지만, 복합 뷰는 제약이 있어 일부 또는 모든 DML 작업이 제한된다. 기본 테이블이 삭제되면 뷰는 더이상 정상적으로 작동하지 않으며, 실행 시 오류가 발생한다. 따라서 ④는 뷰의 특성에 어긋나므로 옳지 않은 설명이다.",
     "chapter": "관계형 DB와 SELECT",
     "_source": "cbt-mock",
     "_origId": "cbt-103",
@@ -3840,7 +3770,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "비식별관계이며 DEPARTMENT 는 STUDENT의 보조식별자이다."
     ],
     "correctIndex": 1,
-    "explanation": "DEPARTMENT와 STUDENT 테이블은 식별 관계이며, 이는 IE 표기법에서는 두 엔터티 사이의 관계선을 실선으로 표현하고, Barker 표기법에서는 자식 엔터티(STUDENT) 쪽에 bar(|) 기호로 나타낸다.식별 관계란 부모 테이블의 식별자(PK)가 자식 테이블의 식별자(PK)의 일부로 사용되는 관계를 의미한다. 이때 자식 테이블의 식별자(PK)는 NOT NULL이며 UNIQUE한 특성을 가지므로, 해당 값은 반드시 입력되어야 한다.",
+    "explanation": "DEPARTMENT와 STUDENT 테이블은 식별 관계이며, 이는 IE 표기법에서는 두 엔터티 사이의 관계선을 실선으로 표현하고, Barker 표기법에서는 자식 엔터티(STUDENT) 쪽에 bar(|) 기호로 나타낸다. 식별 관계란 부모 테이블의 식별자(PK)가 자식 테이블의 식별자(PK)의 일부로 사용되는 관계를 의미한다. 이때 자식 테이블의 식별자(PK)는 NOT NULL이며 UNIQUE한 특성을 가지므로, 해당 값은 반드시 입력되어야 한다.",
     "chapter": "식별자",
     "_source": "cbt-mock",
     "_origId": "cbt-104",
@@ -3906,7 +3836,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "0"
     ],
     "correctIndex": 0,
-    "explanation": "CUSTOMER_ID 별로 그룹화하면 A, B, C 3행이 나오게 되고 각각 SUM(AMOUNT) 값은 A = 2500, B = 1500, C = NULL이다.HAVING에서 집계에 대한 필터링 조건에 따라 B와 C는 출력되지 않고 A = 2500만 출력되므로 1행만 나오게 된다.",
+    "explanation": "CUSTOMER_ID 별로 그룹화하면 A, B, C 3행이 나오게 되고 각각 SUM(AMOUNT) 값은 A = 2500, B = 1500, C = NULL이다. HAVING에서 집계에 대한 필터링 조건에 따라 B와 C는 출력되지 않고 A = 2500만 출력되므로 1행만 나오게 된다.",
     "chapter": "GROUP BY·HAVING",
     "_source": "cbt-mock",
     "_origId": "cbt-107",
@@ -4096,7 +4026,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "SCOTT"
     ],
     "correctIndex": 2,
-    "explanation": "KING을 기준으로 계층 전개를 시작하고 PRIOR EMPNO = MGR 조건에 맞게 전개 시 아래와 같이 전개된다.따라서 FORD는 계층 전개 조건에 일치하지 않으므로 포함되지 않는다.",
+    "explanation": "KING 에서 시작해 PRIOR EMPNO = MGR(부하 방향)으로 펼치면 KING(LEVEL 1) → BLAKE·CLARK(2) → BLAKE 아래 SCOTT(3) → SCOTT 아래 JAMES(4), CLARK 아래 JONES(3) → JONES 아래 SMITH(4) 가 나온다. FORD 는 MGR 이 NULL 이라 누구의 부하도 아니어서 KING 아래로 이어지지 않고, START WITH 는 KING 만 루트로 잡으므로 결과에 없다(③).",
     "chapter": "계층형 질의",
     "_source": "cbt-mock",
     "_origId": "cbt-112",
@@ -4156,51 +4086,6 @@ export const AI_MOCK: QuizQuestion[] = [
             "NULL"
           ]
         ]
-      },
-      {
-        "type": "table",
-        "headers": [
-          "LEVEL",
-          "ENAME",
-          "MGR"
-        ],
-        "rows": [
-          [
-            "1",
-            "KING",
-            "NULL"
-          ],
-          [
-            "2",
-            "BLAKE",
-            "1001"
-          ],
-          [
-            "2",
-            "CLARK",
-            "1001"
-          ],
-          [
-            "3",
-            "SCOTT",
-            "1002"
-          ],
-          [
-            "3",
-            "JONES",
-            "1003"
-          ],
-          [
-            "4",
-            "JAMES",
-            "1006"
-          ],
-          [
-            "4",
-            "SMITH",
-            "1004"
-          ]
-        ]
       }
     ]
   },
@@ -4244,7 +4129,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "0"
     ],
     "correctIndex": 1,
-    "explanation": "조인은 두 테이블씩 발생한다.T1 LEFT OUTER JOIN T2 ON T1.COL = T2.COL 결과는 다음과 같다.위 결과와 T3을 LEFT OUTER JOIN 한다( R1 LEFT OUTER JOIN T3 ON (R1.COL = T3.COL).이후 T2.COL이 NULL이 아닌 대상만 추출하므로 총 2행이 출력된다.",
+    "explanation": "조인은 두 테이블씩 차례로 한다. T1 LEFT JOIN T2 → (1, 1), (2, 2), (3, NULL). 이 결과에 T3 를 LEFT JOIN → (1, 1, 1), (2, 2, NULL), (3, NULL, NULL). 마지막으로 WHERE T2.COL IS NOT NULL 이 T2 쪽이 NULL 인 세 번째 행을 지우므로 2건이다(②).",
     "chapter": "표준 조인",
     "_source": "cbt-mock",
     "_origId": "cbt-114",
@@ -4304,52 +4189,6 @@ export const AI_MOCK: QuizQuestion[] = [
             "NULL"
           ],
           [
-            "NULL"
-          ]
-        ]
-      },
-      {
-        "type": "table",
-        "headers": [
-          "T1.COL",
-          "T2.COL"
-        ],
-        "rows": [
-          [
-            "1",
-            "1"
-          ],
-          [
-            "2",
-            "2"
-          ],
-          [
-            "3",
-            "NULL"
-          ]
-        ]
-      },
-      {
-        "type": "table",
-        "headers": [
-          "T1.COL",
-          "T2.COL",
-          "T3.COL"
-        ],
-        "rows": [
-          [
-            "1",
-            "1",
-            "1"
-          ],
-          [
-            "2",
-            "2",
-            "NULL"
-          ],
-          [
-            "3",
-            "NULL",
             "NULL"
           ]
         ]
@@ -4416,7 +4255,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "보이스-코드 정규화 - 4차정규화 대상"
     ],
     "correctIndex": 1,
-    "explanation": "결정자 중 일부 속성에만 함수 종속성을 가지고 있는 ‘Partial Dependency Attribute’를 갖는 것은 2차정규형을 위반한 사례에 해당한다. 즉 1차정규형이면서 2차정규화의 대상이 된다.",
+    "explanation": "결정자 중 일부 속성에만 함수 종속성을 가지고 있는 'Partial Dependency Attribute'를 갖는 것은 2차정규형을 위반한 사례에 해당한다. 즉 1차정규형이면서 2차정규화의 대상이 된다.",
     "chapter": "속성",
     "_source": "cbt-mock",
     "_origId": "cbt-117",
@@ -4461,7 +4300,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "75",
       "5025",
       "오류 발생",
-      "‘75’"
+      "'75'"
     ],
     "correctIndex": 0,
     "explanation": "TO_NUMBER('0050') 은 문자열을 숫자 50 으로 바꾸므로 50 + 25 = 75 이고 결과는 숫자형이다(①). 문자열 연결이 아니라서 5025(②)가 되지 않고, 오류도 나지 않으며(③), 문자열 '75'(④)도 아니다.",
@@ -4965,7 +4804,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "추상적 데이터 모델링"
     ],
     "correctIndex": 2,
-    "explanation": "•전사적 관점에서 기업의 데이터를 모델링한다. •추상화 수준이 가장 높은 모델링이다. •계층형 데이터 모델, 네트워크 모델, 관계형 모델에 관계없이 업무 측면에서 모델링을 한다.",
+    "explanation": "• 전사적 관점에서 기업의 데이터를 모델링한다. • 추상화 수준이 가장 높은 모델링이다. • 계층형 데이터 모델, 네트워크 모델, 관계형 모델에 관계없이 업무 측면에서 모델링을 한다.",
     "chapter": "데이터 모델 개념",
     "_source": "cbt-mock",
     "_origId": "cbt-135",
@@ -4991,7 +4830,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "0"
     ],
     "correctIndex": 0,
-    "explanation": "EXISTS는 서브쿼리의 결과가 존재하는지만 판단하며, 실제 반환되는 값은 중요하지 않다. 이 쿼리는 EMPLOYEE 테이블에서 각 직원의 EMP_ID를 SALARY 테이블과 비교하여, 해당 EMP_ID가 SALARY에 존재하고 AMOUNT가 NULL이 아닌 경우만 포함시킨다. 메인 쿼리의 각 행에 대해 서브쿼리가 다음과 같이 평가된다.• EMP_ID = 1 → SALARY에 EMP_ID=1, AMOUNT=3000 → 조건 만족 → 포함• EMP_ID = 2 → SALARY에 EMP_ID=2, AMOUNT=NULL → 조건 불만족 → 제외• EMP_ID = 3 → SALARY에 EMP_ID=3 없음 → 조건 불만족 → 제외따라서 결과는 EMP_ID=1 (Kim) 1건이며, 정답은 ①이다.",
+    "explanation": "EXISTS는 서브쿼리의 결과가 존재하는지만 판단하며, 실제 반환되는 값은 중요하지 않다. 이 쿼리는 EMPLOYEE 테이블에서 각 직원의 EMP_ID를 SALARY 테이블과 비교하여, 해당 EMP_ID가 SALARY에 존재하고 AMOUNT가 NULL이 아닌 경우만 포함시킨다. 메인 쿼리의 각 행에 대해 서브쿼리가 다음과 같이 평가된다. • EMP_ID = 1 → SALARY에 EMP_ID=1, AMOUNT=3000 → 조건 만족 → 포함 • EMP_ID = 2 → SALARY에 EMP_ID=2, AMOUNT=NULL → 조건 불만족 → 제외 • EMP_ID = 3 → SALARY에 EMP_ID=3 없음 → 조건 불만족 → 제외따라서 결과는 EMP_ID=1 (Kim) 1건이며, 정답은 ①이다.",
     "chapter": "서브쿼리",
     "_source": "cbt-mock",
     "_origId": "cbt-136",
@@ -5038,19 +4877,6 @@ export const AI_MOCK: QuizQuestion[] = [
           [
             "2",
             "NULL"
-          ]
-        ]
-      },
-      {
-        "type": "table",
-        "headers": [
-          "EMP_ID",
-          "NAME"
-        ],
-        "rows": [
-          [
-            "1",
-            "Kim"
           ]
         ]
       }
@@ -5404,7 +5230,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "논리적으로 연관된 작업을 그룹핑하여 처리 가능하다."
     ],
     "correctIndex": 1,
-    "explanation": "Commit과 Rollback의 장점 •데이터 무결성 보장 •영구적인 변경을 하기 전에 데이터의 변경 사항 확인 가능 •논리적으로 연관된 작업을 그룹핑하여 처리 가능",
+    "explanation": "Commit과 Rollback의 장점 • 데이터 무결성 보장 • 영구적인 변경을 하기 전에 데이터의 변경 사항 확인 가능 • 논리적으로 연관된 작업을 그룹핑하여 처리 가능",
     "chapter": "DCL·TCL",
     "_source": "cbt-mock",
     "_origId": "cbt-149",
@@ -5575,7 +5401,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "NULL"
     ],
     "correctIndex": 1,
-    "explanation": "COALESCE 함수는 NULL이 아닌 첫 번째 값을 리턴하는 함수이다. 즉, 위의 문제에서 첫 번째는 NULL이고 두 번째는 ‘2’이다. 따라서 ‘2’가 리턴된다.",
+    "explanation": "COALESCE 함수는 NULL이 아닌 첫 번째 값을 리턴하는 함수이다. 즉, 위의 문제에서 첫 번째는 NULL이고 두 번째는 '2'이다. 따라서 '2'가 리턴된다.",
     "chapter": "함수",
     "_source": "cbt-mock",
     "_origId": "cbt-155",
@@ -5679,7 +5505,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "0"
     ],
     "correctIndex": 0,
-    "explanation": "이 SQL은 EMPLOYEE 테이블을 기준으로 DEPARTMENT 테이블과 DEPT_ID로 LEFT JOIN한다.LEFT JOIN이므로 EMPLOYEE의 모든 행이 유지되고, 매칭되지 않는 DEPARTMENT는 NULL로 채워진다. 조인 결과는 다음과 같다.이후 WHERE D.LOC = ‘SEOUL’ 조건을 적용하면, D.LOC이 NULL인 행은 제외되므로 결과적으로 SEOUL 지역에 속한 부서(DEPT_ID=10)에 근무하는 직원 1명만 조회된다. 따라서 최종 결과는 1행이며, 정답은 ①이다.",
+    "explanation": "EMPLOYEE 를 기준으로 LEFT JOIN 하면 (1, 10, 10, SEOUL), (2, 20, NULL, NULL), (3, 30, 30, BUSAN) 세 행이 된다. 그다음 WHERE D.LOC = 'SEOUL' 은 조인이 끝난 뒤 행을 거르므로 D.LOC 이 NULL 인 2번 행과 BUSAN 인 3번 행이 빠지고 1행만 남는다(①). LEFT JOIN 이라도 오른쪽 테이블 조건을 WHERE 에 쓰면 INNER JOIN 처럼 된다.",
     "chapter": "표준 조인",
     "_source": "cbt-mock",
     "_origId": "cbt-159",
@@ -5728,35 +5554,6 @@ export const AI_MOCK: QuizQuestion[] = [
             "BUSAN"
           ]
         ]
-      },
-      {
-        "type": "table",
-        "headers": [
-          "E.ID",
-          "E.DEPT_ID",
-          "D.DEPT_ID",
-          "D.LOC"
-        ],
-        "rows": [
-          [
-            "1",
-            "10",
-            "10",
-            "SEOUL"
-          ],
-          [
-            "2",
-            "20",
-            "NULL",
-            "NULL"
-          ],
-          [
-            "3",
-            "30",
-            "30",
-            "BUSAN"
-          ]
-        ]
       }
     ]
   },
@@ -5774,7 +5571,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "업무상 관리가 필요한 관심사에 해당된다."
     ],
     "correctIndex": 0,
-    "explanation": "엔터티(Entity)의 3가지 공통점은 다음과 같다. •개념, 사건, 사람, 장소 등과 같이 명사이다. •비즈니스 프로세스에서 관리되어야 하는 정보이다. •저장이 필요한 어떤 것이다.",
+    "explanation": "엔터티(Entity)의 3가지 공통점은 다음과 같다. • 개념, 사건, 사람, 장소 등과 같이 명사이다. • 비즈니스 프로세스에서 관리되어야 하는 정보이다. • 저장이 필요한 어떤 것이다.",
     "chapter": "엔터티",
     "_source": "cbt-mock",
     "_origId": "cbt-160",
@@ -5862,7 +5659,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "오류 발생"
     ],
     "correctIndex": 2,
-    "explanation": "Oracle 11g 버전에서의 상위 n개 데이터를 가져오려면 먼저 인라인 뷰로 내림차순 정렬된 가상의 테이블을 만든 후 ROWNUM으로 필터링한다.즉, PRICE 기준 내림차 순 정렬해서 가격이 가장 높은 금액 중 하나를 ROWNUM = 1로 추출하는 쿼리이다. 따라서 답은 ITEM C이다.",
+    "explanation": "Oracle 11g 버전에서의 상위 n개 데이터를 가져오려면 먼저 인라인 뷰로 내림차순 정렬된 가상의 테이블을 만든 후 ROWNUM으로 필터링한다. 즉, PRICE 기준 내림차 순 정렬해서 가격이 가장 높은 금액 중 하나를 ROWNUM = 1로 추출하는 쿼리이다. 따라서 답은 ITEM C이다.",
     "chapter": "ORDER BY",
     "_source": "cbt-mock",
     "_origId": "cbt-164",
@@ -5930,7 +5727,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "지속성(Durability) : 트랜잭션이 성공적으로 수행되면 그 결과는 시스템이 재시작 되더라도 롤백될 수 있다."
     ],
     "correctIndex": 3,
-    "explanation": "지속성(Durability)은 트랜잭션이 커밋된 후에는 그 결과가 영구적으로 반영되어야 함을 의미한다. 따라서 “롤백될 수 있다”는 설명은 지속성의 정의에 위배되며 틀린 설명이다.",
+    "explanation": "지속성(Durability)은 트랜잭션이 커밋된 후에는 그 결과가 영구적으로 반영되어야 함을 의미한다. 따라서 \"롤백될 수 있다\"는 설명은 지속성의 정의에 위배되며 틀린 설명이다.",
     "chapter": "속성",
     "_source": "cbt-mock",
     "_origId": "cbt-166",
@@ -5950,7 +5747,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "2025-03-02 20:02:00"
     ],
     "correctIndex": 1,
-    "explanation": "Oracle에서 날짜형에 +1을 하면 day(일, 하루)로 인식한다.예를 들어 SYSDATE의 결과가 2025-06-09 12:12:12라면 SYSDATE +1은 2025-06-10 12:12:12이 반환된다.1/24는 한 시간, 1/24/60은 1분, 1/24/60/60은 1초를 의미하므로 2/24/60/60은 해당 날짜에 2초를 추가하라는 의미이다.이후 날짜형 값을 다시 TO_CHAR로 포매팅하면서 YYYY-MM-DD HH24:MI:SS 형태로 출력하므로 정답은 ②가 된다.",
+    "explanation": "Oracle에서 날짜형에 +1을 하면 day(일, 하루)로 인식한다. 예를 들어 SYSDATE의 결과가 2025-06-09 12:12:12라면 SYSDATE +1은 2025-06-10 12:12:12이 반환된다.1/24는 한 시간, 1/24/60은 1분, 1/24/60/60은 1초를 의미하므로 2/24/60/60은 해당 날짜에 2초를 추가하라는 의미이다. 이후 날짜형 값을 다시 TO_CHAR로 포매팅하면서 YYYY-MM-DD HH24:MI:SS 형태로 출력하므로 정답은 ②가 된다.",
     "chapter": "함수",
     "_source": "cbt-mock",
     "_origId": "cbt-167",
@@ -6114,7 +5911,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "'20240305'"
     ],
     "correctIndex": 2,
-    "explanation": "이 SQL은 함수가 중첩되어 있으므로 내부 함수인 TO_DATE(‘20240305’, ‘YYYYMMDD’)가 먼저 실행된다. 이 함수는 문자열 ‘20240305’를 날짜 타입으로 변환하여 2024년 3월 5일이라는 날짜 값을 생성한다. 시분초는 별도로 지정하지 않았기 때문에 기본적으로 00:00:00이 적용된다. 그다음 TO_CHAR 함수가 이 날짜 값을 ‘YYYY.MM.DD’ 형식으로 문자로 변환하게 되며, 최종 출력 결과는 ‘2024.03.05.’가 된다. 따라서 정답은 ③이다.",
+    "explanation": "이 SQL은 함수가 중첩되어 있으므로 내부 함수인 TO_DATE('20240305', 'YYYYMMDD')가 먼저 실행된다. 이 함수는 문자열 '20240305'를 날짜 타입으로 변환하여 2024년 3월 5일이라는 날짜 값을 생성한다. 시분초는 별도로 지정하지 않았기 때문에 기본적으로 00:00:00이 적용된다. 그다음 TO_CHAR 함수가 이 날짜 값을 'YYYY.MM.DD' 형식으로 문자로 변환하게 되며, 최종 출력 결과는 '2024.03.05.'가 된다. 따라서 정답은 ③이다.",
     "chapter": "함수",
     "_source": "cbt-mock",
     "_origId": "cbt-174",
@@ -6134,13 +5931,13 @@ export const AI_MOCK: QuizQuestion[] = [
     "number": 217,
     "title": "다음 테이블에 아래의 쿼리를 순서대로 실행할 경우, 그 결과에 대한 설명으로 올바른 것을 고르면?",
     "options": [
-      "(ㄱ)은 Oracle일 경우 COL2에 NULL이 입력되고, SQL Server는 ‘’(공백)이 입력된다.",
+      "(ㄱ)은 Oracle일 경우 COL2에 NULL이 입력되고, SQL Server는 ''(공백)이 입력된다.",
       "(ㄱ)이 성공했을 때 (ㄴ)은 Oracle은 1건 조회되고, SQL Server는 조회되지 않는다.",
       "(ㄱ)이 성공했을 때 (ㄷ)은 Oracle은 0건 변경되고, SQL Server는 1건 변경된다.",
       "(ㄹ)은 Oracle에서만 실행 가능하다."
     ],
     "correctIndex": 0,
-    "explanation": "Oracle은 INSERT나 UPDATE할 때 내부적으로 ‘’(공백) 데이터를 NULL로 처리한다. 반면 SQL Server는 NULL과 ‘’(공백)을 별개로 본다.즉, ㄱ을 실행하면 Oracle은 COL2에 NULL로 처리되고, SQL Server는 COL2에 ‘’(공백)이 입력된다. INSERT가 성공했을 때 ㄴ에 대해 Oracle은 0건 출력되며, SQL Server는 1건 출력된다. INSERT가 성공했을 때 ㄷ에 대해 Oracle은 1건 변경되며, SQL Server는 0건 변경된다(‘’로 들어있어 IS NULL로 조회가 안되기 때문). 마지막 DELETE FROM TAB;은 둘 다 잘 수행된다.",
+    "explanation": "Oracle은 INSERT나 UPDATE할 때 내부적으로 ''(공백) 데이터를 NULL로 처리한다. 반면 SQL Server는 NULL과 ''(공백)을 별개로 본다. 즉, ㄱ을 실행하면 Oracle은 COL2에 NULL로 처리되고, SQL Server는 COL2에 ''(공백)이 입력된다. INSERT가 성공했을 때 ㄴ에 대해 Oracle은 0건 출력되며, SQL Server는 1건 출력된다. INSERT가 성공했을 때 ㄷ에 대해 Oracle은 1건 변경되며, SQL Server는 0건 변경된다(''로 들어있어 IS NULL로 조회가 안되기 때문). 마지막 DELETE FROM TAB;은 둘 다 잘 수행된다.",
     "chapter": "DDL",
     "_source": "cbt-mock",
     "_origId": "cbt-175",
@@ -6350,7 +6147,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "ORDER BY 1 DESC ;"
     ],
     "correctIndex": 1,
-    "explanation": "AVG와 같은 집계 함수는 WHERE 절에서 사용할 수 없다.집계 함수는 GROUP BY가 실행되어야 쓸 수 있는데 WHERE 절은 GROUP BY 이전에 실행되기 때문이다.GROUP BY 이후에 실행되는 HAVING에서는 집계 함수를 이용한 조건을 줄 수 있다.",
+    "explanation": "AVG와 같은 집계 함수는 WHERE 절에서 사용할 수 없다. 집계 함수는 GROUP BY가 실행되어야 쓸 수 있는데 WHERE 절은 GROUP BY 이전에 실행되기 때문이다. GROUP BY 이후에 실행되는 HAVING에서는 집계 함수를 이용한 조건을 줄 수 있다.",
     "chapter": "GROUP BY·HAVING",
     "_source": "cbt-mock",
     "_origId": "cbt-183",
@@ -6376,7 +6173,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "Select 영업사원, 판매월, sum(매출) from group by 영업사원, 판매월;"
     ],
     "correctIndex": 0,
-    "explanation": "영업사원별 누적 매출이므로 “partition by 영업사원”을 사용해야 한다. 그리고 unbounded preceding와 current row는 시작부터 현재행까지를 의미한다.",
+    "explanation": "영업사원별 누적 매출이므로 \"partition by 영업사원\"을 사용해야 한다. 그리고 unbounded preceding와 current row는 시작부터 현재행까지를 의미한다.",
     "chapter": "윈도우 함수",
     "_source": "cbt-mock",
     "_origId": "cbt-184",
@@ -6390,7 +6187,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "number": 227,
     "title": "다음 중 옳지 않은 것은?",
     "options": [
-      "Length(‘YOUNGJIN’) = 9",
+      "Length('YOUNGJIN') = 9",
       "CASE 문은 If - Then - Else를 구현 할 수 있다.",
       "(날짜1 - 날짜2)의 결과는 일수가 나온다.",
       "COUNT(표현식)은 표현식의 값이 NULL 값인 것을 제외한 행 수를 출력한다."
@@ -6416,7 +6213,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "GROUPING SETS((A, B), A)"
     ],
     "correctIndex": 0,
-    "explanation": "ROLLUP은 계층적 집계를 수행하므로 뒤에서 컬럼을 하나씩 제외해 가며 처리한다.• ROLLUP(A,B) → GROUP BY A,B; GROUP BY A; GROUP BY ();• CUBE(A,B) → GROUP BY A,B; GROUP BY A; GROUP BY B; GROUP BY ();• GROUPING SETS(A,B) → GROUP BY A; GROUP BY B;• GROUPING SETS((A,B), A) → GROUP BY A,B; GROUP BY A;",
+    "explanation": "ROLLUP은 계층적 집계를 수행하므로 뒤에서 컬럼을 하나씩 제외해 가며 처리한다. • ROLLUP(A,B) → GROUP BY A,B; GROUP BY A; GROUP BY (); • CUBE(A,B) → GROUP BY A,B; GROUP BY A; GROUP BY B; GROUP BY (); • GROUPING SETS(A,B) → GROUP BY A; GROUP BY B; • GROUPING SETS((A,B), A) → GROUP BY A,B; GROUP BY A;",
     "chapter": "GROUP BY·HAVING",
     "_source": "cbt-mock",
     "_origId": "cbt-186",
@@ -6462,7 +6259,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "SELECT ENAME, DNAME FROM EMP E CROSS JOIN DEPT D;"
     ],
     "correctIndex": 1,
-    "explanation": "해당 쿼리는 Oracle 전통 조인 방식으로, EMP와 DEPT를 DEPTNO 기준으로 조인하고 있다.조인조건이 명시되어 있고 외부 조인이 없으므로 이는 내부 조인(INNERJOIN)에 해당한다. ANSI 방식에서는 INNER JOIN ... ON 절을 사용해야 하며, 정답은 ②이다.USING은 조인하는 두 테이블에 같은 컬럼이 있고 이를 명시하면 자동으로 동등 조인을 해준다. 따라서 USING(컬럼) 형태로 사용하며 조인조건을 작성하지 않는다.",
+    "explanation": "해당 쿼리는 Oracle 전통 조인 방식으로, EMP와 DEPT를 DEPTNO 기준으로 조인하고 있다. 조인조건이 명시되어 있고 외부 조인이 없으므로 이는 내부 조인(INNERJOIN)에 해당한다. ANSI 방식에서는 INNER JOIN ... ON 절을 사용해야 하며, 정답은 ②이다. USING은 조인하는 두 테이블에 같은 컬럼이 있고 이를 명시하면 자동으로 동등 조인을 해준다. 따라서 USING(컬럼) 형태로 사용하며 조인조건을 작성하지 않는다.",
     "chapter": "표준 조인",
     "_source": "cbt-mock",
     "_origId": "cbt-189",
@@ -6673,7 +6470,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "sql",
-        "code": "Select c.고객명, c.연령, c.전화번호, o.주문일자,\n       o.주문총금액, o.배송지주소\nFrom 고객 c, 주문 o\nWhere o.고객번호 = c.주문번호\nAnd c.고객등급 = 'A'\nAnd c.연령 between 51 and 60\nAnd o.주문일자 between '20101201' and '20101231'"
+        "code": "Select c.고객명, c.연령, c.전화번호, o.주문일자,\n       o.주문총금액, o.배송지주소\nFrom 고객 c, 주문 o\nWhere o.고객번호 = c.고객번호\nAnd c.고객등급 = 'A'\nAnd c.연령 between 51 and 60\nAnd o.주문일자 between '20101201' and '20101231'"
       },
       {
         "type": "table",
@@ -7034,13 +6831,13 @@ export const AI_MOCK: QuizQuestion[] = [
     "number": 247,
     "title": "부서와 사원 테이블을 생성하는 SQL 문장을 수행한 후 튜플 삽입으로 두 테이블의 상태가 다음과 같을 때, 테이블 연산 수행에 대한 설명으로 올바르지 않은 것은?",
     "options": [
-      "부서 테이블에서 (2, ‘영업부’) 튜플을 삭제한다면 참조 무결성 제약조건을 위배한다.",
-      "사원 테이블에 (13, ‘강감찬’, ‘A1’) 튜플을 삽입한다면 도메인 무결성 제약조건을 위배한다.",
-      "사원 테이블에 (14, ‘김유신’, 0) 튜플을 삽입한다면 참조 무결성 제약조건을 위배한다.",
-      "부서 테이블에 (1, ‘연구부’) 튜플을 삽입한다면 참조 무결성 제약조건을 위배한다."
+      "부서 테이블에서 (2, '영업부') 튜플을 삭제한다면 참조 무결성 제약조건을 위배한다.",
+      "사원 테이블에 (13, '강감찬', 'A1') 튜플을 삽입한다면 도메인 무결성 제약조건을 위배한다.",
+      "사원 테이블에 (14, '김유신', 0) 튜플을 삽입한다면 참조 무결성 제약조건을 위배한다.",
+      "부서 테이블에 (1, '연구부') 튜플을 삽입한다면 참조 무결성 제약조건을 위배한다."
     ],
     "correctIndex": 3,
-    "explanation": "부서 테이블은 마스터 테이블이므로 사원 테이블에 없는 부서번호 등을 자유롭게 입력할 수 있다. 따라서 부서 테이블에 (1, ‘연구부’)을 입력하는 것은 참조 무결성 위배가 아니다.",
+    "explanation": "부서 테이블은 마스터 테이블이므로 사원 테이블에 없는 부서번호 등을 자유롭게 입력할 수 있다. 따라서 부서 테이블에 (1, '연구부')을 입력하는 것은 참조 무결성 위배가 아니다.",
     "chapter": "관계형 DB와 SELECT",
     "_source": "cbt-mock",
     "_origId": "cbt-206",
@@ -8639,7 +8436,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "1과목",
     "number": 304,
-    "title": "테이블 A에 대해 아래와 같은 SQL을 수행하였을 때 테이블 A의 ID ’001’에 해당하는 최종 VAL의 값이 ORACLE에서는 200, SQL Server에서는 100이 되었다. 다음 설명 중 가장 부적절한 것은? (단, AUTO COMMIT은 FALSE로 설정되어 있다)",
+    "title": "테이블 A에 대해 아래와 같은 SQL을 수행하였을 때 테이블 A의 ID '001'에 해당하는 최종 VAL의 값이 ORACLE에서는 200, SQL Server에서는 100이 되었다. 다음 설명 중 가장 부적절한 것은? (단, AUTO COMMIT은 FALSE로 설정되어 있다)",
     "options": [
       "SQL Server에서는 ROLLBACK 실행으로 인하여 UPDATE가 취소되 었으며, 최종적으로 B 테이블은 생성되지 않았다.",
       "ORACLE에서는 CREATE TABLE 문장 수행에 의해 VAL 값은 200이 되었지만, ROLLBACK 실행으로 인하여 최종적으로 B 테이블은 생성 되지 않았다.",
@@ -8875,8 +8672,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "CREATE TABLE 서비스\n(서비스번호 VARCHAR2(10) PRIMARY KEY, \n서비스명 VARCHAR2(100) NULL,\n개시일자 DATE NOT NULL  ); \n [SQL]\n(ㄱ)SELECT * FROM 서비스 WHERE 서비스번호 = 1;\n(ㄴ)INSERT INTO 서비스 VALUES ('999', '', '2015-11-11');\n(ㄷ)SELECT * FROM 서비스 WHERE 서비스명 = '';\n(ㄹ) SELECT * FROM 서비스 WHERE 서비스명 IS NULL;"
+        "type": "sql",
+        "code": "CREATE TABLE 서비스\n(서비스번호 VARCHAR2(10) PRIMARY KEY, \n서비스명 VARCHAR2(100) NULL,\n개시일자 DATE NOT NULL  ); \n [SQL]\n(ㄱ)SELECT * FROM 서비스 WHERE 서비스번호 = 1;\n(ㄴ)INSERT INTO 서비스 VALUES ('999', '', '2015-11-11');\n(ㄷ)SELECT * FROM 서비스 WHERE 서비스명 = '';\n(ㄹ) SELECT * FROM 서비스 WHERE 서비스명 IS NULL;"
       }
     ]
   },
@@ -9042,8 +8839,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "CREATE TABLE T (\n    COL VARCHAR2(10)\n);\n\nINSERT INTO T VALUES ('A' || CHR(10) || 'B');\nINSERT INTO T VALUES ('C' || CHR(10) || 'D');\n\nCOMMIT;\n\n\n<SQL>\nSELECT SUM(LENGTH(COL)) - COUNT(*)\nFROM T;"
+        "type": "sql",
+        "code": "CREATE TABLE T (\n    COL VARCHAR2(10)\n);\n\nINSERT INTO T VALUES ('A' || CHR(10) || 'B');\nINSERT INTO T VALUES ('C' || CHR(10) || 'D');\n\nCOMMIT;\n\n\n<SQL>\nSELECT SUM(LENGTH(COL)) - COUNT(*)\nFROM T;"
       }
     ]
   },
@@ -9069,8 +8866,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT TO_CHAR(TO_DATE('2015.01.10 10', 'YYYY.MM.DD HH24') + 1/24/(60/10), 'YYYY.MM.DD HH24:MI:SS') FROM DUAL;"
+        "type": "sql",
+        "code": "SELECT TO_CHAR(TO_DATE('2015.01.10 10', 'YYYY.MM.DD HH24') + 1/24/(60/10), 'YYYY.MM.DD HH24:MI:SS') FROM DUAL;"
       }
     ]
   },
@@ -9633,15 +9430,15 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 331,
-    "title": "다음 중 아래 (1), (2), (3)의 SQL에서 실행결과가 같은 것은?",
+    "title": "다음 중 아래 (1), (2), (3)의 SQL 에서 실행 결과가 같은 것끼리 묶은 것은? (단, TBL1 과 TBL2 의 ID 는 각각 중복이 없다)",
     "options": [
       "1,2,3",
       "2,3",
       "1,3",
       "1,2"
     ],
-    "correctIndex": 1,
-    "explanation": "(2) 는 LEFT OUTER JOIN 과 RIGHT OUTER JOIN 결과를 UNION 으로 합쳐 FULL OUTER JOIN 과 같은 결과를 만든다(다만 UNION 이 중복 행을 제거). (3) 은 매칭된 행과 각 테이블에만 있는 행을 UNION ALL 로 모아 같은 결과를 만들므로, 문제의 데이터 조건에서 실행 결과가 같은 것은 (2), (3) 이다. 정답은 ② 이다.",
+    "correctIndex": 0,
+    "explanation": "세 SQL 은 모두 \"양쪽에서 짝이 맞는 행 + TBL1 에만 있는 행 + TBL2 에만 있는 행\"을 만든다. (1) FULL OUTER JOIN 이 그 정의 자체이고, (2) 는 LEFT 결과(짝 + TBL1 만)와 RIGHT 결과(짝 + TBL2 만)를 UNION 으로 합치면서 겹치는 짝 행을 한 번만 남기며, (3) 은 짝 행, TBL1 에만 있는 행, TBL2 에만 있는 행을 따로 구해 UNION ALL 로 이어 붙인다. ID 에 중복이 없으므로 셋의 결과가 모두 같다(①). (ID 가 중복되면 UNION 이 같은 행을 지우는 (2) 만 달라질 수 있다.)",
     "chapter": "조인",
     "_source": "sqld-1140",
     "_origId": "sqld-0096",
@@ -9649,8 +9446,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "(1) SELECT A.ID, B.ID\n FROM TBL1 A FULL OUTER JOIN TBL2 B\nON A.ID = B.ID\n(2)  SELECT A.ID, B.ID\n FROM TBL1 A LEFT OUTER JOIN TBL2 B\n ON A.ID = B.ID\n UNION\n SELECT A.ID, B.ID\n FROM TBL1 A RIGHT OUTER JOIN TBL2 B\n ON A.ID = B.ID\n(3)  SELECT A.ID, B.ID\n FROM TBL1 A, TBL2 B\n WHERE A.ID = B.ID\n UNION ALL\n SELECT A.ID, NULL\n FROM TBL1 A\n WHERE NOT EXISTS (SELECT 1 FROM TBL2 B WHERE A.ID = B.ID)\n UNION ALL\n SELECT NULL, B.ID\n FROM TBL2 B\n WHERE NOT EXISTS (SELECT 1 FROM TBL1 A WHERE B.ID = A.ID)"
+        "type": "sql",
+        "code": "(1) SELECT A.ID, B.ID\nFROM TBL1 A FULL OUTER JOIN TBL2 B\nON A.ID = B.ID\n\n(2)  SELECT A.ID, B.ID\nFROM TBL1 A LEFT OUTER JOIN TBL2 B\nON A.ID = B.ID\nUNION\nSELECT A.ID, B.ID\nFROM TBL1 A RIGHT OUTER JOIN TBL2 B\nON A.ID = B.ID\n\n(3)  SELECT A.ID, B.ID\nFROM TBL1 A, TBL2 B\nWHERE A.ID = B.ID\nUNION ALL\nSELECT A.ID, NULL\nFROM TBL1 A\nWHERE NOT EXISTS (SELECT 1 FROM TBL2 B WHERE A.ID = B.ID)\nUNION ALL\nSELECT NULL, B.ID\nFROM TBL2 B\nWHERE NOT EXISTS (SELECT 1 FROM TBL1 A WHERE B.ID = A.ID)"
       }
     ]
   },
@@ -9976,7 +9773,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "SELECT A.일자, SUM(A.매출액) AS 누적매출액\nFROM 일자별매출 A\nGROUP BY A.일자\nORDER BY A.일자;"
     ],
     "correctIndex": 1,
-    "explanation": "④는 일자별매출액에 일자별 매출 테이블과 동일하게 출력된다.\n①,③는 작은 날짜쪽에 제일 큰 누적금액이 출력된다.\n②은 일자별매출 테이블을 Self Join하여, A Alias 쪽에 먼저 읽혔다고 가정하면 다음처럼 데이터가 \n생성될 것이다.\n1.A가 {2015.11.01, 1000} 일 때 B는 {2015.11.01, 1000} \n2. A가 {2015.11.02, 1000} 일 때 B는 {{2015.11.01, 1000}, {2015.11.02, 1000}}\n3. A가 {2015.11.03, 1000} 일 때 B는 {{2015.11.01, 1000}, {2015.11.02,1000}, {2015.11.03, 1000}}\n위의 Self Join은 Equi Join이 아닌 Range Join이므로 A의 레코드는 B의 레코드 수 만큼 증가하게 \n된다.(A * B) 그러므로 위의 3번의 경우 A는 B의 레코드 개수와 동일하게 되므로 SUM(매출금액)을 \n하면 3,000이 된다. 이런 식으로 A Alias의 모든 레코드 개수를 Scan하면 누적 값을 출력하게 된다.",
+    "explanation": "④는 일자별매출액에 일자별 매출 테이블과 동일하게 출력된다.\n①,③는 작은 날짜쪽에 제일 큰 누적금액이 출력된다.\n②은 일자별매출 테이블을 Self Join하여, A Alias 쪽에 먼저 읽혔다고 가정하면 다음처럼 데이터가 \n생성될 것이다.\n1.A가 {2015.11.01, 1000} 일 때 B는 {2015.11.01, 1000} \n2. A가 {2015.11.02, 1000} 일 때 B는 {{2015.11.01, 1000}, {2015.11.02, 1000}}\n3. A가 {2015.11.03, 1000} 일 때 B는 {{2015.11.01, 1000}, {2015.11.02,1000}, {2015.11.03, 1000}}\n위의 Self Join은 Equi Join이 아닌 Range Join이므로 A의 레코드는 B의 레코드 수 만큼 증가하게 \n된다. (A * B) 그러므로 위의 3번의 경우 A는 B의 레코드 개수와 동일하게 되므로 SUM(매출금액)을 \n하면 3,000이 된다. 이런 식으로 A Alias의 모든 레코드 개수를 Scan하면 누적 값을 출력하게 된다.",
     "chapter": "조인",
     "_source": "sqld-1140",
     "_origId": "sqld-0112",
@@ -11228,7 +11025,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "GROUP BY CUBE (자재번호, (발주처ID, 발주일자))"
     ],
     "correctIndex": 0,
-    "explanation": "집계 그룹 함수에는 ROLLUP, CUBE, GROUPING SETS 함수가 있다.문제의 결과 데이터는 (자재번호별) SUB TOTAL과 (자재번호, 발주처별) SUB TOTAL을 출력하고 있다. GROUPING SETS 함수를 사용하여 입력된 인수들에 대한 개별 집계를 구할 수 있으며, CUBE 함수의 경우는 나열된 모든 인수의 결합 가능한 집계가 출력 된다.그러므로 위의 문제에서는 GROUP BY GROUPING SETS(자재번호, (발주체D, 발주일자)) 가 되어야 한다. ",
+    "explanation": "집계 그룹 함수에는 ROLLUP, CUBE, GROUPING SETS 함수가 있다. 문제의 결과 데이터는 (자재번호별) SUB TOTAL과 (자재번호, 발주처별) SUB TOTAL을 출력하고 있다. GROUPING SETS 함수를 사용하여 입력된 인수들에 대한 개별 집계를 구할 수 있으며, CUBE 함수의 경우는 나열된 모든 인수의 결합 가능한 집계가 출력 된다. 그러므로 위의 문제에서는 GROUP BY GROUPING SETS(자재번호, (발주체D, 발주일자)) 가 되어야 한다. ",
     "chapter": "그룹 함수",
     "_source": "sqld-1140",
     "_origId": "sqld-0128",
@@ -11527,8 +11324,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "UPDATE A_User.TB_A \r\nSET col1='AAA' \r\nWHERE col2=3"
+        "type": "sql",
+        "code": "UPDATE A_User.TB_A \r\nSET col1='AAA' \r\nWHERE col2=3"
       }
     ]
   },
@@ -11573,18 +11370,12 @@ export const AI_MOCK: QuizQuestion[] = [
       "업무가 어떤 데이터와 관련이 있는지 분석"
     ],
     "correctIndex": 1,
-    "explanation": "모델링을 할 때의 세 가지 관점은 데이터에 대한 관점, 프로세스에 대한 관점, 그리고 데이터와 프로세스가 서로 연관성이 표현되는 상관 관점이다.",
+    "explanation": "모델링의 세 가지 관점은 데이터 관점(업무가 어떤 데이터와 관련 있는지, ④), 프로세스 관점(업무에서 실제로 하는 일이 무엇인지, ③), 상관 관점(일하는 방법에 따라 데이터가 어떻게 영향을 받는지, ①)이다. ② 프로그램 구성은 모델링 관점이 아니라 개발 설계의 영역이다.",
     "chapter": "데이터 모델 개념",
     "_source": "sqld-1140",
     "_origId": "sqld-0142",
     "_category": "데이터베이스 개념",
-    "_correctRate": 10,
-    "references": [
-      {
-        "type": "text",
-        "content": "모델링을 할 때의 세 가지 관점은 데이터에 대한 관점, 프로세스에 대한 관점, 그리고 데이터와 프로세스가 서로 연관성이 표현되는 상관 관점이다."
-      }
-    ]
+    "_correctRate": 10
   },
   {
     "id": 11159,
@@ -11968,8 +11759,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT PLAYER_NAME 선수명, E_PLAYER_NAME 선수영문명\nFROM PLAYER\nWHERE E_PLAYER_NMAE_LIKE '_A%';"
+        "type": "sql",
+        "code": "SELECT PLAYER_NAME 선수명, E_PLAYER_NAME 선수영문명\nFROM PLAYER\nWHERE E_PLAYER_NMAE_LIKE '_A%';"
       }
     ]
   },
@@ -12540,8 +12331,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT DEPTNO, JOB, SUM(SAL)\nFROM SQLD_73\nGROUP BY (     );"
+        "type": "sql",
+        "code": "SELECT DEPTNO, JOB, SUM(SAL)\nFROM SQLD_73\nGROUP BY (     );"
       },
       {
         "type": "table",
@@ -12618,8 +12409,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT LEVEL,\nLPAD(' ', 4 * (LEVEL-1)) || EMPNO,\nMGR, (    ) AS ISLEAF FROM SCOTT.EMP\nSTART WITH MGR IS NULL\nCONNECT BY PRIOR EMPNO = MGR;"
+        "type": "sql",
+        "code": "SELECT LEVEL,\nLPAD(' ', 4 * (LEVEL-1)) || EMPNO,\nMGR, (    ) AS ISLEAF FROM SCOTT.EMP\nSTART WITH MGR IS NULL\nCONNECT BY PRIOR EMPNO = MGR;"
       }
     ]
   },
@@ -12645,8 +12436,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT DNAME, JOB, COUNT(*) \"Total Emp\", SUM(SAL) \"Total Sal\" FROM SCOTT.EMP A, SCOTT.DEPT B\nWHERE A.DEPTNO = B.DEPTNO\nGROUP BY CUBE(DNAME,JOB);"
+        "type": "sql",
+        "code": "SELECT DNAME, JOB, COUNT(*) \"Total Emp\", SUM(SAL) \"Total Sal\" FROM SCOTT.EMP A, SCOTT.DEPT B\nWHERE A.DEPTNO = B.DEPTNO\nGROUP BY CUBE(DNAME,JOB);"
       },
       {
         "type": "table",
@@ -12792,7 +12583,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "SELECT A.BASE_DATE, A.LAST_JUKA,\nB.LAST_JUKA-A.LAST_JUKA DEBI_VAL\nFROM\n(SELECT ROWNUM ROW1,\nBASE_DATE, LAST_JUKA\nFROM TEST_A)a,\n(SELECT ROWNUM ROW1, BASE_DATE, LAST_JUKA\nFROM TEST_A\nWHERE BASE_DATE > '20230104')b\nWHERE A.ROW1 = B.ROW1;"
     ],
     "correctIndex": 0,
-    "explanation": "LAG 및 LEAD 함수를 사용하지 않고 이전 행과 다음 행의 값을 구하는 SQL문이다. 만약 LAG 함수와 LEAD 함수를 사용한다면 좀 더 쉽게 SQL 문을 작성할 수가 있다. LAG 함수는 이전 행의 값을 구하고 LEAD 함수는 다음 행의 값을 구한다.",
+    "explanation": "결과를 보면 DEBI_VAL 은 바로 다음 날 종가에서 그날 종가를 뺀 값이다(0105: 596.81 − 635.99 = −39.18). ① 은 A = 전체 행에 ROWNUM(0104 가 1번), B = 0104 이후 행에 ROWNUM(0105 가 1번)을 붙여, 같은 번호끼리 조인하면 A 의 하루 뒤 날짜가 B 에 붙는다. 여기서 A.BASE_DATE > '20230104' 로 0105~0108 만 남기면 0105·0106·0107 세 행이 결과와 똑같이 나온다(0108 은 짝이 없어 빠짐). ② 는 ROW1 조인 조건이 없어 모든 조합이 나오고, ③ 은 SELECT 끝에 쉼표가 남아 문법 오류이며, ④ 는 A 쪽 0104 행까지 포함되어 결과에 없는 행이 생긴다. LAG·LEAD 함수를 쓰면 같은 결과를 훨씬 간단히 만들 수 있다.",
     "chapter": "서브쿼리",
     "_source": "sqld-1140",
     "_origId": "sqld-0212",
@@ -12801,33 +12592,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "table",
-        "caption": "[결과]",
-        "headers": [
-          "BASE_DATE",
-          "LAST_JUKA",
-          "DEBI_VAL"
-        ],
-        "rows": [
-          [
-            "20230105",
-            "635.99",
-            "-39.18"
-          ],
-          [
-            "20230106",
-            "596.81",
-            "-49.6"
-          ],
-          [
-            "20230107",
-            "547.21",
-            "12.18"
-          ]
-        ]
-      },
-      {
-        "type": "table",
-        "caption": "[기초 데이터]",
+        "caption": "TEST_A (기초 데이터)",
         "headers": [
           "BASE_DATE",
           "LAST_JUKA"
@@ -12859,6 +12624,32 @@ export const AI_MOCK: QuizQuestion[] = [
         "type": "sql",
         "caption": "[SELECT]",
         "code": "SELECT BASE_DATE, LAST_JUKA\nFROM TEST_A A;"
+      },
+      {
+        "type": "table",
+        "caption": "원하는 결과",
+        "headers": [
+          "BASE_DATE",
+          "LAST_JUKA",
+          "DEBI_VAL"
+        ],
+        "rows": [
+          [
+            "20230105",
+            "635.99",
+            "-39.18"
+          ],
+          [
+            "20230106",
+            "596.81",
+            "-49.6"
+          ],
+          [
+            "20230107",
+            "547.21",
+            "12.18"
+          ]
+        ]
       }
     ]
   },
@@ -12884,8 +12675,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "Update emp set sal=1000\nwhere deptno=100;"
+        "type": "sql",
+        "code": "Update emp set sal=1000\nwhere deptno=100;"
       }
     ]
   },
@@ -12911,8 +12702,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT e.dno, d.dname, e.ename, e.score\nFROM employee e, department d\nWHERE e.dno = d.dno and (e.dno, score) IN\n(SELECT dno, max(score)\nFROM employee GROUP BY dno);"
+        "type": "sql",
+        "code": "SELECT e.dno, d.dname, e.ename, e.score\nFROM employee e, department d\nWHERE e.dno = d.dno and (e.dno, score) IN\n(SELECT dno, max(score)\nFROM employee GROUP BY dno);"
       },
       {
         "type": "table",
@@ -13120,8 +12911,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT * FROM dual WHERE NULL = NULL;"
+        "type": "sql",
+        "code": "SELECT * FROM dual WHERE NULL = NULL;"
       }
     ]
   },
@@ -13210,8 +13001,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT * FROM Student s, Department d WHERE s.dept > 100;"
+        "type": "sql",
+        "code": "SELECT * FROM Student s, Department d WHERE s.dept > 100;"
       },
       {
         "type": "table",
@@ -13311,8 +13102,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT count(*)\nFROM student\nGROUP BY department\nHAVING count(*) > 2;"
+        "type": "sql",
+        "code": "SELECT count(*)\nFROM student\nGROUP BY department\nHAVING count(*) > 2;"
       },
       {
         "type": "table",
@@ -13392,8 +13183,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "create table 사원(번호 char(10) primary key, 월급 integer);\n\nSQL A : select count(번호) from 사원 where 월급 > = 100000 or 월급 < 100000;\nSQL B : select count(번호) from 사원;"
+        "type": "sql",
+        "code": "create table 사원(번호 char(10) primary key, 월급 integer);\n\nSQL A : select count(번호) from 사원 where 월급 > = 100000 or 월급 < 100000;\nSQL B : select count(번호) from 사원;"
       }
     ]
   },
@@ -13419,8 +13210,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT NEXT_DAY\n(ADD_MONTHS(sysdate,6),'월요일)\nFROM dual;"
+        "type": "sql",
+        "code": "SELECT NEXT_DAY\n(ADD_MONTHS(sysdate,6),'월요일)\nFROM dual;"
       }
     ]
   },
@@ -13775,8 +13566,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT ... FROM 급여이력 S\nWHERE NOT EXISTS\n(SELECT 'X' FROM 사원 P\nWHERE P.사원번호 = S.사원번호)\n\n[SQL문]\nSELECT .... FROM 급여이력 S\nLEFT OUTER JOIN 사원 P\nON(S.사원번호=P.사원번호) WHERE (         );"
+        "type": "sql",
+        "code": "SELECT ... FROM 급여이력 S\nWHERE NOT EXISTS\n(SELECT 'X' FROM 사원 P\nWHERE P.사원번호 = S.사원번호)\n\n[SQL문]\nSELECT .... FROM 급여이력 S\nLEFT OUTER JOIN 사원 P\nON(S.사원번호=P.사원번호) WHERE (         );"
       }
     ]
   },
@@ -13931,8 +13722,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT * FROM EMP\nWHERE EMPNO LIKE '100%';"
+        "type": "sql",
+        "code": "SELECT * FROM EMP\nWHERE EMPNO LIKE '100%';"
       }
     ]
   },
@@ -14134,8 +13925,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "Create table Mytest(COL1 number(10));\nINSERT INTO Mytest VALUES(2);\nINSERT INTO Mytest VALUES(2);\nSAVEPOINT SV1;\nUPDATE Mytest SET COL1=7 WHERE COL1=2;\nINSERT INTO Mytest VALUES(9);\nSAVEPOINT SV2;\nDELETE Mytest WHERE CO1=7;\nINSERT INTO Mytest VALUES(11);\nSAVEPOINT SV3;\nINSERT INTO Mytest VALUES(20);\nROLLBACK TO SV2;\nCOMMIT;\nSELECT * FROM mytest;"
+        "type": "sql",
+        "code": "Create table Mytest(COL1 number(10));\nINSERT INTO Mytest VALUES(2);\nINSERT INTO Mytest VALUES(2);\nSAVEPOINT SV1;\nUPDATE Mytest SET COL1=7 WHERE COL1=2;\nINSERT INTO Mytest VALUES(9);\nSAVEPOINT SV2;\nDELETE Mytest WHERE CO1=7;\nINSERT INTO Mytest VALUES(11);\nSAVEPOINT SV3;\nINSERT INTO Mytest VALUES(20);\nROLLBACK TO SV2;\nCOMMIT;\nSELECT * FROM mytest;"
       }
     ]
   },
@@ -14161,8 +13952,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "select * from A1\nunion\nselect * from B1\nminus\nselect * from C1;"
+        "type": "sql",
+        "code": "select * from A1\nunion\nselect * from B1\nminus\nselect * from C1;"
       },
       {
         "type": "table",
@@ -14239,8 +14030,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT *\nFROM Mytest\nSTART WITH (  ㄱ   ) IS NULL\nCONNECT BY PRIOR (   ㄴ  )\nAND today BETWEEN '2017-01-01' AND '2022-12-31'\nORDER SIBLINGS BY empid;"
+        "type": "sql",
+        "code": "SELECT *\nFROM Mytest\nSTART WITH (  ㄱ   ) IS NULL\nCONNECT BY PRIOR (   ㄴ  )\nAND today BETWEEN '2017-01-01' AND '2022-12-31'\nORDER SIBLINGS BY empid;"
       },
       {
         "type": "table",
@@ -14487,8 +14278,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT * FROM Mytest WHERE (COL1, COL2) IN (('x','y'),('kk','BB'))"
+        "type": "sql",
+        "code": "SELECT * FROM Mytest WHERE (COL1, COL2) IN (('x','y'),('kk','BB'))"
       },
       {
         "type": "table",
@@ -14730,8 +14521,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT (   ) OVER\n(ORDER BY 급여 desc)\nas 순위, 이름, 급여\nFROM Mytest;"
+        "type": "sql",
+        "code": "SELECT (   ) OVER\n(ORDER BY 급여 desc)\nas 순위, 이름, 급여\nFROM Mytest;"
       },
       {
         "type": "table",
@@ -15109,8 +14900,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "Create table Mytest\n(\nA number(10)  primary key,\nB number(10),\nC date,\nD varchar2(10)\n);"
+        "type": "sql",
+        "code": "Create table Mytest\n(\nA number(10)  primary key,\nB number(10),\nC date,\nD varchar2(10)\n);"
       }
     ]
   },
@@ -15136,8 +14927,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT \n(     ) AS A,\n(     ) AS B,\n(     ) AS C\nfrom Mytest"
+        "type": "sql",
+        "code": "SELECT \n(     ) AS A,\n(     ) AS B,\n(     ) AS C\nfrom Mytest"
       },
       {
         "type": "table",
@@ -15215,8 +15006,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT DEPTNO, JOB, SUM(SAL)\nFROM Mytest\nGROUP BY (   );"
+        "type": "sql",
+        "code": "SELECT DEPTNO, JOB, SUM(SAL)\nFROM Mytest\nGROUP BY (   );"
       },
       {
         "type": "table",
@@ -15293,8 +15084,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT * FROM SCOTT.EMP A, SCOTT.DEPT B\nWHERE A.DEPTNO = B.DEPTNO\nAND B.DNAME = 'SALES';"
+        "type": "sql",
+        "code": "SELECT * FROM SCOTT.EMP A, SCOTT.DEPT B\nWHERE A.DEPTNO = B.DEPTNO\nAND B.DNAME = 'SALES';"
       }
     ]
   },
@@ -15320,8 +15111,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT * FROM MytestA A INNER JOIN MytestB B ON (A.KEY1 = B.KEY2);\nSELECT * FROM MytestA A LEFT OUTER JOIN MytestB B ON (A.KEY1 = B.KEY2);\nSELECT * FROM MytestA A RIGHT OUTER JOIN MytestB B ON (A.KEY1 = B.KEY2);\nSELECT * FROM MytestA A FULL OUTER JOIN MytestB B ON (A.KEY1 = B.KEY2);\nSELECT * FROM MytestA A CROSS JOIN MytestB B;"
+        "type": "sql",
+        "code": "SELECT * FROM MytestA A INNER JOIN MytestB B ON (A.KEY1 = B.KEY2);\nSELECT * FROM MytestA A LEFT OUTER JOIN MytestB B ON (A.KEY1 = B.KEY2);\nSELECT * FROM MytestA A RIGHT OUTER JOIN MytestB B ON (A.KEY1 = B.KEY2);\nSELECT * FROM MytestA A FULL OUTER JOIN MytestB B ON (A.KEY1 = B.KEY2);\nSELECT * FROM MytestA A CROSS JOIN MytestB B;"
       },
       {
         "type": "table",
@@ -15425,8 +15216,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT * FROM MytestA (       ) MytestB;"
+        "type": "sql",
+        "code": "SELECT * FROM MytestA (       ) MytestB;"
       },
       {
         "type": "table",
@@ -15560,8 +15351,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT SUM(SCORE) / COUNT(NO) FROM Mytest"
+        "type": "sql",
+        "code": "SELECT SUM(SCORE) / COUNT(NO) FROM Mytest"
       },
       {
         "type": "table",
@@ -15617,8 +15408,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT ROUND(10.51234, 1) FROM DUAL;"
+        "type": "sql",
+        "code": "SELECT ROUND(10.51234, 1) FROM DUAL;"
       }
     ]
   },
@@ -16285,8 +16076,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "select * from Mytest\nwhere (COL1 = 1 and COL2 = 3) or (COL1 = 1 and COL2 = 4);"
+        "type": "sql",
+        "code": "select * from Mytest\nwhere (COL1 = 1 and COL2 = 3) or (COL1 = 1 and COL2 = 4);"
       }
     ]
   },
@@ -16304,7 +16095,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "2000, 2500, 3000, 2000, 1000, 1500, 3000, 2000, 3500"
     ],
     "correctIndex": 1,
-    "explanation": "위의 Mytest 테이블에서 MGR 속성별로 파티션을 분할했을 때 각각의 파티션 내에서 HIREDATE 속성값 기준으로 오름차순 정렬하고 그때 같은 파티션 내에서 현재 행을 기준으로 바로 이전 행부터 바로 다음 행까지의 급여의 합계를 계산하여 MGR_SUM 속성값으로 조회한다.",
+    "explanation": "MGR 별로 나눈 뒤 HIREDATE 순으로 정렬하고, 앞 1행 + 현재 행 + 뒤 1행의 SAL 을 더한다. 손권: 노숙(2013) 2000 + 주유 2500 = 4500, 2000 + 2500 + 3000 = 7500, 2500 + 3000(황개) = 5500. 유비: 제갈량(2015) 2000 + 관우 1000 = 3000, 2000 + 1000 + 1500 = 4500, 1000 + 1500(조자룡) = 2500. 조조: 순욱(2015) 3000 + 하후돈 2000 = 5000, 3000 + 2000 + 3500 = 8500, 2000 + 3500(하후연) = 5500. 따라서 ②. 각 파티션의 첫 행은 앞 행이, 마지막 행은 뒤 행이 없어 두 행만 더해진다는 점이 핵심이다.",
     "chapter": "윈도우 함수",
     "_source": "sqld-1140",
     "_origId": "sqld-0334",
@@ -16312,8 +16103,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT MGR, ENAME, SAL, SUM(SAL) OVER (PARTITION BY MGR ORDER BY HIREDATE ROWS BETWEEN 1 PRECEDING AND 1 FOLLOWING) AS MGR_SUM FROM Mytest;"
+        "type": "sql",
+        "code": "SELECT MGR, ENAME, SAL, \n       SUM(SAL) OVER (PARTITION BY MGR ORDER BY HIREDATE ROWS BETWEEN 1 PRECEDING AND 1 FOLLOWING) AS MGR_SUM\nFROM Mytest;"
       },
       {
         "type": "table",
@@ -16383,7 +16174,7 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "table",
-        "caption": "[결과]",
+        "caption": "[결과] (MGR_SUM 을 구하시오)",
         "headers": [
           "MGR",
           "ENAME",
@@ -16412,7 +16203,7 @@ export const AI_MOCK: QuizQuestion[] = [
           [
             "유비",
             "제갈량",
-            "3000",
+            "2000",
             "?"
           ],
           [
@@ -16471,8 +16262,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "INSERT INTO Mytest VALUES(1);\nINSERT INTO Mytest VALUES(2);\nSAVEPOINT SV1;\nUPDATE Mytest SET CO1=8 WHERE COL1=2;\nINSERT INTO Mytest VALUES(9);\nSAVEPOINT SV2;\nDELETE Mytest WHERE COL1=8;\nINSERT INTO Mytest VALUES(11);\nSAVEPOINT SV3;\nINSERT INTO Mytest VALUES(9);\nROLLBACK TO SV2;\nCOMMIT;"
+        "type": "sql",
+        "code": "INSERT INTO Mytest VALUES(1);\nINSERT INTO Mytest VALUES(2);\nSAVEPOINT SV1;\nUPDATE Mytest SET CO1=8 WHERE COL1=2;\nINSERT INTO Mytest VALUES(9);\nSAVEPOINT SV2;\nDELETE Mytest WHERE COL1=8;\nINSERT INTO Mytest VALUES(11);\nSAVEPOINT SV3;\nINSERT INTO Mytest VALUES(9);\nROLLBACK TO SV2;\nCOMMIT;"
       }
     ]
   },
@@ -16561,8 +16352,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT *\nFROM SCOTT.EMP A, SCOTT.DEPT B\nWHERE A.DEPTNO = B.DEPTNO\nAND B.DNMAE ='KIM'"
+        "type": "sql",
+        "code": "SELECT *\nFROM SCOTT.EMP A, SCOTT.DEPT B\nWHERE A.DEPTNO = B.DEPTNO\nAND B.DNMAE ='KIM'"
       }
     ]
   },
@@ -16588,8 +16379,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT LEVEL, LPAD(' ',4 + (LEVEL -1) )|| EMPNO, MGR, (    ) AS ISLEAF\nFROM Mytest\nSTART WITH MGR IS NULL\nCONNECT BY PRIOR EMPNO = MGR;"
+        "type": "sql",
+        "code": "SELECT LEVEL, LPAD(' ',4 + (LEVEL -1) )|| EMPNO, MGR, (    ) AS ISLEAF\nFROM Mytest\nSTART WITH MGR IS NULL\nCONNECT BY PRIOR EMPNO = MGR;"
       }
     ]
   },
@@ -16615,8 +16406,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT SUM(A.N1)\nFROM MytestA A, MytestB B\nWHERE A.V1 <> B.V1;"
+        "type": "sql",
+        "code": "SELECT SUM(A.N1)\nFROM MytestA A, MytestB B\nWHERE A.V1 <> B.V1;"
       },
       {
         "type": "table",
@@ -16711,8 +16502,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT A.* FROM MytestA A, MytestB B WHERE A.MANAGER_ID = B.EMPLOYEE_ID AND B.SALARY >= ANY A.SALARY;"
+        "type": "sql",
+        "code": "SELECT A.* FROM MytestA A, MytestB B WHERE A.MANAGER_ID = B.EMPLOYEE_ID AND B.SALARY >= ANY A.SALARY;"
       },
       {
         "type": "table",
@@ -16810,8 +16601,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "CREATE TABLE A\n(C INTEGER PRIMARY KEY,\nD INTEGER);\n\nCREATE TABLE B\n(B INTEGER PRIMARY KEY,\nC INTEGER REFERENCES A(C) ON DELETE CASCADE);\n\nCREATE TABLE C\n(A INTEGER PRIMARY KEY,\nB INTEGER REFERENCES B(B) ON DELETE SET NULL);"
+        "type": "sql",
+        "code": "CREATE TABLE A\n(C INTEGER PRIMARY KEY,\nD INTEGER);\n\nCREATE TABLE B\n(B INTEGER PRIMARY KEY,\nC INTEGER REFERENCES A(C) ON DELETE CASCADE);\n\nCREATE TABLE C\n(A INTEGER PRIMARY KEY,\nB INTEGER REFERENCES B(B) ON DELETE SET NULL);"
       },
       {
         "type": "table",
@@ -17007,8 +16798,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT VAL, COUNT(*) AS CNT\nFROM(\n             SELECT( ㄱ )(4) over (ORDER BY COL1) AS VAL\n             FROM Mytest\n)\nWHERE 1=1\nGROUP BY VAL ORDER BY 1;"
+        "type": "sql",
+        "code": "SELECT VAL, COUNT(*) AS CNT\nFROM(\n             SELECT( ㄱ )(4) over (ORDER BY COL1) AS VAL\n             FROM Mytest\n)\nWHERE 1=1\nGROUP BY VAL ORDER BY 1;"
       },
       {
         "type": "table",
@@ -17120,8 +16911,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT COL1, COL2, COL3,\nLEAD(COL3, (ㄱ), (ㄴ)) OVER(PARTITION BY COL1 ORDER BY COL3 ) AS Result FROM Mytest"
+        "type": "sql",
+        "code": "SELECT COL1, COL2, COL3,\nLEAD(COL3, (ㄱ), (ㄴ)) OVER(PARTITION BY COL1 ORDER BY COL3 ) AS Result FROM Mytest"
       },
       {
         "type": "table",
@@ -17225,8 +17016,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT NTILE2, COUNT(*) AS CNT\nFROM(\nSELECT COL1, COL2, COL3, NTILE(3)\nOVER(ORDER BY COL3) AS NTILE2\nFROM Mytest )\nGROUP BY NTILE2;"
+        "type": "sql",
+        "code": "SELECT NTILE2, COUNT(*) AS CNT\nFROM(\nSELECT COL1, COL2, COL3, NTILE(3)\nOVER(ORDER BY COL3) AS NTILE2\nFROM Mytest )\nGROUP BY NTILE2;"
       },
       {
         "type": "table",
@@ -17320,8 +17111,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT COALESCE(nullif(1,1),200,300) as data from dual;"
+        "type": "sql",
+        "code": "SELECT COALESCE(nullif(1,1),200,300) as data from dual;"
       }
     ]
   },
@@ -17347,8 +17138,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT EXTRACT\n(YEAR FROM SYSDATE),\nLPAD(EXTRACT(month from sysdate), (ㄱ), (ㄴ))\nFROM Mytest;"
+        "type": "sql",
+        "code": "SELECT EXTRACT\n(YEAR FROM SYSDATE),\nLPAD(EXTRACT(month from sysdate), (ㄱ), (ㄴ))\nFROM Mytest;"
       },
       {
         "type": "table",
@@ -17386,8 +17177,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT * FROM DEPT CROSS JOIN DEPT;"
+        "type": "sql",
+        "code": "SELECT * FROM DEPT CROSS JOIN DEPT;"
       }
     ]
   },
@@ -17413,8 +17204,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT SUM(CASE WHEN COL1 ='A'\nTHEN 1 END) AS SUM1,\nSUM(CASE WHEN COL3 < 20000 THEN 1 END) AS SUM2\nFROM Mytest;"
+        "type": "sql",
+        "code": "SELECT SUM(CASE WHEN COL1 ='A'\nTHEN 1 END) AS SUM1,\nSUM(CASE WHEN COL3 < 20000 THEN 1 END) AS SUM2\nFROM Mytest;"
       },
       {
         "type": "table",
@@ -17486,8 +17277,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT COL1, COL2, SUM(COL3)\nFROM Mytest\nGROUP BY (        );"
+        "type": "sql",
+        "code": "SELECT COL1, COL2, SUM(COL3)\nFROM Mytest\nGROUP BY (        );"
       },
       {
         "type": "table",
@@ -17778,8 +17569,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "CREATE TABLE MYTEST (N1 NUMBER(20), N2 NUMBER(20) );\nINSERT INTO MYTEST VALUES(1,100);\nINSERT INTO MYTEST VALUES(2,200);\nCOMMIT;"
+        "type": "sql",
+        "code": "CREATE TABLE MYTEST (N1 NUMBER(20), N2 NUMBER(20) );\nINSERT INTO MYTEST VALUES(1,100);\nINSERT INTO MYTEST VALUES(2,200);\nCOMMIT;"
       }
     ]
   },
@@ -17874,8 +17665,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT DNMAE,JOB,SUM(SAL)\nFROM Mytest\nGROUP BY (          )"
+        "type": "sql",
+        "code": "SELECT DNMAE,JOB,SUM(SAL)\nFROM Mytest\nGROUP BY (          )"
       },
       {
         "type": "image",
@@ -17932,8 +17723,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT COUNT(C1)\nFROM Mytest"
+        "type": "sql",
+        "code": "SELECT COUNT(C1)\nFROM Mytest"
       },
       {
         "type": "image",
@@ -17985,8 +17776,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT Count(*) FROM(\nSELECT DISTINCT COL1\nFROM mytesta\nUNION ALL\nSELECT COL1\nFRM mytestb );"
+        "type": "sql",
+        "code": "SELECT Count(*) FROM(\nSELECT DISTINCT COL1\nFROM mytesta\nUNION ALL\nSELECT COL1\nFRM mytestb );"
       },
       {
         "type": "image",
@@ -18066,8 +17857,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "CREATE TABLE MYTEST (N1 NUMBER(10), N2 NUMBER(10));\nINSERT INTO MyTEST VALUES (100, 200);\nINSERT INTO MyTEST VALUES (200, 300);\nSAVEPOINT T1;\nUPDATE MYTEST SET N1=300 WHERE N2=200;\nSAVEPOINT T1;\nDELETE MYTEST WHERE N1>=200;\nROLLBACK TO SAVEPOINT T1;\nSELECT MAX(N1) FROM MYTEST;"
+        "type": "sql",
+        "code": "CREATE TABLE MYTEST (N1 NUMBER(10), N2 NUMBER(10));\nINSERT INTO MyTEST VALUES (100, 200);\nINSERT INTO MyTEST VALUES (200, 300);\nSAVEPOINT T1;\nUPDATE MYTEST SET N1=300 WHERE N2=200;\nSAVEPOINT T1;\nDELETE MYTEST WHERE N1>=200;\nROLLBACK TO SAVEPOINT T1;\nSELECT MAX(N1) FROM MYTEST;"
       }
     ]
   },
@@ -18093,8 +17884,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT * FROM Mytesta a full outer join Mytestb b\non a.col1 = b.col1;"
+        "type": "sql",
+        "code": "SELECT * FROM Mytesta a full outer join Mytestb b\non a.col1 = b.col1;"
       }
     ]
   },
@@ -18148,8 +17939,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT * FROM EMP\nWHERE EMP_NAME LIKE 'K%';"
+        "type": "sql",
+        "code": "SELECT * FROM EMP\nWHERE EMP_NAME LIKE 'K%';"
       }
     ]
   },
@@ -18217,8 +18008,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "CREATE TABLE T_ORDER(\nC1 NUMBER(10),\nC2 DATE,\nC3 VARCHAR(10),\nC4 NUMBER DEFAULT 1000\n);"
+        "type": "sql",
+        "code": "CREATE TABLE T_ORDER(\nC1 NUMBER(10),\nC2 DATE,\nC3 VARCHAR(10),\nC4 NUMBER DEFAULT 1000\n);"
       }
     ]
   },
@@ -18265,8 +18056,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT AVG(COL3) FROM SQLD01;\nSELECT AVG(COL3) FROM SQLD01 WHERE COL1 > 0;\nSELECT AVG(COL3) FROM SQLD01 WHERE COL1 IS NOT NULL;"
+        "type": "sql",
+        "code": "SELECT AVG(COL3) FROM SQLD01;\nSELECT AVG(COL3) FROM SQLD01 WHERE COL1 > 0;\nSELECT AVG(COL3) FROM SQLD01 WHERE COL1 IS NOT NULL;"
       },
       {
         "type": "image",
@@ -18366,8 +18157,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT EMPLOYEE_ID,\nDEPARTMENT_ID, LAST_NAME, SALARY, LAG(SALARY,( )) OVER(PARTITION BY DEPARTMENT_ID ORDER BY SALARY) AS BEFORE_SALARAY\nFROM EMPLOYEES\nWHERE EMPLOYEE_ID < 110;"
+        "type": "sql",
+        "code": "SELECT EMPLOYEE_ID,\nDEPARTMENT_ID, LAST_NAME, SALARY, LAG(SALARY,( )) OVER(PARTITION BY DEPARTMENT_ID ORDER BY SALARY) AS BEFORE_SALARAY\nFROM EMPLOYEES\nWHERE EMPLOYEE_ID < 110;"
       },
       {
         "type": "image",
@@ -18398,8 +18189,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT sysdate + NULL FROM DUAL;"
+        "type": "sql",
+        "code": "SELECT sysdate + NULL FROM DUAL;"
       }
     ]
   },
@@ -18425,8 +18216,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT DNAME, JOB, COUNT(*) \"Total EMP\", SUM(SAL) \"Total Sal\" FROM SCOTT.EMP A, SCOTT.DEPT B WHERE A.DEPTNO = B.DEPTNO\nGROUP BY CUBE(DNAME,JOB);"
+        "type": "sql",
+        "code": "SELECT DNAME, JOB, COUNT(*) \"Total EMP\", SUM(SAL) \"Total Sal\" FROM SCOTT.EMP A, SCOTT.DEPT B WHERE A.DEPTNO = B.DEPTNO\nGROUP BY CUBE(DNAME,JOB);"
       },
       {
         "type": "image",
@@ -18749,8 +18540,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT NVL(COL2,COL3) AS 금액A,\nCOALESCE(COL2,COL3) AS 금액B,\nNULLIF(COL2,COL3) AS 금액C,\nCASE WHEN COL2 IS NOT NULL\nTHEN COL2 ELSE COL3 END AS 금액D\nFROM Mytest"
+        "type": "sql",
+        "code": "SELECT NVL(COL2,COL3) AS 금액A,\nCOALESCE(COL2,COL3) AS 금액B,\nNULLIF(COL2,COL3) AS 금액C,\nCASE WHEN COL2 IS NOT NULL\nTHEN COL2 ELSE COL3 END AS 금액D\nFROM Mytest"
       },
       {
         "type": "image",
@@ -18823,8 +18614,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT (A)\nFROM (B) a\nWHERE a.col = (C)"
+        "type": "sql",
+        "code": "SELECT (A)\nFROM (B) a\nWHERE a.col = (C)"
       }
     ]
   },
@@ -18871,8 +18662,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT mgr, empno, ename, LEVEL, CONNECT_BY_ISLEAF, SYS_CONNECT_BY_PATH(ENAME,'-') \"PATH\"\nFROM limbest.EMP\nSTART WITH mgr is null\nConnect by prior empno = mgr;"
+        "type": "sql",
+        "code": "SELECT mgr, empno, ename, LEVEL, CONNECT_BY_ISLEAF, SYS_CONNECT_BY_PATH(ENAME,'-') \"PATH\"\nFROM limbest.EMP\nSTART WITH mgr is null\nConnect by prior empno = mgr;"
       },
       {
         "type": "table",
@@ -18968,8 +18759,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT COUNT(*)\nFROM limbest.emp\nWHERE JOB = 'CLERK'\nOR (ENAME LIKE 'T%' AND SAL >= 3000);"
+        "type": "sql",
+        "code": "SELECT COUNT(*)\nFROM limbest.emp\nWHERE JOB = 'CLERK'\nOR (ENAME LIKE 'T%' AND SAL >= 3000);"
       },
       {
         "type": "table",
@@ -19113,7 +18904,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "2022 - 04 - 30 00 : 00 : 00 2022"
     ],
     "correctIndex": 0,
-    "explanation": "SYSDATE는 Oracle에서 오늘의 날짜와 시간을 가지고 있는 Date 타입이다.따라서 Date 타입을 다시 TO_DATE로 형 변환을 하면 동일 타입을 변환하기 때문에 오류가 발생한다. 즉 이러한 경우는 TO_CHAR를 사용해서 문자형 타입으로 변환해야 한다.",
+    "explanation": "SYSDATE는 Oracle에서 오늘의 날짜와 시간을 가지고 있는 Date 타입이다. 따라서 Date 타입을 다시 TO_DATE로 형 변환을 하면 동일 타입을 변환하기 때문에 오류가 발생한다. 즉 이러한 경우는 TO_CHAR를 사용해서 문자형 타입으로 변환해야 한다.",
     "chapter": "DML",
     "_source": "sqld-1140",
     "_origId": "sqld-0423",
@@ -19121,8 +18912,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT SYSDATE,\nTO_DATE(SYSDATE,'YYYY')\nFROM DUAL;"
+        "type": "sql",
+        "code": "SELECT SYSDATE,\nTO_DATE(SYSDATE,'YYYY')\nFROM DUAL;"
       }
     ]
   },
@@ -19136,11 +18927,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "options": [
       "SELECT CONCAT('0', '5') FROM DUAL",
       "SELECT TRIM('05') FROM DUAL",
-      "SELECT EXTRACT(MONTH FROM DATE '2022 - 05 - 01') FROM DUAL;",
-      "SELECT SUBSTR(TO_CHAR ('20220504'), 5,2) FROM DUAL"
+      "SELECT EXTRACT(MONTH FROM DATE '2022-05-01') FROM DUAL;",
+      "SELECT SUBSTR(TO_CHAR('20220504'), 5, 2) FROM DUAL"
     ],
     "correctIndex": 2,
-    "explanation": "③번 보기만 5를 반환하고 나머지 보기들은 모두 05를 반환한다.",
+    "explanation": "①②④ 는 모두 문자열 '05' 를 돌려준다(CONCAT 으로 '0'+'5', 공백 없는 '05' 를 TRIM, '20220504' 의 5번째부터 2글자). ③ EXTRACT(MONTH …) 는 월을 숫자로 꺼내므로 5 다. 앞의 0 이 붙지 않아 결과가 다르다.",
     "chapter": "DML",
     "_source": "sqld-1140",
     "_origId": "sqld-0424",
@@ -19190,8 +18981,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT SUBSTR('123456789123456789', -4,2) FROM DUAL;"
+        "type": "sql",
+        "code": "SELECT SUBSTR('123456789123456789', -4,2) FROM DUAL;"
       }
     ]
   },
@@ -19342,8 +19133,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT CASE\nWHEN C1=1 THEN 10\nWHEN C1=2 THEN 20\nELSE C1 END\nFROM Mytest;"
+        "type": "sql",
+        "code": "SELECT CASE\nWHEN C1=1 THEN 10\nWHEN C1=2 THEN 20\nELSE C1 END\nFROM Mytest;"
       },
       {
         "type": "table",
@@ -19408,8 +19199,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT COUNT(DATA1), COUNT(DATA2) \nFROM (SELECT DISTINCT DATA1, DATA2 FROM Mytest);"
+        "type": "sql",
+        "code": "SELECT COUNT(DATA1), COUNT(DATA2) \nFROM (SELECT DISTINCT DATA1, DATA2 FROM Mytest);"
       },
       {
         "type": "table",
@@ -19461,8 +19252,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT COUNT(*) FROM(\nSELECT COUNT(*)\nFROM Mytest\nGROUP BY ROLLUP(DATA1), DATA2);"
+        "type": "sql",
+        "code": "SELECT COUNT(*) FROM(\nSELECT COUNT(*)\nFROM Mytest\nGROUP BY ROLLUP(DATA1), DATA2);"
       },
       {
         "type": "table",
@@ -19514,8 +19305,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT * FROM MYTEST WHERE COL1 BETWEEN :A AND :B"
+        "type": "sql",
+        "code": "SELECT * FROM MYTEST WHERE COL1 BETWEEN :A AND :B"
       }
     ]
   },
@@ -19715,11 +19506,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "options": [
       "4",
       "3",
-      "3,5",
-      "3,4"
+      "3.5",
+      "3.4"
     ],
     "correctIndex": 2,
-    "explanation": "ROUND 함수의 첫 번째 인자값인 3.47을 소수 첫째 자리까지 반올림한다.",
+    "explanation": "ROUND(3.47, 1) 은 소수 첫째 자리까지 남기도록 둘째 자리(7)에서 반올림하므로 3.5 다(③). ④ 3.4 는 버림(TRUNC), ② 3 은 정수로 반올림하지 않고 버린 값, ① 4 는 ROUND(3.47) 처럼 정수로 반올림한 값이다.",
     "chapter": "함수",
     "_source": "sqld-1140",
     "_origId": "sqld-0436",
@@ -19727,8 +19518,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT ROUND(3.47,1)\nAS DATA1 FROM DUAL;"
+        "type": "sql",
+        "code": "SELECT ROUND(3.47, 1) AS DATA1\nFROM   DUAL;"
       }
     ]
   },
@@ -19775,8 +19566,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT ProductName, SUM(Price)\nFROM Mytest\nWHERE ProductName = '비디오'\nGROUP BY ROLLUP(ProductName);\n\nSELECT ProductName, SUM(Price)\nFROM Mytest\nWHERE ProductName = '비디오'\nGROUP BY GROUPING SETS(       );"
+        "type": "sql",
+        "code": "SELECT ProductName, SUM(Price)\nFROM Mytest\nWHERE ProductName = '비디오'\nGROUP BY ROLLUP(ProductName);\n\nSELECT ProductName, SUM(Price)\nFROM Mytest\nWHERE ProductName = '비디오'\nGROUP BY GROUPING SETS(       );"
       },
       {
         "type": "table",
@@ -20072,8 +19863,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT * FROM TEST1\nUNION ALL\nSELECT * FROM TEST2\nMINUS\nSELECT * FROM TEST3;"
+        "type": "sql",
+        "code": "SELECT * FROM TEST1\nUNION ALL\nSELECT * FROM TEST2\nMINUS\nSELECT * FROM TEST3;"
       },
       {
         "type": "table",
@@ -20237,8 +20028,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "CREATE TABLE TEST20\n(\nID NUMBER PRIMARY KEY,\nAGE NUMBER NOT NULL,\nNAME VARCHAR2(1)\n);\n\n(1) insert into test20 values(10,20,sysdate);\n(2)insert into test20 values(20,null,'a');\n(3)insert into test20(age, name) values(20,'a');\n(4)insert into test20(id,age,name) values(20,10,null);"
+        "type": "sql",
+        "code": "CREATE TABLE TEST20\n(\nID NUMBER PRIMARY KEY,\nAGE NUMBER NOT NULL,\nNAME VARCHAR2(1)\n);\n\n(1) insert into test20 values(10,20,sysdate);\n(2)insert into test20 values(20,null,'a');\n(3)insert into test20(age, name) values(20,'a');\n(4)insert into test20(id,age,name) values(20,10,null);"
       }
     ]
   },
@@ -20264,8 +20055,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT ID, PARENT_ID, NAME,\nPARENT_NAME\nFROM SQLD_13\nWHERE PARENT_ID NOT IN (3)\nSTART WITH PARENT_ID = 0\nCONNECT BY PRIOR ID = PARENT_ID\nORDER SIBLINGS BY PARENT_ID ASC, ID ASC;"
+        "type": "sql",
+        "code": "SELECT ID, PARENT_ID, NAME,\nPARENT_NAME\nFROM SQLD_13\nWHERE PARENT_ID NOT IN (3)\nSTART WITH PARENT_ID = 0\nCONNECT BY PRIOR ID = PARENT_ID\nORDER SIBLINGS BY PARENT_ID ASC, ID ASC;"
       },
       {
         "type": "table",
@@ -20367,8 +20158,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT 회원ID,\nDENSE_RANK() OVER(ORDER BY (ㄱ)  )\nAS RANK, 주문금액\nFROM SQLD7;"
+        "type": "sql",
+        "code": "SELECT 회원ID,\nDENSE_RANK() OVER(ORDER BY (ㄱ)  )\nAS RANK, 주문금액\nFROM SQLD7;"
       },
       {
         "type": "table",
@@ -20472,8 +20263,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT (         ), Count(Empno)\nFROM EMP\nWHERE EMPNO > 0\nGROUP BY DEPTNO, SAL;"
+        "type": "sql",
+        "code": "SELECT (         ), Count(Empno)\nFROM EMP\nWHERE EMPNO > 0\nGROUP BY DEPTNO, SAL;"
       }
     ]
   },
@@ -20528,8 +20319,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT A.EMPNO, A.ENAME\nFROM EMP A\nWHERE A.EMPNO=(SELECT 1 FROM EMP_T B WHERE A.EMPNO = B.EMPNO);"
+        "type": "sql",
+        "code": "SELECT A.EMPNO, A.ENAME\nFROM EMP A\nWHERE A.EMPNO=(SELECT 1 FROM EMP_T B WHERE A.EMPNO = B.EMPNO);"
       }
     ]
   },
@@ -20555,8 +20346,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT COUNT(DISTINCT COL1)\nFROM test31_1\nWHERE COL3=\n(SELECT COL3 FROM test31_2 WHERE\nCOL2 = 'A')"
+        "type": "sql",
+        "code": "SELECT COUNT(DISTINCT COL1)\nFROM test31_1\nWHERE COL3=\n(SELECT COL3 FROM test31_2 WHERE\nCOL2 = 'A')"
       },
       {
         "type": "table",
@@ -20741,8 +20532,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "select * from kpipool where (subkpi, mainkpi)  in((20,10),(0,30));"
+        "type": "sql",
+        "code": "select * from kpipool where (subkpi, mainkpi)  in((20,10),(0,30));"
       },
       {
         "type": "table",
@@ -20912,8 +20703,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "CREATE TABLE SQLD_29 (N1 NUMBER);\nINSERT INTO SQLD_29 VALUES(1);\nINSERT INTO SQLD_29 VALUES(2);\nCREATE TABLE TMP_SQLD_29 (N1 NUMBER);\nINSERT INTO TMP_SQLD_29 VALUES(1);\nTRUNCATE TABLE TMP_SQLD_29;\nROLLBACK;\nCOMMIT;\nSELECT SUM(N1) FROM SQLD_29;"
+        "type": "sql",
+        "code": "CREATE TABLE SQLD_29 (N1 NUMBER);\nINSERT INTO SQLD_29 VALUES(1);\nINSERT INTO SQLD_29 VALUES(2);\nCREATE TABLE TMP_SQLD_29 (N1 NUMBER);\nINSERT INTO TMP_SQLD_29 VALUES(1);\nTRUNCATE TABLE TMP_SQLD_29;\nROLLBACK;\nCOMMIT;\nSELECT SUM(N1) FROM SQLD_29;"
       }
     ]
   },
@@ -20939,8 +20730,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT *\nFROM SQLD27 (       ) SQLD27_2\nON SQLD27.COL1 = SQLD27_2.COL1;"
+        "type": "sql",
+        "code": "SELECT *\nFROM SQLD27 (       ) SQLD27_2\nON SQLD27.COL1 = SQLD27_2.COL1;"
       },
       {
         "type": "table",
@@ -21067,8 +20858,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT COUNT(*)\nFROM SQLD49, SQLD49_2\nWHERE SQLD49.COL1 = SQLD49_2.COL1;"
+        "type": "sql",
+        "code": "SELECT COUNT(*)\nFROM SQLD49, SQLD49_2\nWHERE SQLD49.COL1 = SQLD49_2.COL1;"
       },
       {
         "type": "table",
@@ -21367,8 +21158,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "select count(*) from TEST11\nwhere COL3 <> 3\nstart with COL3 = 4\nconnect by COL1 = prior COL2;"
+        "type": "sql",
+        "code": "select count(*) from TEST11\nwhere COL3 <> 3\nstart with COL3 = 4\nconnect by COL1 = prior COL2;"
       },
       {
         "type": "image",
@@ -21497,8 +21288,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT DNAME, JOB, SUM(SAL)\nFROM TEST18\nGROUP BY (       )"
+        "type": "sql",
+        "code": "SELECT DNAME, JOB, SUM(SAL)\nFROM TEST18\nGROUP BY (       )"
       },
       {
         "type": "image",
@@ -21576,8 +21367,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "INSERT INTO test24 VALUES (1);\nINSERT INTO test24 VALUES (2);\nCOMMIT;\nINSERT INTO test24 VALUES (3);\nSAVEPOINT SP;\nINSERT INTO test24 VALUES (4);\nROLLBACK to SP;\nSELECT COUNT(*) FROM test24;"
+        "type": "sql",
+        "code": "INSERT INTO test24 VALUES (1);\nINSERT INTO test24 VALUES (2);\nCOMMIT;\nINSERT INTO test24 VALUES (3);\nSAVEPOINT SP;\nINSERT INTO test24 VALUES (4);\nROLLBACK to SP;\nSELECT COUNT(*) FROM test24;"
       }
     ]
   },
@@ -21603,8 +21394,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT * FROM test24\nminus\nSELECT 1 FROM DUAL;"
+        "type": "sql",
+        "code": "SELECT * FROM test24\nminus\nSELECT 1 FROM DUAL;"
       }
     ]
   },
@@ -21630,8 +21421,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT * FROM Orders\nWHERE ( ㄱ ) (SELECT * FROM Customers WHERE (  ㄴ  ));"
+        "type": "sql",
+        "code": "SELECT * FROM Orders\nWHERE ( ㄱ ) (SELECT * FROM Customers WHERE (  ㄴ  ));"
       }
     ]
   },
@@ -21705,8 +21496,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT CASE WHEN SUM (COL1 + COL2)\nIS NULL THEN 0\nELSE SUM(COL1 + COL2)\nEND AS 합계\nFROM TEST32;"
+        "type": "sql",
+        "code": "SELECT CASE WHEN SUM (COL1 + COL2)\nIS NULL THEN 0\nELSE SUM(COL1 + COL2)\nEND AS 합계\nFROM TEST32;"
       },
       {
         "type": "image",
@@ -21758,8 +21549,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT COUNT(*) ROWCNT\nFROM test36_1 a,test36_2 b\nWHERE a.ename LIKE b.condition;"
+        "type": "sql",
+        "code": "SELECT COUNT(*) ROWCNT\nFROM test36_1 a,test36_2 b\nWHERE a.ename LIKE b.condition;"
       },
       {
         "type": "image",
@@ -21790,8 +21581,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT COUNT(*) FROM TEST39 GROUP BY COL1\nHAVING COUNT(*)>2;"
+        "type": "sql",
+        "code": "SELECT COUNT(*) FROM TEST39 GROUP BY COL1\nHAVING COUNT(*)>2;"
       },
       {
         "type": "image",
@@ -21864,8 +21655,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT\n(             ) OVER(ORDER BY sal desc)\nas rank, name, deptname, position, sal FROM test44;"
+        "type": "sql",
+        "code": "SELECT\n(             ) OVER(ORDER BY sal desc)\nas rank, name, deptname, position, sal FROM test44;"
       },
       {
         "type": "image",
@@ -21901,8 +21692,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT COL1, COL2, COUNT(*)\nFROM TEST46\nGROUP BY ROLLUP (COL1, COL2);\n\nSELECT COL1, COL2, COUNT(*)\nFROM TEST46\nGROUP BY GROUPING SETS (      )"
+        "type": "sql",
+        "code": "SELECT COL1, COL2, COUNT(*)\nFROM TEST46\nGROUP BY ROLLUP (COL1, COL2);\n\nSELECT COL1, COL2, COUNT(*)\nFROM TEST46\nGROUP BY GROUPING SETS (      )"
       }
     ]
   },
@@ -21928,8 +21719,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT AVG(NVL(COL2,0)) FROM test48;"
+        "type": "sql",
+        "code": "SELECT AVG(NVL(COL2,0)) FROM test48;"
       },
       {
         "type": "image",
@@ -22144,8 +21935,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT DEPTNO, JOB, SUM(SAL)\nFROM T_TEST\nGROUP BY (           );"
+        "type": "sql",
+        "code": "SELECT DEPTNO, JOB, SUM(SAL)\nFROM T_TEST\nGROUP BY (           );"
       },
       {
         "type": "image",
@@ -22176,8 +21967,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT LPAD('**', (LEVEL-1)*2, '   ')||\nEMPNO AS EMP, NAME\nFROM TEST10\nWHERE EMPNO <> 3\nSTART WITH EMPNO = 3\nCONNECT BY EMPNO = PRIOR MANAGER;"
+        "type": "sql",
+        "code": "SELECT LPAD('**', (LEVEL-1)*2, '   ')||\nEMPNO AS EMP, NAME\nFROM TEST10\nWHERE EMPNO <> 3\nSTART WITH EMPNO = 3\nCONNECT BY EMPNO = PRIOR MANAGER;"
       },
       {
         "type": "image",
@@ -22208,8 +21999,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT 10 + 20 * ((      )NULL, 0.1, 0.2))\nFROM DUAL;\n결과 : 14"
+        "type": "sql",
+        "code": "SELECT 10 + 20 * ((      )NULL, 0.1, 0.2))\nFROM DUAL;\n결과 : 14"
       }
     ]
   },
@@ -22305,8 +22096,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT 분류코드\nAVG(상품가격) AS 상품가격,\nCOUNT(*) OVER(ORDER BY AVG(상품가격)\nRANGE BETWEEN 10000 PRECEDING AND 10000 FOLLOWING) AS CNT\nFROM 상품\nGROUP BY 분류코드;"
+        "type": "sql",
+        "code": "SELECT 분류코드\nAVG(상품가격) AS 상품가격,\nCOUNT(*) OVER(ORDER BY AVG(상품가격)\nRANGE BETWEEN 10000 PRECEDING AND 10000 FOLLOWING) AS CNT\nFROM 상품\nGROUP BY 분류코드;"
       }
     ]
   },
@@ -22332,8 +22123,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT COUNT(*)\nFROM TEST29_1 A\nWHERE A.COL NOT IN(SELECT COL FROM TEST29_2);"
+        "type": "sql",
+        "code": "SELECT COUNT(*)\nFROM TEST29_1 A\nWHERE A.COL NOT IN(SELECT COL FROM TEST29_2);"
       },
       {
         "type": "image",
@@ -22384,7 +22175,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "NULL"
     ],
     "correctIndex": 2,
-    "explanation": "보기의 SQL문은 COL1, COL2가 각각 10000, 'ABC'인 행만을 조회하는 SQL문으로 1번째 행만 조회된다.",
+    "explanation": "(COL1, COL2) IN ((10000, 'ABC')) 는 두 컬럼이 동시에 10000, 'ABC' 인 행만 고르는 다중 컬럼 조건이다. 표에서 두 값이 모두 맞는 행은 첫 번째 행 하나뿐이라 1건이다(③).",
     "chapter": "DML",
     "_source": "sqld-1140",
     "_origId": "sqld-0548",
@@ -22392,8 +22183,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT * FROM TEST32 WHERE (COL1,COL2) IN (10000,'ABC'));"
+        "type": "sql",
+        "code": "SELECT *\nFROM   TEST32\nWHERE  (COL1, COL2) IN ((10000, 'ABC'));"
       },
       {
         "type": "image",
@@ -22424,8 +22215,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "UPDATE A_User.TB_A\nSET col1='TEST'\nWHERE col2=100;"
+        "type": "sql",
+        "code": "UPDATE A_User.TB_A\nSET col1='TEST'\nWHERE col2=100;"
       }
     ]
   },
@@ -22500,8 +22291,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT JOB, COUNT(*) AS ROWCNT\nFROM TEST40\nGROUP BY JOB;"
+        "type": "sql",
+        "code": "SELECT JOB, COUNT(*) AS ROWCNT\nFROM TEST40\nGROUP BY JOB;"
       }
     ]
   },
@@ -22548,8 +22339,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT b.grade, a.StudentNo, SUM(b.grade)\nFROM TEST44_1 a, TEST44_2 b\nGROUP by\n(                       );"
+        "type": "sql",
+        "code": "SELECT b.grade, a.StudentNo, SUM(b.grade)\nFROM TEST44_1 a, TEST44_2 b\nGROUP by\n(                       );"
       },
       {
         "type": "image",
@@ -22585,8 +22376,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT C1,C2\nFROM SQLD_02\nORDER BY C1,C2 DESC (       );"
+        "type": "sql",
+        "code": "SELECT C1,C2\nFROM SQLD_02\nORDER BY C1,C2 DESC (       );"
       },
       {
         "type": "table",
@@ -22680,8 +22471,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT * \nFROM TEST46_1 (            ) TEST46_2\nON TEST46_1.COL1 = TEST46_2.COL1;"
+        "type": "sql",
+        "code": "SELECT * \nFROM TEST46_1 (            ) TEST46_2\nON TEST46_1.COL1 = TEST46_2.COL1;"
       },
       {
         "type": "table",
@@ -22781,8 +22572,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "BEGIN TRANSACTION;\nSAVE TRANSACTION SP1;\nUPDATE 상품마스터 SET 상품명 = 'LG-TV'\nWHERE 상품ID ='001';\nSAVE TRANSACTION SP2;\nUPDATE 상품마스터 SET 상품명 = '평면-TV' WHERE 상품ID = '001';\nROLLBACK TRANSACTION SP2;\nCOMMIT;"
+        "type": "sql",
+        "code": "BEGIN TRANSACTION;\nSAVE TRANSACTION SP1;\nUPDATE 상품마스터 SET 상품명 = 'LG-TV'\nWHERE 상품ID ='001';\nSAVE TRANSACTION SP2;\nUPDATE 상품마스터 SET 상품명 = '평면-TV' WHERE 상품ID = '001';\nROLLBACK TRANSACTION SP2;\nCOMMIT;"
       },
       {
         "type": "table",
@@ -23385,8 +23176,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT SUM(DECODE(SIGN(SAL-4000), 1, 1, 0)) FROM TAB1;"
+        "type": "sql",
+        "code": "SELECT SUM(DECODE(SIGN(SAL-4000), 1, 1, 0)) FROM TAB1;"
       },
       {
         "type": "table",
@@ -23474,8 +23265,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT TO_CHAR(TO_DATE('2024/08/24 10:00', 'YYYY/MM/DD HH24:MI') - 30/24/60, 'YYYY.MM.DD HH24:MI:SS') FROM DUAL;"
+        "type": "sql",
+        "code": "SELECT TO_CHAR(TO_DATE('2024/08/24 10:00', 'YYYY/MM/DD HH24:MI') - 30/24/60, 'YYYY.MM.DD HH24:MI:SS') FROM DUAL;"
       }
     ]
   },
@@ -23501,8 +23292,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT COUNT(CODE) \nFROM TAB1 \nWHERE CODE LIKE '_1%' OR CODE LIKE '%A%';"
+        "type": "sql",
+        "code": "SELECT COUNT(CODE) \nFROM TAB1 \nWHERE CODE LIKE '_1%' OR CODE LIKE '%A%';"
       },
       {
         "type": "table",
@@ -23576,8 +23367,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT SUM(COL2) + SUM(COL3) FROM TAB1; \nSELECT SUM(COL2) + SUM(COL3) FROM TAB1 WHERE COL1 > 0; \nSELECT SUM(COL2) + SUM(COL3) FROM TAB1 WHERE COL1 IS NOT NULL; \nSELECT SUM(COL2) + SUM(COL3) FROM TAB1 WHERE COL1 IS NULL;"
+        "type": "sql",
+        "code": "SELECT SUM(COL2) + SUM(COL3) FROM TAB1; \nSELECT SUM(COL2) + SUM(COL3) FROM TAB1 WHERE COL1 > 0; \nSELECT SUM(COL2) + SUM(COL3) FROM TAB1 WHERE COL1 IS NOT NULL; \nSELECT SUM(COL2) + SUM(COL3) FROM TAB1 WHERE COL1 IS NULL;"
       },
       {
         "type": "table",
@@ -23671,8 +23462,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT SAL FROM TAB1 ORDER BY TO_CHAR(SAL);"
+        "type": "sql",
+        "code": "SELECT SAL FROM TAB1 ORDER BY TO_CHAR(SAL);"
       },
       {
         "type": "table",
@@ -23719,8 +23510,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT SUM(A.COL1) \nFROM TAB1 A, TAB2 B WHERE A.COL2 <> B.COL2;"
+        "type": "sql",
+        "code": "SELECT SUM(A.COL1) \nFROM TAB1 A, TAB2 B WHERE A.COL2 <> B.COL2;"
       },
       {
         "type": "table",
@@ -23794,8 +23585,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT COUNT(*) \nFROM TAB1, TAB2 \nWHERE NAME LIKE RULE_NAME;"
+        "type": "sql",
+        "code": "SELECT COUNT(*) \nFROM TAB1, TAB2 \nWHERE NAME LIKE RULE_NAME;"
       },
       {
         "type": "table",
@@ -23865,8 +23656,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT COUNT(DEPTNO) \n FROM EMPLOYEES \n WHERE DEPTNO <= ALL(SELECT DEPTNO \n FROM EMPLOYEES \n WHERE HIREDATE >= TO_DATE('2020/02', 'YYYY/MM'));"
+        "type": "sql",
+        "code": "SELECT COUNT(DEPTNO) \n FROM EMPLOYEES \n WHERE DEPTNO <= ALL(SELECT DEPTNO \n FROM EMPLOYEES \n WHERE HIREDATE >= TO_DATE('2020/02', 'YYYY/MM'));"
       },
       {
         "type": "table",
@@ -23954,8 +23745,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT COUNT(*)\n FROM TAB1\n WHERE EXISTS (SELECT 1\n FROM TAB2\n WHERE TAB2.COL1 = 'A');"
+        "type": "sql",
+        "code": "SELECT COUNT(*)\n FROM TAB1\n WHERE EXISTS (SELECT 1\n FROM TAB2\n WHERE TAB2.COL1 = 'A');"
       },
       {
         "type": "table",
@@ -24128,8 +23919,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT LEVEL, \n EMPNO, \n MGR, \n _____________ AS 리프노드여부 \n FROM SCOTT.EMP \n START WITH MGR IS NULL \nCONNECT BY PRIOR EMPNO = MGR;"
+        "type": "sql",
+        "code": "SELECT LEVEL, \n EMPNO, \n MGR, \n _____________ AS 리프노드여부 \n FROM SCOTT.EMP \n START WITH MGR IS NULL \nCONNECT BY PRIOR EMPNO = MGR;"
       }
     ]
   },
@@ -24155,8 +23946,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT COUNT(DECODE(DEPTNO,10,1)) AS \"10\", \nCOUNT(DECODE(DEPTNO,20,1)) AS \"20\", \nCOUNT(DECODE(DEPTNO,30,1)) AS \"30\" \n FROM EMP;"
+        "type": "sql",
+        "code": "SELECT COUNT(DECODE(DEPTNO,10,1)) AS \"10\", \nCOUNT(DECODE(DEPTNO,20,1)) AS \"20\", \nCOUNT(DECODE(DEPTNO,30,1)) AS \"30\" \n FROM EMP;"
       }
     ]
   },
@@ -24182,8 +23973,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT REGEXP_COUNT('abc1004 zz1234', '\\d{2}+') AS C1, REGEXP_COUNT('abc1004-zz1234-100', '\\d{2,}+') AS C2 \n FROM DUAL;"
+        "type": "sql",
+        "code": "SELECT REGEXP_COUNT('abc1004 zz1234', '\\d{2}+') AS C1, REGEXP_COUNT('abc1004-zz1234-100', '\\d{2,}+') AS C2 \n FROM DUAL;"
       }
     ]
   },
@@ -24209,8 +24000,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT COUNT(COL1) \nFROM TAB1 WHERE REGEXP_LIKE(COL1, '[XY-]+Z?');"
+        "type": "sql",
+        "code": "SELECT COUNT(COL1) \nFROM TAB1 WHERE REGEXP_LIKE(COL1, '[XY-]+Z?');"
       },
       {
         "type": "table",
@@ -24260,8 +24051,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "INSERT INTO TAB1 VALUES(5, 'E', 3); \nCOMMIT; \nUPDATE TAB1 SET COL2 = 3 WHERE NO = 2; \nSAVEPOINT SAVE1; \nINSERT INTO TAB1 VALUES(6, 'F', 5); \nDELETE TAB1 WHERE NO = 4; \nROLLBACK TO SAVE1; \nUPDATE TAB1 SET COL2 = 2 WHERE NO = 1; \nROLLBACK; \nCOMMIT; \nSELECT SUM(COL2) FROM TAB1;"
+        "type": "sql",
+        "code": "INSERT INTO TAB1 VALUES(5, 'E', 3); \nCOMMIT; \nUPDATE TAB1 SET COL2 = 3 WHERE NO = 2; \nSAVEPOINT SAVE1; \nINSERT INTO TAB1 VALUES(6, 'F', 5); \nDELETE TAB1 WHERE NO = 4; \nROLLBACK TO SAVE1; \nUPDATE TAB1 SET COL2 = 2 WHERE NO = 1; \nROLLBACK; \nCOMMIT; \nSELECT SUM(COL2) FROM TAB1;"
       },
       {
         "type": "table",
@@ -24619,8 +24410,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT _________(5.47) FROM DUAL;"
+        "type": "sql",
+        "code": "SELECT _________(5.47) FROM DUAL;"
       }
     ]
   },
@@ -24646,8 +24437,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT TO_CHAR(TO_DATE(SUBSTR(JUMIN, 1, 6), 'RRMMDD'), 'YYYY-MM-DD') FROM TAB1;"
+        "type": "sql",
+        "code": "SELECT TO_CHAR(TO_DATE(SUBSTR(JUMIN, 1, 6), 'RRMMDD'), 'YYYY-MM-DD') FROM TAB1;"
       },
       {
         "type": "table",
@@ -24706,8 +24497,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT COUNT(A.COL2) \nFROM TAB1 A JOIN TAB2 B \nON A.COL2 = B.COL2;"
+        "type": "sql",
+        "code": "SELECT COUNT(A.COL2) \nFROM TAB1 A JOIN TAB2 B \nON A.COL2 = B.COL2;"
       },
       {
         "type": "table",
@@ -24785,8 +24576,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT COUNT(TAB1.COL1) \nFROM TAB1, TAB2 \nWHERE TAB1.COL2 = TAB2.COL2(+);"
+        "type": "sql",
+        "code": "SELECT COUNT(TAB1.COL1) \nFROM TAB1, TAB2 \nWHERE TAB1.COL2 = TAB2.COL2(+);"
       },
       {
         "type": "table",
@@ -24856,7 +24647,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "7, 2"
     ],
     "correctIndex": 3,
-    "explanation": "LEFT OUTER JOIN의 결과 TAB1의 NO값이 1, 2, 4, 4, 6, 7, 3인 총 7개의 행이 나오게 되고,  RIGHT OUTER JOIN의 결과로 TAB1의 CODE값이 A, B, B, B, NULL, NULL, NULL이 출력되어 DISTINCT 수는 총 2건이다.(NULL은 세지 않는다)",
+    "explanation": "LEFT OUTER JOIN의 결과 TAB1의 NO값이 1, 2, 4, 4, 6, 7, 3인 총 7개의 행이 나오게 되고,  RIGHT OUTER JOIN의 결과로 TAB1의 CODE값이 A, B, B, B, NULL, NULL, NULL이 출력되어 DISTINCT 수는 총 2건이다. (NULL은 세지 않는다)",
     "chapter": "조인",
     "_source": "sqld-1140",
     "_origId": "sqld-0648",
@@ -24864,8 +24655,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT COUNT(TAB1.NO) FROM TAB1 LEFT OUTER JOIN TAB2 ON TAB1.NO = TAB2.NO; \nSELECT COUNT(DISTINCT TAB1.CODE) FROM TAB1 RIGHT OUTER JOIN TAB2 ON TAB1.NO = TAB2.NO;"
+        "type": "sql",
+        "code": "SELECT COUNT(TAB1.NO) FROM TAB1 LEFT OUTER JOIN TAB2 ON TAB1.NO = TAB2.NO; \nSELECT COUNT(DISTINCT TAB1.CODE) FROM TAB1 RIGHT OUTER JOIN TAB2 ON TAB1.NO = TAB2.NO;"
       },
       {
         "type": "table",
@@ -24963,8 +24754,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT SUM(T1.COL2) \nFROM TAB1 T1 \nWHERE T1.COL2 = (SELECT MAX(COL2) \nFROM TAB1 T2 \nWHERE T1.COL1 = T2.COL1);"
+        "type": "sql",
+        "code": "SELECT SUM(T1.COL2) \nFROM TAB1 T1 \nWHERE T1.COL2 = (SELECT MAX(COL2) \nFROM TAB1 T2 \nWHERE T1.COL1 = T2.COL1);"
       },
       {
         "type": "table",
@@ -25194,8 +24985,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT SUM(COL1) \n  FROM TAB1 T1 \n WHERE COL3 >= (SELECT AVG(COL3) \n                   FROM TAB2 T2 \n                  WHERE T2.COL2 = T1.COL2);"
+        "type": "sql",
+        "code": "SELECT SUM(COL1) \n  FROM TAB1 T1 \n WHERE COL3 >= (SELECT AVG(COL3) \n                   FROM TAB2 T2 \n                  WHERE T2.COL2 = T1.COL2);"
       },
       {
         "type": "table",
@@ -25298,7 +25089,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 759,
-    "title": "다음 빈칸에 들어갈 문장으로 가장 적절한 것은?",
+    "title": "아래 판매 테이블을 결과처럼 바꾸려고 한다. 빈칸에 들어갈 절로 가장 적절한 것은?",
     "options": [
       "PIVOT (판매량 FOR 구분 FOR (Q1, Q2))",
       "PIVOT (판매량 FOR 구분 IN (Q1, Q2))",
@@ -25306,7 +25097,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "UNPIVOT (판매량 FOR 구분 IN (Q1, Q2))"
     ],
     "correctIndex": 3,
-    "explanation": "WIDE -> LONG 데이터로 변환하는 과정이므로 UNPIVOT이 적절하다. UNPIVOT은 IN으로 LONG 데이터로 변환할 대상을 지정한다. ",
+    "explanation": "가로(Q1, Q2 컬럼)로 펼쳐진 값을 세로 행(구분, 판매량)으로 접으므로 UNPIVOT 이다. UNPIVOT 은 FROM 절 뒤에 (값 컬럼 FOR 새 컬럼 IN (접을 컬럼들)) 형식으로 쓴다(④). ①② PIVOT 은 반대로 세로를 가로로 펼칠 때 쓰고, ①③ 은 IN 자리에 FOR 를 써서 문법 오류다.",
     "chapter": "윈도우 함수",
     "_source": "sqld-1140",
     "_origId": "sqld-0662",
@@ -25337,7 +25128,7 @@ export const AI_MOCK: QuizQuestion[] = [
       {
         "type": "sql",
         "caption": "[SQL]",
-        "code": "SELECT (        )\nFROM 판매"
+        "code": "SELECT *\nFROM   판매\n       (                              );"
       },
       {
         "type": "table",
@@ -25394,8 +25185,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT REGEXP_SUBSTR('ORA-00600 Oracle SQL-Server 50', '[^0-9]+') \"REGEXPR_SUBSTR\" \nFROM DUAL;"
+        "type": "sql",
+        "code": "SELECT REGEXP_SUBSTR('ORA-00600 Oracle SQL-Server 50', '[^0-9]+') \"REGEXPR_SUBSTR\" \nFROM DUAL;"
       }
     ]
   },
@@ -25421,8 +25212,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "CREATE TABLE TAB1( \nCOL1    VARCHAR(10) PRIMARY KEY, \nCOL2 NUMBER NOT NULL,    \nCOL3 CHAR(10) NOT NULL,     \nCOL4   DATE NOT NULL);"
+        "type": "sql",
+        "code": "CREATE TABLE TAB1( \nCOL1    VARCHAR(10) PRIMARY KEY, \nCOL2 NUMBER NOT NULL,    \nCOL3 CHAR(10) NOT NULL,     \nCOL4   DATE NOT NULL);"
       }
     ]
   },
@@ -25440,7 +25231,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "110"
     ],
     "correctIndex": 0,
-    "explanation": "처음 INSERT 3개의 문장은 COMMIT을 수행했으므로 영구 저장된다. 이후 COL3을 추가하면 이미 입력된 세 개의 행에 대해 NULL을 갖게 된다. 그 뒤 수행하는 INSERT, UPDATE, DELETE 문장은 이어서 실행하는 ALTER TABLE DROP COLUMN 문장으로 인해 자동 확정된다.(DDL AUTO COMMIT). 따라서 ROLLBACK을 수행해도 취소되지 않는다. ",
+    "explanation": "처음 INSERT 3개의 문장은 COMMIT을 수행했으므로 영구 저장된다. 이후 COL3을 추가하면 이미 입력된 세 개의 행에 대해 NULL을 갖게 된다. 그 뒤 수행하는 INSERT, UPDATE, DELETE 문장은 이어서 실행하는 ALTER TABLE DROP COLUMN 문장으로 인해 자동 확정된다. (DDL AUTO COMMIT). 따라서 ROLLBACK을 수행해도 취소되지 않는다. ",
     "chapter": "DML",
     "_source": "sqld-1140",
     "_origId": "sqld-0666",
@@ -25448,8 +25239,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "CREATE TABLE TAB1(COL1 NUMBER, COL2 NUMBER); \n \nINSERT INTO TAB1 VALUES(1,10); \nINSERT INTO TAB1 VALUES(2,20); \nINSERT INTO TAB1 VALUES(3,30); \nCOMMIT; \n \nALTER TABLE TAB1 ADD (COL3 NUMBER); \n \nINSERT INTO TAB1 VALUES(4,40,100); \nUPDATE TAB1 SET COL2 = 50 WHERE COL1 = 1; \nDELETE TAB1 WHERE COL1 = 3; \n \nALTER TABLE TAB1 DROP COLUMN COL1; \n \nROLLBACK; \n \nSELECT SUM(COL2 + COL3) FROM TAB1;"
+        "type": "sql",
+        "code": "CREATE TABLE TAB1(COL1 NUMBER, COL2 NUMBER); \n \nINSERT INTO TAB1 VALUES(1,10); \nINSERT INTO TAB1 VALUES(2,20); \nINSERT INTO TAB1 VALUES(3,30); \nCOMMIT; \n \nALTER TABLE TAB1 ADD (COL3 NUMBER); \n \nINSERT INTO TAB1 VALUES(4,40,100); \nUPDATE TAB1 SET COL2 = 50 WHERE COL1 = 1; \nDELETE TAB1 WHERE COL1 = 3; \n \nALTER TABLE TAB1 DROP COLUMN COL1; \n \nROLLBACK; \n \nSELECT SUM(COL2 + COL3) FROM TAB1;"
       }
     ]
   },
@@ -25904,8 +25695,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT SUM(COL2 + COL3) FROM TAB1 WHERE COL1 IS NOT NULL;"
+        "type": "sql",
+        "code": "SELECT SUM(COL2 + COL3) FROM TAB1 WHERE COL1 IS NOT NULL;"
       },
       {
         "type": "table",
@@ -25983,8 +25774,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT COUNT(TAB1.COL1) AS CNT  \nFROM TAB1 LEFT OUTER JOIN TAB2 \nON TAB1.COL2 = TAB2.COL2 \nAND TAB1.COL1 = TAB2.COL1;"
+        "type": "sql",
+        "code": "SELECT COUNT(TAB1.COL1) AS CNT  \nFROM TAB1 LEFT OUTER JOIN TAB2 \nON TAB1.COL2 = TAB2.COL2 \nAND TAB1.COL1 = TAB2.COL1;"
       },
       {
         "type": "table",
@@ -26087,8 +25878,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT SUM(SAL) \nFROM EMPLOYEES \nWHERE (DEPTNO, SAL) IN (SELECT DEPTNO, MAX(SAL) \nFROM EMPLOYEES \nGROUP BY DEPTNO);"
+        "type": "sql",
+        "code": "SELECT SUM(SAL) \nFROM EMPLOYEES \nWHERE (DEPTNO, SAL) IN (SELECT DEPTNO, MAX(SAL) \nFROM EMPLOYEES \nGROUP BY DEPTNO);"
       },
       {
         "type": "table",
@@ -26156,8 +25947,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "DELETE FROM TAB1 \nWHERE CODE IN (SELECT CODE \nFROM TAB2 \nWHERE STATUS = 'OPEN'); \n\nSELECT SUM(FARE) \nFROM TAB1;"
+        "type": "sql",
+        "code": "DELETE FROM TAB1 \nWHERE CODE IN (SELECT CODE \nFROM TAB2 \nWHERE STATUS = 'OPEN'); \n\nSELECT SUM(FARE) \nFROM TAB1;"
       },
       {
         "type": "table",
@@ -26261,8 +26052,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT DEPTNO, SUM(SAL) AS SUM_SAL \nFROM EMP \nGROUP BY DEPTNO \nUNION ALL \nSELECT NULL DEPTNO, SUM(SAL) AS SUM_SAL \nFROM EMP; \nSELECT DEPTNO, SUM(SAL) AS SUM_SAL \nFROM EMP \nGROUP BY _______________;"
+        "type": "sql",
+        "code": "SELECT DEPTNO, SUM(SAL) AS SUM_SAL \nFROM EMP \nGROUP BY DEPTNO \nUNION ALL \nSELECT NULL DEPTNO, SUM(SAL) AS SUM_SAL \nFROM EMP; \nSELECT DEPTNO, SUM(SAL) AS SUM_SAL \nFROM EMP \nGROUP BY _______________;"
       }
     ]
   },
@@ -26309,8 +26100,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT EMPNO, ENAME, DEPTNO, SAL,  \nSUM(SAL) OVER(PARTITION BY DEPTNO ORDER BY SAL \n____________________) AS RESULT \nFROM EMP;"
+        "type": "sql",
+        "code": "SELECT EMPNO, ENAME, DEPTNO, SAL,  \nSUM(SAL) OVER(PARTITION BY DEPTNO ORDER BY SAL \n____________________) AS RESULT \nFROM EMP;"
       },
       {
         "type": "table",
@@ -26486,8 +26277,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT * \n  FROM TAB1 \nUNPIVOT (_____ FOR _____ IN (\"2023\", \"2024\"));"
+        "type": "sql",
+        "code": "SELECT * \n  FROM TAB1 \nUNPIVOT (_____ FOR _____ IN (\"2023\", \"2024\"));"
       },
       {
         "type": "table",
@@ -26565,8 +26356,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT LENGTH(REGEXP_REPLACE('REGEXP \\. ESCAPE CHARACTER, A|B : A OR B', '[A-z|0-9\\. ]'))  FROM DUAL;"
+        "type": "sql",
+        "code": "SELECT LENGTH(REGEXP_REPLACE('REGEXP \\. ESCAPE CHARACTER, A|B : A OR B', '[A-z|0-9\\. ]'))  FROM DUAL;"
       }
     ]
   },
@@ -26676,8 +26467,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "CREATE TABLE TAB1(COL1 NUMBER, COL2 NUMBER); \nINSERT INTO TAB1 VALUES(100, 100); \nCOMMIT;"
+        "type": "sql",
+        "code": "CREATE TABLE TAB1(COL1 NUMBER, COL2 NUMBER); \nINSERT INTO TAB1 VALUES(100, 100); \nCOMMIT;"
       }
     ]
   },
@@ -27068,8 +26859,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT NEXT_DAY(ADD_MONTHS(HIREDATE, 6),'월요일') FROM EMP;"
+        "type": "sql",
+        "code": "SELECT NEXT_DAY(ADD_MONTHS(HIREDATE, 6),'월요일') FROM EMP;"
       }
     ]
   },
@@ -27095,8 +26886,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT SUM(NULLIF(COL1,100) + COL2) FROM TAB1;"
+        "type": "sql",
+        "code": "SELECT SUM(NULLIF(COL1,100) + COL2) FROM TAB1;"
       },
       {
         "type": "table",
@@ -27144,8 +26935,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT COUNT(COL1) FROM TAB1 WHERE NOT EXISTS(SELECT 'X' FROM TAB2 WHERE TAB1.COL2 = TAB2.COL2);"
+        "type": "sql",
+        "code": "SELECT COUNT(COL1) FROM TAB1 WHERE NOT EXISTS(SELECT 'X' FROM TAB2 WHERE TAB1.COL2 = TAB2.COL2);"
       },
       {
         "type": "table",
@@ -27219,8 +27010,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT COUNT(COL1) FROM TAB1 WHERE COL2 NOT BETWEEN 2000 AND 3000 AND COL3 NOT IN (10, 20);"
+        "type": "sql",
+        "code": "SELECT COUNT(COL1) FROM TAB1 WHERE COL2 NOT BETWEEN 2000 AND 3000 AND COL3 NOT IN (10, 20);"
       },
       {
         "type": "table",
@@ -27316,8 +27107,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT E.ENAME, E.SAL, E.DEPTNO, D.DNAME FROM EMP E, DEPT D WHERE E.DEPTNO = D.DEPTNO AND E.SAL > 3000 ORDER BY E.ENAME;"
+        "type": "sql",
+        "code": "SELECT E.ENAME, E.SAL, E.DEPTNO, D.DNAME FROM EMP E, DEPT D WHERE E.DEPTNO = D.DEPTNO AND E.SAL > 3000 ORDER BY E.ENAME;"
       }
     ]
   },
@@ -27406,8 +27197,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT SUM(TAB2.COL2) FROM TAB1, TAB2 WHERE TAB1.COL2 = TAB2.COL1;"
+        "type": "sql",
+        "code": "SELECT SUM(TAB2.COL2) FROM TAB1, TAB2 WHERE TAB1.COL2 = TAB2.COL1;"
       },
       {
         "type": "table",
@@ -27523,8 +27314,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT SUM(SAL) FROM (SELECT ENAME, DEPTNO, SAL, NTILE(2) OVER(PARTITION BY DEPTNO ORDER BY SAL) AS GN FROM EMP) WHERE (DEPTNO = 10 AND GN = 1) OR (DEPTNO = 20 AND GN = 2);"
+        "type": "sql",
+        "code": "SELECT SUM(SAL) FROM (SELECT ENAME, DEPTNO, SAL, NTILE(2) OVER(PARTITION BY DEPTNO ORDER BY SAL) AS GN FROM EMP) WHERE (DEPTNO = 10 AND GN = 1) OR (DEPTNO = 20 AND GN = 2);"
       },
       {
         "type": "table",
@@ -27596,13 +27387,13 @@ export const AI_MOCK: QuizQuestion[] = [
     "number": 828,
     "title": "다음 결과를 얻기 위한 SQL 문장으로 적절하지 않은 것은?",
     "options": [
-      "SELECT 이름, 성적 FROM (SELECT 성적, DENSE_RANK() OVER(ORDER BY 성적 DESC) AS RN FROM EXAM) WHERE RN BETWEEN 2 AND 3;",
-      "SELECT 이름, 성적 FROM (SELECT 성적, ROW_NUMBER() OVER(ORDER BY 성적 DESC) AS RN FROM EXAM) WHERE RN BETWEEN 2 AND 4;",
+      "SELECT 이름, 성적 FROM (SELECT 이름, 성적, DENSE_RANK() OVER(ORDER BY 성적 DESC) AS RN FROM EXAM) WHERE RN BETWEEN 2 AND 3;",
+      "SELECT 이름, 성적 FROM (SELECT 이름, 성적, ROW_NUMBER() OVER(ORDER BY 성적 DESC) AS RN FROM EXAM) WHERE RN BETWEEN 2 AND 4;",
       "SELECT TOP(3) WITH TIES 이름, 성적 FROM EXAM ORDER BY 성적 DESC;",
       "SELECT 이름, 성적 FROM EXAM ORDER BY 성적 DESC OFFSET 1 ROW FETCH FIRST 3 ROWS ONLY;"
     ],
     "correctIndex": 2,
-    "explanation": "TOP 쿼리는 성적이 높은 순서대로 동순위 포함하여 3명을 출력하므로 홍길동, 박길동, 최길동이 출력된다.",
+    "explanation": "결과는 2~4위(박길동 80, 최길동 80, 김길동 75)다. ① DENSE_RANK 는 98=1, 80·80=2, 75=3 이라 RN 2~3 이 세 명. ② ROW_NUMBER 는 1~5 번호라 RN 2~4 가 같은 세 명. ④ 는 1행을 건너뛰고 3행을 가져와 같은 결과다. ③ TOP(3) WITH TIES 는 위에서 3명(동점 포함)이라 홍길동·박길동·최길동이 나와 결과와 다르다(③).",
     "chapter": "윈도우 함수",
     "_source": "sqld-1140",
     "_origId": "sqld-0759",
@@ -27685,8 +27476,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT * FROM EMP START WITH EMPNO = '0001' CONNECT BY MGR = PRIOR EMPNO;"
+        "type": "sql",
+        "code": "SELECT * FROM EMP START WITH EMPNO = '0001' CONNECT BY MGR = PRIOR EMPNO;"
       },
       {
         "type": "table",
@@ -27733,8 +27524,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT SYS_CONNECT_BY_PATH(DNAME, '-') FROM DEPARTMENT WHERE DEPTNO = 103 START WITH PART IS NULL CONNECT BY PART = PRIOR DEPTNO ;"
+        "type": "sql",
+        "code": "SELECT SYS_CONNECT_BY_PATH(DNAME, '-') FROM DEPARTMENT WHERE DEPTNO = 103 START WITH PART IS NULL CONNECT BY PART = PRIOR DEPTNO ;"
       },
       {
         "type": "table",
@@ -27829,8 +27620,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT REGEXP_SUBSTR('123-234-4545-233', '((\\d+)-(\\d+))-((\\d+)-(\\d+))', 1, 1, NULL, 4) FROM DUAL;"
+        "type": "sql",
+        "code": "SELECT REGEXP_SUBSTR('123-234-4545-233', '((\\d+)-(\\d+))-((\\d+)-(\\d+))', 1, 1, NULL, 4) FROM DUAL;"
       }
     ]
   },
@@ -28348,8 +28139,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT COUNT(ENAME) FROM EMP WHERE ENAME NOT LIKE '_L%E%';"
+        "type": "sql",
+        "code": "SELECT COUNT(ENAME) FROM EMP WHERE ENAME NOT LIKE '_L%E%';"
       },
       {
         "type": "table",
@@ -28642,8 +28433,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT * \n  FROM TAB1 JOIN TAB2 \n     ON TAB1.COL1 = TAB2.COL1 \n        LEFT OUTER JOIN TAB3 \n     ON TAB1.COL2 = TAB3.COL2;"
+        "type": "sql",
+        "code": "SELECT * \n  FROM TAB1 JOIN TAB2 \n     ON TAB1.COL1 = TAB2.COL1 \n        LEFT OUTER JOIN TAB3 \n     ON TAB1.COL2 = TAB3.COL2;"
       }
     ]
   },
@@ -28690,8 +28481,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT COUNT(*) C1, COUNT(COL1) C2, SUM(COL2) C3 , SUM(COL1+COL2+COL3) C4 FROM TAB1;"
+        "type": "sql",
+        "code": "SELECT COUNT(*) C1, COUNT(COL1) C2, SUM(COL2) C3 , SUM(COL1+COL2+COL3) C4 FROM TAB1;"
       },
       {
         "type": "table",
@@ -30776,8 +30567,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "JOIN",
     "references": [
       {
-        "type": "text",
-        "content": "SELECT COUNT(*)\nFROM A a\nLEFT JOIN B b\n  ON a.id = b.id\nWHERE b.id IS NULL\n   OR a.name LIKE 'G%';"
+        "type": "sql",
+        "code": "SELECT COUNT(*)\nFROM A a\nLEFT JOIN B b\n  ON a.id = b.id\nWHERE b.id IS NULL\n   OR a.name LIKE 'G%';"
       },
       {
         "type": "table",
@@ -30916,8 +30707,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "JOIN",
     "references": [
       {
-        "type": "text",
-        "content": "SELECT * FROM A JOIN B ON A.ID = B.ID;"
+        "type": "sql",
+        "code": "SELECT * FROM A JOIN B ON A.ID = B.ID;"
       },
       {
         "type": "table",
@@ -30986,8 +30777,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "JOIN",
     "references": [
       {
-        "type": "text",
-        "content": "SELECT COUNT(DISTINCT a.id)\nFROM A a\nJOIN B b\n  ON a.id = b.id\nWHERE a.id IN (\n  SELECT id\n  FROM B\n  WHERE id >= 2\n);"
+        "type": "sql",
+        "code": "SELECT COUNT(DISTINCT a.id)\nFROM A a\nJOIN B b\n  ON a.id = b.id\nWHERE a.id IN (\n  SELECT id\n  FROM B\n  WHERE id >= 2\n);"
       },
       {
         "type": "table",
@@ -31118,8 +30909,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "JOIN",
     "references": [
       {
-        "type": "text",
-        "content": "SELECT NVL(TO_CHAR(a.id), 'NO_A') AS a_id,\n       b.id AS b_id,\n       b.grade\nFROM A a\nRIGHT OUTER JOIN B b\n  ON a.id = b.id\nORDER BY b.id;"
+        "type": "sql",
+        "code": "SELECT NVL(TO_CHAR(a.id), 'NO_A') AS a_id,\n       b.id AS b_id,\n       b.grade\nFROM A a\nRIGHT OUTER JOIN B b\n  ON a.id = b.id\nORDER BY b.id;"
       },
       {
         "type": "table",
@@ -31184,8 +30975,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "JOIN",
     "references": [
       {
-        "type": "text",
-        "content": "SELECT a.id,\n       COALESCE(b.grade, 'NONE') AS grade\nFROM A a\nLEFT OUTER JOIN B b\n  ON a.id = b.id\nWHERE b.id IS NULL\nORDER BY a.id;"
+        "type": "sql",
+        "code": "SELECT a.id,\n       COALESCE(b.grade, 'NONE') AS grade\nFROM A a\nLEFT OUTER JOIN B b\n  ON a.id = b.id\nWHERE b.id IS NULL\nORDER BY a.id;"
       },
       {
         "type": "table",
@@ -31312,8 +31103,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "그룹 함수",
     "references": [
       {
-        "type": "text",
-        "content": "SELECT dept\nFROM emp\nGROUP BY dept\nHAVING COUNT(*) >= 4\n   AND AVG(salary) > 3000\n   AND SUM(CASE WHEN salary >= 4000 THEN 1 ELSE 0 END) >= 2;"
+        "type": "sql",
+        "code": "SELECT dept\nFROM emp\nGROUP BY dept\nHAVING COUNT(*) >= 4\n   AND AVG(salary) > 3000\n   AND SUM(CASE WHEN salary >= 4000 THEN 1 ELSE 0 END) >= 2;"
       },
       {
         "type": "table",
@@ -31399,8 +31190,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "그룹 함수",
     "references": [
       {
-        "type": "text",
-        "content": "SELECT dept\nFROM emp\nGROUP BY dept\nHAVING MAX(salary) - MIN(salary) >= 1000\n   AND COUNT(*) >= 4\nORDER BY dept;"
+        "type": "sql",
+        "code": "SELECT dept\nFROM emp\nGROUP BY dept\nHAVING MAX(salary) - MIN(salary) >= 1000\n   AND COUNT(*) >= 4\nORDER BY dept;"
       },
       {
         "type": "table",
@@ -31486,8 +31277,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "그룹 함수",
     "references": [
       {
-        "type": "text",
-        "content": "SELECT dept, COUNT(*) FROM emp GROUP BY dept HAVING MIN(salary) >= 2500;"
+        "type": "sql",
+        "code": "SELECT dept, COUNT(*) FROM emp GROUP BY dept HAVING MIN(salary) >= 2500;"
       },
       {
         "type": "table",
@@ -31739,8 +31530,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "집계 함수",
     "references": [
       {
-        "type": "text",
-        "content": "SELECT SUM(NVL(bonus, 0)) + COUNT(salary) AS val\nFROM emp_null;"
+        "type": "sql",
+        "code": "SELECT SUM(NVL(bonus, 0)) + COUNT(salary) AS val\nFROM emp_null;"
       },
       {
         "type": "table",
@@ -32206,8 +31997,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "서브쿼리",
     "references": [
       {
-        "type": "text",
-        "content": "SELECT COUNT(*)\nFROM emp e\nWHERE e.salary > (\n        SELECT AVG(s.salary)\n        FROM emp s\n        WHERE s.dept = e.dept\n      )\n  AND e.salary >= (\n        SELECT MAX(s2.salary) - 500\n        FROM emp s2\n        WHERE s2.dept = e.dept\n      );"
+        "type": "sql",
+        "code": "SELECT COUNT(*)\nFROM emp e\nWHERE e.salary > (\n        SELECT AVG(s.salary)\n        FROM emp s\n        WHERE s.dept = e.dept\n      )\n  AND e.salary >= (\n        SELECT MAX(s2.salary) - 500\n        FROM emp s2\n        WHERE s2.dept = e.dept\n      );"
       },
       {
         "type": "table",
@@ -32263,8 +32054,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "서브쿼리",
     "references": [
       {
-        "type": "text",
-        "content": "SELECT EMP_NAME, DEPT, SALARY\nFROM EMP E1\nWHERE SALARY > (\n    SELECT AVG(SALARY)\n    FROM EMP E2\n    WHERE E1.DEPT = E2.DEPT\n);"
+        "type": "sql",
+        "code": "SELECT EMP_NAME, DEPT, SALARY\nFROM EMP E1\nWHERE SALARY > (\n    SELECT AVG(SALARY)\n    FROM EMP E2\n    WHERE E1.DEPT = E2.DEPT\n);"
       },
       {
         "type": "table",
@@ -32320,8 +32111,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "서브쿼리",
     "references": [
       {
-        "type": "text",
-        "content": "SELECT AVG(salary) FROM emp s WHERE s.dept = e.dept"
+        "type": "sql",
+        "code": "SELECT AVG(salary) FROM emp s WHERE s.dept = e.dept"
       },
       {
         "type": "table",
@@ -32377,8 +32168,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "서브쿼리",
     "references": [
       {
-        "type": "text",
-        "content": "SELECT e.emp_name, e.dept, e.salary\nFROM emp e\nWHERE e.salary > (\n  SELECT AVG(salary)\n  FROM emp\n  WHERE dept = e.dept\n);"
+        "type": "sql",
+        "code": "SELECT e.emp_name, e.dept, e.salary\nFROM emp e\nWHERE e.salary > (\n  SELECT AVG(salary)\n  FROM emp\n  WHERE dept = e.dept\n);"
       },
       {
         "type": "table",
@@ -32500,8 +32291,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "계층형 질의",
     "references": [
       {
-        "type": "text",
-        "content": "SELECT emp_name,\n       LEVEL AS lv,\n       CONNECT_BY_ISLEAF AS is_leaf\nFROM emp_tree\nSTART WITH mgr_id IS NULL\nCONNECT BY PRIOR emp_id = mgr_id\nORDER SIBLINGS BY emp_name;"
+        "type": "sql",
+        "code": "SELECT emp_name,\n       LEVEL AS lv,\n       CONNECT_BY_ISLEAF AS is_leaf\nFROM emp_tree\nSTART WITH mgr_id IS NULL\nCONNECT BY PRIOR emp_id = mgr_id\nORDER SIBLINGS BY emp_name;"
       },
       {
         "type": "table",
@@ -32572,8 +32363,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "계층형 질의",
     "references": [
       {
-        "type": "text",
-        "content": "SELECT emp_id,\n       emp_name,\n       mgr_id,\n       LEVEL AS lv\nFROM emp_tree\nSTART WITH mgr_id IS NULL\nCONNECT BY PRIOR emp_id = mgr_id\nORDER SIBLINGS BY emp_name;"
+        "type": "sql",
+        "code": "SELECT emp_id,\n       emp_name,\n       mgr_id,\n       LEVEL AS lv\nFROM emp_tree\nSTART WITH mgr_id IS NULL\nCONNECT BY PRIOR emp_id = mgr_id\nORDER SIBLINGS BY emp_name;"
       },
       {
         "type": "table",
@@ -32644,8 +32435,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "계층형 질의",
     "references": [
       {
-        "type": "text",
-        "content": "SELECT emp_name,\n       LEVEL AS lv,\n       SYS_CONNECT_BY_PATH(emp_name, ' > ') AS path\nFROM emp_tree\nSTART WITH mgr_id IS NULL\nCONNECT BY PRIOR emp_id = mgr_id\nORDER SIBLINGS BY emp_name;"
+        "type": "sql",
+        "code": "SELECT emp_name,\n       LEVEL AS lv,\n       SYS_CONNECT_BY_PATH(emp_name, ' > ') AS path\nFROM emp_tree\nSTART WITH mgr_id IS NULL\nCONNECT BY PRIOR emp_id = mgr_id\nORDER SIBLINGS BY emp_name;"
       },
       {
         "type": "table",
@@ -32716,8 +32507,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "계층형 질의",
     "references": [
       {
-        "type": "text",
-        "content": "SELECT CONNECT_BY_ROOT emp_name AS root_name,\n       emp_name,\n       LEVEL AS lv\nFROM emp_tree\nSTART WITH mgr_id IS NULL\nCONNECT BY PRIOR emp_id = mgr_id;"
+        "type": "sql",
+        "code": "SELECT CONNECT_BY_ROOT emp_name AS root_name,\n       emp_name,\n       LEVEL AS lv\nFROM emp_tree\nSTART WITH mgr_id IS NULL\nCONNECT BY PRIOR emp_id = mgr_id;"
       },
       {
         "type": "table",
@@ -32788,8 +32579,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "PIVOT",
     "references": [
       {
-        "type": "text",
-        "content": "SELECT dept, Q1, Q2\nFROM (\n  SELECT dept, quarter_cd, amount\n  FROM sales_q\n)\nPIVOT (\n  SUM(amount)\n  FOR quarter_cd IN ('Q1' AS Q1, 'Q2' AS Q2)\n)\nORDER BY dept;"
+        "type": "sql",
+        "code": "SELECT dept, Q1, Q2\nFROM (\n  SELECT dept, quarter_cd, amount\n  FROM sales_q\n)\nPIVOT (\n  SUM(amount)\n  FOR quarter_cd IN ('Q1' AS Q1, 'Q2' AS Q2)\n)\nORDER BY dept;"
       },
       {
         "type": "table",
@@ -32855,8 +32646,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "PIVOT",
     "references": [
       {
-        "type": "text",
-        "content": "SELECT dept, Q1, Q2\nFROM (\n  SELECT dept, quarter_cd, amount\n  FROM sales_q\n)\nPIVOT (\n  SUM(amount)\n  FOR quarter_cd IN ('Q1' AS Q1, 'Q2' AS Q2)\n);"
+        "type": "sql",
+        "code": "SELECT dept, Q1, Q2\nFROM (\n  SELECT dept, quarter_cd, amount\n  FROM sales_q\n)\nPIVOT (\n  SUM(amount)\n  FOR quarter_cd IN ('Q1' AS Q1, 'Q2' AS Q2)\n);"
       },
       {
         "type": "table",
@@ -32922,8 +32713,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "DML",
     "references": [
       {
-        "type": "text",
-        "content": "SELECT region,\n       category,\n       amount,\n       ROW_NUMBER() OVER (\n         ORDER BY category ASC, amount DESC, region ASC\n       ) AS rn\nFROM sales\nWHERE amount >= 100;"
+        "type": "sql",
+        "code": "SELECT region,\n       category,\n       amount,\n       ROW_NUMBER() OVER (\n         ORDER BY category ASC, amount DESC, region ASC\n       ) AS rn\nFROM sales\nWHERE amount >= 100;"
       },
       {
         "type": "table",
@@ -32979,8 +32770,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "DML",
     "references": [
       {
-        "type": "text",
-        "content": "SELECT COUNT(*)\nFROM (\n  SELECT DISTINCT region, category\n  FROM sales\n  WHERE amount >= 100\n) x;"
+        "type": "sql",
+        "code": "SELECT COUNT(*)\nFROM (\n  SELECT DISTINCT region, category\n  FROM sales\n  WHERE amount >= 100\n) x;"
       },
       {
         "type": "table",
@@ -33076,8 +32867,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "윈도우 함수",
     "references": [
       {
-        "type": "text",
-        "content": "SELECT region,\n       seller,\n       amount,\n       ROW_NUMBER() OVER (\n         PARTITION BY region\n         ORDER BY amount DESC, seller ASC\n       ) AS rn,\n       RANK() OVER (\n         PARTITION BY region\n         ORDER BY amount DESC\n       ) AS rnk\nFROM sales_rank;"
+        "type": "sql",
+        "code": "SELECT region,\n       seller,\n       amount,\n       ROW_NUMBER() OVER (\n         PARTITION BY region\n         ORDER BY amount DESC, seller ASC\n       ) AS rn,\n       RANK() OVER (\n         PARTITION BY region\n         ORDER BY amount DESC\n       ) AS rnk\nFROM sales_rank;"
       },
       {
         "type": "table",
@@ -33312,8 +33103,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "그룹 함수",
     "references": [
       {
-        "type": "text",
-        "content": "SELECT region,\n       product,\n       SUM(amount) AS amt,\n       GROUPING(region) AS gr,\n       GROUPING(product) AS gp\nFROM order_amt\nGROUP BY ROLLUP(region, product);"
+        "type": "sql",
+        "code": "SELECT region,\n       product,\n       SUM(amount) AS amt,\n       GROUPING(region) AS gr,\n       GROUPING(product) AS gp\nFROM order_amt\nGROUP BY ROLLUP(region, product);"
       },
       {
         "type": "table",
@@ -33475,8 +33266,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "집합 연산자",
     "references": [
       {
-        "type": "text",
-        "content": "SELECT val\nFROM (\n  SELECT 1 AS val UNION ALL\n  SELECT 2 UNION ALL\n  SELECT 2 UNION ALL\n  SELECT 3\n) a\nMINUS\nSELECT val\nFROM (\n  SELECT 2 AS val UNION\n  SELECT 4\n) b;"
+        "type": "sql",
+        "code": "SELECT val\nFROM (\n  SELECT 1 AS val UNION ALL\n  SELECT 2 UNION ALL\n  SELECT 2 UNION ALL\n  SELECT 3\n) a\nMINUS\nSELECT val\nFROM (\n  SELECT 2 AS val UNION\n  SELECT 4\n) b;"
       }
     ]
   },
@@ -34007,8 +33798,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "View",
     "references": [
       {
-        "type": "text",
-        "content": "CREATE VIEW v_dept_sum AS\nSELECT dept, COUNT(*) AS cnt\nFROM emp\nGROUP BY dept;"
+        "type": "sql",
+        "code": "CREATE VIEW v_dept_sum AS\nSELECT dept, COUNT(*) AS cnt\nFROM emp\nGROUP BY dept;"
       }
     ]
   },
@@ -34053,8 +33844,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "View",
     "references": [
       {
-        "type": "text",
-        "content": "CREATE VIEW v_emp AS SELECT emp_id, emp_name, dept FROM emp WHERE dept = 'SALES';"
+        "type": "sql",
+        "code": "CREATE VIEW v_emp AS SELECT emp_id, emp_name, dept FROM emp WHERE dept = 'SALES';"
       }
     ]
   },
@@ -34119,8 +33910,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "DDL",
     "references": [
       {
-        "type": "text",
-        "content": "CREATE TABLE dept (\n  dept_id NUMBER PRIMARY KEY\n);\nCREATE TABLE emp (\n  emp_id NUMBER PRIMARY KEY,\n  dept_id NUMBER\n);\nALTER TABLE emp\nADD CONSTRAINT fk_emp_dept\nFOREIGN KEY (dept_id) REFERENCES dept(dept_id);"
+        "type": "sql",
+        "code": "CREATE TABLE dept (\n  dept_id NUMBER PRIMARY KEY\n);\nCREATE TABLE emp (\n  emp_id NUMBER PRIMARY KEY,\n  dept_id NUMBER\n);\nALTER TABLE emp\nADD CONSTRAINT fk_emp_dept\nFOREIGN KEY (dept_id) REFERENCES dept(dept_id);"
       }
     ]
   },
@@ -34225,8 +34016,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "DCL",
     "references": [
       {
-        "type": "text",
-        "content": "GRANT SELECT ON emp TO user1 WITH GRANT OPTION;\nuser1이 user2에게 SELECT ON emp 권한 부여\nREVOKE SELECT ON emp FROM user1;"
+        "type": "sql",
+        "code": "GRANT SELECT ON emp TO user1 WITH GRANT OPTION;\nuser1이 user2에게 SELECT ON emp 권한 부여\nREVOKE SELECT ON emp FROM user1;"
       }
     ]
   },
@@ -35263,8 +35054,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "DCL",
     "references": [
       {
-        "type": "text",
-        "content": "GRANT SELECT ON emp TO user1 WITH GRANT OPTION;\nuser1이 user2에게 SELECT ON emp 권한 부여\nREVOKE SELECT ON emp FROM user1;"
+        "type": "sql",
+        "code": "GRANT SELECT ON emp TO user1 WITH GRANT OPTION;\nuser1이 user2에게 SELECT ON emp 권한 부여\nREVOKE SELECT ON emp FROM user1;"
       }
     ]
   },
@@ -35309,8 +35100,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "DML",
     "references": [
       {
-        "type": "text",
-        "content": "INSERT INTO emp_backup (emp_id, emp_name)\nSELECT emp_id, emp_name\nFROM emp\nWHERE dept = 'SALES';"
+        "type": "sql",
+        "code": "INSERT INTO emp_backup (emp_id, emp_name)\nSELECT emp_id, emp_name\nFROM emp\nWHERE dept = 'SALES';"
       }
     ]
   },
@@ -35335,8 +35126,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "DML",
     "references": [
       {
-        "type": "text",
-        "content": "DELETE FROM emp\nWHERE dept_id IS NULL;"
+        "type": "sql",
+        "code": "DELETE FROM emp\nWHERE dept_id IS NULL;"
       }
     ]
   },
@@ -35381,8 +35172,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "DML",
     "references": [
       {
-        "type": "text",
-        "content": "UPDATE emp\nSET status = 'Y';"
+        "type": "sql",
+        "code": "UPDATE emp\nSET status = 'Y';"
       }
     ]
   },
@@ -35407,8 +35198,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "NULL",
     "references": [
       {
-        "type": "text",
-        "content": "SELECT 100 + NULL FROM dual;"
+        "type": "sql",
+        "code": "SELECT 100 + NULL FROM dual;"
       }
     ]
   },
@@ -35433,8 +35224,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "NULL",
     "references": [
       {
-        "type": "text",
-        "content": "SELECT NVL(comm, 0) + sal FROM emp WHERE emp_id = 1;"
+        "type": "sql",
+        "code": "SELECT NVL(comm, 0) + sal FROM emp WHERE emp_id = 1;"
       }
     ]
   },
@@ -35459,8 +35250,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "NULL",
     "references": [
       {
-        "type": "text",
-        "content": "SELECT COALESCE(NULL, NULL, 5, 10) FROM dual;"
+        "type": "sql",
+        "code": "SELECT COALESCE(NULL, NULL, 5, 10) FROM dual;"
       }
     ]
   },
@@ -35669,8 +35460,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "단일행 함수",
     "references": [
       {
-        "type": "text",
-        "content": "SELECT SUBSTR('SQLD', 2, 2) FROM dual;"
+        "type": "sql",
+        "code": "SELECT SUBSTR('SQLD', 2, 2) FROM dual;"
       }
     ]
   },
@@ -35695,8 +35486,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "단일행 함수",
     "references": [
       {
-        "type": "text",
-        "content": "SELECT INSTR('SQLD SQL', 'SQL', 1, 2) FROM dual;"
+        "type": "sql",
+        "code": "SELECT INSTR('SQLD SQL', 'SQL', 1, 2) FROM dual;"
       }
     ]
   },
@@ -35721,8 +35512,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "단일행 함수",
     "references": [
       {
-        "type": "text",
-        "content": "SELECT TRUNC(845.56, 1) FROM dual;"
+        "type": "sql",
+        "code": "SELECT TRUNC(845.56, 1) FROM dual;"
       }
     ]
   },
@@ -35747,8 +35538,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "단일행 함수",
     "references": [
       {
-        "type": "text",
-        "content": "SELECT LENGTH(TRIM(' SQLD ')) FROM dual;"
+        "type": "sql",
+        "code": "SELECT LENGTH(TRIM(' SQLD ')) FROM dual;"
       }
     ]
   },
@@ -35826,8 +35617,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "집계 함수",
     "references": [
       {
-        "type": "text",
-        "content": "SELECT SUM(NVL(bonus, 0)) FROM t;"
+        "type": "sql",
+        "code": "SELECT SUM(NVL(bonus, 0)) FROM t;"
       },
       {
         "type": "table",
@@ -35936,8 +35727,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "집계 함수",
     "references": [
       {
-        "type": "text",
-        "content": "SELECT COUNT(*) - COUNT(salary) FROM t;"
+        "type": "sql",
+        "code": "SELECT COUNT(*) - COUNT(salary) FROM t;"
       },
       {
         "type": "table",
@@ -35993,8 +35784,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "집계 함수",
     "references": [
       {
-        "type": "text",
-        "content": "SELECT COUNT(DISTINCT dept) FROM emp;"
+        "type": "sql",
+        "code": "SELECT COUNT(DISTINCT dept) FROM emp;"
       }
     ]
   },
@@ -36019,8 +35810,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "집합 연산자",
     "references": [
       {
-        "type": "text",
-        "content": "SELECT 1 AS n UNION\nSELECT 1 UNION\nSELECT 2;"
+        "type": "sql",
+        "code": "SELECT 1 AS n UNION\nSELECT 1 UNION\nSELECT 2;"
       }
     ]
   },
@@ -36045,8 +35836,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "집합 연산자",
     "references": [
       {
-        "type": "text",
-        "content": "SELECT 1 AS n UNION ALL\nSELECT 1 UNION ALL\nSELECT 2;"
+        "type": "sql",
+        "code": "SELECT 1 AS n UNION ALL\nSELECT 1 UNION ALL\nSELECT 2;"
       }
     ]
   },
@@ -36071,8 +35862,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "집합 연산자",
     "references": [
       {
-        "type": "text",
-        "content": "SELECT 1 AS n UNION\nSELECT 2\nINTERSECT\nSELECT 2 AS n;"
+        "type": "sql",
+        "code": "SELECT 1 AS n UNION\nSELECT 2\nINTERSECT\nSELECT 2 AS n;"
       }
     ]
   },
@@ -36097,8 +35888,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "집합 연산자",
     "references": [
       {
-        "type": "text",
-        "content": "SELECT 1 AS n UNION\nSELECT 2\nMINUS\nSELECT 2 AS n;"
+        "type": "sql",
+        "code": "SELECT 1 AS n UNION\nSELECT 2\nMINUS\nSELECT 2 AS n;"
       }
     ]
   },
@@ -36143,8 +35934,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "계층형 질의",
     "references": [
       {
-        "type": "text",
-        "content": "SELECT emp_name, LEVEL\nFROM emp_tree\nSTART WITH mgr_id IS NULL\nCONNECT BY PRIOR emp_id = mgr_id;"
+        "type": "sql",
+        "code": "SELECT emp_name, LEVEL\nFROM emp_tree\nSTART WITH mgr_id IS NULL\nCONNECT BY PRIOR emp_id = mgr_id;"
       },
       {
         "type": "table",
@@ -36215,8 +36006,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "계층형 질의",
     "references": [
       {
-        "type": "text",
-        "content": "SELECT COUNT(*)\nFROM (\n  SELECT emp_name, CONNECT_BY_ISLEAF AS is_leaf\n  FROM emp_tree\n  START WITH mgr_id IS NULL\n  CONNECT BY PRIOR emp_id = mgr_id\n) x\nWHERE is_leaf = 1;"
+        "type": "sql",
+        "code": "SELECT COUNT(*)\nFROM (\n  SELECT emp_name, CONNECT_BY_ISLEAF AS is_leaf\n  FROM emp_tree\n  START WITH mgr_id IS NULL\n  CONNECT BY PRIOR emp_id = mgr_id\n) x\nWHERE is_leaf = 1;"
       },
       {
         "type": "table",
@@ -36287,8 +36078,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "계층형 질의",
     "references": [
       {
-        "type": "text",
-        "content": "SELECT emp_name,\n       CONNECT_BY_ROOT emp_name AS root_name\nFROM emp_tree\nSTART WITH mgr_id IS NULL\nCONNECT BY PRIOR emp_id = mgr_id;"
+        "type": "sql",
+        "code": "SELECT emp_name,\n       CONNECT_BY_ROOT emp_name AS root_name\nFROM emp_tree\nSTART WITH mgr_id IS NULL\nCONNECT BY PRIOR emp_id = mgr_id;"
       },
       {
         "type": "table",
@@ -36466,8 +36257,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "윈도우 함수",
     "references": [
       {
-        "type": "text",
-        "content": "SELECT region,\n       seller,\n       amount,\n       SUM(amount) OVER (PARTITION BY region) AS region_total\nFROM sales_rank;"
+        "type": "sql",
+        "code": "SELECT region,\n       seller,\n       amount,\n       SUM(amount) OVER (PARTITION BY region) AS region_total\nFROM sales_rank;"
       },
       {
         "type": "table",
@@ -36528,8 +36319,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "윈도우 함수",
     "references": [
       {
-        "type": "text",
-        "content": "SELECT region,\n       seller,\n       amount,\n       SUM(amount) OVER (\n         PARTITION BY region\n         ORDER BY amount DESC\n         ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW\n       ) AS run_amt\nFROM sales_rank;"
+        "type": "sql",
+        "code": "SELECT region,\n       seller,\n       amount,\n       SUM(amount) OVER (\n         PARTITION BY region\n         ORDER BY amount DESC\n         ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW\n       ) AS run_amt\nFROM sales_rank;"
       }
     ]
   },
@@ -36800,8 +36591,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "정규표현식",
     "references": [
       {
-        "type": "text",
-        "content": "SELECT REGEXP_REPLACE('010-1234-5678', '[^0-9]', '') FROM dual;"
+        "type": "sql",
+        "code": "SELECT REGEXP_REPLACE('010-1234-5678', '[^0-9]', '') FROM dual;"
       }
     ]
   },
@@ -36826,8 +36617,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "정규표현식",
     "references": [
       {
-        "type": "text",
-        "content": "SELECT REGEXP_SUBSTR('user@sqld.kr', '@(.+)$', 1, 1, NULL, 1) FROM dual;"
+        "type": "sql",
+        "code": "SELECT REGEXP_SUBSTR('user@sqld.kr', '@(.+)$', 1, 1, NULL, 1) FROM dual;"
       }
     ]
   },
@@ -36904,8 +36695,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "PIVOT",
     "references": [
       {
-        "type": "text",
-        "content": "SELECT dept, Q1, Q2\nFROM (\n  SELECT dept, quarter_cd, amount\n  FROM sales_q\n)\nPIVOT (\n  SUM(amount)\n  FOR quarter_cd IN ('Q1' AS Q1, 'Q2' AS Q2)\n)\nORDER BY dept;"
+        "type": "sql",
+        "code": "SELECT dept, Q1, Q2\nFROM (\n  SELECT dept, quarter_cd, amount\n  FROM sales_q\n)\nPIVOT (\n  SUM(amount)\n  FOR quarter_cd IN ('Q1' AS Q1, 'Q2' AS Q2)\n)\nORDER BY dept;"
       },
       {
         "type": "table",
@@ -37101,8 +36892,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "PIVOT",
     "references": [
       {
-        "type": "text",
-        "content": "SELECT dept, Q1, Q2\nFROM (\n  SELECT dept, quarter_cd, amount\n  FROM sales_q\n)\nPIVOT (\n  SUM(amount)\n  FOR quarter_cd IN ('Q1' AS Q1, 'Q2' AS Q2)\n);"
+        "type": "sql",
+        "code": "SELECT dept, Q1, Q2\nFROM (\n  SELECT dept, quarter_cd, amount\n  FROM sales_q\n)\nPIVOT (\n  SUM(amount)\n  FOR quarter_cd IN ('Q1' AS Q1, 'Q2' AS Q2)\n);"
       },
       {
         "type": "table",
@@ -37168,8 +36959,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "단일행 함수",
     "references": [
       {
-        "type": "text",
-        "content": "SELECT ROUND(845.56, -1) FROM dual;"
+        "type": "sql",
+        "code": "SELECT ROUND(845.56, -1) FROM dual;"
       }
     ]
   },
@@ -37534,8 +37325,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "JOIN",
     "references": [
       {
-        "type": "text",
-        "content": "SELECT a.id,\n       COUNT(*) AS cnt\nFROM A a\nJOIN B b\n  ON a.id = b.id\nGROUP BY a.id\nHAVING COUNT(*) = 1\nORDER BY a.id;"
+        "type": "sql",
+        "code": "SELECT a.id,\n       COUNT(*) AS cnt\nFROM A a\nJOIN B b\n  ON a.id = b.id\nGROUP BY a.id\nHAVING COUNT(*) = 1\nORDER BY a.id;"
       },
       {
         "type": "table",
@@ -37708,8 +37499,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "집계 함수",
     "references": [
       {
-        "type": "text",
-        "content": "SELECT COUNT(*)\nFROM emp_null\nWHERE NVL(salary, 0) = 0\n   OR bonus IS NULL;"
+        "type": "sql",
+        "code": "SELECT COUNT(*)\nFROM emp_null\nWHERE NVL(salary, 0) = 0\n   OR bonus IS NULL;"
       },
       {
         "type": "table",
@@ -38051,8 +37842,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "DML",
     "references": [
       {
-        "type": "text",
-        "content": "SELECT region,\n       category,\n       amount\nFROM sales\nORDER BY CASE WHEN amount >= 100 THEN 1 ELSE 2 END,\n         category DESC,\n         amount ASC,\n         region ASC;"
+        "type": "sql",
+        "code": "SELECT region,\n       category,\n       amount\nFROM sales\nORDER BY CASE WHEN amount >= 100 THEN 1 ELSE 2 END,\n         category DESC,\n         amount ASC,\n         region ASC;"
       },
       {
         "type": "table",
@@ -38852,8 +38643,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "계층형 질의",
     "references": [
       {
-        "type": "text",
-        "content": "SELECT emp_id,\n       emp_name,\n       LEVEL AS lv\nFROM emp_tree\nSTART WITH mgr_id IS NULL\nCONNECT BY PRIOR emp_id = mgr_id;"
+        "type": "sql",
+        "code": "SELECT emp_id,\n       emp_name,\n       LEVEL AS lv\nFROM emp_tree\nSTART WITH mgr_id IS NULL\nCONNECT BY PRIOR emp_id = mgr_id;"
       },
       {
         "type": "table",
@@ -39162,8 +38953,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "JOIN",
     "references": [
       {
-        "type": "text",
-        "content": "SELECT A.ID, B.GRADE FROM A LEFT JOIN B ON A.ID = B.ID;"
+        "type": "sql",
+        "code": "SELECT A.ID, B.GRADE FROM A LEFT JOIN B ON A.ID = B.ID;"
       },
       {
         "type": "table",
@@ -39404,8 +39195,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "윈도우 함수",
     "references": [
       {
-        "type": "text",
-        "content": "SELECT region,\n       seller,\n       amount,\n       ROW_NUMBER() OVER (\n         PARTITION BY region\n         ORDER BY amount DESC, seller ASC\n       ) AS rn\nFROM sales_rank;"
+        "type": "sql",
+        "code": "SELECT region,\n       seller,\n       amount,\n       ROW_NUMBER() OVER (\n         PARTITION BY region\n         ORDER BY amount DESC, seller ASC\n       ) AS rn\nFROM sales_rank;"
       },
       {
         "type": "table",
@@ -39649,8 +39440,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "서브쿼리",
     "references": [
       {
-        "type": "text",
-        "content": "SELECT *\nFROM EMP e\nWHERE SALARY = (\n    SELECT MAX(SALARY)\n    FROM EMP\n    WHERE DEPT = e.DEPT\n)\nAND SALARY > 4000;"
+        "type": "sql",
+        "code": "SELECT *\nFROM EMP e\nWHERE SALARY = (\n    SELECT MAX(SALARY)\n    FROM EMP\n    WHERE DEPT = e.DEPT\n)\nAND SALARY > 4000;"
       },
       {
         "type": "table",
@@ -39810,8 +39601,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "DCL",
     "references": [
       {
-        "type": "text",
-        "content": "GRANT SELECT ON emp TO user1 WITH GRANT OPTION;"
+        "type": "sql",
+        "code": "GRANT SELECT ON emp TO user1 WITH GRANT OPTION;"
       }
     ]
   },
@@ -39890,8 +39681,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "계층형 질의",
     "references": [
       {
-        "type": "text",
-        "content": "SELECT emp_name,\n       SYS_CONNECT_BY_PATH(emp_name, '/') AS path\nFROM emp_tree\nSTART WITH mgr_id IS NULL\nCONNECT BY PRIOR emp_id = mgr_id;"
+        "type": "sql",
+        "code": "SELECT emp_name,\n       SYS_CONNECT_BY_PATH(emp_name, '/') AS path\nFROM emp_tree\nSTART WITH mgr_id IS NULL\nCONNECT BY PRIOR emp_id = mgr_id;"
       },
       {
         "type": "table",
@@ -40257,8 +40048,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "View",
     "references": [
       {
-        "type": "text",
-        "content": "CREATE VIEW v_sales AS\nSELECT emp_id, dept\nFROM emp\nWHERE dept = 'SALES'\nWITH CHECK OPTION;"
+        "type": "sql",
+        "code": "CREATE VIEW v_sales AS\nSELECT emp_id, dept\nFROM emp\nWHERE dept = 'SALES'\nWITH CHECK OPTION;"
       }
     ]
   },
@@ -40976,8 +40767,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "서브쿼리",
     "references": [
       {
-        "type": "text",
-        "content": "SELECT COUNT(*)\nFROM customer c\nWHERE EXISTS (\n  SELECT 1\n  FROM orders o\n  WHERE o.customer_id = c.customer_id\n  GROUP BY o.customer_id\n  HAVING COUNT(*) >= 2\n);"
+        "type": "sql",
+        "code": "SELECT COUNT(*)\nFROM customer c\nWHERE EXISTS (\n  SELECT 1\n  FROM orders o\n  WHERE o.customer_id = c.customer_id\n  GROUP BY o.customer_id\n  HAVING COUNT(*) >= 2\n);"
       },
       {
         "type": "table",
@@ -45293,8 +45084,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "CREATE TABLE A (\n    가 VARCHAR2(10),\n    나 VARCHAR2(10),\n    다 NUMBER\n);\n\nINSERT INTO A VALUES ('009', 'A003', 600);\nINSERT INTO A VALUES ('005', 'A002', 500);\nINSERT INTO A VALUES ('002', 'A001', 300);\nINSERT INTO A VALUES ('010', 'A004', 200);\n\nCOMMIT;\n\n<SQL>\nSELECT 가, 나, SUM(다) AS 다\nFROM A\nGROUP BY 가, 나\nHAVING SUM(다) >= 500;"
+        "type": "sql",
+        "code": "CREATE TABLE A (\n    가 VARCHAR2(10),\n    나 VARCHAR2(10),\n    다 NUMBER\n);\n\nINSERT INTO A VALUES ('009', 'A003', 600);\nINSERT INTO A VALUES ('005', 'A002', 500);\nINSERT INTO A VALUES ('002', 'A001', 300);\nINSERT INTO A VALUES ('010', 'A004', 200);\n\nCOMMIT;\n\n<SQL>\nSELECT 가, 나, SUM(다) AS 다\nFROM A\nGROUP BY 가, 나\nHAVING SUM(다) >= 500;"
       }
     ]
   },
@@ -46142,8 +45933,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "select * from Mytest order by COL1 desc,  COL2 desc, COL3 desc;"
+        "type": "sql",
+        "code": "select * from Mytest order by COL1 desc,  COL2 desc, COL3 desc;"
       },
       {
         "type": "table",
@@ -46195,8 +45986,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT *\nFROM Mytest\nSTART WITH MGRID IS NULL\nCONNECT BY PRIOR EMPID = MGRID\nAND today BETWEEN '2017-01-01' AND '2022-12-31'\nORDER SIBLINGS BY EMPID;"
+        "type": "sql",
+        "code": "SELECT *\nFROM Mytest\nSTART WITH MGRID IS NULL\nCONNECT BY PRIOR EMPID = MGRID\nAND today BETWEEN '2017-01-01' AND '2022-12-31'\nORDER SIBLINGS BY EMPID;"
       },
       {
         "type": "table",
@@ -46361,8 +46152,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT COALESCE(COL1, COL2 * 50,50) FROM sqld_12;"
+        "type": "sql",
+        "code": "SELECT COALESCE(COL1, COL2 * 50,50) FROM sqld_12;"
       },
       {
         "type": "table",
@@ -46410,8 +46201,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT ID, AGE\nFROM test20\nORDER BY (CASE WHEN ID = 10 OR\nID=13 THEN 1 ELSE 2 END),  AGE DESC"
+        "type": "sql",
+        "code": "SELECT ID, AGE\nFROM test20\nORDER BY (CASE WHEN ID = 10 OR\nID=13 THEN 1 ELSE 2 END),  AGE DESC"
       },
       {
         "type": "table",
@@ -46473,8 +46264,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT C2, SUM(C3)\nFROM SQLD_01\nGROUP BY C2\nHAVING COUNT(*) >= 2;"
+        "type": "sql",
+        "code": "SELECT C2, SUM(C3)\nFROM SQLD_01\nGROUP BY C2\nHAVING COUNT(*) >= 2;"
       },
       {
         "type": "table",
@@ -46707,8 +46498,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "Create table test20 (col1 number(10));\nINSERT INTO test20 VALUES(1);\nINSERT INTO test20 VALUES(4);\nSAVEPOINT SV1;\nUPDATE test20 SET COL1=8 WHERE COL1=2;\nSAVEPOINT SV1;\nDELETE test20 WHERE COL1 >= 2;\nROLLBACK TO SV1;\nINSERT INTO test20 VALUES(3);\nSELECT MAX(COL1) FROM test20;"
+        "type": "sql",
+        "code": "Create table test20 (col1 number(10));\nINSERT INTO test20 VALUES(1);\nINSERT INTO test20 VALUES(4);\nSAVEPOINT SV1;\nUPDATE test20 SET COL1=8 WHERE COL1=2;\nSAVEPOINT SV1;\nDELETE test20 WHERE COL1 >= 2;\nROLLBACK TO SV1;\nINSERT INTO test20 VALUES(3);\nSELECT MAX(COL1) FROM test20;"
       }
     ]
   },
@@ -46948,8 +46739,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT DNAME, \n FIRST_VALUE(NAME) OVER(PARTITION BY DNAME ORDER BY SAL) AS VALUE1, \n LAST_VALUE(NAME) OVER(PARTITION BY DNAME ORDER BY SAL) AS VALUE2 \n FROM TAB1;"
+        "type": "sql",
+        "code": "SELECT DNAME, \n FIRST_VALUE(NAME) OVER(PARTITION BY DNAME ORDER BY SAL) AS VALUE1, \n LAST_VALUE(NAME) OVER(PARTITION BY DNAME ORDER BY SAL) AS VALUE2 \n FROM TAB1;"
       },
       {
         "type": "table",
@@ -47011,8 +46802,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT E.*, LEVEL \n FROM 사원 E \n START WITH 매니저사원번호 IS NULL \nCONNECT BY PRIOR 사원번호 = 매니저사원번호 AND EXTRACT(MONTH FROM 입사일자) >= 7 \n ORDER SIBLINGS BY 이름;"
+        "type": "sql",
+        "code": "SELECT E.*, LEVEL \n FROM 사원 E \n START WITH 매니저사원번호 IS NULL \nCONNECT BY PRIOR 사원번호 = 매니저사원번호 AND EXTRACT(MONTH FROM 입사일자) >= 7 \n ORDER SIBLINGS BY 이름;"
       },
       {
         "type": "table",
@@ -47116,8 +46907,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "UPDATE EMPLOYEE E1 \n SET SAL = (SELECT MAX(SAL) \n FROM EMPLOYEE E2 \n WHERE E1.DNAME = E2.DNAME) \n WHERE SAL <= (SELECT AVG(SAL) \n FROM EMPLOYEE);"
+        "type": "sql",
+        "code": "UPDATE EMPLOYEE E1 \n SET SAL = (SELECT MAX(SAL) \n FROM EMPLOYEE E2 \n WHERE E1.DNAME = E2.DNAME) \n WHERE SAL <= (SELECT AVG(SAL) \n FROM EMPLOYEE);"
       },
       {
         "type": "table",
@@ -47191,8 +46982,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT LTRIM(' AB DE ') AS C1,   INITCAP('ABCDE') AS C2, TO_CHAR('123', '999.99') AS C3 FROM DUAL;"
+        "type": "sql",
+        "code": "SELECT LTRIM(' AB DE ') AS C1,   INITCAP('ABCDE') AS C2, TO_CHAR('123', '999.99') AS C3 FROM DUAL;"
       }
     ]
   },
@@ -47218,8 +47009,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT COALESCE(COL1, COL2, COL3) RESULT FROM TAB1;"
+        "type": "sql",
+        "code": "SELECT COALESCE(COL1, COL2, COL3) RESULT FROM TAB1;"
       },
       {
         "type": "table",
@@ -47271,8 +47062,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT COUNT(COL1) AS RESULT \n FROM TAB1 \nWHERE COL2 >= 30  GROUP BY COL1;"
+        "type": "sql",
+        "code": "SELECT COUNT(COL1) AS RESULT \n FROM TAB1 \nWHERE COL2 >= 30  GROUP BY COL1;"
       },
       {
         "type": "table",
@@ -47332,8 +47123,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT COL1 AS C1, SUM(COL2) AS C2 \n FROM TAB1 \n GROUP BY COL1 \nHAVING SUM(COL2) >= 400;"
+        "type": "sql",
+        "code": "SELECT COL1 AS C1, SUM(COL2) AS C2 \n FROM TAB1 \n GROUP BY COL1 \nHAVING SUM(COL2) >= 400;"
       },
       {
         "type": "table",
@@ -47397,8 +47188,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT COL1 \nFROM TAB1 \nORDER BY CASE WHEN MOD(COL2, 3) = 0 THEN 'A' \nELSE 'B' \nEND, COL1;"
+        "type": "sql",
+        "code": "SELECT COL1 \nFROM TAB1 \nORDER BY CASE WHEN MOD(COL2, 3) = 0 THEN 'A' \nELSE 'B' \nEND, COL1;"
       },
       {
         "type": "table",
@@ -47450,8 +47241,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT E1.EMPNO, E1.ENAME, E1.HIREDATE, COUNT(E2.EMPNO) AS CNT \n  FROM EMP E1 LEFT OUTER JOIN EMP E2 \n     ON E1.HIREDATE > E2.HIREDATE \n GROUP BY E1.EMPNO, E1.ENAME, E1.HIREDATE \n ORDER BY E1.HIREDATE;"
+        "type": "sql",
+        "code": "SELECT E1.EMPNO, E1.ENAME, E1.HIREDATE, COUNT(E2.EMPNO) AS CNT \n  FROM EMP E1 LEFT OUTER JOIN EMP E2 \n     ON E1.HIREDATE > E2.HIREDATE \n GROUP BY E1.EMPNO, E1.ENAME, E1.HIREDATE \n ORDER BY E1.HIREDATE;"
       },
       {
         "type": "table",
@@ -47518,8 +47309,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT * \n  FROM (SELECT COL1, COL2 \n          FROM TAB1 \n          UNION  \n         SELECT COL1, COL2 \n          FROM TAB2) \n MINUS \nSELECT COL1, COL2 \n FROM TAB3;"
+        "type": "sql",
+        "code": "SELECT * \n  FROM (SELECT COL1, COL2 \n          FROM TAB1 \n          UNION  \n         SELECT COL1, COL2 \n          FROM TAB2) \n MINUS \nSELECT COL1, COL2 \n FROM TAB3;"
       },
       {
         "type": "table",
@@ -47627,8 +47418,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT PRODUCT_NO, GOGAK_NO, SUM(QTY) AS TOTAL_QTY  \nFROM JUMUN \nGROUP BY GROUPING SETS(PRODUCT_NO, GOGAK_NO, ());"
+        "type": "sql",
+        "code": "SELECT PRODUCT_NO, GOGAK_NO, SUM(QTY) AS TOTAL_QTY  \nFROM JUMUN \nGROUP BY GROUPING SETS(PRODUCT_NO, GOGAK_NO, ());"
       },
       {
         "type": "table",
@@ -47702,8 +47493,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT NO, \n        RANK() OVER(ORDER BY JUMSU DESC) AS RANK1, \n        DENSE_RANK() OVER(ORDER BY JUMSU DESC) AS RANK2, \n        ROW_NUMBER() OVER(ORDER BY JUMSU DESC) AS RANK3 \n  FROM STUDENT;"
+        "type": "sql",
+        "code": "SELECT NO, \n        RANK() OVER(ORDER BY JUMSU DESC) AS RANK1, \n        DENSE_RANK() OVER(ORDER BY JUMSU DESC) AS RANK2, \n        ROW_NUMBER() OVER(ORDER BY JUMSU DESC) AS RANK3 \n  FROM STUDENT;"
       },
       {
         "type": "table",
@@ -47765,8 +47556,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT 사원번호, 이름, LEVEL \n  FROM 사원 \n  START WITH 사원번호 IN (1006, 1001) \nCONNECT BY PRIOR 상위관리자코드 = 사원번호;"
+        "type": "sql",
+        "code": "SELECT 사원번호, 이름, LEVEL \n  FROM 사원 \n  START WITH 사원번호 IN (1006, 1001) \nCONNECT BY PRIOR 상위관리자코드 = 사원번호;"
       },
       {
         "type": "table",
@@ -47848,8 +47639,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT REGEXP_REPLACE(COL1, 'A(X|Y)+\\.') FROM TAB1;"
+        "type": "sql",
+        "code": "SELECT REGEXP_REPLACE(COL1, 'A(X|Y)+\\.') FROM TAB1;"
       },
       {
         "type": "table",
@@ -47890,8 +47681,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "ALTER TABLE TAB1 ADD COL4 CHAR(5); \nALTER TABLE TAB1 MODIFY COL4 DEFAULT 'AAA'; \nINSERT INTO TAB1 VALUES(4, 'D', 40, NULL); \nINSERT INTO TAB1(COL1, COL2, COL3) VALUES(5,'E',50);"
+        "type": "sql",
+        "code": "ALTER TABLE TAB1 ADD COL4 CHAR(5); \nALTER TABLE TAB1 MODIFY COL4 DEFAULT 'AAA'; \nINSERT INTO TAB1 VALUES(4, 'D', 40, NULL); \nINSERT INTO TAB1(COL1, COL2, COL3) VALUES(5,'E',50);"
       },
       {
         "type": "table",
@@ -47965,8 +47756,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT ROUND(TO_DATE('2024-02-20 14:00:00', 'YYYY-MM-DD HH24:MI:SS'), 'MONTH') AS D1, \nTRUNC(TO_DATE('2024-09-12 09:00:00', 'YYYY-MM-DD HH24:MI:SS')) AS D2 FROM DUAL;"
+        "type": "sql",
+        "code": "SELECT ROUND(TO_DATE('2024-02-20 14:00:00', 'YYYY-MM-DD HH24:MI:SS'), 'MONTH') AS D1, \nTRUNC(TO_DATE('2024-09-12 09:00:00', 'YYYY-MM-DD HH24:MI:SS')) AS D2 FROM DUAL;"
       }
     ]
   },
@@ -47992,8 +47783,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT LTRIM('ORACLE', 'A') AS C1, \n        SUBSTR('SQL-SERVER', 3, 3) AS C2, \n        LENGTH(REPLACE('SQL-SERVER', 'E')) AS C3 \n FROM DUAL;"
+        "type": "sql",
+        "code": "SELECT LTRIM('ORACLE', 'A') AS C1, \n        SUBSTR('SQL-SERVER', 3, 3) AS C2, \n        LENGTH(REPLACE('SQL-SERVER', 'E')) AS C3 \n FROM DUAL;"
       }
     ]
   },
@@ -48019,8 +47810,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT COUNT(COL1) RESULT FROM TAB1 WHERE COL3 < 100 GROUP BY COL1;   \nSELECT COUNT(COL1) RESULT FROM TAB1 WHERE COL1 IS NOT NULL GROUP BY COL1 \nHAVING SUM(COL2) > 500;"
+        "type": "sql",
+        "code": "SELECT COUNT(COL1) RESULT FROM TAB1 WHERE COL3 < 100 GROUP BY COL1;   \nSELECT COUNT(COL1) RESULT FROM TAB1 WHERE COL1 IS NOT NULL GROUP BY COL1 \nHAVING SUM(COL2) > 500;"
       },
       {
         "type": "table",
@@ -48082,8 +47873,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT EMPNO \n  FROM EMP \n ORDER BY TO_CHAR(TO_NUMBER(SUBSTR(JUMIN, 3, 2)));"
+        "type": "sql",
+        "code": "SELECT EMPNO \n  FROM EMP \n ORDER BY TO_CHAR(TO_NUMBER(SUBSTR(JUMIN, 3, 2)));"
       },
       {
         "type": "table",
@@ -48187,8 +47978,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT ENAME, DEPTNO, SAL \n  FROM EMP \n ORDER BY DEPTNO, SAL DESC;"
+        "type": "sql",
+        "code": "SELECT ENAME, DEPTNO, SAL \n  FROM EMP \n ORDER BY DEPTNO, SAL DESC;"
       },
       {
         "type": "table",
@@ -48255,8 +48046,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT 사원번호, 이름, LEVEL \nFROM 사원 \nWHERE 지역 = '경기' \nSTART WITH 상위관리자코드 IS NULL \nCONNECT BY 상위관리자코드 = PRIOR 사원번호;"
+        "type": "sql",
+        "code": "SELECT 사원번호, 이름, LEVEL \nFROM 사원 \nWHERE 지역 = '경기' \nSTART WITH 상위관리자코드 IS NULL \nCONNECT BY 상위관리자코드 = PRIOR 사원번호;"
       },
       {
         "type": "table",
@@ -48348,8 +48139,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT DEPTNO, DNAME, LEVEL, CONNECT_BY_ROOT(DNAME) AS ROOT \n  FROM DEPARTMENT \n START WITH PART IS NULL \nCONNECT BY PRIOR PART = DEPTNO;"
+        "type": "sql",
+        "code": "SELECT DEPTNO, DNAME, LEVEL, CONNECT_BY_ROOT(DNAME) AS ROOT \n  FROM DEPARTMENT \n START WITH PART IS NULL \nCONNECT BY PRIOR PART = DEPTNO;"
       },
       {
         "type": "table",
@@ -48459,8 +48250,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "ALTER TABLE TAB2 ADD FOREIGN KEY(CLASS_NO) REFERENCES TAB1(NO) ON DELETE SET NULL; \nDELETE FROM TAB1 WHERE NAME = 'C';"
+        "type": "sql",
+        "code": "ALTER TABLE TAB2 ADD FOREIGN KEY(CLASS_NO) REFERENCES TAB1(NO) ON DELETE SET NULL; \nDELETE FROM TAB1 WHERE NAME = 'C';"
       },
       {
         "type": "table",
@@ -48543,8 +48334,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT DECODE(DEPTNO, 10, DECODE(JOB, 'CLERK', 'A', 'B'), 'C') AS RESULT FROM EMP ORDER BY EMPNO;"
+        "type": "sql",
+        "code": "SELECT DECODE(DEPTNO, 10, DECODE(JOB, 'CLERK', 'A', 'B'), 'C') AS RESULT FROM EMP ORDER BY EMPNO;"
       },
       {
         "type": "table",
@@ -48628,8 +48419,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT COL2, SUM(COL3) AS C1, MIN(COL3) AS C2, MAX(COL3) AS C3 FROM TAB1 WHERE COL1 > 100 GROUP BY COL2;"
+        "type": "sql",
+        "code": "SELECT COL2, SUM(COL3) AS C1, MIN(COL3) AS C2, MAX(COL3) AS C3 FROM TAB1 WHERE COL1 > 100 GROUP BY COL2;"
       },
       {
         "type": "table",
@@ -48701,8 +48492,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT ID FROM TAB1 ORDER BY CASE WHEN ID > 'B' THEN 'A' ELSE ID END, ID;"
+        "type": "sql",
+        "code": "SELECT ID FROM TAB1 ORDER BY CASE WHEN ID > 'B' THEN 'A' ELSE ID END, ID;"
       },
       {
         "type": "table",
@@ -48752,8 +48543,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT COL1, COL2, (SELECT COL2 FROM TAB2 WHERE TAB1.COL2 = TAB2.COL1) AS RESULT1, (SELECT MAX(COL2) FROM TAB3 WHERE TAB1.COL1 = TAB3.COL1) AS RESULT2 FROM TAB1;"
+        "type": "sql",
+        "code": "SELECT COL1, COL2, (SELECT COL2 FROM TAB2 WHERE TAB1.COL2 = TAB2.COL1) AS RESULT1, (SELECT MAX(COL2) FROM TAB3 WHERE TAB1.COL1 = TAB3.COL1) AS RESULT2 FROM TAB1;"
       },
       {
         "type": "table",
@@ -48853,8 +48644,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT SUM(E2.SAL) AS RESULT FROM EMP E1, EMP E2 WHERE E1.HIREDATE >= E2.HIREDATE GROUP BY E1.ENAME;"
+        "type": "sql",
+        "code": "SELECT SUM(E2.SAL) AS RESULT FROM EMP E1, EMP E2 WHERE E1.HIREDATE >= E2.HIREDATE GROUP BY E1.ENAME;"
       },
       {
         "type": "table",
@@ -48911,8 +48702,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT NAME, NVL((SELECT FARE FROM PROMOTION P2 WHERE P1.CODE = P2.CODE), 100) PRO_FARE FROM PRODUCT P1;"
+        "type": "sql",
+        "code": "SELECT NAME, NVL((SELECT FARE FROM PROMOTION P2 WHERE P1.CODE = P2.CODE), 100) PRO_FARE FROM PRODUCT P1;"
       },
       {
         "type": "table",
@@ -48990,8 +48781,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT EMPNO, ENAME, DEPTNO, SAL, LAG(SAL, 2, 0) OVER(PARTITION BY DEPTNO ORDER BY SAL) LAV_VALUE FROM EMP;"
+        "type": "sql",
+        "code": "SELECT EMPNO, ENAME, DEPTNO, SAL, LAG(SAL, 2, 0) OVER(PARTITION BY DEPTNO ORDER BY SAL) LAV_VALUE FROM EMP;"
       },
       {
         "type": "table",
@@ -49077,8 +48868,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT RATIO_TO_REPORT(COL2) OVER() AS C1, CUME_DIST() OVER(ORDER BY COL2) AS C2, ROUND(PERCENT_RANK() OVER(ORDER BY COL2),2) AS C3 FROM TAB1;"
+        "type": "sql",
+        "code": "SELECT RATIO_TO_REPORT(COL2) OVER() AS C1, CUME_DIST() OVER(ORDER BY COL2) AS C2, ROUND(PERCENT_RANK() OVER(ORDER BY COL2),2) AS C3 FROM TAB1;"
       },
       {
         "type": "table",

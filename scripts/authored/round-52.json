@@ -1325,24 +1325,20 @@
     {
       "subject": "2과목",
       "number": 49,
-      "title": "아래 부서·사원 ERD 에서 부서 한 행을 삭제할 때 이를 참조하는 사원 테이블의 행도 함께 삭제되도록 외래키에 설정해야 할 옵션은?",
+      "title": "아래 부서·사원 ERD 에서 부서 한 행을 삭제할 때 그 부서를 참조하는 사원 행도 함께 삭제되게 하려면, 사원 테이블의 외래키에 어떤 옵션을 설정해야 하는가?",
       "options": [
-        "RESTRICT (참조하는 자식 행이 있으면 부모 삭제를 거부)",
-        "PARENT ← CHILD CASCADE (부모 삭제 시 자식 PK 가 부모로 전파됨 — 잘못된 방향)",
-        "CHILD ← PARENT CASCADE (CHILD 에 ON DELETE CASCADE 설정)",
-        "NO ACTION (참조 무결성 위반 시 명령을 거부하는 표준 SQL 기본 동작)"
+        "ON DELETE RESTRICT",
+        "ON DELETE SET NULL",
+        "ON DELETE CASCADE",
+        "ON DELETE NO ACTION"
       ],
       "correctIndex": 2,
-      "explanation": "자식 테이블(사원)의 외래키에 `ON DELETE CASCADE` 를 설정하면 부모(부서) 삭제 시 자식 행도 자동 삭제된다. 즉 부모→자식 방향(CHILD ← PARENT CASCADE)으로 전파가 이루어진다.",
+      "explanation": "자식(사원) 테이블의 외래키에 ON DELETE CASCADE 를 걸면 부모(부서) 행을 지울 때 그 부서를 참조하는 사원 행도 함께 지워진다(③). ① RESTRICT 와 ④ NO ACTION 은 참조하는 사원이 있으면 부서 삭제 자체를 거부하고, ② SET NULL 은 사원 행을 남긴 채 부서번호만 NULL 로 바꾼다.",
       "references": [
         {
           "type": "erd",
-          "caption": "부서-사원 ERD — 사원의 부서번호 FK 에 ON DELETE CASCADE 설정",
+          "caption": "부서-사원 ERD",
           "mermaid": "erDiagram\n    부서 ||..o{ 사원 : \"소속\"\n    부서 {\n        string 부서번호 PK\n    }\n    사원 {\n        string 사원번호 PK\n        string 부서번호 FK \"ON DELETE CASCADE\"\n    }"
-        },
-        {
-          "type": "sql",
-          "code": "ALTER TABLE 사원\nADD CONSTRAINT FK_사원_부서\nFOREIGN KEY (부서번호) REFERENCES 부서(부서번호)\nON DELETE CASCADE;"
         }
       ]
     },

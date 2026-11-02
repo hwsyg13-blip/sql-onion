@@ -68,3 +68,27 @@ export function trackEvent(name: string, params?: Record<string, any>) {
 }
 
 export const isGAEnabled = () => ENABLED;
+
+// ── 문항별 정답률 수집 ──
+// 사이트는 로그인 없이(베타) 운영되어 풀이 기록이 각자 브라우저(localStorage)에만 남는다.
+// 실제 사용자 전체의 문항별 정답률을 보려고, 답을 고른 문항마다 GA4 이벤트를 하나씩 보낸다.
+// 집계·점검 방법: docs/qa/answer-stats-howto.md, scripts/low-accuracy-report.mjs
+type AnswerQ = { examSetId?: string; round?: number; subject?: string; number?: number };
+
+/** 문항 식별자 — 사이트에 보이는 번호와 같게. 기출 "R57-2-45", 모의고사 풀 "M1209". */
+export function questionKey(q: AnswerQ): string {
+  if (q.examSetId === 'ai-mock') return `M${q.number}`;
+  const subj = (q.subject || '').replace(/[^0-9]/g, '') || '0';
+  return `R${q.round ?? 0}-${subj}-${q.number ?? 0}`;
+}
+
+/** 답을 고른 문항 1개 = 이벤트 1개. 고르지 않고 넘긴 문항은 보내지 않는다(정답률 왜곡 방지). */
+export function trackAnswer(q: AnswerQ, chosen: number | null | undefined, correct: boolean, mode: 'exam' | 'mock' | 'endless') {
+  if (chosen == null || chosen < 0) return;
+  trackEvent('question_answer', {
+    qid: questionKey(q),
+    correct: correct ? 1 : 0,
+    chosen: chosen + 1,
+    mode,
+  });
+}
