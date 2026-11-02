@@ -806,7 +806,7 @@ export const ROUND_49: QuizQuestion[] = [
         "caption": "월별매출",
         "headers": [
           "고객번호(PK)",
-          "월",
+          "월(PK)",
           "매출액"
         ],
         "rows": [
