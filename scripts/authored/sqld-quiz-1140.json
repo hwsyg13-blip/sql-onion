@@ -3234,8 +3234,8 @@
       "explanation": "2014년에 입사한 사원들의 사원, 부서 정보와 부양가족수를 추출하는 SQL이다.\nSELECT 절에 사용된 서브쿼리는 단일행 연관 서브쿼리로 JOIN 으로도 변경이 가능하며, FROM \n절에 사용된 서브쿼리는 Inline View 또는 Dynamic View 이고, WHERE 절에 사용된 서브쿼리는 \n다중행 연관 서브쿼리 이다.\n②번 보기의 경우 이미 FROM절에 Inline View로 사원 테이블의 입사년도 조건을 명시하였으므로 \nWHERE 절의 EXISTS 조건은 부서와 사원 테이블간의 JOIN 조건에 의해 결과에 어떠한 영향도 미치 \n지 못하므로 삭제되어도 무방하다.",
       "references": [
         {
-          "type": "text",
-          "content": "[SQL]\nSELECT B.사원번호, B.사원명, A.부서번호, A.부서명\n, (SELECT COUNT(*)  FROM 부양가족 Y WHERE\nY.사원번호 = B.사원번호)  AS 부양가족수\nFROM 부서 A, (SELECT *\nFROM 사원\nWHERE 입사년도 = '2014')  B\nWHERE A.부서번호 = B.부서번호\nAND EXISTS (SELECT 1 FROM 사원 X WHERE X.부서번호 =\nA.부서번호);"
+          "type": "sql",
+          "code": "SELECT B.사원번호, B.사원명, A.부서번호, A.부서명\n, (SELECT COUNT(*)  FROM 부양가족 Y WHERE\nY.사원번호 = B.사원번호)  AS 부양가족수\nFROM 부서 A, (SELECT *\nFROM 사원\nWHERE 입사년도 = '2014')  B\nWHERE A.부서번호 = B.부서번호\nAND EXISTS (SELECT 1 FROM 사원 X WHERE X.부서번호 =\nA.부서번호);"
         }
       ]
     },
@@ -4650,8 +4650,8 @@
       "explanation": "GROUP BY 절의 집합을 원본으로 하는 데이터를 WINDOW FUNCTION과 함께 사용한다면 GROUP \nBY 절과 함께 WINDOW FUNCTION을 사용한다고 하더라도 오류가 발생하지 않으며, 유사개수 컬럼 \n은 상품분류코드로 GROUPING된 집합을 원본집합으로 하여 상품분류코드별 평균상품가격을 서로 \n비교하여 현재 읽혀진 상품분류코드의 평균가격 대비 -10000 ~ +10000사이에 존재하는 상품분류코 \n드의 개수를 구한 것이다.",
       "references": [
         {
-          "type": "text",
-          "content": "[SQL]\r\nSELECT 상품분류코드\r\n,AVG(상품가격) AS 상품가격\r\n,COUNT(*) OVER(ORDER BY AVG(상품가격)\r\n RANGE BETWEEN 10000 PRECEDING\r\n AND 10000 FOLLOWING) AS 유사개수\r\nFROM 상품\r\nGROUP BY 상품분류코드;"
+          "type": "sql",
+          "code": "SELECT 상품분류코드\r\n,AVG(상품가격) AS 상품가격\r\n,COUNT(*) OVER(ORDER BY AVG(상품가격)\r\n RANGE BETWEEN 10000 PRECEDING\r\n AND 10000 FOLLOWING) AS 유사개수\r\nFROM 상품\r\nGROUP BY 상품분류코드;"
         }
       ]
     },
@@ -4662,7 +4662,7 @@
       "_correctRate": 10,
       "subject": "2과목",
       "chapter": "DCL·TCL",
-      "title": "다음 중 B_User가 아래의 직업을 수행할 수있도록 권한을 부여하는 DCL로 가장 적절한 것은?",
+      "title": "다음 중 B_User가 아래의 작업을 수행할 수 있도록 권한을 부여하는 DCL로 가장 적절한 것은?",
       "options": [
         "GRANT SELECT, UPDATE ON A_User.TB_A TO B_User;",
         "DENY UPDATE ON A_User.TB_A TO B_User;",
@@ -5223,11 +5223,11 @@
         "선수의 영문 이름의 두 번째 문자가 A인 선수들의 이름"
       ],
       "correctIndex": 3,
-      "explanation": "\"_\"와 \"%\"는 와일드카드로 하나의 글자 또는 모든 문자를 대신하여 사용이 되므로 두 번째 문자가 대문자 A인 경우만 출력된다.\t",
+      "explanation": "LIKE 의 _ 는 아무 글자 1개, % 는 0글자 이상이다. '_A%' 는 첫 글자는 아무거나, 두 번째 글자가 A, 그 뒤는 상관없다는 뜻이므로 영문 이름의 두 번째 문자가 대문자 A 인 선수만 나온다(④). LIKE 는 대소문자를 구분하므로 a 는 해당하지 않는다.",
       "references": [
         {
           "type": "sql",
-          "code": "SELECT PLAYER_NAME 선수명, E_PLAYER_NAME 선수영문명\nFROM PLAYER\nWHERE E_PLAYER_NMAE_LIKE '_A%';"
+          "code": "SELECT PLAYER_NAME 선수명, E_PLAYER_NAME 선수영문명\nFROM PLAYER\nWHERE E_PLAYER_NAME LIKE '_A%';"
         }
       ]
     },
@@ -6419,10 +6419,10 @@
         "{(100,영업,Hong,80), (100,영업,Lee,90),(200,개발,Kim,90),(200,개발,Kim,95),(600,null,Hong,65)}",
         "{(100,영업,Lee,90)}",
         "{(100,영업,Lee,90),(200,개발,Kim,95)}",
-        "{(100,영업,Lee,90),(200,개발,Kim,90),(300,서비스,Hong,65)}"
+        "{(100,영업,Lee,90),(200,개발,Kim,95),(300,서비스,Hong,65)}"
       ],
       "correctIndex": 3,
-      "explanation": "서브쿼리만 실행하면 DNO와 MAX(SCORE) 값이 {100,90},{300,65},{200,95} 이다. IN 문을 사용해서 조인을 하므로 {(100,영업,Lee,90),(200,개발,Kim,95),(300,서비스,Hong,65)}가 조회된다.",
+      "explanation": "서브쿼리는 부서별 최고 점수 (100, 90), (200, 95), (300, 65) 를 돌려준다. (dno, score) 가 이 목록에 있는 사원만 남기고 부서명을 붙이면 Lee(100, 90), Kim(200, 95), Hong(300, 65) 세 행이다(④). ② ③ 은 일부 부서가 빠졌고, ① 은 최고 점수가 아닌 행까지 포함했다.",
       "references": [
         {
           "type": "sql",
@@ -7055,11 +7055,11 @@
         "오늘 날짜로부터 6일 후 첫 번째 월요일을 출력한다."
       ],
       "correctIndex": 1,
-      "explanation": "ADD_MONTHS 함수는 6개월을 더하고 NEXT_DAY 함수는 지정된 요일의 첫 번째 날짜를 출력한다. 즉, 문제에서는 6개월 후 첫 번째 월요일을 출력한다.",
+      "explanation": "ADD_MONTHS(SYSDATE, 6) 은 오늘부터 6개월 뒤 날짜이고, NEXT_DAY(날짜, '월요일') 은 그 날짜 다음에 오는 첫 번째 월요일이다. 따라서 6개월 후 첫 번째 월요일이 나온다(②). 6일 후(①④)는 ADD_MONTHS 를 날짜 더하기로 착각한 경우이고, NEXT_DAY 는 두 번째가 아니라 첫 번째 해당 요일을 돌려준다(③).",
       "references": [
         {
           "type": "sql",
-          "code": "SELECT NEXT_DAY\n(ADD_MONTHS(sysdate,6),'월요일)\nFROM dual;"
+          "code": "SELECT NEXT_DAY(ADD_MONTHS(SYSDATE, 6), '월요일')\nFROM   DUAL;"
         }
       ]
     },

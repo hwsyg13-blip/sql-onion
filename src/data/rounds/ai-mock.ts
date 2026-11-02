@@ -1,5 +1,5 @@
 // Auto-generated from scripts/authored/ai-mock.json
-// AI 생성 모의고사 풀 (기출 변형) · 1314문항
+// AI 생성 모의고사 풀 (기출 변형) · 1312문항
 // ⚠ 직접 편집 금지. ai-mock.json 수정 후 'node scripts/build-quiz-bank.mjs' 재실행.
 import type { QuizQuestion } from '../quizBank';
 
@@ -2039,32 +2039,6 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 38
   },
   {
-    "id": 10887,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 88,
-    "title": "다음 SQL문의 결과로 출력되는 데이터는 무엇인가?",
-    "options": [
-      "오늘 날짜로부터 6일 후 첫 번째 월요일을 출력한다.",
-      "오늘 날짜로부터 6개월 후 두 번째 월요일을 출력한다.",
-      "오늘 날짜로부터 6개월 후 첫 번째 월요일을 출력한다.",
-      "오늘 날짜로부터 6일 후 두 번째 월요일을 출력한다."
-    ],
-    "correctIndex": 2,
-    "explanation": "ADD_MONTHS 함수는 6개월을 더하고 NEXT_DAY 함수는 지정된 요일의 첫 번째 날짜를 출력한다. 즉, 문제에서는 6개월 후 첫 번째 월요일을 출력한다.",
-    "chapter": "관계형 DB와 SELECT",
-    "_source": "cbt-mock",
-    "_origId": "cbt-039",
-    "_cbtOrigNo": 39,
-    "references": [
-      {
-        "type": "sql",
-        "code": "SELECT NEXT_DAY(ADD_MONTHS (sysdate,6),'월요일') FROM dual;"
-      }
-    ]
-  },
-  {
     "id": 10888,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
@@ -3131,32 +3105,6 @@ export const AI_MOCK: QuizQuestion[] = [
     "_source": "cbt-mock",
     "_origId": "cbt-075",
     "_cbtOrigNo": 75
-  },
-  {
-    "id": 10920,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 121,
-    "title": "다음 SQL 문장의 결과로 출력되는 데이터는 무엇인가?",
-    "options": [
-      "선수의 영문 이름의 두 번째 문자가 A인 선수들의 이름",
-      "선수의 영문 이름이 A나 a로 시작하는 선수들의 이름",
-      "선수의 영문 이름이 A로 시작하는 선수들의 이름",
-      "위치에 상관없이 선수의 영문 이름에 A를 포함하는 선수들의 이름"
-    ],
-    "correctIndex": 0,
-    "explanation": "\"_\" 와 \"%\"는 와일드카드(WILD CARD)로 하나의 글자 또는 모든 문자를 대신하여 사용이 되므로 두 번째 문자가 대문자 A인 경우만 출력된다.",
-    "chapter": "WHERE",
-    "_source": "cbt-mock",
-    "_origId": "cbt-076",
-    "_cbtOrigNo": 76,
-    "references": [
-      {
-        "type": "sql",
-        "code": "SELECT PLAYER_NAME 선수명, E_PLAYER_NAME 선수영문명 FROM PLAYER WHERE E_PLAYER_NAME LIKE '_A%';"
-      }
-    ]
   },
   {
     "id": 10921,
@@ -10124,8 +10072,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "[SQL]\nSELECT B.사원번호, B.사원명, A.부서번호, A.부서명\n, (SELECT COUNT(*)  FROM 부양가족 Y WHERE\nY.사원번호 = B.사원번호)  AS 부양가족수\nFROM 부서 A, (SELECT *\nFROM 사원\nWHERE 입사년도 = '2014')  B\nWHERE A.부서번호 = B.부서번호\nAND EXISTS (SELECT 1 FROM 사원 X WHERE X.부서번호 =\nA.부서번호);"
+        "type": "sql",
+        "code": "SELECT B.사원번호, B.사원명, A.부서번호, A.부서명\n, (SELECT COUNT(*)  FROM 부양가족 Y WHERE\nY.사원번호 = B.사원번호)  AS 부양가족수\nFROM 부서 A, (SELECT *\nFROM 사원\nWHERE 입사년도 = '2014')  B\nWHERE A.부서번호 = B.부서번호\nAND EXISTS (SELECT 1 FROM 사원 X WHERE X.부서번호 =\nA.부서번호);"
       }
     ]
   },
@@ -11297,8 +11245,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "[SQL]\r\nSELECT 상품분류코드\r\n,AVG(상품가격) AS 상품가격\r\n,COUNT(*) OVER(ORDER BY AVG(상품가격)\r\n RANGE BETWEEN 10000 PRECEDING\r\n AND 10000 FOLLOWING) AS 유사개수\r\nFROM 상품\r\nGROUP BY 상품분류코드;"
+        "type": "sql",
+        "code": "SELECT 상품분류코드\r\n,AVG(상품가격) AS 상품가격\r\n,COUNT(*) OVER(ORDER BY AVG(상품가격)\r\n RANGE BETWEEN 10000 PRECEDING\r\n AND 10000 FOLLOWING) AS 유사개수\r\nFROM 상품\r\nGROUP BY 상품분류코드;"
       }
     ]
   },
@@ -11308,7 +11256,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 357,
-    "title": "다음 중 B_User가 아래의 직업을 수행할 수있도록 권한을 부여하는 DCL로 가장 적절한 것은?",
+    "title": "다음 중 B_User가 아래의 작업을 수행할 수 있도록 권한을 부여하는 DCL로 가장 적절한 것은?",
     "options": [
       "GRANT SELECT, UPDATE ON A_User.TB_A TO B_User;",
       "DENY UPDATE ON A_User.TB_A TO B_User;",
@@ -11751,7 +11699,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "선수의 영문 이름의 두 번째 문자가 A인 선수들의 이름"
     ],
     "correctIndex": 3,
-    "explanation": "\"_\"와 \"%\"는 와일드카드로 하나의 글자 또는 모든 문자를 대신하여 사용이 되므로 두 번째 문자가 대문자 A인 경우만 출력된다.\t",
+    "explanation": "LIKE 의 _ 는 아무 글자 1개, % 는 0글자 이상이다. '_A%' 는 첫 글자는 아무거나, 두 번째 글자가 A, 그 뒤는 상관없다는 뜻이므로 영문 이름의 두 번째 문자가 대문자 A 인 선수만 나온다(④). LIKE 는 대소문자를 구분하므로 a 는 해당하지 않는다.",
     "chapter": "DML",
     "_source": "sqld-1140",
     "_origId": "sqld-0177",
@@ -11760,7 +11708,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "sql",
-        "code": "SELECT PLAYER_NAME 선수명, E_PLAYER_NAME 선수영문명\nFROM PLAYER\nWHERE E_PLAYER_NMAE_LIKE '_A%';"
+        "code": "SELECT PLAYER_NAME 선수명, E_PLAYER_NAME 선수영문명\nFROM PLAYER\nWHERE E_PLAYER_NAME LIKE '_A%';"
       }
     ]
   },
@@ -12691,10 +12639,10 @@ export const AI_MOCK: QuizQuestion[] = [
       "{(100,영업,Hong,80), (100,영업,Lee,90),(200,개발,Kim,90),(200,개발,Kim,95),(600,null,Hong,65)}",
       "{(100,영업,Lee,90)}",
       "{(100,영업,Lee,90),(200,개발,Kim,95)}",
-      "{(100,영업,Lee,90),(200,개발,Kim,90),(300,서비스,Hong,65)}"
+      "{(100,영업,Lee,90),(200,개발,Kim,95),(300,서비스,Hong,65)}"
     ],
     "correctIndex": 3,
-    "explanation": "서브쿼리만 실행하면 DNO와 MAX(SCORE) 값이 {100,90},{300,65},{200,95} 이다. IN 문을 사용해서 조인을 하므로 {(100,영업,Lee,90),(200,개발,Kim,95),(300,서비스,Hong,65)}가 조회된다.",
+    "explanation": "서브쿼리는 부서별 최고 점수 (100, 90), (200, 95), (300, 65) 를 돌려준다. (dno, score) 가 이 목록에 있는 사원만 남기고 부서명을 붙이면 Lee(100, 90), Kim(200, 95), Hong(300, 65) 세 행이다(④). ② ③ 은 일부 부서가 빠졌고, ① 은 최고 점수가 아닌 행까지 포함했다.",
     "chapter": "서브쿼리",
     "_source": "sqld-1140",
     "_origId": "sqld-0215",
@@ -13202,7 +13150,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "오늘 날짜로부터 6일 후 첫 번째 월요일을 출력한다."
     ],
     "correctIndex": 1,
-    "explanation": "ADD_MONTHS 함수는 6개월을 더하고 NEXT_DAY 함수는 지정된 요일의 첫 번째 날짜를 출력한다. 즉, 문제에서는 6개월 후 첫 번째 월요일을 출력한다.",
+    "explanation": "ADD_MONTHS(SYSDATE, 6) 은 오늘부터 6개월 뒤 날짜이고, NEXT_DAY(날짜, '월요일') 은 그 날짜 다음에 오는 첫 번째 월요일이다. 따라서 6개월 후 첫 번째 월요일이 나온다(②). 6일 후(①④)는 ADD_MONTHS 를 날짜 더하기로 착각한 경우이고, NEXT_DAY 는 두 번째가 아니라 첫 번째 해당 요일을 돌려준다(③).",
     "chapter": "함수",
     "_source": "sqld-1140",
     "_origId": "sqld-0239",
@@ -13211,7 +13159,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "sql",
-        "code": "SELECT NEXT_DAY\n(ADD_MONTHS(sysdate,6),'월요일)\nFROM dual;"
+        "code": "SELECT NEXT_DAY(ADD_MONTHS(SYSDATE, 6), '월요일')\nFROM   DUAL;"
       }
     ]
   },
