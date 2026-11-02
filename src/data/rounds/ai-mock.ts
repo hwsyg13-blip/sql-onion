@@ -23780,7 +23780,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "SELECT 성적 \n    FROM EXAM \n   ORDER BY 성적 DESC \n   FETCH FIRST 3 ROWS ONLY;"
     ],
     "correctIndex": 0,
-    "explanation": "성적이 높은 순서대로 3명을 뽑는 쿼리로 적절한 것은 1, 2, 3번 보기이다. 2번의 경우 WITH TIES를 사용하여 동순위까지 출력하므로 98점과 함께 80점 두 명이 모두 출력된다. 하지만 ROWNUM의 경우 SELECT 절이 ORDER BY 절보다 먼저 수행되므로 SELECT 절에서의 ROWNUM은 ORDER BY 결과를 반영하지 못한다. 따라서 성적이 높은 순서대로 RN의 값이 형성되지 않기 때문에 원하는 결과를 얻을 수 없다. ",
+    "explanation": "②③④ 는 모두 98, 80, 80 을 돌려준다. ② RANK 는 98 이 1위, 80 두 명이 공동 2위라 RN <= 2 에서 세 명, ③ TOP(2) WITH TIES 는 2위와 동점인 80 까지 포함해 세 명, ④ 는 정렬 후 3행이다. ① 은 인라인 뷰 안에서 ROWNUM 이 ORDER BY 보다 먼저 매겨지므로, 정렬 전 저장 순서의 앞 3행(98, 60, 72)이 나와 결과가 다르다(①).",
     "chapter": "윈도우 함수",
     "_source": "sqld-1140",
     "_origId": "sqld-0610",
@@ -24783,7 +24783,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "SELECT 고객.고객번호, 상품.상품명 FROM 고객 INNER JOIN 상품 ON 고객.포인트 >= 상품.최소포인트;"
     ],
     "correctIndex": 1,
-    "explanation": "결과표를 보면 고객이 보유한 포인트에 맞춰서 상품을 출력한 것을 알 수 있다. 따라서 고객이 보유한 포인트가 상품 테이블의 최소포인트와 최대포인트 사이에 있는 조건을 갖는 쿼리는 3번이다.",
+    "explanation": "결과표는 고객 포인트가 상품의 최소포인트~최대포인트 범위에 드는 상품 하나씩을 붙인 것이다(홍길동 10000 → C, 최길동 13000 → D, 이길동 2000 → A). 이런 범위 조인은 BETWEEN 최소 AND 최대 로 쓴다(②). ③④ 는 한쪽 경계만 비교해 고객마다 여러 상품이 붙고, ① 은 콤마 조인에 ON 을 써 문법 오류다.",
     "chapter": "조인",
     "_source": "sqld-1140",
     "_origId": "sqld-0653",
@@ -25120,13 +25120,13 @@ export const AI_MOCK: QuizQuestion[] = [
     "number": 761,
     "title": "다음 SQL중 입력오류가 발생할 문장으로 가장 적절한 것은?",
     "options": [
-      "INSERT INTO TAB1 VALUES('0003', 40, 'CCC', '2024/01/01');",
+      "INSERT INTO TAB1 VALUES('0003', NULL, 'CCC', SYSDATE);",
       "INSERT INTO TAB1 VALUES('0002', '30', '1000', CURRENT_DATE);",
       "INSERT INTO TAB1 VALUES('0001', '20', 'BBB', SYSTIMESTAMP);",
       "INSERT INTO TAB1 VALUES(1, 10, 'AAA', SYSDATE);"
     ],
     "correctIndex": 0,
-    "explanation": "1번에서 COL4의 값은 문자상수이므로 날짜 변환 후 입력을 해야 한다. DBMS의 기본 날짜 포맷이 YYYY/MM/DD가 아닌 경우는 이 문장은 에러가 발생한다. ",
+    "explanation": "COL2 는 NOT NULL 이라 NULL 을 넣는 ① 은 오류가 난다. ② '30'·③ '20' 은 숫자로, ④ 1 은 문자로 자동 형변환되고, ③ SYSTIMESTAMP 와 ② CURRENT_DATE 는 DATE 컬럼에 들어갈 수 있다. COL3 CHAR(10) 에 '1000' 을 넣는 것도 문자라 문제없다.",
     "chapter": "DML",
     "_source": "sqld-1140",
     "_origId": "sqld-0665",
