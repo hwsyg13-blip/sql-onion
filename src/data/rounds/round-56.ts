@@ -725,7 +725,7 @@ export const ROUND_56: QuizQuestion[] = [
       "aab"
     ],
     "correctIndex": 1,
-    "explanation": "a{2,4} 는 a 가 2~4번 반복되는 부분과 매칭되며, 정규식은 기본적으로 가능한 한 길게(탐욕적) 매칭한다. 'aaaaabbbb' 앞쪽에서 a 를 최대 4개까지 잡으므로 'aaaa' 다(②). b 는 패턴에 없어 ③④ 는 나올 수 없다.",
+    "explanation": "a{2,4} 는 a 가 2~4번 이어진 부분을 찾는다. 2개, 3개, 4개 모두 가능할 때는 가장 길게(4개) 잡는다. 'aaaaabbbb' 맨 앞에서 a 를 4개까지 잡으므로 결과는 'aaaa'(②). ① 'aaa' 는 더 길게 잡을 수 있는데 멈춘 경우라 틀리고, b 는 패턴에 없으므로 ③ 'ab'·④ 'aab' 는 나올 수 없다.",
     "_source": "authored",
     "references": [
       {
