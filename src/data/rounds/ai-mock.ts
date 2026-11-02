@@ -1,5 +1,5 @@
 // Auto-generated from scripts/authored/ai-mock.json
-// AI 생성 모의고사 풀 (기출 변형) · 1313문항
+// AI 생성 모의고사 풀 (기출 변형) · 1245문항
 // ⚠ 직접 편집 금지. ai-mock.json 수정 후 'node scripts/build-quiz-bank.mjs' 재실행.
 import type { QuizQuestion } from '../quizBank';
 
@@ -36545,32 +36545,6 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11880,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "1과목",
-    "number": 1081,
-    "title": "개념 데이터 모델링 단계에서 주로 수행하는 작업으로 옳은 것은?",
-    "options": [
-      "파티션 키와 병렬도만 결정한다.",
-      "실행 계획을 확정한다.",
-      "인덱스와 저장 파라미터를 결정한다.",
-      "업무에서 필요한 엔터티와 관계를 식별한다."
-    ],
-    "correctIndex": 3,
-    "explanation": "개념 모델링은 업무 요구를 반영해 핵심 엔터티와 관계를 도출하는 단계다.",
-    "chapter": "데이터 모델링 기법",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1073",
-    "_category": "데이터 모델링 기법",
-    "references": [
-      {
-        "type": "text",
-        "content": "다대다 관계를 논리 모델로 바꾸는 방안을 검토한다."
-      }
-    ]
-  },
-  {
     "id": 11881,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
@@ -36660,110 +36634,6 @@ export const AI_MOCK: QuizQuestion[] = [
             "110"
           ]
         ]
-      }
-    ]
-  },
-  {
-    "id": 11884,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "1과목",
-    "number": 1085,
-    "title": "N:M 관계를 논리 모델로 전환할 때 적절한 방법은?",
-    "options": [
-      "N:M 관계는 논리 모델에서 그대로 유지해야 한다.",
-      "한쪽 엔터티를 삭제한다.",
-      "교차 엔터티를 추가하여 두 개의 1:N 관계로 해소한다.",
-      "외래키 없이 텍스트 컬럼에만 저장한다."
-    ],
-    "correctIndex": 2,
-    "explanation": "다대다 관계는 교차 엔터티를 통해 정규화된 구조로 전환하는 것이 일반적이다.",
-    "chapter": "데이터 모델링 기법",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1081",
-    "_category": "데이터 모델링 기법",
-    "references": [
-      {
-        "type": "text",
-        "content": "공통 속성과 유형별 속성을 함께 표현할 모델을 찾는다."
-      }
-    ]
-  },
-  {
-    "id": 11885,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "1과목",
-    "number": 1086,
-    "title": "논리적 데이터 독립성에 대한 설명으로 가장 적절한 것은?",
-    "options": [
-      "개념 스키마가 바뀌지 않으면 외부 스키마는 물리 저장 방식 변경의 영향을 적게 받는다.",
-      "논리적 데이터 독립성은 백업 정책만을 의미한다.",
-      "논리적 데이터 독립성은 COMMIT과 ROLLBACK의 독립성을 말한다.",
-      "테이블스페이스 위치가 바뀌면 모든 응용 SQL을 수정해야 한다."
-    ],
-    "correctIndex": 0,
-    "explanation": "물리 구조 변경이 외부 사용자 프로그램에 미치는 영향을 최소화하는 것이 데이터 독립성의 핵심이다.",
-    "chapter": "데이터 모델 개념",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1082",
-    "_category": "데이터베이스 개념",
-    "references": [
-      {
-        "type": "text",
-        "content": "메타데이터와 실제 업무 데이터를 구분해 설명하려 한다."
-      }
-    ]
-  },
-  {
-    "id": 11886,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "1과목",
-    "number": 1087,
-    "title": "물리 설계 단계에서 주로 결정하는 사항으로 옳은 것은?",
-    "options": [
-      "인덱스, 파티션, 저장 구조와 접근 경로",
-      "업무 용어 사전만 작성하는 작업",
-      "식별자 존재 여부만 검토하는 작업",
-      "엔터티와 관계의 후보 목록"
-    ],
-    "correctIndex": 0,
-    "explanation": "물리 설계는 실제 성능과 저장 효율을 고려해 물리적 구현 방법을 정하는 단계다.",
-    "chapter": "데이터베이스 설계",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1083",
-    "_category": "데이터베이스 설계",
-    "references": [
-      {
-        "type": "text",
-        "content": "정규화된 논리 모델을 성능 요구에 맞게 조정하려 한다."
-      }
-    ]
-  },
-  {
-    "id": 11887,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "1과목",
-    "number": 1088,
-    "title": "슈퍼키(Super Key)에 대한 설명으로 옳은 것은?",
-    "options": [
-      "반드시 단일 컬럼이어야 한다.",
-      "외래키와 동일한 개념이다.",
-      "항상 최소성을 만족한다.",
-      "행을 유일하게 식별할 수 있지만 최소성은 만족하지 않을 수 있다."
-    ],
-    "correctIndex": 3,
-    "explanation": "슈퍼키는 후보키보다 넓은 개념으로, 불필요한 속성을 더 포함할 수 있다.",
-    "chapter": "식별자",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1084",
-    "_category": "식별자",
-    "references": [
-      {
-        "type": "text",
-        "content": "업무 식별자 변경 가능성을 고려해 대리키 사용을 검토한다."
       }
     ]
   },
@@ -36887,162 +36757,6 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11891,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "1과목",
-    "number": 1092,
-    "title": "슈퍼타입/서브타입 모델링이 적절한 경우로 옳은 것은?",
-    "options": [
-      "공통 속성과 유형별 속성을 함께 관리해야 할 때",
-      "PK를 사용하지 않으려 할 때",
-      "조인을 없애기 위해 모든 엔터티를 하나로 합칠 때",
-      "모든 유형이 완전히 동일한 속성만 가질 때"
-    ],
-    "correctIndex": 0,
-    "explanation": "공통 속성은 슈퍼타입에, 유형별 속성은 서브타입에 배치하면 중복을 줄일 수 있다.",
-    "chapter": "데이터 모델링 기법",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1089",
-    "_category": "데이터 모델링 기법",
-    "references": [
-      {
-        "type": "text",
-        "content": "반복 속성이 있는 화면 입력값을 데이터 모델로 정리하려 한다."
-      }
-    ]
-  },
-  {
-    "id": 11892,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "1과목",
-    "number": 1093,
-    "title": "데이터 사전(Data Dictionary)에 저장되는 정보로 옳은 것은?",
-    "options": [
-      "테이블, 컬럼, 제약조건과 같은 메타데이터",
-      "세션별 임시 결과 집합만 저장하는 영역",
-      "사용자 화면 레이아웃 정보",
-      "주문 상세 내역과 같은 트랜잭션 데이터"
-    ],
-    "correctIndex": 0,
-    "explanation": "데이터 사전은 실제 업무 데이터가 아니라 DB 객체 정의와 제약조건 등 메타데이터를 관리한다.",
-    "chapter": "데이터 모델 개념",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1090",
-    "_category": "데이터베이스 개념",
-    "references": [
-      {
-        "type": "text",
-        "content": "관계형 결과 집합에서 행 순서를 기대해도 되는지 검토한다."
-      }
-    ]
-  },
-  {
-    "id": 11893,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "1과목",
-    "number": 1094,
-    "title": "정규화된 논리 모델을 반정규화하는 시점으로 가장 적절한 것은?",
-    "options": [
-      "물리 설계와 무관하므로 고려하지 않는다.",
-      "무결성을 높이기 위해 항상 모든 테이블을 합친다.",
-      "업무 분석 전에 무조건 먼저 수행한다.",
-      "정규화된 모델을 기준으로 성능 요구를 검토한 뒤 필요할 때"
-    ],
-    "correctIndex": 3,
-    "explanation": "반정규화는 정규화를 무시하는 것이 아니라 성능과 관리 비용을 검토해 제한적으로 적용해야 한다.",
-    "chapter": "데이터베이스 설계",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1091",
-    "_category": "데이터베이스 설계",
-    "references": [
-      {
-        "type": "text",
-        "content": "부모-자식 엔터티의 키 구조를 먼저 확정하려 한다."
-      }
-    ]
-  },
-  {
-    "id": 11894,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 1095,
-    "title": "선택도가 매우 낮은 컬럼에 단독 인덱스를 두었을 때 기대 효과로 가장 적절한 것은?",
-    "options": [
-      "조회 패턴에 따라 테이블 전체 스캔이 더 유리할 수 있다.",
-      "반드시 UNIQUE가 된다.",
-      "조인만 금지된다.",
-      "항상 압도적으로 빠르다."
-    ],
-    "correctIndex": 0,
-    "explanation": "값 분포가 치우친 컬럼은 인덱스 이점이 작을 수 있다.",
-    "chapter": "관계형 DB와 SELECT",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1093",
-    "_category": "인덱스",
-    "references": [
-      {
-        "type": "text",
-        "content": "조회 비율과 인덱스 유지 비용을 함께 판단한다."
-      }
-    ]
-  },
-  {
-    "id": 11897,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "1과목",
-    "number": 1098,
-    "title": "속성의 원자성을 높이는 모델링 방식으로 옳은 것은?",
-    "options": [
-      "반복 속성을 분리하여 하나의 컬럼에는 하나의 값만 저장한다.",
-      "코드와 코드명을 한 컬럼에 함께 저장한다.",
-      "조인 감소를 위해 모든 속성을 VARCHAR 하나에 직렬화한다.",
-      "전화번호 3개를 하나의 컬럼에 콤마로 저장한다."
-    ],
-    "correctIndex": 0,
-    "explanation": "1NF 관점에서도 속성은 더 이상 의미 있게 분해되지 않는 단일 값으로 다루는 것이 바람직하다.",
-    "chapter": "데이터 모델링 기법",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1097",
-    "_category": "데이터 모델링 기법",
-    "references": [
-      {
-        "type": "text",
-        "content": "다대다 관계를 논리 모델로 바꾸는 방안을 검토한다."
-      }
-    ]
-  },
-  {
-    "id": 11898,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "1과목",
-    "number": 1099,
-    "title": "관계형 모델의 릴레이션 특성으로 옳은 것은?",
-    "options": [
-      "릴레이션에서는 NULL을 사용할 수 없다.",
-      "열 이름은 반드시 숫자로만 정의해야 한다.",
-      "중복 행이 많을수록 릴레이션의 품질이 좋아진다.",
-      "행의 논리적 순서는 보장되지 않으므로 ORDER BY 없이 특정 순서를 기대하면 안 된다."
-    ],
-    "correctIndex": 3,
-    "explanation": "릴레이션은 집합 개념이므로 행의 논리적 순서를 전제하지 않는다.",
-    "chapter": "데이터 모델 개념",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1098",
-    "_category": "데이터베이스 개념",
-    "references": [
-      {
-        "type": "text",
-        "content": "스토리지 구조 변경 후 응용 SQL 영향 범위를 검토한다."
-      }
-    ]
-  },
-  {
     "id": 11901,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
@@ -37060,91 +36774,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "chapter": "데이터 모델링 기법",
     "_source": "sqld-1140",
     "_origId": "sqld-1105",
-    "_category": "데이터 모델링 기법",
-    "references": [
-      {
-        "type": "text",
-        "content": "공통 속성과 유형별 속성을 함께 표현할 모델을 찾는다."
-      }
-    ]
-  },
-  {
-    "id": 11902,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "1과목",
-    "number": 1103,
-    "title": "데이터베이스 시스템의 장점으로 가장 적절한 것은?",
-    "options": [
-      "무결성 제약을 제거해 개발 속도만 높인다.",
-      "파일 단위 중복을 늘려 응답 속도를 보장한다.",
-      "데이터를 통합 관리하여 중복을 줄이고 일관성을 높일 수 있다.",
-      "응용 프로그램마다 별도 정의를 강제하여 독립성을 낮춘다."
-    ],
-    "correctIndex": 2,
-    "explanation": "DBMS는 데이터 통합과 제어를 통해 중복과 불일치를 줄이는 방향으로 설계된다.",
-    "chapter": "데이터 모델 개념",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1106",
-    "_category": "데이터베이스 개념",
-    "references": [
-      {
-        "type": "text",
-        "content": "메타데이터와 실제 업무 데이터를 구분해 설명하려 한다."
-      }
-    ]
-  },
-  {
-    "id": 11903,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "1과목",
-    "number": 1104,
-    "title": "부모-자식 구조를 설계할 때 가장 먼저 확인해야 할 사항으로 옳은 것은?",
-    "options": [
-      "부모 엔터티와 자식 엔터티의 식별자 및 관계 차수",
-      "정렬 순서만 먼저 확정",
-      "반드시 모든 FK를 NULL 허용으로 만드는 것",
-      "화면 버튼 색상"
-    ],
-    "correctIndex": 0,
-    "explanation": "관계 차수와 식별 관계 여부를 명확히 해야 PK/FK 구조를 안정적으로 설계할 수 있다.",
-    "chapter": "데이터베이스 설계",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1107",
-    "_category": "데이터베이스 설계",
-    "references": [
-      {
-        "type": "text",
-        "content": "정규화된 논리 모델을 성능 요구에 맞게 조정하려 한다."
-      }
-    ]
-  },
-  {
-    "id": 11904,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "1과목",
-    "number": 1105,
-    "title": "복합 기본키에 대한 설명으로 옳은 것은?",
-    "options": [
-      "구성하는 모든 컬럼이 함께 기본키를 이루며 NULL을 허용하지 않는다.",
-      "UNIQUE 제약보다 약한 제약이다.",
-      "외래키에서 참조할 수 없다.",
-      "각 컬럼 중 하나만 값이 있으면 된다."
-    ],
-    "correctIndex": 0,
-    "explanation": "복합 기본키는 여러 속성의 조합으로 행을 식별하며 각 구성 컬럼은 NULL이 될 수 없다.",
-    "chapter": "식별자",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1108",
-    "_category": "식별자",
-    "references": [
-      {
-        "type": "text",
-        "content": "업무 식별자 변경 가능성을 고려해 대리키 사용을 검토한다."
-      }
-    ]
+    "_category": "데이터 모델링 기법"
   },
   {
     "id": 11905,
@@ -37323,84 +36953,6 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11917,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "1과목",
-    "number": 1118,
-    "title": "개념 데이터 모델링 단계에서 주로 수행하는 작업으로 옳은 것은?",
-    "options": [
-      "업무에서 필요한 엔터티와 관계를 식별한다.",
-      "파티션 키와 병렬도만 결정한다.",
-      "실행 계획을 확정한다.",
-      "인덱스와 저장 파라미터를 결정한다."
-    ],
-    "correctIndex": 0,
-    "explanation": "개념 모델링은 업무 요구를 반영해 핵심 엔터티와 관계를 도출하는 단계다.",
-    "chapter": "데이터 모델링 기법",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1122",
-    "_category": "데이터 모델링 기법",
-    "references": [
-      {
-        "type": "text",
-        "content": "공통 속성과 유형별 속성을 함께 표현할 모델을 찾는다."
-      }
-    ]
-  },
-  {
-    "id": 11918,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "1과목",
-    "number": 1119,
-    "title": "일반적인 데이터베이스 설계 순서로 옳은 것은?",
-    "options": [
-      "인덱스 설계 -> 업무 분석 -> 개념 설계",
-      "물리 설계 -> 개념 설계 -> 논리 설계",
-      "개념 설계 -> 논리 설계 -> 물리 설계",
-      "논리 설계 -> 물리 설계 -> 개념 설계"
-    ],
-    "correctIndex": 2,
-    "explanation": "요구사항을 반영한 개념 설계 후 논리 구조를 정교화하고 마지막에 물리 설계를 수행한다.",
-    "chapter": "데이터베이스 설계",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1125",
-    "_category": "데이터베이스 설계",
-    "references": [
-      {
-        "type": "text",
-        "content": "정규화된 논리 모델을 성능 요구에 맞게 조정하려 한다."
-      }
-    ]
-  },
-  {
-    "id": 11919,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "1과목",
-    "number": 1120,
-    "title": "후보키(Candidate Key)에 대한 설명으로 옳은 것은?",
-    "options": [
-      "유일성과 최소성을 만족하는 식별자 후보",
-      "반드시 외래키여야 한다.",
-      "NULL을 반드시 허용해야 한다.",
-      "유일성만 만족하면 된다."
-    ],
-    "correctIndex": 0,
-    "explanation": "후보키는 각 행을 구분할 수 있으면서 불필요한 속성을 포함하지 않아야 한다.",
-    "chapter": "식별자",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1127",
-    "_category": "식별자",
-    "references": [
-      {
-        "type": "text",
-        "content": "업무 식별자 변경 가능성을 고려해 대리키 사용을 검토한다."
-      }
-    ]
-  },
-  {
     "id": 11920,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
@@ -37510,32 +37062,6 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11926,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 1127,
-    "title": "CREATE TABLE의 의미로 옳은 것은?",
-    "options": [
-      "행 단위 수정만 수행한다.",
-      "권한을 부여한다.",
-      "기존 데이터를 조회한다.",
-      "새 테이블 객체를 생성한다."
-    ],
-    "correctIndex": 3,
-    "explanation": "DDL은 데이터 구조를 정의한다.",
-    "chapter": "DDL",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1136",
-    "_category": "DDL",
-    "references": [
-      {
-        "type": "text",
-        "content": "대량 데이터 비우기와 객체 삭제"
-      }
-    ]
-  },
-  {
     "id": 11930,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
@@ -37562,136 +37088,6 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11935,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "1과목",
-    "number": 1136,
-    "title": "N:M 관계를 논리 모델로 전환할 때 적절한 방법은?",
-    "options": [
-      "교차 엔터티를 추가하여 두 개의 1:N 관계로 해소한다.",
-      "외래키 없이 텍스트 컬럼에만 저장한다.",
-      "N:M 관계는 논리 모델에서 그대로 유지해야 한다.",
-      "한쪽 엔터티를 삭제한다."
-    ],
-    "correctIndex": 0,
-    "explanation": "다대다 관계는 교차 엔터티를 통해 정규화된 구조로 전환하는 것이 일반적이다.",
-    "chapter": "데이터 모델링 기법",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1146",
-    "_category": "데이터 모델링 기법",
-    "references": [
-      {
-        "type": "text",
-        "content": "반복 속성이 있는 화면 입력값을 데이터 모델로 정리하려 한다."
-      }
-    ]
-  },
-  {
-    "id": 11937,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "1과목",
-    "number": 1138,
-    "title": "논리적 데이터 독립성에 대한 설명으로 가장 적절한 것은?",
-    "options": [
-      "논리적 데이터 독립성은 COMMIT과 ROLLBACK의 독립성을 말한다.",
-      "테이블스페이스 위치가 바뀌면 모든 응용 SQL을 수정해야 한다.",
-      "개념 스키마가 바뀌지 않으면 외부 스키마는 물리 저장 방식 변경의 영향을 적게 받는다.",
-      "논리적 데이터 독립성은 백업 정책만을 의미한다."
-    ],
-    "correctIndex": 2,
-    "explanation": "물리 구조 변경이 외부 사용자 프로그램에 미치는 영향을 최소화하는 것이 데이터 독립성의 핵심이다.",
-    "chapter": "데이터 모델 개념",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1148",
-    "_category": "데이터베이스 개념",
-    "references": [
-      {
-        "type": "text",
-        "content": "관계형 결과 집합에서 행 순서를 기대해도 되는지 검토한다."
-      }
-    ]
-  },
-  {
-    "id": 11938,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "1과목",
-    "number": 1139,
-    "title": "물리 설계 단계에서 주로 결정하는 사항으로 옳은 것은?",
-    "options": [
-      "인덱스, 파티션, 저장 구조와 접근 경로",
-      "업무 용어 사전만 작성하는 작업",
-      "식별자 존재 여부만 검토하는 작업",
-      "엔터티와 관계의 후보 목록"
-    ],
-    "correctIndex": 0,
-    "explanation": "물리 설계는 실제 성능과 저장 효율을 고려해 물리적 구현 방법을 정하는 단계다.",
-    "chapter": "데이터베이스 설계",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1149",
-    "_category": "데이터베이스 설계",
-    "references": [
-      {
-        "type": "text",
-        "content": "부모-자식 엔터티의 키 구조를 먼저 확정하려 한다."
-      }
-    ]
-  },
-  {
-    "id": 11939,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "1과목",
-    "number": 1140,
-    "title": "슈퍼키(Super Key)에 대한 설명으로 옳은 것은?",
-    "options": [
-      "반드시 단일 컬럼이어야 한다.",
-      "외래키와 동일한 개념이다.",
-      "항상 최소성을 만족한다.",
-      "행을 유일하게 식별할 수 있지만 최소성은 만족하지 않을 수 있다."
-    ],
-    "correctIndex": 3,
-    "explanation": "슈퍼키는 후보키보다 넓은 개념으로, 불필요한 속성을 더 포함할 수 있다.",
-    "chapter": "식별자",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1151",
-    "_category": "식별자",
-    "references": [
-      {
-        "type": "text",
-        "content": "복합 기본키 구성 컬럼의 NULL 허용 여부를 판단한다."
-      }
-    ]
-  },
-  {
-    "id": 11941,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 1142,
-    "title": "인덱스 컬럼에 함수가 적용되면 일반적으로 주의할 점으로 옳은 것은?",
-    "options": [
-      "일반 인덱스를 그대로 활용하지 못할 수 있다.",
-      "PK 제약이 자동 삭제된다.",
-      "무결성이 깨진다.",
-      "인덱스가 더 잘 사용된다."
-    ],
-    "correctIndex": 0,
-    "explanation": "컬럼 값에 함수를 적용하면 함수 기반 인덱스가 아니면 인덱스 사용성이 낮아질 수 있다.",
-    "chapter": "관계형 DB와 SELECT",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1153",
-    "_category": "인덱스",
-    "references": [
-      {
-        "type": "text",
-        "content": "조회 비율과 인덱스 유지 비용을 함께 판단한다."
-      }
-    ]
-  },
-  {
     "id": 11945,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
@@ -37714,32 +37110,6 @@ export const AI_MOCK: QuizQuestion[] = [
       {
         "type": "text",
         "content": "작업1: INSERT A\n작업2: INSERT B\nCOMMIT\n작업3: INSERT C\nROLLBACK"
-      }
-    ]
-  },
-  {
-    "id": 11946,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 1147,
-    "title": "REVOKE INSERT ON emp FROM user1의 의미로 옳은 것은?",
-    "options": [
-      "emp 테이블이 삭제된다.",
-      "user1 계정이 잠긴다.",
-      "SELECT 권한도 함께 회수된다.",
-      "user1의 INSERT 권한만 회수한다."
-    ],
-    "correctIndex": 3,
-    "explanation": "부여된 권한 일부만 선택적으로 회수할 수 있다.",
-    "chapter": "DCL·TCL",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1159",
-    "_category": "DCL",
-    "references": [
-      {
-        "type": "text",
-        "content": "객체 권한과 보안 제어 명령을 구분한다."
       }
     ]
   },
@@ -37925,32 +37295,6 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11956,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "1과목",
-    "number": 1157,
-    "title": "슈퍼타입/서브타입 모델링이 적절한 경우로 옳은 것은?",
-    "options": [
-      "PK를 사용하지 않으려 할 때",
-      "조인을 없애기 위해 모든 엔터티를 하나로 합칠 때",
-      "모든 유형이 완전히 동일한 속성만 가질 때",
-      "공통 속성과 유형별 속성을 함께 관리해야 할 때"
-    ],
-    "correctIndex": 3,
-    "explanation": "공통 속성은 슈퍼타입에, 유형별 속성은 서브타입에 배치하면 중복을 줄일 수 있다.",
-    "chapter": "데이터 모델링 기법",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1170",
-    "_category": "데이터 모델링 기법",
-    "references": [
-      {
-        "type": "text",
-        "content": "다대다 관계를 논리 모델로 바꾸는 방안을 검토한다."
-      }
-    ]
-  },
-  {
     "id": 11957,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
@@ -37979,84 +37323,6 @@ export const AI_MOCK: QuizQuestion[] = [
         "src": "/sqld-images/j1147-1.png",
         "alt": "Parent / Child ERD",
         "caption": "Parent / Child ERD"
-      }
-    ]
-  },
-  {
-    "id": 11958,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "1과목",
-    "number": 1159,
-    "title": "데이터 사전(Data Dictionary)에 저장되는 정보로 옳은 것은?",
-    "options": [
-      "테이블, 컬럼, 제약조건과 같은 메타데이터",
-      "세션별 임시 결과 집합만 저장하는 영역",
-      "사용자 화면 레이아웃 정보",
-      "주문 상세 내역과 같은 트랜잭션 데이터"
-    ],
-    "correctIndex": 0,
-    "explanation": "데이터 사전은 실제 업무 데이터가 아니라 DB 객체 정의와 제약조건 등 메타데이터를 관리한다.",
-    "chapter": "데이터 모델 개념",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1172",
-    "_category": "데이터베이스 개념",
-    "references": [
-      {
-        "type": "text",
-        "content": "스토리지 구조 변경 후 응용 SQL 영향 범위를 검토한다."
-      }
-    ]
-  },
-  {
-    "id": 11959,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "1과목",
-    "number": 1160,
-    "title": "정규화된 논리 모델을 반정규화하는 시점으로 가장 적절한 것은?",
-    "options": [
-      "정규화된 모델을 기준으로 성능 요구를 검토한 뒤 필요할 때",
-      "물리 설계와 무관하므로 고려하지 않는다.",
-      "무결성을 높이기 위해 항상 모든 테이블을 합친다.",
-      "업무 분석 전에 무조건 먼저 수행한다."
-    ],
-    "correctIndex": 0,
-    "explanation": "반정규화는 정규화를 무시하는 것이 아니라 성능과 관리 비용을 검토해 제한적으로 적용해야 한다.",
-    "chapter": "데이터베이스 설계",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1173",
-    "_category": "데이터베이스 설계",
-    "references": [
-      {
-        "type": "text",
-        "content": "대량 거래 테이블의 접근 경로와 인덱스 전략을 설계한다."
-      }
-    ]
-  },
-  {
-    "id": 11961,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "1과목",
-    "number": 1162,
-    "title": "대체키(Alternate Key)에 대한 설명으로 옳은 것은?",
-    "options": [
-      "조인에 사용할 수 없는 키다.",
-      "기본키와 같은 말이다.",
-      "후보키 중 기본키로 선택되지 않은 키",
-      "반드시 NULL을 허용한다."
-    ],
-    "correctIndex": 2,
-    "explanation": "후보키는 여러 개 있을 수 있고, 선택되지 않은 것은 대체키라 부른다.",
-    "chapter": "식별자",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1175",
-    "_category": "식별자",
-    "references": [
-      {
-        "type": "text",
-        "content": "후보키와 슈퍼키, 대체키를 구분하려 한다."
       }
     ]
   },
@@ -38115,32 +37381,6 @@ export const AI_MOCK: QuizQuestion[] = [
             "200"
           ]
         ]
-      }
-    ]
-  },
-  {
-    "id": 11963,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 1164,
-    "title": "선택도가 매우 낮은 컬럼에 단독 인덱스를 두었을 때 기대 효과로 가장 적절한 것은?",
-    "options": [
-      "조회 패턴에 따라 테이블 전체 스캔이 더 유리할 수 있다.",
-      "반드시 UNIQUE가 된다.",
-      "조인만 금지된다.",
-      "항상 압도적으로 빠르다."
-    ],
-    "correctIndex": 0,
-    "explanation": "값 분포가 치우친 컬럼은 인덱스 이점이 작을 수 있다.",
-    "chapter": "관계형 DB와 SELECT",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1177",
-    "_category": "인덱스",
-    "references": [
-      {
-        "type": "text",
-        "content": "복합 인덱스 선두 컬럼 조건의 유무"
       }
     ]
   },
@@ -38253,58 +37493,6 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11969,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 1170,
-    "title": "WITH GRANT OPTION이 있는 권한의 특징으로 옳은 것은?",
-    "options": [
-      "트랜잭션이 자동 커밋되지 않는다.",
-      "권한을 절대 회수할 수 없다.",
-      "권한을 받은 사용자가 다른 사용자에게 같은 권한을 다시 부여할 수 있다.",
-      "DDL 실행만 가능해진다."
-    ],
-    "correctIndex": 2,
-    "explanation": "전파 가능한 객체 권한이다.",
-    "chapter": "DCL·TCL",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1183",
-    "_category": "DCL",
-    "references": [
-      {
-        "type": "text",
-        "content": "권한 부여와 회수의 영향을 사용자별로 검토한다."
-      }
-    ]
-  },
-  {
-    "id": 11970,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 1171,
-    "title": "TRUNCATE TABLE과 DELETE의 차이로 옳은 것은?",
-    "options": [
-      "TRUNCATE는 DDL로서 테이블 전체 데이터를 빠르게 비울 때 사용된다.",
-      "DELETE는 구조까지 제거한다.",
-      "둘은 완전히 동일하다.",
-      "TRUNCATE는 WHERE 조건을 사용할 수 있다."
-    ],
-    "correctIndex": 0,
-    "explanation": "SQLD 빈출 개념이다.",
-    "chapter": "DDL",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1184",
-    "_category": "DDL",
-    "references": [
-      {
-        "type": "text",
-        "content": "신규 테이블 생성과 기존 테이블 구조 변경 명령을 구분한다."
-      }
-    ]
-  },
-  {
     "id": 11972,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
@@ -38355,84 +37543,6 @@ export const AI_MOCK: QuizQuestion[] = [
       {
         "type": "text",
         "content": "단순 뷰와 집계 뷰의 갱신 제약을 비교한다."
-      }
-    ]
-  },
-  {
-    "id": 11977,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "1과목",
-    "number": 1178,
-    "title": "속성의 원자성을 높이는 모델링 방식으로 옳은 것은?",
-    "options": [
-      "조인 감소를 위해 모든 속성을 VARCHAR 하나에 직렬화한다.",
-      "전화번호 3개를 하나의 컬럼에 콤마로 저장한다.",
-      "반복 속성을 분리하여 하나의 컬럼에는 하나의 값만 저장한다.",
-      "코드와 코드명을 한 컬럼에 함께 저장한다."
-    ],
-    "correctIndex": 2,
-    "explanation": "1NF 관점에서도 속성은 더 이상 의미 있게 분해되지 않는 단일 값으로 다루는 것이 바람직하다.",
-    "chapter": "데이터 모델링 기법",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1194",
-    "_category": "데이터 모델링 기법",
-    "references": [
-      {
-        "type": "text",
-        "content": "공통 속성과 유형별 속성을 함께 표현할 모델을 찾는다."
-      }
-    ]
-  },
-  {
-    "id": 11979,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "1과목",
-    "number": 1180,
-    "title": "관계형 모델의 릴레이션 특성으로 옳은 것은?",
-    "options": [
-      "행의 논리적 순서는 보장되지 않으므로 ORDER BY 없이 특정 순서를 기대하면 안 된다.",
-      "릴레이션에서는 NULL을 사용할 수 없다.",
-      "열 이름은 반드시 숫자로만 정의해야 한다.",
-      "중복 행이 많을수록 릴레이션의 품질이 좋아진다."
-    ],
-    "correctIndex": 0,
-    "explanation": "릴레이션은 집합 개념이므로 행의 논리적 순서를 전제하지 않는다.",
-    "chapter": "데이터 모델 개념",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1196",
-    "_category": "데이터베이스 개념",
-    "references": [
-      {
-        "type": "text",
-        "content": "메타데이터와 실제 업무 데이터를 구분해 설명하려 한다."
-      }
-    ]
-  },
-  {
-    "id": 11980,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "1과목",
-    "number": 1181,
-    "title": "트랜잭션 처리량이 매우 큰 테이블에 대해 설계 단계에서 우선 검토할 사항으로 옳은 것은?",
-    "options": [
-      "모든 제약조건 제거",
-      "엔터티명을 길게 변경하는 작업",
-      "모든 컬럼을 PK에 포함하는 방법",
-      "접근 패턴에 맞는 인덱스와 파티션 전략"
-    ],
-    "correctIndex": 3,
-    "explanation": "대량 처리 테이블은 조회/변경 패턴과 데이터 분포를 고려한 물리 설계가 중요하다.",
-    "chapter": "데이터베이스 설계",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1197",
-    "_category": "데이터베이스 설계",
-    "references": [
-      {
-        "type": "text",
-        "content": "정규화된 논리 모델을 성능 요구에 맞게 조정하려 한다."
       }
     ]
   },
@@ -38511,32 +37621,6 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11983,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 1184,
-    "title": "인덱스가 많은 테이블에서 INSERT/UPDATE/DELETE가 느려질 수 있는 이유로 옳은 것은?",
-    "options": [
-      "인덱스가 있으면 COMMIT이 불가능하다.",
-      "인덱스는 무조건 메모리에서만 관리된다.",
-      "인덱스는 변경 작업과 무관하다.",
-      "데이터 변경 시 관련 인덱스도 함께 유지해야 하기 때문이다."
-    ],
-    "correctIndex": 3,
-    "explanation": "인덱스는 조회에는 도움을 줄 수 있지만 DML 시 유지 비용이 발생한다.",
-    "chapter": "관계형 DB와 SELECT",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1201",
-    "_category": "인덱스",
-    "references": [
-      {
-        "type": "text",
-        "content": "함수 적용 컬럼이 인덱스 활용에 미치는 영향을 검토한다."
-      }
-    ]
-  },
-  {
     "id": 11986,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
@@ -38585,58 +37669,6 @@ export const AI_MOCK: QuizQuestion[] = [
       {
         "type": "text",
         "content": "작업1: INSERT A\n작업2: CREATE TABLE T_LOG (id NUMBER)\n작업3: INSERT B\nROLLBACK\n단, DDL 수행 시 자동 COMMIT이 발생한다고 가정한다."
-      }
-    ]
-  },
-  {
-    "id": 11988,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 1189,
-    "title": "ALTER TABLE로 가능한 작업으로 옳은 것은?",
-    "options": [
-      "컬럼 추가, 수정, 삭제 등 구조 변경",
-      "권한 부여만 수행",
-      "트랜잭션 저장점 생성",
-      "데이터만 조회"
-    ],
-    "correctIndex": 0,
-    "explanation": "ALTER는 객체 구조 변경 명령이다.",
-    "chapter": "DDL",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1208",
-    "_category": "DDL",
-    "references": [
-      {
-        "type": "text",
-        "content": "대량 데이터 비우기와 객체 삭제"
-      }
-    ]
-  },
-  {
-    "id": 11992,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "1과목",
-    "number": 1193,
-    "title": "기본 테이블 구조가 변경될 때 VIEW 관련 주의점으로 옳은 것은?",
-    "options": [
-      "뷰는 SELECT 문을 포함할 수 없다.",
-      "뷰는 기본 테이블과 완전히 독립적이다.",
-      "기본 테이블 변경이 뷰 조회 오류로 이어질 수 있다.",
-      "뷰는 DROP TABLE보다 먼저 삭제할 수 없다."
-    ],
-    "correctIndex": 2,
-    "explanation": "뷰는 기본 테이블 정의에 의존한다.",
-    "chapter": "View",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1214",
-    "_category": "View",
-    "references": [
-      {
-        "type": "text",
-        "content": "뷰 조건을 벗어나는 수정이 허용되는지 검토한다."
       }
     ]
   },
@@ -38713,32 +37745,6 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11996,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "1과목",
-    "number": 1197,
-    "title": "데이터 모델링의 주요 목적에 대한 설명으로 옳은 것은?",
-    "options": [
-      "현실 세계의 업무 규칙을 데이터 구조로 명확하게 표현하는 것이다.",
-      "트랜잭션을 모두 배치 처리로 전환하는 것이다.",
-      "물리 디스크 배치만 최적화하는 것이다.",
-      "화면 디자인을 먼저 확정하는 것이다."
-    ],
-    "correctIndex": 0,
-    "explanation": "데이터 모델링은 업무 규칙과 데이터 구조를 일관되게 표현해 품질을 높이는 작업이다.",
-    "chapter": "데이터 모델링 기법",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1218",
-    "_category": "데이터 모델링 기법",
-    "references": [
-      {
-        "type": "text",
-        "content": "반복 속성이 있는 화면 입력값을 데이터 모델로 정리하려 한다."
-      }
-    ]
-  },
-  {
     "id": 11997,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
@@ -38763,84 +37769,6 @@ export const AI_MOCK: QuizQuestion[] = [
         "src": "/sqld-images/j1147-1.png",
         "alt": "Parent / Child ERD",
         "caption": "Parent / Child ERD"
-      }
-    ]
-  },
-  {
-    "id": 11998,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "1과목",
-    "number": 1199,
-    "title": "데이터베이스 시스템의 장점으로 가장 적절한 것은?",
-    "options": [
-      "응용 프로그램마다 별도 정의를 강제하여 독립성을 낮춘다.",
-      "무결성 제약을 제거해 개발 속도만 높인다.",
-      "파일 단위 중복을 늘려 응답 속도를 보장한다.",
-      "데이터를 통합 관리하여 중복을 줄이고 일관성을 높일 수 있다."
-    ],
-    "correctIndex": 3,
-    "explanation": "DBMS는 데이터 통합과 제어를 통해 중복과 불일치를 줄이는 방향으로 설계된다.",
-    "chapter": "데이터 모델 개념",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1220",
-    "_category": "데이터베이스 개념",
-    "references": [
-      {
-        "type": "text",
-        "content": "관계형 결과 집합에서 행 순서를 기대해도 되는지 검토한다."
-      }
-    ]
-  },
-  {
-    "id": 11999,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "1과목",
-    "number": 1200,
-    "title": "부모-자식 구조를 설계할 때 가장 먼저 확인해야 할 사항으로 옳은 것은?",
-    "options": [
-      "반드시 모든 FK를 NULL 허용으로 만드는 것",
-      "화면 버튼 색상",
-      "부모 엔터티와 자식 엔터티의 식별자 및 관계 차수",
-      "정렬 순서만 먼저 확정"
-    ],
-    "correctIndex": 2,
-    "explanation": "관계 차수와 식별 관계 여부를 명확히 해야 PK/FK 구조를 안정적으로 설계할 수 있다.",
-    "chapter": "데이터베이스 설계",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1221",
-    "_category": "데이터베이스 설계",
-    "references": [
-      {
-        "type": "text",
-        "content": "부모-자식 엔터티의 키 구조를 먼저 확정하려 한다."
-      }
-    ]
-  },
-  {
-    "id": 12001,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "1과목",
-    "number": 1202,
-    "title": "복합 기본키에 대한 설명으로 옳은 것은?",
-    "options": [
-      "구성하는 모든 컬럼이 함께 기본키를 이루며 NULL을 허용하지 않는다.",
-      "UNIQUE 제약보다 약한 제약이다.",
-      "외래키에서 참조할 수 없다.",
-      "각 컬럼 중 하나만 값이 있으면 된다."
-    ],
-    "correctIndex": 0,
-    "explanation": "복합 기본키는 여러 속성의 조합으로 행을 식별하며 각 구성 컬럼은 NULL이 될 수 없다.",
-    "chapter": "식별자",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1223",
-    "_category": "식별자",
-    "references": [
-      {
-        "type": "text",
-        "content": "복합 기본키 구성 컬럼의 NULL 허용 여부를 판단한다."
       }
     ]
   },
@@ -39037,58 +37965,6 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "NULL"
   },
   {
-    "id": 12014,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 1215,
-    "title": "뷰(View)에 대한 설명으로 옳은 것은?",
-    "options": [
-      "기본 테이블의 데이터를 이용해 가상 테이블처럼 조회할 수 있다.",
-      "뷰는 인덱스를 대체하는 저장소다.",
-      "뷰는 트랜잭션을 자동 종료한다.",
-      "뷰는 항상 독립적인 물리 데이터를 가진다."
-    ],
-    "correctIndex": 0,
-    "explanation": "뷰는 SELECT 결과를 논리적으로 캡슐화한 객체다.",
-    "chapter": "View",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1238",
-    "_category": "View",
-    "references": [
-      {
-        "type": "text",
-        "content": "보안과 재사용성 관점에서 뷰 활용 목적을 설명한다."
-      }
-    ]
-  },
-  {
-    "id": 12018,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "1과목",
-    "number": 1219,
-    "title": "개념 데이터 모델링 단계에서 주로 수행하는 작업으로 옳은 것은?",
-    "options": [
-      "업무에서 필요한 엔터티와 관계를 식별한다.",
-      "파티션 키와 병렬도만 결정한다.",
-      "실행 계획을 확정한다.",
-      "인덱스와 저장 파라미터를 결정한다."
-    ],
-    "correctIndex": 0,
-    "explanation": "개념 모델링은 업무 요구를 반영해 핵심 엔터티와 관계를 도출하는 단계다.",
-    "chapter": "데이터 모델링 기법",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1242",
-    "_category": "데이터 모델링 기법",
-    "references": [
-      {
-        "type": "text",
-        "content": "반복 속성이 있는 화면 입력값을 데이터 모델로 정리하려 한다."
-      }
-    ]
-  },
-  {
     "id": 12019,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
@@ -39111,84 +37987,6 @@ export const AI_MOCK: QuizQuestion[] = [
       {
         "type": "text",
         "content": "허용 값 범위를 CHECK 제약으로 제한하려 한다."
-      }
-    ]
-  },
-  {
-    "id": 12020,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "1과목",
-    "number": 1221,
-    "title": "ANSI/SPARC 3단계 스키마 구조에 대한 설명으로 옳은 것은?",
-    "options": [
-      "내부 스키마는 사용자별 보기를 각각 정의한다.",
-      "외부 스키마는 물리 저장 장치를 직접 기술한다.",
-      "외부 스키마는 사용자 관점의 뷰를 정의한다.",
-      "개념 스키마는 인덱스 파일 위치를 기술한다."
-    ],
-    "correctIndex": 2,
-    "explanation": "외부 스키마는 사용자별 관점, 개념 스키마는 통합 논리 구조, 내부 스키마는 물리 저장 구조를 다룬다.",
-    "chapter": "데이터 모델 개념",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1244",
-    "_category": "데이터베이스 개념",
-    "references": [
-      {
-        "type": "text",
-        "content": "관계형 결과 집합에서 행 순서를 기대해도 되는지 검토한다."
-      }
-    ]
-  },
-  {
-    "id": 12021,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "1과목",
-    "number": 1222,
-    "title": "일반적인 데이터베이스 설계 순서로 옳은 것은?",
-    "options": [
-      "개념 설계 -> 논리 설계 -> 물리 설계",
-      "논리 설계 -> 물리 설계 -> 개념 설계",
-      "인덱스 설계 -> 업무 분석 -> 개념 설계",
-      "물리 설계 -> 개념 설계 -> 논리 설계"
-    ],
-    "correctIndex": 0,
-    "explanation": "요구사항을 반영한 개념 설계 후 논리 구조를 정교화하고 마지막에 물리 설계를 수행한다.",
-    "chapter": "데이터베이스 설계",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1245",
-    "_category": "데이터베이스 설계",
-    "references": [
-      {
-        "type": "text",
-        "content": "부모-자식 엔터티의 키 구조를 먼저 확정하려 한다."
-      }
-    ]
-  },
-  {
-    "id": 12023,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "1과목",
-    "number": 1224,
-    "title": "후보키(Candidate Key)에 대한 설명으로 옳은 것은?",
-    "options": [
-      "반드시 외래키여야 한다.",
-      "NULL을 반드시 허용해야 한다.",
-      "유일성만 만족하면 된다.",
-      "유일성과 최소성을 만족하는 식별자 후보"
-    ],
-    "correctIndex": 3,
-    "explanation": "후보키는 각 행을 구분할 수 있으면서 불필요한 속성을 포함하지 않아야 한다.",
-    "chapter": "식별자",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1247",
-    "_category": "식별자",
-    "references": [
-      {
-        "type": "text",
-        "content": "복합 기본키 구성 컬럼의 NULL 허용 여부를 판단한다."
       }
     ]
   },
@@ -39377,65 +38175,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "chapter": "데이터 무결성",
     "_source": "sqld-1140",
     "_origId": "sqld-1267",
-    "_category": "데이터 무결성",
-    "references": [
-      {
-        "type": "text",
-        "content": "부모 삭제와 자식 참조 관계의 영향을 검토한다."
-      }
-    ]
-  },
-  {
-    "id": 12040,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "1과목",
-    "number": 1241,
-    "title": "논리적 데이터 독립성에 대한 설명으로 가장 적절한 것은?",
-    "options": [
-      "개념 스키마가 바뀌지 않으면 외부 스키마는 물리 저장 방식 변경의 영향을 적게 받는다.",
-      "논리적 데이터 독립성은 백업 정책만을 의미한다.",
-      "논리적 데이터 독립성은 COMMIT과 ROLLBACK의 독립성을 말한다.",
-      "테이블스페이스 위치가 바뀌면 모든 응용 SQL을 수정해야 한다."
-    ],
-    "correctIndex": 0,
-    "explanation": "물리 구조 변경이 외부 사용자 프로그램에 미치는 영향을 최소화하는 것이 데이터 독립성의 핵심이다.",
-    "chapter": "데이터 모델 개념",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1268",
-    "_category": "데이터베이스 개념",
-    "references": [
-      {
-        "type": "text",
-        "content": "스토리지 구조 변경 후 응용 SQL 영향 범위를 검토한다."
-      }
-    ]
-  },
-  {
-    "id": 12041,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "1과목",
-    "number": 1242,
-    "title": "물리 설계 단계에서 주로 결정하는 사항으로 옳은 것은?",
-    "options": [
-      "인덱스, 파티션, 저장 구조와 접근 경로",
-      "업무 용어 사전만 작성하는 작업",
-      "식별자 존재 여부만 검토하는 작업",
-      "엔터티와 관계의 후보 목록"
-    ],
-    "correctIndex": 0,
-    "explanation": "물리 설계는 실제 성능과 저장 효율을 고려해 물리적 구현 방법을 정하는 단계다.",
-    "chapter": "데이터베이스 설계",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1269",
-    "_category": "데이터베이스 설계",
-    "references": [
-      {
-        "type": "text",
-        "content": "대량 거래 테이블의 접근 경로와 인덱스 전략을 설계한다."
-      }
-    ]
+    "_category": "데이터 무결성"
   },
   {
     "id": 12042,
@@ -39495,32 +38235,6 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12043,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "1과목",
-    "number": 1244,
-    "title": "슈퍼키(Super Key)에 대한 설명으로 옳은 것은?",
-    "options": [
-      "외래키와 동일한 개념이다.",
-      "항상 최소성을 만족한다.",
-      "행을 유일하게 식별할 수 있지만 최소성은 만족하지 않을 수 있다.",
-      "반드시 단일 컬럼이어야 한다."
-    ],
-    "correctIndex": 2,
-    "explanation": "슈퍼키는 후보키보다 넓은 개념으로, 불필요한 속성을 더 포함할 수 있다.",
-    "chapter": "식별자",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1271",
-    "_category": "식별자",
-    "references": [
-      {
-        "type": "text",
-        "content": "후보키와 슈퍼키, 대체키를 구분하려 한다."
-      }
-    ]
-  },
-  {
     "id": 12044,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
@@ -39543,32 +38257,6 @@ export const AI_MOCK: QuizQuestion[] = [
       {
         "type": "text",
         "content": "파티션별 순위와 누적 합계를 동시에 해석한다."
-      }
-    ]
-  },
-  {
-    "id": 12045,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 1246,
-    "title": "인덱스 컬럼에 함수가 적용되면 일반적으로 주의할 점으로 옳은 것은?",
-    "options": [
-      "일반 인덱스를 그대로 활용하지 못할 수 있다.",
-      "PK 제약이 자동 삭제된다.",
-      "무결성이 깨진다.",
-      "인덱스가 더 잘 사용된다."
-    ],
-    "correctIndex": 0,
-    "explanation": "컬럼 값에 함수를 적용하면 함수 기반 인덱스가 아니면 인덱스 사용성이 낮아질 수 있다.",
-    "chapter": "관계형 DB와 SELECT",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1273",
-    "_category": "인덱스",
-    "references": [
-      {
-        "type": "text",
-        "content": "복합 인덱스 선두 컬럼 조건의 유무"
       }
     ]
   },
@@ -39751,110 +38439,6 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12059,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "1과목",
-    "number": 1260,
-    "title": "슈퍼타입/서브타입 모델링이 적절한 경우로 옳은 것은?",
-    "options": [
-      "조인을 없애기 위해 모든 엔터티를 하나로 합칠 때",
-      "모든 유형이 완전히 동일한 속성만 가질 때",
-      "공통 속성과 유형별 속성을 함께 관리해야 할 때",
-      "PK를 사용하지 않으려 할 때"
-    ],
-    "correctIndex": 2,
-    "explanation": "공통 속성은 슈퍼타입에, 유형별 속성은 서브타입에 배치하면 중복을 줄일 수 있다.",
-    "chapter": "데이터 모델링 기법",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1290",
-    "_category": "데이터 모델링 기법",
-    "references": [
-      {
-        "type": "text",
-        "content": "공통 속성과 유형별 속성을 함께 표현할 모델을 찾는다."
-      }
-    ]
-  },
-  {
-    "id": 12060,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 1261,
-    "title": "도메인 무결성을 보장하는 대표 방법으로 옳은 것은?",
-    "options": [
-      "테이블명을 표준화한다.",
-      "외래키만 두 개 이상 둔다.",
-      "컬럼의 데이터 타입과 CHECK 제약으로 허용 범위를 제한한다.",
-      "모든 컬럼을 문자열로 만든다."
-    ],
-    "correctIndex": 2,
-    "explanation": "도메인 무결성은 속성 값의 허용 범위를 통제하는 개념이다.",
-    "chapter": "데이터 무결성",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1291",
-    "_category": "데이터 무결성",
-    "references": [
-      {
-        "type": "text",
-        "content": "기본키와 UNIQUE 제약의 차이를 설명하려 한다."
-      }
-    ]
-  },
-  {
-    "id": 12061,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "1과목",
-    "number": 1262,
-    "title": "데이터 사전(Data Dictionary)에 저장되는 정보로 옳은 것은?",
-    "options": [
-      "테이블, 컬럼, 제약조건과 같은 메타데이터",
-      "세션별 임시 결과 집합만 저장하는 영역",
-      "사용자 화면 레이아웃 정보",
-      "주문 상세 내역과 같은 트랜잭션 데이터"
-    ],
-    "correctIndex": 0,
-    "explanation": "데이터 사전은 실제 업무 데이터가 아니라 DB 객체 정의와 제약조건 등 메타데이터를 관리한다.",
-    "chapter": "데이터 모델 개념",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1292",
-    "_category": "데이터베이스 개념",
-    "references": [
-      {
-        "type": "text",
-        "content": "메타데이터와 실제 업무 데이터를 구분해 설명하려 한다."
-      }
-    ]
-  },
-  {
-    "id": 12062,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "1과목",
-    "number": 1263,
-    "title": "정규화된 논리 모델을 반정규화하는 시점으로 가장 적절한 것은?",
-    "options": [
-      "물리 설계와 무관하므로 고려하지 않는다.",
-      "무결성을 높이기 위해 항상 모든 테이블을 합친다.",
-      "업무 분석 전에 무조건 먼저 수행한다.",
-      "정규화된 모델을 기준으로 성능 요구를 검토한 뒤 필요할 때"
-    ],
-    "correctIndex": 3,
-    "explanation": "반정규화는 정규화를 무시하는 것이 아니라 성능과 관리 비용을 검토해 제한적으로 적용해야 한다.",
-    "chapter": "데이터베이스 설계",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1293",
-    "_category": "데이터베이스 설계",
-    "references": [
-      {
-        "type": "text",
-        "content": "정규화된 논리 모델을 성능 요구에 맞게 조정하려 한다."
-      }
-    ]
-  },
-  {
     "id": 12063,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
@@ -39904,32 +38488,6 @@ export const AI_MOCK: QuizQuestion[] = [
             "3500"
           ]
         ]
-      }
-    ]
-  },
-  {
-    "id": 12065,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 1266,
-    "title": "선택도가 매우 낮은 컬럼에 단독 인덱스를 두었을 때 기대 효과로 가장 적절한 것은?",
-    "options": [
-      "반드시 UNIQUE가 된다.",
-      "조인만 금지된다.",
-      "항상 압도적으로 빠르다.",
-      "조회 패턴에 따라 테이블 전체 스캔이 더 유리할 수 있다."
-    ],
-    "correctIndex": 3,
-    "explanation": "값 분포가 치우친 컬럼은 인덱스 이점이 작을 수 있다.",
-    "chapter": "관계형 DB와 SELECT",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1297",
-    "_category": "인덱스",
-    "references": [
-      {
-        "type": "text",
-        "content": "함수 적용 컬럼이 인덱스 활용에 미치는 영향을 검토한다."
       }
     ]
   },
@@ -40072,32 +38630,6 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12080,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "1과목",
-    "number": 1281,
-    "title": "속성의 원자성을 높이는 모델링 방식으로 옳은 것은?",
-    "options": [
-      "반복 속성을 분리하여 하나의 컬럼에는 하나의 값만 저장한다.",
-      "코드와 코드명을 한 컬럼에 함께 저장한다.",
-      "조인 감소를 위해 모든 속성을 VARCHAR 하나에 직렬화한다.",
-      "전화번호 3개를 하나의 컬럼에 콤마로 저장한다."
-    ],
-    "correctIndex": 0,
-    "explanation": "1NF 관점에서도 속성은 더 이상 의미 있게 분해되지 않는 단일 값으로 다루는 것이 바람직하다.",
-    "chapter": "데이터 모델링 기법",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1314",
-    "_category": "데이터 모델링 기법",
-    "references": [
-      {
-        "type": "text",
-        "content": "반복 속성이 있는 화면 입력값을 데이터 모델로 정리하려 한다."
-      }
-    ]
-  },
-  {
     "id": 12081,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
@@ -40124,110 +38656,6 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12082,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "1과목",
-    "number": 1283,
-    "title": "관계형 모델의 릴레이션 특성으로 옳은 것은?",
-    "options": [
-      "릴레이션에서는 NULL을 사용할 수 없다.",
-      "열 이름은 반드시 숫자로만 정의해야 한다.",
-      "중복 행이 많을수록 릴레이션의 품질이 좋아진다.",
-      "행의 논리적 순서는 보장되지 않으므로 ORDER BY 없이 특정 순서를 기대하면 안 된다."
-    ],
-    "correctIndex": 3,
-    "explanation": "릴레이션은 집합 개념이므로 행의 논리적 순서를 전제하지 않는다.",
-    "chapter": "데이터 모델 개념",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1316",
-    "_category": "데이터베이스 개념",
-    "references": [
-      {
-        "type": "text",
-        "content": "관계형 결과 집합에서 행 순서를 기대해도 되는지 검토한다."
-      }
-    ]
-  },
-  {
-    "id": 12083,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "1과목",
-    "number": 1284,
-    "title": "트랜잭션 처리량이 매우 큰 테이블에 대해 설계 단계에서 우선 검토할 사항으로 옳은 것은?",
-    "options": [
-      "엔터티명을 길게 변경하는 작업",
-      "모든 컬럼을 PK에 포함하는 방법",
-      "접근 패턴에 맞는 인덱스와 파티션 전략",
-      "모든 제약조건 제거"
-    ],
-    "correctIndex": 2,
-    "explanation": "대량 처리 테이블은 조회/변경 패턴과 데이터 분포를 고려한 물리 설계가 중요하다.",
-    "chapter": "데이터베이스 설계",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1317",
-    "_category": "데이터베이스 설계",
-    "references": [
-      {
-        "type": "text",
-        "content": "부모-자식 엔터티의 키 구조를 먼저 확정하려 한다."
-      }
-    ]
-  },
-  {
-    "id": 12084,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "1과목",
-    "number": 1285,
-    "title": "대리키(Surrogate Key)를 사용하는 주된 이유로 적절한 것은?",
-    "options": [
-      "업무 식별자가 변경될 가능성이 크거나 길이가 길 때 안정적인 식별자를 두기 위해서",
-      "외래키를 없애기 위해서",
-      "NULL 비교를 쉽게 하기 위해서",
-      "업무 규칙을 숨기기 위해서만 사용한다."
-    ],
-    "correctIndex": 0,
-    "explanation": "대리키는 업무 속성과 분리된 인공 식별자로 변경 영향도를 낮춘다.",
-    "chapter": "식별자",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1319",
-    "_category": "식별자",
-    "references": [
-      {
-        "type": "text",
-        "content": "복합 기본키 구성 컬럼의 NULL 허용 여부를 판단한다."
-      }
-    ]
-  },
-  {
-    "id": 12086,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 1287,
-    "title": "인덱스가 많은 테이블에서 INSERT/UPDATE/DELETE가 느려질 수 있는 이유로 옳은 것은?",
-    "options": [
-      "인덱스는 무조건 메모리에서만 관리된다.",
-      "인덱스는 변경 작업과 무관하다.",
-      "데이터 변경 시 관련 인덱스도 함께 유지해야 하기 때문이다.",
-      "인덱스가 있으면 COMMIT이 불가능하다."
-    ],
-    "correctIndex": 2,
-    "explanation": "인덱스는 조회에는 도움을 줄 수 있지만 DML 시 유지 비용이 발생한다.",
-    "chapter": "관계형 DB와 SELECT",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1321",
-    "_category": "인덱스",
-    "references": [
-      {
-        "type": "text",
-        "content": "조회 비율과 인덱스 유지 비용을 함께 판단한다."
-      }
-    ]
-  },
-  {
     "id": 12091,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
@@ -40250,58 +38678,6 @@ export const AI_MOCK: QuizQuestion[] = [
       {
         "type": "text",
         "content": "작업1: INSERT A\n작업2: CREATE TABLE T1 (id NUMBER)\n작업3: DELETE B\nROLLBACK\n단, DDL 수행 시 자동 COMMIT이 발생한다고 가정한다."
-      }
-    ]
-  },
-  {
-    "id": 12092,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 1293,
-    "title": "DCL이 담당하는 영역으로 옳은 것은?",
-    "options": [
-      "데이터 조회",
-      "권한과 보안 제어",
-      "집계 결과 계산",
-      "테이블 생성"
-    ],
-    "correctIndex": 1,
-    "explanation": "DCL은 GRANT, REVOKE와 같이 권한과 접근 제어를 담당한다.",
-    "chapter": "DCL·TCL",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1327",
-    "_category": "DCL",
-    "references": [
-      {
-        "type": "text",
-        "content": "권한 부여와 회수의 영향을 사용자별로 검토한다."
-      }
-    ]
-  },
-  {
-    "id": 12093,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 1294,
-    "title": "ALTER TABLE로 가능한 작업으로 옳은 것은?",
-    "options": [
-      "권한 회수만 수행",
-      "SAVEPOINT 생성만 수행",
-      "데이터 조회만 수행",
-      "컬럼 추가와 제약조건 추가"
-    ],
-    "correctIndex": 3,
-    "explanation": "ALTER TABLE은 컬럼, 제약조건 등 구조 변경에 사용된다.",
-    "chapter": "DDL",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1328",
-    "_category": "DDL",
-    "references": [
-      {
-        "type": "text",
-        "content": "신규 테이블 생성과 기존 테이블 구조 변경 명령을 구분한다."
       }
     ]
   },
@@ -40424,84 +38800,6 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12101,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "1과목",
-    "number": 1302,
-    "title": "데이터 모델링의 주요 목적에 대한 설명으로 옳은 것은?",
-    "options": [
-      "현실 세계의 업무 규칙을 데이터 구조로 명확하게 표현하는 것이다.",
-      "트랜잭션을 모두 배치 처리로 전환하는 것이다.",
-      "물리 디스크 배치만 최적화하는 것이다.",
-      "화면 디자인을 먼저 확정하는 것이다."
-    ],
-    "correctIndex": 0,
-    "explanation": "데이터 모델링은 업무 규칙과 데이터 구조를 일관되게 표현해 품질을 높이는 작업이다.",
-    "chapter": "데이터 모델링 기법",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1338",
-    "_category": "데이터 모델링 기법",
-    "references": [
-      {
-        "type": "text",
-        "content": "다대다 관계를 논리 모델로 바꾸는 방안을 검토한다."
-      }
-    ]
-  },
-  {
-    "id": 12102,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "1과목",
-    "number": 1303,
-    "title": "데이터베이스 시스템의 장점으로 가장 적절한 것은?",
-    "options": [
-      "무결성 제약을 제거해 개발 속도만 높인다.",
-      "파일 단위 중복을 늘려 응답 속도를 보장한다.",
-      "데이터를 통합 관리하여 중복을 줄이고 일관성을 높일 수 있다.",
-      "응용 프로그램마다 별도 정의를 강제하여 독립성을 낮춘다."
-    ],
-    "correctIndex": 2,
-    "explanation": "DBMS는 데이터 통합과 제어를 통해 중복과 불일치를 줄이는 방향으로 설계된다.",
-    "chapter": "데이터 모델 개념",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1340",
-    "_category": "데이터베이스 개념",
-    "references": [
-      {
-        "type": "text",
-        "content": "스토리지 구조 변경 후 응용 SQL 영향 범위를 검토한다."
-      }
-    ]
-  },
-  {
-    "id": 12103,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "1과목",
-    "number": 1304,
-    "title": "부모-자식 구조를 설계할 때 가장 먼저 확인해야 할 사항으로 옳은 것은?",
-    "options": [
-      "부모 엔터티와 자식 엔터티의 식별자 및 관계 차수",
-      "정렬 순서만 먼저 확정",
-      "반드시 모든 FK를 NULL 허용으로 만드는 것",
-      "화면 버튼 색상"
-    ],
-    "correctIndex": 0,
-    "explanation": "관계 차수와 식별 관계 여부를 명확히 해야 PK/FK 구조를 안정적으로 설계할 수 있다.",
-    "chapter": "데이터베이스 설계",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1341",
-    "_category": "데이터베이스 설계",
-    "references": [
-      {
-        "type": "text",
-        "content": "대량 거래 테이블의 접근 경로와 인덱스 전략을 설계한다."
-      }
-    ]
-  },
-  {
     "id": 12104,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
@@ -40551,32 +38849,6 @@ export const AI_MOCK: QuizQuestion[] = [
             "3500"
           ]
         ]
-      }
-    ]
-  },
-  {
-    "id": 12105,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "1과목",
-    "number": 1306,
-    "title": "복합 기본키에 대한 설명으로 옳은 것은?",
-    "options": [
-      "UNIQUE 제약보다 약한 제약이다.",
-      "외래키에서 참조할 수 없다.",
-      "각 컬럼 중 하나만 값이 있으면 된다.",
-      "구성하는 모든 컬럼이 함께 기본키를 이루며 NULL을 허용하지 않는다."
-    ],
-    "correctIndex": 3,
-    "explanation": "복합 기본키는 여러 속성의 조합으로 행을 식별하며 각 구성 컬럼은 NULL이 될 수 없다.",
-    "chapter": "식별자",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1343",
-    "_category": "식별자",
-    "references": [
-      {
-        "type": "text",
-        "content": "후보키와 슈퍼키, 대체키를 구분하려 한다."
       }
     ]
   },
@@ -40709,58 +38981,6 @@ export const AI_MOCK: QuizQuestion[] = [
         "src": "/sqld-images/j1115-1.png",
         "alt": "Sales ERD",
         "caption": "Sales ERD"
-      }
-    ]
-  },
-  {
-    "id": 12126,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "1과목",
-    "number": 1327,
-    "title": "ANSI/SPARC 3단계 스키마 구조에 대한 설명으로 옳은 것은?",
-    "options": [
-      "외부 스키마는 사용자 관점의 뷰를 정의한다.",
-      "개념 스키마는 인덱스 파일 위치를 기술한다.",
-      "내부 스키마는 사용자별 보기를 각각 정의한다.",
-      "외부 스키마는 물리 저장 장치를 직접 기술한다."
-    ],
-    "correctIndex": 0,
-    "explanation": "외부 스키마는 사용자별 관점, 개념 스키마는 통합 논리 구조, 내부 스키마는 물리 저장 구조를 다룬다.",
-    "chapter": "데이터 모델 개념",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1364",
-    "_category": "데이터베이스 개념",
-    "references": [
-      {
-        "type": "text",
-        "content": "스토리지 구조 변경 후 응용 SQL 영향 범위를 검토한다."
-      }
-    ]
-  },
-  {
-    "id": 12127,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "1과목",
-    "number": 1328,
-    "title": "일반적인 데이터베이스 설계 순서로 옳은 것은?",
-    "options": [
-      "개념 설계 -> 논리 설계 -> 물리 설계",
-      "논리 설계 -> 물리 설계 -> 개념 설계",
-      "인덱스 설계 -> 업무 분석 -> 개념 설계",
-      "물리 설계 -> 개념 설계 -> 논리 설계"
-    ],
-    "correctIndex": 0,
-    "explanation": "요구사항을 반영한 개념 설계 후 논리 구조를 정교화하고 마지막에 물리 설계를 수행한다.",
-    "chapter": "데이터베이스 설계",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1365",
-    "_category": "데이터베이스 설계",
-    "references": [
-      {
-        "type": "text",
-        "content": "대량 거래 테이블의 접근 경로와 인덱스 전략을 설계한다."
       }
     ]
   },
