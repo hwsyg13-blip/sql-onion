@@ -1,9 +1,10 @@
 {
   "description": "check-answer-leak.mjs 가 잡지만 사람이 검토해 정답 노출이 아니라고 판정한 항목. key = 파일|과목|번호(또는 _id).",
-  "reviewedAt": "2026-11-01",
+  "reviewedAt": "2026-11-02",
   "items": [
     { "key": "ai-mock.json|2과목|ai-mock-006", "reason": "정답 'NULL'이 SQL의 NULL 인자(COALESCE(NULL, ...))와 겹칠 뿐. 결과값은 드러나지 않음." },
     { "key": "round-46.json|2과목|20", "reason": "정답 'TUTOR'는 문제에 나오는 테이블 이름. 어느 쪽이 모든 행을 반환하는지는 LEFT OUTER JOIN 이해로 풀어야 함." },
+    { "key": "round-48.json|2과목|44", "reason": "SQL 이 다섯 함수를 모두 나열하고, 보기는 그중 NULL 이 나오는 두 함수의 조합을 고르게 함. 모든 보기의 함수가 SQL 에 똑같이 나오므로 정답이 드러나지 않음." },
     { "key": "round-53.json|2과목|23", "reason": "정답 'abcd'가 입력 문자열 'xxxxxxabcd'의 일부일 뿐. 오답 선택지도 같은 입력의 부분 문자열." },
     { "key": "round-57.json|2과목|46", "reason": "정답 'EMPNO'가 SQL의 COUNT(EMPNO)와 겹칠 뿐. 괄호 자리에 GROUP BY에 없는 컬럼이 올 수 없다는 점을 묻는 문제." },
     { "key": "round-61.json|2과목|46", "reason": "정답 'NULL'이 SQL의 'SAL IS NULL' 조건과 겹칠 뿐. 입력 행이 없는 MIN과 NULL 산술 전파를 이해해야 풀 수 있음." }

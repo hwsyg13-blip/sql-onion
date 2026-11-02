@@ -1157,15 +1157,15 @@
     {
       "subject": "2과목",
       "number": 44,
-      "title": "아래 T 테이블에 대한 집계 함수 결과 중 NULL 이 반환되는 경우로 옳은 것은?",
+      "title": "아래 SQL 의 다섯 결과 중 NULL 이 나오는 것만 짝지은 것은?",
       "options": [
-        "COUNT(*), COUNT(COL), SUM(COL) — 모든 결과가 정상 값",
-        "AVG(COL_NULL), SUM(COL_NULL) 등 NULL 행만 있는 컬럼의 집계",
-        "모든 집계 함수 결과가 NULL",
-        "데이터 타입 불일치로 ORA-01722 오류 발생"
+        "COUNT(*), COUNT(COL)",
+        "AVG(COL_NULL), SUM(COL_NULL)",
+        "SUM(COL), AVG(COL_NULL)",
+        "COUNT(COL), SUM(COL_NULL)"
       ],
       "correctIndex": 1,
-      "explanation": "집계 함수(SUM·AVG·MIN·MAX) 는 NULL 을 자동으로 제외하고 계산하지만, 컬럼의 모든 값이 NULL 이거나 결과 집합이 비어있으면 결과 자체가 NULL 이 된다. 표 T 에서 COL_NULL 처럼 모든 값이 NULL 인 컬럼에 `SUM`/`AVG` 등을 적용하면 NULL 이 반환된다. ① `COUNT(*)` 는 NULL 이어도 행을 세고 `COUNT(COL)` 은 NULL 제외 후 0 을 반환하므로 NULL 아님. ③ 은 비현실적, ④ 는 무관.",
+      "explanation": "결과는 COUNT(*) = 3, COUNT(COL) = 2, SUM(COL) = 30, AVG(COL_NULL) = NULL, SUM(COL_NULL) = NULL 이다. SUM·AVG 는 NULL 을 빼고 계산하는데, COL_NULL 은 모든 값이 NULL 이라 계산할 값이 없어 결과가 NULL 이 된다(②). COUNT 는 대상이 없어도 0 을 돌려주지 NULL 을 돌려주지 않으므로 COUNT 가 들어간 ①④ 와, 30 이 나오는 SUM(COL) 이 들어간 ③ 은 틀리다.",
       "references": [
         {
           "type": "table",
