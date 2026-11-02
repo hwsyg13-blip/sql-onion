@@ -9949,11 +9949,11 @@
         "2000, 2500, 3000, 2000, 1000, 1500, 3000, 2000, 3500"
       ],
       "correctIndex": 1,
-      "explanation": "위의 Mytest 테이블에서 MGR 속성별로 파티션을 분할했을 때 각각의 파티션 내에서 HIREDATE 속성값 기준으로 오름차순 정렬하고 그때 같은 파티션 내에서 현재 행을 기준으로 바로 이전 행부터 바로 다음 행까지의 급여의 합계를 계산하여 MGR_SUM 속성값으로 조회한다.",
+      "explanation": "MGR 별로 나눈 뒤 HIREDATE 순으로 정렬하고, 앞 1행 + 현재 행 + 뒤 1행의 SAL 을 더한다. 손권: 노숙(2013) 2000 + 주유 2500 = 4500, 2000 + 2500 + 3000 = 7500, 2500 + 3000(황개) = 5500. 유비: 제갈량(2015) 2000 + 관우 1000 = 3000, 2000 + 1000 + 1500 = 4500, 1000 + 1500(조자룡) = 2500. 조조: 순욱(2015) 3000 + 하후돈 2000 = 5000, 3000 + 2000 + 3500 = 8500, 2000 + 3500(하후연) = 5500. 따라서 ②. 각 파티션의 첫 행은 앞 행이, 마지막 행은 뒤 행이 없어 두 행만 더해진다는 점이 핵심이다.",
       "references": [
         {
-          "type": "text",
-          "content": "SELECT MGR, ENAME, SAL, SUM(SAL) OVER (PARTITION BY MGR ORDER BY HIREDATE ROWS BETWEEN 1 PRECEDING AND 1 FOLLOWING) AS MGR_SUM FROM Mytest;"
+          "type": "sql",
+          "code": "SELECT MGR, ENAME, SAL, \n       SUM(SAL) OVER (PARTITION BY MGR ORDER BY HIREDATE ROWS BETWEEN 1 PRECEDING AND 1 FOLLOWING) AS MGR_SUM\nFROM Mytest;"
         },
         {
           "type": "table",
@@ -10023,7 +10023,7 @@
         },
         {
           "type": "table",
-          "caption": "[결과]",
+          "caption": "[결과] (MGR_SUM 을 구하시오)",
           "headers": [
             "MGR",
             "ENAME",
@@ -10052,7 +10052,7 @@
             [
               "유비",
               "제갈량",
-              "3000",
+              "2000",
               "?"
             ],
             [
