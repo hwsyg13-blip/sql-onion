@@ -9430,15 +9430,15 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 331,
-    "title": "다음 중 아래 (1), (2), (3)의 SQL에서 실행결과가 같은 것은?",
+    "title": "다음 중 아래 (1), (2), (3)의 SQL 에서 실행 결과가 같은 것끼리 묶은 것은? (단, TBL1 과 TBL2 의 ID 는 각각 중복이 없다)",
     "options": [
       "1,2,3",
       "2,3",
       "1,3",
       "1,2"
     ],
-    "correctIndex": 1,
-    "explanation": "(2) 는 LEFT OUTER JOIN 과 RIGHT OUTER JOIN 결과를 UNION 으로 합쳐 FULL OUTER JOIN 과 같은 결과를 만든다(다만 UNION 이 중복 행을 제거). (3) 은 매칭된 행과 각 테이블에만 있는 행을 UNION ALL 로 모아 같은 결과를 만들므로, 문제의 데이터 조건에서 실행 결과가 같은 것은 (2), (3) 이다. 정답은 ② 이다.",
+    "correctIndex": 0,
+    "explanation": "세 SQL 은 모두 \"양쪽에서 짝이 맞는 행 + TBL1 에만 있는 행 + TBL2 에만 있는 행\"을 만든다. (1) FULL OUTER JOIN 이 그 정의 자체이고, (2) 는 LEFT 결과(짝 + TBL1 만)와 RIGHT 결과(짝 + TBL2 만)를 UNION 으로 합치면서 겹치는 짝 행을 한 번만 남기며, (3) 은 짝 행, TBL1 에만 있는 행, TBL2 에만 있는 행을 따로 구해 UNION ALL 로 이어 붙인다. ID 에 중복이 없으므로 셋의 결과가 모두 같다(①). (ID 가 중복되면 UNION 이 같은 행을 지우는 (2) 만 달라질 수 있다.)",
     "chapter": "조인",
     "_source": "sqld-1140",
     "_origId": "sqld-0096",
@@ -9446,8 +9446,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "(1) SELECT A.ID, B.ID\n FROM TBL1 A FULL OUTER JOIN TBL2 B\nON A.ID = B.ID\n(2)  SELECT A.ID, B.ID\n FROM TBL1 A LEFT OUTER JOIN TBL2 B\n ON A.ID = B.ID\n UNION\n SELECT A.ID, B.ID\n FROM TBL1 A RIGHT OUTER JOIN TBL2 B\n ON A.ID = B.ID\n(3)  SELECT A.ID, B.ID\n FROM TBL1 A, TBL2 B\n WHERE A.ID = B.ID\n UNION ALL\n SELECT A.ID, NULL\n FROM TBL1 A\n WHERE NOT EXISTS (SELECT 1 FROM TBL2 B WHERE A.ID = B.ID)\n UNION ALL\n SELECT NULL, B.ID\n FROM TBL2 B\n WHERE NOT EXISTS (SELECT 1 FROM TBL1 A WHERE B.ID = A.ID)"
+        "type": "sql",
+        "code": "(1) SELECT A.ID, B.ID\nFROM TBL1 A FULL OUTER JOIN TBL2 B\nON A.ID = B.ID\n\n(2)  SELECT A.ID, B.ID\nFROM TBL1 A LEFT OUTER JOIN TBL2 B\nON A.ID = B.ID\nUNION\nSELECT A.ID, B.ID\nFROM TBL1 A RIGHT OUTER JOIN TBL2 B\nON A.ID = B.ID\n\n(3)  SELECT A.ID, B.ID\nFROM TBL1 A, TBL2 B\nWHERE A.ID = B.ID\nUNION ALL\nSELECT A.ID, NULL\nFROM TBL1 A\nWHERE NOT EXISTS (SELECT 1 FROM TBL2 B WHERE A.ID = B.ID)\nUNION ALL\nSELECT NULL, B.ID\nFROM TBL2 B\nWHERE NOT EXISTS (SELECT 1 FROM TBL1 A WHERE B.ID = A.ID)"
       }
     ]
   },
