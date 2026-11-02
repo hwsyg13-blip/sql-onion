@@ -1037,7 +1037,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "주문 테이블 INTERSECT 주문상세 테이블의 데이터 합계와 주문 테이블 데이터 합계는 다르다."
     ],
     "correctIndex": 2,
-    "explanation": "1:1 필수관계라면 주문에 있는 하나의 주문번호가 반드시 주문상세 테이블에도 하나만 존재한다는 뜻이다.예를 들어 주문 테이블에 (1, 2, 3)이 있다면 주문상세 테이블에도 반드시 (1, 2, 3)이 있다. 따라서 주문 테이블에서 주문상세 테이블을 MINUS하면 0건이 남게 된다.",
+    "explanation": "1:1 필수관계라면 주문에 있는 하나의 주문번호가 반드시 주문상세 테이블에도 하나만 존재한다는 뜻이다. 예를 들어 주문 테이블에 (1, 2, 3)이 있다면 주문상세 테이블에도 반드시 (1, 2, 3)이 있다. 따라서 주문 테이블에서 주문상세 테이블을 MINUS하면 0건이 남게 된다.",
     "chapter": "집합 연산자",
     "_source": "cbt-mock",
     "_origId": "cbt-003",
@@ -1184,7 +1184,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "4"
     ],
     "correctIndex": 2,
-    "explanation": "• SV1 시점 : TAB 테이블에 [(‘A’, 1), (‘B’ , 2), (‘C’, 3)]• SV2 시점 : TAB 테이블에 [(‘A’, 3), (B’, 3), (‘C’, 3)]• SV3 시점 : TAB 테이블에 [(‘D’, 5)]• ROLLBACK TO SV2 후 COMMIT할 때 TAB 테이블 : [(‘A’, 3), (‘B’, 3), (‘C’, 3)]따라서 총 3건이 존재한다.",
+    "explanation": "• SV1 시점 : TAB 테이블에 [('A', 1), ('B' , 2), ('C', 3)] • SV2 시점 : TAB 테이블에 [('A', 3), (B', 3), ('C', 3)] • SV3 시점 : TAB 테이블에 [('D', 5)] • ROLLBACK TO SV2 후 COMMIT할 때 TAB 테이블 : [('A', 3), ('B', 3), ('C', 3)]따라서 총 3건이 존재한다.",
     "chapter": "DCL·TCL",
     "_source": "cbt-mock",
     "_origId": "cbt-009",
@@ -1322,7 +1322,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "0"
     ],
     "correctIndex": 0,
-    "explanation": "WITH 절(CTE, Common Table Expression)은 SELECT 문 시작 전에 미리 정의된 가상의 테이블(임시 결과셋)을 생성하는 문법이다. 이는 마치 FROM 절에 인라인 뷰를 사용하는 것과 유사한 개념이며, 복잡한 쿼리를 구조화하고 가독성을 높이는 데 유리하다. 또한, 같은 CTE를 여러 번 재사용할 수 있는 장점이 있다. 만약 한 번만 사용할 용도라면 인라인 뷰로 작성해도 무방하다. 이 문제에서 CTE REGION_TOTAL은 TB_ORDER 테이블을 REGION 별로 그룹화한 뒤, 각 지역의 주문 금액 합계를 계산한다.REGION_TOTAL의 결과는 다음과 같다.이후 메인 쿼리에서는 TOTAL > 1500 조건을 만족하는 지역만 필터링하여 COUNT(*)를 수행한다. 조건을 만족하는 지역은 EAST 하나뿐이므로, 최종 결과는 1건이다.",
+    "explanation": "WITH 절(CTE, Common Table Expression)은 SELECT 문 시작 전에 미리 정의된 가상의 테이블(임시 결과셋)을 생성하는 문법이다. 이는 마치 FROM 절에 인라인 뷰를 사용하는 것과 유사한 개념이며, 복잡한 쿼리를 구조화하고 가독성을 높이는 데 유리하다. 또한, 같은 CTE를 여러 번 재사용할 수 있는 장점이 있다. 만약 한 번만 사용할 용도라면 인라인 뷰로 작성해도 무방하다. 이 문제에서 CTE REGION_TOTAL은 TB_ORDER 테이블을 REGION 별로 그룹화한 뒤, 각 지역의 주문 금액 합계를 계산한다. REGION_TOTAL의 결과는 다음과 같다. 이후 메인 쿼리에서는 TOTAL > 1500 조건을 만족하는 지역만 필터링하여 COUNT(*)를 수행한다. 조건을 만족하는 지역은 EAST 하나뿐이므로, 최종 결과는 1건이다.",
     "chapter": "GROUP BY·HAVING",
     "_source": "cbt-mock",
     "_origId": "cbt-015",
@@ -1580,7 +1580,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "3"
     ],
     "correctIndex": 3,
-    "explanation": "SELECT문을 보면 department로 GROUP BY한다. 그리면 총 3개의 그룹이 만들어진다. computer, physics, math이다. 3개의 그룹 중에서 개수가 2개 초과인 것을 조회하기 위해서 “HAVING count(*) > 2”문을 사용했다. 따라서 2개 초과인 것은 math이고 math는 총 3개가 있으므로 3이 된다.",
+    "explanation": "SELECT문을 보면 department로 GROUP BY한다. 그리면 총 3개의 그룹이 만들어진다. computer, physics, math이다. 3개의 그룹 중에서 개수가 2개 초과인 것을 조회하기 위해서 \"HAVING count(*) > 2\"문을 사용했다. 따라서 2개 초과인 것은 math이고 math는 총 3개가 있으므로 3이 된다.",
     "chapter": "관계형 DB와 SELECT",
     "_source": "cbt-mock",
     "_origId": "cbt-024",
@@ -1726,7 +1726,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "(ㄱ) FIRST_VALUE, (ㄴ) LAST_VALUE"
     ],
     "correctIndex": 1,
-    "explanation": "LAG는 현재 행 기준 이전 행의 값을 가져오고 LEAD는 현재 행 기준 다음 행의 값을 가져온다.• LAG(컬럼, 오프셋, 디폴트) : 컬럼의 오프셋만큼 이전의 행을 가져오고, 없으면 디폴트 값을 출력한다(오프셋 기본값 : 1, 디폴트 기본값 : NULL).• LEAD(컬럼, 오프셋, 디폴트) : 컬럼의 오프셋만큼 다음의 행을 가져오고, 없으면 디폴트 값을 출력한다(오프셋 기본값 : 1, 디폴트 기본값 : NULL).먼저 HIREDATE를 기준으로 오름차 정렬할 때의 테이블은 다음과 같다.• JONES : LAG일 때 이전값이 없으므로 NULL을 반환, LEAD일 때 다음 값은 CLARK이므로 CLARK 반환• CLARK : LAG일 때 이전값인 JONES 반환, LEAD일 때 다음 값인 KING 반환• KING : LAG일 때 이전값인 CLARK 반환, LEAD일 때 다음 값인 MILLER 반환• MILLER : LAG일 때 이전값인 KING 반환, LEAD일 때 다음 값은 없으므로 NULL 반환",
+    "explanation": "입사일 순서로 놓으면 JONES(81-04-02) → CLARK(81-06-09) → KING(81-11-17) → MILLER(82-01-23)이다. PREV_EMP 는 바로 앞 행(이전 입사자), NEXT_EMP 는 바로 다음 행(다음 입사자)이므로 (ㄱ) LAG, (ㄴ) LEAD 다(②). LAG(컬럼, n, 기본값)은 n행 앞, LEAD 는 n행 뒤의 값을 가져오고 n 을 생략하면 1, 해당 행이 없으면 NULL 이다. PREV·NEXT 라는 함수는 없고(③), FIRST_VALUE·LAST_VALUE 는 범위의 처음·마지막 값이다(④).",
     "chapter": "윈도우 함수",
     "_source": "cbt-mock",
     "_origId": "cbt-029",
@@ -1790,31 +1790,6 @@ export const AI_MOCK: QuizQuestion[] = [
             "MILLER",
             "KING",
             "NULL"
-          ]
-        ]
-      },
-      {
-        "type": "table",
-        "headers": [
-          "ENAME",
-          "HIREDATE"
-        ],
-        "rows": [
-          [
-            "JONES",
-            "1981-04-02"
-          ],
-          [
-            "CLARK",
-            "1981-06-09"
-          ],
-          [
-            "KING",
-            "1981-11-17"
-          ],
-          [
-            "MILLER",
-            "1982-01-23"
           ]
         ]
       }
@@ -1900,7 +1875,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "NULL, 240, 260"
     ],
     "correctIndex": 0,
-    "explanation": "• 첫 번째 쿼리 : DEPTNO가 10인 대상의 SAL+BONUS는 각각 100+NULL , NULL + 20이므로 둘다 NULL이 되어 SUM의 결과는 NULL이 된다.• 두 번째 쿼리 : NVL(SAL, 0) + NVL(BONUS, 0)은 순서대로 각각 100 + 0, 0 + 20, 30 + 10, 50 + 30, 20 + 0이므로 100, 20, 40, 80, 20의 합계를 구하면 260이다.• 세 번째 쿼리 : SUM(SAL)은 100, NULL, 30, 50, 20의 합계이며 집계 함수는 NULL을 무시해 100, 30, 50, 20을 더한 200이 출력된다. SUM(BONUS)은 NULL, 20, 10, 30, NULL로 NULL을 제외한 20, 10, 30의 합계인 60이 나오고, 그 결과 200+60 = 260이 된다.",
+    "explanation": "• 첫 번째 쿼리 : DEPTNO가 10인 대상의 SAL+BONUS는 각각 100+NULL , NULL + 20이므로 둘다 NULL이 되어 SUM의 결과는 NULL이 된다. • 두 번째 쿼리 : NVL(SAL, 0) + NVL(BONUS, 0)은 순서대로 각각 100 + 0, 0 + 20, 30 + 10, 50 + 30, 20 + 0이므로 100, 20, 40, 80, 20의 합계를 구하면 260이다. • 세 번째 쿼리 : SUM(SAL)은 100, NULL, 30, 50, 20의 합계이며 집계 함수는 NULL을 무시해 100, 30, 50, 20을 더한 200이 출력된다. SUM(BONUS)은 NULL, 20, 10, 30, NULL로 NULL을 제외한 20, 10, 30의 합계인 60이 나오고, 그 결과 200+60 = 260이 된다.",
     "chapter": "그룹 함수",
     "_source": "cbt-mock",
     "_origId": "cbt-033",
@@ -1968,7 +1943,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "WHERE REGEXP_LIKE(USER_ID, '[0-9].*[A-Z]$')"
     ],
     "correctIndex": 0,
-    "explanation": "정규 표현식을 사용할 때 ^는 시작을 의미, $는 끝을 의미한다. ‘^[AZ].*[0-9]$’는 대문자 알파벳으로 시작하고, 숫자로 끝나는 문자열을 의미한다. Oracle에서는 복잡한 문자열 패턴 매칭이 필요한 경우 REGEXP_LIKE를 반드시 사용해야 하며, LIKE는 단순한 와일드카드 (%, _)만 지원한다.",
+    "explanation": "정규 표현식을 사용할 때 ^는 시작을 의미, $는 끝을 의미한다. '^[AZ].*[0-9]$'는 대문자 알파벳으로 시작하고, 숫자로 끝나는 문자열을 의미한다. Oracle에서는 복잡한 문자열 패턴 매칭이 필요한 경우 REGEXP_LIKE를 반드시 사용해야 하며, LIKE는 단순한 와일드카드 (%, _)만 지원한다.",
     "chapter": "정규 표현식",
     "_source": "cbt-mock",
     "_origId": "cbt-034",
@@ -2129,7 +2104,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "INSERT INTO TAB2 (COL1, COL2,COL3) VALUES('K002', 'A001', 100);"
     ],
     "correctIndex": 1,
-    "explanation": "①은 각 컬럼의 자료형과 NOT NULL 제약 조건을 만족하므로 정상적으로 입력된다.②는 COL2 값을 입력하지 않았고, 해당 컬럼에는 DEFAULT 설정도 없으므로 자동으로 NULL이 입력되려고 한다. 하지만 COL2는 NOT NULL 제약이 있어 NULL 값이 허용되지 않기 때문에 오류가 발생한다.③과 ④는 TAB2 테이블에서 외래키인 COL2에 ‘A001’ 값을 입력하는데, 이 값은 ①에서 TAB1 테이블에 이미 등록된 값이므로 외래키 조건을 만족하며 정상적으로 입력된다.",
+    "explanation": "①은 각 컬럼의 자료형과 NOT NULL 제약 조건을 만족하므로 정상적으로 입력된다.②는 COL2 값을 입력하지 않았고, 해당 컬럼에는 DEFAULT 설정도 없으므로 자동으로 NULL이 입력되려고 한다. 하지만 COL2는 NOT NULL 제약이 있어 NULL 값이 허용되지 않기 때문에 오류가 발생한다.③과 ④는 TAB2 테이블에서 외래키인 COL2에 'A001' 값을 입력하는데, 이 값은 ①에서 TAB1 테이블에 이미 등록된 값이므로 외래키 조건을 만족하며 정상적으로 입력된다.",
     "chapter": "DDL",
     "_source": "cbt-mock",
     "_origId": "cbt-042",
@@ -2285,7 +2260,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "이름 LIKE '이_%';"
     ],
     "correctIndex": 2,
-    "explanation": "“이”로 시작하면서 언더바( _ )가 하나의 문자를 매칭하므로 두 개를 붙여서 세글자를 추출할 수 있다.① “이”를 포함하는 모든 대상이 출력된다.② “이”로 시작하지만 뒤에 %가 붙어 0개 이상의 문자를 매칭하므로 세 글자를 보장할 수 없다.④ “이”로 시작하고 뒤에 한 문자가 나오고 그다음에 0개 이상 문자가 매칭되므로 세글자를 보장할 수 없다.",
+    "explanation": "\"이\"로 시작하면서 언더바( _ )가 하나의 문자를 매칭하므로 두 개를 붙여서 세글자를 추출할 수 있다.① \"이\"를 포함하는 모든 대상이 출력된다.② \"이\"로 시작하지만 뒤에 %가 붙어 0개 이상의 문자를 매칭하므로 세 글자를 보장할 수 없다.④ \"이\"로 시작하고 뒤에 한 문자가 나오고 그다음에 0개 이상 문자가 매칭되므로 세글자를 보장할 수 없다.",
     "chapter": "관계형 DB와 SELECT",
     "_source": "cbt-mock",
     "_origId": "cbt-048",
@@ -2305,7 +2280,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "3"
     ],
     "correctIndex": 1,
-    "explanation": "외래키에 ON DELETE CASCADE를 지정하면, 참조하는 부모 테이블의 행이 삭제될 때 자식 테이블의 관련 행도 연쇄적으로 삭제된다.예를 들어, TAB1에 데이터가 [(1, 1), (2, 2), (3, 3)]이며, TAB2에 데이터가 [(4, 3), (5, 2)]인 상태에서, TAB1에서 COL2 = 3인 행을 삭제하면, 해당 행의 COL1 = 3이 삭제되고, 이를 참조하고 있는 TAB2의 (4, 3)도 함께 삭제된다.따라서 TAB2에는 (5, 2)만 남게 되어, SELECT COUNT(*) FROM TAB2의 결과는 1이 된다.반면, 외래키에 ON DELETE SET NULL을 지정한 경우에는 부모 테이블의 행이 삭제될 때 자식 테이블의 해당 외래키 값이 NULL로 변경된다.같은 상황에서 TAB1.COL2 = 3을 삭제하면, TAB2는 [(4, NULL), (5, 2)]가 되며, 해당 외래키만 NULL로 남고 행 자체는 유지된다.",
+    "explanation": "외래키에 ON DELETE CASCADE를 지정하면, 참조하는 부모 테이블의 행이 삭제될 때 자식 테이블의 관련 행도 연쇄적으로 삭제된다. 예를 들어, TAB1에 데이터가 [(1, 1), (2, 2), (3, 3)]이며, TAB2에 데이터가 [(4, 3), (5, 2)]인 상태에서, TAB1에서 COL2 = 3인 행을 삭제하면, 해당 행의 COL1 = 3이 삭제되고, 이를 참조하고 있는 TAB2의 (4, 3)도 함께 삭제된다. 따라서 TAB2에는 (5, 2)만 남게 되어, SELECT COUNT(*) FROM TAB2의 결과는 1이 된다. 반면, 외래키에 ON DELETE SET NULL을 지정한 경우에는 부모 테이블의 행이 삭제될 때 자식 테이블의 해당 외래키 값이 NULL로 변경된다. 같은 상황에서 TAB1.COL2 = 3을 삭제하면, TAB2는 [(4, NULL), (5, 2)]가 되며, 해당 외래키만 NULL로 남고 행 자체는 유지된다.",
     "chapter": "DDL",
     "_source": "cbt-mock",
     "_origId": "cbt-049",
@@ -2404,7 +2379,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "ㄱ : 200, ㄴ : 200, ㄷ : 50"
     ],
     "correctIndex": 2,
-    "explanation": "ㄱ은 STUDENT 테이블을 조건없이 조회하는 것이므로 200=50+100+50이 된다. 그리고 ㄴ은 “DISTINCT”를 사용했으므로 학과명이 중복되면 한 번만 출력한다. 문제에서는 영문학과, 법학과, 수학과가 있으므로 3이 되고 ㄷ은 WHERE절에 “영문학과”만 조회하므로 50이 된다.",
+    "explanation": "ㄱ은 STUDENT 테이블을 조건없이 조회하는 것이므로 200=50+100+50이 된다. 그리고 ㄴ은 \"DISTINCT\"를 사용했으므로 학과명이 중복되면 한 번만 출력한다. 문제에서는 영문학과, 법학과, 수학과가 있으므로 3이 되고 ㄷ은 WHERE절에 \"영문학과\"만 조회하므로 50이 된다.",
     "chapter": "WHERE",
     "_source": "cbt-mock",
     "_origId": "cbt-052",
@@ -2665,7 +2640,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "B*DX"
     ],
     "correctIndex": 3,
-    "explanation": "먼저 SUBSTR 함수는 문자열 ‘ABCDXYZ’에서 두 번째 문자부터 4개의 문자를 잘라내므로 결과는 ‘BCDX’가 된다. 이어서 REPLACE 함수는 이 결과에서 문자 ‘C’를 ‘*’로 바꾸기 때문에 최종 결과는 ‘B*DX’가 된다.",
+    "explanation": "먼저 SUBSTR 함수는 문자열 'ABCDXYZ'에서 두 번째 문자부터 4개의 문자를 잘라내므로 결과는 'BCDX'가 된다. 이어서 REPLACE 함수는 이 결과에서 문자 'C'를 '*'로 바꾸기 때문에 최종 결과는 'B*DX'가 된다.",
     "chapter": "함수",
     "_source": "cbt-mock",
     "_origId": "cbt-063",
@@ -2824,7 +2799,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "2, 4, 3, 7, 12"
     ],
     "correctIndex": 0,
-    "explanation": "TAB1 테이블에는 행이 4개, TAB2 테이블에는 행이 3개가 있다. KEY 칼럼을 사용해서 INNER JOIN을 하면 같은 것만 찾는다. 따라서 TAB1와 TAB2 테이블의 KEY 칼럼에서 ‘B’와 ‘C’가 같기 때문에 2개의 행이 출력된다.",
+    "explanation": "TAB1 테이블에는 행이 4개, TAB2 테이블에는 행이 3개가 있다. KEY 칼럼을 사용해서 INNER JOIN을 하면 같은 것만 찾는다. 따라서 TAB1와 TAB2 테이블의 KEY 칼럼에서 'B'와 'C'가 같기 때문에 2개의 행이 출력된다.",
     "chapter": "관계형 DB와 SELECT",
     "_source": "cbt-mock",
     "_origId": "cbt-065",
@@ -2923,7 +2898,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "특정 회원ID의 이름과 집전화를 알려면 회원과 회원연락처 테이블만 조인하면 된다."
     ],
     "correctIndex": 0,
-    "explanation": "특정 회원ID를 토대로 회원연락처와 회원연락처이력만 조인해도 원하는 결과를 얻을 수 있다. 단, 회원명이나 나이가 추가로 필요하다면 회원 테이블도 조인을 해야 한다.회원과 회원연락처이력 테이블 사이에는 적절한 조인 컬럼이 없기 때문에 카티션 곱이 발생할 수 있다.IE 표기법에서 비식별관계는 점선으로 확인할 수 있다.",
+    "explanation": "특정 회원ID를 토대로 회원연락처와 회원연락처이력만 조인해도 원하는 결과를 얻을 수 있다. 단, 회원명이나 나이가 추가로 필요하다면 회원 테이블도 조인을 해야 한다. 회원과 회원연락처이력 테이블 사이에는 적절한 조인 컬럼이 없기 때문에 카티션 곱이 발생할 수 있다. IE 표기법에서 비식별관계는 점선으로 확인할 수 있다.",
     "chapter": "조인",
     "_source": "cbt-mock",
     "_origId": "cbt-067",
@@ -2971,7 +2946,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "4"
     ],
     "correctIndex": 1,
-    "explanation": "두 테이블을 FULL OUTER JOIN ON (A.ID = B.ID)한 결과는 다음과 같다. 그다음 WHERE 절에 의해 (1, NULL)과 (NULL, 4)가 반환되므로 답은 2건이 된다.",
+    "explanation": "FULL OUTER JOIN 결과는 (1, NULL), (2, 2), (3, 3), (NULL, 4) 네 행이다. WHERE 에서 A.ID 나 B.ID 가 NULL 인 행, 즉 한쪽에만 있는 (1, NULL) 과 (NULL, 4) 만 남으므로 2건이다(②).",
     "chapter": "표준 조인",
     "_source": "cbt-mock",
     "_origId": "cbt-069",
@@ -3013,31 +2988,6 @@ export const AI_MOCK: QuizQuestion[] = [
             "3"
           ],
           [
-            "4"
-          ]
-        ]
-      },
-      {
-        "type": "table",
-        "headers": [
-          "ID(A 테이블)",
-          "ID(B 테이블)"
-        ],
-        "rows": [
-          [
-            "1",
-            "NULL"
-          ],
-          [
-            "2",
-            "2"
-          ],
-          [
-            "3",
-            "3"
-          ],
-          [
-            "NULL",
             "4"
           ]
         ]
@@ -3196,7 +3146,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "위치에 상관없이 선수의 영문 이름에 A를 포함하는 선수들의 이름"
     ],
     "correctIndex": 0,
-    "explanation": "“_” 와 “%”는 와일드카드(WILD CARD)로 하나의 글자 또는 모든 문자를 대신하여 사용이 되므로 두 번째 문자가 대문자 A인 경우만 출력된다.",
+    "explanation": "\"_\" 와 \"%\"는 와일드카드(WILD CARD)로 하나의 글자 또는 모든 문자를 대신하여 사용이 되므로 두 번째 문자가 대문자 A인 경우만 출력된다.",
     "chapter": "WHERE",
     "_source": "cbt-mock",
     "_origId": "cbt-076",
@@ -3310,7 +3260,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "DELETE는 ROLLBACK이 불가능하다."
     ],
     "correctIndex": 0,
-    "explanation": "• DELETE는 DML로 ROLLBACK이 가능하며 실행 시 테이블 자체는 남아있다.• TRUNCATE는 DDL로 ROLLBACK이 불가하며, 실행 시 테이블을 초기 상태로 되돌린다(테이블 구조 자체는 남아있음).• DROP은 DDL로 ROLLBACK도 불가능하고 테이블 구조 자체를 삭제한다.",
+    "explanation": "• DELETE는 DML로 ROLLBACK이 가능하며 실행 시 테이블 자체는 남아있다. • TRUNCATE는 DDL로 ROLLBACK이 불가하며, 실행 시 테이블을 초기 상태로 되돌린다(테이블 구조 자체는 남아있음). • DROP은 DDL로 ROLLBACK도 불가능하고 테이블 구조 자체를 삭제한다.",
     "chapter": "DCL·TCL",
     "_source": "cbt-mock",
     "_origId": "cbt-079",
@@ -3460,7 +3410,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "리뷰 테이블의 식별자는 고객ID + 리뷰번호 조합이다."
     ],
     "correctIndex": 2,
-    "explanation": "리뷰 테이블의 식별자는 고객ID + 리뷰번호 조합으로 구성된 복합 식별자이다. 이 중 고객ID는 외래키로 다른 엔터티(CUSTOMER)의 PK를 참조하는 외부 식별자이며, 리뷰번호는 REVIEW 테이블 내부에서 생성된 값으로 내부 식별자이다. 따라서 “고객ID가 내부 식별자”라는 ③의 설명은 잘못되었다.",
+    "explanation": "리뷰 테이블의 식별자는 고객ID + 리뷰번호 조합으로 구성된 복합 식별자이다. 이 중 고객ID는 외래키로 다른 엔터티(CUSTOMER)의 PK를 참조하는 외부 식별자이며, 리뷰번호는 REVIEW 테이블 내부에서 생성된 값으로 내부 식별자이다. 따라서 \"고객ID가 내부 식별자\"라는 ③의 설명은 잘못되었다.",
     "chapter": "식별자",
     "_source": "cbt-mock",
     "_origId": "cbt-087",
@@ -3600,7 +3550,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "데이터 모델링"
     ],
     "correctIndex": 1,
-    "explanation": "논리적 데이터 모델링의 결과로 얻어지는 논리 데이터 모델은 데이터 모델링이 최종적으로 완료된 상태라고 정의할 수 있다. 즉 물리적인 스키마 설계를 하기 전 단계의 ‘데이터 모델’ 상태를 일컫는 말이다.",
+    "explanation": "논리적 데이터 모델링의 결과로 얻어지는 논리 데이터 모델은 데이터 모델링이 최종적으로 완료된 상태라고 정의할 수 있다. 즉 물리적인 스키마 설계를 하기 전 단계의 '데이터 모델' 상태를 일컫는 말이다.",
     "chapter": "데이터 모델 개념",
     "_source": "cbt-mock",
     "_origId": "cbt-093",
@@ -3640,7 +3590,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "450"
     ],
     "correctIndex": 1,
-    "explanation": "ROUND는 반올림 함수이며, 두 번째 인자의 값이 마이너스(-)일 경우에는 정수부에서 두 자리를 남기고 반올림한다는 의미이다. 즉, 456.789에서 정수부 456중 -2는 56에 해당하고 이 위치에서 반올림하면 500이 된다.• ROUND 자릿수가 양수일 경우 : 소수점 N번째 자리까지 반올림 → ROUND(456.789, 1) = 456.8• ROUND 자릿수가 0일 경우 : 정수로 반올림 → ROUND(456.789, 0) = 457• ROUND 자릿수가 음수일 경우 → 정수부의 자릿수를 기준으로 반올림",
+    "explanation": "ROUND는 반올림 함수이며, 두 번째 인자의 값이 마이너스(-)일 경우에는 정수부에서 두 자리를 남기고 반올림한다는 의미이다. 즉, 456.789에서 정수부 456중 -2는 56에 해당하고 이 위치에서 반올림하면 500이 된다. • ROUND 자릿수가 양수일 경우 : 소수점 N번째 자리까지 반올림 → ROUND(456.789, 1) = 456.8 • ROUND 자릿수가 0일 경우 : 정수로 반올림 → ROUND(456.789, 0) = 457 • ROUND 자릿수가 음수일 경우 → 정수부의 자릿수를 기준으로 반올림",
     "chapter": "함수",
     "_source": "cbt-mock",
     "_origId": "cbt-095",
@@ -3714,7 +3664,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "PARTITION BY 절이 없으면 전체 행을 대상으로 진행한다."
     ],
     "correctIndex": 0,
-    "explanation": "GROUP BY는 특정 컬럼 값을 기준으로 행을 그룹화하여, 집계된 결과만 출력하므로 출력 행 수가 줄어든다.반면, 윈도우 함수는 행 수를 줄이지 않고, 각 행에 대해 집계 결과나 순위 등의 값을 추가로 계산한다.즉, PARTITION BY는 GROUP BY처럼 데이터를 그룹으로 나누는 역할을 하지만, 출력 행 수는 유지된다는 점에서 GROUP BY와는 처리 방식이 다르다.",
+    "explanation": "GROUP BY는 특정 컬럼 값을 기준으로 행을 그룹화하여, 집계된 결과만 출력하므로 출력 행 수가 줄어든다. 반면, 윈도우 함수는 행 수를 줄이지 않고, 각 행에 대해 집계 결과나 순위 등의 값을 추가로 계산한다. 즉, PARTITION BY는 GROUP BY처럼 데이터를 그룹으로 나누는 역할을 하지만, 출력 행 수는 유지된다는 점에서 GROUP BY와는 처리 방식이 다르다.",
     "chapter": "윈도우 함수",
     "_source": "cbt-mock",
     "_origId": "cbt-098",
@@ -3760,7 +3710,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "두 집합 간 중복이 없다면 UNION, UNION ALL 모두 동일한 결과를 출력한다."
     ],
     "correctIndex": 0,
-    "explanation": "집합 연산자 이용 시 ORDER BY는 전체 집합 결과에 대해 한 번만 사용해야 하므로 마지막 SELECT 문 뒤에 작성된다.UNION ALL은 중복 제거 및 정렬을 수행하지 않지만, 나머지 UNION, MINUS, INTERSECT 집합 연산자는 모두 중복 제거 및 정렬을 수행한다.",
+    "explanation": "집합 연산자 이용 시 ORDER BY는 전체 집합 결과에 대해 한 번만 사용해야 하므로 마지막 SELECT 문 뒤에 작성된다. UNION ALL은 중복 제거 및 정렬을 수행하지 않지만, 나머지 UNION, MINUS, INTERSECT 집합 연산자는 모두 중복 제거 및 정렬을 수행한다.",
     "chapter": "ORDER BY",
     "_source": "cbt-mock",
     "_origId": "cbt-100",
@@ -3800,7 +3750,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "식별관계는 부모 엔터티의 주식별자 속성을 자식 엔터티의 식별자에 포함한다."
     ],
     "correctIndex": 3,
-    "explanation": "①, ②, ④는 식별관계에 대한 설명이고 ③은 비식별관계에 대한 설명이다. 교재에서는 식별자의 특징으로 다른 엔터티에 “이전”이 필요하다고 설명하고 있으며, 비식별자의 특징으로는 다른 엔터티에 “차단”이 필요하다고설명하고 있다.",
+    "explanation": "①, ②, ④는 식별관계에 대한 설명이고 ③은 비식별관계에 대한 설명이다. 교재에서는 식별자의 특징으로 다른 엔터티에 \"이전\"이 필요하다고 설명하고 있으며, 비식별자의 특징으로는 다른 엔터티에 \"차단\"이 필요하다고설명하고 있다.",
     "chapter": "엔터티",
     "_source": "cbt-mock",
     "_origId": "cbt-102",
@@ -3820,7 +3770,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "테이블이 삭제되어도 뷰는 정상 실행된다."
     ],
     "correctIndex": 3,
-    "explanation": "뷰(View)는 가상 테이블로 데이터를 저장하지 않으며, SELECT 문을 통해정의된다.단일 테이블 기반의 단순 뷰는 DML(INSERT, UPDATE, DELETE) 작업이 가능하지만, 복합 뷰는 제약이 있어 일부 또는 모든 DML 작업이 제한된다. 기본 테이블이 삭제되면 뷰는 더이상 정상적으로 작동하지 않으며, 실행 시 오류가 발생한다. 따라서 ④는 뷰의 특성에 어긋나므로 옳지 않은 설명이다.",
+    "explanation": "뷰(View)는 가상 테이블로 데이터를 저장하지 않으며, SELECT 문을 통해정의된다. 단일 테이블 기반의 단순 뷰는 DML(INSERT, UPDATE, DELETE) 작업이 가능하지만, 복합 뷰는 제약이 있어 일부 또는 모든 DML 작업이 제한된다. 기본 테이블이 삭제되면 뷰는 더이상 정상적으로 작동하지 않으며, 실행 시 오류가 발생한다. 따라서 ④는 뷰의 특성에 어긋나므로 옳지 않은 설명이다.",
     "chapter": "관계형 DB와 SELECT",
     "_source": "cbt-mock",
     "_origId": "cbt-103",
@@ -3840,7 +3790,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "비식별관계이며 DEPARTMENT 는 STUDENT의 보조식별자이다."
     ],
     "correctIndex": 1,
-    "explanation": "DEPARTMENT와 STUDENT 테이블은 식별 관계이며, 이는 IE 표기법에서는 두 엔터티 사이의 관계선을 실선으로 표현하고, Barker 표기법에서는 자식 엔터티(STUDENT) 쪽에 bar(|) 기호로 나타낸다.식별 관계란 부모 테이블의 식별자(PK)가 자식 테이블의 식별자(PK)의 일부로 사용되는 관계를 의미한다. 이때 자식 테이블의 식별자(PK)는 NOT NULL이며 UNIQUE한 특성을 가지므로, 해당 값은 반드시 입력되어야 한다.",
+    "explanation": "DEPARTMENT와 STUDENT 테이블은 식별 관계이며, 이는 IE 표기법에서는 두 엔터티 사이의 관계선을 실선으로 표현하고, Barker 표기법에서는 자식 엔터티(STUDENT) 쪽에 bar(|) 기호로 나타낸다. 식별 관계란 부모 테이블의 식별자(PK)가 자식 테이블의 식별자(PK)의 일부로 사용되는 관계를 의미한다. 이때 자식 테이블의 식별자(PK)는 NOT NULL이며 UNIQUE한 특성을 가지므로, 해당 값은 반드시 입력되어야 한다.",
     "chapter": "식별자",
     "_source": "cbt-mock",
     "_origId": "cbt-104",
@@ -3906,7 +3856,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "0"
     ],
     "correctIndex": 0,
-    "explanation": "CUSTOMER_ID 별로 그룹화하면 A, B, C 3행이 나오게 되고 각각 SUM(AMOUNT) 값은 A = 2500, B = 1500, C = NULL이다.HAVING에서 집계에 대한 필터링 조건에 따라 B와 C는 출력되지 않고 A = 2500만 출력되므로 1행만 나오게 된다.",
+    "explanation": "CUSTOMER_ID 별로 그룹화하면 A, B, C 3행이 나오게 되고 각각 SUM(AMOUNT) 값은 A = 2500, B = 1500, C = NULL이다. HAVING에서 집계에 대한 필터링 조건에 따라 B와 C는 출력되지 않고 A = 2500만 출력되므로 1행만 나오게 된다.",
     "chapter": "GROUP BY·HAVING",
     "_source": "cbt-mock",
     "_origId": "cbt-107",
@@ -4096,7 +4046,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "SCOTT"
     ],
     "correctIndex": 2,
-    "explanation": "KING을 기준으로 계층 전개를 시작하고 PRIOR EMPNO = MGR 조건에 맞게 전개 시 아래와 같이 전개된다.따라서 FORD는 계층 전개 조건에 일치하지 않으므로 포함되지 않는다.",
+    "explanation": "KING 에서 시작해 PRIOR EMPNO = MGR(부하 방향)으로 펼치면 KING(LEVEL 1) → BLAKE·CLARK(2) → BLAKE 아래 SCOTT(3) → SCOTT 아래 JAMES(4), CLARK 아래 JONES(3) → JONES 아래 SMITH(4) 가 나온다. FORD 는 MGR 이 NULL 이라 누구의 부하도 아니어서 KING 아래로 이어지지 않고, START WITH 는 KING 만 루트로 잡으므로 결과에 없다(③).",
     "chapter": "계층형 질의",
     "_source": "cbt-mock",
     "_origId": "cbt-112",
@@ -4156,51 +4106,6 @@ export const AI_MOCK: QuizQuestion[] = [
             "NULL"
           ]
         ]
-      },
-      {
-        "type": "table",
-        "headers": [
-          "LEVEL",
-          "ENAME",
-          "MGR"
-        ],
-        "rows": [
-          [
-            "1",
-            "KING",
-            "NULL"
-          ],
-          [
-            "2",
-            "BLAKE",
-            "1001"
-          ],
-          [
-            "2",
-            "CLARK",
-            "1001"
-          ],
-          [
-            "3",
-            "SCOTT",
-            "1002"
-          ],
-          [
-            "3",
-            "JONES",
-            "1003"
-          ],
-          [
-            "4",
-            "JAMES",
-            "1006"
-          ],
-          [
-            "4",
-            "SMITH",
-            "1004"
-          ]
-        ]
       }
     ]
   },
@@ -4244,7 +4149,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "0"
     ],
     "correctIndex": 1,
-    "explanation": "조인은 두 테이블씩 발생한다.T1 LEFT OUTER JOIN T2 ON T1.COL = T2.COL 결과는 다음과 같다.위 결과와 T3을 LEFT OUTER JOIN 한다( R1 LEFT OUTER JOIN T3 ON (R1.COL = T3.COL).이후 T2.COL이 NULL이 아닌 대상만 추출하므로 총 2행이 출력된다.",
+    "explanation": "조인은 두 테이블씩 차례로 한다. T1 LEFT JOIN T2 → (1, 1), (2, 2), (3, NULL). 이 결과에 T3 를 LEFT JOIN → (1, 1, 1), (2, 2, NULL), (3, NULL, NULL). 마지막으로 WHERE T2.COL IS NOT NULL 이 T2 쪽이 NULL 인 세 번째 행을 지우므로 2건이다(②).",
     "chapter": "표준 조인",
     "_source": "cbt-mock",
     "_origId": "cbt-114",
@@ -4304,52 +4209,6 @@ export const AI_MOCK: QuizQuestion[] = [
             "NULL"
           ],
           [
-            "NULL"
-          ]
-        ]
-      },
-      {
-        "type": "table",
-        "headers": [
-          "T1.COL",
-          "T2.COL"
-        ],
-        "rows": [
-          [
-            "1",
-            "1"
-          ],
-          [
-            "2",
-            "2"
-          ],
-          [
-            "3",
-            "NULL"
-          ]
-        ]
-      },
-      {
-        "type": "table",
-        "headers": [
-          "T1.COL",
-          "T2.COL",
-          "T3.COL"
-        ],
-        "rows": [
-          [
-            "1",
-            "1",
-            "1"
-          ],
-          [
-            "2",
-            "2",
-            "NULL"
-          ],
-          [
-            "3",
-            "NULL",
             "NULL"
           ]
         ]
@@ -4416,7 +4275,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "보이스-코드 정규화 - 4차정규화 대상"
     ],
     "correctIndex": 1,
-    "explanation": "결정자 중 일부 속성에만 함수 종속성을 가지고 있는 ‘Partial Dependency Attribute’를 갖는 것은 2차정규형을 위반한 사례에 해당한다. 즉 1차정규형이면서 2차정규화의 대상이 된다.",
+    "explanation": "결정자 중 일부 속성에만 함수 종속성을 가지고 있는 'Partial Dependency Attribute'를 갖는 것은 2차정규형을 위반한 사례에 해당한다. 즉 1차정규형이면서 2차정규화의 대상이 된다.",
     "chapter": "속성",
     "_source": "cbt-mock",
     "_origId": "cbt-117",
@@ -4965,7 +4824,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "추상적 데이터 모델링"
     ],
     "correctIndex": 2,
-    "explanation": "•전사적 관점에서 기업의 데이터를 모델링한다. •추상화 수준이 가장 높은 모델링이다. •계층형 데이터 모델, 네트워크 모델, 관계형 모델에 관계없이 업무 측면에서 모델링을 한다.",
+    "explanation": "• 전사적 관점에서 기업의 데이터를 모델링한다. • 추상화 수준이 가장 높은 모델링이다. • 계층형 데이터 모델, 네트워크 모델, 관계형 모델에 관계없이 업무 측면에서 모델링을 한다.",
     "chapter": "데이터 모델 개념",
     "_source": "cbt-mock",
     "_origId": "cbt-135",
@@ -4991,7 +4850,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "0"
     ],
     "correctIndex": 0,
-    "explanation": "EXISTS는 서브쿼리의 결과가 존재하는지만 판단하며, 실제 반환되는 값은 중요하지 않다. 이 쿼리는 EMPLOYEE 테이블에서 각 직원의 EMP_ID를 SALARY 테이블과 비교하여, 해당 EMP_ID가 SALARY에 존재하고 AMOUNT가 NULL이 아닌 경우만 포함시킨다. 메인 쿼리의 각 행에 대해 서브쿼리가 다음과 같이 평가된다.• EMP_ID = 1 → SALARY에 EMP_ID=1, AMOUNT=3000 → 조건 만족 → 포함• EMP_ID = 2 → SALARY에 EMP_ID=2, AMOUNT=NULL → 조건 불만족 → 제외• EMP_ID = 3 → SALARY에 EMP_ID=3 없음 → 조건 불만족 → 제외따라서 결과는 EMP_ID=1 (Kim) 1건이며, 정답은 ①이다.",
+    "explanation": "EXISTS는 서브쿼리의 결과가 존재하는지만 판단하며, 실제 반환되는 값은 중요하지 않다. 이 쿼리는 EMPLOYEE 테이블에서 각 직원의 EMP_ID를 SALARY 테이블과 비교하여, 해당 EMP_ID가 SALARY에 존재하고 AMOUNT가 NULL이 아닌 경우만 포함시킨다. 메인 쿼리의 각 행에 대해 서브쿼리가 다음과 같이 평가된다. • EMP_ID = 1 → SALARY에 EMP_ID=1, AMOUNT=3000 → 조건 만족 → 포함 • EMP_ID = 2 → SALARY에 EMP_ID=2, AMOUNT=NULL → 조건 불만족 → 제외 • EMP_ID = 3 → SALARY에 EMP_ID=3 없음 → 조건 불만족 → 제외따라서 결과는 EMP_ID=1 (Kim) 1건이며, 정답은 ①이다.",
     "chapter": "서브쿼리",
     "_source": "cbt-mock",
     "_origId": "cbt-136",
@@ -5038,19 +4897,6 @@ export const AI_MOCK: QuizQuestion[] = [
           [
             "2",
             "NULL"
-          ]
-        ]
-      },
-      {
-        "type": "table",
-        "headers": [
-          "EMP_ID",
-          "NAME"
-        ],
-        "rows": [
-          [
-            "1",
-            "Kim"
           ]
         ]
       }
@@ -5404,7 +5250,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "논리적으로 연관된 작업을 그룹핑하여 처리 가능하다."
     ],
     "correctIndex": 1,
-    "explanation": "Commit과 Rollback의 장점 •데이터 무결성 보장 •영구적인 변경을 하기 전에 데이터의 변경 사항 확인 가능 •논리적으로 연관된 작업을 그룹핑하여 처리 가능",
+    "explanation": "Commit과 Rollback의 장점 • 데이터 무결성 보장 • 영구적인 변경을 하기 전에 데이터의 변경 사항 확인 가능 • 논리적으로 연관된 작업을 그룹핑하여 처리 가능",
     "chapter": "DCL·TCL",
     "_source": "cbt-mock",
     "_origId": "cbt-149",
@@ -5575,7 +5421,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "NULL"
     ],
     "correctIndex": 1,
-    "explanation": "COALESCE 함수는 NULL이 아닌 첫 번째 값을 리턴하는 함수이다. 즉, 위의 문제에서 첫 번째는 NULL이고 두 번째는 ‘2’이다. 따라서 ‘2’가 리턴된다.",
+    "explanation": "COALESCE 함수는 NULL이 아닌 첫 번째 값을 리턴하는 함수이다. 즉, 위의 문제에서 첫 번째는 NULL이고 두 번째는 '2'이다. 따라서 '2'가 리턴된다.",
     "chapter": "함수",
     "_source": "cbt-mock",
     "_origId": "cbt-155",
@@ -5679,7 +5525,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "0"
     ],
     "correctIndex": 0,
-    "explanation": "이 SQL은 EMPLOYEE 테이블을 기준으로 DEPARTMENT 테이블과 DEPT_ID로 LEFT JOIN한다.LEFT JOIN이므로 EMPLOYEE의 모든 행이 유지되고, 매칭되지 않는 DEPARTMENT는 NULL로 채워진다. 조인 결과는 다음과 같다.이후 WHERE D.LOC = ‘SEOUL’ 조건을 적용하면, D.LOC이 NULL인 행은 제외되므로 결과적으로 SEOUL 지역에 속한 부서(DEPT_ID=10)에 근무하는 직원 1명만 조회된다. 따라서 최종 결과는 1행이며, 정답은 ①이다.",
+    "explanation": "EMPLOYEE 를 기준으로 LEFT JOIN 하면 (1, 10, 10, SEOUL), (2, 20, NULL, NULL), (3, 30, 30, BUSAN) 세 행이 된다. 그다음 WHERE D.LOC = 'SEOUL' 은 조인이 끝난 뒤 행을 거르므로 D.LOC 이 NULL 인 2번 행과 BUSAN 인 3번 행이 빠지고 1행만 남는다(①). LEFT JOIN 이라도 오른쪽 테이블 조건을 WHERE 에 쓰면 INNER JOIN 처럼 된다.",
     "chapter": "표준 조인",
     "_source": "cbt-mock",
     "_origId": "cbt-159",
@@ -5728,35 +5574,6 @@ export const AI_MOCK: QuizQuestion[] = [
             "BUSAN"
           ]
         ]
-      },
-      {
-        "type": "table",
-        "headers": [
-          "E.ID",
-          "E.DEPT_ID",
-          "D.DEPT_ID",
-          "D.LOC"
-        ],
-        "rows": [
-          [
-            "1",
-            "10",
-            "10",
-            "SEOUL"
-          ],
-          [
-            "2",
-            "20",
-            "NULL",
-            "NULL"
-          ],
-          [
-            "3",
-            "30",
-            "30",
-            "BUSAN"
-          ]
-        ]
       }
     ]
   },
@@ -5774,7 +5591,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "업무상 관리가 필요한 관심사에 해당된다."
     ],
     "correctIndex": 0,
-    "explanation": "엔터티(Entity)의 3가지 공통점은 다음과 같다. •개념, 사건, 사람, 장소 등과 같이 명사이다. •비즈니스 프로세스에서 관리되어야 하는 정보이다. •저장이 필요한 어떤 것이다.",
+    "explanation": "엔터티(Entity)의 3가지 공통점은 다음과 같다. • 개념, 사건, 사람, 장소 등과 같이 명사이다. • 비즈니스 프로세스에서 관리되어야 하는 정보이다. • 저장이 필요한 어떤 것이다.",
     "chapter": "엔터티",
     "_source": "cbt-mock",
     "_origId": "cbt-160",
@@ -5862,7 +5679,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "오류 발생"
     ],
     "correctIndex": 2,
-    "explanation": "Oracle 11g 버전에서의 상위 n개 데이터를 가져오려면 먼저 인라인 뷰로 내림차순 정렬된 가상의 테이블을 만든 후 ROWNUM으로 필터링한다.즉, PRICE 기준 내림차 순 정렬해서 가격이 가장 높은 금액 중 하나를 ROWNUM = 1로 추출하는 쿼리이다. 따라서 답은 ITEM C이다.",
+    "explanation": "Oracle 11g 버전에서의 상위 n개 데이터를 가져오려면 먼저 인라인 뷰로 내림차순 정렬된 가상의 테이블을 만든 후 ROWNUM으로 필터링한다. 즉, PRICE 기준 내림차 순 정렬해서 가격이 가장 높은 금액 중 하나를 ROWNUM = 1로 추출하는 쿼리이다. 따라서 답은 ITEM C이다.",
     "chapter": "ORDER BY",
     "_source": "cbt-mock",
     "_origId": "cbt-164",
@@ -5930,7 +5747,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "지속성(Durability) : 트랜잭션이 성공적으로 수행되면 그 결과는 시스템이 재시작 되더라도 롤백될 수 있다."
     ],
     "correctIndex": 3,
-    "explanation": "지속성(Durability)은 트랜잭션이 커밋된 후에는 그 결과가 영구적으로 반영되어야 함을 의미한다. 따라서 “롤백될 수 있다”는 설명은 지속성의 정의에 위배되며 틀린 설명이다.",
+    "explanation": "지속성(Durability)은 트랜잭션이 커밋된 후에는 그 결과가 영구적으로 반영되어야 함을 의미한다. 따라서 \"롤백될 수 있다\"는 설명은 지속성의 정의에 위배되며 틀린 설명이다.",
     "chapter": "속성",
     "_source": "cbt-mock",
     "_origId": "cbt-166",
@@ -5950,7 +5767,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "2025-03-02 20:02:00"
     ],
     "correctIndex": 1,
-    "explanation": "Oracle에서 날짜형에 +1을 하면 day(일, 하루)로 인식한다.예를 들어 SYSDATE의 결과가 2025-06-09 12:12:12라면 SYSDATE +1은 2025-06-10 12:12:12이 반환된다.1/24는 한 시간, 1/24/60은 1분, 1/24/60/60은 1초를 의미하므로 2/24/60/60은 해당 날짜에 2초를 추가하라는 의미이다.이후 날짜형 값을 다시 TO_CHAR로 포매팅하면서 YYYY-MM-DD HH24:MI:SS 형태로 출력하므로 정답은 ②가 된다.",
+    "explanation": "Oracle에서 날짜형에 +1을 하면 day(일, 하루)로 인식한다. 예를 들어 SYSDATE의 결과가 2025-06-09 12:12:12라면 SYSDATE +1은 2025-06-10 12:12:12이 반환된다.1/24는 한 시간, 1/24/60은 1분, 1/24/60/60은 1초를 의미하므로 2/24/60/60은 해당 날짜에 2초를 추가하라는 의미이다. 이후 날짜형 값을 다시 TO_CHAR로 포매팅하면서 YYYY-MM-DD HH24:MI:SS 형태로 출력하므로 정답은 ②가 된다.",
     "chapter": "함수",
     "_source": "cbt-mock",
     "_origId": "cbt-167",
@@ -6114,7 +5931,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "'20240305'"
     ],
     "correctIndex": 2,
-    "explanation": "이 SQL은 함수가 중첩되어 있으므로 내부 함수인 TO_DATE(‘20240305’, ‘YYYYMMDD’)가 먼저 실행된다. 이 함수는 문자열 ‘20240305’를 날짜 타입으로 변환하여 2024년 3월 5일이라는 날짜 값을 생성한다. 시분초는 별도로 지정하지 않았기 때문에 기본적으로 00:00:00이 적용된다. 그다음 TO_CHAR 함수가 이 날짜 값을 ‘YYYY.MM.DD’ 형식으로 문자로 변환하게 되며, 최종 출력 결과는 ‘2024.03.05.’가 된다. 따라서 정답은 ③이다.",
+    "explanation": "이 SQL은 함수가 중첩되어 있으므로 내부 함수인 TO_DATE('20240305', 'YYYYMMDD')가 먼저 실행된다. 이 함수는 문자열 '20240305'를 날짜 타입으로 변환하여 2024년 3월 5일이라는 날짜 값을 생성한다. 시분초는 별도로 지정하지 않았기 때문에 기본적으로 00:00:00이 적용된다. 그다음 TO_CHAR 함수가 이 날짜 값을 'YYYY.MM.DD' 형식으로 문자로 변환하게 되며, 최종 출력 결과는 '2024.03.05.'가 된다. 따라서 정답은 ③이다.",
     "chapter": "함수",
     "_source": "cbt-mock",
     "_origId": "cbt-174",
@@ -6140,7 +5957,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "(ㄹ)은 Oracle에서만 실행 가능하다."
     ],
     "correctIndex": 0,
-    "explanation": "Oracle은 INSERT나 UPDATE할 때 내부적으로 ''(공백) 데이터를 NULL로 처리한다. 반면 SQL Server는 NULL과 ''(공백)을 별개로 본다.즉, ㄱ을 실행하면 Oracle은 COL2에 NULL로 처리되고, SQL Server는 COL2에 ''(공백)이 입력된다. INSERT가 성공했을 때 ㄴ에 대해 Oracle은 0건 출력되며, SQL Server는 1건 출력된다. INSERT가 성공했을 때 ㄷ에 대해 Oracle은 1건 변경되며, SQL Server는 0건 변경된다(''로 들어있어 IS NULL로 조회가 안되기 때문). 마지막 DELETE FROM TAB;은 둘 다 잘 수행된다.",
+    "explanation": "Oracle은 INSERT나 UPDATE할 때 내부적으로 ''(공백) 데이터를 NULL로 처리한다. 반면 SQL Server는 NULL과 ''(공백)을 별개로 본다. 즉, ㄱ을 실행하면 Oracle은 COL2에 NULL로 처리되고, SQL Server는 COL2에 ''(공백)이 입력된다. INSERT가 성공했을 때 ㄴ에 대해 Oracle은 0건 출력되며, SQL Server는 1건 출력된다. INSERT가 성공했을 때 ㄷ에 대해 Oracle은 1건 변경되며, SQL Server는 0건 변경된다(''로 들어있어 IS NULL로 조회가 안되기 때문). 마지막 DELETE FROM TAB;은 둘 다 잘 수행된다.",
     "chapter": "DDL",
     "_source": "cbt-mock",
     "_origId": "cbt-175",
@@ -6350,7 +6167,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "ORDER BY 1 DESC ;"
     ],
     "correctIndex": 1,
-    "explanation": "AVG와 같은 집계 함수는 WHERE 절에서 사용할 수 없다.집계 함수는 GROUP BY가 실행되어야 쓸 수 있는데 WHERE 절은 GROUP BY 이전에 실행되기 때문이다.GROUP BY 이후에 실행되는 HAVING에서는 집계 함수를 이용한 조건을 줄 수 있다.",
+    "explanation": "AVG와 같은 집계 함수는 WHERE 절에서 사용할 수 없다. 집계 함수는 GROUP BY가 실행되어야 쓸 수 있는데 WHERE 절은 GROUP BY 이전에 실행되기 때문이다. GROUP BY 이후에 실행되는 HAVING에서는 집계 함수를 이용한 조건을 줄 수 있다.",
     "chapter": "GROUP BY·HAVING",
     "_source": "cbt-mock",
     "_origId": "cbt-183",
@@ -6376,7 +6193,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "Select 영업사원, 판매월, sum(매출) from group by 영업사원, 판매월;"
     ],
     "correctIndex": 0,
-    "explanation": "영업사원별 누적 매출이므로 “partition by 영업사원”을 사용해야 한다. 그리고 unbounded preceding와 current row는 시작부터 현재행까지를 의미한다.",
+    "explanation": "영업사원별 누적 매출이므로 \"partition by 영업사원\"을 사용해야 한다. 그리고 unbounded preceding와 current row는 시작부터 현재행까지를 의미한다.",
     "chapter": "윈도우 함수",
     "_source": "cbt-mock",
     "_origId": "cbt-184",
@@ -6416,7 +6233,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "GROUPING SETS((A, B), A)"
     ],
     "correctIndex": 0,
-    "explanation": "ROLLUP은 계층적 집계를 수행하므로 뒤에서 컬럼을 하나씩 제외해 가며 처리한다.• ROLLUP(A,B) → GROUP BY A,B; GROUP BY A; GROUP BY ();• CUBE(A,B) → GROUP BY A,B; GROUP BY A; GROUP BY B; GROUP BY ();• GROUPING SETS(A,B) → GROUP BY A; GROUP BY B;• GROUPING SETS((A,B), A) → GROUP BY A,B; GROUP BY A;",
+    "explanation": "ROLLUP은 계층적 집계를 수행하므로 뒤에서 컬럼을 하나씩 제외해 가며 처리한다. • ROLLUP(A,B) → GROUP BY A,B; GROUP BY A; GROUP BY (); • CUBE(A,B) → GROUP BY A,B; GROUP BY A; GROUP BY B; GROUP BY (); • GROUPING SETS(A,B) → GROUP BY A; GROUP BY B; • GROUPING SETS((A,B), A) → GROUP BY A,B; GROUP BY A;",
     "chapter": "GROUP BY·HAVING",
     "_source": "cbt-mock",
     "_origId": "cbt-186",
@@ -6462,7 +6279,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "SELECT ENAME, DNAME FROM EMP E CROSS JOIN DEPT D;"
     ],
     "correctIndex": 1,
-    "explanation": "해당 쿼리는 Oracle 전통 조인 방식으로, EMP와 DEPT를 DEPTNO 기준으로 조인하고 있다.조인조건이 명시되어 있고 외부 조인이 없으므로 이는 내부 조인(INNERJOIN)에 해당한다. ANSI 방식에서는 INNER JOIN ... ON 절을 사용해야 하며, 정답은 ②이다.USING은 조인하는 두 테이블에 같은 컬럼이 있고 이를 명시하면 자동으로 동등 조인을 해준다. 따라서 USING(컬럼) 형태로 사용하며 조인조건을 작성하지 않는다.",
+    "explanation": "해당 쿼리는 Oracle 전통 조인 방식으로, EMP와 DEPT를 DEPTNO 기준으로 조인하고 있다. 조인조건이 명시되어 있고 외부 조인이 없으므로 이는 내부 조인(INNERJOIN)에 해당한다. ANSI 방식에서는 INNER JOIN ... ON 절을 사용해야 하며, 정답은 ②이다. USING은 조인하는 두 테이블에 같은 컬럼이 있고 이를 명시하면 자동으로 동등 조인을 해준다. 따라서 USING(컬럼) 형태로 사용하며 조인조건을 작성하지 않는다.",
     "chapter": "표준 조인",
     "_source": "cbt-mock",
     "_origId": "cbt-189",
@@ -6673,7 +6490,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "sql",
-        "code": "Select c.고객명, c.연령, c.전화번호, o.주문일자,\n       o.주문총금액, o.배송지주소\nFrom 고객 c, 주문 o\nWhere o.고객번호 = c.주문번호\nAnd c.고객등급 = 'A'\nAnd c.연령 between 51 and 60\nAnd o.주문일자 between '20101201' and '20101231'"
+        "code": "Select c.고객명, c.연령, c.전화번호, o.주문일자,\n       o.주문총금액, o.배송지주소\nFrom 고객 c, 주문 o\nWhere o.고객번호 = c.고객번호\nAnd c.고객등급 = 'A'\nAnd c.연령 between 51 and 60\nAnd o.주문일자 between '20101201' and '20101231'"
       },
       {
         "type": "table",
@@ -9976,7 +9793,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "SELECT A.일자, SUM(A.매출액) AS 누적매출액\nFROM 일자별매출 A\nGROUP BY A.일자\nORDER BY A.일자;"
     ],
     "correctIndex": 1,
-    "explanation": "④는 일자별매출액에 일자별 매출 테이블과 동일하게 출력된다.\n①,③는 작은 날짜쪽에 제일 큰 누적금액이 출력된다.\n②은 일자별매출 테이블을 Self Join하여, A Alias 쪽에 먼저 읽혔다고 가정하면 다음처럼 데이터가 \n생성될 것이다.\n1.A가 {2015.11.01, 1000} 일 때 B는 {2015.11.01, 1000} \n2. A가 {2015.11.02, 1000} 일 때 B는 {{2015.11.01, 1000}, {2015.11.02, 1000}}\n3. A가 {2015.11.03, 1000} 일 때 B는 {{2015.11.01, 1000}, {2015.11.02,1000}, {2015.11.03, 1000}}\n위의 Self Join은 Equi Join이 아닌 Range Join이므로 A의 레코드는 B의 레코드 수 만큼 증가하게 \n된다.(A * B) 그러므로 위의 3번의 경우 A는 B의 레코드 개수와 동일하게 되므로 SUM(매출금액)을 \n하면 3,000이 된다. 이런 식으로 A Alias의 모든 레코드 개수를 Scan하면 누적 값을 출력하게 된다.",
+    "explanation": "④는 일자별매출액에 일자별 매출 테이블과 동일하게 출력된다.\n①,③는 작은 날짜쪽에 제일 큰 누적금액이 출력된다.\n②은 일자별매출 테이블을 Self Join하여, A Alias 쪽에 먼저 읽혔다고 가정하면 다음처럼 데이터가 \n생성될 것이다.\n1.A가 {2015.11.01, 1000} 일 때 B는 {2015.11.01, 1000} \n2. A가 {2015.11.02, 1000} 일 때 B는 {{2015.11.01, 1000}, {2015.11.02, 1000}}\n3. A가 {2015.11.03, 1000} 일 때 B는 {{2015.11.01, 1000}, {2015.11.02,1000}, {2015.11.03, 1000}}\n위의 Self Join은 Equi Join이 아닌 Range Join이므로 A의 레코드는 B의 레코드 수 만큼 증가하게 \n된다. (A * B) 그러므로 위의 3번의 경우 A는 B의 레코드 개수와 동일하게 되므로 SUM(매출금액)을 \n하면 3,000이 된다. 이런 식으로 A Alias의 모든 레코드 개수를 Scan하면 누적 값을 출력하게 된다.",
     "chapter": "조인",
     "_source": "sqld-1140",
     "_origId": "sqld-0112",
@@ -11228,7 +11045,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "GROUP BY CUBE (자재번호, (발주처ID, 발주일자))"
     ],
     "correctIndex": 0,
-    "explanation": "집계 그룹 함수에는 ROLLUP, CUBE, GROUPING SETS 함수가 있다.문제의 결과 데이터는 (자재번호별) SUB TOTAL과 (자재번호, 발주처별) SUB TOTAL을 출력하고 있다. GROUPING SETS 함수를 사용하여 입력된 인수들에 대한 개별 집계를 구할 수 있으며, CUBE 함수의 경우는 나열된 모든 인수의 결합 가능한 집계가 출력 된다.그러므로 위의 문제에서는 GROUP BY GROUPING SETS(자재번호, (발주체D, 발주일자)) 가 되어야 한다. ",
+    "explanation": "집계 그룹 함수에는 ROLLUP, CUBE, GROUPING SETS 함수가 있다. 문제의 결과 데이터는 (자재번호별) SUB TOTAL과 (자재번호, 발주처별) SUB TOTAL을 출력하고 있다. GROUPING SETS 함수를 사용하여 입력된 인수들에 대한 개별 집계를 구할 수 있으며, CUBE 함수의 경우는 나열된 모든 인수의 결합 가능한 집계가 출력 된다. 그러므로 위의 문제에서는 GROUP BY GROUPING SETS(자재번호, (발주체D, 발주일자)) 가 되어야 한다. ",
     "chapter": "그룹 함수",
     "_source": "sqld-1140",
     "_origId": "sqld-0128",
@@ -12792,7 +12609,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "SELECT A.BASE_DATE, A.LAST_JUKA,\nB.LAST_JUKA-A.LAST_JUKA DEBI_VAL\nFROM\n(SELECT ROWNUM ROW1,\nBASE_DATE, LAST_JUKA\nFROM TEST_A)a,\n(SELECT ROWNUM ROW1, BASE_DATE, LAST_JUKA\nFROM TEST_A\nWHERE BASE_DATE > '20230104')b\nWHERE A.ROW1 = B.ROW1;"
     ],
     "correctIndex": 0,
-    "explanation": "LAG 및 LEAD 함수를 사용하지 않고 이전 행과 다음 행의 값을 구하는 SQL문이다. 만약 LAG 함수와 LEAD 함수를 사용한다면 좀 더 쉽게 SQL 문을 작성할 수가 있다. LAG 함수는 이전 행의 값을 구하고 LEAD 함수는 다음 행의 값을 구한다.",
+    "explanation": "결과를 보면 DEBI_VAL 은 바로 다음 날 종가에서 그날 종가를 뺀 값이다(0105: 596.81 − 635.99 = −39.18). ① 은 A = 전체 행에 ROWNUM(0104 가 1번), B = 0104 이후 행에 ROWNUM(0105 가 1번)을 붙여, 같은 번호끼리 조인하면 A 의 하루 뒤 날짜가 B 에 붙는다. 여기서 A.BASE_DATE > '20230104' 로 0105~0108 만 남기면 0105·0106·0107 세 행이 결과와 똑같이 나온다(0108 은 짝이 없어 빠짐). ② 는 ROW1 조인 조건이 없어 모든 조합이 나오고, ③ 은 SELECT 끝에 쉼표가 남아 문법 오류이며, ④ 는 A 쪽 0104 행까지 포함되어 결과에 없는 행이 생긴다. LAG·LEAD 함수를 쓰면 같은 결과를 훨씬 간단히 만들 수 있다.",
     "chapter": "서브쿼리",
     "_source": "sqld-1140",
     "_origId": "sqld-0212",
@@ -12801,33 +12618,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "table",
-        "caption": "[결과]",
-        "headers": [
-          "BASE_DATE",
-          "LAST_JUKA",
-          "DEBI_VAL"
-        ],
-        "rows": [
-          [
-            "20230105",
-            "635.99",
-            "-39.18"
-          ],
-          [
-            "20230106",
-            "596.81",
-            "-49.6"
-          ],
-          [
-            "20230107",
-            "547.21",
-            "12.18"
-          ]
-        ]
-      },
-      {
-        "type": "table",
-        "caption": "[기초 데이터]",
+        "caption": "TEST_A (기초 데이터)",
         "headers": [
           "BASE_DATE",
           "LAST_JUKA"
@@ -12859,6 +12650,32 @@ export const AI_MOCK: QuizQuestion[] = [
         "type": "sql",
         "caption": "[SELECT]",
         "code": "SELECT BASE_DATE, LAST_JUKA\nFROM TEST_A A;"
+      },
+      {
+        "type": "table",
+        "caption": "원하는 결과",
+        "headers": [
+          "BASE_DATE",
+          "LAST_JUKA",
+          "DEBI_VAL"
+        ],
+        "rows": [
+          [
+            "20230105",
+            "635.99",
+            "-39.18"
+          ],
+          [
+            "20230106",
+            "596.81",
+            "-49.6"
+          ],
+          [
+            "20230107",
+            "547.21",
+            "12.18"
+          ]
+        ]
       }
     ]
   },
@@ -19113,7 +18930,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "2022 - 04 - 30 00 : 00 : 00 2022"
     ],
     "correctIndex": 0,
-    "explanation": "SYSDATE는 Oracle에서 오늘의 날짜와 시간을 가지고 있는 Date 타입이다.따라서 Date 타입을 다시 TO_DATE로 형 변환을 하면 동일 타입을 변환하기 때문에 오류가 발생한다. 즉 이러한 경우는 TO_CHAR를 사용해서 문자형 타입으로 변환해야 한다.",
+    "explanation": "SYSDATE는 Oracle에서 오늘의 날짜와 시간을 가지고 있는 Date 타입이다. 따라서 Date 타입을 다시 TO_DATE로 형 변환을 하면 동일 타입을 변환하기 때문에 오류가 발생한다. 즉 이러한 경우는 TO_CHAR를 사용해서 문자형 타입으로 변환해야 한다.",
     "chapter": "DML",
     "_source": "sqld-1140",
     "_origId": "sqld-0423",
@@ -24856,7 +24673,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "7, 2"
     ],
     "correctIndex": 3,
-    "explanation": "LEFT OUTER JOIN의 결과 TAB1의 NO값이 1, 2, 4, 4, 6, 7, 3인 총 7개의 행이 나오게 되고,  RIGHT OUTER JOIN의 결과로 TAB1의 CODE값이 A, B, B, B, NULL, NULL, NULL이 출력되어 DISTINCT 수는 총 2건이다.(NULL은 세지 않는다)",
+    "explanation": "LEFT OUTER JOIN의 결과 TAB1의 NO값이 1, 2, 4, 4, 6, 7, 3인 총 7개의 행이 나오게 되고,  RIGHT OUTER JOIN의 결과로 TAB1의 CODE값이 A, B, B, B, NULL, NULL, NULL이 출력되어 DISTINCT 수는 총 2건이다. (NULL은 세지 않는다)",
     "chapter": "조인",
     "_source": "sqld-1140",
     "_origId": "sqld-0648",
@@ -25440,7 +25257,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "110"
     ],
     "correctIndex": 0,
-    "explanation": "처음 INSERT 3개의 문장은 COMMIT을 수행했으므로 영구 저장된다. 이후 COL3을 추가하면 이미 입력된 세 개의 행에 대해 NULL을 갖게 된다. 그 뒤 수행하는 INSERT, UPDATE, DELETE 문장은 이어서 실행하는 ALTER TABLE DROP COLUMN 문장으로 인해 자동 확정된다.(DDL AUTO COMMIT). 따라서 ROLLBACK을 수행해도 취소되지 않는다. ",
+    "explanation": "처음 INSERT 3개의 문장은 COMMIT을 수행했으므로 영구 저장된다. 이후 COL3을 추가하면 이미 입력된 세 개의 행에 대해 NULL을 갖게 된다. 그 뒤 수행하는 INSERT, UPDATE, DELETE 문장은 이어서 실행하는 ALTER TABLE DROP COLUMN 문장으로 인해 자동 확정된다. (DDL AUTO COMMIT). 따라서 ROLLBACK을 수행해도 취소되지 않는다. ",
     "chapter": "DML",
     "_source": "sqld-1140",
     "_origId": "sqld-0666",

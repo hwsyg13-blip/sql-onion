@@ -2912,7 +2912,7 @@
         "SELECT A.일자, SUM(A.매출액) AS 누적매출액\nFROM 일자별매출 A\nGROUP BY A.일자\nORDER BY A.일자;"
       ],
       "correctIndex": 1,
-      "explanation": "④는 일자별매출액에 일자별 매출 테이블과 동일하게 출력된다.\n①,③는 작은 날짜쪽에 제일 큰 누적금액이 출력된다.\n②은 일자별매출 테이블을 Self Join하여, A Alias 쪽에 먼저 읽혔다고 가정하면 다음처럼 데이터가 \n생성될 것이다.\n1.A가 {2015.11.01, 1000} 일 때 B는 {2015.11.01, 1000} \n2. A가 {2015.11.02, 1000} 일 때 B는 {{2015.11.01, 1000}, {2015.11.02, 1000}}\n3. A가 {2015.11.03, 1000} 일 때 B는 {{2015.11.01, 1000}, {2015.11.02,1000}, {2015.11.03, 1000}}\n위의 Self Join은 Equi Join이 아닌 Range Join이므로 A의 레코드는 B의 레코드 수 만큼 증가하게 \n된다.(A * B) 그러므로 위의 3번의 경우 A는 B의 레코드 개수와 동일하게 되므로 SUM(매출금액)을 \n하면 3,000이 된다. 이런 식으로 A Alias의 모든 레코드 개수를 Scan하면 누적 값을 출력하게 된다.",
+      "explanation": "④는 일자별매출액에 일자별 매출 테이블과 동일하게 출력된다.\n①,③는 작은 날짜쪽에 제일 큰 누적금액이 출력된다.\n②은 일자별매출 테이블을 Self Join하여, A Alias 쪽에 먼저 읽혔다고 가정하면 다음처럼 데이터가 \n생성될 것이다.\n1.A가 {2015.11.01, 1000} 일 때 B는 {2015.11.01, 1000} \n2. A가 {2015.11.02, 1000} 일 때 B는 {{2015.11.01, 1000}, {2015.11.02, 1000}}\n3. A가 {2015.11.03, 1000} 일 때 B는 {{2015.11.01, 1000}, {2015.11.02,1000}, {2015.11.03, 1000}}\n위의 Self Join은 Equi Join이 아닌 Range Join이므로 A의 레코드는 B의 레코드 수 만큼 증가하게 \n된다. (A * B) 그러므로 위의 3번의 경우 A는 B의 레코드 개수와 동일하게 되므로 SUM(매출금액)을 \n하면 3,000이 된다. 이런 식으로 A Alias의 모든 레코드 개수를 Scan하면 누적 값을 출력하게 된다.",
       "references": [
         {
           "type": "table",
@@ -4113,7 +4113,7 @@
         "GROUP BY CUBE (자재번호, (발주처ID, 발주일자))"
       ],
       "correctIndex": 0,
-      "explanation": "집계 그룹 함수에는 ROLLUP, CUBE, GROUPING SETS 함수가 있다.문제의 결과 데이터는 (자재번호별) SUB TOTAL과 (자재번호, 발주처별) SUB TOTAL을 출력하고 있다. GROUPING SETS 함수를 사용하여 입력된 인수들에 대한 개별 집계를 구할 수 있으며, CUBE 함수의 경우는 나열된 모든 인수의 결합 가능한 집계가 출력 된다.그러므로 위의 문제에서는 GROUP BY GROUPING SETS(자재번호, (발주체D, 발주일자)) 가 되어야 한다. ",
+      "explanation": "집계 그룹 함수에는 ROLLUP, CUBE, GROUPING SETS 함수가 있다. 문제의 결과 데이터는 (자재번호별) SUB TOTAL과 (자재번호, 발주처별) SUB TOTAL을 출력하고 있다. GROUPING SETS 함수를 사용하여 입력된 인수들에 대한 개별 집계를 구할 수 있으며, CUBE 함수의 경우는 나열된 모든 인수의 결합 가능한 집계가 출력 된다. 그러므로 위의 문제에서는 GROUP BY GROUPING SETS(자재번호, (발주체D, 발주일자)) 가 되어야 한다. ",
       "references": [
         {
           "type": "table",
@@ -6302,37 +6302,11 @@
         "SELECT A.BASE_DATE, A.LAST_JUKA,\nB.LAST_JUKA-A.LAST_JUKA DEBI_VAL\nFROM\n(SELECT ROWNUM ROW1,\nBASE_DATE, LAST_JUKA\nFROM TEST_A)a,\n(SELECT ROWNUM ROW1, BASE_DATE, LAST_JUKA\nFROM TEST_A\nWHERE BASE_DATE > '20230104')b\nWHERE A.ROW1 = B.ROW1;"
       ],
       "correctIndex": 0,
-      "explanation": "LAG 및 LEAD 함수를 사용하지 않고 이전 행과 다음 행의 값을 구하는 SQL문이다. 만약 LAG 함수와 LEAD 함수를 사용한다면 좀 더 쉽게 SQL 문을 작성할 수가 있다. LAG 함수는 이전 행의 값을 구하고 LEAD 함수는 다음 행의 값을 구한다.",
+      "explanation": "결과를 보면 DEBI_VAL 은 바로 다음 날 종가에서 그날 종가를 뺀 값이다(0105: 596.81 − 635.99 = −39.18). ① 은 A = 전체 행에 ROWNUM(0104 가 1번), B = 0104 이후 행에 ROWNUM(0105 가 1번)을 붙여, 같은 번호끼리 조인하면 A 의 하루 뒤 날짜가 B 에 붙는다. 여기서 A.BASE_DATE > '20230104' 로 0105~0108 만 남기면 0105·0106·0107 세 행이 결과와 똑같이 나온다(0108 은 짝이 없어 빠짐). ② 는 ROW1 조인 조건이 없어 모든 조합이 나오고, ③ 은 SELECT 끝에 쉼표가 남아 문법 오류이며, ④ 는 A 쪽 0104 행까지 포함되어 결과에 없는 행이 생긴다. LAG·LEAD 함수를 쓰면 같은 결과를 훨씬 간단히 만들 수 있다.",
       "references": [
         {
           "type": "table",
-          "caption": "[결과]",
-          "headers": [
-            "BASE_DATE",
-            "LAST_JUKA",
-            "DEBI_VAL"
-          ],
-          "rows": [
-            [
-              "20230105",
-              "635.99",
-              "-39.18"
-            ],
-            [
-              "20230106",
-              "596.81",
-              "-49.6"
-            ],
-            [
-              "20230107",
-              "547.21",
-              "12.18"
-            ]
-          ]
-        },
-        {
-          "type": "table",
-          "caption": "[기초 데이터]",
+          "caption": "TEST_A (기초 데이터)",
           "headers": [
             "BASE_DATE",
             "LAST_JUKA"
@@ -6364,6 +6338,32 @@
           "type": "sql",
           "caption": "[SELECT]",
           "code": "SELECT BASE_DATE, LAST_JUKA\nFROM TEST_A A;"
+        },
+        {
+          "type": "table",
+          "caption": "원하는 결과",
+          "headers": [
+            "BASE_DATE",
+            "LAST_JUKA",
+            "DEBI_VAL"
+          ],
+          "rows": [
+            [
+              "20230105",
+              "635.99",
+              "-39.18"
+            ],
+            [
+              "20230106",
+              "596.81",
+              "-49.6"
+            ],
+            [
+              "20230107",
+              "547.21",
+              "12.18"
+            ]
+          ]
         }
       ]
     },
@@ -12620,7 +12620,7 @@
         "2022 - 04 - 30 00 : 00 : 00 2022"
       ],
       "correctIndex": 0,
-      "explanation": "SYSDATE는 Oracle에서 오늘의 날짜와 시간을 가지고 있는 Date 타입이다.따라서 Date 타입을 다시 TO_DATE로 형 변환을 하면 동일 타입을 변환하기 때문에 오류가 발생한다. 즉 이러한 경우는 TO_CHAR를 사용해서 문자형 타입으로 변환해야 한다.",
+      "explanation": "SYSDATE는 Oracle에서 오늘의 날짜와 시간을 가지고 있는 Date 타입이다. 따라서 Date 타입을 다시 TO_DATE로 형 변환을 하면 동일 타입을 변환하기 때문에 오류가 발생한다. 즉 이러한 경우는 TO_CHAR를 사용해서 문자형 타입으로 변환해야 한다.",
       "references": [
         {
           "type": "text",
@@ -18770,7 +18770,7 @@
         "7, 2"
       ],
       "correctIndex": 3,
-      "explanation": "LEFT OUTER JOIN의 결과 TAB1의 NO값이 1, 2, 4, 4, 6, 7, 3인 총 7개의 행이 나오게 되고,  RIGHT OUTER JOIN의 결과로 TAB1의 CODE값이 A, B, B, B, NULL, NULL, NULL이 출력되어 DISTINCT 수는 총 2건이다.(NULL은 세지 않는다)",
+      "explanation": "LEFT OUTER JOIN의 결과 TAB1의 NO값이 1, 2, 4, 4, 6, 7, 3인 총 7개의 행이 나오게 되고,  RIGHT OUTER JOIN의 결과로 TAB1의 CODE값이 A, B, B, B, NULL, NULL, NULL이 출력되어 DISTINCT 수는 총 2건이다. (NULL은 세지 않는다)",
       "references": [
         {
           "type": "text",
@@ -19730,7 +19730,7 @@
         "110"
       ],
       "correctIndex": 0,
-      "explanation": "처음 INSERT 3개의 문장은 COMMIT을 수행했으므로 영구 저장된다. 이후 COL3을 추가하면 이미 입력된 세 개의 행에 대해 NULL을 갖게 된다. 그 뒤 수행하는 INSERT, UPDATE, DELETE 문장은 이어서 실행하는 ALTER TABLE DROP COLUMN 문장으로 인해 자동 확정된다.(DDL AUTO COMMIT). 따라서 ROLLBACK을 수행해도 취소되지 않는다. ",
+      "explanation": "처음 INSERT 3개의 문장은 COMMIT을 수행했으므로 영구 저장된다. 이후 COL3을 추가하면 이미 입력된 세 개의 행에 대해 NULL을 갖게 된다. 그 뒤 수행하는 INSERT, UPDATE, DELETE 문장은 이어서 실행하는 ALTER TABLE DROP COLUMN 문장으로 인해 자동 확정된다. (DDL AUTO COMMIT). 따라서 ROLLBACK을 수행해도 취소되지 않는다. ",
       "references": [
         {
           "type": "text",
