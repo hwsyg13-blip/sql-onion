@@ -6,7 +6,7 @@ import { sqloUsage } from './PricingScreen';
 import { BETA_NO_AUTH } from '../App';
 import { QuestionReferences, OptionReferences, renderInlineMd } from '../components/QuestionReferences';
 import { BugReportModal } from '../components/BugReportModal';
-import { trackEvent } from '../lib/analytics';
+import { trackEvent, trackAnswer } from '../lib/analytics';
 import { recordQuizAttempt } from '../lib/progress';
 
 // Endless Quiz — flashcard-esque: single question → grade → explanation → next
@@ -82,6 +82,7 @@ export const EndlessScreen = ({onNavigate}) => {
       number: q.number,
       context: 'endless',
     });
+    trackAnswer(q, selected, isCorrect, 'endless');
     // Track daily mock usage (skip in beta — no plans, no limits)
     if (!BETA_NO_AUTH) {
       try {
