@@ -190,7 +190,7 @@ ${ads ? `  <script async src="https://pagead2.googlesyndication.com/pagead/js/ad
 
 const tail = `  </main>
   <footer class="footer">
-    <p>SQLD양파 — SQLD 3주 합격 루틴 · <a href="/">홈으로</a> · <a href="/terms.html">이용약관</a> · <a href="/privacy.html">개인정보처리방침</a></p>
+    <p>SQLD양파 — SQLD 3주 합격 루틴 · <a href="/">홈으로</a> · <a href="/about/">소개·문의</a> · <a href="/terms.html">이용약관</a> · <a href="/privacy.html">개인정보처리방침</a></p>
   </footer>
 </body>
 </html>`;
@@ -536,6 +536,44 @@ const guides = [
   },
 ];
 
+
+// ============================================================
+// 소개·문의 페이지
+// ============================================================
+function buildAboutPage() {
+  const path = '/about/';
+  const roundCount = rounds.length;
+  return head({ title: '사이트 소개·문의 — SQLD양파', desc: 'SQLD양파는 SQLD 자격증을 준비하는 수험생을 위한 무료 학습 사이트입니다. 콘텐츠를 만드는 방식과 오류 제보·문의 방법을 안내합니다.', path, type: 'website' }) + `
+    <div class="crumb"><a href="/">홈</a> · 소개·문의</div>
+    <h1>SQLD양파 소개</h1>
+    <p class="lead">SQLD(SQL 개발자) 자격증을 3주 안에 준비할 수 있도록 이론·기출·모의고사를 한곳에 모은 무료 학습 사이트입니다. 양파 껍질을 한 겹씩 벗기듯 기초부터 시험에 자주 나오는 함정까지 차례로 익히는 것을 목표로 합니다.</p>
+
+    <h2>제공하는 것</h2>
+    <ul>
+      <li><strong>이론 30챕터</strong> — 1과목 데이터 모델링, 2과목 SQL 기본·활용·관리 구문을 시험에 나오는 핵심 위주로 정리했습니다. 각 챕터는 "꼭 외울 것 → 시험은 이렇게 낸다 → 30초 정리" 순서로 되어 있습니다.</li>
+      <li><strong>기출 복원 ${roundCount}회차 CBT</strong> — 실제 시험처럼 90분 타이머와 답안 표기란으로 풀고, 제출하면 과목별 점수와 문항별 해설을 볼 수 있습니다.</li>
+      <li><strong>실전 모의고사·무한 퀴즈</strong> — 실제 출제 비율(1과목 10문항, 2과목 40문항)로 구성한 모의고사와, 한 문제씩 바로 채점하는 퀴즈입니다.</li>
+      <li><strong>3주 학습 계획</strong> — 하루 1시간 기준으로 무엇을 공부할지 날짜별로 안내합니다.</li>
+    </ul>
+
+    <h2>콘텐츠를 만드는 방식</h2>
+    <ul>
+      <li>기출 문항은 공개된 수험 후기와 복원 자료를 바탕으로 다시 구성한 것이며, 한국데이터산업진흥원의 공식 문제가 아닙니다. 원문을 알 수 없는 부분은 같은 개념을 묻는 형태로 다시 만들고, 그 사실을 해설에 적습니다.</li>
+      <li>모든 문항은 보기마다 결과를 직접 계산해 정답이 하나로 나오는지 확인합니다. SQL 결과를 묻는 문항은 실제로 실행해 정답과 대조합니다.</li>
+      <li>틀린 내용이 확인되면 바로 고치고, 고친 문항은 해설에 이유를 남깁니다.</li>
+    </ul>
+
+    <h2>오류 제보·문의</h2>
+    <p>문제나 해설이 이상하면 각 문항 오른쪽 위의 <strong>오류 제보</strong> 버튼으로 알려 주세요. 접수된 제보는 하나씩 확인해 반영합니다. 그 밖의 문의는 아래 메일로 보내 주시면 됩니다.</p>
+    <p><strong>문의 메일:</strong> <a href="mailto:sqldyangpa@gmail.com">sqldyangpa@gmail.com</a></p>
+
+    <h2>광고 안내</h2>
+    <p>사이트를 무료로 운영하기 위해 일부 학습 콘텐츠 페이지에 광고가 표시될 수 있습니다. 광고는 문제 풀이 화면에는 넣지 않습니다. 개인정보 처리에 관한 내용은 <a href="/privacy.html">개인정보처리방침</a>에서 확인할 수 있습니다.</p>
+
+    <a class="cta" href="/">SQLD양파에서 학습 시작 →</a>
+` + tail;
+}
+
 // ============================================================
 // 사이트맵
 // ============================================================
@@ -546,6 +584,7 @@ function buildSitemap() {
     { loc: SITE + '/theory/', priority: 0.9, changefreq: 'monthly' },
     ...THEORY.subjects.flatMap(s => s.chapters.map(c => ({ loc: `${SITE}/theory/${c.id}/`, priority: 0.7, changefreq: 'monthly' }))),
     ...guides.map(g => ({ loc: `${SITE}/guide/${g.slug}/`, priority: 0.6, changefreq: 'yearly' })),
+    { loc: SITE + '/about/', priority: 0.4, changefreq: 'yearly' },
     { loc: SITE + '/terms.html', priority: 0.3, changefreq: 'yearly' },
     { loc: SITE + '/privacy.html', priority: 0.3, changefreq: 'yearly' },
   ];
@@ -590,6 +629,10 @@ for (const g of guides) {
   writePage(`/guide/${g.slug}/`, buildGuide(g));
 }
 console.log(`  guide: ${guides.length} pages`);
+
+// 소개·문의
+writePage('/about/', buildAboutPage());
+console.log('  about: 1 page');
 
 // 사이트맵
 const total = buildSitemap();
