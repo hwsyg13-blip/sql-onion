@@ -160,13 +160,9 @@ export const ROUND_57: QuizQuestion[] = [
       "오류 발생"
     ],
     "correctIndex": 3,
-    "explanation": "서브쿼리가 두 건(1002, 1003)을 반환하므로 단일 행 비교 연산자 '='와 결합되어 \"단일 행 서브쿼리에 하나 이상의 행이 반환됨\" 오류가 발생한다.",
+    "explanation": "서브쿼리 SELECT 회원ID FROM 회원 WHERE 연락처 = '010-2222' 는 1002, 1003 두 건을 돌려준다. 그런데 바깥 조건이 단일 행 비교 연산자 = 라서 \"단일 행 서브쿼리가 두 개 이상의 행을 반환\" 오류가 난다(④). 여러 행이 나올 수 있는 서브쿼리는 IN 으로 비교해야 하며, IN 이었다면 ① 이순신·강감찬 두 건이 나왔을 것이다.",
     "_source": "authored",
     "references": [
-      {
-        "type": "text",
-        "content": "동일한 연락처를 가진 사람이 2명 존재한다."
-      },
       {
         "type": "table",
         "headers": [
