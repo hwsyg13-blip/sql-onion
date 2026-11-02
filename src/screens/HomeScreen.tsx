@@ -111,7 +111,7 @@ export const HomeScreen = ({onNavigate, user}) => {
     <section style={{marginTop: 28, display:"grid", gridTemplateColumns:"2fr 1fr", gap: 16}} className="dashboard-grid">
       <div style={{background:"var(--bg-card)",border:"1px solid var(--border-subtle)",borderRadius:16,padding:"22px 24px",boxShadow:"var(--shadow-sm)"}}>
         <div style={{display:"flex",justifyContent:"space-between",alignItems:"baseline",marginBottom:16}}>
-          <h3 style={{fontSize:16,fontWeight:700,color:"var(--fg-1)",margin:0}}>회원님의 학습 현황</h3>
+          <h3 style={{fontSize:16,fontWeight:700,color:"var(--fg-1)",margin:0}}>내 학습 현황</h3>
           <button onClick={()=>onNavigate("plan")} style={{background:"none",border:0,color:"var(--point-600)",fontSize:13,fontWeight:600,cursor:"pointer",fontFamily:"inherit"}}>3주 계획 보기 →</button>
         </div>
         <div className="home-stats-grid" style={{display:"grid",gridTemplateColumns:"repeat(4,1fr)",gap:14}}>
@@ -140,7 +140,7 @@ export const HomeScreen = ({onNavigate, user}) => {
         </div>
         <div style={{marginTop:18}}>
           <div style={{display:"flex",justifyContent:"space-between",fontSize:12,color:"var(--fg-3)",marginBottom:6}}>
-            <span>Day {nextDay} · {weekNum}주차 {weekDay}일</span>
+            <span>{nextDay}일차 · {weekNum}주차 {weekDay}일째</span>
             <span style={{fontFamily:"var(--font-mono)"}}>{dayProgress} / 21일</span>
           </div>
           <Progress value={dayProgress} total={21}/>
@@ -178,25 +178,25 @@ export const HomeScreen = ({onNavigate, user}) => {
           {
             n:1, icon: Ic.Calendar,
             title:"3주 계획 따라가기",
-            sub:"하루 1시간, Day 1~14 이론 마스터",
+            sub:"하루 1시간씩, 14일 동안 이론 끝내기",
             route:"plan",
           },
           {
             n:2, icon: Ic.Shuffle,
             title:"틈틈이 무한 퀴즈",
-            sub:"이동 중·자투리 시간에 단일 문제로 감 유지",
+            sub:"자투리 시간에 한 문제씩 풀며 감 유지",
             route:"endless",
           },
           {
             n:3, icon: Ic.ListChecks,
             title:"마지막 주 실전 정리",
-            sub:"Day 15~20: 기출 12회차 + 실전 모의 6회",
+            sub:"15~20일차: 기출 12회 + 실전 모의고사 6회",
             route:"exams",
           },
           {
             n:4, icon: Ic.Sparkles,
             title:"시험 당일 총정리",
-            sub:"Day 21: 핵심·함정·체크리스트 통독 후 입실",
+            sub:"21일차(시험 당일): 핵심·함정 정리를 한 번 읽고 입실",
             route:"final-cheatsheet",
           },
         ].map(step => {
