@@ -1,5 +1,5 @@
 // Auto-generated from scripts/authored/ai-mock.json
-// AI 생성 모의고사 풀 (기출 변형) · 1312문항
+// AI 생성 모의고사 풀 (기출 변형) · 1313문항
 // ⚠ 직접 편집 금지. ai-mock.json 수정 후 'node scripts/build-quiz-bank.mjs' 재실행.
 import type { QuizQuestion } from '../quizBank';
 
@@ -33189,7 +33189,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "sql",
-        "code": "SELECT val\nFROM (\n  SELECT 1 AS val UNION ALL\n  SELECT 2 UNION ALL\n  SELECT 2 UNION ALL\n  SELECT 3\n) a\nMINUS\nSELECT val\nFROM (\n  SELECT 2 AS val UNION\n  SELECT 4\n) b;"
+        "code": "SELECT val\nFROM (\n  SELECT 1 AS val FROM DUAL UNION ALL\n  SELECT 2 FROM DUAL UNION ALL\n  SELECT 2 FROM DUAL UNION ALL\n  SELECT 3 FROM DUAL\n) a\nMINUS\nSELECT val\nFROM (\n  SELECT 2 AS val FROM DUAL UNION\n  SELECT 4 FROM DUAL\n) b;"
       }
     ]
   },
@@ -35733,7 +35733,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "sql",
-        "code": "SELECT 1 AS n UNION\nSELECT 1 UNION\nSELECT 2;"
+        "code": "SELECT 1 AS n FROM DUAL UNION\nSELECT 1 FROM DUAL UNION\nSELECT 2 FROM DUAL;"
       }
     ]
   },
@@ -35759,7 +35759,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "sql",
-        "code": "SELECT 1 AS n UNION ALL\nSELECT 1 UNION ALL\nSELECT 2;"
+        "code": "SELECT 1 AS n FROM DUAL UNION ALL\nSELECT 1 FROM DUAL UNION ALL\nSELECT 2 FROM DUAL;"
       }
     ]
   },
@@ -35785,7 +35785,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "sql",
-        "code": "SELECT 1 AS n UNION\nSELECT 2\nINTERSECT\nSELECT 2 AS n;"
+        "code": "SELECT 1 AS n FROM DUAL UNION\nSELECT 2 FROM DUAL\nINTERSECT\nSELECT 2 AS n FROM DUAL;"
       }
     ]
   },
@@ -35811,7 +35811,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "sql",
-        "code": "SELECT 1 AS n UNION\nSELECT 2\nMINUS\nSELECT 2 AS n;"
+        "code": "SELECT 1 AS n FROM DUAL UNION\nSELECT 2 FROM DUAL\nMINUS\nSELECT 2 AS n FROM DUAL;"
       }
     ]
   },
@@ -37195,6 +37195,32 @@ export const AI_MOCK: QuizQuestion[] = [
       {
         "type": "text",
         "content": "REGEXP_LIKE(val, '^(SQL|DB)D$')"
+      }
+    ]
+  },
+  {
+    "id": 11908,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 1109,
+    "title": "다음 권한 부여/회수 흐름에 대한 설명으로 옳은 것은?",
+    "options": [
+      "user1을 통해 user2에게 전달된 권한도 함께 회수될 수 있다.",
+      "REVOKE는 객체를 삭제한다.",
+      "WITH GRANT OPTION은 조회 권한에 사용할 수 없다.",
+      "user2 권한은 원래 부여자 회수와 무관하게 영구 유지된다."
+    ],
+    "correctIndex": 0,
+    "explanation": "GRANT OPTION으로 전파된 권한은 원 부여자의 권한 회수 시 함께 회수될 수 있다.",
+    "chapter": "DCL·TCL",
+    "_source": "sqld-1140",
+    "_origId": "sqld-1112",
+    "_category": "DCL",
+    "references": [
+      {
+        "type": "sql",
+        "code": "GRANT SELECT ON emp TO user1 WITH GRANT OPTION;\n-- user1이 user2에게 SELECT ON emp 권한 부여\nREVOKE SELECT ON emp FROM user1;"
       }
     ]
   },
