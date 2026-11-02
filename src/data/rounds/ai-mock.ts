@@ -1682,7 +1682,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "options": [
       "인덱스를 경유한 테이블의 Random 액세스 부하가 심할 때, 클러스터 테이블이나 IOT를 활용하는 방안을 고려할 수 있다.",
       "인덱스를 경유한 테이블 액세스 횟수가 같더라도 인덱스 구성에 따라 스캔 효율이 달라진다. 따라서 인덱스 스캔 효율을 높이기 위해 인덱스 칼럼 순서를 바꿔야 할 때가 종종 있다.",
-      "조건절이 Where deptno = 10 and ename = ‘SCOTT’일 때 인덱스를 [deptno + ename] 순으로 구성하나 [ename + deptno] 순으로 구성하나 인덱스 스캔 효율에 차이가 없다.",
+      "조건절이 Where deptno = 10 and ename = 'SCOTT'일 때 인덱스를 [deptno + ename] 순으로 구성하나 [ename + deptno] 순으로 구성하나 인덱스 스캔 효율에 차이가 없다.",
       "인덱스 튜닝의 핵심 요소 중 하나는 불필요한 테이블 Random 액세스가 발생하지 않도록 하는 데에 있다. 이를 위해 인덱스 칼럼 순서를 바꿔주는 것도 큰 효과가 있다."
     ],
     "correctIndex": 3,
@@ -4461,7 +4461,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "75",
       "5025",
       "오류 발생",
-      "‘75’"
+      "'75'"
     ],
     "correctIndex": 0,
     "explanation": "TO_NUMBER('0050') 은 문자열을 숫자 50 으로 바꾸므로 50 + 25 = 75 이고 결과는 숫자형이다(①). 문자열 연결이 아니라서 5025(②)가 되지 않고, 오류도 나지 않으며(③), 문자열 '75'(④)도 아니다.",
@@ -6134,13 +6134,13 @@ export const AI_MOCK: QuizQuestion[] = [
     "number": 217,
     "title": "다음 테이블에 아래의 쿼리를 순서대로 실행할 경우, 그 결과에 대한 설명으로 올바른 것을 고르면?",
     "options": [
-      "(ㄱ)은 Oracle일 경우 COL2에 NULL이 입력되고, SQL Server는 ‘’(공백)이 입력된다.",
+      "(ㄱ)은 Oracle일 경우 COL2에 NULL이 입력되고, SQL Server는 ''(공백)이 입력된다.",
       "(ㄱ)이 성공했을 때 (ㄴ)은 Oracle은 1건 조회되고, SQL Server는 조회되지 않는다.",
       "(ㄱ)이 성공했을 때 (ㄷ)은 Oracle은 0건 변경되고, SQL Server는 1건 변경된다.",
       "(ㄹ)은 Oracle에서만 실행 가능하다."
     ],
     "correctIndex": 0,
-    "explanation": "Oracle은 INSERT나 UPDATE할 때 내부적으로 ‘’(공백) 데이터를 NULL로 처리한다. 반면 SQL Server는 NULL과 ‘’(공백)을 별개로 본다.즉, ㄱ을 실행하면 Oracle은 COL2에 NULL로 처리되고, SQL Server는 COL2에 ‘’(공백)이 입력된다. INSERT가 성공했을 때 ㄴ에 대해 Oracle은 0건 출력되며, SQL Server는 1건 출력된다. INSERT가 성공했을 때 ㄷ에 대해 Oracle은 1건 변경되며, SQL Server는 0건 변경된다(‘’로 들어있어 IS NULL로 조회가 안되기 때문). 마지막 DELETE FROM TAB;은 둘 다 잘 수행된다.",
+    "explanation": "Oracle은 INSERT나 UPDATE할 때 내부적으로 ''(공백) 데이터를 NULL로 처리한다. 반면 SQL Server는 NULL과 ''(공백)을 별개로 본다.즉, ㄱ을 실행하면 Oracle은 COL2에 NULL로 처리되고, SQL Server는 COL2에 ''(공백)이 입력된다. INSERT가 성공했을 때 ㄴ에 대해 Oracle은 0건 출력되며, SQL Server는 1건 출력된다. INSERT가 성공했을 때 ㄷ에 대해 Oracle은 1건 변경되며, SQL Server는 0건 변경된다(''로 들어있어 IS NULL로 조회가 안되기 때문). 마지막 DELETE FROM TAB;은 둘 다 잘 수행된다.",
     "chapter": "DDL",
     "_source": "cbt-mock",
     "_origId": "cbt-175",
@@ -6390,7 +6390,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "number": 227,
     "title": "다음 중 옳지 않은 것은?",
     "options": [
-      "Length(‘YOUNGJIN’) = 9",
+      "Length('YOUNGJIN') = 9",
       "CASE 문은 If - Then - Else를 구현 할 수 있다.",
       "(날짜1 - 날짜2)의 결과는 일수가 나온다.",
       "COUNT(표현식)은 표현식의 값이 NULL 값인 것을 제외한 행 수를 출력한다."
@@ -7034,13 +7034,13 @@ export const AI_MOCK: QuizQuestion[] = [
     "number": 247,
     "title": "부서와 사원 테이블을 생성하는 SQL 문장을 수행한 후 튜플 삽입으로 두 테이블의 상태가 다음과 같을 때, 테이블 연산 수행에 대한 설명으로 올바르지 않은 것은?",
     "options": [
-      "부서 테이블에서 (2, ‘영업부’) 튜플을 삭제한다면 참조 무결성 제약조건을 위배한다.",
-      "사원 테이블에 (13, ‘강감찬’, ‘A1’) 튜플을 삽입한다면 도메인 무결성 제약조건을 위배한다.",
-      "사원 테이블에 (14, ‘김유신’, 0) 튜플을 삽입한다면 참조 무결성 제약조건을 위배한다.",
-      "부서 테이블에 (1, ‘연구부’) 튜플을 삽입한다면 참조 무결성 제약조건을 위배한다."
+      "부서 테이블에서 (2, '영업부') 튜플을 삭제한다면 참조 무결성 제약조건을 위배한다.",
+      "사원 테이블에 (13, '강감찬', 'A1') 튜플을 삽입한다면 도메인 무결성 제약조건을 위배한다.",
+      "사원 테이블에 (14, '김유신', 0) 튜플을 삽입한다면 참조 무결성 제약조건을 위배한다.",
+      "부서 테이블에 (1, '연구부') 튜플을 삽입한다면 참조 무결성 제약조건을 위배한다."
     ],
     "correctIndex": 3,
-    "explanation": "부서 테이블은 마스터 테이블이므로 사원 테이블에 없는 부서번호 등을 자유롭게 입력할 수 있다. 따라서 부서 테이블에 (1, ‘연구부’)을 입력하는 것은 참조 무결성 위배가 아니다.",
+    "explanation": "부서 테이블은 마스터 테이블이므로 사원 테이블에 없는 부서번호 등을 자유롭게 입력할 수 있다. 따라서 부서 테이블에 (1, '연구부')을 입력하는 것은 참조 무결성 위배가 아니다.",
     "chapter": "관계형 DB와 SELECT",
     "_source": "cbt-mock",
     "_origId": "cbt-206",
@@ -8639,7 +8639,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "1과목",
     "number": 304,
-    "title": "테이블 A에 대해 아래와 같은 SQL을 수행하였을 때 테이블 A의 ID ’001’에 해당하는 최종 VAL의 값이 ORACLE에서는 200, SQL Server에서는 100이 되었다. 다음 설명 중 가장 부적절한 것은? (단, AUTO COMMIT은 FALSE로 설정되어 있다)",
+    "title": "테이블 A에 대해 아래와 같은 SQL을 수행하였을 때 테이블 A의 ID '001'에 해당하는 최종 VAL의 값이 ORACLE에서는 200, SQL Server에서는 100이 되었다. 다음 설명 중 가장 부적절한 것은? (단, AUTO COMMIT은 FALSE로 설정되어 있다)",
     "options": [
       "SQL Server에서는 ROLLBACK 실행으로 인하여 UPDATE가 취소되 었으며, 최종적으로 B 테이블은 생성되지 않았다.",
       "ORACLE에서는 CREATE TABLE 문장 수행에 의해 VAL 값은 200이 되었지만, ROLLBACK 실행으로 인하여 최종적으로 B 테이블은 생성 되지 않았다.",
@@ -19136,11 +19136,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "options": [
       "SELECT CONCAT('0', '5') FROM DUAL",
       "SELECT TRIM('05') FROM DUAL",
-      "SELECT EXTRACT(MONTH FROM DATE '2022 - 05 - 01') FROM DUAL;",
-      "SELECT SUBSTR(TO_CHAR ('20220504'), 5,2) FROM DUAL"
+      "SELECT EXTRACT(MONTH FROM DATE '2022-05-01') FROM DUAL;",
+      "SELECT SUBSTR(TO_CHAR('20220504'), 5, 2) FROM DUAL"
     ],
     "correctIndex": 2,
-    "explanation": "③번 보기만 5를 반환하고 나머지 보기들은 모두 05를 반환한다.",
+    "explanation": "①②④ 는 모두 문자열 '05' 를 돌려준다(CONCAT 으로 '0'+'5', 공백 없는 '05' 를 TRIM, '20220504' 의 5번째부터 2글자). ③ EXTRACT(MONTH …) 는 월을 숫자로 꺼내므로 5 다. 앞의 0 이 붙지 않아 결과가 다르다.",
     "chapter": "DML",
     "_source": "sqld-1140",
     "_origId": "sqld-0424",

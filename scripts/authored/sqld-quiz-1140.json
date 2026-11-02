@@ -1245,7 +1245,7 @@
       "_correctRate": 10,
       "subject": "1과목",
       "chapter": "트랜잭션 관리",
-      "title": "테이블 A에 대해 아래와 같은 SQL을 수행하였을 때 테이블 A의 ID ’001’에 해당하는 최종 VAL의 값이 ORACLE에서는 200, SQL Server에서는 100이 되었다. 다음 설명 중 가장 부적절한 것은? (단, AUTO COMMIT은 FALSE로 설정되어 있다)",
+      "title": "테이블 A에 대해 아래와 같은 SQL을 수행하였을 때 테이블 A의 ID '001'에 해당하는 최종 VAL의 값이 ORACLE에서는 200, SQL Server에서는 100이 되었다. 다음 설명 중 가장 부적절한 것은? (단, AUTO COMMIT은 FALSE로 설정되어 있다)",
       "options": [
         "SQL Server에서는 ROLLBACK 실행으로 인하여 UPDATE가 취소되 었으며, 최종적으로 B 테이블은 생성되지 않았다.",
         "ORACLE에서는 CREATE TABLE 문장 수행에 의해 VAL 값은 200이 되었지만, ROLLBACK 실행으로 인하여 최종적으로 B 테이블은 생성 되지 않았다.",
@@ -5280,13 +5280,13 @@
       "chapter": "DML",
       "title": "다음 SQL 문장에서 틀린 부분은 어디인가?",
       "options": [
-        "SELECT PLAYER, PLAYER_NAME\n선수명, TEAM, TEAM_NAME 팀명",
+        "SELECT PLAYER.PLAYER_NAME 선수명, TEAM.TEAM_NAME 팀명",
         "FROM PLAYER P, TEAM T",
         "WHERE P.TEAM_ID = T.TEAM_ID",
         "ORDER BY 선수명;"
       ],
       "correctIndex": 0,
-      "explanation": "FROM절에 테이블에 대한 ALIAS를 사용했을 때 SELECT절에서는 반드시 테이블명 아닌 ALIAS명을 사용해야 한다."
+      "explanation": "FROM 절에서 PLAYER P, TEAM T 처럼 테이블 별칭을 붙이면 SELECT 절에서도 별칭(P., T.)으로 써야 한다. ① 은 원래 테이블명(PLAYER., TEAM.)을 써서 오류가 난다. ③ 의 조인 조건은 별칭을 바르게 썼고, ④ 의 ORDER BY 는 SELECT 절 컬럼 별칭(선수명)을 쓸 수 있다."
     },
     {
       "_id": "sqld-0182",
@@ -12639,11 +12639,11 @@
       "options": [
         "SELECT CONCAT('0', '5') FROM DUAL",
         "SELECT TRIM('05') FROM DUAL",
-        "SELECT EXTRACT(MONTH FROM DATE '2022 - 05 - 01') FROM DUAL;",
-        "SELECT SUBSTR(TO_CHAR ('20220504'), 5,2) FROM DUAL"
+        "SELECT EXTRACT(MONTH FROM DATE '2022-05-01') FROM DUAL;",
+        "SELECT SUBSTR(TO_CHAR('20220504'), 5, 2) FROM DUAL"
       ],
       "correctIndex": 2,
-      "explanation": "③번 보기만 5를 반환하고 나머지 보기들은 모두 05를 반환한다."
+      "explanation": "①②④ 는 모두 문자열 '05' 를 돌려준다(CONCAT 으로 '0'+'5', 공백 없는 '05' 를 TRIM, '20220504' 의 5번째부터 2글자). ③ EXTRACT(MONTH …) 는 월을 숫자로 꺼내므로 5 다. 앞의 0 이 붙지 않아 결과가 다르다."
     },
     {
       "_id": "sqld-0425",
