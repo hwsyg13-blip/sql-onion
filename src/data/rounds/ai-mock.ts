@@ -19506,11 +19506,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "options": [
       "4",
       "3",
-      "3,5",
-      "3,4"
+      "3.5",
+      "3.4"
     ],
     "correctIndex": 2,
-    "explanation": "ROUND 함수의 첫 번째 인자값인 3.47을 소수 첫째 자리까지 반올림한다.",
+    "explanation": "ROUND(3.47, 1) 은 소수 첫째 자리까지 남기도록 둘째 자리(7)에서 반올림하므로 3.5 다(③). ④ 3.4 는 버림(TRUNC), ② 3 은 정수로 반올림하지 않고 버린 값, ① 4 는 ROUND(3.47) 처럼 정수로 반올림한 값이다.",
     "chapter": "함수",
     "_source": "sqld-1140",
     "_origId": "sqld-0436",
@@ -19518,8 +19518,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT ROUND(3.47,1)\nAS DATA1 FROM DUAL;"
+        "type": "sql",
+        "code": "SELECT ROUND(3.47, 1) AS DATA1\nFROM   DUAL;"
       }
     ]
   },
@@ -22175,7 +22175,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "NULL"
     ],
     "correctIndex": 2,
-    "explanation": "보기의 SQL문은 COL1, COL2가 각각 10000, 'ABC'인 행만을 조회하는 SQL문으로 1번째 행만 조회된다.",
+    "explanation": "(COL1, COL2) IN ((10000, 'ABC')) 는 두 컬럼이 동시에 10000, 'ABC' 인 행만 고르는 다중 컬럼 조건이다. 표에서 두 값이 모두 맞는 행은 첫 번째 행 하나뿐이라 1건이다(③).",
     "chapter": "DML",
     "_source": "sqld-1140",
     "_origId": "sqld-0548",
@@ -22183,8 +22183,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "SELECT * FROM TEST32 WHERE (COL1,COL2) IN (10000,'ABC'));"
+        "type": "sql",
+        "code": "SELECT *\nFROM   TEST32\nWHERE  (COL1, COL2) IN ((10000, 'ABC'));"
       },
       {
         "type": "image",
@@ -25089,7 +25089,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 759,
-    "title": "다음 빈칸에 들어갈 문장으로 가장 적절한 것은?",
+    "title": "아래 판매 테이블을 결과처럼 바꾸려고 한다. 빈칸에 들어갈 절로 가장 적절한 것은?",
     "options": [
       "PIVOT (판매량 FOR 구분 FOR (Q1, Q2))",
       "PIVOT (판매량 FOR 구분 IN (Q1, Q2))",
@@ -25097,7 +25097,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "UNPIVOT (판매량 FOR 구분 IN (Q1, Q2))"
     ],
     "correctIndex": 3,
-    "explanation": "WIDE -> LONG 데이터로 변환하는 과정이므로 UNPIVOT이 적절하다. UNPIVOT은 IN으로 LONG 데이터로 변환할 대상을 지정한다. ",
+    "explanation": "가로(Q1, Q2 컬럼)로 펼쳐진 값을 세로 행(구분, 판매량)으로 접으므로 UNPIVOT 이다. UNPIVOT 은 FROM 절 뒤에 (값 컬럼 FOR 새 컬럼 IN (접을 컬럼들)) 형식으로 쓴다(④). ①② PIVOT 은 반대로 세로를 가로로 펼칠 때 쓰고, ①③ 은 IN 자리에 FOR 를 써서 문법 오류다.",
     "chapter": "윈도우 함수",
     "_source": "sqld-1140",
     "_origId": "sqld-0662",
@@ -25128,7 +25128,7 @@ export const AI_MOCK: QuizQuestion[] = [
       {
         "type": "sql",
         "caption": "[SQL]",
-        "code": "SELECT (        )\nFROM 판매"
+        "code": "SELECT *\nFROM   판매\n       (                              );"
       },
       {
         "type": "table",
@@ -27387,13 +27387,13 @@ export const AI_MOCK: QuizQuestion[] = [
     "number": 828,
     "title": "다음 결과를 얻기 위한 SQL 문장으로 적절하지 않은 것은?",
     "options": [
-      "SELECT 이름, 성적 FROM (SELECT 성적, DENSE_RANK() OVER(ORDER BY 성적 DESC) AS RN FROM EXAM) WHERE RN BETWEEN 2 AND 3;",
-      "SELECT 이름, 성적 FROM (SELECT 성적, ROW_NUMBER() OVER(ORDER BY 성적 DESC) AS RN FROM EXAM) WHERE RN BETWEEN 2 AND 4;",
+      "SELECT 이름, 성적 FROM (SELECT 이름, 성적, DENSE_RANK() OVER(ORDER BY 성적 DESC) AS RN FROM EXAM) WHERE RN BETWEEN 2 AND 3;",
+      "SELECT 이름, 성적 FROM (SELECT 이름, 성적, ROW_NUMBER() OVER(ORDER BY 성적 DESC) AS RN FROM EXAM) WHERE RN BETWEEN 2 AND 4;",
       "SELECT TOP(3) WITH TIES 이름, 성적 FROM EXAM ORDER BY 성적 DESC;",
       "SELECT 이름, 성적 FROM EXAM ORDER BY 성적 DESC OFFSET 1 ROW FETCH FIRST 3 ROWS ONLY;"
     ],
     "correctIndex": 2,
-    "explanation": "TOP 쿼리는 성적이 높은 순서대로 동순위 포함하여 3명을 출력하므로 홍길동, 박길동, 최길동이 출력된다.",
+    "explanation": "결과는 2~4위(박길동 80, 최길동 80, 김길동 75)다. ① DENSE_RANK 는 98=1, 80·80=2, 75=3 이라 RN 2~3 이 세 명. ② ROW_NUMBER 는 1~5 번호라 RN 2~4 가 같은 세 명. ④ 는 1행을 건너뛰고 3행을 가져와 같은 결과다. ③ TOP(3) WITH TIES 는 위에서 3명(동점 포함)이라 홍길동·박길동·최길동이 나와 결과와 다르다(③).",
     "chapter": "윈도우 함수",
     "_source": "sqld-1140",
     "_origId": "sqld-0759",
