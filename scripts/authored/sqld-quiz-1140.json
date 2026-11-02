@@ -10098,11 +10098,11 @@
         "1,2"
       ],
       "correctIndex": 0,
-      "explanation": "위의 SQL문의 맨 하단의 ROLLBACK TO SV2 명령어를 수행하면 SAVEPOINT SV2 지점까지 변경된 것을 모두 취소한다.",
+      "explanation": "1, 2 를 넣고 SV1 → 2 를 8 로 바꾸고 9 를 넣은 뒤 SV2 (이때 1, 8, 9). 그 뒤 DELETE·INSERT 11·SV3·INSERT 9 는 ROLLBACK TO SV2 로 모두 취소되고 COMMIT 되므로 1, 8, 9 가 남는다(①).",
       "references": [
         {
           "type": "sql",
-          "code": "INSERT INTO Mytest VALUES(1);\nINSERT INTO Mytest VALUES(2);\nSAVEPOINT SV1;\nUPDATE Mytest SET CO1=8 WHERE COL1=2;\nINSERT INTO Mytest VALUES(9);\nSAVEPOINT SV2;\nDELETE Mytest WHERE COL1=8;\nINSERT INTO Mytest VALUES(11);\nSAVEPOINT SV3;\nINSERT INTO Mytest VALUES(9);\nROLLBACK TO SV2;\nCOMMIT;"
+          "code": "INSERT INTO Mytest VALUES(1);\nINSERT INTO Mytest VALUES(2);\nSAVEPOINT SV1;\nUPDATE Mytest SET COL1=8 WHERE COL1=2;\nINSERT INTO Mytest VALUES(9);\nSAVEPOINT SV2;\nDELETE Mytest WHERE COL1=8;\nINSERT INTO Mytest VALUES(11);\nSAVEPOINT SV3;\nINSERT INTO Mytest VALUES(9);\nROLLBACK TO SV2;\nCOMMIT;"
         }
       ]
     },
@@ -10167,16 +10167,16 @@
       "title": "SQL문을 ANSI 표준 SQL문으로 변환한 것으로 올바른 것은?",
       "options": [
         "SELECT * FROM SCOTT.EMP A INNER JOIN SCOTT.DEPT B\nON A.DEPTNO = B.DEPTNO WHERE 1=1\nAND B.DNAME = 'KIM';",
-        "SELECT * FROM SCOTT.EMP A INNER JOIN SCOTT.DEPT B\nON (A.DEPTNO = B.DEPTNO \nAND B.DNAME = 'KIM') WHERE 1=1;",
+        "SELECT * FROM SCOTT.EMP A NATURAL JOIN SCOTT.DEPT B\nON (A.DEPTNO = B.DEPTNO\nAND B.DNAME = 'KIM') WHERE 1=1;",
         "SELECT * FROM SCOTT.EMP A RIGHT OUTER JOIN SCOTT.DEPT B\nON (A.DEPTNO = B.DEPTNO \nAND B.DNAME = 'KIM') WHERE 1=1;",
         "SELECT * FROM SCOTT.EMP A LEFT OUTER JOIN SCOTT.DEPT B\nON (A.DEPTNO = B.DEPTNO \nAND B.DNAME = 'KIM') ;"
       ],
       "correctIndex": 0,
-      "explanation": "조인 조건과 조회 조건이 분리되어야 하므로 조회 조건은 WHERE절로 분리되어야 한다. OUTER JOIN이 아닌 INNER JOIN이므로 INNER JOIN에 조회 조건 분리가 된 ①번이 맞다.",
+      "explanation": "콤마 조인 + WHERE 의 조인 조건은 ANSI 의 INNER JOIN … ON 이고, 나머지 검색 조건은 WHERE 에 두면 된다(①). ② NATURAL JOIN 은 ON 절과 함께 쓸 수 없어 오류가 나고, ③④ 는 OUTER JOIN 이라 짝이 없는 행까지 나와 원래 SQL 과 결과가 다르다.",
       "references": [
         {
           "type": "sql",
-          "code": "SELECT *\nFROM SCOTT.EMP A, SCOTT.DEPT B\nWHERE A.DEPTNO = B.DEPTNO\nAND B.DNMAE ='KIM'"
+          "code": "SELECT *\nFROM SCOTT.EMP A, SCOTT.DEPT B\nWHERE A.DEPTNO = B.DEPTNO\nAND B.DNAME ='KIM'"
         }
       ]
     },
@@ -10306,11 +10306,11 @@
         "어떤 부하 직원보다도 연봉이 높은 상사"
       ],
       "correctIndex": 3,
-      "explanation": "A테이블의 매니저 아이디가 B테이블의 직원 아이디이므로 A가 부하직원, B가 상사라고 볼 수 있다. 그러므로 상단의 SQL문은 어떤 부하직원보다도 연봉이 높은 상사의 데이터를 조회하는 SQL문이라 할 수 있다.",
+      "explanation": "A.MANAGER_ID = B.EMPLOYEE_ID 이므로 A 가 부하 직원, B 가 그 상사다. B.SALARY >= ANY (A.SALARY) 는 상사의 연봉이 부하 직원의 연봉 이상이라는 조건이고, SELECT 하는 것은 B(상사)이므로 \"부하 직원보다 연봉이 높은 상사\" 를 조회한다(④). ①② 는 부하 직원을 조회하는 설명이고, ③ 은 부등호 방향이 반대다.",
       "references": [
         {
           "type": "sql",
-          "code": "SELECT A.* FROM MytestA A, MytestB B WHERE A.MANAGER_ID = B.EMPLOYEE_ID AND B.SALARY >= ANY A.SALARY;"
+          "code": "SELECT B.*\nFROM   MytestA A, MytestB B\nWHERE  A.MANAGER_ID = B.EMPLOYEE_ID\nAND    B.SALARY >= ANY (A.SALARY);"
         },
         {
           "type": "table",
