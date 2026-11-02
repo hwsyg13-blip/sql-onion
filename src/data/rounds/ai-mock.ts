@@ -1,5 +1,5 @@
 // Auto-generated from scripts/authored/ai-mock.json
-// AI 생성 모의고사 풀 (기출 변형) · 1315문항
+// AI 생성 모의고사 풀 (기출 변형) · 1314문항
 // ⚠ 직접 편집 금지. ai-mock.json 수정 후 'node scripts/build-quiz-bank.mjs' 재실행.
 import type { QuizQuestion } from '../quizBank';
 
@@ -3295,26 +3295,6 @@ export const AI_MOCK: QuizQuestion[] = [
         "code": "create unique index 주문_pk on 주문 (주문번호);\ncreate index 주문_ind11 on 주문 (주문자명);\ncreate index 주문_ind12 on 주문 (주문일자, 주문금액);"
       }
     ]
-  },
-  {
-    "id": 10925,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "1과목",
-    "number": 126,
-    "title": "다음 중 정보시스템을 모델링할 때 세 가지 관점에 해당하지 않는 것은?",
-    "options": [
-      "업무가 어떤 데이터와 관련이 있는지 분석",
-      "업무에서 실제로 하는 일은 무엇인지 또는 무엇을 해야 하는지 분석",
-      "업무를 처리할 수 있는 프로그램 구성을 어떻게 해야 하는지 분석",
-      "업무에서 처리하는 일의 방법에 따라 데이터가 어떻게 영향을 받는지 분석"
-    ],
-    "correctIndex": 2,
-    "explanation": "모델링을 할 때의 세 가지 관점은 데이터에 대한 관점, 프로세스에 대한 관점, 그리고 데이터와 프로세스가 서로 연관성이 표현되는 상관 관점이다",
-    "chapter": "데이터 모델 개념",
-    "_source": "cbt-mock",
-    "_origId": "cbt-081",
-    "_cbtOrigNo": 81
   },
   {
     "id": 10926,
@@ -11390,18 +11370,12 @@ export const AI_MOCK: QuizQuestion[] = [
       "업무가 어떤 데이터와 관련이 있는지 분석"
     ],
     "correctIndex": 1,
-    "explanation": "모델링을 할 때의 세 가지 관점은 데이터에 대한 관점, 프로세스에 대한 관점, 그리고 데이터와 프로세스가 서로 연관성이 표현되는 상관 관점이다.",
+    "explanation": "모델링의 세 가지 관점은 데이터 관점(업무가 어떤 데이터와 관련 있는지, ④), 프로세스 관점(업무에서 실제로 하는 일이 무엇인지, ③), 상관 관점(일하는 방법에 따라 데이터가 어떻게 영향을 받는지, ①)이다. ② 프로그램 구성은 모델링 관점이 아니라 개발 설계의 영역이다.",
     "chapter": "데이터 모델 개념",
     "_source": "sqld-1140",
     "_origId": "sqld-0142",
     "_category": "데이터베이스 개념",
-    "_correctRate": 10,
-    "references": [
-      {
-        "type": "text",
-        "content": "모델링을 할 때의 세 가지 관점은 데이터에 대한 관점, 프로세스에 대한 관점, 그리고 데이터와 프로세스가 서로 연관성이 표현되는 상관 관점이다."
-      }
-    ]
+    "_correctRate": 10
   },
   {
     "id": 11159,
