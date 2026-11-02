@@ -1500,7 +1500,7 @@ export const ROUND_45: QuizQuestion[] = [
       "KING, JOHN"
     ],
     "correctIndex": 1,
-    "explanation": "START WITH C1=2(JOHN)에서 C1 = PRIOR C2 방향(역방향)으로 거슬러 올라가면 JOHN → KING 경로가 생성된다. WHERE C1<>2에 의해 JOHN이 제외되어 최종 결과는 KING만 남는다.",
+    "explanation": "문법 오류가 아니다. Oracle 은 START WITH 와 CONNECT BY 의 순서를 바꿔 써도 된다. 실행 순서대로 보면 ① START WITH C1 = 2 → JOHN 에서 시작한다. ② CONNECT BY C1 = PRIOR C2 → 방금 읽은 JOHN 의 C2(1)를 C1 으로 가진 행, 즉 KING 으로 올라간다(역방향). KING 의 C2 는 NULL 이라 여기서 끝난다. ③ 계층을 다 만든 뒤 WHERE C1 <> 2 로 JOHN 을 빼면 KING 만 남는다(②). ① JOHN 은 WHERE 에서 빠지고, ③ SCOTT 은 JOHN 의 자식이라 위로 올라가는 전개에는 나오지 않으며, ④ 는 WHERE 를 적용하지 않은 결과다.",
     "_source": "authored",
     "references": [
       {
