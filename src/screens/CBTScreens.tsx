@@ -365,7 +365,7 @@ export const CBTExam = ({examId = "round-60", onFinish, onNavigate, onExit, mock
                 </div>
                 <div style={{fontSize:13.5,color:"var(--fg-2)",lineHeight:1.7}}>
                   <strong style={{color:"var(--point-600)",marginRight:6}}>해설</strong>
-                  {q.explanation || "이 문항에는 아직 해설이 등록되지 않았습니다."}
+                  {q.explanation || "이 문제는 아직 해설이 없어요. 오류 제보로 알려 주시면 먼저 채워 둘게요."}
                 </div>
               </div>
             )}
@@ -475,10 +475,10 @@ export const CBTExam = ({examId = "round-60", onFinish, onNavigate, onExit, mock
                 </div>
                 <div style={{fontSize:12.5,color:"var(--fg-3)",marginTop:4,lineHeight:1.55}}>
                   {grading.pass
-                    ? "60점 이상 · 과목별 40% 이상 달성. 오답 해설로 약점 확인."
+                    ? "60점 이상, 과목별 40% 이상을 모두 넘었어요. 틀린 문제의 해설로 약점을 확인해 보세요."
                     : grading.fail40
-                    ? "60점 이상이어도 과목별 40% 미만이면 과락. 취약 과목 재학습 필요."
-                    : "60점까지 끌어올리면 합격. 해설로 약점 좁히기."}
+                    ? "총점이 60점을 넘어도 한 과목이라도 40% 미만이면 과락이에요. 약한 과목을 다시 공부해 보세요."
+                    : "60점까지 조금만 더 올리면 합격이에요. 해설을 보며 약점을 좁혀 보세요."}
                 </div>
               </div>
             </div>
