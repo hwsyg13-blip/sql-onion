@@ -1,5 +1,5 @@
 // Auto-generated from scripts/authored/ai-mock.json
-// AI 생성 모의고사 풀 (기출 변형) · 1312문항
+// AI 생성 모의고사 풀 (기출 변형) · 1311문항
 // ⚠ 직접 편집 금지. ai-mock.json 수정 후 'node scripts/build-quiz-bank.mjs' 재실행.
 import type { QuizQuestion } from '../quizBank';
 
@@ -2336,32 +2336,6 @@ export const AI_MOCK: QuizQuestion[] = [
       {
         "type": "sql",
         "code": "SELECT ENAME, SAL, NTILE(4) OVER (ORDER BY SAL DESC) as DATA FROM EMP ;"
-      }
-    ]
-  },
-  {
-    "id": 10898,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 99,
-    "title": "학생(STUDENT) 테이블에 영문학과 학생 50명, 법학과 학생 100명, 수학과 학생 50명의 정보가 저장되어 있을 때, 다음 SQL문의 실행 결과 튜플 수는 각각 얼마인가? (단, DEPT필드는 학과명, NAME필드는 이름을 의미한다)",
-    "options": [
-      "ㄱ : 3, ㄴ : 3, ㄷ : 1",
-      "ㄱ : 200, ㄴ : 3, ㄷ : 1",
-      "ㄱ : 200, ㄴ : 3, ㄷ : 50",
-      "ㄱ : 200, ㄴ : 200, ㄷ : 50"
-    ],
-    "correctIndex": 2,
-    "explanation": "ㄱ은 STUDENT 테이블을 조건없이 조회하는 것이므로 200=50+100+50이 된다. 그리고 ㄴ은 \"DISTINCT\"를 사용했으므로 학과명이 중복되면 한 번만 출력한다. 문제에서는 영문학과, 법학과, 수학과가 있으므로 3이 되고 ㄷ은 WHERE절에 \"영문학과\"만 조회하므로 50이 된다.",
-    "chapter": "WHERE",
-    "_source": "cbt-mock",
-    "_origId": "cbt-052",
-    "_cbtOrigNo": 52,
-    "references": [
-      {
-        "type": "sql",
-        "code": "ㄱ : SELECT DEPT FROM STUDENT; ㄴ : SELECT DISTINCT DEPT FROM STUDENT; ㄷ : SELECT NAME FROM STUDENT WHERE DEPT='영문학과';"
       }
     ]
   },
@@ -13590,7 +13564,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "text",
-        "content": "ㄱ : SELECT DEPT FROM SUDENT;\nㄴ : SELECT DISTINCT DEPT\n       FROM STUDENT;\nㄷ : SELECT NAME FROM STUDENT \n       WHERE DEPT = '영문학과';"
+        "content": "ㄱ : SELECT DEPT FROM STUDENT;\nㄴ : SELECT DISTINCT DEPT\n       FROM STUDENT;\nㄷ : SELECT NAME FROM STUDENT \n       WHERE DEPT = '영문학과';"
       }
     ]
   },
@@ -13865,7 +13839,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "1,2"
     ],
     "correctIndex": 0,
-    "explanation": "위의 SQL문 면 하단에서 ROLLBACK TO SV2 명령어를 수행하면, SAVEPOINT SV2 지점까지 변경된 것을 모두 취소한다.",
+    "explanation": "2, 2 를 넣고 SV1 → 두 행을 7 로 바꾸고 9 를 넣은 뒤 SV2 (이때 7, 7, 9). 그 뒤 DELETE·INSERT 11·SV3·INSERT 9 를 했지만 ROLLBACK TO SV2 로 SV2 이후 변경이 모두 취소되고 COMMIT 되므로 7, 7, 9 가 남는다(①).",
     "chapter": "DML",
     "_source": "sqld-1140",
     "_origId": "sqld-0275",
@@ -13874,7 +13848,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "sql",
-        "code": "Create table Mytest(COL1 number(10));\nINSERT INTO Mytest VALUES(2);\nINSERT INTO Mytest VALUES(2);\nSAVEPOINT SV1;\nUPDATE Mytest SET COL1=7 WHERE COL1=2;\nINSERT INTO Mytest VALUES(9);\nSAVEPOINT SV2;\nDELETE Mytest WHERE CO1=7;\nINSERT INTO Mytest VALUES(11);\nSAVEPOINT SV3;\nINSERT INTO Mytest VALUES(20);\nROLLBACK TO SV2;\nCOMMIT;\nSELECT * FROM mytest;"
+        "code": "Create table Mytest(COL1 number(10));\nINSERT INTO Mytest VALUES(2);\nINSERT INTO Mytest VALUES(2);\nSAVEPOINT SV1;\nUPDATE Mytest SET COL1=7 WHERE COL1=2;\nINSERT INTO Mytest VALUES(9);\nSAVEPOINT SV2;\nDELETE Mytest WHERE COL1=7;\nINSERT INTO Mytest VALUES(11);\nSAVEPOINT SV3;\nINSERT INTO Mytest VALUES(20);\nROLLBACK TO SV2;\nCOMMIT;\nSELECT * FROM mytest;"
       }
     ]
   },
@@ -14029,7 +14003,7 @@ export const AI_MOCK: QuizQuestion[] = [
           ],
           [
             "1006",
-            "사마위",
+            "사마의",
             "2022-01-01",
             "1004"
           ],
@@ -14212,13 +14186,13 @@ export const AI_MOCK: QuizQuestion[] = [
     "number": 470,
     "title": "주어진 테이블에서 아래의 SQL문과 다른 값을 반환하는 SQL문을 고르시오.",
     "options": [
-      "SELECT * FROM Mytest WHERE\n(COL = 'x' or COL1 = 'KK') and\n(COL2 = 'y' or COL2 ='BB');",
+      "SELECT * FROM Mytest WHERE\n(COL1 = 'x' or COL1 = 'KK') and\n(COL2 = 'y' or COL2 ='BB');",
       "SELECT * FROM Mytest WHERE\n(COL1 = 'x' and COL2 = 'KK') or\n(COL1 = 'y' and COL2 ='BB');",
       "SELECT * FROM Mytest WHERE\n(COL1 = 'x' and COL2 = 'y') or\n(COL1 = 'KK' and COL2 ='BB');",
       "SELECT * FROM Mytest WHERE\nNOT (COL1, COL2) in (('A', 'B'), ('x', 'KK'), ('a','b'),('1','2'), ('y','BB'));"
     ],
     "correctIndex": 1,
-    "explanation": "위의 SQL문은 COL1과 COL2값으로 각각 (x,y),(KK,BB)를 갖는 행들이 반환되지만 ②번 보기는 COL1 과 COL2 값으로 각각 (x,KK),(y,BB)값을 갖는 행들이 반환된다.",
+    "explanation": "기준 SQL 은 (COL1, COL2) 가 (x, y) 또는 (KK, BB) 인 두 행을 돌려준다. ① 은 COL1 이 x·KK 중 하나이고 COL2 가 y·BB 중 하나인 행이라 같은 두 행, ③ 은 두 쌍을 AND·OR 로 그대로 풀어 쓴 것, ④ 는 나머지 다섯 쌍을 NOT IN 으로 뺀 것이라 모두 같다. ② 는 (x, KK), (y, BB) 쌍을 찾으므로 다른 행이 나온다(②).",
     "chapter": "DML",
     "_source": "sqld-1140",
     "_origId": "sqld-0283",
@@ -14227,7 +14201,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "sql",
-        "code": "SELECT * FROM Mytest WHERE (COL1, COL2) IN (('x','y'),('kk','BB'))"
+        "code": "SELECT * FROM Mytest WHERE (COL1, COL2) IN (('x','y'),('KK','BB'))"
       },
       {
         "type": "table",
