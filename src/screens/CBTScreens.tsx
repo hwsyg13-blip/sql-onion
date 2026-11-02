@@ -5,7 +5,7 @@ import { QUIZ_BANK, EXAM_SETS } from '../data/quizBank';
 import { QuestionBody } from './MockScreens';
 import { renderInlineMd, OptionReferences } from '../components/QuestionReferences';
 import { recordExamComplete, recordQuizAttempt } from '../lib/progress';
-import { trackEvent } from '../lib/analytics';
+import { trackEvent, trackAnswer } from '../lib/analytics';
 
 // CBT — Exam list, CBT exam screen (sticky OMR), and result.
 // Also Mock Exam full mode (50-item with timer) reusing pieces.
@@ -187,6 +187,7 @@ export const CBTExam = ({examId = "round-60", onFinish, onNavigate, onExit, mock
           number: q.number,
           context: mockMode ? 'mock' : 'exam',
         });
+        trackAnswer(q, chosen, isCorrect, mockMode ? 'mock' : 'exam');
       });
       const score = Math.round((correctCount / questions.length) * 100);
       if (!mockMode && examId) {

@@ -64,5 +64,16 @@ for (const [code, list] of Object.entries(byCode)) {
   for (const x of list.slice(0, 30)) console.log(`  ${x.id}: ${x.msg}`);
   if (list.length > 30) console.log(`  … 외 ${list.length - 30}건`);
 }
+// 정답률 낮은 문항 (scripts/low-accuracy-report.mjs 결과) — 점검 기록이 없으면 경고만 (실패 아님)
+try {
+  const low = JSON.parse(readFileSync('scripts/audit/low-accuracy.json', 'utf8'));
+  let rv = {}; try { rv = JSON.parse(readFileSync('scripts/audit/low-accuracy-reviewed.json', 'utf8')); } catch {}
+  const pending = (low.items || []).filter(x => !rv[x.qid]);
+  if (pending.length) {
+    console.log(`\n⚠ LOW_ACCURACY ${pending.length}건 — 실제 사용자 정답률 ${low.threshold}% 미만, 아직 점검 전 (${low.generatedAt} 집계)`);
+    for (const x of pending.slice(0, 30)) console.log(`  ${x.qid}: 정답률 ${x.accuracy}% (${x.attempts}건), 정답 ${x.answer} / 최다 선택 ${x.topChoice ?? '-'}`);
+    console.log('  → 직접 풀어 보고 고치거나, scripts/audit/low-accuracy-reviewed.json 에 점검 사유 기록');
+  }
+} catch {}
 if (known.length) console.log(`ℹ 검토 후 보류 ${known.length}건: ${known.map(x => `${x.id} (${KNOWN[`${x.id}|${x.code}`]})`).join('; ')}`);
 process.exitCode = open.length ? 1 : 0;
