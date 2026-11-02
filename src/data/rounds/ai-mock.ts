@@ -21495,7 +21495,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "null"
     ],
     "correctIndex": 2,
-    "explanation": "COL1 칼럼으로 GROUP BY를 할 경우 행 수가 2건 보다 많은 것은 4,5,6행이다.",
+    "explanation": "COL1 으로 묶으면 조조 1, 유비 2, 관우 3, 여포 1, 초선 1 행이다. COUNT(*) > 2 를 만족하는 그룹은 관우 하나뿐이고, SELECT 하는 값은 그 그룹의 행 수 3 이다(③).",
     "chapter": "그룹 함수",
     "_source": "sqld-1140",
     "_origId": "sqld-0512",
@@ -21849,7 +21849,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "DEPTNO, JOB"
     ],
     "correctIndex": 1,
-    "explanation": "집계결과는 DEPTNO별 합계, JOB별 합계, DEPTNO 및 JOB별 합계, 전체합계가 조회되고 Rollup이 와야 한다.",
+    "explanation": "결과에는 (DEPTNO, JOB) 별 합계, DEPTNO 별 소계(10: 3450, 20: 9900), 전체 합계(13350)가 있고 JOB 별 합계는 없다. DEPTNO → (DEPTNO, JOB) 순서로 계층 소계를 만드는 ROLLUP(DEPTNO, JOB) 이다(②). CUBE 라면 JOB 별 합계(CLERK 3200 등)가 더 나오고, GROUPING SETS(DEPTNO, JOB) 는 상세 행과 전체 합계가 없으며, 일반 GROUP BY 는 소계가 없다.",
     "chapter": "그룹 함수",
     "_source": "sqld-1140",
     "_origId": "sqld-0531",
@@ -21913,7 +21913,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "ISNULL"
     ],
     "correctIndex": 1,
-    "explanation": "위의 SQL문에서 NVL2 함수의 첫 번째 인자값이 NULL이기 때문에 0.2를 반환한다. 그리고 10+20*0.2가 되어 14를 반환한다.",
+    "explanation": "10 + 20 × x = 14 가 되려면 x = 0.2 여야 한다. NVL2(값, A, B) 는 값이 NULL 이 아니면 A, NULL 이면 B 를 돌려주므로 NVL2(NULL, 0.1, 0.2) = 0.2 → 10 + 4 = 14(②). COALESCE(NULL, 0.1, 0.2) 와 NVL 은 0.1 을 돌려줘 12 가 되고, ISNULL 은 SQL Server 함수다.",
     "chapter": "함수",
     "_source": "sqld-1140",
     "_origId": "sqld-0534",
@@ -21922,7 +21922,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "sql",
-        "code": "SELECT 10 + 20 * ((      )NULL, 0.1, 0.2))\nFROM DUAL;\n결과 : 14"
+        "code": "SELECT 10 + 20 * (          )(NULL, 0.1, 0.2) AS 결과\nFROM   DUAL;\n-- 결과 : 14"
       }
     ]
   },
@@ -22019,7 +22019,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "sql",
-        "code": "SELECT 분류코드\nAVG(상품가격) AS 상품가격,\nCOUNT(*) OVER(ORDER BY AVG(상품가격)\nRANGE BETWEEN 10000 PRECEDING AND 10000 FOLLOWING) AS CNT\nFROM 상품\nGROUP BY 분류코드;"
+        "code": "SELECT 분류코드,\nAVG(상품가격) AS 상품가격,\nCOUNT(*) OVER(ORDER BY AVG(상품가격)\nRANGE BETWEEN 10000 PRECEDING AND 10000 FOLLOWING) AS CNT\nFROM 상품\nGROUP BY 분류코드;"
       }
     ]
   },
@@ -22123,13 +22123,13 @@ export const AI_MOCK: QuizQuestion[] = [
     "number": 680,
     "title": "다음 중 TEST 사용자가 아래의 작업을 수행할 수 있도록 권한을 부여하는 DCL로 올바른 것은?",
     "options": [
-      "GRANT SELECT, UPDATE ON A_User, TB_A TO TEST;",
-      "REVOKE UPDATE ON A_User, TB_A TO TEST;",
-      "REVOKE SELECT ON A_User, TB_A FROM TEST;",
+      "GRANT SELECT, UPDATE ON A_User.TB_A TO TEST;",
+      "REVOKE UPDATE ON A_User.TB_A TO TEST;",
+      "REVOKE SELECT ON A_User.TB_A FROM TEST;",
       "GRANT UPDATE TO TEST;"
     ],
     "correctIndex": 0,
-    "explanation": "GRANT privileges ON object TO user;",
+    "explanation": "UPDATE … WHERE col2 = 100 을 하려면 값을 바꾸는 UPDATE 권한과, WHERE 조건으로 행을 찾기 위한 SELECT 권한이 필요하다. 권한을 주는 문법은 GRANT 권한 ON 객체 TO 사용자 이므로 ①. ②③ 은 권한을 회수하는 REVOKE 이고(② 는 FROM 이 아니라 TO 라 문법도 틀림), ④ 는 ON 객체가 없어 시스템 권한 문법이 된다.",
     "chapter": "DCL·TCL",
     "_source": "sqld-1140",
     "_origId": "sqld-0549",
@@ -22201,11 +22201,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "options": [
       "ORDER BY 3",
       "ORDER BY COUNT(*)",
-      "ORDER BY CNT DESC",
+      "ORDER BY ROWCNT DESC",
       "ORDER BY JOB"
     ],
     "correctIndex": 0,
-    "explanation": "지문의 SQL문은 SELECT구에 칼럼(JOB,ROWCNT)이 2개 있다. ①번은 칼럼의 수가 2개뿐인데 3번째 칼럼이 존재하지 않기 때문에 사용할 수 없다.",
+    "explanation": "ORDER BY 에는 SELECT 목록의 컬럼·별칭(ROWCNT)·순번, GROUP BY 컬럼, 집계 함수를 쓸 수 있다. SELECT 목록은 JOB, ROWCNT 두 개뿐이라 순번 3 은 없어 오류다(①).",
     "chapter": "그룹 함수",
     "_source": "sqld-1140",
     "_origId": "sqld-0554",
@@ -22249,11 +22249,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "options": [
       "GROUPING SETS(a.studentno, (b.grade, a.studentno));",
       "GROUPING SETS(b.grade, (b.grade, a.studentno));",
-      "GROUPING SETS(b.grade, (a.studentno, b.grade));",
+      "ROLLUP(a.studentno, b.grade);",
       "GROUPING SETS(b.grade, (a.studentno));"
     ],
     "correctIndex": 1,
-    "explanation": "결괏값을 보면 1.b.Grade, a.StudentNo에 대한 집계,\n2.b.grade에 대한 집계가 있고 전체 집계는 없다.",
+    "explanation": "결과에는 (grade, studentno) 별 합계와 grade 별 합계만 있고 전체 합계는 없다. 그래서 GROUPING SETS(b.grade, (b.grade, a.studentno)) 다(②). ① 은 studentno 별 소계, ③ ROLLUP 은 studentno 별 소계와 전체 합계, ④ 는 studentno 별 합계가 나와 결과와 다르다. 괄호 안 컬럼 순서는 묶음에 영향을 주지 않는다.",
     "chapter": "그룹 함수",
     "_source": "sqld-1140",
     "_origId": "sqld-0556",
