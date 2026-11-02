@@ -1,5 +1,5 @@
 // Auto-generated from scripts/authored/ai-mock.json
-// AI 생성 모의고사 풀 (기출 변형) · 1311문항
+// AI 생성 모의고사 풀 (기출 변형) · 1312문항
 // ⚠ 직접 편집 금지. ai-mock.json 수정 후 'node scripts/build-quiz-bank.mjs' 재실행.
 import type { QuizQuestion } from '../quizBank';
 
@@ -29517,8 +29517,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "<SQL>\n(SELECT ID, NAME FROM A\nUNION\nSELECT ID, NAME FROM B)\nMINUS\n(SELECT ID, NAME FROM A\nINTERSECT\nSELECT ID, NAME FROM B);"
+        "type": "sql",
+        "code": "(SELECT ID, NAME FROM A\nUNION\nSELECT ID, NAME FROM B)\nMINUS\n(SELECT ID, NAME FROM A\nINTERSECT\nSELECT ID, NAME FROM B);"
       },
       {
         "type": "table",
@@ -29592,8 +29592,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "<SQL>\n-- 1단계\nDELETE FROM EMP WHERE DEPT = 'SALES';\nSAVEPOINT A;\n-- 2단계\nUPDATE EMP SET SALARY = SALARY + 300 WHERE DEPT = 'IT';\nSAVEPOINT B;\n-- 3단계\nINSERT INTO EMP VALUES (999, 'KIM', 'HR', 5000);\nSAVEPOINT C;\n-- 4단계\nDELETE FROM EMP WHERE DEPT = 'HR';\n-- 5단계\nROLLBACK TO B;\n-- 6단계\nCOMMIT;"
+        "type": "sql",
+        "code": "-- 1단계\nDELETE FROM EMP WHERE DEPT = 'SALES';\nSAVEPOINT A;\n-- 2단계\nUPDATE EMP SET SALARY = SALARY + 300 WHERE DEPT = 'IT';\nSAVEPOINT B;\n-- 3단계\nINSERT INTO EMP VALUES (999, 'KIM', 'HR', 5000);\nSAVEPOINT C;\n-- 4단계\nDELETE FROM EMP WHERE DEPT = 'HR';\n-- 5단계\nROLLBACK TO B;\n-- 6단계\nCOMMIT;"
       }
     ]
   },
@@ -30189,8 +30189,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "<SQL>\n1) SELECT COL1 / COL2 FROM TAB WHERE COL1 = 0 AND COL2 = 300;\n2) SELECT COL1 / COL2 FROM TAB WHERE COL1 = 300 AND COL2 = 0;\n3) SELECT COL1 / COL2 FROM TAB WHERE COL1 = 100 AND COL2 IS NULL;"
+        "type": "sql",
+        "code": "1) SELECT COL1 / COL2 FROM TAB WHERE COL1 = 0 AND COL2 = 300;\n2) SELECT COL1 / COL2 FROM TAB WHERE COL1 = 300 AND COL2 = 0;\n3) SELECT COL1 / COL2 FROM TAB WHERE COL1 = 100 AND COL2 IS NULL;"
       },
       {
         "type": "table",
@@ -30238,8 +30238,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10,
     "references": [
       {
-        "type": "text",
-        "content": "<SQL>\n-- 고객 테이블 생성\nCREATE TABLE CUSTOMER (\n  CUST_ID    NUMBER PRIMARY KEY,   -- 기본 키\n  NAME       VARCHAR2(50),\n  EMAIL      VARCHAR2(100),\n  PHONE      VARCHAR2(20)\n);\n-- 유니크 인덱스 생성\nCREATE UNIQUE INDEX UQ_CUSTOMER_EMAIL_PHONE  ON CUSTOMER (EMAIL, PHONE);"
+        "type": "sql",
+        "code": "-- 고객 테이블 생성\nCREATE TABLE CUSTOMER (\n  CUST_ID    NUMBER PRIMARY KEY,   -- 기본 키\n  NAME       VARCHAR2(50),\n  EMAIL      VARCHAR2(100),\n  PHONE      VARCHAR2(20)\n);\n-- 유니크 인덱스 생성\nCREATE UNIQUE INDEX UQ_CUSTOMER_EMAIL_PHONE  ON CUSTOMER (EMAIL, PHONE);"
       }
     ]
   },
@@ -30308,7 +30308,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "SELECT NAME\n  FROM STUDENT\n WHERE GRADE IN (\n    SELECT MIN(HEIGHT) FROM STUDENT GROUP BY GRADE\n );"
     ],
     "correctIndex": 2,
-    "explanation": "① ❌ 전체 학생 중 가장 키 작은 학생만 1명 출력\n② ❌ 전체 기준에서 키가 가장 작은 학생(들)만 출력 (GRADE별 아님)\n✅ ③ PARTITION BY GRADE로 학년별 그룹을 나누고, ORDER BY HEIGHT로 키 오름차순 정렬 → 각 학년에서 키 가장 작은 학생을 ROW_NUMBER = 1로 부여\n④ ❌ GRADE IN (...)에 MIN(HEIGHT)만 SELECT → 컬럼 혼동\r",
+    "explanation": "학년별로 키가 가장 작은 학생은 1학년 LEE(158), 2학년 JUNG(168)이다. ③ 은 PARTITION BY GRADE 로 학년마다 키 순 번호를 매겨 1번만 남기므로 LEE, JUNG 이 나온다. ① ② 는 학년 구분 없이 전체에서 가장 작은 LEE 만, ④ 는 GRADE 를 키 값과 비교해 아무 행도 나오지 않는다.",
     "chapter": "윈도우 함수",
     "_source": "sqld-1140",
     "_origId": "sqld-0869",
@@ -30341,7 +30341,7 @@ export const AI_MOCK: QuizQuestion[] = [
             "103",
             "PARK",
             "1",
-            "158"
+            "159"
           ],
           [
             "104",
@@ -30382,7 +30382,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "sql",
-        "code": "SELECT EMP_NAME,\n       LPAD(' ', LEVEL * 2) || EMP_NAME AS INDENTED_NAME,\n       SYS_CONNECT_BY_PATH(EMP_NAME, '/') AS PATH\n  FROM EMPLOYEE\n WHERE ________      -- (빈칸 ①)\nCONNECT BY ________  -- (빈칸 ②)\n ORDER SIBLINGS BY EMP_NAME;"
+        "code": "SELECT EMP_NAME,\n       LPAD(' ', LEVEL * 2) || EMP_NAME AS INDENTED_NAME,\n       SYS_CONNECT_BY_PATH(EMP_NAME, '/') AS PATH\n  FROM EMPLOYEE\nSTART WITH ________  -- (빈칸 ①)\nCONNECT BY ________  -- (빈칸 ②)\n ORDER SIBLINGS BY EMP_NAME;"
       },
       {
         "type": "table",
@@ -30560,7 +30560,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "text",
-        "content": "기존 그림 기준으로 A에 (2, DELTA)가 추가된다."
+        "content": "아래 A 테이블에 (2, DELTA) 행이 하나 더 추가된다."
       },
       {
         "type": "table",
@@ -37825,6 +37825,76 @@ export const AI_MOCK: QuizQuestion[] = [
         "src": "/sqld-images/j1115-1.png",
         "alt": "Sales ERD",
         "caption": "Sales ERD"
+      }
+    ]
+  },
+  {
+    "id": 11950,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 1151,
+    "title": "A.ID에 중복값 2가 한 건 더 추가되고 B.ID=2가 1건 존재할 때 INNER JOIN 결과에 추가되는 행 수는?",
+    "options": [
+      "2",
+      "3",
+      "0",
+      "1"
+    ],
+    "correctIndex": 3,
+    "explanation": "A의 ID=2가 2건, B의 ID=2가 1건이면 해당 값으로 2건이 나오며 기존 1건 대비 1건 증가한다.",
+    "chapter": "조인",
+    "_source": "sqld-1140",
+    "_origId": "sqld-1163",
+    "_category": "JOIN",
+    "references": [
+      {
+        "type": "text",
+        "content": "기존 그림 기준으로 A에 (2, DELTA)가 추가된다."
+      },
+      {
+        "type": "table",
+        "caption": "JOIN Basic Tables — Table A",
+        "headers": [
+          "ID",
+          "NAME"
+        ],
+        "rows": [
+          [
+            "1",
+            "ALPHA"
+          ],
+          [
+            "2",
+            "BETA"
+          ],
+          [
+            "3",
+            "GAMMA"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "JOIN Basic Tables — Table B",
+        "headers": [
+          "ID",
+          "VAL"
+        ],
+        "rows": [
+          [
+            "2",
+            "X"
+          ],
+          [
+            "3",
+            "Y"
+          ],
+          [
+            "4",
+            "Z"
+          ]
+        ]
       }
     ]
   },
