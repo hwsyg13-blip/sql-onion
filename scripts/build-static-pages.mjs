@@ -290,6 +290,23 @@ function buildExamIndexPage() {
     <h1>SQLD 회차별 기출 복원문제</h1>
     <p class="lead">제${firstRound.round}회(${firstRound.date.ko})부터 제${lastRound.round}회(${lastRound.date.ko})까지 ${rounds.length}개 회차, 총 ${totalQuestions}문항.</p>
     <a class="cta" href="/">랜덤 문제 풀이 시작하기 →</a>
+    <h2>어떤 회차부터 풀까</h2>
+    <table>
+      <thead><tr><th>구분</th><th>회차</th><th>특징</th></tr></thead>
+      <tbody>
+        <tr><td>현행 출제기준</td><td>제52회(2024년 3월) ~ 최신</td><td>2024년 개편 뒤 시험. 객관식 50문항(1과목 10 · 2과목 40). 시험이 가까우면 여기부터 푼다.</td></tr>
+        <tr><td>개편 전</td><td>제45회 ~ 제51회 (2022~2023년)</td><td>지금은 출제 범위에서 빠진 SQL 최적화(조인 수행 원리·인덱스) 문제가 일부 섞여 있다. 개념을 넓게 복습할 때 쓴다.</td></tr>
+      </tbody>
+    </table>
+
+    <h2>이렇게 풀면 좋다</h2>
+    <ol>
+      <li><strong>한 회차를 90분 타이머로 끊지 않고 푼다.</strong> 실제 시험처럼 시간 배분(1과목 20분 · 2과목 70분)을 연습한다.</li>
+      <li><strong>제출 뒤 과목별 점수부터 본다.</strong> 1과목 10문항 중 4문항 미만이면 총점과 관계없이 과락이다.</li>
+      <li><strong>틀린 문항은 해설을 읽고 해당 <a href="/theory/">이론 챕터</a>로 돌아간다.</strong> 같은 유형이 다음 회차에 숫자만 바뀌어 다시 나온다.</li>
+      <li><strong>SQL 결과를 묻는 문제는 종이에 표를 그려 행을 직접 센다.</strong> 조인·GROUP BY·윈도우 함수는 눈으로만 풀면 실수가 잦다.</li>
+    </ol>
+
     <h2>회차별 문제집 (${rounds.length}개)</h2>
     <ul class="chapters">${items}</ul>
 ` + tail;
