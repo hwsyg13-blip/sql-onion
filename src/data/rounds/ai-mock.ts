@@ -1,5 +1,5 @@
 // Auto-generated from scripts/authored/ai-mock.json
-// AI 생성 모의고사 풀 (기출 변형) · 1185문항
+// AI 생성 모의고사 풀 (기출 변형) · 1186문항
 // ⚠ 직접 편집 금지. ai-mock.json 수정 후 'node scripts/build-quiz-bank.mjs' 재실행.
 import type { QuizQuestion } from '../quizBank';
 
@@ -32964,7 +32964,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "모든 사용자 권한을 회수한다."
     ],
     "correctIndex": 0,
-    "explanation": "GRANT는 객체 권한 부여에 사용된다.",
+    "explanation": "GRANT 권한 ON 객체 TO 사용자 는 사용자에게 객체 권한을 주는 DCL 이다. GRANT SELECT, INSERT ON emp TO user1 은 user1 에게 emp 테이블의 조회(SELECT)와 입력(INSERT) 권한을 함께 준다. 권한 회수는 REVOKE, 구조 변경은 ALTER 이다.",
     "chapter": "DCL·TCL",
     "_source": "sqld-1140",
     "_origId": "sqld-0962",
@@ -32984,7 +32984,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "user1 계정이 잠긴다."
     ],
     "correctIndex": 2,
-    "explanation": "부여된 권한 일부만 선택적으로 회수할 수 있다.",
+    "explanation": "REVOKE 는 지정한 권한만 회수한다. REVOKE INSERT ON emp FROM user1 은 user1 의 INSERT 권한만 회수하고, 이미 받은 SELECT 권한은 그대로 남는다. 테이블이 삭제되거나 계정이 잠기지 않는다.",
     "chapter": "DCL·TCL",
     "_source": "sqld-1140",
     "_origId": "sqld-0963",
@@ -33004,7 +33004,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "트랜잭션이 자동 커밋되지 않는다."
     ],
     "correctIndex": 0,
-    "explanation": "전파 가능한 객체 권한이다.",
+    "explanation": "WITH GRANT OPTION 으로 객체 권한을 받은 사용자는 그 권한을 다른 사용자에게 다시 부여할 수 있다. 권한은 언제든 REVOKE 로 회수할 수 있으며(오라클은 이 경우 다시 부여된 권한도 함께 회수), DDL 이나 트랜잭션과는 관계없다.",
     "chapter": "DCL·TCL",
     "_source": "sqld-1140",
     "_origId": "sqld-0964",
@@ -33545,10 +33545,10 @@ export const AI_MOCK: QuizQuestion[] = [
       "모든 속성이 후보키 전체에 완전 함수 종속된다.",
       "반복 그룹이 전혀 없다.",
       "이행 종속만 존재한다.",
-      "복합키의 일부인 주문번호와 상품번호에만 종속되는 속성이 함께 존재한다."
+      "복합키(주문번호+상품번호)의 일부에만 종속되는 속성(고객명·고객등급은 주문번호에, 상품명은 상품번호에)이 함께 존재한다."
     ],
     "correctIndex": 3,
-    "explanation": "부분 함수 종속이 있으면 2NF를 위반한다.",
+    "explanation": "기본키가 주문번호+상품번호인데 고객명·고객등급은 주문번호만으로, 상품명은 상품번호만으로 결정된다. 이렇게 복합키의 일부에만 종속되는 부분 함수 종속이 있으면 2NF 위반이다. 주문·상품 정보를 별도 테이블로 분리하면 해소된다.",
     "chapter": "정규화",
     "_source": "sqld-1140",
     "_origId": "sqld-0991",
@@ -33815,7 +33815,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "DROP TABLE temp_emp;"
     ],
     "correctIndex": 3,
-    "explanation": "DROP은 객체 정의와 데이터를 함께 제거한다.",
+    "explanation": "DROP TABLE 은 테이블 객체 자체(구조와 데이터)를 제거하는 DDL 이다. ALTER TABLE ... ADD 는 컬럼을 추가해 구조를 바꾸는 DDL, COMMIT 은 TCL, GRANT 는 DCL 이다.",
     "chapter": "DDL",
     "_source": "sqld-1140",
     "_origId": "sqld-0997",
@@ -34126,7 +34126,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "NVL은 문자형에서만 사용한다."
     ],
     "correctIndex": 1,
-    "explanation": "NVL은 NULL을 지정한 값으로 대체한다.",
+    "explanation": "NVL(comm, 0) 은 comm 이 NULL 이면 0 으로 바꾸므로, comm 이 NULL 인 사원도 결과는 0 + sal = sal 이 된다. NVL 없이 comm + sal 로 쓰면 NULL 과의 산술 연산이라 결과가 NULL 이 된다. NVL 은 숫자·문자·날짜형 모두에 쓸 수 있다.",
     "chapter": "함수",
     "_source": "sqld-1140",
     "_origId": "sqld-1012",
@@ -34414,7 +34414,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "846.0"
     ],
     "correctIndex": 1,
-    "explanation": "TRUNC는 지정 자릿수 아래를 버린다.",
+    "explanation": "TRUNC(845.56, 1) 은 소수 첫째 자리까지 남기고 그 아래를 버리므로 845.5 이다(반올림하지 않음). 반올림하는 ROUND(845.56, 1) 은 845.6 이다.",
     "chapter": "함수",
     "_source": "sqld-1140",
     "_origId": "sqld-1029",
@@ -34440,7 +34440,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "6"
     ],
     "correctIndex": 1,
-    "explanation": "양쪽 공백 제거 후 SQLD의 길이는 4다.",
+    "explanation": "TRIM 은 양쪽 공백을 제거하므로 ' SQLD ' 가 'SQLD' 가 되고, LENGTH('SQLD') 는 4 이다. 공백을 제거하지 않은 LENGTH(' SQLD ') 는 6 이다.",
     "chapter": "함수",
     "_source": "sqld-1140",
     "_origId": "sqld-1030",
@@ -36770,6 +36770,66 @@ export const AI_MOCK: QuizQuestion[] = [
       {
         "type": "text",
         "content": "조회 비율과 인덱스 유지 비용을 함께 판단한다."
+      }
+    ]
+  },
+  {
+    "id": 12027,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 1228,
+    "title": "다음 테이블과 가정 기준으로 2NF 위반 원인으로 옳은 것은?",
+    "options": [
+      "복합키의 일부인 주문번호와 상품번호에만 종속되는 속성이 함께 존재한다.",
+      "이행 종속만 존재한다.",
+      "반복 그룹이 전혀 없다.",
+      "모든 속성이 후보키 전체에 완전 함수 종속된다."
+    ],
+    "correctIndex": 0,
+    "explanation": "부분 함수 종속이 있으면 2NF를 위반한다.",
+    "chapter": "정규화",
+    "_source": "sqld-1140",
+    "_origId": "sqld-1251",
+    "_category": "정규화",
+    "references": [
+      {
+        "type": "text",
+        "content": "주문번호는 고객명과 고객등급을 결정하고, 상품번호는 상품명을 결정한다고 가정한다."
+      },
+      {
+        "type": "table",
+        "caption": "Normalization Source Table",
+        "headers": [
+          "ORDER NO",
+          "PRODUCT NO",
+          "PRODUCT NAME",
+          "CUSTOMER NAME",
+          "CUSTOMER GRADE"
+        ],
+        "rows": [
+          [
+            "1001",
+            "P01",
+            "SQL BOOK",
+            "KIM",
+            "VIP"
+          ],
+          [
+            "1001",
+            "P02",
+            "DB BOOK",
+            "KIM",
+            "VIP"
+          ],
+          [
+            "1002",
+            "P03",
+            "NOTE",
+            "LEE",
+            "BASIC"
+          ]
+        ]
       }
     ]
   },
