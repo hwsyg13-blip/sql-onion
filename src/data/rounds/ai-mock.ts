@@ -1,5 +1,5 @@
 // Auto-generated from scripts/authored/ai-mock.json
-// AI 생성 모의고사 풀 (기출 변형) · 1185문항
+// AI 생성 모의고사 풀 (기출 변형) · 1171문항
 // ⚠ 직접 편집 금지. ai-mock.json 수정 후 'node scripts/build-quiz-bank.mjs' 재실행.
 import type { QuizQuestion } from '../quizBank';
 
@@ -3052,36 +3052,6 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 79
   },
   {
-    "id": 10924,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 125,
-    "title": "다음 중 아래 테이블 정의와 인덱스 구조를 참고하여, 인덱스를 효율적으로 액세스할 수 없는 검색조건을 고르시오.",
-    "options": [
-      "where 주문번호 between 1 and 10",
-      "where 주문자명 like '%홍길동%'",
-      "where 주문일자 >= '20181201'",
-      "where 주문일자 = '20181201'"
-    ],
-    "correctIndex": 1,
-    "explanation": "B-Tree 인덱스는 값의 앞부분부터 정렬되어 있어 LIKE '%홍길동%' 처럼 앞에 와일드카드(%)가 오면 시작 위치를 정할 수 없어 인덱스 범위 검색을 할 수 없다. ① 주문번호는 주문_pk, ③④ 주문일자는 주문_ind12 의 선두 컬럼이라 범위·동등 조건 모두 인덱스를 효율적으로 쓸 수 있다. 정답은 ② 이다.",
-    "chapter": "WHERE",
-    "_source": "cbt-mock",
-    "_origId": "cbt-080",
-    "_cbtOrigNo": 80,
-    "references": [
-      {
-        "type": "sql",
-        "code": "create table 주문 (\n    주문번호    int            not null,\n    주문자명    varchar(40)    null,\n    주문금액    money          null,\n    주문일자    varchar(8)     null );"
-      },
-      {
-        "type": "sql",
-        "code": "create unique index 주문_pk on 주문 (주문번호);\ncreate index 주문_ind11 on 주문 (주문자명);\ncreate index 주문_ind12 on 주문 (주문일자, 주문금액);"
-      }
-    ]
-  },
-  {
     "id": 10926,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
@@ -6050,61 +6020,6 @@ export const AI_MOCK: QuizQuestion[] = [
     "_source": "cbt-mock",
     "_origId": "cbt-195",
     "_cbtOrigNo": 195
-  },
-  {
-    "id": 11036,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 237,
-    "title": "SQL 트레이스를 수집한 결과 Row Source Operation이 다음과 같았다. 가장 우선적으로 검토할 사항으로 올바른 것은? (단, 한 달간 주문 건수는 평균 50만 건이다)",
-    "options": [
-      "고객_IDX 인덱스 칼럼 순서를 조정한다.",
-      "주문_IDX 인덱스 칼럼 순서를 조정한다.",
-      "고객_IDX 인덱스에 칼럼을 추가한다.",
-      "주문_IDX 인덱스에 칼럼을 추가한다."
-    ],
-    "correctIndex": 2,
-    "explanation": "• 고객_IDX 인덱스를 읽고 나서 고객 테이블을 액세스하는 횟수는 많으나 대부분 필터링되고 있다. • 고객에 대한 조건절로 사용된 고객등급이나 연령 칼럼이 인덱스에 포함돼 있지 않아 생기는 현상이므로 고객_IDX에 칼럼을 추가해 주어야 한다.",
-    "chapter": "관계형 DB와 SELECT",
-    "_source": "cbt-mock",
-    "_origId": "cbt-196",
-    "_cbtOrigNo": 196,
-    "references": [
-      {
-        "type": "sql",
-        "code": "Select c.고객명, c.연령, c.전화번호, o.주문일자,\n       o.주문총금액, o.배송지주소\nFrom 고객 c, 주문 o\nWhere o.고객번호 = c.고객번호\nAnd c.고객등급 = 'A'\nAnd c.연령 between 51 and 60\nAnd o.주문일자 between '20101201' and '20101231'"
-      },
-      {
-        "type": "table",
-        "headers": [
-          "Rows",
-          "Row Source Operation"
-        ],
-        "rows": [
-          [
-            "10",
-            "NESTED LOOPS"
-          ],
-          [
-            "23",
-            "TABLE ACCESS BY INDEX ROWID 고객"
-          ],
-          [
-            "2978",
-            "INDEX RANGE SCAN 고객_IDX"
-          ],
-          [
-            "10",
-            "TABLE ACCESS BY INDEX ROWID 주문"
-          ],
-          [
-            "28",
-            "INDEX RANGE SCAN 주문_IDX"
-          ]
-        ]
-      }
-    ]
   },
   {
     "id": 11037,
@@ -11125,27 +11040,6 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11176,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "1과목",
-    "number": 377,
-    "title": "분산 데이터베이스의 특징 중 저장 장소 명시가 불필요하다는 특성은 무엇인가?",
-    "options": [
-      "분할 투명성",
-      "병행 투명성",
-      "위치 투명성",
-      "지역 사상 투명성"
-    ],
-    "correctIndex": 2,
-    "explanation": "-위치 투명성이란 사용하려는 데이터의 저장 장소 명시가 불필요하며 위치 정보가 시스템 카탈로그에 유지되어야 함을 말한다.\n-지역 사상 투명성이란 지역 DBMS와 물리적 DB 사이의 Mapping을 보장한다. 각 지역 시스템 이름과 무관한 이름 사용이 가능하다.",
-    "chapter": "데이터 모델 개념",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0167",
-    "_category": "데이터베이스 개념",
-    "_correctRate": 10
-  },
-  {
     "id": 11178,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
@@ -13011,54 +12905,6 @@ export const AI_MOCK: QuizQuestion[] = [
         ]
       }
     ]
-  },
-  {
-    "id": 11253,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 454,
-    "title": "다음의 SQL문에 대한 설명 중 옳지 않은 것은?",
-    "options": [
-      "기능상으로는 문제가 없지만 성능 문제가 있다.",
-      "EMP 테이블을 FULL SCAN한 것은 인덱스가 없어서이다.",
-      "LIKE 조건을 사용하지 말고 \">\"를 사용해야 한다.",
-      "내부적으로 형변환이 발생했다."
-    ],
-    "correctIndex": 1,
-    "explanation": "EMPNO는 기본키이므로 자동으로 인덱스가 생성된다. FULL SCAN이 된 것은 LIKE 조건에서 숫자 칼럼과 문자값 간에 형 변환이 발생해서이다.",
-    "chapter": "DML",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0263",
-    "_category": "DML",
-    "_correctRate": 10,
-    "references": [
-      {
-        "type": "sql",
-        "code": "SELECT * FROM EMP\nWHERE EMPNO LIKE '100%';"
-      }
-    ]
-  },
-  {
-    "id": 11254,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 455,
-    "title": "다음 설명 중 올바르지 않은 것은?",
-    "options": [
-      "Oracle에서 인덱스 구성 칼럼이 모두 null인 레코드는 인덱스에 저장하지 않는다.",
-      "SQL Server는 인덱스 구성 칼럼이 모두 null인 레코드도 인덱스에 저장한다.",
-      "Oracle에서 인덱스 구성 칼럼 중 하나라도 null이 아닌 레코드는 인덱스에 저장한다.",
-      "SQL Server는 null 값을 인덱스 맨 뒤에 저장한다."
-    ],
-    "correctIndex": 3,
-    "explanation": "SQL Server는 null값을 인덱스 맨 앞에 저장하고, Oracle은 맨 뒤에 저장한다.",
-    "chapter": "함수",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0264",
-    "_category": "NULL",
-    "_correctRate": 10
   },
   {
     "id": 11255,
@@ -30700,26 +30546,6 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11730,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "1과목",
-    "number": 931,
-    "title": "COUNT(*)와 COUNT(col)의 차이 설명으로 옳은 것은?",
-    "options": [
-      "COUNT(*)는 전체 행 수를, COUNT(col)은 NULL이 아닌 값 수를 반환한다.",
-      "두 함수는 항상 같은 값을 반환한다.",
-      "COUNT(col)은 NULL을 0으로 바꿔 센다.",
-      "COUNT(*)는 NULL이 하나라도 있으면 오류가 난다."
-    ],
-    "correctIndex": 0,
-    "explanation": "COUNT(*)는 전체 행 수를 세고 COUNT(col)은 NULL이 아닌 값만 센다. 따라서 NULL이 있으면 두 함수의 결과가 달라질 수 있다.",
-    "chapter": "함수",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0890",
-    "_category": "NULL"
-  },
-  {
     "id": 11731,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
@@ -34576,7 +34402,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "NULL"
     ],
     "correctIndex": 1,
-    "explanation": "MAX는 NULL을 제외하고 가장 큰 값을 찾는다.",
+    "explanation": "MAX 는 NULL 을 제외한 값 중 가장 큰 값을 반환한다. bonus 의 NULL 이 아닌 값은 100, 200 이므로 MAX(bonus) 는 200 이다. NULL 이 있다고 결과가 NULL 이 되지 않는다.",
     "chapter": "그룹 함수",
     "_source": "sqld-1140",
     "_origId": "sqld-1033",
@@ -34836,7 +34662,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "NULL"
     ],
     "correctIndex": 1,
-    "explanation": "루트 행은 LEVEL 1부터 시작한다.",
+    "explanation": "계층형 질의에서 START WITH 로 지정한 루트 행의 LEVEL 은 1 이다. mgr_id 가 NULL 인 CEO 가 루트이므로 LEVEL 1, 그 아래 SALES_MGR·DEV_MGR 은 2, 그 아래 사원들은 3 이다. LEVEL 은 0 부터 시작하지 않는다.",
     "chapter": "계층형 질의",
     "_source": "sqld-1140",
     "_origId": "sqld-1041",
@@ -35052,7 +34878,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "뷰는 트랜잭션을 자동 종료한다."
     ],
     "correctIndex": 2,
-    "explanation": "뷰는 SELECT 결과를 논리적으로 캡슐화한 객체다.",
+    "explanation": "뷰는 기본 테이블을 조회하는 SELECT 문을 저장한 가상 테이블이다. 자체 데이터를 물리적으로 저장하지 않고(머티리얼라이즈드 뷰 제외), 인덱스를 대신하거나 트랜잭션을 끝내는 기능도 없다.",
     "chapter": "View",
     "_source": "sqld-1140",
     "_origId": "sqld-1046",
@@ -35111,7 +34937,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 1061,
-    "title": "뷰를 사용하는 주요 목적로 적절한 것은?",
+    "title": "뷰를 사용하는 주요 목적으로 적절한 것은?",
     "options": [
       "반드시 모든 테이블을 하나로 합치는 것",
       "인덱스 유지 비용을 없애는 것",
@@ -35119,7 +34945,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "복잡한 SQL을 단순화하고 필요한 컬럼만 노출하는 것"
     ],
     "correctIndex": 3,
-    "explanation": "보안성과 재사용성을 위해 뷰를 활용할 수 있다.",
+    "explanation": "뷰는 복잡한 조인·조건을 정의해 두고 간단히 조회하게 해 주며(편리성), 필요한 컬럼만 보여 주어 민감한 정보를 숨길 수 있다(보안성). 테이블을 합치거나 인덱스 비용을 없애거나 COMMIT 하는 기능은 없다.",
     "chapter": "View",
     "_source": "sqld-1140",
     "_origId": "sqld-1050",
@@ -35139,7 +34965,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "ROW_NUMBER와 완전히 동일하다."
     ],
     "correctIndex": 2,
-    "explanation": "동점 이후 다음 순위 처리 방식이 두 함수의 핵심 차이다.",
+    "explanation": "동점이 있으면 RANK 는 같은 순위를 준 뒤 그 수만큼 다음 순위를 건너뛰고(1, 2, 2, 4), DENSE_RANK 는 건너뛰지 않는다(1, 2, 2, 3). ROW_NUMBER 는 동점이어도 1, 2, 3, 4 처럼 고유한 번호를 준다. 세 함수 모두 OVER 안에 ORDER BY 를 쓴다.",
     "chapter": "윈도우 함수",
     "_source": "sqld-1140",
     "_origId": "sqld-1052",
@@ -35367,7 +35193,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "ABCD12"
     ],
     "correctIndex": 2,
-    "explanation": "영문 대문자 3자리 뒤에 숫자 2자리가 와야 한다.",
+    "explanation": "^[A-Z]{3}[0-9]{2}$ 는 처음부터 끝까지 '대문자 3개 + 숫자 2개' 인 문자열만 맞는다. ABC12 가 해당한다. AB12 는 대문자가 2개, abc12 는 소문자, ABCD12 는 대문자가 4개라 맞지 않는다(^ 와 $ 로 전체를 고정했기 때문).",
     "chapter": "정규표현식",
     "_source": "sqld-1140",
     "_origId": "sqld-1066",
@@ -35428,32 +35254,6 @@ export const AI_MOCK: QuizQuestion[] = [
       {
         "type": "sql",
         "code": "SELECT REGEXP_SUBSTR('user@sqld.kr', '@(.+)$', 1, 1, NULL, 1) FROM dual;"
-      }
-    ]
-  },
-  {
-    "id": 11881,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 1082,
-    "title": "복합 인덱스 (col1, col2)가 있을 때 일반적으로 인덱스 활용도가 높은 조건으로 옳은 것은?",
-    "options": [
-      "WHERE TO_CHAR(col1) = '10'만 사용",
-      "WHERE col2 + 1 = 5",
-      "WHERE col2 = :v2",
-      "WHERE col1 = :v1 AND col2 BETWEEN :v2 AND :v3"
-    ],
-    "correctIndex": 3,
-    "explanation": "복합 인덱스는 선두 컬럼 조건이 있을 때 활용 가능성이 높다.",
-    "chapter": "관계형 DB와 SELECT",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1077",
-    "_category": "인덱스",
-    "references": [
-      {
-        "type": "text",
-        "content": "복합 인덱스 선두 컬럼 조건의 유무"
       }
     ]
   },
@@ -35538,7 +35338,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "10-1234"
     ],
     "correctIndex": 1,
-    "explanation": "숫자 3자리-숫자 4자리 형식만 허용한다.",
+    "explanation": "^[0-9]{3}-[0-9]{4}$ 는 '숫자 3개, 하이픈, 숫자 4개' 로 전체가 이루어진 문자열만 맞는다. 010-1234 가 해당한다. 0101234 는 하이픈이 없고, 010-12345 는 뒤 숫자가 5개, 10-1234 는 앞 숫자가 2개라 맞지 않는다.",
     "chapter": "정규표현식",
     "_source": "sqld-1140",
     "_origId": "sqld-1086",
@@ -35644,26 +35444,6 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11894,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 1095,
-    "title": "선택도가 매우 낮은 컬럼에 단독 인덱스를 두었을 때 기대 효과로 가장 적절한 것은?",
-    "options": [
-      "조회 패턴에 따라 테이블 전체 스캔이 더 유리할 수 있다.",
-      "반드시 UNIQUE가 된다.",
-      "조인만 금지된다.",
-      "항상 압도적으로 빠르다."
-    ],
-    "correctIndex": 0,
-    "explanation": "값 분포가 치우친 컬럼은 인덱스 이점이 작을 수 있다.",
-    "chapter": "관계형 DB와 SELECT",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1093",
-    "_category": "인덱스"
-  },
-  {
     "id": 11901,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
@@ -35697,7 +35477,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "SQLD"
     ],
     "correctIndex": 3,
-    "explanation": "SQLD 또는 DBD 두 패턴 중 하나만 허용한다.",
+    "explanation": "^(SQL|DB)D$ 는 'SQL 또는 DB' 다음에 D 하나로 끝나는 문자열, 즉 SQLD 와 DBD 만 맞는다. SQLDD 는 D 가 두 개, SQD 는 SQL 이 아니고, DBSQL 은 D 로 끝나지 않는다.",
     "chapter": "정규표현식",
     "_source": "sqld-1140",
     "_origId": "sqld-1110",
@@ -35749,7 +35529,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "고객과 주문의 관계는 N:M 관계이다."
     ],
     "correctIndex": 0,
-    "explanation": "한 고객이 여러 주문을 가질 수 있으므로 1:N이다.",
+    "explanation": "고객 한 명은 여러 주문을 할 수 있고 주문 하나는 한 고객에게 속하므로 고객 : 주문 은 1:N 이다. 주문 하나에 주문상품이 여러 개이므로 주문 : 주문상품 도 1:N 이고, ERD 에서는 각 엔터티의 PK 를 표시한다.",
     "chapter": "엔터티",
     "_source": "sqld-1140",
     "_origId": "sqld-1115",
@@ -35830,32 +35610,6 @@ export const AI_MOCK: QuizQuestion[] = [
             "Z"
           ]
         ]
-      }
-    ]
-  },
-  {
-    "id": 11920,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 1121,
-    "title": "복합 인덱스 (col1, col2)가 있을 때 일반적으로 인덱스 활용도가 높은 조건으로 옳은 것은?",
-    "options": [
-      "WHERE col2 + 1 = 5",
-      "WHERE col2 = :v2",
-      "WHERE col1 = :v1 AND col2 BETWEEN :v2 AND :v3",
-      "WHERE TO_CHAR(col1) = '10'만 사용"
-    ],
-    "correctIndex": 2,
-    "explanation": "복합 인덱스는 선두 컬럼 조건이 있을 때 활용 가능성이 높다.",
-    "chapter": "관계형 DB와 SELECT",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1129",
-    "_category": "인덱스",
-    "references": [
-      {
-        "type": "text",
-        "content": "함수 적용 컬럼이 인덱스 활용에 미치는 영향을 검토한다."
       }
     ]
   },
@@ -35956,37 +35710,11 @@ export const AI_MOCK: QuizQuestion[] = [
       "COUNT(*)는 전체 행 수를, COUNT(col)은 NULL이 아닌 값 수를 반환한다."
     ],
     "correctIndex": 3,
-    "explanation": "SQLD에서 빈출되는 NULL 처리 핵심 개념이다.",
+    "explanation": "COUNT(*) 는 NULL 여부와 상관없이 전체 행 수를, COUNT(col) 은 col 이 NULL 이 아닌 행 수만 센다. 그래서 col 에 NULL 이 있으면 두 값이 다르다. NULL 이 있어도 오류는 나지 않고, NULL 을 0 으로 바꿔 세지도 않는다.",
     "chapter": "함수",
     "_source": "sqld-1140",
     "_origId": "sqld-1140",
-    "_category": "NULL",
-    "references": [
-      {
-        "type": "text",
-        "content": "산술 연산식에 NULL이 포함될 때 결과를 해석한다."
-      }
-    ]
-  },
-  {
-    "id": 11941,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 1142,
-    "title": "인덱스 컬럼에 함수가 적용되면 일반적으로 주의할 점으로 옳은 것은?",
-    "options": [
-      "일반 인덱스를 그대로 활용하지 못할 수 있다.",
-      "PK 제약이 자동 삭제된다.",
-      "무결성이 깨진다.",
-      "인덱스가 더 잘 사용된다."
-    ],
-    "correctIndex": 0,
-    "explanation": "컬럼 값에 함수를 적용하면 함수 기반 인덱스가 아니면 인덱스 사용성이 낮아질 수 있다.",
-    "chapter": "관계형 DB와 SELECT",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1153",
-    "_category": "인덱스"
+    "_category": "NULL"
   },
   {
     "id": 11947,
@@ -36336,26 +36064,6 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11980,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "1과목",
-    "number": 1181,
-    "title": "트랜잭션 처리량이 매우 큰 테이블에 대해 설계 단계에서 우선 검토할 사항으로 옳은 것은?",
-    "options": [
-      "모든 제약조건 제거",
-      "엔터티명을 길게 변경하는 작업",
-      "모든 컬럼을 PK에 포함하는 방법",
-      "접근 패턴에 맞는 인덱스와 파티션 전략"
-    ],
-    "correctIndex": 3,
-    "explanation": "대량 처리 테이블은 조회/변경 패턴과 데이터 분포를 고려한 물리 설계가 중요하다.",
-    "chapter": "데이터베이스 설계",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1197",
-    "_category": "데이터베이스 설계"
-  },
-  {
     "id": 11981,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
@@ -36428,26 +36136,6 @@ export const AI_MOCK: QuizQuestion[] = [
         ]
       }
     ]
-  },
-  {
-    "id": 11983,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 1184,
-    "title": "인덱스가 많은 테이블에서 INSERT/UPDATE/DELETE가 느려질 수 있는 이유로 옳은 것은?",
-    "options": [
-      "인덱스가 있으면 COMMIT이 불가능하다.",
-      "인덱스는 무조건 메모리에서만 관리된다.",
-      "인덱스는 변경 작업과 무관하다.",
-      "데이터 변경 시 관련 인덱스도 함께 유지해야 하기 때문이다."
-    ],
-    "correctIndex": 3,
-    "explanation": "인덱스는 조회에는 도움을 줄 수 있지만 DML 시 유지 비용이 발생한다.",
-    "chapter": "관계형 DB와 SELECT",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1201",
-    "_category": "인덱스"
   },
   {
     "id": 11986,
@@ -36744,32 +36432,6 @@ export const AI_MOCK: QuizQuestion[] = [
             "200"
           ]
         ]
-      }
-    ]
-  },
-  {
-    "id": 12025,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 1226,
-    "title": "복합 인덱스 (col1, col2)가 있을 때 일반적으로 인덱스 활용도가 높은 조건으로 옳은 것은?",
-    "options": [
-      "WHERE col1 = :v1 AND col2 BETWEEN :v2 AND :v3",
-      "WHERE TO_CHAR(col1) = '10'만 사용",
-      "WHERE col2 + 1 = 5",
-      "WHERE col2 = :v2"
-    ],
-    "correctIndex": 0,
-    "explanation": "복합 인덱스는 선두 컬럼 조건이 있을 때 활용 가능성이 높다.",
-    "chapter": "관계형 DB와 SELECT",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1249",
-    "_category": "인덱스",
-    "references": [
-      {
-        "type": "text",
-        "content": "조회 비율과 인덱스 유지 비용을 함께 판단한다."
       }
     ]
   },
@@ -37333,32 +36995,6 @@ export const AI_MOCK: QuizQuestion[] = [
             "GOLD"
           ]
         ]
-      }
-    ]
-  },
-  {
-    "id": 12097,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 1298,
-    "title": "뷰를 사용하는 주요 목적로 적절한 것은?",
-    "options": [
-      "복잡한 SQL을 단순화하고 필요한 컬럼만 노출하는 것",
-      "모든 트랜잭션을 자동 COMMIT 하는 것",
-      "인덱스 유지 비용을 없애는 것",
-      "반드시 모든 테이블을 하나로 합치는 것"
-    ],
-    "correctIndex": 0,
-    "explanation": "보안성과 재사용성을 위해 뷰를 활용할 수 있다.",
-    "chapter": "View",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1334",
-    "_category": "View",
-    "references": [
-      {
-        "type": "text",
-        "content": "단순 뷰와 집계 뷰의 갱신 제약을 비교한다."
       }
     ]
   },
