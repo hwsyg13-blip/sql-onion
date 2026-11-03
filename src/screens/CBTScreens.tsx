@@ -6,6 +6,7 @@ import { QuestionBody } from './MockScreens';
 import { renderInlineMd, OptionReferences } from '../components/QuestionReferences';
 import { recordExamComplete, recordQuizAttempt } from '../lib/progress';
 import { trackEvent, trackAnswer } from '../lib/analytics';
+import { loadMermaid } from '../lib/loadMermaid';
 
 // CBT — Exam list, CBT exam screen (sticky OMR), and result.
 // Also Mock Exam full mode (50-item with timer) reusing pieces.
@@ -122,6 +123,18 @@ export const CBTExam = ({examId = "round-60", onFinish, onNavigate, onExit, mock
     const t = setInterval(() => setRemaining(r => Math.max(0, r-1)), 1000);
     return () => clearInterval(t);
   }, [reviewMode]);
+
+  // ERD 도식 모듈 미리 받기 — 90분 시험 도중 새 배포가 나가면 옛 청크가 사라져
+  // 뒤쪽 ERD 문항이 "다이어그램을 불러오지 못했어요"로 깨진다 (R52 1-9, R58 1-8 제보).
+  // 시험을 시작할 때 브라우저가 한가한 틈에 한 번 받아 두면 배포와 무관하게 유지된다.
+  React.useEffect(() => {
+    if (!questions.some(q => [...(q.references || []), ...((q.optionReferences || []).flat().filter(Boolean) as any[])].some((r: any) => r?.type === 'erd'))) return;
+    const w = window as any;
+    const run = () => { loadMermaid().catch(() => {}); };
+    const id = w.requestIdleCallback ? w.requestIdleCallback(run, { timeout: 3000 }) : setTimeout(run, 1500);
+    return () => { if (w.cancelIdleCallback && w.requestIdleCallback) w.cancelIdleCallback(id); else clearTimeout(id); };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   // GA 이벤트: 시험 시작
   React.useEffect(() => {
