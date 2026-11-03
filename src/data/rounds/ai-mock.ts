@@ -28545,7 +28545,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "1과목",
     "number": 866,
-    "title": "ERD에서 관계(Relationship)는 어떤 기호로 표현되는가?",
+    "title": "Peter Chen 표기법의 ERD 에서 관계(Relationship)는 어떤 기호로 표현되는가?",
     "options": [
       "원",
       "사각형",
@@ -28553,7 +28553,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "삼각형"
     ],
     "correctIndex": 2,
-    "explanation": "엔터티는 사각형, 관계는 다이아몬드(◇)로 표현되며, 관계의 이름이 그 안에 들어갑니다.",
+    "explanation": "Peter Chen 표기법에서 엔터티는 사각형, 관계는 다이아몬드(마름모), 속성은 타원으로 그린다(③). SQLD 에서 주로 보는 IE·바커 표기법에서는 관계를 엔터티 사이의 선으로 표시한다.",
     "chapter": "엔터티",
     "_source": "sqld-1140",
     "_origId": "sqld-0807",
@@ -28741,8 +28741,8 @@ export const AI_MOCK: QuizQuestion[] = [
       "사건엔터티",
       "행위엔터티"
     ],
-    "correctIndex": 1,
-    "explanation": "생성 시점 기준 분류: 기본 엔터티 / 중심 엔터티 / 발생(사건) 엔터티\n하지만 여기서 \"중심엔터티\"는 생성 시점 기준이 아니라 역할 기준 분류입니다.\r",
+    "correctIndex": 2,
+    "explanation": "SQL 전문가 가이드의 발생 시점에 따른 분류는 기본(키)·중심(메인)·행위 엔터티 세 가지다(①②④). 사건 엔터티는 유무형에 따른 분류(유형·개념·사건)에 속하므로 발생 시점 분류가 아니다(③). ※ 기존 정답 ② 를 가이드 분류에 맞춰 ③ 으로 바로잡았다.",
     "chapter": "데이터 모델 개념",
     "_source": "sqld-1140",
     "_origId": "sqld-0821",
