@@ -5325,7 +5325,7 @@
         "select * from SQLD_66 where not ((COL1 ='x' and COL2 = 'y') or (COL1 ='m' and COL2 ='n'));"
       ],
       "correctIndex": 3,
-      "explanation": "정답은 4번이다. 이미지의 기준 SQL은 (x, y), (m, n) 두 행만 반환한다. 1번은 OR 조건으로 같은 두 행을 찾고, 2번은 나머지 네 행을 제외하는 방식이므로 역시 같은 결과가 된다. 3번도 두 쌍을 직접 OR로 연결한 동치 표현이다. 반면 4번은 두 조건 전체를 NOT으로 뒤집어 나머지 행들을 반환하므로 기준 SQL과 다른 값을 반환한다.",
+      "explanation": "기준 SQL 은 (x, y), (m, n) 두 행을 돌려준다. ① 은 COL1 이 x·m, COL2 가 y·n 인 조합을 찾는데 표에 (x, n), (m, y) 행이 없어 같은 두 행이고, ② 는 나머지 네 쌍이 아닌 행이라 역시 같은 두 행, ③ 은 두 쌍을 그대로 풀어 쓴 것이다. ④ 는 그 두 쌍을 NOT 으로 제외해 나머지 네 행을 돌려주므로 결과가 다르다.",
       "references": [
         {
           "type": "table",
@@ -7535,7 +7535,7 @@
         "1"
       ],
       "correctIndex": 1,
-      "explanation": "select * from A union select * from B를 실행하면 1,2,3,4,5가 반환된다. 해당 결과에 MINUS 조인을 하면 4,5가 빠지기 때문에 최종적으로 1,2,3 이 된다.",
+      "explanation": "Oracle 은 집합 연산자를 위에서부터 차례로 계산한다. A1 UNION B1 = {1, 2, 3, 4, 5} 이고, 여기서 MINUS C1 = {4, 5} 를 빼면 {1, 2, 3} 이 남아 3행이다(②).",
       "references": [
         {
           "type": "sql",
@@ -11528,7 +11528,7 @@
         "670, 15, 5"
       ],
       "correctIndex": 1,
-      "explanation": "SQL1) 645건 : 사원 500명 + 대리 100명 + 과장 30명 + 차장 10명 + 부장 5명 SQL2) 15건 : 차장10명 + 부장 5명 SQL3) 6건 : 5개 직급 + NULL",
+      "explanation": "SQL1 의 COUNT(GRADE) 는 NULL 25명을 빼고 500 + 100 + 30 + 10 + 5 = 645 다. SQL2 의 IN 목록에서 '널' 은 NULL 이 아니라 '널' 이라는 글자라 맞는 행이 없고, 차장 10 + 부장 5 = 15 행이다. SQL3 은 GROUP BY 에서 NULL 도 하나의 그룹이 되어 직급 5개 + NULL 1개 = 6 그룹이다. 정답은 645, 15, 6(②).",
       "references": [
         {
           "type": "text",
