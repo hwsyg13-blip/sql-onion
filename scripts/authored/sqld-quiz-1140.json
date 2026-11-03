@@ -6113,13 +6113,13 @@
       "chapter": "그룹 함수",
       "title": "다음의 데이터베이스에서 '부양가족을 2명 이상 가진 사원의 사번(eno), 성명(ename), 부양가족 수를 검색'하는 질의를 SQL로 적절하게 표현한 것은?",
       "options": [
-        "SELECT e.eno, e.ename, count(*)\nFROM employee e, dependent d\nWHERE e.eno = d.eno\nGROUP BY e.eno, e.name\nHAVING count(*) >= 3;",
+        "SELECT e.eno, e.ename, count(*)\nFROM employee e, dependent d\nWHERE e.eno = d.eno\nGROUP BY e.eno, e.ename\nHAVING count(*) >= 3;",
         "SELECT e.eno, e.ename, t.cnt\nFROM employee e,\n(SELECT eno, count(*) as cnt\nFROM dependent GROUP BY\neno HAVING count(*) >= 2) t\nWHERE e.eno = t.eno;",
         "SELECT e.eno, e.ename, count(*)\nFROM employee e, dependent d\nWHERE EXISTS (SELECT * FROM dependent \nGROUP BY eno\nHAVING count(*) >=2)\nGROUP BY e.eno, e.ename;",
         "SELECT eno, ename, count(*)\nFROM employee e, dependent d\nWHERE e.eno = d.eno and count(*) >= 2\nGROUP BY d.eno;"
       ],
       "correctIndex": 1,
-      "explanation": "위의 문제는 GROUP BY ~ HAVING절을 파악하는 것으로 GROUP BY에 조건을 걸기 위해서는 HAVING절을 사용해야 하며 ④번의 경우 count(*) 조건을 사용하기 위해서 HAVING절을 사용해야 한다. ③번은 서브쿼리 SELECT문에 집계함수가 존재하지 않는다. ①번은 HAVING count(*)의 \"3\"이 2가 되면 올바르게 실행된다.",
+      "explanation": "② 는 인라인 뷰에서 사원별 부양가족 수를 세어 2명 이상만 남긴 뒤 employee 와 조인하므로 맞다. ① 은 HAVING count(*) >= 3 이라 2명인 사원이 빠진다. ③ 은 EXISTS 서브쿼리가 바깥 사원과 연결되지 않고 두 테이블 조인 조건도 없어 엉뚱한 결과가 나오며, ④ 는 집계 함수 조건을 WHERE 에 써서 오류가 난다(HAVING 을 써야 한다).",
       "references": [
         {
           "type": "text",
@@ -9064,7 +9064,7 @@
       "options": [
         "HYBRID PARTITION",
         "LIST PARTITION",
-        "HASH PARTITON",
+        "HASH PARTITION",
         "RANGE PARTITION"
       ],
       "correctIndex": 1,

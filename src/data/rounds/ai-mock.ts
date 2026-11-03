@@ -1,5 +1,5 @@
 // Auto-generated from scripts/authored/ai-mock.json
-// AI 생성 모의고사 풀 (기출 변형) · 1157문항
+// AI 생성 모의고사 풀 (기출 변형) · 1156문항
 // ⚠ 직접 편집 금지. ai-mock.json 수정 후 'node scripts/build-quiz-bank.mjs' 재실행.
 import type { QuizQuestion } from '../quizBank';
 
@@ -11658,33 +11658,6 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11215,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 416,
-    "title": "다음의 데이터베이스에서 '부양가족을 2명 이상 가진 사원의 사번(eno), 성명(ename), 부양가족 수를 검색'하는 질의를 SQL로 적절하게 표현한 것은?",
-    "options": [
-      "SELECT e.eno, e.ename, count(*)\nFROM employee e, dependent d\nWHERE e.eno = d.eno\nGROUP BY e.eno, e.name\nHAVING count(*) >= 3;",
-      "SELECT e.eno, e.ename, t.cnt\nFROM employee e,\n(SELECT eno, count(*) as cnt\nFROM dependent GROUP BY\neno HAVING count(*) >= 2) t\nWHERE e.eno = t.eno;",
-      "SELECT e.eno, e.ename, count(*)\nFROM employee e, dependent d\nWHERE EXISTS (SELECT * FROM dependent \nGROUP BY eno\nHAVING count(*) >=2)\nGROUP BY e.eno, e.ename;",
-      "SELECT eno, ename, count(*)\nFROM employee e, dependent d\nWHERE e.eno = d.eno and count(*) >= 2\nGROUP BY d.eno;"
-    ],
-    "correctIndex": 1,
-    "explanation": "위의 문제는 GROUP BY ~ HAVING절을 파악하는 것으로 GROUP BY에 조건을 걸기 위해서는 HAVING절을 사용해야 하며 ④번의 경우 count(*) 조건을 사용하기 위해서 HAVING절을 사용해야 한다. ③번은 서브쿼리 SELECT문에 집계함수가 존재하지 않는다. ①번은 HAVING count(*)의 \"3\"이 2가 되면 올바르게 실행된다.",
-    "chapter": "그룹 함수",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0216",
-    "_category": "집계 함수",
-    "_correctRate": 10,
-    "references": [
-      {
-        "type": "text",
-        "content": "employee(eno, ename, address, score, dno)\ndependent(eno, ename, birthday, relation)"
-      }
-    ]
-  },
-  {
     "id": 11216,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
@@ -14170,7 +14143,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "options": [
       "HYBRID PARTITION",
       "LIST PARTITION",
-      "HASH PARTITON",
+      "HASH PARTITION",
       "RANGE PARTITION"
     ],
     "correctIndex": 1,
