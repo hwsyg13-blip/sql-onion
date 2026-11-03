@@ -1,5 +1,5 @@
 // Auto-generated from scripts/authored/ai-mock.json
-// AI 생성 모의고사 풀 (기출 변형) · 1243문항
+// AI 생성 모의고사 풀 (기출 변형) · 1225문항
 // ⚠ 직접 편집 금지. ai-mock.json 수정 후 'node scripts/build-quiz-bank.mjs' 재실행.
 import type { QuizQuestion } from '../quizBank';
 
@@ -9667,27 +9667,6 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11138,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 339,
-    "title": "다음 중 SELF JOIN을 수행해야 할 경우로 가장 적절한 것은?",
-    "options": [
-      "한 테이블 내에서 연관된 칼럼은 없으나 JOIN을 해야 한다.",
-      "두 테이블에 공통 칼럼이 존재하고 두 테이블이 연관 관계가 있다.",
-      "두 테이블에 연관된 칼럼은 없으나 JOIN을 해야 한다.",
-      "한 테이블 내에서 두 칼럼이 연관 관계가 있다."
-    ],
-    "correctIndex": 3,
-    "explanation": "SELF JOIN은 하나의 테이블에서 두 개의 칼럼이 연관 관계를 가지고 있는 경우에 사용한다.",
-    "chapter": "조인",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0111",
-    "_category": "JOIN",
-    "_correctRate": 10
-  },
-  {
     "id": 11139,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
@@ -11597,54 +11576,6 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11180,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "1과목",
-    "number": 381,
-    "title": "다음은 ERD 작성 순서이다. 올바른 것을 고르시오.",
-    "options": [
-      "가->나->다->마->바->라",
-      "가->나->라->다->마->바",
-      "가->나->다->라->마->바",
-      "나->가->다->라->마->바"
-    ],
-    "correctIndex": 2,
-    "explanation": "1)엔터티를 그린다.\n2)엔터티를 적절하게 배치한다.\n3)엔터티 간의 관계를  설정한다.\n4)관계명을 기술한다.\n5)관계의 참여도를 기술한다.\n6)관계의 필수 여부를 기술한다.",
-    "chapter": "엔터티",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0171",
-    "_category": "ER 모델링",
-    "_correctRate": 10,
-    "references": [
-      {
-        "type": "text",
-        "content": "가)엔터티를 그린다.\n나)엔터티를 적절하게 배치한다.\n다)엔터티 간에 관계를 설정한다.\n라)관계명을 기술한다.\n마)관계의 참여도를 기술한다.\n바)관계의 필수 여부를 기술한다."
-      }
-    ]
-  },
-  {
-    "id": 11181,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "1과목",
-    "number": 382,
-    "title": "다음 설명 중 옳은 것은 무엇인가?",
-    "options": [
-      "데이터베이스에는 단 한 개의 테이블만 존재할 수 있다.",
-      "아주 복잡한 자료도 테이블은 하나만 만드는 것이 바람직하다.",
-      "데이터베이스 내에 테이블이란 존재하지 않는다.",
-      "모든 자료는 실질적으로 테이블에 저장되며 테이블에 있는 자료들을 꺼내 볼 수 있다."
-    ],
-    "correctIndex": 3,
-    "explanation": "데이터베이스에는 자료의 성격에 따라 N개의 테이블을 생성한다. 모든 자료들은 테이블에 입력되며 조회, 수정, 삭제할 수 있다.",
-    "chapter": "데이터 모델 개념",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0172",
-    "_category": "데이터베이스 개념",
-    "_correctRate": 10
-  },
-  {
     "id": 11186,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
@@ -12291,33 +12222,6 @@ export const AI_MOCK: QuizQuestion[] = [
             "14625"
           ]
         ]
-      }
-    ]
-  },
-  {
-    "id": 11207,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 408,
-    "title": "아래의 계층형 SQL에서 리프 데이터면 1, 그렇지 않으면 0을 출력하고 싶을 때 사용하는 키워드로 알맞은 것은?",
-    "options": [
-      "CONNECT_BY_ROOT",
-      "SYS_CONNECT_BY_PATH",
-      "CONNECT_BY_ISCYCLE",
-      "CONNECT_BY_ISLEAF"
-    ],
-    "correctIndex": 3,
-    "explanation": "CONNECT_BY_ISLEAF 는 현재 행이 자식이 없는 리프면 1, 아니면 0 을 반환한다. CONNECT_BY_ROOT 는 루트 행의 값, SYS_CONNECT_BY_PATH 는 루트부터의 경로, CONNECT_BY_ISCYCLE 은 순환 여부를 반환한다. 정답은 ④ 이다.",
-    "chapter": "계층형 질의",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0208",
-    "_category": "계층형 질의",
-    "_correctRate": 10,
-    "references": [
-      {
-        "type": "sql",
-        "code": "SELECT LEVEL,\nLPAD(' ', 4 * (LEVEL-1)) || EMPNO,\nMGR, (    ) AS ISLEAF FROM SCOTT.EMP\nSTART WITH MGR IS NULL\nCONNECT BY PRIOR EMPNO = MGR;"
       }
     ]
   },
@@ -24077,27 +23981,6 @@ export const AI_MOCK: QuizQuestion[] = [
     "_source": "sqld-1140",
     "_origId": "sqld-0621",
     "_category": "데이터 모델링 기법",
-    "_correctRate": 10
-  },
-  {
-    "id": 11537,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "1과목",
-    "number": 738,
-    "title": "엔터티 분류 중 발생시점에 따른 분류가 아닌 것은? ",
-    "options": [
-      "행위엔터티",
-      "사건엔터티",
-      "중심엔터티",
-      "기본엔터티"
-    ],
-    "correctIndex": 1,
-    "explanation": "발생 시점에 따라서는 기본, 중심, 행위 엔터티로 분류한다. ",
-    "chapter": "엔터티",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0622",
-    "_category": "ER 모델링",
     "_correctRate": 10
   },
   {
@@ -37046,32 +36929,6 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11945,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 1146,
-    "title": "중간 저장점과 취소 지점까지 고려하면, 다음 트랜잭션 흐름 후 최종 반영되는 작업으로 옳은 것은?",
-    "options": [
-      "작업1과 작업2만 반영된다.",
-      "작업2와 작업3만 반영된다.",
-      "작업1, 작업2, 작업3이 모두 반영된다.",
-      "작업1만 반영된다."
-    ],
-    "correctIndex": 0,
-    "explanation": "COMMIT 이전의 작업1, 작업2는 확정된다. 이후 작업3은 마지막 COMMIT 이후 수행됐으므로 ROLLBACK 시 취소된다.",
-    "chapter": "트랜잭션 관리",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1158",
-    "_category": "트랜잭션 관리",
-    "references": [
-      {
-        "type": "text",
-        "content": "작업1: INSERT A\n작업2: INSERT B\nCOMMIT\n작업3: INSERT C\nROLLBACK"
-      }
-    ]
-  },
-  {
     "id": 11947,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
@@ -37155,34 +37012,6 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11949,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "1과목",
-    "number": 1150,
-    "title": "제시된 그림만 근거로 판단하면, 주문상품 엔터티의 기본키로 가장 적절한 것은?",
-    "options": [
-      "customer_id",
-      "order_id + item_seq",
-      "status",
-      "product_id"
-    ],
-    "correctIndex": 1,
-    "explanation": "주문 내 순번까지 포함한 복합키가 자연스럽다.",
-    "chapter": "엔터티",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1162",
-    "_category": "ER 모델링",
-    "references": [
-      {
-        "type": "image",
-        "src": "/sqld-images/j1115-1.png",
-        "alt": "Sales ERD",
-        "caption": "Sales ERD"
-      }
-    ]
-  },
-  {
     "id": 11950,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
@@ -37249,38 +37078,6 @@ export const AI_MOCK: QuizQuestion[] = [
             "Z"
           ]
         ]
-      }
-    ]
-  },
-  {
-    "id": 11957,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "1과목",
-    "number": 1158,
-    "title": "제시된 그림만 근거로 판단하면, 부모 ORDERS 행을 삭제하려 할 때 자식 ORDER_DETAIL이 존재하면 기본 동작은?",
-    "options": [
-      "자식 FK가 0으로 변경된다.",
-      "부모만 삭제되고 자식은 유지된다.",
-      "자동으로 자식도 삭제된다.",
-      "삭제가 거부될 수 있다."
-    ],
-    "correctIndex": 3,
-    "explanation": "참조 중인 자식이 있으면 참조 무결성 위반으로 삭제가 막힐 수 있다.",
-    "chapter": "데이터 무결성",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1171",
-    "_category": "데이터 무결성",
-    "references": [
-      {
-        "type": "text",
-        "content": "별도 ON DELETE CASCADE 옵션이 없다고 가정한다."
-      },
-      {
-        "type": "image",
-        "src": "/sqld-images/j1147-1.png",
-        "alt": "Parent / Child ERD",
-        "caption": "Parent / Child ERD"
       }
     ]
   },
@@ -37421,32 +37218,6 @@ export const AI_MOCK: QuizQuestion[] = [
       {
         "type": "text",
         "content": "A는 4행, B는 3행이다."
-      }
-    ]
-  },
-  {
-    "id": 11968,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "1과목",
-    "number": 1169,
-    "title": "명령이 수행된 순서를 따라가면, 다음 트랜잭션 흐름 후 최종 반영되는 작업으로 옳은 것은?",
-    "options": [
-      "작업1, 작업2, 작업4가 반영된다.",
-      "작업1, 작업3, 작업4가 반영된다.",
-      "작업2, 작업4만 반영된다.",
-      "작업1과 작업4만 반영된다."
-    ],
-    "correctIndex": 0,
-    "explanation": "ROLLBACK TO S2 시점에 작업3만 취소된다. SAVEPOINT S2 이전 작업1, 작업2는 유지되고, 이후 수행한 작업4가 함께 COMMIT 된다.",
-    "chapter": "트랜잭션 관리",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1182",
-    "_category": "트랜잭션 관리",
-    "references": [
-      {
-        "type": "text",
-        "content": "작업1: INSERT A\nSAVEPOINT S1\n작업2: INSERT B\nSAVEPOINT S2\n작업3: INSERT C\nROLLBACK TO S2\n작업4: INSERT D\nCOMMIT"
       }
     ]
   },
@@ -37605,32 +37376,6 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11987,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 1188,
-    "title": "COMMIT/ROLLBACK 시점을 기준으로 보면, 다음 트랜잭션 흐름에 대한 설명으로 옳은 것은?",
-    "options": [
-      "작업1과 CREATE TABLE은 유지되고, 작업3만 취소된다.",
-      "작업1만 유지되고 CREATE TABLE은 취소된다.",
-      "모든 작업이 취소된다.",
-      "CREATE TABLE만 유지된다."
-    ],
-    "correctIndex": 0,
-    "explanation": "DDL인 CREATE TABLE 실행 시점에 이전 작업1이 자동 COMMIT 된다. 이후 수행한 작업3은 ROLLBACK 대상이므로 취소되지만, CREATE TABLE과 작업1은 유지된다.",
-    "chapter": "트랜잭션 관리",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1206",
-    "_category": "트랜잭션 관리",
-    "references": [
-      {
-        "type": "text",
-        "content": "작업1: INSERT A\n작업2: CREATE TABLE T_LOG (id NUMBER)\n작업3: INSERT B\nROLLBACK\n단, DDL 수행 시 자동 COMMIT이 발생한다고 가정한다."
-      }
-    ]
-  },
-  {
     "id": 11993,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
@@ -37703,34 +37448,6 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11997,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "1과목",
-    "number": 1198,
-    "title": "그림의 각 행과 관계선을 기준으로 해석하면, 고유성, 엔터티 무결성, 참조 무결성 중 FK와 직접 연결되는 것은?",
-    "options": [
-      "엔터티 무결성",
-      "참조 무결성",
-      "유일성 제약",
-      "도메인 무결성"
-    ],
-    "correctIndex": 1,
-    "explanation": "FK는 참조 무결성을 담당한다.",
-    "chapter": "데이터 무결성",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1219",
-    "_category": "데이터 무결성",
-    "references": [
-      {
-        "type": "image",
-        "src": "/sqld-images/j1147-1.png",
-        "alt": "Parent / Child ERD",
-        "caption": "Parent / Child ERD"
-      }
-    ]
-  },
-  {
     "id": 12003,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
@@ -37779,60 +37496,6 @@ export const AI_MOCK: QuizQuestion[] = [
       {
         "type": "text",
         "content": "INTERSECT와 MINUS의 결과 집합을 해석한다."
-      }
-    ]
-  },
-  {
-    "id": 12007,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "1과목",
-    "number": 1208,
-    "title": "트랜잭션 흐름을 단계별로 해석하면, 다음 트랜잭션 흐름 후 최종 반영되는 작업으로 옳은 것은?",
-    "options": [
-      "작업1과 작업3만 반영된다.",
-      "작업1만 반영된다.",
-      "작업2와 작업3만 반영된다.",
-      "작업3만 반영된다."
-    ],
-    "correctIndex": 3,
-    "explanation": "ROLLBACK은 마지막 COMMIT 이후 전체 변경을 취소하므로 작업1과 작업2가 모두 취소된다. 이후 새로 수행한 작업3만 COMMIT 된다.",
-    "chapter": "트랜잭션 관리",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1230",
-    "_category": "트랜잭션 관리",
-    "references": [
-      {
-        "type": "text",
-        "content": "작업1: INSERT A\nSAVEPOINT S1\n작업2: INSERT B\nROLLBACK\n작업3: INSERT C\nCOMMIT"
-      }
-    ]
-  },
-  {
-    "id": 12011,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 1212,
-    "title": "그림에 제시된 구조와 값을 기준으로 보면, 다음 ERD 기준 CUSTOMER와 ORDERS의 관계로 옳은 것은?",
-    "options": [
-      "한 고객은 여러 주문을 가질 수 있다.",
-      "한 주문은 여러 고객에 속한다.",
-      "두 엔터티는 관계가 없다.",
-      "한 고객은 정확히 한 주문만 가진다."
-    ],
-    "correctIndex": 0,
-    "explanation": "ERD에서 CUSTOMER와 ORDERS는 1:N 관계로 표현되어 있다.",
-    "chapter": "엔터티",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1234",
-    "_category": "ER 모델링",
-    "references": [
-      {
-        "type": "image",
-        "src": "/sqld-images/j1115-1.png",
-        "alt": "Sales ERD",
-        "caption": "Sales ERD"
       }
     ]
   },
@@ -38219,32 +37882,6 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12050,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "1과목",
-    "number": 1251,
-    "title": "중간 저장점과 취소 지점까지 고려하면, 다음 트랜잭션 흐름 후 최종 반영되는 작업으로 옳은 것은?",
-    "options": [
-      "작업2만 반영된다.",
-      "작업1과 작업2가 모두 취소된다.",
-      "아무 작업도 반영되지 않는다.",
-      "작업1만 반영된다."
-    ],
-    "correctIndex": 3,
-    "explanation": "이미 COMMIT 된 작업1은 유지되고, 이후 수행한 작업2만 ROLLBACK 된다.",
-    "chapter": "트랜잭션 관리",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1278",
-    "_category": "트랜잭션 관리",
-    "references": [
-      {
-        "type": "text",
-        "content": "작업1: INSERT A\nCOMMIT\n작업2: DELETE B\nROLLBACK"
-      }
-    ]
-  },
-  {
     "id": 12051,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
@@ -38293,34 +37930,6 @@ export const AI_MOCK: QuizQuestion[] = [
       {
         "type": "text",
         "content": "대량 데이터 비우기와 객체 삭제"
-      }
-    ]
-  },
-  {
-    "id": 12054,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 1255,
-    "title": "제시된 그림만 근거로 판단하면, 다음 ERD 기준 ORDERS와 ORDER_ITEM의 관계 특징으로 옳은 것은?",
-    "options": [
-      "외래키가 없으므로 관계가 성립하지 않는다.",
-      "양쪽 모두 독립 식별자만 사용한다.",
-      "항상 1:1 관계다.",
-      "부모의 식별자가 자식 PK에 포함되는 식별 관계로 해석할 수 있다."
-    ],
-    "correctIndex": 3,
-    "explanation": "자식 PK에 부모 PK가 포함되면 식별 관계로 보는 것이 일반적이다.",
-    "chapter": "엔터티",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1282",
-    "_category": "ER 모델링",
-    "references": [
-      {
-        "type": "image",
-        "src": "/sqld-images/j1115-1.png",
-        "alt": "Sales ERD",
-        "caption": "Sales ERD"
       }
     ]
   },
@@ -38510,32 +38119,6 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12070,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 1271,
-    "title": "명령이 수행된 순서를 따라가면, 다음 트랜잭션 흐름에 대한 설명으로 옳은 것은?",
-    "options": [
-      "작업2와 작업3만 반영된다.",
-      "모든 작업이 취소된다.",
-      "작업1만 반영된다.",
-      "작업1, 작업2만 반영된다."
-    ],
-    "correctIndex": 3,
-    "explanation": "ROLLBACK TO S2는 S2 이후 작업만 취소하므로 작업3만 취소된다.",
-    "chapter": "트랜잭션 관리",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1302",
-    "_category": "트랜잭션 관리",
-    "references": [
-      {
-        "type": "text",
-        "content": "작업1: INSERT A\nSAVEPOINT S1\n작업2: UPDATE B\nSAVEPOINT S2\n작업3: INSERT C\nROLLBACK TO S2\nCOMMIT"
-      }
-    ]
-  },
-  {
     "id": 12072,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
@@ -38610,32 +38193,6 @@ export const AI_MOCK: QuizQuestion[] = [
       {
         "type": "text",
         "content": "허용 값 범위를 CHECK 제약으로 제한하려 한다."
-      }
-    ]
-  },
-  {
-    "id": 12091,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "1과목",
-    "number": 1292,
-    "title": "COMMIT/ROLLBACK 시점을 기준으로 보면, 다음 트랜잭션 흐름에 대한 설명으로 옳은 것은?",
-    "options": [
-      "작업3만 유지된다.",
-      "모든 작업이 취소된다.",
-      "작업1과 CREATE TABLE은 유지되고 작업3은 취소된다.",
-      "CREATE TABLE만 취소된다."
-    ],
-    "correctIndex": 2,
-    "explanation": "DDL 수행 시점에 이전 DML이 자동 COMMIT 되므로 이후 DML만 ROLLBACK 된다.",
-    "chapter": "트랜잭션 관리",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1326",
-    "_category": "트랜잭션 관리",
-    "references": [
-      {
-        "type": "text",
-        "content": "작업1: INSERT A\n작업2: CREATE TABLE T1 (id NUMBER)\n작업3: DELETE B\nROLLBACK\n단, DDL 수행 시 자동 COMMIT이 발생한다고 가정한다."
       }
     ]
   },
@@ -38911,34 +38468,6 @@ export const AI_MOCK: QuizQuestion[] = [
       {
         "type": "text",
         "content": "작업1: INSERT A\nSAVEPOINT S1\n작업2: DELETE B\nROLLBACK\n작업3: UPDATE C\nCOMMIT"
-      }
-    ]
-  },
-  {
-    "id": 12116,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "1과목",
-    "number": 1317,
-    "title": "다음 ERD에 대한 설명으로 옳은 것은?",
-    "options": [
-      "고객과 주문의 관계는 1:N 관계이다.",
-      "주문과 주문상품의 관계는 1:1 관계이다.",
-      "ERD에서는 PK를 정의할 수 없다.",
-      "고객과 주문의 관계는 N:M 관계이다."
-    ],
-    "correctIndex": 0,
-    "explanation": "한 고객이 여러 주문을 가질 수 있으므로 1:N이다.",
-    "chapter": "엔터티",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1354",
-    "_category": "ER 모델링",
-    "references": [
-      {
-        "type": "image",
-        "src": "/sqld-images/j1115-1.png",
-        "alt": "Sales ERD",
-        "caption": "Sales ERD"
       }
     ]
   },

@@ -226,15 +226,25 @@ if (skippedEmpty.length > 0) {
 // 출처가 다른 풀(cbt-mock ↔ sqld-1140 등)에 같은 문제가 들어 있어 한 모의고사에서 같은 문제를 두 번 만날 수 있었다.
 // 제목(기계적으로 붙은 앞 문구 제외)·보기 집합·참고자료가 모두 같으면 같은 문제로 보고, 해설이 더 긴 쪽 하나만 남긴다.
 // 원본 JSON 은 그대로 두므로 이 블록을 지우면 되돌릴 수 있다.
-const FILLER_PREFIX = /^(출제 포인트를 복합적으로 적용하면|데이터 구조의 목적을 생각하면|설계 원칙을 기준으로 판단하면|업무 규칙과 제약조건을 함께 고려하면|실무 적용 관점에서 보면|표와 관계를 함께 읽으면|SQL문을 단계별로 해석하면|식과 절의 반환 규칙을 적용하면|문장을 그대로 평가하면|조건식과 함수 의미를 함께 고려하면|SQL 표현식 결과를 계산하면|엔터티와 데이터 분포를 함께 보면|제시된 표를 바탕으로 SQL문을 그대로 평가하면), /;
+const FILLER_PREFIX = /^(출제 포인트를 복합적으로 적용하면|데이터 구조의 목적을 생각하면|설계 원칙을 기준으로 판단하면|업무 규칙과 제약조건을 함께 고려하면|실무 적용 관점에서 보면|표와 관계를 함께 읽으면|SQL문을 단계별로 해석하면|식과 절의 반환 규칙을 적용하면|문장을 그대로 평가하면|조건식과 함수 의미를 함께 고려하면|SQL 표현식 결과를 계산하면|엔터티와 데이터 분포를 함께 보면|제시된 표를 바탕으로 SQL문을 그대로 평가하면|제시된 그림만 근거로 판단하면|그림에 제시된 구조와 값을 기준으로 보면|그림의 각 행과 관계선을 기준으로 해석하면|처리 순서를 끝까지 반영하면|중간 저장점과 취소 지점까지 고려하면|명령이 수행된 순서를 따라가면|COMMIT\/ROLLBACK 시점을 기준으로 보면|트랜잭션 흐름을 단계별로 해석하면), /;
+// 제목 표현만 조금 다른 같은 문제 (보기·자료·정답이 같음, 2026-11-03 직접 대조). 같은 값끼리 한 문제로 본다.
+const SAME_QUESTION = {
+  'cbt-004': 'self-join', 'sqld-0111': 'self-join',          // M54 · M339 SELF JOIN 이 필요한 경우
+  'cbt-026': 'isleaf', 'sqld-0208': 'isleaf',                // M75 · M408 CONNECT_BY_ISLEAF
+  'cbt-177': 'table-basic', 'sqld-0172': 'table-basic',      // M219 · M382 테이블 기본 개념
+  'sqld-0171': 'erd-order', 'sqld-0447': 'erd-order',        // M381 · M607 ERD 작성 순서
+  'sqld-0622': 'entity-when', 'sqld-0821': 'entity-when',    // M738 · M875 발생(생성)시점 분류
+};
 const refKey = q => (q.references || []).map(r =>
   r.type === 'table' ? JSON.stringify(r.rows) : r.type === 'sql' ? r.code : r.type === 'text' ? r.content
   : r.type === 'erd' ? r.mermaid : (r.src || '')).join('#');
 const dupKey = q => (q.title.replace(FILLER_PREFIX, '') + '|' + [...q.options].sort().join('|') + '|' + refKey(q))
   .replace(/[\s,.]+/g, '').toLowerCase();
+// SAME_QUESTION 에 적힌 문항의 키를 같은 그룹 이름으로 묶는다 (그 문항과 제목까지 같은 사본도 함께 따라온다).
+const keyAlias = new Map(combinedMock.filter(q => SAME_QUESTION[q._id]).map(q => [dupKey(q), 'same:' + SAME_QUESTION[q._id]]));
 const keptByKey = new Map();
 for (const q of combinedMock) {
-  const k = dupKey(q);
+  const k = keyAlias.get(dupKey(q)) || dupKey(q);
   const prev = keptByKey.get(k);
   if (!prev || (q.explanation || '').length > (prev.explanation || '').length) keptByKey.set(k, q);
 }
