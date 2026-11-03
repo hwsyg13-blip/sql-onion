@@ -311,7 +311,7 @@
         "존재성"
       ],
       "correctIndex": 0,
-      "explanation": "식별자는 유일하고(유일성), 최소한의 속성으로 구성되며(최소성), 변경되지 않는 불변성(불변성)을 지녀야 한다. 또한 값이 존재해야 한다(존재성). 가변성은 잘못된 설명이다."
+      "explanation": "주식별자는 행마다 값이 달라야 하고(유일성), 꼭 필요한 최소한의 속성으로 구성하며(최소성), 한번 정한 값은 바꾸지 않고(불변성), 반드시 값이 있어야 한다(존재성). 가변성은 불변성과 반대되는 말이라 특징이 아니다."
     },
     {
       "_id": "cbt-015",
@@ -4593,7 +4593,7 @@
         "오류 발생"
       ],
       "correctIndex": 2,
-      "explanation": "Oracle 11g 버전에서의 상위 n개 데이터를 가져오려면 먼저 인라인 뷰로 내림차순 정렬된 가상의 테이블을 만든 후 ROWNUM으로 필터링한다. 즉, PRICE 기준 내림차 순 정렬해서 가격이 가장 높은 금액 중 하나를 ROWNUM = 1로 추출하는 쿼리이다. 따라서 답은 ITEM C이다.",
+      "explanation": "Oracle 11g 버전에서의 상위 n개 데이터를 가져오려면 먼저 인라인 뷰로 내림차순 정렬된 가상의 테이블을 만든 후 ROWNUM으로 필터링한다. 즉, PRICE 기준 내림차순 정렬해서 가격이 가장 높은 금액 중 하나를 ROWNUM = 1로 추출하는 쿼리이다. 따라서 답은 ITEM C이다.",
       "references": [
         {
           "type": "sql",
@@ -5316,7 +5316,7 @@
         "DELETE FROM EMP WHERE DEPTNO IS NULL;"
       ],
       "correctIndex": 0,
-      "explanation": "DEPTNO가 DEPT 테이블에 존재하지 않는 사원을 올바르게 삭제한다.②, ③ 문법 오류에 해당한다.④ 조건 자체가 문제 의도와 다르며. DEPTNO가 PK이므로 NOT IN 사용 시에도 NULL에 대한 우려가 없다."
+      "explanation": "DEPT 에 없는 부서번호를 가진 사원은 DEPTNO NOT IN (SELECT DEPTNO FROM DEPT) 로 찾는다(①). DEPTNO 가 DEPT 의 PK 라 서브쿼리 결과에 NULL 이 없으므로 NOT IN 을 써도 안전하다. ② DELETE * 는 문법 오류, ③ NOT EXISTS 뒤에는 괄호로 감싼 서브쿼리가 와야 하고, ④ 는 부서번호가 비어 있는 사원만 지운다."
     },
     {
       "_id": "cbt-196",
@@ -5405,7 +5405,7 @@
         "STDDEV"
       ],
       "correctIndex": 2,
-      "explanation": "집계 함수는 집합에 대한 정보를 제공하므로 주로 숫자 유형에 사용된다. 추가로 MAX, MIN, COUNT 함수는 숫자 유형만 아니라 문자 유형, 날짜 유형에도 적용이 가능한 함수이다."
+      "explanation": "COUNT 는 행 수를 세는 함수라 숫자·문자·날짜 어떤 타입에도 쓸 수 있다(③). AVG·SUM·STDDEV 는 계산을 해야 하므로 숫자형에만 쓴다. MAX·MIN 도 문자·날짜에 쓸 수 있지만 보기에는 없다."
     },
     {
       "_id": "cbt-199",

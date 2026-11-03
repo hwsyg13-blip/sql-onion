@@ -48,9 +48,10 @@ const shortDate = (ko) => ko.replace(/(\d{4})년 (\d+)월/, (_, y, m) => `${y}.$
 const EXAM_SCHEDULE = [...readFileSync('src/lib/examDate.ts', 'utf8').matchAll(/\{\s*round:\s*(\d+),\s*date:\s*'(\d{4})-(\d{2})-(\d{2})'\s*\}/g)]
   .map(([, r, y, m, d]) => ({ round: +r, y: +y, m: +m, d: +d, iso: `${y}-${m}-${d}` }));
 const scheduleItems = EXAM_SCHEDULE.slice(-5).map(e => {
-  const upcoming = e.iso >= NOW ? ' — 다음 시험' : '';
-  return `<li>제${e.round}회: ${e.y}년 ${e.m}월 ${e.d}일${upcoming}</li>`;
-}).join('\n        ');
+  const upcoming = e.iso >= NOW ? ' <strong>다음 시험</strong>' : '';
+  const wd = '일월화수목금토'[new Date(Date.UTC(e.y, e.m - 1, e.d)).getUTCDay()];
+  return `<tr><td>제${e.round}회</td><td>${e.y}년 ${e.m}월 ${e.d}일 (${wd})${upcoming}</td></tr>`;
+}).join('\n          ');
 
 // 이론 본문 HTML (앱의 이론 상세 화면과 같은 원문) — 정적 페이지에 그대로 싣는다.
 // 2026-11-02: 예전 정적 이론 페이지는 제목 + 섹션명 + 모든 페이지 같은 안내 문구뿐이라
@@ -161,6 +162,12 @@ ${appCss && APP_CSS ? `  <link rel="stylesheet" href="${APP_CSS}" />\n` : ''}
     p,li{font-size:14.5px}
     code{background:#F0F0F0;padding:1px 5px;border-radius:4px;font-family:'D2Coding','Consolas',monospace;font-size:0.92em}
     .static-theory .reveal{opacity:1!important;transform:none!important}
+    main > table{width:100%;border-collapse:separate;border-spacing:0;margin:12px 0 20px;font-size:14px;border:1px solid var(--border);border-radius:10px;overflow:hidden}
+    main > table th{background:#EBF5EC;color:#1B5E20;text-align:left;padding:10px 12px;font-weight:800;font-size:13px;border-bottom:1px solid var(--border)}
+    main > table td{padding:9px 12px;border-bottom:1px solid var(--border);vertical-align:top;line-height:1.6}
+    main > table tr:last-child td{border-bottom:0}
+    main > table td:first-child{font-weight:700;color:var(--fg-1)}
+    @media (max-width:560px){main > table{display:block;overflow-x:auto}}
     .diagram-note{background:#F8F9FA;border:1px dashed #CFD8CF;border-radius:10px;padding:12px 14px;font-size:13.5px;color:var(--fg-3)}
     .chapter-nav{display:flex;justify-content:space-between;gap:12px;margin-top:8px;font-size:14px}
     .chapter-nav a{color:var(--accent);text-decoration:none;font-weight:600}
@@ -284,6 +291,23 @@ function buildExamIndexPage() {
     <h1>SQLD 회차별 기출 복원문제</h1>
     <p class="lead">제${firstRound.round}회(${firstRound.date.ko})부터 제${lastRound.round}회(${lastRound.date.ko})까지 ${rounds.length}개 회차, 총 ${totalQuestions}문항.</p>
     <a class="cta" href="/">랜덤 문제 풀이 시작하기 →</a>
+    <h2>어떤 회차부터 풀까</h2>
+    <table>
+      <thead><tr><th>구분</th><th>회차</th><th>특징</th></tr></thead>
+      <tbody>
+        <tr><td>현행 출제기준</td><td>제52회(2024년 3월) ~ 최신</td><td>2024년 개편 뒤 시험. 객관식 50문항(1과목 10 · 2과목 40). 시험이 가까우면 여기부터 푼다.</td></tr>
+        <tr><td>개편 전</td><td>제45회 ~ 제51회 (2022~2023년)</td><td>지금은 출제 범위에서 빠진 SQL 최적화(조인 수행 원리·인덱스) 문제가 일부 섞여 있다. 개념을 넓게 복습할 때 쓴다.</td></tr>
+      </tbody>
+    </table>
+
+    <h2>이렇게 풀면 좋다</h2>
+    <ol>
+      <li><strong>한 회차를 90분 타이머로 끊지 않고 푼다.</strong> 실제 시험처럼 시간 배분(1과목 20분 · 2과목 70분)을 연습한다.</li>
+      <li><strong>제출 뒤 과목별 점수부터 본다.</strong> 1과목 10문항 중 4문항 미만이면 총점과 관계없이 과락이다.</li>
+      <li><strong>틀린 문항은 해설을 읽고 해당 <a href="/theory/">이론 챕터</a>로 돌아간다.</strong> 같은 유형이 다음 회차에 숫자만 바뀌어 다시 나온다.</li>
+      <li><strong>SQL 결과를 묻는 문제는 종이에 표를 그려 행을 직접 센다.</strong> 조인·GROUP BY·윈도우 함수는 눈으로만 풀면 실수가 잦다.</li>
+    </ol>
+
     <h2>회차별 문제집 (${rounds.length}개)</h2>
     <ul class="chapters">${items}</ul>
 ` + tail;
@@ -332,6 +356,17 @@ function buildTheoryIndexPage() {
     <h1>SQLD 이론 — 전 범위 챕터 정리</h1>
     <p class="lead">${s1.title} ${s1.chapters.length}챕터 + ${s2.title} ${s2.chapters.length}챕터. SQLD 출제 범위를 한 페이지로 한눈에.</p>
     <a class="cta" href="/">본문 + 미니테스트 모드로 학습 시작 →</a>
+    <h2>이론은 이렇게 본다</h2>
+    <table>
+      <thead><tr><th>영역</th><th>문항 비중</th><th>공부 포인트</th></tr></thead>
+      <tbody>
+        <tr><td>1과목 데이터 모델링의 이해</td><td>10문항 (20점)</td><td>용어와 분류가 그대로 나온다 — 엔터티 분류, 식별자 특성, 정규화 단계, ERD 기호 읽기</td></tr>
+        <tr><td>2과목 SQL 기본</td><td rowspan="3">40문항 (80점)</td><td>WHERE·GROUP BY·조인 결과의 행 수를 손으로 세는 연습</td></tr>
+        <tr><td>2과목 SQL 활용</td><td>윈도우 함수·계층형 질의·그룹 함수(ROLLUP·CUBE)는 매 회 나온다</td></tr>
+        <tr><td>2과목 관리 구문</td><td>TRUNCATE·DDL 자동 커밋, SAVEPOINT 계산, 권한 회수처럼 외울 규칙이 짧다</td></tr>
+      </tbody>
+    </table>
+    <p>챕터마다 <strong>한 줄 요약 → 꼭 외울 것(표·그림) → 시험은 이렇게 낸다(함정) → 30초 정리</strong> 순서다. 처음에는 한 줄 요약과 그림만 훑고, 기출을 풀다 틀린 챕터로 돌아와 함정까지 읽으면 된다.</p>
     ${subjects}
 ` + tail;
 }
@@ -409,38 +444,51 @@ function buildGuide({ slug, title, desc, body }) {
 const guides = [
   {
     slug: 'sqld-overview',
-    title: 'SQLD 자격증 완벽 안내 — 시험 정보·출제 범위·합격 기준',
+    title: 'SQLD 자격증 안내 — 시험 정보·출제 범위·합격 기준',
     desc: 'SQLD(SQL Developer)는 한국데이터산업진흥원이 시행하는 SQL 개발자 자격증입니다. 시험 시간·문항수·합격 기준·출제 범위를 한눈에.',
     body: `
       <h2>SQLD란?</h2>
       <p>SQLD(SQL Developer)는 <strong>한국데이터산업진흥원(KDATA)</strong>이 시행하는 국가공인 데이터 자격검정으로, SQL 개발자에게 필요한 데이터 모델링과 SQL 활용 능력을 검정합니다. 정보처리기사·SQLP·ADsP와 함께 데이터 직무에서 가장 많이 취득하는 자격증 중 하나입니다.</p>
 
-      <h2>시험 개요</h2>
+      <h2>시험 한눈에 보기</h2>
+      <table>
+        <thead><tr><th>항목</th><th>내용</th></tr></thead>
+        <tbody>
+          <tr><td>시험 시간</td><td>90분</td></tr>
+          <tr><td>문항</td><td>50문항, 모두 4지선다 객관식 (2024년부터 단답형 없음)</td></tr>
+          <tr><td>배점</td><td>한 문항 2점, 100점 만점</td></tr>
+          <tr><td>합격 기준</td><td>총점 60점 이상 + 과목마다 40% 이상</td></tr>
+          <tr><td>응시료</td><td>50,000원</td></tr>
+          <tr><td>방식</td><td>컴퓨터로 푸는 CBT</td></tr>
+          <tr><td>주관</td><td>한국데이터산업진흥원 (dataq.or.kr)</td></tr>
+        </tbody>
+      </table>
+
+      <h2>과목 구성과 과락 기준</h2>
+      <table>
+        <thead><tr><th>과목</th><th>문항</th><th>배점</th><th>과락 (40% 미만)</th></tr></thead>
+        <tbody>
+          <tr><td>1과목 데이터 모델링의 이해</td><td>10</td><td>20점</td><td>8점 미만 = 3문항 이하로 맞히면 과락</td></tr>
+          <tr><td>2과목 SQL 기본 및 활용</td><td>40</td><td>80점</td><td>32점 미만 = 15문항 이하로 맞히면 과락</td></tr>
+        </tbody>
+      </table>
+      <p><strong>예:</strong> 2과목을 32문항 맞히고(64점) 1과목을 3문항만 맞히면(6점) 총점은 70점이지만 1과목 과락으로 <strong>불합격</strong>이다. 1과목은 문항이 적어 가볍게 보기 쉽지만, 최소 4문항은 꼭 챙겨야 한다.</p>
+
+      <h3>1과목에서 다루는 것</h3>
       <ul>
-        <li><strong>시험 시간:</strong> 90분</li>
-        <li><strong>문항 수:</strong> 50문항 (객관식 4지선다)</li>
-        <li><strong>합격 기준:</strong> 100점 만점 60점 이상 (과목별 40% 이상)</li>
-        <li><strong>응시료:</strong> 50,000원</li>
-        <li><strong>주관:</strong> 한국데이터산업진흥원 (https://www.dataq.or.kr)</li>
+        <li>데이터 모델링의 이해 — <a href="/theory/c111/">데이터 모델</a>, <a href="/theory/c112/">엔터티</a>, <a href="/theory/c113/">속성</a>, <a href="/theory/c114/">관계</a>, <a href="/theory/c115/">식별자</a></li>
+        <li>데이터 모델과 SQL — <a href="/theory/c121/">정규화</a>, <a href="/theory/c122/">관계와 조인</a>, <a href="/theory/c123/">트랜잭션</a>, <a href="/theory/c124/">NULL 속성</a>, <a href="/theory/c125/">본질·인조식별자</a></li>
       </ul>
 
-      <h2>과목 구성</h2>
-      <h3>1과목 — 데이터 모델링의 이해 (10문항)</h3>
+      <h3>2과목에서 다루는 것</h3>
       <ul>
-        <li>데이터 모델링의 이해 — 데이터 모델, 엔터티, 속성, 관계, 식별자</li>
-        <li>데이터 모델과 SQL — 정규화, 관계와 조인, 트랜잭션, NULL 속성, 본질식별자와 인조식별자</li>
-      </ul>
-
-      <h3>2과목 — SQL 기본 및 활용 (40문항)</h3>
-      <ul>
-        <li>SQL 기본 — SELECT, 함수, WHERE, GROUP BY·HAVING, ORDER BY, 조인, 표준 조인</li>
-        <li>SQL 활용 — 서브쿼리, 집합 연산자, 그룹 함수, 윈도우 함수, Top N, 계층형 질의, PIVOT, 정규 표현식</li>
-        <li>관리 구문 — DML, TCL, DDL, DCL</li>
-        <li>DDL·DML·DCL·TCL</li>
+        <li>SQL 기본 — <a href="/theory/c212/">SELECT</a>, <a href="/theory/c213/">함수</a>, <a href="/theory/c214/">WHERE</a>, <a href="/theory/c215/">GROUP BY·HAVING</a>, <a href="/theory/c216/">ORDER BY</a>, <a href="/theory/c217/">조인</a>, <a href="/theory/c218/">표준 조인</a></li>
+        <li>SQL 활용 — <a href="/theory/c221/">서브쿼리</a>, <a href="/theory/c222/">집합 연산자</a>, <a href="/theory/c223/">그룹 함수</a>, <a href="/theory/c224/">윈도우 함수</a>, <a href="/theory/c225/">Top N</a>, <a href="/theory/c226/">계층형 질의</a>, <a href="/theory/c227/">PIVOT</a>, <a href="/theory/c228/">정규 표현식</a></li>
+        <li>관리 구문 — <a href="/theory/c231/">DML</a>, <a href="/theory/c232/">TCL</a>, <a href="/theory/c233/">DDL</a>, <a href="/theory/c234/">DCL</a></li>
       </ul>
 
       <h2>합격 전략</h2>
-      <p>2과목이 40문항으로 비중이 크므로 SQL 실습 위주의 학습이 핵심입니다. 1과목은 개념 위주로 빠르게 정리한 뒤 기출 회차를 반복 풀이하는 것이 효율적입니다.</p>
+      <p>점수의 80%가 2과목이라 SQL 결과를 손으로 계산하는 연습에 시간을 가장 많이 쓴다. 1과목은 용어와 분류(엔터티 분류, 식별자 특성, 정규화 단계)가 그대로 반복해서 나오므로 이론을 한 번 정리한 뒤 기출로 확인하면 된다. 옛 회차에 나오던 옵티마이저·인덱스·실행 계획 같은 성능 문제는 2024년 개편 뒤로 출제 범위에서 빠졌다.</p>
     `,
   },
   {
@@ -452,9 +500,12 @@ const guides = [
       <p>SQLD는 연 4회 정기 시행 (보통 3월·5월·8월·11월). 정확한 일정은 <a href="https://www.dataq.or.kr" target="_blank" rel="noopener">한국데이터산업진흥원 데이터자격검정</a>에서 확인할 수 있습니다.</p>
 
       <h3>최근·다음 회차 시험일 (참고)</h3>
-      <ul>
-        ${scheduleItems}
-      </ul>
+      <table>
+        <thead><tr><th>회차</th><th>시험일</th></tr></thead>
+        <tbody>
+          ${scheduleItems}
+        </tbody>
+      </table>
       <p>접수 기간·고사장은 회차마다 달라지므로 반드시 공식 사이트 공지를 확인하세요.</p>
 
       <h2>접수 방법</h2>
@@ -473,8 +524,19 @@ const guides = [
         <li>중간 저장 가능, 시험 종료 전 자유롭게 이동</li>
       </ul>
 
+      <h2>시험 전 마지막 일주일 체크리스트</h2>
+      <table>
+        <thead><tr><th>언제</th><th>할 일</th></tr></thead>
+        <tbody>
+          <tr><td>D-7 ~ D-5</td><td>최근 회차(52회 이후) 두세 개를 90분 타이머로 풀고, 과목별 점수로 약한 과목 확인</td></tr>
+          <tr><td>D-4 ~ D-3</td><td>틀린 문항이 몰린 챕터만 <a href="/theory/">이론</a>으로 다시 보기 — 특히 조인 결과 행 수, 윈도우 함수, 계층형 질의</td></tr>
+          <tr><td>D-2</td><td><a href="/guide/sqld-tips/">자주 틀리는 함정 10가지</a> 복습, 1과목 용어(엔터티 분류·식별자 특성·정규화 단계) 정리</td></tr>
+          <tr><td>D-1</td><td>새 문제보다 오답 다시 보기. 고사장 위치·입실 시간·지참물은 회차 공지에서 확인</td></tr>
+        </tbody>
+      </table>
+
       <h2>SQLD양파의 CBT 모드</h2>
-      <p>SQLD양파는 실제 CBT 환경과 동일한 50문항·90분 풀이 모드를 제공합니다. 회차별 기출 또는 랜덤 모의고사로 시험장 환경에 미리 적응할 수 있습니다.</p>
+      <p>SQLD양파의 CBT 모드는 실제 시험과 같은 50문항·90분 구성이다. 문항 번호판으로 오가며 풀고, 제출하면 과목별 점수와 문항별 해설을 바로 볼 수 있다. 회차별 기출이나 랜덤 모의고사로 시간 배분을 미리 연습해 두자.</p>
     `,
   },
   {
@@ -485,34 +547,52 @@ const guides = [
       <h2>전체 로드맵</h2>
       <ul>
         <li><strong>1주차 (Day 1–7):</strong> 1·2과목 이론 빠른 1회독</li>
-        <li><strong>2주차 (Day 8–14):</strong> 회차별 기출 풀이 (45회~55회)</li>
-        <li><strong>3주차 (Day 15–21):</strong> 최근 회차 + 약점 보강 + CBT 모의고사</li>
+        <li><strong>2주차 (Day 8–14):</strong> 현행 기준 기출 풀이 (52회~58회)</li>
+        <li><strong>3주차 (Day 15–21):</strong> 최근 회차(59회~) + 약점 보강 + 모의고사</li>
       </ul>
 
       <h2>1주차 — 이론 1회독</h2>
       <p>매일 1챕터씩 핵심만 빠르게. 모든 챕터를 완벽히 외우려 하지 말고 '이런 개념이 있다'는 감만 잡습니다.</p>
-      <ul>
-        <li>Day 1: 데이터 모델·스키마·ERD 기초</li>
-        <li>Day 2: 엔터티·속성</li>
-        <li>Day 3: 관계·식별자</li>
-        <li>Day 4: 정규화·관계와 조인·트랜잭션·NULL·식별자</li>
-        <li>Day 5: SELECT·WHERE·함수</li>
-        <li>Day 6: GROUP BY·HAVING·JOIN</li>
-        <li>Day 7: 서브쿼리·집합 연산자·윈도우 함수·Top N·계층형 질의·PIVOT·정규 표현식, DML·TCL·DDL·DCL</li>
-      </ul>
+      <table>
+        <thead><tr><th>날짜</th><th>볼 챕터</th></tr></thead>
+        <tbody>
+          <tr><td>Day 1</td><td><a href="/theory/c111/">데이터 모델</a> · <a href="/theory/c112/">엔터티</a></td></tr>
+          <tr><td>Day 2</td><td><a href="/theory/c113/">속성</a> · <a href="/theory/c114/">관계</a></td></tr>
+          <tr><td>Day 3</td><td><a href="/theory/c115/">식별자</a> · <a href="/theory/c121/">정규화</a></td></tr>
+          <tr><td>Day 4</td><td><a href="/theory/c122/">관계와 조인</a> · <a href="/theory/c123/">트랜잭션</a> · <a href="/theory/c124/">NULL</a> · <a href="/theory/c125/">본질·인조식별자</a></td></tr>
+          <tr><td>Day 5</td><td><a href="/theory/c211/">관계형 DB</a> · <a href="/theory/c212/">SELECT</a> · <a href="/theory/c213/">함수</a> · <a href="/theory/c214/">WHERE</a></td></tr>
+          <tr><td>Day 6</td><td><a href="/theory/c215/">GROUP BY</a> · <a href="/theory/c216/">ORDER BY</a> · <a href="/theory/c217/">조인</a> · <a href="/theory/c218/">표준 조인</a></td></tr>
+          <tr><td>Day 7</td><td><a href="/theory/c221/">서브쿼리</a> · <a href="/theory/c222/">집합</a> · <a href="/theory/c223/">그룹 함수</a> · <a href="/theory/c224/">윈도우</a> · <a href="/theory/c225/">Top N</a> · <a href="/theory/c226/">계층형</a> · <a href="/theory/c227/">PIVOT</a> · <a href="/theory/c228/">정규식</a> · <a href="/theory/c231/">DML</a> · <a href="/theory/c232/">TCL</a> · <a href="/theory/c233/">DDL</a> · <a href="/theory/c234/">DCL</a></td></tr>
+        </tbody>
+      </table>
+      <p>Day 7 은 분량이 많다. 2-3 관리 구문(DML·TCL·DDL·DCL)은 외울 것이 적으니 짧게 보고, 윈도우 함수·계층형 질의에 시간을 더 쓴다.</p>
 
-      <h2>2주차 — 기출 풀이</h2>
-      <p>매일 회차 1~2개씩 푼다. 틀린 문항은 오답노트에 정리.</p>
-      <p>SQLD양파의 <a href="/exam/">기출 복원 회차 목록</a>에서 회차를 골라 실제 시험처럼 90분 타이머로 풀 수 있습니다.</p>
+      <h2>2주차 — 기출 풀이 (하루 한 회차)</h2>
+      <p>2024년 개편 뒤 시험인 52회부터 하루 한 회차씩 푼다. 틀린 문항은 해설을 읽고 해당 이론 챕터로 돌아가 같은 유형을 다시 확인한다.</p>
+      <table>
+        <thead><tr><th>날짜</th><th>할 일</th></tr></thead>
+        <tbody>
+          <tr><td>Day 8</td><td><a href="/?cbt=round-52">제52회</a> 90분 풀이 → 채점 → 틀린 문항 해설과 이론 확인</td></tr>
+          <tr><td>Day 9</td><td><a href="/?cbt=round-53">제53회</a> 90분 풀이 → 채점 → 틀린 문항 해설과 이론 확인</td></tr>
+          <tr><td>Day 10</td><td><a href="/?cbt=round-54">제54회</a> 90분 풀이 → 채점 → 틀린 문항 해설과 이론 확인</td></tr>
+          <tr><td>Day 11</td><td><a href="/?cbt=round-55">제55회</a> 90분 풀이 → 채점 → 틀린 문항 해설과 이론 확인</td></tr>
+          <tr><td>Day 12</td><td><a href="/?cbt=round-56">제56회</a> 90분 풀이 → 채점 → 틀린 문항 해설과 이론 확인</td></tr>
+          <tr><td>Day 13</td><td><a href="/?cbt=round-57">제57회</a> 90분 풀이 → 채점 → 틀린 문항 해설과 이론 확인</td></tr>
+          <tr><td>Day 14</td><td><a href="/?cbt=round-58">제58회</a> 90분 풀이 → 채점 → 틀린 문항 해설과 이론 확인</td></tr>
+        </tbody>
+      </table>
 
-      <h2>3주차 — 실전 모의고사</h2>
-      <p>가장 최근 회차들을 시험 환경처럼 90분 타이머로 풀고, 틀린 문제가 몰린 챕터의 이론을 다시 정리합니다. 2024년부터 단답형 없이 객관식 50문항으로만 출제됩니다.</p>
-      <ul>
-        <li>Day 15–17: 최근 회차 풀이 + 채점</li>
-        <li>Day 18–19: 오답노트 회독 + 약점 챕터 보강</li>
-        <li>Day 20: 랜덤 모의고사 + 시험 환경 시뮬레이션</li>
-        <li>Day 21: 핵심 요약 정리 + 충분한 휴식</li>
-      </ul>
+      <h2>3주차 — 최근 회차와 실전 연습</h2>
+      <table>
+        <thead><tr><th>날짜</th><th>할 일</th></tr></thead>
+        <tbody>
+          <tr><td>Day 15–17</td><td>최근 회차(59회 이후)를 시험 환경처럼 90분 타이머로 풀고 채점</td></tr>
+          <tr><td>Day 18–19</td><td>2·3주차 오답 다시 풀기 + 틀린 문제가 몰린 챕터 이론 보강</td></tr>
+          <tr><td>Day 20</td><td>랜덤 모의고사 50문항으로 마지막 점검 (1과목 4문항 이상인지 확인)</td></tr>
+          <tr><td>Day 21</td><td><a href="/guide/sqld-tips/">자주 틀리는 함정</a>과 각 챕터 '30초 정리'만 훑고 충분히 쉰다</td></tr>
+        </tbody>
+      </table>
+      <p>시간이 남으면 개편 전 회차(45~51회)로 개념을 넓게 복습한다. 다만 조인 수행 원리·인덱스 같은 최적화 문제는 지금 출제 범위가 아니니 넘어가도 된다.</p>
     `,
   },
   {
@@ -528,6 +608,23 @@ const guides = [
         <li><strong>SQL은 직접 쳐보기</strong> — Oracle Live SQL이나 SQLite로 실습하면 암기보다 빠르게 익힘.</li>
         <li><strong>윈도우 함수·계층형 질의 집중 정리</strong> — 매 회 출제되는 단골 영역.</li>
       </ol>
+
+      <h2>기출에서 자주 틀리는 함정 10가지</h2>
+      <table>
+        <thead><tr><th>문제에서 묻는 것 (누르면 이론으로)</th><th>정답 포인트</th></tr></thead>
+        <tbody>
+          <tr><td><a href="/theory/c214/">NOT IN 서브쿼리에 NULL 이 섞이면?</a></td><td>결과가 0건</td></tr>
+          <tr><td><a href="/theory/c225/">같은 SELECT 의 ROWNUM &lt;= 3 ORDER BY</a></td><td>정렬 전에 번호가 붙어 엉뚱한 3행</td></tr>
+          <tr><td><a href="/theory/c224/">RANK 와 DENSE_RANK 동점 처리</a></td><td>RANK 1·1·3, DENSE_RANK 1·1·2</td></tr>
+          <tr><td><a href="/theory/c217/">LEFT JOIN 뒤 WHERE 에 오른쪽 조건</a></td><td>NULL 행이 사라져 INNER JOIN 처럼 됨</td></tr>
+          <tr><td><a href="/theory/c223/">ROLLUP(A, B) 결과 행 수</a></td><td>상세 + A 소계 + 총계</td></tr>
+          <tr><td><a href="/theory/c233/">TRUNCATE 뒤 ROLLBACK</a></td><td>DDL 이라 되돌릴 수 없음</td></tr>
+          <tr><td><a href="/theory/c215/">GROUP BY 기준 컬럼이 NULL</a></td><td>NULL 도 한 그룹으로 나옴</td></tr>
+          <tr><td><a href="/theory/c226/">CONNECT BY PRIOR 위치</a></td><td>PRIOR 가 자식 쪽 키면 위 → 아래</td></tr>
+          <tr><td><a href="/theory/c232/">COMMIT 뒤 ROLLBACK TO 저장점</a></td><td>저장점이 사라져 오류</td></tr>
+          <tr><td><a href="/theory/c211/">UNIQUE 컬럼에 NULL</a></td><td>여러 개 넣을 수 있음</td></tr>
+        </tbody>
+      </table>
 
       <h2>시험 당일 팁</h2>
       <ol>
