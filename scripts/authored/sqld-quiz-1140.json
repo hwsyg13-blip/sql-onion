@@ -6542,7 +6542,7 @@
         "0"
       ],
       "correctIndex": 0,
-      "explanation": "SELECT문을 보면 department로  GROUP BY한다. 그러면 총 3개의 그룹이 만들어진다. computer, physics, math이다. 3개의 그룹 중에서 개수가 2개 초과인 것을 조회하기 위해서 \"HAVING count(*) >2\" 문을 사용했다. 따라서 2개 초과인 것은 math이고 math는 총 3개가 있으므로 3이 된다.",
+      "explanation": "department 로 묶으면 computer 2명, physics 2명, math 3명이다. HAVING count(*) > 2 를 만족하는 그룹은 math 하나뿐이고, SELECT 하는 값은 그 그룹의 count(*) 인 3 이다(①). 결과 행 수(1)가 아니라 출력되는 값을 묻는 문제다.",
       "references": [
         {
           "type": "sql",
@@ -7112,7 +7112,7 @@
         "SELECT 출판사명 FROM 도서\nWHERE 발행연도 >= 2000\nORDER BY  COUNT(도서번호) >= 10;"
       ],
       "correctIndex": 0,
-      "explanation": "문제에서 10권 이상 구매한 사람을 출력하기 위해서 \"HAVING COUNT(도서번호)=10\" 의 HAVING 절을 추가하고 발행연도가 2000 이후 이므로 WHERE절에 \"발행연도 >= 2000\"을 넣어야 한다. 또한 출판사명은 이름에 중복이 없어야 하므로 GROUP BY구로 \"출판사명\"을 추가하면 된다."
+      "explanation": "'2000년 이후 발행' 은 그룹을 만들기 전에 행을 거르는 조건이라 WHERE 발행연도 >= 2000 에, '10권 이상' 은 출판사별로 센 결과에 거는 조건이라 HAVING COUNT(도서번호) >= 10 에 써야 한다(①). GROUP BY 출판사명 으로 출판사가 한 번씩만 나온다. ②③ 처럼 WHERE 에 집계 함수를 쓰면 오류이고, ④ 는 그룹을 만들지 않는다."
     },
     {
       "_id": "sqld-0252",
@@ -8566,7 +8566,7 @@
         "DEPTNO, JOB"
       ],
       "correctIndex": 1,
-      "explanation": "주어진 결괏값을 보면 1, DEPTNO별 합계, 2.DEPTNO,JOB별 합계, 3.전체 합계가 조회되므로 빈칸에는 그룹 함수 중 ROLLUP이 와야 한다.",
+      "explanation": "결과를 보면 (DEPTNO, JOB) 별 합계, DEPTNO 별 소계(JOB 이 빈 행), 맨 아래 전체 합계가 있다. 왼쪽 칼럼부터 계층적으로 소계를 만드는 ROLLUP(DEPTNO, JOB) 의 결과다(②). CUBE 였다면 JOB 별 소계도 나오고, GROUPING SETS(DEPTNO, JOB) 은 (DEPTNO, JOB) 조합과 전체 합계가 없다.",
       "references": [
         {
           "type": "sql",
@@ -8959,7 +8959,7 @@
         "A : 기본키, B : 대체키"
       ],
       "correctIndex": 1,
-      "explanation": "-내부 식별자는 엔터티 내부에서 스스로 생성되는 식별자이다.\n-예를 들어 부서코드, 주문번호, 종목코드 등이 있다.\n-외부 식별자는 다른 엔터티의 관계로 인하여 만들어지는 식별자이다.\n-예를 들어 계좌 엔터티에 회원ID이다.",
+      "explanation": "식별자를 스스로 만드는지에 따라 나누면, 엔터티 안에서 스스로 생기는 것은 내부 식별자(예: 부서코드, 주문번호), 다른 엔터티와의 관계로 받아 온 것은 외부 식별자(예: 계좌 엔터티의 회원ID)다. 그래서 A 는 내부, B 는 외부 식별자다(②).",
       "references": [
         {
           "type": "text",
@@ -11494,7 +11494,7 @@
         "중복을 포함한 결과의 합을 검색한다."
       ],
       "correctIndex": 0,
-      "explanation": "①번 보기는 INTERSECT 연산자로 중복된 행을 하나의 행으로 표시하고\n②번 보기는 MINUS\n③번 보기는 UNION 연산자\n④번 보기는 UNION ALL 이다."
+      "explanation": "INTERSECT 는 양쪽 결과에 모두 있는 행만 돌려주는 교집합이다(①, 중복은 한 번만). ② 차집합은 MINUS, ③ 중복을 없앤 합집합은 UNION, ④ 중복을 포함한 합집합은 UNION ALL 이다."
     },
     {
       "_id": "sqld-0395",
@@ -11874,7 +11874,7 @@
         "금액A"
       ],
       "correctIndex": 1,
-      "explanation": "②번 보기에서의 연산자인 NULLIF는 COL2와 COL3이 동일하면 NULL을, 동일하지 않으면 COL2를 반환하는데 3번째 행에서 COL2, COL3 값이 다르므로 해당 행에서의 COL2 값인 NULL 값을 반환한다.",
+      "explanation": "금액A(NVL), 금액B(COALESCE), 금액D(CASE WHEN COL2 IS NOT NULL THEN COL2 ELSE COL3)는 모두 'COL2 가 있으면 COL2, 없으면 COL3' 이라 결과가 같다. 금액C 의 NULLIF(COL2, COL3) 는 두 값이 같으면 NULL, 다르면 COL2 를 돌려주는 전혀 다른 함수라 결과가 다르다(②).",
       "references": [
         {
           "type": "sql",
@@ -13227,7 +13227,7 @@
         "RANK 함수는 동일순위 처리가 가능하다."
       ],
       "correctIndex": 0,
-      "explanation": "순위 함수 RANK, ROW_NUMBER, DENSE_RANK에 ORDER BY를 사용해서 순위를 기준으로 오름차순 혹은 내림차순으로 출력할 수 있다."
+      "explanation": "RANK·DENSE_RANK·ROW_NUMBER 는 무엇을 기준으로 순위를 매길지 알아야 하므로 OVER 안에 ORDER BY 를 반드시 써야 한다. '입력하지 않아도 된다' 는 ① 이 틀렸다. ② ROW_NUMBER 는 동점이어도 다른 번호, ③ DENSE_RANK 는 동점 뒤 순위를 건너뛰지 않고, ④ RANK 는 동점에 같은 순위를 준다."
     },
     {
       "_id": "sqld-0455",
@@ -13786,7 +13786,7 @@
         "select * from  kpipool where subkpi = 20;"
       ],
       "correctIndex": 3,
-      "explanation": "④번의 SQL문 subkpi가 20번인 행을 조회한다. 그리고 문제에서 제시한 SQL문도 in구로 (20,10)을 사용했으므로 똑같이 subkpi가 20인 행이 조회된다.",
+      "explanation": "주어진 SQL 의 (20, 10) 은 subkpi 20 인 행(mainkpi 10)과 맞고, (0, 30) 은 맞는 행이 없어 subkpi 20 한 행만 나온다. ④ subkpi = 20 도 같은 한 행이다. ③ 은 subkpi 10 행까지 2행, ①② 는 맞는 (subkpi, mainkpi) 쌍이 없어 결과가 다르다.",
       "references": [
         {
           "type": "sql",
@@ -15257,7 +15257,7 @@
         "SELECT COALESCE(1,2,3) FROM DUAL;"
       ],
       "correctIndex": 3,
-      "explanation": "\"COALESCE(mgr,1)\"은 mgr이 NULL이 아니면 1을 반환한다. 따라서 1번 지문은 \"1\"이 조회된다. 나머지는 모두 NULL이 조회된다."
+      "explanation": "④ COALESCE(1, 2, 3) 은 처음 나오는 NULL 이 아닌 값 1 을 돌려준다. 나머지는 모두 NULL 이다. ① NULLIF('A', 'A') 는 두 값이 같아 NULL, ② DECODE('A', 'B', 'C', NULL) 은 'A' 가 'B' 와 달라 기본값 NULL, ③ CASE 0 WHEN 1 … 은 0 이 1 이 아니라 ELSE NULL 이다."
     },
     {
       "_id": "sqld-0536",
@@ -19747,7 +19747,7 @@
         "CEIL(-12.345) = -13"
       ],
       "correctIndex": 3,
-      "explanation": "CEIL은 값보다 크면서 가장 작은 정수인 올림값을 리턴한다. 따라서 -12.345보다 값이 크면서 가장 작은 정수는    -12이다. 반대로 FLOOR는 값보다 작으면서 가장 큰 정수인 내림값을 리턴하므로 FLOOR(-12.345) 값은 -13이다."
+      "explanation": "CEIL 은 그 값보다 크거나 같은 가장 작은 정수(올림)라 CEIL(-12.345) = -12 다. -13 이라는 ④ 가 틀렸다. 음수에서 올림은 0 쪽으로 간다는 점에 주의한다. FLOOR(-12.345) 는 작거나 같은 가장 큰 정수라 -13(③), SIGN(0) = 0(①), MOD(8, 3) = 2(②) 는 맞다."
     },
     {
       "_id": "sqld-0687",
@@ -24445,7 +24445,7 @@
         "모든 변경은 롤백되어 아무 작업도 반영되지 않는다."
       ],
       "correctIndex": 2,
-      "explanation": "1. SALES 삭제 → 저장점 A\t삭제됨\n2. IT 급여 인상 → 저장점 B\t인상됨\n3. HR에 KIM 추가 → 저장점 C\t추가됨\n4. HR 전체 삭제\tHR 모두 삭제됨\n5. ROLLBACK TO B\t→ HR 삭제 & KIM 추가 모두 취소됨\n6. COMMIT\t→ SALES 삭제, IT 인상만 반영됨",
+      "explanation": "순서대로 보면 SALES 삭제 → SAVEPOINT A → IT 급여 인상 → SAVEPOINT B → KIM(HR) 추가 → SAVEPOINT C → HR 삭제다. ROLLBACK TO B 는 B 이후의 KIM 추가와 HR 삭제를 되돌리고, 그 앞의 SALES 삭제와 IT 인상은 남긴다. 이어서 COMMIT 하면 SALES 삭제·IT 급여 인상만 반영되고 HR 부서는 원래대로 유지된다(③).",
       "references": [
         {
           "type": "sql",
