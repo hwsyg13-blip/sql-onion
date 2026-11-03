@@ -1775,7 +1775,7 @@ export const ROUND_59: QuizQuestion[] = [
     "options": [
       "EMP 전체 행",
       "오류 발생",
-      "1 = 2 오류",
+      "WHERE 1 = 0 때문에 오류 발생",
       "공집합"
     ],
     "correctIndex": 3,

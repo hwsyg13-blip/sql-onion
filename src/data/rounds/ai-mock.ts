@@ -6233,7 +6233,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "CUBE(DEPTNO, JOB)"
     ],
     "correctIndex": 0,
-    "explanation": "주어진 결괏값을 보면 1. DEPTNO별 합계, 2. DEPTNO, JOB별 합계, 3. 전체 합계가 조회되므로 빈칸에는 그룹 함수 중 ROLLUP이 와야 한다.",
+    "explanation": "결과에는 (DEPTNO, JOB) 별 합계, DEPTNO 별 소계(10: 1300 + 2450 = 3750, 20: 1900 + 6000 + 2975 = 10875), 전체 합계(14625)가 있고 JOB 별 합계는 없다. 이는 DEPTNO → (DEPTNO, JOB) 순으로 계층 소계를 만드는 ROLLUP(DEPTNO, JOB) 이다(①). CUBE 면 JOB 별 합계가 더 나오고, GROUPING SETS(DEPTNO, JOB) 는 상세 행·전체 합계가 없으며, 일반 GROUP BY 는 소계가 없다.",
     "chapter": "관계형 DB와 SELECT",
     "_source": "cbt-mock",
     "_origId": "cbt-191",
@@ -6265,7 +6265,7 @@ export const AI_MOCK: QuizQuestion[] = [
           ],
           [
             "20",
-            "CLEK",
+            "CLERK",
             "1900"
           ],
           [
@@ -6281,12 +6281,12 @@ export const AI_MOCK: QuizQuestion[] = [
           [
             "20",
             "",
-            "9174"
+            "10875"
           ],
           [
             "",
             "",
-            "27549"
+            "14625"
           ]
         ]
       },
@@ -43011,6 +43011,47 @@ export const AI_MOCK: QuizQuestion[] = [
     "_origId": "cbt-066",
     "_cbtOrigNo": 66,
     "references": [
+      {
+        "type": "table",
+        "caption": "[TB_ORDER] 테이블",
+        "headers": [
+          "ORDER_ID",
+          "CUSTOMER",
+          "AMOUNT"
+        ],
+        "rows": [
+          [
+            "1",
+            "A",
+            "3000"
+          ],
+          [
+            "2",
+            "A",
+            "4000"
+          ],
+          [
+            "3",
+            "B",
+            "1000"
+          ],
+          [
+            "4",
+            "C",
+            "5000"
+          ],
+          [
+            "5",
+            "C",
+            "6000"
+          ],
+          [
+            "6",
+            "D",
+            "1000"
+          ]
+        ]
+      },
       {
         "type": "sql",
         "code": "SELECT CUSTOMER, TOTAL\nFROM (SELECT CUSTOMER, SUM(AMOUNT) AS TOTAL\nFROM TB_ORDER\nGROUP BY CUSTOMER)\nWHERE TOTAL > (SELECT AVG(AMOUNT) FROM TB_ORDER);"
