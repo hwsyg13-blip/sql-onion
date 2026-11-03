@@ -33062,13 +33062,7 @@
         "행만 삭제하고 구조는 유지한다."
       ],
       "correctIndex": 2,
-      "explanation": "DROP은 객체 자체를 삭제한다.",
-      "references": [
-        {
-          "type": "text",
-          "content": "테이블 구조에 컬럼과 제약조건을 추가하려 한다."
-        }
-      ]
+      "explanation": "DROP TABLE 은 테이블 정의(구조)와 데이터를 함께 삭제하는 DDL 이다. 데이터만 지우고 구조를 남기는 것은 TRUNCATE(또는 DELETE), 컬럼만 지우는 것은 ALTER TABLE ... DROP COLUMN 이다."
     },
     {
       "_id": "sqld-1161",
@@ -33928,7 +33922,7 @@
         "부모의 식별자가 자식의 기본키 구성 요소가 된다."
       ],
       "correctIndex": 3,
-      "explanation": "식별 관계는 자식 식별에 부모 키가 직접 관여한다.",
+      "explanation": "식별 관계는 부모 엔터티의 식별자(PK)가 자식 엔터티의 PK 구성 요소로 들어가는 관계다(예: 주문번호가 주문상품 PK 의 일부). 부모 식별자를 자식의 일반 속성(FK)으로만 가지면 비식별 관계이다. 식별 관계도 외래키가 있고, 1:1·1:N 관계에서 쓰인다.",
       "references": [
         {
           "type": "image",
@@ -33952,13 +33946,7 @@
         "복잡한 조회를 단순화하고 필요한 컬럼만 노출할 수 있다."
       ],
       "correctIndex": 3,
-      "explanation": "뷰는 보안과 재사용성에 도움이 된다.",
-      "references": [
-        {
-          "type": "text",
-          "content": "단순 뷰와 집계 뷰의 갱신 제약을 비교한다."
-        }
-      ]
+      "explanation": "뷰는 복잡한 조인·조건을 정의해 두고 간단히 조회하게 해 주며(편리성), 필요한 컬럼만 보여 주어 민감한 정보를 숨길 수 있다(보안성). 뷰는 기본 테이블을 그대로 읽으므로 항상 더 빠르지 않고, 데이터를 스스로 만들거나 COMMIT 하지 않는다."
     },
     {
       "_id": "sqld-1191",
@@ -34215,7 +34203,7 @@
         "ORDERS의 최대 CUSTOMER_ID보다 큰 값을 찾는 것과 같다."
       ],
       "correctIndex": 3,
-      "explanation": "ALL 비교는 서브쿼리 결과 전체를 만족해야 한다.",
+      "explanation": "> ALL 은 서브쿼리의 모든 값보다 커야 참이다. ORDERS 의 CUSTOMER_ID 는 101, 101, 103 이므로 103 보다 큰 고객(104)만 조회된다 — 최대값보다 큰 값을 찾는 것과 같다. 하나보다만 크면 되는 것(최소값보다 큰 값)은 > ANY 이다.",
       "references": [
         {
           "type": "text",
@@ -35171,7 +35159,7 @@
         "2"
       ],
       "correctIndex": 0,
-      "explanation": "왼쪽 테이블 A의 3행이 모두 유지된다.",
+      "explanation": "LEFT OUTER JOIN 은 왼쪽 테이블 A 의 행을 모두 남긴다. A 의 ID 1, 2, 3 중 B 와 짝이 맞는 것은 2(SILVER) 뿐이고, 1·3 은 GRADE 가 NULL 로 나온다. B 에만 있는 4 는 나오지 않으므로 결과는 3행이다.",
       "references": [
         {
           "type": "sql",
@@ -36033,7 +36021,7 @@
         "전체 총계"
       ],
       "correctIndex": 3,
-      "explanation": "ROLLUP의 최종 단계는 전체 총계다.",
+      "explanation": "ROLLUP(region, product) 은 (region, product) 별 소계, region 별 소계, 전체 총계 순으로 집계 행을 만든다. 마지막 행은 두 컬럼이 모두 NULL 인 전체 총계(100+200+150+50 = 500)이다. 평균이 아니라 SELECT 의 집계 함수(SUM 등) 결과이다.",
       "references": [
         {
           "type": "table",
@@ -36199,13 +36187,7 @@
         "DENSE_RANK만 정렬 절을 사용한다."
       ],
       "correctIndex": 2,
-      "explanation": "동점 이후 다음 순위 처리 방식이 두 함수의 핵심 차이다.",
-      "references": [
-        {
-          "type": "text",
-          "content": "파티션별 순위와 누적 합계를 동시에 해석한다."
-        }
-      ]
+      "explanation": "동점이 있으면 RANK 는 같은 순위를 준 뒤 그 수만큼 다음 순위를 건너뛰고(1, 2, 2, 4), DENSE_RANK 는 건너뛰지 않는다(1, 2, 2, 3). ROW_NUMBER 는 동점이어도 1, 2, 3, 4 처럼 고유한 번호를 준다. 세 함수 모두 OVER 안에 ORDER BY 를 쓴다."
     },
     {
       "_id": "sqld-1273",
@@ -36741,40 +36723,7 @@
         "외부 쿼리의 각 행을 기준으로 서브쿼리가 반복 평가될 수 있다."
       ],
       "correctIndex": 3,
-      "explanation": "상관 서브쿼리는 행 단위 문맥을 가진다.",
-      "references": [
-        {
-          "type": "table",
-          "caption": "Correlated Subquery Data",
-          "headers": [
-            "EMP NAME",
-            "DEPT",
-            "SALARY"
-          ],
-          "rows": [
-            [
-              "A",
-              "SALES",
-              "3000"
-            ],
-            [
-              "B",
-              "SALES",
-              "2000"
-            ],
-            [
-              "C",
-              "DEV",
-              "5000"
-            ],
-            [
-              "D",
-              "DEV",
-              "3500"
-            ]
-          ]
-        }
-      ]
+      "explanation": "상관(연관) 서브쿼리는 메인쿼리의 컬럼을 참조하므로 메인쿼리의 각 행마다 서브쿼리가 다시 평가될 수 있다. WHERE·SELECT 절 등 어디에나 쓸 수 있고, 같은 결과를 JOIN 으로 바꿔 쓸 수도 있다."
     },
     {
       "_id": "sqld-1296",
@@ -37815,13 +37764,7 @@
         "ORDER SIBLINGS BY"
       ],
       "correctIndex": 0,
-      "explanation": "START WITH는 계층 탐색의 시작 행을 지정한다.",
-      "references": [
-        {
-          "type": "text",
-          "content": "루트와 리프 노드, 경로 값을 함께 해석한다."
-        }
-      ]
+      "explanation": "계층형 질의에서 START WITH 는 전개를 시작할 루트 행을 지정한다(예: START WITH mgr IS NULL). CONNECT BY 는 부모-자식 연결 조건, ORDER SIBLINGS BY 는 같은 부모를 둔 형제끼리의 정렬이다."
     },
     {
       "_id": "sqld-1336",

@@ -1,5 +1,5 @@
 // Auto-generated from scripts/authored/ai-mock.json
-// AI 생성 모의고사 풀 (기출 변형) · 1171문항
+// AI 생성 모의고사 풀 (기출 변형) · 1168문항
 // ⚠ 직접 편집 금지. ai-mock.json 수정 후 'node scripts/build-quiz-bank.mjs' 재실행.
 import type { QuizQuestion } from '../quizBank';
 
@@ -32605,26 +32605,6 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11777,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 978,
-    "title": "뷰의 장점으로 적절한 것은?",
-    "options": [
-      "기본 테이블 없이도 자동으로 데이터가 생성된다.",
-      "트랜잭션을 자동 커밋한다.",
-      "항상 성능이 원본보다 빠르다.",
-      "복잡한 조회를 단순화하고 필요한 컬럼만 노출할 수 있다."
-    ],
-    "correctIndex": 3,
-    "explanation": "뷰는 복잡한 SELECT를 감추고 필요한 컬럼만 노출할 수 있어 조회 재사용성과 보안 측면에서 유리하다.",
-    "chapter": "View",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0954",
-    "_category": "View"
-  },
-  {
     "id": 11778,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
@@ -35717,32 +35697,6 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "NULL"
   },
   {
-    "id": 11947,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 1148,
-    "title": "DROP TABLE의 효과로 옳은 것은?",
-    "options": [
-      "권한만 삭제한다.",
-      "컬럼만 삭제한다.",
-      "테이블 구조와 데이터를 함께 제거한다.",
-      "행만 삭제하고 구조는 유지한다."
-    ],
-    "correctIndex": 2,
-    "explanation": "DROP은 객체 자체를 삭제한다.",
-    "chapter": "DDL",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1160",
-    "_category": "DDL",
-    "references": [
-      {
-        "type": "text",
-        "content": "테이블 구조에 컬럼과 제약조건을 추가하려 한다."
-      }
-    ]
-  },
-  {
     "id": 11948,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
@@ -36023,7 +35977,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "부모의 식별자가 자식의 기본키 구성 요소가 된다."
     ],
     "correctIndex": 3,
-    "explanation": "식별 관계는 자식 식별에 부모 키가 직접 관여한다.",
+    "explanation": "식별 관계는 부모 엔터티의 식별자(PK)가 자식 엔터티의 PK 구성 요소로 들어가는 관계다(예: 주문번호가 주문상품 PK 의 일부). 부모 식별자를 자식의 일반 속성(FK)으로만 가지면 비식별 관계이다. 식별 관계도 외래키가 있고, 1:1·1:N 관계에서 쓰인다.",
     "chapter": "엔터티",
     "_source": "sqld-1140",
     "_origId": "sqld-1186",
@@ -36051,17 +36005,11 @@ export const AI_MOCK: QuizQuestion[] = [
       "복잡한 조회를 단순화하고 필요한 컬럼만 노출할 수 있다."
     ],
     "correctIndex": 3,
-    "explanation": "뷰는 보안과 재사용성에 도움이 된다.",
+    "explanation": "뷰는 복잡한 조인·조건을 정의해 두고 간단히 조회하게 해 주며(편리성), 필요한 컬럼만 보여 주어 민감한 정보를 숨길 수 있다(보안성). 뷰는 기본 테이블을 그대로 읽으므로 항상 더 빠르지 않고, 데이터를 스스로 만들거나 COMMIT 하지 않는다.",
     "chapter": "View",
     "_source": "sqld-1140",
     "_origId": "sqld-1190",
-    "_category": "View",
-    "references": [
-      {
-        "type": "text",
-        "content": "단순 뷰와 집계 뷰의 갱신 제약을 비교한다."
-      }
-    ]
+    "_category": "View"
   },
   {
     "id": 11981,
@@ -36077,7 +36025,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "ORDERS의 최대 CUSTOMER_ID보다 큰 값을 찾는 것과 같다."
     ],
     "correctIndex": 3,
-    "explanation": "ALL 비교는 서브쿼리 결과 전체를 만족해야 한다.",
+    "explanation": "> ALL 은 서브쿼리의 모든 값보다 커야 참이다. ORDERS 의 CUSTOMER_ID 는 101, 101, 103 이므로 103 보다 큰 고객(104)만 조회된다 — 최대값보다 큰 값을 찾는 것과 같다. 하나보다만 크면 되는 것(최소값보다 큰 값)은 > ANY 이다.",
     "chapter": "서브쿼리",
     "_source": "sqld-1140",
     "_origId": "sqld-1198",
@@ -36275,7 +36223,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "2"
     ],
     "correctIndex": 0,
-    "explanation": "왼쪽 테이블 A의 3행이 모두 유지된다.",
+    "explanation": "LEFT OUTER JOIN 은 왼쪽 테이블 A 의 행을 모두 남긴다. A 의 ID 1, 2, 3 중 B 와 짝이 맞는 것은 2(SILVER) 뿐이고, 1·3 은 GRADE 가 NULL 로 나온다. B 에만 있는 4 는 나오지 않으므로 결과는 3행이다.",
     "chapter": "조인",
     "_source": "sqld-1140",
     "_origId": "sqld-1235",
@@ -36475,7 +36423,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "전체 총계"
     ],
     "correctIndex": 3,
-    "explanation": "ROLLUP의 최종 단계는 전체 총계다.",
+    "explanation": "ROLLUP(region, product) 은 (region, product) 별 소계, region 별 소계, 전체 총계 순으로 집계 행을 만든다. 마지막 행은 두 컬럼이 모두 NULL 인 전체 총계(100+200+150+50 = 500)이다. 평균이 아니라 SELECT 의 집계 함수(SUM 등) 결과이다.",
     "chapter": "그룹 함수",
     "_source": "sqld-1140",
     "_origId": "sqld-1264",
@@ -36588,32 +36536,6 @@ export const AI_MOCK: QuizQuestion[] = [
             "3500"
           ]
         ]
-      }
-    ]
-  },
-  {
-    "id": 12044,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 1245,
-    "title": "다음 SQL에서 동점자가 있을 때 RANK와 DENSE_RANK의 차이로 옳은 것은?",
-    "options": [
-      "ROW_NUMBER와 완전히 동일하다.",
-      "둘 다 항상 동일하다.",
-      "RANK는 순위가 건너뛰고 DENSE_RANK는 건너뛰지 않는다.",
-      "DENSE_RANK만 정렬 절을 사용한다."
-    ],
-    "correctIndex": 2,
-    "explanation": "동점 이후 다음 순위 처리 방식이 두 함수의 핵심 차이다.",
-    "chapter": "윈도우 함수",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1272",
-    "_category": "윈도우 함수",
-    "references": [
-      {
-        "type": "text",
-        "content": "파티션별 순위와 누적 합계를 동시에 해석한다."
       }
     ]
   },
@@ -36755,44 +36677,11 @@ export const AI_MOCK: QuizQuestion[] = [
       "외부 쿼리의 각 행을 기준으로 서브쿼리가 반복 평가될 수 있다."
     ],
     "correctIndex": 3,
-    "explanation": "상관 서브쿼리는 행 단위 문맥을 가진다.",
+    "explanation": "상관(연관) 서브쿼리는 메인쿼리의 컬럼을 참조하므로 메인쿼리의 각 행마다 서브쿼리가 다시 평가될 수 있다. WHERE·SELECT 절 등 어디에나 쓸 수 있고, 같은 결과를 JOIN 으로 바꿔 쓸 수도 있다.",
     "chapter": "서브쿼리",
     "_source": "sqld-1140",
     "_origId": "sqld-1294",
-    "_category": "서브쿼리",
-    "references": [
-      {
-        "type": "table",
-        "caption": "Correlated Subquery Data",
-        "headers": [
-          "EMP NAME",
-          "DEPT",
-          "SALARY"
-        ],
-        "rows": [
-          [
-            "A",
-            "SALES",
-            "3000"
-          ],
-          [
-            "B",
-            "SALES",
-            "2000"
-          ],
-          [
-            "C",
-            "DEV",
-            "5000"
-          ],
-          [
-            "D",
-            "DEV",
-            "3500"
-          ]
-        ]
-      }
-    ]
+    "_category": "서브쿼리"
   },
   {
     "id": 12067,
@@ -37012,17 +36901,11 @@ export const AI_MOCK: QuizQuestion[] = [
       "ORDER SIBLINGS BY"
     ],
     "correctIndex": 0,
-    "explanation": "START WITH는 계층 탐색의 시작 행을 지정한다.",
+    "explanation": "계층형 질의에서 START WITH 는 전개를 시작할 루트 행을 지정한다(예: START WITH mgr IS NULL). CONNECT BY 는 부모-자식 연결 조건, ORDER SIBLINGS BY 는 같은 부모를 둔 형제끼리의 정렬이다.",
     "chapter": "계층형 질의",
     "_source": "sqld-1140",
     "_origId": "sqld-1335",
-    "_category": "계층형 질의",
-    "references": [
-      {
-        "type": "text",
-        "content": "루트와 리프 노드, 경로 값을 함께 해석한다."
-      }
-    ]
+    "_category": "계층형 질의"
   },
   {
     "id": 12104,
