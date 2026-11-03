@@ -1,5 +1,5 @@
 // Auto-generated from scripts/authored/ai-mock.json
-// AI 생성 모의고사 풀 (기출 변형) · 1245문항
+// AI 생성 모의고사 풀 (기출 변형) · 1244문항
 // ⚠ 직접 편집 금지. ai-mock.json 수정 후 'node scripts/build-quiz-bank.mjs' 재실행.
 import type { QuizQuestion } from '../quizBank';
 
@@ -38875,32 +38875,6 @@ export const AI_MOCK: QuizQuestion[] = [
       {
         "type": "text",
         "content": "파티션별 순위와 누적 합계를 동시에 해석한다."
-      }
-    ]
-  },
-  {
-    "id": 12107,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 1308,
-    "title": "대량 범위 조회에서 인덱스보다 전체 테이블 스캔이 더 적절할 수 있는 경우로 옳은 것은?",
-    "options": [
-      "선택 비율이 매우 높아 대부분의 행을 읽어야 할 때",
-      "PK로 정확히 한 행을 찾을 때",
-      "조인 조건이 있을 때는 항상 인덱스만 사용한다.",
-      "한 건만 조회할 때"
-    ],
-    "correctIndex": 0,
-    "explanation": "읽어야 할 행이 많으면 인덱스 탐색 후 랜덤 접근보다 전체 스캔이 효율적일 수 있다.",
-    "chapter": "관계형 DB와 SELECT",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1345",
-    "_category": "인덱스",
-    "references": [
-      {
-        "type": "text",
-        "content": "복합 인덱스 선두 컬럼 조건의 유무"
       }
     ]
   },
