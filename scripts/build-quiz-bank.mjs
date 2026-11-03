@@ -227,6 +227,7 @@ if (skippedEmpty.length > 0) {
 // 분산 데이터베이스·성능 데이터 모델링이 없다. 모의고사에서 범위 밖 문제에 시간을 쓰지 않도록 풀에서 뺀다.
 // 기출(회차) 문항은 실제 출제 기록이라 그대로 둔다. 원본 JSON 은 그대로이므로 목록에서 지우면 되돌아온다.
 const OUT_OF_SCOPE = new Set([
+  'cbt-030',  // M79 설계 단계 성능 고려 절차(성능 데이터 모델링)
   'cbt-080', 'cbt-196', 'sqld-0263', 'sqld-1077', 'sqld-1129', 'sqld-1249',  // M125 · M237 · M454 · M1082 · M1121 · M1226 (인덱스 액세스·SQL 트레이스 튜닝, 자료가 달라 사본 판정에서 빠진 복합 인덱스 문항)
   'sqld-1093',  // M1095 (M1068 의 사본 — 선택도·인덱스)
   'cbt-013', 'cbt-016', 'cbt-021', 'cbt-027', 'cbt-038', 'cbt-090',  // M63 · M66 · M71 · M76 · M87 · M134
@@ -257,12 +258,16 @@ const SAME_QUESTION = {
   'cbt-084': 'case-else', 'sqld-0225': 'case-else',          // M129 · M423 CASE ELSE 생략
   'cbt-125': 'cumm-rank', 'sqld-0189': 'cumm-rank', 'cbt-203': 'cumm-rank', // M167 · M396 · M244 CUMM_RANK
   'ai-mock-033': 'norm-wrong', 'ai-mock-055': 'norm-wrong',  // M28 · M47 정규화 틀린 설명
+  'sqld-0961': 'grant-cascade', 'sqld-1004': 'grant-cascade', 'sqld-1112': 'grant-cascade', // M985 · M1024 · M1109 WITH GRANT OPTION 연쇄 회수
   'sqld-0378': 'acid', 'sqld-0411': 'acid',                  // M548 · M575 트랜잭션 특성이 아닌 것
 };
 const refKey = q => (q.references || []).map(r =>
   r.type === 'table' ? JSON.stringify(r.rows) : r.type === 'sql' ? r.code : r.type === 'text' ? r.content
   : r.type === 'erd' ? r.mermaid : (r.src || '')).join('#');
-const dupKey = q => (q.title.replace(FILLER_PREFIX, '') + '|' + [...q.options].sort().join('|') + '|' + refKey(q))
+// 보기는 하나씩 공백·쉼표·마침표를 지우고 소문자로 바꾼 뒤 정렬한다 — 정렬 후에 지우면 'NULL * NULL' 과 'NULL*NULL' 의
+// 정렬 위치가 달라 같은 문제가 다른 키가 된다 (M140·M444, 2026-11-03).
+const normOpt = o => String(o).replace(/[\s,.]+/g, '').toLowerCase();
+const dupKey = q => (q.title.replace(FILLER_PREFIX, '') + '|' + q.options.map(normOpt).sort().join('|') + '|' + refKey(q))
   .replace(/[\s,.]+/g, '').toLowerCase();
 // 범위 밖 제외 — 목록의 문항과 같은 문제(dupKey 가 같은 사본)도 함께 뺀다.
 const outKeys = new Set(combinedMock.filter(q => OUT_OF_SCOPE.has(q._id)).map(dupKey));
