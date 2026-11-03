@@ -1,5 +1,5 @@
 // Auto-generated from scripts/authored/ai-mock.json
-// AI 생성 모의고사 풀 (기출 변형) · 1186문항
+// AI 생성 모의고사 풀 (기출 변형) · 1185문항
 // ⚠ 직접 편집 금지. ai-mock.json 수정 후 'node scripts/build-quiz-bank.mjs' 재실행.
 import type { QuizQuestion } from '../quizBank';
 
@@ -36770,66 +36770,6 @@ export const AI_MOCK: QuizQuestion[] = [
       {
         "type": "text",
         "content": "조회 비율과 인덱스 유지 비용을 함께 판단한다."
-      }
-    ]
-  },
-  {
-    "id": 12027,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 1228,
-    "title": "다음 테이블과 가정 기준으로 2NF 위반 원인으로 옳은 것은?",
-    "options": [
-      "복합키의 일부인 주문번호와 상품번호에만 종속되는 속성이 함께 존재한다.",
-      "이행 종속만 존재한다.",
-      "반복 그룹이 전혀 없다.",
-      "모든 속성이 후보키 전체에 완전 함수 종속된다."
-    ],
-    "correctIndex": 0,
-    "explanation": "부분 함수 종속이 있으면 2NF를 위반한다.",
-    "chapter": "정규화",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1251",
-    "_category": "정규화",
-    "references": [
-      {
-        "type": "text",
-        "content": "주문번호는 고객명과 고객등급을 결정하고, 상품번호는 상품명을 결정한다고 가정한다."
-      },
-      {
-        "type": "table",
-        "caption": "Normalization Source Table",
-        "headers": [
-          "ORDER NO",
-          "PRODUCT NO",
-          "PRODUCT NAME",
-          "CUSTOMER NAME",
-          "CUSTOMER GRADE"
-        ],
-        "rows": [
-          [
-            "1001",
-            "P01",
-            "SQL BOOK",
-            "KIM",
-            "VIP"
-          ],
-          [
-            "1001",
-            "P02",
-            "DB BOOK",
-            "KIM",
-            "VIP"
-          ],
-          [
-            "1002",
-            "P03",
-            "NOTE",
-            "LEE",
-            "BASIC"
-          ]
-        ]
       }
     ]
   },
