@@ -443,7 +443,7 @@
         "가,나,다"
       ],
       "correctIndex": 0,
-      "explanation": "주식별자는 유일성(가), 최소성(나), 불변성(다), 존재성(라, NOT NULL)을 모두 만족해야 한다. 정답은 ① 이다.",
+      "explanation": "주식별자는 네 가지를 모두 만족해야 한다. 가는 유일성(모든 행 구분), 나는 최소성(꼭 필요한 속성만), 다는 불변성(값이 자주 바뀌지 않음), 라는 존재성(반드시 값이 있음, NOT NULL)이다. 네 항목 모두 고려 사항이므로 ① 이다.",
       "references": [
         {
           "type": "text",
@@ -2585,7 +2585,7 @@
         "UNION"
       ],
       "correctIndex": 2,
-      "explanation": "SET OPERATOR :합집합은 UNION, 교집합은 INTERSECT, 차집합은 MINUS/EXCEPT 이다."
+      "explanation": "수학의 교집합처럼 두 결과에 모두 있는 행만 돌려주는 연산자는 INTERSECT 다(③). 합집합은 UNION / UNION ALL, 차집합은 MINUS(Oracle)·EXCEPT(SQL Server)다."
     },
     {
       "_id": "sqld-0104",
@@ -2746,7 +2746,7 @@
         "Union"
       ],
       "correctIndex": 1,
-      "explanation": "집합 C는 집합 A와 집합 日의 교집합이며, 데이터베이스에서 교집합 기능을 하는 집합 연산 Intersection 이다.",
+      "explanation": "C = {다, 라} 는 A 와 B 에 모두 들어 있는 원소, 즉 교집합이다. 교집합 연산은 Intersection(SQL 의 INTERSECT)이다(②). Union 은 합집합, Difference 는 차집합(MINUS), Product 는 모든 조합을 만드는 곱집합(CROSS JOIN)이다.",
       "references": [
         {
           "type": "text",
@@ -3438,7 +3438,7 @@
         "뷰는 단지 정의만을 가지고 있으며, 실행 시점에 질의를 재작성하여 수행한다."
       ],
       "correctIndex": 2,
-      "explanation": "③ 뷰의 장점중 독립성은 테이블 구조가 변경되어도 뷰를 사용하는 응용 프로그램은 변경하지 않아도 된다."
+      "explanation": "뷰를 쓰면 테이블 구조가 바뀌어도 뷰 정의만 고치면 되고, 뷰를 쓰는 응용 프로그램은 바꾸지 않아도 된다. 이것이 뷰의 독립성 장점이므로 '응용 프로그램을 변경해야 한다' 는 ③ 이 틀렸다. ① 머티리얼라이즈드 뷰처럼 데이터를 저장하는 뷰도 있고, ② 필요한 칼럼만 보여 보안에 쓰며, ④ 뷰는 정의만 저장한다."
     },
     {
       "_id": "sqld-0125",
@@ -4338,7 +4338,7 @@
         "업무가 관여하는 어떤 것"
       ],
       "correctIndex": 1,
-      "explanation": "업무가 관여하는 어떤 것, 업무가 관여하는 어떤 것의 성격, 업무가 관여하는 어떤 것의 관계로 구분이 된다."
+      "explanation": "데이터 모델링의 세 가지 중요 개념은 업무가 관여하는 어떤 것(Things, 엔터티), 어떤 것의 성격(Attributes, 속성), 어떤 것의 관계(Relationships, 관계)다. '행위' 는 포함되지 않는다(②)."
     },
     {
       "_id": "sqld-0144",
@@ -4372,7 +4372,7 @@
         "설계 속성"
       ],
       "correctIndex": 1,
-      "explanation": "파생 속성은 다른 속성을 이용하여 계산된 속성으로 자신의 고유값을 갖지 않고 파생, 유추되어 재산정될 수 있는 속성이다."
+      "explanation": "파생 속성은 자기 고유의 값이 아니라 다른 속성으로 계산해서 얻는 속성이다(예: 주문금액 = 단가 × 수량, 나이 = 생년월일로 계산). 원본이 바뀌면 다시 계산해야 하므로 꼭 필요한 경우에만 둔다."
     },
     {
       "_id": "sqld-0146",
@@ -4423,7 +4423,7 @@
         "두 개의 엔터티 사이에 관심 있는 연관규칙이 존재하는가?"
       ],
       "correctIndex": 2,
-      "explanation": "관계를 정의할 때 주요하게 체크해야 하는 사항은 업무기술서, 징표에 관계연결을 가능하게 하는 동사가 있는가이다."
+      "explanation": "관계를 찾을 때는 업무기술서·장표에서 두 엔터티를 잇는 동사(예: 고객이 상품을 '주문한다')를 찾는다. 명사는 엔터티나 속성을 찾을 때 보는 것이므로 ③ 이 거리가 멀다. ①②④ 는 관계 정의 때 확인하는 사항이다."
     },
     {
       "_id": "sqld-0150",
@@ -5080,7 +5080,7 @@
         "GRANT"
       ],
       "correctIndex": 3,
-      "explanation": "GRANT는 권한을 부여하는 SQL문이다. 반대로 권한을 취소하는 것은 REVOKE이다.",
+      "explanation": "권한을 부여할 때는 GRANT 권한 TO 사용자 형식으로 쓴다. GRANT CREATE TABLE TO AAA 가 맞다(④). 반대로 권한을 회수할 때는 REVOKE 권한 FROM 사용자 를 쓴다.",
       "references": [
         {
           "type": "text",
@@ -6682,7 +6682,7 @@
         "Length('LIMBEST') = 8"
       ],
       "correctIndex": 3,
-      "explanation": "④번의 길이는 7이다. 그리고 ①번의 집합함수를 사용하면 집합함수에서 NULL은 제외된다."
+      "explanation": "'LIMBEST' 는 L·I·M·B·E·S·T 7글자라 LENGTH 는 7 이다. 8 이라는 ④ 가 틀렸다. ① COUNT(표현식) 은 NULL 을 빼고 세고, ② 날짜끼리 빼면 일수가 나오며, ③ CASE 로 IF-THEN-ELSE 를 표현할 수 있다."
     },
     {
       "_id": "sqld-0241",
@@ -6778,7 +6778,7 @@
         "FULL OUTER JOIN"
       ],
       "correctIndex": 1,
-      "explanation": "DEPT 테이블에 있는 40번이 조회되고 EMP테이블은 NULL로 조회되므로 RIGHT OUTER JOIN이다.",
+      "explanation": "결과에 EMP 쪽이 모두 NULL 인 DEPT 40번 행이 나온다. 오른쪽(DEPT) 행을 모두 남기는 조인이므로 RIGHT OUTER JOIN 이다(②). SQL 의 RIGHT JOIN 은 RIGHT OUTER JOIN 을 줄여 쓴 것이다.",
       "references": [
         {
           "type": "sql",
@@ -7436,7 +7436,7 @@
         "제1정규화"
       ],
       "correctIndex": 1,
-      "explanation": "제3정규화는 이행 함수 종속성 제거로 칼럼 간에 종속성이 발생하면 테이블을 분할한다."
+      "explanation": "기본키가 아닌 일반 칼럼끼리 종속 관계가 있는 것(이행 함수 종속)을 없애려고 테이블을 나누는 단계는 제3정규화다(②). 예: 사번 → 부서코드 → 부서명 이면 부서 테이블을 따로 만든다."
     },
     {
       "_id": "sqld-0271",
@@ -7453,7 +7453,7 @@
         "그룹마스터는 여러 개의 동일한 그룹ID를 가질 수 있다."
       ],
       "correctIndex": 1,
-      "explanation": "그룹 계정과 사용자 계정 간의 관계는 Optional 관계이므로 그룹 계정에 사용자가 없을 수 있다.",
+      "explanation": "ERD 에서 그룹 계정 쪽에서 사용자 계정으로 가는 관계가 선택(○) 표기라, 사용자가 한 명도 없는 그룹 계정도 있을 수 있다(②). ① '반드시 속해야 한다' 는 필수 관계일 때의 설명이고, ④ 그룹ID 는 그룹마스터의 식별자라 중복될 수 없다.",
       "references": [
         {
           "type": "image",
@@ -7478,7 +7478,7 @@
         "CREATE TABLE"
       ],
       "correctIndex": 1,
-      "explanation": "COMMIT 과 ROLLBACK문은 TCL이고 DDL에는 CREATE, ALTER, DROP, RENAME 등이 있다."
+      "explanation": "COMMIT 은 트랜잭션을 확정하는 TCL 이다(②). DDL 은 CREATE·ALTER·DROP·RENAME·TRUNCATE 처럼 객체 구조를 정의하는 명령이다."
     },
     {
       "_id": "sqld-0274",
@@ -8064,7 +8064,7 @@
         "RANK()"
       ],
       "correctIndex": 2,
-      "explanation": "결괏값에서 중복된 등수 2등 다음에 바로 다음 등수인 3등이 왔으므로 빈칸에는 DENSE_RANK가 와야 한다.",
+      "explanation": "결과에서 급여 260 인 B, C 가 공동 2등이고, 다음 D 가 4 가 아니라 3 이다. 동점 뒤 순위를 건너뛰지 않는 함수는 DENSE_RANK 다(③). RANK 였다면 D 는 4, ROW_NUMBER 였다면 B, C 가 2, 3 으로 나뉜다.",
       "references": [
         {
           "type": "sql",
@@ -8491,7 +8491,7 @@
         "max(COL2), min(COL2), sum(COL1)"
       ],
       "correctIndex": 2,
-      "explanation": "A 속성은 COL1의 최댓값, B 속성은 COL2의 최솟값, C 속성은 COL1 속성의 합이다.",
+      "explanation": "집계 함수는 NULL 을 빼고 계산한다. A = 13 은 COL1 의 최댓값, B = 0 은 COL2 의 최솟값이다. C = 34 는 COL1 의 합(0 + 10 + 11 + 13)이다. 따라서 max(COL1), min(COL2), sum(COL1) 인 ③ 이다.",
       "references": [
         {
           "type": "sql",
@@ -8640,7 +8640,7 @@
         "SELECT * FROM SCOTT.EMP A \nLEFT OUTER JOIN SCOTT.DEPT B\nON(A.DEPTNO = B.DEPTNO AND\nB.DNAME 'SALES');"
       ],
       "correctIndex": 0,
-      "explanation": "OUTER JOIN 혹은 CROSS JOIN이 아닌 INNER JOIN이므로 ①번이 된다.",
+      "explanation": "FROM 절에 테이블을 나열하고 WHERE 에서 A.DEPTNO = B.DEPTNO 로 잇는 것은 등가 조인, 즉 INNER JOIN 이다. ANSI 문법으로는 INNER JOIN … ON 으로 쓰고 나머지 조건은 WHERE 에 두면 된다(①). CROSS JOIN 은 ON 을 쓸 수 없고, OUTER JOIN 은 결과가 달라진다.",
       "references": [
         {
           "type": "sql",
@@ -8743,7 +8743,7 @@
         "GROUP BY DEPTNO, JOB"
       ],
       "correctIndex": 0,
-      "explanation": "CUBE는 CUBE 함수에 제시한 칼럼에 대해서 결합 가능한 모든 집계를 계산한다."
+      "explanation": "CUBE(DEPTNO, JOB) 는 (DEPTNO, JOB), DEPTNO 별, JOB 별, 전체 합계까지 결합 가능한 모든 조합의 집계를 만든다(①). ROLLUP 은 왼쪽부터 계층적으로만(DEPTNO 별, 전체), GROUPING SETS 는 지정한 기준만 집계한다."
     },
     {
       "_id": "sqld-0303",
@@ -8760,7 +8760,7 @@
         "INNER JOIN"
       ],
       "correctIndex": 1,
-      "explanation": "CROSS JOIN은 MytestA 테이블이 4행, MytestB 테이블이 3행이므로 4*3=12가 된다.",
+      "explanation": "결과 12행은 MytestA 4행 × MytestB 3행이다. 조인 조건 없이 모든 행을 짝짓는 CROSS JOIN 이다(②). 나머지 조인은 ON 조건이 필요하다.",
       "references": [
         {
           "type": "sql",
@@ -8883,7 +8883,7 @@
         "100"
       ],
       "correctIndex": 0,
-      "explanation": "COUNT(칼럼명)으로 조회를 하는 경우는 NULL 값이 제외된다. 따라서 3이 된다. 즉, 합계 1200/3=400이다.",
+      "explanation": "SUM(SCORE) 는 150 + 250 + 50 + 150 + 600 = 1200 이다. COUNT(NO) 는 NO 가 NULL 인 2건을 빼고 세어 3 이다. 1200 / 3 = 400(①). COUNT(*) 였다면 5 로 나누어 240 이 된다.",
       "references": [
         {
           "type": "sql",
@@ -9125,7 +9125,7 @@
         "Barker 표기법"
       ],
       "correctIndex": 2,
-      "explanation": "위의 표기법은 정보공학 표기법 IE표기법 형식이다. 위의 모델링과 동일한 Barker의 표기법은 다음과 같다.",
+      "explanation": "그림처럼 관계선 끝에 까마귀발(여러 개)과 ○(선택), |(필수) 기호를 쓰는 것은 IE(Information Engineering, 정보공학) 표기법이다(③). Barker 표기법은 점선(선택)·실선(필수)으로 구분하고 식별자 앞에 # 을 붙인다.",
       "references": [
         {
           "type": "image",
@@ -9184,7 +9184,7 @@
         "기본 엔터티"
       ],
       "correctIndex": 3,
-      "explanation": "기본 엔터티는 다른 엔터티로부터 영향을 받지 않고 독립적으로 생성되는 엔터티이다. 예를 들어 고객, 상품, 부서 등이 있다."
+      "explanation": "발생 시점에 따라 엔터티를 나누면 기본(키) 엔터티, 중심 엔터티, 행위 엔터티다. 다른 엔터티 없이 독립적으로 생기는 것은 기본 엔터티다(④, 예: 고객, 상품, 부서). 중심 엔터티는 기본 엔터티에서 생겨 업무의 중심이 되는 것(예: 주문), 행위 엔터티는 두 개 이상의 엔터티에서 생기는 것(예: 주문 이력)이다."
     },
     {
       "_id": "sqld-0319",
@@ -9201,7 +9201,7 @@
         "Range Partition"
       ],
       "correctIndex": 3,
-      "explanation": "Range Partition은 날짜 및 숫자처럼 연속된 값을 기준으로 만든 파티션 테이블이다."
+      "explanation": "날짜·숫자처럼 연속된 값의 범위(예: 월별)로 나누는 것은 Range Partition 이다(④). List 는 지역 코드처럼 특정 값 목록으로, Hash 는 해시 함수로 고르게, Composite 는 두 방식을 섞어 나눈다."
     },
     {
       "_id": "sqld-0320",
@@ -9218,7 +9218,7 @@
         "개념적 데이터베이스 모델링은 추상화 수준이 낮고 재사용성이 매우 높은 모델링 방법이다."
       ],
       "correctIndex": 3,
-      "explanation": "개념적 모델링은 추상화 수준이 높고 업무에 대한 엔터티를 도출하고 관계를 정의하는 단계이다."
+      "explanation": "개념 모델링은 업무의 핵심 엔터티와 관계를 큰 틀에서 그리는 단계라 추상화 수준이 가장 높다. 추상화 수준이 낮다는 ④ 가 틀렸다. 개념 → 논리 → 물리로 갈수록 구체적이고 상세해진다."
     },
     {
       "_id": "sqld-0322",
@@ -9368,7 +9368,7 @@
         "SELECT FLOOR(35.8) FROM DUAL -> 36"
       ],
       "correctIndex": 2,
-      "explanation": "CEIL은 35.8보다 크거나 같은 최소의 정수를 되돌려 주기 때문에 36이 된다."
+      "explanation": "CEIL(35.8) 은 35.8 보다 크거나 같은 가장 작은 정수라 36 이다(③). ① TRUNC(35.8) 은 소수를 버려 35, ② ROUND(36.8, 0) 은 반올림해 37, ④ FLOOR(35.8) 은 작거나 같은 가장 큰 정수라 35 다."
     },
     {
       "_id": "sqld-0325",
@@ -10082,7 +10082,7 @@
         "UNIQUE : 칼럼에 중복된 값이 없을 때도 NULL 값은 입력되지 않는다."
       ],
       "correctIndex": 3,
-      "explanation": "UNQUE 제약조건은 칼럼에 중복된 값을 허용하진 않지만, NULL 값은 포함된다."
+      "explanation": "UNIQUE 는 중복된 값만 막고 NULL 은 입력할 수 있다. 'NULL 값은 입력되지 않는다' 는 ④ 가 틀렸다. ① 기본키는 자동으로 NOT NULL 이 되고, ③ 기본키는 테이블당 하나이며 인덱스가 자동으로 만들어진다."
     },
     {
       "_id": "sqld-0349",
@@ -10570,7 +10570,7 @@
         "100"
       ],
       "correctIndex": 2,
-      "explanation": "nullif(1,1)에서 NULL을 반환하고 COALESCE(NULL,200,300)에서 200을 반환한다.",
+      "explanation": "안쪽부터 계산한다. NULLIF(1, 1) 은 두 값이 같으므로 NULL 이다. COALESCE(NULL, 200, 300) 은 왼쪽부터 보고 처음 나오는 NULL 이 아닌 값 200 을 돌려준다(③).",
       "references": [
         {
           "type": "sql",
@@ -10897,7 +10897,7 @@
         "유일성 : 엔터티 내에서 모든 인스턴스들은 유일해야 한다."
       ],
       "correctIndex": 0,
-      "explanation": "주식별자는 NULL값을 가질 수 가 없다. 즉, 주식별자는 NOT NULL이어야 한다."
+      "explanation": "주식별자는 반드시 값이 있어야 한다(존재성, NOT NULL). '값이 존재하지 않을 수 있다' 는 ① 이 틀렸다. ②③④ 의 불변성·최소성·유일성 설명은 맞다."
     },
     {
       "_id": "sqld-0365",
@@ -10939,7 +10939,7 @@
         "삽입 이상 : 상품을 주문하지 않은 고객의 정보를 삽입할 수 없다."
       ],
       "correctIndex": 2,
-      "explanation": "스마트폰의 정보를 업데이트할 경우 유비뿐 아니라 관우의 정보도 같이 업데이트해야 한다.",
+      "explanation": "고객별로 상품 정보가 반복 저장된 테이블이라, 스마트폰 정보를 바꾸려면 스마트폰을 산 유비와 관우 행을 모두 고쳐야 한다. 유비 것만 바꾸면 된다는 ③ 이 틀렸다(하나라도 빠뜨리면 데이터가 서로 달라지는 것이 갱신 이상). ① 삭제 이상, ④ 삽입 이상 설명은 맞다.",
       "references": [
         {
           "type": "image",
@@ -10963,7 +10963,7 @@
         "한 개의 엔터티는 한 개의 속성만 가질 수 있다."
       ],
       "correctIndex": 2,
-      "explanation": "속성명은 업무에서 사용하는 명칭을 사용하고 속성명은 데이터 모델에서 유일하게 사용해야 한다."
+      "explanation": "속성은 엔터티를 설명하는 항목이고, 인스턴스(행)를 이루는 구성 요소다(③). ① 속성명은 서술식이 아니라 업무에서 쓰는 짧은 명사형으로 짓고, ② 하나의 속성은 하나의 이름만 가지며, ④ 엔터티는 보통 두 개 이상의 속성을 가진다."
     },
     {
       "_id": "sqld-0370",
@@ -10980,7 +10980,7 @@
         "SELECT N1 FROM MYTEST ORDER BY N2;"
       ],
       "correctIndex": 0,
-      "explanation": "①번 보기에서 ORDER BY 항목은 반드시 SELECT 목록에 있는 칼럼의 자릿수를 사용해야 한다.",
+      "explanation": "ORDER BY 2 는 'SELECT 목록의 두 번째 칼럼' 으로 정렬하라는 뜻이다. ① 은 SELECT 목록에 N1 하나뿐이라 두 번째 칼럼이 없어 오류가 난다. ③ 은 SELECT * 라 두 번째(N2)가 있고, ②④ 처럼 SELECT 에 없는 칼럼 이름(N2)으로 정렬하는 것은 가능하다.",
       "references": [
         {
           "type": "sql",
@@ -11093,7 +11093,7 @@
         "CUBE는 결합 가능한 모든 값에 대하여 다차원 집계를 생성하는 것이 특징이다."
       ],
       "correctIndex": 3,
-      "explanation": "CUBE는 CUBE 함수에 제시한 칼럼에 대해서 결합 가능한 모든 집계를 계산한다."
+      "explanation": "CUBE 는 지정한 칼럼으로 만들 수 있는 모든 조합의 소계를 구하는 다차원 집계다(④). ① 조합이 더 많은 CUBE 가 ROLLUP 보다 부하가 크고, ② 여러 칼럼에 쓸 수 있으며, ③ ROLLUP 은 전체 합계뿐 아니라 계층별 소계도 함께 구한다."
     },
     {
       "_id": "sqld-0377",
@@ -11466,7 +11466,7 @@
         "20, 20, 20"
       ],
       "correctIndex": 1,
-      "explanation": "이 문제의 핵심은 그룹 함수(SUM, AVG, MAX, MIN)는 실행 시에 NULL이 제외된다는 것이다.",
+      "explanation": "AVG 는 NULL 을 빼고 평균을 구한다. 그래서 같은 COL3 이라도 WHERE 로 어떤 행을 남기느냐에 따라 평균이 달라진다. 첫 번째는 전체 행, 두 번째·세 번째는 COL1 이 NULL 이거나 0 이하인 행을 뺀 행으로 계산하여 10, 20, 20 이 된다(②).",
       "references": [
         {
           "type": "sql",
@@ -11551,7 +11551,7 @@
         "1"
       ],
       "correctIndex": 2,
-      "explanation": "LAG 함수는 이전 행의 값을 반환하는 함수이다. LAG(SALARY, 2)라고 하면 이전 두 번째 행 값을 반환하게 된다.",
+      "explanation": "LAG(SALARY, n) 은 같은 파티션에서 n 행 앞의 SALARY 를 가져온다. 결과에서 BEFORE_SALARY 가 두 행 앞 급여이고 부서별 처음 두 행은 NULL 이므로 n = 2 다(③). n 을 생략하면 1, 즉 바로 앞 행이다.",
       "references": [
         {
           "type": "sql",
@@ -11735,7 +11735,7 @@
         "SELECT  NO, A.C1, B.C2\nFROM MytestA A\nNATURAL JOIN MytestB B;"
       ],
       "correctIndex": 2,
-      "explanation": "NO 컬럼이 A, B 둘 다에 있어 컬럼 모호성 오류 발생 (ORA-00918) → 실행 자체가 안 됨",
+      "explanation": "NO 칼럼은 MytestA 와 MytestB 에 모두 있다. ③ 은 CROSS JOIN 인데 NO 앞에 A. 나 B. 를 붙이지 않아 어느 테이블의 NO 인지 알 수 없다는 오류(ORA-00918)가 난다. ④ NATURAL JOIN 은 NO 를 조인 칼럼으로 하나로 합치므로 오히려 접두사 없이 써야 한다.",
       "references": [
         {
           "type": "text",
@@ -11833,7 +11833,7 @@
         "SELECT COL1 FROM T1 WHERE COL100 <> 'NULL'"
       ],
       "correctIndex": 1,
-      "explanation": "NULL 값에 대한 조회는 IN NULL로 하고 NULL 값이 없는 것을 조회할 때는 IS NOT NULL로 한다."
+      "explanation": "NULL 은 = · != · IN 같은 비교로는 찾을 수 없고 IS NULL / IS NOT NULL 로만 판단한다. 값이 있는 행은 COL100 IS NOT NULL 로 찾는다(②). ① NOT IN (NULL) 은 항상 UNKNOWN 이라 결과가 없고, ④ 'NULL' 은 그냥 문자열이다."
     },
     {
       "_id": "sqld-0414",
@@ -11902,7 +11902,7 @@
         "union"
       ],
       "correctIndex": 1,
-      "explanation": "①번은 교집합 집합 연산자이다.\n③번은 중복 포함 합집합이다.\n④번은 중복 제거 합집합이다."
+      "explanation": "차집합은 except 다(②, Oracle 에서는 MINUS). intersect 는 교집합, union all 은 중복 포함 합집합, union 은 중복 제거 합집합이다."
     },
     {
       "_id": "sqld-0417",
@@ -12398,7 +12398,7 @@
         "기본키는 테이블당 하나의 제약만을 정의할 수 있다."
       ],
       "correctIndex": 0,
-      "explanation": "고유키로 지정된 모든 칼럼은 중복된 값을 허용하진 않지만, NULL 값은 가질 수도 있다."
+      "explanation": "UNIQUE(고유키)는 중복만 막을 뿐 NULL 은 허용한다. 'NULL 값을 가질 수 없다' 는 ① 이 틀렸다. ② 외래키는 참조 무결성, ③ CHECK 는 입력 전 조건 검사, ④ 기본키는 테이블당 하나다."
     },
     {
       "_id": "sqld-0429",
@@ -12799,7 +12799,7 @@
         "ORACLE 데이터베이스가 내부적으로 관리하는 값이기 때문에, 개발자가 ROWID 값을 확인할 수 없다."
       ],
       "correctIndex": 3,
-      "explanation": "ROWID는 ORACLE 데이터베이스 내에서 데이터를 구분할 수 있는 유일한 값으로, SELECT 문으로 확인할 수 있다."
+      "explanation": "ROWID 는 Oracle 이 행마다 붙이는 주소(오브젝트·파일·블록·행 번호)라 행을 구분하는 유일한 값이며 블록에 바로 접근할 수 있다. SELECT ROWID FROM 테이블 처럼 개발자도 조회할 수 있으므로 ④ 가 틀렸다."
     },
     {
       "_id": "sqld-0438",
@@ -12907,7 +12907,7 @@
         "COMMIT"
       ],
       "correctIndex": 2,
-      "explanation": "ROLLBACK을 실행하면 데이터에 대한 변경사용을 모두 취소하고 트랜잭션을 종료한다."
+      "explanation": "아직 COMMIT 하지 않은 변경을 취소하고 마지막 COMMIT 시점으로 되돌리는 것은 ROLLBACK 이다(③). COMMIT 은 변경을 확정하고, GRANT·REVOKE 는 권한을 주고 빼앗는 DCL 이다."
     },
     {
       "_id": "sqld-0443",
@@ -12947,7 +12947,7 @@
         "제1정규화"
       ],
       "correctIndex": 1,
-      "explanation": "제3정규화는 주식별자를 제외한 칼럼 간에 종속성을 확인해서 종속성이 있으면 분할하는 과정이다."
+      "explanation": "제1·제2정규화와 BCNF 는 주식별자(기본키)를 기준으로 종속을 따진다. 제3정규화는 주식별자가 아닌 일반 칼럼끼리의 종속(이행 종속)을 보므로 주식별자와 관련성이 가장 낮다(②)."
     },
     {
       "_id": "sqld-0445",
@@ -13244,7 +13244,7 @@
         "GROUP BY ROLLUP(DEPTNO);"
       ],
       "correctIndex": 2,
-      "explanation": "CUBE는 CUBE함수에 제시한 칼럼에 대해서 결합 가능한 모든 집계를 계산한다.",
+      "explanation": "CUBE(DEPTNO, JOB) 은 (DEPTNO), (JOB), (DEPTNO, JOB), 전체 합계 () 네 가지를 모두 집계한다. 이를 그대로 풀어 쓴 것이 GROUPING SETS (DEPTNO, JOB, (DEPTNO, JOB), ()) 다(③). ② 처럼 GROUP BY 를 UNION ALL 로 잇는 문법은 없고, ④ ROLLUP(DEPTNO) 는 DEPTNO 별과 전체만 구한다.",
       "references": [
         {
           "type": "text",
@@ -13528,7 +13528,7 @@
         "독립성 : 테이블 구조가 변경되어도 뷰를 사용하는 응용 프로그램은 변경하지 않아도 된다."
       ],
       "correctIndex": 1,
-      "explanation": "VIEW는 논리적으로 존재하는 가상 테이블로서 물리적으로 실제 데이터를 저장하지 않는다."
+      "explanation": "뷰는 SELECT 문만 저장한 가상 테이블이라 실제 데이터를 갖지 않는다. '물리성' 이라는 ② 가 틀렸다. 뷰의 장점은 ① 보안성, ③ 편리성, ④ 독립성이다."
     },
     {
       "_id": "sqld-0463",
@@ -13691,7 +13691,7 @@
         "ALTER talbe TEST alter column NAME varchar(100);"
       ],
       "correctIndex": 2,
-      "explanation": "칼럼의 변경은 ALTER TABLE ~ MODIFY문을 사용하면 된다. 데이터 타입이나 길이를 변경할 수 있다.",
+      "explanation": "이미 있는 칼럼의 데이터 타입이나 길이를 바꿀 때는 ALTER TABLE … MODIFY 를 쓴다(③, Oracle 기준). ② ADD 는 새 칼럼 추가이고, ① 은 제약조건 추가 문법이 섞였으며, ④ 는 talbe 오타에 SQL Server 식 ALTER COLUMN 이다.",
       "references": [
         {
           "type": "text",
@@ -13714,7 +13714,7 @@
         "데이터베이스의 NULL 값의 의미는 DBMS 종류별로 다르게 해석한다."
       ],
       "correctIndex": 0,
-      "explanation": "NULL 값은 아직 알려지지 않은 미지의 값으로 0 혹은 TRUE, FALSE와는 다른 것이다."
+      "explanation": "NULL 은 '아직 알 수 없는 값' 으로 0 이나 공백, TRUE·FALSE 와 다르다(①). 이 뜻은 DBMS 와 관계없이 같으며, MS-SQL 에서도 NULL 은 0 이 아니다."
     },
     {
       "_id": "sqld-0469",
@@ -13845,7 +13845,7 @@
         "서브쿼리에서는 정렬을 수행하기 위해서 내부에 ORDER BY를 사용하지 못한다."
       ],
       "correctIndex": 2,
-      "explanation": "서브쿼리 내부에서는 메인쿼리의 칼럼을 사용할 수 있지만 반대로 메인쿼리에서 서브쿼리의 칼럼을 사용할 수 없다."
+      "explanation": "서브쿼리 안에서는 메인쿼리 칼럼을 쓸 수 있지만, 메인쿼리에서는 서브쿼리 칼럼을 쓸 수 없다. 그래서 ③ 이 틀렸다(서브쿼리 칼럼이 필요하면 조인으로 바꾼다). ① EXISTS 는 참·거짓만, ② 여러 행을 돌려주면 IN·ANY·ALL 같은 다중 행 연산자, ④ WHERE 절 서브쿼리에는 ORDER BY 를 쓸 수 없다."
     },
     {
       "_id": "sqld-0473",
@@ -14279,7 +14279,7 @@
         "사원은 동일한 콘도를 예약해서 반복적으로 방문할 수 있다."
       ],
       "correctIndex": 1,
-      "explanation": "이용내역' 엔터티에서 이용일자 + 사원번호가 기본키이므로 일자가 같은 날에 여러 콘도를 이용할 수 없다.",
+      "explanation": "이용내역 엔터티의 기본키가 이용일자 + 사원번호 라서, 같은 사원은 같은 날짜에 이용내역을 한 건만 가질 수 있다. 따라서 동일 일자에 여러 콘도를 이용할 수 있다는 ② 가 틀렸다.",
       "references": [
         {
           "type": "image",
@@ -14435,7 +14435,7 @@
         "COMMIT"
       ],
       "correctIndex": 2,
-      "explanation": "DCL은 GRANT, REVOKE가 있으며 GRANT는 권한을 부여하고 REVOKE는 권한을 회수한다."
+      "explanation": "테이블 권한을 주는 DCL 은 GRANT 다(③). REVOKE 는 권한 회수, COMMIT·ROLLBACK 은 트랜잭션을 확정·취소하는 TCL 이다."
     },
     {
       "_id": "sqld-0493",
@@ -14469,7 +14469,7 @@
         "SELECT BAN, COUNT(*) AS RESULT\nFROM TEST15\nGROUP BY BAN;"
       ],
       "correctIndex": 1,
-      "explanation": "②번 보기는 BAN칼럼으로 그룹핑하고 DISTINCT를 사용해서 중복된 이름을 제거하고 카운팅한다.",
+      "explanation": "결과는 반별로 서로 다른 이름의 수를 센 값이다. 같은 반에 같은 이름이 두 번 있어도 한 번만 세려면 COUNT(DISTINCT NAME) 을 써야 한다(②). ③④ 의 COUNT(1)·COUNT(*) 는 중복 이름까지 모두 세고, ① 은 반을 칼럼으로 펼친 한 행이 나온다.",
       "references": [
         {
           "type": "image",
@@ -14717,7 +14717,7 @@
         "1,2,3"
       ],
       "correctIndex": 2,
-      "explanation": "MINUS는 Oracle에서 차집합을 구하는 것이다. 즉 위의 SQL에서 1을 제외하게 되므로 2,3이 된다.",
+      "explanation": "MINUS 는 위 결과에서 아래 결과에 있는 행을 뺀다. {1, 2, 3} 에서 {1} 을 빼면 2, 3 이 남는다(③).",
       "references": [
         {
           "type": "sql",
@@ -14921,7 +14921,7 @@
         "SELECT"
       ],
       "correctIndex": 2,
-      "explanation": "순수 관계 연산자란, 관계형 데이터베이스에 적용할 수 있도록 개발한 관계 연산자를 의미한다."
+      "explanation": "순수 관계 연산자는 관계형 DB 를 위해 새로 만든 SELECT(행 고르기), PROJECT(칼럼 고르기), JOIN, DIVIDE 네 가지다. DELETE 는 관계 연산자가 아니라 데이터를 지우는 DML 이다(③). UNION·INTERSECT·DIFFERENCE·PRODUCT 는 일반 집합 연산자다."
     },
     {
       "_id": "sqld-0517",
@@ -15022,7 +15022,7 @@
         "SELF JOIN"
       ],
       "correctIndex": 0,
-      "explanation": "5개의 행이 총 25개의 행으로 증가하였으므로 5*5=25의 CROSS JOIN을 수행한 것이다.",
+      "explanation": "5행짜리 테이블이 조인 뒤 25행이 되었다. 5 × 5 = 25 로, 조인 조건 없이 모든 행을 짝짓는 CROSS JOIN 의 결과다(①). OUTER JOIN 이나 SELF JOIN 은 조인 조건에 맞는 행만 짝지으므로 이렇게 늘어나지 않는다.",
       "references": [
         {
           "type": "image",
@@ -15470,7 +15470,7 @@
         "0"
       ],
       "correctIndex": 3,
-      "explanation": "NOT IN 안에 NULL이 들어가면 아무것도 출력되지 않는다. 이 때 COUNT는 0을 출력하게 된다.",
+      "explanation": "NOT IN (목록) 은 '목록의 모든 값과 다르다' 를 뜻해서 COL <> 값1 AND COL <> 값2 … 로 풀린다. 목록에 NULL 이 하나라도 있으면 COL <> NULL 이 UNKNOWN 이라 전체 조건이 참이 될 수 없다. 그래서 조회되는 행이 없고 COUNT(*) 는 0 이다(④).",
       "references": [
         {
           "type": "sql",
@@ -15725,7 +15725,7 @@
         "FIRST_VALUE"
       ],
       "correctIndex": 3,
-      "explanation": "파티션에서 가장 처음에 나오는 값을 구하는 윈도우 함수는 FIRST_VALUE이다."
+      "explanation": "FIRST_VALUE 는 파티션에서 정렬 순서상 가장 먼저 나오는 값을 돌려준다(④). LAST_VALUE 는 마지막 값, LAG 는 앞 행 값, LEAD 는 뒤 행 값이다."
     },
     {
       "_id": "sqld-0554",
@@ -16063,7 +16063,7 @@
         "2,3"
       ],
       "correctIndex": 2,
-      "explanation": "NTILE(3)는 데이터 3등분 한다. 그리고 각 등분에 대해서 COUNT를 계산하므로 3,2가 된다.",
+      "explanation": "전체 8행을 NTILE(3) 으로 3그룹에 나누면 8 ÷ 3 = 2 … 2 라서, 나머지 2행을 앞 그룹부터 하나씩 더 준다. 그룹 크기는 3, 3, 2 이므로 빈칸은 그룹 3, 2행(3,2)이다(③).",
       "references": [
         {
           "type": "sql",
@@ -16358,7 +16358,7 @@
         "관계는 존재적 관계와 행위에 의한 관계로 나누어 볼 수 있다."
       ],
       "correctIndex": 0,
-      "explanation": "개인 회원 또는 법인 회원 중 하나만 주문이 가능한 경우 두 엔터티의 관계는 상호배타적 관계이다. ",
+      "explanation": "회원은 개인회원이나 법인회원 중 하나로만 주문할 수 있으므로, 한쪽과 관계를 맺으면 다른 쪽과는 맺을 수 없는 상호배타적 관계다. '상호포함적' 이라는 ① 이 틀렸다. ②③④ 처럼 관계는 존재에 의한 관계(소속)와 행위에 의한 관계(주문)로 나눈다.",
       "references": [
         {
           "type": "text",
@@ -16461,7 +16461,7 @@
         "GROUP BY DEPTNO;"
       ],
       "correctIndex": 2,
-      "explanation": "WHERE 절은 SELECT 절보다 먼저 수행되므로 SELECT 절에서 정의한 컬럼 별칭을 사용할 수 없다. "
+      "explanation": "WHERE 는 SELECT 보다 먼저 처리되므로, SELECT 에서 만든 별칭 ROUND_VALUE 를 WHERE 에서 쓸 수 없어 ③ 에서 오류가 난다. 게다가 AVG 같은 집계 결과로 거르려면 WHERE 가 아니라 GROUP BY 뒤의 HAVING ROUND(AVG(SAL)) >= 3000 으로 써야 한다."
     },
     {
       "_id": "sqld-0584",
@@ -17096,7 +17096,7 @@
         "NULL"
       ],
       "correctIndex": 2,
-      "explanation": "서브쿼리 결과가 항상 거짓이므로 조건에 만족하는 행이 없다. 이 경우 COUNT는 NULL이 아닌 0을 리턴한다.",
+      "explanation": "EXISTS 서브쿼리는 TAB2 에 COL1 = 'A' 인 행이 있는지만 본다. TAB2 에는 B, C, D 만 있어 항상 거짓이므로 TAB1 에서 조회되는 행이 없다. 이때 COUNT(*) 는 NULL 이 아니라 0 을 돌려준다(③).",
       "references": [
         {
           "type": "sql",
@@ -17313,7 +17313,7 @@
         "CONNECT_BY_ISLEAF"
       ],
       "correctIndex": 3,
-      "explanation": "각 행이 리프 노드 데이터인지 여부를 출력해주는 계층형 질의절의 가상 함수 CONNECT_BY_ISLEAF이다. ",
+      "explanation": "계층형 질의에서 자식이 없는 리프 노드면 1, 아니면 0 을 돌려주는 의사 칼럼은 CONNECT_BY_ISLEAF 다(④). CONNECT_BY_ROOT 는 루트 값, SYS_CONNECT_BY_PATH 는 루트부터의 경로, CONNECT_BY_ISCYCLE 은 순환 여부(NOCYCLE 과 함께 사용)다.",
       "references": [
         {
           "type": "sql",
@@ -17460,7 +17460,7 @@
         "2,1"
       ],
       "correctIndex": 2,
-      "explanation": "둘 다 숫자(\\d)가 2회 이상 나열된 단어의 수를 찾는 문제이므로 C1은 2, C2는 3개가 리턴된다.",
+      "explanation": "\\d 는 숫자 한 글자다. C1 의 '\\d{2}+' 는 '숫자 두 개' 가 한 번 이상 이어진 부분이라 '1004', '1234' 두 덩어리를 찾아 2 다. C2 의 '\\d{2,}+' 는 숫자가 2개 이상 연속된 부분이라 '1004', '1234', '100' 세 덩어리를 찾아 3 이다(③).",
       "references": [
         {
           "type": "sql",
@@ -17655,7 +17655,7 @@
         "서로 다른 문자가 나올 때까지 비교한다"
       ],
       "correctIndex": 0,
-      "explanation": "길이가 다른 경우 길이가 같을 때까지 비교하여 모두 값이 같다면 길이가 큰 문자열을 더 큰 값으로 판단한다."
+      "explanation": "비교하는 값 중 하나라도 VARCHAR 면 공백을 채우지 않고 있는 그대로 비교한다. 서로 다른 문자가 나올 때까지 비교하고(④), 짧은 쪽이 끝날 때까지 같으면 긴 쪽이 크며(③), 길이와 내용이 같으면 같다(②). '짧은 쪽에 공백을 붙여 길이를 맞춘다' 는 ① 은 양쪽이 모두 CHAR 일 때의 규칙이다."
     },
     {
       "_id": "sqld-0619",
@@ -18152,7 +18152,7 @@
         "ORDER BY COMM 시 NULL이 마지막에 배치된다."
       ],
       "correctIndex": 0,
-      "explanation": "ORDER BY 시 DESC NULLS LAST 하면 NULL값이 맨 뒤에 배치된다."
+      "explanation": "Oracle 은 NULL 을 가장 큰 값으로 본다. 그래서 ORDER BY COMM(오름차순)이면 NULL 이 맨 뒤(④), DESC 면 맨 앞(②)에 온다. NULLS FIRST 는 NULL 을 앞으로(③), NULLS LAST 는 뒤로 보낸다. DESC NULLS LAST 인데 NULL 이 맨 앞이라는 ① 이 틀렸다."
     },
     {
       "_id": "sqld-0644",
@@ -19422,7 +19422,7 @@
         "데이터 타입을 변경할 경우에는 반드시 빈 컬럼이어야 한다."
       ],
       "correctIndex": 3,
-      "explanation": "CHAR, VARCHAR 타입일 경우 데이터가 있어도 서로 변경가능 하기에 반드시 빈 컬럼일 필요는 없다. "
+      "explanation": "SQL 전문가 가이드 기준으로 칼럼 삭제는 한 번에 하나씩 하고(①), DEFAULT 를 주고 칼럼을 추가하면 기존 행도 그 값이 되며(②), 크기는 늘릴 수 있다(③). 데이터 타입은 칼럼이 비어 있거나 NULL 만 있으면 바꿀 수 있지만, CHAR ↔ VARCHAR 처럼 호환되는 타입은 데이터가 있어도 바꿀 수 있어 '반드시 빈 칼럼' 이라는 ④ 가 틀렸다."
     },
     {
       "_id": "sqld-0669",
@@ -19656,7 +19656,7 @@
         "DBMS에 저장된 데이터는 다른 사용자에게 공유될 수 없다."
       ],
       "correctIndex": 3,
-      "explanation": "DBMS는 데이터를 중앙 집중화하여 여러 응용프로그램이 데이터를 공유하고 사용할 수 있도록 하는 소프트웨어이다."
+      "explanation": "DBMS 는 데이터를 한곳에 모아 여러 사용자와 프로그램이 함께 쓰도록(공유) 하는 것이 목적이다. 공유될 수 없다는 ④ 가 틀렸다. ① 보안, ② 실시간 접근과 계속적 변화, ③ 무결성 유지는 DBMS 의 특징이다."
     },
     {
       "_id": "sqld-0682",
@@ -19690,7 +19690,7 @@
         "ORDER BY 절에 SELECT 절에 정의되지 않은 컬럼을 사용할 수 있다."
       ],
       "correctIndex": 1,
-      "explanation": "GROUP BY 절에 명시되지 않은 컬럼은 ORDER BY 절에 사용할 수 없다."
+      "explanation": "GROUP BY 를 쓰면 ORDER BY 에도 GROUP BY 칼럼이나 집계 함수만 쓸 수 있다. 그룹에 없는 칼럼은 그룹마다 값이 하나로 정해지지 않기 때문이다. 그래서 ② 가 틀렸다. GROUP BY 가 없을 때는 ④ 처럼 SELECT 에 없는 칼럼으로도 정렬할 수 있다."
     },
     {
       "_id": "sqld-0684",
@@ -19934,7 +19934,7 @@
         "SELECT * FROM TAB1 WHERE COL1 IS NOT NULL;"
       ],
       "correctIndex": 3,
-      "explanation": "NULL은 일반적인 비교연산을 수행할 수 없고 IS NULL, IS NOT NULL로 비교해야 한다. "
+      "explanation": "NULL 은 = · != · <> 같은 비교 연산으로는 판별할 수 없어 결과가 항상 UNKNOWN 이다(②③ 은 아무 행도 안 나온다). 반드시 IS NULL / IS NOT NULL 을 써야 한다(④). ① 은 IS 가 빠져 문법 오류다."
     },
     {
       "_id": "sqld-0694",
@@ -20374,7 +20374,7 @@
         "ROLLUP(DEPTNO)"
       ],
       "correctIndex": 3,
-      "explanation": "ROLLUP은 전체 소계를 함께 출력한다. 즉, ROLLUP(A) => GROUP BY A 결과에 전체 소계 출력",
+      "explanation": "위 SQL 은 부서별 합계에 전체 합계 한 행을 UNION ALL 로 붙였다. ROLLUP(DEPTNO) 는 DEPTNO 별 합계와 전체 합계를 함께 만들어 같은 결과를 낸다(④). ② ROLLUP(DEPTNO, SAL) 은 (DEPTNO, SAL) 별 합계가 더 생기고, ③ ROLLUP(SAL) 은 급여별 합계가 된다.",
       "references": [
         {
           "type": "sql",
@@ -20397,7 +20397,7 @@
         "RANK함수는 동일한 값에 대해서는 동일한 순위를 부여한다."
       ],
       "correctIndex": 1,
-      "explanation": "PERCENT_RANK는 값이 아닌 행의 상대 위치를 0~1 사이값으로 반환하는 함수이다."
+      "explanation": "PERCENT_RANK 는 파티션 안에서 행의 순서를 0 ~ 1 사이 백분율로 나타낸다. '누적된 순위를 부여한다' 는 ② 는 맞지 않다. ①③④ 의 RANK·ROW_NUMBER·DENSE_RANK 설명은 맞다."
     },
     {
       "_id": "sqld-0707",
@@ -20894,7 +20894,7 @@
         "데이터에 대한 변경 사항이 데이터베이스에 영구 저장된다."
       ],
       "correctIndex": 0,
-      "explanation": "데이터베이스는 공유 저장 공간이므로 COMMIT 하여 영구 저장된 데이터는 다른 사용자에게 공유된다. "
+      "explanation": "COMMIT 하면 변경 내용이 DB 에 영구 저장되고(④), 이전 상태로 되돌릴 수 없으며(②), 잠금이 풀려 다른 사용자도 그 행을 다룰 수 있다(③). 커밋된 데이터는 모든 사용자가 볼 수 있으므로 'COMMIT 한 사용자만 볼 수 있다' 는 ① 이 틀렸다. 커밋 전에는 변경한 본인만 바뀐 값을 본다."
     },
     {
       "_id": "sqld-0715",
@@ -20911,7 +20911,7 @@
         "컬럼의 크기를 늘릴 수는 있지만 줄일 수는 없다."
       ],
       "correctIndex": 3,
-      "explanation": "컬럼 크기를 늘리는 것은 언제든지 가능하며 반대로 줄이는 것은 해당 컬럼의 최대 길이만큼 줄일 수 있다."
+      "explanation": "칼럼 크기는 늘리는 것은 언제든 되지만, 줄이는 것도 칼럼이 NULL 만 가지고 있거나 행이 없으면(실제 Oracle 은 기존 데이터 길이 이상이면) 가능하다. '줄일 수는 없다' 고 단정한 ④ 가 틀렸다. ①②③ 은 SQL 전문가 가이드의 칼럼 변경 주의 사항 그대로다."
     },
     {
       "_id": "sqld-0716",
@@ -20928,7 +20928,7 @@
         "기본키는 테이블에 저장된 행 데이터를 고유하게 식별하기 위한 키이다."
       ],
       "correctIndex": 1,
-      "explanation": "기본키는 고유키와 NOT NULL 제약조건을 합쳐 놓은 것과 같다. 즉, 중복될 수 없으며 NULL이 삽입될 수 없다. "
+      "explanation": "기본키는 UNIQUE(중복 금지) + NOT NULL(빈 값 금지) 을 합친 것과 같다. 외래키와 합친 것이 아니므로 ② 가 틀렸다. 외래키는 다른 테이블의 기본키를 참조하는 별개의 제약이다."
     },
     {
       "_id": "sqld-0717",
@@ -21048,7 +21048,7 @@
         "외래키를 생성 한 경우 부모 테이블의 참조키 컬럼을 삭제할 수 없다."
       ],
       "correctIndex": 0,
-      "explanation": "NULL값이 있더라도 중복된 값만 없다면 UNIQUE 제약조건을 추가할 수 있다."
+      "explanation": "UNIQUE 는 NULL 을 허용하므로, NULL 이 들어 있어도 NULL 이 아닌 값끼리 중복만 없으면 UNIQUE 제약을 추가할 수 있다. ① 이 틀렸다. ② 이미 있는 칼럼의 NOT NULL 은 MODIFY 로 추가하고, ③ 제약조건 이름은 생략할 수 있으며(자동 생성), ④ 자식이 참조 중인 부모 키 칼럼은 그냥 삭제할 수 없다."
     },
     {
       "_id": "sqld-0720",
@@ -21156,7 +21156,7 @@
         "식별관계"
       ],
       "correctIndex": 3,
-      "explanation": "부모 엔터티의 주식별자를 상속받아 자식 엔터티에서 외부식별자이면서 주식별자로 사용하는 관계는 식별관계이다.",
+      "explanation": "부모 엔터티의 주식별자를 물려받아 자식 엔터티의 주식별자 일부로 쓰는 관계는 식별관계다(④, 실선으로 표기). 물려받은 키를 주식별자가 아닌 일반 속성으로만 쓰면 비식별관계(점선)다. 필수·선택관계는 관계 참여 여부에 따른 구분이다.",
       "references": [
         {
           "type": "text",
@@ -21268,7 +21268,7 @@
         "COUNT는 NULL을 세지 않는다."
       ],
       "correctIndex": 1,
-      "explanation": "NULL이 포함된 컬럼의 SUM 값은 NULL을 무시하고 연산한 결과가 리턴된다."
+      "explanation": "SUM 같은 집계 함수는 NULL 을 빼고 계산하므로 NULL 이 섞여 있어도 나머지 값의 합이 나온다. 모든 값이 NULL 일 때만 결과가 NULL 이다. 그래서 '항상 NULL' 이라는 ② 가 틀렸다. ① NULL 과 비교한 결과는 정확히는 UNKNOWN 이지만 조건에서는 참이 아니라 거짓처럼 걸러진다."
     },
     {
       "_id": "sqld-0731",
@@ -21302,7 +21302,7 @@
         "데이터의 무결성을 보장할 수 있다."
       ],
       "correctIndex": 0,
-      "explanation": "데이터베이스의 크기나 복잡한 관계 및 다양한 쿼리 패턴 등의 이유로 부하를 분석하기가 어렵다."
+      "explanation": "관계형 DB 는 데이터가 커지고 테이블 관계와 쿼리 유형이 복잡해질수록 어디서 부하가 생기는지 분석하기가 어렵다. '부하를 분석하기 쉽다' 는 ① 이 적절하지 않다. ② 스키마 수정이 어렵고, ③ 분류·정렬·탐색이 빠르며, ④ 무결성을 보장하는 것은 특징이 맞다."
     },
     {
       "_id": "sqld-0734",
@@ -21945,7 +21945,7 @@
         "600"
       ],
       "correctIndex": 0,
-      "explanation": "A는 100, 200을 B는 300, C는 300을 리턴한다. 따라서 총 합은 900 이다.",
+      "explanation": "TAB1.COL2 와 TAB2.COL1 이 같은 행끼리 조인한다. A(10) 은 TAB2 의 10 두 행(100, 200), B(20) 과 C(20) 은 각각 20 한 행(300)과 짝지어지고, D(40) 은 짝이 없다. 합계는 100 + 200 + 300 + 300 = 900 이다(①).",
       "references": [
         {
           "type": "sql",
@@ -22738,7 +22738,7 @@
         "뷰는 가상의 테이블이기에 물리적으로 구현되어 있지 않으며 저장공간을 차지하지 않는다."
       ],
       "correctIndex": 1,
-      "explanation": "이미 정의되어 있는 뷰는 다른 뷰의 정의에 기초가 될 수 있다. 즉 뷰를 참조하는 뷰도 만들 수 있다."
+      "explanation": "이미 만든 뷰를 바탕으로 또 다른 뷰를 만들 수 있다. 그래서 '생성 불가' 라는 ② 가 틀렸다. ① 기본 테이블을 지우면 뷰를 조회할 수 없고, ③ 원본 테이블을 감출 수 있으며, ④ 일반 뷰는 정의만 저장하고 데이터 저장 공간을 차지하지 않는다."
     },
     {
       "_id": "sqld-0771",
@@ -22755,7 +22755,7 @@
         "외부 스키마"
       ],
       "correctIndex": 2,
-      "explanation": "스키마의 3단계 구조인 외부, 개념, 내부 스키마 중 개념 스키마에 대한 설명이다.",
+      "explanation": "여러 사용자 관점(외부 스키마)을 하나로 모아 조직 전체의 논리적 구조(개체·속성·관계·데이터 타입)를 정의하는 것은 개념 스키마다(③). 외부 스키마는 사용자별 관점, 내부 스키마는 물리적 저장 구조다.",
       "references": [
         {
           "type": "text",
@@ -22812,7 +22812,7 @@
         "두 개의 엔터티 사이에 정보의 조합이 발생되는가?"
       ],
       "correctIndex": 0,
-      "explanation": "두 개의 엔터티 사이 관계 도출시 업무기술서, 장표에 관계연결을 가능하게 하는 동사가 있는지를 고려해야 한다."
+      "explanation": "관계는 업무기술서·장표에서 두 엔터티를 잇는 동사(예: 고객이 상품을 '주문한다')를 찾아 도출한다. '명사' 를 찾는다는 ① 은 엔터티·속성을 찾을 때의 기준이라 관계 도출 고려사항이 아니다."
     },
     {
       "_id": "sqld-0775",
@@ -22943,7 +22943,7 @@
         "DDL - ALTER"
       ],
       "correctIndex": 1,
-      "explanation": "COMMIT, ROLLBACK은 TCL로 분류되고 GRANTM REVOKE는 DCL로 분류된다."
+      "explanation": "COMMIT 은 트랜잭션을 확정하는 TCL 이다. DCL 로 분류한 ② 가 틀렸다. DCL 은 권한을 다루는 GRANT·REVOKE 이고, ① UPDATE 는 DML, ③ ROLLBACK 은 TCL, ④ ALTER 는 DDL 이 맞다."
     },
     {
       "_id": "sqld-0788",
@@ -22960,7 +22960,7 @@
         "NVL(COMM, 100)"
       ],
       "correctIndex": 1,
-      "explanation": "NULLIF는 두 값이 같으면 NULL, 다르면 첫 번째 인수값을 리턴하는 함수이다."
+      "explanation": "①③④ 는 모두 'COMM 이 NULL 이면 100, 아니면 COMM' 이라는 같은 결과를 낸다(ISNULL 은 SQL Server, NVL·NVL2 는 Oracle 함수). ② NULLIF(COMM, 100) 은 COMM 이 100 이면 NULL, 아니면 COMM 을 돌려주므로 결과가 다르다."
     },
     {
       "_id": "sqld-0789",
@@ -23040,7 +23040,7 @@
         "1"
       ],
       "correctIndex": 1,
-      "explanation": "두 번째 글자가 L이면서 그 뒤에 E를 하나 포함하는 이름을 제외하면 SMITH, KING, CLARK 가 출력된다.",
+      "explanation": "'_L%E%' 는 두 번째 글자가 L 이고 그 뒤 어딘가에 E 가 있는 이름이다. ALLEN, BLAKE 가 여기에 해당해 NOT LIKE 로 빠지고 SMITH, KING, CLARK 3건이 남는다(②). CLARK 은 두 번째가 L 이지만 E 가 없어 남는다.",
       "references": [
         {
           "type": "sql",
@@ -23433,7 +23433,7 @@
         "하드웨어 구조 분석"
       ],
       "correctIndex": 0,
-      "explanation": "논리적 모델링 단계에서는 엔터티의 속성을 정의하고 도메인을 설정하며, 정규화를 수행합니다."
+      "explanation": "논리적 모델링은 개념 모델을 바탕으로 속성을 자세히 정하고(속성 정제), 도메인을 정의하며, 정규화로 구조를 다듬는 단계다(①). 실제 테이블 생성은 물리 모델링 이후의 일이고, 화면 설계·하드웨어 분석은 데이터 모델링의 작업이 아니다."
     },
     {
       "_id": "sqld-0804",
@@ -23467,7 +23467,7 @@
         "비즈니스 규칙"
       ],
       "correctIndex": 2,
-      "explanation": "엔터티는 고객, 제품, 주문 등 데이터로 저장될 수 있는 객체나 개념을 의미합니다."
+      "explanation": "엔터티는 업무에 필요해서 저장·관리해야 하는 데이터의 집합이다(③, 예: 고객, 상품, 주문). 엔터티 안의 항목이 속성이고, 업무를 하는 사람 자체나 업무 규칙은 엔터티가 아니다."
     },
     {
       "_id": "sqld-0806",
@@ -23484,7 +23484,7 @@
         "종속성 제거"
       ],
       "correctIndex": 2,
-      "explanation": "정규화는 데이터의 논리적 구조 개선이 목적이며, 성능 향상보다는 유지보수성과 무결성을 높이는 데 중점을 둡니다."
+      "explanation": "정규화의 목적은 중복을 없애고(①), 함수 종속을 정리해(④) 이상 현상을 막고 무결성을 높이는 것이다(②). 테이블이 잘게 나뉘어 조인이 늘면 조회 성능은 오히려 떨어질 수 있으므로 성능 향상(③)은 목적이 아니다. 성능을 위해서는 반정규화를 한다."
     },
     {
       "_id": "sqld-0807",
@@ -23518,7 +23518,7 @@
         "항상 1:1 관계"
       ],
       "correctIndex": 2,
-      "explanation": "약한 엔터티는 스스로 고유하게 식별될 수 없어 강한 엔터티의 식별자에 의존합니다."
+      "explanation": "약한 엔터티는 자기 속성만으로는 행을 구분할 수 없어, 강한(부모) 엔터티의 식별자를 받아 와야 식별된다(③). 그래서 부모 없이 독립적으로 존재할 수 없다. 예: 주문 없이 존재할 수 없는 주문상세."
     },
     {
       "_id": "sqld-0811",
@@ -23535,7 +23535,7 @@
         "속성 값의 범위"
       ],
       "correctIndex": 1,
-      "explanation": "식별자는 엔터티 내에서 각 인스턴스를 구분할 수 있도록 해주는 속성 또는 속성의 조합입니다."
+      "explanation": "식별자는 엔터티 안에서 각 인스턴스(행)를 하나씩 구분해 주는 속성 또는 속성의 묶음이다(②). 속성 값의 범위는 도메인, 테이블 간 연결은 관계다."
     },
     {
       "_id": "sqld-0812",
@@ -23569,7 +23569,7 @@
         "조인 수행"
       ],
       "correctIndex": 1,
-      "explanation": "1NF는 반복 속성이 없이 모든 속성이 원자값(Atomic Value)을 가져야 함을 의미합니다."
+      "explanation": "제1정규형은 모든 속성이 더 쪼갤 수 없는 하나의 값(원자값)만 갖도록 반복되는 속성을 없앤 상태다(②). 예: 전화번호1, 전화번호2 처럼 반복되는 칼럼을 별도 행·테이블로 분리한다. 이행적 종속 제거는 제3정규형이다."
     },
     {
       "_id": "sqld-0814",
@@ -23603,7 +23603,7 @@
         "외래 키 목록"
       ],
       "correctIndex": 1,
-      "explanation": "도메인은 해당 속성이 가질 수 있는 값의 집합 또는 범위입니다. (예: 성별 → 남/여)"
+      "explanation": "도메인은 속성이 가질 수 있는 값의 범위다(②). 예: 성별은 '남'·'여', 점수는 0 ~ 100 사이 정수. 데이터 타입·길이·허용 값을 정해 두면 여러 엔터티에서 같은 기준으로 쓸 수 있다."
     },
     {
       "_id": "sqld-0817",
@@ -23620,7 +23620,7 @@
         "서버 트래픽 분석"
       ],
       "correctIndex": 2,
-      "explanation": "비즈니스 룰은 기업의 정책이나 업무 규칙으로, 데이터 모델 설계의 기준이 됩니다."
+      "explanation": "비즈니스 룰은 '고객은 여러 번 주문할 수 있다' 같은 회사의 업무 규칙이다. 이것을 보고 엔터티·관계·제약조건을 정하므로 데이터 모델 작성의 기준이 된다(③)."
     },
     {
       "_id": "sqld-0819",
@@ -23736,7 +23736,7 @@
         "병원은 의사 없이는 존재할 수 없다."
       ],
       "correctIndex": 3,
-      "explanation": "병원은 의사 없어도 존재할 수 있습니다. 따라서 ④번은 틀린 설명이므로 정답입니다.",
+      "explanation": "ERD 에서 병원 쪽에서 의사로 가는 관계가 선택(○) 표기라, 소속 의사가 한 명도 없는 병원도 있을 수 있다. '의사 없이는 존재할 수 없다' 는 ④ 가 틀렸다. ①③ 은 필수(|) 표기, ② 는 여러 개(까마귀발) 표기와 맞는 설명이다.",
       "references": [
         {
           "type": "image",
@@ -23795,7 +23795,7 @@
         "인조 식별자는 다른 엔터티의 기본키를 그대로 식별자로 사용하는 것이다."
       ],
       "correctIndex": 3,
-      "explanation": "인조 식별자는 주식별자를 대체할 수 있는 인공 키(예: 일련번호)이며, 다른 엔터티의 키를 쓰는 것은 외래키 개념이다."
+      "explanation": "인조 식별자는 업무와 관계없이 일련번호처럼 인위적으로 만든 식별자다. 다른 엔터티의 기본키를 그대로 받아 쓰는 것은 외부 식별자(외래키)이므로 ④ 가 틀렸다. ①②③ 은 맞는 설명이다."
     },
     {
       "_id": "sqld-0832",
@@ -23812,7 +23812,7 @@
         "4, 4"
       ],
       "correctIndex": 2,
-      "explanation": "ALL은 기본 동작과 동일하며, 중복을 제거하지 않음\ndistinct는 COL1의 중복을 제거한 고유 값 개수",
+      "explanation": "첫 번째 SQL 은 COL2 = 'A' 인 행 (1, A), (1, A), (3, A) 의 COL1 을 센다. ALL 은 생략해도 되는 기본값으로 중복을 그대로 세므로 3 이다. 두 번째는 COL1 의 서로 다른 값 1, 2, 3, 4 를 세어 4 다. 정답은 3, 4(③).",
       "references": [
         {
           "type": "sql",
@@ -25332,7 +25332,7 @@
         "3"
       ],
       "correctIndex": 1,
-      "explanation": "A의 ID=2가 2건, B의 ID=2가 1건이면 해당 값으로 2건이 나오며 기존 1건 대비 1건 증가한다.",
+      "explanation": "INNER JOIN 결과 행 수는 같은 ID 끼리 만들 수 있는 짝의 수다. 원래 ID 2 는 A 1건 × B 1건 = 1행이었는데, A 에 (2, DELTA) 가 추가되면 A 2건 × B 1건 = 2행이 된다. 1행이 늘어난다(②).",
       "references": [
         {
           "type": "text",
@@ -25464,7 +25464,7 @@
         "4"
       ],
       "correctIndex": 1,
-      "explanation": "조건을 만족하며 JOIN되는 A.ID는 2와 3 두 개이므로 DISTINCT 개수는 2다.",
+      "explanation": "JOIN 으로 A·B 양쪽에 있는 ID 2, 3 이 남고, IN 서브쿼리(B 에서 id >= 2 인 2, 3, 4)도 둘 다 만족한다. 서로 다른 a.id 는 2, 3 두 개라 결과는 2 다(②).",
       "references": [
         {
           "type": "sql",
@@ -25530,7 +25530,7 @@
         "ORDER BY가 없기 때문이다."
       ],
       "correctIndex": 2,
-      "explanation": "OUTER JOIN은 보존 테이블 기준으로 행을 유지하고 반대편이 없으면 NULL을 채운다.",
+      "explanation": "LEFT OUTER JOIN 은 왼쪽 A 의 행을 모두 남긴다. A 의 1, 3 처럼 B 에 짝이 없는 행은 B 칼럼 자리를 NULL 로 채워서 보여 준다(③). 0 이나 빈 문자열이 아니라 NULL 이다.",
       "references": [
         {
           "type": "table",
@@ -25853,7 +25853,7 @@
         "HR"
       ],
       "correctIndex": 2,
-      "explanation": "SALES와 DEV는 모두 급여 범위가 1000 이상이고 인원 수가 4명 이상이다. HR은 인원 수 조건을 만족하지 못한다.",
+      "explanation": "부서별로 두 조건을 확인한다. SALES 는 최고 3500 - 최저 2000 = 1500, 4명이라 통과. DEV 는 5000 - 3700 = 1300, 5명이라 통과. HR 은 1명이라 탈락이다. 결과는 SALES, DEV 다(③).",
       "references": [
         {
           "type": "sql",
@@ -26177,7 +26177,7 @@
         "NULL"
       ],
       "correctIndex": 0,
-      "explanation": "NVL 적용 후 bonus 합계는 300이고, NULL이 아닌 salary 개수는 2이므로 결과는 302다.",
+      "explanation": "NVL(bonus, 0) 으로 NULL 을 0 으로 바꾼 합은 100 + 200 + 0 + 0 = 300 이다. COUNT(salary) 는 NULL 을 빼고 1000, 2000 두 건을 세어 2 다. 300 + 2 = 302(①).",
       "references": [
         {
           "type": "sql",
@@ -26515,7 +26515,7 @@
         "4"
       ],
       "correctIndex": 1,
-      "explanation": "SALES에서는 3000, DEV에서는 5000만 두 조건을 모두 만족하므로 총 2명이다.",
+      "explanation": "두 조건을 부서별로 본다. SALES 는 평균 2500, 최고 - 500 = 2500 이라 A(3000)만 둘 다 만족한다. DEV 는 평균 4250, 최고 - 500 = 4500 이라 C(5000)만 만족한다. 결과는 2명이다(②).",
       "references": [
         {
           "type": "sql",
@@ -26621,7 +26621,7 @@
         "salary별"
       ],
       "correctIndex": 0,
-      "explanation": "WHERE s.dept = e.dept 조건에 따라 외부 행과 같은 부서만 집계된다.",
+      "explanation": "내부 쿼리의 WHERE s.dept = e.dept 는 바깥 행 e 의 부서와 같은 부서만 골라 평균을 낸다. 바깥 행이 바뀔 때마다 그 행의 dept 기준으로 다시 계산되는 상관 서브쿼리라 그룹 기준은 '외부 행의 dept 값별' 이다(①).",
       "references": [
         {
           "type": "sql",
@@ -26727,7 +26727,7 @@
         "-1"
       ],
       "correctIndex": 3,
-      "explanation": "NULLIF(100,100)은 NULL이고, COALESCE는 첫 번째 NULL이 아닌 값을 반환하므로 결과는 -1이다.",
+      "explanation": "안쪽부터 계산한다. NULLIF(100, 100) 은 두 값이 같아 NULL 이다. COALESCE(NULL, -1) 은 처음 나오는 NULL 이 아닌 값 -1 을 돌려준다(④).",
       "references": [
         {
           "type": "text",
@@ -26781,7 +26781,7 @@
         "5"
       ],
       "correctIndex": 2,
-      "explanation": "LEVEL 3의 말단 노드는 SALES_A, SALES_B, DEV_A, DEV_B 총 4개다.",
+      "explanation": "CEO 가 LEVEL 1, 두 MGR 이 LEVEL 2, 그 아래 SALES_A·SALES_B·DEV_A·DEV_B 가 LEVEL 3 이다. LEVEL 3 의 네 명은 모두 부하가 없어 CONNECT_BY_ISLEAF = 1 이므로 4행이다(③).",
       "references": [
         {
           "type": "sql",
@@ -26849,7 +26849,7 @@
         "4"
       ],
       "correctIndex": 1,
-      "explanation": "CEO 바로 아래 단계의 SALES_MGR와 DEV_MGR 두 행이 LEVEL 2다.",
+      "explanation": "루트 CEO 가 LEVEL 1 이고, CEO 를 관리자로 둔 SALES_MGR·DEV_MGR 가 LEVEL 2 다. 그래서 LEVEL 2 는 2행이다(②). 그 아래 네 명은 LEVEL 3 이다.",
       "references": [
         {
           "type": "sql",
@@ -26985,7 +26985,7 @@
         "NULL"
       ],
       "correctIndex": 2,
-      "explanation": "CONNECT_BY_ROOT는 현재 행이 속한 계층의 최상위 값을 반환하므로 DEV_A의 root_name은 CEO다.",
+      "explanation": "CONNECT_BY_ROOT 는 현재 행이 속한 계층의 맨 위(START WITH 로 시작한 행) 값을 돌려준다. DEV_A 는 CEO → DEV_MGR → DEV_A 로 내려왔으므로 root_name 은 CEO 다(③). 바로 위 관리자 DEV_MGR 이 아니라는 점에 주의한다.",
       "references": [
         {
           "type": "sql",
@@ -27116,7 +27116,7 @@
         "PIVOT은 집계 함수를 사용할 수 없다."
       ],
       "correctIndex": 2,
-      "explanation": "PIVOT은 quarter_cd 값(Q1, Q2)을 열 이름으로 바꾸고 amount를 집계해 표시한다.",
+      "explanation": "PIVOT 은 FOR 뒤의 quarter_cd 값('Q1', 'Q2')을 칼럼(열)으로 펼치고, 각 칸에 SUM(amount) 를 넣는다(③). dept 는 그대로 행 기준이 되고, PIVOT 에는 SUM 같은 집계 함수가 반드시 들어간다.",
       "references": [
         {
           "type": "sql",
@@ -27317,7 +27317,7 @@
         "3"
       ],
       "correctIndex": 1,
-      "explanation": "BUSAN 지역의 200점 두 행 중 두 번째 행만 ROW_NUMBER=3, RANK=2가 되어 rn과 rnk가 달라진다.",
+      "explanation": "rn(ROW_NUMBER)은 동점이어도 번호가 이어지고, rnk(RANK)는 동점에 같은 순위를 준다. SEOUL 은 동점이 없어 두 값이 같다. BUSAN 은 CHOI·JUNG 이 200 으로 동점이라 RANK 는 둘 다 2, ROW_NUMBER 는 seller 순으로 CHOI 2, JUNG 3 이다. 다른 행은 JUNG 1행이다(②).",
       "references": [
         {
           "type": "sql",
@@ -27820,7 +27820,7 @@
         "NULL 허용 FK이면 참조 무결성 검사를 하지 않는다."
       ],
       "correctIndex": 2,
-      "explanation": "FK가 NULL 허용이어도 이미 자식이 특정 부모를 참조 중이면 CASCADE 없이 부모를 삭제할 수 없다.",
+      "explanation": "외래키가 NULL 을 허용하더라도, 이미 부모 값을 참조하고 있는 자식 행이 있으면 ON DELETE CASCADE 가 없을 때 부모는 삭제가 거부된다(③). FK 가 NULL 로 바뀌는 것은 ON DELETE SET NULL, 자식까지 지워지는 것은 CASCADE 옵션을 줬을 때다.",
       "references": [
         {
           "type": "text",
@@ -27924,7 +27924,7 @@
         "유일성 제약"
       ],
       "correctIndex": 2,
-      "explanation": "외래키는 부모 키 존재 여부를 검사해 자식 행의 참조 대상을 검증하므로 참조 무결성과 직접 연결된다.",
+      "explanation": "외래키는 자식의 값이 부모 테이블 기본키에 실제로 있는지 검사하므로 참조 무결성과 직접 연결된다(③). 엔터티 무결성은 기본키, 도메인 무결성은 값의 범위(데이터 타입·CHECK)에 관한 것이다.",
       "references": [
         {
           "type": "image",
@@ -27948,7 +27948,7 @@
         "정규화와 이상 현상은 무관하다."
       ],
       "correctIndex": 2,
-      "explanation": "상품명은 상품번호에만, 고객등급은 고객명 같은 일반 속성을 통해 결정될 수 있어 2NF와 3NF 관점의 문제가 함께 생긴다.",
+      "explanation": "기본키가 (주문번호, 상품번호) 인데 상품명은 상품번호에만 종속되므로 부분 함수 종속(2NF 위반)이다. 고객등급은 주문번호 → 고객명 → 고객등급 처럼 일반 속성을 거쳐 정해지므로 이행 함수 종속(3NF 위반)이다(③). 복합키라고 3NF 가 자동으로 되는 것은 아니다.",
       "references": [
         {
           "type": "text",
@@ -28160,7 +28160,7 @@
         "집계 함수가 포함되어 일반적인 단순 뷰보다 갱신 제약이 크다."
       ],
       "correctIndex": 3,
-      "explanation": "GROUP BY와 집계 함수가 포함된 뷰는 일반적인 단순 뷰보다 UPDATE/INSERT 제약이 크다.",
+      "explanation": "이 뷰는 GROUP BY 와 COUNT 로 부서별 인원을 집계한다. 뷰의 한 행이 원본 여러 행을 합친 것이라 어느 행을 바꿔야 할지 정할 수 없어, 단순 뷰보다 INSERT·UPDATE·DELETE 제약이 크다(④). 일반 뷰는 데이터를 따로 저장하지 않고, WHERE 절도 쓸 수 있다.",
       "references": [
         {
           "type": "sql",
@@ -28252,7 +28252,7 @@
         "dept 테이블은 기본키가 없어도 된다."
       ],
       "correctIndex": 1,
-      "explanation": "먼저 두 테이블을 만든 뒤 ALTER TABLE로 EMP의 dept_id에 외래키를 추가하는 흐름이다.",
+      "explanation": "dept·emp 두 테이블을 먼저 만든 뒤, ALTER TABLE emp ADD CONSTRAINT … FOREIGN KEY 로 외래키를 나중에 추가하는 흐름이다(②). 외래키는 CREATE TABLE 안에서 만들어도 되고 이처럼 나중에 추가해도 된다. 참조되는 dept.dept_id 는 기본키(또는 UNIQUE)여야 한다.",
       "references": [
         {
           "type": "sql",
@@ -28338,7 +28338,7 @@
         "user1을 통해 user2에게 전달된 권한도 함께 회수될 수 있다."
       ],
       "correctIndex": 3,
-      "explanation": "GRANT OPTION으로 전파된 권한은 원 부여자의 권한 회수 시 함께 회수될 수 있다.",
+      "explanation": "user1 은 WITH GRANT OPTION 으로 받은 SELECT 권한을 user2 에게 다시 주었다. 이후 user1 의 권한을 REVOKE 하면 user1 을 거쳐 user2 에게 간 권한도 함께 회수된다(④, 객체 권한의 연쇄 회수). REVOKE 는 권한만 빼앗을 뿐 객체를 지우지 않는다.",
       "references": [
         {
           "type": "sql",
@@ -28408,7 +28408,7 @@
         "집계 처리"
       ],
       "correctIndex": 2,
-      "explanation": "DCL은 GRANT, REVOKE처럼 사용자 권한과 접근 제어를 다루는 명령의 분류다."
+      "explanation": "DCL 은 GRANT·REVOKE 처럼 누가 어떤 작업을 할 수 있는지, 즉 권한과 보안을 제어하는 명령이다(③). 데이터 조회는 DML(SELECT), 테이블 생성은 DDL 이다."
     },
     {
       "_id": "sqld-0967",
@@ -28512,7 +28512,7 @@
         "내부 스키마는 사용자별 보기를 각각 정의한다."
       ],
       "correctIndex": 1,
-      "explanation": "외부 스키마는 사용자별 관점, 개념 스키마는 통합 논리 구조, 내부 스키마는 물리 저장 구조를 다룬다."
+      "explanation": "외부 스키마는 사용자·응용 프로그램마다 필요한 부분만 보여 주는 관점(뷰)을 정의한다(②). 조직 전체의 논리 구조는 개념 스키마, 인덱스·저장 위치 같은 물리 구조는 내부 스키마가 다룬다."
     },
     {
       "_id": "sqld-0972",
@@ -28544,7 +28544,7 @@
         "사용자 화면 레이아웃 정보"
       ],
       "correctIndex": 2,
-      "explanation": "데이터 사전은 실제 업무 데이터가 아니라 DB 객체 정의와 제약조건 등 메타데이터를 관리한다."
+      "explanation": "데이터 사전(시스템 카탈로그)에는 테이블·칼럼·제약조건·사용자·권한처럼 데이터에 대한 데이터, 즉 메타데이터가 저장된다(③). 주문 내역 같은 실제 업무 데이터는 사용자 테이블에 저장된다."
     },
     {
       "_id": "sqld-0974",
@@ -28624,7 +28624,7 @@
         "조인을 없애기 위해 모든 엔터티를 하나로 합칠 때"
       ],
       "correctIndex": 0,
-      "explanation": "공통 속성은 슈퍼타입에, 유형별 속성은 서브타입에 배치하면 중복을 줄일 수 있다."
+      "explanation": "여러 유형이 공통 속성도 갖고 유형마다 다른 속성도 가질 때 슈퍼타입/서브타입을 쓴다(①). 예: 회원(공통: 이름, 연락처) 아래 개인회원(생년월일), 법인회원(사업자번호). 공통 속성은 슈퍼타입에, 유형별 속성은 서브타입에 두어 중복을 줄인다."
     },
     {
       "_id": "sqld-0979",
@@ -28640,7 +28640,7 @@
         "반복 속성을 분리하여 하나의 컬럼에는 하나의 값만 저장한다."
       ],
       "correctIndex": 3,
-      "explanation": "1NF 관점에서도 속성은 더 이상 의미 있게 분해되지 않는 단일 값으로 다루는 것이 바람직하다."
+      "explanation": "원자성은 한 칼럼에 하나의 값만 들어가는 것이다. 전화번호 여러 개나 코드와 코드명을 한 칸에 몰아 넣으면 원자성이 깨진다. 반복되는 속성은 별도 행이나 테이블로 분리해 칸마다 값 하나만 두어야 한다(④, 제1정규형)."
     },
     {
       "_id": "sqld-0981",
@@ -28656,7 +28656,7 @@
         "인덱스 설계 -> 업무 분석 -> 개념 설계"
       ],
       "correctIndex": 1,
-      "explanation": "요구사항을 반영한 개념 설계 후 논리 구조를 정교화하고 마지막에 물리 설계를 수행한다."
+      "explanation": "데이터베이스 설계는 개념 설계(핵심 엔터티·관계) → 논리 설계(속성·키·정규화) → 물리 설계(테이블·인덱스·저장 구조) 순서로, 추상적인 것에서 구체적인 것으로 진행한다(②)."
     },
     {
       "_id": "sqld-0982",
@@ -28688,7 +28688,7 @@
         "무결성을 높이기 위해 항상 모든 테이블을 합친다."
       ],
       "correctIndex": 1,
-      "explanation": "반정규화는 정규화를 무시하는 것이 아니라 성능과 관리 비용을 검토해 제한적으로 적용해야 한다."
+      "explanation": "반정규화는 먼저 정규화를 제대로 한 모델을 만든 뒤, 성능 요구를 검토해 꼭 필요한 곳에만 적용한다(②). 처음부터 하거나 무조건 테이블을 합치면 중복과 이상 현상이 생겨 무결성이 떨어진다."
     },
     {
       "_id": "sqld-0984",
@@ -28720,7 +28720,7 @@
         "반드시 모든 FK를 NULL 허용으로 만드는 것"
       ],
       "correctIndex": 1,
-      "explanation": "관계 차수와 식별 관계 여부를 명확히 해야 PK/FK 구조를 안정적으로 설계할 수 있다."
+      "explanation": "부모-자식 구조는 먼저 각 엔터티의 식별자와 관계 차수(1:1, 1:N 등), 식별·비식별 관계를 정해야 기본키·외래키 구조를 확정할 수 있다(②)."
     },
     {
       "_id": "sqld-0986",
@@ -28760,7 +28760,7 @@
         "order_id와 item_seq의 복합 식별자"
       ],
       "correctIndex": 3,
-      "explanation": "ORDER_ITEM 엔터티는 order_id와 item_seq가 함께 PK로 표시되어 있다.",
+      "explanation": "ERD 에서 ORDER_ITEM 은 주문번호(order_id)와 주문 안의 순번(item_seq)을 합쳐 기본키로 표시되어 있다(④). order_id 는 부모 ORDERS 에서 받아 온 키라 식별 관계다.",
       "references": [
         {
           "type": "image",
@@ -28832,7 +28832,7 @@
         "한 고객은 여러 주문을 가질 수 있다."
       ],
       "correctIndex": 2,
-      "explanation": "ORDER_ITEM은 특정 주문의 하위 엔터티이므로 여러 주문에 동시에 속한다고 보기 어렵다.",
+      "explanation": "ERD 에서 ORDERS 와 ORDER_ITEM 은 1:N 이라, 주문 하나에 항목이 여러 개 달리지만 항목 하나는 한 주문에만 속한다. '한 ORDER_ITEM 이 여러 주문에 동시에 속한다' 는 ③ 이 잘못된 해석이다. ①②④ 는 관계 표기와 맞다.",
       "references": [
         {
           "type": "image",
@@ -28968,7 +28968,7 @@
         "정렬 이상"
       ],
       "correctIndex": 2,
-      "explanation": "독립적으로 저장되어야 할 정보가 하나의 테이블에 결합되면 삽입 이상이 발생할 수 있다.",
+      "explanation": "고객 정보가 주문 데이터와 한 테이블에 있으면, 아직 주문하지 않은 고객은 주문번호(기본키) 없이 넣을 수 없어 고객등급을 저장할 수 없다. 원치 않는 데이터 없이는 넣을 수 없는 이것이 삽입 이상이다(③).",
       "references": [
         {
           "type": "text",
@@ -29024,7 +29024,7 @@
         "수량"
       ],
       "correctIndex": 2,
-      "explanation": "비키 속성인 고객명이 고객등급을 결정하면 이행 종속이므로 3NF 위반 요소가 된다.",
+      "explanation": "고객등급은 기본키가 아닌 고객명에 의해 정해진다(주문번호 → 고객명 → 고객등급). 일반 속성끼리의 이행 종속이므로 제3정규형을 만족하려면 고객등급을 고객 테이블로 분리해야 한다(③).",
       "references": [
         {
           "type": "text",
@@ -29174,7 +29174,7 @@
         "emp 테이블의 SELECT와 INSERT 권한"
       ],
       "correctIndex": 3,
-      "explanation": "GRANT SELECT, INSERT ON emp TO user1은 두 객체 권한을 부여한다.",
+      "explanation": "첫 줄 GRANT SELECT, INSERT ON emp TO user1 로 user1 은 emp 테이블의 SELECT 와 INSERT 권한을 받는다(④). 두 번째 줄에서 INSERT 만 회수되므로 최종적으로는 SELECT 만 남는다.",
       "references": [
         {
           "type": "sql",
@@ -29197,7 +29197,7 @@
         "user1 계정 자체"
       ],
       "correctIndex": 1,
-      "explanation": "REVOKE INSERT ON emp FROM user1은 INSERT 권한만 회수한다.",
+      "explanation": "REVOKE INSERT ON emp FROM user1 은 emp 테이블의 INSERT 권한만 회수한다(②). 함께 받았던 SELECT 권한은 그대로 남고, 계정 자체는 영향을 받지 않는다.",
       "references": [
         {
           "type": "sql",
@@ -29258,7 +29258,7 @@
         "권한을 부여한다."
       ],
       "correctIndex": 2,
-      "explanation": "INSERT ... SELECT는 조회 결과를 다른 테이블에 입력하는 DML이다.",
+      "explanation": "INSERT INTO … SELECT … 는 조회한 결과를 그대로 다른 테이블에 넣는다. WHERE dept = 'SALES' 로 고른 사원의 emp_id, emp_name 만 emp_backup 에 복사된다(③). 테이블 구조는 바뀌지 않는 DML 이다.",
       "references": [
         {
           "type": "sql",
@@ -29406,7 +29406,7 @@
         "WHERE NOT bonus = NULL"
       ],
       "correctIndex": 2,
-      "explanation": "NULL 비교는 =, <> 대신 IS NULL / IS NOT NULL을 사용해야 한다."
+      "explanation": "NULL 은 = · <> 로 비교하면 결과가 항상 UNKNOWN 이라 아무 행도 나오지 않는다(①④). 값이 있는 행은 IS NOT NULL 로 찾는다(③). ② 의 '= NOT NULL' 은 문법 오류다."
     },
     {
       "_id": "sqld-1016",
@@ -29470,7 +29470,7 @@
         "삭제와 무관하게 COMMIT 된다."
       ],
       "correctIndex": 1,
-      "explanation": "CASCADE 등의 옵션이 없으면 부모 삭제는 자식 참조 때문에 거절될 수 있다.",
+      "explanation": "ON DELETE CASCADE 같은 옵션이 없으면, 자식이 참조하고 있는 부모 행은 참조 무결성 위반으로 삭제가 막힌다(②). 자식까지 지우려면 CASCADE, 자식 FK 를 NULL 로 바꾸려면 SET NULL 옵션을 줘야 하며, FK 가 0 으로 바뀌는 일은 없다.",
       "references": [
         {
           "type": "text",
@@ -29492,7 +29492,7 @@
         "아무 작업도 반영되지 않는다."
       ],
       "correctIndex": 0,
-      "explanation": "이미 COMMIT 된 작업1은 유지되고, 이후 수행한 작업2만 ROLLBACK 된다.",
+      "explanation": "작업1 은 COMMIT 으로 이미 확정되었다. 그 뒤의 ROLLBACK 은 마지막 COMMIT 이후의 작업2 만 되돌린다. 최종적으로 작업1 만 반영된다(①).",
       "references": [
         {
           "type": "text",
@@ -29536,7 +29536,7 @@
         "작업1과 CREATE TABLE은 유지되고 작업3은 취소된다."
       ],
       "correctIndex": 3,
-      "explanation": "DDL 수행 시점에 이전 DML이 자동 COMMIT 되므로 이후 DML만 ROLLBACK 된다.",
+      "explanation": "Oracle 은 CREATE 같은 DDL 을 실행하면 그 앞뒤로 자동 COMMIT 이 일어난다. 그래서 작업1 과 CREATE TABLE 은 확정되고, 그 뒤의 작업3 만 ROLLBACK 으로 취소된다(④).",
       "references": [
         {
           "type": "text",
@@ -29850,7 +29850,7 @@
         "중복되지 않는 부서 수를 센다."
       ],
       "correctIndex": 3,
-      "explanation": "COUNT(DISTINCT col)은 NULL을 제외한 서로 다른 값의 개수를 계산한다.",
+      "explanation": "COUNT(DISTINCT dept) 는 dept 의 서로 다른 값 개수, 즉 부서가 몇 종류인지 센다(④). NULL 은 세지 않는다. 전체 행 수는 COUNT(*), 부서별 합계는 GROUP BY dept 와 SUM 으로 구한다.",
       "references": [
         {
           "type": "sql",
@@ -30267,7 +30267,7 @@
         "같은 지역의 각 행에 지역 합계가 반복 표시된다."
       ],
       "correctIndex": 3,
-      "explanation": "PARTITION BY region은 지역별 합계를 같은 파티션의 모든 행에 보여준다.",
+      "explanation": "SUM(amount) OVER (PARTITION BY region) 은 지역별 합계를 구하되, GROUP BY 처럼 행을 줄이지 않고 같은 지역의 모든 행 옆에 그 합계를 붙여 보여 준다(④). 예: SEOUL 두 행에 모두 800, BUSAN 세 행에 모두 850 이 표시된다.",
       "references": [
         {
           "type": "sql",
@@ -30347,7 +30347,7 @@
         "NULL만 번호를 부여한다."
       ],
       "correctIndex": 2,
-      "explanation": "PARTITION BY로 부서를 나누고 ORDER BY sal DESC로 순번 기준을 정한다."
+      "explanation": "PARTITION BY dept 로 부서마다 따로, ORDER BY sal DESC 로 급여가 높은 사람부터 1, 2, 3 … 번호를 붙인다(③). ROW_NUMBER 는 급여가 같아도 서로 다른 번호를 준다."
     },
     {
       "_id": "sqld-1056",
@@ -30507,7 +30507,7 @@
         "외래키에서 참조할 수 없다."
       ],
       "correctIndex": 1,
-      "explanation": "복합 기본키는 여러 속성의 조합으로 행을 식별하며 각 구성 컬럼은 NULL이 될 수 없다."
+      "explanation": "복합 기본키는 여러 칼럼을 묶어 하나의 기본키로 쓰는 것이다. 묶은 칼럼 전체 조합이 중복되면 안 되고, 각 칼럼은 NULL 일 수 없다(②). 다른 테이블의 외래키가 이 복합키 전체를 참조할 수도 있다."
     },
     {
       "_id": "sqld-1066",
@@ -30883,7 +30883,7 @@
         "dept, Q1, Q2"
       ],
       "correctIndex": 3,
-      "explanation": "행 기준 컬럼인 dept와 PIVOT으로 전개된 Q1, Q2 컬럼이 결과에 나타난다.",
+      "explanation": "PIVOT 결과에는 행 기준이 되는 dept 와, quarter_cd 값을 펼쳐 만든 Q1, Q2 칼럼이 나온다(④). 펼치는 데 쓴 quarter_cd 와 집계 대상 amount 는 결과 칼럼으로 남지 않는다.",
       "references": [
         {
           "type": "sql",
@@ -31152,7 +31152,7 @@
         "현실 세계의 업무 규칙을 데이터 구조로 명확하게 표현하는 것이다."
       ],
       "correctIndex": 3,
-      "explanation": "데이터 모델링은 업무 규칙과 데이터 구조를 일관되게 표현해 품질을 높이는 작업이다."
+      "explanation": "데이터 모델링은 현실 업무에서 무엇을 관리하고(엔터티), 어떤 정보를 갖고(속성), 서로 어떻게 연결되는지(관계)를 데이터 구조로 명확히 표현하는 작업이다(④). 디스크 배치는 물리 설계의 일부일 뿐이고, 화면 디자인은 모델링 대상이 아니다."
     },
     {
       "_id": "sqld-1106",
@@ -31434,7 +31434,7 @@
         "1"
       ],
       "correctIndex": 0,
-      "explanation": "INNER JOIN으로 매칭되는 ID는 2와 3뿐이고 각 ID별 매칭 건수도 1건씩이므로 결과는 2행이다.",
+      "explanation": "INNER JOIN 으로 양쪽에 있는 ID 2, 3 만 남고, 각각 B 에 한 건씩 짝지어져 COUNT(*) 는 1 이다. HAVING COUNT(*) = 1 을 둘 다 만족하므로 결과는 2행이다(①).",
       "references": [
         {
           "type": "sql",
@@ -32682,7 +32682,7 @@
         "SEOUL, B, 100"
       ],
       "correctIndex": 2,
-      "explanation": "amount가 100 미만인 행은 가장 뒤로 밀리며, 해당 조건에 해당하는 행은 INCHEON, B, 80 한 건뿐이다.",
+      "explanation": "첫 번째 정렬 기준은 amount 가 100 이상이면 1, 아니면 2 다. amount 가 80 인 INCHEON 만 2 를 받아 다른 정렬 기준과 관계없이 맨 뒤로 간다. 마지막 행은 INCHEON, B, 80 이다(③).",
       "references": [
         {
           "type": "sql",
@@ -32759,7 +32759,7 @@
         "1"
       ],
       "correctIndex": 3,
-      "explanation": "A의 ID=2가 2건, B의 ID=2가 1건이면 해당 값으로 2건이 나오며 기존 1건 대비 1건 증가한다.",
+      "explanation": "INNER JOIN 결과 행 수는 같은 ID 끼리 만들 수 있는 짝의 수다. 원래 ID 2 는 A 1건 × B 1건 = 1행이었는데, A 에 (2, DELTA) 가 추가되면 A 2건 × B 1건 = 2행이 된다. 1행이 늘어난다(④).",
       "references": [
         {
           "type": "text",
@@ -34191,7 +34191,7 @@
         "리프 노드부터 탐색을 시작한다."
       ],
       "correctIndex": 0,
-      "explanation": "START WITH 절은 계층 탐색의 시작 행을 지정한다. mgr_id가 NULL인 CEO부터 트리가 전개된다.",
+      "explanation": "START WITH 는 계층을 어느 행부터 펼칠지 정한다. mgr_id IS NULL 은 관리자가 없는 행, 즉 최상위 CEO 부터 시작한다는 뜻이다(①). 이어서 CONNECT BY PRIOR emp_id = mgr_id 로 부하 직원 쪽으로 내려간다.",
       "references": [
         {
           "type": "sql",
@@ -35350,7 +35350,7 @@
         "작업1만 반영된다."
       ],
       "correctIndex": 1,
-      "explanation": "SAVEPOINT S1 이후의 작업2는 취소되고, 이후 수행한 작업3과 작업1이 COMMIT 된다.",
+      "explanation": "작업1 뒤에 SAVEPOINT S1 을 만들고 작업2 를 했다가 ROLLBACK TO S1 으로 작업2 만 취소했다. 트랜잭션은 계속되므로 이어서 한 작업3 과, 남아 있던 작업1 이 COMMIT 으로 함께 확정된다(②).",
       "references": [
         {
           "type": "text",
@@ -36149,7 +36149,7 @@
         "/DEV_MGR/CEO/DEV_A"
       ],
       "correctIndex": 2,
-      "explanation": "SYS_CONNECT_BY_PATH는 루트부터 현재 노드까지의 경로를 문자열로 반환한다.",
+      "explanation": "SYS_CONNECT_BY_PATH(emp_name, '/') 는 루트부터 현재 행까지 거쳐 온 이름을 '/' 로 이어 붙인다. DEV_A 는 CEO → DEV_MGR → DEV_A 로 내려왔으므로 '/CEO/DEV_MGR/DEV_A' 다(③). 각 이름 앞에 구분자가 붙어 '/' 로 시작한다.",
       "references": [
         {
           "type": "sql",
@@ -37711,7 +37711,7 @@
         "작업1만 반영된다."
       ],
       "correctIndex": 1,
-      "explanation": "ROLLBACK은 마지막 COMMIT 이후 전체를 취소하므로 작업1과 작업2가 사라지고, 이후 수행한 작업3만 확정된다.",
+      "explanation": "SAVEPOINT 가 있어도 ROLLBACK(TO 없이)은 마지막 COMMIT 이후 작업을 모두 취소한다. 그래서 작업1 과 작업2 가 사라지고, 그 뒤 새로 한 작업3 만 COMMIT 으로 확정된다(②).",
       "references": [
         {
           "type": "text",
