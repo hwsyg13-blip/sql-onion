@@ -1,5 +1,5 @@
 // Auto-generated from scripts/authored/ai-mock.json
-// AI 생성 모의고사 풀 (기출 변형) · 1165문항
+// AI 생성 모의고사 풀 (기출 변형) · 1164문항
 // ⚠ 직접 편집 금지. ai-mock.json 수정 후 'node scripts/build-quiz-bank.mjs' 재실행.
 import type { QuizQuestion } from '../quizBank';
 
@@ -1677,26 +1677,6 @@ export const AI_MOCK: QuizQuestion[] = [
         ]
       }
     ]
-  },
-  {
-    "id": 10878,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "1과목",
-    "number": 79,
-    "title": "다음 중 설계 단계에서 데이터 모델의 성능을 고려하는 절차와 방법에 포함되지 않는 것은?",
-    "options": [
-      "이력모델의 조정, 기본키/외래키 조정, 슈퍼타입/서브타입 조정 등을 수행한다.",
-      "데이터베이스 용량 산정을 수행한다.",
-      "데이터베이스에 발생되는 트랜잭션의 유형을 파악한다.",
-      "데이터 모델링을 할 때 분석 단계에서부터 반정규화를 수행한다."
-    ],
-    "correctIndex": 3,
-    "explanation": "성능을 고려한 데이터 모델링은 먼저 정규화를 정확히 수행한 뒤, 용량 산정(②)과 트랜잭션 유형 파악(③)을 바탕으로 반정규화·이력모델·기본키/외래키·슈퍼타입/서브타입을 조정한다(①). 분석 단계부터 반정규화를 하는 것은 순서가 맞지 않아 ④ 가 포함되지 않는다.",
-    "chapter": "식별자",
-    "_source": "cbt-mock",
-    "_origId": "cbt-030",
-    "_cbtOrigNo": 30
   },
   {
     "id": 10879,
@@ -9143,7 +9123,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 336,
-    "title": "다음 중 아래와 같은 집합이 존재 할 때, 집합 A와 B에 대하여 집합연산을 수행한 결과 집합 C가 돠는 경우 이용돠는 데이터베이스 집합연산은?",
+    "title": "다음 중 아래와 같은 집합이 존재 할 때, 집합 A와 B에 대하여 집합연산을 수행한 결과 집합 C가 되는 경우 이용되는 데이터베이스 집합연산은?",
     "options": [
       "Product",
       "Intersection",
