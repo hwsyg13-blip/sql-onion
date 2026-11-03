@@ -41,15 +41,15 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 2,
-    "title": "다음 중 다중 행 서브쿼리와 관련된 쿼리 중 결과가 0건(Empty Set)으로 출력될 가능성이 있는 쿼리는 무엇인가? (단, T1과 T2 테이블에는 각각 10건의 데이터가 존재한다.)",
+    "title": "다음 중 T1, T2에 어떤 값이 들어 있든 결과가 항상 0건(Empty Set)이 되는 쿼리는? (단, T1과 T2 테이블에는 각각 10건의 데이터가 있고, T1.ID에는 NULL이 없다.)",
     "options": [
-      "SELECT * FROM T1 WHERE ID IN (SELECT ID FROM T2 WHERE ID IS NULL);",
+      "SELECT * FROM T1 WHERE ID IN (SELECT ID FROM T2);",
       "SELECT * FROM T1 WHERE ID NOT IN (SELECT ID FROM T2); (단, T2 테이블의 ID 컬럼에는 NULL 값이 1개 이상 존재한다.)",
-      "SELECT * FROM T1 WHERE EXISTS (SELECT 1 FROM T2 WHERE T1.ID = T2.ID AND T2.ID IS NULL);",
+      "SELECT * FROM T1 WHERE EXISTS (SELECT 1 FROM T2 WHERE T1.ID = T2.ID);",
       "SELECT * FROM T1 WHERE ID <> ALL (SELECT ID FROM T2 WHERE ID IS NOT NULL);"
     ],
     "correctIndex": 1,
-    "explanation": "NOT IN 연산자는 내부적으로 'AND NOT =' 논리를 가집니다. 서브쿼리 결과에 NULL이 하나라도 포함되면 비교 결과가 UNKNOWN이 되어 전체 쿼리는 한 건의 데이터도 반환하지 못합니다.",
+    "explanation": "NOT IN 은 '<> 값1 AND <> 값2 AND …' 와 같다. 서브쿼리 결과에 NULL 이 하나라도 있으면 'ID <> NULL' 이 UNKNOWN 이 되어 AND 전체가 TRUE 가 될 수 없으므로, 데이터와 관계없이 한 건도 반환하지 않는다. ①·③ 은 T1 과 T2 에 같은 ID 가 있으면 행이 나오고, ④ 는 서브쿼리에서 NULL 을 제외했으므로 T2 에 없는 T1 행이 반환된다 — 모두 데이터에 따라 결과가 달라진다.",
     "chapter": "서브쿼리",
     "_source": "ai-mock",
     "_origId": "ai-mock-002"
@@ -187,8 +187,8 @@ export const AI_MOCK: QuizQuestion[] = [
       "CONNECT BY PRIOR PARENT_ID = CHILD_ID",
       "CONNECT BY PRIOR CHILD_ID = PRIOR PARENT_ID"
     ],
-    "correctIndex": 2,
-    "explanation": "PRIOR는 직전(부모) 행의 값을 가리킵니다. 부모 데이터에서 자식 데이터 방향으로 전개하려면 직전 행의 PARENT_ID가 다음 행의 CHILD_ID와 같아야 하므로 PRIOR PARENT_ID = CHILD_ID 가 올바른 순방향 조건입니다.",
+    "correctIndex": 0,
+    "explanation": "PRIOR는 직전(부모) 행의 값을 가리킨다. 부모에서 자식 방향(순방향)으로 전개하려면 직전 행의 CHILD_ID(방금 읽은 노드)가 다음 행의 PARENT_ID와 같아야 하므로 CONNECT BY PRIOR CHILD_ID = PARENT_ID 가 순방향 조건이다(가이드: 'PRIOR 자식 = 부모' → 순방향). ③ PRIOR PARENT_ID = CHILD_ID 는 자식에서 부모로 올라가는 역방향 전개이다.",
     "chapter": "계층형 질의",
     "_source": "ai-mock",
     "_origId": "ai-mock-011"
