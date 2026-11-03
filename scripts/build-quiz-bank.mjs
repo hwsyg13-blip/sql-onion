@@ -222,19 +222,54 @@ if (skippedEmpty.length > 0) {
   for (const [pool, ids] of Object.entries(byPool)) console.log(`  ${pool}: ${ids.length}건`);
 }
 
+// ── 현행 출제 범위 밖 문항 제외 (2026-11-03) ─────────────────────────────────
+// 2024년 개편 후 SQLD 출제기준(dataq)에는 SQL 최적화(옵티마이저·실행 계획·인덱스 튜닝·NL/Hash/Sort Merge 조인)와
+// 분산 데이터베이스·성능 데이터 모델링이 없다. 모의고사에서 범위 밖 문제에 시간을 쓰지 않도록 풀에서 뺀다.
+// 기출(회차) 문항은 실제 출제 기록이라 그대로 둔다. 원본 JSON 은 그대로이므로 목록에서 지우면 되돌아온다.
+const OUT_OF_SCOPE = new Set([
+  'cbt-013', 'cbt-016', 'cbt-021', 'cbt-027', 'cbt-038', 'cbt-090',  // M63 · M66 · M71 · M76 · M87 · M134
+  'cbt-094', 'cbt-116', 'cbt-140', 'cbt-143', 'cbt-145', 'cbt-162',  // M138 · M158 · M182 · M185 · M187 · M204
+  'cbt-170', 'cbt-190', 'sqld-0030', 'sqld-0032', 'sqld-0157', 'sqld-0164',  // M212 · M231 · M277 · M279 · M372 · M376
+  'sqld-0269', 'sqld-0285', 'sqld-0327', 'sqld-0336', 'sqld-0337', 'sqld-0453',  // M459 · M471 · M507 · M514 · M515 · M611
+  'sqld-0482', 'sqld-0984', 'sqld-1056', 'sqld-1057', 'sqld-1058', 'sqld-1059',  // M634 · M1006 · M1066 · M1067 · M1068 · M1069
+  'sqld-1060', 'sqld-1109', 'sqld-1225', 'sqld-1345',  // M1070 · M1106 · M1204 · M1308
+]);
+const outOfScope = combinedMock.filter(q => OUT_OF_SCOPE.has(q._id));
+if (outOfScope.length) console.log(`[범위 밖 제외] ${outOfScope.length} 문항 — 현행 출제기준에 없는 최적화·분산DB·성능 모델링`);
+for (let i = combinedMock.length - 1; i >= 0; i--) if (OUT_OF_SCOPE.has(combinedMock[i]._id)) combinedMock.splice(i, 1);
+
 // ── 같은 문제 중복 제거 (2026-11-01) ─────────────────────────────────────────
 // 출처가 다른 풀(cbt-mock ↔ sqld-1140 등)에 같은 문제가 들어 있어 한 모의고사에서 같은 문제를 두 번 만날 수 있었다.
 // 제목(기계적으로 붙은 앞 문구 제외)·보기 집합·참고자료가 모두 같으면 같은 문제로 보고, 해설이 더 긴 쪽 하나만 남긴다.
 // 원본 JSON 은 그대로 두므로 이 블록을 지우면 되돌릴 수 있다.
-const FILLER_PREFIX = /^(출제 포인트를 복합적으로 적용하면|데이터 구조의 목적을 생각하면|설계 원칙을 기준으로 판단하면|업무 규칙과 제약조건을 함께 고려하면|실무 적용 관점에서 보면|표와 관계를 함께 읽으면|SQL문을 단계별로 해석하면|식과 절의 반환 규칙을 적용하면|문장을 그대로 평가하면|조건식과 함수 의미를 함께 고려하면|SQL 표현식 결과를 계산하면|엔터티와 데이터 분포를 함께 보면|제시된 표를 바탕으로 SQL문을 그대로 평가하면), /;
+const FILLER_PREFIX = /^(출제 포인트를 복합적으로 적용하면|데이터 구조의 목적을 생각하면|설계 원칙을 기준으로 판단하면|업무 규칙과 제약조건을 함께 고려하면|실무 적용 관점에서 보면|표와 관계를 함께 읽으면|SQL문을 단계별로 해석하면|식과 절의 반환 규칙을 적용하면|문장을 그대로 평가하면|조건식과 함수 의미를 함께 고려하면|SQL 표현식 결과를 계산하면|엔터티와 데이터 분포를 함께 보면|제시된 표를 바탕으로 SQL문을 그대로 평가하면|제시된 그림만 근거로 판단하면|그림에 제시된 구조와 값을 기준으로 보면|그림의 각 행과 관계선을 기준으로 해석하면|처리 순서를 끝까지 반영하면|중간 저장점과 취소 지점까지 고려하면|명령이 수행된 순서를 따라가면|COMMIT\/ROLLBACK 시점을 기준으로 보면|트랜잭션 흐름을 단계별로 해석하면), /;
+// 제목 표현만 조금 다른 같은 문제 (보기·자료·정답이 같음, 2026-11-03 직접 대조). 같은 값끼리 한 문제로 본다.
+const SAME_QUESTION = {
+  'cbt-004': 'self-join', 'sqld-0111': 'self-join',          // M54 · M339 SELF JOIN 이 필요한 경우
+  'cbt-026': 'isleaf', 'sqld-0208': 'isleaf',                // M75 · M408 CONNECT_BY_ISLEAF
+  'cbt-177': 'table-basic', 'sqld-0172': 'table-basic',      // M219 · M382 테이블 기본 개념
+  'sqld-0171': 'erd-order', 'sqld-0447': 'erd-order',        // M381 · M607 ERD 작성 순서
+  'sqld-0622': 'entity-when', 'sqld-0821': 'entity-when',    // M738 · M875 발생(생성)시점 분류
+  'sqld-0291': 'window-frame', 'sqld-0417': 'window-frame', 'sqld-0500': 'window-frame', // M476 · M581 · M648 잘못된 윈도우 절
+  'sqld-0085': 'exec-order', 'sqld-0282': 'exec-order', 'sqld-0325': 'exec-order',       // M324 · M469 · M506 SELECT 실행 순서
+  'sqld-0118': 'subq-desc', 'sqld-0652': 'subq-desc',        // M345 · M755 서브쿼리 설명
+  'cbt-055': 'scalar-subq', 'sqld-0228': 'scalar-subq',      // M102 · M426 한 행·한 칼럼 서브쿼리
+  'cbt-068': 'union-perf', 'sqld-0242': 'union-perf',        // M113 · M437 옳지 않은 것(UNION 성능)
+  'cbt-084': 'case-else', 'sqld-0225': 'case-else',          // M129 · M423 CASE ELSE 생략
+  'cbt-125': 'cumm-rank', 'sqld-0189': 'cumm-rank', 'cbt-203': 'cumm-rank', // M167 · M396 · M244 CUMM_RANK
+  'ai-mock-033': 'norm-wrong', 'ai-mock-055': 'norm-wrong',  // M28 · M47 정규화 틀린 설명
+  'sqld-0378': 'acid', 'sqld-0411': 'acid',                  // M548 · M575 트랜잭션 특성이 아닌 것
+};
 const refKey = q => (q.references || []).map(r =>
   r.type === 'table' ? JSON.stringify(r.rows) : r.type === 'sql' ? r.code : r.type === 'text' ? r.content
   : r.type === 'erd' ? r.mermaid : (r.src || '')).join('#');
 const dupKey = q => (q.title.replace(FILLER_PREFIX, '') + '|' + [...q.options].sort().join('|') + '|' + refKey(q))
   .replace(/[\s,.]+/g, '').toLowerCase();
+// SAME_QUESTION 에 적힌 문항의 키를 같은 그룹 이름으로 묶는다 (그 문항과 제목까지 같은 사본도 함께 따라온다).
+const keyAlias = new Map(combinedMock.filter(q => SAME_QUESTION[q._id]).map(q => [dupKey(q), 'same:' + SAME_QUESTION[q._id]]));
 const keptByKey = new Map();
 for (const q of combinedMock) {
-  const k = dupKey(q);
+  const k = keyAlias.get(dupKey(q)) || dupKey(q);
   const prev = keptByKey.get(k);
   if (!prev || (q.explanation || '').length > (prev.explanation || '').length) keptByKey.set(k, q);
 }
