@@ -85,7 +85,7 @@ for (const f of fs.readdirSync(DIR).filter(f => /\.json$/.test(f)).sort()) {
     const sqls = refs.filter(r => r.type === 'sql');
     if (!tables.length || sqls.length !== 1 || typeof q.correctIndex !== 'number') return;
     // '(ID 별 행 수 요약)' 처럼 실제 행이 아니라 요약을 보여 주는 표는 실행할 수 없다 (R47 2-43)
-    if (tables.some(t => /요약/.test(t.caption || ''))) { report.skipped++; return; }
+    if (tables.some(t => /요약|가정|행 개수|행 수\)/.test(t.caption || '') || (t.rows || []).some(r => r.some(c => /^…$/.test(String(c)))))) { report.skipped++; return; }
     const id = `${f.replace('.json', '')} ${q.subject || ''} ${q.number ?? '#' + qi}`;
     const raw = sqls[0].code || '';
     if (SKIP.test(raw) || /\(\s*\?\s*\)|\[\s*\?\s*\]|_{3,}|[ㄱ-ㅎ]\s*[).]|[ⓐ-ⓩ①-④]/.test(raw) || !/^\s*(SELECT|WITH|\()/i.test(raw.replace(/--[^\n]*\n/g, ''))) { report.skipped++; return; }
