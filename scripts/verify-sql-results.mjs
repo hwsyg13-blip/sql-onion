@@ -84,6 +84,8 @@ for (const f of fs.readdirSync(DIR).filter(f => /\.json$/.test(f)).sort()) {
     const tables = refs.filter(r => r.type === 'table');
     const sqls = refs.filter(r => r.type === 'sql');
     if (!tables.length || sqls.length !== 1 || typeof q.correctIndex !== 'number') return;
+    // '(ID 별 행 수 요약)' 처럼 실제 행이 아니라 요약을 보여 주는 표는 실행할 수 없다 (R47 2-43)
+    if (tables.some(t => /요약|가정|행 개수|행 수\)/.test(t.caption || '') || (t.rows || []).some(r => r.some(c => /^…$/.test(String(c)))))) { report.skipped++; return; }
     const id = `${f.replace('.json', '')} ${q.subject || ''} ${q.number ?? '#' + qi}`;
     const raw = sqls[0].code || '';
     if (SKIP.test(raw) || /\(\s*\?\s*\)|\[\s*\?\s*\]|_{3,}|[ㄱ-ㅎ]\s*[).]|[ⓐ-ⓩ①-④]/.test(raw) || !/^\s*(SELECT|WITH|\()/i.test(raw.replace(/--[^\n]*\n/g, ''))) { report.skipped++; return; }
@@ -129,6 +131,22 @@ for (const f of fs.readdirSync(DIR).filter(f => /\.json$/.test(f)).sort()) {
           else if (!want.length && res.length === 1 && res[0].length === 1 && String(opt).trim() === res[0][0]) hits.push(oi);
         }
       });
+      // 보조 대조 (2026-11-03): 'N건'·'공집합' 같은 행 수 보기, '(A, 1, 100), (B, 2, NULL)' 같은 행 목록 보기
+      if (!hits.length) {
+        const nv = v => String(v).replace(/[\s'"]/g, '').toUpperCase().replace(/^(NULL|-|)$/, 'NULL');
+        const resRows = res.map(r => r.map(nv).join(','));
+        q.options.forEach((opt, oi) => {
+          const t = String(opt).trim();
+          const m = t.match(/^(\d+)\s*(건|행)/);
+          if ((m && +m[1] === res.length) || (res.length === 0 && /^(공집합|0건|결과가 없다)/.test(t))) { hits.push(oi); return; }
+          const tup = [...t.matchAll(/\(([^()]*)\)/g)].map(x => x[1].split(',').map(nv).join(','));
+          if (tup.length && tup.length === resRows.length && tup.length > 0 && res[0] && tup[0].split(',').length === res[0].length) {
+            const a = ordered ? tup.join('|') : [...tup].sort().join('|');
+            const b = ordered ? resRows.join('|') : [...resRows].sort().join('|');
+            if (a === b) hits.push(oi);
+          }
+        });
+      }
       const rec = { opts: q.options.map(o => String(o).slice(0, 40)), id, correct: q.correctIndex + 1, hits: hits.map(h => h + 1), cols, res: res.slice(0, 12), title: q.title };
       if (hits.includes(q.correctIndex)) report.ok++;
       else if (hits.length) report.mismatch.push(rec);
