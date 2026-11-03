@@ -356,6 +356,17 @@ function buildTheoryIndexPage() {
     <h1>SQLD 이론 — 전 범위 챕터 정리</h1>
     <p class="lead">${s1.title} ${s1.chapters.length}챕터 + ${s2.title} ${s2.chapters.length}챕터. SQLD 출제 범위를 한 페이지로 한눈에.</p>
     <a class="cta" href="/">본문 + 미니테스트 모드로 학습 시작 →</a>
+    <h2>이론은 이렇게 본다</h2>
+    <table>
+      <thead><tr><th>영역</th><th>문항 비중</th><th>공부 포인트</th></tr></thead>
+      <tbody>
+        <tr><td>1과목 데이터 모델링의 이해</td><td>10문항 (20점)</td><td>용어와 분류가 그대로 나온다 — 엔터티 분류, 식별자 특성, 정규화 단계, ERD 기호 읽기</td></tr>
+        <tr><td>2과목 SQL 기본</td><td rowspan="3">40문항 (80점)</td><td>WHERE·GROUP BY·조인 결과의 행 수를 손으로 세는 연습</td></tr>
+        <tr><td>2과목 SQL 활용</td><td>윈도우 함수·계층형 질의·그룹 함수(ROLLUP·CUBE)는 매 회 나온다</td></tr>
+        <tr><td>2과목 관리 구문</td><td>TRUNCATE·DDL 자동 커밋, SAVEPOINT 계산, 권한 회수처럼 외울 규칙이 짧다</td></tr>
+      </tbody>
+    </table>
+    <p>챕터마다 <strong>한 줄 요약 → 꼭 외울 것(표·그림) → 시험은 이렇게 낸다(함정) → 30초 정리</strong> 순서다. 처음에는 한 줄 요약과 그림만 훑고, 기출을 풀다 틀린 챕터로 돌아와 함정까지 읽으면 된다.</p>
     ${subjects}
 ` + tail;
 }
