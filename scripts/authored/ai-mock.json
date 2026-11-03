@@ -544,12 +544,12 @@
       "title": "서브쿼리 내부에 ORDER BY 절을 사용할 수 없는 쿼리의 형태는?",
       "options": [
         "인라인 뷰(FROM 절 서브쿼리)",
-        "스칼라 서브쿼리(SELECT 절 서브쿼리)",
+        "INSERT INTO ... SELECT ... (INSERT 문에 쓰는 서브쿼리)",
         "CREATE TABLE ... AS SELECT ... (CTAS 구문)",
         "다중 행 서브쿼리(WHERE 절 서브쿼리 - IN 연산자 등)"
       ],
       "correctIndex": 3,
-      "explanation": "WHERE 절 IN 등에서 사용하는 다중 행 서브쿼리는 비교할 집합 자체를 반환하므로 순서가 의미 없으며, 일부 DBMS에서는 ORDER BY 사용 시 오류가 발생할 수 있습니다. 인라인 뷰는 행의 순서가 의미를 가질 수 있어 가능하며, CTAS 구문도 정렬된 결과를 저장하는 용도로 활용 가능합니다."
+      "explanation": "WHERE 절에서 IN 등과 함께 쓰는 서브쿼리는 비교할 값의 집합만 돌려주므로 정렬이 의미가 없고, 가이드는 서브쿼리 안에서 ORDER BY 를 쓸 수 없다고 정리한다(오라클은 오류). 예외는 결과 행 자체를 쓰는 형태로, 인라인 뷰(정렬 후 ROWNUM 으로 상위 N개 추출 등), CTAS, INSERT ... SELECT 의 SELECT 에는 ORDER BY 를 쓸 수 있다. 참고로 SELECT 절의 스칼라 서브쿼리도 ORDER BY 를 쓰면 오라클에서 오류가 난다."
     },
     {
       "_id": "ai-mock-038",

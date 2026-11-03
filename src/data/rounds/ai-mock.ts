@@ -626,12 +626,12 @@ export const AI_MOCK: QuizQuestion[] = [
     "title": "서브쿼리 내부에 ORDER BY 절을 사용할 수 없는 쿼리의 형태는?",
     "options": [
       "인라인 뷰(FROM 절 서브쿼리)",
-      "스칼라 서브쿼리(SELECT 절 서브쿼리)",
+      "INSERT INTO ... SELECT ... (INSERT 문에 쓰는 서브쿼리)",
       "CREATE TABLE ... AS SELECT ... (CTAS 구문)",
       "다중 행 서브쿼리(WHERE 절 서브쿼리 - IN 연산자 등)"
     ],
     "correctIndex": 3,
-    "explanation": "WHERE 절 IN 등에서 사용하는 다중 행 서브쿼리는 비교할 집합 자체를 반환하므로 순서가 의미 없으며, 일부 DBMS에서는 ORDER BY 사용 시 오류가 발생할 수 있습니다. 인라인 뷰는 행의 순서가 의미를 가질 수 있어 가능하며, CTAS 구문도 정렬된 결과를 저장하는 용도로 활용 가능합니다.",
+    "explanation": "WHERE 절에서 IN 등과 함께 쓰는 서브쿼리는 비교할 값의 집합만 돌려주므로 정렬이 의미가 없고, 가이드는 서브쿼리 안에서 ORDER BY 를 쓸 수 없다고 정리한다(오라클은 오류). 예외는 결과 행 자체를 쓰는 형태로, 인라인 뷰(정렬 후 ROWNUM 으로 상위 N개 추출 등), CTAS, INSERT ... SELECT 의 SELECT 에는 ORDER BY 를 쓸 수 있다. 참고로 SELECT 절의 스칼라 서브쿼리도 ORDER BY 를 쓰면 오라클에서 오류가 난다.",
     "chapter": "서브쿼리",
     "_source": "ai-mock",
     "_origId": "ai-mock-037"
@@ -1120,11 +1120,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "options": [
       "서브쿼리는 괄호를 사용해서 SELECT문을 감싸서 사용하는 것이다.",
       "서브쿼리는 비교 연산자와 함께 사용이 가능하다.",
-      "메인쿼리는 서브쿼리의 칼럼을 쓸 수 없다.",
+      "서브쿼리 안에서는 메인쿼리의 칼럼을 참조할 수 없다.",
       "서브쿼리는 SELECT절, FROM절, WHERE절 등에서 사용이 가능하다."
     ],
     "correctIndex": 2,
-    "explanation": "서브쿼리는 괄호로 감싼 SELECT 문이고(①), 비교 연산자와 함께 쓸 수 있으며(②), SELECT·FROM·WHERE 절 등에 쓸 수 있다(④). WHERE 절 서브쿼리의 컬럼은 메인쿼리에서 쓸 수 없지만, FROM 절의 인라인 뷰 컬럼은 메인쿼리에서 사용할 수 있으므로 '메인쿼리는 서브쿼리의 칼럼을 쓸 수 없다' 고 단정한 ③ 이 올바르지 않다.",
+    "explanation": "서브쿼리는 괄호로 감싼 SELECT 문이고(①), 비교 연산자와 함께 쓸 수 있으며(②), SELECT·FROM·WHERE 절 등에 쓸 수 있다(④). 연관(상관) 서브쿼리는 서브쿼리 안에서 메인쿼리의 칼럼을 참조하므로 ③ 이 올바르지 않다. 반대로 메인쿼리는 서브쿼리 안의 칼럼을 직접 쓸 수 없다(FROM 절의 인라인 뷰 칼럼은 예외).",
     "chapter": "서브쿼리",
     "_source": "cbt-mock",
     "_origId": "cbt-006",
@@ -2210,9 +2210,9 @@ export const AI_MOCK: QuizQuestion[] = [
     "number": 95,
     "title": "다음 중 이름이 '이'로 시작하고 전체 글자 수가 세 글자인 대상을 추출하는 SQL로 적절한 것은?",
     "options": [
-      "이름 LIKE ' %이% ' ;",
-      "이름 LIKE ' 이% ' ;",
-      "이름 LIKE ' 이__ ' ;",
+      "이름 LIKE '%이%';",
+      "이름 LIKE '이%';",
+      "이름 LIKE '이__';",
       "이름 LIKE '이_%';"
     ],
     "correctIndex": 2,
@@ -2349,13 +2349,13 @@ export const AI_MOCK: QuizQuestion[] = [
     "number": 101,
     "title": "다음 중 EMP 테이블에서 부서가 10번인 사원들만 선택하여 EMP_TEMP 테이블에 삽입하는 쿼리는? (단, EMP_TEMP와 EMP 테이블의 컬럼 개수, 자료형, 순서는 모두 같다.)",
     "options": [
-      "INSERT INTO EMP_TEMP SELECT * FROMEMP;",
+      "INSERT INTO EMP_TEMP SELECT * FROM EMP;",
       "INSERT INTO EMP_TEMP VALUES(SELECT * FROM EMP WHERE DEPTNO =10);",
-      "INSERT INTO EMP_TEMP SELECT * FROMEMP WHERE DEPTNO = 10;",
+      "INSERT INTO EMP_TEMP SELECT * FROM EMP WHERE DEPTNO = 10;",
       "INSERT * INTO EMP_TEMP FROM EMP WHERE DEPTNO = 10;"
     ],
     "correctIndex": 2,
-    "explanation": "이 문제는 INSERT INTO ... SELECT 문법을 묻는 문제이다. 이 구문은 한테이블에서 조건에 맞는 여러 행을 다른 테이블에 삽입할 때 사용한다.① 모든 직원의 정보를 EMP_TEMP에 삽입하는 문항이므로 오답이다.②, ④ 문법이 잘못되었다. INSERT INTO EMP_TEMP SELECT * FROMEMP WHERE DEPTNO = 10; 사용 시, 두 테이블(EMP_TEMP, EMP)의 컬럼 수와 자료형 순서가 정확히 일치해야 한다.",
+    "explanation": "이 문제는 INSERT INTO ... SELECT 문법을 묻는 문제이다. 이 구문은 한테이블에서 조건에 맞는 여러 행을 다른 테이블에 삽입할 때 사용한다.① 모든 직원의 정보를 EMP_TEMP에 삽입하는 문항이므로 오답이다.②, ④ 문법이 잘못되었다. INSERT INTO EMP_TEMP SELECT * FROM EMP WHERE DEPTNO = 10; 사용 시, 두 테이블(EMP_TEMP, EMP)의 컬럼 수와 자료형 순서가 정확히 일치해야 한다.",
     "chapter": "DML",
     "_source": "cbt-mock",
     "_origId": "cbt-054",
