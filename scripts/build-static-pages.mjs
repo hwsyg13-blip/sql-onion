@@ -339,6 +339,62 @@ function buildTheoryIndexPage() {
 // ============================================================
 // 정적 가이드 글 (5개)
 // ============================================================
+
+// 출제 범위 — 데이터자격검정 공식 출제기준(dataq.or.kr, 2024 개편)의 과목·주요항목·세부항목을
+// 이론 챕터(THEORY)와 1:1 로 맞춰 만든다. 챕터 제목이 공식 세부항목명과 같다.
+const SYLLABUS_POINTS = {
+  c111: '모델링의 특징(추상화·단순화·명확화), 개념·논리·물리 모델링, 3층 스키마와 데이터 독립성, ERD',
+  c112: '엔터티의 특징(업무에 필요·유일한 식별·인스턴스 2개 이상·속성·관계), 유형·무형과 기본·중심·행위 엔터티',
+  c113: '기본·설계·파생 속성, 도메인, 한 인스턴스의 속성은 하나의 값',
+  c114: '관계 차수(1:1·1:N·M:N)와 선택성(필수·선택), IE·바커 표기',
+  c115: '주식별자의 특징(유일성·최소성·불변성·존재성), 식별·비식별 관계',
+  c121: '삽입·갱신·삭제 이상, 함수 종속, 1·2·3정규형과 BCNF',
+  c122: '관계를 조인으로 읽기, 계층형·상호배타 관계',
+  c123: '하나의 트랜잭션으로 묶이는 엔터티, 필수 관계와 트랜잭션',
+  c124: 'NULL 의 연산·비교·집계, NVL·NULLIF·COALESCE',
+  c125: '본질식별자와 인조식별자의 장단점, 인조식별자를 쓸 때 생기는 문제',
+  c211: '관계형 데이터베이스, SQL 의 종류(DDL·DML·DCL·TCL)',
+  c212: 'SELECT·DISTINCT·별칭, 산술·연결 연산자',
+  c213: '문자·숫자·날짜·변환 함수, CASE·DECODE',
+  c214: '연산자 우선순위, BETWEEN·IN·LIKE·IS NULL, NOT IN 과 NULL',
+  c215: '집계 함수와 NULL, WHERE 와 HAVING 의 차이',
+  c216: '정렬 기준(컬럼·별칭·순번), NULL 의 정렬 위치',
+  c217: 'EQUI·Non-EQUI·OUTER·CROSS·SELF 조인, 결과 행 수 계산',
+  c218: 'INNER·OUTER JOIN 문법, ON·USING·NATURAL',
+  c221: '단일행·다중행·다중컬럼, 스칼라 서브쿼리·인라인 뷰, ANY·ALL·EXISTS',
+  c222: 'UNION·UNION ALL·INTERSECT·MINUS, 사용 규칙',
+  c223: 'ROLLUP·CUBE·GROUPING SETS, GROUPING 함수',
+  c224: 'RANK·DENSE_RANK·ROW_NUMBER, 집계 윈도우, LAG·LEAD, ROWS·RANGE',
+  c225: 'ROWNUM, FETCH FIRST·OFFSET, TOP·WITH TIES',
+  c226: 'START WITH·CONNECT BY·PRIOR·LEVEL, 셀프 조인',
+  c227: 'PIVOT·UNPIVOT 문법, CASE 로 바꿔 쓰기',
+  c228: '메타문자, REGEXP_LIKE·SUBSTR·REPLACE·INSTR·COUNT',
+  c231: 'INSERT·UPDATE·DELETE·MERGE',
+  c232: 'COMMIT·ROLLBACK·SAVEPOINT, 트랜잭션의 특성(ACID)',
+  c233: 'CREATE·ALTER·DROP·TRUNCATE, 제약조건',
+  c234: 'GRANT·REVOKE, 시스템·객체 권한, ROLE',
+};
+const SYLLABUS_SECTIONS = [
+  { title: '1과목 — 데이터 모델링의 이해 (10문항 · 20점)', parts: [['데이터 모델링의 이해', 'c11'], ['데이터 모델과 SQL', 'c12']] },
+  { title: '2과목 — SQL 기본 및 활용 (40문항 · 80점)', parts: [['SQL 기본', 'c21'], ['SQL 활용', 'c22'], ['관리 구문', 'c23']] },
+];
+function syllabusBody() {
+  const chapters = THEORY.subjects.flatMap(s => s.chapters);
+  const out = ['<p>데이터자격검정(dataq.or.kr)이 공개한 출제기준의 과목·주요항목·세부항목을 그대로 따랐습니다. 항목을 누르면 SQLD양파의 해당 이론 챕터로 이동합니다.</p>'];
+  for (const sec of SYLLABUS_SECTIONS) {
+    out.push(`<h2>${sec.title}</h2>`);
+    for (const [name, prefix] of sec.parts) {
+      out.push(`<h3>${name}</h3>`, '<ul>');
+      for (const c of chapters.filter(c => c.id.startsWith(prefix))) {
+        out.push(`  <li><a href="/theory/${c.id}/"><strong>${esc(c.title)}</strong></a> — ${esc(SYLLABUS_POINTS[c.id] || '')}</li>`);
+      }
+      out.push('</ul>');
+    }
+  }
+  out.push('<p>2024년 개편 이후 반정규화·성능 모델링, 인덱스·실행 계획 같은 SQL 최적화 내용은 SQLD 출제기준에서 빠졌습니다 (SQLP 범위).</p>');
+  return out.join('\n      ');
+}
+
 function buildGuide({ slug, title, desc, body }) {
   const path = `/guide/${slug}/`;
   return head({ title: `${title} — SQLD양파`, desc, path }) + `
@@ -371,17 +427,15 @@ const guides = [
       <h2>과목 구성</h2>
       <h3>1과목 — 데이터 모델링의 이해 (10문항)</h3>
       <ul>
-        <li>데이터 모델의 이해</li>
-        <li>엔터티·속성·관계·식별자</li>
-        <li>정규화·반정규화</li>
+        <li>데이터 모델링의 이해 — 데이터 모델, 엔터티, 속성, 관계, 식별자</li>
+        <li>데이터 모델과 SQL — 정규화, 관계와 조인, 트랜잭션, NULL 속성, 본질식별자와 인조식별자</li>
       </ul>
 
       <h3>2과목 — SQL 기본 및 활용 (40문항)</h3>
       <ul>
-        <li>SELECT·WHERE·GROUP BY·HAVING</li>
-        <li>JOIN (INNER·OUTER·NATURAL·CROSS)</li>
-        <li>서브쿼리·집합연산자</li>
-        <li>윈도우 함수·계층형 질의·정규표현식</li>
+        <li>SQL 기본 — SELECT, 함수, WHERE, GROUP BY·HAVING, ORDER BY, 조인, 표준 조인</li>
+        <li>SQL 활용 — 서브쿼리, 집합 연산자, 그룹 함수, 윈도우 함수, Top N, 계층형 질의, PIVOT, 정규 표현식</li>
+        <li>관리 구문 — DML, TCL, DDL, DCL</li>
         <li>DDL·DML·DCL·TCL</li>
       </ul>
 
@@ -441,18 +495,18 @@ const guides = [
         <li>Day 1: 데이터 모델·스키마·ERD 기초</li>
         <li>Day 2: 엔터티·속성</li>
         <li>Day 3: 관계·식별자</li>
-        <li>Day 4: 정규화·반정규화</li>
+        <li>Day 4: 정규화·관계와 조인·트랜잭션·NULL·식별자</li>
         <li>Day 5: SELECT·WHERE·함수</li>
         <li>Day 6: GROUP BY·HAVING·JOIN</li>
-        <li>Day 7: 서브쿼리·집합연산자·계층형 질의</li>
+        <li>Day 7: 서브쿼리·집합 연산자·윈도우 함수·Top N·계층형 질의·PIVOT·정규 표현식, DML·TCL·DDL·DCL</li>
       </ul>
 
       <h2>2주차 — 기출 풀이</h2>
       <p>매일 회차 1~2개씩 푼다. 틀린 문항은 오답노트에 정리.</p>
-      <p>SQLD양파의 회차별 페이지로 빠르게 풀이 가능: <a href="/exam/round-45/">45회</a>, <a href="/exam/round-50/">50회</a>, <a href="/exam/round-55/">55회</a>...</p>
+      <p>SQLD양파의 <a href="/exam/">기출 복원 회차 목록</a>에서 회차를 골라 실제 시험처럼 90분 타이머로 풀 수 있습니다.</p>
 
       <h2>3주차 — 실전 모의고사</h2>
-      <p>최근 3개 회차(58·59·60회)를 시험 환경처럼 90분 타이머로 풀이. 약점 챕터의 이론 재정리 + 단답형 암기.</p>
+      <p>가장 최근 회차들을 시험 환경처럼 90분 타이머로 풀고, 틀린 문제가 몰린 챕터의 이론을 다시 정리합니다. 2024년부터 단답형 없이 객관식 50문항으로만 출제됩니다.</p>
       <ul>
         <li>Day 15–17: 최근 회차 풀이 + 채점</li>
         <li>Day 18–19: 오답노트 회독 + 약점 챕터 보강</li>
@@ -490,48 +544,7 @@ const guides = [
     title: 'SQLD 출제 범위 정리 — 1과목·2과목 핵심 키워드',
     desc: 'SQLD 자격증 1과목 데이터 모델링의 이해 + 2과목 SQL 기본 및 활용의 핵심 출제 키워드를 한 페이지로 정리.',
     body: `
-      <h2>1과목 — 데이터 모델링의 이해 (10문항)</h2>
-
-      <h3>데이터 모델의 이해</h3>
-      <p>모델링의 정의·특징, 3층 스키마(외부·개념·내부), 데이터 모델의 구성 요소, ERD 표기법(바커·IE)</p>
-
-      <h3>엔터티·속성</h3>
-      <p>엔터티의 정의·특징·분류(기본·중심·행위), 속성의 분류(기본·설계·파생), 도메인</p>
-
-      <h3>관계</h3>
-      <p>관계의 정의·표기·차수(1:1·1:N·M:N), 선택성(필수·선택), 관계 차수와 카디널리티</p>
-
-      <h3>식별자</h3>
-      <p>주식별자의 4가지 특징(유일성·최소성·불변성·존재성), 식별자 분류(주·보조·내부·외부·인조), 식별자 관계 vs 비식별자 관계</p>
-
-      <h3>정규화·반정규화</h3>
-      <p>1정규화·2정규화·3정규화·BCNF, 함수적 종속, 반정규화의 목적과 기법</p>
-
-      <h2>2과목 — SQL 기본 및 활용 (40문항)</h2>
-
-      <h3>SELECT 기본</h3>
-      <p>SELECT·FROM·WHERE·ORDER BY, 비교 연산자·논리 연산자, BETWEEN·IN·LIKE, 단일행 함수(문자·숫자·날짜·변환·NULL)</p>
-
-      <h3>GROUP BY·HAVING</h3>
-      <p>집계 함수(SUM·AVG·COUNT·MAX·MIN), GROUP BY·HAVING 차이, ROLLUP·CUBE·GROUPING SETS</p>
-
-      <h3>JOIN</h3>
-      <p>INNER JOIN·OUTER JOIN(LEFT·RIGHT·FULL)·NATURAL JOIN·CROSS JOIN·SELF JOIN, ON·USING 절</p>
-
-      <h3>서브쿼리</h3>
-      <p>단일행·다중행·다중컬럼 서브쿼리, 인라인 뷰, 상관 서브쿼리, EXISTS·NOT EXISTS</p>
-
-      <h3>집합 연산자</h3>
-      <p>UNION·UNION ALL·INTERSECT·MINUS(EXCEPT) 차이, 결과 집합의 컬럼 일치 조건</p>
-
-      <h3>계층형 질의·윈도우 함수</h3>
-      <p>START WITH·CONNECT BY·PRIOR·LEVEL, ORDER SIBLINGS BY, RANK·DENSE_RANK·ROW_NUMBER·NTILE, LAG·LEAD, ROWS·RANGE 윈도우 프레임</p>
-
-      <h3>DDL·DML·DCL·TCL</h3>
-      <p>CREATE·ALTER·DROP·TRUNCATE, INSERT·UPDATE·DELETE·MERGE, GRANT·REVOKE, COMMIT·ROLLBACK·SAVEPOINT</p>
-
-      <h3>제약조건·뷰·인덱스</h3>
-      <p>PK·FK·UNIQUE·NOT NULL·CHECK·DEFAULT, 뷰의 종류(Simple·Complex·Updatable), 인덱스의 효과와 한계</p>
+      ${syllabusBody()}
     `,
   },
 ];

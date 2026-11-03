@@ -478,7 +478,7 @@ export const ROUND_54: QuizQuestion[] = [
     "round": 54,
     "subject": "2과목",
     "number": 19,
-    "title": "아래 설명을 SQL 로 작성했을 때 적절하지 않은 것은? (STADIUM 테이블이 두 개의 다른 스키마에 존재한다고 가정)",
+    "title": "아래 설명을 바탕으로 STADIUM 의 NAME 을 조회하는 SQL 중 적절하지 않은 것은?",
     "options": [
       "SELECT STADIUM.NAME FROM HR.STADIUM, SPORT.STADIUM;",
       "SELECT HR.STADIUM.NAME FROM HR.STADIUM;",
@@ -487,7 +487,13 @@ export const ROUND_54: QuizQuestion[] = [
     ],
     "correctIndex": 0,
     "explanation": "같은 이름의 STADIUM 이 두 스키마에 있을 때 FROM 절에 둘 다 쓰면, SELECT 절의 STADIUM.NAME 이 어느 테이블인지 알 수 없어 오류(열의 정의가 애매함)가 난다(①). ② 처럼 스키마명을 붙이거나 ③④ 처럼 테이블 별칭을 주면 구분된다.",
-    "_source": "authored"
+    "_source": "authored",
+    "references": [
+      {
+        "type": "text",
+        "content": "HR 스키마와 SPORT 스키마에 이름이 같은 STADIUM 테이블이 각각 있고, 두 테이블 모두 NAME 컬럼을 가지고 있다. 현재 사용자는 두 스키마의 STADIUM 을 모두 조회할 수 있다."
+      }
+    ]
   },
   {
     "id": 10319,
