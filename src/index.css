@@ -614,6 +614,7 @@ img, svg {
 .t-fig .edge { fill: none; stroke: var(--point-600); }
 .t-fig .dot { fill: var(--bg-card); stroke: var(--fg-1); }
 .t-fig .badge { fill: var(--point-600); }
+.t-fig .mutbox { fill: var(--bg-muted); stroke: var(--border-default); }
 
 /* 모바일 — 표 가로 스크롤 + 헤딩 축소 + 도식 카드 패딩 */
 @media (max-width: 720px) {
