@@ -227,6 +227,8 @@ if (skippedEmpty.length > 0) {
 // 분산 데이터베이스·성능 데이터 모델링이 없다. 모의고사에서 범위 밖 문제에 시간을 쓰지 않도록 풀에서 뺀다.
 // 기출(회차) 문항은 실제 출제 기록이라 그대로 둔다. 원본 JSON 은 그대로이므로 목록에서 지우면 되돌아온다.
 const OUT_OF_SCOPE = new Set([
+  'cbt-080', 'cbt-196', 'sqld-0263', 'sqld-1077', 'sqld-1129', 'sqld-1249',  // M125 · M237 · M454 · M1082 · M1121 · M1226 (인덱스 액세스·SQL 트레이스 튜닝, 자료가 달라 사본 판정에서 빠진 복합 인덱스 문항)
+  'sqld-1093',  // M1095 (M1068 의 사본 — 선택도·인덱스)
   'cbt-013', 'cbt-016', 'cbt-021', 'cbt-027', 'cbt-038', 'cbt-090',  // M63 · M66 · M71 · M76 · M87 · M134
   'cbt-094', 'cbt-116', 'cbt-140', 'cbt-143', 'cbt-145', 'cbt-162',  // M138 · M158 · M182 · M185 · M187 · M204
   'cbt-170', 'cbt-190', 'sqld-0030', 'sqld-0032', 'sqld-0157', 'sqld-0164',  // M212 · M231 · M277 · M279 · M372 · M376
@@ -234,9 +236,6 @@ const OUT_OF_SCOPE = new Set([
   'sqld-0482', 'sqld-0984', 'sqld-1056', 'sqld-1057', 'sqld-1058', 'sqld-1059',  // M634 · M1006 · M1066 · M1067 · M1068 · M1069
   'sqld-1060', 'sqld-1109', 'sqld-1225', 'sqld-1345',  // M1070 · M1106 · M1204 · M1308
 ]);
-const outOfScope = combinedMock.filter(q => OUT_OF_SCOPE.has(q._id));
-if (outOfScope.length) console.log(`[범위 밖 제외] ${outOfScope.length} 문항 — 현행 출제기준에 없는 최적화·분산DB·성능 모델링`);
-for (let i = combinedMock.length - 1; i >= 0; i--) if (OUT_OF_SCOPE.has(combinedMock[i]._id)) combinedMock.splice(i, 1);
 
 // ── 같은 문제 중복 제거 (2026-11-01) ─────────────────────────────────────────
 // 출처가 다른 풀(cbt-mock ↔ sqld-1140 등)에 같은 문제가 들어 있어 한 모의고사에서 같은 문제를 두 번 만날 수 있었다.
@@ -265,6 +264,12 @@ const refKey = q => (q.references || []).map(r =>
   : r.type === 'erd' ? r.mermaid : (r.src || '')).join('#');
 const dupKey = q => (q.title.replace(FILLER_PREFIX, '') + '|' + [...q.options].sort().join('|') + '|' + refKey(q))
   .replace(/[\s,.]+/g, '').toLowerCase();
+// 범위 밖 제외 — 목록의 문항과 같은 문제(dupKey 가 같은 사본)도 함께 뺀다.
+const outKeys = new Set(combinedMock.filter(q => OUT_OF_SCOPE.has(q._id)).map(dupKey));
+const outOfScope = combinedMock.filter(q => OUT_OF_SCOPE.has(q._id) || outKeys.has(dupKey(q)));
+if (outOfScope.length) console.log(`[범위 밖 제외] ${outOfScope.length} 문항 — 현행 출제기준에 없는 최적화·분산DB·성능 모델링 (사본 포함)`);
+for (let i = combinedMock.length - 1; i >= 0; i--) if (OUT_OF_SCOPE.has(combinedMock[i]._id) || outKeys.has(dupKey(combinedMock[i]))) combinedMock.splice(i, 1);
+
 // SAME_QUESTION 에 적힌 문항의 키를 같은 그룹 이름으로 묶는다 (그 문항과 제목까지 같은 사본도 함께 따라온다).
 const keyAlias = new Map(combinedMock.filter(q => SAME_QUESTION[q._id]).map(q => [dupKey(q), 'same:' + SAME_QUESTION[q._id]]));
 const keptByKey = new Map();
