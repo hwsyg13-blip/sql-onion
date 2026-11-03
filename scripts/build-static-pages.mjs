@@ -48,9 +48,10 @@ const shortDate = (ko) => ko.replace(/(\d{4})년 (\d+)월/, (_, y, m) => `${y}.$
 const EXAM_SCHEDULE = [...readFileSync('src/lib/examDate.ts', 'utf8').matchAll(/\{\s*round:\s*(\d+),\s*date:\s*'(\d{4})-(\d{2})-(\d{2})'\s*\}/g)]
   .map(([, r, y, m, d]) => ({ round: +r, y: +y, m: +m, d: +d, iso: `${y}-${m}-${d}` }));
 const scheduleItems = EXAM_SCHEDULE.slice(-5).map(e => {
-  const upcoming = e.iso >= NOW ? ' — 다음 시험' : '';
-  return `<li>제${e.round}회: ${e.y}년 ${e.m}월 ${e.d}일${upcoming}</li>`;
-}).join('\n        ');
+  const upcoming = e.iso >= NOW ? ' <strong>다음 시험</strong>' : '';
+  const wd = '일월화수목금토'[new Date(Date.UTC(e.y, e.m - 1, e.d)).getUTCDay()];
+  return `<tr><td>제${e.round}회</td><td>${e.y}년 ${e.m}월 ${e.d}일 (${wd})${upcoming}</td></tr>`;
+}).join('\n          ');
 
 // 이론 본문 HTML (앱의 이론 상세 화면과 같은 원문) — 정적 페이지에 그대로 싣는다.
 // 2026-11-02: 예전 정적 이론 페이지는 제목 + 섹션명 + 모든 페이지 같은 안내 문구뿐이라
@@ -488,9 +489,12 @@ const guides = [
       <p>SQLD는 연 4회 정기 시행 (보통 3월·5월·8월·11월). 정확한 일정은 <a href="https://www.dataq.or.kr" target="_blank" rel="noopener">한국데이터산업진흥원 데이터자격검정</a>에서 확인할 수 있습니다.</p>
 
       <h3>최근·다음 회차 시험일 (참고)</h3>
-      <ul>
-        ${scheduleItems}
-      </ul>
+      <table>
+        <thead><tr><th>회차</th><th>시험일</th></tr></thead>
+        <tbody>
+          ${scheduleItems}
+        </tbody>
+      </table>
       <p>접수 기간·고사장은 회차마다 달라지므로 반드시 공식 사이트 공지를 확인하세요.</p>
 
       <h2>접수 방법</h2>
@@ -508,6 +512,17 @@ const guides = [
         <li>화면 우측: 문항 네비게이터 (답안 표시·플래그 가능)</li>
         <li>중간 저장 가능, 시험 종료 전 자유롭게 이동</li>
       </ul>
+
+      <h2>시험 전 마지막 일주일 체크리스트</h2>
+      <table>
+        <thead><tr><th>언제</th><th>할 일</th></tr></thead>
+        <tbody>
+          <tr><td>D-7 ~ D-5</td><td>최근 회차(52회 이후) 두세 개를 90분 타이머로 풀고, 과목별 점수로 약한 과목 확인</td></tr>
+          <tr><td>D-4 ~ D-3</td><td>틀린 문항이 몰린 챕터만 <a href="/theory/">이론</a>으로 다시 보기 — 특히 조인 결과 행 수, 윈도우 함수, 계층형 질의</td></tr>
+          <tr><td>D-2</td><td><a href="/guide/sqld-tips/">자주 틀리는 함정 10가지</a> 복습, 1과목 용어(엔터티 분류·식별자 특성·정규화 단계) 정리</td></tr>
+          <tr><td>D-1</td><td>새 문제보다 오답 다시 보기. 고사장 위치·입실 시간·지참물은 회차 공지에서 확인</td></tr>
+        </tbody>
+      </table>
 
       <h2>SQLD양파의 CBT 모드</h2>
       <p>SQLD양파는 실제 CBT 환경과 동일한 50문항·90분 풀이 모드를 제공합니다. 회차별 기출 또는 랜덤 모의고사로 시험장 환경에 미리 적응할 수 있습니다.</p>
