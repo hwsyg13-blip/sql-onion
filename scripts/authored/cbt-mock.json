@@ -5316,7 +5316,7 @@
         "DELETE FROM EMP WHERE DEPTNO IS NULL;"
       ],
       "correctIndex": 0,
-      "explanation": "DEPTNO가 DEPT 테이블에 존재하지 않는 사원을 올바르게 삭제한다.②, ③ 문법 오류에 해당한다.④ 조건 자체가 문제 의도와 다르며. DEPTNO가 PK이므로 NOT IN 사용 시에도 NULL에 대한 우려가 없다."
+      "explanation": "DEPT 에 없는 부서번호를 가진 사원은 DEPTNO NOT IN (SELECT DEPTNO FROM DEPT) 로 찾는다(①). DEPTNO 가 DEPT 의 PK 라 서브쿼리 결과에 NULL 이 없으므로 NOT IN 을 써도 안전하다. ② DELETE * 는 문법 오류, ③ NOT EXISTS 뒤에는 괄호로 감싼 서브쿼리가 와야 하고, ④ 는 부서번호가 비어 있는 사원만 지운다."
     },
     {
       "_id": "cbt-196",

@@ -5995,7 +5995,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "DELETE FROM EMP WHERE DEPTNO IS NULL;"
     ],
     "correctIndex": 0,
-    "explanation": "DEPTNO가 DEPT 테이블에 존재하지 않는 사원을 올바르게 삭제한다.②, ③ 문법 오류에 해당한다.④ 조건 자체가 문제 의도와 다르며. DEPTNO가 PK이므로 NOT IN 사용 시에도 NULL에 대한 우려가 없다.",
+    "explanation": "DEPT 에 없는 부서번호를 가진 사원은 DEPTNO NOT IN (SELECT DEPTNO FROM DEPT) 로 찾는다(①). DEPTNO 가 DEPT 의 PK 라 서브쿼리 결과에 NULL 이 없으므로 NOT IN 을 써도 안전하다. ② DELETE * 는 문법 오류, ③ NOT EXISTS 뒤에는 괄호로 감싼 서브쿼리가 와야 하고, ④ 는 부서번호가 비어 있는 사원만 지운다.",
     "chapter": "서브쿼리",
     "_source": "cbt-mock",
     "_origId": "cbt-195",
@@ -20538,7 +20538,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "WINDOW FUNCTION을 GROUP BY(분류코드)절과 함께 사용하였으므로 위의 SQL은 오류가 발생한다."
     ],
     "correctIndex": 1,
-    "explanation": "CNT 칼럼은 분류코드를 GROUPING된 집합을 원본집합으로 하여 분류코드별 평균상품가격을 서로 비교하고 현재 읽혀진 상품분류코드의 평균가격 대비 -10000 ~ +10000 사이에 존재하는 분류코드의 개수를 구한 것이다.",
+    "explanation": "GROUP BY 분류코드로 먼저 분류코드별 평균가격 행을 만든 뒤, 그 결과 위에서 윈도우 함수가 실행된다. COUNT(*) OVER(ORDER BY AVG(상품가격) RANGE BETWEEN 10000 PRECEDING AND 10000 FOLLOWING) 는 현재 분류코드의 평균가격 ±10000 안에 평균가격이 들어오는 분류코드 수를 센다(②). 윈도우 함수는 GROUP BY 와 함께 쓸 수 있고 ORDER BY 도 정상 문법이다.",
     "chapter": "윈도우 함수",
     "_source": "sqld-1140",
     "_origId": "sqld-0544",
@@ -21883,7 +21883,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "SELECT COL1, COL2, COL3 C1 FROM TAB1 T ORDER BY 1, COL2, COL3;"
     ],
     "correctIndex": 0,
-    "explanation": "단일 DEPTH 를 갖는 SELECT 문의 컬럼 별칭은 테이블명이나 테이블 별칭이 앞에 붙을 수 없다. 아래와 같은 경우 테이블 별칭이 붙을 수 있다. \nSELECT * \n FROM (SELECT EMPNO AS NN, ENAME \n FROM EMP) I \n ORDER BY I.NN; ",
+    "explanation": "C1 은 SELECT 절에서 붙인 칼럼 별칭이라, 별칭 앞에는 테이블 별칭을 붙일 수 없다. ① 의 T.C1 은 테이블 T 에 C1 이라는 칼럼을 찾다가 오류가 난다. ②③④ 처럼 별칭(C1), 칼럼명, SELECT 목록 순번(1, 2, 3)으로 정렬하는 것은 모두 가능하다. 별칭에 접두사를 붙이려면 인라인 뷰로 감싼 뒤 바깥에서 I.별칭 처럼 써야 한다.",
     "chapter": "DML",
     "_source": "sqld-1140",
     "_origId": "sqld-0596",
