@@ -25879,13 +25879,13 @@ export const AI_MOCK: QuizQuestion[] = [
     "number": 792,
     "title": "다음 중 Top N Query에 대한 설명 중 틀린 것은?",
     "options": [
-      "SQL-Server의 TOP(N) 쿼리를 사용하면 정렬 순서대로 상위 N개 데이터만 출력 가능하다.",
+      "SQL Server의 TOP(N)은 WITH TIES를 붙여도 항상 정확히 N개의 행만 출력한다.",
       "FETCH 절을 사용하면 단일 Query로도 정렬 순서대로의 상위 N개에 대한 값을 추출할 수 있다.",
       "ROWNUM을 사용한 방식은 ROWNUM 할당 전에 먼저 순서대로 데이터를 정렬한 뒤 ROWNUM을 부여 후 추출하는 것이 좋다.",
       "윈도우 함수를 사용하여 상위 N개에 대한 값을 추출할 수 있으나 단일 Query로 표현 불가하다."
     ],
     "correctIndex": 0,
-    "explanation": "TOP(N)은 WITH TIES 를 사용하면 N개보다 더 많은 데이터 추출이 가능하다.",
+    "explanation": "TOP(N) WITH TIES 는 N번째 행과 정렬 값이 같은 행까지 함께 출력하므로 N개보다 많은 행이 나올 수 있다. ② FETCH FIRST N ROWS ONLY, ③ 인라인 뷰에서 먼저 정렬한 뒤 ROWNUM 조건, ④ 윈도우 함수(ROW_NUMBER 등)는 인라인 뷰가 필요하다는 설명은 모두 맞다.",
     "chapter": "윈도우 함수",
     "_source": "sqld-1140",
     "_origId": "sqld-0708",
@@ -26008,11 +26008,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "options": [
       "UPDATE 사용 시 동시에 여러 컬럼 수정은 불가능하다.",
       "DML은 반드시 COMMIT 또는 ROLLBACK을 입력하여 TRANSACTION을 종료해야 한다.",
-      "원하는 데이터 DELETE 시 WHERE 절은 반드시 붙이지 않아도 된다.",
+      "DELETE 문에는 WHERE 절을 반드시 붙여야 한다.",
       "DELETE 사용 시 FROM 문구는 생략이 불가능하다."
     ],
     "correctIndex": 1,
-    "explanation": "UPDATE로 동시 여러 컬럼 수정 가능하다. DELETE 시 FROM은 생략이 가능하다. DML 시 COMMIT 또는 ROLLBACK으로 트랜잭션을 종료하지 않으면 변경된 행의 잠금이 발생하여  다른 사용자의 사용에 제한이 생긴다. ",
+    "explanation": "UPDATE로 동시 여러 컬럼 수정 가능하다. DELETE 시 FROM은 생략이 가능하고, WHERE 절도 생략할 수 있다(생략하면 전체 행 삭제). DML 시 COMMIT 또는 ROLLBACK으로 트랜잭션을 종료하지 않으면 변경된 행의 잠금이 발생하여  다른 사용자의 사용에 제한이 생긴다. ",
     "chapter": "DML",
     "_source": "sqld-1140",
     "_origId": "sqld-0713",
@@ -27858,10 +27858,10 @@ export const AI_MOCK: QuizQuestion[] = [
       "ORDER BY 절에는 컬럼명과 숫자를 동시에 사용할 수 없다.",
       "ORDER BY 절에는 컬럼 별칭을 사용할 수 없다.",
       "ORDER BY 절의 기본 정렬 순서는 내림차순이다.",
-      "ORDER BY 절을 사용하지 않으면 입력된 데이터의 순서대로 출력된다."
+      "ORDER BY 절을 사용하지 않으면 출력 순서가 보장되지 않는다."
     ],
     "correctIndex": 3,
-    "explanation": "ORDER BY 절을 사용하지 않으면 기본적으로 테이블에 입력된 행 순서대로 출력된다.",
+    "explanation": "ORDER BY 절이 없으면 DBMS가 읽는 방식(인덱스, 블록 위치 등)에 따라 순서가 정해지므로 입력 순서대로 나온다고 보장할 수 없다. ① 컬럼명과 숫자는 함께 쓸 수 있고, ② 컬럼 별칭도 쓸 수 있으며, ③ 기본 정렬은 오름차순이다.",
     "chapter": "DML",
     "_source": "sqld-1140",
     "_origId": "sqld-0793",
