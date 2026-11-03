@@ -237,6 +237,11 @@ const SAME_QUESTION = {
   'sqld-0291': 'window-frame', 'sqld-0417': 'window-frame', 'sqld-0500': 'window-frame', // M476 · M581 · M648 잘못된 윈도우 절
   'sqld-0085': 'exec-order', 'sqld-0282': 'exec-order', 'sqld-0325': 'exec-order',       // M324 · M469 · M506 SELECT 실행 순서
   'sqld-0118': 'subq-desc', 'sqld-0652': 'subq-desc',        // M345 · M755 서브쿼리 설명
+  'cbt-055': 'scalar-subq', 'sqld-0228': 'scalar-subq',      // M102 · M426 한 행·한 칼럼 서브쿼리
+  'cbt-068': 'union-perf', 'sqld-0242': 'union-perf',        // M113 · M437 옳지 않은 것(UNION 성능)
+  'cbt-084': 'case-else', 'sqld-0225': 'case-else',          // M129 · M423 CASE ELSE 생략
+  'cbt-125': 'cumm-rank', 'sqld-0189': 'cumm-rank', 'cbt-203': 'cumm-rank', // M167 · M396 · M244 CUMM_RANK
+  'ai-mock-033': 'norm-wrong', 'ai-mock-055': 'norm-wrong',  // M28 · M47 정규화 틀린 설명
   'sqld-0378': 'acid', 'sqld-0411': 'acid',                  // M548 · M575 트랜잭션 특성이 아닌 것
 };
 const refKey = q => (q.references || []).map(r =>

@@ -1,5 +1,5 @@
 // Auto-generated from scripts/authored/ai-mock.json
-// AI 생성 모의고사 풀 (기출 변형) · 1219문항
+// AI 생성 모의고사 풀 (기출 변형) · 1213문항
 // ⚠ 직접 편집 금지. ai-mock.json 수정 후 'node scripts/build-quiz-bank.mjs' 재실행.
 import type { QuizQuestion } from '../quizBank';
 
@@ -907,25 +907,6 @@ export const AI_MOCK: QuizQuestion[] = [
     "chapter": "윈도우 함수",
     "_source": "ai-mock",
     "_origId": "ai-mock-054"
-  },
-  {
-    "id": 10846,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "1과목",
-    "number": 47,
-    "title": "정규화(Normalization) 과정과 관련된 설명 중 틀린 것은?",
-    "options": [
-      "제2정규형(2NF)은 복합키로 구성된 주식별자에 대해 일부 속성에만 종속되는 부분 함수 종속을 제거하는 것이다.",
-      "제3정규형(3NF)은 식별자가 아닌 일반 속성 간에 발생하는 이행적 함수 종속(A->B, B->C일 때 A->C)을 제거하는 것이다.",
-      "제1정규형(1NF)은 모든 속성이 원자값(더 이상 분해되지 않는 단위)을 가져야 한다는 원칙이다.",
-      "정규화가 진행될수록 테이블이 잘게 쪼개져 항상 데이터 조회(SELECT) 성능이 향상된다."
-    ],
-    "correctIndex": 3,
-    "explanation": "테이블이 분할되면 조회 시 조인 연산이 늘어나므로 오히려 조회 성능이 저하될 수 있습니다. 이러한 부작용을 보완하기 위해 반정규화(Denormalization)를 수행합니다.",
-    "chapter": "정규화",
-    "_source": "ai-mock",
-    "_origId": "ai-mock-055"
   },
   {
     "id": 10847,
@@ -4483,26 +4464,6 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 124
   },
   {
-    "id": 10966,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 167,
-    "title": "그룹 내 순위 관련 WINDOW 함수의 특징으로 틀린 것은?",
-    "options": [
-      "RANK 함수는 ORDER BY 를 포함한 쿼리에서 특정 항목에 대한 순위를 구하는 함수이다.",
-      "RANK 함수는 동일한 값에 대해서는 동일한 순위를 부여한다(같은 등수가 여럿이면 다음 등수가 SKIP 될 수 있음).",
-      "DENSE_RANK 함수는 RANK 와 비슷하지만 동일한 순위를 하나의 건수로 취급한다.",
-      "CUMM_RANK 함수는 누적된 순위를 부여한다."
-    ],
-    "correctIndex": 3,
-    "explanation": "그룹 내 순위 관련 윈도우 함수는 RANK, DENSE_RANK, ROW_NUMBER 다. RANK 는 동일 값에 같은 순위를 주고 다음 순위를 건너뛰며(①②), DENSE_RANK 는 동일 순위를 하나의 건수로 보아 건너뛰지 않는다(③). CUMM_RANK 라는 함수는 존재하지 않으므로 ④ 가 틀렸다.",
-    "chapter": "윈도우 함수",
-    "_source": "cbt-mock",
-    "_origId": "cbt-125",
-    "_cbtOrigNo": 125
-  },
-  {
     "id": 10967,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
@@ -5291,7 +5252,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "options": [
       "SELECT * FROM TAB WHERE TO_CHAR(COL1,'YYYYMMDDHH24') = '2025010113' OR TO_CHAR(COL1,'YYYYMMDDHH24') = '2025010114' ;",
       "SELECT * FROM TAB WHERE COL1 >= TO_DATE('20250101130000', 'YYYYMMDDHH24MISS') AND COL1 <= TO_DATE('20250101145959', 'YYYYMMDDHH24MISS') ;",
-      "SELECT * FROM TAB WHERE ((TO_CHAR(COL1, 'YYYYMMDD'),(TO_CHAR(COL1, 'HH24') ) IN (('20250101', '13'),('20250101', '14')) ;",
+      "SELECT * FROM TAB WHERE (TO_CHAR(COL1, 'YYYYMMDD'), TO_CHAR(COL1, 'HH24')) IN (('20250101', '13'),('20250101', '14')) ;",
       "SELECT * FROM TAB WHERE COL1 = TO_DATE('2025010113','YYYYMMDDHH24') OR COL1 = TO_DATE('2025010114','YYYYMMDDHH24');"
     ],
     "correctIndex": 3,
@@ -6364,10 +6325,10 @@ export const AI_MOCK: QuizQuestion[] = [
     "number": 236,
     "title": "다음 중 DEPT 테이블에 존재하지 않는 부서의 사원을 삭제하는 SQL은? (단, DEPTNO은 PK이다.)",
     "options": [
-      "DELETE FROM EMP WHERE DEPTNO NOTIN (SELECT DEPTNO FROM DEPT);",
+      "DELETE FROM EMP WHERE DEPTNO NOT IN (SELECT DEPTNO FROM DEPT);",
       "DELETE * FROM EMP WHERE DEPTNO !=ALL (SELECT DEPTNO FROM DEPT);",
-      "DELETE FROM EMP WHERE NOT EXISTSDEPT.DEPTNO = EMP.DEPTNO;",
-      "DELETE FROM EMP WHERE DEPTNO ISNULL;"
+      "DELETE FROM EMP WHERE NOT EXISTS DEPT.DEPTNO = EMP.DEPTNO;",
+      "DELETE FROM EMP WHERE DEPTNO IS NULL;"
     ],
     "correctIndex": 0,
     "explanation": "DEPTNO가 DEPT 테이블에 존재하지 않는 사원을 올바르게 삭제한다.②, ③ 문법 오류에 해당한다.④ 조건 자체가 문제 의도와 다르며. DEPTNO가 PK이므로 NOT IN 사용 시에도 NULL에 대한 우려가 없다.",
@@ -11666,27 +11627,6 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11195,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 396,
-    "title": "그룹 내 순위 관련 WINDOW 함수의 특징으로 틀린 것은?",
-    "options": [
-      "CUMM_RANK 함수는 누적된 순위를 부여할 수 있다(등수를 누적 순위로 표현함).",
-      "RANK 함수가 동일한 값에 대해서는 동일한 순위를 부여하는 데 반해 ROW_NUMBER 함수는 고유한 순위를 부여한다(같은 등수가 존재할 수 없음).",
-      "DENSE_RANK 함수는 RANK 함수와 흡사하나 동일한 순위를 하나의 건수로 취급하는 것이 틀린 점이다(같은 등수에 여럿이 존재하는 경우에도 등수가 SKIP되지 않음).",
-      "RANK 함수는 동일한 값에 대해서는 동일한 순위를 부여한다(같은 등수에 여럿이 존재하는 경우 등수가 SKIP될 수 있음)."
-    ],
-    "correctIndex": 0,
-    "explanation": "그룹 내 순위 관련 WINDOW FUNCTION으로는 RANK, DENSE_RANK, ROW_NUMBER 함수가 있고, ①번은 DENSE_RANK 함수에 대한 설명이며, CUMM_RANK 함수는 존재하지 않는다.",
-    "chapter": "윈도우 함수",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0189",
-    "_category": "윈도우 함수",
-    "_correctRate": 10
-  },
-  {
     "id": 11197,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
@@ -12728,48 +12668,6 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11222,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 423,
-    "title": "CASE문에서 ELSE를 생략하면 어떤 현상이 발생되는가?",
-    "options": [
-      "ELSE 조건이 만족하게 되면 NULL이 된다.",
-      "ELSE 조건을 만족하게 되면 무시한다.",
-      "ELSE 조건이 만족하게 되면 공집합이 리턴 된다.",
-      "ELSE를 생략하고 작성하면 실행 시 ELSE 조건이 참이 되며 오류가 발생한다."
-    ],
-    "correctIndex": 0,
-    "explanation": "CASE문은 IF~THEN~ELSE를 구현할 수 있는 SQL문이다. 즉, 어떤 조건이 참이면 A를 실행하고 그렇지 않으면 B를 실행하라는 것이다. CASE문에서 ELSE 조건을 생략하면 NULL이 되돌려진다.",
-    "chapter": "DML",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0225",
-    "_category": "DML",
-    "_correctRate": 10
-  },
-  {
-    "id": 11225,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 426,
-    "title": "서브쿼리의 종류 중에 서브쿼리를 실행하고 한 행, 한 칼럼을 반환하는 서브쿼리를 무엇이라고 하는가?",
-    "options": [
-      "Access Subquery",
-      "Associative Subquery",
-      "Scala Subquery",
-      "Looping"
-    ],
-    "correctIndex": 2,
-    "explanation": "스칼라 서브쿼리는 SELECT문에서 사용하는 서브쿼리로 한 행만 반환한다.",
-    "chapter": "서브쿼리",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0228",
-    "_category": "서브쿼리",
-    "_correctRate": 10
-  },
-  {
     "id": 11226,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
@@ -13045,27 +12943,6 @@ export const AI_MOCK: QuizQuestion[] = [
     "_source": "sqld-1140",
     "_origId": "sqld-0240",
     "_category": "단일행 함수",
-    "_correctRate": 10
-  },
-  {
-    "id": 11236,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 437,
-    "title": "다음 설명 중 옳지 않은 것은?",
-    "options": [
-      "서브쿼리는 Order by절에 사용할 수 있다.",
-      "View는 실제 데이터를 가지고 있지 않는다.",
-      "Natural Join에 해당하는 칼럼은 테이블의 칼럼명이 동일하다.",
-      "Union 과 Union ALL은 성능 차이가 없다."
-    ],
-    "correctIndex": 3,
-    "explanation": "성능 측면에서는 Union보다 Union All이 우수하다. 그 이유를 알기 위해서 SQL을 만들고 실행 계획을 확인하면 다음과 같다. 다음의 결과를 확인해보면 UNION은 내부적으로 정렬이 발생하는 것을 확인할 수가 있다. 하지만 UNION ALL은 정렬이 발생하지 않는다. 즉, 성능 측면에서는 UNION ALL이 유리하다는 것이다.",
-    "chapter": "집합 연산자",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0242",
-    "_category": "집합 연산자",
     "_correctRate": 10
   },
   {
