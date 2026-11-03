@@ -8275,7 +8275,7 @@
         "select case a.COL1 when null then -1 else 0 end as data from Mytest a;"
       ],
       "correctIndex": 3,
-      "explanation": "나머지 보기는 모두 COL1 값이 NULL일 때 -1을 반환하는데 ④번 보기만 COL1값이 NULL일 때 0 을 반환한다. 즉, CASE문으로 NULL을 비교할 때 알수 없음이 된다.",
+      "explanation": "①②③ 은 COL1 이 NULL 이면 -1, 아니면 0(①② 는 COL1 값 0 그대로)을 돌려준다. ④ 의 CASE a.COL1 WHEN NULL 은 COL1 = NULL 비교라 항상 UNKNOWN 이 되어 NULL 인 행도 ELSE 0 으로 간다. NULL 을 CASE 로 확인하려면 ③ 처럼 CASE WHEN COL1 IS NULL 을 써야 한다.",
       "references": [
         {
           "type": "table",
@@ -15696,12 +15696,12 @@
       "title": "다음 ERD로 작성한 SQL문에서 오류가 발생하는 것은?",
       "options": [
         "SELECT SUM(주문금액) FROM 일자별주문내역\nWHERE EXISTS(SELECT * FROM 고객마스터 UNION ALL SELECT * FROM 일자별주문내역) GROUP BY 회원번호",
-        "SELECT SUM(일자별주문내역,주문금액) FROM 고객마스터, 일자별주문내역\nWHERE 고객.회원번호 = 일자별주문내역,회원번호 GROUP BY 회원번호",
-        "SELECT SUM(일자별주문내역,주문금액) FROM 일자별주문내역 FULL OUTER JOIN 고객마스터 on 고객.회원번호 = 일자별주문이력.회원번호 GROUP BY 회원번호;",
+        "SELECT SUM(B.주문금액) FROM 고객마스터 A, 일자별주문내역 B\nWHERE A.회원번호 = B.회원번호 GROUP BY A.회원번호",
+        "SELECT SUM(B.주문금액) FROM 일자별주문내역 B FULL OUTER JOIN 고객마스터 A ON A.회원번호 = B.회원번호 GROUP BY A.회원번호;",
         "SELECT (SELECT SUM(주문금액) FROM 일자별주문내역) FROM 고객마스터 GROUP BY 회원번호;"
       ],
       "correctIndex": 0,
-      "explanation": "UNION 및 UNION ALL구를 사용할 때 나오는 SQL문은 칼럼 수와 데이터 타입이 완전 일치해야 한다. 하지만 ①번은 고객마스터와 일자별주문내역에 나오는 칼럼의 수가 일치하지 않는다.",
+      "explanation": "UNION ALL 로 잇는 두 SELECT 는 칼럼 개수와 데이터 타입이 같아야 한다. ① 은 칼럼 구성이 다른 고객마스터와 일자별주문내역을 SELECT * 로 UNION ALL 해서 오류가 난다. ②③ 은 조인 후 회원별 합계, ④ 는 스칼라 서브쿼리로 정상 실행된다. ※ 원본 보기 ②③ 의 표기(점 대신 쉼표, 정의되지 않은 별칭, 테이블명 오타)가 그대로면 둘 다 오류가 되어, 단일 정답이 되도록 바로잡았다.",
       "references": [
         {
           "type": "image",
@@ -16666,7 +16666,7 @@
         "SELECT COUNT(*) FROM EMP WHERE DEPTNO = 10 OR DEPTNO = 20 AND JOB = 'CLERK';"
       ],
       "correctIndex": 2,
-      "explanation": "연산자는 NOT > AND > OR 순서대로의 우선순위를 가지고 있다. 따라서 1, 3, 4 번의 경우 DEPTNO = 20 AND JOB='CLERK' 조건이 먼저 실행되고, 이 결과에 DEPTNO = 10 조건에 만족하는 집합을 합하여 리턴되므로 2 번과의 결과가 달라진다. "
+      "explanation": "AND 가 OR 보다 먼저 계산된다(NOT > AND > OR). ①②④ 는 모두 DEPTNO = 10 OR (DEPTNO = 20 AND JOB = 'CLERK') 로 계산되어 10번 부서 전원 + 20번 부서 CLERK 를 센다. ③ 만 괄호로 OR 를 먼저 묶어 (10번 또는 20번 부서) 중 CLERK 만 세므로 결과가 다르다."
     },
     {
       "_id": "sqld-0593",
