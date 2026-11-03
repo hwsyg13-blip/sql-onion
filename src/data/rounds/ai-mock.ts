@@ -21507,7 +21507,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "오라클에서는 GROUP BY절 위에 HAVING절을 명시할 수 있다."
     ],
     "correctIndex": 1,
-    "explanation": "FROM 절은 ORACLE 에서는 생략 불가하다. GROUP BY 절과 HAVING 절은 순서가 바뀌어도 상관없으나 가급적 순서대로 사용한다.",
+    "explanation": "Oracle 은 FROM 절을 생략할 수 없어 테이블이 필요 없을 때도 FROM DUAL 을 쓴다. 그래서 '모든 DBMS 에서 생략 가능' 이라는 ② 가 틀렸다(SQL Server 는 생략 가능). ① DISTINCT 는 SELECT 바로 뒤, ③ ORDER BY 는 작성·실행 모두 마지막, ④ Oracle 은 HAVING 을 GROUP BY 앞에 써도 실행된다.",
     "chapter": "DML",
     "_source": "sqld-1140",
     "_origId": "sqld-0581",
@@ -22615,7 +22615,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "같은 정보를 저장하지 않도록 하여 중복성을 최소화한다."
     ],
     "correctIndex": 0,
-    "explanation": "프로그램과 테이블간의 연계성을 낮추어야 한다. 연계성이 높을 경우 사소한 업무 변화에 대해서도 데이터 모델링의 큰 변화를 가져와 유연성이 떨어진다. ",
+    "explanation": "좋은 데이터 모델은 프로그램과 테이블의 연계성을 낮춰, 업무가 조금 바뀌어도 데이터 구조를 크게 바꾸지 않도록 한다. 연계성을 높이라는 ① 이 적절하지 않다. ② 데이터 정의를 프로세스와 분리해 유연성, ③ 관계를 명확히 해 일관성, ④ 중복 최소화가 모델링 유의사항이다.",
     "chapter": "데이터 모델링 기법",
     "_source": "sqld-1140",
     "_origId": "sqld-0621",
@@ -22678,7 +22678,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "트랜잭션에 의한 관계는 선택적인 관계 형태를 가진다."
     ],
     "correctIndex": 3,
-    "explanation": "두 엔터티의 관계가 서로 필수적일 때 하나의 트랜잭션을 형성할 수 있다. 두 엔터티가 서로 독립적으로 수행이 가능하다면 선택적 관계로 정의한다. ",
+    "explanation": "두 작업이 한 트랜잭션이라는 것은 반드시 함께 성공하거나 함께 취소되어야 한다는 뜻이라, 트랜잭션으로 묶인 관계는 필수적(서로 반드시 함께) 관계다. '선택적 관계' 라는 ④ 가 틀렸다. ① 부분 COMMIT 불가, ② A 만 실행된 뒤 장애 시 A 를 되돌림(undo), ③ 원자성 설명은 맞다.",
     "chapter": "트랜잭션 관리",
     "_source": "sqld-1140",
     "_origId": "sqld-0628",
@@ -22741,7 +22741,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "GROUP BY절에는 컬럼별칭을 사용할 수 없다."
     ],
     "correctIndex": 0,
-    "explanation": "SELECT문 수행 순서는 FROM > WHERE > GROUP BY > HAVING > SELECT > ORDER BY 순이다.",
+    "explanation": "SELECT 문은 FROM → WHERE → GROUP BY → HAVING → SELECT → ORDER BY 순으로 실행되므로 가장 마지막은 ORDER BY 다. 'SELECT 절이 가장 마지막' 이라는 ① 이 틀렸다. ② HAVING 에 그룹 함수 없는 조건도 쓸 수 있고, ③ WHERE 에는 그룹 함수를 못 쓰며, ④ GROUP BY 는 SELECT 보다 먼저 실행되어 별칭을 쓸 수 없다.",
     "chapter": "DML",
     "_source": "sqld-1140",
     "_origId": "sqld-0632",
@@ -22783,7 +22783,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "SELECT CONCAT ('RDBMS', ' SQL') FROM DUAL;"
     ],
     "correctIndex": 0,
-    "explanation": "||(연결연산자)는 오라클에서의 문자열 결합 방식이며,  SQL SERVER에서는 +를 사용하여 문자열을 결합 할 수 있다. & 연산자로 문자열 결합은 불가하다.",
+    "explanation": "문자열 연결은 Oracle 은 || 나 CONCAT, SQL Server 는 + 를 쓴다. ②③④ 는 모두 'RDBMS SQL' 이 된다. & 는 문자열 연결 연산자가 아니라 ① 만 결과가 다르다(오류).",
     "chapter": "DML",
     "_source": "sqld-1140",
     "_origId": "sqld-0634",
@@ -25190,7 +25190,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "SELECT COL1, T.COL2, T.COL3 FROM TAB1 T WHERE COL1 >= 100;"
     ],
     "correctIndex": 0,
-    "explanation": "GROUP BY 절에 포함되지 않은 컬럼으로 정렬할 수 없다. 또한, 컬럼 별칭을 ORDER BY 절에 사용할 경우 컬럼 별칭 앞에 테이블명이나 테이블 별칭을 붙일 수 없다.",
+    "explanation": "GROUP BY T.COL2 로 묶으면 ORDER BY 에도 COL2 나 집계 함수만 쓸 수 있다. ① 은 그룹에 없는 T.COL3 으로 정렬해 오류가 난다(ORDER BY SUM(T.COL3) 이라면 가능). ② 별칭 정렬, ③ WHERE 후 그룹화, ④ 그룹 없이 칼럼 조회는 모두 정상이다.",
     "chapter": "그룹 함수",
     "_source": "sqld-1140",
     "_origId": "sqld-0734",
@@ -26223,7 +26223,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "이름"
     ],
     "correctIndex": 0,
-    "explanation": "복합 속성이란 속성값이 여러 의미로 구성되어 분해가 가능한 속성을 말하며, 주소의 경우 시, 구, 동 등으로 분해가 가능하므로 복합 속성이라고 볼 수 있다.",
+    "explanation": "주소는 시·구·동·번지처럼 더 작은 의미로 나눌 수 있어 복합 속성이다(①). 핸드폰번호·성별·이름은 더 나누지 않고 하나의 값으로 쓰는 단일(단순) 속성이다.",
     "chapter": "엔터티",
     "_source": "sqld-1140",
     "_origId": "sqld-0773",
