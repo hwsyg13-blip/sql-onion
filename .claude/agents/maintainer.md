@@ -61,16 +61,42 @@ model: sonnet
 우선순위 순서:
 1. 사용자가 이 대화에서 지시한 일
 2. 내 열린 PR의 리뷰 반영, 충돌 해결, CI 실패
-3. 백로그에서 영향이 가장 큰 일 (합격률 > 사용자 경험 > 수익 > 정리)
-4. 기본 점검에서 새로 발견한 문제 (4장)
+3. **문의 시트의 새 접수** (매 실행 첫 미션. 4장 "제보") — 실제 사용자가 막힌 곳이라 합격률에 가장 직접적이다
+4. 백로그에서 영향이 가장 큰 일 (합격률 > 사용자 경험 > 수익 > 정리)
+5. 기본 점검에서 새로 발견한 문제 (4장)
 
 미션 하나는 **한 번의 실행 안에서 PR 하나로 끝낼 수 있는 크기**로 자릅니다. "2과목 이론 전수 재검토"처럼 큰 일은 "윈도우 함수 절 재검토"처럼 단위로 나누고, 나머지는 백로그에 남깁니다.
 
+### 3-1. 실행마다 섞을 미션 (2026-11-03 사용자 지시 "미션 설정 개선")
+한 번의 실행에서 같은 종류만 반복하지 않도록 아래를 돌아가며 고릅니다. 낮(최대 3개)이면 ①은 반드시, 나머지에서 둘.
+1. **문의 시트 새 접수** 처리 — 판정표(`docs/support/2026-11-01-cs-recent-reports.md` 하단)에 행 추가
+2. **문항 직접 풀기** — 표·SQL 이 있는 문항을 보기마다 끝까지 계산해 "정답이 정확히 하나인지" 확인 (3-2 체크리스트). 백로그 21 의 다음 구간부터
+3. **실제 교재·공식 자료 대조** — 이론 챕터나 자주 틀리는 개념을 3-3 의 자료와 대조해 표현·사실 오류를 고친다
+4. **자동 점검 후보 처리** — `node scripts/audit-content.mjs` 새 후보, `check-question-quality` LOW_ACCURACY 경고(정답률 25% 미만, GA4 데이터가 들어오면)
+5. **사용자 경험** — 화면 문구(사람이 이해하는 말), 모바일·다크 모드 깨짐, 애드센스 준비 상태
+
+### 3-2. 문항 직접 풀기 체크리스트 (11-01~11-03 실제로 나온 오류)
+- 보기 4개의 결과를 **전부** 계산한다. 정답 하나만 맞는지 보면 "정답이 둘"을 놓친다.
+- INNER JOIN 은 조건을 ON 에 두든 WHERE 에 두든 결과가 같다 → ANSI 변환 문제에서 정답이 둘이 되는 단골 (M517·M820). GROUPING SETS 안의 (a,b)·(b,a) 도 같은 묶음 (M685).
+- 컬럼명 오타(CO1·NMAE·SUDENT·DNMAE), 따옴표·괄호·쉼표 깨짐, 점(.)이 쉼표로 바뀐 별칭 → SQL 자체가 실행 오류.
+- 대소문자('kk'↔'KK'), 동점 데이터(ROW_NUMBER 가 임의로 하나 고름), SELECT 대상(A.* vs B.*)과 정답 설명의 불일치.
+- "오류가 발생한다" 가 정답이면 정말 오류인지 확인 — Oracle 은 문자열 날짜를 관대하게 받아들인다 (M761). 오류 보기는 NOT NULL·PK·자릿수 같은 확실한 제약 위반으로.
+- FROM 없는 상수 SELECT 는 Oracle(23c 이전)에서 오류 → FROM DUAL.
+- 해설이 다른 번호를 가리키거나(M756) 개념을 틀리게 설명하는지(M859) 확인.
+- 글자 자료(type text)는 내용이 `content` 또는 `text` 필드에 있다. 일괄 수정은 둘 다 읽고, 적용 전 diff 에서 지워지는 내용을 `uniq -c` 로 확인한다.
+
+### 3-3. 근거로 삼을 자료 (실제 문제집·공식 자료)
+- **SQL 전문가 가이드** (한국데이터산업진흥원, SQLD·SQLP 공식 교재) — 용어 정의·표현의 1차 기준 (예: "한 개의 인스턴스는 각 속성에 대해 한 개의 속성값만 가진다")
+- **데이터자격검정 공식 사이트** dataq.or.kr — 시험 일정·과목·합격 기준
+- **Oracle Database SQL Language Reference** — 함수 동작, NULL 처리, 오류 여부 (예: NVL2·REGEXP·ROLLUP)
+- 시중 수험서·기출 복원 자료는 **출제 경향 확인용**으로만 보고, 문장을 그대로 옮기지 않는다 (저작권). 우리 말로 다시 쓴다.
+- WebSearch 로 확인한 사실은 PR 본문에 출처 이름을 적는다. 출처가 서로 다르면 Oracle 문서·공식 교재를 따른다.
+
 ## 4. 기본 점검 (일을 찾을 때)
 
-- **제보**: 문의 시트 "SQLD양파 CS"(파일 ID `1ZetajcAO8lDHTbYF0EwfKoytJnDjI-SAqk8510XOIDg`, 시트1)를 Google Drive 커넥터 `mcp__Google_Drive__read_file_content`로 읽고, state.json의 마지막 처리 행 이후 새 제보를 `node scripts/cs-triage.mjs`로 분류합니다.
-- **자동 검증**: `node scripts/validate-rounds.mjs --json`, `node scripts/check-answer-leak.mjs`.
-- **배포 확인**: 운영 사이트 버전은 GitHub deployments API(environment=Production)로 확인합니다. 사이트 직접 접속은 Vercel 방화벽이 막을 수 있어 필수가 아닙니다.
+- **제보**: 문의 시트 "SQLD양파 CS"(파일 ID `1ZetajcAO8lDHTbYF0EwfKoytJnDjI-SAqk8510XOIDg`)를 `mcp__Google_Drive__download_file_content(fileId=…, exportMimeType="text/csv")`로 받습니다. 결과가 크면 파일로 저장되는데, `content` 가 base64 이므로 `jq -r .content <파일> | base64 -d > cs.csv` 후 Python `csv`(field_size_limit 크게)로 읽습니다. `state.json` 의 `cs_last_row` 이후 행만 새 제보로 봅니다. 각 제보는 현재 데이터와 대조하고 `git log --since=<접수일>` 로 이미 고쳤는지 확인합니다. 시트 상태 칸은 편집 커넥터가 없어 채우지 못하므로 판정표에 남깁니다.
+- **자동 검증**: 5-3 의 검사기 5개. 특히 `node scripts/audit-content.mjs` 의 새 후보는 그 자리에서 사람 눈으로 확인합니다.
+- **배포 확인**: 운영 사이트 버전은 GitHub deployments API(environment=Production)로 확인합니다. 사이트 직접 접속은 Vercel 방화벽이 막을 수 있어 필수가 아닙니다 (우회하지 않습니다).
 - 발견한 문제는 영향도와 함께 백로그에 추가합니다.
 
 ## 5. 진행 규칙
@@ -88,7 +114,7 @@ model: sonnet
 
 ### 5-3. 검증
 - `npm run build`가 통과해야 합니다. 실패하면 그 변경을 되돌리고 원인을 기록합니다.
-- 콘텐츠를 고쳤으면 네 검사기를 모두 돌려 오류가 늘지 않았는지 확인합니다: `validate-rounds.mjs --strict`, `check-answer-leak.mjs`, `verify-sql-results.mjs`(SQL 결과형 문항을 SQLite 로 실행해 보기와 대조, 불일치 0), `check-question-quality.mjs`(중복 보기·2개 고르기·붙은 SQL·전각 기호·해설 없음).
+- 콘텐츠를 고쳤으면 다섯 검사기를 모두 돌려 오류가 늘지 않았는지 확인합니다 (`audit-content.mjs` 새 후보 0 포함): `validate-rounds.mjs --strict`, `check-answer-leak.mjs`, `verify-sql-results.mjs`(SQL 결과형 문항을 SQLite 로 실행해 보기와 대조, 불일치 0), `check-question-quality.mjs`(중복 보기·2개 고르기·붙은 SQL·전각 기호·해설 없음), `audit-content.mjs`(자료 없는 '아래 표', 해설용 표 혼입, 작업 메모 노출, 돌려 붙인 문장, FROM 없는 SELECT, 해설 정답 번호 불일치 등).
 - UI를 고쳤으면 로컬 빌드(`npm run build` 후 `npm run preview`)를 세션의 Chromium으로 열어 라이트·다크·모바일 폭에서 확인합니다.
 
 ### 5-4. PR
