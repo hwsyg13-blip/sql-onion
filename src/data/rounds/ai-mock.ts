@@ -530,7 +530,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "TRUNCATE는 데이터를 삭제하면서 디스크의 저장 공간(Extent)을 초기 상태로 반환한다."
     ],
     "correctIndex": 1,
-    "explanation": "TRUNCATE는 행 단위 로그를 남기지 않고 테이블의 데이터 영역을 통째로 비우는 DDL이므로 대용량 삭제 시 DELETE보다 훨씬 빠르다.",
+    "explanation": "TRUNCATE 는 행마다 로그를 남기지 않고 데이터 영역을 통째로 비우는 DDL 이라 대량 삭제에서 DELETE 보다 훨씬 빠르다. '행마다 Redo/Undo 를 기록해 느리다' 는 ② 가 틀렸다(그건 DELETE 의 특징). ①③④ 는 맞는 설명이다.",
     "chapter": "DDL",
     "_source": "ai-mock",
     "_origId": "ai-mock-032"
@@ -1589,7 +1589,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "업무가 관여하는 어떤 것의 관계(Relationships)"
     ],
     "correctIndex": 2,
-    "explanation": "업무가 관여하는 어떤 것(Things), 업무가 관여하는 어떤 것의 성격(Attributes), 업무가 관여하는 어떤 것의 관계(Relationships)로 구분이 된다.",
+    "explanation": "데이터 모델링의 세 가지 중요 개념은 업무가 관여하는 어떤 것(Things, 엔터티), 그것의 성격(Attributes, 속성), 그것들의 관계(Relationships, 관계)다. '행위(Events)' 는 들어가지 않는다(③).",
     "chapter": "속성",
     "_source": "cbt-mock",
     "_origId": "cbt-028",
@@ -2170,7 +2170,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "SAL의 마지막 행은 급여가 가장 작은 사람이다."
     ],
     "correctIndex": 0,
-    "explanation": "NTILE(ARGUMENT) 윈도우 함수는 데이터를 ARGUMENT 값으로 N등분하는 함수이다. 위의 예처럼 NTILE(4)는 1부터 4까지 4등분한다.",
+    "explanation": "NTILE(4) 는 SAL 내림차순으로 줄 세운 행을 4묶음으로 나눠 1, 2, 3, 4 번호를 준다. 그래서 DATA 값은 1~4 이고 '0~3' 이라는 ① 이 틀렸다. ORDER BY SAL DESC 라 급여가 큰 순서로 나오고(②), 마지막 행은 급여가 가장 작은 사람이다(④).",
     "chapter": "윈도우 함수",
     "_source": "cbt-mock",
     "_origId": "cbt-051",
@@ -2457,7 +2457,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "20건"
     ],
     "correctIndex": 2,
-    "explanation": "DEPTNO로 조인을 하고 DNAME과 JOB으로 CUBE를 실행했다. CUBE는 전체합계와 각 칼럼별로 부분합계를 출력한다.",
+    "explanation": "EMP(14명)와 DEPT 를 조인한 뒤 CUBE(DNAME, JOB) 으로 묶으면 (DNAME, JOB) 조합 9행, DNAME 별 소계 3행, JOB 별 소계 5행, 전체 합계 1행이 나와 모두 18행이다(③). 사원이 없는 OPERATIONS(40)는 조인에서 빠진다.",
     "chapter": "관계형 DB와 SELECT",
     "_source": "cbt-mock",
     "_origId": "cbt-064",
@@ -2871,7 +2871,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "1, 2"
     ],
     "correctIndex": 0,
-    "explanation": "SQL문의 맨 하단에서 ROLLBACK TO SV2 명령어를 수행하면 SAVEPOINT SV2 지점까지 변경된 것을 모두 취소한다.",
+    "explanation": "순서대로 따라가면 1, 2 입력 → SV1 → 2 를 7 로 수정 → 9 입력 → SV2(이 시점 1, 7, 9) → 7 삭제 → 11 입력 → SV3 → 9 입력이다. ROLLBACK TO SV2 는 SV2 이후의 삭제·입력을 모두 취소해 1, 7, 9 로 돌아가고, COMMIT 으로 이 상태가 영구 반영된다(①).",
     "chapter": "DCL·TCL",
     "_source": "cbt-mock",
     "_origId": "cbt-073",
@@ -3153,7 +3153,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "COUNT(COMM)는 NULL을 제외하고 센다."
     ],
     "correctIndex": 3,
-    "explanation": "COUNT(*)는 NULL을 포함해서 개수를 센다. COUNT(컬럼)처럼 특정 컬럼을 명시하면 해당 컬럼 내에 NULL은 무시하고 개수를 센다.",
+    "explanation": "COUNT(*) 는 NULL 과 관계없이 모든 행을 세고, COUNT(COMM) 은 COMM 이 NULL 인 행을 빼고 센다(④). 그래서 COMM 에 NULL 이 있으면 두 값이 다르다(① 오답). ②③ 은 두 함수의 설명을 서로 바꿔 쓴 것이다.",
     "chapter": "그룹 함수",
     "_source": "cbt-mock",
     "_origId": "cbt-088",
@@ -3205,7 +3205,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "EXCEPT 연산자는 조회 결과에 대한 차집합을 의미한다."
     ],
     "correctIndex": 0,
-    "explanation": "UNION ALL 연산자는 조회 결과에 대해 별도의 정렬 작업을 하지 않는다. 또한 중복 데이터에 대해서도 삭제하지 않고 여러 번 중복 표현한다.",
+    "explanation": "UNION ALL 은 정렬도 중복 제거도 하지 않고 결과를 그대로 이어 붙인다. '정렬하고 중복을 한 번만 표현한다' 는 ① 은 UNION 의 설명이라 틀렸다. ② UNION 은 중복 제거 과정에서 정렬되고, ③ INTERSECT 는 교집합, ④ EXCEPT 는 차집합이다.",
     "chapter": "집합 연산자",
     "_source": "cbt-mock",
     "_origId": "cbt-091",
@@ -3225,7 +3225,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "유저 생성은 누구나 할 수 있지만 권한 설정은 데이터베이스 관리자만 가능하다."
     ],
     "correctIndex": 2,
-    "explanation": "테이블에 대한 권한은 각 테이블의 소유자가 가지고 있기 때문에 소유자로부터 권한을 받지 않으면 다른 유저의 테이블에 접근할 수 없다.",
+    "explanation": "다른 유저의 테이블은 소유자나 DBA 에게 그 테이블에 대한 권한(예: SELECT)을 받아야 조회할 수 있다(③). ① 새 유저는 CREATE SESSION 권한이 있어야 로그인할 수 있고, ② 유저를 만들려면 CREATE USER 권한이 필요하며, ④ 유저 생성 자체도 권한이 있는 사람만 할 수 있다.",
     "chapter": "관계형 DB와 SELECT",
     "_source": "cbt-mock",
     "_origId": "cbt-092",
@@ -3998,7 +3998,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "4"
     ],
     "correctIndex": 3,
-    "explanation": "주어진 SQL문에서 앞에 UNION 연산을 수행하면 1, 2, 3, 4, 5가 반환되고 이어서 minus를 수행하면 1, 3, 4, 5가 반환된다.",
+    "explanation": "Oracle 은 집합 연산자를 위에서부터 차례로 계산한다. A UNION B = {1, 2, 3, 4, 5} 이고, 여기서 MINUS C 로 2 를 빼면 {1, 3, 4, 5} 가 남아 4행이다(④).",
     "chapter": "관계형 DB와 SELECT",
     "_source": "cbt-mock",
     "_origId": "cbt-120",
@@ -4591,7 +4591,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "SELECT DEPTNO FROM EMP WHERE ROWNUM < 10;"
     ],
     "correctIndex": 2,
-    "explanation": "ROWNUM은 SELECT문에서 행이 인출될 때 행에 부여되는 일렬번호이다. 만약 ROWNUM을 1, 2, 3, 4 등으로 인출하고 조건에 부여하려면 인라인 뷰를 사용해야 한다.",
+    "explanation": "ROWNUM 은 결과 행이 나오는 순서대로 1, 2, 3 … 을 붙인다. 첫 행이 ROWNUM = 1 이어야 다음 행이 2 가 될 수 있으므로, WHERE ROWNUM = 2 는 첫 행부터 탈락해 아무 행도 나오지 않는다(③). ROWNUM = 1, ROWNUM < 10 은 정상이고, 특정 순번을 고르려면 인라인 뷰에서 ROWNUM 을 별칭으로 만든 뒤 바깥에서 거른다.",
     "chapter": "TOP N 쿼리",
     "_source": "cbt-mock",
     "_origId": "cbt-139",
@@ -4611,7 +4611,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "SELF JOIN은 하나의 테이블을 논리적으로 분리시켜 EQUI JOIN을 이용하는 방법이다."
     ],
     "correctIndex": 1,
-    "explanation": "EQUI JOIN은 반드시 기본키, 외래키 관계에 의해서만 성립되는 것은 아니다. 조인 칼럼이 1:1로 맵핑이 가능하면 사용할 수 있다.",
+    "explanation": "EQUI JOIN 은 = 조건으로 잇는 조인일 뿐, 기본키·외래키 관계가 꼭 필요하지는 않다. 값이 같은 칼럼이면 어떤 칼럼이든 쓸 수 있으므로 ② 가 틀렸다. ① NON-EQUI JOIN 은 BETWEEN·> 같은 조건, ③ OUTER JOIN 은 짝 없는 행도 남김, ④ SELF JOIN 은 한 테이블을 별칭 둘로 나눠 조인한다.",
     "chapter": "표준 조인",
     "_source": "cbt-mock",
     "_origId": "cbt-141",
@@ -4849,7 +4849,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "논리적으로 연관된 작업을 그룹핑하여 처리 가능하다."
     ],
     "correctIndex": 1,
-    "explanation": "Commit과 Rollback의 장점 • 데이터 무결성 보장 • 영구적인 변경을 하기 전에 데이터의 변경 사항 확인 가능 • 논리적으로 연관된 작업을 그룹핑하여 처리 가능",
+    "explanation": "COMMIT·ROLLBACK 덕분에 변경을 확정하기 전에 확인할 수 있고(③), 관련 작업을 하나로 묶어 처리하며(④), 데이터 무결성이 보장된다(①). COMMIT 으로 영구 변경을 할 수 있게 하는 것이므로 '영구적인 변경을 할 수 없게 한다' 는 ② 가 맞지 않다.",
     "chapter": "DCL·TCL",
     "_source": "cbt-mock",
     "_origId": "cbt-149",
@@ -5020,7 +5020,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "NULL"
     ],
     "correctIndex": 1,
-    "explanation": "COALESCE 함수는 NULL이 아닌 첫 번째 값을 리턴하는 함수이다. 즉, 위의 문제에서 첫 번째는 NULL이고 두 번째는 '2'이다. 따라서 '2'가 리턴된다.",
+    "explanation": "COALESCE 는 인수를 왼쪽부터 보고 처음 나오는 NULL 이 아닌 값을 돌려준다. 첫 값은 NULL, 두 번째가 '2' 이므로 결과는 '2' 다(②). 뒤의 '1' 은 볼 필요도 없다.",
     "chapter": "함수",
     "_source": "cbt-mock",
     "_origId": "cbt-155",
@@ -5556,7 +5556,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "데이터베이스에는 단 한 개의 테이블만 존재할 수 있다."
     ],
     "correctIndex": 0,
-    "explanation": "데이터베이스에는 자료의 성격에 따라 N개의 테이블을 생성한다. 모든 자료들은 테이블에 입력되며 조회, 수정, 삭제할 수 있다.",
+    "explanation": "관계형 데이터베이스의 데이터는 모두 테이블에 저장되고, 테이블에서 조회·수정·삭제한다(①). 데이터베이스에는 자료 성격에 따라 테이블을 여러 개 만들며(②④ 오답), 복잡한 자료를 한 테이블에 몰아 넣으면 중복과 이상 현상이 생기므로 나눠 설계한다(③ 오답).",
     "chapter": "관계형 DB와 SELECT",
     "_source": "cbt-mock",
     "_origId": "cbt-177",
@@ -5955,7 +5955,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "SELECT * FROM T_TEST WHERE COLUMN1 NOT NULL;"
     ],
     "correctIndex": 0,
-    "explanation": "SELECT문으로 NULL 값을 조회하려면 IS NULL을 사용하고 NULL이 아닌 것을 조회하려면 IS NOT NULL을 사용해야 한다.",
+    "explanation": "NULL 은 = · <> · != 로 비교하면 결과가 항상 UNKNOWN 이라 아무 행도 나오지 않는다(②③). 값이 있는 행은 IS NOT NULL 로 찾는다(①). ④ 는 IS 가 빠져 문법 오류다.",
     "chapter": "WHERE",
     "_source": "cbt-mock",
     "_origId": "cbt-193",
@@ -6015,7 +6015,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "CUME_DIST( )"
     ],
     "correctIndex": 3,
-    "explanation": "CUME_DIST 함수는 주어진 그룹에 대한 상대적인 누적분포도 값을 반환하는 것으로 분포도 값(비율)은 0 초과 1 이하 사이의 값이다.",
+    "explanation": "CUME_DIST 는 파티션 전체 건수 중 현재 행보다 앞이거나 같은(정렬 기준상 작거나 같은) 행의 비율, 즉 누적 백분율을 0 초과 1 이하로 돌려준다(④). NTILE 은 N 등분 번호, LAG·LEAD 는 앞·뒤 행의 값을 가져오는 함수다.",
     "chapter": "윈도우 함수",
     "_source": "cbt-mock",
     "_origId": "cbt-197",
@@ -10355,7 +10355,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "GRANT SELECT, UPDATE TO B_User;"
     ],
     "correctIndex": 0,
-    "explanation": "권한을 부여하는 명령어는 GRANT이며, WHERE 조건의 데이터를 찾기 위한 SELECT 권한과 데이터 변경을 위한 UPDATE 권한이 필요하다.",
+    "explanation": "B_User 가 실행할 UPDATE 는 WHERE col2 = 3 으로 행을 찾아(SELECT 권한) 값을 바꾸므로(UPDATE 권한) 두 권한이 필요하다. 객체 권한은 GRANT 권한 ON 소유자.테이블 TO 사용자 형식이라 ① 이 맞다. ② DENY 는 SQL Server 의 거부 명령, ③ 은 회수, ④ 는 ON 대상 테이블이 빠졌다.",
     "chapter": "DCL·TCL",
     "_source": "sqld-1140",
     "_origId": "sqld-0137",
@@ -10706,7 +10706,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "SCALAR SUBQUERY"
     ],
     "correctIndex": 2,
-    "explanation": "FROM절에 정의된 서브쿼리는 INLINE VIEW이다. INLINE  VIEW는 일반적으로 메인쿼리보다 먼저 수행되므로 SQL 문장 내에서 절차성을 주는 효과를 얻을 수 있다.",
+    "explanation": "FROM 절에 쓴 서브쿼리를 인라인 뷰라고 한다(③). 인라인 뷰가 먼저 결과 집합을 만들고 메인쿼리가 그것을 테이블처럼 쓰므로, 처리 순서(절차성)를 주는 효과가 있다. 중첩 서브쿼리는 WHERE 절, 스칼라 서브쿼리는 주로 SELECT 절에 쓴다.",
     "chapter": "서브쿼리",
     "_source": "sqld-1140",
     "_origId": "sqld-0186",
@@ -10748,7 +10748,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "ROLLUP, SUM"
     ],
     "correctIndex": 1,
-    "explanation": "ROLLUP, CUBE 는 GROUP BY의 확장된 형태로 병렬로 수행이 가능하고 사용하기가 쉽기 때문에 효과적이다. 다차원적인 집계가 필요한 경우는 CUBE를 사용한다.",
+    "explanation": "소계·중계·합계처럼 단계별로 묶어 집계할 때는 ROLLUP 과 CUBE 를 쓴다(②). ROLLUP 은 왼쪽 칼럼부터 계층적으로, CUBE 는 가능한 모든 조합으로 소계를 만든다. SUM 은 일반 집계 함수, GROUPING 은 소계 행인지 판별하는 함수다.",
     "chapter": "그룹 함수",
     "_source": "sqld-1140",
     "_origId": "sqld-0188",
@@ -10769,7 +10769,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "SELECT문에 WHERE 조건이 없으므로 연산에 참여하는 총 행 수는 5개이다."
     ],
     "correctIndex": 1,
-    "explanation": "그룹 함수를 사용하는 경우 NULL 값은 연산에서 제외된다. 그래서 NVL 함수를 사용하는 것은 합계 오류 예방과는 전혀 관계가 없다.",
+    "explanation": "SUM 같은 집계 함수는 원래 NULL 을 빼고 계산하므로, NULL 이 있다고 합계에 오류가 나지 않는다. 그래서 'NVL 이 합계 오류를 예방한다' 는 ② 가 틀렸다. ① NULL 은 0 으로 바뀌어 더해지고, ③ 10번 3000·20번 500, ④ 5행 모두 계산에 들어간다.",
     "chapter": "그룹 함수",
     "_source": "sqld-1140",
     "_origId": "sqld-0191",
@@ -11230,7 +11230,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "ROLLUP(DEPTNO, JOB)"
     ],
     "correctIndex": 3,
-    "explanation": "주어진 결괏값을 보면 1.DEPTNO별 합계, 2.DEPTNO, JOB별 합계, 3.전체 합계가 조회되므로 빈칸에는 그룹 함수 중 ROLLUP이 와야 한다.",
+    "explanation": "결과에 (DEPTNO, JOB) 별 합계, DEPTNO 별 소계(JOB 이 빈 행), 맨 아래 전체 합계가 있다. 왼쪽 칼럼부터 계층적으로 소계를 만드는 ROLLUP(DEPTNO, JOB) 이다(④). CUBE 였다면 JOB 별 소계도 나오고, GROUPING SETS(DEPTNO, JOB) 은 (DEPTNO, JOB) 조합과 전체 합계가 없다.",
     "chapter": "그룹 함수",
     "_source": "sqld-1140",
     "_origId": "sqld-0205",
@@ -11547,7 +11547,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "grant select, update on emp to 홍길동;"
     ],
     "correctIndex": 3,
-    "explanation": "grant는 권한을 부여하는 SQL문이고 revoke는 권한을 삭제하는 SQL문이다. grant구의 문법은 grant 권한 on 테이블 to 사용자이다.",
+    "explanation": "홍길동이 할 UPDATE 는 WHERE 로 행을 찾고(SELECT) 값을 바꾸므로(UPDATE) 두 권한이 필요하다. 권한 부여 문법은 GRANT 권한 ON 테이블 TO 사용자 라서 ④ 가 맞다. ③ 은 받을 사용자(TO)가 빠졌고, ② 는 회수 명령, ① 은 문법이 틀렸다.",
     "chapter": "DCL·TCL",
     "_source": "sqld-1140",
     "_origId": "sqld-0213",
@@ -12326,7 +12326,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "P.사원번호 = NULL"
     ],
     "correctIndex": 0,
-    "explanation": "NOT EXISTS는 OUTER JOIN으로 변경할 경우 NOT NULL칼럼에 대해서 IS NULL로 검사하여 NOT EXISTS를 구현한다.",
+    "explanation": "NOT EXISTS 는 '사원 테이블에 짝이 없는 급여이력' 을 찾는다. LEFT OUTER JOIN 으로 바꾸면 짝이 없는 행의 P 쪽 칼럼이 NULL 이 되므로, 원래 NULL 이 될 수 없는 P.사원번호(기본키)가 NULL 인 행을 고르면 같은 결과다(①). ④ 의 = NULL 은 항상 UNKNOWN 이라 아무 행도 나오지 않는다.",
     "chapter": "집합 연산자",
     "_source": "sqld-1140",
     "_origId": "sqld-0252",
@@ -12715,7 +12715,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "(ㄱ) empid (ㄴ) empid = mgrid"
     ],
     "correctIndex": 1,
-    "explanation": "mgrid가 NULL인 값을 시작해서 empid로 조회를 전개하는 순방향 조회를 하고 있다. 순방향 전개를 하면서 empid로 정렬한다.",
+    "explanation": "관리자가 없는(mgrid IS NULL) 조조·여포에서 시작하므로 (ㄱ) 은 mgrid 다. 부하 직원 쪽으로 내려가려면 '앞 행의 empid 를 mgrid 로 가진 행' 을 찾아야 하므로 (ㄴ) 은 PRIOR empid = mgrid 다(②). ① 은 PRIOR mgrid = empid 로 상사 쪽으로 올라가는 역방향이다.",
     "chapter": "계층형 질의",
     "_source": "sqld-1140",
     "_origId": "sqld-0279",
