@@ -236,6 +236,7 @@ const SAME_QUESTION = {
   'sqld-0622': 'entity-when', 'sqld-0821': 'entity-when',    // M738 · M875 발생(생성)시점 분류
   'sqld-0291': 'window-frame', 'sqld-0417': 'window-frame', 'sqld-0500': 'window-frame', // M476 · M581 · M648 잘못된 윈도우 절
   'sqld-0085': 'exec-order', 'sqld-0282': 'exec-order', 'sqld-0325': 'exec-order',       // M324 · M469 · M506 SELECT 실행 순서
+  'sqld-0118': 'subq-desc', 'sqld-0652': 'subq-desc',        // M345 · M755 서브쿼리 설명
   'sqld-0378': 'acid', 'sqld-0411': 'acid',                  // M548 · M575 트랜잭션 특성이 아닌 것
 };
 const refKey = q => (q.references || []).map(r =>

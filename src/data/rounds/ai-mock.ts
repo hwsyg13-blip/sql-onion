@@ -1,5 +1,5 @@
 // Auto-generated from scripts/authored/ai-mock.json
-// AI 생성 모의고사 풀 (기출 변형) · 1220문항
+// AI 생성 모의고사 풀 (기출 변형) · 1219문항
 // ⚠ 직접 편집 금지. ai-mock.json 수정 후 'node scripts/build-quiz-bank.mjs' 재실행.
 import type { QuizQuestion } from '../quizBank';
 
@@ -21694,7 +21694,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "SELECT NULLIF('A','A') FROM DUAL;",
       "SELECT DECODE('A','B','C',NULL) FROM DUAL;",
       "SELECT CASE 0 WHEN 1 THEN 2 ELSE NULL END FROM DUAL;",
-      "SELECT COLAESCE(1,2,3) FROM DUAL;"
+      "SELECT COALESCE(1,2,3) FROM DUAL;"
     ],
     "correctIndex": 3,
     "explanation": "\"COALESCE(mgr,1)\"은 mgr이 NULL이 아니면 1을 반환한다. 따라서 1번 지문은 \"1\"이 조회된다. 나머지는 모두 NULL이 조회된다.",
@@ -22405,7 +22405,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "뷰는 물리적으로 구현되어 있다.",
       "데이터의 논리적 독립성을 제공할 수 있다.",
       "일단 정의된 뷰는 다른 뷰의 정의에 기초가 될 수 있다.",
-      "뷰가 정의된 기본 테이블이나 뷰를 삭제하면 그 테이블이나 뷰를 기초로 정의된 다른 뷰도 자동으로 삭제된다."
+      "뷰가 정의된 기본 테이블이나 뷰를 삭제하면 그 테이블이나 뷰를 기초로 정의된 다른 뷰도 더 이상 사용할 수 없게 된다."
     ],
     "correctIndex": 0,
     "explanation": "정답은 1번이다. 일반 뷰(View)는 SELECT 문을 저장해 두고 필요할 때 조회 결과를 보여주는 가상 테이블로, 자체 데이터를 물리적으로 저장하지 않는다. 따라서 '뷰는 물리적으로 구현되어 있다'는 설명은 틀리다.",
@@ -22776,7 +22776,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 709,
-    "title": "SQL 문을 실행했을 때 오류가 발생하는 부분으로 가정 적절한 것은?",
+    "title": "SQL 문을 실행했을 때 오류가 발생하는 부분으로 가장 적절한 것은?",
     "options": [
       "SELECT DEPTNO, ROUND(AVG(SAL)) AS ROUND_VALUE",
       "FROM EMP E",
@@ -23970,13 +23970,13 @@ export const AI_MOCK: QuizQuestion[] = [
     "number": 743,
     "title": "다음 SQL 중 항상 오류가 발생하는 구문으로 가장 적절한 것은? ",
     "options": [
-      "SELECT T.COL1 C1, T.COL2 AS \"C1\" FROM TABLE1 T WHERE T.COL2 IN ('A', 'B') ORDER BY 1, \"C1\";",
+      "SELECT T.COL1 C1, T.COL2 AS \"c1\" FROM TABLE1 T WHERE T.COL2 IN ('A', 'B') ORDER BY 1, \"c1\";",
       "SELECT T.COL1 C1, TABLE1.COL2 AS C2 FROM TABLE1 T WHERE TABLE1.COL2 = 'A' ORDER BY 1, 2;",
       "SELECT TABLE1.COL1, SUM(TABLE1.COL2) FROM TABLE1 GROUP BY TABLE1.COL1 ORDER BY COL1;",
       "SELECT T.COL1 C1, T.COL2 AS C2 FROM TABLE1 T WHERE T.COL1 = 4;"
     ],
     "correctIndex": 1,
-    "explanation": "1번 → \"C1\" 별칭과 C1이 공존하지만, \"C1\"은 따로 인식되므로 정상\n2번 → TABLE1.COL2 사용 오류\n→ FROM TABLE1 T로 별칭을 줬으면 TABLE1 대신 T만 사용 가능 → 오류\n3번 → GROUP BY 정상\n4번 → 일반 조회 정상",
+    "explanation": "1번 → 큰따옴표 없는 C1 은 대문자 C1 로 저장되고, 큰따옴표로 감싼 소문자 \"c1\" 은 대소문자를 구분하므로 서로 다른 별칭 → 정상\n2번 → TABLE1.COL2 사용 오류\n→ FROM TABLE1 T로 별칭을 줬으면 TABLE1 대신 T만 사용 가능 → 오류\n3번 → GROUP BY 정상\n4번 → 일반 조회 정상",
     "chapter": "DML",
     "_source": "sqld-1140",
     "_origId": "sqld-0631",
@@ -24035,7 +24035,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "options": [
       "SELECT 'RDBMS' & ' SQL' FROM DUAL;",
       "SELECT 'RDBMS' + ' SQL';",
-      "SELECT 'RDMBS' || ' SQL' FROM DUAL;",
+      "SELECT 'RDBMS' || ' SQL' FROM DUAL;",
       "SELECT CONCAT ('RDBMS', ' SQL') FROM DUAL;"
     ],
     "correctIndex": 0,
@@ -24483,27 +24483,6 @@ export const AI_MOCK: QuizQuestion[] = [
         "caption": "[ERD]"
       }
     ]
-  },
-  {
-    "id": 11554,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 755,
-    "title": "서브쿼리 설명으로 가장 적절한 것은?",
-    "options": [
-      "서브 쿼리는 항상 메인쿼리에서 읽힌 데이터에 대해 서브쿼리에서 해당 조건이 만족하는지를 확인하는 방식으로 수행된다.",
-      "연관 서브쿼리는 주로 메인쿼리에 값을 제공하기 위한 목적으로 사용한다.",
-      "다중 행 서브쿼리 비교 연산자는 단일 행 서브쿼리의 비교 연산자로도 사용할 수 있다.",
-      "단일 행 서브쿼리는 서브쿼리의 실행 결과가 항상 한 건 이하인 서브쿼리로 IN, ALL 등의 비교 연산자를 사용 하여야 한다."
-    ],
-    "correctIndex": 2,
-    "explanation": "① 연관 서브쿼리는 일반적으로 메인쿼리가 먼저 수행된 후에 서브쿼리에서 조건이 맞는지 확인하고자 할 때 사용하기 때문에 항상 서브쿼리 조건이 만족하는지를 확인하는 방식이라고 볼 수 없다. ② 메인쿼리에 값을 제공하기 위한 목적으로 사용하는 쿼리는 비연관 서브쿼리이다.   ④ 단일 행 서브쿼리는 단일 행 비교연산자인 =, <>, >, >=, <, <=의 연산자를 주로 사용한다.",
-    "chapter": "서브쿼리",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0652",
-    "_category": "서브쿼리",
-    "_correctRate": 10
   },
   {
     "id": 11555,
