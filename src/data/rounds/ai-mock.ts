@@ -1012,7 +1012,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "number": 53,
     "title": "주문과 주문상세 테이블이 1:1 필수관계일 때 이에 대한 설명으로 올바른 것은? (단, 둘 다 PK로 주문번호를 가지고 있으며 식별관계이다.)",
     "options": [
-      "주문 테이블의 전체 개수와 주문상세 테이 블의 전체 개수는 다르다.",
+      "주문 테이블의 전체 개수와 주문상세 테이블의 전체 개수는 다르다.",
       "주문이 입력되어도 주문상세 테이블은 입력되지 않을 수 있다.",
       "주문 테이블 MINUS 주문상세 테이블의 출력 건수는 0건이다.",
       "주문 테이블 INTERSECT 주문상세 테이블의 데이터 합계와 주문 테이블 데이터 합계는 다르다."
@@ -8996,7 +8996,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "SELECT B.서비스ID, A.서비스명, A.서비스URL\nFROM 서비스 A, 서비스이용 B\nWHERE A.서비스ID = B.서비스ID;"
     ],
     "correctIndex": 2,
-    "explanation": "수행한 SQL은 이용된 적이 있었던 서비스를 추출하는 SQL이다.\n① 서비스와 서비스이용 테이블의 순서를 변경하고 IN 절을 NOT IN으로 변경하면 동일한 결과를 출력할 수 있다.\n② 서비스를 기준으로 OUTER JOIN을 수행하였으므로, 이용된 적이 없었던 서비스만 출력된다. \nB.서비스ID IS NOT NULL로 변경해야 동일한 결과가 출력된다.\n③ 전체 서비스에서 이용된 적이 있었던 서비스를 MINUS하였으므로 이용된 적이 없었던 서비스가 \n서브쿼리에서 추출된다. 그러므로 NOT EXISTS 구문을 적용하면 이용된 적이 있었던 서비스가 출력된다.\n④ 이용된 적이 있었던 서비스를 추출하는 것은 동일하나 서비스와 서비스이용은 1:n 관계이므로 서비스 이용건수 만큼 추출되므로 전체 결과가 다르다. GROUP BY를 수행하면 동일한 결과를 출력할 수 있다.",
+    "explanation": "수행한 SQL은 이용된 적이 있었던 서비스를 추출하는 SQL이다.\n① 서비스와 서비스이용 테이블의 순서를 변경하고 IN 절을 NOT IN으로 변경하면 동일한 결과를 출력할 수 있다.\n② 서비스를 기준으로 OUTER JOIN을 수행하였으므로, 이용된 적이 없었던 서비스만 출력된다. B.서비스ID IS NOT NULL로 변경해야 동일한 결과가 출력된다.\n③ 전체 서비스에서 이용된 적이 있었던 서비스를 MINUS하였으므로 이용된 적이 없었던 서비스가 서브쿼리에서 추출된다. 그러므로 NOT EXISTS 구문을 적용하면 이용된 적이 있었던 서비스가 출력된다.\n④ 이용된 적이 있었던 서비스를 추출하는 것은 동일하나 서비스와 서비스이용은 1:n 관계이므로 서비스 이용건수 만큼 추출되므로 전체 결과가 다르다. GROUP BY를 수행하면 동일한 결과를 출력할 수 있다.",
     "chapter": "집합 연산자",
     "_source": "sqld-1140",
     "_origId": "sqld-0101",
@@ -9208,7 +9208,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "SELECT A.일자, SUM(A.매출액) AS 누적매출액\nFROM 일자별매출 A\nGROUP BY A.일자\nORDER BY A.일자;"
     ],
     "correctIndex": 1,
-    "explanation": "④는 일자별매출액에 일자별 매출 테이블과 동일하게 출력된다.\n①,③는 작은 날짜쪽에 제일 큰 누적금액이 출력된다.\n②은 일자별매출 테이블을 Self Join하여, A Alias 쪽에 먼저 읽혔다고 가정하면 다음처럼 데이터가 \n생성될 것이다.\n1.A가 {2015.11.01, 1000} 일 때 B는 {2015.11.01, 1000} \n2. A가 {2015.11.02, 1000} 일 때 B는 {{2015.11.01, 1000}, {2015.11.02, 1000}}\n3. A가 {2015.11.03, 1000} 일 때 B는 {{2015.11.01, 1000}, {2015.11.02,1000}, {2015.11.03, 1000}}\n위의 Self Join은 Equi Join이 아닌 Range Join이므로 A의 레코드는 B의 레코드 수 만큼 증가하게 \n된다. (A * B) 그러므로 위의 3번의 경우 A는 B의 레코드 개수와 동일하게 되므로 SUM(매출금액)을 \n하면 3,000이 된다. 이런 식으로 A Alias의 모든 레코드 개수를 Scan하면 누적 값을 출력하게 된다.",
+    "explanation": "④는 일자별매출액에 일자별 매출 테이블과 동일하게 출력된다.\n①,③는 작은 날짜쪽에 제일 큰 누적금액이 출력된다.\n②은 일자별매출 테이블을 Self Join하여, A Alias 쪽에 먼저 읽혔다고 가정하면 다음처럼 데이터가 생성될 것이다.\n1.A가 {2015.11.01, 1000} 일 때 B는 {2015.11.01, 1000}\n2. A가 {2015.11.02, 1000} 일 때 B는 {{2015.11.01, 1000}, {2015.11.02, 1000}}\n3. A가 {2015.11.03, 1000} 일 때 B는 {{2015.11.01, 1000}, {2015.11.02,1000}, {2015.11.03, 1000}} 위의 Self Join은 Equi Join이 아닌 Range Join이므로 A의 레코드는 B의 레코드 수 만큼 증가하게 된다. (A * B) 그러므로 위의 3번의 경우 A는 B의 레코드 개수와 동일하게 되므로 SUM(매출금액)을 하면 3,000이 된다. 이런 식으로 A Alias의 모든 레코드 개수를 Scan하면 누적 값을 출력하게 된다.",
     "chapter": "조인",
     "_source": "sqld-1140",
     "_origId": "sqld-0112",
@@ -9410,7 +9410,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "나,라,마"
     ],
     "correctIndex": 2,
-    "explanation": "다) 서브쿼리의 결과가 복수 행 결과를 반환하는 경우에는 IN, ALL, ANY 등의 복수 행 비교 연산자와 \n사용하여야 한다.\n마) 다중 컬럼 서브쿼리는 서브쿼리의 결과로 여러 개의 컬럼이 반환되어 메인 쿼리의 조건과 비교되는 \n데, SQL Server에서는 현재 지원하지 않는 기능이다.",
+    "explanation": "다) 서브쿼리의 결과가 복수 행 결과를 반환하는 경우에는 IN, ALL, ANY 등의 복수 행 비교 연산자와 사용하여야 한다.\n마) 다중 컬럼 서브쿼리는 서브쿼리의 결과로 여러 개의 컬럼이 반환되어 메인 쿼리의 조건과 비교되는데, SQL Server에서는 현재 지원하지 않는 기능이다.",
     "chapter": "서브쿼리",
     "_source": "sqld-1140",
     "_origId": "sqld-0114",
@@ -9471,7 +9471,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "이벤트 시작일자가 '2014.10.01'과 같거나 큰 이벤트를 대상으로 이메일이 발송된 기록이 있는 모든 회원을 추출하는 SQL이다."
     ],
     "correctIndex": 1,
-    "explanation": "이벤트 시작일자가 '2014.10.01.'과 같거나 큰 이벤트를 기준으로 단 한차례라도 이메일 발송이 누락된 \n회원을 추출하는 SQL문장이다.\n (ㄴ)을 제거하고 (ㄱ)의 EXISTS 연산자를 IN연산자로 변경하게 되면 회원별로 메일을 발송한 건수를 \n계산할 수 없으므로 원하는 결과를 추출할 수 없다.\n GROUP BY 및 집계함수를 사용하지 않고 HAVING 절을 사용하였다고 하여 SQL문장이 오류가 발생하 \n지는 않는다.",
+    "explanation": "이벤트 시작일자가 '2014.10.01.'과 같거나 큰 이벤트를 기준으로 단 한차례라도 이메일 발송이 누락된 회원을 추출하는 SQL문장이다. (ㄴ)을 제거하고 (ㄱ)의 EXISTS 연산자를 IN연산자로 변경하게 되면 회원별로 메일을 발송한 건수를 계산할 수 없으므로 원하는 결과를 추출할 수 없다. GROUP BY 및 집계함수를 사용하지 않고 HAVING 절을 사용하였다고 하여 SQL문장이 오류가 발생하지는 않는다.",
     "chapter": "서브쿼리",
     "_source": "sqld-1140",
     "_origId": "sqld-0117",
@@ -9500,7 +9500,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "단일 행 서브쿼리는 서브쿼리의 실행 결과가 항상 한 건 이하의 서브쿼리로서 IN, ALL 등의 비교 연산자를 사용하여야 한다."
     ],
     "correctIndex": 2,
-    "explanation": "① 메인 쿼리의 결과가 서브쿼리로 제공될 수도 있고, 서브쿼리의 결과가 메인쿼리로 제공될 수도 \n있으므로 실행 순서는 상황에 따라 달라진다.\n② 비 연관 서브쿼리가 주로 메인쿼리에 값을 제공하기 위한 목적으로 사용된다.\n③ 단일 행 서브쿼리의 비교연산자는 다중 행 서브쿼리의 비교연산자로 사용할 수 없지만, 반대의 \n경우는 가능하다.\n④ 단일 행 서브쿼리의 비교연산자로는 =, <,<=, >,>=, 0가 되어야 한다. IN, ALL 등의 비교연산자는 \n다중 행 서브쿼리의 비교연산자 이다.",
+    "explanation": "① 메인 쿼리의 결과가 서브쿼리로 제공될 수도 있고, 서브쿼리의 결과가 메인쿼리로 제공될 수도 있으므로 실행 순서는 상황에 따라 달라진다.\n② 비 연관 서브쿼리가 주로 메인쿼리에 값을 제공하기 위한 목적으로 사용된다.\n③ 단일 행 서브쿼리의 비교연산자는 다중 행 서브쿼리의 비교연산자로 사용할 수 없지만, 반대의 경우는 가능하다.\n④ 단일 행 서브쿼리의 비교연산자로는 =, <,<=, >,>=, 0가 되어야 한다. IN, ALL 등의 비교연산자는 다중 행 서브쿼리의 비교연산자 이다.",
     "chapter": "서브쿼리",
     "_source": "sqld-1140",
     "_origId": "sqld-0118",
@@ -9521,7 +9521,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "위 SQL에는 다중 행 연관 서브쿼리, 단일 행 연관 서브쿼리, Inline View 가 사용되었다"
     ],
     "correctIndex": 1,
-    "explanation": "2014년에 입사한 사원들의 사원, 부서 정보와 부양가족수를 추출하는 SQL이다.\nSELECT 절에 사용된 서브쿼리는 단일행 연관 서브쿼리로 JOIN 으로도 변경이 가능하며, FROM \n절에 사용된 서브쿼리는 Inline View 또는 Dynamic View 이고, WHERE 절에 사용된 서브쿼리는 \n다중행 연관 서브쿼리 이다.\n②번 보기의 경우 이미 FROM절에 Inline View로 사원 테이블의 입사년도 조건을 명시하였으므로 \nWHERE 절의 EXISTS 조건은 부서와 사원 테이블간의 JOIN 조건에 의해 결과에 어떠한 영향도 미치 \n지 못하므로 삭제되어도 무방하다.",
+    "explanation": "2014년에 입사한 사원들의 사원, 부서 정보와 부양가족수를 추출하는 SQL이다.\nSELECT 절에 사용된 서브쿼리는 단일행 연관 서브쿼리로 JOIN 으로도 변경이 가능하며, FROM 절에 사용된 서브쿼리는 Inline View 또는 Dynamic View 이고, WHERE 절에 사용된 서브쿼리는 다중행 연관 서브쿼리 이다.\n②번 보기의 경우 이미 FROM절에 Inline View로 사원 테이블의 입사년도 조건을 명시하였으므로 WHERE 절의 EXISTS 조건은 부서와 사원 테이블간의 JOIN 조건에 의해 결과에 어떠한 영향도 미치지 못하므로 삭제되어도 무방하다.",
     "chapter": "서브쿼리",
     "_source": "sqld-1140",
     "_origId": "sqld-0119",
@@ -9548,7 +9548,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "SELECT B.상품ID, B.상품명, C.평가항목ID, C.평가항목명, A.평가회차,\nA.평가등급, A.평가일자\nFROM 평가결과 A, 평가대상상품 B, 품질평가항목 C,\n(SELECT MAX(평가회차) AS 평가회차 FROM 평가결과) D\nWHERE A.상품ID = B.상품ID\nAND A.평가항목ID = C.평가항목ID\nAND A.평가회차 = D.평가회차;"
     ],
     "correctIndex": 2,
-    "explanation": "① 특정 평가회차에 대한 결과가 아닌, 상품ID, 평가항목ID별로 개별 MAX값을 구하므로 원하는 결과 \n가 아니다.\n② 특정 평가회차에 대한 결과가 아닌, 평가결과 엔터티의 평가회차, 평가등급, 평가일자 속성에 대해 \n서 개별 MAX 값을 구하므로 원하는 결과가 아니다.\n③ 연관 서브쿼리를 활용하여 특정 상품, 평가항목별로 최종 평가회차와 Join을 수행하여 원하는 \n결과를 출력한다.\n④ Inline View D 에서 평가결과 엔터티의 특정상품 및 평가항목에 대한 최종 평가회차가 아닌 전체 \n데이터 중 평가회차가 가장 큰 값을 가지고 JOIN을 수행하므로 원하는 결과가 아니다.",
+    "explanation": "① 특정 평가회차에 대한 결과가 아닌, 상품ID, 평가항목ID별로 개별 MAX값을 구하므로 원하는 결과가 아니다.\n② 특정 평가회차에 대한 결과가 아닌, 평가결과 엔터티의 평가회차, 평가등급, 평가일자 속성에 대해서 개별 MAX 값을 구하므로 원하는 결과가 아니다.\n③ 연관 서브쿼리를 활용하여 특정 상품, 평가항목별로 최종 평가회차와 Join을 수행하여 원하는 결과를 출력한다.\n④ Inline View D 에서 평가결과 엔터티의 특정상품 및 평가항목에 대한 최종 평가회차가 아닌 전체 데이터 중 평가회차가 가장 큰 값을 가지고 JOIN을 수행하므로 원하는 결과가 아니다.",
     "chapter": "서브쿼리",
     "_source": "sqld-1140",
     "_origId": "sqld-0120",
@@ -9577,7 +9577,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "UPDATE 부서 A SET 담당자 = (SELECT C.부서코드\nFROM (SELECT 부서코드, MAX(변경일자) AS 변경일자\nFROM 부서임시\nGROUP BY 부서코드) B, 부서임시 C\nWHERE B.부서코드 = C.부서코드\nAND B.변경일자 = C.변경일자\nAND A.부서코드 = C.부서코드)"
     ],
     "correctIndex": 1,
-    "explanation": "① ④과 같은 사유로 부서코드 A007, A008을 제외한 모든 데이터가 NULL 값으로 변경된다. 또한 \n변경일자를 하드 코딩하는 것은 답이 될 수 없다.\n③ WHERE 절 조건이 부서임시가 아닌 부서 테이블이므로 A007, A008을 제외한 모든 데이터가 NULL \n값으로 변경된다. \n④ 연관 서브쿼리를 활용한 UPDATE 에서 WHERE절은 UPDATE 대상이 되는 데이터의 범위를 결정하 \n게 되는데, WHERE 절이 누락되어 부서의 모든 데이터가 UPDATE 대상이 되므로 부서코드 A007, \nA008을 제외한 모든 데이터가 NULL 값으로 변경된다.",
+    "explanation": "① ④과 같은 사유로 부서코드 A007, A008을 제외한 모든 데이터가 NULL 값으로 변경된다. 또한 변경일자를 하드 코딩하는 것은 답이 될 수 없다.\n③ WHERE 절 조건이 부서임시가 아닌 부서 테이블이므로 A007, A008을 제외한 모든 데이터가 NULL 값으로 변경된다.\n④ 연관 서브쿼리를 활용한 UPDATE 에서 WHERE절은 UPDATE 대상이 되는 데이터의 범위를 결정하게 되는데, WHERE 절이 누락되어 부서의 모든 데이터가 UPDATE 대상이 되므로 부서코드 A007, A008을 제외한 모든 데이터가 NULL 값으로 변경된다.",
     "chapter": "서브쿼리",
     "_source": "sqld-1140",
     "_origId": "sqld-0121",
@@ -9791,7 +9791,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "SELECT (CASE GROUPING(B.지역명) WHEN 0 THEN '지역전체'\nELSE B.지역명 END) AS 지역명\n,(CASE GROUPING(TO_CHAR(A.이용일시, 'YYYY.MM'))\nWHEN 0 THEN '월별합계'\nELSE TO_CHAR(A.이용일시, 'YYYY.MM') END) AS 이용월\n,SUM(A.이용량) AS 이용량\nFROM 이용내역 A INNER JOIN 지역 B ON (A.지역ID = B.지역ID)\nGROUP BY ROLLUP(B.지역명, TO_CHAR(A.이용일시, 'YYYY.MM'))"
     ],
     "correctIndex": 2,
-    "explanation": "위의 결과 데이터는 지역에 대해서 월별 이용량 및 소계와 전체 이용량을 출력하였으므로, ROLLUP \n함수를 활용할 수 있다. ROLLUP 집계 그룹 함수는 나열된 컬럼에 대해 계층 구조로 집계를 출력하는 \n함수로서 ROLLUP(A, B)를 수행하면 (A, B)별 집계, A별 집계와 전체 집계를 출력할 수 있다. \n④번 보기의 경우 CASE 절의 GROUPING 함수의 사용이 잘못 (0이 아닌 1이 되어야 함) 되었으며, \n②번 보기처럼 CUBE를 사용하게 되면, 결합 가능한 모든 값에 대하여 다차원 집계를 생성하게 된다. \n①번 보기처럼 GROUPING SETS를 사용하게 되면 계층구조 없이 지역에 대한 합계와 월별 합계를 \n각각 생성하게 된다.",
+    "explanation": "위의 결과 데이터는 지역에 대해서 월별 이용량 및 소계와 전체 이용량을 출력하였으므로, ROLLUP 함수를 활용할 수 있다. ROLLUP 집계 그룹 함수는 나열된 컬럼에 대해 계층 구조로 집계를 출력하는 함수로서 ROLLUP(A, B)를 수행하면 (A, B)별 집계, A별 집계와 전체 집계를 출력할 수 있다.\n④번 보기의 경우 CASE 절의 GROUPING 함수의 사용이 잘못 (0이 아닌 1이 되어야 함) 되었으며,\n②번 보기처럼 CUBE를 사용하게 되면, 결합 가능한 모든 값에 대하여 다차원 집계를 생성하게 된다.\n①번 보기처럼 GROUPING SETS를 사용하게 되면 계층구조 없이 지역에 대한 합계와 월별 합계를 각각 생성하게 된다.",
     "chapter": "그룹 함수",
     "_source": "sqld-1140",
     "_origId": "sqld-0125",
@@ -9881,7 +9881,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "일반 그룹 함수를 사용하여 CUBE, GROUPING SETS와 같은 그룹함수와 동일한 결과를 추출할 수 있으나, ROLLUP 그룹 함수와 동일한 결과는 추출할 수 없다."
     ],
     "correctIndex": 0,
-    "explanation": "② CUBE, ROLLUP, GROUPING SETS 함수들에 의해 집계된 레코드에서 집계 대상 컬럼 이외의 \nGROUP 대상 컬럼의 값은 NULL을 반환한다.\n③  함수의 인자로 주어진 컬럼의 순서에 따라 다른 결과를 추출하게 되는 그룹 함수는 ROLLUP 이며, \n나열된 컬럼에 대해 계층 구조로 집계를 출력한다.\n④ CUBE, GROUPING SETS, ROLLUP 세가지 그룹 함수 모두 일반 그룹 함수로 동일한 결과를 \n추출할 수 있다.",
+    "explanation": "② CUBE, ROLLUP, GROUPING SETS 함수들에 의해 집계된 레코드에서 집계 대상 컬럼 이외의 GROUP 대상 컬럼의 값은 NULL을 반환한다.\n③ 함수의 인자로 주어진 컬럼의 순서에 따라 다른 결과를 추출하게 되는 그룹 함수는 ROLLUP 이며, 나열된 컬럼에 대해 계층 구조로 집계를 출력한다.\n④ CUBE, GROUPING SETS, ROLLUP 세가지 그룹 함수 모두 일반 그룹 함수로 동일한 결과를 추출할 수 있다.",
     "chapter": "그룹 함수",
     "_source": "sqld-1140",
     "_origId": "sqld-0126",
@@ -10328,7 +10328,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "WINDOW FUNCTION을 GROUP BY 절과 함께 사용하였으므로 위의 SQL은 오류가 발생한다."
     ],
     "correctIndex": 1,
-    "explanation": "GROUP BY 절의 집합을 원본으로 하는 데이터를 WINDOW FUNCTION과 함께 사용한다면 GROUP \nBY 절과 함께 WINDOW FUNCTION을 사용한다고 하더라도 오류가 발생하지 않으며, 유사개수 컬럼 \n은 상품분류코드로 GROUPING된 집합을 원본집합으로 하여 상품분류코드별 평균상품가격을 서로 \n비교하여 현재 읽혀진 상품분류코드의 평균가격 대비 -10000 ~ +10000사이에 존재하는 상품분류코 \n드의 개수를 구한 것이다.",
+    "explanation": "GROUP BY 절의 집합을 원본으로 하는 데이터를 WINDOW FUNCTION과 함께 사용한다면 GROUP BY 절과 함께 WINDOW FUNCTION을 사용한다고 하더라도 오류가 발생하지 않으며, 유사개수 컬럼은 상품분류코드로 GROUPING된 집합을 원본집합으로 하여 상품분류코드별 평균상품가격을 서로 비교하여 현재 읽혀진 상품분류코드의 평균가격 대비 -10000 ~ +10000사이에 존재하는 상품분류코드의 개수를 구한 것이다.",
     "chapter": "윈도우 함수",
     "_source": "sqld-1140",
     "_origId": "sqld-0134",
@@ -10583,7 +10583,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "물리적 데이터 모델링"
     ],
     "correctIndex": 1,
-    "explanation": "-전시적 관점에서 기업의 데이터를 모델링한다.\n-추상화 수준이 가장 높은 모델링이다.\n-계층형 데이터 모델, 네트워크 모델, 관계형 모델에 관계없이 업무 측면에서 모델링을 한다.",
+    "explanation": "추상화 수준이 가장 높고, 업무 중심으로 포괄적인 범위를 다루며, 전사적 데이터 모델링이나 EA(전사 아키텍처) 수립에 쓰이는 것은 개념적 데이터 모델링이다(②). 계층형·네트워크·관계형 같은 DB 종류와 관계없이 업무 관점에서 그린다. 논리 모델링은 키·속성·관계를 자세히 정하고, 물리 모델링은 실제 저장 구조를 정한다.",
     "chapter": "데이터 모델링 기법",
     "_source": "sqld-1140",
     "_origId": "sqld-0153",
@@ -10592,7 +10592,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "text",
-        "content": "-추상화 수준이 높고 업무 중심적이며 포괄적인 수준의 모델링을 진행한다.\n-전시적 데이터 모델링 또는 EA 수립 시 많이 이용된다."
+        "content": "-추상화 수준이 높고 업무 중심적이며 포괄적인 수준의 모델링을 진행한다.\n-전사적 데이터 모델링 또는 EA 수립 시 많이 이용된다."
       }
     ]
   },
@@ -11038,7 +11038,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "select * from SQLD_66 where not ((COL1 ='x' and COL2 = 'y') or (COL1 ='m' and COL2 ='n'));"
     ],
     "correctIndex": 3,
-    "explanation": "정답은 4번이다. 이미지의 기준 SQL은 (x, y), (m, n) 두 행만 반환한다. 1번은 OR 조건으로 같은 두 행을 찾고, 2번은 나머지 네 행을 제외하는 방식이므로 역시 같은 결과가 된다. 3번도 두 쌍을 직접 OR로 연결한 동치 표현이다. 반면 4번은 두 조건 전체를 NOT으로 뒤집어 나머지 행들을 반환하므로 기준 SQL과 다른 값을 반환한다.",
+    "explanation": "기준 SQL 은 (x, y), (m, n) 두 행을 돌려준다. ① 은 COL1 이 x·m, COL2 가 y·n 인 조합을 찾는데 표에 (x, n), (m, y) 행이 없어 같은 두 행이고, ② 는 나머지 네 쌍이 아닌 행이라 역시 같은 두 행, ③ 은 두 쌍을 그대로 풀어 쓴 것이다. ④ 는 그 두 쌍을 NOT 으로 제외해 나머지 네 행을 돌려주므로 결과가 다르다.",
     "chapter": "DML",
     "_source": "sqld-1140",
     "_origId": "sqld-0198",
@@ -11442,7 +11442,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "SELECT E.이름\nFROM 직원 AS E\nWHERE E.직원번호 LIKE (SELECT 직원번호 FROM 부양가족 WHERE E.성별 = 성별);"
     ],
     "correctIndex": 1,
-    "explanation": "①부양가족이 존재하지 않고 성별이 같은 직원 이름을 조회한다.\n③부양가족이 존재하지 않는 직원 이름을 조회한다.\n④LIKE 문이 IN으로 변경된다. 하지만 ④번은 오류이다.",
+    "explanation": "'자신과 성별이 같은 부양가족이 있는 직원' 이므로, 부양가족 중 직원번호와 성별이 모두 같은 행이 있는지 EXISTS 로 확인한다(②). ① 은 NOT EXISTS 라 그런 부양가족이 없는 직원, ③ 은 부양가족이 아예 없는 직원을 찾는다. ④ 는 여러 행을 돌려줄 수 있는 서브쿼리를 LIKE 로 비교해 오류가 난다.",
     "chapter": "서브쿼리",
     "_source": "sqld-1140",
     "_origId": "sqld-0211",
@@ -11698,7 +11698,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "SELECT 영업사원, 판매월, sum(매출) over (partition by 영업사원 order by 판매월 range between unbounded preceding and current row) 누적매출 from 매출;"
     ],
     "correctIndex": 3,
-    "explanation": "Select 영업사원, 판매월, sum(매출) over (partition by 영업사원 order by 판매월 range between unbounded preceding and current row) 누적매출 from 매출;\n영업사원별 누적 매출이므로 \"partition by 영업사원\"을 사용해야 한다. 그리고 unbounded preceding와 current row는 시작부터 현재행까지를 의미한다.",
+    "explanation": "영업사원별로 판매월 순서대로 매출을 누적해야 하므로 PARTITION BY 영업사원 ORDER BY 판매월 에 RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW(처음부터 현재 행까지)를 쓴다(④). ② 는 판매월로 나눠 기준이 다르고, ③ 은 BETWEEN 의 끝(AND CURRENT ROW)이 빠져 문법 오류, ① 은 FROM 테이블이 없고 윈도우 함수도 아니다.",
     "chapter": "윈도우 함수",
     "_source": "sqld-1140",
     "_origId": "sqld-0217",
@@ -11932,7 +11932,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "0"
     ],
     "correctIndex": 0,
-    "explanation": "SELECT문을 보면 department로  GROUP BY한다. 그러면 총 3개의 그룹이 만들어진다. computer, physics, math이다. 3개의 그룹 중에서 개수가 2개 초과인 것을 조회하기 위해서 \"HAVING count(*) >2\" 문을 사용했다. 따라서 2개 초과인 것은 math이고 math는 총 3개가 있으므로 3이 된다.",
+    "explanation": "department 로 묶으면 computer 2명, physics 2명, math 3명이다. HAVING count(*) > 2 를 만족하는 그룹은 math 하나뿐이고, SELECT 하는 값은 그 그룹의 count(*) 인 3 이다(①). 결과 행 수(1)가 아니라 출력되는 값을 묻는 문제다.",
     "chapter": "그룹 함수",
     "_source": "sqld-1140",
     "_origId": "sqld-0234",
@@ -12305,7 +12305,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "SELECT 출판사명 FROM 도서\nWHERE 발행연도 >= 2000\nORDER BY  COUNT(도서번호) >= 10;"
     ],
     "correctIndex": 0,
-    "explanation": "문제에서 10권 이상 구매한 사람을 출력하기 위해서 \"HAVING COUNT(도서번호)=10\" 의 HAVING 절을 추가하고 발행연도가 2000 이후 이므로 WHERE절에 \"발행연도 >= 2000\"을 넣어야 한다. 또한 출판사명은 이름에 중복이 없어야 하므로 GROUP BY구로 \"출판사명\"을 추가하면 된다.",
+    "explanation": "'2000년 이후 발행' 은 그룹을 만들기 전에 행을 거르는 조건이라 WHERE 발행연도 >= 2000 에, '10권 이상' 은 출판사별로 센 결과에 거는 조건이라 HAVING COUNT(도서번호) >= 10 에 써야 한다(①). GROUP BY 출판사명 으로 출판사가 한 번씩만 나온다. ②③ 처럼 WHERE 에 집계 함수를 쓰면 오류이고, ④ 는 그룹을 만들지 않는다.",
     "chapter": "그룹 함수",
     "_source": "sqld-1140",
     "_origId": "sqld-0251",
@@ -12637,7 +12637,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "1"
     ],
     "correctIndex": 1,
-    "explanation": "select * from A union select * from B를 실행하면 1,2,3,4,5가 반환된다. 해당 결과에 MINUS 조인을 하면 4,5가 빠지기 때문에 최종적으로 1,2,3 이 된다.",
+    "explanation": "Oracle 은 집합 연산자를 위에서부터 차례로 계산한다. A1 UNION B1 = {1, 2, 3, 4, 5} 이고, 여기서 MINUS C1 = {4, 5} 를 빼면 {1, 2, 3} 이 남아 3행이다(②).",
     "chapter": "집합 연산자",
     "_source": "sqld-1140",
     "_origId": "sqld-0277",
@@ -13522,7 +13522,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "INSERT into Mytest values(1,12,sysdate,002)"
     ],
     "correctIndex": 0,
-    "explanation": "①의 경우 20220420이라는 숫자형 값을 바로 DATE에 넣어 데이터타입 불일치 에러가 발생한다. TO_DATE(20220420)으로 바꾸어야 한다.\n",
+    "explanation": "①의 경우 20220420이라는 숫자형 값을 바로 DATE에 넣어 데이터타입 불일치 에러가 발생한다. TO_DATE(20220420)으로 바꾸어야 한다.",
     "chapter": "DML",
     "_source": "sqld-1140",
     "_origId": "sqld-0296",
@@ -13628,7 +13628,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "DEPTNO, JOB"
     ],
     "correctIndex": 1,
-    "explanation": "주어진 결괏값을 보면 1, DEPTNO별 합계, 2.DEPTNO,JOB별 합계, 3.전체 합계가 조회되므로 빈칸에는 그룹 함수 중 ROLLUP이 와야 한다.",
+    "explanation": "결과를 보면 (DEPTNO, JOB) 별 합계, DEPTNO 별 소계(JOB 이 빈 행), 맨 아래 전체 합계가 있다. 왼쪽 칼럼부터 계층적으로 소계를 만드는 ROLLUP(DEPTNO, JOB) 의 결과다(②). CUBE 였다면 JOB 별 소계도 나오고, GROUPING SETS(DEPTNO, JOB) 은 (DEPTNO, JOB) 조합과 전체 합계가 없다.",
     "chapter": "그룹 함수",
     "_source": "sqld-1140",
     "_origId": "sqld-0299",
@@ -14057,7 +14057,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "A : 기본키, B : 대체키"
     ],
     "correctIndex": 1,
-    "explanation": "-내부 식별자는 엔터티 내부에서 스스로 생성되는 식별자이다.\n-예를 들어 부서코드, 주문번호, 종목코드 등이 있다.\n-외부 식별자는 다른 엔터티의 관계로 인하여 만들어지는 식별자이다.\n-예를 들어 계좌 엔터티에 회원ID이다.",
+    "explanation": "식별자를 스스로 만드는지에 따라 나누면, 엔터티 안에서 스스로 생기는 것은 내부 식별자(예: 부서코드, 주문번호), 다른 엔터티와의 관계로 받아 온 것은 외부 식별자(예: 계좌 엔터티의 회원ID)다. 그래서 A 는 내부, B 는 외부 식별자다(②).",
     "chapter": "데이터 모델 개념",
     "_source": "sqld-1140",
     "_origId": "sqld-0310",
@@ -14650,7 +14650,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "select * from Mytest where COL1 = 1 and  (COL2 = 3 or COL2 = 4);"
     ],
     "correctIndex": 3,
-    "explanation": "주어진 SQL문은 COL1, COL2 값이 각각(1,3) (1,4)인 행들만 조회되는 SQL문이다.\n이와 같은 값을 반환하는 보기는 COL1이 1이면서 COL2가 3 또는 4인 값을 조회하는 ④번 보기이다.",
+    "explanation": "주어진 SQL문은 COL1, COL2 값이 각각(1,3) (1,4)인 행들만 조회되는 SQL문이다. 이와 같은 값을 반환하는 보기는 COL1이 1이면서 COL2가 3 또는 4인 값을 조회하는 ④번 보기이다.",
     "chapter": "DML",
     "_source": "sqld-1140",
     "_origId": "sqld-0333",
@@ -16546,7 +16546,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "ORDER BY 속성에 숫자와 칼럼을 혼용하여 사용할 수 있다."
     ],
     "correctIndex": 0,
-    "explanation": "ORDER BY는 기본적으로 오름차순 정렬이다. \n내림차순 정렬은 'ORDER BY 속성 DESC'형식으로 해당 속성 뒤에 DESC를 붙여준다.",
+    "explanation": "ORDER BY는 기본적으로 오름차순 정렬이다. 내림차순 정렬은 'ORDER BY 속성 DESC'형식으로 해당 속성 뒤에 DESC를 붙여준다.",
     "chapter": "DML",
     "_source": "sqld-1140",
     "_origId": "sqld-0391",
@@ -16599,7 +16599,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "중복을 포함한 결과의 합을 검색한다."
     ],
     "correctIndex": 0,
-    "explanation": "①번 보기는 INTERSECT 연산자로 중복된 행을 하나의 행으로 표시하고\n②번 보기는 MINUS\n③번 보기는 UNION 연산자\n④번 보기는 UNION ALL 이다.",
+    "explanation": "INTERSECT 는 양쪽 결과에 모두 있는 행만 돌려주는 교집합이다(①, 중복은 한 번만). ② 차집합은 MINUS, ③ 중복을 없앤 합집합은 UNION, ④ 중복을 포함한 합집합은 UNION ALL 이다.",
     "chapter": "집합 연산자",
     "_source": "sqld-1140",
     "_origId": "sqld-0394",
@@ -16641,7 +16641,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "670, 15, 5"
     ],
     "correctIndex": 1,
-    "explanation": "SQL1) 645건 : 사원 500명 + 대리 100명 + 과장 30명 + 차장 10명 + 부장 5명\nSQL2) 15건 : 차장10명 + 부장 5명\nSQL3) 6건 : 5개 직급 + NULL",
+    "explanation": "SQL1 의 COUNT(GRADE) 는 NULL 25명을 빼고 500 + 100 + 30 + 10 + 5 = 645 다. SQL2 의 IN 목록에서 '널' 은 NULL 이 아니라 '널' 이라는 글자라 맞는 행이 없고, 차장 10 + 부장 5 = 15 행이다. SQL3 은 GROUP BY 에서 NULL 도 하나의 그룹이 되어 직급 5개 + NULL 1개 = 6 그룹이다. 정답은 645, 15, 6(②).",
     "chapter": "그룹 함수",
     "_source": "sqld-1140",
     "_origId": "sqld-0396",
@@ -17051,7 +17051,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "금액A"
     ],
     "correctIndex": 1,
-    "explanation": "②번 보기에서의 연산자인 NULLIF는 COL2와 COL3이 동일하면 NULL을, 동일하지 않으면 COL2를 반환하는데 3번째 행에서 COL2, COL3 값이 다르므로 해당 행에서의 COL2 값인 NULL 값을 반환한다.",
+    "explanation": "금액A(NVL), 금액B(COALESCE), 금액D(CASE WHEN COL2 IS NOT NULL THEN COL2 ELSE COL3)는 모두 'COL2 가 있으면 COL2, 없으면 COL3' 이라 결과가 같다. 금액C 의 NULLIF(COL2, COL3) 는 두 값이 같으면 NULL, 다르면 COL2 를 돌려주는 전혀 다른 함수라 결과가 다르다(②).",
     "chapter": "함수",
     "_source": "sqld-1140",
     "_origId": "sqld-0415",
@@ -17843,7 +17843,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "ㄱ : RANK(), ㄴ : ROW_NUMBER()"
     ],
     "correctIndex": 3,
-    "explanation": "첫 번째 실행 결과는 급여가 동일하므로 같은 등수가 조회되었다. 따라서 RANK() 함수이다.\n두 번째 실행 결과는 급여가 동일하지만 유일한 등수가 부여되었다. 따라서 ROW_NUMBER() 함수이다.",
+    "explanation": "첫 번째 실행 결과는 급여가 동일하므로 같은 등수가 조회되었다. 따라서 RANK() 함수이다. 두 번째 실행 결과는 급여가 동일하지만 유일한 등수가 부여되었다. 따라서 ROW_NUMBER() 함수이다.",
     "chapter": "윈도우 함수",
     "_source": "sqld-1140",
     "_origId": "sqld-0435",
@@ -18464,7 +18464,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "RANK 함수는 동일순위 처리가 가능하다."
     ],
     "correctIndex": 0,
-    "explanation": "순위 함수 RANK, ROW_NUMBER, DENSE_RANK에 ORDER BY를 사용해서 순위를 기준으로 오름차순 혹은 내림차순으로 출력할 수 있다.",
+    "explanation": "RANK·DENSE_RANK·ROW_NUMBER 는 무엇을 기준으로 순위를 매길지 알아야 하므로 OVER 안에 ORDER BY 를 반드시 써야 한다. '입력하지 않아도 된다' 는 ① 이 틀렸다. ② ROW_NUMBER 는 동점이어도 다른 번호, ③ DENSE_RANK 는 동점 뒤 순위를 건너뛰지 않고, ④ RANK 는 동점에 같은 순위를 준다.",
     "chapter": "윈도우 함수",
     "_source": "sqld-1140",
     "_origId": "sqld-0454",
@@ -18512,7 +18512,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "1"
     ],
     "correctIndex": 0,
-    "explanation": "(1)번은 NAME에 DATE 타입의 데이터를 입력하여 오류가 발생한다.\n(2)번은 AGE가 NOT NULL인데 null을 입력하여 오류가 발생한다.\n(3)번은 ID의 기본키 값을 입력하지 않아서 오류가 발생한다.",
+    "explanation": "(1)번은 NAME에 DATE 타입의 데이터를 입력하여 오류가 발생한다. (2)번은 AGE가 NOT NULL인데 null을 입력하여 오류가 발생한다. (3)번은 ID의 기본키 값을 입력하지 않아서 오류가 발생한다.",
     "chapter": "DML",
     "_source": "sqld-1140",
     "_origId": "sqld-0457",
@@ -19016,7 +19016,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "select * from  kpipool where subkpi = 20;"
     ],
     "correctIndex": 3,
-    "explanation": "④번의 SQL문 subkpi가 20번인 행을 조회한다. 그리고 문제에서 제시한 SQL문도 in구로 (20,10)을 사용했으므로 똑같이 subkpi가 20인 행이 조회된다.",
+    "explanation": "주어진 SQL 의 (20, 10) 은 subkpi 20 인 행(mainkpi 10)과 맞고, (0, 30) 은 맞는 행이 없어 subkpi 20 한 행만 나온다. ④ subkpi = 20 도 같은 한 행이다. ③ 은 subkpi 10 행까지 2행, ①② 는 맞는 (subkpi, mainkpi) 쌍이 없어 결과가 다르다.",
     "chapter": "집합 연산자",
     "_source": "sqld-1140",
     "_origId": "sqld-0470",
@@ -20468,7 +20468,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "SELECT COALESCE(1,2,3) FROM DUAL;"
     ],
     "correctIndex": 3,
-    "explanation": "\"COALESCE(mgr,1)\"은 mgr이 NULL이 아니면 1을 반환한다. 따라서 1번 지문은 \"1\"이 조회된다. 나머지는 모두 NULL이 조회된다.",
+    "explanation": "④ COALESCE(1, 2, 3) 은 처음 나오는 NULL 이 아닌 값 1 을 돌려준다. 나머지는 모두 NULL 이다. ① NULLIF('A', 'A') 는 두 값이 같아 NULL, ② DECODE('A', 'B', 'C', NULL) 은 'A' 가 'B' 와 달라 기본값 NULL, ③ CASE 0 WHEN 1 … 은 0 이 1 이 아니라 ELSE NULL 이다.",
     "chapter": "함수",
     "_source": "sqld-1140",
     "_origId": "sqld-0535",
@@ -21347,7 +21347,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "한 명의 고객은 여러 개의 서비스를 구매할 수 있다."
     ],
     "correctIndex": 0,
-    "explanation": "고객과 서비스 구매의 관계의 차수는 1 이므로 하나의 고객이 여러 서비스를 구매할 수 있다. 또한 고객 -> 서비스 구매는 선택적 관계이므로 어떤 고객은 서비스를 구매하지 않아도 되지만, 반대는 필수적 관계이므로 서비스 구매는 구매한 고객이 반드시 정의되어야 한다. \n",
+    "explanation": "고객과 서비스 구매의 관계의 차수는 1 이므로 하나의 고객이 여러 서비스를 구매할 수 있다. 또한 고객 -> 서비스 구매는 선택적 관계이므로 어떤 고객은 서비스를 구매하지 않아도 되지만, 반대는 필수적 관계이므로 서비스 구매는 구매한 고객이 반드시 정의되어야 한다.",
     "chapter": "엔터티",
     "_source": "sqld-1140",
     "_origId": "sqld-0574",
@@ -21534,7 +21534,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "오라클에서는 GROUP BY절 위에 HAVING절을 명시할 수 있다."
     ],
     "correctIndex": 1,
-    "explanation": "FROM 절은 ORACLE 에서는 생략 불가하다. GROUP BY 절과 HAVING 절은 순서가 바뀌어도 상관없으나 가급적 순서대로 사용한다. \n",
+    "explanation": "FROM 절은 ORACLE 에서는 생략 불가하다. GROUP BY 절과 HAVING 절은 순서가 바뀌어도 상관없으나 가급적 순서대로 사용한다.",
     "chapter": "DML",
     "_source": "sqld-1140",
     "_origId": "sqld-0581",
@@ -21809,7 +21809,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "500, 100, 400, 600"
     ],
     "correctIndex": 0,
-    "explanation": "SUM(COL2)는 NULL 만 제외하고 총합을 리턴하므로 500 이 출력된다. 하지만 2 번 지문의 경우 COL1 > 0 조건에 \n만족하는 행은 첫 번째 행 하나이므로 SUM(COL2) + SUM(COL3) = NULL + 100 이 되며, 이때는 NULL 이 리턴된다. ",
+    "explanation": "SUM(COL2)는 NULL 만 제외하고 총합을 리턴하므로 500 이 출력된다. 하지만 2 번 지문의 경우 COL1 > 0 조건에 만족하는 행은 첫 번째 행 하나이므로 SUM(COL2) + SUM(COL3) = NULL + 100 이 되며, 이때는 NULL 이 리턴된다.",
     "chapter": "함수",
     "_source": "sqld-1140",
     "_origId": "sqld-0593",
@@ -22663,7 +22663,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "정규화는 모델의 일관성을 확보하고 중복을 제거하여 모델의 독립성을 확보하는 과정이다."
     ],
     "correctIndex": 2,
-    "explanation": "제1정규화 : 속성의 원자성(한 속성이 하나의 값을 갖는 특성)을 갖도록 엔터티를 분해하는 단계 \n제2정규화 : 제1정규화를 진행한 엔터티에 대해 완전 함수 종속을 갖도록 분해하는 단계 \n제3정규화 : 제2정규화를 진행한 엔터티에 대해 이행적 종속을 갖지 않도록 분해하는 단계  -> 일반속성은 주식별자 전체에 종속적이다",
+    "explanation": "제1정규화 : 속성의 원자성(한 속성이 하나의 값을 갖는 특성)을 갖도록 엔터티를 분해하는 단계 제2정규화 : 제1정규화를 진행한 엔터티에 대해 완전 함수 종속을 갖도록 분해하는 단계 제3정규화 : 제2정규화를 진행한 엔터티에 대해 이행적 종속을 갖지 않도록 분해하는 단계 -> 일반속성은 주식별자 전체에 종속적이다",
     "chapter": "정규화",
     "_source": "sqld-1140",
     "_origId": "sqld-0626",
@@ -22747,7 +22747,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "SELECT T.COL1 C1, T.COL2 AS C2 FROM TABLE1 T WHERE T.COL1 = 4;"
     ],
     "correctIndex": 1,
-    "explanation": "1번 → 큰따옴표 없는 C1 은 대문자 C1 로 저장되고, 큰따옴표로 감싼 소문자 \"c1\" 은 대소문자를 구분하므로 서로 다른 별칭 → 정상\n2번 → TABLE1.COL2 사용 오류\n→ FROM TABLE1 T로 별칭을 줬으면 TABLE1 대신 T만 사용 가능 → 오류\n3번 → GROUP BY 정상\n4번 → 일반 조회 정상",
+    "explanation": "1번 → 큰따옴표 없는 C1 은 대문자 C1 로 저장되고, 큰따옴표로 감싼 소문자 \"c1\" 은 대소문자를 구분하므로 서로 다른 별칭 → 정상 2번 → TABLE1.COL2 사용 오류 → FROM TABLE1 T로 별칭을 줬으면 TABLE1 대신 T만 사용 가능 → 오류 3번 → GROUP BY 정상 4번 → 일반 조회 정상",
     "chapter": "DML",
     "_source": "sqld-1140",
     "_origId": "sqld-0631",
@@ -23385,7 +23385,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "NULL"
     ],
     "correctIndex": 1,
-    "explanation": "T2.COL2 값의 그룹별로 COL3의 평균보다 T1.COL3의 값이 큰 행을 찾고, 이들의 T1.COL1의 총 합을 구하는 질의절이다. T2에서 COL2의 값이 A인 그룹의 AVG(COL3)은 20이므로 T1에서 A그룹이면서 COL3의 값이 20보다 크거나 같은 대상을 찾으면 0건이 출력된다. 마찬가지로 T2에서 B그룹의AVG(COL3)을 구하면 20이고, T1의 B그룹중 COL3\n의 값이 20보다 크거나 같은 행은 COL1의 값이 4,5인 행이므로 최종 결과는 9가 리턴된다. ",
+    "explanation": "T2.COL2 값의 그룹별로 COL3의 평균보다 T1.COL3의 값이 큰 행을 찾고, 이들의 T1.COL1의 총 합을 구하는 질의절이다. T2에서 COL2의 값이 A인 그룹의 AVG(COL3)은 20이므로 T1에서 A그룹이면서 COL3의 값이 20보다 크거나 같은 대상을 찾으면 0건이 출력된다. 마찬가지로 T2에서 B그룹의AVG(COL3)을 구하면 20이고, T1의 B그룹중 COL3 의 값이 20보다 크거나 같은 행은 COL1의 값이 4,5인 행이므로 최종 결과는 9가 리턴된다.",
     "chapter": "그룹 함수",
     "_source": "sqld-1140",
     "_origId": "sqld-0654",
@@ -24032,7 +24032,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "CEIL(-12.345) = -13"
     ],
     "correctIndex": 3,
-    "explanation": "CEIL은 값보다 크면서 가장 작은 정수인 올림값을 리턴한다. 따라서 -12.345보다 값이 크면서 가장 작은 정수는    -12이다. 반대로 FLOOR는 값보다 작으면서 가장 큰 정수인 내림값을 리턴하므로 FLOOR(-12.345) 값은 -13이다.",
+    "explanation": "CEIL 은 그 값보다 크거나 같은 가장 작은 정수(올림)라 CEIL(-12.345) = -12 다. -13 이라는 ④ 가 틀렸다. 음수에서 올림은 0 쪽으로 간다는 점에 주의한다. FLOOR(-12.345) 는 작거나 같은 가장 큰 정수라 -13(③), SIGN(0) = 0(①), MOD(8, 3) = 2(②) 는 맞다.",
     "chapter": "함수",
     "_source": "sqld-1140",
     "_origId": "sqld-0686",
@@ -24053,7 +24053,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "SELECT DECODE(DEPTNO, 10, DECODE(JOB, 'CLERK', 'A', 'B'), 20, 'C', 'D') \n    FROM EMP;"
     ],
     "correctIndex": 2,
-    "explanation": "3번은 ELSE 뒤에 다시 WHEN이 나와 CASE 문 문법 순서를 위반했다.\nCASE에서는 ELSE는 마지막에 한 번만 사용 가능하며 이후 WHEN은 올 수 없다.\n따라서 해당 SQL은 문법적으로 잘못된 구문이다.",
+    "explanation": "3번은 ELSE 뒤에 다시 WHEN이 나와 CASE 문 문법 순서를 위반했다. CASE에서는 ELSE는 마지막에 한 번만 사용 가능하며 이후 WHEN은 올 수 없다. 따라서 해당 SQL은 문법적으로 잘못된 구문이다.",
     "chapter": "DML",
     "_source": "sqld-1140",
     "_origId": "sqld-0688",
@@ -24347,7 +24347,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "100"
     ],
     "correctIndex": 1,
-    "explanation": "TAB2의 STATUS가 OPEN인 CODE는 0002와 0004이므로 TAB1에서 이들을 삭제하면 AAA,BBB만 남는다.  \n이들의 FARE 총합은 600이다. ",
+    "explanation": "TAB2의 STATUS가 OPEN인 CODE는 0002와 0004이므로 TAB1에서 이들을 삭제하면 AAA,BBB만 남는다. 이들의 FARE 총합은 600이다.",
     "chapter": "서브쿼리",
     "_source": "sqld-1140",
     "_origId": "sqld-0702",
@@ -24500,7 +24500,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "RANGE BETWEEN UNBOUNDED PRECEDING AND 1 FOLLOWING"
     ],
     "correctIndex": 0,
-    "explanation": "누적합의 범위가 각 행마다 이전행과 현재행, 다음행을 연산하고 있으므로(JONES 기준 1100 + 2975 + 3000 = 7075) \n1 PRECEDING AND 1 FOLLOWING 이며, SAL이 같은 SCOTT과 FORD의 누적합이 각각 다르게 계산되었으므로 \nROWS가 적절하다. ",
+    "explanation": "누적합의 범위가 각 행마다 이전행과 현재행, 다음행을 연산하고 있으므로(JONES 기준 1100 + 2975 + 3000 = 7075) 1 PRECEDING AND 1 FOLLOWING 이며, SAL이 같은 SCOTT과 FORD의 누적합이 각각 다르게 계산되었으므로 ROWS가 적절하다.",
     "chapter": "그룹 함수",
     "_source": "sqld-1140",
     "_origId": "sqld-0707",
@@ -25576,7 +25576,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "SELECT P.CODE, P.NAME, P.PRICE FROM PRODUCT P, (SELECT CODE, MAX(PRICE) AS MAX_PRICE FROM PRODUCT GROUP BY CODE) I WHERE P.CODE = I.CODE AND P.PRICE = I.MAX_PRICE;"
     ],
     "correctIndex": 0,
-    "explanation": "2, 3, 4번 → 모두 CODE별 최대 PRICE를 조회 → 동일한 결과\n1번 → 상관 서브쿼리에서 PRICE 단일값을 기대하지만, 동일 CODE가 여러 건이면\n서브쿼리가 다중행 반환 → 오류 발생 (single-row subquery error)\n즉, 1번만 정상적인 결과 집합을 반환하지 못하거나 결과가 다름",
+    "explanation": "2, 3, 4번 → 모두 CODE별 최대 PRICE를 조회 → 동일한 결과 1번 → 상관 서브쿼리에서 PRICE 단일값을 기대하지만, 동일 CODE가 여러 건이면 서브쿼리가 다중행 반환 → 오류 발생 (single-row subquery error) 즉, 1번만 정상적인 결과 집합을 반환하지 못하거나 결과가 다름",
     "chapter": "서브쿼리",
     "_source": "sqld-1140",
     "_origId": "sqld-0749",
@@ -27571,7 +27571,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "60"
     ],
     "correctIndex": 1,
-    "explanation": "서브쿼리: SELECT MIN(COL1) → 1\n메인쿼리: COL1 = 1인 행 → COL2 = 10, 20\n그 중 MAX(COL2) → 20",
+    "explanation": "서브쿼리: SELECT MIN(COL1) → 1 메인쿼리: COL1 = 1인 행 → COL2 = 10, 20 그 중 MAX(COL2) → 20",
     "chapter": "서브쿼리",
     "_source": "sqld-1140",
     "_origId": "sqld-0835",
@@ -27628,7 +27628,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "오류가 발생한다."
     ],
     "correctIndex": 0,
-    "explanation": "COALESCE는 왼쪽부터 차례로 NULL이 아닌 값을 찾는다.\n'S'는 첫 번째로 만나는 NULL이 아닌 값이므로 그 값이 반환된다.",
+    "explanation": "COALESCE는 왼쪽부터 차례로 NULL이 아닌 값을 찾는다. 'S'는 첫 번째로 만나는 NULL이 아닌 값이므로 그 값이 반환된다.",
     "chapter": "함수",
     "_source": "sqld-1140",
     "_origId": "sqld-0836",
@@ -27682,7 +27682,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "900, 200"
     ],
     "correctIndex": 2,
-    "explanation": "SUM(AMOUNT) → 100 + 200 + 300 = 600\nAVG(NVL(AMOUNT, 0)) → (100 + 0 + 200 + 0 + 300) / 5 = 120",
+    "explanation": "SUM(AMOUNT) → 100 + 200 + 300 = 600 AVG(NVL(AMOUNT, 0)) → (100 + 0 + 200 + 0 + 300) / 5 = 120",
     "chapter": "그룹 함수",
     "_source": "sqld-1140",
     "_origId": "sqld-0840",
@@ -27995,7 +27995,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "아무것도 출력되지 않는다."
     ],
     "correctIndex": 2,
-    "explanation": "A UNION B → 중복 제거된 전체: (1, KIM), (2, LEE), (3, PARK), (4, CHOI)\nA INTERSECT B → 공통된 행: (2, LEE), (3, PARK)\n전체에서 공통된 행을 빼면 → (1, KIM), (4, CHOI)",
+    "explanation": "A UNION B → 중복 제거된 전체: (1, KIM), (2, LEE), (3, PARK), (4, CHOI) A INTERSECT B → 공통된 행: (2, LEE), (3, PARK) 전체에서 공통된 행을 빼면 → (1, KIM), (4, CHOI)",
     "chapter": "집합 연산자",
     "_source": "sqld-1140",
     "_origId": "sqld-0848",
@@ -28070,7 +28070,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "모든 변경은 롤백되어 아무 작업도 반영되지 않는다."
     ],
     "correctIndex": 2,
-    "explanation": "1. SALES 삭제 → 저장점 A\t삭제됨\n2. IT 급여 인상 → 저장점 B\t인상됨\n3. HR에 KIM 추가 → 저장점 C\t추가됨\n4. HR 전체 삭제\tHR 모두 삭제됨\n5. ROLLBACK TO B\t→ HR 삭제 & KIM 추가 모두 취소됨\n6. COMMIT\t→ SALES 삭제, IT 인상만 반영됨",
+    "explanation": "순서대로 보면 SALES 삭제 → SAVEPOINT A → IT 급여 인상 → SAVEPOINT B → KIM(HR) 추가 → SAVEPOINT C → HR 삭제다. ROLLBACK TO B 는 B 이후의 KIM 추가와 HR 삭제를 되돌리고, 그 앞의 SALES 삭제와 IT 인상은 남긴다. 이어서 COMMIT 하면 SALES 삭제·IT 급여 인상만 반영되고 HR 부서는 원래대로 유지된다(③).",
     "chapter": "트랜잭션 관리",
     "_source": "sqld-1140",
     "_origId": "sqld-0849",
@@ -28217,7 +28217,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "UPDATE EMP\n    SET BONUS = NULL;"
     ],
     "correctIndex": 3,
-    "explanation": "MAX(NULL)은 항상 결과가 NULL → 비교 조건과 무관하게 NULL 반환\n따라서 SET BONUS = (SELECT MAX(NULL)...) 은 결국\n→ 모든 대상 행의 BONUS 컬럼을 NULL로 업데이트\n보기 ④는 바로 NULL을 할당하므로 동일한 결과\n",
+    "explanation": "MAX(NULL)은 항상 결과가 NULL → 비교 조건과 무관하게 NULL 반환 따라서 SET BONUS = (SELECT MAX(NULL)...) 은 결국 → 모든 대상 행의 BONUS 컬럼을 NULL로 업데이트 보기 ④는 바로 NULL을 할당하므로 동일한 결과",
     "chapter": "DML",
     "_source": "sqld-1140",
     "_origId": "sqld-0852",
@@ -28716,7 +28716,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "이메일과 전화번호 조합이 유일해야 하며, 단일 컬럼만 비교할 때는 중복을 허용한다."
     ],
     "correctIndex": 3,
-    "explanation": "UNIQUE INDEX (EMAIL, PHONE)는 두 컬럼의 조합이 유일해야 함\n단일 컬럼은 중복 가능 (EMAIL만 같거나, PHONE만 같아도 허용)\nNULL이 포함되면 RDBMS마다 다르지만, 일반적으로 NULL은 서로 다르다고 간주되어 허용\n따라서 조합 전체가 같아야 위반됨",
+    "explanation": "UNIQUE INDEX (EMAIL, PHONE)는 두 컬럼의 조합이 유일해야 함 단일 컬럼은 중복 가능 (EMAIL만 같거나, PHONE만 같아도 허용) NULL이 포함되면 RDBMS마다 다르지만, 일반적으로 NULL은 서로 다르다고 간주되어 허용 따라서 조합 전체가 같아야 위반됨",
     "chapter": "DDL",
     "_source": "sqld-1140",
     "_origId": "sqld-0866",
