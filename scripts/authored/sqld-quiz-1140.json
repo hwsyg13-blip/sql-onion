@@ -6787,10 +6787,10 @@
         "SELECT DEPTNO FROM EMP\nWHERE ROWNUM < 10;",
         "SELECT ENAME FROM EMP\nWHERE ROWNUM = 2;",
         "SELECT EMPNO FROM EMP\nWHERE ROWNUM = 1;",
-        "SELECT ROWNUM, ENAME FROM EMP\nWHERE ROWNUM = 2;"
+        "SELECT ROWNUM, ENAME FROM EMP\nWHERE ROWNUM <= 2;"
       ],
       "correctIndex": 1,
-      "explanation": "ROWNUM은 SELECT문에서 행이 인출될 때 행에 부여되는 일렬번호이다. 만약 ROWNUM을 1,2,3,4 등으로 인출하고 조건에 부여하려면 인라인 뷰를 사용해야 한다."
+      "explanation": "ROWNUM은 SELECT문에서 행이 인출될 때 행에 부여되는 일렬번호이다. ROWNUM = 2 처럼 1이 아닌 값과 같다고 비교하면, 첫 행이 1번을 받자마자 조건에 걸러지고 다음 행도 다시 1번이 되어 계속 걸러지므로 결과가 0건이다. ROWNUM = 1, ROWNUM < N, ROWNUM <= N 은 정상 동작한다. 특정 순번의 행만 꺼내려면 인라인 뷰에서 ROWNUM에 별칭을 붙인 뒤 바깥에서 조건을 건다."
     },
     {
       "_id": "sqld-0231",
@@ -7543,12 +7543,12 @@
       "title": "서브쿼리에 대한 설명으로 올바르지 않은 것은?",
       "options": [
         "서브쿼리는 SELECT, FROM, WHERE 등에서 사용이 가능하다.",
-        "메인쿼리는 스칼라 서브쿼리의 칼럼을 쓸 수 없다.",
+        "서브쿼리 안에서는 메인쿼리의 칼럼을 참조할 수 없다.",
         "서브쿼리는 비교 연산자와 함께 사용이 가능하다.",
         "서브쿼리는 괄호를 사용해서 SELECT문을 감싸서 사용하는 것이다."
       ],
       "correctIndex": 1,
-      "explanation": "서브쿼리의 한 종류인 인라인뷰의 칼럼을 메인 쿼리에서 사용이 가능하다. 서브쿼리는 메인쿼리의 칼럼을 사용할 수 있다. 반대로 메인쿼리는 서브쿼리의 칼럼을 쓸 수 없으므로 스칼라 서브쿼리 등을 사용해야 한다."
+      "explanation": "연관(상관) 서브쿼리는 서브쿼리 안에서 메인쿼리의 칼럼을 참조한다. 따라서 ②가 틀린 설명이다. 반대로 메인쿼리는 서브쿼리 안의 칼럼을 직접 쓸 수 없다(FROM 절의 인라인 뷰 칼럼은 예외)."
     },
     {
       "_id": "sqld-0254",
@@ -8569,13 +8569,13 @@
       "chapter": "윈도우 함수",
       "title": "다음 중 파티션에 대한 설명으로 올바르지 않은 것은?",
       "options": [
-        "AVG(SAL) OVER\n(PARTITION BY MGR\nORDER BY TODAY\nROWS BETWEEN 1 PRECEDING\nAND 1 FOLLOWING)\n: 각 MGR 별로 앞의 한 건, 현재 행, 뒤의 한 건 사이에서 SAL의 평균을 계산한다.",
-        "COUNT(*) OVER\n(ORDER BY SAL)\nRANGE BETWEEN\n10 PRECEDING\nAND 150 FOLLOWING)\n: SAL을 기준으로 현재 행에서의 SAL의 -10에서 +150사이의 급여를 가지는 행의 수를 계산한다.",
+        "AVG(SAL) OVER\n(PARTITION BY MGR\nORDER BY TODAY\nROWS BETWEEN 1 PRECEDING\nAND 1 FOLLOWING)\n: 각 MGR 별로 파티션 전체 행의 SAL 평균을 계산한다.",
+        "COUNT(*) OVER\n(ORDER BY SAL\nRANGE BETWEEN\n10 PRECEDING\nAND 150 FOLLOWING)\n: SAL을 기준으로 현재 행에서의 SAL의 -10에서 +150사이의 급여를 가지는 행의 수를 계산한다.",
         "SUM(SAL) OVER\n(PARTITION BY MGR\nORDER BY SAL\nRANGE UNBOUNDED\nPRECEDING)\n:각 MGR별 현재 행부터 파티션 내 첫 번째 행까지의 SAL의 합계를 계산한다.",
         "RANK() OVER\n(PARTITION BY JOB\nORDER BY SAL ASC) JOB_RANK\n:각 JOB 별 SAL이 낮은 순서대로 순위가 부여된다."
       ],
       "correctIndex": 0,
-      "explanation": "①번 보기는 각 MGR별로 SAL의 평균을 계산하기 전에 TODAY를 기준으로 정렬을 수행한 다음에 SAL의 평균을 계산한다. 즉, 각 MGR별 TODAY 기준으로 정렬하였을 때 파티션 내에서 앞의 한 건, 현재 행, 뒤의 한 건 사이의 급여의 평균을 계산한다."
+      "explanation": "①은 ROWS BETWEEN 1 PRECEDING AND 1 FOLLOWING 이므로 각 MGR 파티션을 TODAY 순으로 정렬했을 때 앞의 한 건, 현재 행, 뒤의 한 건(최대 3행)의 SAL 평균이다. 파티션 전체의 평균이 아니므로 틀린 설명이다. ②는 SAL 값이 (현재 행 SAL - 10) ~ (현재 행 SAL + 150) 범위인 행 수, ③은 파티션의 첫 행부터 현재 행까지의 합계, ④는 JOB 별 SAL 오름차순 순위로 모두 맞는 설명이다."
     },
     {
       "_id": "sqld-0293",
@@ -9880,13 +9880,13 @@
       "chapter": "DML",
       "title": "다음 중 LIKE문에서 세 번째 문자가 'K'인 문자열을 조회하는 것으로 가장 올바른 것은?",
       "options": [
-        "SELECT * FROM EMP WHERE like '_ _K%'",
-        "SELECT * FROM EMP WHERE like '[_ _K]%'",
-        "SELECT * FROM EMP WHERE like '%K%'",
-        "SELECT * FROM EMP WHERE like 'K%'"
+        "SELECT * FROM EMP WHERE ENAME LIKE '__K%'",
+        "SELECT * FROM EMP WHERE ENAME LIKE '[__K]%'",
+        "SELECT * FROM EMP WHERE ENAME LIKE '%K%'",
+        "SELECT * FROM EMP WHERE ENAME LIKE 'K%'"
       ],
       "correctIndex": 0,
-      "explanation": "②첫 번째 문자가 _또는 K인 모든 문자열을 검색하는 조건이다.\n③K 문자가 포함된 모든 문자열\n④K로 시작하는 문자열"
+      "explanation": "① 밑줄(_)은 아무 문자 한 개를 뜻하므로 '__K%'는 앞의 두 글자는 무엇이든 되고 세 번째 글자가 K인 문자열이다.\n②(SQL Server 문법) 첫 번째 문자가 _ 또는 K인 모든 문자열을 검색하는 조건이다.\n③K 문자가 포함된 모든 문자열\n④K로 시작하는 문자열"
     },
     {
       "_id": "sqld-0332",
@@ -9897,13 +9897,13 @@
       "chapter": "DML",
       "title": "다음 중 세 번째 문자가 'N'인 문자열을 검색하는  조건으로 적절한 것은?",
       "options": [
-        "SELECT * FROM 테이블명 WHERE like '_ _N%'",
-        "SELECT * FROM 테이블명 WHERE like '[_ _N]%'",
-        "SELECT * FROM 테이블명 WHERE like '%N%'",
-        "SELECT * FROM 테이블명 WHERE like '_N%'"
+        "SELECT * FROM 테이블명 WHERE 칼럼명 LIKE '__N%'",
+        "SELECT * FROM 테이블명 WHERE 칼럼명 LIKE '[__N]%'",
+        "SELECT * FROM 테이블명 WHERE 칼럼명 LIKE '%N%'",
+        "SELECT * FROM 테이블명 WHERE 칼럼명 LIKE '_N%'"
       ],
       "correctIndex": 0,
-      "explanation": "④번은 N으로 시작하는 문자열, ③번은 N문자가 포함된 모든 문자열, ②번은 첫 번째 문자가 _또는 N인 모든 문자열을 검색하는 조건이다."
+      "explanation": "①번 '__N%'는 밑줄(_) 두 개가 아무 문자 두 개를 뜻하므로 세 번째 문자가 N인 문자열이다. ④번 '_N%'는 두 번째 문자가 N인 문자열, ③번은 N문자가 포함된 모든 문자열, ②번은 첫 번째 문자가 _또는 N인 모든 문자열을 검색하는 조건이다."
     },
     {
       "_id": "sqld-0333",
@@ -10149,13 +10149,13 @@
       "chapter": "DML",
       "title": "다음 중 데이터베이스 관리 언어에 대한 설명으로 올바르지 않은 것은?",
       "options": [
-        "DML은 비절차형 언어로 데이터를 조작할 수 있다.",
+        "DML은 테이블의 구조를 정의하거나 변경하는 언어이다.",
         "COMMIT과 ROLLBACK, SAVEPOINT는 TCL 명령어이다.",
         "DML은 질의를 실행하여 데이터를 조작할 수 있으며 INSERT, UPDATE, SELECT, DELETE구가 있다.",
         "DDL은 테이블, 뷰, 인덱스 등을 생성하거나 변경하는 것으로 CREATE, ALTER, DROP, RENAME 등이 있다."
       ],
       "correctIndex": 0,
-      "explanation": "DML은 INSERT, UPDATE, SELECT, DELETE 등이 있고 TCL은 COMMIT, ROLLBACK, SAVEPOINT가 있다."
+      "explanation": "테이블의 구조를 정의·변경하는 것은 DDL(CREATE, ALTER, DROP, RENAME)이다. DML은 INSERT, UPDATE, DELETE, SELECT 로 데이터를 조작하고, TCL은 COMMIT, ROLLBACK, SAVEPOINT 이다."
     },
     {
       "_id": "sqld-0340",
@@ -10284,12 +10284,12 @@
       "title": "다음 중 서브쿼리에 대한 설명으로 올바르지 않은 것은?",
       "options": [
         "서브쿼리는 SELECT절, FROM절, WHERE절 등에서 사용 가능하다.",
-        "메인쿼리에서 서브쿼리 내에 있는 칼럼을 사용할 수 없다.",
+        "서브쿼리 안에서는 메인쿼리의 칼럼을 참조할 수 없다.",
         "서브쿼리는 단일행 서브쿼리와 다중행 서브쿼리로 분리되고 다중행 서브쿼리의 경우 IN, ANY, EXISTS, ALL과 같은 함수를 사용해야 한다.",
-        "서브쿼리는 SQL문의 SELECT구, FROM구, WHERE구 모두 사용이 가능하다."
+        "서브쿼리는 괄호로 감싸서 사용한다."
       ],
       "correctIndex": 1,
-      "explanation": "서브쿼리 중에서 INLINE VIEW의 칼럼은 메인쿼리에서도 사용 가능하다."
+      "explanation": "연관(상관) 서브쿼리는 서브쿼리 안에서 메인쿼리의 칼럼을 참조한다. 따라서 ②가 틀린 설명이다. 반대로 메인쿼리는 서브쿼리 안의 칼럼을 직접 쓸 수 없다(FROM 절의 인라인 뷰 칼럼은 예외)."
     },
     {
       "_id": "sqld-0345",
@@ -12108,7 +12108,7 @@
       "chapter": "조인",
       "title": "다음의 ANSI JOIN에서 가장 올바르지 않은 것은?",
       "options": [
-        "SELECT E.EMPNO, E.DEPTNO, D.DAME FROM EMP E \nINNER JOIN DEPT D ON (E.DEPTNO = D.DEPTNO);",
+        "SELECT E.EMPNO, E.DEPTNO, D.DNAME FROM EMP E \nINNER JOIN DEPT D ON (E.DEPTNO = D.DEPTNO);",
         "SELECT * FROM DEPT JOIN DEPT_TEMP USING (DEPTNO);",
         "SELECT EMP.DEPTNO, EMPNO, ENAME, DNAME FROM EMP NATURAL JOIN DEPT;",
         "SELECT * FROM EMP a INNER JOIN DEPT b ON a.DEPTNO = b.DEPTNO;"
@@ -12190,12 +12190,12 @@
       "title": "다음 중 데이터베이스에서 작업을 처리하는 트랜잭션의 특징에 해당되지 않는 것은?",
       "options": [
         "일관성",
-        "독립성",
+        "통합성",
         "고립성",
         "원자성"
       ],
       "correctIndex": 1,
-      "explanation": "트랜잭션의 특성(ACID)은 원자성(Atomicity), 일관성(Consistency), 고립성(Isolation), 지속성(Durability)이다. 보기에 고립성이 따로 있으므로 이 문항에서 ACID 에 해당하지 않는 것은 독립성이다. 정답은 ② 이다."
+      "explanation": "트랜잭션의 특성(ACID)은 원자성(Atomicity), 일관성(Consistency), 고립성(Isolation), 지속성(Durability)이다. 통합성은 ACID 에 해당하지 않는다. (고립성은 교재에 따라 독립성·격리성이라고도 부른다.)"
     },
     {
       "_id": "sqld-0412",
