@@ -28642,11 +28642,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "title": "다음 중 식별자(Identifier)에 대한 설명으로 옳지 않은 것은?",
     "options": [
       "주식별자는 엔터티의 개체를 유일하게 식별할 수 있어야 한다.",
-      "인조 식별자는 다른 엔터티의 기본키를 그대로 식별자로 사용하는 것이다.",
+      "주식별자는 논리적 모델링 단계에서 반드시 결정되어야 한다.",
       "내부 식별자는 하나의 엔터티 내에서만 의미를 가지는 식별자이다.",
-      "주식별자는 논리적 모델링 단계에서 반드시 결정되어야 한다."
+      "인조 식별자는 다른 엔터티의 기본키를 그대로 식별자로 사용하는 것이다."
     ],
-    "correctIndex": 1,
+    "correctIndex": 3,
     "explanation": "인조 식별자는 주식별자를 대체할 수 있는 인공 키(예: 일련번호)이며, 다른 엔터티의 키를 쓰는 것은 외래키 개념이다.",
     "chapter": "식별자",
     "_source": "sqld-1140",
@@ -28906,11 +28906,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "title": "다음은 ORDERS 테이블의 일부이다. 다음 SQL 쿼리의 실행 결과로 옳은 것은?",
     "options": [
       "600, 150",
-      "600, 120",
       "900, 180",
+      "600, 120",
       "900, 200"
     ],
-    "correctIndex": 1,
+    "correctIndex": 2,
     "explanation": "SUM(AMOUNT) → 100 + 200 + 300 = 600\nAVG(NVL(AMOUNT, 0)) → (100 + 0 + 200 + 0 + 300) / 5 = 120",
     "chapter": "그룹 함수",
     "_source": "sqld-1140",
@@ -29165,11 +29165,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "title": "다음은 어떤 SQL 쿼리의 실행 흐름에 따라 각 절이 실행되는 순서를 추론하려 한다.\n다음 중 실제 데이터베이스가 SQL을 처리하는 내부 실행 순서(논리적 처리 순서) 와 가장 일치하는 순서는?",
     "options": [
       "SELECT → FROM → WHERE → GROUP BY → HAVING → ORDER BY",
-      "FROM → WHERE → GROUP BY → HAVING → SELECT → ORDER BY",
       "WHERE → FROM → GROUP BY → HAVING → SELECT → ORDER BY",
+      "FROM → WHERE → GROUP BY → HAVING → SELECT → ORDER BY",
       "FROM → GROUP BY → WHERE → HAVING → SELECT → ORDER BY"
     ],
-    "correctIndex": 1,
+    "correctIndex": 2,
     "explanation": "SQL은 작성 순서와 실행 순서가 다릅니다.\n실행 순서는 다음과 같습니다:\n\nFROM\nWHERE\nGROUP BY\nHAVING\nSELECT\nORDER BY\r",
     "chapter": "DML",
     "_source": "sqld-1140",
@@ -29294,11 +29294,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "title": "다음은 EMP 테이블에서 트랜잭션이 수행된 순서이다. 이 트랜잭션 이후, ROLLBACK TO B 수행 후 COMMIT되었다고 할 때, 최종적으로 반영되는 변경 사항은 무엇인가?",
     "options": [
       "SALES 부서 데이터는 유지되고, IT 급여 인상과 HR 삭제가 반영된다.",
-      "SALES 부서는 삭제되고, HR 부서는 유지되며, IT 급여 인상만 반영된다.",
       "HR 부서 삭제는 유지되지만, IT 급여 인상은 취소되고 SALES는 삭제된다.",
+      "SALES 부서는 삭제되고, HR 부서는 유지되며, IT 급여 인상만 반영된다.",
       "모든 변경은 롤백되어 아무 작업도 반영되지 않는다."
     ],
-    "correctIndex": 1,
+    "correctIndex": 2,
     "explanation": "1. SALES 삭제 → 저장점 A\t삭제됨\n2. IT 급여 인상 → 저장점 B\t인상됨\n3. HR에 KIM 추가 → 저장점 C\t추가됨\n4. HR 전체 삭제\tHR 모두 삭제됨\n5. ROLLBACK TO B\t→ HR 삭제 & KIM 추가 모두 취소됨\n6. COMMIT\t→ SALES 삭제, IT 인상만 반영됨",
     "chapter": "트랜잭션 관리",
     "_source": "sqld-1140",
@@ -29320,12 +29320,12 @@ export const AI_MOCK: QuizQuestion[] = [
     "number": 897,
     "title": "다음은 사원 테이블 TAB1의 일부 데이터이다. 다음 SQL을 실행한 결과가 아래와 같을 때, 빈칸에 들어갈 함수로 가장 적절한 것은?",
     "options": [
-      "ROW_NUMBER()",
       "RANK()",
+      "ROW_NUMBER()",
       "DENSE_RANK()",
       "NTILE(2)"
     ],
-    "correctIndex": 1,
+    "correctIndex": 0,
     "explanation": "같은 급여(6000)는 같은 순위 1을 부여\n그 다음 등수는 2를 건너뛰고 3부터 시작 → RANK()의 특징\nROW_NUMBER()는 1, 2, 3, 4, 5\nDENSE_RANK()는 1, 1, 2, 3, 4\r",
     "chapter": "윈도우 함수",
     "_source": "sqld-1140",
@@ -29731,12 +29731,12 @@ export const AI_MOCK: QuizQuestion[] = [
     "number": 907,
     "title": "다음은 도서관의 사서 A와 사서 B가 데이터베이스에서 책 정보를 지우는 방식이다. 이 상황을 SQL에 비유할 때, 다음 중 가장 알맞은 설명은?",
     "options": [
-      "A는 TRUNCATE, B는 DELETE를 사용한 것이다.",
       "A는 DELETE, B는 TRUNCATE를 사용한 것이다.",
+      "A는 TRUNCATE, B는 DELETE를 사용한 것이다.",
       "A는 DROP, B는 DELETE를 사용한 것이다.",
       "A는 TRUNCATE, B는 DROP을 사용한 것이다."
     ],
-    "correctIndex": 1,
+    "correctIndex": 0,
     "explanation": "DELETE: 조건 지정 가능, 하나씩 삭제, ROLLBACK 가능, 로그 남음\nTRUNCATE: 전체 삭제, ROLLBACK 불가, 로그 없음, 빠름\nDROP: 아예 테이블 구조도 삭제 (질문 조건에는 해당 X)\r",
     "chapter": "DML",
     "_source": "sqld-1140",
@@ -30472,11 +30472,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "title": "LEFT OUTER JOIN 결과에서 NULL이 발생하는 이유로 옳은 것은?",
     "options": [
       "A의 PK가 NULL이기 때문이다.",
-      "매칭되는 B 행이 없기 때문에 B 컬럼이 NULL로 채워진다.",
       "JOIN이 실패하면 0을 저장하기 때문이다.",
+      "매칭되는 B 행이 없기 때문에 B 컬럼이 NULL로 채워진다.",
       "ORDER BY가 없기 때문이다."
     ],
-    "correctIndex": 1,
+    "correctIndex": 2,
     "explanation": "OUTER JOIN은 보존 테이블 기준으로 행을 유지하고 반대편이 없으면 NULL을 채운다.",
     "chapter": "조인",
     "_source": "sqld-1140",
@@ -30665,12 +30665,12 @@ export const AI_MOCK: QuizQuestion[] = [
     "number": 922,
     "title": "OUTER JOIN 결과 해석으로 옳은 것은?",
     "options": [
-      "INNER JOIN과 동일하게 항상 교집합만 반환한다.",
       "보존되지 않는 쪽에 매칭 행이 없으면 해당 컬럼은 NULL이 된다.",
+      "INNER JOIN과 동일하게 항상 교집합만 반환한다.",
       "NULL 대신 빈 문자열이 자동 입력된다.",
       "WHERE 절이 없어야만 사용할 수 있다."
     ],
-    "correctIndex": 1,
+    "correctIndex": 0,
     "explanation": "LEFT JOIN은 왼쪽, RIGHT JOIN은 오른쪽 테이블을 보존한다. 보존되지 않는 쪽에 매칭 행이 없으면 해당 컬럼은 NULL로 반환된다.",
     "chapter": "조인",
     "_source": "sqld-1140",
@@ -31072,11 +31072,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "title": "다음 중 HAVING 절에 대한 설명으로 옳은 것은?",
     "options": [
       "HAVING은 GROUP BY 이전에 행을 제거한다.",
-      "HAVING은 GROUP BY 이후 생성된 그룹에 대해 조건을 적용한다.",
+      "HAVING은 SELECT 절에서만 사용한다.",
       "HAVING에는 집계 함수를 사용할 수 없다.",
-      "HAVING은 SELECT 절에서만 사용한다."
+      "HAVING은 GROUP BY 이후 생성된 그룹에 대해 조건을 적용한다."
     ],
-    "correctIndex": 1,
+    "correctIndex": 3,
     "explanation": "WHERE는 행 수준 필터, HAVING은 그룹 수준 필터다.",
     "chapter": "그룹 함수",
     "_source": "sqld-1140",
@@ -31154,12 +31154,12 @@ export const AI_MOCK: QuizQuestion[] = [
     "number": 928,
     "title": "다음 SQL 실행 결과 값으로 옳은 것은?",
     "options": [
-      "300",
       "302",
+      "300",
       "304",
       "NULL"
     ],
-    "correctIndex": 1,
+    "correctIndex": 0,
     "explanation": "NVL 적용 후 bonus 합계는 300이고, NULL이 아닌 salary 개수는 2이므로 결과는 302다.",
     "chapter": "그룹 함수",
     "_source": "sqld-1140",
@@ -31338,11 +31338,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "title": "IN과 EXISTS 비교로 가장 적절한 것은?",
     "options": [
       "IN은 서브쿼리를 사용할 수 없다.",
-      "존재 여부만 필요할 때는 EXISTS가 의도를 더 직접적으로 표현한다.",
+      "IN은 NULL을 포함하면 항상 0행을 반환한다.",
       "EXISTS는 반드시 집계 함수와 함께 사용한다.",
-      "IN은 NULL을 포함하면 항상 0행을 반환한다."
+      "존재 여부만 필요할 때는 EXISTS가 의도를 더 직접적으로 표현한다."
     ],
-    "correctIndex": 1,
+    "correctIndex": 3,
     "explanation": "EXISTS는 조건 만족 행 존재만 확인한다.",
     "chapter": "서브쿼리",
     "_source": "sqld-1140",
@@ -31407,12 +31407,12 @@ export const AI_MOCK: QuizQuestion[] = [
     "number": 933,
     "title": "다음 데이터에서 주문이 없는 고객 ID는?",
     "options": [
-      "101",
       "102, 104",
+      "101",
       "103, 104",
       "104"
     ],
-    "correctIndex": 1,
+    "correctIndex": 0,
     "explanation": "주문 고객 목록에 없는 고객은 102와 104다.",
     "chapter": "서브쿼리",
     "_source": "sqld-1140",
@@ -31478,11 +31478,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "title": "다음 조건의 의미로 옳은 것은? salary > ALL (SELECT salary FROM emp WHERE dept = 'HR')",
     "options": [
       "HR 부서의 최소 급여보다 큰 값을 찾는다.",
-      "HR 부서의 최대 급여보다 큰 급여를 찾는 것과 같다.",
+      "HR 부서와 동일 급여만 찾는다.",
       "HR 부서 급여 중 하나만 만족하면 된다.",
-      "HR 부서와 동일 급여만 찾는다."
+      "HR 부서의 최대 급여보다 큰 급여를 찾는 것과 같다."
     ],
-    "correctIndex": 1,
+    "correctIndex": 3,
     "explanation": "ALL 비교는 서브쿼리 결과 전체를 만족해야 한다.",
     "chapter": "서브쿼리",
     "_source": "sqld-1140",
@@ -31735,12 +31735,12 @@ export const AI_MOCK: QuizQuestion[] = [
     "number": 938,
     "title": "다음 SQL에서 내부 쿼리의 그룹 기준은?",
     "options": [
-      "사원별",
       "외부 행의 dept 값별",
+      "사원별",
       "전체 테이블 단일 그룹",
       "salary별"
     ],
-    "correctIndex": 1,
+    "correctIndex": 0,
     "explanation": "WHERE s.dept = e.dept 조건에 따라 외부 행과 같은 부서만 집계된다.",
     "chapter": "서브쿼리",
     "_source": "sqld-1140",
@@ -31876,11 +31876,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "title": "NVL(col, 0)의 의미로 옳은 것은?",
     "options": [
       "col이 0이면 NULL로 바꾼다.",
-      "col이 NULL이면 0으로 대체한다.",
+      "평균값으로 자동 대체한다.",
       "col이 NULL이 아니면 행을 삭제한다.",
-      "평균값으로 자동 대체한다."
+      "col이 NULL이면 0으로 대체한다."
     ],
-    "correctIndex": 1,
+    "correctIndex": 3,
     "explanation": "NVL은 NULL 치환 함수다.",
     "chapter": "함수",
     "_source": "sqld-1140",
@@ -31896,11 +31896,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "title": "COALESCE(col1, col2, 0)의 설명으로 옳은 것은?",
     "options": [
       "항상 마지막 값 0을 반환한다.",
-      "왼쪽부터 평가하여 처음 만나는 NULL이 아닌 값을 반환한다.",
       "모든 값이 같아야 동작한다.",
+      "왼쪽부터 평가하여 처음 만나는 NULL이 아닌 값을 반환한다.",
       "문자열 컬럼에만 사용할 수 있다."
     ],
-    "correctIndex": 1,
+    "correctIndex": 2,
     "explanation": "COALESCE는 인수를 왼쪽부터 확인해 처음 만나는 NULL이 아닌 값을 반환한다. 따라서 col1이 NULL이면 col2를, 둘 다 NULL이면 0을 반환한다.",
     "chapter": "함수",
     "_source": "sqld-1140",
@@ -32059,12 +32059,12 @@ export const AI_MOCK: QuizQuestion[] = [
     "number": 945,
     "title": "다음 계층형 질의 결과에서 DEV_B의 PATH 값으로 옳은 것은?",
     "options": [
-      "CEO > SALES_MGR > DEV_B",
       "CEO > DEV_MGR > DEV_B",
+      "CEO > SALES_MGR > DEV_B",
       "DEV_MGR > DEV_B",
       "CEO > DEV_B"
     ],
-    "correctIndex": 1,
+    "correctIndex": 0,
     "explanation": "루트 CEO에서 DEV_MGR을 거쳐 DEV_B로 내려가므로 경로는 CEO > DEV_MGR > DEV_B다.",
     "chapter": "계층형 질의",
     "_source": "sqld-1140",
@@ -32451,12 +32451,12 @@ export const AI_MOCK: QuizQuestion[] = [
     "number": 951,
     "title": "ORDER BY dept, salary DESC의 정렬 우선순위는?",
     "options": [
-      "salary 내림차순 후 dept 오름차순이다.",
       "dept 오름차순 후 동일 dept 내에서 salary 내림차순이다.",
+      "salary 내림차순 후 dept 오름차순이다.",
       "두 컬럼을 동시에 무작위 정렬한다.",
       "salary만 정렬한다."
     ],
-    "correctIndex": 1,
+    "correctIndex": 0,
     "explanation": "앞 컬럼부터 우선 적용된다.",
     "chapter": "DML",
     "_source": "sqld-1140",
@@ -32554,11 +32554,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "title": "BUSAN 지역 데이터에서 RANK() OVER(PARTITION BY region ORDER BY amount DESC) 결과로 옳은 것은?",
     "options": [
       "1, 2, 3",
-      "1, 2, 2",
+      "1, 3, 3",
       "1, 1, 2",
-      "1, 3, 3"
+      "1, 2, 2"
     ],
-    "correctIndex": 1,
+    "correctIndex": 3,
     "explanation": "동점이면 같은 순위를 부여하고 다음 순위를 건너뛴다.",
     "chapter": "윈도우 함수",
     "_source": "sqld-1140",
@@ -32612,11 +32612,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "title": "ROW_NUMBER()와 RANK()의 차이로 옳은 것은?",
     "options": [
       "두 함수는 항상 같은 값을 반환한다.",
-      "ROW_NUMBER는 동점이어도 고유한 순번을 부여한다.",
+      "ROW_NUMBER는 ORDER BY를 사용할 수 없다.",
       "RANK는 PARTITION BY를 사용할 수 없다.",
-      "ROW_NUMBER는 ORDER BY를 사용할 수 없다."
+      "ROW_NUMBER는 동점이어도 고유한 순번을 부여한다."
     ],
-    "correctIndex": 1,
+    "correctIndex": 3,
     "explanation": "ROW_NUMBER는 동점이어도 각 행에 서로 다른 순번을 부여한다. 반면 RANK는 동점 행에 같은 순위를 주고 다음 순위를 건너뛴다.",
     "chapter": "윈도우 함수",
     "_source": "sqld-1140",
@@ -32669,12 +32669,12 @@ export const AI_MOCK: QuizQuestion[] = [
     "number": 956,
     "title": "OVER(PARTITION BY region)의 의미로 옳은 것은?",
     "options": [
-      "출력 결과를 삭제한다.",
       "region 값별로 분석 구간을 나눈다.",
+      "출력 결과를 삭제한다.",
       "GROUP BY와 완전히 같은 결과만 낸다.",
       "집계 함수 사용을 금지한다."
     ],
-    "correctIndex": 1,
+    "correctIndex": 0,
     "explanation": "PARTITION BY는 분석 범위를 그룹처럼 분할한다.",
     "chapter": "윈도우 함수",
     "_source": "sqld-1140",
@@ -32785,11 +32785,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "title": "GROUPING SETS((region), (product))의 의미로 옳은 것은?",
     "options": [
       "상세 행만 반환한다.",
-      "지역별 집계와 상품별 집계를 각각 구한다.",
       "ROLLUP과 항상 결과가 동일하다.",
+      "지역별 집계와 상품별 집계를 각각 구한다.",
       "HAVING 절을 대체한다."
     ],
-    "correctIndex": 1,
+    "correctIndex": 2,
     "explanation": "GROUPING SETS는 필요한 집계 조합만 지정한다.",
     "chapter": "그룹 함수",
     "_source": "sqld-1140",
@@ -32917,11 +32917,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "title": "A={1,2,2,3}, B={2,3,4} 일 때 UNION 결과 원소 집합은?",
     "options": [
       "{1,2,2,3,4}",
-      "{1,2,3,4}",
+      "{1,4}",
       "{2,3}",
-      "{1,4}"
+      "{1,2,3,4}"
     ],
-    "correctIndex": 1,
+    "correctIndex": 3,
     "explanation": "UNION은 중복 제거 후 합집합을 반환한다.",
     "chapter": "집합 연산자",
     "_source": "sqld-1140",
@@ -32962,12 +32962,12 @@ export const AI_MOCK: QuizQuestion[] = [
     "number": 963,
     "title": "ORDERS와 ORDER_ITEM의 관계로 옳은 것은?",
     "options": [
-      "1:1",
       "1:N",
+      "1:1",
       "N:1",
       "N:M"
     ],
-    "correctIndex": 1,
+    "correctIndex": 0,
     "explanation": "주문 1건에 여러 상세가 연결된다.",
     "chapter": "엔터티",
     "_source": "sqld-1140",
@@ -33047,11 +33047,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "title": "다음 제약 조건 가정에서 부모 ORDERS 행 삭제에 대한 설명으로 옳은 것은?",
     "options": [
       "자식 FK가 자동으로 NULL로 바뀐다.",
-      "자식이 부모를 참조 중이면 부모 삭제는 거부될 수 있다.",
       "부모 삭제 시 자식도 항상 자동 삭제된다.",
+      "자식이 부모를 참조 중이면 부모 삭제는 거부될 수 있다.",
       "NULL 허용 FK이면 참조 무결성 검사를 하지 않는다."
     ],
-    "correctIndex": 1,
+    "correctIndex": 2,
     "explanation": "FK가 NULL 허용이어도 이미 자식이 특정 부모를 참조 중이면 CASCADE 없이 부모를 삭제할 수 없다.",
     "chapter": "데이터 무결성",
     "_source": "sqld-1140",
@@ -33079,11 +33079,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "title": "FK 컬럼의 NULL 허용 여부로 옳은 것은?",
     "options": [
       "외래키는 항상 NULL 불가다.",
-      "NOT NULL 제약이 없다면 NULL 허용이 가능하다.",
+      "PK와 FK는 같은 테이블에 공존할 수 없다.",
       "부모가 있으면 자식은 NULL이어야 한다.",
-      "PK와 FK는 같은 테이블에 공존할 수 없다."
+      "NOT NULL 제약이 없다면 NULL 허용이 가능하다."
     ],
-    "correctIndex": 1,
+    "correctIndex": 3,
     "explanation": "외래키 자체가 NULL 금지를 의미하지는 않는다.",
     "chapter": "데이터 무결성",
     "_source": "sqld-1140",
@@ -33107,11 +33107,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "title": "부모 ORDERS 행을 삭제하려 할 때 자식 ORDER_DETAIL이 존재하면 기본 동작은?",
     "options": [
       "자동으로 자식도 삭제된다.",
-      "삭제가 거부될 수 있다.",
       "자식 FK가 0으로 변경된다.",
+      "삭제가 거부될 수 있다.",
       "부모만 삭제되고 자식은 유지된다."
     ],
-    "correctIndex": 1,
+    "correctIndex": 2,
     "explanation": "참조 중인 자식이 있으면 참조 무결성 위반으로 삭제가 막힐 수 있다.",
     "chapter": "데이터 무결성",
     "_source": "sqld-1140",
@@ -33139,11 +33139,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "title": "참조 무결성의 의미로 옳은 것은?",
     "options": [
       "모든 컬럼이 UNIQUE여야 한다.",
-      "자식의 FK 값은 부모에 존재하거나 NULL이어야 한다.",
       "자식이 부모보다 먼저 생성되어야 한다.",
+      "자식의 FK 값은 부모에 존재하거나 NULL이어야 한다.",
       "NULL이 하나라도 있으면 위반이다."
     ],
-    "correctIndex": 1,
+    "correctIndex": 2,
     "explanation": "참조 무결성은 부모-자식 관계의 유효성을 보장한다.",
     "chapter": "데이터 무결성",
     "_source": "sqld-1140",
@@ -33195,11 +33195,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "title": "다음 주문 테이블에서 기본키가 (주문번호, 상품번호)일 때 가장 적절한 설명은?",
     "options": [
       "모든 비키 속성이 기본키 전체에만 완전 함수 종속한다.",
-      "상품명은 부분 함수 종속, 고객등급은 이행 함수 종속 문제가 될 수 있다.",
       "기본키가 복합키면 3NF는 자동으로 만족한다.",
+      "상품명은 부분 함수 종속, 고객등급은 이행 함수 종속 문제가 될 수 있다.",
       "정규화와 이상 현상은 무관하다."
     ],
-    "correctIndex": 1,
+    "correctIndex": 2,
     "explanation": "상품명은 상품번호에만, 고객등급은 고객명 같은 일반 속성을 통해 결정될 수 있어 2NF와 3NF 관점의 문제가 함께 생긴다.",
     "chapter": "정규화",
     "_source": "sqld-1140",
@@ -33423,11 +33423,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "title": "다음 VIEW 정의에 대한 설명으로 옳은 것은?",
     "options": [
       "기본 테이블과 완전히 분리되어 별도 데이터가 자동 저장된다.",
-      "집계 함수가 포함되어 일반적인 단순 뷰보다 갱신 제약이 크다.",
+      "뷰는 WHERE 절을 가질 수 없다.",
       "GROUP BY가 있어도 항상 모든 DML이 가능하다.",
-      "뷰는 WHERE 절을 가질 수 없다."
+      "집계 함수가 포함되어 일반적인 단순 뷰보다 갱신 제약이 크다."
     ],
-    "correctIndex": 1,
+    "correctIndex": 3,
     "explanation": "GROUP BY와 집계 함수가 포함된 뷰는 일반적인 단순 뷰보다 UPDATE/INSERT 제약이 크다.",
     "chapter": "View",
     "_source": "sqld-1140",
@@ -33448,12 +33448,12 @@ export const AI_MOCK: QuizQuestion[] = [
     "number": 976,
     "title": "일반 VIEW의 특징으로 옳은 것은?",
     "options": [
-      "항상 인덱스를 가진다.",
       "일반적으로 자체 데이터는 저장하지 않는다.",
+      "항상 인덱스를 가진다.",
       "트리거를 만들 수 없다.",
       "FROM 절에 사용할 수 없다."
     ],
-    "correctIndex": 1,
+    "correctIndex": 0,
     "explanation": "일반 뷰는 쿼리 정의를 저장한다.",
     "chapter": "View",
     "_source": "sqld-1140",
@@ -33469,11 +33469,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "title": "다음 VIEW에 WHERE dept='SALES'가 포함된 경우 조회 결과로 옳은 것은?",
     "options": [
       "모든 부서가 조회된다.",
-      "뷰를 조회하면 SALES 부서 행만 보인다.",
       "WHERE 절은 무시된다.",
+      "뷰를 조회하면 SALES 부서 행만 보인다.",
       "SELECT *는 사용할 수 없다."
     ],
-    "correctIndex": 1,
+    "correctIndex": 2,
     "explanation": "뷰 정의 조건이 결과에 반영된다.",
     "chapter": "View",
     "_source": "sqld-1140",
@@ -33495,11 +33495,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "title": "뷰의 장점으로 적절한 것은?",
     "options": [
       "기본 테이블 없이도 자동으로 데이터가 생성된다.",
-      "복잡한 조회를 단순화하고 필요한 컬럼만 노출할 수 있다.",
+      "트랜잭션을 자동 커밋한다.",
       "항상 성능이 원본보다 빠르다.",
-      "트랜잭션을 자동 커밋한다."
+      "복잡한 조회를 단순화하고 필요한 컬럼만 노출할 수 있다."
     ],
-    "correctIndex": 1,
+    "correctIndex": 3,
     "explanation": "뷰는 복잡한 SELECT를 감추고 필요한 컬럼만 노출할 수 있어 조회 재사용성과 보안 측면에서 유리하다.",
     "chapter": "View",
     "_source": "sqld-1140",
@@ -33515,11 +33515,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "title": "기본 테이블 구조가 변경될 때 VIEW 관련 주의점으로 옳은 것은?",
     "options": [
       "뷰는 기본 테이블과 완전히 독립적이다.",
-      "기본 테이블 변경이 뷰 조회 오류로 이어질 수 있다.",
+      "뷰는 SELECT 문을 포함할 수 없다.",
       "뷰는 DROP TABLE보다 먼저 삭제할 수 없다.",
-      "뷰는 SELECT 문을 포함할 수 없다."
+      "기본 테이블 변경이 뷰 조회 오류로 이어질 수 있다."
     ],
-    "correctIndex": 1,
+    "correctIndex": 3,
     "explanation": "뷰는 기본 테이블 정의에 의존한다.",
     "chapter": "View",
     "_source": "sqld-1140",
@@ -33561,11 +33561,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "title": "CREATE TABLE의 의미로 옳은 것은?",
     "options": [
       "기존 데이터를 조회한다.",
-      "새 테이블 객체를 생성한다.",
       "행 단위 수정만 수행한다.",
+      "새 테이블 객체를 생성한다.",
       "권한을 부여한다."
     ],
-    "correctIndex": 1,
+    "correctIndex": 2,
     "explanation": "DDL은 데이터 구조를 정의한다.",
     "chapter": "DDL",
     "_source": "sqld-1140",
@@ -33580,12 +33580,12 @@ export const AI_MOCK: QuizQuestion[] = [
     "number": 982,
     "title": "DROP TABLE의 효과로 옳은 것은?",
     "options": [
-      "컬럼만 삭제한다.",
       "테이블 구조와 데이터를 함께 제거한다.",
+      "컬럼만 삭제한다.",
       "행만 삭제하고 구조는 유지한다.",
       "권한만 삭제한다."
     ],
-    "correctIndex": 1,
+    "correctIndex": 0,
     "explanation": "DROP은 객체 자체를 삭제한다.",
     "chapter": "DDL",
     "_source": "sqld-1140",
@@ -33600,12 +33600,12 @@ export const AI_MOCK: QuizQuestion[] = [
     "number": 983,
     "title": "TRUNCATE TABLE과 DELETE의 차이로 옳은 것은?",
     "options": [
-      "TRUNCATE는 WHERE 조건을 사용할 수 있다.",
       "TRUNCATE는 DDL로서 테이블 전체 데이터를 빠르게 비울 때 사용된다.",
+      "TRUNCATE는 WHERE 조건을 사용할 수 있다.",
       "DELETE는 구조까지 제거한다.",
       "둘은 완전히 동일하다."
     ],
-    "correctIndex": 1,
+    "correctIndex": 0,
     "explanation": "TRUNCATE는 테이블 전체 데이터를 빠르게 비우는 DDL이며 일반적으로 WHERE 절을 사용할 수 없다. DELETE는 행 단위 DML이라 조건을 줄 수 있다.",
     "chapter": "DDL",
     "_source": "sqld-1140",
@@ -33621,11 +33621,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "title": "ALTER TABLE로 가능한 작업으로 옳은 것은?",
     "options": [
       "데이터만 조회",
-      "컬럼 추가, 수정, 삭제 등 구조 변경",
+      "트랜잭션 저장점 생성",
       "권한 부여만 수행",
-      "트랜잭션 저장점 생성"
+      "컬럼 추가, 수정, 삭제 등 구조 변경"
     ],
-    "correctIndex": 1,
+    "correctIndex": 3,
     "explanation": "ALTER는 객체 구조 변경 명령이다.",
     "chapter": "DDL",
     "_source": "sqld-1140",
@@ -33641,11 +33641,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "title": "다음 권한 부여/회수 흐름에 대한 설명으로 옳은 것은?",
     "options": [
       "user2 권한은 원래 부여자 회수와 무관하게 영구 유지된다.",
-      "user1을 통해 user2에게 전달된 권한도 함께 회수될 수 있다.",
+      "WITH GRANT OPTION은 조회 권한에 사용할 수 없다.",
       "REVOKE는 객체를 삭제한다.",
-      "WITH GRANT OPTION은 조회 권한에 사용할 수 없다."
+      "user1을 통해 user2에게 전달된 권한도 함께 회수될 수 있다."
     ],
-    "correctIndex": 1,
+    "correctIndex": 3,
     "explanation": "GRANT OPTION으로 전파된 권한은 원 부여자의 권한 회수 시 함께 회수될 수 있다.",
     "chapter": "DCL·TCL",
     "_source": "sqld-1140",
@@ -33666,12 +33666,12 @@ export const AI_MOCK: QuizQuestion[] = [
     "number": 986,
     "title": "GRANT SELECT, INSERT ON emp TO user1의 의미로 옳은 것은?",
     "options": [
-      "user1을 삭제한다.",
       "user1에게 emp 테이블의 조회와 입력 권한을 준다.",
+      "user1을 삭제한다.",
       "emp 테이블 구조를 바꾼다.",
       "모든 사용자 권한을 회수한다."
     ],
-    "correctIndex": 1,
+    "correctIndex": 0,
     "explanation": "GRANT는 객체 권한 부여에 사용된다.",
     "chapter": "DCL·TCL",
     "_source": "sqld-1140",
@@ -33687,11 +33687,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "title": "REVOKE INSERT ON emp FROM user1의 의미로 옳은 것은?",
     "options": [
       "SELECT 권한도 함께 회수된다.",
-      "user1의 INSERT 권한만 회수한다.",
       "emp 테이블이 삭제된다.",
+      "user1의 INSERT 권한만 회수한다.",
       "user1 계정이 잠긴다."
     ],
-    "correctIndex": 1,
+    "correctIndex": 2,
     "explanation": "부여된 권한 일부만 선택적으로 회수할 수 있다.",
     "chapter": "DCL·TCL",
     "_source": "sqld-1140",
@@ -33706,12 +33706,12 @@ export const AI_MOCK: QuizQuestion[] = [
     "number": 988,
     "title": "WITH GRANT OPTION이 있는 권한의 특징으로 옳은 것은?",
     "options": [
-      "권한을 절대 회수할 수 없다.",
       "권한을 받은 사용자가 다른 사용자에게 같은 권한을 다시 부여할 수 있다.",
+      "권한을 절대 회수할 수 없다.",
       "DDL 실행만 가능해진다.",
       "트랜잭션이 자동 커밋되지 않는다."
     ],
-    "correctIndex": 1,
+    "correctIndex": 0,
     "explanation": "전파 가능한 객체 권한이다.",
     "chapter": "DCL·TCL",
     "_source": "sqld-1140",
@@ -33773,11 +33773,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "title": "다음 트랜잭션 흐름 후 최종 반영되는 작업으로 옳은 것은?",
     "options": [
       "작업1과 작업4만 반영된다.",
-      "작업1, 작업2, 작업4가 반영된다.",
+      "작업2, 작업4만 반영된다.",
       "작업1, 작업3, 작업4가 반영된다.",
-      "작업2, 작업4만 반영된다."
+      "작업1, 작업2, 작업4가 반영된다."
     ],
-    "correctIndex": 1,
+    "correctIndex": 3,
     "explanation": "ROLLBACK TO S2 시점에 작업3만 취소된다. SAVEPOINT S2 이전 작업1, 작업2는 유지되고, 이후 수행한 작업4가 함께 COMMIT 된다.",
     "chapter": "트랜잭션 관리",
     "_source": "sqld-1140",
@@ -33891,11 +33891,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "title": "데이터 사전(Data Dictionary)에 저장되는 정보로 옳은 것은?",
     "options": [
       "주문 상세 내역과 같은 트랜잭션 데이터",
-      "테이블, 컬럼, 제약조건과 같은 메타데이터",
       "세션별 임시 결과 집합만 저장하는 영역",
+      "테이블, 컬럼, 제약조건과 같은 메타데이터",
       "사용자 화면 레이아웃 정보"
     ],
-    "correctIndex": 1,
+    "correctIndex": 2,
     "explanation": "데이터 사전은 실제 업무 데이터가 아니라 DB 객체 정의와 제약조건 등 메타데이터를 관리한다.",
     "chapter": "데이터 모델 개념",
     "_source": "sqld-1140",
@@ -33911,11 +33911,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "title": "관계형 모델의 릴레이션 특성으로 옳은 것은?",
     "options": [
       "중복 행이 많을수록 릴레이션의 품질이 좋아진다.",
-      "행의 논리적 순서는 보장되지 않으므로 ORDER BY 없이 특정 순서를 기대하면 안 된다.",
       "릴레이션에서는 NULL을 사용할 수 없다.",
+      "행의 논리적 순서는 보장되지 않으므로 ORDER BY 없이 특정 순서를 기대하면 안 된다.",
       "열 이름은 반드시 숫자로만 정의해야 한다."
     ],
-    "correctIndex": 1,
+    "correctIndex": 2,
     "explanation": "릴레이션은 집합 개념이므로 행의 논리적 순서를 전제하지 않는다.",
     "chapter": "데이터 모델 개념",
     "_source": "sqld-1140",
@@ -33931,11 +33931,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "title": "데이터베이스 시스템의 장점으로 가장 적절한 것은?",
     "options": [
       "파일 단위 중복을 늘려 응답 속도를 보장한다.",
-      "데이터를 통합 관리하여 중복을 줄이고 일관성을 높일 수 있다.",
       "응용 프로그램마다 별도 정의를 강제하여 독립성을 낮춘다.",
+      "데이터를 통합 관리하여 중복을 줄이고 일관성을 높일 수 있다.",
       "무결성 제약을 제거해 개발 속도만 높인다."
     ],
-    "correctIndex": 1,
+    "correctIndex": 2,
     "explanation": "DBMS는 데이터 통합과 제어를 통해 중복과 불일치를 줄이는 방향으로 설계된다.",
     "chapter": "데이터 모델 개념",
     "_source": "sqld-1140",
@@ -33951,11 +33951,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "title": "개념 데이터 모델링 단계에서 주로 수행하는 작업으로 옳은 것은?",
     "options": [
       "인덱스와 저장 파라미터를 결정한다.",
-      "업무에서 필요한 엔터티와 관계를 식별한다.",
+      "실행 계획을 확정한다.",
       "파티션 키와 병렬도만 결정한다.",
-      "실행 계획을 확정한다."
+      "업무에서 필요한 엔터티와 관계를 식별한다."
     ],
-    "correctIndex": 1,
+    "correctIndex": 3,
     "explanation": "개념 모델링은 업무 요구를 반영해 핵심 엔터티와 관계를 도출하는 단계다.",
     "chapter": "데이터 모델링 기법",
     "_source": "sqld-1140",
@@ -33971,11 +33971,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "title": "N:M 관계를 논리 모델로 전환할 때 적절한 방법은?",
     "options": [
       "한쪽 엔터티를 삭제한다.",
-      "교차 엔터티를 추가하여 두 개의 1:N 관계로 해소한다.",
+      "N:M 관계는 논리 모델에서 그대로 유지해야 한다.",
       "외래키 없이 텍스트 컬럼에만 저장한다.",
-      "N:M 관계는 논리 모델에서 그대로 유지해야 한다."
+      "교차 엔터티를 추가하여 두 개의 1:N 관계로 해소한다."
     ],
-    "correctIndex": 1,
+    "correctIndex": 3,
     "explanation": "다대다 관계는 교차 엔터티를 통해 정규화된 구조로 전환하는 것이 일반적이다.",
     "chapter": "데이터 모델링 기법",
     "_source": "sqld-1140",
@@ -33990,12 +33990,12 @@ export const AI_MOCK: QuizQuestion[] = [
     "number": 1001,
     "title": "슈퍼타입/서브타입 모델링이 적절한 경우로 옳은 것은?",
     "options": [
-      "모든 유형이 완전히 동일한 속성만 가질 때",
       "공통 속성과 유형별 속성을 함께 관리해야 할 때",
+      "모든 유형이 완전히 동일한 속성만 가질 때",
       "PK를 사용하지 않으려 할 때",
       "조인을 없애기 위해 모든 엔터티를 하나로 합칠 때"
     ],
-    "correctIndex": 1,
+    "correctIndex": 0,
     "explanation": "공통 속성은 슈퍼타입에, 유형별 속성은 서브타입에 배치하면 중복을 줄일 수 있다.",
     "chapter": "데이터 모델링 기법",
     "_source": "sqld-1140",
@@ -34011,11 +34011,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "title": "속성의 원자성을 높이는 모델링 방식으로 옳은 것은?",
     "options": [
       "전화번호 3개를 하나의 컬럼에 콤마로 저장한다.",
-      "반복 속성을 분리하여 하나의 컬럼에는 하나의 값만 저장한다.",
+      "조인 감소를 위해 모든 속성을 VARCHAR 하나에 직렬화한다.",
       "코드와 코드명을 한 컬럼에 함께 저장한다.",
-      "조인 감소를 위해 모든 속성을 VARCHAR 하나에 직렬화한다."
+      "반복 속성을 분리하여 하나의 컬럼에는 하나의 값만 저장한다."
     ],
-    "correctIndex": 1,
+    "correctIndex": 3,
     "explanation": "1NF 관점에서도 속성은 더 이상 의미 있게 분해되지 않는 단일 값으로 다루는 것이 바람직하다.",
     "chapter": "데이터 모델링 기법",
     "_source": "sqld-1140",
@@ -34050,12 +34050,12 @@ export const AI_MOCK: QuizQuestion[] = [
     "number": 1004,
     "title": "물리 설계 단계에서 주로 결정하는 사항으로 옳은 것은?",
     "options": [
-      "엔터티와 관계의 후보 목록",
       "인덱스, 파티션, 저장 구조와 접근 경로",
+      "엔터티와 관계의 후보 목록",
       "업무 용어 사전만 작성하는 작업",
       "식별자 존재 여부만 검토하는 작업"
     ],
-    "correctIndex": 1,
+    "correctIndex": 0,
     "explanation": "물리 설계는 실제 성능과 저장 효율을 고려해 물리적 구현 방법을 정하는 단계다.",
     "chapter": "데이터베이스 설계",
     "_source": "sqld-1140",
@@ -34091,11 +34091,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "title": "트랜잭션 처리량이 매우 큰 테이블에 대해 설계 단계에서 우선 검토할 사항으로 옳은 것은?",
     "options": [
       "모든 컬럼을 PK에 포함하는 방법",
-      "접근 패턴에 맞는 인덱스와 파티션 전략",
       "모든 제약조건 제거",
+      "접근 패턴에 맞는 인덱스와 파티션 전략",
       "엔터티명을 길게 변경하는 작업"
     ],
-    "correctIndex": 1,
+    "correctIndex": 2,
     "explanation": "대량 처리 테이블은 조회/변경 패턴과 데이터 분포를 고려한 물리 설계가 중요하다.",
     "chapter": "데이터베이스 설계",
     "_source": "sqld-1140",
@@ -34131,11 +34131,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "title": "다음 ERD 기준 CUSTOMER와 ORDERS의 관계로 옳은 것은?",
     "options": [
       "한 고객은 정확히 한 주문만 가진다.",
-      "한 고객은 여러 주문을 가질 수 있다.",
       "한 주문은 여러 고객에 속한다.",
+      "한 고객은 여러 주문을 가질 수 있다.",
       "두 엔터티는 관계가 없다."
     ],
-    "correctIndex": 1,
+    "correctIndex": 2,
     "explanation": "ERD에서 CUSTOMER와 ORDERS는 1:N 관계로 표현되어 있다.",
     "chapter": "엔터티",
     "_source": "sqld-1140",
@@ -34159,11 +34159,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "title": "다음 ERD 기준 ORDER_ITEM의 식별자로 가장 적절한 것은?",
     "options": [
       "product_id 단일 식별자",
-      "order_id와 item_seq의 복합 식별자",
+      "status와 order_date의 복합 식별자",
       "customer_id 단일 식별자",
-      "status와 order_date의 복합 식별자"
+      "order_id와 item_seq의 복합 식별자"
     ],
-    "correctIndex": 1,
+    "correctIndex": 3,
     "explanation": "ORDER_ITEM 엔터티는 order_id와 item_seq가 함께 PK로 표시되어 있다.",
     "chapter": "엔터티",
     "_source": "sqld-1140",
@@ -34271,11 +34271,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "title": "다음 테이블과 가정 기준으로 2NF 위반 원인으로 옳은 것은?",
     "options": [
       "모든 속성이 후보키 전체에 완전 함수 종속된다.",
-      "복합키의 일부인 주문번호와 상품번호에만 종속되는 속성이 함께 존재한다.",
+      "반복 그룹이 전혀 없다.",
       "이행 종속만 존재한다.",
-      "반복 그룹이 전혀 없다."
+      "복합키의 일부인 주문번호와 상품번호에만 종속되는 속성이 함께 존재한다."
     ],
-    "correctIndex": 1,
+    "correctIndex": 3,
     "explanation": "부분 함수 종속이 있으면 2NF를 위반한다.",
     "chapter": "정규화",
     "_source": "sqld-1140",
@@ -34511,11 +34511,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "title": "아래 명령 중 테이블 구조를 변경하는 문장으로 옳은 것은?",
     "options": [
       "CREATE TABLE emp (...);",
-      "ALTER TABLE emp ADD hire_date DATE;",
+      "SELECT * FROM emp;",
       "DROP TABLE temp_emp;",
-      "SELECT * FROM emp;"
+      "ALTER TABLE emp ADD hire_date DATE;"
     ],
-    "correctIndex": 1,
+    "correctIndex": 3,
     "explanation": "ALTER TABLE은 기존 객체 구조를 변경할 때 사용한다.",
     "chapter": "DDL",
     "_source": "sqld-1140",
@@ -34538,11 +34538,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "title": "다음 중 객체 자체를 제거하는 DDL 명령으로 옳은 것은?",
     "options": [
       "ALTER TABLE emp ADD hire_date DATE;",
-      "DROP TABLE temp_emp;",
+      "COMMIT;",
       "GRANT SELECT ON emp TO user1;",
-      "COMMIT;"
+      "DROP TABLE temp_emp;"
     ],
-    "correctIndex": 1,
+    "correctIndex": 3,
     "explanation": "DROP은 객체 정의와 데이터를 함께 제거한다.",
     "chapter": "DDL",
     "_source": "sqld-1140",
@@ -34564,12 +34564,12 @@ export const AI_MOCK: QuizQuestion[] = [
     "number": 1019,
     "title": "다음 설명 중 TRUNCATE TABLE에 대한 설명으로 가장 적절한 것은?",
     "options": [
-      "조건절을 사용해 일부 행만 삭제한다.",
       "테이블 전체 데이터를 빠르게 비우는 DDL이다.",
+      "조건절을 사용해 일부 행만 삭제한다.",
       "권한을 회수하는 명령이다.",
       "뷰 정의를 변경하는 명령이다."
     ],
-    "correctIndex": 1,
+    "correctIndex": 0,
     "explanation": "TRUNCATE는 일반적으로 테이블 전체 비우기에 사용되는 DDL로 구분한다.",
     "chapter": "DDL",
     "_source": "sqld-1140",
@@ -34584,12 +34584,12 @@ export const AI_MOCK: QuizQuestion[] = [
     "number": 1020,
     "title": "CREATE TABLE 문의 주된 목적은 무엇인가?",
     "options": [
-      "기존 데이터를 조회하는 것",
       "새로운 테이블 구조를 정의하는 것",
+      "기존 데이터를 조회하는 것",
       "권한을 부여하는 것",
       "트랜잭션을 종료하는 것"
     ],
-    "correctIndex": 1,
+    "correctIndex": 0,
     "explanation": "CREATE TABLE은 컬럼과 제약조건을 포함한 새 테이블을 생성한다.",
     "chapter": "DDL",
     "_source": "sqld-1140",
@@ -34605,11 +34605,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "title": "ALTER TABLE로 가능한 작업으로 옳은 것은?",
     "options": [
       "데이터 조회만 수행",
-      "컬럼 추가와 제약조건 추가",
+      "SAVEPOINT 생성만 수행",
       "권한 회수만 수행",
-      "SAVEPOINT 생성만 수행"
+      "컬럼 추가와 제약조건 추가"
     ],
-    "correctIndex": 1,
+    "correctIndex": 3,
     "explanation": "ALTER TABLE은 컬럼, 제약조건 등 구조 변경에 사용된다.",
     "chapter": "DDL",
     "_source": "sqld-1140",
@@ -34625,11 +34625,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "title": "아래 자료 기준으로 user1에게 처음 부여되는 권한으로 옳은 것은?",
     "options": [
       "emp 테이블의 DELETE 권한",
-      "emp 테이블의 SELECT와 INSERT 권한",
+      "모든 테이블의 DROP 권한",
       "데이터베이스 생성 권한",
-      "모든 테이블의 DROP 권한"
+      "emp 테이블의 SELECT와 INSERT 권한"
     ],
-    "correctIndex": 1,
+    "correctIndex": 3,
     "explanation": "GRANT SELECT, INSERT ON emp TO user1은 두 객체 권한을 부여한다.",
     "chapter": "DCL·TCL",
     "_source": "sqld-1140",
@@ -34679,11 +34679,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "title": "다음 권한 흐름에서 최종 결과로 옳은 것은?",
     "options": [
       "user2 권한은 절대 회수되지 않는다.",
-      "user1을 통해 전파된 user2 권한도 함께 회수될 수 있다.",
+      "WITH GRANT OPTION은 조회 권한에 쓸 수 없다.",
       "REVOKE는 테이블을 삭제한다.",
-      "WITH GRANT OPTION은 조회 권한에 쓸 수 없다."
+      "user1을 통해 전파된 user2 권한도 함께 회수될 수 있다."
     ],
-    "correctIndex": 1,
+    "correctIndex": 3,
     "explanation": "GRANT OPTION으로 전파된 권한은 원 권한 회수 시 연쇄 회수될 수 있다.",
     "chapter": "DCL·TCL",
     "_source": "sqld-1140",
@@ -34725,11 +34725,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "title": "다음 SQL문의 의미로 옳은 것은?",
     "options": [
       "emp_backup을 삭제한다.",
-      "SALES 부서 사원만 emp_backup에 복사한다.",
       "emp 테이블 구조를 변경한다.",
+      "SALES 부서 사원만 emp_backup에 복사한다.",
       "권한을 부여한다."
     ],
-    "correctIndex": 1,
+    "correctIndex": 2,
     "explanation": "INSERT ... SELECT는 조회 결과를 다른 테이블에 입력하는 DML이다.",
     "chapter": "DML",
     "_source": "sqld-1140",
@@ -34751,11 +34751,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "title": "다음 SQL문의 의미로 옳은 것은?",
     "options": [
       "emp 테이블 구조를 삭제한다.",
-      "부서가 지정되지 않은 사원 행만 삭제한다.",
+      "모든 행을 무조건 삭제한다.",
       "NULL 값을 0으로 바꾼다.",
-      "모든 행을 무조건 삭제한다."
+      "부서가 지정되지 않은 사원 행만 삭제한다."
     ],
-    "correctIndex": 1,
+    "correctIndex": 3,
     "explanation": "DELETE는 WHERE 조건을 만족하는 행만 제거한다.",
     "chapter": "DML",
     "_source": "sqld-1140",
@@ -34777,11 +34777,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "title": "MERGE 문에 대한 설명으로 옳은 것은?",
     "options": [
       "항상 DELETE만 수행한다.",
-      "일치 여부에 따라 UPDATE와 INSERT를 한 문장에서 처리할 수 있다.",
       "DDL이므로 구조를 바꾼다.",
+      "일치 여부에 따라 UPDATE와 INSERT를 한 문장에서 처리할 수 있다.",
       "권한만 부여할 수 있다."
     ],
-    "correctIndex": 1,
+    "correctIndex": 2,
     "explanation": "MERGE는 대상과 소스를 비교해 조건에 따라 갱신/삽입을 수행한다.",
     "chapter": "DML",
     "_source": "sqld-1140",
@@ -34797,11 +34797,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "title": "다음 SQL에서 WHERE 절이 없을 때 발생하는 결과로 옳은 것은?",
     "options": [
       "첫 번째 행만 수정된다.",
-      "emp의 모든 행이 수정 대상이 된다.",
+      "테이블 구조가 변경된다.",
       "수정 없이 경고만 발생한다.",
-      "테이블 구조가 변경된다."
+      "emp의 모든 행이 수정 대상이 된다."
     ],
-    "correctIndex": 1,
+    "correctIndex": 3,
     "explanation": "UPDATE는 WHERE 절이 없으면 전체 행에 적용된다.",
     "chapter": "DML",
     "_source": "sqld-1140",
@@ -34920,12 +34920,12 @@ export const AI_MOCK: QuizQuestion[] = [
     "number": 1034,
     "title": "엔터티 무결성(Entity Integrity)에 대한 설명으로 옳은 것은?",
     "options": [
-      "외래키는 반드시 NULL이어야 한다.",
       "기본키는 NULL일 수 없다.",
+      "외래키는 반드시 NULL이어야 한다.",
       "CHECK 제약은 엔터티 무결성만 보장한다.",
       "엔터티 무결성은 권한 제어를 의미한다."
     ],
-    "correctIndex": 1,
+    "correctIndex": 0,
     "explanation": "기본키는 엔터티를 식별해야 하므로 NULL을 허용할 수 없다.",
     "chapter": "데이터 무결성",
     "_source": "sqld-1140",
@@ -34941,11 +34941,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "title": "도메인 무결성을 보장하는 대표 방법으로 옳은 것은?",
     "options": [
       "외래키만 두 개 이상 둔다.",
-      "컬럼의 데이터 타입과 CHECK 제약으로 허용 범위를 제한한다.",
+      "테이블명을 표준화한다.",
       "모든 컬럼을 문자열로 만든다.",
-      "테이블명을 표준화한다."
+      "컬럼의 데이터 타입과 CHECK 제약으로 허용 범위를 제한한다."
     ],
-    "correctIndex": 1,
+    "correctIndex": 3,
     "explanation": "도메인 무결성은 속성 값의 허용 범위를 통제하는 개념이다.",
     "chapter": "데이터 무결성",
     "_source": "sqld-1140",
@@ -34961,11 +34961,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "title": "UNIQUE 제약과 PRIMARY KEY의 차이로 옳은 것은?",
     "options": [
       "UNIQUE는 NULL을 절대 허용할 수 없다.",
-      "PRIMARY KEY는 테이블당 하나이며 NULL을 허용하지 않는다.",
       "PRIMARY KEY는 중복을 허용한다.",
+      "PRIMARY KEY는 테이블당 하나이며 NULL을 허용하지 않는다.",
       "UNIQUE는 참조 무결성만 보장한다."
     ],
-    "correctIndex": 1,
+    "correctIndex": 2,
     "explanation": "UNIQUE는 여러 개 존재할 수 있고 DBMS에 따라 NULL 처리 규칙이 다르지만, PK는 대표 식별자로 NULL을 허용하지 않는다.",
     "chapter": "데이터 무결성",
     "_source": "sqld-1140",
@@ -35033,11 +35033,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "title": "다음 트랜잭션 흐름에 대한 설명으로 옳은 것은?",
     "options": [
       "작업1만 반영된다.",
-      "작업1, 작업2만 반영된다.",
+      "모든 작업이 취소된다.",
       "작업2와 작업3만 반영된다.",
-      "모든 작업이 취소된다."
+      "작업1, 작업2만 반영된다."
     ],
-    "correctIndex": 1,
+    "correctIndex": 3,
     "explanation": "ROLLBACK TO S2는 S2 이후 작업만 취소하므로 작업3만 취소된다.",
     "chapter": "트랜잭션 관리",
     "_source": "sqld-1140",
@@ -35059,11 +35059,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "title": "다음 트랜잭션 흐름에 대한 설명으로 옳은 것은?",
     "options": [
       "모든 작업이 취소된다.",
-      "작업1과 CREATE TABLE은 유지되고 작업3은 취소된다.",
+      "작업3만 유지된다.",
       "CREATE TABLE만 취소된다.",
-      "작업3만 유지된다."
+      "작업1과 CREATE TABLE은 유지되고 작업3은 취소된다."
     ],
-    "correctIndex": 1,
+    "correctIndex": 3,
     "explanation": "DDL 수행 시점에 이전 DML이 자동 COMMIT 되므로 이후 DML만 ROLLBACK 된다.",
     "chapter": "트랜잭션 관리",
     "_source": "sqld-1140",
@@ -35084,12 +35084,12 @@ export const AI_MOCK: QuizQuestion[] = [
     "number": 1041,
     "title": "다음 SQL 결과로 옳은 것은?",
     "options": [
-      "SQ",
       "QL",
+      "SQ",
       "LD",
       "SQL"
     ],
-    "correctIndex": 1,
+    "correctIndex": 0,
     "explanation": "SUBSTR는 시작 위치부터 지정한 길이만큼 문자열을 반환한다.",
     "chapter": "함수",
     "_source": "sqld-1140",
@@ -35409,11 +35409,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "title": "다음 SQL 결과로 옳은 것은?",
     "options": [
       "전체 행 수를 센다.",
-      "중복되지 않는 부서 수를 센다.",
+      "부서별 합계를 계산한다.",
       "NULL 행만 센다.",
-      "부서별 합계를 계산한다."
+      "중복되지 않는 부서 수를 센다."
     ],
-    "correctIndex": 1,
+    "correctIndex": 3,
     "explanation": "COUNT(DISTINCT col)은 NULL을 제외한 서로 다른 값의 개수를 계산한다.",
     "chapter": "그룹 함수",
     "_source": "sqld-1140",
@@ -35539,11 +35539,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "title": "집합 연산을 사용하기 위한 조건으로 옳은 것은?",
     "options": [
       "각 SELECT의 WHERE 절만 동일하면 된다.",
-      "각 SELECT의 컬럼 수가 같고 대응 컬럼의 데이터 타입이 호환되어야 한다.",
+      "JOIN 조건이 반드시 필요하다.",
       "한쪽 SELECT에만 ORDER BY가 있으면 된다.",
-      "JOIN 조건이 반드시 필요하다."
+      "각 SELECT의 컬럼 수가 같고 대응 컬럼의 데이터 타입이 호환되어야 한다."
     ],
-    "correctIndex": 1,
+    "correctIndex": 3,
     "explanation": "집합 연산은 각 SELECT 결과 구조가 서로 호환되어야 수행할 수 있다.",
     "chapter": "집합 연산자",
     "_source": "sqld-1140",
@@ -35775,11 +35775,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "title": "뷰(View)에 대한 설명으로 옳은 것은?",
     "options": [
       "뷰는 항상 독립적인 물리 데이터를 가진다.",
-      "기본 테이블의 데이터를 이용해 가상 테이블처럼 조회할 수 있다.",
       "뷰는 인덱스를 대체하는 저장소다.",
+      "기본 테이블의 데이터를 이용해 가상 테이블처럼 조회할 수 있다.",
       "뷰는 트랜잭션을 자동 종료한다."
     ],
-    "correctIndex": 1,
+    "correctIndex": 2,
     "explanation": "뷰는 SELECT 결과를 논리적으로 캡슐화한 객체다.",
     "chapter": "View",
     "_source": "sqld-1140",
@@ -35794,12 +35794,12 @@ export const AI_MOCK: QuizQuestion[] = [
     "number": 1059,
     "title": "다음 뷰 정의를 기준으로 옳은 설명은?",
     "options": [
-      "뷰는 생성 시점의 데이터만 영구 저장한다.",
       "기본 테이블 데이터가 바뀌면 뷰 조회 결과도 달라질 수 있다.",
+      "뷰는 생성 시점의 데이터만 영구 저장한다.",
       "뷰는 기본 테이블 없이도 삽입 결과를 보존한다.",
       "뷰 정의에는 WHERE 절을 사용할 수 없다."
     ],
-    "correctIndex": 1,
+    "correctIndex": 0,
     "explanation": "일반 뷰는 기본 테이블을 참조하므로 데이터 변경 시 조회 결과가 반영된다.",
     "chapter": "View",
     "_source": "sqld-1140",
@@ -35822,11 +35822,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "title": "집계 함수와 GROUP BY를 포함한 뷰에 대한 설명으로 가장 적절한 것은?",
     "options": [
       "항상 자유롭게 INSERT, UPDATE가 가능하다.",
-      "일반적으로 단순 뷰보다 갱신 제약이 크다.",
       "뷰 정의에는 COUNT를 사용할 수 없다.",
+      "일반적으로 단순 뷰보다 갱신 제약이 크다.",
       "집계 뷰는 외래키 역할만 수행한다."
     ],
-    "correctIndex": 1,
+    "correctIndex": 2,
     "explanation": "집계 뷰는 원본 행과 1:1로 대응하지 않으므로 수정 가능성이 제한된다.",
     "chapter": "View",
     "_source": "sqld-1140",
@@ -35842,11 +35842,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "title": "뷰를 사용하는 주요 목적로 적절한 것은?",
     "options": [
       "반드시 모든 테이블을 하나로 합치는 것",
-      "복잡한 SQL을 단순화하고 필요한 컬럼만 노출하는 것",
+      "인덱스 유지 비용을 없애는 것",
       "모든 트랜잭션을 자동 COMMIT 하는 것",
-      "인덱스 유지 비용을 없애는 것"
+      "복잡한 SQL을 단순화하고 필요한 컬럼만 노출하는 것"
     ],
-    "correctIndex": 1,
+    "correctIndex": 3,
     "explanation": "보안성과 재사용성을 위해 뷰를 활용할 수 있다.",
     "chapter": "View",
     "_source": "sqld-1140",
@@ -35862,11 +35862,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "title": "다음 SQL에서 동점자가 있을 때 RANK와 DENSE_RANK의 차이로 옳은 것은?",
     "options": [
       "둘 다 항상 동일하다.",
-      "RANK는 순위가 건너뛰고 DENSE_RANK는 건너뛰지 않는다.",
       "DENSE_RANK만 정렬 절을 사용한다.",
+      "RANK는 순위가 건너뛰고 DENSE_RANK는 건너뛰지 않는다.",
       "ROW_NUMBER와 완전히 동일하다."
     ],
-    "correctIndex": 1,
+    "correctIndex": 2,
     "explanation": "동점 이후 다음 순위 처리 방식이 두 함수의 핵심 차이다.",
     "chapter": "윈도우 함수",
     "_source": "sqld-1140",
@@ -35882,11 +35882,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "title": "다음 SQL 결과로 옳은 것은?",
     "options": [
       "전체 합계가 한 행만 표시된다.",
-      "같은 지역의 각 행에 지역 합계가 반복 표시된다.",
+      "PARTITION BY는 ORDER BY와 동일하다.",
       "집계 결과는 행 수를 줄인다.",
-      "PARTITION BY는 ORDER BY와 동일하다."
+      "같은 지역의 각 행에 지역 합계가 반복 표시된다."
     ],
-    "correctIndex": 1,
+    "correctIndex": 3,
     "explanation": "PARTITION BY region은 지역별 합계를 같은 파티션의 모든 행에 보여준다.",
     "chapter": "윈도우 함수",
     "_source": "sqld-1140",
@@ -35944,11 +35944,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "title": "다음 SQL 결과로 가장 적절한 설명은?",
     "options": [
       "최종 합계만 한 번 계산한다.",
-      "지역별 정렬 순서에 따른 누적 합계를 계산한다.",
       "모든 동점 행을 하나로 합친다.",
+      "지역별 정렬 순서에 따른 누적 합계를 계산한다.",
       "GROUP BY 없이 사용할 수 없다."
     ],
-    "correctIndex": 1,
+    "correctIndex": 2,
     "explanation": "ORDER BY와 프레임 절을 함께 쓰면 누적 합계 같은 분석 계산이 가능하다.",
     "chapter": "윈도우 함수",
     "_source": "sqld-1140",
@@ -35970,11 +35970,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "title": "ROW_NUMBER() OVER (PARTITION BY dept ORDER BY sal DESC)의 의미로 옳은 것은?",
     "options": [
       "전체 테이블에서 한 번만 번호를 부여한다.",
-      "부서별로 급여가 높은 순서의 일련번호를 부여한다.",
       "부서별 합계를 계산한다.",
+      "부서별로 급여가 높은 순서의 일련번호를 부여한다.",
       "NULL만 번호를 부여한다."
     ],
-    "correctIndex": 1,
+    "correctIndex": 2,
     "explanation": "PARTITION BY로 부서를 나누고 ORDER BY sal DESC로 순번 기준을 정한다.",
     "chapter": "윈도우 함수",
     "_source": "sqld-1140",
@@ -35990,11 +35990,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "title": "복합 인덱스 (col1, col2)가 있을 때 일반적으로 인덱스 활용도가 높은 조건으로 옳은 것은?",
     "options": [
       "WHERE col2 = :v2",
-      "WHERE col1 = :v1 AND col2 BETWEEN :v2 AND :v3",
+      "WHERE col2 + 1 = 5",
       "WHERE TO_CHAR(col1) = '10'만 사용",
-      "WHERE col2 + 1 = 5"
+      "WHERE col1 = :v1 AND col2 BETWEEN :v2 AND :v3"
     ],
-    "correctIndex": 1,
+    "correctIndex": 3,
     "explanation": "복합 인덱스는 선두 컬럼 조건이 있을 때 활용 가능성이 높다.",
     "chapter": "관계형 DB와 SELECT",
     "_source": "sqld-1140",
@@ -36010,11 +36010,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "title": "인덱스 컬럼에 함수가 적용되면 일반적으로 주의할 점으로 옳은 것은?",
     "options": [
       "인덱스가 더 잘 사용된다.",
-      "일반 인덱스를 그대로 활용하지 못할 수 있다.",
       "PK 제약이 자동 삭제된다.",
+      "일반 인덱스를 그대로 활용하지 못할 수 있다.",
       "무결성이 깨진다."
     ],
-    "correctIndex": 1,
+    "correctIndex": 2,
     "explanation": "컬럼 값에 함수를 적용하면 함수 기반 인덱스가 아니면 인덱스 사용성이 낮아질 수 있다.",
     "chapter": "관계형 DB와 SELECT",
     "_source": "sqld-1140",
@@ -36030,11 +36030,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "title": "선택도가 매우 낮은 컬럼에 단독 인덱스를 두었을 때 기대 효과로 가장 적절한 것은?",
     "options": [
       "항상 압도적으로 빠르다.",
-      "조회 패턴에 따라 테이블 전체 스캔이 더 유리할 수 있다.",
       "반드시 UNIQUE가 된다.",
+      "조회 패턴에 따라 테이블 전체 스캔이 더 유리할 수 있다.",
       "조인만 금지된다."
     ],
-    "correctIndex": 1,
+    "correctIndex": 2,
     "explanation": "값 분포가 치우친 컬럼은 인덱스 이점이 작을 수 있다.",
     "chapter": "관계형 DB와 SELECT",
     "_source": "sqld-1140",
@@ -36050,11 +36050,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "title": "인덱스가 많은 테이블에서 INSERT/UPDATE/DELETE가 느려질 수 있는 이유로 옳은 것은?",
     "options": [
       "인덱스는 변경 작업과 무관하다.",
-      "데이터 변경 시 관련 인덱스도 함께 유지해야 하기 때문이다.",
       "인덱스가 있으면 COMMIT이 불가능하다.",
+      "데이터 변경 시 관련 인덱스도 함께 유지해야 하기 때문이다.",
       "인덱스는 무조건 메모리에서만 관리된다."
     ],
-    "correctIndex": 1,
+    "correctIndex": 2,
     "explanation": "인덱스는 조회에는 도움을 줄 수 있지만 DML 시 유지 비용이 발생한다.",
     "chapter": "관계형 DB와 SELECT",
     "_source": "sqld-1140",
@@ -36069,12 +36069,12 @@ export const AI_MOCK: QuizQuestion[] = [
     "number": 1070,
     "title": "대량 범위 조회에서 인덱스보다 전체 테이블 스캔이 더 적절할 수 있는 경우로 옳은 것은?",
     "options": [
-      "한 건만 조회할 때",
       "선택 비율이 매우 높아 대부분의 행을 읽어야 할 때",
+      "한 건만 조회할 때",
       "PK로 정확히 한 행을 찾을 때",
       "조인 조건이 있을 때는 항상 인덱스만 사용한다."
     ],
-    "correctIndex": 1,
+    "correctIndex": 0,
     "explanation": "읽어야 할 행이 많으면 인덱스 탐색 후 랜덤 접근보다 전체 스캔이 효율적일 수 있다.",
     "chapter": "관계형 DB와 SELECT",
     "_source": "sqld-1140",
@@ -36090,11 +36090,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "title": "후보키(Candidate Key)에 대한 설명으로 옳은 것은?",
     "options": [
       "유일성만 만족하면 된다.",
-      "유일성과 최소성을 만족하는 식별자 후보",
       "반드시 외래키여야 한다.",
+      "유일성과 최소성을 만족하는 식별자 후보",
       "NULL을 반드시 허용해야 한다."
     ],
-    "correctIndex": 1,
+    "correctIndex": 2,
     "explanation": "후보키는 각 행을 구분할 수 있으면서 불필요한 속성을 포함하지 않아야 한다.",
     "chapter": "식별자",
     "_source": "sqld-1140",
@@ -36109,12 +36109,12 @@ export const AI_MOCK: QuizQuestion[] = [
     "number": 1072,
     "title": "슈퍼키(Super Key)에 대한 설명으로 옳은 것은?",
     "options": [
-      "항상 최소성을 만족한다.",
       "행을 유일하게 식별할 수 있지만 최소성은 만족하지 않을 수 있다.",
+      "항상 최소성을 만족한다.",
       "반드시 단일 컬럼이어야 한다.",
       "외래키와 동일한 개념이다."
     ],
-    "correctIndex": 1,
+    "correctIndex": 0,
     "explanation": "슈퍼키는 후보키보다 넓은 개념으로, 불필요한 속성을 더 포함할 수 있다.",
     "chapter": "식별자",
     "_source": "sqld-1140",
@@ -36150,11 +36150,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "title": "대리키(Surrogate Key)를 사용하는 주된 이유로 적절한 것은?",
     "options": [
       "업무 규칙을 숨기기 위해서만 사용한다.",
-      "업무 식별자가 변경될 가능성이 크거나 길이가 길 때 안정적인 식별자를 두기 위해서",
       "외래키를 없애기 위해서",
+      "업무 식별자가 변경될 가능성이 크거나 길이가 길 때 안정적인 식별자를 두기 위해서",
       "NULL 비교를 쉽게 하기 위해서"
     ],
-    "correctIndex": 1,
+    "correctIndex": 2,
     "explanation": "대리키는 업무 속성과 분리된 인공 식별자로 변경 영향도를 낮춘다.",
     "chapter": "식별자",
     "_source": "sqld-1140",
@@ -36216,11 +36216,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "title": "다음 SQL 결과로 옳은 것은?",
     "options": [
       "010-1234-5678",
-      "01012345678",
       "12345678",
+      "01012345678",
       "010-12345678"
     ],
-    "correctIndex": 1,
+    "correctIndex": 2,
     "explanation": "숫자가 아닌 문자를 모두 제거하면 하이픈 없는 숫자만 남는다.",
     "chapter": "정규표현식",
     "_source": "sqld-1140",
