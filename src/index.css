@@ -591,6 +591,30 @@ img, svg {
   font-size: 0.9em; font-weight: 600;
 }
 
+/* ── SVG 도식 (2026-11-03) — 색은 토큰만 써서 다크모드에서도 그대로 ── */
+.theory-md .t-fig {
+  margin: 18px 0 24px; padding: 18px 12px 12px;
+  background: var(--bg-card); border: 1px solid var(--border-subtle);
+  border-radius: 12px; text-align: center;
+}
+.theory-md .t-fig svg { display: block; width: 100%; height: auto; max-width: 440px; margin: 0 auto; font-family: var(--font-sans); }
+.theory-md .t-fig figcaption { margin-top: 10px; font-size: 12.5px; line-height: 1.6; color: var(--fg-3); text-align: left; }
+.t-fig .ink { fill: var(--fg-1); }
+.t-fig .sub { fill: var(--fg-3); }
+.t-fig .inv { fill: var(--fg-inverse); }
+.t-fig .accf { fill: var(--point-600); }
+.t-fig .ln { stroke: var(--fg-3); fill: none; }
+.t-fig .ln.strong { stroke: var(--fg-1); }
+.t-fig .ln.faint { stroke: var(--border-subtle); }
+.t-fig .acc { stroke: var(--point-500); }
+.t-fig .box { fill: var(--bg-surface); stroke: var(--border-strong); }
+.t-fig .hi { fill: var(--point-100); stroke: var(--point-500); }
+.t-fig .hi2 { fill: var(--point-300); }
+.t-fig .cut { fill: var(--bg-card); }
+.t-fig .edge { fill: none; stroke: var(--point-600); }
+.t-fig .dot { fill: var(--bg-card); stroke: var(--fg-1); }
+.t-fig .badge { fill: var(--point-600); }
+
 /* 모바일 — 표 가로 스크롤 + 헤딩 축소 + 도식 카드 패딩 */
 @media (max-width: 720px) {
   .theory-md { font-size: 15px; }
