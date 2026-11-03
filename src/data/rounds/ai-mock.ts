@@ -1,5 +1,5 @@
 // Auto-generated from scripts/authored/ai-mock.json
-// AI 생성 모의고사 풀 (기출 변형) · 1213문항
+// AI 생성 모의고사 풀 (기출 변형) · 1185문항
 // ⚠ 직접 편집 금지. ai-mock.json 수정 후 'node scripts/build-quiz-bank.mjs' 재실행.
 import type { QuizQuestion } from '../quizBank';
 
@@ -1250,26 +1250,6 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 10862,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 63,
-    "title": "다음 설명 중 올바르지 않은 것은?",
-    "options": [
-      "SQL Server는 null 값을 인덱스 맨 뒤에 저장한다.",
-      "Oracle에서 인덱스 구성 칼럼 중 하나라도 null이 아닌 레코드는 인덱스에 저장한다.",
-      "SQL Server는 인덱스 구성 칼럼이 모두 null인 레코드도 인덱스에 저장한다.",
-      "Oracle에서 인덱스 구성 칼럼이 모두 null인 레코드는 인덱스에 저장하지 않는다."
-    ],
-    "correctIndex": 0,
-    "explanation": "Oracle 은 인덱스 구성 컬럼이 모두 NULL 인 레코드는 인덱스에 저장하지 않고(④) 하나라도 NULL 이 아니면 저장하며(②), NULL 을 가장 큰 값으로 보아 인덱스 맨 뒤에 둔다. SQL Server 는 모두 NULL 인 레코드도 인덱스에 저장하고(③) NULL 을 맨 앞에 둔다. 따라서 SQL Server 가 NULL 을 맨 뒤에 저장한다는 ① 이 올바르지 않다.",
-    "chapter": "WHERE",
-    "_source": "cbt-mock",
-    "_origId": "cbt-013",
-    "_cbtOrigNo": 13
-  },
-  {
     "id": 10863,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
@@ -1340,26 +1320,6 @@ export const AI_MOCK: QuizQuestion[] = [
         ]
       }
     ]
-  },
-  {
-    "id": 10865,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 66,
-    "title": "Subquery의 종류 중에서 Subquery가 Mainquery의 제공자 역할을 하고 Mainquery의 값이 Subquery에 주입되지 않는 유형은 무엇인가?",
-    "options": [
-      "Filter형 Subquery",
-      "Early Filter형 Subquery",
-      "Associative Subquery",
-      "Access Subquery"
-    ],
-    "correctIndex": 3,
-    "explanation": "서브쿼리가 메인쿼리에 값을 제공하는 제공자 역할만 하고, 메인쿼리의 값이 서브쿼리로 들어가지 않는 유형은 Access Subquery 다(④). Filter 형(①)은 반대로 메인쿼리의 값을 받아 서브쿼리가 확인자 역할을 하고, Early Filter 형(②)은 서브쿼리가 먼저 실행되어 데이터를 걸러내며, Associative Subquery(③)는 연관 서브쿼리를 뜻한다.",
-    "chapter": "서브쿼리",
-    "_source": "cbt-mock",
-    "_origId": "cbt-016",
-    "_cbtOrigNo": 16
   },
   {
     "id": 10866,
@@ -1468,26 +1428,6 @@ export const AI_MOCK: QuizQuestion[] = [
     "_source": "cbt-mock",
     "_origId": "cbt-020",
     "_cbtOrigNo": 20
-  },
-  {
-    "id": 10870,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 71,
-    "title": "Sort Merge 방식의 조인이 Nested Loop 방식 조인보다 효율적으로 판단되는 것을 고르시오.",
-    "options": [
-      "기본키와 외래키 관계에서 외래키에 인덱스가 없을 때",
-      "사용자가 발주한 주문에 대해서 체결 정보 한 건을 확인할 때",
-      "병렬로 테이블을 읽고 SORT_AREA_SIZE가 작은 경우",
-      "Random Access가 자주 발생하지 않을 때"
-    ],
-    "correctIndex": 0,
-    "explanation": "Sort Merge 방식의 조인은 두 개의 테이블을 Sort 한 후에 Merge를 한다. Merge가 완료되면 한 번의 Full Scan으로 데이터를 검색한다. 따라서 기본키와 외래키 관계에서 외래키에 인덱스가 없을 때 옵티마이저가 Sort Merge 방식의 조인으로 동작하게 한다.",
-    "chapter": "조인",
-    "_source": "cbt-mock",
-    "_origId": "cbt-021",
-    "_cbtOrigNo": 21
   },
   {
     "id": 10871,
@@ -1634,26 +1574,6 @@ export const AI_MOCK: QuizQuestion[] = [
         "code": "SELECT LEVEL, LPAD(' ', 4 * (LEVEL - 1)) || EMPNO, MGR, ( ) AS ISLEAF FROM SCOTT.EMP START WITH MGR IS NULL CONNECT BY PRIOR EMPNO = MGR;"
       }
     ]
-  },
-  {
-    "id": 10875,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 76,
-    "title": "다음 중 인덱스 튜닝에 대해 잘못 설명하고 있는 것은?",
-    "options": [
-      "인덱스를 경유한 테이블의 Random 액세스 부하가 심할 때, 클러스터 테이블이나 IOT를 활용하는 방안을 고려할 수 있다.",
-      "인덱스를 경유한 테이블 액세스 횟수가 같더라도 인덱스 구성에 따라 스캔 효율이 달라진다. 따라서 인덱스 스캔 효율을 높이기 위해 인덱스 칼럼 순서를 바꿔야 할 때가 종종 있다.",
-      "조건절이 Where deptno = 10 and ename = 'SCOTT'일 때 인덱스를 [deptno + ename] 순으로 구성하나 [ename + deptno] 순으로 구성하나 인덱스 스캔 효율에 차이가 없다.",
-      "인덱스 튜닝의 핵심 요소 중 하나는 불필요한 테이블 Random 액세스가 발생하지 않도록 하는 데에 있다. 이를 위해 인덱스 칼럼 순서를 바꿔주는 것도 큰 효과가 있다."
-    ],
-    "correctIndex": 3,
-    "explanation": "인덱스를 거친 테이블 Random 액세스 부하가 크면 클러스터 테이블·IOT 를 고려할 수 있고(①), 인덱스 구성에 따라 스캔 효율이 달라져 컬럼 순서를 바꾸기도 하며(②), 두 컬럼이 모두 '=' 조건이면 [deptno + ename] 과 [ename + deptno] 의 스캔 효율은 같다(③). 그러나 테이블 Random 액세스 횟수는 조건을 만족하는 행 수로 정해져 인덱스 컬럼 순서를 바꿔도 줄지 않으므로 ④ 가 잘못되었다(줄이려면 인덱스에 필요한 컬럼을 추가해야 한다).",
-    "chapter": "WHERE",
-    "_source": "cbt-mock",
-    "_origId": "cbt-027",
-    "_cbtOrigNo": 27
   },
   {
     "id": 10876,
@@ -1980,26 +1900,6 @@ export const AI_MOCK: QuizQuestion[] = [
     "_source": "cbt-mock",
     "_origId": "cbt-036",
     "_cbtOrigNo": 36
-  },
-  {
-    "id": 10886,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 87,
-    "title": "조인에 대한 설명으로 적절하지 않은 것은 다음 중 무엇인가?",
-    "options": [
-      "Nested Loop Join은 중첩된 반복문과 유사한 형식이다.",
-      "FROM절에 나열된 모든 테이블이 동시에 조인 작업이 수행된다.",
-      "Nested Loop Join은 선행 테이블의 조건을 만족하는 건수만큼 반복 수행된다.",
-      "Hash Join은 작은 테이블을 선행 테이블로 사용하는 것이 성능관점에서 좋다."
-    ],
-    "correctIndex": 1,
-    "explanation": "FROM절에 아무리 많은 테이블이 나열되더라도 항상 2개씩 조인된다. 테이블과 테이블 사이 또는 앞에서 이미 수행된 조인의 결과 집합과 테이블, 조인 결과와 조인 결과 사이에서 조인이 처리된다.",
-    "chapter": "조인",
-    "_source": "cbt-mock",
-    "_origId": "cbt-038",
-    "_cbtOrigNo": 38
   },
   {
     "id": 10888,
@@ -3342,26 +3242,6 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 10933,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 134,
-    "title": "실행 계획에 대한 설명으로 적절하지 않은 것은?",
-    "options": [
-      "실행 계획은 SQL문의 처리를 위한 절차와 방법이 표현된다.",
-      "실행 계획이 다르면 결과도 달라질 수 있다.",
-      "실행 계획은 액세스 기법, 조인 순서, 조인 방법 등으로 구성된다.",
-      "최적화 정보는 실행 계획의 단계별 예상 비용을 표시한 것이다."
-    ],
-    "correctIndex": 1,
-    "explanation": "실행 계획은 SQL 을 처리하는 절차와 방법을 표현한 것으로(①), 액세스 기법·조인 순서·조인 방법 등으로 구성되고(③), 최적화 정보는 단계별 예상 비용 등을 보여 준다(④). 같은 SQL 은 실행 계획이 달라도 결과는 같고 성능만 달라지므로 결과가 달라질 수 있다는 ② 가 적절하지 않다.",
-    "chapter": "조인",
-    "_source": "cbt-mock",
-    "_origId": "cbt-090",
-    "_cbtOrigNo": 90
-  },
-  {
     "id": 10934,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
@@ -3420,26 +3300,6 @@ export const AI_MOCK: QuizQuestion[] = [
     "_source": "cbt-mock",
     "_origId": "cbt-093",
     "_cbtOrigNo": 93
-  },
-  {
-    "id": 10937,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 138,
-    "title": "다음 중 해시 조인(Hash Join)에 대한 설명으로 올바르지 않은 것은?",
-    "options": [
-      "해시 조인은 해시 함수를 사용해서 주소를 계산하고 조인을 수행한다.",
-      "해시 조인을 할 때는 선행 테이블의 크기가 작아야 한다.",
-      "해시 조인은 CPU 연산이 많이 발생한다.",
-      "해시 조인은 랜덤 액세스(Random Access)로 인하여 부하가 발생한다."
-    ],
-    "correctIndex": 3,
-    "explanation": "해시 조인은 해시 함수를 사용하므로 CPU를 많이 사용하지만, 랜덤 액세스는 발생하지 않는다. 랜덤 액세스는 Nested Loop 조인이 발생한다.",
-    "chapter": "조인",
-    "_source": "cbt-mock",
-    "_origId": "cbt-094",
-    "_cbtOrigNo": 94
   },
   {
     "id": 10938,
@@ -4099,32 +3959,6 @@ export const AI_MOCK: QuizQuestion[] = [
     "_source": "cbt-mock",
     "_origId": "cbt-115",
     "_cbtOrigNo": 115
-  },
-  {
-    "id": 10957,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 158,
-    "title": "Nested Loop 방식의 조인 절차로 옳은 것을 고르시오.",
-    "options": [
-      "(1) → (2) → (4) → (3)",
-      "(3) → (2) → (1) → (4)",
-      "(4) → (2) → (3) → (1)",
-      "(4) → (3) → (2) → (1)"
-    ],
-    "correctIndex": 2,
-    "explanation": "Nested Loop 조인은 선행(driving) 테이블에서 조건을 만족하는 행을 하나 찾고(4), 그 행의 조인 키로 후행 테이블에 조인을 시도한다(2). 이때 후행 테이블의 인덱스에서 조인 키를 찾고(3), 인덱스가 준 레코드 식별자(ROWID)로 후행 테이블을 액세스한다(1). 이 과정을 선행 테이블의 다음 행마다 반복한다. 정답은 ③ 이다.",
-    "chapter": "조인",
-    "_source": "cbt-mock",
-    "_origId": "cbt-116",
-    "_cbtOrigNo": 116,
-    "references": [
-      {
-        "type": "text",
-        "content": "(1) 인덱스에서 추출한 레코드 식별자를 이용하여 후행 테이블을 액세스한다. (2) 선행 테이블의 조인 키를 가지고 후행 테이블에 조인 키가 존재하는지 찾으러 가서 조인을 시도한다. (3) 후행 테이블의 인덱스에 선행 테이블의 조인 키가 존재하는지 확인한다. (4) 선행 테이블에서 조건을 만족하는 첫 번째 행을 찾는다."
-      }
-    ]
   },
   {
     "id": 10958,
@@ -4814,26 +4648,6 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 139
   },
   {
-    "id": 10981,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 182,
-    "title": "옵티마이저에 대한 설명으로 적절하지 않은 것은?",
-    "options": [
-      "옵티마이저는 질의에 대해 실행 계획을 생성한다.",
-      "비용 기반 옵티마이저는 적절한 인덱스가 존재하면 반드시 인덱스를 사용한다.",
-      "규칙 기반 옵티마이저에서 제일 낮은 우선순위는 전체 테이블 스캔이다.",
-      "비용 기반 옵티마이저는 비용 계산을 위해 다양한 통계정보를 사용한다."
-    ],
-    "correctIndex": 1,
-    "explanation": "비용 기반 옵티마이저는 비용을 기반으로 최적의 작업을 수행한다. 따라서 인덱스 스캔보다 전체 테이블 스캔이 비용이 낮다고 판단하면 적절한 인덱스가 존재하더라도 전체 테이블 스캔으로 SQL문을 수행할 수 있다.",
-    "chapter": "관계형 DB와 SELECT",
-    "_source": "cbt-mock",
-    "_origId": "cbt-140",
-    "_cbtOrigNo": 140
-  },
-  {
     "id": 10982,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
@@ -4910,26 +4724,6 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 10984,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 185,
-    "title": "다음 중 분산 데이터베이스의 특징으로 가장 부적절한 것은?",
-    "options": [
-      "지역 자치성, 점증적 시스템 용량 확장",
-      "빠른 응답 속도와 통신 비용 절감",
-      "오류의 잠재성 증대",
-      "처리 비용의 감소"
-    ],
-    "correctIndex": 3,
-    "explanation": "분산 데이터베이스는 지역 자치성과 점진적인 용량 확장(①), 가까운 곳의 데이터를 써서 빠른 응답과 통신 비용 절감(②)이 장점이지만, 구조가 복잡해 오류의 잠재성이 커진다(③). 여러 지역의 데이터베이스를 관리하고 통제해야 하므로 처리 비용은 오히려 증가해, 처리 비용 감소라고 한 ④ 가 부적절하다.",
-    "chapter": "관계형 DB와 SELECT",
-    "_source": "cbt-mock",
-    "_origId": "cbt-143",
-    "_cbtOrigNo": 143
-  },
-  {
     "id": 10985,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
@@ -4948,26 +4742,6 @@ export const AI_MOCK: QuizQuestion[] = [
     "_source": "cbt-mock",
     "_origId": "cbt-144",
     "_cbtOrigNo": 144
-  },
-  {
-    "id": 10986,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 187,
-    "title": "다음 설명 중 적절한 것은 무엇인가?",
-    "options": [
-      "인덱스는 인덱스 구성 칼럼으로 항상 오름차순으로 정렬된다.",
-      "비용 기반 옵티마이저는 인덱스 스캔이 항상 유리하다고 판단한다.",
-      "규칙 기반 옵티마이저는 적절한 인덱스가 존재하면 항상 인덱스를 사용하려고 한다.",
-      "인덱스 범위 스캔은 항상 여러 건의 결과가 반환된다."
-    ],
-    "correctIndex": 2,
-    "explanation": "• 인덱스는 내림차순으로 생성 및 정렬된다. • 비용적인 측면에서는 전체 테이블 스캔이 유리할 수 있다. • 규칙 기반 옵티마이저의 규칙에 따라 적절한 인덱스가 존재하면 전체 테이블 스캔보다는 항상 인덱스를 사용하려고 한다. • 인덱스 범위 스캔은 결과 건수만큼 반환한다. 결과가 없으면 한 건도 반환하지 않을 수 있다.",
-    "chapter": "관계형 DB와 SELECT",
-    "_source": "cbt-mock",
-    "_origId": "cbt-145",
-    "_cbtOrigNo": 145
   },
   {
     "id": 10987,
@@ -5493,26 +5267,6 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 161
   },
   {
-    "id": 11003,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 204,
-    "title": "SQL 처리 흐름도에 대한 설명으로 적절하지 않은 것은?",
-    "options": [
-      "실행 계획을 시각화한 것이다.",
-      "SQL문의 처리 절차를 시각적으로 표현한 것이다.",
-      "인덱스 스캔 및 전체 테이블 스캔 등의 액세스 기법을 표현할 수 있다.",
-      "성능적인 측면의 표현은 고려하지 않는다."
-    ],
-    "correctIndex": 3,
-    "explanation": "SQL 처리 흐름도에서는 성능적인 측면도 표현할 수 있다. 일량적인 측면의 표현과 인덱스 스캔 또는 테이블 스캔 등을 표현할 수 있다.",
-    "chapter": "관계형 DB와 SELECT",
-    "_source": "cbt-mock",
-    "_origId": "cbt-162",
-    "_cbtOrigNo": 162
-  },
-  {
     "id": 11004,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
@@ -5699,26 +5453,6 @@ export const AI_MOCK: QuizQuestion[] = [
     "_source": "cbt-mock",
     "_origId": "cbt-169",
     "_cbtOrigNo": 169
-  },
-  {
-    "id": 11011,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 212,
-    "title": "다음 중 인덱스를 사용할 수 없는 조건에 해당되지 않는 것은?",
-    "options": [
-      "인덱스가 사용되는 칼럼에 NVL(Key, 0)을 사용했다.",
-      "인덱스가 사용되는 칼럼에 to_char(vintagedate, 'yyyymmdd') = sysdate를 사용했다.",
-      "인덱스가 사용되는 칼럼에 vintageyear = to_char(sysdate, 'yyyy')를 사용했다.",
-      "인덱스가 사용되는 칼럼에 name||' ' = 'lim'을 사용했다."
-    ],
-    "correctIndex": 2,
-    "explanation": "인덱스 컬럼을 함수나 연산으로 가공하면(NVL(Key, 0), TO_CHAR(vintagedate, ...), name || ' ') 인덱스에 저장된 값과 비교할 수 없어 인덱스를 쓰지 못한다. ③ 은 인덱스 컬럼 vintageyear 는 그대로 두고 비교 대상인 SYSDATE 쪽만 TO_CHAR 로 가공했으므로 인덱스를 사용할 수 있다. 정답은 ③ 이다.",
-    "chapter": "함수",
-    "_source": "cbt-mock",
-    "_origId": "cbt-170",
-    "_cbtOrigNo": 170
   },
   {
     "id": 11012,
@@ -6159,26 +5893,6 @@ export const AI_MOCK: QuizQuestion[] = [
         "code": "SELECT E.ENAME, D.DNAME\nFROM EMP E, DEPT D\nWHERE E.DEPTNO = D.DEPTNO;"
       }
     ]
-  },
-  {
-    "id": 11030,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 231,
-    "title": "분산 데이터베이스의 특징 중 저장 장소 명시가 불필요하다는 특성은 무엇인가?",
-    "options": [
-      "지역 사상 투명성",
-      "위치 투명성",
-      "병행 투명성",
-      "분할 투명성"
-    ],
-    "correctIndex": 1,
-    "explanation": "• 위치 투명성이란 사용하려는 데이터의 저장 장소 명시가 불필요하며 위치 정보가 System Catalog에 유지되어야 함을 말한다. • 지역 사상 투명성이란 지역 DBMS와 물리적 DB 사이의 Mapping을 보장한다. 각 지역 시스템 이름과 무관한 이름 사용이 가능하다.",
-    "chapter": "관계형 DB와 SELECT",
-    "_source": "cbt-mock",
-    "_origId": "cbt-190",
-    "_cbtOrigNo": 190
   },
   {
     "id": 11031,
@@ -7512,27 +7226,6 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11076,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "1과목",
-    "number": 277,
-    "title": "다음 중 성능 데이터모델링에 대한 설명으로 가장 부적절한 것은?",
-    "options": [
-      "분석/설계 단계에서 성능을 고려한 데이터모델링을 수행할 경우 성능 저하에 따른 Rework비용을 최소화 할 수 있는 기회를 가지게 된다.",
-      "데이터모델은 성능을 튜닝하면서 변경이 될 수 있는 특징이 있다.",
-      "데이터의 증가가 빠를수록 성능저하에 따른 성능개선비용은 증가한다.",
-      "성능이 저하된 결과를 대상으로 데이터모델 보다는 문제발생 시점의 SQL을 중심으로 집중하여 튜닝을 한다."
-    ],
-    "correctIndex": 3,
-    "explanation": "성능 저하는 SQL 만이 아니라 데이터 모델 구조가 원인인 경우가 많아, 데이터 모델 단계부터 성능을 고려해야 한다. 데이터 모델은 고치지 않고 SQL 만 튜닝한다는 ④ 가 부적절하다. 분석·설계 단계의 성능 고려가 Rework 비용을 줄인다(①).",
-    "chapter": "데이터 모델링 기법",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0030",
-    "_category": "데이터 모델링 기법",
-    "_correctRate": 10
-  },
-  {
     "id": 11077,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
@@ -7558,27 +7251,6 @@ export const AI_MOCK: QuizQuestion[] = [
         "content": "가. 데이터 모델링을 할 때 정규화를 정확하게 수행한다.\n나. 용량과 트랜잭션의 유형에 따라 반정규화를 수행한다.\n다. 데이터베이스 용량산정을 수행한다.\n라. 데이터베이스에 발생되는 트랜잭션의 유형을 파악한다.\n마. 성능관점에서 데이터 모델을 검증한다.\n바. 이력모델의 조정,  PK/FK조정, 슈퍼타입/서브타입 조정 등을 수행한다."
       }
     ]
-  },
-  {
-    "id": 11078,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "1과목",
-    "number": 279,
-    "title": "다음 중 성능데이터 모델링을 할 때 고려사항으로 가장 부적절한 것은?",
-    "options": [
-      "이력데이터는 시간에 따라 반복적으로 발생이 되기 때문에 대량 데이터일 가능성이 높아 특별히 성능을 고려하여 칼럼 등을 추가하도록 설계해야 한다.",
-      "물리적인 데이터 모델링을 할 때 PK/FK의 칼럼의 순서조정, FK인덱스 생성 등은 성능 향상을 위한 데이터 모델링 작업에 중요한 요소가 된다.",
-      "용량산정은 전체적인 데이터베이스에 발생되는 트랜잭션의 유형과 양을 분석하는 자료가 되므로 성능데이터 모델링을 할 때 중요한 작업이 될 수 있다.",
-      "데이터 모델링의 정규화는 항상 조회 성능저하를 나타내므로 반정규화 관점에서만 성능을 고려하여 설계하도록 한다."
-    ],
-    "correctIndex": 3,
-    "explanation": "정규화는 중복을 줄여 입력·수정·삭제 성능을 높이고, 조회에서도 대상 테이블이 작아져 오히려 빨라지는 경우가 있다. 정규화가 항상 조회 성능을 떨어뜨리니 반정규화 관점에서만 설계한다는 ④ 가 부적절하다.",
-    "chapter": "데이터 모델링 기법",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0032",
-    "_category": "데이터 모델링 기법",
-    "_correctRate": 10
   },
   {
     "id": 11079,
@@ -11426,27 +11098,6 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11171,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 372,
-    "title": "Hash Join 기법에 대한 설명으로 옳은 것은?",
-    "options": [
-      "Hash Join은 조인 칼럼의 인덱스가 존재하지 않으면 사용할 수 없는 기법이다.",
-      "해시 테이블을 저장할 때 메모리에 적재 할 수 있는 영역의 크기보다 커지면 초과한 크기를 제외한 영역만큼 메모리에 적재한다.",
-      "Hash Join은 해시 함수를 이용하여 조인을 수행하기 때문에 '='로 수행하는 조인인 동등조건 이외에도 사용할 수 있다.",
-      "조인 작업을 수행할 때는 결과 행의 수가 적은 테이블을 선행 테이블로 사용하는 것이 좋다."
-    ],
-    "correctIndex": 3,
-    "explanation": "해시 조인은 CPU 연산이 많이 발생되는 조인으로 조인을 할 때 선행 테이블의 크기가 작아야 유리한 조인이다.",
-    "chapter": "조인",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0157",
-    "_category": "JOIN",
-    "_correctRate": 10
-  },
-  {
     "id": 11172,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
@@ -11474,23 +11125,23 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11175,
+    "id": 11176,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
     "subject": "1과목",
-    "number": 376,
-    "title": "다음 중 분산 데이터베이스의 투명성에 속하지 않는 것은?",
+    "number": 377,
+    "title": "분산 데이터베이스의 특징 중 저장 장소 명시가 불필요하다는 특성은 무엇인가?",
     "options": [
-      "병렬 투명성",
-      "중복 투명성",
+      "분할 투명성",
       "병행 투명성",
-      "분할 투명성"
+      "위치 투명성",
+      "지역 사상 투명성"
     ],
-    "correctIndex": 0,
-    "explanation": "분산 데이터베이스의 투명성의 종류에는 분할 투명성, 위치 투명성, 지역 투명성, 중복 투명성, 병행 투명성, 장애 투명성이 있다.",
+    "correctIndex": 2,
+    "explanation": "-위치 투명성이란 사용하려는 데이터의 저장 장소 명시가 불필요하며 위치 정보가 시스템 카탈로그에 유지되어야 함을 말한다.\n-지역 사상 투명성이란 지역 DBMS와 물리적 DB 사이의 Mapping을 보장한다. 각 지역 시스템 이름과 무관한 이름 사용이 가능하다.",
     "chapter": "데이터 모델 개념",
     "_source": "sqld-1140",
-    "_origId": "sqld-0164",
+    "_origId": "sqld-0167",
     "_category": "데이터베이스 개념",
     "_correctRate": 10
   },
@@ -13389,6 +13040,27 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
+    "id": 11254,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 455,
+    "title": "다음 설명 중 올바르지 않은 것은?",
+    "options": [
+      "Oracle에서 인덱스 구성 칼럼이 모두 null인 레코드는 인덱스에 저장하지 않는다.",
+      "SQL Server는 인덱스 구성 칼럼이 모두 null인 레코드도 인덱스에 저장한다.",
+      "Oracle에서 인덱스 구성 칼럼 중 하나라도 null이 아닌 레코드는 인덱스에 저장한다.",
+      "SQL Server는 null 값을 인덱스 맨 뒤에 저장한다."
+    ],
+    "correctIndex": 3,
+    "explanation": "SQL Server는 null값을 인덱스 맨 앞에 저장하고, Oracle은 맨 뒤에 저장한다.",
+    "chapter": "함수",
+    "_source": "sqld-1140",
+    "_origId": "sqld-0264",
+    "_category": "NULL",
+    "_correctRate": 10
+  },
+  {
     "id": 11255,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
@@ -13449,27 +13121,6 @@ export const AI_MOCK: QuizQuestion[] = [
     "_source": "sqld-1140",
     "_origId": "sqld-0268",
     "_category": "데이터베이스 설계",
-    "_correctRate": 10
-  },
-  {
-    "id": 11258,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "1과목",
-    "number": 459,
-    "title": "다음 중 카디널리티를 계산하는 식으로 올바른 것은?",
-    "options": [
-      "Blevel * 전체 레코드 수",
-      "선택도 * 전체 레코드 수",
-      "0.5 * 전체 레코드 수",
-      "2 * 전체 레코드 수"
-    ],
-    "correctIndex": 1,
-    "explanation": "카디널리티는 두 개의 엔터티에서 관계에 참여하는 수이다. 1:1, 1:N, M:N이 있다.",
-    "chapter": "엔터티",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0269",
-    "_category": "ER 모델링",
     "_correctRate": 10
   },
   {
@@ -13960,27 +13611,6 @@ export const AI_MOCK: QuizQuestion[] = [
         ]
       }
     ]
-  },
-  {
-    "id": 11270,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "1과목",
-    "number": 471,
-    "title": "분산 데이터베이스의 투명성과 관련이 없는 것은?",
-    "options": [
-      "이행 투명성",
-      "지역사상 투명성",
-      "위치 투명성",
-      "분할 투명성"
-    ],
-    "correctIndex": 0,
-    "explanation": "분산 데이터베이스 투명성은 분할, 위치, 지역사상, 중복 투명성 등이 있다.",
-    "chapter": "데이터 모델 개념",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0285",
-    "_category": "데이터베이스 개념",
-    "_correctRate": 10
   },
   {
     "id": 11271,
@@ -15515,33 +15145,6 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11306,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 507,
-    "title": "다음 SQL문에 대한 실행 계획을 읽는 순서로 올바른 것은?",
-    "options": [
-      "6,5,4,3,2,1",
-      "3,4,6,2,5,1",
-      "1,2,3,4,5,6",
-      "3,4,2,6,5,1"
-    ],
-    "correctIndex": 3,
-    "explanation": "SQL 문장에서 실행 계획을 읽는 순서는 우선 안에서 밖으로 읽으면서 같은 레벨에서는 위에서 아래로 읽는다.",
-    "chapter": "조인",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0327",
-    "_category": "JOIN",
-    "_correctRate": 10,
-    "references": [
-      {
-        "type": "text",
-        "content": "1. Nested loops\n2.    Hash join\n3.    TABLE ACCESS (FULL) TABLE1\n4.    TABLE ACCESS (FULL) TABLE2\n5.  TABLE ACCESS (BY ROWID) TABLE3\n6.     INDEX (UNIQUE SCAN) PK_TABLES3"
-      }
-    ]
-  },
-  {
     "id": 11307,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
@@ -15864,48 +15467,6 @@ export const AI_MOCK: QuizQuestion[] = [
         "code": "INSERT INTO Mytest VALUES(1);\nINSERT INTO Mytest VALUES(2);\nSAVEPOINT SV1;\nUPDATE Mytest SET COL1=8 WHERE COL1=2;\nINSERT INTO Mytest VALUES(9);\nSAVEPOINT SV2;\nDELETE Mytest WHERE COL1=8;\nINSERT INTO Mytest VALUES(11);\nSAVEPOINT SV3;\nINSERT INTO Mytest VALUES(9);\nROLLBACK TO SV2;\nCOMMIT;"
       }
     ]
-  },
-  {
-    "id": 11313,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 514,
-    "title": "다음 중 B-Tree 인덱스에 대한 설명으로 올바른 것은?",
-    "options": [
-      "정보계와 같은 Data warehouse 에서 사용하고 많은 양의 데이터를 검색할 때 사용한다.",
-      "인덱스 내부 구조에 해당 데이터가 있으면 1, 없으면 0으로 저장한다.",
-      "분기를 수행하는 브랜치 블록, 인덱스를 구성하는 칼럼값을 가지는 리프 블록으로 구성된다.",
-      "인덱스를 생성하면 물리적으로 정렬되기 때문에 빠르게 연속적인 데이터 블록을 검색할 수 있다."
-    ],
-    "correctIndex": 2,
-    "explanation": "①번, ②번 보기는 BITMAP 인덱스에 대한 설명이다.\n④번 보기는 CLUSTERED 인덱스",
-    "chapter": "관계형 DB와 SELECT",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0336",
-    "_category": "인덱스",
-    "_correctRate": 10
-  },
-  {
-    "id": 11314,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 515,
-    "title": "다음 중 해시 조인에 대해서 올바르지 않은 것은?",
-    "options": [
-      "조인 칼럼에 인덱스가 없어도 사용이 가능하다.",
-      "Equal Join 과 Non-Equal Join 모두 사용이 가능하다.",
-      "해시 조인을 위해서 해시 함수를 사용하기 때문에 CPU를 많이 사용한다.",
-      "해시 조인 시에 선행 테이블은 작은 테이블이 먼저와야 한다."
-    ],
-    "correctIndex": 1,
-    "explanation": "해시 조인은 해시 함수를 사용하기 때문에 Equal join에만 할 수 있다.",
-    "chapter": "조인",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0337",
-    "_category": "JOIN",
-    "_correctRate": 10
   },
   {
     "id": 11315,
@@ -19509,33 +19070,6 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11410,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 611,
-    "title": "다음의 설명에 해당하는 join은?",
-    "options": [
-      "INNER JOIN",
-      "NESTED LOOP JOIN",
-      "SORT MERGE JOIN",
-      "HASH JOIN"
-    ],
-    "correctIndex": 2,
-    "explanation": "sort merge조인은 테이블을 정렬한 후에 정렬된 테이블을 병합하면서 조인을 실행한다.",
-    "chapter": "조인",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0453",
-    "_category": "JOIN",
-    "_correctRate": 10,
-    "references": [
-      {
-        "type": "text",
-        "content": "조인되는 N개의 테이블을 모두 정렬한 후에 조인을 수행한다."
-      }
-    ]
-  },
-  {
     "id": 11411,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
@@ -20539,27 +20073,6 @@ export const AI_MOCK: QuizQuestion[] = [
         "alt": "문항 이미지 j481-1"
       }
     ]
-  },
-  {
-    "id": 11433,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "1과목",
-    "number": 634,
-    "title": "성능 데이터 모델링에서 고려해야 할 사항으로 올바르지 않은 것은?",
-    "options": [
-      "데이터베이스 모델링 시에 성능을 고려한 모델링을 수행하면 성능 비용을 감소시킬 수 있다.",
-      "성능 향상을 위해서 튜닝을 수행하면 데이터베이스 모델링이 변경될 수 있다.",
-      "배치를 통해서 입력되는 데이터 용량이 크면 클수록 성능 튜닝을 위한 비용은 증가된다.",
-      "성능 튜닝을 위해서 애플리케이션이 데이터베이스에 접근하는 트랜잭션 유형은 무시해도 된다."
-    ],
-    "correctIndex": 3,
-    "explanation": "성능 데이터 모델링에서 애플리케이션의 트랜잭션 유형을 파악한다.",
-    "chapter": "데이터 모델링 기법",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0482",
-    "_category": "데이터 모델링 기법",
-    "_correctRate": 10
   },
   {
     "id": 11434,
@@ -33960,26 +33473,6 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "데이터베이스 설계"
   },
   {
-    "id": 11805,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "1과목",
-    "number": 1006,
-    "title": "트랜잭션 처리량이 매우 큰 테이블에 대해 설계 단계에서 우선 검토할 사항으로 옳은 것은?",
-    "options": [
-      "모든 컬럼을 PK에 포함하는 방법",
-      "모든 제약조건 제거",
-      "접근 패턴에 맞는 인덱스와 파티션 전략",
-      "엔터티명을 길게 변경하는 작업"
-    ],
-    "correctIndex": 2,
-    "explanation": "대량 처리 테이블은 조회/변경 패턴과 데이터 분포를 고려한 물리 설계가 중요하다.",
-    "chapter": "데이터베이스 설계",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0984",
-    "_category": "데이터베이스 설계"
-  },
-  {
     "id": 11806,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
@@ -35859,106 +35352,6 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "윈도우 함수"
   },
   {
-    "id": 11865,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 1066,
-    "title": "복합 인덱스 (col1, col2)가 있을 때 일반적으로 인덱스 활용도가 높은 조건으로 옳은 것은?",
-    "options": [
-      "WHERE col2 = :v2",
-      "WHERE col2 + 1 = 5",
-      "WHERE TO_CHAR(col1) = '10'만 사용",
-      "WHERE col1 = :v1 AND col2 BETWEEN :v2 AND :v3"
-    ],
-    "correctIndex": 3,
-    "explanation": "복합 인덱스는 선두 컬럼 조건이 있을 때 활용 가능성이 높다.",
-    "chapter": "관계형 DB와 SELECT",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1056",
-    "_category": "인덱스"
-  },
-  {
-    "id": 11866,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 1067,
-    "title": "인덱스 컬럼에 함수가 적용되면 일반적으로 주의할 점으로 옳은 것은?",
-    "options": [
-      "인덱스가 더 잘 사용된다.",
-      "PK 제약이 자동 삭제된다.",
-      "일반 인덱스를 그대로 활용하지 못할 수 있다.",
-      "무결성이 깨진다."
-    ],
-    "correctIndex": 2,
-    "explanation": "컬럼 값에 함수를 적용하면 함수 기반 인덱스가 아니면 인덱스 사용성이 낮아질 수 있다.",
-    "chapter": "관계형 DB와 SELECT",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1057",
-    "_category": "인덱스"
-  },
-  {
-    "id": 11867,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 1068,
-    "title": "선택도가 매우 낮은 컬럼에 단독 인덱스를 두었을 때 기대 효과로 가장 적절한 것은?",
-    "options": [
-      "항상 압도적으로 빠르다.",
-      "반드시 UNIQUE가 된다.",
-      "조회 패턴에 따라 테이블 전체 스캔이 더 유리할 수 있다.",
-      "조인만 금지된다."
-    ],
-    "correctIndex": 2,
-    "explanation": "값 분포가 치우친 컬럼은 인덱스 이점이 작을 수 있다.",
-    "chapter": "관계형 DB와 SELECT",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1058",
-    "_category": "인덱스"
-  },
-  {
-    "id": 11868,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 1069,
-    "title": "인덱스가 많은 테이블에서 INSERT/UPDATE/DELETE가 느려질 수 있는 이유로 옳은 것은?",
-    "options": [
-      "인덱스는 변경 작업과 무관하다.",
-      "인덱스가 있으면 COMMIT이 불가능하다.",
-      "데이터 변경 시 관련 인덱스도 함께 유지해야 하기 때문이다.",
-      "인덱스는 무조건 메모리에서만 관리된다."
-    ],
-    "correctIndex": 2,
-    "explanation": "인덱스는 조회에는 도움을 줄 수 있지만 DML 시 유지 비용이 발생한다.",
-    "chapter": "관계형 DB와 SELECT",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1059",
-    "_category": "인덱스"
-  },
-  {
-    "id": 11869,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 1070,
-    "title": "대량 범위 조회에서 인덱스보다 전체 테이블 스캔이 더 적절할 수 있는 경우로 옳은 것은?",
-    "options": [
-      "선택 비율이 매우 높아 대부분의 행을 읽어야 할 때",
-      "한 건만 조회할 때",
-      "PK로 정확히 한 행을 찾을 때",
-      "조인 조건이 있을 때는 항상 인덱스만 사용한다."
-    ],
-    "correctIndex": 0,
-    "explanation": "읽어야 할 행이 많으면 인덱스 탐색 후 랜덤 접근보다 전체 스캔이 효율적일 수 있다.",
-    "chapter": "관계형 DB와 SELECT",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1060",
-    "_category": "인덱스"
-  },
-  {
     "id": 11870,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
@@ -36349,6 +35742,26 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
+    "id": 11894,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 1095,
+    "title": "선택도가 매우 낮은 컬럼에 단독 인덱스를 두었을 때 기대 효과로 가장 적절한 것은?",
+    "options": [
+      "조회 패턴에 따라 테이블 전체 스캔이 더 유리할 수 있다.",
+      "반드시 UNIQUE가 된다.",
+      "조인만 금지된다.",
+      "항상 압도적으로 빠르다."
+    ],
+    "correctIndex": 0,
+    "explanation": "값 분포가 치우친 컬럼은 인덱스 이점이 작을 수 있다.",
+    "chapter": "관계형 DB와 SELECT",
+    "_source": "sqld-1140",
+    "_origId": "sqld-1093",
+    "_category": "인덱스"
+  },
+  {
     "id": 11901,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
@@ -36367,32 +35780,6 @@ export const AI_MOCK: QuizQuestion[] = [
     "_source": "sqld-1140",
     "_origId": "sqld-1105",
     "_category": "데이터 모델링 기법"
-  },
-  {
-    "id": 11905,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 1106,
-    "title": "대량 범위 조회에서 인덱스보다 전체 테이블 스캔이 더 적절할 수 있는 경우로 옳은 것은?",
-    "options": [
-      "PK로 정확히 한 행을 찾을 때",
-      "조인 조건이 있을 때는 항상 인덱스만 사용한다.",
-      "한 건만 조회할 때",
-      "선택 비율이 매우 높아 대부분의 행을 읽어야 할 때"
-    ],
-    "correctIndex": 3,
-    "explanation": "읽어야 할 행이 많으면 인덱스 탐색 후 랜덤 접근보다 전체 스캔이 효율적일 수 있다.",
-    "chapter": "관계형 DB와 SELECT",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1109",
-    "_category": "인덱스",
-    "references": [
-      {
-        "type": "text",
-        "content": "함수 적용 컬럼이 인덱스 활용에 미치는 영향을 검토한다."
-      }
-    ]
   },
   {
     "id": 11906,
@@ -36678,6 +36065,26 @@ export const AI_MOCK: QuizQuestion[] = [
         "content": "산술 연산식에 NULL이 포함될 때 결과를 해석한다."
       }
     ]
+  },
+  {
+    "id": 11941,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 1142,
+    "title": "인덱스 컬럼에 함수가 적용되면 일반적으로 주의할 점으로 옳은 것은?",
+    "options": [
+      "일반 인덱스를 그대로 활용하지 못할 수 있다.",
+      "PK 제약이 자동 삭제된다.",
+      "무결성이 깨진다.",
+      "인덱스가 더 잘 사용된다."
+    ],
+    "correctIndex": 0,
+    "explanation": "컬럼 값에 함수를 적용하면 함수 기반 인덱스가 아니면 인덱스 사용성이 낮아질 수 있다.",
+    "chapter": "관계형 DB와 SELECT",
+    "_source": "sqld-1140",
+    "_origId": "sqld-1153",
+    "_category": "인덱스"
   },
   {
     "id": 11947,
@@ -37027,6 +36434,26 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
+    "id": 11980,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "1과목",
+    "number": 1181,
+    "title": "트랜잭션 처리량이 매우 큰 테이블에 대해 설계 단계에서 우선 검토할 사항으로 옳은 것은?",
+    "options": [
+      "모든 제약조건 제거",
+      "엔터티명을 길게 변경하는 작업",
+      "모든 컬럼을 PK에 포함하는 방법",
+      "접근 패턴에 맞는 인덱스와 파티션 전략"
+    ],
+    "correctIndex": 3,
+    "explanation": "대량 처리 테이블은 조회/변경 패턴과 데이터 분포를 고려한 물리 설계가 중요하다.",
+    "chapter": "데이터베이스 설계",
+    "_source": "sqld-1140",
+    "_origId": "sqld-1197",
+    "_category": "데이터베이스 설계"
+  },
+  {
     "id": 11981,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
@@ -37099,6 +36526,26 @@ export const AI_MOCK: QuizQuestion[] = [
         ]
       }
     ]
+  },
+  {
+    "id": 11983,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 1184,
+    "title": "인덱스가 많은 테이블에서 INSERT/UPDATE/DELETE가 느려질 수 있는 이유로 옳은 것은?",
+    "options": [
+      "인덱스가 있으면 COMMIT이 불가능하다.",
+      "인덱스는 무조건 메모리에서만 관리된다.",
+      "인덱스는 변경 작업과 무관하다.",
+      "데이터 변경 시 관련 인덱스도 함께 유지해야 하기 때문이다."
+    ],
+    "correctIndex": 3,
+    "explanation": "인덱스는 조회에는 도움을 줄 수 있지만 DML 시 유지 비용이 발생한다.",
+    "chapter": "관계형 DB와 SELECT",
+    "_source": "sqld-1140",
+    "_origId": "sqld-1201",
+    "_category": "인덱스"
   },
   {
     "id": 11986,
@@ -37195,32 +36642,6 @@ export const AI_MOCK: QuizQuestion[] = [
             "3"
           ]
         ]
-      }
-    ]
-  },
-  {
-    "id": 12003,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 1204,
-    "title": "대량 범위 조회에서 인덱스보다 전체 테이블 스캔이 더 적절할 수 있는 경우로 옳은 것은?",
-    "options": [
-      "조인 조건이 있을 때는 항상 인덱스만 사용한다.",
-      "한 건만 조회할 때",
-      "선택 비율이 매우 높아 대부분의 행을 읽어야 할 때",
-      "PK로 정확히 한 행을 찾을 때"
-    ],
-    "correctIndex": 2,
-    "explanation": "읽어야 할 행이 많으면 인덱스 탐색 후 랜덤 접근보다 전체 스캔이 효율적일 수 있다.",
-    "chapter": "관계형 DB와 SELECT",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1225",
-    "_category": "인덱스",
-    "references": [
-      {
-        "type": "text",
-        "content": "조회 비율과 인덱스 유지 비용을 함께 판단한다."
       }
     ]
   },
@@ -38141,32 +37562,6 @@ export const AI_MOCK: QuizQuestion[] = [
       {
         "type": "text",
         "content": "파티션별 순위와 누적 합계를 동시에 해석한다."
-      }
-    ]
-  },
-  {
-    "id": 12107,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 1308,
-    "title": "대량 범위 조회에서 인덱스보다 전체 테이블 스캔이 더 적절할 수 있는 경우로 옳은 것은?",
-    "options": [
-      "선택 비율이 매우 높아 대부분의 행을 읽어야 할 때",
-      "PK로 정확히 한 행을 찾을 때",
-      "조인 조건이 있을 때는 항상 인덱스만 사용한다.",
-      "한 건만 조회할 때"
-    ],
-    "correctIndex": 0,
-    "explanation": "읽어야 할 행이 많으면 인덱스 탐색 후 랜덤 접근보다 전체 스캔이 효율적일 수 있다.",
-    "chapter": "관계형 DB와 SELECT",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1345",
-    "_category": "인덱스",
-    "references": [
-      {
-        "type": "text",
-        "content": "복합 인덱스 선두 컬럼 조건의 유무"
       }
     ]
   },

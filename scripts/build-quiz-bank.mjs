@@ -222,6 +222,22 @@ if (skippedEmpty.length > 0) {
   for (const [pool, ids] of Object.entries(byPool)) console.log(`  ${pool}: ${ids.length}건`);
 }
 
+// ── 현행 출제 범위 밖 문항 제외 (2026-11-03) ─────────────────────────────────
+// 2024년 개편 후 SQLD 출제기준(dataq)에는 SQL 최적화(옵티마이저·실행 계획·인덱스 튜닝·NL/Hash/Sort Merge 조인)와
+// 분산 데이터베이스·성능 데이터 모델링이 없다. 모의고사에서 범위 밖 문제에 시간을 쓰지 않도록 풀에서 뺀다.
+// 기출(회차) 문항은 실제 출제 기록이라 그대로 둔다. 원본 JSON 은 그대로이므로 목록에서 지우면 되돌아온다.
+const OUT_OF_SCOPE = new Set([
+  'cbt-013', 'cbt-016', 'cbt-021', 'cbt-027', 'cbt-038', 'cbt-090',  // M63 · M66 · M71 · M76 · M87 · M134
+  'cbt-094', 'cbt-116', 'cbt-140', 'cbt-143', 'cbt-145', 'cbt-162',  // M138 · M158 · M182 · M185 · M187 · M204
+  'cbt-170', 'cbt-190', 'sqld-0030', 'sqld-0032', 'sqld-0157', 'sqld-0164',  // M212 · M231 · M277 · M279 · M372 · M376
+  'sqld-0269', 'sqld-0285', 'sqld-0327', 'sqld-0336', 'sqld-0337', 'sqld-0453',  // M459 · M471 · M507 · M514 · M515 · M611
+  'sqld-0482', 'sqld-0984', 'sqld-1056', 'sqld-1057', 'sqld-1058', 'sqld-1059',  // M634 · M1006 · M1066 · M1067 · M1068 · M1069
+  'sqld-1060', 'sqld-1109', 'sqld-1225', 'sqld-1345',  // M1070 · M1106 · M1204 · M1308
+]);
+const outOfScope = combinedMock.filter(q => OUT_OF_SCOPE.has(q._id));
+if (outOfScope.length) console.log(`[범위 밖 제외] ${outOfScope.length} 문항 — 현행 출제기준에 없는 최적화·분산DB·성능 모델링`);
+for (let i = combinedMock.length - 1; i >= 0; i--) if (OUT_OF_SCOPE.has(combinedMock[i]._id)) combinedMock.splice(i, 1);
+
 // ── 같은 문제 중복 제거 (2026-11-01) ─────────────────────────────────────────
 // 출처가 다른 풀(cbt-mock ↔ sqld-1140 등)에 같은 문제가 들어 있어 한 모의고사에서 같은 문제를 두 번 만날 수 있었다.
 // 제목(기계적으로 붙은 앞 문구 제외)·보기 집합·참고자료가 모두 같으면 같은 문제로 보고, 해설이 더 긴 쪽 하나만 남긴다.
