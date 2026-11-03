@@ -22687,7 +22687,7 @@
         "COMMIT을 한 이후에는 ROLLBACK을 수행해도 이전 값으로 돌아갈 수 없다."
       ],
       "correctIndex": 0,
-      "explanation": "1번 선지의 COMMIT이후 까지만 ROLLBACK 된다. 가 틀린 표현입니다. COMMIT 이후까지 ROLLBACK되는 것이 아니라 ROLLBACK 명령어 자체가 에러가 발생합니다. 간단하게 예를 설명하면 HDATALAB 1 SELECT * FROM EMP_T1; 2 SAVEPOINT SP1; 3 DELETE FROM EMP_T1 WHERE JOB = 'CLERK'; 4 COMMIT; 5 INSERT INTO EMP_T1 VALUES(1111,'PARK','CELRK',1112,SYSDATE, 8000, NULL, 20); 6 ROLLBACK TO SP1; 이렇게 있다고 가정할 때 6번의 ROLLBACK TO SP1; 을 실행하게 되면 COMMIT이후 5번의 문장이 ROLLBACK되는 것이 아니라 ROLLBACK 에러 문구가 발생합니다. 즉 5번 문장은 실행이 그대로 되어 있습니다."
+      "explanation": "COMMIT 을 하면 그 앞에 만든 SAVEPOINT 는 모두 사라진다. 그래서 COMMIT 뒤에 ROLLBACK TO SP1 을 실행하면 '저장점이 없다'는 오류가 나고 아무것도 취소되지 않는다 → ①이 틀렸다. ② ROLLBACK 자체를 다시 되돌릴 수는 없고, ③ 컬럼 추가(ALTER, DDL)는 자동 COMMIT 이라 앞의 INSERT 도 확정되며, ④ COMMIT 한 뒤에는 ROLLBACK 해도 돌아오지 않는다."
     },
     {
       "_id": "sqld-0767",
@@ -23399,7 +23399,7 @@
         "데이터를 암호화하는 것"
       ],
       "correctIndex": 2,
-      "explanation": "데이터 모델링은 시스템이 필요로 하는 데이터를 구조적으로 설계하고, 업무 흐름을 정확히 반영하여 시스템을 구축하기 위한 기반을 만드는 과정입니다."
+      "explanation": "데이터 모델링은 업무를 분석해서, 시스템에 어떤 데이터를 어떤 구조로 저장할지 설계하는 일이다. 화면 디자인이나 프로그램 코드 작성이 목적이 아니다."
     },
     {
       "_id": "sqld-0802",
@@ -23416,7 +23416,7 @@
         "네트워크 모델"
       ],
       "correctIndex": 1,
-      "explanation": "개념적 모델링은 비즈니스 중심의 모델링으로, 엔터티(Entity)와 관계(Relationship)를 표현하는 ER 모델이 대표적으로 사용됩니다."
+      "explanation": "개념적 모델링에서는 업무에서 다루는 엔터티와 그 사이의 관계를 그리는 ER 모델(ERD)을 주로 쓴다."
     },
     {
       "_id": "sqld-0803",
@@ -23450,7 +23450,7 @@
         "SQL 사용"
       ],
       "correctIndex": 2,
-      "explanation": "관계형 데이터베이스는 선언형 언어(SQL)를 사용하며, 데이터는 테이블 기반으로 저장됩니다. 절차적 저장은 관계형 DB의 특징이 아닙니다."
+      "explanation": "관계형 DB 는 데이터를 표(테이블)에 담고, 무엇을 원하는지만 적는 비절차적 언어 SQL 로 다룬다. '절차적 데이터 저장'은 관계형 DB 의 특징이 아니다."
     },
     {
       "_id": "sqld-0805",
@@ -24188,7 +24188,7 @@
         "(라)"
       ],
       "correctIndex": 3,
-      "explanation": "정렬 방향(ORDER BY)은 SQL에서 기본값이 오름차순(ASC) 이며,\n내림차순 정렬이 필요한 경우 반드시 DESC를 명시해야 합니다.",
+      "explanation": "합계가 높은 순으로 보려면 내림차순이어야 한다. ORDER BY 는 기본이 오름차순(ASC)이라 (라)에 DESC 를 붙여야 한다.",
       "references": [
         {
           "type": "sql",
