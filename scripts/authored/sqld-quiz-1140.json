@@ -2670,7 +2670,7 @@
         "가: 5개, 나: 3개"
       ],
       "correctIndex": 3,
-      "explanation": "(가) SELECT A, B, C FROM R1 \r\nUNION ALL\r\nSELECT A, B, C FROM R2; \r\n(중복 레코드 유지, 정렬 안함)\n(나)SELECT A, B, C FROM R2\r\n UNION\r\n SELECT A, B, C FROM R2;\r\n(중복 레코드 제거함, 정렬 발생)",
+      "explanation": "(가) UNION ALL 은 중복을 없애지 않고 그대로 이어 붙이므로 R1 3행 + R2 2행 = 5행이다. (나) UNION 은 합친 뒤 중복을 없앤다. R2 의 (A1, B1, C1), (A3, B2, C3) 는 R1 에도 있으므로 빠지고 R1 의 3행만 남는다. 정답은 가: 5개, 나: 3개(④)다.",
       "references": [
         {
           "type": "table",
@@ -2769,7 +2769,7 @@
         "회원ID 컬럼을 대상으로 (회원기본정보 EXCEPT 회원상세정보) 연산을 수행하면 회원상세정보가 등록되지 않은 회원ID가 추출된다."
       ],
       "correctIndex": 1,
-      "explanation": "① 1:1, 양쪽 필수 관계를 시스템적으로 보장하므로 연산 수행결과는 같다.\n③ 1:1, 양쪽 필수 관계를 시스템적으로 보장하므로 UNION을 수행한 결과는 회원기본정보의 전체건수와 동일하지만, UNION ALL을 수행하였으므로 결과건수는 회원기본정보의 전체건수에 2배가 된다.\n④ 1:1, 양쪽 필수 관계를 시스템적으로 보장하므로 두 엔터티간의 EXCEPT 결과는 항상 공집합이다.\r\n",
+      "explanation": "두 테이블이 1:1 이고 양쪽 모두 필수라서 회원ID 집합이 완전히 같다. ① INTERSECT 와 UNION 결과는 둘 다 같은 회원ID 집합이라 '다르다' 는 틀렸다. ② INTERSECT 결과 건수와 회원ID 로 JOIN 한 건수는 같다(정답). ③ UNION ALL 은 중복을 남기므로 전체 건수의 2배다. ④ EXCEPT 결과는 항상 공집합이다.",
       "references": [
         {
           "type": "image",
@@ -3031,7 +3031,7 @@
         "0"
       ],
       "correctIndex": 1,
-      "explanation": "WHERE 절의 단일행 서브쿼리인 (SELECT D FROM DEPT WHERE E = 'i') 에 의해서 DEPT 테이블의 D 컬럼 값이 x인 행이 선택되고, D = (SELECT D FROM DEPT WHERE E = 'i') 조건에 의해 EMP \r\n테이블의 (A=1, B=a), (A=2, B=a) 인 2건이 출력된다. 출력된 결과가 모두 UNIQUE하기 때문에 \r\nDISTINCT 연산자는 결과 건수에 영향을 주지 않는다.",
+      "explanation": "서브쿼리 (SELECT D FROM DEPT WHERE E = 'i') 는 'x' 를 돌려준다. EMP 에서 D = 'x' 인 행은 (1, a), (2, a) 두 건이고, A || B 로 이으면 '1a', '2a' 로 서로 다르다. DISTINCT 를 해도 줄지 않으므로 COUNT 는 2 다(②).",
       "references": [
         {
           "type": "sql",
@@ -3129,7 +3129,7 @@
         "SELECT A.회원번호, A.회원명\nFROM 회원 A\nWHERE EXISTS (SELECT 1 FROM 동의항목 B\nWHERE A.회원번호 = B.회원번호 AND\nB.동의여부 = 'N')\nORDER BY A.회원번호;"
       ],
       "correctIndex": 1,
-      "explanation": "위의 SQL은 약관항목 중 단 하나라도 동의를 하지 않은 회원을 구하는 SQL이다. HAVING 절에서 \r\n동의여부가 N인 데이터가 한 건이라도 존재하는 데이터를 추출한다.\n①는 HAVING절로 처리되던 조건을 WHERE절에 위치시켜 더 간편하게 Join으로 처리하였다. 또한 \r\n회원과 동의항목은 1:N 관계이므로 JOIN된 결과는 N건으로 발생됨에 따라 GROUP BY를 추가하여 \r\n중복을 제거 하였다.\n②의 회원 테이블과 동의항목 테이블간에 회원번호 컬럼으로 연관 서브쿼리로 처리되어야 정상적으로 \r\n처리할 수 있다.\n③는 동의항목 테이블에서 동의여부가 N인 한 건이라도 존재하는 회원을 추출하여 회원테이블과 IN \r\n연산을 수행한다.\r\n④은 회원 테이블과 동의항목 테이블의 회원번호 컬럼으로 연관 서브쿼리를 수행하여 동의여부 컬럼의 \r\n값이 N인 데이터가 한 건이라도 존재하면 회원 데이터를 출력하게 된다.",
+      "explanation": "주어진 SQL 은 동의여부가 'N' 인 항목이 하나라도 있는 회원을 찾는다. ①은 조인 후 WHERE 로 'N' 만 고르고 GROUP BY 로 회원 중복을 없앴다. ③ IN, ④ EXISTS 도 회원번호로 연결해 같은 결과를 낸다. ② 는 서브쿼리가 회원번호로 연결되지 않아, 누구든 'N' 이 하나만 있으면 모든 회원이 출력된다. 그래서 ② 가 부적절하다.",
       "references": [
         {
           "type": "image",
@@ -4064,13 +4064,13 @@
       "chapter": "윈도우 함수",
       "title": "아래 데이터 모델에서 활동점수가 높은 고객을 게임상품ID별로 10등까지 선별하여 사은행사를 진행하려고 한다. 다음 SQL 중 가장 적절한 것은? (단, 활동점수가 동일한 고객은 동일등수로 한다. 아래 결과 예제 참조)",
       "options": [
-        "SELECT 게임상품ID, 고객ID, 활동점수, 순위\nFROM (SELECT RANK() OVER(PARTITION BY 게임상품ID\nORDER BY 활동점수 DESC) AS 순위\n,고객ID,게임상품ID, 활동점수\nFROM 고객활동)",
+        "SELECT 게임상품ID, 고객ID, 활동점수, 순위\nFROM (SELECT RANK() OVER(PARTITION BY 게임상품ID\nORDER BY 활동점수 DESC) AS 순위\n,고객ID,게임상품ID, 활동점수\nFROM 고객활동)\nWHERE 순위 <= 10;",
         "SELECT 게임상품ID, 고객ID, 활동점수, 순위\nFROM (SELECT RANK() OVER(ORDER BY 활동점수 DESC)  AS 순위\n,고객ID, 게임상품ID, 활동점수\nFROM 고객활동)\nWHERE 순위 <= 10;",
         "SELECT 게임상품ID, 고객ID, 활동점수, 순위\nFROM (SELECT DENSE_RANK() OVER(PARTITION BY 게임상품ID\nORDER BY 활동점수 DESC) AS 순위\n,고객ID, 게임상품ID, 활동점수\nFROM 고객활동)\nWHERE 순위<= 10;",
-        "SELECT 게임상품ID, 고객ID, 활동점수, 순위\nFROM (SELECT DENSE_RANK() OVER(ORDER BY 활동점수 DESC) AS 순위\n.고객ID, 게임상품ID, 활동점수\nFROM 고객활동)\nWHERE 순위 <= 10;"
+        "SELECT 게임상품ID, 고객ID, 활동점수, 순위\nFROM (SELECT DENSE_RANK() OVER(ORDER BY 활동점수 DESC) AS 순위\n,고객ID, 게임상품ID, 활동점수\nFROM 고객활동)\nWHERE 순위 <= 10;"
       ],
       "correctIndex": 0,
-      "explanation": "게임상품별로 고객 목록을 추출하기위해서는 OVER절에 \"PARTITION BY 게임상품ID”를 적용하여 게임상품별 활동점수로 순위가 추출될 수 있도록 하여야 한다.\r\n RANK WINDOW 함수는 OVER절의 ORDER BY에 대한 결과에 따라 동일한 값을 동일한 등수로 처리 \r\n함과 동시에 중간 순위를 비우는 반면, DENSE RANK WINDOW 함수는 중간 순위를 비우지 않는다.",
+      "explanation": "게임상품ID 별로 순위를 따로 매겨야 하므로 OVER 안에 PARTITION BY 게임상품ID 가 필요하다(②④ 탈락). 결과 예시에서 동점(150, 150) 다음 순위가 3 으로 건너뛰므로 DENSE_RANK 가 아니라 RANK 다(③ 탈락). 따라서 RANK + PARTITION BY 로 순위를 구하고 10등까지 거르는 ① 이 정답이다.",
       "references": [
         {
           "type": "image",
@@ -4480,7 +4480,7 @@
         "데이터 모델링의 3가지 요소는 Process, Attributes, Relationships이다."
       ],
       "correctIndex": 0,
-      "explanation": "① 논리 모델링의 외래키는 물리 모델에서 반드시 구현되지 않는 선택사항이다.\r\n② 개념 모델링에서 물리 모델링으로 가면서 더 구체적이며 개념 모델링이 가장 추상적이다.\r\n③ 실제 데이터베이스 구축 시 참고되는 모델은 물리적 데이터 모델링이다.   \r\n④ 데이터 모델링의 3요소는 Things, Attributes, Relationships 이다."
+      "explanation": "① 논리 모델의 외래키는 성능 등의 이유로 물리 모델에서 실제 FK 제약으로 만들지 않을 수도 있다(정답). ② 개념 → 논리 → 물리로 갈수록 구체적이고 개념 모델이 가장 추상적이다. ③ 실제 DB 구축에 쓰는 것은 물리 데이터 모델이다. ④ 데이터 모델링의 3요소는 Things(엔터티), Attributes(속성), Relationships(관계)이며 Process 가 아니다."
     },
     {
       "_id": "sqld-0153",
@@ -5149,7 +5149,7 @@
         "(ㄱ) 남성의류, (ㄴ) 남성의류 = 여성의류;"
       ],
       "correctIndex": 0,
-      "explanation": "이 문제는 계층형 질의(START WITH ~ CONNECT BY)를 이용하여 데이터 간의 연결 관계를 추적하는 문제이다.\n\n주어진 데이터는 남성의류 → 여성의류로 이어지는 관계를 가지며, 이를 통해 계층 구조를 형성할 수 있다.\n\n1. START WITH 조건 (ㄱ)\n\n계층형 질의에서 START WITH는 계층 구조의 시작점(루트 노드)을 지정하는 구문이다.\n\n제시된 보기 중 남성의류 IS NULL은 부모가 없는 최상위 노드를 의미하므로, 시작 조건으로 적절하다.\n\n2. CONNECT BY 조건 (ㄴ)\n\nCONNECT BY PRIOR A = B는\n이전 행(A)이 다음 행(B)과 연결되는 관계를 의미한다.\n\n따라서\nPRIOR 여성의류 = 남성의류는\n이전 행의 여성의류 값이 다음 행의 남성의류와 같은 경우를 연결하므로,\n데이터 간의 연속적인 계층 구조를 올바르게 구성한다.",
+      "explanation": "결과는 남성의류가 NULL 인 행(자켓)에서 시작해서, 앞 행의 여성의류 값이 다음 행의 남성의류가 되는 순서로 이어진다. 그래서 (ㄱ) 시작 조건은 남성의류 IS NULL, (ㄴ) 연결 조건은 PRIOR 여성의류 = 남성의류 다(①). CONNECT BY PRIOR A = B 는 '앞 행의 A 값과 같은 B 값을 가진 행을 다음 행으로' 라고 읽으면 된다.",
       "references": [
         {
           "type": "table",
@@ -21749,7 +21749,7 @@
         "SELECT 회원.회원번호, COUNT(상품.상품번호), SUM(상품.가격) \n    FROM 회원, 이용내역, 상품 \n   WHERE 회원.회원번호 = 이용내역.회원번호 \n     AND 이용내역.상품번호 = 상품.상품번호 \n   GROUP BY 회원.회원번호;"
       ],
       "correctIndex": 1,
-      "explanation": "문제의 핵심은 모든 회원 을 출력하는 것이다. 따라서 기준 테이블은 회원이어야 하며, 이용내역이 없는 회원도 결과에 포함되어야 하므로 회원과 이용내역은 LEFT OUTER JOIN으로 연결해야 한다. 이후 총 이용가격을 구하기 위해 이용내역의 상품번호로 상품 테이블을 다시 LEFT OUTER JOIN한다.\n\nCOUNT(이용내역.상품번호)는 회원별 상품 이용횟수를 의미하고, SUM(상품.가격)은 해당 회원이 이용한 상품 가격의 총합을 의미한다. 따라서 모든 회원을 기준으로 이용횟수와 총 이용가격을 집계하는 2번이 가장 적절하다.",
+      "explanation": "'모든 회원' 을 출력해야 하므로 이용 내역이 없는 회원도 남도록 회원을 기준으로 LEFT OUTER JOIN 해야 한다. 이어지는 상품 조인도 LEFT OUTER JOIN 이어야 앞에서 살린 회원이 사라지지 않는다(②). ③ 은 두 번째를 INNER JOIN 으로 하여 이용 내역 없는 회원이 빠지고, ① 은 두 번째 조건에 (+) 가 없어 같은 문제가 생기며, ④ 는 모두 INNER JOIN 이다.",
       "references": [
         {
           "type": "image",
@@ -23688,7 +23688,7 @@
         "가, 나, 다, 라"
       ],
       "correctIndex": 2,
-      "explanation": "가. ❌ 주소는 분해 가능하므로 복합 속성\n나. ⭕ 단순 속성 (분해 불가)\n다. ⭕ 단일 값 속성 (하나의 값만 가짐)\n라. ⭕ 다중 값 속성 (2개 이상 연락처 가능)\r",
+      "explanation": "가. 주소는 시·군·구 등으로 나눌 수 있으므로 단순 속성이 아니라 복합 속성이다(틀림). 나. 나이는 더 나눌 수 없는 단순 속성이다(맞음). 다. 주민번호는 한 사람에게 하나뿐인 단일 값 속성이다(맞음). 라. 연락처는 휴대폰·집 전화처럼 여러 값을 가질 수 있는 다중 값 속성이다(맞음). 옳은 것은 나, 다, 라(③)다.",
       "references": [
         {
           "type": "text",
@@ -24012,7 +24012,7 @@
         "7"
       ],
       "correctIndex": 2,
-      "explanation": "ROLLUP(COL1) 자체가\n→ GROUP BY COL1\n→ + 전체 소계 (GROUP BY ())\n\n그런데 ROLLUP(COL1), COL1 이라고 하면,\n→ 마치 GROUP BY COL1, COL1 또는\n→ GROUPING SETS ((COL1), (COL1), ()) 과 같은 효과를 줍니다.\n\n즉, COL1로 그룹핑한 결과가 중복으로 2번 나오고,\n전체 합계(ROLLUP)가 1번 더 추가됨\n\n→ 하지만 Oracle은 중복된 GROUP BY COL1 구문을 자동으로 제거하지 않고 모두 집계로 처리합니다.\n→ 이로 인해 총 7건이 나와야 할 것 같지만, 실제 쿼리 결과는 6건입니다.\n",
+      "explanation": "ROLLUP(COL1) 은 (COL1) 별 그룹과 전체 합계 () 두 가지를 만든다. 뒤에 COL1 이 한 번 더 붙으면 각 그룹에 COL1 이 더해져 (COL1, COL1) 과 (COL1) 이 되는데, 둘 다 결국 COL1 별 그룹이다. COL1 값은 A, B, C 세 가지이므로 3행 × 2 = 6행이다(③). 전체 합계 행은 생기지 않는다.",
       "references": [
         {
           "type": "sql",
@@ -24142,7 +24142,7 @@
         "6"
       ],
       "correctIndex": 1,
-      "explanation": "REGEXP_INSTR(\n  문자열,        -- '12345678'\n  정규표현식,     -- '(123)(4(56)(78))'\n  시작위치,       -- 1\n  발생순번,       -- 1 (첫 번째 일치)\n  반환옵션,       -- 0 (일치 시작 위치 반환)\n  'i',            -- 대소문자 구분 없음\n  서브표현식 인덱스 -- **2번 그룹의 시작 위치 반환**\n)\n\n(123) → 그룹 1\n(4(56)(78)) → 그룹 2\n56 → 그룹 3\n78 → 그룹 4\n→ 즉, 2번째 그룹은 \"45678\" 전체 중 \"4\"부터 시작\n→ '12345678'에서 두 번째 그룹(45678)은 4번 인덱스에서 시작\r",
+      "explanation": "REGEXP_INSTR 의 마지막 인수 2 는 '2번째 괄호 그룹의 시작 위치' 를 돌려달라는 뜻이다. 괄호는 여는 순서대로 번호가 붙어 (123) 이 1번, (4(56)(78)) 이 2번, (56) 이 3번, (78) 이 4번이다. 2번 그룹 '45678' 은 '12345678' 의 4번째 글자에서 시작하므로 결과는 4 다(②). 다섯 번째 인수 0 은 시작 위치를, 'i' 는 대소문자 무시를 뜻한다.",
       "references": [
         {
           "type": "sql",
@@ -24165,11 +24165,11 @@
         "kkz"
       ],
       "correctIndex": 1,
-      "explanation": "정규표현식 'z{3,4}'는:\n문자 'z'가 3번 이상, 4번 이하 연속해서 반복되는 패턴을 찾음\nOracle의 REGEXP_SUBSTR는 기본적으로 greedy(가장 긴 매칭 우선) 방식\n\n대상 문자열: 'kkkkkzzzz'\n'kkkkk'는 무시되고\n\n'zzzz'에서 'z'가 4번 연속으로 등장\n\n→ 'z{3,4}' 조건에 정확히 부합함\n→ 그 중 가능한 가장 긴 문자열 'zzzz' 를 반환\r",
+      "explanation": "'z{3,4}' 는 z 가 3번 이상 4번 이하 연속된 부분을 찾는다. 정규식은 가능한 한 길게 맞추므로(greedy) 'kkkkkzzzz' 에서 z 4개를 모두 잡아 'zzzz' 를 돌려준다(②).",
       "references": [
         {
           "type": "sql",
-          "code": "SELECT REGEXP_SUBSTR('kkkkkzzzz', z{3, 4}) FROM DUAL;"
+          "code": "SELECT REGEXP_SUBSTR('kkkkkzzzz', 'z{3,4}') FROM DUAL;"
         }
       ]
     },
@@ -24328,7 +24328,7 @@
         "FROM → GROUP BY → WHERE → HAVING → SELECT → ORDER BY"
       ],
       "correctIndex": 2,
-      "explanation": "SQL은 작성 순서와 실행 순서가 다릅니다.\n실행 순서는 다음과 같습니다:\n\nFROM\nWHERE\nGROUP BY\nHAVING\nSELECT\nORDER BY\r",
+      "explanation": "SQL 은 적는 순서와 처리 순서가 다르다. FROM(대상 테이블) → WHERE(행 거르기) → GROUP BY(묶기) → HAVING(그룹 거르기) → SELECT(칼럼 고르기) → ORDER BY(정렬) 순으로 처리된다(③). 그래서 SELECT 의 별칭은 WHERE 에서 못 쓰지만 ORDER BY 에서는 쓸 수 있다.",
       "references": [
         {
           "type": "sql",
@@ -24351,7 +24351,7 @@
         "ALTER TABLE EMP ADD CONSTRAINT FK_EMP_DEPT \nFOREIGN KEY (DEPT_ID) REFERENCES DEPT(DEPT_ID) \nON DELETE CASCADE;\nALTER TABLE EMP DROP DEPT_ID;"
       ],
       "correctIndex": 3,
-      "explanation": "보기 ④는 외래키가 걸린 컬럼은 직접 삭제할 수 없음\n→ 먼저 제약조건을 삭제해야 컬럼 삭제가 가능함\r",
+      "explanation": "①②③ 은 각각 DEPT_ID 추가, SALARY NOT NULL 지정, EMAIL 삭제로 조건에 맞다. ④ 는 외래키를 추가한 뒤 곧바로 DEPT_ID 칼럼을 지워 'DEPT_ID 에 외래키를 부여' 한다는 조건에 어긋난다. 게다가 칼럼 삭제는 DROP COLUMN DEPT_ID 로 써야 하므로 문법도 맞지 않는다.",
       "references": [
         {
           "type": "text",
@@ -24468,7 +24468,7 @@
         "NTILE(2)"
       ],
       "correctIndex": 0,
-      "explanation": "같은 급여(6000)는 같은 순위 1을 부여\n그 다음 등수는 2를 건너뛰고 3부터 시작 → RANK()의 특징\nROW_NUMBER()는 1, 2, 3, 4, 5\nDENSE_RANK()는 1, 1, 2, 3, 4\r",
+      "explanation": "결과에서 급여 6000 인 LEE·PARK 이 함께 1등이고, 다음 KIM 이 2 가 아닌 3 이다. 동점에 같은 순위를 주고 그 수만큼 다음 순위를 건너뛰는 것은 RANK 다(①). ROW_NUMBER 라면 1, 2, 3, 4, 5, DENSE_RANK 라면 1, 1, 2, 3, 4 가 나온다.",
       "references": [
         {
           "type": "sql",
@@ -24557,7 +24557,7 @@
         "원자성 (Atomicity)"
       ],
       "correctIndex": 3,
-      "explanation": "일부만 처리되었으나 전체 작업이 취소되고 원래 상태로 복원됨 → 전형적인 원자성\n원자성: “전부 실행 or 전부 무효” 원칙\n시스템 장애에도 데이터가 보존 → 지속성\n동시에 수행되는 트랜잭션 간 간섭 없음 → 독립성\n트랜잭션 전후 정합성 유지 → 일관성\r",
+      "explanation": "급여 인상 도중 장애가 나자 일부만 바뀐 상태로 두지 않고 전부 취소해 원래대로 돌렸다. '모두 실행되거나 하나도 실행되지 않거나' 라는 원자성(④)이다. 일관성은 실행 전후 데이터가 규칙에 맞는 것, 지속성은 커밋된 결과가 장애에도 남는 것, 독립성(고립성)은 동시에 실행되는 트랜잭션끼리 간섭하지 않는 것이다.",
       "references": [
         {
           "type": "text",
@@ -24603,7 +24603,7 @@
         "조인 조건이 없으므로 오류 발생"
       ],
       "correctIndex": 2,
-      "explanation": "FROM TAB1, TAB2는 CROSS JOIN과 동일\n모든 행이 곱집합(Cartesian Product)으로 조합됨\n즉, 10 × 10 = 100행 생성\r",
+      "explanation": "FROM 에 두 테이블을 조인 조건 없이 쓰면 CROSS JOIN(카티션 곱)이 되어, 독자 한 명마다 책 10권이 모두 짝지어진다. 10 × 10 = 100행이다(③). 조인 조건이 없어도 오류는 나지 않는다.",
       "references": [
         {
           "type": "sql",
@@ -24626,7 +24626,7 @@
         "SELECT EMP_ID = 사번 FROM EMP;"
       ],
       "correctIndex": 3,
-      "explanation": "①, ②, ③ 모두 정상적인 ALIAS(별칭) 사용법\nAS 생략 가능\n따옴표 \" \" 사용 시 공백/한글도 허용\n④는 EMP_ID = 사번 → 별칭이 아니라 비교 연산으로 해석되어 오류 발생\r"
+      "explanation": "별칭은 칼럼 뒤에 AS 별칭 또는 AS 를 빼고 별칭만 써서 붙이고(①②), 공백이 들어가면 큰따옴표로 감싼다(③). ④ 처럼 '=' 로 별칭을 붙이는 문법은 없으며, Oracle 에서는 SELECT 절의 비교식으로 처리되어 오류가 난다."
     },
     {
       "_id": "sqld-0856",
@@ -24666,7 +24666,7 @@
         "두 SELECT 결과를 모두 합치며 중복도 포함한다."
       ],
       "correctIndex": 3,
-      "explanation": "UNION → 중복 제거 (집합 합집합)\nINTERSECT → 교집합\nMINUS → 차집합\nUNION ALL → 중복 포함하여 모두 합침\r"
+      "explanation": "UNION ALL 은 두 SELECT 결과를 중복 제거 없이 모두 이어 붙인다(④). ①③ 처럼 중복을 없애는 것은 UNION, ② 교집합은 INTERSECT 다."
     },
     {
       "_id": "sqld-0859",
@@ -24683,7 +24683,7 @@
         "EAST: CNT 3, TOTAL 3000 / WEST: CNT 3, TOTAL 3500 / SOUTH: CNT 2, TOTAL 4000"
       ],
       "correctIndex": 2,
-      "explanation": "WHERE AMOUNT >= 1000 → NULL과 1000 미만 제외\n\n남는 행:\nEAST: A001(1000), A005(1200)\nWEST: A003(2000), A004(1500)\nSOUTH: A008(1800), A009(2200)\nGROUP BY REGION + COUNT(AMOUNT):\nEAST: 2건, SUM=2200\nWEST: 2건, SUM=3500\nSOUTH: 2건, SUM=4000\nHAVING SUM(AMOUNT) > 2500 → EAST는 탈락",
+      "explanation": "WHERE AMOUNT >= 1000 에서 NULL 과 800 인 행이 먼저 빠진다. 남은 행을 지역별로 묶으면 EAST 2건(1000, 1200) 합 2200, WEST 2건(2000, 1500) 합 3500, SOUTH 2건(1800, 2200) 합 4000 이다. HAVING SUM > 2500 에서 EAST 가 탈락해 WEST, SOUTH 만 남는다(③).",
       "references": [
         {
           "type": "sql",
@@ -24762,7 +24762,7 @@
         "9"
       ],
       "correctIndex": 3,
-      "explanation": "CUBE(REGION, PRODUCT)는 가능한 모든 조합의 집계를 구함:\n(REGION, PRODUCT) 조합 → 2 × 2 = 4건 (EAST-A, EAST-B, WEST-A, WEST-B)\nREGION별 합계 (PRODUCT NULL): EAST, WEST → 2건\nPRODUCT별 합계 (REGION NULL): A, B → 2건\n전체 합계 (REGION NULL, PRODUCT NULL) → 1건\n→ 총: 4 + 2 + 2 + 1 = 9건\n❗️ 하지만 원 테이블에 없는 조합은 생략되지 않고 무조건 생성됨\n→ 따라서 **③번의 보기(8)**는 오답, 정답은 ④번 (9) 이 되어야 정확합니다.\r",
+      "explanation": "CUBE(REGION, PRODUCT) 는 나올 수 있는 모든 집계 조합을 만든다. (REGION, PRODUCT) 별 4행(EAST-A, EAST-B, WEST-A, WEST-B), REGION 별 소계 2행, PRODUCT 별 소계 2행, 전체 합계 1행으로 모두 9행이다(④). 집계는 테이블에 실제로 있는 값의 조합으로만 만들어지며, 여기서는 네 조합이 모두 있다.",
       "references": [
         {
           "type": "sql",
@@ -24839,7 +24839,7 @@
         "A는 TRUNCATE, B는 DROP을 사용한 것이다."
       ],
       "correctIndex": 0,
-      "explanation": "DELETE: 조건 지정 가능, 하나씩 삭제, ROLLBACK 가능, 로그 남음\nTRUNCATE: 전체 삭제, ROLLBACK 불가, 로그 없음, 빠름\nDROP: 아예 테이블 구조도 삭제 (질문 조건에는 해당 X)\r",
+      "explanation": "사서 A 처럼 하나씩 지우고 기록(로그)을 남겨 되돌릴 수 있는 것은 DELETE, 사서 B 처럼 통째로 비우고 되돌리기 어려운 것은 TRUNCATE 다(①). DROP 은 데이터뿐 아니라 책장(테이블 구조)까지 없애는 것이라 이 상황과 다르다.",
       "references": [
         {
           "type": "text",
@@ -24873,13 +24873,13 @@
       "chapter": "조인",
       "title": "다음은 세 개의 테이블과 그 예시 데이터이다. 위 결과를 출력하는 쿼리로 옳은 것은?",
       "options": [
-        "SELECT C.NAME, P.PROD_NAME\n     FROM CUSTOMER C\n       LEFT JOIN ORDER_INFO O ON C.CUST_ID = O.CUST_ID\n       RIGHT JOIN PRODUCT P ON O.PROD_ID = P.PROD_ID;",
+        "SELECT C.NAME, P.PROD_NAME\n     FROM CUSTOMER C\n       LEFT JOIN ORDER_INFO O ON C.CUST_ID = O.CUST_ID\n       LEFT JOIN PRODUCT P ON O.PROD_ID = P.PROD_ID;",
         "SELECT NAME, PROD_NAME\n     FROM CUSTOMER\n     WHERE CUST_ID IN (\n       SELECT CUST_ID\n         FROM ORDER_INFO\n        WHERE PROD_ID IN (\n              SELECT PROD_ID FROM PRODUCT WHERE PROD_NAME = 'Book'\n        ));",
         "SELECT C.NAME, P.PROD_NAME\n    FROM CUSTOMER C\n       JOIN ORDER_INFO O ON C.CUST_ID = O.CUST_ID\n       JOIN PRODUCT P ON O.PROD_ID = P.PROD_ID;",
         "SELECT C.NAME, P.PROD_NAME\n     FROM PRODUCT P\n       JOIN ORDER_INFO O ON P.PROD_ID = O.PROD_ID\n       JOIN CUSTOMER C ON C.CUST_ID = O.CUST_ID\n    WHERE P.PROD_NAME = 'Pen';"
       ],
       "correctIndex": 2,
-      "explanation": "③은 세 테이블을 INNER JOIN으로 정확히 연결:\nCUSTOMER → ORDER_INFO → PRODUCT\n이 조합으로 주문한 고객과 상품명을 정확히 출력함\n①은 조인 방식이 어색하고, RIGHT JOIN이 의도한 결과를 보장하지 않음\n②는 'Book'만 조회함 → 결과 제한\n④는 'Pen'만 필터됨 → 결과 부족\r",
+      "explanation": "결과는 KIM-Pen, KIM-Book, LEE-Book 으로 주문이 있는 고객과 상품만 나온다. 세 테이블을 INNER JOIN 으로 이은 ③ 이 정확히 이 결과를 낸다. ① 은 LEFT JOIN 이라 주문이 없는 PARK 도 상품명 NULL 로 함께 나와 4행이 되고, ② 는 CUSTOMER 에 없는 PROD_NAME 칼럼을 조회해 오류가 나며, ④ 는 Pen 을 산 KIM 한 행만 나온다.",
       "references": [
         {
           "type": "table",
@@ -25054,7 +25054,7 @@
         "INSERT INTO EMPLOYEE (EMP_ID, NAME, EMAIL)\nVALUES (105, NULL, 'lim@corp.com');"
       ],
       "correctIndex": 0,
-      "explanation": "② EMAIL='kim@corp.com' → 기존에 이미 있음 → UNIQUE 위반\n③ EMP_ID=101 이미 존재 → PRIMARY KEY 위반\n④ NAME은 NOT NULL인데 NULL 입력됨 → NOT NULL 제약 위반\r",
+      "explanation": "제약조건을 하나씩 확인한다. ② EMAIL 'kim@corp.com' 은 이미 있어 UNIQUE 위반, ③ EMP_ID 101 은 이미 있어 PRIMARY KEY 위반, ④ NAME 은 NOT NULL 인데 NULL 을 넣어 위반이다. ① 은 EMAIL 이 NULL 인데, UNIQUE 칼럼은 NULL 을 허용하므로 정상 실행된다.",
       "references": [
         {
           "type": "sql",
@@ -25162,7 +25162,7 @@
         "EMP_ID = 100, PRIOR MANAGER_ID = EMP_ID"
       ],
       "correctIndex": 0,
-      "explanation": "MANAGER_ID IS NULL → 루트 노드(CLIENT/CEO)를 정확히 지정\nPRIOR EMP_ID = MANAGER_ID → 상위 → 하위 관계 정확히 표현\r",
+      "explanation": "루트는 관리자가 없는 CEO 이므로 START WITH MANAGER_ID IS NULL, 부하 직원 쪽으로 내려가야 하므로 CONNECT BY PRIOR EMP_ID = MANAGER_ID(앞 행의 사번을 관리자로 가진 행)가 맞다(①). ②③④ 는 연결 조건이 '앞 행의 관리자' 를 찾는 역방향이라 CEO 에서 더 내려가지 못한다.",
       "references": [
         {
           "type": "sql",
