@@ -1,5 +1,5 @@
 // Auto-generated from scripts/authored/ai-mock.json
-// AI 생성 모의고사 풀 (기출 변형) · 1244문항
+// AI 생성 모의고사 풀 (기출 변형) · 1243문항
 // ⚠ 직접 편집 금지. ai-mock.json 수정 후 'node scripts/build-quiz-bank.mjs' 재실행.
 import type { QuizQuestion } from '../quizBank';
 
@@ -8089,7 +8089,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "1과목",
     "number": 295,
-    "title": "표준 SQL(SQL1999)에서테이블 생성시참조관계를정의하기 위해 외래키 (Foreign Key)를 선언한다. 관계형 데이터베이스에서 Child Table의 FK 데이터 생성시 Parent Table에 PK가 없는 경우, Child Table 데이터 입력을 허용하지 않는 참조동작(Referential Action)인 것은?",
+    "title": "표준 SQL(SQL1999)에서 테이블을 생성할 때 참조 관계를 정의하기 위해 외래키(Foreign Key)를 선언한다. 자식 테이블의 FK 데이터를 입력할 때 부모 테이블에 해당 PK 가 없으면 입력을 허용하지 않는 참조 동작(Referential Action)은?",
     "options": [
       "DEPENDENT",
       "AUTOMATIC",
@@ -11484,27 +11484,6 @@ export const AI_MOCK: QuizQuestion[] = [
         "content": "-추상화 수준이 높고 업무 중심적이며 포괄적인 수준의 모델링을 진행한다.\n-전시적 데이터 모델링 또는 EA 수립 시 많이 이용된다."
       }
     ]
-  },
-  {
-    "id": 11169,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "1과목",
-    "number": 370,
-    "title": "엔터티 - 인스턴스 - 속성 - 속성값에 대한 관계 설명 중 틀린 것을 고르시오.",
-    "options": [
-      "엔터티 하나의 인스턴스는 다른 엔터티의 인스턴스 간 관계인 Pariring을 가진다.",
-      "한 개의 엔터티는 두 개 이상의 속성을 갖는다.",
-      "하나의 속성은 하나 이상의 속성값을 가진다.",
-      "한 개의 엔터티는 두 개 이상의 인스턴스 집합이어야 한다."
-    ],
-    "correctIndex": 2,
-    "explanation": "하나의 속성은 하나의 속성값을 가지며 하나 이상의 속성값을 가지는 경우 정규화가 필요하다.",
-    "chapter": "엔터티",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0154",
-    "_category": "ER 모델링",
-    "_correctRate": 10
   },
   {
     "id": 11171,

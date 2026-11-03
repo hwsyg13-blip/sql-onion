@@ -1002,7 +1002,7 @@
       "_correctRate": 10,
       "subject": "1과목",
       "chapter": "데이터 무결성",
-      "title": "표준 SQL(SQL1999)에서테이블 생성시참조관계를정의하기 위해 외래키 (Foreign Key)를 선언한다. 관계형 데이터베이스에서 Child Table의 FK 데이터 생성시 Parent Table에 PK가 없는 경우, Child Table 데이터 입력을 허용하지 않는 참조동작(Referential Action)인 것은?",
+      "title": "표준 SQL(SQL1999)에서 테이블을 생성할 때 참조 관계를 정의하기 위해 외래키(Foreign Key)를 선언한다. 자식 테이블의 FK 데이터를 입력할 때 부모 테이블에 해당 PK 가 없으면 입력을 허용하지 않는 참조 동작(Referential Action)은?",
       "options": [
         "DEPENDENT",
         "AUTOMATIC",
@@ -4910,7 +4910,7 @@
       "chapter": "엔터티",
       "title": "엔터티 - 인스턴스 - 속성 - 속성값에 대한 관계 설명 중 틀린 것을 고르시오.",
       "options": [
-        "엔터티 하나의 인스턴스는 다른 엔터티의 인스턴스 간 관계인 Pariring을 가진다.",
+        "엔터티 하나의 인스턴스는 다른 엔터티의 인스턴스 간 관계인 Pairing을 가진다.",
         "한 개의 엔터티는 두 개 이상의 속성을 갖는다.",
         "하나의 속성은 하나 이상의 속성값을 가진다.",
         "한 개의 엔터티는 두 개 이상의 인스턴스 집합이어야 한다."
