@@ -1,5 +1,5 @@
 // Auto-generated from scripts/authored/ai-mock.json
-// AI 생성 모의고사 풀 (기출 변형) · 1225문항
+// AI 생성 모의고사 풀 (기출 변형) · 1220문항
 // ⚠ 직접 편집 금지. ai-mock.json 수정 후 'node scripts/build-quiz-bank.mjs' 재실행.
 import type { QuizQuestion } from '../quizBank';
 
@@ -14020,27 +14020,6 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11268,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 469,
-    "title": "다음 중 SQL문의 실행 순서로 올바른 것은?",
-    "options": [
-      "FROM-WHERE-GROUP BY-HAVING-SELECT-ORDER BY",
-      "FROM-WHERE-GROUP BY-SELECT-HAVING-ORDER BY",
-      "FROM-WHERE-HAVING-GROUP BY-ORDER BY-SELECT",
-      "FROM-WHERE-GROUP BY-HAVING-ORDER BY-SELECT"
-    ],
-    "correctIndex": 0,
-    "explanation": "FROM구는 테이블을 선택하고 WHERE 조건을 만족하도록 필터링한다. 그 다음 GROUP BY와 HAVING구가 실행되고 SELECT구로 데이터를 인출 한 후에 ORDER BY로 정렬한다.",
-    "chapter": "DML",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0282",
-    "_category": "DML",
-    "_correctRate": 10
-  },
-  {
     "id": 11269,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
@@ -14384,27 +14363,6 @@ export const AI_MOCK: QuizQuestion[] = [
         ]
       }
     ]
-  },
-  {
-    "id": 11275,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 476,
-    "title": "다음 보기는 WINDOW 함수에 대한 사용 방법이다. 가장 올바르지 않은 SQL문은 무엇인가?",
-    "options": [
-      "SUM(급여) OVER\n(PARTITION BY JOB ORDER BY JOB\nRANGE BETWEEN\nUNBOUNDED PRECEDING\nAND CURRENT ROW) SAL",
-      "SUM(급여) OVER\n(PARTITION BY JOB ORDER BY EMPNO\nRANGE BETWEEN\nUNBOUNDED PRECEDING\nAND UNBOUNDED PRECEDING) SAL",
-      "SUM(급여) OVER\n(PARTITION BY JOB ORDER BY EMPNO\nRANGE BETWEEN\nUNBOUNDED PRECEDING\nAND UNBOUNDED FOLLOWING) SAL",
-      "SUM(급여) OVER()"
-    ],
-    "correctIndex": 1,
-    "explanation": "②번 보기에서 UNBOUNDED PRECEDING은 end point에 사용할 수 없다. 즉, UNBOUNDED PRECEDING은 윈도우의 시작 위치가 첫 번째 행이다.",
-    "chapter": "윈도우 함수",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0291",
-    "_category": "윈도우 함수",
-    "_correctRate": 10
   },
   {
     "id": 11276,
@@ -15677,27 +15635,6 @@ export const AI_MOCK: QuizQuestion[] = [
     "_source": "sqld-1140",
     "_origId": "sqld-0324",
     "_category": "단일행 함수",
-    "_correctRate": 10
-  },
-  {
-    "id": 11305,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 506,
-    "title": "다음 중 SQL문의 실행 순서로 올바른 것은?",
-    "options": [
-      "FROM -> WHERE -> GROUP BY -> SELECT -> HAVING -> ORDER BY",
-      "FROM -> WHERE -> HAVING -> GROUP BY -> ORDER BY -> SELECT",
-      "FROM -> WHERE -> GROUP BY -> HAVING -> SELECT -> ORDER BY",
-      "FROM -> WHERE -> GROUP BY -> HAVING -> ORDER BY -> SELECT"
-    ],
-    "correctIndex": 2,
-    "explanation": "SELECT문은 FROM, WHERE, GROUP BY, HAVING, SELECT, ORDER BY 순으로 실행된다.",
-    "chapter": "DML",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0325",
-    "_category": "DML",
     "_correctRate": 10
   },
   {
@@ -17516,27 +17453,6 @@ export const AI_MOCK: QuizQuestion[] = [
         "alt": "문항 이미지 j377-1"
       }
     ]
-  },
-  {
-    "id": 11347,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 548,
-    "title": "트랜잭션이 가지는 특징에 해당되지 않는 것은?",
-    "options": [
-      "통합성",
-      "고립성",
-      "일관성",
-      "원자성"
-    ],
-    "correctIndex": 0,
-    "explanation": "트랜잭션이 가지는 특징은 원지성,일관성,고립성,지속성 이다.",
-    "chapter": "트랜잭션 관리",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0378",
-    "_category": "트랜잭션 관리",
-    "_correctRate": 10
   },
   {
     "id": 11348,
@@ -21106,27 +21022,6 @@ export const AI_MOCK: QuizQuestion[] = [
     "_source": "sqld-1140",
     "_origId": "sqld-0499",
     "_category": "집계 함수",
-    "_correctRate": 10
-  },
-  {
-    "id": 11447,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 648,
-    "title": "아래의 WINDOW FUNCTION을 사용한 SQL 중 가장 올바르지 않은 것은?",
-    "options": [
-      "SUM(SAL) OVER(PARTITION BY JOB ORDER BY EMPNO RANGE BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED PRECEDING)  SAL3",
-      "SUM(SAL) OVER(PARTITION BY JOB ORDER BY JOB RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW)  SAL2",
-      "SUM(SAL) OVER(PARTITION BY JOB ORDER BY EMPNO RANGE BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING)  SAL1",
-      "SUM(SAL) OVER()"
-    ],
-    "correctIndex": 0,
-    "explanation": "①번에서 UNBOUNDED PRECEDING은 end point에 사용될 수 없다.",
-    "chapter": "윈도우 함수",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0500",
-    "_category": "윈도우 함수",
     "_correctRate": 10
   },
   {
