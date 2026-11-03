@@ -68,7 +68,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "START WITH 절은 계층 구조 전개의 시작 위치를 지정하는 구문이다."
     ],
     "correctIndex": 1,
-    "explanation": "ORDER SIBLINGS BY는 계층 구조의 트리 형태를 유지한 상태에서, 같은 레벨에 있는 형제(Siblings) 노드들 사이에서만 정렬을 수행합니다.",
+    "explanation": "ORDER SIBLINGS BY 는 트리 모양은 그대로 두고, 같은 부모 아래 형제끼리만 정렬한다. 트리를 무시하고 전체를 다시 정렬한다는 ②가 틀렸다.",
     "chapter": "계층형 질의",
     "_source": "ai-mock",
     "_origId": "ai-mock-003"
@@ -87,7 +87,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "GROUPING 함수는 ROLLUP이나 CUBE에 의해 계산된 결과 행인지, 아니면 원본 데이터의 그룹핑 결과인지를 구분하기 위해 사용되며 0 또는 1을 반환한다."
     ],
     "correctIndex": 0,
-    "explanation": "GROUPING SETS는 괄호 안에 명시된 집합들에 대해서만 개별적으로 소계를 구합니다. (A, B)가 아니라 (A)와 (B) 각각의 결과만 산출합니다.",
+    "explanation": "GROUPING SETS(A, B) 는 괄호에 적은 것만 따로 집계한다 → (A) 와 (B) 두 묶음뿐이다. (A, B) 상세나 총계는 직접 적어야 나온다. 그래서 '3개를 만든다'는 ①이 틀렸다.",
     "chapter": "그룹 함수",
     "_source": "ai-mock",
     "_origId": "ai-mock-005"
@@ -106,7 +106,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "'A'"
     ],
     "correctIndex": 0,
-    "explanation": "COALESCE(NULL, 'A', 'B')는 첫 번째로 NULL이 아닌 값인 'A'를 반환합니다. 이어진 NULLIF('A', 'A')는 두 인수가 같으므로 NULL을 반환합니다.",
+    "explanation": "안쪽부터 푼다. COALESCE(NULL, 'A', 'B') 는 처음 만나는 NULL 아닌 값 'A'. 그다음 NULLIF('A', 'A') 는 두 값이 같으니 NULL. 최종 결과는 NULL 이다.",
     "chapter": "함수",
     "_source": "ai-mock",
     "_origId": "ai-mock-006",
@@ -131,7 +131,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW는 현재 파티션의 첫 행부터 현재 행까지의 누적 범위를 의미한다."
     ],
     "correctIndex": 2,
-    "explanation": "동일 순위 이후의 순위를 건너뛰지 않는 것은 DENSE_RANK() 함수입니다. RANK() 함수는 1등, 1등, 3등과 같이 순위를 건너뜁니다.",
+    "explanation": "RANK 는 동점이면 같은 순위를 주고, 그 수만큼 다음 순위를 건너뛴다(1, 1, 3). 건너뛰지 않는 것(1, 1, 2)은 DENSE_RANK 다. 그래서 ③이 틀렸다.",
     "chapter": "윈도우 함수",
     "_source": "ai-mock",
     "_origId": "ai-mock-008"
@@ -150,7 +150,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "MINUS(또는 EXCEPT) 연산자를 사용할 때, 첫 번째 쿼리의 컬럼 수와 데이터 타입은 두 번째 쿼리와 달라도 무방하다."
     ],
     "correctIndex": 3,
-    "explanation": "모든 집합 연산자는 결합되는 각 쿼리의 SELECT 절 컬럼 개수와 위치별 데이터 타입이 서로 호환되어야만 오류 없이 실행됩니다.",
+    "explanation": "집합 연산자는 MINUS 를 포함해 모두 위·아래 SELECT 의 컬럼 수가 같고, 같은 자리끼리 타입이 맞아야 실행된다. 달라도 된다는 ④가 틀렸다.",
     "chapter": "집합 연산자",
     "_source": "ai-mock",
     "_origId": "ai-mock-009"
@@ -169,7 +169,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "ON 절에 명시된 조건에 따라 대상 테이블(Target Table)에 해당 데이터가 존재하면 UPDATE를, 존재하지 않으면 INSERT를 수행한다."
     ],
     "correctIndex": 0,
-    "explanation": "MERGE 문에서 데이터를 매칭시키는 기준이 되는 조인 키(ON 절에 사용된 컬럼)는 UPDATE 구문을 통해 값을 변경할 수 없습니다.",
+    "explanation": "MERGE 에서 ON 절에 쓴 조인 키는 '같은 행인지' 판단하는 기준이라 UPDATE 로 바꿀 수 없다(오라클은 오류). 바꿀 수 있다는 ①이 틀렸다.",
     "chapter": "DML",
     "_source": "ai-mock",
     "_origId": "ai-mock-010"
@@ -207,7 +207,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "현재 노드의 전체 하위 자식 노드 개수"
     ],
     "correctIndex": 2,
-    "explanation": "CONNECT_BY_ISLEAF는 현재 행이 더 이상 펼칠 자식이 없는 단말 노드(Leaf Node)이면 1, 아니면 0을 반환합니다. ISCYCLE은 순환 발생 여부를 반환하는 다른 가상 컬럼입니다.",
+    "explanation": "CONNECT_BY_ISLEAF 는 더 내려갈 자식이 없는 행(리프)이면 1, 아니면 0 이다. 순환 여부를 알려 주는 건 CONNECT_BY_ISCYCLE, 루트 값은 CONNECT_BY_ROOT 다.",
     "chapter": "계층형 질의",
     "_source": "ai-mock",
     "_origId": "ai-mock-012"
@@ -226,7 +226,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "EXISTS"
     ],
     "correctIndex": 1,
-    "explanation": "NOT IN은 내부적으로 AND NOT 조건의 결합이므로, 비교 대상 중 하나라도 NULL이면 결과가 UNKNOWN이 되어 전체 조건이 거짓이 되고 결과를 반환하지 못합니다. EXISTS/NOT EXISTS는 행의 존재 여부만 확인해 NULL의 영향을 받지 않습니다.",
+    "explanation": "NOT IN (1, NULL) 은 '1 이 아니고 AND NULL 도 아니다' 와 같다. NULL 과의 비교는 참·거짓을 알 수 없으니 전체가 참이 될 수 없어 0건이 된다. NOT EXISTS 는 행이 있는지만 보므로 NULL 의 영향을 받지 않는다.",
     "chapter": "서브쿼리",
     "_source": "ai-mock",
     "_origId": "ai-mock-013"
@@ -245,7 +245,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "3개"
     ],
     "correctIndex": 3,
-    "explanation": "GROUPING SETS는 괄호 안에 명시된 각 항목에 대해서만 개별적으로 집계하므로 (A), (B), (C) 3개의 결과를 반환합니다. ROLLUP(A,B,C)이면 4개, CUBE(A,B,C)이면 8개입니다.",
+    "explanation": "GROUPING SETS 는 적은 것만큼 따로 집계한다 → (A), (B), (C) 3개. 같은 컬럼이라도 ROLLUP(A, B, C) 이면 4개, CUBE(A, B, C) 이면 2³ = 8개다.",
     "chapter": "그룹 함수",
     "_source": "ai-mock",
     "_origId": "ai-mock-015"
@@ -264,7 +264,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "A와 B 중 NULL이 아닌 첫 번째 값을 반환한다."
     ],
     "correctIndex": 1,
-    "explanation": "NULLIF(A, B)는 두 인수가 같으면 NULL을, 다르면 첫 번째 인수 A를 반환합니다. ③은 NVL/ISNULL, ④는 COALESCE의 동작입니다.",
+    "explanation": "NULLIF(A, B) 는 두 값이 같으면 NULL, 다르면 A 를 돌려준다. ③(A 가 NULL 이면 B)은 NVL, ④(처음 만나는 NULL 아닌 값)는 COALESCE 의 동작이다.",
     "chapter": "함수",
     "_source": "ai-mock",
     "_origId": "ai-mock-016"
@@ -283,7 +283,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "ROW_NUMBER"
     ],
     "correctIndex": 1,
-    "explanation": "RANK는 동순위에 같은 등수를 부여한 뒤 그만큼 다음 등수를 건너뜁니다(1, 1, 3). DENSE_RANK는 건너뛰지 않고(1, 1, 2), ROW_NUMBER는 동순위 없이 일련번호를 부여합니다.",
+    "explanation": "동점에 같은 순위를 주고 그 수만큼 다음 순위를 건너뛰는 것(1, 1, 3)은 RANK 다. DENSE_RANK 는 건너뛰지 않고(1, 1, 2), ROW_NUMBER 는 동점이어도 1, 2, 3 으로 번호를 다르게 준다.",
     "chapter": "윈도우 함수",
     "_source": "ai-mock",
     "_origId": "ai-mock-017"
@@ -302,7 +302,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "쿼리의 순서가 바뀌면 결과도 달라질 수 있다."
     ],
     "correctIndex": 1,
-    "explanation": "MINUS는 UNION·INTERSECT와 마찬가지로 결과 집합에서 중복을 제거하여 고유한 행만 출력합니다. UNION ALL만 중복을 보존합니다.",
+    "explanation": "MINUS 도 UNION·INTERSECT 처럼 결과에서 중복을 지운다. 중복을 그대로 두는 건 UNION ALL 하나뿐이다. 그래서 ②가 틀렸다.",
     "chapter": "집합 연산자",
     "_source": "ai-mock",
     "_origId": "ai-mock-018"
@@ -321,7 +321,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "ON 절에 사용된 조인 조건 컬럼의 값도 UPDATE 절을 통해 수정할 수 있다."
     ],
     "correctIndex": 1,
-    "explanation": "MERGE는 단일 문장으로 UPSERT(Update or Insert)를 처리하는 것이 핵심 기능입니다. WHEN 절은 둘 중 하나만 사용 가능하며, ON 절의 조인 키 컬럼은 UPDATE 대상이 될 수 없습니다.",
+    "explanation": "MERGE 는 '있으면 UPDATE, 없으면 INSERT'를 한 문장으로 처리한다. WHEN MATCHED·WHEN NOT MATCHED 는 하나만 써도 되고(①✕), DELETE 도 MATCHED 안에서 쓸 수 있으며(③✕), ON 절의 조인 키는 UPDATE 할 수 없다(④✕).",
     "chapter": "DML",
     "_source": "ai-mock",
     "_origId": "ai-mock-020"
@@ -340,7 +340,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "ROWS BETWEEN CURRENT ROW AND UNBOUNDED FOLLOWING"
     ],
     "correctIndex": 2,
-    "explanation": "ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW는 파티션의 첫 행부터 현재 행까지의 누적 범위를 의미하는 표준 구문이며 누계 산출에 사용됩니다.",
+    "explanation": "누계는 '파티션 첫 행부터 지금 행까지' 더하면 된다 → ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW. ①은 앞뒤 한 행씩, ④는 지금 행부터 끝까지다.",
     "chapter": "윈도우 함수",
     "_source": "ai-mock",
     "_origId": "ai-mock-022"
@@ -359,7 +359,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "조인 기준 컬럼의 데이터 타입이 다르면 자동으로 형변환을 수행한다."
     ],
     "correctIndex": 0,
-    "explanation": "NATURAL JOIN과 USING 절의 조인 키 컬럼은 두 테이블의 식별자를 잃고 단일 개념으로 통합되므로 테이블 접두사(Alias)를 붙일 수 없는 것이 표준 SQL 규칙입니다.",
+    "explanation": "NATURAL JOIN(그리고 USING)의 조인 컬럼은 결과에서 한 컬럼으로 합쳐진다. 그래서 SELECT 에서 그 컬럼 앞에 테이블명이나 별칭을 붙이면 오류가 난다. ON 절은 함께 쓸 수 없고, 이름이 같은 컬럼이 여러 개면 모두 조인 조건이 된다.",
     "chapter": "조인",
     "_source": "ai-mock",
     "_origId": "ai-mock-023"
@@ -378,7 +378,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "서브쿼리의 결과가 0건(Empty)이면 메인 쿼리도 오류를 발생시킨다."
     ],
     "correctIndex": 3,
-    "explanation": "서브쿼리 결과가 0건이면 비교 연산이 UNKNOWN으로 처리되어 조건이 거짓이 될 뿐 오류는 발생하지 않습니다. 2건 이상 반환되면 단일 행 비교 연산과 어긋나 런타임 오류가 납니다.",
+    "explanation": "단일 행 서브쿼리 결과가 0건이면 비교값이 NULL 이 되어 조건이 참이 되지 않을 뿐, 오류는 나지 않는다(결과가 0건). 오류가 나는 건 2건 이상이 돌아올 때다. 그래서 ④가 틀렸다.",
     "chapter": "서브쿼리",
     "_source": "ai-mock",
     "_origId": "ai-mock-024"
@@ -397,7 +397,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "인자의 순서를 바꾸어도 결과집합의 내용은 완전히 동일하다."
     ],
     "correctIndex": 2,
-    "explanation": "ROLLUP은 오른쪽부터 컬럼을 하나씩 제거하며 소계를 만들고 마지막에 전체 총계를 추가하므로 n+1개의 그룹핑 셋이 생성됩니다. 2^n개는 CUBE, 인자 순서가 결과에 영향을 주는 점도 ROLLUP의 특징입니다.",
+    "explanation": "ROLLUP 은 오른쪽 컬럼부터 하나씩 빼면서 소계를 만들고 마지막에 총계를 붙인다 → 컬럼 n 개면 n + 1 묶음. 2ⁿ 은 CUBE 이고, ROLLUP 은 인자 순서를 바꾸면 결과도 달라진다.",
     "chapter": "그룹 함수",
     "_source": "ai-mock",
     "_origId": "ai-mock-025"
@@ -416,7 +416,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "NVL2"
     ],
     "correctIndex": 2,
-    "explanation": "NVL·COALESCE·NVL2는 모두 NULL을 다른 값으로 대체하는 NULL 처리 함수입니다. NULLIF는 두 값이 같으면 NULL을 반환하는 함수로 NULL을 '생성'하는 성격이라 분류가 다릅니다.",
+    "explanation": "NVL·COALESCE·NVL2 는 NULL 을 다른 값으로 바꿔 주는 함수다. NULLIF 는 두 값이 같으면 NULL 을 '만드는' 함수라 성격이 반대다.",
     "chapter": "함수",
     "_source": "ai-mock",
     "_origId": "ai-mock-026"
@@ -435,7 +435,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "메인 쿼리에서 비교할 컬럼의 순서와 서브쿼리에서 반환하는 컬럼의 순서는 달라도 이름만 같으면 무방하다."
     ],
     "correctIndex": 3,
-    "explanation": "다중 컬럼 비교는 컬럼 이름이 아닌 명시된 위치(순서) 기준 1:1 매핑으로 비교되므로 메인과 서브쿼리의 컬럼 순서가 반드시 일치해야 합니다.",
+    "explanation": "(컬럼1, 컬럼2) IN (SELECT …) 는 이름이 아니라 적은 순서대로 짝지어 비교한다. 순서가 다르면 엉뚱한 컬럼끼리 비교된다. 이름만 같으면 된다는 ④가 틀렸다.",
     "chapter": "서브쿼리",
     "_source": "ai-mock",
     "_origId": "ai-mock-027"
@@ -454,7 +454,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "FROM 절에서 가상의 테이블처럼 사용되는 서브쿼리이다."
     ],
     "correctIndex": 0,
-    "explanation": "스칼라 서브쿼리는 SELECT 절에 주로 사용되며 단일 행·단일 컬럼의 단일 값만 반환해야 합니다. 0건이면 NULL이 반환될 뿐 메인 행이 사라지지 않으며, FROM 절 서브쿼리는 인라인 뷰입니다.",
+    "explanation": "스칼라 서브쿼리는 값 하나(1행 1컬럼)만 돌려줘야 한다. 결과가 0건이면 NULL 이 들어갈 뿐 메인 쿼리의 행은 그대로 나오고(②✕), FROM 절에 쓰는 것은 인라인 뷰다(④✕).",
     "chapter": "서브쿼리",
     "_source": "ai-mock",
     "_origId": "ai-mock-028"
@@ -473,7 +473,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "단순 뷰의 경우 DML(INSERT, UPDATE, DELETE) 작업이 가능하지만 제약이 따른다."
     ],
     "correctIndex": 0,
-    "explanation": "일반 뷰는 데이터를 저장하지 않고 정의(쿼리 텍스트)만 사전에 저장하는 가상 테이블이므로 독립적 저장 공간이나 인덱스를 가질 수 없습니다. 데이터를 실제로 저장하는 것은 구체화된 뷰(MVIEW)입니다.",
+    "explanation": "일반 뷰는 SELECT 문만 저장한 가상 테이블이라 데이터를 따로 저장하지 않고, 인덱스도 직접 만들 수 없다. 데이터를 실제로 저장하는 건 머티리얼라이즈드 뷰다. 그래서 ①이 틀렸다.",
     "chapter": "DDL",
     "_source": "ai-mock",
     "_origId": "ai-mock-029"
@@ -492,7 +492,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "Read Uncommitted - Dirty Read 발생 가능"
     ],
     "correctIndex": 1,
-    "explanation": "Repeatable Read는 기존 데이터의 변경(Non-Repeatable Read)은 막지만 신규 데이터의 INSERT는 막지 못하므로 유령(Phantom) 데이터가 나타날 수 있습니다. Phantom Read를 완전히 막으려면 Serializable이 필요합니다.",
+    "explanation": "Repeatable Read 는 이미 읽은 행이 바뀌는 것(Non-Repeatable Read)은 막지만, 다른 트랜잭션이 새 행을 넣는 것은 막지 못해 없던 행이 보이는 Phantom Read 가 생길 수 있다. 완전히 막으려면 Serializable 이 필요하다.",
     "chapter": "DCL·TCL",
     "_source": "ai-mock",
     "_origId": "ai-mock-030"
@@ -511,7 +511,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "테이블 구조만 변경할 뿐, 내부에 저장된 데이터에는 어떠한 락(Lock)도 발생시키지 않는다."
     ],
     "correctIndex": 0,
-    "explanation": "Oracle 등 대부분 DBMS에서 DDL은 명령 실행 전후로 암묵적 COMMIT을 유발합니다. 따라서 DDL 직전의 미커밋된 DML 작업도 함께 영구 반영되며 ROLLBACK이 불가능하므로 트랜잭션 관리에 주의가 필요합니다.",
+    "explanation": "오라클에서 DDL(CREATE·ALTER·DROP·TRUNCATE 등)을 실행하면 자동으로 COMMIT 된다. 그래서 DDL 앞에 해 둔 DML 까지 함께 확정되고, ROLLBACK 해도 돌아오지 않는다.",
     "chapter": "DDL",
     "_source": "ai-mock",
     "_origId": "ai-mock-031"
@@ -549,7 +549,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "정규화 수준이 높아질수록 조인(Join)의 필요성이 줄어들어 무조건 조회 성능이 향상된다."
     ],
     "correctIndex": 3,
-    "explanation": "정규화가 진행될수록 테이블이 잘게 쪼개져 조회 시 조인이 늘어나므로 오히려 성능이 저하될 수 있습니다. 이를 보완하기 위해 반정규화(Denormalization)를 수행합니다.",
+    "explanation": "정규화를 할수록 테이블이 잘게 나뉘어, 조회할 때는 조인이 늘어나 오히려 느려질 수 있다. '무조건 빨라진다'는 ④가 틀렸다. 조회 성능 때문에 일부러 중복을 허용하는 것이 반정규화다.",
     "chapter": "정규화",
     "_source": "ai-mock",
     "_origId": "ai-mock-033"
@@ -568,7 +568,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "집계 혹은 요약 데이터를 미리 계산해 두어 리포팅 조회 속도를 개선하기 위해"
     ],
     "correctIndex": 1,
-    "explanation": "반정규화는 성능 향상을 위해 데이터 중복을 일부 허용하는 과정이므로 무결성을 해칠 위험이 오히려 커집니다. 무결성 보장은 정규화의 목적이고, 반정규화는 그 트레이드오프로 성능을 얻는 기법입니다.",
+    "explanation": "반정규화는 조회를 빠르게 하려고 일부러 중복을 허용하는 것이라, 무결성은 오히려 지키기 어려워진다. 무결성을 지키는 건 정규화의 목적이다. 그래서 ②가 거리가 멀다.",
     "chapter": "정규화",
     "_source": "ai-mock",
     "_origId": "ai-mock-034"
@@ -587,7 +587,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "PRIMARY KEY"
     ],
     "correctIndex": 0,
-    "explanation": "UNIQUE는 중복 값은 막지만 NULL은 비교 불가이므로 여러 개의 NULL 입력을 허용합니다. PRIMARY KEY는 UNIQUE + NOT NULL 조합이라 NULL을 허용하지 않습니다.",
+    "explanation": "UNIQUE 는 같은 값이 두 번 들어가는 것만 막고 NULL 은 허용한다(NULL 끼리는 같다고 보지 않아 여러 개도 가능). PRIMARY KEY 는 UNIQUE + NOT NULL 이라 NULL 을 넣을 수 없다.",
     "chapter": "DDL",
     "_source": "ai-mock",
     "_origId": "ai-mock-035"
@@ -606,7 +606,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "결과는 10, 8 이다."
     ],
     "correctIndex": 3,
-    "explanation": "COUNT(*)는 NULL 포함 모든 행을 세어 10을 반환합니다. COUNT(COL1)은 COL1이 NULL인 행을 제외하므로 10 - 2 = 8을 반환합니다.",
+    "explanation": "COUNT(*) 는 NULL 이 있든 없든 전체 행 수라 10. COUNT(COL1) 은 COL1 이 NULL 인 2행을 빼고 세므로 8. 결과는 10, 8 이다.",
     "chapter": "그룹 함수",
     "_source": "ai-mock",
     "_origId": "ai-mock-036",
@@ -650,7 +650,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "메인 쿼리가 실행되기 전 단 한 번만 실행되어 결과를 메인 쿼리에 제공한다."
     ],
     "correctIndex": 1,
-    "explanation": "상관 서브쿼리는 서브쿼리 안에서 메인 쿼리의 컬럼을 참조하기 때문에 메인 쿼리의 각 행마다 서브쿼리가 반복 실행됩니다. 비상관 서브쿼리는 한 번만 실행되어 결과를 캐싱하는 것이 일반적입니다.",
+    "explanation": "상관(연관) 서브쿼리는 안에서 메인 쿼리의 컬럼을 쓰기 때문에, 메인 쿼리의 행마다 서브쿼리가 다시 실행된다. 메인 쿼리보다 먼저 한 번만 실행되는 건 비연관 서브쿼리다(④).",
     "chapter": "서브쿼리",
     "_source": "ai-mock",
     "_origId": "ai-mock-038"
@@ -669,7 +669,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "CACHE 옵션을 사용하면 메모리에 미리 번호를 할당하여 속도를 높일 수 있지만, 인스턴스 비정상 종료 시 번호 결번이 생길 수 있다."
     ],
     "correctIndex": 0,
-    "explanation": "시퀀스는 트랜잭션과 독립적으로 동작하므로 ROLLBACK이 발생해도 한 번 증가한 번호는 되돌아가지 않고 결번(Gap)이 발생합니다.",
+    "explanation": "시퀀스는 트랜잭션과 따로 움직인다. 한 번 NEXTVAL 로 꺼낸 번호는 ROLLBACK 해도 돌아오지 않아 번호가 비게(결번) 된다. 그래서 ①이 틀렸다.",
     "chapter": "DDL",
     "_source": "ai-mock",
     "_origId": "ai-mock-039"
@@ -688,7 +688,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "Durability (영속성) - 트랜잭션 실행 전후의 데이터베이스 무결성 제약조건은 항상 유지되어야 한다."
     ],
     "correctIndex": 2,
-    "explanation": "원자성(Atomicity)의 정의는 'All or Nothing'으로 옳습니다. ①은 영속성(Durability), ②는 격리성(Isolation), ④는 일관성(Consistency)에 해당하므로 짝이 맞지 않습니다.",
+    "explanation": "원자성은 '전부 되거나 전부 안 되거나'다 → ③이 맞다. ①은 지속성, ②는 고립성, ④는 일관성의 설명이라 짝이 바뀌었다.",
     "chapter": "트랜잭션과 Null",
     "_source": "ai-mock",
     "_origId": "ai-mock-040"
@@ -707,7 +707,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "서브쿼리의 결과가 0건(Empty Set)일 경우, 연산 오류가 발생하여 메인 쿼리가 실패한다."
     ],
     "correctIndex": 1,
-    "explanation": "NOT IN은 내부적으로 'AND NOT =' 논리이므로 비교 대상 중 하나라도 NULL이면 전체가 UNKNOWN이 되어 결과가 0건이 됩니다. NOT EXISTS는 행의 존재 여부만 확인하므로 NULL의 영향을 받지 않아 NOT IN과 결과가 다를 수 있습니다.",
+    "explanation": "NOT IN 서브쿼리 결과에 NULL 이 하나라도 있으면 비교가 참이 될 수 없어 결과는 항상 0건이다. NOT EXISTS 는 행이 있는지만 보므로 NULL 이 있어도 결과가 나오고, 그래서 둘의 결과가 다를 수 있다.",
     "chapter": "서브쿼리",
     "_source": "ai-mock",
     "_origId": "ai-mock-041",
@@ -732,7 +732,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "CONNECT_BY_ISCYCLE 가상 컬럼은 현재 행이 자식 노드를 가지고 있는지(단말 노드가 아닌지) 여부를 1과 0으로 반환한다."
     ],
     "correctIndex": 3,
-    "explanation": "단말 노드 여부를 반환하는 가상 컬럼은 CONNECT_BY_ISLEAF입니다. CONNECT_BY_ISCYCLE은 데이터의 무한 순환(Cycle) 발생 여부를 반환합니다.",
+    "explanation": "자식이 없는 행(리프)인지 알려 주는 건 CONNECT_BY_ISLEAF 다. CONNECT_BY_ISCYCLE 은 데이터가 빙글빙글 순환하는지(NOCYCLE 과 함께) 알려 준다. 그래서 ④가 틀렸다.",
     "chapter": "계층형 질의",
     "_source": "ai-mock",
     "_origId": "ai-mock-042"
@@ -751,7 +751,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "ORDER BY SALARY RANGE UNBOUNDED PRECEDING"
     ],
     "correctIndex": 2,
-    "explanation": "RANGE는 정렬 키 값 기준이라 동일 SALARY 값을 가진 행을 한 번에 묶어 누적합니다. 반면 ROWS는 물리적 행 순서대로 하나씩 누적하므로 동일 값이 있을 때 RANGE 방식과 결과가 달라집니다. ①·②(생략 시 기본값 RANGE)·④는 모두 RANGE 기반이라 같은 결과를, ③ ROWS는 다른 결과를 냅니다.",
+    "explanation": "ORDER BY 만 쓰거나 RANGE 를 쓰면 정렬 값이 같은 행을 한꺼번에 더한다. ROWS 는 행을 하나씩 차례로 더한다. 같은 SALARY 가 있으면 ③(ROWS)만 결과가 달라지고, ①·②(기본값이 RANGE)·④는 같다.",
     "chapter": "윈도우 함수",
     "_source": "ai-mock",
     "_origId": "ai-mock-043"
@@ -770,7 +770,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "여러 개의 인자를 받아 각 컬럼의 GROUPING 함수 반환값(0 또는 1)을 연결한 이진수를 십진수로 변환하여 반환한다."
     ],
     "correctIndex": 3,
-    "explanation": "GROUPING_ID는 여러 컬럼의 GROUPING 결과(0/1)를 비트맵으로 연결한 뒤 십진수로 변환해 반환합니다. 어떤 조합의 소계인지 한 번에 식별할 수 있어 ROLLUP·CUBE 결과 분석에 유용합니다. ③은 단일 컬럼에 대한 GROUPING 함수의 동작입니다.",
+    "explanation": "GROUPING_ID(A, B) 는 GROUPING(A), GROUPING(B) 의 0/1 을 이어 붙인 이진수를 십진수로 바꾼 값이다. 예: A 소계 행이면 GROUPING 값이 (0, 1) → 이진수 01 → 1. ③(0 또는 1)은 컬럼 하나짜리 GROUPING 함수의 설명이다.",
     "chapter": "그룹 함수",
     "_source": "ai-mock",
     "_origId": "ai-mock-045"
@@ -789,7 +789,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "서브쿼리 내부에서 메인 쿼리의 컬럼을 참조하는 상관 서브쿼리 형태로 작성되었을 때"
     ],
     "correctIndex": 1,
-    "explanation": "스칼라 서브쿼리는 단일 행·단일 컬럼 값만 반환해야 하므로 2건 이상 반환되면 런타임 오류가 발생합니다. 0건은 NULL로 처리될 뿐 오류는 아닙니다.",
+    "explanation": "스칼라 서브쿼리는 값 하나만 돌려줘야 한다. 2건 이상이 나오면 어느 값을 넣을지 몰라 오류가 난다. 0건이면 NULL 로 처리될 뿐 오류가 아니다.",
     "chapter": "서브쿼리",
     "_source": "ai-mock",
     "_origId": "ai-mock-046"
@@ -827,7 +827,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "SUM(COL1)의 결과는 60이다."
     ],
     "correctIndex": 1,
-    "explanation": "AVG는 NULL을 자동으로 제외하므로 분모가 4가 아닌 3입니다. SUM(60) ÷ COUNT(COL1)(3) = 20이 반환됩니다.",
+    "explanation": "AVG 는 NULL 을 빼고 계산한다. 10 + 20 + 30 = 60 을 NULL 이 아닌 3개로 나누니 20 이다. 4로 나눈 15 라는 ②가 틀렸다. COUNT(*) 4, COUNT(COL1) 3, SUM 60 은 맞다.",
     "chapter": "그룹 함수",
     "_source": "ai-mock",
     "_origId": "ai-mock-049"
@@ -846,7 +846,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "두 테이블 간에 동일한 이름을 가진 모든 컬럼들에 대해 동등(=) 조인을 수행한다."
     ],
     "correctIndex": 1,
-    "explanation": "NATURAL JOIN과 USING 절의 공통 컬럼은 두 테이블의 식별자를 잃고 단일 개념으로 통합되므로, 테이블 접두사(Alias)를 붙이면 오류가 발생합니다.",
+    "explanation": "NATURAL JOIN 의 공통 컬럼은 결과에서 한 컬럼으로 합쳐지므로 앞에 테이블명·별칭을 붙이면 오류가 난다. '반드시 붙여야 한다'는 ②가 틀렸다.",
     "chapter": "조인",
     "_source": "ai-mock",
     "_origId": "ai-mock-050"
@@ -865,7 +865,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "필요에 따라 WHEN MATCHED 절이나 WHEN NOT MATCHED 절 중 하나만 선택적으로 사용할 수 있다."
     ],
     "correctIndex": 1,
-    "explanation": "MERGE의 ON 절에 사용된 조인 키 컬럼은 매칭 기준이 되는 열쇠이므로 UPDATE 구문으로 값을 변경할 수 없으며 시도 시 오류가 발생합니다.",
+    "explanation": "MERGE 의 ON 절 조인 키는 같은 행을 찾는 기준이라 UPDATE 로 바꿀 수 없다(오라클은 오류). 바꿀 수 있다는 ②가 틀렸다.",
     "chapter": "DML",
     "_source": "ai-mock",
     "_origId": "ai-mock-052"
@@ -884,7 +884,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "TRUNCATE는 DDL이고, DELETE는 DML 명령어이다."
     ],
     "correctIndex": 2,
-    "explanation": "TRUNCATE는 DDL 명령어이므로 실행 즉시 자동 커밋(Auto Commit)이 발생하여 ROLLBACK으로 복구할 수 없습니다. DELETE는 DML이므로 COMMIT 전에는 ROLLBACK이 가능합니다.",
+    "explanation": "TRUNCATE 는 DDL 이라 실행하자마자 자동 COMMIT 되어 ROLLBACK 으로 되돌릴 수 없다. DELETE 는 DML 이라 COMMIT 전이면 ROLLBACK 할 수 있다. 그래서 ③이 틀렸다.",
     "chapter": "DDL",
     "_source": "ai-mock",
     "_origId": "ai-mock-053"
@@ -903,7 +903,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "전체 집합을 그룹으로 나눈 뒤, 그룹 내에서 정렬 기준에 따라 가장 처음(또는 마지막) 행의 특정 컬럼 값을 추출한다."
     ],
     "correctIndex": 3,
-    "explanation": "KEEP (DENSE_RANK FIRST/LAST ORDER BY ...) 구문은 그룹별로 정렬 기준의 첫 행(또는 마지막 행)에 위치한 데이터의 특정 컬럼 값을 추출하는 데 사용됩니다. 부서별 연봉 1위 사원의 이름을 가져오는 등의 활용이 대표적입니다.",
+    "explanation": "KEEP (DENSE_RANK FIRST ORDER BY …) 는 그룹마다 정렬했을 때 맨 앞(LAST 면 맨 뒤) 행의 다른 컬럼 값을 꺼낸다. 예: 부서별로 급여가 가장 높은 사원의 이름 — MAX(ENAME) KEEP (DENSE_RANK FIRST ORDER BY SAL DESC).",
     "chapter": "윈도우 함수",
     "_source": "ai-mock",
     "_origId": "ai-mock-054"
@@ -922,7 +922,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "COALESCE(NULL, NULL, 50, 100) -> 50"
     ],
     "correctIndex": 2,
-    "explanation": "NULLIF는 두 인수가 같으면 NULL을 반환하고 다르면 첫 번째 인수를 반환합니다. NULLIF('A', 'A')는 두 값이 같으므로 NULL을 반환합니다.",
+    "explanation": "NULLIF 는 두 값이 같으면 NULL, 다르면 첫 번째 값을 돌려준다. NULLIF('A', 'A') 는 같으니 NULL 이다. 'A' 라는 ③이 틀렸다.",
     "chapter": "함수",
     "_source": "ai-mock",
     "_origId": "ai-mock-057"
@@ -941,7 +941,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "FROM -> GROUP BY -> HAVING -> WHERE -> SELECT -> ORDER BY"
     ],
     "correctIndex": 2,
-    "explanation": "SQL의 논리적 실행 순서는 FROM(테이블 참조) → WHERE(행 필터) → GROUP BY(그룹화) → HAVING(그룹 필터) → SELECT(컬럼 추출) → ORDER BY(정렬)입니다. 이 때문에 SELECT 별칭은 WHERE에서는 못 쓰고 ORDER BY에서는 쓸 수 있습니다.",
+    "explanation": "실행 순서는 FROM → WHERE → GROUP BY → HAVING → SELECT → ORDER BY 다. SELECT 가 다섯 번째라서, SELECT 에서 붙인 별칭은 WHERE 에서는 못 쓰고 ORDER BY 에서만 쓸 수 있다.",
     "chapter": "관계형 DB와 SELECT",
     "_source": "ai-mock",
     "_origId": "ai-mock-058"
@@ -960,7 +960,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "여러 트랜잭션이 동시에 수행될 때, 서로의 연산에 끼어들거나 영향을 주어서는 안 된다."
     ],
     "correctIndex": 2,
-    "explanation": "일관성(Consistency)은 트랜잭션 실행 전후로 데이터베이스가 모든 무결성 제약조건을 만족하는 상태로 유지되어야 한다는 특성입니다. ①은 영속성, ②는 원자성, ④는 격리성에 대한 설명입니다.",
+    "explanation": "일관성은 트랜잭션 전후에 제약조건 같은 규칙이 항상 지켜지는 성질이다 → ③. ①은 지속성, ②는 원자성, ④는 고립성의 설명이다.",
     "chapter": "트랜잭션과 Null",
     "_source": "ai-mock",
     "_origId": "ai-mock-059"
@@ -979,7 +979,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "테이블 내에서 여러 개의 컬럼을 조합하여(Composite) 하나의 UNIQUE 제약을 생성할 수 있다."
     ],
     "correctIndex": 0,
-    "explanation": "UNIQUE 제약은 NULL 삽입을 허용하므로 NOT NULL이 자동으로 부여되지 않습니다. UNIQUE와 NOT NULL이 결합된 형태가 PRIMARY KEY입니다.",
+    "explanation": "UNIQUE 는 NULL 을 허용하므로 NOT NULL 이 자동으로 붙지 않는다. UNIQUE 와 NOT NULL 을 합친 것이 PRIMARY KEY 다. 그래서 ①이 틀렸다.",
     "chapter": "DDL",
     "_source": "ai-mock",
     "_origId": "ai-mock-060"
@@ -21332,7 +21332,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "개발자"
     ],
     "correctIndex": 1,
-    "explanation": "3층 스키마의 데이터베이스를 보는 관점은 사용자, 설계자, 개발자입니다.",
+    "explanation": "3층 스키마는 보는 사람에 따라 나눈다. 외부 스키마는 사용자, 개념 스키마는 설계자, 내부 스키마는 개발자 관점이다. '구조자' 관점은 없다.",
     "chapter": "데이터베이스 설계",
     "_source": "sqld-1140",
     "_origId": "sqld-0569",
@@ -26187,7 +26187,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "COMMIT을 한 이후에는 ROLLBACK을 수행해도 이전 값으로 돌아갈 수 없다."
     ],
     "correctIndex": 0,
-    "explanation": "1번 선지의 COMMIT이후 까지만 ROLLBACK 된다. 가 틀린 표현입니다. COMMIT 이후까지 ROLLBACK되는 것이 아니라 ROLLBACK 명령어 자체가 에러가 발생합니다. 간단하게 예를 설명하면 HDATALAB 1 SELECT * FROM EMP_T1; 2 SAVEPOINT SP1; 3 DELETE FROM EMP_T1 WHERE JOB = 'CLERK'; 4 COMMIT; 5 INSERT INTO EMP_T1 VALUES(1111,'PARK','CELRK',1112,SYSDATE, 8000, NULL, 20); 6 ROLLBACK TO SP1; 이렇게 있다고 가정할 때 6번의 ROLLBACK TO SP1; 을 실행하게 되면 COMMIT이후 5번의 문장이 ROLLBACK되는 것이 아니라 ROLLBACK 에러 문구가 발생합니다. 즉 5번 문장은 실행이 그대로 되어 있습니다.",
+    "explanation": "COMMIT 을 하면 그 앞에 만든 SAVEPOINT 는 모두 사라진다. 그래서 COMMIT 뒤에 ROLLBACK TO SP1 을 실행하면 '저장점이 없다'는 오류가 나고 아무것도 취소되지 않는다 → ①이 틀렸다. ② ROLLBACK 자체를 다시 되돌릴 수는 없고, ③ 컬럼 추가(ALTER, DDL)는 자동 COMMIT 이라 앞의 INSERT 도 확정되며, ④ COMMIT 한 뒤에는 ROLLBACK 해도 돌아오지 않는다.",
     "chapter": "트랜잭션 관리",
     "_source": "sqld-1140",
     "_origId": "sqld-0766",
@@ -27003,7 +27003,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "데이터를 암호화하는 것"
     ],
     "correctIndex": 2,
-    "explanation": "데이터 모델링은 시스템이 필요로 하는 데이터를 구조적으로 설계하고, 업무 흐름을 정확히 반영하여 시스템을 구축하기 위한 기반을 만드는 과정입니다.",
+    "explanation": "데이터 모델링은 업무를 분석해서, 시스템에 어떤 데이터를 어떤 구조로 저장할지 설계하는 일이다. 화면 디자인이나 프로그램 코드 작성이 목적이 아니다.",
     "chapter": "데이터 모델링 기법",
     "_source": "sqld-1140",
     "_origId": "sqld-0801",
@@ -27024,7 +27024,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "네트워크 모델"
     ],
     "correctIndex": 1,
-    "explanation": "개념적 모델링은 비즈니스 중심의 모델링으로, 엔터티(Entity)와 관계(Relationship)를 표현하는 ER 모델이 대표적으로 사용됩니다.",
+    "explanation": "개념적 모델링에서는 업무에서 다루는 엔터티와 그 사이의 관계를 그리는 ER 모델(ERD)을 주로 쓴다.",
     "chapter": "데이터 모델링 기법",
     "_source": "sqld-1140",
     "_origId": "sqld-0802",
@@ -27045,7 +27045,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "하드웨어 구조 분석"
     ],
     "correctIndex": 0,
-    "explanation": "논리적 모델링 단계에서는 엔터티의 속성을 정의하고 도메인을 설정하며, 정규화를 수행합니다.",
+    "explanation": "논리적 모델링에서는 엔터티마다 속성을 정하고, 속성이 가질 수 있는 값의 범위(도메인)를 정의하며, 정규화를 한다. 인덱스·저장 구조는 물리적 모델링에서 정한다.",
     "chapter": "데이터 모델링 기법",
     "_source": "sqld-1140",
     "_origId": "sqld-0803",
@@ -27066,7 +27066,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "SQL 사용"
     ],
     "correctIndex": 2,
-    "explanation": "관계형 데이터베이스는 선언형 언어(SQL)를 사용하며, 데이터는 테이블 기반으로 저장됩니다. 절차적 저장은 관계형 DB의 특징이 아닙니다.",
+    "explanation": "관계형 DB 는 데이터를 표(테이블)에 담고, 무엇을 원하는지만 적는 비절차적 언어 SQL 로 다룬다. '절차적 데이터 저장'은 관계형 DB 의 특징이 아니다.",
     "chapter": "데이터 모델 개념",
     "_source": "sqld-1140",
     "_origId": "sqld-0804",
@@ -27087,7 +27087,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "비즈니스 규칙"
     ],
     "correctIndex": 2,
-    "explanation": "엔터티는 고객, 제품, 주문 등 데이터로 저장될 수 있는 객체나 개념을 의미합니다.",
+    "explanation": "엔터티는 업무에서 저장·관리해야 하는 데이터의 집합이다. 고객, 상품, 주문처럼 이름 붙일 수 있는 대상이 엔터티가 된다.",
     "chapter": "데이터 모델 개념",
     "_source": "sqld-1140",
     "_origId": "sqld-0805",
@@ -27150,7 +27150,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "항상 1:1 관계"
     ],
     "correctIndex": 2,
-    "explanation": "약한 엔터티는 스스로 고유하게 식별될 수 없어 강한 엔터티의 식별자에 의존합니다.",
+    "explanation": "약한 엔터티는 자기 속성만으로는 인스턴스를 구분할 수 없어, 강한(부모) 엔터티의 식별자를 빌려 와야 구분된다. 예: 주문상품은 주문번호가 있어야 구분된다.",
     "chapter": "데이터 모델 개념",
     "_source": "sqld-1140",
     "_origId": "sqld-0808",
@@ -27171,7 +27171,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "속성 값의 범위"
     ],
     "correctIndex": 1,
-    "explanation": "식별자는 엔터티 내에서 각 인스턴스를 구분할 수 있도록 해주는 속성 또는 속성의 조합입니다.",
+    "explanation": "식별자는 엔터티 안에서 인스턴스 하나하나를 구분하는 속성(또는 속성 묶음)이다. 테이블로 옮기면 기본키(PK)가 된다.",
     "chapter": "엔터티",
     "_source": "sqld-1140",
     "_origId": "sqld-0811",
@@ -27192,7 +27192,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "1NF → 3NF → 2NF"
     ],
     "correctIndex": 1,
-    "explanation": "정규화는 순차적으로 1NF → 2NF → 3NF로 수행됩니다.",
+    "explanation": "정규화는 1정규형 → 2정규형 → 3정규형 순서로 진행한다. 앞 단계를 만족해야 다음 단계로 갈 수 있다.",
     "chapter": "정규화",
     "_source": "sqld-1140",
     "_origId": "sqld-0812",
@@ -27213,7 +27213,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "조인 수행"
     ],
     "correctIndex": 1,
-    "explanation": "1NF는 반복 속성이 없이 모든 속성이 원자값(Atomic Value)을 가져야 함을 의미합니다.",
+    "explanation": "1정규형은 모든 칸에 값이 하나(원자값)만 들어가야 한다. 전화번호 여러 개를 한 칸에 넣는 것처럼 반복되는 값이 있으면 분리한다.",
     "chapter": "정규화",
     "_source": "sqld-1140",
     "_origId": "sqld-0813",
@@ -27234,7 +27234,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "기본키"
     ],
     "correctIndex": 0,
-    "explanation": "2NF는 기본키의 일부분에만 의존하는 속성(부분 함수 종속)을 제거해야 합니다.",
+    "explanation": "2정규형은 복합 기본키의 일부에만 매달린 속성(부분 함수 종속)을 떼어 낸다. 일반 속성끼리 매달린 것(이행 종속)을 떼는 건 3정규형이다.",
     "chapter": "정규화",
     "_source": "sqld-1140",
     "_origId": "sqld-0814",
@@ -27255,7 +27255,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "외래 키 목록"
     ],
     "correctIndex": 1,
-    "explanation": "도메인은 해당 속성이 가질 수 있는 값의 집합 또는 범위입니다. (예: 성별 → 남/여)",
+    "explanation": "도메인은 속성이 가질 수 있는 값의 범위다. 예: 성별은 '남/여', 학년은 1~4 사이 정수.",
     "chapter": "데이터 모델 개념",
     "_source": "sqld-1140",
     "_origId": "sqld-0816",
@@ -27276,7 +27276,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "서버 트래픽 분석"
     ],
     "correctIndex": 2,
-    "explanation": "비즈니스 룰은 기업의 정책이나 업무 규칙으로, 데이터 모델 설계의 기준이 됩니다.",
+    "explanation": "비즈니스 룰은 '주문에는 반드시 고객이 있어야 한다' 같은 회사의 업무 규칙이다. 데이터 모델을 그릴 때 이 규칙이 엔터티·관계·제약조건의 기준이 된다.",
     "chapter": "데이터 모델 개념",
     "_source": "sqld-1140",
     "_origId": "sqld-0817",
@@ -27297,7 +27297,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "사용자 인터페이스 디자인"
     ],
     "correctIndex": 3,
-    "explanation": "SQL은 데이터베이스 조작을 위한 언어로 UI 디자인은 포함하지 않습니다.",
+    "explanation": "SQL 은 데이터를 정의(DDL)·조작(DML)·제어(DCL)·트랜잭션 처리(TCL)하는 언어다. 화면(UI) 디자인은 SQL 이 하는 일이 아니다.",
     "chapter": "데이터 모델 개념",
     "_source": "sqld-1140",
     "_origId": "sqld-0819",
@@ -27387,7 +27387,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "고객과 주문 간의 관계는 다대다 관계이다."
     ],
     "correctIndex": 3,
-    "explanation": "① 고객과 상품 엔터티는 기본 엔터티이다. → O\n'기본 엔터티'는 다른 엔터티에 의존하지 않고 독립적으로 존재할 수 있는 엔터티입니다. 고객과 상품은 독립적으로 존재 가능하므로 기본 엔터티입니다.\n\n\n② 주문은 사건(이벤트) 엔터티이다. → O\n'사건 엔터티'는 특정한 활동이나 사건을 나타냅니다. 예: 주문, 예약, 거래 등. 주문은 시간에 따라 발생하는 사건이므로 사건 엔터티가 맞습니다.\n\n\n③ 주문상품은 교차 엔터티로 두 개의 외래 키를 기본 키로 가진다. → O\n주문상품은 주문과 상품 사이의 다대다 관계를 해소하기 위한 교차 테이블이며, 두 외래 키(주문번호, 상품번호)를 합쳐 복합 기본 키로 사용합니다.\n\n\n④ 고객과 주문 간의 관계는 다대다 관계이다. → ❌\n한 명의 고객은 여러 개의 주문을 할 수 있지만, 하나의 주문은 하나의 고객에게만 속합니다. 즉, 1:N (고객:주문) 관계입니다.\n → 다대다 관계가 아님.\r",
+    "explanation": "고객 한 명은 주문을 여러 번 할 수 있지만 주문 하나는 고객 한 명의 것이므로 고객 : 주문은 1:N 이다. 다대다라는 ④가 틀렸다. ① 고객·상품은 다른 엔터티 없이 존재하는 기본 엔터티, ② 주문은 업무 중에 생기는 사건(행위) 엔터티, ③ 주문상품은 주문과 상품의 다대다를 풀어 주는 교차 엔터티로 두 외래키를 합쳐 기본키로 쓴다.",
     "chapter": "엔터티",
     "_source": "sqld-1140",
     "_origId": "sqld-0825",
@@ -27416,7 +27416,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "병원은 의사 없이는 존재할 수 없다."
     ],
     "correctIndex": 3,
-    "explanation": "병원은 의사 없어도 존재할 수 있습니다. 따라서 ④번은 틀린 설명이므로 정답입니다.",
+    "explanation": "병원 쪽에서 의사로 가는 관계가 선택(○)이면 의사가 한 명도 없는 병원도 있을 수 있다. '의사 없이는 존재할 수 없다'는 ④가 틀렸다.",
     "chapter": "엔터티",
     "_source": "sqld-1140",
     "_origId": "sqld-0826",
@@ -27724,7 +27724,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "7"
     ],
     "correctIndex": 2,
-    "explanation": "ROLLUP(COL1) 자체가\n→ GROUP BY COL1\n→ + 전체 소계 (GROUP BY ())\n\n그런데 ROLLUP(COL1), COL1 이라고 하면,\n→ 마치 GROUP BY COL1, COL1 또는\n→ GROUPING SETS ((COL1), (COL1), ()) 과 같은 효과를 줍니다.\n\n즉, COL1로 그룹핑한 결과가 중복으로 2번 나오고,\n전체 합계(ROLLUP)가 1번 더 추가됨\n\n→ 하지만 Oracle은 중복된 GROUP BY COL1 구문을 자동으로 제거하지 않고 모두 집계로 처리합니다.\n→ 이로 인해 총 7건이 나와야 할 것 같지만, 실제 쿼리 결과는 6건입니다.\n",
+    "explanation": "ROLLUP(COL1) 은 (COL1), () 두 묶음을 만든다. 여기에 뒤의 COL1 이 붙으면 (COL1, COL1) = (COL1) 과 (COL1) — 총계 () 도 COL1 과 합쳐져 COL1 별 묶음이 된다. 그래서 COL1 별 결과(A, B, C 3행)가 두 번 나와 3 + 3 = 6행이고, 총계 행은 생기지 않는다.",
     "chapter": "그룹 함수",
     "_source": "sqld-1140",
     "_origId": "sqld-0838",
@@ -27862,7 +27862,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "(라)"
     ],
     "correctIndex": 3,
-    "explanation": "정렬 방향(ORDER BY)은 SQL에서 기본값이 오름차순(ASC) 이며,\n내림차순 정렬이 필요한 경우 반드시 DESC를 명시해야 합니다.",
+    "explanation": "합계가 높은 순으로 보려면 내림차순이어야 한다. ORDER BY 는 기본이 오름차순(ASC)이라 (라)에 DESC 를 붙여야 한다.",
     "chapter": "그룹 함수",
     "_source": "sqld-1140",
     "_origId": "sqld-0844",
@@ -28492,7 +28492,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "9"
     ],
     "correctIndex": 3,
-    "explanation": "CUBE(REGION, PRODUCT)는 가능한 모든 조합의 집계를 구함:\n(REGION, PRODUCT) 조합 → 2 × 2 = 4건 (EAST-A, EAST-B, WEST-A, WEST-B)\nREGION별 합계 (PRODUCT NULL): EAST, WEST → 2건\nPRODUCT별 합계 (REGION NULL): A, B → 2건\n전체 합계 (REGION NULL, PRODUCT NULL) → 1건\n→ 총: 4 + 2 + 2 + 1 = 9건\n❗️ 하지만 원 테이블에 없는 조합은 생략되지 않고 무조건 생성됨\n→ 따라서 **③번의 보기(8)**는 오답, 정답은 ④번 (9) 이 되어야 정확합니다.\r",
+    "explanation": "CUBE(REGION, PRODUCT) 는 데이터에 있는 값으로 모든 묶음을 만든다. (REGION, PRODUCT) 4행 + REGION 소계 2행(EAST, WEST) + PRODUCT 소계 2행(A, B) + 총계 1행 = 9행. 표에 네 조합이 모두 있어서 9행이고, 데이터에 없는 조합은 만들지 않는다.",
     "chapter": "그룹 함수",
     "_source": "sqld-1140",
     "_origId": "sqld-0860",
