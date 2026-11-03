@@ -1263,7 +1263,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "존재성"
     ],
     "correctIndex": 0,
-    "explanation": "식별자는 유일하고(유일성), 최소한의 속성으로 구성되며(최소성), 변경되지 않는 불변성(불변성)을 지녀야 한다. 또한 값이 존재해야 한다(존재성). 가변성은 잘못된 설명이다.",
+    "explanation": "주식별자는 행마다 값이 달라야 하고(유일성), 꼭 필요한 최소한의 속성으로 구성하며(최소성), 한번 정한 값은 바꾸지 않고(불변성), 반드시 값이 있어야 한다(존재성). 가변성은 불변성과 반대되는 말이라 특징이 아니다.",
     "chapter": "엔터티",
     "_source": "cbt-mock",
     "_origId": "cbt-014",
@@ -10064,7 +10064,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "GROUP BY CUBE (자재번호, (발주처ID, 발주일자))"
     ],
     "correctIndex": 0,
-    "explanation": "집계 그룹 함수에는 ROLLUP, CUBE, GROUPING SETS 함수가 있다. 문제의 결과 데이터는 (자재번호별) SUB TOTAL과 (자재번호, 발주처별) SUB TOTAL을 출력하고 있다. GROUPING SETS 함수를 사용하여 입력된 인수들에 대한 개별 집계를 구할 수 있으며, CUBE 함수의 경우는 나열된 모든 인수의 결합 가능한 집계가 출력 된다. 그러므로 위의 문제에서는 GROUP BY GROUPING SETS(자재번호, (발주체D, 발주일자)) 가 되어야 한다. ",
+    "explanation": "결과를 보면 자재번호별 합계(발주처·발주일자는 '전체')와 (발주처ID, 발주일자) 조합별 합계(자재번호는 '전체')만 있다. GROUPING SETS 는 괄호 안에 적은 묶음별로 따로 집계하므로 GROUPING SETS (자재번호, (발주처ID, 발주일자)) 가 정답이다(①). ② 는 자재번호·발주처ID·발주일자를 하나씩 따로 집계하고, ③·④ CUBE 는 가능한 모든 조합과 전체 합계까지 출력해 결과 행이 더 많아진다.",
     "chapter": "그룹 함수",
     "_source": "sqld-1140",
     "_origId": "sqld-0128",
@@ -24915,7 +24915,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "권한은 테이블 소유자만이 부여할 수 있다."
     ],
     "correctIndex": 1,
-    "explanation": "롤에 있는 권한을 회수하는 경우 롤을 부여받은 유저도 해당 권한을 즉시 잃게 된다. 4번 문장은 WITH GRANT OPTION에 대한 설명이다.",
+    "explanation": "롤에서 권한을 회수하면 그 롤을 받은 유저도 해당 권한을 바로 잃는다(②). ① 테이블 같은 객체 권한을 다시 넘겨주려면 WITH GRANT OPTION 으로 받아야 하며, WITH ADMIN OPTION 은 시스템 권한·롤에 쓰는 옵션이다. ③ 객체 권한은 부여 즉시 반영된다. ④ 소유자뿐 아니라 WITH GRANT OPTION 으로 권한을 받은 유저나 DBA 도 부여할 수 있다.",
     "chapter": "데이터 무결성",
     "_source": "sqld-1140",
     "_origId": "sqld-0720",
@@ -30710,7 +30710,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 945,
-    "title": "다음 계층형 질의 결과에서 DEV_B의 PATH 값으로 옳은 것은?",
+    "title": "다음 계층형 질의 결과에서 DEV_B의 PATH 값으로 옳은 것은? (단, 맨 앞에 붙는 구분자 ' > ' 는 생략)",
     "options": [
       "CEO > DEV_MGR > DEV_B",
       "CEO > SALES_MGR > DEV_B",
@@ -30718,7 +30718,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "CEO > DEV_B"
     ],
     "correctIndex": 0,
-    "explanation": "루트 CEO에서 DEV_MGR을 거쳐 DEV_B로 내려가므로 경로는 CEO > DEV_MGR > DEV_B다.",
+    "explanation": "START WITH 로 루트 CEO 에서 시작해 PRIOR emp_id = mgr_id 방향(부모 → 자식)으로 내려간다. DEV_B 의 관리자는 DEV_MGR(3), DEV_MGR 의 관리자는 CEO(1) 이므로 경로는 CEO > DEV_MGR > DEV_B 다(①). SYS_CONNECT_BY_PATH 는 각 값 앞에 구분자를 붙이므로 실제 출력은 ' > CEO > DEV_MGR > DEV_B' 처럼 구분자로 시작한다.",
     "chapter": "계층형 질의",
     "_source": "sqld-1140",
     "_origId": "sqld-0908",
