@@ -1,5 +1,5 @@
 // Auto-generated from scripts/authored/ai-mock.json
-// AI 생성 모의고사 풀 (기출 변형) · 1167문항
+// AI 생성 모의고사 풀 (기출 변형) · 1165문항
 // ⚠ 직접 편집 금지. ai-mock.json 수정 후 'node scripts/build-quiz-bank.mjs' 재실행.
 import type { QuizQuestion } from '../quizBank';
 
@@ -33304,32 +33304,6 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11823,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 1024,
-    "title": "다음 권한 흐름에서 최종 결과로 옳은 것은?",
-    "options": [
-      "user2 권한은 절대 회수되지 않는다.",
-      "WITH GRANT OPTION은 조회 권한에 쓸 수 없다.",
-      "REVOKE는 테이블을 삭제한다.",
-      "user1을 통해 전파된 user2 권한도 함께 회수될 수 있다."
-    ],
-    "correctIndex": 3,
-    "explanation": "GRANT OPTION으로 전파된 권한은 원 권한 회수 시 연쇄 회수될 수 있다.",
-    "chapter": "DCL·TCL",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1004",
-    "_category": "DCL",
-    "references": [
-      {
-        "type": "sql",
-        "code": "GRANT SELECT ON emp TO user1 WITH GRANT OPTION;\nuser1이 user2에게 SELECT ON emp 권한 부여\nREVOKE SELECT ON emp FROM user1;"
-      }
-    ]
-  },
-  {
     "id": 11824,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
@@ -35021,32 +34995,6 @@ export const AI_MOCK: QuizQuestion[] = [
       {
         "type": "text",
         "content": "REGEXP_LIKE(val, '^(SQL|DB)D$')"
-      }
-    ]
-  },
-  {
-    "id": 11908,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 1109,
-    "title": "다음 권한 부여/회수 흐름에 대한 설명으로 옳은 것은?",
-    "options": [
-      "user1을 통해 user2에게 전달된 권한도 함께 회수될 수 있다.",
-      "REVOKE는 객체를 삭제한다.",
-      "WITH GRANT OPTION은 조회 권한에 사용할 수 없다.",
-      "user2 권한은 원래 부여자 회수와 무관하게 영구 유지된다."
-    ],
-    "correctIndex": 0,
-    "explanation": "GRANT OPTION으로 전파된 권한은 원 부여자의 권한 회수 시 함께 회수될 수 있다.",
-    "chapter": "DCL·TCL",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1112",
-    "_category": "DCL",
-    "references": [
-      {
-        "type": "sql",
-        "code": "GRANT SELECT ON emp TO user1 WITH GRANT OPTION;\n-- user1이 user2에게 SELECT ON emp 권한 부여\nREVOKE SELECT ON emp FROM user1;"
       }
     ]
   },

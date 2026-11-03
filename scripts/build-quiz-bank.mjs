@@ -257,6 +257,7 @@ const SAME_QUESTION = {
   'cbt-084': 'case-else', 'sqld-0225': 'case-else',          // M129 · M423 CASE ELSE 생략
   'cbt-125': 'cumm-rank', 'sqld-0189': 'cumm-rank', 'cbt-203': 'cumm-rank', // M167 · M396 · M244 CUMM_RANK
   'ai-mock-033': 'norm-wrong', 'ai-mock-055': 'norm-wrong',  // M28 · M47 정규화 틀린 설명
+  'sqld-0961': 'grant-cascade', 'sqld-1004': 'grant-cascade', 'sqld-1112': 'grant-cascade', // M985 · M1024 · M1109 WITH GRANT OPTION 연쇄 회수
   'sqld-0378': 'acid', 'sqld-0411': 'acid',                  // M548 · M575 트랜잭션 특성이 아닌 것
 };
 const refKey = q => (q.references || []).map(r =>
