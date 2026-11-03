@@ -1,17 +1,13 @@
 {
   "last_processed_row": null,
-  "last_run": "2026-11-03T06:06+09:00",
+  "last_run": "2026-11-03T14:06+09:00",
   "last_gate": {
-    "five_hour": 0.25,
-    "seven_day": 0.3
+    "five_hour": 0.94,
+    "seven_day": 0.75
   },
   "current_mission": null,
   "my_prs": [
-    195,
-    247,
-    248,
-    249,
-    250
+    195
   ],
   "merged_prs": [
     197,
@@ -46,7 +42,11 @@
     232,
     233,
     234,
-    235
+    235,
+    247,
+    248,
+    249,
+    250
   ],
   "stop_reason": "낮 실행 — 미션 2개 후 묶음 머지로 마무리. 24시간 배포 76건(기준 80 근접)",
   "releases": [
@@ -57,7 +57,8 @@
     228,
     236,
     242,
-    246
+    246,
+    251
   ],
   "awaiting_user": [
     "AdSense 재심사 요청 (콘솔)",
