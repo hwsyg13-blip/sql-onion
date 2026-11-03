@@ -2,12 +2,13 @@
   "last_processed_row": null,
   "last_run": "2026-11-03T22:07+09:00",
   "last_gate": {
-    "five_hour": 0.94,
-    "seven_day": 0.75
+    "five_hour": 0.45,
+    "seven_day": 0.81
   },
   "current_mission": null,
   "my_prs": [
-    195
+    195,
+    255
   ],
   "merged_prs": [
     197,
