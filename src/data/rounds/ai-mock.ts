@@ -32376,7 +32376,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "NOT NULL 제약이 없다면 NULL 허용이 가능하다."
     ],
     "correctIndex": 3,
-    "explanation": "외래키 자체가 NULL 금지를 의미하지는 않는다.",
+    "explanation": "외래키 컬럼은 NOT NULL 제약을 따로 걸지 않으면 NULL 을 허용한다. NULL 인 FK 는 '아직 참조하는 부모가 없음'을 뜻하며 참조 무결성 위반이 아니다. 한 테이블에 PK 와 FK 가 함께 있을 수 있고(예: 주문상품의 order_id), 부모가 있다고 자식 FK 가 NULL 이어야 하는 것도 아니다.",
     "chapter": "데이터 무결성",
     "_source": "sqld-1140",
     "_origId": "sqld-0942",
@@ -32436,7 +32436,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "NULL이 하나라도 있으면 위반이다."
     ],
     "correctIndex": 2,
-    "explanation": "참조 무결성은 부모-자식 관계의 유효성을 보장한다.",
+    "explanation": "참조 무결성은 자식 테이블의 FK 값이 부모 테이블의 PK(또는 UNIQUE) 값 중 하나이거나 NULL 이어야 한다는 규칙이다. 부모에 없는 값을 자식에 넣거나, 자식이 참조 중인 부모 행을 함부로 지우면 위반이 된다. NULL 자체는 위반이 아니다.",
     "chapter": "데이터 무결성",
     "_source": "sqld-1140",
     "_origId": "sqld-0944",
@@ -32608,7 +32608,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "PK가 존재하지 않는 상황"
     ],
     "correctIndex": 2,
-    "explanation": "중복 저장 속성은 수정 이상을 만든다.",
+    "explanation": "표에서 KIM 의 등급 VIP 가 주문 행마다 반복 저장되어 있다. KIM 의 등급이 바뀌면 KIM 이 들어간 모든 행을 고쳐야 하고, 하나라도 빠뜨리면 데이터가 서로 달라진다 — 이것이 수정(갱신) 이상이다. ① 은 삭제 이상, ② 는 삽입 이상이다.",
     "chapter": "정규화",
     "_source": "sqld-1140",
     "_origId": "sqld-0949",
@@ -32664,7 +32664,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "SELECT 속도가 느린 상황"
     ],
     "correctIndex": 1,
-    "explanation": "한 테이블에 과도하게 많은 개념이 합쳐진 결과다.",
+    "explanation": "고객 정보가 주문 행 안에 함께 저장되어 있으면, 아직 주문하지 않은 신규 고객은 주문번호(기본키 일부)가 없어 고객 정보만 따로 넣을 수 없다 — 이것이 삽입 이상이다. ① 은 수정(갱신) 이상, ③ 은 삭제 이상이고, ④ 는 이상 현상이 아니다.",
     "chapter": "정규화",
     "_source": "sqld-1140",
     "_origId": "sqld-0950",
@@ -32746,7 +32746,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "FROM 절에 사용할 수 없다."
     ],
     "correctIndex": 0,
-    "explanation": "일반 뷰는 쿼리 정의를 저장한다.",
+    "explanation": "일반 뷰는 SELECT 문만 저장하고, 조회할 때마다 기본 테이블에서 데이터를 읽으므로 자체 데이터를 저장하지 않는다(데이터를 저장하는 것은 머티리얼라이즈드 뷰). 뷰는 FROM 절에서 테이블처럼 쓸 수 있고, 일반적으로 인덱스를 직접 만들 수 없다.",
     "chapter": "View",
     "_source": "sqld-1140",
     "_origId": "sqld-0952",
@@ -32766,7 +32766,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "SELECT *는 사용할 수 없다."
     ],
     "correctIndex": 2,
-    "explanation": "뷰 정의 조건이 결과에 반영된다.",
+    "explanation": "뷰를 조회하면 뷰 정의의 SELECT 문이 그대로 실행된다. 정의에 WHERE dept = 'SALES' 가 있으므로 SALES 부서 행만 보이고, 뷰에 대해서도 SELECT * 를 쓸 수 있다.",
     "chapter": "View",
     "_source": "sqld-1140",
     "_origId": "sqld-0953",
@@ -32812,7 +32812,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "기본 테이블 변경이 뷰 조회 오류로 이어질 수 있다."
     ],
     "correctIndex": 3,
-    "explanation": "뷰는 기본 테이블 정의에 의존한다.",
+    "explanation": "뷰는 기본 테이블에 의존하므로, 뷰가 참조하는 컬럼을 삭제·변경하거나 테이블을 삭제하면 뷰를 조회할 때 오류가 난다. 뷰는 SELECT 문으로 정의되며, 기본 테이블과 독립적이지 않다.",
     "chapter": "View",
     "_source": "sqld-1140",
     "_origId": "sqld-0955",
@@ -32858,7 +32858,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "권한을 부여한다."
     ],
     "correctIndex": 2,
-    "explanation": "DDL은 데이터 구조를 정의한다.",
+    "explanation": "CREATE TABLE 은 새 테이블(컬럼, 데이터 타입, 제약조건)을 만드는 DDL 이다. 데이터 조회는 SELECT, 행 수정은 UPDATE, 권한 부여는 GRANT 이다.",
     "chapter": "DDL",
     "_source": "sqld-1140",
     "_origId": "sqld-0957",
@@ -32878,7 +32878,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "권한만 삭제한다."
     ],
     "correctIndex": 0,
-    "explanation": "DROP은 객체 자체를 삭제한다.",
+    "explanation": "DROP TABLE 은 테이블 정의(구조)와 데이터를 함께 삭제하는 DDL 이다. 데이터만 지우고 구조를 남기는 것은 TRUNCATE(또는 DELETE), 컬럼만 지우는 것은 ALTER TABLE ... DROP COLUMN 이다.",
     "chapter": "DDL",
     "_source": "sqld-1140",
     "_origId": "sqld-0958",
@@ -32918,7 +32918,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "컬럼 추가, 수정, 삭제 등 구조 변경"
     ],
     "correctIndex": 3,
-    "explanation": "ALTER는 객체 구조 변경 명령이다.",
+    "explanation": "ALTER TABLE 은 이미 만든 테이블의 구조를 바꾸는 DDL 로, 컬럼 추가(ADD)·변경(MODIFY)·삭제(DROP COLUMN)·이름 변경(RENAME COLUMN), 제약조건 추가·삭제를 할 수 있다. 저장점은 SAVEPOINT, 권한 부여는 GRANT 이다.",
     "chapter": "DDL",
     "_source": "sqld-1140",
     "_origId": "sqld-0960",
