@@ -24808,7 +24808,7 @@
       "_correctRate": 10,
       "subject": "2과목",
       "chapter": "DDL",
-      "title": "다음은 두 테이블 간의 관계 설정에 관한 설명이다. 다음 중 이 제약조건 설정(ON UPDATE CASCADE)의 의미로 옳은 것은?",
+      "title": "다음은 두 테이블 간의 관계 설정에 관한 설명이다. 다음 중 이 제약조건 설정(ON UPDATE CASCADE)의 의미로 옳은 것은? (단, SQL Server 기준)",
       "options": [
         "DEPT 테이블의 DEPT_ID 값을 수정할 수 없게 막는다.",
         "EMP 테이블에서 DEPT_ID 값을 수정하면 DEPT 테이블도 같이 바뀐다.",
@@ -24816,11 +24816,11 @@
         "외래 키 제약조건이므로, 상위 테이블이 삭제되면 하위 테이블도 삭제된다."
       ],
       "correctIndex": 2,
-      "explanation": "ON UPDATE CASCADE: 부모 테이블의 기본 키가 변경되면, 자식 테이블의 외래 키도 자동으로 함께 변경됨\r",
+      "explanation": "ON UPDATE CASCADE 는 부모(DEPT)의 키 값이 바뀌면 그 값을 참조하는 자식(EMP)의 외래키도 자동으로 같이 바뀌게 한다. ① 수정을 막는 것은 옵션이 없을 때(NO ACTION)이고, ② 자식을 고쳐도 부모는 바뀌지 않으며, ④ 부모 삭제 시 자식 삭제는 ON DELETE CASCADE 다. 참고로 Oracle 은 ON DELETE 옵션만 있고 ON UPDATE CASCADE 는 지원하지 않는다.",
       "references": [
         {
           "type": "sql",
-          "code": "CREATE TABLE DEPT (\n  DEPT_ID   NUMBER PRIMARY KEY,\n  DEPT_NAME VARCHAR2(50)\n);\nCREATE TABLE EMP (\n  EMP_ID    NUMBER PRIMARY KEY,\n  EMP_NAME  VARCHAR2(50),\n  DEPT_ID   NUMBER,\n  CONSTRAINT FK_DEPT\n    FOREIGN KEY (DEPT_ID)\n    REFERENCES DEPT (DEPT_ID)\n    ON UPDATE CASCADE\n);"
+          "code": "CREATE TABLE DEPT (\n  DEPT_ID   NUMBER PRIMARY KEY,\n  DEPT_NAME VARCHAR(50)\n);\nCREATE TABLE EMP (\n  EMP_ID    NUMBER PRIMARY KEY,\n  EMP_NAME  VARCHAR(50),\n  DEPT_ID   NUMBER,\n  CONSTRAINT FK_DEPT\n    FOREIGN KEY (DEPT_ID)\n    REFERENCES DEPT (DEPT_ID)\n    ON UPDATE CASCADE\n);"
         }
       ]
     },
