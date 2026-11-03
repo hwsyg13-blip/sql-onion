@@ -9656,10 +9656,10 @@ export const AI_MOCK: QuizQuestion[] = [
       "오라클의 계층형 질의문에서 PRIOR 키워드는 CONNECT BY 절에만 사용할 수 있으며 'prior 자식 = 부모' 형태로 사용하면 순방향 전개로 수행 된다.",
       "오라클의 계층형 질의문에서 WHERE 절은 모든 전개를 진행한 이후 필터 조건으로서 조건을 만족하는 데이터만을 추출하는데 활용된다.",
       "SQL Server에서의 계층형 질의문은 앵커 멤버를 실행하여 기본 결과 집합을 만들고 이후 재귀 멤버를 지속적으로 실행한다.",
-      "SQL Server에서의 게층형 질의문은 CTE(Common Table Expression)를 재귀 호출함으로써 계층 구조를 전개한다."
+      "SQL Server에서의 계층형 질의문은 CTE(Common Table Expression)를 재귀 호출함으로써 계층 구조를 전개한다."
     ],
     "correctIndex": 0,
-    "explanation": "오라클 계층형 질의문에서 PRIOR 키워드 SELECT, WHERE 절에서도 사용할 수 있다.",
+    "explanation": "① 의 뒷부분(\"PRIOR 자식 = 부모\" 는 부모에서 자식으로 내려가는 순방향)은 맞지만, PRIOR 는 CONNECT BY 절뿐 아니라 SELECT·WHERE 절에서도 쓸 수 있으므로 \"CONNECT BY 절에만\" 이 틀렸다(①). ② 계층형 질의의 WHERE 는 전개를 마친 뒤 거르는 조건이고, ③④ SQL Server 는 재귀 CTE 로 앵커 멤버를 먼저 실행한 뒤 재귀 멤버를 반복해 계층을 펼친다.",
     "chapter": "계층형 질의",
     "_source": "sqld-1140",
     "_origId": "sqld-0110",
@@ -16779,7 +16779,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "options": [
       "루트 노드의 LEVEL 값은 1이 아니다.",
       "순방향 전개란 부모 노드로부터 자식 노드로 전개하는 것이고 역방향 전개는 자식 노드에서 부모 노드로 전개하는 것이다.",
-      "ORDER SIBILINGS BY구는 형제 노드 사이에 정렬을 수행한다.",
+      "ORDER SIBLINGS BY 절는 형제 노드 사이에 정렬을 수행한다.",
       "START WITH절은 계층 구조의 시작점을 지정하는 구문이다."
     ],
     "correctIndex": 0,
@@ -17723,13 +17723,13 @@ export const AI_MOCK: QuizQuestion[] = [
     "number": 551,
     "title": "동일한 순위에 대해서 동일한 순위를 부여하고 다음 순위를 건너뛰지 않는 것은?",
     "options": [
-      "RATIO.....TO REPORT",
+      "RATIO_TO_REPORT",
       "ROW_NUMBER",
       "DENSE_RANK",
       "RANK"
     ],
     "correctIndex": 2,
-    "explanation": "dense_rank는 동일한 순위에 대해서 하나의 건수로 계산한다.",
+    "explanation": "DENSE_RANK 는 동점에 같은 순위를 주고 다음 순위를 건너뛰지 않는다(1, 2, 2, 3). RANK 는 동점 수만큼 건너뛰고(1, 2, 2, 4), ROW_NUMBER 는 동점이어도 다른 번호를 주며, RATIO_TO_REPORT 는 순위가 아니라 합계 대비 비율이다.",
     "chapter": "윈도우 함수",
     "_source": "sqld-1140",
     "_origId": "sqld-0382",
@@ -24197,8 +24197,8 @@ export const AI_MOCK: QuizQuestion[] = [
       "인조식별자를 사용하면 본질식별자를 사용할 때와 비교하여 추가적인 인덱스가 필요해진다.",
       "인조식별자를 사용하면 불필요하게 발생하는 중복데이터를 막을 수 있다."
     ],
-    "correctIndex": 1,
-    "explanation": "인조식별자(Surrogate Key)는 본질식별자(Natural Key)가 복잡해서만 만들어지는 것이 아니다.\n\n실제 설계에서는 다음과 같은 이유로 사용된다:\n\n값 변경 가능성 제거\nPK 안정성 확보\n조인 성능 개선\n단일 컬럼 PK 구성\n\n즉, “복잡할 때만 만든다”는 설명은 부정확하다.",
+    "correctIndex": 3,
+    "explanation": "SQL 전문가 가이드는 인조식별자를 \"본질식별자가 복잡한 구성을 가질 때 인위적으로 만든 식별자\" 로 정의한다(② 옳음). 자동 증가 일련번호가 대표적이고(① 옳음), 인조식별자를 PK 로 쓰면 본질식별자 쪽에도 유일성 보장을 위한 인덱스가 따로 필요해진다(③ 옳음). 반대로 인조식별자는 업무와 무관한 번호라서, 같은 업무 데이터가 번호만 달리해 두 번 들어가는 중복 데이터가 생길 수 있다. 중복을 막아 준다는 ④ 가 적절하지 않다. ※ 기존 정답 ② 를 가이드 정의에 맞춰 ④ 로 바로잡았다.",
     "chapter": "식별자",
     "_source": "sqld-1140",
     "_origId": "sqld-0630",
