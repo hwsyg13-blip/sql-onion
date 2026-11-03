@@ -16863,7 +16863,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "SELECT * FROM EMP a INNER JOIN DEPT b ON a.DEPTNO = b.DEPTNO;"
     ],
     "correctIndex": 2,
-    "explanation": "NATURAL JOIN이 사용된 열은 식별자를 가질 수가 없다. 즉 EMP.DEPTNO와 같이 OWNER 명을 사용하면 에러가 발생한다.",
+    "explanation": "NATURAL JOIN 은 이름이 같은 칼럼(DEPTNO)을 하나로 합쳐 조인하므로, 그 칼럼 앞에 EMP. 같은 테이블명이나 별칭을 붙이면 오류가 난다(③). DEPTNO 처럼 접두사 없이 써야 한다. ①④ 의 ON, ② 의 USING 은 정상 문법이다.",
     "chapter": "조인",
     "_source": "sqld-1140",
     "_origId": "sqld-0407",
@@ -16928,11 +16928,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "options": [
       "SELECT * FROM Mytest WHERE \nCOL1 <= 200\nAND COL2 >= 200;",
       "SELECT * FROM Mytest WHERE \n1=1\nAND 200 BETWEEN COL1 AND\nCOL2",
-      "SELECT * FROM Mytset WHERE\n1=1\nAND ( CODE = 'A001' AND 200\nBETWEEN COL1 AND COL2)\nOR ( CODE = 'B001' AND 200\nBETWEEN COL1 AND COL2);",
+      "SELECT * FROM Mytest WHERE\n1=1\nAND ( CODE = 'A001' AND 200\nBETWEEN COL1 AND COL2)\nOR ( CODE = 'B001' AND 200\nBETWEEN COL1 AND COL2);",
       "SELECT * FROM Mytest WHERE\n1=1\nAND CODE IN ('A001','B001')\nAND COL1 BETWEEN 200 AND 400;"
     ],
     "correctIndex": 3,
-    "explanation": "④번 보기는 200<=A<=400, 200<=B<=400의 의미이고 ①,②,③ 번 보기는 모두 COL1<=200 && COL2>=200의 의미이다.",
+    "explanation": "①②③ 은 모두 'COL1 <= 200 이고 COL2 >= 200', 즉 200 이 COL1~COL2 범위 안에 드는 행을 찾는다(③ 은 CODE 가 A001 이나 B001 인 경우로 나눠 썼을 뿐이다). ④ 는 COL1 자체가 200~400 사이인 행을 찾으므로 결과가 다르다.",
     "chapter": "집합 연산자",
     "_source": "sqld-1140",
     "_origId": "sqld-0410",
@@ -17104,7 +17104,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "SUM(급여)  OVER()"
     ],
     "correctIndex": 1,
-    "explanation": "②번 보기에서 UNBOUNDED PRECEDING 은 end point에 사용할 수 없다. 즉, UNBOUNDED PRECEDING은 윈도우의 시작 위치가 첫 번째 행이다.",
+    "explanation": "윈도우 범위 RANGE BETWEEN 시작 AND 끝 에서 UNBOUNDED PRECEDING(파티션 첫 행)은 시작에만 쓸 수 있다. ② 처럼 끝에 UNBOUNDED PRECEDING 을 쓰면 오류다. ①③ 은 처음부터 현재 행·끝까지, ④ OVER() 는 전체 합계로 모두 정상이다.",
     "chapter": "윈도우 함수",
     "_source": "sqld-1140",
     "_origId": "sqld-0417",
@@ -18266,7 +18266,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "계좌를 개설하지 않은 고객은 ABC증권회사의 고객이 될 수가 없다."
     ],
     "correctIndex": 2,
-    "explanation": "계좌마스터의 기본키가 계좌번호와 고객번호이므로 전체 고객에게 유일한 번호가 할당되는 것은 아니다. 즉, 고객별 유일한 계좌번호가 된다.",
+    "explanation": "그림에서 계좌마스터의 기본키는 계좌번호 + 고객번호 다. 그러면 계좌번호는 고객마다 따로 매겨질 수 있어 전체 고객에서 유일하다고 할 수 없다. 그래서 ③ 이 틀렸다. 고객번호가 자식 기본키에 들어가므로 두 엔터티는 식별 관계다(②).",
     "chapter": "엔터티",
     "_source": "sqld-1140",
     "_origId": "sqld-0446",
@@ -18957,7 +18957,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "Select *\nfrom kpipool\nstart with mainkpi = 0\nconnect by prior subkpi = mainkpi;"
     ],
     "correctIndex": 0,
-    "explanation": "mainkpi가 0부터 출발하여 subkpi를 탐색한다. 그리고 subkpi가 30이면 출력시킨다. 이 때 subkpi 30에 대한 mainkpi 20번이 같이 출력된다.",
+    "explanation": "START WITH mainkpi = 0 으로 최상위(고객만족도, 10)에서 시작해 CONNECT BY PRIOR subkpi = mainkpi 로 하위 KPI 를 따라 내려간다. 그중 WHERE subkpi = 30 으로 불만건수 행만 출력한다(①). ③ 은 연결 방향이 반대(상위로 올라감)이고, ②④ 는 subkpi 30 만 고르지 않는다.",
     "chapter": "계층형 질의",
     "_source": "sqld-1140",
     "_origId": "sqld-0469",
@@ -19187,7 +19187,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "NULL"
     ],
     "correctIndex": 1,
-    "explanation": "CREATE, TRUNCATE 같은 DDL은 묵시적으로 COMMIT을 수행하므로 ROLLBACK 명령어를 수행하면 마지막 COMMIT을 수행한 6번째 행으로 이동한다.",
+    "explanation": "SQLD_29 에 1, 2 를 넣은 뒤 CREATE TABLE(DDL)이 실행되면서 자동 COMMIT 되어 1, 2 는 확정된다. TRUNCATE 도 DDL 이라 다시 자동 COMMIT 된다. 그 뒤의 ROLLBACK 은 되돌릴 작업이 없으므로 SQLD_29 의 SUM(N1) 은 1 + 2 = 3 이다(②).",
     "chapter": "트랜잭션 관리",
     "_source": "sqld-1140",
     "_origId": "sqld-0476",
@@ -19518,7 +19518,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "기본키 속성 - 외래키 속성 - 일반 속성"
     ],
     "correctIndex": 3,
-    "explanation": "기본키는 엔터티를 대표하는 키로 최소성과 유일성을 만족해야 한다. 외래키는 두 개의 테이블 간에 연결을 설정하기 위한 키이다.",
+    "explanation": "엔터티를 식별하는 속성은 기본키 속성(ㄱ), 다른 엔터티와의 관계에서 받아 온 속성은 외래키 속성(ㄴ), 둘 다 아닌 나머지 속성은 일반 속성(ㄷ)이다(④). 엔터티 구성 방식에 따른 속성 분류다.",
     "chapter": "엔터티",
     "_source": "sqld-1140",
     "_origId": "sqld-0486",
@@ -20055,7 +20055,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "INT"
     ],
     "correctIndex": 2,
-    "explanation": "CHAR는 고정길이 문자열을 의미하며 VARCHAR는 가변형 문자형(Character)이고 Oracle 데이터베이스는 VARCHAR2도 제공한다.",
+    "explanation": "CHAR 는 고정 길이 문자형이라 숫자형이 아니다(③). DECIMAL·FLOAT·INT 는 모두 숫자형(NUMERIC 계열)이다. 문자형에는 CHAR(고정 길이), VARCHAR/VARCHAR2(가변 길이)가 있다.",
     "chapter": "함수",
     "_source": "sqld-1140",
     "_origId": "sqld-0514",
