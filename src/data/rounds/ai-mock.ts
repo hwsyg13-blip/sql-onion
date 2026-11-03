@@ -11463,7 +11463,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "table",
-        "caption": "[SQLD_66] Correlated Subquery Data",
+        "caption": "SQLD_66 테이블",
         "headers": [
           "COL1",
           "COL2"
@@ -29445,7 +29445,7 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "table",
-        "caption": "JOIN Basic Tables — Table A",
+        "caption": "A 테이블",
         "headers": [
           "ID",
           "NAME"
@@ -29467,7 +29467,7 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "table",
-        "caption": "JOIN Basic Tables — Table B",
+        "caption": "B 테이블",
         "headers": [
           "ID",
           "VAL"
@@ -29515,7 +29515,7 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "table",
-        "caption": "JOIN Basic Tables — Table A",
+        "caption": "A 테이블",
         "headers": [
           "ID",
           "NAME"
@@ -29537,7 +29537,7 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "table",
-        "caption": "JOIN Basic Tables — Table B",
+        "caption": "B 테이블",
         "headers": [
           "ID",
           "VAL"
@@ -29585,7 +29585,7 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "table",
-        "caption": "JOIN Basic Tables — Table A",
+        "caption": "A 테이블",
         "headers": [
           "ID",
           "NAME"
@@ -29607,7 +29607,7 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "table",
-        "caption": "JOIN Basic Tables — Table B",
+        "caption": "B 테이블",
         "headers": [
           "ID",
           "VAL"
@@ -29655,7 +29655,7 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "table",
-        "caption": "JOIN Basic Tables — Table A",
+        "caption": "A 테이블",
         "headers": [
           "ID",
           "NAME"
@@ -29677,7 +29677,7 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "table",
-        "caption": "JOIN Basic Tables — Table B",
+        "caption": "B 테이블",
         "headers": [
           "ID",
           "VAL"
@@ -29981,9 +29981,9 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "table",
-        "caption": "EMP Group Data",
+        "caption": "EMP 테이블",
         "headers": [
-          "EMP ID",
+          "EMP_ID",
           "DEPT",
           "SALARY"
         ],
@@ -30068,9 +30068,9 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "table",
-        "caption": "EMP Group Data",
+        "caption": "EMP 테이블",
         "headers": [
-          "EMP ID",
+          "EMP_ID",
           "DEPT",
           "SALARY"
         ],
@@ -30155,9 +30155,9 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "table",
-        "caption": "EMP Group Data",
+        "caption": "EMP 테이블",
         "headers": [
-          "EMP ID",
+          "EMP_ID",
           "DEPT",
           "SALARY"
         ],
@@ -30238,9 +30238,9 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "table",
-        "caption": "EMP Group Data",
+        "caption": "EMP 테이블",
         "headers": [
-          "EMP ID",
+          "EMP_ID",
           "DEPT",
           "SALARY"
         ],
@@ -30321,9 +30321,9 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "table",
-        "caption": "EMP Group Data",
+        "caption": "EMP 테이블",
         "headers": [
-          "EMP ID",
+          "EMP_ID",
           "DEPT",
           "SALARY"
         ],
@@ -30408,9 +30408,9 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "table",
-        "caption": "NULL Aggregate Data",
+        "caption": "EMP_NULL 테이블",
         "headers": [
-          "EMP ID",
+          "EMP_ID",
           "SALARY",
           "BONUS"
         ],
@@ -30461,9 +30461,9 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "table",
-        "caption": "NULL Aggregate Data",
+        "caption": "EMP 테이블",
         "headers": [
-          "EMP ID",
+          "EMP_ID",
           "SALARY",
           "BONUS"
         ],
@@ -30514,9 +30514,9 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "table",
-        "caption": "NULL Aggregate Data",
+        "caption": "EMP 테이블",
         "headers": [
-          "EMP ID",
+          "EMP_ID",
           "SALARY",
           "BONUS"
         ],
@@ -30757,9 +30757,9 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "table",
-        "caption": "Correlated Subquery Data",
+        "caption": "EMP 테이블",
         "headers": [
-          "EMP NAME",
+          "EMP_NAME",
           "DEPT",
           "SALARY"
         ],
@@ -30814,9 +30814,9 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "table",
-        "caption": "Correlated Subquery Data",
+        "caption": "EMP 테이블",
         "headers": [
-          "EMP NAME",
+          "EMP_NAME",
           "DEPT",
           "SALARY"
         ],
@@ -30871,9 +30871,9 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "table",
-        "caption": "Correlated Subquery Data",
+        "caption": "EMP 테이블",
         "headers": [
-          "EMP NAME",
+          "EMP_NAME",
           "DEPT",
           "SALARY"
         ],
@@ -30928,9 +30928,9 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "table",
-        "caption": "Correlated Subquery Data",
+        "caption": "EMP 테이블",
         "headers": [
-          "EMP NAME",
+          "EMP_NAME",
           "DEPT",
           "SALARY"
         ],
@@ -31051,11 +31051,11 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "table",
-        "caption": "Hierarchy EMP Data",
+        "caption": "EMP_TREE 테이블",
         "headers": [
-          "EMP ID",
-          "EMP NAME",
-          "MGR ID"
+          "EMP_ID",
+          "EMP_NAME",
+          "MGR_ID"
         ],
         "rows": [
           [
@@ -31123,11 +31123,11 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "table",
-        "caption": "Hierarchy EMP Data",
+        "caption": "EMP_TREE 테이블",
         "headers": [
-          "EMP ID",
-          "EMP NAME",
-          "MGR ID"
+          "EMP_ID",
+          "EMP_NAME",
+          "MGR_ID"
         ],
         "rows": [
           [
@@ -31195,11 +31195,11 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "table",
-        "caption": "Hierarchy EMP Data",
+        "caption": "EMP_TREE 테이블",
         "headers": [
-          "EMP ID",
-          "EMP NAME",
-          "MGR ID"
+          "EMP_ID",
+          "EMP_NAME",
+          "MGR_ID"
         ],
         "rows": [
           [
@@ -31267,11 +31267,11 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "table",
-        "caption": "Hierarchy EMP Data",
+        "caption": "EMP_TREE 테이블",
         "headers": [
-          "EMP ID",
-          "EMP NAME",
-          "MGR ID"
+          "EMP_ID",
+          "EMP_NAME",
+          "MGR_ID"
         ],
         "rows": [
           [
@@ -31339,10 +31339,10 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "table",
-        "caption": "PIVOT Source Data",
+        "caption": "SALES_Q 테이블",
         "headers": [
           "DEPT",
-          "QUARTER CD",
+          "QUARTER_CD",
           "AMOUNT"
         ],
         "rows": [
@@ -31406,10 +31406,10 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "table",
-        "caption": "PIVOT Source Data",
+        "caption": "SALES_Q 테이블",
         "headers": [
           "DEPT",
-          "QUARTER CD",
+          "QUARTER_CD",
           "AMOUNT"
         ],
         "rows": [
@@ -31473,7 +31473,7 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "table",
-        "caption": "SELECT Result Data",
+        "caption": "SALES 테이블",
         "headers": [
           "REGION",
           "AMOUNT",
@@ -31530,7 +31530,7 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "table",
-        "caption": "SELECT Result Data",
+        "caption": "SALES 테이블",
         "headers": [
           "REGION",
           "AMOUNT",
@@ -31627,7 +31627,7 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "table",
-        "caption": "Window Function Data",
+        "caption": "SALES_RANK 테이블",
         "headers": [
           "REGION",
           "SELLER",
@@ -31685,7 +31685,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "table",
-        "caption": "Window Function Data",
+        "caption": "판매 데이터",
         "headers": [
           "REGION",
           "SELLER",
@@ -31743,7 +31743,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "table",
-        "caption": "Window Function Data",
+        "caption": "판매 데이터",
         "headers": [
           "REGION",
           "SELLER",
@@ -31801,7 +31801,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "table",
-        "caption": "Window Function Data",
+        "caption": "판매 데이터",
         "headers": [
           "REGION",
           "SELLER",
@@ -31863,7 +31863,7 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "table",
-        "caption": "ROLLUP Data",
+        "caption": "ORDER_AMT 테이블",
         "headers": [
           "REGION",
           "PRODUCT",
@@ -31916,7 +31916,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "table",
-        "caption": "ROLLUP Data",
+        "caption": "판매 데이터",
         "headers": [
           "REGION",
           "PRODUCT",
@@ -31969,7 +31969,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "table",
-        "caption": "ROLLUP Data",
+        "caption": "판매 데이터",
         "headers": [
           "REGION",
           "PRODUCT",
@@ -32330,13 +32330,13 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "table",
-        "caption": "Normalization Source Table",
+        "caption": "주문 테이블",
         "headers": [
-          "ORDER NO",
-          "PRODUCT NO",
-          "PRODUCT NAME",
-          "CUSTOMER NAME",
-          "CUSTOMER GRADE"
+          "ORDER_NO",
+          "PRODUCT_NO",
+          "PRODUCT_NAME",
+          "CUSTOMER_NAME",
+          "CUSTOMER_GRADE"
         ],
         "rows": [
           [
@@ -32386,13 +32386,13 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "table",
-        "caption": "Normalization Source Table",
+        "caption": "주문 테이블",
         "headers": [
-          "ORDER NO",
-          "PRODUCT NO",
-          "PRODUCT NAME",
-          "CUSTOMER NAME",
-          "CUSTOMER GRADE"
+          "ORDER_NO",
+          "PRODUCT_NO",
+          "PRODUCT_NAME",
+          "CUSTOMER_NAME",
+          "CUSTOMER_GRADE"
         ],
         "rows": [
           [
@@ -32442,13 +32442,13 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "table",
-        "caption": "Normalization Source Table",
+        "caption": "주문 테이블",
         "headers": [
-          "ORDER NO",
-          "PRODUCT NO",
-          "PRODUCT NAME",
-          "CUSTOMER NAME",
-          "CUSTOMER GRADE"
+          "ORDER_NO",
+          "PRODUCT_NO",
+          "PRODUCT_NAME",
+          "CUSTOMER_NAME",
+          "CUSTOMER_GRADE"
         ],
         "rows": [
           [
@@ -32498,13 +32498,13 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "table",
-        "caption": "Normalization Source Table",
+        "caption": "주문 테이블",
         "headers": [
-          "ORDER NO",
-          "PRODUCT NO",
-          "PRODUCT NAME",
-          "CUSTOMER NAME",
-          "CUSTOMER GRADE"
+          "ORDER_NO",
+          "PRODUCT_NO",
+          "PRODUCT_NAME",
+          "CUSTOMER_NAME",
+          "CUSTOMER_GRADE"
         ],
         "rows": [
           [
@@ -33366,13 +33366,13 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "table",
-        "caption": "Normalization Source Table",
+        "caption": "주문 테이블",
         "headers": [
-          "ORDER NO",
-          "PRODUCT NO",
-          "PRODUCT NAME",
-          "CUSTOMER NAME",
-          "CUSTOMER GRADE"
+          "ORDER_NO",
+          "PRODUCT_NO",
+          "PRODUCT_NAME",
+          "CUSTOMER_NAME",
+          "CUSTOMER_GRADE"
         ],
         "rows": [
           [
@@ -33426,13 +33426,13 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "table",
-        "caption": "Normalization Source Table",
+        "caption": "주문 테이블",
         "headers": [
-          "ORDER NO",
-          "PRODUCT NO",
-          "PRODUCT NAME",
-          "CUSTOMER NAME",
-          "CUSTOMER GRADE"
+          "ORDER_NO",
+          "PRODUCT_NO",
+          "PRODUCT_NAME",
+          "CUSTOMER_NAME",
+          "CUSTOMER_GRADE"
         ],
         "rows": [
           [
@@ -33486,13 +33486,13 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "table",
-        "caption": "Normalization Source Table",
+        "caption": "주문 테이블",
         "headers": [
-          "ORDER NO",
-          "PRODUCT NO",
-          "PRODUCT NAME",
-          "CUSTOMER NAME",
-          "CUSTOMER GRADE"
+          "ORDER_NO",
+          "PRODUCT_NO",
+          "PRODUCT_NAME",
+          "CUSTOMER_NAME",
+          "CUSTOMER_GRADE"
         ],
         "rows": [
           [
@@ -33546,13 +33546,13 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "table",
-        "caption": "Normalization Source Table",
+        "caption": "주문 테이블",
         "headers": [
-          "ORDER NO",
-          "PRODUCT NO",
-          "PRODUCT NAME",
-          "CUSTOMER NAME",
-          "CUSTOMER GRADE"
+          "ORDER_NO",
+          "PRODUCT_NO",
+          "PRODUCT_NAME",
+          "CUSTOMER_NAME",
+          "CUSTOMER_GRADE"
         ],
         "rows": [
           [
@@ -34280,9 +34280,9 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "table",
-        "caption": "NULL Aggregate Data",
+        "caption": "EMP 테이블",
         "headers": [
-          "EMP ID",
+          "EMP_ID",
           "SALARY",
           "BONUS"
         ],
@@ -34337,9 +34337,9 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "table",
-        "caption": "NULL Aggregate Data",
+        "caption": "T 테이블",
         "headers": [
-          "EMP ID",
+          "EMP_ID",
           "SALARY",
           "BONUS"
         ],
@@ -34390,9 +34390,9 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "table",
-        "caption": "NULL Aggregate Data",
+        "caption": "EMP 테이블",
         "headers": [
-          "EMP ID",
+          "EMP_ID",
           "SALARY",
           "BONUS"
         ],
@@ -34447,9 +34447,9 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "table",
-        "caption": "NULL Aggregate Data",
+        "caption": "T 테이블",
         "headers": [
-          "EMP ID",
+          "EMP_ID",
           "SALARY",
           "BONUS"
         ],
@@ -34654,11 +34654,11 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "table",
-        "caption": "Hierarchy EMP Data",
+        "caption": "EMP_TREE 테이블",
         "headers": [
-          "EMP ID",
-          "EMP NAME",
-          "MGR ID"
+          "EMP_ID",
+          "EMP_NAME",
+          "MGR_ID"
         ],
         "rows": [
           [
@@ -34726,11 +34726,11 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "table",
-        "caption": "Hierarchy EMP Data",
+        "caption": "EMP_TREE 테이블",
         "headers": [
-          "EMP ID",
-          "EMP NAME",
-          "MGR ID"
+          "EMP_ID",
+          "EMP_NAME",
+          "MGR_ID"
         ],
         "rows": [
           [
@@ -34798,11 +34798,11 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "table",
-        "caption": "Hierarchy EMP Data",
+        "caption": "EMP_TREE 테이블",
         "headers": [
-          "EMP ID",
-          "EMP NAME",
-          "MGR ID"
+          "EMP_ID",
+          "EMP_NAME",
+          "MGR_ID"
         ],
         "rows": [
           [
@@ -34977,7 +34977,7 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "table",
-        "caption": "Window Function Data",
+        "caption": "SALES_RANK 테이블",
         "headers": [
           "REGION",
           "SELLER",
@@ -35263,10 +35263,10 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "table",
-        "caption": "PIVOT Source Data",
+        "caption": "SALES_Q 테이블",
         "headers": [
           "DEPT",
-          "QUARTER CD",
+          "QUARTER_CD",
           "AMOUNT"
         ],
         "rows": [
@@ -35356,10 +35356,10 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "table",
-        "caption": "PIVOT Source Data",
+        "caption": "SALES_Q 테이블",
         "headers": [
           "DEPT",
-          "QUARTER CD",
+          "QUARTER_CD",
           "AMOUNT"
         ],
         "rows": [
@@ -35549,7 +35549,7 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "table",
-        "caption": "JOIN Basic Tables — Table A",
+        "caption": "A 테이블",
         "headers": [
           "ID",
           "NAME"
@@ -35571,7 +35571,7 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "table",
-        "caption": "JOIN Basic Tables — Table B",
+        "caption": "B 테이블",
         "headers": [
           "ID",
           "VAL"
@@ -35619,9 +35619,9 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "table",
-        "caption": "NULL Aggregate Data",
+        "caption": "EMP_NULL 테이블",
         "headers": [
-          "EMP ID",
+          "EMP_ID",
           "SALARY",
           "BONUS"
         ],
@@ -35722,7 +35722,7 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "table",
-        "caption": "SELECT Result Data",
+        "caption": "SALES 테이블",
         "headers": [
           "REGION",
           "AMOUNT",
@@ -35779,7 +35779,7 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "table",
-        "caption": "JOIN Basic Tables — Table A",
+        "caption": "A 테이블",
         "headers": [
           "ID",
           "NAME"
@@ -35801,7 +35801,7 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "table",
-        "caption": "JOIN Basic Tables — Table B",
+        "caption": "B 테이블",
         "headers": [
           "ID",
           "VAL"
@@ -35845,7 +35845,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "table",
-        "caption": "Window Function Data",
+        "caption": "판매 데이터",
         "headers": [
           "REGION",
           "SELLER",
@@ -35903,13 +35903,13 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "table",
-        "caption": "Normalization Source Table",
+        "caption": "주문 테이블",
         "headers": [
-          "ORDER NO",
-          "PRODUCT NO",
-          "PRODUCT NAME",
-          "CUSTOMER NAME",
-          "CUSTOMER GRADE"
+          "ORDER_NO",
+          "PRODUCT_NO",
+          "PRODUCT_NAME",
+          "CUSTOMER_NAME",
+          "CUSTOMER_GRADE"
         ],
         "rows": [
           [
@@ -36137,11 +36137,11 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "table",
-        "caption": "Hierarchy EMP Data",
+        "caption": "EMP_TREE 테이블",
         "headers": [
-          "EMP ID",
-          "EMP NAME",
-          "MGR ID"
+          "EMP_ID",
+          "EMP_NAME",
+          "MGR_ID"
         ],
         "rows": [
           [
@@ -36347,7 +36347,7 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "table",
-        "caption": "Window Function Data",
+        "caption": "SALES_RANK 테이블",
         "headers": [
           "REGION",
           "SELLER",
@@ -36431,7 +36431,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "table",
-        "caption": "ROLLUP Data",
+        "caption": "판매 데이터",
         "headers": [
           "REGION",
           "PRODUCT",
@@ -36508,9 +36508,9 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "table",
-        "caption": "Correlated Subquery Data",
+        "caption": "EMP 테이블",
         "headers": [
-          "EMP NAME",
+          "EMP_NAME",
           "DEPT",
           "SALARY"
         ],
@@ -36617,11 +36617,11 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "table",
-        "caption": "Hierarchy EMP Data",
+        "caption": "EMP_TREE 테이블",
         "headers": [
-          "EMP ID",
-          "EMP NAME",
-          "MGR ID"
+          "EMP_ID",
+          "EMP_NAME",
+          "MGR_ID"
         ],
         "rows": [
           [
@@ -36709,13 +36709,13 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "table",
-        "caption": "Normalization Source Table",
+        "caption": "주문 테이블",
         "headers": [
-          "ORDER NO",
-          "PRODUCT NO",
-          "PRODUCT NAME",
-          "CUSTOMER NAME",
-          "CUSTOMER GRADE"
+          "ORDER_NO",
+          "PRODUCT_NO",
+          "PRODUCT_NAME",
+          "CUSTOMER_NAME",
+          "CUSTOMER_GRADE"
         ],
         "rows": [
           [
@@ -36929,9 +36929,9 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "table",
-        "caption": "Correlated Subquery Data",
+        "caption": "EMP 테이블",
         "headers": [
-          "EMP NAME",
+          "EMP_NAME",
           "DEPT",
           "SALARY"
         ],
