@@ -8309,13 +8309,13 @@
       "chapter": "DML",
       "title": "다음 중 SQL에 대한 설명으로 올바르지 않은 것은?",
       "options": [
-        "TCL : 트랜잭션을 제어하면 Commit 과 Rollback이 있다.",
+        "TCL : 트랜잭션을 제어하며 Commit 과 Rollback이 있다.",
         "DML : 테이블에 데이터를 입력하거나 변경, 삭제한다.",
         "DCL : 데이터베이스의 테이블에 있는 데이터를 변경한다.",
         "DDL : 테이블과 같은 데이터 구조를 정의하거나 변경한다."
       ],
       "correctIndex": 2,
-      "explanation": "③번은 DML에 대한 설명이다."
+      "explanation": "DCL(Data Control Language)은 GRANT, REVOKE 처럼 사용자 권한을 제어하는 명령이다. 테이블의 데이터를 입력·변경·삭제하는 것은 DML(INSERT, UPDATE, DELETE)이므로 ③이 틀렸다. ① TCL 은 COMMIT, ROLLBACK, SAVEPOINT 로 트랜잭션을 제어하고, ④ DDL 은 CREATE, ALTER, DROP 등으로 데이터 구조를 정의·변경한다."
     },
     {
       "_id": "sqld-0288",
@@ -9256,7 +9256,7 @@
         "인조키"
       ],
       "correctIndex": 1,
-      "explanation": "후보키는 유일성과 최소성을 만족하는 키이다.",
+      "explanation": "유일성(모든 행을 구분)과 최소성(꼭 필요한 속성만으로 구성)을 모두 만족하는 키는 후보키이다. 수퍼키는 유일성만 만족하고 최소성은 만족하지 않을 수 있다. 외래키는 다른 테이블의 기본키를 참조하는 키, 인조키는 업무와 무관하게 인위적으로 만든 식별자이다.",
       "references": [
         {
           "type": "text",
@@ -11416,7 +11416,7 @@
         "SELECT COALESCE(NULL,'20') FROM DUAL"
       ],
       "correctIndex": 2,
-      "explanation": "①번은 B값을 반환한다.\n②번은 1\n④번은 20"
+      "explanation": "NULLIF(A, B) 는 A 와 B 가 같으면 NULL, 다르면 A 를 반환하므로 NULLIF('B','B') 는 NULL 이다. ① NVL(NULL,'B') 는 'B', ② NVL(NULL,0)+10 은 10, ④ COALESCE(NULL,'20') 은 처음 만나는 NULL 이 아닌 값 '20' 을 반환한다."
     },
     {
       "_id": "sqld-0374",
@@ -11713,7 +11713,7 @@
         "ABC_100"
       ],
       "correctIndex": 3,
-      "explanation": "테이블명과 칼럼명은 반드시 문자로 시작해야 한다."
+      "explanation": "테이블명은 반드시 문자로 시작해야 하고, A-Z, a-z, 0-9, _, $, # 만 쓸 수 있다. ①(100-ABC)·③(200_TAB)은 숫자로 시작하고, ①·②(ABC-1A00)는 하이픈(-)이 들어 있어 쓸 수 없다. ABC_100 만 규칙을 모두 지킨다."
     },
     {
       "_id": "sqld-0389",
@@ -11975,7 +11975,7 @@
         "0"
       ],
       "correctIndex": 0,
-      "explanation": "날짜형 데이터와 NULL을 더하면 NULL이 된다.",
+      "explanation": "NULL 과의 산술 연산 결과는 항상 NULL 이다. SYSDATE + 1 은 내일 날짜지만, SYSDATE + NULL 은 더할 값을 알 수 없으므로 NULL 이 반환된다. 0 으로 바뀌거나 오류가 나지 않는다.",
       "references": [
         {
           "type": "sql",
@@ -13312,15 +13312,15 @@
       "_correctRate": 10,
       "subject": "1과목",
       "chapter": "데이터 모델 개념",
-      "title": "다음은 데이터베이스 모델링에 대한 설명으로 가장 올바른 것은?",
+      "title": "다음 설명에 해당하는 데이터베이스 모델링 용어로 가장 적절한 것은?",
       "options": [
         "도메인",
-        "선텍도",
+        "선택도",
         "다중 값 속성",
         "시스템 카탈로그"
       ],
       "correctIndex": 0,
-      "explanation": "도메인은 속성이 가질 수 있는 값의 범위이다.",
+      "explanation": "도메인은 속성이 가질 수 있는 값의 범위(데이터 타입, 길이, 허용 값 등)이다. 호가 단위처럼 주문 가격이 가질 수 있는 값을 규칙으로 제한하는 것은 도메인 정의에 해당한다. 다중 값 속성은 한 속성에 여러 값이 들어가는 것, 시스템 카탈로그는 DB 객체 정보를 담은 메타데이터 저장소, 선택도는 조건에 맞는 행의 비율이다.",
       "references": [
         {
           "type": "text",
@@ -14739,7 +14739,7 @@
         "한 개의 엔터티는 두 개 이상의 인스턴스 집합이어야 한다."
       ],
       "correctIndex": 2,
-      "explanation": "엔터티는 관계를 2개 이상 가질 수 있다."
+      "explanation": "엔터티는 다른 엔터티와 여러 개의 관계를 맺을 수 있다(관계가 최소 1개 이상 있어야 하며 개수 제한은 없다). ① 한 속성은 한 개의 속성값, ② 한 엔터티는 두 개 이상의 속성, ④ 두 개 이상의 인스턴스 집합이라는 설명은 가이드의 엔터티·속성 규칙 그대로이다."
     },
     {
       "_id": "sqld-0488",
@@ -14780,7 +14780,7 @@
         "유일성"
       ],
       "correctIndex": 2,
-      "explanation": "최소성 : 주식별자는 최소성을 만족하는 키이다.",
+      "explanation": "학번만으로 학생을 유일하게 구분할 수 있는데 입학일자까지 주식별자에 넣었으므로, 유일성을 만족하는 데 꼭 필요한 속성만으로 구성해야 한다는 최소성을 어긴 모델링이다. 유일성은 모든 인스턴스를 구분하는 성질, 불변성은 값이 자주 바뀌지 않는 성질, 존재성은 값이 반드시 있어야(NULL 불가) 하는 성질이다.",
       "references": [
         {
           "type": "text",
@@ -15159,7 +15159,7 @@
         "SELECT deptno FROM Dept WHERE Deptno NOT IN (SELECT deptno FROM Emp);"
       ],
       "correctIndex": 0,
-      "explanation": "①의 결과는 모든 DEPTNO가 조회된다.",
+      "explanation": "<> ANY 는 서브쿼리 결과 중 하나라도 다르면 참이다. Emp 에 부서번호가 두 가지 이상만 있어도 모든 부서번호가 조회되므로 '사원이 없는 부서'를 찾지 못한다. ② OUTER JOIN 후 사원 쪽(empno)이 NULL 인 행, ③ NOT EXISTS, ④ NOT IN(문제 조건상 Emp.deptno 에 NULL 이 없음)은 모두 사원이 없는 부서만 조회한다.",
       "references": [
         {
           "type": "text",
@@ -16436,7 +16436,7 @@
         "REVOKE"
       ],
       "correctIndex": 2,
-      "explanation": "테이블의 권한을 부여하는 DCL은 GRANT이다.",
+      "explanation": "권한을 부여하는 DCL 명령은 GRANT 이다. GRANT CREATE TABLE TO LIMBEST; 는 LIMBEST 사용자에게 테이블 생성 권한을 준다. REVOKE 는 권한 회수, COMMIT·ROLLBACK 은 트랜잭션 제어(TCL) 명령이다.",
       "references": [
         {
           "type": "text",
@@ -16528,7 +16528,7 @@
         "접근 제어를 통한 자동 보안이 제공된다."
       ],
       "correctIndex": 0,
-      "explanation": "뷰는 논리적 데이터 독립성을 제공한다."
+      "explanation": "뷰는 기본 테이블 구조가 바뀌어도 뷰를 쓰는 응용 프로그램은 그대로 쓸 수 있게 해 주므로 논리적 데이터 독립성을 제공한다. 따라서 '독립성을 제공하지 않는다'는 장점이 아닌(틀린) 설명이다. ② 같은 데이터를 사용자마다 다르게 보여 주기, ③ 복잡한 질의 단순화, ④ 필요한 컬럼만 노출하는 보안은 뷰의 장점이다."
     },
     {
       "_id": "sqld-0565",
@@ -16562,7 +16562,7 @@
         "뷰는 조인문의 사용 최소화로 사용상의 편의성을 최대화 한다."
       ],
       "correctIndex": 2,
-      "explanation": "뷰는 임시적인 작업을 위한 용도로 활용된다."
+      "explanation": "뷰는 저장된 SELECT 문으로, 조회할 때마다 기본 테이블을 읽는 가상 테이블이다. 데이터 보정이나 영구 보관 같은 작업은 실제 테이블에서 하며 뷰의 용도가 아니다. ①·② 는 뷰의 정의, ④ 는 복잡한 조인을 뷰로 감춰 사용을 편하게 한다는 장점이다."
     },
     {
       "_id": "sqld-0567",
@@ -16596,7 +16596,7 @@
         "예약어를 사용할 수 있다."
       ],
       "correctIndex": 3,
-      "explanation": "사전에 정의한 예약어는 테이블명으로 사용할 수 없다."
+      "explanation": "테이블명이나 컬럼명에는 SELECT, TABLE 처럼 DBMS 가 미리 정해 둔 예약어를 쓸 수 없다. 그래서 ④가 틀렸다. ① 객체를 잘 나타내는 이름, ② 가능하면 단수형, ③ 반드시 문자로 시작하는 것은 가이드가 권장하는 규칙이다."
     },
     {
       "_id": "sqld-0569",
@@ -16630,7 +16630,7 @@
         "개념스키마"
       ],
       "correctIndex": 2,
-      "explanation": "구조 스키마라는 것은 없다."
+      "explanation": "3층 스키마는 외부·개념·내부 스키마로 나뉜다. 물리적 저장 구조(저장 장치, 레코드 형식, 인덱스 등)를 기술하는 것은 내부 스키마이다. 외부 스키마는 사용자 관점의 뷰, 개념 스키마는 전체 데이터베이스의 논리적 구조를 나타내며, '구조 스키마'라는 단계는 없다."
     },
     {
       "_id": "sqld-0572",
@@ -16800,7 +16800,7 @@
         "정해지지 않은 값을 의미한다."
       ],
       "correctIndex": 1,
-      "explanation": "NULL 로 구성된 집합의 COUNT 결과는 0 이다. "
+      "explanation": "COUNT(컬럼)은 NULL 이 아닌 값의 개수를 세므로, NULL 로만 구성된 컬럼을 COUNT 하면 공집합이 아니라 0 이 반환된다(SUM·AVG·MAX 는 NULL). ① NULL 은 공백이나 0 과 다르고, ③ NULL 과의 비교는 UNKNOWN, ④ 정해지지 않은 값이라는 설명은 맞다."
     },
     {
       "_id": "sqld-0580",
@@ -19835,7 +19835,7 @@
         "PRIMARY KEY는 여러 컬럼으로 구성하여 생성할 수 있다."
       ],
       "correctIndex": 2,
-      "explanation": "UNIQUE 제약조건에서는 NULL을 허용한다."
+      "explanation": "UNIQUE 제약은 중복 값만 막고 NULL 은 허용한다(NULL 은 서로 비교되지 않아 여러 개 입력 가능). NULL 을 막는 것은 NOT NULL 이고, PRIMARY KEY 는 UNIQUE + NOT NULL 이다. ① 외래키는 자식 테이블에 생성, ② CTAS 복제 시 NOT NULL 제약만 함께 복제, ④ 기본키는 여러 컬럼으로 구성 가능하다."
     },
     {
       "_id": "sqld-0670",
@@ -19875,7 +19875,7 @@
         "도메인"
       ],
       "correctIndex": 3,
-      "explanation": "도메인은 속성값이 갖는 범위를 의미한다.",
+      "explanation": "도메인은 속성이 가질 수 있는 값의 범위(데이터 타입, 길이, 허용 값 등)이다. 학년은 1~4 사이 정수, 주민번호는 13자리 이내 문자열처럼 속성 값의 범위를 정의한 것이므로 도메인에 해당한다. 릴레이션은 테이블, 시스템 카탈로그는 DB 객체 정보를 담은 메타데이터 저장소이다.",
       "references": [
         {
           "type": "text",
@@ -19898,7 +19898,7 @@
         "한 개의 엔터티는 두 개 이상의 인스턴스의 집합이어야 한다."
       ],
       "correctIndex": 1,
-      "explanation": "하나의 속성은 한 개의 속성값을 가져야 한다."
+      "explanation": "한 개의 속성은 한 개의 속성값만 가진다(하나의 속성에 여러 값이 들어가는 다중 값이면 별도 엔터티로 분리한다). 그래서 ②가 틀렸다. ① 인스턴스 간 관계(Pairing), ③ 엔터티는 두 개 이상의 속성, ④ 두 개 이상의 인스턴스 집합이라는 설명은 맞다."
     },
     {
       "_id": "sqld-0673",
@@ -19932,7 +19932,7 @@
         "관계명"
       ],
       "correctIndex": 2,
-      "explanation": "관계의 차수에 대한 설명이다."
+      "explanation": "1:1, 1:M, M:N 처럼 한 엔터티의 인스턴스가 상대 엔터티의 인스턴스 몇 개와 관계를 맺는지를 나타내는 것은 관계차수(Cardinality)이다. 관계선택성(Optionality)은 관계가 필수인지 선택인지, 관계명은 관계의 이름을 뜻한다."
     },
     {
       "_id": "sqld-0675",
@@ -19949,7 +19949,7 @@
         "주식별자에 의해 엔터티 내의 모든 인스턴스들이 유일하게 구분되어야 한다."
       ],
       "correctIndex": 2,
-      "explanation": "주식별자는 NULL값이 들어갈 수 없다."
+      "explanation": "주식별자는 엔터티의 모든 인스턴스를 구분해야 하므로 값이 반드시 있어야 한다(존재성, NULL 불가). 그래서 ③이 틀렸다. ① 자주 변하지 않는 값(불변성), ② 유일성을 만족하는 최소한의 속성(최소성), ④ 모든 인스턴스를 유일하게 구분(유일성)은 주식별자의 특징이다."
     },
     {
       "_id": "sqld-0676",
@@ -20012,7 +20012,7 @@
         "두 엔터티의 관계가 서로 필수적일 때 하나의 트랜잭션을 형성한다."
       ],
       "correctIndex": 1,
-      "explanation": "하나의 트랜잭션은 부분 COMMIT이 불가하다."
+      "explanation": "트랜잭션은 모두 반영되거나 모두 취소되어야 하는 하나의 작업 단위(원자성)이므로 일부만 COMMIT 할 수 없다. 그래서 ②가 틀렸다. 하나의 트랜잭션에는 여러 DML 이 들어갈 수 있고, 두 엔터티가 함께 처리되어야 하면 필수 관계(하나의 트랜잭션), 독립적으로 처리할 수 있으면 선택 관계로 표현한다."
     },
     {
       "_id": "sqld-0680",
@@ -21501,7 +21501,7 @@
         "유형엔터티"
       ],
       "correctIndex": 0,
-      "explanation": "행위 엔터티는 발생 시점에 따른 분류에 속한다."
+      "explanation": "유형·무형에 따른 분류는 유형 엔터티, 개념 엔터티, 사건 엔터티이다. 행위 엔터티는 발생 시점에 따른 분류(기본·중심·행위 엔터티)에 속하므로 ①이 답이다."
     },
     {
       "_id": "sqld-0723",
@@ -21535,7 +21535,7 @@
         "관계명"
       ],
       "correctIndex": 0,
-      "explanation": "관계는 관계명, 차수, 선택성으로 구성된다."
+      "explanation": "관계는 관계명(관계의 이름), 관계차수(Cardinality: 1:1, 1:M, M:N), 관계선택사양(Optionality: 필수/선택)으로 구성된다. '관계정의'는 구성 요소가 아니다."
     },
     {
       "_id": "sqld-0725",
@@ -21630,7 +21630,7 @@
         "관계란 엔터티의 인스턴스 사이의 논리적인 연관성을 의미한다."
       ],
       "correctIndex": 2,
-      "explanation": "정규화에 의해 분리된 두 테이블은 서로 관계를 맺는다."
+      "explanation": "정규화로 분리된 엔터티는 원래 하나였던 데이터이므로 서로 관계를 맺어야 하고, 필요할 때 조인으로 다시 연결한다. 그래서 ③이 틀렸다. ① 행위 관계, ② 관계로 연결된 엔터티를 다시 연결하는 것이 조인, ④ 관계는 인스턴스 사이의 논리적 연관성이라는 설명은 맞다."
     },
     {
       "_id": "sqld-0728",
@@ -22541,7 +22541,7 @@
         "두 집합의 컬럼 수가 일치해야 한다."
       ],
       "correctIndex": 0,
-      "explanation": "두 집합의 컬럼 사이즈는 달라도 집합 연산이 가능하다."
+      "explanation": "집합 연산자는 두 SELECT 의 컬럼 수가 같고 대응 컬럼의 데이터 유형이 호환되면 된다. 컬럼 크기(길이)가 서로 달라도 연산할 수 있으므로 ①이 틀렸다. 결과의 컬럼명은 첫 번째(위) SELECT 의 컬럼명을 따른다."
     },
     {
       "_id": "sqld-0755",
@@ -23100,7 +23100,7 @@
         "테이블 생성시 대소문자 구분은 하지 않아도 된다."
       ],
       "correctIndex": 2,
-      "explanation": "문자 유형은 반드시 최대 크기를 지정해야 한다."
+      "explanation": "CHAR, VARCHAR2 같은 문자 유형은 보통 길이를 지정해야 한다(VARCHAR2 는 길이 생략 시 오류). 그래서 ③이 틀렸다. ① 제약조건은 CONSTRAINT 로 추가, ② DATE 는 크기를 지정하지 않으며, ④ 테이블명·컬럼명은 대소문자를 구분하지 않는다(큰따옴표로 감싸지 않은 경우)."
     },
     {
       "_id": "sqld-0768",
@@ -23282,7 +23282,7 @@
         "COUNT"
       ],
       "correctIndex": 3,
-      "explanation": "COUNT는 0이 리턴된다."
+      "explanation": "COUNT(컬럼)은 NULL 이 아닌 값의 개수를 세므로 NULL 로만 구성된 컬럼이면 0 을 반환한다. MIN, AVG, SUM 같은 다른 집계 함수는 계산할 값이 하나도 없으므로 NULL 을 반환한다."
     },
     {
       "_id": "sqld-0780",
@@ -24067,7 +24067,7 @@
         "내부 스키마"
       ],
       "correctIndex": 0,
-      "explanation": "스키마 3계층은 외부 / 개념 / 내부 스키마"
+      "explanation": "ANSI/SPARC 3단계 스키마는 외부 스키마(사용자 관점), 개념 스키마(전체 논리 구조), 내부 스키마(물리 저장 구조)로 구성된다. '응용 스키마'라는 단계는 없다."
     },
     {
       "_id": "sqld-0823",
@@ -24174,7 +24174,7 @@
         "업무 규칙이 모델에 포함되지 않아도 된다."
       ],
       "correctIndex": 3,
-      "explanation": "업무 규칙은 반드시 모델에 포함되어야 한다."
+      "explanation": "데이터 모델은 업무 규칙(예: 주문에는 반드시 고객이 있어야 한다)을 엔터티·관계·제약으로 표현해야 한다. 업무 규칙을 빼면 데이터 무결성을 지킬 수 없으므로 ④가 틀렸다. ① 필요한 데이터 포함, ② 중복 최소화와 일관성, ③ 변경·확장 고려는 모델링의 기본 원칙이다."
     },
     {
       "_id": "sqld-0829",
@@ -26415,7 +26415,7 @@
         "10"
       ],
       "correctIndex": 1,
-      "explanation": "서로 다른 dept 값 수만큼 그룹이 생성된다.",
+      "explanation": "GROUP BY dept 는 dept 값이 같은 행끼리 하나의 그룹으로 묶는다. 표의 dept 값은 SALES, DEV, HR 세 가지이므로 그룹은 3개다. 행 수(10)나 사원 수와는 상관없다.",
       "references": [
         {
           "type": "table",
@@ -26675,7 +26675,7 @@
         "NULL"
       ],
       "correctIndex": 2,
-      "explanation": "100 + 200 = 300이다.",
+      "explanation": "SUM 은 NULL 을 제외하고 더하므로 100 + 200 = 300 이다. NULL 이 섞여 있다고 결과가 NULL 이 되지 않는다(NULL + 100 같은 행 단위 산술 연산과 다르다).",
       "references": [
         {
           "type": "table",
@@ -26740,7 +26740,7 @@
         "존재 여부만 필요할 때는 EXISTS가 의도를 더 직접적으로 표현한다."
       ],
       "correctIndex": 3,
-      "explanation": "EXISTS는 조건 만족 행 존재만 확인한다.",
+      "explanation": "EXISTS 는 서브쿼리 결과가 한 행이라도 있는지만 확인하므로 '존재 여부'를 묻는 의도를 직접 드러낸다. ① IN 도 서브쿼리를 쓸 수 있고, ② IN 목록의 NULL 은 그 값과 비교가 UNKNOWN 이 될 뿐 다른 값이 맞으면 행이 나온다(항상 0행이 되는 것은 NOT IN), ③ EXISTS 에 집계 함수는 필요 없다.",
       "references": [
         {
           "type": "table",
@@ -26806,7 +26806,7 @@
         "104"
       ],
       "correctIndex": 0,
-      "explanation": "주문 고객 목록에 없는 고객은 102와 104다.",
+      "explanation": "주문 테이블에 나오는 고객 ID 는 101(두 건)과 103 뿐이다. 고객 테이블의 101~104 중 주문에 없는 고객은 102(LEE)와 104(CHOI)이다. NOT EXISTS 나 LEFT OUTER JOIN 후 주문 쪽이 NULL 인 행으로 구할 수 있다.",
       "references": [
         {
           "type": "table",
@@ -26872,57 +26872,8 @@
         "HR 부서의 최대 급여보다 큰 급여를 찾는 것과 같다."
       ],
       "correctIndex": 3,
-      "explanation": "ALL 비교는 서브쿼리 결과 전체를 만족해야 한다.",
-      "references": [
-        {
-          "type": "table",
-          "caption": "CUSTOMER",
-          "headers": [
-            "CUSTOMER ID",
-            "NAME"
-          ],
-          "rows": [
-            [
-              "101",
-              "KIM"
-            ],
-            [
-              "102",
-              "LEE"
-            ],
-            [
-              "103",
-              "PARK"
-            ],
-            [
-              "104",
-              "CHOI"
-            ]
-          ]
-        },
-        {
-          "type": "table",
-          "caption": "ORDERS",
-          "headers": [
-            "ORDER ID",
-            "CUSTOMER ID"
-          ],
-          "rows": [
-            [
-              "9001",
-              "101"
-            ],
-            [
-              "9002",
-              "101"
-            ],
-            [
-              "9003",
-              "103"
-            ]
-          ]
-        }
-      ]
+      "explanation": "> ALL 은 서브쿼리의 모든 값보다 커야 참이므로, HR 부서 급여 중 가장 큰 값보다 큰 급여를 찾는 것과 같다. 최솟값보다 크면 되는 것은 > ANY 이다.",
+      "references": []
     },
     {
       "_id": "sqld-0895",
@@ -26938,59 +26889,11 @@
         "NULL과 동일한 의미다."
       ],
       "correctIndex": 2,
-      "explanation": "ANY는 OR 성격으로 해석할 수 있다.",
+      "explanation": "> ANY 는 비교 대상 중 하나라도 만족하면 참이다. salary > ANY (10, 20, 30) 은 10 보다만 크면 참이므로 salary > 10 과 같다(가장 작은 값보다 크면 됨). 30 보다 커야 하는 것은 > ALL 이다.",
       "references": [
         {
           "type": "text",
           "content": "salary > ANY (10, 20, 30)을 해석한다."
-        },
-        {
-          "type": "table",
-          "caption": "CUSTOMER",
-          "headers": [
-            "CUSTOMER ID",
-            "NAME"
-          ],
-          "rows": [
-            [
-              "101",
-              "KIM"
-            ],
-            [
-              "102",
-              "LEE"
-            ],
-            [
-              "103",
-              "PARK"
-            ],
-            [
-              "104",
-              "CHOI"
-            ]
-          ]
-        },
-        {
-          "type": "table",
-          "caption": "ORDERS",
-          "headers": [
-            "ORDER ID",
-            "CUSTOMER ID"
-          ],
-          "rows": [
-            [
-              "9001",
-              "101"
-            ],
-            [
-              "9002",
-              "101"
-            ],
-            [
-              "9003",
-              "103"
-            ]
-          ]
         }
       ]
     },
@@ -27242,7 +27145,7 @@
         "col이 NULL이면 0으로 대체한다."
       ],
       "correctIndex": 3,
-      "explanation": "NVL은 NULL 치환 함수다."
+      "explanation": "NVL(col, 0) 은 col 이 NULL 이면 0 을, NULL 이 아니면 col 값을 그대로 반환한다. 행을 지우거나 값을 바꾸지 않고 조회 결과에서만 대체한다."
     },
     {
       "_id": "sqld-0905",
@@ -27778,7 +27681,7 @@
         "salary만 정렬한다."
       ],
       "correctIndex": 0,
-      "explanation": "앞 컬럼부터 우선 적용된다."
+      "explanation": "ORDER BY 는 앞에 쓴 컬럼부터 정렬하고, 앞 컬럼 값이 같을 때만 다음 컬럼으로 정렬한다. dept 는 정렬 방향을 쓰지 않아 기본값인 오름차순, 같은 dept 안에서는 salary 내림차순이다."
     },
     {
       "_id": "sqld-0920",
@@ -27794,7 +27697,7 @@
         "한 컬럼만 사용할 수 있다."
       ],
       "correctIndex": 1,
-      "explanation": "ORDER BY는 출력 결과의 정렬 순서를 결정한다."
+      "explanation": "ORDER BY 는 SELECT 결과를 어떤 순서로 보여 줄지 정하며, 가장 마지막에 실행된다(WHERE 보다 나중). 집계 함수(ORDER BY SUM(sal))나 여러 컬럼(ORDER BY dept, sal DESC)도 쓸 수 있다."
     },
     {
       "_id": "sqld-0921",
@@ -27868,7 +27771,7 @@
         "1, 2, 2"
       ],
       "correctIndex": 3,
-      "explanation": "동점이면 같은 순위를 부여하고 다음 순위를 건너뛴다.",
+      "explanation": "BUSAN 파티션은 PARK 450, CHOI 200, JUNG 200 이다. amount 내림차순으로 PARK 이 1위, CHOI·JUNG 은 같은 값이라 공동 2위가 된다. RANK 는 동점 다음 순위를 건너뛰지만 BUSAN 에는 다음 행이 없으므로 결과는 1, 2, 2 이다.",
       "references": [
         {
           "type": "table",
@@ -28203,7 +28106,7 @@
         "{1,2,3,4}"
       ],
       "correctIndex": 3,
-      "explanation": "UNION은 중복 제거 후 합집합을 반환한다.",
+      "explanation": "UNION 은 두 집합을 합친 뒤 중복을 제거한다. A 의 2 가 두 번 있어도 결과에는 한 번만 남아 {1, 2, 3, 4} 이다. 중복을 그대로 두는 것은 UNION ALL({1,2,2,3,2,3,4}) 이다.",
       "references": [
         {
           "type": "text",
@@ -28241,7 +28144,7 @@
         "N:M"
       ],
       "correctIndex": 0,
-      "explanation": "주문 1건에 여러 상세가 연결된다.",
+      "explanation": "주문(ORDERS) 하나에 주문상품(ORDER_ITEM)이 여러 개 들어갈 수 있고, 주문상품 하나는 한 주문에만 속한다. 그래서 ORDERS : ORDER_ITEM 은 1:N 관계이다.",
       "references": [
         {
           "type": "image",
@@ -28265,7 +28168,7 @@
         "status"
       ],
       "correctIndex": 2,
-      "explanation": "주문 내 순번까지 포함한 복합키가 자연스럽다.",
+      "explanation": "주문상품은 한 주문 안에서 여러 상품 행을 가지므로 order_id 하나만으로는 구분할 수 없다. 주문번호(order_id)와 주문 안의 순번(item_seq)을 함께 써야 각 행을 유일하게 구분할 수 있다. product_id 는 다른 주문에서도 반복되고, customer_id·status 는 주문상품을 식별하지 못한다.",
       "references": [
         {
           "type": "image",
@@ -34948,59 +34851,11 @@
         "비교 대상 중 하나라도 만족하면 참이므로 10보다 크면 참이다."
       ],
       "correctIndex": 3,
-      "explanation": "ANY는 OR 성격으로 해석할 수 있다.",
+      "explanation": "> ANY 는 비교 대상 중 하나라도 만족하면 참이다. salary > ANY (10, 20, 30) 은 10 보다만 크면 참이므로 salary > 10 과 같다(가장 작은 값보다 크면 됨). 30 보다 커야 하는 것은 > ALL 이다.",
       "references": [
         {
           "type": "text",
           "content": "salary > ANY (10, 20, 30)을 해석한다."
-        },
-        {
-          "type": "table",
-          "caption": "CUSTOMER",
-          "headers": [
-            "CUSTOMER ID",
-            "NAME"
-          ],
-          "rows": [
-            [
-              "101",
-              "KIM"
-            ],
-            [
-              "102",
-              "LEE"
-            ],
-            [
-              "103",
-              "PARK"
-            ],
-            [
-              "104",
-              "CHOI"
-            ]
-          ]
-        },
-        {
-          "type": "table",
-          "caption": "ORDERS",
-          "headers": [
-            "ORDER ID",
-            "CUSTOMER ID"
-          ],
-          "rows": [
-            [
-              "9001",
-              "101"
-            ],
-            [
-              "9002",
-              "101"
-            ],
-            [
-              "9003",
-              "103"
-            ]
-          ]
         }
       ]
     },
