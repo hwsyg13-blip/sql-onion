@@ -213,7 +213,7 @@
         "4"
       ],
       "correctIndex": 2,
-      "explanation": "• SV1 시점 : TAB 테이블에 [('A', 1), ('B' , 2), ('C', 3)] • SV2 시점 : TAB 테이블에 [('A', 3), (B', 3), ('C', 3)] • SV3 시점 : TAB 테이블에 [('D', 5)] • ROLLBACK TO SV2 후 COMMIT할 때 TAB 테이블 : [('A', 3), ('B', 3), ('C', 3)]따라서 총 3건이 존재한다.",
+      "explanation": "SV1 시점: (A,1), (B,2), (C,3). UPDATE 후 SV2 시점: (A,3), (B,3), (C,3). 그 뒤 D 를 넣고 COL2 = 3 인 A·B·C 를 지워 SV3 시점에는 (D,5) 한 행이지만, ROLLBACK TO SV2 로 SV2 이후 변경이 모두 취소된다. COMMIT 후 남는 행은 (A,3), (B,3), (C,3) 3건이다(③).",
       "references": [
         {
           "type": "sql",
@@ -327,7 +327,7 @@
         "0"
       ],
       "correctIndex": 0,
-      "explanation": "WITH 절(CTE, Common Table Expression)은 SELECT 문 시작 전에 미리 정의된 가상의 테이블(임시 결과셋)을 생성하는 문법이다. 이는 마치 FROM 절에 인라인 뷰를 사용하는 것과 유사한 개념이며, 복잡한 쿼리를 구조화하고 가독성을 높이는 데 유리하다. 또한, 같은 CTE를 여러 번 재사용할 수 있는 장점이 있다. 만약 한 번만 사용할 용도라면 인라인 뷰로 작성해도 무방하다. 이 문제에서 CTE REGION_TOTAL은 TB_ORDER 테이블을 REGION 별로 그룹화한 뒤, 각 지역의 주문 금액 합계를 계산한다. REGION_TOTAL의 결과는 다음과 같다. 이후 메인 쿼리에서는 TOTAL > 1500 조건을 만족하는 지역만 필터링하여 COUNT(*)를 수행한다. 조건을 만족하는 지역은 EAST 하나뿐이므로, 최종 결과는 1건이다.",
+      "explanation": "WITH 절(CTE)은 쿼리 앞에서 이름 붙인 임시 결과를 만들어 FROM 절에서 테이블처럼 쓰게 해 준다(인라인 뷰와 비슷). REGION_TOTAL 은 지역별 합계로 EAST 1000 + 2000 = 3000, WEST 500 두 행이 된다. 이 중 TOTAL > 1500 인 것은 EAST 하나라 COUNT(*) 는 1 이다(①).",
       "references": [
         {
           "type": "sql",
@@ -354,24 +354,6 @@
             ],
             [
               "3",
-              "WEST",
-              "500"
-            ]
-          ]
-        },
-        {
-          "type": "table",
-          "caption": "[REGION_TOTAL]",
-          "headers": [
-            "REGION",
-            "TOTAL"
-          ],
-          "rows": [
-            [
-              "EAST",
-              "3000"
-            ],
-            [
               "WEST",
               "500"
             ]
@@ -940,7 +922,7 @@
         "WHERE REGEXP_LIKE(USER_ID, '[0-9].*[A-Z]$')"
       ],
       "correctIndex": 0,
-      "explanation": "정규 표현식을 사용할 때 ^는 시작을 의미, $는 끝을 의미한다. '^[AZ].*[0-9]$'는 대문자 알파벳으로 시작하고, 숫자로 끝나는 문자열을 의미한다. Oracle에서는 복잡한 문자열 패턴 매칭이 필요한 경우 REGEXP_LIKE를 반드시 사용해야 하며, LIKE는 단순한 와일드카드 (%, _)만 지원한다.",
+      "explanation": "정규 표현식을 사용할 때 ^는 시작을 의미, $는 끝을 의미한다. '^[A-Z].*[0-9]는 대문자 알파벳으로 시작하고, 숫자로 끝나는 문자열을 의미한다. Oracle에서는 복잡한 문자열 패턴 매칭이 필요한 경우 REGEXP_LIKE를 반드시 사용해야 하며, LIKE는 단순한 와일드카드 (%, _)만 지원한다.는 대문자 알파벳으로 시작하고, 숫자로 끝나는 문자열을 의미한다. Oracle에서는 복잡한 문자열 패턴 매칭이 필요한 경우 REGEXP_LIKE를 반드시 사용해야 하며, LIKE는 단순한 와일드카드 (%, _)만 지원한다.",
       "references": [
         {
           "type": "table",
@@ -1308,7 +1290,7 @@
       "_origNo": 48,
       "subject": "2과목",
       "chapter": "관계형 DB와 SELECT",
-      "title": "다음 중 이름이 ‘이’로 시작하고 전체 글자 수가 세 글자인 대상을 추출하는 SQL로 적절한 것은?",
+      "title": "다음 중 이름이 '이'로 시작하고 전체 글자 수가 세 글자인 대상을 추출하는 SQL로 적절한 것은?",
       "options": [
         "이름 LIKE ' %이% ' ;",
         "이름 LIKE ' 이% ' ;",
@@ -3877,7 +3859,7 @@
       "_origNo": 137,
       "subject": "2과목",
       "chapter": "그룹 함수",
-      "title": "“TEST” 테이블에 있는 NUM2 칼럼의 총 행은 10개이고 2개의 NULL 값이 있다. 다음의 SQL문을 실행할 경우 결괏값은?",
+      "title": "\"TEST\" 테이블에 있는 NUM2 칼럼의 총 행은 10개이고 2개의 NULL 값이 있다. 다음의 SQL문을 실행할 경우 결괏값은?",
       "options": [
         "ㄱ : 10, ㄴ : 10",
         "ㄱ : 10, ㄴ : 8",
@@ -3971,11 +3953,41 @@
         "부서별 합계를 계산할 때 NULL값을 만나면 0으로 치환한다."
       ],
       "correctIndex": 2,
-      "explanation": "그룹 함수를 사용하는 경우 NULL값은 연산에서 제외된다. 그래서 NVL 함수를 사용하는 것은 합계오류 예방과는 전혀 관계가 없다.",
+      "explanation": "WHERE 가 없으니 5행이 모두 연산에 참여하고(①), 부서별 합계는 10 이 1000 + 2000 = 3000, 20 이 500 이다(②). NVL(SAL, 0) 은 NULL 을 0 으로 바꿔 더하므로 ④ 도 옳다. 하지만 SUM 같은 집계 함수는 원래 NULL 을 빼고 계산하므로 NVL 이 없어도 같은 결과가 나온다. NVL 이 \"합계 오류를 예방한다\" 는 ③ 이 옳지 않다.",
       "references": [
         {
+          "type": "table",
+          "caption": "[DEPT] 테이블",
+          "headers": [
+            "DEPTNO",
+            "SAL"
+          ],
+          "rows": [
+            [
+              "10",
+              "NULL"
+            ],
+            [
+              "10",
+              "1000"
+            ],
+            [
+              "10",
+              "2000"
+            ],
+            [
+              "20",
+              "NULL"
+            ],
+            [
+              "20",
+              "500"
+            ]
+          ]
+        },
+        {
           "type": "sql",
-          "code": "가. 실제 데이터 DEPTNO SAL -------------------- 10 10 1000 10 2000 20 20 500 나. SELECT문 SELECT DEPTNO, SUM(NVL(SAL,0)) FROM DEPT GROUP BY DEPTNO;"
+          "code": "SELECT DEPTNO, SUM(NVL(SAL, 0))\nFROM   DEPT\nGROUP BY DEPTNO;"
         }
       ]
     },
@@ -4001,7 +4013,7 @@
       "_origNo": 144,
       "subject": "1과목",
       "chapter": "트랜잭션과 Null",
-      "title": "다음 중 트랜잭션의 ‘일관성(Consistency)’ 특성에 대한 설명으로 가장 적절한 것은?",
+      "title": "다음 중 트랜잭션의 '일관성(Consistency)' 특성에 대한 설명으로 가장 적절한 것은?",
       "options": [
         "트랜잭션이 실패하면 중간 상태가 유지된다.",
         "트랜잭션이 시작되면 다른 트랜잭션과 완전히 분리된다.",
@@ -4071,7 +4083,7 @@
       "_origNo": 148,
       "subject": "2과목",
       "chapter": "WHERE",
-      "title": "릴레이션 ‘employee’와 ‘department’에서 다음 SQL 질의문의 수행 결과는?",
+      "title": "릴레이션 'employee'와 'department'에서 다음 SQL 질의문의 수행 결과는?",
       "options": [
         "{(100, 영업, Lee, 90), (200, 개발, Kim, 95), (300, 서비스, Hong, 65)}",
         "{(100, 영업, Lee, 90), (200, 개발, Kim, 95)}",
@@ -4654,19 +4666,13 @@
       "chapter": "DDL",
       "title": "다음 중 EMP 테이블의 DEPTNO에 외래키 제약을 추가하는 SQL은?",
       "options": [
-        "ALTER EMP ADD FOREIGN KEY (DEPTNO)REFERENCES DEPT(DEPTNO);",
-        "ALTER TABLE EMP ADD CONSTRAINTFK_DEPT FOREIGN KEY (DEPTNO)REFERENCES DEPT(DEPTNO);",
+        "ALTER EMP ADD FOREIGN KEY (DEPTNO) REFERENCES DEPT(DEPTNO);",
+        "ALTER TABLE EMP ADD CONSTRAINT FK_DEPT FOREIGN KEY (DEPTNO) REFERENCES DEPT(DEPTNO);",
         "ALTER TABLE EMP FOREIGN KEY(DEPTNO) REFERENCES DEPT;",
-        "MODIFY EMP FOREIGN KEY (DEPTNO)REFERENCES DEPT(DEPTNO);"
+        "MODIFY EMP FOREIGN KEY (DEPTNO) REFERENCES DEPT(DEPTNO);"
       ],
       "correctIndex": 1,
-      "explanation": "이 문제는 기존 테이블(EMP)에 외래키(Foreign Key) 제약조건을 추가하는 SQL 문법을 묻는 문제이다. 외래키는 다른 테이블(여기서는 DEPT)의 기본키를 참조해야 하며, 다음과 같은 문법을 사용한다.",
-      "references": [
-        {
-          "type": "sql",
-          "code": "ALTER TABLE 테이블명 ADD CONSTRAINT 제약조건명 FOREIGN KEY(컬럼) REFERENCES 참조할테이블(컬럼);"
-        }
-      ]
+      "explanation": "기존 테이블에 외래키를 추가하는 문법은 ALTER TABLE 테이블명 ADD CONSTRAINT 제약조건명 FOREIGN KEY (컬럼) REFERENCES 참조테이블(컬럼) 이다(②). ① 은 TABLE 키워드가 빠졌고, ③ 은 ADD 가 없으며, ④ MODIFY 는 ALTER TABLE 안에서 컬럼 정의를 바꿀 때 쓰는 말이라 문법 오류다."
     },
     {
       "_id": "cbt-170",
@@ -4722,7 +4728,7 @@
       "_origNo": 173,
       "subject": "2과목",
       "chapter": "GROUP BY·HAVING",
-      "title": "다음의 데이터베이스에서 ‘부양가족을 2명 이상 가진 사원의 사번(eno), 성명(ename), 부양가족 수를 검색’하는 질의를 SQL로 적절하게 표현한 것은?",
+      "title": "다음의 데이터베이스에서 '부양가족을 2명 이상 가진 사원의 사번(eno), 성명(ename), 부양가족 수를 검색'하는 질의를 SQL로 적절하게 표현한 것은?",
       "options": [
         "SELECT eno, ename, count(*) FROM employee e, dependent d WHERE e.eno = d.eno and count(*) >= 2 GROUP BY d.eno;",
         "SELECT e.eno, e.ename, count(*) FROM employee e, dependent d WHERE EXISTS (SELECT * FROM dependent GROUP BY eno HAVING count(*) >= 2) GROUP BY e.eno, e.ename;",
@@ -5091,7 +5097,7 @@
         "ON DELETE CASCADE는 부모 테이블의 행이 삭제될 때 자식 테이블의 행도 자동으로 삭제된다.",
         "ON DELETE SET NULL은 자식 테이블의 해당 행 전체가 삭제된다.",
         "ON DELETE CASCADE를 사용하면 참조 무결성 오류가 발생한다.",
-        "ON DELETE SET NULL은 부모 행 삭제 시 외래키 컬럼이 ‘0’으로 초기화된다."
+        "ON DELETE SET NULL은 부모 행 삭제 시 외래키 컬럼이 '0'으로 초기화된다."
       ],
       "correctIndex": 0,
       "explanation": "ON DELETE CASCADE는 부모 행이 삭제될 경우 해당 부모를 참조하던 자식의 행도 자동으로 DELETE 된다. ON DELETE SET NULL은 부모 행이 삭제될 경우 해당 부모를 참조하던 자식의 컬럼 값이 NULL로 변경된다."

@@ -131,6 +131,8 @@ for (const f of fs.readdirSync(DIR).filter(f => /\.json$/.test(f)).sort()) {
       });
       const rec = { opts: q.options.map(o => String(o).slice(0, 40)), id, correct: q.correctIndex + 1, hits: hits.map(h => h + 1), cols, res: res.slice(0, 12), title: q.title };
       if (hits.includes(q.correctIndex)) report.ok++;
+      // '옳지 않은 것'·'아닌 것' 처럼 틀린 설명을 고르는 문항은 실행 결과가 옳은 설명(오답 보기)과 맞는 게 정상 (cbt-mock 2과목 #141)
+      else if (hits.length && /옳지 않은|않은 것|아닌 것|틀린 것|부적절|적절하지 않은|다른 하나|결과가 다른/.test(q.title || '')) report.ok++;
       else if (hits.length) report.mismatch.push(rec);
       else report.nomatch.push(rec);
     } catch (e) { report.errors++; report.err.push(`${id}: ${String(e.message).slice(0, 100)}`); }
