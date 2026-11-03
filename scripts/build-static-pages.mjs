@@ -444,7 +444,7 @@ function buildGuide({ slug, title, desc, body }) {
 const guides = [
   {
     slug: 'sqld-overview',
-    title: 'SQLD 자격증 완벽 안내 — 시험 정보·출제 범위·합격 기준',
+    title: 'SQLD 자격증 안내 — 시험 정보·출제 범위·합격 기준',
     desc: 'SQLD(SQL Developer)는 한국데이터산업진흥원이 시행하는 SQL 개발자 자격증입니다. 시험 시간·문항수·합격 기준·출제 범위를 한눈에.',
     body: `
       <h2>SQLD란?</h2>
@@ -536,7 +536,7 @@ const guides = [
       </table>
 
       <h2>SQLD양파의 CBT 모드</h2>
-      <p>SQLD양파는 실제 CBT 환경과 동일한 50문항·90분 풀이 모드를 제공합니다. 회차별 기출 또는 랜덤 모의고사로 시험장 환경에 미리 적응할 수 있습니다.</p>
+      <p>SQLD양파의 CBT 모드는 실제 시험과 같은 50문항·90분 구성이다. 문항 번호판으로 오가며 풀고, 제출하면 과목별 점수와 문항별 해설을 바로 볼 수 있다. 회차별 기출이나 랜덤 모의고사로 시간 배분을 미리 연습해 두자.</p>
     `,
   },
   {
