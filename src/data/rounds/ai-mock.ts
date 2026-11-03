@@ -16614,13 +16614,13 @@ export const AI_MOCK: QuizQuestion[] = [
     "number": 562,
     "title": "다음 중 Window Function에 대한 설명으로 알맞은 것은?",
     "options": [
-      "GROUP BY와 Window Function은 병행하여 사용할 수 있다.",
+      "Window Function은 반드시 GROUP BY와 함께 사용해야 한다.",
       "Window Function 처리로 인해 결과 건수가 줄어들 수 있어 성능이 빠르다.",
       "sum, min, max 등과 같은 집계 Window Function을 사용할 때 window 절과 함께 사용하면 집계의 대상이 되는 레코드 범위를 지정할 수 있다.",
       "Window Function은 내부적으로 자동 튜닝을 실시한다."
     ],
     "correctIndex": 2,
-    "explanation": "GROUP BY는 실제 출력되는 행을 줄여서 출력하나, Window Function은 실제 행이 줄어들지 않는다. 그러므로, 병행작성이 불가능한 것은 아니지만, 병행하여 사용하지 않고 필요에 따라 둘 중 하나를 선택해 사용한다.",
+    "explanation": "SUM·MIN·MAX 같은 집계 함수를 윈도우 함수로 쓸 때 ROWS·RANGE 같은 윈도우 절을 붙이면 집계할 행의 범위(예: 처음부터 현재 행까지)를 정할 수 있다(③). ① 윈도우 함수는 GROUP BY 없이도 쓰며, ② 결과 건수는 줄지 않고, ④ 자동 튜닝 기능은 없다. ※ 원 보기 ①(GROUP BY 와 병행 사용 가능)은 실제로 가능한 내용이라 정답이 둘이 되어, 단일 정답이 되도록 보기를 고쳤다.",
     "chapter": "윈도우 함수",
     "_source": "sqld-1140",
     "_origId": "sqld-0395",
@@ -16727,7 +16727,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "10건"
     ],
     "correctIndex": 1,
-    "explanation": "두 개의 테이블을 조인하면 14개의 행이 나오게 된다. 이를 CUBE로 집계를 하면 전체합계 1건, JOB별 집계 5건, DEPTNO별 집계 3건, DEPTNO에서의 JOB별 집계가 3건씩 9건으로 총 18건이 출력된다.",
+    "explanation": "EMP 와 DEPT 를 조인하면 14행이다. CUBE(DNAME, JOB) 은 (DNAME, JOB) 조합별 9행, DNAME 별 3행, JOB 별 5행, 전체 합계 1행을 만들어 모두 18행이다(②).",
     "chapter": "그룹 함수",
     "_source": "sqld-1140",
     "_origId": "sqld-0401",
@@ -16835,7 +16835,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "고객, 개인고객, 기업고객 간의 관계는 Super Type과 Sub Type 관계이다."
     ],
     "correctIndex": 0,
-    "explanation": "Super Type과 Sub Type은 베타적 관계와 포괄적 관계가 있는데 본 예제의 관계는 베타적 관계 모델링이다. 베타적 관계는 한순간에 하나만 될 수 있기 때문에 한순간에 개인고객이 되거나 아니면 기업고객이 된다.",
+    "explanation": "슈퍼타입·서브타입 관계에는 배타적 관계와 포괄적 관계가 있다. 그림은 고객구분으로 개인고객 또는 기업고객 중 하나만 되는 배타적 관계다. '동시에 둘 다 되는 포괄적 관계' 라는 ① 이 틀렸다. ② 고객구분이 서브타입을 나누는 구분자이고, ③ 세 테이블로 나누면 조인이 많아지며, ④ 슈퍼타입·서브타입 관계가 맞다.",
     "chapter": "엔터티",
     "_source": "sqld-1140",
     "_origId": "sqld-0406",
@@ -19751,7 +19751,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "CUBE(DNAME,JOB)"
     ],
     "correctIndex": 3,
-    "explanation": "결괏값을 보면 1.DNAME, JOB별 소계 2.DNMAE 별 소계 3.JOB별 소계 4.전체 집계 등 모든 조합 가능한 소계와 집계가 조회되었으므로 빈칸에 들어갈 그룹 함수는 CUBE이다.",
+    "explanation": "결과에 DNAME·JOB 조합별 소계, DNAME 별 소계, JOB 별 소계, 전체 합계가 모두 나온다. 가능한 모든 조합의 소계를 만드는 것은 CUBE(DNAME, JOB) 이다(④). ROLLUP 이었다면 JOB 별 소계가 없고, GROUPING SETS(DNAME, JOB) 은 조합별 소계와 전체 합계가 없다.",
     "chapter": "그룹 함수",
     "_source": "sqld-1140",
     "_origId": "sqld-0497",
@@ -25555,7 +25555,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "FROM 절에 사용하는 서브쿼리를 스칼라 서브쿼리라고 한다."
     ],
     "correctIndex": 0,
-    "explanation": "서브쿼리가 메인쿼리 컬럼을 가지고 있을 경우 연관 서브쿼리라고 하며, 주로 메인쿼리가 먼저 수행된 후에 서브쿼 리에서 조건이 맞는지 확인할 때 사용한다.",
+    "explanation": "서브쿼리 안에서 메인쿼리의 칼럼을 쓰면 연관(상관) 서브쿼리다. 메인쿼리의 행을 하나씩 읽으면서 서브쿼리로 조건이 맞는지 확인할 때 주로 쓴다(①). ② 는 연관 서브쿼리의 설명이고, ③ 단일행 서브쿼리는 =, < 같은 비교 연산자와 함께 쓰며, ④ FROM 절 서브쿼리는 인라인 뷰다(스칼라 서브쿼리는 주로 SELECT 절).",
     "chapter": "서브쿼리",
     "_source": "sqld-1140",
     "_origId": "sqld-0747",
@@ -26160,7 +26160,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "CREATE TABLE 테이블명 AS SELECT 문으로 테이블 복제가 가능하다."
     ],
     "correctIndex": 1,
-    "explanation": "PRIMARY KEY 나 UNIQUE 설정 없이 부여된 NOT NULL 속성은 함께 복제되며 PRIMARY KEY 나 UNIQUE로 인해 만들어진 NOT NULL 속성은 복제되지 않는다.",
+    "explanation": "CREATE TABLE … AS SELECT 로 복제하면 칼럼 구성·순서·데이터 타입·데이터와 직접 지정한 NOT NULL 은 따라오지만, PRIMARY KEY·UNIQUE·FOREIGN KEY 같은 제약조건은 복제되지 않는다. 그래서 '기본키도 함께 복제된다' 는 ② 가 틀렸다. 필요하면 복제 후 ALTER TABLE 로 다시 추가한다.",
     "chapter": "데이터 무결성",
     "_source": "sqld-1140",
     "_origId": "sqld-0768",
@@ -27883,7 +27883,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "피벗 결과는 REGION 값을 기준으로 GROUP BY 없이 자동 집계되지 않는다."
     ],
     "correctIndex": 0,
-    "explanation": "REGION 값을 기준으로 열(EAST, WEST)을 만들고\n각 REGION별 AMOUNT를 집계(SUM)\n자동으로 GROUP BY YEAR가 적용됨",
+    "explanation": "PIVOT 은 FOR 뒤의 REGION 값('EAST', 'WEST')을 칼럼으로 펼치고 SUM(AMOUNT) 로 칸을 채운다. PIVOT 과 집계에 쓰지 않은 YEAR 는 자동으로 그룹 기준이 되므로, 연도별로 EAST·WEST 금액이 한 행에 나온다(①). GROUP BY 를 따로 쓰지 않아도 집계되므로 ④ 는 틀렸고, UNPIVOT 은 반대로 칼럼을 행으로 바꾸는 기능이다.",
     "chapter": "PIVOT",
     "_source": "sqld-1140",
     "_origId": "sqld-0845",
