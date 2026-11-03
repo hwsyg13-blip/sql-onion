@@ -2904,7 +2904,7 @@
       "_correctRate": 10,
       "subject": "2과목",
       "chapter": "조인",
-      "title": "아래와 같이 일자별매출 테아블이 존재할 때 아래 결과처럼 일자별 누적매출액을 SQL로 구하려고 한다. WINDOW FUNCTION을 사용하지 않고 일자별 누적매출액을 구하는 SQL로 옳은 것은?",
+      "title": "아래와 같이 일자별매출 테이블이 존재할 때 아래 결과처럼 일자별 누적매출액을 SQL로 구하려고 한다. WINDOW FUNCTION을 사용하지 않고 일자별 누적매출액을 구하는 SQL로 옳은 것은?",
       "options": [
         "SELECT A.일자\n,(SELECT SUM(B.매출액)\nFROM 일자별매출 B WHERE B.일자 >= A.일자)  AS 누적\n매출액\nFROM 일자별매출 A\nGROUP BY A.일자\nORDER BY A.일자;",
         "SELECT A.일자, SUM(B.매출액) AS 누적매출액\nFROM 일자별매출 A JOIN 일자별매출 B ON (A.일자>= B.일자)\nGROUP BY A.일자\nORDER BY A.일자;",
@@ -23728,7 +23728,7 @@
       "_correctRate": 10,
       "subject": "1과목",
       "chapter": "엔터티",
-      "title": "다음 ERD를 참고해서 옳은 않은것 고르시오.",
+      "title": "다음 ERD 에 대한 설명으로 옳지 않은 것은?",
       "options": [
         "의사는 반드시 하나의 병원에 소속되어야 한다.",
         "의사는 여러 건의 수술을 담당할 수 있다.",
