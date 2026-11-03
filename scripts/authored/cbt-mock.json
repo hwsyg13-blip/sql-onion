@@ -4593,7 +4593,7 @@
         "오류 발생"
       ],
       "correctIndex": 2,
-      "explanation": "Oracle 11g 버전에서의 상위 n개 데이터를 가져오려면 먼저 인라인 뷰로 내림차순 정렬된 가상의 테이블을 만든 후 ROWNUM으로 필터링한다. 즉, PRICE 기준 내림차 순 정렬해서 가격이 가장 높은 금액 중 하나를 ROWNUM = 1로 추출하는 쿼리이다. 따라서 답은 ITEM C이다.",
+      "explanation": "Oracle 11g 버전에서의 상위 n개 데이터를 가져오려면 먼저 인라인 뷰로 내림차순 정렬된 가상의 테이블을 만든 후 ROWNUM으로 필터링한다. 즉, PRICE 기준 내림차순 정렬해서 가격이 가장 높은 금액 중 하나를 ROWNUM = 1로 추출하는 쿼리이다. 따라서 답은 ITEM C이다.",
       "references": [
         {
           "type": "sql",
@@ -5405,7 +5405,7 @@
         "STDDEV"
       ],
       "correctIndex": 2,
-      "explanation": "집계 함수는 집합에 대한 정보를 제공하므로 주로 숫자 유형에 사용된다. 추가로 MAX, MIN, COUNT 함수는 숫자 유형만 아니라 문자 유형, 날짜 유형에도 적용이 가능한 함수이다."
+      "explanation": "COUNT 는 행 수를 세는 함수라 숫자·문자·날짜 어떤 타입에도 쓸 수 있다(③). AVG·SUM·STDDEV 는 계산을 해야 하므로 숫자형에만 쓴다. MAX·MIN 도 문자·날짜에 쓸 수 있지만 보기에는 없다."
     },
     {
       "_id": "cbt-199",

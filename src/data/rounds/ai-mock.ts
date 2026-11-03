@@ -5258,7 +5258,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "오류 발생"
     ],
     "correctIndex": 2,
-    "explanation": "Oracle 11g 버전에서의 상위 n개 데이터를 가져오려면 먼저 인라인 뷰로 내림차순 정렬된 가상의 테이블을 만든 후 ROWNUM으로 필터링한다. 즉, PRICE 기준 내림차 순 정렬해서 가격이 가장 높은 금액 중 하나를 ROWNUM = 1로 추출하는 쿼리이다. 따라서 답은 ITEM C이다.",
+    "explanation": "Oracle 11g 버전에서의 상위 n개 데이터를 가져오려면 먼저 인라인 뷰로 내림차순 정렬된 가상의 테이블을 만든 후 ROWNUM으로 필터링한다. 즉, PRICE 기준 내림차순 정렬해서 가격이 가장 높은 금액 중 하나를 ROWNUM = 1로 추출하는 쿼리이다. 따라서 답은 ITEM C이다.",
     "chapter": "ORDER BY",
     "_source": "cbt-mock",
     "_origId": "cbt-164",
@@ -6041,7 +6041,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "STDDEV"
     ],
     "correctIndex": 2,
-    "explanation": "집계 함수는 집합에 대한 정보를 제공하므로 주로 숫자 유형에 사용된다. 추가로 MAX, MIN, COUNT 함수는 숫자 유형만 아니라 문자 유형, 날짜 유형에도 적용이 가능한 함수이다.",
+    "explanation": "COUNT 는 행 수를 세는 함수라 숫자·문자·날짜 어떤 타입에도 쓸 수 있다(③). AVG·SUM·STDDEV 는 계산을 해야 하므로 숫자형에만 쓴다. MAX·MIN 도 문자·날짜에 쓸 수 있지만 보기에는 없다.",
     "chapter": "그룹 함수",
     "_source": "cbt-mock",
     "_origId": "cbt-198",
@@ -10658,7 +10658,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "데이터베이스 내에서 변별 가능한 객체이다."
     ],
     "correctIndex": 3,
-    "explanation": "엔터티의 3가지 공통점은 다음과 같다.\n-개념, 사건, 사람, 장소 등과 같이 명사이다.\n-비즈니스 프로세스에서 관리되어야 하는 정보이다.\n-저장이 필요한 어떤 것이다.",
+    "explanation": "엔터티 정의의 공통점 세 가지는 ① 업무에서 관리해야 하는 관심사이고, ② 저장이 필요한 어떤 것이며, ③ 사람·장소·물건·사건·개념 같은 명사라는 것이다. '데이터베이스 내에서 변별 가능한 객체' 는 학자마다 다른 표현 중 하나일 뿐 공통점 3가지에 들지 않는다(④).",
     "chapter": "엔터티",
     "_source": "sqld-1140",
     "_origId": "sqld-0170",
@@ -21597,7 +21597,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "CEIL(3.5) : 4"
     ],
     "correctIndex": 1,
-    "explanation": "ROUND(12345.678, -2)는 정수 두 번째 자리(십의 자리)에서 반올림하여 맞추기 때문에 12300 이 리턴된다. ",
+    "explanation": "ROUND(12345.678, -2) 는 백의 자리까지 남기도록 십의 자리에서 반올림한다. 십의 자리 숫자 4 는 5 미만이라 버려져 12300 이다(12350 이 아님). ① SIGN(120) = 1(양수), ③ FLOOR(3.5) = 3(내림), ④ CEIL(3.5) = 4(올림) 는 맞다.",
     "chapter": "함수",
     "_source": "sqld-1140",
     "_origId": "sqld-0585",
@@ -23708,7 +23708,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "HR 계정에게 부여된 SCOTT.EMP에 대한 SELECT 권한도 함께 회수된다."
     ],
     "correctIndex": 0,
-    "explanation": "중간관리자가 WITN GRANT OPTION으로 부여 받은 권한을 제 3자에게 부여한 경우, 관리자가 제 3자의 권한을 직 접 회수할 수 없다. 하지만 중간관리자 권한을 회수하면 제 3자에게 부여한 권한도 함께 회수된다. 반대로 WITH ADMIN OPTION으로 부여할 경우 중간관리자 권한 회수 시 제 3자에게 부여한 권한은 함께 회수되지 않는다.",
+    "explanation": "중간관리자가 WITN GRANT OPTION으로 부여 받은 권한을 제 3자에게 부여한 경우, 관리자가 제 3자의 권한을 직접 회수할 수 없다. 하지만 중간관리자 권한을 회수하면 제 3자에게 부여한 권한도 함께 회수된다. 반대로 WITH ADMIN OPTION으로 부여할 경우 중간관리자 권한 회수 시 제 3자에게 부여한 권한은 함께 회수되지 않는다.",
     "chapter": "DCL·TCL",
     "_source": "sqld-1140",
     "_origId": "sqld-0670",
@@ -26047,7 +26047,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "INSERT INTO TAB2 SELECT NO, NAME, JUMIN FROM TAB1;"
     ],
     "correctIndex": 2,
-    "explanation": "INSERT SELECT 구문에는 AS가 붙지 않는다. 양쪽 테이블의 컬럼수가 다르므로 INSERT 시 적절하게 컬럼수를 맞 춰서 입력해야 한다.",
+    "explanation": "INSERT … SELECT 에는 AS 를 쓰지 않으므로 ③ 은 문법 오류다. 또 TAB1 은 칼럼이 4개(NO, NAME, JUMIN, DEPTNO), TAB2 는 3개라 개수를 맞춰야 한다. ② 는 NULL 을 하나 더 넣어 4개를 맞췄고, ①④ 는 3개 칼럼 테이블 TAB2 에 3개를 넣어 모두 실행된다.",
     "chapter": "DML",
     "_source": "sqld-1140",
     "_origId": "sqld-0765",
@@ -26229,7 +26229,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "누락된 프로세스의 경우 이후 추가하거나 수정할 수 없다."
     ],
     "correctIndex": 2,
-    "explanation": "엔터티의 이름을 정할 때 약어 사용은 자제하고 현업에서 사용하는 용어를 사용한다. 또한 사용되지 않는 고립 엔터 티는 추후 제거를 고려한다.",
+    "explanation": "사용되지 않는 고립 엔터티(다른 엔터티와 관계가 없고 프로세스에서도 안 쓰이는 것)는 제거를 고려한다(③). ① 엔터티 이름은 약어 대신 현업 용어로 짓고, ② 엔터티는 다른 엔터티와 최소 한 개 이상 관계를 가져야 하며, ④ 누락된 프로세스는 나중에 추가·수정할 수 있다.",
     "chapter": "엔터티",
     "_source": "sqld-1140",
     "_origId": "sqld-0772",
@@ -26472,7 +26472,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "SELECT SUM(DECODE(COL2, 10, 1, 0)) AS CNT10, SUM(DECODE(COL2, 20, 1, 0)) AS CNT20 FROM TAB1;"
     ],
     "correctIndex": 3,
-    "explanation": "특정 대상의 수를 세려면 COUNT는 세고자 하는 값이 어떤 값이든 존재(1이나 ‘X’ 등)하면 되고, 반대로 세지 않을 값은 반드시 NULL이어야 한다. SUM은 세고자 하는 값이 1이고, 나머지는 NULL이거나 0이면 된다. 따라서 해당 조 건에 만족하는 문장은 1번이다.",
+    "explanation": "특정 대상의 수를 세려면 COUNT는 세고자 하는 값이 어떤 값이든 존재(1이나 ‘X’ 등)하면 되고, 반대로 세지 않을 값은 반드시 NULL이어야 한다. SUM은 세고자 하는 값이 1이고, 나머지는 NULL이거나 0이면 된다. 따라서 해당 조건에 만족하는 문장은 1번이다.",
     "chapter": "그룹 함수",
     "_source": "sqld-1140",
     "_origId": "sqld-0789",
@@ -26590,7 +26590,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "SELECT * FROM EMP WHERE DEPTNO IN (10,20) AND JOB = 'CLERK' OR SAL > 3000;"
     ],
     "correctIndex": 2,
-    "explanation": "2번 문장은 연산자 우선순위(NOT > AND > OR)에 의해 (DEPTNO = 20 AND JOB = 'CLERK') 조건이 먼저 수행되므 로 다른 문장들과 연산 순서가 달라진다.",
+    "explanation": "AND 가 OR 보다 먼저 계산된다(NOT > AND > OR). ①②④ 는 모두 '(10번 또는 20번 부서이면서 CLERK) 또는 SAL > 3000' 이다. ③ 은 괄호가 없어 DEPTNO = 10 OR (DEPTNO = 20 AND JOB = 'CLERK') OR SAL > 3000 으로 계산되어, 10번 부서는 직무와 관계없이 모두 나온다. 그래서 결과가 다른 것은 ③ 이다.",
     "chapter": "DML",
     "_source": "sqld-1140",
     "_origId": "sqld-0791",
@@ -26653,7 +26653,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "SELECT E1.EMPNO, E1.ENAME, E2.ENAME AS MANAGER_NAME FROM EMP E1, EMP E2 WHERE E1.MGR = E2.EMPNO ORDER BY E1.EMPNO;"
     ],
     "correctIndex": 2,
-    "explanation": "SELECT절을 보면 E2.ENAME이 매니저이름이다. 따라서 E1의 MGR(매니저번호)을 갖는 E2에서의 EMPNO가 E1 사 원의 매니저라고 볼 수 있다. 또한, 매니저가 없는 MARTIN도 출력을 하기 위해서는 LEFT OUTER JOIN이 필요하므 로 오라클 표준으로 E1의 반대쪽 컬럼에 (+) 기호를 붙여주면 된다.",
+    "explanation": "SELECT절을 보면 E2.ENAME이 매니저이름이다. 따라서 E1의 MGR(매니저번호)을 갖는 E2에서의 EMPNO가 E1 사원의 매니저라고 볼 수 있다. 또한, 매니저가 없는 MARTIN도 출력을 하기 위해서는 LEFT OUTER JOIN이 필요하므 로 오라클 표준으로 E1의 반대쪽 컬럼에 (+) 기호를 붙여주면 된다.",
     "chapter": "조인",
     "_source": "sqld-1140",
     "_origId": "sqld-0794",
