@@ -13,6 +13,7 @@
 
 import React from 'react';
 import { loadMermaid, mermaidLoadFailedHtml } from '../lib/loadMermaid';
+import { trackEvent } from '../lib/analytics';
 import { CodeBlock } from './Atoms';
 
 export type QuestionReference =
@@ -287,6 +288,37 @@ function RefEntityDiagram({ entityName, preText, headers, rows }: any) {
   );
 }
 
+// mermaid 가 그리지 못했을 때(2026-11-03 macOS Safari 제보 R45·R49 1과목 4번) 빈 칸이나 오류문 대신
+// 표기법을 그대로 글로 보여 준다. 관계의 '뜻'(필수·선택)은 문제의 답이 될 수 있어 풀어 쓰지 않고 기호만 옮긴다.
+const ERD_REL = /^\s*("?[^"\s{]+"?)\s+([|}][|o]|[|o][|{])(--|\.\.)([|o][|{]|[|}][|o])\s+("?[^"\s:]+"?)\s*(?::\s*"?([^"]*)"?)?\s*$/;
+function escHtml(s: string) { return s.replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' } as any)[c]); }
+export function erdFallbackHtml(code: string): string {
+  const lines = String(code || '').split('\n');
+  const rels: string[] = [];
+  const ents: { name: string; attrs: string[] }[] = [];
+  let cur: { name: string; attrs: string[] } | null = null;
+  for (const raw of lines) {
+    const line = raw.trim();
+    if (!line || /^erDiagram$/i.test(line)) continue;
+    if (cur) { if (line === '}') { ents.push(cur); cur = null; } else cur.attrs.push(line.replace(/\s+/g, ' ')); continue; }
+    const open = line.match(/^("?[^"\s{]+"?)\s*\{$/);
+    if (open) { cur = { name: open[1].replace(/"/g, ''), attrs: [] }; continue; }
+    const m = line.match(ERD_REL);
+    if (m) {
+      const [, a, l, ln, r, b, label] = m;
+      rels.push(`${escHtml(a.replace(/"/g, ''))}  ${escHtml(l)}${ln === '--' ? '────' : '┄┄┄┄'}${escHtml(r)}  ${escHtml(b.replace(/"/g, ''))}${label ? `  : ${escHtml(label)}` : ''}`);
+    }
+  }
+  const box = (t: string) => `<div style="font-family:var(--font-mono, ui-monospace, monospace);font-size:13.5px;line-height:1.7;white-space:pre;overflow-x:auto;color:var(--fg-1);">${t}</div>`;
+  const entHtml = ents.map(e => box(`[${escHtml(e.name)}]\n` + e.attrs.map(a => '  ' + escHtml(a)).join('\n'))).join('<div style="height:8px"></div>');
+  return `<div style="padding:4px 6px;">`
+    + (entHtml ? entHtml + '<div style="height:10px"></div>' : '')
+    + (rels.length ? box(rels.join('\n')) : '')
+    + `<div style="margin-top:10px;font-size:12px;line-height:1.6;color:var(--fg-3);">이 브라우저에서 다이어그램을 그리지 못해 표기를 글로 옮겼어요. `
+    + `<code>|</code> 수직선, <code>o</code> 동그라미, <code>{</code> <code>}</code> 까마귀발, ──── 실선, ┄┄┄┄ 점선이에요.</div>`
+    + `</div>`;
+}
+
 // ER 다이어그램 — mermaid erDiagram 으로 진짜 ERD SVG 렌더.
 // 데이터에 mermaid 코드 그대로 박힘. 'entity-diagram' 후속 (PR #100 spec).
 // 다크모드는 data-theme 감지 + themeVariables 분기. 같은 페이지 여러 ERD 도
@@ -334,12 +366,15 @@ function RefErd({ mermaid: code, caption, instanceTable }: any) {
         securityLevel: 'loose',
       });
       const renderId = `erd-${reactId}-${isDark ? 'd' : 'l'}`;
-      mermaid.render(renderId, code).then(({ svg }) => {
-        if (!cancelled && ref.current) ref.current.innerHTML = svg;
-      }).catch(err => {
-        if (!cancelled && ref.current) {
-          ref.current.innerHTML = `<pre style="color:var(--wrong-fg);font-size:12px;white-space:pre-wrap;">ERD 렌더 실패: ${String(err?.message || err).replace(/[<>&]/g, '')}</pre>`;
-        }
+      const show = ({ svg }: { svg: string }) => { if (!cancelled && ref.current) ref.current.innerHTML = svg; };
+      mermaid.render(renderId, code).then(show).catch(() =>
+        // 같은 id 의 이전 렌더 잔여물 등 일시적인 실패일 수 있으니 새 id 로 한 번 더
+        new Promise(r => setTimeout(r, 250)).then(() => mermaid.render(`${renderId}-r${Date.now() % 100000}`, code)).then(show)
+      ).catch(err => {
+        const msg = String(err?.message || err).slice(0, 120);
+        console.warn('[RefErd] render failed', msg);
+        trackEvent('erd_render_error', { message: msg, ua: navigator.userAgent.slice(0, 100) });
+        if (!cancelled && ref.current) ref.current.innerHTML = erdFallbackHtml(code);
       });
     }).catch(err => {
       console.warn('[RefErd] mermaid load failed', err);
