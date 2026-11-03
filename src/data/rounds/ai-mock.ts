@@ -8354,7 +8354,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "1과목",
     "number": 316,
-    "title": "다음 중 아래 TAB1 을보고 각 SQL 실행결과를 가장 올바르게 설명한 것을 고르시오.",
+    "title": "다음 중 아래 TAB1 을보고 각 SQL 실행결과를 가장 올바르게 설명한 것을 고르시오. (단, SQL Server 기준)",
     "options": [
       "SELECT COUNT(COL2) FROM TAB1 WHERE COL1 IN ('b','c'); \n-> 실행 결과는 1 이다.",
       "SELECT COUNT(COL1) FROM TAB1 WHERE COL2 = NULL; \n-> 실행 결과는 1 이다.",
@@ -12589,7 +12589,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "ALTER table Mytest alter add column JOB"
     ],
     "correctIndex": 1,
-    "explanation": "기존 테이블에 필요한 칼럼을 추가하는 명령어는 add이다.",
+    "explanation": "칼럼 추가는 ALTER TABLE 테이블명 ADD 칼럼명 [데이터타입] 형식이다(②). ① ADD CONSTRAINT 는 제약조건을 추가하는 문법이고, ③ ATLER 는 오타인 데다 MODIFY 는 칼럼 변경용이며, ④ ALTER ... ALTER ADD COLUMN 같은 문법은 없다.",
     "chapter": "DDL",
     "_source": "sqld-1140",
     "_origId": "sqld-0274",
@@ -15133,7 +15133,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "(1,NULL)과(2,2)"
     ],
     "correctIndex": 2,
-    "explanation": "DELETE FROM A 이후 A 테이블은 모두 삭제된다. C 테이블은 Cascade 옵션에 의해서 A의 첫번째 행을 참조하는 두 건 모두 삭제된다. 그리고 B 테이블이 삭제됨에 따라 B 테이블의 B칼럼을 참조하는 C 테이블의 B 칼럼값은 SET NULL 옵션에 의해서 NULL 값으로 변경된다.",
+    "explanation": "DELETE FROM A 를 하면 A 의 두 행이 모두 지워진다. B 의 C 칼럼은 A(C) 를 ON DELETE CASCADE 로 참조하므로, A 의 1번 행을 참조하던 B 의 두 행(3, 4)도 함께 삭제된다. C 의 B 칼럼은 B(B) 를 ON DELETE SET NULL 로 참조하므로, 참조하던 B 행(3, 4)이 사라지면 행은 남고 B 값만 NULL 로 바뀐다. 따라서 C 에는 (1, NULL), (2, NULL) 이 남는다(③).",
     "chapter": "DML",
     "_source": "sqld-1140",
     "_origId": "sqld-0347",
@@ -27318,7 +27318,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "고객과 주문 간의 관계는 다대다 관계이다."
     ],
     "correctIndex": 3,
-    "explanation": "① 고객과 상품 엔터티는 기본 엔터티이다. → O\n'기본 엔터티'는 다른 엔터티에 의존하지 않고 독립적으로 존재할 수 있는 엔터티입니다. 고객과 상품은 독립적으로 존재 가능하므로 기본 엔터티입니다.\n\n\n② 주문은 사건(이벤트) 엔터티이다. → O\n'사건 엔터티'는 특정한 활동이나 사건을 나타냅니다. 예: 주문, 예약, 거래 등. 주문은 시간에 따라 발생하는 사건이므로 사건 엔터티가 맞습니다.\n\n\n③ 주문상품은 교차 엔터티로 두 개의 외래 키를 기본 키로 가진다. → O\n주문상품은 주문과 상품 사이의 다대다 관계를 해소하기 위한 교차 테이블이며, 두 외래 키(주문번호, 상품번호)를 합쳐 복합 기본 키로 사용합니다.\n\n\n④ 고객과 주문 간의 관계는 다대다 관계이다. → ❌\n한 명의 고객은 여러 개의 주문을 할 수 있지만, 하나의 주문은 하나의 고객에게만 속합니다. 즉, 1:N (고객:주문) 관계입니다.\n → 다대다 관계가 아님.\r",
+    "explanation": "④ 한 고객은 여러 번 주문할 수 있지만 주문 하나는 한 고객의 것이므로 고객:주문은 1:N 관계다. 다대다라는 설명이 옳지 않다. ① 고객·상품은 다른 엔터티 없이 스스로 존재하는 기본 엔터티, ② 주문은 업무 중에 발생하는 사건 엔터티, ③ 주문상품은 주문과 상품의 다대다 관계를 풀기 위한 교차(관계) 엔터티로 주문번호·상품번호 두 외래키를 합쳐 기본키로 쓴다.",
     "chapter": "엔터티",
     "_source": "sqld-1140",
     "_origId": "sqld-0825",
