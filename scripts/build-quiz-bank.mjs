@@ -262,7 +262,10 @@ const SAME_QUESTION = {
 const refKey = q => (q.references || []).map(r =>
   r.type === 'table' ? JSON.stringify(r.rows) : r.type === 'sql' ? r.code : r.type === 'text' ? r.content
   : r.type === 'erd' ? r.mermaid : (r.src || '')).join('#');
-const dupKey = q => (q.title.replace(FILLER_PREFIX, '') + '|' + [...q.options].sort().join('|') + '|' + refKey(q))
+// 보기는 하나씩 공백·쉼표·마침표를 지우고 소문자로 바꾼 뒤 정렬한다 — 정렬 후에 지우면 'NULL * NULL' 과 'NULL*NULL' 의
+// 정렬 위치가 달라 같은 문제가 다른 키가 된다 (M140·M444, 2026-11-03).
+const normOpt = o => String(o).replace(/[\s,.]+/g, '').toLowerCase();
+const dupKey = q => (q.title.replace(FILLER_PREFIX, '') + '|' + q.options.map(normOpt).sort().join('|') + '|' + refKey(q))
   .replace(/[\s,.]+/g, '').toLowerCase();
 // 범위 밖 제외 — 목록의 문항과 같은 문제(dupKey 가 같은 사본)도 함께 뺀다.
 const outKeys = new Set(combinedMock.filter(q => OUT_OF_SCOPE.has(q._id)).map(dupKey));

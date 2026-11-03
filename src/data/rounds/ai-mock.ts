@@ -1,5 +1,5 @@
 // Auto-generated from scripts/authored/ai-mock.json
-// AI 생성 모의고사 풀 (기출 변형) · 1168문항
+// AI 생성 모의고사 풀 (기출 변형) · 1167문항
 // ⚠ 직접 편집 금지. ai-mock.json 수정 후 'node scripts/build-quiz-bank.mjs' 재실행.
 import type { QuizQuestion } from '../quizBank';
 
@@ -12306,55 +12306,6 @@ export const AI_MOCK: QuizQuestion[] = [
           [
             "19",
             "파인애플"
-          ]
-        ]
-      }
-    ]
-  },
-  {
-    "id": 11243,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 444,
-    "title": "다음의 예에서 결괏값이 다른 하나는?",
-    "options": [
-      "SELECT count(고객) FROM SQLD_13 WHERE 거래내역 IS NULL;",
-      "SELECT NULL*NULL FROM SQLD_13;",
-      "SELECT NULL*3 FROM SQLD_13;",
-      "SELECT NULL*2 FROM SQLD_13;"
-    ],
-    "correctIndex": 0,
-    "explanation": "②③④ 번은 모두 SELECT NULL FROM SQLD_13; 과 같은 SQL문으로 모두 NULL을 반환하는데 ①번은 거래내역이 NULL인 고객의 수를 구하는 SQL문으로 결괏값 2를 반환한다.",
-    "chapter": "함수",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0250",
-    "_category": "NULL",
-    "_correctRate": 10,
-    "references": [
-      {
-        "type": "table",
-        "caption": "[SQLD_13]",
-        "headers": [
-          "고객",
-          "거래내역"
-        ],
-        "rows": [
-          [
-            "철수",
-            "100"
-          ],
-          [
-            "민정",
-            ""
-          ],
-          [
-            "아름",
-            "300"
-          ],
-          [
-            "예진",
-            ""
           ]
         ]
       }
