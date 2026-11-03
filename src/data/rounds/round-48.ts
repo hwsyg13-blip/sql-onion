@@ -977,8 +977,40 @@ export const ROUND_48: QuizQuestion[] = [
       "SELECT * FROM T WHERE ROWNUM = 1 OR ROWNUM = 2;"
     ],
     "correctIndex": 0,
-    "explanation": "Oracle 의 `ROWNUM` 은 fetch 시점에 1 부터 순차 부여되는 의사 컬럼이라 `ROWNUM = 2` 같은 등호 조건(N≥2)은 절대 만족되지 않아 0 건이 된다. ②③④ 는 모두 ROWNUM 1, 2 를 포함하는 조건이라 2 건 반환. 결과가 다른 것은 ①.",
-    "_source": "authored"
+    "explanation": "Oracle 의 `ROWNUM` 은 fetch 시점에 1 부터 순차 부여되는 의사 컬럼이라 `ROWNUM = 2` 같은 등호 조건(N≥2)은 절대 만족되지 않아 0 건이 된다. ②③④ 는 모두 ROWNUM 1, 2 를 포함하는 조건이라 위 T 테이블에서 2 건을 반환한다(어떤 2 건인지는 정렬이 없어 보장되지 않음). 결과가 다른 것은 ①.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "caption": "T 테이블",
+        "headers": [
+          "ID",
+          "NAME"
+        ],
+        "rows": [
+          [
+            "1",
+            "A"
+          ],
+          [
+            "2",
+            "B"
+          ],
+          [
+            "3",
+            "C"
+          ],
+          [
+            "4",
+            "D"
+          ],
+          [
+            "5",
+            "E"
+          ]
+        ]
+      }
+    ]
   },
   {
     "id": 10627,

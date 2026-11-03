@@ -1,5 +1,5 @@
 // Auto-generated from scripts/authored/ai-mock.json
-// AI 생성 모의고사 풀 (기출 변형) · 1185문항
+// AI 생성 모의고사 풀 (기출 변형) · 1168문항
 // ⚠ 직접 편집 금지. ai-mock.json 수정 후 'node scripts/build-quiz-bank.mjs' 재실행.
 import type { QuizQuestion } from '../quizBank';
 
@@ -3052,36 +3052,6 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 79
   },
   {
-    "id": 10924,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 125,
-    "title": "다음 중 아래 테이블 정의와 인덱스 구조를 참고하여, 인덱스를 효율적으로 액세스할 수 없는 검색조건을 고르시오.",
-    "options": [
-      "where 주문번호 between 1 and 10",
-      "where 주문자명 like '%홍길동%'",
-      "where 주문일자 >= '20181201'",
-      "where 주문일자 = '20181201'"
-    ],
-    "correctIndex": 1,
-    "explanation": "B-Tree 인덱스는 값의 앞부분부터 정렬되어 있어 LIKE '%홍길동%' 처럼 앞에 와일드카드(%)가 오면 시작 위치를 정할 수 없어 인덱스 범위 검색을 할 수 없다. ① 주문번호는 주문_pk, ③④ 주문일자는 주문_ind12 의 선두 컬럼이라 범위·동등 조건 모두 인덱스를 효율적으로 쓸 수 있다. 정답은 ② 이다.",
-    "chapter": "WHERE",
-    "_source": "cbt-mock",
-    "_origId": "cbt-080",
-    "_cbtOrigNo": 80,
-    "references": [
-      {
-        "type": "sql",
-        "code": "create table 주문 (\n    주문번호    int            not null,\n    주문자명    varchar(40)    null,\n    주문금액    money          null,\n    주문일자    varchar(8)     null );"
-      },
-      {
-        "type": "sql",
-        "code": "create unique index 주문_pk on 주문 (주문번호);\ncreate index 주문_ind11 on 주문 (주문자명);\ncreate index 주문_ind12 on 주문 (주문일자, 주문금액);"
-      }
-    ]
-  },
-  {
     "id": 10926,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
@@ -6050,61 +6020,6 @@ export const AI_MOCK: QuizQuestion[] = [
     "_source": "cbt-mock",
     "_origId": "cbt-195",
     "_cbtOrigNo": 195
-  },
-  {
-    "id": 11036,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 237,
-    "title": "SQL 트레이스를 수집한 결과 Row Source Operation이 다음과 같았다. 가장 우선적으로 검토할 사항으로 올바른 것은? (단, 한 달간 주문 건수는 평균 50만 건이다)",
-    "options": [
-      "고객_IDX 인덱스 칼럼 순서를 조정한다.",
-      "주문_IDX 인덱스 칼럼 순서를 조정한다.",
-      "고객_IDX 인덱스에 칼럼을 추가한다.",
-      "주문_IDX 인덱스에 칼럼을 추가한다."
-    ],
-    "correctIndex": 2,
-    "explanation": "• 고객_IDX 인덱스를 읽고 나서 고객 테이블을 액세스하는 횟수는 많으나 대부분 필터링되고 있다. • 고객에 대한 조건절로 사용된 고객등급이나 연령 칼럼이 인덱스에 포함돼 있지 않아 생기는 현상이므로 고객_IDX에 칼럼을 추가해 주어야 한다.",
-    "chapter": "관계형 DB와 SELECT",
-    "_source": "cbt-mock",
-    "_origId": "cbt-196",
-    "_cbtOrigNo": 196,
-    "references": [
-      {
-        "type": "sql",
-        "code": "Select c.고객명, c.연령, c.전화번호, o.주문일자,\n       o.주문총금액, o.배송지주소\nFrom 고객 c, 주문 o\nWhere o.고객번호 = c.고객번호\nAnd c.고객등급 = 'A'\nAnd c.연령 between 51 and 60\nAnd o.주문일자 between '20101201' and '20101231'"
-      },
-      {
-        "type": "table",
-        "headers": [
-          "Rows",
-          "Row Source Operation"
-        ],
-        "rows": [
-          [
-            "10",
-            "NESTED LOOPS"
-          ],
-          [
-            "23",
-            "TABLE ACCESS BY INDEX ROWID 고객"
-          ],
-          [
-            "2978",
-            "INDEX RANGE SCAN 고객_IDX"
-          ],
-          [
-            "10",
-            "TABLE ACCESS BY INDEX ROWID 주문"
-          ],
-          [
-            "28",
-            "INDEX RANGE SCAN 주문_IDX"
-          ]
-        ]
-      }
-    ]
   },
   {
     "id": 11037,
@@ -9559,36 +9474,6 @@ export const AI_MOCK: QuizQuestion[] = [
         "type": "sql",
         "caption": "[SQL]",
         "code": "SELECT A.회원번호, A.회원명\nFROM   회원 A, 동의항목 B\nWHERE  A.회원번호 = B.회원번호\nGROUP BY A.회원번호, A.회원명\nHAVING COUNT(CASE WHEN B.동의여부 = 'N' THEN 0 ELSE NULL END) >= 1\nORDER BY A.회원번호;"
-      },
-      {
-        "type": "sql",
-        "caption": "[SQL]",
-        "code": "SELECT A.회원번호, A.회원명\nFROM   회원 A, 동의항목 B\nWHERE  A.회원번호 = B.회원번호\nGROUP BY A.회원번호, A.회원명\nHAVING COUNT(CASE WHEN B.동의여부 = 'N' THEN 0 ELSE NULL END) >= 1\nORDER BY A.회원번호;"
-      },
-      {
-        "type": "sql",
-        "caption": "[SQL]",
-        "code": "SELECT A.회원번호, A.회원명\nFROM   회원 A, 동의항목 B\nWHERE  A.회원번호 = B.회원번호\nGROUP BY A.회원번호, A.회원명\nHAVING COUNT(CASE WHEN B.동의여부 = 'N' THEN 0 ELSE NULL END) >= 1\nORDER BY A.회원번호;"
-      },
-      {
-        "type": "sql",
-        "caption": "[SQL]",
-        "code": "SELECT A.회원번호, A.회원명\nFROM   회원 A, 동의항목 B\nWHERE  A.회원번호 = B.회원번호\nGROUP BY A.회원번호, A.회원명\nHAVING COUNT(CASE WHEN B.동의여부 = 'N' THEN 0 ELSE NULL END) >= 1\nORDER BY A.회원번호;"
-      },
-      {
-        "type": "sql",
-        "caption": "[SQL]",
-        "code": "SELECT A.회원번호, A.회원명\nFROM   회원 A, 동의항목 B\nWHERE  A.회원번호 = B.회원번호\nGROUP BY A.회원번호, A.회원명\nHAVING COUNT(CASE WHEN B.동의여부 = 'N' THEN 0 ELSE NULL END) >= 1\nORDER BY A.회원번호;"
-      },
-      {
-        "type": "sql",
-        "caption": "[SQL]",
-        "code": "SELECT A.회원번호, A.회원명\nFROM   회원 A, 동의항목 B\nWHERE  A.회원번호 = B.회원번호\nGROUP BY A.회원번호, A.회원명\nHAVING COUNT(CASE WHEN B.동의여부 = 'N' THEN 0 ELSE NULL END) >= 1\nORDER BY A.회원번호;"
-      },
-      {
-        "type": "sql",
-        "caption": "[SQL]",
-        "code": "SELECT A.회원번호, A.회원명\nFROM   회원 A, 동의항목 B\nWHERE  A.회원번호 = B.회원번호\nGROUP BY A.회원번호, A.회원명\nHAVING COUNT(CASE WHEN B.동의여부 = 'N' THEN 0 ELSE NULL END) >= 1\nORDER BY A.회원번호;"
       }
     ]
   },
@@ -9707,7 +9592,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "title": "아래 부서 테이블의 담당자 변경을 위해 부서임시 테이블에 입력된 데이터를 활용하여 주기적으로 부서 테이블을 아래 결과와 같이 반영하기 위한 SQL으로 가장 적절한 것은?(단, 부서임시 테이블에서 변경일자를 가준으로 가장 최근에 변경된 데이터를 가준으로 부서 테이블에 반영되어야 한다)",
     "options": [
       "UPDATE 부서 A SET 담당자 = (SELECT B.담당자\nFROM 부서임시 B\nWHERE B.부서코드 = A.부서코드\nAND B.변경일자 = '2015.01.25.') ;",
-      "UPDATE 부서 A SET 담당자 = (SELECT B.담당자\nFROM 부서임시 B\nWHERE B.부서코드 = A.부서코드\nAND B.변경 일자 = (SELECT MAX(C.변경일자)\nFROM 부서임시 C WHERE\nC.부서코드 = B.부서코드))\nWHERE 부서코드 IN (SELECT 부서코드 FROM 부서임시);",
+      "UPDATE 부서 A SET 담당자 = (SELECT B.담당자\nFROM 부서임시 B\nWHERE B.부서코드 = A.부서코드\nAND B.변경일자 = (SELECT MAX(C.변경일자)\nFROM 부서임시 C WHERE\nC.부서코드 = B.부서코드))\nWHERE 부서코드 IN (SELECT 부서코드 FROM 부서임시);",
       "UPDATE 부서 A SET 담당자 = (SELECT C.부서코드\nFROM (SELECT 부서코드, MAX(변경일자) AS 변경일자\nFROM 부서임시\nGROUP BY 부서코드) B, 부서임시 C\nWHERE B.부서코드 = C.부서코드\nAND B.변경일자 = C.변경일자\nAND A.부서코드 = C.부서코드)\nWHERE EXISTS (SELECT 1 FROM 부서 X WHERE A.부서코드 =\nX.부서코드);",
       "UPDATE 부서 A SET 담당자 = (SELECT C.부서코드\nFROM (SELECT 부서코드, MAX(변경일자) AS 변경일자\nFROM 부서임시\nGROUP BY 부서코드) B, 부서임시 C\nWHERE B.부서코드 = C.부서코드\nAND B.변경일자 = C.변경일자\nAND A.부서코드 = C.부서코드)"
     ],
@@ -9921,8 +9806,8 @@ export const AI_MOCK: QuizQuestion[] = [
     "title": "아래의 데이터 모델에서 SQL을 이용하여 표(지역별 월별 이용량)와 같은 형식의 데이터를 추출하려고 할 때 올바른 SQL 문장은?",
     "options": [
       "SELECT (CASE GROUPING(B.지역ID) WHEN 1 THEN '지역전체'\nELSE MIN(B.지역명) END) AS 지역명\n,(CASE GROUPING(TO_CHAR(A.이용일시, 'YYYY.MM'))\nWHEN 1 THEN '월별합계'\nELSE TO_CHAR(A.이용일시, 'YYYY.MM') END) AS 이용월\n,SUM(A.이용량)  AS 이용량\nFROM 이용내역 A INNER JOIN 지역 B ON (A.지역ID = B.지역ID)\nGROUP BY GROUPING SETS(B.지역ID, TO_CHAR(A.이용일시, 'YYYY.MM'))",
-      "SELECT (CASE GROUPINGS(B.지역명) WHEN 1 THEN '지역전체'\nELSE B.지역명 END) AS 지역명\n,(CASE GROUPING(TO_CHAR(A.이용일시,  'YYYY.MM'))\nWHEN 1 THEN '월별합계'\nELSE TO_CHAR(A.이용일시, 'YYYY.MM') END) AS 이용월\n,SUM(A.이용량) AS 이용량\nFROM 이용내역 A INNER JOIN 지역 B ON (A.지역ID = B.지역ID)\nGROUP BY CUBE(B.지역명, TO_CHAR(A.이용일시, 'YYYY.MM'))",
-      "SELECT (CASE GROUPINGS(B.지역ID) WHEN 1 THEN '지역전체'\nELSE MIN(B.지역명) END) AS 지역명\n,(CASE GROUPING(TO_CHAR(A.이용일시, 'YYYY.MM'))\nWHEN 1 THEN '월별합계'\nELSE TO_CHAR(A.이용일시, 'YYYY.MM') END) AS 이용월\n,SUM(A.이용량) AS 이용량\nFROM 이용내역 A INNER JOIN 지역 B ON (A.지역ID = B.지역ID)\nGROUP BY ROLLUP(B.지역ID, TO_CHAR(A.이용일시, 'YYYY.MM'))",
+      "SELECT (CASE GROUPING(B.지역명) WHEN 1 THEN '지역전체'\nELSE B.지역명 END) AS 지역명\n,(CASE GROUPING(TO_CHAR(A.이용일시,  'YYYY.MM'))\nWHEN 1 THEN '월별합계'\nELSE TO_CHAR(A.이용일시, 'YYYY.MM') END) AS 이용월\n,SUM(A.이용량) AS 이용량\nFROM 이용내역 A INNER JOIN 지역 B ON (A.지역ID = B.지역ID)\nGROUP BY CUBE(B.지역명, TO_CHAR(A.이용일시, 'YYYY.MM'))",
+      "SELECT (CASE GROUPING(B.지역ID) WHEN 1 THEN '지역전체'\nELSE MIN(B.지역명) END) AS 지역명\n,(CASE GROUPING(TO_CHAR(A.이용일시, 'YYYY.MM'))\nWHEN 1 THEN '월별합계'\nELSE TO_CHAR(A.이용일시, 'YYYY.MM') END) AS 이용월\n,SUM(A.이용량) AS 이용량\nFROM 이용내역 A INNER JOIN 지역 B ON (A.지역ID = B.지역ID)\nGROUP BY ROLLUP(B.지역ID, TO_CHAR(A.이용일시, 'YYYY.MM'))",
       "SELECT (CASE GROUPING(B.지역명) WHEN 0 THEN '지역전체'\nELSE B.지역명 END) AS 지역명\n,(CASE GROUPING(TO_CHAR(A.이용일시, 'YYYY.MM'))\nWHEN 0 THEN '월별합계'\nELSE TO_CHAR(A.이용일시, 'YYYY.MM') END) AS 이용월\n,SUM(A.이용량) AS 이용량\nFROM 이용내역 A INNER JOIN 지역 B ON (A.지역ID = B.지역ID)\nGROUP BY ROLLUP(B.지역명, TO_CHAR(A.이용일시, 'YYYY.MM'))"
     ],
     "correctIndex": 2,
@@ -9938,372 +9823,6 @@ export const AI_MOCK: QuizQuestion[] = [
         "src": "/sqld-images/j125-erd.png",
         "alt": "지역-이용내역 ERD",
         "caption": "[데이터 모델]"
-      },
-      {
-        "type": "table",
-        "caption": "[표 : 지역별 월별 이용량]",
-        "headers": [
-          "지역명",
-          "이용월",
-          "이용량"
-        ],
-        "rows": [
-          [
-            "서울",
-            "2014.01",
-            "1,000"
-          ],
-          [
-            "서울",
-            "2014.02",
-            "1,000"
-          ],
-          [
-            "서울",
-            "월별합계",
-            "2,000"
-          ],
-          [
-            "경기",
-            "2014.01",
-            "1,000"
-          ],
-          [
-            "경기",
-            "2014.03",
-            "2,000"
-          ],
-          [
-            "경기",
-            "월별합계",
-            "3,000"
-          ],
-          [
-            "대전",
-            "2014.05",
-            "1,500"
-          ],
-          [
-            "대전",
-            "2014.06",
-            "1,000"
-          ],
-          [
-            "대전",
-            "월별합계",
-            "2,500"
-          ],
-          [
-            "지역전체",
-            "월별합계",
-            "7,500"
-          ]
-        ]
-      },
-      {
-        "type": "table",
-        "caption": "[표 : 지역별 월별 이용량]",
-        "headers": [
-          "지역명",
-          "이용월",
-          "이용량"
-        ],
-        "rows": [
-          [
-            "서울",
-            "2014.01",
-            "1,000"
-          ],
-          [
-            "서울",
-            "2014.02",
-            "1,000"
-          ],
-          [
-            "서울",
-            "월별합계",
-            "2,000"
-          ],
-          [
-            "경기",
-            "2014.01",
-            "1,000"
-          ],
-          [
-            "경기",
-            "2014.03",
-            "2,000"
-          ],
-          [
-            "경기",
-            "월별합계",
-            "3,000"
-          ],
-          [
-            "대전",
-            "2014.05",
-            "1,500"
-          ],
-          [
-            "대전",
-            "2014.06",
-            "1,000"
-          ],
-          [
-            "대전",
-            "월별합계",
-            "2,500"
-          ],
-          [
-            "지역전체",
-            "월별합계",
-            "7,500"
-          ]
-        ]
-      },
-      {
-        "type": "table",
-        "caption": "[표 : 지역별 월별 이용량]",
-        "headers": [
-          "지역명",
-          "이용월",
-          "이용량"
-        ],
-        "rows": [
-          [
-            "서울",
-            "2014.01",
-            "1,000"
-          ],
-          [
-            "서울",
-            "2014.02",
-            "1,000"
-          ],
-          [
-            "서울",
-            "월별합계",
-            "2,000"
-          ],
-          [
-            "경기",
-            "2014.01",
-            "1,000"
-          ],
-          [
-            "경기",
-            "2014.03",
-            "2,000"
-          ],
-          [
-            "경기",
-            "월별합계",
-            "3,000"
-          ],
-          [
-            "대전",
-            "2014.05",
-            "1,500"
-          ],
-          [
-            "대전",
-            "2014.06",
-            "1,000"
-          ],
-          [
-            "대전",
-            "월별합계",
-            "2,500"
-          ],
-          [
-            "지역전체",
-            "월별합계",
-            "7,500"
-          ]
-        ]
-      },
-      {
-        "type": "table",
-        "caption": "[표 : 지역별 월별 이용량]",
-        "headers": [
-          "지역명",
-          "이용월",
-          "이용량"
-        ],
-        "rows": [
-          [
-            "서울",
-            "2014.01",
-            "1,000"
-          ],
-          [
-            "서울",
-            "2014.02",
-            "1,000"
-          ],
-          [
-            "서울",
-            "월별합계",
-            "2,000"
-          ],
-          [
-            "경기",
-            "2014.01",
-            "1,000"
-          ],
-          [
-            "경기",
-            "2014.03",
-            "2,000"
-          ],
-          [
-            "경기",
-            "월별합계",
-            "3,000"
-          ],
-          [
-            "대전",
-            "2014.05",
-            "1,500"
-          ],
-          [
-            "대전",
-            "2014.06",
-            "1,000"
-          ],
-          [
-            "대전",
-            "월별합계",
-            "2,500"
-          ],
-          [
-            "지역전체",
-            "월별합계",
-            "7,500"
-          ]
-        ]
-      },
-      {
-        "type": "table",
-        "caption": "[표 : 지역별 월별 이용량]",
-        "headers": [
-          "지역명",
-          "이용월",
-          "이용량"
-        ],
-        "rows": [
-          [
-            "서울",
-            "2014.01",
-            "1,000"
-          ],
-          [
-            "서울",
-            "2014.02",
-            "1,000"
-          ],
-          [
-            "서울",
-            "월별합계",
-            "2,000"
-          ],
-          [
-            "경기",
-            "2014.01",
-            "1,000"
-          ],
-          [
-            "경기",
-            "2014.03",
-            "2,000"
-          ],
-          [
-            "경기",
-            "월별합계",
-            "3,000"
-          ],
-          [
-            "대전",
-            "2014.05",
-            "1,500"
-          ],
-          [
-            "대전",
-            "2014.06",
-            "1,000"
-          ],
-          [
-            "대전",
-            "월별합계",
-            "2,500"
-          ],
-          [
-            "지역전체",
-            "월별합계",
-            "7,500"
-          ]
-        ]
-      },
-      {
-        "type": "table",
-        "caption": "[표 : 지역별 월별 이용량]",
-        "headers": [
-          "지역명",
-          "이용월",
-          "이용량"
-        ],
-        "rows": [
-          [
-            "서울",
-            "2014.01",
-            "1,000"
-          ],
-          [
-            "서울",
-            "2014.02",
-            "1,000"
-          ],
-          [
-            "서울",
-            "월별합계",
-            "2,000"
-          ],
-          [
-            "경기",
-            "2014.01",
-            "1,000"
-          ],
-          [
-            "경기",
-            "2014.03",
-            "2,000"
-          ],
-          [
-            "경기",
-            "월별합계",
-            "3,000"
-          ],
-          [
-            "대전",
-            "2014.05",
-            "1,500"
-          ],
-          [
-            "대전",
-            "2014.06",
-            "1,000"
-          ],
-          [
-            "대전",
-            "월별합계",
-            "2,500"
-          ],
-          [
-            "지역전체",
-            "월별합계",
-            "7,500"
-          ]
-        ]
       },
       {
         "type": "table",
@@ -11125,27 +10644,6 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11176,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "1과목",
-    "number": 377,
-    "title": "분산 데이터베이스의 특징 중 저장 장소 명시가 불필요하다는 특성은 무엇인가?",
-    "options": [
-      "분할 투명성",
-      "병행 투명성",
-      "위치 투명성",
-      "지역 사상 투명성"
-    ],
-    "correctIndex": 2,
-    "explanation": "-위치 투명성이란 사용하려는 데이터의 저장 장소 명시가 불필요하며 위치 정보가 시스템 카탈로그에 유지되어야 함을 말한다.\n-지역 사상 투명성이란 지역 DBMS와 물리적 DB 사이의 Mapping을 보장한다. 각 지역 시스템 이름과 무관한 이름 사용이 가능하다.",
-    "chapter": "데이터 모델 개념",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0167",
-    "_category": "데이터베이스 개념",
-    "_correctRate": 10
-  },
-  {
     "id": 11178,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
@@ -11569,7 +11067,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "table",
-        "caption": "[SQLD_66] Correlated Subquery Data",
+        "caption": "SQLD_66 테이블",
         "headers": [
           "COL1",
           "COL2"
@@ -11700,9 +11198,9 @@ export const AI_MOCK: QuizQuestion[] = [
     "title": "다음 주어진 테이블에서 SELECT문을 수행하였을 때 결괏값으로 다른 것을 고르시오.",
     "options": [
       "select nvl(A.COL1,-1) as C4 from A;",
-      "select decode(A.COL1, null, -1, A, COL1) as C3 from A;",
+      "select decode(A.COL1, null, -1, A.COL1) as C3 from A;",
       "select case when A.COL1 is null then -1 else 0 end as C2 from A;",
-      "select case A,COL1 when null then -1 else 0 end as C1 from A;"
+      "select case A.COL1 when null then -1 else 0 end as C1 from A;"
     ],
     "correctIndex": 3,
     "explanation": "나머지 보기는 모두 COL1 값이 NULL일 때 -1을 반환하는데 ④번 보기만 COL1 값이 NULL일 때 0을 반환한다. null은 어떤 값과 비교하면 알수없음이므로 is null을 사용해야 한다.",
@@ -13013,54 +12511,6 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11253,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 454,
-    "title": "다음의 SQL문에 대한 설명 중 옳지 않은 것은?",
-    "options": [
-      "기능상으로는 문제가 없지만 성능 문제가 있다.",
-      "EMP 테이블을 FULL SCAN한 것은 인덱스가 없어서이다.",
-      "LIKE 조건을 사용하지 말고 \">\"를 사용해야 한다.",
-      "내부적으로 형변환이 발생했다."
-    ],
-    "correctIndex": 1,
-    "explanation": "EMPNO는 기본키이므로 자동으로 인덱스가 생성된다. FULL SCAN이 된 것은 LIKE 조건에서 숫자 칼럼과 문자값 간에 형 변환이 발생해서이다.",
-    "chapter": "DML",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0263",
-    "_category": "DML",
-    "_correctRate": 10,
-    "references": [
-      {
-        "type": "sql",
-        "code": "SELECT * FROM EMP\nWHERE EMPNO LIKE '100%';"
-      }
-    ]
-  },
-  {
-    "id": 11254,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 455,
-    "title": "다음 설명 중 올바르지 않은 것은?",
-    "options": [
-      "Oracle에서 인덱스 구성 칼럼이 모두 null인 레코드는 인덱스에 저장하지 않는다.",
-      "SQL Server는 인덱스 구성 칼럼이 모두 null인 레코드도 인덱스에 저장한다.",
-      "Oracle에서 인덱스 구성 칼럼 중 하나라도 null이 아닌 레코드는 인덱스에 저장한다.",
-      "SQL Server는 null 값을 인덱스 맨 뒤에 저장한다."
-    ],
-    "correctIndex": 3,
-    "explanation": "SQL Server는 null값을 인덱스 맨 앞에 저장하고, Oracle은 맨 뒤에 저장한다.",
-    "chapter": "함수",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0264",
-    "_category": "NULL",
-    "_correctRate": 10
-  },
-  {
     "id": 11255,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
@@ -13476,12 +12926,12 @@ export const AI_MOCK: QuizQuestion[] = [
     "title": "다음 중 Mytest 테이블에서 부서코드 400부터 상위 부서를 찾는 SQL문은?",
     "options": [
       "Select 상위부서코드\nfrom Mytest\nwhere 부서코드 = 400\nstart with 상위부서코드 = 0\nconnect by prior 부서코드 = 상위부서코드;",
-      "Select 상위부서코드\nfrom Mytest\nwhere 부서코드 = 400\nstart with 부서코드 = 50\nconnect by prior 부서코드 = 상위부서코드;",
+      "Select 상위부서코드\nfrom Mytest\nwhere 부서코드 = 400\nstart with 부서코드 = 150\nconnect by prior 부서코드 = 상위부서코드;",
       "Select 상위부서코드\nfrom Mytest\nwhere 부서코드 = 400\nstart with 상위부서코드 = 0\nconnect by prior 상위부서코드 = 부서코드;",
       "Select 상위부서코드\nfrom Mytest\nwhere 부서코드 = 400\nstart with 부서코드 = 50\nconnect by prior 상위부서코드 = 부서코드;"
     ],
     "correctIndex": 0,
-    "explanation": "상위부서코드 0부터 시작하여 계층적으로 조회하는데 이때 where 조건으로 부서코드 = 400에 대한 상위부서코드 값을 찾을 수 있다. 계층 쿼리는 START WITH - CONNECT BY 로 전개가 완료된 후에 WHERE 등의 필터링이 실행된다.",
+    "explanation": "상위부서코드 0부터 시작하여 계층적으로 조회하는데 이때 where 조건으로 부서코드 = 400에 대한 상위부서코드 값을 찾을 수 있다. 계층 쿼리는 START WITH - CONNECT BY 로 전개가 완료된 후에 WHERE 등의 필터링이 실행된다. ② 는 부서코드 150 부터 아래로 전개해 400 이 결과에 없고, ③·④ 는 역방향 전개라 시작 행(부서코드 50)만 남아 부서코드 = 400 인 행이 없다.",
     "chapter": "계층형 질의",
     "_source": "sqld-1140",
     "_origId": "sqld-0280",
@@ -14121,7 +13571,7 @@ export const AI_MOCK: QuizQuestion[] = [
           [
             "103",
             "20221101",
-            "20000"
+            "10000"
           ]
         ]
       }
@@ -29599,7 +29049,7 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "table",
-        "caption": "JOIN Basic Tables — Table A",
+        "caption": "A 테이블",
         "headers": [
           "ID",
           "NAME"
@@ -29621,7 +29071,7 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "table",
-        "caption": "JOIN Basic Tables — Table B",
+        "caption": "B 테이블",
         "headers": [
           "ID",
           "VAL"
@@ -29669,7 +29119,7 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "table",
-        "caption": "JOIN Basic Tables — Table A",
+        "caption": "A 테이블",
         "headers": [
           "ID",
           "NAME"
@@ -29691,7 +29141,7 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "table",
-        "caption": "JOIN Basic Tables — Table B",
+        "caption": "B 테이블",
         "headers": [
           "ID",
           "VAL"
@@ -29739,7 +29189,7 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "table",
-        "caption": "JOIN Basic Tables — Table A",
+        "caption": "A 테이블",
         "headers": [
           "ID",
           "NAME"
@@ -29761,7 +29211,7 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "table",
-        "caption": "JOIN Basic Tables — Table B",
+        "caption": "B 테이블",
         "headers": [
           "ID",
           "VAL"
@@ -29809,7 +29259,7 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "table",
-        "caption": "JOIN Basic Tables — Table A",
+        "caption": "A 테이블",
         "headers": [
           "ID",
           "NAME"
@@ -29831,7 +29281,7 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "table",
-        "caption": "JOIN Basic Tables — Table B",
+        "caption": "B 테이블",
         "headers": [
           "ID",
           "VAL"
@@ -30135,9 +29585,9 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "table",
-        "caption": "EMP Group Data",
+        "caption": "EMP 테이블",
         "headers": [
-          "EMP ID",
+          "EMP_ID",
           "DEPT",
           "SALARY"
         ],
@@ -30222,9 +29672,9 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "table",
-        "caption": "EMP Group Data",
+        "caption": "EMP 테이블",
         "headers": [
-          "EMP ID",
+          "EMP_ID",
           "DEPT",
           "SALARY"
         ],
@@ -30309,9 +29759,9 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "table",
-        "caption": "EMP Group Data",
+        "caption": "EMP 테이블",
         "headers": [
-          "EMP ID",
+          "EMP_ID",
           "DEPT",
           "SALARY"
         ],
@@ -30392,9 +29842,9 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "table",
-        "caption": "EMP Group Data",
+        "caption": "EMP 테이블",
         "headers": [
-          "EMP ID",
+          "EMP_ID",
           "DEPT",
           "SALARY"
         ],
@@ -30475,9 +29925,9 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "table",
-        "caption": "EMP Group Data",
+        "caption": "EMP 테이블",
         "headers": [
-          "EMP ID",
+          "EMP_ID",
           "DEPT",
           "SALARY"
         ],
@@ -30562,9 +30012,9 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "table",
-        "caption": "NULL Aggregate Data",
+        "caption": "EMP_NULL 테이블",
         "headers": [
-          "EMP ID",
+          "EMP_ID",
           "SALARY",
           "BONUS"
         ],
@@ -30615,9 +30065,9 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "table",
-        "caption": "NULL Aggregate Data",
+        "caption": "EMP 테이블",
         "headers": [
-          "EMP ID",
+          "EMP_ID",
           "SALARY",
           "BONUS"
         ],
@@ -30668,9 +30118,9 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "table",
-        "caption": "NULL Aggregate Data",
+        "caption": "EMP 테이블",
         "headers": [
-          "EMP ID",
+          "EMP_ID",
           "SALARY",
           "BONUS"
         ],
@@ -30698,26 +30148,6 @@ export const AI_MOCK: QuizQuestion[] = [
         ]
       }
     ]
-  },
-  {
-    "id": 11730,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "1과목",
-    "number": 931,
-    "title": "COUNT(*)와 COUNT(col)의 차이 설명으로 옳은 것은?",
-    "options": [
-      "COUNT(*)는 전체 행 수를, COUNT(col)은 NULL이 아닌 값 수를 반환한다.",
-      "두 함수는 항상 같은 값을 반환한다.",
-      "COUNT(col)은 NULL을 0으로 바꿔 센다.",
-      "COUNT(*)는 NULL이 하나라도 있으면 오류가 난다."
-    ],
-    "correctIndex": 0,
-    "explanation": "COUNT(*)는 전체 행 수를 세고 COUNT(col)은 NULL이 아닌 값만 센다. 따라서 NULL이 있으면 두 함수의 결과가 달라질 수 있다.",
-    "chapter": "함수",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0890",
-    "_category": "NULL"
   },
   {
     "id": 11731,
@@ -30931,9 +30361,9 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "table",
-        "caption": "Correlated Subquery Data",
+        "caption": "EMP 테이블",
         "headers": [
-          "EMP NAME",
+          "EMP_NAME",
           "DEPT",
           "SALARY"
         ],
@@ -30988,9 +30418,9 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "table",
-        "caption": "Correlated Subquery Data",
+        "caption": "EMP 테이블",
         "headers": [
-          "EMP NAME",
+          "EMP_NAME",
           "DEPT",
           "SALARY"
         ],
@@ -31045,9 +30475,9 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "table",
-        "caption": "Correlated Subquery Data",
+        "caption": "EMP 테이블",
         "headers": [
-          "EMP NAME",
+          "EMP_NAME",
           "DEPT",
           "SALARY"
         ],
@@ -31102,9 +30532,9 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "table",
-        "caption": "Correlated Subquery Data",
+        "caption": "EMP 테이블",
         "headers": [
-          "EMP NAME",
+          "EMP_NAME",
           "DEPT",
           "SALARY"
         ],
@@ -31225,11 +30655,11 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "table",
-        "caption": "Hierarchy EMP Data",
+        "caption": "EMP_TREE 테이블",
         "headers": [
-          "EMP ID",
-          "EMP NAME",
-          "MGR ID"
+          "EMP_ID",
+          "EMP_NAME",
+          "MGR_ID"
         ],
         "rows": [
           [
@@ -31297,11 +30727,11 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "table",
-        "caption": "Hierarchy EMP Data",
+        "caption": "EMP_TREE 테이블",
         "headers": [
-          "EMP ID",
-          "EMP NAME",
-          "MGR ID"
+          "EMP_ID",
+          "EMP_NAME",
+          "MGR_ID"
         ],
         "rows": [
           [
@@ -31369,11 +30799,11 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "table",
-        "caption": "Hierarchy EMP Data",
+        "caption": "EMP_TREE 테이블",
         "headers": [
-          "EMP ID",
-          "EMP NAME",
-          "MGR ID"
+          "EMP_ID",
+          "EMP_NAME",
+          "MGR_ID"
         ],
         "rows": [
           [
@@ -31441,11 +30871,11 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "table",
-        "caption": "Hierarchy EMP Data",
+        "caption": "EMP_TREE 테이블",
         "headers": [
-          "EMP ID",
-          "EMP NAME",
-          "MGR ID"
+          "EMP_ID",
+          "EMP_NAME",
+          "MGR_ID"
         ],
         "rows": [
           [
@@ -31513,10 +30943,10 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "table",
-        "caption": "PIVOT Source Data",
+        "caption": "SALES_Q 테이블",
         "headers": [
           "DEPT",
-          "QUARTER CD",
+          "QUARTER_CD",
           "AMOUNT"
         ],
         "rows": [
@@ -31580,10 +31010,10 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "table",
-        "caption": "PIVOT Source Data",
+        "caption": "SALES_Q 테이블",
         "headers": [
           "DEPT",
-          "QUARTER CD",
+          "QUARTER_CD",
           "AMOUNT"
         ],
         "rows": [
@@ -31647,7 +31077,7 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "table",
-        "caption": "SELECT Result Data",
+        "caption": "SALES 테이블",
         "headers": [
           "REGION",
           "AMOUNT",
@@ -31704,7 +31134,7 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "table",
-        "caption": "SELECT Result Data",
+        "caption": "SALES 테이블",
         "headers": [
           "REGION",
           "AMOUNT",
@@ -31801,7 +31231,7 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "table",
-        "caption": "Window Function Data",
+        "caption": "SALES_RANK 테이블",
         "headers": [
           "REGION",
           "SELLER",
@@ -31859,7 +31289,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "table",
-        "caption": "Window Function Data",
+        "caption": "판매 데이터",
         "headers": [
           "REGION",
           "SELLER",
@@ -31917,7 +31347,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "table",
-        "caption": "Window Function Data",
+        "caption": "판매 데이터",
         "headers": [
           "REGION",
           "SELLER",
@@ -31975,7 +31405,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "table",
-        "caption": "Window Function Data",
+        "caption": "판매 데이터",
         "headers": [
           "REGION",
           "SELLER",
@@ -32037,7 +31467,7 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "table",
-        "caption": "ROLLUP Data",
+        "caption": "ORDER_AMT 테이블",
         "headers": [
           "REGION",
           "PRODUCT",
@@ -32090,7 +31520,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "table",
-        "caption": "ROLLUP Data",
+        "caption": "판매 데이터",
         "headers": [
           "REGION",
           "PRODUCT",
@@ -32143,7 +31573,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "table",
-        "caption": "ROLLUP Data",
+        "caption": "판매 데이터",
         "headers": [
           "REGION",
           "PRODUCT",
@@ -32504,13 +31934,13 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "table",
-        "caption": "Normalization Source Table",
+        "caption": "주문 테이블",
         "headers": [
-          "ORDER NO",
-          "PRODUCT NO",
-          "PRODUCT NAME",
-          "CUSTOMER NAME",
-          "CUSTOMER GRADE"
+          "ORDER_NO",
+          "PRODUCT_NO",
+          "PRODUCT_NAME",
+          "CUSTOMER_NAME",
+          "CUSTOMER_GRADE"
         ],
         "rows": [
           [
@@ -32560,13 +31990,13 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "table",
-        "caption": "Normalization Source Table",
+        "caption": "주문 테이블",
         "headers": [
-          "ORDER NO",
-          "PRODUCT NO",
-          "PRODUCT NAME",
-          "CUSTOMER NAME",
-          "CUSTOMER GRADE"
+          "ORDER_NO",
+          "PRODUCT_NO",
+          "PRODUCT_NAME",
+          "CUSTOMER_NAME",
+          "CUSTOMER_GRADE"
         ],
         "rows": [
           [
@@ -32616,13 +32046,13 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "table",
-        "caption": "Normalization Source Table",
+        "caption": "주문 테이블",
         "headers": [
-          "ORDER NO",
-          "PRODUCT NO",
-          "PRODUCT NAME",
-          "CUSTOMER NAME",
-          "CUSTOMER GRADE"
+          "ORDER_NO",
+          "PRODUCT_NO",
+          "PRODUCT_NAME",
+          "CUSTOMER_NAME",
+          "CUSTOMER_GRADE"
         ],
         "rows": [
           [
@@ -32672,13 +32102,13 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "table",
-        "caption": "Normalization Source Table",
+        "caption": "주문 테이블",
         "headers": [
-          "ORDER NO",
-          "PRODUCT NO",
-          "PRODUCT NAME",
-          "CUSTOMER NAME",
-          "CUSTOMER GRADE"
+          "ORDER_NO",
+          "PRODUCT_NO",
+          "PRODUCT_NAME",
+          "CUSTOMER_NAME",
+          "CUSTOMER_GRADE"
         ],
         "rows": [
           [
@@ -32777,26 +32207,6 @@ export const AI_MOCK: QuizQuestion[] = [
         "code": "CREATE VIEW v_emp AS SELECT emp_id, emp_name, dept FROM emp WHERE dept = 'SALES';"
       }
     ]
-  },
-  {
-    "id": 11777,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 978,
-    "title": "뷰의 장점으로 적절한 것은?",
-    "options": [
-      "기본 테이블 없이도 자동으로 데이터가 생성된다.",
-      "트랜잭션을 자동 커밋한다.",
-      "항상 성능이 원본보다 빠르다.",
-      "복잡한 조회를 단순화하고 필요한 컬럼만 노출할 수 있다."
-    ],
-    "correctIndex": 3,
-    "explanation": "뷰는 복잡한 SELECT를 감추고 필요한 컬럼만 노출할 수 있어 조회 재사용성과 보안 측면에서 유리하다.",
-    "chapter": "View",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0954",
-    "_category": "View"
   },
   {
     "id": 11778,
@@ -32964,7 +32374,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "모든 사용자 권한을 회수한다."
     ],
     "correctIndex": 0,
-    "explanation": "GRANT는 객체 권한 부여에 사용된다.",
+    "explanation": "GRANT 권한 ON 객체 TO 사용자 는 사용자에게 객체 권한을 주는 DCL 이다. GRANT SELECT, INSERT ON emp TO user1 은 user1 에게 emp 테이블의 조회(SELECT)와 입력(INSERT) 권한을 함께 준다. 권한 회수는 REVOKE, 구조 변경은 ALTER 이다.",
     "chapter": "DCL·TCL",
     "_source": "sqld-1140",
     "_origId": "sqld-0962",
@@ -32984,7 +32394,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "user1 계정이 잠긴다."
     ],
     "correctIndex": 2,
-    "explanation": "부여된 권한 일부만 선택적으로 회수할 수 있다.",
+    "explanation": "REVOKE 는 지정한 권한만 회수한다. REVOKE INSERT ON emp FROM user1 은 user1 의 INSERT 권한만 회수하고, 이미 받은 SELECT 권한은 그대로 남는다. 테이블이 삭제되거나 계정이 잠기지 않는다.",
     "chapter": "DCL·TCL",
     "_source": "sqld-1140",
     "_origId": "sqld-0963",
@@ -33004,7 +32414,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "트랜잭션이 자동 커밋되지 않는다."
     ],
     "correctIndex": 0,
-    "explanation": "전파 가능한 객체 권한이다.",
+    "explanation": "WITH GRANT OPTION 으로 객체 권한을 받은 사용자는 그 권한을 다른 사용자에게 다시 부여할 수 있다. 권한은 언제든 REVOKE 로 회수할 수 있으며(오라클은 이 경우 다시 부여된 권한도 함께 회수), DDL 이나 트랜잭션과는 관계없다.",
     "chapter": "DCL·TCL",
     "_source": "sqld-1140",
     "_origId": "sqld-0964",
@@ -33545,10 +32955,10 @@ export const AI_MOCK: QuizQuestion[] = [
       "모든 속성이 후보키 전체에 완전 함수 종속된다.",
       "반복 그룹이 전혀 없다.",
       "이행 종속만 존재한다.",
-      "복합키의 일부인 주문번호와 상품번호에만 종속되는 속성이 함께 존재한다."
+      "복합키(주문번호+상품번호)의 일부에만 종속되는 속성(고객명·고객등급은 주문번호에, 상품명은 상품번호에)이 함께 존재한다."
     ],
     "correctIndex": 3,
-    "explanation": "부분 함수 종속이 있으면 2NF를 위반한다.",
+    "explanation": "기본키가 주문번호+상품번호인데 고객명·고객등급은 주문번호만으로, 상품명은 상품번호만으로 결정된다. 이렇게 복합키의 일부에만 종속되는 부분 함수 종속이 있으면 2NF 위반이다. 주문·상품 정보를 별도 테이블로 분리하면 해소된다.",
     "chapter": "정규화",
     "_source": "sqld-1140",
     "_origId": "sqld-0991",
@@ -33560,13 +32970,13 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "table",
-        "caption": "Normalization Source Table",
+        "caption": "주문 테이블",
         "headers": [
-          "ORDER NO",
-          "PRODUCT NO",
-          "PRODUCT NAME",
-          "CUSTOMER NAME",
-          "CUSTOMER GRADE"
+          "ORDER_NO",
+          "PRODUCT_NO",
+          "PRODUCT_NAME",
+          "CUSTOMER_NAME",
+          "CUSTOMER_GRADE"
         ],
         "rows": [
           [
@@ -33620,13 +33030,13 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "table",
-        "caption": "Normalization Source Table",
+        "caption": "주문 테이블",
         "headers": [
-          "ORDER NO",
-          "PRODUCT NO",
-          "PRODUCT NAME",
-          "CUSTOMER NAME",
-          "CUSTOMER GRADE"
+          "ORDER_NO",
+          "PRODUCT_NO",
+          "PRODUCT_NAME",
+          "CUSTOMER_NAME",
+          "CUSTOMER_GRADE"
         ],
         "rows": [
           [
@@ -33680,13 +33090,13 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "table",
-        "caption": "Normalization Source Table",
+        "caption": "주문 테이블",
         "headers": [
-          "ORDER NO",
-          "PRODUCT NO",
-          "PRODUCT NAME",
-          "CUSTOMER NAME",
-          "CUSTOMER GRADE"
+          "ORDER_NO",
+          "PRODUCT_NO",
+          "PRODUCT_NAME",
+          "CUSTOMER_NAME",
+          "CUSTOMER_GRADE"
         ],
         "rows": [
           [
@@ -33740,13 +33150,13 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "table",
-        "caption": "Normalization Source Table",
+        "caption": "주문 테이블",
         "headers": [
-          "ORDER NO",
-          "PRODUCT NO",
-          "PRODUCT NAME",
-          "CUSTOMER NAME",
-          "CUSTOMER GRADE"
+          "ORDER_NO",
+          "PRODUCT_NO",
+          "PRODUCT_NAME",
+          "CUSTOMER_NAME",
+          "CUSTOMER_GRADE"
         ],
         "rows": [
           [
@@ -33815,7 +33225,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "DROP TABLE temp_emp;"
     ],
     "correctIndex": 3,
-    "explanation": "DROP은 객체 정의와 데이터를 함께 제거한다.",
+    "explanation": "DROP TABLE 은 테이블 객체 자체(구조와 데이터)를 제거하는 DDL 이다. ALTER TABLE ... ADD 는 컬럼을 추가해 구조를 바꾸는 DDL, COMMIT 은 TCL, GRANT 는 DCL 이다.",
     "chapter": "DDL",
     "_source": "sqld-1140",
     "_origId": "sqld-0997",
@@ -34126,7 +33536,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "NVL은 문자형에서만 사용한다."
     ],
     "correctIndex": 1,
-    "explanation": "NVL은 NULL을 지정한 값으로 대체한다.",
+    "explanation": "NVL(comm, 0) 은 comm 이 NULL 이면 0 으로 바꾸므로, comm 이 NULL 인 사원도 결과는 0 + sal = sal 이 된다. NVL 없이 comm + sal 로 쓰면 NULL 과의 산술 연산이라 결과가 NULL 이 된다. NVL 은 숫자·문자·날짜형 모두에 쓸 수 있다.",
     "chapter": "함수",
     "_source": "sqld-1140",
     "_origId": "sqld-1012",
@@ -34414,7 +33824,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "846.0"
     ],
     "correctIndex": 1,
-    "explanation": "TRUNC는 지정 자릿수 아래를 버린다.",
+    "explanation": "TRUNC(845.56, 1) 은 소수 첫째 자리까지 남기고 그 아래를 버리므로 845.5 이다(반올림하지 않음). 반올림하는 ROUND(845.56, 1) 은 845.6 이다.",
     "chapter": "함수",
     "_source": "sqld-1140",
     "_origId": "sqld-1029",
@@ -34440,7 +33850,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "6"
     ],
     "correctIndex": 1,
-    "explanation": "양쪽 공백 제거 후 SQLD의 길이는 4다.",
+    "explanation": "TRIM 은 양쪽 공백을 제거하므로 ' SQLD ' 가 'SQLD' 가 되고, LENGTH('SQLD') 는 4 이다. 공백을 제거하지 않은 LENGTH(' SQLD ') 는 6 이다.",
     "chapter": "함수",
     "_source": "sqld-1140",
     "_origId": "sqld-1030",
@@ -34474,9 +33884,9 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "table",
-        "caption": "NULL Aggregate Data",
+        "caption": "EMP 테이블",
         "headers": [
-          "EMP ID",
+          "EMP_ID",
           "SALARY",
           "BONUS"
         ],
@@ -34531,9 +33941,9 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "table",
-        "caption": "NULL Aggregate Data",
+        "caption": "T 테이블",
         "headers": [
-          "EMP ID",
+          "EMP_ID",
           "SALARY",
           "BONUS"
         ],
@@ -34576,7 +33986,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "NULL"
     ],
     "correctIndex": 1,
-    "explanation": "MAX는 NULL을 제외하고 가장 큰 값을 찾는다.",
+    "explanation": "MAX 는 NULL 을 제외한 값 중 가장 큰 값을 반환한다. bonus 의 NULL 이 아닌 값은 100, 200 이므로 MAX(bonus) 는 200 이다. NULL 이 있다고 결과가 NULL 이 되지 않는다.",
     "chapter": "그룹 함수",
     "_source": "sqld-1140",
     "_origId": "sqld-1033",
@@ -34584,9 +33994,9 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "table",
-        "caption": "NULL Aggregate Data",
+        "caption": "EMP 테이블",
         "headers": [
-          "EMP ID",
+          "EMP_ID",
           "SALARY",
           "BONUS"
         ],
@@ -34641,9 +34051,9 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "table",
-        "caption": "NULL Aggregate Data",
+        "caption": "T 테이블",
         "headers": [
-          "EMP ID",
+          "EMP_ID",
           "SALARY",
           "BONUS"
         ],
@@ -34836,7 +34246,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "NULL"
     ],
     "correctIndex": 1,
-    "explanation": "루트 행은 LEVEL 1부터 시작한다.",
+    "explanation": "계층형 질의에서 START WITH 로 지정한 루트 행의 LEVEL 은 1 이다. mgr_id 가 NULL 인 CEO 가 루트이므로 LEVEL 1, 그 아래 SALES_MGR·DEV_MGR 은 2, 그 아래 사원들은 3 이다. LEVEL 은 0 부터 시작하지 않는다.",
     "chapter": "계층형 질의",
     "_source": "sqld-1140",
     "_origId": "sqld-1041",
@@ -34848,11 +34258,11 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "table",
-        "caption": "Hierarchy EMP Data",
+        "caption": "EMP_TREE 테이블",
         "headers": [
-          "EMP ID",
-          "EMP NAME",
-          "MGR ID"
+          "EMP_ID",
+          "EMP_NAME",
+          "MGR_ID"
         ],
         "rows": [
           [
@@ -34920,11 +34330,11 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "table",
-        "caption": "Hierarchy EMP Data",
+        "caption": "EMP_TREE 테이블",
         "headers": [
-          "EMP ID",
-          "EMP NAME",
-          "MGR ID"
+          "EMP_ID",
+          "EMP_NAME",
+          "MGR_ID"
         ],
         "rows": [
           [
@@ -34992,11 +34402,11 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "table",
-        "caption": "Hierarchy EMP Data",
+        "caption": "EMP_TREE 테이블",
         "headers": [
-          "EMP ID",
-          "EMP NAME",
-          "MGR ID"
+          "EMP_ID",
+          "EMP_NAME",
+          "MGR_ID"
         ],
         "rows": [
           [
@@ -35052,7 +34462,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "뷰는 트랜잭션을 자동 종료한다."
     ],
     "correctIndex": 2,
-    "explanation": "뷰는 SELECT 결과를 논리적으로 캡슐화한 객체다.",
+    "explanation": "뷰는 기본 테이블을 조회하는 SELECT 문을 저장한 가상 테이블이다. 자체 데이터를 물리적으로 저장하지 않고(머티리얼라이즈드 뷰 제외), 인덱스를 대신하거나 트랜잭션을 끝내는 기능도 없다.",
     "chapter": "View",
     "_source": "sqld-1140",
     "_origId": "sqld-1046",
@@ -35111,7 +34521,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 1061,
-    "title": "뷰를 사용하는 주요 목적로 적절한 것은?",
+    "title": "뷰를 사용하는 주요 목적으로 적절한 것은?",
     "options": [
       "반드시 모든 테이블을 하나로 합치는 것",
       "인덱스 유지 비용을 없애는 것",
@@ -35119,7 +34529,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "복잡한 SQL을 단순화하고 필요한 컬럼만 노출하는 것"
     ],
     "correctIndex": 3,
-    "explanation": "보안성과 재사용성을 위해 뷰를 활용할 수 있다.",
+    "explanation": "뷰는 복잡한 조인·조건을 정의해 두고 간단히 조회하게 해 주며(편리성), 필요한 컬럼만 보여 주어 민감한 정보를 숨길 수 있다(보안성). 테이블을 합치거나 인덱스 비용을 없애거나 COMMIT 하는 기능은 없다.",
     "chapter": "View",
     "_source": "sqld-1140",
     "_origId": "sqld-1050",
@@ -35139,7 +34549,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "ROW_NUMBER와 완전히 동일하다."
     ],
     "correctIndex": 2,
-    "explanation": "동점 이후 다음 순위 처리 방식이 두 함수의 핵심 차이다.",
+    "explanation": "동점이 있으면 RANK 는 같은 순위를 준 뒤 그 수만큼 다음 순위를 건너뛰고(1, 2, 2, 4), DENSE_RANK 는 건너뛰지 않는다(1, 2, 2, 3). ROW_NUMBER 는 동점이어도 1, 2, 3, 4 처럼 고유한 번호를 준다. 세 함수 모두 OVER 안에 ORDER BY 를 쓴다.",
     "chapter": "윈도우 함수",
     "_source": "sqld-1140",
     "_origId": "sqld-1052",
@@ -35171,7 +34581,7 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "table",
-        "caption": "Window Function Data",
+        "caption": "SALES_RANK 테이블",
         "headers": [
           "REGION",
           "SELLER",
@@ -35367,7 +34777,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "ABCD12"
     ],
     "correctIndex": 2,
-    "explanation": "영문 대문자 3자리 뒤에 숫자 2자리가 와야 한다.",
+    "explanation": "^[A-Z]{3}[0-9]{2}$ 는 처음부터 끝까지 '대문자 3개 + 숫자 2개' 인 문자열만 맞는다. ABC12 가 해당한다. AB12 는 대문자가 2개, abc12 는 소문자, ABCD12 는 대문자가 4개라 맞지 않는다(^ 와 $ 로 전체를 고정했기 때문).",
     "chapter": "정규표현식",
     "_source": "sqld-1140",
     "_origId": "sqld-1066",
@@ -35432,32 +34842,6 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11881,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 1082,
-    "title": "복합 인덱스 (col1, col2)가 있을 때 일반적으로 인덱스 활용도가 높은 조건으로 옳은 것은?",
-    "options": [
-      "WHERE TO_CHAR(col1) = '10'만 사용",
-      "WHERE col2 + 1 = 5",
-      "WHERE col2 = :v2",
-      "WHERE col1 = :v1 AND col2 BETWEEN :v2 AND :v3"
-    ],
-    "correctIndex": 3,
-    "explanation": "복합 인덱스는 선두 컬럼 조건이 있을 때 활용 가능성이 높다.",
-    "chapter": "관계형 DB와 SELECT",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1077",
-    "_category": "인덱스",
-    "references": [
-      {
-        "type": "text",
-        "content": "복합 인덱스 선두 컬럼 조건의 유무"
-      }
-    ]
-  },
-  {
     "id": 11883,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
@@ -35483,10 +34867,10 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "table",
-        "caption": "PIVOT Source Data",
+        "caption": "SALES_Q 테이블",
         "headers": [
           "DEPT",
-          "QUARTER CD",
+          "QUARTER_CD",
           "AMOUNT"
         ],
         "rows": [
@@ -35538,7 +34922,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "10-1234"
     ],
     "correctIndex": 1,
-    "explanation": "숫자 3자리-숫자 4자리 형식만 허용한다.",
+    "explanation": "^[0-9]{3}-[0-9]{4}$ 는 '숫자 3개, 하이픈, 숫자 4개' 로 전체가 이루어진 문자열만 맞는다. 010-1234 가 해당한다. 0101234 는 하이픈이 없고, 010-12345 는 뒤 숫자가 5개, 10-1234 는 앞 숫자가 2개라 맞지 않는다.",
     "chapter": "정규표현식",
     "_source": "sqld-1140",
     "_origId": "sqld-1086",
@@ -35576,10 +34960,10 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "table",
-        "caption": "PIVOT Source Data",
+        "caption": "SALES_Q 테이블",
         "headers": [
           "DEPT",
-          "QUARTER CD",
+          "QUARTER_CD",
           "AMOUNT"
         ],
         "rows": [
@@ -35644,26 +35028,6 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11894,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 1095,
-    "title": "선택도가 매우 낮은 컬럼에 단독 인덱스를 두었을 때 기대 효과로 가장 적절한 것은?",
-    "options": [
-      "조회 패턴에 따라 테이블 전체 스캔이 더 유리할 수 있다.",
-      "반드시 UNIQUE가 된다.",
-      "조인만 금지된다.",
-      "항상 압도적으로 빠르다."
-    ],
-    "correctIndex": 0,
-    "explanation": "값 분포가 치우친 컬럼은 인덱스 이점이 작을 수 있다.",
-    "chapter": "관계형 DB와 SELECT",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1093",
-    "_category": "인덱스"
-  },
-  {
     "id": 11901,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
@@ -35697,7 +35061,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "SQLD"
     ],
     "correctIndex": 3,
-    "explanation": "SQLD 또는 DBD 두 패턴 중 하나만 허용한다.",
+    "explanation": "^(SQL|DB)D$ 는 'SQL 또는 DB' 다음에 D 하나로 끝나는 문자열, 즉 SQLD 와 DBD 만 맞는다. SQLDD 는 D 가 두 개, SQD 는 SQL 이 아니고, DBSQL 은 D 로 끝나지 않는다.",
     "chapter": "정규표현식",
     "_source": "sqld-1140",
     "_origId": "sqld-1110",
@@ -35749,7 +35113,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "고객과 주문의 관계는 N:M 관계이다."
     ],
     "correctIndex": 0,
-    "explanation": "한 고객이 여러 주문을 가질 수 있으므로 1:N이다.",
+    "explanation": "고객 한 명은 여러 주문을 할 수 있고 주문 하나는 한 고객에게 속하므로 고객 : 주문 은 1:N 이다. 주문 하나에 주문상품이 여러 개이므로 주문 : 주문상품 도 1:N 이고, ERD 에서는 각 엔터티의 PK 를 표시한다.",
     "chapter": "엔터티",
     "_source": "sqld-1140",
     "_origId": "sqld-1115",
@@ -35789,7 +35153,7 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "table",
-        "caption": "JOIN Basic Tables — Table A",
+        "caption": "A 테이블",
         "headers": [
           "ID",
           "NAME"
@@ -35811,7 +35175,7 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "table",
-        "caption": "JOIN Basic Tables — Table B",
+        "caption": "B 테이블",
         "headers": [
           "ID",
           "VAL"
@@ -35830,32 +35194,6 @@ export const AI_MOCK: QuizQuestion[] = [
             "Z"
           ]
         ]
-      }
-    ]
-  },
-  {
-    "id": 11920,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 1121,
-    "title": "복합 인덱스 (col1, col2)가 있을 때 일반적으로 인덱스 활용도가 높은 조건으로 옳은 것은?",
-    "options": [
-      "WHERE col2 + 1 = 5",
-      "WHERE col2 = :v2",
-      "WHERE col1 = :v1 AND col2 BETWEEN :v2 AND :v3",
-      "WHERE TO_CHAR(col1) = '10'만 사용"
-    ],
-    "correctIndex": 2,
-    "explanation": "복합 인덱스는 선두 컬럼 조건이 있을 때 활용 가능성이 높다.",
-    "chapter": "관계형 DB와 SELECT",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1129",
-    "_category": "인덱스",
-    "references": [
-      {
-        "type": "text",
-        "content": "함수 적용 컬럼이 인덱스 활용에 미치는 영향을 검토한다."
       }
     ]
   },
@@ -35885,9 +35223,9 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "table",
-        "caption": "NULL Aggregate Data",
+        "caption": "EMP_NULL 테이블",
         "headers": [
-          "EMP ID",
+          "EMP_ID",
           "SALARY",
           "BONUS"
         ],
@@ -35956,63 +35294,11 @@ export const AI_MOCK: QuizQuestion[] = [
       "COUNT(*)는 전체 행 수를, COUNT(col)은 NULL이 아닌 값 수를 반환한다."
     ],
     "correctIndex": 3,
-    "explanation": "SQLD에서 빈출되는 NULL 처리 핵심 개념이다.",
+    "explanation": "COUNT(*) 는 NULL 여부와 상관없이 전체 행 수를, COUNT(col) 은 col 이 NULL 이 아닌 행 수만 센다. 그래서 col 에 NULL 이 있으면 두 값이 다르다. NULL 이 있어도 오류는 나지 않고, NULL 을 0 으로 바꿔 세지도 않는다.",
     "chapter": "함수",
     "_source": "sqld-1140",
     "_origId": "sqld-1140",
-    "_category": "NULL",
-    "references": [
-      {
-        "type": "text",
-        "content": "산술 연산식에 NULL이 포함될 때 결과를 해석한다."
-      }
-    ]
-  },
-  {
-    "id": 11941,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 1142,
-    "title": "인덱스 컬럼에 함수가 적용되면 일반적으로 주의할 점으로 옳은 것은?",
-    "options": [
-      "일반 인덱스를 그대로 활용하지 못할 수 있다.",
-      "PK 제약이 자동 삭제된다.",
-      "무결성이 깨진다.",
-      "인덱스가 더 잘 사용된다."
-    ],
-    "correctIndex": 0,
-    "explanation": "컬럼 값에 함수를 적용하면 함수 기반 인덱스가 아니면 인덱스 사용성이 낮아질 수 있다.",
-    "chapter": "관계형 DB와 SELECT",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1153",
-    "_category": "인덱스"
-  },
-  {
-    "id": 11947,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 1148,
-    "title": "DROP TABLE의 효과로 옳은 것은?",
-    "options": [
-      "권한만 삭제한다.",
-      "컬럼만 삭제한다.",
-      "테이블 구조와 데이터를 함께 제거한다.",
-      "행만 삭제하고 구조는 유지한다."
-    ],
-    "correctIndex": 2,
-    "explanation": "DROP은 객체 자체를 삭제한다.",
-    "chapter": "DDL",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1160",
-    "_category": "DDL",
-    "references": [
-      {
-        "type": "text",
-        "content": "테이블 구조에 컬럼과 제약조건을 추가하려 한다."
-      }
-    ]
+    "_category": "NULL"
   },
   {
     "id": 11948,
@@ -36040,7 +35326,7 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "table",
-        "caption": "SELECT Result Data",
+        "caption": "SALES 테이블",
         "headers": [
           "REGION",
           "AMOUNT",
@@ -36097,7 +35383,7 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "table",
-        "caption": "JOIN Basic Tables — Table A",
+        "caption": "A 테이블",
         "headers": [
           "ID",
           "NAME"
@@ -36119,7 +35405,7 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "table",
-        "caption": "JOIN Basic Tables — Table B",
+        "caption": "B 테이블",
         "headers": [
           "ID",
           "VAL"
@@ -36163,7 +35449,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "table",
-        "caption": "Window Function Data",
+        "caption": "판매 데이터",
         "headers": [
           "REGION",
           "SELLER",
@@ -36221,13 +35507,13 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "table",
-        "caption": "Normalization Source Table",
+        "caption": "주문 테이블",
         "headers": [
-          "ORDER NO",
-          "PRODUCT NO",
-          "PRODUCT NAME",
-          "CUSTOMER NAME",
-          "CUSTOMER GRADE"
+          "ORDER_NO",
+          "PRODUCT_NO",
+          "PRODUCT_NAME",
+          "CUSTOMER_NAME",
+          "CUSTOMER_GRADE"
         ],
         "rows": [
           [
@@ -36295,7 +35581,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "부모의 식별자가 자식의 기본키 구성 요소가 된다."
     ],
     "correctIndex": 3,
-    "explanation": "식별 관계는 자식 식별에 부모 키가 직접 관여한다.",
+    "explanation": "식별 관계는 부모 엔터티의 식별자(PK)가 자식 엔터티의 PK 구성 요소로 들어가는 관계다(예: 주문번호가 주문상품 PK 의 일부). 부모 식별자를 자식의 일반 속성(FK)으로만 가지면 비식별 관계이다. 식별 관계도 외래키가 있고, 1:1·1:N 관계에서 쓰인다.",
     "chapter": "엔터티",
     "_source": "sqld-1140",
     "_origId": "sqld-1186",
@@ -36323,37 +35609,11 @@ export const AI_MOCK: QuizQuestion[] = [
       "복잡한 조회를 단순화하고 필요한 컬럼만 노출할 수 있다."
     ],
     "correctIndex": 3,
-    "explanation": "뷰는 보안과 재사용성에 도움이 된다.",
+    "explanation": "뷰는 복잡한 조인·조건을 정의해 두고 간단히 조회하게 해 주며(편리성), 필요한 컬럼만 보여 주어 민감한 정보를 숨길 수 있다(보안성). 뷰는 기본 테이블을 그대로 읽으므로 항상 더 빠르지 않고, 데이터를 스스로 만들거나 COMMIT 하지 않는다.",
     "chapter": "View",
     "_source": "sqld-1140",
     "_origId": "sqld-1190",
-    "_category": "View",
-    "references": [
-      {
-        "type": "text",
-        "content": "단순 뷰와 집계 뷰의 갱신 제약을 비교한다."
-      }
-    ]
-  },
-  {
-    "id": 11980,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "1과목",
-    "number": 1181,
-    "title": "트랜잭션 처리량이 매우 큰 테이블에 대해 설계 단계에서 우선 검토할 사항으로 옳은 것은?",
-    "options": [
-      "모든 제약조건 제거",
-      "엔터티명을 길게 변경하는 작업",
-      "모든 컬럼을 PK에 포함하는 방법",
-      "접근 패턴에 맞는 인덱스와 파티션 전략"
-    ],
-    "correctIndex": 3,
-    "explanation": "대량 처리 테이블은 조회/변경 패턴과 데이터 분포를 고려한 물리 설계가 중요하다.",
-    "chapter": "데이터베이스 설계",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1197",
-    "_category": "데이터베이스 설계"
+    "_category": "View"
   },
   {
     "id": 11981,
@@ -36369,7 +35629,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "ORDERS의 최대 CUSTOMER_ID보다 큰 값을 찾는 것과 같다."
     ],
     "correctIndex": 3,
-    "explanation": "ALL 비교는 서브쿼리 결과 전체를 만족해야 한다.",
+    "explanation": "> ALL 은 서브쿼리의 모든 값보다 커야 참이다. ORDERS 의 CUSTOMER_ID 는 101, 101, 103 이므로 103 보다 큰 고객(104)만 조회된다 — 최대값보다 큰 값을 찾는 것과 같다. 하나보다만 크면 되는 것(최소값보다 큰 값)은 > ANY 이다.",
     "chapter": "서브쿼리",
     "_source": "sqld-1140",
     "_origId": "sqld-1198",
@@ -36430,26 +35690,6 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11983,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 1184,
-    "title": "인덱스가 많은 테이블에서 INSERT/UPDATE/DELETE가 느려질 수 있는 이유로 옳은 것은?",
-    "options": [
-      "인덱스가 있으면 COMMIT이 불가능하다.",
-      "인덱스는 무조건 메모리에서만 관리된다.",
-      "인덱스는 변경 작업과 무관하다.",
-      "데이터 변경 시 관련 인덱스도 함께 유지해야 하기 때문이다."
-    ],
-    "correctIndex": 3,
-    "explanation": "인덱스는 조회에는 도움을 줄 수 있지만 DML 시 유지 비용이 발생한다.",
-    "chapter": "관계형 DB와 SELECT",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1201",
-    "_category": "인덱스"
-  },
-  {
     "id": 11986,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
@@ -36501,11 +35741,11 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "table",
-        "caption": "Hierarchy EMP Data",
+        "caption": "EMP_TREE 테이블",
         "headers": [
-          "EMP ID",
-          "EMP NAME",
-          "MGR ID"
+          "EMP_ID",
+          "EMP_NAME",
+          "MGR_ID"
         ],
         "rows": [
           [
@@ -36587,7 +35827,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "2"
     ],
     "correctIndex": 0,
-    "explanation": "왼쪽 테이블 A의 3행이 모두 유지된다.",
+    "explanation": "LEFT OUTER JOIN 은 왼쪽 테이블 A 의 행을 모두 남긴다. A 의 ID 1, 2, 3 중 B 와 짝이 맞는 것은 2(SILVER) 뿐이고, 1·3 은 GRADE 가 NULL 로 나온다. B 에만 있는 4 는 나오지 않으므로 결과는 3행이다.",
     "chapter": "조인",
     "_source": "sqld-1140",
     "_origId": "sqld-1235",
@@ -36711,7 +35951,7 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "table",
-        "caption": "Window Function Data",
+        "caption": "SALES_RANK 테이블",
         "headers": [
           "REGION",
           "SELLER",
@@ -36744,32 +35984,6 @@ export const AI_MOCK: QuizQuestion[] = [
             "200"
           ]
         ]
-      }
-    ]
-  },
-  {
-    "id": 12025,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 1226,
-    "title": "복합 인덱스 (col1, col2)가 있을 때 일반적으로 인덱스 활용도가 높은 조건으로 옳은 것은?",
-    "options": [
-      "WHERE col1 = :v1 AND col2 BETWEEN :v2 AND :v3",
-      "WHERE TO_CHAR(col1) = '10'만 사용",
-      "WHERE col2 + 1 = 5",
-      "WHERE col2 = :v2"
-    ],
-    "correctIndex": 0,
-    "explanation": "복합 인덱스는 선두 컬럼 조건이 있을 때 활용 가능성이 높다.",
-    "chapter": "관계형 DB와 SELECT",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1249",
-    "_category": "인덱스",
-    "references": [
-      {
-        "type": "text",
-        "content": "조회 비율과 인덱스 유지 비용을 함께 판단한다."
       }
     ]
   },
@@ -36813,7 +36027,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "전체 총계"
     ],
     "correctIndex": 3,
-    "explanation": "ROLLUP의 최종 단계는 전체 총계다.",
+    "explanation": "ROLLUP(region, product) 은 (region, product) 별 소계, region 별 소계, 전체 총계 순으로 집계 행을 만든다. 마지막 행은 두 컬럼이 모두 NULL 인 전체 총계(100+200+150+50 = 500)이다. 평균이 아니라 SELECT 의 집계 함수(SUM 등) 결과이다.",
     "chapter": "그룹 함수",
     "_source": "sqld-1140",
     "_origId": "sqld-1264",
@@ -36821,7 +36035,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "table",
-        "caption": "ROLLUP Data",
+        "caption": "판매 데이터",
         "headers": [
           "REGION",
           "PRODUCT",
@@ -36898,9 +36112,9 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "table",
-        "caption": "Correlated Subquery Data",
+        "caption": "EMP 테이블",
         "headers": [
-          "EMP NAME",
+          "EMP_NAME",
           "DEPT",
           "SALARY"
         ],
@@ -36926,32 +36140,6 @@ export const AI_MOCK: QuizQuestion[] = [
             "3500"
           ]
         ]
-      }
-    ]
-  },
-  {
-    "id": 12044,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 1245,
-    "title": "다음 SQL에서 동점자가 있을 때 RANK와 DENSE_RANK의 차이로 옳은 것은?",
-    "options": [
-      "ROW_NUMBER와 완전히 동일하다.",
-      "둘 다 항상 동일하다.",
-      "RANK는 순위가 건너뛰고 DENSE_RANK는 건너뛰지 않는다.",
-      "DENSE_RANK만 정렬 절을 사용한다."
-    ],
-    "correctIndex": 2,
-    "explanation": "동점 이후 다음 순위 처리 방식이 두 함수의 핵심 차이다.",
-    "chapter": "윈도우 함수",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1272",
-    "_category": "윈도우 함수",
-    "references": [
-      {
-        "type": "text",
-        "content": "파티션별 순위와 누적 합계를 동시에 해석한다."
       }
     ]
   },
@@ -37033,11 +36221,11 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "table",
-        "caption": "Hierarchy EMP Data",
+        "caption": "EMP_TREE 테이블",
         "headers": [
-          "EMP ID",
-          "EMP NAME",
-          "MGR ID"
+          "EMP_ID",
+          "EMP_NAME",
+          "MGR_ID"
         ],
         "rows": [
           [
@@ -37093,44 +36281,11 @@ export const AI_MOCK: QuizQuestion[] = [
       "외부 쿼리의 각 행을 기준으로 서브쿼리가 반복 평가될 수 있다."
     ],
     "correctIndex": 3,
-    "explanation": "상관 서브쿼리는 행 단위 문맥을 가진다.",
+    "explanation": "상관(연관) 서브쿼리는 메인쿼리의 컬럼을 참조하므로 메인쿼리의 각 행마다 서브쿼리가 다시 평가될 수 있다. WHERE·SELECT 절 등 어디에나 쓸 수 있고, 같은 결과를 JOIN 으로 바꿔 쓸 수도 있다.",
     "chapter": "서브쿼리",
     "_source": "sqld-1140",
     "_origId": "sqld-1294",
-    "_category": "서브쿼리",
-    "references": [
-      {
-        "type": "table",
-        "caption": "Correlated Subquery Data",
-        "headers": [
-          "EMP NAME",
-          "DEPT",
-          "SALARY"
-        ],
-        "rows": [
-          [
-            "A",
-            "SALES",
-            "3000"
-          ],
-          [
-            "B",
-            "SALES",
-            "2000"
-          ],
-          [
-            "C",
-            "DEV",
-            "5000"
-          ],
-          [
-            "D",
-            "DEV",
-            "3500"
-          ]
-        ]
-      }
-    ]
+    "_category": "서브쿼리"
   },
   {
     "id": 12067,
@@ -37158,13 +36313,13 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "table",
-        "caption": "Normalization Source Table",
+        "caption": "주문 테이블",
         "headers": [
-          "ORDER NO",
-          "PRODUCT NO",
-          "PRODUCT NAME",
-          "CUSTOMER NAME",
-          "CUSTOMER GRADE"
+          "ORDER_NO",
+          "PRODUCT_NO",
+          "PRODUCT_NAME",
+          "CUSTOMER_NAME",
+          "CUSTOMER_GRADE"
         ],
         "rows": [
           [
@@ -37337,32 +36492,6 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12097,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 1298,
-    "title": "뷰를 사용하는 주요 목적로 적절한 것은?",
-    "options": [
-      "복잡한 SQL을 단순화하고 필요한 컬럼만 노출하는 것",
-      "모든 트랜잭션을 자동 COMMIT 하는 것",
-      "인덱스 유지 비용을 없애는 것",
-      "반드시 모든 테이블을 하나로 합치는 것"
-    ],
-    "correctIndex": 0,
-    "explanation": "보안성과 재사용성을 위해 뷰를 활용할 수 있다.",
-    "chapter": "View",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1334",
-    "_category": "View",
-    "references": [
-      {
-        "type": "text",
-        "content": "단순 뷰와 집계 뷰의 갱신 제약을 비교한다."
-      }
-    ]
-  },
-  {
     "id": 12098,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
@@ -37376,17 +36505,11 @@ export const AI_MOCK: QuizQuestion[] = [
       "ORDER SIBLINGS BY"
     ],
     "correctIndex": 0,
-    "explanation": "START WITH는 계층 탐색의 시작 행을 지정한다.",
+    "explanation": "계층형 질의에서 START WITH 는 전개를 시작할 루트 행을 지정한다(예: START WITH mgr IS NULL). CONNECT BY 는 부모-자식 연결 조건, ORDER SIBLINGS BY 는 같은 부모를 둔 형제끼리의 정렬이다.",
     "chapter": "계층형 질의",
     "_source": "sqld-1140",
     "_origId": "sqld-1335",
-    "_category": "계층형 질의",
-    "references": [
-      {
-        "type": "text",
-        "content": "루트와 리프 노드, 경로 값을 함께 해석한다."
-      }
-    ]
+    "_category": "계층형 질의"
   },
   {
     "id": 12104,
@@ -37410,9 +36533,9 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "table",
-        "caption": "Correlated Subquery Data",
+        "caption": "EMP 테이블",
         "headers": [
-          "EMP NAME",
+          "EMP_NAME",
           "DEPT",
           "SALARY"
         ],

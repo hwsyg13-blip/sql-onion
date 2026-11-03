@@ -88,7 +88,7 @@ for (const f of fs.readdirSync(DIR).filter(f => /\.json$/.test(f)).sort()) {
     if (tables.some(t => /요약|가정|행 개수|행 수\)/.test(t.caption || '') || (t.rows || []).some(r => r.some(c => /^…$/.test(String(c)))))) { report.skipped++; return; }
     const id = `${f.replace('.json', '')} ${q.subject || ''} ${q.number ?? '#' + qi}`;
     const raw = sqls[0].code || '';
-    if (SKIP.test(raw) || /\(\s*\?\s*\)|\[\s*\?\s*\]|_{3,}|[ㄱ-ㅎ]\s*[).]|[ⓐ-ⓩ①-④]/.test(raw) || !/^\s*(SELECT|WITH|\()/i.test(raw.replace(/--[^\n]*\n/g, ''))) { report.skipped++; return; }
+    if (SKIP.test(raw) || /\(\s*\?\s*\)|\(\s{3,}\)|\[\s*\?\s*\]|_{3,}|[ㄱ-ㅎ]\s*[).]|[ⓐ-ⓩ①-④]/.test(raw) || !/^\s*(SELECT|WITH|\()/i.test(raw.replace(/--[^\n]*\n/g, ''))) { report.skipped++; return; }
     const db = new DatabaseSync(':memory:');
     try {
       for (const [i, t] of tables.entries()) {
