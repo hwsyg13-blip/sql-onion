@@ -1,5 +1,5 @@
 // Auto-generated from scripts/authored/ai-mock.json
-// AI 생성 모의고사 풀 (기출 변형) · 1164문항
+// AI 생성 모의고사 풀 (기출 변형) · 1157문항
 // ⚠ 직접 편집 금지. ai-mock.json 수정 후 'node scripts/build-quiz-bank.mjs' 재실행.
 import type { QuizQuestion } from '../quizBank';
 
@@ -33500,26 +33500,6 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "NULL"
   },
   {
-    "id": 11833,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 1034,
-    "title": "엔터티 무결성(Entity Integrity)에 대한 설명으로 옳은 것은?",
-    "options": [
-      "기본키는 NULL일 수 없다.",
-      "외래키는 반드시 NULL이어야 한다.",
-      "CHECK 제약은 엔터티 무결성만 보장한다.",
-      "엔터티 무결성은 권한 제어를 의미한다."
-    ],
-    "correctIndex": 0,
-    "explanation": "엔터티 무결성은 기본키 값이 반드시 있고(NOT NULL) 중복되지 않아야 한다는 규칙이다(①). 외래키 값이 부모 테이블에 있어야 한다는 것은 참조 무결성, 칼럼 값의 허용 범위는 도메인 무결성이다.",
-    "chapter": "데이터 무결성",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1016",
-    "_category": "데이터 무결성"
-  },
-  {
     "id": 11834,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
@@ -35569,32 +35549,6 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11986,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 1187,
-    "title": "INTERSECT의 의미로 옳은 것은?",
-    "options": [
-      "차집합",
-      "교집합",
-      "정렬",
-      "합집합"
-    ],
-    "correctIndex": 1,
-    "explanation": "INTERSECT 는 두 SELECT 결과에 모두 있는 행만 돌려주는 교집합이다(②). 합집합은 UNION, 차집합은 MINUS(SQL Server 는 EXCEPT)다.",
-    "chapter": "집합 연산자",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1205",
-    "_category": "집합 연산자",
-    "references": [
-      {
-        "type": "text",
-        "content": "UNION과 UNION ALL의 결과 행 수 차이"
-      }
-    ]
-  },
-  {
     "id": 11993,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
@@ -35684,13 +35638,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "chapter": "집합 연산자",
     "_source": "sqld-1140",
     "_origId": "sqld-1229",
-    "_category": "집합 연산자",
-    "references": [
-      {
-        "type": "text",
-        "content": "INTERSECT와 MINUS의 결과 집합을 해석한다."
-      }
-    ]
+    "_category": "집합 연산자"
   },
   {
     "id": 12012,
@@ -35796,13 +35744,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "chapter": "데이터 무결성",
     "_source": "sqld-1140",
     "_origId": "sqld-1243",
-    "_category": "데이터 무결성",
-    "references": [
-      {
-        "type": "text",
-        "content": "허용 값 범위를 CHECK 제약으로 제한하려 한다."
-      }
-    ]
+    "_category": "데이터 무결성"
   },
   {
     "id": 12024,
@@ -36049,32 +35991,6 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12052,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 1253,
-    "title": "다음 설명 중 TRUNCATE TABLE에 대한 설명으로 가장 적절한 것은?",
-    "options": [
-      "테이블 전체 데이터를 빠르게 비우는 DDL이다.",
-      "권한을 회수하는 명령이다.",
-      "뷰 정의를 변경하는 명령이다.",
-      "조건절을 사용해 일부 행만 삭제한다."
-    ],
-    "correctIndex": 0,
-    "explanation": "TRUNCATE TABLE 은 테이블 구조는 남기고 데이터 전체를 한꺼번에 비우는 DDL 이다(①). WHERE 조건을 쓸 수 없어 일부 행만 지울 때는 DELETE 를 쓰고, 테이블 자체를 없앨 때는 DROP TABLE 을 쓴다.",
-    "chapter": "DDL",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1280",
-    "_category": "DDL",
-    "references": [
-      {
-        "type": "text",
-        "content": "대량 데이터 비우기와 객체 삭제"
-      }
-    ]
-  },
-  {
     "id": 12057,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
@@ -36227,32 +36143,6 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12072,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 1273,
-    "title": "MERGE 문에 대한 설명으로 옳은 것은?",
-    "options": [
-      "DDL이므로 구조를 바꾼다.",
-      "권한만 부여할 수 있다.",
-      "항상 DELETE만 수행한다.",
-      "일치 여부에 따라 UPDATE와 INSERT를 한 문장에서 처리할 수 있다."
-    ],
-    "correctIndex": 3,
-    "explanation": "MERGE 는 대상 테이블과 소스를 ON 조건으로 비교해서, 일치하면 UPDATE(WHEN MATCHED), 일치하지 않으면 INSERT(WHEN NOT MATCHED)를 한 문장으로 처리한다(④). 데이터를 바꾸는 DML 이다.",
-    "chapter": "DML",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1305",
-    "_category": "DML",
-    "references": [
-      {
-        "type": "text",
-        "content": "매칭 여부에 따라 삽입과 갱신을 함께 처리하려 한다."
-      }
-    ]
-  },
-  {
     "id": 12076,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
@@ -36275,32 +36165,6 @@ export const AI_MOCK: QuizQuestion[] = [
       {
         "type": "sql",
         "code": "CREATE VIEW v_sales AS\nSELECT emp_id, dept\nFROM emp\nWHERE dept = 'SALES'\nWITH CHECK OPTION;"
-      }
-    ]
-  },
-  {
-    "id": 12081,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "1과목",
-    "number": 1282,
-    "title": "UNIQUE 제약과 PRIMARY KEY의 차이로 옳은 것은?",
-    "options": [
-      "PRIMARY KEY는 테이블당 하나이며 NULL을 허용하지 않는다.",
-      "PRIMARY KEY는 중복을 허용한다.",
-      "UNIQUE는 참조 무결성만 보장한다.",
-      "UNIQUE는 NULL을 절대 허용할 수 없다."
-    ],
-    "correctIndex": 0,
-    "explanation": "UNIQUE는 여러 개 존재할 수 있고 DBMS에 따라 NULL 처리 규칙이 다르지만, PK는 대표 식별자로 NULL을 허용하지 않는다.",
-    "chapter": "데이터 무결성",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1315",
-    "_category": "데이터 무결성",
-    "references": [
-      {
-        "type": "text",
-        "content": "허용 값 범위를 CHECK 제약으로 제한하려 한다."
       }
     ]
   },
@@ -36440,58 +36304,6 @@ export const AI_MOCK: QuizQuestion[] = [
             "3500"
           ]
         ]
-      }
-    ]
-  },
-  {
-    "id": 12106,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 1307,
-    "title": "ROW_NUMBER() OVER (PARTITION BY dept ORDER BY sal DESC)의 의미로 옳은 것은?",
-    "options": [
-      "부서별 합계를 계산한다.",
-      "NULL만 번호를 부여한다.",
-      "전체 테이블에서 한 번만 번호를 부여한다.",
-      "부서별로 급여가 높은 순서의 일련번호를 부여한다."
-    ],
-    "correctIndex": 3,
-    "explanation": "PARTITION BY로 부서를 나누고 ORDER BY sal DESC로 순번 기준을 정한다.",
-    "chapter": "윈도우 함수",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1344",
-    "_category": "윈도우 함수",
-    "references": [
-      {
-        "type": "text",
-        "content": "파티션별 순위와 누적 합계를 동시에 해석한다."
-      }
-    ]
-  },
-  {
-    "id": 12111,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 1312,
-    "title": "집합 연산을 사용하기 위한 조건으로 옳은 것은?",
-    "options": [
-      "JOIN 조건이 반드시 필요하다.",
-      "각 SELECT의 WHERE 절만 동일하면 된다.",
-      "각 SELECT의 컬럼 수가 같고 대응 컬럼의 데이터 타입이 호환되어야 한다.",
-      "한쪽 SELECT에만 ORDER BY가 있으면 된다."
-    ],
-    "correctIndex": 2,
-    "explanation": "UNION·INTERSECT·MINUS 를 쓰려면 위아래 SELECT 의 칼럼 개수가 같고, 같은 위치 칼럼끼리 데이터 타입이 호환되어야 한다(③). ORDER BY 는 맨 마지막 SELECT 뒤에 한 번만 쓰고, JOIN 조건은 필요 없다.",
-    "chapter": "집합 연산자",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1349",
-    "_category": "집합 연산자",
-    "references": [
-      {
-        "type": "text",
-        "content": "UNION과 UNION ALL의 결과 행 수 차이"
       }
     ]
   },
