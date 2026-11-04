@@ -47,6 +47,8 @@ const shortDate = (ko) => ko.replace(/(\d{4})년 (\d+)월/, (_, y, m) => `${y}.$
 // 시험 일정 — 앱 D-day 와 같은 원본(src/lib/examDate.ts)을 읽는다.
 const EXAM_SCHEDULE = [...readFileSync('src/lib/examDate.ts', 'utf8').matchAll(/\{\s*round:\s*(\d+),\s*date:\s*'(\d{4})-(\d{2})-(\d{2})'\s*\}/g)]
   .map(([, r, y, m, d]) => ({ round: +r, y: +y, m: +m, d: +d, iso: `${y}-${m}-${d}` }));
+const NEXT_EXAM = EXAM_SCHEDULE.find(e => e.iso >= NOW) || null;
+const NEXT_EXAM_KO = NEXT_EXAM ? `제${NEXT_EXAM.round}회 ${NEXT_EXAM.y}년 ${NEXT_EXAM.m}월 ${NEXT_EXAM.d}일 (${'일월화수목금토'[new Date(Date.UTC(NEXT_EXAM.y, NEXT_EXAM.m - 1, NEXT_EXAM.d)).getUTCDay()]})` : '';
 const scheduleItems = EXAM_SCHEDULE.slice(-5).map(e => {
   const upcoming = e.iso >= NOW ? ' <strong>다음 시험</strong>' : '';
   const wd = '일월화수목금토'[new Date(Date.UTC(e.y, e.m - 1, e.d)).getUTCDay()];
@@ -281,8 +283,8 @@ function buildExamIndexPage() {
 
   const items = rounds.slice().sort((a, b) => b.round - a.round).map(r => {
     return `<li>
-  <a href="/?cbt=round-${r.round}">SQLD 제${r.round}회 기출문제 풀어보기 →</a>
-  <div class="sub">${r.date.ko} 시행 · 50문항 · CBT 모드 (90분)</div>
+  <a id="round-${r.round}" href="/?cbt=round-${r.round}">SQLD ${r.round}회 기출 복원문제 (${shortDate(r.date.ko)}) 풀어보기 →</a>
+  <div class="sub">${r.date.ko} 시행 · 50문항 · 정답·해설 포함 · CBT 모드 (90분)</div>
 </li>`;
   }).join('\n');
 
@@ -430,9 +432,9 @@ function syllabusBody() {
   return out.join('\n      ');
 }
 
-function buildGuide({ slug, title, desc, body }) {
+function buildGuide({ slug, title, desc, body, ld }) {
   const path = `/guide/${slug}/`;
-  return head({ title: `${title} — SQLD양파`, desc, path }) + `
+  return head({ title: `${title} — SQLD양파`, desc, path }) + (ld ? `\n    <script type="application/ld+json">${JSON.stringify(ld).replace(/</g, '\\u003c')}</script>` : '') + `
     <div class="crumb"><a href="/">홈</a> · 가이드 · ${esc(title)}</div>
     <h1>${esc(title)}</h1>
     <p class="lead">${esc(desc)}</p>
@@ -444,8 +446,19 @@ function buildGuide({ slug, title, desc, body }) {
 const guides = [
   {
     slug: 'sqld-overview',
-    title: 'SQLD 자격증 안내 — 시험 정보·출제 범위·합격 기준',
-    desc: 'SQLD(SQL Developer)는 한국데이터산업진흥원이 시행하는 SQL 개발자 자격증입니다. 시험 시간·문항수·합격 기준·출제 범위를 한눈에.',
+    title: `SQLD 시험 일정·합격 기준·과락·응시료 (${NEXT_EXAM ? NEXT_EXAM.y : new Date().getFullYear()}) — 자격증 안내`,
+    desc: `SQLD(SQL Developer) 시험 정보 한 장 정리.${NEXT_EXAM ? ` 다음 시험은 ${NEXT_EXAM_KO}.` : ''} 90분 50문항, 60점 이상·과목별 40% 이상 합격, 응시료 5만 원, 과목별 과락 기준과 출제 범위.`,
+    ld: {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: [
+        ['SQLD 합격 기준은 몇 점인가요?', '총점 100점 중 60점 이상이면서, 1과목(20점)과 2과목(80점) 각각 40% 이상을 맞혀야 합니다. 1과목 8점 미만이나 2과목 32점 미만이면 총점이 60점을 넘어도 과락으로 불합격입니다.'],
+        ['SQLD 과락은 몇 문제부터인가요?', '1과목은 10문항 중 3문항 이하, 2과목은 40문항 중 15문항 이하로 맞히면 과락입니다.'],
+        ['SQLD 시험 시간과 문항 수는?', '90분 동안 객관식 4지선다 50문항(1과목 10문항, 2과목 40문항)을 컴퓨터로 풉니다. 2024년부터 단답형은 없습니다.'],
+        ['SQLD 응시료는 얼마인가요?', '50,000원입니다.'],
+        ['SQLD 시험은 1년에 몇 번 있나요?', '연 4회 정기 시행합니다. 정확한 일정과 접수 기간은 한국데이터산업진흥원 데이터자격검정(dataq.or.kr) 공지에서 확인합니다.'],
+      ].map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })),
+    },
     body: `
       <h2>SQLD란?</h2>
       <p>SQLD(SQL Developer)는 <strong>한국데이터산업진흥원(KDATA)</strong>이 시행하는 국가공인 데이터 자격검정으로, SQL 개발자에게 필요한 데이터 모델링과 SQL 활용 능력을 검정합니다. 정보처리기사·SQLP·ADsP와 함께 데이터 직무에서 가장 많이 취득하는 자격증 중 하나입니다.</p>
@@ -454,6 +467,7 @@ const guides = [
       <table>
         <thead><tr><th>항목</th><th>내용</th></tr></thead>
         <tbody>
+          ${NEXT_EXAM ? `<tr><td>다음 시험</td><td><strong>${NEXT_EXAM_KO}</strong> — <a href="/guide/sqld-application/">일정·접수 안내</a></td></tr>` : ''}
           <tr><td>시험 시간</td><td>90분</td></tr>
           <tr><td>문항</td><td>50문항, 모두 4지선다 객관식 (2024년부터 단답형 없음)</td></tr>
           <tr><td>배점</td><td>한 문항 2점, 100점 만점</td></tr>
@@ -486,6 +500,16 @@ const guides = [
         <li>SQL 활용 — <a href="/theory/c221/">서브쿼리</a>, <a href="/theory/c222/">집합 연산자</a>, <a href="/theory/c223/">그룹 함수</a>, <a href="/theory/c224/">윈도우 함수</a>, <a href="/theory/c225/">Top N</a>, <a href="/theory/c226/">계층형 질의</a>, <a href="/theory/c227/">PIVOT</a>, <a href="/theory/c228/">정규 표현식</a></li>
         <li>관리 구문 — <a href="/theory/c231/">DML</a>, <a href="/theory/c232/">TCL</a>, <a href="/theory/c233/">DDL</a>, <a href="/theory/c234/">DCL</a></li>
       </ul>
+
+      <h2>자주 묻는 질문</h2>
+      <h3>합격 기준은 몇 점인가요?</h3>
+      <p>총점 60점 이상이면서 과목마다 40% 이상이어야 합니다. 1과목 8점(4문항), 2과목 32점(16문항)이 최소선입니다.</p>
+      <h3>과락은 몇 문제부터인가요?</h3>
+      <p>1과목은 3문항 이하, 2과목은 15문항 이하로 맞히면 과락입니다. 총점이 60점을 넘어도 불합격입니다.</p>
+      <h3>시험 시간과 문항 수는?</h3>
+      <p>90분, 객관식 50문항(1과목 10 · 2과목 40)입니다. 2024년부터 단답형이 없어졌습니다.</p>
+      <h3>응시료와 시험 횟수는?</h3>
+      <p>응시료는 50,000원, 시험은 연 4회입니다. 회차별 날짜는 <a href="/guide/sqld-application/">응시 안내</a>에 정리했습니다.</p>
 
       <h2>합격 전략</h2>
       <p>점수의 80%가 2과목이라 SQL 결과를 손으로 계산하는 연습에 시간을 가장 많이 쓴다. 1과목은 용어와 분류(엔터티 분류, 식별자 특성, 정규화 단계)가 그대로 반복해서 나오므로 이론을 한 번 정리한 뒤 기출로 확인하면 된다. 옛 회차에 나오던 옵티마이저·인덱스·실행 계획 같은 성능 문제는 2024년 개편 뒤로 출제 범위에서 빠졌다.</p>
