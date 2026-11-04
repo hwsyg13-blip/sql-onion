@@ -1819,13 +1819,13 @@ export const ROUND_57: QuizQuestion[] = [
     "number": 49,
     "title": "아래 EMP 테이블에 대한 SQL 의 출력 레이블 가공으로 가장 적절한 CASE-GROUPING 조합은?",
     "options": [
-      "GROUPING(DEPT) = 1 AND GROUPING(JOB) = 1 → '전체총계', GROUPING(DEPT) = 1 → '부서별 소계'",
-      "GROUPING(DEPT) = 0 AND GROUPING(JOB) = 0 → '전체총계', GROUPING(DEPT) = 1 → '부서별 소계'",
+      "GROUPING(DEPT) = 1 AND GROUPING(JOB) = 1 → '전체총계', GROUPING(JOB) = 1 → '부서별 소계'",
+      "GROUPING(DEPT) = 0 AND GROUPING(JOB) = 0 → '전체총계', GROUPING(JOB) = 1 → '부서별 소계'",
       "GROUPING 함수는 CUBE 절과만 결합 가능하므로 ROLLUP 결과에 적용할 수 없다.",
       "GROUPING 함수는 ROLLUP 절과만 결합 가능하므로 CUBE·GROUPING SETS 결과에 적용할 수 없다."
     ],
     "correctIndex": 0,
-    "explanation": "`GROUPING(컬럼)` 은 그 컬럼이 소계·총계 행에서 NULL 일 때 1, 일반 그룹 행에서는 0 을 반환한다. ROLLUP(DEPT, JOB) 결과에서 (NULL, NULL) 행은 둘 다 1 = 전체 총계, (DEPT, NULL) 행은 DEPT=0, JOB=1 인데... 잠깐 — 정확히는 부서별 소계 행에서 GROUPING(JOB)=1, GROUPING(DEPT)=0.③④ 는 GROUPING 이 ROLLUP·CUBE·GROUPING SETS 모두에 사용 가능하므로 잘못된 진술.",
+    "explanation": "GROUPING(컬럼) 은 그 컬럼이 소계·총계 때문에 비어 있으면 1, 실제 값으로 묶인 행이면 0 이다. ROLLUP(DEPT, JOB) 결과에서 전체 총계 행은 GROUPING(DEPT) = 1, GROUPING(JOB) = 1 이고, 부서별 소계 행은 GROUPING(DEPT) = 0, GROUPING(JOB) = 1 이다. 그래서 둘 다 1 이면 '전체총계', JOB 만 1 이면 '부서별 소계' 로 붙이는 ① 이 맞다(CASE 는 위에서부터 판단하므로 총계 조건을 먼저 둔다). ② 는 둘 다 0 인 상세 행을 총계라고 붙였고, ③④ GROUPING 은 ROLLUP·CUBE·GROUPING SETS 어디서나 쓸 수 있다. ※ 복원 자료의 보기 ① 은 부서 소계 조건이 GROUPING(DEPT) = 1 로 되어 있어 소계 라벨이 붙지 않고, ELSE DEPT(숫자)와 문자 라벨이 섞여 Oracle 에서 타입 오류가 나므로 GROUPING(JOB) = 1, TO_CHAR(DEPT) 로 바로잡았다.",
     "_source": "authored",
     "references": [
       {
@@ -1856,7 +1856,7 @@ export const ROUND_57: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT CASE\n         ( ? )\n         ELSE DEPT\n       END AS DEPT_LBL,\n       SUM(SAL)\nFROM   EMP\nGROUP BY ROLLUP(DEPT, JOB);"
+        "code": "SELECT CASE\n         ( ? )\n         ELSE TO_CHAR(DEPT)\n       END AS DEPT_LBL,\n       SUM(SAL)\nFROM   EMP\nGROUP BY ROLLUP(DEPT, JOB);"
       }
     ]
   },
