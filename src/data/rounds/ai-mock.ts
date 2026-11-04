@@ -1483,7 +1483,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "3"
     ],
     "correctIndex": 3,
-    "explanation": "SELECT문을 보면 department로 GROUP BY한다. 그리면 총 3개의 그룹이 만들어진다. computer, physics, math이다. 3개의 그룹 중에서 개수가 2개 초과인 것을 조회하기 위해서 \"HAVING count(*) > 2\"문을 사용했다. 따라서 2개 초과인 것은 math이고 math는 총 3개가 있으므로 3이 된다.",
+    "explanation": "SELECT문을 보면 department로 GROUP BY한다. 그러면 총 3개의 그룹이 만들어진다. computer, physics, math이다. 3개의 그룹 중에서 개수가 2개 초과인 것을 조회하기 위해서 \"HAVING count(*) > 2\"문을 사용했다. 따라서 2개 초과인 것은 math이고 math는 총 3개가 있으므로 3이 된다.",
     "chapter": "관계형 DB와 SELECT",
     "_source": "cbt-mock",
     "_origId": "cbt-024",
@@ -1806,7 +1806,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "WHERE REGEXP_LIKE(USER_ID, '[0-9].*[A-Z]$')"
     ],
     "correctIndex": 0,
-    "explanation": "정규 표현식을 사용할 때 ^는 시작을 의미, $는 끝을 의미한다. '^[A-Z].*[0-9]는 대문자 알파벳으로 시작하고, 숫자로 끝나는 문자열을 의미한다. Oracle에서는 복잡한 문자열 패턴 매칭이 필요한 경우 REGEXP_LIKE를 반드시 사용해야 하며, LIKE는 단순한 와일드카드 (%, _)만 지원한다.는 대문자 알파벳으로 시작하고, 숫자로 끝나는 문자열을 의미한다. Oracle에서는 복잡한 문자열 패턴 매칭이 필요한 경우 REGEXP_LIKE를 반드시 사용해야 하며, LIKE는 단순한 와일드카드 (%, _)만 지원한다.",
+    "explanation": "정규 표현식에서 ^ 는 시작, $ 는 끝을 뜻한다. '^[A-Z].*[0-9]$' 는 대문자 알파벳으로 시작하고 숫자로 끝나는 문자열이라 A123, B5, C_99, Z8 이 조회된다(①). Oracle 의 LIKE 는 % 와 _ 두 와일드카드만 지원해 [A-Z] 같은 문자 범위를 쓸 수 없으므로 ②③ 은 의도대로 동작하지 않고(③ 의 $ 도 LIKE 에서는 그냥 문자), ④ 는 숫자로 시작해 대문자로 끝나는 반대 패턴이다.",
     "chapter": "정규 표현식",
     "_source": "cbt-mock",
     "_origId": "cbt-034",
@@ -1855,7 +1855,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "개념 스키마가 변경되어도 외부 스키마에 영향이 없는 특성이다."
     ],
     "correctIndex": 3,
-    "explanation": "논리적 데이터 독립성이란, 개념 스키마(테이블 구조, 관계, 제약조건 등)가 변경되더라도, 외부 스키마(사용자 관점의 뷰나 응용 프로그램)에 영향을 주지 않는 특성을 말한다. 즉, 테이블의 컬럼이 추가되거나 제약 조건이 변경되더라도, 외부에서 사용하는 응용 프로그램이나 뷰는 그대로 동작할 수 있어야 한다.② 물리적 데이터 독립성에 대한 설명이다.",
+    "explanation": "논리적 데이터 독립성이란, 개념 스키마(테이블 구조, 관계, 제약조건 등)가 변경되더라도, 외부 스키마(사용자 관점의 뷰나 응용 프로그램)에 영향을 주지 않는 특성을 말한다. 즉, 테이블의 컬럼이 추가되거나 제약 조건이 변경되더라도, 외부에서 사용하는 응용 프로그램이나 뷰는 그대로 동작할 수 있어야 한다. ② 는 물리적 데이터 독립성에 대한 설명이다.",
     "chapter": "데이터 모델 개념",
     "_source": "cbt-mock",
     "_origId": "cbt-035",
@@ -2590,7 +2590,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "2, 4, 3, 7, 12"
     ],
     "correctIndex": 0,
-    "explanation": "TAB1 테이블에는 행이 4개, TAB2 테이블에는 행이 3개가 있다. KEY 칼럼을 사용해서 INNER JOIN을 하면 같은 것만 찾는다. 따라서 TAB1와 TAB2 테이블의 KEY 칼럼에서 'B'와 'C'가 같기 때문에 2개의 행이 출력된다.",
+    "explanation": "TAB1 의 KEY1 은 B, C, D, E, TAB2 의 KEY2 는 A, B, C 다. INNER JOIN 은 양쪽에 있는 B, C 2건, LEFT OUTER JOIN 은 TAB1 4행이 모두 남아 4건(D, E 는 TAB2 칼럼이 NULL), RIGHT OUTER JOIN 은 TAB2 3행이 모두 남아 3건(A 는 TAB1 칼럼이 NULL), FULL OUTER JOIN 은 짝 2건 + TAB1 에만 있는 D, E + TAB2 에만 있는 A 로 5건, CROSS JOIN 은 4 × 3 = 12건이다(①).",
     "chapter": "관계형 DB와 SELECT",
     "_source": "cbt-mock",
     "_origId": "cbt-065",
@@ -3265,7 +3265,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "450"
     ],
     "correctIndex": 1,
-    "explanation": "ROUND는 반올림 함수이며, 두 번째 인자의 값이 마이너스(-)일 경우에는 정수부에서 두 자리를 남기고 반올림한다는 의미이다. 즉, 456.789에서 정수부 456중 -2는 56에 해당하고 이 위치에서 반올림하면 500이 된다. • ROUND 자릿수가 양수일 경우 : 소수점 N번째 자리까지 반올림 → ROUND(456.789, 1) = 456.8 • ROUND 자릿수가 0일 경우 : 정수로 반올림 → ROUND(456.789, 0) = 457 • ROUND 자릿수가 음수일 경우 → 정수부의 자릿수를 기준으로 반올림",
+    "explanation": "ROUND 의 두 번째 인수가 음수이면 정수부에서 반올림한다. -2 는 백의 자리까지 남기도록 십의 자리(5)에서 반올림하므로 456.789 는 500 이 된다(②). 참고로 ROUND(456.789, 1) = 456.8, ROUND(456.789, 0) = 457, ROUND(456.789, -1) = 460 이고, 400 은 TRUNC(456.789, -2) 의 결과다.",
     "chapter": "함수",
     "_source": "cbt-mock",
     "_origId": "cbt-095",
@@ -3425,7 +3425,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "식별관계는 부모 엔터티의 주식별자 속성을 자식 엔터티의 식별자에 포함한다."
     ],
     "correctIndex": 3,
-    "explanation": "①, ②, ④는 식별관계에 대한 설명이고 ③은 비식별관계에 대한 설명이다. 교재에서는 식별자의 특징으로 다른 엔터티에 \"이전\"이 필요하다고 설명하고 있으며, 비식별자의 특징으로는 다른 엔터티에 \"차단\"이 필요하다고설명하고 있다.",
+    "explanation": "식별관계는 부모 엔터티의 주식별자를 자식 엔터티의 주식별자에 포함하는 관계라 ④ 가 옳다. ① '자식 주식별자에 부모 주식별자를 포함' 과 ② '강한 연결 관계' 는 식별관계의 특징이고, ③ '부모 쪽 관계 참여가 선택' 은 비식별관계의 특징이라 이름이 서로 바뀌었다. 교재는 식별관계를 부모 식별자를 자식에게 '이전' 하는 관계, 비식별관계를 그 이전을 '차단' 하는 관계로 설명한다.",
     "chapter": "엔터티",
     "_source": "cbt-mock",
     "_origId": "cbt-102",
@@ -3613,7 +3613,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "날짜형 데이터 타입을 오름차순으로 정렬하면 날짜 값이 가장 늦은 날짜가 먼저 출력된다."
     ],
     "correctIndex": 3,
-    "explanation": "날짜형 데이터를 오름차순으로 출력하며 다음과 같다. 날짜형 데이터를 출력하기 위해서 sysdate를 사용하고 어제 날짜를 구하기 위해서 sysdate-1을 한다. 이것을 Union all로 합집합을 만든 다음에 Order by로 정렬을 한다.",
+    "explanation": "날짜형도 오름차순(ASC)이면 이른 날짜부터, 즉 작은 값부터 나온다. 가장 늦은 날짜가 먼저 나오는 것은 내림차순(DESC)이므로 ④ 가 올바르지 않다. ① 기본은 오름차순이고 DESC 로 내림차순, ② 숫자 오름차순은 작은 값부터, ③ SQL Server 는 NULL 을 가장 작은 값으로 보아 오름차순에서 맨 앞에 둔다(Oracle 은 맨 뒤).",
     "chapter": "ORDER BY",
     "_source": "cbt-mock",
     "_origId": "cbt-110",
@@ -4321,7 +4321,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "1300"
     ],
     "correctIndex": 3,
-    "explanation": "TX2의 update 문은 베타적 Lock 때문에 대기했다가 TX1 트랜잭션이 commit 한 후에 처리를 계속한다. TX1에 의해 1,100으로 바뀐 값을 읽어 200을 더하므로 최종 결과는 1,300이 된다.",
+    "explanation": "TX2의 update 문은 배타적 Lock 때문에 대기했다가 TX1 트랜잭션이 commit 한 후에 처리를 계속한다. TX1에 의해 1,100으로 바뀐 값을 읽어 200을 더하므로 최종 결과는 1,300이 된다.",
     "chapter": "트랜잭션과 Null",
     "_source": "cbt-mock",
     "_origId": "cbt-130",
@@ -4479,7 +4479,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "0"
     ],
     "correctIndex": 0,
-    "explanation": "EXISTS는 서브쿼리의 결과가 존재하는지만 판단하며, 실제 반환되는 값은 중요하지 않다. 이 쿼리는 EMPLOYEE 테이블에서 각 직원의 EMP_ID를 SALARY 테이블과 비교하여, 해당 EMP_ID가 SALARY에 존재하고 AMOUNT가 NULL이 아닌 경우만 포함시킨다. 메인 쿼리의 각 행에 대해 서브쿼리가 다음과 같이 평가된다. • EMP_ID = 1 → SALARY에 EMP_ID=1, AMOUNT=3000 → 조건 만족 → 포함 • EMP_ID = 2 → SALARY에 EMP_ID=2, AMOUNT=NULL → 조건 불만족 → 제외 • EMP_ID = 3 → SALARY에 EMP_ID=3 없음 → 조건 불만족 → 제외따라서 결과는 EMP_ID=1 (Kim) 1건이며, 정답은 ①이다.",
+    "explanation": "EXISTS는 서브쿼리의 결과가 존재하는지만 판단하며, 실제 반환되는 값은 중요하지 않다. 이 쿼리는 EMPLOYEE 테이블에서 각 직원의 EMP_ID를 SALARY 테이블과 비교하여, 해당 EMP_ID가 SALARY에 존재하고 AMOUNT가 NULL이 아닌 경우만 포함시킨다. 메인 쿼리의 각 행에 대해 서브쿼리가 다음과 같이 평가된다. • EMP_ID = 1 → SALARY에 EMP_ID=1, AMOUNT=3000 → 조건 만족 → 포함 • EMP_ID = 2 → SALARY에 EMP_ID=2, AMOUNT=NULL → 조건 불만족 → 제외 • EMP_ID = 3 → SALARY에 EMP_ID=3 없음 → 조건 불만족 → 제외. 따라서 결과는 EMP_ID=1 (Kim) 1건이며, 정답은 ①이다.",
     "chapter": "서브쿼리",
     "_source": "cbt-mock",
     "_origId": "cbt-136",
@@ -5272,7 +5272,7 @@ export const AI_MOCK: QuizQuestion[] = [
         "type": "table",
         "caption": "[TB_ITEM] 테이블",
         "headers": [
-          "NAME",
+          "ITEM",
           "PRICE"
         ],
         "rows": [
@@ -5484,7 +5484,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "'20240305'"
     ],
     "correctIndex": 2,
-    "explanation": "이 SQL은 함수가 중첩되어 있으므로 내부 함수인 TO_DATE('20240305', 'YYYYMMDD')가 먼저 실행된다. 이 함수는 문자열 '20240305'를 날짜 타입으로 변환하여 2024년 3월 5일이라는 날짜 값을 생성한다. 시분초는 별도로 지정하지 않았기 때문에 기본적으로 00:00:00이 적용된다. 그다음 TO_CHAR 함수가 이 날짜 값을 'YYYY.MM.DD' 형식으로 문자로 변환하게 되며, 최종 출력 결과는 '2024.03.05.'가 된다. 따라서 정답은 ③이다.",
+    "explanation": "이 SQL은 함수가 중첩되어 있으므로 내부 함수인 TO_DATE('20240305', 'YYYYMMDD')가 먼저 실행된다. 이 함수는 문자열 '20240305'를 날짜 타입으로 변환하여 2024년 3월 5일이라는 날짜 값을 생성한다. 시분초는 별도로 지정하지 않았기 때문에 기본적으로 00:00:00이 적용된다. 그다음 TO_CHAR 함수가 이 날짜 값을 'YYYY.MM.DD' 형식으로 문자로 변환하게 되며, 최종 출력 결과는 '2024.03.05' 가 된다. 따라서 정답은 ③이다.",
     "chapter": "함수",
     "_source": "cbt-mock",
     "_origId": "cbt-174",
@@ -5608,7 +5608,7 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "table",
-        "caption": "[TB_PRODUCT] 테이블",
+        "caption": "[PRODUCTS] 테이블",
         "headers": [
           "ID",
           "NAME",
@@ -6232,7 +6232,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "20"
     ],
     "correctIndex": 3,
-    "explanation": "SQL문에서 COUNT() 함수는 행 수를 확인하는 집계 함수이다. 그런데 R 테이블과 S 테이블에 조인 조건이 없어서 카텐시안 곱이 발생한다. 즉, R 테이블의 행 수가 4개이고 S 테이블의 행 수가 5개이므로 4*5=20이 조회된다.",
+    "explanation": "SQL문에서 COUNT() 함수는 행 수를 확인하는 집계 함수이다. 그런데 R 테이블과 S 테이블에 조인 조건이 없어서 카티션 곱이 발생한다. 즉, R 테이블의 행 수가 4개이고 S 테이블의 행 수가 5개이므로 4*5=20이 조회된다.",
     "chapter": "관계형 DB와 SELECT",
     "_source": "cbt-mock",
     "_origId": "cbt-205",
@@ -6335,7 +6335,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "부서 테이블에 (1, '연구부') 튜플을 삽입한다면 참조 무결성 제약조건을 위배한다."
     ],
     "correctIndex": 3,
-    "explanation": "부서 테이블은 마스터 테이블이므로 사원 테이블에 없는 부서번호 등을 자유롭게 입력할 수 있다. 따라서 부서 테이블에 (1, '연구부')을 입력하는 것은 참조 무결성 위배가 아니다.",
+    "explanation": "① 사원 테이블이 부서번호 2 를 참조하고 있어 삭제하면 참조 무결성 위배(기본 동작은 삭제 거부)다. ② 부서번호는 INT 인데 'A1' 은 문자라 도메인 무결성 위배, ③ 부서번호 0 은 부서 테이블에 없어 참조 무결성 위배다. ④ 부서 테이블은 참조되는 쪽이라 새 행을 넣어도 참조 무결성과는 관계가 없다. 다만 부서번호 1 이 이미 있어 기본키 중복, 즉 개체 무결성 위배가 된다. 따라서 '참조 무결성 위배'라는 ④ 의 설명이 틀렸다.",
     "chapter": "관계형 DB와 SELECT",
     "_source": "cbt-mock",
     "_origId": "cbt-206",
@@ -6832,7 +6832,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "text",
-        "content": "우리은행은 예금분류(일반예금, 특별예금 등)의 원금, 예치기간, 이자율을 관리할 필요가 있다. 또한 원금에 대한 이자율을 적용하여 계산된 이자에 대해서도 속성으로 관리하고자 한다. 예를 들어 원금이 1000원이고 예치기간이 5개월이며 이자율이 5.0%라는 속성을 관리하고 계산된 이자도 관리한다. 일반예금이나 특별예금 등에 대해서는 코드를 부여(예. 01-일반예금, 02-특별예금 등)하여 관리한다."
+        "content": "OO은행은 예금분류(일반예금, 특별예금 등)의 원금, 예치기간, 이자율을 관리할 필요가 있다. 또한 원금에 대한 이자율을 적용하여 계산된 이자에 대해서도 속성으로 관리하고자 한다. 예를 들어 원금이 1000원이고 예치기간이 5개월이며 이자율이 5.0%라는 속성을 관리하고 계산된 이자도 관리한다. 일반예금이나 특별예금 등에 대해서는 코드를 부여(예. 01-일반예금, 02-특별예금 등)하여 관리한다."
       }
     ]
   },
@@ -7418,7 +7418,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "ALTER TABLE 기관분류 ALTER COLUMN (분류명 VARCHAR(30), 등록일자 DATE NOT NULL);"
     ],
     "correctIndex": 0,
-    "explanation": "SQL Server 는 ALTER TABLE ... ALTER COLUMN 으로 한 번에 컬럼 하나만 변경할 수 있고, 괄호로 여러 컬럼을 묶을 수 없다(③④ 오류). (나) 처럼 분류명도 NOT NULL 이 되어야 하므로 두 컬럼 모두 NOT NULL 을 지정한 ① 이 정답이다.",
+    "explanation": "SQL Server 는 ALTER TABLE ... ALTER COLUMN 으로 한 번에 컬럼 하나만 변경할 수 있고, 괄호로 여러 컬럼을 묶을 수 없다(③④ 오류). SQL Server 의 ALTER COLUMN 은 NOT NULL 을 다시 적지 않으면 NULL 허용으로 바뀌므로, (나) 처럼 NOT NULL 을 유지하려면 두 컬럼 모두 NOT NULL 을 적은 ① 이 정답이다(② 는 분류명이 NULL 허용이 된다).",
     "chapter": "DDL",
     "_source": "sqld-1140",
     "_origId": "sqld-0043",
@@ -8147,7 +8147,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "SELECT SUM(매출금액) AS 매출금액합계\nFROM 월별매출\nWHERE 년 BETWEEN '2014' AND '2015'\nAND 월 BETWEEN '03' AND '12';"
     ],
     "correctIndex": 0,
-    "explanation": "AND 가 OR 보다 우선하므로 ① 은 (2014년 11~12월) OR (2015년 1~3월) 로 4000 + 5000 + 6000 + 7000 + 8000 을 정확히 더한다. ② 는 2014년 1~3월·2015년 11~12월까지, ③ 은 03~05월 조합, ④ 는 두 해의 3~12월을 모두 포함해 범위가 틀린다. 정답은 ① 이다.",
+    "explanation": "AND 가 OR 보다 우선하므로 ① 은 (2014년 11~12월) OR (2015년 1~3월) 로 4000 + 5000 + 6000 + 7000 + 8000 을 정확히 더한다. ② 는 2014년 1~3월·2015년 11~12월까지, ③ 은 03~05월 조합, ④ 는 두 해의 3~12월을 모두 포함해 범위가 틀리다. 정답은 ① 이다.",
     "chapter": "DML",
     "_source": "sqld-1140",
     "_origId": "sqld-0067",
@@ -9022,7 +9022,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 334,
-    "title": "SET OPERATOR 중에서 수학의 교집합과 같은 가능을 하는 연산자로 가장 적절한 것은?",
+    "title": "SET OPERATOR 중에서 수학의 교집합과 같은 기능을 하는 연산자로 가장 적절한 것은?",
     "options": [
       "EXCEPT",
       "MINUS",
@@ -9051,7 +9051,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "가: 5개, 나: 3개"
     ],
     "correctIndex": 3,
-    "explanation": "(가) UNION ALL 은 중복을 없애지 않고 그대로 이어 붙이므로 R1 3행 + R2 2행 = 5행이다. (나) UNION 은 합친 뒤 중복을 없앤다. R2 의 (A1, B1, C1), (A3, B2, C3) 는 R1 에도 있으므로 빠지고 R1 의 3행만 남는다. 정답은 가: 5개, 나: 3개(④)다.",
+    "explanation": "(가) UNION ALL 은 중복을 없애지 않고 그대로 이어 붙이므로 T1 3행 + T2 2행 = 5행이다. (나) UNION 은 합친 뒤 중복을 없앤다. T2 의 (A1, B1, C1), (A3, B2, C3) 는 T1 에도 있으므로 빠지고 T1 의 3행만 남는다. 정답은 가: 5개, 나: 3개(④)다. ※ 원 자료의 SQL 이 표에 없는 R1, R2 를 조회하고 있어 표 이름(T1, T2)으로 맞췄다.",
     "chapter": "집합 연산자",
     "_source": "sqld-1140",
     "_origId": "sqld-0105",
@@ -9108,12 +9108,12 @@ export const AI_MOCK: QuizQuestion[] = [
       {
         "type": "sql",
         "caption": "가.",
-        "code": "SELECT A, B, C FROM R1\nUNION ALL\nSELECT A, B, C FROM R2"
+        "code": "SELECT A, B, C FROM T1\nUNION ALL\nSELECT A, B, C FROM T2"
       },
       {
         "type": "sql",
         "caption": "나.",
-        "code": "SELECT A, B, C FROM R1\nUNION\nSELECT A, B, C FROM R2"
+        "code": "SELECT A, B, C FROM T1\nUNION\nSELECT A, B, C FROM T2"
       }
     ]
   },
@@ -9500,7 +9500,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "단일 행 서브쿼리는 서브쿼리의 실행 결과가 항상 한 건 이하의 서브쿼리로서 IN, ALL 등의 비교 연산자를 사용하여야 한다."
     ],
     "correctIndex": 2,
-    "explanation": "① 메인 쿼리의 결과가 서브쿼리로 제공될 수도 있고, 서브쿼리의 결과가 메인쿼리로 제공될 수도 있으므로 실행 순서는 상황에 따라 달라진다.\n② 비 연관 서브쿼리가 주로 메인쿼리에 값을 제공하기 위한 목적으로 사용된다.\n③ 단일 행 서브쿼리의 비교연산자는 다중 행 서브쿼리의 비교연산자로 사용할 수 없지만, 반대의 경우는 가능하다.\n④ 단일 행 서브쿼리의 비교연산자로는 =, <,<=, >,>=, 0가 되어야 한다. IN, ALL 등의 비교연산자는 다중 행 서브쿼리의 비교연산자 이다.",
+    "explanation": "① 메인 쿼리의 결과가 서브쿼리로 제공될 수도 있고, 서브쿼리의 결과가 메인쿼리로 제공될 수도 있으므로 실행 순서는 상황에 따라 달라진다.\n② 비 연관 서브쿼리가 주로 메인쿼리에 값을 제공하기 위한 목적으로 사용된다.\n③ 단일 행 서브쿼리의 비교연산자는 다중 행 서브쿼리의 비교연산자로 사용할 수 없지만, 반대의 경우는 가능하다.\n④ 단일 행 서브쿼리의 비교연산자로는 =, <, <=, >, >=, <> 를 쓴다. IN, ALL 등의 비교연산자는 다중 행 서브쿼리의 비교연산자 이다.",
     "chapter": "서브쿼리",
     "_source": "sqld-1140",
     "_origId": "sqld-0118",
@@ -9540,7 +9540,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 347,
-    "title": "아래와 같은 데이터 모델에서 평가대상상품에 대한 품질평기향목별 최종 평가 결과를 추출하는 SQL 문장으로 옳은 것은? (단, 평가항목에 대한 평가(평가등급)가 기대수준에 미치지 못할 경우 해당 평기항목에 대해서만 재평가를 수행한다)",
+    "title": "아래와 같은 데이터 모델에서 평가대상상품에 대한 품질평가항목별 최종 평가 결과를 추출하는 SQL 문장으로 옳은 것은? (단, 평가항목에 대한 평가(평가등급)가 기대수준에 미치지 못할 경우 해당 평가항목에 대해서만 재평가를 수행한다)",
     "options": [
       "SELECT B.상품ID. B.상품명, C.평가항목ID, C.평가항목명, A.평가회차,\nA.평가등급, A.평가일자\nFROM (SELECT 상품ID, 평가항목ID\n,MAX(평가회차) AS 평가회차\n,MAX(평가등급) AS 평가등급\n,MAX(평가일자) AS 평가일자\nFROM 평가결과\nGROUP BY 상품ID, 평가항목ID)  A, 평가대상상품 B, 품질평가항목 C\nWHERE A.상품ID = B.상품ID\nAND A.평가항목ID = C.평가항목ID;",
       "SELECT B.상품ID, B.상품명, C.평가항목ID, C.평가항목명\n,MAX(A.평가회차) AS 평가회차\n,MAX(A.평가등급) AS 평가등급\n,MAX(A.평가일자) AS 평가일자\nFROM 평가결과 A, 평가대상상품 B, 품질평가항목 C\nWHERE A.상품ID = B.상품ID\nAND A.평가항목ID = C.평가항목ID\nGROUP BY B.상품ID, B.상품명, C.평가항목ID, C.평가항목명;",
@@ -9569,7 +9569,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 348,
-    "title": "아래 부서 테이블의 담당자 변경을 위해 부서임시 테이블에 입력된 데이터를 활용하여 주기적으로 부서 테이블을 아래 결과와 같이 반영하기 위한 SQL으로 가장 적절한 것은?(단, 부서임시 테이블에서 변경일자를 가준으로 가장 최근에 변경된 데이터를 가준으로 부서 테이블에 반영되어야 한다)",
+    "title": "아래 부서 테이블의 담당자 변경을 위해 부서임시 테이블에 입력된 데이터를 활용하여 주기적으로 부서 테이블을 아래 결과와 같이 반영하기 위한 SQL으로 가장 적절한 것은?(단, 부서임시 테이블에서 변경일자를 기준으로 가장 최근에 변경된 데이터를 기준으로 부서 테이블에 반영되어야 한다)",
     "options": [
       "UPDATE 부서 A SET 담당자 = (SELECT B.담당자\nFROM 부서임시 B\nWHERE B.부서코드 = A.부서코드\nAND B.변경일자 = '2015.01.25.') ;",
       "UPDATE 부서 A SET 담당자 = (SELECT B.담당자\nFROM 부서임시 B\nWHERE B.부서코드 = A.부서코드\nAND B.변경일자 = (SELECT MAX(C.변경일자)\nFROM 부서임시 C WHERE\nC.부서코드 = B.부서코드))\nWHERE 부서코드 IN (SELECT 부서코드 FROM 부서임시);",
@@ -9658,7 +9658,7 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "table",
-        "caption": "[테이블 : 부서이력]",
+        "caption": "[테이블 : 부서임시]",
         "headers": [
           "변경일자(PK)",
           "부서코드(PK)",
@@ -11308,7 +11308,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "10건"
     ],
     "correctIndex": 1,
-    "explanation": "DEPTNO로 조인을 하고 DNAME과 JOB으로 CUBE를 실행했다. CUBE는 전체합계와 각 칼럼별로 부분합계를 출력한다. CUBE는 입력된 칼럼들의 모든 조합으로 집계를 출력한다. ",
+    "explanation": "DEPTNO 로 조인한 뒤 CUBE(DNAME, JOB) 은 (DNAME, JOB), (DNAME), (JOB), () 네 그룹을 모두 만든다. (DNAME, JOB) 조합은 ACCOUNTING 3개(MANAGER·PRESIDENT·CLERK), RESEARCH 3개(CLERK·MANAGER·ANALYST), SALES 3개(SALESMAN·MANAGER·CLERK)로 9행, DNAME 별 소계 3행(사원이 없는 OPERATIONS 는 조인에서 빠짐), JOB 별 소계 5행(CLERK·SALESMAN·MANAGER·ANALYST·PRESIDENT), 전체 합계 1행이다. 9 + 3 + 5 + 1 = 18건(②).",
     "chapter": "그룹 함수",
     "_source": "sqld-1140",
     "_origId": "sqld-0210",
@@ -12074,7 +12074,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 439,
-    "title": "다음 SQL문에서 ( )에 들어갈 알맞은 명령어는 무엇인가?",
+    "title": "다음 SQL문에서 ( )에 들어갈 알맞은 명령어는 무엇인가? (단, EMP 에는 부서가 지정되지 않은(DEPTNO 가 NULL 인) 사원 7999 도 있다)",
     "options": [
       "CROSS JOIN",
       "RIGHT OUTER JOIN",
@@ -12082,7 +12082,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "FULL OUTER JOIN"
     ],
     "correctIndex": 1,
-    "explanation": "결과에 EMP 쪽이 모두 NULL 인 DEPT 40번 행이 나온다. 오른쪽(DEPT) 행을 모두 남기는 조인이므로 RIGHT OUTER JOIN 이다(②). SQL 의 RIGHT JOIN 은 RIGHT OUTER JOIN 을 줄여 쓴 것이다.",
+    "explanation": "결과 마지막 행은 EMP 쪽 칼럼이 모두 NULL 이고 DEPT 쪽에만 40 OPERATIONS 가 있다. 사원이 없는 부서까지 오른쪽(DEPT) 행을 모두 남기는 조인이므로 RIGHT OUTER JOIN 이다(②). LEFT OUTER JOIN 이면 EMP 쪽이 남아 40번 부서가 나오지 않고, FULL OUTER JOIN 이면 부서가 없는 사원 7999 도 결과에 나와야 하는데 결과에 없고, CROSS JOIN 은 ON 절을 쓸 수 없다. ※ 원 자료는 빈칸 자리에 정답(RIGHT JOIN)이 그대로 적혀 있고 결과 표가 깨져(부서번호 불일치·오타) 빈칸과 표를 정리하고, FULL OUTER JOIN 과 구분되도록 부서 없는 사원 조건을 넣었다.",
     "chapter": "조인",
     "_source": "sqld-1140",
     "_origId": "sqld-0244",
@@ -12092,7 +12092,7 @@ export const AI_MOCK: QuizQuestion[] = [
       {
         "type": "sql",
         "caption": "[SQL]",
-        "code": "SELECT * FROM EMP a RIGHT JOIN DEPT b\nON a.DEPTNO = b.DEPTNO;"
+        "code": "SELECT * FROM EMP a (          ) DEPT b\nON a.DEPTNO = b.DEPTNO;"
       },
       {
         "type": "table",
@@ -12105,8 +12105,8 @@ export const AI_MOCK: QuizQuestion[] = [
           "HIREDATE",
           "SAL",
           "COMM",
-          "DEPTNO.1",
-          "DEPTNO.2",
+          "a.DEPTNO",
+          "b.DEPTNO",
           "DNAME",
           "LOC"
         ],
@@ -12115,64 +12115,64 @@ export const AI_MOCK: QuizQuestion[] = [
             "7788",
             "SCOTT",
             "ANALYST",
-            "7786",
-            "03/1/259",
-            "2800",
-            "",
+            "7566",
+            "87/04/19",
+            "3000",
+            "NULL",
             "20",
             "20",
             "RESEARCH",
             "DALLAS"
           ],
           [
-            "7189",
+            "7839",
             "KING",
             "PRESIDENT",
-            "",
-            "31/11/17",
-            "3600",
-            "",
-            "20",
-            "28",
+            "NULL",
+            "81/11/17",
+            "5000",
+            "NULL",
+            "10",
+            "10",
             "ACCOUNTING",
             "NEW YORK"
           ],
           [
             "7844",
             "TURNER",
-            "SILVERMAN",
-            "7788",
-            "01/09/09",
+            "SALESMAN",
+            "7698",
+            "81/09/08",
             "1500",
-            "",
-            "20",
-            "28",
+            "0",
+            "30",
+            "30",
             "SALES",
             "CHICAGO"
           ],
           [
-            "7976",
+            "7876",
             "ADAMS",
             "CLERK",
             "7788",
-            "R1/12/03",
-            "1500",
-            "",
+            "87/05/23",
+            "1100",
+            "NULL",
             "20",
-            "38",
+            "20",
             "RESEARCH",
-            "TALLAO"
+            "DALLAS"
           ],
           [
-            "7960",
+            "7900",
             "JAMES",
             "CLERK",
-            "7788",
-            "R1/12/03",
-            "956",
-            "",
-            "20",
-            "38",
+            "7698",
+            "81/12/03",
+            "950",
+            "NULL",
+            "30",
+            "30",
             "SALES",
             "CHICAGO"
           ],
@@ -12180,26 +12180,26 @@ export const AI_MOCK: QuizQuestion[] = [
             "7902",
             "FORD",
             "ANALYST",
-            "7788",
-            "83/01/03",
-            "1500",
-            "",
+            "7566",
+            "81/12/03",
+            "3000",
+            "NULL",
             "20",
-            "18",
+            "20",
             "RESEARCH",
             "DALLAS"
           ],
           [
-            "790A",
-            "HELLER",
+            "7934",
+            "MILLER",
             "CLERK",
-            "7788",
-            "83/01/23",
+            "7782",
+            "82/01/23",
             "1300",
-            "",
+            "NULL",
             "10",
-            "18",
-            "ACCOUNTINS",
+            "10",
+            "ACCOUNTING",
             "NEW YORK"
           ],
           [
@@ -12227,13 +12227,13 @@ export const AI_MOCK: QuizQuestion[] = [
     "number": 443,
     "title": "다음 과일 테이블에 대한 SQL문 내의 비교조건을 해석한 것으로 올바르지 않은 것은?",
     "options": [
-      "where 19=ALL(SELECT 과일코드 FROM 과일)\" 거짓이다.",
-      "where 15<ALL(SELECT 과일코드 FROM 과일)\"은 참이다.",
-      "where 19<ANY(SELECT 과일코드 FROM 과일)\"은 거짓이다.",
-      "where 21 NOT IN (SELECT 과일코드 FROM 과일)\"은 참이다."
+      "where 19=ALL(SELECT 과일코드 FROM 과일) 은 거짓이다.",
+      "where 15<ALL(SELECT 과일코드 FROM 과일) 은 참이다.",
+      "where 19<ANY(SELECT 과일코드 FROM 과일) 은 거짓이다.",
+      "where 21 NOT IN (SELECT 과일코드 FROM 과일) 은 참이다."
     ],
     "correctIndex": 1,
-    "explanation": "ALL은 전부 일치하는 것만 출력하는 것으로 AND라고 생각하면 되고 ANY는 OR로 생각하면 된다. 그러므로 보기②번은 15보다 큰 것이 모두 일치해야 하는데 과일 테이블에 있는 15, 키위는 값이 크지 않고 같다.",
+    "explanation": "ALL 은 서브쿼리 결과 모두에 대해 참이어야 하고(AND), ANY 는 하나라도 참이면 된다(OR). 과일코드는 10, 15, 19 다. ② 15 < ALL(10, 15, 19) 은 15 < 10, 15 < 15 가 거짓이므로 거짓이다. '참이다' 라고 한 ② 가 틀렸다. ① 19 = ALL 은 10, 15 와 같지 않아 거짓, ③ 19 < ANY 는 19 보다 큰 값이 없어 거짓, ④ 21 은 목록에 없어 NOT IN 이 참이다.",
     "chapter": "서브쿼리",
     "_source": "sqld-1140",
     "_origId": "sqld-0248",
@@ -12583,7 +12583,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "1,2"
     ],
     "correctIndex": 0,
-    "explanation": "2, 2 를 넣고 SV1 → 두 행을 7 로 바꾸고 9 를 넣은 뒤 SV2 (이때 7, 7, 9). 그 뒤 DELETE·INSERT 11·SV3·INSERT 9 를 했지만 ROLLBACK TO SV2 로 SV2 이후 변경이 모두 취소되고 COMMIT 되므로 7, 7, 9 가 남는다(①).",
+    "explanation": "2, 2 를 넣고 SV1 → 두 행을 7 로 바꾸고 9 를 넣은 뒤 SV2 (이때 7, 7, 9). 그 뒤 DELETE·INSERT 11·SV3·INSERT 20 을 했지만 ROLLBACK TO SV2 로 SV2 이후 변경이 모두 취소되고 COMMIT 되므로 7, 7, 9 가 남는다(①).",
     "chapter": "DML",
     "_source": "sqld-1140",
     "_origId": "sqld-0275",
@@ -13886,7 +13886,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "FULL OUTER JOIN"
     ],
     "correctIndex": 1,
-    "explanation": "Oracle OUTER JOIN에서 (+)가 왼쪽 테이블 옆에 위치해 있으므로 우측 테이블에서는 조인을 수행하지 않는 테이블의 행들은 그대로 유지되며, 좌측 테이블에서는 조인을 수행하지 않는 테이블의 행들은 null값으로 추가되는 Rights OUTER JOIN이 수행된다.",
+    "explanation": "Oracle 의 (+) 는 데이터가 없을 수 있는 쪽(NULL 로 채워질 쪽)에 붙인다. EMP.부서코드(+) = DEPT.부서코드 는 EMP 쪽에 (+) 가 있으므로 DEPT 의 모든 행을 남기고 짝이 없는 EMP 칼럼을 NULL 로 채운다. EMP 를 왼쪽에 두고 오른쪽 DEPT 를 보존하는 조인이므로 RIGHT OUTER JOIN 이다(②). LEFT OUTER JOIN 이면 EMP 쪽이 보존되고, FULL 은 양쪽 모두, CROSS JOIN 은 ON 조건을 쓸 수 없다.",
     "chapter": "조인",
     "_source": "sqld-1140",
     "_origId": "sqld-0304",
@@ -14210,7 +14210,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "number": 497,
     "title": "아래 ER 모델링의 표기법은 무엇인가?",
     "options": [
-      "IDEFIX 표기법",
+      "IDEF1X 표기법",
       "UML 표기법",
       "IE 표기법",
       "Barker 표기법"
@@ -14350,7 +14350,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "서브쿼리에는 Order by구를 사용할 수 없다."
     ],
     "correctIndex": 0,
-    "explanation": "서브쿼리는 메인쿼리의 칼럼을 모두 사용할 수 있지만, 메인쿼리는 서브쿼리의 칼럼을 사용할 수 없으므로 스칼라 서브쿼리 등을 사용해야 한다.",
+    "explanation": "서브쿼리는 메인쿼리의 칼럼을 쓸 수 있지만(연관 서브쿼리), 메인쿼리는 서브쿼리 안의 칼럼을 직접 쓸 수 없다(FROM 절 인라인 뷰 칼럼은 예외). 그래서 '메인쿼리에서도 서브쿼리 칼럼을 쓸 수 있다' 는 ① 이 틀렸다. ② FROM 절이면 인라인 뷰, ③ 여러 행이 오면 IN·ANY·ALL 을 쓴다. ④ 는 SQL 전문가 가이드 기준(ORDER BY 는 메인쿼리 마지막에 한 번만 쓴다)으로 옳은 설명이다. 참고로 실제 Oracle 은 인라인 뷰 안의 ORDER BY 를 허용한다(TOP-N 쿼리).",
     "chapter": "서브쿼리",
     "_source": "sqld-1140",
     "_origId": "sqld-0322",
@@ -15996,7 +15996,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "고객번호가 없으면 주문을 할 수 없으며, 한 명의 고객은 여러 개의 주문을 할 수 있고 주문을 하지 않을 수도 있다."
     ],
     "correctIndex": 1,
-    "explanation": "ERD 에서 주문과 제품 사이는 주문상품 같은 관계로 이어져 있어, 한 제품이 여러 주문에 들어갈 수 있다. 하나의 제품에 주문이 하나뿐이라는 ② 는 그림과 맞지 않는다. 문제는 그림에 나온 관계선과 표기만 근거로 판단해야 한다.",
+    "explanation": "그림의 주문 엔터티(주문번호 PK)는 고객번호·제품번호·배송번호를 FK 로 가진다. 제품 하나가 여러 주문 행의 제품번호로 쓰일 수 있으므로 제품 1 : 주문 N 관계이고, '하나의 제품에는 하나의 주문만' 이라는 ② 가 틀렸다. ① 주문일자는 주문 시점의 값이라 배송 후에도 바뀌지 않고, ③ 배송정보 쪽은 선택 관계라 배송지가 없는 주문도 있으며, ④ 고객 쪽은 필수(고객번호 FK)라 고객 없이 주문할 수 없고 고객은 주문을 여러 개 하거나 하지 않을 수 있다.",
     "chapter": "엔터티",
     "_source": "sqld-1140",
     "_origId": "sqld-0365",
@@ -16341,7 +16341,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "NULL"
     ],
     "correctIndex": 2,
-    "explanation": "SAVEPOINT가 중복될 경우 ROLLBACK TO SAVEPOINT을 수행하면, 중복된 SAVEPOINT 중 맨 뒤에 있는 SAVEPOINT 지점으로 ROLLBACK 된다. ",
+    "explanation": "(100, 200), (200, 300) 을 넣고 SAVEPOINT T1 → N2 = 200 인 행의 N1 을 300 으로 바꾼 뒤 같은 이름 T1 을 다시 만들었다. 같은 이름의 저장점을 다시 만들면 뒤의 것으로 바뀌므로, DELETE 후 ROLLBACK TO SAVEPOINT T1 은 UPDATE 직후 시점으로 돌아간다. 남은 행은 (300, 200), (200, 300) 이라 MAX(N1) = 300 이다(③).",
     "chapter": "트랜잭션 관리",
     "_source": "sqld-1140",
     "_origId": "sqld-0383",
@@ -16540,7 +16540,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "20, 20, 20"
     ],
     "correctIndex": 1,
-    "explanation": "AVG 는 NULL 을 빼고 평균을 구한다. 그래서 같은 COL3 이라도 WHERE 로 어떤 행을 남기느냐에 따라 평균이 달라진다. 첫 번째는 전체 행, 두 번째·세 번째는 COL1 이 NULL 이거나 0 이하인 행을 뺀 행으로 계산하여 10, 20, 20 이 된다(②).",
+    "explanation": "AVG 는 NULL 을 빼고 계산한다. COL3 값은 20, 0, NULL 이라 첫 SQL 은 (20 + 0) / 2 = 10. COL1 > 0 인 행은 첫 행(COL1 30)뿐이라 20. COL1 IS NOT NULL 인 행은 첫째(COL3 20)·셋째(COL1 0, COL3 NULL)인데 NULL 을 빼면 20 만 남아 20 이다. 정답은 10, 20, 20(②).",
     "chapter": "그룹 함수",
     "_source": "sqld-1140",
     "_origId": "sqld-0393",
@@ -17816,7 +17816,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "ㄱ : RANK(), ㄴ : ROW_NUMBER()"
     ],
     "correctIndex": 3,
-    "explanation": "첫 번째 실행 결과는 급여가 동일하므로 같은 등수가 조회되었다. 따라서 RANK() 함수이다. 두 번째 실행 결과는 급여가 동일하지만 유일한 등수가 부여되었다. 따라서 ROW_NUMBER() 함수이다.",
+    "explanation": "결과 1 은 급여 250 인 제갈량·사마의가 같은 3 등이고 다음이 5 등으로 건너뛰므로 RANK() 다(ㄱ). 결과 2 는 급여가 같아도 3, 4 처럼 서로 다른 순번이 붙으므로 ROW_NUMBER() 다(ㄴ). 정답은 ④. DENSE_RANK() 였다면 동점 다음이 4 등이 된다. ※ 원 자료는 결과 표 순서가 해설·정답과 반대로 놓여 있어 표 순서를 바로잡았다.",
     "chapter": "윈도우 함수",
     "_source": "sqld-1140",
     "_origId": "sqld-0435",
@@ -17873,7 +17873,62 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "table",
-        "caption": "[결과 1] (모든 순번 고유 — ROW_NUMBER 패턴)",
+        "caption": "[결과 1]",
+        "headers": [
+          "순번",
+          "이름",
+          "부서",
+          "직책",
+          "급여"
+        ],
+        "rows": [
+          [
+            "1",
+            "조자룡",
+            "총무팀",
+            "부장",
+            "300"
+          ],
+          [
+            "2",
+            "유비",
+            "경영지원팀",
+            "과장",
+            "290"
+          ],
+          [
+            "3",
+            "제갈량",
+            "보안팀",
+            "대리",
+            "250"
+          ],
+          [
+            "3",
+            "사마의",
+            "인사부",
+            "대리",
+            "250"
+          ],
+          [
+            "5",
+            "관우",
+            "개발팀",
+            "사원",
+            "230"
+          ],
+          [
+            "6",
+            "장비",
+            "개발팀",
+            "사원",
+            "220"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "[결과 2]",
         "headers": [
           "순번",
           "이름",
@@ -17927,64 +17982,9 @@ export const AI_MOCK: QuizQuestion[] = [
         ]
       },
       {
-        "type": "table",
-        "caption": "[결과 2] (동률 250 — RANK 패턴, 3·3 후 5로 점프)",
-        "headers": [
-          "순번",
-          "이름",
-          "부서",
-          "직책",
-          "급여"
-        ],
-        "rows": [
-          [
-            "1",
-            "조자룡",
-            "총무팀",
-            "부장",
-            "300"
-          ],
-          [
-            "2",
-            "유비",
-            "경영지원팀",
-            "과장",
-            "290"
-          ],
-          [
-            "3",
-            "제갈량",
-            "보안팀",
-            "대리",
-            "250"
-          ],
-          [
-            "3",
-            "사마의",
-            "인사부",
-            "대리",
-            "250"
-          ],
-          [
-            "5",
-            "관우",
-            "개발팀",
-            "사원",
-            "230"
-          ],
-          [
-            "6",
-            "장비",
-            "개발팀",
-            "사원",
-            "220"
-          ]
-        ]
-      },
-      {
         "type": "sql",
-        "caption": "윈도우 함수 빈칸(①②) 추론 SQL",
-        "code": "-- 결과 1\nSELECT ( ① ) OVER (ORDER BY 급여 desc) as 순번,\n       이름, 부서, 직책, 급여\nFROM Mytest;\n\n-- 결과 2\nSELECT ( ② ) OVER (ORDER BY 급여 desc) as 순번,\n       이름, 부서, 직책, 급여\nFROM Mytest;"
+        "caption": "[SQL]",
+        "code": "-- 결과 1\nSELECT ( ㄱ ) OVER (ORDER BY 급여 desc) as 순번,\n       이름, 부서, 직책, 급여\nFROM Mytest;\n\n-- 결과 2\nSELECT ( ㄴ ) OVER (ORDER BY 급여 desc) as 순번,\n       이름, 부서, 직책, 급여\nFROM Mytest;"
       }
     ]
   },
@@ -18050,7 +18050,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "ProductName"
     ],
     "correctIndex": 0,
-    "explanation": "두 SQL문은 모두 ProductName '비디오'에 대한 집계이다. ProductName '비디오' 에 대한 전체 합계가 조회되어야 한다.",
+    "explanation": "ROLLUP(ProductName) 은 (ProductName) 별 합계와 전체 합계 () 두 단계를 만든다. 같은 결과를 GROUPING SETS 로 쓰려면 두 그룹을 그대로 적은 GROUPING SETS(ProductName, ()) 가 된다(①). WHERE 로 '비디오' 만 남겼으므로 결과는 비디오 합계 28002 와 전체 합계 28002 두 행이다. ② 는 (ProductName), (Price) 그룹, ③ 은 전체 합계만, ④ 는 비디오 합계만 만든다.",
     "chapter": "그룹 함수",
     "_source": "sqld-1140",
     "_origId": "sqld-0438",
@@ -18249,7 +18249,7 @@ export const AI_MOCK: QuizQuestion[] = [
       {
         "type": "image",
         "src": "/sqld-images/j446-1.png",
-        "caption": "IE 표기법 ERD — [고객마스터] 고객번호(PK), 가입일자, 유입경로, 고객등급, 거주지, 전화번호, 주소. [계좌마스터] 계좌번호(PK), 고객번호(FK), 계좌명, 관리지점, 계좌유형, 예수금, 평균잔고, 계좌개설일, 휴면계좌여부, 계좌정지여부, 인터넷뱅킹신청여부. 관계: 고객마스터 1 — 까마귀발 N 계좌마스터 (한 고객이 여러 계좌 보유)."
+        "caption": "IE 표기법 ERD — [고객마스터] 고객번호(PK), 가입일자, 유입경로, 고객등급, 거주지, 전화번호, 주소. [계좌마스터] 계좌번호 + 고객번호(FK) 가 함께 주식별자(PK), 계좌명, 관리지점, 계좌유형, 예수금, 평균잔고, 계좌개설일, 휴면계좌여부, 계좌정지여부, 인터넷뱅킹신청여부. 관계: 고객마스터 1 — 까마귀발 N 계좌마스터."
       }
     ]
   },
@@ -18308,7 +18308,7 @@ export const AI_MOCK: QuizQuestion[] = [
       {
         "type": "image",
         "src": "/sqld-images/j448-1.png",
-        "caption": "IE 표기법 ERD — [고객마스터]/[계좌마스터] (j446 동일 구조, 1:N 까마귀발). 고객마스터 속성: 고객번호(PK), 가입일자, 유입경로, 고객등급, 거주지, 전화번호, 주소. 계좌마스터 속성: 계좌번호(PK), 고객번호(FK), 계좌명, 관리지점, 계좌유형, 예수금, 평균잔고, 계좌개설일, 휴면계좌여부, 계좌정지여부, 인터넷뱅킹신청여부."
+        "caption": "IE 표기법 ERD — [고객마스터] 고객번호(PK), 가입일자, 유입경로, 고객등급, 거주지, 전화번호, 주소. [계좌마스터] 계좌번호 + 고객번호(FK) 가 함께 주식별자(PK), 계좌명, 관리지점, 계좌유형, 예수금, 평균잔고, 계좌개설일, 휴면계좌여부, 계좌정지여부, 인터넷뱅킹신청여부. 관계: 고객마스터 1 — 까마귀발 N 계좌마스터."
       }
     ]
   },
@@ -19099,10 +19099,10 @@ export const AI_MOCK: QuizQuestion[] = [
       "부서별 합계를 계산할 때 NULL 값을 만나면 0으로 치환한다.",
       "DEPTNO 10의 합계는 3000이고 20의 합계는 500이다.",
       "NVL(SAL, 0)문에서 NVL은 NULL에 대한 합계 오류를 예방한다.",
-      "SELECT문에 WHERE 조건이 없으므로 연산에 참여하는 총 행의 수는 2개이다."
+      "SELECT문에 WHERE 조건이 없으므로 연산에 참여하는 총 행의 수는 5개이다."
     ],
     "correctIndex": 2,
-    "explanation": "해당 쿼리문의 경우 각각 칼럼에 NULL이 있으면 여러개 칼럼을 0으로 치환하는 연산이 수행되기 때문에 비효율적이다. 실무적인 측면에서는 NVL 함수를 바깥에서 1회만 사용할 수 있도록 처리해야 한다.",
+    "explanation": "SUM 같은 집계 함수는 원래 NULL 을 빼고 계산하므로 NULL 이 있어도 합계에 오류가 나지 않는다. 'NVL 이 합계 오류를 예방한다' 는 ③ 이 옳지 않다. ① NULL 은 0 으로 바뀌어 더해지고, ② 10번은 0 + 1000 + 2000 = 3000, 20번은 0 + 500 = 500 이며, ④ WHERE 가 없어 5행 모두 연산에 참여한다. 참고로 행마다 NVL 을 쓰는 것보다 NVL(SUM(SAL), 0) 처럼 바깥에서 한 번 쓰는 편이 효율적이다. ※ 원 자료의 ④ 는 '총 행의 수는 2개' 로 적혀 있어 ③ 과 함께 정답이 둘이 되므로, 같은 문제의 다른 판(5개)으로 바로잡았다.",
     "chapter": "그룹 함수",
     "_source": "sqld-1140",
     "_origId": "sqld-0475",
@@ -20134,7 +20134,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "22"
     ],
     "correctIndex": 1,
-    "explanation": "NVL(COL2, 0) 으로 NULL 을 0 으로 바꾼 다음 평균을 구하므로, NULL 이었던 행도 분모에 들어간다. AVG(COL2) 처럼 NVL 없이 구하면 NULL 행은 빠져서 평균이 더 커진다. 이 차이를 묻는 문제다.",
+    "explanation": "COL2 는 10, 20, NULL, 40, 50 이다. NVL(COL2, 0) 으로 NULL 을 0 으로 바꾸면 다섯 행 모두 평균에 들어가 (10 + 20 + 0 + 40 + 50) / 5 = 120 / 5 = 24 다(②). NVL 없이 AVG(COL2) 를 구하면 NULL 행이 빠져 120 / 4 = 30 이 된다.",
     "chapter": "그룹 함수",
     "_source": "sqld-1140",
     "_origId": "sqld-0520",
@@ -20323,7 +20323,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "가,나"
     ],
     "correctIndex": 2,
-    "explanation": "데이터베이스 식별자는 대표성 여부에 따라서 주식별자와 보조 식별자로 구분된다. 주식별자는 후보키 중에서 엔터티를 대표하는 식별자로 다른 엔터티와 참조하여 연결할 수 있는 식별자이다.",
+    "explanation": "주식별자는 해당 업무에서 자주 이용되는 속성으로 정하고(가), 복합 식별자라면 너무 많은 속성이 들어가지 않게 한다(라). 나 처럼 리스트·명칭같이 이름으로 기술되는 것은 주식별자로 쓰지 않고, 다 처럼 자주 바뀌는 속성은 불변성에 어긋나 주식별자로 부적절하다. 정답은 가, 라(③).",
     "chapter": "엔터티",
     "_source": "sqld-1140",
     "_origId": "sqld-0530",
@@ -20414,7 +20414,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "ISNULL"
     ],
     "correctIndex": 1,
-    "explanation": "10 + 20 × x = 14 가 되려면 x = 0.2 여야 한다. NVL2(값, A, B) 는 값이 NULL 이 아니면 A, NULL 이면 B 를 돌려주므로 NVL2(NULL, 0.1, 0.2) = 0.2 → 10 + 4 = 14(②). COALESCE(NULL, 0.1, 0.2) 와 NVL 은 0.1 을 돌려줘 12 가 되고, ISNULL 은 SQL Server 함수다.",
+    "explanation": "10 + 20 × x = 14 가 되려면 x = 0.2 여야 한다. NVL2(값, A, B) 는 값이 NULL 이 아니면 A, NULL 이면 B 를 돌려주므로 NVL2(NULL, 0.1, 0.2) = 0.2 → 10 + 4 = 14(②). COALESCE(NULL, 0.1, 0.2) 는 처음 나오는 NULL 이 아닌 값 0.1 을 돌려줘 12 가 되고, NVL 은 인수를 두 개만 받으므로 세 개를 주면 오류이며, ISNULL 은 SQL Server 함수다.",
     "chapter": "함수",
     "_source": "sqld-1140",
     "_origId": "sqld-0534",
@@ -20462,7 +20462,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "select count(nvl(usercount, 0)) from test21;"
     ],
     "correctIndex": 3,
-    "explanation": "①②③ 은 NULL 을 0 또는 1 로 바꾼 뒤 평균을 구하는 식(③ 은 합계를 전체 4행으로 나눈 평균)으로, 표의 값으로 계산하면 모두 같은 값이 나온다. ④ COUNT(NVL(usercount, 0)) 는 NVL 로 NULL 이 사라져 전체 행 수 4 를 센다. 평균이 아니라 건수를 구하는 ④ 만 결과가 다르다.",
+    "explanation": "usercount 는 10, 20, NULL, NULL 이다. ① NULL 을 1 로 바꾸면 (10 + 20 + 1 + 1) / 4 = 8, 여기서 0.5 를 빼 7.5. ② NULL 을 0 으로 바꾼 평균 30 / 4 = 7.5. ③ 합 30 을 4 로 나눠 7.5. ④ COUNT(NVL(usercount, 0)) 는 NVL 로 NULL 이 사라져 4 행을 모두 세어 4 이므로 결과가 다르다.",
     "chapter": "그룹 함수",
     "_source": "sqld-1140",
     "_origId": "sqld-0538",
@@ -21320,7 +21320,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "한 명의 고객은 여러 개의 서비스를 구매할 수 있다."
     ],
     "correctIndex": 0,
-    "explanation": "고객과 서비스 구매의 관계의 차수는 1 이므로 하나의 고객이 여러 서비스를 구매할 수 있다. 또한 고객 -> 서비스 구매는 선택적 관계이므로 어떤 고객은 서비스를 구매하지 않아도 되지만, 반대는 필수적 관계이므로 서비스 구매는 구매한 고객이 반드시 정의되어야 한다.",
+    "explanation": "고객 1 명은 서비스구매를 여러 건 가질 수 있는 1:N 관계다(④). 고객 쪽에서 서비스구매로 가는 관계는 선택이라 구매하지 않은 고객도 있을 수 있고(③), 서비스구매 쪽에서 고객으로 가는 관계는 필수라 모든 구매 이력에는 반드시 고객이 있어야 한다(②). 그래서 '구매 이력에 고객 정보가 없을 수 있다' 는 ① 이 틀렸다.",
     "chapter": "엔터티",
     "_source": "sqld-1140",
     "_origId": "sqld-0574",
@@ -21642,7 +21642,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "SELECT DECODE(SUBSTR(JUMIN, 7, 1), '1', '남자', '여자') FROM TAB1;"
     ],
     "correctIndex": 1,
-    "explanation": "CASE 문 축약형 문법(비교 대상이 CASE 와 WHEN 사이에 있는)은 반드시 비교 대상과 비교 상수의 데이터 타입이 일치해야 한다. SUBSTR 결과는 항상 문자로 출력되므로 숫자 상수와 비교하는 3 번 지문은 에러가 발생하여 출력되지 않는다. ",
+    "explanation": "CASE 문 축약형 문법(비교 대상이 CASE 와 WHEN 사이에 있는)은 반드시 비교 대상과 비교 상수의 데이터 타입이 일치해야 한다. SUBSTR 결과는 문자이므로 숫자 1 과 비교하는 ② (CASE SUBSTR(...) WHEN 1) 은 데이터 타입이 맞지 않아 오류가 난다. ③ 처럼 CASE WHEN SUBSTR(...) = 1 로 쓰면 일반 비교식이라 문자가 숫자로 자동 변환되어 ①④ 와 같은 결과(남자, 여자)가 나온다. ",
     "chapter": "함수",
     "_source": "sqld-1140",
     "_origId": "sqld-0588",
@@ -21782,7 +21782,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "500, 100, 400, 600"
     ],
     "correctIndex": 0,
-    "explanation": "SUM(COL2)는 NULL 만 제외하고 총합을 리턴하므로 500 이 출력된다. 하지만 2 번 지문의 경우 COL1 > 0 조건에 만족하는 행은 첫 번째 행 하나이므로 SUM(COL2) + SUM(COL3) = NULL + 100 이 되며, 이때는 NULL 이 리턴된다.",
+    "explanation": "SUM 은 NULL 을 빼고 더하지만, SUM 결과끼리 더할 때 한쪽이 NULL 이면 결과도 NULL 이다. ① 전체: SUM(COL2) = 200 + 300 = 500, SUM(COL3) = 100 + 400 = 500 → 1000. ② COL1 > 0 인 행은 첫 행뿐이라 SUM(COL2) 가 NULL 이 되어 NULL + 100 = NULL. ③ COL1 IS NOT NULL 인 첫째·셋째 행: SUM(COL2) = 300, SUM(COL3) = 100 → 400. ④ COL1 IS NULL 인 둘째 행: 200 + 400 = 600. 정답은 1000, NULL, 400, 600(①).",
     "chapter": "함수",
     "_source": "sqld-1140",
     "_origId": "sqld-0593",
@@ -22071,7 +22071,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "2"
     ],
     "correctIndex": 2,
-    "explanation": "서브쿼리 결과가 먼저 실행되어 2020년 2월 1일보다 입사일이 큰 행의 DEPTNO(30, 40, 50)가 출력되고 ALL이 작다와 결합되어 이들 중 30보다 작거나 같은 조건으로 전달된다. 따라서 DEPTNO가 10, 20, 30인 EMPNO의 수는 총 3개이다. ",
+    "explanation": "서브쿼리는 입사일이 2020-02-01 이후(같은 날 포함)인 사원의 DEPTNO 30, 40, 50 을 돌려준다. DEPTNO <= ALL(30, 40, 50) 은 세 값 모두보다 작거나 같아야 하므로 DEPTNO <= 30 과 같다. 해당하는 DEPTNO 는 10, 20, 30 이고, DEPTNO 가 NULL 인 1번 사원은 비교 결과가 UNKNOWN 이라 빠진다. COUNT(DEPTNO) = 3(③).",
     "chapter": "서브쿼리",
     "_source": "sqld-1140",
     "_origId": "sqld-0602",
@@ -22231,7 +22231,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "SELECT 고객.성별, COUNT(서비스.서비스번호) AS CNT, SUM(서비스.가격) AS SUM_PRICE \n    FROM 고객, 서비스구매, 서비스 \n   WHERE 고객.고객번호= 서비스구매.고객번호 \n     AND 서비스구매.서비스번호 = 서비스.서비스번호 \n   GROUP BY 고객.성별;"
     ],
     "correctIndex": 2,
-    "explanation": "고객과 서비스 구매 관계에서 고객은 필수, 서비스 구매는 선택적 관계이므로 LEFT OUTER JOIN을 하면 서비스 구매를 하지 않은 고객의 서비스 구매 정보가 NULL로 출력된다. 따라서 이때, 고객의 성별로 서비스 구매나 서비스 테이블의 컬럼을 COUNT할 경우 NULL은 세지 않기 때문에 정상적으로 구매를 한 고객 수가 리턴될 텐데 2번의 경우 고객 테이블의 고객 번호를 세기 때문에 성별 고객 수가 출력된다.",
+    "explanation": "고객 쪽에서 서비스구매는 선택 관계라 LEFT OUTER JOIN 을 하면 구매하지 않은 고객도 서비스 칼럼이 NULL 인 행으로 남는다. ③ 은 이 상태에서 COUNT(고객.고객번호) 를 세므로 구매하지 않은 고객까지 이용횟수에 들어가 결과가 틀린다(서비스 쪽 칼럼을 세야 NULL 이 빠진다). ①·② 는 INNER JOIN 후 서비스번호·가격을 세고 더하며, ④ 도 등가 조인이라 구매한 건만 집계해 성별 이용횟수와 금액이 맞게 나온다.",
     "chapter": "조인",
     "_source": "sqld-1140",
     "_origId": "sqld-0605",
@@ -22636,7 +22636,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "정규화는 모델의 일관성을 확보하고 중복을 제거하여 모델의 독립성을 확보하는 과정이다."
     ],
     "correctIndex": 2,
-    "explanation": "제1정규화 : 속성의 원자성(한 속성이 하나의 값을 갖는 특성)을 갖도록 엔터티를 분해하는 단계 제2정규화 : 제1정규화를 진행한 엔터티에 대해 완전 함수 종속을 갖도록 분해하는 단계 제3정규화 : 제2정규화를 진행한 엔터티에 대해 이행적 종속을 갖지 않도록 분해하는 단계 -> 일반속성은 주식별자 전체에 종속적이다",
+    "explanation": "정규화는 논리 데이터 모델링 단계에서 엔터티를 상세화하는 과정이다. '개념 모델링 단계' 라고 한 ③ 이 적절하지 않다. ① 제3정규형까지 만족하면 일반속성은 주식별자 전체에 종속되고(부분·이행 종속 제거), ② 제1정규형은 모든 속성이 하나의 값(원자값)을 가진다는 뜻이며, ④ 정규화는 중복을 없애 모델의 일관성과 독립성을 높인다.",
     "chapter": "정규화",
     "_source": "sqld-1140",
     "_origId": "sqld-0626",
@@ -23612,7 +23612,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "110"
     ],
     "correctIndex": 0,
-    "explanation": "처음 INSERT 3개의 문장은 COMMIT을 수행했으므로 영구 저장된다. 이후 COL3을 추가하면 이미 입력된 세 개의 행에 대해 NULL을 갖게 된다. 그 뒤 수행하는 INSERT, UPDATE, DELETE 문장은 이어서 실행하는 ALTER TABLE DROP COLUMN 문장으로 인해 자동 확정된다. (DDL AUTO COMMIT). 따라서 ROLLBACK을 수행해도 취소되지 않는다. ",
+    "explanation": "처음 INSERT 3개의 문장은 COMMIT을 수행했으므로 영구 저장된다. 이후 COL3을 추가하면 이미 입력된 세 개의 행에 대해 NULL을 갖게 된다. 그 뒤 수행하는 INSERT, UPDATE, DELETE 문장은 이어서 실행하는 ALTER TABLE DROP COLUMN 문장으로 인해 자동 확정된다. (DDL AUTO COMMIT). 따라서 ROLLBACK을 수행해도 취소되지 않는다.  남은 행은 (COL2, COL3) = (50, NULL), (20, NULL), (40, 100) 이고, COL2 + COL3 은 NULL 이 섞인 두 행이 NULL 이라 SUM 은 40 + 100 = 140 이다(①).",
     "chapter": "DML",
     "_source": "sqld-1140",
     "_origId": "sqld-0666",
@@ -23677,11 +23677,11 @@ export const AI_MOCK: QuizQuestion[] = [
     "options": [
       "HR 유저에게 부여된 EMP 테이블 입력 권한 회수 시 HONG에게 부여된 권한도 함께 회수되었다.",
       "HR이 HONG에게 부여한 EMP 테이블의 조회 권한은 SYSTEM 계정에서 직접 회수가 가능하다.",
-      "HR 유저에게 부여된 CREATE TABLE 권한 회수 시 HONG에게 부여된 CREATE TABLE 권한도 함께  \n회수되었다.",
+      "HR 유저에게 부여된 CREATE VIEW 권한 회수 시 HONG에게 부여된 CREATE VIEW 권한도 함께 회수되었다.",
       "HR 계정에게 부여된 SCOTT.EMP에 대한 SELECT 권한도 함께 회수된다."
     ],
     "correctIndex": 0,
-    "explanation": "중간관리자가 WITN GRANT OPTION으로 부여 받은 권한을 제 3자에게 부여한 경우, 관리자가 제 3자의 권한을 직접 회수할 수 없다. 하지만 중간관리자 권한을 회수하면 제 3자에게 부여한 권한도 함께 회수된다. 반대로 WITH ADMIN OPTION으로 부여할 경우 중간관리자 권한 회수 시 제 3자에게 부여한 권한은 함께 회수되지 않는다.",
+    "explanation": "WITH GRANT OPTION 으로 받은 객체 권한(SELECT, INSERT ON SCOTT.EMP)을 HR 이 HONG 에게 다시 준 경우, HR 의 권한을 회수하면 HONG 에게 준 권한도 함께 회수된다(①). ② SYSTEM 은 HR 이 HONG 에게 준 권한을 직접 회수할 수 없다(REVOKE 는 자기가 준 권한만 회수). ③ WITH ADMIN OPTION 으로 받은 시스템 권한(CREATE VIEW)은 HR 에게서 회수해도 HONG 의 권한은 남는다. ④ 회수한 것은 INSERT 뿐이라 HR 의 SELECT 권한은 그대로다. ※ 원 자료의 ③ 은 위 SQL 에 없는 CREATE TABLE 로 적혀 있어 CREATE VIEW 로 맞췄다.",
     "chapter": "DCL·TCL",
     "_source": "sqld-1140",
     "_origId": "sqld-0670",
@@ -25121,13 +25121,13 @@ export const AI_MOCK: QuizQuestion[] = [
     "number": 810,
     "title": "NULL에 대한 설명으로 틀린 것은?",
     "options": [
-      "NULL과의 비교 연산은 FALSE를 리턴한다.",
+      "NULL과의 비교 연산은 UNKNOWN 을 리턴한다.",
       "NULL이 포함된 컬럼의 SUM 값은 항상 NULL이다.",
       "NULL + 100은 NULL을 리턴한다.",
       "COUNT는 NULL을 세지 않는다."
     ],
     "correctIndex": 1,
-    "explanation": "SUM 같은 집계 함수는 NULL 을 빼고 계산하므로 NULL 이 섞여 있어도 나머지 값의 합이 나온다. 모든 값이 NULL 일 때만 결과가 NULL 이다. 그래서 '항상 NULL' 이라는 ② 가 틀렸다. ① NULL 과 비교한 결과는 정확히는 UNKNOWN 이지만 조건에서는 참이 아니라 거짓처럼 걸러진다.",
+    "explanation": "SUM 같은 집계 함수는 NULL 을 빼고 계산하므로 NULL 이 섞여 있어도 나머지 값의 합이 나온다. 모든 값이 NULL 일 때만 결과가 NULL 이다. 그래서 '항상 NULL' 이라는 ② 가 틀렸다. ① NULL 과의 비교 결과는 UNKNOWN 이고(조건에서는 참이 아니라 걸러짐), ③ NULL + 100 은 NULL, ④ COUNT(칼럼) 은 NULL 을 세지 않는다. ※ 원 자료의 ① 은 'FALSE 를 리턴한다' 로 적혀 있어 가이드 기준(UNKNOWN)으로 보면 이것도 틀린 설명이 되므로, 단일 정답이 되도록 바로잡았다.",
     "chapter": "함수",
     "_source": "sqld-1140",
     "_origId": "sqld-0729",
@@ -25549,7 +25549,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "SELECT P.CODE, P.NAME, P.PRICE FROM PRODUCT P, (SELECT CODE, MAX(PRICE) AS MAX_PRICE FROM PRODUCT GROUP BY CODE) I WHERE P.CODE = I.CODE AND P.PRICE = I.MAX_PRICE;"
     ],
     "correctIndex": 0,
-    "explanation": "2, 3, 4번 → 모두 CODE별 최대 PRICE를 조회 → 동일한 결과 1번 → 상관 서브쿼리에서 PRICE 단일값을 기대하지만, 동일 CODE가 여러 건이면 서브쿼리가 다중행 반환 → 오류 발생 (single-row subquery error) 즉, 1번만 정상적인 결과 집합을 반환하지 못하거나 결과가 다름",
+    "explanation": "②③④ 는 모두 CODE 별로 PRICE 가 가장 큰 행(CODE, NAME, PRICE)만 조회해 결과가 같다(② 연관 서브쿼리, ③ 다중 컬럼 IN, ④ 인라인 뷰 조인). ① 은 스칼라 서브쿼리 안에서 정의되지 않은 별칭 P2 를 써서 오류가 나고, 별칭을 고치더라도 같은 CODE 가 여러 행이면 스칼라 서브쿼리가 여러 값을 돌려줘 오류가 난다. 최댓값 행만 고르는 조건도 없어 나머지와 결과가 다르다(①).",
     "chapter": "서브쿼리",
     "_source": "sqld-1140",
     "_origId": "sqld-0749",
@@ -25687,7 +25687,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "7300"
     ],
     "correctIndex": 1,
-    "explanation": "그룹으로 나눌 때 명학히 나눠지지 않으면 앞 그룹의 크기를 더 크게 나누므로 10번 부서의 1번 그룹원은 MILLER, CLARK이며, 20번 부서의 2번 그룹원은 SCOTT과 FORD 이므로 1300 + 2450 + 3000 + 3000 = 9750 이 된다.",
+    "explanation": "그룹으로 나눌 때 명확히 나눠지지 않으면 앞 그룹의 크기를 더 크게 나누므로 10번 부서의 1번 그룹원은 MILLER, CLARK이며, 20번 부서의 2번 그룹원은 SCOTT과 FORD 이므로 1300 + 2450 + 3000 + 3000 = 9750 이 된다.",
     "chapter": "윈도우 함수",
     "_source": "sqld-1140",
     "_origId": "sqld-0758",
@@ -26445,7 +26445,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "SELECT SUM(DECODE(COL2, 10, 1, 0)) AS CNT10, SUM(DECODE(COL2, 20, 1, 0)) AS CNT20 FROM TAB1;"
     ],
     "correctIndex": 3,
-    "explanation": "특정 대상의 수를 세려면 COUNT는 세고자 하는 값이 어떤 값이든 존재(1이나 ‘X’ 등)하면 되고, 반대로 세지 않을 값은 반드시 NULL이어야 한다. SUM은 세고자 하는 값이 1이고, 나머지는 NULL이거나 0이면 된다. 따라서 해당 조건에 만족하는 문장은 1번이다.",
+    "explanation": "COUNT 로 세려면 세지 않을 값이 반드시 NULL 이어야 하고, SUM 으로 세려면 셀 값은 1, 나머지는 0 이나 NULL 이면 된다. ④ SUM(DECODE(COL2, 10, 1, 0)) 은 10 인 행만 1 이라 3, 20 은 2 가 되어 결과와 같다. ① ③ 은 DECODE 가 'X' 나 0 처럼 NULL 이 아닌 값을 돌려줘 COUNT 가 5 행을 모두 세고, ② 는 문자 'O'·'X' 를 SUM 해 오류가 난다. 정답은 ④.",
     "chapter": "그룹 함수",
     "_source": "sqld-1140",
     "_origId": "sqld-0789",
@@ -26727,7 +26727,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "2"
     ],
     "correctIndex": 1,
-    "explanation": "NATURAL JOIN은 컬럼명이 같은 컬럼끼리 값이 같은 조인을 완성한다. 따라서 양쪽 테이블의 COL2의 값이 같은 대상끼리 연결되는데, TAB1의 COL2가 10인 경우 1개, 20인 경우 2개, 30인 경우는 생략되며, NULL은 같다고 볼 수 없으므로 생략된다. 따라서 최종 출력되는 건수는 1 + 2+ 1 = 4건이다.",
+    "explanation": "NATURAL JOIN 은 이름이 같은 칼럼(COL2) 값이 같은 행끼리 잇는다. TAB1 의 COL2 가 10 인 A·D 는 TAB2 의 10 한 행과 각각 이어져 2건, 20 인 B 는 TAB2 의 20 두 행과 이어져 2건이다. 30 인 C 는 짝이 없고, NULL 끼리는 같다고 보지 않아 E 도 빠진다. 2 + 2 = 4건(②).",
     "chapter": "조인",
     "_source": "sqld-1140",
     "_origId": "sqld-0795",
@@ -27404,7 +27404,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 883,
-    "title": "TAB1의 데이터를 바탕으로 SQL의 결과는 무엇인가가?",
+    "title": "TAB1의 데이터를 바탕으로 SQL의 결과는 무엇인가?",
     "options": [
       "2, 3",
       "3, 3",
@@ -32722,7 +32722,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "두 엔터티는 관계가 없다."
     ],
     "correctIndex": 2,
-    "explanation": "ERD 에서 CUSTOMER 쪽은 하나, ORDERS 쪽은 여러 개(까마귀발) 표기로 이어져 있다. 한 고객이 여러 주문을 할 수 있는 1:N 관계다(③). 반대로 주문 하나는 고객 한 명에게만 속한다.",
+    "explanation": "ERD 에서 CUSTOMER 와 ORDERS 사이에 1:N 이 표시되어 있고, ORDERS 가 customer_id 를 FK 로 가진다. 한 고객이 여러 주문을 할 수 있는 관계다(③). 반대로 주문 하나는 고객 한 명에게만 속한다.",
     "chapter": "엔터티",
     "_source": "sqld-1140",
     "_origId": "sqld-0986",
@@ -32806,7 +32806,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "ORDER_DATE의 데이터 타입"
     ],
     "correctIndex": 1,
-    "explanation": "주문 하나에 주문항목(ORDER_ITEM)이 여러 개 달리는 구조는 ORDERS 와 ORDER_ITEM 사이의 1:N 관계로 표현한다(②). ERD 에서는 ORDER_ITEM 쪽에 '여러 개' 표기(까마귀발)가 붙는다.",
+    "explanation": "주문 하나에 주문항목(ORDER_ITEM)이 여러 개 달리는 구조는 ORDERS 와 ORDER_ITEM 사이의 1:N 관계로 표현한다(②). 그림에서는 두 엔터티 사이의 1:N 표시와, ORDER_ITEM 이 order_id 를 받아 쓰는 것으로 나타난다.",
     "chapter": "엔터티",
     "_source": "sqld-1140",
     "_origId": "sqld-0989",
@@ -32834,7 +32834,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "한 고객은 여러 주문을 가질 수 있다."
     ],
     "correctIndex": 2,
-    "explanation": "ERD 에서 ORDERS 와 ORDER_ITEM 은 1:N 이라, 주문 하나에 항목이 여러 개 달리지만 항목 하나는 한 주문에만 속한다. '한 ORDER_ITEM 이 여러 주문에 동시에 속한다' 는 ③ 이 잘못된 해석이다. ①②④ 는 관계 표기와 맞다.",
+    "explanation": "ERD 에서 ORDERS 와 ORDER_ITEM 은 1:N 이라, 주문 하나에 항목이 여러 개 달리지만 항목 하나는 한 주문에만 속한다. '한 ORDER_ITEM 이 여러 주문에 동시에 속한다' 는 ③ 이 잘못된 해석이다. ② ④ 는 1:N 표시 그대로이고, ① 은 1:N 의 N 이 0 개 이상을 뜻하므로(주문 없는 고객도 고객 테이블에 존재 가능) 잘못된 해석이 아니다.",
     "chapter": "엔터티",
     "_source": "sqld-1140",
     "_origId": "sqld-0990",
