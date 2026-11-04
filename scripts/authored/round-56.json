@@ -329,7 +329,7 @@
         "60"
       ],
       "correctIndex": 1,
-      "explanation": "KEEP (DENSE_RANK FIRST ORDER BY COL1) 은 COL1 오름차순으로 가장 앞 순위인 행들(COL1 = 1 인 두 행)만 남긴 뒤 MAX(COL2)를 구한다. 그 두 행의 COL2 는 10, 20 이라 결과는 20 이다(②). 10 은 MIN, 50 은 전체 MAX 를 구한 값이다.",
+      "explanation": "KEEP (DENSE_RANK FIRST ORDER BY COL1) 은 COL1 오름차순으로 가장 앞 순위인 행들(COL1 = 1 인 두 행)만 남긴 뒤 MAX(COL2)를 구한다. 그 두 행의 COL2 는 10, 20 이라 결과는 20 이다(②). ① 10 은 MAX 대신 MIN 을 쓴 값이고, 전체에서 MAX 를 구하면 50 이 나온다(KEEP 없이).",
       "references": [
         {
           "type": "table",

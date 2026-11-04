@@ -58,7 +58,7 @@
         "주문이 없는 상품도 존재할 수 있다."
       ],
       "correctIndex": 2,
-      "explanation": "상품 쪽 실선 + `|`는 주문 입장에서 상품이 필수 하나임을 의미하고, 주문 쪽 점선 + `o<`는 상품 입장에서 주문 참여가 선택적(0 이상 다수)임을 의미한다. 따라서 주문이 없는 상품도 존재할 수 있으므로 ③은 옳지 않다.",
+      "explanation": "상품 쪽 `||` 는 주문 하나가 반드시 상품 하나와 연결된다는 뜻이고(①), 주문 쪽 `o{` 는 상품 하나에 주문이 없거나(0) 여러 개일 수 있다는 뜻이다(②④). 따라서 주문이 없는 상품도 있을 수 있으므로 '상품은 항상 주문을 가진다' 는 ③ 이 옳지 않다.",
       "references": [
         {
           "type": "erd",
@@ -155,7 +155,7 @@
         "관계속성(Relationship Attribute)"
       ],
       "correctIndex": 1,
-      "explanation": "관계차수는 두 엔터티 간 관계에 참여하는 인스턴스 수의 대응 관계(1:1, 1:M, M:N)를 의미하며, `|`(단일성), `o`(선택성), `<`(까마귀발, 다수) 기호 조합으로 표기된다. 예컨대 `[A] ─|─|─ [B]`는 1:1, `[A] ─|─< [B]`는 1:N, `[A] ─|─o< [B]`는 1:0·1·N 관계를 나타낸다."
+      "explanation": "관계차수(Cardinality)는 두 엔터티 사이에서 관계에 참여하는 인스턴스 수를 나타내며 1:1, 1:M, M:N 으로 표현한다(②). IE 표기에서는 `|` 가 하나, 까마귀발(`<`)이 여럿을 뜻한다. `o` 는 참여가 필수가 아님(0 가능)을 나타내는 관계선택사양(Optionality) 기호이고, 관계명은 관계의 이름이다."
     },
     {
       "subject": "2과목",
@@ -207,7 +207,7 @@
         "SELECT * FROM EMP START WITH MANAGER_NO IS NULL CONNECT BY PRIOR EMP_NO = PRIOR MANAGER_NO;"
       ],
       "correctIndex": 0,
-      "explanation": "`PRIOR` 는 \"이전(부모) 행의 컬럼\" 을 의미한다. `PRIOR EMP_NO = MANAGER_NO` 는 \"이전 행의 EMP_NO 가 다음 행의 MANAGER_NO 가 되도록\" 연결 — 즉 부모(EMP_NO) → 자식(MANAGER_NO 가 부모를 가리키는 행) 순방향 전개. ② 는 자식 → 부모 역방향, ③ 은 PRIOR 없어 모든 행이 단일 그룹으로 평가, ④ 는 PRIOR 가 양쪽에 있어 자기 참조라 무한루프 또는 0 건.",
+      "explanation": "`PRIOR` 가 붙은 컬럼은 바로 앞에 찾은 행(부모)의 값이다. ① `PRIOR EMP_NO = MANAGER_NO` 는 부모의 EMP_NO 를 MANAGER_NO 로 가진 행, 곧 자식을 찾으므로 100 → 200·300 → 400·500 순방향으로 전개된다. ② 는 부모의 MANAGER_NO 를 EMP_NO 로 가진 행을 찾는 역방향이라 루트 100(MANAGER_NO 가 NULL)에서 더 내려가지 못한다. ③ 은 PRIOR 가 없어 앞 행과 연결되지 않고 EMP_NO = MANAGER_NO 인 행도 없으며, ④ 는 앞 행의 컬럼끼리만 비교해 자식을 찾지 못하므로 ②③④ 모두 루트 100 한 행만 나온다.",
       "references": [
         {
           "type": "table",
@@ -1234,7 +1234,7 @@
         "A, B, B, C, C, D"
       ],
       "correctIndex": 1,
-      "explanation": "INTERSECT 는 두 집합에 모두 존재하는 행만 남기는 교집합 연산이다. T1 과 T2 에 공통으로 있는 값은 B 와 C 이므로 두 건이 반환되며 결과는 기본적으로 오름차순 정렬된다. 합집합이면 A·B·C·D, 차집합(MINUS)이면 A 가 나온다.",
+      "explanation": "INTERSECT 는 두 집합에 모두 존재하는 행만 남기는 교집합 연산이다. T1 과 T2 에 공통으로 있는 값은 B 와 C 이므로 두 건이 반환된다. 합집합이면 A·B·C·D, 차집합(MINUS)이면 A 가 나온다.",
       "references": [
         {
           "type": "table",

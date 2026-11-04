@@ -200,7 +200,7 @@ export const ROUND_54: QuizQuestion[] = [
       "IE 표기법에서 NULL 허용 여부를 알 수 있다."
     ],
     "correctIndex": 2,
-    "explanation": "NULL 은 '값이 없음(미지의 값)' 을 의미하므로 일반 비교 연산자(=, <>) 로 비교할 수 없고 IS NULL / IS NOT NULL 로만 판별한다. NULL 에도 산술·문자 연산자는 사용 가능하나 결과는 NULL 이 된다.",
+    "explanation": "NULL 은 '아직 모르는 값' 이라 =, <> 같은 비교로 판별할 수 없고 IS NULL / IS NOT NULL 로만 판별한다(③). ① 산술·문자 연산은 할 수 있고 결과가 NULL 이 될 뿐이며, ② 바커 표기법은 속성 앞의 *(필수)·o(선택)로 NULL 허용 여부를 표시하고, ④ IE 표기법은 NULL 허용 여부를 표시하지 않는다.",
     "_source": "authored"
   },
   {
@@ -317,7 +317,7 @@ export const ROUND_54: QuizQuestion[] = [
       "순방향 탐색이다."
     ],
     "correctIndex": 2,
-    "explanation": "PRIOR emp_no = mgr_no 조건은 \"이전(부모) 행의 emp_no 가 다음(자식) 행의 mgr_no 와 같아야 연결\" 의미 — 즉 부모→자식 순방향 전개. 따라서 ③ '역방향 탐색이다' 가 옳지 않은 진술. ① 계층 구조 조회 옳음, ② START WITH mgr_no IS NULL 이 묵시되면 최상위(관리자가 없는 KING) 부터 조회되므로 옳음, ④ 순방향 탐색 옳음.",
+    "explanation": "START WITH mgr_no IS NULL 로 관리자가 없는 KING 부터 시작하고(②), CONNECT BY PRIOR emp_no = mgr_no 는 '앞(부모) 행의 emp_no 를 mgr_no 로 가진 행' 을 다음 행으로 잇는 부모 → 자식 순방향 전개다(①④). 그래서 '역방향 탐색' 이라는 ③ 이 옳지 않다. 참고로 START WITH 를 생략하면 모든 행이 각각 루트가 되어 전개되므로, 위에서부터 조회하려면 START WITH 를 꼭 적어야 한다. ※ 복원 자료의 SQL 에는 START WITH 가 빠져 있어 ② 도 틀린 설명이 되므로 START WITH mgr_no IS NULL 을 넣었다.",
     "_source": "authored",
     "references": [
       {
@@ -353,7 +353,7 @@ export const ROUND_54: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "-- emp_no : 하위 사원 번호, mgr_no : 상위 관리자 번호\nSELECT *\nFROM   EMP\nCONNECT BY PRIOR emp_no = mgr_no;"
+        "code": "-- emp_no : 하위 사원 번호, mgr_no : 상위 관리자 번호\nSELECT *\nFROM   EMP\nSTART WITH mgr_no IS NULL\nCONNECT BY PRIOR emp_no = mgr_no;"
       }
     ]
   },
@@ -2020,7 +2020,7 @@ export const ROUND_54: QuizQuestion[] = [
       "전체 행 반환"
     ],
     "correctIndex": 1,
-    "explanation": "T1.COL2 = T2.COL2 조인 시 T1 의 'A' 행은 T1.COL3=2 이므로 T1.COL3>=3 조건을 만족하지 못하고, T1 의 'B' 행은 T2 에 매칭되지 않아 결과가 공집합이 된다.",
+    "explanation": "T1.COL2 = T2.COL2 로 짝이 맞는 행은 (가, A)–(2, A) 와 (다, C)–(3, C) 두 쌍이다. (가, A) 는 T1.COL3 = 2 라 COL3 >= 3 을 만족하지 못하고, (다, C) 는 COL3 이 NULL 인 데다 T2.COL2 = 'C' 가 IN ('A', 'B') 에 없다. T1 의 (나, B) 는 T2 에 B 가 없어 처음부터 짝이 없다. 남는 행이 없어 결과는 공집합이다(②).",
     "_source": "authored",
     "references": [
       {

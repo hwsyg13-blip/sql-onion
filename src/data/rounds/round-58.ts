@@ -146,13 +146,13 @@ export const ROUND_58: QuizQuestion[] = [
     "number": 8,
     "title": "다음 중 상호배타적(Arc) 관계를 표현한 ERD로 가장 적절한 것은?",
     "options": [
-      "보기 ①",
-      "보기 ②",
-      "보기 ③",
-      "보기 ④"
+      "차량과 소유자를 관계선 하나로 1:1 연결한 ERD",
+      "부서와 사원을 관계선 하나로 1:N 연결한 ERD",
+      "사원 엔터티가 관리자 관계로 자기 자신과 연결된 순환 관계 ERD",
+      "차량에서 법인소유자·개인소유자로 갈라지는 두 관계선을 반원(Arc)으로 가로지른 ERD"
     ],
     "correctIndex": 3,
-    "explanation": "상호배타적(Arc) 관계는 한 엔터티가 여러 엔터티 중 반드시 하나와만 연결되는 관계로, 갈라지는 관계선들을 가로지르는 반원(Arc)으로 표시한다. ④ 는 차량에서 법인소유자·개인소유자로 갈라지는 두 관계선 위에 반원이 그려져 있어 \"차량의 소유자는 법인 또는 개인 중 하나\"라는 뜻이다(정답). ① 은 차량–소유자 1:1, ② 는 부서–사원 1:N, ③ 은 사원이 사원을 관리하는 재귀(순환) 관계다.",
+    "explanation": "상호배타적(Arc) 관계는 한 엔터티가 여러 엔터티 중 반드시 하나와만 관계를 맺는 것으로, 갈라지는 관계선들을 가로지르는 반원(Arc)으로 표시한다. ④ 는 '차량의 소유자는 법인 또는 개인 중 하나' 라는 뜻이라 정답이다. ① 은 1:1, ② 는 1:N 관계, ③ 은 재귀(순환) 관계다. ※ 복원 자료에는 보기가 그림 번호(①~④)만 남아 있어, 각 그림의 내용을 글로 옮겨 보기를 복원했다.",
     "_source": "authored",
     "optionReferences": [
       [
@@ -196,7 +196,7 @@ export const ROUND_58: QuizQuestion[] = [
       "하나의 학생은 여러 개의 수강 이력을 가질 수 있다."
     ],
     "correctIndex": 1,
-    "explanation": "수강을 하지 않은 학생도 존재할 수 있으므로 학생 존재만으로 수강 이력이 강제되지는 않는다. 따라서 옵션 2번이 옳지 않다. (수정 이력: 2026-04-26 사용자 제보 — 옵션 2 주어 명시 + 옵션 3 변별 강화)",
+    "explanation": "ERD 에서 학생 쪽에서 수강으로 가는 관계는 선택(o) 표기라, 수강을 하나도 하지 않은 학생도 있을 수 있다. 그래서 '학생은 반드시 수강목록에 있어야 한다' 는 ② 가 옳지 않다. ① 수강번호는 수강의 기본키라 중복되지 않고, ③ 수강.학생ID 는 학생을 참조하는 외래키이며, ④ 학생 1 : 수강 N 이라 한 학생이 여러 수강 이력을 가질 수 있다.",
     "_source": "authored",
     "references": [
       {
@@ -332,7 +332,7 @@ export const ROUND_58: QuizQuestion[] = [
     "references": [
       {
         "type": "sql",
-        "code": "-- 각 옵션을 다음 SQL 의 첫 인자로 치환해 평가:\nSELECT REGEXP_LIKE('ER-123',  '^\\w*$') FROM DUAL;\nSELECT REGEXP_LIKE('abcde',   '^\\w*$') FROM DUAL;\nSELECT REGEXP_LIKE('SQL2025', '^\\w*$') FROM DUAL;\nSELECT REGEXP_LIKE('test_01', '^\\w*$') FROM DUAL;"
+        "code": "-- 각 문자열이 패턴과 일치하면 한 행이 나온다\nSELECT 'ER-123'  FROM DUAL WHERE REGEXP_LIKE('ER-123',  '^\\w*$');\nSELECT 'abcde'   FROM DUAL WHERE REGEXP_LIKE('abcde',   '^\\w*$');\nSELECT 'SQL2025' FROM DUAL WHERE REGEXP_LIKE('SQL2025', '^\\w*$');\nSELECT 'test_01' FROM DUAL WHERE REGEXP_LIKE('test_01', '^\\w*$');"
       }
     ]
   },
@@ -471,7 +471,7 @@ export const ROUND_58: QuizQuestion[] = [
       "SQL Server의 계층형 질의문은 CTE(Common Table Expression)를 재귀 호출함으로써 계층 구조를 전개한다."
     ],
     "correctIndex": 0,
-    "explanation": "'PRIOR 부모 = 자식' 형태(예: PRIOR EMPNO = MGR)는 순방향 전개를, 'PRIOR 자식 = 부모' 형태(예: PRIOR MGR = EMPNO)는 역방향 전개를 수행한다. 하나의 조건으로 순방향과 역방향이 동시에 전개되지는 않으므로 ①은 옳지 않은 설명이다.",
+    "explanation": "SQL 전문가 가이드 표현으로 'PRIOR 자식 = 부모'(예: CONNECT BY PRIOR EMPNO = MGR, 앞 행의 사번을 관리자로 가진 행)는 부모 → 자식 순방향 전개이고, 'PRIOR 부모 = 자식'(예: CONNECT BY PRIOR MGR = EMPNO)은 자식 → 부모 역방향 전개다. 한 조건으로 순방향과 역방향이 동시에 전개되지는 않고, PRIOR 는 CONNECT BY 뿐 아니라 SELECT 절에서도 쓸 수 있으므로(예: SELECT PRIOR ENAME) ① 이 옳지 않다. ② WHERE 는 전개가 끝난 뒤 거르는 조건, ③ NOCYCLE 은 순환 시 무한 루프 방지, ④ SQL Server 는 재귀 CTE 로 계층을 전개한다.",
     "_source": "authored"
   },
   {
@@ -1495,7 +1495,7 @@ export const ROUND_58: QuizQuestion[] = [
       "윈도우 함수는 SELECT 절에서만 사용할 수 있다."
     ],
     "correctIndex": 1,
-    "explanation": "RANK/DENSE_RANK는 동일 값에 동일 순위를 부여하나 ROW_NUMBER는 행마다 고유 순번을 부여한다. 또한 RANK는 동일 순위 다음 순위를 건너뛰지만 DENSE_RANK는 건너뛰지 않고 연속된 순위를 부여한다.",
+    "explanation": "ROW_NUMBER 는 값이 같아도 행마다 서로 다른 순번을 준다(②). ① 윈도우 함수는 GROUP BY 와 함께 쓸 수 있고(GROUP BY 결과 위에서 계산), ③ RANK 는 동점 뒤 순위를 건너뛰지만 DENSE_RANK 는 건너뛰지 않으며, ④ 윈도우 함수는 SELECT 절뿐 아니라 ORDER BY 절에서도 쓸 수 있다.",
     "_source": "authored"
   },
   {
