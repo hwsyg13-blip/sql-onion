@@ -43,7 +43,7 @@ export const ROUND_60: QuizQuestion[] = [
       "부서코드"
     ],
     "correctIndex": 0,
-    "explanation": "사번·생년월일·부서코드는 업무에서 직접 관리되어 입력되는 기본 속성이다. 반면 연령은 생년월일로부터 계산되어 도출되는 파생 속성에 해당하므로 성격이 다르다.",
+    "explanation": "연령은 생년월일로 계산해서 얻는 파생 속성이다(①). 사번·생년월일·부서코드는 계산 없이 값을 직접 입력해 관리하는 속성이다(사번·부서코드는 코드·일련번호라 설계 속성, 생년월일은 기본 속성). 다른 속성에서 계산되는 것은 연령뿐이라 성격이 다르다.",
     "_source": "authored",
     "references": [
       {
@@ -107,7 +107,7 @@ export const ROUND_60: QuizQuestion[] = [
       "납부는 행위 엔터티에 해당한다."
     ],
     "correctIndex": 1,
-    "explanation": "서비스는 업무에 원래부터 존재하는 기본 엔터티이고(①), 청구·납부는 업무를 수행하면서 발생하는 행위 엔터티다(③④). 서비스이용도 고객이 서비스를 실제로 이용한 사실(이벤트)을 기록하는 엔터티라, 발생 시점으로는 행위 엔터티, 유무형으로는 사건 엔터티에 해당한다. 개념 엔터티는 조직·보험상품처럼 물리적 형태 없이 개념으로 존재하는 정보이므로 ② 가 옳지 않다.",
+    "explanation": "서비스는 업무에 원래 있는 기본 엔터티다(①). 서비스이용은 기본 엔터티인 서비스에서 생겨 청구의 부모가 되는 중심 엔터티이고, 유무형으로 나누면 이용 사실을 기록하는 사건 엔터티다. 청구·납부는 그 아래로 업무가 진행되며 생기는 행위 엔터티다(③④). 개념 엔터티는 조직·보험상품처럼 물리적 형태 없이 개념으로만 존재하는 것이라 ② 가 옳지 않다.",
     "_source": "authored",
     "references": [
       {
@@ -246,7 +246,7 @@ export const ROUND_60: QuizQuestion[] = [
       "가, 나, 다, 라"
     ],
     "correctIndex": 3,
-    "explanation": "LEVEL은 계층형 질의에서 단독으로 사용 가능하지만 CONNECT BY가 선행되어야 의미를 갖는다. ISLEAF·ISCYCLE은 CONNECT BY NOCYCLE 옵션 등 특정 조건에서만 유효한 값을 반환하며, CONNECT_BY_ROOT 또한 계층형 질의의 컨텍스트가 전제되어야 동작한다. 모두 단독으로는 의미 있는 결과를 내지 못하므로 정답은 '가, 나, 다, 라'이다.",
+    "explanation": "네 가지 모두 계층형 질의(START WITH … CONNECT BY) 안에서만 의미 있는 값을 돌려준다. LEVEL 은 계층의 깊이, CONNECT_BY_ISLEAF 는 리프 여부, CONNECT_BY_ROOT 는 루트 값으로 CONNECT BY 가 있어야 하고, CONNECT_BY_ISCYCLE 은 여기에 더해 CONNECT BY NOCYCLE 옵션이 있어야 쓸 수 있다. 그래서 가, 나, 다, 라 모두 해당한다(④).",
     "_source": "authored",
     "references": [
       {
@@ -501,7 +501,7 @@ export const ROUND_60: QuizQuestion[] = [
       "NOT ((사번 = 10005) AND (회원번호 = 2003))"
     ],
     "correctIndex": 1,
-    "explanation": "튜플 IN 절 `(A, B) IN ((x, y))` 는 `(A = x AND B = y)` 와 동등하다. 두 컬럼이 동시에 매칭되어야 한다는 뜻이므로 OR가 아닌 AND이다. 위 데이터에 원 SQL을 적용하면 (10005, 2003) 행 두 건만 통과한다. 보기 ① OR로 바꾸면 사번이 10005인 모든 행과 회원번호가 2003인 모든 행이 통과하여 4건이 나오므로 결과가 달라진다. 보기 ④ NOT은 정반대 결과(나머지 행)를 반환한다.",
+    "explanation": "튜플 IN 절 `(A, B) IN ((x, y))` 는 `(A = x AND B = y)` 와 동등하다. 두 컬럼이 동시에 매칭되어야 한다는 뜻이므로 OR가 아닌 AND이다. 위 데이터에 원 SQL을 적용하면 (10005, 2003) 행 두 건만 통과한다. 보기 ① OR로 바꾸면 사번이 10005 이거나 회원번호가 2003 인 행이 모두 통과해 5행 전부가 나오므로 결과가 달라진다. 보기 ④ NOT은 정반대 결과(나머지 행)를 반환한다.",
     "_source": "authored",
     "references": [
       {
@@ -1279,7 +1279,7 @@ export const ROUND_60: QuizQuestion[] = [
       "실버 2, 브론즈 1"
     ],
     "correctIndex": 1,
-    "explanation": "FETCH FIRST n ROWS ONLY는 정렬 조건이 없으면 물리적 저장 순서대로 상위 n건을 반환한다. 테이블에 저장된 순서(골드, 실버, 브론즈) 기준 상위 2건은 골드 1, 실버 2이다.",
+    "explanation": "FETCH FIRST 2 ROWS ONLY 는 결과의 앞 2행만 돌려준다. ORDER BY 가 없으므로 문제에서는 테이블에 저장된 순서(골드, 실버, 브론즈)를 기준으로 보아 골드 1, 실버 2 가 나온다(②). 실무에서는 ORDER BY 없이 쓰면 어떤 2행이 나올지 보장되지 않으므로, 상위 N건을 뽑을 때는 반드시 ORDER BY 와 함께 쓴다.",
     "_source": "authored",
     "references": [
       {
@@ -1783,7 +1783,7 @@ export const ROUND_60: QuizQuestion[] = [
       "COMM 값이 NULL이 아니면 COMM을 그대로 반환한다."
     ],
     "correctIndex": 0,
-    "explanation": "NVL은 NULL 치환 함수이며 덧셈 연산을 수행하지 않는다. 따라서 덧셈 연산을 수행한다고 기술한 ①은 옳지 않은 설명에 해당하여 정답이 된다. 원본 파편의 \"덧셈 연산 안한다\"는 해당 보기를 요약한 메모로 판단하여, 본래의 틀린 진술 형태(\"덧셈 연산을 수행한다\")로 복원하였다.",
+    "explanation": "NVL(COMM, SAL) 은 COMM 이 NULL 이면 SAL 을, 아니면 COMM 을 그대로 돌려주는 NULL 대체 함수다(②④). 두 인수는 데이터 타입이 호환되어야 한다(③). 두 값을 더하는 함수가 아니므로 ① 이 옳지 않다. COMM 이 NULL 일 때 SAL 과 더하려면 SAL + NVL(COMM, 0) 처럼 쓴다. ※ 복원 자료에는 ① 이 '덧셈 연산 안 한다' 는 메모로만 남아 있어 틀린 보기 형태로 복원했다.",
     "_source": "authored"
   },
   {
