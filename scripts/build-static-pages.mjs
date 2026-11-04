@@ -124,7 +124,8 @@ ${appCss && APP_CSS ? `  <link rel="stylesheet" href="${APP_CSS}" />\n` : ''}
     :root{--bg:#F5F7F6;--surface:#FFFFFF;--fg-1:#1F2320;--fg-2:#333;--fg-3:#6B7280;--border:#EEF1EE;--accent:#2E7D32;--accent-bg:#EBF5EC;--correct-bg:#E6F3E7;--correct-fg:#256B29}
     *{box-sizing:border-box}
     html,body{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;-webkit-touch-callout:none}
-    input,textarea,[contenteditable="true"],pre,code,.allow-select{-webkit-user-select:text!important;-moz-user-select:text!important;-ms-user-select:text!important;user-select:text!important}
+    input,textarea,[contenteditable="true"]{-webkit-user-select:text!important;-moz-user-select:text!important;-ms-user-select:text!important;user-select:text!important}
+    @media print{body *{display:none!important}body::after{content:"SQLD양파의 문제와 해설은 인쇄할 수 없습니다.";display:block;padding:40px;font-size:16px}}
     img,svg{-webkit-user-drag:none;user-drag:none}
     body{margin:0;background:var(--bg);color:var(--fg-2);font-family:-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;line-height:1.7;font-size:15.5px}
     .top{background:var(--surface);border-bottom:1px solid var(--border);padding:14px 24px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:10}
@@ -181,9 +182,10 @@ ${ads ? `  <script async src="https://pagead2.googlesyndication.com/pagead/js/ad
     window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
     gtag('js',new Date());gtag('config','${GA_ID}');
     // 콘텐츠 보호 — 우클릭/복사/잘라내기/드래그 차단
-    (function(){var ok=function(t){return t&&t.closest&&t.closest('input,textarea,[contenteditable="true"],pre,code,.allow-select');};
+    (function(){var ok=function(t){return t&&t.closest&&t.closest('input,textarea,[contenteditable="true"]');};
     var b=function(e){if(ok(e.target))return;e.preventDefault();};
-    ['contextmenu','copy','cut','selectstart','dragstart'].forEach(function(n){document.addEventListener(n,b);});})();
+    ['contextmenu','copy','cut','selectstart','dragstart'].forEach(function(n){document.addEventListener(n,b);});
+    document.addEventListener('keydown',function(e){var k=(e.key||'').toLowerCase();if((e.ctrlKey||e.metaKey)&&(k==='p'||k==='s'))e.preventDefault();});})();
   </script>
 </head>
 <body>
