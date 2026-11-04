@@ -1,9 +1,9 @@
 {
   "last_processed_row": null,
-  "last_run": "2026-11-04T08:55+09:00",
+  "last_run": "2026-11-04T14:30+09:00",
   "last_gate": {
-    "five_hour": 0.3,
-    "seven_day": 0.02
+    "five_hour": 0.1,
+    "seven_day": 0.03
   },
   "current_mission": null,
   "my_prs": [
