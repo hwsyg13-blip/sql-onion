@@ -275,7 +275,7 @@
       "references": [
         {
           "type": "text",
-          "content": "우리은행은 예금분류(일반예금, 특별예금 등)의 원금, 예치기간, 이자율을 관리할 필요가 있다. 또한 원금에 대한 이자율을 적용하여 계산된 이자에 대해서도 속성으로 관리하고자 한다. 예를 들어 원금이 1000원이고 예치기간이 5개월이며 이자율이 5.0%라는 속성을 관리하고 계산된 이자도 관리한다. 일반예금이나 특별예금 등에 대해서는 코드를 부여(예. 01-일반예금, 02-특별예금 등)하여 관리한다."
+          "content": "OO은행은 예금분류(일반예금, 특별예금 등)의 원금, 예치기간, 이자율을 관리할 필요가 있다. 또한 원금에 대한 이자율을 적용하여 계산된 이자에 대해서도 속성으로 관리하고자 한다. 예를 들어 원금이 1000원이고 예치기간이 5개월이며 이자율이 5.0%라는 속성을 관리하고 계산된 이자도 관리한다. 일반예금이나 특별예금 등에 대해서는 코드를 부여(예. 01-일반예금, 02-특별예금 등)하여 관리한다."
         }
       ]
     },
@@ -826,7 +826,7 @@
         "ALTER TABLE 기관분류 ALTER COLUMN (분류명 VARCHAR(30), 등록일자 DATE NOT NULL);"
       ],
       "correctIndex": 0,
-      "explanation": "SQL Server 는 ALTER TABLE ... ALTER COLUMN 으로 한 번에 컬럼 하나만 변경할 수 있고, 괄호로 여러 컬럼을 묶을 수 없다(③④ 오류). (나) 처럼 분류명도 NOT NULL 이 되어야 하므로 두 컬럼 모두 NOT NULL 을 지정한 ① 이 정답이다.",
+      "explanation": "SQL Server 는 ALTER TABLE ... ALTER COLUMN 으로 한 번에 컬럼 하나만 변경할 수 있고, 괄호로 여러 컬럼을 묶을 수 없다(③④ 오류). SQL Server 의 ALTER COLUMN 은 NOT NULL 을 다시 적지 않으면 NULL 허용으로 바뀌므로, (나) 처럼 NOT NULL 을 유지하려면 두 컬럼 모두 NOT NULL 을 적은 ① 이 정답이다(② 는 분류명이 NULL 허용이 된다).",
       "references": [
         {
           "type": "image",
@@ -1476,7 +1476,7 @@
         "SELECT SUM(매출금액) AS 매출금액합계\nFROM 월별매출\nWHERE 년 BETWEEN '2014' AND '2015'\nAND 월 BETWEEN '03' AND '12';"
       ],
       "correctIndex": 0,
-      "explanation": "AND 가 OR 보다 우선하므로 ① 은 (2014년 11~12월) OR (2015년 1~3월) 로 4000 + 5000 + 6000 + 7000 + 8000 을 정확히 더한다. ② 는 2014년 1~3월·2015년 11~12월까지, ③ 은 03~05월 조합, ④ 는 두 해의 3~12월을 모두 포함해 범위가 틀린다. 정답은 ① 이다.",
+      "explanation": "AND 가 OR 보다 우선하므로 ① 은 (2014년 11~12월) OR (2015년 1~3월) 로 4000 + 5000 + 6000 + 7000 + 8000 을 정확히 더한다. ② 는 2014년 1~3월·2015년 11~12월까지, ③ 은 03~05월 조합, ④ 는 두 해의 3~12월을 모두 포함해 범위가 틀리다. 정답은 ① 이다.",
       "references": [
         {
           "type": "table",
@@ -2577,7 +2577,7 @@
       "_correctRate": 10,
       "subject": "2과목",
       "chapter": "집합 연산자",
-      "title": "SET OPERATOR 중에서 수학의 교집합과 같은 가능을 하는 연산자로 가장 적절한 것은?",
+      "title": "SET OPERATOR 중에서 수학의 교집합과 같은 기능을 하는 연산자로 가장 적절한 것은?",
       "options": [
         "EXCEPT",
         "MINUS",
@@ -2670,7 +2670,7 @@
         "가: 5개, 나: 3개"
       ],
       "correctIndex": 3,
-      "explanation": "(가) UNION ALL 은 중복을 없애지 않고 그대로 이어 붙이므로 R1 3행 + R2 2행 = 5행이다. (나) UNION 은 합친 뒤 중복을 없앤다. R2 의 (A1, B1, C1), (A3, B2, C3) 는 R1 에도 있으므로 빠지고 R1 의 3행만 남는다. 정답은 가: 5개, 나: 3개(④)다.",
+      "explanation": "(가) UNION ALL 은 중복을 없애지 않고 그대로 이어 붙이므로 T1 3행 + T2 2행 = 5행이다. (나) UNION 은 합친 뒤 중복을 없앤다. T2 의 (A1, B1, C1), (A3, B2, C3) 는 T1 에도 있으므로 빠지고 T1 의 3행만 남는다. 정답은 가: 5개, 나: 3개(④)다. ※ 원 자료의 SQL 이 표에 없는 R1, R2 를 조회하고 있어 표 이름(T1, T2)으로 맞췄다.",
       "references": [
         {
           "type": "table",
@@ -2722,12 +2722,12 @@
         {
           "type": "sql",
           "caption": "가.",
-          "code": "SELECT A, B, C FROM R1\nUNION ALL\nSELECT A, B, C FROM R2"
+          "code": "SELECT A, B, C FROM T1\nUNION ALL\nSELECT A, B, C FROM T2"
         },
         {
           "type": "sql",
           "caption": "나.",
-          "code": "SELECT A, B, C FROM R1\nUNION\nSELECT A, B, C FROM R2"
+          "code": "SELECT A, B, C FROM T1\nUNION\nSELECT A, B, C FROM T2"
         }
       ]
     },
@@ -3184,7 +3184,7 @@
         "단일 행 서브쿼리는 서브쿼리의 실행 결과가 항상 한 건 이하의 서브쿼리로서 IN, ALL 등의 비교 연산자를 사용하여야 한다."
       ],
       "correctIndex": 2,
-      "explanation": "① 메인 쿼리의 결과가 서브쿼리로 제공될 수도 있고, 서브쿼리의 결과가 메인쿼리로 제공될 수도 있으므로 실행 순서는 상황에 따라 달라진다.\n② 비 연관 서브쿼리가 주로 메인쿼리에 값을 제공하기 위한 목적으로 사용된다.\n③ 단일 행 서브쿼리의 비교연산자는 다중 행 서브쿼리의 비교연산자로 사용할 수 없지만, 반대의 경우는 가능하다.\n④ 단일 행 서브쿼리의 비교연산자로는 =, <,<=, >,>=, 0가 되어야 한다. IN, ALL 등의 비교연산자는 다중 행 서브쿼리의 비교연산자 이다."
+      "explanation": "① 메인 쿼리의 결과가 서브쿼리로 제공될 수도 있고, 서브쿼리의 결과가 메인쿼리로 제공될 수도 있으므로 실행 순서는 상황에 따라 달라진다.\n② 비 연관 서브쿼리가 주로 메인쿼리에 값을 제공하기 위한 목적으로 사용된다.\n③ 단일 행 서브쿼리의 비교연산자는 다중 행 서브쿼리의 비교연산자로 사용할 수 없지만, 반대의 경우는 가능하다.\n④ 단일 행 서브쿼리의 비교연산자로는 =, <, <=, >, >=, <> 를 쓴다. IN, ALL 등의 비교연산자는 다중 행 서브쿼리의 비교연산자 이다."
     },
     {
       "_id": "sqld-0119",
@@ -3216,7 +3216,7 @@
       "_correctRate": 10,
       "subject": "2과목",
       "chapter": "서브쿼리",
-      "title": "아래와 같은 데이터 모델에서 평가대상상품에 대한 품질평기향목별 최종 평가 결과를 추출하는 SQL 문장으로 옳은 것은? (단, 평가항목에 대한 평가(평가등급)가 기대수준에 미치지 못할 경우 해당 평기항목에 대해서만 재평가를 수행한다)",
+      "title": "아래와 같은 데이터 모델에서 평가대상상품에 대한 품질평가항목별 최종 평가 결과를 추출하는 SQL 문장으로 옳은 것은? (단, 평가항목에 대한 평가(평가등급)가 기대수준에 미치지 못할 경우 해당 평가항목에 대해서만 재평가를 수행한다)",
       "options": [
         "SELECT B.상품ID. B.상품명, C.평가항목ID, C.평가항목명, A.평가회차,\nA.평가등급, A.평가일자\nFROM (SELECT 상품ID, 평가항목ID\n,MAX(평가회차) AS 평가회차\n,MAX(평가등급) AS 평가등급\n,MAX(평가일자) AS 평가일자\nFROM 평가결과\nGROUP BY 상품ID, 평가항목ID)  A, 평가대상상품 B, 품질평가항목 C\nWHERE A.상품ID = B.상품ID\nAND A.평가항목ID = C.평가항목ID;",
         "SELECT B.상품ID, B.상품명, C.평가항목ID, C.평가항목명\n,MAX(A.평가회차) AS 평가회차\n,MAX(A.평가등급) AS 평가등급\n,MAX(A.평가일자) AS 평가일자\nFROM 평가결과 A, 평가대상상품 B, 품질평가항목 C\nWHERE A.상품ID = B.상품ID\nAND A.평가항목ID = C.평가항목ID\nGROUP BY B.상품ID, B.상품명, C.평가항목ID, C.평가항목명;",
@@ -3241,7 +3241,7 @@
       "_correctRate": 10,
       "subject": "2과목",
       "chapter": "서브쿼리",
-      "title": "아래 부서 테이블의 담당자 변경을 위해 부서임시 테이블에 입력된 데이터를 활용하여 주기적으로 부서 테이블을 아래 결과와 같이 반영하기 위한 SQL으로 가장 적절한 것은?(단, 부서임시 테이블에서 변경일자를 가준으로 가장 최근에 변경된 데이터를 가준으로 부서 테이블에 반영되어야 한다)",
+      "title": "아래 부서 테이블의 담당자 변경을 위해 부서임시 테이블에 입력된 데이터를 활용하여 주기적으로 부서 테이블을 아래 결과와 같이 반영하기 위한 SQL으로 가장 적절한 것은?(단, 부서임시 테이블에서 변경일자를 기준으로 가장 최근에 변경된 데이터를 기준으로 부서 테이블에 반영되어야 한다)",
       "options": [
         "UPDATE 부서 A SET 담당자 = (SELECT B.담당자\nFROM 부서임시 B\nWHERE B.부서코드 = A.부서코드\nAND B.변경일자 = '2015.01.25.') ;",
         "UPDATE 부서 A SET 담당자 = (SELECT B.담당자\nFROM 부서임시 B\nWHERE B.부서코드 = A.부서코드\nAND B.변경일자 = (SELECT MAX(C.변경일자)\nFROM 부서임시 C WHERE\nC.부서코드 = B.부서코드))\nWHERE 부서코드 IN (SELECT 부서코드 FROM 부서임시);",
@@ -3325,7 +3325,7 @@
         },
         {
           "type": "table",
-          "caption": "[테이블 : 부서이력]",
+          "caption": "[테이블 : 부서임시]",
           "headers": [
             "변경일자(PK)",
             "부서코드(PK)",
@@ -5753,7 +5753,7 @@
         "10건"
       ],
       "correctIndex": 1,
-      "explanation": "DEPTNO로 조인을 하고 DNAME과 JOB으로 CUBE를 실행했다. CUBE는 전체합계와 각 칼럼별로 부분합계를 출력한다. CUBE는 입력된 칼럼들의 모든 조합으로 집계를 출력한다. ",
+      "explanation": "DEPTNO 로 조인한 뒤 CUBE(DNAME, JOB) 은 (DNAME, JOB), (DNAME), (JOB), () 네 그룹을 모두 만든다. (DNAME, JOB) 조합은 ACCOUNTING 3개(MANAGER·PRESIDENT·CLERK), RESEARCH 3개(CLERK·MANAGER·ANALYST), SALES 3개(SALESMAN·MANAGER·CLERK)로 9행, DNAME 별 소계 3행(사원이 없는 OPERATIONS 는 조인에서 빠짐), JOB 별 소계 5행(CLERK·SALESMAN·MANAGER·ANALYST·PRESIDENT), 전체 합계 1행이다. 9 + 3 + 5 + 1 = 18건(②).",
       "references": [
         {
           "type": "sql",
@@ -6770,7 +6770,7 @@
       "_correctRate": 10,
       "subject": "2과목",
       "chapter": "조인",
-      "title": "다음 SQL문에서 ( )에 들어갈 알맞은 명령어는 무엇인가?",
+      "title": "다음 SQL문에서 ( )에 들어갈 알맞은 명령어는 무엇인가? (단, EMP 에는 부서가 지정되지 않은(DEPTNO 가 NULL 인) 사원 7999 도 있다)",
       "options": [
         "CROSS JOIN",
         "RIGHT OUTER JOIN",
@@ -6778,12 +6778,12 @@
         "FULL OUTER JOIN"
       ],
       "correctIndex": 1,
-      "explanation": "결과에 EMP 쪽이 모두 NULL 인 DEPT 40번 행이 나온다. 오른쪽(DEPT) 행을 모두 남기는 조인이므로 RIGHT OUTER JOIN 이다(②). SQL 의 RIGHT JOIN 은 RIGHT OUTER JOIN 을 줄여 쓴 것이다.",
+      "explanation": "결과 마지막 행은 EMP 쪽 칼럼이 모두 NULL 이고 DEPT 쪽에만 40 OPERATIONS 가 있다. 사원이 없는 부서까지 오른쪽(DEPT) 행을 모두 남기는 조인이므로 RIGHT OUTER JOIN 이다(②). LEFT OUTER JOIN 이면 EMP 쪽이 남아 40번 부서가 나오지 않고, FULL OUTER JOIN 이면 부서가 없는 사원 7999 도 결과에 나와야 하는데 결과에 없고, CROSS JOIN 은 ON 절을 쓸 수 없다. ※ 원 자료는 빈칸 자리에 정답(RIGHT JOIN)이 그대로 적혀 있고 결과 표가 깨져(부서번호 불일치·오타) 빈칸과 표를 정리하고, FULL OUTER JOIN 과 구분되도록 부서 없는 사원 조건을 넣었다.",
       "references": [
         {
           "type": "sql",
           "caption": "[SQL]",
-          "code": "SELECT * FROM EMP a RIGHT JOIN DEPT b\nON a.DEPTNO = b.DEPTNO;"
+          "code": "SELECT * FROM EMP a (          ) DEPT b\nON a.DEPTNO = b.DEPTNO;"
         },
         {
           "type": "table",
@@ -6796,8 +6796,8 @@
             "HIREDATE",
             "SAL",
             "COMM",
-            "DEPTNO.1",
-            "DEPTNO.2",
+            "a.DEPTNO",
+            "b.DEPTNO",
             "DNAME",
             "LOC"
           ],
@@ -6806,64 +6806,64 @@
               "7788",
               "SCOTT",
               "ANALYST",
-              "7786",
-              "03/1/259",
-              "2800",
-              "",
+              "7566",
+              "87/04/19",
+              "3000",
+              "NULL",
               "20",
               "20",
               "RESEARCH",
               "DALLAS"
             ],
             [
-              "7189",
+              "7839",
               "KING",
               "PRESIDENT",
-              "",
-              "31/11/17",
-              "3600",
-              "",
-              "20",
-              "28",
+              "NULL",
+              "81/11/17",
+              "5000",
+              "NULL",
+              "10",
+              "10",
               "ACCOUNTING",
               "NEW YORK"
             ],
             [
               "7844",
               "TURNER",
-              "SILVERMAN",
-              "7788",
-              "01/09/09",
+              "SALESMAN",
+              "7698",
+              "81/09/08",
               "1500",
-              "",
-              "20",
-              "28",
+              "0",
+              "30",
+              "30",
               "SALES",
               "CHICAGO"
             ],
             [
-              "7976",
+              "7876",
               "ADAMS",
               "CLERK",
               "7788",
-              "R1/12/03",
-              "1500",
-              "",
+              "87/05/23",
+              "1100",
+              "NULL",
               "20",
-              "38",
+              "20",
               "RESEARCH",
-              "TALLAO"
+              "DALLAS"
             ],
             [
-              "7960",
+              "7900",
               "JAMES",
               "CLERK",
-              "7788",
-              "R1/12/03",
-              "956",
-              "",
-              "20",
-              "38",
+              "7698",
+              "81/12/03",
+              "950",
+              "NULL",
+              "30",
+              "30",
               "SALES",
               "CHICAGO"
             ],
@@ -6871,26 +6871,26 @@
               "7902",
               "FORD",
               "ANALYST",
-              "7788",
-              "83/01/03",
-              "1500",
-              "",
+              "7566",
+              "81/12/03",
+              "3000",
+              "NULL",
               "20",
-              "18",
+              "20",
               "RESEARCH",
               "DALLAS"
             ],
             [
-              "790A",
-              "HELLER",
+              "7934",
+              "MILLER",
               "CLERK",
-              "7788",
-              "83/01/23",
+              "7782",
+              "82/01/23",
               "1300",
-              "",
+              "NULL",
               "10",
-              "18",
-              "ACCOUNTINS",
+              "10",
+              "ACCOUNTING",
               "NEW YORK"
             ],
             [
@@ -7020,13 +7020,13 @@
       "chapter": "서브쿼리",
       "title": "다음 과일 테이블에 대한 SQL문 내의 비교조건을 해석한 것으로 올바르지 않은 것은?",
       "options": [
-        "where 19=ALL(SELECT 과일코드 FROM 과일)\" 거짓이다.",
-        "where 15<ALL(SELECT 과일코드 FROM 과일)\"은 참이다.",
-        "where 19<ANY(SELECT 과일코드 FROM 과일)\"은 거짓이다.",
-        "where 21 NOT IN (SELECT 과일코드 FROM 과일)\"은 참이다."
+        "where 19=ALL(SELECT 과일코드 FROM 과일) 은 거짓이다.",
+        "where 15<ALL(SELECT 과일코드 FROM 과일) 은 참이다.",
+        "where 19<ANY(SELECT 과일코드 FROM 과일) 은 거짓이다.",
+        "where 21 NOT IN (SELECT 과일코드 FROM 과일) 은 참이다."
       ],
       "correctIndex": 1,
-      "explanation": "ALL은 전부 일치하는 것만 출력하는 것으로 AND라고 생각하면 되고 ANY는 OR로 생각하면 된다. 그러므로 보기②번은 15보다 큰 것이 모두 일치해야 하는데 과일 테이블에 있는 15, 키위는 값이 크지 않고 같다.",
+      "explanation": "ALL 은 서브쿼리 결과 모두에 대해 참이어야 하고(AND), ANY 는 하나라도 참이면 된다(OR). 과일코드는 10, 15, 19 다. ② 15 < ALL(10, 15, 19) 은 15 < 10, 15 < 15 가 거짓이므로 거짓이다. '참이다' 라고 한 ② 가 틀렸다. ① 19 = ALL 은 10, 15 와 같지 않아 거짓, ③ 19 < ANY 는 19 보다 큰 값이 없어 거짓, ④ 21 은 목록에 없어 NOT IN 이 참이다.",
       "references": [
         {
           "type": "table",
@@ -7512,7 +7512,7 @@
         "1,2"
       ],
       "correctIndex": 0,
-      "explanation": "2, 2 를 넣고 SV1 → 두 행을 7 로 바꾸고 9 를 넣은 뒤 SV2 (이때 7, 7, 9). 그 뒤 DELETE·INSERT 11·SV3·INSERT 9 를 했지만 ROLLBACK TO SV2 로 SV2 이후 변경이 모두 취소되고 COMMIT 되므로 7, 7, 9 가 남는다(①).",
+      "explanation": "2, 2 를 넣고 SV1 → 두 행을 7 로 바꾸고 9 를 넣은 뒤 SV2 (이때 7, 7, 9). 그 뒤 DELETE·INSERT 11·SV3·INSERT 20 을 했지만 ROLLBACK TO SV2 로 SV2 이후 변경이 모두 취소되고 COMMIT 되므로 7, 7, 9 가 남는다(①).",
       "references": [
         {
           "type": "sql",
@@ -8831,7 +8831,7 @@
         "FULL OUTER JOIN"
       ],
       "correctIndex": 1,
-      "explanation": "Oracle OUTER JOIN에서 (+)가 왼쪽 테이블 옆에 위치해 있으므로 우측 테이블에서는 조인을 수행하지 않는 테이블의 행들은 그대로 유지되며, 좌측 테이블에서는 조인을 수행하지 않는 테이블의 행들은 null값으로 추가되는 Rights OUTER JOIN이 수행된다.",
+      "explanation": "Oracle 의 (+) 는 데이터가 없을 수 있는 쪽(NULL 로 채워질 쪽)에 붙인다. EMP.부서코드(+) = DEPT.부서코드 는 EMP 쪽에 (+) 가 있으므로 DEPT 의 모든 행을 남기고 짝이 없는 EMP 칼럼을 NULL 로 채운다. EMP 를 왼쪽에 두고 오른쪽 DEPT 를 보존하는 조인이므로 RIGHT OUTER JOIN 이다(②). LEFT OUTER JOIN 이면 EMP 쪽이 보존되고, FULL 은 양쪽 모두, CROSS JOIN 은 ON 조건을 쓸 수 없다.",
       "references": [
         {
           "type": "sql",
@@ -9119,7 +9119,7 @@
       "chapter": "엔터티",
       "title": "아래 ER 모델링의 표기법은 무엇인가?",
       "options": [
-        "IDEFIX 표기법",
+        "IDEF1X 표기법",
         "UML 표기법",
         "IE 표기법",
         "Barker 표기법"
@@ -9235,7 +9235,7 @@
         "서브쿼리에는 Order by구를 사용할 수 없다."
       ],
       "correctIndex": 0,
-      "explanation": "서브쿼리는 메인쿼리의 칼럼을 모두 사용할 수 있지만, 메인쿼리는 서브쿼리의 칼럼을 사용할 수 없으므로 스칼라 서브쿼리 등을 사용해야 한다."
+      "explanation": "서브쿼리는 메인쿼리의 칼럼을 쓸 수 있지만(연관 서브쿼리), 메인쿼리는 서브쿼리 안의 칼럼을 직접 쓸 수 없다(FROM 절 인라인 뷰 칼럼은 예외). 그래서 '메인쿼리에서도 서브쿼리 칼럼을 쓸 수 있다' 는 ① 이 틀렸다. ② FROM 절이면 인라인 뷰, ③ 여러 행이 오면 IN·ANY·ALL 을 쓴다. ④ 는 SQL 전문가 가이드 기준(ORDER BY 는 메인쿼리 마지막에 한 번만 쓴다)으로 옳은 설명이다. 참고로 실제 Oracle 은 인라인 뷰 안의 ORDER BY 를 허용한다(TOP-N 쿼리)."
     },
     {
       "_id": "sqld-0323",
