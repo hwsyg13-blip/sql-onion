@@ -1483,7 +1483,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "3"
     ],
     "correctIndex": 3,
-    "explanation": "SELECT문을 보면 department로 GROUP BY한다. 그리면 총 3개의 그룹이 만들어진다. computer, physics, math이다. 3개의 그룹 중에서 개수가 2개 초과인 것을 조회하기 위해서 \"HAVING count(*) > 2\"문을 사용했다. 따라서 2개 초과인 것은 math이고 math는 총 3개가 있으므로 3이 된다.",
+    "explanation": "SELECT문을 보면 department로 GROUP BY한다. 그러면 총 3개의 그룹이 만들어진다. computer, physics, math이다. 3개의 그룹 중에서 개수가 2개 초과인 것을 조회하기 위해서 \"HAVING count(*) > 2\"문을 사용했다. 따라서 2개 초과인 것은 math이고 math는 총 3개가 있으므로 3이 된다.",
     "chapter": "관계형 DB와 SELECT",
     "_source": "cbt-mock",
     "_origId": "cbt-024",
@@ -1806,7 +1806,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "WHERE REGEXP_LIKE(USER_ID, '[0-9].*[A-Z]$')"
     ],
     "correctIndex": 0,
-    "explanation": "정규 표현식을 사용할 때 ^는 시작을 의미, $는 끝을 의미한다. '^[A-Z].*[0-9]는 대문자 알파벳으로 시작하고, 숫자로 끝나는 문자열을 의미한다. Oracle에서는 복잡한 문자열 패턴 매칭이 필요한 경우 REGEXP_LIKE를 반드시 사용해야 하며, LIKE는 단순한 와일드카드 (%, _)만 지원한다.는 대문자 알파벳으로 시작하고, 숫자로 끝나는 문자열을 의미한다. Oracle에서는 복잡한 문자열 패턴 매칭이 필요한 경우 REGEXP_LIKE를 반드시 사용해야 하며, LIKE는 단순한 와일드카드 (%, _)만 지원한다.",
+    "explanation": "정규 표현식에서 ^ 는 시작, $ 는 끝을 뜻한다. '^[A-Z].*[0-9]$' 는 대문자 알파벳으로 시작하고 숫자로 끝나는 문자열이라 A123, B5, C_99, Z8 이 조회된다(①). Oracle 의 LIKE 는 % 와 _ 두 와일드카드만 지원해 [A-Z] 같은 문자 범위를 쓸 수 없으므로 ②③ 은 의도대로 동작하지 않고(③ 의 $ 도 LIKE 에서는 그냥 문자), ④ 는 숫자로 시작해 대문자로 끝나는 반대 패턴이다.",
     "chapter": "정규 표현식",
     "_source": "cbt-mock",
     "_origId": "cbt-034",
@@ -1855,7 +1855,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "개념 스키마가 변경되어도 외부 스키마에 영향이 없는 특성이다."
     ],
     "correctIndex": 3,
-    "explanation": "논리적 데이터 독립성이란, 개념 스키마(테이블 구조, 관계, 제약조건 등)가 변경되더라도, 외부 스키마(사용자 관점의 뷰나 응용 프로그램)에 영향을 주지 않는 특성을 말한다. 즉, 테이블의 컬럼이 추가되거나 제약 조건이 변경되더라도, 외부에서 사용하는 응용 프로그램이나 뷰는 그대로 동작할 수 있어야 한다.② 물리적 데이터 독립성에 대한 설명이다.",
+    "explanation": "논리적 데이터 독립성이란, 개념 스키마(테이블 구조, 관계, 제약조건 등)가 변경되더라도, 외부 스키마(사용자 관점의 뷰나 응용 프로그램)에 영향을 주지 않는 특성을 말한다. 즉, 테이블의 컬럼이 추가되거나 제약 조건이 변경되더라도, 외부에서 사용하는 응용 프로그램이나 뷰는 그대로 동작할 수 있어야 한다. ② 는 물리적 데이터 독립성에 대한 설명이다.",
     "chapter": "데이터 모델 개념",
     "_source": "cbt-mock",
     "_origId": "cbt-035",
@@ -2590,7 +2590,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "2, 4, 3, 7, 12"
     ],
     "correctIndex": 0,
-    "explanation": "TAB1 테이블에는 행이 4개, TAB2 테이블에는 행이 3개가 있다. KEY 칼럼을 사용해서 INNER JOIN을 하면 같은 것만 찾는다. 따라서 TAB1와 TAB2 테이블의 KEY 칼럼에서 'B'와 'C'가 같기 때문에 2개의 행이 출력된다.",
+    "explanation": "TAB1 의 KEY1 은 B, C, D, E, TAB2 의 KEY2 는 A, B, C 다. INNER JOIN 은 양쪽에 있는 B, C 2건, LEFT OUTER JOIN 은 TAB1 4행이 모두 남아 4건(D, E 는 TAB2 칼럼이 NULL), RIGHT OUTER JOIN 은 TAB2 3행이 모두 남아 3건(A 는 TAB1 칼럼이 NULL), FULL OUTER JOIN 은 짝 2건 + TAB1 에만 있는 D, E + TAB2 에만 있는 A 로 5건, CROSS JOIN 은 4 × 3 = 12건이다(①).",
     "chapter": "관계형 DB와 SELECT",
     "_source": "cbt-mock",
     "_origId": "cbt-065",
@@ -3265,7 +3265,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "450"
     ],
     "correctIndex": 1,
-    "explanation": "ROUND는 반올림 함수이며, 두 번째 인자의 값이 마이너스(-)일 경우에는 정수부에서 두 자리를 남기고 반올림한다는 의미이다. 즉, 456.789에서 정수부 456중 -2는 56에 해당하고 이 위치에서 반올림하면 500이 된다. • ROUND 자릿수가 양수일 경우 : 소수점 N번째 자리까지 반올림 → ROUND(456.789, 1) = 456.8 • ROUND 자릿수가 0일 경우 : 정수로 반올림 → ROUND(456.789, 0) = 457 • ROUND 자릿수가 음수일 경우 → 정수부의 자릿수를 기준으로 반올림",
+    "explanation": "ROUND 의 두 번째 인수가 음수이면 정수부에서 반올림한다. -2 는 백의 자리까지 남기도록 십의 자리(5)에서 반올림하므로 456.789 는 500 이 된다(②). 참고로 ROUND(456.789, 1) = 456.8, ROUND(456.789, 0) = 457, ROUND(456.789, -1) = 460 이고, 400 은 TRUNC(456.789, -2) 의 결과다.",
     "chapter": "함수",
     "_source": "cbt-mock",
     "_origId": "cbt-095",
@@ -3425,7 +3425,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "식별관계는 부모 엔터티의 주식별자 속성을 자식 엔터티의 식별자에 포함한다."
     ],
     "correctIndex": 3,
-    "explanation": "①, ②, ④는 식별관계에 대한 설명이고 ③은 비식별관계에 대한 설명이다. 교재에서는 식별자의 특징으로 다른 엔터티에 \"이전\"이 필요하다고 설명하고 있으며, 비식별자의 특징으로는 다른 엔터티에 \"차단\"이 필요하다고설명하고 있다.",
+    "explanation": "식별관계는 부모 엔터티의 주식별자를 자식 엔터티의 주식별자에 포함하는 관계라 ④ 가 옳다. ① '자식 주식별자에 부모 주식별자를 포함' 과 ② '강한 연결 관계' 는 식별관계의 특징이고, ③ '부모 쪽 관계 참여가 선택' 은 비식별관계의 특징이라 이름이 서로 바뀌었다. 교재는 식별관계를 부모 식별자를 자식에게 '이전' 하는 관계, 비식별관계를 그 이전을 '차단' 하는 관계로 설명한다.",
     "chapter": "엔터티",
     "_source": "cbt-mock",
     "_origId": "cbt-102",
@@ -3613,7 +3613,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "날짜형 데이터 타입을 오름차순으로 정렬하면 날짜 값이 가장 늦은 날짜가 먼저 출력된다."
     ],
     "correctIndex": 3,
-    "explanation": "날짜형 데이터를 오름차순으로 출력하며 다음과 같다. 날짜형 데이터를 출력하기 위해서 sysdate를 사용하고 어제 날짜를 구하기 위해서 sysdate-1을 한다. 이것을 Union all로 합집합을 만든 다음에 Order by로 정렬을 한다.",
+    "explanation": "날짜형도 오름차순(ASC)이면 이른 날짜부터, 즉 작은 값부터 나온다. 가장 늦은 날짜가 먼저 나오는 것은 내림차순(DESC)이므로 ④ 가 올바르지 않다. ① 기본은 오름차순이고 DESC 로 내림차순, ② 숫자 오름차순은 작은 값부터, ③ SQL Server 는 NULL 을 가장 작은 값으로 보아 오름차순에서 맨 앞에 둔다(Oracle 은 맨 뒤).",
     "chapter": "ORDER BY",
     "_source": "cbt-mock",
     "_origId": "cbt-110",
@@ -4321,7 +4321,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "1300"
     ],
     "correctIndex": 3,
-    "explanation": "TX2의 update 문은 베타적 Lock 때문에 대기했다가 TX1 트랜잭션이 commit 한 후에 처리를 계속한다. TX1에 의해 1,100으로 바뀐 값을 읽어 200을 더하므로 최종 결과는 1,300이 된다.",
+    "explanation": "TX2의 update 문은 배타적 Lock 때문에 대기했다가 TX1 트랜잭션이 commit 한 후에 처리를 계속한다. TX1에 의해 1,100으로 바뀐 값을 읽어 200을 더하므로 최종 결과는 1,300이 된다.",
     "chapter": "트랜잭션과 Null",
     "_source": "cbt-mock",
     "_origId": "cbt-130",
@@ -4479,7 +4479,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "0"
     ],
     "correctIndex": 0,
-    "explanation": "EXISTS는 서브쿼리의 결과가 존재하는지만 판단하며, 실제 반환되는 값은 중요하지 않다. 이 쿼리는 EMPLOYEE 테이블에서 각 직원의 EMP_ID를 SALARY 테이블과 비교하여, 해당 EMP_ID가 SALARY에 존재하고 AMOUNT가 NULL이 아닌 경우만 포함시킨다. 메인 쿼리의 각 행에 대해 서브쿼리가 다음과 같이 평가된다. • EMP_ID = 1 → SALARY에 EMP_ID=1, AMOUNT=3000 → 조건 만족 → 포함 • EMP_ID = 2 → SALARY에 EMP_ID=2, AMOUNT=NULL → 조건 불만족 → 제외 • EMP_ID = 3 → SALARY에 EMP_ID=3 없음 → 조건 불만족 → 제외따라서 결과는 EMP_ID=1 (Kim) 1건이며, 정답은 ①이다.",
+    "explanation": "EXISTS는 서브쿼리의 결과가 존재하는지만 판단하며, 실제 반환되는 값은 중요하지 않다. 이 쿼리는 EMPLOYEE 테이블에서 각 직원의 EMP_ID를 SALARY 테이블과 비교하여, 해당 EMP_ID가 SALARY에 존재하고 AMOUNT가 NULL이 아닌 경우만 포함시킨다. 메인 쿼리의 각 행에 대해 서브쿼리가 다음과 같이 평가된다. • EMP_ID = 1 → SALARY에 EMP_ID=1, AMOUNT=3000 → 조건 만족 → 포함 • EMP_ID = 2 → SALARY에 EMP_ID=2, AMOUNT=NULL → 조건 불만족 → 제외 • EMP_ID = 3 → SALARY에 EMP_ID=3 없음 → 조건 불만족 → 제외. 따라서 결과는 EMP_ID=1 (Kim) 1건이며, 정답은 ①이다.",
     "chapter": "서브쿼리",
     "_source": "cbt-mock",
     "_origId": "cbt-136",
@@ -5272,7 +5272,7 @@ export const AI_MOCK: QuizQuestion[] = [
         "type": "table",
         "caption": "[TB_ITEM] 테이블",
         "headers": [
-          "NAME",
+          "ITEM",
           "PRICE"
         ],
         "rows": [
@@ -5484,7 +5484,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "'20240305'"
     ],
     "correctIndex": 2,
-    "explanation": "이 SQL은 함수가 중첩되어 있으므로 내부 함수인 TO_DATE('20240305', 'YYYYMMDD')가 먼저 실행된다. 이 함수는 문자열 '20240305'를 날짜 타입으로 변환하여 2024년 3월 5일이라는 날짜 값을 생성한다. 시분초는 별도로 지정하지 않았기 때문에 기본적으로 00:00:00이 적용된다. 그다음 TO_CHAR 함수가 이 날짜 값을 'YYYY.MM.DD' 형식으로 문자로 변환하게 되며, 최종 출력 결과는 '2024.03.05.'가 된다. 따라서 정답은 ③이다.",
+    "explanation": "이 SQL은 함수가 중첩되어 있으므로 내부 함수인 TO_DATE('20240305', 'YYYYMMDD')가 먼저 실행된다. 이 함수는 문자열 '20240305'를 날짜 타입으로 변환하여 2024년 3월 5일이라는 날짜 값을 생성한다. 시분초는 별도로 지정하지 않았기 때문에 기본적으로 00:00:00이 적용된다. 그다음 TO_CHAR 함수가 이 날짜 값을 'YYYY.MM.DD' 형식으로 문자로 변환하게 되며, 최종 출력 결과는 '2024.03.05' 가 된다. 따라서 정답은 ③이다.",
     "chapter": "함수",
     "_source": "cbt-mock",
     "_origId": "cbt-174",
@@ -5608,7 +5608,7 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "table",
-        "caption": "[TB_PRODUCT] 테이블",
+        "caption": "[PRODUCTS] 테이블",
         "headers": [
           "ID",
           "NAME",
@@ -6232,7 +6232,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "20"
     ],
     "correctIndex": 3,
-    "explanation": "SQL문에서 COUNT() 함수는 행 수를 확인하는 집계 함수이다. 그런데 R 테이블과 S 테이블에 조인 조건이 없어서 카텐시안 곱이 발생한다. 즉, R 테이블의 행 수가 4개이고 S 테이블의 행 수가 5개이므로 4*5=20이 조회된다.",
+    "explanation": "SQL문에서 COUNT() 함수는 행 수를 확인하는 집계 함수이다. 그런데 R 테이블과 S 테이블에 조인 조건이 없어서 카티션 곱이 발생한다. 즉, R 테이블의 행 수가 4개이고 S 테이블의 행 수가 5개이므로 4*5=20이 조회된다.",
     "chapter": "관계형 DB와 SELECT",
     "_source": "cbt-mock",
     "_origId": "cbt-205",
@@ -6335,7 +6335,7 @@ export const AI_MOCK: QuizQuestion[] = [
       "부서 테이블에 (1, '연구부') 튜플을 삽입한다면 참조 무결성 제약조건을 위배한다."
     ],
     "correctIndex": 3,
-    "explanation": "부서 테이블은 마스터 테이블이므로 사원 테이블에 없는 부서번호 등을 자유롭게 입력할 수 있다. 따라서 부서 테이블에 (1, '연구부')을 입력하는 것은 참조 무결성 위배가 아니다.",
+    "explanation": "① 사원 테이블이 부서번호 2 를 참조하고 있어 삭제하면 참조 무결성 위배(기본 동작은 삭제 거부)다. ② 부서번호는 INT 인데 'A1' 은 문자라 도메인 무결성 위배, ③ 부서번호 0 은 부서 테이블에 없어 참조 무결성 위배다. ④ 부서 테이블은 참조되는 쪽이라 새 행을 넣어도 참조 무결성과는 관계가 없다. 다만 부서번호 1 이 이미 있어 기본키 중복, 즉 개체 무결성 위배가 된다. 따라서 '참조 무결성 위배'라는 ④ 의 설명이 틀렸다.",
     "chapter": "관계형 DB와 SELECT",
     "_source": "cbt-mock",
     "_origId": "cbt-206",
