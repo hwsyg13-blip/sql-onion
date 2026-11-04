@@ -468,7 +468,7 @@
         "TRUNCATE는 데이터를 삭제하면서 디스크의 저장 공간(Extent)을 초기 상태로 반환한다."
       ],
       "correctIndex": 1,
-      "explanation": "TRUNCATE는 행 단위 로그를 남기지 않고 테이블의 데이터 영역을 통째로 비우는 DDL이므로 대용량 삭제 시 DELETE보다 훨씬 빠르다."
+      "explanation": "TRUNCATE 는 행마다 로그를 남기지 않고 데이터 영역을 통째로 비우는 DDL 이라 대량 삭제에서 DELETE 보다 훨씬 빠르다. '행마다 Redo/Undo 를 기록해 느리다' 는 ② 가 틀렸다(그건 DELETE 의 특징). ①③④ 는 맞는 설명이다."
     },
     {
       "_id": "ai-mock-033",
