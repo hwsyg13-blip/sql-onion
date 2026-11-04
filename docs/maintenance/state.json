@@ -7,10 +7,7 @@
   },
   "current_mission": null,
   "my_prs": [
-    195,
-    263,
-    264,
-    265
+    195
   ],
   "merged_prs": [
     197,
@@ -90,5 +87,10 @@
     "status": "pr_open",
     "chapters": 29
   },
-  "next_exam": "2026-11-14 (63회, src/lib/examDate.ts)"
+  "next_exam": "2026-11-14 (63회, src/lib/examDate.ts)",
+  "theory_freeze": {
+    "from": "2026-11-05",
+    "until": "2026-11-14",
+    "rule": "이론은 오류 수정만"
+  }
 }
