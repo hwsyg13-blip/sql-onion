@@ -916,7 +916,13 @@
         "user1@example.com"
       ],
       "correctIndex": 2,
-      "explanation": "도메인에 점(.) 이 있는지 검사하는 패턴이라면 name@domain.com, test@naver.co.kr, user1@example.com 은 모두 '@' 뒤 도메인에 점이 있어 정상으로 판정된다. hello@nodot 은 도메인에 점이 없어 패턴과 매칭되지 않고 NULL(빈 결과)이 나오므로 부적절한 결과가 나오는 경우는 ③ 이다."
+      "explanation": "패턴 '@[^.]+\\.[a-z.]+' 는 @ 뒤에 점이 아닌 글자가 이어지다가 점(.)과 도메인 끝부분이 오는 부분을 찾는다. name@domain.com → '@domain.com', test@naver.co.kr → '@naver.co.kr', user1@example.com → '@example.com' 처럼 도메인이 정상 추출된다. hello@nodot 은 @ 뒤에 점이 없어 일치하는 부분이 없으므로 NULL 이 나온다(③). ※ 복원 자료에는 검사에 쓴 SQL 이 빠져 있어, 해설의 '도메인 점 유무 검사' 를 SQL 로 보충했다.",
+      "references": [
+        {
+          "type": "sql",
+          "code": "SELECT EMAIL,\n       REGEXP_SUBSTR(EMAIL, '@[^.]+\\.[a-z.]+') AS 도메인\nFROM   회원;"
+        }
+      ]
     },
     {
       "subject": "2과목",
