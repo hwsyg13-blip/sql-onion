@@ -135,3 +135,9 @@
 - 문의 시트 전체: Drive 커넥터 `download_file_content(fileId=1ZetajcAO8lDHTbYF0EwfKoytJnDjI-SAqk8510XOIDg, exportMimeType=text/csv)`.
 - 기록 브랜치는 fetch 설정이 main 만 받아 추적 참조가 낡는다. push 뒤 `git fetch origin +maintenance/maintainer-agent:refs/remotes/origin/maintenance/maintainer-agent`.
 - PR 은 REST API(`gh api .../pulls -X POST`), 사용량은 `list_events(kinds=["rate_limit_event"])`, 배포 확인은 GitHub deployments API.
+
+## 2026-11-04 20:30 KST — 모의고사 풀 전수 검토 완료
+- #261(기출 62→45 전수 검토) 머지 완료 → main 6314bed, 배포 성공
+- 모의고사 풀 1156 전부 검토 → PR #262 (content/2026-11-04-mock-review, 72bc285). 복수 정답·정답 불성립 6건(M439·M597·M628·M810·M765·M335), 해설 번호 오기 등 수정
+- #262 는 다음 정기 배치 머지 대상 (24h 배포 < 80 · 사용량 게이트 확인 후)
+- 다음 후보: 이론(theory*.ts) 본문 정확성 전수 검토, 퀴즈뱅크 외 데이터 확인
