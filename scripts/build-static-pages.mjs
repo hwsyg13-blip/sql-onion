@@ -2,7 +2,8 @@
 // 빌드 후 실행: dist/ 안에 회차/이론/콘텐츠 페이지 생성 + sitemap 갱신
 //
 // 출력 페이지 구조:
-//   /exam/                    회차 목록 (회차 상세 /exam/round-NN/ 은 콘텐츠 보호로 생성하지 않음 — 아래 참고)
+//   /exam/                    회차 목록
+//   /exam/round-NN/           회차 소개 (시행일·단원별 문항 수·많이 나온 주제 — 문제 본문은 싣지 않음)
 //   /theory/cXX/              이론 챕터별 섹션 목록 (챕터 수는 src/data/theory.ts 기준)
 //   /guide/sqld-overview/     SQLD 자격증 안내
 //   /guide/sqld-application/  시험 응시·일정·접수 안내
@@ -227,49 +228,61 @@ function renderRef(ref) {
   return '';
 }
 
-function buildRoundPage(r) {
-  const { round, date, authored } = r;
-  const title = `SQLD 제${round}회 (${date.ko}) 기출 복원문제 50문항 · 정답·해설 — SQLD양파`;
-  const desc = `SQLD ${date.ko} 시행 제${round}회 기출 복원문제 50문항을 무료로 풀어보세요. 데이터모델링·SQL 활용 1·2과목 정답과 해설 포함, 회원가입 없이 즉시 풀이 가능.`;
+// 회차 소개 페이지 — 문제 본문·보기·해설은 싣지 않는다 (4/26 콘텐츠 보호 결정).
+// 시행일·문항 구성·주제 분포(scripts/round-topics.json)와 CBT 풀이 링크만.
+const ROUND_TOPICS = JSON.parse(readFileSync('scripts/round-topics.json', 'utf8')).rounds;
+const CHAPTER_TITLE = Object.fromEntries(THEORY.subjects.flatMap(s => s.chapters.map(c => [c.id, c.title])));
+const TOPIC_GROUPS = [
+  { label: '1과목 · 데이터 모델링의 이해', test: id => /^c11/.test(id) },
+  { label: '1과목 · 데이터 모델과 SQL', test: id => /^c12/.test(id) },
+  { label: '2과목 · SQL 기본', test: id => /^c21/.test(id) },
+  { label: '2과목 · SQL 활용', test: id => /^c22/.test(id) },
+  { label: '2과목 · 관리 구문', test: id => /^c23/.test(id) },
+  { label: 'SQL 최적화 (2024년 개편 전 범위)', test: id => id === 'opt' },
+];
+function roundExactDate(round, fallbackKo) {
+  const e = EXAM_SCHEDULE.find(x => x.round === round);
+  if (!e) return fallbackKo;
+  const wd = '일월화수목금토'[new Date(Date.UTC(e.y, e.m - 1, e.d)).getUTCDay()];
+  return `${e.y}년 ${e.m}월 ${e.d}일 (${wd})`;
+}
+function buildRoundPage(r, idx) {
+  const { round, date } = r;
+  const items = r.authored || [];
+  const tags = ROUND_TOPICS[String(round)] || {};
+  const when = roundExactDate(round, date.ko);
   const path = `/exam/round-${round}/`;
-
-  const questionsHtml = authored.map(q => {
-    const refs = (q.references || []).map(renderRef).join('');
-    const opts = q.options.map((o, i) => {
-      const isAns = i === q.correctIndex;
-      return `<li${isAns ? ' style="color:var(--correct-fg);font-weight:700"' : ''}>${CIRCLED[i]} ${esc(o)}${isAns ? ' (정답)' : ''}</li>`;
-    }).join('');
-    return `<article class="q" id="q${q.number}">
-  <span class="num">${q.number}번</span><span class="subj">${esc(q.subject)}</span>
-  <div class="stem">${esc(q.title)}</div>
-  ${refs}
-  <ol type="1" start="1" style="list-style:none;padding-left:0">${opts}</ol>
-  <div class="answer">정답: ${CIRCLED[q.correctIndex]} ${esc(q.options[q.correctIndex])}</div>
-  ${q.explanation ? `<div class="expl">${esc(q.explanation)}</div>` : ''}
-</article>`;
-  }).join('\n');
-
-  // JSON-LD: Quiz schema
+  const reformed = round >= 52;
+  const s1 = items.filter(q => q.subject === '1과목').length, s2 = items.length - s1;
+  const counts = {};
+  for (const q of items) { const c = tags[String(q.number)]; if (c) counts[c] = (counts[c] || 0) + 1; }
+  const groupRows = TOPIC_GROUPS.map(g => [g.label, Object.entries(counts).filter(([c]) => g.test(c)).reduce((n, [, v]) => n + v, 0)]).filter(([, n]) => n > 0);
+  const top = Object.entries(counts).filter(([c]) => c !== 'opt' && CHAPTER_TITLE[c]).sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0])).slice(0, 6);
+  const prev = rounds[idx - 1], next = rounds[idx + 1];
+  const title = `SQLD ${round}회 기출 복원문제 (${shortDate(date.ko)}) — 출제 주제·CBT 풀이`;
+  const desc = `SQLD 제${round}회(${when} 시행) 기출 복원 ${items.length}문항. 1과목 ${s1} · 2과목 ${s2}문항, 단원별 출제 수와 많이 나온 주제를 정리했고 정답·해설과 함께 90분 CBT 로 풀 수 있다.`;
   const ld = {
-    "@context": "https://schema.org",
-    "@type": "Quiz",
-    "name": `SQLD 제${round}회 (${date.ko}) 기출 복원문제`,
-    "about": "SQLD (SQL Developer) 자격검정",
-    "educationalLevel": "intermediate",
-    "inLanguage": "ko-KR",
-    "url": SITE + path,
-    "numberOfQuestions": authored.length,
-    "datePublished": NOW,
+    '@context': 'https://schema.org', '@type': 'Quiz',
+    name: `SQLD 제${round}회 기출 복원문제`, about: 'SQLD (SQL Developer) 자격검정',
+    inLanguage: 'ko-KR', url: SITE + path, numberOfQuestions: items.length,
   };
-
-  return head({ title, desc, path }) + `
-    <div class="crumb"><a href="/">홈</a> · <a href="/exam/">기출문제</a> · 제${round}회</div>
-    <h1>SQLD 제${round}회 기출 복원문제 (${date.ko})</h1>
-    <p class="lead">총 50문항 · 1과목 데이터 모델링의 이해 10문항 + 2과목 SQL 기본 및 활용 40문항. 정답과 해설 모두 포함.</p>
-    <a class="cta" href="/">실전 CBT 모드로 풀어보기 →</a>
-    <h2>전체 문항 (${authored.length}문항)</h2>
-    ${questionsHtml}
+  return head({ title: `${title} — SQLD양파`, desc, path }) + `
     <script type="application/ld+json">${JSON.stringify(ld)}</script>
+    <div class="crumb"><a href="/">홈</a> · <a href="/exam/">기출문제</a> · 제${round}회</div>
+    <h1>SQLD 제${round}회 기출 복원문제</h1>
+    <p class="lead">${when} 시행 · ${items.length}문항 (1과목 ${s1} · 2과목 ${s2}) · ${reformed ? '2024년 개편 후 현행 출제기준' : '2024년 개편 전 시험 — SQL 최적화 문제가 일부 섞여 있다'}</p>
+    <a class="cta" href="/?cbt=round-${round}">제${round}회 50문항 CBT 로 풀기 (90분 · 정답·해설) →</a>
+    <h2>단원별 문항 수</h2>
+    <table>
+      <thead><tr><th>단원</th><th>문항</th></tr></thead>
+      <tbody>${groupRows.map(([l, n]) => `<tr><td>${esc(l)}</td><td>${n}</td></tr>`).join('')}</tbody>
+    </table>
+    <h2>이 회차에 많이 나온 주제</h2>
+    <table>
+      <thead><tr><th>주제 (이론 챕터)</th><th>문항</th></tr></thead>
+      <tbody>${top.map(([c, n]) => `<tr><td><a href="/theory/${c}/">${esc(CHAPTER_TITLE[c])}</a></td><td>${n}</td></tr>`).join('')}</tbody>
+    </table>
+    <nav class="chapter-nav">${prev ? `<a href="/exam/round-${prev.round}/">← 제${prev.round}회</a>` : '<span></span>'}<a href="/exam/">회차 목록</a>${next ? `<a href="/exam/round-${next.round}/">제${next.round}회 →</a>` : '<span></span>'}</nav>
 ` + tail;
 }
 
@@ -283,7 +296,7 @@ function buildExamIndexPage() {
 
   const items = rounds.slice().sort((a, b) => b.round - a.round).map(r => {
     return `<li>
-  <a id="round-${r.round}" href="/?cbt=round-${r.round}">SQLD ${r.round}회 기출 복원문제 (${shortDate(r.date.ko)}) 풀어보기 →</a>
+  <a id="round-${r.round}" href="/exam/round-${r.round}/">SQLD ${r.round}회 기출 복원문제 (${shortDate(r.date.ko)}) — 출제 주제 보기</a> · <a href="/?cbt=round-${r.round}">바로 풀기 →</a>
   <div class="sub">${r.date.ko} 시행 · 50문항 · 정답·해설 포함 · CBT 모드 (90분)</div>
 </li>`;
   }).join('\n');
@@ -311,6 +324,7 @@ function buildExamIndexPage() {
     </ol>
 
     <h2>회차별 문제집 (${rounds.length}개)</h2>
+    <p>회차마다 소개 페이지에 단원별 문항 수와 많이 나온 주제(문항 내용을 이론 챕터에 대응시켜 센 것)를 정리했다. 문제 본문은 학습 화면에서 푼다.</p>
     <ul class="chapters">${items}</ul>
 ` + tail;
 }
@@ -716,6 +730,7 @@ function buildSitemap() {
     { loc: SITE + '/', priority: 1.0, changefreq: 'weekly' },
     { loc: SITE + '/exam/', priority: 0.9, changefreq: 'monthly' },
     { loc: SITE + '/theory/', priority: 0.9, changefreq: 'monthly' },
+    ...rounds.map(r => ({ loc: `${SITE}/exam/round-${r.round}/`, priority: 0.8, changefreq: 'monthly' })),
     ...THEORY.subjects.flatMap(s => s.chapters.map(c => ({ loc: `${SITE}/theory/${c.id}/`, priority: 0.7, changefreq: 'monthly' }))),
     ...guides.map(g => ({ loc: `${SITE}/guide/${g.slug}/`, priority: 0.6, changefreq: 'yearly' })),
     { loc: SITE + '/about/', priority: 0.4, changefreq: 'yearly' },
@@ -742,10 +757,10 @@ ${urls.map(u => `  <url>
 // ============================================================
 console.log('Generating static SEO pages...');
 
-// 회차 인덱스만 — 회차 상세 페이지(/exam/round-NN/)는 콘텐츠 무단 복제 방지를 위해
-// 정적 노출 중단. 인덱스의 각 회차 카드는 SPA CBT 풀이 모드로 직접 연결.
+// 회차 인덱스 + 회차 소개 페이지 — 소개 페이지에는 문제 본문을 싣지 않는다(콘텐츠 보호).
 writePage('/exam/', buildExamIndexPage());
-console.log(`  exam: 1 index page (round detail static pages removed)`);
+rounds.forEach((r, i) => writePage(`/exam/round-${r.round}/`, buildRoundPage(r, i)));
+console.log(`  exam: 1 index + ${rounds.length} round overview pages (no question text)`);
 
 // 이론 챕터 + 인덱스
 let chCnt = 0;
