@@ -8,7 +8,8 @@
   "current_mission": null,
   "my_prs": [
     195,
-    263
+    263,
+    264
   ],
   "merged_prs": [
     197,
@@ -87,5 +88,6 @@
     "pr": 263,
     "status": "pr_open",
     "chapters": 29
-  }
+  },
+  "next_exam": "2026-11-14 (63회, src/lib/examDate.ts)"
 }
