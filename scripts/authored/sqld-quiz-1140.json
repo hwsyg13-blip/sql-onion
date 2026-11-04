@@ -16285,7 +16285,7 @@
         "한 명의 고객은 여러 개의 서비스를 구매할 수 있다."
       ],
       "correctIndex": 0,
-      "explanation": "고객과 서비스 구매의 관계의 차수는 1 이므로 하나의 고객이 여러 서비스를 구매할 수 있다. 또한 고객 -> 서비스 구매는 선택적 관계이므로 어떤 고객은 서비스를 구매하지 않아도 되지만, 반대는 필수적 관계이므로 서비스 구매는 구매한 고객이 반드시 정의되어야 한다.",
+      "explanation": "고객 1 명은 서비스구매를 여러 건 가질 수 있는 1:N 관계다(④). 고객 쪽에서 서비스구매로 가는 관계는 선택이라 구매하지 않은 고객도 있을 수 있고(③), 서비스구매 쪽에서 고객으로 가는 관계는 필수라 모든 구매 이력에는 반드시 고객이 있어야 한다(②). 그래서 '구매 이력에 고객 정보가 없을 수 있다' 는 ① 이 틀렸다.",
       "references": [
         {
           "type": "image",
@@ -16559,7 +16559,7 @@
         "SELECT DECODE(SUBSTR(JUMIN, 7, 1), '1', '남자', '여자') FROM TAB1;"
       ],
       "correctIndex": 1,
-      "explanation": "CASE 문 축약형 문법(비교 대상이 CASE 와 WHEN 사이에 있는)은 반드시 비교 대상과 비교 상수의 데이터 타입이 일치해야 한다. SUBSTR 결과는 항상 문자로 출력되므로 숫자 상수와 비교하는 3 번 지문은 에러가 발생하여 출력되지 않는다. ",
+      "explanation": "CASE 문 축약형 문법(비교 대상이 CASE 와 WHEN 사이에 있는)은 반드시 비교 대상과 비교 상수의 데이터 타입이 일치해야 한다. SUBSTR 결과는 문자이므로 숫자 1 과 비교하는 ② (CASE SUBSTR(...) WHEN 1) 은 데이터 타입이 맞지 않아 오류가 난다. ③ 처럼 CASE WHEN SUBSTR(...) = 1 로 쓰면 일반 비교식이라 문자가 숫자로 자동 변환되어 ①④ 와 같은 결과(남자, 여자)가 나온다. ",
       "references": [
         {
           "type": "table",
@@ -16683,7 +16683,7 @@
         "500, 100, 400, 600"
       ],
       "correctIndex": 0,
-      "explanation": "SUM(COL2)는 NULL 만 제외하고 총합을 리턴하므로 500 이 출력된다. 하지만 2 번 지문의 경우 COL1 > 0 조건에 만족하는 행은 첫 번째 행 하나이므로 SUM(COL2) + SUM(COL3) = NULL + 100 이 되며, 이때는 NULL 이 리턴된다.",
+      "explanation": "SUM 은 NULL 을 빼고 더하지만, SUM 결과끼리 더할 때 한쪽이 NULL 이면 결과도 NULL 이다. ① 전체: SUM(COL2) = 200 + 300 = 500, SUM(COL3) = 100 + 400 = 500 → 1000. ② COL1 > 0 인 행은 첫 행뿐이라 SUM(COL2) 가 NULL 이 되어 NULL + 100 = NULL. ③ COL1 IS NOT NULL 인 첫째·셋째 행: SUM(COL2) = 300, SUM(COL3) = 100 → 400. ④ COL1 IS NULL 인 둘째 행: 200 + 400 = 600. 정답은 1000, NULL, 400, 600(①).",
       "references": [
         {
           "type": "sql",
@@ -17015,7 +17015,7 @@
         "2"
       ],
       "correctIndex": 2,
-      "explanation": "서브쿼리 결과가 먼저 실행되어 2020년 2월 1일보다 입사일이 큰 행의 DEPTNO(30, 40, 50)가 출력되고 ALL이 작다와 결합되어 이들 중 30보다 작거나 같은 조건으로 전달된다. 따라서 DEPTNO가 10, 20, 30인 EMPNO의 수는 총 3개이다. ",
+      "explanation": "서브쿼리는 입사일이 2020-02-01 이후(같은 날 포함)인 사원의 DEPTNO 30, 40, 50 을 돌려준다. DEPTNO <= ALL(30, 40, 50) 은 세 값 모두보다 작거나 같아야 하므로 DEPTNO <= 30 과 같다. 해당하는 DEPTNO 는 10, 20, 30 이고, DEPTNO 가 NULL 인 1번 사원은 비교 결과가 UNKNOWN 이라 빠진다. COUNT(DEPTNO) = 3(③).",
       "references": [
         {
           "type": "sql",
@@ -17163,7 +17163,7 @@
         "SELECT 고객.성별, COUNT(서비스.서비스번호) AS CNT, SUM(서비스.가격) AS SUM_PRICE \n    FROM 고객, 서비스구매, 서비스 \n   WHERE 고객.고객번호= 서비스구매.고객번호 \n     AND 서비스구매.서비스번호 = 서비스.서비스번호 \n   GROUP BY 고객.성별;"
       ],
       "correctIndex": 2,
-      "explanation": "고객과 서비스 구매 관계에서 고객은 필수, 서비스 구매는 선택적 관계이므로 LEFT OUTER JOIN을 하면 서비스 구매를 하지 않은 고객의 서비스 구매 정보가 NULL로 출력된다. 따라서 이때, 고객의 성별로 서비스 구매나 서비스 테이블의 컬럼을 COUNT할 경우 NULL은 세지 않기 때문에 정상적으로 구매를 한 고객 수가 리턴될 텐데 2번의 경우 고객 테이블의 고객 번호를 세기 때문에 성별 고객 수가 출력된다.",
+      "explanation": "고객 쪽에서 서비스구매는 선택 관계라 LEFT OUTER JOIN 을 하면 구매하지 않은 고객도 서비스 칼럼이 NULL 인 행으로 남는다. ③ 은 이 상태에서 COUNT(고객.고객번호) 를 세므로 구매하지 않은 고객까지 이용횟수에 들어가 결과가 틀린다(서비스 쪽 칼럼을 세야 NULL 이 빠진다). ①·② 는 INNER JOIN 후 서비스번호·가격을 세고 더하며, ④ 도 등가 조인이라 구매한 건만 집계해 성별 이용횟수와 금액이 맞게 나온다.",
       "references": [
         {
           "type": "image",
@@ -17768,7 +17768,7 @@
         "정규화는 모델의 일관성을 확보하고 중복을 제거하여 모델의 독립성을 확보하는 과정이다."
       ],
       "correctIndex": 2,
-      "explanation": "제1정규화 : 속성의 원자성(한 속성이 하나의 값을 갖는 특성)을 갖도록 엔터티를 분해하는 단계 제2정규화 : 제1정규화를 진행한 엔터티에 대해 완전 함수 종속을 갖도록 분해하는 단계 제3정규화 : 제2정규화를 진행한 엔터티에 대해 이행적 종속을 갖지 않도록 분해하는 단계 -> 일반속성은 주식별자 전체에 종속적이다"
+      "explanation": "정규화는 논리 데이터 모델링 단계에서 엔터티를 상세화하는 과정이다. '개념 모델링 단계' 라고 한 ③ 이 적절하지 않다. ① 제3정규형까지 만족하면 일반속성은 주식별자 전체에 종속되고(부분·이행 종속 제거), ② 제1정규형은 모든 속성이 하나의 값(원자값)을 가진다는 뜻이며, ④ 정규화는 중복을 없애 모델의 일관성과 독립성을 높인다."
     },
     {
       "_id": "sqld-0627",
@@ -19328,7 +19328,7 @@
         "110"
       ],
       "correctIndex": 0,
-      "explanation": "처음 INSERT 3개의 문장은 COMMIT을 수행했으므로 영구 저장된다. 이후 COL3을 추가하면 이미 입력된 세 개의 행에 대해 NULL을 갖게 된다. 그 뒤 수행하는 INSERT, UPDATE, DELETE 문장은 이어서 실행하는 ALTER TABLE DROP COLUMN 문장으로 인해 자동 확정된다. (DDL AUTO COMMIT). 따라서 ROLLBACK을 수행해도 취소되지 않는다. ",
+      "explanation": "처음 INSERT 3개의 문장은 COMMIT을 수행했으므로 영구 저장된다. 이후 COL3을 추가하면 이미 입력된 세 개의 행에 대해 NULL을 갖게 된다. 그 뒤 수행하는 INSERT, UPDATE, DELETE 문장은 이어서 실행하는 ALTER TABLE DROP COLUMN 문장으로 인해 자동 확정된다. (DDL AUTO COMMIT). 따라서 ROLLBACK을 수행해도 취소되지 않는다.  남은 행은 (COL2, COL3) = (50, NULL), (20, NULL), (40, 100) 이고, COL2 + COL3 은 NULL 이 섞인 두 행이 NULL 이라 SUM 은 40 + 100 = 140 이다(①).",
       "references": [
         {
           "type": "sql",
@@ -19452,11 +19452,11 @@
       "options": [
         "HR 유저에게 부여된 EMP 테이블 입력 권한 회수 시 HONG에게 부여된 권한도 함께 회수되었다.",
         "HR이 HONG에게 부여한 EMP 테이블의 조회 권한은 SYSTEM 계정에서 직접 회수가 가능하다.",
-        "HR 유저에게 부여된 CREATE TABLE 권한 회수 시 HONG에게 부여된 CREATE TABLE 권한도 함께  \n회수되었다.",
+        "HR 유저에게 부여된 CREATE VIEW 권한 회수 시 HONG에게 부여된 CREATE VIEW 권한도 함께 회수되었다.",
         "HR 계정에게 부여된 SCOTT.EMP에 대한 SELECT 권한도 함께 회수된다."
       ],
       "correctIndex": 0,
-      "explanation": "중간관리자가 WITN GRANT OPTION으로 부여 받은 권한을 제 3자에게 부여한 경우, 관리자가 제 3자의 권한을 직접 회수할 수 없다. 하지만 중간관리자 권한을 회수하면 제 3자에게 부여한 권한도 함께 회수된다. 반대로 WITH ADMIN OPTION으로 부여할 경우 중간관리자 권한 회수 시 제 3자에게 부여한 권한은 함께 회수되지 않는다.",
+      "explanation": "WITH GRANT OPTION 으로 받은 객체 권한(SELECT, INSERT ON SCOTT.EMP)을 HR 이 HONG 에게 다시 준 경우, HR 의 권한을 회수하면 HONG 에게 준 권한도 함께 회수된다(①). ② SYSTEM 은 HR 이 HONG 에게 준 권한을 직접 회수할 수 없다(REVOKE 는 자기가 준 권한만 회수). ③ WITH ADMIN OPTION 으로 받은 시스템 권한(CREATE VIEW)은 HR 에게서 회수해도 HONG 의 권한은 남는다. ④ 회수한 것은 INSERT 뿐이라 HR 의 SELECT 권한은 그대로다. ※ 원 자료의 ③ 은 위 SQL 에 없는 CREATE TABLE 로 적혀 있어 CREATE VIEW 로 맞췄다.",
       "references": [
         {
           "type": "text",
@@ -21262,13 +21262,13 @@
       "chapter": "함수",
       "title": "NULL에 대한 설명으로 틀린 것은?",
       "options": [
-        "NULL과의 비교 연산은 FALSE를 리턴한다.",
+        "NULL과의 비교 연산은 UNKNOWN 을 리턴한다.",
         "NULL이 포함된 컬럼의 SUM 값은 항상 NULL이다.",
         "NULL + 100은 NULL을 리턴한다.",
         "COUNT는 NULL을 세지 않는다."
       ],
       "correctIndex": 1,
-      "explanation": "SUM 같은 집계 함수는 NULL 을 빼고 계산하므로 NULL 이 섞여 있어도 나머지 값의 합이 나온다. 모든 값이 NULL 일 때만 결과가 NULL 이다. 그래서 '항상 NULL' 이라는 ② 가 틀렸다. ① NULL 과 비교한 결과는 정확히는 UNKNOWN 이지만 조건에서는 참이 아니라 거짓처럼 걸러진다."
+      "explanation": "SUM 같은 집계 함수는 NULL 을 빼고 계산하므로 NULL 이 섞여 있어도 나머지 값의 합이 나온다. 모든 값이 NULL 일 때만 결과가 NULL 이다. 그래서 '항상 NULL' 이라는 ② 가 틀렸다. ① NULL 과의 비교 결과는 UNKNOWN 이고(조건에서는 참이 아니라 걸러짐), ③ NULL + 100 은 NULL, ④ COUNT(칼럼) 은 NULL 을 세지 않는다. ※ 원 자료의 ① 은 'FALSE 를 리턴한다' 로 적혀 있어 가이드 기준(UNKNOWN)으로 보면 이것도 틀린 설명이 되므로, 단일 정답이 되도록 바로잡았다."
     },
     {
       "_id": "sqld-0731",
@@ -21928,7 +21928,7 @@
         "SELECT P.CODE, P.NAME, P.PRICE FROM PRODUCT P, (SELECT CODE, MAX(PRICE) AS MAX_PRICE FROM PRODUCT GROUP BY CODE) I WHERE P.CODE = I.CODE AND P.PRICE = I.MAX_PRICE;"
       ],
       "correctIndex": 0,
-      "explanation": "2, 3, 4번 → 모두 CODE별 최대 PRICE를 조회 → 동일한 결과 1번 → 상관 서브쿼리에서 PRICE 단일값을 기대하지만, 동일 CODE가 여러 건이면 서브쿼리가 다중행 반환 → 오류 발생 (single-row subquery error) 즉, 1번만 정상적인 결과 집합을 반환하지 못하거나 결과가 다름"
+      "explanation": "②③④ 는 모두 CODE 별로 PRICE 가 가장 큰 행(CODE, NAME, PRICE)만 조회해 결과가 같다(② 연관 서브쿼리, ③ 다중 컬럼 IN, ④ 인라인 뷰 조인). ① 은 스칼라 서브쿼리 안에서 정의되지 않은 별칭 P2 를 써서 오류가 나고, 별칭을 고치더라도 같은 CODE 가 여러 행이면 스칼라 서브쿼리가 여러 값을 돌려줘 오류가 난다. 최댓값 행만 고르는 조건도 없어 나머지와 결과가 다르다(①)."
     },
     {
       "_id": "sqld-0750",
