@@ -22311,7 +22311,7 @@
         "7300"
       ],
       "correctIndex": 1,
-      "explanation": "그룹으로 나눌 때 명학히 나눠지지 않으면 앞 그룹의 크기를 더 크게 나누므로 10번 부서의 1번 그룹원은 MILLER, CLARK이며, 20번 부서의 2번 그룹원은 SCOTT과 FORD 이므로 1300 + 2450 + 3000 + 3000 = 9750 이 된다.",
+      "explanation": "그룹으로 나눌 때 명확히 나눠지지 않으면 앞 그룹의 크기를 더 크게 나누므로 10번 부서의 1번 그룹원은 MILLER, CLARK이며, 20번 부서의 2번 그룹원은 SCOTT과 FORD 이므로 1300 + 2450 + 3000 + 3000 = 9750 이 된다.",
       "references": [
         {
           "type": "sql",
@@ -22977,7 +22977,7 @@
         "SELECT SUM(DECODE(COL2, 10, 1, 0)) AS CNT10, SUM(DECODE(COL2, 20, 1, 0)) AS CNT20 FROM TAB1;"
       ],
       "correctIndex": 3,
-      "explanation": "특정 대상의 수를 세려면 COUNT는 세고자 하는 값이 어떤 값이든 존재(1이나 ‘X’ 등)하면 되고, 반대로 세지 않을 값은 반드시 NULL이어야 한다. SUM은 세고자 하는 값이 1이고, 나머지는 NULL이거나 0이면 된다. 따라서 해당 조건에 만족하는 문장은 1번이다.",
+      "explanation": "COUNT 로 세려면 세지 않을 값이 반드시 NULL 이어야 하고, SUM 으로 세려면 셀 값은 1, 나머지는 0 이나 NULL 이면 된다. ④ SUM(DECODE(COL2, 10, 1, 0)) 은 10 인 행만 1 이라 3, 20 은 2 가 되어 결과와 같다. ① ③ 은 DECODE 가 'X' 나 0 처럼 NULL 이 아닌 값을 돌려줘 COUNT 가 5 행을 모두 세고, ② 는 문자 'O'·'X' 를 SUM 해 오류가 난다. 정답은 ④.",
       "references": [
         {
           "type": "table",
@@ -23235,7 +23235,7 @@
         "2"
       ],
       "correctIndex": 1,
-      "explanation": "NATURAL JOIN은 컬럼명이 같은 컬럼끼리 값이 같은 조인을 완성한다. 따라서 양쪽 테이블의 COL2의 값이 같은 대상끼리 연결되는데, TAB1의 COL2가 10인 경우 1개, 20인 경우 2개, 30인 경우는 생략되며, NULL은 같다고 볼 수 없으므로 생략된다. 따라서 최종 출력되는 건수는 1 + 2+ 1 = 4건이다.",
+      "explanation": "NATURAL JOIN 은 이름이 같은 칼럼(COL2) 값이 같은 행끼리 잇는다. TAB1 의 COL2 가 10 인 A·D 는 TAB2 의 10 한 행과 각각 이어져 2건, 20 인 B 는 TAB2 의 20 두 행과 이어져 2건이다. 30 인 C 는 짝이 없고, NULL 끼리는 같다고 보지 않아 E 도 빠진다. 2 + 2 = 4건(②).",
       "references": [
         {
           "type": "table",
@@ -23804,7 +23804,7 @@
       "_correctRate": 10,
       "subject": "2과목",
       "chapter": "그룹 함수",
-      "title": "TAB1의 데이터를 바탕으로 SQL의 결과는 무엇인가가?",
+      "title": "TAB1의 데이터를 바탕으로 SQL의 결과는 무엇인가?",
       "options": [
         "2, 3",
         "3, 3",
@@ -28736,7 +28736,7 @@
         "두 엔터티는 관계가 없다."
       ],
       "correctIndex": 2,
-      "explanation": "ERD 에서 CUSTOMER 쪽은 하나, ORDERS 쪽은 여러 개(까마귀발) 표기로 이어져 있다. 한 고객이 여러 주문을 할 수 있는 1:N 관계다(③). 반대로 주문 하나는 고객 한 명에게만 속한다.",
+      "explanation": "ERD 에서 CUSTOMER 와 ORDERS 사이에 1:N 이 표시되어 있고, ORDERS 가 customer_id 를 FK 로 가진다. 한 고객이 여러 주문을 할 수 있는 관계다(③). 반대로 주문 하나는 고객 한 명에게만 속한다.",
       "references": [
         {
           "type": "image",
@@ -28808,7 +28808,7 @@
         "ORDER_DATE의 데이터 타입"
       ],
       "correctIndex": 1,
-      "explanation": "주문 하나에 주문항목(ORDER_ITEM)이 여러 개 달리는 구조는 ORDERS 와 ORDER_ITEM 사이의 1:N 관계로 표현한다(②). ERD 에서는 ORDER_ITEM 쪽에 '여러 개' 표기(까마귀발)가 붙는다.",
+      "explanation": "주문 하나에 주문항목(ORDER_ITEM)이 여러 개 달리는 구조는 ORDERS 와 ORDER_ITEM 사이의 1:N 관계로 표현한다(②). 그림에서는 두 엔터티 사이의 1:N 표시와, ORDER_ITEM 이 order_id 를 받아 쓰는 것으로 나타난다.",
       "references": [
         {
           "type": "image",
@@ -28832,7 +28832,7 @@
         "한 고객은 여러 주문을 가질 수 있다."
       ],
       "correctIndex": 2,
-      "explanation": "ERD 에서 ORDERS 와 ORDER_ITEM 은 1:N 이라, 주문 하나에 항목이 여러 개 달리지만 항목 하나는 한 주문에만 속한다. '한 ORDER_ITEM 이 여러 주문에 동시에 속한다' 는 ③ 이 잘못된 해석이다. ①②④ 는 관계 표기와 맞다.",
+      "explanation": "ERD 에서 ORDERS 와 ORDER_ITEM 은 1:N 이라, 주문 하나에 항목이 여러 개 달리지만 항목 하나는 한 주문에만 속한다. '한 ORDER_ITEM 이 여러 주문에 동시에 속한다' 는 ③ 이 잘못된 해석이다. ② ④ 는 1:N 표시 그대로이고, ① 은 1:N 의 N 이 0 개 이상을 뜻하므로(주문 없는 고객도 고객 테이블에 존재 가능) 잘못된 해석이 아니다.",
       "references": [
         {
           "type": "image",
