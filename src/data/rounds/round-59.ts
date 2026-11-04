@@ -297,7 +297,7 @@ export const ROUND_59: QuizQuestion[] = [
       {
         "type": "table",
         "headers": [
-          "연구소명"
+          "명"
         ],
         "rows": [
           [
