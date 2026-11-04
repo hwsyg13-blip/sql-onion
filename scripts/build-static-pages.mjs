@@ -2,7 +2,8 @@
 // 빌드 후 실행: dist/ 안에 회차/이론/콘텐츠 페이지 생성 + sitemap 갱신
 //
 // 출력 페이지 구조:
-//   /exam/                    회차 목록 (회차 상세 /exam/round-NN/ 은 콘텐츠 보호로 생성하지 않음 — 아래 참고)
+//   /exam/                    회차 목록
+//   /exam/round-NN/           회차 소개 (시행일·단원별 문항 수·많이 나온 주제 — 문제 본문은 싣지 않음)
 //   /theory/cXX/              이론 챕터별 섹션 목록 (챕터 수는 src/data/theory.ts 기준)
 //   /guide/sqld-overview/     SQLD 자격증 안내
 //   /guide/sqld-application/  시험 응시·일정·접수 안내
@@ -47,6 +48,8 @@ const shortDate = (ko) => ko.replace(/(\d{4})년 (\d+)월/, (_, y, m) => `${y}.$
 // 시험 일정 — 앱 D-day 와 같은 원본(src/lib/examDate.ts)을 읽는다.
 const EXAM_SCHEDULE = [...readFileSync('src/lib/examDate.ts', 'utf8').matchAll(/\{\s*round:\s*(\d+),\s*date:\s*'(\d{4})-(\d{2})-(\d{2})'\s*\}/g)]
   .map(([, r, y, m, d]) => ({ round: +r, y: +y, m: +m, d: +d, iso: `${y}-${m}-${d}` }));
+const NEXT_EXAM = EXAM_SCHEDULE.find(e => e.iso >= NOW) || null;
+const NEXT_EXAM_KO = NEXT_EXAM ? `제${NEXT_EXAM.round}회 ${NEXT_EXAM.y}년 ${NEXT_EXAM.m}월 ${NEXT_EXAM.d}일 (${'일월화수목금토'[new Date(Date.UTC(NEXT_EXAM.y, NEXT_EXAM.m - 1, NEXT_EXAM.d)).getUTCDay()]})` : '';
 const scheduleItems = EXAM_SCHEDULE.slice(-5).map(e => {
   const upcoming = e.iso >= NOW ? ' <strong>다음 시험</strong>' : '';
   const wd = '일월화수목금토'[new Date(Date.UTC(e.y, e.m - 1, e.d)).getUTCDay()];
@@ -225,49 +228,61 @@ function renderRef(ref) {
   return '';
 }
 
-function buildRoundPage(r) {
-  const { round, date, authored } = r;
-  const title = `SQLD 제${round}회 (${date.ko}) 기출 복원문제 50문항 · 정답·해설 — SQLD양파`;
-  const desc = `SQLD ${date.ko} 시행 제${round}회 기출 복원문제 50문항을 무료로 풀어보세요. 데이터모델링·SQL 활용 1·2과목 정답과 해설 포함, 회원가입 없이 즉시 풀이 가능.`;
+// 회차 소개 페이지 — 문제 본문·보기·해설은 싣지 않는다 (4/26 콘텐츠 보호 결정).
+// 시행일·문항 구성·주제 분포(scripts/round-topics.json)와 CBT 풀이 링크만.
+const ROUND_TOPICS = JSON.parse(readFileSync('scripts/round-topics.json', 'utf8')).rounds;
+const CHAPTER_TITLE = Object.fromEntries(THEORY.subjects.flatMap(s => s.chapters.map(c => [c.id, c.title])));
+const TOPIC_GROUPS = [
+  { label: '1과목 · 데이터 모델링의 이해', test: id => /^c11/.test(id) },
+  { label: '1과목 · 데이터 모델과 SQL', test: id => /^c12/.test(id) },
+  { label: '2과목 · SQL 기본', test: id => /^c21/.test(id) },
+  { label: '2과목 · SQL 활용', test: id => /^c22/.test(id) },
+  { label: '2과목 · 관리 구문', test: id => /^c23/.test(id) },
+  { label: 'SQL 최적화 (2024년 개편 전 범위)', test: id => id === 'opt' },
+];
+function roundExactDate(round, fallbackKo) {
+  const e = EXAM_SCHEDULE.find(x => x.round === round);
+  if (!e) return fallbackKo;
+  const wd = '일월화수목금토'[new Date(Date.UTC(e.y, e.m - 1, e.d)).getUTCDay()];
+  return `${e.y}년 ${e.m}월 ${e.d}일 (${wd})`;
+}
+function buildRoundPage(r, idx) {
+  const { round, date } = r;
+  const items = r.authored || [];
+  const tags = ROUND_TOPICS[String(round)] || {};
+  const when = roundExactDate(round, date.ko);
   const path = `/exam/round-${round}/`;
-
-  const questionsHtml = authored.map(q => {
-    const refs = (q.references || []).map(renderRef).join('');
-    const opts = q.options.map((o, i) => {
-      const isAns = i === q.correctIndex;
-      return `<li${isAns ? ' style="color:var(--correct-fg);font-weight:700"' : ''}>${CIRCLED[i]} ${esc(o)}${isAns ? ' (정답)' : ''}</li>`;
-    }).join('');
-    return `<article class="q" id="q${q.number}">
-  <span class="num">${q.number}번</span><span class="subj">${esc(q.subject)}</span>
-  <div class="stem">${esc(q.title)}</div>
-  ${refs}
-  <ol type="1" start="1" style="list-style:none;padding-left:0">${opts}</ol>
-  <div class="answer">정답: ${CIRCLED[q.correctIndex]} ${esc(q.options[q.correctIndex])}</div>
-  ${q.explanation ? `<div class="expl">${esc(q.explanation)}</div>` : ''}
-</article>`;
-  }).join('\n');
-
-  // JSON-LD: Quiz schema
+  const reformed = round >= 52;
+  const s1 = items.filter(q => q.subject === '1과목').length, s2 = items.length - s1;
+  const counts = {};
+  for (const q of items) { const c = tags[String(q.number)]; if (c) counts[c] = (counts[c] || 0) + 1; }
+  const groupRows = TOPIC_GROUPS.map(g => [g.label, Object.entries(counts).filter(([c]) => g.test(c)).reduce((n, [, v]) => n + v, 0)]).filter(([, n]) => n > 0);
+  const top = Object.entries(counts).filter(([c]) => c !== 'opt' && CHAPTER_TITLE[c]).sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0])).slice(0, 6);
+  const prev = rounds[idx - 1], next = rounds[idx + 1];
+  const title = `SQLD ${round}회 기출 복원문제 (${shortDate(date.ko)}) — 출제 주제·CBT 풀이`;
+  const desc = `SQLD 제${round}회(${when} 시행) 기출 복원 ${items.length}문항. 1과목 ${s1} · 2과목 ${s2}문항, 단원별 출제 수와 많이 나온 주제를 정리했고 정답·해설과 함께 90분 CBT 로 풀 수 있다.`;
   const ld = {
-    "@context": "https://schema.org",
-    "@type": "Quiz",
-    "name": `SQLD 제${round}회 (${date.ko}) 기출 복원문제`,
-    "about": "SQLD (SQL Developer) 자격검정",
-    "educationalLevel": "intermediate",
-    "inLanguage": "ko-KR",
-    "url": SITE + path,
-    "numberOfQuestions": authored.length,
-    "datePublished": NOW,
+    '@context': 'https://schema.org', '@type': 'Quiz',
+    name: `SQLD 제${round}회 기출 복원문제`, about: 'SQLD (SQL Developer) 자격검정',
+    inLanguage: 'ko-KR', url: SITE + path, numberOfQuestions: items.length,
   };
-
-  return head({ title, desc, path }) + `
-    <div class="crumb"><a href="/">홈</a> · <a href="/exam/">기출문제</a> · 제${round}회</div>
-    <h1>SQLD 제${round}회 기출 복원문제 (${date.ko})</h1>
-    <p class="lead">총 50문항 · 1과목 데이터 모델링의 이해 10문항 + 2과목 SQL 기본 및 활용 40문항. 정답과 해설 모두 포함.</p>
-    <a class="cta" href="/">실전 CBT 모드로 풀어보기 →</a>
-    <h2>전체 문항 (${authored.length}문항)</h2>
-    ${questionsHtml}
+  return head({ title: `${title} — SQLD양파`, desc, path }) + `
     <script type="application/ld+json">${JSON.stringify(ld)}</script>
+    <div class="crumb"><a href="/">홈</a> · <a href="/exam/">기출문제</a> · 제${round}회</div>
+    <h1>SQLD 제${round}회 기출 복원문제</h1>
+    <p class="lead">${when} 시행 · ${items.length}문항 (1과목 ${s1} · 2과목 ${s2}) · ${reformed ? '2024년 개편 후 현행 출제기준' : '2024년 개편 전 시험 — SQL 최적화 문제가 일부 섞여 있다'}</p>
+    <a class="cta" href="/?cbt=round-${round}">제${round}회 50문항 CBT 로 풀기 (90분 · 정답·해설) →</a>
+    <h2>단원별 문항 수</h2>
+    <table>
+      <thead><tr><th>단원</th><th>문항</th></tr></thead>
+      <tbody>${groupRows.map(([l, n]) => `<tr><td>${esc(l)}</td><td>${n}</td></tr>`).join('')}</tbody>
+    </table>
+    <h2>이 회차에 많이 나온 주제</h2>
+    <table>
+      <thead><tr><th>주제 (이론 챕터)</th><th>문항</th></tr></thead>
+      <tbody>${top.map(([c, n]) => `<tr><td><a href="/theory/${c}/">${esc(CHAPTER_TITLE[c])}</a></td><td>${n}</td></tr>`).join('')}</tbody>
+    </table>
+    <nav class="chapter-nav">${prev ? `<a href="/exam/round-${prev.round}/">← 제${prev.round}회</a>` : '<span></span>'}<a href="/exam/">회차 목록</a>${next ? `<a href="/exam/round-${next.round}/">제${next.round}회 →</a>` : '<span></span>'}</nav>
 ` + tail;
 }
 
@@ -281,8 +296,8 @@ function buildExamIndexPage() {
 
   const items = rounds.slice().sort((a, b) => b.round - a.round).map(r => {
     return `<li>
-  <a href="/?cbt=round-${r.round}">SQLD 제${r.round}회 기출문제 풀어보기 →</a>
-  <div class="sub">${r.date.ko} 시행 · 50문항 · CBT 모드 (90분)</div>
+  <a id="round-${r.round}" href="/exam/round-${r.round}/">SQLD ${r.round}회 기출 복원문제 (${shortDate(r.date.ko)}) — 출제 주제 보기</a> · <a href="/?cbt=round-${r.round}">바로 풀기 →</a>
+  <div class="sub">${r.date.ko} 시행 · 50문항 · 정답·해설 포함 · CBT 모드 (90분)</div>
 </li>`;
   }).join('\n');
 
@@ -309,6 +324,7 @@ function buildExamIndexPage() {
     </ol>
 
     <h2>회차별 문제집 (${rounds.length}개)</h2>
+    <p>회차마다 소개 페이지에 단원별 문항 수와 많이 나온 주제(문항 내용을 이론 챕터에 대응시켜 센 것)를 정리했다. 문제 본문은 학습 화면에서 푼다.</p>
     <ul class="chapters">${items}</ul>
 ` + tail;
 }
@@ -430,9 +446,9 @@ function syllabusBody() {
   return out.join('\n      ');
 }
 
-function buildGuide({ slug, title, desc, body }) {
+function buildGuide({ slug, title, desc, body, ld }) {
   const path = `/guide/${slug}/`;
-  return head({ title: `${title} — SQLD양파`, desc, path }) + `
+  return head({ title: `${title} — SQLD양파`, desc, path }) + (ld ? `\n    <script type="application/ld+json">${JSON.stringify(ld).replace(/</g, '\\u003c')}</script>` : '') + `
     <div class="crumb"><a href="/">홈</a> · 가이드 · ${esc(title)}</div>
     <h1>${esc(title)}</h1>
     <p class="lead">${esc(desc)}</p>
@@ -444,8 +460,19 @@ function buildGuide({ slug, title, desc, body }) {
 const guides = [
   {
     slug: 'sqld-overview',
-    title: 'SQLD 자격증 안내 — 시험 정보·출제 범위·합격 기준',
-    desc: 'SQLD(SQL Developer)는 한국데이터산업진흥원이 시행하는 SQL 개발자 자격증입니다. 시험 시간·문항수·합격 기준·출제 범위를 한눈에.',
+    title: `SQLD 시험 일정·합격 기준·과락·응시료 (${NEXT_EXAM ? NEXT_EXAM.y : new Date().getFullYear()}) — 자격증 안내`,
+    desc: `SQLD(SQL Developer) 시험 정보 한 장 정리.${NEXT_EXAM ? ` 다음 시험은 ${NEXT_EXAM_KO}.` : ''} 90분 50문항, 60점 이상·과목별 40% 이상 합격, 응시료 5만 원, 과목별 과락 기준과 출제 범위.`,
+    ld: {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: [
+        ['SQLD 합격 기준은 몇 점인가요?', '총점 100점 중 60점 이상이면서, 1과목(20점)과 2과목(80점) 각각 40% 이상을 맞혀야 합니다. 1과목 8점 미만이나 2과목 32점 미만이면 총점이 60점을 넘어도 과락으로 불합격입니다.'],
+        ['SQLD 과락은 몇 문제부터인가요?', '1과목은 10문항 중 3문항 이하, 2과목은 40문항 중 15문항 이하로 맞히면 과락입니다.'],
+        ['SQLD 시험 시간과 문항 수는?', '90분 동안 객관식 4지선다 50문항(1과목 10문항, 2과목 40문항)을 컴퓨터로 풉니다. 2024년부터 단답형은 없습니다.'],
+        ['SQLD 응시료는 얼마인가요?', '50,000원입니다.'],
+        ['SQLD 시험은 1년에 몇 번 있나요?', '연 4회 정기 시행합니다. 정확한 일정과 접수 기간은 한국데이터산업진흥원 데이터자격검정(dataq.or.kr) 공지에서 확인합니다.'],
+      ].map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })),
+    },
     body: `
       <h2>SQLD란?</h2>
       <p>SQLD(SQL Developer)는 <strong>한국데이터산업진흥원(KDATA)</strong>이 시행하는 국가공인 데이터 자격검정으로, SQL 개발자에게 필요한 데이터 모델링과 SQL 활용 능력을 검정합니다. 정보처리기사·SQLP·ADsP와 함께 데이터 직무에서 가장 많이 취득하는 자격증 중 하나입니다.</p>
@@ -454,6 +481,7 @@ const guides = [
       <table>
         <thead><tr><th>항목</th><th>내용</th></tr></thead>
         <tbody>
+          ${NEXT_EXAM ? `<tr><td>다음 시험</td><td><strong>${NEXT_EXAM_KO}</strong> — <a href="/guide/sqld-application/">일정·접수 안내</a></td></tr>` : ''}
           <tr><td>시험 시간</td><td>90분</td></tr>
           <tr><td>문항</td><td>50문항, 모두 4지선다 객관식 (2024년부터 단답형 없음)</td></tr>
           <tr><td>배점</td><td>한 문항 2점, 100점 만점</td></tr>
@@ -486,6 +514,16 @@ const guides = [
         <li>SQL 활용 — <a href="/theory/c221/">서브쿼리</a>, <a href="/theory/c222/">집합 연산자</a>, <a href="/theory/c223/">그룹 함수</a>, <a href="/theory/c224/">윈도우 함수</a>, <a href="/theory/c225/">Top N</a>, <a href="/theory/c226/">계층형 질의</a>, <a href="/theory/c227/">PIVOT</a>, <a href="/theory/c228/">정규 표현식</a></li>
         <li>관리 구문 — <a href="/theory/c231/">DML</a>, <a href="/theory/c232/">TCL</a>, <a href="/theory/c233/">DDL</a>, <a href="/theory/c234/">DCL</a></li>
       </ul>
+
+      <h2>자주 묻는 질문</h2>
+      <h3>합격 기준은 몇 점인가요?</h3>
+      <p>총점 60점 이상이면서 과목마다 40% 이상이어야 합니다. 1과목 8점(4문항), 2과목 32점(16문항)이 최소선입니다.</p>
+      <h3>과락은 몇 문제부터인가요?</h3>
+      <p>1과목은 3문항 이하, 2과목은 15문항 이하로 맞히면 과락입니다. 총점이 60점을 넘어도 불합격입니다.</p>
+      <h3>시험 시간과 문항 수는?</h3>
+      <p>90분, 객관식 50문항(1과목 10 · 2과목 40)입니다. 2024년부터 단답형이 없어졌습니다.</p>
+      <h3>응시료와 시험 횟수는?</h3>
+      <p>응시료는 50,000원, 시험은 연 4회입니다. 회차별 날짜는 <a href="/guide/sqld-application/">응시 안내</a>에 정리했습니다.</p>
 
       <h2>합격 전략</h2>
       <p>점수의 80%가 2과목이라 SQL 결과를 손으로 계산하는 연습에 시간을 가장 많이 쓴다. 1과목은 용어와 분류(엔터티 분류, 식별자 특성, 정규화 단계)가 그대로 반복해서 나오므로 이론을 한 번 정리한 뒤 기출로 확인하면 된다. 옛 회차에 나오던 옵티마이저·인덱스·실행 계획 같은 성능 문제는 2024년 개편 뒤로 출제 범위에서 빠졌다.</p>
@@ -692,6 +730,7 @@ function buildSitemap() {
     { loc: SITE + '/', priority: 1.0, changefreq: 'weekly' },
     { loc: SITE + '/exam/', priority: 0.9, changefreq: 'monthly' },
     { loc: SITE + '/theory/', priority: 0.9, changefreq: 'monthly' },
+    ...rounds.map(r => ({ loc: `${SITE}/exam/round-${r.round}/`, priority: 0.8, changefreq: 'monthly' })),
     ...THEORY.subjects.flatMap(s => s.chapters.map(c => ({ loc: `${SITE}/theory/${c.id}/`, priority: 0.7, changefreq: 'monthly' }))),
     ...guides.map(g => ({ loc: `${SITE}/guide/${g.slug}/`, priority: 0.6, changefreq: 'yearly' })),
     { loc: SITE + '/about/', priority: 0.4, changefreq: 'yearly' },
@@ -718,10 +757,10 @@ ${urls.map(u => `  <url>
 // ============================================================
 console.log('Generating static SEO pages...');
 
-// 회차 인덱스만 — 회차 상세 페이지(/exam/round-NN/)는 콘텐츠 무단 복제 방지를 위해
-// 정적 노출 중단. 인덱스의 각 회차 카드는 SPA CBT 풀이 모드로 직접 연결.
+// 회차 인덱스 + 회차 소개 페이지 — 소개 페이지에는 문제 본문을 싣지 않는다(콘텐츠 보호).
 writePage('/exam/', buildExamIndexPage());
-console.log(`  exam: 1 index page (round detail static pages removed)`);
+rounds.forEach((r, i) => writePage(`/exam/round-${r.round}/`, buildRoundPage(r, i)));
+console.log(`  exam: 1 index + ${rounds.length} round overview pages (no question text)`);
 
 // 이론 챕터 + 인덱스
 let chCnt = 0;
