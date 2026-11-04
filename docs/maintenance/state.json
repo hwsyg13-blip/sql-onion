@@ -7,7 +7,8 @@
   },
   "current_mission": null,
   "my_prs": [
-    195
+    195,
+    263
   ],
   "merged_prs": [
     197,
@@ -81,5 +82,10 @@
     "pr": 262,
     "scope": "pool 1156 (sqld-1140 846, cbt 184, hard 76, ai 50)",
     "merged": "dd112e1"
+  },
+  "theory_restore": {
+    "pr": 263,
+    "status": "pr_open",
+    "chapters": 29
   }
 }
