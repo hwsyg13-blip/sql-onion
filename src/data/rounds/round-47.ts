@@ -391,15 +391,15 @@ export const ROUND_47: QuizQuestion[] = [
     "round": 47,
     "subject": "2과목",
     "number": 18,
-    "title": "아래 SQL 의 PREV 컬럼을 채우는 데 사용된 윈도우 함수는?",
+    "title": "아래 SQL 의 PREV 컬럼을 채우는 데 사용된 식은?",
     "options": [
-      "SUM",
-      "ROW_NUMBER",
-      "LEAD",
-      "LAG"
+      "LAG(VAL)",
+      "LEAD(VAL, 1, 0)",
+      "LAG(VAL, 2, 0)",
+      "LAG(VAL, 1, 0)"
     ],
     "correctIndex": 3,
-    "explanation": "PREV 컬럼에 직전 행의 VAL 이 들어가 있고 첫 행은 이전 행이 없어 NULL 이다. 이렇게 앞선 행의 값을 가져오는 함수가 LAG 이다. LEAD 는 반대로 다음 행의 값을 가져오고, ROW_NUMBER 는 순번을, SUM 은 누적·합계를 반환하므로 이 결과를 만들 수 없다.",
+    "explanation": "PARTITION BY 지점 이라 A(ID 1, 2, 4)와 B(ID 3, 5)를 따로 본다. 결과를 지점 안에서 보면 A 는 0, 100, 200, B 는 0, 300 으로 \"같은 지점의 바로 앞 행 값, 앞 행이 없으면 0\" 이다. LAG(값, 1, 0) 은 1행 앞의 값을 가져오고 앞 행이 없으면 세 번째 인자 0 을 돌려준다(④). ① LAG(VAL) 은 기본값이 없어 첫 행이 NULL 이다. ② LEAD 는 다음 행 값(A: 200, 400, 0)이다. ③ 2행 앞은 A 가 0, 0, 100 이다. 표의 ID 순서(1, 2, 3, 4, 5)대로 앞 행을 보면 ID 4 의 PREV 가 300 이어야 하는데 실제는 200 이므로, 지점별로 나누었다는 것을 결과에서 읽어 낼 수 있다. ※ 복원 자료의 표가 단순해 실제 시험 수준으로 데이터·SQL 을 보강했다(묻는 개념은 같다).",
     "_source": "authored",
     "references": [
       {
@@ -407,26 +407,40 @@ export const ROUND_47: QuizQuestion[] = [
         "caption": "매출 테이블",
         "headers": [
           "ID",
+          "지점",
           "VAL"
         ],
         "rows": [
           [
             "1",
+            "A",
             "100"
           ],
           [
             "2",
+            "A",
             "200"
           ],
           [
             "3",
+            "B",
             "300"
+          ],
+          [
+            "4",
+            "A",
+            "400"
+          ],
+          [
+            "5",
+            "B",
+            "500"
           ]
         ]
       },
       {
         "type": "sql",
-        "code": "SELECT ID, VAL,\n       (  ?  ) OVER (ORDER BY ID) AS PREV\nFROM   매출;"
+        "code": "SELECT ID, VAL,\n       (  ?  ) OVER (PARTITION BY 지점 ORDER BY ID) AS PREV\nFROM   매출\nORDER BY ID;"
       },
       {
         "type": "table",
@@ -440,7 +454,7 @@ export const ROUND_47: QuizQuestion[] = [
           [
             "1",
             "100",
-            "(NULL)"
+            "0"
           ],
           [
             "2",
@@ -450,7 +464,17 @@ export const ROUND_47: QuizQuestion[] = [
           [
             "3",
             "300",
+            "0"
+          ],
+          [
+            "4",
+            "400",
             "200"
+          ],
+          [
+            "5",
+            "500",
+            "300"
           ]
         ]
       }
