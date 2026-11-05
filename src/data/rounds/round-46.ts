@@ -1582,19 +1582,20 @@ export const ROUND_46: QuizQuestion[] = [
     "round": 46,
     "subject": "2과목",
     "number": 44,
-    "title": "아래 SQL의 결과로 옳은 것은?",
+    "title": "아래 SQL의 결과로 옳은 것은? (Oracle 기준, 출력 순서대로)",
     "options": [
-      "(A,150), (B,140)",
-      "(A,150), (C,130)",
-      "(C,130), (D,120)",
-      "(A,150), (D,120)"
+      "(E,160), (A,150)",
+      "(D,NULL), (E,160)",
+      "(C,130), (B,140)",
+      "(A,150), (B,140)"
     ],
-    "correctIndex": 0,
-    "explanation": "인라인 뷰에서 급여 내림차순으로 ROW_NUMBER 를 매기면 A(150)=1, B(140)=2, C(130)=3, D(120)=4 이다. 바깥 쿼리에서 RN <= 2 인 행만 남기므로 (A,150), (B,140) 이다(①).",
+    "correctIndex": 1,
+    "explanation": "Oracle 은 NULL 을 가장 큰 값으로 보므로 내림차순(DESC)에서 NULL 이 맨 앞에 온다. 급여 내림차순은 D(NULL), E(160), A(150), B(140), C(130) 이고 RN 은 이 순서로 1, 2, 3 … 이다. RN <= 2 는 D 와 E 다(②). ① 은 NULL 이 맨 뒤에 온다고 본 결과(NULLS LAST 또는 SQL Server 방식)로, 급여가 가장 높은 두 명을 뽑으려면 ORDER BY 급여 DESC NULLS LAST 처럼 써야 한다. ③ 은 오름차순으로 번호를 매긴 결과, ④ 는 정렬 없이 표의 위에서부터 두 행을 고른 결과다. ※ 복원 자료의 표가 단순해 실제 시험 수준으로 데이터·SQL 을 보강했다(묻는 개념은 같다).",
     "_source": "authored",
     "references": [
       {
         "type": "table",
+        "caption": "EMP 테이블",
         "headers": [
           "이름",
           "급여"
@@ -1614,14 +1615,17 @@ export const ROUND_46: QuizQuestion[] = [
           ],
           [
             "D",
-            "120"
+            "NULL"
+          ],
+          [
+            "E",
+            "160"
           ]
-        ],
-        "caption": "EMP 테이블"
+        ]
       },
       {
         "type": "sql",
-        "code": "SELECT 이름, 급여\nFROM   ( SELECT 이름, 급여,\n                ROW_NUMBER() OVER (ORDER BY 급여 DESC) AS RN\n         FROM   EMP )\nWHERE  RN <= 2;"
+        "code": "SELECT 이름, 급여\nFROM   ( SELECT 이름, 급여,\n                ROW_NUMBER() OVER (ORDER BY 급여 DESC) AS RN\n         FROM   EMP )\nWHERE  RN <= 2\nORDER BY RN;"
       }
     ]
   },

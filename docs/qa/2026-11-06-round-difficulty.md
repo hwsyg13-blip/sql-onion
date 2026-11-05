@@ -77,3 +77,12 @@
 | 46-23 | RANGE vs ROWS | 모든 값이 같던 데이터 → 일부만 동점, 그룹 2개, 기대 결과 표 추가 | RANGE | (B) B 그룹만 보면 세 보기가 같아 A 그룹으로 판단해야 한다는 점을 해설에 |
 | 47-18 | LAG 인자·PARTITION | 3행 → 5행 2지점, LAG/LEAD 와 offset·default 를 보기로 | LAG(VAL, 1, 0) | (A) 결과표의 ID 4 값으로 PARTITION 을 읽어 낼 수 있게 설계 |
 | 50-49 | LAG default | 금액이 2 이던 이상한 데이터 → NULL 이 섞인 5행, LAG(금액, 2, 0) | ㄱ NULL, ㄴ 700 | (E) default 는 "앞 행이 없을 때"만 쓰이고 앞 행 값이 NULL 이면 NULL — 킬러 포인트 |
+
+## 5차 4문항
+
+| 문항 | 개념 | 바뀐 점 | 정답 | 검토 메모 |
+|---|---|---|---|---|
+| 45-31 | Oracle (+) 4테이블, 마지막 INNER | 2행씩 → 3~4행, T2·T4 에 중복 | 4 | (B) 중복을 놓치면 2·3, INNER 를 무시하면 5 |
+| 46-44 | ROW_NUMBER Top-N | 4행 → 5행, 급여 NULL 추가 | (D,NULL), (E,160) | (C) DESC 에서 NULL 이 먼저 → "Oracle 기준" 명시, 해설에 NULLS LAST 로 고치는 법 |
+| 48-14 | MAX() OVER + 조인 | 동점 최고 연봉, 연봉이 NULL 뿐인 부서 추가, 결과 행 수로 묻도록 | 4건 | (E) MAX 가 NULL → NULL = NULL 이 참이 아니라 빠짐 |
+| 49-42 | INTERSECT | 중복·NULL 추가 | B, C, NULL | (C) 집합 연산의 NULL 동등 처리 / 중복 제거 |

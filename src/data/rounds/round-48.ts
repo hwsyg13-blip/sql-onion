@@ -340,19 +340,20 @@ export const ROUND_48: QuizQuestion[] = [
     "round": 48,
     "subject": "2과목",
     "number": 14,
-    "title": "아래 사원 테이블에 대한 SQL 의 결과로 가장 적절한 것은?",
+    "title": "아래 사원 테이블에 대한 SQL 의 결과 행 수로 옳은 것은?",
     "options": [
-      "3건 반환 (부서별 최고 연봉자: 강감찬, 김유신, 변사또)",
-      "전체 사원 7건 반환",
-      "2건 반환",
-      "1건 반환 (전체 최고 연봉자만)"
+      "3건",
+      "4건",
+      "5건",
+      "8건"
     ],
-    "correctIndex": 0,
-    "explanation": "인라인 뷰 X 가 `MAX(연봉) OVER(PARTITION BY 부서ID)` 로 각 사원에게 자기 부서의 최고 연봉을 부여한 뒤, 외부에서 `X.최고연봉 = Y.연봉` 으로 그 값과 같은 사원만 남긴다. 부서 100 = 강감찬(3000), 부서 200 = 김유신(4500), 부서 300 = 변사또(4500) 로 총 3 건이 반환된다.",
+    "correctIndex": 1,
+    "explanation": "인라인 뷰 X 는 GROUP BY 가 아니라 윈도우 함수라 행을 줄이지 않고, 사원마다 자기 부서의 최고 연봉을 붙인다: 100 은 3000, 200 은 4500, 300 은 4500, 400 은 NULL(값이 NULL 뿐이면 MAX 도 NULL). 바깥에서 자기 연봉이 부서 최고 연봉과 같은 사원만 남긴다. 100 의 강감찬, 200 의 김유신·김선달(동점 둘 다), 300 의 변사또가 남는다. 400 의 임꺽정은 NULL = NULL 이 참이 아니라 빠진다. 결과 4건이다(②). ① 3건은 동점자 중 한 명만 남긴다고 본 값, ③ 5건은 NULL 끼리 같다고 보고 임꺽정을 넣은 값, ④ 8건은 윈도우 함수 결과로 거르지 않은 전체 행 수다. ※ 복원 자료의 표가 단순해 실제 시험 수준으로 데이터·SQL 을 보강했다(묻는 개념은 같다).",
     "_source": "authored",
     "references": [
       {
         "type": "table",
+        "caption": "사원 테이블",
         "headers": [
           "사원ID",
           "부서ID",
@@ -382,7 +383,7 @@ export const ROUND_48: QuizQuestion[] = [
             "004",
             "200",
             "김선달",
-            "3000"
+            "4500"
           ],
           [
             "005",
@@ -401,13 +402,18 @@ export const ROUND_48: QuizQuestion[] = [
             "300",
             "박문수",
             "3000"
+          ],
+          [
+            "008",
+            "400",
+            "임꺽정",
+            "NULL"
           ]
-        ],
-        "caption": "사원 테이블"
+        ]
       },
       {
         "type": "sql",
-        "code": "SELECT Y.*\nFROM (SELECT 사원ID, MAX(연봉) OVER(PARTITION BY 부서ID) AS 최고연봉 FROM 사원) X,\n     사원 Y\nWHERE X.사원ID = Y.사원ID AND X.최고연봉 = Y.연봉;"
+        "code": "SELECT Y.*\nFROM   (SELECT 사원ID, MAX(연봉) OVER (PARTITION BY 부서ID) AS 최고연봉\n        FROM   사원) X,\n       사원 Y\nWHERE  X.사원ID = Y.사원ID\nAND    X.최고연봉 = Y.연봉;"
       }
     ],
     "optionReferences": [
