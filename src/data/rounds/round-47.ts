@@ -1339,40 +1339,60 @@ export const ROUND_47: QuizQuestion[] = [
     "number": 43,
     "title": "아래 T 테이블에 대한 SQL 의 결과로 옳은 것은?",
     "options": [
-      "공집합 (행 0건)",
-      "ID 별 COUNT 가 모두 표시된 다중 행",
-      "COUNT(*) = 300 인 한 행",
-      "ORA-00937 등 그룹 함수 오류"
+      "3, 2 (두 행)",
+      "3, 2, 2 (세 행)",
+      "3 (한 행)",
+      "그룹 함수 오류"
     ],
-    "correctIndex": 2,
-    "explanation": "`GROUP BY ID`로 같은 ID끼리 묶고, `HAVING COUNT(*) >= 2`로 행 수가 2 이상인 그룹만 남긴다. 살아남은 그룹마다 한 행씩 결과로 나오며 각 행에는 그 그룹의 COUNT 값이 표시된다. 예를 들어 행이 300건인 ID 그룹 하나가 조건을 통과하면 결과로 300이 1건 반환된다. 정답은 ③번이다.",
+    "correctIndex": 0,
+    "explanation": "ID 로 묶으면 A(3행), B(1행), C(2행), D(2행) 네 그룹이다. HAVING 은 COUNT(*) 가 아니라 COUNT(VAL) 로 거르는데, COUNT(VAL) 은 NULL 을 빼고 센다: A 2, B 1, C 0, D 2. 그래서 A 와 D 만 남고, SELECT 의 COUNT(*) 는 그룹의 전체 행 수라 A 는 3, D 는 2 다. ID 순으로 3, 2 두 행이다(①). ② 는 COUNT(VAL) 도 NULL 을 센다고 본 결과(C 가 남음)이고, ③ 은 COUNT(VAL) 이 같은 값(D 의 40, 40)을 한 번만 센다고 본 결과다(그건 COUNT(DISTINCT VAL)). ④ SELECT 에 집계 함수만 있고 ORDER BY 의 ID 는 GROUP BY 컬럼이라 오류가 나지 않는다. ※ 복원 자료의 표가 단순해 실제 시험 수준으로 데이터·SQL 을 보강했다(묻는 개념은 같다).",
     "_source": "authored",
     "references": [
       {
         "type": "table",
-        "caption": "T 테이블 (ID 별 행 수 요약)",
+        "caption": "T 테이블",
         "headers": [
           "ID",
-          "행 수"
+          "VAL"
         ],
         "rows": [
           [
             "A",
-            "300"
+            "10"
+          ],
+          [
+            "A",
+            "20"
+          ],
+          [
+            "A",
+            "NULL"
           ],
           [
             "B",
-            "1"
+            "30"
           ],
           [
             "C",
-            "1"
+            "NULL"
+          ],
+          [
+            "C",
+            "NULL"
+          ],
+          [
+            "D",
+            "40"
+          ],
+          [
+            "D",
+            "40"
           ]
         ]
       },
       {
         "type": "sql",
-        "code": "SELECT COUNT(*)\nFROM   T\nGROUP BY ID\nHAVING COUNT(*) >= 2;"
+        "code": "SELECT COUNT(*)\nFROM   T\nGROUP BY ID\nHAVING COUNT(VAL) >= 2\nORDER BY ID;"
       }
     ]
   },

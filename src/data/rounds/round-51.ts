@@ -1513,42 +1513,56 @@ export const ROUND_51: QuizQuestion[] = [
     "round": 51,
     "subject": "2과목",
     "number": 46,
-    "title": "아래 일자별 매출 테이블에 대해 일자별 누적 합계를 계산한 결과로 옳은 것은?",
+    "title": "아래 지점별·일자별 매출 테이블에 대한 SQL 의 결과(M 컬럼, 위에서부터)로 옳은 것은?",
     "options": [
-      "1000, 1000, 1000",
-      "1000, 1300, 2300",
-      "1000, 2300, 1300",
-      "1000, 2300, 2000"
+      "1000, 1300, 2300, 500, 700",
+      "1000, 1300, 1300, 500, 700",
+      "1000, 300, 1000, 500, 200",
+      "2300, 2300, 2300, 700, 700"
     ],
     "correctIndex": 1,
-    "explanation": "ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW 는 첫 행부터 현재 행까지의 합이다. 1일 1000, 2일 1000 + 300 = 1300, 3일 1300 + 1000 = 2300 이다(②). ① 은 누적하지 않은 값이고, ③④ 는 순서를 잘못 더한 결과다.",
+    "explanation": "PARTITION BY 지점 으로 A 와 B 를 따로 계산하고, ROWS BETWEEN 1 PRECEDING AND CURRENT ROW 는 \"바로 앞 1행 + 지금 행\" 두 행만 더한다. A: 1일 1000(앞 행 없음), 2일 1000 + 300 = 1300, 3일 300 + 1000 = 1300. B: 1일 500, 3일 500 + 200 = 700. 그래서 1000, 1300, 1300, 500, 700 이다(②). ① 은 UNBOUNDED PRECEDING(처음부터 누적)으로 본 결과라 A 의 3일이 2300 이 되고, ③ 은 윈도우 합계 없이 금액만 적은 것, ④ 는 윈도우 범위를 무시하고 지점 전체 합계를 붙인 결과다. B 지점에는 2일이 없어도 '1 PRECEDING' 은 날짜가 아니라 행 개수라 1일 행을 더한다. ※ 복원 자료의 표가 단순해 실제 시험 수준으로 데이터·SQL 을 보강했다(묻는 개념은 같다).",
     "_source": "authored",
     "references": [
       {
         "type": "table",
-        "caption": "T 테이블 (일자별 매출)",
+        "caption": "T 테이블 (매출)",
         "headers": [
+          "지점",
           "일자",
           "금액"
         ],
         "rows": [
           [
+            "A",
             "1일",
             "1000"
           ],
           [
+            "A",
             "2일",
             "300"
           ],
           [
+            "B",
+            "1일",
+            "500"
+          ],
+          [
+            "A",
             "3일",
             "1000"
+          ],
+          [
+            "B",
+            "3일",
+            "200"
           ]
         ]
       },
       {
         "type": "sql",
-        "code": "SELECT 일자,\n       SUM(금액) OVER (ORDER BY 일자\n                       ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS 누적합\nFROM   T;"
+        "code": "SELECT 지점, 일자,\n       SUM(금액) OVER (PARTITION BY 지점 ORDER BY 일자\n                       ROWS BETWEEN 1 PRECEDING AND CURRENT ROW) AS M\nFROM   T\nORDER BY 지점, 일자;"
       }
     ]
   },

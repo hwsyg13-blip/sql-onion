@@ -1278,7 +1278,7 @@ export const ROUND_59: QuizQuestion[] = [
     "round": 59,
     "subject": "2과목",
     "number": 38,
-    "title": "아래 SQL의 결과 건수로 옳은 것은?",
+    "title": "아래 A, B 테이블에 대한 SQL의 결과 건수로 옳은 것은?",
     "options": [
       "3건",
       "0건",
@@ -1286,30 +1286,56 @@ export const ROUND_59: QuizQuestion[] = [
       "오류"
     ],
     "correctIndex": 0,
-    "explanation": "EXISTS 는 서브쿼리가 한 행이라도 반환하면 참이다. 서브쿼리 SELECT NULL FROM A 는 A 의 행 수만큼(3행) NULL 값을 반환하는데, EXISTS 는 값이 아니라 행의 존재만 보므로 참이 된다. 바깥 쿼리와 연관도 없어 A 의 3행이 모두 반환된다(①).",
+    "explanation": "서브쿼리의 VAL 에는 테이블 이름이 없는데, 컬럼 이름은 가장 가까운(안쪽) FROM 부터 찾으므로 B.VAL 이다. 서브쿼리는 A 와 아무 연관이 없고, B 에 VAL 이 NULL 인 행(ID 1)이 있으니 한 행을 돌려준다. EXISTS 는 값이 아니라 행이 있는지만 보므로 SELECT NULL 이어도 참이고, A 의 모든 행에서 똑같이 참이라 3건이다(①). ③ 1건은 VAL 을 바깥 A.VAL 로 읽어 A 의 ID 2 만 남는다고 본 결과, ② 0건은 SELECT NULL 이면 결과가 없다고 본 결과, ④ 는 문법상 문제가 없다. ※ 복원 자료의 표가 단순해 실제 시험 수준으로 데이터·SQL 을 보강했다(묻는 개념은 같다).",
     "_source": "authored",
     "references": [
       {
         "type": "table",
+        "caption": "A 테이블",
         "headers": [
-          "A"
+          "ID",
+          "VAL"
         ],
         "rows": [
           [
-            "1"
+            "1",
+            "10"
           ],
           [
-            "2"
+            "2",
+            "NULL"
           ],
           [
-            "3"
+            "3",
+            "30"
           ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "B 테이블",
+        "headers": [
+          "ID",
+          "VAL"
         ],
-        "caption": "A 테이블"
+        "rows": [
+          [
+            "1",
+            "NULL"
+          ],
+          [
+            "3",
+            "30"
+          ],
+          [
+            "4",
+            "40"
+          ]
+        ]
       },
       {
         "type": "sql",
-        "code": "SELECT *\nFROM   A\nWHERE  EXISTS (SELECT NULL FROM A);"
+        "code": "SELECT *\nFROM   A\nWHERE  EXISTS (SELECT NULL\n               FROM   B\n               WHERE  VAL IS NULL);"
       }
     ]
   },
@@ -1621,40 +1647,54 @@ export const ROUND_59: QuizQuestion[] = [
     "number": 46,
     "title": "아래 GROUP BY 절 결과의 총 행 개수로 옳은 것은?",
     "options": [
-      "3",
-      "4",
-      "5",
-      "6"
+      "9",
+      "10",
+      "11",
+      "12"
     ],
-    "correctIndex": 3,
-    "explanation": "ROLLUP(A, B)은 (A,B), (A), () 집계 레벨을 반환한다. (X,1),(X,2),(Y,1),(X),(Y),()의 6건이 출력된다.",
+    "correctIndex": 2,
+    "explanation": "ROLLUP 이 GROUP BY 의 일부에만 쓰였다(부분 ROLLUP). A 는 항상 묶고, ROLLUP(B, C) 가 (B, C), (B), () 를 만들어 결과 묶음은 (A, B, C), (A, B), (A) 세 가지다. (A, B, C): X-1-p, X-1-q, X-2-p, Y-1-p, Y-NULL-p 5행. (A, B): X-1, X-2, Y-1, Y-NULL 4행. (A): X, Y 2행. 합계 11행이다(③). ① 9 는 B 가 NULL 인 그룹을 빼고 센 값, ② 10 은 A 소계 대신 총계 1행을 센 값(5 + 4 + 1), ④ 12 는 ROLLUP(A, B, C) 로 보고 총계까지 센 값이다. 결과에는 (Y, NULL, NULL) 이 두 행 나오는데, 하나는 B 가 원래 NULL 인 그룹의 소계이고 다른 하나는 Y 전체 소계다. ※ 복원 자료의 표가 단순해 실제 시험 수준으로 데이터·SQL 을 보강했다(묻는 개념은 같다).",
     "_source": "authored",
     "references": [
       {
         "type": "table",
+        "caption": "T 테이블",
         "headers": [
           "A",
-          "B"
+          "B",
+          "C"
         ],
         "rows": [
           [
             "X",
-            "1"
+            "1",
+            "p"
           ],
           [
             "X",
-            "2"
+            "1",
+            "q"
+          ],
+          [
+            "X",
+            "2",
+            "p"
           ],
           [
             "Y",
-            "1"
+            "1",
+            "p"
+          ],
+          [
+            "Y",
+            "NULL",
+            "p"
           ]
-        ],
-        "caption": "T 테이블"
+        ]
       },
       {
         "type": "sql",
-        "code": "SELECT A, B, COUNT(*)\nFROM   T\nGROUP BY ROLLUP(A, B);"
+        "code": "SELECT A, B, C, COUNT(*)\nFROM   T\nGROUP BY A, ROLLUP(B, C);"
       }
     ]
   },

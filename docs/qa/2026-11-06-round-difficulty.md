@@ -1,0 +1,43 @@
+# 60회 이전 기출 난이도 보강 — 검증 기록
+
+## 왜 고쳤나
+- 60회 이전 회차는 복원 자료가 단순하다는 학습자 피드백이 있었다. 실제 시험은 시중 문제집(노랭이)보다 어렵다.
+- 45~59회 SQL 결과형 문항의 표는 평균 3~4행이었다. 실제 시험은 표가 크고, NULL·중복·동점이 섞이며, SQL 도 여러 개념을 한 번에 묻는다.
+- 원칙
+  - 묻는 개념과 문제 유형은 그대로 두고, 표·SQL·보기를 실제 시험 수준으로 키운다.
+  - 오답 보기는 "어떤 착각을 하면 그 값이 나오는지"가 분명한 값으로만 만든다.
+  - 해설 끝에 "※ 복원 자료의 표가 단순해 … 보강했다"를 적어, 원문과 다르다는 것을 숨기지 않는다.
+  - 문제집 문항을 옮겨 쓰지 않고 새로 만든다(저작권).
+
+## 검증 절차 (문항마다 전부)
+1. **실행 검증**: 로컬 PostgreSQL 16 에서 표를 만들고 SQL 을 그대로 실행해 정답과 비교했다.
+   - CONNECT BY 는 같은 뜻의 재귀 CTE 로 바꿔 실행했다.
+   - PostgreSQL 은 Oracle 과 NULL 정렬 규칙이 같다(ASC 마지막, DESC 처음). 집합 연산자도 위에서부터 계산하는 것이 같다.
+2. **오답 재현**: 오답 보기마다 그 착각을 SQL 로 재현해 값이 나오는지 확인했다.
+   - 예: PARTITION BY 를 빼면 (8, 6), NULLS LAST 로 바꾸면 (3, 2), UNBOUNDED 로 바꾸면 2300.
+3. **5가지 시선 검토**
+   - (A) 처음 푸는 수험생: 문제·표·SQL 만으로 풀리나, 빠진 컬럼이 없나
+   - (B) 함정을 찾는 고득점자: 다른 보기를 정답이라고 우길 여지가 있나
+   - (C) Oracle 전문가: Oracle 과 다른 DBMS 의 차이로 답이 갈리지 않나(그렇다면 "Oracle 기준" 을 적는다)
+   - (D) 출제 범위: SQL 전문가 가이드 범위 안인가
+   - (E) 해설 검토: 풀이 과정과 보기별 오답 이유가 실행 결과와 맞나
+4. **저장소 검사기**: validate-rounds --strict, check-question-quality, check-answer-leak, verify-sql-results(MISMATCH 0), audit-content(새 후보 0)
+
+## 1차 12문항
+
+| 문항 | 개념 | 바뀐 점 | 정답 | 5가지 시선에서 걸린 것과 처리 |
+|---|---|---|---|---|
+| 45-40 | LEFT JOIN ON vs WHERE | 2행 → T1 5행·T2 7행. ID 1 에 X 두 번, TYPE NULL, T2 에만 있는 ID 6 | 3건 | (B) "ID 개수 2"와 "WHERE 전 6행"을 오답으로 둠 / (C) TYPE 은 Oracle 예약어가 아니라 컬럼명으로 쓸 수 있음 |
+| 45-45 | 역방향 계층 + WHERE 는 나중 | 3행 → 7행, 중간 노드(MILLER)에서 시작 | MILLER, SCOTT, KING | (B) WHERE 를 CONNECT BY 처럼 보면 MILLER, SCOTT → 오답 ①로 둠. 출력 순서를 문제에 명시 |
+| 46-39 | NOT IN + NULL | 서브쿼리에 WHERE COL2 > 1 을 넣어 NULL 이 먼저 걸러지게 함. T1 에도 NULL | 2건 | (A) "NULL 이면 무조건 0건" 암기를 깨는 문항. T1 의 NULL 행이 남지 않는 것도 해설에 적음 |
+| 47-43 | GROUP BY + HAVING | "ID 별 행 수 요약" 표 → 실제 8행. HAVING COUNT(VAL) | 3, 2 (두 행) | (C) GROUP BY 컬럼은 SELECT 에 없어도 ORDER BY 에 쓸 수 있음(오류 아님) |
+| 49-26 | RANK·DENSE_RANK | PARTITION BY 추가, 동점·NULL 포함 | R1 4, R2 3 | (C) SQL Server 는 NULL 을 가장 작게 봐 답이 달라짐 → 문제에 "Oracle 기준" 명시 |
+| 51-46 | ROWS 윈도우 | 누적 → 1 PRECEDING 이동 합, 지점별 PARTITION | 1000, 1300, 1300, 500, 700 | (B) B 지점의 2일 결측 — '1 PRECEDING' 은 행 개수라는 점을 해설에 적음. 지점 안의 일자가 겹치지 않게 해 ROWS 결과를 하나로 고정 |
+| 52-34 | UNION / UNION ALL 혼합 | 부서 조건 MAX 두 개가 같은 값, C 부서 NULL | 9500 | (C) Oracle 은 집합 연산자 우선순위가 같아 위에서부터 계산(INTERSECT 없음). MIN 은 NULL 을 건너뜀 |
+| 55-25 | 그룹별 Top N | 2행 → 6행. PARTITION, 동점 150, NULL | ID 2, 3, 4, 5 | (C) DESC 에서 NULL 이 맨 앞 → "Oracle 기준" 명시 / (B) 동점도 ROW_NUMBER 라 둘 다 RN ≤ 2 |
+| 57-41 | LEFT JOIN 행 수 | "0~다수"라던 표가 실제로는 1:1 → T1 에 3건 매칭, T4·NULL 짝 없음 | 5건 | (B) FULL 이면 7, CLASS 행 수 6 을 오답으로 |
+| 58-48 | CUBE 행 수 | B 에 원래 NULL 2행 | 12 | (B) 원래 데이터의 NULL 그룹을 빼면 11 → 오답 ③ |
+| 59-38 | EXISTS | 서브쿼리 컬럼 이름 해석(안쪽 B.VAL) | 3건 | (A) 테이블명 없는 VAL 이 B 컬럼이라는 점을 해설 첫 줄에 / 바깥 A.VAL 로 읽으면 1건 → 오답 ③ |
+| 59-46 | 부분 ROLLUP | GROUP BY A, ROLLUP(B, C), B 에 NULL | 11 | (E) 결과에 (Y, NULL, NULL) 이 두 행(값이 NULL 인 그룹의 소계와 Y 소계)이라는 점을 해설에 적음 |
+
+실행 결과 원본: PostgreSQL 출력은 작업 로그에 남겼다. 오답 보기 값도 모두 재현했다.

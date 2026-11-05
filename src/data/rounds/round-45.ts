@@ -1307,13 +1307,13 @@ export const ROUND_45: QuizQuestion[] = [
     "number": 40,
     "title": "아래 SQL의 결과 행 수로 옳은 것은? (LEFT OUTER JOIN의 ON 조건과 WHERE 조건 차이)",
     "options": [
-      "0건",
-      "1건",
       "2건",
-      "오류 발생"
+      "3건",
+      "5건",
+      "6건"
     ],
     "correctIndex": 1,
-    "explanation": "ON 절의 T2.TYPE='X' 조건이 조인 단계에서 필터링되어 T1.ID=1 행만 매칭되고, 매칭되지 않은 행은 T2.TYPE이 NULL로 남는다. 이후 WHERE T2.TYPE='X' 필터가 적용되어 최종적으로 1건이 반환된다.",
+    "explanation": "ON 절은 T2 의 어떤 행을 붙일지만 정하고 T1 행은 모두 남긴다. TYPE = 'X' 인 T2 행은 ID 1 에 두 개(SEQ 10, 11), ID 2 에 하나(SEQ 20)라 조인 직후에는 (1,10) (1,11) (2,20) 에 짝이 없는 ID 3·4·5 의 NULL 행 3개를 더해 6행이다. ID 4 의 TYPE 은 NULL 이라 'X' 와 비교하면 UNKNOWN 이 되어 붙지 않고, T2 에만 있는 ID 6 은 LEFT 조인이라 나오지 않는다. 이어서 WHERE T2.TYPE = 'X' 가 NULL 행 3개를 지워 최종 3건이다(②). ① 2건은 ID 1 에 X 가 두 번 붙는 것을 놓친 값, ③ 5건은 LEFT 조인이라 T1 의 5행이 그대로 남는다고 본 값, ④ 6건은 WHERE 를 적용하기 전의 행 수다. 오른쪽 테이블 조건을 WHERE 에도 쓰면 결과는 INNER JOIN 과 같아진다. ※ 복원 자료의 표가 단순해 실제 시험 수준으로 데이터·SQL 을 보강했다(묻는 개념은 같다).",
     "_source": "authored",
     "references": [
       {
@@ -1331,6 +1331,18 @@ export const ROUND_45: QuizQuestion[] = [
           [
             "2",
             "B"
+          ],
+          [
+            "3",
+            "C"
+          ],
+          [
+            "4",
+            "D"
+          ],
+          [
+            "5",
+            "E"
           ]
         ]
       },
@@ -1338,23 +1350,51 @@ export const ROUND_45: QuizQuestion[] = [
         "type": "table",
         "caption": "T2",
         "headers": [
+          "SEQ",
           "ID",
           "TYPE"
         ],
         "rows": [
           [
+            "10",
             "1",
             "X"
           ],
           [
-            "2",
+            "11",
+            "1",
+            "X"
+          ],
+          [
+            "12",
+            "1",
             "Y"
+          ],
+          [
+            "20",
+            "2",
+            "X"
+          ],
+          [
+            "30",
+            "3",
+            "Y"
+          ],
+          [
+            "40",
+            "4",
+            "NULL"
+          ],
+          [
+            "60",
+            "6",
+            "X"
           ]
         ]
       },
       {
         "type": "sql",
-        "code": "SELECT T1.ID, T1.NAME, T2.TYPE\nFROM   T1 LEFT OUTER JOIN T2\nON     T1.ID = T2.ID AND T2.TYPE = 'X'\nWHERE  T2.TYPE = 'X';"
+        "code": "SELECT T1.ID, T1.NAME, T2.SEQ\nFROM   T1 LEFT OUTER JOIN T2\nON     T1.ID = T2.ID AND T2.TYPE = 'X'\nWHERE  T2.TYPE = 'X';"
       }
     ]
   },
@@ -1492,15 +1532,15 @@ export const ROUND_45: QuizQuestion[] = [
     "round": 45,
     "subject": "2과목",
     "number": 45,
-    "title": "아래 계층형 쿼리의 결과로 옳은 것은?",
+    "title": "아래 계층형 쿼리의 결과로 옳은 것은? (출력 순서대로)",
     "options": [
-      "JOHN",
-      "KING",
-      "SCOTT",
-      "KING, JOHN"
+      "MILLER, SCOTT",
+      "MILLER, SCOTT, KING",
+      "MILLER, FORD",
+      "MILLER, SCOTT, JOHN, KING"
     ],
     "correctIndex": 1,
-    "explanation": "문법 오류가 아니다. Oracle 은 START WITH 와 CONNECT BY 의 순서를 바꿔 써도 된다. 실행 순서대로 보면 ① START WITH C1 = 2 → JOHN 에서 시작한다. ② CONNECT BY C1 = PRIOR C2 → 방금 읽은 JOHN 의 C2(1)를 C1 으로 가진 행, 즉 KING 으로 올라간다(역방향). KING 의 C2 는 NULL 이라 여기서 끝난다. ③ 계층을 다 만든 뒤 WHERE C1 <> 2 로 JOHN 을 빼면 KING 만 남는다(②). ① JOHN 은 WHERE 에서 빠지고, ③ SCOTT 은 JOHN 의 자식이라 위로 올라가는 전개에는 나오지 않으며, ④ 는 WHERE 를 적용하지 않은 결과다.",
+    "explanation": "Oracle 은 START WITH 와 CONNECT BY 의 순서를 바꿔 써도 된다. ① START WITH C1 = 5 → MILLER 에서 시작한다. ② CONNECT BY C1 = PRIOR C2 는 \"방금 읽은 행의 C2(상위 번호)를 C1 으로 가진 행\" 을 찾으므로 위로 올라가는 역방향이다: MILLER(C2=3) → SCOTT(C2=2) → JOHN(C2=1) → KING(C2=NULL, 끝). ③ 계층을 다 만든 뒤 WHERE C1 <> 2 가 JOHN 한 행만 뺀다. 그래서 MILLER, SCOTT, KING 이다(②). ① 은 WHERE 조건을 CONNECT BY 에 쓴 것처럼 JOHN 에서 전개가 끊긴다고 본 결과이고, ③ 은 PRIOR 방향을 거꾸로 읽어 MILLER 의 자식(FORD)으로 내려간 결과, ④ 는 WHERE 를 적용하지 않은 결과다. ADAMS·ALLEN 은 MILLER 의 경로에 없다. ※ 복원 자료의 표가 단순해 실제 시험 수준으로 데이터·SQL 을 보강했다(묻는 개념은 같다).",
     "_source": "authored",
     "references": [
       {
@@ -1526,12 +1566,32 @@ export const ROUND_45: QuizQuestion[] = [
             "3",
             "2",
             "SCOTT"
+          ],
+          [
+            "4",
+            "1",
+            "ADAMS"
+          ],
+          [
+            "5",
+            "3",
+            "MILLER"
+          ],
+          [
+            "6",
+            "5",
+            "FORD"
+          ],
+          [
+            "7",
+            "4",
+            "ALLEN"
           ]
         ]
       },
       {
         "type": "sql",
-        "code": "SELECT C3\nFROM   SQLD45\nWHERE  C1 <> 2\nCONNECT BY C1 = PRIOR C2\nSTART WITH C1 = 2;"
+        "code": "SELECT C3\nFROM   SQLD45\nWHERE  C1 <> 2\nCONNECT BY C1 = PRIOR C2\nSTART WITH C1 = 5;"
       }
     ]
   },

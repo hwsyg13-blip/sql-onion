@@ -1604,17 +1604,18 @@ export const ROUND_58: QuizQuestion[] = [
     "number": 48,
     "title": "아래 SQL의 결과 행 수로 옳은 것은?",
     "options": [
-      "3",
-      "4",
-      "6",
-      "8"
+      "5",
+      "9",
+      "11",
+      "12"
     ],
     "correctIndex": 3,
-    "explanation": "CUBE(A,B)는 (A,B), (A), (B), () 조합을 모두 반환한다. 세부 집계 3건, (A) 소계 2건, (B) 소계 2건, 총계 1건을 합쳐 8건이 된다.",
+    "explanation": "CUBE(A, B) 는 (A, B), (A), (B), () 네 가지 묶음을 모두 만든다. (A, B): X-1, X-2, Y-1, Y-NULL, Z-NULL 5행(원래 값이 NULL 인 B 도 하나의 그룹이다). (A): X, Y, Z 3행. (B): 1, 2, NULL 3행. (): 총계 1행. 합계 5 + 3 + 3 + 1 = 12 행이다(④). ① 5 는 GROUP BY A, B 만의 결과, ② 9 는 ROLLUP(A, B) 로 본 값(5 + 3 + 1), ③ 11 은 B 가 NULL 인 그룹을 (B) 소계에서 빼고 센 값이다. 원래 데이터의 NULL 그룹과 소계 행의 NULL 은 GROUPING 함수로 구분한다. ※ 복원 자료의 표가 단순해 실제 시험 수준으로 데이터·SQL 을 보강했다(묻는 개념은 같다).",
     "_source": "authored",
     "references": [
       {
         "type": "table",
+        "caption": "T 테이블",
         "headers": [
           "A",
           "B"
@@ -1631,9 +1632,16 @@ export const ROUND_58: QuizQuestion[] = [
           [
             "Y",
             "1"
+          ],
+          [
+            "Y",
+            "NULL"
+          ],
+          [
+            "Z",
+            "NULL"
           ]
-        ],
-        "caption": "T 테이블"
+        ]
       },
       {
         "type": "sql",

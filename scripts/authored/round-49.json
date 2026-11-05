@@ -769,45 +769,70 @@
     {
       "subject": "2과목",
       "number": 26,
-      "title": "아래 EMP 테이블에 RANK 와 DENSE_RANK 를 적용했을 때 마지막 행의 두 값으로 옳은 것은?",
+      "title": "아래 EMP 테이블에 RANK 와 DENSE_RANK 를 적용했을 때 사원 H 의 R1, R2 값으로 옳은 것은? (Oracle 기준)",
       "options": [
-        "RANK 4, DENSE_RANK 3",
-        "RANK 3, DENSE_RANK 3",
-        "RANK 4, DENSE_RANK 4",
-        "RANK 5, DENSE_RANK 4"
+        "R1 4, R2 3",
+        "R1 3, R2 2",
+        "R1 8, R2 6",
+        "R1 4, R2 4"
       ],
       "correctIndex": 0,
-      "explanation": "SAL 내림차순으로 500, 400, 400, 300 이 되어 400 두 건이 공동 2 위가 된다. RANK 는 공동 순위가 차지한 자리를 건너뛰어 다음을 4 위로 매기고, DENSE_RANK 는 건너뛰지 않아 3 위로 매긴다. 따라서 마지막 행(300)은 RANK 4, DENSE_RANK 3 이다.",
+      "explanation": "H 는 20번 부서라 20번 부서 안에서만 순위를 매긴다(PARTITION BY). Oracle 은 NULL 을 가장 큰 값으로 보므로 내림차순(DESC)에서 NULL 이 맨 앞에 온다: F(NULL) 1위, E·G(600) 공동 2위, H(200). RANK 는 공동 2위가 두 자리를 차지해 H 가 4위, DENSE_RANK 는 건너뛰지 않아 3위다. 답은 R1 4, R2 3 이다(①). ② 는 NULL 이 맨 뒤에 온다고 본 결과(SQL Server 방식, 또는 NULLS LAST), ③ 은 PARTITION BY 를 무시하고 8명 전체에서 순위를 매긴 결과, ④ 는 DENSE_RANK 도 건너뛴다고 본 결과다. ※ 복원 자료의 표가 단순해 실제 시험 수준으로 데이터·SQL 을 보강했다(묻는 개념은 같다).",
       "references": [
         {
           "type": "table",
           "caption": "EMP 테이블",
           "headers": [
             "ENAME",
+            "DEPTNO",
             "SAL"
           ],
           "rows": [
             [
               "A",
+              "10",
               "500"
             ],
             [
               "B",
+              "10",
               "400"
             ],
             [
               "C",
+              "10",
               "400"
             ],
             [
               "D",
+              "10",
               "300"
+            ],
+            [
+              "E",
+              "20",
+              "600"
+            ],
+            [
+              "F",
+              "20",
+              "NULL"
+            ],
+            [
+              "G",
+              "20",
+              "600"
+            ],
+            [
+              "H",
+              "20",
+              "200"
             ]
           ]
         },
         {
           "type": "sql",
-          "code": "SELECT ENAME, SAL,\n       RANK()       OVER (ORDER BY SAL DESC) AS R1,\n       DENSE_RANK() OVER (ORDER BY SAL DESC) AS R2\nFROM   EMP;"
+          "code": "SELECT ENAME, DEPTNO, SAL,\n       RANK()       OVER (PARTITION BY DEPTNO ORDER BY SAL DESC) AS R1,\n       DENSE_RANK() OVER (PARTITION BY DEPTNO ORDER BY SAL DESC) AS R2\nFROM   EMP;"
         }
       ]
     },

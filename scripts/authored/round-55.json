@@ -770,37 +770,60 @@
     {
       "subject": "2과목",
       "number": 25,
-      "title": "아래 SQL 의 결과로 옳은 것은?",
+      "title": "아래 SQL 의 결과로 출력되는 ID 로 옳은 것은? (Oracle 기준)",
       "options": [
-        "1, 40 / 2, 150",
-        "2, 150 / 1, 40",
-        "1, 40 / 1, 40",
-        "2, 150 / 2, 150"
+        "2, 5",
+        "2, 3, 4, 5",
+        "2, 3, 4, 6",
+        "1, 2, 4, 6"
       ],
       "correctIndex": 1,
-      "explanation": "내부 쿼리에서 VAL DESC 기준 RN=1이 (2, 150), RN=2가 (1, 40)으로 부여된다. 외부 ORDER BY RN은 오름차순이므로 RN=1인 (2, 150)이 먼저 출력되고 RN=2인 (1, 40)이 뒤에 출력된다.",
+      "explanation": "GRP 별로 따로 번호를 매긴다. A: VAL 내림차순에 동점(150)은 ID 순이라 ID 2 가 1, ID 3 이 2, ID 1(40) 이 3. B: Oracle 은 내림차순에서 NULL 이 맨 앞이라 ID 5(NULL) 가 1, ID 4(90) 가 2, ID 6(70) 이 3. RN <= 2 인 ID 는 2, 3, 4, 5 이고 ID 순으로 출력된다(②). ① 은 PARTITION BY 를 무시하고 전체에서 2명을 뽑은 결과(NULL 인 5 와 150 인 2), ③ 은 NULL 이 맨 뒤에 온다고 본 결과, ④ 는 오름차순으로 번호를 매긴 결과다. 150 이 동점이어도 ROW_NUMBER 는 번호를 1, 2 로 나누므로 두 명 모두 RN <= 2 에 든다. ※ 복원 자료의 표가 단순해 실제 시험 수준으로 데이터·SQL 을 보강했다(묻는 개념은 같다).",
       "references": [
         {
           "type": "table",
+          "caption": "T 테이블",
           "headers": [
             "ID",
+            "GRP",
             "VAL"
           ],
           "rows": [
             [
               "1",
+              "A",
               "40"
             ],
             [
               "2",
+              "A",
               "150"
+            ],
+            [
+              "3",
+              "A",
+              "150"
+            ],
+            [
+              "4",
+              "B",
+              "90"
+            ],
+            [
+              "5",
+              "B",
+              "NULL"
+            ],
+            [
+              "6",
+              "B",
+              "70"
             ]
-          ],
-          "caption": "T 테이블"
+          ]
         },
         {
           "type": "sql",
-          "code": "SELECT *\nFROM   (SELECT ID, VAL, ROW_NUMBER() OVER (ORDER BY VAL DESC) AS RN\n        FROM   T)\nORDER BY RN;"
+          "code": "SELECT ID, RN\nFROM   (SELECT ID, VAL,\n               ROW_NUMBER() OVER (PARTITION BY GRP\n                                  ORDER BY VAL DESC, ID) AS RN\n        FROM   T)\nWHERE  RN <= 2\nORDER BY ID;"
         }
       ]
     },

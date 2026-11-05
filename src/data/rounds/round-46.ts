@@ -1315,13 +1315,13 @@ export const ROUND_46: QuizQuestion[] = [
     "number": 39,
     "title": "아래 두 테이블에 대해 NOT IN 서브쿼리를 사용한 SQL 의 결과 행 수로 옳은 것은? (T2.COL2 에 NULL 포함)",
     "options": [
-      "T1의 모든 행",
-      "T1 중 COL1이 T2.COL2에 존재하지 않는 행",
       "0건",
+      "2건",
+      "3건",
       "오류 발생"
     ],
-    "correctIndex": 2,
-    "explanation": "`NOT IN` 목록에 NULL 이 포함되면 `COL1 <> NULL` 평가가 UNKNOWN 이 되어 어떤 행도 조건을 TRUE 로 만족시키지 못한다. 따라서 결과는 0 건이다.",
+    "correctIndex": 1,
+    "explanation": "T2 에 NULL 이 있다고 바로 0건을 고르면 틀린다. 서브쿼리 안의 WHERE COL2 > 1 이 먼저 적용되는데, NULL > 1 은 UNKNOWN 이라 NULL 행은 서브쿼리 결과에서 빠진다. 서브쿼리 결과는 {2, 3, 5} 이고, COL1 NOT IN (2, 3, 5) 를 만족하는 행은 1 과 4 뿐이다. T1 의 NULL 행은 NULL <> 2 가 UNKNOWN 이라 남지 않는다. 그래서 2건이다(②). ① 0건은 서브쿼리 결과에 NULL 이 남아 있을 때(WHERE COL2 > 1 이 없을 때)의 결과이고, ③ 3건은 T1 의 NULL 행까지 센 값이며, ④ NOT IN 에 NULL 이 섞여도 오류는 나지 않는다. ※ 복원 자료의 표가 단순해 실제 시험 수준으로 데이터·SQL 을 보강했다(묻는 개념은 같다).",
     "_source": "authored",
     "references": [
       {
@@ -1339,6 +1339,12 @@ export const ROUND_46: QuizQuestion[] = [
           ],
           [
             "3"
+          ],
+          [
+            "4"
+          ],
+          [
+            "NULL"
           ]
         ]
       },
@@ -1357,12 +1363,15 @@ export const ROUND_46: QuizQuestion[] = [
           ],
           [
             "NULL"
+          ],
+          [
+            "5"
           ]
         ]
       },
       {
         "type": "sql",
-        "code": "SELECT *\nFROM   T1\nWHERE  COL1 NOT IN (SELECT COL2 FROM T2);"
+        "code": "SELECT *\nFROM   T1\nWHERE  COL1 NOT IN (SELECT COL2\n                    FROM   T2\n                    WHERE  COL2 > 1);"
       }
     ]
   },
