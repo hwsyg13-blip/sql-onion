@@ -1389,35 +1389,40 @@ export const ROUND_53: QuizQuestion[] = [
     "round": 53,
     "subject": "2과목",
     "number": 47,
-    "title": "아래 A, B 테이블을 UNION 한 결과(중복 제거) 의 행 수는?",
+    "title": "아래 A, B 테이블을 UNION 한 결과(중복 제거)의 행 수는? (Oracle 기준)",
     "options": [
-      "6개",
-      "8개",
       "4개",
-      "2개"
+      "5개",
+      "6개",
+      "8개"
     ],
-    "correctIndex": 0,
-    "explanation": "UNION 은 두 집합을 합친 뒤 중복을 제거한다. A 의 1·2·3·4 와 B 의 3·4·5·6 을 합치면 3·4 가 중복되어 한 번씩만 남아 1·2·3·4·5·6 의 6 건이 된다. 중복을 그대로 두는 UNION ALL 이라면 8 건이다.",
+    "correctIndex": 1,
+    "explanation": "UNION 은 두 결과를 합친 뒤 모든 컬럼 값이 같은 행을 하나로 줄인다. (1, a) 는 A 에 두 번, B 에 한 번 있지만 한 행만 남는다. (NULL, c) 는 양쪽에 있는데, 집합 연산에서는 NULL 끼리도 같은 값으로 보므로 한 행이다. (2, b) 와 (2, B) 는 Oracle 의 문자 비교가 대소문자를 구분해 서로 다른 행이다. 남는 행은 (1, a), (2, b), (2, B), (NULL, c), (3, NULL) 5개다(②). ① 4개는 b 와 B 를 같게 본 값, ③ 6개는 (NULL, c) 두 행을 서로 다르다고 본 값, ④ 8개는 중복을 지우지 않는 UNION ALL 의 결과다.",
     "_source": "authored",
     "references": [
       {
         "type": "table",
         "caption": "A 테이블",
         "headers": [
-          "COL"
+          "C1",
+          "C2"
         ],
         "rows": [
           [
-            "1"
+            "1",
+            "a"
           ],
           [
-            "2"
+            "1",
+            "a"
           ],
           [
-            "3"
+            "2",
+            "b"
           ],
           [
-            "4"
+            "NULL",
+            "c"
           ]
         ]
       },
@@ -1425,26 +1430,31 @@ export const ROUND_53: QuizQuestion[] = [
         "type": "table",
         "caption": "B 테이블",
         "headers": [
-          "COL"
+          "C1",
+          "C2"
         ],
         "rows": [
           [
-            "3"
+            "1",
+            "a"
           ],
           [
-            "4"
+            "2",
+            "B"
           ],
           [
-            "5"
+            "NULL",
+            "c"
           ],
           [
-            "6"
+            "3",
+            "NULL"
           ]
         ]
       },
       {
         "type": "sql",
-        "code": "SELECT COL FROM A\nUNION\nSELECT COL FROM B;"
+        "code": "SELECT C1, C2 FROM A\nUNION\nSELECT C1, C2 FROM B;"
       }
     ]
   },

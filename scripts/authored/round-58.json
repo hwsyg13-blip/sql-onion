@@ -594,41 +594,57 @@
     {
       "subject": "2과목",
       "number": 22,
-      "title": "아래 데이터에 대한 NTILE(2) 함수 결과로 옳은 것은?",
+      "title": "아래 데이터에 대한 NTILE(2) 함수 결과(GRP, 부서·ID 순)로 옳은 것은?",
       "options": [
-        "1, 1, 2",
-        "1, 2, 2",
-        "1, 1, 1",
-        "2, 2, 2"
+        "1, 1, 1, 2, 2, 1, 2",
+        "1, 1, 2, 2, 2, 1, 1",
+        "1, 1, 2, 2, 2, 1, 2",
+        "2, 2, 1, 1, 1, 2, 1"
       ],
       "correctIndex": 0,
-      "explanation": "NTILE(2) 는 3행을 두 그룹으로 나누고, 나머지 1행은 앞 그룹에 준다. 그래서 첫 그룹 2행, 둘째 그룹 1행이 되어 1, 1, 2 다(①). 나머지를 뒤에 주면 1, 2, 2(②)가 되지만 NTILE 은 앞에서부터 채운다.",
+      "explanation": "PARTITION BY DEPT 라 부서마다 따로 2개 그룹으로 나눈다. NTILE 은 나누어떨어지지 않으면 앞 그룹에 한 행을 더 준다. A 부서 5행(ID 3~7)은 3 + 2 로 나뉘어 1, 1, 1, 2, 2, B 부서 2행(ID 1, 2)은 1, 2 다. 부서·ID 순으로 1, 1, 1, 2, 2, 1, 2 다(①). ② 는 PARTITION BY 를 무시하고 7행 전체를 ID 순으로 4 + 3 으로 나눈 결과(ID 1~4 가 1), ③ 은 A 부서의 나머지를 뒤 그룹에 준 결과(2 + 3), ④ 는 ID 내림차순으로 나눈 결과다.",
       "references": [
         {
           "type": "table",
+          "caption": "T 테이블",
           "headers": [
             "ID",
-            "VAL"
+            "DEPT"
           ],
           "rows": [
             [
               "1",
-              "100"
+              "B"
             ],
             [
               "2",
-              "200"
+              "B"
             ],
             [
               "3",
-              "300"
+              "A"
+            ],
+            [
+              "4",
+              "A"
+            ],
+            [
+              "5",
+              "A"
+            ],
+            [
+              "6",
+              "A"
+            ],
+            [
+              "7",
+              "A"
             ]
-          ],
-          "caption": "T 테이블"
+          ]
         },
         {
           "type": "sql",
-          "code": "SELECT ID, NTILE(2) OVER (ORDER BY ID) AS GRP FROM T;"
+          "code": "SELECT DEPT, ID,\n       NTILE(2) OVER (PARTITION BY DEPT ORDER BY ID) AS GRP\nFROM   T\nORDER BY DEPT, ID;"
         }
       ]
     },
