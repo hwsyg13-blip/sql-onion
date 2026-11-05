@@ -103,21 +103,21 @@ export const ROUND_45: QuizQuestion[] = [
     "round": 45,
     "subject": "1과목",
     "number": 4,
-    "title": "아래 ERD에 대한 설명으로 가장 적절하지 않은 것은?",
+    "title": "아래 ERD에 대한 설명으로 가장 적절하지 않은 것은? (IE 표기법)",
     "options": [
-      "고객은 주문을 하나도 하지 않을 수 있다.",
-      "고객은 여러 건의 주문을 가질 수 있다.",
-      "주문은 반드시 한 명의 고객에게 귀속된다.",
-      "주문은 고객이 없을 수도 있다."
+      "관리자가 없는 사원이 있을 수 있다.",
+      "한 사원이 여러 사원을 관리할 수 있다.",
+      "모든 사원은 반드시 하나의 부서에 소속된다.",
+      "부서장이 지정되지 않은 부서는 존재할 수 없다."
     ],
     "correctIndex": 3,
-    "explanation": "고객 쪽 `||` 는 주문 하나가 반드시 고객 한 명과 연결된다는 뜻이라 모든 주문은 고객에게 귀속된다(③). 주문 쪽 `o{` 는 고객 한 명에 주문이 없거나(0) 여러 건일 수 있다는 뜻이다(①②). 따라서 '주문은 고객이 없을 수도 있다' 는 ④ 가 옳지 않다.",
+    "explanation": "\"부서장\" 관계에서 부서 쪽에서 본 사원(부서장) 끝은 |o(0 또는 1)라 부서장이 비어 있는 부서도 있을 수 있다. 그래서 ④ 가 틀렸다. ① 사원-사원 \"관리\" 관계(자기 자신을 참조하는 순환 관계)에서 관리자 쪽 끝이 |o 라 관리자가 없는 사원(예: 대표)이 있을 수 있다. ② 반대쪽 끝이 o{ 라 한 사원이 여러 사원을 관리할 수 있다. ③ \"소속\" 관계의 부서 쪽 끝이 || 라 사원은 반드시 부서 하나에 속한다. 같은 두 엔터티 사이에도 의미가 다르면 관계를 여러 개 그릴 수 있다(소속·부서장). 읽는 법: 관계선 끝의 기호는 그 기호가 붙은 쪽 엔터티가 상대 한 건당 몇 개인지를 말한다. | 는 반드시(필수), o 는 없어도 됨(선택), 까마귀발은 여러 개다.",
     "_source": "authored",
     "references": [
       {
         "type": "erd",
-        "caption": "고객-주문 ERD",
-        "mermaid": "erDiagram\n    고객 ||--o{ 주문 : \"한다\""
+        "caption": "부서·사원 ERD (사원-사원 관리 관계, 부서-사원 소속·부서장 관계)",
+        "mermaid": "erDiagram\n    부서 ||--o{ 사원 : \"소속\"\n    사원 |o--o| 부서 : \"부서장\"\n    사원 |o--o{ 사원 : \"관리\"\n    부서 {\n        string 부서번호 PK\n        string 부서명\n        string 부서장사번 FK\n    }\n    사원 {\n        string 사번 PK\n        string 이름\n        string 부서번호 FK\n        string 관리자사번 FK\n    }"
       }
     ]
   },
@@ -886,13 +886,13 @@ export const ROUND_45: QuizQuestion[] = [
     "number": 31,
     "title": "아래 네 테이블에 대한 SQL 의 결과 행 수로 옳은 것은?",
     "options": [
-      "1",
       "2",
       "3",
-      "0"
+      "4",
+      "5"
     ],
-    "correctIndex": 0,
-    "explanation": "`T2.COL1(+) = T1.COL1` 은 T1 LEFT OUTER JOIN T2, `T3.COL1(+) = T2.COL1` 은 그 결과에 T3 LEFT OUTER JOIN, 마지막 `T4.COL1 = T3.COL1` 은 INNER JOIN. 마지막이 INNER JOIN 이라 T3·T4 양쪽에 모두 있는 키만 살아남고, 그 키가 다시 T1·T2 와 매칭되는 행만 남는다. 네 테이블 공통 키는 1 한 건이라 결과는 1 행.",
+    "correctIndex": 2,
+    "explanation": "(+) 가 붙은 쪽이 NULL 로 채워지는 쪽이다. T2.COL1(+) = T1.COL1 은 T1 기준 LEFT JOIN T2, T3.COL1(+) = T2.COL1 은 그 결과 기준 LEFT JOIN T3, 마지막 T4.COL1 = T3.COL1 은 (+) 가 없어 INNER JOIN 이다. ① T1 ⟕ T2: 1-1, 2-2, 2-2(T2 에 2 가 두 개), 3-NULL, 4-NULL → 5행. ② ⟕ T3: T2 가 1·2 인 3행은 T3 와 짝이 있고 나머지 2행은 T3 가 NULL → 여전히 5행. ③ T4 와 INNER: T3 가 1 인 1행은 T4 의 1 두 개와 붙어 2행, T3 가 2 인 2행은 T4 의 2 하나와 붙어 2행, NULL 행은 사라진다. 결과 4행이다(③). ① 2 는 중복을 무시하고 공통 키(1, 2)만 센 값, ② 3 은 T4 의 1 중복을 놓친 값(1 + 2), ④ 5 는 마지막 INNER 조인이 앞의 OUTER 결과를 줄이지 않는다고 본 값이다.",
     "_source": "authored",
     "references": [
       {
@@ -907,6 +907,12 @@ export const ROUND_45: QuizQuestion[] = [
           ],
           [
             "2"
+          ],
+          [
+            "3"
+          ],
+          [
+            "4"
           ]
         ]
       },
@@ -921,7 +927,13 @@ export const ROUND_45: QuizQuestion[] = [
             "1"
           ],
           [
-            "3"
+            "2"
+          ],
+          [
+            "2"
+          ],
+          [
+            "5"
           ]
         ]
       },
@@ -936,7 +948,10 @@ export const ROUND_45: QuizQuestion[] = [
             "1"
           ],
           [
-            "4"
+            "2"
+          ],
+          [
+            "6"
           ]
         ]
       },
@@ -951,7 +966,10 @@ export const ROUND_45: QuizQuestion[] = [
             "1"
           ],
           [
-            "5"
+            "1"
+          ],
+          [
+            "2"
           ]
         ]
       },
@@ -1307,13 +1325,13 @@ export const ROUND_45: QuizQuestion[] = [
     "number": 40,
     "title": "아래 SQL의 결과 행 수로 옳은 것은? (LEFT OUTER JOIN의 ON 조건과 WHERE 조건 차이)",
     "options": [
-      "0건",
-      "1건",
       "2건",
-      "오류 발생"
+      "3건",
+      "5건",
+      "6건"
     ],
     "correctIndex": 1,
-    "explanation": "ON 절의 T2.TYPE='X' 조건이 조인 단계에서 필터링되어 T1.ID=1 행만 매칭되고, 매칭되지 않은 행은 T2.TYPE이 NULL로 남는다. 이후 WHERE T2.TYPE='X' 필터가 적용되어 최종적으로 1건이 반환된다.",
+    "explanation": "ON 절은 T2 의 어떤 행을 붙일지만 정하고 T1 행은 모두 남긴다. TYPE = 'X' 인 T2 행은 ID 1 에 두 개(SEQ 10, 11), ID 2 에 하나(SEQ 20)라 조인 직후에는 (1,10) (1,11) (2,20) 에 짝이 없는 ID 3·4·5 의 NULL 행 3개를 더해 6행이다. ID 4 의 TYPE 은 NULL 이라 'X' 와 비교하면 UNKNOWN 이 되어 붙지 않고, T2 에만 있는 ID 6 은 LEFT 조인이라 나오지 않는다. 이어서 WHERE T2.TYPE = 'X' 가 NULL 행 3개를 지워 최종 3건이다(②). ① 2건은 ID 1 에 X 가 두 번 붙는 것을 놓친 값, ③ 5건은 LEFT 조인이라 T1 의 5행이 그대로 남는다고 본 값, ④ 6건은 WHERE 를 적용하기 전의 행 수다. 오른쪽 테이블 조건을 WHERE 에도 쓰면 결과는 INNER JOIN 과 같아진다.",
     "_source": "authored",
     "references": [
       {
@@ -1331,6 +1349,18 @@ export const ROUND_45: QuizQuestion[] = [
           [
             "2",
             "B"
+          ],
+          [
+            "3",
+            "C"
+          ],
+          [
+            "4",
+            "D"
+          ],
+          [
+            "5",
+            "E"
           ]
         ]
       },
@@ -1338,23 +1368,51 @@ export const ROUND_45: QuizQuestion[] = [
         "type": "table",
         "caption": "T2",
         "headers": [
+          "SEQ",
           "ID",
           "TYPE"
         ],
         "rows": [
           [
+            "10",
             "1",
             "X"
           ],
           [
-            "2",
+            "11",
+            "1",
+            "X"
+          ],
+          [
+            "12",
+            "1",
             "Y"
+          ],
+          [
+            "20",
+            "2",
+            "X"
+          ],
+          [
+            "30",
+            "3",
+            "Y"
+          ],
+          [
+            "40",
+            "4",
+            "NULL"
+          ],
+          [
+            "60",
+            "6",
+            "X"
           ]
         ]
       },
       {
         "type": "sql",
-        "code": "SELECT T1.ID, T1.NAME, T2.TYPE\nFROM   T1 LEFT OUTER JOIN T2\nON     T1.ID = T2.ID AND T2.TYPE = 'X'\nWHERE  T2.TYPE = 'X';"
+        "code": "SELECT T1.ID, T1.NAME, T2.SEQ\nFROM   T1 LEFT OUTER JOIN T2\nON     T1.ID = T2.ID AND T2.TYPE = 'X'\nWHERE  T2.TYPE = 'X';"
       }
     ]
   },
@@ -1437,15 +1495,15 @@ export const ROUND_45: QuizQuestion[] = [
     "round": 45,
     "subject": "2과목",
     "number": 44,
-    "title": "아래 계층형 쿼리 결과에서 C3 컬럼의 두 번째 값은?",
+    "title": "아래 계층형 쿼리 결과에서 C3 컬럼의 네 번째 값은?",
     "options": [
-      "A",
       "B",
-      "C",
-      "D"
+      "D",
+      "E",
+      "F"
     ],
     "correctIndex": 2,
-    "explanation": "루트 C1=1(A)을 기준으로 자식들을 C1 내림차순으로 정렬하면 형제 노드 중 C1=3(C)이 C1=2(B)보다 먼저 오므로 두 번째 행은 C가 된다.",
+    "explanation": "계층형 질의는 한 가지를 끝까지 내려간 뒤 다음 형제로 넘어가는 깊이 우선 순서로 출력한다. ORDER SIBLINGS BY 는 이 순서를 유지한 채 같은 부모를 둔 형제끼리만 정렬한다. A 의 자식은 B(2)·C(3)·G(7) 인데 C1 내림차순이라 G → C → B 순이다. G 는 자식이 없고, C 아래에 E, B 아래에 F(6)·D(4) 가 내림차순으로 온다. 출력은 A, G, C, E, B, F, D 이고 네 번째는 E 다(③). ① B 는 레벨별로(A → G·C·B → …) 출력된다고 본 결과, ② D 는 ORDER BY C1 DESC 처럼 계층과 상관없이 전체를 정렬한 결과(G, F, E, D …), ④ F 는 형제를 오름차순으로 본 결과(A, B, D, F …)다.",
     "_source": "authored",
     "references": [
       {
@@ -1476,6 +1534,21 @@ export const ROUND_45: QuizQuestion[] = [
             "4",
             "2",
             "D"
+          ],
+          [
+            "5",
+            "3",
+            "E"
+          ],
+          [
+            "6",
+            "2",
+            "F"
+          ],
+          [
+            "7",
+            "1",
+            "G"
           ]
         ]
       },
@@ -1492,15 +1565,15 @@ export const ROUND_45: QuizQuestion[] = [
     "round": 45,
     "subject": "2과목",
     "number": 45,
-    "title": "아래 계층형 쿼리의 결과로 옳은 것은?",
+    "title": "아래 계층형 쿼리의 결과로 옳은 것은? (출력 순서대로)",
     "options": [
-      "JOHN",
-      "KING",
-      "SCOTT",
-      "KING, JOHN"
+      "MILLER, SCOTT",
+      "MILLER, SCOTT, KING",
+      "MILLER, FORD",
+      "MILLER, SCOTT, JOHN, KING"
     ],
     "correctIndex": 1,
-    "explanation": "문법 오류가 아니다. Oracle 은 START WITH 와 CONNECT BY 의 순서를 바꿔 써도 된다. 실행 순서대로 보면 ① START WITH C1 = 2 → JOHN 에서 시작한다. ② CONNECT BY C1 = PRIOR C2 → 방금 읽은 JOHN 의 C2(1)를 C1 으로 가진 행, 즉 KING 으로 올라간다(역방향). KING 의 C2 는 NULL 이라 여기서 끝난다. ③ 계층을 다 만든 뒤 WHERE C1 <> 2 로 JOHN 을 빼면 KING 만 남는다(②). ① JOHN 은 WHERE 에서 빠지고, ③ SCOTT 은 JOHN 의 자식이라 위로 올라가는 전개에는 나오지 않으며, ④ 는 WHERE 를 적용하지 않은 결과다.",
+    "explanation": "Oracle 은 START WITH 와 CONNECT BY 의 순서를 바꿔 써도 된다. ① START WITH C1 = 5 → MILLER 에서 시작한다. ② CONNECT BY C1 = PRIOR C2 는 \"방금 읽은 행의 C2(상위 번호)를 C1 으로 가진 행\" 을 찾으므로 위로 올라가는 역방향이다: MILLER(C2=3) → SCOTT(C2=2) → JOHN(C2=1) → KING(C2=NULL, 끝). ③ 계층을 다 만든 뒤 WHERE C1 <> 2 가 JOHN 한 행만 뺀다. 그래서 MILLER, SCOTT, KING 이다(②). ① 은 WHERE 조건을 CONNECT BY 에 쓴 것처럼 JOHN 에서 전개가 끊긴다고 본 결과이고, ③ 은 PRIOR 방향을 거꾸로 읽어 MILLER 의 자식(FORD)으로 내려간 결과, ④ 는 WHERE 를 적용하지 않은 결과다. ADAMS·ALLEN 은 MILLER 의 경로에 없다.",
     "_source": "authored",
     "references": [
       {
@@ -1526,12 +1599,32 @@ export const ROUND_45: QuizQuestion[] = [
             "3",
             "2",
             "SCOTT"
+          ],
+          [
+            "4",
+            "1",
+            "ADAMS"
+          ],
+          [
+            "5",
+            "3",
+            "MILLER"
+          ],
+          [
+            "6",
+            "5",
+            "FORD"
+          ],
+          [
+            "7",
+            "4",
+            "ALLEN"
           ]
         ]
       },
       {
         "type": "sql",
-        "code": "SELECT C3\nFROM   SQLD45\nWHERE  C1 <> 2\nCONNECT BY C1 = PRIOR C2\nSTART WITH C1 = 2;"
+        "code": "SELECT C3\nFROM   SQLD45\nWHERE  C1 <> 2\nCONNECT BY C1 = PRIOR C2\nSTART WITH C1 = 5;"
       }
     ]
   },

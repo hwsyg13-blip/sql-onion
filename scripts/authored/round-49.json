@@ -50,20 +50,20 @@
     {
       "subject": "1과목",
       "number": 4,
-      "title": "아래 ERD 해석 중 옳지 않은 것은?",
+      "title": "아래 ERD 해석 중 옳지 않은 것은? (IE 표기법)",
       "options": [
-        "하나의 주문은 반드시 하나의 상품을 가진다.",
-        "하나의 상품은 여러 주문을 가질 수 있다.",
-        "하나의 상품은 항상 주문을 가진다.",
-        "주문이 없는 상품도 존재할 수 있다."
+        "담당 과목이 없는 교수가 있을 수 있다.",
+        "학생은 반드시 한 과목 이상을 수강해야 한다.",
+        "수강생이 없는 과목은 존재할 수 없다.",
+        "학과에 소속되지 않은 학생이 있을 수 있다."
       ],
       "correctIndex": 2,
-      "explanation": "상품 쪽 `||` 는 주문 하나가 반드시 상품 하나와 연결된다는 뜻이고(①), 주문 쪽 `o{` 는 상품 하나에 주문이 없거나(0) 여러 개일 수 있다는 뜻이다(②④). 따라서 주문이 없는 상품도 있을 수 있으므로 '상품은 항상 주문을 가진다' 는 ③ 이 옳지 않다.",
+      "explanation": "과목-수강 관계에서 수강 쪽 끝이 o{(0개 이상)라 수강생이 한 명도 없는 과목도 존재할 수 있다. 그래서 ③ 이 틀렸다. ① 교수-과목의 과목 쪽 끝이 o{ 라 담당 과목이 없는 교수가 있을 수 있다. ② 학생-수강의 수강 쪽 끝이 |{(1개 이상)라 학생은 반드시 한 과목 이상을 수강한다. ④ 학과-학생의 학과 쪽 끝이 |o(0 또는 1)라 학과가 없는 학생도 있다. 같은 o 라도 어느 끝에 붙었는지 보고, 그 끝의 엔터티를 \"몇 개 있을 수 있나\" 로 읽어야 한다. 수강은 학생과 과목의 M:N 을 푼 교차 엔터티다. 읽는 법: 관계선 끝의 기호는 그 기호가 붙은 쪽 엔터티가 상대 한 건당 몇 개인지를 말한다. | 는 반드시(필수), o 는 없어도 됨(선택), 까마귀발은 여러 개다.",
       "references": [
         {
           "type": "erd",
-          "caption": "상품-주문 ERD",
-          "mermaid": "erDiagram\n    상품 ||--o{ 주문 : \"주문된다\""
+          "caption": "학과·학생·수강·과목·교수 ERD",
+          "mermaid": "erDiagram\n    학과 |o--o{ 학생 : \"소속\"\n    학생 ||--|{ 수강 : \"신청\"\n    과목 ||--o{ 수강 : \"개설\"\n    교수 ||--o{ 과목 : \"담당\"\n    학생 {\n        string 학번 PK\n        string 학과코드 FK\n    }\n    수강 {\n        string 학번 PK,FK\n        string 과목코드 PK,FK\n        string 수강학기 PK\n    }\n    과목 {\n        string 과목코드 PK\n        string 교수번호 FK\n    }"
         }
       ]
     },
@@ -769,45 +769,70 @@
     {
       "subject": "2과목",
       "number": 26,
-      "title": "아래 EMP 테이블에 RANK 와 DENSE_RANK 를 적용했을 때 마지막 행의 두 값으로 옳은 것은?",
+      "title": "아래 EMP 테이블에 RANK 와 DENSE_RANK 를 적용했을 때 사원 H 의 R1, R2 값으로 옳은 것은? (Oracle 기준)",
       "options": [
-        "RANK 4, DENSE_RANK 3",
-        "RANK 3, DENSE_RANK 3",
-        "RANK 4, DENSE_RANK 4",
-        "RANK 5, DENSE_RANK 4"
+        "R1 4, R2 3",
+        "R1 3, R2 2",
+        "R1 8, R2 6",
+        "R1 4, R2 4"
       ],
       "correctIndex": 0,
-      "explanation": "SAL 내림차순으로 500, 400, 400, 300 이 되어 400 두 건이 공동 2 위가 된다. RANK 는 공동 순위가 차지한 자리를 건너뛰어 다음을 4 위로 매기고, DENSE_RANK 는 건너뛰지 않아 3 위로 매긴다. 따라서 마지막 행(300)은 RANK 4, DENSE_RANK 3 이다.",
+      "explanation": "H 는 20번 부서라 20번 부서 안에서만 순위를 매긴다(PARTITION BY). Oracle 은 NULL 을 가장 큰 값으로 보므로 내림차순(DESC)에서 NULL 이 맨 앞에 온다: F(NULL) 1위, E·G(600) 공동 2위, H(200). RANK 는 공동 2위가 두 자리를 차지해 H 가 4위, DENSE_RANK 는 건너뛰지 않아 3위다. 답은 R1 4, R2 3 이다(①). ② 는 NULL 이 맨 뒤에 온다고 본 결과(SQL Server 방식, 또는 NULLS LAST), ③ 은 PARTITION BY 를 무시하고 8명 전체에서 순위를 매긴 결과, ④ 는 DENSE_RANK 도 건너뛴다고 본 결과다.",
       "references": [
         {
           "type": "table",
           "caption": "EMP 테이블",
           "headers": [
             "ENAME",
+            "DEPTNO",
             "SAL"
           ],
           "rows": [
             [
               "A",
+              "10",
               "500"
             ],
             [
               "B",
+              "10",
               "400"
             ],
             [
               "C",
+              "10",
               "400"
             ],
             [
               "D",
+              "10",
               "300"
+            ],
+            [
+              "E",
+              "20",
+              "600"
+            ],
+            [
+              "F",
+              "20",
+              "NULL"
+            ],
+            [
+              "G",
+              "20",
+              "600"
+            ],
+            [
+              "H",
+              "20",
+              "200"
             ]
           ]
         },
         {
           "type": "sql",
-          "code": "SELECT ENAME, SAL,\n       RANK()       OVER (ORDER BY SAL DESC) AS R1,\n       DENSE_RANK() OVER (ORDER BY SAL DESC) AS R2\nFROM   EMP;"
+          "code": "SELECT ENAME, DEPTNO, SAL,\n       RANK()       OVER (PARTITION BY DEPTNO ORDER BY SAL DESC) AS R1,\n       DENSE_RANK() OVER (PARTITION BY DEPTNO ORDER BY SAL DESC) AS R2\nFROM   EMP;"
         }
       ]
     },
@@ -1228,13 +1253,13 @@
       "number": 42,
       "title": "아래 두 테이블에 대한 SQL 의 결과로 옳은 것은?",
       "options": [
-        "A, B, C, D",
         "B, C",
-        "A, D",
-        "A, B, B, C, C, D"
+        "B, C, NULL",
+        "B, B, C, NULL",
+        "A, D"
       ],
       "correctIndex": 1,
-      "explanation": "INTERSECT 는 두 집합에 모두 존재하는 행만 남기는 교집합 연산이다. T1 과 T2 에 공통으로 있는 값은 B 와 C 이므로 두 건이 반환된다. 합집합이면 A·B·C·D, 차집합(MINUS)이면 A 가 나온다.",
+      "explanation": "INTERSECT 는 두 결과에 모두 있는 행을 남기고 중복을 지운다. 공통 값은 B, C, NULL 이다. 집합 연산에서는 NULL 끼리도 같은 값으로 보므로 NULL 도 교집합에 들어가고, B 는 양쪽에 두 개씩 있어도 한 번만 나온다. 결과는 B, C, NULL 이다(②). ① 은 NULL 은 비교할 수 없어 교집합이 아니라고 본 결과(WHERE 의 = 비교와 헷갈린 것), ③ 은 중복을 남기는 INTERSECT ALL 로 본 결과, ④ 는 한쪽에만 있는 값(MINUS 를 양쪽으로 한 것)이다.",
       "references": [
         {
           "type": "table",
@@ -1250,7 +1275,13 @@
               "B"
             ],
             [
+              "B"
+            ],
+            [
               "C"
+            ],
+            [
+              "NULL"
             ]
           ]
         },
@@ -1265,10 +1296,16 @@
               "B"
             ],
             [
+              "B"
+            ],
+            [
               "C"
             ],
             [
               "D"
+            ],
+            [
+              "NULL"
             ]
           ]
         },

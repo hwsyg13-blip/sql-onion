@@ -851,16 +851,17 @@
       "number": 28,
       "title": "아래 SQL의 결과로 옳은 것은?",
       "options": [
-        "11 1002 / 11 1004 / 10 1002",
-        "11 1004 / 11 1002 / 10 1002",
-        "10 1002 / 11 1002 / 11 1004",
-        "11 1004 / 10 1002 / 11 1002"
+        "12 NULL / 11 1004 / 11 1002",
+        "NULL 1003 / 12 NULL / 11 1004",
+        "12 NULL / 11 1002 / 11 1004",
+        "11 1004 / 11 1002 / 10 1002"
       ],
       "correctIndex": 0,
-      "explanation": "EMPNO 내림차순(NULLS LAST)이므로 11, 11, 10 순이고, EMPNO가 같은 11 중에서는 DEPTNO 오름차순이라 1002가 먼저, 1004가 나중에 온다. 상위 3건은 (11, 1002), (11, 1004), (10, 1002)로 ①번이다.",
+      "explanation": "첫 기준 EMPNO 내림차순에 NULLS LAST 를 붙였으므로 EMPNO 가 NULL 인 행(1003)은 맨 뒤로 간다: 12, 11, 11, 10, 10, NULL. EMPNO 가 같은 11 두 행은 두 번째 기준 DEPTNO 내림차순이라 1004 가 먼저다. 앞 3행은 (12, NULL), (11, 1004), (11, 1002) 다(①). ② 는 Oracle 의 DESC 기본값(NULLS FIRST)대로 NULL 을 맨 앞에 둔 결과로, NULLS LAST 를 무시했다. ③ 은 두 번째 기준을 오름차순으로 본 결과, ④ 는 NULLS LAST 가 DEPTNO 가 NULL 인 행(12)까지 뒤로 보낸다고 본 결과다. NULLS LAST 는 바로 앞의 정렬 기준(EMPNO)에만 적용된다.",
       "references": [
         {
           "type": "table",
+          "caption": "EMP 테이블",
           "headers": [
             "EMPNO",
             "DEPTNO"
@@ -881,13 +882,20 @@
             [
               "(NULL)",
               "1003"
+            ],
+            [
+              "10",
+              "1001"
+            ],
+            [
+              "12",
+              "(NULL)"
             ]
-          ],
-          "caption": "EMP 테이블"
+          ]
         },
         {
           "type": "sql",
-          "code": "SELECT EMPNO, DEPTNO\nFROM   EMP\nORDER BY EMPNO DESC NULLS LAST, DEPTNO ASC\nFETCH FIRST 3 ROWS ONLY;"
+          "code": "SELECT EMPNO, DEPTNO\nFROM   EMP\nORDER BY EMPNO DESC NULLS LAST, DEPTNO DESC\nFETCH FIRST 3 ROWS ONLY;"
         }
       ]
     },
@@ -1363,16 +1371,17 @@
       "number": 48,
       "title": "아래 SQL의 결과 행 수로 옳은 것은?",
       "options": [
-        "3",
-        "4",
-        "6",
-        "8"
+        "5",
+        "9",
+        "11",
+        "12"
       ],
       "correctIndex": 3,
-      "explanation": "CUBE(A,B)는 (A,B), (A), (B), () 조합을 모두 반환한다. 세부 집계 3건, (A) 소계 2건, (B) 소계 2건, 총계 1건을 합쳐 8건이 된다.",
+      "explanation": "CUBE(A, B) 는 (A, B), (A), (B), () 네 가지 묶음을 모두 만든다. (A, B): X-1, X-2, Y-1, Y-NULL, Z-NULL 5행(원래 값이 NULL 인 B 도 하나의 그룹이다). (A): X, Y, Z 3행. (B): 1, 2, NULL 3행. (): 총계 1행. 합계 5 + 3 + 3 + 1 = 12 행이다(④). ① 5 는 GROUP BY A, B 만의 결과, ② 9 는 ROLLUP(A, B) 로 본 값(5 + 3 + 1), ③ 11 은 B 가 NULL 인 그룹을 (B) 소계에서 빼고 센 값이다. 원래 데이터의 NULL 그룹과 소계 행의 NULL 은 GROUPING 함수로 구분한다.",
       "references": [
         {
           "type": "table",
+          "caption": "T 테이블",
           "headers": [
             "A",
             "B"
@@ -1389,9 +1398,16 @@
             [
               "Y",
               "1"
+            ],
+            [
+              "Y",
+              "NULL"
+            ],
+            [
+              "Z",
+              "NULL"
             ]
-          ],
-          "caption": "T 테이블"
+          ]
         },
         {
           "type": "sql",

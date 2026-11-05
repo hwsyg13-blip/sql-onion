@@ -19,7 +19,7 @@ export const ROUND_60: QuizQuestion[] = [
       "개념 엔터티"
     ],
     "correctIndex": 1,
-    "explanation": "기본 엔터티인 고객·상품으로부터 발생하면서, 다시 주문상세·결제·배송 같은 여러 엔터티의 부모가 되어 업무의 중심 역할을 하는 엔터티를 중심 엔터티라 한다. 다른 엔터티로부터 발생하지 않으면 기본 엔터티, 두 엔터티의 관계나 업무 행위로만 생기면 행위 엔터티로 분류한다.",
+    "explanation": "기본 엔터티인 고객·상품으로부터 발생하면서, 다시 주문상세·결제·배송 같은 여러 엔터티의 부모가 되어 업무의 중심 역할을 하는 엔터티를 중심 엔터티라 한다. ① 기본 엔터티는 다른 엔터티로부터 발생하지 않는 엔터티이고, ③ 행위 엔터티는 두 개 이상의 부모 엔터티로부터 발생해 자주 바뀌거나 쌓이는 엔터티(예: 주문이력)다. ④ 개념 엔터티는 유형·무형 기준의 분류라 발생 시점 기준의 질문과 맞지 않는다.",
     "_source": "authored",
     "references": [
       {
@@ -43,7 +43,7 @@ export const ROUND_60: QuizQuestion[] = [
       "부서코드"
     ],
     "correctIndex": 0,
-    "explanation": "연령은 생년월일로 계산해서 얻는 파생 속성이다(①). 사번·생년월일·부서코드는 계산 없이 값을 직접 입력해 관리하는 속성이다(사번·부서코드는 코드·일련번호라 설계 속성, 생년월일은 기본 속성). 다른 속성에서 계산되는 것은 연령뿐이라 성격이 다르다.",
+    "explanation": "연령은 생년월일로 계산해서 얻는 파생 속성이다(①). ② 사번·③ 생년월일·④ 부서코드는 계산 없이 값을 직접 입력해 관리하는 속성이다(사번·부서코드는 코드·일련번호라 설계 속성, 생년월일은 기본 속성). 다른 속성에서 계산되는 것은 연령뿐이라 성격이 다르다.",
     "_source": "authored",
     "references": [
       {
@@ -156,7 +156,7 @@ export const ROUND_60: QuizQuestion[] = [
       "자식 엔터티에서 독립된 주식별자를 정의할 수 있다."
     ],
     "correctIndex": 2,
-    "explanation": "비식별자 관계는 부모의 기본키를 자식의 일반 속성(외래키)으로만 상속하므로 자식은 별도의 주식별자를 정의한다. 따라서 부모 식별자가 곧 자식 주식별자가 되는 식별자 관계와 달리 '주식별자와 식별자가 같다'는 설명은 옳지 않다. ③은 식별자 관계의 특성에 가까우며, 비식별자 관계와는 구분된다.",
+    "explanation": "비식별자 관계는 부모의 기본키를 자식의 일반 속성(외래키)으로만 상속하므로 자식은 별도의 주식별자를 정의한다. 따라서 부모 식별자가 곧 자식 주식별자가 되는 식별자 관계와 달리 '주식별자와 식별자가 같다'는 설명은 옳지 않다. ③은 식별자 관계의 특성에 가까우며, 비식별자 관계와는 구분된다. ① 부모 키를 일반 속성으로 상속하고, ② 부모와 자식의 생성 시점이 분리될 수 있으며, ④ 자식이 독립된 주식별자를 가지는 것은 모두 비식별자 관계의 특징이다.",
     "_source": "authored"
   },
   {
@@ -174,7 +174,7 @@ export const ROUND_60: QuizQuestion[] = [
       "○"
     ],
     "correctIndex": 2,
-    "explanation": "피터 첸 표기법은 엔터티를 사각형(□), 속성을 타원(○), 관계를 마름모(◇)로 표현하며, 주식별자 속성에는 밑줄을 긋는다. 관계는 두 엔터티 사이에 마름모로 배치되어 엔터티 간 연관을 명시한다.",
+    "explanation": "피터 첸 표기법은 엔터티를 사각형(□), 속성을 타원(○), 관계를 마름모(◇)로 표현하며, 주식별자 속성에는 밑줄을 긋는다. 관계는 두 엔터티 사이에 마름모로 배치되어 엔터티 간 연관을 명시한다. ① 사각형은 엔터티, ④ 타원은 속성을 나타내고, ② 삼각형은 피터 첸 표기법에서 쓰지 않는 도형이다.",
     "_source": "authored"
   },
   {
@@ -210,7 +210,7 @@ export const ROUND_60: QuizQuestion[] = [
       "BCNF"
     ],
     "correctIndex": 2,
-    "explanation": "1정규화는 반복되는 속성을 분리하면서 식별자 구성이 달라지고, 2정규화는 주식별자의 일부에만 종속되는 부분 함수 종속을 제거하며, BCNF 는 결정자가 후보키인지를 따지므로 모두 주식별자와 직접 관련된다. 반면 3정규화는 주식별자가 아닌 일반 속성 사이의 이행 함수 종속을 제거하는 단계이므로 주식별자 선정과 가장 관련이 적다.",
+    "explanation": "① 1정규화는 반복되는 속성을 분리하면서 식별자 구성이 달라지고, ② 2정규화는 주식별자의 일부에만 종속되는 부분 함수 종속을 제거하며, ④ BCNF 는 결정자가 후보키인지를 따지므로 모두 주식별자와 직접 관련된다. 반면 3정규화는 주식별자가 아닌 일반 속성 사이의 이행 함수 종속을 제거하는 단계이므로 주식별자 선정과 가장 관련이 적다.",
     "_source": "authored"
   },
   {
@@ -228,7 +228,7 @@ export const ROUND_60: QuizQuestion[] = [
       "본질 식별자는 업무 규칙 변화에 따라 값이 변경될 수 있다."
     ],
     "correctIndex": 1,
-    "explanation": "본질 식별자는 업무 행위를 통해 그 값이 결정되는 속성이므로, 업무 행위가 전혀 없는 상태에서 부여되는 값은 본질 식별자로 적절하지 않다. 업무 행위 없이 부여되는 것은 인조 식별자의 특성이다.",
+    "explanation": "본질 식별자는 업무 행위를 통해 그 값이 결정되는 속성이므로, 업무 행위가 전혀 없는 상태에서 부여되는 값은 본질 식별자로 적절하지 않다. 업무 행위 없이 부여되는 것은 인조 식별자의 특성이다. ① 본질 식별자는 업무에서 자연스럽게 생기는 값이라 쉽게 파악되고, ③ 본질 식별자가 있어도 관리 편의를 위해 인조 식별자를 따로 둘 수 있으며, ④ 업무 규칙이 바뀌면 본질 식별자의 값도 바뀔 수 있다.",
     "_source": "authored"
   },
   {
@@ -246,7 +246,7 @@ export const ROUND_60: QuizQuestion[] = [
       "가, 나, 다, 라"
     ],
     "correctIndex": 3,
-    "explanation": "네 가지 모두 계층형 질의(START WITH … CONNECT BY) 안에서만 의미 있는 값을 돌려준다. LEVEL 은 계층의 깊이, CONNECT_BY_ISLEAF 는 리프 여부, CONNECT_BY_ROOT 는 루트 값으로 CONNECT BY 가 있어야 하고, CONNECT_BY_ISCYCLE 은 여기에 더해 CONNECT BY NOCYCLE 옵션이 있어야 쓸 수 있다. 그래서 가, 나, 다, 라 모두 해당한다(④).",
+    "explanation": "네 가지 모두 계층형 질의(START WITH … CONNECT BY) 안에서만 의미 있는 값을 돌려준다. LEVEL 은 계층의 깊이, CONNECT_BY_ISLEAF 는 리프 여부, CONNECT_BY_ROOT 는 루트 값으로 CONNECT BY 가 있어야 하고, CONNECT_BY_ISCYCLE 은 여기에 더해 CONNECT BY NOCYCLE 옵션이 있어야 쓸 수 있다. 그래서 가, 나, 다, 라 모두 해당한다(④). ① 은 나·다·라를, ② 는 가·라를, ③ 은 가(LEVEL)를 빠뜨렸다. LEVEL 과 CONNECT_BY_ROOT 도 CONNECT BY 가 있어야 의미가 있다.",
     "_source": "authored",
     "references": [
       {
@@ -270,7 +270,7 @@ export const ROUND_60: QuizQuestion[] = [
       "오류 발생"
     ],
     "correctIndex": 2,
-    "explanation": "EMP 테이블의 MGR 컬럼에 KING·JONES 두 행의 값이 NULL로 존재한다. NOT IN 비교는 내부적으로 모든 값에 대한 비교를 AND로 묶는데, 어떤 값과 NULL을 비교하면 UNKNOWN으로 평가되므로 전체 조건이 어떤 행에서도 참이 되지 못한다. 따라서 결과는 공집합이 된다. 만약 MGR이 모두 NOT NULL이라면 매니저로 지정된 적이 없는 직원의 행이 반환될 수 있지만, NULL이 한 건이라도 존재하면 그 가능성은 차단된다.",
+    "explanation": "EMP 테이블의 MGR 컬럼에 KING·JONES 두 행의 값이 NULL로 존재한다. NOT IN 비교는 내부적으로 모든 값에 대한 비교를 AND로 묶는데, 어떤 값과 NULL을 비교하면 UNKNOWN으로 평가되므로 전체 조건이 어떤 행에서도 참이 되지 못한다. 따라서 결과는 공집합이 된다. 만약 MGR이 모두 NOT NULL이라면 매니저로 지정된 적이 없는 직원의 행이 반환될 수 있지만, NULL이 한 건이라도 존재하면 그 가능성은 차단된다. ② 는 MGR 에 NULL 이 없을 때(또는 NOT EXISTS 를 썼을 때)의 결과이고, ① 은 NOT IN 조건이 모두 참이 된다고 본 결과이며, ④ NULL 이 섞여도 오류는 나지 않는다.",
     "_source": "authored",
     "references": [
       {
@@ -459,7 +459,7 @@ export const ROUND_60: QuizQuestion[] = [
       "3000 3000 3000"
     ],
     "correctIndex": 0,
-    "explanation": "ORDER BY SAL 오름차순 정렬 후 각 행까지의 누적 윈도우에서 FIRST_VALUE는 항상 최소값인 1000을 반환한다.",
+    "explanation": "ORDER BY SAL 오름차순 정렬 후 각 행까지의 누적 윈도우에서 FIRST_VALUE는 항상 최소값인 1000을 반환한다. ② 는 각 행의 SAL 을 그대로 쓴 결과(이 범위의 LAST_VALUE 와 같다), ③ 은 행 순서를 거꾸로 본 결과, ④ 는 최댓값 3000 을 고른 결과다.",
     "_source": "authored",
     "references": [
       {
@@ -710,7 +710,7 @@ export const ROUND_60: QuizQuestion[] = [
       "0, 0"
     ],
     "correctIndex": 0,
-    "explanation": "NULL 값은 SUM 집계에서 자동으로 제외되며, ㉠은 SAL=4인 행만 합산하여 4, ㉡은 4+9+10 = 23을 반환한다.",
+    "explanation": "NULL 값은 SUM 집계에서 자동으로 제외되며, ㉠은 SAL=4인 행만 합산하여 4, ㉡은 4+9+10 = 23을 반환한다. ②·③ 은 NULL 이 섞이면 SUM 결과도 NULL 이 된다고 본 결과인데(② 는 ㉠, ③ 은 ㉡), SUM 은 NULL 을 건너뛴다.",
     "_source": "authored",
     "references": [
       {
@@ -1012,7 +1012,7 @@ export const ROUND_60: QuizQuestion[] = [
       "CHECK"
     ],
     "correctIndex": 0,
-    "explanation": "외부 쿼리가 '=' 단일 행 비교를 사용하므로 서브쿼리 (SELECT COL2 FROM T2 WHERE A='A') 가 반드시 0행 또는 1행만 반환해야 한다. 만약 T2.A='A' 인 행이 둘 이상이면 'ORA-01427: single-row subquery returns more than one row' 오류가 발생한다. 따라서 검색 키인 T2.A 컬럼이 UNIQUE여야 'A='A''인 행이 최대 1건으로 보장된다. NOT NULL은 NULL만 막을 뿐 중복은 허용하고, FOREIGN KEY는 다른 테이블 참조를 강제, CHECK는 값 도메인을 제한할 뿐 단일성과 무관하다. 정답은 ①.",
+    "explanation": "외부 쿼리가 '=' 단일 행 비교를 사용하므로 서브쿼리 (SELECT COL2 FROM T2 WHERE A='A') 가 반드시 0행 또는 1행만 반환해야 한다. 만약 T2.A='A' 인 행이 둘 이상이면 'ORA-01427: single-row subquery returns more than one row' 오류가 발생한다. 따라서 검색 키인 T2.A 컬럼이 UNIQUE여야 'A='A''인 행이 최대 1건으로 보장된다. ② NOT NULL은 NULL만 막을 뿐 중복은 허용하고, ③ FOREIGN KEY는 다른 테이블 참조를 강제, ④ CHECK는 값 도메인을 제한할 뿐 단일성과 무관하다. 정답은 ①.",
     "_source": "authored",
     "references": [
       {
@@ -1214,7 +1214,7 @@ export const ROUND_60: QuizQuestion[] = [
       "AND 조건은 계층형 질의에서 지원되지 않는다."
     ],
     "correctIndex": 1,
-    "explanation": "`CONNECT BY` 절의 조건(`AND COL3 <> 2`) 은 트리 전개 자체에 적용되어 조건을 만족하지 못한 노드부터 그 하위 가지 전체가 따라오지 못한다. 표에서 'D2' 노드의 COL3=2 라 'D2' 가 제거되고, 그 자식인 'D2-1', 'D2-2' 도 함께 단절된다. `WHERE` 절에서 같은 조건을 주는 것과는 동작이 다르다.",
+    "explanation": "`CONNECT BY` 절의 조건(`AND COL3 <> 2`) 은 트리 전개 자체에 적용되어 조건을 만족하지 못한 노드부터 그 하위 가지 전체가 따라오지 못한다. 표에서 'D2' 노드의 COL3=2 라 'D2' 가 제거되고, 그 자식인 'D2-1', 'D2-2' 도 함께 단절된다. `WHERE` 절에서 같은 조건을 주는 것과는 동작이 다르다. ① 루트가 여러 건이어도 오류는 나지 않고(이 문제는 START WITH 로 루트가 D 하나다), ③ PRIOR 는 CONNECT BY 에서 쓰는 연산자이며, ④ CONNECT BY 에도 AND 로 조건을 덧붙일 수 있다.",
     "_source": "authored",
     "references": [
       {
@@ -1279,7 +1279,7 @@ export const ROUND_60: QuizQuestion[] = [
       "실버 2, 브론즈 1"
     ],
     "correctIndex": 1,
-    "explanation": "FETCH FIRST 2 ROWS ONLY 는 결과의 앞 2행만 돌려준다. ORDER BY 가 없으므로 문제에서는 테이블에 저장된 순서(골드, 실버, 브론즈)를 기준으로 보아 골드 1, 실버 2 가 나온다(②). 실무에서는 ORDER BY 없이 쓰면 어떤 2행이 나올지 보장되지 않으므로, 상위 N건을 뽑을 때는 반드시 ORDER BY 와 함께 쓴다.",
+    "explanation": "FETCH FIRST 2 ROWS ONLY 는 결과의 앞 2행만 돌려준다. ORDER BY 가 없으므로 문제에서는 테이블에 저장된 순서(골드, 실버, 브론즈)를 기준으로 보아 골드 1, 실버 2 가 나온다(②). 실무에서는 ORDER BY 없이 쓰면 어떤 2행이 나올지 보장되지 않으므로, 상위 N건을 뽑을 때는 반드시 ORDER BY 와 함께 쓴다. ① 은 FETCH 를 무시하고 3행을 모두 가져온 결과, ③ 은 개수 내림차순으로 정렬한 것처럼 본 결과, ④ 는 첫 행을 건너뛴(OFFSET 1) 결과다.",
     "_source": "authored",
     "references": [
       {
@@ -1343,7 +1343,7 @@ export const ROUND_60: QuizQuestion[] = [
       "오류"
     ],
     "correctIndex": 1,
-    "explanation": "NOT EXISTS는 서브쿼리에서 매칭 행이 한 건도 없을 때만 참이 된다. 주문의 ITEM 1과 2는 판매 테이블에 등장하지 않으므로 NOT EXISTS가 참이 되어 결과에 포함되고, ITEM 3은 판매에 있으므로 제외된다.",
+    "explanation": "NOT EXISTS는 서브쿼리에서 매칭 행이 한 건도 없을 때만 참이 된다. 주문의 ITEM 1과 2는 판매 테이블에 등장하지 않으므로 NOT EXISTS가 참이 되어 결과에 포함되고, ITEM 3은 판매에 있으므로 제외된다. ① 은 2 를 빠뜨린 결과이고, ③ 은 서브쿼리에 행이 하나라도 있으면 모든 행이 거짓이 된다고 본(상관 조건을 무시한) 결과이며, ④ 상관 서브쿼리를 쓴 NOT EXISTS 는 정상 문법이다.",
     "_source": "authored",
     "references": [
       {
@@ -1397,7 +1397,7 @@ export const ROUND_60: QuizQuestion[] = [
       "EXCEPT"
     ],
     "correctIndex": 1,
-    "explanation": "UNION ALL은 두 결과 집합을 그대로 합치며 중복 행을 제거하지 않고 모두 반환한다. 반면 UNION·INTERSECT·EXCEPT(MINUS)는 모두 내부적으로 중복 제거(DISTINCT)를 수행한다.",
+    "explanation": "UNION ALL은 두 결과 집합을 그대로 합치며 중복 행을 제거하지 않고 모두 반환한다. 반면 ① UNION·③ INTERSECT·④ EXCEPT(MINUS)는 모두 내부적으로 중복 제거(DISTINCT)를 수행한다.",
     "_source": "authored"
   },
   {
@@ -1415,7 +1415,7 @@ export const ROUND_60: QuizQuestion[] = [
       "4개"
     ],
     "correctIndex": 3,
-    "explanation": "UNION 연산은 위·아래 SELECT의 컬럼 개수와 데이터 타입이 일치해야 한다. 첫 SELECT에 EMPNO, ENAME, YR, SAL 4개의 컬럼이 있으므로 결과 컬럼 개수도 4개가 된다. 별칭(YR)은 첫 SELECT에서 부여한 것이 결과 컬럼명으로 사용된다.",
+    "explanation": "UNION 연산은 위·아래 SELECT의 컬럼 개수와 데이터 타입이 일치해야 한다. 첫 SELECT에 EMPNO, ENAME, YR, SAL 4개의 컬럼이 있으므로 결과 컬럼 개수도 4개가 된다. 별칭(YR)은 첫 SELECT에서 부여한 것이 결과 컬럼명으로 사용된다. ①②③ 처럼 컬럼이 줄지 않는다. 함수로 만든 YR 도 하나의 컬럼이고, UNION 은 행을 합칠 뿐 컬럼 수는 그대로다.",
     "_source": "authored",
     "references": [
       {
@@ -1481,7 +1481,7 @@ export const ROUND_60: QuizQuestion[] = [
       "GRANT, REVOKE는 DCL이다."
     ],
     "correctIndex": 0,
-    "explanation": "TRUNCATE 는 테이블의 모든 행을 삭제하면서 저장 공간까지 초기화하는 명령으로 DDL 에 속한다. 행 단위로 삭제하고 롤백할 수 있는 DELETE 와 달리 자동 커밋되는 점이 DDL 의 특징이다.",
+    "explanation": "TRUNCATE 는 테이블의 모든 행을 삭제하면서 저장 공간까지 초기화하는 명령으로 DDL 에 속한다. 행 단위로 삭제하고 롤백할 수 있는 DELETE 와 달리 자동 커밋되는 점이 DDL 의 특징이다. ②(DML), ③(DDL), ④(DCL)는 옳게 분류했다.",
     "_source": "authored"
   },
   {
@@ -1499,7 +1499,7 @@ export const ROUND_60: QuizQuestion[] = [
       "NULL"
     ],
     "correctIndex": 0,
-    "explanation": "WHERE A.컬럼1 = B.컬럼1 로 등가 조인하면 테이블1 의 1~4 가 테이블2 의 1~4 와 한 번씩 매칭되고, 테이블2 의 5 는 짝이 없어 빠진다. 매칭된 행의 컬럼2 합은 10 + 20 + 30 + 40 = 100 이다(①).",
+    "explanation": "WHERE A.컬럼1 = B.컬럼1 로 등가 조인하면 테이블1 의 1~4 가 테이블2 의 1~4 와 한 번씩 매칭되고, 테이블2 의 5 는 짝이 없어 빠진다. 매칭된 행의 컬럼2 합은 10 + 20 + 30 + 40 = 100 이다(①). ④ 짝이 없는 테이블2 의 5 는 등가 조인 결과에 들어오지 않으므로 합계가 NULL 이 되지 않는다.",
     "_source": "authored",
     "references": [
       {
@@ -1573,7 +1573,7 @@ export const ROUND_60: QuizQuestion[] = [
       "오류"
     ],
     "correctIndex": 0,
-    "explanation": "조인 조건이 없는 `FROM A, B` 는 카티션 곱(Cross Join)이라 결과 행 수 = `|A| × |B|` = 2 × 2 = 4. `COUNT(*)` 가 4 를 반환한다.",
+    "explanation": "조인 조건이 없는 `FROM A, B` 는 카티션 곱(Cross Join)이라 결과 행 수 = `|A| × |B|` = 2 × 2 = 4. `COUNT(*)` 가 4 를 반환한다. ② 2 는 한 테이블의 행 수만 센 값, ③ 0 은 조건이 없으면 조인이 안 된다고 본 값이고, ④ 조인 조건이 없어도 오류는 나지 않는다.",
     "_source": "authored",
     "references": [
       {
@@ -1627,7 +1627,7 @@ export const ROUND_60: QuizQuestion[] = [
       "100 NULL 100"
     ],
     "correctIndex": 0,
-    "explanation": "TGT.ID = (1) 이고 SRC.ID = (2) 라 ON 조건 (T.ID = S.ID) 이 매칭되지 않는다. 따라서 NOT MATCHED 분기가 실행되어 SRC 의 ID=2 행이 TGT 에 INSERT 되며, INSERT 절에서 V1·V2·V3 모두 100 을 명시했으므로 새 행은 (2, 100, 100, 100) 이 된다. MATCHED 분기가 실행되었다면 V3 는 UPDATE 대상에 없어 기존 NULL 이 남았겠지만 이 문제는 NOT MATCHED 가 동작한다.",
+    "explanation": "TGT.ID = (1) 이고 SRC.ID = (2) 라 ON 조건 (T.ID = S.ID) 이 매칭되지 않는다. 따라서 NOT MATCHED 분기가 실행되어 SRC 의 ID=2 행이 TGT 에 INSERT 되며, INSERT 절에서 V1·V2·V3 모두 100 을 명시했으므로 새 행은 (2, 100, 100, 100) 이 된다. MATCHED 분기가 실행되었다면 V3 는 UPDATE 대상에 없어 기존 NULL 이 남았겠지만 이 문제는 NOT MATCHED 가 동작한다. ② 는 MATCHED 분기처럼 V3 를 건드리지 않는다고 본 결과이고, ③④ 는 INSERT 값 일부를 빠뜨린 결과다.",
     "_source": "authored",
     "references": [
       {
@@ -1681,7 +1681,7 @@ export const ROUND_60: QuizQuestion[] = [
       "ORDER BY 절의 제품코드 별칭 사용"
     ],
     "correctIndex": 2,
-    "explanation": "SQL 처리 순서는 FROM → WHERE → … → SELECT → ORDER BY 다. WHERE 절은 SELECT 보다 먼저 처리되어 SELECT 절에서 붙인 별칭 '제품코드' 를 알 수 없으므로 오류가 난다(③). ORDER BY 는 SELECT 이후에 처리되어 별칭을 쓸 수 있다(④). SELECT 절과 FROM 절 자체에는 문제가 없다.",
+    "explanation": "SQL 처리 순서는 FROM → WHERE → … → SELECT → ORDER BY 다. WHERE 절은 SELECT 보다 먼저 처리되어 SELECT 절에서 붙인 별칭 '제품코드' 를 알 수 없으므로 오류가 난다(③). ORDER BY 는 SELECT 이후에 처리되어 별칭을 쓸 수 있다(④). ① SELECT 절과 ② FROM 절 자체에는 문제가 없다.",
     "_source": "authored",
     "references": [
       {
@@ -1741,7 +1741,7 @@ export const ROUND_60: QuizQuestion[] = [
       "3"
     ],
     "correctIndex": 1,
-    "explanation": "VAL 에 CHECK (VAL > 0) 제약이 있으므로 -1 과 0 을 넣는 INSERT 는 제약 위반으로 실패하고, 1 만 들어간다. ID 는 IDENTITY 로 자동 생성된다. 실패한 문장은 그 문장만 취소되고 COMMIT 으로 1 이 확정되어 COUNT(*) = 1 이다(②).",
+    "explanation": "VAL 에 CHECK (VAL > 0) 제약이 있으므로 -1 과 0 을 넣는 INSERT 는 제약 위반으로 실패하고, 1 만 들어간다. ID 는 IDENTITY 로 자동 생성된다. 실패한 문장은 그 문장만 취소되고 COMMIT 으로 1 이 확정되어 COUNT(*) = 1 이다(②). ① 0 은 한 문장이 실패하면 트랜잭션 전체가 취소된다고 본 값이고, ③ 2 는 0 도 CHECK (VAL > 0) 를 통과한다고 본 값, ④ 3 은 CHECK 를 무시한 값이다.",
     "_source": "authored",
     "references": [
       {
@@ -1948,7 +1948,7 @@ export const ROUND_60: QuizQuestion[] = [
       "FOREIGN KEY"
     ],
     "correctIndex": 1,
-    "explanation": "특정 컬럼이 지정한 값 집합에 한정되도록 강제하려면 CHECK 제약 조건을 사용한다. NOT NULL은 NULL 금지만, PRIMARY KEY는 유일성+NOT NULL을, FOREIGN KEY는 다른 테이블 참조를 강제할 뿐 값 도메인을 제한하지 못한다.",
+    "explanation": "특정 컬럼이 지정한 값 집합에 한정되도록 강제하려면 CHECK 제약 조건을 사용한다. ① NOT NULL은 NULL 금지만, ③ PRIMARY KEY는 유일성+NOT NULL을, ④ FOREIGN KEY는 다른 테이블 참조를 강제할 뿐 값 도메인을 제한하지 못한다.",
     "_source": "authored",
     "references": [
       {

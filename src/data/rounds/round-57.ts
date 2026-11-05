@@ -518,19 +518,20 @@ export const ROUND_57: QuizQuestion[] = [
     "round": 57,
     "subject": "2과목",
     "number": 20,
-    "title": "아래 데이터에 대한 윈도우 절 COUNT 함수 결과로 옳은 것은?",
+    "title": "아래 데이터에 대한 윈도우 함수 COUNT 결과(CNT 컬럼, ID 순)로 옳은 것은? (Oracle 기준)",
     "options": [
-      "1, 1, 1, 1",
-      "1, 2, 2, 3",
-      "1, 2, 3, 4",
-      "0, 0, 0, 0"
+      "1, 2, 5, 4, 3",
+      "3, 3, 4, 4, 3",
+      "3, 3, 5, 4, 3",
+      "5, 5, 5, 5, 5"
     ],
     "correctIndex": 2,
-    "explanation": "윈도우 절 `ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW`는 첫 행부터 현재 행까지 누적 범위를 의미한다. `COUNT(*)`는 NULL 여부와 무관하게 행 개수를 세므로, ID 1~4까지 누적되어 1, 2, 3, 4가 된다.",
+    "explanation": "OVER 안에 ORDER BY 만 있고 범위를 적지 않으면 기본 범위는 RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW 다. RANGE 는 ORDER BY 값이 같은 행을 한꺼번에 묶는다. VAL 오름차순은 3, 3, 3(ID 1·2·5) → 5(ID 4) → NULL(ID 3) 순이다(Oracle 은 NULL 을 가장 큰 값으로 봐 오름차순 맨 뒤). 그래서 VAL 3 인 세 행은 모두 3, VAL 5 는 4, NULL 행은 5 다. ID 순으로 3, 3, 5, 4, 3 이다(③). ① 은 ROWS 처럼 같은 값을 한 행씩 따로 센 결과, ② 는 COUNT(VAL) 처럼 NULL 을 빼고 센 결과(NULL 행이 4), ④ 는 ORDER BY 가 없을 때의 전체 건수다.",
     "_source": "authored",
     "references": [
       {
         "type": "table",
+        "caption": "T 테이블",
         "headers": [
           "ID",
           "VAL"
@@ -546,18 +547,21 @@ export const ROUND_57: QuizQuestion[] = [
           ],
           [
             "3",
-            "5"
+            "NULL"
           ],
           [
             "4",
+            "5"
+          ],
+          [
+            "5",
             "3"
           ]
-        ],
-        "caption": "T 테이블"
+        ]
       },
       {
         "type": "sql",
-        "code": "SELECT VAL,\n       COUNT(*) OVER (ORDER BY ID\n                      ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW)\nFROM T;"
+        "code": "SELECT ID,\n       COUNT(*) OVER (ORDER BY VAL) AS CNT\nFROM   T\nORDER BY ID;"
       }
     ]
   },
@@ -1234,15 +1238,15 @@ export const ROUND_57: QuizQuestion[] = [
     "round": 57,
     "subject": "2과목",
     "number": 41,
-    "title": "아래 TUTOR(2건), CLASS(4건) 테이블을 튜터 기준으로 LEFT OUTER JOIN 한 결과의 행 수는? (튜터별로 매칭되는 클래스가 0~다수일 수 있음)",
+    "title": "아래 TUTOR(3건), CLASS(6건) 테이블을 튜터 기준으로 LEFT OUTER JOIN 한 결과의 행 수는?",
     "options": [
-      "2건",
-      "4건",
+      "3건",
+      "5건",
       "6건",
-      "8건"
+      "7건"
     ],
-    "correctIndex": 0,
-    "explanation": "LEFT OUTER JOIN 은 좌측 테이블의 행을 모두 보존하고, 우측에 매칭되는 행이 없으면 NULL 로 채운다. TUTOR 가 2 행이고 각 튜터에 매칭되는 클래스가 하나씩이므로 결과는 좌측 행 수와 같은 2 건이다. CLASS 에만 있는 T3·T4 는 좌측 기준 조인이라 결과에 포함되지 않는다.",
+    "correctIndex": 1,
+    "explanation": "LEFT OUTER JOIN 은 왼쪽(TUTOR) 행을 모두 남기되, 오른쪽에 짝이 여러 개면 짝마다 한 행씩 만든다. T1 은 수학·영어·미술 3행, T2 는 과학 1행, T3 는 짝이 없어 NAME 이 NULL 인 1행이라 모두 5건이다(②). CLASS 의 역사(T4)와 음악(NULL)은 왼쪽에 짝이 없어 나오지 않는다. ① 3건은 \"LEFT 조인이면 왼쪽 행 수 그대로\" 라고 본 값, ③ 6건은 CLASS 행 수, ④ 7건은 FULL OUTER JOIN 의 결과(5건 + 역사 + 음악)다.",
     "_source": "authored",
     "references": [
       {
@@ -1257,6 +1261,9 @@ export const ROUND_57: QuizQuestion[] = [
           ],
           [
             "T2"
+          ],
+          [
+            "T3"
           ]
         ]
       },
@@ -1274,15 +1281,23 @@ export const ROUND_57: QuizQuestion[] = [
           ],
           [
             "영어",
-            "T2"
+            "T1"
           ],
           [
             "과학",
-            "T3"
+            "T2"
           ],
           [
             "역사",
             "T4"
+          ],
+          [
+            "음악",
+            "NULL"
+          ],
+          [
+            "미술",
+            "T1"
           ]
         ]
       },

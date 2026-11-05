@@ -340,19 +340,20 @@ export const ROUND_48: QuizQuestion[] = [
     "round": 48,
     "subject": "2과목",
     "number": 14,
-    "title": "아래 사원 테이블에 대한 SQL 의 결과로 가장 적절한 것은?",
+    "title": "아래 사원 테이블에 대한 SQL 의 결과 행 수로 옳은 것은?",
     "options": [
-      "3건 반환 (부서별 최고 연봉자: 강감찬, 김유신, 변사또)",
-      "전체 사원 7건 반환",
-      "2건 반환",
-      "1건 반환 (전체 최고 연봉자만)"
+      "3건",
+      "4건",
+      "5건",
+      "8건"
     ],
-    "correctIndex": 0,
-    "explanation": "인라인 뷰 X 가 `MAX(연봉) OVER(PARTITION BY 부서ID)` 로 각 사원에게 자기 부서의 최고 연봉을 부여한 뒤, 외부에서 `X.최고연봉 = Y.연봉` 으로 그 값과 같은 사원만 남긴다. 부서 100 = 강감찬(3000), 부서 200 = 김유신(4500), 부서 300 = 변사또(4500) 로 총 3 건이 반환된다.",
+    "correctIndex": 1,
+    "explanation": "인라인 뷰 X 는 GROUP BY 가 아니라 윈도우 함수라 행을 줄이지 않고, 사원마다 자기 부서의 최고 연봉을 붙인다: 100 은 3000, 200 은 4500, 300 은 4500, 400 은 NULL(값이 NULL 뿐이면 MAX 도 NULL). 바깥에서 자기 연봉이 부서 최고 연봉과 같은 사원만 남긴다. 100 의 강감찬, 200 의 김유신·김선달(동점 둘 다), 300 의 변사또가 남는다. 400 의 임꺽정은 NULL = NULL 이 참이 아니라 빠진다. 결과 4건이다(②). ① 3건은 동점자 중 한 명만 남긴다고 본 값, ③ 5건은 NULL 끼리 같다고 보고 임꺽정을 넣은 값, ④ 8건은 윈도우 함수 결과로 거르지 않은 전체 행 수다.",
     "_source": "authored",
     "references": [
       {
         "type": "table",
+        "caption": "사원 테이블",
         "headers": [
           "사원ID",
           "부서ID",
@@ -382,7 +383,7 @@ export const ROUND_48: QuizQuestion[] = [
             "004",
             "200",
             "김선달",
-            "3000"
+            "4500"
           ],
           [
             "005",
@@ -401,13 +402,18 @@ export const ROUND_48: QuizQuestion[] = [
             "300",
             "박문수",
             "3000"
+          ],
+          [
+            "008",
+            "400",
+            "임꺽정",
+            "NULL"
           ]
-        ],
-        "caption": "사원 테이블"
+        ]
       },
       {
         "type": "sql",
-        "code": "SELECT Y.*\nFROM (SELECT 사원ID, MAX(연봉) OVER(PARTITION BY 부서ID) AS 최고연봉 FROM 사원) X,\n     사원 Y\nWHERE X.사원ID = Y.사원ID AND X.최고연봉 = Y.연봉;"
+        "code": "SELECT Y.*\nFROM   (SELECT 사원ID, MAX(연봉) OVER (PARTITION BY 부서ID) AS 최고연봉\n        FROM   사원) X,\n       사원 Y\nWHERE  X.사원ID = Y.사원ID\nAND    X.최고연봉 = Y.연봉;"
       }
     ],
     "optionReferences": [
@@ -924,41 +930,58 @@ export const ROUND_48: QuizQuestion[] = [
     "round": 48,
     "subject": "2과목",
     "number": 26,
-    "title": "아래 T 테이블에 대한 NTILE(2) 함수 결과로 옳은 것은?",
+    "title": "아래 T 테이블에 대한 NTILE(3) 함수 결과(GRP 컬럼, 위에서부터)로 옳은 것은?",
     "options": [
-      "1, 2, 3, 4",
-      "1, 1, 2, 2",
-      "1, 4, 2, 3",
-      "1, 2, 1, 2"
+      "1, 1, 2, 2, 3, 3, 3",
+      "1, 1, 1, 2, 2, 3, 3",
+      "1, 1, 2, 2, 2, 3, 3",
+      "1, 2, 3, 1, 2, 3, 1"
     ],
     "correctIndex": 1,
-    "explanation": "NTILE(n) 은 정렬된 데이터를 n 개의 그룹으로 최대한 고르게 나누어 각 행에 그룹 번호(1~n) 를 부여한다. 4 건을 2 그룹으로 나누면 정확히 2 건씩 떨어지므로 앞 2 건은 1, 뒤 2 건은 2 가 되어 결과는 1, 1, 2, 2 이다. 분할 수(2) 를 넘는 3·4 가 등장하는 보기는 NTILE(2) 결과로 불가능하다.",
+    "explanation": "NTILE(3) 은 정렬된 행을 3개 그룹으로 최대한 고르게 나누고, 나누어떨어지지 않는 나머지는 앞 그룹부터 한 행씩 더 준다. 7행 ÷ 3 = 2 나머지 1 이라 그룹 크기는 3, 2, 2 다. SAL 내림차순 800, 750, 700 이 1, 650, 600 이 2, 550, 500 이 3 이다(②). ① 은 나머지를 마지막 그룹에 준 결과, ③ 은 가운데 그룹에 준 결과, ④ 는 행마다 1, 2, 3 을 돌아가며 붙인 결과다. 표의 ID 순서가 아니라 SAL 내림차순으로 나눈다는 점도 함께 확인해야 한다.",
     "_source": "authored",
     "references": [
       {
         "type": "table",
-        "caption": "T 테이블 (ORDER BY ID ASC)",
+        "caption": "T 테이블",
         "headers": [
-          "ID"
+          "ID",
+          "SAL"
         ],
         "rows": [
           [
-            "1"
+            "1",
+            "600"
           ],
           [
-            "2"
+            "2",
+            "800"
           ],
           [
-            "3"
+            "3",
+            "500"
           ],
           [
-            "4"
+            "4",
+            "750"
+          ],
+          [
+            "5",
+            "650"
+          ],
+          [
+            "6",
+            "550"
+          ],
+          [
+            "7",
+            "700"
           ]
         ]
       },
       {
         "type": "sql",
-        "code": "SELECT ID, NTILE(2) OVER (ORDER BY ID) AS GRP\nFROM   T;"
+        "code": "SELECT ID, SAL,\n       NTILE(3) OVER (ORDER BY SAL DESC) AS GRP\nFROM   T\nORDER BY SAL DESC;"
       }
     ]
   },

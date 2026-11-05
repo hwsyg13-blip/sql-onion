@@ -238,17 +238,18 @@ export const ROUND_46: QuizQuestion[] = [
     "number": 11,
     "title": "아래 테이블과 계층형 쿼리의 결과 행 수로 옳은 것은?",
     "options": [
-      "1건",
-      "2건",
       "3건",
-      "4건"
+      "5건",
+      "6건",
+      "8건"
     ],
-    "correctIndex": 1,
-    "explanation": "COL3=4(D)를 루트로 COL1=PRIOR COL2 방향으로 거슬러 올라가면 D→B→A가 도출되지만, WHERE 필터(COL3<>2)가 계층 전개 이후 적용되어 B(COL3=2)가 제외된다. 최종 결과는 D, A의 2건이다.",
+    "correctIndex": 2,
+    "explanation": "START WITH COL2 IS NULL 을 만족하는 행은 A 와 H 두 개라 루트가 둘이다. CONNECT BY PRIOR COL1 = COL2 는 부모의 COL1 을 COL2 로 가진 행, 즉 자식으로 내려가는 순방향이다. A 아래로 B·C, B 아래로 D·E, D 아래로 G, C 아래로 F 가 이어져 A 트리 7행, H 는 자식이 없어 1행, 모두 8행이 만들어진다. WHERE COL3 <> 2 는 트리를 다 만든 뒤 그 행만 지우므로 B 와 F 두 행만 빠지고 B 아래의 D·E·G 는 그대로 남는다. 결과 6건이다(③). ① 3건은 조건을 CONNECT BY 에 쓴 것처럼 B·F 아래 가지까지 잘라 낸 값(A, C, H), ② 5건은 루트를 A 하나로 본 값, ④ 8건은 WHERE 를 적용하지 않은 값이다.",
     "_source": "authored",
     "references": [
       {
         "type": "table",
+        "caption": "SQLD46_01 테이블",
         "headers": [
           "COL1",
           "COL2",
@@ -274,13 +275,32 @@ export const ROUND_46: QuizQuestion[] = [
             "D",
             "B",
             "4"
+          ],
+          [
+            "E",
+            "B",
+            "5"
+          ],
+          [
+            "F",
+            "C",
+            "2"
+          ],
+          [
+            "G",
+            "D",
+            "6"
+          ],
+          [
+            "H",
+            "NULL",
+            "7"
           ]
-        ],
-        "caption": "SQLD46_01 테이블"
+        ]
       },
       {
         "type": "sql",
-        "code": "SELECT *\nFROM   SQLD46_01\nWHERE  COL3 <> 2\nSTART WITH COL3 = 4\nCONNECT BY COL1 = PRIOR COL2;"
+        "code": "SELECT *\nFROM   SQLD46_01\nWHERE  COL3 <> 2\nSTART WITH COL2 IS NULL\nCONNECT BY PRIOR COL1 = COL2;"
       }
     ]
   },
@@ -601,15 +621,15 @@ export const ROUND_46: QuizQuestion[] = [
     "round": 46,
     "subject": "2과목",
     "number": 19,
-    "title": "아래 세 테이블에 대한 SQL 의 결과 행 수로 옳은 것은?",
+    "title": "아래 세 테이블에 대한 SQL 의 결과 행 수로 옳은 것은? (Oracle 기준)",
     "options": [
       "3건",
       "4건",
-      "5건",
-      "오류 발생"
+      "6건",
+      "7건"
     ],
-    "correctIndex": 1,
-    "explanation": "T1 UNION T2 = {1, 2, 3, 4, 5} (UNION 은 중복 제거). 거기서 T3 = {2} 를 MINUS 하면 {1, 3, 4, 5} 로 총 4 건이다.",
+    "correctIndex": 0,
+    "explanation": "Oracle 은 집합 연산자의 우선순위가 같아 괄호가 없으면 위에서부터 계산한다. ① T1 UNION ALL T2 = 1, 2, 3, 3, NULL, 3, 4, 5, NULL (9행, 중복 그대로). ② 여기에서 T3 = {2, 3, NULL, 6} 을 MINUS 하면, MINUS 는 결과의 중복도 지우고 집합 연산이라 NULL 끼리도 같은 값으로 본다. 2·3·NULL 이 모두 빠지고 1, 4, 5 만 남아 3건이다(①). ② 4건은 NULL 끼리는 같지 않다고 보고 NULL 을 남긴 값, ③ 6건은 MINUS 가 같은 값을 한 번씩만 빼고 중복을 남긴다고 본 값(1, 3, 3, NULL, 4, 5), ④ 7건은 MINUS 를 먼저 계산(T2 MINUS T3 = 4, 5)한 뒤 T1 에 붙인 값이다.",
     "_source": "authored",
     "references": [
       {
@@ -627,6 +647,12 @@ export const ROUND_46: QuizQuestion[] = [
           ],
           [
             "3"
+          ],
+          [
+            "3"
+          ],
+          [
+            "NULL"
           ]
         ]
       },
@@ -645,6 +671,9 @@ export const ROUND_46: QuizQuestion[] = [
           ],
           [
             "5"
+          ],
+          [
+            "NULL"
           ]
         ]
       },
@@ -657,12 +686,21 @@ export const ROUND_46: QuizQuestion[] = [
         "rows": [
           [
             "2"
+          ],
+          [
+            "3"
+          ],
+          [
+            "NULL"
+          ],
+          [
+            "6"
           ]
         ]
       },
       {
         "type": "sql",
-        "code": "SELECT COL FROM T1\nUNION\nSELECT COL FROM T2\nMINUS\nSELECT COL FROM T3;"
+        "code": "SELECT COL FROM T1\nUNION ALL\nSELECT COL FROM T2\nMINUS\nSELECT COL FROM T3;"
       }
     ]
   },
@@ -808,7 +846,7 @@ export const ROUND_46: QuizQuestion[] = [
     "round": 46,
     "subject": "2과목",
     "number": 23,
-    "title": "아래 T 테이블에서 정렬 조건의 중복 값을 동일 합으로 처리하는 윈도우 절은? (기대 결과: (A, 300), (A, 300), (A, 300))",
+    "title": "아래 T 테이블에서 기대 결과처럼 정렬 값이 같은 행에 같은 누적 합을 주는 윈도우 절은?",
     "options": [
       "ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW",
       "RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW",
@@ -816,12 +854,12 @@ export const ROUND_46: QuizQuestion[] = [
       "ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING"
     ],
     "correctIndex": 1,
-    "explanation": "ORDER BY 키에 중복이 있을 때 ROWS는 물리적 행 단위로 누적하여 결과가 달라지는 반면, RANGE는 동일 값을 하나의 논리적 범위로 처리해 동일 누적 합을 반환한다.",
+    "explanation": "A 그룹의 AMT 100 인 두 행이 모두 200 을 받는 것이 핵심이다. RANGE 는 ORDER BY 값이 같은 행을 한꺼번에 범위에 넣으므로 A 의 100 두 행은 100 + 100 = 200, 200 행은 400, B 의 300 두 행은 600 이 된다(②). ① ROWS 누적은 같은 값도 한 행씩 따로 더해 A 가 100, 200, 400 이 된다. ③ 앞뒤 1행 합은 A 가 200, 400, 300 이다. ④ 처음부터 끝까지는 A 세 행이 모두 400 이다. B 그룹만 보면 ②·③·④ 가 모두 600, 600 이라 구분되지 않으므로 반드시 A 그룹으로 판단해야 한다. ORDER BY 만 쓰고 범위를 생략해도 기본값이 RANGE 라 ② 와 같다.",
     "_source": "authored",
     "references": [
       {
         "type": "table",
-        "caption": "T 테이블 (GRP=A 그룹의 AMT 가 모두 동일)",
+        "caption": "T 테이블",
         "headers": [
           "ID",
           "GRP",
@@ -841,13 +879,59 @@ export const ROUND_46: QuizQuestion[] = [
           [
             "3",
             "A",
-            "100"
+            "200"
+          ],
+          [
+            "4",
+            "B",
+            "300"
+          ],
+          [
+            "5",
+            "B",
+            "300"
           ]
         ]
       },
       {
         "type": "sql",
-        "code": "SELECT GRP, SUM(AMT) OVER (\n  PARTITION BY GRP\n  ORDER BY AMT\n  [ ? ]\n) AS RUNNING_SUM\nFROM T;"
+        "code": "SELECT ID, GRP, SUM(AMT) OVER (\n  PARTITION BY GRP\n  ORDER BY AMT\n  [ ? ]\n) AS RUNNING_SUM\nFROM T;"
+      },
+      {
+        "type": "table",
+        "caption": "기대 결과",
+        "headers": [
+          "ID",
+          "GRP",
+          "RUNNING_SUM"
+        ],
+        "rows": [
+          [
+            "1",
+            "A",
+            "200"
+          ],
+          [
+            "2",
+            "A",
+            "200"
+          ],
+          [
+            "3",
+            "A",
+            "400"
+          ],
+          [
+            "4",
+            "B",
+            "600"
+          ],
+          [
+            "5",
+            "B",
+            "600"
+          ]
+        ]
       }
     ]
   },
@@ -1315,13 +1399,13 @@ export const ROUND_46: QuizQuestion[] = [
     "number": 39,
     "title": "아래 두 테이블에 대해 NOT IN 서브쿼리를 사용한 SQL 의 결과 행 수로 옳은 것은? (T2.COL2 에 NULL 포함)",
     "options": [
-      "T1의 모든 행",
-      "T1 중 COL1이 T2.COL2에 존재하지 않는 행",
       "0건",
+      "2건",
+      "3건",
       "오류 발생"
     ],
-    "correctIndex": 2,
-    "explanation": "`NOT IN` 목록에 NULL 이 포함되면 `COL1 <> NULL` 평가가 UNKNOWN 이 되어 어떤 행도 조건을 TRUE 로 만족시키지 못한다. 따라서 결과는 0 건이다.",
+    "correctIndex": 1,
+    "explanation": "T2 에 NULL 이 있다고 바로 0건을 고르면 틀린다. 서브쿼리 안의 WHERE COL2 > 1 이 먼저 적용되는데, NULL > 1 은 UNKNOWN 이라 NULL 행은 서브쿼리 결과에서 빠진다. 서브쿼리 결과는 {2, 3, 5} 이고, COL1 NOT IN (2, 3, 5) 를 만족하는 행은 1 과 4 뿐이다. T1 의 NULL 행은 NULL <> 2 가 UNKNOWN 이라 남지 않는다. 그래서 2건이다(②). ① 0건은 서브쿼리 결과에 NULL 이 남아 있을 때(WHERE COL2 > 1 이 없을 때)의 결과이고, ③ 3건은 T1 의 NULL 행까지 센 값이며, ④ NOT IN 에 NULL 이 섞여도 오류는 나지 않는다.",
     "_source": "authored",
     "references": [
       {
@@ -1339,6 +1423,12 @@ export const ROUND_46: QuizQuestion[] = [
           ],
           [
             "3"
+          ],
+          [
+            "4"
+          ],
+          [
+            "NULL"
           ]
         ]
       },
@@ -1357,12 +1447,15 @@ export const ROUND_46: QuizQuestion[] = [
           ],
           [
             "NULL"
+          ],
+          [
+            "5"
           ]
         ]
       },
       {
         "type": "sql",
-        "code": "SELECT *\nFROM   T1\nWHERE  COL1 NOT IN (SELECT COL2 FROM T2);"
+        "code": "SELECT *\nFROM   T1\nWHERE  COL1 NOT IN (SELECT COL2\n                    FROM   T2\n                    WHERE  COL2 > 1);"
       }
     ]
   },
@@ -1489,19 +1582,20 @@ export const ROUND_46: QuizQuestion[] = [
     "round": 46,
     "subject": "2과목",
     "number": 44,
-    "title": "아래 SQL의 결과로 옳은 것은?",
+    "title": "아래 SQL의 결과로 옳은 것은? (Oracle 기준, 출력 순서대로)",
     "options": [
-      "(A,150), (B,140)",
-      "(A,150), (C,130)",
-      "(C,130), (D,120)",
-      "(A,150), (D,120)"
+      "(E,160), (A,150)",
+      "(D,NULL), (E,160)",
+      "(C,130), (B,140)",
+      "(A,150), (B,140)"
     ],
-    "correctIndex": 0,
-    "explanation": "인라인 뷰에서 급여 내림차순으로 ROW_NUMBER 를 매기면 A(150)=1, B(140)=2, C(130)=3, D(120)=4 이다. 바깥 쿼리에서 RN <= 2 인 행만 남기므로 (A,150), (B,140) 이다(①).",
+    "correctIndex": 1,
+    "explanation": "Oracle 은 NULL 을 가장 큰 값으로 보므로 내림차순(DESC)에서 NULL 이 맨 앞에 온다. 급여 내림차순은 D(NULL), E(160), A(150), B(140), C(130) 이고 RN 은 이 순서로 1, 2, 3 … 이다. RN <= 2 는 D 와 E 다(②). ① 은 NULL 이 맨 뒤에 온다고 본 결과(NULLS LAST 또는 SQL Server 방식)로, 급여가 가장 높은 두 명을 뽑으려면 ORDER BY 급여 DESC NULLS LAST 처럼 써야 한다. ③ 은 오름차순으로 번호를 매긴 결과, ④ 는 정렬 없이 표의 위에서부터 두 행을 고른 결과다.",
     "_source": "authored",
     "references": [
       {
         "type": "table",
+        "caption": "EMP 테이블",
         "headers": [
           "이름",
           "급여"
@@ -1521,14 +1615,17 @@ export const ROUND_46: QuizQuestion[] = [
           ],
           [
             "D",
-            "120"
+            "NULL"
+          ],
+          [
+            "E",
+            "160"
           ]
-        ],
-        "caption": "EMP 테이블"
+        ]
       },
       {
         "type": "sql",
-        "code": "SELECT 이름, 급여\nFROM   ( SELECT 이름, 급여,\n                ROW_NUMBER() OVER (ORDER BY 급여 DESC) AS RN\n         FROM   EMP )\nWHERE  RN <= 2;"
+        "code": "SELECT 이름, 급여\nFROM   ( SELECT 이름, 급여,\n                ROW_NUMBER() OVER (ORDER BY 급여 DESC) AS RN\n         FROM   EMP )\nWHERE  RN <= 2\nORDER BY RN;"
       }
     ]
   },

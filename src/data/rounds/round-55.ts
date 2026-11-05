@@ -437,17 +437,18 @@ export const ROUND_55: QuizQuestion[] = [
     "number": 14,
     "title": "아래 TAB1 테이블에 대한 SQL 의 결과로 옳은 것은?",
     "options": [
-      "3",
-      "6",
       "4",
-      "8"
+      "5",
+      "8",
+      "9"
     ],
-    "correctIndex": 1,
-    "explanation": "`GROUP BY ROLLUP(COL1), COL1` 은 `GROUP BY COL1 UNION ALL GROUP BY COL1` 과 동일하다 (ROLLUP 의 소계가 COL1 별 그룹과 결합됨). 그룹 = {A, B, C} 3 개 × 2 회 = 6 행이 산출되고 외부 `COUNT(*)` 가 6 을 반환한다.",
+    "correctIndex": 2,
+    "explanation": "GROUP BY ROLLUP(COL1), COL1 은 ROLLUP(COL1) 이 만드는 (COL1) 과 () 각각에 뒤의 COL1 이 붙는다. 그래서 묶음은 (COL1, COL1) 과 (COL1) 인데, 둘 다 결국 COL1 별 묶음이라 같은 그룹이 두 번 나온다(Oracle 은 이 중복을 지우지 않는다). COL1 의 값은 A, B, C, NULL 4개다. 원래 값이 NULL 인 행도 하나의 그룹이다. 결과 4 × 2 = 8행이고 COUNT(*) 는 8 이다(③). ① 4 는 GROUP BY COL1 과 같다고 본 값, ② 5 는 ROLLUP(COL1) 만 있는 것처럼 총계 1행을 더한 값, ④ 9 는 중복 8행에 총계까지 더한 값이다. 뒤에 COL1 이 또 있으므로 총계 () 묶음은 만들어지지 않는다.",
     "_source": "authored",
     "references": [
       {
         "type": "table",
+        "caption": "TAB1 테이블",
         "headers": [
           "COL1",
           "COL2"
@@ -468,9 +469,12 @@ export const ROUND_55: QuizQuestion[] = [
           [
             "C",
             "400"
+          ],
+          [
+            "NULL",
+            "500"
           ]
-        ],
-        "caption": "TAB1 테이블"
+        ]
       },
       {
         "type": "sql",
@@ -750,40 +754,89 @@ export const ROUND_55: QuizQuestion[] = [
     "number": 21,
     "title": "아래 네 테이블에 대한 SQL 의 결과 행 수는?",
     "options": [
-      "1 건",
+      "2 건",
       "3 건",
-      "0 건",
-      "매칭되지 않는 모든 T1 행"
+      "4 건",
+      "5 건"
     ],
-    "correctIndex": 0,
-    "explanation": "마지막 `INNER JOIN T4` 가 이전까지의 OUTER JOIN 결과 중 T4 와 매칭되는 행만 남긴다. 네 테이블 공통 ID 는 1 한 건이라 최종 1 행이 반환된다.",
+    "correctIndex": 1,
+    "explanation": "조인은 위에서부터 차례로 한다. T1 LEFT JOIN T2: 1-1, 2-2, 2-2(T2 에 2 가 두 개), 3-NULL, 4-4 로 5행. 이어서 LEFT JOIN T3 (T2.ID 기준): 1 과 2 두 행은 T3 와 짝이 있고, T2 가 NULL 인 행과 4 는 짝이 없어 T3 가 NULL 인 채 남아 여전히 5행. 마지막 INNER JOIN T4 ON T3.ID = T4.ID 는 짝이 있는 행만 남기므로 T3.ID 가 1 인 1행과 2 인 2행만 남고 NULL 인 행은 사라진다. 결과 3건이다(②). ① 2건은 T2 의 중복된 2 를 하나로 본 값, ③ 4건은 LEFT 조인이라 T1 의 4행이 그대로 남는다고 본 값, ④ 5건은 마지막 INNER JOIN 이 앞의 OUTER 결과를 줄이지 않는다고 본 값이다. 앞에서 OUTER 로 살린 행도 뒤의 INNER JOIN 에서 짝이 없으면 지워진다.",
     "_source": "authored",
     "references": [
       {
         "type": "table",
+        "caption": "T1",
         "headers": [
-          "테이블",
-          "ID 값"
+          "ID"
         ],
         "rows": [
           [
-            "T1",
-            "1, 2, 3"
-          ],
-          [
-            "T2",
-            "1, 2"
-          ],
-          [
-            "T3",
-            "1, 2"
-          ],
-          [
-            "T4",
             "1"
+          ],
+          [
+            "2"
+          ],
+          [
+            "3"
+          ],
+          [
+            "4"
           ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "T2",
+        "headers": [
+          "ID"
         ],
-        "caption": "테이블별 ID 값"
+        "rows": [
+          [
+            "1"
+          ],
+          [
+            "2"
+          ],
+          [
+            "2"
+          ],
+          [
+            "4"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "T3",
+        "headers": [
+          "ID"
+        ],
+        "rows": [
+          [
+            "1"
+          ],
+          [
+            "2"
+          ],
+          [
+            "5"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "T4",
+        "headers": [
+          "ID"
+        ],
+        "rows": [
+          [
+            "1"
+          ],
+          [
+            "2"
+          ]
+        ]
       },
       {
         "type": "sql",
@@ -896,38 +949,61 @@ export const ROUND_55: QuizQuestion[] = [
     "round": 55,
     "subject": "2과목",
     "number": 25,
-    "title": "아래 SQL 의 결과로 옳은 것은?",
+    "title": "아래 SQL 의 결과로 출력되는 ID 로 옳은 것은? (Oracle 기준)",
     "options": [
-      "1, 40 / 2, 150",
-      "2, 150 / 1, 40",
-      "1, 40 / 1, 40",
-      "2, 150 / 2, 150"
+      "2, 5",
+      "2, 3, 4, 5",
+      "2, 3, 4, 6",
+      "1, 2, 4, 6"
     ],
     "correctIndex": 1,
-    "explanation": "내부 쿼리에서 VAL DESC 기준 RN=1이 (2, 150), RN=2가 (1, 40)으로 부여된다. 외부 ORDER BY RN은 오름차순이므로 RN=1인 (2, 150)이 먼저 출력되고 RN=2인 (1, 40)이 뒤에 출력된다.",
+    "explanation": "GRP 별로 따로 번호를 매긴다. A: VAL 내림차순에 동점(150)은 ID 순이라 ID 2 가 1, ID 3 이 2, ID 1(40) 이 3. B: Oracle 은 내림차순에서 NULL 이 맨 앞이라 ID 5(NULL) 가 1, ID 4(90) 가 2, ID 6(70) 이 3. RN <= 2 인 ID 는 2, 3, 4, 5 이고 ID 순으로 출력된다(②). ① 은 PARTITION BY 를 무시하고 전체에서 2명을 뽑은 결과(NULL 인 5 와 150 인 2), ③ 은 NULL 이 맨 뒤에 온다고 본 결과, ④ 는 오름차순으로 번호를 매긴 결과다. 150 이 동점이어도 ROW_NUMBER 는 번호를 1, 2 로 나누므로 두 명 모두 RN <= 2 에 든다.",
     "_source": "authored",
     "references": [
       {
         "type": "table",
+        "caption": "T 테이블",
         "headers": [
           "ID",
+          "GRP",
           "VAL"
         ],
         "rows": [
           [
             "1",
+            "A",
             "40"
           ],
           [
             "2",
+            "A",
             "150"
+          ],
+          [
+            "3",
+            "A",
+            "150"
+          ],
+          [
+            "4",
+            "B",
+            "90"
+          ],
+          [
+            "5",
+            "B",
+            "NULL"
+          ],
+          [
+            "6",
+            "B",
+            "70"
           ]
-        ],
-        "caption": "T 테이블"
+        ]
       },
       {
         "type": "sql",
-        "code": "SELECT *\nFROM   (SELECT ID, VAL, ROW_NUMBER() OVER (ORDER BY VAL DESC) AS RN\n        FROM   T)\nORDER BY RN;"
+        "code": "SELECT ID, RN\nFROM   (SELECT ID, VAL,\n               ROW_NUMBER() OVER (PARTITION BY GRP\n                                  ORDER BY VAL DESC, ID) AS RN\n        FROM   T)\nWHERE  RN <= 2\nORDER BY ID;"
       }
     ]
   },
