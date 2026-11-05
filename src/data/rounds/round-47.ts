@@ -399,7 +399,7 @@ export const ROUND_47: QuizQuestion[] = [
       "LAG(VAL, 1, 0)"
     ],
     "correctIndex": 3,
-    "explanation": "PARTITION BY 지점 이라 A(ID 1, 2, 4)와 B(ID 3, 5)를 따로 본다. 결과를 지점 안에서 보면 A 는 0, 100, 200, B 는 0, 300 으로 \"같은 지점의 바로 앞 행 값, 앞 행이 없으면 0\" 이다. LAG(값, 1, 0) 은 1행 앞의 값을 가져오고 앞 행이 없으면 세 번째 인자 0 을 돌려준다(④). ① LAG(VAL) 은 기본값이 없어 첫 행이 NULL 이다. ② LEAD 는 다음 행 값(A: 200, 400, 0)이다. ③ 2행 앞은 A 가 0, 0, 100 이다. 표의 ID 순서(1, 2, 3, 4, 5)대로 앞 행을 보면 ID 4 의 PREV 가 300 이어야 하는데 실제는 200 이므로, 지점별로 나누었다는 것을 결과에서 읽어 낼 수 있다. ※ 복원 자료의 표가 단순해 실제 시험 수준으로 데이터·SQL 을 보강했다(묻는 개념은 같다).",
+    "explanation": "PARTITION BY 지점 이라 A(ID 1, 2, 4)와 B(ID 3, 5)를 따로 본다. 결과를 지점 안에서 보면 A 는 0, 100, 200, B 는 0, 300 으로 \"같은 지점의 바로 앞 행 값, 앞 행이 없으면 0\" 이다. LAG(값, 1, 0) 은 1행 앞의 값을 가져오고 앞 행이 없으면 세 번째 인자 0 을 돌려준다(④). ① LAG(VAL) 은 기본값이 없어 첫 행이 NULL 이다. ② LEAD 는 다음 행 값(A: 200, 400, 0)이다. ③ 2행 앞은 A 가 0, 0, 100 이다. 표의 ID 순서(1, 2, 3, 4, 5)대로 앞 행을 보면 ID 4 의 PREV 가 300 이어야 하는데 실제는 200 이므로, 지점별로 나누었다는 것을 결과에서 읽어 낼 수 있다.",
     "_source": "authored",
     "references": [
       {
@@ -1369,7 +1369,7 @@ export const ROUND_47: QuizQuestion[] = [
       "그룹 함수 오류"
     ],
     "correctIndex": 0,
-    "explanation": "ID 로 묶으면 A(3행), B(1행), C(2행), D(2행) 네 그룹이다. HAVING 은 COUNT(*) 가 아니라 COUNT(VAL) 로 거르는데, COUNT(VAL) 은 NULL 을 빼고 센다: A 2, B 1, C 0, D 2. 그래서 A 와 D 만 남고, SELECT 의 COUNT(*) 는 그룹의 전체 행 수라 A 는 3, D 는 2 다. ID 순으로 3, 2 두 행이다(①). ② 는 COUNT(VAL) 도 NULL 을 센다고 본 결과(C 가 남음)이고, ③ 은 COUNT(VAL) 이 같은 값(D 의 40, 40)을 한 번만 센다고 본 결과다(그건 COUNT(DISTINCT VAL)). ④ SELECT 에 집계 함수만 있고 ORDER BY 의 ID 는 GROUP BY 컬럼이라 오류가 나지 않는다. ※ 복원 자료의 표가 단순해 실제 시험 수준으로 데이터·SQL 을 보강했다(묻는 개념은 같다).",
+    "explanation": "ID 로 묶으면 A(3행), B(1행), C(2행), D(2행) 네 그룹이다. HAVING 은 COUNT(*) 가 아니라 COUNT(VAL) 로 거르는데, COUNT(VAL) 은 NULL 을 빼고 센다: A 2, B 1, C 0, D 2. 그래서 A 와 D 만 남고, SELECT 의 COUNT(*) 는 그룹의 전체 행 수라 A 는 3, D 는 2 다. ID 순으로 3, 2 두 행이다(①). ② 는 COUNT(VAL) 도 NULL 을 센다고 본 결과(C 가 남음)이고, ③ 은 COUNT(VAL) 이 같은 값(D 의 40, 40)을 한 번만 센다고 본 결과다(그건 COUNT(DISTINCT VAL)). ④ SELECT 에 집계 함수만 있고 ORDER BY 의 ID 는 GROUP BY 컬럼이라 오류가 나지 않는다.",
     "_source": "authored",
     "references": [
       {
@@ -1571,7 +1571,7 @@ export const ROUND_47: QuizQuestion[] = [
       "3, 4, 5, 7"
     ],
     "correctIndex": 2,
-    "explanation": "부서마다 연봉 내림차순으로 RANK 를 매기고 1위만 남긴다. A 는 COL1 5 와 3 이 5000 으로 동점이라 RANK 가 둘 다 1 이다. B 는 4(4500) 가 1위. C 는 Oracle 이 NULL 을 가장 큰 값으로 보므로 내림차순에서 NULL 인 6 이 1위다. COL1 순으로 3, 4, 5, 6 이다(③). ① 은 동점 중 하나만 남기고(ROW_NUMBER 처럼) C 도 뺀 결과, ② 는 연봉이 NULL 인 C 부서에 1위가 없다고 본 결과, ④ 는 NULL 이 맨 뒤에 온다고 보고 C 의 1위를 7 로 본 결과다(NULLS LAST 를 쓰면 실제로 ④ 가 된다). ※ 복원 자료의 표가 단순해 실제 시험 수준으로 데이터·SQL 을 보강했다(묻는 개념은 같다).",
+    "explanation": "부서마다 연봉 내림차순으로 RANK 를 매기고 1위만 남긴다. A 는 COL1 5 와 3 이 5000 으로 동점이라 RANK 가 둘 다 1 이다. B 는 4(4500) 가 1위. C 는 Oracle 이 NULL 을 가장 큰 값으로 보므로 내림차순에서 NULL 인 6 이 1위다. COL1 순으로 3, 4, 5, 6 이다(③). ① 은 동점 중 하나만 남기고(ROW_NUMBER 처럼) C 도 뺀 결과, ② 는 연봉이 NULL 인 C 부서에 1위가 없다고 본 결과, ④ 는 NULL 이 맨 뒤에 온다고 보고 C 의 1위를 7 로 본 결과다(NULLS LAST 를 쓰면 실제로 ④ 가 된다).",
     "_source": "authored",
     "references": [
       {

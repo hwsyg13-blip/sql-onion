@@ -998,7 +998,7 @@ export const ROUND_58: QuizQuestion[] = [
       "11 1004 / 11 1002 / 10 1002"
     ],
     "correctIndex": 0,
-    "explanation": "첫 기준 EMPNO 내림차순에 NULLS LAST 를 붙였으므로 EMPNO 가 NULL 인 행(1003)은 맨 뒤로 간다: 12, 11, 11, 10, 10, NULL. EMPNO 가 같은 11 두 행은 두 번째 기준 DEPTNO 내림차순이라 1004 가 먼저다. 앞 3행은 (12, NULL), (11, 1004), (11, 1002) 다(①). ② 는 Oracle 의 DESC 기본값(NULLS FIRST)대로 NULL 을 맨 앞에 둔 결과로, NULLS LAST 를 무시했다. ③ 은 두 번째 기준을 오름차순으로 본 결과, ④ 는 NULLS LAST 가 DEPTNO 가 NULL 인 행(12)까지 뒤로 보낸다고 본 결과다. NULLS LAST 는 바로 앞의 정렬 기준(EMPNO)에만 적용된다. ※ 복원 자료의 표가 단순해 실제 시험 수준으로 데이터·SQL 을 보강했다(묻는 개념은 같다).",
+    "explanation": "첫 기준 EMPNO 내림차순에 NULLS LAST 를 붙였으므로 EMPNO 가 NULL 인 행(1003)은 맨 뒤로 간다: 12, 11, 11, 10, 10, NULL. EMPNO 가 같은 11 두 행은 두 번째 기준 DEPTNO 내림차순이라 1004 가 먼저다. 앞 3행은 (12, NULL), (11, 1004), (11, 1002) 다(①). ② 는 Oracle 의 DESC 기본값(NULLS FIRST)대로 NULL 을 맨 앞에 둔 결과로, NULLS LAST 를 무시했다. ③ 은 두 번째 기준을 오름차순으로 본 결과, ④ 는 NULLS LAST 가 DEPTNO 가 NULL 인 행(12)까지 뒤로 보낸다고 본 결과다. NULLS LAST 는 바로 앞의 정렬 기준(EMPNO)에만 적용된다.",
     "_source": "authored",
     "references": [
       {
@@ -1618,7 +1618,7 @@ export const ROUND_58: QuizQuestion[] = [
       "12"
     ],
     "correctIndex": 3,
-    "explanation": "CUBE(A, B) 는 (A, B), (A), (B), () 네 가지 묶음을 모두 만든다. (A, B): X-1, X-2, Y-1, Y-NULL, Z-NULL 5행(원래 값이 NULL 인 B 도 하나의 그룹이다). (A): X, Y, Z 3행. (B): 1, 2, NULL 3행. (): 총계 1행. 합계 5 + 3 + 3 + 1 = 12 행이다(④). ① 5 는 GROUP BY A, B 만의 결과, ② 9 는 ROLLUP(A, B) 로 본 값(5 + 3 + 1), ③ 11 은 B 가 NULL 인 그룹을 (B) 소계에서 빼고 센 값이다. 원래 데이터의 NULL 그룹과 소계 행의 NULL 은 GROUPING 함수로 구분한다. ※ 복원 자료의 표가 단순해 실제 시험 수준으로 데이터·SQL 을 보강했다(묻는 개념은 같다).",
+    "explanation": "CUBE(A, B) 는 (A, B), (A), (B), () 네 가지 묶음을 모두 만든다. (A, B): X-1, X-2, Y-1, Y-NULL, Z-NULL 5행(원래 값이 NULL 인 B 도 하나의 그룹이다). (A): X, Y, Z 3행. (B): 1, 2, NULL 3행. (): 총계 1행. 합계 5 + 3 + 3 + 1 = 12 행이다(④). ① 5 는 GROUP BY A, B 만의 결과, ② 9 는 ROLLUP(A, B) 로 본 값(5 + 3 + 1), ③ 11 은 B 가 NULL 인 그룹을 (B) 소계에서 빼고 센 값이다. 원래 데이터의 NULL 그룹과 소계 행의 NULL 은 GROUPING 함수로 구분한다.",
     "_source": "authored",
     "references": [
       {

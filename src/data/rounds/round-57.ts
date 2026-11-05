@@ -526,7 +526,7 @@ export const ROUND_57: QuizQuestion[] = [
       "5, 5, 5, 5, 5"
     ],
     "correctIndex": 2,
-    "explanation": "OVER 안에 ORDER BY 만 있고 범위를 적지 않으면 기본 범위는 RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW 다. RANGE 는 ORDER BY 값이 같은 행을 한꺼번에 묶는다. VAL 오름차순은 3, 3, 3(ID 1·2·5) → 5(ID 4) → NULL(ID 3) 순이다(Oracle 은 NULL 을 가장 큰 값으로 봐 오름차순 맨 뒤). 그래서 VAL 3 인 세 행은 모두 3, VAL 5 는 4, NULL 행은 5 다. ID 순으로 3, 3, 5, 4, 3 이다(③). ① 은 ROWS 처럼 같은 값을 한 행씩 따로 센 결과, ② 는 COUNT(VAL) 처럼 NULL 을 빼고 센 결과(NULL 행이 4), ④ 는 ORDER BY 가 없을 때의 전체 건수다. ※ 복원 자료의 표가 단순해 실제 시험 수준으로 데이터·SQL 을 보강했다(묻는 개념은 같다).",
+    "explanation": "OVER 안에 ORDER BY 만 있고 범위를 적지 않으면 기본 범위는 RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW 다. RANGE 는 ORDER BY 값이 같은 행을 한꺼번에 묶는다. VAL 오름차순은 3, 3, 3(ID 1·2·5) → 5(ID 4) → NULL(ID 3) 순이다(Oracle 은 NULL 을 가장 큰 값으로 봐 오름차순 맨 뒤). 그래서 VAL 3 인 세 행은 모두 3, VAL 5 는 4, NULL 행은 5 다. ID 순으로 3, 3, 5, 4, 3 이다(③). ① 은 ROWS 처럼 같은 값을 한 행씩 따로 센 결과, ② 는 COUNT(VAL) 처럼 NULL 을 빼고 센 결과(NULL 행이 4), ④ 는 ORDER BY 가 없을 때의 전체 건수다.",
     "_source": "authored",
     "references": [
       {
@@ -1246,7 +1246,7 @@ export const ROUND_57: QuizQuestion[] = [
       "7건"
     ],
     "correctIndex": 1,
-    "explanation": "LEFT OUTER JOIN 은 왼쪽(TUTOR) 행을 모두 남기되, 오른쪽에 짝이 여러 개면 짝마다 한 행씩 만든다. T1 은 수학·영어·미술 3행, T2 는 과학 1행, T3 는 짝이 없어 NAME 이 NULL 인 1행이라 모두 5건이다(②). CLASS 의 역사(T4)와 음악(NULL)은 왼쪽에 짝이 없어 나오지 않는다. ① 3건은 \"LEFT 조인이면 왼쪽 행 수 그대로\" 라고 본 값, ③ 6건은 CLASS 행 수, ④ 7건은 FULL OUTER JOIN 의 결과(5건 + 역사 + 음악)다. ※ 복원 자료의 표가 단순해 실제 시험 수준으로 데이터·SQL 을 보강했다(묻는 개념은 같다).",
+    "explanation": "LEFT OUTER JOIN 은 왼쪽(TUTOR) 행을 모두 남기되, 오른쪽에 짝이 여러 개면 짝마다 한 행씩 만든다. T1 은 수학·영어·미술 3행, T2 는 과학 1행, T3 는 짝이 없어 NAME 이 NULL 인 1행이라 모두 5건이다(②). CLASS 의 역사(T4)와 음악(NULL)은 왼쪽에 짝이 없어 나오지 않는다. ① 3건은 \"LEFT 조인이면 왼쪽 행 수 그대로\" 라고 본 값, ③ 6건은 CLASS 행 수, ④ 7건은 FULL OUTER JOIN 의 결과(5건 + 역사 + 음악)다.",
     "_source": "authored",
     "references": [
       {

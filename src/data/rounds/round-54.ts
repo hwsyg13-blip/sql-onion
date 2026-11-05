@@ -994,7 +994,7 @@ export const ROUND_54: QuizQuestion[] = [
       "5 (전체 건수)"
     ],
     "correctIndex": 1,
-    "explanation": "서브쿼리에서 NVL 이 NULL 을 0 으로 바꾸므로 결과는 {1, 2, 0} 이고 NULL 이 없다. 그래서 NOT IN 이 정상 동작한다. TAB2 에서 3 과 4 는 1, 2, 0 어느 것과도 같지 않아 남고, TAB2 의 NULL 은 NULL <> 1 이 UNKNOWN 이라 남지 않는다. 결과 2 다(②). ① 0 은 TAB1 에 NULL 이 있으니 무조건 0건이라고 본 값(NVL 이 없었다면 맞다), ③ 3 은 TAB2 의 NULL 행까지 센 값, ④ 는 조건이 모두 참이라고 본 값이다. ※ 복원 자료의 표가 단순해 실제 시험 수준으로 데이터·SQL 을 보강했다(묻는 개념은 같다).",
+    "explanation": "서브쿼리에서 NVL 이 NULL 을 0 으로 바꾸므로 결과는 {1, 2, 0} 이고 NULL 이 없다. 그래서 NOT IN 이 정상 동작한다. TAB2 에서 3 과 4 는 1, 2, 0 어느 것과도 같지 않아 남고, TAB2 의 NULL 은 NULL <> 1 이 UNKNOWN 이라 남지 않는다. 결과 2 다(②). ① 0 은 TAB1 에 NULL 이 있으니 무조건 0건이라고 본 값(NVL 이 없었다면 맞다), ③ 3 은 TAB2 의 NULL 행까지 센 값, ④ 는 조건이 모두 참이라고 본 값이다.",
     "_source": "authored",
     "references": [
       {

@@ -188,7 +188,7 @@
         "8건"
       ],
       "correctIndex": 2,
-      "explanation": "START WITH COL2 IS NULL 을 만족하는 행은 A 와 H 두 개라 루트가 둘이다. CONNECT BY PRIOR COL1 = COL2 는 부모의 COL1 을 COL2 로 가진 행, 즉 자식으로 내려가는 순방향이다. A 아래로 B·C, B 아래로 D·E, D 아래로 G, C 아래로 F 가 이어져 A 트리 7행, H 는 자식이 없어 1행, 모두 8행이 만들어진다. WHERE COL3 <> 2 는 트리를 다 만든 뒤 그 행만 지우므로 B 와 F 두 행만 빠지고 B 아래의 D·E·G 는 그대로 남는다. 결과 6건이다(③). ① 3건은 조건을 CONNECT BY 에 쓴 것처럼 B·F 아래 가지까지 잘라 낸 값(A, C, H), ② 5건은 루트를 A 하나로 본 값, ④ 8건은 WHERE 를 적용하지 않은 값이다. ※ 복원 자료의 표가 단순해 실제 시험 수준으로 데이터·SQL 을 보강했다(묻는 개념은 같다).",
+      "explanation": "START WITH COL2 IS NULL 을 만족하는 행은 A 와 H 두 개라 루트가 둘이다. CONNECT BY PRIOR COL1 = COL2 는 부모의 COL1 을 COL2 로 가진 행, 즉 자식으로 내려가는 순방향이다. A 아래로 B·C, B 아래로 D·E, D 아래로 G, C 아래로 F 가 이어져 A 트리 7행, H 는 자식이 없어 1행, 모두 8행이 만들어진다. WHERE COL3 <> 2 는 트리를 다 만든 뒤 그 행만 지우므로 B 와 F 두 행만 빠지고 B 아래의 D·E·G 는 그대로 남는다. 결과 6건이다(③). ① 3건은 조건을 CONNECT BY 에 쓴 것처럼 B·F 아래 가지까지 잘라 낸 값(A, C, H), ② 5건은 루트를 A 하나로 본 값, ④ 8건은 WHERE 를 적용하지 않은 값이다.",
       "references": [
         {
           "type": "table",
@@ -533,7 +533,7 @@
         "7건"
       ],
       "correctIndex": 0,
-      "explanation": "Oracle 은 집합 연산자의 우선순위가 같아 괄호가 없으면 위에서부터 계산한다. ① T1 UNION ALL T2 = 1, 2, 3, 3, NULL, 3, 4, 5, NULL (9행, 중복 그대로). ② 여기에서 T3 = {2, 3, NULL, 6} 을 MINUS 하면, MINUS 는 결과의 중복도 지우고 집합 연산이라 NULL 끼리도 같은 값으로 본다. 2·3·NULL 이 모두 빠지고 1, 4, 5 만 남아 3건이다(①). ② 4건은 NULL 끼리는 같지 않다고 보고 NULL 을 남긴 값, ③ 6건은 MINUS 가 같은 값을 한 번씩만 빼고 중복을 남긴다고 본 값(1, 3, 3, NULL, 4, 5), ④ 7건은 MINUS 를 먼저 계산(T2 MINUS T3 = 4, 5)한 뒤 T1 에 붙인 값이다. ※ 복원 자료의 표가 단순해 실제 시험 수준으로 데이터·SQL 을 보강했다(묻는 개념은 같다).",
+      "explanation": "Oracle 은 집합 연산자의 우선순위가 같아 괄호가 없으면 위에서부터 계산한다. ① T1 UNION ALL T2 = 1, 2, 3, 3, NULL, 3, 4, 5, NULL (9행, 중복 그대로). ② 여기에서 T3 = {2, 3, NULL, 6} 을 MINUS 하면, MINUS 는 결과의 중복도 지우고 집합 연산이라 NULL 끼리도 같은 값으로 본다. 2·3·NULL 이 모두 빠지고 1, 4, 5 만 남아 3건이다(①). ② 4건은 NULL 끼리는 같지 않다고 보고 NULL 을 남긴 값, ③ 6건은 MINUS 가 같은 값을 한 번씩만 빼고 중복을 남긴다고 본 값(1, 3, 3, NULL, 4, 5), ④ 7건은 MINUS 를 먼저 계산(T2 MINUS T3 = 4, 5)한 뒤 T1 에 붙인 값이다.",
       "references": [
         {
           "type": "table",
@@ -738,7 +738,7 @@
         "ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING"
       ],
       "correctIndex": 1,
-      "explanation": "A 그룹의 AMT 100 인 두 행이 모두 200 을 받는 것이 핵심이다. RANGE 는 ORDER BY 값이 같은 행을 한꺼번에 범위에 넣으므로 A 의 100 두 행은 100 + 100 = 200, 200 행은 400, B 의 300 두 행은 600 이 된다(②). ① ROWS 누적은 같은 값도 한 행씩 따로 더해 A 가 100, 200, 400 이 된다. ③ 앞뒤 1행 합은 A 가 200, 400, 300 이다. ④ 처음부터 끝까지는 A 세 행이 모두 400 이다. B 그룹만 보면 ②·③·④ 가 모두 600, 600 이라 구분되지 않으므로 반드시 A 그룹으로 판단해야 한다. ORDER BY 만 쓰고 범위를 생략해도 기본값이 RANGE 라 ② 와 같다. ※ 복원 자료의 표가 단순해 실제 시험 수준으로 데이터·SQL 을 보강했다(묻는 개념은 같다).",
+      "explanation": "A 그룹의 AMT 100 인 두 행이 모두 200 을 받는 것이 핵심이다. RANGE 는 ORDER BY 값이 같은 행을 한꺼번에 범위에 넣으므로 A 의 100 두 행은 100 + 100 = 200, 200 행은 400, B 의 300 두 행은 600 이 된다(②). ① ROWS 누적은 같은 값도 한 행씩 따로 더해 A 가 100, 200, 400 이 된다. ③ 앞뒤 1행 합은 A 가 200, 400, 300 이다. ④ 처음부터 끝까지는 A 세 행이 모두 400 이다. B 그룹만 보면 ②·③·④ 가 모두 600, 600 이라 구분되지 않으므로 반드시 A 그룹으로 판단해야 한다. ORDER BY 만 쓰고 범위를 생략해도 기본값이 RANGE 라 ② 와 같다.",
       "references": [
         {
           "type": "table",
@@ -1209,7 +1209,7 @@
         "오류 발생"
       ],
       "correctIndex": 1,
-      "explanation": "T2 에 NULL 이 있다고 바로 0건을 고르면 틀린다. 서브쿼리 안의 WHERE COL2 > 1 이 먼저 적용되는데, NULL > 1 은 UNKNOWN 이라 NULL 행은 서브쿼리 결과에서 빠진다. 서브쿼리 결과는 {2, 3, 5} 이고, COL1 NOT IN (2, 3, 5) 를 만족하는 행은 1 과 4 뿐이다. T1 의 NULL 행은 NULL <> 2 가 UNKNOWN 이라 남지 않는다. 그래서 2건이다(②). ① 0건은 서브쿼리 결과에 NULL 이 남아 있을 때(WHERE COL2 > 1 이 없을 때)의 결과이고, ③ 3건은 T1 의 NULL 행까지 센 값이며, ④ NOT IN 에 NULL 이 섞여도 오류는 나지 않는다. ※ 복원 자료의 표가 단순해 실제 시험 수준으로 데이터·SQL 을 보강했다(묻는 개념은 같다).",
+      "explanation": "T2 에 NULL 이 있다고 바로 0건을 고르면 틀린다. 서브쿼리 안의 WHERE COL2 > 1 이 먼저 적용되는데, NULL > 1 은 UNKNOWN 이라 NULL 행은 서브쿼리 결과에서 빠진다. 서브쿼리 결과는 {2, 3, 5} 이고, COL1 NOT IN (2, 3, 5) 를 만족하는 행은 1 과 4 뿐이다. T1 의 NULL 행은 NULL <> 2 가 UNKNOWN 이라 남지 않는다. 그래서 2건이다(②). ① 0건은 서브쿼리 결과에 NULL 이 남아 있을 때(WHERE COL2 > 1 이 없을 때)의 결과이고, ③ 3건은 T1 의 NULL 행까지 센 값이며, ④ NOT IN 에 NULL 이 섞여도 오류는 나지 않는다.",
       "references": [
         {
           "type": "table",
@@ -1369,7 +1369,7 @@
         "(A,150), (B,140)"
       ],
       "correctIndex": 1,
-      "explanation": "Oracle 은 NULL 을 가장 큰 값으로 보므로 내림차순(DESC)에서 NULL 이 맨 앞에 온다. 급여 내림차순은 D(NULL), E(160), A(150), B(140), C(130) 이고 RN 은 이 순서로 1, 2, 3 … 이다. RN <= 2 는 D 와 E 다(②). ① 은 NULL 이 맨 뒤에 온다고 본 결과(NULLS LAST 또는 SQL Server 방식)로, 급여가 가장 높은 두 명을 뽑으려면 ORDER BY 급여 DESC NULLS LAST 처럼 써야 한다. ③ 은 오름차순으로 번호를 매긴 결과, ④ 는 정렬 없이 표의 위에서부터 두 행을 고른 결과다. ※ 복원 자료의 표가 단순해 실제 시험 수준으로 데이터·SQL 을 보강했다(묻는 개념은 같다).",
+      "explanation": "Oracle 은 NULL 을 가장 큰 값으로 보므로 내림차순(DESC)에서 NULL 이 맨 앞에 온다. 급여 내림차순은 D(NULL), E(160), A(150), B(140), C(130) 이고 RN 은 이 순서로 1, 2, 3 … 이다. RN <= 2 는 D 와 E 다(②). ① 은 NULL 이 맨 뒤에 온다고 본 결과(NULLS LAST 또는 SQL Server 방식)로, 급여가 가장 높은 두 명을 뽑으려면 ORDER BY 급여 DESC NULLS LAST 처럼 써야 한다. ③ 은 오름차순으로 번호를 매긴 결과, ④ 는 정렬 없이 표의 위에서부터 두 행을 고른 결과다.",
       "references": [
         {
           "type": "table",
