@@ -29,21 +29,21 @@ export const ROUND_51: QuizQuestion[] = [
     "round": 51,
     "subject": "1과목",
     "number": 2,
-    "title": "아래 ERD 해석에 대한 설명 중 적절하지 않은 것은?",
+    "title": "아래 ERD 해석에 대한 설명 중 적절하지 않은 것은? (IE 표기법)",
     "options": [
-      "하나의 고객은 여러 개의 주문을 가질 수 있다.",
-      "주문은 반드시 고객과 연결된다.",
       "고객은 주문을 하지 않을 수도 있다.",
-      "주문은 고객을 가지지 않을 수도 있다."
+      "주문은 반드시 하나 이상의 주문상세를 가진다.",
+      "한 번도 주문되지 않은 상품도 존재할 수 있다.",
+      "배송은 주문 없이 단독으로 존재할 수 있다."
     ],
     "correctIndex": 3,
-    "explanation": "ERD 는 고객(||) 쪽이 필수 1, 주문(o{) 쪽이 선택 0..N 이다. 따라서 한 고객은 주문을 여러 개 가질 수 있고(①) 주문을 하지 않을 수도 있지만(③), 주문은 반드시 고객 한 명과 연결된다(②). 주문이 고객을 갖지 않을 수 있다는 ④ 는 고객 쪽 필수 표기(||)와 맞지 않아 옳지 않다.",
+    "explanation": "주문-배송 관계에서 주문 쪽 끝이 ||(반드시 하나)라 배송은 반드시 주문 하나에 연결된다. 배송 쪽 끝은 o|(0 또는 1)라 아직 배송이 없는 주문은 있을 수 있지만, 주문 없는 배송은 있을 수 없다. 그래서 ④ 가 틀렸다. ① 고객-주문의 주문 쪽 끝이 o{ 라 주문하지 않은 고객이 있을 수 있다. ② 주문-주문상세의 주문상세 쪽 끝이 |{(1개 이상)라 주문은 주문상세를 하나 이상 가진다. ③ 상품-주문상세의 주문상세 쪽 끝이 o{ 라 한 번도 주문되지 않은 상품도 있을 수 있다. 읽는 법: 관계선 끝의 기호는 그 기호가 붙은 쪽 엔터티가 상대 한 건당 몇 개인지를 말한다. | 는 반드시(필수), o 는 없어도 됨(선택), 까마귀발은 여러 개다.",
     "_source": "authored",
     "references": [
       {
         "type": "erd",
-        "caption": "고객-주문 ERD",
-        "mermaid": "erDiagram\n    고객 ||--o{ 주문 : \"한다\""
+        "caption": "고객·주문·주문상세·상품·배송 ERD",
+        "mermaid": "erDiagram\n    고객 ||--o{ 주문 : \"한다\"\n    주문 ||--|{ 주문상세 : \"포함\"\n    상품 ||--o{ 주문상세 : \"대상\"\n    주문 ||--o| 배송 : \"발생\"\n    주문 {\n        string 주문번호 PK\n        string 고객번호 FK\n    }\n    주문상세 {\n        string 주문번호 PK,FK\n        string 상품코드 PK,FK\n        int 수량\n    }\n    배송 {\n        string 배송번호 PK\n        string 주문번호 FK\n    }"
       }
     ]
   },
@@ -584,12 +584,12 @@ export const ROUND_51: QuizQuestion[] = [
     "title": "아래 SQL 의 결과로 옳은 것은?",
     "options": [
       "1",
-      "0",
       "2",
+      "0",
       "NULL"
     ],
-    "correctIndex": 0,
-    "explanation": "NOT EXISTS 는 서브쿼리 결과가 한 건도 없을 때 참이다. T1 의 10 은 T2 에 10 이 있어 제외되고, 20 은 T2 에 같은 값이 없어(NULL 과의 비교는 참이 아님) 남는다. 따라서 COUNT(*) = 1 이다(①). NOT IN 과 달리 NOT EXISTS 는 T2 의 NULL 때문에 결과가 0 이 되지 않는다.",
+    "correctIndex": 1,
+    "explanation": "NOT EXISTS 는 T1 의 행마다 서브쿼리를 실행해 짝이 한 건도 없으면 참이다. 10 과 30 은 T2 에 같은 값이 있어 빠진다. 20 은 짝이 없어 남는다. T1 의 NULL 행은 T1.COL1 = T2.COL1 이 어떤 행과도 참이 되지 않아(NULL 비교는 UNKNOWN) 서브쿼리 결과가 0건이므로 NOT EXISTS 가 참이 되어 남는다. 그래서 2 다(②). ① 1 은 T1 의 NULL 행이 빠진다고 본 값, ③ 0 은 NOT IN 처럼 T2 의 NULL 때문에 전부 탈락한다고 본 값(NOT IN 이었다면 실제로 0), ④ COUNT 는 행이 없어도 NULL 이 아니라 숫자를 돌려준다.",
     "_source": "authored",
     "references": [
       {
@@ -604,6 +604,12 @@ export const ROUND_51: QuizQuestion[] = [
           ],
           [
             "20"
+          ],
+          [
+            "NULL"
+          ],
+          [
+            "30"
           ]
         ]
       },
@@ -619,6 +625,9 @@ export const ROUND_51: QuizQuestion[] = [
           ],
           [
             "NULL"
+          ],
+          [
+            "30"
           ]
         ]
       },
@@ -1107,17 +1116,18 @@ export const ROUND_51: QuizQuestion[] = [
     "number": 35,
     "title": "아래 계층형 쿼리의 결과로 옳은 것은?",
     "options": [
-      "1",
-      "2",
+      "0",
       "3",
-      "4"
+      "4",
+      "5"
     ],
-    "correctIndex": 1,
-    "explanation": "COL3 = 4 에서 역방향 전개로 (D→B→A) 결과가 구해지고, 이후 WHERE COL3 <> 2 로 B 가 제거되어 A, D 의 두 건이 남는다.",
+    "correctIndex": 2,
+    "explanation": "조건 COL3 <> 2 가 WHERE 가 아니라 CONNECT BY 에 있다. CONNECT BY 의 조건은 \"이 자식으로 내려갈지\" 를 정하므로, 조건에 걸린 행은 그 아래 가지까지 통째로 빠진다. 단, 시작 행(START WITH 로 고른 루트)은 CONNECT BY 조건을 검사하지 않는다. 루트 A 는 COL3 이 2 여도 나온다. A 의 자식 B(1) 는 통과, C(2) 는 탈락해 그 아래 E·H 도 빠진다. B 의 자식 D(4) 는 통과, F(2) 는 탈락. D 아래 G(6) 통과. 결과는 A, B, D, G 4건이다(③). ① 0 은 루트 A 도 조건에 걸려 아무것도 시작하지 못한다고 본 값, ② 3 은 루트만 빼고 센 값(B, D, G), ④ 5 는 조건을 WHERE 처럼 COL3 = 2 인 행만 빼고 나머지(B, D, E, G, H)를 센 값이다.",
     "_source": "authored",
     "references": [
       {
         "type": "table",
+        "caption": "TAB1 테이블",
         "headers": [
           "COL1",
           "COL2",
@@ -1127,29 +1137,48 @@ export const ROUND_51: QuizQuestion[] = [
           [
             "A",
             "NULL",
-            "1"
+            "2"
           ],
           [
             "B",
             "A",
-            "2"
+            "1"
           ],
           [
             "C",
             "A",
-            "3"
+            "2"
           ],
           [
             "D",
             "B",
             "4"
+          ],
+          [
+            "E",
+            "C",
+            "5"
+          ],
+          [
+            "F",
+            "B",
+            "2"
+          ],
+          [
+            "G",
+            "D",
+            "6"
+          ],
+          [
+            "H",
+            "C",
+            "3"
           ]
-        ],
-        "caption": "TAB1 테이블"
+        ]
       },
       {
         "type": "sql",
-        "code": "SELECT COUNT(*)\nFROM   TAB1\nWHERE  COL3 <> 2\nSTART WITH COL3 = 4\nCONNECT BY COL1 = PRIOR COL2;"
+        "code": "SELECT COUNT(*)\nFROM   TAB1\nSTART WITH COL2 IS NULL\nCONNECT BY PRIOR COL1 = COL2\n       AND COL3 <> 2;"
       }
     ]
   },
@@ -1240,13 +1269,13 @@ export const ROUND_51: QuizQuestion[] = [
     "number": 39,
     "title": "아래 A, B 테이블에 대한 LEFT OUTER JOIN 의 결과 행 수로 옳은 것은?",
     "options": [
-      "1건",
-      "2건",
-      "3건",
-      "0건"
+      "4건",
+      "5건",
+      "6건",
+      "8건"
     ],
     "correctIndex": 2,
-    "explanation": "LEFT OUTER JOIN 은 ON 조건에 매칭되지 않아도 LEFT 테이블(A) 의 모든 행이 유지되므로 A 의 3건이 그대로 결과에 남는다. B 측 컬럼은 매칭되는 행이 있을 때만 채워지고 그렇지 않으면 NULL.",
+    "explanation": "ON 의 두 조건을 모두 만족하는 B 행만 붙고, 붙을 행이 없는 A 행은 B 칸이 NULL 인 채 한 행으로 남는다. A 의 1 은 B(1, 100) 이 200 이하라 짝이 없어 NULL 한 행. A 의 2 는 (2, 220) 한 행. A 의 3 은 두 행이고 각각 (3, 250), (3, 300) 두 짝이 붙어 2 × 2 = 4행. 합계 1 + 1 + 4 = 6건이다(③). ① 4건은 LEFT 조인이면 A 의 행 수 그대로라고 본 값, ② 5건은 짝이 없는 A 의 1 을 지운 INNER JOIN 의 결과, ④ 8건은 B.COL2 > 200 조건을 무시한 값이다.",
     "_source": "authored",
     "references": [
       {
@@ -1264,6 +1293,9 @@ export const ROUND_51: QuizQuestion[] = [
           ],
           [
             "3"
+          ],
+          [
+            "3"
           ]
         ]
       },
@@ -1271,23 +1303,39 @@ export const ROUND_51: QuizQuestion[] = [
         "type": "table",
         "caption": "B 테이블",
         "headers": [
-          "COL1"
+          "COL1",
+          "COL2"
         ],
         "rows": [
           [
-            "10"
-          ],
-          [
+            "1",
             "100"
           ],
           [
+            "2",
             "220"
+          ],
+          [
+            "3",
+            "250"
+          ],
+          [
+            "3",
+            "150"
+          ],
+          [
+            "3",
+            "300"
+          ],
+          [
+            "4",
+            "500"
           ]
         ]
       },
       {
         "type": "sql",
-        "code": "SELECT A.*, B.*\nFROM   A LEFT OUTER JOIN B ON (A.COL1 = B.COL1 AND B.COL1 > 200);"
+        "code": "SELECT A.COL1, B.COL2\nFROM   A LEFT OUTER JOIN B\nON     (A.COL1 = B.COL1 AND B.COL2 > 200);"
       }
     ]
   },
@@ -1513,42 +1561,56 @@ export const ROUND_51: QuizQuestion[] = [
     "round": 51,
     "subject": "2과목",
     "number": 46,
-    "title": "아래 일자별 매출 테이블에 대해 일자별 누적 합계를 계산한 결과로 옳은 것은?",
+    "title": "아래 지점별·일자별 매출 테이블에 대한 SQL 의 결과(M 컬럼, 위에서부터)로 옳은 것은?",
     "options": [
-      "1000, 1000, 1000",
-      "1000, 1300, 2300",
-      "1000, 2300, 1300",
-      "1000, 2300, 2000"
+      "1000, 1300, 2300, 500, 700",
+      "1000, 1300, 1300, 500, 700",
+      "1000, 300, 1000, 500, 200",
+      "2300, 2300, 2300, 700, 700"
     ],
     "correctIndex": 1,
-    "explanation": "ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW 는 첫 행부터 현재 행까지의 합이다. 1일 1000, 2일 1000 + 300 = 1300, 3일 1300 + 1000 = 2300 이다(②). ① 은 누적하지 않은 값이고, ③④ 는 순서를 잘못 더한 결과다.",
+    "explanation": "PARTITION BY 지점 으로 A 와 B 를 따로 계산하고, ROWS BETWEEN 1 PRECEDING AND CURRENT ROW 는 \"바로 앞 1행 + 지금 행\" 두 행만 더한다. A: 1일 1000(앞 행 없음), 2일 1000 + 300 = 1300, 3일 300 + 1000 = 1300. B: 1일 500, 3일 500 + 200 = 700. 그래서 1000, 1300, 1300, 500, 700 이다(②). ① 은 UNBOUNDED PRECEDING(처음부터 누적)으로 본 결과라 A 의 3일이 2300 이 되고, ③ 은 윈도우 합계 없이 금액만 적은 것, ④ 는 윈도우 범위를 무시하고 지점 전체 합계를 붙인 결과다. B 지점에는 2일이 없어도 '1 PRECEDING' 은 날짜가 아니라 행 개수라 1일 행을 더한다.",
     "_source": "authored",
     "references": [
       {
         "type": "table",
-        "caption": "T 테이블 (일자별 매출)",
+        "caption": "T 테이블 (매출)",
         "headers": [
+          "지점",
           "일자",
           "금액"
         ],
         "rows": [
           [
+            "A",
             "1일",
             "1000"
           ],
           [
+            "A",
             "2일",
             "300"
           ],
           [
+            "B",
+            "1일",
+            "500"
+          ],
+          [
+            "A",
             "3일",
             "1000"
+          ],
+          [
+            "B",
+            "3일",
+            "200"
           ]
         ]
       },
       {
         "type": "sql",
-        "code": "SELECT 일자,\n       SUM(금액) OVER (ORDER BY 일자\n                       ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS 누적합\nFROM   T;"
+        "code": "SELECT 지점, 일자,\n       SUM(금액) OVER (PARTITION BY 지점 ORDER BY 일자\n                       ROWS BETWEEN 1 PRECEDING AND CURRENT ROW) AS M\nFROM   T\nORDER BY 지점, 일자;"
       }
     ]
   },

@@ -391,15 +391,15 @@ export const ROUND_47: QuizQuestion[] = [
     "round": 47,
     "subject": "2과목",
     "number": 18,
-    "title": "아래 SQL 의 PREV 컬럼을 채우는 데 사용된 윈도우 함수는?",
+    "title": "아래 SQL 의 PREV 컬럼을 채우는 데 사용된 식은?",
     "options": [
-      "SUM",
-      "ROW_NUMBER",
-      "LEAD",
-      "LAG"
+      "LAG(VAL)",
+      "LEAD(VAL, 1, 0)",
+      "LAG(VAL, 2, 0)",
+      "LAG(VAL, 1, 0)"
     ],
     "correctIndex": 3,
-    "explanation": "PREV 컬럼에 직전 행의 VAL 이 들어가 있고 첫 행은 이전 행이 없어 NULL 이다. 이렇게 앞선 행의 값을 가져오는 함수가 LAG 이다. LEAD 는 반대로 다음 행의 값을 가져오고, ROW_NUMBER 는 순번을, SUM 은 누적·합계를 반환하므로 이 결과를 만들 수 없다.",
+    "explanation": "PARTITION BY 지점 이라 A(ID 1, 2, 4)와 B(ID 3, 5)를 따로 본다. 결과를 지점 안에서 보면 A 는 0, 100, 200, B 는 0, 300 으로 \"같은 지점의 바로 앞 행 값, 앞 행이 없으면 0\" 이다. LAG(값, 1, 0) 은 1행 앞의 값을 가져오고 앞 행이 없으면 세 번째 인자 0 을 돌려준다(④). ① LAG(VAL) 은 기본값이 없어 첫 행이 NULL 이다. ② LEAD 는 다음 행 값(A: 200, 400, 0)이다. ③ 2행 앞은 A 가 0, 0, 100 이다. 표의 ID 순서(1, 2, 3, 4, 5)대로 앞 행을 보면 ID 4 의 PREV 가 300 이어야 하는데 실제는 200 이므로, 지점별로 나누었다는 것을 결과에서 읽어 낼 수 있다.",
     "_source": "authored",
     "references": [
       {
@@ -407,26 +407,40 @@ export const ROUND_47: QuizQuestion[] = [
         "caption": "매출 테이블",
         "headers": [
           "ID",
+          "지점",
           "VAL"
         ],
         "rows": [
           [
             "1",
+            "A",
             "100"
           ],
           [
             "2",
+            "A",
             "200"
           ],
           [
             "3",
+            "B",
             "300"
+          ],
+          [
+            "4",
+            "A",
+            "400"
+          ],
+          [
+            "5",
+            "B",
+            "500"
           ]
         ]
       },
       {
         "type": "sql",
-        "code": "SELECT ID, VAL,\n       (  ?  ) OVER (ORDER BY ID) AS PREV\nFROM   매출;"
+        "code": "SELECT ID, VAL,\n       (  ?  ) OVER (PARTITION BY 지점 ORDER BY ID) AS PREV\nFROM   매출\nORDER BY ID;"
       },
       {
         "type": "table",
@@ -440,7 +454,7 @@ export const ROUND_47: QuizQuestion[] = [
           [
             "1",
             "100",
-            "(NULL)"
+            "0"
           ],
           [
             "2",
@@ -450,7 +464,17 @@ export const ROUND_47: QuizQuestion[] = [
           [
             "3",
             "300",
+            "0"
+          ],
+          [
+            "4",
+            "400",
             "200"
+          ],
+          [
+            "5",
+            "500",
+            "300"
           ]
         ]
       }
@@ -1339,40 +1363,60 @@ export const ROUND_47: QuizQuestion[] = [
     "number": 43,
     "title": "아래 T 테이블에 대한 SQL 의 결과로 옳은 것은?",
     "options": [
-      "공집합 (행 0건)",
-      "ID 별 COUNT 가 모두 표시된 다중 행",
-      "COUNT(*) = 300 인 한 행",
-      "ORA-00937 등 그룹 함수 오류"
+      "3, 2 (두 행)",
+      "3, 2, 2 (세 행)",
+      "3 (한 행)",
+      "그룹 함수 오류"
     ],
-    "correctIndex": 2,
-    "explanation": "`GROUP BY ID`로 같은 ID끼리 묶고, `HAVING COUNT(*) >= 2`로 행 수가 2 이상인 그룹만 남긴다. 살아남은 그룹마다 한 행씩 결과로 나오며 각 행에는 그 그룹의 COUNT 값이 표시된다. 예를 들어 행이 300건인 ID 그룹 하나가 조건을 통과하면 결과로 300이 1건 반환된다. 정답은 ③번이다.",
+    "correctIndex": 0,
+    "explanation": "ID 로 묶으면 A(3행), B(1행), C(2행), D(2행) 네 그룹이다. HAVING 은 COUNT(*) 가 아니라 COUNT(VAL) 로 거르는데, COUNT(VAL) 은 NULL 을 빼고 센다: A 2, B 1, C 0, D 2. 그래서 A 와 D 만 남고, SELECT 의 COUNT(*) 는 그룹의 전체 행 수라 A 는 3, D 는 2 다. ID 순으로 3, 2 두 행이다(①). ② 는 COUNT(VAL) 도 NULL 을 센다고 본 결과(C 가 남음)이고, ③ 은 COUNT(VAL) 이 같은 값(D 의 40, 40)을 한 번만 센다고 본 결과다(그건 COUNT(DISTINCT VAL)). ④ SELECT 에 집계 함수만 있고 ORDER BY 의 ID 는 GROUP BY 컬럼이라 오류가 나지 않는다.",
     "_source": "authored",
     "references": [
       {
         "type": "table",
-        "caption": "T 테이블 (ID 별 행 수 요약)",
+        "caption": "T 테이블",
         "headers": [
           "ID",
-          "행 수"
+          "VAL"
         ],
         "rows": [
           [
             "A",
-            "300"
+            "10"
+          ],
+          [
+            "A",
+            "20"
+          ],
+          [
+            "A",
+            "NULL"
           ],
           [
             "B",
-            "1"
+            "30"
           ],
           [
             "C",
-            "1"
+            "NULL"
+          ],
+          [
+            "C",
+            "NULL"
+          ],
+          [
+            "D",
+            "40"
+          ],
+          [
+            "D",
+            "40"
           ]
         ]
       },
       {
         "type": "sql",
-        "code": "SELECT COUNT(*)\nFROM   T\nGROUP BY ID\nHAVING COUNT(*) >= 2;"
+        "code": "SELECT COUNT(*)\nFROM   T\nGROUP BY ID\nHAVING COUNT(VAL) >= 2\nORDER BY ID;"
       }
     ]
   },
@@ -1519,15 +1563,15 @@ export const ROUND_47: QuizQuestion[] = [
     "round": 47,
     "subject": "2과목",
     "number": 49,
-    "title": "아래 EMP 테이블에 대한 SQL 의 결과로 옳은 것은?",
+    "title": "아래 EMP 테이블에 대한 SQL 의 결과로 옳은 것은? (Oracle 기준)",
     "options": [
-      "1, 2",
-      "3, 3",
       "4, 5",
-      "5, 4"
+      "3, 4, 5",
+      "3, 4, 5, 6",
+      "3, 4, 5, 7"
     ],
-    "correctIndex": 3,
-    "explanation": "인라인 뷰에서 `ROW_NUMBER() OVER (PARTITION BY 부서 ORDER BY 연봉 DESC)` 는 부서별로 연봉 높은 순서대로 1, 2, 3 을 매긴다. 부서 A: (COL1=5, 연봉=5000) 이 RN=1, 부서 B: (COL1=4, 연봉=4500) 이 RN=1. 외부 `WHERE RN = 1` 로 부서별 최고 연봉자만 남기면 COL1 = 5, 4 가 반환된다.",
+    "correctIndex": 2,
+    "explanation": "부서마다 연봉 내림차순으로 RANK 를 매기고 1위만 남긴다. A 는 COL1 5 와 3 이 5000 으로 동점이라 RANK 가 둘 다 1 이다. B 는 4(4500) 가 1위. C 는 Oracle 이 NULL 을 가장 큰 값으로 보므로 내림차순에서 NULL 인 6 이 1위다. COL1 순으로 3, 4, 5, 6 이다(③). ① 은 동점 중 하나만 남기고(ROW_NUMBER 처럼) C 도 뺀 결과, ② 는 연봉이 NULL 인 C 부서에 1위가 없다고 본 결과, ④ 는 NULL 이 맨 뒤에 온다고 보고 C 의 1위를 7 로 본 결과다(NULLS LAST 를 쓰면 실제로 ④ 가 된다).",
     "_source": "authored",
     "references": [
       {
@@ -1552,7 +1596,7 @@ export const ROUND_47: QuizQuestion[] = [
           [
             "3",
             "A",
-            "4000"
+            "5000"
           ],
           [
             "2",
@@ -1563,12 +1607,22 @@ export const ROUND_47: QuizQuestion[] = [
             "4",
             "B",
             "4500"
+          ],
+          [
+            "6",
+            "C",
+            "NULL"
+          ],
+          [
+            "7",
+            "C",
+            "1000"
           ]
         ]
       },
       {
         "type": "sql",
-        "code": "SELECT COL1\nFROM (\n    SELECT COL1,\n           ROW_NUMBER() OVER (PARTITION BY 부서 ORDER BY 연봉 DESC) AS RN\n    FROM EMP\n)\nWHERE RN = 1;"
+        "code": "SELECT COL1\nFROM (\n    SELECT COL1,\n           RANK() OVER (PARTITION BY 부서 ORDER BY 연봉 DESC) AS RN\n    FROM EMP\n)\nWHERE RN = 1\nORDER BY COL1;"
       }
     ]
   },

@@ -740,13 +740,13 @@ export const ROUND_50: QuizQuestion[] = [
     "number": 24,
     "title": "아래 두 테이블에 대해 UNION 과 UNION ALL 을 각각 수행했을 때 결과 행 수로 옳은 것은?",
     "options": [
-      "UNION 4건, UNION ALL 6건",
-      "UNION 6건, UNION ALL 6건",
-      "UNION 4건, UNION ALL 4건",
-      "UNION 3건, UNION ALL 6건"
+      "UNION 4건, UNION ALL 10건",
+      "UNION 5건, UNION ALL 10건",
+      "UNION 6건, UNION ALL 10건",
+      "UNION 3건, UNION ALL 10건"
     ],
-    "correctIndex": 0,
-    "explanation": "UNION 은 두 결과를 합친 뒤 중복을 제거하므로 A·B·C·D 네 건이 된다. UNION ALL 은 중복 제거 없이 그대로 이어 붙이므로 3 + 3 = 6 건이 된다. 중복 제거를 위해 정렬 작업이 더해지는 만큼 UNION 이 UNION ALL 보다 비용이 크다.",
+    "correctIndex": 1,
+    "explanation": "UNION ALL 은 아무것도 지우지 않으므로 5 + 5 = 10건이다. UNION 은 두 결과를 합친 뒤 중복을 지우는데, 한 테이블 안의 중복(T1 의 B 두 개, T2 의 D 두 개)도 지우고, 집합 연산에서는 NULL 끼리도 같은 값으로 본다. 남는 값은 A, B, C, D, NULL 5건이다(②). ① 4건은 NULL 을 결과에서 뺀 값, ③ 6건은 두 NULL 을 서로 다른 값으로 본 값, ④ 3건은 두 테이블에 공통인 값(B, C, NULL)만 센 INTERSECT 의 결과다. WHERE 의 = 비교와 달리 집합 연산자·DISTINCT·GROUP BY 는 NULL 을 하나로 묶는다.",
     "_source": "authored",
     "references": [
       {
@@ -761,6 +761,12 @@ export const ROUND_50: QuizQuestion[] = [
           ],
           [
             "B"
+          ],
+          [
+            "B"
+          ],
+          [
+            "NULL"
           ],
           [
             "C"
@@ -779,6 +785,12 @@ export const ROUND_50: QuizQuestion[] = [
           ],
           [
             "C"
+          ],
+          [
+            "NULL"
+          ],
+          [
+            "D"
           ],
           [
             "D"
@@ -1649,13 +1661,13 @@ export const ROUND_50: QuizQuestion[] = [
     "number": 49,
     "title": "아래 매출 테이블에 대한 LAG 함수 쿼리의 결과 빈칸 (ㄱ), (ㄴ) 으로 옳은 것은?",
     "options": [
-      "ㄱ = 2, ㄴ = 700",
-      "ㄱ = 1, ㄴ = 700",
-      "ㄱ = 2, ㄴ = 600",
-      "ㄱ = NULL, ㄴ = 700"
+      "ㄱ = NULL, ㄴ = 700",
+      "ㄱ = 0, ㄴ = 700",
+      "ㄱ = 700, ㄴ = 600",
+      "ㄱ = 0, ㄴ = 0"
     ],
     "correctIndex": 0,
-    "explanation": "LAG(금액, 1) 은 직전 행의 금액을 반환한다. 1행의 LAG 는 이전 행이 없어 NULL, 2행의 LAG 는 1행의 금액 (ㄱ), 3행의 LAG 는 2행의 금액 (ㄴ) 이다. 출제 데이터에서 (ㄱ)=2, (ㄴ)=700.",
+    "explanation": "LAG(금액, 2, 0) 은 2행 앞의 금액을 가져오고, 2행 앞이 없을 때(1·2행)만 0 을 돌려준다. 4행의 2행 앞은 2행인데 그 금액이 NULL 이라 (ㄱ) 은 NULL 이다. 세 번째 인자 0 은 \"앞 행이 없을 때\" 의 값이지 \"앞 행의 값이 NULL 일 때\" 의 값이 아니다. 5행의 2행 앞은 3행이라 (ㄴ) 은 700 이다(①). ② 는 기본값 0 이 NULL 값까지 바꾼다고 본 결과, ③ 은 1행 앞(LAG(금액, 1))으로 본 결과, ④ 는 LEAD 처럼 뒤쪽을 보고 행이 없어 0 이 된다고 본 결과다.",
     "_source": "authored",
     "references": [
       {
@@ -1668,21 +1680,29 @@ export const ROUND_50: QuizQuestion[] = [
         "rows": [
           [
             "1",
-            "2"
+            "500"
           ],
           [
             "2",
-            "700"
+            "NULL"
           ],
           [
             "3",
+            "700"
+          ],
+          [
+            "4",
             "600"
+          ],
+          [
+            "5",
+            "300"
           ]
         ]
       },
       {
         "type": "sql",
-        "code": "SELECT 행,\n       LAG(금액, 1) OVER (ORDER BY 행) AS 이전금액\nFROM   매출;"
+        "code": "SELECT 행, 금액,\n       LAG(금액, 2, 0) OVER (ORDER BY 행) AS 이전금액\nFROM   매출;"
       },
       {
         "type": "table",
@@ -1690,22 +1710,32 @@ export const ROUND_50: QuizQuestion[] = [
         "headers": [
           "행",
           "금액",
-          "LAG(금액, 1)"
+          "이전금액"
         ],
         "rows": [
           [
             "1",
-            "2",
-            "NULL"
+            "500",
+            "0"
           ],
           [
             "2",
-            "700",
-            "(ㄱ)"
+            "NULL",
+            "0"
           ],
           [
             "3",
+            "700",
+            "500"
+          ],
+          [
+            "4",
             "600",
+            "(ㄱ)"
+          ],
+          [
+            "5",
+            "300",
             "(ㄴ)"
           ]
         ]
