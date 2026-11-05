@@ -952,15 +952,15 @@ export const ROUND_59: QuizQuestion[] = [
     "round": 59,
     "subject": "2과목",
     "number": 30,
-    "title": "아래 세 테이블 T1, T2, T3 에 대한 집합 연산의 결과로 가장 적절한 것은?",
+    "title": "아래 세 테이블 T1, T2, T3 에 대한 집합 연산의 결과 행 수로 옳은 것은?",
     "options": [
-      "A B C",
-      "A B",
-      "A B B C",
-      "B B C"
+      "3건",
+      "5건",
+      "6건",
+      "8건"
     ],
-    "correctIndex": 0,
-    "explanation": "괄호로 묶인 `T2 INTERSECT T3` 가 먼저 실행. T2 = {B}, T3 = {C} 라 공통 원소 없음 → 공집합. 이어 `T1 UNION (공집합)` = T1 = {A, B, C}.",
+    "correctIndex": 2,
+    "explanation": "괄호 안의 INTERSECT 가 먼저 계산된다. T2 와 T3 에 공통인 값은 C 와 NULL 이다(집합 연산에서는 NULL 끼리 같은 값으로 본다). 이 2행을 T1 의 4행(A, B, C, C)에 UNION ALL 로 그대로 붙이므로 6건이다(③). ① 3건은 UNION ALL 도 중복을 지운다고 보고 A, B, C 만 센 값, ② 5건은 NULL 은 교집합이 될 수 없다고 본 값(4 + 1), ④ 8건은 INTERSECT 를 UNION 으로 보고 T2·T3 의 합집합(B, C, NULL, D)을 붙인 값이다. ※ 복원 자료의 표가 단순해 실제 시험 수준으로 데이터·SQL 을 보강했다(묻는 개념은 같다).",
     "_source": "authored",
     "references": [
       {
@@ -978,6 +978,9 @@ export const ROUND_59: QuizQuestion[] = [
           ],
           [
             "C"
+          ],
+          [
+            "C"
           ]
         ]
       },
@@ -990,6 +993,12 @@ export const ROUND_59: QuizQuestion[] = [
         "rows": [
           [
             "B"
+          ],
+          [
+            "C"
+          ],
+          [
+            "NULL"
           ]
         ]
       },
@@ -1002,12 +1011,18 @@ export const ROUND_59: QuizQuestion[] = [
         "rows": [
           [
             "C"
+          ],
+          [
+            "NULL"
+          ],
+          [
+            "D"
           ]
         ]
       },
       {
         "type": "sql",
-        "code": "SELECT V FROM T1\nUNION\n(SELECT V FROM T2 INTERSECT SELECT V FROM T3);"
+        "code": "SELECT V FROM T1\nUNION ALL\n(SELECT V FROM T2 INTERSECT SELECT V FROM T3);"
       }
     ]
   },

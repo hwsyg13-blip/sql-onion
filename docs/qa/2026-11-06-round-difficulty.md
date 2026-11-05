@@ -41,3 +41,19 @@
 | 59-46 | 부분 ROLLUP | GROUP BY A, ROLLUP(B, C), B 에 NULL | 11 | (E) 결과에 (Y, NULL, NULL) 이 두 행(값이 NULL 인 그룹의 소계와 Y 소계)이라는 점을 해설에 적음 |
 
 실행 결과 원본: PostgreSQL 출력은 작업 로그에 남겼다. 오답 보기 값도 모두 재현했다.
+
+## 2차 11문항
+
+| 문항 | 개념 | 바뀐 점 | 정답 | 5가지 시선에서 걸린 것과 처리 |
+|---|---|---|---|---|
+| 46-11 | 순방향 계층 + WHERE | 4행 → 8행. START WITH COL2 IS NULL 로 루트 2개(A, H), WHERE 로 중간 노드 두 개 제거 | 6건 | (B) 조건을 CONNECT BY 처럼 보면 3, 루트를 하나로 보면 5 → 오답으로 / (E) 중간 노드가 빠져도 자식은 남는다는 점을 해설에 |
+| 48-26 | NTILE | 4행 NTILE(2) → 7행 NTILE(3), ID 순서와 SAL 순서가 다름 | 1, 1, 1, 2, 2, 3, 3 | (B) 나머지를 어디에 주는지(앞 그룹부터)를 묻도록 / 동점이 없게 해 그룹 배정이 하나로 정해짐 |
+| 50-24 | UNION vs UNION ALL | 테이블 안 중복과 NULL 추가 | UNION 5, UNION ALL 10 | (C) 집합 연산에서 NULL 끼리 같은 값으로 보는 것은 Oracle·표준 모두 같음 |
+| 57-20 | 윈도우 기본 범위 | ROWS 누적 → ORDER BY 만 쓴 COUNT(*) (기본 RANGE), 동점 3개, NULL | 3, 3, 5, 4, 3 | (C) NULL 정렬 위치 때문에 "Oracle 기준" 명시 / 동점은 RANGE 라 결과가 하나로 정해짐 |
+| 51-21 | NOT EXISTS | T1 에도 NULL 행 추가 | 2 | (B) NOT IN 이었으면 0 → 오답으로 / T1 의 NULL 행이 NOT EXISTS 로 남는다는 점이 핵심 |
+| 51-39 | LEFT JOIN ON 조건 | 매칭이 없던 데이터 → A 중복·B 다중 매칭 | 6건 | (B) INNER 면 5, 조건 무시하면 8 |
+| 54-27 | NOT IN + NVL | 서브쿼리에 NVL, TAB2 에 NULL | 2 | (A) "NULL 있으면 0" 암기를 깨는 문항 / TAB2 의 NULL 행은 남지 않음 |
+| 55-14 | ROLLUP(COL1), COL1 | NULL 그룹 추가 | 8 | (C) Oracle 은 중복 묶음을 지우지 않음. 뒤에 COL1 이 있어 총계가 안 생긴다는 점을 해설에 |
+| 58-28 | NULLS LAST + FETCH | NULL 이 두 컬럼에 하나씩, 두 번째 기준 DESC | 12 NULL / 11 1004 / 11 1002 | (C) NULLS LAST 는 바로 앞 기준에만 적용 — DEPTNO NULL 행이 맨 앞에 오는 점이 함정 |
+| 59-30 | INTERSECT 우선 + UNION ALL | 중복·NULL 추가, 결과 행 수로 묻도록 바꿈 | 6건 | (C) 괄호가 있어 DBMS 별 우선순위 차이가 생기지 않음 |
+| 55-21 | OUTER 뒤 INNER JOIN | "테이블별 ID 값" 요약표 → 실제 4개 테이블, T2 에 중복 | 3건 | (B) 마지막 INNER 가 앞의 OUTER 행을 줄이지 않는다고 보면 5 → 오답 ④ / 모바일 CBT 화면에서 표 4개 렌더링 확인 |

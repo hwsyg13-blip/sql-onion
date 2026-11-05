@@ -182,16 +182,17 @@
       "number": 11,
       "title": "아래 테이블과 계층형 쿼리의 결과 행 수로 옳은 것은?",
       "options": [
-        "1건",
-        "2건",
         "3건",
-        "4건"
+        "5건",
+        "6건",
+        "8건"
       ],
-      "correctIndex": 1,
-      "explanation": "COL3=4(D)를 루트로 COL1=PRIOR COL2 방향으로 거슬러 올라가면 D→B→A가 도출되지만, WHERE 필터(COL3<>2)가 계층 전개 이후 적용되어 B(COL3=2)가 제외된다. 최종 결과는 D, A의 2건이다.",
+      "correctIndex": 2,
+      "explanation": "START WITH COL2 IS NULL 을 만족하는 행은 A 와 H 두 개라 루트가 둘이다. CONNECT BY PRIOR COL1 = COL2 는 부모의 COL1 을 COL2 로 가진 행, 즉 자식으로 내려가는 순방향이다. A 아래로 B·C, B 아래로 D·E, D 아래로 G, C 아래로 F 가 이어져 A 트리 7행, H 는 자식이 없어 1행, 모두 8행이 만들어진다. WHERE COL3 <> 2 는 트리를 다 만든 뒤 그 행만 지우므로 B 와 F 두 행만 빠지고 B 아래의 D·E·G 는 그대로 남는다. 결과 6건이다(③). ① 3건은 조건을 CONNECT BY 에 쓴 것처럼 B·F 아래 가지까지 잘라 낸 값(A, C, H), ② 5건은 루트를 A 하나로 본 값, ④ 8건은 WHERE 를 적용하지 않은 값이다. ※ 복원 자료의 표가 단순해 실제 시험 수준으로 데이터·SQL 을 보강했다(묻는 개념은 같다).",
       "references": [
         {
           "type": "table",
+          "caption": "SQLD46_01 테이블",
           "headers": [
             "COL1",
             "COL2",
@@ -217,13 +218,32 @@
               "D",
               "B",
               "4"
+            ],
+            [
+              "E",
+              "B",
+              "5"
+            ],
+            [
+              "F",
+              "C",
+              "2"
+            ],
+            [
+              "G",
+              "D",
+              "6"
+            ],
+            [
+              "H",
+              "NULL",
+              "7"
             ]
-          ],
-          "caption": "SQLD46_01 테이블"
+          ]
         },
         {
           "type": "sql",
-          "code": "SELECT *\nFROM   SQLD46_01\nWHERE  COL3 <> 2\nSTART WITH COL3 = 4\nCONNECT BY COL1 = PRIOR COL2;"
+          "code": "SELECT *\nFROM   SQLD46_01\nWHERE  COL3 <> 2\nSTART WITH COL2 IS NULL\nCONNECT BY PRIOR COL1 = COL2;"
         }
       ]
     },

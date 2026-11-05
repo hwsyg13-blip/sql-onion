@@ -584,12 +584,12 @@ export const ROUND_51: QuizQuestion[] = [
     "title": "아래 SQL 의 결과로 옳은 것은?",
     "options": [
       "1",
-      "0",
       "2",
+      "0",
       "NULL"
     ],
-    "correctIndex": 0,
-    "explanation": "NOT EXISTS 는 서브쿼리 결과가 한 건도 없을 때 참이다. T1 의 10 은 T2 에 10 이 있어 제외되고, 20 은 T2 에 같은 값이 없어(NULL 과의 비교는 참이 아님) 남는다. 따라서 COUNT(*) = 1 이다(①). NOT IN 과 달리 NOT EXISTS 는 T2 의 NULL 때문에 결과가 0 이 되지 않는다.",
+    "correctIndex": 1,
+    "explanation": "NOT EXISTS 는 T1 의 행마다 서브쿼리를 실행해 짝이 한 건도 없으면 참이다. 10 과 30 은 T2 에 같은 값이 있어 빠진다. 20 은 짝이 없어 남는다. T1 의 NULL 행은 T1.COL1 = T2.COL1 이 어떤 행과도 참이 되지 않아(NULL 비교는 UNKNOWN) 서브쿼리 결과가 0건이므로 NOT EXISTS 가 참이 되어 남는다. 그래서 2 다(②). ① 1 은 T1 의 NULL 행이 빠진다고 본 값, ③ 0 은 NOT IN 처럼 T2 의 NULL 때문에 전부 탈락한다고 본 값(NOT IN 이었다면 실제로 0), ④ COUNT 는 행이 없어도 NULL 이 아니라 숫자를 돌려준다. ※ 복원 자료의 표가 단순해 실제 시험 수준으로 데이터·SQL 을 보강했다(묻는 개념은 같다).",
     "_source": "authored",
     "references": [
       {
@@ -604,6 +604,12 @@ export const ROUND_51: QuizQuestion[] = [
           ],
           [
             "20"
+          ],
+          [
+            "NULL"
+          ],
+          [
+            "30"
           ]
         ]
       },
@@ -619,6 +625,9 @@ export const ROUND_51: QuizQuestion[] = [
           ],
           [
             "NULL"
+          ],
+          [
+            "30"
           ]
         ]
       },
@@ -1240,13 +1249,13 @@ export const ROUND_51: QuizQuestion[] = [
     "number": 39,
     "title": "아래 A, B 테이블에 대한 LEFT OUTER JOIN 의 결과 행 수로 옳은 것은?",
     "options": [
-      "1건",
-      "2건",
-      "3건",
-      "0건"
+      "4건",
+      "5건",
+      "6건",
+      "8건"
     ],
     "correctIndex": 2,
-    "explanation": "LEFT OUTER JOIN 은 ON 조건에 매칭되지 않아도 LEFT 테이블(A) 의 모든 행이 유지되므로 A 의 3건이 그대로 결과에 남는다. B 측 컬럼은 매칭되는 행이 있을 때만 채워지고 그렇지 않으면 NULL.",
+    "explanation": "ON 의 두 조건을 모두 만족하는 B 행만 붙고, 붙을 행이 없는 A 행은 B 칸이 NULL 인 채 한 행으로 남는다. A 의 1 은 B(1, 100) 이 200 이하라 짝이 없어 NULL 한 행. A 의 2 는 (2, 220) 한 행. A 의 3 은 두 행이고 각각 (3, 250), (3, 300) 두 짝이 붙어 2 × 2 = 4행. 합계 1 + 1 + 4 = 6건이다(③). ① 4건은 LEFT 조인이면 A 의 행 수 그대로라고 본 값, ② 5건은 짝이 없는 A 의 1 을 지운 INNER JOIN 의 결과, ④ 8건은 B.COL2 > 200 조건을 무시한 값이다. ※ 복원 자료의 표가 단순해 실제 시험 수준으로 데이터·SQL 을 보강했다(묻는 개념은 같다).",
     "_source": "authored",
     "references": [
       {
@@ -1264,6 +1273,9 @@ export const ROUND_51: QuizQuestion[] = [
           ],
           [
             "3"
+          ],
+          [
+            "3"
           ]
         ]
       },
@@ -1271,23 +1283,39 @@ export const ROUND_51: QuizQuestion[] = [
         "type": "table",
         "caption": "B 테이블",
         "headers": [
-          "COL1"
+          "COL1",
+          "COL2"
         ],
         "rows": [
           [
-            "10"
-          ],
-          [
+            "1",
             "100"
           ],
           [
+            "2",
             "220"
+          ],
+          [
+            "3",
+            "250"
+          ],
+          [
+            "3",
+            "150"
+          ],
+          [
+            "3",
+            "300"
+          ],
+          [
+            "4",
+            "500"
           ]
         ]
       },
       {
         "type": "sql",
-        "code": "SELECT A.*, B.*\nFROM   A LEFT OUTER JOIN B ON (A.COL1 = B.COL1 AND B.COL1 > 200);"
+        "code": "SELECT A.COL1, B.COL2\nFROM   A LEFT OUTER JOIN B\nON     (A.COL1 = B.COL1 AND B.COL2 > 200);"
       }
     ]
   },

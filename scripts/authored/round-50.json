@@ -619,13 +619,13 @@
       "number": 24,
       "title": "아래 두 테이블에 대해 UNION 과 UNION ALL 을 각각 수행했을 때 결과 행 수로 옳은 것은?",
       "options": [
-        "UNION 4건, UNION ALL 6건",
-        "UNION 6건, UNION ALL 6건",
-        "UNION 4건, UNION ALL 4건",
-        "UNION 3건, UNION ALL 6건"
+        "UNION 4건, UNION ALL 10건",
+        "UNION 5건, UNION ALL 10건",
+        "UNION 6건, UNION ALL 10건",
+        "UNION 3건, UNION ALL 10건"
       ],
-      "correctIndex": 0,
-      "explanation": "UNION 은 두 결과를 합친 뒤 중복을 제거하므로 A·B·C·D 네 건이 된다. UNION ALL 은 중복 제거 없이 그대로 이어 붙이므로 3 + 3 = 6 건이 된다. 중복 제거를 위해 정렬 작업이 더해지는 만큼 UNION 이 UNION ALL 보다 비용이 크다.",
+      "correctIndex": 1,
+      "explanation": "UNION ALL 은 아무것도 지우지 않으므로 5 + 5 = 10건이다. UNION 은 두 결과를 합친 뒤 중복을 지우는데, 한 테이블 안의 중복(T1 의 B 두 개, T2 의 D 두 개)도 지우고, 집합 연산에서는 NULL 끼리도 같은 값으로 본다. 남는 값은 A, B, C, D, NULL 5건이다(②). ① 4건은 NULL 을 결과에서 뺀 값, ③ 6건은 두 NULL 을 서로 다른 값으로 본 값, ④ 3건은 두 테이블에 공통인 값(B, C, NULL)만 센 INTERSECT 의 결과다. WHERE 의 = 비교와 달리 집합 연산자·DISTINCT·GROUP BY 는 NULL 을 하나로 묶는다. ※ 복원 자료의 표가 단순해 실제 시험 수준으로 데이터·SQL 을 보강했다(묻는 개념은 같다).",
       "references": [
         {
           "type": "table",
@@ -639,6 +639,12 @@
             ],
             [
               "B"
+            ],
+            [
+              "B"
+            ],
+            [
+              "NULL"
             ],
             [
               "C"
@@ -657,6 +663,12 @@
             ],
             [
               "C"
+            ],
+            [
+              "NULL"
+            ],
+            [
+              "D"
             ],
             [
               "D"
