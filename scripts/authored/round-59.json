@@ -26,7 +26,7 @@
         "예금분류는 설계 속성이다."
       ],
       "correctIndex": 2,
-      "explanation": "원금과 이자율로부터 계산되어 도출되는 값은 이자뿐이다. 이자율은 기본 속성이므로 \"이자와 이자율 모두가 파생 속성\"이라는 설명은 옳지 않다.",
+      "explanation": "원금과 이자율로부터 계산되어 도출되는 값은 이자뿐이다. 이자율은 기본 속성이므로 \"이자와 이자율 모두가 파생 속성\"이라는 설명은 옳지 않다. ① 예금분류는 코드(01, 02)로 관리하므로 코드 엔터티로 분리할 수 있고, ② 원금·예치기간은 업무에서 그대로 생기는 기본 속성이며, ④ 예금분류 코드는 관리 편의를 위해 만든 설계 속성이다.",
       "references": [
         {
           "type": "text",
@@ -45,7 +45,7 @@
         "관계"
       ],
       "correctIndex": 1,
-      "explanation": "도메인은 속성이 가질 수 있는 값의 범위(데이터 타입, 길이, 제약 등)를 정의한 개념이다. 제약조건은 데이터 무결성 규칙, 식별자는 엔터티의 인스턴스를 구분하는 속성, 관계는 엔터티 간 연관성을 의미한다.",
+      "explanation": "도메인은 속성이 가질 수 있는 값의 범위(데이터 타입, 길이, 제약 등)를 정의한 개념이다. ① 제약조건은 데이터 무결성 규칙, ③ 식별자는 엔터티의 인스턴스를 구분하는 속성, ④ 관계는 엔터티 간 연관성을 의미한다.",
       "references": [
         {
           "type": "text",
@@ -64,7 +64,7 @@
         "관계 빈도"
       ],
       "correctIndex": 3,
-      "explanation": "관계의 표기법은 관계명(Relationship Name), 관계차수(Cardinality), 관계선택사양(Optionality)의 세 요소로 구성된다. 관계 빈도는 표기 요소에 해당하지 않는다."
+      "explanation": "관계의 표기법은 관계명(Relationship Name), 관계차수(Cardinality), 관계선택사양(Optionality)의 세 요소로 구성된다. 관계 빈도는 표기 요소에 해당하지 않는다. ①②③ 이 관계 표기의 3요소다."
     },
     {
       "subject": "1과목",
@@ -91,7 +91,7 @@
         "B테이블의 FK를 비식별자로 바꾸면 C테이블에서 조인할 때 더 편하다."
       ],
       "correctIndex": 3,
-      "explanation": "비식별자 관계로 바꾸면 부모의 키가 자식의 주식별자에 포함되지 않고 일반 속성(FK)으로만 전이된다(② 는 옳은 설명). 이 때문에 손자 엔터티까지 키가 전파되지 않아 상위 엔터티에 접근하려면 중간 엔터티를 거치는 조인이 추가로 필요해진다. 따라서 조인이 더 편해진다는 ④ 가 옳지 않다.",
+      "explanation": "비식별자 관계로 바꾸면 부모의 키가 자식의 주식별자에 포함되지 않고 일반 속성(FK)으로만 전이된다(② 는 옳은 설명). 이 때문에 손자 엔터티까지 키가 전파되지 않아 상위 엔터티에 접근하려면 중간 엔터티를 거치는 조인이 추가로 필요해진다. 따라서 조인이 더 편해진다는 ④ 가 옳지 않다. ① 네 테이블은 1:M 으로 이어져 있고, ③ A 는 자기 속성으로 식별하는 내부 식별자, B 는 부모 키를 받아 식별하는 외부 식별자를 가진다.",
       "references": [
         {
           "type": "erd",
@@ -111,7 +111,7 @@
         "BCNF"
       ],
       "correctIndex": 2,
-      "explanation": "이행적 종속 제거는 3정규화의 목적이다. 2정규화는 부분 함수 종속을, BCNF는 결정자이면서 후보키가 아닌 종속을 제거한다."
+      "explanation": "이행적 종속 제거는 3정규화의 목적이다. ② 2정규화는 부분 함수 종속을, ④ BCNF는 결정자이면서 후보키가 아닌 종속을 제거한다. ① 1정규화는 반복 그룹·다중값을 없애 원자값으로 만드는 단계다."
     },
     {
       "subject": "1과목",
@@ -124,7 +124,7 @@
         "영속성(Durability)"
       ],
       "correctIndex": 1,
-      "explanation": "트랜잭션의 네 가지 특성은 원자성(Atomicity), 일관성(Consistency), 고립성(Isolation), 영속성(Durability)이다. 상호성(Interactivity)은 ACID와 무관한 개념이므로 정답이다."
+      "explanation": "트랜잭션의 네 가지 특성은 원자성(Atomicity), 일관성(Consistency), 고립성(Isolation), 영속성(Durability)이다. 상호성(Interactivity)은 ACID와 무관한 개념이므로 정답이다. ① 원자성, ③ 일관성, ④ 영속성은 ACID 에 속한다."
     },
     {
       "subject": "1과목",
@@ -170,7 +170,7 @@
         "가, 나, 라"
       ],
       "correctIndex": 2,
-      "explanation": "가는 DCL이 데이터 제어 언어이므로 오답이며, 다는 REVOKE가 권한 회수 명령으로서 물리 디스크 저장과는 무관하므로 오답이다.",
+      "explanation": "가는 DCL이 데이터 제어 언어이므로 오답이며, 다는 REVOKE가 권한 회수 명령으로서 물리 디스크 저장과는 무관하므로 오답이다. ① 과 ④ 는 틀린 가를, ② 는 틀린 다를 포함했다.",
       "references": [
         {
           "type": "text",
@@ -189,7 +189,7 @@
         "LEAD, ORDER BY 조건은 DESC"
       ],
       "correctIndex": 1,
-      "explanation": "`LAG` 는 \"이전 행\" 의 값을 가져오는 함수다. ORDER BY 가 ASC 면 ID=1, 2, 3 순으로 정렬되어 LAG 가 ID=1 의 직전 행(없음 → NULL), ID=2 의 직전(=ID=1, VAL=100) 을 반환한다. ORDER BY 를 DESC 로 바꾸면 ID=3, 2, 1 순이라 LAG 가 \"논리적 다음 행\"(원래 데이터 기준) 을 가져오는 효과 = LEAD 와 같음. 정답은 ② LAG + DESC.",
+      "explanation": "`LAG` 는 \"이전 행\" 의 값을 가져오는 함수다. ORDER BY 가 ASC 면 ID=1, 2, 3 순으로 정렬되어 LAG 가 ID=1 의 직전 행(없음 → NULL), ID=2 의 직전(=ID=1, VAL=100) 을 반환한다. ORDER BY 를 DESC 로 바꾸면 ID=3, 2, 1 순이라 LAG 가 \"논리적 다음 행\"(원래 데이터 기준) 을 가져오는 효과 = LEAD 와 같음. 정답은 ② LAG + DESC. ① LAG + ASC 는 원래 순서의 이전 행이라 역방향 효과가 없고, ③ LEAD + ASC 는 다음 행을 가져오며, ④ LEAD + DESC 는 원래 순서의 이전 행을 가져와 ① 과 같은 결과가 된다.",
       "references": [
         {
           "type": "table",
@@ -313,7 +313,7 @@
         "CROSS JOIN"
       ],
       "correctIndex": 0,
-      "explanation": "Oracle 표기에서 (+) 가 붙은 쪽(B)이 부족분을 NULL 로 채우는 측이므로, A 의 모든 행은 결과에 살아남고 B 는 매칭이 있을 때만 합쳐진다. 즉 A 가 기준이 되는 LEFT OUTER JOIN 에 해당한다. 예시 데이터에서 A.ID=3 은 B 에 매칭이 없지만 결과에 포함되며 B 컬럼이 NULL 로 출력된다. 정답은 ①.",
+      "explanation": "Oracle 표기에서 (+) 가 붙은 쪽(B)이 부족분을 NULL 로 채우는 측이므로, A 의 모든 행은 결과에 살아남고 B 는 매칭이 있을 때만 합쳐진다. 즉 A 가 기준이 되는 LEFT OUTER JOIN 에 해당한다. 예시 데이터에서 A.ID=3 은 B 에 매칭이 없지만 결과에 포함되며 B 컬럼이 NULL 로 출력된다. 정답은 ①. ② RIGHT OUTER JOIN 이면 B 가 기준이라 A.ID=3 이 빠지고, ③ INNER JOIN 도 3 이 빠지며, ④ CROSS JOIN 은 ON 조건 없이 3 × 2 = 6행을 만든다.",
       "references": [
         {
           "type": "table",
@@ -503,7 +503,7 @@
         "NULL"
       ],
       "correctIndex": 2,
-      "explanation": "DDL 실행 시점에 묵시적 커밋이 발생해 직전까지의 30건이 확정된다. 이후 INSERT는 ROLLBACK으로 취소되므로 최종 30건이 남는다.",
+      "explanation": "DDL 실행 시점에 묵시적 커밋이 발생해 직전까지의 30건이 확정된다. 이후 INSERT는 ROLLBACK으로 취소되므로 최종 30건이 남는다. ① 0 은 ROLLBACK 이 COMMIT 된 것까지 취소한다고 본 값, ② 15 는 CREATE INDEX 의 자동 커밋을 놓친 값이고, ④ COUNT(*) 는 행이 없어도 NULL 이 아니라 0 을 돌려준다.",
       "references": [
         {
           "type": "table",
@@ -666,7 +666,7 @@
         "컬럼 타입은 전달되지 않는다."
       ],
       "correctIndex": 2,
-      "explanation": "CTAS는 컬럼 타입과 NOT NULL 제약은 그대로 전달하므로 데이터 속성을 일일이 재정의할 필요가 없다. 반면 기본키·외래키 등 다른 제약사항은 전달되지 않는다. 따라서 ③이 옳은 설명이다."
+      "explanation": "CTAS는 컬럼 타입과 NOT NULL 제약은 그대로 전달하므로 데이터 속성을 일일이 재정의할 필요가 없다. 반면 기본키·외래키 등 다른 제약사항은 전달되지 않는다. 따라서 ③이 옳은 설명이다. ① 컬럼 타입이 그대로 넘어오므로 다시 정의할 필요가 없고, ② NOT NULL 은 전달되며, ④ 컬럼 타입도 전달된다."
     },
     {
       "subject": "2과목",
@@ -679,7 +679,7 @@
         "INSERT INTO TABLE1 VALUES (1, 20240606, '001');"
       ],
       "correctIndex": 3,
-      "explanation": "B 컬럼은 DATE 타입인데 숫자 리터럴 20240606이 직접 입력되어 자동 변환이 이루어지지 않으므로 타입 불일치 오류가 발생한다.",
+      "explanation": "B 컬럼은 DATE 타입인데 숫자 리터럴 20240606이 직접 입력되어 자동 변환이 이루어지지 않으므로 타입 불일치 오류가 발생한다. ① SYSDATE, ② TO_DATE(...), ③ DATE 리터럴은 모두 DATE 값이라 정상 입력된다.",
       "references": [
         {
           "type": "sql",
@@ -748,7 +748,7 @@
         "HIRE_DT >= DATE '2025-10-20' AND HIRE_DT <= DATE '2025-10-20' + 1 - 1/86400"
       ],
       "correctIndex": 2,
-      "explanation": "BETWEEN은 양 끝점을 포함하므로 21일 00:00:00까지 포함되어 20일 밤 자정 이후의 21일 시작 시각이 결과에 혼입된다."
+      "explanation": "BETWEEN은 양 끝점을 포함하므로 21일 00:00:00까지 포함되어 20일 밤 자정 이후의 21일 시작 시각이 결과에 혼입된다. ① 은 20일 0시 이상 21일 0시 미만, ② 는 시분초를 잘라 20일만, ④ 는 20일 0시부터 23:59:59 까지라 모두 20일 하루만 조회한다."
     },
     {
       "subject": "2과목",
@@ -761,7 +761,7 @@
         "30 60 60"
       ],
       "correctIndex": 3,
-      "explanation": "COALESCE 는 인자를 왼쪽부터 평가해 가장 먼저 NULL 이 아닌 값을 돌려준다. 첫 행은 V1 이 30 이라 30, 둘째 행은 V1 이 NULL 이고 V2 가 60 이라 60, 셋째 행은 V1·V2 가 모두 NULL 이고 V3 가 60 이라 60 이 된다. 따라서 결과는 30, 60, 60 순이다.",
+      "explanation": "COALESCE 는 인자를 왼쪽부터 평가해 가장 먼저 NULL 이 아닌 값을 돌려준다. 첫 행은 V1 이 30 이라 30, 둘째 행은 V1 이 NULL 이고 V2 가 60 이라 60, 셋째 행은 V1·V2 가 모두 NULL 이고 V3 가 60 이라 60 이 된다. 따라서 결과는 30, 60, 60 순이다. ② 처럼 NULL 이 나오려면 세 인자가 모두 NULL 이어야 하는데 그런 행은 없고, ③ 은 첫 행에서 V1(30)을 건너뛰고 V3(60)을 고른 결과다.",
       "references": [
         {
           "type": "table",
@@ -810,7 +810,7 @@
         "B B C"
       ],
       "correctIndex": 0,
-      "explanation": "괄호로 묶인 `T2 INTERSECT T3` 가 먼저 실행. T2 = {B}, T3 = {C} 라 공통 원소 없음 → 공집합. 이어 `T1 UNION (공집합)` = T1 = {A, B, C}.",
+      "explanation": "괄호로 묶인 `T2 INTERSECT T3` 가 먼저 실행. T2 = {B}, T3 = {C} 라 공통 원소 없음 → 공집합. 이어 `T1 UNION (공집합)` = T1 = {A, B, C}. ② 는 T1 의 C 를 빠뜨렸는데 T1 은 그대로 남는다. ③④ 처럼 B 가 두 번 나오려면 UNION ALL 이어야 하지만, UNION 은 중복을 없앤다.",
       "references": [
         {
           "type": "table",
@@ -947,7 +947,7 @@
         "나, 다"
       ],
       "correctIndex": 2,
-      "explanation": "ROUND(136.2, -1)은 십의 자리로 반올림되어 140이다. ROUND(-7.532, 2)는 소수 둘째 자리까지 반올림되어 -7.53이다. ROUND(3.561, 0)은 소수 첫째 자리에서 반올림되어 4이므로 (다)는 틀리다.",
+      "explanation": "ROUND(136.2, -1)은 십의 자리로 반올림되어 140이다. ROUND(-7.532, 2)는 소수 둘째 자리까지 반올림되어 -7.53이다. ROUND(3.561, 0)은 소수 첫째 자리에서 반올림되어 4이므로 (다)는 틀리다. ① 은 나를, ② 는 가를 빠뜨렸고, ④ 는 틀린 다를 포함했다.",
       "references": [
         {
           "type": "text",
@@ -985,7 +985,7 @@
         "B B C"
       ],
       "correctIndex": 2,
-      "explanation": "T2 = {B} 에서 T3 = {C} 의 원소를 제외(`NOT IN`)하면 {B} 가 그대로 남는다. T1 = {A, B, C} 와 `UNION ALL` 로 결합하면 중복 제거 없이 {A, B, C, B} = {A, B, B, C} 가 된다.",
+      "explanation": "T2 = {B} 에서 T3 = {C} 의 원소를 제외(`NOT IN`)하면 {B} 가 그대로 남는다. T1 = {A, B, C} 와 `UNION ALL` 로 결합하면 중복 제거 없이 {A, B, C, B} = {A, B, B, C} 가 된다. ① A·② A B 는 T1 의 일부나 아래쪽 결과를 빠뜨린 결과이고, ④ 는 T1 의 A 를 빠뜨린 결과다.",
       "references": [
         {
           "type": "table",
@@ -1096,7 +1096,7 @@
         "오류"
       ],
       "correctIndex": 0,
-      "explanation": "EXISTS 는 서브쿼리가 한 행이라도 반환하면 참이다. 서브쿼리 SELECT NULL FROM A 는 A 의 행 수만큼(3행) NULL 값을 반환하는데, EXISTS 는 값이 아니라 행의 존재만 보므로 참이 된다. 바깥 쿼리와 연관도 없어 A 의 3행이 모두 반환된다(①).",
+      "explanation": "EXISTS 는 서브쿼리가 한 행이라도 반환하면 참이다. 서브쿼리 SELECT NULL FROM A 는 A 의 행 수만큼(3행) NULL 값을 반환하는데, EXISTS 는 값이 아니라 행의 존재만 보므로 참이 된다. 바깥 쿼리와 연관도 없어 A 의 3행이 모두 반환된다(①). ② 0건은 서브쿼리가 NULL 만 돌려주니 거짓이라고 본 결과, ③ 1건은 EXISTS 가 한 행만 남긴다고 본 결과이고, ④ SELECT NULL 은 정상 문법이다.",
       "references": [
         {
           "type": "table",
@@ -1191,7 +1191,7 @@
         "가, 나, 다"
       ],
       "correctIndex": 3,
-      "explanation": "가: Oracle 에서 DDL 은 실행 전후로 묵시적 COMMIT 이 일어난다. 나: 트랜잭션은 여러 SQL 문장을 하나의 논리 단위로 묶을 수 있다. 다: SAVEPOINT 를 지정하면 그 지점까지만 부분 롤백할 수 있다. 세 설명이 모두 옳으므로 ④ 가, 나, 다 이다.",
+      "explanation": "가: Oracle 에서 DDL 은 실행 전후로 묵시적 COMMIT 이 일어난다. 나: 트랜잭션은 여러 SQL 문장을 하나의 논리 단위로 묶을 수 있다. 다: SAVEPOINT 를 지정하면 그 지점까지만 부분 롤백할 수 있다. 세 설명이 모두 옳으므로 ④ 가, 나, 다 이다. ①②③ 은 옳은 설명을 일부 빠뜨렸다.",
       "references": [
         {
           "type": "text",
@@ -1210,7 +1210,7 @@
         "4, 3"
       ],
       "correctIndex": 1,
-      "explanation": "GROUP BY 고객ID로 묶고 HAVING COUNT(배송일자) >= 2를 적용하면 배송 건수가 2건 이상인 고객만 남는다. 고객 2는 2건, 고객 3은 3건이므로 결과는 2와 3이다. 고객 1과 4는 각각 1건뿐이므로 제외된다.",
+      "explanation": "GROUP BY 고객ID로 묶고 HAVING COUNT(배송일자) >= 2를 적용하면 배송 건수가 2건 이상인 고객만 남는다. 고객 2는 2건, 고객 3은 3건이므로 결과는 2와 3이다. 고객 1과 4는 각각 1건뿐이므로 제외된다. ① 과 ④ 는 1건뿐인 고객 4 를, ①③ 은 1건뿐인 고객 1 을 포함했다.",
       "references": [
         {
           "type": "table",
@@ -1280,7 +1280,7 @@
         "ON DELETE CASCADE 옵션에 의해 PARENT와 CHILD 모두 삭제된다."
       ],
       "correctIndex": 3,
-      "explanation": "PARENT 의 ID=1 행이 삭제될 때 CHILD 의 `PAR_ID` 컬럼은 `ON DELETE CASCADE` 로 선언되어 있어 부모 행 삭제와 함께 자식 행(ID=10) 도 자동으로 함께 삭제된다. 결과적으로 두 테이블에서 해당 행이 모두 제거되어 빈 테이블이 된다.",
+      "explanation": "PARENT 의 ID=1 행이 삭제될 때 CHILD 의 `PAR_ID` 컬럼은 `ON DELETE CASCADE` 로 선언되어 있어 부모 행 삭제와 함께 자식 행(ID=10) 도 자동으로 함께 삭제된다. 결과적으로 두 테이블에서 해당 행이 모두 제거되어 빈 테이블이 된다. ① 은 CHILD 행이 남는다고, ② 는 반대로 자식만 지워진다고 본 결과이고, ③ 참조 무결성 오류는 ON DELETE CASCADE 가 없을 때(기본 동작) 나는 결과다.",
       "references": [
         {
           "type": "table",
@@ -1325,7 +1325,7 @@
         "오류 발생"
       ],
       "correctIndex": 0,
-      "explanation": "DEPT 테이블에 DNAME 이 '없는부서' 인 행이 없으므로 서브쿼리는 NULL 을 반환한다. 메인 쿼리의 `DEPTNO = NULL` 비교는 UNKNOWN 으로 평가되어 어떤 행도 TRUE 가 되지 않으므로 공집합이 반환된다. ③ DEPTNO=NULL 사원도 `=` 연산자로는 매칭되지 않음 (IS NULL 만 매칭).",
+      "explanation": "DEPT 테이블에 DNAME 이 '없는부서' 인 행이 없으므로 서브쿼리는 NULL 을 반환한다. 메인 쿼리의 `DEPTNO = NULL` 비교는 UNKNOWN 으로 평가되어 어떤 행도 TRUE 가 되지 않으므로 공집합이 반환된다. ③ DEPTNO=NULL 사원도 `=` 연산자로는 매칭되지 않음 (IS NULL 만 매칭). ② 는 조건이 무시된다고 본 결과이고, ④ 서브쿼리가 0행이어도 = 비교는 오류가 나지 않는다(오류는 2행 이상일 때 난다).",
       "references": [
         {
           "type": "table",
@@ -1397,7 +1397,7 @@
         "6"
       ],
       "correctIndex": 3,
-      "explanation": "ROLLUP(A, B)은 (A,B), (A), () 집계 레벨을 반환한다. (X,1),(X,2),(Y,1),(X),(Y),()의 6건이 출력된다.",
+      "explanation": "ROLLUP(A, B)은 (A,B), (A), () 집계 레벨을 반환한다. (X,1),(X,2),(Y,1),(X),(Y),()의 6건이 출력된다. ① 3 은 (A, B) 그룹만, ② 4 는 A 소계를 빼고 전체 합계만 더한 값, ③ 5 는 전체 합계 () 를 빠뜨린 값이다.",
       "references": [
         {
           "type": "table",
@@ -1438,7 +1438,7 @@
         "M = S = F = 100 (세 컬럼 모두 모든 행에서 100)"
       ],
       "correctIndex": 0,
-      "explanation": "M = MAX(VAL) OVER () 는 전체 최대값이라 모든 행에서 100 이다. S = SUM(VAL) OVER (ORDER BY ID) 는 기본 윈도우(처음~현재 행)의 누적합이라 100, 200, ..., 600 이다. F = FIRST_VALUE(VAL) OVER (... ROWS BETWEEN 200 PRECEDING AND 200 FOLLOWING) 는 프레임의 첫 값이 모두 100 이라 모든 행에서 100 이다. 따라서 M 과 F 는 100 으로 고정이고 S 만 누적값인 ①이 옳다.",
+      "explanation": "M = MAX(VAL) OVER () 는 전체 최대값이라 모든 행에서 100 이다. S = SUM(VAL) OVER (ORDER BY ID) 는 기본 윈도우(처음~현재 행)의 누적합이라 100, 200, ..., 600 이다. F = FIRST_VALUE(VAL) OVER (... ROWS BETWEEN 200 PRECEDING AND 200 FOLLOWING) 는 프레임의 첫 값이 모두 100 이라 모든 행에서 100 이다. 따라서 M 과 F 는 100 으로 고정이고 S 만 누적값인 ①이 옳다. ③ 은 OVER () 인 M 도 누적된다고 본 결과이고, ④ 는 S 의 ORDER BY 가 누적합을 만든다는 점을 놓친 결과다.",
       "references": [
         {
           "type": "table",
@@ -1491,7 +1491,7 @@
         "오류"
       ],
       "correctIndex": 0,
-      "explanation": "CASE 는 WHEN 조건을 위에서부터 차례로 평가해 처음 참이 되는 THEN 값을 반환하고 나머지는 보지 않는다. 첫 조건 1 = 1 이 참이므로 'A' 다(①). 두 번째 조건도 참이지만 평가되지 않으며, 조건이 겹쳐도 오류는 나지 않는다(④).",
+      "explanation": "CASE 는 WHEN 조건을 위에서부터 차례로 평가해 처음 참이 되는 THEN 값을 반환하고 나머지는 보지 않는다. 첫 조건 1 = 1 이 참이므로 'A' 다(①). 두 번째 조건도 참이지만 평가되지 않으며, 조건이 겹쳐도 오류는 나지 않는다(④). ② B 는 마지막으로 참이 되는 조건을 고른 결과이고, ③ C 는 조건이 겹치면 ELSE 로 간다고 본 결과다.",
       "references": [
         {
           "type": "sql",
@@ -1510,7 +1510,7 @@
         "NOCYCLES"
       ],
       "correctIndex": 2,
-      "explanation": "NOCYCLE 옵션을 지정하면 사이클 발생 시 무한 루프에 빠지지 않고 CONNECT_BY_ISCYCLE 값으로 해당 행을 표시한다.",
+      "explanation": "NOCYCLE 옵션을 지정하면 사이클 발생 시 무한 루프에 빠지지 않고 CONNECT_BY_ISCYCLE 값으로 해당 행을 표시한다. ① NO CYCLE 과 ④ NOCYCLES 는 없는 철자이고, ② LEAF 는 CONNECT BY 옵션이 아니다(리프 여부는 CONNECT_BY_ISLEAF 로 본다).",
       "references": [
         {
           "type": "sql",
