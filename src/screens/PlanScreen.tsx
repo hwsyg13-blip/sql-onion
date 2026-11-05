@@ -4,11 +4,13 @@ import { Btn, Tag, Ic, Mascot, MascotGuide, OnionMark, Progress } from '../compo
 import { useProgress, isPlanDayDone } from '../lib/progress';
 import { AdSlot } from '../components/AdSlot';
 import { getNextExam, daysUntilExam, planStartDate } from '../lib/examDate';
+import { EXAM_SETS } from '../data/quizBank';
 
 // 3-week plan v3 — actions 배열 (한 Day 안에 여러 활동 → 각각 따로 버튼).
 // 명세: 사용자 요청 (2026-04-27)
 //   Week 1~2 (14일): 30챕터 이론 마스터 (미니 테스트 제거)
-//   Week 3 Day 15~18 (월~목): 매일 기출 3회차씩 (round-60→49 내림차순, 12회차)
+//   Week 3 Day 15~18 (월~목): 매일 기출 3회차씩 — 가장 최근 12회차를 최신순으로 자동 배치
+//     (EXAM_SETS 기준. 63회가 추가되면 자동으로 63→52 가 된다. 2026-11-05: 61·62회 포함)
 //   Week 3 Day 19~20 (금~토): 모의고사 3개씩
 //   Week 3 Day 21 (일): 최종 암기장
 
@@ -17,6 +19,18 @@ import { getNextExam, daysUntilExam, planStartDate } from '../lib/examDate';
 //   { kind: 'cbt',    label, examId }
 //   { kind: 'mock',   label }
 //   { kind: 'cheatsheet', label }
+
+// 최근 기출 12회차를 최신순으로 하루 3회차씩 Day 15~18 에 배치
+const RECENT_ROUNDS = [...EXAM_SETS].filter(s => /^round-\d+$/.test(s.id)).sort((a, b) => b.round - a.round).slice(0, 12);
+const RECENT_ROUND_DAYS = [0, 1, 2, 3].map(i => {
+  const sets = RECENT_ROUNDS.slice(i * 3, i * 3 + 3);
+  return {
+    week: 3, day: 15 + i, subj: "기출",
+    title: `제${sets.map(s => s.round).join('·')}회`,
+    actions: sets.map(s => ({ kind: 'cbt', label: `제${s.round}회`, examId: s.id })),
+    concept: [i === 0 ? "최신 3회 — 출제 경향 그대로" : "CBT 실전 3회"], est: 270,
+  };
+}).filter(d => d.actions.length);
 
 export const PLAN_DATA = [
   // ─ Week 1 Day 1~4 (4일): 1과목 10챕터 압축 — 출제 비중 10/50 으로 빠르게 보고 2과목에 시간 배분
@@ -94,35 +108,8 @@ export const PLAN_DATA = [
     ],
     concept:["CREATE/ALTER/DROP","GRANT/REVOKE"], est:55},
 
-  // ─ Week 3 Day 15~18: 기출 12회차 (round-60 → round-49 내림차순)
-  {week:3, day:15, subj:"기출", title:"제60·59·58회",
-    actions:[
-      {kind:'cbt',label:'제60회',examId:'round-60'},
-      {kind:'cbt',label:'제59회',examId:'round-59'},
-      {kind:'cbt',label:'제58회',examId:'round-58'},
-    ],
-    concept:["CBT 실전 3회"], est:270},
-  {week:3, day:16, subj:"기출", title:"제57·56·55회",
-    actions:[
-      {kind:'cbt',label:'제57회',examId:'round-57'},
-      {kind:'cbt',label:'제56회',examId:'round-56'},
-      {kind:'cbt',label:'제55회',examId:'round-55'},
-    ],
-    concept:["CBT 실전 3회"], est:270},
-  {week:3, day:17, subj:"기출", title:"제54·53·52회",
-    actions:[
-      {kind:'cbt',label:'제54회',examId:'round-54'},
-      {kind:'cbt',label:'제53회',examId:'round-53'},
-      {kind:'cbt',label:'제52회',examId:'round-52'},
-    ],
-    concept:["CBT 실전 3회"], est:270},
-  {week:3, day:18, subj:"기출", title:"제51·50·49회",
-    actions:[
-      {kind:'cbt',label:'제51회',examId:'round-51'},
-      {kind:'cbt',label:'제50회',examId:'round-50'},
-      {kind:'cbt',label:'제49회',examId:'round-49'},
-    ],
-    concept:["CBT 실전 3회"], est:270},
+  // ─ Week 3 Day 15~18: 기출 최근 12회차 (최신순, 하루 3회차) — RECENT_ROUND_DAYS 로 생성
+  ...RECENT_ROUND_DAYS,
 
   // ─ Week 3 Day 19~20: 모의고사 3개씩
   {week:3, day:19, subj:"모의", title:"실전 모의 3회",

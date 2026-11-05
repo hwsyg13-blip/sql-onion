@@ -248,6 +248,63 @@ function roundExactDate(round, fallbackKo) {
   const wd = '일월화수목금토'[new Date(Date.UTC(e.y, e.m - 1, e.d)).getUTCDay()];
   return `${e.y}년 ${e.m}월 ${e.d}일 (${wd})`;
 }
+// 문항 유형 — 문제 문장·자료로 판별 (회차 소개 페이지 출제 경향용)
+const QTYPES = ['SQL 결과 계산', '개념·설명', '오류 찾기', 'SQL 고르기', '빈칸 채우기'];
+function qtypeOf(q) {
+  const t = q.title || '';
+  const hasCode = (q.references || []).some(x => (x.code || '').trim()) || (q.options || []).some(o => /SELECT|FROM|WHERE|INSERT|UPDATE|CREATE|ALTER/.test(o));
+  if (/오류|문법이 틀린|실행되지 않는/.test(t)) return '오류 찾기';
+  if (/빈칸|들어갈|\(\s*[ㄱㄴ?]\s*\)/.test(t)) return '빈칸 채우기';
+  if (/결과|행 ?수|건수|개수|값으로|값은|합계|출력|반환|몇/.test(t) && hasCode) return 'SQL 결과 계산';
+  if (/SQL ?(로|은|문|을)|조건(으로|식)|절로|구문|쿼리/.test(t) && hasCode) return 'SQL 고르기';
+  return hasCode ? 'SQL 결과 계산' : '개념·설명';
+}
+const isNegative = q => /옳지 않은|틀린|부적절|적절하지 않은|잘못된|아닌 것|거리가 먼/.test(q.title || '');
+function roundStats(r) {
+  const items = r.authored || [], tags = ROUND_TOPICS[String(r.round)] || {};
+  const types = Object.fromEntries(QTYPES.map(k => [k, 0])); const chapters = {};
+  for (const q of items) { types[qtypeOf(q)]++; const c = tags[String(q.number)]; if (c) chapters[c] = (chapters[c] || 0) + 1; }
+  return { n: items.length, types, chapters, neg: items.filter(isNegative).length };
+}
+const ROUND_STATS = Object.fromEntries(rounds.map(r => [r.round, roundStats(r)]));
+function avgStats(list) {
+  const types = Object.fromEntries(QTYPES.map(k => [k, 0])), chapters = {}; let neg = 0;
+  for (const s of list) { QTYPES.forEach(k => types[k] += s.types[k]); for (const [c, v] of Object.entries(s.chapters)) chapters[c] = (chapters[c] || 0) + v; neg += s.neg; }
+  const k = list.length || 1;
+  return { types: Object.fromEntries(QTYPES.map(x => [x, types[x] / k])), chapters: Object.fromEntries(Object.entries(chapters).map(([c, v]) => [c, v / k])), neg: neg / k };
+}
+const AVG_REFORMED = avgStats(rounds.filter(r => r.round >= 52).map(r => ROUND_STATS[r.round]));
+const AVG_OLD = avgStats(rounds.filter(r => r.round < 52).map(r => ROUND_STATS[r.round]));
+const pct = (v, n) => `${Math.round(v / n * 100)}%`;
+const fmt1 = v => (Math.round(v * 10) / 10).toString();
+
+function trendHtml(r, idx) {
+  const s = ROUND_STATS[r.round], avg = r.round >= 52 ? AVG_REFORMED : AVG_OLD;
+  const avgLabel = r.round >= 52 ? '현행 기준 평균 (52회~)' : '개편 전 평균 (45~51회)';
+  const typeRows = QTYPES.filter(k => s.types[k] || avg.types[k] >= 0.5).map(k => `<tr><td>${k}</td><td>${s.types[k]}문항 (${pct(s.types[k], s.n)})</td><td>${fmt1(avg.types[k])}</td></tr>`).join('');
+  const notes = [];
+  const sqlShare = s.types['SQL 결과 계산'] / s.n, avgSql = avg.types['SQL 결과 계산'] / 50;
+  if (Math.abs(sqlShare - avgSql) >= 0.06) notes.push(`SQL 결과를 직접 계산하는 문제가 ${pct(s.types['SQL 결과 계산'], s.n)}로 평균(${Math.round(avgSql * 100)}%)보다 ${sqlShare > avgSql ? '많다' : '적다'}.`);
+  if (s.types['오류 찾기'] >= 3) notes.push(`"오류가 나는 SQL 고르기" 가 ${s.types['오류 찾기']}문항 — 문법 규칙(별칭 위치, GROUP BY 컬럼, 집합 연산 컬럼 수 등)을 묻는 유형이 평소(${fmt1(avg.types['오류 찾기'])}문항)보다 많았다.`);
+  if (Math.abs(s.neg - avg.neg) >= 3) notes.push(`"옳지 않은 것" 을 고르는 부정형 문제가 ${s.neg}문항으로 평균(${fmt1(avg.neg)})보다 ${s.neg > avg.neg ? '많아 보기 하나하나를 판정해야 하는 시간이 길었다' : '적다'}.`);
+  const prev = rounds[idx - 1];
+  if (prev) {
+    const ps = ROUND_STATS[prev.round];
+    const diffs = Object.keys({ ...s.chapters, ...ps.chapters }).filter(c => CHAPTER_TITLE[c])
+      .map(c => [c, (s.chapters[c] || 0) - (ps.chapters[c] || 0)]).filter(([, d]) => Math.abs(d) >= 2).sort((a, b) => Math.abs(b[1]) - Math.abs(a[1])).slice(0, 3);
+    if (diffs.length) notes.push(`제${prev.round}회와 비교하면 ${diffs.map(([c, d]) => `${CHAPTER_TITLE[c]} ${d > 0 ? '+' : ''}${d}`).join(', ')}문항.`);
+  }
+  const rare = Object.entries(s.chapters).filter(([c, v]) => CHAPTER_TITLE[c] && v >= 1 && (avg.chapters[c] || 0) < 0.6).map(([c]) => `<a href="/theory/${c}/">${esc(CHAPTER_TITLE[c])}</a>`);
+  if (rare.length) notes.push(`평소 잘 안 나오던 주제가 출제됐다: ${rare.join(', ')}.`);
+  return `
+    <h2>출제 경향 분석</h2>
+    <table>
+      <thead><tr><th>문항 유형</th><th>제${r.round}회</th><th>${avgLabel}</th></tr></thead>
+      <tbody>${typeRows}<tr><td>"옳지 않은 것" 고르기 (부정형)</td><td>${s.neg}문항 (${pct(s.neg, s.n)})</td><td>${fmt1(avg.neg)}</td></tr></tbody>
+    </table>
+    ${notes.length ? `<ul>${notes.map(x => `<li>${x}</li>`).join('')}</ul>` : `<p>문항 유형 비율이 ${avgLabel}과 거의 같다.</p>`}`;
+}
+
 function buildRoundPage(r, idx) {
   const { round, date } = r;
   const items = r.authored || [];
@@ -284,6 +341,7 @@ function buildRoundPage(r, idx) {
       <thead><tr><th>주제 (이론 챕터)</th><th>문항</th></tr></thead>
       <tbody>${top.map(([c, n]) => `<tr><td><a href="/theory/${c}/">${esc(CHAPTER_TITLE[c])}</a></td><td>${n}</td></tr>`).join('')}</tbody>
     </table>
+    ${trendHtml(r, idx)}
     <nav class="chapter-nav">${prev ? `<a href="/exam/round-${prev.round}/">← 제${prev.round}회</a>` : '<span></span>'}<a href="/exam/">회차 목록</a>${next ? `<a href="/exam/round-${next.round}/">제${next.round}회 →</a>` : '<span></span>'}</nav>
 ` + tail;
 }
@@ -324,6 +382,14 @@ function buildExamIndexPage() {
       <li><strong>틀린 문항은 해설을 읽고 해당 <a href="/theory/">이론 챕터</a>로 돌아간다.</strong> 같은 유형이 다음 회차에 숫자만 바뀌어 다시 나온다.</li>
       <li><strong>SQL 결과를 묻는 문제는 종이에 표를 그려 행을 직접 센다.</strong> 조인·GROUP BY·윈도우 함수는 눈으로만 풀면 실수가 잦다.</li>
     </ol>
+
+    <h2>회차별 출제 경향 (현행 기준 52회~)</h2>
+    <p>각 회차 50문항을 유형별로 나눠 센 표다. "SQL 결과 계산" 은 표와 SQL 을 주고 결과·행 수를 묻는 문제, "개념·설명" 은 용어·설명의 옳고 그름을 묻는 문제다.</p>
+    <table>
+      <thead><tr><th>회차</th><th>SQL 결과 계산</th><th>개념·설명</th><th>오류 찾기</th><th>부정형</th><th>가장 많이 나온 주제</th></tr></thead>
+      <tbody>${rounds.filter(r => r.round >= 52).sort((a, b) => b.round - a.round).map(r => { const s = ROUND_STATS[r.round]; const top = Object.entries(s.chapters).filter(([c]) => CHAPTER_TITLE[c]).sort((a, b) => b[1] - a[1])[0]; return `<tr><td><a href="/exam/round-${r.round}/">${r.round}회</a></td><td>${pct(s.types['SQL 결과 계산'], s.n)}</td><td>${pct(s.types['개념·설명'], s.n)}</td><td>${s.types['오류 찾기']}</td><td>${s.neg}</td><td>${top ? `${esc(CHAPTER_TITLE[top[0]])} ${top[1]}` : ''}</td></tr>`; }).join('')}</tbody>
+    </table>
+    <p>현행 기준 평균은 SQL 결과 계산 ${pct(AVG_REFORMED.types['SQL 결과 계산'], 50)}, 개념·설명 ${pct(AVG_REFORMED.types['개념·설명'], 50)}, 부정형 ${fmt1(AVG_REFORMED.neg)}문항이다. 2과목 40문항 중 절반 넘게가 SQL 을 직접 읽고 계산하는 문제라, 이론을 읽는 것만으로는 부족하고 기출을 손으로 풀어 봐야 한다.</p>
 
     <h2>회차별 문제집 (${rounds.length}개)</h2>
     <p>회차마다 소개 페이지에 단원별 문항 수와 많이 나온 주제(문항 내용을 이론 챕터에 대응시켜 센 것)를 정리했다. 문제 본문은 학습 화면에서 푼다.</p>
@@ -587,8 +653,8 @@ const guides = [
       <h2>전체 로드맵</h2>
       <ul>
         <li><strong>1주차 (Day 1–7):</strong> 1·2과목 이론 빠른 1회독</li>
-        <li><strong>2주차 (Day 8–14):</strong> 현행 기준 기출 풀이 (52회~58회)</li>
-        <li><strong>3주차 (Day 15–21):</strong> 최근 회차(59회~) + 약점 보강 + 모의고사</li>
+        <li><strong>2주차 (Day 8–14):</strong> 현행 기준 기출 풀이 (52회~${lastRound.round - 4}회)</li>
+        <li><strong>3주차 (Day 15–21):</strong> 최근 4개 회차(${[0,1,2,3].map(i => lastRound.round - 3 + i).join('·')}회) + 약점 보강 + 모의고사</li>
       </ul>
 
       <h2>1주차 — 이론 1회독</h2>
@@ -626,7 +692,7 @@ const guides = [
       <table>
         <thead><tr><th>날짜</th><th>할 일</th></tr></thead>
         <tbody>
-          <tr><td>Day 15–17</td><td>최근 회차(59회 이후)를 시험 환경처럼 90분 타이머로 풀고 채점</td></tr>
+          <tr><td>Day 15–17</td><td>최근 회차를 시험 환경처럼 90분 타이머로 풀고 채점 — ${[3,2,1,0].map(i => `<a href="/exam/round-${lastRound.round - i}/">${lastRound.round - i}회</a>`).join(' · ')}. 최신 회차일수록 이번 시험과 출제 경향이 가깝다</td></tr>
           <tr><td>Day 18–19</td><td>2·3주차 오답 다시 풀기 + 틀린 문제가 몰린 챕터 이론 보강</td></tr>
           <tr><td>Day 20</td><td>랜덤 모의고사 50문항으로 마지막 점검 (1과목 4문항 이상인지 확인)</td></tr>
           <tr><td>Day 21</td><td><a href="/guide/sqld-tips/">자주 틀리는 함정</a>과 각 챕터 '30초 정리'만 훑고 충분히 쉰다</td></tr>
