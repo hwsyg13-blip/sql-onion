@@ -69,6 +69,7 @@ const APP_CSS = (() => {
 /** 앱 전용 요소 정리: 죽은 복사 버튼 제거, mermaid(자바스크립트로 그리는 도식)는 학습 화면 안내로 대체 */
 function staticTheoryBody(html) {
   return html
+    .replace(/<a href="#" data-chapter="(c\d+)">/g, '<a href="/theory/$1/">')
     .replace(/<button[^>]*class="copy-btn"[^>]*>[\s\S]*?<\/button>/g, '')
     .replace(/<div class="mermaid"[^>]*>[\s\S]*?<\/div>/g,
       '<p class="diagram-note">이 도식은 <a href="/">SQLD양파 학습 화면</a>에서 그림으로 볼 수 있어요.</p>');
@@ -390,6 +391,17 @@ function buildExamIndexPage() {
       <tbody>${rounds.filter(r => r.round >= 52).sort((a, b) => b.round - a.round).map(r => { const s = ROUND_STATS[r.round]; const top = Object.entries(s.chapters).filter(([c]) => CHAPTER_TITLE[c]).sort((a, b) => b[1] - a[1])[0]; return `<tr><td><a href="/exam/round-${r.round}/">${r.round}회</a></td><td>${pct(s.types['SQL 결과 계산'], s.n)}</td><td>${pct(s.types['개념·설명'], s.n)}</td><td>${s.types['오류 찾기']}</td><td>${s.neg}</td><td>${top ? `${esc(CHAPTER_TITLE[top[0]])} ${top[1]}` : ''}</td></tr>`; }).join('')}</tbody>
     </table>
     <p>현행 기준 평균은 SQL 결과 계산 ${pct(AVG_REFORMED.types['SQL 결과 계산'], 50)}, 개념·설명 ${pct(AVG_REFORMED.types['개념·설명'], 50)}, 부정형 ${fmt1(AVG_REFORMED.neg)}문항이다. 2과목 40문항 중 절반 넘게가 SQL 을 직접 읽고 계산하는 문제라, 이론을 읽는 것만으로는 부족하고 기출을 손으로 풀어 봐야 한다.</p>
+
+    <h2>연도별 합격률</h2>
+    <table>
+      <thead><tr><th>연도</th><th>합격률</th><th>해당 회차</th></tr></thead>
+      <tbody>
+        <tr><td>2023년</td><td>47.81%</td><td>48~51회</td></tr>
+        <tr><td>2024년</td><td>57.29%</td><td>52~55회 (개편 첫해)</td></tr>
+        <tr><td>2025년</td><td><strong>41.68%</strong></td><td>56~59회</td></tr>
+      </tbody>
+    </table>
+    <p>2025년은 최근 5년 중 가장 낮았다. 응시자 열 명 중 여섯 명이 떨어진 셈이라, 개편 첫해(2024년)의 합격률만 보고 가볍게 준비하면 위험하다. 출처: 민간자격정보서비스 공식 데이터를 정리한 한국데이터경제신문 기사(2026년 7월 26일). 회차별 합격률은 확인할 수 있는 공식 자료를 찾지 못해 연도 단위로만 싣는다.</p>
 
     <h2>회차별 문제집 (${rounds.length}개)</h2>
     <p>회차마다 소개 페이지에 단원별 문항 수와 많이 나온 주제(문항 내용을 이론 챕터에 대응시켜 센 것)를 정리했다. 문제 본문은 학습 화면에서 푼다.</p>
