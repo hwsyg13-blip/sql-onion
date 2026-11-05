@@ -19,7 +19,7 @@ export const ROUND_61: QuizQuestion[] = [
       "응용프로그램이 필요로 하는 데이터만 정의하여 접근 범위를 제한할 수 있다."
     ],
     "correctIndex": 2,
-    "explanation": "외부 스키마는 사용자 관점의 뷰(View) 단계이다. 하나의 DB에 대해 여러 개의 뷰(외부 스키마)를 만들 수 있고, 필요한 데이터만 정의해 접근 범위를 제한할 수 있다. ③의 '전체 저장 구조·물리적 저장 방법'은 내부 스키마의 설명이다. (외계인이네: 외부·개념·내부)",
+    "explanation": "외부 스키마는 사용자 관점의 뷰(View) 단계이다. 하나의 DB에 대해 여러 개의 뷰(외부 스키마)를 만들 수 있고, 필요한 데이터만 정의해 접근 범위를 제한할 수 있다. ③의 '전체 저장 구조·물리적 저장 방법'은 내부 스키마의 설명이다. (외계인이네: 외부·개념·내부) ①②④ 는 외부 스키마의 옳은 설명이다.",
     "_source": "authored"
   },
   {
@@ -37,7 +37,7 @@ export const ROUND_61: QuizQuestion[] = [
       "인스턴스"
     ],
     "correctIndex": 0,
-    "explanation": "도메인은 속성이 가질 수 있는 값의 범위(데이터 타입, 제약 사항)를 의미한다. 속성에 대한 타입·제약·값의 범위라는 키워드가 나오면 도메인을 떠올린다.",
+    "explanation": "도메인은 속성이 가질 수 있는 값의 범위(데이터 타입, 제약 사항)를 의미한다. 속성에 대한 타입·제약·값의 범위라는 키워드가 나오면 도메인을 떠올린다. ② 식별자는 인스턴스를 구분하는 속성, ③ 엔터티는 업무에서 관리하는 대상의 집합, ④ 인스턴스는 엔터티의 개별 건이라 값의 범위와는 관계가 없다.",
     "_source": "authored",
     "references": [
       {
@@ -61,7 +61,7 @@ export const ROUND_61: QuizQuestion[] = [
       "행위 엔터티"
     ],
     "correctIndex": 3,
-    "explanation": "엔터티는 유형·무형 기준으로 유형·개념·사건 엔터티로 나뉜다. 행위 엔터티는 발생 시점 기준(기본·중심·행위 엔터티)의 분류이므로 유형·무형 기준에 해당하지 않는다.",
+    "explanation": "엔터티는 유형·무형 기준으로 유형·개념·사건 엔터티로 나뉜다. 행위 엔터티는 발생 시점 기준(기본·중심·행위 엔터티)의 분류이므로 유형·무형 기준에 해당하지 않는다. ①②③ 은 유형·무형 기준의 분류다.",
     "_source": "authored"
   },
   {
@@ -97,7 +97,7 @@ export const ROUND_61: QuizQuestion[] = [
       "가, 나, 다"
     ],
     "correctIndex": 1,
-    "explanation": "관계선택사양은 관계 참여가 필수인지 선택인지를 나타내며(가), 조직 내 업무 규칙에 따라 결정된다(나). 두 엔터티 관계에서 참여자의 수를 표현하는 것은 관계 차수이므로 (다)는 옳지 않다.",
+    "explanation": "관계선택사양은 관계 참여가 필수인지 선택인지를 나타내며(가), 조직 내 업무 규칙에 따라 결정된다(나). 두 엔터티 관계에서 참여자의 수를 표현하는 것은 관계 차수이므로 (다)는 옳지 않다. ① 은 옳은 (나)를 빠뜨렸고, ③④ 는 옳지 않은 (다)를 포함했다.",
     "_source": "authored",
     "references": [
       {
@@ -121,7 +121,7 @@ export const ROUND_61: QuizQuestion[] = [
       "연관 관계는 오퍼레이션에서 파라미터 등으로 이용할 수 있고, 의존 관계는 소스 코드에서 멤버 변수로 선언하여 사용할 수 있다."
     ],
     "correctIndex": 3,
-    "explanation": "연관 관계(존재적 관계)는 멤버 변수로 지속적으로 참조하고, 의존 관계(행위적 관계)는 오퍼레이션의 파라미터·지역 변수·반환값처럼 일시적으로 사용한다. ④는 두 관계의 구현 방식을 서로 바꿔 설명했으므로 옳지 않다.",
+    "explanation": "연관 관계(존재적 관계)는 멤버 변수로 지속적으로 참조하고, 의존 관계(행위적 관계)는 오퍼레이션의 파라미터·지역 변수·반환값처럼 일시적으로 사용한다. ④는 두 관계의 구현 방식을 서로 바꿔 설명했으므로 옳지 않다. ①②③ 은 옳은 설명이다.",
     "_source": "authored"
   },
   {
@@ -139,7 +139,7 @@ export const ROUND_61: QuizQuestion[] = [
       "고객명은 중복과 NULL이 허용되므로 식별자로 사용할 수 없다."
     ],
     "correctIndex": 2,
-    "explanation": "주식별자는 유일성·최소성·불변성·존재성(NOT NULL)을 만족해야 한다. 이메일은 식별은 가능하지만 NULL이 허용되어 존재성을 만족하지 못하므로 주식별자로 사용할 수 없다.",
+    "explanation": "주식별자는 유일성·최소성·불변성·존재성(NOT NULL)을 만족해야 한다. 이메일은 식별은 가능하지만 NULL이 허용되어 존재성을 만족하지 못하므로 주식별자로 사용할 수 없다. ① 고객번호와 ② 주민등록번호는 식별 가능하고 NOT NULL 이라 주식별자가 될 수 있고, ④ 고객명은 중복·NULL 이 허용되어 식별자가 될 수 없으므로 옳은 설명이다.",
     "_source": "authored",
     "references": [
       {
@@ -185,7 +185,7 @@ export const ROUND_61: QuizQuestion[] = [
       "위배하고 있지 않음"
     ],
     "correctIndex": 2,
-    "explanation": "(주문ID, 상품ID)가 복합 식별자이지만, 일반 속성끼리 종속 관계가 있다. 할인쿠폰코드가 결정되면 할인쿠폰명이 결정되므로(할인쿠폰코드 → 할인쿠폰명) 주식별자를 거치지 않는 이행 함수 종속이 존재하여 제3정규형을 위배한다. 복합 식별자라는 이유만으로 제2정규형이라고 단정하지 않도록 주의한다.",
+    "explanation": "(주문ID, 상품ID)가 복합 식별자이지만, 일반 속성끼리 종속 관계가 있다. 할인쿠폰코드가 결정되면 할인쿠폰명이 결정되므로(할인쿠폰코드 → 할인쿠폰명) 주식별자를 거치지 않는 이행 함수 종속이 존재하여 제3정규형을 위배한다. 복합 식별자라는 이유만으로 제2정규형이라고 단정하지 않도록 주의한다. ① 모든 값이 원자값이라 1NF 는 만족하고, ② PK 의 일부(주문ID 나 상품ID 하나)에만 종속되는 속성이 없어 2NF 도 만족한다. 이행 종속이 있으므로 ④ 는 틀리다.",
     "_source": "authored",
     "references": [
       {
@@ -243,7 +243,7 @@ export const ROUND_61: QuizQuestion[] = [
       "자식 엔터티가 부모 엔터티 없이 독립적으로 존재 가능함을 의미한다."
     ],
     "correctIndex": 1,
-    "explanation": "배타적 관계(Exclusive, Arc)는 하나의 엔터티가 관계를 맺을 수 있는 여러 엔터티 중 반드시 하나와만 관계를 맺는 구조로, ERD 에서는 분기되는 관계선을 가로지르는 호(Arc)로 표기한다. 예를 들어 차량의 소유자는 법인소유자이거나 개인소유자 중 하나이지 둘 다일 수 없다. 슈퍼·서브타입은 하나의 엔터티를 공통·개별 속성으로 나누는 개념으로 배타적 관계와는 다르다. 정답은 ② 이다.",
+    "explanation": "배타적 관계(Exclusive, Arc)는 하나의 엔터티가 관계를 맺을 수 있는 여러 엔터티 중 반드시 하나와만 관계를 맺는 구조로, ERD 에서는 분기되는 관계선을 가로지르는 호(Arc)로 표기한다. 예를 들어 차량의 소유자는 법인소유자이거나 개인소유자 중 하나이지 둘 다일 수 없다. 슈퍼·서브타입은 하나의 엔터티를 공통·개별 속성으로 나누는 개념으로 배타적 관계와는 다르다. 정답은 ② 이다. ① 은 여러 엔터티와 동시에 관계를 맺는 포함(Inclusive) 관계, ③ 은 1:1 관계 차수, ④ 는 선택 참여(비식별) 관계에 대한 설명이다.",
     "_source": "authored"
   },
   {
@@ -279,7 +279,7 @@ export const ROUND_61: QuizQuestion[] = [
       "시퀀스"
     ],
     "correctIndex": 0,
-    "explanation": "관계형 데이터베이스에서 데이터를 저장하는 기본 단위는 테이블이다. 뷰는 가상 테이블, 인덱스는 검색 성능을 위한 객체, 시퀀스는 일련번호 생성 객체이다.",
+    "explanation": "관계형 데이터베이스에서 데이터를 저장하는 기본 단위는 테이블이다. ② 뷰는 데이터를 저장하지 않는 가상 테이블, ③ 인덱스는 검색 성능을 위한 객체, ④ 시퀀스는 일련번호 생성 객체이다.",
     "_source": "authored"
   },
   {
@@ -297,7 +297,7 @@ export const ROUND_61: QuizQuestion[] = [
       "10, 7"
     ],
     "correctIndex": 3,
-    "explanation": "COUNT(*)는 NULL 여부와 관계없이 전체 행 수(10)를 세고, COUNT(컬럼)은 해당 컬럼이 NULL인 행을 제외하고 센다. DEPT_ID가 NULL인 행이 3건이므로 B는 7이다.",
+    "explanation": "COUNT(*)는 NULL 여부와 관계없이 전체 행 수(10)를 세고, COUNT(컬럼)은 해당 컬럼이 NULL인 행을 제외하고 센다. DEPT_ID가 NULL인 행이 3건이므로 B는 7이다. ① 은 COUNT(*) 도 NULL 을 뺀다고 본 결과, ② 는 COUNT(컬럼) 도 NULL 을 센다고 본 결과, ③ 은 A·B 를 뒤바꾼 결과다.",
     "_source": "authored",
     "references": [
       {
@@ -360,7 +360,7 @@ export const ROUND_61: QuizQuestion[] = [
       "ALLEN"
     ],
     "correctIndex": 3,
-    "explanation": "(+)가 붙지 않은 EMP가 기준 테이블인 아우터 조인이지만, 이후 WHERE 절의 LOCATION <> 'DALLAS' 조건이 적용된다. KING(20번 부서)은 DALLAS라 제외, ALLEN(10번 부서, NEW YORK)만 통과한다. DEPT_ID가 NULL인 JONES·CLARK는 조인에 실패해 LOCATION이 NULL이므로 NULL <> 'DALLAS'는 UNKNOWN이 되어 결과에서 제외된다.",
+    "explanation": "(+)가 붙지 않은 EMP가 기준 테이블인 아우터 조인이지만, 이후 WHERE 절의 LOCATION <> 'DALLAS' 조건이 적용된다. KING(20번 부서)은 DALLAS라 제외, ALLEN(10번 부서, NEW YORK)만 통과한다. DEPT_ID가 NULL인 JONES·CLARK는 조인에 실패해 LOCATION이 NULL이므로 NULL <> 'DALLAS'는 UNKNOWN이 되어 결과에서 제외된다. ① 은 LOCATION 이 NULL 인 JONES·CLARK 를 남긴 결과이고, ②③ 은 DALLAS 인 KING 을 빼지 않은 결과다(② 는 CLARK 까지 남겼다).",
     "_source": "authored",
     "references": [
       {
@@ -436,7 +436,7 @@ export const ROUND_61: QuizQuestion[] = [
       "오류가 발생한다."
     ],
     "correctIndex": 1,
-    "explanation": "IN 목록에 같은 값(100)이 중복되어도 오류는 발생하지 않으며 (COL = 100 OR COL = 200 OR COL = 100)과 같이 처리된다. 100과 200에 해당하는 행이 각 1건이므로 결과는 2건이다.",
+    "explanation": "IN 목록에 같은 값(100)이 중복되어도 오류는 발생하지 않으며 (COL = 100 OR COL = 200 OR COL = 100)과 같이 처리된다. 100과 200에 해당하는 행이 각 1건이므로 결과는 2건이다. ③ 3 은 IN 목록의 값 개수(3개)만큼 행이 나온다고 본 결과이고, ④ 목록에 같은 값이 있어도 오류는 나지 않는다.",
     "_source": "authored",
     "references": [
       {
@@ -478,7 +478,7 @@ export const ROUND_61: QuizQuestion[] = [
       "5"
     ],
     "correctIndex": 1,
-    "explanation": "A로 그룹핑한 뒤 COUNT(*)(전체 건수)와 COUNT(B)(NULL 제외 건수)를 더한다. A=10은 2+0=2, A=20은 3+2=5, A=30은 1+0=1이므로 CNT는 2, 5, 1이다.",
+    "explanation": "A로 그룹핑한 뒤 COUNT(*)(전체 건수)와 COUNT(B)(NULL 제외 건수)를 더한다. A=10은 2+0=2, A=20은 3+2=5, A=30은 1+0=1이므로 CNT는 2, 5, 1이다. ① 은 B 가 모두 NULL 인 그룹의 합이 NULL 이 된다고 본 결과인데, COUNT 는 NULL 이 아니라 0 을 돌려준다. ③ 8 은 GROUP BY 없이 전체를 센 값(6 + 2), ④ 5 는 A=20 그룹 하나만 본 값이다.",
     "_source": "authored",
     "references": [
       {
@@ -536,7 +536,7 @@ export const ROUND_61: QuizQuestion[] = [
       "10, 12, 15, 22, 28, 30, 31"
     ],
     "correctIndex": 0,
-    "explanation": "<= ALL (15, 30)은 15 이하이면서 30 이하인 값, 즉 두 값의 최솟값인 15 이하를 의미한다. TBL1에서 15 이하인 값은 10, 12, 15이다.",
+    "explanation": "<= ALL (15, 30)은 15 이하이면서 30 이하인 값, 즉 두 값의 최솟값인 15 이하를 의미한다. TBL1에서 15 이하인 값은 10, 12, 15이다. ② 는 15 이상 30 이하로, ③ 은 30 이하(<= ANY, 최댓값 기준)로 본 결과이고, ④ 는 조건 없이 전부 고른 결과다.",
     "_source": "authored",
     "references": [
       {
@@ -605,7 +605,7 @@ export const ROUND_61: QuizQuestion[] = [
       "SELECT - SQL의 SELECT 절에 해당한다."
     ],
     "correctIndex": 3,
-    "explanation": "순수 관계 연산자의 SELECT는 행(로우)을 선택하는 연산으로 SQL의 WHERE 절에 대응하고, PROJECT가 컬럼을 선택하여 SQL의 SELECT 절에 대응한다. ④는 SELECT 절이 아니라 WHERE 절에 해당한다고 해야 옳다.",
+    "explanation": "순수 관계 연산자의 SELECT는 행(로우)을 선택하는 연산으로 SQL의 WHERE 절에 대응하고, PROJECT가 컬럼을 선택하여 SQL의 SELECT 절에 대응한다. ④는 SELECT 절이 아니라 WHERE 절에 해당한다고 해야 옳다. ①②③ 은 옳은 설명이다.",
     "_source": "authored"
   },
   {
@@ -623,7 +623,7 @@ export const ROUND_61: QuizQuestion[] = [
       "5개"
     ],
     "correctIndex": 2,
-    "explanation": "%는 0개 이상의 문자, _는 정확히 한 개의 문자를 의미한다. 따라서 'A', 임의의 한 글자, 'C'가 연속해야 한다. A1C, A-CD, A_C, ABC는 매칭되지만 AB_C는 A와 C 사이에 두 글자가 있어 매칭되지 않는다. 따라서 4건이다.",
+    "explanation": "%는 0개 이상의 문자, _는 정확히 한 개의 문자를 의미한다. 따라서 'A', 임의의 한 글자, 'C'가 연속해야 한다. A1C, A-CD, A_C, ABC는 매칭되지만 AB_C는 A와 C 사이에 두 글자가 있어 매칭되지 않는다. 따라서 4건이다. ④ 5개는 AB_C 까지 센 값이고, ① 2개·② 3개는 _ 가 '-' 나 '_' 같은 기호 한 글자도 대신한다는 점을 놓친 값이다.",
     "_source": "authored",
     "references": [
       {
@@ -667,7 +667,7 @@ export const ROUND_61: QuizQuestion[] = [
       "5000"
     ],
     "correctIndex": 0,
-    "explanation": "AMOUNT 내림차순으로 정렬하면 5000(50000), 4000(45000), 1000(40000), 3000(35000), 2000(30000) 순이다. OFFSET 2 ROWS로 앞의 2개 행을 건너뛰고 FETCH NEXT 1 ROWS ONLY로 다음 1개 행만 가져오므로 3번째 행의 ID인 1000이 조회된다.",
+    "explanation": "AMOUNT 내림차순으로 정렬하면 5000(50000), 4000(45000), 1000(40000), 3000(35000), 2000(30000) 순이다. OFFSET 2 ROWS로 앞의 2개 행을 건너뛰고 FETCH NEXT 1 ROWS ONLY로 다음 1개 행만 가져오므로 3번째 행의 ID인 1000이 조회된다. ④ 5000 은 건너뛰지 않고 첫 행을, ② 는 건너뛰지 않고 앞 3행을 가져온 결과이며, ③ 은 오름차순으로 정렬한 결과다.",
     "_source": "authored",
     "references": [
       {
@@ -745,7 +745,7 @@ export const ROUND_61: QuizQuestion[] = [
       "abc"
     ],
     "correctIndex": 1,
-    "explanation": "LENGTH('abcdefg')는 7이므로 시작 위치는 7 - 3 = 4이다. SUBSTR에서 길이 인수를 생략하면 시작 위치부터 끝까지 반환하므로 4번째 문자 d부터 끝까지인 'defg'가 된다.",
+    "explanation": "LENGTH('abcdefg')는 7이므로 시작 위치는 7 - 3 = 4이다. SUBSTR에서 길이 인수를 생략하면 시작 위치부터 끝까지 반환하므로 4번째 문자 d부터 끝까지인 'defg'가 된다. ① abcd 는 앞에서 4글자, ④ abc 는 앞에서 3글자를 자른 결과이고, ③ d 는 시작 위치의 한 글자만 가져온 결과다.",
     "_source": "authored",
     "references": [
       {
@@ -769,7 +769,7 @@ export const ROUND_61: QuizQuestion[] = [
       "ROWNUM"
     ],
     "correctIndex": 0,
-    "explanation": "동일 순위(공동 1등)가 존재하고 그 다음 순위가 건너뛰어 3등이 되는 패턴은 RANK이다. DENSE_RANK는 2등이 이어지고, ROW_NUMBER는 동일 값에도 고유한 순번을 부여하며, ROWNUM은 OVER 절과 함께 쓸 수 없다.",
+    "explanation": "동일 순위(공동 1등)가 존재하고 그 다음 순위가 건너뛰어 3등이 되는 패턴은 RANK이다. ② DENSE_RANK였다면 PARK 가 2 가 되고, ③ ROW_NUMBER는 같은 점수에도 1, 2 처럼 다른 순번을 부여하며, ④ ROWNUM은 OVER 절과 함께 쓸 수 없다.",
     "_source": "authored",
     "references": [
       {
@@ -850,7 +850,7 @@ export const ROUND_61: QuizQuestion[] = [
       "tbl_test260531#"
     ],
     "correctIndex": 3,
-    "explanation": "테이블명은 문자로 시작해야 하고 SQL 예약어는 사용할 수 없으며 공백과 하이픈(-) 등은 허용되지 않는다. 특수문자는 _, #, $ 정도만 허용되므로 tbl_test260531#만 가능하다.",
+    "explanation": "테이블명은 문자로 시작해야 하고 SQL 예약어는 사용할 수 없으며 공백과 하이픈(-) 등은 허용되지 않는다. 특수문자는 _, #, $ 정도만 허용되므로 tbl_test260531#만 가능하다. ① 은 숫자로 시작하고, ② table 은 예약어이며, ③ 은 하이픈(-)이 들어가 쓸 수 없다.",
     "_source": "authored"
   },
   {
@@ -868,7 +868,7 @@ export const ROUND_61: QuizQuestion[] = [
       "컬럼명 A, B, C / 값 200, 300, 400"
     ],
     "correctIndex": 2,
-    "explanation": "PIVOT의 FOR 절은 컬럼명으로 올릴 값(10, 20, 30)이고, 앞의 집계 함수(SUM(SAL))가 그 안을 채운다. 부서별 SAL 합계는 10번 300, 20번 300, 30번 500이며, AS 별칭이 있으므로 컬럼명은 10, 20, 30 대신 A, B, C가 된다.",
+    "explanation": "PIVOT의 FOR 절은 컬럼명으로 올릴 값(10, 20, 30)이고, 앞의 집계 함수(SUM(SAL))가 그 안을 채운다. 부서별 SAL 합계는 10번 300, 20번 300, 30번 500이며, AS 별칭이 있으므로 컬럼명은 10, 20, 30 대신 A, B, C가 된다. ①② 는 AS 별칭을 무시하고 컬럼명을 10, 20, 30 으로 본 결과이고, ②④ 의 200, 300, 400 은 SUM 이 아니라 MAX 로 집계한 값이다.",
     "_source": "authored",
     "references": [
       {
@@ -928,7 +928,7 @@ export const ROUND_61: QuizQuestion[] = [
       "20, 40"
     ],
     "correctIndex": 1,
-    "explanation": "LEFT OUTER JOIN 후 A.COL1은 NULL, NULL, 40, 40이고 집계 함수는 NULL을 제외하므로 AVG는 40이다. B.COL2는 조인 결과 40, 40, NULL, NULL이지만 NVL로 NULL이 0이 되어 40, 40, 0, 0의 평균인 20이 된다.",
+    "explanation": "LEFT OUTER JOIN 후 A.COL1은 NULL, NULL, 40, 40이고 집계 함수는 NULL을 제외하므로 AVG는 40이다. B.COL2는 조인 결과 40, 40, NULL, NULL이지만 NVL로 NULL이 0이 되어 40, 40, 0, 0의 평균인 20이 된다. ① 20, 20 은 AVG(A.COL1) 에서도 NULL 을 0 으로 센 값, ③ 40, 40 은 NVL 을 쓴 쪽에서도 NULL 을 뺀 값, ④ 는 두 값을 바꾼 결과다.",
     "_source": "authored",
     "references": [
       {
@@ -1004,7 +1004,7 @@ export const ROUND_61: QuizQuestion[] = [
       "WHERE 절의 조건은 START WITH와 CONNECT BY로 계층구조가 모두 생성된 뒤에 적용되어, 그중 조건을 만족하는 행만 걸러서 보여준다."
     ],
     "correctIndex": 2,
-    "explanation": "NOCYCLE은 순환 참조가 발생하면 그 이전까지만 출력하고 더 진행하지 않는 옵션이다. ③은 반대로 설명하고 있어 옳지 않다.",
+    "explanation": "NOCYCLE은 순환 참조가 발생하면 그 이전까지만 출력하고 더 진행하지 않는 옵션이다. ③은 반대로 설명하고 있어 옳지 않다. ①②④ 는 옳은 설명이다.",
     "_source": "authored"
   },
   {
@@ -1064,7 +1064,7 @@ export const ROUND_61: QuizQuestion[] = [
       "오류가 발생한다. (OVER 절에는 PARTITION BY가 반드시 필요하다)"
     ],
     "correctIndex": 0,
-    "explanation": "OVER 절에 ORDER BY만 있고 윈도우 범위가 생략되면 기본값인 RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW가 적용되어 첫 행부터 현재 행까지의 누적 합계가 계산된다. 전체 합계가 모든 행에 표시되려면 OVER()처럼 ORDER BY가 없어야 하며, PARTITION BY는 생략할 수 있다.",
+    "explanation": "OVER 절에 ORDER BY만 있고 윈도우 범위가 생략되면 기본값인 RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW가 적용되어 첫 행부터 현재 행까지의 누적 합계가 계산된다. ② 전체 합계가 모든 행에 표시되려면 OVER()처럼 ORDER BY가 없어야 하고, ③ 윈도우 함수는 행을 묶지 않으므로 날짜별로 그룹화되지 않으며, ④ PARTITION BY는 생략할 수 있어 오류가 나지 않는다.",
     "_source": "authored",
     "references": [
       {
@@ -1088,7 +1088,7 @@ export const ROUND_61: QuizQuestion[] = [
       "게시판 유형별 게시글 건수가 출력된다."
     ],
     "correctIndex": 0,
-    "explanation": "PARTITION BY로 게시판 유형별로 나누고 REG_DATE 내림차순으로 순번을 매긴 뒤 RN = 1만 남기므로, 각 유형에서 가장 최근에 등록된 글 1건씩이 조회된다.",
+    "explanation": "PARTITION BY로 게시판 유형별로 나누고 REG_DATE 내림차순으로 순번을 매긴 뒤 RN = 1만 남기므로, 각 유형에서 가장 최근에 등록된 글 1건씩이 조회된다. ② 는 PARTITION BY 가 없을 때의 결과이고, ③ 상위 2건은 RN <= 2 에 PARTITION BY 도 없어야 나오며, ④ 건수를 내려면 COUNT 가 필요하다.",
     "_source": "authored",
     "references": [
       {
@@ -1158,7 +1158,7 @@ export const ROUND_61: QuizQuestion[] = [
       "오류 발생"
     ],
     "correctIndex": 2,
-    "explanation": "NOT IN은 AND 조건으로 풀리므로 서브쿼리 결과에 NULL이 하나라도 있으면 NULL 비교가 UNKNOWN이 되어 전체가 UNKNOWN 처리된다. PARENT_ID에 NULL이 있으므로 어떤 행도 조건을 만족하지 못해 공집합이 반환된다.",
+    "explanation": "NOT IN은 AND 조건으로 풀리므로 서브쿼리 결과에 NULL이 하나라도 있으면 NULL 비교가 UNKNOWN이 되어 전체가 UNKNOWN 처리된다. PARENT_ID에 NULL이 있으므로 어떤 행도 조건을 만족하지 못해 공집합이 반환된다. ② 는 서브쿼리에 NULL 이 없을 때(또는 NOT EXISTS 를 썼을 때)의 결과이고, ① 은 NOT IN 조건이 모두 참이 된다고 본 결과이며, ④ NULL 이 섞여도 오류는 나지 않는다.",
     "_source": "authored",
     "references": [
       {
@@ -1218,7 +1218,7 @@ export const ROUND_61: QuizQuestion[] = [
       "오류가 발생한다."
     ],
     "correctIndex": 2,
-    "explanation": "CEIL(7.1)은 올림으로 8, FLOOR(8.2)는 버림으로 8, ROUND(7.6)은 반올림으로 8, TRUNC(8.9)는 버림으로 8이다. 모든 함수의 결과가 8로 같다.",
+    "explanation": "CEIL(7.1)은 올림으로 8, FLOOR(8.2)는 버림으로 8, ROUND(7.6)은 반올림으로 8, TRUNC(8.9)는 버림으로 8이다. 모든 함수의 결과가 8로 같다. ① A(올림)도 8 이고, ② C 도 8 이며, ④ 소수 자리 인수를 생략해도 오류는 나지 않는다.",
     "_source": "authored",
     "references": [
       {
@@ -1242,7 +1242,7 @@ export const ROUND_61: QuizQuestion[] = [
       "모두 오류가 발생한다."
     ],
     "correctIndex": 1,
-    "explanation": "UNION은 두 SELECT의 컬럼 수와 대응 컬럼의 데이터 타입이 같아야 하고, ORDER BY는 마지막 SELECT 문에 한 번만 사용할 수 있다. 가는 컬럼 수가 다르고, 나는 ORDER BY 위치가 잘못되었다. 다는 TBL1의 COL2(숫자)와 TBL2의 COL3(숫자)이 대응되어 컬럼 수·타입이 같고 ORDER BY가 마지막에 한 번만 있으므로 오류가 없다.",
+    "explanation": "UNION은 두 SELECT의 컬럼 수와 대응 컬럼의 데이터 타입이 같아야 하고, ORDER BY는 마지막 SELECT 문에 한 번만 사용할 수 있다. ① 가는 컬럼 수가 다르고, ③ 에 들어간 나는 ORDER BY 위치가 잘못되어 오류가 난다. 다는 TBL1의 COL2(숫자)와 TBL2의 COL3(숫자)이 대응되어 컬럼 수·타입이 같고 ORDER BY가 마지막에 한 번만 있으므로 오류가 없다. 따라서 ④ 처럼 모두 오류가 나지는 않는다.",
     "_source": "authored",
     "references": [
       {
@@ -1308,7 +1308,7 @@ export const ROUND_61: QuizQuestion[] = [
       "가, 나, 다"
     ],
     "correctIndex": 3,
-    "explanation": "기준 SQL 은 TBL1 의 {1, 2, 3, 4} 에서 TBL2 의 값 2 를 빼 {1, 3, 4} 를 돌려준다. 가는 서브쿼리에서 NULL 을 미리 걸러 낸 NOT IN 이라 1, 3, 4, 나는 NOT EXISTS 라 NULL 의 영향 없이 1, 3, 4, 다는 LEFT JOIN 뒤 짝이 없는 행(T2.COL2 IS NULL)만 남기는 안티 조인이라 1, 3, 4 로 모두 같다(④). 주의: MINUS 는 결과의 중복도 없애므로 TBL1 에 같은 값이 두 번 있으면 MINUS 는 한 번, 가·나·다는 두 번 나와 결과가 달라진다. ※ 복원 자료의 TBL1 에는 3 이 두 번 들어 있어 어느 보기도 정답이 되지 않았다. 원문을 확인할 수 없어 단일 정답이 되도록 마지막 값을 4 로 바로잡았다.",
+    "explanation": "기준 SQL 은 TBL1 의 {1, 2, 3, 4} 에서 TBL2 의 값 2 를 빼 {1, 3, 4} 를 돌려준다. 가는 서브쿼리에서 NULL 을 미리 걸러 낸 NOT IN 이라 1, 3, 4, 나는 NOT EXISTS 라 NULL 의 영향 없이 1, 3, 4, 다는 LEFT JOIN 뒤 짝이 없는 행(T2.COL2 IS NULL)만 남기는 안티 조인이라 1, 3, 4 로 모두 같다(④). 주의: MINUS 는 결과의 중복도 없애므로 TBL1 에 같은 값이 두 번 있으면 MINUS 는 한 번, 가·나·다는 두 번 나와 결과가 달라진다. ※ 복원 자료의 TBL1 에는 3 이 두 번 들어 있어 어느 보기도 정답이 되지 않았다. 원문을 확인할 수 없어 단일 정답이 되도록 마지막 값을 4 로 바로잡았다. ① 가만, ② 가·나, ③ 나·다는 같은 결과를 내는 SQL 을 일부 빠뜨렸다.",
     "_source": "authored",
     "references": [
       {
@@ -1372,7 +1372,7 @@ export const ROUND_61: QuizQuestion[] = [
       "EQUI JOIN이 자동으로 적용된다."
     ],
     "correctIndex": 0,
-    "explanation": "FROM 절에 두 테이블만 나열하고 조인 조건이 없으므로 두 테이블의 모든 행의 조합(카테시안 곱, 크로스 조인)이 생성된다. 자동 조인은 NATURAL JOIN을 명시했을 때만 수행된다.",
+    "explanation": "FROM 절에 두 테이블만 나열하고 조인 조건이 없으므로 두 테이블의 모든 행의 조합(카테시안 곱, 크로스 조인)이 생성된다. ② ④ 처럼 저절로 등가 조인이 되지는 않으며(같은 이름 컬럼으로 조인하려면 NATURAL JOIN 을 명시해야 한다), ③ 조인 조건이 없어도 문법 오류는 아니다.",
     "_source": "authored",
     "references": [
       {
@@ -1396,7 +1396,7 @@ export const ROUND_61: QuizQuestion[] = [
       "사용자가 직접 정의해야 하는 일반 컬럼이다."
     ],
     "correctIndex": 0,
-    "explanation": "ROWNUM은 시스템이 제공하는 의사 컬럼으로 조회되는 행에 1부터 순차적으로 부여된다. WHERE 절 평가 과정에서 부여되므로 ROWNUM <= 5처럼 조건으로 사용할 수 있다.",
+    "explanation": "ROWNUM은 시스템이 제공하는 의사 컬럼으로 조회되는 행에 1부터 순차적으로 부여된다. WHERE 절 평가 과정에서 부여되므로 ROWNUM <= 5처럼 조건으로 사용할 수 있다. ② ROWNUM 은 WHERE 절을 평가하면서 행마다 부여되며, ③ 물리적 컬럼도 ④ 사용자가 정의하는 컬럼도 아닌 의사 컬럼이다.",
     "_source": "authored"
   },
   {
@@ -1414,7 +1414,7 @@ export const ROUND_61: QuizQuestion[] = [
       "SELECT A\nFROM TBL1\nWHERE EXISTS (SELECT 1 FROM TBL2 WHERE TBL1.A = TBL2.A);"
     ],
     "correctIndex": 2,
-    "explanation": "스칼라 서브쿼리는 단일 행·단일 컬럼만 반환해야 한다. ③은 A=100일 때 TBL2에서 두 행(10, 20)이 반환되어 오류(ORA-01427)가 발생한다. ②는 SUM 집계로 한 행이 보장되어 안전하다.",
+    "explanation": "스칼라 서브쿼리는 단일 행·단일 컬럼만 반환해야 한다. ③은 A=100일 때 TBL2에서 두 행(10, 20)이 반환되어 오류(ORA-01427)가 발생한다. ②는 SUM 집계로 한 행이 보장되어 안전하다. ① IN 과 ④ EXISTS 는 여러 행을 받아도 되는 연산이라 오류가 없다.",
     "_source": "authored",
     "references": [
       {
@@ -1478,7 +1478,7 @@ export const ROUND_61: QuizQuestion[] = [
       "결과 없음 (공집합)"
     ],
     "correctIndex": 1,
-    "explanation": "서브쿼리의 COL2 IN (100, NULL)은 OR 연산이라 NULL은 무시되고 100만 선택되므로 서브쿼리 결과는 {100}이다. 따라서 NOT IN (100)에서 COL1이 100이 아닌 값 중 200만 참이 되고, NULL은 100인지 아닌지 알 수 없어(UNKNOWN) 제외된다.",
+    "explanation": "서브쿼리의 COL2 IN (100, NULL)은 OR 연산이라 NULL은 무시되고 100만 선택되므로 서브쿼리 결과는 {100}이다. 따라서 NOT IN (100)에서 COL1이 100이 아닌 값 중 200만 참이 되고, NULL은 100인지 아닌지 알 수 없어(UNKNOWN) 제외된다. ① 100 은 IN 과 NOT IN 을 거꾸로 본 결과이고, ④ 공집합은 서브쿼리 결과에 NULL 이 들어간다고 본 결과다(COL2 IN (100, NULL) 에서 NULL 행은 뽑히지 않는다).",
     "_source": "authored",
     "references": [
       {
@@ -1538,7 +1538,7 @@ export const ROUND_61: QuizQuestion[] = [
       "SELECT ENAME, NVL2(SAL, 100, SAL) AS RESULT FROM EMP;"
     ],
     "correctIndex": 3,
-    "explanation": "기준 SQL은 SAL이 NULL이면 100, 아니면 SAL을 반환한다. NVL, COALESCE, DECODE는 모두 동일하다. NVL2(expr, A, B)는 expr이 NULL이 아니면 A, NULL이면 B를 반환하므로 NVL2(SAL, 100, SAL)은 정반대로 동작하여 결과가 다르다.",
+    "explanation": "기준 SQL은 SAL이 NULL이면 100, 아니면 SAL을 반환한다. ① NVL, ② COALESCE, ③ DECODE(NULL 끼리 같다고 본다)는 모두 기준 SQL 과 같다. NVL2(expr, A, B)는 expr이 NULL이 아니면 A, NULL이면 B를 반환하므로 NVL2(SAL, 100, SAL)은 정반대로 동작하여 결과가 다르다.",
     "_source": "authored",
     "references": [
       {
@@ -1562,7 +1562,7 @@ export const ROUND_61: QuizQuestion[] = [
       "EMP_ID, ENAME: (10001, GIM), (10002, PARK)"
     ],
     "correctIndex": 1,
-    "explanation": "MERGE는 ON 조건(EMP_ID 일치)이 맞으면 UPDATE, 맞지 않으면 INSERT를 수행한다. 두 행 모두 EMP_ID가 일치하므로 INSERT는 수행되지 않고 EMP_NAME이 EMP_TEMP의 값으로 갱신되어 (10001, GIM), (10002, LEE)가 된다.",
+    "explanation": "MERGE는 ON 조건(EMP_ID 일치)이 맞으면 UPDATE, 맞지 않으면 INSERT를 수행한다. 두 행 모두 EMP_ID가 일치하므로 INSERT는 수행되지 않고 EMP_NAME이 EMP_TEMP의 값으로 갱신되어 (10001, GIM), (10002, LEE)가 된다. ① 은 갱신이 일어나지 않았다고 본 결과, ③ 은 일치해도 INSERT 한다고 본 결과, ④ 는 10002 행의 갱신을 빠뜨린 결과다.",
     "_source": "authored",
     "references": [
       {
@@ -1622,7 +1622,7 @@ export const ROUND_61: QuizQuestion[] = [
       "AABBCC, AABBCC"
     ],
     "correctIndex": 2,
-    "explanation": "패턴 '(A|B)+C'는 A 또는 B가 1회 이상 반복된 뒤 C가 오는 패턴으로 왼쪽부터 최장 일치하여 'AABBC'가 된다(C는 반복 대상이 아니라 1개). 패턴 'AB+C'는 A 바로 뒤에 B가 1회 이상 이어진 뒤 C가 와야 하므로 첫 A(다음이 A)는 탈락하고 두 번째 A부터 매칭되어 'ABBC'가 된다.",
+    "explanation": "패턴 '(A|B)+C'는 A 또는 B가 1회 이상 반복된 뒤 C가 오는 패턴으로 왼쪽부터 최장 일치하여 'AABBC'가 된다(C는 반복 대상이 아니라 1개). 패턴 'AB+C'는 A 바로 뒤에 B가 1회 이상 이어진 뒤 C가 와야 하므로 첫 A(다음이 A)는 탈락하고 두 번째 A부터 매칭되어 'ABBC'가 된다. ①④ 의 첫 값 AABBCC 는 C 도 반복된다고 본 값이고, ②④ 의 두 번째 값 AABBCC 는 AB+C 가 첫 A 부터 끝까지 맞는다고 본 값이다.",
     "_source": "authored",
     "references": [
       {
@@ -1646,7 +1646,7 @@ export const ROUND_61: QuizQuestion[] = [
       "USING 절은 두 테이블에서 컬럼명이 서로 다른 경우에도 사용할 수 있다."
     ],
     "correctIndex": 2,
-    "explanation": "NATURAL JOIN은 두 테이블에서 이름이 같은 컬럼을 자동으로 찾아 등가 조인한다. CROSS JOIN은 조인 조건이 없고, INNER JOIN은 비등가 조건도 가능하며, USING 절은 컬럼명이 같은 경우에만 사용할 수 있다.",
+    "explanation": "NATURAL JOIN은 두 테이블에서 이름이 같은 컬럼을 자동으로 찾아 등가 조인한다. ① CROSS JOIN은 조인 조건이 없고, ② INNER JOIN은 비등가 조건도 가능하며, ④ USING 절은 컬럼명이 같은 경우에만 사용할 수 있다.",
     "_source": "authored"
   },
   {
@@ -1706,7 +1706,7 @@ export const ROUND_61: QuizQuestion[] = [
       "7개"
     ],
     "correctIndex": 2,
-    "explanation": "A가 매칭되는 것은 100 한 건뿐이다. NULL은 UNKNOWN이라 서로 조인되지 않으므로 나머지는 각각 따로 출력된다. 매칭 1건 + TBL1 단독(200, NULL, NULL) 3건 + TBL2 단독(300, NULL) 2건 = 6건이다.",
+    "explanation": "A가 매칭되는 것은 100 한 건뿐이다. NULL은 UNKNOWN이라 서로 조인되지 않으므로 나머지는 각각 따로 출력된다. 매칭 1건 + TBL1 단독(200, NULL, NULL) 3건 + TBL2 단독(300, NULL) 2건 = 6건이다. ② 5개는 NULL 끼리 조인된다고 본 값이고, ④ 7개는 100 도 짝을 짓지 않고 두 테이블의 행을 모두 따로 센 값이다.",
     "_source": "authored",
     "references": [
       {
@@ -1769,7 +1769,7 @@ export const ROUND_61: QuizQuestion[] = [
       "오류 발생"
     ],
     "correctIndex": 1,
-    "explanation": "DEPT_ID가 20이면서 SAL이 NULL인 행에 대한 MIN(SAL)은 NULL이다. 집계 함수는 NULL을 제외하지만 입력 값이 없으면 결과가 NULL이고, NULL과의 산술 연산은 모두 NULL이므로 2800 + NULL = NULL이다.",
+    "explanation": "DEPT_ID가 20이면서 SAL이 NULL인 행에 대한 MIN(SAL)은 NULL이다. 집계 함수는 NULL을 제외하지만 입력 값이 없으면 결과가 NULL이고, NULL과의 산술 연산은 모두 NULL이므로 2800 + NULL = NULL이다. ① 2800 은 NULL 을 무시하고 더한 값, ③ 0 은 대상 행이 없는 MIN 을 0 으로 본 값이고, ④ 대상 행이 0건이어도 집계 함수는 오류 없이 NULL 을 돌려준다.",
     "_source": "authored",
     "references": [
       {
@@ -1829,7 +1829,7 @@ export const ROUND_61: QuizQuestion[] = [
       "8개"
     ],
     "correctIndex": 2,
-    "explanation": "GROUPING SETS는 나열한 기준별로 따로 그룹핑한 결과를 UNION ALL한 것과 같다. 중첩 괄호 (DEPTNO, PRODUCT)는 한 덩어리로 취급되어 4행, DEPTNO 단독 2행, 빈 괄호 () 전체 합계 1행이므로 4 + 2 + 1 = 7행이다.",
+    "explanation": "GROUPING SETS는 나열한 기준별로 따로 그룹핑한 결과를 UNION ALL한 것과 같다. 중첩 괄호 (DEPTNO, PRODUCT)는 한 덩어리로 취급되어 4행, DEPTNO 단독 2행, 빈 괄호 () 전체 합계 1행이므로 4 + 2 + 1 = 7행이다. ① 4개는 (DEPTNO, PRODUCT) 그룹만, ② 6개는 전체 합계 () 를 빠뜨린 값이고, ④ 8개는 () 대신 PRODUCT 단독 그룹(2행)을 센 값이다.",
     "_source": "authored",
     "references": [
       {
@@ -1884,7 +1884,7 @@ export const ROUND_61: QuizQuestion[] = [
       "DELETE FROM EMP WHERE EMP_ID = 1;"
     ],
     "correctIndex": 2,
-    "explanation": "EMP.DEPT_ID는 DEPT.DEPT_ID를 참조하는 외래키이다. DEPT에 20번 부서가 없으므로 ③은 참조 무결성 위반(ORA-02291)이 발생한다. FK 컬럼에는 NULL이 허용되어 ②는 가능하고, 자식(EMP) 행 삭제는 문제가 없다.",
+    "explanation": "EMP.DEPT_ID는 DEPT.DEPT_ID를 참조하는 외래키이다. DEPT에 20번 부서가 없으므로 ③은 참조 무결성 위반(ORA-02291)이 발생한다. ① 10번 부서는 있으므로 가능하고, FK 컬럼에는 NULL이 허용되어 ②도 가능하며, ④ 자식(EMP) 행 삭제는 문제가 없다.",
     "_source": "authored",
     "references": [
       {
@@ -1908,7 +1908,7 @@ export const ROUND_61: QuizQuestion[] = [
       "NULL, -50, 30"
     ],
     "correctIndex": 0,
-    "explanation": "LAG(AMT)는 직전 행의 AMT를 반환하므로 NULL, 100, 150이 된다. AMT에서 이를 빼면 100 - NULL = NULL, 150 - 100 = 50, 120 - 150 = -30이다.",
+    "explanation": "LAG(AMT)는 직전 행의 AMT를 반환하므로 NULL, 100, 150이 된다. AMT에서 이를 빼면 100 - NULL = NULL, 150 - 100 = 50, 120 - 150 = -30이다. ② 는 첫 행의 차이를 0 으로, ③ 은 LAG 의 NULL 을 0 으로 보고 100 - 0 을 계산한 결과이며, ④ 는 직전 값에서 현재 값을 뺀(LAG - AMT) 결과다.",
     "_source": "authored",
     "references": [
       {
@@ -1954,7 +1954,7 @@ export const ROUND_61: QuizQuestion[] = [
       "3"
     ],
     "correctIndex": 2,
-    "explanation": "SAVEPOINT 문제는 ROLLBACK을 먼저 찾는다. ROLLBACK TO SP1은 SP1 이후의 변경(2, 3 삽입)만 취소하므로 남는 것은 SP1 이전의 1과 이후에 새로 삽입한 4로 총 2행이다.",
+    "explanation": "SAVEPOINT 문제는 ROLLBACK을 먼저 찾는다. ROLLBACK TO SP1은 SP1 이후의 변경(2, 3 삽입)만 취소하므로 남는 것은 SP1 이전의 1과 이후에 새로 삽입한 4로 총 2행이다. ① 0 은 COMMIT 전에 모든 행이 취소된다고, ② 1 은 ROLLBACK TO SP1 이 처음부터 전부 취소한다고 본 값이고, ④ 3 은 SP1 이전과 이후를 거꾸로 본 값(2, 3, 4)이다.",
     "_source": "authored",
     "references": [
       {
