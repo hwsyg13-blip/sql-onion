@@ -55,7 +55,7 @@
 | 54-27 | NOT IN + NVL | 서브쿼리에 NVL, TAB2 에 NULL | 2 | (A) "NULL 있으면 0" 암기를 깨는 문항 / TAB2 의 NULL 행은 남지 않음 |
 | 55-14 | ROLLUP(COL1), COL1 | NULL 그룹 추가 | 8 | (C) Oracle 은 중복 묶음을 지우지 않음. 뒤에 COL1 이 있어 총계가 안 생긴다는 점을 해설에 |
 | 58-28 | NULLS LAST + FETCH | NULL 이 두 컬럼에 하나씩, 두 번째 기준 DESC | 12 NULL / 11 1004 / 11 1002 | (C) NULLS LAST 는 바로 앞 기준에만 적용 — DEPTNO NULL 행이 맨 앞에 오는 점이 함정 |
-| 59-30 | INTERSECT 우선 + UNION ALL | 중복·NULL 추가, 결과 행 수로 묻도록 바꿈 | 6건 | (C) 괄호가 있어 DBMS 별 우선순위 차이가 생기지 않음 |
+| ~~59-30~~ | — | **되돌림**: 이론 c222 가 이 문항의 원래 데이터를 예제로 인용하고 있어 원래대로 둠 | — | — |
 | 55-21 | OUTER 뒤 INNER JOIN | "테이블별 ID 값" 요약표 → 실제 4개 테이블, T2 에 중복 | 3건 | (B) 마지막 INNER 가 앞의 OUTER 행을 줄이지 않는다고 보면 5 → 오답 ④ / 모바일 CBT 화면에서 표 4개 렌더링 확인 |
 
 ## 3차 — 1과목 ERD 3문항
