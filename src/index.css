@@ -592,9 +592,14 @@ img, svg {
 .theory-md table tbody td:first-child { color: var(--fg-1); font-weight: 700; }
 /* 함수 | 기능 | 예시 → 결과 표: 모바일에서도 세 칸이 고르게 */
 .theory-md table.fn { table-layout: fixed; width: 100%; }
-.theory-md table.fn th:nth-child(1), .theory-md table.fn td:nth-child(1) { width: 27%; }
-.theory-md table.fn th:nth-child(2), .theory-md table.fn td:nth-child(2) { width: 30%; }
-.theory-md table.fn th:nth-child(3), .theory-md table.fn td:nth-child(3) { width: 43%; }
+.theory-md table.fn th:nth-child(1) { width: 23%; }
+.theory-md table.fn th:nth-child(2) { width: 27%; }
+.theory-md table.fn th:nth-child(3) { width: 30%; }
+.theory-md table.fn th:nth-child(4) { width: 20%; }
+.theory-md table.fn td { font-size: 13px; padding-left: 8px; padding-right: 8px; }
+/* 함수·기능 칸을 rowspan 으로 병합한 이어지는 행: 첫 칸이 예시라 굵게 하지 않는다 */
+.theory-md table.fn tbody tr.cont td:first-child { font-weight: 400; color: inherit; }
+.theory-md table.fn td[rowspan] { vertical-align: top; }
 .theory-md table.fn td { word-break: keep-all; overflow-wrap: anywhere; }
 .theory-md table code {
   background: var(--point-050); color: var(--point-600);
