@@ -19,7 +19,7 @@ export const ROUND_62: QuizQuestion[] = [
       "매출 엔터티 (월별 매출 집계)"
     ],
     "correctIndex": 1,
-    "explanation": "발생 시점에 따라 엔터티는 기본·중심·행위 엔터티로 나뉜다. 사원은 다른 엔터티 없이 업무에 원래 있는 기본 엔터티다(②). 주문·계약·매출은 기본 엔터티(고객·상품 등)에서 생겨 업무의 중심이 되는 중심 엔터티라 성격이 같다. 행위 엔터티는 주문목록·변경이력처럼 두 개 이상의 엔터티에서 생기는 것이다.",
+    "explanation": "발생 시점에 따라 엔터티는 기본·중심·행위 엔터티로 나뉜다. 사원은 다른 엔터티 없이 업무에 원래 있는 기본 엔터티다(②). 주문·계약·매출은 기본 엔터티(고객·상품 등)에서 생겨 업무의 중심이 되는 중심 엔터티라 성격이 같다. 행위 엔터티는 주문목록·변경이력처럼 두 개 이상의 엔터티에서 생기는 것이다. ①(주문)·③(계약)·④(매출)은 모두 중심 엔터티라 성격이 같다.",
     "_source": "authored"
   },
   {
@@ -55,7 +55,7 @@ export const ROUND_62: QuizQuestion[] = [
       "업무에서 실제 사용하는 용어를 사용한다."
     ],
     "correctIndex": 0,
-    "explanation": "속성명은 군더더기 없이 간결한 명사형으로 짓는 것이 원칙이므로 서술적(긴 서술형) 이름은 옳지 않다. 약어 사용 최소화, 현업 용어 반영, 모델 전체에서의 유일성 확보는 모두 옳은 원칙이다.",
+    "explanation": "속성명은 군더더기 없이 간결한 명사형으로 짓는 것이 원칙이므로 서술적(긴 서술형) 이름은 옳지 않다. 약어 사용 최소화, 현업 용어 반영, 모델 전체에서의 유일성 확보는 모두 옳은 원칙이다. ② 약어 피하기, ③ 모델 전체에서 유일·일관, ④ 업무 용어 사용은 모두 옳은 원칙이다.",
     "_source": "authored"
   },
   {
@@ -73,7 +73,7 @@ export const ROUND_62: QuizQuestion[] = [
       "고객과 주문은 다대다 관계이며 둘 다 선택적 참여이다."
     ],
     "correctIndex": 2,
-    "explanation": "ERD에서는 상대 엔터티 쪽 기호가 나의 참여 조건이다. 고객 입장에서 주문 쪽에는 동그라미(○)가 있어 주문을 한 건도 하지 않을 수 있는 선택 참여이고, 주문 입장에서 고객 쪽에는 수직선(┼)이 있어 반드시 고객이 존재해야 하는 필수 참여이다. 주문 쪽 까마귀발은 1:N을 뜻한다.",
+    "explanation": "ERD에서는 상대 엔터티 쪽 기호가 나의 참여 조건이다. 고객 입장에서 주문 쪽에는 동그라미(○)가 있어 주문을 한 건도 하지 않을 수 있는 선택 참여이고, 주문 입장에서 고객 쪽에는 수직선(┼)이 있어 반드시 고객이 존재해야 하는 필수 참여이다. 주문 쪽 까마귀발은 1:N을 뜻한다. ① 은 차수(1:1)와 고객 쪽 참여(필수)가 틀렸고, ② 는 필수·선택을 반대로 말했으며, ④ 는 차수(M:N)와 주문 쪽 참여(선택)가 틀렸다.",
     "_source": "authored",
     "references": [
       {
@@ -102,7 +102,7 @@ export const ROUND_62: QuizQuestion[] = [
       "비식별 관계에서는 부모의 식별자가 자식의 일반 속성이 된다."
     ],
     "correctIndex": 2,
-    "explanation": "식별 관계는 강한 연결이므로 실선, 비식별 관계는 느슨한 연결이므로 점선으로 표현한다. ③은 반대로 서술했다. (바커 표기법에서는 실선·점선이 식별 여부가 아니라 필수·선택 참여를 나타낸다.)",
+    "explanation": "식별 관계는 강한 연결이므로 실선, 비식별 관계는 느슨한 연결이므로 점선으로 표현한다. ③은 반대로 서술했다. (바커 표기법에서는 실선·점선이 식별 여부가 아니라 필수·선택 참여를 나타낸다.) ①②④ 는 옳은 설명이다.",
     "_source": "authored"
   },
   {
@@ -120,7 +120,7 @@ export const ROUND_62: QuizQuestion[] = [
       "상호 배타적 관계"
     ],
     "correctIndex": 3,
-    "explanation": "하나의 엔터티가 둘 이상의 부모와 관계를 맺을 때 한 시점에는 오직 하나의 부모와만 관계를 가지며, 하나가 선택되면 다른 쪽 외래키는 NULL이어야 하는 구조는 상호 배타적 관계(Exclusive Relationship)이다. 예를 들어 결제는 개인 회원의 결제이거나 법인 회원의 결제이지 동시에 둘일 수 없다.",
+    "explanation": "하나의 엔터티가 둘 이상의 부모와 관계를 맺을 때 한 시점에는 오직 하나의 부모와만 관계를 가지며, 하나가 선택되면 다른 쪽 외래키는 NULL이어야 하는 구조는 상호 배타적 관계(Exclusive Relationship)이다. 예를 들어 결제는 개인 회원의 결제이거나 법인 회원의 결제이지 동시에 둘일 수 없다. ① 식별 관계와 ② 비식별 관계는 부모 키를 자식의 어디에 두느냐의 구분이라 \"둘 중 하나의 부모만\" 이라는 설명과 다르고, ③ 제약 조건은 범위가 너무 넓은 말이다.",
     "_source": "authored",
     "references": [
       {
@@ -144,7 +144,7 @@ export const ROUND_62: QuizQuestion[] = [
       "부서는 반드시 한 명 이상의 사원을 가져야 한다."
     ],
     "correctIndex": 3,
-    "explanation": "부서 쪽에서 사원 방향에 동그라미(○)가 있으므로 사원이 한 명도 없는 신설 부서도 존재할 수 있는 선택 참여이다. 따라서 ④는 옳지 않다. 사원은 부서에 필수 참여이므로 외래키 부서번호는 부서 테이블에 존재하는 값이어야 한다.",
+    "explanation": "부서 쪽에서 사원 방향에 동그라미(○)가 있으므로 사원이 한 명도 없는 신설 부서도 존재할 수 있는 선택 참여이다. 따라서 ④는 옳지 않다. 사원은 부서에 필수 참여이므로 외래키 부서번호는 부서 테이블에 존재하는 값이어야 한다. ① 주민등록번호도 유일하므로 유일성만 보면 후보가 될 수 있고, ② 는 외래키의 참조 무결성, ③ 은 부서번호 → 부서위치 종속이라 모두 옳다.",
     "_source": "authored",
     "references": [
       {
@@ -173,7 +173,7 @@ export const ROUND_62: QuizQuestion[] = [
       "이미 정의된 주식별자라도 업무 변화에 따라 유연하게 변경할 수 있다."
     ],
     "correctIndex": 3,
-    "explanation": "주식별자는 유일성·최소성·존재성(NOT NULL)과 함께 불변성을 만족해야 한다. 한 번 정해지면 업무 환경이 바뀌어도 쉽게 변하지 않아야 하며, 값이 변하면 이를 물려받은 자식 엔터티의 키까지 모두 수정해야 하므로 ④는 옳지 않다.",
+    "explanation": "주식별자는 유일성·최소성·존재성(NOT NULL)과 함께 불변성을 만족해야 한다. 한 번 정해지면 업무 환경이 바뀌어도 쉽게 변하지 않아야 하며, 값이 변하면 이를 물려받은 자식 엔터티의 키까지 모두 수정해야 하므로 ④는 옳지 않다. ① 은 유일성, ② 는 최소성, ③ 은 존재성으로 옳은 설명이다.",
     "_source": "authored"
   },
   {
@@ -191,7 +191,7 @@ export const ROUND_62: QuizQuestion[] = [
       "구분자로 이어서 하나의 컬럼에 저장한다."
     ],
     "correctIndex": 1,
-    "explanation": "한 컬럼에 두 개 이상의 값을 담는 다중값 속성은 제1정규형 위반이다. 다중값을 별도 엔터티로 분리하고 각 값을 개별 행으로 저장해야 한다. 컬럼 반복이나 구분자 사용은 SQL 성능을 떨어뜨리고 원자성을 해친다.",
+    "explanation": "한 컬럼에 두 개 이상의 값을 담는 다중값 속성은 제1정규형 위반이다. 다중값을 별도 엔터티로 분리하고 각 값을 개별 행으로 저장해야 한다. 컬럼 반복이나 구분자 사용은 SQL 성능을 떨어뜨리고 원자성을 해친다. ① 같은 컬럼을 여러 개 두면 반복 그룹이 남고, ③ 행 수 제한은 해결책이 아니며, ④ 구분자로 이어 저장하면 원자값 원칙이 깨진다.",
     "_source": "authored"
   },
   {
@@ -227,7 +227,7 @@ export const ROUND_62: QuizQuestion[] = [
       "집합적 언어이다."
     ],
     "correctIndex": 0,
-    "explanation": "SQL은 어떻게 처리할지가 아니라 무엇을 원하는지를 기술하는 선언적(비절차적)·집합적·구조적 언어이다. 절차적 언어라는 설명은 옳지 않다.",
+    "explanation": "SQL은 어떻게 처리할지가 아니라 무엇을 원하는지를 기술하는 선언적(비절차적)·집합적·구조적 언어이다. ① 절차적 언어라는 설명은 옳지 않고, ②(구조적)·③(선언적)·④(집합적)는 SQL 의 특징이다.",
     "_source": "authored"
   },
   {
@@ -245,7 +245,7 @@ export const ROUND_62: QuizQuestion[] = [
       "DEFAULT 값은 적용된다."
     ],
     "correctIndex": 0,
-    "explanation": "CREATE TABLE ... AS SELECT로 복제하면 컬럼의 데이터 타입과 NOT NULL 제약만 복사되고, PK·UNIQUE·FK·CHECK 제약과 기본 인덱스는 복사되지 않는다.",
+    "explanation": "CREATE TABLE ... AS SELECT로 복제하면 컬럼의 데이터 타입과 NOT NULL 제약만 복사되고, PK·UNIQUE·FK·CHECK 제약과 기본 인덱스는 복사되지 않는다. ② NOT NULL 은 복사되므로 틀리고, ③ CHECK 와 ④ DEFAULT 는 복사되지 않으므로 틀리다.",
     "_source": "authored",
     "references": [
       {
@@ -287,7 +287,7 @@ export const ROUND_62: QuizQuestion[] = [
       "5"
     ],
     "correctIndex": 2,
-    "explanation": "REGEXP_COUNT(문자열, 패턴, 시작위치)는 패턴이 일치하는 횟수를 센다. 'abcd'가 4번 반복되므로 'ab'는 4번 나타난다.",
+    "explanation": "REGEXP_COUNT(문자열, 패턴, 시작위치)는 패턴이 일치하는 횟수를 센다. 'abcd'가 4번 반복되므로 'ab'는 4번 나타난다. \"ab\" 는 겹치지 않고 4번 나오므로 ① 2, ② 3, ④ 5 는 모두 아니다.",
     "_source": "authored",
     "references": [
       {
@@ -329,7 +329,7 @@ export const ROUND_62: QuizQuestion[] = [
       "(라) 표준 SQL\nSELECT * FROM EMP ORDER BY SAL ASC FETCH FIRST 5 ROWS ONLY;"
     ],
     "correctIndex": 2,
-    "explanation": "Oracle에서 같은 쿼리 블록의 ROWNUM <= 5는 ORDER BY 정렬보다 먼저 적용된다. 임의로 뽑힌 5행만 정렬될 뿐 급여가 가장 적은 5명이 보장되지 않는다. TOP 5와 FETCH FIRST는 정렬 결과의 앞 5행을 제한하고, WITH TIES는 경계값과 같은 행을 추가로 포함하지만 급여가 모두 다르다고 했으므로 정확히 5행이 나온다. (다)를 고치려면 인라인 뷰 안에서 먼저 정렬한 뒤 바깥에서 ROWNUM을 적용해야 한다.",
+    "explanation": "Oracle에서 같은 쿼리 블록의 ROWNUM <= 5는 ORDER BY 정렬보다 먼저 적용된다. 임의로 뽑힌 5행만 정렬될 뿐 급여가 가장 적은 5명이 보장되지 않는다. (가) TOP 5와 (라) FETCH FIRST는 정렬 결과의 앞 5행을 제한하고, (나) WITH TIES는 경계값과 같은 행을 추가로 포함하지만 급여가 모두 다르다고 했으므로 정확히 5행이 나온다. (다)를 고치려면 인라인 뷰 안에서 먼저 정렬한 뒤 바깥에서 ROWNUM을 적용해야 한다.",
     "_source": "authored"
   },
   {
@@ -347,7 +347,7 @@ export const ROUND_62: QuizQuestion[] = [
       "단일 행이 반환되지 않아 오류가 발생한다."
     ],
     "correctIndex": 1,
-    "explanation": "EXISTS 서브쿼리가 메인 쿼리와 연결(상관)되어 있지 않아 부서 테이블에 지역이 '서울'인 행이 존재하기만 하면 모든 직원 행에 대해 항상 참이 된다. 따라서 3명 모두 갱신된다.",
+    "explanation": "EXISTS 서브쿼리가 메인 쿼리와 연결(상관)되어 있지 않아 부서 테이블에 지역이 '서울'인 행이 존재하기만 하면 모든 직원 행에 대해 항상 참이 된다. 따라서 3명 모두 갱신된다. ① 은 서브쿼리가 직원 A 와 연결된(WHERE B.부서번호 = A.부서번호 를 넣은) 경우의 결과이고, ③ 은 서울 부서가 하나도 없을 때의 결과다. ④ 단일 행 오류는 = 로 여러 행을 비교할 때 나는 것이라 EXISTS 와 관계없다.",
     "_source": "authored",
     "references": [
       {
@@ -419,7 +419,7 @@ export const ROUND_62: QuizQuestion[] = [
       "오류가 발생한다."
     ],
     "correctIndex": 1,
-    "explanation": "TO_CHAR로 값이 문자열('100', '90', '80')이 되므로 MAX는 문자열 비교로 '90'을 반환한다(첫 글자 9 > 1). 이후 MIN(COL_A)=10과 더할 때 문자 '90'이 숫자 90으로 묵시적 형변환되어 10 + 90 = 100이 된다.",
+    "explanation": "TO_CHAR로 값이 문자열('100', '90', '80')이 되므로 MAX는 문자열 비교로 '90'을 반환한다(첫 글자 9 > 1). 이후 MIN(COL_A)=10과 더할 때 문자 '90'이 숫자 90으로 묵시적 형변환되어 10 + 90 = 100이 된다. ① 10 은 MAX 결과를 더하지 않은 값이고, ④ 문자 '90' 은 숫자로 자동 변환되어 더해지므로 오류가 나지 않는다.",
     "_source": "authored",
     "references": [
       {
@@ -532,7 +532,7 @@ export const ROUND_62: QuizQuestion[] = [
       "a, b, c, NULL"
     ],
     "correctIndex": 2,
-    "explanation": "가는 PRIMARY KEY이므로 NULL이 불가하고, 나는 NOT NULL, 라는 CHECK (라 IS NOT NULL)로 NULL이 불가하다. UNIQUE 제약은 NULL을 허용하므로 다에만 NULL을 입력할 수 있다.",
+    "explanation": "가는 PRIMARY KEY이므로 NULL이 불가하고, 나는 NOT NULL, 라는 CHECK (라 IS NOT NULL)로 NULL이 불가하다. UNIQUE 제약은 NULL을 허용하므로 다에만 NULL을 입력할 수 있다. ① 가는 PRIMARY KEY, ② 나는 NOT NULL, ④ 라는 CHECK 조건 때문에 NULL 을 넣을 수 없다.",
     "_source": "authored",
     "references": [
       {
@@ -556,7 +556,7 @@ export const ROUND_62: QuizQuestion[] = [
       "4"
     ],
     "correctIndex": 1,
-    "explanation": "NOT BETWEEN 100 AND 200은 값 < 100 또는 값 > 200과 같다. 50과 350 두 건이 조건을 만족하고, NULL은 비교 결과가 UNKNOWN이라 제외된다. 100과 200은 경계값이라 BETWEEN에 포함되므로 NOT BETWEEN에서는 제외된다.",
+    "explanation": "NOT BETWEEN 100 AND 200은 값 < 100 또는 값 > 200과 같다. 50과 350 두 건이 조건을 만족하고, NULL은 비교 결과가 UNKNOWN이라 제외된다. 100과 200은 경계값이라 BETWEEN에 포함되므로 NOT BETWEEN에서는 제외된다. ① 1 은 한쪽만, ③ 3 은 NULL 까지, ④ 4 는 경계값 100·200 까지 센 값이다.",
     "_source": "authored",
     "references": [
       {
@@ -607,7 +607,7 @@ export const ROUND_62: QuizQuestion[] = [
       "100, 200, 300"
     ],
     "correctIndex": 1,
-    "explanation": "사용자와 구매일로 그룹핑하므로 사용자 100은 20260101 그룹(품목 A뿐)과 20260201 그룹(품목 B뿐)으로 나뉘어 각 그룹의 품목 종류가 1개라 탈락한다. 200은 품목 A, B 2종에 합계 1000이지만 MAX가 500이라 MAX < 500 조건에서 탈락한다. 300은 품목 2종, 합계 700, MAX 400으로 모두 만족한다.",
+    "explanation": "사용자와 구매일로 그룹핑하므로 사용자 100은 20260101 그룹(품목 A뿐)과 20260201 그룹(품목 B뿐)으로 나뉘어 각 그룹의 품목 종류가 1개라 탈락한다. 200은 품목 A, B 2종에 합계 1000이지만 MAX가 500이라 MAX < 500 조건에서 탈락한다. 300은 품목 2종, 합계 700, MAX 400으로 모두 만족한다. 따라서 100 이 들어간 ①③④ 와 200 이 들어간 ③④ 는 틀리다. 구매일 없이 사용자로만 묶었다면 100 도 남는다.",
     "_source": "authored",
     "references": [
       {
@@ -697,7 +697,7 @@ export const ROUND_62: QuizQuestion[] = [
       "19000"
     ],
     "correctIndex": 1,
-    "explanation": "num이 일치하는 1001은 total_pay가 5000+1000=6000, 1002는 3000+0=3000이 되는데 DELETE WHERE total_pay < 4000에 의해 삭제된다. 1003은 테이블2에 없어 4000 그대로이고, 일치하지 않는 1004는 (1004, 3000, 3000)으로 삽입된다. 합계는 6000 + 4000 + 3000 = 13000이다.",
+    "explanation": "num이 일치하는 1001은 total_pay가 5000+1000=6000, 1002는 3000+0=3000이 되는데 DELETE WHERE total_pay < 4000에 의해 삭제된다. 1003은 테이블2에 없어 4000 그대로이고, 일치하지 않는 1004는 (1004, 3000, 3000)으로 삽입된다. 합계는 6000 + 4000 + 3000 = 13000이다. ① 10000 은 새로 들어간 1004 를 빠뜨린 값이고, ③ 16000 은 DELETE WHERE 를 적용하지 않아 1002(3000)가 남은 값이다.",
     "_source": "authored",
     "references": [
       {
@@ -769,7 +769,7 @@ export const ROUND_62: QuizQuestion[] = [
       "공집합"
     ],
     "correctIndex": 3,
-    "explanation": "WHERE를 통과한 행이 0건이고 GROUP BY가 있으므로 만들어지는 그룹 자체가 없어 결과가 0행(공집합)이다. NVL이 NULL을 'N'으로 바꿀 대상 행이 없다. GROUP BY가 없는 전체 집계였다면 MAX가 NULL인 1행이 만들어져 'N'이 출력되므로 이 차이를 구분해야 한다.",
+    "explanation": "WHERE를 통과한 행이 0건이고 GROUP BY가 있으므로 만들어지는 그룹 자체가 없어 결과가 0행(공집합)이다. NVL이 NULL을 'N'으로 바꿀 대상 행이 없다. GROUP BY가 없는 전체 집계였다면 MAX가 NULL인 1행이 만들어져 'N'이 출력되므로 이 차이를 구분해야 한다. ① Y·② N·③ NULL 은 모두 결과가 1행 있다고 본 것인데, GROUP BY 가 있으면 0건에서 그룹이 하나도 만들어지지 않는다.",
     "_source": "authored",
     "references": [
       {
@@ -793,7 +793,7 @@ export const ROUND_62: QuizQuestion[] = [
       "JOIN ... ON (조건 AND 조건)"
     ],
     "correctIndex": 2,
-    "explanation": "NATURAL JOIN, USING, ON 조건 조인은 모두 조건에 맞는 행만 연결하지만, CROSS JOIN은 조인 조건 없이 모든 행의 조합(카티션 곱)을 만들어 행 수가 다르다.",
+    "explanation": "NATURAL JOIN, USING, ON 조건 조인은 모두 조건에 맞는 행만 연결하지만, CROSS JOIN은 조인 조건 없이 모든 행의 조합(카티션 곱)을 만들어 행 수가 다르다. ①②④ 는 ID 가 같은 행끼리만 이어 행 수가 같다.",
     "_source": "authored"
   },
   {
@@ -874,7 +874,7 @@ export const ROUND_62: QuizQuestion[] = [
       "(라)\nSELECT RTRIM(DNAME)\nFROM DEPT;"
     ],
     "correctIndex": 1,
-    "explanation": "(나)는 인라인 뷰 안에서 정의한 테이블 별칭 b를 바깥 SELECT 절에서 참조하므로 오류가 발생한다. b의 유효 범위는 괄호 안의 쿼리 블록뿐이며 바깥에서는 인라인 뷰 별칭 a를 사용해야 한다(SELECT a.DEPTNO). (가), (다), (라)는 각각 컬럼 조회, 문자열 자르기, 오른쪽 공백 제거로 모두 정상 실행된다.",
+    "explanation": "(나)는 인라인 뷰 안에서 정의한 테이블 별칭 b를 바깥 SELECT 절에서 참조하므로 오류가 발생한다. b의 유효 범위는 괄호 안의 쿼리 블록뿐이며 바깥에서는 인라인 뷰 별칭 a를 사용해야 한다(SELECT a.DEPTNO). (가) ①, (다) ③, (라) ④ 는 각각 컬럼 조회, 문자열 자르기, 오른쪽 공백 제거로 모두 정상 실행된다.",
     "_source": "authored",
     "references": [
       {
@@ -912,7 +912,7 @@ export const ROUND_62: QuizQuestion[] = [
       "결과 없음"
     ],
     "correctIndex": 2,
-    "explanation": "LIKE '%N'은 N으로 끝나는 문자열만 매칭한다. ALLEN과 MARTIN이 해당하며, JONES는 N이 중간에 포함될 뿐 S로 끝나므로 제외된다.",
+    "explanation": "LIKE '%N'은 N으로 끝나는 문자열만 매칭한다. ALLEN과 MARTIN이 해당하며, JONES는 N이 중간에 포함될 뿐 S로 끝나므로 제외된다. 따라서 ① 은 틀리고, ② 는 '%N%'(N 포함)로 본 결과이며, ④ ALLEN·MARTIN 이 N 으로 끝나므로 결과가 있다.",
     "_source": "authored",
     "references": [
       {
@@ -963,7 +963,7 @@ export const ROUND_62: QuizQuestion[] = [
       "NULLIF(0, PRICE)"
     ],
     "correctIndex": 0,
-    "explanation": "COALESCE(PRICE, 0)은 PRICE가 NULL이면 0을 반환한다. NULL(PRICE, 0)이라는 함수는 없고, IFNULL은 MySQL 전용이며, NULLIF(a, b)는 두 값이 같으면 NULL을 반환하는 함수이다.",
+    "explanation": "COALESCE(PRICE, 0)은 PRICE가 NULL이면 0을 반환한다. ② NULL(PRICE, 0)이라는 함수는 없고, ③ IFNULL은 MySQL 전용이며, ④ NULLIF(a, b)는 두 값이 같으면 NULL을 반환하는 함수라 NULL 을 0 으로 바꾸지 못한다.",
     "_source": "authored",
     "references": [
       {
@@ -1037,7 +1037,7 @@ export const ROUND_62: QuizQuestion[] = [
       "6개"
     ],
     "correctIndex": 3,
-    "explanation": "식별 관계에서는 부모의 PK가 자식의 PK와 FK로 상속되므로 복합키 전체를 조인 조건에 포함해야 한다. A-B는 A_ID 1개, B-C는 A_ID·B_ID 2개, C-D는 A_ID·B_ID·C_ID 3개로 1 + 2 + 3 = 6개이다. 3개는 조인 연산의 횟수일 뿐이고, 4·5개는 복합 외래키의 일부 조건을 누락한 값이다.",
+    "explanation": "식별 관계에서는 부모의 PK가 자식의 PK와 FK로 상속되므로 복합키 전체를 조인 조건에 포함해야 한다. A-B는 A_ID 1개, B-C는 A_ID·B_ID 2개, C-D는 A_ID·B_ID·C_ID 3개로 1 + 2 + 3 = 6개이다. ① 3개는 조인 연산의 횟수일 뿐이고, ② 4개·③ 5개는 복합 외래키의 일부 조건을 누락한 값이다.",
     "_source": "authored",
     "references": [
       {
@@ -1088,7 +1088,7 @@ export const ROUND_62: QuizQuestion[] = [
       "5"
     ],
     "correctIndex": 2,
-    "explanation": "UNION ALL 은 중복 제거나 NULL 처리 없이 두 결과의 행을 그대로 합친다. A INTERSECT B 의 1행과 C 의 3행(NULL 행 포함)을 합치면 4행이다(③). UNION 이었다면 중복이 제거되어 줄어들 수 있다.",
+    "explanation": "UNION ALL 은 중복 제거나 NULL 처리 없이 두 결과의 행을 그대로 합친다. A INTERSECT B 의 1행과 C 의 3행(NULL 행 포함)을 합치면 4행이다(③). UNION 이었다면 중복이 제거되어 줄어들 수 있다. ① 2·② 3 은 C 의 NULL 행이나 중복을 뺀 값인데, UNION ALL 은 아무것도 빼지 않는다.",
     "_source": "authored"
   },
   {
@@ -1106,7 +1106,7 @@ export const ROUND_62: QuizQuestion[] = [
       "CONNECT BY 절로 자식 노드를 지정한다."
     ],
     "correctIndex": 0,
-    "explanation": "LEVEL 1은 루트 노드이고 리프 노드는 트리의 가장 아래 노드로 하위 레벨을 가진다. 따라서 리프 노드의 레벨이 반드시 1이라는 설명은 옳지 않다.",
+    "explanation": "LEVEL 1은 루트 노드이고 리프 노드는 트리의 가장 아래 노드로 하위 레벨을 가진다. 따라서 리프 노드의 레벨이 반드시 1이라는 설명은 옳지 않다. ②③④ 는 옳은 설명이다.",
     "_source": "authored"
   },
   {
@@ -1124,7 +1124,7 @@ export const ROUND_62: QuizQuestion[] = [
       "오류가 발생한다."
     ],
     "correctIndex": 1,
-    "explanation": "SUM(컬럼1)은 NULL을 제외한 100 + 200 + 300 = 600이고, COUNT(컬럼1)도 NULL을 제외한 3이므로 600 / 3 = 200이다.",
+    "explanation": "SUM(컬럼1)은 NULL을 제외한 100 + 200 + 300 = 600이고, COUNT(컬럼1)도 NULL을 제외한 3이므로 600 / 3 = 200이다. ① 150 은 NULL 을 0 으로 보고 4 로 나눈 값(600 ÷ 4)이고, ④ NULL 이 있어도 집계 함수는 오류 없이 NULL 을 건너뛴다.",
     "_source": "authored",
     "references": [
       {
@@ -1165,7 +1165,7 @@ export const ROUND_62: QuizQuestion[] = [
       "아무 행도 출력되지 않는다."
     ],
     "correctIndex": 0,
-    "explanation": "ROWNUM은 조건을 통과한 행에 순차적으로 부여된다. 1, 2번째 행은 ROWNUM이 1, 2로 조건(<> 3)을 통과하지만, 3번째 행은 ROWNUM 3이라 탈락하고 그다음 행도 다시 ROWNUM 3이 부여되어 계속 탈락한다. 따라서 1, 2번째 행만 출력된다.",
+    "explanation": "ROWNUM은 조건을 통과한 행에 순차적으로 부여된다. 1, 2번째 행은 ROWNUM이 1, 2로 조건(<> 3)을 통과하지만, 3번째 행은 ROWNUM 3이라 탈락하고 그다음 행도 다시 ROWNUM 3이 부여되어 계속 탈락한다. 따라서 1, 2번째 행만 출력된다. ② 는 ROWNUM 이 원래 행 번호처럼 고정된다고 본 결과, ③ 은 조건이 무시된다고 본 결과, ④ 는 ROWNUM > 2 처럼 첫 행부터 탈락하는 조건과 헷갈린 결과다.",
     "_source": "authored",
     "references": [
       {
@@ -1210,7 +1210,7 @@ export const ROUND_62: QuizQuestion[] = [
       "ROLLUP은 인자의 순서가 달라져도 결과가 동일하다."
     ],
     "correctIndex": 3,
-    "explanation": "ROLLUP은 인자 순서에 따라 소계의 단위가 달라져 결과가 달라진다. 인자 순서와 무관하게 결과가 같은 것은 모든 조합을 만드는 CUBE이다.",
+    "explanation": "ROLLUP은 인자 순서에 따라 소계의 단위가 달라져 결과가 달라진다. 인자 순서와 무관하게 결과가 같은 것은 모든 조합을 만드는 CUBE이다. ①②③ 은 옳은 설명이다.",
     "_source": "authored"
   },
   {
@@ -1228,7 +1228,7 @@ export const ROUND_62: QuizQuestion[] = [
       "선택적으로 일부 데이터만 뷰로 노출할 수 있다."
     ],
     "correctIndex": 0,
-    "explanation": "일반 뷰는 쿼리 정의만 저장하는 가상 테이블이라 조회할 때마다 정의된 쿼리가 실행되므로 성능을 개선하지 않는다. 뷰는 독립성·편리성·보안(일부 데이터만 노출) 장점이 있다.",
+    "explanation": "일반 뷰는 쿼리 정의만 저장하는 가상 테이블이라 조회할 때마다 정의된 쿼리가 실행되므로 성능을 개선하지 않는다. ② 독립성, ③ 저장 공간을 쓰지 않음, ④ 보안(일부 데이터만 노출)은 뷰의 옳은 특징이다.",
     "_source": "authored"
   },
   {
@@ -1246,7 +1246,7 @@ export const ROUND_62: QuizQuestion[] = [
       "6, 6"
     ],
     "correctIndex": 0,
-    "explanation": "COUNT(DISTINCT 칼럼)은 NULL을 제외하고 서로 다른 값의 개수를 센다. 테이블1은 A, B 2종, 테이블2는 1, 2, 3 3종이므로 2, 3이다.",
+    "explanation": "COUNT(DISTINCT 칼럼)은 NULL을 제외하고 서로 다른 값의 개수를 센다. 테이블1은 A, B 2종, 테이블2는 1, 2, 3 3종이므로 2, 3이다. ② 3, 4 는 NULL 도 하나의 값으로 센 결과이고, ③ 3, 3 은 테이블1 에서만 NULL 을 센 결과다. ④ 6, 6 은 DISTINCT 를 빼도(5, 6) 나오지 않는다.",
     "_source": "authored",
     "references": [
       {
@@ -1326,7 +1326,7 @@ export const ROUND_62: QuizQuestion[] = [
       "칼럼 간 데이터 타입이 서로 호환되더라도 타입이 다르면 오류가 발생한다."
     ],
     "correctIndex": 1,
-    "explanation": "집합 연산자에서 ORDER BY는 마지막에 한 번만 쓰며, 결과 컬럼명은 첫 번째 SELECT의 컬럼명을 따르므로 두 번째 SELECT에서 정의된 컬럼명은 사용할 수 없다. 숫자(위치)로 정렬하는 것도 가능하고, 타입이 서로 호환되면 오류 없이 처리된다.",
+    "explanation": "집합 연산자에서 ORDER BY는 마지막에 한 번만 쓰며, 결과 컬럼명은 첫 번째 SELECT의 컬럼명을 따르므로 두 번째 SELECT에서 정의된 컬럼명은 사용할 수 없다. ① 첫 번째 SELECT 의 컬럼명은 ORDER BY 에 쓸 수 있고, ③ 숫자(위치)로 정렬하는 것도 가능하며, ④ 타입이 서로 호환되면 오류 없이 처리된다.",
     "_source": "authored"
   },
   {
@@ -1344,7 +1344,7 @@ export const ROUND_62: QuizQuestion[] = [
       "CREATE TABLE ... AS SELECT"
     ],
     "correctIndex": 2,
-    "explanation": "서브쿼리로 데이터를 삽입할 때는 INSERT INTO 테이블 SELECT ... 로 작성하며 AS를 쓰지 않는다. AS SELECT는 CREATE TABLE ... AS SELECT(CTAS)에서 사용한다.",
+    "explanation": "서브쿼리로 데이터를 삽입할 때는 INSERT INTO 테이블 SELECT ... 로 작성하며 AS를 쓰지 않는다. AS SELECT는 CREATE TABLE ... AS SELECT(CTAS)에서 사용한다. ①②④ 는 올바른 문법이다.",
     "_source": "authored"
   },
   {
@@ -1362,7 +1362,7 @@ export const ROUND_62: QuizQuestion[] = [
       "COLA, COLB"
     ],
     "correctIndex": 1,
-    "explanation": "USING 절에 지정한 컬럼은 결과의 맨 앞에 한 번만 나오고, 이어서 TBL1의 나머지 컬럼, TBL2의 나머지 컬럼 순으로 출력된다. 결과 컬럼 순서가 COLB, COLA, COLA, COLC이므로 USING (COLB)이다.",
+    "explanation": "USING 절에 지정한 컬럼은 결과의 맨 앞에 한 번만 나오고, 이어서 TBL1의 나머지 컬럼, TBL2의 나머지 컬럼 순으로 출력된다. 결과 컬럼 순서가 COLB, COLA, COLA, COLC이므로 USING (COLB)이다. ① USING (COLA) 였다면 COLA 가 맨 앞에 한 번 나오고, ③ COLC 는 TBL1 에 없어 USING 에 쓸 수 없으며, ④ 두 컬럼을 쓰면 COLA·COLB 가 모두 한 번씩만 나온다.",
     "_source": "authored",
     "references": [
       {
@@ -1458,7 +1458,7 @@ export const ROUND_62: QuizQuestion[] = [
       "2, 1, 1"
     ],
     "correctIndex": 1,
-    "explanation": "INSERT FIRST는 각 행에 대해 처음으로 만족하는 WHEN 절에만 삽입한다. c1이 2와 5인 행은 첫 번째 조건(>= 2)을 만족해 t1에 들어가고(두 번째 조건은 평가되지 않음), 1은 어떤 WHEN도 만족하지 않아 ELSE의 t3에 들어간다. 따라서 2, 0, 1이다.",
+    "explanation": "INSERT FIRST는 각 행에 대해 처음으로 만족하는 WHEN 절에만 삽입한다. c1이 2와 5인 행은 첫 번째 조건(>= 2)을 만족해 t1에 들어가고(두 번째 조건은 평가되지 않음), 1은 어떤 WHEN도 만족하지 않아 ELSE의 t3에 들어간다. 따라서 2, 0, 1이다. ④ 2, 1, 1 은 INSERT ALL 처럼 5 를 t2 에도 넣은 결과이고, ③ 은 거기에 ELSE 로 가는 1 까지 빠뜨렸으며, ① 은 ELSE 로 가는 1 을 빠뜨린 값이다.",
     "_source": "authored",
     "references": [
       {
@@ -1500,7 +1500,7 @@ export const ROUND_62: QuizQuestion[] = [
       "30, 40 두 행"
     ],
     "correctIndex": 1,
-    "explanation": "조건은 NOT (COL1 = 1 OR COL2 IS NULL)이다. (NULL, 'A')는 COL1 = 1이 UNKNOWN이고 COL2 IS NULL이 거짓이라 전체가 UNKNOWN이 되어 제외된다. (1, NULL)과 (30, NULL)은 COL2 IS NULL이 참이라 제외된다. (40, 'D')만 조건을 만족한다.",
+    "explanation": "조건은 NOT (COL1 = 1 OR COL2 IS NULL)이다. (NULL, 'A')는 COL1 = 1이 UNKNOWN이고 COL2 IS NULL이 거짓이라 전체가 UNKNOWN이 되어 제외된다. (1, NULL)과 (30, NULL)은 COL2 IS NULL이 참이라 제외된다. (40, 'D')만 조건을 만족한다. ① 은 (40, 'D') 를 놓친 것이고, ③ 은 UNKNOWN 을 참으로 본 결과, ④ 는 COL2 IS NULL 인 30 을 포함한 결과다.",
     "_source": "authored",
     "references": [
       {
@@ -1550,7 +1550,7 @@ export const ROUND_62: QuizQuestion[] = [
       "5"
     ],
     "correctIndex": 1,
-    "explanation": "START WITH MGR IS NULL로 7782와 7839가 각각 루트가 되고, CONNECT BY MGR = PRIOR EMPNO로 자식 방향으로 전개한다. 7839를 루트로 하는 계층에는 루트인 KING 자신과 직속 자식 7876, 7900이 포함되어 COUNT(*)는 3이다. (7782 계층은 루트 자신과 7844로 2건이라 제시된 결과와 일치한다.)",
+    "explanation": "START WITH MGR IS NULL로 7782와 7839가 각각 루트가 되고, CONNECT BY MGR = PRIOR EMPNO로 자식 방향으로 전개한다. 7839를 루트로 하는 계층에는 루트인 KING 자신과 직속 자식 7876, 7900이 포함되어 COUNT(*)는 3이다. (7782 계층은 루트 자신과 7844로 2건이라 제시된 결과와 일치한다.) ① 2 는 루트(KING)를 빼고 센 값, ③ 4·④ 5 는 다른 계층의 행까지 센 값이다.",
     "_source": "authored",
     "references": [
       {
@@ -1628,7 +1628,7 @@ export const ROUND_62: QuizQuestion[] = [
       "ID, 구분, AMOUNT"
     ],
     "correctIndex": 1,
-    "explanation": "UNPIVOT의 IN 절에는 행으로 풀어낼 원본 컬럼명(AMOUNT_3, AMOUNT_2, AMOUNT_1)을 나열한다. 이 컬럼명이 구분 컬럼의 값이 되고, 컬럼 값이 AMOUNT에 담긴다.",
+    "explanation": "UNPIVOT의 IN 절에는 행으로 풀어낼 원본 컬럼명(AMOUNT_3, AMOUNT_2, AMOUNT_1)을 나열한다. 이 컬럼명이 구분 컬럼의 값이 되고, 컬럼 값이 AMOUNT에 담긴다. ① 은 컬럼 값을, ③ 은 결과 컬럼명을 적은 것이고, ④ 는 SELECT 목록을 적은 것이라 IN 절에 들어갈 수 없다.",
     "_source": "authored",
     "references": [
       {
@@ -1700,7 +1700,7 @@ export const ROUND_62: QuizQuestion[] = [
       "결과 없음"
     ],
     "correctIndex": 2,
-    "explanation": "A.COL1 <= B.COL1을 만족하는 (A, B) 조합의 개수를 센다. A=1은 B가 1, 2, 3, 4로 4건, A=2는 3건, A=3은 2건, A=4는 1건이므로 4 + 3 + 2 + 1 = 10건이다.",
+    "explanation": "A.COL1 <= B.COL1을 만족하는 (A, B) 조합의 개수를 센다. A=1은 B가 1, 2, 3, 4로 4건, A=2는 3건, A=3은 2건, A=4는 1건이므로 4 + 3 + 2 + 1 = 10건이다. ① 4 는 같은 값끼리만(=), ② 6 은 A < B 로 센 값이다.",
     "_source": "authored",
     "references": [
       {
@@ -1745,7 +1745,7 @@ export const ROUND_62: QuizQuestion[] = [
       "7"
     ],
     "correctIndex": 2,
-    "explanation": "COMMIT이 수행되면 그 이전에 지정된 SAVEPOINT는 모두 사라진다. 따라서 ROLLBACK TO S1은 오류가 발생하고 아무 것도 취소되지 않아 마지막 INSERT까지 모두 반영된다. 3 + 1 + 1 + 1 = 6건이다.",
+    "explanation": "COMMIT이 수행되면 그 이전에 지정된 SAVEPOINT는 모두 사라진다. 따라서 ROLLBACK TO S1은 오류가 발생하고 아무 것도 취소되지 않아 마지막 INSERT까지 모두 반영된다. 3 + 1 + 1 + 1 = 6건이다. COMMIT 이 S1 을 없애므로 ① 4·② 5 처럼 일부가 취소되지 않고, ④ 7 은 행을 하나 더 센 값이다.",
     "_source": "authored",
     "references": [
       {
@@ -1769,7 +1769,7 @@ export const ROUND_62: QuizQuestion[] = [
       "ALTER TABLE EMP ADD HIREDATE DATE DEFAULT SYSDATE;"
     ],
     "correctIndex": 1,
-    "explanation": "Oracle에는 DROP FOREIGN KEY라는 독립 구문이 없다(MySQL 문법). 외래키는 제약조건 이름을 지정해 ALTER TABLE EMP DROP CONSTRAINT EMP_FK로 제거해야 한다. DROP PRIMARY KEY는 Oracle에서 사용할 수 있고, DEPTNO는 EMP가 부모를 참조하는 단일 외래키 컬럼이라 DROP COLUMN이 가능하며, 기본값이 있는 DATE 컬럼 추가도 정상 문법이다.",
+    "explanation": "Oracle에는 DROP FOREIGN KEY라는 독립 구문이 없다(MySQL 문법). 외래키는 제약조건 이름을 지정해 ALTER TABLE EMP DROP CONSTRAINT EMP_FK로 제거해야 한다. ① DROP PRIMARY KEY는 Oracle에서 사용할 수 있고, ③ DEPTNO는 EMP가 부모를 참조하는 단일 외래키 컬럼이라 DROP COLUMN이 가능하며, ④ 기본값이 있는 DATE 컬럼 추가도 정상 문법이다.",
     "_source": "authored",
     "references": [
       {
@@ -1793,7 +1793,7 @@ export const ROUND_62: QuizQuestion[] = [
       "철수의 INSERT 권한을 박탈하려면 STAFF와 MGR 둘 다에서 박탈해야 한다."
     ],
     "correctIndex": 0,
-    "explanation": "STAFF 롤은 MGR 롤에 부여되고 MGR 롤은 철수에게 부여되었으므로 철수는 MGR을 통해 STAFF의 권한(SELECT 등)을 갖는다. STAFF 롤을 삭제하면 MGR을 거쳐 받은 철수의 SELECT 권한도 함께 사라진다. 영희는 STAFF만 받았으므로 DELETE 권한이 없고, INSERT 권한은 STAFF에서 회수하면 된다.",
+    "explanation": "STAFF 롤은 MGR 롤에 부여되고 MGR 롤은 철수에게 부여되었으므로 철수는 MGR을 통해 STAFF의 권한(SELECT 등)을 갖는다. STAFF 롤을 삭제하면 MGR을 거쳐 받은 철수의 SELECT 권한도 함께 사라진다. ② 철수는 MGR 을 통해 SELECT 를 할 수 있고, ③ 영희는 STAFF만 받았으므로 DELETE 권한이 없으며, ④ INSERT 권한은 STAFF에서만 회수하면 MGR 을 거친 권한도 함께 사라진다.",
     "_source": "authored",
     "references": [
       {
