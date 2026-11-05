@@ -69,6 +69,7 @@ const APP_CSS = (() => {
 /** 앱 전용 요소 정리: 죽은 복사 버튼 제거, mermaid(자바스크립트로 그리는 도식)는 학습 화면 안내로 대체 */
 function staticTheoryBody(html) {
   return html
+    .replace(/<a href="#" data-chapter="(c\d+)">/g, '<a href="/theory/$1/">')
     .replace(/<button[^>]*class="copy-btn"[^>]*>[\s\S]*?<\/button>/g, '')
     .replace(/<div class="mermaid"[^>]*>[\s\S]*?<\/div>/g,
       '<p class="diagram-note">이 도식은 <a href="/">SQLD양파 학습 화면</a>에서 그림으로 볼 수 있어요.</p>');
