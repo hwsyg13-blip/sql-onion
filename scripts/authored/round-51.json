@@ -940,16 +940,17 @@
       "number": 35,
       "title": "아래 계층형 쿼리의 결과로 옳은 것은?",
       "options": [
-        "1",
-        "2",
+        "0",
         "3",
-        "4"
+        "4",
+        "5"
       ],
-      "correctIndex": 1,
-      "explanation": "COL3 = 4 에서 역방향 전개로 (D→B→A) 결과가 구해지고, 이후 WHERE COL3 <> 2 로 B 가 제거되어 A, D 의 두 건이 남는다.",
+      "correctIndex": 2,
+      "explanation": "조건 COL3 <> 2 가 WHERE 가 아니라 CONNECT BY 에 있다. CONNECT BY 의 조건은 \"이 자식으로 내려갈지\" 를 정하므로, 조건에 걸린 행은 그 아래 가지까지 통째로 빠진다. 단, 시작 행(START WITH 로 고른 루트)은 CONNECT BY 조건을 검사하지 않는다. 루트 A 는 COL3 이 2 여도 나온다. A 의 자식 B(1) 는 통과, C(2) 는 탈락해 그 아래 E·H 도 빠진다. B 의 자식 D(4) 는 통과, F(2) 는 탈락. D 아래 G(6) 통과. 결과는 A, B, D, G 4건이다(③). ① 0 은 루트 A 도 조건에 걸려 아무것도 시작하지 못한다고 본 값, ② 3 은 루트만 빼고 센 값(B, D, G), ④ 5 는 조건을 WHERE 처럼 COL3 = 2 인 행만 빼고 나머지(B, D, E, G, H)를 센 값이다. ※ 복원 자료의 표가 단순해 실제 시험 수준으로 데이터·SQL 을 보강했다(묻는 개념은 같다).",
       "references": [
         {
           "type": "table",
+          "caption": "TAB1 테이블",
           "headers": [
             "COL1",
             "COL2",
@@ -959,29 +960,48 @@
             [
               "A",
               "NULL",
-              "1"
+              "2"
             ],
             [
               "B",
               "A",
-              "2"
+              "1"
             ],
             [
               "C",
               "A",
-              "3"
+              "2"
             ],
             [
               "D",
               "B",
               "4"
+            ],
+            [
+              "E",
+              "C",
+              "5"
+            ],
+            [
+              "F",
+              "B",
+              "2"
+            ],
+            [
+              "G",
+              "D",
+              "6"
+            ],
+            [
+              "H",
+              "C",
+              "3"
             ]
-          ],
-          "caption": "TAB1 테이블"
+          ]
         },
         {
           "type": "sql",
-          "code": "SELECT COUNT(*)\nFROM   TAB1\nWHERE  COL3 <> 2\nSTART WITH COL3 = 4\nCONNECT BY COL1 = PRIOR COL2;"
+          "code": "SELECT COUNT(*)\nFROM   TAB1\nSTART WITH COL2 IS NULL\nCONNECT BY PRIOR COL1 = COL2\n       AND COL3 <> 2;"
         }
       ]
     },

@@ -1317,15 +1317,15 @@
     {
       "subject": "2과목",
       "number": 49,
-      "title": "아래 EMP 테이블에 대한 SQL 의 결과로 옳은 것은?",
+      "title": "아래 EMP 테이블에 대한 SQL 의 결과로 옳은 것은? (Oracle 기준)",
       "options": [
-        "1, 2",
-        "3, 3",
         "4, 5",
-        "5, 4"
+        "3, 4, 5",
+        "3, 4, 5, 6",
+        "3, 4, 5, 7"
       ],
-      "correctIndex": 3,
-      "explanation": "인라인 뷰에서 `ROW_NUMBER() OVER (PARTITION BY 부서 ORDER BY 연봉 DESC)` 는 부서별로 연봉 높은 순서대로 1, 2, 3 을 매긴다. 부서 A: (COL1=5, 연봉=5000) 이 RN=1, 부서 B: (COL1=4, 연봉=4500) 이 RN=1. 외부 `WHERE RN = 1` 로 부서별 최고 연봉자만 남기면 COL1 = 5, 4 가 반환된다.",
+      "correctIndex": 2,
+      "explanation": "부서마다 연봉 내림차순으로 RANK 를 매기고 1위만 남긴다. A 는 COL1 5 와 3 이 5000 으로 동점이라 RANK 가 둘 다 1 이다. B 는 4(4500) 가 1위. C 는 Oracle 이 NULL 을 가장 큰 값으로 보므로 내림차순에서 NULL 인 6 이 1위다. COL1 순으로 3, 4, 5, 6 이다(③). ① 은 동점 중 하나만 남기고(ROW_NUMBER 처럼) C 도 뺀 결과, ② 는 연봉이 NULL 인 C 부서에 1위가 없다고 본 결과, ④ 는 NULL 이 맨 뒤에 온다고 보고 C 의 1위를 7 로 본 결과다(NULLS LAST 를 쓰면 실제로 ④ 가 된다). ※ 복원 자료의 표가 단순해 실제 시험 수준으로 데이터·SQL 을 보강했다(묻는 개념은 같다).",
       "references": [
         {
           "type": "table",
@@ -1349,7 +1349,7 @@
             [
               "3",
               "A",
-              "4000"
+              "5000"
             ],
             [
               "2",
@@ -1360,12 +1360,22 @@
               "4",
               "B",
               "4500"
+            ],
+            [
+              "6",
+              "C",
+              "NULL"
+            ],
+            [
+              "7",
+              "C",
+              "1000"
             ]
           ]
         },
         {
           "type": "sql",
-          "code": "SELECT COL1\nFROM (\n    SELECT COL1,\n           ROW_NUMBER() OVER (PARTITION BY 부서 ORDER BY 연봉 DESC) AS RN\n    FROM EMP\n)\nWHERE RN = 1;"
+          "code": "SELECT COL1\nFROM (\n    SELECT COL1,\n           RANK() OVER (PARTITION BY 부서 ORDER BY 연봉 DESC) AS RN\n    FROM EMP\n)\nWHERE RN = 1\nORDER BY COL1;"
         }
       ]
     },

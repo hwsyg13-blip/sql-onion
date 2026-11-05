@@ -86,3 +86,10 @@
 | 46-44 | ROW_NUMBER Top-N | 4행 → 5행, 급여 NULL 추가 | (D,NULL), (E,160) | (C) DESC 에서 NULL 이 먼저 → "Oracle 기준" 명시, 해설에 NULLS LAST 로 고치는 법 |
 | 48-14 | MAX() OVER + 조인 | 동점 최고 연봉, 연봉이 NULL 뿐인 부서 추가, 결과 행 수로 묻도록 | 4건 | (E) MAX 가 NULL → NULL = NULL 이 참이 아니라 빠짐 |
 | 49-42 | INTERSECT | 중복·NULL 추가 | B, C, NULL | (C) 집합 연산의 NULL 동등 처리 / 중복 제거 |
+
+## 6차 2문항
+
+| 문항 | 개념 | 바뀐 점 | 정답 | 검토 메모 |
+|---|---|---|---|---|
+| 51-35 | CONNECT BY 조건(가지째 제외), 루트는 검사 안 함 | WHERE 조건 → CONNECT BY 조건, 8노드, 루트의 COL3 도 2 | 4 | (C) START WITH 로 고른 루트는 CONNECT BY 조건을 검사하지 않음(Oracle) — 0·3 을 오답으로 / WHERE 였다면 5 |
+| 47-49 | 부서별 1위 (RANK) | ROW_NUMBER → RANK, 동점·NULL 부서 추가 | 3, 4, 5, 6 | (C) DESC 에서 NULL 이 먼저 → "Oracle 기준" 명시. NULLS LAST 면 ④ 가 된다는 점을 해설에 |
