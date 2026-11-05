@@ -205,3 +205,4 @@
 - PR #278 (content/2026-11-06-round-difficulty): 34문항 보강(2과목 31 + 1과목 ERD 3). 검증 기록 docs/qa/2026-11-06-round-difficulty.md. 59-30 은 이론 c222 인용 때문에 되돌림
 - 검증 도구: 로컬 PostgreSQL 16 (`service postgresql start`, `su postgres -c "psql -f /tmp/x.sql"`). CONNECT BY 는 재귀 CTE, Oracle 과 NULL 정렬 동일. 스크립트: scratchpad up1~5.py, v*.sql
 - 다음: 남은 후보(cand.txt 177개 중 고빈도 주제) 계속, 46-20·49-22 등은 이미 적당
+- 11-06 00:2x: 사용자 "머지" → #276·#277·#278 → release/2026-11-06-am → #279 merge (main d4be5b0), 운영 배포 success. #276/#278 의 59-38·46 충돌은 #278 버전으로 해결. "※ 보강했다" 문구는 사용자 요청으로 삭제(앞으로 넣지 않음). 함수 챕터 표는 함수|기능|예시 → 결과 형식(table.fn)
