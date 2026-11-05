@@ -39,7 +39,7 @@
         "기본 엔터티"
       ],
       "correctIndex": 0,
-      "explanation": "발생 시점에 따른 엔터티 분류는 기본·중심·행위 세 가지이다. 관계 엔터티는 다대다 관계를 풀 때 만드는 교차 엔터티를 가리키는 말이라 발생 시점 분류에 없다. 정답은 ① 이다."
+      "explanation": "발생 시점에 따른 엔터티 분류는 기본·중심·행위 세 가지이다. 관계 엔터티는 다대다 관계를 풀 때 만드는 교차 엔터티를 가리키는 말이라 발생 시점 분류에 없다. 정답은 ① 이다. ② 행위·③ 중심·④ 기본 엔터티가 발생 시점에 따른 분류다."
     },
     {
       "subject": "1과목",
@@ -52,7 +52,7 @@
         "주문상품은 주문과 상품의 M:N 관계를 해소하는 행위 엔터티이다."
       ],
       "correctIndex": 2,
-      "explanation": "기본(키) 엔터티는 업무에 원래부터 존재하며 다른 엔터티로부터 발생하지 않는 엔터티로 고객·상품이 해당한다. 중심 엔터티는 기본 엔터티로부터 발생해 업무의 중심이 되는 엔터티로 주문이 해당한다. 행위 엔터티는 두 개 이상의 엔터티로부터 발생하는 엔터티로, 주문상품은 주문과 상품의 M:N 관계를 해소하는 교차 엔터티이자 행위 엔터티이다. 따라서 주문상품을 기본 엔터티라고 한 ③ 이 옳지 않다.",
+      "explanation": "기본(키) 엔터티는 업무에 원래부터 존재하며 다른 엔터티로부터 발생하지 않는 엔터티로 고객·상품이 해당한다. 중심 엔터티는 기본 엔터티로부터 발생해 업무의 중심이 되는 엔터티로 주문이 해당한다. 행위 엔터티는 두 개 이상의 엔터티로부터 발생하는 엔터티로, 주문상품은 주문과 상품의 M:N 관계를 해소하는 교차 엔터티이자 행위 엔터티이다. 따라서 주문상품을 기본 엔터티라고 한 ③ 이 옳지 않다. ① 고객·상품은 기본, ② 주문은 중심, ④ 주문상품은 행위 엔터티라는 설명은 옳다.",
       "references": [
         {
           "type": "erd",
@@ -72,7 +72,7 @@
         "총주문금액"
       ],
       "correctIndex": 3,
-      "explanation": "파생 속성은 다른 속성으로부터 계산되어 만들어지는 속성이다. 총주문금액은 단가 × 주문수량으로 도출되므로 파생 속성이고, 나머지는 업무에서 직접 입력·부여되는 기본 속성이다. 파생 속성은 정합성 관리 부담이 있어 가급적 최소화한다.",
+      "explanation": "파생 속성은 다른 속성으로부터 계산되어 만들어지는 속성이다. 총주문금액은 단가 × 주문수량으로 도출되므로 파생 속성이고, ① 주문번호·② 주문일자·③ 주문수량은 업무에서 직접 입력·부여되는 기본 속성이다. 파생 속성은 정합성 관리 부담이 있어 가급적 최소화한다.",
       "references": [
         {
           "type": "table",
@@ -117,7 +117,7 @@
         "가, 나, 다, 라"
       ],
       "correctIndex": 3,
-      "explanation": "주소는 시·군·구 등 세부 속성으로 나눌 수 있어 복합 속성(가), 나이는 더 나눌 수 없는 단순 속성(나), 주민번호는 한 사람에게 값이 하나뿐인 단일 값 속성(다), 연락처는 휴대폰·집 전화처럼 여러 값을 가질 수 있는 다중 값 속성(라)이다. 네 설명이 모두 옳아 ④ 가, 나, 다, 라 이다.",
+      "explanation": "주소는 시·군·구 등 세부 속성으로 나눌 수 있어 복합 속성(가), 나이는 더 나눌 수 없는 단순 속성(나), 주민번호는 한 사람에게 값이 하나뿐인 단일 값 속성(다), 연락처는 휴대폰·집 전화처럼 여러 값을 가질 수 있는 다중 값 속성(라)이다. 네 설명이 모두 옳아 ④ 가, 나, 다, 라 이다. ① 가·라, ② 가·나·다, ③ 나·다·라 는 옳은 설명을 하나씩 빠뜨렸다.",
       "references": [
         {
           "type": "text",
@@ -195,7 +195,7 @@
         "OR"
       ],
       "correctIndex": 1,
-      "explanation": "괄호는 모든 연산자보다 먼저 평가되므로 우선순위가 가장 높다. 이어서 비교 연산자, NOT, AND, OR 순으로 적용되며 AND 가 OR 보다 먼저 묶인다."
+      "explanation": "괄호는 모든 연산자보다 먼저 평가되므로 우선순위가 가장 높다. 이어서 ① 비교 연산자, NOT, ③ AND, ④ OR 순으로 적용되며 AND 가 OR 보다 먼저 묶인다."
     },
     {
       "subject": "2과목",
@@ -265,7 +265,7 @@
         "FULL OUTER JOIN"
       ],
       "correctIndex": 3,
-      "explanation": "INNER JOIN 은 양쪽에 모두 있는 B·C 두 건만 반환한다. LEFT OUTER JOIN 은 여기에 TAB1 에만 있는 A 를 더해 3 건, RIGHT OUTER JOIN 은 TAB2 에만 있는 D 를 더해 3 건이다. FULL OUTER JOIN 은 매칭 2 건에 양쪽 미매칭 A·D 를 모두 더해 4 건이므로 결과 행 수가 가장 많다.",
+      "explanation": "① INNER JOIN 은 양쪽에 모두 있는 B·C 두 건만 반환한다. ② LEFT OUTER JOIN 은 여기에 TAB1 에만 있는 A 를 더해 3 건, ③ RIGHT OUTER JOIN 은 TAB2 에만 있는 D 를 더해 3 건이다. FULL OUTER JOIN 은 매칭 2 건에 양쪽 미매칭 A·D 를 모두 더해 4 건이므로 결과 행 수가 가장 많다.",
       "references": [
         {
           "type": "table",
@@ -329,7 +329,7 @@
         "60"
       ],
       "correctIndex": 1,
-      "explanation": "KEEP (DENSE_RANK FIRST ORDER BY COL1) 은 COL1 오름차순으로 가장 앞 순위인 행들(COL1 = 1 인 두 행)만 남긴 뒤 MAX(COL2)를 구한다. 그 두 행의 COL2 는 10, 20 이라 결과는 20 이다(②). ① 10 은 MAX 대신 MIN 을 쓴 값이고, 전체에서 MAX 를 구하면 50 이 나온다(KEEP 없이).",
+      "explanation": "KEEP (DENSE_RANK FIRST ORDER BY COL1) 은 COL1 오름차순으로 가장 앞 순위인 행들(COL1 = 1 인 두 행)만 남긴 뒤 MAX(COL2)를 구한다. 그 두 행의 COL2 는 10, 20 이라 결과는 20 이다(②). ① 10 은 MAX 대신 MIN 을 쓴 값이고, 전체에서 MAX 를 구하면 50 이 나온다(KEEP 없이). ③ 40 은 COL1 이 가장 큰 행들(DENSE_RANK LAST)에서 MIN 을 구한 값이다.",
       "references": [
         {
           "type": "table",
@@ -378,7 +378,7 @@
         "오류가 발생한다."
       ],
       "correctIndex": 0,
-      "explanation": "COALESCE 는 인수를 왼쪽부터 보며 처음 나오는 NULL 이 아닌 값을 반환한다. NULL, NULL 다음의 'S' 가 처음 NULL 이 아닌 값이므로 'S' 다(①). 뒤의 'QL' 은 평가하지 않으며 값을 이어 붙이지도 않는다(②).",
+      "explanation": "COALESCE 는 인수를 왼쪽부터 보며 처음 나오는 NULL 이 아닌 값을 반환한다. NULL, NULL 다음의 'S' 가 처음 NULL 이 아닌 값이므로 'S' 다(①). 뒤의 'QL' 은 평가하지 않으며 값을 이어 붙이지도 않는다(②). ③ NULL 이 아닌 값이 있으므로 NULL 이 아니고, ④ 오류도 나지 않는다.",
       "references": [
         {
           "type": "sql",
@@ -397,7 +397,7 @@
         "10, 10, 9"
       ],
       "correctIndex": 1,
-      "explanation": "`CEIL(9.36)` = 10 (올림), `ROUND(9.48)` = 9 (소수 첫째자리 반올림 = 9.5 미만이라 9), `FLOOR(9.72)` = 9 (내림). 결과: 10, 9, 9.",
+      "explanation": "`CEIL(9.36)` = 10 (올림), `ROUND(9.48)` = 9 (소수 첫째자리 반올림 = 9.5 미만이라 9), `FLOOR(9.72)` = 9 (내림). 결과: 10, 9, 9. ① 은 CEIL 을 버림으로, ③ 은 FLOOR 를 올림으로 본 결과, ④ 는 ROUND(9.48) 을 10 으로 본 결과다.",
       "references": [
         {
           "type": "sql",
@@ -416,7 +416,7 @@
         "3, NULL"
       ],
       "correctIndex": 1,
-      "explanation": "(1) `COUNT(DISTINCT 물품)` 은 서로 다른 물품 종류의 수. p, q, r 3 종이라 3 반환. (2) `IN ('p', NULL)` 에서 NULL 비교는 UNKNOWN 으로 평가되어 무시되고 `물품 = 'p'` 만 매칭되어 30 건 반환.",
+      "explanation": "(1) `COUNT(DISTINCT 물품)` 은 서로 다른 물품 종류의 수. p, q, r 3 종이라 3 반환. (2) `IN ('p', NULL)` 에서 NULL 비교는 UNKNOWN 으로 평가되어 무시되고 `물품 = 'p'` 만 매칭되어 30 건 반환. ① 은 IN 목록에 NULL 이 있으면 아무 행도 안 나온다고 본 값(NOT IN 과 헷갈린 것), ③ IN 목록의 NULL 은 오류가 아니며, ④ COUNT 는 NULL 을 돌려주지 않는다.",
       "references": [
         {
           "type": "table",
@@ -457,7 +457,7 @@
         "EXCEPT"
       ],
       "correctIndex": 1,
-      "explanation": "두 결과 집합에 모두 있는 행(교집합)을 반환하는 것은 INTERSECT 다(②). UNION 은 합집합, MINUS(Oracle)·EXCEPT(SQL Server)는 차집합이다."
+      "explanation": "두 결과 집합에 모두 있는 행(교집합)을 반환하는 것은 INTERSECT 다(②). ① UNION 은 합집합, ③ MINUS(Oracle)·④ EXCEPT(SQL Server)는 차집합이다."
     },
     {
       "subject": "2과목",
@@ -562,7 +562,7 @@
         "공집합, 공집합"
       ],
       "correctIndex": 2,
-      "explanation": "첫 번째 쿼리는 조건을 만족하는 행이 없어 공집합을 반환한다. 두 번째 쿼리는 집계 함수이므로 조건에 맞는 행이 없더라도 한 건(NULL)을 반환한다.",
+      "explanation": "첫 번째 쿼리는 조건을 만족하는 행이 없어 공집합을 반환한다. 두 번째 쿼리는 집계 함수이므로 조건에 맞는 행이 없더라도 한 건(NULL)을 반환한다. ① 과 ② 는 일반 SELECT 도 행이 없으면 NULL 한 행이 나온다고 본 결과, ④ 는 집계 함수도 행이 없으면 공집합이라고 본 결과다.",
       "references": [
         {
           "type": "table",
@@ -618,7 +618,7 @@
         "MINUS"
       ],
       "correctIndex": 1,
-      "explanation": "UNION ALL 은 중복 제거 없이 두 결과 집합을 그대로 결합한다. UNION·INTERSECT·MINUS 는 모두 중복을 제거한다."
+      "explanation": "UNION ALL 은 중복 제거 없이 두 결과 집합을 그대로 결합한다. ① UNION·③ INTERSECT·④ MINUS 는 모두 중복을 제거한다."
     },
     {
       "subject": "2과목",
@@ -631,7 +631,7 @@
         "(라)"
       ],
       "correctIndex": 3,
-      "explanation": "ORDER BY 는 기본 오름차순(ASC)이므로 \"높은 순\"으로 정렬하려면 (라) 의 `ORDER BY SUM(SALARY)` 에 `DESC` 를 추가해 `ORDER BY SUM(SALARY) DESC` 로 만들어야 한다. (가) SELECT 절, (나) WHERE 조건, (다) GROUP BY 는 모두 정상.",
+      "explanation": "ORDER BY 는 기본 오름차순(ASC)이므로 \"높은 순\"으로 정렬하려면 (라) 의 `ORDER BY SUM(SALARY)` 에 `DESC` 를 추가해 `ORDER BY SUM(SALARY) DESC` 로 만들어야 한다. ① (가) SELECT 절, ② (나) WHERE 조건, ③ (다) GROUP BY 는 모두 정상이다.",
       "references": [
         {
           "type": "table",
@@ -689,7 +689,7 @@
         "FROM - WHERE - HAVING - GROUP BY - SELECT - ORDER BY"
       ],
       "correctIndex": 2,
-      "explanation": "SQL 의 논리적 실행 순서는 FROM → WHERE → GROUP BY → HAVING → SELECT → ORDER BY 이다."
+      "explanation": "SQL 의 논리적 실행 순서는 FROM → WHERE → GROUP BY → HAVING → SELECT → ORDER BY 이다. ① 은 쓰는 순서, ② 는 WHERE 를 FROM 보다, ④ 는 HAVING 을 GROUP BY 보다 먼저 둔 순서라 틀리다."
     },
     {
       "subject": "2과목",
@@ -702,7 +702,7 @@
         "ROW_NUMBER()"
       ],
       "correctIndex": 0,
-      "explanation": "Bob, Smith 가 같은 7000 으로 1 위, 다음 David(6000) 이 2 위 — \"동일 순위 후 다음 순위를 건너뛰지 않는\" 패턴은 DENSE_RANK. RANK 는 동일 1, 1, 3, 4, 5 처럼 건너뛰며, ROW_NUMBER 는 동률이어도 1, 2, 3, 4, 5 로 고유 부여, PERCENT_RANK 는 0~1 비율 반환.",
+      "explanation": "Bob, Smith 가 같은 7000 으로 1 위, 다음 David(6000) 이 2 위 — \"동일 순위 후 다음 순위를 건너뛰지 않는\" 패턴은 DENSE_RANK. ② RANK 는 동일 1, 1, 3, 4, 5 처럼 건너뛰며, ④ ROW_NUMBER 는 동률이어도 1, 2, 3, 4, 5 로 고유 부여, ③ PERCENT_RANK 는 0~1 비율 반환.",
       "references": [
         {
           "type": "table",
@@ -753,7 +753,7 @@
         "지속성"
       ],
       "correctIndex": 2,
-      "explanation": "고립성(Isolation)은 동시에 실행되는 트랜잭션이 서로의 중간 상태를 보지 못하도록 격리하는 성질이다. 커밋되지 않은 다른 트랜잭션의 값을 읽은 것은 고립성 위반에 해당한다. 원자성은 전부 반영되거나 전부 취소되는 성질, 지속성은 커밋된 결과가 영구 보존되는 성질이다.",
+      "explanation": "고립성(Isolation)은 동시에 실행되는 트랜잭션이 서로의 중간 상태를 보지 못하도록 격리하는 성질이다. 커밋되지 않은 다른 트랜잭션의 값을 읽은 것은 고립성 위반에 해당한다. ① 원자성은 전부 반영되거나 전부 취소되는 성질, ④ 지속성은 커밋된 결과가 영구 보존되는 성질이다. ② 일관성은 트랜잭션 전후로 데이터가 규칙에 맞는 상태를 유지하는 성질이다.",
       "references": [
         {
           "type": "text",
@@ -772,7 +772,7 @@
         "결과가 없다 (공집합)"
       ],
       "correctIndex": 0,
-      "explanation": "(A, 10) 은 TAB2 의 어느 행과 비교해도 COL1 또는 COL2 가 확정적으로 다르므로 NOT IN 이 참이 되어 반환된다. (B, 20) 은 TAB2 의 (B, 20) 과 일치하여 제외된다. (C, 30) 은 (C, NULL) 과의 비교에서 COL1 은 같고 COL2 비교가 UNKNOWN 이 되어 NOT IN 이 UNKNOWN 이므로 제외된다. 따라서 결과는 (A, 10) 한 행이고 COL2 는 10 이다. 서브쿼리에 NULL 이 있다고 해서 항상 공집합이 되는 것은 아니며, 비교 대상 중 하나라도 확정적으로 다르면 NOT IN 은 참이 된다.",
+      "explanation": "(A, 10) 은 TAB2 의 어느 행과 비교해도 COL1 또는 COL2 가 확정적으로 다르므로 NOT IN 이 참이 되어 반환된다. (B, 20) 은 TAB2 의 (B, 20) 과 일치하여 제외된다. (C, 30) 은 (C, NULL) 과의 비교에서 COL1 은 같고 COL2 비교가 UNKNOWN 이 되어 NOT IN 이 UNKNOWN 이므로 제외된다. 따라서 결과는 (A, 10) 한 행이고 COL2 는 10 이다. 서브쿼리에 NULL 이 있다고 해서 항상 공집합이 되는 것은 아니며, 비교 대상 중 하나라도 확정적으로 다르면 NOT IN 은 참이 된다. ② 20 인 (B, 20) 은 일치해서, ③ 30 인 (C, 30) 은 NULL 비교가 UNKNOWN 이라 빠지고, (A, 10) 이 남으므로 ④ 공집합이 아니다.",
       "references": [
         {
           "type": "table",
@@ -835,7 +835,7 @@
         "UPDATE TAB1 SET COL1 = NULL;"
       ],
       "correctIndex": 3,
-      "explanation": "서브쿼리가 `SELECT MAX(NULL) FROM TAB2 ...` 이라 항상 NULL 을 반환 (MAX 의 입력이 NULL 상수). WHERE 조건과 무관하게 모든 TAB1 행의 COL1 이 NULL 로 갱신된다 = ④ `UPDATE TAB1 SET COL1 = NULL;` 과 동일.",
+      "explanation": "서브쿼리가 `SELECT MAX(NULL) FROM TAB2 ...` 이라 항상 NULL 을 반환 (MAX 의 입력이 NULL 상수). WHERE 조건과 무관하게 모든 TAB1 행의 COL1 이 NULL 로 갱신된다 = ④ `UPDATE TAB1 SET COL1 = NULL;` 과 동일. ① 은 MAX(COL2) 라 200·300 행이 값을 받고, ② 는 COALESCE 로 모든 행에 0 이 들어가며, ③ 은 MAX(0) 이라 짝이 있는 행에 0 이 들어가 결과가 다르다.",
       "references": [
         {
           "type": "table",
@@ -928,7 +928,7 @@
         "오류가 발생한다."
       ],
       "correctIndex": 2,
-      "explanation": "FROM TAB1, TAB2 에 조인 조건이 없으면 두 테이블의 모든 행 조합(카티션 곱)이 만들어진다. 10건 × 10건 = 100건이므로 COUNT(*) 는 100 이다(③). 오류는 나지 않는다.",
+      "explanation": "FROM TAB1, TAB2 에 조인 조건이 없으면 두 테이블의 모든 행 조합(카티션 곱)이 만들어진다. 10건 × 10건 = 100건이므로 COUNT(*) 는 100 이다(③). 오류는 나지 않는다. ① 10 은 한 테이블의 행 수, ② 20 은 두 테이블 행 수의 합이고, ④ 조건이 없어도 오류는 나지 않는다.",
       "references": [
         {
           "type": "table",
@@ -995,7 +995,7 @@
         "15"
       ],
       "correctIndex": 0,
-      "explanation": "두 테이블의 공통 컬럼은 ID 이지만 TAB1(1, 2, 3)과 TAB2(10, 20, 30, 40, 50) 사이에 일치하는 ID 값이 없으므로 NATURAL JOIN 결과는 0 건이다.",
+      "explanation": "두 테이블의 공통 컬럼은 ID 이지만 TAB1(1, 2, 3)과 TAB2(10, 20, 30, 40, 50) 사이에 일치하는 ID 값이 없으므로 NATURAL JOIN 결과는 0 건이다. ② 3 은 TAB1 행 수, ③ 5 는 TAB2 행 수, ④ 15 는 조건 없는 CROSS JOIN 의 결과다.",
       "references": [
         {
           "type": "table",
@@ -1132,7 +1132,7 @@
         "REGEXP_INSTR"
       ],
       "correctIndex": 3,
-      "explanation": "REGEXP_INSTR 는 문자열에서 정규식과 일치하는 패턴의 시작 위치를 정수로 반환한다. REGEXP_LIKE 는 boolean 판정, REGEXP_COUNT 는 일치 횟수, REGEXP_REPLACE 는 치환을 수행한다."
+      "explanation": "REGEXP_INSTR 는 문자열에서 정규식과 일치하는 패턴의 시작 위치를 정수로 반환한다. ② REGEXP_LIKE 는 boolean 판정, ① REGEXP_COUNT 는 일치 횟수, ③ REGEXP_REPLACE 는 치환을 수행한다."
     },
     {
       "subject": "2과목",
@@ -1145,7 +1145,7 @@
         "PARK, KIM, LEE"
       ],
       "correctIndex": 1,
-      "explanation": "AGE < 35 이고 DEPT 가 A 또는 B 인 행을 찾는다. PARK(30, A)과 KIM(25, B)은 두 조건을 모두 만족하고, LEE(40, A)는 나이 조건에서 빠진다. 따라서 PARK, KIM 이다(②).",
+      "explanation": "AGE < 35 이고 DEPT 가 A 또는 B 인 행을 찾는다. PARK(30, A)과 KIM(25, B)은 두 조건을 모두 만족하고, LEE(40, A)는 나이 조건에서 빠진다. 따라서 PARK, KIM 이다(②). ① 은 KIM 을 놓친 결과, ③ 은 나이 조건 대신 DEPT A 만 본 결과, ④ 는 나이 조건을 무시한 결과다.",
       "references": [
         {
           "type": "table",
@@ -1190,7 +1190,7 @@
         "1500, NULL"
       ],
       "correctIndex": 2,
-      "explanation": "두 집계의 NULL 처리 방식이 다른 점이 핵심이다. AVG(NVL(SAL, 0))는 NULL을 0으로 치환해 모든 4행이 평균에 포함되어 (1000+1000+2500+0)÷4 = 1125. MIN(SAL)은 NVL이 적용되지 않아 NULL을 자동 제외하고 1000, 1000, 2500 중 최솟값 1000. 따라서 결과는 (1125, 1000)으로 정답은 ③번이다.",
+      "explanation": "두 집계의 NULL 처리 방식이 다른 점이 핵심이다. AVG(NVL(SAL, 0))는 NULL을 0으로 치환해 모든 4행이 평균에 포함되어 (1000+1000+2500+0)÷4 = 1125. MIN(SAL)은 NVL이 적용되지 않아 NULL을 자동 제외하고 1000, 1000, 2500 중 최솟값 1000. 따라서 결과는 (1125, 1000)으로 정답은 ③번이다. ① 1500 은 NVL 없이 NULL 을 빼고 평균을 낸 값(4500 ÷ 3), ② 는 MIN 자리에 최댓값을 적은 것, ④ 는 NULL 을 빼고 평균을 내면서 MIN 이 NULL 이라고 본 결과다.",
       "references": [
         {
           "type": "table",
@@ -1455,7 +1455,7 @@
         "오류가 발생한다."
       ],
       "correctIndex": 1,
-      "explanation": "`ORDER BY SAL` 은 기본 오름차순(ASC). `NULLS LAST` 옵션은 정렬 후 NULL 값을 결과의 마지막에 배치한다. 본 데이터에서 출력 순서: SAL=2000(이순신) → 3000(홍길동) → 5000(강감찬) → NULL(박문수).",
+      "explanation": "`ORDER BY SAL` 은 기본 오름차순(ASC). `NULLS LAST` 옵션은 정렬 후 NULL 값을 결과의 마지막에 배치한다. 본 데이터에서 출력 순서: SAL=2000(이순신) → 3000(홍길동) → 5000(강감찬) → NULL(박문수). ① 은 NULLS FIRST 일 때의 결과, ③ NULLS LAST 는 무시되지 않으며, ④ Oracle 은 NULLS LAST 를 지원해 오류가 나지 않는다.",
       "references": [
         {
           "type": "table",
@@ -1567,7 +1567,7 @@
         "4"
       ],
       "correctIndex": 2,
-      "explanation": "UPDATE 로 COL2≤2 인 두 행의 COL1 이 4 로 갱신되고, DELETE 는 SP2 로 되돌려지므로 (4,2),(4,1),(3,4) 가 남는다. 마지막 INSERT (4,1) 가 더해져 COL1=4 인 행은 세 건이다.",
+      "explanation": "UPDATE 로 COL2≤2 인 두 행의 COL1 이 4 로 갱신되고, DELETE 는 SP2 로 되돌려지므로 (4,2),(4,1),(3,4) 가 남는다. 마지막 INSERT (4,1) 가 더해져 COL1=4 인 행은 세 건이다. ① 1 은 ROLLBACK TO SP2 가 UPDATE 까지 되돌린다고 본 값, ② 2 는 마지막 INSERT 를 빠뜨린 값이다.",
       "references": [
         {
           "type": "table",
