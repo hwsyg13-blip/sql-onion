@@ -13,7 +13,7 @@
         "관계 엔터티"
       ],
       "correctIndex": 3,
-      "explanation": "M:N 관계를 두 개의 1:M 관계로 풀기 위해 가운데 두는 엔터티가 관계(교차) 엔터티이며, 보통 양쪽 부모의 주식별자를 상속받아 복합 식별자로 삼는다. 기본 엔터티는 다른 엔터티에 의존하지 않고 고유한 주식별자를 가지며, 중심 엔터티는 기본 엔터티로부터 발생해 업무의 중심이 되고, 행위 엔터티는 두 개 이상의 부모로부터 발생해 데이터가 자주 바뀌거나 늘어나는 엔터티다. 참고로 모든 엔터티는 반드시 식별자를 가져야 하며 \"주식별자가 없어도 되는 엔터티\" 는 없다. ※ 복원 자료의 문제 문장이 이 원칙과 어긋나 문장을 바로잡았다."
+      "explanation": "M:N 관계를 두 개의 1:M 관계로 풀기 위해 가운데 두는 엔터티가 관계(교차) 엔터티이며, 보통 양쪽 부모의 주식별자를 상속받아 복합 식별자로 삼는다. ① 기본 엔터티는 다른 엔터티에 의존하지 않고 고유한 주식별자를 가지며, ② 중심 엔터티는 기본 엔터티로부터 발생해 업무의 중심이 되고, ③ 행위 엔터티는 두 개 이상의 부모로부터 발생해 데이터가 자주 바뀌거나 늘어나는 엔터티다. 참고로 모든 엔터티는 반드시 식별자를 가져야 하며 \"주식별자가 없어도 되는 엔터티\" 는 없다. ※ 복원 자료의 문제 문장이 이 원칙과 어긋나 문장을 바로잡았다."
     },
     {
       "subject": "1과목",
@@ -124,7 +124,7 @@
         "물리적 독립성 — 개념 스키마 변경"
       ],
       "correctIndex": 1,
-      "explanation": "파티션과 인덱스는 디스크에 데이터를 어떻게 저장할지를 다루는 내부 스키마의 영역이다. 내부 스키마가 바뀌어도 개념·외부 스키마가 영향을 받지 않는 성질을 물리적 독립성이라 한다. 반대로 개념 스키마(테이블 구조)가 바뀌어도 응용 프로그램이 영향을 받지 않는 것은 논리적 독립성이다.",
+      "explanation": "파티션과 인덱스는 디스크에 데이터를 어떻게 저장할지를 다루는 내부 스키마의 영역이다. 내부 스키마가 바뀌어도 개념·외부 스키마가 영향을 받지 않는 성질을 물리적 독립성이라 한다. 반대로 개념 스키마(테이블 구조)가 바뀌어도 응용 프로그램이 영향을 받지 않는 것은 논리적 독립성이다. ① 과 ④ 는 바뀐 층(내부)을 개념 스키마로 잘못 보았고, ③ 은 내부 스키마 변경에 논리적 독립성을 짝지었다.",
       "references": [
         {
           "type": "text",
@@ -143,7 +143,7 @@
         "인덱스 설계를 포함한다."
       ],
       "correctIndex": 0,
-      "explanation": "개념적 데이터 모델링은 추상화 수준이 가장 높아 업무 중심으로 표현되며 세부 구현(저장 구조·인덱스·튜닝 등)은 다루지 않는다."
+      "explanation": "개념적 데이터 모델링은 추상화 수준이 가장 높아 업무 중심으로 표현되며 세부 구현(저장 구조·인덱스·튜닝 등)은 다루지 않는다. ② 물리적 저장 구조, ③ 성능 튜닝, ④ 인덱스 설계는 물리적 데이터 모델링에서 다룬다."
     },
     {
       "subject": "1과목",
@@ -156,7 +156,7 @@
         "관계 엔터티"
       ],
       "correctIndex": 2,
-      "explanation": "다른 엔터티의 부모 역할을 하면서 업무에 원래부터 존재해 독립적으로 생성되는 엔터티는 기본 엔터티이다. 중심 엔터티는 기본 엔터티에서 파생되어 업무의 중심 역할을 한다.",
+      "explanation": "다른 엔터티의 부모 역할을 하면서 업무에 원래부터 존재해 독립적으로 생성되는 엔터티는 기본 엔터티이다. ② 중심 엔터티는 기본 엔터티에서 파생되어 업무의 중심 역할을 한다. ① 행위 엔터티는 두 개 이상의 엔터티로부터 발생하고, ④ 관계 엔터티는 M:N 을 풀 때 만드는 교차 엔터티다.",
       "references": [
         {
           "type": "text",
@@ -188,7 +188,7 @@
         "대체키"
       ],
       "correctIndex": 1,
-      "explanation": "다른 엔터티의 주식별자(PK)를 참조하기 위해 사용하는 키는 외래키(FK)이다. 후보키·대체키는 같은 엔터티 내부의 식별자 후보이다."
+      "explanation": "다른 엔터티의 주식별자(PK)를 참조하기 위해 사용하는 키는 외래키(FK)이다. ③ 후보키·④ 대체키는 같은 엔터티 내부의 식별자 후보이다. ① 내부 식별자는 엔터티 안에서 스스로 만든 식별자다."
     },
     {
       "subject": "1과목",
@@ -201,7 +201,7 @@
         "ERD 표기법에 따라 둘을 구분하지 않는다."
       ],
       "correctIndex": 2,
-      "explanation": "ERD(IE 표기법)에서 식별 관계는 실선, 비식별 관계는 점선으로 표기한다. 식별 관계는 부모의 주식별자가 자식의 주식별자에 포함되는 관계이다."
+      "explanation": "ERD(IE 표기법)에서 식별 관계는 실선, 비식별 관계는 점선으로 표기한다. 식별 관계는 부모의 주식별자가 자식의 주식별자에 포함되는 관계이다. ① 은 반대로, ② 는 둘 다 실선으로 본 것이고, ④ IE 표기법은 선 모양으로 둘을 구분한다."
     },
     {
       "subject": "1과목",
@@ -214,7 +214,7 @@
         "4개"
       ],
       "correctIndex": 2,
-      "explanation": "ERD 에서 교수-학생, 학생-과목이 각각 M:N 이다. M:N 관계 하나를 해소하면 두 엔터티 사이에 연결(관계) 엔터티가 하나 생기므로, 두 관계에서 연결 테이블이 2개 추가된다(예: 담당, 이수). 정답은 ③ 이다.",
+      "explanation": "ERD 에서 교수-학생, 학생-과목이 각각 M:N 이다. M:N 관계 하나를 해소하면 두 엔터티 사이에 연결(관계) 엔터티가 하나 생기므로, 두 관계에서 연결 테이블이 2개 추가된다(예: 담당, 이수). 정답은 ③ 이다. ① 1개는 관계 하나만 푼 값, ② 3개는 엔터티 수, ④ 4개는 관계마다 테이블이 두 개 생긴다고 본 값이다.",
       "references": [
         {
           "type": "erd",
@@ -247,7 +247,7 @@
         "COL1 = 4, COL2 = D"
       ],
       "correctIndex": 3,
-      "explanation": "COL1 이 NULL 인 첫 행은 `COL1 <= 3` 이 UNKNOWN, `COL2 IS NULL` 이 FALSE 이므로 OR 결과가 UNKNOWN 이고 NOT UNKNOWN 도 UNKNOWN 이라 조건을 만족하지 못해 제외된다. COL1 이 1·3 인 행은 `COL1 <= 3` 이 참이므로 NOT 에 의해 제외된다. COL1 이 4 인 행만 두 조건이 모두 거짓이어서 NOT 이 참이 되므로 (4, D) 한 행이 반환된다.",
+      "explanation": "COL1 이 NULL 인 첫 행은 `COL1 <= 3` 이 UNKNOWN, `COL2 IS NULL` 이 FALSE 이므로 OR 결과가 UNKNOWN 이고 NOT UNKNOWN 도 UNKNOWN 이라 조건을 만족하지 못해 제외된다. COL1 이 1·3 인 행은 `COL1 <= 3` 이 참이므로 NOT 에 의해 제외된다. COL1 이 4 인 행만 두 조건이 모두 거짓이어서 NOT 이 참이 되므로 (4, D) 한 행이 반환된다. ① 은 NOT 의 효과를 무시한 결과, ② 는 UNKNOWN 을 참으로 본 결과, ③ 은 COL1 <= 3 인 3 을 남긴 결과다.",
       "references": [
         {
           "type": "table",
@@ -333,7 +333,7 @@
         "18, 18, 18, 18"
       ],
       "correctIndex": 2,
-      "explanation": "ORDER BY ID 이므로 RANGE 의 ±2 는 'ID 값' 기준 범위. ID=1 의 윈도우: ID ∈ [-1, 3] = {1, 2, 3} → VAL 합 3+4+5 = 12. ID=2: ID ∈ [0, 4] = {1, 2, 3, 4} → 3+4+5+6 = 18. ID=3: ID ∈ [1, 5] = {1, 2, 3, 4} → 18. ID=4: ID ∈ [2, 6] = {2, 3, 4} → 4+5+6 = 15. 결과 12, 18, 18, 15 → ③ 정답.",
+      "explanation": "ORDER BY ID 이므로 RANGE 의 ±2 는 'ID 값' 기준 범위. ID=1 의 윈도우: ID ∈ [-1, 3] = {1, 2, 3} → VAL 합 3+4+5 = 12. ID=2: ID ∈ [0, 4] = {1, 2, 3, 4} → 3+4+5+6 = 18. ID=3: ID ∈ [1, 5] = {1, 2, 3, 4} → 18. ID=4: ID ∈ [2, 6] = {2, 3, 4} → 4+5+6 = 15. 결과 12, 18, 18, 15 → ③ 정답. ② 는 2 PRECEDING AND CURRENT ROW(앞 2행 + 지금 행)로 본 값, ④ 는 전체 합계를 붙인 값이다.",
       "references": [
         {
           "type": "table",
@@ -378,7 +378,7 @@
         "위치 어디도 아님"
       ],
       "correctIndex": 0,
-      "explanation": "루트(START WITH 매니저 IS NULL)에서 시작해 부모 행의 사원 값과 자식 행의 매니저 값이 일치하는 행을 따라 내려가는 순방향 전개이므로 PRIOR 는 사원 앞(ㄱ)에 온다. 즉 CONNECT BY PRIOR 사원 = 매니저 형태이다.",
+      "explanation": "루트(START WITH 매니저 IS NULL)에서 시작해 부모 행의 사원 값과 자식 행의 매니저 값이 일치하는 행을 따라 내려가는 순방향 전개이므로 PRIOR 는 사원 앞(ㄱ)에 온다. 즉 CONNECT BY PRIOR 사원 = 매니저 형태이다. ② ㄴ(매니저 앞)에 오면 역방향이라 루트 한 행만 나오고, ③ PRIOR 는 한쪽에만 붙이며, ④ PRIOR 가 없으면 부모·자식 방향을 정하지 못한다.",
       "references": [
         {
           "type": "table",
@@ -423,7 +423,7 @@
         "4번 행 (NVL 로 0 출력)"
       ],
       "correctIndex": 2,
-      "explanation": "NVL(금액, 0) 적용 후 출력값: ID=1 → 1000, ID=2 → 0 (NVL 적용), ID=3 → 3000, ID=4 → 0 (NVL 적용). 가장 큰 값은 ID=3 의 3000. 정답 ③.",
+      "explanation": "NVL(금액, 0) 적용 후 출력값: ID=1 → 1000, ID=2 → 0 (NVL 적용), ID=3 → 3000, ID=4 → 0 (NVL 적용). 가장 큰 값은 ID=3 의 3000. 정답 ③. ① 1000 은 두 번째로 큰 값, ② 와 ④ 는 NVL 로 0 이 된 행이다.",
       "references": [
         {
           "type": "table",
@@ -468,7 +468,7 @@
         "LEVEL"
       ],
       "correctIndex": 0,
-      "explanation": "CONNECT BY 절에서 PRIOR 가 붙은 쪽이 이전(부모) 행이 된다. PRIOR 사원번호 = 매니저번호 는 부모에서 자식으로 내려가는 순방향, PRIOR 매니저번호 = 사원번호 는 자식에서 부모로 올라가는 역방향이다. START WITH 는 시작 행, CONNECT BY 는 연결 조건을 쓰는 절, LEVEL 은 깊이를 나타낼 뿐 방향을 정하지 않는다. 정답은 ① 이다."
+      "explanation": "CONNECT BY 절에서 PRIOR 가 붙은 쪽이 이전(부모) 행이 된다. PRIOR 사원번호 = 매니저번호 는 부모에서 자식으로 내려가는 순방향, PRIOR 매니저번호 = 사원번호 는 자식에서 부모로 올라가는 역방향이다. ② START WITH 는 시작 행, ③ CONNECT BY 는 연결 조건을 쓰는 절, ④ LEVEL 은 깊이를 나타낼 뿐 방향을 정하지 않는다. 정답은 ① 이다."
     },
     {
       "subject": "2과목",
@@ -481,7 +481,7 @@
         "지속성"
       ],
       "correctIndex": 2,
-      "explanation": "트랜잭션의 ACID 중 고립성(Isolation)에 대한 설명이다. 동시 실행되는 다른 트랜잭션의 영향을 받지 않고 독립적으로 수행됨을 보장한다.",
+      "explanation": "트랜잭션의 ACID 중 고립성(Isolation)에 대한 설명이다. 동시 실행되는 다른 트랜잭션의 영향을 받지 않고 독립적으로 수행됨을 보장한다. ① 원자성은 전부 되거나 전부 취소, ② 일관성은 규칙에 맞는 상태 유지, ④ 지속성은 커밋 결과의 영구 보존이다.",
       "references": [
         {
           "type": "text",
@@ -500,7 +500,7 @@
         "스칼라 서브쿼리는 단일 값을 반환한다."
       ],
       "correctIndex": 1,
-      "explanation": "서브쿼리는 메인 쿼리의 컬럼을 참조할 수 있지만(연관 서브쿼리, ③), 메인 쿼리는 WHERE·SELECT 절 서브쿼리 안의 컬럼을 직접 쓸 수 없다. 서브쿼리 컬럼은 서브쿼리 안에서만 유효하기 때문이다(FROM 절 인라인 뷰는 테이블처럼 취급되어 예외). 따라서 ② 가 적절하지 않다."
+      "explanation": "서브쿼리는 메인 쿼리의 컬럼을 참조할 수 있지만(연관 서브쿼리, ③), 메인 쿼리는 WHERE·SELECT 절 서브쿼리 안의 컬럼을 직접 쓸 수 없다. 서브쿼리 컬럼은 서브쿼리 안에서만 유효하기 때문이다(FROM 절 인라인 뷰는 테이블처럼 취급되어 예외). 따라서 ② 가 적절하지 않다. ① 서브쿼리는 SELECT·WHERE·FROM 등에 쓸 수 있고, ④ 스칼라 서브쿼리는 값 하나를 돌려준다."
     },
     {
       "subject": "2과목",
@@ -513,7 +513,7 @@
         "1, 1, 2, 2"
       ],
       "correctIndex": 0,
-      "explanation": "PARTITION BY DEPT 는 부서별로 순위를 따로 매긴다. DEPT 10 안에서 300 이 1 위, 200 이 2 위이고 DEPT 20 안에서도 500 이 1 위, 400 이 2 위가 되어 순위가 부서마다 1 부터 다시 시작한다. PARTITION BY 가 없었다면 전체를 한 묶음으로 보아 1, 2, 3, 4 가 된다.",
+      "explanation": "PARTITION BY DEPT 는 부서별로 순위를 따로 매긴다. DEPT 10 안에서 300 이 1 위, 200 이 2 위이고 DEPT 20 안에서도 500 이 1 위, 400 이 2 위가 되어 순위가 부서마다 1 부터 다시 시작한다. PARTITION BY 가 없었다면 전체를 한 묶음으로 보아 1, 2, 3, 4 가 된다. ② 는 같은 부서 안의 급여 차이를 무시한 결과, ④ 는 부서 번호를 기준으로 DENSE_RANK 를 매긴 것과 같은 결과다.",
       "references": [
         {
           "type": "table",
@@ -558,7 +558,7 @@
         "GRANT — DCL"
       ],
       "correctIndex": 0,
-      "explanation": "INSERT 는 DML 이므로 DCL 과 짝지어지지 않는다. SELECT 도 SQLD 에서는 DML(데이터 조회)로 분류한다."
+      "explanation": "INSERT 는 DML 이므로 DCL 과 짝지어지지 않는다. ② SELECT 도 SQLD 에서는 DML(데이터 조회)로 분류한다. ③ CREATE 는 DDL, ④ GRANT 는 DCL 로 맞게 짝지어졌다."
     },
     {
       "subject": "2과목",
@@ -571,7 +571,7 @@
         "EXCEPT"
       ],
       "correctIndex": 3,
-      "explanation": "첫 번째 결과 집합에서 두 번째 결과 집합에 존재하는 행을 제외하는 차집합 연산자는 EXCEPT(Oracle 의 MINUS) 이다.",
+      "explanation": "첫 번째 결과 집합에서 두 번째 결과 집합에 존재하는 행을 제외하는 차집합 연산자는 EXCEPT(Oracle 의 MINUS) 이다. ① UNION 은 합집합, ② UNION ALL 은 중복을 포함한 합집합, ③ INTERSECT 는 교집합이다.",
       "references": [
         {
           "type": "text",
@@ -634,7 +634,7 @@
         "14"
       ],
       "correctIndex": 2,
-      "explanation": "COALESCE(C1, C2, C3) 는 행마다 처음 NULL 이 아닌 값을 고른다. 1행은 C1 = 1, 2행은 C1 이 NULL 이라 C2 = 2, 3행은 C1·C2 가 NULL 이라 C3 = 3 이다. SUM 은 1 + 2 + 3 = 6 이다(③).",
+      "explanation": "COALESCE(C1, C2, C3) 는 행마다 처음 NULL 이 아닌 값을 고른다. 1행은 C1 = 1, 2행은 C1 이 NULL 이라 C2 = 2, 3행은 C1·C2 가 NULL 이라 C3 = 3 이다. SUM 은 1 + 2 + 3 = 6 이다(③). ② 1 은 C1 만 더한 값, ④ 14 는 NULL 을 빼고 모든 칸을 더한 값(1+2+3+2+3+3)이다.",
       "references": [
         {
           "type": "table",
@@ -679,7 +679,7 @@
         "ORDER BY 절은 별칭을 참조할 수 없다"
       ],
       "correctIndex": 0,
-      "explanation": "SQL 은 FROM → WHERE → GROUP BY → HAVING → SELECT → ORDER BY 순으로 평가된다. WHERE 는 그룹이 만들어지기 전에 행을 거르는 단계라 집계 함수를 쓸 수 없고, 집계 결과로 걸러내려면 GROUP BY 뒤의 HAVING 을 써야 한다.",
+      "explanation": "SQL 은 FROM → WHERE → GROUP BY → HAVING → SELECT → ORDER BY 순으로 평가된다. WHERE 는 그룹이 만들어지기 전에 행을 거르는 단계라 집계 함수를 쓸 수 없고, 집계 결과로 걸러내려면 GROUP BY 뒤의 HAVING 을 써야 한다. ② GROUP BY 절에는 집계 함수가 없고, ③ 이 SQL 은 WHERE 에서 별칭을 쓰지 않았으며, ④ ORDER BY 는 별칭을 쓸 수 있다.",
       "references": [
         {
           "type": "sql",
@@ -739,7 +739,7 @@
         "카티션 곱(Cartesian Product)"
       ],
       "correctIndex": 3,
-      "explanation": "제품과 생산라인은 교차 엔터티 '생산제품' 을 거쳐 M:N 으로 연결된다. 중간 엔터티를 건너뛰고 두 테이블을 직접 조인하면 조인 조건이 성립할 키가 없어 모든 행이 곱해지는 카티션 곱(CROSS JOIN) 이 발생한다.",
+      "explanation": "제품과 생산라인은 교차 엔터티 '생산제품' 을 거쳐 M:N 으로 연결된다. 중간 엔터티를 건너뛰고 두 테이블을 직접 조인하면 조인 조건이 성립할 키가 없어 모든 행이 곱해지는 카티션 곱(CROSS JOIN) 이 발생한다. ① 짝을 맞출 조인 조건이 없어 정상 조인이 아니고, ② 중복 제거는 일어나지 않으며, ③ 공집합이 아니라 모든 조합이 나온다.",
       "references": [
         {
           "type": "erd",
@@ -772,7 +772,7 @@
         "CASCADE CONSTRAINTS"
       ],
       "correctIndex": 3,
-      "explanation": "테이블을 삭제하면서 이를 참조하는 외래키 등 모든 제약을 함께 제거하려면 DROP TABLE ... CASCADE CONSTRAINTS 옵션을 사용한다."
+      "explanation": "테이블을 삭제하면서 이를 참조하는 외래키 등 모든 제약을 함께 제거하려면 DROP TABLE ... CASCADE CONSTRAINTS 옵션을 사용한다. ① RESTRICT 는 참조가 있으면 삭제를 막고, ② WITH GRANT 는 권한 재부여 옵션이며, ③ NO ACTION 은 참조 무결성 동작 옵션이라 제약을 지우지 않는다."
     },
     {
       "subject": "2과목",
@@ -785,7 +785,7 @@
         "COMMIT 으로 권한을 부여하고 ROLLBACK 으로 회수한다."
       ],
       "correctIndex": 2,
-      "explanation": "권한은 GRANT 로 부여하고 REVOKE 로 회수한다. ROLE 은 권한의 묶음이며 동일하게 GRANT·REVOKE 로 관리한다."
+      "explanation": "권한은 GRANT 로 부여하고 REVOKE 로 회수한다. ROLE 은 권한의 묶음이며 동일하게 GRANT·REVOKE 로 관리한다. ① CREATE·DROP 은 DDL, ② INSERT·DELETE 는 DML, ④ COMMIT·ROLLBACK 은 TCL 이다."
     },
     {
       "subject": "2과목",
@@ -1041,7 +1041,7 @@
         "CUBE"
       ],
       "correctIndex": 3,
-      "explanation": "지정한 컬럼들의 모든 부분집합 조합에 대해 집계를 산출하는 절은 CUBE 이다. ROLLUP 은 계층적 소계만, GROUPING SETS 는 명시한 조합만 산출한다."
+      "explanation": "지정한 컬럼들의 모든 부분집합 조합에 대해 집계를 산출하는 절은 CUBE 이다. ① ROLLUP 은 계층적 소계만, ② GROUPING SETS 는 명시한 조합만 산출한다. ③ GROUP BY 는 지정한 컬럼 조합 하나만 집계한다."
     },
     {
       "subject": "2과목",
@@ -1054,7 +1054,7 @@
         "전체 행"
       ],
       "correctIndex": 2,
-      "explanation": "NULL 과의 비교는 UNKNOWN 을 반환하고 NOT(UNKNOWN) 도 UNKNOWN 이므로 COL 이 NULL 인 행은 제외된다. COL <= 2 는 1, 2 에 대해 TRUE 이고 그 NOT 은 FALSE 이므로 1, 2 도 제외된다. 결과적으로 COL > 2 를 만족하는 3, 4 만 반환된다.",
+      "explanation": "NULL 과의 비교는 UNKNOWN 을 반환하고 NOT(UNKNOWN) 도 UNKNOWN 이므로 COL 이 NULL 인 행은 제외된다. COL <= 2 는 1, 2 에 대해 TRUE 이고 그 NOT 은 FALSE 이므로 1, 2 도 제외된다. 결과적으로 COL > 2 를 만족하는 3, 4 만 반환된다. ① 은 NULL 행을 남긴 결과, ② 는 NOT 을 무시한 결과, ④ 는 조건을 무시한 결과다.",
       "references": [
         {
           "type": "table",
@@ -1097,7 +1097,7 @@
         "SELECT * FROM T1 CROSS JOIN T2;"
       ],
       "correctIndex": 3,
-      "explanation": "INNER/LEFT/RIGHT OUTER JOIN 은 모두 ON 조건으로 ID 가 매칭되는 행만 반환하므로 (모든 행이 매칭되는 가정에서) 결과는 3 행으로 동일하다. CROSS JOIN 은 조인 조건 없이 모든 조합을 반환하므로 3 × 3 = 9 행으로 결과 행 수가 가장 많다.",
+      "explanation": "INNER/LEFT/RIGHT OUTER JOIN 은 모두 ON 조건으로 ID 가 매칭되는 행만 반환하므로 (모든 행이 매칭되는 가정에서) 결과는 3 행으로 동일하다. CROSS JOIN 은 조인 조건 없이 모든 조합을 반환하므로 3 × 3 = 9 행으로 결과 행 수가 가장 많다. ①·②·③ 은 모든 행이 매칭되어 3행으로 같고, ④ 만 9행이다.",
       "references": [
         {
           "type": "table",
@@ -1156,7 +1156,7 @@
         "카티션 곱"
       ],
       "correctIndex": 3,
-      "explanation": "제품과 생산라인은 교차 엔터티인 생산제품을 거쳐 M:N 관계로 연결된다. 중간 엔터티를 건너뛰고 두 테이블을 직접 `JOIN` 하면 조인 조건이 성립할 키가 없어 모든 행이 곱해지는 카티션 곱(CROSS JOIN) 이 발생한다. 정확히 조인하려면 `제품 JOIN 생산제품 ON 제품.제품번호 = 생산제품.제품번호 JOIN 생산라인 ON 생산제품.라인번호 = 생산라인.라인번호` 형태로 중간 엔터티를 경유해야 한다.",
+      "explanation": "제품과 생산라인은 교차 엔터티인 생산제품을 거쳐 M:N 관계로 연결된다. 중간 엔터티를 건너뛰고 두 테이블을 직접 `JOIN` 하면 조인 조건이 성립할 키가 없어 모든 행이 곱해지는 카티션 곱(CROSS JOIN) 이 발생한다. 정확히 조인하려면 `제품 JOIN 생산제품 ON 제품.제품번호 = 생산제품.제품번호 JOIN 생산라인 ON 생산제품.라인번호 = 생산라인.라인번호` 형태로 중간 엔터티를 경유해야 한다. ① 정상 조인이 아니고, ② 공집합이 아니라 모든 조합이 나오며, ③ 중복 제거는 일어나지 않는다.",
       "references": [
         {
           "type": "erd",
@@ -1222,7 +1222,7 @@
         "TOP"
       ],
       "correctIndex": 0,
-      "explanation": "SELECT 절에서 행의 중복을 제거하는 표준 키워드는 DISTINCT 이다. UNIQUE 는 일부 DBMS 의 동의어이며 표준 정답은 DISTINCT 이다."
+      "explanation": "SELECT 절에서 행의 중복을 제거하는 표준 키워드는 DISTINCT 이다. ② UNIQUE 는 일부 DBMS 의 동의어이며 표준 정답은 DISTINCT 이다. ③ LIMIT(MySQL)·④ TOP(SQL Server) 은 행 수를 자르는 키워드다."
     },
     {
       "subject": "2과목",
@@ -1235,7 +1235,7 @@
         "1.b 3.c"
       ],
       "correctIndex": 2,
-      "explanation": "ON (T.ID = S.ID) 로 비교하면 ID 1 은 양쪽에 있어 MATCHED → V 가 b 로 UPDATE 되고, SRC 의 ID 3 은 TGT 에 없어 NOT MATCHED → (3, c) 가 INSERT 된다. TGT 에만 있는 ID 2 는 그대로 a 다. 결과는 1.b 2.a 3.c 다(③). MERGE 는 SRC 에 없는 TGT 행을 지우지 않으므로 ④ 는 틀리다.",
+      "explanation": "ON (T.ID = S.ID) 로 비교하면 ID 1 은 양쪽에 있어 MATCHED → V 가 b 로 UPDATE 되고, SRC 의 ID 3 은 TGT 에 없어 NOT MATCHED → (3, c) 가 INSERT 된다. TGT 에만 있는 ID 2 는 그대로 a 다. 결과는 1.b 2.a 3.c 다(③). MERGE 는 SRC 에 없는 TGT 행을 지우지 않으므로 ④ 는 틀리다. ① 은 UPDATE·INSERT 가 모두 안 된다고, ② 는 UPDATE 가 안 된다고 본 결과다.",
       "references": [
         {
           "type": "table",
@@ -1290,7 +1290,7 @@
         "연/월/일/시/분/초를 포함한 ISO 8601 표기"
       ],
       "correctIndex": 1,
-      "explanation": "YYYYMMDDHH24MISS 포맷은 4+2+2+2+2+2 = 14자리 숫자 문자열로, 연·월·일·시(24시)·분·초를 모두 포함한다."
+      "explanation": "YYYYMMDDHH24MISS 포맷은 4+2+2+2+2+2 = 14자리 숫자 문자열로, 연·월·일·시(24시)·분·초를 모두 포함한다. ① 은 YYYY 만, ③ 은 MMDDHH24MI 만 본 결과이고, ④ ISO 8601 은 구분 기호(-, T, :)가 들어간 다른 표기다."
     },
     {
       "subject": "2과목",
@@ -1303,7 +1303,7 @@
         "ㄹ"
       ],
       "correctIndex": 3,
-      "explanation": "`mgr = PRIOR empno` 는 이전(부모) 행의 empno 가 현재 행의 mgr 와 같다는 뜻으로 부모→자식 순방향 전개이다. START WITH mgr IS NULL 로 루트(100)에서 시작하므로 PRIOR 는 ㄹ(empno 앞)에 와야 한다. ㄷ(mgr 앞)에 오면 역방향이라 루트 한 행만 조회된다. ㄱ·ㄴ 은 FROM·START WITH 위치라 PRIOR 가 올 수 없다.",
+      "explanation": "`mgr = PRIOR empno` 는 이전(부모) 행의 empno 가 현재 행의 mgr 와 같다는 뜻으로 부모→자식 순방향 전개이다. START WITH mgr IS NULL 로 루트(100)에서 시작하므로 PRIOR 는 ㄹ(empno 앞)에 와야 한다. ③ ㄷ(mgr 앞)에 오면 역방향이라 루트 한 행만 조회된다. ① ㄱ·② ㄴ 은 FROM·START WITH 위치라 PRIOR 가 올 수 없다.",
       "references": [
         {
           "type": "table",
