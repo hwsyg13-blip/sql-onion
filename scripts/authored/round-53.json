@@ -39,7 +39,7 @@
         "배송추적은 기본 엔터티이다."
       ],
       "correctIndex": 3,
-      "explanation": "기본 엔터티는 업무에 원래부터 존재해 다른 엔터티로부터 발생하지 않는 것으로 고객이 해당한다. 중심 엔터티는 기본 엔터티로부터 발생해 업무의 중심이 되는 것으로 주문이 해당하고, 행위 엔터티는 두 개 이상의 엔터티나 업무 행위로부터 발생하는 것으로 주문상세·배송추적이 해당한다. 배송추적은 주문이 있어야 생기므로 기본 엔터티가 아니다.",
+      "explanation": "기본 엔터티는 업무에 원래부터 존재해 다른 엔터티로부터 발생하지 않는 것으로 고객이 해당한다. 중심 엔터티는 기본 엔터티로부터 발생해 업무의 중심이 되는 것으로 주문이 해당하고, 행위 엔터티는 두 개 이상의 엔터티나 업무 행위로부터 발생하는 것으로 주문상세·배송추적이 해당한다. 배송추적은 주문이 있어야 생기므로 기본 엔터티가 아니다. ① 고객은 기본, ② 주문은 중심, ③ 주문상세는 행위 엔터티라는 설명은 옳다.",
       "references": [
         {
           "type": "erd",
@@ -162,7 +162,7 @@
         "COMMIT, ROLLBACK"
       ],
       "correctIndex": 2,
-      "explanation": "GRANT 와 REVOKE 는 권한을 부여·회수하는 데이터 제어어(DCL)이다. CREATE/ALTER 는 DDL, INSERT/UPDATE 는 DML, COMMIT/ROLLBACK 은 TCL 이다."
+      "explanation": "GRANT 와 REVOKE 는 권한을 부여·회수하는 데이터 제어어(DCL)이다. ① CREATE/ALTER 는 DDL, ② INSERT/UPDATE 는 DML, ④ COMMIT/ROLLBACK 은 TCL 이다."
     },
     {
       "subject": "2과목",
@@ -175,7 +175,7 @@
         "GROUP BY SAL HAVING COUNT(*) >= 5 을 사용한다."
       ],
       "correctIndex": 0,
-      "explanation": "TOP-N 쿼리에서 동순위를 포함하려면 `RANK()` 또는 `FETCH FIRST N ROWS WITH TIES` 를 사용해야 한다. ③ `WHERE ROWNUM = 5` 는 ROWNUM 의사 컬럼 특성상 항상 0건이 반환되어 부적합하다."
+      "explanation": "TOP-N 쿼리에서 동순위를 포함하려면 `RANK()` 또는 `FETCH FIRST N ROWS WITH TIES` 를 사용해야 한다. ③ `WHERE ROWNUM = 5` 는 ROWNUM 의사 컬럼 특성상 항상 0건이 반환되어 부적합하다. ② DISTINCT 로 급여 값만 고르면 같은 급여의 사원이 사라지고, ④ GROUP BY … HAVING 은 같은 급여가 5명 이상인 급여를 찾을 뿐이다."
     },
     {
       "subject": "2과목",
@@ -188,7 +188,7 @@
         "SUBSTR('Gangneung Wonju', 8, 4) = 'g Wo'"
       ],
       "correctIndex": 3,
-      "explanation": "SUBSTR('Gangneung Wonju', 8, 4) 는 8 번째 문자부터 4 글자를 잘라내므로 'ng W' 가 된다. 'g Wo' 는 9 번째부터 잘랐을 때의 결과라 ④ 가 적절하지 않다."
+      "explanation": "SUBSTR('Gangneung Wonju', 8, 4) 는 8 번째 문자부터 4 글자를 잘라내므로 'ng W' 가 된다. 'g Wo' 는 9 번째부터 잘랐을 때의 결과라 ④ 가 적절하지 않다. ① ROUND(4.875, 2) 는 4.88, ② LENGTH('KOREAN') 은 6, ③ DATE_FORMAT 은 MySQL 함수로 '2022-11-02' 를 돌려줘 맞는 결과다."
     },
     {
       "subject": "2과목",
@@ -201,7 +201,7 @@
         "0개"
       ],
       "correctIndex": 0,
-      "explanation": "`AMT BETWEEN 3000 AND 5000` 과 `VOL <= 10` 을 동시에 만족해야 한다. (4000, 5) 만 두 조건 모두 만족, (6000, 3) 은 AMT 범위 초과, (3000, 15) 는 VOL 초과. 따라서 1 건.",
+      "explanation": "`AMT BETWEEN 3000 AND 5000` 과 `VOL <= 10` 을 동시에 만족해야 한다. (4000, 5) 만 두 조건 모두 만족, (6000, 3) 은 AMT 범위 초과, (3000, 15) 는 VOL 초과. 따라서 1 건. ② 2개는 AMT 조건이나 VOL 조건 중 하나만 본 값, ③ 3개는 두 조건을 모두 무시한 값이다.",
       "references": [
         {
           "type": "table",
@@ -255,7 +255,7 @@
         "5"
       ],
       "correctIndex": 2,
-      "explanation": "T1 의 1 은 T2 의 1(세 건) 과 매칭되고 T1 의 3 은 T2 의 3(한 건) 과 매칭되어 3 + 1 = 4 건이 나온다.",
+      "explanation": "T1 의 1 은 T2 의 1(세 건) 과 매칭되고 T1 의 3 은 T2 의 3(한 건) 과 매칭되어 3 + 1 = 4 건이 나온다. ① 2 는 같은 값의 종류(1, 3)만 센 값, ② 3 은 3 의 짝을 놓친 값, ④ 5 는 T1 의 행 수다.",
       "references": [
         {
           "type": "table",
@@ -364,7 +364,7 @@
         "NTILE"
       ],
       "correctIndex": 0,
-      "explanation": "DENSE_RANK 는 동순위를 같은 등수로 부여하면서 다음 등수를 건너뛰지 않아, 상위 N 순위 동순위 포함 조회에 적합하다."
+      "explanation": "DENSE_RANK 는 동순위를 같은 등수로 부여하면서 다음 등수를 건너뛰지 않아, 상위 N 순위 동순위 포함 조회에 적합하다. ② ROW_NUMBER 는 동점에도 다른 번호를, ③ RANK 는 동점 다음 순위를 건너뛰고, ④ NTILE 은 그룹 번호를 매긴다."
     },
     {
       "subject": "2과목",
@@ -377,7 +377,7 @@
         "공집합"
       ],
       "correctIndex": 3,
-      "explanation": "주문 테이블의 주문월은 '201001' 한 건뿐이라 주문월 = '201010' 을 만족하는 행이 없다. 조건을 만족하는 행이 없으면 결과는 0건, 즉 공집합이다. NULL 이 담긴 한 행이 나오는 것과는 다르다. 정답은 ④ 이다.",
+      "explanation": "주문 테이블의 주문월은 '201001' 한 건뿐이라 주문월 = '201010' 을 만족하는 행이 없다. 조건을 만족하는 행이 없으면 결과는 0건, 즉 공집합이다. NULL 이 담긴 한 행이 나오는 것과는 다르다. 정답은 ④ 이다. ① 전체 회원은 조건을 무시한 결과, ② 1건은 '201001' 과 '201010' 을 같게 본 결과, ③ NULL 이 담긴 한 행은 GROUP BY 없는 집계 함수일 때나 나온다.",
       "references": [
         {
           "type": "table",
@@ -412,7 +412,7 @@
         "COALESCE(M.이름, '사장')"
       ],
       "correctIndex": 3,
-      "explanation": "사원 테이블에서 매니저ID 가 NULL 인 사원(예: 김사장)은 LEFT JOIN 결과에서 M 측 컬럼이 모두 NULL 이 된다. 이때 COALESCE(M.이름, '사장') 은 NULL 이 아닌 첫 인자를 반환하므로 '사장' 이 출력된다. NVL 은 인자가 두 개 필요하고 NULLIF 는 두 값이 같으면 NULL 을 반환하는 함수라 의미가 다르다. 정답은 ④.",
+      "explanation": "사원 테이블에서 매니저ID 가 NULL 인 사원(예: 김사장)은 LEFT JOIN 결과에서 M 측 컬럼이 모두 NULL 이 된다. 이때 COALESCE(M.이름, '사장') 은 NULL 이 아닌 첫 인자를 반환하므로 '사장' 이 출력된다. ① NVL 은 인자가 두 개 필요하고, ③ NULLIF 는 두 값이 같으면 NULL 을 반환하는 함수라 의미가 다르다. 정답은 ④. ② DECODE 도 비교할 값과 결과를 함께 줘야 하므로 인자 하나로는 쓸 수 없다.",
       "references": [
         {
           "type": "table",
@@ -492,7 +492,7 @@
         "NULL"
       ],
       "correctIndex": 0,
-      "explanation": "LTRIM(문자열, 'x') 은 왼쪽부터 'x' 가 아닌 문자가 나올 때까지 지정 문자를 한 번이 아니라 모두 제거한다. 앞의 'xxxxxx' 가 전부 지워져 'abcd' 가 된다. 정답은 ① 이다.",
+      "explanation": "LTRIM(문자열, 'x') 은 왼쪽부터 'x' 가 아닌 문자가 나올 때까지 지정 문자를 한 번이 아니라 모두 제거한다. 앞의 'xxxxxx' 가 전부 지워져 'abcd' 가 된다. 정답은 ① 이다. ② 는 'x' 를 세 개만 지운다고 본 결과, ③ 은 지우지 않은 원래 값, ④ 는 문자가 남으므로 NULL 이 아니다.",
       "references": [
         {
           "type": "sql",
@@ -530,7 +530,7 @@
         "INT"
       ],
       "correctIndex": 0,
-      "explanation": "CEIL 은 소수점을 올리는 함수이므로 내림 함수에 해당하지 않는다. FLOOR 는 내림, TRUNC 는 지정한 자리에서 버림, INT 는 정수부만 취하므로 모두 내림 계열이다."
+      "explanation": "CEIL 은 소수점을 올리는 함수이므로 내림 함수에 해당하지 않는다. ② FLOOR 는 내림, ③ TRUNC 는 지정한 자리에서 버림, ④ INT 는 정수부만 취하므로 모두 내림 계열이다."
     },
     {
       "subject": "2과목",
@@ -622,7 +622,7 @@
         "오류 발생"
       ],
       "correctIndex": 0,
-      "explanation": "DECODE 가 VVIP 에 1, VIP 에 2, 기타에 3 을 부여하므로 ORDER BY 결과는 VVIP → VIP 순으로 정렬된다.",
+      "explanation": "DECODE 가 VVIP 에 1, VIP 에 2, 기타에 3 을 부여하므로 ORDER BY 결과는 VVIP → VIP 순으로 정렬된다. ② 는 DECODE 값을 반대로 본 결과, ③ ORDER BY 에 식이 있으므로 정렬되고, ④ ORDER BY 에 DECODE 같은 식을 써도 오류가 나지 않는다.",
       "references": [
         {
           "type": "table",
@@ -714,7 +714,7 @@
         "MINUS"
       ],
       "correctIndex": 3,
-      "explanation": "첫 번째 집합에서 두 번째 집합에 있는 행을 뺀 차집합은 MINUS(SQL Server 는 EXCEPT)다(④). UNION 은 중복을 제거한 합집합, UNION ALL 은 중복을 포함한 합집합, INTERSECT 는 교집합이다.",
+      "explanation": "첫 번째 집합에서 두 번째 집합에 있는 행을 뺀 차집합은 MINUS(SQL Server 는 EXCEPT)다(④). ① UNION 은 중복을 제거한 합집합, ② UNION ALL 은 중복을 포함한 합집합, ③ INTERSECT 는 교집합이다.",
       "references": [
         {
           "type": "text",
@@ -794,7 +794,7 @@
         "3"
       ],
       "correctIndex": 0,
-      "explanation": "CROSS JOIN 은 조인 조건 없이 두 테이블의 모든 행을 조합하므로 결과 행 수는 M × N 이다. M = 3, N = 5 이면 15 행이다(①). 8 은 M + N 을 더한 잘못된 계산이다.",
+      "explanation": "CROSS JOIN 은 조인 조건 없이 두 테이블의 모든 행을 조합하므로 결과 행 수는 M × N 이다. M = 3, N = 5 이면 15 행이다(①). ② 8 은 M + N 을 더한 잘못된 계산이고, ③ 5 와 ④ 3 은 한 테이블의 행 수다.",
       "references": [
         {
           "type": "table",
@@ -916,7 +916,7 @@
         "user1@example.com"
       ],
       "correctIndex": 2,
-      "explanation": "패턴 '@[^.]+\\.[a-z.]+' 는 @ 뒤에 점이 아닌 글자가 이어지다가 점(.)과 도메인 끝부분이 오는 부분을 찾는다. name@domain.com → '@domain.com', test@naver.co.kr → '@naver.co.kr', user1@example.com → '@example.com' 처럼 도메인이 정상 추출된다. hello@nodot 은 @ 뒤에 점이 없어 일치하는 부분이 없으므로 NULL 이 나온다(③). ※ 복원 자료에는 검사에 쓴 SQL 이 빠져 있어, 해설의 '도메인 점 유무 검사' 를 SQL 로 보충했다.",
+      "explanation": "패턴 '@[^.]+\\.[a-z.]+' 는 @ 뒤에 점이 아닌 글자가 이어지다가 점(.)과 도메인 끝부분이 오는 부분을 찾는다. name@domain.com → '@domain.com', test@naver.co.kr → '@naver.co.kr', user1@example.com → '@example.com' 처럼 도메인이 정상 추출된다. hello@nodot 은 @ 뒤에 점이 없어 일치하는 부분이 없으므로 NULL 이 나온다(③). ※ 복원 자료에는 검사에 쓴 SQL 이 빠져 있어, 해설의 '도메인 점 유무 검사' 를 SQL 로 보충했다. ①·②·④ 는 점이 있어 도메인이 정상 추출된다.",
       "references": [
         {
           "type": "sql",
@@ -935,7 +935,7 @@
         "두 결과 모두 빈 문자열"
       ],
       "correctIndex": 1,
-      "explanation": "REGEXP_SUBSTR(문자열, 패턴, 시작위치) 의 세 번째 인자는 검색을 시작할 위치다. 'aabbc' 의 2 번째 문자부터 'a.*' 를 찾으면 2 번째 'a' 에서 시작해 끝까지 이어지는 'abbc' 가 반환된다. 4 번째 문자부터 'b.*' 를 찾으면 4 번째 'b' 에서 시작하는 'bc' 가 반환된다. ① 은 시작 위치를 무시하고 1 번째부터 검색한 경우이다.",
+      "explanation": "REGEXP_SUBSTR(문자열, 패턴, 시작위치) 의 세 번째 인자는 검색을 시작할 위치다. 'aabbc' 의 2 번째 문자부터 'a.*' 를 찾으면 2 번째 'a' 에서 시작해 끝까지 이어지는 'abbc' 가 반환된다. 4 번째 문자부터 'b.*' 를 찾으면 4 번째 'b' 에서 시작하는 'bc' 가 반환된다. ① 은 시작 위치를 무시하고 1 번째부터 검색한 경우이다. ④ 두 패턴 모두 맞는 부분이 있으므로 빈 문자열이 아니다.",
       "references": [
         {
           "type": "sql",
@@ -969,11 +969,11 @@
       "options": [
         "NOCYCLE 을 수행한 뒤 순환 발생 행을 CONNECT_BY_ISCYCLE 로 확인할 수 있다.",
         "SIBLINGS 는 전체 트리를 재정렬한다.",
-        "ORDER BY 는 계층형 결과를 보존하지 않는다.",
+        "일반 ORDER BY 를 쓰면 계층형 결과의 순서가 그대로 보존된다.",
         "NOCYCLE 은 CONNECT_BY_ROOT 와 반드시 함께 사용한다."
       ],
       "correctIndex": 0,
-      "explanation": "NOCYCLE 옵션은 순환을 만나면 전개를 중단하며, 순환이 발생한 행은 CONNECT_BY_ISCYCLE 의사 컬럼으로 식별할 수 있다."
+      "explanation": "NOCYCLE 옵션은 순환을 만나면 전개를 중단하며, 순환이 발생한 행은 CONNECT_BY_ISCYCLE 의사 컬럼으로 식별할 수 있다. ② SIBLINGS 는 같은 부모를 둔 형제끼리만 정렬하고, ③ 일반 ORDER BY 는 전체 결과를 다시 정렬해 계층 순서를 깨뜨리며, ④ NOCYCLE 은 CONNECT_BY_ROOT 와 상관없이 쓸 수 있다."
     },
     {
       "subject": "2과목",
@@ -986,7 +986,7 @@
         "오류"
       ],
       "correctIndex": 0,
-      "explanation": "T.COL1 = (10, 50, 90). `MIN(COL1)` = 10 (숫자), `MAX(TO_CHAR(COL1))` = '90' (문자 비교 기준 가장 큰 문자열). `숫자 + 문자열` 은 묵시적 형변환으로 10 + 90 = 100 이 된다.",
+      "explanation": "T.COL1 = (10, 50, 90). `MIN(COL1)` = 10 (숫자), `MAX(TO_CHAR(COL1))` = '90' (문자 비교 기준 가장 큰 문자열). `숫자 + 문자열` 은 묵시적 형변환으로 10 + 90 = 100 이 된다. ③ NULL 이 섞이지 않아 NULL 이 아니고, ④ 문자 '90' 은 숫자로 자동 변환되어 오류가 나지 않는다.",
       "references": [
         {
           "type": "table",
@@ -1023,7 +1023,7 @@
         "0명"
       ],
       "correctIndex": 1,
-      "explanation": "LIKE '%n' 은 앞에 무엇이 와도 되고 마지막 글자가 소문자 n 인 문자열과 매칭된다. Kevin, Jason 은 n 으로 끝나고 Tom 은 m 으로 끝나므로 2명이다(②).",
+      "explanation": "LIKE '%n' 은 앞에 무엇이 와도 되고 마지막 글자가 소문자 n 인 문자열과 매칭된다. Kevin, Jason 은 n 으로 끝나고 Tom 은 m 으로 끝나므로 2명이다(②). ① 1명은 둘 중 하나를 놓친 값, ③ 3명은 Tom 까지 센 값이다.",
       "references": [
         {
           "type": "table",
@@ -1092,7 +1092,7 @@
         "0개"
       ],
       "correctIndex": 0,
-      "explanation": "세 테이블 모두에 값이 존재하는 키는 1 한 건 뿐이다. T2 의 NULL 과 T3 의 NULL 은 동등 비교 대상이 되지 않는다.",
+      "explanation": "세 테이블 모두에 값이 존재하는 키는 1 한 건 뿐이다. T2 의 NULL 과 T3 의 NULL 은 동등 비교 대상이 되지 않는다. ② 2개는 T1·T2 만 조인한 결과(1, 2)이고, ④ 0개는 NULL 이 섞이면 조인이 모두 실패한다고 본 결과다.",
       "references": [
         {
           "type": "table",
@@ -1285,7 +1285,7 @@
         "7"
       ],
       "correctIndex": 2,
-      "explanation": "TABLE50 은 비어 있는 상태로 시작한다. INSERT 1·2·3 → 3건. SAVEPOINT SQL1 선언. INSERT 4·5 → 5건. COMMIT 시점에 5건이 영구 확정되며 이때 SAVEPOINT SQL1 은 함께 사라진다. 이후 INSERT 6 → 6건. ROLLBACK TO SAVEPOINT SQL1 은 가리킬 SAVEPOINT 가 없으므로 오류가 발생해 무시되거나 영향이 없고, 최종 SELECT 결과는 6 건이다. 정답은 ③.",
+      "explanation": "TABLE50 은 비어 있는 상태로 시작한다. INSERT 1·2·3 → 3건. SAVEPOINT SQL1 선언. INSERT 4·5 → 5건. COMMIT 시점에 5건이 영구 확정되며 이때 SAVEPOINT SQL1 은 함께 사라진다. 이후 INSERT 6 → 6건. ROLLBACK TO SAVEPOINT SQL1 은 가리킬 SAVEPOINT 가 없으므로 오류가 발생해 무시되거나 영향이 없고, 최종 SELECT 결과는 6 건이다. 정답은 ③. ② 5 는 ROLLBACK 이 커밋되지 않은 6 만 취소한다고 본 값이다.",
       "references": [
         {
           "type": "text",
