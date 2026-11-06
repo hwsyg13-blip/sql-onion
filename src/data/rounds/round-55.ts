@@ -19,7 +19,7 @@ export const ROUND_55: QuizQuestion[] = [
       "나, 다"
     ],
     "correctIndex": 1,
-    "explanation": "내부 스키마는 물리적 저장 구조와 저장 장치에서의 저장 방식을 표현하며(나), DB 가 물리적으로 저장되는 형식을 정의한다(라). 가(외부 사용자 관점)는 외부 스키마, 다(조직 전체의 통합 관점)는 개념 스키마에 대한 설명이다. 따라서 ② 나, 라 이다.",
+    "explanation": "내부 스키마는 물리적 저장 구조와 저장 장치에서의 저장 방식을 표현하며(나), DB 가 물리적으로 저장되는 형식을 정의한다(라). 가(외부 사용자 관점)는 외부 스키마, 다(조직 전체의 통합 관점)는 개념 스키마에 대한 설명이다. 따라서 ② 나, 라 이다. ① 가·다 는 외부·개념 스키마의 설명만 고른 것, ③ 은 가(외부)를, ④ 는 다(개념)를 넣었다.",
     "_source": "authored",
     "references": [
       {
@@ -79,7 +79,7 @@ export const ROUND_55: QuizQuestion[] = [
       "BCNF"
     ],
     "correctIndex": 1,
-    "explanation": "주식별자가 두 컬럼인 복합키에서 일반 속성이 그중 하나에만 종속되는 것이 부분 함수 종속이고, 이를 테이블 분리로 없애는 단계가 제2 정규화이다. 제1 정규화는 원자값, 제3 정규화는 이행 종속, BCNF 는 모든 결정자가 후보키가 되도록 하는 단계다. 정답은 ② 이다.",
+    "explanation": "주식별자가 두 컬럼인 복합키에서 일반 속성이 그중 하나에만 종속되는 것이 부분 함수 종속이고, 이를 테이블 분리로 없애는 단계가 제2 정규화이다. ① 제1 정규화는 원자값, ③ 제3 정규화는 이행 종속, ④ BCNF 는 모든 결정자가 후보키가 되도록 하는 단계다. 정답은 ② 이다.",
     "_source": "authored",
     "references": [
       {
@@ -175,7 +175,7 @@ export const ROUND_55: QuizQuestion[] = [
       "엔터티 - 인스턴스 - 속성 - 속성값"
     ],
     "correctIndex": 3,
-    "explanation": "데이터 모델의 구성 요소는 엔터티(집합) → 인스턴스(개별 행) → 속성(컬럼) → 속성값(셀 값) 순서의 포함 관계로 정의된다.",
+    "explanation": "데이터 모델의 구성 요소는 엔터티(집합) → 인스턴스(개별 행) → 속성(컬럼) → 속성값(셀 값) 순서의 포함 관계로 정의된다. ①·②·③ 은 집합 → 개별 행 → 컬럼 → 값 의 포함 순서를 뒤섞었다.",
     "_source": "authored",
     "references": [
       {
@@ -241,7 +241,7 @@ export const ROUND_55: QuizQuestion[] = [
       "COMMIT, ROLLBACK"
     ],
     "correctIndex": 0,
-    "explanation": "DML(Data Manipulation Language)은 데이터 조작어로 INSERT·UPDATE·DELETE·SELECT가 해당된다. CREATE/ALTER/DROP은 DDL, GRANT/REVOKE는 DCL, COMMIT/ROLLBACK은 TCL이다.",
+    "explanation": "DML(Data Manipulation Language)은 데이터 조작어로 INSERT·UPDATE·DELETE·SELECT가 해당된다. ② CREATE/ALTER/DROP은 DDL, ③ GRANT/REVOKE는 DCL, ④ COMMIT/ROLLBACK은 TCL이다.",
     "_source": "authored"
   },
   {
@@ -259,7 +259,7 @@ export const ROUND_55: QuizQuestion[] = [
       "1, 1, 3, 1"
     ],
     "correctIndex": 1,
-    "explanation": "DENSE_RANK 는 같은 값에 같은 순위를 주되 다음 순위를 건너뛰지 않고 1 씩 올린다. PARTITION BY DEPT 로 부서별 순위를 따로 매기므로 DEPT 10 은 3000, 3000, 2500 에 대해 1, 1, 2 가 되고 DEPT 20 은 단독 행이라 1 이 된다. 테이블 행 순서대로 읽으면 1, 1, 2, 1 이다. RANK 였다면 세 번째가 3 으로 건너뛰었을 것이다.",
+    "explanation": "DENSE_RANK 는 같은 값에 같은 순위를 주되 다음 순위를 건너뛰지 않고 1 씩 올린다. PARTITION BY DEPT 로 부서별 순위를 따로 매기므로 DEPT 10 은 3000, 3000, 2500 에 대해 1, 1, 2 가 되고 DEPT 20 은 단독 행이라 1 이 된다. 테이블 행 순서대로 읽으면 1, 1, 2, 1 이다. RANK 였다면 세 번째가 3 으로 건너뛰었을 것이다. ③ 은 ROW_NUMBER, ④ 는 RANK 의 결과다.",
     "_source": "authored",
     "references": [
       {
@@ -497,7 +497,7 @@ export const ROUND_55: QuizQuestion[] = [
       "(4) 세미콜론 위치 오류"
     ],
     "correctIndex": 0,
-    "explanation": "Oracle 식별자 규칙상 테이블명은 영문자로 시작해야 하며 숫자로 시작할 수 없다. VARCHAR2(20)·NUMBER(크기 생략 허용)·세미콜론은 모두 정상 구문이다.",
+    "explanation": "Oracle 식별자 규칙상 테이블명은 영문자로 시작해야 하며 숫자로 시작할 수 없다. ② VARCHAR2(20)·③ NUMBER(크기 생략 허용)·④ 세미콜론은 모두 정상 구문이다.",
     "_source": "authored",
     "references": [
       {
@@ -567,7 +567,7 @@ export const ROUND_55: QuizQuestion[] = [
       "GROUPING SETS(A, B, ())"
     ],
     "correctIndex": 3,
-    "explanation": "`ROLLUP(A)` 는 (A), () 를 산출. 여기에 B 를 GROUPING SETS 로 합치면 (A), (B), () 의 세 조합이 된다 — ④ 와 같다.",
+    "explanation": "`ROLLUP(A)` 는 (A), () 를 산출. 여기에 B 를 GROUPING SETS 로 합치면 (A), (B), () 의 세 조합이 된다 — ④ 와 같다. ① 은 총계 () 가 빠졌고, ② 는 (A, B) 를 한 묶음으로 만들어 다르며, ③ 은 (B) 소계 대신 (A, B) 를 만든다.",
     "_source": "authored",
     "references": [
       {
@@ -612,7 +612,7 @@ export const ROUND_55: QuizQuestion[] = [
       "NULL, NULL, NULL"
     ],
     "correctIndex": 1,
-    "explanation": "NULL 에 산술 연산을 적용하면 결과가 NULL 이 되므로, NULL 이 포함된 첫 번째·세 번째 행은 NULL 이 반환된다.",
+    "explanation": "NULL 에 산술 연산을 적용하면 결과가 NULL 이 되므로, NULL 이 포함된 첫 번째·세 번째 행은 NULL 이 반환된다. ① 은 NULL 을 0 으로 보고 계산한 값, ③ 은 NULL 이 섞인 연산 결과가 0 이 된다고 본 값, ④ 는 한 행이라도 NULL 이 있으면 모든 행이 NULL 이 된다고 본 값이다.",
     "_source": "authored",
     "references": [
       {
@@ -658,7 +658,7 @@ export const ROUND_55: QuizQuestion[] = [
       "SUM 은 NULL 을 0 으로 변환한다."
     ],
     "correctIndex": 2,
-    "explanation": "`SUM(C1)` 과 `SUM(C2)` 는 각각 NULL 을 자동 제외하고 집계한 후, 두 집계 값을 더한다. 본 데이터에서 `SUM(C1)` = 100+200+300 = 600, `SUM(C2)` = 10+30 = 40, 합계 640. NVL 은 결과가 NULL 인 경우만 0 으로 치환 (이 케이스는 NULL 아니라 그대로 640).",
+    "explanation": "`SUM(C1)` 과 `SUM(C2)` 는 각각 NULL 을 자동 제외하고 집계한 후, 두 집계 값을 더한다. 본 데이터에서 `SUM(C1)` = 100+200+300 = 600, `SUM(C2)` = 10+30 = 40, 합계 640. NVL 은 결과가 NULL 인 경우만 0 으로 치환 (이 케이스는 NULL 아니라 그대로 640). ① SUM 은 NULL 을 건너뛰므로 C2 의 NULL 때문에 전체가 NULL 이 되지 않고, ② 두 SUM 모두 계산되며, ④ SUM 은 NULL 을 0 으로 바꾸는 것이 아니라 건너뛴다(값이 모두 NULL 이면 결과도 NULL).",
     "_source": "authored",
     "references": [
       {
@@ -704,7 +704,7 @@ export const ROUND_55: QuizQuestion[] = [
       "LEFT 3, FULL 5, RIGHT 4"
     ],
     "correctIndex": 2,
-    "explanation": "T1 과 T2 는 공통 값 3 하나로 매칭된다. LEFT OUTER JOIN 은 T1 기준 3 건(1, 2, 3), RIGHT OUTER JOIN 은 T2 기준 3 건(3, 4, 5), FULL OUTER JOIN 은 매칭 1 건 + T1 미매칭 2 건 + T2 미매칭 2 건으로 5 건이 된다.",
+    "explanation": "T1 과 T2 는 공통 값 3 하나로 매칭된다. LEFT OUTER JOIN 은 T1 기준 3 건(1, 2, 3), RIGHT OUTER JOIN 은 T2 기준 3 건(3, 4, 5), FULL OUTER JOIN 은 매칭 1 건 + T1 미매칭 2 건 + T2 미매칭 2 건으로 5 건이 된다. ① 은 FULL 도 3 건으로, ② 는 모든 조인을 5 건으로, ④ 는 RIGHT 를 4 건으로 센 값이다.",
     "_source": "authored",
     "references": [
       {
@@ -859,7 +859,7 @@ export const ROUND_55: QuizQuestion[] = [
       "7"
     ],
     "correctIndex": 1,
-    "explanation": "REGEXP_INSTR 의 마지막 인자 2 는 두 번째 서브 표현식(괄호 그룹)의 위치를 반환하라는 뜻이다. 그룹은 여는 괄호 순서로 세어 첫째 (123), 둘째 (4(56)(78)) 이고, 둘째 그룹은 '4' 가 있는 4번째 위치에서 시작한다(②). 1 은 첫째 그룹 위치, 5 는 셋째 그룹 (56) 의 위치다.",
+    "explanation": "REGEXP_INSTR 의 마지막 인자 2 는 두 번째 서브 표현식(괄호 그룹)의 위치를 반환하라는 뜻이다. 그룹은 여는 괄호 순서로 세어 첫째 (123), 둘째 (4(56)(78)) 이고, 둘째 그룹은 '4' 가 있는 4번째 위치에서 시작한다(②). ① 1 은 첫째 그룹 위치, ③ 5 는 셋째 그룹 (56) 의 위치, ④ 7 은 넷째 그룹 (78) 의 위치다.",
     "_source": "authored",
     "references": [
       {
@@ -883,7 +883,7 @@ export const ROUND_55: QuizQuestion[] = [
       "NULL, NULL"
     ],
     "correctIndex": 1,
-    "explanation": "첫 번째는 'b*c' 를 리터럴로 해석(b, *, c 가 연속)하여 매칭되지 않아 NULL 이 된다. 두 번째는 'b*c' 에서 * 가 0회 이상을 의미하므로 'bc' 에 매칭된다.",
+    "explanation": "첫 번째는 'b*c' 를 리터럴로 해석(b, *, c 가 연속)하여 매칭되지 않아 NULL 이 된다. 두 번째는 'b*c' 에서 * 가 0회 이상을 의미하므로 'bc' 에 매칭된다. ① 은 첫 번째의 \\* 도 반복 기호로 본 결과, ③ 은 둘을 반대로 본 결과, ④ 는 두 번째 패턴도 매칭되지 않는다고 본 결과다.",
     "_source": "authored",
     "references": [
       {
@@ -1072,7 +1072,7 @@ export const ROUND_55: QuizQuestion[] = [
       "ORDER BY 절에서 별칭을 참조할 수 있다."
     ],
     "correctIndex": 2,
-    "explanation": "컬럼 별칭은 컬럼 표현식 뒤에만 쓸 수 있고 앞에는 붙일 수 없으므로 ③ 이 적절하지 않다. AS 는 생략할 수 있고, 공백이나 특수문자가 들어간 별칭은 큰따옴표로 감싸며, ORDER BY 는 SELECT 이후에 수행되어 별칭을 참조할 수 있다.",
+    "explanation": "컬럼 별칭은 컬럼 표현식 뒤에만 쓸 수 있고 앞에는 붙일 수 없으므로 ③ 이 적절하지 않다. ① AS 는 생략할 수 있고, ② 공백이나 특수문자가 들어간 별칭은 큰따옴표로 감싸며, ④ ORDER BY 는 SELECT 이후에 수행되어 별칭을 참조할 수 있다.",
     "_source": "authored"
   },
   {
@@ -1090,7 +1090,7 @@ export const ROUND_55: QuizQuestion[] = [
       "1건"
     ],
     "correctIndex": 0,
-    "explanation": "AND가 OR보다 우선하므로 `(고객번호='YY' AND 등급=1 AND 지역='서울') OR 고객번호='XX'`로 평가된다. 고객번호='XX'인 세 건(1·2·4행)과 YY이면서 등급=1·서울인 두 건(3·5행)이 모두 조건을 만족하여 최종 5건이 반환된다.",
+    "explanation": "AND가 OR보다 우선하므로 `(고객번호='YY' AND 등급=1 AND 지역='서울') OR 고객번호='XX'`로 평가된다. 고객번호='XX'인 세 건(1·2·4행)과 YY이면서 등급=1·서울인 두 건(3·5행)이 모두 조건을 만족하여 최종 5건이 반환된다. ② 3건은 XX 행만, ③ 2건은 YY 행만 센 값이다. 괄호를 넣어 OR 를 먼저 묶었다면 4건이다.",
     "_source": "authored",
     "references": [
       {
@@ -1434,7 +1434,7 @@ export const ROUND_55: QuizQuestion[] = [
       "(4)"
     ],
     "correctIndex": 3,
-    "explanation": "(1) 부모에 'A' 를 넣고, (2) 자식의 FK 컬럼 COL1 에 NULL 을 넣는 것은 허용되며, (3) COL1 = 'A' 는 부모에 있어 성공한다. (4) 는 부모 테이블에 없는 'B' 를 FK 컬럼에 넣으려 해 부모 키가 없다는 참조 무결성 위반(ORA-02291) 오류가 난다(④).",
+    "explanation": "① (1) 부모에 'A' 를 넣고, ② (2) 자식의 FK 컬럼 COL1 에 NULL 을 넣는 것은 허용되며, ③ (3) COL1 = 'A' 는 부모에 있어 성공한다. (4) 는 부모 테이블에 없는 'B' 를 FK 컬럼에 넣으려 해 부모 키가 없다는 참조 무결성 위반(ORA-02291) 오류가 난다(④).",
     "_source": "authored",
     "references": [
       {
@@ -1458,7 +1458,7 @@ export const ROUND_55: QuizQuestion[] = [
       "가, 마"
     ],
     "correctIndex": 0,
-    "explanation": "ROLLBACK TO SAVEPOINT A 는 저장점 A 이후의 변경만 취소하고 그 이전의 변경은 유지한다. 따라서 A 이전에 실행된 (가) 는 살아남고 A 이후의 (나)·(다) 는 취소된다. 이후 실행된 (라)·(마) 는 롤백의 영향을 받지 않으므로 COMMIT 시점에 영구 반영되는 것은 (가), (라), (마) 세 개다.",
+    "explanation": "ROLLBACK TO SAVEPOINT A 는 저장점 A 이후의 변경만 취소하고 그 이전의 변경은 유지한다. 따라서 A 이전에 실행된 (가) 는 살아남고 A 이후의 (나)·(다) 는 취소된다. 이후 실행된 (라)·(마) 는 롤백의 영향을 받지 않으므로 COMMIT 시점에 영구 반영되는 것은 (가), (라), (마) 세 개다. ② 와 ③ 은 ROLLBACK TO A 가 (나)·(다) 를 취소한다는 점을 놓쳤고, ④ 는 (라) 를 빠뜨렸다.",
     "_source": "authored",
     "references": [
       {
@@ -1482,7 +1482,7 @@ export const ROUND_55: QuizQuestion[] = [
       "ASC·DESC 모두 NULLS LAST"
     ],
     "correctIndex": 1,
-    "explanation": "Oracle 은 오름차순 정렬에서 NULL 을 가장 뒤에, 내림차순 정렬에서 가장 앞에 배치한다. NULL 을 가장 큰 값처럼 취급하기 때문이며, 이 순서를 바꾸려면 NULLS FIRST 나 NULLS LAST 를 명시해야 한다.",
+    "explanation": "Oracle 은 오름차순 정렬에서 NULL 을 가장 뒤에, 내림차순 정렬에서 가장 앞에 배치한다. NULL 을 가장 큰 값처럼 취급하기 때문이며, 이 순서를 바꾸려면 NULLS FIRST 나 NULLS LAST 를 명시해야 한다. ① 은 SQL Server 의 기본 동작(NULL 을 가장 작은 값으로 봄)이고, ③·④ 는 정렬 방향과 관계없이 한쪽에 둔다고 본 것이다.",
     "_source": "authored"
   },
   {
@@ -1582,7 +1582,7 @@ export const ROUND_55: QuizQuestion[] = [
       "(A UNION B) MINUS (A INTERSECT B)"
     ],
     "correctIndex": 0,
-    "explanation": "(A UNION B)는 양쪽 모두에 있는 행을 한 번씩 포함하는 합집합. (A INTERSECT B)는 양쪽 공통 행. UNION ALL은 두 결과를 그대로 이어 붙이므로, (A UNION B) UNION ALL (A INTERSECT B)는 A UNION ALL B와 같은 행 수를 가진다(공통 행이 두 번 등장하는 효과).",
+    "explanation": "(A UNION B)는 양쪽 모두에 있는 행을 한 번씩 포함하는 합집합. (A INTERSECT B)는 양쪽 공통 행. UNION ALL은 두 결과를 그대로 이어 붙이므로, (A UNION B) UNION ALL (A INTERSECT B)는 A UNION ALL B와 같은 행 수를 가진다(공통 행이 두 번 등장하는 효과). ② 는 UNION 이라 중복이 지워져 A UNION B 와 같고, ③ 은 B 에만 있는 행이 빠지며, ④ 는 공통 행이 빠진 대칭 차집합이다.",
     "_source": "authored"
   },
   {
@@ -1600,7 +1600,7 @@ export const ROUND_55: QuizQuestion[] = [
       "0, NULL, ERROR"
     ],
     "correctIndex": 1,
-    "explanation": "(1) `0 / 300` = 0. (2) `300 / 0` 은 0 으로 나누기 오류 ORA-01476 발생. (3) `100 / NULL` 은 NULL 연산 결과로 NULL 반환.",
+    "explanation": "(1) `0 / 300` = 0. (2) `300 / 0` 은 0 으로 나누기 오류 ORA-01476 발생. (3) `100 / NULL` 은 NULL 연산 결과로 NULL 반환. ① 은 0 으로 나눠도 0 이 된다고 본 결과, ③ 은 (1) 과 (3) 을 바꾼 결과, ④ 는 (2) 와 (3) 을 바꾼 결과다.",
     "_source": "authored",
     "references": [
       {
@@ -1664,7 +1664,7 @@ export const ROUND_55: QuizQuestion[] = [
       "0개"
     ],
     "correctIndex": 1,
-    "explanation": "LIKE '%학' 은 마지막 글자가 '학' 인 문자열과 매칭된다. 물리학, 수학은 '학' 으로 끝나고, 공학개론은 '학' 이 가운데 있어 매칭되지 않으므로 2개다(②). '%학%' 였다면 세 과목 모두 매칭된다.",
+    "explanation": "LIKE '%학' 은 마지막 글자가 '학' 인 문자열과 매칭된다. 물리학, 수학은 '학' 으로 끝나고, 공학개론은 '학' 이 가운데 있어 매칭되지 않으므로 2개다(②). ③ 3개는 '%학%' 였을 때의 결과다(세 과목 모두 매칭). ① 1개는 물리학·수학 중 하나를 놓친 값이다.",
     "_source": "authored",
     "references": [
       {
@@ -1706,7 +1706,7 @@ export const ROUND_55: QuizQuestion[] = [
       "0건"
     ],
     "correctIndex": 1,
-    "explanation": "NULL 은 값이 없음을 뜻하므로 = 나 <> 로 비교할 수 없고 IS NULL / IS NOT NULL 로만 판별한다. VAL 이 NULL 이 아닌 행은 ID 1 과 3 이므로 2 건이 반환된다. 같은 의도로 `VAL <> NULL` 을 쓰면 비교가 UNKNOWN 이 되어 0 건이 된다.",
+    "explanation": "NULL 은 값이 없음을 뜻하므로 = 나 <> 로 비교할 수 없고 IS NULL / IS NOT NULL 로만 판별한다. VAL 이 NULL 이 아닌 행은 ID 1 과 3 이므로 2 건이 반환된다. 같은 의도로 `VAL <> NULL` 을 쓰면 비교가 UNKNOWN 이 되어 0 건이 된다. ① 1건은 둘 중 하나를 놓친 값, ③ 3건은 IS NOT NULL 조건을 무시한 값, ④ 0건은 VAL <> NULL 로 비교했을 때의 결과다.",
     "_source": "authored",
     "references": [
       {
@@ -1752,7 +1752,7 @@ export const ROUND_55: QuizQuestion[] = [
       "INSERT INTO EMP (OFFI_POST_NUMBER) VALUES (NULL);"
     ],
     "correctIndex": 1,
-    "explanation": "기존 테이블에 컬럼을 추가할 때는 ALTER TABLE ... ADD (컬럼명 데이터타입) 구문을 사용한다. CREATE는 신규 생성, UPDATE는 데이터 수정, INSERT는 행 추가용이다.",
+    "explanation": "기존 테이블에 컬럼을 추가할 때는 ALTER TABLE ... ADD (컬럼명 데이터타입) 구문을 사용한다. ① CREATE는 신규 생성, ③ UPDATE는 데이터 수정, ④ INSERT는 행 추가용이라 컬럼을 추가하지 못한다.",
     "_source": "authored",
     "references": [
       {
@@ -1836,7 +1836,7 @@ export const ROUND_55: QuizQuestion[] = [
       "이름이 'JOHN' 인 직원이 두 명일 경우 오류가 발생한다."
     ],
     "correctIndex": 3,
-    "explanation": "`IN` 절은 다중 행 서브쿼리를 허용하므로 EMPNM 이 'JOHN' 인 직원이 두 명이어도 서브쿼리는 두 행의 DEPT 를 반환하고 외부 IN 비교가 정상 동작한다. ④ \"두 명일 경우 오류 발생\" 은 잘못된 설명.",
+    "explanation": "`IN` 절은 다중 행 서브쿼리를 허용하므로 EMPNM 이 'JOHN' 인 직원이 두 명이어도 서브쿼리는 두 행의 DEPT 를 반환하고 외부 IN 비교가 정상 동작한다. ④ \"두 명일 경우 오류 발생\" 은 잘못된 설명. ①·②·③ 은 IN 다중 행 서브쿼리에 대한 옳은 설명이다.",
     "_source": "authored",
     "references": [
       {
