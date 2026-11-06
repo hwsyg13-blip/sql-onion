@@ -1,13 +1,14 @@
 {
  "last_processed_row": null,
- "last_run": "2026-11-06T22:09+09:00",
+ "last_run": "2026-11-07T06:07+09:00",
  "last_gate": {
-  "five_hour": 0.34,
-  "seven_day": 0.59
+  "five_hour": 0.18,
+  "seven_day": 0.63
  },
  "current_mission": null,
  "my_prs": [
-  195
+  195,
+  287
  ],
  "merged_prs": [
   197,
@@ -77,7 +78,7 @@
   284,
   285
  ],
- "stop_reason": "밤 실행 — 53·52회 오답 이유(#285) 후 마무리. #284(vercel.json 캐시, 확인 필요 영역)·#285 사용자 \"머지\" 대기",
+ "stop_reason": "낮 실행 — 51·50회 오답 이유(#287) 후 마무리. 사용자 \"머지\" 대기",
  "releases": [
   214,
   217,
