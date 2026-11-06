@@ -19,7 +19,7 @@ export const ROUND_58: QuizQuestion[] = [
       "고객"
     ],
     "correctIndex": 1,
-    "explanation": "키(기본) 엔터티는 다른 엔터티로부터 발생하지 않고 업무에 원래부터 존재하는 엔터티로, 사원·회사·고객이 이에 해당한다. 반면 프로젝트는 업무 수행 과정에서 발생하여 기본 엔터티로부터 파생되는 중심 엔터티이므로 키 엔터티에 해당하지 않는다.",
+    "explanation": "키(기본) 엔터티는 다른 엔터티로부터 발생하지 않고 업무에 원래부터 존재하는 엔터티로, ① 사원·③ 회사·④ 고객이 이에 해당한다. 반면 프로젝트는 업무 수행 과정에서 발생하여 기본 엔터티로부터 파생되는 중심 엔터티이므로 키 엔터티에 해당하지 않는다.",
     "_source": "authored"
   },
   {
@@ -37,7 +37,7 @@ export const ROUND_58: QuizQuestion[] = [
       "주식별자를 제외한 일반 속성 간의 함수적 종속성을 제거하는 과정이다."
     ],
     "correctIndex": 0,
-    "explanation": "제3정규형은 제1·제2정규형을 만족하면서 주식별자가 아닌 일반 속성 사이의 이행 함수 종속성을 제거한 상태이다. 따라서 이행 함수 종속성을 배제하지 않는다는 ①이 가장 거리가 멀다.",
+    "explanation": "제3정규형은 제1·제2정규형을 만족하면서 주식별자가 아닌 일반 속성 사이의 이행 함수 종속성을 제거한 상태이다. 따라서 이행 함수 종속성을 배제하지 않는다는 ①이 가장 거리가 멀다. ② 와 ③ 처럼 제1·제2정규형을 먼저 만족해야 하고, ④ 일반 속성 사이의 종속을 제거한다는 설명도 옳다.",
     "_source": "authored"
   },
   {
@@ -55,7 +55,7 @@ export const ROUND_58: QuizQuestion[] = [
       "기술 관점 (Technical)"
     ],
     "correctIndex": 3,
-    "explanation": "데이터 모델링은 데이터 관점(업무가 어떤 데이터와 관련되는가, What), 프로세스 관점(업무가 실제로 어떤 일을 하는가, How), 데이터와 프로세스의 상관 관점(Interaction) 세 가지로 구성된다. 기술 관점은 여기에 포함되지 않는다.",
+    "explanation": "데이터 모델링은 ① 데이터 관점(업무가 어떤 데이터와 관련되는가, What), ② 프로세스 관점(업무가 실제로 어떤 일을 하는가, How), 데이터와 프로세스의 ③ 상관 관점(Interaction) 세 가지로 구성된다. ④ 기술 관점은 여기에 포함되지 않는다.",
     "_source": "authored"
   },
   {
@@ -116,7 +116,7 @@ export const ROUND_58: QuizQuestion[] = [
       "자식 엔터티에서 주식별자의 사용이 가능하더라도 별도의 주식별자를 생성하는 경우"
     ],
     "correctIndex": 1,
-    "explanation": "비식별자 관계는 부모의 식별자를 자식의 일반 속성(FK)으로만 전이하여 두 엔터티가 독립적인 생명주기를 갖도록 할 때 선택한다. 부모와 자식의 생명주기를 동일하게 관리해야 하는 경우는 오히려 식별자 관계를 선택하는 기준이므로 ②가 적절하지 않다.",
+    "explanation": "비식별자 관계는 부모의 식별자를 자식의 일반 속성(FK)으로만 전이하여 두 엔터티가 독립적인 생명주기를 갖도록 할 때 선택한다. 부모와 자식의 생명주기를 동일하게 관리해야 하는 경우는 오히려 식별자 관계를 선택하는 기준이므로 ②가 적절하지 않다. ① 통합된 엔터티가 각각 관계를 가질 때, ③ FK 가 필수가 아니어도 될 때, ④ 자식이 별도 주식별자를 둘 때는 모두 비식별자 관계를 고르는 기준이다.",
     "_source": "authored"
   },
   {
@@ -134,7 +134,7 @@ export const ROUND_58: QuizQuestion[] = [
       "BCNF"
     ],
     "correctIndex": 2,
-    "explanation": "제1정규화는 속성의 원자성을 확보하고, 제2정규화는 주식별자에 대한 부분 함수 종속을 제거하며, 제3정규화는 주식별자가 아닌 일반 속성 사이의 이행적 함수 종속성을 제거한다. BCNF 는 모든 결정자가 후보키가 되도록 분해하는 단계이다.",
+    "explanation": "① 제1정규화는 속성의 원자성을 확보하고, ② 제2정규화는 주식별자에 대한 부분 함수 종속을 제거하며, 제3정규화는 주식별자가 아닌 일반 속성 사이의 이행적 함수 종속성을 제거한다. ④ BCNF 는 모든 결정자가 후보키가 되도록 분해하는 단계이다.",
     "_source": "authored"
   },
   {
@@ -282,7 +282,7 @@ export const ROUND_58: QuizQuestion[] = [
       "㉠은 3건, ㉡은 6건을 반환한다."
     ],
     "correctIndex": 2,
-    "explanation": "㉠ `LIKE '%a_c%'` 의 `_` 는 임의 한 문자를 의미하는 와일드카드라 모든 4행이 매칭된다. ㉡ `LIKE '%a\\_c%' ESCAPE '\\'` 는 `\\` 다음의 `_` 를 리터럴 밑줄로 해석하므로 \"a_c\" 문자열만 매칭 → 1건.",
+    "explanation": "㉠ `LIKE '%a_c%'` 의 `_` 는 임의 한 문자를 의미하는 와일드카드라 모든 4행이 매칭된다. ㉡ `LIKE '%a\\_c%' ESCAPE '\\'` 는 `\\` 다음의 `_` 를 리터럴 밑줄로 해석하므로 \"a_c\" 문자열만 매칭 → 1건. ① 은 ㉠ 의 _ 도 밑줄 문자로만 본 결과, ② 는 ㉡ 의 ESCAPE 를 무시한 결과이고, ④ 는 표에 4행뿐이라 나올 수 없는 값이다.",
     "_source": "authored",
     "references": [
       {
@@ -351,7 +351,7 @@ export const ROUND_58: QuizQuestion[] = [
       "DBA, U1, U2, U3"
     ],
     "correctIndex": 3,
-    "explanation": "RESTRICT 옵션은 권한을 다시 부여한 사용자(U3)가 존재하면 REVOKE를 거부하여 오류가 발생한다. 따라서 네 사용자의 SELECT 권한이 모두 그대로 유지된다.",
+    "explanation": "RESTRICT 옵션은 권한을 다시 부여한 사용자(U3)가 존재하면 REVOKE를 거부하여 오류가 발생한다. 따라서 네 사용자의 SELECT 권한이 모두 그대로 유지된다. CASCADE 였다면 U2 와 U2 가 재부여한 U3 의 권한이 함께 회수되어 ① 이 된다. ② 는 U1 의 권한까지 사라진다고 본 결과, ③ 은 U2 만 회수된다고 본 결과다.",
     "_source": "authored",
     "references": [
       {
@@ -375,7 +375,7 @@ export const ROUND_58: QuizQuestion[] = [
       "20"
     ],
     "correctIndex": 3,
-    "explanation": "CROSS JOIN은 4×3 = 12건, INNER JOIN은 ID=1 매칭 2건·ID=2 매칭 1건 합계 3건, FULL OUTER JOIN은 매칭 3건·TAB1 미매칭 1건(ID=3)·TAB2 미매칭 1건(ID=4)의 5건이므로 합계는 12 + 3 + 5 = 20이다.",
+    "explanation": "CROSS JOIN은 4×3 = 12건, INNER JOIN은 ID=1 매칭 2건·ID=2 매칭 1건 합계 3건, FULL OUTER JOIN은 매칭 3건·TAB1 미매칭 1건(ID=3)·TAB2 미매칭 1건(ID=4)의 5건이므로 합계는 12 + 3 + 5 = 20이다. ① 17 은 CROSS JOIN 을 3 × 3 = 9 로 본 값, ② 18 은 FULL OUTER JOIN 을 INNER JOIN 과 같은 3건으로 본 값, ③ 19 는 FULL OUTER JOIN 에서 한쪽 미매칭 행을 빠뜨린 값(4건)이다.",
     "_source": "authored",
     "references": [
       {
@@ -489,7 +489,7 @@ export const ROUND_58: QuizQuestion[] = [
       "60, 15, 15"
     ],
     "correctIndex": 1,
-    "explanation": "VAL = (10, NULL, 20, NULL, 30). `SUM(VAL)` = 10 + 20 + 30 = 60 (NULL 제외). `AVG(VAL)` = 60 / 3 = 20 (분모는 NULL 아닌 3건). `AVG(NVL(VAL, 0))` = (10 + 0 + 20 + 0 + 30) / 5 = 60 / 5 = 12 (NVL 로 NULL → 0 변환 후 분모는 5건). 정답은 `60, 20, 12`.",
+    "explanation": "VAL = (10, NULL, 20, NULL, 30). `SUM(VAL)` = 10 + 20 + 30 = 60 (NULL 제외). `AVG(VAL)` = 60 / 3 = 20 (분모는 NULL 아닌 3건). `AVG(NVL(VAL, 0))` = (10 + 0 + 20 + 0 + 30) / 5 = 60 / 5 = 12 (NVL 로 NULL → 0 변환 후 분모는 5건). 정답은 `60, 20, 12`. ①·③·④ 는 모두 두 AVG 를 같은 값으로 적었는데, AVG(VAL) 은 NULL 을 분모에서도 빼고(60 ÷ 3) NVL 을 쓰면 NULL 이 0 이 되어 분모에 들어가므로(60 ÷ 5) 두 값은 다를 수밖에 없다.",
     "_source": "authored",
     "references": [
       {
@@ -543,7 +543,7 @@ export const ROUND_58: QuizQuestion[] = [
       "CROSS JOIN"
     ],
     "correctIndex": 0,
-    "explanation": "B 의 모든 행이 결과에 포함되어야 하므로 오른쪽 기준 외부 조인이 필요하다. RIGHT OUTER JOIN 을 쓰면 A 에 매칭이 없는 B.ID=3·4 행까지 결과에 살아남고 그 자리에 A.ID 는 NULL 로 채워진다. LEFT OUTER JOIN 은 A 기준이라 B.ID=3·4 행이 사라지고, INNER JOIN 은 매칭만 남으며, CROSS JOIN 은 카티시안 곱이라 의미가 다르다. 정답은 ①.",
+    "explanation": "B 의 모든 행이 결과에 포함되어야 하므로 오른쪽 기준 외부 조인이 필요하다. RIGHT OUTER JOIN 을 쓰면 A 에 매칭이 없는 B.ID=3·4 행까지 결과에 살아남고 그 자리에 A.ID 는 NULL 로 채워진다. ② LEFT OUTER JOIN 은 A 기준이라 B.ID=3·4 행이 사라지고, ③ INNER JOIN 은 매칭만 남으며, ④ CROSS JOIN 은 카티시안 곱이라 의미가 다르다. 정답은 ①.",
     "_source": "authored",
     "references": [
       {
@@ -705,42 +705,58 @@ export const ROUND_58: QuizQuestion[] = [
     "round": 58,
     "subject": "2과목",
     "number": 22,
-    "title": "아래 데이터에 대한 NTILE(2) 함수 결과로 옳은 것은?",
+    "title": "아래 데이터에 대한 NTILE(2) 함수 결과(GRP, 부서·ID 순)로 옳은 것은?",
     "options": [
-      "1, 1, 2",
-      "1, 2, 2",
-      "1, 1, 1",
-      "2, 2, 2"
+      "1, 1, 1, 2, 2, 1, 2",
+      "1, 1, 2, 2, 2, 1, 1",
+      "1, 1, 2, 2, 2, 1, 2",
+      "2, 2, 1, 1, 1, 2, 1"
     ],
     "correctIndex": 0,
-    "explanation": "NTILE(2) 는 3행을 두 그룹으로 나누고, 나머지 1행은 앞 그룹에 준다. 그래서 첫 그룹 2행, 둘째 그룹 1행이 되어 1, 1, 2 다(①). 나머지를 뒤에 주면 1, 2, 2(②)가 되지만 NTILE 은 앞에서부터 채운다.",
+    "explanation": "PARTITION BY DEPT 라 부서마다 따로 2개 그룹으로 나눈다. NTILE 은 나누어떨어지지 않으면 앞 그룹에 한 행을 더 준다. A 부서 5행(ID 3~7)은 3 + 2 로 나뉘어 1, 1, 1, 2, 2, B 부서 2행(ID 1, 2)은 1, 2 다. 부서·ID 순으로 1, 1, 1, 2, 2, 1, 2 다(①). ② 는 PARTITION BY 를 무시하고 7행 전체를 ID 순으로 4 + 3 으로 나눈 결과(ID 1~4 가 1), ③ 은 A 부서의 나머지를 뒤 그룹에 준 결과(2 + 3), ④ 는 ID 내림차순으로 나눈 결과다.",
     "_source": "authored",
     "references": [
       {
         "type": "table",
+        "caption": "T 테이블",
         "headers": [
           "ID",
-          "VAL"
+          "DEPT"
         ],
         "rows": [
           [
             "1",
-            "100"
+            "B"
           ],
           [
             "2",
-            "200"
+            "B"
           ],
           [
             "3",
-            "300"
+            "A"
+          ],
+          [
+            "4",
+            "A"
+          ],
+          [
+            "5",
+            "A"
+          ],
+          [
+            "6",
+            "A"
+          ],
+          [
+            "7",
+            "A"
           ]
-        ],
-        "caption": "T 테이블"
+        ]
       },
       {
         "type": "sql",
-        "code": "SELECT ID, NTILE(2) OVER (ORDER BY ID) AS GRP FROM T;"
+        "code": "SELECT DEPT, ID,\n       NTILE(2) OVER (PARTITION BY DEPT ORDER BY ID) AS GRP\nFROM   T\nORDER BY DEPT, ID;"
       }
     ]
   },
@@ -870,7 +886,7 @@ export const ROUND_58: QuizQuestion[] = [
       "4"
     ],
     "correctIndex": 1,
-    "explanation": "Tbl_B에서 E='E'인 D는 y, z 이다. Tbl_A에서 C가 y 또는 z인 행은 (2,a,z,1), (2,a,y,2), (3,b,y,2) 이며, (A,B) DISTINCT 결과는 (2,a), (3,b) 의 2건이다.",
+    "explanation": "Tbl_B에서 E='E'인 D는 y, z 이다. Tbl_A에서 C가 y 또는 z인 행은 (2,a,z,1), (2,a,y,2), (3,b,y,2) 이며, (A,B) DISTINCT 결과는 (2,a), (3,b) 의 2건이다. ③ 3 은 DISTINCT 를 무시하고 행 수를 센 값, ④ 4 는 IN 조건을 무시한 Tbl_A 전체 행 수다.",
     "_source": "authored",
     "references": [
       {
@@ -974,7 +990,7 @@ export const ROUND_58: QuizQuestion[] = [
       "오류 발생"
     ],
     "correctIndex": 1,
-    "explanation": "NULL IS NULL 은 NULL 인지를 묻는 조건이라 TRUE 다. CASE 의 첫 조건이 참이므로 'Y' 를 반환한다(②). = NULL 처럼 비교했다면 UNKNOWN 이 되어 ELSE 의 'N' 이 나왔을 것이다.",
+    "explanation": "NULL IS NULL 은 NULL 인지를 묻는 조건이라 TRUE 다. CASE 의 첫 조건이 참이므로 'Y' 를 반환한다(②). = NULL 처럼 비교했다면 UNKNOWN 이 되어 ELSE 의 'N' 이 나왔을 것이다. ① N 은 IS NULL 을 = NULL 로 착각한 결과, ③ 조건이 참이면 THEN 의 값을 돌려주므로 NULL 이 아니며, ④ NULL IS NULL 은 정상 문법이다.",
     "_source": "authored",
     "references": [
       {
@@ -1098,7 +1114,7 @@ export const ROUND_58: QuizQuestion[] = [
       "공집합"
     ],
     "correctIndex": 3,
-    "explanation": "DUAL은 한 건만 반환하므로 COUNT(*)는 1이다. HAVING 조건 COUNT(*) > 4 를 만족하지 않아 결과는 공집합이 된다.",
+    "explanation": "DUAL은 한 건만 반환하므로 COUNT(*)는 1이다. HAVING 조건 COUNT(*) > 4 를 만족하지 않아 결과는 공집합이 된다. ① 1 은 HAVING 조건을 무시한 COUNT 값, ② 0 은 조건을 만족하지 않으면 0 이 나온다고 본 값이고, ③ 9999 같은 값은 나올 수 없다. GROUP BY 가 없어도 HAVING 은 전체를 한 그룹으로 보고 거른다.",
     "_source": "authored",
     "references": [
       {
@@ -1122,7 +1138,7 @@ export const ROUND_58: QuizQuestion[] = [
       "㉢과 ㉣"
     ],
     "correctIndex": 0,
-    "explanation": "㉠ NVL(NULL, 'X')와 ㉡ COALESCE(NULL, 'X')는 NULL 대체 기능이 동일하므로 모두 'X'를 반환한다. ㉢ NULLIF('X', 'X')는 두 인자가 같으므로 NULL을 반환하고, ㉣ NVL('Y', 'X')는 첫 번째 인자가 NULL이 아니므로 'Y'를 반환한다. 따라서 결과가 같은 쌍은 ㉠과 ㉡뿐이다.",
+    "explanation": "㉠ NVL(NULL, 'X')와 ㉡ COALESCE(NULL, 'X')는 NULL 대체 기능이 동일하므로 모두 'X'를 반환한다. ㉢ NULLIF('X', 'X')는 두 인자가 같으므로 NULL을 반환하고, ㉣ NVL('Y', 'X')는 첫 번째 인자가 NULL이 아니므로 'Y'를 반환한다. 따라서 결과가 같은 쌍은 ㉠과 ㉡뿐이다. ② ㉠('X')과 ㉢(NULL), ③ ㉡('X')과 ㉣('Y'), ④ ㉢(NULL)과 ㉣('Y') 은 값이 다르다.",
     "_source": "authored",
     "references": [
       {
@@ -1146,7 +1162,7 @@ export const ROUND_58: QuizQuestion[] = [
       "A B"
     ],
     "correctIndex": 1,
-    "explanation": "HAVING GROUPING(ID) + GROUPING(TYPE) != 1 조건은 (ID, TYPE) 세부 집계 네 건과 전체 총계 한 건만 남긴다. 결과 ID 컬럼은 A, A, B, B, NULL 순으로 출력된다.",
+    "explanation": "HAVING GROUPING(ID) + GROUPING(TYPE) != 1 조건은 (ID, TYPE) 세부 집계 네 건과 전체 총계 한 건만 남긴다. 결과 ID 컬럼은 A, A, B, B, NULL 순으로 출력된다. ③ 은 총계 행(NULL)을 빠뜨린 결과, ④ 는 세부 행 대신 ID 소계만 남긴 결과, ① 은 7행이라 세부 4행 + 총계 1행 = 5행과 맞지 않는다. GROUPING(ID) + GROUPING(TYPE) 이 1 인 행이 ID 소계(A, B)라 그 두 행만 빠진다.",
     "_source": "authored",
     "references": [
       {
@@ -1229,7 +1245,7 @@ export const ROUND_58: QuizQuestion[] = [
       "오류 발생"
     ],
     "correctIndex": 0,
-    "explanation": "Oracle 의 문자 연결 연산자 || 는 NULL 을 빈 문자열처럼 취급해 무시한다. 따라서 'ABC' || NULL || 'XYZ' = 'ABCXYZ' 다(①). 산술 연산과 달리 결과가 NULL 이 되지 않고(②), 오류도 나지 않는다.",
+    "explanation": "Oracle 의 문자 연결 연산자 || 는 NULL 을 빈 문자열처럼 취급해 무시한다. 따라서 'ABC' || NULL || 'XYZ' = 'ABCXYZ' 다(①). 산술 연산과 달리 결과가 NULL 이 되지 않고(②), ④ 오류도 나지 않는다. ③ 처럼 'NULL' 이라는 글자가 끼어들지도 않는다.",
     "_source": "authored",
     "references": [
       {
@@ -1271,7 +1287,7 @@ export const ROUND_58: QuizQuestion[] = [
       "오류 발생"
     ],
     "correctIndex": 0,
-    "explanation": "DECODE 는 일반 비교와 달리 NULL 과 NULL 을 같은 값으로 본다. 첫 인수 NULL 이 비교값 NULL 과 일치하므로 'Y' 를 반환한다(①). CASE WHEN NULL = NULL 로 비교했다면 UNKNOWN 이 되어 'N' 이 나온다.",
+    "explanation": "DECODE 는 일반 비교와 달리 NULL 과 NULL 을 같은 값으로 본다. 첫 인수 NULL 이 비교값 NULL 과 일치하므로 'Y' 를 반환한다(①). ② N 은 CASE WHEN NULL = NULL 처럼 비교했을 때의 결과다(UNKNOWN 이라 ELSE). ③ 일치하면 'Y' 를 돌려주므로 NULL 이 아니고, ④ 오류도 나지 않는다.",
     "_source": "authored",
     "references": [
       {
@@ -1295,7 +1311,7 @@ export const ROUND_58: QuizQuestion[] = [
       "3"
     ],
     "correctIndex": 2,
-    "explanation": "DUAL 은 한 행짜리 테이블이고, CONNECT BY LEVEL <= 2 는 LEVEL 1, 2 인 행을 계층 전개로 만들어 두 행을 생성한다. 따라서 COUNT(*) = 2 다(③). 이는 원하는 개수만큼 행을 만들 때 자주 쓰는 방법이다.",
+    "explanation": "DUAL 은 한 행짜리 테이블이고, CONNECT BY LEVEL <= 2 는 LEVEL 1, 2 인 행을 계층 전개로 만들어 두 행을 생성한다. 따라서 COUNT(*) = 2 다(③). 이는 원하는 개수만큼 행을 만들 때 자주 쓰는 방법이다. ① 0·② 1 은 CONNECT BY 가 행을 늘리지 않는다고 본 값, ④ 3 은 LEVEL 을 0 부터 센다고 본 값이다.",
     "_source": "authored",
     "references": [
       {
@@ -1319,7 +1335,7 @@ export const ROUND_58: QuizQuestion[] = [
       "오류 발생"
     ],
     "correctIndex": 1,
-    "explanation": "COALESCE 는 인수를 왼쪽부터 보며 처음 NULL 이 아닌 값을 반환한다. NULL, NULL 다음의 3 이 처음 NULL 이 아닌 값이므로 3 이다(②). 마지막 4 는 평가하지 않는다.",
+    "explanation": "COALESCE 는 인수를 왼쪽부터 보며 처음 NULL 이 아닌 값을 반환한다. NULL, NULL 다음의 3 이 처음 NULL 이 아닌 값이므로 3 이다(②). 마지막 4 는 평가하지 않는다. ① 처음으로 NULL 이 아닌 값이 있으므로 NULL 이 아니고, ③ 4 는 마지막 값을 고른 결과, ④ 인수가 여러 개여도 오류는 나지 않는다.",
     "_source": "authored",
     "references": [
       {
@@ -1343,7 +1359,7 @@ export const ROUND_58: QuizQuestion[] = [
       "4"
     ],
     "correctIndex": 2,
-    "explanation": "REGEXP_INSTR 은 패턴이 처음 매칭되는 시작 위치를 1 부터 세어 반환한다. '123123123' 에서 3 번째 문자부터 '3', '1', '2' 가 이어져 '312' 와 일치하므로 3 을 반환한다.",
+    "explanation": "REGEXP_INSTR 은 패턴이 처음 매칭되는 시작 위치를 1 부터 세어 반환한다. '123123123' 에서 3 번째 문자부터 '3', '1', '2' 가 이어져 '312' 와 일치하므로 3 을 반환한다. ① 1 은 패턴 대신 '123' 을 찾은 결과, ② 2 는 위치를 0 부터 센 결과, ④ 4 는 두 번째 '123' 의 시작 위치다.",
     "_source": "authored",
     "references": [
       {
@@ -1422,7 +1438,7 @@ export const ROUND_58: QuizQuestion[] = [
       "'''A'''"
     ],
     "correctIndex": 0,
-    "explanation": "Oracle 문자열 리터럴은 양쪽 작은따옴표가 구분자, 내부의 인접한 두 개의 작은따옴표(`''`)는 하나의 작은따옴표 리터럴로 해석된다. `'''''A'''''` 를 분해하면 양 끝 1개씩이 구분자, 내부에는 `''`(=`'`) 2쌍 + `A` + `''`(=`'`) 2쌍 → 결과는 `''A''`.",
+    "explanation": "Oracle 문자열 리터럴은 양쪽 작은따옴표가 구분자, 내부의 인접한 두 개의 작은따옴표(`''`)는 하나의 작은따옴표 리터럴로 해석된다. `'''''A'''''` 를 분해하면 양 끝 1개씩이 구분자, 내부에는 `''`(=`'`) 2쌍 + `A` + `''`(=`'`) 2쌍 → 결과는 `''A''`. ② 'A' 는 바깥 따옴표 한 쌍씩만 남는다고 본 결과, ③ A 는 따옴표를 모두 구분자로 본 결과, ④ 는 '' 를 ' 하나로 줄이지 않은 결과다.",
     "_source": "authored",
     "references": [
       {
@@ -1690,7 +1706,7 @@ export const ROUND_58: QuizQuestion[] = [
       "전체 사원"
     ],
     "correctIndex": 1,
-    "explanation": "`SAL > ALL (집합)` 은 집합의 모든 원소보다 커야 한다는 의미 = 집합의 최대값보다 큰 값. 본 SQL 은 DEPTNO=10 사원들의 SAL 모두 보다 큰 사원 = DEPTNO=10 의 최대 급여(5000) 초과인 사원만 선택. 본 데이터에서는 6000 인 BLAKE 한 명이 결과.",
+    "explanation": "`SAL > ALL (집합)` 은 집합의 모든 원소보다 커야 한다는 의미 = 집합의 최대값보다 큰 값. 본 SQL 은 DEPTNO=10 사원들의 SAL 모두 보다 큰 사원 = DEPTNO=10 의 최대 급여(5000) 초과인 사원만 선택. 본 데이터에서는 6000 인 BLAKE 한 명이 결과. ① 은 IN 과 헷갈린 결과, ③ 은 평균과 비교한다고 본 결과(ALL 은 최댓값 기준), ④ 는 조건을 무시한 결과다.",
     "_source": "authored",
     "references": [
       {

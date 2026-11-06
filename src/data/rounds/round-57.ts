@@ -19,7 +19,7 @@ export const ROUND_57: QuizQuestion[] = [
       "㉠ 내부 ㉡ 개념 ㉢ 외부"
     ],
     "correctIndex": 0,
-    "explanation": "외부 스키마는 사용자나 응용 프로그램이 보는 관점이라 VIEW 가 해당하고, 개념 스키마는 조직 전체가 공유하는 단 하나의 통합 설계도라 전사 ERD 가 해당한다. 내부 스키마는 실제 저장 구조를 다루므로 테이블스페이스·인덱스·파티션 설계가 여기에 속한다.",
+    "explanation": "외부 스키마는 사용자나 응용 프로그램이 보는 관점이라 VIEW 가 해당하고, 개념 스키마는 조직 전체가 공유하는 단 하나의 통합 설계도라 전사 ERD 가 해당한다. 내부 스키마는 실제 저장 구조를 다루므로 테이블스페이스·인덱스·파티션 설계가 여기에 속한다. ② 는 ㉠·㉡ 을, ③ 은 ㉡·㉢ 을, ④ 는 ㉠·㉢ 을 서로 바꾼 짝이다.",
     "_source": "authored",
     "references": [
       {
@@ -99,7 +99,7 @@ export const ROUND_57: QuizQuestion[] = [
       "파생 속성"
     ],
     "correctIndex": 3,
-    "explanation": "파생 속성은 다른 속성의 값을 기반으로 계산·변환하여 도출되는 속성이다. 기본 속성은 업무에서 직접 발생하고, 설계 속성은 모델링 과정에서 부여되며, 일반 속성은 고유 의미를 갖는 속성이다.",
+    "explanation": "파생 속성은 다른 속성의 값을 기반으로 계산·변환하여 도출되는 속성이다. ① 기본 속성은 업무에서 직접 발생하고, ② 설계 속성은 모델링 과정에서 부여되며, ③ 일반 속성은 고유 의미를 갖는 속성이다.",
     "_source": "authored"
   },
   {
@@ -160,7 +160,7 @@ export const ROUND_57: QuizQuestion[] = [
       "오류 발생"
     ],
     "correctIndex": 3,
-    "explanation": "서브쿼리 SELECT 회원ID FROM 회원 WHERE 연락처 = '010-2222' 는 1002, 1003 두 건을 돌려준다. 그런데 바깥 조건이 단일 행 비교 연산자 = 라서 \"단일 행 서브쿼리가 두 개 이상의 행을 반환\" 오류가 난다(④). 여러 행이 나올 수 있는 서브쿼리는 IN 으로 비교해야 하며, IN 이었다면 ① 이순신·강감찬 두 건이 나왔을 것이다.",
+    "explanation": "서브쿼리 SELECT 회원ID FROM 회원 WHERE 연락처 = '010-2222' 는 1002, 1003 두 건을 돌려준다. 그런데 바깥 조건이 단일 행 비교 연산자 = 라서 \"단일 행 서브쿼리가 두 개 이상의 행을 반환\" 오류가 난다(④). 여러 행이 나올 수 있는 서브쿼리는 IN 으로 비교해야 하며, IN 이었다면 ① 이순신·강감찬 두 건이 나왔을 것이다. ② 이순신 한 건은 서브쿼리가 첫 행만 돌려준다고 본 결과, ③ 공집합은 오류 대신 결과가 없다고 본 결과다.",
     "_source": "authored",
     "references": [
       {
@@ -278,7 +278,7 @@ export const ROUND_57: QuizQuestion[] = [
       "가, 나, 다"
     ],
     "correctIndex": 0,
-    "explanation": "OFFSET n ROWS 는 처음 n건을 건너뛴다. FETCH FIRST k ROWS ONLY 는 정확히 k건 이하를 반환하므로 5건을 초과할 수 없다.",
+    "explanation": "OFFSET n ROWS 는 처음 n건을 건너뛴다. FETCH FIRST k ROWS ONLY 는 정확히 k건 이하를 반환하므로 5건을 초과할 수 없다. ② 나 는 OFFSET 3 이 3번째 행만 뺀다고 본 것이라 틀리고, ③·④ 는 틀린 다(5건 초과)를 포함했다.",
     "_source": "authored",
     "references": [
       {
@@ -366,7 +366,7 @@ export const ROUND_57: QuizQuestion[] = [
       "TCL : COMMIT"
     ],
     "correctIndex": 1,
-    "explanation": "DROP 은 테이블·뷰 같은 객체 자체를 삭제하는 명령이라 DML 이 아니라 DDL 이다. TRUNCATE 도 DDL 이고, REVOKE 는 권한 회수라 DCL, COMMIT 은 트랜잭션 확정이라 TCL 이 맞다.",
+    "explanation": "DROP 은 테이블·뷰 같은 객체 자체를 삭제하는 명령이라 DML 이 아니라 DDL 이다. ① TRUNCATE 도 DDL 이고, ③ REVOKE 는 권한 회수라 DCL, ④ COMMIT 은 트랜잭션 확정이라 TCL 이 맞다.",
     "_source": "authored"
   },
   {
@@ -384,7 +384,7 @@ export const ROUND_57: QuizQuestion[] = [
       "SQL 결과 간의 차집합으로 중복된 행은 하나의 행으로 출력한다."
     ],
     "correctIndex": 2,
-    "explanation": "INTERSECT 는 두 집합의 공통 행만 반환하는 교집합 연산자이며 결과의 중복은 제거되어 한 행으로 출력된다. 합집합은 UNION/UNION ALL, 차집합은 MINUS(EXCEPT) 가 담당한다.",
+    "explanation": "INTERSECT 는 두 집합의 공통 행만 반환하는 교집합 연산자이며 결과의 중복은 제거되어 한 행으로 출력된다. ① 은 UNION, ② 는 UNION ALL, ④ 는 MINUS(EXCEPT) 의 설명이다.",
     "_source": "authored"
   },
   {
@@ -402,7 +402,7 @@ export const ROUND_57: QuizQuestion[] = [
       "연관(상관) 서브쿼리"
     ],
     "correctIndex": 2,
-    "explanation": "서브쿼리가 DEPTNO 와 MAX(SAL) 두 개의 컬럼을 반환하고 메인 쿼리가 두 컬럼을 한 쌍으로 묶어 비교하므로 다중 컬럼 서브쿼리다. 서브쿼리가 메인 쿼리의 컬럼을 참조하지 않으므로 연관 서브쿼리는 아니며, 부서별 최고 급여자를 뽑는 대표적인 패턴이다.",
+    "explanation": "서브쿼리가 DEPTNO 와 MAX(SAL) 두 개의 컬럼을 반환하고 메인 쿼리가 두 컬럼을 한 쌍으로 묶어 비교하므로 다중 컬럼 서브쿼리다. 서브쿼리가 메인 쿼리의 컬럼을 참조하지 않으므로 연관 서브쿼리는 아니며, 부서별 최고 급여자를 뽑는 대표적인 패턴이다. ① 단일 행·② 다중 행 은 돌려주는 행 수로 나눈 이름인데, 이 SQL 의 특징은 컬럼 두 개를 한 쌍으로 비교한다는 점이다. ④ 메인 쿼리의 컬럼을 참조하지 않으므로 연관 서브쿼리가 아니다.",
     "_source": "authored",
     "references": [
       {
@@ -580,7 +580,7 @@ export const ROUND_57: QuizQuestion[] = [
       "FETCH FIRST 1 ROW ONLY 와 ORDER BY DESC"
     ],
     "correctIndex": 0,
-    "explanation": "`>= ANY` 는 집합 내 임의의 값 이상을 의미하므로 최솟값 이상이 되어 '최고'의 의미를 표현하지 못한다. 최고를 표현하려면 `>= ALL` 또는 `= MAX(...)` 가 적절하다.",
+    "explanation": "`>= ANY` 는 집합 내 임의의 값 이상을 의미하므로 최솟값 이상이 되어 '최고'의 의미를 표현하지 못한다. 최고를 표현하려면 `>= ALL` 또는 `= MAX(...)` 가 적절하다. ② RANK = 1, ③ MAX(VAL), ④ ORDER BY DESC 뒤 FETCH FIRST 1 ROW 는 모두 최고 값을 구하는 적절한 방법이다.",
     "_source": "authored"
   },
   {
@@ -725,7 +725,7 @@ export const ROUND_57: QuizQuestion[] = [
       "4개"
     ],
     "correctIndex": 1,
-    "explanation": "WHERE COL1 = COL2 는 두 값이 같을 때만 참이다. (1,1), (5,5) 는 참이고 (2,3) 은 거짓이며, (NULL,NULL) 은 NULL = NULL 이 UNKNOWN 이라 참이 아니므로 세지 않는다. 따라서 2개다(②). NULL 끼리 같다고 세면 3개(③)가 되지만 SQL 은 그렇게 비교하지 않는다.",
+    "explanation": "WHERE COL1 = COL2 는 두 값이 같을 때만 참이다. (1,1), (5,5) 는 참이고 (2,3) 은 거짓이며, (NULL,NULL) 은 NULL = NULL 이 UNKNOWN 이라 참이 아니므로 세지 않는다. 따라서 2개다(②). NULL 끼리 같다고 세면 3개(③)가 되지만 SQL 은 그렇게 비교하지 않는다. ① 1개는 (1,1)·(5,5) 중 하나를 놓친 값, ④ 4개는 모든 행이 같다고 본 값이다.",
     "_source": "authored",
     "references": [
       {
@@ -793,7 +793,7 @@ export const ROUND_57: QuizQuestion[] = [
       "Saturday"
     ],
     "correctIndex": 2,
-    "explanation": "패턴 'u[a-z]*day$' 는 소문자 u 가 나온 뒤 소문자가 0 개 이상 이어지고 문자열이 day 로 끝나는 값을 찾는다. Tuesday(T-u-esday), Saturday(Sat-u-rday), Sunday(S-u-nday) 는 모두 u 뒤에 day 로 끝나는 형태라 조회된다. 반면 Friday 에는 u 가 없어 조회되지 않으므로 정답은 ③ 이다. (Monday·Wednesday 도 같은 이유로 조회되지 않는다.)",
+    "explanation": "패턴 'u[a-z]*day$' 는 소문자 u 가 나온 뒤 소문자가 0 개 이상 이어지고 문자열이 day 로 끝나는 값을 찾는다. ① Tuesday(T-u-esday), ④ Saturday(Sat-u-rday), ② Sunday(S-u-nday) 는 모두 u 뒤에 day 로 끝나는 형태라 조회된다. 반면 Friday 에는 u 가 없어 조회되지 않으므로 정답은 ③ 이다. (Monday·Wednesday 도 같은 이유로 조회되지 않는다.)",
     "_source": "authored",
     "references": [
       {
@@ -883,7 +883,7 @@ export const ROUND_57: QuizQuestion[] = [
       "START WITH 절"
     ],
     "correctIndex": 2,
-    "explanation": "`START WITH` 는 트리 전개의 시작점(루트), `CONNECT BY` 는 부모-자식 관계 조건이라 두 절은 트리 전개 자체에 영향을 준다. 반면 `WHERE` 는 트리 전개가 모두 끝난 결과 행에만 적용되어 단순 필터로 동작한다.",
+    "explanation": "④ `START WITH` 는 트리 전개의 시작점(루트), ① `CONNECT BY` 는 부모-자식 관계 조건이라 두 절은 트리 전개 자체에 영향을 준다. 반면 `WHERE` 는 트리 전개가 모두 끝난 결과 행에만 적용되어 단순 필터로 동작한다. ② FROM 절은 대상 테이블을 정할 뿐 결과를 거르지 않는다.",
     "_source": "authored"
   },
   {
@@ -919,7 +919,7 @@ export const ROUND_57: QuizQuestion[] = [
       "17"
     ],
     "correctIndex": 2,
-    "explanation": "공통 행은 G 하나. INNER 1건, LEFT(TAB1 기준) 4건, RIGHT(TAB2 기준) 4건, FULL OUTER 7건(매칭 1 + 미매칭 3 + 3). 합계 = 1 + 4 + 4 + 7 = 16.",
+    "explanation": "공통 행은 G 하나. INNER 1건, LEFT(TAB1 기준) 4건, RIGHT(TAB2 기준) 4건, FULL OUTER 7건(매칭 1 + 미매칭 3 + 3). 합계 = 1 + 4 + 4 + 7 = 16. ① 14 는 FULL OUTER JOIN 을 5건으로, ② 15 는 6건으로 센 값, ④ 17 은 FULL OUTER JOIN 을 LEFT + RIGHT = 8건으로 본 값이다.",
     "_source": "authored",
     "references": [
       {
@@ -981,7 +981,7 @@ export const ROUND_57: QuizQuestion[] = [
       "SELECT * FROM (SELECT * FROM EMP ORDER BY SAL DESC) WHERE ROWNUM <= 10;"
     ],
     "correctIndex": 3,
-    "explanation": "Oracle 에서 ORDER BY 결과의 상위 N 건을 안전하게 얻으려면, 정렬을 적용한 인라인 뷰를 만든 뒤 바깥 쿼리에서 ROWNUM 조건을 거는 방식이 가장 일반적이다. ROWNUM 을 ORDER BY 와 같은 SELECT 에 직접 쓰면 정렬 이전에 부여되어 의도한 결과가 나오지 않는다.",
+    "explanation": "Oracle 에서 ORDER BY 결과의 상위 N 건을 안전하게 얻으려면, 정렬을 적용한 인라인 뷰를 만든 뒤 바깥 쿼리에서 ROWNUM 조건을 거는 방식이 가장 일반적이다. ROWNUM 을 ORDER BY 와 같은 SELECT 에 직접 쓰면 정렬 이전에 부여되어 의도한 결과가 나오지 않는다. ① 은 ROWNUM 이 정렬 전에 붙어 아무 10행을 정렬하고, ② LIMIT 은 MySQL·PostgreSQL 문법, ③ TOP 은 SQL Server 문법이다.",
     "_source": "authored"
   },
   {
@@ -999,7 +999,7 @@ export const ROUND_57: QuizQuestion[] = [
       "0"
     ],
     "correctIndex": 3,
-    "explanation": "WHERE 1 = 2 로 선택되는 행이 없어도 COUNT(*) 는 NULL 이 아니라 0 을 반환한다. 그래서 NVL(0, 9999) = 0 이다(④). 대체값 9999 는 COUNT 결과가 NULL 일 때만 쓰이는데, COUNT 는 NULL 을 반환하지 않는다.",
+    "explanation": "WHERE 1 = 2 로 선택되는 행이 없어도 COUNT(*) 는 NULL 이 아니라 0 을 반환한다. 그래서 NVL(0, 9999) = 0 이다(④). 대체값 9999 는 COUNT 결과가 NULL 일 때만 쓰이는데, COUNT 는 NULL 을 반환하지 않는다. ① COUNT 는 NULL 을 돌려주지 않으므로 NULL 이 아니고, ③ 9999 는 COUNT 결과가 NULL 이라고 본 값이다.",
     "_source": "authored",
     "references": [
       {
@@ -1041,7 +1041,7 @@ export const ROUND_57: QuizQuestion[] = [
       "RIGHT OUTER JOIN"
     ],
     "correctIndex": 2,
-    "explanation": "NATURAL JOIN 은 두 테이블에서 이름과 데이터 타입이 동일한 컬럼을 자동으로 찾아 등가 조인하며 ON·USING 절을 명시할 필요가 없다.",
+    "explanation": "NATURAL JOIN 은 두 테이블에서 이름과 데이터 타입이 동일한 컬럼을 자동으로 찾아 등가 조인하며 ON·USING 절을 명시할 필요가 없다. ① INNER JOIN 은 ON·USING 으로 조건을 직접 써야 하고, ② LEFT·④ RIGHT OUTER JOIN 은 한쪽 행을 보존하는 방식일 뿐 같은 이름 컬럼을 자동으로 찾지 않는다.",
     "_source": "authored"
   },
   {
@@ -1059,7 +1059,7 @@ export const ROUND_57: QuizQuestion[] = [
       "4개"
     ],
     "correctIndex": 0,
-    "explanation": "ㄴ은 GROUP BY 에 없는 일반 컬럼 SAL 을 선택하여 오류, ㄷ은 집계와 일반 컬럼 혼용으로 GROUP BY 필요 오류이다. ㄱ·ㄹ은 정상 실행된다.",
+    "explanation": "ㄴ은 GROUP BY 에 없는 일반 컬럼 SAL 을 선택하여 오류, ㄷ은 집계와 일반 컬럼 혼용으로 GROUP BY 필요 오류이다. ㄱ·ㄹ은 정상 실행된다. ② 1개·③ 3개·④ 4개 는 오류 개수를 잘못 센 값이다. ㄹ 처럼 ORDER BY 에 집계 함수를 쓰는 것은 정상이다.",
     "_source": "authored",
     "references": [
       {
@@ -1192,7 +1192,7 @@ export const ROUND_57: QuizQuestion[] = [
       "4개"
     ],
     "correctIndex": 2,
-    "explanation": "BETWEEN 1200 AND 1400 (양 끝 포함) 조건을 만족하는 행은 B(1,200), C(1,300), D(1,400) 3 명. A(1,100) 와 E(1,500) 은 범위 밖.",
+    "explanation": "BETWEEN 1200 AND 1400 (양 끝 포함) 조건을 만족하는 행은 B(1,200), C(1,300), D(1,400) 3 명. A(1,100) 와 E(1,500) 은 범위 밖. ① 1개·② 2개 는 BETWEEN 이 양 끝(또는 한쪽 끝) 값을 빼는 것으로 본 값, ④ 4개는 범위 밖 행까지 센 값이다.",
     "_source": "authored",
     "references": [
       {
@@ -1322,7 +1322,7 @@ export const ROUND_57: QuizQuestion[] = [
       "1.b 4.c"
     ],
     "correctIndex": 2,
-    "explanation": "ON (T.ID = S.ID) 기준으로 ID 1 은 양쪽에 있어 VAL 이 b 로 UPDATE 되고, SRC 의 ID 4 는 TGT 에 없어 (4, c) 가 INSERT 된다. TGT 에만 있는 ID 2 는 바뀌지 않는다. 결과는 1.b 2.a 4.c 다(③). MERGE 는 SRC 에 없는 TGT 행을 삭제하지 않으므로 ④ 는 틀리다.",
+    "explanation": "ON (T.ID = S.ID) 기준으로 ID 1 은 양쪽에 있어 VAL 이 b 로 UPDATE 되고, SRC 의 ID 4 는 TGT 에 없어 (4, c) 가 INSERT 된다. TGT 에만 있는 ID 2 는 바뀌지 않는다. 결과는 1.b 2.a 4.c 다(③). MERGE 는 SRC 에 없는 TGT 행을 삭제하지 않으므로 ④ 는 틀리다. ① 은 UPDATE·INSERT 가 모두 안 된다고 본 결과, ② 는 INSERT 만 되고 UPDATE 는 안 된다고 본 결과다.",
     "_source": "authored",
     "references": [
       {
@@ -1382,7 +1382,7 @@ export const ROUND_57: QuizQuestion[] = [
       "2022년 11월, 12월 / 2023년 3월, 5월"
     ],
     "correctIndex": 3,
-    "explanation": "`BETWEEN '2022-11' AND '2023-05'` 로 7 개월(2022-11, 12, 2023-01, 02, 03, 04, 05) 이 후보가 된다. `EXTRACT(MONTH ...) NOT IN (1, 2, 4)` 로 1·2·4 월을 제거하면 남는 건 2022-11, 2022-12, 2023-03, 2023-05 의 4 개월.",
+    "explanation": "`BETWEEN '2022-11' AND '2023-05'` 로 7 개월(2022-11, 12, 2023-01, 02, 03, 04, 05) 이 후보가 된다. `EXTRACT(MONTH ...) NOT IN (1, 2, 4)` 로 1·2·4 월을 제거하면 남는 건 2022-11, 2022-12, 2023-03, 2023-05 의 4 개월. ① 에는 제외되는 2월이, ② 와 ③ 에는 제외되는 4월이 들어 있어 틀리다.",
     "_source": "authored",
     "references": [
       {
@@ -1436,7 +1436,7 @@ export const ROUND_57: QuizQuestion[] = [
       "CUBE"
     ],
     "correctIndex": 0,
-    "explanation": "결과 표를 보면 (DEPT=10, JOB=CLERK) 같은 세부 집계, (DEPT=10, JOB=NULL) 부서 소계, (NULL, NULL) 전체 총계가 나타난다. 이는 ROLLUP(DEPT, JOB) 이 만드는 (DEPT, JOB) → (DEPT) → () 패턴과 정확히 일치. CUBE 는 추가로 (JOB) 단독 소계까지 만들고, GROUPING SETS 는 명시 그룹만, GROUP BY 는 세부 집계만 만든다.",
+    "explanation": "결과 표를 보면 (DEPT=10, JOB=CLERK) 같은 세부 집계, (DEPT=10, JOB=NULL) 부서 소계, (NULL, NULL) 전체 총계가 나타난다. 이는 ROLLUP(DEPT, JOB) 이 만드는 (DEPT, JOB) → (DEPT) → () 패턴과 정확히 일치. ④ CUBE 는 추가로 (JOB) 단독 소계까지 만들고, ② GROUPING SETS 는 명시 그룹만, ③ GROUP BY 는 세부 집계만 만든다.",
     "_source": "authored",
     "references": [
       {
@@ -1707,7 +1707,7 @@ export const ROUND_57: QuizQuestion[] = [
       "MIN(ID) , ID"
     ],
     "correctIndex": 0,
-    "explanation": "이름이 같은 행 중에서 가장 작은 ID 만 남기려면, 우선 NAME 으로 그룹화한 뒤 그룹별 MIN(ID) 를 구해 'NOT IN' 으로 그 외 행을 모두 삭제해야 한다. 따라서 첫 번째 빈칸은 MIN(ID), 두 번째 빈칸은 NAME 이며 정답은 ①. 예를 들어 아래 데이터에서 '홍길동' 그룹은 MIN(ID)=1 만 남고 (3,4) 가 삭제, '김철수' 그룹은 MIN(ID)=2 만 남고 5 가 삭제된다.",
+    "explanation": "이름이 같은 행 중에서 가장 작은 ID 만 남기려면, 우선 NAME 으로 그룹화한 뒤 그룹별 MIN(ID) 를 구해 'NOT IN' 으로 그 외 행을 모두 삭제해야 한다. 따라서 첫 번째 빈칸은 MIN(ID), 두 번째 빈칸은 NAME 이며 정답은 ①. 예를 들어 아래 데이터에서 '홍길동' 그룹은 MIN(ID)=1 만 남고 (3,4) 가 삭제, '김철수' 그룹은 MIN(ID)=2 만 남고 5 가 삭제된다. ② 와 ③ 은 MAX 라 가장 큰 ID 가 남고, ④ 처럼 ID 로 묶으면 모든 행이 각자 그룹이 되어 아무것도 지워지지 않는다.",
     "_source": "authored",
     "references": [
       {
@@ -1890,7 +1890,7 @@ export const ROUND_57: QuizQuestion[] = [
       "1건 반환 (김유신)"
     ],
     "correctIndex": 2,
-    "explanation": "인라인 뷰 X 에서 각 사원에 부서별 최고 연봉이 매핑된다. Y 와 조인하면서 사원ID 가 같고 '본인 연봉 = 부서 최고 연봉' 조건까지 만족하는 행만 남는다. 부서 100은 002(강감찬, 3000), 200은 003(김유신, 4500), 300은 006(변사또, 4500) 이 반환된다.",
+    "explanation": "인라인 뷰 X 에서 각 사원에 부서별 최고 연봉이 매핑된다. Y 와 조인하면서 사원ID 가 같고 '본인 연봉 = 부서 최고 연봉' 조건까지 만족하는 행만 남는다. 부서 100은 002(강감찬, 3000), 200은 003(김유신, 4500), 300은 006(변사또, 4500) 이 반환된다. ① 은 부서 100 을 빠뜨렸고, ② 는 부서별 최저 연봉자를, ④ 는 부서 200 만 본 결과다.",
     "_source": "authored",
     "references": [
       {
