@@ -93,3 +93,14 @@
 |---|---|---|---|---|
 | 51-35 | CONNECT BY 조건(가지째 제외), 루트는 검사 안 함 | WHERE 조건 → CONNECT BY 조건, 8노드, 루트의 COL3 도 2 | 4 | (C) START WITH 로 고른 루트는 CONNECT BY 조건을 검사하지 않음(Oracle) — 0·3 을 오답으로 / WHERE 였다면 5 |
 | 47-49 | 부서별 1위 (RANK) | ROW_NUMBER → RANK, 동점·NULL 부서 추가 | 3, 4, 5, 6 | (C) DESC 에서 NULL 이 먼저 → "Oracle 기준" 명시. NULLS LAST 면 ④ 가 된다는 점을 해설에 |
+
+## 7차 6문항 (11-06 06시 정기 실행)
+
+| 문항 | 개념 | 바뀐 점 | 정답 | 검토 메모 |
+|---|---|---|---|---|
+| 49-16 | GROUP BY NULL 그룹 + CASE 정렬 | NULL 2행 추가 | 999, 100, NULL | (C) 오름차순 NULL 위치 → "Oracle 기준" / CASE 의 ELSE 로 NULL 키 |
+| 49-22 | GROUP BY 유무와 0건 집계 | SQL 두 개 비교 (GROUP BY+HAVING vs WHERE 만) | 공집합 / 0 한 행 | (B) 네 조합을 모두 보기로 |
+| 53-47 | 다중 컬럼 UNION | 1컬럼 → 2컬럼, 대소문자·NULL 행·중복 | 5개 | (C) Oracle 문자 비교는 대소문자 구분 → "Oracle 기준" |
+| 58-22 | NTILE(2) + PARTITION | 3행 → 2부서 7행 | 1, 1, 1, 2, 2, 1, 2 | (B) 첫 설계는 PARTITION 을 빼도 결과가 같아 오답이 구별되지 않음 → 부서별 ID 배치를 바꿔 재설계 |
+| 59-42 | COUNT(*) · COUNT(컬럼) · COUNT(DISTINCT) | 중복 날짜·NULL 날짜, DISTINCT 조건 | 2 | (E) 근거 없는 오답 하나를 "DISTINCT 가 NULL 도 센다" 착각 값으로 교체 |
+| 50-46 | ROW_NUMBER 두 기준 정렬 | DESC + NULL + 동점 ID DESC, 출력은 ID 순 | 5, 4, 3, 1, 2 | (A) 출력 순서와 번호 순서가 다르다는 점을 해설에 |

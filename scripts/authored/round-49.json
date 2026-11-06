@@ -263,18 +263,19 @@
     {
       "subject": "2과목",
       "number": 16,
-      "title": "아래 SQL 의 실행 결과로 옳은 것은?",
+      "title": "아래 SQL 의 실행 결과로 옳은 것은? (Oracle 기준, 출력 순서대로)",
       "options": [
-        "100, 999",
+        "100, 999, NULL",
+        "999, 100, NULL",
         "999, 100",
-        "100, 200, 999",
-        "999, 200, 100"
+        "NULL, 999, 100"
       ],
       "correctIndex": 1,
-      "explanation": "HAVING COUNT(*) = 2 로 두 번 나오는 ID 만 남기면 100 과 999 다(200 은 3번). 정렬 키 CASE 식은 999 면 0, 나머지는 ID 그대로라 999(0) → 100(100) 순으로 출력된다(②). ① 은 ID 값 그대로 정렬한 결과이고, ③④ 는 HAVING 조건을 무시해 200 이 포함됐다.",
+      "explanation": "GROUP BY 는 NULL 도 하나의 그룹으로 묶는다. ID 별 건수는 100 이 2, 200 이 3, 999 가 2, NULL 이 2 라 HAVING COUNT(*) = 2 를 통과하는 그룹은 100, 999, NULL 이다. 정렬 키는 999 면 0, 아니면 ID 그대로인데, NULL 행은 ID = 999 비교가 UNKNOWN 이라 ELSE 로 가서 키도 NULL 이다. Oracle 은 오름차순에서 NULL 을 맨 뒤에 두므로 999(0) → 100(100) → NULL 순이다(②). ① 은 CASE 식을 무시하고 ID 로 정렬한 결과, ③ 은 NULL 그룹이 GROUP BY 에서 빠진다고 본 결과, ④ 는 NULL 이 오름차순 맨 앞에 온다고 본 결과(SQL Server 방식)다.",
       "references": [
         {
           "type": "table",
+          "caption": "TBL 테이블",
           "headers": [
             "ID"
           ],
@@ -299,9 +300,14 @@
             ],
             [
               "999"
+            ],
+            [
+              "NULL"
+            ],
+            [
+              "NULL"
             ]
-          ],
-          "caption": "TBL 테이블"
+          ]
         },
         {
           "type": "sql",
@@ -541,15 +547,15 @@
     {
       "subject": "2과목",
       "number": 22,
-      "title": "아래 T 테이블에 대한 SQL 의 결과로 옳은 것은?",
+      "title": "아래 T 테이블에 대한 두 SQL 의 결과로 옳은 것은?",
       "options": [
-        "데이터가 출력되지 않는다.",
-        "0 이 한 행 반환된다.",
-        "NULL 이 한 행 반환된다.",
-        "오류 발생"
+        "(가) 출력 없음(공집합), (나) 0 한 행",
+        "(가) 0 한 행, (나) 출력 없음(공집합)",
+        "(가)·(나) 모두 출력 없음",
+        "(가)·(나) 모두 0 한 행"
       ],
       "correctIndex": 0,
-      "explanation": "GROUP BY 가 지정된 쿼리는 조건을 만족하는 그룹이 없으면 공집합을 반환한다. 본 데이터에서 ID 별 그룹은 A=2건, B=2건, C=1건 으로 모두 3 이하라 HAVING COUNT(*) > 3 을 만족하는 그룹이 없다.",
+      "explanation": "(가) 는 GROUP BY 가 있다. ID 별 그룹은 A 2건, B 2건, C 1건, NULL 1건으로 모두 3 이하라 HAVING 을 통과하는 그룹이 하나도 없고, 그룹이 없으니 출력 행도 없다(공집합). (나) 는 GROUP BY 없이 테이블 전체를 한 덩어리로 집계한다. WHERE 를 통과한 행이 0건이어도 전체 집계는 항상 한 행을 만들고 COUNT(*) 는 0 이다. 그래서 ① 이다. ② 는 둘을 반대로 본 것, ③ 은 집계할 행이 없으면 언제나 출력이 없다고 본 것, ④ 는 COUNT 는 언제나 한 행을 돌려준다고 본 것이다. GROUP BY 가 있으면 0건에서 그룹이 생기지 않는다는 점이 핵심이다.",
       "references": [
         {
           "type": "table",
@@ -572,12 +578,15 @@
             ],
             [
               "C"
+            ],
+            [
+              "NULL"
             ]
           ]
         },
         {
           "type": "sql",
-          "code": "SELECT COUNT(*)\nFROM   T\nGROUP BY ID\nHAVING COUNT(*) > 3;"
+          "code": "-- (가)\nSELECT COUNT(*)\nFROM   T\nGROUP BY ID\nHAVING COUNT(*) > 3;\n\n-- (나)\nSELECT COUNT(*)\nFROM   T\nWHERE  ID = 'Z';"
         }
       ]
     },
