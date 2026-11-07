@@ -37,7 +37,7 @@ export const ROUND_48: QuizQuestion[] = [
       "논리 스키마"
     ],
     "correctIndex": 1,
-    "explanation": "데이터베이스의 3단계 스키마는 외부(사용자별 뷰), 개념(조직 전체 통합 구조), 내부(물리 저장 구조)로 나뉜다. 설명이 \"조직 전체 관점의 통합 표현\"이라고 했으므로 개념 스키마에 해당해 정답은 ②번이다.",
+    "explanation": "데이터베이스의 3단계 스키마는 외부(①, 사용자별 뷰), 개념(조직 전체 통합 구조), 내부(③, 물리 저장 구조)로 나뉜다. 설명이 \"조직 전체 관점의 통합 표현\"이라고 했으므로 개념 스키마에 해당해 정답은 ②번이다. ④ 논리 스키마는 3단계 스키마 구조의 정식 명칭이 아니다.",
     "_source": "authored",
     "references": [
       {
@@ -61,7 +61,7 @@ export const ROUND_48: QuizQuestion[] = [
       "유형 엔터티"
     ],
     "correctIndex": 3,
-    "explanation": "발생 시점에 따라 엔터티는 기본 → 중심 → 행위 세 가지로 분류된다. 기본은 가장 먼저 만들어지는 독립 엔터티(고객·상품), 중심은 기본끼리 만나 만들어지는 핵심 업무 엔터티(주문·계약), 행위는 사건이 일어날 때마다 생기는 엔터티(주문이력)이다. \"유형 엔터티\"는 이 세 가지에 포함되지 않아 정답은 ④번이다.",
+    "explanation": "발생 시점에 따라 엔터티는 기본(①) → 중심(②) → 행위(③) 세 가지로 분류된다. 기본은 가장 먼저 만들어지는 독립 엔터티(고객·상품), 중심은 기본끼리 만나 만들어지는 핵심 업무 엔터티(주문·계약), 행위는 사건이 일어날 때마다 생기는 엔터티(주문이력)이다. \"유형 엔터티\"는 이 세 가지에 포함되지 않아 정답은 ④번이다. ④ 유형 엔터티는 발생 시점이 아니라 유무형(유형·개념·사건) 기준의 분류다.",
     "_source": "authored"
   },
   {
@@ -97,7 +97,7 @@ export const ROUND_48: QuizQuestion[] = [
       "PK속성"
     ],
     "correctIndex": 0,
-    "explanation": "다른 속성에서 계산해 만든 속성이 파생속성이다. 매번 계산하지 않고 미리 계산값을 저장해 두면 조회 성능이 좋아지지만, 원본 값이 바뀌면 함께 갱신해야 한다는 부담이 따른다. 정답은 ①번이다.",
+    "explanation": "다른 속성에서 계산해 만든 속성이 파생속성이다. 매번 계산하지 않고 미리 계산값을 저장해 두면 조회 성능이 좋아지지만, 원본 값이 바뀌면 함께 갱신해야 한다는 부담이 따른다. 정답은 ①번이다. ② 기본속성은 업무에서 바로 뽑아낸 원래 속성, ③ 설계속성은 코드·일련번호처럼 설계하면서 새로 만든 속성이고, ④ PK속성은 구성 방식(PK·FK·일반) 기준의 분류라 계산값과 관계없다.",
     "_source": "authored"
   },
   {
@@ -158,7 +158,7 @@ export const ROUND_48: QuizQuestion[] = [
       "존재성"
     ],
     "correctIndex": 1,
-    "explanation": "주식별자의 4대 특성 중 최소성은 행을 식별하는 데 필요한 최소한의 속성으로 구성해야 한다는 조건이다. 빠뜨리면 식별이 안 되는 속성만 묶이도록 설계해야 한다. 정답은 ②번이다.",
+    "explanation": "주식별자의 4대 특성 중 최소성은 행을 식별하는 데 필요한 최소한의 속성으로 구성해야 한다는 조건이다. 빠뜨리면 식별이 안 되는 속성만 묶이도록 설계해야 한다. 정답은 ②번이다. ① 유일성은 각 행을 유일하게 구분하는 성질, ③ 불변성은 값이 자주 바뀌지 않아야 한다는 성질, ④ 존재성은 반드시 값이 있어야(NULL 불가) 한다는 성질이다.",
     "_source": "authored",
     "references": [
       {
@@ -182,7 +182,7 @@ export const ROUND_48: QuizQuestion[] = [
       "차수 1:1, 사원 측 필수"
     ],
     "correctIndex": 0,
-    "explanation": "관계선 끝의 까마귀발은 다(多)를 뜻하므로 한 부서에 여러 사원이 속하는 1:M 관계다. 사원 쪽 끝의 ○ 는 선택 참여를 뜻해 사원이 한 명도 없는 부서도 존재할 수 있다. 관계 차수는 참여하는 인스턴스의 수를, 선택 사양은 필수 참여인지 선택 참여인지를 나타낸다.",
+    "explanation": "관계선 끝의 까마귀발은 다(多)를 뜻하므로 한 부서에 여러 사원이 속하는 1:M 관계다. 사원 쪽 끝의 ○ 는 선택 참여를 뜻해 사원이 한 명도 없는 부서도 존재할 수 있다. 관계 차수는 참여하는 인스턴스의 수를, 선택 사양은 필수 참여인지 선택 참여인지를 나타낸다. 정답은 ①번이다. ② 사원 측이 필수라면 사원 쪽 끝이 ○ 대신 | 로 표시되고, ③ M:N 이 되려면 부서 쪽에도 까마귀발이 있어야 하며, ④ 1:1 이라면 사원 쪽에 까마귀발이 없어야 한다.",
     "_source": "authored",
     "references": [
       {
@@ -232,7 +232,7 @@ export const ROUND_48: QuizQuestion[] = [
       "키가 185 이상인 선수"
     ],
     "correctIndex": 3,
-    "explanation": "`>=`는 \"크거나 같다\"는 의미로 한국어로는 \"이상\"에 해당한다. 따라서 키 185도 포함한다. `>` 만 있으면 \"초과\"라 185는 빠진다. 정답은 ④번이다.",
+    "explanation": "`>=`는 \"크거나 같다\"는 의미로 한국어로는 \"이상\"에 해당한다. 따라서 키 185도 포함한다. `>` 만 있으면 \"초과\"(②)라 185는 빠진다. 정답은 ④번이다. ① 미만은 `<`, ③ 이하는 `<=` 에 해당한다.",
     "_source": "authored",
     "references": [
       {
@@ -256,7 +256,7 @@ export const ROUND_48: QuizQuestion[] = [
       "FROM - WHERE - GROUP BY - HAVING - SELECT - ORDER BY"
     ],
     "correctIndex": 3,
-    "explanation": "SQL은 작성 순서와 실제 실행 순서가 다르다. 먼저 FROM으로 테이블을 가져오고, WHERE로 행을 거른 뒤, GROUP BY로 묶고, HAVING으로 그룹을 거른 다음, SELECT로 컬럼을 골라내고, 마지막으로 ORDER BY로 정렬한다. 그래서 SELECT의 별칭을 WHERE에서 못 쓰고 ORDER BY에서는 쓸 수 있는 것이다. 정답은 ④번이다.",
+    "explanation": "SQL은 작성 순서와 실제 실행 순서가 다르다. 먼저 FROM으로 테이블을 가져오고, WHERE로 행을 거른 뒤, GROUP BY로 묶고, HAVING으로 그룹을 거른 다음, SELECT로 컬럼을 골라내고, 마지막으로 ORDER BY로 정렬한다. 그래서 SELECT의 별칭을 WHERE에서 못 쓰고 ORDER BY에서는 쓸 수 있는 것이다. 정답은 ④번이다. ① 은 SQL 을 작성하는 순서이고, ② 는 SELECT 를 WHERE 보다 먼저, ③ 은 ORDER BY 보다 나중에 둔 순서라 틀리다.",
     "_source": "authored"
   },
   {
@@ -691,7 +691,7 @@ export const ROUND_48: QuizQuestion[] = [
       "다중 컬럼 서브쿼리"
     ],
     "correctIndex": 3,
-    "explanation": "서브쿼리는 반환되는 행 수와 컬럼 수에 따라 단일/다중 행, 단일/다중 컬럼으로 분류된다. 두 개 이상의 컬럼을 한꺼번에 반환해 메인쿼리에서 짝지어 비교하는 것이 다중 컬럼 서브쿼리이다. 정답은 ④번이다.",
+    "explanation": "서브쿼리는 반환되는 행 수와 컬럼 수에 따라 단일/다중 행, 단일/다중 컬럼으로 분류된다. 두 개 이상의 컬럼을 한꺼번에 반환해 메인쿼리에서 짝지어 비교하는 것이 다중 컬럼 서브쿼리이다. 정답은 ④번이다. ① 단일 행·② 다중 행 서브쿼리는 반환하는 행 수 기준의 분류라 여러 컬럼을 함께 비교한다는 설명과 맞지 않고, ③ 단일 컬럼 서브쿼리는 컬럼을 하나만 반환한다.",
     "_source": "authored"
   },
   {
@@ -709,7 +709,7 @@ export const ROUND_48: QuizQuestion[] = [
       "JUNE"
     ],
     "correctIndex": 3,
-    "explanation": "`TO_DATE`로 문자열을 날짜로 변환한 뒤 `TO_CHAR(..., 'MONTH')`로 월 이름을 영문으로 추출한다. 6월에 해당하는 영문 월 이름은 JUNE이므로 정답은 ④번이다.",
+    "explanation": "`TO_DATE`로 문자열을 날짜로 변환한 뒤 `TO_CHAR(..., 'MONTH')`로 월 이름을 영문으로 추출한다. 6월에 해당하는 영문 월 이름은 JUNE이므로 정답은 ④번이다. ① MARCH·② APRIL·③ MAY 는 각각 3·4·5월이다. 참고로 Oracle 의 'MONTH' 형식은 가장 긴 월 이름(SEPTEMBER, 9자) 길이에 맞춰 뒤를 공백으로 채운다.",
     "_source": "authored",
     "references": [
       {
@@ -828,7 +828,7 @@ export const ROUND_48: QuizQuestion[] = [
       "지속성"
     ],
     "correctIndex": 2,
-    "explanation": "트랜잭션 ACID 중 격리성(Isolation)은 동시에 실행되는 다른 트랜잭션의 중간 결과로부터 영향을 받지 않고 마치 혼자 실행되는 것처럼 동작하도록 보장하는 성질이다. 정답은 ③번이다.",
+    "explanation": "트랜잭션 ACID 중 격리성(Isolation)은 동시에 실행되는 다른 트랜잭션의 중간 결과로부터 영향을 받지 않고 마치 혼자 실행되는 것처럼 동작하도록 보장하는 성질이다. 정답은 ③번이다. ① 원자성은 전부 수행되거나 전부 취소되는 성질, ② 일관성은 실행 전후 DB 가 일관된 상태를 유지하는 성질, ④ 지속성은 COMMIT 된 결과가 영구히 남는 성질이다.",
     "_source": "authored"
   },
   {
@@ -920,7 +920,7 @@ export const ROUND_48: QuizQuestion[] = [
       "NOT NULL + UNIQUE"
     ],
     "correctIndex": 3,
-    "explanation": "기본키는 행을 유일하게 식별해야 하므로 비어 있어도 안 되고(NOT NULL) 중복도 허용되지 않아야 한다(UNIQUE). 두 가지를 모두 만족시키는 ④번이 정답이다.",
+    "explanation": "기본키는 행을 유일하게 식별해야 하므로 비어 있어도 안 되고(NOT NULL) 중복도 허용되지 않아야 한다(UNIQUE). 두 가지를 모두 만족시키는 ④번이 정답이다. ① 은 NULL 을 허용해 값이 없는 행을 식별할 수 없고, ② 는 NULL 허용과 NOT NULL 이 서로 모순되며, ③ NOT NULL 만으로는 중복 값을 막지 못한다.",
     "_source": "authored"
   },
   {
@@ -1050,7 +1050,7 @@ export const ROUND_48: QuizQuestion[] = [
       "4"
     ],
     "correctIndex": 2,
-    "explanation": "ROLLBACK 으로 DELETE·UPDATE 가 취소되고 COMMIT 된 INSERT 만 유지된다. 최종 단가 2000 인 행은 처음 데이터의 002·004 와 COMMIT 된 005 의 3건이다.",
+    "explanation": "ROLLBACK 으로 DELETE·UPDATE 가 취소되고 COMMIT 된 INSERT 만 유지된다. 최종 단가 2000 인 행은 처음 데이터의 002·004 와 COMMIT 된 005 의 3건이다. 정답은 ③번이다. ② 2 는 ROLLBACK 이 두 번째 BEGIN 이후의 UPDATE 만 취소해 002 삭제가 남는다고 본 값(004·005)이고, ④ 4 는 DELETE·UPDATE 가 모두 남는다고 본 값(001·003·004·005)이다.",
     "_source": "authored",
     "references": [
       {
@@ -1100,7 +1100,7 @@ export const ROUND_48: QuizQuestion[] = [
       "(A, B), (A), (B), () 모든 조합"
     ],
     "correctIndex": 1,
-    "explanation": "ROLLUP(A, B)는 왼쪽부터 단계적으로 그룹 키를 줄여가며 (A, B), (A), () 세 가지 수준의 집계만 반환한다. (B) 단독 그룹은 만들지 않는다. CUBE(A, B)가 (A, B), (A), (B), () 모든 조합을 만드는 것과 구분해야 한다. 정답은 ②번이다.",
+    "explanation": "ROLLUP(A, B)는 왼쪽부터 단계적으로 그룹 키를 줄여가며 (A, B), (A), () 세 가지 수준의 집계만 반환한다. (B) 단독 그룹은 만들지 않는다(③). CUBE(A, B)가 (A, B), (A), (B), () 모든 조합(④)을 만드는 것과 구분해야 한다. 정답은 ②번이다. ① 은 소계·총계가 없는 GROUP BY A, B 의 결과다.",
     "_source": "authored"
   },
   {
@@ -1118,7 +1118,7 @@ export const ROUND_48: QuizQuestion[] = [
       "NULL"
     ],
     "correctIndex": 2,
-    "explanation": "`CONNECT BY LEVEL <= 2`는 LEVEL이 1, 2가 되는 두 행을 가상으로 만들어내는 패턴이다. DUAL은 한 행짜리 더미 테이블이지만 CONNECT BY와 결합하면 LEVEL 조건을 만족할 때까지 행이 복제된다. 결과적으로 LEVEL=1, LEVEL=2의 두 행이 만들어지고 COUNT(*)는 2를 반환한다. 정답은 ③번이다.",
+    "explanation": "`CONNECT BY LEVEL <= 2`는 LEVEL이 1, 2가 되는 두 행을 가상으로 만들어내는 패턴이다. DUAL은 한 행짜리 더미 테이블이지만 CONNECT BY와 결합하면 LEVEL 조건을 만족할 때까지 행이 복제된다. 결과적으로 LEVEL=1, LEVEL=2의 두 행이 만들어지고 COUNT(*)는 2를 반환한다. 정답은 ③번이다. ② 1 은 DUAL 의 한 행만 센 값이고, COUNT(*) 는 행이 없어도 0 을 돌려줄 뿐 ④ NULL 이 되지 않는다.",
     "_source": "authored",
     "references": [
       {
@@ -1160,7 +1160,7 @@ export const ROUND_48: QuizQuestion[] = [
       "REPLACE"
     ],
     "correctIndex": 1,
-    "explanation": "DROP TABLE 시 다른 테이블이 외래키로 참조 중이면 기본적으로 삭제가 거부된다. CASCADE CONSTRAINTS 옵션을 붙이면 참조하는 외래키 제약을 함께 정리한 뒤 테이블을 삭제할 수 있다. RESTRICT는 참조가 있으면 막는 보호 옵션, NO ACTION은 표준 SQL 외래키 동작 정의, REPLACE는 뷰에서 사용하는 옵션이라 의미가 다르다. 정답은 ②번이다.",
+    "explanation": "DROP TABLE 시 다른 테이블이 외래키로 참조 중이면 기본적으로 삭제가 거부된다. CASCADE CONSTRAINTS 옵션을 붙이면 참조하는 외래키 제약을 함께 정리한 뒤 테이블을 삭제할 수 있다. ① RESTRICT는 참조가 있으면 막는 보호 옵션, ③ NO ACTION은 표준 SQL 외래키 동작 정의, ④ REPLACE는 뷰에서 사용하는 옵션이라 의미가 다르다. 정답은 ②번이다.",
     "_source": "authored"
   },
   {
@@ -1250,7 +1250,7 @@ export const ROUND_48: QuizQuestion[] = [
       "TRIM"
     ],
     "correctIndex": 3,
-    "explanation": "TRIM 은 문자열 양쪽 끝의 공백(또는 지정 문자)을 제거한다. LTRIM 은 왼쪽만, RTRIM 은 오른쪽만 지운다. REPLACE 는 문자열 안의 특정 문자열을 다른 문자열로 바꾸는 함수라 공백을 바꾸면 가운데 공백까지 사라진다. 양쪽 공백만 지우는 함수는 ④ TRIM 이다.",
+    "explanation": "TRIM 은 문자열 양쪽 끝의 공백(또는 지정 문자)을 제거한다. ① LTRIM 은 왼쪽만, ② RTRIM 은 오른쪽만 지운다. ③ REPLACE 는 문자열 안의 특정 문자열을 다른 문자열로 바꾸는 함수라 공백을 바꾸면 가운데 공백까지 사라진다. 양쪽 공백만 지우는 함수는 ④ TRIM 이다.",
     "_source": "authored"
   },
   {
@@ -1268,7 +1268,7 @@ export const ROUND_48: QuizQuestion[] = [
       "6건"
     ],
     "correctIndex": 3,
-    "explanation": "`ESCAPE '@'` 옵션으로 `@_` 를 리터럴 밑줄(`_`) 로 해석한다. 따라서 패턴 `'%@_%'` 는 \"문자열 안에 `_` 를 포함하는 행\" 을 의미하며, T 테이블의 모든 6 행이 `_` 를 포함하므로 6 건이 매칭된다.",
+    "explanation": "`ESCAPE '@'` 옵션으로 `@_` 를 리터럴 밑줄(`_`) 로 해석한다. 따라서 패턴 `'%@_%'` 는 \"문자열 안에 `_` 를 포함하는 행\" 을 의미하며, T 테이블의 모든 6 행이 `_` 를 포함하므로 6 건이 매칭된다. ESCAPE 를 빼고 '%_%' 로 써도 _ 가 임의의 한 글자가 되어 한 글자 이상인 6 행이 모두 매칭되므로, 이 데이터에서는 ① 2건·② 4건·③ 5건처럼 일부만 나오는 경우가 없다.",
     "_source": "authored",
     "references": [
       {
@@ -1319,7 +1319,7 @@ export const ROUND_48: QuizQuestion[] = [
       "FULL OUTER JOIN"
     ],
     "correctIndex": 0,
-    "explanation": "CROSS JOIN(카티션 곱)은 조인 조건 없이 두 테이블의 모든 행을 짝지어 만들 수 있는 모든 조합을 반환하며, 결과 행 수는 두 테이블 행 수의 곱이 된다. INNER JOIN은 매칭 조건이 필요하고, LEFT/FULL OUTER JOIN은 매칭 조건이 있는 상태에서 미매칭 행까지 보존하는 조인이라 의미가 다르다. 정답은 ①번이다.",
+    "explanation": "CROSS JOIN(카티션 곱)은 조인 조건 없이 두 테이블의 모든 행을 짝지어 만들 수 있는 모든 조합을 반환하며, 결과 행 수는 두 테이블 행 수의 곱이 된다. ② INNER JOIN은 매칭 조건이 필요하고, ③ LEFT/④ FULL OUTER JOIN은 매칭 조건이 있는 상태에서 미매칭 행까지 보존하는 조인이라 의미가 다르다. 정답은 ①번이다.",
     "_source": "authored"
   },
   {
@@ -1337,7 +1337,7 @@ export const ROUND_48: QuizQuestion[] = [
       "오류가 발생한다."
     ],
     "correctIndex": 1,
-    "explanation": "계층형 쿼리에서 `CONNECT BY PRIOR 자식 = 부모`로 트리를 전개할 때, 다음에 따라가야 할 부모 키 값이 NULL이면 \"매칭되는 부모가 없다\"는 의미가 되어 그 가지의 전개가 거기서 멈춘다. 무한 전개·역방향 전환·오류는 발생하지 않는다. 정답은 ②번이다.",
+    "explanation": "계층형 쿼리에서 `CONNECT BY PRIOR 자식 = 부모`로 트리를 전개할 때, 다음에 따라가야 할 부모 키 값이 NULL이면 \"매칭되는 부모가 없다\"는 의미가 되어 그 가지의 전개가 거기서 멈춘다. 무한 전개(①)·역방향 전환(③)·오류(④)는 발생하지 않는다. 정답은 ②번이다.",
     "_source": "authored"
   },
   {
@@ -1355,7 +1355,7 @@ export const ROUND_48: QuizQuestion[] = [
       "Analytic Window Function"
     ],
     "correctIndex": 0,
-    "explanation": "윈도우 함수는 집계(Aggregate), 순위(Ranking), 행 순서(Row Order), 비율(Ratio) 관련 함수로 분류한다. 사용자가 직접 정의하는 User Defined Window Function 은 표준 분류에 포함되지 않는다.",
+    "explanation": "윈도우 함수는 집계(Aggregate), 순위(Ranking), 행 순서(Row Order), 비율(Ratio) 관련 함수로 분류한다. 사용자가 직접 정의하는 User Defined Window Function 은 표준 분류에 포함되지 않는다. 정답은 ①번이다. ② Aggregate·③ Ranking 은 각각 집계·순위 함수 그룹이고, ④ Analytic 은 행 순서·비율 함수처럼 분석용 윈도우 함수를 가리키는 이름이다.",
     "_source": "authored"
   },
   {
@@ -1373,7 +1373,7 @@ export const ROUND_48: QuizQuestion[] = [
       "사원명 기준 정렬"
     ],
     "correctIndex": 3,
-    "explanation": "ORDER BY 뒤에 컬럼명을 쓰지 않고 숫자를 쓰면 SELECT 절에 나열된 컬럼의 순서 번호를 의미한다. SELECT 사원ID, 사원명, 연봉 에서 1=사원ID, 2=사원명, 3=연봉 이므로 `ORDER BY 2` 는 두 번째 컬럼인 사원명을 기준으로 정렬한다. 따라서 정답은 ④ 사원명 기준 정렬.",
+    "explanation": "ORDER BY 뒤에 컬럼명을 쓰지 않고 숫자를 쓰면 SELECT 절에 나열된 컬럼의 순서 번호를 의미한다. SELECT 사원ID, 사원명, 연봉 에서 1=사원ID, 2=사원명, 3=연봉 이므로 `ORDER BY 2` 는 두 번째 컬럼인 사원명을 기준으로 정렬한다. 따라서 정답은 ④ 사원명 기준 정렬. ① 사원ID 기준 정렬은 ORDER BY 1, ② 연봉 기준 정렬은 ORDER BY 3 이고, ③ 숫자는 정렬 컬럼의 개수가 아니라 SELECT 목록의 위치를 뜻한다.",
     "_source": "authored",
     "references": [
       {
@@ -1509,7 +1509,7 @@ export const ROUND_48: QuizQuestion[] = [
       "60 / NULL / 10 / 0"
     ],
     "correctIndex": 0,
-    "explanation": "ㄱ 은 COL2 의 NULL 을 제외한 50+10=60, ㄴ 은 COL1>0 행의 COL2 가 NULL 뿐이므로 NULL, ㄷ 은 COL1 IS NOT NULL 행에서 NULL+10=10, ㄹ 은 COL1 IS NULL 행의 COL2=50 이 된다.",
+    "explanation": "ㄱ 은 COL2 의 NULL 을 제외한 50+10=60, ㄴ 은 COL1>0 행의 COL2 가 NULL 뿐이므로 NULL, ㄷ 은 COL1 IS NOT NULL 행에서 NULL+10=10, ㄹ 은 COL1 IS NULL 행의 COL2=50 이 된다. 정답은 ①번이다. ② 는 ㄴ 을 0 으로 봤지만 대상 값이 모두 NULL 이면 SUM 은 0 이 아니라 NULL 이고, ③ 은 ㄱ 을 NULL 로 봤지만 SUM 은 NULL 을 빼고 더하며, ④ 는 ㄹ 을 0 으로 봤지만 COL1 IS NULL 인 행(COL2=50)이 있다. COL1=0 인 행은 0 > 0 이 거짓이라 ㄴ 에 포함되지 않는다.",
     "_source": "authored",
     "references": [
       {
@@ -1559,7 +1559,7 @@ export const ROUND_48: QuizQuestion[] = [
       "2"
     ],
     "correctIndex": 2,
-    "explanation": "정렬 키는 ID 가 1, 3 이면 ID × 3, 아니면 ID 다. ID 1 → 3, ID 2 → 2, ID 3 → 9, ID 4 → 4 이고, 키 내림차순(9, 4, 3, 2)으로 출력하면 ID 는 3, 4, 1, 2 순이다. 세 번째로 출력되는 값은 1 이다(③).",
+    "explanation": "정렬 키는 ID 가 1, 3 이면 ID × 3, 아니면 ID 다. ID 1 → 3, ID 2 → 2, ID 3 → 9, ID 4 → 4 이고, 키 내림차순(9, 4, 3, 2)으로 출력하면 ID 는 3, 4, 1, 2 순이다. 세 번째로 출력되는 값은 1 이다(③). ① 3·② 4 는 첫 번째·두 번째로, ④ 2 는 네 번째로 출력되는 값이다.",
     "_source": "authored",
     "references": [
       {
@@ -1604,7 +1604,7 @@ export const ROUND_48: QuizQuestion[] = [
       "7"
     ],
     "correctIndex": 1,
-    "explanation": "START WITH 매니저 IS NULL → 루트는 매니저가 NULL 인 A (LEVEL=1). CONNECT BY PRIOR 사원 = 매니저 는 부모 행의 사원이 자식 행의 매니저와 매칭되는 순방향 전개. A 의 자식은 매니저='A' 인 행 → B·C·D 세 명이 LEVEL=2. 그 아래 LEVEL=3 은 B 의 자식 (E, F) + D 의 자식 (G) 으로 3 명이지만 질문은 LEVEL=2 만 묻고 있으므로 정답은 3 건.",
+    "explanation": "START WITH 매니저 IS NULL → 루트는 매니저가 NULL 인 A (LEVEL=1). CONNECT BY PRIOR 사원 = 매니저 는 부모 행의 사원이 자식 행의 매니저와 매칭되는 순방향 전개. A 의 자식은 매니저='A' 인 행 → B·C·D 세 명이 LEVEL=2. 그 아래 LEVEL=3 은 B 의 자식 (E, F) + D 의 자식 (G) 으로 3 명이지만 질문은 LEVEL=2 만 묻고 있으므로 정답은 3 건. ① 1 은 LEVEL=1 인 루트(A)만 센 값, ③ 4 는 LEVEL 2 이하(A·B·C·D)를 센 값, ④ 7 은 전체 행 수다.",
     "_source": "authored",
     "references": [
       {
@@ -1684,7 +1684,7 @@ export const ROUND_48: QuizQuestion[] = [
       "IN, TO"
     ],
     "correctIndex": 1,
-    "explanation": "권한 부여 구문은 GRANT 권한 ON 객체 TO 사용자 이므로 빈칸에는 차례로 ON, TO 가 들어간다(②). 권한 회수는 REVOKE 권한 ON 객체 FROM 사용자 처럼 FROM 을 쓴다.",
+    "explanation": "권한 부여 구문은 GRANT 권한 ON 객체 TO 사용자 이므로 빈칸에는 차례로 ON, TO 가 들어간다(②). 권한 회수는 REVOKE 권한 ON 객체 FROM 사용자 처럼 FROM 을 쓴다(③). ① 은 ON 과 TO 의 순서가 뒤바뀌었고, ④ IN 은 GRANT 구문에 쓰지 않는다.",
     "_source": "authored",
     "references": [
       {
