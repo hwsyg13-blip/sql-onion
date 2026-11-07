@@ -1,13 +1,14 @@
 {
  "last_processed_row": null,
- "last_run": "2026-11-07T06:07+09:00",
+ "last_run": "2026-11-07T14:07+09:00",
  "last_gate": {
-  "five_hour": 0.18,
-  "seven_day": 0.63
+  "five_hour": 0.17,
+  "seven_day": 0.67
  },
  "current_mission": null,
  "my_prs": [
-  195
+  195,
+  288
  ],
  "merged_prs": [
   197,
@@ -78,7 +79,7 @@
   285,
   287
  ],
- "stop_reason": "낮 실행 — 51·50회 오답 이유(#287) 후 마무리. 사용자 \"머지\" 대기",
+ "stop_reason": "낮 실행 — 49회 오답 이유(#288) 후 마무리. 사용자 \"머지\" 대기",
  "releases": [
   214,
   217,
