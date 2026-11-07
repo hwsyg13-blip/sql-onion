@@ -104,3 +104,12 @@
 | 58-22 | NTILE(2) + PARTITION | 3행 → 2부서 7행 | 1, 1, 1, 2, 2, 1, 2 | (B) 첫 설계는 PARTITION 을 빼도 결과가 같아 오답이 구별되지 않음 → 부서별 ID 배치를 바꿔 재설계 |
 | 59-42 | COUNT(*) · COUNT(컬럼) · COUNT(DISTINCT) | 중복 날짜·NULL 날짜, DISTINCT 조건 | 2 | (E) 근거 없는 오답 하나를 "DISTINCT 가 NULL 도 센다" 착각 값으로 교체 |
 | 50-46 | ROW_NUMBER 두 기준 정렬 | DESC + NULL + 동점 ID DESC, 출력은 ID 순 | 5, 4, 3, 1, 2 | (A) 출력 순서와 번호 순서가 다르다는 점을 해설에 |
+
+## 8차 2문항 (11-08 06시 정기 실행)
+
+| 문항 | 개념 | 바뀐 점 | 정답 | 검토 메모 |
+|---|---|---|---|---|
+| 47-29 | MERGE + UPDATE/INSERT 의 WHERE | 2·2행 → 대상 4행·원본 5행, NULL 대상값·NULL 원본값, 조건부 UPDATE·INSERT, 결과는 COUNT(*)·SUM | 5, 115 | 오답 세 개(5, 155 / 6, 115 / 6, 150)를 각각 "NULL 비교를 참으로", "INSERT WHERE 무시", "두 WHERE 무시" MERGE 로 재현. (D) 이론 c231 MERGE 규칙 표에 `UPDATE SET … WHERE`·`INSERT … WHERE` 가 있어 범위 안. (B) 원본에 같은 ID 가 둘인 행이 없어 Oracle ORA-30926 여지 없음 |
+| 51-26 | INSERT FIRST + NULL 비교 | 1컬럼 3행 → 2컬럼 6행, WHEN 3개 + ELSE, NULL 이 두 컬럼에 섞임 | T1 = 2, T2 = 1, T3 = 2, T4 = 1 | INSERT ALL 이면 2·2·4·1 이 됨을 CASE·조건 합계로 재현. (A) T1~T4 가 TAB1 과 같은 구조라는 전제를 문제 문장에 적음. (C) Oracle 은 WHEN 이 UNKNOWN 이면 다음 WHEN 으로 넘어감 |
+
+- 52-13(RANGE 윈도우)도 동점·간격 데이터로 설계했지만 이론 c224 가 "52회 13번 그대로다" 로 원래 표를 인용하고 있어, 이론 동결(11-14 까지) 동안 바꾸지 않기로 했다.
