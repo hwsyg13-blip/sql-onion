@@ -19,7 +19,7 @@ export const ROUND_45: QuizQuestion[] = [
       "성능 향상을 위해 초기 설계 단계부터 반정규화를 적극적으로 수행한다."
     ],
     "correctIndex": 3,
-    "explanation": "데이터 모델링의 유의점은 중복·비유연성·비일관성 회피이며, 성능 반정규화는 물리 모델 단계에서 필요에 따라 수행하는 기법일 뿐 데이터 모델링 자체의 유의점이 아니다.",
+    "explanation": "데이터 모델링의 유의점은 중복(①)·비유연성(②)·비일관성(③) 회피이며, 성능 반정규화는 물리 모델 단계에서 필요에 따라 수행하는 기법일 뿐 데이터 모델링 자체의 유의점이 아니다.",
     "_source": "authored"
   },
   {
@@ -37,7 +37,7 @@ export const ROUND_45: QuizQuestion[] = [
       "예금분류는 설계(Designed) 속성이다."
     ],
     "correctIndex": 2,
-    "explanation": "이자는 원금·이자율·예치기간으로부터 계산되는 파생 속성에 해당하지만, 이자율은 업무상 정의되어 입력되는 값이므로 기본 속성으로 분류된다.",
+    "explanation": "이자는 원금·이자율·예치기간으로부터 계산되는 파생 속성에 해당하지만, 이자율은 업무상 정의되어 입력되는 값이므로 기본 속성으로 분류된다. 정답은 ③번이다. ① 예금분류는 코드 엔터티로 분리하고 코드값(01·02)만 두는 것이 맞고, ② 원금·예치기간은 업무에서 바로 정해지는 기본 속성이며, ④ 예금분류 코드는 업무에 원래 없던 값을 설계하면서 부여한 설계 속성이다.",
     "_source": "authored",
     "references": [
       {
@@ -61,7 +61,7 @@ export const ROUND_45: QuizQuestion[] = [
       "인스턴스는 각 속성에 대응하는 값의 집합으로 구성된다."
     ],
     "correctIndex": 2,
-    "explanation": "인스턴스는 엔터티가 정의한 각 속성에 대응하는 값의 집합으로 구성된다. 예시에서 인스턴스 1은 (10001, 정고객, AAA1) 세 속성값의 조합으로 성립하므로 속성 없이는 인스턴스가 존재할 수 없다.",
+    "explanation": "인스턴스는 엔터티가 정의한 각 속성에 대응하는 값의 집합으로 구성된다. 예시에서 인스턴스 1은 (10001, 정고객, AAA1) 세 속성값의 조합으로 성립하므로 속성 없이는 인스턴스가 존재할 수 없다. 정답은 ③번이다. ① 인스턴스는 엔터티의 실제 값(한 건의 데이터)이고, ② 고객 엔터티 하나에 여러 고객 인스턴스가 들어가며, ④ 인스턴스가 속성값의 집합이라는 설명은 옳다.",
     "_source": "authored",
     "references": [
       {
@@ -136,7 +136,7 @@ export const ROUND_45: QuizQuestion[] = [
       "부모 엔터티와 자식 엔터티의 Data Life Cycle이 같을 때"
     ],
     "correctIndex": 3,
-    "explanation": "Data Life Cycle이 동일할 경우에는 부모의 식별자를 자식의 주식별자로 그대로 상속받아 식별자 관계를 구성하는 것이 자연스럽다.",
+    "explanation": "Data Life Cycle이 동일할 경우에는 부모의 식별자를 자식의 주식별자로 그대로 상속받아 식별자 관계를 구성하는 것이 자연스럽다. 정답은 ④번이다. ①·②·③ 은 부모 없는 자식 허용, 생명주기 분리, 통합 엔터티의 별도 관계처럼 비식별자 관계를 선택하는 대표적인 경우다.",
     "_source": "authored"
   },
   {
@@ -154,7 +154,7 @@ export const ROUND_45: QuizQuestion[] = [
       "운영 데이터 모델링"
     ],
     "correctIndex": 1,
-    "explanation": "논리적 데이터 모델링은 구축 대상 업무의 키·속성·관계를 정규화를 통해 정확하게 표현하므로, 데이터베이스 엔진·플랫폼과 무관하게 재사용성이 높다.",
+    "explanation": "논리적 데이터 모델링은 구축 대상 업무의 키·속성·관계를 정규화를 통해 정확하게 표현하므로, 데이터베이스 엔진·플랫폼과 무관하게 재사용성이 높다. 정답은 ②번이다. ① 개념 모델은 핵심 엔터티 위주의 추상적인 모델이라 그대로 구현에 쓰기 어렵고, ③ 물리 모델은 특정 DBMS·성능 요건에 맞춘 것이라 다른 환경에 그대로 쓰기 어려우며, ④ 운영 데이터 모델링은 모델링 3단계(개념·논리·물리)에 들지 않는다.",
     "_source": "authored"
   },
   {
@@ -172,7 +172,7 @@ export const ROUND_45: QuizQuestion[] = [
       "최초주문일자, 주문금액, 총주문금액"
     ],
     "correctIndex": 3,
-    "explanation": "파생 속성은 다른 속성으로부터 계산되거나 집계되어 도출되는 속성이다. 최초주문일자는 주문 내역에서 MIN으로, 주문금액은 단가 × 수량으로, 총주문금액은 주문금액의 합계로 도출된다.",
+    "explanation": "파생 속성은 다른 속성으로부터 계산되거나 집계되어 도출되는 속성이다. 최초주문일자는 주문 내역에서 MIN으로, 주문금액은 단가 × 수량으로, 총주문금액은 주문금액의 합계로 도출된다. 정답은 ④번이다. ① 회원번호·이름·주소, ② 상품코드·단가·상품명, ③ 주문번호·주문일자·상품코드 는 계산으로 얻는 값이 아니라 업무에서 바로 정하거나 설계하며 부여한 기본·설계 속성이다.",
     "_source": "authored"
   },
   {
@@ -208,7 +208,7 @@ export const ROUND_45: QuizQuestion[] = [
       "식별자(Identifier)"
     ],
     "correctIndex": 1,
-    "explanation": "속성(Attribute)은 업무에서 필요로 하는 인스턴스로 관리하고자 하는, 의미상 더 이상 분리되지 않는 최소의 데이터 단위이다. 엔터티는 속성의 집합, 도메인은 속성이 가질 수 있는 값의 범위, 식별자는 인스턴스를 유일하게 구분하는 속성(또는 속성 집합)이다.",
+    "explanation": "속성(Attribute)은 업무에서 필요로 하는 인스턴스로 관리하고자 하는, 의미상 더 이상 분리되지 않는 최소의 데이터 단위이다. ① 엔터티는 속성의 집합, ③ 도메인은 속성이 가질 수 있는 값의 범위, ④ 식별자는 인스턴스를 유일하게 구분하는 속성(또는 속성 집합)이다.",
     "_source": "authored"
   },
   {
@@ -226,7 +226,7 @@ export const ROUND_45: QuizQuestion[] = [
       "제3정규형"
     ],
     "correctIndex": 2,
-    "explanation": "제2정규형(2NF)은 제1정규형을 만족하면서 기본키가 아닌 모든 속성이 기본키 전체에 완전 함수 종속(Full Functional Dependency)된 상태이다. 즉 부분 함수 종속이 제거된 상태를 의미한다. 제3정규형은 이행적 종속 제거, BCNF는 모든 결정자가 후보키여야 하는 더 강한 형태이다.",
+    "explanation": "제2정규형(2NF)은 제1정규형을 만족하면서 기본키가 아닌 모든 속성이 기본키 전체에 완전 함수 종속(Full Functional Dependency)된 상태이다. 즉 부분 함수 종속이 제거된 상태를 의미한다. ④ 제3정규형은 이행적 종속 제거, ② BCNF는 모든 결정자가 후보키여야 하는 더 강한 형태이다. ① 제1정규형은 원자값 조건까지만 요구한다.",
     "_source": "authored"
   },
   {
@@ -244,7 +244,7 @@ export const ROUND_45: QuizQuestion[] = [
       "DELETE"
     ],
     "correctIndex": 1,
-    "explanation": "INSERT는 테이블에 새로운 행을 추가하는 DML 명령어이다. SELECT는 조회, UPDATE는 기존 행 수정, DELETE는 기존 행 삭제에 사용된다.",
+    "explanation": "INSERT는 테이블에 새로운 행을 추가하는 DML 명령어이다. ① SELECT는 조회, ③ UPDATE는 기존 행 수정, ④ DELETE는 기존 행 삭제에 사용된다.",
     "_source": "authored"
   },
   {
@@ -262,7 +262,7 @@ export const ROUND_45: QuizQuestion[] = [
       "ROUND(22.14)"
     ],
     "correctIndex": 0,
-    "explanation": "CEIL 은 주어진 수보다 크거나 같은 가장 작은 정수로 올림하므로 CEIL(22.14) = 23 이다(①). FLOOR 는 작거나 같은 가장 큰 정수로 내림해 22, TRUNC 는 소수점 이하를 버려 22, ROUND 는 소수 첫째 자리(1)에서 반올림해 22 다. 결과가 다른 것은 ① 이다.",
+    "explanation": "CEIL 은 주어진 수보다 크거나 같은 가장 작은 정수로 올림하므로 CEIL(22.14) = 23 이다(①). ② FLOOR 는 작거나 같은 가장 큰 정수로 내림해 22, ③ TRUNC 는 소수점 이하를 버려 22, ④ ROUND 는 소수 첫째 자리(1)에서 반올림해 22 다. 결과가 다른 것은 ① 이다.",
     "_source": "authored",
     "references": [
       {
@@ -382,7 +382,7 @@ export const ROUND_45: QuizQuestion[] = [
       "Constraints"
     ],
     "correctIndex": 2,
-    "explanation": "Lock·Unlock은 동시 접근 시의 병행성(동시성) 제어 기법이며, 데이터 무결성과는 직접적인 관련이 없다. 무결성은 제약조건, 트리거, 애플리케이션 로직 등으로 보장한다.",
+    "explanation": "Lock·Unlock은 동시 접근 시의 병행성(동시성) 제어 기법이며, 데이터 무결성과는 직접적인 관련이 없다. 무결성은 제약조건(④), 트리거(②), 애플리케이션 로직(①) 등으로 보장한다.",
     "_source": "authored"
   },
   {
@@ -400,7 +400,7 @@ export const ROUND_45: QuizQuestion[] = [
       "Product (곱집합)"
     ],
     "correctIndex": 2,
-    "explanation": "교집합(Intersection)은 두 집합에 공통으로 속한 원소만 추출한다. A ∩ B = {3, 4}이다. 합집합은 {1,2,3,4,5,6}, 차집합 A-B는 {1,2}, 곱집합은 모든 (a,b) 쌍을 만든다.",
+    "explanation": "교집합(Intersection)은 두 집합에 공통으로 속한 원소만 추출한다. A ∩ B = {3, 4}이다. ① 합집합은 {1,2,3,4,5,6}, ② 차집합 A-B는 {1,2}, ④ 곱집합은 모든 (a,b) 쌍을 만든다.",
     "_source": "authored"
   },
   {
@@ -418,7 +418,7 @@ export const ROUND_45: QuizQuestion[] = [
       "WHERE 1=2 와 함께 사용하면 구조만 복제할 수 있다."
     ],
     "correctIndex": 1,
-    "explanation": "CTAS는 NOT NULL 제약조건만 상속되며, PRIMARY KEY·UNIQUE·FOREIGN KEY·CHECK 등은 복제되지 않는다.",
+    "explanation": "CTAS는 NOT NULL 제약조건만 상속되며, PRIMARY KEY·UNIQUE·FOREIGN KEY·CHECK 등은 복제되지 않는다. 정답은 ②번이다. ① CTAS 는 SELECT 결과 데이터를 함께 복제하고, ③ 컬럼의 데이터 타입도 그대로 가져오며, ④ WHERE 1=2 처럼 거짓 조건을 주면 행 없이 구조만 만든다.",
     "_source": "authored"
   },
   {
@@ -436,7 +436,7 @@ export const ROUND_45: QuizQuestion[] = [
       "LEAD"
     ],
     "correctIndex": 0,
-    "explanation": "FIRST_VALUE는 정렬된 파티션에서 첫 번째 값을 반환한다. LAST_VALUE는 마지막 값, LAG은 이전 행의 값, LEAD는 다음 행의 값을 반환한다.",
+    "explanation": "FIRST_VALUE는 정렬된 파티션에서 첫 번째 값을 반환한다. ② LAST_VALUE는 마지막 값, ③ LAG은 이전 행의 값, ④ LEAD는 다음 행의 값을 반환한다.",
     "_source": "authored"
   },
   {
@@ -454,7 +454,7 @@ export const ROUND_45: QuizQuestion[] = [
       "SELECT 이름 FROM EMP GROUP BY 직급 HAVING 나이 = MAX(나이) AND COUNT(*) >= 9 ORDER BY 나이 DESC FETCH FIRST 1 ROWS ONLY;"
     ],
     "correctIndex": 2,
-    "explanation": "HAVING COUNT(*) >= 9 조건으로 9명 이상 직급을 먼저 추출하고, 해당 직급 직원 중 나이가 가장 많은 사람을 반환한다.",
+    "explanation": "HAVING COUNT(*) >= 9 조건으로 9명 이상 직급을 먼저 추출하고, 해당 직급 직원 중 나이가 가장 많은 사람을 반환한다. 정답은 ③번이다. ① 은 WHERE 절에 집계 함수 COUNT(*) 를 써서 오류이고, ② 는 GROUP BY 직급 인데 그룹 컬럼이 아닌 이름·나이를 SELECT·ORDER BY 에 써서 오류이며, ④ 도 HAVING 에서 그룹 컬럼이 아닌 나이를 집계 없이 비교해 오류다.",
     "_source": "authored"
   },
   {
@@ -472,7 +472,7 @@ export const ROUND_45: QuizQuestion[] = [
       "(1, 4, 5)"
     ],
     "correctIndex": 3,
-    "explanation": "SAVEPOINT A로 되돌리면 A 이후 수행된 INSERT 2, DELETE 3이 모두 취소되고, 이후 수행된 INSERT 4, 5가 COMMIT으로 확정된다.",
+    "explanation": "SAVEPOINT A로 되돌리면 A 이후 수행된 INSERT 2, DELETE 3이 모두 취소되고, 이후 수행된 INSERT 4, 5가 COMMIT으로 확정된다. 정답은 ④번이다. ① 은 ROLLBACK TO SAVEPOINT 를 무시했고, ② 는 SAVEPOINT 뒤의 INSERT 2 까지 남는다고 봤으며, ③ 은 SAVEPOINT 앞의 INSERT 1 까지 취소된다고 본 조합이다.",
     "_source": "authored",
     "references": [
       {
@@ -496,7 +496,7 @@ export const ROUND_45: QuizQuestion[] = [
       "Windowing"
     ],
     "correctIndex": 2,
-    "explanation": "ROLLUP, CUBE, GROUPING SETS는 GROUP BY의 확장으로 소계와 총계를 한 번에 생성하는 그룹핑(Grouping) 함수에 해당한다. Aggregation은 SUM·AVG 등 집계함수, Partition·Windowing은 윈도우 함수의 영역 지정에 사용된다.",
+    "explanation": "ROLLUP, CUBE, GROUPING SETS는 GROUP BY의 확장으로 소계와 총계를 한 번에 생성하는 그룹핑(Grouping) 함수에 해당한다. ① Aggregation은 SUM·AVG 등 집계함수, ② Partition·④ Windowing은 윈도우 함수의 영역 지정에 사용된다.",
     "_source": "authored"
   },
   {
@@ -606,7 +606,7 @@ export const ROUND_45: QuizQuestion[] = [
       "10"
     ],
     "correctIndex": 1,
-    "explanation": "테이블 N 개를 모두 연결하려면 최소 N-1 개의 조인 조건이 필요하다(테이블 둘을 잇는 데 조건 하나). 5개면 5 - 1 = 4 이므로 ② 이다.",
+    "explanation": "테이블 N 개를 모두 연결하려면 최소 N-1 개의 조인 조건이 필요하다(테이블 둘을 잇는 데 조건 하나). 5개면 5 - 1 = 4 이므로 ② 이다. ① 3 은 하나가 모자라 테이블 하나가 연결되지 않고, ③ 5 나 ④ 10(5개 중 2개를 고르는 모든 쌍)은 최소 개수가 아니다.",
     "_source": "authored"
   },
   {
@@ -808,7 +808,7 @@ export const ROUND_45: QuizQuestion[] = [
       "NULL"
     ],
     "correctIndex": 0,
-    "explanation": "NVL로 NULL을 0으로 치환하면 대상은 {10, 20, 0}이 되고, 분모도 3이 되어 (10+20+0)/3 = 10이다.",
+    "explanation": "NVL로 NULL을 0으로 치환하면 대상은 {10, 20, 0}이 되고, 분모도 3이 되어 (10+20+0)/3 = 10이다. 정답은 ①번이다. ② 15 는 NVL 없이 AVG(C1) 로 NULL 을 빼고 계산한 값이고, NVL 로 NULL 을 0 으로 바꿨으므로 ④ NULL 이 나올 수 없다.",
     "_source": "authored",
     "references": [
       {
@@ -850,7 +850,7 @@ export const ROUND_45: QuizQuestion[] = [
       "(1, 1, 1)"
     ],
     "correctIndex": 2,
-    "explanation": "INSERT FIRST는 먼저 만족한 WHEN 절로만 분기한다. N1=1은 ELSE(TABLE3), N1=2와 N1=5는 첫 WHEN(TABLE1)으로 이동하므로 TABLE1=2, TABLE2=0, TABLE3=1이다.",
+    "explanation": "INSERT FIRST는 먼저 만족한 WHEN 절로만 분기한다. N1=1은 ELSE(TABLE3), N1=2와 N1=5는 첫 WHEN(TABLE1)으로 이동하므로 TABLE1=2, TABLE2=0, TABLE3=1이다. 정답은 ③번이다. ② (2, 1, 0) 은 INSERT ALL 처럼 5 를 TABLE2 에도 넣고 ELSE 행을 빠뜨린 값(INSERT ALL 이면 (2, 1, 1))이고, ④ (1, 1, 1) 은 5 가 더 좁은 두 번째 WHEN 으로 간다고 본 값이다. INSERT FIRST 는 위에서부터 처음 참인 WHEN 하나만 따른다.",
     "_source": "authored",
     "references": [
       {
@@ -1012,7 +1012,7 @@ export const ROUND_45: QuizQuestion[] = [
       "오류 발생"
     ],
     "correctIndex": 2,
-    "explanation": "`NOT IN` 목록에 NULL 이 포함되면 `A.N1 <> NULL` 평가가 UNKNOWN 이 되어 어떤 행에서도 조건이 TRUE 로 평가되지 않는다. 따라서 매칭되지 않는 행조차 결과에서 제외되어 0 건이 반환된다.",
+    "explanation": "`NOT IN` 목록에 NULL 이 포함되면 `A.N1 <> NULL` 평가가 UNKNOWN 이 되어 어떤 행에서도 조건이 TRUE 로 평가되지 않는다. 따라서 매칭되지 않는 행조차 결과에서 제외되어 0 건이 반환된다. 정답은 ③번이다. ② T3 에 없는 1 만 나오게 하려면 서브쿼리에서 NULL 을 빼야(WHERE B.N1 IS NOT NULL) 하고, ① 2·3 은 T3 에 있으므로 어떤 경우에도 모든 행이 나오지 않으며, NULL 이 있어도 문법 오류는 아니라 ④ 오류가 나지 않는다.",
     "_source": "authored",
     "references": [
       {
@@ -1072,7 +1072,7 @@ export const ROUND_45: QuizQuestion[] = [
       "①은 외곽에서만 NVL 을 적용하므로 ②보다 항상 작은 값을 반환한다."
     ],
     "correctIndex": 1,
-    "explanation": "NULL 과의 산술 연산은 NULL 을 반환한다. ① 은 각 컬럼을 NVL 로 0 치환 후 더하므로 모든 행이 합계에 반영되어 (10+20)+(0+30)+(40+0)+(50+50)=200 을 얻는다. ② 는 COL1+COL2 결과가 NULL 인 행이 SUM 에서 제외되어 30+100=130 만 합산된다. 따라서 ② 는 NULL 행이 제외되므로 ① 과 결과가 달라질 수 있다.",
+    "explanation": "NULL 과의 산술 연산은 NULL 을 반환한다. ① 은 각 컬럼을 NVL 로 0 치환 후 더하므로 모든 행이 합계에 반영되어 (10+20)+(0+30)+(40+0)+(50+50)=200 을 얻는다. ② 는 COL1+COL2 결과가 NULL 인 행이 SUM 에서 제외되어 30+100=130 만 합산된다. 따라서 ② 는 NULL 행이 제외되므로 ① 과 결과가 달라질 수 있다. 1번 보기는 결과가 200 과 130 으로 다르므로 틀리고, 3번 보기는 ② 가 NULL 행을 0 으로 보정하지 않고 오히려 더 작은 값(130)을 내므로 틀리며, 4번 보기는 ① 이 NVL 을 컬럼마다(안쪽에서) 적용해 더 큰 값(200)을 내므로 틀리다. 정답은 2번 보기다.",
     "_source": "authored",
     "references": [
       {
@@ -1313,7 +1313,7 @@ export const ROUND_45: QuizQuestion[] = [
       "메인쿼리와 서브쿼리가 있을 때 최종 결과는 항상 서브쿼리의 결과를 따른다."
     ],
     "correctIndex": 3,
-    "explanation": "WHERE 절 서브쿼리는 메인쿼리 행의 필터 조건으로 사용될 뿐, FROM 절 인라인 뷰가 아닌 한 서브쿼리가 최종 결과를 결정하지 않는다.",
+    "explanation": "WHERE 절 서브쿼리는 메인쿼리 행의 필터 조건으로 사용될 뿐, FROM 절 인라인 뷰가 아닌 한 서브쿼리가 최종 결과를 결정하지 않는다. 정답은 ④번이다. ①·②·③ 은 WHERE 절 서브쿼리의 용도, 종류(단일 행·다중 행), 상관 서브쿼리의 특징을 바르게 설명했다.",
     "_source": "authored"
   },
   {
@@ -1455,7 +1455,7 @@ export const ROUND_45: QuizQuestion[] = [
       "지정된 컬럼 순서에 따라 계층적 소계만 생성한다."
     ],
     "correctIndex": 1,
-    "explanation": "CUBE는 지정된 모든 컬럼의 가능한 조합에 대해 소계와 총계를 생성한다. ROLLUP은 지정 순서에 따른 계층적 소계만 생성한다는 점에서 구분된다.",
+    "explanation": "CUBE는 지정된 모든 컬럼의 가능한 조합에 대해 소계와 총계를 생성한다. ROLLUP은 지정 순서에 따른 계층적 소계만(④) 생성한다는 점에서 구분된다. 정답은 ②번이다. ① 은 (부서, 직급) 세부 집계가 빠졌고, ③ 은 소계·총계가 없는 일반 GROUP BY 부서, 직급 의 결과다.",
     "_source": "authored",
     "references": [
       {
@@ -1479,7 +1479,7 @@ export const ROUND_45: QuizQuestion[] = [
       "FULL OUTER JOIN"
     ],
     "correctIndex": 0,
-    "explanation": "FROM A, B 처럼 조인 조건 없이 테이블을 나열하면 두 테이블의 모든 행 조합(카티션 곱)이 나온다. ANSI 문법에서 이와 같은 것은 CROSS JOIN 이다(①). INNER JOIN 은 ON 조건이 필요하고, NATURAL JOIN 은 같은 이름 컬럼으로 등가 조인하며, FULL OUTER JOIN 도 조인 조건이 있어야 한다.",
+    "explanation": "FROM A, B 처럼 조인 조건 없이 테이블을 나열하면 두 테이블의 모든 행 조합(카티션 곱)이 나온다. ANSI 문법에서 이와 같은 것은 CROSS JOIN 이다(①). ② INNER JOIN 은 ON 조건이 필요하고, ③ NATURAL JOIN 은 같은 이름 컬럼으로 등가 조인하며, ④ FULL OUTER JOIN 도 조인 조건이 있어야 한다.",
     "_source": "authored",
     "references": [
       {
@@ -1643,7 +1643,7 @@ export const ROUND_45: QuizQuestion[] = [
       "DCL (Data Control Language)"
     ],
     "correctIndex": 3,
-    "explanation": "GRANT(권한 부여), REVOKE(권한 회수)는 데이터에 대한 접근 제어를 정의하는 DCL(Data Control Language)에 속한다. DDL은 CREATE·ALTER·DROP, DML은 SELECT·INSERT·UPDATE·DELETE, TCL은 COMMIT·ROLLBACK·SAVEPOINT이다.",
+    "explanation": "GRANT(권한 부여), REVOKE(권한 회수)는 데이터에 대한 접근 제어를 정의하는 DCL(Data Control Language)에 속한다. ① DDL은 CREATE·ALTER·DROP, ② DML은 SELECT·INSERT·UPDATE·DELETE, ③ TCL은 COMMIT·ROLLBACK·SAVEPOINT이다.",
     "_source": "authored"
   },
   {
@@ -1661,7 +1661,7 @@ export const ROUND_45: QuizQuestion[] = [
       "ㄱ 2, ㄴ 2"
     ],
     "correctIndex": 0,
-    "explanation": "NTILE(3) 은 전체 8 개 행을 3 개의 그룹으로 최대한 균등하게 분할한다. 8 = 3 + 3 + 2 이므로 첫 번째 그룹에 3 개, 두 번째 그룹에 3 개, 세 번째 그룹에 2 개씩 배정된다. 표의 행 라벨이 'A=첫그룹', 'B=두번째그룹(고정 3)', 'C=세번째그룹' 일 때 (ㄱ)=첫그룹 건수=3, (ㄴ)=세번째그룹 건수=2 가 된다.",
+    "explanation": "NTILE(3) 은 전체 8 개 행을 3 개의 그룹으로 최대한 균등하게 분할한다. 8 = 3 + 3 + 2 이므로 첫 번째 그룹에 3 개, 두 번째 그룹에 3 개, 세 번째 그룹에 2 개씩 배정된다. 표의 행 라벨이 'A=첫그룹', 'B=두번째그룹(고정 3)', 'C=세번째그룹' 일 때 (ㄱ)=첫그룹 건수=3, (ㄴ)=세번째그룹 건수=2 가 된다. 정답은 ①번이다. 남는 2 행은 앞 그룹부터 하나씩 더 배정되므로 마지막 그룹이 가장 적다. ② 는 첫 번째·세 번째 그룹을 뒤바꿨고, ③ 3·3·3 은 9 행, ④ 2·3·2 는 7 행이라 8 행과 맞지 않는다.",
     "_source": "authored",
     "references": [
       {
@@ -1740,7 +1740,7 @@ export const ROUND_45: QuizQuestion[] = [
       "RANGE"
     ],
     "correctIndex": 3,
-    "explanation": "현재 값에서 +0 ~ +50 범위에 속하는 값들의 COUNT를 구해야 하므로, 물리적 행이 아닌 값의 범위를 기준으로 하는 RANGE를 사용한다. ROWS는 행 단위로 누적한다.",
+    "explanation": "현재 값에서 +0 ~ +50 범위에 속하는 값들의 COUNT를 구해야 하므로, 물리적 행이 아닌 값의 범위를 기준으로 하는 RANGE를 사용한다. ① ROWS는 행 단위로 누적한다. 정답은 ④번이다. ② GROUPS 는 값이 아니라 같은 값끼리 묶은 그룹 개수로 범위를 정하는 단위라 50 FOLLOWING 이 값 +50 이 아니라 50 개 그룹 뒤를 뜻하게 되고, ③ PARTITION 은 PARTITION BY 로 행을 나눌 때 쓰는 키워드라 프레임 단위 자리에 올 수 없다.",
     "_source": "authored",
     "references": [
       {
@@ -1794,7 +1794,7 @@ export const ROUND_45: QuizQuestion[] = [
       "0"
     ],
     "correctIndex": 1,
-    "explanation": "AND가 OR보다 우선순위가 높아 \"(V1='A' AND V2='T1') OR V2='T2' OR V2='T3'\"로 해석된다. 세 행 모두 하나 이상의 조건을 만족하므로 결과는 3건이다.",
+    "explanation": "AND가 OR보다 우선순위가 높아 \"(V1='A' AND V2='T1') OR V2='T2' OR V2='T3'\"로 해석된다. 세 행 모두 하나 이상의 조건을 만족하므로 결과는 3건이다. ① 1 은 V1 = 'A' 가 OR 전체에 걸린다고 본 값이고, ③ 2 는 V1 이 NULL 인 3행이 빠진다고 본 값이지만 3행은 V2 = 'T3' 만으로 참이 된다.",
     "_source": "authored",
     "references": [
       {
@@ -1844,7 +1844,7 @@ export const ROUND_45: QuizQuestion[] = [
       "1"
     ],
     "correctIndex": 0,
-    "explanation": "'_L%'은 두 번째 문자가 L인 문자열을 의미한다. ALX(두 번째 L), CLARE(두 번째 L), BLX(두 번째 L) 세 건이 해당된다.",
+    "explanation": "'_L%'은 두 번째 문자가 L인 문자열을 의미한다. ALX(두 번째 L), CLARE(두 번째 L), BLX(두 번째 L) 세 건이 해당된다. SMITH·JOHN 은 두 번째 글자가 M·O 라 빠지므로 ② 2·③ 4·④ 1 은 맞지 않는다.",
     "_source": "authored",
     "references": [
       {
