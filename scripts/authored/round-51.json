@@ -689,37 +689,53 @@
     {
       "subject": "2과목",
       "number": 26,
-      "title": "아래 TAB1 테이블에 대해 INSERT FIRST 를 수행한 뒤 T1, T2, T3 의 행 수로 옳은 것은?",
+      "title": "아래 TAB1 테이블에 대해 INSERT FIRST 를 수행한 뒤 T1, T2, T3, T4 의 행 수로 옳은 것은? (T1~T4 는 TAB1 과 구조가 같은 빈 테이블)",
       "options": [
-        "T1 = 2, T2 = 0, T3 = 1",
-        "T1 = 1, T2 = 1, T3 = 1",
-        "T1 = 3, T2 = 0, T3 = 0",
-        "T1 = 0, T2 = 1, T3 = 2"
+        "T1 = 2, T2 = 1, T3 = 2, T4 = 1",
+        "T1 = 2, T2 = 2, T3 = 4, T4 = 1",
+        "T1 = 2, T2 = 1, T3 = 2, T4 = 0",
+        "T1 = 2, T2 = 1, T3 = 1, T4 = 2"
       ],
       "correctIndex": 0,
-      "explanation": "`INSERT FIRST` 는 조건을 만족하는 첫 번째 `WHEN` 만 실행한다. C1 = 1: 두 WHEN 모두 불만족 → ELSE T3, C1 = 2: 첫 WHEN 만족 → T1, C1 = 4: 첫 WHEN 만족 → T1 (두 번째 WHEN 도 만족하지만 FIRST 라 무시). 결과: T1 = 2 행, T2 = 0 행, T3 = 1 행. ② 는 4 가 두 번째 WHEN(>= 4)으로 간다고 본 결과, ③ 은 1 도 T1 에 들어간다고 본 결과다.",
+      "explanation": "INSERT FIRST 는 위에서부터 WHEN 을 차례로 따져 처음 참이 되는 절 하나만 실행하고, 참인 절이 하나도 없을 때만 ELSE 를 실행한다. NULL 과의 비교는 UNKNOWN 이라 참이 아니므로 다음 WHEN 으로 넘어간다. 행별로 보면 (1, A) 는 1 >= 4 가 거짓, C2 = 'A' 가 참이라 T2. (2, B) 는 앞의 두 조건이 거짓이고 2 >= 2 가 참이라 T3. (4, NULL) 과 (5, A) 는 첫 WHEN 이 참이라 T1 이다(5 는 C2 = 'A' 도 참이지만 FIRST 라 무시). (NULL, C) 는 세 조건이 모두 참이 아니라 ELSE 로 T4. (3, NULL) 은 C2 = 'A' 가 UNKNOWN 이라 넘어가고 3 >= 2 가 참이라 T3 이다. 따라서 T1 = 2, T2 = 1, T3 = 2, T4 = 1 이다(①). ② 는 참인 WHEN 을 모두 실행하는 INSERT ALL 의 결과(4 는 T1·T3, 5 는 T1·T2·T3)이고, ③ 은 C1 이 NULL 인 행은 ELSE 에도 들어가지 않는다고 본 값, ④ 는 비교 결과가 UNKNOWN 이면 곧바로 ELSE 로 간다고 보고 (3, NULL) 을 T4 에 넣은 값이다.",
       "references": [
         {
           "type": "table",
+          "caption": "TAB1 테이블",
           "headers": [
-            "TAB1.C1"
+            "C1",
+            "C2"
           ],
           "rows": [
             [
-              "1"
+              "1",
+              "A"
             ],
             [
-              "2"
+              "2",
+              "B"
             ],
             [
-              "4"
+              "4",
+              "NULL"
+            ],
+            [
+              "5",
+              "A"
+            ],
+            [
+              "NULL",
+              "C"
+            ],
+            [
+              "3",
+              "NULL"
             ]
-          ],
-          "caption": "TAB1 테이블"
+          ]
         },
         {
           "type": "sql",
-          "code": "INSERT FIRST\n  WHEN C1 >= 2 THEN INTO T1 VALUES (C1)\n  WHEN C1 >= 4 THEN INTO T2 VALUES (C1)\n  ELSE INTO T3 VALUES (C1)\nSELECT * FROM TAB1;"
+          "code": "INSERT FIRST\n  WHEN C1 >= 4  THEN INTO T1 VALUES (C1, C2)\n  WHEN C2 = 'A' THEN INTO T2 VALUES (C1, C2)\n  WHEN C1 >= 2  THEN INTO T3 VALUES (C1, C2)\n  ELSE               INTO T4 VALUES (C1, C2)\nSELECT C1, C2 FROM TAB1;"
         }
       ]
     },

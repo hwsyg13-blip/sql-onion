@@ -747,19 +747,19 @@
     {
       "subject": "2과목",
       "number": 29,
-      "title": "아래 MERGE 구문 수행 후 결과로 옳은 것은?",
+      "title": "아래 MERGE 구문을 수행한 뒤 A 테이블을 조회한 결과(COUNT(*), SUM(V))로 옳은 것은?",
       "options": [
-        "100, 100, 100",
-        "100, 0, 100",
-        "5, 0, 7",
-        "100, 0"
+        "5, 155",
+        "5, 115",
+        "6, 115",
+        "6, 150"
       ],
       "correctIndex": 1,
-      "explanation": "MERGE 는 ON 조건으로 대상(A)과 원본(B)을 매칭해, 매칭되면 UPDATE, 매칭되지 않으면 INSERT 를 수행한다. ID 1 은 A·B 에 모두 있어 UPDATE 로 V=100 이 되고, ID 2 는 B 에 없어 매칭 대상이 아니므로 V=0 으로 남으며, ID 3 은 A 에 없어 INSERT 로 V=100 이 추가된다. 따라서 A 의 V 는 100, 0, 100 이다. ① 은 모든 행이 UPDATE 된다고 본 경우, ③ 은 B 의 값이 그대로 반영된다고 본 경우, ④ 는 WHEN NOT MATCHED 가 INSERT 를 수행하지 않는다고 본 경우이다.",
+      "explanation": "MERGE 는 ON 조건으로 A(대상)와 B(원본)를 짝지은 뒤 짝이 있으면 UPDATE, 없으면 INSERT 를 하는데, 이 문제는 두 절에 모두 WHERE 가 붙어 있다. 행별로 보면 ID 1 은 15 > 10 이 참이라 15 로 바뀐다. ID 2 는 B 에 없어 MERGE 대상이 아니므로 20 그대로 남는다. ID 3 은 25 > 30 이 거짓이라 30 그대로다. ID 4 는 40 > NULL 이 UNKNOWN 이라 UPDATE 되지 않고 NULL 로 남는다. B 에만 있는 ID 5 는 V 가 50 이라 INSERT 되고, ID 6 은 V 가 NULL 이라 INSERT 의 WHERE 에 걸려 들어가지 않는다. 최종 A 는 (1, 15), (2, 20), (3, 30), (4, NULL), (5, 50) 이므로 COUNT(*) 는 NULL 행까지 센 5, SUM(V) 는 NULL 을 뺀 15 + 20 + 30 + 50 = 115 다. 정답은 ②번이다. ① 5, 155 는 NULL 과의 비교를 참으로 보고 ID 4 를 40 으로 바꾼 값, ③ 6, 115 는 INSERT 의 WHERE 를 놓쳐 ID 6 을 넣은 값, ④ 6, 150 은 두 WHERE 를 모두 무시해 ID 3·4 를 25·40 으로 바꾸고 ID 6 까지 넣은 값이다.",
       "references": [
         {
           "type": "table",
-          "caption": "A 테이블 (TGT)",
+          "caption": "A 테이블 (대상)",
           "headers": [
             "ID",
             "V"
@@ -767,17 +767,25 @@
           "rows": [
             [
               "1",
-              "0"
+              "10"
             ],
             [
               "2",
-              "0"
+              "20"
+            ],
+            [
+              "3",
+              "30"
+            ],
+            [
+              "4",
+              "NULL"
             ]
           ]
         },
         {
           "type": "table",
-          "caption": "B 테이블 (SRC)",
+          "caption": "B 테이블 (원본)",
           "headers": [
             "ID",
             "V"
@@ -785,17 +793,29 @@
           "rows": [
             [
               "1",
-              "5"
+              "15"
             ],
             [
               "3",
-              "7"
+              "25"
+            ],
+            [
+              "4",
+              "40"
+            ],
+            [
+              "5",
+              "50"
+            ],
+            [
+              "6",
+              "NULL"
             ]
           ]
         },
         {
           "type": "sql",
-          "code": "MERGE INTO A USING B ON (A.ID = B.ID)\nWHEN MATCHED THEN UPDATE SET A.V = 100\nWHEN NOT MATCHED THEN INSERT (ID, V) VALUES (B.ID, 100);"
+          "code": "MERGE INTO A USING B ON (A.ID = B.ID)\nWHEN MATCHED THEN\n  UPDATE SET A.V = B.V WHERE B.V > A.V\nWHEN NOT MATCHED THEN\n  INSERT (ID, V) VALUES (B.ID, B.V) WHERE B.V IS NOT NULL;\n\nSELECT COUNT(*), SUM(V) FROM A;"
         }
       ]
     },

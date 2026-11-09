@@ -1681,19 +1681,20 @@ export const ROUND_49: QuizQuestion[] = [
     "round": 49,
     "subject": "2과목",
     "number": 47,
-    "title": "아래 SQL 의 결과로 옳은 것은?",
+    "title": "아래 SQL 의 결과로 옳은 것은? (Oracle 기준, 오름차순에서 NULL 은 마지막)",
     "options": [
-      "1",
-      "2",
-      "3",
-      "4"
+      "(A, 3), (C, 3), (NULL, 3)",
+      "(A, 2), (C, 2)",
+      "(A, 2), (C, 2), (NULL, 3)",
+      "(A, 2), (C, 3), (NULL, 3)"
     ],
     "correctIndex": 2,
-    "explanation": "GROUP BY ID 로 묶으면 A 2건, B 2건, C 3건, D 1건이 된다. HAVING COUNT(*) > 2 를 만족하는 그룹은 C 하나뿐이므로 COUNT(*) 값 3 이 반환된다. ① 1 은 조건을 만족하는 그룹 수, ② 2 는 2건짜리 그룹의 COUNT, ④ 4 는 전체 그룹 수로 본 값이다.",
+    "explanation": "실행 순서대로 따라가면 된다. 먼저 WHERE 가 COL1 = 6 인 (C, 6) 한 행만 지운다(COL1 이 NULL 인 행은 IS NULL 로 남는다). 다음 GROUP BY ID 로 묶으면 A 는 1·2·NULL, B 는 3·4, C 는 5·7·NULL, D 는 8, 그리고 ID 가 NULL 인 행 9·10·11 도 하나의 그룹이 된다. HAVING COUNT(*) > 2 는 행 수로 세므로 A(3)·C(3)·NULL 그룹(3)만 남는다. SELECT 의 COUNT(COL1) 은 NULL 을 빼고 세어 A 2, C 2, NULL 그룹 3 이고, 오름차순에서 NULL 은 마지막이라 (A, 2), (C, 2), (NULL, 3) 이다. 정답은 ③번이다. ① 은 COUNT(COL1) 을 COUNT(*) 처럼 NULL 까지 센 값, ② 는 ID 가 NULL 인 행이 그룹에서 빠진다고 본 값, ④ 는 WHERE 를 놓쳐 (C, 6) 이 남아 C 의 COUNT(COL1) 을 3 으로 센 값이다.",
     "_source": "authored",
     "references": [
       {
         "type": "table",
+        "caption": "TAB1 테이블",
         "headers": [
           "ID",
           "COL1"
@@ -1706,6 +1707,10 @@ export const ROUND_49: QuizQuestion[] = [
           [
             "A",
             "2"
+          ],
+          [
+            "A",
+            "NULL"
           ],
           [
             "B",
@@ -1728,15 +1733,30 @@ export const ROUND_49: QuizQuestion[] = [
             "7"
           ],
           [
+            "C",
+            "NULL"
+          ],
+          [
             "D",
             "8"
+          ],
+          [
+            "NULL",
+            "9"
+          ],
+          [
+            "NULL",
+            "10"
+          ],
+          [
+            "NULL",
+            "11"
           ]
-        ],
-        "caption": "TAB1 테이블"
+        ]
       },
       {
         "type": "sql",
-        "code": "SELECT COUNT(*) FROM TAB1 GROUP BY ID HAVING COUNT(*) > 2;"
+        "code": "SELECT ID, COUNT(COL1) AS CNT\nFROM   TAB1\nWHERE  COL1 <> 6 OR COL1 IS NULL\nGROUP  BY ID\nHAVING COUNT(*) > 2\nORDER  BY ID;"
       }
     ]
   },

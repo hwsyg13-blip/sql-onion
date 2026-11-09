@@ -104,3 +104,26 @@
 | 58-22 | NTILE(2) + PARTITION | 3행 → 2부서 7행 | 1, 1, 1, 2, 2, 1, 2 | (B) 첫 설계는 PARTITION 을 빼도 결과가 같아 오답이 구별되지 않음 → 부서별 ID 배치를 바꿔 재설계 |
 | 59-42 | COUNT(*) · COUNT(컬럼) · COUNT(DISTINCT) | 중복 날짜·NULL 날짜, DISTINCT 조건 | 2 | (E) 근거 없는 오답 하나를 "DISTINCT 가 NULL 도 센다" 착각 값으로 교체 |
 | 50-46 | ROW_NUMBER 두 기준 정렬 | DESC + NULL + 동점 ID DESC, 출력은 ID 순 | 5, 4, 3, 1, 2 | (A) 출력 순서와 번호 순서가 다르다는 점을 해설에 |
+
+## 8차 2문항 (11-08 06시 정기 실행)
+
+| 문항 | 개념 | 바뀐 점 | 정답 | 검토 메모 |
+|---|---|---|---|---|
+| 47-29 | MERGE + UPDATE/INSERT 의 WHERE | 2·2행 → 대상 4행·원본 5행, NULL 대상값·NULL 원본값, 조건부 UPDATE·INSERT, 결과는 COUNT(*)·SUM | 5, 115 | 오답 세 개(5, 155 / 6, 115 / 6, 150)를 각각 "NULL 비교를 참으로", "INSERT WHERE 무시", "두 WHERE 무시" MERGE 로 재현. (D) 이론 c231 MERGE 규칙 표에 `UPDATE SET … WHERE`·`INSERT … WHERE` 가 있어 범위 안. (B) 원본에 같은 ID 가 둘인 행이 없어 Oracle ORA-30926 여지 없음 |
+| 51-26 | INSERT FIRST + NULL 비교 | 1컬럼 3행 → 2컬럼 6행, WHEN 3개 + ELSE, NULL 이 두 컬럼에 섞임 | T1 = 2, T2 = 1, T3 = 2, T4 = 1 | INSERT ALL 이면 2·2·4·1 이 됨을 CASE·조건 합계로 재현. (A) T1~T4 가 TAB1 과 같은 구조라는 전제를 문제 문장에 적음. (C) Oracle 은 WHEN 이 UNKNOWN 이면 다음 WHEN 으로 넘어감 |
+
+- 52-13(RANGE 윈도우)도 동점·간격 데이터로 설계했지만 이론 c224 가 "52회 13번 그대로다" 로 원래 표를 인용하고 있어, 이론 동결(11-14 까지) 동안 바꾸지 않기로 했다.
+
+## 9차 2문항 (11-09 22시 정기 실행)
+
+| 문항 | 개념 | 바뀐 점 | 정답 | 검토 메모 |
+|---|---|---|---|---|
+| 50-13 | LEFT OUTER JOIN 의 ON 조건 vs WHERE 조건 | 5·3행 서술형 보기 → 6·5행에 NULL 키·중복 키(D 두 행), 같은 조건을 ON 에 둔 SQL 과 WHERE 에 둔 SQL 의 COUNT 비교 | ㄱ 6, ㄴ 2 | 오답 (7, 2)·(6, 6)·(6, 3) 을 각각 "ON 의 BETWEEN 무시", "WHERE 도 왼쪽 행 보존", "NULL = NULL 참" 으로 재현. (A) 두 SQL 은 보기 번호와 겹치지 않게 ㄱ·ㄴ 으로 표시 |
+| 49-47 | WHERE → GROUP BY(NULL 그룹) → HAVING COUNT(*) → COUNT(컬럼) | 8행 → 13행, NULL 컬럼값·NULL 그룹 키, WHERE 로 한 행 제거, 결과는 (ID, CNT) 목록 | (A, 2), (C, 2), (NULL, 3) | 오답 셋을 "COUNT(컬럼)도 NULL 셈", "NULL 그룹 없음", "WHERE 놓침" 으로 재현. (C) 오름차순 NULL 위치를 "Oracle 기준" 으로 문제에 적음(정답 구별에는 영향 없음) |
+
+## 10차 2문항 (11-09 22시 정기 실행)
+
+| 문항 | 개념 | 바뀐 점 | 정답 | 검토 메모 |
+|---|---|---|---|---|
+| 48-44 | 집계 함수와 NULL (값이 없을 때 COUNT 0 / 나머지 NULL) | 5개 → 6개 결과(COUNT(DISTINCT), NVL(SUM), COUNT(전부 NULL 컬럼) 추가), WHERE 로 행 제한 | ㄴ, ㅁ | 오답 셋을 "NVL 놓침", "COUNT 도 NULL", "AVG 에 NULL 섞이면 NULL" 착각으로 구성. 결과는 PostgreSQL 로 확인 |
+| 54-29 | GROUP BY + AVG + HAVING COUNT(컬럼) | 7행 3그룹 → 10행 4그룹(값이 모두 NULL 인 그룹 포함), HAVING 추가, 결과는 (그룹, 평균) 목록 | (1, 15), (2, 30), (4, 40) | AVG(NVL) 값, HAVING COUNT(*) 값을 각각 실행해 오답 ①·② 재현. (B) ④ 는 ② 에 "전부 NULL 그룹의 AVG = 0" 착각을 더한 값 |

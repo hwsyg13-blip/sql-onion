@@ -1099,17 +1099,18 @@ export const ROUND_54: QuizQuestion[] = [
     "number": 29,
     "title": "아래 데이터에 대한 SQL 의 결과로 옳은 것은?",
     "options": [
-      "10, 20, 25",
-      "10, 20, NULL",
-      "10, 20, 30",
-      "10, 20, 20"
+      "(1, 10), (2, 10), (4, 40)",
+      "(1, 15), (2, 30), (3, NULL), (4, 40)",
+      "(1, 15), (2, 30), (4, 40)",
+      "(1, 15), (2, 30), (3, 0), (4, 40)"
     ],
     "correctIndex": 2,
-    "explanation": "AVG 는 NULL 을 제외하고 평균을 구한다. 나이_그룹 1 은 (10+10)/2 = 10, 2 는 (20+20)/2 = 20, 3 은 NULL 을 빼고 (30+30)/2 = 30 이다(③). NULL 을 0 으로 보고 세 행으로 나누면 20(④)이 되지만 AVG 는 그렇게 계산하지 않는다. ② 는 NULL 이 섞이면 AVG 도 NULL 이 된다고 본 결과다.",
+    "explanation": "AVG 와 COUNT(컬럼) 은 모두 NULL 을 빼고 계산한다. 그룹별로 보면 1 은 10·20 의 평균 15, 2 는 30 하나뿐이라 30, 4 는 (30 + 50) / 2 = 40 이다. 3 은 나이가 모두 NULL 이라 COUNT(나이) 가 0 이므로 HAVING COUNT(나이) >= 1 에서 그룹째 빠진다. 결과는 (1, 15), (2, 30), (4, 40) 이고 정답은 ③번이다. ① 은 NULL 을 0 으로 보고 세 행으로 나눈 AVG(NVL(나이, 0)) 의 값, ② 는 HAVING 의 COUNT(나이) 를 COUNT(*) 처럼 행 수로 세어 3 그룹을 남긴 값, ④ 는 거기에 더해 값이 모두 NULL 인 그룹의 AVG 를 0 으로 본 값이다.",
     "_source": "authored",
     "references": [
       {
         "type": "table",
+        "caption": "TAB 테이블",
         "headers": [
           "나이_그룹",
           "나이"
@@ -1121,34 +1122,45 @@ export const ROUND_54: QuizQuestion[] = [
           ],
           [
             "1",
-            "10"
-          ],
-          [
-            "2",
             "20"
           ],
           [
+            "1",
+            "NULL"
+          ],
+          [
             "2",
-            "20"
-          ],
-          [
-            "3",
             "30"
           ],
           [
-            "3",
-            "30"
+            "2",
+            "NULL"
+          ],
+          [
+            "2",
+            "NULL"
           ],
           [
             "3",
             "NULL"
+          ],
+          [
+            "3",
+            "NULL"
+          ],
+          [
+            "4",
+            "30"
+          ],
+          [
+            "4",
+            "50"
           ]
-        ],
-        "caption": "TAB 테이블"
+        ]
       },
       {
         "type": "sql",
-        "code": "SELECT AVG(나이) AS 평균_나이\nFROM   TAB\nGROUP BY 나이_그룹;"
+        "code": "SELECT 나이_그룹, AVG(나이) AS 평균_나이\nFROM   TAB\nGROUP  BY 나이_그룹\nHAVING COUNT(나이) >= 1\nORDER  BY 나이_그룹;"
       }
     ]
   },
