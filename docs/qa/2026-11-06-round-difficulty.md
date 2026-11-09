@@ -120,3 +120,10 @@
 |---|---|---|---|---|
 | 50-13 | LEFT OUTER JOIN 의 ON 조건 vs WHERE 조건 | 5·3행 서술형 보기 → 6·5행에 NULL 키·중복 키(D 두 행), 같은 조건을 ON 에 둔 SQL 과 WHERE 에 둔 SQL 의 COUNT 비교 | ㄱ 6, ㄴ 2 | 오답 (7, 2)·(6, 6)·(6, 3) 을 각각 "ON 의 BETWEEN 무시", "WHERE 도 왼쪽 행 보존", "NULL = NULL 참" 으로 재현. (A) 두 SQL 은 보기 번호와 겹치지 않게 ㄱ·ㄴ 으로 표시 |
 | 49-47 | WHERE → GROUP BY(NULL 그룹) → HAVING COUNT(*) → COUNT(컬럼) | 8행 → 13행, NULL 컬럼값·NULL 그룹 키, WHERE 로 한 행 제거, 결과는 (ID, CNT) 목록 | (A, 2), (C, 2), (NULL, 3) | 오답 셋을 "COUNT(컬럼)도 NULL 셈", "NULL 그룹 없음", "WHERE 놓침" 으로 재현. (C) 오름차순 NULL 위치를 "Oracle 기준" 으로 문제에 적음(정답 구별에는 영향 없음) |
+
+## 10차 2문항 (11-09 22시 정기 실행)
+
+| 문항 | 개념 | 바뀐 점 | 정답 | 검토 메모 |
+|---|---|---|---|---|
+| 48-44 | 집계 함수와 NULL (값이 없을 때 COUNT 0 / 나머지 NULL) | 5개 → 6개 결과(COUNT(DISTINCT), NVL(SUM), COUNT(전부 NULL 컬럼) 추가), WHERE 로 행 제한 | ㄴ, ㅁ | 오답 셋을 "NVL 놓침", "COUNT 도 NULL", "AVG 에 NULL 섞이면 NULL" 착각으로 구성. 결과는 PostgreSQL 로 확인 |
+| 54-29 | GROUP BY + AVG + HAVING COUNT(컬럼) | 7행 3그룹 → 10행 4그룹(값이 모두 NULL 인 그룹 포함), HAVING 추가, 결과는 (그룹, 평균) 목록 | (1, 15), (2, 30), (4, 40) | AVG(NVL) 값, HAVING COUNT(*) 값을 각각 실행해 오답 ①·② 재현. (B) ④ 는 ② 에 "전부 NULL 그룹의 AVG = 0" 착각을 더한 값 |
