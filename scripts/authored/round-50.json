@@ -258,15 +258,15 @@
     {
       "subject": "2과목",
       "number": 13,
-      "title": "아래 OUTER JOIN SQL 의 결과로 옳은 것은?",
+      "title": "아래 두 OUTER JOIN SQL 의 결과(ㄱ, ㄴ)로 옳은 것은?",
       "options": [
-        "TAB1 과 TAB2 가 매칭되는 3 행만 반환된다.",
-        "TAB1 의 5행 모두 반환 (매칭되지 않은 D, E 의 TAB2 컬럼은 NULL)",
-        "ON 조건을 만족하지 않는 D, E 가 제외되어 TAB1 의 4 행만 반환된다.",
-        "양쪽 조인 키가 모두 NULL 이라 공집합이 반환된다."
+        "ㄱ 7, ㄴ 2",
+        "ㄱ 6, ㄴ 2",
+        "ㄱ 6, ㄴ 6",
+        "ㄱ 6, ㄴ 3"
       ],
       "correctIndex": 1,
-      "explanation": "LEFT OUTER JOIN 은 좌측 TAB1 의 모든 행을 보존하며, ON 조건 불일치 행의 우측 컬럼은 NULL 로 채워진다. ON 절은 두 조건의 AND 결합으로, C1 매칭과 B.C2 BETWEEN 1 AND 3 을 둘 다 만족해야 매칭된다. TAB2 에는 D 가 (D,4) 로 존재하지만 C2=4 가 BETWEEN 1 AND 3 을 만족하지 못하므로 매칭에서 제외된다 → TAB1 의 D 행은 미매칭 처리되어 우측 컬럼이 NULL. E 는 TAB2 자체에 없어 NULL. 결과적으로 TAB1 의 5행 모두 보존되고 D·E 의 TAB2 컬럼만 NULL 이 된다. 보기 ① 은 INNER JOIN 처럼 본 결과(실제 매칭은 B·C 두 행), ③ 은 ON 조건이 안 맞는 행이 빠진다고 본 결과이고, ④ 조인 키에 NULL 이 없다.",
+      "explanation": "LEFT OUTER JOIN 에서 ON 절 조건은 \"어떤 오른쪽 행과 짝지을지\" 를 정할 뿐 왼쪽 행을 지우지 않고, WHERE 절 조건은 조인이 끝난 결과에서 행을 거른다. ㄱ 은 C1 이 같고 B.C2 가 1~3 인 TAB2 행하고만 짝짓는다. B 는 (B, 2), C 는 (C, 3) 과 짝지어지고, D 는 (D, 4)·(D, 7) 모두 C2 가 범위 밖이라 짝이 없다. A·E 는 TAB2 에 없고, C1 이 NULL 인 행은 NULL = NULL 이 참이 아니라 짝이 없다. 짝이 없는 행도 TAB2 쪽을 NULL 로 채워 한 행씩 남으므로 TAB1 의 6 행이 그대로 6 이다. ㄴ 은 먼저 C1 만으로 짝지어 A(짝 없음), B, C, D 두 행(D 4·D 7), E(짝 없음), NULL(짝 없음) 의 7 행을 만든 뒤 WHERE 로 B.C2 가 1~3 인 행만 남긴다. 짝이 없어 B.C2 가 NULL 인 행도 BETWEEN 이 참이 아니라 빠지므로 (B, 2)·(C, 3) 두 행, 2 다. 정답은 ②번이다. ① 은 ㄱ 에서 ON 의 BETWEEN 을 놓쳐 D 를 두 번 센 값, ③ 은 WHERE 조건도 ON 조건처럼 왼쪽 행을 남긴다고 본 값, ④ 는 NULL = NULL 을 참으로 보고 (NULL, 6) 과 (NULL, 1) 을 짝지은 값이다.",
       "references": [
         {
           "type": "table",
@@ -295,6 +295,10 @@
             [
               "E",
               "5"
+            ],
+            [
+              "NULL",
+              "6"
             ]
           ]
         },
@@ -317,12 +321,20 @@
             [
               "D",
               "4"
+            ],
+            [
+              "D",
+              "7"
+            ],
+            [
+              "NULL",
+              "1"
             ]
           ]
         },
         {
           "type": "sql",
-          "code": "SELECT * FROM TAB1 A\nLEFT OUTER JOIN TAB2 B\nON (A.C1 = B.C1 AND B.C2 BETWEEN 1 AND 3);"
+          "code": "-- ㄱ\nSELECT COUNT(*)\nFROM   TAB1 A LEFT OUTER JOIN TAB2 B\nON     (A.C1 = B.C1 AND B.C2 BETWEEN 1 AND 3);\n\n-- ㄴ\nSELECT COUNT(*)\nFROM   TAB1 A LEFT OUTER JOIN TAB2 B\nON     (A.C1 = B.C1)\nWHERE  B.C2 BETWEEN 1 AND 3;"
         }
       ]
     },

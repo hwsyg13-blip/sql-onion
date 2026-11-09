@@ -113,3 +113,10 @@
 | 51-26 | INSERT FIRST + NULL 비교 | 1컬럼 3행 → 2컬럼 6행, WHEN 3개 + ELSE, NULL 이 두 컬럼에 섞임 | T1 = 2, T2 = 1, T3 = 2, T4 = 1 | INSERT ALL 이면 2·2·4·1 이 됨을 CASE·조건 합계로 재현. (A) T1~T4 가 TAB1 과 같은 구조라는 전제를 문제 문장에 적음. (C) Oracle 은 WHEN 이 UNKNOWN 이면 다음 WHEN 으로 넘어감 |
 
 - 52-13(RANGE 윈도우)도 동점·간격 데이터로 설계했지만 이론 c224 가 "52회 13번 그대로다" 로 원래 표를 인용하고 있어, 이론 동결(11-14 까지) 동안 바꾸지 않기로 했다.
+
+## 9차 2문항 (11-09 22시 정기 실행)
+
+| 문항 | 개념 | 바뀐 점 | 정답 | 검토 메모 |
+|---|---|---|---|---|
+| 50-13 | LEFT OUTER JOIN 의 ON 조건 vs WHERE 조건 | 5·3행 서술형 보기 → 6·5행에 NULL 키·중복 키(D 두 행), 같은 조건을 ON 에 둔 SQL 과 WHERE 에 둔 SQL 의 COUNT 비교 | ㄱ 6, ㄴ 2 | 오답 (7, 2)·(6, 6)·(6, 3) 을 각각 "ON 의 BETWEEN 무시", "WHERE 도 왼쪽 행 보존", "NULL = NULL 참" 으로 재현. (A) 두 SQL 은 보기 번호와 겹치지 않게 ㄱ·ㄴ 으로 표시 |
+| 49-47 | WHERE → GROUP BY(NULL 그룹) → HAVING COUNT(*) → COUNT(컬럼) | 8행 → 13행, NULL 컬럼값·NULL 그룹 키, WHERE 로 한 행 제거, 결과는 (ID, CNT) 목록 | (A, 2), (C, 2), (NULL, 3) | 오답 셋을 "COUNT(컬럼)도 NULL 셈", "NULL 그룹 없음", "WHERE 놓침" 으로 재현. (C) 오름차순 NULL 위치를 "Oracle 기준" 으로 문제에 적음(정답 구별에는 영향 없음) |
