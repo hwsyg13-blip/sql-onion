@@ -87,7 +87,7 @@ export const ROUND_46: QuizQuestion[] = [
       "기본속성, 파생속성, 설계속성"
     ],
     "correctIndex": 0,
-    "explanation": "기본속성은 업무 분석에서 자연스럽게 도출되는 속성, 설계속성은 업무에는 없으나 설계 과정에서 새로 만든 속성(코드·자동부여 ID 등), 파생속성은 다른 속성에서 계산·변형해 만든 속성이다. ㄱ→기본, ㄴ→설계, ㄷ→파생 순으로 매핑되어 정답은 ①이다.",
+    "explanation": "기본속성은 업무 분석에서 자연스럽게 도출되는 속성, 설계속성은 업무에는 없으나 설계 과정에서 새로 만든 속성(코드·자동부여 ID 등), 파생속성은 다른 속성에서 계산·변형해 만든 속성이다. ㄱ→기본, ㄴ→설계, ㄷ→파생 순으로 매핑되어 정답은 ①이다. ② 는 ㄱ·ㄷ, ③ 은 ㄱ·ㄴ, ④ 는 ㄴ·ㄷ 의 짝을 서로 바꿔 놓았다.",
     "_source": "authored",
     "references": [
       {
@@ -111,7 +111,7 @@ export const ROUND_46: QuizQuestion[] = [
       "연관속성"
     ],
     "correctIndex": 2,
-    "explanation": "다른 속성에서 계산되거나 변형되어 만들어진 속성을 파생속성이라 한다. 예: 생년월일에서 계산되는 나이, 단가·수량에서 계산되는 합계 등이 파생속성에 해당한다. 기본속성·설계속성과 달리 다른 값에 종속된다는 특징을 갖는다.",
+    "explanation": "다른 속성에서 계산되거나 변형되어 만들어진 속성을 파생속성이라 한다. 예: 생년월일에서 계산되는 나이, 단가·수량에서 계산되는 합계 등이 파생속성에 해당한다. ① 기본속성·② 설계속성과 달리 다른 값에 종속된다는 특징을 갖는다. 정답은 ③번이다. ④ 연관속성은 SQL 전문가 가이드의 속성 분류(기본·설계·파생)에 없는 이름이다.",
     "_source": "authored"
   },
   {
@@ -129,7 +129,7 @@ export const ROUND_46: QuizQuestion[] = [
       "BCNF"
     ],
     "correctIndex": 1,
-    "explanation": "제2정규형은 제1정규형을 만족하면서, 기본키가 아닌 모든 속성이 주식별자에 완전 함수 종속되어야 한다는 조건을 추가한다. 즉 복합키의 일부에만 종속되는 부분 함수 종속이 제거된 상태이며, 설명이 정확히 이 조건이므로 정답은 ②이다.",
+    "explanation": "제2정규형은 제1정규형을 만족하면서, 기본키가 아닌 모든 속성이 주식별자에 완전 함수 종속되어야 한다는 조건을 추가한다. 즉 복합키의 일부에만 종속되는 부분 함수 종속이 제거된 상태이며, 설명이 정확히 이 조건이므로 정답은 ②이다. ① 제1정규형은 원자값 조건까지만 요구하고, ③ 제3정규형은 여기에 이행 종속 제거를, ④ BCNF 는 모든 결정자가 후보키일 것을 더 요구한다.",
     "_source": "authored",
     "references": [
       {
@@ -178,7 +178,7 @@ export const ROUND_46: QuizQuestion[] = [
       "보조식별자, 주식별자, 본질식별자, 외부식별자"
     ],
     "correctIndex": 0,
-    "explanation": "주식별자는 엔터티의 모든 인스턴스를 대표해 구분하는 식별자, 보조식별자는 인스턴스 구분은 가능하나 대표성이 없는 식별자, 본질식별자는 업무에서 자연스럽게 발생한 식별자(예: 교육이력의 사원번호 + 수강일자. 주문번호처럼 인위적으로 부여한 번호는 인조식별자), 외부식별자는 다른 엔터티와의 관계로부터 상속받은 식별자(외래키)이다. ㄱ→주, ㄴ→보조, ㄷ→본질, ㄹ→외부 순서이므로 정답은 ①이다.",
+    "explanation": "주식별자는 엔터티의 모든 인스턴스를 대표해 구분하는 식별자, 보조식별자는 인스턴스 구분은 가능하나 대표성이 없는 식별자, 본질식별자는 업무에서 자연스럽게 발생한 식별자(예: 교육이력의 사원번호 + 수강일자. 주문번호처럼 인위적으로 부여한 번호는 인조식별자), 외부식별자는 다른 엔터티와의 관계로부터 상속받은 식별자(외래키)이다. ㄱ→주, ㄴ→보조, ㄷ→본질, ㄹ→외부 순서이므로 정답은 ①이다. ② 는 ㄱ·ㄴ 과 ㄷ·ㄹ 을, ③ 은 ㄴ·ㄹ 을, ④ 는 ㄱ·ㄴ 을 서로 바꿔 놓았다.",
     "_source": "authored",
     "references": [
       {
@@ -202,7 +202,7 @@ export const ROUND_46: QuizQuestion[] = [
       "인스턴스(Instance)"
     ],
     "correctIndex": 2,
-    "explanation": "도메인은 각 속성이 가질 수 있는 값의 범위(데이터 타입·길이·제약)를 정의하는 개념이다. 엔터티는 관리 대상 집합, 식별자는 인스턴스를 구분하는 속성, 인스턴스는 엔터티의 개별 발생을 의미한다.",
+    "explanation": "도메인은 각 속성이 가질 수 있는 값의 범위(데이터 타입·길이·제약)를 정의하는 개념이다. ① 엔터티는 관리 대상 집합, ② 식별자는 인스턴스를 구분하는 속성, ④ 인스턴스는 엔터티의 개별 발생을 의미한다.",
     "_source": "authored"
   },
   {
@@ -220,7 +220,7 @@ export const ROUND_46: QuizQuestion[] = [
       "ㄱ 유일성, ㄴ 대표성"
     ],
     "correctIndex": 1,
-    "explanation": "주식별자의 4대 특성은 유일성·최소성·불변성·존재성이다. 최소성은 유일성을 만족하는 속성의 최소 집합 조건이고, 불변성은 한 번 부여된 식별자 값이 변경되지 않아야 한다는 요건이다.",
+    "explanation": "주식별자의 4대 특성은 유일성·최소성·불변성·존재성이다. 최소성은 유일성을 만족하는 속성의 최소 집합 조건이고, 불변성은 한 번 부여된 식별자 값이 변경되지 않아야 한다는 요건이다. 정답은 ②번이다. ③ 은 ㄱ·ㄴ 을 뒤바꿨고, ① 대표성은 주식별자와 보조식별자를 가르는 기준일 뿐 주식별자 4대 특성이 아니며, ④ 유일성은 이미 첫 줄에 나온 특성이다.",
     "_source": "authored",
     "references": [
       {
@@ -343,7 +343,7 @@ export const ROUND_46: QuizQuestion[] = [
       "ㄱ 관리자 IS NULL, ㄴ 관리자, ㄷ 사원"
     ],
     "correctIndex": 0,
-    "explanation": "조직도의 최상위 직원은 자신의 관리자가 없으므로 관리자 컬럼이 NULL이다. 따라서 START WITH 관리자 IS NULL로 출발점을 잡고, 부모(상사)의 사원번호가 자식(부하)의 관리자번호와 같다는 조건으로 트리를 위에서 아래로 펼치므로 PRIOR 사원 = 관리자가 된다. ㄱ→관리자 IS NULL, ㄴ→사원, ㄷ→관리자.",
+    "explanation": "조직도의 최상위 직원은 자신의 관리자가 없으므로 관리자 컬럼이 NULL이다. 따라서 START WITH 관리자 IS NULL로 출발점을 잡고, 부모(상사)의 사원번호가 자식(부하)의 관리자번호와 같다는 조건으로 트리를 위에서 아래로 펼치므로 PRIOR 사원 = 관리자가 된다. ㄱ→관리자 IS NULL, ㄴ→사원, ㄷ→관리자. 정답은 ①번이다. ② 는 사원 IS NULL 이라 시작 행이 없고 전개 방향도 거꾸로이며, ③ 관리자 = 사원 은 자기 자신이 자기 관리자인 행이어야 해 보통 시작 행이 없고, ④ PRIOR 관리자 = 사원 은 아래에서 위로 올라가는 역방향 전개라 최상위 행에서 출발하면 더 올라갈 곳이 없다.",
     "_source": "authored",
     "references": [
       {
@@ -587,7 +587,7 @@ export const ROUND_46: QuizQuestion[] = [
       "세 SQL 모두 NULL을 반환한다."
     ],
     "correctIndex": 1,
-    "explanation": "공집합에 대한 집계함수 중 COUNT는 0을, 나머지(SUM·MIN·MAX·AVG)는 NULL을 반환한다. NVL로 감싸면 0으로 치환된다.",
+    "explanation": "공집합에 대한 집계함수 중 COUNT는 0을, 나머지(SUM·MIN·MAX·AVG)는 NULL을 반환한다. NVL로 감싸면 0으로 치환된다. 첫 SQL 을 NULL 로 본 1번 보기는 NVL 을 놓쳤고, 셋째 SQL(COUNT) 을 NULL 로 본 3번 보기와 모두 NULL 이라는 4번 보기는 COUNT 가 공집합에서도 0 을 돌려준다는 점을 놓쳤다. 정답은 2번 보기다.",
     "_source": "authored",
     "references": [
       {
@@ -719,7 +719,7 @@ export const ROUND_46: QuizQuestion[] = [
       "두 테이블 중 어느 쪽도 보장되지 않는다."
     ],
     "correctIndex": 0,
-    "explanation": "LEFT OUTER JOIN은 FROM 절의 좌측 테이블 모든 행을 결과에 보존하고, 우측에서 매칭되는 행이 없으면 NULL로 채운다. 좌측이 TUTOR이므로 SESSIONS에 짝이 없어도 TUTOR의 모든 행은 항상 반환된다.",
+    "explanation": "LEFT OUTER JOIN은 FROM 절의 좌측 테이블 모든 행을 결과에 보존하고, 우측에서 매칭되는 행이 없으면 NULL로 채운다. 좌측이 TUTOR이므로 SESSIONS에 짝이 없어도 TUTOR의 모든 행은 항상 반환된다. 정답은 ①번이다. ② SESSIONS 의 행은 TUTOR 와 짝이 맞을 때만 나오므로 보장되지 않고, ③ 두 테이블을 모두 보존하려면 FULL OUTER JOIN 이어야 하며, ④ LEFT OUTER JOIN 은 왼쪽 TUTOR 의 모든 행을 보장한다(짝이 없는 T03 강감찬은 S.DATE 가 NULL).",
     "_source": "authored",
     "references": [
       {
@@ -786,7 +786,7 @@ export const ROUND_46: QuizQuestion[] = [
       "NTILE(5) OVER (ORDER BY VAL)"
     ],
     "correctIndex": 1,
-    "explanation": "VAL 이 20 인 행이 두 개라 동률이 생긴다. RANK 는 1, 2, 2, 4, 5 로 동률 다음 순위를 건너뛰고 DENSE_RANK 는 1, 2, 2, 3, 4 로 건너뛰지 않는다. ROW_NUMBER 는 동률과 무관하게 1, 2, 3, 4, 5 이고 NTILE(5) 도 다섯 그룹으로 나누어 1, 2, 3, 4, 5 가 된다. 마지막 행의 값이 4 인 DENSE_RANK 만 나머지(5)와 다르다.",
+    "explanation": "VAL 이 20 인 행이 두 개라 동률이 생긴다. ① RANK 는 1, 2, 2, 4, 5 로 동률 다음 순위를 건너뛰고 DENSE_RANK 는 1, 2, 2, 3, 4 로 건너뛰지 않는다. ③ ROW_NUMBER 는 동률과 무관하게 1, 2, 3, 4, 5 이고 ④ NTILE(5) 도 다섯 그룹으로 나누어 1, 2, 3, 4, 5 가 된다. 마지막 행의 값이 4 인 ② DENSE_RANK 만 나머지(5)와 다르다.",
     "_source": "authored",
     "references": [
       {
@@ -950,7 +950,7 @@ export const ROUND_46: QuizQuestion[] = [
       "오류가 발생한다."
     ],
     "correctIndex": 1,
-    "explanation": "ROWS BETWEEN CURRENT ROW AND CURRENT ROW로 프레임을 설정하면 누적 범위가 현재 한 행으로 한정된다. 한 행만 본 MAX는 곧 자기 자신이므로, 모든 행에서 자신의 연봉 값이 그대로 반환된다.",
+    "explanation": "ROWS BETWEEN CURRENT ROW AND CURRENT ROW로 프레임을 설정하면 누적 범위가 현재 한 행으로 한정된다. 한 행만 본 MAX는 곧 자기 자신이므로, 모든 행에서 자신의 연봉 값이 그대로 반환된다. 정답은 ②번이다. ① 전체 최대를 모든 행에 주려면 OVER () 처럼 파티션 전체를 프레임으로 잡아야 하고, ③ 이전 행까지라면 ROWS BETWEEN UNBOUNDED PRECEDING AND 1 PRECEDING 같은 프레임이 필요하며, ④ CURRENT ROW 를 시작과 끝에 모두 쓰는 프레임은 문법상 허용된다.",
     "_source": "authored",
     "references": [
       {
@@ -974,7 +974,7 @@ export const ROUND_46: QuizQuestion[] = [
       "SELECT JOB FROM EMP UNION SELECT JOB FROM EMP2;"
     ],
     "correctIndex": 0,
-    "explanation": "EXISTS는 행의 존재 여부만 판별할 뿐 중복을 제거하지 않는다. 나머지는 DISTINCT, GROUP BY, UNION 모두 중복을 제거한다.",
+    "explanation": "EXISTS는 행의 존재 여부만 판별할 뿐 중복을 제거하지 않는다. 나머지 ② DISTINCT, ③ GROUP BY, ④ UNION 은 모두 중복을 제거한다.",
     "_source": "authored"
   },
   {
@@ -1010,7 +1010,7 @@ export const ROUND_46: QuizQuestion[] = [
       "\"single-row subquery returns more than one row\" 오류가 발생한다."
     ],
     "correctIndex": 3,
-    "explanation": "서브쿼리 SELECT MAX(급여) FROM EMP GROUP BY 부서 는 부서마다 한 행씩, 여러 행을 반환한다. 그런데 비교 연산자 >= 는 단일 행만 받을 수 있어 \"single-row subquery returns more than one row\"(ORA-01427) 오류가 난다(④). 부서별 최고 급여와 비교하려면 >= ALL 이나 IN, 연관 서브쿼리를 써야 한다.",
+    "explanation": "서브쿼리 SELECT MAX(급여) FROM EMP GROUP BY 부서 는 부서마다 한 행씩, 여러 행을 반환한다. 그런데 비교 연산자 >= 는 단일 행만 받을 수 있어 \"single-row subquery returns more than one row\"(ORA-01427) 오류가 난다(④). 부서별 최고 급여와 비교하려면 >= ALL 이나 IN, 연관 서브쿼리를 써야 한다. ① 은 서브쿼리에 GROUP BY 가 없을 때(전체 MAX 하나와 비교)를 가정한 것이고, ② 는 부서별 최고 급여와 짝지어 비교하는 연관 서브쿼리를 썼을 때의 결과이며, ③ 은 오류로 실행되지 않으므로 틀리다.",
     "_source": "authored",
     "references": [
       {
@@ -1059,7 +1059,7 @@ export const ROUND_46: QuizQuestion[] = [
       "두 SQL 모두 오류가 발생한다."
     ],
     "correctIndex": 1,
-    "explanation": "①은 GROUP BY에 포함되지 않은 C를 ORDER BY에 사용하여 오라클에서 오류가 발생한다. ②의 HAVING COUNT(C)는 집계함수의 인자로 사용한 것이므로 허용된다.",
+    "explanation": "①은 GROUP BY에 포함되지 않은 C를 ORDER BY에 사용하여 오라클에서 오류가 발생한다. ②의 HAVING COUNT(C)는 집계함수의 인자로 사용한 것이므로 허용된다. SQL ① 이 오류이므로 1번·3번 보기는 틀리고, SQL ② 는 정상 실행되므로 4번 보기도 틀리다. 정답은 2번 보기다.",
     "_source": "authored",
     "references": [
       {
@@ -1151,7 +1151,7 @@ export const ROUND_46: QuizQuestion[] = [
       "30"
     ],
     "correctIndex": 2,
-    "explanation": "CROSS JOIN 은 조인 조건 없이 두 테이블의 모든 행을 조합하므로 결과 행 수는 두 테이블 행 수의 곱이다. 5 × 3 = 15 행(③).",
+    "explanation": "CROSS JOIN 은 조인 조건 없이 두 테이블의 모든 행을 조합하므로 결과 행 수는 두 테이블 행 수의 곱이다. 5 × 3 = 15 행(③). ① 5 는 사원 행 수만 본 값, ② 8 은 두 행 수를 더한 값이다.",
     "_source": "authored"
   },
   {
@@ -1169,7 +1169,7 @@ export const ROUND_46: QuizQuestion[] = [
       "ROLLBACK"
     ],
     "correctIndex": 1,
-    "explanation": "GRANT는 사용자에게 객체 접근 권한을 부여하는 DCL 명령이다. REVOKE는 권한을 회수하며, COMMIT·ROLLBACK은 트랜잭션 제어(TCL)에 해당하므로 권한 부여 명령과는 무관하다.",
+    "explanation": "GRANT는 사용자에게 객체 접근 권한을 부여하는 DCL 명령이다. ③ REVOKE는 권한을 회수하며, ① COMMIT·④ ROLLBACK은 트랜잭션 제어(TCL)에 해당하므로 권한 부여 명령과는 무관하다.",
     "_source": "authored"
   },
   {
@@ -1187,7 +1187,7 @@ export const ROUND_46: QuizQuestion[] = [
       "GROUP BY 컬럼과 집계 컬럼이 함께 올 수 없으므로 오류가 발생한다."
     ],
     "correctIndex": 0,
-    "explanation": "GROUP BY 운전자로 같은 운전자끼리 한 그룹으로 묶고, COUNT(운행번호)로 그룹별 운행 건수를 센다. 결과적으로 운전자 한 명당 한 행씩 운행횟수가 나오므로 운전자별 운행 횟수를 모두 확인할 수 있다.",
+    "explanation": "GROUP BY 운전자로 같은 운전자끼리 한 그룹으로 묶고, COUNT(운행번호)로 그룹별 운행 건수를 센다. 결과적으로 운전자 한 명당 한 행씩 운행횟수가 나오므로 운전자별 운행 횟수를 모두 확인할 수 있다. 정답은 ①번이다. ② 전체 총 운행 횟수만 보려면 GROUP BY 를 빼야 하고, ③ COUNT(운행번호) 가 있으므로 건수도 나오며, ④ GROUP BY 컬럼과 집계 함수는 함께 SELECT 할 수 있다.",
     "_source": "authored",
     "references": [
       {
@@ -1307,7 +1307,7 @@ export const ROUND_46: QuizQuestion[] = [
       "(A,1,NULL), (A,2,50), (A,1,100)"
     ],
     "correctIndex": 1,
-    "explanation": "COL1, COL2는 오름차순이므로 1이 먼저 배치되고, 이후 COL3는 DESC이므로 오라클 기준 NULL이 가장 먼저 정렬된다.",
+    "explanation": "COL1, COL2는 오름차순이므로 1이 먼저 배치되고, 이후 COL3는 DESC이므로 오라클 기준 NULL이 가장 먼저 정렬된다. 정답은 ②번이다. ① 은 DESC 에서 NULL 을 맨 뒤로 보냈고, ③ 은 COL2 까지 내림차순으로 본 순서다. COL2 는 정렬 방향이 없어 기본값 ASC 이므로 1 이 먼저 온다.",
     "_source": "authored",
     "references": [
       {
@@ -1357,7 +1357,7 @@ export const ROUND_46: QuizQuestion[] = [
       "CONCAT"
     ],
     "correctIndex": 0,
-    "explanation": "SUBSTR(Oracle)·SUBSTRING(SQL Server)은 문자열의 M번째 위치에서 N개 문자를 잘라 반환하는 부분 문자열 함수이다. INSTR은 특정 문자의 위치를 찾고, REPLACE는 문자열을 치환하며, CONCAT은 문자열을 이어 붙이므로 자르기 동작과는 다르다.",
+    "explanation": "SUBSTR(Oracle)·SUBSTRING(SQL Server)은 문자열의 M번째 위치에서 N개 문자를 잘라 반환하는 부분 문자열 함수이다. ② INSTR은 특정 문자의 위치를 찾고, ③ REPLACE는 문자열을 치환하며, ④ CONCAT은 문자열을 이어 붙이므로 자르기 동작과는 다르다.",
     "_source": "authored",
     "references": [
       {
@@ -1381,7 +1381,7 @@ export const ROUND_46: QuizQuestion[] = [
       "지속성(Durability)"
     ],
     "correctIndex": 0,
-    "explanation": "원자성(Atomicity)은 트랜잭션의 모든 연산이 모두 성공해 반영되거나, 하나라도 실패하면 전혀 수행되지 않은 상태로 남아야 한다는 ALL OR NOTHING 속성이다. 일관성·고립성·지속성과 함께 ACID를 구성한다.",
+    "explanation": "원자성(Atomicity)은 트랜잭션의 모든 연산이 모두 성공해 반영되거나, 하나라도 실패하면 전혀 수행되지 않은 상태로 남아야 한다는 ALL OR NOTHING 속성이다. 일관성·고립성·지속성과 함께 ACID를 구성한다. ② 일관성은 실행 전후에 DB 가 일관된 상태를 유지하는 성질, ③ 고립성은 다른 트랜잭션의 영향을 받지 않는 성질, ④ 지속성은 COMMIT 된 결과가 영구히 남는 성질이다.",
     "_source": "authored",
     "references": [
       {
@@ -1474,7 +1474,7 @@ export const ROUND_46: QuizQuestion[] = [
       "S, A, B, B"
     ],
     "correctIndex": 1,
-    "explanation": "CASE 식은 위에서 아래로 평가되며, 첫 번째로 참이 되는 WHEN의 결과가 반환된다. 1행(50,150)과 2행(100,250)은 COL1<=100을 만족해 'B', 3행(200,150)은 COL1>100이지만 COL2<=200이어서 'A', 4행(300,400)은 어느 조건도 만족하지 않아 ELSE의 'S'가 된다.",
+    "explanation": "CASE 식은 위에서 아래로 평가되며, 첫 번째로 참이 되는 WHEN의 결과가 반환된다. 1행(50,150)과 2행(100,250)은 COL1<=100을 만족해 'B', 3행(200,150)은 COL1>100이지만 COL2<=200이어서 'A', 4행(300,400)은 어느 조건도 만족하지 않아 ELSE의 'S'가 된다. 정답은 ②번이다. ① 은 1·2행을 'A' 로 봤지만 첫 WHEN(COL1 <= 100)이 먼저 참이라 'B' 이고, ③ 은 3행을 'B' 로 봤지만 COL1 = 200 은 첫 조건이 거짓이며, ④ 는 순서를 거꾸로 적었다.",
     "_source": "authored",
     "references": [
       {
@@ -1524,7 +1524,7 @@ export const ROUND_46: QuizQuestion[] = [
       "NATURAL JOIN"
     ],
     "correctIndex": 2,
-    "explanation": "계층형 쿼리는 같은 테이블 안의 부모-자식 관계를 표현하므로 한 테이블을 두 번 참조해 자기 자신과 결합하는 셀프 조인 형태로 동작한다.",
+    "explanation": "계층형 쿼리는 같은 테이블 안의 부모-자식 관계를 표현하므로 한 테이블을 두 번 참조해 자기 자신과 결합하는 셀프 조인 형태로 동작한다. 정답은 ③번이다. ① INNER·② OUTER·④ NATURAL JOIN 은 결과 범위나 조건 작성 방식에 따른 분류라, 자기 자신과 조인한다는 계층형 쿼리의 구조를 나타내지 않는다.",
     "_source": "authored"
   },
   {
@@ -1542,7 +1542,7 @@ export const ROUND_46: QuizQuestion[] = [
       "10333.33"
     ],
     "correctIndex": 1,
-    "explanation": "ROUND의 두 번째 인자가 음수이면 정수부의 해당 자리에서 반올림한다. -2 는 십의 자리(3)에서 반올림해 백 단위까지 남기므로 결과는 10300 이다.",
+    "explanation": "ROUND의 두 번째 인자가 음수이면 정수부의 해당 자리에서 반올림한다. -2 는 십의 자리(3)에서 반올림해 백 단위까지 남기므로 결과는 10300 이다. ① 10333 은 ROUND(x, 0), ③ 10000 은 ROUND(x, -3), ④ 10333.33 은 ROUND(x, 2) 의 값이다.",
     "_source": "authored",
     "references": [
       {
@@ -1644,7 +1644,7 @@ export const ROUND_46: QuizQuestion[] = [
       "4, 33"
     ],
     "correctIndex": 0,
-    "explanation": "WHERE COL2>21 필터로 (10,25), (20,26), (30,30) 세 행이 선택된다. COUNT(COL1)은 세 행 모두 COL1이 NULL이 아니므로 3이고, AVG(COL2)는 (25+26+30)/3 = 27이다.",
+    "explanation": "WHERE COL2>21 필터로 (10,25), (20,26), (30,30) 세 행이 선택된다. COUNT(COL1)은 세 행 모두 COL1이 NULL이 아니므로 3이고, AVG(COL2)는 (25+26+30)/3 = 27이다. WHERE 를 통과한 세 행 모두 COL1 이 NULL 이 아니라 COUNT 는 ③ 2 나 ④ 4 가 아닌 3 이고, 평균도 27 이라 ② 33 이 아니다.",
     "_source": "authored",
     "references": [
       {
@@ -1730,7 +1730,7 @@ export const ROUND_46: QuizQuestion[] = [
       "2"
     ],
     "correctIndex": 3,
-    "explanation": "AVG(COL1)은 NULL을 제외한 4개 값의 평균이므로 (4+4+8+8)/4 = 6이고, AVG(NVL(COL1, 0))은 NULL을 0으로 치환한 6개 값의 평균이므로 24/6 = 4이다. 따라서 차이는 6 - 4 = 2이다.",
+    "explanation": "AVG(COL1)은 NULL을 제외한 4개 값의 평균이므로 (4+4+8+8)/4 = 6이고, AVG(NVL(COL1, 0))은 NULL을 0으로 치환한 6개 값의 평균이므로 24/6 = 4이다. 따라서 차이는 6 - 4 = 2이다. ① 0 은 AVG 도 NULL 을 0 으로 센다고 본 값이다. 두 평균은 분모가 4 와 6 으로 달라 차이가 정확히 2 이므로 ② 1·③ 1.5 도 답이 될 수 없다.",
     "_source": "authored",
     "references": [
       {
@@ -1781,7 +1781,7 @@ export const ROUND_46: QuizQuestion[] = [
       "CROSS JOIN"
     ],
     "correctIndex": 0,
-    "explanation": "사원이 없는 부서까지 모두 보려면 부서 테이블의 행을 모두 보존해야 한다. 부서(DEPT)가 JOIN 키워드의 오른쪽에 있으므로 오른쪽 테이블을 보존하는 RIGHT OUTER JOIN 이다(①). LEFT OUTER JOIN 은 사원 쪽을 보존하고, INNER JOIN 은 사원이 없는 부서가 빠지며, CROSS JOIN 은 조건 없는 카티션 곱이다.",
+    "explanation": "사원이 없는 부서까지 모두 보려면 부서 테이블의 행을 모두 보존해야 한다. 부서(DEPT)가 JOIN 키워드의 오른쪽에 있으므로 오른쪽 테이블을 보존하는 RIGHT OUTER JOIN 이다(①). ② LEFT OUTER JOIN 은 사원 쪽을 보존하고, ③ INNER JOIN 은 사원이 없는 부서가 빠지며, ④ CROSS JOIN 은 조건 없는 카티션 곱이다.",
     "_source": "authored",
     "references": [
       {
@@ -1805,7 +1805,7 @@ export const ROUND_46: QuizQuestion[] = [
       "GRADE, JOB"
     ],
     "correctIndex": 1,
-    "explanation": "결과 표는 (GRADE, JOB) 세부 4행에 GRADE 단위 소계 2행만 더해진 6행이고 전체 총계 행이 없다. GROUPING SETS 는 필요한 집계 조합만 골라 지정하므로 (GRADE) 와 (GRADE, JOB) 두 조합이 정확히 이 결과를 만든다. ROLLUP 은 전체 총계까지 붙어 7행이 되고, CUBE 는 JOB 단위 소계까지 추가되며, 일반 GROUP BY 는 소계 자체가 없어 4행에 그친다.",
+    "explanation": "결과 표는 (GRADE, JOB) 세부 4행에 GRADE 단위 소계 2행만 더해진 6행이고 전체 총계 행이 없다. GROUPING SETS 는 필요한 집계 조합만 골라 지정하므로 (GRADE) 와 (GRADE, JOB) 두 조합이 정확히 이 결과를 만든다. ① ROLLUP 은 전체 총계까지 붙어 7행이 되고, ③ CUBE 는 JOB 단위 소계까지 추가되며, ④ 일반 GROUP BY 는 소계 자체가 없어 4행에 그친다.",
     "_source": "authored",
     "references": [
       {
