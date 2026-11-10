@@ -19,7 +19,7 @@ export const ROUND_61: QuizQuestion[] = [
       "응용프로그램이 필요로 하는 데이터만 정의하여 접근 범위를 제한할 수 있다."
     ],
     "correctIndex": 2,
-    "explanation": "외부 스키마는 사용자 관점의 뷰(View) 단계이다. 하나의 DB에 대해 여러 개의 뷰(외부 스키마)를 만들 수 있고, 필요한 데이터만 정의해 접근 범위를 제한할 수 있다. ③의 '전체 저장 구조·물리적 저장 방법'은 내부 스키마의 설명이다. (외계인이네: 외부·개념·내부) ①②④ 는 외부 스키마의 옳은 설명이다.",
+    "explanation": "외부 스키마는 사용자 관점의 뷰(View) 단계다. 사용자나 개발자가 보는 논리적 구조이고(①), 하나의 DB 에 여러 개를 만들 수 있으며(②), 필요한 데이터만 정의해 접근 범위를 제한할 수 있다(④). ③ 의 '전체 저장 구조·물리적 저장 방법' 은 내부 스키마에 대한 설명이라 옳지 않다. (외계인이네: 외부·개념·내부)",
     "_source": "authored"
   },
   {
@@ -1022,7 +1022,7 @@ export const ROUND_61: QuizQuestion[] = [
       "POSITION = 'MF' AND HEIGHT >= 175 AND HEIGHT <= 180 AND (TEAM = '삼성블루윙즈' OR TEAM = '전남드래곤즈')"
     ],
     "correctIndex": 1,
-    "explanation": "AND는 OR보다 연산 우선순위가 높다. ②는 괄호가 없어 (TEAM = '전남드래곤즈' AND POSITION = 'MF' AND 키 조건) OR (TEAM = '삼성블루윙즈')로 해석되어 삼성블루윙즈 선수 전원이 조회되는 엉뚱한 결과가 나온다. ③은 BETWEEN을 사용했을 뿐 괄호로 OR 조건을 먼저 묶었고, ④는 BETWEEN을 부등호로 바꾼 것이라 동일하다.",
+    "explanation": "AND는 OR보다 연산 우선순위가 높다. ②는 괄호가 없어 (TEAM = '전남드래곤즈' AND POSITION = 'MF' AND 키 조건) OR (TEAM = '삼성블루윙즈')로 해석되어 삼성블루윙즈 선수 전원이 조회되는 엉뚱한 결과가 나온다. ① 은 OR 조건을 괄호로 먼저 묶었고, ③ 은 키 조건에 BETWEEN 을 썼으며, ④ 는 키 조건을 부등호로 쓰고 OR 조건을 괄호로 묶은 것이라 셋 다 같은 결과를 낸다.",
     "_source": "authored",
     "references": [
       {
@@ -1046,7 +1046,7 @@ export const ROUND_61: QuizQuestion[] = [
       "SELECT E1.EMP_ID, E1.EMP_NAME, E1.SAL\nFROM EMP E1, EMP E2\nWHERE E1.MGR_ID = E2.EMP_ID\nAND E1.SAL > 3000;"
     ],
     "correctIndex": 2,
-    "explanation": "①②④는 MGR_ID가 실제 존재하는 직원(상위 직급자가 있는 사원)만 조회한다. ③은 '부정의 부정'처럼 보이지만 MGR_ID와 다른 EMP_ID를 가진 행이 거의 항상 존재하므로 NOT EXISTS가 거짓이 되어 전혀 다른(대개 공집합) 결과가 나온다.",
+    "explanation": "①②④ 는 MGR_ID 가 실제 직원의 EMP_ID 와 맞는 사원, 즉 상위 직급자가 있는 사원만 조회한다. ③ 은 부정의 부정처럼 보이지만 뜻이 전혀 다르다. MGR_ID 가 있는 사원은 자기 관리자가 아닌 다른 직원이 거의 항상 있어 NOT EXISTS 가 거짓이 되고, 반대로 MGR_ID 가 NULL 인 사원(관리자가 없는 사원)은 M.EMP_ID <> NULL 이 모두 UNKNOWN 이라 서브쿼리 결과가 없어 NOT EXISTS 가 참이 된다. 그래서 찾으려는 것과 정반대로 관리자가 없는 사원이 조회된다.",
     "_source": "authored"
   },
   {
