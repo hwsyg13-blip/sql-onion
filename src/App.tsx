@@ -16,6 +16,7 @@ import { CheatSheetScreen } from './screens/CheatSheetScreen';
 import { useSession, signOut } from './lib/auth';
 import { recordVisit } from './lib/progress';
 import { trackPageView } from './lib/analytics';
+import { Analytics } from '@vercel/analytics/react';
 
 // 🚧 베타 모드: 로그인/결제 기능 숨김 (나중에 켤 때 false 로만 바꾸면 됨)
 export const BETA_NO_AUTH = true;
@@ -251,8 +252,13 @@ export const App = () => {
   // 로그인 화면만 TopNav 숨김. CBT/모의 중 나가기는 CBTExam 내부 상단 바에 통합.
   const hideTopBar = (route === 'login');
 
+  // Vercel Web Analytics — 주소가 바뀌지 않는 SPA 라 화면 이름을 가상 경로로 넘긴다 (GA 의 trackPageView 와 같은 방식)
+  const vaRoute = `/${route}`;
+  const vaPath = (typeof params === 'string' || typeof params === 'number') ? `${vaRoute}/${encodeURIComponent(String(params))}` : vaRoute;
+
   return (
     <>
+      <Analytics route={vaRoute} path={vaPath} />
       {!hideTopBar && <TopNav route={route} onNavigate={navigate} dark={tweaks.theme === 'dark'} onToggleDark={toggleDark} user={BETA_NO_AUTH ? null : user} onLogout={handleLogout} betaNoAuth={BETA_NO_AUTH}/>}
       <ErrorBoundary resetKey={route}>{screen}</ErrorBoundary>
       {paywall && !BETA_NO_AUTH && (

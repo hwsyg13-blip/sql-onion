@@ -190,7 +190,7 @@
         "가, 나, 다, 라"
       ],
       "correctIndex": 3,
-      "explanation": "네 가지 모두 계층형 질의(START WITH … CONNECT BY) 안에서만 의미 있는 값을 돌려준다. LEVEL 은 계층의 깊이, CONNECT_BY_ISLEAF 는 리프 여부, CONNECT_BY_ROOT 는 루트 값으로 CONNECT BY 가 있어야 하고, CONNECT_BY_ISCYCLE 은 여기에 더해 CONNECT BY NOCYCLE 옵션이 있어야 쓸 수 있다. 그래서 가, 나, 다, 라 모두 해당한다(④). ① 은 나·다·라를, ② 는 가·라를, ③ 은 가(LEVEL)를 빠뜨렸다. LEVEL 과 CONNECT_BY_ROOT 도 CONNECT BY 가 있어야 의미가 있다.",
+      "explanation": "네 가지 모두 계층형 질의(START WITH … CONNECT BY) 안에서만 의미 있는 값을 돌려준다. LEVEL 은 계층의 깊이, CONNECT_BY_ISLEAF 는 리프 여부, CONNECT_BY_ROOT 는 루트 값으로 CONNECT BY 가 있어야 하고, CONNECT_BY_ISCYCLE 은 여기에 더해 CONNECT BY NOCYCLE 옵션이 있어야 쓸 수 있다. 그래서 가, 나, 다, 라 모두 해당한다(④). ① 은 나·다·라를, ② 는 가·라를, ③ 은 가(LEVEL)를 빠뜨렸다.",
       "references": [
         {
           "type": "text",
