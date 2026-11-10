@@ -1,13 +1,14 @@
 {
  "last_processed_row": null,
- "last_run": "2026-11-10T22:40+09:00",
+ "last_run": "2026-11-11T06:05+09:00",
  "last_gate": {
   "five_hour": 0.17,
   "seven_day": 0.67
  },
  "current_mission": null,
  "my_prs": [
-  195
+  195,
+  298
  ],
  "merged_prs": [
   197,
@@ -86,7 +87,7 @@
   295,
   296
  ],
- "stop_reason": "사용자 \"머지\" → #293~#296 release #297 (main 8d59880), 배포 success",
+ "stop_reason": "낮 실행 — B-2 61회 대조(#298, 해설 오류 1건 수정). 7일 0.85(+0.03) 로 기준 근접 → 07:00 초기화 전 멈춤",
  "releases": [
   214,
   217,
