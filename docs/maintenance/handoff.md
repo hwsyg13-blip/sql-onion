@@ -280,3 +280,9 @@
 - 디시 리뷰("복원 개판, 틀린 해설") 개선안 보고 → 사용자: A(배지·분리)·C(제보 루프) 거절, B·D 실행, 시험 기간엔 오류·해설 보강만, 심화는 다음 주
 - B-1: scripts/verify-sql-pg.mjs (PostgreSQL 검증기) → 실행 345·정답 일치 219·MISMATCH 0. 45~62회 대조 불가 문항과 실행 오류 18건을 직접 대조 → 결함 없음. PR #294
 - B-2 시작: 62회 1과목 대조(사실 오류 없음). 해설 중복 검출기(docs/maintenance/expl-dup-detector.py, 단어 겹침 60%·9자 이상 반복 구절)로 45~62회 후보 약 50건 → 실제 반복 13건 정리, PR #295
+
+## 2026-11-11 00:xx — 사용자 요청: Vercel Pro 전환, GA 연결, Vercel Analytics
+- GA 연결: 세션에 Google 인증 없음·공식 GA 커넥터 없음 → 시트 내보내기(추천)/외부 커넥터/서비스 계정 안내. 사용자가 GA 보고서 PDF 공유(28일: 활성 1.4만, 세션 5.6만, 참여 24분 39초, google organic 3.2만) → state.json traffic_ga4
+- Vercel Web Analytics: #296 (App.tsx 가상 경로, privacy.html 갱신, 대시보드에서 Enable 필요)
+- 열린 PR 6개(사용자 요청 작업 포함) — 머지 대기
+

@@ -10,7 +10,8 @@
   195,
   293,
   294,
-  295
+  295,
+  296
  ],
  "merged_prs": [
   197,
@@ -127,5 +128,13 @@
   "from": "2026-11-05",
   "until": "2026-11-14",
   "rule": "이론은 오류 수정만"
+ },
+ "traffic_ga4": {
+  "period": "2026-10-13~11-09 (28일, 63회 직전)",
+  "active_users": "1.4만",
+  "new_users": "1.2만",
+  "sessions": "5.6만",
+  "engagement_per_user": "24분 39초",
+  "top_sources": "google organic 3.2만, direct 1.2만, 네이버(검색+블로그) 약 8천, bing 837, everytime 290"
  }
 }
