@@ -1404,7 +1404,7 @@ export const ROUND_59: QuizQuestion[] = [
       "NATURAL JOIN 결과에는 두 테이블의 동일 이름 컬럼이 각각 두 번씩 표시된다."
     ],
     "correctIndex": 0,
-    "explanation": "① NATURAL JOIN 은 동일 컬럼명을 자동 조인 조건으로 사용 — 옳음. ② USING 의 조인 컬럼에는 테이블 별칭을 붙일 수 없으므로 옳지 않음. ③ NATURAL JOIN 과 USING 은 동시 사용 불가 — 옳지 않음. ④ NATURAL JOIN 은 동일 컬럼을 한 번만 표시함 (USING 과 동일) — 두 번 표시된다는 진술은 옳지 않음.",
+    "explanation": "① NATURAL JOIN 은 이름이 같은 컬럼을 자동으로 조인 조건으로 쓰므로 옳다. ② USING 절에 쓴 조인 컬럼에는 테이블 별칭을 붙일 수 없고, ③ NATURAL JOIN 과 USING 은 함께 쓸 수 없으며, ④ NATURAL JOIN 결과에서 이름이 같은 컬럼은 USING 처럼 한 번만 나온다.",
     "_source": "authored"
   },
   {
