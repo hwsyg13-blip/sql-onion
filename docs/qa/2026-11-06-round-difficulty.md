@@ -127,3 +127,12 @@
 |---|---|---|---|---|
 | 48-44 | 집계 함수와 NULL (값이 없을 때 COUNT 0 / 나머지 NULL) | 5개 → 6개 결과(COUNT(DISTINCT), NVL(SUM), COUNT(전부 NULL 컬럼) 추가), WHERE 로 행 제한 | ㄴ, ㅁ | 오답 셋을 "NVL 놓침", "COUNT 도 NULL", "AVG 에 NULL 섞이면 NULL" 착각으로 구성. 결과는 PostgreSQL 로 확인 |
 | 54-29 | GROUP BY + AVG + HAVING COUNT(컬럼) | 7행 3그룹 → 10행 4그룹(값이 모두 NULL 인 그룹 포함), HAVING 추가, 결과는 (그룹, 평균) 목록 | (1, 15), (2, 30), (4, 40) | AVG(NVL) 값, HAVING COUNT(*) 값을 각각 실행해 오답 ①·② 재현. (B) ④ 는 ② 에 "전부 NULL 그룹의 AVG = 0" 착각을 더한 값 |
+
+## 11차 2문항 (11-10 06시 정기 실행)
+
+| 문항 | 개념 | 바뀐 점 | 정답 | 검토 메모 |
+|---|---|---|---|---|
+| 53-29 | ORDER BY DECODE + 보조 정렬 키 | 서술형 보기("VVIP, VIP 순") → 7행(NULL 등급·소문자 'vip'·동점 포인트), 정렬 키 3개, 회원ID 순서를 묻기 | 2, 5, 3, 1, 4, 6, 7 | 오답 셋을 "대소문자 무시", "포인트 오름차순", "NULL 은 DECODE 기본값을 못 받아 맨 뒤" 로 재현. (C) Oracle 문자 비교는 대소문자 구분, DECODE(NULL, …) 은 검색값에 NULL 이 없으면 기본값 → "Oracle 기준" 표기 |
+| 54-39 | GROUP BY + HAVING COUNT(*) + ORDER BY 별칭 DESC | 5행 2그룹 → 9행 4그룹(전부 NULL 인 그룹, NULL 그룹 키), HAVING 추가, DESC | 부서3 NULL / 부서1 18000 / 부서2 11300 | (C) Oracle 은 DESC 에서 NULL 이 맨 앞 → "Oracle 기준" 표기. HAVING 없는 결과도 실행해 ④ 재현 |
+
+- 화면 확인 중 `GROUP  BY`·`ORDER  BY` 처럼 공백이 두 칸인 SQL 은 키워드 색이 빠지는 것을 발견했다(61·62회·하드 모의고사 포함 26곳). `src/components/Atoms.tsx` 의 강조 정규식에서 두 단어 키워드의 공백을 `\s+` 로 바꿔 고쳤다.
