@@ -106,8 +106,8 @@
   297
  ],
  "awaiting_user": [
-  "AdSense 재심사 요청 (콘솔)",
-  "문의 시트 상태 칸 갱신 — Google Sheets 커넥터를 이 대화에서 켜면 에이전트가 직접 (판정표: docs/support/2026-11-01-cs-recent-reports.md)"
+  "문의 시트 상태 칸 갱신 — Google Sheets 커넥터를 이 대화에서 켜면 에이전트가 직접 (판정표: docs/support/2026-11-01-cs-recent-reports.md)",
+  "AdSense 계정(pub-4723950729614149)이 10-31 \"6개월간 온보딩 미완료\"로 비활성화됨(Gmail 확인) → 사용자가 애드센스에서 재활성화 후 사이트 검토 요청 필요. ads.txt·메타 태그의 게시자 ID 는 일치"
  ],
  "closed_prs": [
   196
