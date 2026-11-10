@@ -107,7 +107,7 @@
  ],
  "awaiting_user": [
   "문의 시트 상태 칸 갱신 — Google Sheets 커넥터를 이 대화에서 켜면 에이전트가 직접 (판정표: docs/support/2026-11-01-cs-recent-reports.md)",
-  "AdSense 계정(pub-4723950729614149)이 10-31 \"6개월간 온보딩 미완료\"로 비활성화됨(Gmail 확인) → 사용자가 애드센스에서 재활성화 후 사이트 검토 요청 필요. ads.txt·메타 태그의 게시자 ID 는 일치"
+  "AdSense: 사용자가 11-03 재활성화 + 사이트 재심사 요청함(심사 중). 결과 메일은 정기 실행 때 Gmail(adsense-noreply@google.com)로 확인. 카카오 애드핏 병행 검토 중 — 도입 시 vercel.json CSP 수정(제외 영역, 사용자 확인) 필요"
  ],
  "closed_prs": [
   196
