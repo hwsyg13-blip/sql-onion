@@ -981,7 +981,7 @@ export const ROUND_57: QuizQuestion[] = [
       "SELECT * FROM (SELECT * FROM EMP ORDER BY SAL DESC) WHERE ROWNUM <= 10;"
     ],
     "correctIndex": 3,
-    "explanation": "Oracle 에서 ORDER BY 결과의 상위 N 건을 안전하게 얻으려면, 정렬을 적용한 인라인 뷰를 만든 뒤 바깥 쿼리에서 ROWNUM 조건을 거는 방식이 가장 일반적이다. ROWNUM 을 ORDER BY 와 같은 SELECT 에 직접 쓰면 정렬 이전에 부여되어 의도한 결과가 나오지 않는다. ① 은 ROWNUM 이 정렬 전에 붙어 아무 10행을 정렬하고, ② LIMIT 은 MySQL·PostgreSQL 문법, ③ TOP 은 SQL Server 문법이다.",
+    "explanation": "Oracle 에서 ORDER BY 결과의 상위 N 건을 안전하게 얻으려면, 정렬을 적용한 인라인 뷰를 만든 뒤 바깥 쿼리에서 ROWNUM 조건을 거는 방식이 가장 일반적이다. ① 은 ROWNUM 이 정렬 전에 붙어 아무 10행을 정렬하고, ② LIMIT 은 MySQL·PostgreSQL 문법, ③ TOP 은 SQL Server 문법이다.",
     "_source": "authored"
   },
   {
@@ -1168,7 +1168,7 @@ export const ROUND_57: QuizQuestion[] = [
       "2025/01/01 00:00:00, 2025/01/01 00:00:00"
     ],
     "correctIndex": 0,
-    "explanation": "TRUNC 는 truncate(잘라 내다)에서 온 이름으로, 지정한 단위 아래를 모두 버린다. `TRUNC(SYSDATE, 'YYYY')` 는 연 단위 아래를 버리므로 항상 그해 1월 1일 0시 → 2025/01/01 00:00:00. ROUND 는 round(반올림)로, 연 단위 반올림의 기준점은 7월 1일이다. 8월 15일은 7월 1일 이후라 다음 해로 올라가 2026/01/01 00:00:00. 따라서 ①. ② 는 함수를 적용하지 않은 현재 시각, ③ 은 TRUNC 를 전날로 착각한 값, ④ 는 ROUND 도 버림으로 계산한 값이다.",
+    "explanation": "TRUNC 는 지정한 단위 아래를 모두 버리므로 TRUNC(SYSDATE, 'YYYY') 는 그해 1월 1일 0시, 즉 2025/01/01 00:00:00 이다. ROUND 는 반올림이고, 연 단위로 반올림할 때는 7월 1일이 기준이다. 8월 15일은 7월 1일 이후라 다음 해로 올라가 2026/01/01 00:00:00 이 된다. 그래서 정답은 ① 이다. ② 는 함수를 적용하지 않은 현재 시각, ③ 은 TRUNC 결과를 전날로 착각한 값, ④ 는 ROUND 도 버림으로 계산한 값이다.",
     "_source": "authored",
     "references": [
       {

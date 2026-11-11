@@ -216,7 +216,7 @@
         "5"
       ],
       "correctIndex": 2,
-      "explanation": "REGEXP_COUNT(문자열, 패턴, 시작위치)는 패턴이 일치하는 횟수를 센다. 'abcd'가 4번 반복되므로 'ab'는 4번 나타난다. \"ab\" 는 겹치지 않고 4번 나오므로 ① 2, ② 3, ④ 5 는 모두 아니다.",
+      "explanation": "REGEXP_COUNT(문자열, 패턴, 시작위치)는 패턴이 일치하는 횟수를 센다. 'abcd' 가 4번 반복되니 'ab' 도 겹치지 않고 정확히 4번 나와 ③ 4 다.",
       "references": [
         {
           "type": "sql",
@@ -1320,7 +1320,7 @@
         "7"
       ],
       "correctIndex": 2,
-      "explanation": "COMMIT이 수행되면 그 이전에 지정된 SAVEPOINT는 모두 사라진다. 따라서 ROLLBACK TO S1은 오류가 발생하고 아무 것도 취소되지 않아 마지막 INSERT까지 모두 반영된다. 3 + 1 + 1 + 1 = 6건이다. COMMIT 이 S1 을 없애므로 ① 4·② 5 처럼 일부가 취소되지 않고, ④ 7 은 행을 하나 더 센 값이다.",
+      "explanation": "COMMIT이 수행되면 그 이전에 지정된 SAVEPOINT는 모두 사라진다. 따라서 ROLLBACK TO S1은 오류가 발생하고 아무 것도 취소되지 않아 마지막 INSERT까지 모두 반영된다. 3 + 1 + 1 + 1 = 6건이다. COMMIT 이 S1 을 없앴으므로 ① 4·② 5 처럼 일부만 취소되는 일은 일어나지 않는다.",
       "references": [
         {
           "type": "sql",

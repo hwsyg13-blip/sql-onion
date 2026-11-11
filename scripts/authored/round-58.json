@@ -741,7 +741,7 @@
         "SELECT * FROM A WHERE A.ID IN (SELECT ID FROM B) (WHERE IN 서브쿼리)"
       ],
       "correctIndex": 0,
-      "explanation": "두 테이블에 동일 이름 컬럼이 ID 외에 NAME 도 있다고 가정. ① NATURAL JOIN 은 ID 와 NAME 모두를 자동 조인 조건으로 사용 → ID 가 같아도 NAME 이 다르면 매칭 실패. ②③ 은 ID 만 조인 조건이라 NAME 무관. ④ 는 A 의 ID 가 B 의 ID 에 존재하는지만 확인. 결과적으로 ① 만 NAME 까지 매칭이 필요해 다른 셋과 결과가 달라질 수 있다.",
+      "explanation": "두 테이블에는 ID 말고도 이름이 같은 NAME 컬럼이 있다. ① NATURAL JOIN 은 이름이 같은 컬럼을 모두 조인 조건으로 쓰므로 ID 와 NAME 이 둘 다 같아야 짝이 맞고, ID 가 같아도 NAME 이 다르면 빠진다. ② USING (ID) 와 ③ ON A.ID = B.ID 는 ID 만 비교하므로 NAME 과 상관없고, ④ IN 서브쿼리도 A 의 ID 가 B 에 있는지만 본다. 그래서 NAME 까지 맞아야 하는 ① 만 나머지와 결과가 달라질 수 있다.",
       "references": [
         {
           "type": "text",

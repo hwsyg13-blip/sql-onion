@@ -912,7 +912,7 @@ export const ROUND_54: QuizQuestion[] = [
       "CHECK 는 특정 조건을 만족하는 값만 허용한다."
     ],
     "correctIndex": 2,
-    "explanation": "UNIQUE 는 값의 중복만 막을 뿐 NULL 은 허용하므로 ③ 이 적절하지 않다. NULL 까지 막으려면 NOT NULL 제약을 따로 지정해야 한다. 반면 PRIMARY KEY 는 유일성과 NOT NULL 을 함께 강제한다. ① PK 는 유일성과 NOT NULL, ② FK 는 부모 키 참조, ④ CHECK 는 조건 검사라 모두 옳다.",
+    "explanation": "UNIQUE 는 값의 중복만 막을 뿐 NULL 은 허용하므로 ③ 이 적절하지 않다. NULL 까지 막으려면 NOT NULL 제약을 따로 지정해야 한다. ① PK 는 유일성과 NOT NULL, ② FK 는 부모 키 참조, ④ CHECK 는 조건 검사라 모두 옳다.",
     "_source": "authored"
   },
   {
