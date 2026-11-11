@@ -767,7 +767,7 @@
         "NULL, NULL"
       ],
       "correctIndex": 1,
-      "explanation": "첫 번째는 'b*c' 를 리터럴로 해석(b, *, c 가 연속)하여 매칭되지 않아 NULL 이 된다. 두 번째는 'b*c' 에서 * 가 0회 이상을 의미하므로 'bc' 에 매칭된다. ① 은 첫 번째의 \\* 도 반복 기호로 본 결과, ③ 은 둘을 반대로 본 결과, ④ 는 두 번째 패턴도 매칭되지 않는다고 본 결과다.",
+      "explanation": "첫 번째 패턴 'b\\*c' 의 \\* 는 별표 문자 그대로라 b, *, c 가 연달아 있어야 하는데 'abcd' 에는 * 가 없어 NULL 이다. 두 번째 패턴 'b*c' 의 * 는 바로 앞 b 가 0번 이상 반복된다는 뜻이라 'bc' 와 맞아 'bc' 가 나온다. 그래서 NULL, bc 이고 정답은 ② 다. ① 은 첫 번째의 \\* 도 반복 기호로 본 결과, ③ 은 둘을 반대로 본 결과, ④ 는 두 번째 패턴도 맞지 않는다고 본 결과다.",
       "references": [
         {
           "type": "sql",
@@ -1376,7 +1376,7 @@
         "(A UNION B) MINUS (A INTERSECT B)"
       ],
       "correctIndex": 0,
-      "explanation": "(A UNION B)는 양쪽 모두에 있는 행을 한 번씩 포함하는 합집합. (A INTERSECT B)는 양쪽 공통 행. UNION ALL은 두 결과를 그대로 이어 붙이므로, (A UNION B) UNION ALL (A INTERSECT B)는 A UNION ALL B와 같은 행 수를 가진다(공통 행이 두 번 등장하는 효과). ② 는 UNION 이라 중복이 지워져 A UNION B 와 같고, ③ 은 B 에만 있는 행이 빠지며, ④ 는 공통 행이 빠진 대칭 차집합이다."
+      "explanation": "A 와 B 에 각각 중복이 없으면 A UNION ALL B 는 공통 행만 두 번, 나머지 행은 한 번씩 나온다. ① 에서 A UNION B 는 모든 행을 한 번씩 담고, 거기에 A INTERSECT B(공통 행)를 UNION ALL 로 한 번 더 붙이므로 공통 행이 두 번 나와 A UNION ALL B 와 결과가 같다. ② 는 UNION 이라 중복이 지워져 A UNION B 와 같고, ③ 은 B 에만 있는 행이 빠지며, ④ 는 공통 행이 빠진 대칭 차집합이다."
     },
     {
       "subject": "2과목",
