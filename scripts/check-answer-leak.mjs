@@ -4,6 +4,7 @@
 // 제외 규칙
 //   1) 같은 참고 블록에 모든 선택지가 함께 들어 있으면 노출로 보지 않는다
 //      (선택지를 나란히 나열한 것이라 어느 것이 정답인지 드러나지 않음).
+//   (추가) 결과를 묻는 문항에 '실행 후'·'최종 상태' 표가 값까지 채워져 있으면 정답 노출로 본다.
 //   2) scripts/audit/answer-leak-reviewed.json 에 사람이 오탐으로 판정한 항목은
 //      경고 대신 "검토 완료"로 따로 센다. 판정 사유는 그 파일에 기록한다.
 
@@ -58,6 +59,20 @@ for (const file of files) {
     const correctNorm = normalize(correct);
     const optionNorms = q.options.map(normalize);
     if (!Array.isArray(q.references)) continue;
+
+    // 실행 "후" 상태 표: 결과를 묻는 문항에 실행 후 테이블을 함께 보여 주면 정답이 그대로 드러난다
+    // (50회 2과목 44번, 52회 1과목 2번). "아래 결과를 얻기 위한" 처럼 결과를 주고 SQL 을 묻는 문항은 제외.
+    if (!/결과를 얻|결과가 (아래|다음)|결과처럼|결과와 같|결과를 (보고|출력|반환|산출|나타)|결괏값/.test(q.title || '')) {
+      for (const ref of q.references) {
+        const cap = ref.type === 'table' ? String(ref.caption || '') : '';
+        if (!/(실행|수행)\s*후|최종 상태/.test(cap)) continue;
+        if ((ref.rows || []).every(r => r.some(c => /^\s*\?\s*$|^\(\s*[ㄱ-ㅎ]\s*\)$/.test(String(c))))) continue;
+        const key = itemKey(file, q);
+        if (reviewed.has(key)) { reviewedHits.add(key); continue; }
+        findings.push({ file, id: q.number ?? q._id, subject: q.subject, correctIndex: q.correctIndex, correct,
+          refLabel: 'table.caption(실행 후 상태)', refValue: cap.slice(0, 100) });
+      }
+    }
 
     for (const ref of q.references) {
       // 검사 대상 필드
