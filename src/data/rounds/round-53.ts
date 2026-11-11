@@ -1552,7 +1552,7 @@ export const ROUND_53: QuizQuestion[] = [
       "7"
     ],
     "correctIndex": 2,
-    "explanation": "TABLE50 은 비어 있는 상태로 시작한다. INSERT 1·2·3 → 3건. SAVEPOINT SQL1 선언. INSERT 4·5 → 5건. COMMIT 시점에 5건이 영구 확정되며 이때 SAVEPOINT SQL1 은 함께 사라진다. 이후 INSERT 6 → 6건. ROLLBACK TO SAVEPOINT SQL1 은 가리킬 SAVEPOINT 가 없으므로 오류가 발생해 무시되거나 영향이 없고, 최종 SELECT 결과는 6 건이다. 정답은 ③. ② 5 는 ROLLBACK 이 커밋되지 않은 6 만 취소한다고 본 값이다.",
+    "explanation": "빈 테이블에 1·2·3 을 넣고 SAVEPOINT SQL1 을 만든 뒤 4·5 를 넣으면 5건이다. 여기서 COMMIT 하면 5건이 확정되고, COMMIT 이전에 만든 SAVEPOINT SQL1 도 함께 사라진다. 이어서 6 을 넣으면 6건이 되는데, ROLLBACK TO SAVEPOINT SQL1 은 가리킬 저장점이 없어 오류만 나고 아무것도 취소하지 못한다. 그래서 마지막 조회 결과는 6건이고 정답은 ③ 이다. ② 5 는 이 ROLLBACK 이 커밋되지 않은 6 만 취소한다고 본 값이다.",
     "_source": "authored",
     "references": [
       {
