@@ -26,7 +26,7 @@
         "학생이 학과를 참조하고 있어 참조 무결성 오류로 삭제가 중단된다."
       ],
       "correctIndex": 0,
-      "explanation": "FK 에 `ON DELETE CASCADE` 가 설정되면 부모(학과) 행 삭제 시 그 행을 참조하던 자식(학생) 행이 자동으로 함께 삭제된다. ② 는 ON DELETE 가 자식 행만 단독으로 지우는 정책이 아니라는 점에서 오답, ③ 은 `ON DELETE SET NULL` 의 동작이고, ④ 는 `ON DELETE RESTRICT/NO ACTION` 의 동작이다. 본 문항은 CASCADE 가 명시되어 있으므로 ④ 가 아닌 ① 이 단일 정답이다.",
+      "explanation": "FK 에 `ON DELETE CASCADE` 가 설정되면 부모(학과) 행 삭제 시 그 행을 참조하던 자식(학생) 행이 자동으로 함께 삭제된다. ② 는 ON DELETE 가 자식 행만 단독으로 지우는 정책이 아니라는 점에서 오답, ③ 은 `ON DELETE SET NULL` 의 동작이고, ④ 는 `ON DELETE RESTRICT/NO ACTION` 의 동작이다. 그래서 CS 학과 한 행과 CS 학생 두 명(1001, 1002)이 지워지고 EE 학과와 1003 박민수만 남는다.",
       "references": [
         {
           "type": "erd",
@@ -80,36 +80,6 @@
         {
           "type": "sql",
           "code": "-- FK 정의 (학생 테이블 생성 시)\nCREATE TABLE 학생 (\n  학번      VARCHAR2(10) PRIMARY KEY,\n  이름      VARCHAR2(20),\n  학과코드  VARCHAR2(4),\n  CONSTRAINT FK_학생_학과 FOREIGN KEY (학과코드)\n    REFERENCES 학과(학과코드) ON DELETE CASCADE\n);\n\n-- 부모 행 삭제\nDELETE FROM 학과 WHERE 학과코드 = 'CS';"
-        },
-        {
-          "type": "table",
-          "caption": "학과 (실행 후) — CS 한 행 삭제",
-          "headers": [
-            "학과코드",
-            "학과명"
-          ],
-          "rows": [
-            [
-              "EE",
-              "전자공학과"
-            ]
-          ]
-        },
-        {
-          "type": "table",
-          "caption": "학생 (실행 후) — CS 학과 학생 2명 CASCADE 삭제",
-          "headers": [
-            "학번",
-            "이름",
-            "학과코드"
-          ],
-          "rows": [
-            [
-              "1003",
-              "박민수",
-              "EE"
-            ]
-          ]
         }
       ]
     },
@@ -759,7 +729,7 @@
         "SELECT * FROM 회원 INNER JOIN 주문 ON 회원.회원ID = 주문.회원ID;"
       ],
       "correctIndex": 2,
-      "explanation": "주문 이력이 없는 회원은 주문 테이블에 매칭 행이 없는 회원이므로 NOT EXISTS 또는 LEFT OUTER JOIN ... IS NULL 패턴이 정답이다. ① EXISTS 는 주문 있는 회원, ② IN 도 주문 있는 회원, ④ INNER JOIN 은 매칭만 — 모두 의도와 반대. 정답 ③ NOT EXISTS."
+      "explanation": "주문 이력이 없는 회원은 주문 테이블에 같은 회원ID 행이 하나도 없는 회원이므로, 회원마다 그런 주문이 없는지 확인하는 NOT EXISTS 가 맞다(③). LEFT OUTER JOIN 뒤 주문 쪽이 NULL 인 행을 고르는 방법도 같은 결과다. ① EXISTS 와 ② IN 은 반대로 주문이 있는 회원을 찾고, ④ INNER JOIN 은 주문과 짝이 맞는 회원만 남겨 역시 의도와 반대다."
     },
     {
       "subject": "2과목",
