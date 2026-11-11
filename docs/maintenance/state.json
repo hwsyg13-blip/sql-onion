@@ -1,13 +1,14 @@
 {
  "last_processed_row": null,
- "last_run": "2026-11-11T06:05+09:00",
+ "last_run": "2026-11-11T14:05+09:00",
  "last_gate": {
   "five_hour": 0.17,
   "seven_day": 0.67
  },
  "current_mission": null,
  "my_prs": [
-  195
+  195,
+  299
  ],
  "merged_prs": [
   197,
@@ -87,7 +88,7 @@
   296,
   298
  ],
- "stop_reason": "사용자 \"머지\" → #298 squash (main c5623d4), 배포 success",
+ "stop_reason": "낮 실행 — B-2 62회 2과목·60~57회 대조, PR #299 (해설 12건). 7일 0.04 대. 사용자 \"머지\" 대기",
  "releases": [
   214,
   217,
