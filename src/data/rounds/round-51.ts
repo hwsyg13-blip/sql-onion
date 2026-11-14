@@ -1060,7 +1060,7 @@ export const ROUND_51: QuizQuestion[] = [
       "SELECT * FROM T WHERE COL1 = 'A' OR COL2 = 2000;"
     ],
     "correctIndex": 0,
-    "explanation": "다중 컬럼 IN `(COL1, COL2) IN (('A', 1000), ('B', 2000))` 은 각 튜플 안에서는 컬럼끼리 AND 로 묶고, 튜플 간에는 OR 로 결합한 형태와 동일하다. 즉 `(COL1='A' AND COL2=1000) OR (COL1='B' AND COL2=2000)` 으로 풀어쓸 수 있다. ② 는 모순(같은 행이 동시에 'A'/'B' 일 수 없음), ③ 은 (A, 2000) (B, 1000) 도 매칭하므로 더 넓다, ④ 는 의미 자체가 다름.",
+    "explanation": "다중 컬럼 IN `(COL1, COL2) IN (('A', 1000), ('B', 2000))` 은 각 튜플 안에서는 컬럼끼리 AND 로 묶고, 튜플 간에는 OR 로 결합한 형태와 동일하다. 즉 `(COL1='A' AND COL2=1000) OR (COL1='B' AND COL2=2000)` 으로 풀어쓸 수 있다. ② 는 한 행의 COL1 이 'A' 이면서 'B' 일 수 없어 아무 행도 나오지 않고, ③ 은 ('A', 2000)·('B', 1000) 조합까지 골라 범위가 더 넓으며, ④ 는 둘 중 한 조건만 맞아도 통과해 전혀 다른 조건이다. 그래서 정답은 ① 이다.",
     "_source": "authored",
     "references": [
       {
