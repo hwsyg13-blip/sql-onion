@@ -2,13 +2,14 @@
  "last_processed_row": null,
  "last_run": "2026-11-15T06:05+09:00",
  "last_gate": {
-  "five_hour": 0.42,
+  "five_hour": 0.48,
   "seven_day": 0.34
  },
  "current_mission": null,
  "my_prs": [
   195,
-  302
+  302,
+  303
  ],
  "merged_prs": [
   197,
@@ -88,7 +89,7 @@
   296,
   298
  ],
- "stop_reason": "(진행 중) 11-15 06:05 실행",
+ "stop_reason": "낮 실행 — 5시간 0.48·7일 0.34 로 기준 미만이지만 머지 대기 PR(#302 내용 수정·화면, #303 검증기)이 사용자 \"머지\" 없이는 반영되지 않아, 같은 회차 JSON 을 더 고치면 충돌 위험만 커져 여기서 멈춤",
  "releases": [
   214,
   217,
