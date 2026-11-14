@@ -6,14 +6,17 @@
 //   - 실행: su postgres -c psql 로 문항마다 새 스키마에서 실행. 표의 컬럼은 값이 모두 숫자면 numeric, 아니면 text.
 //   - MISMATCH: 실행 결과가 정답이 아닌 다른 보기와 일치 → 사람이 확인. PostgreSQL 과 Oracle 의 차이
 //     (DDL 자동 커밋, '' = NULL, 정수 나눗셈 등)로 생기는 오탐이 있을 수 있다.
-//   - CONNECT BY·ROWNUM·MERGE·INSERT ALL·KEEP·날짜 함수는 건너뛴다.
+//   - CONNECT BY 는 단일 테이블 계층형 질의(START WITH·CONNECT BY [NOCYCLE]·ORDER SIBLINGS BY·LEVEL)를 재귀 CTE 로 옮겨
+//     실행한다(형제 순서는 표의 행 순서, 출력은 깊이 우선). ROWNUM 은 바깥 SELECT 의 WHERE 에 단독 조건으로 쓴 경우만
+//     LIMIT 으로 옮긴다(같은 SELECT 의 ORDER BY 는 ROWNUM 다음에 적용).
+//   - MERGE·INSERT ALL·KEEP·날짜 함수·SYS_CONNECT_BY_PATH·CONNECT_BY_ROOT 등은 건너뛴다.
 import { readFileSync, readdirSync } from 'node:fs';
 import { spawnSync } from 'node:child_process';
 const fs = { readFileSync, readdirSync };
 const DIR = 'scripts/authored';
 const only = process.argv[2] && !process.argv[2].startsWith('--') ? process.argv[2] : null;
 const SHOW = process.argv.includes('--show');
-const SKIP = /\b(ROWNUM|CONNECT\s+BY|START\s+WITH|PRIOR|LEVEL|SYS_CONNECT_BY_PATH|MERGE|INSERT\s+(ALL|FIRST)|KEEP|SYSDATE|ADD_MONTHS|MONTHS_BETWEEN|LAST_DAY|NEXT_DAY|INSTR|PIVOT|UNPIVOT|REGEXP_\w+|SEQUENCE|NEXTVAL|CURRVAL|CREATE\s+(OR\s+REPLACE\s+)?(TABLE|VIEW|INDEX)|ALTER|DROP|TRUNCATE|GRANT|REVOKE|TOP\s*\(|TOP\s+\d|IDENTITY|GETDATE|ISNULL|EXCEPT\s+ALL)\b/i;
+const SKIP = /\b(SYS_CONNECT_BY_PATH|CONNECT_BY_\w+|MERGE|INSERT\s+(ALL|FIRST)|KEEP|SYSDATE|ADD_MONTHS|MONTHS_BETWEEN|LAST_DAY|NEXT_DAY|INSTR|PIVOT|UNPIVOT|REGEXP_\w+|SEQUENCE|NEXTVAL|CURRVAL|CREATE\s+(OR\s+REPLACE\s+)?(TABLE|VIEW|INDEX)|ALTER|DROP|TRUNCATE|GRANT|REVOKE|TOP\s*\(|TOP\s+\d|IDENTITY|GETDATE|ISNULL|EXCEPT\s+ALL)\b/i;
 
 function splitArgs(s) { const out = []; let d = 0, q = false, buf = '';
   for (const ch of s) { if (ch === "'") q = !q; if (!q) { if (ch === '(') d++; if (ch === ')') d--; if (ch === ',' && d === 0) { out.push(buf); buf = ''; continue; } } buf += ch; }
@@ -39,6 +42,69 @@ function toPg(sql) {
   s = s.replace(/\bLISTAGG\s*\(([^,()]+),\s*('[^']*')\s*\)\s*WITHIN\s+GROUP\s*\(\s*ORDER\s+BY\s+([^()]+)\)/gi, 'STRING_AGG(($1)::text, $2 ORDER BY $3)');
   s = rewriteCall(s, 'TO_CHAR', a => a.length === 1 ? `CAST((${a[0]}) AS TEXT)` : `TO_CHAR(${a.join(', ')})`);
   return s;
+}
+// ── 계층형 질의 → 재귀 CTE ─────────────────────────────────────────────
+// 바깥(괄호 0단계)에 있는 키워드 위치를 찾는다
+function topLevel(sql, kw) {
+  const re = new RegExp('\\b' + kw.replace(/ /g, '\\s+') + '\\b', 'gi'); const out = [];
+  let m; while ((m = re.exec(sql))) {
+    let d = 0, q = false; for (let i = 0; i < m.index; i++) { const ch = sql[i]; if (ch === "'") q = !q; if (!q) { if (ch === '(') d++; if (ch === ')') d--; } }
+    if (d === 0) out.push({ i: m.index, end: m.index + m[0].length });
+  }
+  return out;
+}
+class Skip extends Error {}
+function convertHier(stmt, tables) {
+  if (!/\bCONNECT\s+BY\b/i.test(stmt)) {
+    if (/\b(PRIOR|LEVEL|START\s+WITH)\b/i.test(stmt)) throw new Skip('hier keyword without CONNECT BY');
+    return stmt;
+  }
+  const KW = ['SELECT', 'FROM', 'WHERE', 'START WITH', 'CONNECT BY', 'ORDER SIBLINGS BY', 'ORDER BY', 'GROUP BY', 'HAVING'];
+  const pos = [];
+  for (const k of KW) for (const p of topLevel(stmt, k)) pos.push({ k, ...p });
+  // 'ORDER SIBLINGS BY' 안의 'BY' 등 겹치는 것 정리: ORDER BY 는 SIBLINGS 와 겹치지 않음
+  pos.sort((a, b) => a.i - b.i);
+  const seen = new Set(); for (const p of pos) { if (seen.has(p.k)) throw new Skip('repeated ' + p.k); seen.add(p.k); }
+  if (seen.has('GROUP BY') || seen.has('HAVING') || !seen.has('START WITH') || pos[0]?.k !== 'SELECT') throw new Skip('unsupported shape');
+  const seg = {}; pos.forEach((p, n) => { seg[p.k] = stmt.slice(p.end, n + 1 < pos.length ? pos[n + 1].i : stmt.length).trim(); });
+  const from = seg.FROM.match(/^"?([A-Za-z_가-힣][\w가-힣]*)"?(?:\s+(?:AS\s+)?([A-Za-z_가-힣][\w가-힣]*))?$/i);
+  if (!from) throw new Skip('from not single table');
+  const [, tname, alias] = from;
+  const t = tables.find(x => tableName(x.caption) && tableName(x.caption).toUpperCase() === tname.toUpperCase());
+  if (!t) throw new Skip('table not found');
+  const heads = t.headers.map(h => String(h).replace(/\(.*?\)/g, '').trim());
+  const unAlias = x => alias ? x.replace(new RegExp('\\b' + alias + '\\.', 'gi'), '') : x;
+  const lvl = x => x.replace(/(?<![\w가-힣"])LEVEL(?![\w가-힣"])/gi, '__lvl');
+  let cols = unAlias(seg.SELECT);
+  // LEVEL 은 어디서나 __lvl 로, 단독 SELECT 항목이면 결과 컬럼 이름을 LEVEL 로 남긴다
+  cols = /^\s*\*\s*$/.test(cols) ? heads.join(', ') : splitArgs(lvl(cols)).map(c => /^__lvl$/i.test(c) ? '__lvl AS "LEVEL"' : c).join(', ');
+  const isCol = w => heads.find(h => h.toUpperCase() === w.toUpperCase());
+  let cond = unAlias(seg['CONNECT BY']).replace(/^\s*NOCYCLE\b/i, '');
+  // PRIOR 컬럼 → 앞 행(__h), 나머지 컬럼 → 새 행(__c)
+  cond = cond.replace(/(\bPRIOR\s+)?(?<![\w가-힣.])([A-Za-z_가-힣][\w가-힣]*)(?![\w가-힣])/gi, (m, pr, w) => isCol(w) ? (pr ? '__h.' : '__c.') + w : (pr ? (() => { throw new Skip('PRIOR on expression'); })() : m));
+  if (/\bPRIOR\b/i.test(cond)) throw new Skip('PRIOR left');
+  const sib = seg['ORDER SIBLINGS BY'] ? unAlias(seg['ORDER SIBLINGS BY']) : '1';
+  const where = seg.WHERE ? ' WHERE ' + lvl(unAlias(seg.WHERE)) : '';
+  const agg = /\b(COUNT|SUM|AVG|MAX|MIN)\s*\(/i.test(cols);
+  const order = seg['ORDER BY'] ? ' ORDER BY ' + lvl(unAlias(seg['ORDER BY'])) : (agg ? '' : ' ORDER BY __path');
+  return `WITH RECURSIVE __src AS (SELECT __t.*, ROW_NUMBER() OVER () AS __rn, DENSE_RANK() OVER (ORDER BY ${sib}) AS __k FROM ${tname} __t),\n`
+    + `__h AS (SELECT __s.*, 1 AS __lvl, ARRAY[__s.__k, __s.__rn]::bigint[] AS __path, ARRAY[__s.__rn]::bigint[] AS __rns FROM __src __s WHERE ${unAlias(seg['START WITH'])}\n`
+    + `  UNION ALL SELECT __c.*, __h.__lvl + 1, __h.__path || ARRAY[__c.__k, __c.__rn]::bigint[], __h.__rns || __c.__rn FROM __src __c JOIN __h ON (${cond}) AND NOT (__c.__rn = ANY(__h.__rns)))\n`
+    + `SELECT ${cols} FROM __h${where}${order}`;
+}
+// ── ROWNUM (바깥 WHERE 의 단독 조건) → LIMIT ───────────────────────────
+function convertRownum(stmt) {
+  if (!/\bROWNUM\b/i.test(stmt)) return stmt;
+  const w = topLevel(stmt, 'WHERE');
+  if (w.length !== 1) throw new Skip('rownum shape');
+  const after = stmt.slice(w[0].end);
+  const ob = topLevel(after, 'ORDER BY')[0];
+  const cond = (ob ? after.slice(0, ob.i) : after).trim();
+  const m = cond.match(/^ROWNUM\s*(<=|<|=)\s*(\d+)$/i);
+  if (!m || /\bROWNUM\b/i.test(stmt.slice(0, w[0].i))) throw new Skip('rownum not simple');
+  const n = +m[2]; const lim = m[1] === '<=' ? n : m[1] === '<' ? n - 1 : (n === 1 ? 1 : 0);
+  const base = stmt.slice(0, w[0].i).trim() + ` LIMIT ${Math.max(0, lim)}`;
+  return ob ? `SELECT * FROM (${base}) __rn_v ${after.slice(ob.i)}` : base;
 }
 const esc = v => v === null ? 'NULL' : (typeof v === 'number' ? String(v) : `'${String(v).replace(/'/g, "''")}'`);
 function psql(script) {
@@ -93,7 +159,9 @@ for (const f of fs.readdirSync(DIR).filter(f => /\.json$/.test(f)).sort()) {
     const id = `${f.replace('.json', '')} ${q.subject || ''} ${q.number ?? '#' + qi}`;
     const raw = sqls[0].code || '';
     if (SKIP.test(raw) || /\(\s*\?\s*\)|\(\s{3,}\)|\[\s*\?\s*\]|_{3,}|[ㄱ-ㅎ]\s*[).]|\(\s*[ㄱ-ㅎ]\s*\)|[ⓐ-ⓩ①-④㉠-㉣]/.test(raw)) { report.skipped++; return; }
-    const parts = toPg(raw).split(';').map(x => x.trim()).filter(Boolean);
+    let parts = toPg(raw).split(';').map(x => x.trim()).filter(Boolean);
+    try { parts = parts.map(p => convertRownum(convertHier(p, tables))); }
+    catch (e) { if (e instanceof Skip) { report.skipped++; return; } throw e; }
     if (!parts.length || !/^\s*(SELECT|WITH|\()/i.test(parts[parts.length - 1])) { report.skipped++; return; }
     const selects = parts.filter(p => /^\s*(SELECT|WITH|\()/i.test(p));
     const multiScalar = selects.length > 1 && selects.length === parts.length;
@@ -164,6 +232,12 @@ for (const f of fs.readdirSync(DIR).filter(f => /\.json$/.test(f)).sort()) {
           const t = String(opt).trim();
           const m = t.match(/^(\d+)\s*(건|행)/);
           if ((m && +m[1] === res.length) || (res.length === 0 && /^(공집합|0건|결과가 없다)/.test(t))) { hits.push(oi); return; }
+          // 'MILLER, SCOTT, KING' 처럼 한 컬럼 결과를 순서대로 나열한 보기
+          if (res.length > 1 && res[0].length === 1 && !/[()]/.test(t)) {
+            const items = t.split(/\s*(?:,|→|->|\/)\s*/).map(nv);
+            const vals = res.map(r => nv(r[0]));
+            if (items.length === vals.length && (ordered ? items.join('|') === vals.join('|') : [...items].sort().join('|') === [...vals].sort().join('|'))) { hits.push(oi); return; }
+          }
           const tup = [...t.matchAll(/\(([^()]*)\)/g)].map(x => x[1].split(',').map(nv).join(','));
           if (tup.length && tup.length === resRows.length && tup.length > 0 && res[0] && tup[0].split(',').length === res[0].length) {
             const a = ordered ? tup.join('|') : [...tup].sort().join('|');
