@@ -838,20 +838,20 @@ export const ROUND_48: QuizQuestion[] = [
     "round": 48,
     "subject": "2과목",
     "number": 24,
-    "title": "아래 T 테이블에 대해 조건을 만족하는 행에 대한 SUM(A) 결과는?",
+    "title": "아래 T 테이블에 대한 SQL 의 결과(SUM(A), SUM(B), COUNT(*))로 옳은 것은?",
     "options": [
-      "10",
-      "40",
-      "100",
-      "NULL"
+      "18, 7, 2",
+      "83, 45, 6",
+      "53, 42, 4",
+      "88, 55, 7"
     ],
     "correctIndex": 2,
-    "explanation": "모든 행이 A >= B 를 만족하므로 10 행이 모두 남고, A 가 모두 10 이라 SUM(A) = 10 × 10 = 100 이다(③). ① 10 은 한 행의 값이고, 조건을 만족하는 행이 있으니 ④ NULL 도 아니다.",
+    "explanation": "WHERE A >= B 가 참인 행만 남는다. (10, 5) 와 (8, 2) 는 A 가 크고, (20, 20) 과 (15, 15) 는 같아서 >= 를 만족한다. (5, 10) 은 거짓이고, A 나 B 가 NULL 인 (NULL, 3)·(30, NULL) 은 비교 결과가 UNKNOWN 이라 WHERE 를 통과하지 못한다. 남은 4행으로 SUM(A) = 10 + 20 + 15 + 8 = 53, SUM(B) = 5 + 20 + 15 + 2 = 42, COUNT(*) = 4 다(③). ① 은 >= 를 > 로 보고 같은 값 두 행을 뺀 값, ② 는 NULL 과의 비교도 통과한다고 보고 두 행을 더 넣은 값(SUM 은 NULL 을 빼고 더해 83, 45), ④ 는 WHERE 를 적용하지 않은 전체 합계다.",
     "_source": "authored",
     "references": [
       {
         "type": "table",
-        "caption": "T 테이블 (총 10 행, 모두 A >= B 조건을 만족)",
+        "caption": "T 테이블",
         "headers": [
           "A",
           "B"
@@ -862,46 +862,34 @@ export const ROUND_48: QuizQuestion[] = [
             "5"
           ],
           [
-            "10",
-            "5"
+            "20",
+            "20"
           ],
           [
-            "10",
-            "5"
+            "5",
+            "10"
           ],
           [
-            "10",
-            "5"
+            "NULL",
+            "3"
           ],
           [
-            "10",
-            "5"
+            "30",
+            "NULL"
           ],
           [
-            "10",
-            "5"
+            "15",
+            "15"
           ],
           [
-            "10",
-            "5"
-          ],
-          [
-            "10",
-            "5"
-          ],
-          [
-            "10",
-            "5"
-          ],
-          [
-            "10",
-            "5"
+            "8",
+            "2"
           ]
         ]
       },
       {
         "type": "sql",
-        "code": "SELECT SUM(A) FROM T WHERE A >= B;"
+        "code": "SELECT SUM(A), SUM(B), COUNT(*)\nFROM   T\nWHERE  A >= B;"
       }
     ]
   },

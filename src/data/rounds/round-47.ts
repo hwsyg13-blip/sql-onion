@@ -705,15 +705,15 @@ export const ROUND_47: QuizQuestion[] = [
     "round": 47,
     "subject": "2과목",
     "number": 26,
-    "title": "아래 T 테이블에 대한 SQL 의 결과로 옳은 것은?",
+    "title": "아래 T 테이블에 대한 SQL 의 결과(R1, R2)로 옳은 것은?",
     "options": [
-      "12",
-      "13",
-      "25",
-      "0"
+      "0, 44",
+      "44, 44",
+      "32, 44",
+      "32, 32"
     ],
     "correctIndex": 2,
-    "explanation": "CASE 식은 위에서 아래로 평가하다가 처음 참이 되는 분기를 따른다. T 에는 한 행만 있고 GRADE = 12, RANK = 13 이므로 GRADE + RANK = 25 이다. SUM(25) 의 결과는 25 이고 NULL 이 아니므로 ELSE 분기인 SUM(GRADE + RANK) 이 그대로 25 로 반환된다. 정답은 ③ 번이다. ① 12 와 ② 13 은 GRADE·RANK 중 한 컬럼만 본 값이고, ④ 0 은 합계가 NULL 일 때만 나오는 THEN 분기 값이다.",
+    "explanation": "R1 은 행마다 GRADE + RANK 를 먼저 계산한다. 25, NULL, NULL, 7 이 되는데 NULL 이 섞인 덧셈은 NULL 이기 때문이다. SUM 은 NULL 을 빼고 더해 32 이고, NULL 이 아니므로 CASE 의 ELSE 로 가 R1 = 32 다. R2 는 컬럼별로 먼저 합친다. SUM(GRADE) = 12 + 7 + 3 = 22, SUM(RANK) = 13 + 5 + 4 = 22 라 R2 = 44 다. 정답은 ③번이다. ① 은 NULL 이 하나라도 있으면 SUM 전체가 NULL 이 된다고 보고 THEN 0 으로 간 값, ② 는 행 단위 덧셈에서도 NULL 을 0 으로 본 값, ④ 는 R2 도 NULL 이 있는 행을 통째로 뺀다고 본 값이다. 더하는 순서(행 먼저냐 컬럼 먼저냐)에 따라 NULL 의 영향이 달라진다는 점이 핵심이다.",
     "_source": "authored",
     "references": [
       {
@@ -727,12 +727,24 @@ export const ROUND_47: QuizQuestion[] = [
           [
             "12",
             "13"
+          ],
+          [
+            "NULL",
+            "5"
+          ],
+          [
+            "7",
+            "NULL"
+          ],
+          [
+            "3",
+            "4"
           ]
         ]
       },
       {
         "type": "sql",
-        "code": "SELECT CASE WHEN SUM(GRADE + RANK) IS NULL THEN 0\n            ELSE SUM(GRADE + RANK) END\nFROM   T;"
+        "code": "SELECT CASE WHEN SUM(GRADE + RANK) IS NULL THEN 0\n            ELSE SUM(GRADE + RANK) END AS R1,\n       SUM(GRADE) + SUM(RANK) AS R2\nFROM   T;"
       }
     ]
   },
