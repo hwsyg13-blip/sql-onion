@@ -1,16 +1,14 @@
 {
  "last_processed_row": null,
- "last_run": "2026-11-14T22:07+09:00",
+ "last_run": "2026-11-15T06:05+09:00",
  "last_gate": {
-  "five_hour": 0.17,
-  "seven_day": 0.67
+  "five_hour": 0.42,
+  "seven_day": 0.34
  },
  "current_mission": null,
  "my_prs": [
   195,
-  299,
-  300,
-  301
+  302
  ],
  "merged_prs": [
   197,
@@ -90,7 +88,7 @@
   296,
   298
  ],
- "stop_reason": "밤 실행 — 63회 복원 자료 아직 검색 안 됨. 복원 사이트 recall.sqld.kr 는 세션 네트워크에서 막힘. 열린 PR 상한",
+ "stop_reason": "(진행 중) 11-15 06:05 실행",
  "releases": [
   214,
   217,
@@ -113,9 +111,12 @@
   "AdSense 11-14 14:04 승인·본인 인증 완료(Gmail). 광고가 안 뜨는 원인 = AdSlot 이 숫자 광고 단위 ID 일 때만 렌더·스크립트 로드(현재 HOME_BOTTOM 등 라벨) → 사용자에게 디스플레이 광고 단위 4개 ID 요청(또는 자동 광고 선택). CSP 에 *.adtrafficquality.google 추가 필요(vercel.json, 사용자 확인). 기본 결제 수단 설정은 사용자 몫"
  ],
  "closed_prs": [
-  196
+  196,
+  299,
+  300,
+  301
  ],
- "cs_last_row": 1517,
+ "cs_last_row": 1576,
  "mock_review": {
   "status": "done",
   "date": "2026-11-04",
