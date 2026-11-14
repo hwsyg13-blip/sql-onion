@@ -906,11 +906,11 @@ export const ROUND_53: QuizQuestion[] = [
     "options": [
       "UNION 연산자는 합집합 결과에서 중복된 행을 하나의 행으로 만든다.",
       "UNION ALL 연산자는 중복이 없는 경우 UNION 과 결과가 동일하다.",
-      "UNION 연산자를 사용한 SQL 은 각각의 집합에 GROUP BY 절을 사용할 수 있다.",
+      "UNION 으로 결합하는 각 SELECT 문은 컬럼의 개수가 같아야 한다.",
       "UNION 연산자를 사용한 SQL 은 각각의 집합에 ORDER BY 절을 사용할 수 있다."
     ],
     "correctIndex": 3,
-    "explanation": "UNION 은 합집합에서 중복 행을 하나로 만들고(①), 중복이 없으면 UNION ALL 과 결과가 같다(②). 각 SELECT 에는 WHERE·GROUP BY·HAVING 을 따로 쓸 수 있지만(③), ORDER BY 는 집합 연산이 끝난 최종 결과에 한 번만, 마지막 SELECT 뒤에 쓸 수 있다. 각 집합에 ORDER BY 를 쓸 수 있다는 ④ 가 옳지 않다.",
+    "explanation": "UNION 은 합집합에서 중복 행을 하나로 만들고(①), 중복이 없으면 UNION ALL 과 결과가 같으며(②), 결합하는 각 SELECT 문은 컬럼 개수가 같아야 한다(③). ORDER BY 는 집합 연산이 끝난 최종 결과에 한 번만, 마지막 SELECT 뒤에 쓸 수 있으므로 각 집합에 ORDER BY 를 쓸 수 있다는 ④ 가 옳지 않다. ※ 복원 자료의 ③ 은 '각각의 집합에 GROUP BY 절을 사용할 수 있다' 로 ④ 와 한 단어만 달라 같은 보기로 읽힌다는 제보가 있어, 구분되는 옳은 설명으로 바꿨다.",
     "_source": "authored"
   },
   {

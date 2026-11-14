@@ -1197,7 +1197,7 @@
     {
       "subject": "2과목",
       "number": 34,
-      "title": "아래 주문 테이블에서 3 회 이상 주문한 고객을 조회하는 HAVING 절로 옳은 것은?",
+      "title": "아래 주문 테이블에서 3 회 이상 주문한 고객을 조회하려 한다. 빈칸에 들어갈 절로 옳은 것은?",
       "options": [
         "HAVING COUNT(구매번호) >= 3",
         "HAVING SUM(구매번호) >= 3",
@@ -1205,7 +1205,7 @@
         "HAVING 구매번호 = 3"
       ],
       "correctIndex": 0,
-      "explanation": "그룹 함수 결과를 필터링할 때는 `HAVING` 을 사용. 3 회 이상 주문 조건은 `COUNT(구매번호) >= 3`. ② SUM 은 합계라 의미 다름, ③ WHERE 절에는 집계 함수를 직접 쓸 수 없음, ④ 는 그룹 함수 없이 비교라 의미 안 맞음.",
+      "explanation": "그룹으로 묶은 뒤의 조건은 HAVING 절에 쓰고, 주문 횟수는 COUNT(구매번호) 로 센다. C001 만 3건이라 C001 이 조회된다(①). ② SUM 은 값을 더하는 함수라 횟수가 아니고(구매번호가 문자라 더할 수도 없다), ③ WHERE 절에는 집계 함수를 쓸 수 없으며, ④ 는 그룹마다 여러 값인 구매번호를 집계 없이 비교해 오류다. ※ 복원 자료의 SQL 에 HAVING 이 미리 적혀 있어 보기 ③(WHERE) 이 바로 걸러진다는 제보가 있어, 빈칸을 절 전체로 바꿨다.",
       "references": [
         {
           "type": "table",
@@ -1243,7 +1243,7 @@
         },
         {
           "type": "sql",
-          "code": "SELECT 고객ID\nFROM   주문\nGROUP BY 고객ID\nHAVING ( ? );"
+          "code": "SELECT 고객ID\nFROM   주문\nGROUP BY 고객ID\n( ? );"
         }
       ]
     },

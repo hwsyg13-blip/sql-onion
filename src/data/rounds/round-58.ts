@@ -471,7 +471,7 @@ export const ROUND_58: QuizQuestion[] = [
       "SQL Server의 계층형 질의문은 CTE(Common Table Expression)를 재귀 호출함으로써 계층 구조를 전개한다."
     ],
     "correctIndex": 0,
-    "explanation": "SQL 전문가 가이드 표현으로 'PRIOR 자식 = 부모'(예: CONNECT BY PRIOR EMPNO = MGR, 앞 행의 사번을 관리자로 가진 행)는 부모 → 자식 순방향 전개이고, 'PRIOR 부모 = 자식'(예: CONNECT BY PRIOR MGR = EMPNO)은 자식 → 부모 역방향 전개다. 한 조건으로 순방향과 역방향이 동시에 전개되지는 않고, PRIOR 는 CONNECT BY 뿐 아니라 SELECT 절에서도 쓸 수 있으므로(예: SELECT PRIOR ENAME) ① 이 옳지 않다. ② WHERE 는 전개가 끝난 뒤 거르는 조건, ③ NOCYCLE 은 순환 시 무한 루프 방지, ④ SQL Server 는 재귀 CTE 로 계층을 전개한다.",
+    "explanation": "SQL 전문가 가이드 표현으로 'PRIOR 자식 = 부모'(예: CONNECT BY PRIOR EMPNO = MGR, 앞 행의 사번을 관리자로 가진 행을 찾음)는 부모에서 자식으로 내려가는 순방향 전개이고, 'PRIOR 부모 = 자식'(예: CONNECT BY PRIOR MGR = EMPNO)은 자식에서 부모로 올라가는 역방향 전개다. 한 조건으로 두 방향이 동시에 전개되지는 않는다. 또 PRIOR 는 CONNECT BY 뿐 아니라 SELECT 절에서도 쓸 수 있다(예: SELECT PRIOR ENAME). 그래서 ① 이 옳지 않다. ② WHERE 는 전개가 끝난 뒤 거르는 조건이고, ③ NOCYCLE 은 순환이 있어도 무한 루프에 빠지지 않게 하며, ④ SQL Server 는 재귀 CTE 로 계층을 전개한다.",
     "_source": "authored"
   },
   {
@@ -1688,7 +1688,7 @@ export const ROUND_58: QuizQuestion[] = [
       "PIVOT 절의 IN 목록에 별칭을 지정할 수 있다."
     ],
     "correctIndex": 2,
-    "explanation": "PIVOT 은 행을 열로(①), UNPIVOT 은 열을 행으로 바꾸며(②), PIVOT 의 IN 목록 값마다 AS 로 열 별칭을 줄 수 있다(④). PIVOT 은 새로 만드는 열에 들어갈 값을 집계해야 하므로 SUM·COUNT 같은 집계 함수가 반드시 필요하다. ③ 이 옳지 않다.",
+    "explanation": "PIVOT 은 행을 열로(①), UNPIVOT 은 열을 행으로 바꾸며(②), PIVOT 의 IN 목록 값마다 AS 로 열 별칭을 줄 수 있다(④). ① 과 ② 는 서로 반대 방향을 설명할 뿐 둘 다 옳다. PIVOT 은 새로 만드는 열에 들어갈 값을 집계해야 하므로 SUM·COUNT 같은 집계 함수가 반드시 필요하다. ③ 이 옳지 않다.",
     "_source": "authored"
   },
   {

@@ -130,7 +130,10 @@ export const CBTExam = ({examId = "round-60", onFinish, onNavigate, onExit, mock
   React.useEffect(() => {
     if (!questions.some(q => [...(q.references || []), ...((q.optionReferences || []).flat().filter(Boolean) as any[])].some((r: any) => r?.type === 'erd'))) return;
     const w = window as any;
-    const run = () => { loadMermaid().catch(() => {}); };
+    // mermaid 본체만 받으면 erDiagram 모듈(별도 청크)은 첫 ERD 를 그릴 때 받는다. 그 사이 배포가 나가면
+    // 그 청크가 404 가 된다 (제보: "Failed to fetch dynamically imported module …/erDiagram-….js").
+    // parse 를 한 번 돌려 erDiagram 모듈까지 미리 받아 둔다.
+    const run = () => { loadMermaid().then(({ default: m }) => m.parse('erDiagram\n  A ||--o{ B : r')).catch(() => {}); };
     const id = w.requestIdleCallback ? w.requestIdleCallback(run, { timeout: 3000 }) : setTimeout(run, 1500);
     return () => { if (w.cancelIdleCallback && w.requestIdleCallback) w.cancelIdleCallback(id); else clearTimeout(id); };
     // eslint-disable-next-line react-hooks/exhaustive-deps

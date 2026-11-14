@@ -116,7 +116,7 @@ export const ROUND_59: QuizQuestion[] = [
     "title": "아래 네 개의 테이블이 1:M 관계로 연결된 모델에서 식별자·비식별자 관계에 대한 설명 중 옳지 않은 것은?",
     "options": [
       "1:M으로 연결되어 있다.",
-      "비식별자 관계로 바꾸면 자식은 부모의 주식별자를 상속받지 않고 일반 속성으로 참조한다.",
+      "비식별자 관계로 바꾸면 부모의 주식별자가 자식의 주식별자에 포함되지 않고 일반 속성(FK)으로 상속된다.",
       "A테이블 키는 내부식별자, B테이블은 외부식별자이다.",
       "B테이블의 FK를 비식별자로 바꾸면 C테이블에서 조인할 때 더 편하다."
     ],
@@ -825,7 +825,7 @@ export const ROUND_59: QuizQuestion[] = [
     "round": 59,
     "subject": "2과목",
     "number": 27,
-    "title": "고객별 주문 금액의 누적 합계를 계산하려 한다. 아래 빈칸에 들어갈 윈도우 절로 가장 적절한 것은?",
+    "title": "주문 한 건마다 그 건까지의 누적 금액을 구하려 한다. 같은 주문일자의 주문도 한 건씩 따로 누적해야 할 때, 빈칸에 들어갈 윈도우 절로 가장 적절한 것은?",
     "options": [
       "ROWS BETWEEN 1 PRECEDING AND 1 FOLLOWING",
       "ROWS BETWEEN CURRENT ROW AND UNBOUNDED FOLLOWING",
@@ -833,7 +833,7 @@ export const ROUND_59: QuizQuestion[] = [
       "RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW"
     ],
     "correctIndex": 2,
-    "explanation": "누적 합계는 첫 행부터 현재 행까지의 합이므로 시작 경계를 UNBOUNDED PRECEDING, 끝 경계를 CURRENT ROW로 지정해야 한다. ①은 이동평균 범위, ②는 현재 이후의 합계, ④는 RANGE 기반으로 동일 정렬 키 값들을 한 번에 묶어 계산하므로 행 단위 누적과는 차이가 있다.",
+    "explanation": "주문 건마다 따로 누적하려면 첫 행부터 현재 행까지를 행 단위로 더하는 ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW 를 쓴다(③). 결과는 10,000, 30,000, 33,000, 38,000 처럼 1월 8일의 두 건도 한 건씩 차례로 더해진다(같은 날 두 건의 순서는 정렬 키가 같아 정해지지 않는다). ④ RANGE 는 ORDER BY 값이 같은 행을 한꺼번에 묶어 1월 8일 두 건이 모두 33,000 이 되므로 건별 누적이 아니다. ① 은 앞뒤 한 건씩의 이동 합계, ② 는 현재 행부터 끝까지의 합계다. ※ '고객별 누적 합계' 라는 문장만으로는 ③ 과 ④ 가 모두 답처럼 보인다는 제보가 있어, 건별 누적이라는 조건을 문장에 넣었다.",
     "_source": "authored",
     "references": [
       {
@@ -1038,13 +1038,13 @@ export const ROUND_59: QuizQuestion[] = [
     "number": 32,
     "title": "아래 EMP 테이블에 대한 SQL 의 설명 중 옳지 않은 것은?",
     "options": [
-      "부서가 1개이면 값이 하나이다.",
-      "부서 수에 따라 오류가 발생할 수 있다.",
-      "ANY로 바꿔도 동일하다.",
-      "ALL로 바꿔도 동일하다."
+      "서브쿼리는 바깥 행 하나마다 그 부서의 최고 급여 값 하나만 돌려준다.",
+      "부서 수가 많아지면 서브쿼리가 여러 행을 돌려줘 오류가 발생할 수 있다.",
+      "> 를 > ANY 로 바꿔도 결과가 같다.",
+      "> 를 > ALL 로 바꿔도 결과가 같다."
     ],
     "correctIndex": 1,
-    "explanation": "연관 서브쿼리는 외부 쿼리의 각 행마다 한 번씩 실행되며, 각 부서별 `MAX(SAL)` 은 단일 값을 반환하므로 다중 행 반환 오류는 발생하지 않는다. ② 는 부서 수와 무관하게 항상 단일 값을 반환하므로 오류가 발생한다는 진술은 옳지 않다. ③④ 서브쿼리가 부서별 MAX(SAL) 하나만 반환하므로 ANY 나 ALL 로 바꿔도 비교 대상이 하나뿐이어서 결과는 동일하다(옳은 설명). 참고로 어떤 사원도 자기 부서 최고 급여보다 클 수 없으므로 이 SQL 의 최종 결과는 공집합이다.",
+    "explanation": "연관 서브쿼리는 바깥 행마다 한 번씩 실행되고, 그때마다 그 행의 부서(E.DEPTNO)에 대한 MAX(SAL) 하나만 돌려준다(①). 부서가 몇 개든 서브쿼리 결과는 항상 한 행이라 다중 행 오류가 나지 않으므로 ② 가 옳지 않다. 비교 대상이 값 하나뿐이라 > ANY(③)나 > ALL(④)로 바꿔도 결과가 같다. 어떤 사원도 자기 부서 최고 급여보다 클 수 없으므로 이 SQL 의 결과는 공집합이다. ※ 복원 자료의 ① '부서가 1개이면 값이 하나이다' 는 무엇의 값인지 모호해 ① 도 틀린 설명으로 읽힌다는 제보가 있어 보기 문장을 분명히 했다.",
     "_source": "authored",
     "references": [
       {
@@ -1165,7 +1165,7 @@ export const ROUND_59: QuizQuestion[] = [
       "B B C"
     ],
     "correctIndex": 2,
-    "explanation": "T2 = {B} 에서 T3 = {C} 의 원소를 제외(`NOT IN`)하면 {B} 가 그대로 남는다. T1 = {A, B, C} 와 `UNION ALL` 로 결합하면 중복 제거 없이 {A, B, C, B} = {A, B, B, C} 가 된다. ① A·② A B 는 T1 의 일부나 아래쪽 결과를 빠뜨린 결과이고, ④ 는 T1 의 A 를 빠뜨린 결과다.",
+    "explanation": "WHERE 절은 바로 앞 SELECT(T2) 에만 붙는다. T2 의 B 는 T3 의 C 와 달라 NOT IN 을 통과해 B 가 남는다. 이를 T1 의 A, B, C 와 UNION ALL 로 중복 없이 이어 붙이면 A, B, C, B 네 행이다(③). UNION ALL 은 정렬하지 않으므로 보통 위 SELECT 결과 다음에 아래 SELECT 결과가 붙는다. ① A 와 ② A B 는 T1 의 일부나 T2 쪽 결과를 빠뜨린 것이고, ④ 는 T1 의 A 를 빠뜨렸다.",
     "_source": "authored",
     "references": [
       {
@@ -1709,7 +1709,7 @@ export const ROUND_59: QuizQuestion[] = [
     "options": [
       "M = 100 (모든 행), S = 누적 (100, 200, ..., 600), F = 100 (모든 행)",
       "M = NULL, S = 600 (모든 행), F = NULL",
-      "M = 100, 200, 300, 400, 500, 600 (S 와 동일)",
+      "M = 100, 200, 300, 400, 500, 600 (S 와 같은 누적), F = 100 (모든 행)",
       "M = S = F = 100 (세 컬럼 모두 모든 행에서 100)"
     ],
     "correctIndex": 0,
@@ -1787,7 +1787,7 @@ export const ROUND_59: QuizQuestion[] = [
     "round": 59,
     "subject": "2과목",
     "number": 49,
-    "title": "계층형 질의에서 사이클(순환)을 허용하면서 순환된 행을 표시하려 한다. 빈칸에 들어갈 옵션은?",
+    "title": "계층형 질의에서 데이터에 순환(사이클)이 있어도 무한 루프 없이 전개하고, 순환이 일어난 행을 표시하려 한다. 빈칸에 들어갈 옵션은?",
     "options": [
       "NO CYCLE",
       "LEAF",
@@ -1795,7 +1795,7 @@ export const ROUND_59: QuizQuestion[] = [
       "NOCYCLES"
     ],
     "correctIndex": 2,
-    "explanation": "NOCYCLE 옵션을 지정하면 사이클 발생 시 무한 루프에 빠지지 않고 CONNECT_BY_ISCYCLE 값으로 해당 행을 표시한다. ① NO CYCLE 과 ④ NOCYCLES 는 없는 철자이고, ② LEAF 는 CONNECT BY 옵션이 아니다(리프 여부는 CONNECT_BY_ISLEAF 로 본다).",
+    "explanation": "NOCYCLE 을 쓰면 순환이 있는 데이터를 만나도 이미 지나온 행으로 다시 돌아가지 않고 그 가지의 전개를 멈춘다. 그래서 무한 루프 오류(ORA-01436) 없이 결과가 나오고, 순환이 일어난 행은 CONNECT_BY_ISCYCLE 이 1 로 표시된다(③). NOCYCLE 이 없으면 순환을 만났을 때 오류가 난다. ① NO CYCLE 과 ④ NOCYCLES 는 없는 철자이고, ② LEAF 는 CONNECT BY 옵션이 아니다(리프 여부는 CONNECT_BY_ISLEAF 로 본다). ※ '순환을 허용하면서' 라는 문장이 '순환을 허용하지 않는다' 와 헷갈린다는 제보가 있어 문장을 풀어 썼다.",
     "_source": "authored",
     "references": [
       {

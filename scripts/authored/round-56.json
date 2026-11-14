@@ -884,10 +884,10 @@
         "SELECT A.EMP_ID, B.EMP_ID FROM EMP A INNER JOIN EMP B ON A.EMP_ID = B.EMP_ID;",
         "SELECT A.EMP_ID, B.EMP_ID FROM EMP A INNER JOIN EMP B ON A.MGR_ID = B.EMP_ID;",
         "SELECT A.EMP_ID, B.EMP_ID FROM EMP A LEFT OUTER JOIN EMP B ON A.EMP_ID = B.MGR_ID;",
-        "SELECT A.EMP_ID, B.EMP_ID FROM EMP A LEFT OUTER JOIN EMP B ON A.EMP_ID = B.EMP_ID;"
+        "SELECT A.EMP_ID, B.EMP_ID FROM EMP A RIGHT OUTER JOIN EMP B ON A.EMP_ID = B.MGR_ID;"
       ],
       "correctIndex": 2,
-      "explanation": "셀프 조인으로 \"A 가 관리하는 부하 사원 B\" 를 매칭하려면 `A.EMP_ID = B.MGR_ID` 조건이 필요 (B 의 관리자 = A). LEFT OUTER JOIN 으로 부하가 없는 A 사원(예: 1003, 1004) 도 결과에 NULL 과 함께 포함된다. ① 자기 자신과 매칭, ② 는 \"A 의 상사 = B\" 매칭으로 의미 반대, ④ 자기 자신 LEFT OUTER 라 모두 의도와 다름.",
+      "explanation": "A 가 관리하는 부하 B 를 붙이려면 B 의 관리자가 A 여야 하므로 조건은 A.EMP_ID = B.MGR_ID 다. 부하가 없는 A 까지 남기려면 A 쪽을 보존하는 LEFT OUTER JOIN 을 쓴다(③). 결과는 (1001, 1002), (1002, 1003), (1002, 1004), (1003, NULL), (1004, NULL) 이다. ① 은 자기 자신과 짝지어 부하 관계가 아니고, ② 는 A.MGR_ID = B.EMP_ID 라 B 가 A 의 상사가 되며, ④ 는 조건은 맞지만 RIGHT OUTER JOIN 이라 B 쪽을 보존해 부하 없는 1003·1004 가 A 자리에 나오지 않고 대신 (NULL, 1001) 이 생긴다. ※ 복원 자료의 ④ 는 ① 과 결과가 같은 보기라 헷갈린다는 제보가 있어 바꿨다(PostgreSQL 실행 확인).",
       "references": [
         {
           "type": "table",

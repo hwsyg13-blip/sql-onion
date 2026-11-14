@@ -292,7 +292,12 @@ function RefEntityDiagram({ entityName, preText, headers, rows }: any) {
 // 표기법을 그대로 글로 보여 준다. 관계의 '뜻'(필수·선택)은 문제의 답이 될 수 있어 풀어 쓰지 않고 기호만 옮긴다.
 const ERD_REL = /^\s*("?[^"\s{]+"?)\s+([|}][|o]|[|o][|{])(--|\.\.)([|o][|{]|[|}][|o])\s+("?[^"\s:]+"?)\s*(?::\s*"?([^"]*)"?)?\s*$/;
 function escHtml(s: string) { return s.replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' } as any)[c]); }
-export function erdFallbackHtml(code: string): string {
+// 배포 직후 옛 청크가 사라져 mermaid 의 erDiagram 모듈을 못 받을 때 브라우저별 메시지
+// (Chrome: Failed to fetch dynamically imported module / Safari: Importing a module script failed / Firefox: error loading dynamically imported module)
+export const isChunkLoadError = (msg: string) =>
+  /dynamically imported module|module script failed|Loading chunk|Failed to fetch/i.test(msg);
+
+export function erdFallbackHtml(code: string, staleChunk = false): string {
   const lines = String(code || '').split('\n');
   const rels: string[] = [];
   const ents: { name: string; attrs: string[] }[] = [];
@@ -316,6 +321,11 @@ export function erdFallbackHtml(code: string): string {
     + (rels.length ? box(rels.join('\n')) : '')
     + `<div style="margin-top:10px;font-size:12px;line-height:1.6;color:var(--fg-3);">이 브라우저에서 다이어그램을 그리지 못해 표기를 글로 옮겼어요. `
     + `<code>|</code> 수직선, <code>o</code> 동그라미, <code>{</code> <code>}</code> 까마귀발, ──── 실선, ┄┄┄┄ 점선이에요.</div>`
+    + (staleChunk
+      ? `<div style="margin-top:6px;font-size:12px;line-height:1.6;color:var(--fg-3);">사이트가 방금 업데이트되어 그림을 불러오지 못했어요. `
+        + `<button type="button" onclick="location.reload()" style="padding:2px 10px;border-radius:6px;border:1px solid var(--border-default);background:var(--bg-card);color:var(--fg-1);font:inherit;cursor:pointer;">새로고침</button>`
+        + ` 하면 그림으로 보여요(시험 중이면 답안이 초기화될 수 있어요).</div>`
+      : '')
     + `</div>`;
 }
 
@@ -364,17 +374,46 @@ function RefErd({ mermaid: code, caption, instanceTable }: any) {
           attributeBackgroundColorEven: isDark ? '#262E26' : '#F0F7F1',
         },
         securityLevel: 'loose',
+        // 실패해도 mermaid 가 body 맨 아래에 'Syntax error in text' 폭탄 그림을 붙이지 않게
+        suppressErrorRendering: true,
       });
       const renderId = `erd-${reactId}-${isDark ? 'd' : 'l'}`;
-      const show = ({ svg }: { svg: string }) => { if (!cancelled && ref.current) ref.current.innerHTML = svg; };
+      let settled = false;
+      // 어떤 브라우저에서 렌더가 끝나지도 실패하지도 않으면 빈 상자로 남는다 (Safari 제보 "ERD 가 빈칸").
+      // 8초 안에 그림이 안 나오면 표기를 글로 먼저 보여 주고, 늦게라도 그림이 오면 바꿔 끼운다.
+      const watchdog = setTimeout(() => {
+        if (settled || cancelled || !ref.current) return;
+        trackEvent('erd_render_error', { message: 'timeout', ua: navigator.userAgent.slice(0, 100) });
+        ref.current.innerHTML = erdFallbackHtml(code);
+      }, 8000);
+      const show = ({ svg }: { svg: string }) => {
+        settled = true; clearTimeout(watchdog);
+        if (cancelled || !ref.current) return;
+        ref.current.innerHTML = svg;
+        // mermaid 는 width="100%" + style max-width 로 크기를 주는데, Safari 의 flex 컨테이너에서는
+        // 이 조합이 폭 0 으로 접혀 그림이 안 보일 수 있다. viewBox 크기를 width/height 로 박고
+        // max-width:100%·height:auto 로 줄어들게만 한다 (모든 브라우저에서 같은 결과).
+        const el = ref.current.querySelector('svg');
+        const vb = el?.viewBox?.baseVal;
+        if (el && vb && vb.width > 0 && vb.height > 0) {
+          el.setAttribute('width', String(Math.ceil(vb.width)));
+          el.setAttribute('height', String(Math.ceil(vb.height)));
+          el.style.maxWidth = '100%';
+          el.style.height = 'auto';
+          el.style.flexShrink = '1';
+        }
+      };
       mermaid.render(renderId, code).then(show).catch(() =>
         // 같은 id 의 이전 렌더 잔여물 등 일시적인 실패일 수 있으니 새 id 로 한 번 더
         new Promise(r => setTimeout(r, 250)).then(() => mermaid.render(`${renderId}-r${Date.now() % 100000}`, code)).then(show)
       ).catch(err => {
+        settled = true; clearTimeout(watchdog);
+        // 실패한 렌더가 남긴 임시 요소 정리 (mermaid 는 id 앞에 d 를 붙인 래퍼를 body 에 만든다)
+        document.querySelectorAll(`[id^="d${renderId}"]`).forEach(n => n.remove());
         const msg = String(err?.message || err).slice(0, 120);
         console.warn('[RefErd] render failed', msg);
         trackEvent('erd_render_error', { message: msg, ua: navigator.userAgent.slice(0, 100) });
-        if (!cancelled && ref.current) ref.current.innerHTML = erdFallbackHtml(code);
+        if (!cancelled && ref.current) ref.current.innerHTML = erdFallbackHtml(code, isChunkLoadError(msg));
       });
     }).catch(err => {
       console.warn('[RefErd] mermaid load failed', err);
