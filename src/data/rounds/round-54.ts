@@ -212,13 +212,13 @@ export const ROUND_54: QuizQuestion[] = [
     "number": 11,
     "title": "CTAS(CREATE TABLE AS SELECT) 에 대한 설명으로 적절하지 않은 것은?",
     "options": [
-      "데이터만 복사한다.",
+      "SELECT 결과의 데이터도 함께 복사된다.",
       "제약 조건이 모두 복사된다.",
       "기존 테이블의 구조를 기반으로 한다.",
       "일부 제약 조건은 별도로 추가할 수 있다."
     ],
     "correctIndex": 1,
-    "explanation": "CTAS 는 SELECT 결과를 기준으로 새 테이블의 컬럼 구조를 만들고 데이터를 복사한다(①③). 이때 원본의 제약 조건 중 NOT NULL 만 따라오고 PK·FK·UNIQUE·CHECK·DEFAULT 는 복사되지 않아, 필요하면 ALTER TABLE 로 따로 추가한다(④). 제약 조건이 모두 복사된다는 ② 가 옳지 않다.",
+    "explanation": "CTAS 는 SELECT 결과를 기준으로 새 테이블의 컬럼 구조를 만들고 데이터도 함께 복사한다(①③). 이때 원본의 제약 조건 중 NOT NULL 만 따라오고 PK·FK·UNIQUE·CHECK·DEFAULT 는 복사되지 않아, 필요하면 ALTER TABLE 로 따로 추가한다(④). 제약 조건이 모두 복사된다는 ② 가 옳지 않다. ※ 복원 자료의 ① '데이터만 복사한다' 는 구조도 함께 만들어지므로 그 자체로 틀린 문장이라 정답이 둘이 된다는 제보가 있어 바로잡았다.",
     "_source": "authored"
   },
   {
@@ -912,7 +912,7 @@ export const ROUND_54: QuizQuestion[] = [
       "CHECK 는 특정 조건을 만족하는 값만 허용한다."
     ],
     "correctIndex": 2,
-    "explanation": "UNIQUE 는 값의 중복만 막을 뿐 NULL 은 허용하므로 ③ 이 적절하지 않다. NULL 까지 막으려면 NOT NULL 제약을 따로 지정해야 한다. 반면 PRIMARY KEY 는 유일성과 NOT NULL 을 함께 강제한다. ① PK 는 유일성과 NOT NULL, ② FK 는 부모 키 참조, ④ CHECK 는 조건 검사라 모두 옳다.",
+    "explanation": "UNIQUE 는 값의 중복만 막을 뿐 NULL 은 허용하므로 ③ 이 적절하지 않다. NULL 까지 막으려면 NOT NULL 제약을 따로 지정해야 한다. ① PK 는 유일성과 NOT NULL, ② FK 는 부모 키 참조, ④ CHECK 는 조건 검사라 모두 옳다.",
     "_source": "authored"
   },
   {

@@ -767,7 +767,7 @@
         "NULL, NULL"
       ],
       "correctIndex": 1,
-      "explanation": "첫 번째는 'b*c' 를 리터럴로 해석(b, *, c 가 연속)하여 매칭되지 않아 NULL 이 된다. 두 번째는 'b*c' 에서 * 가 0회 이상을 의미하므로 'bc' 에 매칭된다. ① 은 첫 번째의 \\* 도 반복 기호로 본 결과, ③ 은 둘을 반대로 본 결과, ④ 는 두 번째 패턴도 매칭되지 않는다고 본 결과다.",
+      "explanation": "첫 번째 패턴 'b\\*c' 의 \\* 는 별표 문자 그대로라 b, *, c 가 연달아 있어야 하는데 'abcd' 에는 * 가 없어 NULL 이다. 두 번째 패턴 'b*c' 의 * 는 바로 앞 b 가 0번 이상 반복된다는 뜻이라 'bc' 와 맞아 'bc' 가 나온다. 그래서 NULL, bc 이고 정답은 ② 다. ① 은 첫 번째의 \\* 도 반복 기호로 본 결과, ③ 은 둘을 반대로 본 결과, ④ 는 두 번째 패턴도 맞지 않는다고 본 결과다.",
       "references": [
         {
           "type": "sql",
@@ -1197,7 +1197,7 @@
     {
       "subject": "2과목",
       "number": 34,
-      "title": "아래 주문 테이블에서 3 회 이상 주문한 고객을 조회하는 HAVING 절로 옳은 것은?",
+      "title": "아래 주문 테이블에서 3 회 이상 주문한 고객을 조회하려 한다. 빈칸에 들어갈 절로 옳은 것은?",
       "options": [
         "HAVING COUNT(구매번호) >= 3",
         "HAVING SUM(구매번호) >= 3",
@@ -1205,7 +1205,7 @@
         "HAVING 구매번호 = 3"
       ],
       "correctIndex": 0,
-      "explanation": "그룹 함수 결과를 필터링할 때는 `HAVING` 을 사용. 3 회 이상 주문 조건은 `COUNT(구매번호) >= 3`. ② SUM 은 합계라 의미 다름, ③ WHERE 절에는 집계 함수를 직접 쓸 수 없음, ④ 는 그룹 함수 없이 비교라 의미 안 맞음.",
+      "explanation": "그룹으로 묶은 뒤의 조건은 HAVING 절에 쓰고, 주문 횟수는 COUNT(구매번호) 로 센다. C001 만 3건이라 C001 이 조회된다(①). ② SUM 은 값을 더하는 함수라 횟수가 아니고(구매번호가 문자라 더할 수도 없다), ③ WHERE 절에는 집계 함수를 쓸 수 없으며, ④ 는 그룹마다 여러 값인 구매번호를 집계 없이 비교해 오류다. ※ 복원 자료의 SQL 에 HAVING 이 미리 적혀 있어 보기 ③(WHERE) 이 바로 걸러진다는 제보가 있어, 빈칸을 절 전체로 바꿨다.",
       "references": [
         {
           "type": "table",
@@ -1243,7 +1243,7 @@
         },
         {
           "type": "sql",
-          "code": "SELECT 고객ID\nFROM   주문\nGROUP BY 고객ID\nHAVING ( ? );"
+          "code": "SELECT 고객ID\nFROM   주문\nGROUP BY 고객ID\n( ? );"
         }
       ]
     },
@@ -1376,7 +1376,7 @@
         "(A UNION B) MINUS (A INTERSECT B)"
       ],
       "correctIndex": 0,
-      "explanation": "(A UNION B)는 양쪽 모두에 있는 행을 한 번씩 포함하는 합집합. (A INTERSECT B)는 양쪽 공통 행. UNION ALL은 두 결과를 그대로 이어 붙이므로, (A UNION B) UNION ALL (A INTERSECT B)는 A UNION ALL B와 같은 행 수를 가진다(공통 행이 두 번 등장하는 효과). ② 는 UNION 이라 중복이 지워져 A UNION B 와 같고, ③ 은 B 에만 있는 행이 빠지며, ④ 는 공통 행이 빠진 대칭 차집합이다."
+      "explanation": "A 와 B 에 각각 중복이 없으면 A UNION ALL B 는 공통 행만 두 번, 나머지 행은 한 번씩 나온다. ① 에서 A UNION B 는 모든 행을 한 번씩 담고, 거기에 A INTERSECT B(공통 행)를 UNION ALL 로 한 번 더 붙이므로 공통 행이 두 번 나와 A UNION ALL B 와 결과가 같다. ② 는 UNION 이라 중복이 지워져 A UNION B 와 같고, ③ 은 B 에만 있는 행이 빠지며, ④ 는 공통 행이 빠진 대칭 차집합이다."
     },
     {
       "subject": "2과목",

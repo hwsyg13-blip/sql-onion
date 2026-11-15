@@ -906,11 +906,11 @@ export const ROUND_53: QuizQuestion[] = [
     "options": [
       "UNION 연산자는 합집합 결과에서 중복된 행을 하나의 행으로 만든다.",
       "UNION ALL 연산자는 중복이 없는 경우 UNION 과 결과가 동일하다.",
-      "UNION 연산자를 사용한 SQL 은 각각의 집합에 GROUP BY 절을 사용할 수 있다.",
+      "UNION 으로 결합하는 각 SELECT 문은 컬럼의 개수가 같아야 한다.",
       "UNION 연산자를 사용한 SQL 은 각각의 집합에 ORDER BY 절을 사용할 수 있다."
     ],
     "correctIndex": 3,
-    "explanation": "UNION 은 합집합에서 중복 행을 하나로 만들고(①), 중복이 없으면 UNION ALL 과 결과가 같다(②). 각 SELECT 에는 WHERE·GROUP BY·HAVING 을 따로 쓸 수 있지만(③), ORDER BY 는 집합 연산이 끝난 최종 결과에 한 번만, 마지막 SELECT 뒤에 쓸 수 있다. 각 집합에 ORDER BY 를 쓸 수 있다는 ④ 가 옳지 않다.",
+    "explanation": "UNION 은 합집합에서 중복 행을 하나로 만들고(①), 중복이 없으면 UNION ALL 과 결과가 같으며(②), 결합하는 각 SELECT 문은 컬럼 개수가 같아야 한다(③). ORDER BY 는 집합 연산이 끝난 최종 결과에 한 번만, 마지막 SELECT 뒤에 쓸 수 있으므로 각 집합에 ORDER BY 를 쓸 수 있다는 ④ 가 옳지 않다. ※ 복원 자료의 ③ 은 '각각의 집합에 GROUP BY 절을 사용할 수 있다' 로 ④ 와 한 단어만 달라 같은 보기로 읽힌다는 제보가 있어, 구분되는 옳은 설명으로 바꿨다.",
     "_source": "authored"
   },
   {
@@ -1552,7 +1552,7 @@ export const ROUND_53: QuizQuestion[] = [
       "7"
     ],
     "correctIndex": 2,
-    "explanation": "TABLE50 은 비어 있는 상태로 시작한다. INSERT 1·2·3 → 3건. SAVEPOINT SQL1 선언. INSERT 4·5 → 5건. COMMIT 시점에 5건이 영구 확정되며 이때 SAVEPOINT SQL1 은 함께 사라진다. 이후 INSERT 6 → 6건. ROLLBACK TO SAVEPOINT SQL1 은 가리킬 SAVEPOINT 가 없으므로 오류가 발생해 무시되거나 영향이 없고, 최종 SELECT 결과는 6 건이다. 정답은 ③. ② 5 는 ROLLBACK 이 커밋되지 않은 6 만 취소한다고 본 값이다.",
+    "explanation": "빈 테이블에 1·2·3 을 넣고 SAVEPOINT SQL1 을 만든 뒤 4·5 를 넣으면 5건이다. 여기서 COMMIT 하면 5건이 확정되고, COMMIT 이전에 만든 SAVEPOINT SQL1 도 함께 사라진다. 이어서 6 을 넣으면 6건이 되는데, ROLLBACK TO SAVEPOINT SQL1 은 가리킬 저장점이 없어 오류만 나고 아무것도 취소하지 못한다. 그래서 마지막 조회 결과는 6건이고 정답은 ③ 이다. ② 5 는 이 ROLLBACK 이 커밋되지 않은 6 만 취소한다고 본 값이다.",
     "_source": "authored",
     "references": [
       {

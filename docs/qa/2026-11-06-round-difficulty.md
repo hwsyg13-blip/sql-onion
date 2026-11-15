@@ -136,3 +136,24 @@
 | 54-39 | GROUP BY + HAVING COUNT(*) + ORDER BY 별칭 DESC | 5행 2그룹 → 9행 4그룹(전부 NULL 인 그룹, NULL 그룹 키), HAVING 추가, DESC | 부서3 NULL / 부서1 18000 / 부서2 11300 | (C) Oracle 은 DESC 에서 NULL 이 맨 앞 → "Oracle 기준" 표기. HAVING 없는 결과도 실행해 ④ 재현 |
 
 - 화면 확인 중 `GROUP  BY`·`ORDER  BY` 처럼 공백이 두 칸인 SQL 은 키워드 색이 빠지는 것을 발견했다(61·62회·하드 모의고사 포함 26곳). `src/components/Atoms.tsx` 의 강조 정규식에서 두 단어 키워드의 공백을 `\s+` 로 바꿔 고쳤다.
+
+## 12차 2문항 (11-15)
+
+| 문항 | 개념 | 바뀐 점 | 정답 | 5가지 시선에서 걸린 것과 처리 |
+|---|---|---|---|---|
+| 48-24 | WHERE 비교 + NULL + SUM | 10행이 모두 (10, 5) 인 표 → 7행, 같은 값·A<B·A 또는 B 가 NULL 인 행 섞음, SUM(A)·SUM(B)·COUNT(*) 함께 | 53, 42, 4 | 오답 재현: > 로 보면 18·7·2, NULL 비교 통과로 보면 83·45·6, WHERE 무시 88·55·7 (PostgreSQL) |
+| 47-26 | CASE + SUM + NULL 덧셈 | 한 행 (12, 13) → 4행에 NULL 두 개, 행 단위 덧셈 합(R1)과 컬럼 합의 덧셈(R2) 비교 | 32, 44 | 오답 재현: NULL 이면 SUM 전체 NULL 로 본 0, 행 덧셈 NULL 을 0 으로 본 44, R2 도 행을 뺀 32 / (C) RANK 는 컬럼명으로 쓸 수 있음(기존 문항과 동일) |
+
+## 13차 2문항 (11-15 오후)
+
+| 문항 | 개념 | 바뀐 점 | 정답 | 5가지 시선에서 걸린 것과 처리 |
+|---|---|---|---|---|
+| 45-29 | AVG(NVL()) vs NVL(AVG()) | 1컬럼 3행 → DEPT 그룹 3개·7행(모두 NULL 인 그룹, 값 0 섞음), 두 식을 나란히 | (A,10,15),(B,0,0),(C,15,15) | 오답 재현: NULL 을 분모에서 뺀 X(A 15), 모두 NULL 그룹을 NULL 로 본 값, 0 을 NULL 처럼 뺀 C 30 (PostgreSQL) |
+| 46-45 | WHERE + COUNT(col)/COUNT(*) + AVG | 4행 → 6행, COL1·COL2 에 NULL, COUNT(*) 추가 | 2, 4, 25.75 | 오답 재현: COUNT(COL1) 이 NULL 을 센 4, NULL 비교 통과 3·5, WHERE 무시 4·6·24.6 |
+
+## 14차 2문항 (11-15 오후)
+
+| 문항 | 개념 | 바뀐 점 | 정답 | 5가지 시선에서 걸린 것과 처리 |
+|---|---|---|---|---|
+| 47-41 | AVG vs SUM/COUNT(*) + HAVING COUNT(col) | 1컬럼 3행 → 그룹 3개·6행(값이 NULL 뿐인 그룹), HAVING COUNT(COL) 추가 | (A,105,70),(B,90,45) | 오답 재현: HAVING 을 COUNT(*) 로 보면 C(NULL, NULL) 이 남음, COUNT(*) 도 NULL 을 뺀다고 보면 105·90 (PostgreSQL) |
+| 48-46 | WHERE 조건별 SUM 과 NULL | 3행 → 5행, ㄷ 에 OR + IS NULL, ㄹ 에 NULL 비교로 빠지는 행 | 90 / 30 / 40 / NULL | 오답 재현: ㄴ NULL 통과 80, 모두 NULL 인 SUM 을 0, ㄹ NULL 통과 30 |

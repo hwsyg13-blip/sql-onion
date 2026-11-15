@@ -37,7 +37,7 @@ export const ROUND_52: QuizQuestion[] = [
       "학생이 학과를 참조하고 있어 참조 무결성 오류로 삭제가 중단된다."
     ],
     "correctIndex": 0,
-    "explanation": "FK 에 `ON DELETE CASCADE` 가 설정되면 부모(학과) 행 삭제 시 그 행을 참조하던 자식(학생) 행이 자동으로 함께 삭제된다. ② 는 ON DELETE 가 자식 행만 단독으로 지우는 정책이 아니라는 점에서 오답, ③ 은 `ON DELETE SET NULL` 의 동작이고, ④ 는 `ON DELETE RESTRICT/NO ACTION` 의 동작이다. 본 문항은 CASCADE 가 명시되어 있으므로 ④ 가 아닌 ① 이 단일 정답이다.",
+    "explanation": "FK 에 `ON DELETE CASCADE` 가 설정되면 부모(학과) 행 삭제 시 그 행을 참조하던 자식(학생) 행이 자동으로 함께 삭제된다. ② 는 ON DELETE 가 자식 행만 단독으로 지우는 정책이 아니라는 점에서 오답, ③ 은 `ON DELETE SET NULL` 의 동작이고, ④ 는 `ON DELETE RESTRICT/NO ACTION` 의 동작이다. 그래서 CS 학과 한 행과 CS 학생 두 명(1001, 1002)이 지워지고 EE 학과와 1003 박민수만 남는다.",
     "_source": "authored",
     "references": [
       {
@@ -92,36 +92,6 @@ export const ROUND_52: QuizQuestion[] = [
       {
         "type": "sql",
         "code": "-- FK 정의 (학생 테이블 생성 시)\nCREATE TABLE 학생 (\n  학번      VARCHAR2(10) PRIMARY KEY,\n  이름      VARCHAR2(20),\n  학과코드  VARCHAR2(4),\n  CONSTRAINT FK_학생_학과 FOREIGN KEY (학과코드)\n    REFERENCES 학과(학과코드) ON DELETE CASCADE\n);\n\n-- 부모 행 삭제\nDELETE FROM 학과 WHERE 학과코드 = 'CS';"
-      },
-      {
-        "type": "table",
-        "caption": "학과 (실행 후) — CS 한 행 삭제",
-        "headers": [
-          "학과코드",
-          "학과명"
-        ],
-        "rows": [
-          [
-            "EE",
-            "전자공학과"
-          ]
-        ]
-      },
-      {
-        "type": "table",
-        "caption": "학생 (실행 후) — CS 학과 학생 2명 CASCADE 삭제",
-        "headers": [
-          "학번",
-          "이름",
-          "학과코드"
-        ],
-        "rows": [
-          [
-            "1003",
-            "박민수",
-            "EE"
-          ]
-        ]
       }
     ]
   },
@@ -895,7 +865,7 @@ export const ROUND_52: QuizQuestion[] = [
       "SELECT * FROM 회원 INNER JOIN 주문 ON 회원.회원ID = 주문.회원ID;"
     ],
     "correctIndex": 2,
-    "explanation": "주문 이력이 없는 회원은 주문 테이블에 매칭 행이 없는 회원이므로 NOT EXISTS 또는 LEFT OUTER JOIN ... IS NULL 패턴이 정답이다. ① EXISTS 는 주문 있는 회원, ② IN 도 주문 있는 회원, ④ INNER JOIN 은 매칭만 — 모두 의도와 반대. 정답 ③ NOT EXISTS.",
+    "explanation": "주문 이력이 없는 회원은 주문 테이블에 같은 회원ID 행이 하나도 없는 회원이므로, 회원마다 그런 주문이 없는지 확인하는 NOT EXISTS 가 맞다(③). LEFT OUTER JOIN 뒤 주문 쪽이 NULL 인 행을 고르는 방법도 같은 결과다. ① EXISTS 와 ② IN 은 반대로 주문이 있는 회원을 찾고, ④ INNER JOIN 은 주문과 짝이 맞는 회원만 남겨 역시 의도와 반대다.",
     "_source": "authored"
   },
   {
@@ -1359,21 +1329,91 @@ export const ROUND_52: QuizQuestion[] = [
     "round": 52,
     "subject": "2과목",
     "number": 42,
-    "title": "아래 ERD 와 같이 제품·생산제품·생산라인 엔터티가 있을 때 제품과 생산라인을 직접 조인할 경우 발생하는 현상은?",
+    "title": "아래 ERD 와 데이터에 대한 SQL 의 결과로 옳은 것은? (제품명 오름차순)",
     "options": [
-      "정상 조인 결과",
-      "공집합",
-      "중복 제거 결과",
-      "카티션 곱"
+      "노트 1, 볼펜 1, 지우개 0",
+      "노트 1, 볼펜 2, 지우개 0",
+      "노트 1, 볼펜 1 (지우개 행 없음)",
+      "노트 1, 볼펜 2, 지우개 1"
     ],
-    "correctIndex": 3,
-    "explanation": "제품과 생산라인은 교차 엔터티인 생산제품을 거쳐 M:N 관계로 연결된다. 중간 엔터티를 건너뛰고 두 테이블을 직접 `JOIN` 하면 조인 조건이 성립할 키가 없어 모든 행이 곱해지는 카티션 곱(CROSS JOIN) 이 발생한다. 정확히 조인하려면 `제품 JOIN 생산제품 ON 제품.제품번호 = 생산제품.제품번호 JOIN 생산라인 ON 생산제품.라인번호 = 생산라인.라인번호` 형태로 중간 엔터티를 경유해야 한다. ① 정상 조인이 아니고, ② 공집합이 아니라 모든 조합이 나오며, ③ 중복 제거는 일어나지 않는다.",
+    "correctIndex": 0,
+    "explanation": "제품과 생산라인은 교차 엔터티 생산제품을 거쳐 연결되므로 제품, 생산제품, 생산라인 순으로 조인한다. 첫 번째 LEFT OUTER JOIN 으로 볼펜은 (L1)·(L2) 두 행, 노트는 (L1) 한 행이 되고, 생산 기록이 없는 지우개도 생산제품 쪽이 NULL 인 한 행으로 남는다. 두 번째 LEFT OUTER JOIN 은 ON 절에 L.라인명 = '1라인' 이 함께 있어 L1 인 행에만 생산라인이 붙고, 볼펜의 L2 행과 지우개 행은 생산라인 쪽이 NULL 로 남는다. COUNT(L.라인번호) 는 NULL 을 세지 않으므로 노트 1, 볼펜 1, 지우개 0 이다(①). ② 는 라인명 조건을 빼고 센 값, ③ 은 라인명 조건을 WHERE 절에 써서 NULL 행이 지워진 결과, ④ 는 COUNT(*) 로 NULL 행까지 센 값이다. ※ 복원 자료에서 이 번호는 26번과 같은 문제(교차 엔터티를 건너뛴 조인)가 중복되어 있다는 제보가 있어, 같은 ERD 로 교차 엔터티를 거친 외부 조인 결과를 묻는 문항으로 바꿨다(PostgreSQL 실행 확인).",
     "_source": "authored",
     "references": [
       {
         "type": "erd",
-        "caption": "제품·생산제품·생산라인 ERD — [생산제품] 이 M:N 교차 엔터티",
+        "caption": "제품·생산제품·생산라인 ERD",
         "mermaid": "erDiagram\n    제품 ||--o{ 생산제품 : \"생산\"\n    생산라인 ||--o{ 생산제품 : \"운영\"\n    제품 {\n        string 제품번호 PK\n        string 제품명\n    }\n    생산제품 {\n        string 제품번호 PK,FK\n        string 라인번호 PK,FK\n        date 생산일자\n    }\n    생산라인 {\n        string 라인번호 PK\n        string 라인명\n    }"
+      },
+      {
+        "type": "table",
+        "caption": "제품",
+        "headers": [
+          "제품번호",
+          "제품명"
+        ],
+        "rows": [
+          [
+            "P1",
+            "볼펜"
+          ],
+          [
+            "P2",
+            "노트"
+          ],
+          [
+            "P3",
+            "지우개"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "생산라인",
+        "headers": [
+          "라인번호",
+          "라인명"
+        ],
+        "rows": [
+          [
+            "L1",
+            "1라인"
+          ],
+          [
+            "L2",
+            "2라인"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "생산제품",
+        "headers": [
+          "제품번호",
+          "라인번호",
+          "생산일자"
+        ],
+        "rows": [
+          [
+            "P1",
+            "L1",
+            "2024-01-02"
+          ],
+          [
+            "P1",
+            "L2",
+            "2024-01-03"
+          ],
+          [
+            "P2",
+            "L1",
+            "2024-01-02"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT P.제품명, COUNT(L.라인번호) AS 라인수\nFROM   제품 P\n       LEFT OUTER JOIN 생산제품 S\n         ON P.제품번호 = S.제품번호\n       LEFT OUTER JOIN 생산라인 L\n         ON S.라인번호 = L.라인번호\n        AND L.라인명 = '1라인'\nGROUP BY P.제품명\nORDER BY P.제품명;"
       }
     ]
   },
