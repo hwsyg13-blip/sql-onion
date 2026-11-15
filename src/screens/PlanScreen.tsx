@@ -254,7 +254,7 @@ export const PlanScreen = ({onNavigate}: any) => {
 
       {/* 광고 슬롯 — 3주 계획 하단 */}
       <div style={{marginTop:32}}>
-        <AdSlot slot="PLAN_BOTTOM" format="horizontal"/>
+        <AdSlot slot="1114532773" format="auto"/>
       </div>
     </div>
   );

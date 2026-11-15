@@ -92,7 +92,7 @@ export const TheoryListScreen = ({ onNavigate }) => (
         {/* 광고 슬롯 — 1과목과 2과목 사이 */}
         {sIdx === 0 && (
           <div style={{ marginBottom: 32 }}>
-            <AdSlot slot="THEORY_LIST_MID" format="horizontal" />
+            <AdSlot slot="1114532773" format="auto" />
           </div>
         )}
       </React.Fragment>
@@ -100,7 +100,7 @@ export const TheoryListScreen = ({ onNavigate }) => (
 
     {/* 광고 슬롯 — 이론 목록 하단 */}
     <div style={{ marginTop: 32 }}>
-      <AdSlot slot="THEORY_LIST_BOTTOM" format="horizontal" />
+      <AdSlot slot="1114532773" format="auto" />
     </div>
   </div>
 );
@@ -623,7 +623,7 @@ export const TheoryDetailScreen = ({ chapterId, onNavigate }) => {
             <MiniTestSidebar chapterId={chapterId} chapterLabel={`${sub.code} ${ch.title}`} />
           ) : null}
           {toc.length > 0 && <TocCard toc={toc} />}
-          <AdSlot slot="9969248457" format="fluid" layoutKey="-fb+5w+4e-db+86" />
+          <AdSlot slot="1114532773" format="auto" />
         </aside>
       </div>
     </div>
