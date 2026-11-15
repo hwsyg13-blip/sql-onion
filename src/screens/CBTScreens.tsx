@@ -7,6 +7,7 @@ import { renderInlineMd, OptionReferences } from '../components/QuestionReferenc
 import { recordExamComplete, recordQuizAttempt } from '../lib/progress';
 import { trackEvent, trackAnswer } from '../lib/analytics';
 import { loadMermaid } from '../lib/loadMermaid';
+import { AdSlot } from '../components/AdSlot';
 
 // CBT — Exam list, CBT exam screen (sticky OMR), and result.
 // Also Mock Exam full mode (50-item with timer) reusing pieces.
@@ -401,6 +402,13 @@ export const CBTExam = ({examId = "round-60", onFinish, onNavigate, onExit, mock
             <Btn size="sm" variant="ghost" icon={<Ic.ArrowLeft size={14}/>} onClick={()=>setIdx(Math.max(0, idx-1))} disabled={idx===0}>이전</Btn>
             <Btn size="sm" variant="primary" iconRight={<Ic.ArrowRight size={14}/>} onClick={()=>setIdx(Math.min(totalQ-1, idx+1))} disabled={idx===totalQ-1}>다음</Btn>
           </div>
+
+          {/* 광고 — 모의고사 채점 후 복습(문제 + 해설) 화면에만. 시험 푸는 중·기출 CBT 에는 두지 않는다 */}
+          {reviewMode && mockMode && (
+            <div style={{marginTop:24}}>
+              <AdSlot slot="1992675180" format="fluid" layoutKey="-fb+5w+4e-db+86" />
+            </div>
+          )}
         </main>
 
         {/* Right — sticky OMR */}
