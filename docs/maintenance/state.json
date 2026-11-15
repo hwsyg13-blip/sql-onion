@@ -1,13 +1,14 @@
 {
  "last_processed_row": null,
- "last_run": "2026-11-15T14:06+09:00",
+ "last_run": "2026-11-15T22:06+09:00",
  "last_gate": {
-  "five_hour": 0.17,
-  "seven_day": 0.37
+  "five_hour": 0.55,
+  "seven_day": 0.5
  },
  "current_mission": null,
  "my_prs": [
-  195
+  195,
+  317
  ],
  "merged_prs": [
   197,
@@ -101,7 +102,7 @@
   315,
   316
  ],
- "stop_reason": "낮 실행 — 5시간 0.17·7일 0.37 로 기준 미만. #302·#303 이 사용자 \"머지\" 없이는 반영되지 않아 같은 PR 에 더 쌓으면 리뷰·충돌 부담만 커져 멈춤. 63회 복원 출처(sqldpass.com 가채점) 접근은 WebFetch DNS 실패·curl 은 권한 검사 거부",
+ "stop_reason": "밤 실행 — 5시간 0.55·7일 0.50 (기준 0.98 미만). 난이도 15차 #317 만들고 멈춤: 사용자 \"머지\" 없이는 반영 안 됨, 다음 우선순위(AdSense·GA4 BigQuery 첫 분석)는 11-16 10:23 적재 뒤에 가능",
  "releases": [
   214,
   217,
