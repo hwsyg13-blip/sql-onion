@@ -50,8 +50,12 @@ export function initGA() {
 
 export function trackPageView(route: string, params?: any) {
   if (!ENABLED || typeof window === 'undefined' || !window.gtag) return;
-  // route 와 params 를 가상 경로로 만들어서 전송 (URL 라우팅이 아니므로)
-  const path = params ? `/${route}?p=${encodeURIComponent(String(params))}` : `/${route}`;
+  // 화면마다 실제 주소가 생겼으므로(routeUrl.ts) 그 주소를 그대로 보낸다.
+  // 주소가 없는 화면(login 등)은 예전처럼 가상 경로.
+  const real = window.location.pathname;
+  const path = (real && real !== '/') || route === 'home'
+    ? real
+    : (params ? `/${route}?p=${encodeURIComponent(String(params))}` : `/${route}`);
   window.gtag('event', 'page_view', {
     page_path: path,
     page_title: route,
