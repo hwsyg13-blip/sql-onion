@@ -274,7 +274,7 @@ export const App = () => {
       {!hideTopBar && <Footer/>}
       {!hideTopBar && <MobileNav route={route} onNavigate={navigate}/>}
       {/* 사이드 광고 — PC 와이드 화면 전용 (≥1280px). 시험 중·로그인 화면 제외 */}
-      {!hideTopBar && route !== 'cbt' && route !== 'mock-exam' && <AdSidebar slot="1114532773"/>}
+      {!hideTopBar && <AdSidebar slot="1114532773"/>}
     </>
   );
 };

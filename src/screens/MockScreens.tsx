@@ -169,6 +169,11 @@ export const EndlessScreen = ({onNavigate}) => {
           <Btn onClick={()=>onNavigate("pricing")} iconRight={<Ic.ArrowRight size={14}/>}>Pro 보기</Btn>
         </div>
       )}
+
+      {/* 광고 — 랜덤 퀴즈 하단 (사용자 지시 11-15). 확인·다음 버튼과 간격을 둔다 */}
+      <div style={{marginTop:40}}>
+        <AdSlot slot="1114532773" format="auto"/>
+      </div>
     </div>
   );
 };

@@ -404,12 +404,11 @@ export const CBTExam = ({examId = "round-60", onFinish, onNavigate, onExit, mock
             <Btn size="sm" variant="primary" iconRight={<Ic.ArrowRight size={14}/>} onClick={()=>setIdx(Math.min(totalQ-1, idx+1))} disabled={idx===totalQ-1}>다음</Btn>
           </div>
 
-          {/* 광고 — 모의고사 채점 후 복습(문제 + 해설) 화면에만. 시험 푸는 중·기출 CBT 에는 두지 않는다 */}
-          {reviewMode && mockMode && (
-            <div style={{marginTop:24}}>
-              <AdSlot slot="1114532773" format="auto" />
-            </div>
-          )}
+          {/* 광고 — 사용자 지시(11-15)로 문제 푸는 중·복습 모두(기출 CBT·모의고사). 이전·다음 버튼과 붙어 있으면
+              잘못 누르기 쉬워(애드센스 정책) 간격을 넉넉히 둔다 */}
+          <div style={{marginTop:40}}>
+            <AdSlot slot="1114532773" format="auto" />
+          </div>
         </main>
 
         {/* Right — sticky OMR */}
