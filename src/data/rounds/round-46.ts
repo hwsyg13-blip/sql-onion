@@ -1730,47 +1730,58 @@ export const ROUND_46: QuizQuestion[] = [
     "round": 46,
     "subject": "2과목",
     "number": 48,
-    "title": "아래 SQL의 결과 값은?",
+    "title": "아래 T 테이블에 대한 SQL 의 결과(GRP, D)로 옳은 것은?",
     "options": [
-      "0",
-      "1",
-      "1.5",
-      "2"
+      "(A, 0), (B, 0)",
+      "(A, NULL), (B, NULL)",
+      "(A, 4), (B, 3)",
+      "(A, 2), (B, 3)"
     ],
     "correctIndex": 3,
-    "explanation": "AVG(COL1)은 NULL을 제외한 4개 값의 평균이므로 (4+4+8+8)/4 = 6이고, AVG(NVL(COL1, 0))은 NULL을 0으로 치환한 6개 값의 평균이므로 24/6 = 4이다. 따라서 차이는 6 - 4 = 2이다. ① 0 은 AVG 도 NULL 을 0 으로 센다고 본 값이다. 두 평균은 분모가 4 와 6 으로 달라 차이가 정확히 2 이므로 ② 1·③ 1.5 도 답이 될 수 없다.",
+    "explanation": "AVG(COL1) 은 NULL 을 빼고 평균을 내고, AVG(NVL(COL1, 0)) 은 NULL 을 0 으로 바꿔 분모에 넣는다. A 그룹은 AVG(COL1) = (4 + 8) / 2 = 6, AVG(NVL(COL1, 0)) = (4 + 0 + 8) / 3 = 4 라 D = 2 다. B 그룹은 AVG(COL1) = (6 + 6) / 2 = 6, AVG(NVL(COL1, 0)) = (0 + 0 + 6 + 6) / 4 = 3 이라 D = 3 이다. 정답은 ④번이다. NULL 이 많은 그룹일수록 두 평균의 차이가 커진다. ① 은 AVG 도 NULL 을 0 으로 센다고 본 값, ② 는 그룹에 NULL 이 하나라도 있으면 AVG 가 NULL 이라고 본 값, ③ 은 뺄셈을 놓치고 AVG(NVL(COL1, 0)) 만 본 값이다.",
     "_source": "authored",
     "references": [
       {
         "type": "table",
+        "caption": "T 테이블",
         "headers": [
+          "GRP",
           "COL1"
         ],
         "rows": [
           [
+            "A",
             "4"
           ],
           [
-            "4"
-          ],
-          [
+            "A",
             "NULL"
           ],
           [
+            "A",
+            "8"
+          ],
+          [
+            "B",
             "NULL"
           ],
           [
-            "8"
+            "B",
+            "NULL"
           ],
           [
-            "8"
+            "B",
+            "6"
+          ],
+          [
+            "B",
+            "6"
           ]
-        ],
-        "caption": "T 테이블"
+        ]
       },
       {
         "type": "sql",
-        "code": "SELECT AVG(COL1) - AVG(NVL(COL1, 0))\nFROM   T;"
+        "code": "SELECT GRP,\n       AVG(COL1) - AVG(NVL(COL1, 0)) AS D\nFROM   T\nGROUP BY GRP\nORDER BY GRP;"
       }
     ]
   },

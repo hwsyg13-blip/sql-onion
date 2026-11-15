@@ -157,3 +157,10 @@
 |---|---|---|---|---|
 | 47-41 | AVG vs SUM/COUNT(*) + HAVING COUNT(col) | 1컬럼 3행 → 그룹 3개·6행(값이 NULL 뿐인 그룹), HAVING COUNT(COL) 추가 | (A,105,70),(B,90,45) | 오답 재현: HAVING 을 COUNT(*) 로 보면 C(NULL, NULL) 이 남음, COUNT(*) 도 NULL 을 뺀다고 보면 105·90 (PostgreSQL) |
 | 48-46 | WHERE 조건별 SUM 과 NULL | 3행 → 5행, ㄷ 에 OR + IS NULL, ㄹ 에 NULL 비교로 빠지는 행 | 90 / 30 / 40 / NULL | 오답 재현: ㄴ NULL 통과 80, 모두 NULL 인 SUM 을 0, ㄹ NULL 통과 30 |
+
+## 15차 2문항 (11-15 밤)
+
+| 문항 | 개념 | 바뀐 점 | 정답 | 5가지 시선에서 걸린 것과 처리 |
+|---|---|---|---|---|
+| 45-49 | AND/OR 우선순위 + NULL | 3행 → 6행(V1·V2 에 NULL), OR 에 IS NULL 조건 추가 | 4 | 오답 재현: V1='A' 가 전체에 걸리면 2, A AND (T1 OR T2) 로 묶으면 3, NULL 비교를 참으로 보면 5 (PostgreSQL) |
+| 46-48 | AVG(col) − AVG(NVL(col,0)) | 1그룹 6행 → 2그룹 7행(NULL 비율이 다른 그룹) | (A,2),(B,3) | 오답 재현: NVL 만 본 (A,4),(B,3), AVG 가 NULL 을 0 으로 센다고 본 (0,0) |

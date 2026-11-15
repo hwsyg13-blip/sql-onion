@@ -1802,20 +1802,20 @@ export const ROUND_45: QuizQuestion[] = [
     "round": 45,
     "subject": "2과목",
     "number": 49,
-    "title": "아래 SQL의 결과 행 수로 옳은 것은?",
+    "title": "아래 SQLD49 테이블에 대한 SQL 의 결과 행 수로 옳은 것은?",
     "options": [
-      "1",
-      "3",
       "2",
-      "0"
+      "3",
+      "4",
+      "5"
     ],
-    "correctIndex": 1,
-    "explanation": "AND가 OR보다 우선순위가 높아 \"(V1='A' AND V2='T1') OR V2='T2' OR V2='T3'\"로 해석된다. 세 행 모두 하나 이상의 조건을 만족하므로 결과는 3건이다. ① 1 은 V1 = 'A' 가 OR 전체에 걸린다고 본 값이고, ③ 2 는 V1 이 NULL 인 3행이 빠진다고 본 값이지만 3행은 V2 = 'T3' 만으로 참이 된다.",
+    "correctIndex": 2,
+    "explanation": "AND 가 OR 보다 먼저 계산되므로 조건은 (V1 = 'A' AND V2 = 'T1') OR V2 = 'T2' OR V1 IS NULL 이다. 1행 (A, T1) 은 첫 조건, 2행 (B, T2) 와 4행 (A, T2) 는 두 번째 조건, 3행 (NULL, T3) 은 세 번째 조건으로 참이다. 5행 (A, NULL) 은 V2 가 NULL 이라 V2 = 'T1' 과 V2 = 'T2' 가 모두 UNKNOWN 이고 V1 IS NULL 은 거짓이어서 남지 않는다. 6행 (C, T1) 은 어느 조건도 참이 아니다. 결과는 4건이다(③). ① 2 는 V1 = 'A' 가 OR 전체에 걸린다고 본 값(1·4행), ② 3 은 V1 = 'A' AND (V2 = 'T1' OR V2 = 'T2') 로 묶었다고 본 값(1·3·4행), ④ 5 는 NULL 과의 비교를 참으로 보고 5행까지 넣은 값이다.",
     "_source": "authored",
     "references": [
       {
         "type": "table",
-        "caption": "SQLD49",
+        "caption": "SQLD49 테이블",
         "headers": [
           "N1",
           "V1",
@@ -1836,12 +1836,27 @@ export const ROUND_45: QuizQuestion[] = [
             "3",
             "NULL",
             "T3"
+          ],
+          [
+            "4",
+            "A",
+            "T2"
+          ],
+          [
+            "5",
+            "A",
+            "NULL"
+          ],
+          [
+            "6",
+            "C",
+            "T1"
           ]
         ]
       },
       {
         "type": "sql",
-        "code": "SELECT *\nFROM   SQLD49\nWHERE  V1 = 'A' AND V2 = 'T1'\n   OR  V2 = 'T2'\n   OR  V2 = 'T3';"
+        "code": "SELECT COUNT(*)\nFROM   SQLD49\nWHERE  V1 = 'A' AND V2 = 'T1'\n   OR  V2 = 'T2'\n   OR  V1 IS NULL;"
       }
     ]
   },
