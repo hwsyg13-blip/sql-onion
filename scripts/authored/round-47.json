@@ -542,15 +542,59 @@
     {
       "subject": "2과목",
       "number": 24,
-      "title": "1~100 데이터에서 10~50 범위를 조회하는 SQL 로 적절한 것은?",
+      "title": "아래 성적 테이블에서 점수가 10 이상 50 이하인 학생(4명)만 조회하는 WHERE 조건으로 옳은 것은?",
       "options": [
-        "WHERE COL IN (10, 50)",
-        "WHERE COL = 10 OR COL = 50",
-        "WHERE COL BETWEEN 10 AND 50",
-        "WHERE COL >= 10 AND COL > 50"
+        "점수 >= 10 AND 점수 < 50",
+        "점수 BETWEEN 50 AND 10",
+        "NOT (점수 < 10 OR 점수 > 50)",
+        "점수 IN (10, 50)"
       ],
       "correctIndex": 2,
-      "explanation": "`BETWEEN A AND B`는 `A 이상이고 B 이하`를 한 번에 표현해 준다. ①의 IN은 정확히 10 또는 50인 두 값만 골라내고, ②의 OR도 마찬가지이다. ④는 `>= 10 AND > 50`이라 50보다 큰 값만 남아 의도와 다르다. 10부터 50 사이 모든 값을 잡는 것은 ③번뿐이다."
+      "explanation": "10 이상 50 이하에 드는 학생은 S1(10), S2(50), S6(30), S7(50) 4명이다. ③ NOT (점수 < 10 OR 점수 > 50) 은 10 미만도 50 초과도 아닌 행, 곧 10 이상 50 이하를 고르므로 정확히 이 4명이다. 점수가 NULL 인 S5 는 괄호 안이 UNKNOWN 이라 NOT 을 붙여도 UNKNOWN 이어서 빠진다. ① 은 < 50 이라 50점인 S2·S7 이 빠져 2명이다. ② BETWEEN 50 AND 10 은 '50 이상이고 10 이하' 라는 뜻이라 만족하는 값이 없어 0명이다(BETWEEN 은 작은 값을 앞에 써야 한다). ④ IN (10, 50) 은 10 과 50 두 값만 골라 S1·S2·S7 3명이다.",
+      "references": [
+        {
+          "type": "table",
+          "caption": "성적",
+          "headers": [
+            "학번",
+            "점수"
+          ],
+          "rows": [
+            [
+              "S1",
+              "10"
+            ],
+            [
+              "S2",
+              "50"
+            ],
+            [
+              "S3",
+              "51"
+            ],
+            [
+              "S4",
+              "9"
+            ],
+            [
+              "S5",
+              "NULL"
+            ],
+            [
+              "S6",
+              "30"
+            ],
+            [
+              "S7",
+              "50"
+            ]
+          ]
+        },
+        {
+          "type": "sql",
+          "code": "SELECT 학번\nFROM   성적\nWHERE  (  ?  );"
+        }
+      ]
     },
     {
       "subject": "2과목",
@@ -884,15 +928,72 @@
     {
       "subject": "2과목",
       "number": 32,
-      "title": "순위 1, 1, 2, 3, 3, 4, 5 와 같이 동순위를 허용하고 연속 순위를 부여하는 함수는?",
+      "title": "아래 사원 테이블에 대한 SQL 결과에서 H 의 R1, R2, R3 값으로 옳은 것은?",
       "options": [
-        "DENSE_RANK",
-        "RANK",
-        "ROW_NUMBER",
-        "NTILE"
+        "R1 3, R2 2, R3 3",
+        "R1 2, R2 2, R3 3",
+        "R1 3, R2 3, R3 3",
+        "R1 4, R2 3, R3 4"
       ],
       "correctIndex": 0,
-      "explanation": "같은 값에는 같은 순위를 주되 다음 순위를 건너뛰지 않고 1, 2, 2, 3처럼 연속해서 매기는 함수가 DENSE_RANK이다. ② RANK는 동순위 뒤 번호를 건너뛰며(1, 2, 2, 4...), ③ ROW_NUMBER는 동순위 없이 무조건 일련번호를 매기고, ④ NTILE은 그룹을 분할하는 함수이다. 정답은 ①번이다."
+      "explanation": "H 는 개발 부서라 개발 부서 안에서만 순위를 매긴다. NULLS LAST 라 급여가 NULL 인 F 는 맨 뒤로 가고, 순서는 E(400), G(400), H(350), F(NULL) 다. RANK 는 E·G 를 공동 1위로 두고 두 자리를 차지한 다음 순위를 3으로 건너뛰어 H 가 3, DENSE_RANK 는 건너뛰지 않아 H 가 2, ROW_NUMBER 는 동점이어도 이름 순으로 E 1, G 2 를 매겨 H 가 3 이다. 정답은 ①번이다. ② 는 RANK 도 순위를 건너뛰지 않는다고 본 값, ③ 은 DENSE_RANK 도 건너뛴다고 본 값, ④ 는 NULLS LAST 를 놓치고 Oracle 기본처럼 내림차순에서 NULL 을 맨 앞에 둔 값(F 가 1위가 되어 하나씩 밀림)이다.",
+      "references": [
+        {
+          "type": "table",
+          "caption": "사원",
+          "headers": [
+            "이름",
+            "부서",
+            "급여"
+          ],
+          "rows": [
+            [
+              "A",
+              "영업",
+              "300"
+            ],
+            [
+              "B",
+              "영업",
+              "300"
+            ],
+            [
+              "C",
+              "영업",
+              "250"
+            ],
+            [
+              "D",
+              "영업",
+              "200"
+            ],
+            [
+              "E",
+              "개발",
+              "400"
+            ],
+            [
+              "F",
+              "개발",
+              "NULL"
+            ],
+            [
+              "G",
+              "개발",
+              "400"
+            ],
+            [
+              "H",
+              "개발",
+              "350"
+            ]
+          ]
+        },
+        {
+          "type": "sql",
+          "code": "SELECT 이름,\n  RANK() OVER (\n    PARTITION BY 부서\n    ORDER BY 급여 DESC NULLS LAST\n  ) AS R1,\n  DENSE_RANK() OVER (\n    PARTITION BY 부서\n    ORDER BY 급여 DESC NULLS LAST\n  ) AS R2,\n  ROW_NUMBER() OVER (\n    PARTITION BY 부서\n    ORDER BY 급여 DESC NULLS LAST, 이름\n  ) AS R3\nFROM 사원;"
+        }
+      ]
     },
     {
       "subject": "2과목",
