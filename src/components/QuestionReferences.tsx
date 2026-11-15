@@ -333,6 +333,46 @@ export function erdFallbackHtml(code: string, staleChunk = false): string {
 // 데이터에 mermaid 코드 그대로 박힘. 'entity-diagram' 후속 (PR #100 spec).
 // 다크모드는 data-theme 감지 + themeVariables 분기. 같은 페이지 여러 ERD 도
 // useId 로 ID 충돌 방지.
+// ERD 원래 크기 보기 — 전체 화면 위에 띄우고 좌우·상하로 스크롤한다. Esc·닫기·바깥 영역으로 닫는다.
+function ErdZoom({ svg, caption, onClose }: { svg: string; caption?: string; onClose: () => void }) {
+  const box = React.useRef<HTMLDivElement>(null);
+  React.useEffect(() => {
+    const el = box.current?.querySelector('svg');
+    const vb = el?.viewBox?.baseVal;
+    if (el && vb && vb.width > 0) {
+      el.setAttribute('width', String(Math.ceil(vb.width)));
+      el.setAttribute('height', String(Math.ceil(vb.height)));
+      el.style.maxWidth = 'none';
+      el.style.display = 'block';
+      el.style.margin = '0 auto';
+    }
+    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') onClose(); };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [onClose]);
+  return (
+    <div role="dialog" aria-modal="true" aria-label="ERD 크게 보기" onClick={onClose} style={{
+      position: 'fixed', inset: 0, zIndex: 1000, background: 'rgba(0,0,0,0.45)',
+      display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 12,
+    }}>
+      <div onClick={e => e.stopPropagation()} style={{
+        background: 'var(--bg-card)', borderRadius: 12, width: '100%', maxWidth: 960, maxHeight: '100%',
+        display: 'flex', flexDirection: 'column', overflow: 'hidden', border: '1px solid var(--border-subtle)',
+      }}>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '10px 14px', borderBottom: '1px solid var(--border-subtle)' }}>
+          <span style={{ fontSize: 13, color: 'var(--fg-2)', fontWeight: 600 }}>{caption || 'ERD'}</span>
+          <button type="button" onClick={onClose} style={{
+            padding: '4px 12px', borderRadius: 8, border: '1px solid var(--border-default)',
+            background: 'var(--bg-card)', color: 'var(--fg-1)', font: 'inherit', fontSize: 13, cursor: 'pointer',
+          }}>닫기</button>
+        </div>
+        <div ref={box} style={{ overflow: 'auto', padding: 16, WebkitOverflowScrolling: 'touch' }}
+          dangerouslySetInnerHTML={{ __html: svg }} />
+      </div>
+    </div>
+  );
+}
+
 function RefErd({ mermaid: code, caption, instanceTable }: any) {
   const ref = React.useRef<HTMLDivElement>(null);
   const reactId = React.useId().replace(/[:]/g, '-');
@@ -350,9 +390,15 @@ function RefErd({ mermaid: code, caption, instanceTable }: any) {
     return () => obs.disconnect();
   }, []);
 
+  // 화면 폭에 맞춰 줄어든 ERD 는 글씨가 작다(문의 1562) → '크게 보기' 로 원래 크기를 전체 화면에서 본다
+  const svgMarkup = React.useRef('');
+  const [scaled, setScaled] = React.useState(false);
+  const [zoom, setZoom] = React.useState(false);
+
   React.useEffect(() => {
     if (!code) return;
     let cancelled = false;
+    setScaled(false);
     loadMermaid().then(({ default: mermaid }) => {
       if (cancelled) return;
       const isDark = theme === 'dark';
@@ -401,6 +447,9 @@ function RefErd({ mermaid: code, caption, instanceTable }: any) {
           el.style.maxWidth = '100%';
           el.style.height = 'auto';
           el.style.flexShrink = '1';
+          svgMarkup.current = svg;
+          // 원래 크기의 85% 보다 작게 줄어들었을 때만 버튼을 보인다
+          setScaled((ref.current.clientWidth || vb.width) < vb.width * 0.85);
         }
       };
       mermaid.render(renderId, code).then(show).catch(() =>
@@ -436,6 +485,15 @@ function RefErd({ mermaid: code, caption, instanceTable }: any) {
         display: 'flex', justifyContent: 'center',
         overflowX: 'auto', minHeight: 80,
       }} aria-label="ER 다이어그램" />
+      {scaled && (
+        <div style={{ textAlign: 'center', marginTop: 6 }}>
+          <button type="button" onClick={() => setZoom(true)} style={{
+            padding: '4px 12px', borderRadius: 8, border: '1px solid var(--border-default)',
+            background: 'var(--bg-card)', color: 'var(--fg-2)', font: 'inherit', fontSize: 12.5, cursor: 'pointer',
+          }}>크게 보기</button>
+        </div>
+      )}
+      {zoom && <ErdZoom svg={svgMarkup.current} caption={caption} onClose={() => setZoom(false)} />}
       {instanceTable && (
         <div style={{ marginTop: 14, padding: '0 6px' }}>
           <div style={{ fontSize: 11.5, color: 'var(--fg-3)', fontWeight: 600, marginBottom: 6, textAlign: 'center' }}>
