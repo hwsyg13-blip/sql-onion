@@ -60,7 +60,8 @@ export const ExamListScreen = ({onNavigate}) => {
         </section>
       ))}
 
-      {/* 광고 자리 없음 — 메뉴·목록·결과처럼 게시자 콘텐츠가 없는 화면에는 광고를 두지 않는다 (애드센스 정책, 2026-11-02) */}
+      {/* 광고 — 사용자 지시(11-15)로 목록·결과 화면에도 홈 디스플레이 광고 단위 */}
+      <div style={{marginTop:32}}><AdSlot slot="1114532773" format="auto"/></div>
     </div>
   );
 };
@@ -406,7 +407,7 @@ export const CBTExam = ({examId = "round-60", onFinish, onNavigate, onExit, mock
           {/* 광고 — 모의고사 채점 후 복습(문제 + 해설) 화면에만. 시험 푸는 중·기출 CBT 에는 두지 않는다 */}
           {reviewMode && mockMode && (
             <div style={{marginTop:24}}>
-              <AdSlot slot="1992675180" format="fluid" layoutKey="-fb+5w+4e-db+86" />
+              <AdSlot slot="1114532773" format="auto" />
             </div>
           )}
         </main>
@@ -663,7 +664,8 @@ export const CBTResult = ({result, onNavigate}) => {
         )}
       </div>
 
-      {/* 광고 자리 없음 — 메뉴·목록·결과처럼 게시자 콘텐츠가 없는 화면에는 광고를 두지 않는다 (애드센스 정책, 2026-11-02) */}
+      {/* 광고 — 사용자 지시(11-15)로 목록·결과 화면에도 홈 디스플레이 광고 단위 */}
+      <div style={{marginTop:32}}><AdSlot slot="1114532773" format="auto"/></div>
 
       {/* Detailed question list with explanations */}
       <section style={{marginTop:28}}>

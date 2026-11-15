@@ -7,6 +7,7 @@ import { BETA_NO_AUTH } from '../App';
 import { QuestionReferences, OptionReferences, renderInlineMd } from '../components/QuestionReferences';
 import { BugReportModal } from '../components/BugReportModal';
 import { trackEvent, trackAnswer } from '../lib/analytics';
+import { AdSlot } from '../components/AdSlot';
 import { recordQuizAttempt } from '../lib/progress';
 
 // Endless Quiz — flashcard-esque: single question → grade → explanation → next
@@ -44,7 +45,8 @@ export const MockLanding = ({onNavigate}) => (
       })}
     </div>
 
-    {/* 광고 자리 없음 — 메뉴·목록·결과처럼 게시자 콘텐츠가 없는 화면에는 광고를 두지 않는다 (애드센스 정책, 2026-11-02) */}
+    {/* 광고 — 사용자 지시(11-15)로 목록·결과 화면에도 홈 디스플레이 광고 단위 */}
+      <div style={{marginTop:32}}><AdSlot slot="1114532773" format="auto"/></div>
   </div>
 );
 
