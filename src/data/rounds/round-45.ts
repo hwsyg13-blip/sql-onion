@@ -19,7 +19,7 @@ export const ROUND_45: QuizQuestion[] = [
       "성능 향상을 위해 초기 설계 단계부터 반정규화를 적극적으로 수행한다."
     ],
     "correctIndex": 3,
-    "explanation": "데이터 모델링의 유의점은 중복(①)·비유연성(②)·비일관성(③) 회피이며, 성능 반정규화는 물리 모델 단계에서 필요에 따라 수행하는 기법일 뿐 데이터 모델링 자체의 유의점이 아니다.",
+    "explanation": "데이터 모델링에서는 중복(①), 비유연성(②), 비일관성(③)이 생기지 않도록 주의해야 한다. 반정규화는 정규화를 마친 뒤 성능 문제가 확인될 때 물리 모델 단계에서 필요한 만큼만 하는 작업이므로, 초기 설계부터 적극적으로 하라는 ④ 가 적절하지 않다.",
     "_source": "authored"
   },
   {
@@ -37,7 +37,7 @@ export const ROUND_45: QuizQuestion[] = [
       "예금분류는 설계(Designed) 속성이다."
     ],
     "correctIndex": 2,
-    "explanation": "이자는 원금·이자율·예치기간으로부터 계산되는 파생 속성에 해당하지만, 이자율은 업무상 정의되어 입력되는 값이므로 기본 속성으로 분류된다. 정답은 ③번이다. ① 예금분류는 코드 엔터티로 분리하고 코드값(01·02)만 두는 것이 맞고, ② 원금·예치기간은 업무에서 바로 정해지는 기본 속성이며, ④ 예금분류 코드는 업무에 원래 없던 값을 설계하면서 부여한 설계 속성이다.",
+    "explanation": "이자는 원금에 이자율과 예치기간을 적용해 계산한 값이라 파생 속성이 맞다. 그러나 이자율은 은행이 정해 입력하는 값이라 계산으로 얻는 속성이 아니고 기본 속성이다. 이자와 이자율을 모두 파생 속성이라고 한 ③ 이 적절하지 않다. ① 예금분류는 코드 엔터티로 분리하고 코드값(01·02)만 두는 것이 맞고, ② 원금·예치기간은 업무에서 바로 정해지는 기본 속성이며, ④ 예금분류 코드는 업무에 원래 없던 값을 설계하면서 부여한 설계 속성이다.",
     "_source": "authored",
     "references": [
       {
@@ -61,7 +61,7 @@ export const ROUND_45: QuizQuestion[] = [
       "인스턴스는 각 속성에 대응하는 값의 집합으로 구성된다."
     ],
     "correctIndex": 2,
-    "explanation": "인스턴스는 엔터티가 정의한 각 속성에 대응하는 값의 집합으로 구성된다. 예시에서 인스턴스 1은 (10001, 정고객, AAA1) 세 속성값의 조합으로 성립하므로 속성 없이는 인스턴스가 존재할 수 없다. 정답은 ③번이다. ① 인스턴스는 엔터티의 실제 값(한 건의 데이터)이고, ② 고객 엔터티 하나에 여러 고객 인스턴스가 들어가며, ④ 인스턴스가 속성값의 집합이라는 설명은 옳다.",
+    "explanation": "인스턴스는 엔터티에 속한 데이터 한 건이고, 엔터티가 정의한 속성마다 값을 하나씩 가진 묶음이다. 고객 인스턴스 하나는 고객번호·고객이름·고객아이디 값의 조합으로 이루어지므로 속성 없이는 인스턴스가 존재할 수 없다. 정답은 ③번이다. ① 인스턴스는 엔터티의 실제 값(한 건의 데이터)이고, ② 고객 엔터티 하나에 여러 고객 인스턴스가 들어가며, ④ 인스턴스가 속성값의 집합이라는 설명은 옳다.",
     "_source": "authored",
     "references": [
       {
@@ -111,7 +111,7 @@ export const ROUND_45: QuizQuestion[] = [
       "부서장이 지정되지 않은 부서는 존재할 수 없다."
     ],
     "correctIndex": 3,
-    "explanation": "\"부서장\" 관계에서 부서 쪽에서 본 사원(부서장) 끝은 |o(0 또는 1)라 부서장이 비어 있는 부서도 있을 수 있다. 그래서 ④ 가 틀렸다. ① 사원-사원 \"관리\" 관계(자기 자신을 참조하는 순환 관계)에서 관리자 쪽 끝이 |o 라 관리자가 없는 사원(예: 대표)이 있을 수 있다. ② 반대쪽 끝이 o{ 라 한 사원이 여러 사원을 관리할 수 있다. ③ \"소속\" 관계의 부서 쪽 끝이 || 라 사원은 반드시 부서 하나에 속한다. 같은 두 엔터티 사이에도 의미가 다르면 관계를 여러 개 그릴 수 있다(소속·부서장). 읽는 법: 관계선 끝의 기호는 그 기호가 붙은 쪽 엔터티가 상대 한 건당 몇 개인지를 말한다. | 는 반드시(필수), o 는 없어도 됨(선택), 까마귀발은 여러 개다.",
+    "explanation": "관계선 끝의 기호는 그 끝에 붙은 엔터티가 상대 한 건당 몇 개인지를 나타낸다. 세로선(|)은 반드시, 동그라미(o)는 없어도 됨, 까마귀발은 여러 개라는 뜻이다. '부서장' 관계에서 사원 쪽 끝이 |o 라 부서 하나에 부서장이 0명 또는 1명이므로, 부서장이 비어 있는 부서도 있을 수 있다. 그래서 ④ 가 틀렸다. ① 사원이 사원을 참조하는 '관리' 관계(순환 관계)에서 관리자 쪽 끝이 |o 라 대표처럼 관리자가 없는 사원이 있을 수 있다. ② 반대쪽 끝이 o{ 라 한 사원이 여러 사원을 관리할 수 있다. ③ '소속' 관계의 부서 쪽 끝이 || 라 사원은 반드시 부서 하나에 속한다. 같은 두 엔터티 사이에도 의미가 다르면 소속·부서장처럼 관계를 여러 개 그릴 수 있다.",
     "_source": "authored",
     "references": [
       {
@@ -336,7 +336,7 @@ export const ROUND_45: QuizQuestion[] = [
       "SELECT SNS, 추천점수 FROM SNS_LOG ORDER BY SNS;"
     ],
     "correctIndex": 2,
-    "explanation": "SNS 별 합계를 보려면 GROUP BY SNS 로 묶고 SELECT 절에 그룹 기준 컬럼 SNS 와 집계 함수 SUM(추천점수)를 함께 쓴다(③ → FB 9, IG 3). ① 은 전체 합계 한 행만 나오고, ② 는 GROUP BY 에 없는 일반 컬럼(추천점수)을 집계 없이 SELECT 해 오류, ④ 는 집계 없이 정렬만 한다.",
+    "explanation": "SNS 별 합계를 보려면 GROUP BY SNS 로 묶고 SELECT 절에 그룹 기준 컬럼 SNS 와 집계 함수 SUM(추천점수)를 함께 쓴다(③). 결과는 FB 9, IG 3 두 행이다. ① 은 전체 합계 한 행만 나오고, ② 는 GROUP BY 에 없는 일반 컬럼(추천점수)을 집계 없이 SELECT 해 오류, ④ 는 집계 없이 정렬만 한다.",
     "_source": "authored",
     "references": [
       {
@@ -514,7 +514,7 @@ export const ROUND_45: QuizQuestion[] = [
       "SUBSTR('DATABASE', INSTR('DATABASE','S'), 2)"
     ],
     "correctIndex": 2,
-    "explanation": "각 호출의 결과는 다음과 같다. ① `SUBSTR('DATABASE', 7)` 은 7번째 문자부터 끝까지 → 'SE'. ② `SUBSTR('DATABASE', -2)` 는 끝에서 2번째 문자부터 끝까지 → 'SE'. ③ `SUBSTR('DATABASE', 8, -2)` 는 길이 인자가 음수라 Oracle 에서 빈 문자열(NULL) 을 반환. ④ `INSTR('DATABASE','S')` = 7 이므로 `SUBSTR('DATABASE', 7, 2)` = 'SE'. ①②④ 가 모두 'SE' 인 반면 ③ 만 NULL/빈 문자열로 결과가 다르다.",
+    "explanation": "① 은 7번째 글자부터 끝까지라 'SE', ② 는 끝에서 두 번째 글자부터 끝까지라 'SE' 다. ④ 는 INSTR('DATABASE', 'S') 가 7 이라 SUBSTR('DATABASE', 7, 2) 와 같아 'SE' 다. ③ 은 길이 인자가 음수라 Oracle 에서 NULL 을 돌려준다. 결과가 다른 것은 ③ 이다.",
     "_source": "authored",
     "references": [
       {
@@ -530,7 +530,7 @@ export const ROUND_45: QuizQuestion[] = [
     "round": 45,
     "subject": "2과목",
     "number": 23,
-    "title": "아래 결과를 얻기 위해 A 테이블과 B 테이블에 적용할 조건절로 올바른 것은?",
+    "title": "아래 T1, T2 테이블에 대해 SQL 의 결과가 COL1 = 3 한 행만 나오게 하려 한다. 빈칸 (ㄱ) 에 들어갈 조건으로 옳은 것은?",
     "options": [
       "NOT EXISTS (SELECT 1 FROM T2 B WHERE B.COL1 = A.COL1)",
       "EXISTS (SELECT 1 FROM T2 B WHERE B.COL1 = A.COL1)",
@@ -538,7 +538,7 @@ export const ROUND_45: QuizQuestion[] = [
       "COL1 < (SELECT MAX(COL1) FROM T2)"
     ],
     "correctIndex": 0,
-    "explanation": "T1에만 존재하고 T2에는 존재하지 않는 COL1 값을 추출하려면 상관 서브쿼리와 NOT EXISTS를 조합한다(①, 결과 3). ② EXISTS 와 ③ IN 은 T2 에도 있는 1, 2 를 반환하고, ④ 는 T2 의 최댓값 2 보다 작은 1 만 반환한다.",
+    "explanation": "T1 의 COL1 은 1, 2, 3 이고 T2 에는 1, 2 만 있으므로, 3 만 남기려면 T2 에 같은 값이 없는 T1 행을 골라야 한다. 상관 서브쿼리를 NOT EXISTS 로 감싼 ① 이 그렇게 동작해 결과가 3 한 행이다. ② EXISTS 와 ③ IN 은 반대로 T2 에도 있는 1, 2 를 돌려주고, ④ 는 T2 의 최댓값 2 보다 작은 1 만 돌려준다. ※ 복원 자료의 문제 문장('A 테이블과 B 테이블에 적용할 조건절')이 표의 테이블 이름과 달라 헷갈린다는 제보가 있어 문장을 정리했다.",
     "_source": "authored",
     "references": [
       {
@@ -580,10 +580,6 @@ export const ROUND_45: QuizQuestion[] = [
             "20"
           ]
         ]
-      },
-      {
-        "type": "text",
-        "content": "기대 결과: COL1 = 3"
       },
       {
         "type": "sql",
@@ -648,7 +644,7 @@ export const ROUND_45: QuizQuestion[] = [
       "(A LEFT OUTER JOIN B) UNION ALL (A RIGHT OUTER JOIN B)"
     ],
     "correctIndex": 3,
-    "explanation": "UNION ALL 은 중복을 제거하지 않아 교집합 부분(양쪽에 모두 매칭되는 행) 이 두 번 반환되므로, 중복을 제거하는 FULL OUTER JOIN 과 결과가 다르다. ① FULL OUTER JOIN 과 ② FULL JOIN 은 동의어이며, ③ LEFT UNION RIGHT 는 중복 제거하므로 FULL OUTER JOIN 과 동일.",
+    "explanation": "FULL OUTER JOIN 은 양쪽에 짝이 있는 KEY 2, 3 을 한 번씩, 짝이 없는 1(A 쪽)과 4(B 쪽)를 NULL 과 함께 돌려줘 4행이다. ① 과 ② 는 같은 문법(FULL JOIN 은 OUTER 를 생략한 것)이다. ③ 은 LEFT 결과(1, 2, 3)와 RIGHT 결과(2, 3, 4)를 UNION 으로 합치면서 겹치는 2, 3 이 한 번만 남아 FULL OUTER JOIN 과 같다. ④ UNION ALL 은 중복을 남기므로 2, 3 이 두 번씩 나와 6행이 되어 결과가 다르다.",
     "_source": "authored",
     "references": [
       {
@@ -784,7 +780,7 @@ export const ROUND_45: QuizQuestion[] = [
       "INSERT INTO T1 VALUES (1, 2, 3, NULL);"
     ],
     "correctIndex": 2,
-    "explanation": "UNIQUE 제약은 NULL 을 허용하므로 ③ C3 에 NULL 이 입력되어도 오류가 발생하지 않는다. ① C1 PRIMARY KEY 위반, ② C2 NOT NULL 위반, ④ C4 CHECK(C4 IS NOT NULL) 위반.",
+    "explanation": "UNIQUE 제약은 NULL 을 허용하므로 C3 에 NULL 을 넣은 ③ 은 오류 없이 입력된다. ① 은 PRIMARY KEY 인 C1 에 NULL 을 넣어, ② 는 NOT NULL 인 C2 에 NULL 을 넣어, ④ 는 CHECK (C4 IS NOT NULL) 조건에 어긋나 오류가 난다.",
     "_source": "authored",
     "references": [
       {
@@ -800,38 +796,58 @@ export const ROUND_45: QuizQuestion[] = [
     "round": 45,
     "subject": "2과목",
     "number": 29,
-    "title": "아래 테이블에 대한 AVG(NVL(C1, 0)) 연산의 결과로 옳은 것은?",
+    "title": "아래 T 테이블에 대한 SQL 의 결과(DEPT, X, Y)로 옳은 것은?",
     "options": [
-      "10",
-      "15",
-      "20",
-      "NULL"
+      "(A, 10, 15), (B, 0, 0), (C, 15, 15)",
+      "(A, 15, 15), (B, 0, 0), (C, 15, 15)",
+      "(A, 10, 15), (B, NULL, 0), (C, 15, 15)",
+      "(A, 10, 15), (B, 0, 0), (C, 30, 30)"
     ],
     "correctIndex": 0,
-    "explanation": "NVL로 NULL을 0으로 치환하면 대상은 {10, 20, 0}이 되고, 분모도 3이 되어 (10+20+0)/3 = 10이다. 정답은 ①번이다. ② 15 는 NVL 없이 AVG(C1) 로 NULL 을 빼고 계산한 값이고, NVL 로 NULL 을 0 으로 바꿨으므로 ④ NULL 이 나올 수 없다.",
+    "explanation": "NVL 이 AVG 안에 있느냐 밖에 있느냐가 핵심이다. X = AVG(NVL(C1, 0)) 은 먼저 NULL 을 0 으로 바꾼 뒤 평균을 내므로 NULL 행도 분모에 들어간다. A 는 (10 + 0 + 20) / 3 = 10, B 는 (0 + 0) / 2 = 0, C 는 (30 + 0) / 2 = 15 다. Y = NVL(AVG(C1), 0) 은 NULL 을 빼고 평균을 낸 뒤 결과가 NULL 일 때만 0 으로 바꾼다. A 는 (10 + 20) / 2 = 15, B 는 값이 모두 NULL 이라 AVG 가 NULL 이고 NVL 로 0, C 는 (30 + 0) / 2 = 15 다. 정답은 ①번이다. ② 는 X 에서도 NULL 행을 분모에서 뺀 값, ③ 은 값이 모두 NULL 인 그룹은 NVL 을 거쳐도 AVG 가 NULL 이라고 본 값, ④ 는 0 도 NULL 처럼 평균에서 빠진다고 본 값이다(0 은 엄연한 값이라 분모에 들어간다).",
     "_source": "authored",
     "references": [
       {
         "type": "table",
+        "caption": "T 테이블",
         "headers": [
+          "DEPT",
           "C1"
         ],
         "rows": [
           [
+            "A",
             "10"
           ],
           [
+            "A",
+            "NULL"
+          ],
+          [
+            "A",
             "20"
           ],
           [
+            "B",
             "NULL"
+          ],
+          [
+            "B",
+            "NULL"
+          ],
+          [
+            "C",
+            "30"
+          ],
+          [
+            "C",
+            "0"
           ]
-        ],
-        "caption": "T 테이블"
+        ]
       },
       {
         "type": "sql",
-        "code": "SELECT AVG(NVL(C1, 0)) FROM T;"
+        "code": "SELECT DEPT,\n       AVG(NVL(C1, 0)) AS X,\n       NVL(AVG(C1), 0) AS Y\nFROM   T\nGROUP BY DEPT\nORDER BY DEPT;"
       }
     ]
   },
@@ -892,7 +908,7 @@ export const ROUND_45: QuizQuestion[] = [
       "5"
     ],
     "correctIndex": 2,
-    "explanation": "(+) 가 붙은 쪽이 NULL 로 채워지는 쪽이다. T2.COL1(+) = T1.COL1 은 T1 기준 LEFT JOIN T2, T3.COL1(+) = T2.COL1 은 그 결과 기준 LEFT JOIN T3, 마지막 T4.COL1 = T3.COL1 은 (+) 가 없어 INNER JOIN 이다. ① T1 ⟕ T2: 1-1, 2-2, 2-2(T2 에 2 가 두 개), 3-NULL, 4-NULL → 5행. ② ⟕ T3: T2 가 1·2 인 3행은 T3 와 짝이 있고 나머지 2행은 T3 가 NULL → 여전히 5행. ③ T4 와 INNER: T3 가 1 인 1행은 T4 의 1 두 개와 붙어 2행, T3 가 2 인 2행은 T4 의 2 하나와 붙어 2행, NULL 행은 사라진다. 결과 4행이다(③). ① 2 는 중복을 무시하고 공통 키(1, 2)만 센 값, ② 3 은 T4 의 1 중복을 놓친 값(1 + 2), ④ 5 는 마지막 INNER 조인이 앞의 OUTER 결과를 줄이지 않는다고 본 값이다.",
+    "explanation": "(+) 가 붙은 쪽이 짝이 없을 때 NULL 로 채워지는 쪽이다. T2.COL1(+) = T1.COL1 은 T1 기준으로 T2 를 LEFT JOIN 하고, T3.COL1(+) = T2.COL1 은 그 결과를 기준으로 T3 를 LEFT JOIN 하며, 마지막 T4.COL1 = T3.COL1 은 (+) 가 없어 INNER JOIN 이다. 먼저 T1 과 T2 를 붙이면 1-1, 2-2, 2-2(T2 에 2 가 두 개), 3-NULL, 4-NULL 로 5행이다. T3 를 붙여도 T2 가 1·2 인 3행은 짝이 있고 나머지 2행은 NULL 이라 그대로 5행이다. 마지막으로 T4 와 INNER JOIN 하면 T3 가 1 인 1행은 T4 의 1 두 개와 붙어 2행, T3 가 2 인 2행은 T4 의 2 하나와 붙어 2행이 되고, T3 가 NULL 인 행은 사라진다. 결과 4행이다(③). ① 2 는 중복을 무시하고 공통 키(1, 2)만 센 값, ② 3 은 T4 의 1 중복을 놓친 값(1 + 2), ④ 5 는 마지막 INNER 조인이 앞의 OUTER 결과를 줄이지 않는다고 본 값이다.",
     "_source": "authored",
     "references": [
       {
@@ -994,7 +1010,7 @@ export const ROUND_45: QuizQuestion[] = [
       "SELECT * FROM T WHERE ROWNUM <= 2 - 1;"
     ],
     "correctIndex": 2,
-    "explanation": "Oracle ROWNUM 은 fetch 시점에 1 부터 부여된다. ① ROWNUM = 1 은 첫 행만 반환, ② ROWNUM < 2 도 1 건 (ROWNUM=1), ④ ROWNUM <= 1 도 1 건. 그러나 ③ `ROWNUM <= 2` 는 2 건을 반환하므로 결과가 다르다.",
+    "explanation": "Oracle 의 ROWNUM 은 조건을 통과한 행에 1 부터 차례로 번호를 붙인다. ① ROWNUM = 1, ② ROWNUM < 2, ④ ROWNUM <= 2 - 1(곧 1)은 모두 첫 행 하나만 통과시켜 1건이다. ③ ROWNUM <= 2 는 두 행이 통과해 2건이라 혼자 다르다.",
     "_source": "authored"
   },
   {
@@ -1067,12 +1083,12 @@ export const ROUND_45: QuizQuestion[] = [
     "title": "아래 T 테이블에 대한 두 SQL 의 결과에 대한 설명으로 옳은 것은?",
     "options": [
       "두 SQL 모두 NULL 을 0 으로 치환한 뒤 합산하므로 결과가 항상 동일하다.",
-      "①은 NULL을 0으로 개별 치환 후 합하므로 모든 행이 반영되지만, ②는 COL1 또는 COL2가 NULL인 행은 NULL이 되어 SUM에서 제외된다.",
-      "②는 NULL 행을 SUM 대신 0 으로 보정하므로 ①보다 항상 큰 값을 반환한다.",
-      "①은 외곽에서만 NVL 을 적용하므로 ②보다 항상 작은 값을 반환한다."
+      "(가) 는 NULL 을 0 으로 개별 치환 후 합하므로 모든 행이 반영되지만, (나) 는 COL1 또는 COL2 가 NULL 인 행은 NULL 이 되어 SUM 에서 제외된다.",
+      "(나) 는 NULL 행을 SUM 대신 0 으로 보정하므로 (가) 보다 항상 큰 값을 반환한다.",
+      "(가) 는 외곽에서만 NVL 을 적용하므로 (나) 보다 항상 작은 값을 반환한다."
     ],
     "correctIndex": 1,
-    "explanation": "NULL 과의 산술 연산은 NULL 을 반환한다. ① 은 각 컬럼을 NVL 로 0 치환 후 더하므로 모든 행이 합계에 반영되어 (10+20)+(0+30)+(40+0)+(50+50)=200 을 얻는다. ② 는 COL1+COL2 결과가 NULL 인 행이 SUM 에서 제외되어 30+100=130 만 합산된다. 따라서 ② 는 NULL 행이 제외되므로 ① 과 결과가 달라질 수 있다. 1번 보기는 결과가 200 과 130 으로 다르므로 틀리고, 3번 보기는 ② 가 NULL 행을 0 으로 보정하지 않고 오히려 더 작은 값(130)을 내므로 틀리며, 4번 보기는 ① 이 NVL 을 컬럼마다(안쪽에서) 적용해 더 큰 값(200)을 내므로 틀리다. 정답은 2번 보기다.",
+    "explanation": "NULL 이 섞인 산술 연산은 결과가 NULL 이다. (가) 는 컬럼마다 NVL 로 NULL 을 0 으로 바꾼 뒤 더하므로 모든 행이 합계에 들어가 (10 + 20) + (0 + 30) + (40 + 0) + (50 + 50) = 200 이다. (나) 는 COL1 + COL2 가 NULL 인 둘째·셋째 행이 SUM 에서 빠져 30 + 100 = 130 이다. 그래서 ② 가 옳다. ① 은 결과가 200 과 130 으로 달라 틀리고, ③ 은 (나) 가 NULL 행을 0 으로 보정하지 않고 더 작은 값을 내므로 틀리며, ④ 는 (가) 가 NVL 을 안쪽 컬럼마다 적용해 더 큰 값을 내므로 틀리다.",
     "_source": "authored",
     "references": [
       {
@@ -1103,7 +1119,7 @@ export const ROUND_45: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "-- ① SELECT SUM( NVL(COL1, 0) + NVL(COL2, 0) ) FROM T;\n-- ② SELECT NVL( SUM(COL1 + COL2), 0 )        FROM T;"
+        "code": "-- (가)\nSELECT SUM(NVL(COL1, 0) + NVL(COL2, 0)) FROM T;\n\n-- (나)\nSELECT NVL(SUM(COL1 + COL2), 0) FROM T;"
       }
     ]
   },
@@ -1114,15 +1130,15 @@ export const ROUND_45: QuizQuestion[] = [
     "round": 45,
     "subject": "2과목",
     "number": 35,
-    "title": "아래 T 테이블에 대한 네 SQL ①·②·③·④ 중 결과가 나머지와 다른 것은?",
+    "title": "아래 T 테이블에 대한 네 SQL (가)~(라) 중 결과가 나머지와 다른 것은?",
     "options": [
-      "①",
-      "②",
-      "③",
-      "④"
+      "(가)",
+      "(나)",
+      "(다)",
+      "(라)"
     ],
     "correctIndex": 1,
-    "explanation": "①은 IN/OR 조건으로 A·B 두 행 반환. ②는 UNION ALL이라 중복을 제거하지 않아 두 SELECT의 결과가 모두 합쳐져 A·B가 두 번씩 나타남. ③은 UNION이라 중복 제거되어 A·B만. ④는 OR 조건으로 ①과 동일하게 A·B 반환. 결과 A·B만 반환하는 ①·③·④와 달리 ②만 A·B·A·B를 반환하므로 결과가 다르다.",
+    "explanation": "(가) 는 COL1 이 A·B 이거나 COL2 가 c 가 아닌 행이라 A, B 두 행이다. (다) 는 두 SELECT 결과(A, B 와 A, B)를 UNION 으로 합치며 중복을 없애 A, B 이고, (라) 는 IN 을 OR 로 풀어 쓴 것이라 (가) 와 같다. (나) 만 UNION ALL 이라 중복을 남겨 A, B, A, B 네 행이 나오므로 결과가 다르다. 정답은 ②다.",
     "_source": "authored",
     "references": [
       {
@@ -1149,7 +1165,7 @@ export const ROUND_45: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "-- ① SELECT COL1 FROM T WHERE COL1 IN ('A','B') OR COL2 <> 'c';\n-- ② SELECT COL1 FROM T WHERE COL1 IN ('A','B')\n--    UNION ALL\n--    SELECT COL1 FROM T WHERE COL2 <> 'c';\n-- ③ SELECT COL1 FROM T WHERE COL1 IN ('A','B')\n--    UNION\n--    SELECT COL1 FROM T WHERE COL2 <> 'c';\n-- ④ SELECT COL1 FROM T WHERE COL1 = 'A' OR COL1 = 'B' OR COL2 <> 'c';"
+        "code": "-- (가)\nSELECT COL1 FROM T WHERE COL1 IN ('A', 'B') OR COL2 <> 'c';\n\n-- (나)\nSELECT COL1 FROM T WHERE COL1 IN ('A', 'B')\nUNION ALL\nSELECT COL1 FROM T WHERE COL2 <> 'c';\n\n-- (다)\nSELECT COL1 FROM T WHERE COL1 IN ('A', 'B')\nUNION\nSELECT COL1 FROM T WHERE COL2 <> 'c';\n\n-- (라)\nSELECT COL1 FROM T WHERE COL1 = 'A' OR COL1 = 'B' OR COL2 <> 'c';"
       }
     ]
   },
@@ -1503,7 +1519,7 @@ export const ROUND_45: QuizQuestion[] = [
       "F"
     ],
     "correctIndex": 2,
-    "explanation": "계층형 질의는 한 가지를 끝까지 내려간 뒤 다음 형제로 넘어가는 깊이 우선 순서로 출력한다. ORDER SIBLINGS BY 는 이 순서를 유지한 채 같은 부모를 둔 형제끼리만 정렬한다. A 의 자식은 B(2)·C(3)·G(7) 인데 C1 내림차순이라 G → C → B 순이다. G 는 자식이 없고, C 아래에 E, B 아래에 F(6)·D(4) 가 내림차순으로 온다. 출력은 A, G, C, E, B, F, D 이고 네 번째는 E 다(③). ① B 는 레벨별로(A → G·C·B → …) 출력된다고 본 결과, ② D 는 ORDER BY C1 DESC 처럼 계층과 상관없이 전체를 정렬한 결과(G, F, E, D …), ④ F 는 형제를 오름차순으로 본 결과(A, B, D, F …)다.",
+    "explanation": "계층형 질의는 한 가지를 끝까지 내려간 뒤 다음 형제로 넘어가는 깊이 우선 순서로 출력한다. ORDER SIBLINGS BY 는 이 순서를 유지한 채 같은 부모를 둔 형제끼리만 정렬한다. A 의 자식은 B(2)·C(3)·G(7) 인데 C1 내림차순이라 G, C, B 순이다. G 는 자식이 없고, C 아래에 E, B 아래에 F(6)·D(4) 가 내림차순으로 온다. 출력은 A, G, C, E, B, F, D 이고 네 번째는 E 다(③). ① B 는 레벨 순서대로(A 다음 G·C·B) 출력된다고 본 결과, ② D 는 ORDER BY C1 DESC 처럼 계층과 상관없이 전체를 정렬한 결과(G, F, E, D …), ④ F 는 형제를 오름차순으로 본 결과(A, B, D, F …)다.",
     "_source": "authored",
     "references": [
       {
@@ -1573,7 +1589,7 @@ export const ROUND_45: QuizQuestion[] = [
       "MILLER, SCOTT, JOHN, KING"
     ],
     "correctIndex": 1,
-    "explanation": "Oracle 은 START WITH 와 CONNECT BY 의 순서를 바꿔 써도 된다. ① START WITH C1 = 5 → MILLER 에서 시작한다. ② CONNECT BY C1 = PRIOR C2 는 \"방금 읽은 행의 C2(상위 번호)를 C1 으로 가진 행\" 을 찾으므로 위로 올라가는 역방향이다: MILLER(C2=3) → SCOTT(C2=2) → JOHN(C2=1) → KING(C2=NULL, 끝). ③ 계층을 다 만든 뒤 WHERE C1 <> 2 가 JOHN 한 행만 뺀다. 그래서 MILLER, SCOTT, KING 이다(②). ① 은 WHERE 조건을 CONNECT BY 에 쓴 것처럼 JOHN 에서 전개가 끊긴다고 본 결과이고, ③ 은 PRIOR 방향을 거꾸로 읽어 MILLER 의 자식(FORD)으로 내려간 결과, ④ 는 WHERE 를 적용하지 않은 결과다. ADAMS·ALLEN 은 MILLER 의 경로에 없다.",
+    "explanation": "Oracle 은 START WITH 와 CONNECT BY 의 순서를 바꿔 써도 된다. START WITH C1 = 5 라 MILLER 에서 시작한다. CONNECT BY C1 = PRIOR C2 는 방금 읽은 행의 C2(상위 번호)를 C1 으로 가진 행을 찾으므로 위로 올라가는 역방향이다. MILLER(C2 = 3), SCOTT(C2 = 2), JOHN(C2 = 1), KING(C2 = NULL) 순으로 올라가고 KING 에서 끝난다. 계층을 다 만든 뒤 WHERE C1 <> 2 가 JOHN 한 행만 빼므로 MILLER, SCOTT, KING 이다(②). ① 은 WHERE 조건을 CONNECT BY 에 쓴 것처럼 JOHN 에서 전개가 끊긴다고 본 결과이고, ③ 은 PRIOR 방향을 거꾸로 읽어 MILLER 의 자식(FORD)으로 내려간 결과, ④ 는 WHERE 를 적용하지 않은 결과다. ADAMS·ALLEN 은 MILLER 의 경로에 없다.",
     "_source": "authored",
     "references": [
       {
@@ -1661,7 +1677,7 @@ export const ROUND_45: QuizQuestion[] = [
       "ㄱ 2, ㄴ 2"
     ],
     "correctIndex": 0,
-    "explanation": "NTILE(3) 은 전체 8 개 행을 3 개의 그룹으로 최대한 균등하게 분할한다. 8 = 3 + 3 + 2 이므로 첫 번째 그룹에 3 개, 두 번째 그룹에 3 개, 세 번째 그룹에 2 개씩 배정된다. 표의 행 라벨이 'A=첫그룹', 'B=두번째그룹(고정 3)', 'C=세번째그룹' 일 때 (ㄱ)=첫그룹 건수=3, (ㄴ)=세번째그룹 건수=2 가 된다. 정답은 ①번이다. 남는 2 행은 앞 그룹부터 하나씩 더 배정되므로 마지막 그룹이 가장 적다. ② 는 첫 번째·세 번째 그룹을 뒤바꿨고, ③ 3·3·3 은 9 행, ④ 2·3·2 는 7 행이라 8 행과 맞지 않는다.",
+    "explanation": "NTILE(3) 은 8개 행을 3개 그룹으로 최대한 고르게 나누고, 나누어떨어지지 않는 나머지는 앞 그룹부터 한 행씩 더 준다. 8 = 3 + 3 + 2 라 첫 그룹 3건, 두 번째 그룹 3건, 세 번째 그룹 2건이다. (ㄱ) 은 첫 그룹이라 3, (ㄴ) 은 세 번째 그룹이라 2 이고 정답은 ①번이다. ② 는 첫 그룹과 세 번째 그룹을 바꿨고, ③ 은 3 + 3 + 3 = 9 행, ④ 는 2 + 3 + 2 = 7 행이라 8 행과 맞지 않는다.",
     "_source": "authored",
     "references": [
       {

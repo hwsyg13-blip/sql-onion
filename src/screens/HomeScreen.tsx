@@ -238,7 +238,7 @@ export const HomeScreen = ({onNavigate, user}) => {
 
     {/* 광고 슬롯 — 홈 하단 */}
     <div style={{marginTop: 32}}>
-      <AdSlot slot="HOME_BOTTOM" format="horizontal"/>
+      <AdSlot slot="1114532773" format="auto"/>
     </div>
   </div>
   );

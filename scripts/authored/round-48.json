@@ -45,7 +45,7 @@
         "유형 엔터티"
       ],
       "correctIndex": 3,
-      "explanation": "발생 시점에 따라 엔터티는 기본(①) → 중심(②) → 행위(③) 세 가지로 분류된다. 기본은 가장 먼저 만들어지는 독립 엔터티(고객·상품), 중심은 기본끼리 만나 만들어지는 핵심 업무 엔터티(주문·계약), 행위는 사건이 일어날 때마다 생기는 엔터티(주문이력)이다. \"유형 엔터티\"는 이 세 가지에 포함되지 않아 정답은 ④번이다. ④ 유형 엔터티는 발생 시점이 아니라 유무형(유형·개념·사건) 기준의 분류다."
+      "explanation": "엔터티를 발생 시점으로 나누면 기본·중심·행위 엔터티 세 가지다(①②③). 기본 엔터티는 고객·상품처럼 업무에 원래 있어 독립적으로 생기는 엔터티, 중심 엔터티는 주문·계약처럼 기본 엔터티에서 생겨 업무의 중심이 되는 엔터티, 행위 엔터티는 주문이력처럼 두 개 이상의 부모 엔터티에서 생기고 내용이 자주 바뀌거나 계속 쌓이는 엔터티다. ④ 유형 엔터티는 발생 시점이 아니라 유무형(유형·개념·사건) 기준으로 나눈 분류라 해당하지 않는다."
     },
     {
       "subject": "1과목",
@@ -104,7 +104,7 @@
         "속성은 인스턴스 없이 독립적으로 존재할 수 있다."
       ],
       "correctIndex": 1,
-      "explanation": "속성은 엔터티의 특징을 표현하는 컬럼에 해당하며, 한 행(인스턴스)을 이루는 부품이다. ①은 보통 엔터티가 두 개 이상 속성을 가지므로 잘못, ③은 한 속성에는 한 값만 들어가야 한다는 원자성에 어긋나므로 잘못, ④는 속성이 인스턴스의 구성 요소이므로 인스턴스 없이 독립적으로 존재할 수 없어 잘못이다. 정답은 ②번이다."
+      "explanation": "속성은 엔터티를 설명하는 항목이고, 인스턴스 한 건을 이루는 구성 요소다(②). ① 엔터티는 보통 두 개 이상의 속성을 가진다. ③ 한 속성에는 값이 하나만 들어가야 하고, 여러 값이 들어가면 정규화 대상이다. ④ 속성 값은 인스턴스마다 하나씩 존재하므로, 인스턴스 없이 속성만 따로 존재할 수 없다."
     },
     {
       "subject": "1과목",
@@ -156,7 +156,7 @@
         "계정그룹의 주식별자는 계정 수와 무관하다."
       ],
       "correctIndex": 1,
-      "explanation": "ERD 표기 `계정그룹 |o--o{ 계정` 에서 계정그룹 쪽 `|o` 는 0 또는 1 (선택), 계정 쪽 `o{` 는 0 또는 N (선택) 을 의미한다. 즉 계정 입장에서 자신을 묶는 계정그룹은 \"있어도 되고 없어도 되는\" 선택 관계이므로, ② \"계정은 반드시 계정그룹 하나에 속해야 한다\" 는 ERD 와 모순되어 옳지 않다. ③ 은 같은 선택사양을 정반대 방향에서 옳게 진술한 것이고, ① 은 1:N 의 N 측을 ④ 는 PK 의 독립성을 옳게 설명한 것이다.",
+      "explanation": "계정그룹 쪽 끝의 |o 는 계정 한 건에 계정그룹이 0개 또는 1개라는 뜻이다. 계정은 계정그룹에 속하지 않을 수도 있으므로, 반드시 하나에 속해야 한다는 ② 가 옳지 않다. ③ 은 같은 내용을 옳게 말한 것이다. ① 계정 쪽 끝이 o{ 라 계정그룹 하나가 여러 계정을 가질 수 있고, ④ 계정그룹을 구분하는 주식별자는 계정이 몇 개인지와 상관없이 정해진다.",
       "references": [
         {
           "type": "erd",
@@ -277,7 +277,7 @@
         "8건"
       ],
       "correctIndex": 1,
-      "explanation": "인라인 뷰 X 는 GROUP BY 가 아니라 윈도우 함수라 행을 줄이지 않고, 사원마다 자기 부서의 최고 연봉을 붙인다: 100 은 3000, 200 은 4500, 300 은 4500, 400 은 NULL(값이 NULL 뿐이면 MAX 도 NULL). 바깥에서 자기 연봉이 부서 최고 연봉과 같은 사원만 남긴다. 100 의 강감찬, 200 의 김유신·김선달(동점 둘 다), 300 의 변사또가 남는다. 400 의 임꺽정은 NULL = NULL 이 참이 아니라 빠진다. 결과 4건이다(②). ① 3건은 동점자 중 한 명만 남긴다고 본 값, ③ 5건은 NULL 끼리 같다고 보고 임꺽정을 넣은 값, ④ 8건은 윈도우 함수 결과로 거르지 않은 전체 행 수다.",
+      "explanation": "인라인 뷰 X 는 GROUP BY 가 아니라 윈도우 함수라 행을 줄이지 않고, 사원마다 자기 부서의 최고 연봉을 붙인다. 부서별 최고 연봉은 100 이 3000, 200 이 4500, 300 이 4500, 400 이 NULL 이다(값이 NULL 뿐이면 MAX 도 NULL). 바깥에서 자기 연봉이 부서 최고 연봉과 같은 사원만 남긴다. 100 의 강감찬, 200 의 김유신·김선달(동점 둘 다), 300 의 변사또가 남는다. 400 의 임꺽정은 NULL = NULL 이 참이 아니라 빠진다. 결과 4건이다(②). ① 3건은 동점자 중 한 명만 남긴다고 본 값, ③ 5건은 NULL 끼리 같다고 보고 임꺽정을 넣은 값, ④ 8건은 윈도우 함수 결과로 거르지 않은 전체 행 수다.",
       "references": [
         {
           "type": "table",
@@ -524,7 +524,7 @@
         "B 300 / A 200 / A 50 / C 100"
       ],
       "correctIndex": 1,
-      "explanation": "첫 정렬 키 CASE 식은 ID = 'A' 면 1, 나머지는 2 라서 A 행들이 먼저 나온다. 같은 키 안에서는 AMT DESC 로 정렬하므로 A 200, A 50, 그다음 B 300, C 100 순이다(②). ① 과 ④ 는 AMT 만으로 정렬한 순서, ③ 은 AMT 오름차순 순서다.",
+      "explanation": "첫 정렬 키 CASE 식은 ID = 'A' 면 1, 나머지는 2 라서 A 행들이 먼저 나온다. 같은 키 안에서는 AMT DESC 로 정렬하므로 A 200, A 50, 그다음 B 300, C 100 순이다(②). ① 은 CASE 키를 빼고 AMT 내림차순으로만 정렬한 순서, ③ 은 AMT 오름차순 순서이고, ④ 는 A 행이 먼저 나와야 한다는 첫 번째 정렬 키와 맞지 않는다.",
       "references": [
         {
           "type": "table",
@@ -569,7 +569,7 @@
         "CEIL(4.1)"
       ],
       "correctIndex": 3,
-      "explanation": "각 함수의 결과를 비교한다. ① ROUND(4.3) — 소수 첫째 자리에서 반올림해 정수로 → 4. ② TRUNC(4.9) — 소수점 절삭 → 4. ③ FLOOR(4.9) — 내림 → 4. ④ CEIL(4.1) — 올림 → 5. 따라서 가장 큰 값은 CEIL(4.1) = 5 인 ④ 이다."
+      "explanation": "① ROUND(4.3) 은 소수 첫째 자리에서 반올림해 4, ② TRUNC(4.9) 는 소수점 아래를 버려 4, ③ FLOOR(4.9) 는 내림이라 4 다. ④ CEIL(4.1) 은 올림이라 5 가 되어 가장 크다. 소수 부분이 아무리 작아도 CEIL 은 다음 정수로 올리고, FLOOR·TRUNC 는 소수 부분이 아무리 커도 버린다는 점이 핵심이다."
     },
     {
       "subject": "2과목",
@@ -672,7 +672,7 @@
         "모두 다른 값"
       ],
       "correctIndex": 2,
-      "explanation": "데이터 SAL = 2000, 1500, 1500, 1500을 SAL DESC 정렬 시 RANK·DENSE_RANK 모두 1, 2, 2, 2를 부여한다(동순위 1500 세 행이 모두 2위, 마지막 행 끝이라 RANK도 다음 순위 건너뛰기 효과 없음). 그러나 ①은 'DENSE_RANK가 동순위에도 다른 순위(1,2,3,4)를 부여한다'고 잘못 진술했고, ②는 'RANK가 1, 4, 4, 4를 부여한다'고 잘못 진술했다(실제로는 1, 2, 2, 2). FIRST_VALUE는 정렬된 윈도우의 첫 행 값(2000)을 모든 행에 동일하게 반환하므로 ③이 옳다. 정답은 ③번이다.",
+      "explanation": "SAL 을 내림차순으로 놓으면 2000, 1500, 1500, 1500 이다. 1500 세 행은 동순위라 RANK 와 DENSE_RANK 모두 1, 2, 2, 2 가 된다. 동순위 뒤에 오는 행이 없으니 RANK 가 순위를 건너뛰는 차이도 드러나지 않는다. 그래서 ① 의 1, 2, 3, 4 와 ② 의 1, 4, 4, 4 는 틀렸다. FIRST_VALUE 는 정렬된 윈도우의 첫 행 값인 2000 을 모든 행에 똑같이 돌려주므로 ③ 이 옳다. RNK 와 D_RNK 가 같은 값이므로 ④ 도 틀렸다.",
       "references": [
         {
           "type": "table",
@@ -717,19 +717,19 @@
     {
       "subject": "2과목",
       "number": 24,
-      "title": "아래 T 테이블에 대해 조건을 만족하는 행에 대한 SUM(A) 결과는?",
+      "title": "아래 T 테이블에 대한 SQL 의 결과(SUM(A), SUM(B), COUNT(*))로 옳은 것은?",
       "options": [
-        "10",
-        "40",
-        "100",
-        "NULL"
+        "18, 7, 2",
+        "83, 45, 6",
+        "53, 42, 4",
+        "88, 55, 7"
       ],
       "correctIndex": 2,
-      "explanation": "WHERE A >= B 조건을 만족하는 행이 총 10 건이고 각 행의 A 값이 10 이므로 SUM(A) = 10 × 10 = 100 이다. 보기 ①(10) 은 단일 행 값, ②(40) 는 4 건만 가정한 결과, ④(NULL) 은 빈 결과를 의미하므로 모두 의도와 맞지 않는다. 정답은 ③ 번 100 이다.",
+      "explanation": "WHERE A >= B 가 참인 행만 남는다. (10, 5) 와 (8, 2) 는 A 가 크고, (20, 20) 과 (15, 15) 는 같아서 >= 를 만족한다. (5, 10) 은 거짓이고, A 나 B 가 NULL 인 (NULL, 3)·(30, NULL) 은 비교 결과가 UNKNOWN 이라 WHERE 를 통과하지 못한다. 남은 4행으로 SUM(A) = 10 + 20 + 15 + 8 = 53, SUM(B) = 5 + 20 + 15 + 2 = 42, COUNT(*) = 4 다(③). ① 은 >= 를 > 로 보고 같은 값 두 행을 뺀 값, ② 는 NULL 과의 비교도 통과한다고 보고 두 행을 더 넣은 값(SUM 은 NULL 을 빼고 더해 83, 45), ④ 는 WHERE 를 적용하지 않은 전체 합계다.",
       "references": [
         {
           "type": "table",
-          "caption": "T 테이블 (총 10 행, 모두 A >= B 조건을 만족)",
+          "caption": "T 테이블",
           "headers": [
             "A",
             "B"
@@ -740,46 +740,34 @@
               "5"
             ],
             [
-              "10",
-              "5"
+              "20",
+              "20"
             ],
             [
-              "10",
-              "5"
+              "5",
+              "10"
             ],
             [
-              "10",
-              "5"
+              "NULL",
+              "3"
             ],
             [
-              "10",
-              "5"
+              "30",
+              "NULL"
             ],
             [
-              "10",
-              "5"
+              "15",
+              "15"
             ],
             [
-              "10",
-              "5"
-            ],
-            [
-              "10",
-              "5"
-            ],
-            [
-              "10",
-              "5"
-            ],
-            [
-              "10",
-              "5"
+              "8",
+              "2"
             ]
           ]
         },
         {
           "type": "sql",
-          "code": "SELECT SUM(A) FROM T WHERE A >= B;"
+          "code": "SELECT SUM(A), SUM(B), COUNT(*)\nFROM   T\nWHERE  A >= B;"
         }
       ]
     },
@@ -864,7 +852,7 @@
         "SELECT * FROM T WHERE ROWNUM = 1 OR ROWNUM = 2;"
       ],
       "correctIndex": 0,
-      "explanation": "Oracle 의 `ROWNUM` 은 fetch 시점에 1 부터 순차 부여되는 의사 컬럼이라 `ROWNUM = 2` 같은 등호 조건(N≥2)은 절대 만족되지 않아 0 건이 된다. ②③④ 는 모두 ROWNUM 1, 2 를 포함하는 조건이라 위 T 테이블에서 2 건을 반환한다(어떤 2 건인지는 정렬이 없어 보장되지 않음). 결과가 다른 것은 ①.",
+      "explanation": "Oracle 의 ROWNUM 은 조건을 통과한 행에 1 부터 차례로 번호를 붙인다. ROWNUM = 2 는 첫 행이 1 번을 받는 순간 조건에 맞지 않아 버려지고, 다음 행도 다시 1 번을 받아 버려지므로 결과가 0 건이다. ②③④ 는 모두 ROWNUM 1 과 2 를 받아들이는 조건이라 2 건이 나온다(어떤 2 건인지는 정렬이 없어 정해지지 않는다). 결과 건수가 다른 것은 ① 이다.",
       "references": [
         {
           "type": "table",
@@ -901,7 +889,7 @@
     {
       "subject": "2과목",
       "number": 28,
-      "title": "아래 품목 테이블에 대한 SQL 수행 후 최종 COUNT 값은?",
+      "title": "아래 품목 테이블에 대한 SQL 수행 후 최종 COUNT 값은? (SQL Server 기준)",
       "options": [
         "0",
         "2",
@@ -909,7 +897,7 @@
         "4"
       ],
       "correctIndex": 2,
-      "explanation": "ROLLBACK 으로 DELETE·UPDATE 가 취소되고 COMMIT 된 INSERT 만 유지된다. 최종 단가 2000 인 행은 처음 데이터의 002·004 와 COMMIT 된 005 의 3건이다. 정답은 ③번이다. ② 2 는 ROLLBACK 이 두 번째 BEGIN 이후의 UPDATE 만 취소해 002 삭제가 남는다고 본 값(004·005)이고, ④ 4 는 DELETE·UPDATE 가 모두 남는다고 본 값(001·003·004·005)이다.",
+      "explanation": "SQL Server 에서는 BEGIN TRANSACTION 을 겹쳐 열어도, ROLLBACK 은 가장 바깥 트랜잭션이 시작된 시점까지 모두 취소한다. 그래서 두 번째 BEGIN TRANSACTION 뒤의 DELETE 와 세 번째 BEGIN TRANSACTION 뒤의 UPDATE 가 함께 취소되고, 앞에서 COMMIT 한 005 의 INSERT 만 남는다. 단가가 2000 인 행은 002·004·005 의 3건이다(③). ② 2 는 ROLLBACK 이 UPDATE 만 취소하고 002 삭제는 남는다고 본 값(004·005)이고, ④ 4 는 DELETE·UPDATE 가 모두 남는다고 본 값(001·003·004·005)이다.",
       "references": [
         {
           "type": "table",
@@ -939,7 +927,7 @@
         },
         {
           "type": "sql",
-          "code": "CREATE TABLE 품목 (품목ID VARCHAR2(3), 단가 NUMBER);\n-- 초기 데이터: 001 1000, 002 2000, 003 1000, 004 2000\n\nBEGIN TRANSACTION;\nINSERT INTO 품목 VALUES ('005', 2000);\nCOMMIT;             -- 005 영구 반영\n\nBEGIN TRANSACTION;\nDELETE FROM 품목 WHERE 품목ID = '002';\nBEGIN TRANSACTION;\nUPDATE 품목 SET 단가 = 2000 WHERE 단가 = 1000;\nROLLBACK;            -- DELETE·UPDATE 모두 취소\n\nSELECT COUNT(품목ID) FROM 품목 WHERE 단가 = 2000;"
+          "code": "CREATE TABLE 품목 (품목ID VARCHAR(3), 단가 NUMBER);\n-- 초기 데이터: 001 1000, 002 2000, 003 1000, 004 2000\n\nBEGIN TRANSACTION;\nINSERT INTO 품목 VALUES ('005', 2000);\nCOMMIT;\n\nBEGIN TRANSACTION;\nDELETE FROM 품목 WHERE 품목ID = '002';\nBEGIN TRANSACTION;\nUPDATE 품목 SET 단가 = 2000 WHERE 단가 = 1000;\nROLLBACK;\n\nSELECT COUNT(품목ID) FROM 품목 WHERE 단가 = 2000;"
         }
       ]
     },
@@ -954,7 +942,7 @@
         "(A, B), (A), (B), () 모든 조합"
       ],
       "correctIndex": 1,
-      "explanation": "ROLLUP(A, B)는 왼쪽부터 단계적으로 그룹 키를 줄여가며 (A, B), (A), () 세 가지 수준의 집계만 반환한다. (B) 단독 그룹은 만들지 않는다(③). CUBE(A, B)가 (A, B), (A), (B), () 모든 조합(④)을 만드는 것과 구분해야 한다. 정답은 ②번이다. ① 은 소계·총계가 없는 GROUP BY A, B 의 결과다."
+      "explanation": "ROLLUP(A, B)는 오른쪽 컬럼부터 하나씩 빼 가며 (A, B), (A), () 세 가지 수준의 집계만 반환한다. (B) 단독 그룹은 만들지 않는다(③). CUBE(A, B)가 (A, B), (A), (B), () 모든 조합(④)을 만드는 것과 구분해야 한다. 정답은 ②번이다. ① 은 소계·총계가 없는 GROUP BY A, B 의 결과다."
     },
     {
       "subject": "2과목",
@@ -999,7 +987,7 @@
         "REPLACE"
       ],
       "correctIndex": 1,
-      "explanation": "DROP TABLE 시 다른 테이블이 외래키로 참조 중이면 기본적으로 삭제가 거부된다. CASCADE CONSTRAINTS 옵션을 붙이면 참조하는 외래키 제약을 함께 정리한 뒤 테이블을 삭제할 수 있다. ① RESTRICT는 참조가 있으면 막는 보호 옵션, ③ NO ACTION은 표준 SQL 외래키 동작 정의, ④ REPLACE는 뷰에서 사용하는 옵션이라 의미가 다르다. 정답은 ②번이다."
+      "explanation": "DROP TABLE 을 할 때 다른 테이블의 외래키가 이 테이블을 참조하고 있으면 기본적으로 삭제가 거부된다. CASCADE CONSTRAINTS 를 붙이면 참조하던 외래키 제약을 함께 지우고 테이블을 삭제한다(②). ① RESTRICT 는 참조가 있으면 삭제를 막는 쪽이고, ③ NO ACTION 은 외래키를 만들 때 정하는 참조 동작이며, ④ REPLACE 는 CREATE OR REPLACE VIEW 처럼 객체를 다시 만들 때 쓰는 말이다."
     },
     {
       "subject": "2과목",
@@ -1012,7 +1000,7 @@
         "NULLIF(컬럼, '합계')"
       ],
       "correctIndex": 0,
-      "explanation": "ROLLUP·CUBE 의 소계·총계 행에서는 그룹 기준 컬럼이 NULL 로 표시되는데, 이 NULL 은 데이터의 NULL 이 아니라 '소계 행' 이라는 표식이다. GROUPING(컬럼) 은 그 컬럼이 소계·총계로 집계된 행이면 1, 일반 행이면 0 을 반환하므로 CASE WHEN GROUPING(컬럼) = 1 THEN '합계' ELSE 컬럼 END 로 소계 행에만 '합계' 를 출력할 수 있다(①). ② NVL 은 원래 데이터가 NULL 인 행까지 '합계' 로 바꿔 구분하지 못하고, ③ 은 NULL 을 0 으로 바꾸며, ④ NULLIF 는 값이 '합계' 와 같을 때 NULL 을 반환하는 함수라 의도와 반대다. 참고로 Oracle 에서는 빈 문자열 '' 이 NULL 로 처리된다."
+      "explanation": "ROLLUP·CUBE 의 소계·총계 행에서는 그룹 기준 컬럼이 NULL 로 표시되는데, 이 NULL 은 데이터의 NULL 이 아니라 '소계 행' 이라는 표식이다. GROUPING(컬럼) 은 그 컬럼이 소계·총계로 집계된 행이면 1, 일반 행이면 0 을 반환하므로 CASE WHEN GROUPING(컬럼) = 1 THEN '합계' ELSE 컬럼 END 로 소계 행에만 '합계' 를 출력할 수 있다(①). ② NVL 은 원래 데이터가 NULL 인 행까지 '합계' 로 바꿔 구분하지 못하고, ③ 은 NULL 을 0 으로 바꾸며, ④ NULLIF 는 값이 '합계' 와 같을 때 NULL 을 반환하는 함수라 의도와 반대다."
     },
     {
       "subject": "2과목",
@@ -1162,7 +1150,7 @@
         "사원명 기준 정렬"
       ],
       "correctIndex": 3,
-      "explanation": "ORDER BY 뒤에 컬럼명을 쓰지 않고 숫자를 쓰면 SELECT 절에 나열된 컬럼의 순서 번호를 의미한다. SELECT 사원ID, 사원명, 연봉 에서 1=사원ID, 2=사원명, 3=연봉 이므로 `ORDER BY 2` 는 두 번째 컬럼인 사원명을 기준으로 정렬한다. 따라서 정답은 ④ 사원명 기준 정렬. ① 사원ID 기준 정렬은 ORDER BY 1, ② 연봉 기준 정렬은 ORDER BY 3 이고, ③ 숫자는 정렬 컬럼의 개수가 아니라 SELECT 목록의 위치를 뜻한다.",
+      "explanation": "ORDER BY 뒤에 컬럼명을 쓰지 않고 숫자를 쓰면 SELECT 절에 나열된 컬럼의 순서 번호를 의미한다. SELECT 사원ID, 사원명, 연봉 에서 1=사원ID, 2=사원명, 3=연봉 이므로 `ORDER BY 2` 는 두 번째 컬럼인 사원명을 기준으로 정렬한다. 따라서 ④ 가 정답이다. ① 사원ID 기준 정렬은 ORDER BY 1, ② 연봉 기준 정렬은 ORDER BY 3 이고, ③ 숫자는 정렬 컬럼의 개수가 아니라 SELECT 목록의 위치를 뜻한다.",
       "references": [
         {
           "type": "table",
@@ -1277,16 +1265,17 @@
       "number": 46,
       "title": "아래 T1 테이블에 대한 SQL 의 결과(ㄱ / ㄴ / ㄷ / ㄹ) 로 옳은 것은?",
       "options": [
-        "60 / NULL / 10 / 50",
-        "60 / 0 / 10 / 50",
-        "NULL / NULL / 10 / 50",
-        "60 / NULL / 10 / 0"
+        "90 / 30 / 40 / NULL",
+        "90 / 80 / 40 / NULL",
+        "90 / 30 / 40 / 0",
+        "90 / 30 / 40 / 30"
       ],
       "correctIndex": 0,
-      "explanation": "ㄱ 은 COL2 의 NULL 을 제외한 50+10=60, ㄴ 은 COL1>0 행의 COL2 가 NULL 뿐이므로 NULL, ㄷ 은 COL1 IS NOT NULL 행에서 NULL+10=10, ㄹ 은 COL1 IS NULL 행의 COL2=50 이 된다. 정답은 ①번이다. ② 는 ㄴ 을 0 으로 봤지만 대상 값이 모두 NULL 이면 SUM 은 0 이 아니라 NULL 이고, ③ 은 ㄱ 을 NULL 로 봤지만 SUM 은 NULL 을 빼고 더하며, ④ 는 ㄹ 을 0 으로 봤지만 COL1 IS NULL 인 행(COL2=50)이 있다. COL1=0 인 행은 0 > 0 이 거짓이라 ㄴ 에 포함되지 않는다.",
+      "explanation": "ㄱ 은 COL2 의 NULL 을 빼고 50 + 10 + 30 = 90 이다. ㄴ 은 COL1 > 0 인 행이 (10, NULL, 10) 과 (20, 30, NULL) 이다. COL1 이 0 인 행은 0 > 0 이 거짓이고, COL1 이 NULL 인 행은 비교가 UNKNOWN 이라 빠진다. COL2 합은 NULL 을 빼고 30 이다. ㄷ 은 COL1 이 NULL 이 아니거나 COL3 이 NULL 인 행으로 첫째·셋째·넷째 행이 남아 NULL + 10 + 30 에서 NULL 을 빼고 40 이다. ㄹ 은 COL3 < 10 인 행이 (NULL, NULL, 5) 하나뿐이다. COL3 이 NULL 인 넷째 행은 비교가 UNKNOWN 이라 빠진다. 남은 COL2 가 NULL 뿐이라 SUM 은 0 이 아니라 NULL 이다. 정답은 ①번이다. ② 는 ㄴ 에서 COL1 이 NULL 인 행도 통과한다고 본 값(50 이 더해짐), ③ 은 더할 값이 모두 NULL 이면 SUM 이 0 이라고 본 값, ④ 는 ㄹ 에서 COL3 이 NULL 인 행도 통과한다고 본 값이다.",
       "references": [
         {
           "type": "table",
+          "caption": "T1 테이블",
           "headers": [
             "COL1",
             "COL2",
@@ -1307,13 +1296,22 @@
               "0",
               "10",
               "10"
+            ],
+            [
+              "20",
+              "30",
+              "NULL"
+            ],
+            [
+              "NULL",
+              "NULL",
+              "5"
             ]
-          ],
-          "caption": "T1 테이블"
+          ]
         },
         {
           "type": "sql",
-          "code": "ㄱ. SELECT SUM(COL2) FROM T1;\nㄴ. SELECT SUM(COL2) FROM T1 WHERE COL1 > 0;\nㄷ. SELECT SUM(COL2) FROM T1 WHERE COL1 IS NOT NULL;\nㄹ. SELECT SUM(COL2) FROM T1 WHERE COL1 IS NULL;"
+          "code": "-- ㄱ\nSELECT SUM(COL2) FROM T1;\n\n-- ㄴ\nSELECT SUM(COL2) FROM T1 WHERE COL1 > 0;\n\n-- ㄷ\nSELECT SUM(COL2) FROM T1 WHERE COL1 IS NOT NULL OR COL3 IS NULL;\n\n-- ㄹ\nSELECT SUM(COL2) FROM T1 WHERE COL3 < 10;"
         }
       ]
     },
@@ -1368,7 +1366,7 @@
         "7"
       ],
       "correctIndex": 1,
-      "explanation": "START WITH 매니저 IS NULL → 루트는 매니저가 NULL 인 A (LEVEL=1). CONNECT BY PRIOR 사원 = 매니저 는 부모 행의 사원이 자식 행의 매니저와 매칭되는 순방향 전개. A 의 자식은 매니저='A' 인 행 → B·C·D 세 명이 LEVEL=2. 그 아래 LEVEL=3 은 B 의 자식 (E, F) + D 의 자식 (G) 으로 3 명이지만 질문은 LEVEL=2 만 묻고 있으므로 정답은 3 건. ① 1 은 LEVEL=1 인 루트(A)만 센 값, ③ 4 는 LEVEL 2 이하(A·B·C·D)를 센 값, ④ 7 은 전체 행 수다.",
+      "explanation": "START WITH 매니저 IS NULL 이라 매니저가 없는 A 가 루트(LEVEL 1)다. CONNECT BY PRIOR 사원 = 매니저 는 앞 행의 사원을 매니저로 가진 행, 곧 부하 직원을 찾아 내려간다. A 를 매니저로 둔 B·C·D 가 LEVEL 2 이고, 그 아래 E·F(B 의 부하)와 G(D 의 부하)가 LEVEL 3 이다. LEVEL 2 인 행은 3개다(②). ① 1 은 루트 A 만 센 값, ③ 4 는 LEVEL 2 이하(A·B·C·D)를 센 값, ④ 7 은 전체 행 수다.",
       "references": [
         {
           "type": "table",

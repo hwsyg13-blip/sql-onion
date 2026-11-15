@@ -14,12 +14,12 @@ export const ROUND_47: QuizQuestion[] = [
     "title": "아래 설명에 해당하는 데이터 모델링 관점은?",
     "options": [
       "데이터 관점",
-      "데이터와 프로세스 관점",
+      "데이터와 프로세스의 상관 관점",
       "프로세스 관점",
       "보안 관점"
     ],
     "correctIndex": 1,
-    "explanation": "데이터 모델링은 보는 시각에 따라 셋으로 나뉜다. 데이터 관점(①)은 어떤 정보(엔터티·속성·관계)를 다룰지에 집중하고, 프로세스 관점(③)은 어떤 일이 어떻게 처리되는지에 집중한다. 데이터와 프로세스 관점은 두 가지를 함께 보면서 업무 처리 방식이 데이터에 어떤 영향을 주는지를 분석한다. 설명이 그 영향 관계를 묘사하므로 정답은 ②번이다. ④ 보안 관점은 데이터 모델링의 세 관점에 들지 않는다.",
+    "explanation": "데이터 모델링은 보는 시각에 따라 셋으로 나뉜다. 데이터 관점(①)은 어떤 데이터를 다루는지(What), 프로세스 관점(③)은 업무가 어떻게 처리되는지(How)에 집중한다. 데이터와 프로세스의 상관 관점(②)은 두 가지를 함께 보면서 업무 처리 방법에 따라 데이터가 어떤 영향을 받는지(Interaction)를 모델링한다. 설명이 바로 이 영향 관계라 정답은 ②번이다. ④ 보안 관점은 데이터 모델링의 세 관점에 들지 않는다.",
     "_source": "authored",
     "references": [
       {
@@ -243,7 +243,7 @@ export const ROUND_47: QuizQuestion[] = [
       "물리 스키마"
     ],
     "correctIndex": 0,
-    "explanation": "데이터베이스의 3단계 스키마는 사용자에게 가까운 순서로 외부 → 개념 → 내부이다. 외부 스키마는 사용자나 응용 프로그램이 보는 개별 뷰, 개념 스키마(②)는 조직 전체가 공유하는 통합된 논리 구조, 내부 스키마(③)는 실제 저장 방식·인덱스 등 물리 구조를 정의한다. 설명이 응용 프로그래머가 보는 개인적 DB 정의를 가리키므로 정답은 ①번이다. ④ 물리 스키마는 3단계 스키마 구조의 정식 명칭이 아니며, 물리 저장 구조는 내부 스키마가 정의한다.",
+    "explanation": "데이터베이스의 3단계 스키마는 사용자에게 가까운 순서로 외부, 개념, 내부 스키마다. 외부 스키마는 사용자나 응용 프로그램이 보는 개별 뷰, 개념 스키마(②)는 조직 전체가 공유하는 통합된 논리 구조, 내부 스키마(③)는 실제 저장 방식·인덱스 등 물리 구조를 정의한다. 설명이 응용 프로그래머가 보는 개인적 DB 정의를 가리키므로 정답은 ①번이다. ④ 물리 스키마는 3단계 스키마 구조의 정식 명칭이 아니며, 물리 저장 구조는 내부 스키마가 정의한다.",
     "_source": "authored",
     "references": [
       {
@@ -285,7 +285,7 @@ export const ROUND_47: QuizQuestion[] = [
       "GROUP BY 평가항목"
     ],
     "correctIndex": 1,
-    "explanation": "ROLLUP(A, B)는 왼쪽부터 점차 줄여가며 (A, B), (A), () 세 가지 그룹을 만든다. 문제는 첫 컬럼 집계, 두 컬럼 조합 집계, 전체 집계가 필요하므로 정확히 ROLLUP이 만드는 세 가지 그룹과 일치한다. ① CUBE는 (B) 단독까지 추가로 만들어 결과 행이 더 많아 의도에 맞지 않는다. 정답은 ②번이다. ③ 은 전체 집계 () 가 빠지고 대신 (평가) 단독 집계가 들어 있으며, ④ GROUP BY 평가항목 은 첫 컬럼 집계 하나만 만든다.",
+    "explanation": "ROLLUP(A, B)는 오른쪽 컬럼부터 하나씩 빼 가며 (A, B), (A), () 세 가지 그룹을 만든다. 문제는 첫 컬럼 집계, 두 컬럼 조합 집계, 전체 집계가 필요하므로 정확히 ROLLUP이 만드는 세 가지 그룹과 일치한다. ① CUBE는 (B) 단독까지 추가로 만들어 결과 행이 더 많아 의도에 맞지 않는다. 정답은 ②번이다. ③ 은 전체 집계 () 가 빠지고 대신 (평가) 단독 집계가 들어 있으며, ④ GROUP BY 평가항목 은 첫 컬럼 집계 하나만 만든다.",
     "_source": "authored"
   },
   {
@@ -303,7 +303,7 @@ export const ROUND_47: QuizQuestion[] = [
       "COMMIT 과 ROLLBACK 을 사용하여 데이터 무결성을 보장할 수 있다."
     ],
     "correctIndex": 3,
-    "explanation": "트랜잭션은 한 묶음의 작업을 의미하며 무결성 유지를 위해 COMMIT(확정)과 ROLLBACK(취소)이라는 두 명령으로 제어한다. 작업이 정상적으로 끝나면 COMMIT으로 영구 반영하고, 도중에 문제가 생기면 ROLLBACK으로 되돌린다. ①은 지속성에 대한 설명이고, ②·③은 잘못된 진술이다. 정답은 ④번이다.",
+    "explanation": "트랜잭션은 한 묶음의 작업이고, 작업이 정상적으로 끝나면 COMMIT 으로 확정하고 도중에 문제가 생기면 ROLLBACK 으로 되돌려 데이터 무결성을 지킨다(④). ① 성공한 변경이 영구히 남는 것은 고립성이 아니라 지속성이다. ② ROLLBACK 을 하면 커밋하지 않은 변경 사항이 취소된다. ③ 잘못된 변경을 되돌리는 ROLLBACK 도 무결성을 지키는 데 함께 쓰이므로 COMMIT 만으로 보장된다는 말은 틀렸다.",
     "_source": "authored"
   },
   {
@@ -487,7 +487,7 @@ export const ROUND_47: QuizQuestion[] = [
     "round": 47,
     "subject": "2과목",
     "number": 19,
-    "title": "아래 두 테이블 A, B 조인 결과가 나머지와 다른 SQL 은?",
+    "title": "아래 두 테이블 A, B 에 대한 조인 SQL 중 나머지 셋과 달리 오류가 발생하는 것은?",
     "options": [
       "SELECT * FROM A NATURAL JOIN B;",
       "SELECT * FROM A JOIN B USING(SRN_NO);",
@@ -495,7 +495,7 @@ export const ROUND_47: QuizQuestion[] = [
       "SELECT * FROM A, B WHERE A.SRN_NO = B.SRN_NO;"
     ],
     "correctIndex": 2,
-    "explanation": "A 와 B 의 공통 컬럼은 SRN_NO 하나뿐이므로 ① NATURAL JOIN, ② USING(SRN_NO), ④ WHERE 조인은 모두 SRN_NO 가 같은 1 건을 반환한다. 반면 ③ 은 INNER JOIN 을 쓰면서 ON 이나 USING 으로 조인 조건을 주지 않아 문법 오류가 발생하므로 결과가 다르다.",
+    "explanation": "A 와 B 의 공통 컬럼은 SRN_NO 하나뿐이다. ① NATURAL JOIN, ② USING(SRN_NO), ④ WHERE 조인은 모두 SRN_NO 가 1 로 같은 한 건을 반환한다. ④ 는 A.SRN_NO 와 B.SRN_NO 가 따로 나와 컬럼 수는 하나 많지만 반환하는 행은 같다. 반면 ③ 은 INNER JOIN 을 쓰면서 ON 이나 USING 으로 조인 조건을 주지 않아 문법 오류가 난다. ※ 복원 자료의 '결과가 다른 SQL' 은 ④ 의 컬럼 구성까지 다르다고 볼 여지가 있어, 문제 문장을 '오류가 발생하는 것' 으로 분명히 했다.",
     "_source": "authored",
     "references": [
       {
@@ -705,15 +705,15 @@ export const ROUND_47: QuizQuestion[] = [
     "round": 47,
     "subject": "2과목",
     "number": 26,
-    "title": "아래 T 테이블에 대한 SQL 의 결과로 옳은 것은?",
+    "title": "아래 T 테이블에 대한 SQL 의 결과(R1, R2)로 옳은 것은?",
     "options": [
-      "12",
-      "13",
-      "25",
-      "0"
+      "0, 44",
+      "44, 44",
+      "32, 44",
+      "32, 32"
     ],
     "correctIndex": 2,
-    "explanation": "CASE 식은 위에서 아래로 평가하다가 처음 참이 되는 분기를 따른다. T 에는 한 행만 있고 GRADE = 12, RANK = 13 이므로 GRADE + RANK = 25 이다. SUM(25) 의 결과는 25 이고 NULL 이 아니므로 ELSE 분기인 SUM(GRADE + RANK) 이 그대로 25 로 반환된다. 정답은 ③ 번이다. ① 12 와 ② 13 은 GRADE·RANK 중 한 컬럼만 본 값이고, ④ 0 은 합계가 NULL 일 때만 나오는 THEN 분기 값이다.",
+    "explanation": "R1 은 행마다 GRADE + RANK 를 먼저 계산한다. 25, NULL, NULL, 7 이 되는데 NULL 이 섞인 덧셈은 NULL 이기 때문이다. SUM 은 NULL 을 빼고 더해 32 이고, NULL 이 아니므로 CASE 의 ELSE 로 가 R1 = 32 다. R2 는 컬럼별로 먼저 합친다. SUM(GRADE) = 12 + 7 + 3 = 22, SUM(RANK) = 13 + 5 + 4 = 22 라 R2 = 44 다. 정답은 ③번이다. ① 은 NULL 이 하나라도 있으면 SUM 전체가 NULL 이 된다고 보고 THEN 0 으로 간 값, ② 는 행 단위 덧셈에서도 NULL 을 0 으로 본 값, ④ 는 R2 도 NULL 이 있는 행을 통째로 뺀다고 본 값이다. 더하는 순서(행 먼저냐 컬럼 먼저냐)에 따라 NULL 의 영향이 달라진다는 점이 핵심이다.",
     "_source": "authored",
     "references": [
       {
@@ -727,12 +727,24 @@ export const ROUND_47: QuizQuestion[] = [
           [
             "12",
             "13"
+          ],
+          [
+            "NULL",
+            "5"
+          ],
+          [
+            "7",
+            "NULL"
+          ],
+          [
+            "3",
+            "4"
           ]
         ]
       },
       {
         "type": "sql",
-        "code": "SELECT CASE WHEN SUM(GRADE + RANK) IS NULL THEN 0\n            ELSE SUM(GRADE + RANK) END\nFROM   T;"
+        "code": "SELECT CASE WHEN SUM(GRADE + RANK) IS NULL THEN 0\n            ELSE SUM(GRADE + RANK) END AS R1,\n       SUM(GRADE) + SUM(RANK) AS R2\nFROM   T;"
       }
     ]
   },
@@ -823,7 +835,7 @@ export const ROUND_47: QuizQuestion[] = [
       "공집합"
     ],
     "correctIndex": 0,
-    "explanation": "집합 연산은 위에서 아래로 차례대로 적용된다. 먼저 `A UNION ALL B` 로 두 집합을 중복 포함해 합치면 {1, 2, 3, 3, 4, 5}. 그 결과에서 `MINUS C` 로 C 의 원소 {2, 4, 6} 을 모두 빼고 중복도 자동 제거 → {1, 3, 5}. 정답은 ①. ② 1, 2, 3 은 A 만 본 값, ③ 2, 4, 6 은 C 자체이고, ④ C 에 없는 1·3·5 가 남으므로 공집합이 아니다.",
+    "explanation": "집합 연산자는 위에서부터 차례로 적용된다. 먼저 A UNION ALL B 로 중복을 남긴 채 합치면 1, 2, 3, 3, 4, 5 가 된다. 여기서 MINUS C 로 C 에 있는 2, 4, 6 을 빼면 1, 3, 3, 5 가 남고, MINUS 는 중복을 없애므로 결과는 1, 3, 5 다(①). ② 1, 2, 3 은 A 만 본 값, ③ 2, 4, 6 은 C 자체이고, C 에 없는 1·3·5 가 남으므로 ④ 공집합도 아니다.",
     "_source": "authored",
     "references": [
       {
@@ -1059,7 +1071,7 @@ export const ROUND_47: QuizQuestion[] = [
       "NTILE"
     ],
     "correctIndex": 1,
-    "explanation": "비율 함수 RATIO_TO_REPORT는 한 행의 값을 파티션 전체 합으로 나눈 비율을 0~1 사이의 소수로 돌려준다. 예: 합계가 100이고 어떤 행 값이 20이면 0.2를 반환한다. ① PERCENT_RANK는 순위 기반 백분위, ③ CUME_DIST는 누적 분포, ④ NTILE은 그룹 분할이라 의미가 다르다. 정답은 ②번이다.",
+    "explanation": "비율 함수 RATIO_TO_REPORT는 한 행의 값을 파티션 전체 합으로 나눈 비율을 0~1 사이의 소수로 돌려준다. 예를 들어 합계가 100이고 어떤 행 값이 20이면 0.2를 반환한다. ① PERCENT_RANK는 순위 기반 백분위, ③ CUME_DIST는 누적 분포, ④ NTILE은 그룹 분할이라 의미가 다르다. 정답은 ②번이다.",
     "_source": "authored"
   },
   {
@@ -1077,7 +1089,7 @@ export const ROUND_47: QuizQuestion[] = [
       "EXCEPT"
     ],
     "correctIndex": 2,
-    "explanation": "집합 연산자의 의미를 정리하면 ① UNION은 합집합(중복 제거), ② UNION ALL은 합집합(중복 유지), INTERSECT는 교집합(양쪽 모두에 있는 행), ④ EXCEPT/MINUS는 차집합이다. 두 SELECT의 공통 행을 보고 싶을 때 쓰는 것이 INTERSECT이므로 정답은 ③번이다.",
+    "explanation": "집합 연산자의 의미를 정리하면 ① UNION은 합집합(중복 제거), ② UNION ALL은 합집합(중복 유지), ③ INTERSECT는 교집합(양쪽 모두에 있는 행), ④ EXCEPT/MINUS는 차집합이다. 두 SELECT의 공통 행을 보고 싶을 때 쓰는 것이 INTERSECT이므로 정답은 ③번이다.",
     "_source": "authored"
   },
   {
@@ -1113,7 +1125,7 @@ export const ROUND_47: QuizQuestion[] = [
       "가, 나, 다, 라"
     ],
     "correctIndex": 1,
-    "explanation": "보기 4개 SQL을 차례로 분석한다. 가(A.상품ID = B.상품ID AND ROWNUM = 1) 는 상관 서브쿼리에 ROWNUM = 1을 두어 한 행만 보장하므로 정상 동작. 나(A.상품ID = B.상품ID) 는 상품 테이블에 같은 상품ID가 두 건(P001 사과·P001 사과(중복)) 있어 SELECT 절 스칼라 서브쿼리가 다중 행을 반환해 ORA-01427 오류. 다(= 단일 행 비교) 는 서브쿼리가 평가항목의 상품ID 3건을 반환하는데 = 는 한 행만 받을 수 있어 ORA-01427 오류. 라(EXISTS 상관 서브쿼리) 는 존재 여부만 확인하므로 정상. 따라서 오류가 발생하는 것은 나·다 두 개이므로 ②번이 정답. ① 은 정상 동작하는 가 를, ③ 은 정상인 라 를 포함했고, ④ 는 가·라 까지 모두 포함했다. ※ 복원 자료의 다 는 '평가항목에 상품ID 컬럼이 없다' 는 가정이 위 표와 모순돼, 같은 범위(서브쿼리 반환 행 수)의 오류 사례로 바꿨다.",
+    "explanation": "가 는 상품 테이블에 상품ID 가 P001 인 행이 두 건이지만, 스칼라 서브쿼리 안에 ROWNUM = 1 을 두어 한 행만 돌려주므로 정상 실행된다. 나 는 같은 스칼라 서브쿼리에 ROWNUM 조건이 없어, 평가항목 E01 의 상품ID P001 에 대해 두 행을 돌려주므로 ORA-01427(단일 행 서브쿼리가 여러 행을 반환) 오류가 난다. 다 는 = 로 비교하는 서브쿼리가 평가항목의 상품ID 세 건을 돌려주어 같은 오류가 난다. 라 는 EXISTS 로 존재 여부만 확인하므로 정상이다. 오류가 나는 것은 나·다 라서 ②번이 정답이다. ① 은 정상인 가 를, ③ 은 정상인 라 를 넣었고, ④ 는 가·라 까지 모두 넣었다. ※ 복원 자료의 다 는 '평가항목에 상품ID 컬럼이 없다' 는 가정이 위 표와 모순돼, 같은 범위(서브쿼리 반환 행 수)의 오류 사례로 바꿨다.",
     "_source": "authored",
     "references": [
       {
@@ -1266,7 +1278,7 @@ export const ROUND_47: QuizQuestion[] = [
       "CONCAT(CONCAT(NULL, 'BC'), 'D')"
     ],
     "correctIndex": 1,
-    "explanation": "① LPAD('BCD', 3, 'A')는 이미 길이가 3이라 패딩 없이 'BCD'를 그대로 반환. ③ SUBSTR('ABCDE', 2, 3) = 'BCD'. ④ CONCAT(CONCAT(NULL, 'BC'), 'D') = 'BCD' (NULL은 빈 문자열로 처리). 그러나 ② RTRIM('EBCDE', 'E')는 오른쪽 끝의 'E'만 잘라 'EBCD'가 되고 앞쪽 'E'는 그대로 남는다. 결과 형태가 명확히 다른 것은 ②번이다.",
+    "explanation": "① LPAD('BCD', 3, 'A') 는 이미 길이가 3 이라 채울 자리가 없어 'BCD' 그대로다. ③ SUBSTR('ABCDE', 2, 3) 은 두 번째 글자부터 세 글자라 'BCD' 다. ④ Oracle 의 CONCAT 은 NULL 을 빈 문자열처럼 이어 붙여 CONCAT(NULL, 'BC') 가 'BC' 가 되고, 여기에 'D' 를 붙여 'BCD' 다. ② RTRIM('EBCDE', 'E') 는 오른쪽 끝의 E 만 지우고 앞쪽 E 는 남기므로 'EBCD' 가 되어 혼자 다르다.",
     "_source": "authored"
   },
   {
@@ -1276,38 +1288,54 @@ export const ROUND_47: QuizQuestion[] = [
     "round": 47,
     "subject": "2과목",
     "number": 41,
-    "title": "아래 T 테이블에 대한 SQL 의 결과로 옳은 것은?",
+    "title": "아래 T 테이블에 대한 SQL 의 결과(GRP, R1, R2)로 옳은 것은?",
     "options": [
-      "105, 70",
-      "70, 105",
-      "100, 100",
-      "NULL, NULL"
+      "(A, 105, 70), (B, 90, 45)",
+      "(A, 70, 105), (B, 45, 90)",
+      "(A, 105, 70), (B, 90, 45), (C, NULL, NULL)",
+      "(A, 105, 105), (B, 90, 90)"
     ],
     "correctIndex": 0,
-    "explanation": "T.COL = (100, 110, NULL). `AVG(COL)` 은 NULL 을 자동 제외해 (100+110)/2 = 105. `SUM(COL)/COUNT(*)` 는 SUM 만 NULL 제외(210), `COUNT(*)` 는 NULL 포함 행 수(3) 라 210/3 = 70. 정답 ① `105, 70`. ② 는 두 결과의 순서를 뒤바꾼 값이고, AVG·SUM 은 NULL 을 빼고 계산하므로 ④ NULL 이 되지 않는다.",
+    "explanation": "HAVING COUNT(COL) >= 1 은 COL 값이 하나라도 있는 그룹만 남긴다. COUNT(COL) 은 NULL 을 세지 않으므로 값이 NULL 하나뿐인 C 는 0 이라 빠지고 A·B 만 남는다. R1 = AVG(COL) 은 NULL 을 빼고 평균을 내 A 는 (100 + 110) / 2 = 105, B 는 90 이다. R2 = SUM(COL) / COUNT(*) 는 합계는 NULL 을 빼고 210·90 이지만 COUNT(*) 는 NULL 행까지 세어 3·2 라 A 70, B 45 다. 정답은 ①번이다. ② 는 R1 과 R2 를 바꾼 값, ③ 은 HAVING 의 COUNT(COL) 을 COUNT(*) 처럼 보고 C 를 남긴 값, ④ 는 COUNT(*) 도 NULL 행을 뺀다고 본 값이다.",
     "_source": "authored",
     "references": [
       {
         "type": "table",
         "caption": "T 테이블",
         "headers": [
+          "GRP",
           "COL"
         ],
         "rows": [
           [
+            "A",
             "100"
           ],
           [
+            "A",
             "110"
           ],
           [
+            "A",
+            "NULL"
+          ],
+          [
+            "B",
+            "NULL"
+          ],
+          [
+            "B",
+            "90"
+          ],
+          [
+            "C",
             "NULL"
           ]
         ]
       },
       {
         "type": "sql",
-        "code": "SELECT ROUND(AVG(COL)),\n       ROUND(SUM(COL)/COUNT(*))\nFROM   T;"
+        "code": "SELECT GRP,\n       ROUND(AVG(COL))           AS R1,\n       ROUND(SUM(COL) / COUNT(*)) AS R2\nFROM   T\nGROUP BY GRP\nHAVING COUNT(COL) >= 1\nORDER BY GRP;"
       }
     ]
   },
@@ -1321,12 +1349,12 @@ export const ROUND_47: QuizQuestion[] = [
     "title": "아래 고객·주문 테이블에 대해 외래키 참조 무결성 오류가 발생하는 구문은?",
     "options": [
       "INSERT INTO 주문 (주문ID, 고객ID) VALUES (503, 'C001');",
-      "INSERT INTO 고객 VALUES ('C004', '신규'); INSERT INTO 주문 VALUES (504, 'C004');",
+      "INSERT INTO 고객 VALUES ('C004', '신규'); INSERT INTO 주문 (주문ID, 고객ID) VALUES (504, 'C004');",
       "UPDATE 주문 SET 주문일 = SYSDATE WHERE 주문ID = 501;",
       "UPDATE 주문 SET 고객ID = 'C999' WHERE 주문ID = 501;"
     ],
     "correctIndex": 3,
-    "explanation": "외래키 (FK) 는 부모 테이블 (고객) 의 PK 를 참조한다는 제약이라, 자식 테이블 (주문) 의 `고객ID` 값은 반드시 고객 테이블에 존재해야 한다. ① C001 은 고객에 존재 → 정상, ② 새 고객 C004 추가 후 그 ID 참조 → 정상, ③ 고객ID 는 그대로 두고 주문일만 변경 → FK 무관. ④ 'C999' 는 고객 테이블에 없어 ORA-02291 (참조 무결성 위배) 오류 발생.",
+    "explanation": "외래키는 자식 테이블(주문)의 고객ID 값이 부모 테이블(고객)의 고객ID 에 반드시 있어야 한다는 제약이다. ① C001 은 고객 테이블에 있으므로 정상 입력된다. ② 새 고객 C004 를 먼저 넣은 뒤 그 ID 로 주문을 넣으므로 정상이다. ③ 은 고객ID 를 건드리지 않고 주문일만 바꿔 외래키와 관계가 없다. ④ C999 는 고객 테이블에 없는 값이라 ORA-02291(부모 키 없음) 오류가 난다.",
     "_source": "authored",
     "references": [
       {
@@ -1389,7 +1417,7 @@ export const ROUND_47: QuizQuestion[] = [
       "그룹 함수 오류"
     ],
     "correctIndex": 0,
-    "explanation": "ID 로 묶으면 A(3행), B(1행), C(2행), D(2행) 네 그룹이다. HAVING 은 COUNT(*) 가 아니라 COUNT(VAL) 로 거르는데, COUNT(VAL) 은 NULL 을 빼고 센다: A 2, B 1, C 0, D 2. 그래서 A 와 D 만 남고, SELECT 의 COUNT(*) 는 그룹의 전체 행 수라 A 는 3, D 는 2 다. ID 순으로 3, 2 두 행이다(①). ② 는 COUNT(VAL) 도 NULL 을 센다고 본 결과(C 가 남음)이고, ③ 은 COUNT(VAL) 이 같은 값(D 의 40, 40)을 한 번만 센다고 본 결과다(그건 COUNT(DISTINCT VAL)). ④ SELECT 에 집계 함수만 있고 ORDER BY 의 ID 는 GROUP BY 컬럼이라 오류가 나지 않는다.",
+    "explanation": "ID 로 묶으면 A(3행), B(1행), C(2행), D(2행) 네 그룹이다. HAVING 은 COUNT(*) 가 아니라 COUNT(VAL) 로 거르는데, COUNT(VAL) 은 NULL 을 빼고 센다. A 2, B 1, C 0, D 2 다. 그래서 A 와 D 만 남고, SELECT 의 COUNT(*) 는 그룹의 전체 행 수라 A 는 3, D 는 2 다. ID 순으로 3, 2 두 행이다(①). ② 는 COUNT(VAL) 도 NULL 을 센다고 본 결과(C 가 남음)이고, ③ 은 COUNT(VAL) 이 같은 값(D 의 40, 40)을 한 번만 센다고 본 결과다(그건 COUNT(DISTINCT VAL)). ④ SELECT 에 집계 함수만 있고 ORDER BY 의 ID 는 GROUP BY 컬럼이라 오류가 나지 않는다.",
     "_source": "authored",
     "references": [
       {
@@ -1451,7 +1479,7 @@ export const ROUND_47: QuizQuestion[] = [
     "options": [
       "10, 20",
       "10, 0",
-      "10, 10 (COL1 평균 = 20/2, COL2 평균 = 20/2)",
+      "10, 10",
       "AVG 연산 오류"
     ],
     "correctIndex": 2,
@@ -1501,7 +1529,7 @@ export const ROUND_47: QuizQuestion[] = [
       "중복 허용을 기본으로 한다."
     ],
     "correctIndex": 2,
-    "explanation": "UNION은 두 SELECT 결과를 합치되 중복된 행은 한 번으로 줄여 보여준다. 그래서 ①에서 말하는 것과 달리 UNION ALL보다 정렬·중복 제거 비용이 들어 일반적으로 더 느리다. ②와 ④는 잘못된 진술이다. 정답은 ③번이다.",
+    "explanation": "UNION 은 두 SELECT 결과를 합치되 중복된 행은 하나로 줄인다(③). 중복을 없애려고 정렬·비교를 더 하므로 ① 과 달리 UNION ALL 보다 일반적으로 느리다. ② UNION 은 두 조건이 서로 배타적인지와 상관없이 쓸 수 있고, ④ 중복을 그대로 두는 것은 UNION ALL 이다.",
     "_source": "authored"
   },
   {
@@ -1543,7 +1571,7 @@ export const ROUND_47: QuizQuestion[] = [
       "FORCE"
     ],
     "correctIndex": 2,
-    "explanation": "DROP USER에 CASCADE 옵션을 붙이면 그 사용자가 소유한 테이블·뷰·시퀀스 등 모든 객체까지 함께 삭제된다. 옵션 없이 DROP USER를 시도하면 사용자가 가진 객체가 있을 때 삭제가 거부된다. ① RESTRICT는 참조 객체가 있을 때 삭제를 막는 보호 옵션, ② PURGE는 휴지통까지 비우는 옵션이라 의미가 다르다. 정답은 ③번이다. ④ FORCE 는 DROP USER 의 옵션이 아니다.",
+    "explanation": "DROP USER 에 CASCADE 를 붙이면 그 사용자가 가진 테이블·뷰·시퀀스 같은 객체까지 함께 삭제된다(③). 옵션 없이 DROP USER 를 하면 사용자에게 객체가 있을 때 삭제가 거부된다. ① RESTRICT 와 ④ FORCE 는 DROP USER 에 쓰는 옵션이 아니고, ② PURGE 는 DROP TABLE 에서 휴지통을 거치지 않고 바로 지울 때 쓴다.",
     "_source": "authored",
     "references": [
       {
@@ -1661,7 +1689,7 @@ export const ROUND_47: QuizQuestion[] = [
       "5"
     ],
     "correctIndex": 1,
-    "explanation": "계층형 쿼리에서 조건의 위치가 결정적이다. CONNECT BY 절 안에 함께 둔 조건은 트리를 전개하는 단계 자체를 차단하여 그 행과 자식·손자 노드를 모두 제외한다. 본 SQL은 START WITH COL1=2에서 출발하고 CONNECT BY 조건에 AND COL1 <> 5가 들어가 있으므로, 출발 행 2의 자식 후보 5와 6 중 5는 차단되어 5와 그 자식 9가 모두 제외된다. 6은 통과되지만 자식이 없다. 결과는 {2, 6} 두 행이라 정답은 ②번이다. ① 1 은 시작 행 2 만 센 값이고, ③ 3 은 COL1 <> 5 를 WHERE 절에 둔 경우의 결과(2, 6, 9)다. WHERE 는 전개가 끝난 뒤 5 한 행만 지우므로 그 자식 9 가 남는다.",
+    "explanation": "CONNECT BY 절에 함께 쓴 조건은 트리를 내려가는 단계에서 적용되므로, 조건에 걸린 행에서 전개가 멈추고 그 아래 자손도 따라오지 않는다. START WITH COL1 = 2 에서 출발하면 2 의 자식 후보는 COL2 가 2 인 5 와 6 이다. 5 는 COL1 <> 5 에 걸려 빠지고, 그 자식 9 도 함께 빠진다. 6 은 통과하지만 자식이 없다. 결과는 2, 6 두 행이라 정답은 ②번이다. ① 1 은 시작 행 2 만 센 값이다. ③ 3 은 COL1 <> 5 를 WHERE 절에 둔 경우의 결과(2, 6, 9)로, WHERE 는 전개가 끝난 뒤 5 한 행만 지우므로 그 자식 9 가 남는다.",
     "_source": "authored",
     "references": [
       {
