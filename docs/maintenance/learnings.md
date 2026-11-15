@@ -189,3 +189,5 @@
 - (11-15) mermaid 는 본체와 별개로 다이어그램 종류별 청크(erDiagram-*.js)를 첫 렌더 때 받는다. 미리 받기는 `mermaid.parse('erDiagram ...')` 까지 해야 한다. 실패 렌더는 body 맨 아래에 'Syntax error in text' 를 남기므로 `suppressErrorRendering: true`.
 - (11-15) 보기 두 개가 한 단어(GROUP BY/ORDER BY, ROWS/RANGE)만 다르면 "보기가 같다" 제보가 반복된다. 핵심 대비가 아니면 다른 문장으로 바꾸고, 핵심 대비면 해설에 두 결과값을 나란히 적는다.
 - (11-15) 열린 PR 상한 + 머지 불가가 겹치면, 머지 대기 PR 들을 한 브랜치에 병합해 PR 하나로 합치고 옛 PR 은 코멘트 후 닫는다(#299~#301 → #302). 상한을 넘기지 않고 다음 작업을 PR 로 올릴 수 있다.
+- (11-15) wt-maint 의 원격 추적 참조는 `git fetch origin maintenance/maintainer-agent:refs/remotes/origin/maintenance/maintainer-agent` 로 받아야 갱신된다(그냥 `git fetch origin <브랜치>` 는 FETCH_HEAD 만 바뀌어, reset 하면 옛 커밋으로 돌아간 것처럼 보인다).
+- (11-15) 외부 복원·가채점 사이트는 WebFetch 가 DNS 로 막히고 curl 은 권한 검사가 거부한다(환경 네트워크는 unrestricted). 우회하지 말고 사용자에게 권한 규칙 추가나 자료 공유를 요청한다.
