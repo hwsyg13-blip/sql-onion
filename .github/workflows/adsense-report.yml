@@ -1,0 +1,34 @@
+name: AdSense report → BigQuery
+
+# 매일 AdSense 보고서(화면별·광고 단위별)를 BigQuery sql-onion-cs.adsense 에 적재한다.
+# 비밀값 3개(ADSENSE_CLIENT_ID / ADSENSE_CLIENT_SECRET / ADSENSE_REFRESH_TOKEN)가 없으면 아무것도 하지 않고 끝난다.
+# 공개 저장소라 로그에는 행 수만 남긴다.
+on:
+  schedule:
+    - cron: '23 1 * * *'   # 매일 10:23 KST
+  workflow_dispatch:
+    inputs:
+      days:
+        description: '최근 며칠을 다시 받을지 (1~90)'
+        default: '3'
+
+permissions:
+  contents: read
+
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: AdSense → BigQuery
+        run: node scripts/adsense/report-to-bq.mjs
+        env:
+          ADSENSE_CLIENT_ID: ${{ secrets.ADSENSE_CLIENT_ID }}
+          ADSENSE_CLIENT_SECRET: ${{ secrets.ADSENSE_CLIENT_SECRET }}
+          ADSENSE_REFRESH_TOKEN: ${{ secrets.ADSENSE_REFRESH_TOKEN }}
+          ADSENSE_ACCOUNT: accounts/pub-4723950729614149
+          DAYS: ${{ github.event.inputs.days || '3' }}

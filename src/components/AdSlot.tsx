@@ -41,16 +41,14 @@ export const AdSlot = ({ slot, format = 'auto', layoutKey, style }: { slot: stri
     ensureScript();
     if (pushedRef.current) return;
     pushedRef.current = true;
-    const t = setTimeout(() => {
-      try {
-        const w: any = window;
-        w.adsbygoogle = w.adsbygoogle || [];
-        w.adsbygoogle.push({});
-      } catch (e) {
-        console.warn('[AdSlot] push failed', e);
-      }
-    }, 100);
-    return () => clearTimeout(t);
+    // 스크립트가 아직 안 받아졌어도 adsbygoogle 배열에 쌓아 두면 로드 직후 처리된다 → 기다리지 않고 바로 요청
+    try {
+      const w: any = window;
+      w.adsbygoogle = w.adsbygoogle || [];
+      w.adsbygoogle.push({});
+    } catch (e) {
+      console.warn('[AdSlot] push failed', e);
+    }
   }, [isLive]);
 
   // 실제 광고 슬롯 ID 가 없으면 사용자에게는 안 보이게 처리
@@ -117,14 +115,11 @@ export const AdSidebar = ({ slot }: { slot: string }) => {
     ensureScript();
     if (pushedRef.current) return;
     pushedRef.current = true;
-    const t = setTimeout(() => {
-      try {
-        const w: any = window;
-        w.adsbygoogle = w.adsbygoogle || [];
-        w.adsbygoogle.push({});
-      } catch {}
-    }, 100);
-    return () => clearTimeout(t);
+    try {
+      const w: any = window;
+      w.adsbygoogle = w.adsbygoogle || [];
+      w.adsbygoogle.push({});
+    } catch {}
   }, [isLive, show]);
 
   if (!show) return null;
