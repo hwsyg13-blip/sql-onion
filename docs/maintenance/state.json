@@ -163,5 +163,11 @@
   "sessions": "5.6만",
   "engagement_per_user": "24분 39초",
   "top_sources": "google organic 3.2만, direct 1.2만, 네이버(검색+블로그) 약 8천, bing 837, everytime 290"
+ },
+ "bigquery": {
+  "project": "sql-onion-cs",
+  "location": "asia-northeast3",
+  "linked": "2026-11-15",
+  "status": "GA4 → BigQuery 연결 완료, 데이터 세트 아직 없음(첫 일일 내보내기는 11-16 중). 도구: mcp__Google_Cloud_BigQuery__list_dataset_ids(projectId=sql-onion-cs) → execute_sql_readonly"
  }
 }
