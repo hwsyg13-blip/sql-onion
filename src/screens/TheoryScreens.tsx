@@ -623,7 +623,7 @@ export const TheoryDetailScreen = ({ chapterId, onNavigate }) => {
             <MiniTestSidebar chapterId={chapterId} chapterLabel={`${sub.code} ${ch.title}`} />
           ) : null}
           {toc.length > 0 && <TocCard toc={toc} />}
-          <AdSlot slot="THEORY_DETAIL_AFTER_MINITEST" format="rectangle" />
+          <AdSlot slot="9969248457" format="fluid" layoutKey="-fb+5w+4e-db+86" />
         </aside>
       </div>
     </div>
