@@ -1900,3 +1900,6 @@ html, body { overflow-x: hidden; }
     gap: 4px !important;
   }
 }
+
+/* AdSense — 채울 광고가 없으면(unfilled) 빈 상자를 남기지 않는다 */
+ins.adsbygoogle[data-ad-status="unfilled"] { display: none !important; }
