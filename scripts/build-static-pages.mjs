@@ -428,6 +428,8 @@ function buildTheoryChapterPage(subject, ch) {
     <h1>${esc(ch.title)}</h1>
     <p class="lead">${esc(subject.code)} ${esc(subject.title)}</p>
     ${body ? `<article class="theory-md static-theory">${staticTheoryBody(body)}</article>` : `<ul>${(ch.sections || []).map(s => `<li>${esc(s)}</li>`).join('')}</ul>`}
+    ${body ? `<ins class="adsbygoogle" style="display:block;margin:28px 0" data-ad-client="${ADSENSE_CLIENT}" data-ad-slot="1114532773" data-ad-format="auto" data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>` : ''}
     <a class="cta" href="/">미니테스트로 바로 확인하기 →</a>
     ${nav}
 ` + tail;
