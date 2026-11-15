@@ -650,37 +650,57 @@
     {
       "subject": "2과목",
       "number": 29,
-      "title": "아래 테이블에 대한 AVG(NVL(C1, 0)) 연산의 결과로 옳은 것은?",
+      "title": "아래 T 테이블에 대한 SQL 의 결과(DEPT, X, Y)로 옳은 것은?",
       "options": [
-        "10",
-        "15",
-        "20",
-        "NULL"
+        "(A, 10, 15), (B, 0, 0), (C, 15, 15)",
+        "(A, 15, 15), (B, 0, 0), (C, 15, 15)",
+        "(A, 10, 15), (B, NULL, 0), (C, 15, 15)",
+        "(A, 10, 15), (B, 0, 0), (C, 30, 30)"
       ],
       "correctIndex": 0,
-      "explanation": "NVL로 NULL을 0으로 치환하면 대상은 {10, 20, 0}이 되고, 분모도 3이 되어 (10+20+0)/3 = 10이다. 정답은 ①번이다. ② 15 는 NVL 없이 AVG(C1) 로 NULL 을 빼고 계산한 값이고, NVL 로 NULL 을 0 으로 바꿨으므로 ④ NULL 이 나올 수 없다.",
+      "explanation": "NVL 이 AVG 안에 있느냐 밖에 있느냐가 핵심이다. X = AVG(NVL(C1, 0)) 은 먼저 NULL 을 0 으로 바꾼 뒤 평균을 내므로 NULL 행도 분모에 들어간다. A 는 (10 + 0 + 20) / 3 = 10, B 는 (0 + 0) / 2 = 0, C 는 (30 + 0) / 2 = 15 다. Y = NVL(AVG(C1), 0) 은 NULL 을 빼고 평균을 낸 뒤 결과가 NULL 일 때만 0 으로 바꾼다. A 는 (10 + 20) / 2 = 15, B 는 값이 모두 NULL 이라 AVG 가 NULL 이고 NVL 로 0, C 는 (30 + 0) / 2 = 15 다. 정답은 ①번이다. ② 는 X 에서도 NULL 행을 분모에서 뺀 값, ③ 은 값이 모두 NULL 인 그룹은 NVL 을 거쳐도 AVG 가 NULL 이라고 본 값, ④ 는 0 도 NULL 처럼 평균에서 빠진다고 본 값이다(0 은 엄연한 값이라 분모에 들어간다).",
       "references": [
         {
           "type": "table",
+          "caption": "T 테이블",
           "headers": [
+            "DEPT",
             "C1"
           ],
           "rows": [
             [
+              "A",
               "10"
             ],
             [
+              "A",
+              "NULL"
+            ],
+            [
+              "A",
               "20"
             ],
             [
+              "B",
               "NULL"
+            ],
+            [
+              "B",
+              "NULL"
+            ],
+            [
+              "C",
+              "30"
+            ],
+            [
+              "C",
+              "0"
             ]
-          ],
-          "caption": "T 테이블"
+          ]
         },
         {
           "type": "sql",
-          "code": "SELECT AVG(NVL(C1, 0)) FROM T;"
+          "code": "SELECT DEPT,\n       AVG(NVL(C1, 0)) AS X,\n       NVL(AVG(C1), 0) AS Y\nFROM   T\nGROUP BY DEPT\nORDER BY DEPT;"
         }
       ]
     },

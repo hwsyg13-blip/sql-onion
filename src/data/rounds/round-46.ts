@@ -1636,19 +1636,20 @@ export const ROUND_46: QuizQuestion[] = [
     "round": 46,
     "subject": "2과목",
     "number": 45,
-    "title": "아래 데이터와 SQL의 결과로 옳은 것은?",
+    "title": "아래 T 테이블에 대한 SQL 의 결과(COUNT(COL1), COUNT(*), AVG(COL2))로 옳은 것은?",
     "options": [
-      "3, 27",
-      "3, 33",
-      "2, 27",
-      "4, 33"
+      "2, 4, 25.75",
+      "4, 4, 25.75",
+      "3, 5, 25.75",
+      "4, 6, 24.6"
     ],
     "correctIndex": 0,
-    "explanation": "WHERE COL2 > 21 로 (10, 25), (20, 26), (30, 30) 세 행이 남는다. 세 행 모두 COL1 이 NULL 이 아니라 COUNT(COL1) 은 3 이고, AVG(COL2) 는 (25 + 26 + 30) / 3 = 27 이다(①). ③ 2 와 ④ 4 는 남은 행 수와 맞지 않고, ② 33 은 평균을 잘못 구한 값이다.",
+    "explanation": "WHERE COL2 > 21 을 통과하는 행은 (10, 25), (NULL, 26), (30, 30), (NULL, 22) 네 개다. (40, 20) 은 거짓이고, (50, NULL) 은 NULL 과의 비교가 UNKNOWN 이라 빠진다. 남은 네 행에서 COUNT(*) 는 4, COUNT(COL1) 은 COL1 이 NULL 인 두 행을 빼고 2, AVG(COL2) 는 (25 + 26 + 30 + 22) / 4 = 25.75 다. 정답은 ①번이다. ② 는 COUNT(COL1) 도 NULL 을 센다고 본 값, ③ 은 COL2 가 NULL 인 (50, NULL) 도 WHERE 를 통과한다고 본 값(AVG 는 NULL 을 빼므로 그대로 25.75), ④ 는 WHERE 를 적용하지 않은 전체 결과다.",
     "_source": "authored",
     "references": [
       {
         "type": "table",
+        "caption": "T 테이블",
         "headers": [
           "COL1",
           "COL2"
@@ -1659,7 +1660,7 @@ export const ROUND_46: QuizQuestion[] = [
             "25"
           ],
           [
-            "20",
+            "NULL",
             "26"
           ],
           [
@@ -1669,13 +1670,20 @@ export const ROUND_46: QuizQuestion[] = [
           [
             "40",
             "20"
+          ],
+          [
+            "50",
+            "NULL"
+          ],
+          [
+            "NULL",
+            "22"
           ]
-        ],
-        "caption": "T 테이블"
+        ]
       },
       {
         "type": "sql",
-        "code": "SELECT COUNT(COL1), AVG(COL2)\nFROM   T\nWHERE  COL2 > 21;"
+        "code": "SELECT COUNT(COL1), COUNT(*), AVG(COL2)\nFROM   T\nWHERE  COL2 > 21;"
       }
     ]
   },
