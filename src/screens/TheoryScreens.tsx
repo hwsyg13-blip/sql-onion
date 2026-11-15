@@ -516,6 +516,9 @@ export const TheoryDetailScreen = ({ chapterId, onNavigate }) => {
             </div>
           ) : null}
 
+          {/* 광고 — 본문 상단 (사용자 지시 11-15). 오른쪽 칸은 900px 미만에서 숨겨져 그 안의 광고가 모바일에 안 나왔다 */}
+          <div style={{ marginBottom: 24 }}><AdSlot slot="1114532773" format="auto" /></div>
+
           {/* 마크다운 본문 — .theory-md 가 디자인 시스템 적용 */}
           <div
             ref={bodyRef}
@@ -584,6 +587,9 @@ export const TheoryDetailScreen = ({ chapterId, onNavigate }) => {
               </button>
             </div>
           )}
+
+          {/* 광고 — 본문 하단, 이전·다음 버튼과 간격을 둔다 */}
+          <div style={{ marginTop: 40 }}><AdSlot slot="1114532773" format="auto" /></div>
 
           {/* Nav footer */}
           <div style={{ display: 'flex', justifyContent: 'space-between', gap: 10, marginTop: 40, paddingTop: 24, borderTop: '1px solid var(--border-subtle)' }}>

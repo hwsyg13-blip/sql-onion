@@ -427,6 +427,8 @@ function buildTheoryChapterPage(subject, ch) {
     <div class="crumb"><a href="/">홈</a> · <a href="/theory/">이론</a> · ${esc(subject.code)} · ${esc(ch.title)}</div>
     <h1>${esc(ch.title)}</h1>
     <p class="lead">${esc(subject.code)} ${esc(subject.title)}</p>
+    ${body ? `<ins class="adsbygoogle" style="display:block;margin:0 0 24px" data-ad-client="${ADSENSE_CLIENT}" data-ad-slot="1114532773" data-ad-format="auto" data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>` : ''}
     ${body ? `<article class="theory-md static-theory">${staticTheoryBody(body)}</article>` : `<ul>${(ch.sections || []).map(s => `<li>${esc(s)}</li>`).join('')}</ul>`}
     ${body ? `<ins class="adsbygoogle" style="display:block;margin:28px 0" data-ad-client="${ADSENSE_CLIENT}" data-ad-slot="1114532773" data-ad-format="auto" data-full-width-responsive="true"></ins>
     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>` : ''}
