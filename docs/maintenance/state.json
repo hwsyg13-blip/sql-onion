@@ -95,7 +95,10 @@
   308,
   310,
   311,
-  312
+  312,
+  313,
+  314,
+  315
  ],
  "stop_reason": "낮 실행 — 5시간 0.17·7일 0.37 로 기준 미만. #302·#303 이 사용자 \"머지\" 없이는 반영되지 않아 같은 PR 에 더 쌓으면 리뷰·충돌 부담만 커져 멈춤. 63회 복원 출처(sqldpass.com 가채점) 접근은 WebFetch DNS 실패·curl 은 권한 검사 거부",
  "releases": [
@@ -168,6 +171,7 @@
   "project": "sql-onion-cs",
   "location": "asia-northeast3",
   "linked": "2026-11-15",
-  "status": "GA4 → BigQuery 연결 완료, 데이터 세트 아직 없음(첫 일일 내보내기는 11-16 중). 도구: mcp__Google_Cloud_BigQuery__list_dataset_ids(projectId=sql-onion-cs) → execute_sql_readonly"
+  "status": "GA4 → BigQuery 연결 완료, 데이터 세트 아직 없음(첫 일일 내보내기는 11-16 중). 도구: mcp__Google_Cloud_BigQuery__list_dataset_ids(projectId=sql-onion-cs) → execute_sql_readonly",
+  "adsense": "sql-onion-cs.adsense.daily_by_page / daily_by_unit (서울, 날짜 파티션, 샌드박스라 60일 보관). #314 워크플로 adsense-report.yml 매일 10:23 KST. 사용자가 콘솔 6단계(scripts/adsense/README.md) + GitHub Secrets 3개 등록 대기 → 등록 후 Actions 수동 실행 확인"
  }
 }
