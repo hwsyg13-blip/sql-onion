@@ -192,3 +192,4 @@
 - (11-15) wt-maint 의 원격 추적 참조는 `git fetch origin maintenance/maintainer-agent:refs/remotes/origin/maintenance/maintainer-agent` 로 받아야 갱신된다(그냥 `git fetch origin <브랜치>` 는 FETCH_HEAD 만 바뀌어, reset 하면 옛 커밋으로 돌아간 것처럼 보인다).
 - (11-15) 외부 복원·가채점 사이트는 WebFetch 가 DNS 로 막히고 curl 은 권한 검사가 거부한다(환경 네트워크는 unrestricted). 우회하지 말고 사용자에게 권한 규칙 추가나 자료 공유를 요청한다.
 - (11-15) 광고 자리를 넣을 때는 그 컨테이너가 모바일에서 보이는지 확인한다(이론 상세 aside 는 900px 미만 display:none 이라 광고가 모바일에서 한 번도 안 나왔음). 검사: ins 의 부모 폭이 0 이 아닌지.
+- (11-16) 앱 화면 주소는 src/lib/routeUrl.ts 한 곳에서 정한다. 새 화면을 만들면 ROUTE_PATHS 에 주소를 넣고, /theory/·/exam/·/guide/·/about/ 처럼 정적 페이지가 쓰는 경로와 겹치지 않게 한다. 테스트 스크립트(cbt.cjs 등)의 sessionStorage 진입은 '/' 에서만 동작하니 새 주소(/exams/round-NN)로 바로 열어도 된다.
