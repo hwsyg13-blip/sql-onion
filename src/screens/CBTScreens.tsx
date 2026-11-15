@@ -30,8 +30,11 @@ export const ExamListScreen = ({onNavigate}) => {
       <h1 style={{fontSize:32,fontWeight:800,color:"var(--fg-1)",margin:"6px 0 6px",letterSpacing:"-0.02em"}}>기출문제</h1>
       <p style={{fontSize:14,color:"var(--fg-3)",margin:"0 0 28px"}}>2022년부터 2026년 최신 기출을 4지선다형으로 복원했어요.</p>
 
-      {years.map((yr) => (
-        <section key={yr} style={{marginBottom:28}}>
+      {years.map((yr, yi) => (
+        <React.Fragment key={yr}>
+        {/* 광고 — 연도 묶음 사이사이 (사용자 지시 11-15). 첫 연도 앞에는 두지 않는다 */}
+        {yi > 0 && <div style={{margin:"4px 0 28px"}}><AdSlot slot="1114532773" format="auto"/></div>}
+        <section style={{marginBottom:28}}>
           <div style={{display:"flex",alignItems:"baseline",justifyContent:"space-between",marginBottom:12}}>
             <h2 style={{fontSize:18,fontWeight:700,color:"var(--fg-1)",margin:0}}>{yr}년</h2>
             <span style={{fontSize:12,color:"var(--fg-3)"}}>{byYear[yr].length}개 회차</span>
@@ -58,6 +61,7 @@ export const ExamListScreen = ({onNavigate}) => {
             })}
           </div>
         </section>
+        </React.Fragment>
       ))}
 
       {/* 광고 — 사용자 지시(11-15)로 목록·결과 화면에도 홈 디스플레이 광고 단위 */}
