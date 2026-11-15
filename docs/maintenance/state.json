@@ -181,8 +181,13 @@
   "until": "2026-11-30",
   "per_run": "회차 1개 이상 × 2문항",
   "order": "45 → 62 → 45 …(끝나면 처음부터)",
-  "next_round": 45,
+  "next_round": 46,
   "log": "docs/qa/2026-11-06-round-difficulty.md",
-  "done": {}
+  "done": {
+   "45": [
+    "45-2-24",
+    "45-1-7"
+   ]
+  }
  }
 }
