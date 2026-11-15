@@ -6,7 +6,8 @@
 // → 사용자가 레이아웃을 미리 확인할 수 있고, 승인 후 ID 입력하면 자동 전환
 import React from 'react';
 
-const CLIENT = import.meta.env.VITE_ADSENSE_CLIENT as string | undefined;
+// 게시자 ID 는 공개값(index.html 의 google-adsense-account 메타, ads.txt 와 같음). 환경변수가 비어 있어도 광고가 나오게 기본값으로 둔다.
+const CLIENT = (import.meta.env.VITE_ADSENSE_CLIENT as string | undefined) || 'ca-pub-4723950729614149';
 
 let scriptLoaded = false;
 function ensureScript() {
