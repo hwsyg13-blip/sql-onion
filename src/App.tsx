@@ -16,6 +16,7 @@ import { CheatSheetScreen } from './screens/CheatSheetScreen';
 import { useSession, signOut } from './lib/auth';
 import { recordVisit } from './lib/progress';
 import { trackPageView } from './lib/analytics';
+import { pathFor, parsePath, routePattern, canonicalFor } from './lib/routeUrl';
 import { Analytics } from '@vercel/analytics/react';
 
 // 🚧 베타 모드: 로그인/결제 기능 숨김 (나중에 켤 때 false 로만 바꾸면 됨)
@@ -42,10 +43,12 @@ export const App = () => {
     try { return JSON.parse(localStorage.getItem('sqlo_tweaks') || 'null') || TWEAK_DEFAULTS; }
     catch { return TWEAK_DEFAULTS; }
   });
-  // 라우트 복원 우선순위: URL 쿼리(?cbt=round-NN) > sessionStorage > 'home'
-  // — 정적 /exam/ 인덱스에서 회차 카드 클릭 시 SPA 딥링크 진입용
+  // 라우트 복원 우선순위: 주소(/learn/c111 등, routeUrl.ts) > URL 쿼리(?cbt=round-NN) > sessionStorage > 'home'
+  // — 쿼리는 정적 /exam/ 인덱스에서 회차 카드 클릭 시 SPA 딥링크 진입용(예전 주소 호환)
   const [route, setRoute] = React.useState(() => {
     try {
+      const fromPath = parsePath(window.location.pathname);
+      if (fromPath) return fromPath.route;
       const sp = new URLSearchParams(window.location.search);
       const cbtId = sp.get('cbt');
       if (cbtId && /^round-\d+$/.test(cbtId)) return 'cbt';
@@ -58,6 +61,8 @@ export const App = () => {
   });
   const [params, setParams] = React.useState<any>(() => {
     try {
+      const fromPath = parsePath(window.location.pathname);
+      if (fromPath) return fromPath.params;
       const sp = new URLSearchParams(window.location.search);
       const cbtId = sp.get('cbt');
       if (cbtId && /^round-\d+$/.test(cbtId)) return cbtId;
@@ -175,7 +180,8 @@ export const App = () => {
     }
     // 브라우저 히스토리에 기록 — popstate 로 인해 호출된 경우는 제외
     if (!isPoppingRef.current && typeof window !== 'undefined') {
-      try { window.history.pushState({ sqlo: true, route: to, params: p }, ''); } catch {}
+      const url = pathFor(to, p);
+      try { window.history.pushState({ sqlo: true, route: to, params: p }, '', url ?? undefined); } catch {}
     }
     setRoute(to);
     setParams(p);
@@ -185,8 +191,14 @@ export const App = () => {
   // 최초 마운트: 현재 route/params 를 history state 로 교체 (앱 재시작 후 뒤로가기 처리)
   React.useEffect(() => {
     if (typeof window === 'undefined') return;
-    if (!window.history.state?.sqlo) {
-      try { window.history.replaceState({ sqlo: true, route, params }, ''); } catch {}
+    const url = pathFor(route, params);
+    const cur = window.location.pathname + window.location.search;
+    if (!window.history.state?.sqlo || (url && url !== cur)) {
+      // 정적 페이지 쿼리(?edit=1·?adsdebug=1 등)는 유지하고 ?cbt=·?mock= 만 없앤다
+      const sp = new URLSearchParams(window.location.search);
+      sp.delete('cbt'); sp.delete('mock');
+      const q = sp.toString();
+      try { window.history.replaceState({ sqlo: true, route, params }, '', url ? url + (q ? `?${q}` : '') : undefined); } catch {}
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -194,6 +206,11 @@ export const App = () => {
   // GA4 page_view — route/params 변경마다 발사 (SPA 라우팅이라 자동 추적 안 됨)
   React.useEffect(() => {
     trackPageView(route, params);
+    // 대표 주소 — 같은 내용의 정적 페이지(/theory/c111/ 등)가 있으면 그쪽을 가리켜 앱 주소가 따로 색인되지 않게
+    try {
+      const link = document.querySelector('link[rel="canonical"]');
+      if (link) link.setAttribute('href', canonicalFor(route, params));
+    } catch {}
   }, [route, params]);
 
   // popstate (브라우저 뒤로가기/앞으로가기) — 시험 중 이탈 방어 후 route 복원
@@ -210,7 +227,7 @@ export const App = () => {
         if (answered > 0) {
           const ok = window.confirm('진행 중인 풀이를 종료하고 이동할까요? 답안은 저장되지 않아요.');
           if (!ok) {
-            try { window.history.pushState({ sqlo: true, route, params }, ''); } catch {}
+            try { window.history.pushState({ sqlo: true, route, params }, '', pathFor(route, params) ?? undefined); } catch {}
             return;
           }
         }
@@ -253,8 +270,8 @@ export const App = () => {
   const hideTopBar = (route === 'login');
 
   // Vercel Web Analytics — 주소가 바뀌지 않는 SPA 라 화면 이름을 가상 경로로 넘긴다 (GA 의 trackPageView 와 같은 방식)
-  const vaRoute = `/${route}`;
-  const vaPath = (typeof params === 'string' || typeof params === 'number') ? `${vaRoute}/${encodeURIComponent(String(params))}` : vaRoute;
+  const vaRoute = routePattern(route, params);
+  const vaPath = pathFor(route, params) ?? `/${route}`;
 
   return (
     <>
