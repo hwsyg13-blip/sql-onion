@@ -31,7 +31,8 @@ function debugMode(): boolean {
   return /[?&]adsdebug=1/.test(window.location.search);
 }
 
-export const AdSlot = ({ slot, format = 'auto', style }: { slot: string; format?: 'auto' | 'fluid' | 'rectangle' | 'horizontal' | 'vertical'; style?: React.CSSProperties }) => {
+// layoutKey: 인피드 광고(format='fluid') 의 data-ad-layout-key — AdSense 가 광고 단위 코드에 같이 준다
+export const AdSlot = ({ slot, format = 'auto', layoutKey, style }: { slot: string; format?: 'auto' | 'fluid' | 'rectangle' | 'horizontal' | 'vertical'; layoutKey?: string; style?: React.CSSProperties }) => {
   const pushedRef = React.useRef(false);
   const isLive = Boolean(CLIENT && isRealSlotId(slot));
 
@@ -87,7 +88,8 @@ export const AdSlot = ({ slot, format = 'auto', style }: { slot: string; format?
       data-ad-client={CLIENT}
       data-ad-slot={slot}
       data-ad-format={format}
-      data-full-width-responsive="true"
+      {...(layoutKey ? { 'data-ad-layout-key': layoutKey } : {})}
+      {...(format === 'fluid' ? {} : { 'data-full-width-responsive': 'true' })}
     />
   );
 };
