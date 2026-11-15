@@ -92,7 +92,7 @@ export const TheoryListScreen = ({ onNavigate }) => (
         {/* 광고 슬롯 — 1과목과 2과목 사이 */}
         {sIdx === 0 && (
           <div style={{ marginBottom: 32 }}>
-            <AdSlot slot="1992675180" format="fluid" layoutKey="-fb+5w+4e-db+86" />
+            <AdSlot slot="THEORY_LIST_MID" format="horizontal" />
           </div>
         )}
       </React.Fragment>
