@@ -1082,37 +1082,53 @@
     {
       "subject": "2과목",
       "number": 41,
-      "title": "아래 T 테이블에 대한 SQL 의 결과로 옳은 것은?",
+      "title": "아래 T 테이블에 대한 SQL 의 결과(GRP, R1, R2)로 옳은 것은?",
       "options": [
-        "105, 70",
-        "70, 105",
-        "100, 100",
-        "NULL, NULL"
+        "(A, 105, 70), (B, 90, 45)",
+        "(A, 70, 105), (B, 45, 90)",
+        "(A, 105, 70), (B, 90, 45), (C, NULL, NULL)",
+        "(A, 105, 105), (B, 90, 90)"
       ],
       "correctIndex": 0,
-      "explanation": "COL 값은 100, 110, NULL 이다. AVG(COL) 은 NULL 을 빼고 (100 + 110) / 2 = 105 를 구한다. SUM(COL) / COUNT(*) 는 SUM 이 NULL 을 빼고 210 을 구하지만 COUNT(*) 는 NULL 행까지 세어 3 이라 210 / 3 = 70 이다. 정답은 ① 105, 70 이다. ② 는 두 값의 순서를 바꾼 것이고, AVG·SUM 은 NULL 을 빼고 계산하므로 ④ NULL 이 되지 않는다.",
+      "explanation": "HAVING COUNT(COL) >= 1 은 COL 값이 하나라도 있는 그룹만 남긴다. COUNT(COL) 은 NULL 을 세지 않으므로 값이 NULL 하나뿐인 C 는 0 이라 빠지고 A·B 만 남는다. R1 = AVG(COL) 은 NULL 을 빼고 평균을 내 A 는 (100 + 110) / 2 = 105, B 는 90 이다. R2 = SUM(COL) / COUNT(*) 는 합계는 NULL 을 빼고 210·90 이지만 COUNT(*) 는 NULL 행까지 세어 3·2 라 A 70, B 45 다. 정답은 ①번이다. ② 는 R1 과 R2 를 바꾼 값, ③ 은 HAVING 의 COUNT(COL) 을 COUNT(*) 처럼 보고 C 를 남긴 값, ④ 는 COUNT(*) 도 NULL 행을 뺀다고 본 값이다.",
       "references": [
         {
           "type": "table",
           "caption": "T 테이블",
           "headers": [
+            "GRP",
             "COL"
           ],
           "rows": [
             [
+              "A",
               "100"
             ],
             [
+              "A",
               "110"
             ],
             [
+              "A",
+              "NULL"
+            ],
+            [
+              "B",
+              "NULL"
+            ],
+            [
+              "B",
+              "90"
+            ],
+            [
+              "C",
               "NULL"
             ]
           ]
         },
         {
           "type": "sql",
-          "code": "SELECT ROUND(AVG(COL)),\n       ROUND(SUM(COL)/COUNT(*))\nFROM   T;"
+          "code": "SELECT GRP,\n       ROUND(AVG(COL))           AS R1,\n       ROUND(SUM(COL) / COUNT(*)) AS R2\nFROM   T\nGROUP BY GRP\nHAVING COUNT(COL) >= 1\nORDER BY GRP;"
         }
       ]
     },

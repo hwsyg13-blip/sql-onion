@@ -150,3 +150,10 @@
 |---|---|---|---|---|
 | 45-29 | AVG(NVL()) vs NVL(AVG()) | 1컬럼 3행 → DEPT 그룹 3개·7행(모두 NULL 인 그룹, 값 0 섞음), 두 식을 나란히 | (A,10,15),(B,0,0),(C,15,15) | 오답 재현: NULL 을 분모에서 뺀 X(A 15), 모두 NULL 그룹을 NULL 로 본 값, 0 을 NULL 처럼 뺀 C 30 (PostgreSQL) |
 | 46-45 | WHERE + COUNT(col)/COUNT(*) + AVG | 4행 → 6행, COL1·COL2 에 NULL, COUNT(*) 추가 | 2, 4, 25.75 | 오답 재현: COUNT(COL1) 이 NULL 을 센 4, NULL 비교 통과 3·5, WHERE 무시 4·6·24.6 |
+
+## 14차 2문항 (11-15 오후)
+
+| 문항 | 개념 | 바뀐 점 | 정답 | 5가지 시선에서 걸린 것과 처리 |
+|---|---|---|---|---|
+| 47-41 | AVG vs SUM/COUNT(*) + HAVING COUNT(col) | 1컬럼 3행 → 그룹 3개·6행(값이 NULL 뿐인 그룹), HAVING COUNT(COL) 추가 | (A,105,70),(B,90,45) | 오답 재현: HAVING 을 COUNT(*) 로 보면 C(NULL, NULL) 이 남음, COUNT(*) 도 NULL 을 뺀다고 보면 105·90 (PostgreSQL) |
+| 48-46 | WHERE 조건별 SUM 과 NULL | 3행 → 5행, ㄷ 에 OR + IS NULL, ㄹ 에 NULL 비교로 빠지는 행 | 90 / 30 / 40 / NULL | 오답 재현: ㄴ NULL 통과 80, 모두 NULL 인 SUM 을 0, ㄹ NULL 통과 30 |

@@ -1265,16 +1265,17 @@
       "number": 46,
       "title": "아래 T1 테이블에 대한 SQL 의 결과(ㄱ / ㄴ / ㄷ / ㄹ) 로 옳은 것은?",
       "options": [
-        "60 / NULL / 10 / 50",
-        "60 / 0 / 10 / 50",
-        "NULL / NULL / 10 / 50",
-        "60 / NULL / 10 / 0"
+        "90 / 30 / 40 / NULL",
+        "90 / 80 / 40 / NULL",
+        "90 / 30 / 40 / 0",
+        "90 / 30 / 40 / 30"
       ],
       "correctIndex": 0,
-      "explanation": "ㄱ 은 NULL 을 빼고 50 + 10 = 60 이다. ㄴ 은 COL1 > 0 을 만족하는 행이 (10, NULL, 10) 하나뿐이다. COL1 이 0 인 행은 0 > 0 이 거짓이고, NULL 인 행은 비교 결과가 UNKNOWN 이라 빠진다. 남은 COL2 가 NULL 뿐이라 SUM 은 NULL 이다. ㄷ 은 COL1 이 NULL 이 아닌 첫째·셋째 행에서 NULL 을 빼고 더해 10, ㄹ 은 COL1 이 NULL 인 둘째 행의 COL2 라 50 이다. 정답은 ①번이다. ② 는 ㄴ 을 0 으로 봤지만 더할 값이 모두 NULL 이면 SUM 은 0 이 아니라 NULL 이고, ③ 은 ㄱ 을 NULL 로 봤지만 SUM 은 NULL 을 빼고 더하며, ④ 는 ㄹ 을 0 으로 봤지만 COL1 이 NULL 인 행의 COL2 가 50 이다.",
+      "explanation": "ㄱ 은 COL2 의 NULL 을 빼고 50 + 10 + 30 = 90 이다. ㄴ 은 COL1 > 0 인 행이 (10, NULL, 10) 과 (20, 30, NULL) 이다. COL1 이 0 인 행은 0 > 0 이 거짓이고, COL1 이 NULL 인 행은 비교가 UNKNOWN 이라 빠진다. COL2 합은 NULL 을 빼고 30 이다. ㄷ 은 COL1 이 NULL 이 아니거나 COL3 이 NULL 인 행으로 첫째·셋째·넷째 행이 남아 NULL + 10 + 30 에서 NULL 을 빼고 40 이다. ㄹ 은 COL3 < 10 인 행이 (NULL, NULL, 5) 하나뿐이다. COL3 이 NULL 인 넷째 행은 비교가 UNKNOWN 이라 빠진다. 남은 COL2 가 NULL 뿐이라 SUM 은 0 이 아니라 NULL 이다. 정답은 ①번이다. ② 는 ㄴ 에서 COL1 이 NULL 인 행도 통과한다고 본 값(50 이 더해짐), ③ 은 더할 값이 모두 NULL 이면 SUM 이 0 이라고 본 값, ④ 는 ㄹ 에서 COL3 이 NULL 인 행도 통과한다고 본 값이다.",
       "references": [
         {
           "type": "table",
+          "caption": "T1 테이블",
           "headers": [
             "COL1",
             "COL2",
@@ -1295,13 +1296,22 @@
               "0",
               "10",
               "10"
+            ],
+            [
+              "20",
+              "30",
+              "NULL"
+            ],
+            [
+              "NULL",
+              "NULL",
+              "5"
             ]
-          ],
-          "caption": "T1 테이블"
+          ]
         },
         {
           "type": "sql",
-          "code": "ㄱ. SELECT SUM(COL2) FROM T1;\nㄴ. SELECT SUM(COL2) FROM T1 WHERE COL1 > 0;\nㄷ. SELECT SUM(COL2) FROM T1 WHERE COL1 IS NOT NULL;\nㄹ. SELECT SUM(COL2) FROM T1 WHERE COL1 IS NULL;"
+          "code": "-- ㄱ\nSELECT SUM(COL2) FROM T1;\n\n-- ㄴ\nSELECT SUM(COL2) FROM T1 WHERE COL1 > 0;\n\n-- ㄷ\nSELECT SUM(COL2) FROM T1 WHERE COL1 IS NOT NULL OR COL3 IS NULL;\n\n-- ㄹ\nSELECT SUM(COL2) FROM T1 WHERE COL3 < 10;"
         }
       ]
     },
