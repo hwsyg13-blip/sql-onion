@@ -195,3 +195,6 @@
 - (11-16) 앱 화면 주소는 src/lib/routeUrl.ts 한 곳에서 정한다. 새 화면을 만들면 ROUTE_PATHS 에 주소를 넣고, /theory/·/exam/·/guide/·/about/ 처럼 정적 페이지가 쓰는 경로와 겹치지 않게 한다. 테스트 스크립트(cbt.cjs 등)의 sessionStorage 진입은 '/' 에서만 동작하니 새 주소(/exams/round-NN)로 바로 열어도 된다.
 - (11-16) AdSense 보고서가 0행이면 먼저 기간 끝 날짜와 실제 광고 게재 시작일을 비교한다. 수동 실행 기본 기간은 어제까지라, 게재 첫날 데이터는 다음 날 실행에서야 잡힌다. 새 워크플로의 schedule 은 첫날 안 돌 수 있으니 workflow_dispatch(--ref 브랜치 가능)로 확인한다.
 - (11-16) Mermaid ERD 점선(..) 렌더링은 svg 안 관계선 path 의 computed stroke-dasharray(8px)로 확인할 수 있다 — 작은 캡처로는 실선/점선이 구분되지 않는다.
+- (11-16) 기출 보기 문자열 안의 \n 은 화면에서 줄바꿈되지 않는다(공백 없이 붙어 보임). 긴 보기는 ' / ' 로 나눈다.
+- (11-16) 문항을 '옳지 않은 것' 으로 바꾸면 회차 분석 페이지(build-static-pages)의 부정형 통계 문장이 생겨 check-content-tone 반복 문장 경고가 날 수 있다 — 바꾼 뒤 문체 검사까지 꼭 본다.
+- (11-16) vite preview 캡처가 goto 에서 멈추면(외부 광고·폰트 요청 대기) waitUntil 'domcontentloaded' + 고정 대기로 바꾼다. 끝나면 pkill -f 'vite preview' 로 남은 서버 정리.
