@@ -174,21 +174,21 @@ export const ROUND_48: QuizQuestion[] = [
     "round": 48,
     "subject": "1과목",
     "number": 9,
-    "title": "아래 ERD 의 관계 표기에서 관계 차수(Cardinality)와 관계 선택 사양(Optionality)을 올바르게 읽은 것은?",
+    "title": "아래 ERD 의 관계 차수(Cardinality)와 관계 선택 사양(Optionality)을 올바르게 읽은 것은? (IE 표기법)",
     "options": [
-      "차수 1:M, 사원 측 선택",
-      "차수 1:M, 사원 측 필수",
-      "차수 M:N, 사원 측 선택",
-      "차수 1:1, 사원 측 필수"
+      "부서와 사원은 1:M 관계이며, 소속 사원이 한 명도 없는 부서는 존재할 수 없다.",
+      "사원은 반드시 하나의 부서에 소속되어야 한다.",
+      "사원과 프로젝트는 프로젝트참여를 통해 M:N 관계를 이루며, 참여 사원이 한 명도 없는 프로젝트는 존재할 수 없다.",
+      "프로젝트참여 한 건은 여러 사원과 연결될 수 있다."
     ],
-    "correctIndex": 0,
-    "explanation": "관계선 끝의 까마귀발은 다(多)를 뜻하므로 한 부서에 여러 사원이 속하는 1:M 관계다. 사원 쪽 끝의 ○ 는 선택 참여를 뜻해 사원이 한 명도 없는 부서도 존재할 수 있다. 관계 차수는 참여하는 인스턴스의 수를, 선택 사양은 필수 참여인지 선택 참여인지를 나타낸다. 정답은 ①번이다. ② 사원 측이 필수라면 사원 쪽 끝이 ○ 대신 | 로 표시되고, ③ M:N 이 되려면 부서 쪽에도 까마귀발이 있어야 하며, ④ 1:1 이라면 사원 쪽에 까마귀발이 없어야 한다.",
+    "correctIndex": 2,
+    "explanation": "관계선 끝의 기호는 그 끝에 붙은 엔터티가 상대 한 건당 몇 개인지를 나타낸다. 세로선(|)은 반드시, 동그라미(o)는 없어도 됨, 까마귀발은 여러 개라는 뜻이다. 프로젝트와 프로젝트참여 사이에서 프로젝트참여 쪽 끝이 |{ 라 프로젝트마다 참여 행이 하나 이상 있어야 하고, 사원과 프로젝트참여 사이에서 프로젝트참여 쪽 끝이 o{ 라 사원 한 명은 여러 프로젝트에 참여할 수 있다. 프로젝트참여가 두 관계를 이어 주므로 사원과 프로젝트는 M:N 이고, 참여 사원이 없는 프로젝트는 있을 수 없다. 정답은 ③번이다. ① 부서와 사원 사이에서 사원 쪽 끝이 o{ 라 사원이 한 명도 없는 부서도 있을 수 있다. ② 같은 관계에서 부서 쪽 끝이 |o 라 사원 한 명에 부서가 0개 또는 1개이므로, 부서가 없는 사원도 있을 수 있다. ④ 사원과 프로젝트참여 사이에서 사원 쪽 끝이 || 라 프로젝트참여 한 건은 사원 정확히 한 명과 연결된다.",
     "_source": "authored",
     "references": [
       {
         "type": "erd",
-        "caption": "부서-사원 ERD",
-        "mermaid": "erDiagram\n    부서 ||--o{ 사원 : \"소속\""
+        "caption": "부서·사원·프로젝트·프로젝트참여 ERD",
+        "mermaid": "erDiagram\n    부서 |o--o{ 사원 : \"소속\"\n    부서 ||--o{ 프로젝트 : \"주관\"\n    사원 ||--o{ 프로젝트참여 : \"참여\"\n    프로젝트 ||--|{ 프로젝트참여 : \"배정\"\n    부서 {\n        string 부서코드 PK\n        string 부서명\n    }\n    사원 {\n        string 사원번호 PK\n        string 사원명\n        string 부서코드 FK\n    }\n    프로젝트 {\n        string 프로젝트번호 PK\n        string 프로젝트명\n        string 주관부서코드 FK\n    }\n    프로젝트참여 {\n        string 사원번호 PK,FK\n        string 프로젝트번호 PK,FK\n        string 역할\n    }"
       }
     ]
   },
@@ -1212,16 +1212,73 @@ export const ROUND_48: QuizQuestion[] = [
     "round": 48,
     "subject": "2과목",
     "number": 36,
-    "title": "두 SELECT 결과를 결합할 때 UNION 결과보다 UNION ALL 결과 행 수가 더 많은 경우의 (UNION 행 수, UNION ALL 행 수) 조합으로 옳은 것은?",
+    "title": "아래 A, B 테이블에 대해 SQL 의 빈칸에 UNION, UNION ALL, INTERSECT, MINUS 를 차례로 넣어 실행했을 때, 각 결과의 행 수로 옳은 것은? (Oracle 기준)",
     "options": [
-      "UNION 10, UNION ALL 9",
-      "UNION 9, UNION ALL 9",
-      "UNION 10, UNION ALL 10",
-      "UNION 9, UNION ALL 10"
+      "UNION 5, UNION ALL 11, INTERSECT 3, MINUS 3",
+      "UNION 7, UNION ALL 11, INTERSECT 2, MINUS 3",
+      "UNION 5, UNION ALL 8, INTERSECT 3, MINUS 1",
+      "UNION 5, UNION ALL 11, INTERSECT 3, MINUS 1"
     ],
     "correctIndex": 3,
-    "explanation": "UNION 은 중복을 제거하고 UNION ALL 은 중복을 그대로 두므로 UNION ALL 의 행 수는 항상 UNION 보다 같거나 많다. 겹치는 행이 있으면 그만큼 UNION 이 적어지므로 'UNION 9, UNION ALL 10' 인 ④ 가 맞다. ① 처럼 UNION 이 더 많을 수는 없고, ②③ 은 두 결과가 같아 겹치는 행이 없는 경우라 'UNION ALL 이 더 많은 경우' 가 아니다.",
-    "_source": "authored"
+    "explanation": "집합 연산자는 WHERE 의 비교와 달리 NULL 끼리를 같은 값으로 보고 중복을 제거한다. UNION 은 두 결과를 합친 뒤 중복을 없애 1, 2, 3, 4, NULL 의 5행이다. UNION ALL 은 중복을 그대로 두므로 6 + 5 = 11행이다. INTERSECT 는 양쪽에 모두 있는 값을 중복 없이 남겨 1, 3, NULL 의 3행이고, MINUS 는 A 에만 있는 값을 중복 없이 남겨 2 한 행이다. 정답은 ④번이다. ① 은 MINUS 가 A 의 중복을 남긴다고 보고(1, 2, NULL) 3으로 센 값, ② 는 NULL 끼리를 서로 다른 값으로 본 값(UNION 은 NULL 3개가 모두 남아 7, INTERSECT 는 NULL 이 빠져 2), ③ 은 UNION ALL 도 각 테이블 안의 중복을 먼저 없앤다고 본 값(4 + 4 = 8)이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "caption": "A",
+        "headers": [
+          "C1"
+        ],
+        "rows": [
+          [
+            "1"
+          ],
+          [
+            "1"
+          ],
+          [
+            "2"
+          ],
+          [
+            "3"
+          ],
+          [
+            "NULL"
+          ],
+          [
+            "NULL"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "B",
+        "headers": [
+          "C1"
+        ],
+        "rows": [
+          [
+            "1"
+          ],
+          [
+            "3"
+          ],
+          [
+            "3"
+          ],
+          [
+            "4"
+          ],
+          [
+            "NULL"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT C1 FROM A\n(          )\nSELECT C1 FROM B;"
+      }
+    ]
   },
   {
     "id": 10636,
