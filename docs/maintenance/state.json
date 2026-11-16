@@ -8,7 +8,8 @@
   "current_mission": null,
   "my_prs": [
     195,
-    317
+    317,
+    318
   ],
   "merged_prs": [
     197,
@@ -174,14 +175,16 @@
     "location": "asia-northeast3",
     "linked": "2026-11-15",
     "status": "GA4 → BigQuery 연결 완료, 데이터 세트 아직 없음(첫 일일 내보내기는 11-16 중). 도구: mcp__Google_Cloud_BigQuery__list_dataset_ids(projectId=sql-onion-cs) → execute_sql_readonly",
-    "adsense": "sql-onion-cs.adsense.daily_by_page / daily_by_unit (서울, 날짜 파티션, 샌드박스 60일). 11-15 21:4x 비밀값 3개 등록 완료, 수동 실행(43715235711) — 인증·보고서 API 성공, 기간 10-16~11-14 데이터 없음(광고는 11-15 시작). 로드 작업 경로는 아직 미검증 → 11-16 10:23 KST 자동 실행 뒤 행 수 확인, 실패하면 Actions 로그(gh api actions/jobs/<id>/logs) 보고 수정"
+    "adsense": "sql-onion-cs.adsense.daily_by_page / daily_by_unit (서울, 날짜 파티션, 샌드박스 60일). 11-15 21:4x 비밀값 3개 등록 완료, 수동 실행(43715235711) — 인증·보고서 API 성공, 기간 10-16~11-14 데이터 없음(광고는 11-15 시작). 로드 작업 경로는 아직 미검증 → 11-16 10:23 KST 자동 실행 뒤 행 수 확인, 실패하면 Actions 로그(gh api actions/jobs/<id>/logs) 보고 수정",
+    "adsense_status": "11-16 브랜치 수동 실행으로 첫 적재 성공(11-15 하루치). 11-14 이전은 광고 요청 0 이라 데이터 없음. 11-16 10:23 예약 실행은 안 돌았음(새 워크플로 첫 예약 지연 추정) — 다음 실행에서 schedule 이벤트 확인",
+    "ga4": "analytics_534530247 (asia-northeast3), events_20261114 부터. 수익 숫자는 공개 저장소에 적지 말 것"
   },
   "routing": "11-16 #316: 화면마다 영어 주소(/learn, /learn/cXXX, /exams, /exams/round-NN, /mock, /mock/exam, /quiz, /plan, /cheatsheet), src/lib/routeUrl.ts. 정적 /theory/·/exam/ 과 겹치지 않게. canonical 은 정적 페이지로. GA4 향상된 측정의 브라우저 기록 page_view 는 사용자가 끔(중복 방지)",
   "difficulty_cycle": {
     "until": "2026-11-30",
     "per_run": "회차 1개 이상 × 2문항",
     "order": "45 → 62 → 45 …(끝나면 처음부터)",
-    "next_round": 48,
+    "next_round": 50,
     "log": "docs/qa/2026-11-06-round-difficulty.md",
     "done": {
       "45": [
@@ -195,6 +198,14 @@
       "47": [
         "47-2-24",
         "47-2-32"
+      ],
+      "48": [
+        "48-2-36",
+        "48-1-9"
+      ],
+      "49": [
+        "49-2-27",
+        "49-1-6"
       ]
     }
   },
