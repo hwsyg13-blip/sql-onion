@@ -198,3 +198,5 @@
 - (11-16) 기출 보기 문자열 안의 \n 은 화면에서 줄바꿈되지 않는다(공백 없이 붙어 보임). 긴 보기는 ' / ' 로 나눈다.
 - (11-16) 문항을 '옳지 않은 것' 으로 바꾸면 회차 분석 페이지(build-static-pages)의 부정형 통계 문장이 생겨 check-content-tone 반복 문장 경고가 날 수 있다 — 바꾼 뒤 문체 검사까지 꼭 본다.
 - (11-16) vite preview 캡처가 goto 에서 멈추면(외부 광고·폰트 요청 대기) waitUntil 'domcontentloaded' + 고정 대기로 바꾼다. 끝나면 pkill -f 'vite preview' 로 남은 서버 정리.
+- (11-17) 문의 시트 새 행 확인은 Drive get_file_metadata 의 modifiedTime 으로 먼저 본다(본문 읽기보다 훨씬 가벼움). 바뀌었을 때만 본문을 읽는다.
+- (11-17) SQL ㉠~㉣ 를 한 sql 칸에 넣으면 verify-sql-results 가 'multi-statement' 로 errors +1 — 정상이며, PostgreSQL 에서 하나씩 직접 검증한다.
