@@ -138,6 +138,7 @@ async function main() {
     if (!account) throw new Error('접근 가능한 AdSense 계정이 없습니다');
   }
   console.log(`기간 ${iso(start)} ~ ${iso(end)}`);
+  let empty = 0;
   for (const spec of REPORTS) {
     let dims = spec.dims, report;
     try { report = await generate(token, account, dims, spec.metrics, start, end); }
@@ -150,8 +151,40 @@ async function main() {
       await loadPartition(token, spec.table, d, rows);
       console.log(`${spec.table} ${d}: ${rows.length}행 적재`);
     }
-    if (!Object.keys(parts).length) console.log(`${spec.table}: 기간 안에 데이터 없음`);
+    if (!Object.keys(parts).length) {
+      console.log(`${spec.table}: 기간 안에 데이터 없음 (totalMatchedRows ${report.totalMatchedRows ?? '-'}, 경고 ${(report.warnings || []).join(', ') || '없음'})`);
+      empty++;
+    }
   }
+  if (empty === REPORTS.length) await diagnose(token, account, start, end);
+}
+
+// 보고서가 모두 비었을 때 원인을 좁히기 위한 점검. 공개 저장소라 금액·횟수는 찍지 않고 '있음/없음'과 상태값만 남긴다.
+async function diagnose(token, account, start, end) {
+  console.log('--- 빈 보고서 점검 ---');
+  const tryRun = async (label, fn) => { try { await fn(); } catch (e) { console.log(`${label}: 실패 ${e.message}`); } };
+  await tryRun('사이트', async () => {
+    const j = await api(token, `https://adsense.googleapis.com/v2/${account}/sites`);
+    const sites = j.sites || [];
+    console.log(`사이트 ${sites.length}개${sites.map(s => `\n  ${s.domain} — 상태 ${s.state}${s.autoAdsEnabled ? ', 자동 광고 켜짐' : ''}`).join('')}`);
+  });
+  await tryRun('알림', async () => {
+    const j = await api(token, `https://adsense.googleapis.com/v2/${account}/alerts?languageCode=ko`);
+    const alerts = j.alerts || [];
+    console.log(`계정 알림 ${alerts.length}개${alerts.map(a => `\n  [${a.severity}] ${a.type}`).join('')}`);
+  });
+  await tryRun('광고 단위', async () => {
+    const cl = await api(token, `https://adsense.googleapis.com/v2/${account}/adclients`);
+    for (const c of cl.adClients || []) {
+      const u = await api(token, `https://adsense.googleapis.com/v2/${c.name}/adunits?pageSize=50`);
+      console.log(`광고 클라이언트 ${c.reportingDimensionId} (${c.productCode}, ${c.state}) — 광고 단위 ${(u.adUnits || []).length}개${(u.adUnits || []).map(x => `\n  ${x.reportingDimensionId} ${x.state}`).join('')}`);
+    }
+  });
+  await tryRun('날짜만', async () => {
+    const r = await generate(token, account, ['DATE'], ['PAGE_VIEWS', 'AD_REQUESTS', 'IMPRESSIONS'], start, end);
+    const has = i => (r.rows || []).some(x => Number(x.cells?.[i]?.value) > 0);
+    console.log(`날짜만 나눈 보고서: ${(r.rows || []).length}행 — 페이지뷰 ${has(1) ? '있음' : '없음'}, 광고 요청 ${has(2) ? '있음' : '없음'}, 노출 ${has(3) ? '있음' : '없음'}`);
+  });
 }
 
 main().catch(e => { console.error('실패:', e.message); process.exit(1); });
