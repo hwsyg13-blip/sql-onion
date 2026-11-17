@@ -735,16 +735,22 @@ export const ROUND_57: QuizQuestion[] = [
     "round": 57,
     "subject": "2과목",
     "number": 26,
-    "title": "고유키(UNIQUE) 제약조건에 대한 설명 중 옳지 않은 것은?",
+    "title": "아래 테이블을 만든 뒤 INSERT ㉠~㉤ 을 차례로 실행했을 때, 오류가 나는 것만 모두 고른 것은? (Oracle)",
     "options": [
-      "고유키 컬럼에는 NULL 값이 여러 개 올 수 없다.",
-      "기본키는 고유키와 NOT NULL 제약조건이 합쳐진 상태이다.",
-      "고유키는 한 테이블에 여러 개 정의할 수 있다.",
-      "고유키 컬럼에는 기본적으로 인덱스가 자동 생성된다."
+      "㉣, ㉤",
+      "㉣",
+      "㉢, ㉣",
+      "㉢, ㉣, ㉤"
     ],
     "correctIndex": 0,
-    "explanation": "기본키는 고유키(UNIQUE)에 NOT NULL 을 더한 것이고(②), 고유키는 한 테이블에 여러 개 만들 수 있으며(③), 만들면 고유 인덱스가 자동 생성된다(④). 고유키 컬럼은 NULL 을 허용하고, Oracle 에서는 NULL 끼리는 같은 값으로 보지 않아 NULL 행을 여러 개 넣을 수 있으므로 ① 이 옳지 않다. (SQL Server 는 고유키 컬럼에 NULL 을 하나만 허용한다.)",
-    "_source": "authored"
+    "explanation": "기본키(PRIMARY KEY)는 UNIQUE 와 NOT NULL 이 합쳐진 제약이라 중복도 NULL 도 안 된다. UNIQUE 는 같은 값의 중복만 막고, NULL 은 값이 없다는 뜻이라 서로 같다고 보지 않아 여러 행에 들어갈 수 있다. ㉠·㉡ 은 문제없이 들어가고, ㉢ 도 EMAIL 이 NULL 이라 ㉡ 의 NULL 과 겹쳐도 오류가 나지 않는다. ㉣ 은 EMAIL 'a@x.com' 이 ㉠ 과 겹쳐 UNIQUE 위반, ㉤ 은 기본키 ID 에 NULL 을 넣어 오류다. 정답은 ①번이다. ② 는 기본키에 NULL 이 들어갈 수 있다고 본 것, ③·④ 는 UNIQUE 칼럼에 NULL 이 하나만 들어간다고 본 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "CREATE TABLE T (\n  ID    NUMBER PRIMARY KEY,\n  EMAIL VARCHAR2(50) UNIQUE\n);\n\n-- ㉠\nINSERT INTO T VALUES (1, 'a@x.com');\n-- ㉡\nINSERT INTO T VALUES (2, NULL);\n-- ㉢\nINSERT INTO T VALUES (3, NULL);\n-- ㉣\nINSERT INTO T VALUES (4, 'a@x.com');\n-- ㉤\nINSERT INTO T VALUES (NULL, 'b@x.com');"
+      }
+    ]
   },
   {
     "id": 10176,
@@ -843,16 +849,70 @@ export const ROUND_57: QuizQuestion[] = [
     "round": 57,
     "subject": "2과목",
     "number": 30,
-    "title": "계층형 질의에서 트리 전개가 끝난 뒤 결과 행을 필터링할 때 사용하는 절은?",
+    "title": "아래 EMP 테이블에 대한 계층형 SQL 의 결과에 나오는 사원을 모두 고른 것은? (Oracle)",
     "options": [
-      "CONNECT BY 절",
-      "FROM 절",
-      "WHERE 절",
-      "START WITH 절"
+      "A, C",
+      "C, D",
+      "A, C, D",
+      "A, B, C, D, E, F"
     ],
     "correctIndex": 2,
-    "explanation": "④ `START WITH` 는 트리 전개의 시작점(루트), ① `CONNECT BY` 는 부모-자식 관계 조건이라 두 절은 트리 전개 자체에 영향을 준다. 반면 `WHERE` 는 트리 전개가 모두 끝난 결과 행에만 적용되어 단순 필터로 동작한다. ② FROM 절은 대상 테이블을 정할 뿐 결과를 거르지 않는다.",
-    "_source": "authored"
+    "explanation": "계층형 SQL 의 WHERE 절은 START WITH 와 CONNECT BY 로 트리를 모두 전개한 뒤에 적용된다. 먼저 A 를 뿌리로 A → B, C, B → D, E, C → F 의 여섯 행이 모두 전개되고, 그다음 부서 = 10 인 A, C, D 만 남는다. D 의 관리자 B 는 부서가 20 이지만, WHERE 는 가지를 잘라 내지 않으므로 D 는 그대로 남는다. 정답은 ③번이다. ① 은 부서 조건을 CONNECT BY 에 넣었을 때(CONNECT BY PRIOR 사번 = 관리자 AND 부서 = 10)처럼 B 아래 가지까지 잘린다고 본 값이다. ② 는 START WITH 로 시작한 A 는 결과에서 빠진다고 본 값, ④ 는 WHERE 를 무시한 값이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "caption": "EMP",
+        "headers": [
+          "사번",
+          "이름",
+          "관리자",
+          "부서"
+        ],
+        "rows": [
+          [
+            "1",
+            "A",
+            "NULL",
+            "10"
+          ],
+          [
+            "2",
+            "B",
+            "1",
+            "20"
+          ],
+          [
+            "3",
+            "C",
+            "1",
+            "10"
+          ],
+          [
+            "4",
+            "D",
+            "2",
+            "10"
+          ],
+          [
+            "5",
+            "E",
+            "2",
+            "20"
+          ],
+          [
+            "6",
+            "F",
+            "3",
+            "20"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT 이름\nFROM   EMP\nWHERE  부서 = 10\nSTART WITH 관리자 IS NULL\nCONNECT BY PRIOR 사번 = 관리자;"
+      }
+    ]
   },
   {
     "id": 10180,
