@@ -96,16 +96,23 @@ export const ROUND_53: QuizQuestion[] = [
     "round": 53,
     "subject": "1과목",
     "number": 5,
-    "title": "인조 식별자에 대한 설명 중 옳지 않은 것은?",
+    "title": "아래 ERD 에서 주문상세의 주식별자를 인조 식별자(주문상세번호)로 둔 것에 대한 설명으로 옳지 않은 것은? (점선은 비식별자 관계)",
     "options": [
-      "속성의 수가 적으면 인조 식별자를 반드시 사용해야 한다.",
-      "업무와 무관하게 시스템이 부여한다.",
-      "본질 식별자를 대체하여 관리 편의성을 높인다.",
-      "일련번호 형태로 단순하게 부여되는 경우가 많다."
+      "주문상세번호를 주식별자로 두면 주문번호와 상품번호는 더 이상 주문·상품을 참조하는 외래키가 될 수 없다.",
+      "주문상세번호처럼 업무와 무관하게 시스템이 부여한 일련번호를 인조 식별자라 한다.",
+      "주문번호·상품번호 조합에 유일 제약을 따로 두지 않으면 같은 주문에 같은 상품이 두 행으로 들어가는 것을 막을 수 없다.",
+      "주문번호와 상품번호로 주문상세를 자주 찾는다면 두 칼럼에 대한 인덱스가 추가로 필요할 수 있다."
     ],
     "correctIndex": 0,
-    "explanation": "인조 식별자는 업무와 무관하게 시스템이 부여하는 식별자로(②), 본질 식별자가 너무 복잡할 때 대신 써서 관리를 쉽게 하고(③), 일련번호 형태가 많다(④). 인조 식별자를 쓸지는 본질 식별자가 복잡한지, 중복 데이터를 막을 수 있는지 등을 따져 정하며 속성 수가 적다고 반드시 써야 하는 것은 아니므로 ① 이 옳지 않다.",
-    "_source": "authored"
+    "explanation": "인조 식별자를 주식별자로 써도 주문번호와 상품번호는 그대로 주문·상품의 주식별자를 참조하는 외래키다. 주식별자에 들어가지 않을 뿐이라 관계가 식별자 관계(실선)에서 비식별자 관계(점선)로 바뀐 것이다. 따라서 ① 이 옳지 않다. ② 업무 속성이 아니라 시스템이 붙인 일련번호가 인조 식별자다. ③ 주식별자인 주문상세번호는 행마다 새로 붙으므로, 본질 식별자였던 (주문번호, 상품번호) 조합은 별도 유일 제약이 없으면 중복될 수 있다. 인조 식별자의 대표적인 단점이다. ④ 조회 조건으로 쓰이는 칼럼이 주식별자에서 빠졌으므로 그 칼럼들에 대한 인덱스가 따로 필요할 수 있다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "erd",
+        "caption": "주문·상품·주문상세 ERD",
+        "mermaid": "erDiagram\n    주문 ||..o{ 주문상세 : \"포함\"\n    상품 ||..o{ 주문상세 : \"대상\"\n    주문 {\n        string 주문번호 PK\n        date 주문일자\n    }\n    상품 {\n        string 상품번호 PK\n        string 상품명\n    }\n    주문상세 {\n        bigint 주문상세번호 PK \"시스템이 부여하는 일련번호\"\n        string 주문번호 FK\n        string 상품번호 FK\n        int 수량\n    }"
+      }
+    ]
   },
   {
     "id": 10355,
@@ -228,16 +235,56 @@ export const ROUND_53: QuizQuestion[] = [
     "round": 53,
     "subject": "2과목",
     "number": 12,
-    "title": "상위 5건과 동순위 포함 5건을 조회하는 방법으로 가장 적절한 것은?",
+    "title": "아래 사원 테이블에서 급여 상위 사원을 조회하는 SQL ㉠~㉣ 의 결과 행 수를 차례대로 나열한 것은? (Oracle 12c 이상)",
     "options": [
-      "RANK() OVER (ORDER BY SAL DESC) 를 사용하여 순위를 매기고 조건으로 5까지 필터링한다.",
-      "DISTINCT SAL 의 상위 5건만 별도 쿼리한다.",
-      "WHERE ROWNUM = 5 로만 조회한다.",
-      "GROUP BY SAL HAVING COUNT(*) >= 5 을 사용한다."
+      "㉠ 3, ㉡ 4, ㉢ 4, ㉣ 5",
+      "㉠ 3, ㉡ 3, ㉢ 3, ㉣ 3",
+      "㉠ 3, ㉡ 4, ㉢ 3, ㉣ 5",
+      "㉠ 4, ㉡ 4, ㉢ 4, ㉣ 5"
     ],
     "correctIndex": 0,
-    "explanation": "TOP-N 쿼리에서 동순위를 포함하려면 `RANK()` 또는 `FETCH FIRST N ROWS WITH TIES` 를 사용해야 한다. ③ `WHERE ROWNUM = 5` 는 ROWNUM 의사 컬럼 특성상 항상 0건이 반환되어 부적합하다. ② DISTINCT 로 급여 값만 고르면 같은 급여의 사원이 사라지고, ④ GROUP BY … HAVING 은 같은 급여가 5명 이상인 급여를 찾을 뿐이다.",
-    "_source": "authored"
+    "explanation": "급여 내림차순으로 놓으면 A·B 500, C·D 400, E 300, F 200 이다. ㉠ FETCH FIRST 3 ROWS ONLY 는 동점과 상관없이 정확히 3행(A, B, 그리고 C·D 중 하나)만 돌려준다. ㉡ WITH TIES 는 3번째 행의 급여 400 과 같은 행을 함께 돌려주므로 D 까지 4행이다. ㉢ RANK 는 A·B 가 공동 1위, C·D 가 공동 3위라 R <= 3 이 4행이다. RANK 로 거른 결과는 WITH TIES 와 같다. ㉣ DENSE_RANK 는 순위를 건너뛰지 않아 C·D 가 2위, E 가 3위가 되므로 5행이다. 정답은 ①번이다. ② 는 동순위를 고려하지 않은 값, ③ 은 RANK 에서 공동 1위 두 명 다음을 4위로 잘못 세어 C·D 를 뺀 값, ④ 는 FETCH FIRST ... ONLY 도 동점 행을 함께 돌려준다고 본 값이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "caption": "사원",
+        "headers": [
+          "이름",
+          "급여"
+        ],
+        "rows": [
+          [
+            "A",
+            "500"
+          ],
+          [
+            "B",
+            "500"
+          ],
+          [
+            "C",
+            "400"
+          ],
+          [
+            "D",
+            "400"
+          ],
+          [
+            "E",
+            "300"
+          ],
+          [
+            "F",
+            "200"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "-- ㉠\nSELECT 이름, 급여 FROM 사원\nORDER BY 급여 DESC\nFETCH FIRST 3 ROWS ONLY;\n\n-- ㉡\nSELECT 이름, 급여 FROM 사원\nORDER BY 급여 DESC\nFETCH FIRST 3 ROWS WITH TIES;\n\n-- ㉢\nSELECT 이름, 급여\nFROM (\n  SELECT 이름, 급여,\n    RANK() OVER (\n      ORDER BY 급여 DESC\n    ) AS R\n  FROM 사원\n)\nWHERE R <= 3;\n\n-- ㉣\nSELECT 이름, 급여\nFROM (\n  SELECT 이름, 급여,\n    DENSE_RANK() OVER (\n      ORDER BY 급여 DESC\n    ) AS R\n  FROM 사원\n)\nWHERE R <= 3;"
+      }
+    ]
   },
   {
     "id": 10362,
