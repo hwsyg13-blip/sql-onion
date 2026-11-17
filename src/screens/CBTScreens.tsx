@@ -392,6 +392,14 @@ export const CBTExam = ({examId = "round-60", onFinish, onNavigate, onExit, mock
                 </div>
               </div>
             )}
+
+            {/* 광고 — 복습(채점 후) 화면에서는 해설 바로 아래에 둔다(사용자 지시 11-17: 해설을 읽는 자리라 실제로 보임).
+                문항을 넘겨도 다시 불러오지 않도록 key 를 주지 않고, 아래 이전·다음 버튼과는 간격을 둔다 */}
+            {reviewMode && (
+              <div style={{margin:"24px 0 24px"}}>
+                <AdSlot slot="1114532773" format="auto" />
+              </div>
+            )}
           </div>
 
           {/* Question number strip — 문제 박스 아래에 (체크 좌 / 진도 중 / 이전·다음 우) */}
@@ -410,9 +418,11 @@ export const CBTExam = ({examId = "round-60", onFinish, onNavigate, onExit, mock
 
           {/* 광고 — 사용자 지시(11-15)로 문제 푸는 중·복습 모두(기출 CBT·모의고사). 이전·다음 버튼과 붙어 있으면
               잘못 누르기 쉬워(애드센스 정책) 간격을 넉넉히 둔다 */}
-          <div style={{marginTop:40}}>
-            <AdSlot slot="1114532773" format="auto" />
-          </div>
+          {!reviewMode && (
+            <div style={{marginTop:40}}>
+              <AdSlot slot="1114532773" format="auto" />
+            </div>
+          )}
         </main>
 
         {/* Right — sticky OMR */}
