@@ -131,7 +131,7 @@ export const EndlessScreen = ({onNavigate}) => {
         <OptionList q={q} selected={selected} setSelected={setSelected} checked={checked}/>
 
         {checked && <FeedbackBanner q={q} correct={selected === q.correctIndex}/>}
-        {checked && <Accordion open={open} setOpen={setOpen} explanation={q.explanation}/>}
+        {checked && <Accordion open={open} setOpen={setOpen} explanation={q.explanation} ad/>}
 
         <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginTop:22,gap:10,flexWrap:"wrap"}}>
           <div style={{display:"flex",gap:8}}>
@@ -299,7 +299,8 @@ export const FeedbackBanner = ({q, correct}) => {
   );
 };
 
-export const Accordion = ({open, setOpen, explanation}) => (
+// 해설을 펼치면 해설 아래에 광고를 함께 보여 준다(사용자 지시 11-17). 펼칠 때만 불러와 접힌 상태에서 빈 광고를 요청하지 않는다
+export const Accordion = ({open, setOpen, explanation, ad = false}) => (
   <div style={{marginTop:12,border:"1px solid var(--border-subtle)",borderRadius:12,background:"var(--bg-card)",overflow:"hidden"}}>
     <button onClick={()=>setOpen(!open)} style={{
       width:"100%",display:"flex",alignItems:"center",gap:10,
@@ -310,13 +311,18 @@ export const Accordion = ({open, setOpen, explanation}) => (
       <span style={{marginLeft:"auto",color:"var(--fg-3)",transform:open?"rotate(180deg)":"none",transition:"transform 200ms",display:"flex"}}><Ic.ChevronDown/></span>
     </button>
     <div style={{
-      maxHeight: open ? 600 : 0, opacity: open ? 1 : 0,
+      maxHeight: open ? 1400 : 0, opacity: open ? 1 : 0,
       transition: "max-height 320ms var(--ease-standard), opacity 200ms",overflow:"hidden",
     }}>
       <div style={{padding:"0 18px 18px"}}>
         <div style={{padding:"14px 16px",background:"var(--point-050)",borderLeft:"3px solid var(--point-500)",borderRadius:8}}>
           <div style={{fontSize:14,color:"var(--fg-2)",lineHeight:1.75,textWrap:"pretty"}}>{explanation}</div>
         </div>
+        {ad && open && (
+          <div style={{margin:"20px 0 12px"}}>
+            <AdSlot slot="1114532773" format="auto"/>
+          </div>
+        )}
       </div>
     </div>
   </div>
