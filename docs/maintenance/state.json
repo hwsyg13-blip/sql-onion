@@ -252,6 +252,7 @@
     },
     "blocker": "사용자 회사원(겸직 규정 확인), 명의(가족 단독 대표 또는 공동사업자 검토, 명의대여 불가 안내함), 주소(비상주 또는 지인 사업장 — 무상사용승낙서·전대동의) → 사업자등록 → 통신판매업 → PortOne 심사",
     "offer": "A안: 사업자 준비와 병행해 PortOne 테스트 채널로 미리 완성 — 사용자 답 대기",
-    "design_artifact": "https://claude.ai/artifact/XFsgoeMN2r4xv6EsUQyHrE (구독·마이페이지 무료/이용권·로그인 4장, 확인 대기)"
+    "design_artifact": "https://claude.ai/artifact/XFsgoeMN2r4xv6EsUQyHrE (구독·마이페이지 무료/이용권·로그인 4장, 확인 대기)",
+    "decisions_11_17": "로그인=카카오 1개(Supabase Kakao, 이메일 없이도 가입 허용), 결제=PortOne 카카오페이 단건(정기결제 없음), 이용권 3일 1,000/15일 3,000/30일 5,000, 결제는 로그인 필수, 같은 날 재열람 무차감, 기출·모의고사·이론 열 때 차감 팝업, 퀴즈는 배지만·소진 시 팝업, 이용권=광고 제거"
   }
 }
