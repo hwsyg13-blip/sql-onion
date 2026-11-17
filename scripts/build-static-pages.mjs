@@ -287,7 +287,9 @@ function trendHtml(r, idx) {
   const sqlShare = s.types['SQL 결과 계산'] / s.n, avgSql = avg.types['SQL 결과 계산'] / 50;
   if (Math.abs(sqlShare - avgSql) >= 0.06) notes.push(`SQL 결과를 직접 계산하는 문제가 ${pct(s.types['SQL 결과 계산'], s.n)}로 평균(${Math.round(avgSql * 100)}%)보다 ${sqlShare > avgSql ? '많다' : '적다'}.`);
   if (s.types['오류 찾기'] >= 3) notes.push(`"오류가 나는 SQL 고르기" 가 ${s.types['오류 찾기']}문항 — 문법 규칙(별칭 위치, GROUP BY 컬럼, 집합 연산 컬럼 수 등)을 묻는 유형이 평소(${fmt1(avg.types['오류 찾기'])}문항)보다 많았다.`);
-  if (Math.abs(s.neg - avg.neg) >= 3) notes.push(`"옳지 않은 것" 을 고르는 부정형 문제가 ${s.neg}문항으로 평균(${fmt1(avg.neg)})보다 ${s.neg > avg.neg ? '많아 보기 하나하나를 판정해야 하는 시간이 길었다' : '적다'}.`);
+  // 같은 문장이 여러 회차 페이지에 그대로 반복되지 않도록 회차마다 표현을 바꾼다(check-content-tone 반복 문장 검사)
+  const negMore = ['많았다. 맞는 보기 하나를 찾고 끝낼 수 없어 풀이 시간이 늘어나는 회차다', '많아 보기 하나하나를 판정해야 하는 시간이 길었다', '많았다 — 보기 네 개를 모두 따져 봐야 해서 시간 배분에 신경 써야 한다'][r.round % 3];
+  if (Math.abs(s.neg - avg.neg) >= 3) notes.push(`"옳지 않은 것" 을 고르는 부정형 문제가 ${s.neg}문항으로 평균(${fmt1(avg.neg)})보다 ${s.neg > avg.neg ? negMore : '적다'}.`);
   const prev = rounds[idx - 1];
   if (prev) {
     const ps = ROUND_STATS[prev.round];

@@ -176,20 +176,20 @@
     {
       "subject": "1과목",
       "number": 9,
-      "title": "교수·학생·과목 간 M:N 관계를 정규화할 때 추가로 생기는 테이블의 수는?",
+      "title": "아래 ERD 를 관계형 테이블로 옮길 때, M:N 관계를 모두 해소한 뒤의 전체 테이블 수는?",
       "options": [
-        "1개",
-        "3개",
-        "2개",
-        "4개"
+        "4개",
+        "6개",
+        "7개",
+        "8개"
       ],
       "correctIndex": 2,
-      "explanation": "ERD 에서 교수-학생, 학생-과목이 각각 M:N 이다. M:N 관계 하나를 해소하면 두 엔터티 사이에 연결(관계) 엔터티가 하나 생기므로, 두 관계에서 연결 테이블이 2개 추가된다(예: 담당, 이수). 정답은 ③ 이다. ① 1개는 관계 하나만 푼 값, ② 3개는 엔터티 수, ④ 4개는 관계마다 테이블이 두 개 생긴다고 본 값이다.",
+      "explanation": "관계선 양쪽 끝이 모두 까마귀발이면 M:N 관계다. 이 ERD 에는 교수-학생(지도), 학생-과목(이수), 교수-과목(강의) 세 개가 있다. 관계형 테이블은 M:N 을 그대로 담을 수 없어 관계마다 두 부모의 주식별자를 물려받은 교차 테이블(예: 지도, 수강, 강의)을 하나씩 만든다. 학과-학생은 1:N 이라 학생 테이블의 학과코드(FK)로 표현되고 별도 테이블이 필요 없다. 따라서 엔터티 4개 + 교차 테이블 3개 = 7개다(③). ① 은 엔터티 수만 센 값, ② 는 M:N 관계 하나를 놓친 값, ④ 는 1:N 관계까지 별도 테이블로 만든다고 본 값이다.",
       "references": [
         {
           "type": "erd",
-          "caption": "교수·학생·과목 ERD (교수-학생, 학생-과목은 각각 M:N 관계)",
-          "mermaid": "erDiagram\n    교수 }o--o{ 학생 : \"담당\"\n    학생 }o--o{ 과목 : \"이수\""
+          "caption": "학과·학생·교수·과목 ERD",
+          "mermaid": "erDiagram\n    학과 ||--o{ 학생 : \"소속\"\n    교수 }o--o{ 학생 : \"지도\"\n    학생 }o--o{ 과목 : \"이수\"\n    교수 }o--o{ 과목 : \"강의\"\n    학과 {\n        string 학과코드 PK\n        string 학과명\n    }\n    학생 {\n        string 학번 PK\n        string 이름\n        string 학과코드 FK\n    }\n    교수 {\n        string 교수번호 PK\n        string 교수명\n    }\n    과목 {\n        string 과목코드 PK\n        string 과목명\n    }"
         }
       ]
     },
@@ -721,15 +721,73 @@
     {
       "subject": "2과목",
       "number": 27,
-      "title": "주문한 이력이 없는 회원을 조회하는 SQL 로 옳은 것은?",
+      "title": "아래 회원·주문 테이블에서 주문한 이력이 없는 회원(C3, C4)을 조회하려고 작성한 SQL ㉠~㉣ 중, C3 와 C4 가 정확히 조회되는 것만 모두 고른 것은?",
       "options": [
-        "SELECT * FROM 회원 WHERE EXISTS (SELECT 1 FROM 주문 WHERE 주문.회원ID = 회원.회원ID);",
-        "SELECT * FROM 회원 WHERE 회원ID IN (SELECT 회원ID FROM 주문);",
-        "SELECT * FROM 회원 M WHERE NOT EXISTS (SELECT 1 FROM 주문 O WHERE O.회원ID = M.회원ID);",
-        "SELECT * FROM 회원 INNER JOIN 주문 ON 회원.회원ID = 주문.회원ID;"
+        "㉡, ㉢",
+        "㉠, ㉡, ㉢",
+        "㉡, ㉢, ㉣",
+        "㉠, ㉡, ㉢, ㉣"
       ],
       "correctIndex": 2,
-      "explanation": "주문 이력이 없는 회원은 주문 테이블에 같은 회원ID 행이 하나도 없는 회원이므로, 회원마다 그런 주문이 없는지 확인하는 NOT EXISTS 가 맞다(③). LEFT OUTER JOIN 뒤 주문 쪽이 NULL 인 행을 고르는 방법도 같은 결과다. ① EXISTS 와 ② IN 은 반대로 주문이 있는 회원을 찾고, ④ INNER JOIN 은 주문과 짝이 맞는 회원만 남겨 역시 의도와 반대다."
+      "explanation": "주문 테이블에 회원번호가 NULL 인 O4 가 있다는 점이 핵심이다. ㉠ 의 NOT IN 은 '회원번호 <> C1 AND 회원번호 <> C2 AND 회원번호 <> NULL' 과 같은데, NULL 과의 비교는 UNKNOWN 이라 조건 전체가 참이 될 수 없어 한 행도 나오지 않는다. ㉣ 은 서브쿼리에서 NULL 을 걸러 내 NOT IN 이 C1·C2 와만 비교하므로 C3·C4 가 나온다. ㉡ NOT EXISTS 는 회원마다 같은 회원번호의 주문이 있는지만 보므로 NULL 의 영향을 받지 않고, ㉢ 은 LEFT OUTER JOIN 으로 짝이 없는 회원의 주문 칼럼이 NULL 로 채워진 행만 고르므로 역시 C3·C4 다. 정답은 ③번이다. ① 은 ㉣ 처럼 NULL 을 걸러 낸 NOT IN 도 쓸 수 있다는 점을 놓친 것, ② 와 ④ 는 서브쿼리 결과에 NULL 이 섞인 NOT IN 이 C3·C4 를 돌려준다고 본 것이다.",
+      "references": [
+        {
+          "type": "table",
+          "caption": "회원",
+          "headers": [
+            "회원번호",
+            "회원명"
+          ],
+          "rows": [
+            [
+              "C1",
+              "김하늘"
+            ],
+            [
+              "C2",
+              "이바다"
+            ],
+            [
+              "C3",
+              "박구름"
+            ],
+            [
+              "C4",
+              "최별"
+            ]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "주문",
+          "headers": [
+            "주문번호",
+            "회원번호"
+          ],
+          "rows": [
+            [
+              "O1",
+              "C1"
+            ],
+            [
+              "O2",
+              "C1"
+            ],
+            [
+              "O3",
+              "C2"
+            ],
+            [
+              "O4",
+              "NULL"
+            ]
+          ]
+        },
+        {
+          "type": "sql",
+          "code": "-- ㉠\nSELECT 회원번호\nFROM   회원\nWHERE  회원번호 NOT IN (\n  SELECT 회원번호\n  FROM   주문);\n\n-- ㉡\nSELECT M.회원번호\nFROM   회원 M\nWHERE  NOT EXISTS (\n  SELECT 1\n  FROM   주문 O\n  WHERE  O.회원번호 = M.회원번호);\n\n-- ㉢\nSELECT M.회원번호\nFROM   회원 M\n       LEFT OUTER JOIN 주문 O\n       ON M.회원번호 = O.회원번호\nWHERE  O.주문번호 IS NULL;\n\n-- ㉣\nSELECT 회원번호\nFROM   회원\nWHERE  회원번호 NOT IN (\n  SELECT 회원번호\n  FROM   주문\n  WHERE  회원번호 IS NOT NULL);"
+        }
+      ]
     },
     {
       "subject": "2과목",

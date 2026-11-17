@@ -167,16 +167,23 @@ export const ROUND_50: QuizQuestion[] = [
     "round": 50,
     "subject": "1과목",
     "number": 9,
-    "title": "M:N 관계를 1:M, M:1 관계로 해소하여 정규화를 수행하는 데이터 모델링 단계는?",
+    "title": "아래 ERD 는 학생과 강좌 사이의 M:N 관계를 해소한 결과다. 이에 대한 설명으로 옳지 않은 것은? (IE 표기법)",
     "options": [
-      "개괄적 모델링",
-      "개념적 모델링",
-      "논리적 모델링",
-      "물리적 모델링"
+      "M:N 관계를 이처럼 1:M, M:1 관계로 해소하는 작업은 논리적 모델링 단계에서 한다.",
+      "수강신청은 학생과 강좌의 관계에서 생겨난 교차 엔터티로, 두 부모의 주식별자를 물려받았다.",
+      "성적은 학생과 강좌의 조합마다 정해지므로 수강신청의 속성으로 두는 것이 알맞다.",
+      "한 학생이 같은 강좌를 다른 학기에 다시 신청한 이력도 이 구조 그대로 저장할 수 있다."
     ],
-    "correctIndex": 2,
-    "explanation": "M:N 관계를 1:M, M:1 로 해소하고 정규화를 수행해 업무 데이터 구조를 상세하게 정의하는 단계는 논리적 모델링이다(③). 개념적 모델링(②)은 핵심 엔터티와 관계를 추상적으로 도출하는 단계, 물리적 모델링(④)은 테이블·인덱스 등 실제 저장 구조를 설계하는 단계이며, '개괄적 모델링'(①)은 표준 단계가 아니다.",
-    "_source": "authored"
+    "correctIndex": 3,
+    "explanation": "수강신청의 주식별자는 (학번, 강좌코드) 라 같은 학생과 같은 강좌의 조합은 한 행만 들어갈 수 있다. 같은 강좌를 다른 학기에 다시 신청하면 주식별자가 겹쳐 저장할 수 없으므로 ④ 가 옳지 않다. 재수강 이력까지 남기려면 학기(또는 신청순번)를 주식별자에 더해야 한다. ① M:N 관계를 교차 엔터티로 풀어 1:M, M:1 로 바꾸는 일은 정규화와 함께 논리적 모델링에서 한다. ② 수강신청은 학생과 강좌 사이의 관계가 엔터티가 된 것으로, 학번과 강좌코드를 물려받아 주식별자로 쓴다. ③ 성적은 학생 한 사람이나 강좌 하나만으로는 정해지지 않고 둘의 조합마다 정해지므로 수강신청에 둔다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "erd",
+        "caption": "학생·강좌·교수·수강신청 ERD",
+        "mermaid": "erDiagram\n    학생 ||--o{ 수강신청 : \"신청\"\n    강좌 ||--o{ 수강신청 : \"개설\"\n    교수 ||--o{ 강좌 : \"담당\"\n    학생 {\n        string 학번 PK\n        string 이름\n    }\n    강좌 {\n        string 강좌코드 PK\n        string 강좌명\n        string 교수번호 FK\n    }\n    교수 {\n        string 교수번호 PK\n        string 교수명\n    }\n    수강신청 {\n        string 학번 PK,FK\n        string 강좌코드 PK,FK\n        date 신청일자\n        string 성적\n    }"
+      }
+    ]
   },
   {
     "id": 10509,
@@ -951,16 +958,68 @@ export const ROUND_50: QuizQuestion[] = [
     "round": 50,
     "subject": "2과목",
     "number": 30,
-    "title": "아래 LAG·LEAD 함수 결과 중 나머지와 다른 것은?",
+    "title": "아래 매출 테이블에 대한 SQL 결과에서 지점 B 의 P, N 값을 월 순서대로 나열한 것으로 옳은 것은?",
     "options": [
-      "LAG(VAL, 1) OVER(ORDER BY ID)",
-      "LAG(VAL) OVER(ORDER BY ID)",
-      "LAG(VAL, 1) OVER(ORDER BY ID DESC)",
-      "LEAD(VAL, 1) OVER(ORDER BY ID DESC)"
+      "P: 0, 200, 0, 180 / N: 180, 210, NULL, NULL",
+      "P: 120, 200, NULL, 180 / N: 180, 210, NULL, NULL",
+      "P: 0, 200, NULL, 180 / N: 180, 210, NULL, NULL",
+      "P: 0, 200, NULL, 180 / N: NULL, 180, 210, NULL"
     ],
     "correctIndex": 2,
-    "explanation": "ID 오름차순 기준으로 '직전 행' 값을 돌려주는지 비교한다. ① LAG(VAL, 1) 은 직전 행이다. ② LAG(VAL) 은 offset 을 생략하면 1 이므로 ① 과 같다. ④ LEAD(VAL, 1) OVER(ORDER BY ID DESC) 는 내림차순에서 다음 행, 곧 오름차순 기준의 직전 행이다. ③ LAG(VAL, 1) OVER(ORDER BY ID DESC) 는 내림차순에서 직전 행, 곧 오름차순 기준의 다음 행이라 방향이 반대다. ※ 복원 자료의 ② LEAD(VAL, -1) 처럼 음수 offset 을 쓰는 형태는 SQL 전문가 가이드에서 다루지 않고 DBMS 마다 처리(오류 또는 반대 방향)가 달라, 같은 뜻이 분명한 LAG(VAL) 로 바꿨다.",
-    "_source": "authored"
+    "explanation": "PARTITION BY 지점 이라 B 의 행끼리만 앞뒤를 본다. P 는 LAG(금액, 1, 0) 으로 한 행 앞의 금액이다. 월 1 은 B 안에서 앞 행이 없어 기본값 0, 월 2 는 200, 월 3 은 앞 행(월 2)의 금액이 NULL 이라 NULL, 월 4 는 180 이다. 세 번째 인자 0 은 앞 행이 없을 때만 쓰이고, 앞 행의 값이 NULL 일 때는 쓰이지 않는다. N 은 LEAD(금액, 2) 로 두 행 뒤의 금액이다. 월 1 은 월 3 의 180, 월 2 는 월 4 의 210 이고, 월 3·4 는 두 행 뒤가 없는데 기본값을 주지 않아 NULL 이다. 정답은 ③번이다. ① 은 앞 행 값이 NULL 일 때도 기본값 0 이 들어간다고 본 값, ② 는 PARTITION BY 를 놓치고 A 의 마지막 금액 120 을 B 월 1 의 P 로 가져온 값, ④ 는 LEAD 의 두 번째 인자를 놓치고 바로 다음 행을 가져온 값이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "caption": "매출",
+        "headers": [
+          "지점",
+          "월",
+          "금액"
+        ],
+        "rows": [
+          [
+            "A",
+            "1",
+            "100"
+          ],
+          [
+            "A",
+            "2",
+            "150"
+          ],
+          [
+            "A",
+            "3",
+            "120"
+          ],
+          [
+            "B",
+            "1",
+            "200"
+          ],
+          [
+            "B",
+            "2",
+            "NULL"
+          ],
+          [
+            "B",
+            "3",
+            "180"
+          ],
+          [
+            "B",
+            "4",
+            "210"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT 지점, 월,\n  LAG(금액, 1, 0) OVER (\n    PARTITION BY 지점 ORDER BY 월\n  ) AS P,\n  LEAD(금액, 2) OVER (\n    PARTITION BY 지점 ORDER BY 월\n  ) AS N\nFROM 매출;"
+      }
+    ]
   },
   {
     "id": 10530,

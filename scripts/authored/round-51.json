@@ -64,15 +64,22 @@
     {
       "subject": "1과목",
       "number": 5,
-      "title": "고객이 하나의 서비스만 계약할 수 있다는 제약을 반영해 '고객 - 서비스' 모델을 개선한 형태로 가장 적절한 것은?",
+      "title": "아래 ERD 를 '고객은 서비스를 하나만 계약할 수 있고, 한 서비스는 여러 고객이 계약할 수 있다' 는 규칙에 맞게 고치는 방법으로 가장 적절한 것은?",
       "options": [
-        "고객 테이블에 서비스 ID 를 외래키 컬럼으로 추가",
-        "서비스 테이블에 고객 ID 를 직접 저장",
-        "고객 ─ 서비스계약(고객 ID + 서비스 ID 복합 PK) ─ 서비스 의 연결 엔터티를 두는 구조",
-        "고객과 서비스를 별도 스키마로 분리"
+        "고객에 서비스ID 를 외래키로 두고 계약 엔터티를 없앤다 (계약일자는 고객으로 옮긴다).",
+        "계약의 주식별자에 계약일자를 추가한다.",
+        "서비스에 고객ID 를 외래키로 둔다.",
+        "서비스와 계약의 관계를 1:1 로 바꾼다."
       ],
       "correctIndex": 0,
-      "explanation": "한 고객은 서비스 하나만, 한 서비스는 여러 고객이 계약할 수 있으므로 서비스(1) : 고객(N) 관계다. 1:N 관계는 N 쪽인 고객 테이블에 서비스 ID 를 외래키로 두면 \"고객당 서비스 하나\" 가 구조로 보장된다(①). ② 는 서비스 하나에 고객이 한 명만 연결되고, ③ 의 연결 엔터티는 M:N 관계를 해소하는 방식이라 한 고객이 여러 서비스를 계약하는 것을 막지 못한다. ④ 는 관계 표현과 무관하다. ※ 복원 자료의 보기가 모호해 정답 논쟁이 있어, 업무 규칙대로 보기를 정리했다."
+      "explanation": "지금 모델은 계약의 주식별자가 (고객ID, 서비스ID) 라 한 고객이 서로 다른 서비스와 계약을 여러 건 맺을 수 있는 M:N 구조다. 규칙대로라면 고객 쪽이 N, 서비스 쪽이 1 인 1:N 관계이므로, N 쪽인 고객에 서비스ID 를 외래키로 두면 고객 한 명당 서비스가 하나로 고정된다(①). 계약 엔터티를 남기더라도 주식별자를 고객ID 하나로 줄이면 같은 효과가 난다. ② 계약일자를 주식별자에 더하면 같은 서비스도 날짜만 다르면 또 계약할 수 있어 제약이 오히려 느슨해진다. ③ 서비스에 고객ID 를 두면 서비스 하나에 고객이 한 명만 연결되어 '여러 고객이 계약할 수 있다' 는 규칙에 어긋난다. ④ 서비스와 계약을 1:1 로 바꾸면 서비스마다 계약이 한 건뿐이라 역시 여러 고객이 같은 서비스를 계약할 수 없다.",
+      "references": [
+        {
+          "type": "erd",
+          "caption": "현재 모델: 고객·서비스·계약 ERD",
+          "mermaid": "erDiagram\n    고객 ||--o{ 계약 : \"체결\"\n    서비스 ||--o{ 계약 : \"대상\"\n    고객 {\n        string 고객ID PK\n        string 고객명\n    }\n    서비스 {\n        string 서비스ID PK\n        string 서비스명\n    }\n    계약 {\n        string 고객ID PK,FK\n        string 서비스ID PK,FK\n        date 계약일자\n    }"
+        }
+      ]
     },
     {
       "subject": "1과목",
@@ -1024,15 +1031,51 @@
     {
       "subject": "2과목",
       "number": 36,
-      "title": "Oracle 에서 매출 상위 1·2위를 조회하는 SQL 로 옳은 것은?",
+      "title": "아래 SALES 테이블에서 매출 상위 3건을 보려고 작성한 SQL 의 결과로 옳은 것은? (Oracle, 행은 표의 순서대로 읽힌다고 가정)",
       "options": [
-        "SELECT 영업, 매출 FROM SALES ORDER BY 매출 DESC LIMIT 2;",
-        "SELECT TOP 2 영업, 매출 FROM SALES ORDER BY 매출 DESC;",
-        "SELECT 영업, 매출 FROM SALES WHERE ROWNUM <= 2 ORDER BY 매출 DESC;",
-        "SELECT 영업, 매출 FROM (SELECT 영업, 매출 FROM SALES ORDER BY 매출 DESC) WHERE ROWNUM <= 2;"
+        "D 600, B 500, E 400",
+        "A 300, B 500, C 100",
+        "오류가 발생한다 (ROWNUM 과 ORDER BY 는 함께 쓸 수 없다)",
+        "B 500, A 300, C 100"
       ],
       "correctIndex": 3,
-      "explanation": "Oracle 에서 ROWNUM 은 정렬 전에 부여되므로 ORDER BY 와 동시에 사용하면 의도된 상위 N 건이 나오지 않는다. 따라서 ORDER BY 결과를 인라인 뷰로 감싼 뒤 바깥에서 WHERE ROWNUM <= 2 를 적용해야 한다. ① LIMIT 은 MySQL·PostgreSQL 문법, ② TOP 은 SQL Server 문법이고, ③ 은 ROWNUM 이 정렬 전에 붙어 상위 2건이 아니다."
+      "explanation": "ROWNUM 은 WHERE 절을 처리하면서 읽힌 순서대로 붙고, ORDER BY 는 그다음에 실행된다. 그래서 먼저 읽힌 A, B, C 세 행이 ROWNUM 1~3 으로 골라진 뒤 매출 내림차순으로 정렬되어 B 500, A 300, C 100 이 나온다(④). 실제 매출 상위 3건인 D 600, B 500, E 400(①)을 얻으려면 정렬을 인라인 뷰 안에서 먼저 하고 바깥에서 ROWNUM 을 걸어야 한다. 예: SELECT * FROM (SELECT 영업, 매출 FROM SALES ORDER BY 매출 DESC) WHERE ROWNUM <= 3; ② 는 ORDER BY 를 놓친 값이고, ③ 처럼 오류가 나지는 않는다. 문법상 문제없이 실행되지만 원하는 결과가 아닐 뿐이다.",
+      "references": [
+        {
+          "type": "table",
+          "caption": "SALES",
+          "headers": [
+            "영업",
+            "매출"
+          ],
+          "rows": [
+            [
+              "A",
+              "300"
+            ],
+            [
+              "B",
+              "500"
+            ],
+            [
+              "C",
+              "100"
+            ],
+            [
+              "D",
+              "600"
+            ],
+            [
+              "E",
+              "400"
+            ]
+          ]
+        },
+        {
+          "type": "sql",
+          "code": "SELECT 영업, 매출\nFROM   SALES\nWHERE  ROWNUM <= 3\nORDER BY 매출 DESC;"
+        }
+      ]
     },
     {
       "subject": "2과목",
