@@ -200,3 +200,5 @@
 - (11-16) vite preview 캡처가 goto 에서 멈추면(외부 광고·폰트 요청 대기) waitUntil 'domcontentloaded' + 고정 대기로 바꾼다. 끝나면 pkill -f 'vite preview' 로 남은 서버 정리.
 - (11-17) 문의 시트 새 행 확인은 Drive get_file_metadata 의 modifiedTime 으로 먼저 본다(본문 읽기보다 훨씬 가벼움). 바뀌었을 때만 본문을 읽는다.
 - (11-17) SQL ㉠~㉣ 를 한 sql 칸에 넣으면 verify-sql-results 가 'multi-statement' 로 errors +1 — 정상이며, PostgreSQL 에서 하나씩 직접 검증한다.
+- (11-17) AdSense 보고서의 PAGE_URL 은 SPA 에서 처음 로드한 주소로만 잡힌다(화면 전환은 반영 안 됨). 화면별 광고 성과는 GA4(BigQuery) 화면 조회와 함께 추정해야 한다.
+- (11-17) GitHub 예약 워크플로는 몇 시간씩 늦게 돌 수 있다. 분석에 필요한 날 데이터가 없으면 workflow_dispatch(main, days=3)로 바로 받는다.
