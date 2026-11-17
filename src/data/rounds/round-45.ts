@@ -435,16 +435,63 @@ export const ROUND_45: QuizQuestion[] = [
     "round": 45,
     "subject": "2과목",
     "number": 18,
-    "title": "윈도우 함수 중 정렬된 파티션에서 가장 첫 번째 값을 반환하는 함수는?",
+    "title": "아래 사원 테이블에 대한 SQL 결과에서 C 행의 F, L1, L2 값으로 옳은 것은?",
     "options": [
-      "FIRST_VALUE",
-      "LAST_VALUE",
-      "LAG",
-      "LEAD"
+      "F B, L1 C, L2 A",
+      "F B, L1 A, L2 A",
+      "F A, L1 C, L2 A",
+      "F B, L1 C, L2 C"
     ],
     "correctIndex": 0,
-    "explanation": "FIRST_VALUE는 정렬된 파티션에서 첫 번째 값을 반환한다. ② LAST_VALUE는 마지막 값, ③ LAG은 이전 행의 값, ④ LEAD는 다음 행의 값을 반환한다.",
-    "_source": "authored"
+    "explanation": "C 는 영업 부서라 영업 안에서 급여 내림차순으로 B(500), C(400), A(300) 순서다. F 의 FIRST_VALUE 는 파티션의 첫 행인 B 다. 윈도우 절 없이 ORDER BY 만 쓰면 범위가 '파티션 처음부터 현재 행까지' 라, L1 의 LAST_VALUE 는 C 행에서 범위의 마지막인 C 자신이다. L2 는 범위를 파티션 끝까지로 넓혀서 마지막 행인 A 가 된다. 정답은 ①번이다. ② 는 ORDER BY 만 있어도 파티션 전체를 본다고 착각한 것, ③ 은 FIRST_VALUE 를 급여가 가장 낮은 값으로 본 것, ④ 는 L2 의 범위 확장을 놓친 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "caption": "사원",
+        "headers": [
+          "부서",
+          "이름",
+          "급여"
+        ],
+        "rows": [
+          [
+            "영업",
+            "A",
+            "300"
+          ],
+          [
+            "영업",
+            "B",
+            "500"
+          ],
+          [
+            "영업",
+            "C",
+            "400"
+          ],
+          [
+            "개발",
+            "D",
+            "200"
+          ],
+          [
+            "개발",
+            "E",
+            "600"
+          ],
+          [
+            "인사",
+            "F",
+            "350"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT 이름,\n  FIRST_VALUE(이름) OVER (\n    PARTITION BY 부서 ORDER BY 급여 DESC\n  ) AS F,\n  LAST_VALUE(이름) OVER (\n    PARTITION BY 부서 ORDER BY 급여 DESC\n  ) AS L1,\n  LAST_VALUE(이름) OVER (\n    PARTITION BY 부서 ORDER BY 급여 DESC\n    ROWS BETWEEN UNBOUNDED PRECEDING\n             AND UNBOUNDED FOLLOWING\n  ) AS L2\nFROM 사원;"
+      }
+    ]
   },
   {
     "id": 10768,
@@ -1458,16 +1505,63 @@ export const ROUND_45: QuizQuestion[] = [
     "round": 45,
     "subject": "2과목",
     "number": 39,
-    "title": "WHERE 절에 사용된 서브쿼리에 대한 설명으로 적절하지 않은 것은?",
+    "title": "아래 사원 테이블에 대한 SQL 의 결과로 옳은 것은?",
     "options": [
-      "서브쿼리는 메인쿼리의 조건을 판별하는 용도로 사용된다.",
-      "단일 행 서브쿼리와 다중 행 서브쿼리가 있다.",
-      "상관 서브쿼리는 메인쿼리의 컬럼을 참조할 수 있다.",
-      "메인쿼리와 서브쿼리가 있을 때 최종 결과는 항상 서브쿼리의 결과를 따른다."
+      "B, C, E",
+      "B, C, E, F",
+      "E",
+      "B, E"
     ],
     "correctIndex": 3,
-    "explanation": "WHERE 절 서브쿼리는 메인쿼리 행의 필터 조건으로 사용될 뿐, FROM 절 인라인 뷰가 아닌 한 서브쿼리가 최종 결과를 결정하지 않는다. 정답은 ④번이다. ①·②·③ 은 WHERE 절 서브쿼리의 용도, 종류(단일 행·다중 행), 상관 서브쿼리의 특징을 바르게 설명했다.",
-    "_source": "authored"
+    "explanation": "서브쿼리가 바깥 행의 E.부서 를 참조하는 상관 서브쿼리라, 행마다 그 사원 부서의 평균 급여와 비교한다. 영업 평균은 (300 + 500 + 400) / 3 = 400 이라 B 만 넘고, 개발 평균은 400 이라 E 만 넘는다. 인사는 F 혼자라 평균이 350 이고 '같은 값' 은 '보다 큰' 에 들지 않아 빠진다. 정답은 ④번이다. ① 은 부서 조건 없이 전체 평균(약 391.7)과 비교한 결과, ② 는 > 를 >= 로 본 결과, ③ 은 가장 높은 급여만 고른다고 본 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "caption": "사원",
+        "headers": [
+          "부서",
+          "이름",
+          "급여"
+        ],
+        "rows": [
+          [
+            "영업",
+            "A",
+            "300"
+          ],
+          [
+            "영업",
+            "B",
+            "500"
+          ],
+          [
+            "영업",
+            "C",
+            "400"
+          ],
+          [
+            "개발",
+            "D",
+            "200"
+          ],
+          [
+            "개발",
+            "E",
+            "600"
+          ],
+          [
+            "인사",
+            "F",
+            "350"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT 이름\nFROM   사원 E\nWHERE  급여 > (SELECT AVG(급여)\n               FROM   사원\n               WHERE  부서 = E.부서);"
+      }
+    ]
   },
   {
     "id": 10789,
