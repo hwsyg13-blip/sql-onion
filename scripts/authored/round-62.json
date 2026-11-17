@@ -808,15 +808,71 @@
     {
       "subject": "2과목",
       "number": 32,
-      "title": "A INTERSECT B의 결과가 1행이고, 테이블 C가 3행(NULL 포함)일 때, (A INTERSECT B) UNION ALL C의 최종 행 수는?",
+      "title": "아래 A, B, C 테이블에 대해 ㉠ (A INTERSECT B) UNION ALL C 와 ㉡ (A INTERSECT B) UNION C 의 결과 행 수로 옳은 것은?",
       "options": [
-        "2",
-        "3",
-        "4",
-        "5"
+        "㉠ 4, ㉡ 3",
+        "㉠ 5, ㉡ 4",
+        "㉠ 5, ㉡ 3",
+        "㉠ 4, ㉡ 2"
       ],
       "correctIndex": 2,
-      "explanation": "UNION ALL 은 중복 제거나 NULL 처리 없이 두 결과의 행을 그대로 합친다. A INTERSECT B 의 1행과 C 의 3행(NULL 행 포함)을 합치면 4행이다(③). UNION 이었다면 중복이 제거되어 줄어들 수 있다. ① 2·② 3 은 C 의 NULL 행이나 중복을 뺀 값인데, UNION ALL 은 아무것도 빼지 않는다."
+      "explanation": "집합 연산자는 NULL 끼리를 같은 값으로 본다. A INTERSECT B 는 양쪽에 다 있는 2 와 NULL 의 2행이다. ㉠ UNION ALL 은 중복을 그대로 두므로 2 + 3 = 5행이다. ㉡ UNION 은 중복을 없애 2, NULL, 4 의 3행이 된다(C 의 NULL 두 개와 교집합의 NULL 이 하나로 합쳐진다). 정답은 ③번이다. ① 은 INTERSECT 에서 NULL 이 빠진다고 본 것, ② 는 UNION 에서 C 의 NULL 을 따로 센 것, ④ 는 둘 다 잘못 센 것이다.",
+      "references": [
+        {
+          "type": "table",
+          "caption": "A",
+          "headers": [
+            "V"
+          ],
+          "rows": [
+            [
+              "1"
+            ],
+            [
+              "2"
+            ],
+            [
+              "NULL"
+            ]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "B",
+          "headers": [
+            "V"
+          ],
+          "rows": [
+            [
+              "2"
+            ],
+            [
+              "3"
+            ],
+            [
+              "NULL"
+            ]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "C",
+          "headers": [
+            "V"
+          ],
+          "rows": [
+            [
+              "NULL"
+            ],
+            [
+              "NULL"
+            ],
+            [
+              "4"
+            ]
+          ]
+        }
+      ]
     },
     {
       "subject": "2과목",
@@ -1363,19 +1419,41 @@
     {
       "subject": "2과목",
       "number": 24,
-      "title": "테이블 T에서 COL = 9를 만족하는 행이 없을 때, 다음 SQL의 수행 결과로 옳은 것은?",
+      "title": "아래 T 테이블에 대한 SQL ㉠~㉣ 의 결과를 차례대로 나열한 것은?",
       "options": [
-        "Y",
-        "N",
-        "NULL",
-        "공집합"
+        "N / N / 0 / NULL",
+        "NULL / 공집합 / 0 / 0",
+        "N / 공집합 / 0 / 0",
+        "N / 공집합 / 0 / NULL"
       ],
       "correctIndex": 3,
-      "explanation": "WHERE를 통과한 행이 0건이고 GROUP BY가 있으므로 만들어지는 그룹 자체가 없어 결과가 0행(공집합)이다. NVL이 NULL을 'N'으로 바꿀 대상 행이 없다. GROUP BY가 없는 전체 집계였다면 MAX가 NULL인 1행이 만들어져 'N'이 출력되므로 이 차이를 구분해야 한다. ① Y·② N·③ NULL 은 모두 결과가 1행 있다고 본 것인데, GROUP BY 가 있으면 0건에서 그룹이 하나도 만들어지지 않는다.",
+      "explanation": "COL = 9 인 행은 없다. GROUP BY 없이 집계 함수만 쓰면 대상 행이 없어도 결과는 한 행으로 나온다. ㉠ 은 MAX('Y') 가 NULL 이라 NVL 로 'N' 이 되고, ㉢ COUNT(*) 는 0, ㉣ SUM 은 더할 값이 없어 NULL 이다. ㉡ 처럼 GROUP BY 가 있으면 만들 그룹이 하나도 없어 결과 행이 없다(공집합). 정답은 ④번이다. ① 은 GROUP BY 가 있어도 한 행이 나온다고 본 것, ③ 은 행이 없을 때 SUM 이 0 이라고 본 것이다. 0 이 필요하면 NVL(SUM(COL), 0) 으로 쓴다.",
       "references": [
         {
+          "type": "table",
+          "caption": "T",
+          "headers": [
+            "C1",
+            "COL"
+          ],
+          "rows": [
+            [
+              "A",
+              "1"
+            ],
+            [
+              "A",
+              "2"
+            ],
+            [
+              "B",
+              "3"
+            ]
+          ]
+        },
+        {
           "type": "sql",
-          "code": "SELECT NVL(MAX('Y'), 'N')\nFROM   T\nWHERE  COL = 9\nGROUP  BY C1;"
+          "code": "-- ㉠\nSELECT NVL(MAX('Y'), 'N') FROM T WHERE COL = 9;\n-- ㉡\nSELECT NVL(MAX('Y'), 'N') FROM T WHERE COL = 9\nGROUP BY C1;\n-- ㉢\nSELECT COUNT(*) FROM T WHERE COL = 9;\n-- ㉣\nSELECT SUM(COL) FROM T WHERE COL = 9;"
         }
       ]
     },

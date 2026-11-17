@@ -257,3 +257,20 @@
 |---|---|---|---|---|
 | 57-30 | 계층형 SQL 의 WHERE 적용 시점 | 'WHERE 절' 이름 고르기 → 6행 EMP 에서 WHERE 부서 = 10 이 전개 후에 걸려 부모(B)가 빠져도 자식(D)이 남는 것 | A, C, D | PostgreSQL(재귀 CTE): WHERE 면 A·C·D, 조건을 CONNECT BY 에 넣으면 A·C(오답 ①). 형제 순서는 정해지지 않아 '출력 순서' 가 아닌 '모두 고르기' 로 물음 |
 | 57-26 | PRIMARY KEY·UNIQUE 와 NULL | 설명 고르기 → CREATE TABLE 과 INSERT 5개 중 오류 나는 것 고르기 | ㉣, ㉤ | PostgreSQL: UNIQUE 칼럼 NULL 두 번은 통과, 중복 값·PK NULL 은 오류(Oracle 동일) |
+
+## 순환 1바퀴 — 58~62회 (11-18 01시, 사용자 지시 "한 사이클 오늘 완료")
+
+| 문항 | 개념 | 바뀐 점 | 정답 | 검증·처리 |
+|---|---|---|---|---|
+| 58-49 | PIVOT | 설명 고르기 → 판매 표 PIVOT(SUM, IN 목록 밖 Q3 제외) 결과 | 2025 Q1 15·Q2 20 / 2026 Q1 30·Q2 NULL | PostgreSQL(CASE 집계로 동일 계산). 빈 칸 0·첫 값·IN 밖 열 생성 오답 |
+| 58-34 | GROUPING SETS + GROUPING() | 설명 고르기 → 지역 NULL 행이 있는 표에서 '미지정'·'합계' 구분 | 미지정 5, 합계 65 | PostgreSQL GROUPING SETS·GROUPING 동일 |
+| 59-40 | NATURAL JOIN vs USING | 설명 고르기 → 같은 이름 칼럼이 둘(부서번호·지역)인 표에서 행 수 | 2, 4 | PostgreSQL 2·4 |
+| 59-28 | DATE 범위·BETWEEN 경계 | 보기 SQL 만 → 0시 경계 데이터 5행에서 정확한 조건 모두 고르기 | ㉠, ㉡ | PostgreSQL: BETWEEN 은 21일 0시(D) 포함, '=' 은 B 만 |
+| 60-32 | ALTER TABLE 과 기존 데이터 | 설명 고르기 → 데이터 있는 표에 ALTER 4개, 오류 나는 것 | ㉠, ㉣ | PostgreSQL: NOT NULL(기존 NULL)·자릿수 축소 오류, DEFAULT 있는 NOT NULL 추가는 통과. 390px 에서 ㉢ 줄이 꺾여 두 줄로 나눔 |
+| 60-45 | NVL vs 덧셈·COUNT | 설명 고르기 → EMP 4행에서 SUM(NVL), SUM(COMM+SAL), COUNT(NVL) | 350, 650, 3 | PostgreSQL 350·650·3 (덧셈 오해 950) |
+| 61-17 | 관계 대수 DIVIDE | 순수 관계 연산자 설명 → 수강 ÷ 필수 결과 | S1, S2 | PostgreSQL NOT EXISTS 두 번 |
+| 61-36 | ROWNUM 부여 시점 | 정의 고르기 → ROWNUM = 1 / = 2 / <= 2 / > 1 행 수 | 1, 0, 2, 0 | verify-sql-pg ROWNUM 변환과 일치 |
+| 62-24 | 빈 집합 집계 | GROUP BY 있는 SQL 하나 → GROUP BY 유무·COUNT·SUM 4개 비교 | N / 공집합 / 0 / NULL | PostgreSQL 동일 |
+| 62-32 | INTERSECT·UNION·UNION ALL 과 NULL | 행 수만 주던 문항 → 세 테이블 데이터에서 두 연산 행 수 | 5, 3 | PostgreSQL 5·3 |
+
+이로써 45~62회 18개 회차 순환 1바퀴 완료(회차당 2문항, 총 36문항). 다음 순환은 45회부터.

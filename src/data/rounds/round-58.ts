@@ -1219,16 +1219,48 @@ export const ROUND_58: QuizQuestion[] = [
     "round": 58,
     "subject": "2과목",
     "number": 34,
-    "title": "GROUPING SETS에 대한 설명 중 옳지 않은 것은?",
+    "title": "아래 매출 테이블에 대한 SQL 결과에서 '미지정' 행과 '합계' 행의 SUM(금액) 으로 옳은 것은?",
     "options": [
-      "정렬이 필요하면 ORDER BY 를 별도로 명시해야 한다.",
-      "인수 순서가 달라지면 결과도 달라진다.",
-      "개별 집계 조합을 자유롭게 지정할 수 있다.",
-      "UNION ALL + GROUP BY 조합으로 동일한 결과를 만들 수 있다."
+      "미지정 행 없음, 합계 65",
+      "미지정 5, 합계 65",
+      "미지정 5, 합계 60",
+      "미지정 65, 합계 65"
     ],
     "correctIndex": 1,
-    "explanation": "GROUPING SETS 는 정렬을 보장하지 않아 필요하면 ORDER BY 를 쓰고(①), 원하는 집계 조합을 자유롭게 지정하며(③), 각 조합의 GROUP BY 결과를 UNION ALL 한 것과 같다(④). GROUPING SETS 의 인수는 집계 조합을 나열한 것이라 순서를 바꿔도 결과 집합은 같고 출력 순서만 달라질 수 있으므로 ② 가 옳지 않다.",
-    "_source": "authored"
+    "explanation": "GROUPING SETS((지역), ()) 는 지역별 그룹과 전체 합계 그룹을 함께 만든다. 지역이 NULL 인 행도 하나의 지역 그룹이 되는데, 이 행은 GROUPING(지역) 이 0 이라 NVL 에 의해 '미지정' 으로 보이고 합은 5 다. 전체 합계 행은 지역 칸이 집계로 생긴 NULL 이라 GROUPING(지역) 이 1 이 되어 '합계' 로 보이고 10 + 20 + 5 + 30 = 65 다. 정답은 ②번이다. GROUPING 함수는 데이터 자체의 NULL 과 소계·합계 행의 NULL 을 구분할 때 쓴다. ① 은 데이터의 NULL 그룹이 합계 행과 합쳐진다고 본 것, ③ 은 합계에서 NULL 지역의 금액을 뺀 것, ④ 는 '미지정' 을 합계로 착각한 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "caption": "매출",
+        "headers": [
+          "지역",
+          "금액"
+        ],
+        "rows": [
+          [
+            "서울",
+            "10"
+          ],
+          [
+            "서울",
+            "20"
+          ],
+          [
+            "NULL",
+            "5"
+          ],
+          [
+            "부산",
+            "30"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT CASE WHEN GROUPING(지역) = 1 THEN '합계'\n            ELSE NVL(지역, '미지정')\n       END AS 구분,\n       SUM(금액)\nFROM   매출\nGROUP BY GROUPING SETS ((지역), ());"
+      }
+    ]
   },
   {
     "id": 10134,
@@ -1680,16 +1712,58 @@ export const ROUND_58: QuizQuestion[] = [
     "round": 58,
     "subject": "2과목",
     "number": 49,
-    "title": "PIVOT 절에 대한 다음 설명 중 옳지 않은 것은?",
+    "title": "아래 판매 테이블에 대한 PIVOT SQL 의 결과로 옳은 것은? (Oracle)",
     "options": [
-      "PIVOT 절은 행을 열로 변환한다.",
-      "UNPIVOT 절은 열을 행으로 변환한다.",
-      "PIVOT 절은 집계 함수 없이 사용할 수 있다.",
-      "PIVOT 절의 IN 목록에 별칭을 지정할 수 있다."
+      "2025: Q1 15, Q2 20 / 2026: Q1 30, Q2 0",
+      "2025: Q1 10, Q2 20 / 2026: Q1 30, Q2 NULL",
+      "2025: Q1 15, Q2 20 / 2026: Q1 30, Q2 NULL",
+      "2025: Q1 15, Q2 20, Q3 NULL / 2026: Q1 30, Q2 NULL, Q3 40"
     ],
     "correctIndex": 2,
-    "explanation": "PIVOT 은 행을 열로(①), UNPIVOT 은 열을 행으로 바꾸며(②), PIVOT 의 IN 목록 값마다 AS 로 열 별칭을 줄 수 있다(④). ① 과 ② 는 서로 반대 방향을 설명할 뿐 둘 다 옳다. PIVOT 은 새로 만드는 열에 들어갈 값을 집계해야 하므로 SUM·COUNT 같은 집계 함수가 반드시 필요하다. ③ 이 옳지 않다.",
-    "_source": "authored"
+    "explanation": "PIVOT 은 FOR 뒤 칼럼(분기)의 값 중 IN 목록에 적은 'Q1', 'Q2' 만 열로 만들고, 나머지 칼럼(년도)으로 행을 묶어 집계 함수를 적용한다. 2025년 Q1 은 10 + 5 = 15, Q2 는 20 이다. 2026년 Q1 은 30 이고 Q2 에 해당하는 행이 없어 SUM 결과가 NULL 이다. 2026년 Q3 의 40 은 IN 목록에 없어 어떤 열에도 들어가지 않는다. 정답은 ③번이다. ① 은 값이 없는 칸을 0 으로 본 것, ② 는 SUM 없이 첫 행 값만 가져온 것, ④ 는 IN 목록에 없는 값도 열이 생긴다고 본 것이다. PIVOT 에는 SUM 같은 집계 함수가 반드시 들어가야 한다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "caption": "판매",
+        "headers": [
+          "년도",
+          "분기",
+          "금액"
+        ],
+        "rows": [
+          [
+            "2025",
+            "Q1",
+            "10"
+          ],
+          [
+            "2025",
+            "Q1",
+            "5"
+          ],
+          [
+            "2025",
+            "Q2",
+            "20"
+          ],
+          [
+            "2026",
+            "Q1",
+            "30"
+          ],
+          [
+            "2026",
+            "Q3",
+            "40"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT *\nFROM  (SELECT 년도, 분기, 금액 FROM 판매)\nPIVOT (SUM(금액)\n       FOR 분기 IN ('Q1' AS Q1, 'Q2' AS Q2))\nORDER BY 년도;"
+      }
+    ]
   },
   {
     "id": 10149,
