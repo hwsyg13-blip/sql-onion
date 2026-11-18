@@ -3,7 +3,7 @@ import React from 'react';
 import { Btn, Tag, Ic, Mascot, MascotGuide, OnionMark, Progress } from '../components/Atoms';
 import { useProgress, isPlanDayDone } from '../lib/progress';
 import { AdSlot } from '../components/AdSlot';
-import { getNextExam, daysUntilExam, planStartDate } from '../lib/examDate';
+import { getNextExam, daysUntilExam, planStartDate, nextScheduleYearShort } from '../lib/examDate';
 import { EXAM_SETS } from '../data/quizBank';
 
 // 3-week plan v3 — actions 배열 (한 Day 안에 여러 활동 → 각각 따로 버튼).
@@ -188,7 +188,7 @@ export const PlanScreen = ({onNavigate}: any) => {
   const nextExam = getNextExam();
   const dDay = daysUntilExam();
   const dDayLabel =
-    dDay === null ? '다음 시험 일정 발표 예정'
+    dDay === null ? `${nextScheduleYearShort()}년도 일정은 곧 발표돼요`
     : dDay === 0 ? '시험 당일'
     : `시험까지 ${dDay}일`;
 
