@@ -969,16 +969,22 @@ export const ROUND_52: QuizQuestion[] = [
     "round": 52,
     "subject": "2과목",
     "number": 30,
-    "title": "CTAS(CREATE TABLE AS SELECT) 로 테이블을 복제할 때 적용되는 제약 조건 중 옳은 설명은?",
+    "title": "아래 SQL 로 복사 테이블을 만든 뒤 ㉠~㉣ 을 각각 실행할 때 오류가 발생하는 것만 모두 고른 것은? (Oracle 기준)",
     "options": [
-      "프라이머리 키(PK) 는 복제되지 않는다.",
-      "NOT NULL 조건은 전달되지 않는다.",
-      "CHECK 제약은 전달된다.",
-      "DEFAULT 값은 그대로 전달된다."
+      "㉡",
+      "㉠, ㉡",
+      "㉠, ㉡, ㉣",
+      "㉡, ㉣"
     ],
     "correctIndex": 0,
-    "explanation": "CTAS 는 SELECT 결과로 컬럼 구조와 데이터를 복사하지만, 제약 조건은 NOT NULL 만 따라온다. 따라서 PK 는 복제되지 않는다는 ① 이 옳다. NOT NULL 은 전달되고(②), CHECK(③)와 DEFAULT(④)는 전달되지 않는다.",
-    "_source": "authored"
+    "explanation": "CTAS 로 만든 테이블에는 칼럼 구조와 데이터, 그리고 NOT NULL 제약만 넘어온다. PRIMARY KEY, CHECK, DEFAULT 는 넘어오지 않는다. 그래서 ㉠ 은 ID 1 이 이미 있어도 PK 가 없어 들어가고, ㉢ 은 등급이 기본값 'B' 가 아닌 NULL 로 들어가며, ㉣ 은 CHECK 가 없어 'Z' 가 들어간다. NOT NULL 이 남아 있는 이름에 NULL 을 넣는 ㉡ 만 오류다. 정답은 ①번이다. ② 는 PK 도 복사된다고 본 것, ③ 은 PK 와 CHECK 가 모두 복사된다고 본 것, ④ 는 CHECK 가 복사된다고 본 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "CREATE TABLE 원본 (\n  ID   NUMBER       PRIMARY KEY,\n  이름 VARCHAR2(10) NOT NULL,\n  등급 CHAR(1) DEFAULT 'B'\n       CHECK (등급 IN ('A', 'B'))\n);\nINSERT INTO 원본 VALUES (1, '김', 'A');\nCREATE TABLE 복사 AS\n  SELECT * FROM 원본;\n\n-- ㉠\nINSERT INTO 복사 VALUES (1, '이', 'A');\n-- ㉡\nINSERT INTO 복사 VALUES (2, NULL, 'A');\n-- ㉢\nINSERT INTO 복사 (ID, 이름)\n  VALUES (3, '박');\n-- ㉣\nINSERT INTO 복사 VALUES (4, '최', 'Z');"
+      }
+    ]
   },
   {
     "id": 10430,
@@ -1616,16 +1622,22 @@ export const ROUND_52: QuizQuestion[] = [
     "round": 52,
     "subject": "2과목",
     "number": 47,
-    "title": "YYYYMMDDHH24MISS 포맷에 해당하는 결과는?",
+    "title": "아래 SQL 의 결과(A, B, C)로 옳은 것은? (Oracle 기준)",
     "options": [
-      "연도 네 자리만 표시",
-      "연/월/일/시/분/초 14자리 숫자 문자열",
-      "월/일/시/분 10자리",
-      "연/월/일/시/분/초를 포함한 ISO 8601 표기"
+      "20261231243000, 2026-12-31 24:15, 20260228",
+      "20270101003000, 2027-01-01 00:15, 20260228",
+      "20270101003000, 2027-01-01 00:15, 20260303",
+      "20270101003000, 2027-01-01 01:15, 20260228"
     ],
     "correctIndex": 1,
-    "explanation": "YYYYMMDDHH24MISS 포맷은 4+2+2+2+2+2 = 14자리 숫자 문자열로, 연·월·일·시(24시)·분·초를 모두 포함한다. ① 은 YYYY 만, ③ 은 MMDDHH24MI 만 본 결과이고, ④ ISO 8601 은 구분 기호(-, T, :)가 들어간 다른 표기다.",
-    "_source": "authored"
+    "explanation": "DATE 에 숫자를 더하면 일 단위로 더해진다. 1/24 은 1시간이라 2026-12-31 23:30 이 2027-01-01 00:30 이 되고, 형식에 맞추면 A 는 '20270101003000' 이다. 45/1440 은 45분이라 B 는 2027-01-01 00:15 다. ADD_MONTHS 는 1월 31일처럼 달의 마지막 날에 한 달을 더하면 다음 달의 마지막 날을 돌려주므로, 윤년이 아닌 2026년 2월의 말일인 '20260228' 이 된다. 정답은 ②번이다. ① 은 시각이 24시를 넘으면 날짜가 바뀐다는 것을 놓친 것, ③ 은 2월 31일을 3월로 넘긴 것, ④ 는 45/1440 을 1시간 15분으로 계산한 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT TO_CHAR(D + 1/24,\n         'YYYYMMDDHH24MISS') AS A,\n       TO_CHAR(D + 45/1440,\n         'YYYY-MM-DD HH24:MI') AS B,\n       TO_CHAR(ADD_MONTHS(D2, 1),\n         'YYYYMMDD') AS C\nFROM  (SELECT\n         TO_DATE('20261231 2330',\n                 'YYYYMMDD HH24MI')\n           AS D,\n         TO_DATE('20260131',\n                 'YYYYMMDD')\n           AS D2\n       FROM DUAL);"
+      }
+    ]
   },
   {
     "id": 10447,

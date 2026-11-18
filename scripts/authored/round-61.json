@@ -511,15 +511,70 @@
     {
       "subject": "2과목",
       "number": 17,
-      "title": "다음 중 순수 관계 연산자에 대한 설명으로 옳지 않은 것은?",
+      "title": "아래 두 릴레이션에 대한 관계 대수 연산 '수강 ÷ 필수' 의 결과로 옳은 것은?",
       "options": [
-        "관계형 데이터베이스에서 테이블(릴레이션)의 데이터를 처리하기 위해 고안된 관계 연산자이다.",
-        "PROJECT - 특정 속성(컬럼)만 추출하는 연산자이다.",
-        "DIVIDE - 특정 조건을 모두 만족하는 대상을 찾는 연산이며 SQL에서는 직접 지원하지 않아 NOT EXISTS 등으로 표현한다.",
-        "SELECT - SQL의 SELECT 절에 해당한다."
+        "S3",
+        "S1",
+        "S1, S2, S3",
+        "S1, S2"
       ],
       "correctIndex": 3,
-      "explanation": "순수 관계 연산자의 SELECT는 행(로우)을 선택하는 연산으로 SQL의 WHERE 절에 대응하고, PROJECT가 컬럼을 선택하여 SQL의 SELECT 절에 대응한다. ④는 SELECT 절이 아니라 WHERE 절에 해당한다고 해야 옳다. ①②③ 은 옳은 설명이다."
+      "explanation": "나누기(DIVIDE)는 오른쪽 릴레이션(필수)의 값을 모두 가진 왼쪽 릴레이션의 나머지 속성(학번)을 고른다. 필수 과목은 DB 와 OS 다. S1 은 DB·OS·NET, S2 는 DB·OS 를 들어 둘 다 해당하고, S3 는 OS 가 없어 빠진다. 필수에 없는 과목(NET)을 더 들었는지는 상관없다. 정답은 ④번이다. SQL 로는 '필수 과목 중 그 학생이 듣지 않은 과목이 없는 학생' 을 NOT EXISTS 두 번으로 찾는다. ① 은 필수 과목(OS)을 빠뜨린 학생을 거꾸로 고른 것, ② 는 수강 테이블에 나오는 과목(DB·OS·NET)을 모두 들은 학생으로 본 것, ③ 은 필수 과목 중 하나(DB)만 들어도 된다고 본 것이다.",
+      "references": [
+        {
+          "type": "table",
+          "caption": "수강",
+          "headers": [
+            "학번",
+            "과목"
+          ],
+          "rows": [
+            [
+              "S1",
+              "DB"
+            ],
+            [
+              "S1",
+              "OS"
+            ],
+            [
+              "S1",
+              "NET"
+            ],
+            [
+              "S2",
+              "DB"
+            ],
+            [
+              "S2",
+              "OS"
+            ],
+            [
+              "S3",
+              "DB"
+            ],
+            [
+              "S3",
+              "NET"
+            ]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "필수",
+          "headers": [
+            "과목"
+          ],
+          "rows": [
+            [
+              "DB"
+            ],
+            [
+              "OS"
+            ]
+          ]
+        }
+      ]
     },
     {
       "subject": "2과목",
@@ -897,15 +952,63 @@
     {
       "subject": "2과목",
       "number": 28,
-      "title": "다음 중 \"연봉(SAL)이 3,000을 초과하면서, 상위 직급자(관리자, MGR)가 존재하는 사원\"을 찾는 SQL로 가장 적절하지 않은 것은?",
+      "title": "아래 EMP 테이블에 대한 SQL ㉠, ㉡, ㉢ 의 결과 행 수로 옳은 것은?",
       "options": [
-        "SELECT EMP_ID, EMP_NAME, SAL\nFROM EMP E\nWHERE SAL > 3000\nAND EXISTS (\n    SELECT 1\n    FROM EMP M\n    WHERE M.EMP_ID = E.MGR_ID\n);",
-        "SELECT EMP_ID, EMP_NAME, SAL\nFROM EMP\nWHERE SAL > 3000\nAND MGR_ID IN (\n    SELECT EMP_ID\n    FROM EMP\n);",
-        "SELECT EMP_ID, EMP_NAME, SAL\nFROM EMP E\nWHERE SAL > 3000\nAND NOT EXISTS (\n    SELECT 1\n    FROM EMP M\n    WHERE M.EMP_ID <> E.MGR_ID\n);",
-        "SELECT E1.EMP_ID, E1.EMP_NAME, E1.SAL\nFROM EMP E1, EMP E2\nWHERE E1.MGR_ID = E2.EMP_ID\nAND E1.SAL > 3000;"
+        "3, 2, 3",
+        "2, 2, 2",
+        "3, 2, 2",
+        "3, 3, 2"
       ],
       "correctIndex": 2,
-      "explanation": "①②④ 는 MGR_ID 가 실제 직원의 EMP_ID 와 맞는 사원, 즉 상위 직급자가 있는 사원만 조회한다. ③ 은 부정의 부정처럼 보이지만 뜻이 전혀 다르다. MGR_ID 가 있는 사원은 자기 관리자가 아닌 다른 직원이 거의 항상 있어 NOT EXISTS 가 거짓이 되고, 반대로 MGR_ID 가 NULL 인 사원(관리자가 없는 사원)은 M.EMP_ID <> NULL 이 모두 UNKNOWN 이라 서브쿼리 결과가 없어 NOT EXISTS 가 참이 된다. 그래서 찾으려는 것과 정반대로 관리자가 없는 사원이 조회된다."
+      "explanation": "급여가 3000 을 넘는 사람은 KING, JONES, FORD, ADAMS 다. ㉠ 은 MGR 값이 있기만 하면 되므로 KING 만 빠져 3행이다. ㉡ 은 MGR 이 실제 EMP 에 있는 사원이어야 한다. FORD 의 MGR 9 는 없는 사번이라 빠지고 JONES(1), ADAMS(4)만 남아 2행이다. ㉢ 의 IN 도 같은 검사라 2행이다. KING 은 MGR 이 NULL 이라 IN 비교가 UNKNOWN 이 되어 빠진다. 정답은 ③번이다. ① 은 IN 이 값의 존재만 본다고 착각한 것, ② 는 ㉠ 에서 없는 사번을 가리키는 FORD 를 뺀 것, ④ 는 EXISTS 가 MGR 값만 있으면 TRUE 라고 본 것이다.",
+      "references": [
+        {
+          "type": "table",
+          "caption": "EMP",
+          "headers": [
+            "EMPNO",
+            "ENAME",
+            "SAL",
+            "MGR"
+          ],
+          "rows": [
+            [
+              "1",
+              "KING",
+              "5000",
+              "NULL"
+            ],
+            [
+              "2",
+              "JONES",
+              "3500",
+              "1"
+            ],
+            [
+              "3",
+              "FORD",
+              "4000",
+              "9"
+            ],
+            [
+              "4",
+              "SMITH",
+              "800",
+              "2"
+            ],
+            [
+              "5",
+              "ADAMS",
+              "3100",
+              "4"
+            ]
+          ]
+        },
+        {
+          "type": "sql",
+          "code": "-- ㉠\nSELECT * FROM EMP E\nWHERE  SAL > 3000 AND MGR IS NOT NULL;\n-- ㉡\nSELECT * FROM EMP E\nWHERE  SAL > 3000\nAND    EXISTS (SELECT 1 FROM EMP M\n               WHERE  M.EMPNO = E.MGR);\n-- ㉢\nSELECT * FROM EMP E\nWHERE  SAL > 3000\nAND    MGR IN (SELECT EMPNO FROM EMP);"
+        }
+      ]
     },
     {
       "subject": "2과목",
@@ -1207,15 +1310,51 @@
     {
       "subject": "2과목",
       "number": 36,
-      "title": "다음 중 ROWNUM에 대한 정의로 가장 적절한 것은?",
+      "title": "5개 행이 들어 있는 테이블 T 에 대해 아래 SQL ㉠~㉣ 의 결과 행 수를 차례대로 나열한 것은? (Oracle)",
       "options": [
-        "SELECT 절에서 결과 집합의 각 행에 순차적으로 부여되는 의사컬럼(Pseudo Column)이다.",
-        "WHERE 절 조건이 모두 평가된 이후 마지막에 한 번만 부여되는 고정값이다.",
-        "인덱스 생성 시 자동으로 생성되는 물리적 컬럼이다.",
-        "사용자가 직접 정의해야 하는 일반 컬럼이다."
+        "1, 0, 2, 0",
+        "1, 1, 2, 4",
+        "1, 0, 2, 4",
+        "1, 1, 2, 0"
       ],
       "correctIndex": 0,
-      "explanation": "ROWNUM은 시스템이 제공하는 의사 컬럼으로 조회되는 행에 1부터 순차적으로 부여된다. WHERE 절 평가 과정에서 부여되므로 ROWNUM <= 5처럼 조건으로 사용할 수 있다. ② ROWNUM 은 WHERE 절을 평가하면서 행마다 부여되며, ③ 물리적 컬럼도 ④ 사용자가 정의하는 컬럼도 아닌 의사 컬럼이다."
+      "explanation": "ROWNUM 은 WHERE 조건을 통과한 행에 1부터 차례로 붙는 번호다. 조건을 통과하지 못한 행은 번호를 받지 못하고, 다음 행이 다시 1번 후보가 된다. ㉠ 은 첫 행이 1번이 되어 1행이다. ㉡ 은 첫 행이 1번 후보인데 '= 2' 를 만족하지 못해 버려지고, 다음 행도 다시 1번 후보라 끝까지 한 행도 나오지 않는다. ㉢ 은 1번, 2번까지 받아 2행이다. ㉣ 도 ㉡ 과 같은 이유로 0행이다. 정답은 ①번이다. ② 와 ④ 는 ROWNUM 이 테이블에 미리 붙어 있는 번호라고 본 것이다. 두 번째 행만 보려면 인라인 뷰에서 ROWNUM 에 별칭을 붙인 뒤 바깥에서 거른다.",
+      "references": [
+        {
+          "type": "table",
+          "caption": "T",
+          "headers": [
+            "ID",
+            "NAME"
+          ],
+          "rows": [
+            [
+              "1",
+              "A"
+            ],
+            [
+              "2",
+              "B"
+            ],
+            [
+              "3",
+              "C"
+            ],
+            [
+              "4",
+              "D"
+            ],
+            [
+              "5",
+              "E"
+            ]
+          ]
+        },
+        {
+          "type": "sql",
+          "code": "-- ㉠\nSELECT * FROM T WHERE ROWNUM = 1;\n-- ㉡\nSELECT * FROM T WHERE ROWNUM = 2;\n-- ㉢\nSELECT * FROM T WHERE ROWNUM <= 2;\n-- ㉣\nSELECT * FROM T WHERE ROWNUM > 1;"
+        }
+      ]
     },
     {
       "subject": "2과목",
@@ -1427,15 +1566,69 @@
     {
       "subject": "2과목",
       "number": 42,
-      "title": "다음 중 JOIN에 대한 설명으로 가장 적절한 것은 무엇인가?",
+      "title": "아래 두 테이블에 대한 SQL ㉠, ㉡, ㉢ 의 결과 행 수로 옳은 것은?",
       "options": [
-        "CROSS JOIN은 조인 조건을 ON절에 명시해야 한다.",
-        "INNER JOIN은 등가 조인만 가능하다.",
-        "NATURAL JOIN은 두 테이블에서 이름이 같은 컬럼을 자동으로 찾아 등가 조인을 하는 것이다.",
-        "USING 절은 두 테이블에서 컬럼명이 서로 다른 경우에도 사용할 수 있다."
+        "2, 2, 2",
+        "4, 4, 4",
+        "4, 2, 3",
+        "4, 2, 4"
       ],
       "correctIndex": 2,
-      "explanation": "NATURAL JOIN은 두 테이블에서 이름이 같은 컬럼을 자동으로 찾아 등가 조인한다. ① CROSS JOIN은 조인 조건이 없고, ② INNER JOIN은 비등가 조건도 가능하며, ④ USING 절은 컬럼명이 같은 경우에만 사용할 수 있다."
+      "explanation": "㉠ 은 급여 조건이 ON 에 있어 조인할 사원을 고르는 데만 쓰이고, 부서는 모두 남는다. 영업-김, 영업-이, 그리고 맞는 사원이 없는 개발·인사가 NULL 로 나와 4행이다. ㉡ 은 조인을 먼저 끝낸 뒤 WHERE 로 거르므로, 급여가 NULL 인 인사 행과 200 인 개발-박 행이 빠져 김·이 2행이다. ㉢ 은 사원이 없어 이름이 NULL 인 인사 행만 다시 살아나 3행이다. 개발은 박과 조인되어 이름이 NULL 이 아니므로 빠진다. 정답은 ③번이다. ① 은 ON 과 WHERE 를 같다고 본 것, ② 는 LEFT JOIN 이면 WHERE 와 상관없이 부서가 모두 남는다고 본 것, ④ 는 ㉢ 에서 개발도 남는다고 본 것이다.",
+      "references": [
+        {
+          "type": "table",
+          "caption": "부서",
+          "headers": [
+            "부서번호",
+            "부서명"
+          ],
+          "rows": [
+            [
+              "10",
+              "영업"
+            ],
+            [
+              "20",
+              "개발"
+            ],
+            [
+              "30",
+              "인사"
+            ]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "사원",
+          "headers": [
+            "이름",
+            "부서번호",
+            "급여"
+          ],
+          "rows": [
+            [
+              "김",
+              "10",
+              "300"
+            ],
+            [
+              "이",
+              "10",
+              "500"
+            ],
+            [
+              "박",
+              "20",
+              "200"
+            ]
+          ]
+        },
+        {
+          "type": "sql",
+          "code": "-- ㉠\nSELECT D.부서명, E.이름\nFROM   부서 D LEFT JOIN 사원 E\n       ON D.부서번호 = E.부서번호\n      AND E.급여 >= 300;\n-- ㉡\nSELECT D.부서명, E.이름\nFROM   부서 D LEFT JOIN 사원 E\n       ON D.부서번호 = E.부서번호\nWHERE  E.급여 >= 300;\n-- ㉢\nSELECT D.부서명, E.이름\nFROM   부서 D LEFT JOIN 사원 E\n       ON D.부서번호 = E.부서번호\nWHERE  E.급여 >= 300\n   OR  E.이름 IS NULL;"
+        }
+      ]
     },
     {
       "subject": "2과목",

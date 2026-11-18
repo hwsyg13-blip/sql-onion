@@ -183,12 +183,9 @@ export const MascotGuide = ({size = 80, variant = "smile", children, side = "rig
 );
 
 // Onion mark — for smaller logo accent
+// 예전 동그라미 양파 아이콘은 쓰지 않는다(사용자 11-18) — 메인 로고와 같은 양파 캐릭터로 통일
 export const OnionMark = ({size = 24}: any) => (
-  <svg width={size} height={size} viewBox="0 0 40 40" fill="none" style={{flexShrink: 0}}>
-    <path d="M20 35c-7.5 0-13-5.5-13-12.5C7 15.5 12.5 10 20 10s13 5.5 13 12.5C33 29.5 27.5 35 20 35Z" fill="#EBF5EC" stroke="#2E7D32" strokeWidth="2"/>
-    <path d="M11 22c2 5 5 8 9 8M29 22c-2 5-5 8-9 8" stroke="#4CAF50" strokeWidth="1.25" strokeLinecap="round" fill="none"/>
-    <path d="M20 10c0-3 1-5 2-5M20 10c0-2-2-4-4-4" stroke="#2E7D32" strokeWidth="1.75" strokeLinecap="round" fill="none"/>
-  </svg>
+  <img src="/assets/onion-mascot.svg" alt="" height={size} style={{flexShrink: 0, display: "block"}}/>
 );
 
 export const Progress = ({value, total, color = "var(--point-600)"}: any) => (

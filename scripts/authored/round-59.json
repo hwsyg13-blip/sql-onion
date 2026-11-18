@@ -740,15 +740,51 @@
     {
       "subject": "2과목",
       "number": 28,
-      "title": "2025년 10월 20일 하루의 데이터만 조회하려 한다. 다음 방법 중 옳지 않은 것은? (HIRE_DT는 DATE 타입이며 시분초를 포함한다.)",
+      "title": "아래 사원 테이블에서 2025년 10월 20일 하루에 입사한 사원(B, C)만 정확히 조회하는 WHERE 조건을 모두 고른 것은? (입사일시는 시분초를 포함하는 DATE)",
       "options": [
-        "HIRE_DT >= DATE '2025-10-20' AND HIRE_DT < DATE '2025-10-21'",
-        "TRUNC(HIRE_DT) = DATE '2025-10-20'",
-        "HIRE_DT BETWEEN DATE '2025-10-20' AND DATE '2025-10-21'",
-        "HIRE_DT >= DATE '2025-10-20' AND HIRE_DT <= DATE '2025-10-20' + 1 - 1/86400"
+        "㉠",
+        "㉡, ㉣",
+        "㉠, ㉡",
+        "㉠, ㉡, ㉢"
       ],
       "correctIndex": 2,
-      "explanation": "BETWEEN 은 양 끝값을 포함하므로 HIRE_DT 가 21일 00:00:00 정각인 행까지 결과에 들어온다. 그래서 20일 하루만 조회한다는 목적과 맞지 않는 ③ 이 옳지 않다. ① 은 20일 0시 이상 21일 0시 미만, ② 는 시분초를 잘라 20일만, ④ 는 20일 0시부터 23:59:59 까지라 모두 20일 하루만 조회한다."
+      "explanation": "DATE '2025-10-20' 은 그날 00:00:00 을 뜻한다. ㉠ 은 20일 0시 이상, 21일 0시 미만이라 B·C 만 고른다. ㉡ 은 시각을 잘라 날짜만 비교하므로 역시 B·C 다. ㉢ BETWEEN 은 양 끝을 포함해 21일 0시 정각인 D 까지 들어가고, ㉣ 은 0시 정각인 B 만 고른다. 정답은 ③번이다. 날짜 범위는 ㉠ 처럼 '다음 날 0시 미만' 으로 거는 것이 안전하다. ㉡ 은 결과는 맞지만 칼럼을 가공해 인덱스를 쓰지 못할 수 있다.",
+      "references": [
+        {
+          "type": "table",
+          "caption": "사원",
+          "headers": [
+            "이름",
+            "입사일시"
+          ],
+          "rows": [
+            [
+              "A",
+              "2025-10-19 23:59:59"
+            ],
+            [
+              "B",
+              "2025-10-20 00:00:00"
+            ],
+            [
+              "C",
+              "2025-10-20 18:30:00"
+            ],
+            [
+              "D",
+              "2025-10-21 00:00:00"
+            ],
+            [
+              "E",
+              "2025-10-21 09:00:00"
+            ]
+          ]
+        },
+        {
+          "type": "sql",
+          "code": "-- ㉠\nWHERE 입사일시 >= DATE '2025-10-20'\n  AND 입사일시 <  DATE '2025-10-21'\n-- ㉡\nWHERE TRUNC(입사일시) = DATE '2025-10-20'\n-- ㉢\nWHERE 입사일시 BETWEEN DATE '2025-10-20'\n                  AND DATE '2025-10-21'\n-- ㉣\nWHERE 입사일시 = DATE '2025-10-20'"
+        }
+      ]
     },
     {
       "subject": "2과목",
@@ -863,15 +899,47 @@
     {
       "subject": "2과목",
       "number": 31,
-      "title": "AND / OR 논리 연산자에 대한 설명으로 옳은 것은?",
+      "title": "아래 T 테이블에 대한 SQL ㉠, ㉡, ㉢ 의 결과 행 수로 옳은 것은?",
       "options": [
-        "AND가 OR보다 먼저 평가된다.",
-        "OR가 AND보다 먼저 평가된다.",
-        "두 연산자의 우선순위는 동일하며 작성 순서대로 평가된다.",
-        "두 연산자는 괄호 없이는 동시에 사용할 수 없다."
+        "1, 0, 4",
+        "2, 1, 4",
+        "1, 0, 3",
+        "2, 1, 3"
       ],
       "correctIndex": 0,
-      "explanation": "논리 연산자의 우선순위는 NOT > AND > OR 이라 AND 가 OR 보다 먼저 평가된다(①). 따라서 ② 와 ③ 은 틀리고, 괄호 없이 함께 쓸 수 있지만(④ 틀림) 의도한 순서가 다르면 괄호로 묶어야 한다. 예: A OR B AND C 는 A OR (B AND C) 로 처리된다."
+      "explanation": "NULL 과의 비교는 TRUE 도 FALSE 도 아닌 UNKNOWN 이고, WHERE 는 TRUE 인 행만 남긴다. ㉠ 에서 3번 행의 NULL <> 1 은 UNKNOWN 이라 빠지고 2번만 남아 1행이다. ㉡ 의 괄호 안은 1·2·4번에서 TRUE 라 NOT 이 FALSE 가 되고, 3번은 UNKNOWN OR UNKNOWN 이라 NOT 을 붙여도 UNKNOWN 이다. 그래서 0행이다. ㉢ 은 1·4번이 C = 1, 3번이 C IS NULL, 2번이 C <> 1 로 모두 TRUE 라 4행이다. 정답은 ①번이다. ② 는 NULL 비교를 TRUE 로 본 것, ③ 은 IS NULL 이 NULL 행을 잡는다는 것을 놓친 것, ④ 는 두 가지를 모두 잘못 본 것이다.",
+      "references": [
+        {
+          "type": "table",
+          "caption": "T",
+          "headers": [
+            "ID",
+            "C"
+          ],
+          "rows": [
+            [
+              "1",
+              "1"
+            ],
+            [
+              "2",
+              "2"
+            ],
+            [
+              "3",
+              "NULL"
+            ],
+            [
+              "4",
+              "1"
+            ]
+          ]
+        },
+        {
+          "type": "sql",
+          "code": "-- ㉠\nSELECT * FROM T\nWHERE  C <> 1;\n-- ㉡\nSELECT * FROM T\nWHERE  NOT (C = 1 OR C = 2);\n-- ㉢\nSELECT * FROM T\nWHERE  C = 1 OR C IS NULL\n   OR  C <> 1;"
+        }
+      ]
     },
     {
       "subject": "2과목",
@@ -1196,32 +1264,100 @@
     {
       "subject": "2과목",
       "number": 40,
-      "title": "NATURAL JOIN과 USING 절에 대한 설명 중 옳은 것은?",
+      "title": "아래 EMP, DEPT 테이블에 대해 ㉠ NATURAL JOIN 과 ㉡ USING (부서번호) 조인의 결과 행 수로 옳은 것은?",
       "options": [
-        "NATURAL JOIN은 동일한 컬럼명을 자동으로 조인 조건으로 사용한다.",
-        "USING 절의 조인 컬럼에는 테이블 별칭을 붙여 참조할 수 있다.",
-        "NATURAL JOIN과 USING은 동시에 함께 사용할 수 있다.",
-        "NATURAL JOIN 결과에는 두 테이블의 동일 이름 컬럼이 각각 두 번씩 표시된다."
+        "㉠ 2, ㉡ 4",
+        "㉠ 4, ㉡ 4",
+        "㉠ 2, ㉡ 2",
+        "㉠ 3, ㉡ 4"
       ],
       "correctIndex": 0,
-      "explanation": "① NATURAL JOIN 은 이름이 같은 컬럼을 자동으로 조인 조건으로 쓰므로 옳다. ② USING 절에 쓴 조인 컬럼에는 테이블 별칭을 붙일 수 없고, ③ NATURAL JOIN 과 USING 은 함께 쓸 수 없으며, ④ NATURAL JOIN 결과에서 이름이 같은 컬럼은 USING 처럼 한 번만 나온다."
+      "explanation": "NATURAL JOIN 은 이름이 같은 칼럼을 모두 조인 조건으로 쓴다. 두 테이블에는 부서번호와 지역이 함께 있으므로 둘 다 같아야 한다. E1(10, 서울) 과 E4(30, 서울) 만 DEPT 와 맞고, E2 는 10번 부서의 지역이 서울이라, E3 는 20번 부서의 지역이 부산이라 빠진다. 그래서 ㉠ 은 2행이다. USING (부서번호) 는 부서번호만 비교하므로 네 사원 모두 짝이 있어 ㉡ 은 4행이다. 정답은 ①번이다. ② 는 NATURAL JOIN 도 부서번호만 본다고 생각한 것이다. USING 절의 칼럼에는 테이블 별칭을 붙일 수 없고, NATURAL JOIN 과 USING 은 함께 쓸 수 없다.",
+      "references": [
+        {
+          "type": "table",
+          "caption": "EMP",
+          "headers": [
+            "사번",
+            "이름",
+            "부서번호",
+            "지역"
+          ],
+          "rows": [
+            [
+              "E1",
+              "김",
+              "10",
+              "서울"
+            ],
+            [
+              "E2",
+              "이",
+              "10",
+              "부산"
+            ],
+            [
+              "E3",
+              "박",
+              "20",
+              "서울"
+            ],
+            [
+              "E4",
+              "최",
+              "30",
+              "서울"
+            ]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "DEPT",
+          "headers": [
+            "부서번호",
+            "부서명",
+            "지역"
+          ],
+          "rows": [
+            [
+              "10",
+              "영업",
+              "서울"
+            ],
+            [
+              "20",
+              "개발",
+              "부산"
+            ],
+            [
+              "30",
+              "인사",
+              "서울"
+            ]
+          ]
+        },
+        {
+          "type": "sql",
+          "code": "-- ㉠\nSELECT * FROM EMP NATURAL JOIN DEPT;\n\n-- ㉡\nSELECT * FROM EMP JOIN DEPT USING (부서번호);"
+        }
+      ]
     },
     {
       "subject": "2과목",
       "number": 41,
-      "title": "TCL 관련 설명 중 옳은 것으로만 묶은 것은?",
+      "title": "빈 테이블 T(C) 에 아래 SQL 을 순서대로 실행했다. 오류가 나는 문장은 건너뛰고 계속 실행한다고 할 때, 마지막 SELECT 의 결과로 옳은 것은?",
       "options": [
-        "가",
-        "다",
-        "나, 다",
-        "가, 나, 다"
+        "1",
+        "1, 2, 3",
+        "1, 2, 4",
+        "1, 2"
       ],
       "correctIndex": 3,
-      "explanation": "가: Oracle 에서 DDL 은 실행 전후로 묵시적 COMMIT 이 일어난다. 나: 트랜잭션은 여러 SQL 문장을 하나의 논리 단위로 묶을 수 있다. 다: SAVEPOINT 를 지정하면 그 지점까지만 부분 롤백할 수 있다. 세 설명이 모두 옳으므로 ④ 가, 나, 다 이다. ①②③ 은 옳은 설명을 일부 빠뜨렸다.",
+      "explanation": "COMMIT 은 그때까지의 변경을 확정하고, 그 트랜잭션에서 만든 저장점도 모두 지운다. 그래서 COMMIT 뒤의 ROLLBACK TO A 는 저장점 A 가 없어 오류가 나고 아무것도 되돌리지 않는다. 이후 마지막 ROLLBACK 이 COMMIT 이후에 넣은 3 과 4 를 모두 취소하므로 1, 2 만 남는다. 정답은 ④번이다. ① 은 COMMIT 된 2 도 저장점으로 되돌릴 수 있다고 본 것, ②·③ 은 마지막 ROLLBACK 이 COMMIT 이후의 변경 중 일부만 취소한다고 본 것이다.",
       "references": [
         {
-          "type": "text",
-          "content": "가. DDL은 수행 전후 묵시적 COMMIT이 발생한다.\n나. 트랜잭션의 논리 단위는 여러 SQL 문장으로 구성될 수 있다.\n다. SAVEPOINT를 지정하면 해당 지점까지 부분 롤백이 가능하다."
+          "type": "sql",
+          "code": "INSERT INTO T VALUES (1);\nSAVEPOINT A;\nINSERT INTO T VALUES (2);\nCOMMIT;\nINSERT INTO T VALUES (3);\nROLLBACK TO A;\nINSERT INTO T VALUES (4);\nROLLBACK;\nSELECT C FROM T ORDER BY C;"
         }
       ]
     },

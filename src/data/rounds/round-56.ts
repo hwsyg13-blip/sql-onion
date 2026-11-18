@@ -243,16 +243,58 @@ export const ROUND_56: QuizQuestion[] = [
     "round": 56,
     "subject": "2과목",
     "number": 11,
-    "title": "다음 중 SQL 연산자의 우선순위가 가장 높은 것은?",
+    "title": "아래 사원 테이블에 대한 SQL ㉠, ㉡, ㉢ 의 결과 행 수로 옳은 것은?",
     "options": [
-      "비교 연산자",
-      "괄호",
-      "AND",
-      "OR"
+      "2, 2, 2",
+      "3, 2, 2",
+      "3, 2, 4",
+      "2, 3, 2"
     ],
     "correctIndex": 1,
-    "explanation": "괄호는 모든 연산자보다 먼저 평가되므로 우선순위가 가장 높다. 이어서 ① 비교 연산자, NOT, ③ AND, ④ OR 순으로 적용되며 AND 가 OR 보다 먼저 묶인다.",
-    "_source": "authored"
+    "explanation": "논리 연산자의 우선순위는 NOT, AND, OR 순서다. ㉠ 은 AND 가 먼저 묶여 '영업이거나, (개발이면서 400 이상)' 이 된다. 영업 김·이와 개발 박이 해당해 3행이다. ㉡ 은 괄호로 OR 를 먼저 묶어 '영업 또는 개발 중 400 이상' 이라 이·박 2행이다. ㉢ 은 NOT 이 바로 뒤의 조건에만 걸려 '영업이 아니면서 400 이상' 이 된다. 박·정 2행이다. 정답은 ②번이다. ① 은 ㉠ 을 왼쪽부터 차례로 계산한 것, ③ 은 ㉢ 의 NOT 이 'AND 전체' 에 걸린다고 본 것, ④ 는 ㉠ 과 ㉡ 을 바꿔 본 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "caption": "사원",
+        "headers": [
+          "이름",
+          "부서",
+          "급여"
+        ],
+        "rows": [
+          [
+            "김",
+            "영업",
+            "300"
+          ],
+          [
+            "이",
+            "영업",
+            "500"
+          ],
+          [
+            "박",
+            "개발",
+            "400"
+          ],
+          [
+            "최",
+            "개발",
+            "200"
+          ],
+          [
+            "정",
+            "인사",
+            "600"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "-- ㉠\nSELECT * FROM 사원\nWHERE  부서 = '영업'\n   OR  부서 = '개발' AND 급여 >= 400;\n-- ㉡\nSELECT * FROM 사원\nWHERE  (부서 = '영업'\n        OR 부서 = '개발')\n  AND  급여 >= 400;\n-- ㉢\nSELECT * FROM 사원\nWHERE  NOT 부서 = '영업'\n  AND  급여 >= 400;"
+      }
+    ]
   },
   {
     "id": 10211,
@@ -563,16 +605,22 @@ export const ROUND_56: QuizQuestion[] = [
     "round": 56,
     "subject": "2과목",
     "number": 20,
-    "title": "TRUNCATE 에 대한 설명 중 옳은 것은?",
+    "title": "COMMIT 된 3행씩을 가진 T1, T2 테이블에 아래 SQL 을 순서대로 실행했다. 마지막 SELECT 의 결과로 옳은 것은? (Oracle 기준)",
     "options": [
-      "데이터 구조와 데이터를 모두 삭제한다.",
-      "TRUNCATE 이후 ROLLBACK 으로 데이터를 복구할 수 있다.",
-      "특정 행만 삭제하는 것은 불가능하다.",
-      "모든 행을 제거할 경우 DELETE 보다 성능이 떨어진다."
+      "3, 0",
+      "4, 3",
+      "4, 0",
+      "0, 0"
     ],
     "correctIndex": 2,
-    "explanation": "TRUNCATE 는 WHERE 절을 쓸 수 없어 테이블의 모든 행을 지우며 특정 행만 삭제할 수 없다(③). 테이블 구조는 남기고(① 은 DROP 설명), DDL 이라 자동 커밋되어 ROLLBACK 으로 복구할 수 없으며(②), 전체 삭제는 UNDO 를 거의 만들지 않아 DELETE 보다 빠르다(④).",
-    "_source": "authored"
+    "explanation": "Oracle 에서 TRUNCATE 는 DDL 이라 실행 전후로 자동 COMMIT 된다. 그래서 TRUNCATE 직전에 한 T1 의 INSERT 도 함께 확정되고, T2 는 0행이 되며, 바로 다음 ROLLBACK 은 되돌릴 것이 없다. 이어서 DELETE 로 T1 을 비웠지만 DML 이라 ROLLBACK 으로 되살아나 4행이 된다. 결과는 4, 0 이다. 정답은 ③번이다. ① 은 TRUNCATE 의 자동 COMMIT 으로 INSERT 가 확정된 것을 놓친 것, ② 는 TRUNCATE 도 ROLLBACK 된다고 본 것, ④ 는 DELETE 도 되돌릴 수 없다고 본 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "INSERT INTO T1 VALUES (4);\nTRUNCATE TABLE T2;\nROLLBACK;\nDELETE FROM T1;\nROLLBACK;\nSELECT (SELECT COUNT(*) FROM T1) AS A,\n       (SELECT COUNT(*) FROM T2) AS B\nFROM   DUAL;"
+      }
+    ]
   },
   {
     "id": 10220,
@@ -657,16 +705,58 @@ export const ROUND_56: QuizQuestion[] = [
     "round": 56,
     "subject": "2과목",
     "number": 23,
-    "title": "셀프 조인을 수행할 수 있는 경우로 가장 적절한 것은?",
+    "title": "아래 사원 테이블에 대한 셀프 조인 SQL 결과에서 관리자가 NULL 로 나오는 사원을 모두 고른 것은?",
     "options": [
-      "두 테이블 내에 컬럼이 연관관계가 있는 경우",
-      "두 테이블 내에 연관관계는 없지만 조인이 필요할 때",
-      "한 테이블 내에 컬럼이 연관관계가 있는 경우",
-      "한 테이블 내에 연관관계는 없지만 조인이 필요할 때"
+      "김",
+      "정",
+      "김, 정",
+      "김, 이"
     ],
     "correctIndex": 2,
-    "explanation": "셀프 조인은 한 테이블 안의 컬럼끼리 연관관계가 있을 때(예: 사원 테이블의 관리자번호가 같은 테이블의 사원번호를 참조) 같은 테이블을 별칭을 달리해 두 번 써서 조인한다(③). 두 테이블 사이의 조인(①②)은 셀프 조인이 아니고, 연관관계가 없으면 셀프 조인할 이유가 없다(④).",
-    "_source": "authored"
+    "explanation": "같은 사원 테이블을 E(사원)와 M(관리자) 두 별칭으로 놓고, E 의 관리자사번이 M 의 사번과 같은 행을 잇는다. 이 → 김, 박 → 김, 최 → 이 로 짝이 맞는다. 김은 관리자사번이 NULL 이라 어떤 사번과도 같지 않고, 정은 관리자사번 9 인 사원이 테이블에 없다. LEFT OUTER JOIN 이라 두 사람 모두 결과에 남되 관리자 칸이 NULL 이 된다. 정답은 ③번이다. ① 과 ② 는 둘 중 한 사람만 본 것이고, ④ 는 '부하 직원이 있는 사람(관리자 역할인 사람)' 으로 방향을 거꾸로 읽은 것이다. INNER JOIN 이었다면 김과 정은 결과에서 빠진다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "caption": "사원",
+        "headers": [
+          "사번",
+          "이름",
+          "관리자사번"
+        ],
+        "rows": [
+          [
+            "1",
+            "김",
+            "NULL"
+          ],
+          [
+            "2",
+            "이",
+            "1"
+          ],
+          [
+            "3",
+            "박",
+            "1"
+          ],
+          [
+            "4",
+            "최",
+            "2"
+          ],
+          [
+            "5",
+            "정",
+            "9"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT E.이름, M.이름 AS 관리자\nFROM   사원 E\n       LEFT OUTER JOIN 사원 M\n         ON E.관리자사번 = M.사번\nORDER BY E.사번;"
+      }
+    ]
   },
   {
     "id": 10223,
@@ -1792,16 +1882,58 @@ export const ROUND_56: QuizQuestion[] = [
     "round": 56,
     "subject": "2과목",
     "number": 49,
-    "title": "지정한 컬럼의 모든 부분집합 조합으로 집계를 산출하는 절은?",
+    "title": "아래 판매 테이블에 대해 SQL 의 GROUP BY 빈칸에 ㉠, ㉡, ㉢ 을 각각 넣었을 때 결과 행 수로 옳은 것은?",
     "options": [
-      "ROLLUP()",
-      "GROUP BY",
-      "GROUPING SETS()",
-      "CUBE()"
+      "㉠ 8, ㉡ 10, ㉢ 5",
+      "㉠ 10, ㉡ 7, ㉢ 5",
+      "㉠ 10, ㉡ 8, ㉢ 6",
+      "㉠ 10, ㉡ 8, ㉢ 5"
     ],
     "correctIndex": 3,
-    "explanation": "CUBE 는 지정한 컬럼들의 모든 부분집합 조합으로 집계한다. CUBE(A, B) 는 (A, B), (A), (B), () 를 만든다(④). ROLLUP(①)은 계층 순서대로 (A, B), (A), () 만, GROUPING SETS(③)는 지정한 조합만 만들고, GROUP BY(②)는 지정한 컬럼 조합 하나로만 묶는다.",
-    "_source": "authored"
+    "explanation": "먼저 (지역, 분기) 조합을 센다. 서울 1Q 는 두 행이지만 한 그룹이라 서울-1Q, 서울-2Q, 부산-1Q, 대구-2Q 의 4개다. 지역은 3개, 분기는 2개다. ㉠ CUBE(지역, 분기) 는 (지역, 분기)·(지역)·(분기)·() 를 모두 만들어 4 + 3 + 2 + 1 = 10행이다. ㉡ ROLLUP(지역, 분기) 는 (지역, 분기)·(지역)·() 만 만들어 4 + 3 + 1 = 8행이다. ㉢ GROUPING SETS(지역, 분기) 는 적은 집합만, 곧 (지역)·(분기) 를 만들어 3 + 2 = 5행이고 전체 합계는 없다. 정답은 ④번이다. ① 은 CUBE 와 ROLLUP 을 바꿔 본 값, ② 는 ROLLUP 의 소계를 분기 기준(2개)으로 센 값(ROLLUP(분기, 지역) 이면 7), ③ 은 GROUPING SETS 에도 전체 합계 행이 붙는다고 본 값이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "caption": "판매",
+        "headers": [
+          "지역",
+          "분기",
+          "금액"
+        ],
+        "rows": [
+          [
+            "서울",
+            "1Q",
+            "10"
+          ],
+          [
+            "서울",
+            "1Q",
+            "15"
+          ],
+          [
+            "서울",
+            "2Q",
+            "20"
+          ],
+          [
+            "부산",
+            "1Q",
+            "30"
+          ],
+          [
+            "대구",
+            "2Q",
+            "25"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT 지역, 분기, SUM(금액)\nFROM   판매\nGROUP BY (          );\n\n-- ㉠ CUBE(지역, 분기)\n-- ㉡ ROLLUP(지역, 분기)\n-- ㉢ GROUPING SETS(지역, 분기)"
+      }
+    ]
   },
   {
     "id": 10249,

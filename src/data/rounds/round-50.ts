@@ -1350,16 +1350,49 @@ export const ROUND_50: QuizQuestion[] = [
     "round": 50,
     "subject": "2과목",
     "number": 40,
-    "title": "두 번째 글자가 'S' 이고 전체 길이가 4 글자 이상인 문자열을 찾는 LIKE 패턴으로 옳지 않은 것은?",
+    "title": "아래 T 테이블에 대한 SQL 의 결과(A, B, C)로 옳은 것은?",
     "options": [
-      "'%S__'",
-      "'_S%__'",
-      "'_S_%_'",
-      "'_S__%'"
+      "2, 3, 6",
+      "2, 3, 3",
+      "4, 3, 6",
+      "2, 6, 6"
     ],
     "correctIndex": 0,
-    "explanation": "'_' 는 정확히 한 글자, '%' 는 0 글자 이상이다. ② '_S%__', ③ '_S_%_', ④ '_S__%' 는 모두 첫 글자 하나 뒤에 S 가 오므로 두 번째 글자가 S 이고, S 뒤에 '_' 가 두 개 있어 전체 4 글자 이상이 보장된다. ① '%S__' 는 앞의 % 때문에 S 가 어느 위치에 와도 매칭되므로(예: 'ABCSDE') 두 번째 글자가 S 라는 조건을 보장하지 못한다.",
-    "_source": "authored"
+    "explanation": "A 의 '_S__%' 는 두 번째 글자가 S 이고 전체가 4글자 이상인 값이다. ASQL, XS_1 만 해당해 2 다. AS 와 ES% 는 두 번째 글자가 S 지만 4글자가 안 된다. B 는 ESCAPE 로 '\\_' 를 진짜 밑줄 문자로 바꿨으므로 밑줄이 들어 있는 S_AB, XS_1, B_S_ 의 3 이다. C 의 '%_%' 에는 ESCAPE 가 없어 _ 가 '아무 한 글자' 라는 뜻이라, 한 글자 이상인 모든 행이 해당해 6 이다. 정답은 ①번이다. ② 는 ESCAPE 없이도 _ 가 밑줄 문자라고 본 것, ③ 은 A 에서 길이 조건을 놓친 것, ④ 는 B 의 ESCAPE 를 무시한 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "caption": "T",
+        "headers": [
+          "코드"
+        ],
+        "rows": [
+          [
+            "ASQL"
+          ],
+          [
+            "S_AB"
+          ],
+          [
+            "XS_1"
+          ],
+          [
+            "AS"
+          ],
+          [
+            "B_S_"
+          ],
+          [
+            "ES%"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT\n  SUM(CASE WHEN 코드 LIKE '_S__%'\n           THEN 1 ELSE 0 END) AS A,\n  SUM(CASE WHEN 코드 LIKE '%\\_%'\n                ESCAPE '\\'\n           THEN 1 ELSE 0 END) AS B,\n  SUM(CASE WHEN 코드 LIKE '%_%'\n           THEN 1 ELSE 0 END) AS C\nFROM T;"
+      }
+    ]
   },
   {
     "id": 10540,
@@ -1692,16 +1725,22 @@ export const ROUND_50: QuizQuestion[] = [
     "round": 50,
     "subject": "2과목",
     "number": 47,
-    "title": "ROUND(3.45, 1) 의 결과는?",
+    "title": "아래 SQL 의 결과(A, B, C, D)로 옳은 것은? (Oracle 기준)",
     "options": [
-      "3.4",
-      "3.45",
-      "3.5",
-      "4"
+      "-2.4, -2.4, -2, -3",
+      "-2.5, -2.5, -3, -2",
+      "-2.5, -2.4, -2, -3",
+      "-2.5, -2.4, -3, -2"
     ],
     "correctIndex": 2,
-    "explanation": "ROUND(3.45, 1) 은 소수 첫째 자리까지 남기도록 둘째 자리(5)에서 반올림하므로 3.5 다(③). TRUNC(3.45, 1) 이라면 버림으로 3.4(①), ROUND(3.45) 라면 정수로 반올림해 3 이 된다. ② 3.45 는 반올림하지 않은 원래 값, ④ 4 는 3.5 를 다시 정수로 반올림한 값이다.",
-    "_source": "authored"
+    "explanation": "ROUND(-2.45, 1) 은 소수 둘째 자리 5 에서 반올림한다. 음수는 0 에서 먼 쪽으로 올라가 -2.5 가 된다. TRUNC(-2.45, 1) 은 소수 첫째 자리 아래를 버려 -2.4 다. CEIL 은 그 값 이상인 가장 작은 정수라 -2, FLOOR 는 그 값 이하인 가장 큰 정수라 -3 이다. 정답은 ③번이다. ① 은 음수의 반올림을 버림처럼 본 것, ② 는 TRUNC 를 ROUND 처럼 보고 CEIL·FLOOR 를 바꾼 것, ④ 는 음수에서 CEIL 과 FLOOR 의 방향을 거꾸로 본 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT ROUND(-2.45, 1) AS A,\n       TRUNC(-2.45, 1) AS B,\n       CEIL(-2.45)     AS C,\n       FLOOR(-2.45)    AS D\nFROM   DUAL;"
+      }
+    ]
   },
   {
     "id": 10547,

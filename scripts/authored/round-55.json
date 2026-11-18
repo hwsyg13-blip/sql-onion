@@ -1415,28 +1415,100 @@
     {
       "subject": "2과목",
       "number": 38,
-      "title": "ROW LIMITING 구문에 대한 설명으로 적절하지 않은 것은?",
+      "title": "아래 점수 테이블에 대한 SQL ㉠, ㉡ 의 결과로 옳은 것은? (Oracle 12c 이상)",
       "options": [
-        "OFFSET offset : 건너뛸 행의 개수를 지정한다.",
-        "FETCH : 반환할 행의 개수나 백분율을 지정한다.",
-        "ONLY : 지정된 행의 개수나 백분율만큼만 반환한다.",
-        "WITH TIES : 첫 번째 행에 대한 동순위를 포함해서 반환한다."
+        "㉠ A, B / ㉡ B, C",
+        "㉠ A, B, C / ㉡ C, D",
+        "㉠ A, B, C, D / ㉡ B, C",
+        "㉠ A, B, C / ㉡ B, C"
       ],
       "correctIndex": 3,
-      "explanation": "OFFSET 은 건너뛸 행 수(①), FETCH 는 반환할 행 수나 백분율(②), ONLY 는 지정한 만큼만 반환(③)한다. WITH TIES 는 FETCH 로 잘린 마지막 행과 정렬 값이 같은(동순위) 행들을 함께 반환하는 옵션이므로, 첫 번째 행의 동순위라고 한 ④ 가 옳지 않다."
+      "explanation": "㉠ 의 WITH TIES 는 2번째 행과 정렬 값이 같은 행까지 함께 가져온다. 2번째 행의 점수 80 과 같은 C 도 포함되어 A, B, C 다. ㉡ 은 앞의 1행(A)을 건너뛰고 다음 2행을 가져오므로 80점인 B, C 다. 정답은 ④번이다. ① 은 WITH TIES 를 ONLY 처럼 본 것, ② 는 OFFSET 1 을 두 행을 건너뛰는 것으로 본 것, ③ 은 WITH TIES 가 그다음 점수까지 가져온다고 본 것이다.",
+      "references": [
+        {
+          "type": "table",
+          "caption": "점수",
+          "headers": [
+            "이름",
+            "점수"
+          ],
+          "rows": [
+            [
+              "A",
+              "90"
+            ],
+            [
+              "B",
+              "80"
+            ],
+            [
+              "C",
+              "80"
+            ],
+            [
+              "D",
+              "70"
+            ],
+            [
+              "E",
+              "60"
+            ]
+          ]
+        },
+        {
+          "type": "sql",
+          "code": "-- ㉠\nSELECT 이름 FROM 점수\nORDER  BY 점수 DESC\nFETCH FIRST 2 ROWS WITH TIES;\n\n-- ㉡\nSELECT 이름 FROM 점수\nORDER  BY 점수 DESC\nOFFSET 1 ROWS FETCH NEXT 2 ROWS ONLY;"
+        }
+      ]
     },
     {
       "subject": "2과목",
       "number": 39,
-      "title": "집계 함수에 대한 설명 중 적절하지 않은 것은?",
+      "title": "아래 사원 테이블에 대한 SQL 의 결과(A, B, C, D)로 옳은 것은?",
       "options": [
-        "SUM, AVG, MIN, MAX 는 NULL 값을 제외하고 집계한다.",
-        "COUNT(expr) 은 NULL 값을 포함하여 집계한다.",
-        "COUNT(*) 는 NULL 을 포함한 전체 행의 수를 반환한다.",
-        "GROUP BY 없이 단일 집계 함수를 사용하면 전체 테이블에 대한 집계가 된다."
+        "120, 120, 120, 5",
+        "200, 120, 120, 3",
+        "200, 200, 120, 3",
+        "200, 120, 200, 3"
       ],
       "correctIndex": 1,
-      "explanation": "SUM·AVG·MIN·MAX 는 NULL 을 제외하고 집계하며(①), COUNT(*) 는 NULL 여부와 관계없이 전체 행 수를 세고(③), GROUP BY 없이 집계 함수만 쓰면 테이블 전체가 한 그룹이 된다(④). COUNT(expr) 은 expr 이 NULL 인 행을 세지 않으므로 ② 가 옳지 않다."
+      "explanation": "집계 함수는 NULL 을 빼고 계산한다. AVG(보너스) 는 값이 있는 3명의 평균이라 600 / 3 = 200 이다. B 는 NULL 을 0 으로 바꾼 뒤 5명 평균이라 600 / 5 = 120 이다. C 는 SUM 이 NULL 을 빼고 600, COUNT(*) 는 5 라서 120 이다. D 의 COUNT(보너스) 는 NULL 을 빼고 3 이다. 정답은 ②번이다. ① 은 AVG 가 NULL 을 0 으로 계산한다고 본 것, ③ 은 NVL 의 효과를 놓친 것, ④ 는 COUNT(*) 도 NULL 행을 뺀다고 본 것이다.",
+      "references": [
+        {
+          "type": "table",
+          "caption": "사원",
+          "headers": [
+            "이름",
+            "보너스"
+          ],
+          "rows": [
+            [
+              "가",
+              "100"
+            ],
+            [
+              "나",
+              "NULL"
+            ],
+            [
+              "다",
+              "200"
+            ],
+            [
+              "라",
+              "NULL"
+            ],
+            [
+              "마",
+              "300"
+            ]
+          ]
+        },
+        {
+          "type": "sql",
+          "code": "SELECT AVG(보너스)             AS A,\n       AVG(NVL(보너스, 0))     AS B,\n       SUM(보너스) / COUNT(*)  AS C,\n       COUNT(보너스)           AS D\nFROM   사원;"
+        }
+      ]
     },
     {
       "subject": "2과목",
