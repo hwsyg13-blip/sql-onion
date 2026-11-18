@@ -283,3 +283,46 @@
 | 45-39 | 상관 서브쿼리 + AVG | 서브쿼리 설명 고르기 → 부서별 평균보다 급여가 큰 사원 | B, E | PostgreSQL: 비상관이면 B·C·E, >= 면 B·C·E·F |
 
 부수 수정: 회차 분석 페이지의 'SQL 결과 계산 비율' 문장이 3페이지에 같은 숫자로 반복돼 문체 검사 경고 → 회차마다 표현을 바꿈(build-static-pages).
+
+## 순환 2바퀴 — 46~62회 (11-18, 사용자 지시 "문제 보강")
+
+회차당 2문항, 이름·정의 고르기 문항을 표·SQL 을 직접 계산하는 문항으로 바꿈. 정답 번호 자리는 원래대로 유지.
+
+| 문항 | 개념 | 정답 | 검증 |
+|---|---|---|---|
+| 46-33 | WITH GRANT OPTION 연쇄 회수 | D | PostgreSQL(REVOKE … CASCADE): D 만 SELECT 가능 |
+| 46-37 | SUBSTR·INSTR(4인자)·REPLACE(2인자) | EXAM, 10, 12 | PostgreSQL + 직접 계산(INSTR 4인자는 Oracle 전용) |
+| 47-13 | SAVEPOINT 되돌림 범위 | 1, 4 | PostgreSQL 동일 |
+| 47-33 | RATIO_TO_REPORT·PERCENT_RANK·CUME_DIST | 0.2, 0.25, 0.8 | PostgreSQL(비율은 x/SUM OVER) |
+| 48-31 | COUNT(*)·COUNT(칼럼)·DISTINCT·NVL | 5, 3, 2, 3 | PostgreSQL 동일 |
+| 48-49 | LAG 기본값·LEAD | 100, 0, 120 | PostgreSQL 동일 |
+| 49-13 | 커밋 전 변경의 가시성(두 세션) | 100, 200, 210 | READ COMMITTED 기준 |
+| 49-46 | 뷰 WITH CHECK OPTION | ㉡, ㉢ | PostgreSQL: ㉡·㉢ 오류, ㉣ 0건 |
+| 50-40 | LIKE 의 _ 와 ESCAPE | 2, 3, 6 | PostgreSQL 동일 |
+| 50-47 | 음수 ROUND·TRUNC·CEIL·FLOOR | -2.5, -2.4, -2, -3 | PostgreSQL numeric 동일 |
+| 51-43 | ORDER BY 다중 키 + DESC 의 NULL 위치 | 2, 4, 1, 3, 5 | PostgreSQL 동일(DESC 기본 NULLS FIRST) |
+| 51-45 | ON DELETE SET NULL·CASCADE | 2, 1 | PostgreSQL 동일 |
+| 52-47 | DATE 산술·ADD_MONTHS 말일 | 20270101003000 … 20260228 | PostgreSQL(interval) 동일 |
+| 52-30 | CTAS 로 넘어오는 제약(NOT NULL 만) | ㉡ | Oracle 규칙(PostgreSQL 은 NOT NULL 도 안 넘어와 다름) |
+| 53-19 | DENSE_RANK·RANK·ROW_NUMBER 필터 | 5, 3, 3 | PostgreSQL 동일 |
+| 53-37 | UNPIVOT 과 INCLUDE NULLS | 3, 6 | PostgreSQL(LATERAL VALUES 로 같은 계산) |
+| 54-31 | NTILE 나머지 배분 | D, E | PostgreSQL 동일 |
+| 54-16 | 스칼라 서브쿼리 다중 행 오류·없는 행 NULL | ㉠ 오류, ㉡ 2행 | PostgreSQL 동일 |
+| 55-38 | FETCH … WITH TIES·OFFSET | A·B·C / B·C | PostgreSQL 동일 |
+| 55-39 | NULL 과 AVG·SUM/COUNT(*) | 200, 120, 120, 3 | PostgreSQL 동일 |
+| 56-11 | NOT·AND·OR 우선순위 | 3, 2, 2 | PostgreSQL 동일 |
+| 56-20 | TRUNCATE 자동 COMMIT | 4, 0 | Oracle 규칙(PostgreSQL 은 TRUNCATE 도 되돌려져 다름) |
+| 57-19 | 정규식 수량자 + · {2,} · ? | 3, 345, colour | PostgreSQL 16 regexp_count·regexp_substr 동일 |
+| 57-24 | ROWS 1 PRECEDING ~ 1 FOLLOWING | 30, 90, 90 | PostgreSQL 동일 |
+| 58-36 | MERGE 의 UPDATE 뒤 DELETE WHERE | 1 100, 2 250, 4 70 | PostgreSQL MERGE(DELETE 절로 같은 결과) |
+| 58-17 | CONNECT_BY_ISLEAF·SYS_CONNECT_BY_PATH | C, D / /A/B/D | PostgreSQL 재귀 CTE |
+| 59-31 | NULL 과 3값 논리(NOT, OR) | 1, 0, 4 | PostgreSQL 동일 |
+| 59-41 | COMMIT 이 저장점을 지움 | 1, 2 | PostgreSQL 동일(저장점 없음 오류) |
+| 60-27 | 팬텀 리드와 ANSI 격리 수준 | 팬텀 리드, SERIALIZABLE | ANSI 표준 정의 |
+| 60-41 | 단순 CASE·검색 CASE·DECODE 의 NULL | Y, N, N | PostgreSQL(CASE), DECODE 는 Oracle 규칙 |
+| 61-42 | LEFT JOIN 조건의 ON / WHERE 위치 | 4, 2, 3 | PostgreSQL 동일 |
+| 61-28 | MGR IS NOT NULL vs EXISTS vs IN | 3, 2, 2 | PostgreSQL 동일 |
+| 62-25 | 중복·NULL 이 있는 조인 행 수 | 4, 5, 6 | PostgreSQL 동일 |
+| 62-40 | HAVING 별칭·GROUP BY 누락·GROUP BY 없는 HAVING | ㉡, ㉢ | PostgreSQL 동일(Oracle 19c 기준 명시) |
+
+화면 확인: 390px 에서 34문항 전부 캡처. 처음엔 SQL 21개가 줄이 꺾여, 모든 줄을 화면 폭 안(한글 2칸 기준 39칸)으로 다시 나눔. 이로써 순환 2바퀴(45~62회) 완료.

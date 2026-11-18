@@ -1054,16 +1054,48 @@ export const ROUND_59: QuizQuestion[] = [
     "round": 59,
     "subject": "2과목",
     "number": 31,
-    "title": "AND / OR 논리 연산자에 대한 설명으로 옳은 것은?",
+    "title": "아래 T 테이블에 대한 SQL ㉠, ㉡, ㉢ 의 결과 행 수로 옳은 것은?",
     "options": [
-      "AND가 OR보다 먼저 평가된다.",
-      "OR가 AND보다 먼저 평가된다.",
-      "두 연산자의 우선순위는 동일하며 작성 순서대로 평가된다.",
-      "두 연산자는 괄호 없이는 동시에 사용할 수 없다."
+      "1, 0, 4",
+      "2, 1, 4",
+      "1, 0, 3",
+      "2, 1, 3"
     ],
     "correctIndex": 0,
-    "explanation": "논리 연산자의 우선순위는 NOT > AND > OR 이라 AND 가 OR 보다 먼저 평가된다(①). 따라서 ② 와 ③ 은 틀리고, 괄호 없이 함께 쓸 수 있지만(④ 틀림) 의도한 순서가 다르면 괄호로 묶어야 한다. 예: A OR B AND C 는 A OR (B AND C) 로 처리된다.",
-    "_source": "authored"
+    "explanation": "NULL 과의 비교는 TRUE 도 FALSE 도 아닌 UNKNOWN 이고, WHERE 는 TRUE 인 행만 남긴다. ㉠ 에서 3번 행의 NULL <> 1 은 UNKNOWN 이라 빠지고 2번만 남아 1행이다. ㉡ 의 괄호 안은 1·2·4번에서 TRUE 라 NOT 이 FALSE 가 되고, 3번은 UNKNOWN OR UNKNOWN 이라 NOT 을 붙여도 UNKNOWN 이다. 그래서 0행이다. ㉢ 은 1·4번이 C = 1, 3번이 C IS NULL, 2번이 C <> 1 로 모두 TRUE 라 4행이다. 정답은 ①번이다. ② 는 NULL 비교를 TRUE 로 본 것, ③ 은 IS NULL 이 NULL 행을 잡는다는 것을 놓친 것, ④ 는 두 가지를 모두 잘못 본 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "caption": "T",
+        "headers": [
+          "ID",
+          "C"
+        ],
+        "rows": [
+          [
+            "1",
+            "1"
+          ],
+          [
+            "2",
+            "2"
+          ],
+          [
+            "3",
+            "NULL"
+          ],
+          [
+            "4",
+            "1"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "-- ㉠\nSELECT * FROM T\nWHERE  C <> 1;\n-- ㉡\nSELECT * FROM T\nWHERE  NOT (C = 1 OR C = 2);\n-- ㉢\nSELECT * FROM T\nWHERE  C = 1 OR C IS NULL\n   OR  C <> 1;"
+      }
+    ]
   },
   {
     "id": 10081,
@@ -1518,20 +1550,20 @@ export const ROUND_59: QuizQuestion[] = [
     "round": 59,
     "subject": "2과목",
     "number": 41,
-    "title": "TCL 관련 설명 중 옳은 것으로만 묶은 것은?",
+    "title": "빈 테이블 T(C) 에 아래 SQL 을 순서대로 실행했다. 오류가 나는 문장은 건너뛰고 계속 실행한다고 할 때, 마지막 SELECT 의 결과로 옳은 것은?",
     "options": [
-      "가",
-      "다",
-      "나, 다",
-      "가, 나, 다"
+      "1",
+      "1, 2, 3",
+      "1, 2, 4",
+      "1, 2"
     ],
     "correctIndex": 3,
-    "explanation": "가: Oracle 에서 DDL 은 실행 전후로 묵시적 COMMIT 이 일어난다. 나: 트랜잭션은 여러 SQL 문장을 하나의 논리 단위로 묶을 수 있다. 다: SAVEPOINT 를 지정하면 그 지점까지만 부분 롤백할 수 있다. 세 설명이 모두 옳으므로 ④ 가, 나, 다 이다. ①②③ 은 옳은 설명을 일부 빠뜨렸다.",
+    "explanation": "COMMIT 은 그때까지의 변경을 확정하고, 그 트랜잭션에서 만든 저장점도 모두 지운다. 그래서 COMMIT 뒤의 ROLLBACK TO A 는 저장점 A 가 없어 오류가 나고 아무것도 되돌리지 않는다. 이후 마지막 ROLLBACK 이 COMMIT 이후에 넣은 3 과 4 를 모두 취소하므로 1, 2 만 남는다. 정답은 ④번이다. ① 은 COMMIT 된 2 도 저장점으로 되돌릴 수 있다고 본 것, ②·③ 은 마지막 ROLLBACK 이 COMMIT 이후의 변경 중 일부만 취소한다고 본 것이다.",
     "_source": "authored",
     "references": [
       {
-        "type": "text",
-        "content": "가. DDL은 수행 전후 묵시적 COMMIT이 발생한다.\n나. 트랜잭션의 논리 단위는 여러 SQL 문장으로 구성될 수 있다.\n다. SAVEPOINT를 지정하면 해당 지점까지 부분 롤백이 가능하다."
+        "type": "sql",
+        "code": "INSERT INTO T VALUES (1);\nSAVEPOINT A;\nINSERT INTO T VALUES (2);\nCOMMIT;\nINSERT INTO T VALUES (3);\nROLLBACK TO A;\nINSERT INTO T VALUES (4);\nROLLBACK;\nSELECT C FROM T ORDER BY C;"
       }
     ]
   },

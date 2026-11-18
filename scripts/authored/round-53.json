@@ -403,15 +403,55 @@
     {
       "subject": "2과목",
       "number": 19,
-      "title": "SAL 기준 상위 3순위까지 동순위를 포함하되, 동순위 다음 순위를 건너뛰지 않고 부여하는 함수로 적절한 것은?",
+      "title": "아래 사원 테이블에 대한 SQL 의 결과(A, B, C)로 옳은 것은?",
       "options": [
-        "DENSE_RANK",
-        "ROW_NUMBER",
-        "RANK",
-        "NTILE"
+        "5, 3, 3",
+        "5, 5, 3",
+        "3, 3, 3",
+        "3, 5, 3"
       ],
       "correctIndex": 0,
-      "explanation": "DENSE_RANK 는 동순위를 같은 등수로 부여하면서 다음 등수를 건너뛰지 않아, 상위 N 순위 동순위 포함 조회에 적합하다. ② ROW_NUMBER 는 동점에도 다른 번호를, ③ RANK 는 동점 다음 순위를 건너뛰고, ④ NTILE 은 그룹 번호를 매긴다."
+      "explanation": "DENSE_RANK 는 같은 값에 같은 순위를 주고 다음 순위를 건너뛰지 않는다. 500 은 1, 400 두 명은 2, 300 두 명은 3 이라 3 이하가 5명이다. RANK 는 같은 순위 다음을 건너뛴다. 500 은 1, 400 두 명은 2, 300 두 명은 4 라 3 이하가 3명이다. ROW_NUMBER 는 같은 값에도 1, 2, 3, … 을 차례로 주므로 3 이하는 정확히 3행이다. 정답은 ①번이다. ② 는 RANK 도 순위를 건너뛰지 않는다고 본 것, ③ 은 세 함수가 모두 같다고 본 것, ④ 는 DENSE_RANK 와 RANK 를 바꿔 본 것이다.",
+      "references": [
+        {
+          "type": "table",
+          "caption": "사원",
+          "headers": [
+            "이름",
+            "SAL"
+          ],
+          "rows": [
+            [
+              "가",
+              "500"
+            ],
+            [
+              "나",
+              "400"
+            ],
+            [
+              "다",
+              "400"
+            ],
+            [
+              "라",
+              "300"
+            ],
+            [
+              "마",
+              "300"
+            ],
+            [
+              "바",
+              "200"
+            ]
+          ]
+        },
+        {
+          "type": "sql",
+          "code": "SELECT SUM(CASE WHEN DR <= 3\n           THEN 1 ELSE 0 END) AS A,\n       SUM(CASE WHEN RK <= 3\n           THEN 1 ELSE 0 END) AS B,\n       SUM(CASE WHEN RN <= 3\n           THEN 1 ELSE 0 END) AS C\nFROM (\n  SELECT\n    DENSE_RANK()\n      OVER (ORDER BY SAL DESC) AS DR,\n    RANK()\n      OVER (ORDER BY SAL DESC) AS RK,\n    ROW_NUMBER()\n      OVER (ORDER BY SAL DESC) AS RN\n  FROM 사원\n);"
+        }
+      ]
     },
     {
       "subject": "2과목",
@@ -958,15 +998,45 @@
     {
       "subject": "2과목",
       "number": 37,
-      "title": "UNPIVOT 절 사용 시 열 이름의 순서에 대한 설명 중 옳은 것은?",
+      "title": "아래 실적 테이블에 대한 두 SQL 의 결과 행 수(㉠, ㉡)로 옳은 것은? (Oracle 기준)",
       "options": [
-        "AMOUNT3, AMOUNT2, AMOUNT1 순으로 UNPIVOT 해도 결과 행 자체(컬럼-값 매핑) 는 동일하고 출력 순서만 바뀐다.",
-        "UNPIVOT 시 입력 열의 순서를 바꾸면 결과 행 수가 달라진다.",
-        "UNPIVOT 은 NULL 행을 항상 유지한다.",
-        "UNPIVOT 은 반드시 세 개의 열을 대상으로 한다."
+        "3, 6",
+        "6, 6",
+        "3, 3",
+        "2, 6"
       ],
       "correctIndex": 0,
-      "explanation": "UNPIVOT 의 열 나열 순서는 결과 행의 출력 순서에만 영향을 줄 뿐, 각 행의 컬럼-값 매핑 자체는 동일하게 유지되고 행 수도 같다. ② 입력 열 순서를 바꿔도 결과 행 수는 같다. ③ UNPIVOT 은 기본적으로 NULL 행을 제외하며 `INCLUDE NULLS` 옵션을 줄 때만 유지한다. ④ UNPIVOT 의 대상 열 수는 두 개 이상이면 충분하다."
+      "explanation": "UNPIVOT 은 열(Q1, Q2, Q3)을 행으로 펼쳐 한 사람당 최대 3행을 만든다. 기본값은 EXCLUDE NULLS 라 값이 NULL 인 칸은 행으로 만들지 않는다. 김은 Q1·Q3, 이는 Q3 만 남아 ㉠ 은 3행이다. INCLUDE NULLS 를 쓰면 NULL 칸도 행으로 만들어 2명 × 3분기 = 6행이 된다. 정답은 ①번이다. ② 는 기본값도 NULL 을 포함한다고 본 것, ③ 은 INCLUDE NULLS 의 효과를 놓친 것, ④ 는 NULL 이 하나라도 있는 사람을 통째로 뺀 것이다.",
+      "references": [
+        {
+          "type": "table",
+          "caption": "실적",
+          "headers": [
+            "이름",
+            "Q1",
+            "Q2",
+            "Q3"
+          ],
+          "rows": [
+            [
+              "김",
+              "10",
+              "NULL",
+              "30"
+            ],
+            [
+              "이",
+              "NULL",
+              "NULL",
+              "20"
+            ]
+          ]
+        },
+        {
+          "type": "sql",
+          "code": "-- ㉠\nSELECT 이름, 분기, 값\nFROM   실적\nUNPIVOT (값 FOR 분기 IN (Q1, Q2, Q3));\n\n-- ㉡\nSELECT 이름, 분기, 값\nFROM   실적\nUNPIVOT INCLUDE NULLS\n        (값 FOR 분기 IN (Q1, Q2, Q3));"
+        }
+      ]
     },
     {
       "subject": "2과목",

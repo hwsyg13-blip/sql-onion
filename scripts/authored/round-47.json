@@ -229,15 +229,21 @@
     {
       "subject": "2과목",
       "number": 13,
-      "title": "트랜잭션 특성 설명 중 가장 적절한 것은?",
+      "title": "빈 테이블 T(C) 에 아래 SQL 을 순서대로 실행했을 때 마지막 SELECT 의 결과로 옳은 것은?",
       "options": [
-        "트랜잭션이 성공하면 변경 내용이 영구 저장되는 것을 고립성이라 한다.",
-        "ROLLBACK 후에는 데이터 변경 사항이 그대로 유지된다.",
-        "COMMIT 으로만 데이터 무결성이 보장된다.",
-        "COMMIT 과 ROLLBACK 을 사용하여 데이터 무결성을 보장할 수 있다."
+        "1, 2, 4",
+        "1, 2, 3, 4",
+        "4",
+        "1, 4"
       ],
       "correctIndex": 3,
-      "explanation": "트랜잭션은 한 묶음의 작업이고, 작업이 정상적으로 끝나면 COMMIT 으로 확정하고 도중에 문제가 생기면 ROLLBACK 으로 되돌려 데이터 무결성을 지킨다(④). ① 성공한 변경이 영구히 남는 것은 고립성이 아니라 지속성이다. ② ROLLBACK 을 하면 커밋하지 않은 변경 사항이 취소된다. ③ 잘못된 변경을 되돌리는 ROLLBACK 도 무결성을 지키는 데 함께 쓰이므로 COMMIT 만으로 보장된다는 말은 틀렸다."
+      "explanation": "ROLLBACK TO S2 는 S2 이후의 UPDATE 만 되돌려 T 는 1, 2 가 된다. 이어서 3 을 넣으면 1, 2, 3 이다. ROLLBACK TO S1 은 S1 이후에 한 일을 모두 되돌린다. 2 와 3 의 INSERT 가 취소되어 1 만 남고, 4 를 넣은 뒤 COMMIT 하므로 결과는 1, 4 다. 정답은 ④번이다. ① 은 ROLLBACK TO S1 이 S2 이후만 되돌린다고 본 것, ② 는 저장점으로 돌아가도 INSERT 는 남는다고 본 것, ③ 은 ROLLBACK TO S1 이 트랜잭션 전체를 되돌린다고 본 것이다.",
+      "references": [
+        {
+          "type": "sql",
+          "code": "INSERT INTO T VALUES (1);\nSAVEPOINT S1;\nINSERT INTO T VALUES (2);\nSAVEPOINT S2;\nUPDATE T SET C = C * 10;\nROLLBACK TO S2;\nINSERT INTO T VALUES (3);\nROLLBACK TO S1;\nINSERT INTO T VALUES (4);\nCOMMIT;\nSELECT C FROM T ORDER BY C;"
+        }
+      ]
     },
     {
       "subject": "2과목",
@@ -998,15 +1004,51 @@
     {
       "subject": "2과목",
       "number": 33,
-      "title": "파티션 내 전체 SUM 값 대비 각 행의 비율을 소수점으로 반환하는 함수는?",
+      "title": "아래 점수 테이블에 대한 SQL 에서 C 행의 R, P, CD 값으로 옳은 것은? (Oracle 기준)",
       "options": [
-        "PERCENT_RANK",
-        "RATIO_TO_REPORT",
-        "CUME_DIST",
-        "NTILE"
+        "R 0.2, P 0.5, CD 0.6",
+        "R 0.2, P 0.25, CD 0.8",
+        "R 0.2, P 0.25, CD 0.6",
+        "R 0.2, P 0.4, CD 0.8"
       ],
       "correctIndex": 1,
-      "explanation": "비율 함수 RATIO_TO_REPORT는 한 행의 값을 파티션 전체 합으로 나눈 비율을 0~1 사이의 소수로 돌려준다. 예를 들어 합계가 100이고 어떤 행 값이 20이면 0.2를 반환한다. ① PERCENT_RANK는 순위 기반 백분위, ③ CUME_DIST는 누적 분포, ④ NTILE은 그룹 분할이라 의미가 다르다. 정답은 ②번이다."
+      "explanation": "점수 합계가 100 이라 C 의 RATIO_TO_REPORT 는 20 / 100 = 0.2 다. PERCENT_RANK 는 (RANK - 1) / (전체 행 수 - 1) 이다. 20점인 B, C, E 는 모두 RANK 가 2 라서 (2 - 1) / (5 - 1) = 0.25 다. CUME_DIST 는 '현재 값 이하인 행 수 / 전체 행 수' 다. 20 이하는 A, B, C, E 네 행이라 4 / 5 = 0.8 이다. 정답은 ②번이다. ① 은 같은 값이 여러 행일 때 행 위치로 계산한 것, ③ 은 CUME_DIST 를 현재 행까지만 센 것, ④ 는 PERCENT_RANK 를 '순위 / 전체 행 수' 로 본 것이다.",
+      "references": [
+        {
+          "type": "table",
+          "caption": "점수",
+          "headers": [
+            "이름",
+            "점수"
+          ],
+          "rows": [
+            [
+              "A",
+              "10"
+            ],
+            [
+              "B",
+              "20"
+            ],
+            [
+              "C",
+              "20"
+            ],
+            [
+              "D",
+              "30"
+            ],
+            [
+              "E",
+              "20"
+            ]
+          ]
+        },
+        {
+          "type": "sql",
+          "code": "SELECT 이름,\n       RATIO_TO_REPORT(점수)\n         OVER () AS R,\n       PERCENT_RANK()\n         OVER (ORDER BY 점수) AS P,\n       CUME_DIST()\n         OVER (ORDER BY 점수) AS CD\nFROM   점수;"
+        }
+      ]
     },
     {
       "subject": "2과목",

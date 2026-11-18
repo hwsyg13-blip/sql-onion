@@ -468,16 +468,22 @@ export const ROUND_57: QuizQuestion[] = [
     "round": 57,
     "subject": "2과목",
     "number": 19,
-    "title": "정규표현식 수량자 설명 중 옳은 것은?",
+    "title": "아래 SQL 의 결과(A, B, C)로 옳은 것은? (Oracle 기준)",
     "options": [
-      "? : 대상이 0회 혹은 그 이상 반복하는지 확인한다.",
-      "* : 대상이 1회 이상 반복하는지 확인한다.",
-      "+ : 대상이 0회 혹은 그 이상 반복하는지 확인한다.",
-      "{m,} : 대상이 m회 이상 반복하는지 확인한다."
+      "2, 12, colour",
+      "3, 12, color",
+      "3, 345, color",
+      "3, 345, colour"
     ],
     "correctIndex": 3,
-    "explanation": "? 는 0회 또는 1회, * 는 0회 이상, + 는 1회 이상, {m,} 은 m회 이상 반복을 뜻한다. ① 은 ? 를 0회 이상이라고 해 * 와 혼동했고, ② 는 * 를 1회 이상이라고 해 + 와 혼동했으며, ③ 은 + 를 0회 이상이라고 해 * 와 혼동했다. 정의대로 설명한 것은 ④ 뿐이다.",
-    "_source": "authored"
+    "explanation": "+ 는 앞 글자가 1번 이상, {2,} 는 2번 이상, ? 는 0번 또는 1번 나온다는 수량자다. A 의 'a+b' 는 a 가 하나 이상 있고 b 로 끝나는 부분이라 aab, aaab, ab 의 3개다. 맨 끝의 b 는 앞에 a 가 없어 빠진다. B 는 숫자가 2개 이상 이어진 부분 중 두 번째라, '12' 다음의 '345' 다. 6 은 한 자리라 해당하지 않는다. C 의 'colou?r' 는 u 가 있어도 없어도 되므로 color, colour 가 차례로 맞고, 두 번째는 colour 다. colr 는 o 가 없어 맞지 않는다. 정답은 ④번이다. ① 은 + 를 2번 이상으로 본 것, ② 는 n번째 인자를 무시하고 첫 일치만 본 것, ③ 은 C 에서 첫 일치를 고른 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT\n  REGEXP_COUNT('aab aaab ab b', 'a+b')\n    AS A,\n  REGEXP_SUBSTR('x12y345z6',\n                '[0-9]{2,}', 1, 2)\n    AS B,\n  REGEXP_SUBSTR('color colour colr',\n                'colou?r', 1, 2)\n    AS C\nFROM DUAL;"
+      }
+    ]
   },
   {
     "id": 10169,
@@ -667,16 +673,52 @@ export const ROUND_57: QuizQuestion[] = [
     "round": 57,
     "subject": "2과목",
     "number": 24,
-    "title": "윈도우 절에서 행 단위(Row-based)로 윈도우 프레임을 지정할 때 사용하는 키워드는?",
+    "title": "아래 매출 테이블에 대한 SQL 에서 월이 1, 3, 5 인 행의 S 값으로 옳은 것은?",
     "options": [
-      "ROWS",
-      "RANGE",
-      "GROUPS",
-      "PARTITION"
+      "30, 90, 90",
+      "60, 90, 120",
+      "10, 60, 150",
+      "10, 50, 90"
     ],
     "correctIndex": 0,
-    "explanation": "윈도우 프레임을 물리적인 행 개수(앞뒤 몇 행)로 정할 때는 ROWS 를 쓴다(①). RANGE(②)는 ORDER BY 값의 논리적 범위(예: 현재 값 ± 100)로 프레임을 정하고, GROUPS(③)는 동일 값 묶음 단위로 세는 방식이며, PARTITION(④)은 윈도우를 나누는 그룹 기준이지 프레임 단위가 아니다.",
-    "_source": "authored"
+    "explanation": "ROWS BETWEEN 1 PRECEDING AND 1 FOLLOWING 은 행 기준으로 앞 1행, 현재 행, 뒤 1행을 묶는다. 1월은 앞 행이 없어 1월과 2월만 더해 30 이다. 3월은 2·3·4월이라 90, 5월은 뒤 행이 없어 4·5월만 더해 90 이다. 정답은 ①번이다. ② 는 처음과 끝에서도 늘 3행을 채운다고 본 것, ③ 은 처음부터 현재 행까지의 누적 합으로 본 것, ④ 는 1 FOLLOWING 을 빼고 앞 행과 현재 행만 더한 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "caption": "매출",
+        "headers": [
+          "월",
+          "금액"
+        ],
+        "rows": [
+          [
+            "1",
+            "10"
+          ],
+          [
+            "2",
+            "20"
+          ],
+          [
+            "3",
+            "30"
+          ],
+          [
+            "4",
+            "40"
+          ],
+          [
+            "5",
+            "50"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT 월,\n       SUM(금액) OVER (\n         ORDER BY 월\n         ROWS BETWEEN 1 PRECEDING\n                  AND 1 FOLLOWING\n       ) AS S\nFROM   매출;"
+      }
+    ]
   },
   {
     "id": 10174,

@@ -807,16 +807,64 @@ export const ROUND_62: QuizQuestion[] = [
     "round": 62,
     "subject": "2과목",
     "number": 25,
-    "title": "동일한 두 테이블을 ID 컬럼 기준으로 조인할 때, 다음 중 결과 행의 개수가 다른 것은?",
+    "title": "아래 두 테이블을 ID 로 조인할 때 INNER JOIN, LEFT OUTER JOIN, FULL OUTER JOIN 의 결과 행 수로 옳은 것은?",
     "options": [
-      "NATURAL JOIN",
-      "JOIN ... USING (ID)",
-      "CROSS JOIN",
-      "JOIN ... ON (조건 AND 조건)"
+      "3, 4, 5",
+      "5, 5, 5",
+      "4, 5, 6",
+      "4, 4, 4"
     ],
     "correctIndex": 2,
-    "explanation": "NATURAL JOIN, USING, ON 조건 조인은 모두 조건에 맞는 행만 연결하지만, CROSS JOIN은 조인 조건 없이 모든 행의 조합(카티션 곱)을 만들어 행 수가 다르다. ①②④ 는 ID 가 같은 행끼리만 이어 행 수가 같다.",
-    "_source": "authored"
+    "explanation": "같은 값이 여러 행이면 가능한 짝이 모두 만들어진다. ID 1 은 T1 의 2행 × T2 의 1행 = 2행, ID 2 는 1행 × 2행 = 2행이라 INNER JOIN 은 4행이다. NULL 은 NULL 과도 같지 않아 짝이 생기지 않는다. LEFT OUTER JOIN 은 여기에 짝이 없는 T1 의 NULL 행이 더해져 5행, FULL OUTER JOIN 은 T2 의 NULL 행까지 더해져 6행이다. 정답은 ③번이다. ① 은 같은 값이 여러 행일 때 짝을 덜 센 것, ② 는 NULL 끼리 같다고 본 것, ④ 는 외부 조인에서 짝 없는 행이 추가된다는 것을 놓친 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "caption": "T1",
+        "headers": [
+          "ID"
+        ],
+        "rows": [
+          [
+            "1"
+          ],
+          [
+            "1"
+          ],
+          [
+            "2"
+          ],
+          [
+            "NULL"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "T2",
+        "headers": [
+          "ID"
+        ],
+        "rows": [
+          [
+            "1"
+          ],
+          [
+            "2"
+          ],
+          [
+            "2"
+          ],
+          [
+            "NULL"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT * FROM T1 INNER JOIN T2\n  ON T1.ID = T2.ID;\nSELECT * FROM T1 LEFT OUTER JOIN T2\n  ON T1.ID = T2.ID;\nSELECT * FROM T1 FULL OUTER JOIN T2\n  ON T1.ID = T2.ID;"
+      }
+    ]
   },
   {
     "id": 9925,
@@ -1414,16 +1462,22 @@ export const ROUND_62: QuizQuestion[] = [
     "round": 62,
     "subject": "2과목",
     "number": 40,
-    "title": "다음 중 문법이 틀린 것은?",
+    "title": "아래 사원(부서, 급여) 테이블에 대한 SQL ㉠~㉣ 중 오류가 발생하는 것만 모두 고른 것은? (Oracle 19c 기준)",
     "options": [
-      "INSERT INTO ... VALUES",
-      "UPDATE ... SET",
-      "INSERT ... AS SELECT",
-      "CREATE TABLE ... AS SELECT"
+      "㉡",
+      "㉡, ㉢, ㉣",
+      "㉡, ㉢",
+      "㉢, ㉣"
     ],
     "correctIndex": 2,
-    "explanation": "서브쿼리로 데이터를 삽입할 때는 INSERT INTO 테이블 SELECT ... 로 작성하며 AS를 쓰지 않는다. AS SELECT는 CREATE TABLE ... AS SELECT(CTAS)에서 사용한다. ①②④ 는 올바른 문법이다.",
-    "_source": "authored"
+    "explanation": "SELECT 절의 별칭은 SELECT 보다 나중에 처리되는 ORDER BY 에서만 쓸 수 있다. 그래서 ㉠ 은 되고, 먼저 처리되는 HAVING 에 별칭을 쓴 ㉡ 은 오류다. ㉢ 은 GROUP BY 에 없는 급여를 집계 없이 SELECT 해서 오류다. ㉣ 처럼 GROUP BY 없이 HAVING 만 쓰면 테이블 전체를 한 그룹으로 보므로 문법상 문제가 없다. 정답은 ③번이다. ① 은 ㉢ 의 GROUP BY 규칙을 놓친 것, ②·④ 는 GROUP BY 없이 HAVING 을 쓸 수 없다고 본 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "-- ㉠\nSELECT 부서, SUM(급여) AS 합\nFROM   사원\nGROUP  BY 부서\nORDER  BY 합;\n-- ㉡\nSELECT 부서, SUM(급여) AS 합\nFROM   사원\nGROUP  BY 부서\nHAVING 합 > 100;\n-- ㉢\nSELECT 부서, 급여\nFROM   사원\nGROUP  BY 부서;\n-- ㉣\nSELECT SUM(급여)\nFROM   사원\nHAVING SUM(급여) > 0;"
+      }
+    ]
   },
   {
     "id": 9940,

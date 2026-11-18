@@ -1093,16 +1093,64 @@ export const ROUND_61: QuizQuestion[] = [
     "round": 61,
     "subject": "2과목",
     "number": 28,
-    "title": "다음 중 \"연봉(SAL)이 3,000을 초과하면서, 상위 직급자(관리자, MGR)가 존재하는 사원\"을 찾는 SQL로 가장 적절하지 않은 것은?",
+    "title": "아래 EMP 테이블에 대한 SQL ㉠, ㉡, ㉢ 의 결과 행 수로 옳은 것은?",
     "options": [
-      "SELECT EMP_ID, EMP_NAME, SAL\nFROM EMP E\nWHERE SAL > 3000\nAND EXISTS (\n    SELECT 1\n    FROM EMP M\n    WHERE M.EMP_ID = E.MGR_ID\n);",
-      "SELECT EMP_ID, EMP_NAME, SAL\nFROM EMP\nWHERE SAL > 3000\nAND MGR_ID IN (\n    SELECT EMP_ID\n    FROM EMP\n);",
-      "SELECT EMP_ID, EMP_NAME, SAL\nFROM EMP E\nWHERE SAL > 3000\nAND NOT EXISTS (\n    SELECT 1\n    FROM EMP M\n    WHERE M.EMP_ID <> E.MGR_ID\n);",
-      "SELECT E1.EMP_ID, E1.EMP_NAME, E1.SAL\nFROM EMP E1, EMP E2\nWHERE E1.MGR_ID = E2.EMP_ID\nAND E1.SAL > 3000;"
+      "3, 2, 3",
+      "2, 2, 2",
+      "3, 2, 2",
+      "3, 3, 2"
     ],
     "correctIndex": 2,
-    "explanation": "①②④ 는 MGR_ID 가 실제 직원의 EMP_ID 와 맞는 사원, 즉 상위 직급자가 있는 사원만 조회한다. ③ 은 부정의 부정처럼 보이지만 뜻이 전혀 다르다. MGR_ID 가 있는 사원은 자기 관리자가 아닌 다른 직원이 거의 항상 있어 NOT EXISTS 가 거짓이 되고, 반대로 MGR_ID 가 NULL 인 사원(관리자가 없는 사원)은 M.EMP_ID <> NULL 이 모두 UNKNOWN 이라 서브쿼리 결과가 없어 NOT EXISTS 가 참이 된다. 그래서 찾으려는 것과 정반대로 관리자가 없는 사원이 조회된다.",
-    "_source": "authored"
+    "explanation": "급여가 3000 을 넘는 사람은 KING, JONES, FORD, ADAMS 다. ㉠ 은 MGR 값이 있기만 하면 되므로 KING 만 빠져 3행이다. ㉡ 은 MGR 이 실제 EMP 에 있는 사원이어야 한다. FORD 의 MGR 9 는 없는 사번이라 빠지고 JONES(1), ADAMS(4)만 남아 2행이다. ㉢ 의 IN 도 같은 검사라 2행이다. KING 은 MGR 이 NULL 이라 IN 비교가 UNKNOWN 이 되어 빠진다. 정답은 ③번이다. ① 은 IN 이 값의 존재만 본다고 착각한 것, ② 는 ㉠ 에서 없는 사번을 가리키는 FORD 를 뺀 것, ④ 는 EXISTS 가 MGR 값만 있으면 TRUE 라고 본 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "caption": "EMP",
+        "headers": [
+          "EMPNO",
+          "ENAME",
+          "SAL",
+          "MGR"
+        ],
+        "rows": [
+          [
+            "1",
+            "KING",
+            "5000",
+            "NULL"
+          ],
+          [
+            "2",
+            "JONES",
+            "3500",
+            "1"
+          ],
+          [
+            "3",
+            "FORD",
+            "4000",
+            "9"
+          ],
+          [
+            "4",
+            "SMITH",
+            "800",
+            "2"
+          ],
+          [
+            "5",
+            "ADAMS",
+            "3100",
+            "4"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "-- ㉠\nSELECT * FROM EMP E\nWHERE  SAL > 3000 AND MGR IS NOT NULL;\n-- ㉡\nSELECT * FROM EMP E\nWHERE  SAL > 3000\nAND    EXISTS (SELECT 1 FROM EMP M\n               WHERE  M.EMPNO = E.MGR);\n-- ㉢\nSELECT * FROM EMP E\nWHERE  SAL > 3000\nAND    MGR IN (SELECT EMPNO FROM EMP);"
+      }
+    ]
   },
   {
     "id": 9978,
@@ -1729,16 +1777,70 @@ export const ROUND_61: QuizQuestion[] = [
     "round": 61,
     "subject": "2과목",
     "number": 42,
-    "title": "다음 중 JOIN에 대한 설명으로 가장 적절한 것은 무엇인가?",
+    "title": "아래 두 테이블에 대한 SQL ㉠, ㉡, ㉢ 의 결과 행 수로 옳은 것은?",
     "options": [
-      "CROSS JOIN은 조인 조건을 ON절에 명시해야 한다.",
-      "INNER JOIN은 등가 조인만 가능하다.",
-      "NATURAL JOIN은 두 테이블에서 이름이 같은 컬럼을 자동으로 찾아 등가 조인을 하는 것이다.",
-      "USING 절은 두 테이블에서 컬럼명이 서로 다른 경우에도 사용할 수 있다."
+      "2, 2, 2",
+      "4, 4, 4",
+      "4, 2, 3",
+      "4, 2, 4"
     ],
     "correctIndex": 2,
-    "explanation": "NATURAL JOIN은 두 테이블에서 이름이 같은 컬럼을 자동으로 찾아 등가 조인한다. ① CROSS JOIN은 조인 조건이 없고, ② INNER JOIN은 비등가 조건도 가능하며, ④ USING 절은 컬럼명이 같은 경우에만 사용할 수 있다.",
-    "_source": "authored"
+    "explanation": "㉠ 은 급여 조건이 ON 에 있어 조인할 사원을 고르는 데만 쓰이고, 부서는 모두 남는다. 영업-김, 영업-이, 그리고 맞는 사원이 없는 개발·인사가 NULL 로 나와 4행이다. ㉡ 은 조인을 먼저 끝낸 뒤 WHERE 로 거르므로, 급여가 NULL 인 인사 행과 200 인 개발-박 행이 빠져 김·이 2행이다. ㉢ 은 사원이 없어 이름이 NULL 인 인사 행만 다시 살아나 3행이다. 개발은 박과 조인되어 이름이 NULL 이 아니므로 빠진다. 정답은 ③번이다. ① 은 ON 과 WHERE 를 같다고 본 것, ② 는 LEFT JOIN 이면 WHERE 와 상관없이 부서가 모두 남는다고 본 것, ④ 는 ㉢ 에서 개발도 남는다고 본 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "caption": "부서",
+        "headers": [
+          "부서번호",
+          "부서명"
+        ],
+        "rows": [
+          [
+            "10",
+            "영업"
+          ],
+          [
+            "20",
+            "개발"
+          ],
+          [
+            "30",
+            "인사"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "사원",
+        "headers": [
+          "이름",
+          "부서번호",
+          "급여"
+        ],
+        "rows": [
+          [
+            "김",
+            "10",
+            "300"
+          ],
+          [
+            "이",
+            "10",
+            "500"
+          ],
+          [
+            "박",
+            "20",
+            "200"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "-- ㉠\nSELECT D.부서명, E.이름\nFROM   부서 D LEFT JOIN 사원 E\n       ON D.부서번호 = E.부서번호\n      AND E.급여 >= 300;\n-- ㉡\nSELECT D.부서명, E.이름\nFROM   부서 D LEFT JOIN 사원 E\n       ON D.부서번호 = E.부서번호\nWHERE  E.급여 >= 300;\n-- ㉢\nSELECT D.부서명, E.이름\nFROM   부서 D LEFT JOIN 사원 E\n       ON D.부서번호 = E.부서번호\nWHERE  E.급여 >= 300\n   OR  E.이름 IS NULL;"
+      }
+    ]
   },
   {
     "id": 9992,

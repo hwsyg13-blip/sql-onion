@@ -1071,15 +1071,21 @@
     {
       "subject": "2과목",
       "number": 33,
-      "title": "사용자에게 객체 접근 권한을 부여하는 DCL 명령어는?",
+      "title": "A 가 소유한 T 테이블에 대해 아래 명령을 순서대로 실행했다. 마지막에 T 를 조회(SELECT)할 수 있는 사용자를 모두 고른 것은? (Oracle 기준)",
       "options": [
-        "COMMIT",
-        "GRANT",
-        "REVOKE",
-        "ROLLBACK"
+        "C, D",
+        "D",
+        "B, C, D",
+        "아무도 없음"
       ],
       "correctIndex": 1,
-      "explanation": "GRANT는 사용자에게 객체 접근 권한을 부여하는 DCL 명령이다. ③ REVOKE는 권한을 회수하며, ① COMMIT·④ ROLLBACK은 트랜잭션 제어(TCL)에 해당하므로 권한 부여 명령과는 무관하다."
+      "explanation": "객체 권한을 WITH GRANT OPTION 으로 받은 사용자가 회수되면, 그 사용자가 다른 사람에게 준 권한도 줄줄이 함께 회수된다. ⑤ 로 B 가 회수되면 B 가 준 C 의 권한이 사라지고, C 가 준 D 의 권한(③)도 사라진다. 하지만 D 는 ④ 에서 A 에게 직접 받은 권한이 따로 있어서 여전히 조회할 수 있다. 정답은 ②번이다. ① 은 연쇄 회수를 놓친 것, ③ 은 REVOKE 가 아무 영향이 없다고 본 것, ④ 는 D 가 A 에게 직접 받은 권한까지 지워진다고 본 것이다. 참고로 시스템 권한을 WITH ADMIN OPTION 으로 준 경우에는 이런 연쇄 회수가 일어나지 않는다.",
+      "references": [
+        {
+          "type": "sql",
+          "code": "-- ① A 가 실행\nGRANT SELECT ON T TO B\n  WITH GRANT OPTION;\n-- ② B 가 실행\nGRANT SELECT ON A.T TO C\n  WITH GRANT OPTION;\n-- ③ C 가 실행\nGRANT SELECT ON A.T TO D;\n-- ④ A 가 실행\nGRANT SELECT ON T TO D;\n-- ⑤ A 가 실행\nREVOKE SELECT ON T FROM B;"
+        }
+      ]
     },
     {
       "subject": "2과목",
@@ -1239,19 +1245,19 @@
     {
       "subject": "2과목",
       "number": 37,
-      "title": "아래 설명에 해당하는 문자열 함수는?",
+      "title": "아래 SQL 의 결과(A, B, C)로 옳은 것은? (Oracle 기준)",
       "options": [
-        "SUBSTR / SUBSTRING",
-        "INSTR",
-        "REPLACE",
-        "CONCAT"
+        "EXAM, 10, 12",
+        "_EXA, 10, 12",
+        "EXAM, 5, 12",
+        "EXAM, 10, 14"
       ],
       "correctIndex": 0,
-      "explanation": "SUBSTR(Oracle)·SUBSTRING(SQL Server)은 문자열의 M번째 위치에서 N개 문자를 잘라 반환하는 부분 문자열 함수이다. ② INSTR은 특정 문자의 위치를 찾고, ③ REPLACE는 문자열을 치환하며, ④ CONCAT은 문자열을 이어 붙이므로 자르기 동작과는 다르다.",
+      "explanation": "S 는 'SQLD_EXAM_2026' 이고 첫 '_' 는 5번째, 두 번째 '_' 는 10번째 글자다. A 는 INSTR 결과 5 에 1 을 더한 6번째부터 4글자를 잘라 'EXAM' 이다. B 의 INSTR(S, '_', 1, 2) 는 1번째 글자부터 찾은 두 번째 '_' 의 위치라 10 이다. C 는 세 번째 인자를 생략한 REPLACE 가 '_' 를 지워 'SQLDEXAM2026' 이 되므로 길이가 12 다. 정답은 ①번이다. ② 는 +1 을 빼먹은 것, ③ 은 두 번째 '_' 의 위치를 첫 '_' 다음부터 센 것, ④ 는 REPLACE 가 아무것도 바꾸지 않는다고 본 것이다.",
       "references": [
         {
-          "type": "text",
-          "content": "문자열의 M번째 위치에서 N개 문자를 잘라 반환한다."
+          "type": "sql",
+          "code": "SELECT SUBSTR(S, INSTR(S, '_') + 1, 4)\n         AS A,\n       INSTR(S, '_', 1, 2)     AS B,\n       LENGTH(REPLACE(S, '_')) AS C\nFROM  (SELECT 'SQLD_EXAM_2026' AS S\n       FROM   DUAL);"
         }
       ]
     },
