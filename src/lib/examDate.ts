@@ -65,3 +65,9 @@ export function planStartDate(now: Date = new Date()): string | null {
   const d = new Date(Date.UTC(next.year, next.month - 1, next.day - 21));
   return d.toISOString().slice(0, 10);
 }
+
+/** 일정 목록이 끝났을 때 안내할 다음 해 두 자리(예: 2026 마지막 시험 뒤 → '27') */
+export function nextScheduleYearShort(): string {
+  const last = EXAM_SCHEDULE[EXAM_SCHEDULE.length - 1];
+  return String(Number(last.date.slice(0, 4)) + 1).slice(2);
+}
