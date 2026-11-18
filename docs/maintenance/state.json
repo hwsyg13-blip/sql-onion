@@ -9,7 +9,8 @@
   "my_prs": [
     195,
     323,
-    324
+    324,
+    325
   ],
   "merged_prs": [
     197,
@@ -290,7 +291,9 @@
     "theory_free_limit": "3 chapters/day (user 11-17: 3쪽→3챕터)",
     "business_registration": "11-18 사용자: 사업자등록 신청 완료(번호 발급 대기). 다음: 통신판매업 신고 → PortOne 카카오페이 채널",
     "login_setup_guide_given": "11-18: Supabase 프로젝트(서울) → 카카오 앱(Web 도메인 3, Redirect=Supabase callback, 동의항목 닉네임 필수·이메일 선택(비즈앱), Client Secret) → Supabase Kakao provider(Allow users without email) + URL 설정 → Vercel VITE_SUPABASE_URL/ANON_KEY. 개발은 '이대로 개발' 대기",
-    "login_pr": "#324 카카오 로그인+마이페이지(LOGIN_ENABLED=hasSupabase, BETA_NO_AUTH 유지), 0002 마이그레이션(email NOT NULL 해제). 사용자: Supabase 0001·0002 실행, Kakao provider, Vercel env → 머지",
-    "kakao_webhook_note": "11-18 사용자가 계정 상태 변경 웹훅을 https://sqldyangpa.com 로 테스트 → 403(X-Vercel-Mitigated: deny, Vercel 방화벽). 로그인에 웹훅 불필요 — URL 비워 두라고 안내. 방화벽 우회 안 함"
+    "login_pr": "#324 카카오 로그인(Vercel 서버 함수 api/auth/*, HMAC 서명 HttpOnly 쿠키, Supabase 미사용 — 사용자 결정 11-18). env: KAKAO_REST_API_KEY·KAKAO_CLIENT_SECRET·SESSION_SECRET. 카카오 Redirect URI: https://sqldyangpa.com/api/auth/kakao/callback (+www). vercel.json /api 재작성 제외",
+    "kakao_webhook_note": "11-18 사용자가 계정 상태 변경 웹훅을 https://sqldyangpa.com 로 테스트 → 403(X-Vercel-Mitigated: deny, Vercel 방화벽). 로그인에 웹훅 불필요 — URL 비워 두라고 안내. 방화벽 우회 안 함",
+    "db_plan": "결제 붙일 때 Vercel Storage(Marketplace) Postgres(Neon) 추가, DATABASE_URL 하나로 접속 — 이관 쉽게 일반 SQL. 카카오 앱(1656582) 바꾸지 말 것(회원번호가 앱별)",
+    "icons_pr": "#325 예전 동그라미 양파 아이콘 → 메인 로고 양파(파비콘·홈 화면·검색 로고). 예전 아이콘 사용 금지(사용자 11-18)"
   }
 }
