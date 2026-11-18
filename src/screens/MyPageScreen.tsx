@@ -11,17 +11,6 @@ const KakaoBubble = ({ size = 20 }: any) => (
   </svg>
 );
 
-const Chip = ({ icon, children }: any) => (
-  <span style={{
-    padding: '6px 12px', borderRadius: 999, background: 'var(--bg-muted)',
-    fontSize: 13, color: 'var(--fg-2)', display: 'inline-flex', alignItems: 'center', gap: 5,
-  }}>{icon}{children}</span>
-);
-
-const chipIcon = (d: string) => (
-  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--point-600)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d={d}/></svg>
-);
-
 const LoginCard = () => {
   const [busy, setBusy] = React.useState(false);
   const [error, setError] = React.useState('');
@@ -41,18 +30,10 @@ const LoginCard = () => {
       padding: '36px 20px 24px', background: 'var(--bg-card)', border: '1px solid var(--border-subtle)',
       borderRadius: 20, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 20,
     }}>
-      <span style={{
-        width: 72, height: 72, borderRadius: 999, background: 'var(--point-050)', color: 'var(--point-600)',
-        display: 'flex', alignItems: 'center', justifyContent: 'center',
-      }}>
-        <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round" aria-hidden="true"><path d="M5 3h11l3 3v15H5z"/><path d="M8 3v5h7V3M8 21v-7h8v7"/></svg>
-      </span>
-      <h1 style={{ margin: 0, fontSize: 22, fontWeight: 700, textAlign: 'center', color: 'var(--fg-1)' }}>학습 기록을 저장하세요</h1>
-      <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', justifyContent: 'center' }}>
-        <Chip icon={chipIcon('M4 18V6M10 18v-8M16 18v-5M22 18H2')}>진도</Chip>
-        <Chip icon={chipIcon('M12 3l2.6 5.4 5.9.9-4.3 4.1 1 5.9L12 16.6 6.8 19.3l1-5.9L3.5 9.3l5.9-.9z')}>점수</Chip>
-        <Chip icon={chipIcon('M6 6l12 12M18 6L6 18')}>오답</Chip>
-      </div>
+      <img src="/assets/onion-mascot.svg" alt="" width="96" height="96" style={{ display: 'block' }}/>
+      <h1 style={{ margin: 0, fontSize: 21, fontWeight: 700, lineHeight: 1.45, textAlign: 'center', color: 'var(--fg-1)', wordBreak: 'keep-all' }}>
+        학습 기록을 남기고<br/>합격까지 달려보세요!
+      </h1>
       <button onClick={start} disabled={busy} style={{
         alignSelf: 'stretch', marginTop: 4, height: 56, border: 0, borderRadius: 12,
         background: '#FEE500', color: '#191919', fontFamily: 'inherit', fontSize: 16, fontWeight: 700,
