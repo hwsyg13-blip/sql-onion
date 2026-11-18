@@ -468,16 +468,22 @@ export const ROUND_57: QuizQuestion[] = [
     "round": 57,
     "subject": "2과목",
     "number": 19,
-    "title": "정규표현식 수량자 설명 중 옳은 것은?",
+    "title": "아래 SQL 의 결과(A, B, C)로 옳은 것은? (Oracle 기준)",
     "options": [
-      "? : 대상이 0회 혹은 그 이상 반복하는지 확인한다.",
-      "* : 대상이 1회 이상 반복하는지 확인한다.",
-      "+ : 대상이 0회 혹은 그 이상 반복하는지 확인한다.",
-      "{m,} : 대상이 m회 이상 반복하는지 확인한다."
+      "2, 12, colour",
+      "3, 12, color",
+      "3, 345, color",
+      "3, 345, colour"
     ],
     "correctIndex": 3,
-    "explanation": "? 는 0회 또는 1회, * 는 0회 이상, + 는 1회 이상, {m,} 은 m회 이상 반복을 뜻한다. ① 은 ? 를 0회 이상이라고 해 * 와 혼동했고, ② 는 * 를 1회 이상이라고 해 + 와 혼동했으며, ③ 은 + 를 0회 이상이라고 해 * 와 혼동했다. 정의대로 설명한 것은 ④ 뿐이다.",
-    "_source": "authored"
+    "explanation": "+ 는 앞 글자가 1번 이상, {2,} 는 2번 이상, ? 는 0번 또는 1번 나온다는 수량자다. A 의 'a+b' 는 a 가 하나 이상 있고 b 로 끝나는 부분이라 aab, aaab, ab 의 3개다. 맨 끝의 b 는 앞에 a 가 없어 빠진다. B 는 숫자가 2개 이상 이어진 부분 중 두 번째라, '12' 다음의 '345' 다. 6 은 한 자리라 해당하지 않는다. C 의 'colou?r' 는 u 가 있어도 없어도 되므로 color, colour 가 차례로 맞고, 두 번째는 colour 다. colr 는 o 가 없어 맞지 않는다. 정답은 ④번이다. ① 은 + 를 2번 이상으로 본 것, ② 는 n번째 인자를 무시하고 첫 일치만 본 것, ③ 은 C 에서 첫 일치를 고른 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT\n  REGEXP_COUNT('aab aaab ab b', 'a+b')\n    AS A,\n  REGEXP_SUBSTR('x12y345z6',\n                '[0-9]{2,}', 1, 2)\n    AS B,\n  REGEXP_SUBSTR('color colour colr',\n                'colou?r', 1, 2)\n    AS C\nFROM DUAL;"
+      }
+    ]
   },
   {
     "id": 10169,
@@ -667,16 +673,52 @@ export const ROUND_57: QuizQuestion[] = [
     "round": 57,
     "subject": "2과목",
     "number": 24,
-    "title": "윈도우 절에서 행 단위(Row-based)로 윈도우 프레임을 지정할 때 사용하는 키워드는?",
+    "title": "아래 매출 테이블에 대한 SQL 에서 월이 1, 3, 5 인 행의 S 값으로 옳은 것은?",
     "options": [
-      "ROWS",
-      "RANGE",
-      "GROUPS",
-      "PARTITION"
+      "30, 90, 90",
+      "60, 90, 120",
+      "10, 60, 150",
+      "10, 50, 90"
     ],
     "correctIndex": 0,
-    "explanation": "윈도우 프레임을 물리적인 행 개수(앞뒤 몇 행)로 정할 때는 ROWS 를 쓴다(①). RANGE(②)는 ORDER BY 값의 논리적 범위(예: 현재 값 ± 100)로 프레임을 정하고, GROUPS(③)는 동일 값 묶음 단위로 세는 방식이며, PARTITION(④)은 윈도우를 나누는 그룹 기준이지 프레임 단위가 아니다.",
-    "_source": "authored"
+    "explanation": "ROWS BETWEEN 1 PRECEDING AND 1 FOLLOWING 은 행 기준으로 앞 1행, 현재 행, 뒤 1행을 묶는다. 1월은 앞 행이 없어 1월과 2월만 더해 30 이다. 3월은 2·3·4월이라 90, 5월은 뒤 행이 없어 4·5월만 더해 90 이다. 정답은 ①번이다. ② 는 처음과 끝에서도 늘 3행을 채운다고 본 것, ③ 은 처음부터 현재 행까지의 누적 합으로 본 것, ④ 는 1 FOLLOWING 을 빼고 앞 행과 현재 행만 더한 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "caption": "매출",
+        "headers": [
+          "월",
+          "금액"
+        ],
+        "rows": [
+          [
+            "1",
+            "10"
+          ],
+          [
+            "2",
+            "20"
+          ],
+          [
+            "3",
+            "30"
+          ],
+          [
+            "4",
+            "40"
+          ],
+          [
+            "5",
+            "50"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT 월,\n       SUM(금액) OVER (\n         ORDER BY 월\n         ROWS BETWEEN 1 PRECEDING\n                  AND 1 FOLLOWING\n       ) AS S\nFROM   매출;"
+      }
+    ]
   },
   {
     "id": 10174,
@@ -735,16 +777,22 @@ export const ROUND_57: QuizQuestion[] = [
     "round": 57,
     "subject": "2과목",
     "number": 26,
-    "title": "고유키(UNIQUE) 제약조건에 대한 설명 중 옳지 않은 것은?",
+    "title": "아래 테이블을 만든 뒤 INSERT ㉠~㉤ 을 차례로 실행했을 때, 오류가 나는 것만 모두 고른 것은? (Oracle)",
     "options": [
-      "고유키 컬럼에는 NULL 값이 여러 개 올 수 없다.",
-      "기본키는 고유키와 NOT NULL 제약조건이 합쳐진 상태이다.",
-      "고유키는 한 테이블에 여러 개 정의할 수 있다.",
-      "고유키 컬럼에는 기본적으로 인덱스가 자동 생성된다."
+      "㉣, ㉤",
+      "㉣",
+      "㉢, ㉣",
+      "㉢, ㉣, ㉤"
     ],
     "correctIndex": 0,
-    "explanation": "기본키는 고유키(UNIQUE)에 NOT NULL 을 더한 것이고(②), 고유키는 한 테이블에 여러 개 만들 수 있으며(③), 만들면 고유 인덱스가 자동 생성된다(④). 고유키 컬럼은 NULL 을 허용하고, Oracle 에서는 NULL 끼리는 같은 값으로 보지 않아 NULL 행을 여러 개 넣을 수 있으므로 ① 이 옳지 않다. (SQL Server 는 고유키 컬럼에 NULL 을 하나만 허용한다.)",
-    "_source": "authored"
+    "explanation": "기본키(PRIMARY KEY)는 UNIQUE 와 NOT NULL 이 합쳐진 제약이라 중복도 NULL 도 안 된다. UNIQUE 는 같은 값의 중복만 막고, NULL 은 값이 없다는 뜻이라 서로 같다고 보지 않아 여러 행에 들어갈 수 있다. ㉠·㉡ 은 문제없이 들어가고, ㉢ 도 EMAIL 이 NULL 이라 ㉡ 의 NULL 과 겹쳐도 오류가 나지 않는다. ㉣ 은 EMAIL 'a@x.com' 이 ㉠ 과 겹쳐 UNIQUE 위반, ㉤ 은 기본키 ID 에 NULL 을 넣어 오류다. 정답은 ①번이다. ② 는 기본키에 NULL 이 들어갈 수 있다고 본 것, ③·④ 는 UNIQUE 칼럼에 NULL 이 하나만 들어간다고 본 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "CREATE TABLE T (\n  ID    NUMBER PRIMARY KEY,\n  EMAIL VARCHAR2(50) UNIQUE\n);\n\n-- ㉠\nINSERT INTO T VALUES (1, 'a@x.com');\n-- ㉡\nINSERT INTO T VALUES (2, NULL);\n-- ㉢\nINSERT INTO T VALUES (3, NULL);\n-- ㉣\nINSERT INTO T VALUES (4, 'a@x.com');\n-- ㉤\nINSERT INTO T VALUES (NULL, 'b@x.com');"
+      }
+    ]
   },
   {
     "id": 10176,
@@ -843,16 +891,70 @@ export const ROUND_57: QuizQuestion[] = [
     "round": 57,
     "subject": "2과목",
     "number": 30,
-    "title": "계층형 질의에서 트리 전개가 끝난 뒤 결과 행을 필터링할 때 사용하는 절은?",
+    "title": "아래 EMP 테이블에 대한 계층형 SQL 의 결과에 나오는 사원을 모두 고른 것은? (Oracle)",
     "options": [
-      "CONNECT BY 절",
-      "FROM 절",
-      "WHERE 절",
-      "START WITH 절"
+      "A, C",
+      "C, D",
+      "A, C, D",
+      "A, B, C, D, E, F"
     ],
     "correctIndex": 2,
-    "explanation": "④ `START WITH` 는 트리 전개의 시작점(루트), ① `CONNECT BY` 는 부모-자식 관계 조건이라 두 절은 트리 전개 자체에 영향을 준다. 반면 `WHERE` 는 트리 전개가 모두 끝난 결과 행에만 적용되어 단순 필터로 동작한다. ② FROM 절은 대상 테이블을 정할 뿐 결과를 거르지 않는다.",
-    "_source": "authored"
+    "explanation": "계층형 SQL 의 WHERE 절은 START WITH 와 CONNECT BY 로 트리를 모두 전개한 뒤에 적용된다. 먼저 A 를 뿌리로 A → B, C, B → D, E, C → F 의 여섯 행이 모두 전개되고, 그다음 부서 = 10 인 A, C, D 만 남는다. D 의 관리자 B 는 부서가 20 이지만, WHERE 는 가지를 잘라 내지 않으므로 D 는 그대로 남는다. 정답은 ③번이다. ① 은 부서 조건을 CONNECT BY 에 넣었을 때(CONNECT BY PRIOR 사번 = 관리자 AND 부서 = 10)처럼 B 아래 가지까지 잘린다고 본 값이다. ② 는 START WITH 로 시작한 A 는 결과에서 빠진다고 본 값, ④ 는 WHERE 를 무시한 값이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "caption": "EMP",
+        "headers": [
+          "사번",
+          "이름",
+          "관리자",
+          "부서"
+        ],
+        "rows": [
+          [
+            "1",
+            "A",
+            "NULL",
+            "10"
+          ],
+          [
+            "2",
+            "B",
+            "1",
+            "20"
+          ],
+          [
+            "3",
+            "C",
+            "1",
+            "10"
+          ],
+          [
+            "4",
+            "D",
+            "2",
+            "10"
+          ],
+          [
+            "5",
+            "E",
+            "2",
+            "20"
+          ],
+          [
+            "6",
+            "F",
+            "3",
+            "20"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT 이름\nFROM   EMP\nWHERE  부서 = 10\nSTART WITH 관리자 IS NULL\nCONNECT BY PRIOR 사번 = 관리자;"
+      }
+    ]
   },
   {
     "id": 10180,

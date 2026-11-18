@@ -193,15 +193,21 @@
     {
       "subject": "2과목",
       "number": 13,
-      "title": "COMMIT 이전 DML 에 대한 설명으로 적절하지 않은 것은?",
+      "title": "T 테이블에 ID 가 1, 값이 100 인 행 하나가 있다. 두 세션이 아래 순서로 실행할 때 ㉠, ㉡, ㉢ 의 결과로 옳은 것은? (Oracle 기본 설정)",
       "options": [
-        "본인 세션에서는 SELECT 로 변경 내용을 조회할 수 있다.",
-        "ROLLBACK 으로 변경을 취소할 수 있다.",
-        "DDL 수행 시 묵시적 COMMIT 이 발생한다.",
-        "다른 유저가 커밋 이전의 변경 내용을 수정할 수 있다."
+        "200, 200, 210",
+        "100, 100, 110",
+        "100, 200, 200",
+        "100, 200, 210"
       ],
       "correctIndex": 3,
-      "explanation": "커밋 전 변경 중인 행에는 잠금(Lock)이 걸려 있어 다른 사용자는 그 행을 수정할 수 없고(④ 가 옳지 않음), 조회하더라도 변경 전(마지막으로 커밋된) 데이터만 보인다. 본인 세션에서는 변경된 내용을 조회할 수 있고(①), ROLLBACK 으로 취소할 수 있으며(②), Oracle 에서는 DDL 을 수행하면 그 전에 묵시적 COMMIT 이 일어난다(③)."
+      "explanation": "COMMIT 하지 않은 변경은 다른 세션에서 보이지 않는다. 그래서 ㉠ 시점의 세션2 는 변경 전 값 100 을 읽는다. 세션1 이 COMMIT 한 뒤에는 변경이 확정되어 ㉡ 은 200 이다. 세션2 가 200 에 10 을 더해 COMMIT 했으므로 ㉢ 에서 세션1 은 210 을 읽는다. 정답은 ④번이다. ① 은 커밋 전 변경도 보인다고 본 것, ② 는 세션2 가 처음 읽은 값만 계속 본다고 본 것, ③ 은 다른 세션이 커밋한 변경이 세션1 에 안 보인다고 본 것이다.",
+      "references": [
+        {
+          "type": "sql",
+          "code": "-- 세션1\nUPDATE T SET 값 = 200 WHERE ID = 1;\n-- 세션2\nSELECT 값 FROM T WHERE ID = 1;   -- ㉠\n-- 세션1\nCOMMIT;\n-- 세션2\nSELECT 값 FROM T WHERE ID = 1;   -- ㉡\nUPDATE T SET 값 = 값 + 10 WHERE ID = 1;\nCOMMIT;\n-- 세션1\nSELECT 값 FROM T WHERE ID = 1;   -- ㉢"
+        }
+      ]
     },
     {
       "subject": "2과목",
@@ -1495,15 +1501,47 @@
     {
       "subject": "2과목",
       "number": 46,
-      "title": "다른 테이블에서 파생된 테이블로 물리적 데이터를 저장하지 않고 논리적으로만 존재하는 객체는?",
+      "title": "아래 사원 테이블과 뷰 V 에 대해 ㉠~㉣ 을 각각 실행할 때 오류가 발생하는 것만 모두 고른 것은?",
       "options": [
-        "VIEW (뷰)",
-        "INDEX (인덱스)",
-        "SYNONYM (동의어)",
-        "SEQUENCE (시퀀스)"
+        "㉡, ㉢",
+        "㉡",
+        "㉡, ㉢, ㉣",
+        "오류 없음"
       ],
       "correctIndex": 0,
-      "explanation": "VIEW 는 하나 이상의 기본 테이블에서 파생된 가상 테이블로, 정의만 데이터 사전에 저장될 뿐 실제 데이터를 저장하지 않는다. ② INDEX 는 검색 성능을 위한 물리 객체, ③ SYNONYM 은 객체에 대한 별칭, ④ SEQUENCE 는 순번 생성기이다."
+      "explanation": "WITH CHECK OPTION 이 붙은 뷰는 뷰 조건(부서 = 10)을 벗어나는 행을 넣거나, 행을 조건 밖으로 바꾸는 것을 막는다. ㉠ 은 부서 10 이라 들어간다. ㉡ 은 부서 20 을 넣으려 해서 오류, ㉢ 은 1번 사원을 부서 20 으로 옮기려 해서 오류다. ㉣ 의 3번 사원은 부서 20 이라 뷰에 보이지 않으므로 0건 삭제로 끝나고 오류는 아니다. 정답은 ①번이다. ② 는 UPDATE 는 검사하지 않는다고 본 것, ③ 은 뷰에 없는 행을 지우면 오류라고 본 것, ④ 는 CHECK OPTION 의 역할을 놓친 것이다.",
+      "references": [
+        {
+          "type": "table",
+          "caption": "사원",
+          "headers": [
+            "사번",
+            "이름",
+            "부서"
+          ],
+          "rows": [
+            [
+              "1",
+              "김",
+              "10"
+            ],
+            [
+              "2",
+              "이",
+              "10"
+            ],
+            [
+              "3",
+              "박",
+              "20"
+            ]
+          ]
+        },
+        {
+          "type": "sql",
+          "code": "CREATE VIEW V AS\n  SELECT * FROM 사원 WHERE 부서 = 10\n  WITH CHECK OPTION;\n\n-- ㉠\nINSERT INTO V VALUES (4, '오', 10);\n-- ㉡\nINSERT INTO V VALUES (5, '유', 20);\n-- ㉢\nUPDATE V SET 부서 = 20 WHERE 사번 = 1;\n-- ㉣\nDELETE FROM V WHERE 사번 = 3;"
+        }
+      ]
     },
     {
       "subject": "2과목",

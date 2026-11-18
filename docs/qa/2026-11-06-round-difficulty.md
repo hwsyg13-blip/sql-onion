@@ -243,3 +243,108 @@
 |---|---|---|---|---|
 | 55-32 | 1:N 연쇄 조인 건수·LEFT OUTER JOIN | ERD 만 보고 문장 고르기 → ERD + 세 테이블 데이터에서 일반 조인 ㉠ 과 LEFT OUTER JOIN 연쇄 ㉡ 의 COUNT | ㉠ 6, ㉡ 8 | PostgreSQL: 6·8. 상세가 없는 계약(K4)과 계약이 없는 고객(C3)을 하나씩 둬 외부 조인에서 각각 1행씩 남는 걸 보이게 함. ERD SVG 확인 |
 | 55-5 | 제1·제2정규형 | 1정규형 정의 문장 → 다중 값이 든 학생 표, 행으로 나눈 뒤 행 수와 남는 부분 함수 종속 | ④ | 나눈 뒤 6행(2+1+3)을 보기 ③ 으로 넣어 데이터를 실제로 세게 함 |
+
+## 순환 1바퀴 — 56회 (11-17 22시 실행)
+
+| 문항 | 개념 | 바뀐 점 | 정답 | 5가지 시선에서 걸린 것과 처리 |
+|---|---|---|---|---|
+| 56-49 | CUBE·ROLLUP·GROUPING SETS 행 수 | 'CUBE 이름 고르기' → 같은 조합이 두 행인 판매 표에서 세 확장 그룹의 결과 행 수 | 10, 8, 5 | PostgreSQL: 10·8·5, ROLLUP(분기, 지역) 이면 7(오답 ②). 같은 그룹 두 행(서울 1Q)을 넣어 행 수가 아닌 조합 수를 세게 함 |
+| 56-23 | 셀프 조인 + LEFT OUTER JOIN | 셀프 조인 정의 → 관리자사번이 NULL 인 사원과 없는 사번(9)을 가리키는 사원이 있는 표에서 관리자 NULL 행 | 김, 정 | PostgreSQL: 김·정. 방향을 거꾸로 읽은 '김, 이' 를 오답으로 |
+
+## 순환 1바퀴 — 57회 (11-17 22시 실행)
+
+| 문항 | 개념 | 바뀐 점 | 정답 | 5가지 시선에서 걸린 것과 처리 |
+|---|---|---|---|---|
+| 57-30 | 계층형 SQL 의 WHERE 적용 시점 | 'WHERE 절' 이름 고르기 → 6행 EMP 에서 WHERE 부서 = 10 이 전개 후에 걸려 부모(B)가 빠져도 자식(D)이 남는 것 | A, C, D | PostgreSQL(재귀 CTE): WHERE 면 A·C·D, 조건을 CONNECT BY 에 넣으면 A·C(오답 ①). 형제 순서는 정해지지 않아 '출력 순서' 가 아닌 '모두 고르기' 로 물음 |
+| 57-26 | PRIMARY KEY·UNIQUE 와 NULL | 설명 고르기 → CREATE TABLE 과 INSERT 5개 중 오류 나는 것 고르기 | ㉣, ㉤ | PostgreSQL: UNIQUE 칼럼 NULL 두 번은 통과, 중복 값·PK NULL 은 오류(Oracle 동일) |
+
+## 순환 1바퀴 — 58~62회 (11-18 01시, 사용자 지시 "한 사이클 오늘 완료")
+
+| 문항 | 개념 | 바뀐 점 | 정답 | 검증·처리 |
+|---|---|---|---|---|
+| 58-49 | PIVOT | 설명 고르기 → 판매 표 PIVOT(SUM, IN 목록 밖 Q3 제외) 결과 | 2025 Q1 15·Q2 20 / 2026 Q1 30·Q2 NULL | PostgreSQL(CASE 집계로 동일 계산). 빈 칸 0·첫 값·IN 밖 열 생성 오답 |
+| 58-34 | GROUPING SETS + GROUPING() | 설명 고르기 → 지역 NULL 행이 있는 표에서 '미지정'·'합계' 구분 | 미지정 5, 합계 65 | PostgreSQL GROUPING SETS·GROUPING 동일 |
+| 59-40 | NATURAL JOIN vs USING | 설명 고르기 → 같은 이름 칼럼이 둘(부서번호·지역)인 표에서 행 수 | 2, 4 | PostgreSQL 2·4 |
+| 59-28 | DATE 범위·BETWEEN 경계 | 보기 SQL 만 → 0시 경계 데이터 5행에서 정확한 조건 모두 고르기 | ㉠, ㉡ | PostgreSQL: BETWEEN 은 21일 0시(D) 포함, '=' 은 B 만 |
+| 60-32 | ALTER TABLE 과 기존 데이터 | 설명 고르기 → 데이터 있는 표에 ALTER 4개, 오류 나는 것 | ㉠, ㉣ | PostgreSQL: NOT NULL(기존 NULL)·자릿수 축소 오류, DEFAULT 있는 NOT NULL 추가는 통과. 390px 에서 ㉢ 줄이 꺾여 두 줄로 나눔 |
+| 60-45 | NVL vs 덧셈·COUNT | 설명 고르기 → EMP 4행에서 SUM(NVL), SUM(COMM+SAL), COUNT(NVL) | 350, 650, 3 | PostgreSQL 350·650·3 (덧셈 오해 950) |
+| 61-17 | 관계 대수 DIVIDE | 순수 관계 연산자 설명 → 수강 ÷ 필수 결과 | S1, S2 | PostgreSQL NOT EXISTS 두 번 |
+| 61-36 | ROWNUM 부여 시점 | 정의 고르기 → ROWNUM = 1 / = 2 / <= 2 / > 1 행 수 | 1, 0, 2, 0 | verify-sql-pg ROWNUM 변환과 일치 |
+| 62-24 | 빈 집합 집계 | GROUP BY 있는 SQL 하나 → GROUP BY 유무·COUNT·SUM 4개 비교 | N / 공집합 / 0 / NULL | PostgreSQL 동일 |
+| 62-32 | INTERSECT·UNION·UNION ALL 과 NULL | 행 수만 주던 문항 → 세 테이블 데이터에서 두 연산 행 수 | 5, 3 | PostgreSQL 5·3 |
+
+이로써 45~62회 18개 회차 순환 1바퀴 완료(회차당 2문항, 총 36문항). 다음 순환은 45회부터.
+
+## 순환 2바퀴 — 45회 (11-18 06시 실행)
+
+| 문항 | 개념 | 바뀐 점 | 정답 | 검증·처리 |
+|---|---|---|---|---|
+| 45-18 | FIRST_VALUE·LAST_VALUE 기본 윈도우 범위 | 함수 이름 고르기 → 부서별 급여 표에서 ORDER BY 만 있을 때와 UNBOUNDED FOLLOWING 일 때 LAST_VALUE 차이 | F B, L1 C, L2 A | PostgreSQL 동일(기본 범위 = 현재 행까지) |
+| 45-39 | 상관 서브쿼리 + AVG | 서브쿼리 설명 고르기 → 부서별 평균보다 급여가 큰 사원 | B, E | PostgreSQL: 비상관이면 B·C·E, >= 면 B·C·E·F |
+
+부수 수정: 회차 분석 페이지의 'SQL 결과 계산 비율' 문장이 3페이지에 같은 숫자로 반복돼 문체 검사 경고 → 회차마다 표현을 바꿈(build-static-pages).
+
+## 순환 2바퀴 — 46~62회 (11-18, 사용자 지시 "문제 보강")
+
+회차당 2문항, 이름·정의 고르기 문항을 표·SQL 을 직접 계산하는 문항으로 바꿈. 정답 번호 자리는 원래대로 유지.
+
+| 문항 | 개념 | 정답 | 검증 |
+|---|---|---|---|
+| 46-33 | WITH GRANT OPTION 연쇄 회수 | D | PostgreSQL(REVOKE … CASCADE): D 만 SELECT 가능 |
+| 46-37 | SUBSTR·INSTR(4인자)·REPLACE(2인자) | EXAM, 10, 12 | PostgreSQL + 직접 계산(INSTR 4인자는 Oracle 전용) |
+| 47-13 | SAVEPOINT 되돌림 범위 | 1, 4 | PostgreSQL 동일 |
+| 47-33 | RATIO_TO_REPORT·PERCENT_RANK·CUME_DIST | 0.2, 0.25, 0.8 | PostgreSQL(비율은 x/SUM OVER) |
+| 48-31 | COUNT(*)·COUNT(칼럼)·DISTINCT·NVL | 5, 3, 2, 3 | PostgreSQL 동일 |
+| 48-49 | LAG 기본값·LEAD | 100, 0, 120 | PostgreSQL 동일 |
+| 49-13 | 커밋 전 변경의 가시성(두 세션) | 100, 200, 210 | READ COMMITTED 기준 |
+| 49-46 | 뷰 WITH CHECK OPTION | ㉡, ㉢ | PostgreSQL: ㉡·㉢ 오류, ㉣ 0건 |
+| 50-40 | LIKE 의 _ 와 ESCAPE | 2, 3, 6 | PostgreSQL 동일 |
+| 50-47 | 음수 ROUND·TRUNC·CEIL·FLOOR | -2.5, -2.4, -2, -3 | PostgreSQL numeric 동일 |
+| 51-43 | ORDER BY 다중 키 + DESC 의 NULL 위치 | 2, 4, 1, 3, 5 | PostgreSQL 동일(DESC 기본 NULLS FIRST) |
+| 51-45 | ON DELETE SET NULL·CASCADE | 2, 1 | PostgreSQL 동일 |
+| 52-47 | DATE 산술·ADD_MONTHS 말일 | 20270101003000 … 20260228 | PostgreSQL(interval) 동일 |
+| 52-30 | CTAS 로 넘어오는 제약(NOT NULL 만) | ㉡ | Oracle 규칙(PostgreSQL 은 NOT NULL 도 안 넘어와 다름) |
+| 53-19 | DENSE_RANK·RANK·ROW_NUMBER 필터 | 5, 3, 3 | PostgreSQL 동일 |
+| 53-37 | UNPIVOT 과 INCLUDE NULLS | 3, 6 | PostgreSQL(LATERAL VALUES 로 같은 계산) |
+| 54-31 | NTILE 나머지 배분 | D, E | PostgreSQL 동일 |
+| 54-16 | 스칼라 서브쿼리 다중 행 오류·없는 행 NULL | ㉠ 오류, ㉡ 2행 | PostgreSQL 동일 |
+| 55-38 | FETCH … WITH TIES·OFFSET | A·B·C / B·C | PostgreSQL 동일 |
+| 55-39 | NULL 과 AVG·SUM/COUNT(*) | 200, 120, 120, 3 | PostgreSQL 동일 |
+| 56-11 | NOT·AND·OR 우선순위 | 3, 2, 2 | PostgreSQL 동일 |
+| 56-20 | TRUNCATE 자동 COMMIT | 4, 0 | Oracle 규칙(PostgreSQL 은 TRUNCATE 도 되돌려져 다름) |
+| 57-19 | 정규식 수량자 + · {2,} · ? | 3, 345, colour | PostgreSQL 16 regexp_count·regexp_substr 동일 |
+| 57-24 | ROWS 1 PRECEDING ~ 1 FOLLOWING | 30, 90, 90 | PostgreSQL 동일 |
+| 58-36 | MERGE 의 UPDATE 뒤 DELETE WHERE | 1 100, 2 250, 4 70 | PostgreSQL MERGE(DELETE 절로 같은 결과) |
+| 58-17 | CONNECT_BY_ISLEAF·SYS_CONNECT_BY_PATH | C, D / /A/B/D | PostgreSQL 재귀 CTE |
+| 59-31 | NULL 과 3값 논리(NOT, OR) | 1, 0, 4 | PostgreSQL 동일 |
+| 59-41 | COMMIT 이 저장점을 지움 | 1, 2 | PostgreSQL 동일(저장점 없음 오류) |
+| 60-27 | 팬텀 리드와 ANSI 격리 수준 | 팬텀 리드, SERIALIZABLE | ANSI 표준 정의 |
+| 60-41 | 단순 CASE·검색 CASE·DECODE 의 NULL | Y, N, N | PostgreSQL(CASE), DECODE 는 Oracle 규칙 |
+| 61-42 | LEFT JOIN 조건의 ON / WHERE 위치 | 4, 2, 3 | PostgreSQL 동일 |
+| 61-28 | MGR IS NOT NULL vs EXISTS vs IN | 3, 2, 2 | PostgreSQL 동일 |
+| 62-25 | 중복·NULL 이 있는 조인 행 수 | 4, 5, 6 | PostgreSQL 동일 |
+| 62-40 | HAVING 별칭·GROUP BY 누락·GROUP BY 없는 HAVING | ㉡, ㉢ | PostgreSQL 동일(Oracle 19c 기준 명시) |
+
+화면 확인: 390px 에서 34문항 전부 캡처. 처음엔 SQL 21개가 줄이 꺾여, 모든 줄을 화면 폭 안(한글 2칸 기준 39칸)으로 다시 나눔. 이로써 순환 2바퀴(45~62회) 완료.
+
+## 순환 3바퀴 — 45회 (11-18 14시 실행)
+
+| 문항 | 개념 | 바뀐 점 | 정답 | 검증·처리 |
+|---|---|---|---|---|
+| 45-2-16 | MINUS·UNION·UNION ALL 과 NULL·중복 | 집합 기호 고르기 → 중복과 NULL 이 있는 두 테이블의 세 연산 행 수 | 2, 5, 8 | PostgreSQL(EXCEPT) 2·5·8. 집합 연산은 NULL 끼리 같은 값으로 봄 |
+| 45-1-10 | 제2정규형(부분 함수 종속 제거) | 정의 고르기 → 함수 종속 4개를 보고 2NF 분해 결과 고르기 | 수강 / 학생 / 과목(교수명 포함) | 3NF(교수 분리)를 오답으로. 7칼럼 표가 390px 에서 잘려 스키마 한 줄 + 함수 종속 표로 바꿈 |
+
+## 순환 3바퀴 — 46회 (11-18 14시 실행)
+
+| 문항 | 개념 | 바뀐 점 | 정답 | 검증·처리 |
+|---|---|---|---|---|
+| 46-1-5 | 파생 속성 vs 기본 속성 | 이름 고르기 → 주문·주문상세 표와 업무 규칙에서 파생 속성만 고르기 | 배송일, 상품수, 총액 | 표 값으로 계산 확인(O1 총액 7000). 주문 시점 단가는 기본 속성(오답 함정). 390px 에서 5칼럼 표가 잘려 칼럼 이름을 줄임 |
+| 46-1-6 | 단일 칼럼 키의 2NF·이행 종속 | 설명 → 사원 표와 함수 종속에서 가장 높은 정규형 | 제2정규형 | 단일 키라 부분 종속 없음, 사번 → 부서번호 → 부서명 이행 종속 |
+
+## 순환 3바퀴 — 47회 + 문의 1577 (11-18 22시 실행)
+
+| 문항 | 개념 | 바뀐 점 | 정답 | 검증·처리 |
+|---|---|---|---|---|
+| 45-2-22 | SUBSTR 음수 위치·음수 길이·INSTR | **문의 1577("보기 형태가 이게 최선인지")** — 보기에 SQL 호출 4개를 그대로 넣고 참고 SQL 에도 같은 호출과 글자 위치표(힌트)를 반복하던 형태 → SQL 한 블록의 A~D 결과를 고르는 형태 | SE, SE, NULL, SE | Oracle 규칙대로 직접 계산(음수 위치 = 끝에서, 음수 길이 = NULL) |
+| 47-2-38 | 2단계 셀프 조인(차상위) | 제목은 '차상위' 인데 답은 직속 매니저 조인이던 문항 → LEFT JOIN 두 번으로 차상위 구하기 | B, 2 | PostgreSQL 동일 |
+| 47-2-14 | 트리거와 트랜잭션 | 저장 프로시저 설명 고르기 → AFTER INSERT 트리거 + ROLLBACK 뒤 주문·로그 행 수 | 1, 1 | PostgreSQL(plpgsql 트리거) 1·1 |

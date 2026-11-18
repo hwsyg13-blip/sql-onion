@@ -1546,16 +1546,64 @@ export const ROUND_51: QuizQuestion[] = [
     "round": 51,
     "subject": "2과목",
     "number": 43,
-    "title": "ORDER BY COL1, COL2 DESC, COL3 NULLS LAST 에 대한 해석으로 옳은 것은?",
+    "title": "아래 T 테이블을 SQL 로 조회했을 때 출력되는 ID 순서로 옳은 것은? (Oracle 기준)",
     "options": [
-      "COL1 오름차순, COL2 내림차순, COL3 오름차순 (NULL 마지막)",
-      "모든 컬럼 내림차순 정렬",
-      "NULL 은 항상 가장 앞에 정렬된다.",
-      "ORDER BY 에 여러 컬럼은 지정할 수 없다."
+      "2, 4, 1, 3, 5",
+      "2, 4, 1, 5, 3",
+      "4, 2, 1, 3, 5",
+      "1, 2, 4, 5, 3"
     ],
     "correctIndex": 0,
-    "explanation": "ORDER BY 의 정렬 옵션은 컬럼별로 독립 적용된다. COL1 은 기본값 ASC, COL2 는 DESC, COL3 은 ASC 이며 NULLS LAST 옵션으로 NULL 이 마지막에 출력된다. ② 는 DESC 가 모든 컬럼에 적용된다고 본 것, ③ NULLS LAST 를 지정했고 오름차순 기본값에서도 Oracle 은 NULL 을 뒤에 두며, ④ 여러 컬럼을 지정할 수 있다.",
-    "_source": "authored"
+    "explanation": "먼저 C1 오름차순이라 A(1, 2, 4)가 B(3, 5)보다 앞선다. A 안에서는 C2 내림차순이라 2인 2·4번이 1인 1번보다 먼저 나오고, 2·4번은 C3 오름차순에 NULLS LAST 라 값이 5인 2번 다음에 NULL 인 4번이 온다. B 안에서는 C2 내림차순인데, Oracle 은 NULL 을 가장 큰 값으로 보므로 DESC 에서 NULL 인 3번이 1인 5번보다 먼저 나온다. 결과는 2, 4, 1, 3, 5 다. 정답은 ①번이다. ② 는 DESC 에서도 NULL 이 뒤로 간다고 본 것, ③ 은 NULLS LAST 를 거꾸로 적용한 것, ④ 는 C2 DESC 를 무시한 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "caption": "T",
+        "headers": [
+          "ID",
+          "C1",
+          "C2",
+          "C3"
+        ],
+        "rows": [
+          [
+            "1",
+            "A",
+            "1",
+            "NULL"
+          ],
+          [
+            "2",
+            "A",
+            "2",
+            "5"
+          ],
+          [
+            "3",
+            "B",
+            "NULL",
+            "3"
+          ],
+          [
+            "4",
+            "A",
+            "2",
+            "NULL"
+          ],
+          [
+            "5",
+            "B",
+            "1",
+            "7"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT ID\nFROM   T\nORDER  BY C1, C2 DESC, C3 NULLS LAST;"
+      }
+    ]
   },
   {
     "id": 10493,
@@ -1602,16 +1650,81 @@ export const ROUND_51: QuizQuestion[] = [
     "round": 51,
     "subject": "2과목",
     "number": 45,
-    "title": "제약 조건 설명 중 옳지 않은 것은?",
+    "title": "아래와 같이 테이블을 만들고 데이터를 넣은 뒤 부서 10 을 삭제했다. 사원 중 부서번호가 NULL 인 행 수와 프로젝트의 행 수로 옳은 것은?",
     "options": [
-      "제약 조건은 데이터 무결성을 보장한다.",
-      "PRIMARY KEY 는 NOT NULL 과 UNIQUE 를 결합한 제약이다.",
-      "UNIQUE 제약 조건은 NULL 이 여러 개 들어가면 위반이다.",
-      "CHECK 제약은 TRUE/FALSE 로 판별 가능한 식이어야 한다."
+      "0, 1",
+      "2, 2",
+      "2, 1",
+      "삭제 시 오류가 발생한다"
     ],
     "correctIndex": 2,
-    "explanation": "UNIQUE 제약은 같은 값의 중복만 막는다. NULL 은 값이 아니라서 Oracle 에서는 여러 행에 NULL 이 들어가도 위반이 아니다(SQL Server 는 NULL 을 하나만 허용). PRIMARY KEY = NOT NULL + UNIQUE(②), CHECK 는 참·거짓을 판별하는 식(④) 이라는 설명은 맞으므로 정답은 ③ 이다.",
-    "_source": "authored"
+    "explanation": "사원의 외래키는 ON DELETE SET NULL 이라, 부서 10 이 지워지면 그 부서를 가리키던 1·2번 사원의 부서번호가 NULL 로 바뀐다. 그래서 NULL 인 행은 2개다. 프로젝트의 외래키는 ON DELETE CASCADE 라 부서 10 을 가리키던 1번 프로젝트가 함께 삭제되어 1행이 남는다. 정답은 ③번이다. ① 은 SET NULL 을 행 삭제로 본 것, ② 는 CASCADE 를 놓친 것, ④ 는 자식 행이 있으면 무조건 삭제할 수 없다고 본 것이다. 옵션 없이 만든 외래키였다면 ④ 처럼 오류가 났을 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "CREATE TABLE 부서 (\n  부서번호 NUMBER PRIMARY KEY\n);\nCREATE TABLE 사원 (\n  사번     NUMBER PRIMARY KEY,\n  부서번호 NUMBER REFERENCES 부서\n           ON DELETE SET NULL\n);\nCREATE TABLE 프로젝트 (\n  번호     NUMBER PRIMARY KEY,\n  부서번호 NUMBER REFERENCES 부서\n           ON DELETE CASCADE\n);"
+      },
+      {
+        "type": "table",
+        "caption": "부서",
+        "headers": [
+          "부서번호"
+        ],
+        "rows": [
+          [
+            "10"
+          ],
+          [
+            "20"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "사원",
+        "headers": [
+          "사번",
+          "부서번호"
+        ],
+        "rows": [
+          [
+            "1",
+            "10"
+          ],
+          [
+            "2",
+            "10"
+          ],
+          [
+            "3",
+            "20"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "프로젝트",
+        "headers": [
+          "번호",
+          "부서번호"
+        ],
+        "rows": [
+          [
+            "1",
+            "10"
+          ],
+          [
+            "2",
+            "20"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "DELETE FROM 부서 WHERE 부서번호 = 10;"
+      }
+    ]
   },
   {
     "id": 10495,
