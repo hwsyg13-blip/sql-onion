@@ -202,3 +202,6 @@
 - (11-17) SQL ㉠~㉣ 를 한 sql 칸에 넣으면 verify-sql-results 가 'multi-statement' 로 errors +1 — 정상이며, PostgreSQL 에서 하나씩 직접 검증한다.
 - (11-17) AdSense 보고서의 PAGE_URL 은 SPA 에서 처음 로드한 주소로만 잡힌다(화면 전환은 반영 안 됨). 화면별 광고 성과는 GA4(BigQuery) 화면 조회와 함께 추정해야 한다.
 - (11-17) GitHub 예약 워크플로는 몇 시간씩 늦게 돌 수 있다. 분석에 필요한 날 데이터가 없으면 workflow_dispatch(main, days=3)로 바로 받는다.
+
+- 11-18: 390px 모바일에서 SQL 코드는 한 줄 39칸(한글 2칸)을 넘으면 꺾인다 — 작성 단계에서 폭을 재고 나눈다. 표는 칼럼 5개 이상이면 머리글을 짧게(배송예정일→배송일) 하거나 '스키마 한 줄 + 함수 종속 표'로 바꾼다. 7칼럼 표는 무조건 잘림.
+- 11-18: wt-maint 의 fetch refspec 이 다른 브랜치로 잡혀 있어 origin/maintenance/maintainer-agent 가 옛 값으로 보였음 — 푸시 확인은 git ls-remote 로.

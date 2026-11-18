@@ -183,7 +183,7 @@
     "until": "2026-11-30",
     "per_run": "회차 1개 이상 × 2문항",
     "order": "45 → 62 → 45 …(끝나면 처음부터)",
-    "next_round": 45,
+    "next_round": 47,
     "log": "docs/qa/2026-11-06-round-difficulty.md",
     "done": {
       "45": [
@@ -262,9 +262,13 @@
     "cycle1_completed": "2026-11-18 01시 (45~62회, 36문항)",
     "cycle": 3,
     "cycle2_completed": "2026-11-18 (46~62 in one batch, PR #323)",
-    "done_cycle3": [],
+    "done_cycle3": [
+      45,
+      46
+    ],
     "cycle2_picks_46_62": "46:33,37 47:13,33 48:31,49 49:13,46 50:40,47 51:43,45 52:47,30 53:19,37 54:31,16 55:38,39 56:11,20 57:19,24 58:36,17 59:31,41 60:27,41 61:42,28 62:25,40",
-    "mobile_sql_width_rule": "SQL line <= 39 cols at 390px (Korean = 2)"
+    "mobile_sql_width_rule": "SQL line <= 39 cols at 390px (Korean = 2)",
+    "cycle3_picks": "45:2-16,1-10 46:1-5,1-6"
   },
   "mission2_payment": {
     "status": "진행 — 사용자 11-17 18시경: \"베타 떼고 로그인 붙이자. HTML 로 먼저 마이페이지·구독 페이지 만들어 디자인 확인 후 개발, 구독 시 광고 제거 포함\". 결제(PG)는 사업자 등록 후",
@@ -282,6 +286,8 @@
     "decisions_11_17": "로그인=카카오 1개(Supabase Kakao, 이메일 없이도 가입 허용), 결제=PortOne 카카오페이 단건(정기결제 없음), 이용권 3일 1,000/15일 3,000/30일 5,000, 결제는 로그인 필수, 같은 날 재열람 무차감, 기출·모의고사·이론 열 때 차감 팝업, 퀴즈는 배지만·소진 시 팝업, 이용권=광고 제거; 명칭=프리미엄; 기출 재진입=이어서/처음부터 시트; 다 푼 회차=기존 결과 팝업+다시 풀기(기록 삭제 확인); 며칠 전 푼 회차 다시 풀기=무료 횟수 차감(오늘 연 회차는 무차감); 로그인 전 마이페이지=로그인 카드만; 결제 내역 마이페이지 바로 노출, 영수증·환불 화면; 연장 버튼 없음",
     "refund_rule": "결제 당일 취소=전액. 그 외=결제액 - 사용일수×333원(3일권 1,000원 기준 일할), 0원 미만이면 0. 환불 즉시 프리미엄 종료. 화면은 환불 유도 느낌 없게(중립 색, 외곽선 버튼)",
     "design_quiz_limit": "⑥-1 랜덤 퀴즈 한도 화면 추가(오늘 푼 문제 30, 00:00 +30, 오답 다시 보기 / 한도 없이 계속하기)",
-    "theory_free_limit": "3 chapters/day (user 11-17: 3쪽→3챕터)"
+    "theory_free_limit": "3 chapters/day (user 11-17: 3쪽→3챕터)",
+    "business_registration": "11-18 사용자: 사업자등록 신청 완료(번호 발급 대기). 다음: 통신판매업 신고 → PortOne 카카오페이 채널",
+    "login_setup_guide_given": "11-18: Supabase 프로젝트(서울) → 카카오 앱(Web 도메인 3, Redirect=Supabase callback, 동의항목 닉네임 필수·이메일 선택(비즈앱), Client Secret) → Supabase Kakao provider(Allow users without email) + URL 설정 → Vercel VITE_SUPABASE_URL/ANON_KEY. 개발은 '이대로 개발' 대기"
   }
 }
