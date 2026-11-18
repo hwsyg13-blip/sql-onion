@@ -2,7 +2,6 @@
 // TopNav + mobile nav
 import React from 'react';
 import { Btn, Ic } from './Atoms';
-import { UserMenu } from '../screens/LoginScreen';
 
 export const TopNav = ({route, onNavigate, dark, onToggleDark, user, onLogout, betaNoAuth = false, loginEnabled = false}: any) => {
   const links = [
@@ -72,15 +71,11 @@ export const TopNav = ({route, onNavigate, dark, onToggleDark, user, onLogout, b
                   ? <img src={user.avatarUrl} alt="" width="34" height="34" style={{objectFit: "cover"}}/>
                   : <span style={{color: "var(--point-600)"}}>{user.avatar}</span>)
               : <Ic.User size={18}/>}</button>
-          : betaNoAuth
-          ? <span
+          : <span
               title="베타 버전 — 사용자 피드백을 받으며 다듬는 중이에요 🧅"
               aria-label="베타 버전"
               style={{fontSize:11,color:"var(--fg-3)",padding:"6px 10px",background:"var(--bg-muted)",borderRadius:999,fontWeight:600,cursor:"help"}}
             >BETA</span>
-          : user
-            ? <UserMenu user={user} onLogout={onLogout} onNavigate={onNavigate}/>
-            : <Btn size="sm" variant="ghost" icon={<Ic.User size={16}/>} onClick={() => onNavigate("login")}>로그인</Btn>
         }
       </div>
     </header>

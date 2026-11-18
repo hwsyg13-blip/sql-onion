@@ -1,101 +1,74 @@
 // @ts-nocheck
+// 카카오 로그인 (Vercel 서버 함수 api/auth/* 방식 — Supabase 를 쓰지 않는다)
+//
+// - 로그인 상태는 서버가 발급한 HttpOnly 쿠키(sqlo_session)에 있고, 브라우저 코드는 /api/auth/me 로만 확인한다.
+// - 서버 환경변수(KAKAO_REST_API_KEY·KAKAO_CLIENT_SECRET·SESSION_SECRET)가 없으면 enabled=false 라 화면에 로그인 기능이 안 보인다.
+// - 요금제·결제·무료 한도는 아직 없음(App.tsx BETA_NO_AUTH). user.plan 은 늘 'free'.
 import React from 'react';
-import { supabase, hasSupabase } from './supabase';
 
 export type SessionUser = {
   id: string;
   name: string;
   email: string;
-  avatar: string;
-  avatarUrl?: string;
-  provider: 'google' | 'kakao' | 'naver' | 'email';
+  avatar: string;      // 이름 첫 글자 (사진이 없을 때 동그라미 안에 표시)
+  avatarUrl?: string;  // 카카오 프로필 사진
+  provider: 'kakao';
   plan: 'free' | 'pro';
   subscribedAt?: number | null;
 };
 
-export async function signInWithGoogle() {
-  if (!hasSupabase) {
-    alert('Supabase 설정이 없어 실제 로그인이 동작하지 않아요. .env.local 을 채워주세요.');
-    return;
-  }
-  const { error } = await supabase.auth.signInWithOAuth({
-    provider: 'google',
-    options: { redirectTo: window.location.origin },
-  });
-  if (error) throw error;
+type AuthState = { enabled: boolean; user: SessionUser | null; loading: boolean };
+
+const AUTH_EVENT = 'sqlo-auth-changed';
+const ENABLED_CACHE = 'sqlo_login_enabled';
+
+function readEnabledCache(): boolean {
+  try { return sessionStorage.getItem(ENABLED_CACHE) === '1'; } catch { return false; }
 }
 
-/**
- * 카카오 로그인 — Supabase 의 Kakao provider 로 카카오 동의 화면에 보냈다가 돌아온다.
- * 돌아올 곳은 마이페이지(/my). Supabase 대시보드 Redirect URLs 에 이 사이트 주소(/**)가 있어야 한다.
- * 이메일 동의는 선택 항목이라, 이메일 없이 가입한 사용자도 있다(Supabase 'Allow users without an email').
- */
-export async function signInWithKakao() {
-  if (!hasSupabase) throw new Error('로그인 설정이 아직 연결되지 않았어요.');
-  const { error } = await supabase.auth.signInWithOAuth({
-    provider: 'kakao',
-    options: { redirectTo: `${window.location.origin}/my` },
-  });
-  if (error) throw error;
+function toUser(u: any): SessionUser | null {
+  if (!u || !u.id) return null;
+  const name = u.name || '양파학습자';
+  return { id: String(u.id), name, email: u.email || '', avatar: name[0] || '?', avatarUrl: u.avatarUrl || '', provider: 'kakao', plan: 'free', subscribedAt: null };
+}
+
+async function fetchMe(): Promise<{ enabled: boolean; user: SessionUser | null }> {
+  try {
+    const res = await fetch('/api/auth/me', { credentials: 'same-origin', cache: 'no-store' });
+    // 로컬 vite dev 처럼 서버 함수가 없으면 HTML 이 오거나 404 — 로그인 꺼짐으로 본다
+    if (!res.ok || !(res.headers.get('content-type') || '').includes('application/json')) return { enabled: false, user: null };
+    const data = await res.json();
+    return { enabled: Boolean(data.enabled), user: toUser(data.user) };
+  } catch {
+    return { enabled: false, user: null };
+  }
+}
+
+/** 카카오 동의 화면으로 이동 (서버가 위조 방지 값을 붙여 보낸다) */
+export function signInWithKakao() {
+  window.location.href = '/api/auth/kakao/start';
 }
 
 export async function signOut() {
-  if (!hasSupabase) return;
-  await supabase.auth.signOut();
+  try { await fetch('/api/auth/logout', { method: 'POST', credentials: 'same-origin' }); } catch {}
+  window.dispatchEvent(new Event(AUTH_EVENT));
 }
 
-/**
- * useSession — Supabase 세션 + profiles + current_plan 을 통합해서
- * 기존 프로토타입이 쓰던 user 객체 모양을 그대로 반환.
- */
-export function useSession(): { user: SessionUser | null; loading: boolean } {
-  const [state, setState] = React.useState({ user: null as SessionUser | null, loading: true });
+/** 로그인 기능 켜짐 여부 + 현재 사용자. 첫 화면 깜박임을 줄이려고 '켜짐' 여부만 탭 단위로 기억한다. */
+export function useSession(): AuthState {
+  const [state, setState] = React.useState<AuthState>(() => ({ enabled: readEnabledCache(), user: null, loading: true }));
 
   React.useEffect(() => {
-    if (!hasSupabase) { setState({ user: null, loading: false }); return; }
-
     let cancelled = false;
-
-    const hydrate = async (session) => {
-      if (!session?.user) { if (!cancelled) setState({ user: null, loading: false }); return; }
-      const authUser = session.user;
-
-      const [{ data: profile }, { data: planRow }] = await Promise.all([
-        supabase.from('profiles').select('email, name, avatar_url').eq('id', authUser.id).maybeSingle(),
-        supabase.from('current_plan').select('plan, started_at').eq('user_id', authUser.id).maybeSingle(),
-      ]);
-
-      const meta = authUser.user_metadata || {};
-      const name = profile?.name
-        || meta.full_name
-        || meta.name
-        || meta.preferred_username
-        || meta.nickname
-        || authUser.email?.split('@')[0]
-        || '양파학습자';
-      const avatarUrl = profile?.avatar_url || meta.avatar_url || meta.picture || '';
-
-      const merged: SessionUser = {
-        id: authUser.id,
-        name,
-        email: profile?.email || authUser.email || '',
-        avatar: name[0] || '?',
-        avatarUrl,
-        provider: (authUser.app_metadata?.provider as any) || 'email',
-        plan: (planRow?.plan as any) || 'free',
-        subscribedAt: planRow?.started_at ? new Date(planRow.started_at).getTime() : null,
-      };
-
-      if (!cancelled) setState({ user: merged, loading: false });
+    const load = async () => {
+      const me = await fetchMe();
+      if (cancelled) return;
+      try { sessionStorage.setItem(ENABLED_CACHE, me.enabled ? '1' : '0'); } catch {}
+      setState({ enabled: me.enabled, user: me.user, loading: false });
     };
-
-    supabase.auth.getSession().then(({ data }) => hydrate(data.session));
-
-    const { data: sub } = supabase.auth.onAuthStateChange((_evt, session) => {
-      hydrate(session);
-    });
-
-    return () => { cancelled = true; sub.subscription.unsubscribe(); };
+    load();
+    window.addEventListener(AUTH_EVENT, load);
+    return () => { cancelled = true; window.removeEventListener(AUTH_EVENT, load); };
   }, []);
 
   return state;

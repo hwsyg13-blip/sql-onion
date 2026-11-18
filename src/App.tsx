@@ -6,7 +6,6 @@ import { Footer } from './components/Footer';
 import { AdSidebar } from './components/AdSlot';
 import { ErrorBoundary } from './components/ErrorBoundary';
 import { HomeScreen } from './screens/HomeScreen';
-import { LoginScreen } from './screens/LoginScreen';
 import { PricingScreen, SubscribeFlow, Paywall, sqloUsage } from './screens/PricingScreen';
 import { PlanScreen } from './screens/PlanScreen';
 import { TheoryListScreen, TheoryDetailScreen } from './screens/TheoryScreens';
@@ -15,7 +14,6 @@ import { ExamListScreen, CBTExam, CBTResult } from './screens/CBTScreens';
 import { CheatSheetScreen } from './screens/CheatSheetScreen';
 import { MyPageScreen } from './screens/MyPageScreen';
 import { useSession, signOut } from './lib/auth';
-import { hasSupabase } from './lib/supabase';
 import { recordVisit } from './lib/progress';
 import { trackPageView } from './lib/analytics';
 import { pathFor, parsePath, routePattern, canonicalFor } from './lib/routeUrl';
@@ -23,9 +21,8 @@ import { Analytics } from '@vercel/analytics/react';
 
 // 🚧 베타 모드: 로그인/결제 기능 숨김 (나중에 켤 때 false 로만 바꾸면 됨)
 export const BETA_NO_AUTH = true;
-// 로그인(카카오)은 결제와 따로 켠다 — Supabase 환경변수가 있으면 마이페이지·로그인이 보인다.
-// 요금제·결제·무료 한도는 여전히 BETA_NO_AUTH 로 꺼 둔다(프리미엄 개발 때 켬).
-export const LOGIN_ENABLED = hasSupabase;
+// 로그인(카카오)은 결제와 따로 켠다 — Vercel 서버 환경변수가 있으면 /api/auth/me 가 enabled=true 를 주고
+// 마이페이지·로그인이 보인다(useSession). 요금제·결제·무료 한도는 여전히 BETA_NO_AUTH 로 꺼 둔다.
 
 const TWEAK_DEFAULTS = {
   theme: 'light',
@@ -42,7 +39,7 @@ const ACCENT_PRESETS: any = {
 };
 
 export const App = () => {
-  const { user, loading: sessionLoading } = useSession();
+  const { user, loading: sessionLoading, enabled: loginEnabled } = useSession();
 
   const [tweaks, setTweaks] = React.useState(() => {
     try { return JSON.parse(localStorage.getItem('sqlo_tweaks') || 'null') || TWEAK_DEFAULTS; }
@@ -53,7 +50,7 @@ export const App = () => {
   const [route, setRoute] = React.useState(() => {
     try {
       const fromPath = parsePath(window.location.pathname);
-      if (fromPath) return (fromPath.route === 'mypage' && !LOGIN_ENABLED) ? 'home' : fromPath.route;
+      if (fromPath) return fromPath.route;
       const sp = new URLSearchParams(window.location.search);
       const cbtId = sp.get('cbt');
       if (cbtId && /^round-\d+$/.test(cbtId)) return 'cbt';
@@ -61,7 +58,6 @@ export const App = () => {
       if (mock === '1') return 'mock-exam';
       const saved = sessionStorage.getItem('sqlo_route');
       if (saved === 'login' || saved === 'subscribe') return 'home';
-      if (saved === 'mypage' && !LOGIN_ENABLED) return 'home';
       return saved || 'home';
     } catch { return 'home'; }
   });
@@ -83,7 +79,6 @@ export const App = () => {
     try { return sessionStorage.getItem('sqlo_exit_return') || 'home'; } catch { return 'home'; }
   });
 
-  const handleLogin = () => { /* noop: Supabase OAuth redirect handles it */ };
   const handleLogout = async () => { await signOut(); navigate('home'); };
 
   React.useEffect(() => { localStorage.setItem('sqlo_tweaks', JSON.stringify(tweaks)); }, [tweaks]);
@@ -162,8 +157,7 @@ export const App = () => {
     }
 
     // 로그인 화면은 마이페이지(로그인 카드)로 합쳤다
-    if (to === 'login') to = LOGIN_ENABLED ? 'mypage' : 'home';
-    if (to === 'mypage' && !LOGIN_ENABLED) to = 'home';
+    if (to === 'login') to = loginEnabled ? 'mypage' : 'home';
     // 베타 모드: 요금제·결제 화면은 아직 닫아 둔다
     if (BETA_NO_AUTH && (to === 'pricing' || to === 'subscribe')) {
       to = 'home';
@@ -254,19 +248,22 @@ export const App = () => {
     return () => window.removeEventListener('popstate', onPop);
   }, [route, params]);
 
+  // 로그인 기능이 꺼진 배포에서 /my 로 들어오면 홈으로
+  React.useEffect(() => {
+    if (!sessionLoading && !loginEnabled && route === 'mypage') navigate('home', null, { skipConfirm: true });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [sessionLoading, loginEnabled, route]);
+
   const toggleDark = () => setTweaks((t: any) => ({ ...t, theme: t.theme === 'dark' ? 'light' : 'dark' }));
 
   let screen: any = null;
   switch (route) {
     case 'home':          screen = <HomeScreen onNavigate={navigate} user={BETA_NO_AUTH ? null : user}/>; break;
-    case 'mypage':        screen = LOGIN_ENABLED
-      ? <MyPageScreen user={user} loading={sessionLoading} onLogout={handleLogout}/>
-      : <HomeScreen onNavigate={navigate} user={null}/>; break;
-    case 'login':         screen = <LoginScreen onNavigate={navigate} onLogin={handleLogin} layout={tweaks.loginLayout}/>; break;
+    case 'mypage':        screen = <MyPageScreen user={user} loading={sessionLoading} onLogout={handleLogout}/>; break;
     case 'pricing':       screen = <PricingScreen onNavigate={navigate} user={user} onSubscribe={() => navigate('subscribe')} onCancel={() => alert('Pro 해지는 곧 지원해요. 필요하시면 문의해주세요.')}/>; break;
     case 'subscribe':     screen = user
       ? <SubscribeFlow user={user} onComplete={() => navigate('home')} onCancel={() => navigate('pricing')}/>
-      : <LoginScreen onNavigate={navigate} onLogin={handleLogin} layout={tweaks.loginLayout}/>; break;
+      : <MyPageScreen user={null} loading={sessionLoading} onLogout={handleLogout}/>; break;
     case 'plan':          screen = <PlanScreen onNavigate={navigate} planViz={tweaks.planViz} setPlanViz={(v: any) => setTweaks((t: any) => ({ ...t, planViz: v }))}/>; break;
     case 'theory':        screen = <TheoryListScreen onNavigate={navigate}/>; break;
     case 'theory-detail': screen = <TheoryDetailScreen chapterId={params || 'c23'} onNavigate={navigate}/>; break;
@@ -290,7 +287,7 @@ export const App = () => {
   return (
     <>
       <Analytics route={vaRoute} path={vaPath} />
-      {!hideTopBar && <TopNav route={route} onNavigate={navigate} dark={tweaks.theme === 'dark'} onToggleDark={toggleDark} user={LOGIN_ENABLED ? user : null} onLogout={handleLogout} betaNoAuth={BETA_NO_AUTH} loginEnabled={LOGIN_ENABLED}/>}
+      {!hideTopBar && <TopNav route={route} onNavigate={navigate} dark={tweaks.theme === 'dark'} onToggleDark={toggleDark} user={loginEnabled ? user : null} onLogout={handleLogout} betaNoAuth={BETA_NO_AUTH} loginEnabled={loginEnabled}/>}
       <ErrorBoundary resetKey={route}>{screen}</ErrorBoundary>
       {paywall && !BETA_NO_AUTH && (
         <Paywall

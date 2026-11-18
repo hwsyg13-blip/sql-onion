@@ -11,19 +11,30 @@ const KakaoBubble = ({ size = 20 }: any) => (
   </svg>
 );
 
+// 서버가 로그인 실패 시 /my?login=<사유> 로 돌려보낸다 (api/auth/kakao/callback.ts)
+const LOGIN_ERRORS: Record<string, string> = {
+  cancel: '로그인을 취소했어요.',
+  off: '지금은 로그인을 쓸 수 없어요.',
+};
+
 const LoginCard = () => {
   const [busy, setBusy] = React.useState(false);
   const [error, setError] = React.useState('');
-  const start = async () => {
+  React.useEffect(() => {
+    try {
+      const sp = new URLSearchParams(window.location.search);
+      const reason = sp.get('login');
+      if (!reason) return;
+      setError(LOGIN_ERRORS[reason] || '로그인하지 못했어요. 잠시 뒤 다시 시도해 주세요.');
+      sp.delete('login');
+      const q = sp.toString();
+      window.history.replaceState(window.history.state, '', window.location.pathname + (q ? `?${q}` : ''));
+    } catch {}
+  }, []);
+  const start = () => {
     setError('');
     setBusy(true);
-    try {
-      await signInWithKakao();
-      // 성공하면 카카오 화면으로 이동하므로 여기서 더 할 일은 없다
-    } catch (e: any) {
-      setBusy(false);
-      setError('카카오 로그인을 시작하지 못했어요. 잠시 뒤 다시 시도해 주세요.');
-    }
+    signInWithKakao(); // 카카오 동의 화면으로 이동
   };
   return (
     <section aria-label="로그인" style={{
