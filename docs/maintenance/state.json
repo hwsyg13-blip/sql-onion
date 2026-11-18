@@ -8,7 +8,8 @@
   "current_mission": null,
   "my_prs": [
     195,
-    323
+    323,
+    324
   ],
   "merged_prs": [
     197,
@@ -288,6 +289,8 @@
     "design_quiz_limit": "⑥-1 랜덤 퀴즈 한도 화면 추가(오늘 푼 문제 30, 00:00 +30, 오답 다시 보기 / 한도 없이 계속하기)",
     "theory_free_limit": "3 chapters/day (user 11-17: 3쪽→3챕터)",
     "business_registration": "11-18 사용자: 사업자등록 신청 완료(번호 발급 대기). 다음: 통신판매업 신고 → PortOne 카카오페이 채널",
-    "login_setup_guide_given": "11-18: Supabase 프로젝트(서울) → 카카오 앱(Web 도메인 3, Redirect=Supabase callback, 동의항목 닉네임 필수·이메일 선택(비즈앱), Client Secret) → Supabase Kakao provider(Allow users without email) + URL 설정 → Vercel VITE_SUPABASE_URL/ANON_KEY. 개발은 '이대로 개발' 대기"
+    "login_setup_guide_given": "11-18: Supabase 프로젝트(서울) → 카카오 앱(Web 도메인 3, Redirect=Supabase callback, 동의항목 닉네임 필수·이메일 선택(비즈앱), Client Secret) → Supabase Kakao provider(Allow users without email) + URL 설정 → Vercel VITE_SUPABASE_URL/ANON_KEY. 개발은 '이대로 개발' 대기",
+    "login_pr": "#324 카카오 로그인+마이페이지(LOGIN_ENABLED=hasSupabase, BETA_NO_AUTH 유지), 0002 마이그레이션(email NOT NULL 해제). 사용자: Supabase 0001·0002 실행, Kakao provider, Vercel env → 머지",
+    "kakao_webhook_note": "11-18 사용자가 계정 상태 변경 웹훅을 https://sqldyangpa.com 로 테스트 → 403(X-Vercel-Mitigated: deny, Vercel 방화벽). 로그인에 웹훅 불필요 — URL 비워 두라고 안내. 방화벽 우회 안 함"
   }
 }
