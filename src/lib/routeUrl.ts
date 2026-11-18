@@ -20,6 +20,7 @@ const ROUTE_PATHS: Record<string, string> = {
   endless: '/quiz',
   exams: '/exams',
   'final-cheatsheet': '/cheatsheet',
+  mypage: '/my',
 };
 
 const CHAPTER_ID = /^[A-Za-z0-9_-]{1,40}$/;

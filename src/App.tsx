@@ -13,7 +13,9 @@ import { TheoryListScreen, TheoryDetailScreen } from './screens/TheoryScreens';
 import { MockLanding, EndlessScreen } from './screens/MockScreens';
 import { ExamListScreen, CBTExam, CBTResult } from './screens/CBTScreens';
 import { CheatSheetScreen } from './screens/CheatSheetScreen';
+import { MyPageScreen } from './screens/MyPageScreen';
 import { useSession, signOut } from './lib/auth';
+import { hasSupabase } from './lib/supabase';
 import { recordVisit } from './lib/progress';
 import { trackPageView } from './lib/analytics';
 import { pathFor, parsePath, routePattern, canonicalFor } from './lib/routeUrl';
@@ -21,6 +23,9 @@ import { Analytics } from '@vercel/analytics/react';
 
 // 🚧 베타 모드: 로그인/결제 기능 숨김 (나중에 켤 때 false 로만 바꾸면 됨)
 export const BETA_NO_AUTH = true;
+// 로그인(카카오)은 결제와 따로 켠다 — Supabase 환경변수가 있으면 마이페이지·로그인이 보인다.
+// 요금제·결제·무료 한도는 여전히 BETA_NO_AUTH 로 꺼 둔다(프리미엄 개발 때 켬).
+export const LOGIN_ENABLED = hasSupabase;
 
 const TWEAK_DEFAULTS = {
   theme: 'light',
@@ -48,7 +53,7 @@ export const App = () => {
   const [route, setRoute] = React.useState(() => {
     try {
       const fromPath = parsePath(window.location.pathname);
-      if (fromPath) return fromPath.route;
+      if (fromPath) return (fromPath.route === 'mypage' && !LOGIN_ENABLED) ? 'home' : fromPath.route;
       const sp = new URLSearchParams(window.location.search);
       const cbtId = sp.get('cbt');
       if (cbtId && /^round-\d+$/.test(cbtId)) return 'cbt';
@@ -56,6 +61,7 @@ export const App = () => {
       if (mock === '1') return 'mock-exam';
       const saved = sessionStorage.getItem('sqlo_route');
       if (saved === 'login' || saved === 'subscribe') return 'home';
+      if (saved === 'mypage' && !LOGIN_ENABLED) return 'home';
       return saved || 'home';
     } catch { return 'home'; }
   });
@@ -78,7 +84,7 @@ export const App = () => {
   });
 
   const handleLogin = () => { /* noop: Supabase OAuth redirect handles it */ };
-  const handleLogout = async () => { await signOut(); setRoute('home'); };
+  const handleLogout = async () => { await signOut(); navigate('home'); };
 
   React.useEffect(() => { localStorage.setItem('sqlo_tweaks', JSON.stringify(tweaks)); }, [tweaks]);
   // 라우트는 sessionStorage 에만 — 새 탭/새 창에서 열면 홈으로 시작
@@ -134,6 +140,7 @@ export const App = () => {
       cbt: `CBT 진행 · ${base}`,
       'cbt-result': `CBT 결과 · ${base}`,
       'final-cheatsheet': `최종 암기장 · ${base}`,
+      mypage: `마이페이지 · ${base}`,
     };
     document.title = names[route] || `${base} — SQLD 3주 합격 루틴`;
   }, [route]);
@@ -154,8 +161,11 @@ export const App = () => {
       }
     }
 
-    // 베타 모드: 로그인/결제 없이 모든 화면 자유 접근
-    if (BETA_NO_AUTH && (to === 'login' || to === 'pricing' || to === 'subscribe')) {
+    // 로그인 화면은 마이페이지(로그인 카드)로 합쳤다
+    if (to === 'login') to = LOGIN_ENABLED ? 'mypage' : 'home';
+    if (to === 'mypage' && !LOGIN_ENABLED) to = 'home';
+    // 베타 모드: 요금제·결제 화면은 아직 닫아 둔다
+    if (BETA_NO_AUTH && (to === 'pricing' || to === 'subscribe')) {
       to = 'home';
       p = null;
     }
@@ -198,7 +208,8 @@ export const App = () => {
       const sp = new URLSearchParams(window.location.search);
       sp.delete('cbt'); sp.delete('mock');
       const q = sp.toString();
-      try { window.history.replaceState({ sqlo: true, route, params }, '', url ? url + (q ? `?${q}` : '') : undefined); } catch {}
+      // 해시(#access_token=… 카카오 로그인 복귀값)는 Supabase 가 읽어야 하므로 지우지 않는다
+      try { window.history.replaceState({ sqlo: true, route, params }, '', url ? url + (q ? `?${q}` : '') + window.location.hash : undefined); } catch {}
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -247,7 +258,10 @@ export const App = () => {
 
   let screen: any = null;
   switch (route) {
-    case 'home':          screen = <HomeScreen onNavigate={navigate} user={user}/>; break;
+    case 'home':          screen = <HomeScreen onNavigate={navigate} user={BETA_NO_AUTH ? null : user}/>; break;
+    case 'mypage':        screen = LOGIN_ENABLED
+      ? <MyPageScreen user={user} loading={sessionLoading} onLogout={handleLogout}/>
+      : <HomeScreen onNavigate={navigate} user={null}/>; break;
     case 'login':         screen = <LoginScreen onNavigate={navigate} onLogin={handleLogin} layout={tweaks.loginLayout}/>; break;
     case 'pricing':       screen = <PricingScreen onNavigate={navigate} user={user} onSubscribe={() => navigate('subscribe')} onCancel={() => alert('Pro 해지는 곧 지원해요. 필요하시면 문의해주세요.')}/>; break;
     case 'subscribe':     screen = user
@@ -261,9 +275,9 @@ export const App = () => {
     case 'mock-exam':     screen = <CBTExam examId="AI-MOCK-1" mockMode={true} onNavigate={navigate} onExit={() => navigate(exitReturnRoute || 'home', null, { skipConfirm: true })} onFinish={(r: any) => { setCbtResult(r); navigate('cbt-result'); }}/>; break;
     case 'exams':         screen = <ExamListScreen onNavigate={navigate}/>; break;
     case 'cbt':           screen = <CBTExam examId={params || 'round-60'} onNavigate={navigate} onExit={() => navigate(exitReturnRoute || 'home', null, { skipConfirm: true })} onFinish={(r: any) => { setCbtResult(r); navigate('cbt-result'); }}/>; break;
-    case 'cbt-result':    screen = cbtResult ? <CBTResult result={cbtResult} onNavigate={navigate}/> : <HomeScreen onNavigate={navigate} user={user}/>; break;
+    case 'cbt-result':    screen = cbtResult ? <CBTResult result={cbtResult} onNavigate={navigate}/> : <HomeScreen onNavigate={navigate} user={BETA_NO_AUTH ? null : user}/>; break;
     case 'final-cheatsheet': screen = <CheatSheetScreen onNavigate={navigate}/>; break;
-    default:              screen = <HomeScreen onNavigate={navigate} user={user}/>;
+    default:              screen = <HomeScreen onNavigate={navigate} user={BETA_NO_AUTH ? null : user}/>;
   }
 
   // 로그인 화면만 TopNav 숨김. CBT/모의 중 나가기는 CBTExam 내부 상단 바에 통합.
@@ -276,7 +290,7 @@ export const App = () => {
   return (
     <>
       <Analytics route={vaRoute} path={vaPath} />
-      {!hideTopBar && <TopNav route={route} onNavigate={navigate} dark={tweaks.theme === 'dark'} onToggleDark={toggleDark} user={BETA_NO_AUTH ? null : user} onLogout={handleLogout} betaNoAuth={BETA_NO_AUTH}/>}
+      {!hideTopBar && <TopNav route={route} onNavigate={navigate} dark={tweaks.theme === 'dark'} onToggleDark={toggleDark} user={LOGIN_ENABLED ? user : null} onLogout={handleLogout} betaNoAuth={BETA_NO_AUTH} loginEnabled={LOGIN_ENABLED}/>}
       <ErrorBoundary resetKey={route}>{screen}</ErrorBoundary>
       {paywall && !BETA_NO_AUTH && (
         <Paywall

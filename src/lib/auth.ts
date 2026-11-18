@@ -7,6 +7,7 @@ export type SessionUser = {
   name: string;
   email: string;
   avatar: string;
+  avatarUrl?: string;
   provider: 'google' | 'kakao' | 'naver' | 'email';
   plan: 'free' | 'pro';
   subscribedAt?: number | null;
@@ -20,6 +21,20 @@ export async function signInWithGoogle() {
   const { error } = await supabase.auth.signInWithOAuth({
     provider: 'google',
     options: { redirectTo: window.location.origin },
+  });
+  if (error) throw error;
+}
+
+/**
+ * 카카오 로그인 — Supabase 의 Kakao provider 로 카카오 동의 화면에 보냈다가 돌아온다.
+ * 돌아올 곳은 마이페이지(/my). Supabase 대시보드 Redirect URLs 에 이 사이트 주소(/**)가 있어야 한다.
+ * 이메일 동의는 선택 항목이라, 이메일 없이 가입한 사용자도 있다(Supabase 'Allow users without an email').
+ */
+export async function signInWithKakao() {
+  if (!hasSupabase) throw new Error('로그인 설정이 아직 연결되지 않았어요.');
+  const { error } = await supabase.auth.signInWithOAuth({
+    provider: 'kakao',
+    options: { redirectTo: `${window.location.origin}/my` },
   });
   if (error) throw error;
 }
@@ -50,18 +65,22 @@ export function useSession(): { user: SessionUser | null; loading: boolean } {
         supabase.from('current_plan').select('plan, started_at').eq('user_id', authUser.id).maybeSingle(),
       ]);
 
+      const meta = authUser.user_metadata || {};
       const name = profile?.name
-        || authUser.user_metadata?.full_name
-        || authUser.user_metadata?.name
+        || meta.full_name
+        || meta.name
+        || meta.preferred_username
+        || meta.nickname
         || authUser.email?.split('@')[0]
-        || '사용자';
-      const avatarUrl = profile?.avatar_url || authUser.user_metadata?.avatar_url || '';
+        || '양파학습자';
+      const avatarUrl = profile?.avatar_url || meta.avatar_url || meta.picture || '';
 
       const merged: SessionUser = {
         id: authUser.id,
         name,
         email: profile?.email || authUser.email || '',
-        avatar: avatarUrl || (name[0] || '?'),
+        avatar: name[0] || '?',
+        avatarUrl,
         provider: (authUser.app_metadata?.provider as any) || 'email',
         plan: (planRow?.plan as any) || 'free',
         subscribedAt: planRow?.started_at ? new Date(planRow.started_at).getTime() : null,
