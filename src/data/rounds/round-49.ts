@@ -333,20 +333,42 @@ export const ROUND_49: QuizQuestion[] = [
     "round": 49,
     "subject": "2과목",
     "number": 15,
-    "title": "Oracle NULL 처리 함수의 역할이 올바르게 매칭된 조합은?",
+    "title": "아래 T 테이블에 대한 SQL 의 결과(P, Q, R)로 옳은 것은? (Oracle 기준)",
     "options": [
-      "A: COALESCE, B: NVL, C: NULLIF",
-      "A: NVL, B: NULLIF, C: COALESCE",
-      "A: NULLIF, B: COALESCE, C: NVL",
-      "A: NVL, B: COALESCE, C: NULLIF"
+      "3, 60, 29",
+      "1, 60, 29",
+      "1, 60, 18",
+      "2, 60, 29"
     ],
     "correctIndex": 1,
-    "explanation": "NVL(컬럼, 대체값) 은 컬럼이 NULL 일 때 대체값을 출력하므로 A 에 해당하고, NULLIF(a, b) 는 a 와 b 가 같으면 NULL 을 반환하므로 B 에 해당하며, COALESCE(v1, v2, ...) 는 인자들 중 NULL 이 아닌 첫 값을 반환하므로 C 에 해당한다. ① 과 ③ 은 셋 다 어긋나고, ④ 는 B(NULLIF)·C(COALESCE) 를 서로 바꿨다.",
+    "explanation": "NULLIF(A, B) 는 두 값이 같으면 NULL, 다르면 A 다. 1행은 10, 2행은 A 가 NULL 이라 NULL, 3행은 30 = 30 이라 NULL 이다. COUNT 는 NULL 을 빼므로 P 는 1 이다. COALESCE(A, B) 는 처음으로 NULL 이 아닌 값이라 10, 20, 30 이고 Q 는 60 이다. NVL2(A, B, -1) 은 A 가 NULL 이 아니면 B, NULL 이면 -1 이다. 1행은 B 인 NULL, 2행은 -1, 3행은 30 이라, NULL 을 뺀 합 R 은 29 다. 정답은 ②번이다. ① 은 COUNT 가 NULL 도 센다고 본 것, ③ 은 NVL2 의 두 번째·세 번째 인자 순서를 거꾸로 본 것, ④ 는 같은 값끼리의 NULLIF 가 A 를 돌려준다고 본 것이다.",
     "_source": "authored",
     "references": [
       {
-        "type": "text",
-        "content": "A: 컬럼 값이 NULL 이면 B 를 출력\nB: 두 컬럼 값이 같으면 NULL\nC: 왼쪽부터 NULL 이 아닌 첫 값을 반환"
+        "type": "table",
+        "caption": "T",
+        "headers": [
+          "A",
+          "B"
+        ],
+        "rows": [
+          [
+            "10",
+            "NULL"
+          ],
+          [
+            "NULL",
+            "20"
+          ],
+          [
+            "30",
+            "30"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT COUNT(NULLIF(A, B))      AS P,\n       SUM(COALESCE(A, B))       AS Q,\n       SUM(NVL2(A, B, -1))       AS R\nFROM   T;"
       }
     ]
   },
@@ -629,16 +651,53 @@ export const ROUND_49: QuizQuestion[] = [
     "round": 49,
     "subject": "2과목",
     "number": 20,
-    "title": "회원번호·상품별 집계와 회원번호별 소계, 전체 총계를 함께 산출하려 한다. GROUP BY 절로 적절한 것은?",
+    "title": "아래 주문 테이블에 대한 SQL ㉠, ㉡ 의 결과 행 수로 옳은 것은?",
     "options": [
-      "GROUP BY ROLLUP(회원번호, 상품)",
-      "GROUP BY 회원번호, ROLLUP(상품)",
-      "GROUP BY CUBE(회원번호, 상품)",
-      "GROUP BY GROUPING SETS(회원번호, 상품)"
+      "8, 7",
+      "7, 8",
+      "8, 8",
+      "10, 10"
     ],
     "correctIndex": 0,
-    "explanation": "회원번호·상품별 세부 (회원번호, 상품), 회원번호별 소계 (회원번호), 전체 총계 () 를 모두 산출하는 것은 `ROLLUP(회원번호, 상품)` 이다. ② `회원번호, ROLLUP(상품)` 는 전체 총계가 빠지고, ③ CUBE 는 (상품) 소계까지 추가하며, ④ GROUPING SETS(회원번호, 상품) 은 세부 행이 없다.",
-    "_source": "authored"
+    "explanation": "ROLLUP(X, Y) 는 (X, Y) 별 집계, X 별 소계, 전체 합계를 만든다. 칼럼 순서에 따라 소계의 기준이 달라진다. ㉠ 은 (회원, 상품) 조합 4행 + 회원별 소계 3행(A·B·C) + 합계 1행 = 8행이다. ㉡ 은 (상품, 회원) 조합 4행 + 상품별 소계 2행(P1·P2) + 합계 1행 = 7행이다. 정답은 ①번이다. ② 는 두 결과를 바꿔 본 것, ③ 은 ROLLUP 의 칼럼 순서가 결과에 영향이 없다고 본 것, ④ 는 회원별·상품별 소계를 모두 만드는 CUBE 로 계산한 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "caption": "주문",
+        "headers": [
+          "회원",
+          "상품",
+          "금액"
+        ],
+        "rows": [
+          [
+            "A",
+            "P1",
+            "10"
+          ],
+          [
+            "A",
+            "P2",
+            "20"
+          ],
+          [
+            "B",
+            "P1",
+            "30"
+          ],
+          [
+            "C",
+            "P1",
+            "40"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "-- ㉠\nSELECT 회원, 상품, SUM(금액)\nFROM   주문\nGROUP  BY ROLLUP(회원, 상품);\n-- ㉡\nSELECT 회원, 상품, SUM(금액)\nFROM   주문\nGROUP  BY ROLLUP(상품, 회원);"
+      }
+    ]
   },
   {
     "id": 10570,

@@ -348,3 +348,12 @@
 | 45-2-22 | SUBSTR 음수 위치·음수 길이·INSTR | **문의 1577("보기 형태가 이게 최선인지")** — 보기에 SQL 호출 4개를 그대로 넣고 참고 SQL 에도 같은 호출과 글자 위치표(힌트)를 반복하던 형태 → SQL 한 블록의 A~D 결과를 고르는 형태 | SE, SE, NULL, SE | Oracle 규칙대로 직접 계산(음수 위치 = 끝에서, 음수 길이 = NULL) |
 | 47-2-38 | 2단계 셀프 조인(차상위) | 제목은 '차상위' 인데 답은 직속 매니저 조인이던 문항 → LEFT JOIN 두 번으로 차상위 구하기 | B, 2 | PostgreSQL 동일 |
 | 47-2-14 | 트리거와 트랜잭션 | 저장 프로시저 설명 고르기 → AFTER INSERT 트리거 + ROLLBACK 뒤 주문·로그 행 수 | 1, 1 | PostgreSQL(plpgsql 트리거) 1·1 |
+
+## 순환 3바퀴 — 48·49회 (11-19 06시 실행)
+
+| 문항 | 개념 | 바뀐 점 | 정답 | 검증·처리 |
+|---|---|---|---|---|
+| 48-2-19 | 다중 칼럼 서브쿼리(쌍 비교 vs 따로 비교) | 유형 이름 고르기 → 부서별 최고 급여를 (부서, 급여) 쌍으로 비교할 때와 따로 비교할 때 행 수 | 3, 4 | PostgreSQL 3·4. 10번 부서의 400 이 20번 부서 최고와 같아 따로 비교에서만 통과 |
+| 48-2-37 | LTRIM·RTRIM 문자 집합·TRIM | 함수 이름 → LTRIM/RTRIM('xy')/TRIM(FROM)/LENGTH(TRIM) 결과 | SQLxx, xySQL, SQL, 5 | PostgreSQL 동일 |
+| 49-2-15 | NULLIF·COALESCE·NVL2 + 집계 | 역할 짝짓기 → NULL 섞인 표에서 COUNT(NULLIF)·SUM(COALESCE)·SUM(NVL2) | 1, 60, 29 | PostgreSQL(NVL2 는 CASE) 1·60·29 |
+| 49-2-20 | ROLLUP 칼럼 순서와 소계 | GROUP BY 고르기 → ROLLUP(회원, 상품) vs ROLLUP(상품, 회원) 행 수 | 8, 7 | PostgreSQL 8·7 (CUBE 10 은 오답) |
