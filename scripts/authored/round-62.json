@@ -316,19 +316,19 @@
     {
       "subject": "2과목",
       "number": 14,
-      "title": "다음 SQL의 수행 결과는?",
+      "title": "아래 SQL 의 결과(A, B, C, D)로 옳은 것은? (Oracle 기준)",
       "options": [
-        "2",
-        "3",
-        "4",
-        "5"
+        "4, 4, 4, 3",
+        "4, 3, 4, 2",
+        "4, 3, 0, 2",
+        "4, 3, 0, 3"
       ],
       "correctIndex": 2,
-      "explanation": "REGEXP_COUNT(문자열, 패턴, 시작위치)는 패턴이 일치하는 횟수를 센다. 'abcd' 가 4번 반복되니 'ab' 도 겹치지 않고 정확히 4번 나와 ③ 4 다.",
+      "explanation": "REGEXP_COUNT 의 세 번째 인자는 검색을 시작할 위치다. A 는 처음부터 'ab' 를 세어 4, B 는 5번째 글자부터 세어 첫 'ab' 를 빼고 3 이다. C 는 대소문자를 구분해 대문자 'AB' 가 없어 0 이다. D 는 찾은 부분이 겹치지 않게 세므로 'aaaa' 에서 'aa' 를 앞에서부터 두 번 잡아 2 다. 정답은 ③번이다. ① 은 시작 위치와 대소문자를 무시하고 겹쳐 센 것, ② 는 대소문자를 구분하지 않는다고 본 것, ④ 는 겹쳐 센 것이다.",
       "references": [
         {
           "type": "sql",
-          "code": "SELECT REGEXP_COUNT('abcdabcdabcdabcd', 'ab', 1)\nFROM   DUAL;"
+          "code": "SELECT\n  REGEXP_COUNT('abcdabcdabcdabcd',\n               'ab', 1)   AS A,\n  REGEXP_COUNT('abcdabcdabcdabcd',\n               'ab', 5)   AS B,\n  REGEXP_COUNT('abcdabcdabcdabcd',\n               'AB')      AS C,\n  REGEXP_COUNT('aaaa', 'aa') AS D\nFROM DUAL;"
         }
       ]
     },

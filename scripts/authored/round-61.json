@@ -1665,19 +1665,19 @@
     {
       "subject": "2과목",
       "number": 41,
-      "title": "다음 SQL의 결과로 가장 적절한 것은 무엇인가?",
+      "title": "아래 SQL 의 결과(A, B, C, D)로 옳은 것은? (Oracle 기준)",
       "options": [
-        "AABBCC, ABBC",
-        "AABBC, AABBCC",
-        "AABBC, ABBC",
-        "AABBCC, AABBCC"
+        "AABBCC, ABBC, AA, NULL",
+        "AABBC, AABBCC, AAB, B",
+        "AABBC, ABBC, AA, NULL",
+        "AABBC, ABBC, AB, NULL"
       ],
       "correctIndex": 2,
-      "explanation": "패턴 '(A|B)+C'는 A 또는 B가 1회 이상 반복된 뒤 C가 오는 패턴으로 왼쪽부터 최장 일치하여 'AABBC'가 된다(C는 반복 대상이 아니라 1개). 패턴 'AB+C'는 A 바로 뒤에 B가 1회 이상 이어진 뒤 C가 와야 하므로 첫 A(다음이 A)는 탈락하고 두 번째 A부터 매칭되어 'ABBC'가 된다. ①④ 의 첫 값 AABBCC 는 C 도 반복된다고 본 값이고, ②④ 의 두 번째 값 AABBCC 는 AB+C 가 첫 A 부터 끝까지 맞는다고 본 값이다.",
+      "explanation": "(A|B)+ 는 A 나 B 가 1번 이상 이어진 부분이라 'AABB' 뒤에 C 하나가 붙어 A 는 'AABBC' 다(C 는 하나만 찾는다). AB+C 는 A 하나, B 가 1번 이상, C 하나라 두 번째 A 부터 시작한 'ABBC' 가 B 다. [AB]{2} 는 A 나 B 가 정확히 2글자인 부분이라 맨 앞의 'AA' 가 C 다. ^B 는 문자열이 B 로 시작해야 하는데 A 로 시작하므로 D 는 NULL 이다. 정답은 ③번이다. ① 은 C 까지 모두 붙인 것, ② 는 AB+C 가 앞의 A 들도 함께 잡는다고 본 것, ④ 는 [AB]{2} 가 서로 다른 두 글자를 요구한다고 본 것이다.",
       "references": [
         {
           "type": "sql",
-          "code": "SELECT REGEXP_SUBSTR('AABBCC', '(A|B)+C'),\n       REGEXP_SUBSTR('AABBCC', 'AB+C')\nFROM   DUAL;"
+          "code": "SELECT\n  REGEXP_SUBSTR('AABBCC', '(A|B)+C')\n    AS A,\n  REGEXP_SUBSTR('AABBCC', 'AB+C')\n    AS B,\n  REGEXP_SUBSTR('AABBCC', '[AB]{2}')\n    AS C,\n  REGEXP_SUBSTR('AABBCC', '^B')\n    AS D\nFROM DUAL;"
         }
       ]
     },
