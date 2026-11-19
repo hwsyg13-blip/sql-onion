@@ -640,3 +640,14 @@
 | 49-2-11 | ORDER BY 위치 번호·칼럼별 정렬 방향 | SQL 고르기 → 출력 순서 | 박, 김, 이, 최 | PostgreSQL 동일 |
 | 50-2-21 | MODIFY 길이 축소·NOT NULL 추가의 제한 | 문법 고르기 → 데이터가 있는 칼럼에 MODIFY 4개 | 성공, 오류, 오류, 성공 | PostgreSQL 동일(ALTER COLUMN) |
 | 50-2-36 | 외부 조인 조건 ON vs WHERE | 조인 방식 고르기 → 세 SQL 행 수 | 4, 3, 2 | PostgreSQL 동일 |
+
+## 순환 7바퀴 — 51~53회
+
+| 문항 | 개념 | 바뀐 점 | 정답 | 검증 |
+|---|---|---|---|---|
+| 51-2-11 | 고립성(미확정 값은 안 보임)·ROLLBACK | 옳지 않은 설명 → 두 세션 실행 순서표에서 조회 값 | 100, 200, 200 | PostgreSQL 두 세션 실제 실행으로 확인 |
+| 51-2-49 | WITH GRANT OPTION 객체 권한 회수의 연쇄 | DCL 이름 → GRANT·REVOKE 연쇄 결과 | B, C 모두 불가 | Oracle 규칙(PostgreSQL 은 CASCADE 를 써야 함)이라 Oracle 기준 명시 |
+| 52-2-16 | PRIOR 위치와 전개 방향·LEVEL | 키워드 고르기 → 순방향·역방향 행 수와 LEVEL | 3, 2, 2 | PostgreSQL 재귀 CTE 로 같은 결과 |
+| 52-2-43 | NVL2·NULLIF(5, 5.0)·COALESCE 중첩 | 설명 고르기 → 네 식 결과 | Y, NULL, Z, NULL | NULLIF·COALESCE 는 PostgreSQL 동일, NVL2 는 정의로 판정 |
+| 53-2-13 | SUBSTR 음수 위치·INSTR n번째·LPAD·ROUND 음수 | 결과 고르기 → 네 식 결과 | 'lop', 4, '007', -3 | LPAD·ROUND·위치 계산 PostgreSQL 로 확인 |
+| 53-2-34 | ROLLUP = GROUPING SETS 동치·CUBE 묶음 수 | 옳지 않은 설명 → 동치식과 묶음 수 | ((A, B), (A), ()) / 4 | 정의로 판정 |

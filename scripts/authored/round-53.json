@@ -246,15 +246,21 @@
     {
       "subject": "2과목",
       "number": 13,
-      "title": "SQL 실행 결과로 적절하지 않은 것은?",
+      "title": "아래 SQL 의 결과(A, B, C, D)로 옳은 것은? (Oracle 기준)",
       "options": [
-        "ROUND(4.875, 2) = 4.88",
-        "LENGTH('KOREAN') = 6",
-        "DATE_FORMAT('2022-11-02', '%Y-%m-%d') = 2022-11-02",
-        "SUBSTR('Gangneung Wonju', 8, 4) = 'g Wo'"
+        "'lop', 2, '700', -2",
+        "'Dev', 4, '007', -3",
+        "'lop', 4, '007', -2",
+        "'lop', 4, '007', -3"
       ],
       "correctIndex": 3,
-      "explanation": "SUBSTR('Gangneung Wonju', 8, 4) 는 8 번째 문자부터 4 글자를 잘라내므로 'ng W' 가 된다. 'g Wo' 는 9 번째부터 잘랐을 때의 결과라 ④ 가 적절하지 않다. ① ROUND(4.875, 2) 는 4.88, ② LENGTH('KOREAN') 은 6, ③ DATE_FORMAT 은 MySQL 함수로 '2022-11-02' 를 돌려줘 맞는 결과다."
+      "explanation": "SUBSTR 의 시작 위치가 음수이면 뒤에서부터 센다. 'SQLDeveloper' 는 12글자라 뒤에서 5번째는 앞에서 8번째 'l' 이고, 여기서 3글자를 잘라 'lop' 이다. INSTR('BANANA', 'A', 1, 2) 는 1번째 글자부터 찾아 두 번째로 나오는 'A' 의 위치라 4 다. LPAD 는 왼쪽을 채워 길이 3 을 만들어 '007' 이다. ROUND 는 0.5 를 0 에서 먼 쪽으로 반올림해 -2.5 는 -3 이 된다. 정답은 ④번이다. ① 은 첫 번째 'A' 위치를 구하고 오른쪽을 채운 것, ② 는 음수 위치를 앞에서 센 것, ③ 은 음수 반올림을 0 쪽으로 한 것이다.",
+      "references": [
+        {
+          "type": "sql",
+          "code": "SELECT\n  SUBSTR('SQLDeveloper', -5, 3) AS A,\n  INSTR('BANANA', 'A', 1, 2)  AS B,\n  LPAD('7', 3, '0')           AS C,\n  ROUND(-2.5)                 AS D\nFROM DUAL;"
+        }
+      ]
     },
     {
       "subject": "2과목",
@@ -907,15 +913,15 @@
     {
       "subject": "2과목",
       "number": 34,
-      "title": "계층형 집계 함수에 대한 설명 중 옳지 않은 것은?",
+      "title": "ROLLUP(A, B) 와 같은 결과를 내는 GROUPING SETS 식과, CUBE(A, B) 가 만드는 그룹 묶음의 수로 옳은 것은?",
       "options": [
-        "ROLLUP 은 시간·지형 등 계층형 데이터의 소계·총계를 반환한다.",
-        "CUBE 는 모든 컬럼 조합의 집계를 반환한다.",
-        "GROUPING SETS 는 원하는 집계 조합을 선택적으로 지정한다.",
-        "ROLLUP·CUBE·GROUPING SETS 은 내부에서 정렬을 수행하지 못한다."
+        "GROUPING SETS ((A), (B), ()) / 3",
+        "GROUPING SETS ((A, B), (B), ()) / 4",
+        "GROUPING SETS ((A, B), (A), (B), ()) / 3",
+        "GROUPING SETS ((A, B), (A), ()) / 4"
       ],
       "correctIndex": 3,
-      "explanation": "ROLLUP 은 계층 순서대로 소계·총계를(①), CUBE 는 모든 컬럼 조합의 집계를(②), GROUPING SETS 는 원하는 조합만 골라 집계한다(③). 이 함수들은 그룹을 만들기 위해 내부적으로 정렬·그룹화를 수행하며, 결과 순서를 원하는 대로 보장하려면 ORDER BY 를 함께 쓴다. 정렬을 수행하지 못한다는 ④ 가 옳지 않다."
+      "explanation": "ROLLUP 은 나열한 칼럼을 오른쪽부터 하나씩 빼 가며 묶는다. ROLLUP(A, B) 는 (A, B), (A), () 의 세 묶음이라 GROUPING SETS ((A, B), (A), ()) 와 같다. CUBE 는 가능한 모든 조합을 만들어 (A, B), (A), (B), () 의 4가지 묶음이 된다(칼럼이 n 개면 2ⁿ 개). 정답은 ④번이다. ① 은 ROLLUP 에 (A, B) 묶음이 없다고 보고 B 소계를 넣은 것, ② 는 B 쪽 소계를 만든다고 본 것, ③ 은 CUBE 의 묶음을 ROLLUP 으로 보고 묶음 수를 잘못 센 것이다."
     },
     {
       "subject": "2과목",

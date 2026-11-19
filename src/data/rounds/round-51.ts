@@ -251,16 +251,64 @@ export const ROUND_51: QuizQuestion[] = [
     "round": 51,
     "subject": "2과목",
     "number": 11,
-    "title": "트랜잭션에 대한 설명으로 적절하지 않은 것은?",
+    "title": "계좌 1번의 잔액이 100 으로 COMMIT 되어 있다. 두 세션이 아래 순서로 실행할 때 세션 B 가 조회한 ㉠, ㉡, ㉢ 의 값으로 옳은 것은? (기본 격리 수준)",
     "options": [
-      "하나의 트랜잭션에서 처리되는 데이터는 다른 트랜잭션에서도 변경할 수 있다.",
-      "트랜잭션은 논리적 작업 단위이다.",
-      "트랜잭션 종료 시점에 COMMIT 또는 ROLLBACK 이 수행된다.",
-      "트랜잭션은 원자성·일관성·고립성·지속성 (ACID) 을 보장해야 한다."
+      "100, 200, 200",
+      "200, 200, 300",
+      "100, 200, 300",
+      "200, 200, 200"
     ],
     "correctIndex": 0,
-    "explanation": "트랜잭션은 논리적 작업 단위이고(②), COMMIT 이나 ROLLBACK 으로 끝나며(③), 원자성·일관성·고립성·지속성(ACID)을 보장해야 한다(④). 고립성에 따라 한 트랜잭션이 처리 중인 데이터는 다른 트랜잭션이 끼어들어 변경할 수 없으므로(잠금) ① 이 옳지 않다.",
-    "_source": "authored"
+    "explanation": "트랜잭션의 고립성 때문에, 한 트랜잭션이 바꾸고 아직 COMMIT 하지 않은 값은 다른 트랜잭션에서 보이지 않는다. 그래서 ㉠ 은 COMMIT 전이라 기존 값 100 이다. A 가 COMMIT 하면 변경이 확정되어 ㉡ 은 200 이다. 그 뒤 A 가 300 으로 바꿨다가 ROLLBACK 했으므로 300 은 없던 일이 되고 ㉢ 은 200 이다. 정답은 ①번이다. ② 는 COMMIT 전 값도 보인다고 본 것, ③ 은 ROLLBACK 한 값이 남는다고 본 것, ④ 는 COMMIT 전 변경이 다른 세션에 보인다고 본 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "caption": "실행 순서",
+        "headers": [
+          "순서",
+          "세션 A",
+          "세션 B"
+        ],
+        "rows": [
+          [
+            "1",
+            "UPDATE 잔액 = 200",
+            ""
+          ],
+          [
+            "2",
+            "",
+            "SELECT → ㉠"
+          ],
+          [
+            "3",
+            "COMMIT",
+            ""
+          ],
+          [
+            "4",
+            "",
+            "SELECT → ㉡"
+          ],
+          [
+            "5",
+            "UPDATE 잔액 = 300",
+            ""
+          ],
+          [
+            "6",
+            "ROLLBACK",
+            ""
+          ],
+          [
+            "7",
+            "",
+            "SELECT → ㉢"
+          ]
+        ]
+      }
+    ]
   },
   {
     "id": 10461,
@@ -1941,16 +1989,22 @@ export const ROUND_51: QuizQuestion[] = [
     "round": 51,
     "subject": "2과목",
     "number": 49,
-    "title": "데이터베이스 접근 권한과 객체 접근 권한을 부여하는 언어의 종류는?",
+    "title": "사용자 A 가 자기 테이블 T 에 대해 아래 명령을 차례로 실행했다. 마지막 REVOKE 뒤에 B 와 C 가 T 를 조회할 수 있는지로 옳은 것은? (Oracle 기준)",
     "options": [
-      "DDL (Data Definition Language)",
-      "DML (Data Manipulation Language)",
-      "TCL (Transaction Control Language)",
-      "DCL (Data Control Language)"
+      "B 는 불가, C 는 가능",
+      "B 는 가능, C 는 불가",
+      "B, C 모두 가능",
+      "B, C 모두 불가"
     ],
     "correctIndex": 3,
-    "explanation": "GRANT·REVOKE 로 데이터베이스와 객체에 대한 접근 권한을 주고 회수하는 언어는 DCL 이다(④). DDL(①)은 CREATE·ALTER·DROP 등 구조 정의, DML(②)은 SELECT·INSERT·UPDATE·DELETE, TCL(③)은 COMMIT·ROLLBACK·SAVEPOINT 다.",
-    "_source": "authored"
+    "explanation": "권한을 주고 빼앗는 GRANT·REVOKE 는 DCL 이다. WITH GRANT OPTION 으로 받은 객체 권한은 받은 사람이 다시 남에게 줄 수 있다. Oracle 에서 이렇게 받은 객체 권한을 회수하면, 그 사람이 다른 사용자에게 준 권한도 함께 회수된다. 그래서 B 와 B 에게서 받은 C 모두 T 를 조회할 수 없다. 정답은 ④번이다. 시스템 권한을 WITH ADMIN OPTION 으로 주고받은 경우에는 회수가 이어지지 않아 C 의 권한이 남는다는 점과 구분해야 한다. ① 은 객체 권한도 회수가 이어지지 않는다고 본 것, ②·③ 은 REVOKE 가 B 에게 적용되지 않는다고 본 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "-- A 가 실행\nGRANT SELECT ON T TO B\n  WITH GRANT OPTION;\n-- B 가 실행\nGRANT SELECT ON A.T TO C;\n-- A 가 실행\nREVOKE SELECT ON T FROM B;"
+      }
+    ]
   },
   {
     "id": 10499,
