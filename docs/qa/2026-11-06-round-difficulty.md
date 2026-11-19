@@ -862,3 +862,11 @@
 | 54-2-28 | IN·NOT IN 목록의 NULL·IS NULL | IN 하나 → 네 조건 행 수 | 2, 0, 1, 2 | PostgreSQL 동일 |
 | 55-2-45 | <>·NOT = 과 NULL 행·NVL 로 포함시키기 | IS NOT NULL 하나 → 네 조건 행 수 | 2, 1, 1, 2 | PostgreSQL 동일 |
 | 56-2-41 | AVG·AVG(DISTINCT)·COUNT(DISTINCT)·MIN(NVL) | 두 값 → 네 값 | 1500, 1750, 2, 0 | PostgreSQL 동일 |
+
+## 순환 10바퀴 — 58~59회 (57회는 남은 후보가 이미 다룬 개념이라 건너뜀)
+
+| 문항 | 개념 | 바뀐 점 | 정답 | 검증 |
+|---|---|---|---|---|
+| 58-2-35 | Oracle 의 || 와 NULL·'' = NULL | 식 하나 → 네 식 결과 | ABCXYZ, A, 1, EMPTY | Oracle 규칙(PostgreSQL 은 다름, 해설에 적음) |
+| 58-2-40 | REGEXP_INSTR 의 n번째·반환 옵션·REGEXP_COUNT | 식 하나 → 네 식 결과 | 3, 6, 6, 2 | PostgreSQL 동일 |
+| 59-2-23 | 정규식 대소문자 구분과 'i' 옵션·점(.) | 빈칸 두 개 → 네 식 결과 | NULL, BCD, BCD, BxD | PostgreSQL 정규식으로 같은 결과 |

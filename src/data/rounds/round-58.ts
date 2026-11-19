@@ -1436,20 +1436,20 @@ export const ROUND_58: QuizQuestion[] = [
     "round": 58,
     "subject": "2과목",
     "number": 35,
-    "title": "아래 SQL(Oracle)의 결과로 옳은 것은?",
+    "title": "아래 SQL 의 결과(A, B, C, D)로 옳은 것은? (Oracle 기준)",
     "options": [
-      "ABCXYZ",
-      "NULL",
-      "ABC NULL XYZ",
-      "오류 발생"
+      "ABCXYZ, A, 1, EMPTY",
+      "NULL, A, 1, (빈 문자열)",
+      "ABCXYZ, NULL, NULL, EMPTY",
+      "ABC NULL XYZ, A, 2, EMPTY"
     ],
     "correctIndex": 0,
-    "explanation": "Oracle 의 문자 연결 연산자 || 는 NULL 을 빈 문자열처럼 취급해 무시한다. 따라서 'ABC' || NULL || 'XYZ' = 'ABCXYZ' 다(①). 산술 연산과 달리 결과가 NULL 이 되지 않고(②), ④ 오류도 나지 않는다. ③ 처럼 'NULL' 이라는 글자가 끼어들지도 않는다.",
+    "explanation": "Oracle 의 || 와 CONCAT 은 NULL 을 빈 문자열처럼 이어 붙여 A 는 'ABCXYZ', B 는 'A' 다. 또 Oracle 은 빈 문자열 '' 을 NULL 로 다룬다. 그래서 C 는 'A' 에 아무것도 붙지 않아 길이 1 이고, D 는 '' 이 NULL 이므로 NVL 이 'EMPTY' 로 바꾼다. 정답은 ①번이다. ② 는 || 가 NULL 을 만나면 NULL 이 된다고 보고 '' 을 값으로 본 것, ③ 은 CONCAT 이 NULL 을 돌려준다고 본 것, ④ 는 NULL 을 글자 그대로 붙인다고 본 것이다. PostgreSQL 에서는 || 에 NULL 이 섞이면 NULL 이고 '' 은 NULL 이 아니라 결과가 다르다.",
     "_source": "authored",
     "references": [
       {
         "type": "sql",
-        "code": "SELECT 'ABC' || NULL || 'XYZ' FROM DUAL;"
+        "code": "SELECT 'ABC' || NULL || 'XYZ' AS A,\n       CONCAT('A', '')          AS B,\n       LENGTH('A' || '')        AS C,\n       NVL('', 'EMPTY')         AS D\nFROM   DUAL;"
       }
     ]
   },
@@ -1600,20 +1600,20 @@ export const ROUND_58: QuizQuestion[] = [
     "round": 58,
     "subject": "2과목",
     "number": 40,
-    "title": "아래 SQL의 결과로 옳은 것은?",
+    "title": "아래 SQL 의 결과(A, B, C, D)로 옳은 것은? (Oracle 기준)",
     "options": [
-      "1",
-      "2",
-      "3",
-      "4"
+      "3, 6, 5, 2",
+      "3, 9, 6, 2",
+      "3, 6, 6, 2",
+      "3, 6, 6, 3"
     ],
     "correctIndex": 2,
-    "explanation": "REGEXP_INSTR 은 패턴이 처음 매칭되는 시작 위치를 1 부터 세어 반환한다. '123123123' 에서 3 번째 문자부터 '3', '1', '2' 가 이어져 '312' 와 일치하므로 3 을 반환한다. ① 1 은 패턴 대신 '123' 을 찾은 결과, ② 2 는 위치를 0 부터 센 결과, ④ 4 는 두 번째 '123' 의 시작 위치다.",
+    "explanation": "REGEXP_INSTR 은 패턴이 처음 나오는 위치를 돌려줘 '312' 는 3번째 글자에서 시작하므로 A 는 3 이다. 네 번째 인자는 몇 번째로 나온 것을 찾을지라, B 는 두 번째 '312' 의 시작 위치 6 이다. 다섯 번째 인자가 1 이면 시작 위치 대신 일치한 부분 바로 다음 위치를 돌려줘, 첫 '312'(3~5번째) 다음인 C 는 6 이다. REGEXP_COUNT 는 겹치지 않게 세어 3·6번째의 2번이다(9번째부터는 '3' 한 글자뿐). 정답은 ③번이다. ① 은 C 를 일치한 마지막 글자 위치로 본 것, ② 는 B 를 세 번째 위치로 본 것, ④ 는 끝의 '3' 까지 센 것이다.",
     "_source": "authored",
     "references": [
       {
         "type": "sql",
-        "code": "SELECT REGEXP_INSTR('123123123', '312')\nFROM DUAL;"
+        "code": "SELECT\n  REGEXP_INSTR('123123123', '312')\n    AS A,\n  REGEXP_INSTR('123123123', '312',\n               1, 2)      AS B,\n  REGEXP_INSTR('123123123', '312',\n               1, 1, 1)   AS C,\n  REGEXP_COUNT('123123123', '312')\n    AS D\nFROM DUAL;"
       }
     ]
   },
