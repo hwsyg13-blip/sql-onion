@@ -1617,15 +1617,21 @@
     {
       "subject": "2과목",
       "number": 41,
-      "title": "A, B 에 각각 중복 행이 없다고 가정할 때, SQL 집합 연산자 UNION ALL 과 의미가 동일한 조합은?",
+      "title": "A = {1, 2, 3}, B = {2, 3, 4} 일 때 아래 식 ㉠~㉣ 의 결과 행 수로 옳은 것은? (A UNION ALL B 는 6행)",
       "options": [
-        "(A UNION B) UNION ALL (A INTERSECT B)",
-        "(A UNION B) UNION (A UNION B)",
-        "(A INTERSECT B) UNION ALL (A MINUS B)",
-        "(A UNION B) MINUS (A INTERSECT B)"
+        "6, 4, 3, 2",
+        "6, 8, 3, 2",
+        "4, 4, 3, 2",
+        "6, 4, 2, 4"
       ],
       "correctIndex": 0,
-      "explanation": "A 와 B 에 각각 중복이 없으면 A UNION ALL B 는 공통 행만 두 번, 나머지 행은 한 번씩 나온다. ① 에서 A UNION B 는 모든 행을 한 번씩 담고, 거기에 A INTERSECT B(공통 행)를 UNION ALL 로 한 번 더 붙이므로 공통 행이 두 번 나와 A UNION ALL B 와 결과가 같다. ② 는 UNION 이라 중복이 지워져 A UNION B 와 같고, ③ 은 B 에만 있는 행이 빠지며, ④ 는 공통 행이 빠진 대칭 차집합이다."
+      "explanation": "A UNION B 는 {1, 2, 3, 4} 의 4행, A INTERSECT B 는 {2, 3}, A MINUS B 는 {1} 이다. ㉠ 은 4행에 공통 값 2, 3 을 한 번 더 붙여 6행이 되고, 값도 1, 2, 2, 3, 3, 4 로 A UNION ALL B 와 같다. ㉡ 은 같은 집합끼리의 UNION 이라 중복이 없어져 4행, ㉢ 은 {2, 3} + {1} 로 A 와 같은 3행, ㉣ 은 {1, 4} 의 2행이다. 정답은 ①번이다. ② 는 UNION 도 중복을 남긴다고 본 것, ③ 은 ㉠ 의 UNION ALL 을 UNION 처럼 본 것, ④ 는 ㉢ 과 ㉣ 을 잘못 계산한 것이다.",
+      "references": [
+        {
+          "type": "sql",
+          "code": "-- ㉠\n(A UNION B) UNION ALL\n(A INTERSECT B)\n-- ㉡\n(A UNION B) UNION (A UNION B)\n-- ㉢\n(A INTERSECT B) UNION ALL\n(A MINUS B)\n-- ㉣\n(A UNION B) MINUS\n(A INTERSECT B)"
+        }
+      ]
     },
     {
       "subject": "2과목",
@@ -1762,19 +1768,19 @@
     {
       "subject": "2과목",
       "number": 46,
-      "title": "기존 테이블에 새로운 컬럼을 추가하는 DDL 로 적절한 것은?",
+      "title": "행이 2개 있는 EMP 테이블에 아래 ㉠, ㉡, ㉢ 을 각각 실행한 결과로 옳은 것은? (Oracle 기준)",
       "options": [
-        "CREATE TABLE EMP ADD OFFI_POST_NUMBER VARCHAR2(80);",
-        "ALTER TABLE EMP ADD (OFFI_POST_NUMBER VARCHAR2(80));",
-        "UPDATE TABLE EMP ADD OFFI_POST_NUMBER VARCHAR2(80);",
-        "INSERT INTO EMP (OFFI_POST_NUMBER) VALUES (NULL);"
+        "성공, 성공, 성공",
+        "성공, 오류, 성공",
+        "성공, 오류, 오류",
+        "오류, 오류, 성공"
       ],
       "correctIndex": 1,
-      "explanation": "기존 테이블에 컬럼을 추가할 때는 ALTER TABLE ... ADD (컬럼명 데이터타입) 구문을 사용한다. ① CREATE는 신규 생성, ③ UPDATE는 데이터 수정, ④ INSERT는 행 추가용이라 컬럼을 추가하지 못한다.",
+      "explanation": "칼럼 추가는 ALTER TABLE … ADD 로 한다. 이미 행이 있는 테이블에 칼럼을 추가하면 기존 행의 새 칼럼은 NULL 이 되므로 ㉠ 은 성공한다. ㉡ 은 기존 행의 C2 가 NULL 이 되어야 하는데 NOT NULL 이라 오류다. ㉢ 은 DEFAULT 0 이 기존 행에도 채워져 NOT NULL 을 만족하므로 성공한다. 정답은 ②번이다. ① 은 NOT NULL 칼럼도 그냥 추가된다고 본 것, ③ 은 DEFAULT 가 기존 행에 채워지지 않는다고 본 것, ④ 는 행이 있으면 칼럼 추가가 안 된다고 본 것이다.",
       "references": [
         {
           "type": "sql",
-          "code": "-- 직원 테이블에 직장우편번호(OFFI_POST_NUMBER) 컬럼을 추가한다."
+          "code": "-- ㉠\nALTER TABLE EMP ADD (C1 NUMBER);\n-- ㉡\nALTER TABLE EMP\n  ADD (C2 NUMBER NOT NULL);\n-- ㉢\nALTER TABLE EMP\n  ADD (C3 NUMBER DEFAULT 0 NOT NULL);"
         }
       ]
     },

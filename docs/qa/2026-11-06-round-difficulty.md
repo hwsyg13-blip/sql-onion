@@ -719,3 +719,14 @@
 | 52-2-45 | 다중 칼럼 DISTINCT·DISTINCT 와 NULL·COUNT(DISTINCT) | 키워드 이름 → 세 SQL 결과 | 4, 2, 3 | PostgreSQL 동일 |
 | 53-2-22 | DELETE·TRUNCATE·DROP 특징(UNDO·트리거·공간·정의) | 옳지 않은 설명 → 특징 3개에 명령 | DELETE, TRUNCATE, DROP | 정의로 판정 |
 | 53-2-15 | Oracle 의 '' = NULL·SUBSTR 범위 밖·DECODE 기본값 없음 | NULL 아닌 것 고르기 → 식 5개 중 NULL | ㉠, ㉡, ㉣ | Oracle 규칙(PostgreSQL 은 '' ≠ NULL, 해설에 적음) |
+
+## 순환 8바퀴 — 54~56회
+
+| 문항 | 개념 | 바뀐 점 | 정답 | 검증 |
+|---|---|---|---|---|
+| 54-2-41 | 저장점 위치·COMMIT 후 저장점 소멸 | 빈칸 하나 → 1 만 남기는 두 빈칸 조합 | SAVEPOINT S / SAVEPOINT T | PostgreSQL 로 ①·② 결과 확인 |
+| 54-2-43 | DROP 부모 테이블 오류 vs CASCADE CONSTRAINTS | 명령 고르기 → 두 명령 결과와 자식 테이블 상태 | ② | Oracle 규칙으로 판정 |
+| 55-2-41 | 집합 연산 조합의 행 수 | 동치식 고르기 → 구체 집합으로 네 식 행 수 | 6, 4, 3, 2 | PostgreSQL 동일 |
+| 55-2-46 | 행이 있는 테이블에 NOT NULL 칼럼 추가 | 문법 고르기 → ADD 3개 결과 | 성공, 오류, 성공 | PostgreSQL 동일 |
+| 56-2-16 | 행별 COALESCE·마지막 인자 0 | 상수 하나 → 표의 행별 값과 SUM | 2, NULL, 1 / 3 | PostgreSQL 동일 |
+| 56-2-25 | 정규식 탐욕·게으른 수량자·REGEXP_COUNT·REPLACE | 함수 하나 → 네 함수 결과 | aaaa, aa, 2, aaaaaX | PostgreSQL 정규식으로 같은 결과 |
