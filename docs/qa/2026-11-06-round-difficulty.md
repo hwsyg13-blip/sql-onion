@@ -920,3 +920,4 @@
 | 47-2-35 | 자기 참조 ERD·IS NULL vs = NULL·NOT EXISTS·셀프 LEFT JOIN | 조건 이름 → ERD + 표 + SQL 4개 | 1, 0, 2, 3 | PostgreSQL 동일, 자기 참조 ERD 렌더 확인 |
 | 47-2-45 | 1:M 두 개 ERD 에서 UNION·UNION ALL·JOIN·INTERSECT | UNION 설명 고르기 → ERD + 데이터 + SQL 4개 | 3, 5, 1, 1 | PostgreSQL 동일, ERD 렌더 확인 |
 | 48-2-39 | CROSS JOIN 으로 모든 조합 만든 뒤 NOT EXISTS 로 빼기 | 조인 이름 → ERD + 데이터 + SQL 3개 | 6, 4, 2 | PostgreSQL 동일, ERD 렌더 확인 |
+| 57-2-35 | 같은 이름 다른 뜻 칼럼과 NATURAL JOIN·USING·ON | 조인 이름 → ERD + 데이터 + SQL 3개 | 0, 2, 2 | PostgreSQL 동일, ERD 렌더 확인 |
