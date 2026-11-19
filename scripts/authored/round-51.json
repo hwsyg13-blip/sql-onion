@@ -774,15 +774,57 @@
     {
       "subject": "2과목",
       "number": 28,
-      "title": "'첫 행부터 현재 행까지의 누적합' 을 구하는 윈도우 절로 옳은 것은?",
+      "title": "아래 매출 테이블에 대한 SQL 에서 (A, 2월) 행과 (B, 3월) 행의 누적 값으로 옳은 것은?",
       "options": [
-        "ROWS UNBOUNDED PRECEDING",
-        "RANGE UNBOUNDED PRECEDING",
-        "ROWS BETWEEN UNBOUNDED PRECEDING AND 1 PRECEDING",
-        "RANGE BETWEEN UNBOUNDED PRECEDING AND 1 PRECEDING"
+        "30, 45",
+        "30, 75",
+        "20, 25",
+        "30, 40"
       ],
       "correctIndex": 0,
-      "explanation": "ROWS UNBOUNDED PRECEDING 은 파티션의 첫 행부터 현재 행까지 행 단위로 누적합을 계산한다. RANGE 옵션은 값 기준이므로 동일 정렬 값이 함께 묶여 결과가 달라질 수 있다. ② RANGE 는 같은 값을 한꺼번에 묶어 행 단위 누적이 아니고, ③·④ 는 끝이 1 PRECEDING 이라 현재 행이 빠진다."
+      "explanation": "PARTITION BY 부서 라 누적 합은 부서마다 처음부터 다시 센다. ROWS UNBOUNDED PRECEDING 은 '파티션 첫 행부터 현재 행까지' 다. A 의 2월은 10 + 20 = 30, B 의 3월은 B 만 더해 5 + 15 + 25 = 45 다. 정답은 ①번이다. ② 는 파티션을 무시하고 A 의 값까지 이어서 더한 것, ③ 은 누적이 아닌 그 행의 금액만 본 것, ④ 는 B 3월에서 바로 앞 행과 현재 행만 더한 것이다.",
+      "references": [
+        {
+          "type": "table",
+          "caption": "매출",
+          "headers": [
+            "부서",
+            "월",
+            "금액"
+          ],
+          "rows": [
+            [
+              "A",
+              "1",
+              "10"
+            ],
+            [
+              "A",
+              "2",
+              "20"
+            ],
+            [
+              "B",
+              "1",
+              "5"
+            ],
+            [
+              "B",
+              "2",
+              "15"
+            ],
+            [
+              "B",
+              "3",
+              "25"
+            ]
+          ]
+        },
+        {
+          "type": "sql",
+          "code": "SELECT 부서, 월,\n       SUM(금액) OVER (\n         PARTITION BY 부서\n         ORDER BY 월\n         ROWS UNBOUNDED PRECEDING\n       ) AS 누적\nFROM   매출;"
+        }
+      ]
     },
     {
       "subject": "2과목",
@@ -1129,15 +1171,21 @@
     {
       "subject": "2과목",
       "number": 38,
-      "title": "Oracle 에서 COL 에 NULL 이 포함되어 있을 때, 아래 ORDER BY 절 중 NULL 의 정렬 위치가 나머지와 다른 것은?",
+      "title": "COL 값이 3, NULL, 1 인 T 테이블에 대한 SQL ㉠~㉣ 에서 첫 번째로 출력되는 값으로 옳은 것은? (Oracle 기준)",
       "options": [
-        "ORDER BY COL",
-        "ORDER BY COL DESC",
-        "ORDER BY COL ASC",
-        "ORDER BY COL NULLS LAST"
+        "1, 3, 3, NULL",
+        "1, NULL, 3, NULL",
+        "NULL, NULL, 3, 1",
+        "1, NULL, 1, NULL"
       ],
       "correctIndex": 1,
-      "explanation": "Oracle 은 오름차순 정렬에서 NULL 을 가장 마지막에(NULLS LAST), 내림차순 정렬에서 가장 앞에(NULLS FIRST) 배치한다. ①·③ 은 오름차순이고 ④ 는 NULLS LAST 를 명시했으므로 모두 NULL 이 마지막에 오지만, ② 는 내림차순이라 NULL 이 가장 앞에 오므로 정렬 위치가 다르다."
+      "explanation": "Oracle 은 정렬할 때 NULL 을 가장 큰 값으로 본다. 그래서 오름차순 ㉠ 은 1 이 먼저(NULL 은 맨 뒤), 내림차순 ㉡ 은 NULL 이 먼저다. ㉢ 은 내림차순이지만 NULLS LAST 로 NULL 을 뒤로 보내 3 이 먼저다. ㉣ 은 NULL 을 0 으로 바꾼 값으로 정렬하므로 0 으로 취급된 NULL 행이 가장 먼저 나오고, 출력되는 값은 원래 칼럼이라 NULL 이다. 정답은 ②번이다. ① 은 DESC 에서도 NULL 이 뒤로 간다고 본 것, ③ 은 ASC 에서 NULL 이 먼저라고 본 것, ④ 는 NULLS LAST 를 오름차순으로 바꾸는 옵션으로 본 것이다.",
+      "references": [
+        {
+          "type": "sql",
+          "code": "-- ㉠\nSELECT COL FROM T ORDER BY COL;\n-- ㉡\nSELECT COL FROM T ORDER BY COL DESC;\n-- ㉢\nSELECT COL FROM T\nORDER  BY COL DESC NULLS LAST;\n-- ㉣\nSELECT COL FROM T\nORDER  BY NVL(COL, 0);"
+        }
+      ]
     },
     {
       "subject": "2과목",

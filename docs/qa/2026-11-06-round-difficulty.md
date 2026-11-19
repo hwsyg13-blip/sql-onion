@@ -436,3 +436,14 @@
 | 49-2-37 | DISTINCT·GROUP BY 의 NULL vs COUNT(DISTINCT) | 결과 다른 SQL → 네 SQL 행 수·값 | 3, 3, 2, 2 | PostgreSQL 동일 |
 | 50-2-16 | INNER·LEFT·FULL OUTER 행 수 | 조인 조합 고르기 → 표 두 개로 행 수 | 2, 3, 4 | PostgreSQL 동일 |
 | 50-2-25 | DELETE 뒤 TRUNCATE 자동 COMMIT, DROP | 비교 설명 → 순서 실행 후 세 테이블 | 0, 0, 오류 | Oracle 규칙(DDL 자동 COMMIT) |
+
+## 순환 4바퀴 — 51~53회 (11-19 22시 실행 계속)
+
+| 문항 | 개념 | 바뀐 점 | 정답 | 검증 |
+|---|---|---|---|---|
+| 51-2-28 | PARTITION BY 누적합 초기화 | 윈도우 절 고르기 → 부서별 누적 두 값 | 30, 45 | PostgreSQL 동일 |
+| 51-2-38 | NULL 정렬 위치(ASC·DESC·NULLS LAST·NVL) | 옵션 효과 고르기 → 네 정렬의 첫 값 | 1, NULL, 3, NULL | PostgreSQL 동일(기본 NULL 정렬이 Oracle 과 같음) |
+| 52-2-31 | ELSE 없는 CASE 와 집계 | CASE 고르기 → SUM·COUNT·AVG·AVG(ELSE 0) | 7500, 3, 2500, 1875 | PostgreSQL 동일 |
+| 52-2-37 | 공통 칼럼 없는 NATURAL JOIN·공통 칼럼 한정자 | 설명 고르기 → 세 SQL 결과 | 6, 2, 오류 | PostgreSQL 6·2. ㉢ 오류는 Oracle 규칙(ORA-25155, PostgreSQL 은 허용) — '(Oracle 기준)' 표시 |
+| 53-2-32 | MINUS 중복 제거·집합 연산자 같은 우선순위 | 설명 고르기 → 세 SQL 행 수 | 2, 0, 2 | PostgreSQL(EXCEPT) 동일 |
+| 53-2-44 | ADD DEFAULT·RENAME·DROP COLUMN | 설명 고르기 → 세 ALTER 뒤 행 | BB=2, C=5 | PostgreSQL 동일 |

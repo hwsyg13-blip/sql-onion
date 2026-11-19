@@ -995,16 +995,22 @@ export const ROUND_53: QuizQuestion[] = [
     "round": 53,
     "subject": "2과목",
     "number": 32,
-    "title": "집합 연산자에 대한 설명 중 옳지 않은 것은?",
+    "title": "A(값 1, 1, 2, 3, 3), B(값 3) 테이블에 대한 SQL ㉠, ㉡, ㉢ 의 결과 행 수로 옳은 것은?",
     "options": [
-      "UNION 연산자는 합집합 결과에서 중복된 행을 하나의 행으로 만든다.",
-      "UNION ALL 연산자는 중복이 없는 경우 UNION 과 결과가 동일하다.",
-      "UNION 으로 결합하는 각 SELECT 문은 컬럼의 개수가 같아야 한다.",
-      "UNION 연산자를 사용한 SQL 은 각각의 집합에 ORDER BY 절을 사용할 수 있다."
+      "3, 0, 4",
+      "2, 1, 2",
+      "4, 0, 3",
+      "2, 0, 2"
     ],
     "correctIndex": 3,
-    "explanation": "UNION 은 합집합에서 중복 행을 하나로 만들고(①), 중복이 없으면 UNION ALL 과 결과가 같으며(②), 결합하는 각 SELECT 문은 컬럼 개수가 같아야 한다(③). ORDER BY 는 집합 연산이 끝난 최종 결과에 한 번만, 마지막 SELECT 뒤에 쓸 수 있으므로 각 집합에 ORDER BY 를 쓸 수 있다는 ④ 가 옳지 않다. ※ 복원 자료의 ③ 은 '각각의 집합에 GROUP BY 절을 사용할 수 있다' 로 ④ 와 한 단어만 달라 같은 보기로 읽힌다는 제보가 있어, 구분되는 옳은 설명으로 바꿨다.",
-    "_source": "authored"
+    "explanation": "MINUS 는 앞의 결과에서 뒤에 있는 값을 빼고, 결과의 중복도 없앤다. ㉠ 은 1, 1, 2, 3, 3 에서 3 을 빼고 중복을 없애 1, 2 의 2행이다. ㉡ 은 B 의 3 이 A 에도 있어 남는 값이 없으니 0행이다. Oracle 의 집합 연산자는 우선순위가 같아 위에서부터 차례로 계산한다. ㉢ 은 (A UNION ALL B) 의 1, 1, 2, 3, 3, 3 에서 B 의 3 을 빼고 중복을 없애 1, 2 의 2행이다. 정답은 ④번이다. ① 은 MINUS 가 중복을 남기고 3 하나만 뺀다고 본 것, ② 는 ㉡ 에 3 이 남는다고 본 것, ③ 은 MINUS 를 한 개씩 지우는 연산으로 본 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "-- ㉠\nSELECT 값 FROM A\nMINUS\nSELECT 값 FROM B;\n-- ㉡\nSELECT 값 FROM B\nMINUS\nSELECT 값 FROM A;\n-- ㉢\nSELECT 값 FROM A\nUNION ALL\nSELECT 값 FROM B\nMINUS\nSELECT 값 FROM B;"
+      }
+    ]
   },
   {
     "id": 10382,
@@ -1442,16 +1448,22 @@ export const ROUND_53: QuizQuestion[] = [
     "round": 53,
     "subject": "2과목",
     "number": 44,
-    "title": "테이블 구조 변경에 대한 설명 중 옳지 않은 것은?",
+    "title": "아래 SQL 을 순서대로 실행한 뒤 SELECT * FROM T 의 결과로 옳은 것은?",
     "options": [
-      "기존 데이터가 있으면 컬럼 사이즈 축소 시 제한이 있다.",
-      "NULL 만 입력된 컬럼은 사이즈 축소가 가능하다.",
-      "DEFAULT 값을 변경하면 변경 이후 입력되는 데이터에만 적용된다.",
-      "DEFAULT 값을 NULL 로 변경하면 기존 NULL 데이터에도 새로운 DEFAULT 가 소급 적용된다."
+      "A=1, BB=2, C=5",
+      "BB=2, C=NULL",
+      "B=2, C=5",
+      "BB=2, C=5"
     ],
     "correctIndex": 3,
-    "explanation": "기존 데이터가 있으면 그보다 작게 컬럼 크기를 줄일 수 없고(①), 값이 모두 NULL 인 컬럼은 줄일 수 있다(②). DEFAULT 값을 바꾸면 변경 이후에 입력되는 행에만 적용되며(③) 이미 저장된 데이터(NULL 포함)에는 소급 적용되지 않는다. 따라서 ④ 가 옳지 않다.",
-    "_source": "authored"
+    "explanation": "DEFAULT 가 있는 칼럼을 추가하면 이미 있던 행에도 그 기본값이 채워져 C 는 5 다. RENAME COLUMN 은 데이터는 그대로 두고 칼럼 이름만 B 에서 BB 로 바꾼다. DROP COLUMN 으로 A 칼럼과 그 값은 사라진다. 그래서 결과는 BB=2, C=5 인 1행이다. 정답은 ④번이다. ① 은 DROP COLUMN 을 놓친 것, ② 는 기존 행에는 기본값이 들어가지 않는다고 본 것, ③ 은 RENAME 을 놓친 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "CREATE TABLE T (A NUMBER, B NUMBER);\nINSERT INTO T VALUES (1, 2);\n\nALTER TABLE T\n  ADD (C NUMBER DEFAULT 5);\nALTER TABLE T\n  RENAME COLUMN B TO BB;\nALTER TABLE T DROP COLUMN A;"
+      }
+    ]
   },
   {
     "id": 10394,
