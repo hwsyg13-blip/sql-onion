@@ -212,3 +212,4 @@
 
 - 11-19: 날짜 산술 문항은 기준 시각을 바꾸면 날짜 차이(E)도 바뀐다. 보기 전체를 PG 로 다시 계산할 것(50-2-33 에서 1.58 을 1.5 로 적을 뻔함).
 - 11-19: 390px 에서 4칼럼 이상 표·긴 날짜 보기·비고 칼럼이 잘 넘친다. 칼럼을 줄이거나 문장으로 옮긴다.
+- 11-20: maintenance 브랜치 동기화는 반드시 `git fetch origin maintenance/maintainer-agent:refs/remotes/origin/maintenance/maintainer-agent` 로. 그냥 fetch 하면 origin/ 참조가 옛 커밋(427df4b)에 머물러 reset 시 옛 상태로 돌아간다(원격은 안전).
