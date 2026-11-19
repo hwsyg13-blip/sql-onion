@@ -425,3 +425,14 @@
 | 46-2-41 | 셀프 조인 짝 세기(< vs <>) | 조인 방식 이름 → 같은 부서 짝 행 수 | 3, 6 | PostgreSQL 동일 |
 | 47-1-6 | 슈퍼·서브타입 변환 3방식 테이블 수 | 방식 이름 → mermaid ERD(서브타입 3개)로 테이블 수 | 1, 4, 3 | 가이드 정의로 계산, ERD 렌더 확인 |
 | 47-1-5 | 주식별자 4조건 | 특징 설명 → 회원 표에서 조건을 모두 만족하는 칼럼 | 회원번호 | 정답 노출 검사가 '회원번호는 바뀌지 않는다' 문장을 잡아 안내 문장을 중립으로 바꿈 |
+
+## 순환 4바퀴 — 48~50회 (11-19 22시 실행)
+
+| 문항 | 개념 | 바뀐 점 | 정답 | 검증 |
+|---|---|---|---|---|
+| 48-2-17 | MOD 음수·CEIL 음수·ROUND 음수 자릿수·TRUNC | 가장 큰 값 고르기 → 네 함수 결과 | -1, -4, 0, 4.56 | PostgreSQL 동일 |
+| 48-2-34 | 검색 CASE 의 WHEN 평가 순서 | 설명 고르기 → 작은 조건을 먼저 쓴 CASE 결과 | C, C, C, F | PostgreSQL 동일 |
+| 49-2-23 | 집계 후 동점: FETCH ONLY / WITH TIES / RANK | SQL 고르기 → 세 방식 행 수·값 | 1, 2, 2 | PostgreSQL 동일 |
+| 49-2-37 | DISTINCT·GROUP BY 의 NULL vs COUNT(DISTINCT) | 결과 다른 SQL → 네 SQL 행 수·값 | 3, 3, 2, 2 | PostgreSQL 동일 |
+| 50-2-16 | INNER·LEFT·FULL OUTER 행 수 | 조인 조합 고르기 → 표 두 개로 행 수 | 2, 3, 4 | PostgreSQL 동일 |
+| 50-2-25 | DELETE 뒤 TRUNCATE 자동 COMMIT, DROP | 비교 설명 → 순서 실행 후 세 테이블 | 0, 0, 오류 | Oracle 규칙(DDL 자동 COMMIT) |

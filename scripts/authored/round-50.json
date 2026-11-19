@@ -398,15 +398,61 @@
     {
       "subject": "2과목",
       "number": 16,
-      "title": "클래스와 튜터 관계에서 빠짐없이 값이 나오도록 조인하려 한다. 가장 적절한 조합은?",
+      "title": "아래 두 테이블을 튜터ID = ID 로 조인할 때 INNER JOIN, 클래스 기준 LEFT JOIN, FULL OUTER JOIN 의 결과 행 수로 옳은 것은? (순서대로)",
       "options": [
-        "INNER JOIN 만 사용",
-        "클래스 기준 LEFT JOIN",
-        "튜터 기준 RIGHT JOIN",
-        "양쪽을 모두 포함하는 FULL OUTER JOIN"
+        "2, 3, 3",
+        "3, 3, 4",
+        "2, 2, 4",
+        "2, 3, 4"
       ],
       "correctIndex": 3,
-      "explanation": "클래스와 튜터 양쪽 모두에서 짝이 없는 행까지 빠짐없이 나오려면 두 테이블의 행을 모두 보존하는 FULL OUTER JOIN 을 쓴다(④). ① INNER JOIN 은 양쪽이 매칭된 행만 남기고, ② 클래스 기준 LEFT JOIN 은 튜터가 없는 클래스는 남기지만 클래스가 없는 튜터가 빠지며, ③ 튜터 기준 RIGHT JOIN 은 그 반대로 튜터가 없는 클래스가 빠진다."
+      "explanation": "INNER JOIN 은 양쪽에 짝이 있는 수학-김, 영어-이 2행이다. 클래스 기준 LEFT JOIN 은 여기에 튜터가 없는 과학이 튜터 칼럼 NULL 로 더해져 3행이다. FULL OUTER JOIN 은 LEFT 결과에 맡은 클래스가 없는 튜터 박까지 클래스 칼럼 NULL 로 더해져 4행이다. 정답은 ④번이다. ① 은 FULL OUTER 를 LEFT 와 같다고 본 것, ② 는 INNER 에도 과학이 남는다고 본 것, ③ 은 LEFT 에서 과학이 빠진다고 본 것이다.",
+      "references": [
+        {
+          "type": "table",
+          "caption": "클래스",
+          "headers": [
+            "클래스",
+            "튜터ID"
+          ],
+          "rows": [
+            [
+              "수학",
+              "T1"
+            ],
+            [
+              "영어",
+              "T2"
+            ],
+            [
+              "과학",
+              "NULL"
+            ]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "튜터",
+          "headers": [
+            "ID",
+            "이름"
+          ],
+          "rows": [
+            [
+              "T1",
+              "김"
+            ],
+            [
+              "T2",
+              "이"
+            ],
+            [
+              "T3",
+              "박"
+            ]
+          ]
+        }
+      ]
     },
     {
       "subject": "2과목",
@@ -703,15 +749,21 @@
     {
       "subject": "2과목",
       "number": 25,
-      "title": "DELETE, TRUNCATE, DROP 명령어에 대한 비교 중 옳지 않은 것은?",
+      "title": "T1, T2, T3 에 각각 COMMIT 된 3행이 있을 때 아래 SQL 을 순서대로 실행한 결과로 옳은 것은? ('T1 행 수, T2 행 수, T3 조회 결과' 순서, Oracle 기준)",
       "options": [
-        "DROP 은 테이블 정의와 모든 데이터를 삭제한다.",
-        "TRUNCATE 는 테이블을 초기 상태로 만든다.",
-        "TRUNCATE 는 UNDO 데이터를 생성하지 않아 DELETE 보다 빠르다.",
-        "DROP 은 Auto Commit 이고 DELETE 와 TRUNCATE 는 사용자 COMMIT 으로 수행된다."
+        "3, 0, 3",
+        "3, 0, 오류",
+        "3, 3, 3",
+        "0, 0, 오류"
       ],
       "correctIndex": 3,
-      "explanation": "DROP 은 테이블 정의와 데이터를 모두 삭제하고(①), TRUNCATE 는 데이터를 모두 지우고 저장 공간을 해제해 테이블을 처음 상태로 만들며(②), UNDO 를 거의 만들지 않아 DELETE 보다 빠르다(③). TRUNCATE 는 DDL 이라 DROP 과 마찬가지로 자동 커밋되고, 사용자 COMMIT 이 필요한 것은 DML 인 DELETE 뿐이다. ④ 가 옳지 않다."
+      "explanation": "Oracle 에서 TRUNCATE·DROP 은 DDL 이라 실행 전후로 자동 COMMIT 된다. 그래서 TRUNCATE 직전에 한 T1 의 DELETE 도 그 순간 확정되어, 다음 ROLLBACK 이 되돌릴 것이 없다. T1 과 T2 는 모두 0행이다. DROP 도 되돌릴 수 없어 T3 는 테이블 자체가 사라졌고, 조회하면 테이블이 없다는 오류가 난다. 정답은 ④번이다. ① 은 DELETE 와 DROP 이 ROLLBACK 된다고 본 것, ② 는 DELETE 만 ROLLBACK 된다고 본 것(TRUNCATE 의 자동 COMMIT 을 놓침), ③ 은 모두 되돌려진다고 본 것이다.",
+      "references": [
+        {
+          "type": "sql",
+          "code": "DELETE FROM T1;\nTRUNCATE TABLE T2;\nROLLBACK;\nDROP TABLE T3;\nROLLBACK;\n\nSELECT COUNT(*) FROM T1;\nSELECT COUNT(*) FROM T2;\nSELECT COUNT(*) FROM T3;"
+        }
+      ]
     },
     {
       "subject": "2과목",

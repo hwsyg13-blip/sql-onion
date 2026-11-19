@@ -665,15 +665,51 @@
     {
       "subject": "2과목",
       "number": 23,
-      "title": "Oracle 환경에서 회원별 총 주문 금액이 가장 큰 1건을 조회하는 SQL 로 옳은 것은?",
+      "title": "아래 주문 테이블에 대한 SQL ㉠, ㉡, ㉢ 의 결과로 옳은 것은? ('㉠ 행 수, ㉡ 행 수, ㉢ 값' 순서, Oracle 12c 이상)",
       "options": [
-        "SELECT 회원번호, SUM(주문금액) FROM 주문 GROUP BY 회원번호 ORDER BY 2 DESC LIMIT 1;",
-        "SELECT * FROM (SELECT 회원번호, SUM(주문금액) AS 총주문금액 FROM 주문 GROUP BY 회원번호 ORDER BY 2 DESC) WHERE ROWNUM = 1;",
-        "SELECT 회원번호 FROM 주문 WHERE ROWNUM = 1 ORDER BY 주문금액 DESC;",
-        "SELECT TOP 1 * FROM 주문 ORDER BY 주문금액 DESC;"
+        "1, 1, 1",
+        "1, 2, 2",
+        "2, 2, 2",
+        "1, 2, 1"
       ],
       "correctIndex": 1,
-      "explanation": "Oracle 에서는 ORDER BY 가 적용된 인라인 뷰를 먼저 만든 뒤 외부 쿼리에서 ROWNUM = 1 로 한 건만 잘라야 '가장 큰 1건' 을 정확히 얻는다. ①은 표준 Oracle 에 LIMIT 가 없고, ③은 ROWNUM 이 ORDER BY 이전에 부여되어 잘못된 결과가 나오며, ④의 TOP 은 SQL Server 문법이고 GROUP BY 도 없다."
+      "explanation": "회원별 합계는 A 300, B 300, C 250 이라 1위가 A·B 두 명이다. ㉠ 의 ONLY 는 동점과 상관없이 딱 1행만 가져온다(A·B 중 어느 쪽이 나올지는 정해져 있지 않다). ㉡ 의 WITH TIES 는 1번째 행과 정렬 값이 같은 행까지 가져와 2행, ㉢ 의 RANK 는 동점에 같은 순위를 줘서 1위가 2명이다. 정답은 ②번이다. ① 은 동점을 생각하지 않은 것, ③ 은 ONLY 도 동점을 함께 가져온다고 본 것, ④ 는 RANK 가 동점에도 서로 다른 순위를 준다고 본 것이다.",
+      "references": [
+        {
+          "type": "table",
+          "caption": "주문",
+          "headers": [
+            "회원",
+            "금액"
+          ],
+          "rows": [
+            [
+              "A",
+              "100"
+            ],
+            [
+              "A",
+              "200"
+            ],
+            [
+              "B",
+              "300"
+            ],
+            [
+              "C",
+              "100"
+            ],
+            [
+              "C",
+              "150"
+            ]
+          ]
+        },
+        {
+          "type": "sql",
+          "code": "-- ㉠\nSELECT 회원 FROM 주문\nGROUP  BY 회원\nORDER  BY SUM(금액) DESC\nFETCH  FIRST 1 ROWS ONLY;\n-- ㉡\nSELECT 회원 FROM 주문\nGROUP  BY 회원\nORDER  BY SUM(금액) DESC\nFETCH  FIRST 1 ROWS WITH TIES;\n-- ㉢\nSELECT COUNT(*)\nFROM  (SELECT 회원,\n              RANK() OVER (\n                ORDER BY SUM(금액) DESC\n              ) AS RK\n       FROM   주문\n       GROUP  BY 회원)\nWHERE  RK = 1;"
+        }
+      ]
     },
     {
       "subject": "2과목",
@@ -1305,15 +1341,21 @@
     {
       "subject": "2과목",
       "number": 37,
-      "title": "아래 네 SQL 중 결과가 다른 것은?",
+      "title": "COL1 값이 A, A, NULL, B, NULL 인 T 테이블에 대한 SQL ㉠~㉣ 의 결과로 옳은 것은? ('㉠ 행 수, ㉡ 행 수, ㉢ 값, ㉣ 행 수' 순서)",
       "options": [
-        "SELECT UNIQUE COL1 FROM T;",
-        "SELECT DISTINCT COUNT(*) FROM T;",
-        "SELECT COL1 FROM T GROUP BY COL1;",
-        "SELECT DISTINCT COL1 FROM T;"
+        "2, 2, 2, 2",
+        "3, 3, 2, 2",
+        "3, 3, 3, 3",
+        "3, 2, 2, 1"
       ],
       "correctIndex": 1,
-      "explanation": "①③④ 는 COL1 의 서로 다른 값을 한 번씩 돌려준다. Oracle 에서 UNIQUE 는 DISTINCT 와 같은 뜻이라 ① 과 ④ 가 같고, ③ 처럼 GROUP BY COL1 로 묶어도 값마다 한 행이 나온다. ② 는 COUNT(*) 로 전체 행 수를 한 행에 구한 뒤 DISTINCT 를 적용하므로, 행 수 하나만 나와 결과가 다르다."
+      "explanation": "DISTINCT 와 GROUP BY 는 NULL 을 하나의 값처럼 모은다. 그래서 ㉠·㉡ 은 A, B, NULL 의 3행이다. 반면 집계 함수는 NULL 을 빼므로 ㉢ 의 COUNT(DISTINCT COL1) 은 A, B 의 2 다. ㉣ 은 그룹별 행 수가 A 2, NULL 2, B 1 이고, 이 값들에서 중복을 없애면 2 와 1 이 남아 2행이다. 정답은 ②번이다. ① 은 DISTINCT·GROUP BY 도 NULL 을 뺀다고 본 것, ③ 은 COUNT(DISTINCT) 도 NULL 을 센다고 본 것, ④ 는 GROUP BY 가 NULL 행을 버린다고 본 것이다.",
+      "references": [
+        {
+          "type": "sql",
+          "code": "-- ㉠\nSELECT DISTINCT COL1 FROM T;\n-- ㉡\nSELECT COL1 FROM T GROUP BY COL1;\n-- ㉢\nSELECT COUNT(DISTINCT COL1) FROM T;\n-- ㉣\nSELECT DISTINCT COUNT(*)\nFROM   T\nGROUP  BY COL1;"
+        }
+      ]
     },
     {
       "subject": "2과목",

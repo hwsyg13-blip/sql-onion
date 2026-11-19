@@ -561,15 +561,21 @@
     {
       "subject": "2과목",
       "number": 17,
-      "title": "값이 가장 크게 나오는 함수는?",
+      "title": "아래 SQL 의 결과(A, B, C, D)로 옳은 것은? (Oracle 기준)",
       "options": [
-        "ROUND(4.3)",
-        "TRUNC(4.9)",
-        "FLOOR(4.9)",
-        "CEIL(4.1)"
+        "2, -5, 5, 4.57",
+        "-1, -5, 0, 4.57",
+        "2, -4, 10, 4.56",
+        "-1, -4, 0, 4.56"
       ],
       "correctIndex": 3,
-      "explanation": "① ROUND(4.3) 은 소수 첫째 자리에서 반올림해 4, ② TRUNC(4.9) 는 소수점 아래를 버려 4, ③ FLOOR(4.9) 는 내림이라 4 다. ④ CEIL(4.1) 은 올림이라 5 가 되어 가장 크다. 소수 부분이 아무리 작아도 CEIL 은 다음 정수로 올리고, FLOOR·TRUNC 는 소수 부분이 아무리 커도 버린다는 점이 핵심이다."
+      "explanation": "MOD 의 나머지는 나누어지는 수(-7)의 부호를 따른다. -7 = 3 × (-2) + (-1) 이라 A 는 -1 이다. CEIL 은 그 값 이상인 가장 작은 정수라 -4.1 은 -4 로 올라간다. ROUND 의 두 번째 인자 -1 은 십의 자리로 반올림하라는 뜻이라 4.567 은 0 이 된다. TRUNC(4.567, 2) 는 소수 둘째 자리 아래를 버려 4.56 이다. 정답은 ④번이다. ① 은 나머지를 늘 양수로 보고 -1 을 일의 자리로 읽은 것, ② 는 CEIL 을 0 에서 먼 쪽으로 올리고 TRUNC 를 반올림처럼 본 것, ③ 은 십의 자리 반올림을 10 으로 올린 것이다.",
+      "references": [
+        {
+          "type": "sql",
+          "code": "SELECT MOD(-7, 3)         AS A,\n       CEIL(-4.1)         AS B,\n       ROUND(4.567, -1)   AS C,\n       TRUNC(4.567, 2)    AS D\nFROM   DUAL;"
+        }
+      ]
     },
     {
       "subject": "2과목",
@@ -1077,15 +1083,21 @@
     {
       "subject": "2과목",
       "number": 34,
-      "title": "SEARCHED CASE 표현식에 대한 설명 중 옳지 않은 것은?",
+      "title": "점수가 95, 85, 72, 55 인 4행에 아래 CASE 식을 적용한 결과(점수 순서대로)로 옳은 것은?",
       "options": [
-        "WHEN 절마다 조건식을 독립적으로 기술한다.",
-        "순차적으로 평가되어 첫 번째 참 조건의 값을 반환한다.",
-        "ELSE 절을 생략하면 기본 NULL 이 반환된다.",
-        "CASE 바로 뒤에 비교 대상 컬럼을 기술해야 한다."
+        "A, B, C, F",
+        "A, B, C, NULL",
+        "C, C, C, NULL",
+        "C, C, C, F"
       ],
       "correctIndex": 3,
-      "explanation": "SEARCHED CASE 는 CASE WHEN 조건식 THEN 값 형태로 WHEN 마다 조건을 따로 쓰고(①), 위에서부터 평가해 처음 참이 되는 값을 반환하며(②), ELSE 를 생략하면 NULL 이다(③). CASE 바로 뒤에 비교 대상 컬럼을 쓰는 것은 SIMPLE CASE(CASE 컬럼 WHEN 값 THEN …)이므로 ④ 가 옳지 않다."
+      "explanation": "검색 CASE 는 WHEN 을 위에서부터 차례로 검사하고, 처음 참이 된 WHEN 의 값을 돌려준 뒤 나머지는 보지 않는다. 95·85·72 는 모두 첫 조건 '>= 60' 에서 이미 참이라 C 가 되고, 아래의 B·A 조건까지 가지 못한다. 55 는 어느 WHEN 에도 맞지 않아 ELSE 의 F 다. 정답은 ④번이다. 그래서 범위 조건은 큰 값(>= 90)부터 적어야 한다. ① 은 가장 잘 맞는 조건을 골라 준다고 본 것, ②·③ 은 ELSE 가 있는데도 NULL 이 나온다고 본 것이다.",
+      "references": [
+        {
+          "type": "sql",
+          "code": "CASE WHEN 점수 >= 60 THEN 'C'\n     WHEN 점수 >= 80 THEN 'B'\n     WHEN 점수 >= 90 THEN 'A'\n     ELSE 'F'\nEND"
+        }
+      ]
     },
     {
       "subject": "2과목",
