@@ -918,3 +918,5 @@
 | 47-2-30 | 스칼라 서브쿼리 vs JOIN + GROUP BY (사원 없는 부서) | 최댓값 SQL 고르기 → ERD + 데이터 + SQL 2개 | 3, NULL, 2 | PostgreSQL 동일, ERD 렌더 확인 |
 | 48-2-29 | 선택 관계 ERD 에서 INNER vs LEFT JOIN 후 ROLLUP·NULL 합계 | ROLLUP 묶음 고르기 → ERD + 데이터 + SQL 2개 | 6, 7, NULL | PostgreSQL 동일, ERD 렌더 확인 |
 | 47-2-35 | 자기 참조 ERD·IS NULL vs = NULL·NOT EXISTS·셀프 LEFT JOIN | 조건 이름 → ERD + 표 + SQL 4개 | 1, 0, 2, 3 | PostgreSQL 동일, 자기 참조 ERD 렌더 확인 |
+| 47-2-45 | 1:M 두 개 ERD 에서 UNION·UNION ALL·JOIN·INTERSECT | UNION 설명 고르기 → ERD + 데이터 + SQL 4개 | 3, 5, 1, 1 | PostgreSQL 동일, ERD 렌더 확인 |
+| 48-2-39 | CROSS JOIN 으로 모든 조합 만든 뒤 NOT EXISTS 로 빼기 | 조인 이름 → ERD + 데이터 + SQL 3개 | 6, 4, 2 | PostgreSQL 동일, ERD 렌더 확인 |

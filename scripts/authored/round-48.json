@@ -1369,15 +1369,30 @@
     {
       "subject": "2과목",
       "number": 39,
-      "title": "조인 조건 없이 두 테이블의 모든 조합을 반환하는 조인은?",
+      "title": "아래 ERD 와 데이터에서 '아직 신청하지 않은 (사원, 과정) 조합' 을 찾으려 한다. SQL ㉠, ㉡, ㉢ 의 결과 행 수로 옳은 것은?",
       "options": [
-        "CROSS JOIN",
-        "INNER JOIN",
-        "LEFT OUTER JOIN",
-        "FULL OUTER JOIN"
+        "6, 4, 2",
+        "5, 3, 2",
+        "6, 6, 2",
+        "6, 4, 6"
       ],
       "correctIndex": 0,
-      "explanation": "CROSS JOIN(카티션 곱)은 조인 조건 없이 두 테이블의 모든 행을 짝지어 만들 수 있는 모든 조합을 반환하며, 결과 행 수는 두 테이블 행 수의 곱이 된다. ② INNER JOIN은 매칭 조건이 필요하고, ③ LEFT/④ FULL OUTER JOIN은 매칭 조건이 있는 상태에서 미매칭 행까지 보존하는 조인이라 의미가 다르다. 정답은 ①번이다."
+      "explanation": "CROSS JOIN 은 조인 조건 없이 모든 조합을 만들어 사원 3명 × 과정 2개 = 6행이다(㉠). 이렇게 가능한 모든 조합을 만든 뒤 ㉡ 처럼 NOT EXISTS 로 이미 신청한 2건을 빼면 아직 신청하지 않은 조합 4행이 남는다. ㉢ 은 신청을 거쳐 이어지는 실제 신청 내역이라 2행이다. 정답은 ①번이다. ② 는 CROSS JOIN 을 행 수의 합으로 본 것, ③ 은 NOT EXISTS 가 아무것도 빼지 못한다고 본 것, ④ 는 ㉢ 도 모든 조합을 만든다고 본 것이다.",
+      "references": [
+        {
+          "type": "erd",
+          "caption": "사원·신청·과정 ERD",
+          "mermaid": "erDiagram\n    사원 ||..o{ 신청 : \"신청함\"\n    과정 ||..o{ 신청 : \"받음\"\n    사원 {\n        string 이름 PK\n    }\n    신청 {\n        string 이름 FK\n        string 과정명 FK\n    }\n    과정 {\n        string 과정명 PK\n    }"
+        },
+        {
+          "type": "text",
+          "content": "사원: 김, 이, 박 / 과정: SQL, DB\n신청: (김, SQL), (이, DB)"
+        },
+        {
+          "type": "sql",
+          "code": "-- ㉠\nSELECT * FROM 사원 CROSS JOIN 과정;\n-- ㉡\nSELECT E.이름, K.과정명\nFROM 사원 E CROSS JOIN 과정 K\nWHERE NOT EXISTS\n  (SELECT 1 FROM 신청 R\n   WHERE R.이름 = E.이름\n   AND   R.과정명 = K.과정명);\n-- ㉢\nSELECT * FROM 사원 E\nJOIN 신청 R ON E.이름 = R.이름\nJOIN 과정 K ON K.과정명 = R.과정명;"
+        }
+      ]
     },
     {
       "subject": "2과목",

@@ -1730,15 +1730,30 @@
     {
       "subject": "2과목",
       "number": 45,
-      "title": "UNION 에 대한 설명으로 가장 적절한 것은?",
+      "title": "아래 ERD 와 데이터에서 '주문했거나 문의한 고객' 등을 구하는 SQL ㉠~㉣ 의 결과 행 수로 옳은 것은?",
       "options": [
-        "UNION ALL 보다 성능이 좋다.",
-        "상호 배타적 조건에만 사용된다.",
-        "합집합이며 중복 행은 하나로 취급한다.",
-        "중복 허용을 기본으로 한다."
+        "3, 5, 2, 1",
+        "5, 5, 1, 1",
+        "3, 5, 1, 1",
+        "3, 3, 1, 2"
       ],
       "correctIndex": 2,
-      "explanation": "UNION 은 두 SELECT 결과를 합치되 중복된 행은 하나로 줄인다(③). 중복을 없애려고 정렬·비교를 더 하므로 ① 과 달리 UNION ALL 보다 일반적으로 느리다. ② UNION 은 두 조건이 서로 배타적인지와 상관없이 쓸 수 있고, ④ 중복을 그대로 두는 것은 UNION ALL 이다."
+      "explanation": "고객 한 명이 주문과 문의를 여러 건 가질 수 있는 1:M 관계 두 개다. ㉠ UNION 은 두 결과를 합치고 중복을 하나로 줄여 C1, C2, C3 의 3행이다. ㉡ UNION ALL 은 중복을 남겨 3 + 2 = 5행이다. ㉢ 조인은 같은 고객번호끼리 짝을 지어, C2 의 주문 1건과 문의 1건이 만나 1행이다. ㉣ INTERSECT 는 양쪽에 모두 있는 C2 하나라 1행이다. 정답은 ③번이다. ① 은 조인에서 C1 도 짝이 생긴다고 본 것, ② 는 UNION 도 중복을 남긴다고 본 것, ④ 는 UNION ALL 도 중복을 없앤다고 보고 교집합을 2명으로 본 것이다.",
+      "references": [
+        {
+          "type": "erd",
+          "caption": "고객·주문·문의 ERD",
+          "mermaid": "erDiagram\n    고객 ||..o{ 주문 : \"주문함\"\n    고객 ||..o{ 문의 : \"문의함\"\n    고객 {\n        string 고객번호 PK\n    }\n    주문 {\n        string 주문번호 PK\n        string 고객번호 FK\n    }\n    문의 {\n        string 문의번호 PK\n        string 고객번호 FK\n    }"
+        },
+        {
+          "type": "text",
+          "content": "주문의 고객번호: C1, C1, C2\n문의의 고객번호: C2, C3"
+        },
+        {
+          "type": "sql",
+          "code": "-- ㉠\nSELECT 고객번호 FROM 주문\nUNION\nSELECT 고객번호 FROM 문의;\n-- ㉡\nSELECT 고객번호 FROM 주문\nUNION ALL\nSELECT 고객번호 FROM 문의;\n-- ㉢\nSELECT O.고객번호\nFROM 주문 O JOIN 문의 Q\n  ON O.고객번호 = Q.고객번호;\n-- ㉣\nSELECT 고객번호 FROM 주문\nINTERSECT\nSELECT 고객번호 FROM 문의;"
+        }
+      ]
     },
     {
       "subject": "2과목",
