@@ -1106,19 +1106,19 @@
     {
       "subject": "2과목",
       "number": 30,
-      "title": "아래 SQL 의 결과로 옳은 것은?",
+      "title": "아래 SQL ㉠, ㉡, ㉢ 의 결과(COUNT(*))를 차례대로 나열한 것은? (Oracle 기준, T 는 ID 1, 2 의 두 행을 가진 테이블)",
       "options": [
-        "0",
-        "1",
-        "2",
-        "NULL"
+        "3, 4, 2",
+        "3, 6, 2",
+        "3, 6, 4",
+        "2, 4, 4"
       ],
       "correctIndex": 2,
-      "explanation": "`CONNECT BY LEVEL <= 2`는 LEVEL이 1, 2가 되는 두 행을 가상으로 만들어내는 패턴이다. DUAL은 한 행짜리 더미 테이블이지만 CONNECT BY와 결합하면 LEVEL 조건을 만족할 때까지 행이 복제된다. 결과적으로 LEVEL=1, LEVEL=2의 두 행이 만들어지고 COUNT(*)는 2를 반환한다. 정답은 ③번이다. ② 1 은 DUAL 의 한 행만 센 값이고, COUNT(*) 는 행이 없어도 0 을 돌려줄 뿐 ④ NULL 이 되지 않는다.",
+      "explanation": "PRIOR 없이 CONNECT BY LEVEL <= n 만 쓰면 '앞 단계의 모든 행' 과 '테이블의 모든 행' 이 부모·자식으로 연결된다. ㉠ DUAL 은 한 행이라 단계마다 한 행씩 이어져 LEVEL 1, 2, 3 의 3행이 된다. 숫자 1~n 을 만드는 데 자주 쓰는 방법이다. ㉡ 은 T 가 두 행이다. LEVEL 1 에 2행이 있고, LEVEL 2 에서는 그 2행 각각에 T 의 2행이 모두 자식으로 붙어 2 × 2 = 4행이 생긴다. 합하면 6행이다. ㉢ 은 계층을 만든 뒤 WHERE 로 LEVEL 2 만 남기므로 4행이다. 정답은 ③번이다. ① 은 ㉡ 을 행 수 × 단계 수로 계산한 것이고, ② 는 ㉢ 에서 LEVEL 2 도 테이블 행 수만큼만 생긴다고 본 것, ④ 는 ㉠ 이 DUAL 한 행에서 LEVEL 1 을 빼고 센 것이다.",
       "references": [
         {
           "type": "sql",
-          "code": "SELECT COUNT(*) FROM DUAL CONNECT BY LEVEL <= 2;"
+          "code": "-- ㉠\nSELECT COUNT(*) FROM DUAL\nCONNECT BY LEVEL <= 3;\n-- ㉡\nSELECT COUNT(*) FROM T\nCONNECT BY LEVEL <= 2;\n-- ㉢\nSELECT COUNT(*) FROM T\nWHERE LEVEL = 2\nCONNECT BY LEVEL <= 2;"
         }
       ]
     },

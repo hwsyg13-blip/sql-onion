@@ -938,3 +938,5 @@
 | 48-2-11 | NULL 과 비교·NOT·OR 로 모든 경우를 덮어도 빠지는 행·NVL | 부등호 뜻 → NULL 섞인 표에서 네 조건 행 수 | 2, 2, 4, 3 | PostgreSQL 동일(COALESCE) |
 | 47-2-48 | 전부 NULL 인 그룹의 SUM = NULL, DESC 에서 NULL 이 앞·NULLS LAST | 키워드 빈칸 → 두 정렬의 첫 행 | D3, D2 | PostgreSQL 동일(DESC 기본 NULLS FIRST) |
 | 62-2-27 | 별칭이 보이는 범위(ORDER BY·WHERE·상관 서브쿼리·인라인 뷰 안팎) | 오류 하나 → ERD + SQL 5개 중 오류 모두 | (나), (라), (마) | PostgreSQL 동일(세 개 오류) |
+| 47-2-25 | SELECT 에 없는 칼럼 정렬: 일반 SELECT 허용, DISTINCT·GROUP BY 에서는 오류 | DESC 위치 고르기 → SQL 4개 중 오류 | ㉡, ㉢ | PostgreSQL 동일 |
+| 48-2-30 | PRIOR 없는 CONNECT BY LEVEL(여러 행 테이블은 단계마다 곱해짐) | DUAL 한 줄 → 세 SQL 행 수 | 3, 6, 4 | Oracle 규칙, 재귀 CTE(모든 행 연결)로 6·4 확인 |

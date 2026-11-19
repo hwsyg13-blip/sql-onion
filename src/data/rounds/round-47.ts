@@ -911,20 +911,46 @@ export const ROUND_47: QuizQuestion[] = [
     "round": 47,
     "subject": "2과목",
     "number": 25,
-    "title": "내림차순 정렬을 수행하는 SQL 에서 수정이 필요한 부분은?",
+    "title": "급여가 높은 순으로 정렬하려고 아래 사원 테이블에 SQL ㉠~㉣ 을 작성했다. 실행 시 오류가 나는 것만 모두 고른 것은?",
     "options": [
-      "SELECT 절",
-      "FROM 절",
-      "WHERE 절",
-      "ORDER BY 절에 DESC 추가"
+      "㉡",
+      "㉢",
+      "㉠, ㉡",
+      "㉡, ㉢"
     ],
     "correctIndex": 3,
-    "explanation": "ORDER BY는 기본적으로 오름차순(ASC)으로 정렬한다. 내림차순으로 바꾸려면 컬럼 뒤에 명시적으로 DESC 키워드를 붙여야 한다. ①·②·③ 의 SELECT/FROM/WHERE 절은 정렬과 무관하므로 정답은 ④번이다.",
+    "explanation": "㉠ 처럼 일반 SELECT 에서는 SELECT 절에 없는 칼럼(급여)으로도 정렬할 수 있다. 박, 김, 이 순서로 나온다. ㉡ 은 DISTINCT 로 부서 A 의 두 행이 하나로 합쳐진다. 합쳐진 A 행이 급여 300 과 200 중 어느 값으로 정렬될지 정할 수 없으므로, DISTINCT 를 쓰면 ORDER BY 에는 SELECT 목록의 항목만 쓸 수 있다. 오류다. ㉢ 도 같은 이유다. GROUP BY 뒤에는 그룹마다 한 행만 남으므로 ORDER BY 에 개별 행의 급여를 쓸 수 없고, 그룹 칼럼이나 집계 함수(MAX(급여))를 써야 한다. ㉣ 은 집계 결과의 별칭 M 으로 정렬해 B 400, A 300 순서로 나온다. 정답은 ④번이다. ① 과 ② 는 둘 중 하나만 오류로 본 것이고, ③ 은 SELECT 절에 없는 칼럼으로는 언제나 정렬할 수 없다고 본 것이다.",
     "_source": "authored",
     "references": [
       {
+        "type": "table",
+        "caption": "사원",
+        "headers": [
+          "이름",
+          "부서",
+          "급여"
+        ],
+        "rows": [
+          [
+            "김",
+            "A",
+            "300"
+          ],
+          [
+            "이",
+            "A",
+            "200"
+          ],
+          [
+            "박",
+            "B",
+            "400"
+          ]
+        ]
+      },
+      {
         "type": "sql",
-        "code": "SELECT ... FROM ... WHERE ... ORDER BY A;"
+        "code": "-- ㉠\nSELECT 이름 FROM 사원\nORDER BY 급여 DESC;\n-- ㉡\nSELECT DISTINCT 부서 FROM 사원\nORDER BY 급여 DESC;\n-- ㉢\nSELECT 부서, MAX(급여) FROM 사원\nGROUP BY 부서\nORDER BY 급여 DESC;\n-- ㉣\nSELECT 부서, MAX(급여) AS M\nFROM 사원\nGROUP BY 부서\nORDER BY M DESC;"
       }
     ]
   },
