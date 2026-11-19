@@ -1688,19 +1688,28 @@
     {
       "subject": "2과목",
       "number": 43,
-      "title": "아래 SQL의 COALESCE 절에 대한 설명으로 옳은 것은?",
+      "title": "아래 ERD 와 데이터에서 SQL 의 ㉠, ㉡, ㉢ 값을 차례대로 나열한 것은?",
       "options": [
-        "COM이 NULL이면 SAL을, NULL이 아니면 COM을 반환한다.",
-        "COM과 SAL의 합을 반환한다.",
-        "COM과 SAL 중 큰 값을 반환한다.",
-        "COM이 NULL이 아니면 SAL을 반환한다."
+        "350, 650, 1",
+        "350, 650, 2",
+        "300, 650, 1",
+        "350, 350, 1"
       ],
       "correctIndex": 0,
-      "explanation": "COALESCE 는 인수를 왼쪽부터 보며 처음으로 NULL 이 아닌 값을 반환한다. COALESCE(COM, SAL) 은 COM 이 NULL 이 아니면 COM, NULL 이면 SAL 이다(①). 합(②)이나 큰 값(③)을 구하지 않으며, ④ 는 반대로 설명했다.",
+      "explanation": "LEFT JOIN 결과는 3행이다. 사원 1 은 수당 50, 사원 2 는 수당 행이 없어 A 쪽 칼럼이 모두 NULL, 사원 3 은 수당 행은 있지만 금액이 NULL 이다. ㉠ COALESCE(A.금액, E.기본급) 은 금액이 NULL 이 아니면 금액을, NULL 이면 기본급을 돌려준다. 행마다 50, 200, 100 이 되어 합은 350 이다. 수당 행이 없어서 생긴 NULL 과 금액 자체가 NULL 인 경우를 구분하지 않는다. ㉡ 은 열마다 따로 합한다. SUM(A.금액) 은 NULL 을 빼고 50, SUM(E.기본급) 은 600 이라 650 이다. ㉢ COUNT(A.금액) 은 NULL 이 아닌 금액만 세어 1 이다. 정답은 ①번이다. ② 는 수당 행이 있는 사원 3 의 NULL 금액까지 센 것이고(COUNT(A.사번) 이면 2), ③ 은 사원 3 처럼 수당 행이 있으면 COALESCE 가 기본급으로 넘어가지 않는다고 본 것이다. ④ 는 ㉡ 을 SUM(A.금액 + E.기본급) 처럼 행마다 더한 것이다. 그러면 NULL 이 섞인 행이 빠져 사원 1 의 350 만 남는다.",
       "references": [
         {
+          "type": "erd",
+          "caption": "사원·수당 ERD (수당은 0 또는 1건)",
+          "mermaid": "erDiagram\n    사원 ||..o| 수당 : \"지급\"\n    사원 {\n        int 사번 PK\n        int 기본급\n    }\n    수당 {\n        int 사번 PK, FK\n        int 금액\n    }"
+        },
+        {
+          "type": "text",
+          "content": "사원(사번, 기본급): (1, 300), (2, 200), (3, 100)\n수당(사번, 금액): (1, 50), (3, NULL)"
+        },
+        {
           "type": "sql",
-          "code": "SELECT 사번, COALESCE(COM, SAL) AS 보상\nFROM   EMP;"
+          "code": "SELECT\n  SUM(COALESCE(A.금액, E.기본급))\n    AS ㉠,\n  SUM(A.금액) + SUM(E.기본급)\n    AS ㉡,\n  COUNT(A.금액) AS ㉢\nFROM 사원 E LEFT JOIN 수당 A\n  ON A.사번 = E.사번;"
         }
       ]
     },

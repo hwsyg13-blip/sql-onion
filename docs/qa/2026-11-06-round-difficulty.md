@@ -942,3 +942,4 @@
 | 48-2-30 | PRIOR 없는 CONNECT BY LEVEL(여러 행 테이블은 단계마다 곱해짐) | DUAL 한 줄 → 세 SQL 행 수 | 3, 6, 4 | Oracle 규칙, 재귀 CTE(모든 행 연결)로 6·4 확인 |
 | 58-2-27 | CASE 는 처음 참인 WHEN 에서 멈춤·단순 CASE 의 WHEN NULL·ELSE 없는 CASE 의 NULL | NULL IS NULL 한 줄 → 세 CASE 값 | 응시, 응시, NULL | PostgreSQL 동일 |
 | 59-2-13 | LIKE 의 %(0글자 포함)·_(정확히 한 글자, 한글 포함) | LIKE 하나 고르기 → 네 패턴 행 수 | 3, 1, 4, 1 | PostgreSQL 동일, 패턴은 고정폭 글꼴로 표시 |
+| 46-2-43 | 선택적 1:1 LEFT JOIN 뒤 COALESCE·열별 SUM·COUNT(칼럼) | COALESCE 뜻 → ERD + 데이터 + 세 집계 | 350, 650, 1 | PostgreSQL 동일, ERD 렌더 확인 |
