@@ -1404,16 +1404,22 @@ export const ROUND_45: QuizQuestion[] = [
     "round": 45,
     "subject": "2과목",
     "number": 32,
-    "title": "아래 네 SQL 중 반환 행 수가 1건이 아닌 것은? (테이블 T 에는 충분한 행이 존재한다고 가정)",
+    "title": "행이 10건 있는 T 테이블에 대한 SQL ㉠~㉣ 의 결과 행 수로 옳은 것은? (Oracle 기준)",
     "options": [
-      "SELECT * FROM T WHERE ROWNUM = 1;",
-      "SELECT * FROM T WHERE ROWNUM < 2;",
-      "SELECT * FROM T WHERE ROWNUM <= 2;",
-      "SELECT * FROM T WHERE ROWNUM <= 2 - 1;"
+      "1, 0, 3, 2",
+      "1, 2, 3, 2",
+      "1, 0, 3, 0",
+      "1, 0, 2, 0"
     ],
     "correctIndex": 2,
-    "explanation": "Oracle 의 ROWNUM 은 조건을 통과한 행에 1 부터 차례로 번호를 붙인다. ① ROWNUM = 1, ② ROWNUM < 2, ④ ROWNUM <= 2 - 1(곧 1)은 모두 첫 행 하나만 통과시켜 1건이다. ③ ROWNUM <= 2 는 두 행이 통과해 2건이라 혼자 다르다.",
-    "_source": "authored"
+    "explanation": "ROWNUM 은 WHERE 조건을 통과한 행에 1 부터 차례로 붙는다. 첫 행은 늘 ROWNUM 1 로 검사받으므로, 1 을 포함하는 조건(㉠ = 1, ㉢ <= 3)만 결과를 낸다. ㉠ 은 1건, ㉢ 은 3건이다. ㉡ 의 > 1 은 첫 행이 1 이라 걸러지고, 다음 행도 다시 1 을 받아 걸러지기를 반복해 0건이다. ㉣ 의 BETWEEN 2 AND 3 도 같은 이유로 0건이다. 정답은 ③번이다. ①·② 는 ROWNUM 이 원래 행 번호처럼 고정되어 있다고 본 것, ④ 는 <= 3 을 3 미만으로 본 것이다. 2~3번째 행을 원하면 인라인 뷰에서 ROWNUM 에 별칭을 붙인 뒤 바깥에서 거른다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "-- ㉠\nSELECT * FROM T WHERE ROWNUM = 1;\n-- ㉡\nSELECT * FROM T WHERE ROWNUM > 1;\n-- ㉢\nSELECT * FROM T WHERE ROWNUM <= 3;\n-- ㉣\nSELECT * FROM T\nWHERE  ROWNUM BETWEEN 2 AND 3;"
+      }
+    ]
   },
   {
     "id": 10782,
@@ -1699,20 +1705,20 @@ export const ROUND_45: QuizQuestion[] = [
     "round": 45,
     "subject": "2과목",
     "number": 38,
-    "title": "아래 SQL의 결과로 옳은 것은?",
+    "title": "N1 값이 1, NULL, 3 인 SQLD 테이블에 대한 SQL ㉠~㉣ 의 결과 행 수로 옳은 것은?",
     "options": [
-      "모든 행이 반환된다.",
-      "NULL이 반환된다.",
-      "결과가 없다(0건).",
-      "오류가 발생한다."
+      "0, 1, 2, 0",
+      "0, 0, 1, 0",
+      "0, 1, 1, 0",
+      "0, 1, 1, 3"
     ],
     "correctIndex": 2,
-    "explanation": "WHERE 1 = 2 는 어떤 행에 대해서도 거짓이라 조건을 만족하는 행이 없다. 따라서 결과는 0건(공집합)이다(③). 오류가 나지도 않고(④), NULL 한 행이 나오는 것도 아니다(②, 집계 함수를 썼을 때만 한 행이 나온다).",
+    "explanation": "㉠ 의 1 = 2 는 늘 거짓이라 오류 없이 0건이다. ㉡ 은 앞이 거짓이라도 OR 뒤의 N1 IS NULL 이 참인 NULL 행 1건이 남는다. ㉢ 에서 N1 = 1 은 1 행에서 참, 3 행에서 거짓, NULL 행에서 UNKNOWN 이다. NOT 을 붙이면 3 행만 참이 되고 UNKNOWN 은 그대로 UNKNOWN 이라 1건이다. ㉣ 의 N1 > NULL 은 모든 행에서 UNKNOWN 이고, TRUE AND UNKNOWN 도 UNKNOWN 이라 0건이다. 정답은 ③번이다. ① 은 NOT 이 NULL 행도 살린다고 본 것, ② 는 OR 의 한쪽이 거짓이면 전체가 거짓이라고 본 것, ④ 는 1 = 1 이 참이면 뒤의 조건을 보지 않는다고 본 것이다.",
     "_source": "authored",
     "references": [
       {
         "type": "sql",
-        "code": "SELECT N1\nFROM   SQLD\nWHERE  1 = 2;"
+        "code": "-- ㉠\nSELECT N1 FROM SQLD WHERE 1 = 2;\n-- ㉡\nSELECT N1 FROM SQLD\nWHERE  1 = 2 OR N1 IS NULL;\n-- ㉢\nSELECT N1 FROM SQLD\nWHERE  NOT (N1 = 1);\n-- ㉣\nSELECT N1 FROM SQLD\nWHERE  1 = 1 AND N1 > NULL;"
       }
     ]
   },

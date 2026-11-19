@@ -486,20 +486,20 @@ export const ROUND_47: QuizQuestion[] = [
     "round": 47,
     "subject": "2과목",
     "number": 17,
-    "title": "번호가 없으면 1을 반환하고 있으면 MAX(번호)+1 을 반환하는 SQL 로 동일한 결과의 쿼리는?",
+    "title": "번호를 새로 매기려고 아래 ㉠~㉢ 을 썼다. T 가 비어 있을 때와, T 에 (구분 1, 번호 3), (구분 1, 번호 7) 이 있을 때의 결과로 옳은 것은? ('빈 T: ㉠, ㉡, ㉢ / 두 행: ㉠, ㉢' 순서)",
     "options": [
-      "SELECT COALESCE(MAX(번호), 1) FROM T;",
-      "SELECT COALESCE(MAX(번호) + 1, 1) FROM T;",
-      "SELECT NVL(MAX(번호) + 1, 0) FROM T;",
-      "SELECT NULLIF(MAX(번호), 1) FROM T;"
+      "1, 1, 1 / 8, 3",
+      "1, 공집합, 1 / 8, 3",
+      "NULL, 공집합, 1 / 8, 8",
+      "1, 공집합, 0 / 8, 2"
     ],
     "correctIndex": 1,
-    "explanation": "기준 SQL `NVL(MAX(번호) + 1, 1)` 은 데이터가 없으면 MAX(번호) 가 NULL 이라 MAX(번호) + 1 도 NULL 이 되어 1 을, 데이터가 있으면 MAX(번호) + 1 을 돌려준다. ② `COALESCE(MAX(번호) + 1, 1)` 은 NVL 과 같은 동작이라 결과가 같다. ① 은 +1 이 빠져 데이터가 있을 때 MAX(번호) 를 그대로 돌려주고, ③ 은 데이터가 없을 때 0 을, ④ NULLIF 는 MAX(번호) 가 1 이면 NULL 을 돌려주는 전혀 다른 함수다. ※ 복원 자료의 기준 SQL `NVL(MAX(번호), 1) + 1` 은 데이터가 없을 때 2 를 돌려줘 문제 문장(없으면 1)과 맞지 않고 동일한 보기도 없어, 문장에 맞게 바로잡았다.",
+    "explanation": "GROUP BY 없는 집계는 대상 행이 없어도 1행을 돌려준다. 빈 T 에서 ㉠ 은 MAX 가 NULL, NULL + 1 도 NULL 이라 NVL 이 1 로 바꿔 1 이다. ㉢ 은 COUNT(*) 가 0 이라 1 이다. ㉡ 은 GROUP BY 가 있어 그룹이 하나도 없으니 공집합이 되고, 번호를 받지 못한다. 두 행이 있으면 ㉠ 은 7 + 1 = 8, ㉢ 은 2 + 1 = 3 이다. 행 수로 번호를 매기는 ㉢ 은 중간 번호가 비어 있으면 MAX 방식과 결과가 달라진다. 정답은 ②번이다. ① 은 GROUP BY 가 있어도 1행이 나온다고 본 것, ③ 은 NVL 이 MAX 에만 걸린다고 보고 ㉢ 을 MAX 처럼 계산한 것, ④ 는 COUNT 에 1 을 더하는 것을 놓친 것이다.",
     "_source": "authored",
     "references": [
       {
         "type": "sql",
-        "code": "SELECT NVL(MAX(번호) + 1, 1) FROM T;"
+        "code": "-- ㉠\nSELECT NVL(MAX(번호) + 1, 1) FROM T;\n-- ㉡\nSELECT NVL(MAX(번호) + 1, 1) FROM T\nGROUP  BY 구분;\n-- ㉢\nSELECT COUNT(*) + 1 FROM T;"
       }
     ]
   },
@@ -1910,20 +1910,20 @@ export const ROUND_47: QuizQuestion[] = [
     "round": 47,
     "subject": "2과목",
     "number": 47,
-    "title": "사용자를 삭제할 때 해당 사용자에 속한 모든 오브젝트까지 함께 삭제하는 옵션은?",
+    "title": "사용자 U 가 테이블 2개를 가지고 있다. 아래 ㉠, ㉡ 을 각각 실행했을 때의 결과로 옳은 것은? (Oracle 기준)",
     "options": [
-      "RESTRICT",
-      "PURGE",
-      "CASCADE",
-      "FORCE"
+      "㉠ 은 U 만 삭제하고 테이블은 남긴다 / ㉡ 도 성공한다.",
+      "㉠ 은 U 와 테이블을 함께 삭제한다 / ㉡ 은 오류다.",
+      "㉠ 은 오류다 / ㉡ 은 U 와 U 의 테이블을 모두 삭제한다.",
+      "㉠ 은 오류다 / ㉡ 은 U 만 삭제하고 테이블은 다른 사용자에게 넘긴다."
     ],
     "correctIndex": 2,
-    "explanation": "DROP USER 에 CASCADE 를 붙이면 그 사용자가 가진 테이블·뷰·시퀀스 같은 객체까지 함께 삭제된다(③). 옵션 없이 DROP USER 를 하면 사용자에게 객체가 있을 때 삭제가 거부된다. ① RESTRICT 와 ④ FORCE 는 DROP USER 에 쓰는 옵션이 아니고, ② PURGE 는 DROP TABLE 에서 휴지통을 거치지 않고 바로 지울 때 쓴다.",
+    "explanation": "Oracle 에서 객체를 가지고 있는 사용자는 그냥 DROP USER 로 지울 수 없어 ㉠ 은 오류가 난다. CASCADE 를 붙이면 그 사용자가 가진 테이블·뷰·인덱스 같은 모든 객체를 먼저 지운 뒤 사용자를 삭제한다. 정답은 ③번이다. ① 은 객체가 주인 없이 남을 수 있다고 본 것, ② 는 두 명령을 거꾸로 본 것, ④ 는 객체가 다른 사용자에게 옮겨진다고 본 것이다. 다른 사용자의 뷰나 시노님이 지워진 객체를 가리키고 있었다면 사용할 수 없는 상태가 된다.",
     "_source": "authored",
     "references": [
       {
         "type": "sql",
-        "code": "DROP USER user_name (   );"
+        "code": "-- ㉠\nDROP USER U;\n-- ㉡\nDROP USER U CASCADE;"
       }
     ]
   },

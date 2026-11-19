@@ -1142,16 +1142,22 @@ export const ROUND_46: QuizQuestion[] = [
     "round": 46,
     "subject": "2과목",
     "number": 25,
-    "title": "아래 네 SQL 중 JOB 컬럼의 중복 데이터가 제거되지 않는 것은?",
+    "title": "EMP 테이블의 JOB 값이 CLERK 3행, MANAGER 2행, NULL 1행일 때, 아래 SQL ㉠~㉣ 의 결과 행 수로 옳은 것은?",
     "options": [
-      "SELECT JOB FROM EMP WHERE EXISTS (SELECT 1 FROM DEPT WHERE DEPT.DNO = EMP.DNO);",
-      "SELECT DISTINCT JOB FROM EMP;",
-      "SELECT JOB FROM EMP GROUP BY JOB;",
-      "SELECT JOB FROM EMP UNION SELECT JOB FROM EMP2;"
+      "6, 3, 3, 3",
+      "6, 2, 2, 2",
+      "3, 3, 3, 3",
+      "6, 3, 2, 3"
     ],
     "correctIndex": 0,
-    "explanation": "EXISTS는 행의 존재 여부만 판별할 뿐 중복을 제거하지 않는다. 나머지 ② DISTINCT, ③ GROUP BY, ④ UNION 은 모두 중복을 제거한다.",
-    "_source": "authored"
+    "explanation": "㉠ 의 EXISTS 서브쿼리는 늘 행이 있어 참이므로, 중복을 없애지 않고 6행이 모두 나온다. ㉡ DISTINCT, ㉢ GROUP BY, ㉣ UNION 은 모두 중복을 없애고 NULL 도 하나의 값으로 모아 CLERK, MANAGER, NULL 의 3행이다. 정답은 ①번이다. ② 는 세 방식이 NULL 을 버린다고 본 것, ③ 은 EXISTS 도 중복을 없앤다고 본 것, ④ 는 GROUP BY 만 NULL 그룹을 만들지 않는다고 본 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "-- ㉠\nSELECT JOB FROM EMP\nWHERE  EXISTS (SELECT 1 FROM DUAL);\n-- ㉡\nSELECT DISTINCT JOB FROM EMP;\n-- ㉢\nSELECT JOB FROM EMP GROUP BY JOB;\n-- ㉣\nSELECT JOB FROM EMP\nUNION\nSELECT JOB FROM EMP;"
+      }
+    ]
   },
   {
     "id": 10725,
@@ -1866,20 +1872,20 @@ export const ROUND_46: QuizQuestion[] = [
     "round": 46,
     "subject": "2과목",
     "number": 42,
-    "title": "아래 함수의 수행 결과로 옳은 것은?",
+    "title": "아래 SQL 의 결과(A, B, C, D)로 옳은 것은? (Oracle 기준)",
     "options": [
-      "10333",
-      "10300",
-      "10000",
-      "10333.33"
+      "10300, 10400, 10400, 10400",
+      "10300, 10300, 10400, 10400",
+      "10333, 10300, 10300, 10400",
+      "10300, 10300, 10300, 10301"
     ],
     "correctIndex": 1,
-    "explanation": "ROUND의 두 번째 인자가 음수이면 정수부의 해당 자리에서 반올림한다. -2 는 십의 자리(3)에서 반올림해 백 단위까지 남기므로 결과는 10300 이다. ① 10333 은 ROUND(x, 0), ③ 10000 은 ROUND(x, -3), ④ 10333.33 은 ROUND(x, 2) 의 값이다.",
+    "explanation": "두 번째 인자가 -2 이면 백의 자리를 기준으로 한다. A 는 십의 자리 3 이 5 미만이라 내려 10300, B 의 TRUNC 는 반올림 없이 버려 10300 이다. C 는 십의 자리 5 에서 반올림해 올라가 10400 이다. D 는 103.01 을 CEIL 로 올려 104, 다시 100 을 곱해 10400 이다. 정답은 ②번이다. ① 은 TRUNC 를 반올림처럼 본 것, ③ 은 -2 를 소수점 둘째 자리로 보고 5 를 내림한 것, ④ 는 5 를 내리고 CEIL 을 소수 그대로 둔 것이다.",
     "_source": "authored",
     "references": [
       {
         "type": "sql",
-        "code": "SELECT ROUND(10333.3333, -2) FROM DUAL;"
+        "code": "SELECT ROUND(10333.3333, -2)   AS A,\n       TRUNC(10388, -2)        AS B,\n       ROUND(10350, -2)        AS C,\n       CEIL(10301 / 100) * 100 AS D\nFROM   DUAL;"
       }
     ]
   },
