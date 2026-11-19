@@ -468,16 +468,31 @@ export const ROUND_47: QuizQuestion[] = [
     "round": 47,
     "subject": "2과목",
     "number": 16,
-    "title": "테이블 조인 시 매칭되지 않는 행까지 포함하여 조회하는 조인은?",
+    "title": "아래 ERD 와 데이터에 대한 SQL ㉠~㉣ 의 결과로 옳은 것은? ('㉠ 행 수, ㉡ 행 수, ㉢ 값, ㉣ 값' 순서)",
     "options": [
-      "INNER JOIN",
-      "NATURAL JOIN",
-      "CROSS JOIN",
-      "OUTER JOIN"
+      "3, 3, 1, NULL",
+      "3, 4, 1, 1",
+      "4, 4, 1, 0",
+      "3, 4, 1, 0"
     ],
     "correctIndex": 3,
-    "explanation": "① 일반 조인(INNER JOIN)은 양쪽 테이블에 모두 매칭되는 행만 결과로 보여준다. 매칭되지 않은 행까지 결과에 살리고 싶을 때 사용하는 것이 OUTER JOIN이다. LEFT/RIGHT/FULL 세 가지 형태가 있어 각각 한쪽 또는 양쪽의 미매칭 행을 NULL로 채워 보존한다. 정답은 ④번이다. ② NATURAL JOIN 은 이름이 같은 컬럼으로 묶는 내부 조인의 한 형태라 매칭되는 행만 남고, ③ CROSS JOIN 은 조건 없이 모든 조합을 만든다.",
-    "_source": "authored"
+    "explanation": "ERD 에서 주문 쪽 끝이 동그라미 + 까마귀발이라 주문이 없는 고객(C3)이 있을 수 있다. 이런 관계는 조인 방식에 따라 결과가 달라진다. ㉠ INNER JOIN 은 짝이 있는 주문 3행만 나온다. ㉡ LEFT JOIN 은 주문 없는 C3 도 주문 칼럼 NULL 로 남아 4행이다. ㉢ 은 주문이 없는 고객 수라 C3 하나로 1 이다. ㉣ 은 C3 의 LEFT JOIN 결과 1행에서 주문번호가 NULL 이라 COUNT(O.주문번호) 는 0 이다(COUNT(*) 였다면 1). 정답은 ④번이다. ① 은 LEFT JOIN 도 짝 없는 행을 버린다고 보고 COUNT 가 NULL 을 돌려준다고 본 것, ② 는 COUNT(칼럼) 이 NULL 행도 센다고 본 것, ③ 은 INNER JOIN 에도 C3 가 남는다고 본 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "erd",
+        "caption": "고객·주문 ERD (주문 쪽 0개 이상)",
+        "mermaid": "erDiagram\n    고객 ||..o{ 주문 : \"주문함\"\n    고객 {\n        string 고객번호 PK\n    }\n    주문 {\n        string 주문번호 PK\n        string 고객번호 FK\n    }"
+      },
+      {
+        "type": "text",
+        "content": "고객: C1, C2, C3\n주문: (O1, C1), (O2, C1), (O3, C2)"
+      },
+      {
+        "type": "sql",
+        "code": "-- ㉠\nSELECT * FROM 고객 C\nJOIN 주문 O ON C.고객번호 = O.고객번호;\n-- ㉡\nSELECT * FROM 고객 C\nLEFT JOIN 주문 O\n  ON C.고객번호 = O.고객번호;\n-- ㉢\nSELECT COUNT(*) FROM 고객 C\nWHERE NOT EXISTS\n  (SELECT 1 FROM 주문 O\n   WHERE O.고객번호 = C.고객번호);\n-- ㉣ C3 의 주문 수\nSELECT COUNT(O.주문번호)\nFROM 고객 C LEFT JOIN 주문 O\n  ON C.고객번호 = O.고객번호\nWHERE C.고객번호 = 'C3';"
+      }
+    ]
   },
   {
     "id": 10666,
@@ -662,16 +677,31 @@ export const ROUND_47: QuizQuestion[] = [
     "round": 47,
     "subject": "2과목",
     "number": 20,
-    "title": "아래 네 조인 중 결과 행 수가 잘못 매칭된 것은?",
+    "title": "아래 ERD 와 데이터에 대한 SQL ㉠~㉣ 의 결과 행 수로 옳은 것은?",
     "options": [
-      "INNER JOIN: 매칭 행만 반환",
-      "LEFT OUTER JOIN: 좌측 전체 + 매칭",
-      "RIGHT OUTER JOIN: 우측 전체 + 매칭",
-      "FULL OUTER JOIN: 양쪽 매칭 행만 반환"
+      "3, 3, 1, 4",
+      "3, 4, 2, 4",
+      "3, 4, 1, 3",
+      "3, 4, 1, 4"
     ],
     "correctIndex": 3,
-    "explanation": "FULL OUTER JOIN은 양쪽 테이블의 행을 모두 살리는 조인이라, 매칭되지 않은 행도 NULL로 채워 결과에 포함시킨다. 즉 LEFT OUTER JOIN과 RIGHT OUTER JOIN의 결과를 합친 합집합과 같다. \"양쪽 매칭 행만 반환\"이라는 ④번 설명은 INNER JOIN의 동작이지 FULL OUTER JOIN의 동작이 아니므로 잘못된 매칭이 된다. 정답은 ④번이다. ①·②·③ 은 각 조인의 결과를 바르게 설명했다.",
-    "_source": "authored"
+    "explanation": "학생과 과목의 M:N 관계를 수강 엔터티로 풀었고, 수강의 주식별자는 학번 + 과목코드(식별 관계, 실선)다. 수강 쪽이 0개 이상이라 수강하지 않은 학생(S3)이 있을 수 있다. ㉠ 세 테이블 INNER JOIN 은 수강 3행만큼 3행이다. ㉡ LEFT JOIN 은 S3 가 NULL 로 더해져 4행, ㉢ 은 K2 를 신청한 S1 하나라 1행이다. ㉣ FULL OUTER JOIN 은 학생 쪽 S3 를 남기지만, 수강 행은 모두 학생이 있어 더 늘지 않아 ㉡ 과 같은 4행이다(식별 관계라 학생 없는 수강은 생길 수 없다). 정답은 ④번이다. ① 은 LEFT JOIN 에서 S3 를 놓친 것, ② 는 K2 수강을 2건으로 센 것, ③ 은 FULL OUTER JOIN 이 LEFT 보다 행이 적다고 본 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "erd",
+        "caption": "학생·수강·과목 ERD (M:N 해소)",
+        "mermaid": "erDiagram\n    학생 ||--o{ 수강 : \"신청\"\n    과목 ||--o{ 수강 : \"개설\"\n    학생 {\n        string 학번 PK\n    }\n    수강 {\n        string 학번 PK, FK\n        string 과목코드 PK, FK\n    }\n    과목 {\n        string 과목코드 PK\n    }"
+      },
+      {
+        "type": "text",
+        "content": "학생: S1, S2, S3 / 과목: K1, K2\n수강: (S1, K1), (S1, K2), (S2, K1)"
+      },
+      {
+        "type": "sql",
+        "code": "-- ㉠\nSELECT * FROM 학생 S\nJOIN 수강 E ON S.학번 = E.학번\nJOIN 과목 K ON K.과목코드 = E.과목코드;\n-- ㉡\nSELECT * FROM 학생 S\nLEFT JOIN 수강 E ON S.학번 = E.학번;\n-- ㉢\nSELECT * FROM 수강\nWHERE 과목코드 = 'K2';\n-- ㉣\nSELECT * FROM 학생 S\nFULL OUTER JOIN 수강 E\n  ON S.학번 = E.학번;"
+      }
+    ]
   },
   {
     "id": 10670,
@@ -1185,16 +1215,31 @@ export const ROUND_47: QuizQuestion[] = [
     "round": 47,
     "subject": "2과목",
     "number": 30,
-    "title": "최대값을 조회하는 SQL 로 옳은 것은?",
+    "title": "아래 ERD 와 데이터에 대한 SQL ㉠, ㉡ 의 결과로 옳은 것은? ('㉠ 행 수, ㉠ 의 기획 부서 값, ㉡ 행 수' 순서)",
     "options": [
-      "SELECT MAX(COL) FROM T WHERE ROWNUM = 1;",
-      "SELECT * FROM (SELECT COL FROM T ORDER BY COL DESC) WHERE ROWNUM = 1;",
-      "SELECT COL FROM T ORDER BY COL DESC WHERE ROWNUM = 1;",
-      "SELECT COL FROM T WHERE ROWNUM = (SELECT MAX(COL) FROM T);"
+      "3, 0, 2",
+      "3, NULL, 2",
+      "2, NULL, 2",
+      "3, NULL, 3"
     ],
     "correctIndex": 1,
-    "explanation": "ROWNUM은 결과 행에 1부터 차례로 번호를 매기는 가상 컬럼이다. 그러나 ROWNUM은 ORDER BY가 적용되기 전에 매겨지므로 단순히 `WHERE ROWNUM = 1`만 쓰면 정렬이 무시된 첫 행이 나와 최대값이 보장되지 않는다. 따라서 인라인 뷰 안에서 먼저 ORDER BY DESC로 정렬해 둔 뒤, 바깥에서 ROWNUM = 1로 첫 행을 잘라야 안전하게 최대값을 얻을 수 있다. 정답은 ②번이다. ① 은 WHERE ROWNUM = 1 이 먼저 임의의 한 행만 남긴 뒤 MAX 를 구해 전체 최대값이 보장되지 않고, ③ 은 ORDER BY 뒤에 WHERE 가 와 문법 오류이며, ④ 는 행 번호(ROWNUM)를 최대값과 비교해 의미가 다르다.",
-    "_source": "authored"
+    "explanation": "ERD 에서 사원 쪽이 0명 이상이라 사원이 없는 부서(기획)가 있을 수 있다. ㉠ 은 부서 테이블의 행마다 스칼라 서브쿼리로 최고 급여를 구하므로 부서 3행이 모두 나오고, 사원이 없는 기획은 서브쿼리 결과가 없어 NULL 이다. ㉡ 은 INNER JOIN 뒤에 묶어 사원이 있는 영업·인사 2행만 나온다. 같은 '부서별 최고 급여' 라도 사원 없는 부서를 보여 줄지에 따라 방식을 골라야 한다. 정답은 ②번이다. ① 은 결과가 없는 스칼라 서브쿼리를 0 으로 본 것, ③ 은 스칼라 서브쿼리도 행을 버린다고 본 것, ④ 는 INNER JOIN 에도 기획이 남는다고 본 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "erd",
+        "caption": "부서·사원 ERD (사원 쪽 0명 이상)",
+        "mermaid": "erDiagram\n    부서 ||..o{ 사원 : \"소속\"\n    부서 {\n        string 부서코드 PK\n        string 부서명\n    }\n    사원 {\n        string 사번 PK\n        string 부서코드 FK\n        int 급여\n    }"
+      },
+      {
+        "type": "text",
+        "content": "부서: (D1, 영업), (D2, 인사), (D3, 기획)\n사원: (김, D1, 300), (이, D1, 500), (박, D2, 400)"
+      },
+      {
+        "type": "sql",
+        "code": "-- ㉠\nSELECT D.부서명,\n       (SELECT MAX(E.급여)\n        FROM   사원 E\n        WHERE  E.부서코드 = D.부서코드)\nFROM   부서 D;\n-- ㉡\nSELECT D.부서명, MAX(E.급여)\nFROM   부서 D JOIN 사원 E\n  ON D.부서코드 = E.부서코드\nGROUP  BY D.부서명;"
+      }
+    ]
   },
   {
     "id": 10680,
