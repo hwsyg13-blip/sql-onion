@@ -1447,7 +1447,7 @@ export const ROUND_52: QuizQuestion[] = [
       {
         "type": "erd",
         "caption": "매장·매출 ERD",
-        "mermaid": "erDiagram\n    매장 ||--o{ 매출 : \"발생\"\n    매장 {\n        string 매장코드 PK\n        string 지역\n    }\n    매출 {\n        int 매출번호 PK\n        string 매장코드 FK\n        int 금액\n    }"
+        "mermaid": "erDiagram\n    매장 ||..o{ 매출 : \"발생\"\n    매장 {\n        string 매장코드 PK\n        string 지역\n    }\n    매출 {\n        int 매출번호 PK\n        string 매장코드 FK\n        int 금액\n    }"
       },
       {
         "type": "text",
