@@ -11,15 +11,15 @@ export const ROUND_52: QuizQuestion[] = [
     "round": 52,
     "subject": "1과목",
     "number": 1,
-    "title": "M:N 관계를 해소하기 위해 만들어지며, 양쪽 부모 엔터티의 주식별자를 상속받아 조합한 복합 식별자를 주식별자로 갖는 경우가 많은 엔터티는?",
+    "title": "학생은 여러 동아리에 가입할 수 있고, 한 동아리에는 여러 학생이 있다. 가입할 때마다 가입일과 직책(회원·총무·회장)을 관리해야 한다면, 가입일·직책을 둘 곳과 그 엔터티의 종류로 옳은 것은?",
     "options": [
-      "기본 엔터티",
-      "중심 엔터티",
-      "행위 엔터티",
-      "관계 엔터티"
+      "학생 엔터티 / 기본 엔터티",
+      "동아리 엔터티 / 기본 엔터티",
+      "학생과 동아리 양쪽에 같은 값을 둔다 / 기본 엔터티",
+      "동아리가입 엔터티를 새로 만든다 / 관계(교차) 엔터티"
     ],
     "correctIndex": 3,
-    "explanation": "M:N 관계를 두 개의 1:M 관계로 풀기 위해 가운데 두는 엔터티가 관계(교차) 엔터티이며, 보통 양쪽 부모의 주식별자를 상속받아 복합 식별자로 삼는다. ① 기본 엔터티는 다른 엔터티에 의존하지 않고 고유한 주식별자를 가지며, ② 중심 엔터티는 기본 엔터티로부터 발생해 업무의 중심이 되고, ③ 행위 엔터티는 두 개 이상의 부모로부터 발생해 데이터가 자주 바뀌거나 늘어나는 엔터티다. 참고로 모든 엔터티는 반드시 식별자를 가져야 하며 \"주식별자가 없어도 되는 엔터티\" 는 없다. ※ 복원 자료의 문제 문장이 이 원칙과 어긋나 문장을 바로잡았다.",
+    "explanation": "가입일과 직책은 학생 한 명만으로도, 동아리 하나만으로도 정해지지 않고 '어느 학생이 어느 동아리에' 라는 조합마다 정해진다. 그래서 M:N 관계를 풀 때 만드는 동아리가입 엔터티에 두어야 하고, 이 엔터티는 학생번호 + 동아리번호 를 주식별자로 갖는 관계(교차) 엔터티다. 정답은 ④번이다. ①·② 는 한 학생이 여러 동아리에, 한 동아리에 여러 학생이 있어 값이 여러 개가 되므로 둘 수 없다. ③ 은 같은 값을 두 곳에 두는 중복이고, 어느 동아리의 직책인지도 알 수 없다.",
     "_source": "authored"
   },
   {
@@ -186,16 +186,22 @@ export const ROUND_52: QuizQuestion[] = [
     "round": 52,
     "subject": "1과목",
     "number": 7,
-    "title": "다른 엔터티의 주식별자를 참조하는 키로 적절한 것은?",
+    "title": "아래 사원 테이블 정의에서 ㉠ 사번, ㉡ 주민번호, ㉢ 부서코드 를 키 종류로 가장 정확하게 짝지은 것은?",
     "options": [
-      "내부 식별자",
-      "외래키(FK)",
-      "후보키",
-      "대체키"
+      "기본키, 외래키, 대체키",
+      "기본키, 대체키, 외래키",
+      "후보키, 기본키, 외래키",
+      "기본키, 대체키, 후보키"
     ],
     "correctIndex": 1,
-    "explanation": "다른 엔터티의 주식별자(PK)를 참조하기 위해 사용하는 키는 외래키(FK)이다. ③ 후보키·④ 대체키는 같은 엔터티 내부의 식별자 후보이다. ① 내부 식별자는 엔터티 안에서 스스로 만든 식별자다.",
-    "_source": "authored"
+    "explanation": "후보키는 행을 유일하게 구별하는 최소 칼럼 집합이고, 그중 하나를 골라 기본키로 쓴다. 사번과 주민번호는 둘 다 후보키인데 사번을 기본키로 정했으니, 남은 주민번호는 대체키다. 부서코드는 다른 테이블(부서)의 기본키를 가리키는 외래키다. 정답은 ②번이다. ① 은 주민번호와 부서코드를 바꿔 본 것, ③ 은 PRIMARY KEY 로 정한 칼럼을 기본키로 보지 않은 것, ④ 는 여러 사원이 같은 값을 가질 수 있는 부서코드를 후보키로 본 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "CREATE TABLE 사원 (\n  사번     CHAR(5)  PRIMARY KEY,\n  주민번호 CHAR(13) NOT NULL UNIQUE,\n  부서코드 CHAR(3)\n    REFERENCES 부서(부서코드),\n  이름     VARCHAR2(20)\n);"
+      }
+    ]
   },
   {
     "id": 10407,
@@ -204,16 +210,22 @@ export const ROUND_52: QuizQuestion[] = [
     "round": 52,
     "subject": "1과목",
     "number": 8,
-    "title": "식별 관계와 비식별 관계에 대한 설명 중 옳은 것은?",
+    "title": "아래 DDL 을 IE 표기법 ERD 로 그릴 때 옳은 것은? ('㉠ 주문–주문상세 관계선, ㉡ 고객–주문 관계선, ㉡ 의 고객 쪽 끝에 동그라미가 붙는지' 순서)",
     "options": [
-      "식별 관계는 점선, 비식별 관계는 실선으로 표기한다.",
-      "식별 관계와 비식별 관계 모두 실선으로 표기한다.",
-      "식별 관계는 실선, 비식별 관계는 점선으로 표기한다.",
-      "ERD 표기법에 따라 둘을 구분하지 않는다."
+      "점선, 실선, 붙음",
+      "실선, 실선, 붙지 않음",
+      "실선, 점선, 붙음",
+      "실선, 점선, 붙지 않음"
     ],
     "correctIndex": 2,
-    "explanation": "ERD(IE 표기법)에서 식별 관계는 실선, 비식별 관계는 점선으로 표기한다. 식별 관계는 부모의 주식별자가 자식의 주식별자에 포함되는 관계이다. ① 은 반대로, ② 는 둘 다 실선으로 본 것이고, ④ IE 표기법은 선 모양으로 둘을 구분한다.",
-    "_source": "authored"
+    "explanation": "부모의 기본키가 자식 기본키의 일부가 되면 식별자 관계로 실선, 자식의 일반 칼럼으로만 들어가면 비식별자 관계로 점선을 쓴다. 주문상세의 기본키에 주문번호가 들어 있으니 ㉠ 은 실선, 주문의 기본키는 주문번호뿐이고 고객번호는 일반 칼럼이니 ㉡ 은 점선이다. 고객번호가 NULL 을 허용해 고객 없는 주문이 있을 수 있으므로 고객 쪽 끝에 선택을 뜻하는 동그라미가 붙는다. 정답은 ③번이다. ① 은 실선·점선을 반대로 본 것, ② 는 외래키만 있으면 모두 식별자 관계라고 본 것, ④ 는 NULL 허용을 놓친 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "CREATE TABLE 주문 (\n  주문번호 CHAR(10) PRIMARY KEY,\n  고객번호 CHAR(5)  NULL\n    REFERENCES 고객(고객번호)\n);\nCREATE TABLE 주문상세 (\n  주문번호 CHAR(10)\n    REFERENCES 주문(주문번호),\n  순번     NUMBER(3),\n  수량     NUMBER(5),\n  PRIMARY KEY (주문번호, 순번)\n);"
+      }
+    ]
   },
   {
     "id": 10408,
@@ -247,16 +259,36 @@ export const ROUND_52: QuizQuestion[] = [
     "round": 52,
     "subject": "1과목",
     "number": 10,
-    "title": "1정규형·2정규형·3정규형에 대한 설명으로 옳지 않은 것은?",
+    "title": "아래 수강 테이블(기본키: 학번 + 과목코드)에는 이행 함수 종속이 없다. 이 테이블의 정규형에 대한 판단으로 옳은 것은?",
     "options": [
-      "3정규화는 1정규화·2정규화를 만족하지 않아도 수행할 수 있다.",
-      "1정규형은 모든 속성이 원자값을 가진다.",
-      "2정규형은 부분 함수 종속을 제거한다.",
-      "3정규형은 이행 함수 종속을 제거한다."
+      "부분 종속이 있어 제2정규형이 아니므로, 이행 종속이 없어도 제3정규형이 아니다.",
+      "이행 종속이 없으므로 제3정규형이다.",
+      "제3정규형은 이행 종속만 보므로 제3정규형이지만, 제2정규형은 아니다.",
+      "과목코드 → 과목명 은 이행 종속이므로 제2정규형까지만 만족한다."
     ],
     "correctIndex": 0,
-    "explanation": "1정규형은 모든 속성이 원자값을 갖는 상태(②), 2정규형은 1정규형에서 부분 함수 종속을 제거한 상태(③), 3정규형은 2정규형에서 이행 함수 종속을 제거한 상태(④)다. 정규형은 앞 단계를 만족해야 다음 단계로 갈 수 있으므로, 1·2정규형을 만족하지 않아도 3정규화를 할 수 있다는 ① 이 옳지 않다.",
-    "_source": "authored"
+    "explanation": "정규형은 단계가 쌓이는 구조라, 제3정규형이 되려면 먼저 제2정규형을 만족해야 한다. 과목명이 기본키 일부인 과목코드에만 종속되는 부분 함수 종속이 있어 제2정규형이 아니고, 그래서 이행 종속이 없더라도 제3정규형이 될 수 없다. 이 테이블은 제1정규형까지 만족한다. 정답은 ①번이다. ②·③ 은 아래 단계를 건너뛰고 이행 종속만 본 것, ④ 는 기본키 일부에 대한 부분 종속을 이행 종속으로 잘못 본 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "caption": "함수 종속",
+        "headers": [
+          "결정자",
+          "종속 속성"
+        ],
+        "rows": [
+          [
+            "학번 + 과목코드",
+            "성적"
+          ],
+          [
+            "과목코드",
+            "과목명"
+          ]
+        ]
+      }
+    ]
   },
   {
     "id": 10410,
@@ -511,16 +543,53 @@ export const ROUND_52: QuizQuestion[] = [
     "round": 52,
     "subject": "2과목",
     "number": 16,
-    "title": "계층형 질의에서 정방향·역방향 탐색 방향을 결정하는 키워드는?",
+    "title": "아래 사원 테이블에 대한 SQL ㉠, ㉡ 의 결과 행 수와, ㉡ 에서 A 의 LEVEL 값으로 옳은 것은? (Oracle 기준)",
     "options": [
-      "PRIOR",
-      "START WITH",
-      "CONNECT BY",
-      "LEVEL"
+      "3, 2, 2",
+      "2, 3, 2",
+      "3, 2, 1",
+      "3, 3, 2"
     ],
     "correctIndex": 0,
-    "explanation": "CONNECT BY 절에서 PRIOR 가 붙은 쪽이 이전(부모) 행이 된다. PRIOR 사원번호 = 매니저번호 는 부모에서 자식으로 내려가는 순방향, PRIOR 매니저번호 = 사원번호 는 자식에서 부모로 올라가는 역방향이다. ② START WITH 는 시작 행, ③ CONNECT BY 는 연결 조건을 쓰는 절, ④ LEVEL 은 깊이를 나타낼 뿐 방향을 정하지 않는다. 정답은 ① 이다.",
-    "_source": "authored"
+    "explanation": "PRIOR 는 '바로 앞에 읽은 행' 을 가리키며, PRIOR 를 어느 쪽에 붙이느냐로 전개 방향이 정해진다. ㉠ 의 PRIOR 사번 = 관리자 는 앞 행의 사번을 관리자로 갖는 행, 즉 부하 쪽으로 내려가는 순방향이라 B 와 그 아래 C·D 의 3행이다. ㉡ 의 PRIOR 관리자 = 사번 은 앞 행의 관리자를 사번으로 갖는 행, 즉 상사 쪽으로 올라가는 역방향이라 B, A 의 2행이다. LEVEL 은 시작 행이 1 이라 A 는 2 다. 정답은 ①번이다. ② 는 두 방향을 바꿔 본 것, ③ 은 역방향에서 LEVEL 이 거꾸로 매겨진다고 본 것, ④ 는 역방향도 부하를 포함한다고 본 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "caption": "사원",
+        "headers": [
+          "사번",
+          "관리자",
+          "이름"
+        ],
+        "rows": [
+          [
+            "1",
+            "NULL",
+            "A"
+          ],
+          [
+            "2",
+            "1",
+            "B"
+          ],
+          [
+            "3",
+            "2",
+            "C"
+          ],
+          [
+            "4",
+            "2",
+            "D"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "-- ㉠\nSELECT 이름, LEVEL FROM 사원\nSTART WITH 사번 = 2\nCONNECT BY PRIOR 사번 = 관리자;\n-- ㉡\nSELECT 이름, LEVEL FROM 사원\nSTART WITH 사번 = 2\nCONNECT BY PRIOR 관리자 = 사번;"
+      }
+    ]
   },
   {
     "id": 10416,
@@ -553,16 +622,22 @@ export const ROUND_52: QuizQuestion[] = [
     "round": 52,
     "subject": "2과목",
     "number": 18,
-    "title": "서브쿼리에 대한 설명 중 적절하지 않은 것은?",
+    "title": "ID 가 1, 2, 3 인 3행짜리 T 테이블에 대한 SQL ㉠~㉣ 의 결과(COUNT)로 옳은 것은? (Oracle 기준)",
     "options": [
-      "서브쿼리는 SELECT, WHERE, FROM 절 등에 사용할 수 있다.",
-      "서브쿼리 테이블의 컬럼을 메인 쿼리에서 직접 사용할 수 있다.",
-      "연관 서브쿼리는 메인 쿼리의 컬럼을 참조한다.",
-      "스칼라 서브쿼리는 단일 값을 반환한다."
+      "0, 0, 3, 3",
+      "3, 0, 0, 3",
+      "3, 0, 3, 3",
+      "0, 0, 0, 3"
     ],
     "correctIndex": 1,
-    "explanation": "서브쿼리는 메인 쿼리의 컬럼을 참조할 수 있지만(연관 서브쿼리, ③), 메인 쿼리는 WHERE·SELECT 절 서브쿼리 안의 컬럼을 직접 쓸 수 없다. 서브쿼리 컬럼은 서브쿼리 안에서만 유효하기 때문이다(FROM 절 인라인 뷰는 테이블처럼 취급되어 예외). 따라서 ② 가 적절하지 않다. ① 서브쿼리는 SELECT·WHERE·FROM 등에 쓸 수 있고, ④ 스칼라 서브쿼리는 값 하나를 돌려준다.",
-    "_source": "authored"
+    "explanation": "EXISTS 는 서브쿼리가 행을 하나라도 돌려주는지만 본다. ㉠ 의 서브쿼리는 값이 NULL 인 행 하나를 돌려주므로 참이 되어 3행이 모두 나온다. IN 과 NOT IN 은 값을 비교한다. ㉡ 의 ID = NULL 은 UNKNOWN 이라 0, ㉢ 의 ID <> NULL 도 UNKNOWN 이라 역시 0 이다. ㉣ 의 서브쿼리는 행이 없으니 NOT EXISTS 가 참이 되어 3 이다. 정답은 ②번이다. ① 은 EXISTS 가 NULL 값을 보고 거짓이 된다고 본 것, ③ 은 NOT IN 이 NULL 과 다르니 모두 통과한다고 본 것, ④ 는 두 가지를 모두 잘못 본 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT COUNT(*) FROM T          -- ㉠\nWHERE  EXISTS (SELECT NULL FROM DUAL);\n\nSELECT COUNT(*) FROM T          -- ㉡\nWHERE  ID IN (SELECT NULL FROM DUAL);\n\nSELECT COUNT(*) FROM T          -- ㉢\nWHERE  ID NOT IN (SELECT NULL\n                  FROM   DUAL);\n\nSELECT COUNT(*) FROM T          -- ㉣\nWHERE  NOT EXISTS (SELECT 1 FROM DUAL\n                   WHERE  1 = 0);"
+      }
+    ]
   },
   {
     "id": 10418,
@@ -933,16 +1008,22 @@ export const ROUND_52: QuizQuestion[] = [
     "round": 52,
     "subject": "2과목",
     "number": 28,
-    "title": "EMPLOYEE 테이블을 삭제할 때 참조하는 모든 제약 조건을 함께 제거하려면 어떤 옵션을 사용해야 하는가?",
+    "title": "아래와 같이 부서·사원 테이블이 있을 때 ㉠~㉢ 을 순서대로 실행한 결과로 옳은 것은? ('㉠ 결과, ㉡ 뒤 사원 행 수, ㉢ 결과' 순서, Oracle 기준)",
     "options": [
-      "RESTRICT",
-      "WITH GRANT",
-      "NO ACTION",
-      "CASCADE CONSTRAINTS"
+      "성공, 0, 오류",
+      "오류, 0, 성공",
+      "오류, 3, 오류",
+      "오류, 3, 성공"
     ],
     "correctIndex": 3,
-    "explanation": "테이블을 삭제하면서 이를 참조하는 외래키 등 모든 제약을 함께 제거하려면 DROP TABLE ... CASCADE CONSTRAINTS 옵션을 사용한다. ① RESTRICT 는 참조가 있으면 삭제를 막고, ② WITH GRANT 는 권한 재부여 옵션이며, ③ NO ACTION 은 참조 무결성 동작 옵션이라 제약을 지우지 않는다.",
-    "_source": "authored"
+    "explanation": "다른 테이블의 외래키가 참조하고 있는 테이블은 그냥 DROP 할 수 없어 ㉠ 은 오류다. CASCADE CONSTRAINTS 를 붙이면 부서를 참조하던 외래키 제약만 함께 지우고 부서 테이블을 삭제한다. 사원의 데이터는 건드리지 않으므로 3행 그대로다. 외래키가 사라졌으니 없는 부서 99 를 넣는 ㉢ 도 성공한다. 정답은 ④번이다. ① 은 부모를 지우면 자식이 함께 지워진다고 본 것, ② 는 CASCADE CONSTRAINTS 가 자식 행까지 지운다고 본 것, ③ 은 외래키가 남아 있다고 본 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "CREATE TABLE 부서 (\n  부서번호 NUMBER PRIMARY KEY\n);\nCREATE TABLE 사원 (\n  사번     NUMBER PRIMARY KEY,\n  부서번호 NUMBER REFERENCES 부서\n);\n-- 부서: 10, 20\n-- 사원: 3명(부서 10, 10, 20)\n\nDROP TABLE 부서;                 -- ㉠\nDROP TABLE 부서\n  CASCADE CONSTRAINTS;           -- ㉡\nINSERT INTO 사원\nVALUES (4, 99);                  -- ㉢"
+      }
+    ]
   },
   {
     "id": 10428,
@@ -951,15 +1032,15 @@ export const ROUND_52: QuizQuestion[] = [
     "round": 52,
     "subject": "2과목",
     "number": 29,
-    "title": "권한(ROLE) 에 대한 설명으로 옳은 것은?",
+    "title": "사원 100명에게 같은 권한 5개를 줘야 하고, 나중에 권한 1개를 더 줄 예정이다. ROLE 에 대한 설명으로 옳은 것은? (Oracle 기준)",
     "options": [
-      "CREATE 로 권한을 부여하고 DROP 으로 회수한다.",
-      "INSERT 로 권한을 부여하고 DELETE 로 회수한다.",
-      "GRANT 로 권한을 부여하고 REVOKE 로 회수한다.",
-      "COMMIT 으로 권한을 부여하고 ROLLBACK 으로 회수한다."
+      "사용자마다 권한 5개를 따로 GRANT 해 두어야 나중에 권한을 추가하기도 쉽다.",
+      "ROLE 은 CREATE 로 권한을 부여하고 DROP 으로 권한을 회수한다.",
+      "CREATE ROLE 로 롤을 만들어 권한을 담고 사용자에게 롤을 GRANT 하면, 나중에 롤에 권한을 추가할 때 100명 모두 바로 쓸 수 있다.",
+      "ROLE 에는 객체 권한만 담을 수 있고 시스템 권한은 담을 수 없다."
     ],
     "correctIndex": 2,
-    "explanation": "권한은 GRANT 로 부여하고 REVOKE 로 회수한다. ROLE 은 권한의 묶음이며 동일하게 GRANT·REVOKE 로 관리한다. ① CREATE·DROP 은 DDL, ② INSERT·DELETE 는 DML, ④ COMMIT·ROLLBACK 은 TCL 이다.",
+    "explanation": "ROLE 은 여러 권한을 묶어 이름을 붙인 것이다. CREATE ROLE R 로 만들고, GRANT 권한 TO R 로 권한을 담은 뒤, GRANT R TO 사용자 로 나눠 준다. 롤에 권한을 추가하거나 회수하면 롤을 받은 모든 사용자에게 곧바로 반영되므로 관리가 쉬워진다. 정답은 ③번이다. ① 은 사용자 100명에게 매번 따로 GRANT 해야 하는 비효율이고, ② 의 권한 부여·회수는 CREATE·DROP 이 아니라 GRANT·REVOKE 다. ④ 는 틀렸다. ROLE 에는 CREATE SESSION 같은 시스템 권한도 담을 수 있다(CONNECT, RESOURCE 가 대표적인 롤이다).",
     "_source": "authored"
   },
   {
@@ -993,16 +1074,22 @@ export const ROUND_52: QuizQuestion[] = [
     "round": 52,
     "subject": "2과목",
     "number": 31,
-    "title": "총 월급 2,000 이상인 직원을 기준으로 조건을 만족하지 않는 경우 NULL 을 반환하도록 하는 CASE 문으로 옳은 것은?",
+    "title": "월급이 1500, 2000, 3000, 2500 인 4행짜리 사원 테이블에 대한 SQL 의 결과(P, Q, R, S)로 옳은 것은?",
     "options": [
-      "CASE WHEN 총월급 >= 2000 THEN 총월급 ELSE 0 END",
-      "CASE WHEN 총월급 > 2000 THEN 총월급 ELSE NULL END",
-      "CASE WHEN 총월급 < 2000 THEN NULL END",
-      "CASE WHEN 총월급 >= 2000 THEN 총월급 ELSE NULL END"
+      "9000, 4, 2250, 1875",
+      "7500, 4, 1875, 1875",
+      "7500, 3, 1875, 2500",
+      "7500, 3, 2500, 1875"
     ],
     "correctIndex": 3,
-    "explanation": "④ 는 총월급이 2,000 이상이면 총월급을, 아니면 NULL 을 반환한다. ① 은 조건을 만족하지 않을 때 0 을 반환하고, ② 는 > 라서 총월급이 정확히 2,000 인 직원도 NULL 이 되며, ③ 은 THEN 에서도 NULL 이고 ELSE 가 없어 모든 행이 NULL 이다. 참고로 ELSE 를 생략하면 ELSE NULL 과 같다 (CASE WHEN 총월급 >= 2000 THEN 총월급 END 도 같은 결과).",
-    "_source": "authored"
+    "explanation": "ELSE 가 없는 CASE 는 조건에 맞지 않으면 NULL 을 돌려준다. 1500 인 행은 NULL 이 되고, 나머지 2000·3000·2500 만 값이 남는다. 집계 함수는 NULL 을 빼므로 P = 7500, Q = 3, R = 7500 / 3 = 2500 이다. S 는 ELSE 0 이라 1500 행도 0 으로 계산에 들어가 7500 / 4 = 1875 다. 정답은 ④번이다. ① 은 CASE 가 원래 값을 그대로 돌려준다고 본 것, ② 는 NULL 도 COUNT·AVG 에 들어간다고 본 것, ③ 은 R 과 S 를 바꿔 본 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT\n  SUM(CASE WHEN 월급 >= 2000\n      THEN 월급 END)          AS P,\n  COUNT(CASE WHEN 월급 >= 2000\n      THEN 월급 END)          AS Q,\n  AVG(CASE WHEN 월급 >= 2000\n      THEN 월급 END)          AS R,\n  AVG(CASE WHEN 월급 >= 2000\n      THEN 월급 ELSE 0 END)   AS S\nFROM 사원;"
+      }
+    ]
   },
   {
     "id": 10431,
@@ -1227,16 +1314,84 @@ export const ROUND_52: QuizQuestion[] = [
     "round": 52,
     "subject": "2과목",
     "number": 37,
-    "title": "NATURAL JOIN 에 대한 설명으로 옳지 않은 것은?",
+    "title": "아래 세 테이블에 대한 SQL ㉠, ㉡, ㉢ 의 결과로 옳은 것은? ('㉠ 행 수, ㉡ 행 수, ㉢ 결과' 순서, Oracle 기준)",
     "options": [
-      "동일 이름을 가진 컬럼이 있으면 자동으로 조인 조건이 된다.",
-      "NATURAL JOIN 은 USING·ON 절과 함께 사용할 수 있다.",
-      "조인 결과에 동일 이름 컬럼은 한 번만 나타난다.",
-      "동일 이름 컬럼이 없으면 CROSS JOIN 과 동일한 결과가 된다."
+      "0, 2, 오류",
+      "6, 2, 오류",
+      "오류, 2, 2행",
+      "6, 2, 2행"
     ],
     "correctIndex": 1,
-    "explanation": "NATURAL JOIN 은 두 테이블의 같은 이름 컬럼을 모두 자동으로 조인 조건으로 쓰며(①), 결과에 그 컬럼은 한 번만 나오고(③), 같은 이름 컬럼이 없으면 카티션 곱(CROSS JOIN)과 같다(④). 조인 조건을 자동으로 정하므로 USING·ON 절을 함께 쓸 수 없어 ② 가 옳지 않다.",
-    "_source": "authored"
+    "explanation": "NATURAL JOIN 은 이름이 같은 칼럼을 모두 조인 조건으로 쓴다. A 와 B 는 같은 이름의 칼럼이 하나도 없어 조건이 없는 셈이라, CROSS JOIN 처럼 2 × 3 = 6행이 된다. A 와 C 는 ID 로 조인되어 1, 2 가 맞는 2행이다. Oracle 은 NATURAL JOIN 의 공통 칼럼 앞에 테이블 이름이나 별칭을 붙이지 못하게 하므로 A.ID 라고 쓴 ㉢ 은 오류다(ID 라고만 써야 한다). 정답은 ②번이다. ① 은 공통 칼럼이 없으면 결과가 0 이라고 본 것, ③ 은 공통 칼럼이 없으면 오류라고 본 것, ④ 는 공통 칼럼에 테이블 이름을 붙여도 된다고 본 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "caption": "A",
+        "headers": [
+          "ID",
+          "X"
+        ],
+        "rows": [
+          [
+            "1",
+            "a"
+          ],
+          [
+            "2",
+            "b"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "B",
+        "headers": [
+          "Y",
+          "Z"
+        ],
+        "rows": [
+          [
+            "p",
+            "1"
+          ],
+          [
+            "q",
+            "2"
+          ],
+          [
+            "r",
+            "3"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "C",
+        "headers": [
+          "ID",
+          "W"
+        ],
+        "rows": [
+          [
+            "1",
+            "가"
+          ],
+          [
+            "2",
+            "나"
+          ],
+          [
+            "9",
+            "다"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "-- ㉠\nSELECT * FROM A NATURAL JOIN B;\n-- ㉡\nSELECT * FROM A NATURAL JOIN C;\n-- ㉢\nSELECT A.ID FROM A NATURAL JOIN C;"
+      }
+    ]
   },
   {
     "id": 10437,
@@ -1488,16 +1643,22 @@ export const ROUND_52: QuizQuestion[] = [
     "round": 52,
     "subject": "2과목",
     "number": 43,
-    "title": "NVL, NVL2, NULLIF, COALESCE 함수의 결과로 옳은 것은?",
+    "title": "아래 SQL 의 결과(A, B, C, D)로 옳은 것은? (Oracle 기준)",
     "options": [
-      "NVL(NULL, 'A') 의 결과는 NULL 이다.",
-      "NVL2(NULL, 'A', 'B') 의 결과는 'B' 이다.",
-      "NULLIF('A', 'A') 의 결과는 'A' 이다.",
-      "COALESCE(NULL, NULL, NULL) 의 결과는 'NULL 문자열' 이다."
+      "N, NULL, Z, 1",
+      "Y, NULL, Z, NULL",
+      "Y, 5, A, NULL",
+      "N, 5, Z, NULL"
     ],
     "correctIndex": 1,
-    "explanation": "NVL2(EXPR, V1, V2) 는 EXPR 이 NULL 이면 V2 를 반환한다. 따라서 NVL2(NULL, 'A', 'B') = 'B'. ① NVL(NULL,'A')='A', ③ NULLIF('A','A')=NULL, ④ COALESCE(NULL,NULL,NULL)=NULL 이므로 ② 만 옳다.",
-    "_source": "authored"
+    "explanation": "NVL2(식, 값1, 값2) 는 식이 NULL 이 아니면 값1, NULL 이면 값2 를 돌려준다. 0 은 NULL 이 아니므로 A 는 'Y' 다. NULLIF(x, y) 는 두 값이 같으면 NULL 을 돌려주는데, 5 와 5.0 은 숫자로 같은 값이라 B 는 NULL 이다. COALESCE 는 처음으로 NULL 이 아닌 값을 돌려준다. 두 번째 인자 NULLIF('A', 'A') 도 NULL 이라 C 는 'Z' 다. D 는 식이 NULL 이라 값2 인 NULL 이 된다. 정답은 ②번이다. ① 은 0 을 NULL 처럼 본 것, ③ 은 NULLIF 가 같은 값을 그대로 돌려준다고 본 것, ④ 는 두 가지를 모두 거꾸로 본 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT NVL2(0, 'Y', 'N')       AS A,\n       NULLIF(5, 5.0)          AS B,\n       COALESCE(NULL,\n                NULLIF('A', 'A'),\n                'Z')           AS C,\n       NVL2(NULL, 1, NULL)     AS D\nFROM   DUAL;"
+      }
+    ]
   },
   {
     "id": 10443,
@@ -1544,16 +1705,56 @@ export const ROUND_52: QuizQuestion[] = [
     "round": 52,
     "subject": "2과목",
     "number": 45,
-    "title": "행의 중복을 제거하는 SELECT 키워드는?",
+    "title": "아래 사원 테이블에 대한 ㉠, ㉡, ㉢ 의 결과(행 수 또는 값)로 옳은 것은?",
     "options": [
-      "DISTINCT",
-      "UNIQUE",
-      "LIMIT",
-      "TOP"
+      "4, 2, 3",
+      "4, 3, 3",
+      "6, 2, 3",
+      "4, 2, 2"
     ],
     "correctIndex": 0,
-    "explanation": "SELECT 절에서 행의 중복을 제거하는 표준 키워드는 DISTINCT 이다. ② UNIQUE 는 일부 DBMS 의 동의어이며 표준 정답은 DISTINCT 이다. ③ LIMIT(MySQL)·④ TOP(SQL Server) 은 행 수를 자르는 키워드다.",
-    "_source": "authored"
+    "explanation": "DISTINCT 는 SELECT 목록 전체가 같은 행을 하나로 합친다. ㉠ 은 (A, 사원), (A, 대리), (B, 사원), (NULL, 사원) 의 4행이다. DISTINCT 는 NULL 도 하나의 값으로 모아 ㉢ 은 A, B, NULL 의 3행이다. 반면 COUNT 같은 집계 함수는 NULL 을 세지 않아 ㉡ 은 A, B 의 2 다. 정답은 ①번이다. ② 는 COUNT(DISTINCT) 가 NULL 도 센다고 본 것, ③ 은 DISTINCT 가 칼럼 하나에만 적용된다고 본 것, ④ 는 DISTINCT 가 NULL 을 버린다고 본 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "caption": "사원",
+        "headers": [
+          "부서",
+          "직급"
+        ],
+        "rows": [
+          [
+            "A",
+            "사원"
+          ],
+          [
+            "A",
+            "사원"
+          ],
+          [
+            "A",
+            "대리"
+          ],
+          [
+            "B",
+            "사원"
+          ],
+          [
+            "NULL",
+            "사원"
+          ],
+          [
+            "NULL",
+            "사원"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "-- ㉠ 결과 행 수\nSELECT DISTINCT 부서, 직급 FROM 사원;\n-- ㉡ 결과 값\nSELECT COUNT(DISTINCT 부서) FROM 사원;\n-- ㉢ 결과 행 수\nSELECT DISTINCT 부서 FROM 사원;"
+      }
+    ]
   },
   {
     "id": 10445,

@@ -11,16 +11,22 @@ export const ROUND_45: QuizQuestion[] = [
     "round": 45,
     "subject": "1과목",
     "number": 1,
-    "title": "데이터 모델링 시 유의점으로 적절하지 않은 것은?",
+    "title": "성능 데이터 모델링을 아래 ㉠~㉥ 단계로 진행할 때 올바른 순서는?",
     "options": [
-      "중복(Duplication) 발생을 방지한다.",
-      "비유연성(Inflexibility)에 대한 고려를 통해 데이터 모델이 업무 변화에 유연하게 대응하도록 한다.",
-      "비일관성(Inconsistency)이 발생하지 않도록 데이터 간 상호 연관 관계를 명확히 정의한다.",
-      "성능 향상을 위해 초기 설계 단계부터 반정규화를 적극적으로 수행한다."
+      "㉡ → ㉠ → ㉢ → ㉣ → ㉤ → ㉥",
+      "㉢ → ㉣ → ㉡ → ㉠ → ㉤ → ㉥",
+      "㉡ → ㉢ → ㉣ → ㉤ → ㉠ → ㉥",
+      "㉡ → ㉢ → ㉣ → ㉠ → ㉤ → ㉥"
     ],
     "correctIndex": 3,
-    "explanation": "데이터 모델링에서는 중복(①), 비유연성(②), 비일관성(③)이 생기지 않도록 주의해야 한다. 반정규화는 정규화를 마친 뒤 성능 문제가 확인될 때 물리 모델 단계에서 필요한 만큼만 하는 작업이므로, 초기 설계부터 적극적으로 하라는 ④ 가 적절하지 않다.",
-    "_source": "authored"
+    "explanation": "성능 모델링은 먼저 정규화를 정확히 해 두고(㉡), 테이블별 데이터 양을 산정하고(㉢), 어떤 업무가 많이 실행되는지 파악한 뒤(㉣), 그 근거로 필요한 곳만 반정규화한다(㉠). 그다음 이력 모델·PK·FK·슈퍼·서브타입을 조정하고(㉤), 마지막으로 성능 관점에서 모델을 검증한다(㉥). 정답은 ④번이다. ① 은 용량과 트랜잭션을 보기도 전에 반정규화부터 한 것으로, 근거 없는 중복만 늘린다. ② 는 정규화보다 용량 산정을 앞에 둔 것, ③ 은 반정규화를 조정 단계 뒤로 미룬 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "text",
+        "content": "㉠ 반정규화를 한다.\n㉡ 정규화를 한다.\n㉢ 데이터 용량을 산정한다.\n㉣ 트랜잭션 유형(조회·입력이 많은 업무)을 파악한다.\n㉤ 이력 모델, PK·FK, 슈퍼·서브타입을 조정한다.\n㉥ 성능 관점에서 데이터 모델을 검증한다."
+      }
+    ]
   },
   {
     "id": 10751,
@@ -146,15 +152,15 @@ export const ROUND_45: QuizQuestion[] = [
     "round": 45,
     "subject": "1과목",
     "number": 6,
-    "title": "모델링의 단계 중 재사용성이 가장 높은 모델링은?",
+    "title": "DBMS 를 Oracle 에서 PostgreSQL 로 바꾸는 차세대 프로젝트에서, 기존 시스템 산출물 중 새 시스템에 가장 그대로 가져다 쓰기 좋은 것은?",
     "options": [
-      "개념적 데이터 모델링",
-      "논리적 데이터 모델링",
-      "물리적 데이터 모델링",
-      "운영 데이터 모델링"
+      "개념 모델: 주제영역과 핵심 엔터티만 그린 그림",
+      "논리 모델: 속성·식별자·관계를 정하고 정규화까지 마친 모델",
+      "물리 모델: Oracle 데이터 타입·파티션·인덱스까지 정한 모델",
+      "운영 DB 의 테이블 생성 스크립트"
     ],
     "correctIndex": 1,
-    "explanation": "논리적 데이터 모델링은 구축 대상 업무의 키·속성·관계를 정규화를 통해 정확하게 표현하므로, 데이터베이스 엔진·플랫폼과 무관하게 재사용성이 높다. 정답은 ②번이다. ① 개념 모델은 핵심 엔터티 위주의 추상적인 모델이라 그대로 구현에 쓰기 어렵고, ③ 물리 모델은 특정 DBMS·성능 요건에 맞춘 것이라 다른 환경에 그대로 쓰기 어려우며, ④ 운영 데이터 모델링은 모델링 3단계(개념·논리·물리)에 들지 않는다.",
+    "explanation": "논리 모델은 업무의 키·속성·관계를 정확히 표현하면서도 특정 DBMS 에 묶이지 않아 재사용성이 가장 높다. DBMS 가 바뀌어도 논리 모델은 그대로 두고 물리 설계만 다시 하면 된다. 정답은 ②번이다. ① 개념 모델은 추상화 수준이 높아 속성과 식별자가 없으니 다시 자세히 설계해야 한다. ③·④ 는 Oracle 에 맞춘 타입·저장 구조가 들어 있어 다른 DBMS 에 그대로 쓰기 어렵다.",
     "_source": "authored"
   },
   {
@@ -189,16 +195,23 @@ export const ROUND_45: QuizQuestion[] = [
     "round": 45,
     "subject": "1과목",
     "number": 8,
-    "title": "엔터티 간 관계에서 1:1, 1:M과 같이 관계의 기수성을 나타내는 개념은?",
+    "title": "아래 ERD(IE 표기법)를 읽은 결과로 옳은 것은? ('부서:사원 관계차수, 사원:사물함 관계차수, 사물함이 없는 사원, 배정된 사원이 없는 사물함' 순서)",
     "options": [
-      "관계명(Relationship Membership)",
-      "관계차수(Relationship Degree / Cardinality)",
-      "관계선택사양(Relationship Optionality)",
-      "관계정의(Relationship Definition)"
+      "1:M, 1:M, 있을 수 있음, 있을 수 있음",
+      "1:M, 1:1, 있을 수 있음, 있을 수 없음",
+      "1:M, 1:1, 있을 수 없음, 있을 수 있음",
+      "M:N, 1:1, 있을 수 있음, 있을 수 없음"
     ],
     "correctIndex": 1,
-    "explanation": "관계차수(Cardinality)는 두 엔터티 사이에서 관계에 참여하는 인스턴스 수를 1:1, 1:M, M:N 처럼 나타낸다(②). IE 표기에서는 `|` 가 하나, 까마귀발(`<`)이 여럿을 뜻한다. `o` 는 참여가 필수가 아님을 나타내는 관계선택사양(③) 기호이고, 관계명(①)은 관계의 이름이다.",
-    "_source": "authored"
+    "explanation": "IE 표기법에서 관계선 끝의 까마귀발은 '여럿', 세로줄은 '하나' 를 뜻하고(관계차수), 동그라미는 참여하지 않아도 된다는 뜻이다(관계선택사양). 부서 쪽은 세로줄 하나, 사원 쪽은 까마귀발이라 부서:사원 은 1:M 이다. 사원:사물함 은 양쪽 끝이 모두 '하나' 라 1:1 이다. 사물함 쪽 끝에 동그라미가 있어 사물함을 받지 않은 사원이 있을 수 있고, 사원 쪽 끝은 세로줄 둘(반드시 하나)이라 사물함은 꼭 한 사원에게 배정되어야 한다. 정답은 ②번이다. ① 은 사원:사물함 을 1:M 으로 보고 사원 쪽 필수 표시를 놓친 것, ③ 은 동그라미가 붙은 쪽을 반대로 읽은 것, ④ 는 부서:사원 을 M:N 으로 본 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "erd",
+        "caption": "부서·사원·사물함 ERD",
+        "mermaid": "erDiagram\n    부서 ||..o{ 사원 : \"소속\"\n    사원 ||..o| 사물함 : \"배정\"\n    부서 {\n        string 부서코드 PK\n        string 부서명\n    }\n    사원 {\n        string 사번 PK\n        string 부서코드 FK\n    }\n    사물함 {\n        string 사물함번호 PK\n        string 사번 FK\n    }"
+      }
+    ]
   },
   {
     "id": 10758,
@@ -207,16 +220,40 @@ export const ROUND_45: QuizQuestion[] = [
     "round": 45,
     "subject": "1과목",
     "number": 9,
-    "title": "업무에서 필요로 하는 인스턴스로 관리하고자 하는, 의미상 더 이상 분리되지 않는 최소의 데이터 단위는 무엇인가?",
+    "title": "속성은 업무에서 관리하는, 의미상 더 이상 나누지 않는 최소 단위다. 아래 업무 조건에서 고객 엔터티의 주소를 설계한 방법으로 가장 적절한 것은?",
     "options": [
-      "엔터티(Entity)",
-      "속성(Attribute)",
-      "도메인(Domain)",
-      "식별자(Identifier)"
+      "주소 하나의 속성으로 두고 집계할 때 문자열을 잘라 쓴다.",
+      "시, 구, 상세주소 세 속성으로 나눈다.",
+      "주소를 별도 엔터티로 분리하고 고객과 1:M 관계를 맺는다.",
+      "시·구는 주소에서 계산되므로 파생 속성으로 추가한다."
     ],
     "correctIndex": 1,
-    "explanation": "속성(Attribute)은 업무에서 필요로 하는 인스턴스로 관리하고자 하는, 의미상 더 이상 분리되지 않는 최소의 데이터 단위이다. ① 엔터티는 속성의 집합, ③ 도메인은 속성이 가질 수 있는 값의 범위, ④ 식별자는 인스턴스를 유일하게 구분하는 속성(또는 속성 집합)이다.",
-    "_source": "authored"
+    "explanation": "무엇이 '더 이상 나누지 않는 단위' 인지는 업무가 정한다. 이 업무는 시·구를 따로 집계하고 구 단위로 배송을 묶으므로 시와 구가 각각 의미 있는 값이다. 그래서 시, 구, 상세주소로 나누는 것이 맞다. 정답은 ②번이다. ① 처럼 한 칸에 두면 '강남구' 와 '강남 구' 처럼 쓰는 방식이 달라질 때 집계가 틀어지고, 시·구 값의 범위(도메인)도 정할 수 없다. ③ 은 고객마다 주소가 하나라는 조건과 맞지 않는다. ④ 는 원래 값을 쪼개 담아야 할 것을 계산 값처럼 겹쳐 두어, 주소와 시·구가 서로 다른 값이 될 위험만 생긴다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "caption": "고객",
+        "headers": [
+          "고객번호",
+          "주소"
+        ],
+        "rows": [
+          [
+            "C1",
+            "서울시 강남구 테헤란로 1"
+          ],
+          [
+            "C2",
+            "부산시 해운대구 우동 3"
+          ]
+        ]
+      },
+      {
+        "type": "text",
+        "content": "업무 조건: 매달 시·구별 고객 수를 집계하고, 같은 구 고객에게 묶음 배송을 한다. 주소는 고객마다 하나다."
+      }
+    ]
   },
   {
     "id": 10759,
@@ -275,16 +312,22 @@ export const ROUND_45: QuizQuestion[] = [
     "round": 45,
     "subject": "2과목",
     "number": 11,
-    "title": "테이블에 새로운 행 데이터를 입력할 때 사용하는 DML 명령어는?",
+    "title": "빈 테이블 T 에 아래 INSERT 세 개를 실행한 뒤 SELECT SUM(B), COUNT(C) FROM T 의 결과로 옳은 것은?",
     "options": [
-      "SELECT",
-      "INSERT",
-      "UPDATE",
-      "DELETE"
+      "15, 2",
+      "10, 2",
+      "10, 3",
+      "5, 2"
     ],
     "correctIndex": 1,
-    "explanation": "INSERT는 테이블에 새로운 행을 추가하는 DML 명령어이다. ① SELECT는 조회, ③ UPDATE는 기존 행 수정, ④ DELETE는 기존 행 삭제에 사용된다.",
-    "_source": "authored"
+    "explanation": "INSERT 에서 칼럼 목록에 빠진 칼럼은 DEFAULT 가 있으면 그 값, 없으면 NULL 이 들어간다. 첫 행은 (1, 5, NULL), 셋째 행은 SELECT 결과를 넣는 INSERT … SELECT 로 (3, 5, 4) 가 된다. 둘째 행처럼 NULL 을 직접 넣으면 DEFAULT 가 있어도 NULL 이 들어가 (2, NULL, 3) 이다. 그래서 SUM(B) = 5 + 5 = 10, 값이 있는 C 는 3 과 4 라 COUNT(C) = 2 다. 정답은 ②번이다. ① 은 NULL 을 직접 넣어도 DEFAULT 가 들어간다고 본 것, ③ 은 COUNT 가 NULL 도 센다고 본 것, ④ 는 INSERT … SELECT 행에 DEFAULT 가 들어가지 않는다고 본 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "CREATE TABLE T (\n  A NUMBER,\n  B NUMBER DEFAULT 5,\n  C NUMBER\n);\nINSERT INTO T (A) VALUES (1);\nINSERT INTO T VALUES (2, NULL, 3);\nINSERT INTO T (A, C)\n  SELECT 3, 4 FROM DUAL;"
+      }
+    ]
   },
   {
     "id": 10761,
@@ -413,16 +456,22 @@ export const ROUND_45: QuizQuestion[] = [
     "round": 45,
     "subject": "2과목",
     "number": 15,
-    "title": "데이터 무결성을 지키기 위한 방법과 관계가 없는 것은?",
+    "title": "아래 업무 규칙 ㉠~㉢ 을 지키는 방법으로 가장 알맞게 짝지은 것은?",
     "options": [
-      "애플리케이션의 로직",
-      "Trigger",
-      "Lock",
-      "Constraints"
+      "트리거, CHECK 제약, 애플리케이션 로직",
+      "CHECK 제약, 애플리케이션 로직, 트리거",
+      "CHECK 제약, 트리거, 애플리케이션 로직",
+      "Lock, 트리거, CHECK 제약"
     ],
     "correctIndex": 2,
-    "explanation": "Lock·Unlock은 동시 접근 시의 병행성(동시성) 제어 기법이며, 데이터 무결성과는 직접적인 관련이 없다. 무결성은 제약조건(④), 트리거(②), 애플리케이션 로직(①) 등으로 보장한다.",
-    "_source": "authored"
+    "explanation": "데이터 무결성은 제약조건(Constraint), 트리거, 애플리케이션 로직으로 지킨다. 한 칼럼 값의 범위처럼 단순한 규칙(㉠)은 CHECK 제약이 가장 확실하다. 한 테이블에 변경이 생기면 다른 테이블도 자동으로 바꿔야 하는 규칙(㉡)은 트리거로 처리한다. 등급별 한도 계산과 화면 안내까지 필요한 복잡한 규칙(㉢)은 애플리케이션 로직이 알맞다. 정답은 ③번이다. ④ 의 Lock 은 여러 트랜잭션이 동시에 같은 데이터를 고치지 못하게 하는 동시성 제어 수단이라, 값이 규칙에 맞는지 정하는 무결성 방법이 아니다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "text",
+        "content": "㉠ 주문수량은 1 이상이어야 한다.\n㉡ 주문이 들어오면 상품 재고를 자동으로 줄인다.\n㉢ 회원 등급마다 하루 주문 한도를 다르게 두고, 넘으면 화면에 안내 문구를 띄운다."
+      }
+    ]
   },
   {
     "id": 10765,
@@ -497,16 +546,26 @@ export const ROUND_45: QuizQuestion[] = [
     "round": 45,
     "subject": "2과목",
     "number": 17,
-    "title": "CTAS(CREATE TABLE AS SELECT) 방식으로 테이블을 복제할 때의 특징으로 적절하지 않은 것은?",
+    "title": "아래처럼 CTAS 로 T2 를 만들었다. T2 에 그대로 옮겨 오는 것만 모두 고른 것은? (Oracle 기준)",
     "options": [
-      "원본 테이블의 데이터를 함께 복제할 수 있다.",
-      "원본 테이블의 모든 제약조건을 그대로 가져온다.",
-      "컬럼의 데이터 타입을 그대로 승계한다.",
-      "WHERE 1=2 와 함께 사용하면 구조만 복제할 수 있다."
+      "㉠, ㉡",
+      "㉠, ㉡, ㉣",
+      "㉠, ㉡, ㉢, ㉣",
+      "㉠, ㉡, ㉣, ㉤"
     ],
     "correctIndex": 1,
-    "explanation": "CTAS는 NOT NULL 제약조건만 상속되며, PRIMARY KEY·UNIQUE·FOREIGN KEY·CHECK 등은 복제되지 않는다. 정답은 ②번이다. ① CTAS 는 SELECT 결과 데이터를 함께 복제하고, ③ 컬럼의 데이터 타입도 그대로 가져오며, ④ WHERE 1=2 처럼 거짓 조건을 주면 행 없이 구조만 만든다.",
-    "_source": "authored"
+    "explanation": "CTAS(CREATE TABLE … AS SELECT)는 SELECT 결과로 새 테이블을 만들므로 데이터와 칼럼 이름·타입은 그대로 옮겨진다. 제약조건은 NOT NULL 만 따라오고, PRIMARY KEY·UNIQUE·FOREIGN KEY·CHECK 같은 다른 제약과 DEFAULT 값은 옮겨지지 않는다. 그래서 ㉠, ㉡, ㉣ 이다. 정답은 ②번이다. 필요한 제약은 CTAS 뒤에 ALTER TABLE 로 다시 추가해야 한다. 구조만 복사하려면 WHERE 1 = 2 처럼 거짓 조건을 붙인다. ① 은 NOT NULL 도 빠진다고 본 것, ③ 은 기본키까지 옮겨진다고 본 것, ④ 는 DEFAULT 도 옮겨진다고 본 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "CREATE TABLE T (\n  ID   NUMBER PRIMARY KEY,\n  NAME VARCHAR2(10) NOT NULL,\n  AMT  NUMBER DEFAULT 0\n);\n\nCREATE TABLE T2 AS\n  SELECT * FROM T;"
+      },
+      {
+        "type": "text",
+        "content": "㉠ T 의 데이터\n㉡ 칼럼 이름과 데이터 타입\n㉢ ID 의 PRIMARY KEY\n㉣ NAME 의 NOT NULL\n㉤ AMT 의 DEFAULT 0"
+      }
+    ]
   },
   {
     "id": 10767,
@@ -580,16 +639,63 @@ export const ROUND_45: QuizQuestion[] = [
     "round": 45,
     "subject": "2과목",
     "number": 19,
-    "title": "직급 인원이 9명 이상인 직급 중 나이가 가장 많은 직원의 이름을 조회하는 SQL로 올바른 것은?",
+    "title": "아래 EMP 테이블에 대한 SQL 의 결과(이름)로 옳은 것은?",
     "options": [
-      "SELECT 이름 FROM EMP WHERE COUNT(*) >= 9 GROUP BY 직급 ORDER BY 나이 DESC FETCH FIRST 1 ROWS ONLY;",
-      "SELECT 이름 FROM EMP GROUP BY 직급 HAVING COUNT(*) >= 9 ORDER BY 나이 DESC FETCH FIRST 1 ROWS ONLY;",
-      "SELECT 이름 FROM EMP WHERE 직급 IN (SELECT 직급 FROM EMP GROUP BY 직급 HAVING COUNT(*) >= 9) ORDER BY 나이 DESC FETCH FIRST 1 ROWS ONLY;",
-      "SELECT 이름 FROM EMP GROUP BY 직급 HAVING 나이 = MAX(나이) AND COUNT(*) >= 9 ORDER BY 나이 DESC FETCH FIRST 1 ROWS ONLY;"
+      "바",
+      "나",
+      "마",
+      "오류가 발생한다"
     ],
     "correctIndex": 2,
-    "explanation": "HAVING COUNT(*) >= 9 조건으로 9명 이상 직급을 먼저 추출하고, 해당 직급 직원 중 나이가 가장 많은 사람을 반환한다. 정답은 ③번이다. ① 은 WHERE 절에 집계 함수 COUNT(*) 를 써서 오류이고, ② 는 GROUP BY 직급 인데 그룹 컬럼이 아닌 이름·나이를 SELECT·ORDER BY 에 써서 오류이며, ④ 도 HAVING 에서 그룹 컬럼이 아닌 나이를 집계 없이 비교해 오류다.",
-    "_source": "authored"
+    "explanation": "서브쿼리는 직급별 인원을 세어 2명 이상인 직급만 돌려준다. 사원은 3명, 대리는 2명, 과장은 1명이라 사원·대리가 남는다. 바깥 쿼리는 이 두 직급의 사람(가·나·다·라·마)을 나이 내림차순으로 정렬해 첫 행만 가져오므로 40세인 마가 나온다. 정답은 ③번이다. ① 은 HAVING 조건을 놓치고 전체에서 가장 나이 많은 사람을 고른 것, ② 는 '2명 이상' 을 '2명 초과' 로 읽어 사원만 남긴 것, ④ 는 서브쿼리와 FETCH 를 함께 쓸 수 없다고 본 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "caption": "EMP",
+        "headers": [
+          "이름",
+          "직급",
+          "나이"
+        ],
+        "rows": [
+          [
+            "가",
+            "사원",
+            "25"
+          ],
+          [
+            "나",
+            "사원",
+            "31"
+          ],
+          [
+            "다",
+            "사원",
+            "28"
+          ],
+          [
+            "라",
+            "대리",
+            "35"
+          ],
+          [
+            "마",
+            "대리",
+            "40"
+          ],
+          [
+            "바",
+            "과장",
+            "50"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT 이름\nFROM   EMP\nWHERE  직급 IN (SELECT   직급\n               FROM     EMP\n               GROUP BY 직급\n               HAVING   COUNT(*) >= 2)\nORDER  BY 나이 DESC\nFETCH  FIRST 1 ROWS ONLY;"
+      }
+    ]
   },
   {
     "id": 10769,
@@ -622,16 +728,48 @@ export const ROUND_45: QuizQuestion[] = [
     "round": 45,
     "subject": "2과목",
     "number": 21,
-    "title": "ROLLUP, CUBE, GROUPING SETS 등 소계·총계 생성용 GROUP BY 확장 함수를 통칭하는 용어는?",
+    "title": "아래 판매 테이블에 대한 SQL 결과에서 ㉠·㉡·㉢ 행의 G 값으로 옳은 것은?",
     "options": [
-      "Aggregation",
-      "Partition",
-      "Grouping",
-      "Windowing"
+      "1, 2, 2",
+      "2, 1, 3",
+      "1, 2, 3",
+      "0, 0, 1"
     ],
     "correctIndex": 2,
-    "explanation": "ROLLUP, CUBE, GROUPING SETS는 GROUP BY의 확장으로 소계와 총계를 한 번에 생성하는 그룹핑(Grouping) 함수에 해당한다. ① Aggregation은 SUM·AVG 등 집계함수, ② Partition·④ Windowing은 윈도우 함수의 영역 지정에 사용된다.",
-    "_source": "authored"
+    "explanation": "GROUPING_ID(지역, 상품) 은 각 칼럼의 GROUPING 값(집계로 묶여 NULL 이 된 칼럼이면 1)을 이어 붙인 2진수를 10진수로 바꾼 값이다. 앞 칼럼이 높은 자리다. ㉠ 은 상품만 묶였으니 2진수 01 이라 1, ㉡ 은 지역만 묶였으니 10 이라 2, ㉢ 은 둘 다 묶였으니 11 이라 3 이다. 정답은 ③번이다. ① 은 합계 행도 한 칼럼만 묶인 것으로 본 것, ② 는 자리의 높낮이를 거꾸로 본 것, ④ 는 소계 행을 일반 행처럼 0 으로 본 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "caption": "판매",
+        "headers": [
+          "지역",
+          "상품",
+          "수량"
+        ],
+        "rows": [
+          [
+            "서울",
+            "P1",
+            "10"
+          ],
+          [
+            "서울",
+            "P2",
+            "20"
+          ],
+          [
+            "부산",
+            "P1",
+            "30"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT 지역, 상품, SUM(수량),\n       GROUPING_ID(지역, 상품) AS G\nFROM   판매\nGROUP  BY CUBE(지역, 상품);\n\n-- ㉠ 지역 서울, 상품 NULL 인 소계 행\n-- ㉡ 지역 NULL, 상품 P1 인 소계 행\n-- ㉢ 지역 NULL, 상품 NULL 인 합계 행"
+      }
+    ]
   },
   {
     "id": 10771,
@@ -1266,16 +1404,22 @@ export const ROUND_45: QuizQuestion[] = [
     "round": 45,
     "subject": "2과목",
     "number": 32,
-    "title": "아래 네 SQL 중 반환 행 수가 1건이 아닌 것은? (테이블 T 에는 충분한 행이 존재한다고 가정)",
+    "title": "행이 10건 있는 T 테이블에 대한 SQL ㉠~㉣ 의 결과 행 수로 옳은 것은? (Oracle 기준)",
     "options": [
-      "SELECT * FROM T WHERE ROWNUM = 1;",
-      "SELECT * FROM T WHERE ROWNUM < 2;",
-      "SELECT * FROM T WHERE ROWNUM <= 2;",
-      "SELECT * FROM T WHERE ROWNUM <= 2 - 1;"
+      "1, 0, 3, 2",
+      "1, 2, 3, 2",
+      "1, 0, 3, 0",
+      "1, 0, 2, 0"
     ],
     "correctIndex": 2,
-    "explanation": "Oracle 의 ROWNUM 은 조건을 통과한 행에 1 부터 차례로 번호를 붙인다. ① ROWNUM = 1, ② ROWNUM < 2, ④ ROWNUM <= 2 - 1(곧 1)은 모두 첫 행 하나만 통과시켜 1건이다. ③ ROWNUM <= 2 는 두 행이 통과해 2건이라 혼자 다르다.",
-    "_source": "authored"
+    "explanation": "ROWNUM 은 WHERE 조건을 통과한 행에 1 부터 차례로 붙는다. 첫 행은 늘 ROWNUM 1 로 검사받으므로, 1 을 포함하는 조건(㉠ = 1, ㉢ <= 3)만 결과를 낸다. ㉠ 은 1건, ㉢ 은 3건이다. ㉡ 의 > 1 은 첫 행이 1 이라 걸러지고, 다음 행도 다시 1 을 받아 걸러지기를 반복해 0건이다. ㉣ 의 BETWEEN 2 AND 3 도 같은 이유로 0건이다. 정답은 ③번이다. ①·② 는 ROWNUM 이 원래 행 번호처럼 고정되어 있다고 본 것, ④ 는 <= 3 을 3 미만으로 본 것이다. 2~3번째 행을 원하면 인라인 뷰에서 ROWNUM 에 별칭을 붙인 뒤 바깥에서 거른다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "-- ㉠\nSELECT * FROM T WHERE ROWNUM = 1;\n-- ㉡\nSELECT * FROM T WHERE ROWNUM > 1;\n-- ㉢\nSELECT * FROM T WHERE ROWNUM <= 3;\n-- ㉣\nSELECT * FROM T\nWHERE  ROWNUM BETWEEN 2 AND 3;"
+      }
+    ]
   },
   {
     "id": 10782,
@@ -1561,20 +1705,20 @@ export const ROUND_45: QuizQuestion[] = [
     "round": 45,
     "subject": "2과목",
     "number": 38,
-    "title": "아래 SQL의 결과로 옳은 것은?",
+    "title": "N1 값이 1, NULL, 3 인 SQLD 테이블에 대한 SQL ㉠~㉣ 의 결과 행 수로 옳은 것은?",
     "options": [
-      "모든 행이 반환된다.",
-      "NULL이 반환된다.",
-      "결과가 없다(0건).",
-      "오류가 발생한다."
+      "0, 1, 2, 0",
+      "0, 0, 1, 0",
+      "0, 1, 1, 0",
+      "0, 1, 1, 3"
     ],
     "correctIndex": 2,
-    "explanation": "WHERE 1 = 2 는 어떤 행에 대해서도 거짓이라 조건을 만족하는 행이 없다. 따라서 결과는 0건(공집합)이다(③). 오류가 나지도 않고(④), NULL 한 행이 나오는 것도 아니다(②, 집계 함수를 썼을 때만 한 행이 나온다).",
+    "explanation": "㉠ 의 1 = 2 는 늘 거짓이라 오류 없이 0건이다. ㉡ 은 앞이 거짓이라도 OR 뒤의 N1 IS NULL 이 참인 NULL 행 1건이 남는다. ㉢ 에서 N1 = 1 은 1 행에서 참, 3 행에서 거짓, NULL 행에서 UNKNOWN 이다. NOT 을 붙이면 3 행만 참이 되고 UNKNOWN 은 그대로 UNKNOWN 이라 1건이다. ㉣ 의 N1 > NULL 은 모든 행에서 UNKNOWN 이고, TRUE AND UNKNOWN 도 UNKNOWN 이라 0건이다. 정답은 ③번이다. ① 은 NOT 이 NULL 행도 살린다고 본 것, ② 는 OR 의 한쪽이 거짓이면 전체가 거짓이라고 본 것, ④ 는 1 = 1 이 참이면 뒤의 조건을 보지 않는다고 본 것이다.",
     "_source": "authored",
     "references": [
       {
         "type": "sql",
-        "code": "SELECT N1\nFROM   SQLD\nWHERE  1 = 2;"
+        "code": "-- ㉠\nSELECT N1 FROM SQLD WHERE 1 = 2;\n-- ㉡\nSELECT N1 FROM SQLD\nWHERE  1 = 2 OR N1 IS NULL;\n-- ㉢\nSELECT N1 FROM SQLD\nWHERE  NOT (N1 = 1);\n-- ㉣\nSELECT N1 FROM SQLD\nWHERE  1 = 1 AND N1 > NULL;"
       }
     ]
   },
@@ -1962,16 +2106,22 @@ export const ROUND_45: QuizQuestion[] = [
     "round": 45,
     "subject": "2과목",
     "number": 46,
-    "title": "GRANT, REVOKE 와 같이 권한을 부여하거나 회수하는 SQL의 분류로 옳은 것은?",
+    "title": "아래 권한 ㉠~㉣ 중 다른 사용자에게 다시 줄 수 있게 하려면 WITH ADMIN OPTION 을 붙여 GRANT 해야 하는 것만 모두 고른 것은? (Oracle 기준)",
     "options": [
-      "DDL (Data Definition Language)",
-      "DML (Data Manipulation Language)",
-      "TCL (Transaction Control Language)",
-      "DCL (Data Control Language)"
+      "㉡, ㉣",
+      "㉠",
+      "㉠, ㉡, ㉢",
+      "㉠, ㉢"
     ],
     "correctIndex": 3,
-    "explanation": "GRANT(권한 부여), REVOKE(권한 회수)는 데이터에 대한 접근 제어를 정의하는 DCL(Data Control Language)에 속한다. ① DDL은 CREATE·ALTER·DROP, ② DML은 SELECT·INSERT·UPDATE·DELETE, ③ TCL은 COMMIT·ROLLBACK·SAVEPOINT이다.",
-    "_source": "authored"
+    "explanation": "권한을 주고 회수하는 GRANT·REVOKE 는 DCL 이다. 권한은 DB 전체에 대한 시스템 권한(CREATE TABLE, CREATE SESSION 등)과 특정 객체에 대한 객체 권한(SELECT ON 주문 등)으로 나뉜다. 시스템 권한을 다시 줄 수 있게 하려면 WITH ADMIN OPTION, 객체 권한은 WITH GRANT OPTION 을 붙인다. 그래서 ㉠, ㉢ 이다. 정답은 ④번이다. ① 은 객체 권한에 ADMIN OPTION 을 쓴다고 본 것, ② 는 CREATE SESSION 을 놓친 것, ③ 은 객체 권한을 섞은 것이다. 두 옵션은 회수할 때도 달라, GRANT OPTION 으로 준 객체 권한만 회수가 연쇄된다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "text",
+        "content": "㉠ CREATE TABLE\n㉡ SELECT ON 주문\n㉢ CREATE SESSION\n㉣ UPDATE ON 주문"
+      }
+    ]
   },
   {
     "id": 10796,

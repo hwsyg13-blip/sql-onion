@@ -5,15 +5,21 @@
     {
       "subject": "1과목",
       "number": 1,
-      "title": "비식별자 관계로 구성된 테이블에 대한 설명 중 적절하지 않은 것은?",
+      "title": "아래 상황 ㉠~㉣ 중 부모와 자식을 비식별자 관계로 연결하는 것이 알맞은 것만 모두 고른 것은?",
       "options": [
-        "부모·자식 간 1:M 관계이며 부모 테이블이 생성되지 않은 상태에서도 자식 테이블이 생성될 수 있다.",
-        "부모 테이블의 삭제 시점이 자식 테이블보다 빠를 수 있다.",
-        "테이블 간 조인을 최소화한다.",
-        "자식 테이블의 주식별자를 부모 테이블에서 받아오는 것보다 직접 생성하는 것이 더 효율적인 경우가 있다."
+        "㉠, ㉡",
+        "㉡, ㉢",
+        "㉡, ㉢, ㉣",
+        "㉠, ㉢, ㉣"
       ],
       "correctIndex": 2,
-      "explanation": "비식별자 관계는 부모 키가 자식의 일반 속성으로 전이되므로 상위 엔터티까지 접근하려면 추가 조인이 필요해져 오히려 조인이 많아진다. ① 비식별 관계는 부모 없이도 자식이 생길 수 있고(선택 참여), ② 부모를 먼저 지울 수 있으며, ④ 자식이 독립 주식별자를 갖는 편이 나을 때 비식별을 고르므로 모두 옳은 설명이다."
+      "explanation": "비식별자 관계는 부모의 기본키를 자식의 일반 칼럼(외래키)으로만 받는다. 부모와 자식이 따로 생기고 따로 사라지는 경우(㉡), 부모 없이도 자식이 생길 수 있어 외래키에 NULL 이 들어가는 경우(㉢), 식별자 관계가 길게 이어져 자식의 기본키가 너무 커진 경우(㉣)에 쓴다. 정답은 ③번이다. ㉠ 은 자식이 부모에 완전히 묶여 있고 부모 키로 늘 찾으므로, 부모 키를 자식 기본키에 넣는 식별자 관계가 알맞다. ①·④ 는 ㉠ 을 비식별로 본 것, ② 는 기본키가 길어지는 문제를 놓친 것이다.",
+      "references": [
+        {
+          "type": "text",
+          "content": "㉠ 주문상세는 주문 없이 생길 수 없고, 늘 주문번호와 함께 조회한다.\n㉡ 사원이 퇴사해 사원 행을 지워도, 그 사원이 처리한 주문 기록은 남겨야 한다.\n㉢ 비회원도 게시글을 쓸 수 있어, 작성자 회원번호가 없는 글이 있다.\n㉣ 식별자 관계가 다섯 단계 이어져 맨 아래 자식의 기본키가 6칼럼이 되었다."
+        }
+      ]
     },
     {
       "subject": "1과목",
@@ -38,15 +44,21 @@
     {
       "subject": "1과목",
       "number": 3,
-      "title": "물리 모델링의 특징으로 적절하지 않은 것은?",
+      "title": "아래 설계 작업 ㉠~㉣ 을 데이터 모델링 단계(개념·논리·물리)로 바르게 나눈 것은?",
       "options": [
-        "물리적 저장 구조와 접근 방식을 정의한다.",
-        "성능 향상을 위한 인덱스·파티션 등이 설계된다.",
-        "테이블·컬럼의 실제 물리 구현 단계이다.",
-        "추상화 수준이 가장 높고 업무 중심적으로 표현하는 모델링이다."
+        "개념, 논리, 논리, 물리",
+        "논리, 개념, 물리, 물리",
+        "개념, 물리, 물리, 물리",
+        "개념, 논리, 물리, 물리"
       ],
       "correctIndex": 3,
-      "explanation": "물리 모델링은 테이블·컬럼을 실제 DBMS 에 구현하는 단계로(③), 물리적 저장 구조와 접근 방식(①), 성능을 위한 인덱스·파티션(②)을 설계한다. 추상화 수준이 가장 높고 업무 중심적으로 표현하는 것은 개념 모델링의 특징이므로 ④ 가 적절하지 않다. ※ 복원 자료의 ④ '어떻게 데이터에 접근하고 누가 접근하는지' 는 접근 경로·권한 설계로 보면 물리 모델링에도 해당해 정답이 갈릴 수 있어, 단일 정답이 되도록 보기를 바꿨다."
+      "explanation": "개념 모델링은 추상화 수준이 가장 높아 업무의 핵심 엔터티와 관계를 넓게 그린다(㉠). 논리 모델링은 속성·식별자·관계를 자세히 정하고 정규화를 해, 특정 DBMS 에 묶이지 않는 구조를 만든다(㉡). 물리 모델링은 실제 DBMS 에 올릴 테이블·칼럼의 타입과 길이, 인덱스·파티션 같은 저장과 성능 요소를 정한다(㉢, ㉣). 정답은 ④번이다. ① 은 파티션·인덱스를 논리 단계로 본 것, ② 는 개념과 논리를 바꿔 본 것, ③ 은 정규화를 물리 단계로 본 것이다.",
+      "references": [
+        {
+          "type": "text",
+          "content": "㉠ 업무 전체의 핵심 엔터티와 그 사이 관계를 큰 그림으로 그린다.\n㉡ 엔터티마다 식별자를 확정하고 정규화를 한다.\n㉢ 주문 테이블을 월별 파티션으로 나누고 인덱스를 만든다.\n㉣ 칼럼의 데이터 타입과 길이를 사용할 DBMS 에 맞게 정한다."
+        }
+      ]
     },
     {
       "subject": "1과목",
@@ -116,28 +128,56 @@
     {
       "subject": "1과목",
       "number": 8,
-      "title": "주식별자에 대한 설명으로 적절하지 않은 것은?",
+      "title": "주식별자를 정한 사례로 적절하지 않은 것은?",
       "options": [
-        "해당 업무에서 자주 이용되는 속성을 사용한다.",
-        "복합 식별자에는 최대한 많은 속성이 포함되도록 구성한다.",
-        "명칭은 되도록 지정하지 않는다.",
-        "속성이 자주 사용되지 않는다는 이유로 임의의 속성을 주식별자로 선정하지 않는다."
+        "사원 엔터티에서 업무에서 늘 쓰는 사번을 주식별자로 정했다.",
+        "주문상세를 확실히 구별하려고 주문번호 + 상품번호 + 수량 + 단가 + 주문일시 를 주식별자로 정했다.",
+        "부서명은 조직 개편 때 바뀌므로 부서코드를 주식별자로 정했다.",
+        "자연 키 조합이 길어 순번 인조식별자를 주식별자로 두고, 원래 조합에는 유일 제약을 걸었다."
       ],
       "correctIndex": 1,
-      "explanation": "주식별자는 업무에서 자주 이용되는 속성을 쓰고(①), 이름·명칭은 되도록 지정하지 않으며(③), 자주 쓰이지 않는다는 이유로 임의의 속성을 선정하지 않는다(④). 주식별자는 유일성을 만족하는 최소한의 속성으로 구성해야 하므로(최소성) 복합 식별자에 최대한 많은 속성을 넣는다는 ② 가 옳지 않다."
+      "explanation": "주식별자는 업무에서 자주 쓰는 속성으로, 바뀌지 않고, 이름처럼 서술하는 속성을 피하며, 여러 속성을 묶더라도 너무 많이 묶지 않는다. 주문상세는 주문번호 + 상품번호 로 이미 구별되는데 수량·단가·주문일시까지 넣으면 최소성을 어기고, 이 긴 키가 자식 테이블로 그대로 전파되어 조인과 관리가 무거워진다. 정답은 ②번이다. ① 은 자주 쓰는 속성, ③ 은 바뀌는 이름 대신 코드를 쓴 것이고, ④ 는 인조식별자를 쓰면서 원래 조합의 중복은 유일 제약으로 막은 알맞은 방법이다."
     },
     {
       "subject": "1과목",
       "number": 9,
-      "title": "주식별자가 지정되면 반드시 데이터 값이 존재해야 한다는 특성의 명칭은?",
+      "title": "아래 회원 테이블에서 이메일과 닉네임을 각각 주식별자로 쓸 수 없는 이유(어긴 특성)로 옳은 것은? (순서대로)",
       "options": [
-        "존재성",
-        "유일성",
-        "최소성",
-        "불변성"
+        "존재성, 유일성",
+        "유일성, 존재성",
+        "최소성, 불변성",
+        "존재성, 최소성"
       ],
       "correctIndex": 0,
-      "explanation": "주식별자가 지정되면 반드시 값이 들어 있어야 하며 NULL 을 허용하지 않는 특성은 존재성이다(①). 유일성(②)은 인스턴스를 유일하게 구분하는 성질, 최소성(③)은 유일성을 만족하는 최소한의 속성으로 구성하는 성질, 불변성(④)은 값이 자주 바뀌지 않는 성질이다."
+      "explanation": "주식별자는 모든 인스턴스를 구별해야 하고(유일성), 값이 반드시 있어야 하며(존재성), 필요한 속성만으로 이뤄지고(최소성), 값이 바뀌지 않아야 한다(불변성). 이메일은 M2 처럼 값이 없는 회원이 있어 존재성을 어기고, 닉네임은 M1 과 M3 이 둘 다 Kim 이라 유일성을 어긴다. 정답은 ①번이다. ② 는 두 칼럼의 문제를 바꿔 본 것이고, ③·④ 의 최소성은 칼럼 하나짜리 식별자에서는 문제가 되지 않는다.",
+      "references": [
+        {
+          "type": "table",
+          "caption": "회원",
+          "headers": [
+            "회원번호",
+            "이메일",
+            "닉네임"
+          ],
+          "rows": [
+            [
+              "M1",
+              "a@x.kr",
+              "Kim"
+            ],
+            [
+              "M2",
+              "NULL",
+              "Lee"
+            ],
+            [
+              "M3",
+              "c@x.kr",
+              "Kim"
+            ]
+          ]
+        }
+      ]
     },
     {
       "subject": "1과목",
@@ -155,15 +195,63 @@
     {
       "subject": "2과목",
       "number": 11,
-      "title": "트랜잭션에 대한 설명으로 적절하지 않은 것은?",
+      "title": "계좌 1번의 잔액이 100 으로 COMMIT 되어 있다. 두 세션이 아래 순서로 실행할 때 세션 B 가 조회한 ㉠, ㉡, ㉢ 의 값으로 옳은 것은? (기본 격리 수준)",
       "options": [
-        "하나의 트랜잭션에서 처리되는 데이터는 다른 트랜잭션에서도 변경할 수 있다.",
-        "트랜잭션은 논리적 작업 단위이다.",
-        "트랜잭션 종료 시점에 COMMIT 또는 ROLLBACK 이 수행된다.",
-        "트랜잭션은 원자성·일관성·고립성·지속성 (ACID) 을 보장해야 한다."
+        "100, 200, 200",
+        "200, 200, 300",
+        "100, 200, 300",
+        "200, 200, 200"
       ],
       "correctIndex": 0,
-      "explanation": "트랜잭션은 논리적 작업 단위이고(②), COMMIT 이나 ROLLBACK 으로 끝나며(③), 원자성·일관성·고립성·지속성(ACID)을 보장해야 한다(④). 고립성에 따라 한 트랜잭션이 처리 중인 데이터는 다른 트랜잭션이 끼어들어 변경할 수 없으므로(잠금) ① 이 옳지 않다."
+      "explanation": "트랜잭션의 고립성 때문에, 한 트랜잭션이 바꾸고 아직 COMMIT 하지 않은 값은 다른 트랜잭션에서 보이지 않는다. 그래서 ㉠ 은 COMMIT 전이라 기존 값 100 이다. A 가 COMMIT 하면 변경이 확정되어 ㉡ 은 200 이다. 그 뒤 A 가 300 으로 바꿨다가 ROLLBACK 했으므로 300 은 없던 일이 되고 ㉢ 은 200 이다. 정답은 ①번이다. ② 는 COMMIT 전 값도 보인다고 본 것, ③ 은 ROLLBACK 한 값이 남는다고 본 것, ④ 는 COMMIT 전 변경이 다른 세션에 보인다고 본 것이다.",
+      "references": [
+        {
+          "type": "table",
+          "caption": "실행 순서",
+          "headers": [
+            "순서",
+            "세션 A",
+            "세션 B"
+          ],
+          "rows": [
+            [
+              "1",
+              "UPDATE 잔액 = 200",
+              ""
+            ],
+            [
+              "2",
+              "",
+              "SELECT → ㉠"
+            ],
+            [
+              "3",
+              "COMMIT",
+              ""
+            ],
+            [
+              "4",
+              "",
+              "SELECT → ㉡"
+            ],
+            [
+              "5",
+              "UPDATE 잔액 = 300",
+              ""
+            ],
+            [
+              "6",
+              "ROLLBACK",
+              ""
+            ],
+            [
+              "7",
+              "",
+              "SELECT → ㉢"
+            ]
+          ]
+        }
+      ]
     },
     {
       "subject": "2과목",
@@ -209,28 +297,66 @@
     {
       "subject": "2과목",
       "number": 13,
-      "title": "Oracle ORDER BY 절에서 NULL 값이 가장 마지막에 출력되도록 하는 옵션은?",
+      "title": "아래 사원 테이블에 SQL 을 실행했을 때 출력되는 급여의 순서로 옳은 것은?",
       "options": [
-        "NVL(COL, 0) 으로 치환하여 정렬",
-        "NULLIF 로 치환하여 정렬",
-        "NULLS LAST 옵션을 사용",
-        "COALESCE 로 치환하여 정렬"
+        "NULL, 300, 200, 100",
+        "100, NULL, 300, 200",
+        "100, 300, NULL, 200",
+        "300, NULL, 200, 100"
       ],
       "correctIndex": 2,
-      "explanation": "Oracle 에서 ORDER BY 절에 NULLS LAST 를 명시하면 NULL 이 정렬 결과의 가장 마지막에 위치한다. ① NVL·② NULLIF·④ COALESCE 는 값을 치환하는 방식이라 정렬 의미가 달라질 수 있다."
+      "explanation": "NULLS FIRST·NULLS LAST 는 정렬 기준마다 따로 붙여 NULL 의 위치를 정한다. 먼저 부서 오름차순에 NULLS FIRST 라 부서가 NULL 인 행(급여 100)이 맨 앞, 그다음 A, B 순서다. A 안에서는 급여 내림차순인데 NULLS LAST 라 300 다음에 NULL 이 온다. 그래서 100, 300, NULL, 200 이다. 정답은 ③번이다. ① 은 급여만으로 정렬한 것, ② 는 NULLS LAST 를 놓쳐 내림차순에서 NULL 을 앞에 둔 것, ④ 는 부서의 NULLS FIRST 를 놓친 것이다.",
+      "references": [
+        {
+          "type": "table",
+          "caption": "사원",
+          "headers": [
+            "부서",
+            "급여"
+          ],
+          "rows": [
+            [
+              "A",
+              "NULL"
+            ],
+            [
+              "A",
+              "300"
+            ],
+            [
+              "B",
+              "200"
+            ],
+            [
+              "NULL",
+              "100"
+            ]
+          ]
+        },
+        {
+          "type": "sql",
+          "code": "SELECT 부서, 급여\nFROM   사원\nORDER  BY 부서 NULLS FIRST,\n          급여 DESC NULLS LAST;"
+        }
+      ]
     },
     {
       "subject": "2과목",
       "number": 14,
-      "title": "User1 이 생성한 테이블 user1.T1 을 User2 가 조회할 수 있도록 부여하는 명령은?",
+      "title": "user1 과 user2 가 아래 순서로 SQL 을 실행했다. user2 의 ㉠~㉣ 중 오류가 발생하는 것만 모두 고른 것은? (Oracle 기준, 동의어가 없는 상태에서 시작)",
       "options": [
-        "REVOKE SELECT ON user1.T1 FROM user2;",
-        "GRANT SELECT ON user1.T1 TO user2;",
-        "GRANT ALL ON user1.T1 TO SYS;",
-        "CONNECT user2 TO user1;"
+        "㉠",
+        "㉠, ㉢",
+        "㉢",
+        "㉠, ㉢, ㉣"
       ],
       "correctIndex": 1,
-      "explanation": "다른 사용자에게 객체 권한을 부여할 때는 GRANT 권한 ON 객체 TO 사용자 구문을 사용한다. ① REVOKE 는 권한 회수, ④ CONNECT 는 접속 명령으로 본 목적과 무관하다. ③ 은 SYS 에게 모든 권한을 주는 것이라 User2 와 관계가 없다."
+      "explanation": "다른 사용자의 테이블은 권한이 있어도 '소유자.테이블명' 으로 불러야 한다. 그래서 ㉠ 은 user2 자신의 T1 을 찾다가 테이블이 없다는 오류가 나고, ㉡ 은 조회된다. user1 이 준 권한은 SELECT 뿐이라 INSERT 하는 ㉢ 은 권한 부족 오류다. 공용 동의어 T1 을 만든 뒤에는 소유자 이름 없이 T1 만 써도 user1.T1 을 가리켜 ㉣ 은 조회된다. 정답은 ②번이다. ① 은 SELECT 권한으로 INSERT 도 된다고 본 것, ③ 은 소유자 이름 없이도 남의 테이블을 찾는다고 본 것, ④ 는 동의어가 있어도 소유자 이름이 필요하다고 본 것이다.",
+      "references": [
+        {
+          "type": "sql",
+          "code": "-- user1\nCREATE TABLE T1 (C NUMBER);\nGRANT SELECT ON T1 TO user2;\n\n-- user2\nSELECT * FROM T1;               -- ㉠\nSELECT * FROM user1.T1;         -- ㉡\nINSERT INTO user1.T1\nVALUES (1);                     -- ㉢\n\n-- DBA\nCREATE PUBLIC SYNONYM T1\n  FOR user1.T1;\n\n-- user2\nSELECT * FROM T1;               -- ㉣"
+        }
+      ]
     },
     {
       "subject": "2과목",
@@ -306,19 +432,41 @@
     {
       "subject": "2과목",
       "number": 17,
-      "title": "아래 데이터에 대해 나눗셈 연산 시 0 나누기 오류를 피하기 위해 사용되는 함수는?",
+      "title": "아래 판매 테이블에 대한 ㉠, ㉡, ㉢ 의 결과로 옳은 것은? ('㉠ / ㉡ 의 세 값 / ㉢' 순서)",
       "options": [
-        "NVL",
-        "NULLIF",
-        "COALESCE",
-        "DECODE"
+        "오류 / 25, 0, NULL / 8.33",
+        "오류 / 25, NULL, NULL / 25",
+        "25, 0, NULL / 25, NULL, NULL / 12.5",
+        "오류 / 25, NULL, NULL / 8.33"
       ],
       "correctIndex": 1,
-      "explanation": "NULLIF(COL2, 0) 은 COL2 가 0 이면 NULL, 아니면 COL2 를 반환한다. 숫자를 NULL 로 나누면 오류 대신 NULL 이 되므로 0 나누기 오류를 피할 수 있다(②). NVL(COL2, 0)(①)과 COALESCE(③)는 NULL 을 0 으로 바꿔 오히려 0 으로 나누게 되고, DECODE(④)는 인수가 최소 3개 필요해 DECODE(COL2, 0) 형태로는 오류가 난다.",
+      "explanation": "㉠ 은 둘째 행에서 50 / 0 을 계산하다 0 으로 나누기 오류가 나 전체 SQL 이 실패한다. ㉡ 의 NULLIF(수량, 0) 은 수량이 0 이면 NULL 을 돌려준다. 숫자를 NULL 로 나누면 오류 없이 NULL 이 되므로 결과는 25, NULL, NULL 이다(수량이 원래 NULL 인 셋째 행도 NULL). ㉢ 의 AVG 는 NULL 을 빼고 계산하므로 25 하나의 평균인 25 다. 정답은 ②번이다. ①·④ 는 NULL 로 나눈 결과를 0 으로 보거나 NULL 행까지 개수에 넣은 것, ③ 은 0 으로 나누면 0 이 나온다고 본 것이다.",
       "references": [
         {
+          "type": "table",
+          "caption": "판매",
+          "headers": [
+            "금액",
+            "수량"
+          ],
+          "rows": [
+            [
+              "100",
+              "4"
+            ],
+            [
+              "50",
+              "0"
+            ],
+            [
+              "30",
+              "NULL"
+            ]
+          ]
+        },
+        {
           "type": "sql",
-          "code": "SELECT COL1 / ( ? )(COL2, 0) FROM T;"
+          "code": "-- ㉠\nSELECT 금액 / 수량 FROM 판매;\n-- ㉡\nSELECT 금액 / NULLIF(수량, 0)\nFROM   판매;\n-- ㉢\nSELECT AVG(금액 / NULLIF(수량, 0))\nFROM   판매;"
         }
       ]
     },
@@ -768,15 +916,57 @@
     {
       "subject": "2과목",
       "number": 28,
-      "title": "'첫 행부터 현재 행까지의 누적합' 을 구하는 윈도우 절로 옳은 것은?",
+      "title": "아래 매출 테이블에 대한 SQL 에서 (A, 2월) 행과 (B, 3월) 행의 누적 값으로 옳은 것은?",
       "options": [
-        "ROWS UNBOUNDED PRECEDING",
-        "RANGE UNBOUNDED PRECEDING",
-        "ROWS BETWEEN UNBOUNDED PRECEDING AND 1 PRECEDING",
-        "RANGE BETWEEN UNBOUNDED PRECEDING AND 1 PRECEDING"
+        "30, 45",
+        "30, 75",
+        "20, 25",
+        "30, 40"
       ],
       "correctIndex": 0,
-      "explanation": "ROWS UNBOUNDED PRECEDING 은 파티션의 첫 행부터 현재 행까지 행 단위로 누적합을 계산한다. RANGE 옵션은 값 기준이므로 동일 정렬 값이 함께 묶여 결과가 달라질 수 있다. ② RANGE 는 같은 값을 한꺼번에 묶어 행 단위 누적이 아니고, ③·④ 는 끝이 1 PRECEDING 이라 현재 행이 빠진다."
+      "explanation": "PARTITION BY 부서 라 누적 합은 부서마다 처음부터 다시 센다. ROWS UNBOUNDED PRECEDING 은 '파티션 첫 행부터 현재 행까지' 다. A 의 2월은 10 + 20 = 30, B 의 3월은 B 만 더해 5 + 15 + 25 = 45 다. 정답은 ①번이다. ② 는 파티션을 무시하고 A 의 값까지 이어서 더한 것, ③ 은 누적이 아닌 그 행의 금액만 본 것, ④ 는 B 3월에서 바로 앞 행과 현재 행만 더한 것이다.",
+      "references": [
+        {
+          "type": "table",
+          "caption": "매출",
+          "headers": [
+            "부서",
+            "월",
+            "금액"
+          ],
+          "rows": [
+            [
+              "A",
+              "1",
+              "10"
+            ],
+            [
+              "A",
+              "2",
+              "20"
+            ],
+            [
+              "B",
+              "1",
+              "5"
+            ],
+            [
+              "B",
+              "2",
+              "15"
+            ],
+            [
+              "B",
+              "3",
+              "25"
+            ]
+          ]
+        },
+        {
+          "type": "sql",
+          "code": "SELECT 부서, 월,\n       SUM(금액) OVER (\n         PARTITION BY 부서\n         ORDER BY 월\n         ROWS UNBOUNDED PRECEDING\n       ) AS 누적\nFROM   매출;"
+        }
+      ]
     },
     {
       "subject": "2과목",
@@ -917,15 +1107,21 @@
     {
       "subject": "2과목",
       "number": 33,
-      "title": "뷰(VIEW) 에 대한 설명으로 옳지 않은 것은?",
+      "title": "T 테이블에 C 값 5, 15, 25 가 있을 때 아래 SQL 을 순서대로 실행했다. 마지막 두 SELECT 의 결과로 옳은 것은?",
       "options": [
-        "뷰는 논리적 테이블이다.",
-        "뷰는 참조 테이블의 데이터를 조회할 수 있다.",
-        "뷰는 참조 테이블의 구조 변경에 영향을 받는다.",
-        "뷰에는 물리적인 데이터가 저장된다."
+        "3, 15",
+        "2, 45",
+        "0, 75",
+        "0, 15"
       ],
       "correctIndex": 3,
-      "explanation": "뷰는 SELECT 문에 이름을 붙여 저장한 논리적(가상) 테이블이라 데이터를 따로 저장하지 않는다. 조회할 때마다 참조 테이블을 읽으므로 ② 가 맞고, 참조 테이블의 구조가 바뀌면(컬럼 삭제 등) 뷰도 영향을 받으므로 ③ 도 맞다. 물리적인 데이터가 저장된다는 ④ 가 옳지 않다."
+      "explanation": "뷰는 데이터를 따로 저장하지 않고, 조회할 때마다 원래 테이블에서 조건에 맞는 행을 읽는다. INSERT 뒤 V 로 보이는 행은 15, 25, 30 이고, 단순한 뷰라 UPDATE V 는 T 의 이 세 행을 실제로 고쳐 -5, 5, 10 이 된다. 이제 T 는 5, -5, 5, 10 이라 C > 10 인 행이 없어 COUNT 는 0, 합계는 15 다. 정답은 ④번이다. ① 은 뷰가 처음 만든 순간의 행을 들고 있다고 본 것, ② 는 뷰를 고쳐도 원래 테이블은 그대로라고 보고 새 행도 빠진다고 본 것, ③ 은 UPDATE 가 원래 테이블에 반영되지 않는다고 본 것이다.",
+      "references": [
+        {
+          "type": "sql",
+          "code": "CREATE VIEW V AS\n  SELECT C FROM T WHERE C > 10;\n\nINSERT INTO T VALUES (30);\nUPDATE V SET C = C - 20;\n\nSELECT COUNT(*) FROM V;\nSELECT SUM(C)   FROM T;"
+        }
+      ]
     },
     {
       "subject": "2과목",
@@ -1117,15 +1313,21 @@
     {
       "subject": "2과목",
       "number": 38,
-      "title": "Oracle 에서 COL 에 NULL 이 포함되어 있을 때, 아래 ORDER BY 절 중 NULL 의 정렬 위치가 나머지와 다른 것은?",
+      "title": "COL 값이 3, NULL, 1 인 T 테이블에 대한 SQL ㉠~㉣ 에서 첫 번째로 출력되는 값으로 옳은 것은? (Oracle 기준)",
       "options": [
-        "ORDER BY COL",
-        "ORDER BY COL DESC",
-        "ORDER BY COL ASC",
-        "ORDER BY COL NULLS LAST"
+        "1, 3, 3, NULL",
+        "1, NULL, 3, NULL",
+        "NULL, NULL, 3, 1",
+        "1, NULL, 1, NULL"
       ],
       "correctIndex": 1,
-      "explanation": "Oracle 은 오름차순 정렬에서 NULL 을 가장 마지막에(NULLS LAST), 내림차순 정렬에서 가장 앞에(NULLS FIRST) 배치한다. ①·③ 은 오름차순이고 ④ 는 NULLS LAST 를 명시했으므로 모두 NULL 이 마지막에 오지만, ② 는 내림차순이라 NULL 이 가장 앞에 오므로 정렬 위치가 다르다."
+      "explanation": "Oracle 은 정렬할 때 NULL 을 가장 큰 값으로 본다. 그래서 오름차순 ㉠ 은 1 이 먼저(NULL 은 맨 뒤), 내림차순 ㉡ 은 NULL 이 먼저다. ㉢ 은 내림차순이지만 NULLS LAST 로 NULL 을 뒤로 보내 3 이 먼저다. ㉣ 은 NULL 을 0 으로 바꾼 값으로 정렬하므로 0 으로 취급된 NULL 행이 가장 먼저 나오고, 출력되는 값은 원래 칼럼이라 NULL 이다. 정답은 ②번이다. ① 은 DESC 에서도 NULL 이 뒤로 간다고 본 것, ③ 은 ASC 에서 NULL 이 먼저라고 본 것, ④ 는 NULLS LAST 를 오름차순으로 바꾸는 옵션으로 본 것이다.",
+      "references": [
+        {
+          "type": "sql",
+          "code": "-- ㉠\nSELECT COL FROM T ORDER BY COL;\n-- ㉡\nSELECT COL FROM T ORDER BY COL DESC;\n-- ㉢\nSELECT COL FROM T\nORDER  BY COL DESC NULLS LAST;\n-- ㉣\nSELECT COL FROM T\nORDER  BY NVL(COL, 0);"
+        }
+      ]
     },
     {
       "subject": "2과목",
@@ -1595,15 +1797,21 @@
     {
       "subject": "2과목",
       "number": 49,
-      "title": "데이터베이스 접근 권한과 객체 접근 권한을 부여하는 언어의 종류는?",
+      "title": "사용자 A 가 자기 테이블 T 에 대해 아래 명령을 차례로 실행했다. 마지막 REVOKE 뒤에 B 와 C 가 T 를 조회할 수 있는지로 옳은 것은? (Oracle 기준)",
       "options": [
-        "DDL (Data Definition Language)",
-        "DML (Data Manipulation Language)",
-        "TCL (Transaction Control Language)",
-        "DCL (Data Control Language)"
+        "B 는 불가, C 는 가능",
+        "B 는 가능, C 는 불가",
+        "B, C 모두 가능",
+        "B, C 모두 불가"
       ],
       "correctIndex": 3,
-      "explanation": "GRANT·REVOKE 로 데이터베이스와 객체에 대한 접근 권한을 주고 회수하는 언어는 DCL 이다(④). DDL(①)은 CREATE·ALTER·DROP 등 구조 정의, DML(②)은 SELECT·INSERT·UPDATE·DELETE, TCL(③)은 COMMIT·ROLLBACK·SAVEPOINT 다."
+      "explanation": "권한을 주고 빼앗는 GRANT·REVOKE 는 DCL 이다. WITH GRANT OPTION 으로 받은 객체 권한은 받은 사람이 다시 남에게 줄 수 있다. Oracle 에서 이렇게 받은 객체 권한을 회수하면, 그 사람이 다른 사용자에게 준 권한도 함께 회수된다. 그래서 B 와 B 에게서 받은 C 모두 T 를 조회할 수 없다. 정답은 ④번이다. 시스템 권한을 WITH ADMIN OPTION 으로 주고받은 경우에는 회수가 이어지지 않아 C 의 권한이 남는다는 점과 구분해야 한다. ① 은 객체 권한도 회수가 이어지지 않는다고 본 것, ②·③ 은 REVOKE 가 B 에게 적용되지 않는다고 본 것이다.",
+      "references": [
+        {
+          "type": "sql",
+          "code": "-- A 가 실행\nGRANT SELECT ON T TO B\n  WITH GRANT OPTION;\n-- B 가 실행\nGRANT SELECT ON A.T TO C;\n-- A 가 실행\nREVOKE SELECT ON T FROM B;"
+        }
+      ]
     },
     {
       "subject": "2과목",

@@ -35,20 +35,20 @@ export const ROUND_60: QuizQuestion[] = [
     "round": 60,
     "subject": "1과목",
     "number": 2,
-    "title": "아래 [직원] 엔터티의 속성 중 성격이 나머지와 다른 것은?",
+    "title": "아래 직원 엔터티의 속성 중 값을 직접 입력하지 않고 다른 속성으로 계산해 얻는 것만 모두 고른 것은?",
     "options": [
-      "연령",
-      "사번",
-      "생년월일",
-      "부서코드"
+      "연령, 근속연수, 연봉",
+      "연령, 근속연수",
+      "연령, 사번, 부서코드",
+      "근속연수, 연봉, 입사일"
     ],
     "correctIndex": 0,
-    "explanation": "연령은 생년월일로 계산해서 얻는 파생 속성이다(①). ② 사번·③ 생년월일·④ 부서코드는 계산 없이 값을 직접 입력해 관리하는 속성이다(사번·부서코드는 코드·일련번호라 설계 속성, 생년월일은 기본 속성). 다른 속성에서 계산되는 것은 연령뿐이라 성격이 다르다.",
+    "explanation": "파생 속성은 다른 속성으로 계산하거나 변형해 얻는 속성이다. 연령은 생년월일, 근속연수는 입사일, 연봉은 기본급(과 상여)으로 계산된다. 정답은 ①번이다. ② 는 연봉의 계산식을 놓친 것이다. ③ 의 사번·부서코드는 업무 규칙에 따라 붙인 설계 속성이고, 부서코드는 표에 있지도 않다. ④ 의 입사일은 직접 입력하는 기본 속성이다. 연령·근속연수처럼 시간이 지나면 저절로 달라지는 값은 저장해 두면 곧 틀어지므로, 보통 조회할 때 계산한다.",
     "_source": "authored",
     "references": [
       {
         "type": "table",
-        "caption": "직원 엔터티",
+        "caption": "직원",
         "headers": [
           "속성명",
           "예시 값"
@@ -67,10 +67,26 @@ export const ROUND_60: QuizQuestion[] = [
             "35"
           ],
           [
-            "부서코드",
-            "D10"
+            "입사일",
+            "2018-03-02"
+          ],
+          [
+            "근속연수",
+            "8"
+          ],
+          [
+            "기본급",
+            "300"
+          ],
+          [
+            "연봉",
+            "4,200"
           ]
         ]
+      },
+      {
+        "type": "text",
+        "content": "사번은 입사 때 부여한다. 기본급은 월 단위(만 원)이고, 연봉은 기본급 × 12 에 상여 600 을 더한 값이다."
       }
     ]
   },
@@ -81,16 +97,44 @@ export const ROUND_60: QuizQuestion[] = [
     "round": 60,
     "subject": "1과목",
     "number": 3,
-    "title": "엔터티·인스턴스·속성에 대한 설명 중 옳지 않은 것은?",
+    "title": "아래 회원 엔터티에 대한 설명으로 옳지 않은 것은?",
     "options": [
-      "엔터티는 두 개 이상의 인스턴스를 가진다.",
-      "한 인스턴스에서 하나의 속성은 하나의 값만 가진다.",
-      "인스턴스는 두 가지의 속성값을 가진다.",
-      "하나의 엔터티는 두 개 이상의 속성을 가진다."
+      "회원 엔터티의 인스턴스는 3개다.",
+      "M2 인스턴스에서 이름 속성은 '이', 등급 속성은 'Gold' 하나씩의 값을 가진다.",
+      "등급 칸에 'Gold, VIP' 처럼 두 값을 함께 넣어도 하나의 속성값으로 본다.",
+      "속성이 3개라 '엔터티는 속성을 2개 이상 가진다' 는 조건을 만족한다."
     ],
     "correctIndex": 2,
-    "explanation": "한 개의 엔터티는 두 개 이상의 인스턴스와 두 개 이상의 속성을 가지며(①④), 한 개의 인스턴스는 각 속성에 대해 하나의 속성값만 가진다(②, 원자값). 인스턴스가 가지는 속성값의 개수는 엔터티에 정의한 속성 수에 따라 달라지므로 \"두 가지\" 로 고정할 수 없다(③ 이 옳지 않음).",
-    "_source": "authored"
+    "explanation": "엔터티는 인스턴스의 집합이고, 인스턴스(행)마다 각 속성은 값을 하나만 가진다. 이 표는 인스턴스 3개(①), 속성 3개(④)이고, M2 의 각 속성도 값이 하나씩이다(②). 등급 칸에 'Gold, VIP' 를 함께 넣으면 한 속성에 값이 둘이 되어 '속성 하나에 값 하나' 원칙을 어기고 제1정규형도 깨진다. 등급이 여러 개라면 회원등급처럼 따로 떼어 내야 한다. 그래서 ③ 이 옳지 않다. 정답은 ③번이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "caption": "회원",
+        "headers": [
+          "회원번호",
+          "이름",
+          "등급"
+        ],
+        "rows": [
+          [
+            "M1",
+            "김",
+            "Silver"
+          ],
+          [
+            "M2",
+            "이",
+            "Gold"
+          ],
+          [
+            "M3",
+            "박",
+            "Silver"
+          ]
+        ]
+      }
+    ]
   },
   {
     "id": 10003,
@@ -149,16 +193,23 @@ export const ROUND_60: QuizQuestion[] = [
     "round": 60,
     "subject": "1과목",
     "number": 6,
-    "title": "비식별자 관계에 대한 설명 중 옳지 않은 것은?",
+    "title": "아래 ERD(실선 = 식별 관계, 점선 = 비식별 관계)에 대한 설명으로 옳은 것은? ('주문상세의 기본키 / 주문.고객번호 의 NULL 허용' 순서)",
     "options": [
-      "부모의 기본키를 자식의 일반 속성으로 상속한다.",
-      "부모 엔터티의 생성과 자식 엔터티의 생성 시점이 분리될 수 있다.",
-      "주식별자와 식별자가 같다.",
-      "자식 엔터티에서 독립된 주식별자를 정의할 수 있다."
+      "상세번호 / NULL 불가",
+      "주문번호 + 상세번호 / NULL 불가",
+      "주문번호 + 상세번호 / NULL 가능",
+      "상세번호 / NULL 가능"
     ],
     "correctIndex": 2,
-    "explanation": "비식별자 관계는 부모의 기본키를 자식의 일반 속성(외래키)으로만 상속하므로 자식은 별도의 주식별자를 정의한다. 따라서 부모 식별자가 곧 자식 주식별자가 되는 식별자 관계와 달리 '주식별자와 식별자가 같다'는 설명은 옳지 않다. ① 부모 키를 일반 속성으로 상속하고, ② 부모와 자식의 생성 시점이 분리될 수 있으며, ④ 자식이 독립된 주식별자를 가지는 것은 모두 비식별자 관계의 특징이다.",
-    "_source": "authored"
+    "explanation": "식별 관계(실선)는 부모의 기본키가 자식의 기본키 일부가 된다. 주문 → 주문상세 가 식별 관계라 주문상세의 기본키는 주문번호 + 상세번호 다. 비식별 관계(점선)는 부모의 기본키가 자식의 일반 칼럼(외래키)으로만 들어간다. 고객 → 주문 은 비식별이면서 고객 쪽이 선택(|o) 이라, 고객 없이도 주문이 생길 수 있어 고객번호에 NULL 을 허용한다. 정답은 ③번이다. ① 은 식별 관계에서도 부모 키가 기본키에 들어가지 않는다고 보고 선택 관계를 놓친 것, ② 는 비식별·선택 관계의 외래키도 반드시 값이 있어야 한다고 본 것, ④ 는 식별 관계를 놓친 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "erd",
+        "caption": "고객·주문·주문상세 ERD",
+        "mermaid": "erDiagram\n    고객 |o..o{ 주문 : \"주문함\"\n    주문 ||--|{ 주문상세 : \"포함\"\n    고객 {\n        string 고객번호 PK\n        string 이름\n    }\n    주문 {\n        string 주문번호 PK\n        string 고객번호 FK\n        date 주문일\n    }\n    주문상세 {\n        string 주문번호 PK, FK\n        int 상세번호 PK\n        int 수량\n    }"
+      }
+    ]
   },
   {
     "id": 10006,
@@ -167,15 +218,15 @@ export const ROUND_60: QuizQuestion[] = [
     "round": 60,
     "subject": "1과목",
     "number": 7,
-    "title": "피터 첸(Peter Chen) ERD 표기법에서 '관계(Relationship)'를 나타내는 도형은?",
+    "title": "피터 첸(Peter Chen) 표기법에서 ㉠ 엔터티, ㉡ 관계, ㉢ 속성, ㉣ 다중값 속성을 나타내는 도형으로 옳은 것은? (순서대로)",
     "options": [
-      "□",
-      "△",
-      "◇",
-      "○"
+      "사각형, 타원, 마름모, 이중 타원",
+      "마름모, 사각형, 타원, 점선 타원",
+      "사각형, 마름모, 타원, 이중 타원",
+      "사각형, 마름모, 이중 타원, 타원"
     ],
     "correctIndex": 2,
-    "explanation": "피터 첸 표기법은 엔터티를 사각형(□), 속성을 타원(○), 관계를 마름모(◇)로 표현하며, 주식별자 속성에는 밑줄을 긋는다. 관계는 두 엔터티 사이에 마름모로 배치되어 엔터티 간 연관을 명시한다. ① 사각형은 엔터티, ④ 타원은 속성을 나타내고, ② 삼각형은 피터 첸 표기법에서 쓰지 않는 도형이다.",
+    "explanation": "첸 표기법은 엔터티를 사각형, 관계를 마름모, 속성을 타원으로 그린다. 값이 여러 개일 수 있는 다중값 속성은 이중 타원, 다른 속성으로 계산되는 파생 속성은 점선 타원, 식별자 속성은 이름에 밑줄을 긋는다. 약한 엔터티는 이중 사각형이다. 정답은 ③번이다. ① 은 관계와 속성을 바꿔 본 것, ② 는 엔터티와 관계를 바꾸고 다중값 속성을 파생 속성 기호로 본 것, ④ 는 일반 속성과 다중값 속성을 바꿔 본 것이다.",
     "_source": "authored"
   },
   {
@@ -221,15 +272,15 @@ export const ROUND_60: QuizQuestion[] = [
     "round": 60,
     "subject": "1과목",
     "number": 10,
-    "title": "인조 식별자와 본질 식별자에 대한 설명 중 옳지 않은 것은?",
+    "title": "주문 엔터티는 '고객번호 + 주문일시' 로 구별되지만, 관리 편의를 위해 '주문번호' 를 새로 만들어 주식별자로 쓴다. 이에 대한 설명으로 옳지 않은 것은?",
     "options": [
-      "본질 식별자는 업무 수행 과정에서 쉽게 파악된다.",
-      "본질 식별자는 어떠한 업무 행위 없이도 부여될 수 있다.",
-      "인조 식별자는 본질 식별자가 존재함에도 관리 편의를 위해 별도로 부여될 수 있다.",
-      "본질 식별자는 업무 규칙 변화에 따라 값이 변경될 수 있다."
+      "고객번호 + 주문일시 는 주문이라는 업무 행위가 일어나야 생기는 본질식별자다.",
+      "본질식별자는 업무 행위가 없어도 시스템이 미리 만들어 둘 수 있다.",
+      "주문번호를 주식별자로 쓰면 주문상세 같은 자식 엔터티로 넘어가는 키가 짧아진다.",
+      "주문번호만 주식별자로 두면 같은 주문이 두 번 저장되는 것을 막지 못하므로, 고객번호 + 주문일시 에 유일 제약을 함께 둔다."
     ],
     "correctIndex": 1,
-    "explanation": "본질 식별자는 업무 행위를 통해 그 값이 결정되는 속성이므로, 업무 행위가 전혀 없는 상태에서 부여되는 값은 본질 식별자로 적절하지 않다. 업무 행위 없이 부여되는 것은 인조 식별자의 특성이다. ① 본질 식별자는 업무에서 자연스럽게 생기는 값이라 쉽게 파악되고, ③ 본질 식별자가 있어도 관리 편의를 위해 인조 식별자를 따로 둘 수 있으며, ④ 업무 규칙이 바뀌면 본질 식별자의 값도 바뀔 수 있다.",
+    "explanation": "본질식별자는 업무에 의해 만들어지는 식별자라, 주문이 일어나야 고객번호 + 주문일시 값이 생긴다(①). 업무 행위 없이 미리 만들어 둘 수 있는 것은 시스템이 붙이는 인조식별자 쪽이므로 ② 가 옳지 않다. 정답은 ②번이다. 인조식별자는 키가 짧아 자식으로 전파되는 칼럼이 줄어드는 장점이 있다(③). 대신 업무상 같은 주문이 번호만 다르게 두 번 들어가도 막지 못하므로, 원래 조합에 유일 제약을 따로 걸어야 한다(④).",
     "_source": "authored"
   },
   {
@@ -239,20 +290,56 @@ export const ROUND_60: QuizQuestion[] = [
     "round": 60,
     "subject": "2과목",
     "number": 11,
-    "title": "다음 계층형 질의에서 사용하는 가상 컬럼 및 연산자 중, 전제 조건 없이 단독으로 동작하지 않거나 특정 옵션이 선행되어야 유효한 값을 반환하는 것은 무엇인가?",
+    "title": "아래 조직 테이블에 대한 계층형 SQL 의 출력 순서(이름)로 옳은 것은?",
     "options": [
-      "가",
-      "나, 다",
-      "나, 다, 라",
-      "가, 나, 다, 라"
+      "가, 다, 라, 나, 마",
+      "마, 라, 다, 나, 가",
+      "나, 마, 가, 다, 라",
+      "나, 마, 가, 라, 다"
     ],
     "correctIndex": 3,
-    "explanation": "네 가지 모두 계층형 질의(START WITH … CONNECT BY) 안에서만 의미 있는 값을 돌려준다. LEVEL 은 계층의 깊이, CONNECT_BY_ISLEAF 는 리프 여부, CONNECT_BY_ROOT 는 루트 값으로 CONNECT BY 가 있어야 하고, CONNECT_BY_ISCYCLE 은 여기에 더해 CONNECT BY NOCYCLE 옵션이 있어야 쓸 수 있다. 그래서 가, 나, 다, 라 모두 해당한다(④). ① 은 나·다·라를, ② 는 가·라를, ③ 은 가(LEVEL)를 빠뜨렸다.",
+    "explanation": "ORDER SIBLINGS BY 는 계층 구조(부모 바로 아래 자식)를 지킨 채, 같은 부모를 둔 형제끼리만 정렬한다. 최상위 형제 가·나를 내림차순하면 나가 먼저이고, 나 아래 마가 이어진다. 그다음 가, 그리고 가의 자식 다·라를 내림차순해 라, 다 순이다. 결과는 나, 마, 가, 라, 다 다. CONNECT_BY_ROOT 이름 은 각 행이 속한 최상위 행의 이름이라 마는 '나', 라·다는 '가' 가 된다. 정답은 ④번이다. ① 은 오름차순으로 본 것, ② 는 계층을 무시하고 ORDER BY 처럼 전체를 정렬한 것, ③ 은 최상위 형제만 정렬하고 자식은 그대로 둔 것이다.",
     "_source": "authored",
     "references": [
       {
-        "type": "text",
-        "content": "* 가. LEVEL\n* 나. ISLEAF\n* 다. ISCYCLE\n* 라. CONNECT_BY_ROOT"
+        "type": "table",
+        "caption": "조직",
+        "headers": [
+          "ID",
+          "상위ID",
+          "이름"
+        ],
+        "rows": [
+          [
+            "1",
+            "NULL",
+            "가"
+          ],
+          [
+            "2",
+            "NULL",
+            "나"
+          ],
+          [
+            "3",
+            "1",
+            "다"
+          ],
+          [
+            "4",
+            "1",
+            "라"
+          ],
+          [
+            "5",
+            "2",
+            "마"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT 이름,\n       CONNECT_BY_ROOT 이름 AS 루트\nFROM   조직\nSTART  WITH 상위ID IS NULL\nCONNECT BY PRIOR ID = 상위ID\nORDER  SIBLINGS BY 이름 DESC;"
       }
     ]
   },
@@ -661,16 +748,22 @@ export const ROUND_60: QuizQuestion[] = [
     "round": 60,
     "subject": "2과목",
     "number": 18,
-    "title": "사용자 R1이 테이블을 생성하고 접속을 종료한 뒤, 다른 사용자 R2가 접속하여 R1의 테이블을 조회하려 하자 오류가 발생하였다. 해결 방안으로 가장 적절한 것은?",
+    "title": "사용자 R1 이 자기 스키마에 테이블 T 를 만들었다. 이어서 아래 순서로 실행할 때 ㉡, ㉢, ㉣ 의 결과로 옳은 것은? (Oracle 기준, R2 스키마에는 T 가 없다)",
     "options": [
-      "R2가 R1의 계정으로 재로그인하여 조회한다.",
-      "GRANT로 SELECT 권한을 부여한다.",
-      "R2 계정에서 SYNONYM만 생성하면 자동으로 접근이 허용된다.",
-      "R2가 관리자 권한으로 테이블을 강제 복제한다."
+      "성공, 성공, 성공",
+      "오류, 성공, 성공",
+      "오류, 오류, 성공",
+      "성공, 성공, 오류"
     ],
     "correctIndex": 1,
-    "explanation": "다른 사용자의 객체에 접근하려면 객체 소유자가 GRANT 명령으로 SELECT 권한을 부여해야 한다. ①은 보안상 부적절하고, ③ SYNONYM은 객체에 대한 별칭일 뿐 권한을 자동 부여하지 않으며, ④ 강제 복제는 정상적인 권한 관리 방식이 아니다.",
-    "_source": "authored"
+    "explanation": "다른 사용자의 테이블은 소유자가 GRANT 로 권한을 줘야 쓸 수 있다. 그런데 권한을 받아도 스키마 이름 없이 T 라고만 쓰면 R2 자신의 스키마에서 T 를 찾기 때문에 ㉡ 은 여전히 오류다. ㉢ 처럼 R1.T 로 소유자를 붙이면 권한이 있어 성공한다. R2 가 R1.T 를 가리키는 시노님 T 를 만들면, ㉣ 처럼 T 라고만 써도 R1.T 로 연결되어 성공한다. 정답은 ②번이다. ① 은 권한만 받으면 이름만으로 찾을 수 있다고 본 것, ③ 은 R1.T 로도 안 된다고 본 것, ④ 는 시노님이 권한 없이 동작한다거나 권한을 없앤다고 본 것이다. 시노님은 이름을 대신할 뿐 권한을 주지는 않는다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "-- ㉠ R2 가 실행 → 오류\nSELECT * FROM T;\n-- R1 이 실행\nGRANT SELECT ON T TO R2;\n-- ㉡ R2 가 실행\nSELECT * FROM T;\n-- ㉢ R2 가 실행\nSELECT * FROM R1.T;\n-- R2 가 실행\nCREATE SYNONYM T FOR R1.T;\n-- ㉣ R2 가 실행\nSELECT * FROM T;"
+      }
+    ]
   },
   {
     "id": 10018,
@@ -1402,16 +1495,22 @@ export const ROUND_60: QuizQuestion[] = [
     "round": 60,
     "subject": "2과목",
     "number": 34,
-    "title": "다음 집합 연산자 중 중복을 허용하는 것은?",
+    "title": "아래 SQL ㉠~㉤ 중 오류가 발생하는 것만 모두 고른 것은? (Oracle 기준)",
     "options": [
-      "UNION",
-      "UNION ALL",
-      "INTERSECT",
-      "EXCEPT"
+      "㉣",
+      "㉡, ㉣, ㉤",
+      "㉡, ㉣",
+      "㉣, ㉤"
     ],
     "correctIndex": 1,
-    "explanation": "UNION ALL은 두 결과 집합을 그대로 합치며 중복 행을 제거하지 않고 모두 반환한다. 반면 ① UNION·③ INTERSECT·④ EXCEPT(MINUS)는 모두 내부적으로 중복 제거(DISTINCT)를 수행한다.",
-    "_source": "authored"
+    "explanation": "집합 연산 결과의 칼럼 이름은 첫 번째 SELECT 에서 정해진다. 그래서 ORDER BY X(㉠)와 위치 번호 ORDER BY 1(㉢)은 되지만, 두 번째 SELECT 의 별칭 Y 로 정렬하는 ㉡ 은 오류다. 집합 연산으로 묶는 SELECT 들은 칼럼 수가 같아야 해서 ㉣ 은 오류이고, ORDER BY 는 맨 마지막에 한 번만 쓸 수 있어 중간에 넣은 ㉤ 도 오류다. 정답은 ②번이다. ① 은 칼럼 수만 본 것, ③ 은 ORDER BY 위치 규칙을 놓친 것, ④ 는 아무 SELECT 의 별칭으로나 정렬할 수 있다고 본 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT 1 AS X FROM DUAL\nUNION ALL\nSELECT 2 AS Y FROM DUAL\nORDER  BY X;                    -- ㉠\n\nSELECT 1 AS X FROM DUAL\nUNION ALL\nSELECT 2 AS Y FROM DUAL\nORDER  BY Y;                    -- ㉡\n\nSELECT 1 AS X FROM DUAL\nUNION ALL\nSELECT 2 AS Y FROM DUAL\nORDER  BY 1;                    -- ㉢\n\nSELECT 1, 2 FROM DUAL\nUNION ALL\nSELECT 3 FROM DUAL;             -- ㉣\n\nSELECT 1 FROM DUAL ORDER BY 1\nUNION ALL\nSELECT 2 FROM DUAL;             -- ㉤"
+      }
+    ]
   },
   {
     "id": 10034,
@@ -1486,16 +1585,22 @@ export const ROUND_60: QuizQuestion[] = [
     "round": 60,
     "subject": "2과목",
     "number": 36,
-    "title": "DML/DDL/DCL 구분에 대한 설명 중 잘못된 것은?",
+    "title": "아래 명령 ㉠~㉤ 중 Oracle 에서 실행하는 순간 그 앞에 하던 작업까지 자동으로 COMMIT 되는 것만 모두 고른 것은?",
     "options": [
-      "TRUNCATE는 DML이다.",
-      "INSERT, UPDATE, DELETE, MERGE는 DML이다.",
-      "CREATE, ALTER, DROP은 DDL이다.",
-      "GRANT, REVOKE는 DCL이다."
+      "㉠, ㉢, ㉣",
+      "㉠, ㉢",
+      "㉠, ㉡, ㉢",
+      "㉢, ㉣, ㉤"
     ],
     "correctIndex": 0,
-    "explanation": "TRUNCATE 는 테이블의 모든 행을 삭제하면서 저장 공간까지 초기화하는 명령으로 DDL 에 속한다. 행 단위로 삭제하고 롤백할 수 있는 DELETE 와 달리 자동 커밋되는 점이 DDL 의 특징이다. ②(DML), ③(DDL), ④(DCL)는 옳게 분류했다.",
-    "_source": "authored"
+    "explanation": "Oracle 에서 DDL 과 DCL 은 실행 전후로 자동 COMMIT 된다. TRUNCATE(㉠)와 RENAME(㉢)은 DDL, GRANT(㉣)는 DCL 이라 실행하는 순간 앞의 작업도 함께 확정된다. MERGE(㉡)는 DML 이라 COMMIT 이나 ROLLBACK 을 해야 끝나고, SAVEPOINT(㉤)는 트랜잭션 안의 지점을 표시하는 TCL 이라 아무것도 확정하지 않는다. 정답은 ①번이다. ② 는 DCL 도 자동 COMMIT 된다는 점을 놓친 것, ③ 은 행을 지우고 바꾸는 MERGE 를 DDL 로 본 것, ④ 는 TRUNCATE 를 DML 로 보고 SAVEPOINT 가 저장한다고 본 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "text",
+        "content": "㉠ TRUNCATE TABLE 로그\n㉡ MERGE INTO 재고 USING 입고 …\n㉢ RENAME 주문 TO 주문_old\n㉣ GRANT SELECT ON 주문 TO U1\n㉤ SAVEPOINT S1"
+      }
+    ]
   },
   {
     "id": 10036,
@@ -1752,16 +1857,22 @@ export const ROUND_60: QuizQuestion[] = [
     "round": 60,
     "subject": "2과목",
     "number": 42,
-    "title": "다음 SELECT 문 중 반환 값이 나머지와 다른 것은?",
+    "title": "아래 SQL 의 결과(A, B, C, D)로 옳은 것은? (Oracle 기준)",
     "options": [
-      "SELECT 1 + NULL FROM DUAL;",
-      "SELECT 'X' FROM DUAL;",
-      "SELECT 1 * NULL FROM DUAL;",
-      "SELECT NULL FROM DUAL;"
+      "NULL, NULL, 1, 0",
+      "NULL, X, 1, 0",
+      "1, X, 1, 1",
+      "NULL, X, NULL, NULL"
     ],
     "correctIndex": 1,
-    "explanation": "NULL 이 포함된 산술 연산은 결과가 NULL 이다. 1 + NULL(①), 1 * NULL(③)은 NULL 이고, SELECT NULL(④)도 NULL 이다. ② 만 문자 상수 'X' 를 반환하므로 결과가 다르다.",
-    "_source": "authored"
+    "explanation": "NULL 과의 산술 연산은 결과가 NULL 이라 A 는 NULL 이다. Oracle 의 CONCAT(과 ||)은 NULL 을 빈 문자열처럼 이어 붙여 B 는 'X' 다. C 는 NVL 이 NULL 을 먼저 0 으로 바꾼 뒤 1 을 더해 1 이다. D 의 COUNT(NULL) 은 셀 값이 NULL 하나뿐이라 0 이다(COUNT 는 NULL 을 세지 않고, 결과가 NULL 이 되지도 않는다). 정답은 ②번이다. ① 은 문자열 연결도 NULL 이 된다고 본 것, ③ 은 NULL 을 0 처럼 계산한 것, ④ 는 NVL 뒤의 덧셈과 COUNT 도 NULL 이 된다고 본 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT 1 + NULL              AS A,\n       CONCAT('X', NULL)     AS B,\n       NVL(NULL, 0) + 1      AS C,\n       (SELECT COUNT(NULL)\n        FROM   DUAL)         AS D\nFROM   DUAL;"
+      }
+    ]
   },
   {
     "id": 10042,
@@ -1794,16 +1905,22 @@ export const ROUND_60: QuizQuestion[] = [
     "round": 60,
     "subject": "2과목",
     "number": 44,
-    "title": "DROP TABLE ... RESTRICT 옵션 사용 시 해당 테이블을 참조하는 뷰가 존재하는 경우의 결과로 옳은 것은?",
+    "title": "테이블 T 를 참조하는 뷰 V 가 있다. 아래 ㉠ 을 실행하고, 이어서 ㉡ 을 실행했을 때의 결과로 옳은 것은? (표준 SQL·PostgreSQL 기준)",
     "options": [
-      "어떤 객체도 삭제되지 않는다.",
-      "테이블만 삭제되고 뷰는 남는다.",
-      "테이블과 뷰가 함께 삭제된다.",
-      "뷰가 먼저 삭제된 뒤 테이블이 삭제된다."
+      "㉠ 은 오류라 T·V 모두 남고, ㉡ 은 T 와 V 를 함께 삭제한다.",
+      "㉠ 은 T 만 삭제하고 V 는 남기며, ㉡ 은 아무것도 하지 않는다.",
+      "㉠ 은 오류라 T·V 모두 남고, ㉡ 은 T 만 삭제하고 V 는 남긴다.",
+      "㉠ 은 T 와 V 를 함께 삭제하고, ㉡ 은 오류다."
     ],
     "correctIndex": 0,
-    "explanation": "RESTRICT 는 삭제하려는 테이블을 참조하는 다른 객체(뷰, 외래키 등)가 있으면 삭제를 거부하는 옵션이다. 그래서 오류가 나고 테이블도 뷰도 삭제되지 않는다(①). 참조 객체까지 함께 삭제하는 것은 CASCADE 옵션이다(③④).",
-    "_source": "authored"
+    "explanation": "RESTRICT 는 삭제할 테이블에 기대는 객체(뷰, 외래키 등)가 하나라도 있으면 삭제를 거부한다. 그래서 ㉠ 은 오류가 나고 아무것도 지워지지 않는다. CASCADE 는 기대는 객체까지 함께 지우므로 ㉡ 은 T 와 V 를 모두 삭제한다. 정답은 ①번이다. Oracle 은 DROP TABLE … CASCADE CONSTRAINTS 로 참조하는 외래키 제약만 지우고, 뷰는 지우지 않고 사용할 수 없는 상태로 남긴다는 점이 다르다. ② 와 ④ 는 RESTRICT 를 잘못 이해한 것, ③ 은 CASCADE 가 뷰를 지우지 않는다고 본 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "-- ㉠\nDROP TABLE T RESTRICT;\n-- ㉡\nDROP TABLE T CASCADE;"
+      }
+    ]
   },
   {
     "id": 10044,
@@ -1996,16 +2113,44 @@ export const ROUND_60: QuizQuestion[] = [
     "round": 60,
     "subject": "2과목",
     "number": 48,
-    "title": "다음 중 `ROLLUP(A, B)` 에는 포함되지 않지만 `CUBE(A, B)` 에는 포함되는 집계 조합은?",
+    "title": "아래 판매 테이블에 GROUP BY CUBE(지역, 분기) 와 GROUP BY ROLLUP(지역, 분기) 를 각각 실행했다. CUBE 결과에만 있는 행의 수와 그 행들의 묶음으로 옳은 것은?",
     "options": [
-      "(A, B)",
-      "(A, NULL)",
-      "(NULL, B)",
-      "(NULL, NULL)"
+      "2, 지역별 소계 (지역, NULL)",
+      "3, 분기별 소계 (NULL, 분기)",
+      "2, 분기별 소계 (NULL, 분기)",
+      "1, 전체 합계 (NULL, NULL)"
     ],
     "correctIndex": 2,
-    "explanation": "ROLLUP(A, B) 는 오른쪽 컬럼부터 하나씩 빼며 (A, B) → (A) → () 세 묶음만 만든다. A 를 건너뛰고 B 하나로 묶는 그룹은 만들 수 없다. CUBE(A, B) 는 가능한 모든 조합인 (A, B), (A), (B), () 네 묶음을 만들므로 A 가 NULL 로 나오는 (B) 소계가 추가된다. 그래서 CUBE 에만 있는 것은 ③ (NULL, B) 이다. ① (A, B), ② (A, NULL) 즉 (A) 소계, ④ (NULL, NULL) 즉 전체 총계는 둘 다 만든다.",
-    "_source": "authored"
+    "explanation": "ROLLUP(지역, 분기) 는 (지역, 분기), (지역), () 의 세 묶음, CUBE(지역, 분기) 는 여기에 (분기) 묶음이 더해진다. 그래서 CUBE 에만 있는 행은 분기별 소계, 즉 지역 칸이 NULL 인 (NULL, 분기) 행이다. 분기 값이 Q1, Q2 두 가지라 2행이다. 정답은 ③번이다. ① 은 지역별 소계를 ROLLUP 에 없다고 본 것, ② 는 분기 소계 행 수를 지역 수로 센 것, ④ 는 전체 합계가 ROLLUP 에 없다고 본 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "caption": "판매",
+        "headers": [
+          "지역",
+          "분기",
+          "금액"
+        ],
+        "rows": [
+          [
+            "서울",
+            "Q1",
+            "10"
+          ],
+          [
+            "서울",
+            "Q2",
+            "20"
+          ],
+          [
+            "부산",
+            "Q1",
+            "30"
+          ]
+        ]
+      }
+    ]
   },
   {
     "id": 10048,

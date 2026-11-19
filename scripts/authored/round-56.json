@@ -18,15 +18,21 @@
     {
       "subject": "1과목",
       "number": 2,
-      "title": "데이터 모델링에 대한 설명으로 옳지 않은 것은?",
+      "title": "아래 업무 규칙 ㉠~㉢ 을 IE 표기법 ERD 에 반영할 때 옳지 않은 것은?",
       "options": [
-        "업무에서 사용되는 모든 데이터를 포함해야 한다.",
-        "현실 세계를 추상화하여 데이터 관점으로 표현한다.",
-        "업무 프로세스를 이해하고 참여자들과 의사소통하는 도구가 된다.",
-        "업무 규칙이 모델에 포함되지 않아도 된다."
+        "㉠ 은 회원:주문 1:M 관계다.",
+        "㉡ 은 주문상세 쪽 끝을 세로줄 + 까마귀발(1개 이상)로 그린다.",
+        "㉢ 은 주문에서 본 쿠폰 쪽 끝을 동그라미 + 세로줄(0 또는 1)로 그린다.",
+        "㉠ 에서 가입만 한 회원이 있으므로 회원 쪽 끝에 동그라미를 붙인다."
       ],
       "correctIndex": 3,
-      "explanation": "데이터 모델링은 업무에서 사용되는 데이터를 빠짐없이 포함하고(①), 현실 세계를 데이터 관점으로 추상화하며(②), 업무를 이해하고 참여자와 소통하는 도구가 된다(③). 업무 규칙(예: 주문은 반드시 고객이 있어야 한다)은 관계·제약으로 모델에 반드시 반영해야 하므로 포함하지 않아도 된다는 ④ 가 옳지 않다."
+      "explanation": "업무 규칙은 관계차수와 선택 표시로 ERD 에 그대로 드러나야 한다. 동그라미는 '그쪽 엔터티가 없어도 된다' 는 뜻이라, 상대편에서 본 참여 여부를 나타낸다. 주문하지 않은 회원이 있다는 것은 회원 한 명에게 주문이 0건일 수 있다는 뜻이므로 동그라미는 주문 쪽 끝에 붙는다(회원 ||--o{ 주문). 회원 쪽에 붙이면 '회원 없는 주문' 이 된다. 정답은 ④번이다. ①·②·③ 은 규칙을 맞게 옮긴 것이다.",
+      "references": [
+        {
+          "type": "text",
+          "content": "㉠ 회원은 주문을 여러 번 할 수 있고, 가입만 하고 주문하지 않은 회원도 있다.\n㉡ 주문에는 상품이 1개 이상 담긴다(주문상세).\n㉢ 주문 하나에는 쿠폰을 최대 1장 쓸 수 있다."
+        }
+      ]
     },
     {
       "subject": "1과목",
@@ -109,19 +115,19 @@
     {
       "subject": "1과목",
       "number": 6,
-      "title": "다음 속성 분류에 대한 설명 중 옳은 것을 모두 고르시오.",
+      "title": "아래 회원 속성 ㉠~㉣ 중 제1정규형을 만족하려면 반드시 별도 테이블로 떼어 내야 하는 것만 모두 고른 것은?",
       "options": [
-        "가, 라",
-        "가, 나, 다",
-        "나, 다, 라",
-        "가, 나, 다, 라"
+        "㉠",
+        "㉠, ㉡",
+        "㉠, ㉡, ㉣",
+        "㉡, ㉣"
       ],
       "correctIndex": 3,
-      "explanation": "주소는 시·군·구 등 세부 속성으로 나눌 수 있어 복합 속성(가), 나이는 더 나눌 수 없는 단순 속성(나), 주민번호는 한 사람에게 값이 하나뿐인 단일 값 속성(다), 연락처는 휴대폰·집 전화처럼 여러 값을 가질 수 있는 다중 값 속성(라)이다. 네 설명이 모두 옳아 ④ 가, 나, 다, 라 이다. ① 가·라, ② 가·나·다, ③ 나·다·라 는 옳은 설명을 하나씩 빠뜨렸다.",
+      "explanation": "제1정규형은 한 칸에 값이 하나만 있어야 한다는 조건이다. 값이 여러 개일 수 있는 다중값속성(㉡ 연락처, ㉣ 관심분야)은 한 칸에 담을 수 없으니 회원번호와 짝지은 별도 테이블로 떼어 내야 한다. 주소처럼 여러 부분으로 나눌 수 있는 복합속성은 회원마다 값이 하나라 제1정규형을 어기지 않는다. 업무에 따라 시·구로 나눠 칼럼을 늘릴 수는 있어도 별도 테이블이 필요한 것은 아니다. 나이는 단순·단일값속성이다. 정답은 ④번이다. ①·②·③ 은 복합속성을 다중값속성처럼 떼어 내야 한다고 본 것이다.",
       "references": [
         {
           "type": "text",
-          "content": "가. 주소는 시·군·구 등으로 나누어지므로 복합 속성이다.\n나. 나이는 단순 속성이다.\n다. 주민번호는 단일 값 속성이다.\n라. 연락처는 휴대폰 번호와 집 전화번호가 될 수 있기 때문에 다중 값 속성이다."
+          "content": "㉠ 주소: 시·구·상세주소로 나눌 수 있지만 회원마다 하나다.\n㉡ 연락처: 휴대폰·집 전화 등 회원마다 여러 개일 수 있다.\n㉢ 나이: 숫자 하나다.\n㉣ 관심분야: 회원마다 여러 개를 고를 수 있다."
         }
       ]
     },
@@ -161,28 +167,84 @@
     {
       "subject": "1과목",
       "number": 9,
-      "title": "모든 일반 속성이 주식별자에 완전 함수 종속된 정규형은?",
+      "title": "아래 주문 테이블(기본키: 주문번호)이 만족하는 가장 높은 정규형으로 옳은 것은?",
       "options": [
-        "제1 정규형",
-        "제2 정규형",
-        "제3 정규형",
+        "제1정규형",
+        "제2정규형",
+        "제3정규형",
         "보이스-코드 정규형"
       ],
       "correctIndex": 1,
-      "explanation": "1정규형을 만족하면서 모든 일반 속성이 주식별자 전체에 완전 함수 종속된(부분 함수 종속이 없는) 상태는 2정규형이다(②). 1정규형(①)은 원자값 조건만, 3정규형(③)은 여기에 이행 함수 종속까지 제거한 상태, BCNF(④)는 모든 결정자가 후보키인 상태다."
+      "explanation": "칸마다 값이 하나라 제1정규형이다. 기본키가 주문번호 하나라 '기본키 일부에만 종속' 되는 부분 함수 종속이 생길 수 없어, 모든 일반 속성이 기본키에 완전 함수 종속하는 제2정규형도 만족한다. 그러나 주문번호 → 고객번호 → 고객명 처럼 키가 아닌 고객번호를 거쳐 고객명이 정해지는 이행 종속이 있어 제3정규형은 만족하지 못한다. 정답은 ②번이다. ① 은 단일 기본키여도 부분 종속이 생긴다고 본 것, ③·④ 는 고객번호 → 고객명 을 놓친 것이다.",
+      "references": [
+        {
+          "type": "table",
+          "caption": "주문",
+          "headers": [
+            "주문번호",
+            "고객번호",
+            "고객명",
+            "주문일"
+          ],
+          "rows": [
+            [
+              "O1",
+              "C1",
+              "김",
+              "11-01"
+            ],
+            [
+              "O2",
+              "C1",
+              "김",
+              "11-03"
+            ],
+            [
+              "O3",
+              "C2",
+              "이",
+              "11-03"
+            ]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "함수 종속",
+          "headers": [
+            "결정자",
+            "종속 속성"
+          ],
+          "rows": [
+            [
+              "주문번호",
+              "고객번호, 고객명, 주문일"
+            ],
+            [
+              "고객번호",
+              "고객명"
+            ]
+          ]
+        }
+      ]
     },
     {
       "subject": "1과목",
       "number": 10,
-      "title": "정규화에 대한 설명 중 옳지 않은 것은?",
+      "title": "주문 목록 화면이 느려 아래처럼 반정규화를 했다. 이에 대한 설명으로 옳지 않은 것은?",
       "options": [
-        "정규화 시 유연성이 떨어진다.",
-        "일반 속성 간 종속을 제거하는 것은 제3 정규형이다.",
-        "반정규화는 데이터 중복으로 독립성이 떨어진다.",
-        "정규화를 많이 할수록 성능이 저하된다."
+        "주문 목록에 고객명을 보여 줄 때 고객과 조인해야 하는 횟수가 늘어난다.",
+        "고객명이 바뀌면 고객과 주문 두 곳을 모두 고쳐야 하고, 하나라도 놓치면 값이 어긋난다.",
+        "같은 고객명이 주문 건수만큼 반복 저장되어 저장 공간이 늘어난다.",
+        "정규화된 구조로 두면 데이터 구조가 바뀔 때 고칠 곳이 적어 더 유연하다."
       ],
       "correctIndex": 0,
-      "explanation": "일반 속성 사이의 종속(이행 종속)을 제거하는 것은 3정규형이고(②), 반정규화는 중복을 허용해 데이터 독립성이 떨어지며(③), 정규화로 테이블이 많이 나뉘면 조인이 늘어 조회 성능이 저하될 수 있다(④). 정규화는 중복을 줄여 데이터 구조의 유연성과 확장성을 높이는 과정이므로 유연성이 떨어진다는 ① 이 옳지 않다."
+      "explanation": "반정규화는 조회 성능을 위해 일부러 중복을 허용하는 것이다. 주문에 고객명을 복사해 두면 목록 화면에서 고객과 조인하지 않아도 되므로 조인이 오히려 줄어든다. ① 은 거꾸로 말해 옳지 않다. 정답은 ①번이다. 대신 같은 값이 두 곳에 있어 고칠 때 둘 다 맞춰야 하고(②), 주문 건수만큼 고객명이 쌓여 공간이 늘어난다(③). 정규화는 한 사실을 한 곳에만 두어 구조 변경에 유연하다(④). 정규화가 유연성을 떨어뜨린다는 말은 틀린 설명이다.",
+      "references": [
+        {
+          "type": "text",
+          "content": "전: 주문(주문번호, 고객번호, 주문일) + 고객(고객번호, 고객명)\n후: 주문(주문번호, 고객번호, 고객명, 주문일) + 고객(고객번호, 고객명)"
+        }
+      ]
     },
     {
       "subject": "2과목",
@@ -350,7 +412,7 @@
     {
       "subject": "2과목",
       "number": 14,
-      "title": "다음 WHERE 조건 중 결과가 나머지와 다른 것은?",
+      "title": "아래 T 테이블에 각 조건을 WHERE 절에 넣었을 때, 결과로 나오는 행이 나머지와 다른 것은?",
       "options": [
         "COL3 >= 200 AND COL4 <= 200",
         "NOT (200 < COL3 OR 200 > COL4)",
@@ -358,7 +420,35 @@
         "COL3 <= 200 AND COL4 >= 200"
       ],
       "correctIndex": 0,
-      "explanation": "②·③·④ 는 \"200이 COL3 ~ COL4 범위에 포함되는 조건\" 으로 동치이다. ①은 부등호 방향이 반대이므로 결과가 다르다."
+      "explanation": "② 는 드모르간 법칙으로 COL3 <= 200 AND COL4 >= 200 과 같고, ③ 의 200 BETWEEN COL3 AND COL4 도 같은 뜻이며, ④ 는 이를 그대로 쓴 것이다. 세 조건 모두 (150, 250), (200, 200) 두 행을 돌려준다. (250, 150) 은 BETWEEN 의 아래쪽 값이 위쪽 값보다 커서 거짓이 되고, COL3 이 NULL 인 행은 비교 결과가 UNKNOWN 이라 NOT 을 붙여도 UNKNOWN 이어서 빠진다. ① 은 부등호 방향이 반대라 (200, 200), (250, 150) 을 돌려줘 결과가 다르다. 정답은 ①번이다.",
+      "references": [
+        {
+          "type": "table",
+          "caption": "T",
+          "headers": [
+            "COL3",
+            "COL4"
+          ],
+          "rows": [
+            [
+              "150",
+              "250"
+            ],
+            [
+              "200",
+              "200"
+            ],
+            [
+              "250",
+              "150"
+            ],
+            [
+              "NULL",
+              "300"
+            ]
+          ]
+        }
+      ]
     },
     {
       "subject": "2과목",
@@ -412,19 +502,45 @@
     {
       "subject": "2과목",
       "number": 16,
-      "title": "아래 쿼리의 실행 결과로 옳은 것은?",
+      "title": "아래 T 테이블에 대한 SQL 의 결과로 옳은 것은? ('COALESCE(A, B, C) 의 세 값 / SUM 결과' 순서)",
       "options": [
-        "S",
-        "SQL",
-        "NULL",
-        "오류가 발생한다."
+        "2, NULL, 1 / 3",
+        "2, NULL, 1 / NULL",
+        "3, NULL, 9 / 12",
+        "2, 0, 1 / 3"
       ],
       "correctIndex": 0,
-      "explanation": "COALESCE 는 인수를 왼쪽부터 보며 처음 나오는 NULL 이 아닌 값을 반환한다. NULL, NULL 다음의 'S' 가 처음 NULL 이 아닌 값이므로 'S' 다(①). 뒤의 'QL' 은 평가하지 않으며 값을 이어 붙이지도 않는다(②). ③ NULL 이 아닌 값이 있으므로 NULL 이 아니고, ④ 오류도 나지 않는다.",
+      "explanation": "COALESCE 는 인자를 왼쪽부터 보며 처음 나오는 NULL 이 아닌 값을 돌려준다. 첫 행은 B 의 2, 둘째 행은 모두 NULL 이라 NULL, 셋째 행은 A 의 1 이다. 마지막 인자에 0 을 주면 모두 NULL 인 행도 0 이 되어 SUM 은 2 + 0 + 1 = 3 이다. 정답은 ①번이다. ② 는 NULL 이 섞이면 SUM 이 NULL 이 된다고 본 것, ③ 은 마지막 NULL 이 아닌 값을 고른 것, ④ 는 0 을 주지 않아도 NULL 이 0 이 된다고 본 것이다.",
       "references": [
         {
+          "type": "table",
+          "caption": "T",
+          "headers": [
+            "A",
+            "B",
+            "C"
+          ],
+          "rows": [
+            [
+              "NULL",
+              "2",
+              "3"
+            ],
+            [
+              "NULL",
+              "NULL",
+              "NULL"
+            ],
+            [
+              "1",
+              "NULL",
+              "9"
+            ]
+          ]
+        },
+        {
           "type": "sql",
-          "code": "SELECT COALESCE(NULL, NULL, 'S', NULL, 'QL') FROM DUAL;"
+          "code": "SELECT COALESCE(A, B, C) FROM T;\n\nSELECT SUM(COALESCE(A, B, C, 0))\nFROM   T;"
         }
       ]
     },
@@ -576,15 +692,21 @@
     {
       "subject": "2과목",
       "number": 22,
-      "title": "다음 중 결과가 나머지와 다른 것은?",
+      "title": "칼럼 C 가 NULL 인 행에서 아래 네 식의 값으로 옳은 것은? (순서대로, Oracle 기준)",
       "options": [
-        "CASE 칼럼 WHEN NULL THEN -1 ELSE 0 END",
-        "CASE WHEN 칼럼 IS NULL THEN -1 ELSE 0 END",
-        "DECODE(칼럼, NULL, -1, 0)",
-        "NVL2(칼럼, 0, -1)"
+        "0, -1, -1, -1",
+        "-1, -1, -1, -1",
+        "0, -1, 0, -1",
+        "-1, -1, 0, 0"
       ],
       "correctIndex": 0,
-      "explanation": "① 단순 CASE 는 NULL 을 = 로 비교해 항상 UNKNOWN 이라 ELSE 로 넘어가 항상 0 을 반환한다. ②③④ 는 칼럼이 NULL 이면 -1, 아니면 0 을 반환하므로(DECODE 는 NULL 끼리 같다고 보고, NVL2(expr, a, b) 는 NULL 이 아니면 a, NULL 이면 b 를 반환한다) 서로 같다. 따라서 결과가 다른 것은 ①이다."
+      "explanation": "㉠ 처럼 CASE 뒤에 칼럼을 쓰는 단순 CASE 는 'C = NULL' 로 비교하는데, NULL 과의 = 비교는 UNKNOWN 이라 참이 되지 않아 ELSE 의 0 이 나온다. ㉡ 은 IS NULL 로 확인해 -1 이다. DECODE 는 예외적으로 NULL 과 NULL 을 같은 값으로 보므로 ㉢ 은 -1 이다. NVL2 는 C 가 NULL 이면 세 번째 인자를 돌려줘 ㉣ 도 -1 이다. 정답은 ①번이다. ② 는 단순 CASE 도 NULL 을 잡는다고 본 것, ③ 은 DECODE 도 = 처럼 NULL 을 못 잡는다고 본 것, ④ 는 DECODE 와 NVL2 를 거꾸로 본 것이다.",
+      "references": [
+        {
+          "type": "sql",
+          "code": "-- ㉠\nCASE C WHEN NULL THEN -1 ELSE 0 END\n-- ㉡\nCASE WHEN C IS NULL THEN -1\n     ELSE 0 END\n-- ㉢\nDECODE(C, NULL, -1, 0)\n-- ㉣\nNVL2(C, 0, -1)"
+        }
+      ]
     },
     {
       "subject": "2과목",
@@ -681,19 +803,19 @@
     {
       "subject": "2과목",
       "number": 25,
-      "title": "아래 함수의 실행 결과로 옳은 것은?",
+      "title": "아래 SQL 의 결과(A, B, C, D)로 옳은 것은? (Oracle 기준)",
       "options": [
-        "aaa",
-        "aaaa",
-        "ab",
-        "aab"
+        "aaa, aa, 2, aaaaaX",
+        "aaaa, aa, 2, aaaaaX",
+        "aaaa, aaaa, 3, aaaaaXXXX",
+        "aaaa, aa, 3, aaaaaX"
       ],
       "correctIndex": 1,
-      "explanation": "a{2,4} 는 a 가 2~4번 이어진 부분을 찾는다. 2개, 3개, 4개 모두 가능할 때는 가장 길게(4개) 잡는다. 'aaaaabbbb' 맨 앞에서 a 를 4개까지 잡으므로 결과는 'aaaa'(②). ① 'aaa' 는 더 길게 잡을 수 있는데 멈춘 경우라 틀리고, b 는 패턴에 없으므로 ③ 'ab'·④ 'aab' 는 나올 수 없다.",
+      "explanation": "a{2,4} 는 a 가 2~4번 이어진 부분이고, 기본적으로 가능한 한 길게 잡아 A 는 'aaaa' 다. 뒤에 ? 를 붙이면 가능한 한 짧게 잡아 B 는 'aa' 다. REGEXP_COUNT 는 겹치지 않게 센다. a 다섯 개에서 'aa' 를 앞에서부터 두 번 잡고 a 하나가 남아 C 는 2 다. b+ 는 b 가 1번 이상 이어진 덩어리 하나라 bbbb 전체가 X 하나로 바뀌어 D 는 'aaaaaX' 다. 정답은 ②번이다. ① 은 길게 잡는 규칙을 놓친 것, ③ 은 ? 를 무시하고 b 를 하나씩 바꾼 것, ④ 는 겹쳐서 센 것이다.",
       "references": [
         {
           "type": "sql",
-          "code": "SELECT REGEXP_SUBSTR('aaaaabbbb', 'a{2,4}') FROM DUAL;"
+          "code": "SELECT\n  REGEXP_SUBSTR('aaaaabbbb', 'a{2,4}')\n    AS A,\n  REGEXP_SUBSTR('aaaaabbbb', 'a{2,4}?')\n    AS B,\n  REGEXP_COUNT('aaaaabbbb', 'a{2}')\n    AS C,\n  REGEXP_REPLACE('aaaaabbbb',\n                 'b+', 'X')\n    AS D\nFROM DUAL;"
         }
       ]
     },
@@ -771,15 +893,21 @@
     {
       "subject": "2과목",
       "number": 29,
-      "title": "SQL 실행 순서로 올바른 것은?",
+      "title": "사원 테이블에 대한 SQL ㉠~㉣ 중 오류가 발생하는 것만 모두 고른 것은?",
       "options": [
-        "SELECT - FROM - WHERE - GROUP BY - HAVING - ORDER BY",
-        "WHERE - FROM - HAVING - GROUP BY - SELECT - ORDER BY",
-        "FROM - WHERE - GROUP BY - HAVING - SELECT - ORDER BY",
-        "FROM - WHERE - HAVING - GROUP BY - SELECT - ORDER BY"
+        "㉠",
+        "㉠, ㉢, ㉣",
+        "㉠, ㉢",
+        "㉢"
       ],
       "correctIndex": 2,
-      "explanation": "SQL 의 논리적 실행 순서는 FROM → WHERE → GROUP BY → HAVING → SELECT → ORDER BY 이다. ① 은 쓰는 순서, ② 는 WHERE 를 FROM 보다, ④ 는 HAVING 을 GROUP BY 보다 먼저 둔 순서라 틀리다."
+      "explanation": "SELECT 문은 FROM → WHERE → GROUP BY → HAVING → SELECT → ORDER BY 순서로 처리되고, 윈도우 함수는 SELECT 단계에서 계산된다. 그래서 그보다 먼저 처리되는 WHERE(㉠)와 HAVING(㉢)에는 윈도우 함수를 쓸 수 없어 오류다. ㉡ 처럼 인라인 뷰 안에서 먼저 계산한 뒤 바깥 WHERE 에서 거르면 되고, SELECT 뒤에 처리되는 ORDER BY(㉣)에는 윈도우 함수를 쓸 수 있다. 정답은 ③번이다. ① 은 HAVING 은 집계라서 된다고 본 것, ② 는 ORDER BY 에도 못 쓴다고 본 것, ④ 는 WHERE 에서 행 번호로 거를 수 있다고 본 것이다.",
+      "references": [
+        {
+          "type": "sql",
+          "code": "-- ㉠\nSELECT 이름 FROM 사원\nWHERE  ROW_NUMBER() OVER\n       (ORDER BY 급여 DESC) = 1;\n-- ㉡\nSELECT 이름\nFROM  (SELECT 이름,\n         ROW_NUMBER() OVER\n         (ORDER BY 급여 DESC) AS RN\n       FROM 사원)\nWHERE  RN = 1;\n-- ㉢\nSELECT 부서 FROM 사원\nGROUP  BY 부서\nHAVING RANK() OVER\n       (ORDER BY SUM(급여)) = 1;\n-- ㉣\nSELECT 이름 FROM 사원\nORDER  BY ROW_NUMBER() OVER\n       (ORDER BY 급여);"
+        }
+      ]
     },
     {
       "subject": "2과목",
@@ -1201,28 +1329,40 @@
     {
       "subject": "2과목",
       "number": 38,
-      "title": "제약조건에 대한 설명 중 옳은 것은?",
+      "title": "아래 SQL 을 순서대로 실행한 뒤 ID 1, 2, 3, 4 행의 상태 값으로 옳은 것은?",
       "options": [
-        "기본키는 한 컬럼에 하나의 속성만 가질 수 있다.",
-        "외래키는 여러 컬럼으로 구성된 복합 외래키로 정의될 수 있다.",
-        "UNIQUE 는 NULL 을 허용하지 않는다.",
-        "FOREIGN KEY 는 동일 테이블 내에서는 정의할 수 없다."
+        "N, N, N, Y",
+        "N, NULL, N, Y",
+        "N, NULL, N, N",
+        "Y, NULL, Y, Y"
       ],
       "correctIndex": 1,
-      "explanation": "외래키는 부모의 복합 기본키를 참조하는 복합 외래키로 정의할 수 있다(②). 기본키도 여러 컬럼으로 만들 수 있고(①), UNIQUE 는 NULL 을 허용하며(③), 같은 테이블의 기본키를 참조하는 자기 참조 외래키(예: 관리자번호 → 사원번호)도 정의할 수 있다(④)."
+      "explanation": "DEFAULT 는 값을 넣지 않았을 때만 쓰인다. 칼럼을 빼고 넣은 1 과 DEFAULT 키워드를 쓴 3 은 'N' 이 된다. 2 처럼 NULL 을 직접 넣으면 '값을 NULL 로 정했다' 는 뜻이라 기본값이 아닌 NULL 이 저장된다. 기본값을 'Y' 로 바꾸면 그 뒤에 들어오는 행에만 적용되고, 이미 들어간 행은 그대로다. 그래서 4 만 'Y' 다. 정답은 ②번이다. ① 은 NULL 을 넣어도 기본값으로 바뀐다고 본 것, ③ 은 기본값 변경이 새 행에도 안 먹힌다고 본 것, ④ 는 기존 행까지 바뀐다고 본 것이다.",
+      "references": [
+        {
+          "type": "sql",
+          "code": "CREATE TABLE T (\n  ID   NUMBER PRIMARY KEY,\n  상태 CHAR(1) DEFAULT 'N'\n);\nINSERT INTO T (ID) VALUES (1);\nINSERT INTO T VALUES (2, NULL);\nINSERT INTO T VALUES (3, DEFAULT);\nALTER TABLE T\n  MODIFY 상태 DEFAULT 'Y';\nINSERT INTO T (ID) VALUES (4);"
+        }
+      ]
     },
     {
       "subject": "2과목",
       "number": 39,
-      "title": "문자열 내에서 특정 패턴이 시작되는 위치를 정수로 반환하는 함수는?",
+      "title": "아래 SQL 의 결과(A, B, C)로 옳은 것은? (Oracle 기준)",
       "options": [
-        "REGEXP_COUNT",
-        "REGEXP_LIKE",
-        "REGEXP_REPLACE",
-        "REGEXP_INSTR"
+        "2, 4, 2",
+        "4, 5, 5",
+        "4, 6, 2",
+        "4, 6, 5"
       ],
       "correctIndex": 3,
-      "explanation": "REGEXP_INSTR 는 문자열에서 정규식과 일치하는 패턴의 시작 위치를 정수로 반환한다. ② REGEXP_LIKE 는 boolean 판정, ① REGEXP_COUNT 는 일치 횟수, ③ REGEXP_REPLACE 는 치환을 수행한다."
+      "explanation": "'a1b22c333' 에서 숫자가 이어진 덩어리는 '1'(2번째 글자), '22'(4~5번째), '333'(7~9번째) 순이다. A 는 1번째 글자부터 찾은 두 번째 덩어리 '22' 의 시작 위치 4 다. B 는 다섯 번째 인자 1 이 '일치한 부분이 끝난 다음 위치' 를 돌려달라는 뜻이라 5 다음인 6 이다. C 처럼 INSTR 의 시작 위치가 음수면 끝에서부터 거꾸로 찾으므로, 마지막 'B' 의 위치 5 가 나온다(위치 번호는 앞에서부터 센다). 정답은 ④번이다. ① 은 첫 번째 덩어리를 찾은 것, ② 는 B 를 일치한 마지막 글자의 위치로 본 것, ③ 은 거꾸로 찾아도 첫 'B' 가 나온다고 본 것이다.",
+      "references": [
+        {
+          "type": "sql",
+          "code": "SELECT\n  REGEXP_INSTR('a1b22c333',\n               '[0-9]+', 1, 2)    AS A,\n  REGEXP_INSTR('a1b22c333',\n               '[0-9]+', 1, 2, 1) AS B,\n  INSTR('ABCABC', 'B', -1)       AS C\nFROM DUAL;"
+        }
+      ]
     },
     {
       "subject": "2과목",
@@ -1623,15 +1763,21 @@
     {
       "subject": "2과목",
       "number": 48,
-      "title": "계층별 소계와 총계를 순차적으로 산출하는 집계 절은?",
+      "title": "지역이 서울 2행, 부산 1행인 판매 테이블에 대한 SQL ㉠, ㉡, ㉢ 의 결과 행 수로 옳은 것은?",
       "options": [
-        "GROUPING SETS()",
-        "ROLLUP()",
-        "CUBE()",
-        "HAVING()"
+        "3, 3, 3",
+        "3, 5, 3",
+        "3, 5, 2",
+        "2, 4, 3"
       ],
       "correctIndex": 1,
-      "explanation": "ROLLUP 은 GROUP BY ROLLUP(A, B) 처럼 지정한 순서대로 (A, B) → (A) → () 로 집계 레벨을 하나씩 줄이며 계층별 소계와 총계를 만든다(②). CUBE(③)는 모든 조합, GROUPING SETS(①)는 지정한 조합만 집계하고, HAVING(④)은 그룹 조건절이다."
+      "explanation": "㉠ 은 지역별 집계 2행(서울·부산)과 () 로 만든 전체 합계 1행을 합쳐 3행이다. GROUPING SETS 는 적힌 묶음마다 결과를 따로 만들어 붙이므로, ㉡ 처럼 (지역) 을 두 번 쓰면 지역별 행이 두 번 나와 2 + 2 + 1 = 5행이다(중복을 없애 주지 않는다). ㉢ 의 ROLLUP(지역) 은 GROUPING SETS((지역), ()) 와 같아 3행이다. 정답은 ②번이다. ① 은 같은 묶음을 두 번 써도 한 번만 계산된다고 본 것, ③ 은 ROLLUP 이 합계 행을 만들지 않는다고 본 것, ④ 는 () 를 합계로 보지 않은 것이다.",
+      "references": [
+        {
+          "type": "sql",
+          "code": "-- ㉠\nSELECT 지역, SUM(수량) FROM 판매\nGROUP  BY GROUPING SETS ((지역), ());\n-- ㉡\nSELECT 지역, SUM(수량) FROM 판매\nGROUP  BY GROUPING SETS\n          ((지역), (지역), ());\n-- ㉢\nSELECT 지역, SUM(수량) FROM 판매\nGROUP  BY ROLLUP(지역);"
+        }
+      ]
     },
     {
       "subject": "2과목",

@@ -53,16 +53,22 @@ export const ROUND_54: QuizQuestion[] = [
     "round": 54,
     "subject": "1과목",
     "number": 3,
-    "title": "속성의 특징으로 적절하지 않은 것은?",
+    "title": "고객 테이블에 파생 속성 '누적구매금액'(그 고객의 주문 금액 합계)을 두었다. 아래 작업 ㉠~㉣ 중 누적구매금액도 함께 고쳐야 하는 것만 모두 고른 것은?",
     "options": [
-      "속성은 엔터티의 특성을 나타낸다.",
-      "속성에는 기본 속성과 파생 속성이 있다.",
-      "파생 속성은 다른 속성에서 계산된다.",
-      "파생 속성은 많을수록 좋다."
+      "㉠",
+      "㉠, ㉡",
+      "㉠, ㉢, ㉣",
+      "㉠, ㉡, ㉣"
     ],
     "correctIndex": 3,
-    "explanation": "속성은 엔터티의 특성을 나타내며(①), 기본 속성·설계 속성·파생 속성으로 나뉘고(②), 파생 속성은 다른 속성에서 계산된다(③). 파생 속성은 원본이 바뀔 때 함께 갱신해야 해 정합성을 해치기 쉬우므로 꼭 필요한 만큼만 최소로 정의한다. 많을수록 좋다는 ④ 가 옳지 않다.",
-    "_source": "authored"
+    "explanation": "파생 속성은 다른 속성으로 계산되는 값이라, 계산에 쓰인 원래 값이 바뀔 때마다 같이 고쳐야 한다. 누적구매금액은 주문 금액에서 나오므로 주문이 늘거나(㉠) 사라지거나(㉡) 금액이 바뀌면(㉣) 다시 맞춰야 한다. 주소(㉢)는 계산과 상관없다. 정답은 ④번이다. 파생 속성은 조회를 빠르게 해 주지만, 이렇게 고칠 곳이 늘고 하나라도 놓치면 값이 어긋난다. 그래서 꼭 필요한 것만 두는 것이 원칙이다. ① 은 취소와 수정을 놓친 것, ② 는 금액 수정을 놓친 것, ③ 은 계산과 무관한 주소 변경을 넣고 취소를 놓친 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "text",
+        "content": "㉠ 고객이 새 주문을 한다.\n㉡ 고객이 주문 하나를 취소한다.\n㉢ 고객이 배송 주소를 바꾼다.\n㉣ 주문의 수량이 바뀌어 금액이 달라진다."
+      }
+    ]
   },
   {
     "id": 10303,
@@ -89,16 +95,22 @@ export const ROUND_54: QuizQuestion[] = [
     "round": 54,
     "subject": "1과목",
     "number": 5,
-    "title": "식별자 관계에 대한 설명으로 적절하지 않은 것은?",
+    "title": "부서–사원 은 비식별자 관계이고, 사원.부서코드 는 NULL 을 허용하는 외래키다. 부서에 D1 만 있고 D1 에 소속된 사원이 있을 때, 아래 ㉠~㉢ 을 각각 실행한 결과로 옳은 것은? (ON DELETE 옵션 없음)",
     "options": [
-      "식별자 관계는 부모 엔터티와 종속적인 관계를 맺는다.",
-      "비식별자 관계에서 부모와의 관계는 필수 조건이다.",
-      "식별자 관계는 부모의 식별자를 자식에게 전달한다.",
-      "비식별자 관계는 자식 엔터티가 독립적으로 존재할 수 있다."
+      "오류, 오류, 성공",
+      "성공, 오류, 오류",
+      "성공, 성공, 오류",
+      "성공, 오류, 성공"
     ],
     "correctIndex": 1,
-    "explanation": "식별자 관계는 부모의 식별자를 자식에게 전달해 자식 주식별자의 일부가 되므로 부모에 종속적이다(①③). 비식별자 관계는 부모 식별자가 자식의 일반 속성으로만 들어가 자식이 독립적으로 존재할 수 있다(④). 비식별자 관계에서는 부모와의 관계가 선택(Optional)일 수 있으므로 반드시 필수라는 ② 가 옳지 않다.",
-    "_source": "authored"
+    "explanation": "비식별자 관계는 부모 키를 자식의 일반 칼럼(외래키)으로만 받으므로, 외래키에 NULL 을 허용하면 부모 없는 자식을 만들 수 있다. 그래서 ㉠ 은 성공한다. 비식별자 관계라고 부모가 반드시 있어야 하는 것은 아니고, 필수인지 선택인지는 NULL 허용 여부(관계선택사양)로 정한다. 외래키에 값을 넣을 때는 부모에 그 값이 있어야 하므로 없는 D9 를 넣는 ㉡ 은 오류다. 참조하는 사원이 있는 부모 행을 지우는 ㉢ 도 ON DELETE 옵션이 없어 오류다. 정답은 ②번이다. ① 은 비식별자 관계도 부모가 필수라고 본 것, ③ 은 없는 부모 값을 넣어도 된다고 본 것, ④ 는 자식이 있어도 부모를 지울 수 있다고 본 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "-- ㉠\nINSERT INTO 사원 (사번, 부서코드)\nVALUES (1, NULL);\n-- ㉡\nINSERT INTO 사원 (사번, 부서코드)\nVALUES (2, 'D9');\n-- ㉢\nDELETE FROM 부서\nWHERE  부서코드 = 'D1';"
+      }
+    ]
   },
   {
     "id": 10305,
@@ -217,15 +229,15 @@ export const ROUND_54: QuizQuestion[] = [
     "round": 54,
     "subject": "1과목",
     "number": 9,
-    "title": "ERD 표기법(IE·Barker)에 대한 설명으로 적절하지 않은 것은?",
+    "title": "주문–주문상세 는 식별자 관계이고, 주문에는 주문상세가 1개 이상 반드시 있고 주문상세는 반드시 주문 하나에 속한다. 이 관계를 IE 표기법과 Barker 표기법으로 그린 모습으로 옳은 것은?",
     "options": [
-      "IE 표기법은 관계선 끝의 까마귀발(crow’s foot) 로 다(多) 카디널리티를 표시한다.",
-      "Barker 표기법은 관계선의 실선과 점선으로 식별 관계와 비식별 관계를 구분한다.",
-      "IE 표기법에서 관계선의 실선은 식별 관계를, 점선은 비식별 관계를 나타낸다.",
-      "Barker 표기법은 관계선의 실선과 점선으로 필수 참여와 선택 참여를 구분한다."
+      "IE: 점선 / Barker: 관계선에 UID 바 없음",
+      "IE: 실선, 주문상세 쪽 끝은 세로줄 + 까마귀발 / Barker: 주문상세 쪽 끝에 UID 바, 관계선 양쪽 모두 실선",
+      "IE: 실선, 주문상세 쪽 끝은 동그라미 + 까마귀발 / Barker: 관계선 양쪽 모두 점선",
+      "IE: 점선, 주문상세 쪽 끝은 세로줄 + 까마귀발 / Barker: 관계선 양쪽 모두 실선, UID 바 없음"
     ],
     "correctIndex": 1,
-    "explanation": "Barker(오라클) 표기법에서 관계선의 실선·점선은 필수 참여와 선택 참여를 나타내며, 식별 관계는 관계선 위의 UID bar 로 표시한다. 실선·점선으로 식별·비식별 관계를 구분하는 것은 IE 표기법이므로 ② 가 적절하지 않다. ①·③·④ 는 옳은 설명이다.",
+    "explanation": "IE 표기법은 식별자 관계를 실선, 비식별자 관계를 점선으로 그리고, 필수·선택은 끝의 세로줄·동그라미로 나타낸다. 주문상세가 1개 이상 반드시 있으므로 주문상세 쪽 끝은 세로줄 + 까마귀발이다. Barker 표기법은 실선·점선으로 필수·선택을 나타내고, 식별자 관계는 자식 쪽 관계선 끝에 가로 막대(UID 바)를 그어 표시한다. 양쪽 모두 필수라 관계선 양쪽이 실선이다. 정답은 ②번이다. ①·④ 는 IE 에서 식별자 관계를 점선으로 본 것이고, ③ 은 필수 관계를 선택으로 그린 것이다. 두 표기법에서 실선·점선의 뜻이 다르다는 점이 핵심이다.",
     "_source": "authored"
   },
   {
@@ -235,16 +247,22 @@ export const ROUND_54: QuizQuestion[] = [
     "round": 54,
     "subject": "1과목",
     "number": 10,
-    "title": "NULL 에 대한 설명으로 적절한 것은?",
+    "title": "사원 테이블의 보너스 칼럼 값이 NULL 인 행에서 아래 ㉠~㉣ 조건식의 결과로 옳은 것은? (순서대로)",
     "options": [
-      "NULL 에는 연산자를 사용할 수 없다.",
-      "바커 표기법에서 NULL 허용 여부를 알 수 없다.",
-      "NULL 은 미지의 값으로 비교가 불가하다.",
-      "IE 표기법에서 NULL 허용 여부를 알 수 있다."
+      "TRUE, TRUE, TRUE, FALSE",
+      "UNKNOWN, TRUE, TRUE, UNKNOWN",
+      "UNKNOWN, TRUE, UNKNOWN, UNKNOWN",
+      "FALSE, TRUE, FALSE, FALSE"
     ],
     "correctIndex": 2,
-    "explanation": "NULL 은 '아직 모르는 값' 이라 =, <> 같은 비교로 판별할 수 없고 IS NULL / IS NOT NULL 로만 판별한다(③). ① 산술·문자 연산은 할 수 있고 결과가 NULL 이 될 뿐이며, ② 바커 표기법은 속성 앞의 *(필수)·o(선택)로 NULL 허용 여부를 표시하고, ④ IE 표기법은 NULL 허용 여부를 표시하지 않는다.",
-    "_source": "authored"
+    "explanation": "NULL 은 '아직 모르는 값' 이라 0 이나 빈 문자열과 다르고, 어떤 값과 = · > 로 비교해도 참인지 거짓인지 정할 수 없어 UNKNOWN 이 된다. ㉠ 과 ㉢ 은 NULL 과 비교했으니 UNKNOWN 이다(모르는 값 둘이 같은지도 알 수 없다). NULL 인지 확인할 때는 ㉡ 처럼 IS NULL 을 써야 TRUE 가 나온다. ㉣ 은 NULL + 100 이 NULL 이라 비교 결과도 UNKNOWN 이다. 정답은 ③번이다. ① 은 NULL 을 일반 값처럼 본 것, ② 는 NULL 끼리는 같다고 본 것, ④ 는 UNKNOWN 을 FALSE 와 같은 것으로 본 것이다(WHERE 에서는 둘 다 행이 걸러지지만 결과 값은 다르다).",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "text",
+        "content": "㉠ 보너스 = NULL\n㉡ 보너스 IS NULL\n㉢ NULL = NULL\n㉣ 보너스 + 100 > 50"
+      }
+    ]
   },
   {
     "id": 10310,
@@ -271,16 +289,22 @@ export const ROUND_54: QuizQuestion[] = [
     "round": 54,
     "subject": "2과목",
     "number": 12,
-    "title": "뷰(VIEW) 에 대한 설명으로 적절하지 않은 것은?",
+    "title": "사원(이름, 부서, 급여) 테이블에 아래 두 뷰를 만들고 ㉠~㉣ 을 각각 실행할 때 오류가 발생하는 것만 모두 고른 것은?",
     "options": [
-      "뷰는 조회 속도를 높이기 위해 사용된다.",
-      "뷰는 실제 데이터를 저장하지 않는다.",
-      "컬럼이 추가될 때 뷰를 변경하지 않아도 응용 프로그램에 영향을 미치지 않는다.",
-      "뷰는 다른 테이블의 데이터를 참조한다."
+      "㉠, ㉢",
+      "㉠",
+      "㉠, ㉢, ㉣",
+      "오류 없음"
     ],
     "correctIndex": 0,
-    "explanation": "뷰는 조회 속도를 높이려고 쓰는 객체가 아니라 논리적 독립성, 질의 단순화, 보안(접근 제어)을 위해 사용한다. ② 뷰는 실제 데이터를 저장하지 않고 ④ 다른 테이블을 참조하며, ③ 기본 테이블에 컬럼이 추가되어도 뷰 정의를 바꾸지 않으면 응용 프로그램에 영향이 없다. 따라서 적절하지 않은 것은 ①이다.",
-    "_source": "authored"
+    "explanation": "뷰를 통한 UPDATE·DELETE·INSERT 는 뷰의 각 행이 원래 테이블의 한 행과 바로 대응될 때만 된다. V1 은 GROUP BY·SUM 으로 여러 행을 묶은 결과라 어느 행을 고쳐야 할지 정할 수 없어 ㉠·㉢ 은 오류다. V2 는 사원의 행을 그대로 골라 보여 주는 단순한 뷰라 ㉡ 의 UPDATE 는 된다. ㉣ 도 들어가는데, 뷰에 없는 부서 칼럼은 NULL 로 저장되고(WITH CHECK OPTION 이 없어 막지 않는다) V2 로는 다시 보이지 않는다. 정답은 ①번이다. ② 는 집계 뷰에서 DELETE 는 된다고 본 것, ③ 은 뷰 조건에 맞지 않는 INSERT 를 막는다고 본 것, ④ 는 뷰로는 무엇이든 바꿀 수 있다고 본 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "CREATE VIEW V1 AS\n  SELECT 부서, SUM(급여) AS 합\n  FROM   사원\n  GROUP  BY 부서;\nCREATE VIEW V2 AS\n  SELECT 이름, 급여\n  FROM   사원\n  WHERE  부서 = 10;\n\n-- ㉠\nUPDATE V1 SET 합 = 0;\n-- ㉡\nUPDATE V2 SET 급여 = 급여 + 1;\n-- ㉢\nDELETE FROM V1 WHERE 부서 = 10;\n-- ㉣\nINSERT INTO V2 VALUES ('신', 100);"
+      }
+    ]
   },
   {
     "id": 10312,
@@ -289,15 +313,15 @@ export const ROUND_54: QuizQuestion[] = [
     "round": 54,
     "subject": "2과목",
     "number": 13,
-    "title": "데이터베이스의 논리적 업무 최소 단위는?",
+    "title": "계좌 이체 기능은 '㉠ 보내는 계좌 출금 UPDATE, ㉡ 받는 계좌 입금 UPDATE, ㉢ 이체내역 INSERT' 로 이루어진다. 트랜잭션을 나누는 방법으로 가장 알맞은 것은?",
     "options": [
-      "트랜잭션",
-      "레코드",
-      "Query",
-      "테이블"
+      "㉠~㉢ 을 하나의 트랜잭션으로 묶어 모두 성공했을 때 한 번만 COMMIT 한다.",
+      "문장마다 바로 COMMIT 해 변경을 빨리 확정한다.",
+      "㉠·㉡ 은 한 트랜잭션으로 묶고, 기록용인 ㉢ 은 따로 COMMIT 한다.",
+      "㉠ 과 ㉡ 을 서로 다른 세션에서 동시에 실행해 속도를 높인다."
     ],
     "correctIndex": 0,
-    "explanation": "트랜잭션은 분리될 수 없는 하나의 논리적 업무 처리 단위이다. ② 레코드·④ 테이블·③ Query 는 물리적·구문적 단위이므로 논리적 업무 최소 단위가 아니다.",
+    "explanation": "트랜잭션은 더 나눌 수 없는 논리적 작업 단위다. 이체는 출금·입금·기록이 모두 이루어져야 의미가 있으므로 하나의 트랜잭션으로 묶고, 끝까지 성공하면 COMMIT, 중간에 실패하면 ROLLBACK 해야 한다. 정답은 ①번이다. ② 는 출금만 확정된 뒤 입금이 실패하면 돈이 사라진 상태로 남는다. ③ 은 이체는 됐는데 내역이 없거나, 이체는 취소됐는데 내역만 남을 수 있다. ④ 는 두 작업이 서로 다른 트랜잭션이 되어 함께 취소할 수 없다.",
     "_source": "authored"
   },
   {
@@ -997,16 +1021,22 @@ export const ROUND_54: QuizQuestion[] = [
     "round": 54,
     "subject": "2과목",
     "number": 25,
-    "title": "제약 조건에 대한 설명 중 적절하지 않은 것은?",
+    "title": "아래 테이블에 INSERT ㉠~㉤ 을 차례로 실행할 때 성공하는 것만 모두 고른 것은?",
     "options": [
-      "PRIMARY KEY 는 NOT NULL 조건을 함께 만족한다.",
-      "FOREIGN KEY 는 부모 테이블의 기본키를 참조한다.",
-      "UNIQUE KEY 는 NOT NULL 이다.",
-      "CHECK 는 특정 조건을 만족하는 값만 허용한다."
+      "㉠",
+      "㉠, ㉡, ㉢",
+      "㉠, ㉡",
+      "㉠, ㉡, ㉣"
     ],
     "correctIndex": 2,
-    "explanation": "UNIQUE 는 값의 중복만 막을 뿐 NULL 은 허용하므로 ③ 이 적절하지 않다. NULL 까지 막으려면 NOT NULL 제약을 따로 지정해야 한다. ① PK 는 유일성과 NOT NULL, ② FK 는 부모 키 참조, ④ CHECK 는 조건 검사라 모두 옳다.",
-    "_source": "authored"
+    "explanation": "㉠ 의 100 은 BETWEEN 의 끝값이라 통과한다. CHECK 는 조건이 FALSE 일 때만 막고, NULL 처럼 결과가 UNKNOWN 이면 통과시킨다. 그래서 점수 NULL 인 ㉡ 도 들어간다. ㉢ 의 101 은 CHECK 위반, ㉣ 은 기본키에 NULL, ㉤ 은 기본키 1 중복이라 오류다. 정답은 ③번이다. ① 은 CHECK 가 NULL 도 막는다고 본 것, ② 는 101 이 범위 안이라고 본 것, ④ 는 기본키에 NULL 이 들어간다고 본 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "CREATE TABLE 성적 (\n  학번 NUMBER PRIMARY KEY,\n  점수 NUMBER\n       CHECK (점수 BETWEEN 0 AND 100)\n);\n\n-- ㉠\nINSERT INTO 성적 VALUES (1, 100);\n-- ㉡\nINSERT INTO 성적 VALUES (2, NULL);\n-- ㉢\nINSERT INTO 성적 VALUES (3, 101);\n-- ㉣\nINSERT INTO 성적 VALUES (NULL, 50);\n-- ㉤\nINSERT INTO 성적 VALUES (1, 50);"
+      }
+    ]
   },
   {
     "id": 10325,
@@ -1638,16 +1668,22 @@ export const ROUND_54: QuizQuestion[] = [
     "round": 54,
     "subject": "2과목",
     "number": 36,
-    "title": "행이 2건인 테이블에 대해 결과가 나머지와 다른 SQL 은?",
+    "title": "T 의 급여가 300, 100, 500, 200 순서로 읽힌다고 할 때, 아래 SQL ㉠, ㉡, ㉢ 의 결과로 옳은 것은? (Oracle 기준)",
     "options": [
-      "SELECT * FROM T WHERE ROWNUM > 0;",
-      "SELECT * FROM T WHERE ROWNUM = 2;",
-      "SELECT * FROM T WHERE ROWNUM < 3;",
-      "SELECT * FROM T WHERE ROWNUM <= 2;"
+      "500·300 / 500·300 / 1행",
+      "300·100 / 500·300 / 0행",
+      "500·300 / 300·100 / 0행",
+      "300·100 / 500·300 / 1행"
     ],
     "correctIndex": 1,
-    "explanation": "ROWNUM 은 1부터 순차 부여되므로 첫 행이 ROWNUM=1 을 받고 탈락하면 다음 행에도 1 이 할당되어 2에 도달하지 못한다. 따라서 ROWNUM = 2 는 0건을 반환하고, ① ROWNUM > 0, ③ ROWNUM < 3, ④ ROWNUM <= 2 는 모두 2건을 반환한다.",
-    "_source": "authored"
+    "explanation": "ROWNUM 은 WHERE 단계에서 행을 읽는 순서대로 붙고, ORDER BY 는 그 뒤에 처리된다. ㉠ 은 먼저 읽힌 300, 100 두 행을 고른 다음 정렬해 300, 100 이다. 급여가 큰 순서로 2건을 얻으려면 ㉡ 처럼 인라인 뷰에서 먼저 정렬하고 바깥에서 ROWNUM 으로 잘라야 하며, 결과는 500, 300 이다. ㉢ 은 첫 행이 ROWNUM 1 을 받아 '= 2' 에 걸러지고, 그다음 행도 다시 1 을 받으므로 어떤 행도 2 가 되지 못해 0행이다. 정답은 ②번이다. ① 은 ㉠ 에서도 정렬이 먼저라고 본 것, ③ 은 ㉠ 과 ㉡ 을 바꿔 본 것, ④ 는 ROWNUM = 2 가 두 번째 행을 고른다고 본 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "-- ㉠\nSELECT 급여 FROM T\nWHERE  ROWNUM <= 2\nORDER  BY 급여 DESC;\n-- ㉡\nSELECT 급여\nFROM  (SELECT 급여 FROM T\n       ORDER BY 급여 DESC)\nWHERE  ROWNUM <= 2;\n-- ㉢\nSELECT 급여 FROM T\nWHERE  ROWNUM = 2;"
+      }
+    ]
   },
   {
     "id": 10336,
@@ -1873,20 +1909,20 @@ export const ROUND_54: QuizQuestion[] = [
     "round": 54,
     "subject": "2과목",
     "number": 41,
-    "title": "빈칸에 들어갈 트랜잭션 제어 명령어로 옳은 것은?",
+    "title": "빈 테이블 T 에 아래 SQL 을 실행한 뒤 1 만 남게 하려면 ( ㉠ ), ( ㉡ ) 에 들어갈 명령으로 옳은 것은?",
     "options": [
-      "COMMIT",
-      "ROLLBACK",
-      "SAVEPOINT",
-      "GRANT"
+      "SAVEPOINT S / SAVEPOINT T",
+      "SAVEPOINT T / SAVEPOINT S",
+      "COMMIT / SAVEPOINT S",
+      "SAVEPOINT S / COMMIT"
     ],
     "correctIndex": 0,
-    "explanation": "정상 처리된 트랜잭션을 영속화하여 다른 트랜잭션에서 조회 가능하게 만드는 명령은 COMMIT 이다. ② ROLLBACK 은 취소, ③ SAVEPOINT 는 부분 저장점, ④ GRANT 는 DCL 권한 부여이다.",
+    "explanation": "ROLLBACK TO S 는 저장점 S 이후의 작업만 취소하고, 마지막 COMMIT 이 그때까지 남은 작업을 확정한다. ① 처럼 1 을 넣은 직후 S 를 만들면 2·3 이 취소되어 1 만 남는다(뒤의 SAVEPOINT T 는 결과에 영향이 없다). 정답은 ①번이다. ② 는 S 가 2 다음에 있어 3 만 취소되므로 1, 2 가 남는다. ③ 은 1 을 이미 COMMIT 하고 2 다음에 S 를 만들어 역시 1, 2 가 남는다. ④ 는 COMMIT 하는 순간 그 앞의 저장점 S 가 사라져, ROLLBACK TO S 에서 저장점이 없다는 오류가 난다.",
     "_source": "authored",
     "references": [
       {
-        "type": "text",
-        "content": "입력·수정·삭제한 데이터에 대해 전혀 문제가 없다고 판단되었을 경우 (   ) 명령을 수행한다."
+        "type": "sql",
+        "code": "INSERT INTO T VALUES (1);\n( ㉠ );\nINSERT INTO T VALUES (2);\n( ㉡ );\nINSERT INTO T VALUES (3);\nROLLBACK TO S;\nCOMMIT;"
       }
     ]
   },
@@ -1973,16 +2009,22 @@ export const ROUND_54: QuizQuestion[] = [
     "round": 54,
     "subject": "2과목",
     "number": 43,
-    "title": "부서 테이블을 삭제하면서 부서 테이블을 참조하는 외래키 제약 조건도 함께 삭제하는 명령어는?",
+    "title": "사원 테이블이 외래키로 부서 테이블을 참조하고 있다. 아래 ㉠ 과 ㉡ 을 각각 실행했을 때의 결과로 옳은 것은? (Oracle 기준)",
     "options": [
-      "TRUNCATE TABLE 부서;",
-      "DROP TABLE 부서 CASCADE CONSTRAINTS;",
-      "DELETE FROM 부서;",
-      "ALTER TABLE 부서 DROP COLUMN 부서명;"
+      "㉠ 은 성공하고 사원 행도 함께 삭제된다.",
+      "㉠ 은 오류, ㉡ 은 성공하고 사원의 외래키 제약만 사라져 사원 데이터는 남는다.",
+      "㉠ 은 오류, ㉡ 은 성공하고 사원 테이블도 함께 삭제된다.",
+      "㉠ 은 성공하고, ㉡ 은 참조하는 테이블이 있어 오류다."
     ],
     "correctIndex": 1,
-    "explanation": "DROP TABLE 부서 CASCADE CONSTRAINTS 는 부서 테이블을 삭제하면서, 부서 테이블을 참조하던 다른 테이블의 외래키 제약 조건도 함께 삭제한다(②, 참조하던 테이블 자체는 남는다). TRUNCATE(①)·DELETE(③)는 데이터만 지우고 테이블은 남기며, 참조하는 자식 행이 있으면 실패할 수 있다. ④ 는 컬럼 하나만 삭제한다.",
-    "_source": "authored"
+    "explanation": "다른 테이블의 외래키가 참조하고 있는 부모 테이블은 그냥 DROP 할 수 없어 ㉠ 은 오류가 난다. CASCADE CONSTRAINTS 를 붙이면 부서를 지우면서, 부서를 참조하던 사원의 외래키 제약조건도 함께 지운다. 사원 테이블과 그 데이터는 그대로 남고 부서번호 칼럼도 남지만, 더 이상 참조 무결성 검사는 하지 않는다. 정답은 ②번이다. ① 은 ON DELETE CASCADE 처럼 자식 행이 지워진다고 본 것, ③ 은 자식 테이블까지 지운다고 본 것, ④ 는 두 명령의 결과를 거꾸로 본 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "-- ㉠\nDROP TABLE 부서;\n-- ㉡\nDROP TABLE 부서 CASCADE CONSTRAINTS;"
+      }
+    ]
   },
   {
     "id": 10343,
@@ -2181,16 +2223,22 @@ export const ROUND_54: QuizQuestion[] = [
     "round": 54,
     "subject": "2과목",
     "number": 48,
-    "title": "단일 행 함수에 대한 설명으로 적절하지 않은 것은?",
+    "title": "입사일(문자 'YYYYMMDD')이 20240301, 20240915, 20250102, 20251120, 20251201 인 사원 테이블에 대한 SQL ㉠, ㉡, ㉢ 의 결과로 옳은 것은? ('㉠ 행 수 / ㉡ / ㉢', Oracle 19c 기준)",
     "options": [
-      "각 행에 개별적으로 적용된다.",
-      "여러 인자를 입력으로 받을 수 있다.",
-      "중첩 사용이 가능하다.",
-      "GROUP BY 절에는 사용할 수 없다."
+      "5 / 오류 / 오류",
+      "2 / 2행 / 2행",
+      "2 / 2행 / 오류",
+      "2 / 오류 / 오류"
     ],
     "correctIndex": 3,
-    "explanation": "단일 행 함수는 각 행마다 하나의 결과를 돌려주며(①), 여러 인자를 받을 수 있고(②, 예: SUBSTR), 함수 안에 함수를 중첩해 쓸 수 있다(③). SELECT·WHERE·ORDER BY 뿐 아니라 GROUP BY 절에도 쓸 수 있으므로(예: GROUP BY SUBSTR(입사일, 1, 4)) ④ 가 옳지 않다.",
-    "_source": "authored"
+    "explanation": "단일 행 함수는 GROUP BY 에도 쓸 수 있다. ㉠ 은 입사일 앞 네 글자(연도)로 묶여 2024 2명, 2025 3명의 2행이다. SELECT 절의 별칭은 GROUP BY 보다 나중에 정해지므로 GROUP BY 에 별칭 연도를 쓴 ㉡ 은 오류다. ㉢ 은 GROUP BY 가 앞 네 글자인데 SELECT 는 앞 여섯 글자(연월)를 보여 달라고 해서, 한 그룹 안에 값이 여러 개라 오류다. 정답은 ④번이다. ① 은 함수를 쓰면 행마다 따로 묶인다고 본 것, ②·③ 은 GROUP BY 에 별칭을 쓸 수 있다고 본 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "-- ㉠\nSELECT SUBSTR(입사일, 1, 4) AS 연도,\n       COUNT(*)\nFROM   사원\nGROUP  BY SUBSTR(입사일, 1, 4);\n-- ㉡\nSELECT SUBSTR(입사일, 1, 4) AS 연도,\n       COUNT(*)\nFROM   사원\nGROUP  BY 연도;\n-- ㉢\nSELECT SUBSTR(입사일, 1, 6),\n       COUNT(*)\nFROM   사원\nGROUP  BY SUBSTR(입사일, 1, 4);"
+      }
+    ]
   },
   {
     "id": 10348,
@@ -2199,16 +2247,78 @@ export const ROUND_54: QuizQuestion[] = [
     "round": 54,
     "subject": "2과목",
     "number": 49,
-    "title": "INNER JOIN 에 대한 설명 중 적절하지 않은 것은?",
+    "title": "아래 두 테이블에 대한 SQL 의 결과로 옳은 것은? ('행 수, 다의 등급, 라의 등급' 순서)",
     "options": [
-      "두 테이블에서 조인 조건이 일치하는 행만 반환된다.",
-      "ON 절에 조인 조건을 기술할 수 있다.",
-      "USING 절로 컬럼명이 같은 경우 간단히 조인할 수 있다.",
-      "조인으로 사용되는 컬럼은 반드시 컬럼명이 같아야 한다."
+      "5행, 2, 3",
+      "4행, 3, 3",
+      "4행, 2, 2",
+      "4행, 2, 3"
     ],
     "correctIndex": 3,
-    "explanation": "INNER JOIN 은 조인 조건이 일치하는 행만 반환하며(①), ON 절에 조건을 쓰거나(②) 같은 이름의 컬럼이면 USING 으로 간단히 쓸 수 있다(③). ON A.DEPTNO = B.DNO 처럼 컬럼명이 달라도 조인할 수 있으므로 반드시 같아야 한다는 ④ 가 옳지 않다.",
-    "_source": "authored"
+    "explanation": "INNER JOIN 의 조건은 = 가 아니어도 되고, 두 칼럼 이름이 같을 필요도 없다. 이처럼 범위로 짝을 짓는 것을 비등가 조인이라 한다. BETWEEN 은 양 끝 값을 포함하므로 399 인 다는 2등급(200~399), 400 인 라는 3등급(400~599)이다. 700 인 마는 어느 범위에도 들지 않아 INNER JOIN 결과에서 빠지고, 결과는 4행이다. 정답은 ④번이다. ① 은 짝이 없는 행도 남는다고 본 것, ②·③ 은 BETWEEN 의 경계값을 한쪽 등급으로 잘못 붙인 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "caption": "등급",
+        "headers": [
+          "등급",
+          "하한",
+          "상한"
+        ],
+        "rows": [
+          [
+            "1",
+            "0",
+            "199"
+          ],
+          [
+            "2",
+            "200",
+            "399"
+          ],
+          [
+            "3",
+            "400",
+            "599"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "사원",
+        "headers": [
+          "이름",
+          "급여"
+        ],
+        "rows": [
+          [
+            "가",
+            "150"
+          ],
+          [
+            "나",
+            "200"
+          ],
+          [
+            "다",
+            "399"
+          ],
+          [
+            "라",
+            "400"
+          ],
+          [
+            "마",
+            "700"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT E.이름, G.등급\nFROM   사원 E\n       INNER JOIN 등급 G\n       ON E.급여 BETWEEN G.하한\n                     AND G.상한;"
+      }
+    ]
   },
   {
     "id": 10349,

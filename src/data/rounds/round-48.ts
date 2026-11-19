@@ -53,16 +53,22 @@ export const ROUND_48: QuizQuestion[] = [
     "round": 48,
     "subject": "1과목",
     "number": 3,
-    "title": "발생 시점 기준 엔터티에 해당하지 않는 것은?",
+    "title": "아래 은행 업무의 엔터티 ㉠~㉣ 을 발생 시점 기준(기본·중심·행위 엔터티)으로 바르게 분류한 것은?",
     "options": [
-      "기본 엔터티",
-      "중심 엔터티",
-      "행위 엔터티",
-      "유형 엔터티"
+      "기본, 중심, 중심, 행위",
+      "중심, 기본, 중심, 행위",
+      "기본, 기본, 행위, 행위",
+      "기본, 기본, 중심, 행위"
     ],
     "correctIndex": 3,
-    "explanation": "엔터티를 발생 시점으로 나누면 기본·중심·행위 엔터티 세 가지다(①②③). 기본 엔터티는 고객·상품처럼 업무에 원래 있어 독립적으로 생기는 엔터티, 중심 엔터티는 주문·계약처럼 기본 엔터티에서 생겨 업무의 중심이 되는 엔터티, 행위 엔터티는 주문이력처럼 두 개 이상의 부모 엔터티에서 생기고 내용이 자주 바뀌거나 계속 쌓이는 엔터티다. ④ 유형 엔터티는 발생 시점이 아니라 유무형(유형·개념·사건) 기준으로 나눈 분류라 해당하지 않는다.",
-    "_source": "authored"
+    "explanation": "기본 엔터티는 다른 엔터티에 기대지 않고 업무에 원래 있는 것으로, 자기만의 식별자를 가진다. 고객과 예금상품이 여기에 해당한다. 중심 엔터티는 기본 엔터티에서 생겨나 업무의 중심이 되고, 많은 행위 엔터티를 만들어 낸다. 고객과 예금상품이 만나 생기는 계좌가 그렇다. 행위 엔터티는 두 개 이상의 부모에서 생기고 데이터가 계속 쌓이는 것으로, 입출금내역이 해당한다. 정답은 ④번이다. ① 은 상품을 중심 엔터티로 본 것, ② 는 고객을 중심 엔터티로 본 것, ③ 은 계좌를 거래 기록처럼 행위 엔터티로 본 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "text",
+        "content": "㉠ 고객: 은행과 거래하는 사람. 고객번호로 구별한다.\n㉡ 예금상품: 은행이 파는 예금 종류. 상품코드로 구별한다.\n㉢ 계좌: 고객이 예금상품에 가입하면 생긴다.\n㉣ 입출금내역: 계좌에서 돈이 들어오고 나갈 때마다 쌓인다."
+      }
+    ]
   },
   {
     "id": 10603,
@@ -71,16 +77,22 @@ export const ROUND_48: QuizQuestion[] = [
     "round": 48,
     "subject": "1과목",
     "number": 4,
-    "title": "데이터 모델링의 관계에 대한 설명 중 옳지 않은 것은?",
+    "title": "아래 관계 ㉠~㉢ 을 존재에 의한 관계와 행위에 의한 관계로 나누고, ERD 에서 둘을 어떻게 그리는지 바르게 짝지은 것은?",
     "options": [
-      "관계는 존재적 관계와 행위적 관계로 구분할 수 있으나 ERD 에서는 단일 표기법을 사용한다.",
-      "UML 의 연관관계(Association) 와 의존관계(Dependency) 는 실선과 점선으로 다르게 표기된다.",
-      "관계는 존재적 관계와 행위적 관계를 ERD 에서 실선·점선으로 다르게 표기한다.",
-      "존재적 관계는 엔터티 간의 상태를, 행위적 관계는 엔터티 간 행위로 발생하는 관계를 나타낸다."
+      "존재, 행위, 존재 / 존재는 실선, 행위는 점선",
+      "행위, 존재, 행위 / 같은 관계선으로 그린다",
+      "존재, 행위, 행위 / 같은 관계선으로 그린다",
+      "존재, 행위, 행위 / 존재는 실선, 행위는 점선"
     ],
     "correctIndex": 2,
-    "explanation": "관계는 존재에 의한 관계(예: 부서-사원)와 행위에 의한 관계(예: 고객-주문)로 나눌 수 있지만, ERD 에서는 둘을 구분하지 않고 같은 표기법으로 그린다(①). 반면 UML 클래스 다이어그램은 연관관계(실선)와 의존관계(점선)를 구분한다(②). 따라서 ERD 에서 존재·행위 관계를 실선·점선으로 구분한다는 ③ 이 옳지 않다. ④ 는 두 관계의 뜻을 바르게 설명했다.",
-    "_source": "authored"
+    "explanation": "존재에 의한 관계는 어떤 행위가 없어도 상태로 이어져 있는 관계(소속), 행위에 의한 관계는 주문·작성처럼 어떤 행위가 일어나야 생기는 관계다. ㉠ 은 존재, ㉡·㉢ 은 행위에 의한 관계다. ERD 는 이 둘을 구분하지 않고 같은 관계선으로 그린다. 실선·점선은 식별자 관계 여부를 나타낼 뿐이다(존재·행위를 선 모양으로 나누는 것은 UML 의 연관·의존 관계). 정답은 ③번이다. ①·④ 는 ERD 의 실선·점선을 존재·행위 구분으로 본 것이고, ① 은 ㉢ 도 존재로 보았다. ② 는 ㉠ 과 ㉡ 을 바꿔 본 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "text",
+        "content": "㉠ 사원은 부서에 소속된다.\n㉡ 고객이 상품을 주문한다.\n㉢ 회원이 게시글을 작성한다."
+      }
+    ]
   },
   {
     "id": 10604,
@@ -132,16 +144,22 @@ export const ROUND_48: QuizQuestion[] = [
     "round": 48,
     "subject": "1과목",
     "number": 7,
-    "title": "속성의 특징에 대한 설명으로 올바른 것은?",
+    "title": "주문 엔터티를 설계하고 있다. 아래 후보 중 주문의 속성이 아니라 별도 엔터티로 관리해야 하는 것은?",
     "options": [
-      "엔터티는 한 개의 속성만으로 구성될 수 있다.",
-      "속성은 엔터티를 설명하며 인스턴스의 구성 요소가 된다.",
-      "하나의 속성에는 여러 개의 속성 값을 동시에 가질 수 있다.",
-      "속성은 인스턴스 없이 독립적으로 존재할 수 있다."
+      "주문일자",
+      "배송지",
+      "주문금액",
+      "결제수단코드"
     ],
     "correctIndex": 1,
-    "explanation": "속성은 엔터티를 설명하는 항목이고, 인스턴스 한 건을 이루는 구성 요소다(②). ① 엔터티는 보통 두 개 이상의 속성을 가진다. ③ 한 속성에는 값이 하나만 들어가야 하고, 여러 값이 들어가면 정규화 대상이다. ④ 속성 값은 인스턴스마다 하나씩 존재하므로, 인스턴스 없이 속성만 따로 존재할 수 없다.",
-    "_source": "authored"
+    "explanation": "속성은 인스턴스마다 값 하나를 갖는, 더 나누지 않는 단위다. 배송지는 한 주문에 여러 개가 있을 수 있고, 각각 받는 사람·주소·연락처·상태라는 자기 속성을 가진다. 이렇게 여러 건이면서 스스로 설명할 속성을 가지면 속성이 아니라 엔터티(주문배송지)로 떼어 주문과 1:M 으로 이어야 한다. 정답은 ②번이다. 주문일자·주문금액·결제수단코드는 주문 한 건에 값이 하나씩이라 주문의 속성으로 충분하다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "text",
+        "content": "업무 조건: 선물 주문은 한 주문을 여러 곳으로 나눠 보낼 수 있고, 배송지마다 받는 사람·주소·연락처·배송 상태를 따로 관리한다."
+      }
+    ]
   },
   {
     "id": 10607,
@@ -150,20 +168,56 @@ export const ROUND_48: QuizQuestion[] = [
     "round": 48,
     "subject": "1과목",
     "number": 8,
-    "title": "아래 설명에 해당하는 주식별자의 특성은?",
+    "title": "아래 수강 테이블의 주식별자 후보 중 유일성은 만족하지만 최소성을 만족하지 못하는 것은?",
     "options": [
-      "유일성",
-      "최소성",
-      "불변성",
-      "존재성"
+      "학번 + 과목코드",
+      "학번 + 과목코드 + 학기 + 성적",
+      "학번 + 과목코드 + 학기",
+      "학번 + 학기"
     ],
     "correctIndex": 1,
-    "explanation": "주식별자의 4대 특성 중 최소성은 행을 식별하는 데 필요한 최소한의 속성으로 구성해야 한다는 조건이다. 빠뜨리면 식별이 안 되는 속성만 묶이도록 설계해야 한다. 정답은 ②번이다. ① 유일성은 각 행을 유일하게 구분하는 성질, ③ 불변성은 값이 자주 바뀌지 않아야 한다는 성질, ④ 존재성은 반드시 값이 있어야(NULL 불가) 한다는 성질이다.",
+    "explanation": "유일성은 모든 행을 구별할 수 있는지, 최소성은 그 가운데 하나라도 빼면 구별이 안 되는 최소 조합인지를 본다. 학번 + 과목코드 는 101 의 DB 재수강 때문에, 학번 + 학기 는 101 의 2025-2 두 과목 때문에 겹쳐 유일성부터 깨진다. 학번 + 과목코드 + 학기 는 업무 규칙상 겹치지 않고 셋 중 하나라도 빼면 겹치므로 둘 다 만족한다. 여기에 성적을 더한 조합은 여전히 유일하지만 성적을 빼도 구별되므로 최소성을 어긴다. 정답은 ②번이다. ①·④ 는 유일성을 만족하지 못하고, ③ 은 두 조건을 모두 만족한다.",
     "_source": "authored",
     "references": [
       {
+        "type": "table",
+        "caption": "수강",
+        "headers": [
+          "학번",
+          "과목코드",
+          "학기",
+          "성적"
+        ],
+        "rows": [
+          [
+            "101",
+            "DB",
+            "2025-1",
+            "C"
+          ],
+          [
+            "101",
+            "DB",
+            "2025-2",
+            "A"
+          ],
+          [
+            "101",
+            "SQL",
+            "2025-2",
+            "B"
+          ],
+          [
+            "102",
+            "DB",
+            "2025-1",
+            "B"
+          ]
+        ]
+      },
+      {
         "type": "text",
-        "content": "주식별자를 구성하는 속성이 최소한으로 구성되어야 한다."
+        "content": "한 학생은 같은 학기에 같은 과목을 한 번만 듣는다. 재수강은 다른 학기에 한다."
       }
     ]
   },
@@ -248,16 +302,22 @@ export const ROUND_48: QuizQuestion[] = [
     "round": 48,
     "subject": "2과목",
     "number": 12,
-    "title": "SELECT 문장의 실행 순서로 옳은 것은?",
+    "title": "아래 SQL 의 ㉠~㉣ 자리에 각각 해당 절을 넣었을 때, 별칭 연봉 을 써도 오류 없이 실행되는 것만 모두 고른 것은? (Oracle 19c 기준)",
     "options": [
-      "SELECT - FROM - WHERE - GROUP BY - HAVING - ORDER BY",
-      "FROM - SELECT - WHERE - GROUP BY - HAVING - ORDER BY",
-      "FROM - WHERE - GROUP BY - HAVING - ORDER BY - SELECT",
-      "FROM - WHERE - GROUP BY - HAVING - SELECT - ORDER BY"
+      "㉠, ㉡",
+      "㉡, ㉢",
+      "㉡, ㉢, ㉣",
+      "㉡"
     ],
     "correctIndex": 3,
-    "explanation": "SQL은 작성 순서와 실제 실행 순서가 다르다. 먼저 FROM으로 테이블을 가져오고, WHERE로 행을 거른 뒤, GROUP BY로 묶고, HAVING으로 그룹을 거른 다음, SELECT로 컬럼을 골라내고, 마지막으로 ORDER BY로 정렬한다. 그래서 SELECT의 별칭을 WHERE에서 못 쓰고 ORDER BY에서는 쓸 수 있는 것이다. 정답은 ④번이다. ① 은 SQL 을 작성하는 순서이고, ② 는 SELECT 를 WHERE 보다 먼저, ③ 은 ORDER BY 보다 나중에 둔 순서라 틀리다.",
-    "_source": "authored"
+    "explanation": "SELECT 문은 FROM → WHERE → GROUP BY → HAVING → SELECT → ORDER BY 순서로 처리되고, 별칭은 SELECT 단계에서 생긴다. 그래서 SELECT 보다 먼저 처리되는 WHERE(㉠)·GROUP BY(㉢)·HAVING(㉣)에서는 별칭 연봉 을 알 수 없어 오류가 나고, SELECT 뒤에 처리되는 ORDER BY(㉡)에서만 쓸 수 있다. 정답은 ④번이다. 별칭 대신 급여 * 12 를 그대로 쓰면 WHERE 에서도 쓸 수 있다. ①·②·③ 은 SELECT 보다 먼저 처리되는 절에서도 별칭을 쓸 수 있다고 본 것이다(PostgreSQL 은 GROUP BY 의 별칭을 허용해 결과가 다르다).",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT 부서, 급여 * 12 AS 연봉\nFROM   사원\n-- ㉠ WHERE  연봉 > 3000\n-- ㉡ ORDER BY 연봉 DESC\n-- ㉢ GROUP BY 부서, 연봉\n-- ㉣ HAVING 연봉 > 0"
+      }
+    ]
   },
   {
     "id": 10612,
@@ -647,16 +707,22 @@ export const ROUND_48: QuizQuestion[] = [
     "round": 48,
     "subject": "2과목",
     "number": 17,
-    "title": "값이 가장 크게 나오는 함수는?",
+    "title": "아래 SQL 의 결과(A, B, C, D)로 옳은 것은? (Oracle 기준)",
     "options": [
-      "ROUND(4.3)",
-      "TRUNC(4.9)",
-      "FLOOR(4.9)",
-      "CEIL(4.1)"
+      "2, -5, 5, 4.57",
+      "-1, -5, 0, 4.57",
+      "2, -4, 10, 4.56",
+      "-1, -4, 0, 4.56"
     ],
     "correctIndex": 3,
-    "explanation": "① ROUND(4.3) 은 소수 첫째 자리에서 반올림해 4, ② TRUNC(4.9) 는 소수점 아래를 버려 4, ③ FLOOR(4.9) 는 내림이라 4 다. ④ CEIL(4.1) 은 올림이라 5 가 되어 가장 크다. 소수 부분이 아무리 작아도 CEIL 은 다음 정수로 올리고, FLOOR·TRUNC 는 소수 부분이 아무리 커도 버린다는 점이 핵심이다.",
-    "_source": "authored"
+    "explanation": "MOD 의 나머지는 나누어지는 수(-7)의 부호를 따른다. -7 = 3 × (-2) + (-1) 이라 A 는 -1 이다. CEIL 은 그 값 이상인 가장 작은 정수라 -4.1 은 -4 로 올라간다. ROUND 의 두 번째 인자 -1 은 십의 자리로 반올림하라는 뜻이라 4.567 은 0 이 된다. TRUNC(4.567, 2) 는 소수 둘째 자리 아래를 버려 4.56 이다. 정답은 ④번이다. ① 은 나머지를 늘 양수로 보고 -1 을 일의 자리로 읽은 것, ② 는 CEIL 을 0 에서 먼 쪽으로 올리고 TRUNC 를 반올림처럼 본 것, ③ 은 십의 자리 반올림을 10 으로 올린 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT MOD(-7, 3)         AS A,\n       CEIL(-4.1)         AS B,\n       ROUND(4.567, -1)   AS C,\n       TRUNC(4.567, 2)    AS D\nFROM   DUAL;"
+      }
+    ]
   },
   {
     "id": 10617,
@@ -665,16 +731,22 @@ export const ROUND_48: QuizQuestion[] = [
     "round": 48,
     "subject": "2과목",
     "number": 18,
-    "title": "컬럼을 추가할 때 올바른 ALTER 구문은? (Oracle 환경)",
+    "title": "T 테이블에 칼럼 C 가 없을 때, 아래 ㉠~㉣ 중 오류가 발생하는 것만 모두 고른 것은? (Oracle 기준)",
     "options": [
-      "ALTER TABLE T COLUMN 컬럼명 DATE DEFAULT '날짜' NOT NULL;",
-      "ALTER TABLE T ADD 컬럼명 DATE DEFAULT '날짜' NOT NULL;",
-      "ALTER TABLE T ADD COLUMN 컬럼명 DATE DEFAULT '날짜' NOT NULL;",
-      "ALTER TABLE T MODIFY 컬럼명 DATE DEFAULT '날짜' NOT NULL;"
+      "㉡",
+      "㉡, ㉣",
+      "㉠, ㉡",
+      "㉢, ㉣"
     ],
     "correctIndex": 1,
-    "explanation": "Oracle 에서 컬럼 추가는 ALTER TABLE 테이블명 ADD 컬럼명 타입 형식이며 COLUMN 키워드를 쓰지 않는다(②). ① 은 ADD 가 없고, ③ 의 ADD COLUMN 은 SQL Server·MySQL 등의 문법이며, ④ MODIFY 는 이미 있는 컬럼을 변경할 때 쓴다.",
-    "_source": "authored"
+    "explanation": "Oracle 에서 칼럼은 ALTER TABLE … ADD (칼럼 타입 …) 으로 추가하고, DEFAULT 도 함께 줄 수 있다(㉠). 괄호 안에 여러 칼럼을 한 번에 추가할 수도 있다(㉢). ADD 뒤에 COLUMN 키워드를 쓰는 ㉡ 은 SQL Server·PostgreSQL 방식이라 Oracle 에서는 오류다. MODIFY 는 있는 칼럼을 바꾸는 명령이라, 없는 칼럼 C 를 MODIFY 하는 ㉣ 도 오류다. 정답은 ②번이다. ① 은 없는 칼럼도 MODIFY 로 만들 수 있다고 본 것, ③ 은 ADD 에 DEFAULT 를 줄 수 없다고 본 것, ④ 는 여러 칼럼을 한 번에 추가할 수 없다고 본 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "-- ㉠\nALTER TABLE T\n  ADD (C DATE DEFAULT SYSDATE);\n-- ㉡\nALTER TABLE T ADD COLUMN C DATE;\n-- ㉢\nALTER TABLE T\n  ADD (C1 NUMBER, C2 VARCHAR2(10));\n-- ㉣\nALTER TABLE T MODIFY (C DATE);"
+      }
+    ]
   },
   {
     "id": 10618,
@@ -683,16 +755,58 @@ export const ROUND_48: QuizQuestion[] = [
     "round": 48,
     "subject": "2과목",
     "number": 19,
-    "title": "서브쿼리 결과로 여러 개의 컬럼이 반환되어 메인 쿼리의 조건절에서 동시에 비교되는 서브쿼리 유형은?",
+    "title": "아래 사원 테이블에 대한 SQL ㉠, ㉡ 의 결과 행 수로 옳은 것은?",
     "options": [
-      "단일 행 서브쿼리",
-      "다중 행 서브쿼리",
-      "단일 컬럼 서브쿼리",
-      "다중 컬럼 서브쿼리"
+      "3, 3",
+      "4, 4",
+      "4, 3",
+      "3, 4"
     ],
     "correctIndex": 3,
-    "explanation": "서브쿼리는 반환되는 행 수와 컬럼 수에 따라 단일/다중 행, 단일/다중 컬럼으로 분류된다. 두 개 이상의 컬럼을 한꺼번에 반환해 메인쿼리에서 짝지어 비교하는 것이 다중 컬럼 서브쿼리이다. 정답은 ④번이다. ① 단일 행·② 다중 행 서브쿼리는 반환하는 행 수 기준의 분류라 여러 컬럼을 함께 비교한다는 설명과 맞지 않고, ③ 단일 컬럼 서브쿼리는 컬럼을 하나만 반환한다.",
-    "_source": "authored"
+    "explanation": "서브쿼리가 돌려주는 부서별 최고 급여는 (10, 500), (20, 400), (30, 500) 이다. ㉠ 은 다중 칼럼 서브쿼리라 부서와 급여를 한 쌍으로 비교한다. 김(10, 500), 최(20, 400), 정(30, 500) 만 맞아 3행이다. ㉡ 은 부서와 급여를 따로 비교해서, 급여가 최고 급여 목록 {500, 400} 중 하나이기만 하면 통과한다. 그래서 10번 부서의 최고는 아니지만 400 을 받는 이까지 들어와 4행이 된다. 정답은 ④번이다. ① 은 두 방식이 같다고 본 것, ② 는 ㉠ 도 따로 비교한다고 본 것, ③ 은 두 결과를 바꿔 본 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "caption": "사원",
+        "headers": [
+          "이름",
+          "부서",
+          "급여"
+        ],
+        "rows": [
+          [
+            "김",
+            "10",
+            "500"
+          ],
+          [
+            "이",
+            "10",
+            "400"
+          ],
+          [
+            "박",
+            "20",
+            "300"
+          ],
+          [
+            "최",
+            "20",
+            "400"
+          ],
+          [
+            "정",
+            "30",
+            "500"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "-- ㉠\nSELECT 이름 FROM 사원\nWHERE  (부서, 급여) IN\n       (SELECT 부서, MAX(급여)\n        FROM   사원\n        GROUP  BY 부서);\n-- ㉡\nSELECT 이름 FROM 사원\nWHERE  부서 IN (SELECT 부서\n               FROM   사원\n               GROUP  BY 부서)\nAND    급여 IN (SELECT MAX(급여)\n               FROM   사원\n               GROUP  BY 부서);"
+      }
+    ]
   },
   {
     "id": 10619,
@@ -1188,16 +1302,44 @@ export const ROUND_48: QuizQuestion[] = [
     "round": 48,
     "subject": "2과목",
     "number": 33,
-    "title": "ROLLUP 결과에서 데이터 자체의 NULL 과 구분하여, 소계·총계 행에만 '합계' 가 출력되도록 하는 처리로 가장 적절한 것은?",
+    "title": "아래 판매 테이블에 SQL 을 실행한 결과로 옳은 것은? (지역 NULL 은 '지역을 모르는 판매')",
     "options": [
-      "CASE WHEN GROUPING(컬럼) = 1 THEN '합계' ELSE 컬럼 END",
-      "NVL(컬럼, '합계')",
-      "COALESCE(컬럼, 0)",
-      "NULLIF(컬럼, '합계')"
+      "부산 7, 서울 10, 미상 5, 합계 22",
+      "부산 7, 서울 10, 합계 5, 합계 22",
+      "부산 7, 서울 10, 미상 5, 미상 22",
+      "부산 7, 서울 10, 합계 22"
     ],
     "correctIndex": 0,
-    "explanation": "ROLLUP·CUBE 의 소계·총계 행에서는 그룹 기준 컬럼이 NULL 로 표시되는데, 이 NULL 은 데이터의 NULL 이 아니라 '소계 행' 이라는 표식이다. GROUPING(컬럼) 은 그 컬럼이 소계·총계로 집계된 행이면 1, 일반 행이면 0 을 반환하므로 CASE WHEN GROUPING(컬럼) = 1 THEN '합계' ELSE 컬럼 END 로 소계 행에만 '합계' 를 출력할 수 있다(①). ② NVL 은 원래 데이터가 NULL 인 행까지 '합계' 로 바꿔 구분하지 못하고, ③ 은 NULL 을 0 으로 바꾸며, ④ NULLIF 는 값이 '합계' 와 같을 때 NULL 을 반환하는 함수라 의도와 반대다.",
-    "_source": "authored"
+    "explanation": "ROLLUP(지역) 은 지역별 행과 전체 합계 행을 만든다. 전체 합계 행의 지역도 NULL 로 나오기 때문에, 원래 데이터의 NULL 과 구분하려면 GROUPING 을 써야 한다. GROUPING(지역) 은 집계로 생긴 행에서만 1 이다. 그래서 원래 NULL 인 5 원 행은 GROUPING 이 0 이라 NVL 로 '미상', 합계 행만 '합계' 가 된다. 정렬은 GROUPING 이 0 인 행이 먼저, 그 안에서 지역 오름차순(NULL 은 맨 뒤)이다. 정답은 ①번이다. ② 는 GROUPING 대신 NVL(지역, '합계') 처럼 처리해 원래 NULL 도 '합계' 가 된 경우, ③ 은 합계 행도 NVL 로 처리한 경우, ④ 는 NULL 지역 행이 사라진다고 본 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "caption": "판매",
+        "headers": [
+          "지역",
+          "금액"
+        ],
+        "rows": [
+          [
+            "서울",
+            "10"
+          ],
+          [
+            "NULL",
+            "5"
+          ],
+          [
+            "부산",
+            "7"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT CASE WHEN GROUPING(지역) = 1\n            THEN '합계'\n            ELSE NVL(지역, '미상')\n       END       AS 구분,\n       SUM(금액) AS 합\nFROM   판매\nGROUP  BY ROLLUP(지역)\nORDER  BY GROUPING(지역), 지역;"
+      }
+    ]
   },
   {
     "id": 10633,
@@ -1206,16 +1348,22 @@ export const ROUND_48: QuizQuestion[] = [
     "round": 48,
     "subject": "2과목",
     "number": 34,
-    "title": "SEARCHED CASE 표현식에 대한 설명 중 옳지 않은 것은?",
+    "title": "점수가 95, 85, 72, 55 인 4행에 아래 CASE 식을 적용한 결과(점수 순서대로)로 옳은 것은?",
     "options": [
-      "WHEN 절마다 조건식을 독립적으로 기술한다.",
-      "순차적으로 평가되어 첫 번째 참 조건의 값을 반환한다.",
-      "ELSE 절을 생략하면 기본 NULL 이 반환된다.",
-      "CASE 바로 뒤에 비교 대상 컬럼을 기술해야 한다."
+      "A, B, C, F",
+      "A, B, C, NULL",
+      "C, C, C, NULL",
+      "C, C, C, F"
     ],
     "correctIndex": 3,
-    "explanation": "SEARCHED CASE 는 CASE WHEN 조건식 THEN 값 형태로 WHEN 마다 조건을 따로 쓰고(①), 위에서부터 평가해 처음 참이 되는 값을 반환하며(②), ELSE 를 생략하면 NULL 이다(③). CASE 바로 뒤에 비교 대상 컬럼을 쓰는 것은 SIMPLE CASE(CASE 컬럼 WHEN 값 THEN …)이므로 ④ 가 옳지 않다.",
-    "_source": "authored"
+    "explanation": "검색 CASE 는 WHEN 을 위에서부터 차례로 검사하고, 처음 참이 된 WHEN 의 값을 돌려준 뒤 나머지는 보지 않는다. 95·85·72 는 모두 첫 조건 '>= 60' 에서 이미 참이라 C 가 되고, 아래의 B·A 조건까지 가지 못한다. 55 는 어느 WHEN 에도 맞지 않아 ELSE 의 F 다. 정답은 ④번이다. 그래서 범위 조건은 큰 값(>= 90)부터 적어야 한다. ① 은 가장 잘 맞는 조건을 골라 준다고 본 것, ②·③ 은 ELSE 가 있는데도 NULL 이 나온다고 본 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "CASE WHEN 점수 >= 60 THEN 'C'\n     WHEN 점수 >= 80 THEN 'B'\n     WHEN 점수 >= 90 THEN 'A'\n     ELSE 'F'\nEND"
+      }
+    ]
   },
   {
     "id": 10634,
@@ -1224,16 +1372,26 @@ export const ROUND_48: QuizQuestion[] = [
     "round": 48,
     "subject": "2과목",
     "number": 35,
-    "title": "VIEW 에 대한 설명으로 옳은 것은?",
+    "title": "테이블 T(A, B, C) 에 아래처럼 뷰 V 를 만들었다. ㉠~㉢ 에 대한 답으로 옳은 것은? (Oracle 기준)",
     "options": [
-      "뷰 정의는 ALTER 문으로 변경이 불가능하다.",
-      "뷰는 실제 데이터를 저장한다.",
-      "뷰는 한 번 생성되면 절대 삭제할 수 없다.",
-      "뷰는 참조 테이블 구조 변경에 영향을 받지 않는다."
+      "2개 / CREATE OR REPLACE VIEW / 오류",
+      "3개 / ALTER VIEW … AS / 오류",
+      "2개 / ALTER VIEW … AS / A 만 보인다",
+      "3개 / CREATE OR REPLACE VIEW / A 만 보인다"
     ],
     "correctIndex": 0,
-    "explanation": "Oracle 의 ALTER VIEW 는 재컴파일이나 제약 조건 관리에만 쓰이고, 뷰의 정의(SELECT 문)는 바꿀 수 없다. 정의를 바꾸려면 CREATE OR REPLACE VIEW 로 다시 만든다. 따라서 ① 이 옳다. 뷰는 데이터를 저장하지 않는 가상 테이블이고(②), DROP VIEW 로 삭제할 수 있으며(③), 참조하는 테이블의 컬럼이 바뀌면 뷰가 무효화되는 등 영향을 받는다(④).",
-    "_source": "authored"
+    "explanation": "뷰는 만들 때의 SELECT 문 정의만 저장해 둔다. 그래서 T 에 칼럼이 늘어나도 V 는 정의대로 A, B 두 칼럼만 보여 준다(㉠). 뷰의 정의는 ALTER VIEW 로 바꿀 수 없고, CREATE OR REPLACE VIEW 로 다시 만들어야 한다(㉡). Oracle 의 ALTER VIEW 는 다시 컴파일하는 용도다. 뷰가 쓰는 칼럼 B 가 사라지면 V 는 사용할 수 없는 상태가 되어 조회하면 오류가 난다(㉢). 정답은 ①번이다. ② 와 ④ 는 뷰가 원래 테이블의 칼럼 추가를 따라간다고 본 것, ③ 은 남은 칼럼만 보여 준다고 본 것이다. PostgreSQL 은 뷰가 쓰는 칼럼을 아예 삭제하지 못하게 막는다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "CREATE VIEW V AS\n  SELECT A, B FROM T;"
+      },
+      {
+        "type": "text",
+        "content": "㉠ T 에 칼럼 D 를 추가한 뒤 SELECT * FROM V 의 칼럼 수는?\n㉡ V 가 C 도 보여 주도록 정의를 바꾸려면 어떤 명령을 쓰는가?\n㉢ T 에서 칼럼 B 를 삭제한 뒤 SELECT * FROM V 를 실행하면?"
+      }
+    ]
   },
   {
     "id": 10635,
@@ -1317,16 +1475,22 @@ export const ROUND_48: QuizQuestion[] = [
     "round": 48,
     "subject": "2과목",
     "number": 37,
-    "title": "양쪽 공백 제거를 수행하는 함수는?",
+    "title": "아래 SQL 의 결과(A, B, C, D)로 옳은 것은? (Oracle 기준)",
     "options": [
-      "LTRIM",
-      "RTRIM",
-      "REPLACE",
-      "TRIM"
+      "SQL, xySQL, SQL, 5",
+      "SQLxx, xySQLyx, SQL, 5",
+      "SQLxx, xySQL, SQL, 3",
+      "SQLxx, xySQL, SQL, 5"
     ],
     "correctIndex": 3,
-    "explanation": "TRIM 은 문자열 양쪽 끝의 공백(또는 지정 문자)을 제거한다. ① LTRIM 은 왼쪽만, ② RTRIM 은 오른쪽만 지운다. ③ REPLACE 는 문자열 안의 특정 문자열을 다른 문자열로 바꾸는 함수라 공백을 바꾸면 가운데 공백까지 사라진다. 양쪽 공백만 지우는 함수는 ④ TRIM 이다.",
-    "_source": "authored"
+    "explanation": "LTRIM 은 왼쪽에서만 지정한 문자를 지워 A 는 'SQLxx' 다. RTRIM 의 두 번째 인자 'xy' 는 문자열 통째가 아니라 '지울 문자들의 모음' 이라, 오른쪽 끝에서 x 나 y 가 아닌 글자가 나올 때까지 지운다. 그래서 B 는 'xySQL' 이다. TRIM 은 기본으로 양쪽을 지워 C 는 'SQL' 이다. D 는 바깥 공백만 지우고 가운데 공백은 남겨 'S Q L' 의 길이 5 다. 정답은 ④번이다. ① 은 LTRIM 이 양쪽을 지운다고 본 것, ② 는 RTRIM 의 'xy' 를 한 덩어리 문자열로 본 것, ③ 은 TRIM 이 가운데 공백까지 지운다고 본 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT LTRIM('xxSQLxx', 'x')       AS A,\n       RTRIM('xySQLyx', 'xy')      AS B,\n       TRIM('x' FROM 'xxSQLxx')    AS C,\n       LENGTH(TRIM('  S Q L  '))   AS D\nFROM   DUAL;"
+      }
+    ]
   },
   {
     "id": 10637,
@@ -1404,16 +1568,58 @@ export const ROUND_48: QuizQuestion[] = [
     "round": 48,
     "subject": "2과목",
     "number": 40,
-    "title": "계층형 쿼리에서 순방향 전개 중 NULL 이 나오면 이후 전개가 어떻게 되는가?",
+    "title": "아래 사원 테이블에 계층형 SQL 을 실행한 결과로 옳은 것은? ('결과 행 수, 가장 큰 LEVEL, D 포함 여부' 순서, Oracle 기준)",
     "options": [
-      "무한히 전개된다.",
-      "NULL 이면 더 이상 전개되지 않는다.",
-      "역방향으로 전환된다.",
-      "오류가 발생한다."
+      "5, 3, 포함",
+      "4, 3, 미포함",
+      "4, 2, 미포함",
+      "3, 3, 미포함"
     ],
     "correctIndex": 1,
-    "explanation": "계층형 쿼리에서 `CONNECT BY PRIOR 자식 = 부모`로 트리를 전개할 때, 다음에 따라가야 할 부모 키 값이 NULL이면 \"매칭되는 부모가 없다\"는 의미가 되어 그 가지의 전개가 거기서 멈춘다. 무한 전개(①)·역방향 전환(③)·오류(④)는 발생하지 않는다. 정답은 ②번이다.",
-    "_source": "authored"
+    "explanation": "START WITH 관리자 IS NULL 이라 A 와 E 두 행이 각각 루트(LEVEL 1)가 된다. A 아래로 B(LEVEL 2), B 아래로 C(LEVEL 3)가 이어지고, 더 이어질 자식이 없으면 그 가지의 전개가 멈춘다. E 는 자식이 없어 혼자 끝난다. D 는 관리자 9 가 테이블에 없어 어느 루트에서도 닿지 못하므로 결과에 나오지 않는다. 그래서 A, B, C, E 의 4행이고 가장 큰 LEVEL 은 3 이다. 정답은 ②번이다. ① 은 연결되지 않은 행도 나온다고 본 것, ③ 은 C 까지 내려가지 않는다고 본 것, ④ 는 루트가 하나뿐이라고 본 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "caption": "사원",
+        "headers": [
+          "사번",
+          "관리자",
+          "이름"
+        ],
+        "rows": [
+          [
+            "1",
+            "NULL",
+            "A"
+          ],
+          [
+            "2",
+            "1",
+            "B"
+          ],
+          [
+            "3",
+            "2",
+            "C"
+          ],
+          [
+            "4",
+            "9",
+            "D"
+          ],
+          [
+            "5",
+            "NULL",
+            "E"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT 이름, LEVEL FROM 사원\nSTART WITH 관리자 IS NULL\nCONNECT BY PRIOR 사번 = 관리자;"
+      }
+    ]
   },
   {
     "id": 10640,
@@ -1422,16 +1628,22 @@ export const ROUND_48: QuizQuestion[] = [
     "round": 48,
     "subject": "2과목",
     "number": 41,
-    "title": "데이터 분석 함수의 분류로 적절하지 않은 것은?",
+    "title": "아래 윈도우 함수 ㉠~㉤ 를 그룹 내 순위·집계·행 순서·비율 함수로 바르게 분류한 것은?",
     "options": [
-      "User Defined Window Function",
-      "Aggregate Window Function",
-      "Ranking Window Function",
-      "Analytic Window Function"
+      "순위, 집계, 행 순서, 비율, 행 순서",
+      "순위, 집계, 비율, 행 순서, 집계",
+      "집계, 순위, 행 순서, 비율, 순위",
+      "순위, 집계, 행 순서, 집계, 비율"
     ],
     "correctIndex": 0,
-    "explanation": "윈도우 함수는 집계(Aggregate), 순위(Ranking), 행 순서(Row Order), 비율(Ratio) 관련 함수로 분류한다. 사용자가 직접 정의하는 User Defined Window Function 은 표준 분류에 포함되지 않는다. 정답은 ①번이다. ② Aggregate·③ Ranking 은 각각 집계·순위 함수 그룹이고, ④ Analytic 은 행 순서·비율 함수처럼 분석용 윈도우 함수를 가리키는 이름이다.",
-    "_source": "authored"
+    "explanation": "윈도우 함수는 그룹 내 순위 함수(RANK, DENSE_RANK, ROW_NUMBER), 집계 함수(SUM, AVG, MAX, MIN, COUNT), 행 순서 함수(FIRST_VALUE, LAST_VALUE, LAG, LEAD), 비율 함수(RATIO_TO_REPORT, PERCENT_RANK, CUME_DIST, NTILE)로 나뉜다. ㉠ 은 순위, ㉡ 은 집계, ㉢ 의 LAG 와 ㉤ 의 FIRST_VALUE 는 다른 행의 값을 가져오는 행 순서 함수, ㉣ 은 비율 함수다. 정답은 ①번이다. ② 는 LAG 를 비율 함수로, ③ 은 RANK 와 SUM 을 바꿔 보고, ④ 는 RATIO_TO_REPORT 를 집계 함수로 본 것이다. 사용자 정의(User Defined) 윈도우 함수라는 분류는 없다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "text",
+        "content": "㉠ RANK\n㉡ SUM … OVER\n㉢ LAG\n㉣ RATIO_TO_REPORT\n㉤ FIRST_VALUE"
+      }
+    ]
   },
   {
     "id": 10641,

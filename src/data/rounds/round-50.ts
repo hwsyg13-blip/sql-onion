@@ -11,16 +11,48 @@ export const ROUND_50: QuizQuestion[] = [
     "round": 50,
     "subject": "1과목",
     "number": 1,
-    "title": "주식별자 도출 기준으로 옳지 않은 것은?",
+    "title": "아래 거래처 엔터티의 주식별자로 가장 적절한 것은?",
     "options": [
-      "해당 업무에서 자주 이용되는 속성을 주식별자로 지정한다.",
-      "지정된 주식별자의 값은 자주 변하지 않아야 한다.",
-      "명칭·내역 등과 같이 이름으로 기술되는 속성을 주식별자로 지정한다.",
-      "복합으로 주식별자를 구성할 경우 너무 많은 속성을 포함하지 않도록 한다."
+      "거래처명",
+      "사업자번호",
+      "거래처코드",
+      "사업자번호 + 거래처명 + 전화"
     ],
     "correctIndex": 2,
-    "explanation": "주식별자는 해당 업무에서 자주 이용되는 속성으로 지정하고(①), 값이 자주 바뀌지 않아야 하며(②), 복합 식별자는 너무 많은 속성을 넣지 않는다(④). 이름·명칭·내역처럼 이름으로 기술되는 속성은 같은 이름이 있을 수 있고 바뀌기도 쉬워 주식별자로 지정하지 않으므로 ③ 이 옳지 않다.",
-    "_source": "authored"
+    "explanation": "주식별자는 업무에서 자주 쓰는 속성으로, 값이 바뀌지 않고 NULL 이 없어야 하며, 이름처럼 서술하는 속성은 피하고, 여러 속성을 묶더라도 너무 많이 묶지 않는다. 거래처코드는 회사가 정해 붙인 값이라 바뀌지 않고 모든 행에 값이 있어 가장 적절하다. 정답은 ③번이다. ① 은 이름 속성이고 상호 변경으로 값이 바뀐다. ② 는 개인 거래처에서 NULL 이 생긴다. ④ 는 속성이 너무 많고 바뀔 수 있는 값을 포함하며, 사업자번호가 NULL 인 행도 있다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "caption": "거래처 (전화 칼럼은 생략)",
+        "headers": [
+          "거래처코드",
+          "사업자번호",
+          "거래처명"
+        ],
+        "rows": [
+          [
+            "V01",
+            "123-45-67890",
+            "한빛상사"
+          ],
+          [
+            "V02",
+            "NULL",
+            "김철수(개인)"
+          ],
+          [
+            "V03",
+            "234-56-78901",
+            "바다유통"
+          ]
+        ]
+      },
+      {
+        "type": "text",
+        "content": "거래처명은 상호를 바꾸면 달라지고, 전화는 바뀔 수 있다. 개인 거래처는 사업자번호가 없다."
+      }
+    ]
   },
   {
     "id": 10501,
@@ -47,16 +79,22 @@ export const ROUND_50: QuizQuestion[] = [
     "round": 50,
     "subject": "1과목",
     "number": 3,
-    "title": "하나의 엔터티에 구성되어 있는 여러 속성 중 엔터티를 대표할 수 있는 속성은?",
+    "title": "아래 회원 엔터티의 속성 ㉠~㉣ 에 알맞은 분류로 바르게 짝지은 것은?",
     "options": [
-      "파생속성",
-      "복합속성",
-      "단일속성",
-      "식별자"
+      "단일속성, 복합속성, 식별자, 파생속성",
+      "복합속성, 단일속성, 식별자, 파생속성",
+      "복합속성, 다중값속성, 파생속성, 식별자",
+      "복합속성, 다중값속성, 식별자, 파생속성"
     ],
     "correctIndex": 3,
-    "explanation": "엔터티를 대표하고 각 인스턴스를 구분하는 속성은 식별자다(④). 파생속성(①)은 다른 속성에서 계산된 속성, 복합속성(②)은 주소처럼 여러 세부 속성으로 나눌 수 있는 속성, 단일속성(③)은 하나의 값만 갖는 속성으로, 모두 엔터티를 대표하는 개념이 아니다.",
-    "_source": "authored"
+    "explanation": "속성을 구성 방식으로 나누면, 더 작게 나눌 수 있는 복합속성(㉠ 주소), 값이 여러 개일 수 있는 다중값속성(㉡ 취미), 나눌 수 없는 단일속성이 있다. 엔터티를 대표하며 인스턴스를 구별하는 속성은 식별자(㉢), 다른 속성으로 계산되는 속성은 파생속성(㉣)이다. 정답은 ④번이다. ① 은 주소를 단일, 취미를 복합으로 본 것, ② 는 취미를 단일속성으로 본 것, ③ 은 식별자와 파생속성을 바꿔 본 것이다. 다중값속성 ㉡ 은 제1정규형을 위해 결국 별도 엔터티로 떼어 낸다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "text",
+        "content": "㉠ 주소: 시·구·상세주소로 나눌 수 있다.\n㉡ 취미: 한 회원이 여러 개를 가질 수 있다.\n㉢ 회원번호: 회원을 하나씩 구별해 엔터티를 대표한다.\n㉣ 나이: 생년월일로 계산한다."
+      }
+    ]
   },
   {
     "id": 10503,
@@ -65,16 +103,22 @@ export const ROUND_50: QuizQuestion[] = [
     "round": 50,
     "subject": "1과목",
     "number": 4,
-    "title": "개념 엔터티로 적합한 예시는?",
+    "title": "아래 보험회사 업무의 엔터티 ㉠~㉣ 을 유형 기준(유형·개념·사건 엔터티)으로 바르게 분류한 것은?",
     "options": [
-      "조직, 보험상품",
-      "주문, 입금",
-      "청구, 결제",
-      "로그인, 알림"
+      "유형, 개념, 사건, 개념",
+      "유형, 유형, 사건, 개념",
+      "개념, 개념, 사건, 유형",
+      "유형, 사건, 개념, 개념"
     ],
     "correctIndex": 0,
-    "explanation": "유무형에 따른 분류에서 개념 엔터티는 물리적 형태는 없지만 관리할 가치가 있는 개념적 정보로, 조직·보험상품이 대표적이다(①). 주문·입금(②), 청구·결제(③), 로그인·알림(④)은 업무 수행 중에 발생하는 사건 엔터티에 해당한다.",
-    "_source": "authored"
+    "explanation": "유형 엔터티는 사람·물건처럼 물리적 형태가 있는 것, 개념 엔터티는 형태는 없지만 관리해야 할 개념적인 것, 사건 엔터티는 업무를 하면서 생기는 일이다. 사원은 형태가 있는 사람이라 유형, 보험상품과 조직은 실체가 없는 개념이라 개념, 청구는 업무 중 발생한 일이라 사건 엔터티다. 정답은 ①번이다. ② 는 보험상품을 물건처럼 유형으로 본 것, ③ 은 사원과 조직을 바꿔 본 것, ④ 는 보험상품과 청구를 바꿔 본 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "text",
+        "content": "㉠ 사원: 보험을 판매하는 직원\n㉡ 보험상품: 회사가 설계한 보험 종류\n㉢ 청구: 고객이 보험금을 달라고 요청한 건\n㉣ 조직: 본부·지점 같은 회사 조직"
+      }
+    ]
   },
   {
     "id": 10504,
@@ -107,16 +151,22 @@ export const ROUND_50: QuizQuestion[] = [
     "round": 50,
     "subject": "1과목",
     "number": 6,
-    "title": "데이터 모델링 유의 사항 중 옳지 않은 것은?",
+    "title": "두 프로젝트에서 따로 만든 고객 엔터티를 하나로 통합하려 한다. 데이터 모델링 유의점에 비추어 옳지 않은 것은?",
     "options": [
-      "중복 데이터를 최소화한다.",
-      "업무 규칙을 반영해야 한다.",
-      "엔터티 간 관계를 명확히 표현해야 한다.",
-      "프로젝트별로 상이한 엔터티를 별도의 제약 없이 통합하여 저장한다."
+      "같은 사람을 두 곳에 따로 두고 있으면 중복성 문제이므로 하나로 모은다.",
+      "고객등급과 회원등급처럼 같은 뜻을 다르게 부르는 속성은 이름과 값 규칙을 하나로 맞춘다.",
+      "합치기 전에 고객번호와 회원ID 가 같은 사람을 같은 방식으로 구별하는지 확인한다.",
+      "칼럼 구성과 규칙이 달라도 우선 그대로 합치고, 차이는 각 프로그램에서 알아서 맞추게 한다."
     ],
     "correctIndex": 3,
-    "explanation": "데이터 모델링은 중복 데이터를 최소화하고(①), 업무 규칙을 반영하며(②), 엔터티 간 관계를 명확히 표현해야 한다(③). 업무 성격이 다른 엔터티를 아무 제약 없이 하나로 통합하면 의미가 섞이고 데이터 무결성과 관리 효율이 떨어지므로 ④ 가 옳지 않다.",
-    "_source": "authored"
+    "explanation": "데이터 모델링에서는 중복성, 비유연성, 비일관성을 피해야 한다. 같은 대상을 한곳으로 모으고(①), 같은 뜻의 속성 이름과 값 규칙을 맞추며(②), 식별자가 같은 대상을 같은 방식으로 가리키는지 확인하는 것(③)은 모두 맞는 통합 절차다. 규칙을 맞추지 않은 채 합치고 차이를 프로그램마다 따로 처리하게 하면, 같은 고객의 등급이 화면마다 달라지는 비일관성이 생긴다. 정답은 ④번이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "text",
+        "content": "A 프로젝트: 고객(고객번호, 이름, 고객등급)\nB 프로젝트: 회원(회원ID, 성명, 회원등급, 가입채널)"
+      }
+    ]
   },
   {
     "id": 10506,
@@ -479,16 +529,62 @@ export const ROUND_50: QuizQuestion[] = [
     "round": 50,
     "subject": "2과목",
     "number": 16,
-    "title": "클래스와 튜터 관계에서 빠짐없이 값이 나오도록 조인하려 한다. 가장 적절한 조합은?",
+    "title": "아래 두 테이블을 튜터ID = ID 로 조인할 때 INNER JOIN, 클래스 기준 LEFT JOIN, FULL OUTER JOIN 의 결과 행 수로 옳은 것은? (순서대로)",
     "options": [
-      "INNER JOIN 만 사용",
-      "클래스 기준 LEFT JOIN",
-      "튜터 기준 RIGHT JOIN",
-      "양쪽을 모두 포함하는 FULL OUTER JOIN"
+      "2, 3, 3",
+      "3, 3, 4",
+      "2, 2, 4",
+      "2, 3, 4"
     ],
     "correctIndex": 3,
-    "explanation": "클래스와 튜터 양쪽 모두에서 짝이 없는 행까지 빠짐없이 나오려면 두 테이블의 행을 모두 보존하는 FULL OUTER JOIN 을 쓴다(④). ① INNER JOIN 은 양쪽이 매칭된 행만 남기고, ② 클래스 기준 LEFT JOIN 은 튜터가 없는 클래스는 남기지만 클래스가 없는 튜터가 빠지며, ③ 튜터 기준 RIGHT JOIN 은 그 반대로 튜터가 없는 클래스가 빠진다.",
-    "_source": "authored"
+    "explanation": "INNER JOIN 은 양쪽에 짝이 있는 수학-김, 영어-이 2행이다. 클래스 기준 LEFT JOIN 은 여기에 튜터가 없는 과학이 튜터 칼럼 NULL 로 더해져 3행이다. FULL OUTER JOIN 은 LEFT 결과에 맡은 클래스가 없는 튜터 박까지 클래스 칼럼 NULL 로 더해져 4행이다. 정답은 ④번이다. ① 은 FULL OUTER 를 LEFT 와 같다고 본 것, ② 는 INNER 에도 과학이 남는다고 본 것, ③ 은 LEFT 에서 과학이 빠진다고 본 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "caption": "클래스",
+        "headers": [
+          "클래스",
+          "튜터ID"
+        ],
+        "rows": [
+          [
+            "수학",
+            "T1"
+          ],
+          [
+            "영어",
+            "T2"
+          ],
+          [
+            "과학",
+            "NULL"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "튜터",
+        "headers": [
+          "ID",
+          "이름"
+        ],
+        "rows": [
+          [
+            "T1",
+            "김"
+          ],
+          [
+            "T2",
+            "이"
+          ],
+          [
+            "T3",
+            "박"
+          ]
+        ]
+      }
+    ]
   },
   {
     "id": 10516,
@@ -629,16 +725,22 @@ export const ROUND_50: QuizQuestion[] = [
     "round": 50,
     "subject": "2과목",
     "number": 19,
-    "title": "NATURAL JOIN 의 특징으로 옳지 않은 것은?",
+    "title": "A(ID, 이름), B(ID, 이름, 점수) 테이블에 아래 SQL ㉠, ㉡, ㉢ 을 실행했을 때 결과의 칼럼 수로 옳은 것은?",
     "options": [
-      "두 테이블 간 동일 이름의 컬럼으로 조인이 이루어진다.",
-      "등가 조인(Equi Join) 과 비등가 조인(Non-Equi Join) 이 모두 가능하다.",
-      "USING 절과 함께 사용할 수 없다.",
-      "ON 절과 함께 사용할 수 없다."
+      "3, 3, 5",
+      "3, 4, 5",
+      "5, 4, 3",
+      "3, 4, 4"
     ],
     "correctIndex": 1,
-    "explanation": "NATURAL JOIN 은 두 테이블에서 이름이 같은 모든 컬럼을 자동으로 찾아 등가(=) 조인만 수행하며(①), USING 절이나 ON 절과 함께 쓸 수 없다(③④). 비등가 조인(BETWEEN, > 등)은 할 수 없으므로 ② 가 옳지 않다.",
-    "_source": "authored"
+    "explanation": "NATURAL JOIN 은 이름이 같은 칼럼(ID, 이름)을 모두 등가 조인 조건으로 쓰고, 그 칼럼을 결과에 한 번씩만 보여 줘 ID, 이름, 점수 의 3칼럼이다. USING(ID) 는 ID 만 조건으로 쓰고 ID 를 한 번만 보여 주므로 ID, A.이름, B.이름, 점수 의 4칼럼이다. ON 은 두 테이블의 칼럼을 모두 보여 줘 2 + 3 = 5칼럼이다. 정답은 ②번이다. ① 은 USING 도 이름을 합친다고 본 것, ③ 은 순서를 거꾸로 본 것, ④ 는 ON 도 조인 칼럼을 합친다고 본 것이다. NATURAL JOIN 은 등가 조인만 되고 ON·USING 절을 함께 쓸 수 없다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "-- ㉠\nSELECT * FROM A NATURAL JOIN B;\n-- ㉡\nSELECT * FROM A JOIN B USING (ID);\n-- ㉢\nSELECT * FROM A JOIN B\n  ON A.ID = B.ID;"
+      }
+    ]
   },
   {
     "id": 10519,
@@ -697,16 +799,22 @@ export const ROUND_50: QuizQuestion[] = [
     "round": 50,
     "subject": "2과목",
     "number": 21,
-    "title": "ALTER 문으로 컬럼의 형식을 변경하는 SQL 로 옳은 것은?",
+    "title": "NAME VARCHAR2(10) 칼럼에 최대 8글자 값과 NULL 이 함께 들어 있다. 아래 ㉠~㉣ 을 각각 실행한 결과로 옳은 것은? (Oracle 기준)",
     "options": [
-      "ALTER TABLE TEAM MODIFY 컬럼명 VARCHAR2(10) DEFAULT '2023-09-09' NOT NULL;",
-      "ALTER TABLE TEAM CHANGE 컬럼명 VARCHAR2(10);",
-      "ALTER COLUMN TEAM.컬럼명 TYPE VARCHAR2(10);",
-      "UPDATE TABLE TEAM MODIFY 컬럼명 VARCHAR2(10);"
+      "성공, 오류, 오류, 성공",
+      "성공, 성공, 오류, 성공",
+      "성공, 오류, 성공, 성공",
+      "성공, 오류, 오류, 오류"
     ],
     "correctIndex": 0,
-    "explanation": "Oracle 에서 컬럼 형식 변경은 ALTER TABLE ... MODIFY 구문을 사용하며 DEFAULT·NOT NULL 도 함께 지정할 수 있다. ② CHANGE 는 MySQL 문법, ③ ALTER COLUMN … TYPE 은 PostgreSQL 식 문법이며, ④ UPDATE 는 데이터를 고치는 DML 이다.",
-    "_source": "authored"
+    "explanation": "MODIFY 로 칼럼 길이를 늘리는 것(㉠)은 언제나 된다. 줄이는 것(㉡)은 이미 들어 있는 값이 새 길이에 맞을 때만 되는데, 8글자 값이 있어 5 로 줄일 수 없다. NOT NULL 을 추가하는 것(㉢)도 이미 NULL 인 행이 있어 오류다. DEFAULT 는 앞으로 들어올 행에만 적용되므로 기존 NULL 이 있어도 바로 바꿀 수 있다(㉣). 정답은 ①번이다. ② 는 길이를 줄여도 데이터를 잘라 준다고 본 것, ③ 은 NULL 이 있어도 NOT NULL 을 걸 수 있다고 본 것, ④ 는 DEFAULT 가 기존 행까지 바꿔야 해서 실패한다고 본 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "-- ㉠\nALTER TABLE T\n  MODIFY (NAME VARCHAR2(20));\n-- ㉡\nALTER TABLE T\n  MODIFY (NAME VARCHAR2(5));\n-- ㉢\nALTER TABLE T\n  MODIFY (NAME NOT NULL);\n-- ㉣\nALTER TABLE T\n  MODIFY (NAME DEFAULT 'X');"
+      }
+    ]
   },
   {
     "id": 10521,
@@ -739,16 +847,22 @@ export const ROUND_50: QuizQuestion[] = [
     "round": 50,
     "subject": "2과목",
     "number": 23,
-    "title": "데이터 제어어(DCL) 및 트랜잭션 제어어(TCL) 에 해당하지 않는 명령은?",
+    "title": "빈 테이블 T 에 아래 명령을 차례로 실행한 뒤 남는 행 수는?",
     "options": [
-      "GRANT",
-      "ROLLBACK",
-      "REVOKE",
-      "ALTER"
+      "4",
+      "3",
+      "1",
+      "2"
     ],
     "correctIndex": 3,
-    "explanation": "① GRANT·③ REVOKE 는 권한을 제어하는 DCL 이고 ② ROLLBACK 은 트랜잭션을 되돌리는 TCL 이다. ALTER 는 테이블 구조를 변경하는 DDL 이므로 두 분류 어디에도 속하지 않는다.",
-    "_source": "authored"
+    "explanation": "COMMIT·ROLLBACK·SAVEPOINT 는 트랜잭션을 다루는 TCL 이다. ROLLBACK TO S 는 저장점 S 이후의 작업(2 입력)만 취소하고 트랜잭션은 이어진다. 그 뒤 3 을 넣고 COMMIT 하면 1 과 3 이 확정된다. 새 트랜잭션에서 넣은 4 는 마지막 ROLLBACK 으로 취소된다. 그래서 1, 3 의 2행이 남는다. 정답은 ④번이다. ① 은 ROLLBACK 이 아무것도 취소하지 않는다고 본 것, ② 는 ROLLBACK TO S 를 놓친 것, ③ 은 ROLLBACK TO S 가 트랜잭션 전체를 취소한다고 본 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "INSERT INTO T VALUES (1);\nSAVEPOINT S;\nINSERT INTO T VALUES (2);\nROLLBACK TO S;\nINSERT INTO T VALUES (3);\nCOMMIT;\nINSERT INTO T VALUES (4);\nROLLBACK;"
+      }
+    ]
   },
   {
     "id": 10523,
@@ -829,16 +943,22 @@ export const ROUND_50: QuizQuestion[] = [
     "round": 50,
     "subject": "2과목",
     "number": 25,
-    "title": "DELETE, TRUNCATE, DROP 명령어에 대한 비교 중 옳지 않은 것은?",
+    "title": "T1, T2, T3 에 각각 COMMIT 된 3행이 있을 때 아래 SQL 을 순서대로 실행한 결과로 옳은 것은? ('T1 행 수, T2 행 수, T3 조회 결과' 순서, Oracle 기준)",
     "options": [
-      "DROP 은 테이블 정의와 모든 데이터를 삭제한다.",
-      "TRUNCATE 는 테이블을 초기 상태로 만든다.",
-      "TRUNCATE 는 UNDO 데이터를 생성하지 않아 DELETE 보다 빠르다.",
-      "DROP 은 Auto Commit 이고 DELETE 와 TRUNCATE 는 사용자 COMMIT 으로 수행된다."
+      "3, 0, 3",
+      "3, 0, 오류",
+      "3, 3, 3",
+      "0, 0, 오류"
     ],
     "correctIndex": 3,
-    "explanation": "DROP 은 테이블 정의와 데이터를 모두 삭제하고(①), TRUNCATE 는 데이터를 모두 지우고 저장 공간을 해제해 테이블을 처음 상태로 만들며(②), UNDO 를 거의 만들지 않아 DELETE 보다 빠르다(③). TRUNCATE 는 DDL 이라 DROP 과 마찬가지로 자동 커밋되고, 사용자 COMMIT 이 필요한 것은 DML 인 DELETE 뿐이다. ④ 가 옳지 않다.",
-    "_source": "authored"
+    "explanation": "Oracle 에서 TRUNCATE·DROP 은 DDL 이라 실행 전후로 자동 COMMIT 된다. 그래서 TRUNCATE 직전에 한 T1 의 DELETE 도 그 순간 확정되어, 다음 ROLLBACK 이 되돌릴 것이 없다. T1 과 T2 는 모두 0행이다. DROP 도 되돌릴 수 없어 T3 는 테이블 자체가 사라졌고, 조회하면 테이블이 없다는 오류가 난다. 정답은 ④번이다. ① 은 DELETE 와 DROP 이 ROLLBACK 된다고 본 것, ② 는 DELETE 만 ROLLBACK 된다고 본 것(TRUNCATE 의 자동 COMMIT 을 놓침), ③ 은 모두 되돌려진다고 본 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "DELETE FROM T1;\nTRUNCATE TABLE T2;\nROLLBACK;\nDROP TABLE T3;\nROLLBACK;\n\nSELECT COUNT(*) FROM T1;\nSELECT COUNT(*) FROM T2;\nSELECT COUNT(*) FROM T3;"
+      }
+    ]
   },
   {
     "id": 10525,
@@ -847,16 +967,22 @@ export const ROUND_50: QuizQuestion[] = [
     "round": 50,
     "subject": "2과목",
     "number": 26,
-    "title": "아래 테이블명 중 올바른 것은?",
+    "title": "아래 CREATE TABLE 문 ㉠~㉤ 을 각각 실행할 때 오류가 발생하는 것만 모두 고른 것은? (Oracle 기준)",
     "options": [
-      "2023_TBL",
-      "2023-TBL",
-      "TBL-2023",
-      "TBL_2023#"
+      "㉠, ㉡",
+      "㉠, ㉡, ㉣",
+      "㉡, ㉢, ㉤",
+      "㉠, ㉡, ㉢"
     ],
     "correctIndex": 3,
-    "explanation": "Oracle 테이블명은 문자로 시작해야 하고, 문자·숫자와 특수문자 _, $, # 만 쓸 수 있다. ④ TBL_2023# 은 문자로 시작하고 허용된 _ 와 # 만 써서 올바르다. ①② 는 숫자로 시작하고, ②③ 의 하이픈(-)은 허용되지 않는 문자다.",
-    "_source": "authored"
+    "explanation": "따옴표 없는 테이블명은 문자로 시작해야 하고, 문자·숫자와 _, $, # 만 쓸 수 있으며, 예약어는 쓸 수 없다. ㉠ 은 숫자로 시작해 오류, ㉡ 은 하이픈(-)이 있어 오류, ㉢ 은 예약어 SELECT 라 오류다. ㉣ 처럼 큰따옴표로 감싸면 예약어도 이름으로 쓸 수 있고(대신 쓸 때마다 \"SELECT\" 로 적어야 한다), ㉤ 은 허용된 _ 와 $ 만 써서 만들어진다. 정답은 ④번이다. ① 은 예약어도 테이블명이 된다고 본 것, ② 는 큰따옴표 이름을 오류로 보고 따옴표 없는 SELECT 는 된다고 본 것, ③ 은 숫자로 시작해도 되고 $ 는 안 된다고 본 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "-- ㉠\nCREATE TABLE 2026_EXAM (C NUMBER);\n-- ㉡\nCREATE TABLE EXAM-2026 (C NUMBER);\n-- ㉢\nCREATE TABLE SELECT (C NUMBER);\n-- ㉣\nCREATE TABLE \"SELECT\" (C NUMBER);\n-- ㉤\nCREATE TABLE EXAM_2026$ (C NUMBER);"
+      }
+    ]
   },
   {
     "id": 10526,
@@ -934,20 +1060,20 @@ export const ROUND_50: QuizQuestion[] = [
     "round": 50,
     "subject": "2과목",
     "number": 29,
-    "title": "아래 설명에 해당하는 윈도우 함수는?",
+    "title": "월별 매출이 1월 10, 2월 20, 3월 15, 4월 30 인 테이블에 아래 SQL 을 실행했다. ('3월의 P, 3월의 N, 2월의 P2, 4월의 F' 순서)",
     "options": [
-      "LEAD",
-      "LAG",
-      "FIRST_VALUE",
-      "LAST_VALUE"
+      "15, 30, 10, 10",
+      "20, 30, 0, 10",
+      "20, 30, NULL, 30",
+      "30, 20, 0, 10"
     ],
     "correctIndex": 1,
-    "explanation": "현재 행 기준으로 이전 행의 값을 가져오는 함수는 LAG 다(②). LEAD(①)는 다음 행의 값, FIRST_VALUE(③)·LAST_VALUE(④)는 윈도우의 첫 행·마지막 행 값을 반환한다.",
+    "explanation": "LAG 는 이전 행, LEAD 는 다음 행의 값을 가져온다. 3월의 P 는 2월의 20, N 은 4월의 30 이다. LAG(매출, 2, 0) 은 두 행 앞의 값을 가져오고 없으면 세 번째 인자 0 을 쓴다. 2월에서 두 행 앞은 없으므로 P2 는 0 이다. FIRST_VALUE 는 처음부터 현재 행까지 중 첫 값이라 4월에서도 1월의 10 이다. 정답은 ②번이다. ① 은 LAG 를 현재 행 값으로 본 것, ③ 은 기본값 0 을 놓치고 FIRST_VALUE 를 현재 행 값으로 본 것, ④ 는 LAG 와 LEAD 를 바꿔 본 것이다.",
     "_source": "authored",
     "references": [
       {
-        "type": "text",
-        "content": "현재 행 기준 이전 행의 값을 참조한다."
+        "type": "sql",
+        "code": "SELECT 월, 매출,\n  LAG(매출)  OVER (ORDER BY 월) AS P,\n  LEAD(매출) OVER (ORDER BY 월) AS N,\n  LAG(매출, 2, 0)\n    OVER (ORDER BY 월)       AS P2,\n  FIRST_VALUE(매출)\n    OVER (ORDER BY 월)       AS F\nFROM 매출;"
       }
     ]
   },
@@ -1028,16 +1154,58 @@ export const ROUND_50: QuizQuestion[] = [
     "round": 50,
     "subject": "2과목",
     "number": 31,
-    "title": "계층형 질의 관련 설명 중 옳지 않은 것은?",
+    "title": "아래 조직 테이블에 대한 계층형 SQL 에서, 사장 행의 LEVEL 과 결과 행 수로 옳은 것은?",
     "options": [
-      "LEAF 노드의 LEVEL 은 항상 1이다.",
-      "CONNECT_BY_ISLEAF 는 리프 노드이면 1을 반환한다.",
-      "ORDER SIBLINGS BY 는 동일 레벨 내에서 정렬을 수행한다.",
-      "NOCYCLE 옵션은 사이클 발생 시 전개를 중단한다."
+      "4, 4",
+      "1, 4",
+      "4, 5",
+      "1, 1"
     ],
     "correctIndex": 0,
-    "explanation": "CONNECT_BY_ISLEAF 는 리프 노드면 1, 아니면 0 을 반환하고(②), ORDER SIBLINGS BY 는 같은 부모를 가진 형제 노드끼리 정렬하며(③), NOCYCLE 은 순환이 생기면 그 지점에서 더 전개하지 않고 오류 없이 진행한다(④). LEVEL 은 루트가 1 이고 아래로 내려갈수록 1씩 커지므로 리프 노드의 LEVEL 이 항상 1 이라는 ① 이 옳지 않다.",
-    "_source": "authored"
+    "explanation": "CONNECT BY PRIOR 상위ID = ID 는 '방금 읽은 행의 상위ID 와 같은 ID 를 가진 행' 을 다음으로 읽으라는 뜻이라, 아래에서 위로 올라가는 역방향 전개다. 대리(LEVEL 1)에서 시작해 과장(2), 부장(3), 사장(4) 순으로 올라가고, 사장의 상위ID 가 NULL 이라 멈춘다. LEVEL 은 시작한 행이 1 이므로 사장은 4, 결과는 4행이다. 정답은 ①번이다. ② 는 최상위 행은 언제나 LEVEL 1 이라고 본 것, ③ 은 부장의 다른 부하인 차장까지 펼쳐진다고 본 것, ④ 는 대리 밑으로 내려가는 순방향으로 읽어 대리만 남는다고 본 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "caption": "조직",
+        "headers": [
+          "ID",
+          "상위ID",
+          "이름"
+        ],
+        "rows": [
+          [
+            "1",
+            "NULL",
+            "사장"
+          ],
+          [
+            "2",
+            "1",
+            "부장"
+          ],
+          [
+            "3",
+            "2",
+            "과장"
+          ],
+          [
+            "4",
+            "3",
+            "대리"
+          ],
+          [
+            "5",
+            "2",
+            "차장"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT LEVEL, 이름\nFROM   조직\nSTART  WITH 이름 = '대리'\nCONNECT BY PRIOR 상위ID = ID;"
+      }
+    ]
   },
   {
     "id": 10531,
@@ -1064,20 +1232,20 @@ export const ROUND_50: QuizQuestion[] = [
     "round": 50,
     "subject": "2과목",
     "number": 33,
-    "title": "아래 SQL 수행 시 추가되는 시간으로 옳은 것은?",
+    "title": "D 가 2025-01-01 12:00 인 DATE 값일 때 아래 식의 결과(A, B, C, E)로 옳은 것은? (Oracle 기준, A·B 는 1월 1일의 시각, C 는 1월 며칠 몇 시인지)",
     "options": [
-      "+30분",
-      "+45분",
-      "+1시간",
-      "+2시간"
+      "12:30, 12:30, 3일 00:00, 1.5",
+      "13:00, 12:30, 2일 12:00, 2",
+      "13:00, 12:30, 3일 00:00, 1.5",
+      "14:00, 12:30, 3일 00:00, 1.5"
     ],
     "correctIndex": 2,
-    "explanation": "날짜에 더하는 숫자는 '일' 단위다. 60/30 = 2 이므로 1/12/2 = 1/24 일이고, 하루의 1/24 은 1시간이다(③). 참고로 1/24/60 은 1분, 1/24/2 는 30분이다. ① +30분은 한 번 더 2 로 나눈 값(1/48 일), ④ +2시간은 60/30 으로 나누는 것을 놓친 값(1/12 일)이다.",
+    "explanation": "DATE 에 더하는 숫자의 단위는 '일' 이다. A 의 1/12/(60/30) 은 1/12 일을 다시 2 로 나눈 1/24 일, 즉 1시간이라 13:00 이다. B 의 30/(24*60) 일은 30분이라 12:30 이다. C 의 1.5 일은 1일 12시간이라 1월 3일 00:00 이다. 날짜끼리 빼면 차이가 일 단위 숫자로 나와, E 는 1월 3일 0시와 1월 1일 12시의 차이인 1.5 다. 정답은 ③번이다. ① 은 A 를 30분으로, ② 는 소수 부분(0.5일)을 버리고, ④ 는 A 를 2시간으로 계산한 것이다.",
     "_source": "authored",
     "references": [
       {
         "type": "sql",
-        "code": "SELECT SYSDATE + 1/12/(60/30) FROM DUAL;"
+        "code": "SELECT D + 1/12/(60/30)        AS A,\n       D + 30/(24*60)          AS B,\n       D + 1.5                 AS C,\n       TO_DATE('2025-01-03',\n               'YYYY-MM-DD') - D AS E\nFROM   …;"
       }
     ]
   },
@@ -1162,16 +1330,22 @@ export const ROUND_50: QuizQuestion[] = [
     "round": 50,
     "subject": "2과목",
     "number": 36,
-    "title": "사원이 없는 부서까지 포함하여 조회하는 조인 방식은?",
+    "title": "부서 테이블에 D1, D2, D3 이 있고, 사원은 D1 에 2명(급여 100, 300), D2 에 1명(급여 200) 있다. 아래 SQL ㉠, ㉡, ㉢ 의 결과 행 수로 옳은 것은?",
     "options": [
-      "INNER JOIN",
-      "LEFT OUTER JOIN (부서 기준)",
-      "RIGHT OUTER JOIN (사원 기준)",
-      "CROSS JOIN"
+      "4, 2, 2",
+      "4, 3, 2",
+      "3, 3, 2",
+      "4, 3, 3"
     ],
     "correctIndex": 1,
-    "explanation": "사원이 없는 부서까지 나오려면 부서 테이블의 모든 행을 보존해야 한다. 부서를 왼쪽에 두고 LEFT OUTER JOIN 으로 사원을 붙이면 된다(②). ① INNER JOIN 은 사원이 없는 부서가 빠지고, 사원을 보존하는 조인(③)은 반대로 부서가 없는 사원을 남기며, ④ CROSS JOIN 은 조건 없는 카티션 곱이다.",
-    "_source": "authored"
+    "explanation": "㉠ 은 D1 이 사원 2명과, D2 가 1명과 이어지고, 사원이 없는 D3 도 NULL 로 남아 4행이다. ㉡ 처럼 조건을 ON 에 두면 조인할 사원만 고를 뿐 부서는 모두 남는다. D1 은 300 인 사원 하나, D2 는 200 인 사원, D3 은 NULL 로 3행이다. ㉢ 처럼 WHERE 에 두면 조인을 마친 뒤 거르므로, 급여가 NULL 인 D3 행과 100 인 행이 빠져 2행이 되고 외부 조인의 의미가 사라진다. 정답은 ②번이다. ① 은 ON 조건도 부서를 거른다고 본 것, ③ 은 ㉠ 에서 D1 이 한 행만 나온다고 본 것, ④ 는 WHERE 조건도 D3 을 남긴다고 본 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "-- ㉠\nSELECT * FROM 부서 D\nLEFT JOIN 사원 E\n  ON D.부서 = E.부서;\n-- ㉡\nSELECT * FROM 부서 D\nLEFT JOIN 사원 E\n  ON D.부서 = E.부서\n AND E.급여 >= 200;\n-- ㉢\nSELECT * FROM 부서 D\nLEFT JOIN 사원 E\n  ON D.부서 = E.부서\nWHERE E.급여 >= 200;"
+      }
+    ]
   },
   {
     "id": 10536,

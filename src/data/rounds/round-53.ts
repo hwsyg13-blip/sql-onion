@@ -11,16 +11,22 @@ export const ROUND_53: QuizQuestion[] = [
     "round": 53,
     "subject": "1과목",
     "number": 1,
-    "title": "다음 중 데이터 모델링의 세 가지 관점에 해당하는 것은?",
+    "title": "아래 분석 작업 ㉠~㉢ 을 데이터 모델링의 세 관점으로 바르게 짝지은 것은? ('상관' 은 데이터와 프로세스의 상관 관점)",
     "options": [
-      "데이터 관점",
-      "보안 관점",
-      "성능 관점",
-      "인프라 관점"
+      "데이터, 프로세스, 상관",
+      "프로세스, 데이터, 상관",
+      "데이터, 상관, 프로세스",
+      "상관, 프로세스, 데이터"
     ],
     "correctIndex": 0,
-    "explanation": "데이터 모델링의 세 가지 관점은 데이터 관점(무엇을 관리하는가), 프로세스 관점(무엇을 하는가), 데이터와 프로세스의 상관 관점(업무 처리가 데이터에 어떤 영향을 주는가)이다. 보기 중에는 데이터 관점(①)만 해당하며, 보안·성능·인프라 관점(②③④)은 세 관점에 들지 않는다.",
-    "_source": "authored"
+    "explanation": "데이터 관점은 업무가 어떤 데이터를 다루고 데이터끼리 어떻게 관계를 맺는지(What), 프로세스 관점은 업무가 실제로 무엇을 어떤 순서로 하는지(How)를 본다. 데이터와 프로세스의 상관 관점은 업무 처리가 데이터에 어떤 영향을 주는지(Interaction)를 보며, 생성·조회·수정·삭제를 표로 정리한 CRUD 매트릭스가 대표적이다. ㉠ 은 데이터, ㉡ 은 프로세스, ㉢ 은 상관 관점이다. 정답은 ①번이다. ② 는 ㉠ 과 ㉡ 을 바꿔 본 것, ③ 은 업무 흐름과 CRUD 표를 바꿔 본 것, ④ 는 ㉠ 과 ㉢ 을 바꿔 본 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "text",
+        "content": "㉠ 고객·상품·주문이 어떤 속성을 갖고 서로 어떻게 이어지는지 정리한다.\n㉡ 주문 접수 → 결제 → 출고로 이어지는 업무 흐름을 정리한다.\n㉢ '주문 취소' 업무가 주문·재고 데이터를 읽는지, 고치는지, 지우는지 표로 정리한다."
+      }
+    ]
   },
   {
     "id": 10351,
@@ -29,16 +35,22 @@ export const ROUND_53: QuizQuestion[] = [
     "round": 53,
     "subject": "1과목",
     "number": 2,
-    "title": "데이터 모델링 개요 설명 중 옳지 않은 것은?",
+    "title": "물리 데이터 모델링 단계에서 테이블 용량을 산정하려 한다. 아래 조건에서 5년 뒤 주문상세 테이블의 예상 행 수는?",
     "options": [
-      "현실 세계를 단순화·추상화하여 표현한다.",
-      "데이터 용량 산정은 데이터 모델링의 산출물이 아니다.",
-      "업무 흐름을 표현하는 도구로 활용될 수 있다.",
-      "데이터 구조와 관계를 명확히 정의한다."
+      "3,650,000",
+      "10,950,000",
+      "2,190,000",
+      "32,850,000"
     ],
     "correctIndex": 1,
-    "explanation": "데이터 모델링은 현실 세계를 단순화·추상화해 표현하고(①), 업무 흐름을 이해하고 소통하는 도구가 되며(③), 데이터 구조와 관계를 정의한다(④). 물리 데이터 모델링 단계에서는 테이블별 데이터 건수·크기 같은 용량 산정도 수행하므로 '데이터 용량 산정은 산출물이 아니다' 는 ② 가 옳지 않다.",
-    "_source": "authored"
+    "explanation": "용량 산정은 물리 모델링에서 테이블별 데이터 양을 추정하는 작업이고, 그 결과로 저장 공간·파티션·인덱스를 정한다. 주문상세는 주문 수 × 주문당 상품 수만큼 쌓이므로 2,000 × 3 × 365 × 5 = 10,950,000 행이다. 정답은 ②번이다. ① 은 주문 테이블의 행 수(2,000 × 365 × 5), ③ 은 1년치(2,000 × 3 × 365), ④ 는 상품 수 3 을 한 번 더 곱한 값이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "text",
+        "content": "· 주문은 하루 평균 2,000건 들어온다.\n· 주문 한 건에 담기는 상품은 평균 3개다(상품 하나당 주문상세 1행).\n· 데이터는 5년(1년 = 365일) 동안 보관한다."
+      }
+    ]
   },
   {
     "id": 10352,
@@ -181,16 +193,23 @@ export const ROUND_53: QuizQuestion[] = [
     "round": 53,
     "subject": "1과목",
     "number": 9,
-    "title": "트랜잭션에 대한 설명 중 옳지 않은 것은?",
+    "title": "'주문을 저장할 때는 주문상세도 적어도 한 건 같은 트랜잭션에서 함께 저장해야 한다' 는 업무 규칙을 ERD 에 나타내는 방법으로 가장 적절한 것은?",
     "options": [
-      "논리적 연산의 단위이다.",
-      "트랜잭션을 모델에 표현할 수 없다.",
-      "연관된 업무를 하나의 커밋 단위로 묶을 수 있다.",
-      "데이터 정합성을 확보하는 수단이다."
+      "주문–주문상세 관계선을 실선에서 점선으로 바꾼다.",
+      "주문상세 쪽 끝의 동그라미를 세로줄로 바꿔 1개 이상(필수)으로 그린다.",
+      "주문상세를 주문에 합쳐 하나의 엔터티로 만든다.",
+      "트랜잭션은 ERD 로 나타낼 수 없으므로 따로 문서로만 남긴다."
     ],
     "correctIndex": 1,
-    "explanation": "트랜잭션은 논리적인 작업(연산)의 단위이고(①), 연관된 업무를 하나의 커밋 단위로 묶으며(③), 데이터 정합성을 확보하는 수단이다(④). 데이터 모델에서도 함께 처리되어야 하는 업무는 필수 관계 등으로 트랜잭션을 표현할 수 있으므로 '트랜잭션을 모델에 표현할 수 없다' 는 ② 가 옳지 않다.",
-    "_source": "authored"
+    "explanation": "관계선택사양(필수·선택)은 트랜잭션 단위를 알려 준다. 주문이 생길 때 주문상세도 반드시 함께 생겨야 한다면 주문 쪽에서 본 주문상세를 필수로 그려, 둘을 같은 트랜잭션에서 처리해야 한다는 것을 드러낸다. 정답은 ②번이다. ① 의 실선·점선은 식별자 관계 여부를 나타낼 뿐 함께 저장해야 하는지와는 상관이 없다. ③ 은 한 주문에 상품이 여러 개라는 1:M 구조를 무너뜨린다. ④ 는 관계선택사양이 트랜잭션을 표현한다는 점을 놓친 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "erd",
+        "caption": "현재 ERD (주문상세 쪽 끝이 0개 이상)",
+        "mermaid": "erDiagram\n    주문 ||--o{ 주문상세 : \"포함\"\n    주문 {\n        string 주문번호 PK\n    }\n    주문상세 {\n        string 주문번호 PK, FK\n        int 순번 PK\n    }"
+      }
+    ]
   },
   {
     "id": 10359,
@@ -199,15 +218,15 @@ export const ROUND_53: QuizQuestion[] = [
     "round": 53,
     "subject": "1과목",
     "number": 10,
-    "title": "바커 표기법에서 필수 참여(인스턴스가 반드시 존재해야 함)를 표현하는 선의 형태는?",
+    "title": "바커(Barker) 표기법으로 그린 부서–사원 관계선이 부서 쪽 절반은 점선, 사원 쪽 절반은 실선이고, 사원 쪽 끝에 까마귀발이 있다. 이 관계를 바르게 읽은 것은?",
     "options": [
-      "직선",
-      "점선",
-      "이중선",
-      "파선"
+      "모든 사원은 반드시 한 부서에 속하고, 사원이 없는 부서도 있을 수 있다.",
+      "모든 부서에는 사원이 반드시 있고, 부서가 없는 사원도 있을 수 있다.",
+      "모든 사원은 반드시 한 부서에 속하고, 모든 부서에도 사원이 반드시 있다.",
+      "한 사원이 여러 부서에 속할 수 있고, 사원이 없는 부서도 있을 수 있다."
     ],
     "correctIndex": 0,
-    "explanation": "바커 표기법은 관계선택사양을 선 모양으로 구분해, 필수 참여는 직선(실선), 선택 참여는 점선으로 그린다(①). 점선(②)·파선(④)은 선택 참여를 뜻하고, 이중선(③)은 바커 표기법의 참여 표기가 아니다.",
+    "explanation": "바커 표기법은 관계선을 반으로 나눠, 각 엔터티 쪽 절반의 선 모양으로 그 엔터티의 참여를 나타낸다. 실선은 반드시 참여(필수), 점선은 참여하지 않아도 됨(선택)이다. 사원 쪽 절반이 실선이니 모든 사원은 부서에 반드시 속하고, 부서 쪽 절반이 점선이니 사원이 한 명도 없는 부서가 있을 수 있다. 까마귀발은 사원 쪽에 있어 부서 하나에 사원이 여럿인 1:M 이다. 정답은 ①번이다. IE 표기법은 선택 기호(동그라미)를 상대편 끝에 붙여 읽는 방향이 반대처럼 느껴지므로 헷갈리기 쉽다. ② 는 필수·선택을 반대로 본 것, ③ 은 점선을 놓친 것, ④ 는 까마귀발의 방향을 반대로 본 것이다.",
     "_source": "authored"
   },
   {
@@ -293,16 +312,22 @@ export const ROUND_53: QuizQuestion[] = [
     "round": 53,
     "subject": "2과목",
     "number": 13,
-    "title": "SQL 실행 결과로 적절하지 않은 것은?",
+    "title": "아래 SQL 의 결과(A, B, C, D)로 옳은 것은? (Oracle 기준)",
     "options": [
-      "ROUND(4.875, 2) = 4.88",
-      "LENGTH('KOREAN') = 6",
-      "DATE_FORMAT('2022-11-02', '%Y-%m-%d') = 2022-11-02",
-      "SUBSTR('Gangneung Wonju', 8, 4) = 'g Wo'"
+      "'lop', 2, '700', -2",
+      "'Dev', 4, '007', -3",
+      "'lop', 4, '007', -2",
+      "'lop', 4, '007', -3"
     ],
     "correctIndex": 3,
-    "explanation": "SUBSTR('Gangneung Wonju', 8, 4) 는 8 번째 문자부터 4 글자를 잘라내므로 'ng W' 가 된다. 'g Wo' 는 9 번째부터 잘랐을 때의 결과라 ④ 가 적절하지 않다. ① ROUND(4.875, 2) 는 4.88, ② LENGTH('KOREAN') 은 6, ③ DATE_FORMAT 은 MySQL 함수로 '2022-11-02' 를 돌려줘 맞는 결과다.",
-    "_source": "authored"
+    "explanation": "SUBSTR 의 시작 위치가 음수이면 뒤에서부터 센다. 'SQLDeveloper' 는 12글자라 뒤에서 5번째는 앞에서 8번째 'l' 이고, 여기서 3글자를 잘라 'lop' 이다. INSTR('BANANA', 'A', 1, 2) 는 1번째 글자부터 찾아 두 번째로 나오는 'A' 의 위치라 4 다. LPAD 는 왼쪽을 채워 길이 3 을 만들어 '007' 이다. ROUND 는 0.5 를 0 에서 먼 쪽으로 반올림해 -2.5 는 -3 이 된다. 정답은 ④번이다. ① 은 첫 번째 'A' 위치를 구하고 오른쪽을 채운 것, ② 는 음수 위치를 앞에서 센 것, ③ 은 음수 반올림을 0 쪽으로 한 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT\n  SUBSTR('SQLDeveloper', -5, 3) AS A,\n  INSTR('BANANA', 'A', 1, 2)  AS B,\n  LPAD('7', 3, '0')           AS C,\n  ROUND(-2.5)                 AS D\nFROM DUAL;"
+      }
+    ]
   },
   {
     "id": 10363,
@@ -357,16 +382,22 @@ export const ROUND_53: QuizQuestion[] = [
     "round": 53,
     "subject": "2과목",
     "number": 15,
-    "title": "아래 함수 중 NULL 을 반환하지 않는 것은?",
+    "title": "아래 식 ㉠~㉤ 중 Oracle 에서 NULL 을 반환하는 것만 모두 고른 것은?",
     "options": [
-      "NVL(NULL, NULL)",
-      "NULLIF('A', 'A')",
-      "COALESCE('AB', 'CD')",
-      "CASE WHEN 1=2 THEN 'Y' END"
+      "㉣",
+      "㉠, ㉣",
+      "㉠, ㉡, ㉣",
+      "㉠, ㉡, ㉢, ㉣"
     ],
     "correctIndex": 2,
-    "explanation": "COALESCE('AB', 'CD') 는 처음 NULL 이 아닌 값 'AB' 를 반환한다(③). NVL(NULL, NULL)(①)은 대체값도 NULL 이라 NULL, NULLIF('A', 'A')(②)는 두 값이 같아 NULL, ELSE 없는 CASE(④)는 조건 1 = 2 가 거짓이라 NULL 을 반환한다.",
-    "_source": "authored"
+    "explanation": "㉠ 은 시작 위치 5 가 문자열 길이 3 을 넘어 잘라 낼 글자가 없으므로, Oracle 에서는 빈 문자열이 곧 NULL 이라 NULL 이다. ㉡ 도 Oracle 이 '' 를 NULL 로 다루므로 LENGTH(NULL) = NULL 이다. ㉢ 의 CONCAT 은 NULL 을 빈 문자열처럼 이어 붙여 'A' 다. ㉣ 의 DECODE 는 맞는 값이 없고 기본값도 주지 않아 NULL 이다. ㉤ 의 INSTR 은 찾는 글자가 없으면 0 을 돌려준다. 정답은 ③번이다. ① 과 ② 는 Oracle 에서 빈 문자열이 NULL 이라는 점을 놓친 것, ④ 는 CONCAT 도 NULL 을 돌려준다고 본 것이다. PostgreSQL 은 '' 와 NULL 을 구분해 ㉠·㉡ 결과가 다르다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "-- ㉠\nSUBSTR('ABC', 5)\n-- ㉡\nLENGTH('')\n-- ㉢\nCONCAT('A', NULL)\n-- ㉣\nDECODE('X', 'Y', 1)\n-- ㉤\nINSTR('ABC', 'Z')"
+      }
+    ]
   },
   {
     "id": 10365,
@@ -669,16 +700,22 @@ export const ROUND_53: QuizQuestion[] = [
     "round": 53,
     "subject": "2과목",
     "number": 22,
-    "title": "DELETE·TRUNCATE·DROP 비교에 대한 설명 중 옳지 않은 것은?",
+    "title": "아래 특징 ㉠, ㉡, ㉢ 에 해당하는 명령을 순서대로 고른 것은? (Oracle 기준)",
     "options": [
-      "특정 테이블에 WHERE 조건 없이 DELETE 를 수행하면 DROP TABLE 과 동일한 결과를 얻는다.",
-      "DROP 은 테이블 정의를 삭제하고 TRUNCATE 는 테이블을 초기 상태로 만든다.",
-      "TRUNCATE 는 UNDO 데이터를 생성하지 않아 대량 삭제 시 DELETE 보다 빠르다.",
-      "DROP 과 TRUNCATE 는 Auto Commit 이고 DELETE 는 사용자 COMMIT 이 필요하다."
+      "DELETE, TRUNCATE, DROP",
+      "TRUNCATE, DELETE, DROP",
+      "DELETE, DROP, TRUNCATE",
+      "DROP, TRUNCATE, DELETE"
     ],
     "correctIndex": 0,
-    "explanation": "DROP 은 테이블 정의까지 삭제하고 TRUNCATE 는 테이블을 처음 상태로 만들며(②), TRUNCATE 는 UNDO 를 거의 만들지 않아 대량 삭제 시 빠르고(③), DROP·TRUNCATE 는 DDL 이라 자동 커밋되지만 DELETE 는 COMMIT 이 필요하다(④). WHERE 없는 DELETE 는 모든 행을 지울 뿐 테이블 구조는 남으므로 DROP TABLE 과 결과가 같다는 ① 이 옳지 않다.",
-    "_source": "authored"
+    "explanation": "DELETE 는 DML 이라 조건으로 일부 행만 지울 수 있고, 행마다 되돌릴 정보(UNDO)를 남겨 ROLLBACK 할 수 있으며 DELETE 트리거도 실행된다(㉠). TRUNCATE 는 DDL 이라 조건 없이 모든 행을 지우고 저장 공간을 반환하며 자동 COMMIT 되지만, 테이블 정의는 그대로 둔다(㉡). DROP 은 테이블 정의까지 지운다(㉢). 정답은 ①번이다. ② 는 DELETE 와 TRUNCATE 를, ③ 은 TRUNCATE 와 DROP 을 바꿔 본 것이고, ④ 는 셋을 모두 엇갈리게 본 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "text",
+        "content": "㉠ WHERE 로 일부 행만 지울 수 있고, 행마다 DELETE 트리거가 실행되며, COMMIT 전에는 ROLLBACK 할 수 있다.\n㉡ 모든 행을 빠르게 지우고 저장 공간을 처음 크기로 되돌리지만, 테이블 구조는 남는다. 자동 COMMIT 된다.\n㉢ 데이터와 함께 테이블 정의까지 없애, 이후 그 테이블을 조회하면 오류가 난다."
+      }
+    ]
   },
   {
     "id": 10372,
@@ -777,16 +814,22 @@ export const ROUND_53: QuizQuestion[] = [
     "round": 53,
     "subject": "2과목",
     "number": 27,
-    "title": "테이블·컬럼 별칭 사용에 대한 다음 설명 중 옳지 않은 것은?",
+    "title": "EMP 테이블에 대한 SQL ㉠~㉤ 중 오류가 발생하는 것만 모두 고른 것은? (Oracle 기준)",
     "options": [
-      "컬럼 별칭은 AS 키워드를 생략할 수 있다.",
-      "테이블 별칭은 FROM 절에서 지정한다.",
-      "SELECT U1.T1.C1 FROM U1.T1 A; 처럼 별칭을 지정한 뒤에도 원래 테이블명을 SELECT 절에 사용할 수 있다.",
-      "ORDER BY 절에서는 SELECT 절의 별칭을 참조할 수 있다."
+      "㉡",
+      "㉡, ㉢",
+      "㉡, ㉢, ㉤",
+      "㉡, ㉤"
     ],
     "correctIndex": 2,
-    "explanation": "컬럼 별칭은 AS 를 생략할 수 있고(①), 테이블 별칭은 FROM 절에서 지정하며(②), ORDER BY 는 SELECT 이후에 처리되어 SELECT 절 별칭을 쓸 수 있다(④). FROM 절에서 테이블 별칭(A)을 지정하면 그 쿼리 안에서는 별칭으로만 참조해야 하므로, 원래 이름 U1.T1.C1 을 쓰면 오류다. ③ 이 옳지 않다.",
-    "_source": "authored"
+    "explanation": "칼럼 별칭은 SELECT 보다 나중에 처리되는 ORDER BY 에서만 쓸 수 있어 ㉠ 은 되고, WHERE 에 쓴 ㉡ 은 오류다. Oracle 은 테이블 별칭 앞에 AS 를 허용하지 않아 ㉢ 은 오류다(칼럼 별칭의 AS 는 된다). 공백이 들어간 별칭은 큰따옴표로 감싸면 되므로 ㉣ 은 된다. 테이블 별칭 E 를 붙인 뒤에는 원래 이름 EMP 로 칼럼을 부를 수 없어 ㉤ 도 오류다. 정답은 ③번이다. ① 은 ㉢·㉤ 을 허용된다고 본 것, ② 는 별칭을 붙여도 원래 테이블명을 쓸 수 있다고 본 것, ④ 는 테이블 별칭에도 AS 를 쓸 수 있다고 본 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT SAL AS 급여 FROM EMP\nORDER  BY 급여;                 -- ㉠\n\nSELECT SAL 급여 FROM EMP\nWHERE  급여 > 100;               -- ㉡\n\nSELECT E.SAL FROM EMP AS E;     -- ㉢\n\nSELECT SAL \"월 급여\" FROM EMP;   -- ㉣\n\nSELECT EMP.SAL FROM EMP E;      -- ㉤"
+      }
+    ]
   },
   {
     "id": 10377,
@@ -989,16 +1032,22 @@ export const ROUND_53: QuizQuestion[] = [
     "round": 53,
     "subject": "2과목",
     "number": 32,
-    "title": "집합 연산자에 대한 설명 중 옳지 않은 것은?",
+    "title": "A(값 1, 1, 2, 3, 3), B(값 3) 테이블에 대한 SQL ㉠, ㉡, ㉢ 의 결과 행 수로 옳은 것은?",
     "options": [
-      "UNION 연산자는 합집합 결과에서 중복된 행을 하나의 행으로 만든다.",
-      "UNION ALL 연산자는 중복이 없는 경우 UNION 과 결과가 동일하다.",
-      "UNION 으로 결합하는 각 SELECT 문은 컬럼의 개수가 같아야 한다.",
-      "UNION 연산자를 사용한 SQL 은 각각의 집합에 ORDER BY 절을 사용할 수 있다."
+      "3, 0, 4",
+      "2, 1, 2",
+      "4, 0, 3",
+      "2, 0, 2"
     ],
     "correctIndex": 3,
-    "explanation": "UNION 은 합집합에서 중복 행을 하나로 만들고(①), 중복이 없으면 UNION ALL 과 결과가 같으며(②), 결합하는 각 SELECT 문은 컬럼 개수가 같아야 한다(③). ORDER BY 는 집합 연산이 끝난 최종 결과에 한 번만, 마지막 SELECT 뒤에 쓸 수 있으므로 각 집합에 ORDER BY 를 쓸 수 있다는 ④ 가 옳지 않다. ※ 복원 자료의 ③ 은 '각각의 집합에 GROUP BY 절을 사용할 수 있다' 로 ④ 와 한 단어만 달라 같은 보기로 읽힌다는 제보가 있어, 구분되는 옳은 설명으로 바꿨다.",
-    "_source": "authored"
+    "explanation": "MINUS 는 앞의 결과에서 뒤에 있는 값을 빼고, 결과의 중복도 없앤다. ㉠ 은 1, 1, 2, 3, 3 에서 3 을 빼고 중복을 없애 1, 2 의 2행이다. ㉡ 은 B 의 3 이 A 에도 있어 남는 값이 없으니 0행이다. Oracle 의 집합 연산자는 우선순위가 같아 위에서부터 차례로 계산한다. ㉢ 은 (A UNION ALL B) 의 1, 1, 2, 3, 3, 3 에서 B 의 3 을 빼고 중복을 없애 1, 2 의 2행이다. 정답은 ④번이다. ① 은 MINUS 가 중복을 남기고 3 하나만 뺀다고 본 것, ② 는 ㉡ 에 3 이 남는다고 본 것, ③ 은 MINUS 를 한 개씩 지우는 연산으로 본 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "-- ㉠\nSELECT 값 FROM A\nMINUS\nSELECT 값 FROM B;\n-- ㉡\nSELECT 값 FROM B\nMINUS\nSELECT 값 FROM A;\n-- ㉢\nSELECT 값 FROM A\nUNION ALL\nSELECT 값 FROM B\nMINUS\nSELECT 값 FROM B;"
+      }
+    ]
   },
   {
     "id": 10382,
@@ -1047,15 +1096,15 @@ export const ROUND_53: QuizQuestion[] = [
     "round": 53,
     "subject": "2과목",
     "number": 34,
-    "title": "계층형 집계 함수에 대한 설명 중 옳지 않은 것은?",
+    "title": "ROLLUP(A, B) 와 같은 결과를 내는 GROUPING SETS 식과, CUBE(A, B) 가 만드는 그룹 묶음의 수로 옳은 것은?",
     "options": [
-      "ROLLUP 은 시간·지형 등 계층형 데이터의 소계·총계를 반환한다.",
-      "CUBE 는 모든 컬럼 조합의 집계를 반환한다.",
-      "GROUPING SETS 는 원하는 집계 조합을 선택적으로 지정한다.",
-      "ROLLUP·CUBE·GROUPING SETS 은 내부에서 정렬을 수행하지 못한다."
+      "GROUPING SETS ((A), (B), ()) / 3",
+      "GROUPING SETS ((A, B), (B), ()) / 4",
+      "GROUPING SETS ((A, B), (A), (B), ()) / 3",
+      "GROUPING SETS ((A, B), (A), ()) / 4"
     ],
     "correctIndex": 3,
-    "explanation": "ROLLUP 은 계층 순서대로 소계·총계를(①), CUBE 는 모든 컬럼 조합의 집계를(②), GROUPING SETS 는 원하는 조합만 골라 집계한다(③). 이 함수들은 그룹을 만들기 위해 내부적으로 정렬·그룹화를 수행하며, 결과 순서를 원하는 대로 보장하려면 ORDER BY 를 함께 쓴다. 정렬을 수행하지 못한다는 ④ 가 옳지 않다.",
+    "explanation": "ROLLUP 은 나열한 칼럼을 오른쪽부터 하나씩 빼 가며 묶는다. ROLLUP(A, B) 는 (A, B), (A), () 의 세 묶음이라 GROUPING SETS ((A, B), (A), ()) 와 같다. CUBE 는 가능한 모든 조합을 만들어 (A, B), (A), (B), () 의 4가지 묶음이 된다(칼럼이 n 개면 2ⁿ 개). 정답은 ④번이다. ① 은 ROLLUP 에 (A, B) 묶음이 없다고 보고 B 소계를 넣은 것, ② 는 B 쪽 소계를 만든다고 본 것, ③ 은 CUBE 의 묶음을 ROLLUP 으로 보고 묶음 수를 잘못 센 것이다.",
     "_source": "authored"
   },
   {
@@ -1280,20 +1329,50 @@ export const ROUND_53: QuizQuestion[] = [
     "round": 53,
     "subject": "2과목",
     "number": 40,
-    "title": "아래 설명에 해당하는 윈도우 절로 옳은 것은?",
+    "title": "아래 T 테이블에 대한 SQL 에서 X 가 4, 9 인 행의 S 값으로 옳은 것은?",
     "options": [
-      "RANGE BETWEEN 50 PRECEDING AND 150 FOLLOWING",
-      "ROWS BETWEEN 1 PRECEDING AND 1 FOLLOWING",
-      "ROWS UNBOUNDED PRECEDING",
-      "RANGE BETWEEN CURRENT ROW AND UNBOUNDED FOLLOWING"
+      "60, 120",
+      "50, 50",
+      "60, 50",
+      "50, 120"
     ],
     "correctIndex": 1,
-    "explanation": "행 단위로 윈도우 범위를 지정하는 것은 ROWS 이고, 현재 행의 앞뒤 한 행씩을 포함하려면 시작을 1 PRECEDING, 끝을 1 FOLLOWING 으로 지정한다. ① RANGE 는 행이 아니라 정렬 키의 값 범위를 기준으로 하므로 동일 값이 있으면 결과가 달라지고, ③ 은 첫 행부터 현재 행까지, ④ 는 현재 행부터 마지막 행까지라 범위가 다르다.",
+    "explanation": "RANGE 는 행 개수가 아니라 ORDER BY 값의 범위로 묶는다. '2 PRECEDING ~ CURRENT ROW' 는 현재 X 에서 2 를 뺀 값부터 현재 X 까지다. X = 4 는 2~4 범위라 X 가 2, 4 인 행의 20 + 30 = 50 이다. X = 9 는 7~9 범위인데 X 가 9 인 행뿐이라 50 이다. 정답은 ②번이다. ① 은 ROWS 처럼 앞의 두 행을 더한 것(10 + 20 + 30, 30 + 40 + 50), ③·④ 는 두 행 중 하나만 ROWS 로 계산한 것이다.",
     "_source": "authored",
     "references": [
       {
-        "type": "text",
-        "content": "정렬 기준에서 현재 행과 바로 앞 한 행, 바로 뒤 한 행을 합한 세 개의 행을 윈도우 범위로 지정한다."
+        "type": "table",
+        "caption": "T",
+        "headers": [
+          "X",
+          "값"
+        ],
+        "rows": [
+          [
+            "1",
+            "10"
+          ],
+          [
+            "2",
+            "20"
+          ],
+          [
+            "4",
+            "30"
+          ],
+          [
+            "5",
+            "40"
+          ],
+          [
+            "9",
+            "50"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT X,\n       SUM(값) OVER (\n         ORDER BY X\n         RANGE BETWEEN 2 PRECEDING\n                   AND CURRENT ROW\n       ) AS S\nFROM   T;"
       }
     ]
   },
@@ -1406,16 +1485,22 @@ export const ROUND_53: QuizQuestion[] = [
     "round": 53,
     "subject": "2과목",
     "number": 44,
-    "title": "테이블 구조 변경에 대한 설명 중 옳지 않은 것은?",
+    "title": "아래 SQL 을 순서대로 실행한 뒤 SELECT * FROM T 의 결과로 옳은 것은?",
     "options": [
-      "기존 데이터가 있으면 컬럼 사이즈 축소 시 제한이 있다.",
-      "NULL 만 입력된 컬럼은 사이즈 축소가 가능하다.",
-      "DEFAULT 값을 변경하면 변경 이후 입력되는 데이터에만 적용된다.",
-      "DEFAULT 값을 NULL 로 변경하면 기존 NULL 데이터에도 새로운 DEFAULT 가 소급 적용된다."
+      "A=1, BB=2, C=5",
+      "BB=2, C=NULL",
+      "B=2, C=5",
+      "BB=2, C=5"
     ],
     "correctIndex": 3,
-    "explanation": "기존 데이터가 있으면 그보다 작게 컬럼 크기를 줄일 수 없고(①), 값이 모두 NULL 인 컬럼은 줄일 수 있다(②). DEFAULT 값을 바꾸면 변경 이후에 입력되는 행에만 적용되며(③) 이미 저장된 데이터(NULL 포함)에는 소급 적용되지 않는다. 따라서 ④ 가 옳지 않다.",
-    "_source": "authored"
+    "explanation": "DEFAULT 가 있는 칼럼을 추가하면 이미 있던 행에도 그 기본값이 채워져 C 는 5 다. RENAME COLUMN 은 데이터는 그대로 두고 칼럼 이름만 B 에서 BB 로 바꾼다. DROP COLUMN 으로 A 칼럼과 그 값은 사라진다. 그래서 결과는 BB=2, C=5 인 1행이다. 정답은 ④번이다. ① 은 DROP COLUMN 을 놓친 것, ② 는 기존 행에는 기본값이 들어가지 않는다고 본 것, ③ 은 RENAME 을 놓친 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "CREATE TABLE T (A NUMBER, B NUMBER);\nINSERT INTO T VALUES (1, 2);\n\nALTER TABLE T\n  ADD (C NUMBER DEFAULT 5);\nALTER TABLE T\n  RENAME COLUMN B TO BB;\nALTER TABLE T DROP COLUMN A;"
+      }
+    ]
   },
   {
     "id": 10394,

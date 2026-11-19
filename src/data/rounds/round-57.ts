@@ -91,15 +91,15 @@ export const ROUND_57: QuizQuestion[] = [
     "round": 57,
     "subject": "1과목",
     "number": 4,
-    "title": "다른 속성으로부터 계산이나 변형을 통해 생성되는 속성은?",
+    "title": "다음 중 파생 속성을 두어 값을 미리 저장해 두기에 가장 알맞은 것은?",
     "options": [
-      "기본 속성",
-      "설계 속성",
-      "일반 속성",
-      "파생 속성"
+      "단가가 자주 바뀌는데, 주문 금액(수량 × 단가)을 저장해 두고 단가가 바뀔 때마다 다시 계산한다.",
+      "회원의 나이를 생년월일에서 계산해 칼럼으로 저장해 둔다.",
+      "상품이 20개뿐인 가게에서 재고 합계를 칼럼으로 저장해 둔다.",
+      "수백만 건의 거래를 모두 더해야 하는 계좌 잔액을, 조회할 때마다 화면에 보여 줘야 한다."
     ],
     "correctIndex": 3,
-    "explanation": "파생 속성은 다른 속성의 값을 기반으로 계산·변환하여 도출되는 속성이다. ① 기본 속성은 업무에서 직접 발생하고, ② 설계 속성은 모델링 과정에서 부여되며, ③ 일반 속성은 고유 의미를 갖는 속성이다.",
+    "explanation": "파생 속성은 계산 비용이 크고, 자주 조회되며, 원래 값이 바뀔 때 함께 고치는 부담이 감당할 만할 때 둔다. 계좌 잔액은 조회 때마다 수백만 건을 더하면 너무 느리고, 거래가 생길 때만 잔액을 고치면 되므로 파생 속성으로 두기에 알맞다. 정답은 ④번이다. ① 은 원래 값이 자주 바뀌어 고칠 곳만 늘고, ② 의 나이는 해마다 저절로 바뀌어 저장한 값이 곧 틀려진다. ③ 은 매번 계산해도 빨라 굳이 중복을 둘 이유가 없다.",
     "_source": "authored"
   },
   {
@@ -109,16 +109,22 @@ export const ROUND_57: QuizQuestion[] = [
     "round": 57,
     "subject": "1과목",
     "number": 5,
-    "title": "주식별자에 대한 설명 중 옳지 않은 것은?",
+    "title": "아래 두 테이블에 ㉠~㉢ 을 실행한 결과로 옳은 것은?",
     "options": [
-      "주식별자는 NULL이어도 된다.",
-      "유일해야 한다.",
-      "유일성을 만족하는 선에서 최소의 값을 가져야 한다.",
-      "자주 변하지 않아야 한다."
+      "오류, 성공, 두 번 모두 성공",
+      "성공, 성공, 두 번 모두 성공",
+      "오류, 오류, 두 번 모두 성공",
+      "오류, 성공, 두 번째는 오류"
     ],
     "correctIndex": 0,
-    "explanation": "주식별자는 유일해야 하고(②), 유일성을 만족하는 최소한의 속성으로 구성하며(③, 최소성), 자주 변하지 않아야 한다(④, 불변성). 또한 반드시 값이 있어야 하므로(존재성) NULL 을 허용한다는 ① 이 옳지 않다.",
-    "_source": "authored"
+    "explanation": "기본키(주식별자)는 값이 반드시 있어야 하므로, 여러 칼럼으로 된 기본키라도 각 칼럼에 NULL 을 넣을 수 없다. 그래서 ㉠ 은 B 가 NULL 이라 오류다. UNIQUE 는 값이 있는 것끼리만 중복을 막고 NULL 은 허용한다. ㉡ 은 성공하고, 모든 칼럼이 NULL 인 행은 서로 같다고 보지 않아 ㉢ 은 두 번 모두 성공한다. 정답은 ①번이다. ② 는 기본키에도 NULL 이 들어간다고 본 것, ③ 은 UNIQUE 도 NULL 을 막는다고 본 것, ④ 는 NULL 끼리 중복으로 본 것이다. 기본키 = UNIQUE + NOT NULL 이라고 기억하면 된다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "CREATE TABLE T1 (\n  A CHAR(2), B CHAR(2),\n  PRIMARY KEY (A, B)\n);\nCREATE TABLE T2 (\n  A CHAR(2), B CHAR(2),\n  UNIQUE (A, B)\n);\n-- ㉠\nINSERT INTO T1 VALUES ('O1', NULL);\n-- ㉡\nINSERT INTO T2 VALUES ('O1', NULL);\n-- ㉢ (두 번 실행)\nINSERT INTO T2 VALUES (NULL, NULL);"
+      }
+    ]
   },
   {
     "id": 10155,
@@ -152,16 +158,22 @@ export const ROUND_57: QuizQuestion[] = [
     "round": 57,
     "subject": "1과목",
     "number": 7,
-    "title": "반정규화 기법 중 '테이블 추가' 에 해당하지 않는 것은?",
+    "title": "아래 반정규화 사례 ㉠~㉣ 중 '테이블 추가' 기법에 해당하지 않는 것만 모두 고른 것은?",
     "options": [
-      "중복 테이블 추가",
-      "통계 테이블 추가",
-      "이력 테이블 추가",
-      "수직 분할"
+      "㉢",
+      "㉣",
+      "㉠, ㉢",
+      "㉢, ㉣"
     ],
     "correctIndex": 3,
-    "explanation": "테이블 반정규화는 테이블 병합, 테이블 분할, 테이블 추가로 나뉜다. 테이블 추가에는 다른 업무의 테이블과 같은 내용을 두는 중복 테이블(①), SUM·AVG 같은 집계 결과를 미리 저장하는 통계 테이블(②), 변경 이력을 따로 쌓는 이력 테이블(③), 자주 쓰는 컬럼만 모은 부분 테이블이 있다. ④ 수직 분할은 컬럼을 나누어 테이블을 쪼개는 테이블 분할 기법이라 테이블 추가에 해당하지 않는다. ※ 복원 자료에서 이 번호에 2과목 범위의 SQL 실행 결과 문항이 들어 있어 1과목에 맞지 않는다는 제보가 있어, 1과목(성능 데이터 모델링) 범위 문항으로 바꿨다.",
-    "_source": "authored"
+    "explanation": "테이블 반정규화는 병합, 분할, 추가로 나뉘고, 추가에는 중복·통계·이력·부분·진행 테이블 추가가 있다. ㉠ 은 미리 집계해 둔 통계 테이블 추가, ㉡ 은 같은 데이터를 한 벌 더 두는 중복 테이블 추가다. ㉢ 은 있던 테이블을 칼럼 단위로 나눈 수직 분할이라 '분할' 이고, ㉣ 은 테이블이 아니라 칼럼을 중복시킨 칼럼 반정규화다. 정답은 ④번이다. ①·② 는 둘 중 하나만 본 것, ③ 은 미리 계산한 합계 테이블을 추가가 아니라고 본 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "text",
+        "content": "㉠ 매일 밤 지점별 월 매출 합계를 계산해 따로 저장하고, 보고서는 그것만 읽는다.\n㉡ 원격 서버의 상품 테이블을 매번 원격 조인하지 않도록 같은 테이블을 로컬에 하나 더 둔다.\n㉢ 칼럼이 100개인 회원 테이블에서 자주 읽는 5개 칼럼만 떼어 별도 테이블로 나눈다.\n㉣ 주문 테이블에 고객명 칼럼을 복사해 둔다."
+      }
+    ]
   },
   {
     "id": 10157,
@@ -170,16 +182,23 @@ export const ROUND_57: QuizQuestion[] = [
     "round": 57,
     "subject": "1과목",
     "number": 8,
-    "title": "식별자에 대한 다음 설명 중 옳지 않은 것은?",
+    "title": "아래 ERD(실선 = 식별자 관계, 점선 = 비식별자 관계)의 주문상세 식별자에 대한 설명으로 옳지 않은 것은?",
     "options": [
-      "주식별자는 엔터티 내 인스턴스를 유일하게 구별한다.",
-      "외래키(FK)는 내부 식별자이다.",
-      "인조 식별자는 업무와 무관하게 시스템이 부여한 식별자이다.",
-      "본질 식별자는 업무상 의미를 가지는 식별자이다."
+      "주문상세의 주식별자(주문번호 + 상세순번)는 복합식별자다.",
+      "상품번호는 주식별자에 들어가지 않으므로 내부식별자다.",
+      "주문번호는 주문 엔터티에서 받아 온 외부식별자다.",
+      "주문번호는 식별자 관계로 받아 와 주문상세의 주식별자 일부가 되었다."
     ],
     "correctIndex": 1,
-    "explanation": "주식별자는 엔터티 안에서 인스턴스를 유일하게 구별하고(①), 인조 식별자는 업무와 무관하게 시스템이 부여하며(③), 본질 식별자는 업무상 의미가 있는 식별자다(④). 외래키(FK)는 다른 엔터티와의 관계를 통해 들여온 식별자이므로 외부 식별자다. 내부 식별자라는 ② 가 옳지 않다.",
-    "_source": "authored"
+    "explanation": "내부식별자는 엔터티 안에서 스스로 만든 식별자이고, 외부식별자는 다른 엔터티와의 관계로 받아 온 식별자(외래키)다. 이 구분은 주식별자에 들어가는지와는 상관이 없다. 상품번호는 상품과의 관계로 받아 온 외래키라 주식별자에 들어가지 않아도 외부식별자다. 그래서 ② 가 옳지 않다. 정답은 ②번이다. 주식별자가 두 속성으로 되어 있으니 복합식별자이고(①), 주문번호는 주문에서 받은 외부식별자이며(③), 실선(식별자 관계)이라 주식별자의 일부가 되었다(④).",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "erd",
+        "caption": "주문·주문상세·상품 ERD",
+        "mermaid": "erDiagram\n    주문 ||--|{ 주문상세 : \"포함\"\n    상품 ||..o{ 주문상세 : \"담김\"\n    주문 {\n        string 주문번호 PK\n    }\n    주문상세 {\n        string 주문번호 PK, FK\n        int 상세순번 PK\n        string 상품번호 FK\n    }\n    상품 {\n        string 상품번호 PK\n    }"
+      }
+    ]
   },
   {
     "id": 10158,
@@ -290,16 +309,22 @@ export const ROUND_57: QuizQuestion[] = [
     "round": 57,
     "subject": "2과목",
     "number": 13,
-    "title": "COMMIT에 대한 설명 중 옳지 않은 것은?",
+    "title": "T 테이블에 ID 1, 값 100 인 행이 있다. 두 세션이 아래 순서로 실행할 때 ㉠ 시점의 세션2 상태와 ㉡ 의 결과로 옳은 것은? (Oracle 기본 설정)",
     "options": [
-      "COMMIT 이후에는 다른 사용자가 변경된 데이터를 조회할 수 있다.",
-      "COMMIT 이전에도 본인 세션에서는 SELECT로 참조할 수 있다.",
-      "COMMIT 이전에 외부 사용자가 변경된 데이터를 확인할 수 있다.",
-      "COMMIT 이전에 수정은 가능하다."
+      "㉠ 바로 실행됨 / ㉡ 110",
+      "㉠ 오류 / ㉡ 110",
+      "㉠ 세션1 이 끝날 때까지 기다림 / ㉡ 220",
+      "㉠ 세션1 이 끝날 때까지 기다림 / ㉡ 200"
     ],
     "correctIndex": 2,
-    "explanation": "COMMIT 하면 변경이 확정되어 다른 사용자도 조회할 수 있고(①), COMMIT 전에도 본인 세션에서는 변경 내용을 SELECT 로 볼 수 있으며(②), 수정을 이어 갈 수도 있다(④). COMMIT 전의 변경은 다른 사용자에게 보이지 않고 변경 전 데이터만 보이므로 ③ 이 옳지 않다.",
-    "_source": "authored"
+    "explanation": "세션1 이 UPDATE 한 행에는 COMMIT 이나 ROLLBACK 전까지 잠금이 걸린다. 그래서 같은 행을 고치려는 세션2 의 ㉠ 은 오류가 아니라 세션1 이 끝날 때까지 기다린다. 세션1 이 COMMIT 하면 값이 110 으로 확정되고, 기다리던 세션2 는 확정된 110 을 다시 읽어 두 배인 220 으로 바꾼다. 세션2 도 COMMIT 하므로 ㉡ 은 220 이다. 정답은 ③번이다. ①·② 는 잠금을 놓친 것, ④ 는 세션2 가 처음 본 100 으로 계산한다고 본 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "-- 세션1\nUPDATE T SET 값 = 값 + 10\nWHERE  ID = 1;\n-- 세션2\nUPDATE T SET 값 = 값 * 2\nWHERE  ID = 1;           -- ㉠\n-- 세션1\nCOMMIT;\n-- 세션2\nCOMMIT;\nSELECT 값 FROM T\nWHERE  ID = 1;           -- ㉡"
+      }
+    ]
   },
   {
     "id": 10163,
@@ -308,16 +333,22 @@ export const ROUND_57: QuizQuestion[] = [
     "round": 57,
     "subject": "2과목",
     "number": 14,
-    "title": "NULL에 대한 설명 중 옳은 것은?",
+    "title": "C 값이 10, NULL, 30, NULL 인 4행짜리 T 테이블에 아래 SQL 을 실행한 결과로 옳은 것은?",
     "options": [
-      "NULL은 0과 같은 의미이다.",
-      "NULL은 집계 함수에서 제외된다.",
-      "NULL = NULL 은 TRUE 이다.",
-      "바커 표기법에서는 NULL 허용 여부를 알 수 없고 IE 표기법에서는 NULL 허용 여부를 알 수 있다."
+      "40, 4, 4, 10, 10",
+      "40, 4, 2, 20, 10",
+      "NULL, 4, 2, 20, 10",
+      "40, 2, 2, 20, 20"
     ],
     "correctIndex": 1,
-    "explanation": "SUM·AVG·MIN·MAX·COUNT(컬럼) 같은 집계 함수는 NULL 을 제외하고 계산한다(②). NULL 은 0 이나 공백과 다른 '알 수 없는 값' 이고(①), NULL = NULL 은 TRUE 가 아니라 UNKNOWN 이다(③). ④ 는 반대다. 바커 표기법은 속성의 필수(*)·선택(o)으로 NULL 허용 여부를 표시하지만 IE 표기법은 이를 표시하지 않는다.",
-    "_source": "authored"
+    "explanation": "집계 함수는 NULL 을 빼고 계산한다. SUM(C) 는 10 + 30 = 40 이고, NULL 이 섞여 있어도 결과가 NULL 이 되지 않는다. COUNT(*) 는 행 자체를 세어 4, COUNT(C) 는 값이 있는 행만 세어 2 다. AVG(C) 는 40 / 2 = 20 이고, NVL 로 NULL 을 0 으로 바꾸면 네 행 모두 계산에 들어가 40 / 4 = 10 이다. 정답은 ②번이다. ① 은 COUNT(C) 도 NULL 을 센다고 본 것, ③ 은 NULL 이 섞이면 SUM 이 NULL 이 된다고 본 것, ④ 는 COUNT(*) 도 NULL 행을 뺀다고 본 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT SUM(C), COUNT(*), COUNT(C),\n       AVG(C), AVG(NVL(C, 0))\nFROM   T;"
+      }
+    ]
   },
   {
     "id": 10164,
@@ -326,16 +357,22 @@ export const ROUND_57: QuizQuestion[] = [
     "round": 57,
     "subject": "2과목",
     "number": 15,
-    "title": "다음 중 SQL 명령어의 분류가 적절하지 않은 것은?",
+    "title": "빈 테이블 T 에 INSERT 한 뒤, 아래 ㉠~㉣ 중 하나를 실행하고 ROLLBACK 했다. INSERT 한 행이 그대로 남는 경우만 모두 고른 것은? (Oracle 기준, ㉠~㉣ 은 모두 성공한다고 가정)",
     "options": [
-      "DDL : TRUNCATE",
-      "DML : DROP",
-      "DCL : REVOKE",
-      "TCL : COMMIT"
+      "㉡",
+      "㉡, ㉢",
+      "㉠, ㉡, ㉢",
+      "㉣"
     ],
     "correctIndex": 1,
-    "explanation": "DROP 은 테이블·뷰 같은 객체 자체를 삭제하는 명령이라 DML 이 아니라 DDL 이다. ① TRUNCATE 도 DDL 이고, ③ REVOKE 는 권한 회수라 DCL, ④ COMMIT 은 트랜잭션 확정이라 TCL 이 맞다.",
-    "_source": "authored"
+    "explanation": "Oracle 에서 DDL 과 DCL 은 실행 전후로 자동 COMMIT 된다. COMMENT ON 은 DDL, GRANT 는 DCL 이라 ㉡·㉢ 을 실행하는 순간 앞의 INSERT 도 확정되어 ROLLBACK 해도 남는다. MERGE(㉠)는 DML 이라 INSERT 와 같은 트랜잭션에 묶여 함께 취소되고, SAVEPOINT(㉣)는 되돌릴 지점만 표시하는 TCL 이라 ROLLBACK 하면 INSERT 까지 사라진다. 정답은 ②번이다. ① 은 GRANT 는 자동 COMMIT 이 아니라고 본 것, ③ 은 MERGE 를 DDL 로 본 것, ④ 는 SAVEPOINT 가 그때까지의 작업을 저장한다고 본 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "INSERT INTO T VALUES (1);\n\n-- ㉠\nMERGE INTO T2 USING T\n  ON (T2.C = T.C)\n  WHEN NOT MATCHED THEN\n    INSERT VALUES (T.C);\n-- ㉡\nCOMMENT ON TABLE T IS '주문';\n-- ㉢\nGRANT SELECT ON T TO U;\n-- ㉣\nSAVEPOINT S1;\n\nROLLBACK;"
+      }
+    ]
   },
   {
     "id": 10165,
@@ -344,16 +381,22 @@ export const ROUND_57: QuizQuestion[] = [
     "round": 57,
     "subject": "2과목",
     "number": 16,
-    "title": "집합 연산자 INTERSECT에 대한 설명으로 가장 적절한 것은?",
+    "title": "A 의 값이 1, 1, 2, NULL 이고 B 의 값이 1, 1, NULL 일 때, 아래 SQL ㉠~㉣ 의 결과 행 수로 옳은 것은?",
     "options": [
-      "여러 SQL 결과의 합집합으로 중복된 행은 하나의 행으로 출력한다.",
-      "여러 SQL 결과의 합집합으로 중복된 행도 그대로 결과로 출력한다.",
-      "여러 SQL 결과의 교집합으로 중복된 행은 하나의 행으로 출력한다.",
-      "SQL 결과 간의 차집합으로 중복된 행은 하나의 행으로 출력한다."
+      "2, 2, 2, 2",
+      "1, 2, 4, 2",
+      "2, 2, 4, 2",
+      "2, 1, 4, 1"
     ],
     "correctIndex": 2,
-    "explanation": "INTERSECT 는 두 집합의 공통 행만 반환하는 교집합 연산자이며 결과의 중복은 제거되어 한 행으로 출력된다. ① 은 UNION, ② 는 UNION ALL, ④ 는 MINUS(EXCEPT) 의 설명이다.",
-    "_source": "authored"
+    "explanation": "㉠ INTERSECT 는 교집합이면서 중복을 없애고, 집합 연산에서는 NULL 끼리도 같은 값으로 봐 1, NULL 의 2행이다. ㉡ IN 과 ㉣ EXISTS 는 A 의 행을 남길지만 정하므로 A 의 1 두 행이 그대로 남아 2행이고, NULL 은 = 비교가 UNKNOWN 이라 빠진다. ㉢ 조인은 A 의 1 두 행이 B 의 1 두 행과 각각 짝이 되어 2 × 2 = 4행이다. 정답은 ③번이다. ① 은 조인이 행을 늘린다는 점을 놓친 것, ② 는 INTERSECT 가 NULL 을 뺀다고 본 것, ④ 는 IN·EXISTS 도 중복을 없앤다고 본 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "-- ㉠\nSELECT V FROM A\nINTERSECT\nSELECT V FROM B;\n-- ㉡\nSELECT V FROM A\nWHERE  V IN (SELECT V FROM B);\n-- ㉢\nSELECT A.V FROM A JOIN B\n  ON A.V = B.V;\n-- ㉣\nSELECT V FROM A\nWHERE  EXISTS (SELECT 1 FROM B\n               WHERE B.V = A.V);"
+      }
+    ]
   },
   {
     "id": 10166,
@@ -546,16 +589,22 @@ export const ROUND_57: QuizQuestion[] = [
     "round": 57,
     "subject": "2과목",
     "number": 21,
-    "title": "가장 높은 순위(최고 순위) 를 구할 때 사용이 적절하지 않은 것은?",
+    "title": "VAL 값이 10, 30, 30, 20 인 T 테이블에서 '가장 큰 값을 가진 행' 을 찾으려는 SQL ㉠~㉣ 의 결과 행 수로 옳은 것은? (Oracle 12c 이상)",
     "options": [
-      ">= ANY",
-      "RANK() OVER(ORDER BY VAL DESC) = 1",
-      "MAX(VAL)",
-      "FETCH FIRST 1 ROW ONLY 와 ORDER BY DESC"
+      "4, 2, 2, 1",
+      "1, 2, 2, 1",
+      "4, 2, 1, 1",
+      "2, 2, 2, 2"
     ],
     "correctIndex": 0,
-    "explanation": "`>= ANY` 는 집합 내 임의의 값 이상을 의미하므로 최솟값 이상이 되어 '최고'의 의미를 표현하지 못한다. 최고를 표현하려면 `>= ALL` 또는 `= MAX(...)` 가 적절하다. ② RANK = 1, ③ MAX(VAL), ④ ORDER BY DESC 뒤 FETCH FIRST 1 ROW 는 모두 최고 값을 구하는 적절한 방법이다.",
-    "_source": "authored"
+    "explanation": "㉠ 의 >= ANY 는 서브쿼리 값 중 하나 이상보다 크거나 같으면 참이다. 모든 값은 최소값 10 이상이라 4행이 모두 나와 최고값을 찾는 데 쓸 수 없다. ㉡ 의 >= ALL 은 모든 값보다 크거나 같아야 해 30 인 2행, ㉢ 의 RANK 는 동점에 같은 순위를 줘 1위 2행이다. ㉣ 의 FETCH FIRST 1 ROW ONLY 는 동점이 있어도 1행만 가져온다. 정답은 ①번이다. ② 는 ANY 를 ALL 처럼 본 것, ③ 은 RANK 가 동점을 하나만 1위로 준다고 본 것, ④ 는 FETCH 도 동점을 함께 가져온다고 본 것이다(그러려면 WITH TIES 를 쓴다).",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "-- ㉠\nSELECT * FROM T\nWHERE VAL >= ANY (SELECT VAL FROM T);\n-- ㉡\nSELECT * FROM T\nWHERE VAL >= ALL (SELECT VAL FROM T);\n-- ㉢\nSELECT * FROM\n (SELECT T.*, RANK() OVER\n    (ORDER BY VAL DESC) AS RK\n  FROM T)\nWHERE RK = 1;\n-- ㉣\nSELECT * FROM T\nORDER BY VAL DESC\nFETCH FIRST 1 ROW ONLY;"
+      }
+    ]
   },
   {
     "id": 10171,
@@ -855,16 +904,22 @@ export const ROUND_57: QuizQuestion[] = [
     "round": 57,
     "subject": "2과목",
     "number": 28,
-    "title": "다음 설명 중 옳지 않은 것은?",
+    "title": "데이터가 들어 있는 상품 테이블(금액 NUMBER(5) 에 최대 999 저장, 비고에 NULL 행 있음, 코드에 중복 값 있음)에 ㉠~㉣ 을 각각 실행한 결과로 옳은 것은? (Oracle 기준)",
     "options": [
-      "디폴트를 설정하면 전체 성능이 떨어진다.",
-      "데이터가 들어 있는 NUMBER 형 컬럼의 크기는 늘릴 수는 있어도 줄일 수는 없다.",
-      "NULL 이 없을 때만 NOT NULL 제약조건을 설정할 수 있다.",
-      "PRIMARY KEY 제약을 추가하려면 대상 컬럼에 중복 값이 없어야 한다."
+      "성공, 오류, 성공(기존 NULL 행은 그대로), 오류",
+      "성공, 성공, 성공(기존 NULL 행도 '없음'), 오류",
+      "성공, 오류, 성공(기존 NULL 행도 '없음'), 성공",
+      "오류, 오류, 성공(기존 NULL 행은 그대로), 오류"
     ],
     "correctIndex": 0,
-    "explanation": "DEFAULT 는 값을 입력하지 않았을 때 채워 넣을 기본값을 지정하는 것으로 전체 성능과 직접 관련이 없으므로 ① 이 옳지 않다. ② Oracle 에서 데이터가 들어 있는 NUMBER 컬럼은 정밀도를 줄일 수 없다(ORA-01440). 문자형(VARCHAR2)은 들어 있는 가장 긴 값보다 크게만 줄이면 축소할 수 있지만, 보기는 NUMBER 형이라 옳은 설명이다. ③ NOT NULL 은 기존 데이터에 NULL 이 없어야 추가할 수 있고, ④ PRIMARY KEY 는 중복 값과 NULL 이 없어야 추가할 수 있다.",
-    "_source": "authored"
+    "explanation": "Oracle 에서 숫자 칼럼의 자릿수를 늘리는 것(㉠)은 데이터가 있어도 되지만, 줄이는 것(㉡)은 값이 들어가더라도 칼럼이 비어 있어야 해 오류다. DEFAULT 는 앞으로 들어올 행에만 적용되므로 ㉢ 은 성공하고 기존 NULL 행은 그대로 NULL 이다. DEFAULT 를 둔다고 성능이 떨어지지는 않는다. 중복 값이 있는 칼럼에는 기본키를 걸 수 없어 ㉣ 은 오류다. 정답은 ①번이다. ② 는 자릿수를 줄여도 된다고 보고 DEFAULT 가 기존 행까지 바꾼다고 본 것, ③ 은 중복이 있어도 기본키를 걸 수 있다고 본 것, ④ 는 자릿수를 늘리는 것도 안 된다고 본 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "-- ㉠\nALTER TABLE 상품\n  MODIFY (금액 NUMBER(8));\n-- ㉡\nALTER TABLE 상품\n  MODIFY (금액 NUMBER(3));\n-- ㉢\nALTER TABLE 상품\n  MODIFY (비고 DEFAULT '없음');\n-- ㉣\nALTER TABLE 상품\n  ADD PRIMARY KEY (코드);"
+      }
+    ]
   },
   {
     "id": 10178,
@@ -873,16 +928,22 @@ export const ROUND_57: QuizQuestion[] = [
     "round": 57,
     "subject": "2과목",
     "number": 29,
-    "title": "동일 값에 동일 순위를 부여하되 다음 순위를 건너뛰지 않는 순위 함수는?",
+    "title": "급여가 500, NULL, 400, 400, 300 인 사원 테이블에 아래 SQL 을 실행했다. 300 행의 RK·DR 값과 500 행의 RK 값으로 옳은 것은? (Oracle 기준)",
     "options": [
-      "DENSE_RANK",
-      "RANK",
-      "ROW_NUMBER",
-      "PERFECT_RANK"
+      "5, 4, 2",
+      "4, 3, 1",
+      "4, 4, 1",
+      "5, 5, 2"
     ],
     "correctIndex": 0,
-    "explanation": "같은 값에 같은 순위를 주고 다음 순위를 건너뛰지 않는 함수는 DENSE_RANK 다(①, 예: 1, 2, 2, 3). RANK(②)는 같은 순위 수만큼 다음 순위를 건너뛰고(1, 2, 2, 4), ROW_NUMBER(③)는 같은 값이어도 서로 다른 순번을 매긴다(1, 2, 3, 4). PERFECT_RANK(④)라는 함수는 없다.",
-    "_source": "authored"
+    "explanation": "Oracle 은 NULL 을 가장 큰 값으로 보므로 내림차순에서 NULL 이 맨 앞에 와 1위를 받는다. 그래서 500 은 2위다. 400 두 명은 공동 3위이고, RANK 는 공동 순위만큼 건너뛰어 300 이 5위, DENSE_RANK 는 건너뛰지 않아 300 이 4위다. 정답은 ①번이다. ② 는 NULL 이 맨 뒤로 간다고 본 것, ③ 은 NULL 이 뒤로 가고 RANK 도 건너뛰지 않는다고 본 것, ④ 는 DENSE_RANK 도 순위를 건너뛴다고 본 것이다. NULL 을 순위에서 빼려면 ORDER BY 급여 DESC NULLS LAST 처럼 써야 한다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT 급여,\n       RANK()       OVER\n         (ORDER BY 급여 DESC) AS RK,\n       DENSE_RANK() OVER\n         (ORDER BY 급여 DESC) AS DR\nFROM   사원;"
+      }
+    ]
   },
   {
     "id": 10179,
@@ -963,16 +1024,48 @@ export const ROUND_57: QuizQuestion[] = [
     "round": 57,
     "subject": "2과목",
     "number": 31,
-    "title": "중복을 제거하고 개수를 세는 SQL 로 가장 적절한 것은?",
+    "title": "아래 T 테이블에 대한 SQL 의 결과(A, B, C)로 옳은 것은? (Oracle 기준)",
     "options": [
-      "COUNT(DISTINCT COL)",
-      "COUNT(*)",
-      "COUNT(ALL COL)",
-      "SUM(DISTINCT COL)"
+      "4, 1, 3",
+      "4, 2, 3",
+      "4, 1, 1",
+      "3, 1, 3"
     ],
     "correctIndex": 0,
-    "explanation": "COUNT(DISTINCT COL) 은 COL 의 중복 값을 하나로 보고 서로 다른 값의 개수를 센다(①). COUNT(*)(②)는 전체 행 수, COUNT(ALL COL)(③)은 NULL 을 뺀 값의 개수(중복 포함), SUM(DISTINCT COL)(④)은 서로 다른 값들의 합계라 개수가 아니다.",
-    "_source": "authored"
+    "explanation": "COUNT(*) 는 4행을 모두 센다. COUNT(DISTINCT 부서) 는 NULL 을 빼고 서로 다른 값만 세므로 'A' 하나라 1 이다. Oracle 의 CONCAT 은 (|| 연산자와 마찬가지로) NULL 을 빈 문자열처럼 이어 붙인다. 그래서 네 행은 'AX', 'A', 'X', 'AX' 가 되고, 서로 다른 값은 3개다. 정답은 ①번이다. ② 는 NULL 도 하나의 값으로 센 것, ③ 은 NULL 과 이으면 결과가 NULL 이 되는 표준 SQL 방식으로 계산한 것, ④ 는 COUNT(*) 에서 중복 행을 뺀 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "caption": "T",
+        "headers": [
+          "부서",
+          "직급"
+        ],
+        "rows": [
+          [
+            "A",
+            "X"
+          ],
+          [
+            "A",
+            "NULL"
+          ],
+          [
+            "NULL",
+            "X"
+          ],
+          [
+            "A",
+            "X"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT COUNT(*)              AS A,\n       COUNT(DISTINCT 부서)   AS B,\n       COUNT(DISTINCT\n         CONCAT(부서, 직급))  AS C\nFROM   T;"
+      }
+    ]
   },
   {
     "id": 10181,

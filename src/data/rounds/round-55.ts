@@ -35,16 +35,22 @@ export const ROUND_55: QuizQuestion[] = [
     "round": 55,
     "subject": "1과목",
     "number": 2,
-    "title": "엔터티명에 대한 설명으로 적절하지 않은 것은?",
+    "title": "아래 엔터티 이름 후보 ㉠~㉤ 중 엔터티 명명 규칙에 맞는 것만 모두 고른 것은?",
     "options": [
-      "현업 업무에서 사용하는 용어를 사용한다.",
-      "가능하면 약어로 사용한다.",
-      "단수 명사를 사용한다.",
-      "모든 엔터티에서 유일하게 이름이 부여되어야 한다."
+      "㉠",
+      "㉠, ㉣",
+      "㉠, ㉣, ㉤",
+      "㉠, ㉢, ㉣"
     ],
     "correctIndex": 1,
-    "explanation": "엔터티명은 현업에서 쓰는 용어를 쓰고(①), 단수 명사로 하며(③), 모든 엔터티에서 유일해야 한다(④). 약어는 뜻이 모호해지므로 가능하면 쓰지 않는 것이 명명 원칙이다. 약어를 쓴다는 ② 가 옳지 않다.",
-    "_source": "authored"
+    "explanation": "엔터티 이름은 현업에서 쓰는 말로, 약어를 피하고, 단수 명사로 짓고, 모델 전체에서 하나뿐이어야 한다. ㉠ 고객과 ㉣ 주문상세는 규칙에 맞는다. ㉡ 은 복수형, ㉢ 은 영문 약어라 맞지 않는다. ㉤ 은 이미 있는 엔터티와 이름이 같아 유일해야 한다는 규칙을 어긴다. 같은 대상이라면 하나로 합치고, 다른 대상이라면 다른 이름을 붙여야 한다. 정답은 ②번이다. ① 은 주문상세처럼 두 단어를 붙인 이름도 안 된다고 본 것, ③ 은 주제영역이 다르면 이름이 같아도 된다고 본 것, ④ 는 약어를 허용한 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "text",
+        "content": "㉠ 고객\n㉡ 상품들\n㉢ ORD_DTL\n㉣ 주문상세\n㉤ 고객 (영업 주제영역에 '고객' 이 이미 있는데 CS 주제영역에 새로 만든 엔터티)"
+      }
+    ]
   },
   {
     "id": 10252,
@@ -141,16 +147,22 @@ export const ROUND_55: QuizQuestion[] = [
     "round": 55,
     "subject": "1과목",
     "number": 6,
-    "title": "식별자 관계에 대한 설명으로 적절하지 않은 것은?",
+    "title": "아래 세 자식 엔터티는 모두 사원(기본키: 사번)과 식별자 관계다. 기본키 구성을 보고 사원과의 관계차수로 옳은 것은? ('사원:사원상세, 사원:사원경력, 사원:사원자격' 순서)",
     "options": [
-      "부모의 주식별자가 자식의 주식별자에 포함된다.",
-      "부모 엔터티와 자식 엔터티의 관계는 항상 1:1 관계이다.",
-      "자식이 부모 속성만으로 주식별자를 구성하면 1:1 관계가 된다.",
-      "부모 속성과 다른 속성을 함께 주식별자로 구성하면 1:M 관계가 된다."
+      "1:1, 1:M, 1:1",
+      "1:1, 1:M, 1:M",
+      "1:M, 1:M, 1:M",
+      "1:1, 1:1, 1:M"
     ],
     "correctIndex": 1,
-    "explanation": "식별자 관계에서는 부모의 주식별자가 자식의 주식별자에 포함된다(①). 자식이 부모의 속성만으로 주식별자를 구성하면 부모 하나에 자식이 하나뿐인 1:1 관계가 되고(③), 부모 속성에 다른 속성을 더해 구성하면 1:M 관계가 된다(④). 따라서 항상 1:1 이라는 ② 가 옳지 않다.",
-    "_source": "authored"
+    "explanation": "식별자 관계라도 자식의 기본키를 무엇으로 짰는지에 따라 관계차수가 달라진다. 사원상세처럼 부모 키(사번)만으로 기본키를 만들면 사원 한 명당 행이 하나뿐이라 1:1 이다. 사원경력은 사번에 경력순번을 더해 한 사원이 여러 행을 가질 수 있으니 1:M 이다. 사원자격도 사번에 자격코드를 더해 한 사원이 여러 자격을 가질 수 있어 1:M 이다(사원과 자격의 M:N 을 풀어 놓은 엔터티다). 정답은 ②번이다. ① 은 다른 엔터티의 키를 더한 경우를 1:1 로 본 것, ③ 은 식별자 관계가 늘 1:M 이라고 본 것, ④ 는 순번을 더해도 1:1 이라고 본 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "text",
+        "content": "사원상세(사번 PK·FK, 주소, 취미)\n사원경력(사번 PK·FK, 경력순번 PK, 회사명)\n사원자격(사번 PK·FK, 자격코드 PK·FK, 취득일)\n※ 자격코드는 자격 엔터티의 기본키다."
+      }
+    ]
   },
   {
     "id": 10256,
@@ -177,16 +189,22 @@ export const ROUND_55: QuizQuestion[] = [
     "round": 55,
     "subject": "1과목",
     "number": 8,
-    "title": "계층형 데이터 모델에 대한 설명으로 적절하지 않은 것은?",
+    "title": "아래 ㉠~㉢ 은 데이터 모델의 종류를 설명한 것이다. 바르게 짝지은 것은?",
     "options": [
-      "트리 구조로 데이터를 표현한다.",
-      "개체 간의 관계는 1:1 이다.",
-      "루트 노드에서 하위 노드로 확장된다.",
-      "동일 레벨의 개체 간에는 관계가 표현되지 않는다."
+      "네트워크형, 계층형, 관계형",
+      "계층형, 네트워크형, 관계형",
+      "관계형, 네트워크형, 계층형",
+      "계층형, 관계형, 네트워크형"
     ],
     "correctIndex": 1,
-    "explanation": "계층형 데이터 모델은 루트에서 하위로 확장되는 트리 구조로 데이터를 표현하고(①③), 같은 레벨의 개체 사이에는 관계를 표현하지 않는다(④). 부모 하나가 여러 자식을 갖는 1:N 관계가 기본이므로 개체 간 관계가 1:1 이라는 ② 가 옳지 않다.",
-    "_source": "authored"
+    "explanation": "계층형 모델은 트리 구조로 부모와 자식이 1:N 이며, 자식은 부모를 하나만 가질 수 있어 M:N 을 바로 표현하지 못한다(㉠). 네트워크형 모델은 레코드가 여러 오너를 가질 수 있는 그래프 구조라 M:N 도 표현한다(㉡). 관계형 모델은 데이터를 테이블로 나타내고 키 값으로 관계를 맺는다(㉢). 정답은 ②번이다. ① 은 계층형과 네트워크형을 바꿔 본 것, ③ 은 계층형과 관계형을 바꿔 본 것, ④ 는 네트워크형과 관계형을 바꿔 본 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "text",
+        "content": "㉠ 부모 하나에 자식이 여럿인 트리 구조라, 자식 레코드는 부모를 하나만 가진다.\n㉡ 한 레코드가 여러 부모(오너)를 가질 수 있어 M:N 관계도 표현할 수 있다.\n㉢ 데이터를 행과 열로 된 테이블로 나타내고, 칼럼 값(키)으로 테이블끼리 연결한다."
+      }
+    ]
   },
   {
     "id": 10258,
@@ -195,20 +213,41 @@ export const ROUND_55: QuizQuestion[] = [
     "round": 55,
     "subject": "1과목",
     "number": 9,
-    "title": "아래 빈칸에 들어갈 데이터 모델 구성 요소의 순서로 올바른 것은?",
+    "title": "아래 표에서 ㉠~㉣ 이 가리키는 데이터 모델 구성 요소를 바르게 짝지은 것은?",
     "options": [
-      "인스턴스 - 엔터티 - 속성값 - 속성",
-      "엔터티 - 속성 - 인스턴스 - 속성값",
-      "속성 - 인스턴스 - 엔터티 - 속성값",
-      "엔터티 - 인스턴스 - 속성 - 속성값"
+      "인스턴스, 엔터티, 속성값, 속성",
+      "엔터티, 속성, 인스턴스, 속성값",
+      "속성, 인스턴스, 엔터티, 속성값",
+      "엔터티, 인스턴스, 속성, 속성값"
     ],
     "correctIndex": 3,
-    "explanation": "데이터 모델의 구성 요소는 엔터티(집합) → 인스턴스(개별 행) → 속성(컬럼) → 속성값(셀 값) 순서의 포함 관계로 정의된다. ①·②·③ 은 집합 → 개별 행 → 컬럼 → 값 의 포함 순서를 뒤섞었다.",
+    "explanation": "엔터티는 관리할 대상의 집합(회원), 인스턴스는 그 집합에 속한 하나하나(M2 행), 속성은 인스턴스를 설명하는 항목(등급 열), 속성값은 특정 인스턴스의 특정 속성에 들어 있는 값('Gold')이다. 정답은 ④번이다. ① 은 엔터티와 인스턴스, 속성과 속성값을 바꿔 본 것, ② 는 행과 열을 바꿔 본 것, ③ 은 표 전체와 열을 바꿔 본 것이다.",
     "_source": "authored",
     "references": [
       {
+        "type": "table",
+        "caption": "회원",
+        "headers": [
+          "회원번호",
+          "이름",
+          "등급"
+        ],
+        "rows": [
+          [
+            "M1",
+            "김",
+            "Silver"
+          ],
+          [
+            "M2",
+            "이",
+            "Gold"
+          ]
+        ]
+      },
+      {
         "type": "text",
-        "content": "( ㉠ ) → ( ㉡ ) → ( ㉢ ) → ( ㉣ )"
+        "content": "㉠ '회원' 표 전체가 나타내는 대상\n㉡ M2 행 하나\n㉢ '등급' 열\n㉣ M2 행의 등급 칸에 든 'Gold'"
       }
     ]
   },
@@ -243,16 +282,22 @@ export const ROUND_55: QuizQuestion[] = [
     "round": 55,
     "subject": "2과목",
     "number": 11,
-    "title": "서브쿼리에 대한 설명 중 적절하지 않은 것은?",
+    "title": "부서 10 에 사원이 3명 있다. 아래 SQL ㉠~㉣ 중 오류가 발생하는 것만 모두 고른 것은?",
     "options": [
-      "서브쿼리는 SELECT, WHERE, FROM 절 등에 사용할 수 있다.",
-      "EXISTS 는 존재 여부만 확인하므로 성능에 유리한 경우가 많다.",
-      "IN 절은 단일 행 서브쿼리만 사용할 수 있다.",
-      "스칼라 서브쿼리는 단일 값을 반환해야 한다."
+      "㉠, ㉡",
+      "㉡",
+      "㉠",
+      "㉠, ㉣"
     ],
     "correctIndex": 2,
-    "explanation": "IN 은 단일 행·다중 행 서브쿼리 모두에 쓸 수 있다. 다중 행 결과에 = 같은 단일 행 연산자를 쓸 때 오류가 난다. 서브쿼리 사용 위치(①), EXISTS 의 존재 여부 확인(②), 스칼라 서브쿼리의 단일 값 반환(④) 은 맞으므로 정답은 ③ 이다.",
-    "_source": "authored"
+    "explanation": "= · > 같은 단일 행 비교 연산자 뒤의 서브쿼리는 한 행만 돌려줘야 한다. ㉠ 의 서브쿼리는 3행을 돌려주므로 오류다. 여러 행을 돌려주는 서브쿼리는 ㉡ 의 IN 이나 ㉢ 의 ALL·ANY 같은 다중 행 연산자와 함께 써야 한다. ㉣ 은 SELECT 절의 스칼라 서브쿼리인데, 부서번호마다 부서명이 하나라 행마다 값 하나를 돌려주므로 문제없다. 정답은 ③번이다. ① 은 IN 도 단일 행만 받는다고 본 것, ② 는 = 와 IN 을 바꿔 본 것, ④ 는 SELECT 절에는 서브쿼리를 쓸 수 없다고 본 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "-- ㉠\nSELECT 이름 FROM 사원\nWHERE  급여 = (SELECT 급여 FROM 사원\n               WHERE  부서 = 10);\n-- ㉡\nSELECT 이름 FROM 사원\nWHERE  급여 IN (SELECT 급여 FROM 사원\n                WHERE  부서 = 10);\n-- ㉢\nSELECT 이름 FROM 사원\nWHERE  급여 > ALL (SELECT 급여\n                   FROM   사원\n                   WHERE  부서 = 10);\n-- ㉣\nSELECT 이름,\n       (SELECT 부서명 FROM 부서 D\n        WHERE  D.부서 = E.부서)\nFROM   사원 E;"
+      }
+    ]
   },
   {
     "id": 10261,
@@ -261,16 +306,22 @@ export const ROUND_55: QuizQuestion[] = [
     "round": 55,
     "subject": "2과목",
     "number": 12,
-    "title": "DML 로 적절한 것은?",
+    "title": "기본키 칼럼 C 하나뿐인 빈 테이블 T 와, C 값이 2, 3, 1 인 S 테이블이 있다. 아래를 순서대로 실행할 때 마지막 SELECT 결과로 옳은 것은? (Oracle 기준, 오류가 난 문장 다음도 계속 실행)",
     "options": [
-      "INSERT, UPDATE, DELETE",
-      "CREATE, ALTER, DROP",
-      "GRANT, REVOKE",
-      "COMMIT, ROLLBACK"
+      "2",
+      "4",
+      "0",
+      "1"
     ],
     "correctIndex": 0,
-    "explanation": "DML(Data Manipulation Language)은 데이터 조작어로 INSERT·UPDATE·DELETE·SELECT가 해당된다. ② CREATE/ALTER/DROP은 DDL, ③ GRANT/REVOKE는 DCL, ④ COMMIT/ROLLBACK은 TCL이다.",
-    "_source": "authored"
+    "explanation": "두 번째 INSERT 는 S 의 세 행을 한 문장으로 넣는데, 그중 1 이 이미 T 에 있어 기본키 위반 오류가 난다. Oracle 은 오류가 난 '문장' 하나만 통째로 취소한다. 그래서 같은 문장에서 먼저 들어가려던 2, 3 도 남지 않는다. 앞서 넣은 1 은 그 문장과 상관없어 그대로다. 이어서 4 를 넣고 COMMIT 하므로 T 는 1, 4 의 2행이다. 정답은 ①번이다. ② 는 오류 전까지 들어간 2, 3 이 남는다고 본 것, ③ 은 오류 하나로 트랜잭션 전체가 취소된다고 본 것, ④ 는 오류 뒤 문장은 실행되지 않는다고 본 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "INSERT INTO T VALUES (1);\nINSERT INTO T SELECT C FROM S;\nINSERT INTO T VALUES (4);\nCOMMIT;\nSELECT COUNT(*) FROM T;"
+      }
+    ]
   },
   {
     "id": 10262,
@@ -1092,16 +1143,22 @@ export const ROUND_55: QuizQuestion[] = [
     "round": 55,
     "subject": "2과목",
     "number": 27,
-    "title": "컬럼 별칭(ALIAS) 에 대한 설명으로 적절하지 않은 것은?",
+    "title": "아래 SQL ㉠~㉣ 중 오류가 발생하는 것만 모두 고른 것은? (Oracle 기준)",
     "options": [
-      "AS 키워드는 생략할 수 있다.",
-      "공백이 포함된 별칭은 큰따옴표로 감싼다.",
-      "컬럼 앞에도 별칭을 붙일 수 있다.",
-      "ORDER BY 절에서 별칭을 참조할 수 있다."
+      "㉢",
+      "㉡, ㉢",
+      "㉢, ㉣",
+      "㉡, ㉢, ㉣"
     ],
     "correctIndex": 2,
-    "explanation": "컬럼 별칭은 컬럼 표현식 뒤에만 쓸 수 있고 앞에는 붙일 수 없으므로 ③ 이 적절하지 않다. ① AS 는 생략할 수 있고, ② 공백이나 특수문자가 들어간 별칭은 큰따옴표로 감싸며, ④ ORDER BY 는 SELECT 이후에 수행되어 별칭을 참조할 수 있다.",
-    "_source": "authored"
+    "explanation": "칼럼 별칭은 칼럼 뒤에 AS 와 함께, 또는 AS 없이 공백 하나 띄워 붙인다(㉠). 별칭에 공백이 들어가면 큰따옴표로 감싸야 하므로 ㉡ 은 되고, 따옴표 없이 띄어 쓴 ㉢ 은 오류다. ㉣ 처럼 '별칭 = 칼럼' 으로 칼럼 앞에 별칭을 두는 방식은 SQL Server 문법이라 Oracle 에서는 오류다. 정답은 ③번이다. ① 은 칼럼 앞에 별칭을 둘 수 있다고 본 것, ②·④ 는 큰따옴표로 감싼 별칭도 안 된다고 본 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "-- ㉠\nSELECT 이름 사원명 FROM 사원;\n-- ㉡\nSELECT 이름 AS \"사원 이름\" FROM 사원;\n-- ㉢\nSELECT 이름 AS 사원 이름 FROM 사원;\n-- ㉣\nSELECT 사원명 = 이름 FROM 사원;"
+      }
+    ]
   },
   {
     "id": 10277,
@@ -1285,16 +1342,22 @@ export const ROUND_55: QuizQuestion[] = [
     "round": 55,
     "subject": "2과목",
     "number": 31,
-    "title": "계약이 없는 고객을 조회하는 SQL 로 적절한 것은?",
+    "title": "고객 테이블에 고객ID 1, 2, 3, 4 가 있고, 계약 테이블의 고객ID 가 1, 3, NULL 일 때 '계약이 없는 고객' 을 찾는 SQL ㉠, ㉡, ㉢ 의 결과 행 수로 옳은 것은?",
     "options": [
-      "INNER JOIN",
-      "EXISTS",
-      "NOT EXISTS",
-      "COALESCE"
+      "2, 2, 2",
+      "0, 0, 2",
+      "0, 2, 2",
+      "2, 2, 0"
     ],
     "correctIndex": 2,
-    "explanation": "계약이 '없는' 고객을 찾으려면, 고객마다 계약 테이블에 해당 고객의 행이 존재하지 않는지를 확인하는 NOT EXISTS(연관 서브쿼리)를 쓴다(③). EXISTS(②)와 INNER JOIN(①)은 반대로 계약이 있는 고객을 찾고, COALESCE(④)는 NULL 대체 함수라 관계가 없다.",
-    "_source": "authored"
+    "explanation": "㉠ 의 NOT IN 은 '고객ID <> 1 AND <> 3 AND <> NULL' 인데, <> NULL 이 UNKNOWN 이라 어떤 행도 참이 되지 못해 0행이다. 서브쿼리에 NULL 이 하나만 섞여도 NOT IN 은 결과가 사라진다. ㉡ 의 NOT EXISTS 는 고객마다 같은 고객ID 의 계약 행이 있는지만 본다. NULL 행은 어떤 고객과도 같지 않아 영향이 없고, 2·4 의 2행이다. ㉢ 은 짝이 없는 고객의 계약 칼럼이 NULL 이 되는 것을 이용해 역시 2·4 의 2행이다. 정답은 ③번이다. ① 은 NOT IN 이 NULL 을 그냥 건너뛴다고 본 것, ② 는 NOT EXISTS 도 NULL 의 영향을 받는다고 본 것, ④ 는 외부 조인 결과에서 IS NULL 이 아무것도 잡지 못한다고 본 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "-- ㉠\nSELECT * FROM 고객\nWHERE  고객ID NOT IN\n       (SELECT 고객ID FROM 계약);\n-- ㉡\nSELECT * FROM 고객 C\nWHERE  NOT EXISTS\n       (SELECT 1 FROM 계약 K\n        WHERE  K.고객ID = C.고객ID);\n-- ㉢\nSELECT C.*\nFROM   고객 C LEFT JOIN 계약 K\n       ON C.고객ID = K.고객ID\nWHERE  K.고객ID IS NULL;"
+      }
+    ]
   },
   {
     "id": 10281,
@@ -1760,16 +1823,22 @@ export const ROUND_55: QuizQuestion[] = [
     "round": 55,
     "subject": "2과목",
     "number": 41,
-    "title": "A, B 에 각각 중복 행이 없다고 가정할 때, SQL 집합 연산자 UNION ALL 과 의미가 동일한 조합은?",
+    "title": "A = {1, 2, 3}, B = {2, 3, 4} 일 때 아래 식 ㉠~㉣ 의 결과 행 수로 옳은 것은? (A UNION ALL B 는 6행)",
     "options": [
-      "(A UNION B) UNION ALL (A INTERSECT B)",
-      "(A UNION B) UNION (A UNION B)",
-      "(A INTERSECT B) UNION ALL (A MINUS B)",
-      "(A UNION B) MINUS (A INTERSECT B)"
+      "6, 4, 3, 2",
+      "6, 8, 3, 2",
+      "4, 4, 3, 2",
+      "6, 4, 2, 4"
     ],
     "correctIndex": 0,
-    "explanation": "A 와 B 에 각각 중복이 없으면 A UNION ALL B 는 공통 행만 두 번, 나머지 행은 한 번씩 나온다. ① 에서 A UNION B 는 모든 행을 한 번씩 담고, 거기에 A INTERSECT B(공통 행)를 UNION ALL 로 한 번 더 붙이므로 공통 행이 두 번 나와 A UNION ALL B 와 결과가 같다. ② 는 UNION 이라 중복이 지워져 A UNION B 와 같고, ③ 은 B 에만 있는 행이 빠지며, ④ 는 공통 행이 빠진 대칭 차집합이다.",
-    "_source": "authored"
+    "explanation": "A UNION B 는 {1, 2, 3, 4} 의 4행, A INTERSECT B 는 {2, 3}, A MINUS B 는 {1} 이다. ㉠ 은 4행에 공통 값 2, 3 을 한 번 더 붙여 6행이 되고, 값도 1, 2, 2, 3, 3, 4 로 A UNION ALL B 와 같다. ㉡ 은 같은 집합끼리의 UNION 이라 중복이 없어져 4행, ㉢ 은 {2, 3} + {1} 로 A 와 같은 3행, ㉣ 은 {1, 4} 의 2행이다. 정답은 ①번이다. ② 는 UNION 도 중복을 남긴다고 본 것, ③ 은 ㉠ 의 UNION ALL 을 UNION 처럼 본 것, ④ 는 ㉢ 과 ㉣ 을 잘못 계산한 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "-- ㉠\n(A UNION B) UNION ALL\n(A INTERSECT B)\n-- ㉡\n(A UNION B) UNION (A UNION B)\n-- ㉢\n(A INTERSECT B) UNION ALL\n(A MINUS B)\n-- ㉣\n(A UNION B) MINUS\n(A INTERSECT B)"
+      }
+    ]
   },
   {
     "id": 10291,
@@ -1930,20 +1999,20 @@ export const ROUND_55: QuizQuestion[] = [
     "round": 55,
     "subject": "2과목",
     "number": 46,
-    "title": "기존 테이블에 새로운 컬럼을 추가하는 DDL 로 적절한 것은?",
+    "title": "행이 2개 있는 EMP 테이블에 아래 ㉠, ㉡, ㉢ 을 각각 실행한 결과로 옳은 것은? (Oracle 기준)",
     "options": [
-      "CREATE TABLE EMP ADD OFFI_POST_NUMBER VARCHAR2(80);",
-      "ALTER TABLE EMP ADD (OFFI_POST_NUMBER VARCHAR2(80));",
-      "UPDATE TABLE EMP ADD OFFI_POST_NUMBER VARCHAR2(80);",
-      "INSERT INTO EMP (OFFI_POST_NUMBER) VALUES (NULL);"
+      "성공, 성공, 성공",
+      "성공, 오류, 성공",
+      "성공, 오류, 오류",
+      "오류, 오류, 성공"
     ],
     "correctIndex": 1,
-    "explanation": "기존 테이블에 컬럼을 추가할 때는 ALTER TABLE ... ADD (컬럼명 데이터타입) 구문을 사용한다. ① CREATE는 신규 생성, ③ UPDATE는 데이터 수정, ④ INSERT는 행 추가용이라 컬럼을 추가하지 못한다.",
+    "explanation": "칼럼 추가는 ALTER TABLE … ADD 로 한다. 이미 행이 있는 테이블에 칼럼을 추가하면 기존 행의 새 칼럼은 NULL 이 되므로 ㉠ 은 성공한다. ㉡ 은 기존 행의 C2 가 NULL 이 되어야 하는데 NOT NULL 이라 오류다. ㉢ 은 DEFAULT 0 이 기존 행에도 채워져 NOT NULL 을 만족하므로 성공한다. 정답은 ②번이다. ① 은 NOT NULL 칼럼도 그냥 추가된다고 본 것, ③ 은 DEFAULT 가 기존 행에 채워지지 않는다고 본 것, ④ 는 행이 있으면 칼럼 추가가 안 된다고 본 것이다.",
     "_source": "authored",
     "references": [
       {
         "type": "sql",
-        "code": "-- 직원 테이블에 직장우편번호(OFFI_POST_NUMBER) 컬럼을 추가한다."
+        "code": "-- ㉠\nALTER TABLE EMP ADD (C1 NUMBER);\n-- ㉡\nALTER TABLE EMP\n  ADD (C2 NUMBER NOT NULL);\n-- ㉢\nALTER TABLE EMP\n  ADD (C3 NUMBER DEFAULT 0 NOT NULL);"
       }
     ]
   },
@@ -1954,16 +2023,22 @@ export const ROUND_55: QuizQuestion[] = [
     "round": 55,
     "subject": "2과목",
     "number": 47,
-    "title": "참조 무결성을 구현해 주는 키로 적절한 것은?",
+    "title": "아래처럼 자기 자신을 참조하는 사원 테이블에 INSERT ㉠~㉣ 을 차례로 실행할 때 오류가 발생하는 것만 모두 고른 것은?",
     "options": [
-      "기본키",
-      "외래키",
-      "대체키",
-      "후보키"
+      "없음",
+      "㉡",
+      "㉡, ㉣",
+      "㉠, ㉡"
     ],
     "correctIndex": 1,
-    "explanation": "참조 무결성(자식의 값이 부모에 반드시 존재)은 외래키로 구현한다(②). 기본키(①)는 개체 무결성(NOT NULL + 유일)을 보장하고, 대체키(③)는 후보키 중 기본키가 아닌 키, 후보키(④)는 기본키가 될 수 있는 키다.",
-    "_source": "authored"
+    "explanation": "외래키는 같은 테이블의 기본키도 참조할 수 있다(관리자 → 사번). 참조 무결성은 넣는 순간 가리키는 행이 있는지로 검사한다. ㉠ 의 관리자 NULL 은 '관리자 없음' 이라 허용된다. ㉡ 은 아직 없는 사번 3 을 가리켜 오류다. ㉢ 은 있는 사번 1 을 가리켜 성공하고, 그 뒤의 ㉣ 은 사번 3 이 생겼으므로 같은 값인데도 성공한다(㉡ 이 실패해서 사번 2 도 중복이 아니다). 정답은 ②번이다. ① 은 같은 테이블 참조는 검사하지 않는다고 본 것, ③ 은 ㉣ 도 실패한다고 본 것, ④ 는 외래키에 NULL 을 넣을 수 없다고 본 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "CREATE TABLE 사원 (\n  사번   NUMBER PRIMARY KEY,\n  관리자 NUMBER\n         REFERENCES 사원(사번)\n);\n-- ㉠\nINSERT INTO 사원 VALUES (1, NULL);\n-- ㉡\nINSERT INTO 사원 VALUES (2, 3);\n-- ㉢\nINSERT INTO 사원 VALUES (3, 1);\n-- ㉣\nINSERT INTO 사원 VALUES (2, 3);"
+      }
+    ]
   },
   {
     "id": 10297,
@@ -1972,16 +2047,22 @@ export const ROUND_55: QuizQuestion[] = [
     "round": 55,
     "subject": "2과목",
     "number": 48,
-    "title": "무결성 제약조건 위배에 대한 설명 중 옳지 않은 것은?",
+    "title": "회원 테이블에 ID 'A', 'B' 만 있을 때 아래 INSERT ㉠~㉣ 의 결과로 옳은 것은? ('㉠·㉡·㉢ 이 위배하는 무결성 / ㉣ 결과' 순서)",
     "options": [
-      "도서관 테이블의 회원ID 컬럼에 FOREIGN KEY 제약이 정의되지 않았더라도 다른 테이블에 없는 회원ID 값을 넣으면 참조 무결성이 위배된다.",
-      "PRIMARY KEY 컬럼에 중복 값을 삽입하면 개체 무결성이 위배된다.",
-      "CHECK 제약을 벗어난 값이 입력되면 도메인 무결성이 위배된다.",
-      "PRIMARY KEY 컬럼에 NULL 이 들어가면 개체 무결성이 위배된다."
+      "참조, 도메인, 개체 / 성공",
+      "참조, 도메인, 개체 / 오류",
+      "개체, 도메인, 참조 / 성공",
+      "참조, 개체, 도메인 / 오류"
     ],
     "correctIndex": 0,
-    "explanation": "참조 무결성은 FOREIGN KEY 제약이 정의된 경우에만 검사된다. FK 제약이 없는 회원ID 는 일반 컬럼일 뿐이라 다른 테이블에 없는 값을 넣어도 참조 무결성 위배가 아니므로 ① 이 옳지 않다. ② 기본키 중복, ④ 기본키 NULL 은 개체 무결성(기본키는 유일 + NOT NULL) 위배이고, ③ CHECK 범위를 벗어나면 도메인 무결성 위배다. ※ 복원 자료의 ④ 는 'NOT NULL 컬럼에 NULL' 이라 일반 컬럼이면 도메인 무결성으로도 볼 수 있어 정답이 둘로 읽혀, 기본키 컬럼으로 명확히 했다.",
-    "_source": "authored"
+    "explanation": "㉠ 은 회원에 없는 'C' 를 가리켜 외래키, 즉 참조 무결성을 어긴다. ㉡ 의 권수 7 은 CHECK 로 정한 값의 범위를 벗어나 도메인 무결성 위반이다. ㉢ 은 기본키에 NULL 을 넣어 개체 무결성 위반이다. 외래키 칼럼은 NULL 을 허용하므로(가리키는 회원이 아직 없다는 뜻) ㉣ 은 성공한다. 정답은 ①번이다. ② 는 외래키에 NULL 을 넣을 수 없다고 본 것, ③ 은 참조와 개체를 바꿔 본 것, ④ 는 CHECK 와 기본키 위반의 이름을 바꾸고 ㉣ 도 오류로 본 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "CREATE TABLE 대출 (\n  번호   NUMBER PRIMARY KEY,\n  회원ID CHAR(1) REFERENCES 회원(ID),\n  권수   NUMBER\n         CHECK (권수 BETWEEN 1 AND 5)\n);\n\n-- ㉠\nINSERT INTO 대출 VALUES (1, 'C', 2);\n-- ㉡\nINSERT INTO 대출 VALUES (2, 'A', 7);\n-- ㉢\nINSERT INTO 대출 VALUES (NULL, 'B', 1);\n-- ㉣\nINSERT INTO 대출 VALUES (3, NULL, 1);"
+      }
+    ]
   },
   {
     "id": 10298,
