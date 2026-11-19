@@ -933,3 +933,5 @@
 | 52-2-39 | 계층 칼럼(매장 → 지역)의 CUBE·ROLLUP·GROUPING SETS 행 수 | 절 이름 → ERD + 데이터 + 세 GROUP BY 행 수 | 9, 6, 4 | PostgreSQL 동일, ERD 렌더 확인 |
 | 58-2-20 | GROUP BY 에 없는 칼럼(종속 칼럼이어도 오류)·MAX·HAVING | 설명 고르기 → ERD + 데이터 + SQL 4개 | 오류, 2, 2, 1 | Oracle 규칙(PostgreSQL 은 기본키로 묶으면 ㉠ 허용 — 해설에 적음), 나머지 PostgreSQL 동일 |
 | 49-2-21 | ROLLUP 칼럼 순서에 따른 소계 행 수·GROUPING SETS | 설명 고르기 → 표 + 세 GROUP BY 행 수 | 7, 8, 5 | PostgreSQL 동일 |
+| 54-2-11 | CTAS 가 옮기지 않는 PK·FK(중복·고아 행 허용)와 옮기는 NOT NULL | 옳지 않은 설명 → ERD + CTAS + INSERT 4개 중 성공 | ㉠, ㉡ | Oracle 규칙(PostgreSQL 은 NOT NULL 도 안 옮김 — 해설에 적음), PK·FK 결과는 PostgreSQL 동일 |
+| 50-2-37 | 위로 올라가는 PRIOR·아래로 내려가는 PRIOR·CONNECT BY 조건(가지치기) vs WHERE | SQL 고르기 → 자기 참조 ERD + 5행 트리 + 질의 4개 행 수 | 3, 3, 2, 4 | 재귀 CTE 로 같은 계산 확인(PostgreSQL), ERD 렌더 확인 |

@@ -1168,37 +1168,54 @@
     {
       "subject": "2과목",
       "number": 37,
-      "title": "아래 부서 테이블에서 부서코드 11 → 7 → 2 의 계층 결과를 반환하는 SQL 로 옳은 것은?",
+      "title": "아래 ERD 와 데이터에 대해 Oracle 계층형 질의 ㉠~㉣ 의 결과 행 수를 차례대로 나열한 것은?",
       "options": [
-        "START WITH 부서코드=2 CONNECT BY 상위부서코드 = PRIOR 부서코드",
-        "START WITH 부서코드=2 CONNECT BY PRIOR 상위부서코드 = 부서코드",
-        "START WITH 부서코드=11 CONNECT BY 상위부서코드 = PRIOR 부서코드",
-        "START WITH 부서코드=11 CONNECT BY PRIOR 상위부서코드 = 부서코드"
+        "3, 3, 4, 4",
+        "3, 2, 2, 4",
+        "1, 3, 2, 4",
+        "3, 3, 2, 4"
       ],
       "correctIndex": 3,
-      "explanation": "부서 11 에서 시작해 자식→부모 방향(역방향) 으로 2 까지 거슬러 올라간다. PRIOR 상위부서코드 = 부서코드 형태가 자식 행의 상위부서코드 가 부모 행의 부서코드와 매칭되어 역방향 전개가 이루어진다. ① 은 2 에서 아래(순방향)로 내려가 2 → 7 → 11 로 순서가 반대이고, ② 는 2 에서 위로 올라가 2 한 행만, ③ 은 11 에서 아래로 내려가 11 한 행만 나온다.",
+      "explanation": "트리는 2 아래에 7, 9 가 있고 7 아래에 11, 12 가 있다. ㉠ 은 PRIOR 가 상위코드 쪽에 있어 '방금 읽은 행의 상위코드 = 다음 행의 코드' 로 위로 올라간다. 11 → 7 → 2 의 3행이다. ㉡ 은 '방금 읽은 행의 코드 = 다음 행의 상위코드' 로 아래로 내려가 7, 11, 12 의 3행이다. ㉢ 은 조건을 CONNECT BY 에 넣었다. 7 로 내려가는 연결 자체가 막혀 7 과 그 아래 11, 12 가 모두 빠지고 2, 9 의 2행만 남는다. ㉣ 은 조건을 WHERE 에 넣었다. WHERE 는 트리를 다 만든 뒤 행을 거르므로 7 한 행만 빠지고 2, 9, 11, 12 의 4행이 남는다. 정답은 ④번이다. ① 은 ㉢ 과 ㉣ 을 같다고 본 것이고, ② 는 ㉡ 에서 7 을 빼고 센 것, ③ 은 ㉠ 이 위로 올라가지 못하고 11 하나만 낸다고 본 것이다.",
       "references": [
         {
+          "type": "erd",
+          "caption": "부서 자기 참조 ERD",
+          "mermaid": "erDiagram\n    부서 |o..o{ 부서 : \"상위\"\n    부서 {\n        int 코드 PK\n        int 상위코드 FK\n    }"
+        },
+        {
           "type": "table",
-          "caption": "부서 테이블",
+          "caption": "부서",
           "headers": [
-            "부서코드",
-            "상위부서코드"
+            "코드",
+            "상위코드"
           ],
           "rows": [
             [
-              "11",
-              "7"
+              "2",
+              "NULL"
             ],
             [
               "7",
               "2"
             ],
             [
-              "2",
-              "NULL"
+              "9",
+              "2"
+            ],
+            [
+              "11",
+              "7"
+            ],
+            [
+              "12",
+              "7"
             ]
           ]
+        },
+        {
+          "type": "sql",
+          "code": "-- ㉠\nSELECT 코드 FROM 부서\nSTART WITH 코드 = 11\nCONNECT BY PRIOR 상위코드 = 코드;\n-- ㉡\nSELECT 코드 FROM 부서\nSTART WITH 코드 = 7\nCONNECT BY 상위코드 = PRIOR 코드;\n-- ㉢\nSELECT 코드 FROM 부서\nSTART WITH 코드 = 2\nCONNECT BY PRIOR 코드 = 상위코드\n       AND 코드 <> 7;\n-- ㉣\nSELECT 코드 FROM 부서\nWHERE 코드 <> 7\nSTART WITH 코드 = 2\nCONNECT BY PRIOR 코드 = 상위코드;"
         }
       ]
     },
