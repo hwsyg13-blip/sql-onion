@@ -748,16 +748,22 @@ export const ROUND_60: QuizQuestion[] = [
     "round": 60,
     "subject": "2과목",
     "number": 18,
-    "title": "사용자 R1이 테이블을 생성하고 접속을 종료한 뒤, 다른 사용자 R2가 접속하여 R1의 테이블을 조회하려 하자 오류가 발생하였다. 해결 방안으로 가장 적절한 것은?",
+    "title": "사용자 R1 이 자기 스키마에 테이블 T 를 만들었다. 이어서 아래 순서로 실행할 때 ㉡, ㉢, ㉣ 의 결과로 옳은 것은? (Oracle 기준, R2 스키마에는 T 가 없다)",
     "options": [
-      "R2가 R1의 계정으로 재로그인하여 조회한다.",
-      "GRANT로 SELECT 권한을 부여한다.",
-      "R2 계정에서 SYNONYM만 생성하면 자동으로 접근이 허용된다.",
-      "R2가 관리자 권한으로 테이블을 강제 복제한다."
+      "성공, 성공, 성공",
+      "오류, 성공, 성공",
+      "오류, 오류, 성공",
+      "성공, 성공, 오류"
     ],
     "correctIndex": 1,
-    "explanation": "다른 사용자의 객체에 접근하려면 객체 소유자가 GRANT 명령으로 SELECT 권한을 부여해야 한다. ①은 보안상 부적절하고, ③ SYNONYM은 객체에 대한 별칭일 뿐 권한을 자동 부여하지 않으며, ④ 강제 복제는 정상적인 권한 관리 방식이 아니다.",
-    "_source": "authored"
+    "explanation": "다른 사용자의 테이블은 소유자가 GRANT 로 권한을 줘야 쓸 수 있다. 그런데 권한을 받아도 스키마 이름 없이 T 라고만 쓰면 R2 자신의 스키마에서 T 를 찾기 때문에 ㉡ 은 여전히 오류다. ㉢ 처럼 R1.T 로 소유자를 붙이면 권한이 있어 성공한다. R2 가 R1.T 를 가리키는 시노님 T 를 만들면, ㉣ 처럼 T 라고만 써도 R1.T 로 연결되어 성공한다. 정답은 ②번이다. ① 은 권한만 받으면 이름만으로 찾을 수 있다고 본 것, ③ 은 R1.T 로도 안 된다고 본 것, ④ 는 시노님이 권한 없이 동작한다거나 권한을 없앤다고 본 것이다. 시노님은 이름을 대신할 뿐 권한을 주지는 않는다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "-- ㉠ R2 가 실행 → 오류\nSELECT * FROM T;\n-- R1 이 실행\nGRANT SELECT ON T TO R2;\n-- ㉡ R2 가 실행\nSELECT * FROM T;\n-- ㉢ R2 가 실행\nSELECT * FROM R1.T;\n-- R2 가 실행\nCREATE SYNONYM T FOR R1.T;\n-- ㉣ R2 가 실행\nSELECT * FROM T;"
+      }
+    ]
   },
   {
     "id": 10018,
@@ -1579,16 +1585,22 @@ export const ROUND_60: QuizQuestion[] = [
     "round": 60,
     "subject": "2과목",
     "number": 36,
-    "title": "DML/DDL/DCL 구분에 대한 설명 중 잘못된 것은?",
+    "title": "아래 명령 ㉠~㉤ 중 Oracle 에서 실행하는 순간 그 앞에 하던 작업까지 자동으로 COMMIT 되는 것만 모두 고른 것은?",
     "options": [
-      "TRUNCATE는 DML이다.",
-      "INSERT, UPDATE, DELETE, MERGE는 DML이다.",
-      "CREATE, ALTER, DROP은 DDL이다.",
-      "GRANT, REVOKE는 DCL이다."
+      "㉠, ㉢, ㉣",
+      "㉠, ㉢",
+      "㉠, ㉡, ㉢",
+      "㉢, ㉣, ㉤"
     ],
     "correctIndex": 0,
-    "explanation": "TRUNCATE 는 테이블의 모든 행을 삭제하면서 저장 공간까지 초기화하는 명령으로 DDL 에 속한다. 행 단위로 삭제하고 롤백할 수 있는 DELETE 와 달리 자동 커밋되는 점이 DDL 의 특징이다. ②(DML), ③(DDL), ④(DCL)는 옳게 분류했다.",
-    "_source": "authored"
+    "explanation": "Oracle 에서 DDL 과 DCL 은 실행 전후로 자동 COMMIT 된다. TRUNCATE(㉠)와 RENAME(㉢)은 DDL, GRANT(㉣)는 DCL 이라 실행하는 순간 앞의 작업도 함께 확정된다. MERGE(㉡)는 DML 이라 COMMIT 이나 ROLLBACK 을 해야 끝나고, SAVEPOINT(㉤)는 트랜잭션 안의 지점을 표시하는 TCL 이라 아무것도 확정하지 않는다. 정답은 ①번이다. ② 는 DCL 도 자동 COMMIT 된다는 점을 놓친 것, ③ 은 행을 지우고 바꾸는 MERGE 를 DDL 로 본 것, ④ 는 TRUNCATE 를 DML 로 보고 SAVEPOINT 가 저장한다고 본 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "text",
+        "content": "㉠ TRUNCATE TABLE 로그\n㉡ MERGE INTO 재고 USING 입고 …\n㉢ RENAME 주문 TO 주문_old\n㉣ GRANT SELECT ON 주문 TO U1\n㉤ SAVEPOINT S1"
+      }
+    ]
   },
   {
     "id": 10036,

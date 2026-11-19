@@ -845,20 +845,20 @@ export const ROUND_61: QuizQuestion[] = [
     "round": 61,
     "subject": "2과목",
     "number": 21,
-    "title": "다음 SQL의 결과로 가장 적절한 것은 무엇인가?",
+    "title": "아래 SQL 의 결과(A, B, C, D)로 옳은 것은? (Oracle 기준)",
     "options": [
-      "abcd",
-      "defg",
-      "d",
-      "abc"
+      "'defg', 'ef', 2, 'b-c'",
+      "'defg', 'ef', 4, 'c'",
+      "'efg', 'fg', 4, 'c'",
+      "'defg', 'fe', 4, '-c'"
     ],
     "correctIndex": 1,
-    "explanation": "LENGTH('abcdefg')는 7이므로 시작 위치는 7 - 3 = 4이다. SUBSTR에서 길이 인수를 생략하면 시작 위치부터 끝까지 반환하므로 4번째 문자 d부터 끝까지인 'defg'가 된다. ① abcd 는 앞에서 4글자, ④ abc 는 앞에서 3글자를 자른 결과이고, ③ d 는 시작 위치의 한 글자만 가져온 결과다.",
+    "explanation": "A 는 길이 7 에서 3 을 뺀 4번째 글자부터 끝까지라 'defg' 다. B 는 시작 위치가 음수라 뒤에서 3번째 'e' 부터 2글자인 'ef' 다. INSTR 의 시작 위치가 -1 이면 문자열 끝에서부터 앞으로 찾으므로 C 는 마지막 '-' 의 위치 4 다. D 는 그 다음 글자부터 끝까지라 마지막 구분자 뒤의 'c' 다. 정답은 ②번이다. ① 은 INSTR 이 앞에서 찾은 첫 '-' 위치로 계산한 것, ③ 은 LENGTH - 3 을 뒤에서 센 것, ④ 는 음수 위치에서 거꾸로 자른다고 보고 + 1 을 놓친 것이다.",
     "_source": "authored",
     "references": [
       {
         "type": "sql",
-        "code": "SELECT SUBSTR('abcdefg', LENGTH('abcdefg')-3) FROM DUAL;"
+        "code": "SELECT\n  SUBSTR('abcdefg',\n         LENGTH('abcdefg') - 3) AS A,\n  SUBSTR('abcdefg', -3, 2)       AS B,\n  INSTR('a-b-c', '-', -1)        AS C,\n  SUBSTR('a-b-c',\n    INSTR('a-b-c', '-', -1) + 1)  AS D\nFROM DUAL;"
       }
     ]
   },
@@ -950,16 +950,22 @@ export const ROUND_61: QuizQuestion[] = [
     "round": 61,
     "subject": "2과목",
     "number": 23,
-    "title": "다음 중 테이블명으로 가장 적절한 것은 무엇인가?",
+    "title": "아래 CREATE TABLE 문 ㉠~㉤ 중 오류 없이 실행되는 것만 모두 고른 것은?",
     "options": [
-      "201504table_TB",
-      "table",
-      "test-n202605",
-      "tbl_test260531#"
+      "㉢",
+      "㉢, ㉤",
+      "㉠, ㉢",
+      "㉢, ㉣"
     ],
     "correctIndex": 3,
-    "explanation": "테이블명은 문자로 시작해야 하고 SQL 예약어는 사용할 수 없으며 공백과 하이픈(-) 등은 허용되지 않는다. 특수문자는 _, #, $ 정도만 허용되므로 tbl_test260531#만 가능하다. ① 은 숫자로 시작하고, ② table 은 예약어이며, ③ 은 하이픈(-)이 들어가 쓸 수 없다.",
-    "_source": "authored"
+    "explanation": "테이블 이름은 문자로 시작해야 하고, 문자·숫자·_·$·# 만 쓸 수 있으며, 예약어는 쓸 수 없다. 숫자로 시작하는 ㉠, 하이픈(-)이 들어간 ㉡, 예약어 SELECT 를 쓴 ㉤ 은 오류다. ㉢ 은 규칙에 맞는다. ㉣ 처럼 큰따옴표로 감싸면 숫자로 시작하거나 공백이 있는 이름도 만들 수 있다. 다만 이후에도 늘 \"2025 sales\" 처럼 따옴표를 붙여 써야 해 권장하지 않는다. 정답은 ④번이다. ① 은 따옴표 이름을 놓친 것, ② 는 예약어도 이름으로 쓸 수 있다고 본 것, ③ 은 숫자로 시작해도 된다고 본 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "-- ㉠\nCREATE TABLE 2025_sales (A NUMBER);\n-- ㉡\nCREATE TABLE sales-2025 (A NUMBER);\n-- ㉢\nCREATE TABLE sales_2025 (A NUMBER);\n-- ㉣\nCREATE TABLE \"2025 sales\" (A NUMBER);\n-- ㉤\nCREATE TABLE select (A NUMBER);"
+      }
+    ]
   },
   {
     "id": 9973,
