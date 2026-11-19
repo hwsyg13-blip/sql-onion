@@ -1418,40 +1418,19 @@
     {
       "subject": "2과목",
       "number": 41,
-      "title": "아래 사원 데이터에 대한 AVG, MIN 결과로 옳은 것은?",
+      "title": "SAL 값이 1000, 1000, 2500, NULL 인 T 테이블에 아래 SQL 을 실행한 결과로 옳은 것은? (순서대로)",
       "options": [
-        "1500, 1000",
-        "1000, 2500",
-        "1125, 1000",
-        "1500, NULL"
+        "1500, 1500, 2, 0",
+        "1125, 1750, 3, 0",
+        "1500, 1750, 2, 0",
+        "1500, 1750, 2, 1000"
       ],
       "correctIndex": 2,
-      "explanation": "두 집계의 NULL 처리 방식이 다른 점이 핵심이다. AVG(NVL(SAL, 0))는 NULL을 0으로 치환해 모든 4행이 평균에 포함되어 (1000+1000+2500+0)÷4 = 1125. MIN(SAL)은 NVL이 적용되지 않아 NULL을 자동 제외하고 1000, 1000, 2500 중 최솟값 1000. 따라서 결과는 (1125, 1000)으로 정답은 ③번이다. ① 1500 은 NVL 없이 NULL 을 빼고 평균을 낸 값(4500 ÷ 3), ② 는 MIN 자리에 최댓값을 적은 것, ④ 는 NULL 을 빼고 평균을 내면서 MIN 이 NULL 이라고 본 결과다.",
+      "explanation": "집계 함수는 NULL 을 빼고 계산한다. AVG(SAL) 은 (1000 + 1000 + 2500) / 3 = 1500 이다. DISTINCT 를 붙이면 중복 값을 하나로 줄여 1000, 2500 만 남으므로 AVG 는 1750, COUNT 는 2 다. MIN(NVL(SAL, 0)) 은 NULL 이 0 으로 바뀐 뒤 최솟값을 구해 0 이다. 정답은 ③번이다. ① 은 DISTINCT 를 무시한 것, ② 는 AVG 에 NULL 을 0 으로 넣고 COUNT(DISTINCT) 에 NULL 을 센 것, ④ 는 NVL 로 바뀐 0 을 놓친 것이다.",
       "references": [
         {
-          "type": "table",
-          "headers": [
-            "SAL"
-          ],
-          "rows": [
-            [
-              "1000"
-            ],
-            [
-              "1000"
-            ],
-            [
-              "2500"
-            ],
-            [
-              "(NULL)"
-            ]
-          ],
-          "caption": "T 테이블"
-        },
-        {
           "type": "sql",
-          "code": "SELECT AVG(NVL(SAL,0)), MIN(SAL) FROM T;"
+          "code": "SELECT AVG(SAL),\n       AVG(DISTINCT SAL),\n       COUNT(DISTINCT SAL),\n       MIN(NVL(SAL, 0))\nFROM   T;"
         }
       ]
     },

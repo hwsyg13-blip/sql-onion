@@ -853,3 +853,12 @@
 | 51-2-47 | MOD 부호(나누어지는 수)·REMAINDER(ROUND) | MOD 두 개 → 네 식 결과 | 2, -1, -2, 2 | MOD PostgreSQL 동일, REMAINDER 는 Oracle 정의 |
 | 52-2-24 | 그룹 조건은 HAVING·HAVING 에선 별칭 불가·ORDER BY 는 가능 | 오류 이유 고르기 → 고친 SQL 3개 실행 여부 | ㉠, ㉢ | PostgreSQL 동일 |
 | 52-2-50 | 기본키 하나·복합 PK·UNIQUE 여러 개·UNIQUE 를 참조하는 FK | 옳지 않은 설명 → CREATE TABLE 4개 중 오류 | ㉠ | PostgreSQL 동일 |
+
+## 순환 10바퀴 — 54~56회
+
+| 문항 | 개념 | 바뀐 점 | 정답 | 검증 |
+|---|---|---|---|---|
+| 54-2-45 | LIKE 대소문자 구분·UPPER·%·_ | 조건 하나 설명 → 네 조건 행 수 | 2, 3, 3, 1 | PostgreSQL 동일 |
+| 54-2-28 | IN·NOT IN 목록의 NULL·IS NULL | IN 하나 → 네 조건 행 수 | 2, 0, 1, 2 | PostgreSQL 동일 |
+| 55-2-45 | <>·NOT = 과 NULL 행·NVL 로 포함시키기 | IS NOT NULL 하나 → 네 조건 행 수 | 2, 1, 1, 2 | PostgreSQL 동일 |
+| 56-2-41 | AVG·AVG(DISTINCT)·COUNT(DISTINCT)·MIN(NVL) | 두 값 → 네 값 | 1500, 1750, 2, 0 | PostgreSQL 동일 |

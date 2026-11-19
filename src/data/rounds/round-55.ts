@@ -1953,20 +1953,20 @@ export const ROUND_55: QuizQuestion[] = [
     "round": 55,
     "subject": "2과목",
     "number": 45,
-    "title": "아래 T 테이블에 대한 SQL 의 결과 행 수로 옳은 것은?",
+    "title": "아래 T 테이블에 대한 조건 ㉠~㉣ 의 결과 행 수로 옳은 것은?",
     "options": [
-      "1건",
-      "2건",
-      "3건",
-      "0건"
+      "2, 2, 2, 2",
+      "2, 1, 1, 2",
+      "2, 2, 1, 2",
+      "1, 1, 1, 2"
     ],
     "correctIndex": 1,
-    "explanation": "NULL 은 값이 없음을 뜻하므로 = 나 <> 로 비교할 수 없고 IS NULL / IS NOT NULL 로만 판별한다. VAL 이 NULL 이 아닌 행은 ID 1 과 3 이므로 2 건이 반환된다. 같은 의도로 `VAL <> NULL` 을 쓰면 비교가 UNKNOWN 이 되어 0 건이 된다. ① 1건은 둘 중 하나를 놓친 값, ③ 3건은 IS NOT NULL 조건을 무시한 값, ④ 0건은 VAL <> NULL 로 비교했을 때의 결과다.",
+    "explanation": "㉠ 은 값이 있는 1, 3 의 2행이다. ㉡ 과 ㉢ 은 10 이 아닌 행을 찾지만, NULL 행은 비교 결과가 UNKNOWN(NOT 을 붙여도 UNKNOWN)이라 빠지고 30 인 3 만 남아 1행이다. ㉣ 은 NULL 을 0 으로 바꾼 뒤 비교해 0 <> 10 이 참이 되어 NULL 행도 들어가 2행이다. '10 이 아닌 행' 에 NULL 행도 넣고 싶다면 ㉣ 처럼 처리해야 한다. 정답은 ②번이다. ① 은 <> 가 NULL 행도 잡는다고 본 것, ③ 은 <> 와 NOT = 가 다르게 동작한다고 본 것, ④ 는 IS NOT NULL 이 1행이라고 본 것이다.",
     "_source": "authored",
     "references": [
       {
         "type": "table",
-        "caption": "T 테이블",
+        "caption": "T",
         "headers": [
           "ID",
           "VAL"
@@ -1978,7 +1978,7 @@ export const ROUND_55: QuizQuestion[] = [
           ],
           [
             "2",
-            "(NULL)"
+            "NULL"
           ],
           [
             "3",
@@ -1988,7 +1988,7 @@ export const ROUND_55: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT * FROM T WHERE VAL IS NOT NULL;"
+        "code": "-- ㉠\nWHERE VAL IS NOT NULL\n-- ㉡\nWHERE VAL <> 10\n-- ㉢\nWHERE NOT (VAL = 10)\n-- ㉣\nWHERE NVL(VAL, 0) <> 10"
       }
     ]
   },
