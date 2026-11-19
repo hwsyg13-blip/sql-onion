@@ -118,15 +118,22 @@
     {
       "subject": "1과목",
       "number": 6,
-      "title": "비식별자 관계에 대한 설명 중 옳지 않은 것은?",
+      "title": "아래 ERD(실선 = 식별 관계, 점선 = 비식별 관계)에 대한 설명으로 옳은 것은? ('주문상세의 기본키 / 주문.고객번호 의 NULL 허용' 순서)",
       "options": [
-        "부모의 기본키를 자식의 일반 속성으로 상속한다.",
-        "부모 엔터티의 생성과 자식 엔터티의 생성 시점이 분리될 수 있다.",
-        "주식별자와 식별자가 같다.",
-        "자식 엔터티에서 독립된 주식별자를 정의할 수 있다."
+        "상세번호 / NULL 불가",
+        "주문번호 + 상세번호 / NULL 불가",
+        "주문번호 + 상세번호 / NULL 가능",
+        "상세번호 / NULL 가능"
       ],
       "correctIndex": 2,
-      "explanation": "비식별자 관계는 부모의 기본키를 자식의 일반 속성(외래키)으로만 상속하므로 자식은 별도의 주식별자를 정의한다. 따라서 부모 식별자가 곧 자식 주식별자가 되는 식별자 관계와 달리 '주식별자와 식별자가 같다'는 설명은 옳지 않다. ① 부모 키를 일반 속성으로 상속하고, ② 부모와 자식의 생성 시점이 분리될 수 있으며, ④ 자식이 독립된 주식별자를 가지는 것은 모두 비식별자 관계의 특징이다."
+      "explanation": "식별 관계(실선)는 부모의 기본키가 자식의 기본키 일부가 된다. 주문 → 주문상세 가 식별 관계라 주문상세의 기본키는 주문번호 + 상세번호 다. 비식별 관계(점선)는 부모의 기본키가 자식의 일반 칼럼(외래키)으로만 들어간다. 고객 → 주문 은 비식별이면서 고객 쪽이 선택(|o) 이라, 고객 없이도 주문이 생길 수 있어 고객번호에 NULL 을 허용한다. 정답은 ③번이다. ① 은 식별 관계에서도 부모 키가 기본키에 들어가지 않는다고 보고 선택 관계를 놓친 것, ② 는 비식별·선택 관계의 외래키도 반드시 값이 있어야 한다고 본 것, ④ 는 식별 관계를 놓친 것이다.",
+      "references": [
+        {
+          "type": "erd",
+          "caption": "고객·주문·주문상세 ERD",
+          "mermaid": "erDiagram\n    고객 |o..o{ 주문 : \"주문함\"\n    주문 ||--|{ 주문상세 : \"포함\"\n    고객 {\n        string 고객번호 PK\n        string 이름\n    }\n    주문 {\n        string 주문번호 PK\n        string 고객번호 FK\n        date 주문일\n    }\n    주문상세 {\n        string 주문번호 PK, FK\n        int 상세번호 PK\n        int 수량\n    }"
+        }
+      ]
     },
     {
       "subject": "1과목",
@@ -1583,15 +1590,21 @@
     {
       "subject": "2과목",
       "number": 42,
-      "title": "다음 SELECT 문 중 반환 값이 나머지와 다른 것은?",
+      "title": "아래 SQL 의 결과(A, B, C, D)로 옳은 것은? (Oracle 기준)",
       "options": [
-        "SELECT 1 + NULL FROM DUAL;",
-        "SELECT 'X' FROM DUAL;",
-        "SELECT 1 * NULL FROM DUAL;",
-        "SELECT NULL FROM DUAL;"
+        "NULL, NULL, 1, 0",
+        "NULL, X, 1, 0",
+        "1, X, 1, 1",
+        "NULL, X, NULL, NULL"
       ],
       "correctIndex": 1,
-      "explanation": "NULL 이 포함된 산술 연산은 결과가 NULL 이다. 1 + NULL(①), 1 * NULL(③)은 NULL 이고, SELECT NULL(④)도 NULL 이다. ② 만 문자 상수 'X' 를 반환하므로 결과가 다르다."
+      "explanation": "NULL 과의 산술 연산은 결과가 NULL 이라 A 는 NULL 이다. Oracle 의 CONCAT(과 ||)은 NULL 을 빈 문자열처럼 이어 붙여 B 는 'X' 다. C 는 NVL 이 NULL 을 먼저 0 으로 바꾼 뒤 1 을 더해 1 이다. D 의 COUNT(NULL) 은 셀 값이 NULL 하나뿐이라 0 이다(COUNT 는 NULL 을 세지 않고, 결과가 NULL 이 되지도 않는다). 정답은 ②번이다. ① 은 문자열 연결도 NULL 이 된다고 본 것, ③ 은 NULL 을 0 처럼 계산한 것, ④ 는 NVL 뒤의 덧셈과 COUNT 도 NULL 이 된다고 본 것이다.",
+      "references": [
+        {
+          "type": "sql",
+          "code": "SELECT 1 + NULL              AS A,\n       CONCAT('X', NULL)     AS B,\n       NVL(NULL, 0) + 1      AS C,\n       (SELECT COUNT(NULL)\n        FROM   DUAL)         AS D\nFROM   DUAL;"
+        }
+      ]
     },
     {
       "subject": "2과목",
