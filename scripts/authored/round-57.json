@@ -224,15 +224,21 @@
     {
       "subject": "2과목",
       "number": 13,
-      "title": "COMMIT에 대한 설명 중 옳지 않은 것은?",
+      "title": "T 테이블에 ID 1, 값 100 인 행이 있다. 두 세션이 아래 순서로 실행할 때 ㉠ 시점의 세션2 상태와 ㉡ 의 결과로 옳은 것은? (Oracle 기본 설정)",
       "options": [
-        "COMMIT 이후에는 다른 사용자가 변경된 데이터를 조회할 수 있다.",
-        "COMMIT 이전에도 본인 세션에서는 SELECT로 참조할 수 있다.",
-        "COMMIT 이전에 외부 사용자가 변경된 데이터를 확인할 수 있다.",
-        "COMMIT 이전에 수정은 가능하다."
+        "㉠ 바로 실행됨 / ㉡ 110",
+        "㉠ 오류 / ㉡ 110",
+        "㉠ 세션1 이 끝날 때까지 기다림 / ㉡ 220",
+        "㉠ 세션1 이 끝날 때까지 기다림 / ㉡ 200"
       ],
       "correctIndex": 2,
-      "explanation": "COMMIT 하면 변경이 확정되어 다른 사용자도 조회할 수 있고(①), COMMIT 전에도 본인 세션에서는 변경 내용을 SELECT 로 볼 수 있으며(②), 수정을 이어 갈 수도 있다(④). COMMIT 전의 변경은 다른 사용자에게 보이지 않고 변경 전 데이터만 보이므로 ③ 이 옳지 않다."
+      "explanation": "세션1 이 UPDATE 한 행에는 COMMIT 이나 ROLLBACK 전까지 잠금이 걸린다. 그래서 같은 행을 고치려는 세션2 의 ㉠ 은 오류가 아니라 세션1 이 끝날 때까지 기다린다. 세션1 이 COMMIT 하면 값이 110 으로 확정되고, 기다리던 세션2 는 확정된 110 을 다시 읽어 두 배인 220 으로 바꾼다. 세션2 도 COMMIT 하므로 ㉡ 은 220 이다. 정답은 ③번이다. ①·② 는 잠금을 놓친 것, ④ 는 세션2 가 처음 본 100 으로 계산한다고 본 것이다.",
+      "references": [
+        {
+          "type": "sql",
+          "code": "-- 세션1\nUPDATE T SET 값 = 값 + 10\nWHERE  ID = 1;\n-- 세션2\nUPDATE T SET 값 = 값 * 2\nWHERE  ID = 1;           -- ㉠\n-- 세션1\nCOMMIT;\n-- 세션2\nCOMMIT;\nSELECT 값 FROM T\nWHERE  ID = 1;           -- ㉡"
+        }
+      ]
     },
     {
       "subject": "2과목",
@@ -807,15 +813,47 @@
     {
       "subject": "2과목",
       "number": 31,
-      "title": "중복을 제거하고 개수를 세는 SQL 로 가장 적절한 것은?",
+      "title": "아래 T 테이블에 대한 SQL 의 결과(A, B, C)로 옳은 것은? (Oracle 기준)",
       "options": [
-        "COUNT(DISTINCT COL)",
-        "COUNT(*)",
-        "COUNT(ALL COL)",
-        "SUM(DISTINCT COL)"
+        "4, 1, 3",
+        "4, 2, 3",
+        "4, 1, 1",
+        "3, 1, 3"
       ],
       "correctIndex": 0,
-      "explanation": "COUNT(DISTINCT COL) 은 COL 의 중복 값을 하나로 보고 서로 다른 값의 개수를 센다(①). COUNT(*)(②)는 전체 행 수, COUNT(ALL COL)(③)은 NULL 을 뺀 값의 개수(중복 포함), SUM(DISTINCT COL)(④)은 서로 다른 값들의 합계라 개수가 아니다."
+      "explanation": "COUNT(*) 는 4행을 모두 센다. COUNT(DISTINCT 부서) 는 NULL 을 빼고 서로 다른 값만 세므로 'A' 하나라 1 이다. Oracle 의 CONCAT 은 (|| 연산자와 마찬가지로) NULL 을 빈 문자열처럼 이어 붙인다. 그래서 네 행은 'AX', 'A', 'X', 'AX' 가 되고, 서로 다른 값은 3개다. 정답은 ①번이다. ② 는 NULL 도 하나의 값으로 센 것, ③ 은 NULL 과 이으면 결과가 NULL 이 되는 표준 SQL 방식으로 계산한 것, ④ 는 COUNT(*) 에서 중복 행을 뺀 것이다.",
+      "references": [
+        {
+          "type": "table",
+          "caption": "T",
+          "headers": [
+            "부서",
+            "직급"
+          ],
+          "rows": [
+            [
+              "A",
+              "X"
+            ],
+            [
+              "A",
+              "NULL"
+            ],
+            [
+              "NULL",
+              "X"
+            ],
+            [
+              "A",
+              "X"
+            ]
+          ]
+        },
+        {
+          "type": "sql",
+          "code": "SELECT COUNT(*)              AS A,\n       COUNT(DISTINCT 부서)   AS B,\n       COUNT(DISTINCT\n         CONCAT(부서, 직급))  AS C\nFROM   T;"
+        }
+      ]
     },
     {
       "subject": "2과목",

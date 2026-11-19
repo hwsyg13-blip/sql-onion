@@ -217,20 +217,20 @@ export const ROUND_59: QuizQuestion[] = [
     "round": 59,
     "subject": "2과목",
     "number": 11,
-    "title": "DCL에 관한 다음 설명 중 옳은 것으로만 묶은 것은?",
+    "title": "아래 순서로 SQL 을 실행할 때 ㉠, ㉡, ㉢ 의 결과로 옳은 것은? (Oracle 기준, U 는 접속 권한이 있음)",
     "options": [
-      "가, 나",
-      "나, 다",
-      "나, 라",
-      "가, 나, 라"
+      "성공, 오류, 오류",
+      "오류, 오류, 오류",
+      "성공, 성공, 오류",
+      "성공, 성공, 성공"
     ],
     "correctIndex": 2,
-    "explanation": "가는 DCL이 데이터 제어 언어이므로 오답이며, 다는 REVOKE가 권한 회수 명령으로서 물리 디스크 저장과는 무관하므로 오답이다. ① 과 ④ 는 틀린 가를, ② 는 틀린 다를 포함했다.",
+    "explanation": "롤(ROLE)은 권한을 묶어 한 번에 주는 이름이다. U 는 롤 R 을 통해 CREATE TABLE 권한을 받았으므로 ㉠ 은 성공한다. 롤을 회수하면 그 롤로 받은 권한이 사라져, 다시 접속한 U 의 ㉢ 은 권한 부족 오류다. 하지만 이미 만든 T1 은 U 가 소유한 테이블이라 자기 테이블 조회인 ㉡ 은 그대로 된다. 정답은 ③번이다. ① 은 권한을 회수하면 그 권한으로 만든 테이블도 못 쓴다고 본 것, ② 는 롤로 받은 권한은 쓸 수 없다고 본 것, ④ 는 롤 회수가 효과가 없다고 본 것이다.",
     "_source": "authored",
     "references": [
       {
-        "type": "text",
-        "content": "가. DCL은 데이터 정의 언어이다.\n나. GRANT는 자신이 가진 권한을 다른 사용자에게 부여할 수 있다.\n다. REVOKE는 실행 후 물리 디스크에 저장한다.\n라. ROLE 권한은 데이터에 대한 접근 권한의 집합이다."
+        "type": "sql",
+        "code": "-- DBA\nCREATE ROLE R;\nGRANT CREATE TABLE TO R;\nGRANT R TO U;\n\n-- U\nCREATE TABLE T1 (C NUMBER);  -- ㉠\n\n-- DBA\nREVOKE R FROM U;\n\n-- U (다시 접속한 뒤)\nSELECT * FROM T1;            -- ㉡\nCREATE TABLE T2 (C NUMBER);  -- ㉢"
       }
     ]
   },
@@ -1177,20 +1177,20 @@ export const ROUND_59: QuizQuestion[] = [
     "round": 59,
     "subject": "2과목",
     "number": 34,
-    "title": "ROUND 함수에 대한 다음 설명 중 옳은 것은?",
+    "title": "아래 SQL 결과에서 A·B 의 월-일과 C 의 연도로 옳은 것은? (Oracle 기준)",
     "options": [
-      "가",
-      "나",
-      "가, 나",
-      "나, 다"
+      "12-01, 12-01, 2027",
+      "11-01, 11-01, 2026",
+      "12-01, 11-01, 2027",
+      "12-01, 11-01, 2026"
     ],
     "correctIndex": 2,
-    "explanation": "ROUND(136.2, -1)은 십의 자리로 반올림되어 140이다. ROUND(-7.532, 2)는 소수 둘째 자리까지 반올림되어 -7.53이다. ROUND(3.561, 0)은 소수 첫째 자리에서 반올림되어 4이므로 (다)는 틀리다. ① 은 나를, ② 는 가를 빠뜨렸고, ④ 는 틀린 다를 포함했다.",
+    "explanation": "날짜를 'MM' 으로 ROUND 하면 16일부터 다음 달 1일로 올리고 15일까지는 그달 1일로 내린다. 그래서 A(11-16)는 2026-12-01, B(11-15)는 2026-11-01 이다. 'YYYY' 로 ROUND 하면 7월 1일부터 다음 해 1월 1일로 올리므로 C 는 2027-01-01 이다. 같은 자리에 TRUNC 를 쓰면 날짜와 상관없이 늘 그달 1일·그해 1월 1일로 버린다. 정답은 ③번이다. ① 은 15일도 올린다고 본 것, ② 는 ROUND 를 TRUNC 처럼 버린 것, ④ 는 7월 1일을 아직 상반기로 보고 내린 것이다.",
     "_source": "authored",
     "references": [
       {
-        "type": "text",
-        "content": "(가) `ROUND(136.2, -1)` 은 140 이다.\n(나) `ROUND(-7.532, 2)` 는 -7.53 이다.\n(다) `ROUND(3.561, 0)` 은 3.5 이다."
+        "type": "sql",
+        "code": "SELECT ROUND(D1, 'MM')   AS A,\n       ROUND(D2, 'MM')   AS B,\n       ROUND(D3, 'YYYY') AS C\nFROM  (SELECT DATE '2026-11-16' AS D1,\n              DATE '2026-11-15' AS D2,\n              DATE '2026-07-01' AS D3\n       FROM   DUAL);"
       }
     ]
   },

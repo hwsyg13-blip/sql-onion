@@ -390,3 +390,14 @@
 | 55-2-48 | 개체·참조·도메인 무결성, FK NULL | 위배 설명 → INSERT 4개의 위배 종류와 FK NULL 결과 | 참조, 도메인, 개체 / 성공 | PostgreSQL 동일 |
 | 56-2-38 | DEFAULT 와 명시적 NULL·기본값 변경 | 제약 설명 → INSERT 4번과 ALTER 뒤 상태 값 | N, NULL, N, Y | PostgreSQL 동일 |
 | 56-2-39 | REGEXP_INSTR(N번째·끝 위치)·INSTR 음수 | 함수 이름 → 결과 계산 | 4, 6, 5 | PostgreSQL regexp_instr 4·6, INSTR 음수는 Oracle 규칙 |
+
+## 순환 3바퀴 — 57~59회 (11-19 14시 실행 계속)
+
+| 문항 | 개념 | 바뀐 점 | 정답 | 검증 |
+|---|---|---|---|---|
+| 57-2-13 | 행 잠금과 커밋 후 재읽기 | COMMIT 설명 → 두 세션이 같은 행 UPDATE 할 때 대기·최종 값 | 대기 / 220 | PostgreSQL 두 세션 실제 실행(세션2 2초 대기, 220) |
+| 57-2-31 | COUNT(DISTINCT)·NULL 연결 | COUNT(DISTINCT) 고르기 → NULL 섞인 표의 COUNT 3종 | 4, 1, 3 | PostgreSQL concat 3. 처음 `||` 로 썼다가 PostgreSQL(표준) 은 NULL 이 되어 검증기 불일치 → Oracle·PostgreSQL 이 같게 동작하는 CONCAT 으로 바꾸고 해설에 `||` 도 같다고 적음 |
+| 58-2-29 | 외부 조인 COUNT(*) vs COUNT(칼럼) vs 스칼라 서브쿼리 | 서브쿼리 설명 → 사원 없는 부서의 세 COUNT | 1, 0, 0 | PostgreSQL 동일 |
+| 58-2-44 | GROUP BY + 윈도우 함수 | 윈도우 설명 → 부서별 합에 RANK·SUM(SUM) OVER | 600, 3, 2200 | PostgreSQL 동일 |
+| 59-2-11 | 롤 회수와 소유 객체 | DCL 설명 묶음 → 롤로 받은 CREATE TABLE 회수 전후 | 성공, 성공, 오류 | Oracle 규칙(롤 변경은 다시 접속 후 반영 — 문항에 명시) |
+| 59-2-34 | 날짜 ROUND('MM'·'YYYY') | ROUND 설명 묶음 → 16일·15일·7월 1일 반올림 | 12-01, 11-01, 2027 | Oracle 규칙. 처음 날짜 4개 보기가 390px 에서 중간에 꺾여 3개·짧은 형식으로 줄임 |
