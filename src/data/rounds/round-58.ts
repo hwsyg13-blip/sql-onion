@@ -1273,20 +1273,20 @@ export const ROUND_58: QuizQuestion[] = [
     "round": 58,
     "subject": "2과목",
     "number": 31,
-    "title": "아래 SQL의 결과로 옳은 것은?",
+    "title": "행이 있는 EMP 테이블과 DUAL 에 대한 SQL ㉠~㉣ 의 결과로 옳은 것은?",
     "options": [
-      "1",
-      "0",
-      "9999",
-      "공집합"
+      "0, 1, 공집합, 공집합",
+      "공집합, 1, 공집합, NULL",
+      "공집합, 1, 0, 공집합",
+      "공집합, 1, 0, NULL"
     ],
     "correctIndex": 3,
-    "explanation": "DUAL은 한 건만 반환하므로 COUNT(*)는 1이다. HAVING 조건 COUNT(*) > 4 를 만족하지 않아 결과는 공집합이 된다. ① 1 은 HAVING 조건을 무시한 COUNT 값, ② 0 은 조건을 만족하지 않으면 0 이 나온다고 본 값이고, ③ 9999 같은 값은 나올 수 없다. GROUP BY 가 없어도 HAVING 은 전체를 한 그룹으로 보고 거른다.",
+    "explanation": "GROUP BY 없이 HAVING 을 쓰면 테이블 전체가 하나의 그룹이 되고, HAVING 조건이 거짓이면 그 그룹이 빠져 공집합이 된다. ㉠ 은 COUNT(*) 가 1 이라 > 4 가 거짓이어서 공집합, ㉡ 은 참이라 1 이다. WHERE 로 행이 모두 걸러져도 집계 그룹은 하나 남아 COUNT(*) 는 0, MAX(SAL) 은 NULL 이다. 그래서 ㉢ 은 0 = 0 이 참이라 0 이 나오고, ㉣ 도 NULL IS NULL 이 참이라 NULL 이 담긴 1행이다. 정답은 ④번이다. ① 은 HAVING 이 거짓이면 0 이 나온다고 본 것, ②·③ 은 행이 없으면 집계 그룹도 없다고 본 것이다.",
     "_source": "authored",
     "references": [
       {
         "type": "sql",
-        "code": "SELECT COUNT(*)\nFROM   DUAL\nHAVING COUNT(*) > 4;"
+        "code": "-- ㉠\nSELECT COUNT(*) FROM DUAL\nHAVING COUNT(*) > 4;\n-- ㉡\nSELECT COUNT(*) FROM DUAL\nHAVING COUNT(*) = 1;\n-- ㉢\nSELECT COUNT(*) FROM EMP\nWHERE  1 = 0\nHAVING COUNT(*) = 0;\n-- ㉣\nSELECT MAX(SAL) FROM EMP\nWHERE  1 = 0\nHAVING MAX(SAL) IS NULL;"
       }
     ]
   },
@@ -1552,20 +1552,20 @@ export const ROUND_58: QuizQuestion[] = [
     "round": 58,
     "subject": "2과목",
     "number": 38,
-    "title": "아래 SQL의 실행 결과(COUNT(*) 값)로 옳은 것은?",
+    "title": "아래 SQL ㉠, ㉡, ㉢ 의 결과로 옳은 것은? (Oracle 기준, T 는 2행짜리 테이블)",
     "options": [
-      "0",
-      "1",
-      "2",
-      "3"
+      "2, 10, 4",
+      "1, 10, 4",
+      "2, 10, 6",
+      "2, 4, 6"
     ],
     "correctIndex": 2,
-    "explanation": "DUAL 은 한 행짜리 테이블이고, CONNECT BY LEVEL <= 2 는 LEVEL 1, 2 인 행을 계층 전개로 만들어 두 행을 생성한다. 따라서 COUNT(*) = 2 다(③). 이는 원하는 개수만큼 행을 만들 때 자주 쓰는 방법이다. ① 0·② 1 은 CONNECT BY 가 행을 늘리지 않는다고 본 값, ④ 3 은 LEVEL 을 0 부터 센다고 본 값이다.",
+    "explanation": "PRIOR 없이 CONNECT BY LEVEL <= n 을 쓰면 행마다 조건을 만족하는 모든 행을 자식으로 붙여 나간다. DUAL 은 1행이라 LEVEL 1, 2, … 가 하나씩 생겨 ㉠ 은 2행이고, ㉡ 은 1 + 2 + 3 + 4 = 10 이다. ㉢ 처럼 행이 2개인 테이블에 쓰면 LEVEL 1 에서 2행, 그 2행이 각각 2행씩을 자식으로 붙여 LEVEL 2 에서 4행이 생겨 모두 6행이다. 정답은 ③번이다. ①·② 는 행이 여러 개여도 LEVEL 마다 한 번씩만 늘어난다고 본 것, ④ 는 SUM 대신 행 수를 센 것이다. 숫자 행을 만들 때는 1행짜리 DUAL 로 쓰는 이유다.",
     "_source": "authored",
     "references": [
       {
         "type": "sql",
-        "code": "SELECT COUNT(*)\nFROM DUAL\nCONNECT BY LEVEL <= 2;"
+        "code": "-- ㉠\nSELECT COUNT(*) FROM DUAL\nCONNECT BY LEVEL <= 2;\n-- ㉡\nSELECT SUM(LEVEL) FROM DUAL\nCONNECT BY LEVEL <= 4;\n-- ㉢\nSELECT COUNT(*) FROM T\nCONNECT BY LEVEL <= 2;"
       }
     ]
   },

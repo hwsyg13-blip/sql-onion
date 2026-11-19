@@ -798,3 +798,14 @@
 | 55-2-22 | REGEXP_INSTR 하위 표현식 번호 | 값 하나 → 번호 1~4 결과 | 1, 4, 5, 7 | PostgreSQL regexp_instr 동일 |
 | 56-2-31 | 격리 수준별로 남는 현상(READ COMMITTED) | 특성 이름 → 격리 수준을 올린 뒤 남는 현상 | Non-Repeatable, Phantom | 정의로 판정 |
 | 56-2-26 | 겹치지 않는 결과는 UNION ALL | 이름 고르기 → 상황에 맞는 연산자와 이유 | UNION ALL | 정의로 판정 |
+
+## 순환 9바퀴 — 57~59회
+
+| 문항 | 개념 | 바뀐 점 | 정답 | 검증 |
+|---|---|---|---|---|
+| 57-2-39 | 날짜 TRUNC·ROUND 의 단위별 반올림 기준(7월 1일·16일·정오) | 두 식 → 네 식 결과 | 25.1.1, 26.1.1, 25.8.1, 25.8.16 | Oracle 규칙으로 판정. 긴 날짜 보기가 줄바꿈되어 YY.M.D 로 줄임 |
+| 57-2-37 | GROUP BY 의 NULL 그룹과 COUNT(*)·COUNT(C) | 상수 계산 → NULL 그룹 값과 행 수 | 2, 0, 3 | PostgreSQL 동일 |
+| 58-2-38 | CONNECT BY LEVEL 행 생성·여러 행 테이블에서의 증식 | 한 식 → 세 SQL 결과 | 2, 10, 6 | Oracle 규칙으로 판정 |
+| 58-2-31 | GROUP BY 없는 HAVING·빈 결과의 집계 | 한 식 → 네 SQL 결과 | 공집합, 1, 0, NULL | PostgreSQL 동일 |
+| 59-2-26 | INSERT 자동 형변환·길이 초과·숫자 변환 실패·칼럼 생략 | 오류 하나 고르기 → INSERT 4개 중 오류 | ㉡, ㉢ | PostgreSQL 동일 |
+| 59-2-12 | OVER 안 정렬 방향에 따른 LAG·LEAD | 함수 고르기 → 행별 값 | 300, 100, 100, NULL | PostgreSQL 동일 |
