@@ -730,3 +730,14 @@
 | 55-2-46 | 행이 있는 테이블에 NOT NULL 칼럼 추가 | 문법 고르기 → ADD 3개 결과 | 성공, 오류, 성공 | PostgreSQL 동일 |
 | 56-2-16 | 행별 COALESCE·마지막 인자 0 | 상수 하나 → 표의 행별 값과 SUM | 2, NULL, 1 / 3 | PostgreSQL 동일 |
 | 56-2-25 | 정규식 탐욕·게으른 수량자·REGEXP_COUNT·REPLACE | 함수 하나 → 네 함수 결과 | aaaa, aa, 2, aaaaaX | PostgreSQL 정규식으로 같은 결과 |
+
+## 순환 8바퀴 — 57~59회
+
+| 문항 | 개념 | 바뀐 점 | 정답 | 검증 |
+|---|---|---|---|---|
+| 57-2-28 | 숫자 자릿수 축소 제한·DEFAULT 는 이후 행만·중복 값과 PK | 옳지 않은 설명 → 데이터가 있는 테이블에 ALTER 4개 | ① | Oracle 규칙으로 판정(자릿수 축소는 빈 칼럼만) |
+| 57-2-16 | INTERSECT(중복 제거·NULL 같음) vs IN·EXISTS vs JOIN | 설명 고르기 → 중복·NULL 있는 두 표의 네 SQL 행 수 | 2, 2, 4, 2 | PostgreSQL 동일 |
+| 58-2-16 | 행 단위 덧셈의 NULL vs 칼럼별 SUM | NVL 쓰임 → 세 합계 값 | 550, 650, 650 | PostgreSQL 동일 |
+| 58-2-42 | 작은따옴표 두 번 쓰기·q 인용 | 리터럴 하나 → 네 식 결과 | It's, ', 1, It's | 앞의 셋 PostgreSQL 동일, q 인용은 Oracle 규칙 |
+| 59-2-35 | 날짜 + 숫자·ADD_MONTHS 말일·MONTHS_BETWEEN·EXTRACT | 추출 방법 고르기 → 네 식 결과 | '06', 2025-02-28, 2, 5 | 날짜 계산 PostgreSQL 로 확인 |
+| 59-2-50 | 대상 행이 없을 때 집계(GROUP BY 유무) | WHERE 1 = 0 한 줄 → 세 SQL 결과 | 0, NULL, 공집합 | PostgreSQL 동일 |

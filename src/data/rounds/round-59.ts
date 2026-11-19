@@ -1321,20 +1321,20 @@ export const ROUND_59: QuizQuestion[] = [
     "round": 59,
     "subject": "2과목",
     "number": 35,
-    "title": "'202505' 문자열에서 월(MM) 부분만 추출하려 한다. 아래 방식 중 해당 목적과 가장 거리가 먼 것은?",
+    "title": "아래 SQL 의 결과(A, B, C, D)로 옳은 것은? (Oracle 기준, 날짜는 YYYY-MM-DD 로 표시)",
     "options": [
-      "EXTRACT(YEAR FROM SYSDATE)",
-      "EXTRACT(MONTH FROM TO_DATE('202505','YYYYMM'))",
-      "SUBSTR('202505', 5, 2)",
-      "TO_NUMBER(TO_CHAR(TO_DATE('202505','YYYYMM'),'MM'))"
+      "'06', 2025-02-28, 2, 5",
+      "'05', 2025-03-03, 2, 5",
+      "'06', 2025-02-28, 1.9, 5",
+      "'06', 2025-03-01, 2, '05'"
     ],
     "correctIndex": 0,
-    "explanation": "① 은 현재 날짜(SYSDATE)에서 연도를 추출하므로 '202505' 와도, 월과도 무관하다. ② 는 문자열을 날짜로 바꾼 뒤 월을 추출해 5, ③ 은 5번째 문자부터 2글자를 잘라 '05', ④ 는 날짜로 바꾼 뒤 'MM' 형식 문자로 바꿔 숫자 5 를 얻는다. 목적과 가장 거리가 먼 것은 ① 이다.",
+    "explanation": "날짜에 숫자를 더하면 그만큼 일(日)이 늘어난다. 5월 31일 + 1 은 6월 1일이라 A 는 '06' 이다. ADD_MONTHS 는 결과 달에 같은 날이 없으면 그 달의 마지막 날로 맞춰, 1월 31일 + 1개월은 2월 28일이다(B). MONTHS_BETWEEN 은 두 날짜의 날(日)이 같으면 정수로 나와 3월 15일과 1월 15일 사이는 2 다(C). EXTRACT(MONTH …) 는 숫자 5 를 돌려준다(D). 정답은 ①번이다. ② 는 날짜 + 1 을 같은 달로 보고 2월을 넘긴 날짜를 3월로 넘긴 것, ③ 은 월 차이를 일수로 나눠 계산한 것, ④ 는 EXTRACT 가 문자 '05' 를 돌려준다고 본 것이다.",
     "_source": "authored",
     "references": [
       {
         "type": "sql",
-        "code": "-- 대상 문자열: '202505'\n-- 추출 목표: 05 (월)"
+        "code": "SELECT\n  TO_CHAR(TO_DATE('20250531',\n    'YYYYMMDD') + 1, 'MM')   AS A,\n  ADD_MONTHS(TO_DATE('20250131',\n    'YYYYMMDD'), 1)          AS B,\n  MONTHS_BETWEEN(\n    TO_DATE('20250315', 'YYYYMMDD'),\n    TO_DATE('20250115', 'YYYYMMDD'))\n                             AS C,\n  EXTRACT(MONTH FROM\n    TO_DATE('202505', 'YYYYMM')) AS D\nFROM DUAL;"
       }
     ]
   },
@@ -2067,20 +2067,20 @@ export const ROUND_59: QuizQuestion[] = [
     "round": 59,
     "subject": "2과목",
     "number": 50,
-    "title": "아래 SQL의 결과로 옳은 것은?",
+    "title": "행이 있는 EMP 테이블에 아래 SQL ㉠, ㉡, ㉢ 을 실행한 결과로 옳은 것은?",
     "options": [
-      "EMP 전체 행",
-      "오류 발생",
-      "WHERE 1 = 0 때문에 오류 발생",
-      "공집합"
+      "공집합, 공집합, 공집합",
+      "0, 0, 0",
+      "0, NULL, NULL",
+      "0, NULL, 공집합"
     ],
     "correctIndex": 3,
-    "explanation": "WHERE 1 = 0 은 어떤 행에서도 거짓인 조건이라 선택되는 행이 없어 공집합이다(④). 문법상 문제가 없으므로 오류는 나지 않는다(②③). 데이터 없이 테이블 구조만 복사할 때(CREATE TABLE ... AS SELECT ... WHERE 1 = 0) 이 방식을 쓴다.",
+    "explanation": "WHERE 1 = 0 은 늘 거짓이라 모든 행이 걸러진다. GROUP BY 없이 집계 함수만 쓰면 대상 행이 없어도 결과는 1행이 나온다. 그래서 ㉠ COUNT(*) 는 0, ㉡ MAX(SAL) 은 NULL 이 담긴 1행이다. GROUP BY 가 있으면 그룹이 하나도 만들어지지 않으므로 ㉢ 은 행이 없는 공집합이다. 정답은 ④번이다. ① 은 집계 함수도 공집합을 돌려준다고 본 것, ② 는 MAX 도 0 을 돌려준다고 본 것, ③ 은 GROUP BY 가 있어도 1행이 나온다고 본 것이다.",
     "_source": "authored",
     "references": [
       {
         "type": "sql",
-        "code": "SELECT *\nFROM   EMP\nWHERE  1 = 0;"
+        "code": "-- ㉠\nSELECT COUNT(*) FROM EMP\nWHERE  1 = 0;\n-- ㉡\nSELECT MAX(SAL) FROM EMP\nWHERE  1 = 0;\n-- ㉢\nSELECT MAX(SAL) FROM EMP\nWHERE  1 = 0\nGROUP  BY DEPTNO;"
       }
     ]
   }

@@ -469,20 +469,20 @@ export const ROUND_58: QuizQuestion[] = [
     "round": 58,
     "subject": "2과목",
     "number": 16,
-    "title": "아래 SQL에서 NULL을 처리하는 함수 사용이 가장 옳은 것은?",
+    "title": "SAL·COMM 이 (100, NULL), (200, 50), (300, 0) 인 EMP 테이블에 아래 SQL 을 실행한 결과(A, B, C)로 옳은 것은?",
     "options": [
-      "SELECT SAL + COMM FROM EMP;",
-      "SELECT SAL + NVL(COMM, 0) FROM EMP;",
-      "SELECT SAL + IS NULL(COMM) FROM EMP;",
-      "SELECT SAL + COMM IS NULL FROM EMP;"
+      "650, 650, 650",
+      "550, 650, 650",
+      "550, 550, 650",
+      "NULL, 650, 650"
     ],
     "correctIndex": 1,
-    "explanation": "COMM 이 NULL 이면 SAL + COMM 도 NULL 이 되므로(①), NVL(COMM, 0) 으로 NULL 을 0 으로 바꿔 더해야 한다(②). ③ IS NULL 은 함수가 아니라 조건 연산자라 이렇게 쓸 수 없고, ④ 는 산술식에 IS NULL 조건을 붙인 것이라 SELECT 절 계산식으로 쓸 수 없다.",
+    "explanation": "A 는 행마다 SAL + COMM 을 먼저 계산하는데, 첫 행은 100 + NULL = NULL 이라 SUM 에서 빠지고 250 + 300 = 550 이다. B 는 칼럼별로 먼저 합해 600 + 50 = 650 이다. SUM(COMM) 은 NULL 을 빼고 더하므로 NULL 이 되지 않는다. C 는 NULL 을 0 으로 바꾼 뒤 더해 650 이다. 정답은 ②번이다. ① 은 행 단위 덧셈에서도 NULL 이 0 처럼 처리된다고 본 것, ③ 은 B 도 NULL 행이 빠진다고 본 것, ④ 는 NULL 이 하나라도 있으면 SUM 전체가 NULL 이 된다고 본 것이다. 그래서 NULL 이 있을 수 있는 칼럼을 더할 때는 C 처럼 NVL 로 먼저 처리한다.",
     "_source": "authored",
     "references": [
       {
         "type": "sql",
-        "code": "-- COMM 컬럼에 NULL이 존재할 때, \n-- NULL을 0으로 대체한 SAL+COMM을 계산한다."
+        "code": "SELECT SUM(SAL + COMM)          AS A,\n       SUM(SAL) + SUM(COMM)     AS B,\n       SUM(SAL + NVL(COMM, 0))  AS C\nFROM   EMP;"
       }
     ]
   },
@@ -1679,20 +1679,20 @@ export const ROUND_58: QuizQuestion[] = [
     "round": 58,
     "subject": "2과목",
     "number": 42,
-    "title": "아래 SQL의 출력 결과로 옳은 것은?",
+    "title": "아래 SQL 의 결과(A, B, C, D)로 옳은 것은? (Oracle 기준)",
     "options": [
-      "''A''",
-      "'A'",
-      "A",
-      "'''A'''"
+      "It's, ', 1, It's",
+      "It''s, '', 2, [It's]",
+      "It's, ', 3, It's",
+      "It's, '', 2, It's"
     ],
     "correctIndex": 0,
-    "explanation": "Oracle 문자열 리터럴은 양쪽 작은따옴표가 구분자, 내부의 인접한 두 개의 작은따옴표(`''`)는 하나의 작은따옴표 리터럴로 해석된다. `'''''A'''''` 를 분해하면 양 끝 1개씩이 구분자, 내부에는 `''`(=`'`) 2쌍 + `A` + `''`(=`'`) 2쌍 → 결과는 `''A''`. ② 'A' 는 바깥 따옴표 한 쌍씩만 남는다고 본 결과, ③ A 는 따옴표를 모두 구분자로 본 결과, ④ 는 '' 를 ' 하나로 줄이지 않은 결과다.",
+    "explanation": "문자열 안에 작은따옴표를 넣으려면 작은따옴표를 두 번 연달아 쓴다. 'It''s' 는 It's, '''' 는 바깥 따옴표 둘 사이에 '' 가 있어 작은따옴표 한 글자 ' 다. 그래서 LENGTH('''') 는 1 이다. Oracle 의 q'[ … ]' 표기는 대괄호 안의 내용을 그대로 문자열로 쓰는 방법이라, 안의 작은따옴표를 두 번 쓰지 않아도 되고 D 도 It's 다. 정답은 ①번이다. ② 는 두 번 쓴 따옴표가 그대로 남는다고 보고 대괄호까지 출력된다고 본 것, ③ 은 따옴표 4개를 모두 센 것, ④ 는 B 를 따옴표 두 개로 본 것이다.",
     "_source": "authored",
     "references": [
       {
         "type": "sql",
-        "code": "SELECT '''''A''''' AS R1 FROM DUAL;"
+        "code": "SELECT 'It''s'       AS A,\n       ''''          AS B,\n       LENGTH('''') AS C,\n       q'[It's]'     AS D\nFROM   DUAL;"
       }
     ]
   },

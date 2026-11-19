@@ -381,16 +381,22 @@ export const ROUND_57: QuizQuestion[] = [
     "round": 57,
     "subject": "2과목",
     "number": 16,
-    "title": "집합 연산자 INTERSECT에 대한 설명으로 가장 적절한 것은?",
+    "title": "A 의 값이 1, 1, 2, NULL 이고 B 의 값이 1, 1, NULL 일 때, 아래 SQL ㉠~㉣ 의 결과 행 수로 옳은 것은?",
     "options": [
-      "여러 SQL 결과의 합집합으로 중복된 행은 하나의 행으로 출력한다.",
-      "여러 SQL 결과의 합집합으로 중복된 행도 그대로 결과로 출력한다.",
-      "여러 SQL 결과의 교집합으로 중복된 행은 하나의 행으로 출력한다.",
-      "SQL 결과 간의 차집합으로 중복된 행은 하나의 행으로 출력한다."
+      "2, 2, 2, 2",
+      "1, 2, 4, 2",
+      "2, 2, 4, 2",
+      "2, 1, 4, 1"
     ],
     "correctIndex": 2,
-    "explanation": "INTERSECT 는 두 집합의 공통 행만 반환하는 교집합 연산자이며 결과의 중복은 제거되어 한 행으로 출력된다. ① 은 UNION, ② 는 UNION ALL, ④ 는 MINUS(EXCEPT) 의 설명이다.",
-    "_source": "authored"
+    "explanation": "㉠ INTERSECT 는 교집합이면서 중복을 없애고, 집합 연산에서는 NULL 끼리도 같은 값으로 봐 1, NULL 의 2행이다. ㉡ IN 과 ㉣ EXISTS 는 A 의 행을 남길지만 정하므로 A 의 1 두 행이 그대로 남아 2행이고, NULL 은 = 비교가 UNKNOWN 이라 빠진다. ㉢ 조인은 A 의 1 두 행이 B 의 1 두 행과 각각 짝이 되어 2 × 2 = 4행이다. 정답은 ③번이다. ① 은 조인이 행을 늘린다는 점을 놓친 것, ② 는 INTERSECT 가 NULL 을 뺀다고 본 것, ④ 는 IN·EXISTS 도 중복을 없앤다고 본 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "-- ㉠\nSELECT V FROM A\nINTERSECT\nSELECT V FROM B;\n-- ㉡\nSELECT V FROM A\nWHERE  V IN (SELECT V FROM B);\n-- ㉢\nSELECT A.V FROM A JOIN B\n  ON A.V = B.V;\n-- ㉣\nSELECT V FROM A\nWHERE  EXISTS (SELECT 1 FROM B\n               WHERE B.V = A.V);"
+      }
+    ]
   },
   {
     "id": 10166,
@@ -898,16 +904,22 @@ export const ROUND_57: QuizQuestion[] = [
     "round": 57,
     "subject": "2과목",
     "number": 28,
-    "title": "다음 설명 중 옳지 않은 것은?",
+    "title": "데이터가 들어 있는 상품 테이블(금액 NUMBER(5) 에 최대 999 저장, 비고에 NULL 행 있음, 코드에 중복 값 있음)에 ㉠~㉣ 을 각각 실행한 결과로 옳은 것은? (Oracle 기준)",
     "options": [
-      "디폴트를 설정하면 전체 성능이 떨어진다.",
-      "데이터가 들어 있는 NUMBER 형 컬럼의 크기는 늘릴 수는 있어도 줄일 수는 없다.",
-      "NULL 이 없을 때만 NOT NULL 제약조건을 설정할 수 있다.",
-      "PRIMARY KEY 제약을 추가하려면 대상 컬럼에 중복 값이 없어야 한다."
+      "성공, 오류, 성공(기존 NULL 행은 그대로), 오류",
+      "성공, 성공, 성공(기존 NULL 행도 '없음'), 오류",
+      "성공, 오류, 성공(기존 NULL 행도 '없음'), 성공",
+      "오류, 오류, 성공(기존 NULL 행은 그대로), 오류"
     ],
     "correctIndex": 0,
-    "explanation": "DEFAULT 는 값을 입력하지 않았을 때 채워 넣을 기본값을 지정하는 것으로 전체 성능과 직접 관련이 없으므로 ① 이 옳지 않다. ② Oracle 에서 데이터가 들어 있는 NUMBER 컬럼은 정밀도를 줄일 수 없다(ORA-01440). 문자형(VARCHAR2)은 들어 있는 가장 긴 값보다 크게만 줄이면 축소할 수 있지만, 보기는 NUMBER 형이라 옳은 설명이다. ③ NOT NULL 은 기존 데이터에 NULL 이 없어야 추가할 수 있고, ④ PRIMARY KEY 는 중복 값과 NULL 이 없어야 추가할 수 있다.",
-    "_source": "authored"
+    "explanation": "Oracle 에서 숫자 칼럼의 자릿수를 늘리는 것(㉠)은 데이터가 있어도 되지만, 줄이는 것(㉡)은 값이 들어가더라도 칼럼이 비어 있어야 해 오류다. DEFAULT 는 앞으로 들어올 행에만 적용되므로 ㉢ 은 성공하고 기존 NULL 행은 그대로 NULL 이다. DEFAULT 를 둔다고 성능이 떨어지지는 않는다. 중복 값이 있는 칼럼에는 기본키를 걸 수 없어 ㉣ 은 오류다. 정답은 ①번이다. ② 는 자릿수를 줄여도 된다고 보고 DEFAULT 가 기존 행까지 바꾼다고 본 것, ③ 은 중복이 있어도 기본키를 걸 수 있다고 본 것, ④ 는 자릿수를 늘리는 것도 안 된다고 본 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "-- ㉠\nALTER TABLE 상품\n  MODIFY (금액 NUMBER(8));\n-- ㉡\nALTER TABLE 상품\n  MODIFY (금액 NUMBER(3));\n-- ㉢\nALTER TABLE 상품\n  MODIFY (비고 DEFAULT '없음');\n-- ㉣\nALTER TABLE 상품\n  ADD PRIMARY KEY (코드);"
+      }
+    ]
   },
   {
     "id": 10178,
