@@ -1343,19 +1343,28 @@
     {
       "subject": "2과목",
       "number": 45,
-      "title": "아래 테이블에 대한 INSERT 중 오류가 발생하는 것은?",
+      "title": "아래 ERD 의 주문상세 테이블에 INSERT ㉠~㉤ 을 차례로 실행할 때, 성공하는 문장만 모두 고른 것은? (Oracle 기준)",
       "options": [
-        "INSERT INTO TEST45 VALUES (1, 2, 3);",
-        "INSERT INTO TEST45 VALUES (1, 2, 3, 4);",
-        "INSERT INTO TEST45 (COL1, COL2, COL3) VALUES (1, 2, 3);",
-        "INSERT INTO TEST45 (COL1, COL2, COL3, COL4) VALUES (1, 2, 3, 4);"
+        "㉠, ㉤",
+        "㉠, ㉡, ㉤",
+        "㉠, ㉣, ㉤",
+        "㉠, ㉢, ㉤"
       ],
       "correctIndex": 0,
-      "explanation": "TEST45 는 컬럼이 4개다. 컬럼 목록을 생략한 INSERT 는 모든 컬럼에 순서대로 값을 줘야 하는데, ① 은 값이 3개뿐이라 '값의 수가 충분하지 않다' 는 오류가 난다. ② 는 4개를 모두 줬고, ③ 은 컬럼 3개를 명시해 COL4 에 NULL 이 들어가며, ④ 는 4개 컬럼을 명시했으므로 모두 정상이다.",
+      "explanation": "㉠ 은 주문 O1 과 상품 P1 이 모두 있고 키도 처음이라 성공한다. ㉡ 의 P3 은 상품 테이블에 없어 외래키 위반이다. ㉢ 은 ㉠ 과 (주문번호, 상품코드) 가 같아 기본키 위반이다. ㉣ 은 칼럼 목록 없이 값을 2개만 주었다. 칼럼 목록을 생략하면 테이블의 모든 칼럼(3개)에 값을 줘야 하므로 Oracle 에서는 값의 개수가 모자란다는 오류가 난다. DEFAULT 는 칼럼 목록에서 빠진 칼럼에만 들어간다. ㉤ 은 칼럼 목록에서 수량을 뺐으므로 DEFAULT 1 이 들어가 NOT NULL 도 지키고 성공한다. 정답은 ①번이다. ② 는 외래키 검사를, ④ 는 복합 기본키 검사를 빠뜨린 것이다. ③ 은 칼럼 목록 없이도 모자란 값에 DEFAULT 가 채워진다고 본 것이다. 참고로 PostgreSQL 은 ㉣ 처럼 뒤쪽 값을 생략하면 기본값을 채워 넣어 성공한다.",
       "references": [
         {
+          "type": "erd",
+          "caption": "주문·주문상세·상품 ERD",
+          "mermaid": "erDiagram\n    주문 ||--|{ 주문상세 : \"포함\"\n    상품 ||--o{ 주문상세 : \"판매\"\n    주문 {\n        string 주문번호 PK\n    }\n    주문상세 {\n        string 주문번호 PK, FK\n        string 상품코드 PK, FK\n        int 수량\n    }\n    상품 {\n        string 상품코드 PK\n    }"
+        },
+        {
+          "type": "text",
+          "content": "주문상세.수량: DEFAULT 1, NOT NULL\n주문: O1 / 상품: P1, P2\n주문상세: 비어 있음"
+        },
+        {
           "type": "sql",
-          "code": "CREATE TABLE TEST45 (\n  COL1 NUMBER,\n  COL2 NUMBER,\n  COL3 NUMBER,\n  COL4 NUMBER\n);"
+          "code": "-- ㉠\nINSERT INTO 주문상세\nVALUES ('O1', 'P1', 2);\n-- ㉡\nINSERT INTO 주문상세\nVALUES ('O1', 'P3', 1);\n-- ㉢\nINSERT INTO 주문상세\nVALUES ('O1', 'P1', 5);\n-- ㉣\nINSERT INTO 주문상세\nVALUES ('O1', 'P2');\n-- ㉤\nINSERT INTO 주문상세\n  (주문번호, 상품코드)\nVALUES ('O1', 'P2');"
         }
       ]
     },

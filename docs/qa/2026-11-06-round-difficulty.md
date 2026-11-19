@@ -924,3 +924,6 @@
 | 46-2-49 | OUTER JOIN 뒤 일반 조인이 살린 행을 지움 vs 인라인 뷰로 먼저 조인 | 조인 이름 → ERD 3개 테이블 + 데이터 + SQL 3개 | 4, 3, 4 | PostgreSQL 동일, ERD 렌더 확인 |
 | 48-2-32 | ON DELETE CASCADE 가 손자 테이블 외래키에 막힘 | DROP 옵션 이름 → ERD + 외래키 설정 + DELETE 2개 후 행 수 | 1, 2, 1 | PostgreSQL 동일(첫 DELETE 오류), ERD 렌더 확인 |
 | 46-2-28 | 양쪽 선택(|o..o{) ERD 와 INNER·LEFT·FULL OUTER | ERD 설명 고르기 → ERD + 데이터 + SQL 3개 | 3, 4, 5 | PostgreSQL 동일, ERD 렌더 확인 |
+| 53-2-45 | 외래키·복합 기본키·칼럼 목록 생략 시 값 개수·DEFAULT | 값 개수 하나 → ERD + 제약 + INSERT 5개 중 성공 | ㉠, ㉤ | Oracle 규칙(PostgreSQL 은 생략한 뒤쪽 값에 기본값을 채워 ㉣ 도 성공 — 해설에 적음), 나머지 PostgreSQL 동일 |
+| 61-2-35 | 테이블 3개에서 조인 조건이 하나 빠질 때의 카티션 곱 | 쉼표 조인 설명 → ERD + 데이터 + SQL 3개 | 4, 12, 8 | PostgreSQL 동일, ERD 렌더 확인 |
+| 45-2-43 | 같은 이름 칼럼이 없을 때 NATURAL JOIN = CROSS JOIN, 비등가 조인 | 조인 이름 → 두 표 + SQL 4개 | 9, 9, 9, 3 | PostgreSQL 동일 |

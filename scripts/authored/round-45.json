@@ -1704,19 +1704,67 @@
     {
       "subject": "2과목",
       "number": 43,
-      "title": "아래 SQL1과 동일한 결과를 반환하도록 SQL2의 빈칸에 들어갈 조인 방식은?",
+      "title": "같은 이름의 칼럼이 하나도 없는 아래 두 테이블에 대해 SQL ㉠~㉣ 의 결과(COUNT(*))를 차례대로 나열한 것은?",
       "options": [
-        "CROSS JOIN",
-        "INNER JOIN",
-        "NATURAL JOIN",
-        "FULL OUTER JOIN"
+        "9, 9, 9, 3",
+        "9, 0, 9, 3",
+        "9, 오류, 9, 3",
+        "9, 3, 9, 3"
       ],
       "correctIndex": 0,
-      "explanation": "FROM A, B 처럼 조인 조건 없이 테이블을 나열하면 두 테이블의 모든 행 조합(카티션 곱)이 나온다. ANSI 문법에서 이와 같은 것은 CROSS JOIN 이다(①). ② INNER JOIN 은 ON 조건이 필요하고, ③ NATURAL JOIN 은 같은 이름 컬럼으로 등가 조인하며, ④ FULL OUTER JOIN 도 조인 조건이 있어야 한다.",
+      "explanation": "㉠ 처럼 조인 조건 없이 테이블을 나열하면 3 × 3 = 9행의 카티션 곱이 나오고, ANSI 문법의 ㉢ CROSS JOIN 도 같은 9행이다. ㉡ NATURAL JOIN 은 이름이 같은 칼럼을 모두 찾아 등가 조건으로 쓰는데, 두 테이블에는 같은 이름의 칼럼이 없다. 비교할 조건이 하나도 없으니 오류나 0행이 아니라 CROSS JOIN 처럼 9행이 나온다. ㉣ 은 급여가 하한과 상한 사이인 등급만 붙이는 비등가 조인이라 직원마다 한 행씩 3행이다. 정답은 ①번이다. ② 와 ③ 은 같은 이름 칼럼이 없으면 NATURAL JOIN 이 0행을 내거나 실패한다고 본 것이고, ④ 는 NATURAL JOIN 이 알아서 범위 조건을 찾는다고 본 것이다.",
       "references": [
         {
+          "type": "table",
+          "caption": "직원",
+          "headers": [
+            "사번",
+            "급여"
+          ],
+          "rows": [
+            [
+              "1",
+              "150"
+            ],
+            [
+              "2",
+              "250"
+            ],
+            [
+              "3",
+              "350"
+            ]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "급여등급",
+          "headers": [
+            "등급",
+            "하한",
+            "상한"
+          ],
+          "rows": [
+            [
+              "A",
+              "100",
+              "199"
+            ],
+            [
+              "B",
+              "200",
+              "299"
+            ],
+            [
+              "C",
+              "300",
+              "399"
+            ]
+          ]
+        },
+        {
           "type": "sql",
-          "code": "[SQL1]\nSELECT * FROM A, B;\n\n[SQL2]\nSELECT * FROM A (  ㄱ  ) B;"
+          "code": "-- ㉠\nSELECT COUNT(*) FROM 직원, 급여등급;\n-- ㉡\nSELECT COUNT(*) FROM 직원\nNATURAL JOIN 급여등급;\n-- ㉢\nSELECT COUNT(*) FROM 직원\nCROSS JOIN 급여등급;\n-- ㉣\nSELECT COUNT(*) FROM 직원 E\nJOIN 급여등급 G\n  ON E.급여 BETWEEN G.하한\n               AND G.상한;"
         }
       ]
     },
