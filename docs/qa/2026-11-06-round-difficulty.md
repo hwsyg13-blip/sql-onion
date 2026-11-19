@@ -765,3 +765,14 @@
 | 46-2-25 | DISTINCT·GROUP BY·UNION 중복 제거와 NULL | 중복 안 지워지는 것 → 네 SQL 행 수 | 6, 3, 3, 3 | PostgreSQL 동일 |
 | 47-2-17 | 빈 테이블에서 MAX+1 채번·GROUP BY 공집합·COUNT 방식 차이 | 동치식 고르기 → 빈 T 와 두 행 T 의 결과 | 1, 공집합, 1 / 8, 3 | PostgreSQL 동일 |
 | 47-2-47 | DROP USER 와 CASCADE | 옵션 이름 → 두 명령 결과 | ③ | Oracle 규칙으로 판정 |
+
+## 순환 9바퀴 — 48~50회
+
+| 문항 | 개념 | 바뀐 점 | 정답 | 검증 |
+|---|---|---|---|---|
+| 48-2-40 | 루트 여러 개·연결 안 되는 행·전개 종료 | 서술 고르기 → 표의 계층 결과 | 4, 3, 미포함 | PostgreSQL 재귀 CTE 로 같은 결과 |
+| 48-2-18 | ADD 문법(COLUMN 키워드 불가)·여러 칼럼 추가·MODIFY 대상 | 문법 고르기 → ALTER 4개 중 오류 | ㉡, ㉣ | Oracle 규칙(PostgreSQL 은 ADD COLUMN 허용) |
+| 49-2-40 | AND 가 OR 보다 먼저·괄호·IN | 조건 고르기 → 표에서 세 조건 행 수 | 3, 2, 2 | PostgreSQL 동일 |
+| 49-2-39 | LENGTH 와 공백·LTRIM·TRIM·REPLACE | LENGTH 하나 → 네 식 결과 | 10, 5, 3, 9 | PostgreSQL 동일 |
+| 50-2-29 | LAG·LEAD·LAG 기본값·FIRST_VALUE | 함수 이름 → 네 값 계산 | 20, 30, 0, 10 | PostgreSQL 동일 |
+| 50-2-33 | DATE + 숫자(일 단위)·날짜 차이 | 식 하나 → 네 식 결과 | 13:00, 12:30, 3일 00:00, 1.5 | PostgreSQL 로 확인. 처음 쓴 기준 시각(10:00)으로는 E 가 1.58 이 되어 12:00 으로 바꿈 |

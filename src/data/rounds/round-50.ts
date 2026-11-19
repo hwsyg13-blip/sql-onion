@@ -1060,20 +1060,20 @@ export const ROUND_50: QuizQuestion[] = [
     "round": 50,
     "subject": "2과목",
     "number": 29,
-    "title": "아래 설명에 해당하는 윈도우 함수는?",
+    "title": "월별 매출이 1월 10, 2월 20, 3월 15, 4월 30 인 테이블에 아래 SQL 을 실행했다. ('3월의 P, 3월의 N, 2월의 P2, 4월의 F' 순서)",
     "options": [
-      "LEAD",
-      "LAG",
-      "FIRST_VALUE",
-      "LAST_VALUE"
+      "15, 30, 10, 10",
+      "20, 30, 0, 10",
+      "20, 30, NULL, 30",
+      "30, 20, 0, 10"
     ],
     "correctIndex": 1,
-    "explanation": "현재 행 기준으로 이전 행의 값을 가져오는 함수는 LAG 다(②). LEAD(①)는 다음 행의 값, FIRST_VALUE(③)·LAST_VALUE(④)는 윈도우의 첫 행·마지막 행 값을 반환한다.",
+    "explanation": "LAG 는 이전 행, LEAD 는 다음 행의 값을 가져온다. 3월의 P 는 2월의 20, N 은 4월의 30 이다. LAG(매출, 2, 0) 은 두 행 앞의 값을 가져오고 없으면 세 번째 인자 0 을 쓴다. 2월에서 두 행 앞은 없으므로 P2 는 0 이다. FIRST_VALUE 는 처음부터 현재 행까지 중 첫 값이라 4월에서도 1월의 10 이다. 정답은 ②번이다. ① 은 LAG 를 현재 행 값으로 본 것, ③ 은 기본값 0 을 놓치고 FIRST_VALUE 를 현재 행 값으로 본 것, ④ 는 LAG 와 LEAD 를 바꿔 본 것이다.",
     "_source": "authored",
     "references": [
       {
-        "type": "text",
-        "content": "현재 행 기준 이전 행의 값을 참조한다."
+        "type": "sql",
+        "code": "SELECT 월, 매출,\n  LAG(매출)  OVER (ORDER BY 월) AS P,\n  LEAD(매출) OVER (ORDER BY 월) AS N,\n  LAG(매출, 2, 0)\n    OVER (ORDER BY 월)       AS P2,\n  FIRST_VALUE(매출)\n    OVER (ORDER BY 월)       AS F\nFROM 매출;"
       }
     ]
   },
@@ -1232,20 +1232,20 @@ export const ROUND_50: QuizQuestion[] = [
     "round": 50,
     "subject": "2과목",
     "number": 33,
-    "title": "아래 SQL 수행 시 추가되는 시간으로 옳은 것은?",
+    "title": "D 가 2025-01-01 12:00 인 DATE 값일 때 아래 식의 결과(A, B, C, E)로 옳은 것은? (Oracle 기준, A·B 는 1월 1일의 시각, C 는 1월 며칠 몇 시인지)",
     "options": [
-      "+30분",
-      "+45분",
-      "+1시간",
-      "+2시간"
+      "12:30, 12:30, 3일 00:00, 1.5",
+      "13:00, 12:30, 2일 12:00, 2",
+      "13:00, 12:30, 3일 00:00, 1.5",
+      "14:00, 12:30, 3일 00:00, 1.5"
     ],
     "correctIndex": 2,
-    "explanation": "날짜에 더하는 숫자는 '일' 단위다. 60/30 = 2 이므로 1/12/2 = 1/24 일이고, 하루의 1/24 은 1시간이다(③). 참고로 1/24/60 은 1분, 1/24/2 는 30분이다. ① +30분은 한 번 더 2 로 나눈 값(1/48 일), ④ +2시간은 60/30 으로 나누는 것을 놓친 값(1/12 일)이다.",
+    "explanation": "DATE 에 더하는 숫자의 단위는 '일' 이다. A 의 1/12/(60/30) 은 1/12 일을 다시 2 로 나눈 1/24 일, 즉 1시간이라 13:00 이다. B 의 30/(24*60) 일은 30분이라 12:30 이다. C 의 1.5 일은 1일 12시간이라 1월 3일 00:00 이다. 날짜끼리 빼면 차이가 일 단위 숫자로 나와, E 는 1월 3일 0시와 1월 1일 12시의 차이인 1.5 다. 정답은 ③번이다. ① 은 A 를 30분으로, ② 는 소수 부분(0.5일)을 버리고, ④ 는 A 를 2시간으로 계산한 것이다.",
     "_source": "authored",
     "references": [
       {
         "type": "sql",
-        "code": "SELECT SYSDATE + 1/12/(60/30) FROM DUAL;"
+        "code": "SELECT D + 1/12/(60/30)        AS A,\n       D + 30/(24*60)          AS B,\n       D + 1.5                 AS C,\n       TO_DATE('2025-01-03',\n               'YYYY-MM-DD') - D AS E\nFROM   …;"
       }
     ]
   },

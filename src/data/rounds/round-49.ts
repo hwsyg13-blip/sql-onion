@@ -1662,20 +1662,20 @@ export const ROUND_49: QuizQuestion[] = [
     "round": 49,
     "subject": "2과목",
     "number": 39,
-    "title": "아래 SQL 의 결과로 옳은 것은?",
+    "title": "아래 SQL 의 결과(A, B, C, D)로 옳은 것은? (Oracle 기준)",
     "options": [
-      "9",
-      "10",
-      "11",
-      "7"
+      "9, 3, 3, 9",
+      "10, 5, 3, 9",
+      "10, 3, 3, 10",
+      "10, 7, 3, 9"
     ],
     "correctIndex": 1,
-    "explanation": "LENGTH 는 공백을 포함한 문자 수를 반환한다. 'SQL EXPERT' 는 SQL 3 자, 공백 1 자, EXPERT 6 자로 모두 10 자이다. ① 9 는 공백을 빼고 센 값, ③ 11 은 한 글자를 더 센 값이다.",
+    "explanation": "LENGTH 는 공백도 한 글자로 센다. A 는 'SQL' 3 + 공백 1 + 'EXPERT' 6 = 10 이다. B 의 LTRIM 은 왼쪽 공백 두 개만 지워 'SQL  ' 이 되어 5, C 의 TRIM 은 양쪽 공백을 모두 지워 3 이다. D 는 REPLACE 로 공백을 지운 'SQLEXPERT' 라 9 다. 정답은 ②번이다. ① 은 공백을 세지 않은 것, ③ 은 LTRIM 이 양쪽을 지우고 REPLACE 가 아무것도 바꾸지 않는다고 본 것, ④ 는 LTRIM 이 아무것도 지우지 않는다고 본 것이다.",
     "_source": "authored",
     "references": [
       {
         "type": "sql",
-        "code": "SELECT LENGTH('SQL EXPERT') FROM DUAL;"
+        "code": "SELECT LENGTH('SQL EXPERT')      AS A,\n       LENGTH(LTRIM('  SQL  '))  AS B,\n       LENGTH(TRIM('  SQL  '))   AS C,\n       LENGTH(REPLACE('SQL EXPERT',\n                      ' '))      AS D\nFROM   DUAL;"
       }
     ]
   },
@@ -1686,20 +1686,50 @@ export const ROUND_49: QuizQuestion[] = [
     "round": 49,
     "subject": "2과목",
     "number": 40,
-    "title": "아래 요구 사항을 만족하는 WHERE 조건으로 옳은 것은?",
+    "title": "아래 T 테이블에 대한 SQL ㉠, ㉡, ㉢ 의 결과 행 수로 옳은 것은? (요구 사항: 등급이 F 또는 G 이고, 금액이 2,000 ~ 50,000 사이)",
     "options": [
-      "COL1 = 'F' OR COL1 = 'G' AND 금액 BETWEEN 2000 AND 50000",
-      "(COL1 = 'F' OR COL1 = 'G') AND 금액 BETWEEN 2000 AND 50000",
-      "COL1 IN ('F', 'G') OR 금액 BETWEEN 2000 AND 50000",
-      "COL1 = 'F' AND COL1 = 'G' AND 금액 BETWEEN 2000 AND 50000"
+      "2, 2, 2",
+      "3, 2, 2",
+      "3, 3, 2",
+      "4, 2, 2"
     ],
     "correctIndex": 1,
-    "explanation": "조건 우선순위는 AND 가 OR 보다 먼저 평가되므로 괄호 없이 `OR ... AND ...` 를 쓰면 의도와 다르게 결합된다. '등급 F 또는 G' 부분에 괄호를 묶고 금액 BETWEEN 조건을 AND 로 결합한 ②가 요구사항을 정확히 표현한다. ① 은 괄호가 없어 COL1 = 'F' 이면 금액과 상관없이 통과하고, ③ 은 OR 로 묶여 등급 조건이 없어도 통과하며, ④ 는 한 행이 F 이면서 G 일 수 없어 공집합이다.",
+    "explanation": "AND 는 OR 보다 먼저 계산된다. ㉠ 은 '등급 = F' OR '(등급 = G AND 금액 범위)' 로 해석되어, 금액과 상관없이 F 두 행과 G 3000 한 행이 나와 3행이다. 괄호로 OR 를 먼저 묶은 ㉡ 과, IN 으로 바꾼 ㉢ 은 요구대로 F 3000, G 3000 의 2행이다. 정답은 ②번이다. ① 은 괄호가 없어도 결과가 같다고 본 것, ③ 은 ㉡ 의 괄호 효과를 놓친 것, ④ 는 ㉠ 에서 금액 조건이 아무 데도 걸리지 않는다고 본 것이다.",
     "_source": "authored",
     "references": [
       {
-        "type": "text",
-        "content": "등급이 F 또는 G 이고, 금액 범위가 2,000 ~ 50,000 사이"
+        "type": "table",
+        "caption": "T",
+        "headers": [
+          "등급",
+          "금액"
+        ],
+        "rows": [
+          [
+            "F",
+            "1000"
+          ],
+          [
+            "F",
+            "3000"
+          ],
+          [
+            "G",
+            "1000"
+          ],
+          [
+            "G",
+            "3000"
+          ],
+          [
+            "H",
+            "3000"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "-- ㉠\nWHERE 등급 = 'F' OR 등급 = 'G'\n  AND 금액 BETWEEN 2000 AND 50000\n-- ㉡\nWHERE (등급 = 'F' OR 등급 = 'G')\n  AND 금액 BETWEEN 2000 AND 50000\n-- ㉢\nWHERE 등급 IN ('F', 'G')\n  AND 금액 >= 2000 AND 금액 <= 50000"
       }
     ]
   },
