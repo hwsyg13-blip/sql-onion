@@ -693,20 +693,29 @@ export const ROUND_58: QuizQuestion[] = [
     "round": 58,
     "subject": "2과목",
     "number": 20,
-    "title": "아래 SQL 관련 설명 중 옳지 않은 것은?",
+    "title": "아래 부서·사원 데이터에서 SQL ㉠~㉣ 의 결과를 차례대로 나열한 것은? (오류가 나면 '오류', 아니면 결과 행 수, Oracle 기준)",
     "options": [
-      "GROUP BY 절은 SELECT 절보다 먼저 수행된다.",
-      "HAVING 절은 그룹 함수 결과를 조건으로 사용할 수 있다.",
-      "GROUP BY 절에 명시되지 않은 일반 컬럼은 SELECT 절에 자유롭게 사용할 수 있다.",
-      "HAVING 절이 WHERE 절보다 먼저 수행되지는 않는다."
+      "2, 2, 2, 1",
+      "오류, 2, 2, 2",
+      "오류, 2, 2, 1",
+      "오류, 오류, 2, 1"
     ],
     "correctIndex": 2,
-    "explanation": "SQL 처리 순서는 FROM → WHERE → GROUP BY → HAVING → SELECT → ORDER BY 라서 GROUP BY 는 SELECT 보다 먼저 수행되고(①), HAVING 은 그룹 함수 결과를 조건으로 쓸 수 있으며(②), WHERE 보다 늦게 수행된다(④). GROUP BY 를 쓰면 SELECT 절에는 GROUP BY 컬럼과 집계 함수만 올 수 있고 그 밖의 일반 컬럼은 오류가 나므로 ③ 이 옳지 않다.",
+    "explanation": "GROUP BY 를 쓰면 SELECT 절에는 GROUP BY 에 적은 칼럼과 집계 함수만 올 수 있다. ㉠ 의 D.부서명 은 부서코드가 정해지면 하나로 정해지는 값이지만, GROUP BY 에 없고 집계 함수로 감싸지도 않았으므로 Oracle 에서는 GROUP BY 식이 아니라는 오류가 난다. ㉡ 처럼 부서명을 GROUP BY 에 함께 넣거나, ㉢ 처럼 MAX 로 감싸면 실행된다. 일반 조인이라 사원이 없는 D3 은 빠지고 D1, D2 의 2행이다. ㉣ 은 그룹을 만든 뒤 HAVING 으로 사원이 2명 이상인 D1 만 남겨 1행이다. 정답은 ③번이다. ① 은 부서명이 부서코드에 따라 정해지니 ㉠ 도 된다고 본 것이고, ② 는 HAVING 을 빠뜨린 것, ④ 는 GROUP BY 에 칼럼을 여러 개 쓰면 안 된다고 본 것이다. 참고로 PostgreSQL 은 GROUP BY 에 기본키(부서코드)가 있으면 그 테이블의 다른 칼럼을 허용해 ㉠ 도 실행된다.",
     "_source": "authored",
     "references": [
       {
+        "type": "erd",
+        "caption": "부서·사원 ERD",
+        "mermaid": "erDiagram\n    부서 ||..o{ 사원 : \"소속\"\n    부서 {\n        string 부서코드 PK\n        string 부서명\n    }\n    사원 {\n        int 사번 PK\n        string 부서코드 FK\n    }"
+      },
+      {
+        "type": "text",
+        "content": "부서: (D1, 영업), (D2, 인사), (D3, 기획)\n사원: (1, D1), (2, D1), (3, D2)"
+      },
+      {
         "type": "sql",
-        "code": "SELECT DEPTNO, SUM(SAL)\nFROM   EMP\nGROUP BY DEPTNO\nHAVING SUM(SAL) > 10000;"
+        "code": "-- ㉠\nSELECT D.부서코드, D.부서명,\n       COUNT(*)\nFROM 부서 D, 사원 E\nWHERE E.부서코드 = D.부서코드\nGROUP BY D.부서코드;\n-- ㉡\nSELECT D.부서코드, D.부서명,\n       COUNT(*)\nFROM 부서 D, 사원 E\nWHERE E.부서코드 = D.부서코드\nGROUP BY D.부서코드, D.부서명;\n-- ㉢\nSELECT D.부서코드,\n       MAX(D.부서명), COUNT(*)\nFROM 부서 D, 사원 E\nWHERE E.부서코드 = D.부서코드\nGROUP BY D.부서코드;\n-- ㉣ ㉢ 에 다음을 덧붙임\nHAVING COUNT(*) >= 2;"
       }
     ]
   },

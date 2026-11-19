@@ -930,3 +930,6 @@
 | 56-2-19 | INTERSECT 비교 기준(식별자 vs 겹치는 이름)·HAVING COUNT | 연산자 이름 → ERD + 데이터 + SQL 3개 | 2, 1, 1 | PostgreSQL 동일, ERD 렌더 확인 |
 | 48-2-45 | 스칼라 서브쿼리 다중 행 오류·MAX·단일 행 =·IN 중복 | 설명 고르기 → ERD + 데이터 + SQL 4개 | 오류, 3, 1, 2 | PostgreSQL 동일(㉠ 오류), ERD 렌더 확인 |
 | 53-2-31 | NULL 허용 외래키와 MINUS·NOT IN·NOT EXISTS | 정의 → ERD(비회원 주문) + 데이터 + SQL 3개 | 2, 0, 2 | PostgreSQL 동일(EXCEPT), ERD 렌더 확인 |
+| 52-2-39 | 계층 칼럼(매장 → 지역)의 CUBE·ROLLUP·GROUPING SETS 행 수 | 절 이름 → ERD + 데이터 + 세 GROUP BY 행 수 | 9, 6, 4 | PostgreSQL 동일, ERD 렌더 확인 |
+| 58-2-20 | GROUP BY 에 없는 칼럼(종속 칼럼이어도 오류)·MAX·HAVING | 설명 고르기 → ERD + 데이터 + SQL 4개 | 오류, 2, 2, 1 | Oracle 규칙(PostgreSQL 은 기본키로 묶으면 ㉠ 허용 — 해설에 적음), 나머지 PostgreSQL 동일 |
+| 49-2-21 | ROLLUP 칼럼 순서에 따른 소계 행 수·GROUPING SETS | 설명 고르기 → 표 + 세 GROUP BY 행 수 | 7, 8, 5 | PostgreSQL 동일 |
