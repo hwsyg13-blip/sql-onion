@@ -748,20 +748,46 @@ export const ROUND_53: QuizQuestion[] = [
     "round": 53,
     "subject": "2과목",
     "number": 24,
-    "title": "아래 SQL 의 WHERE 조건과 동일한 의미를 가지는 것은?",
+    "title": "아래 T 테이블에 대한 WHERE 조건 ㉠~㉣ 의 결과 행 수로 옳은 것은?",
     "options": [
-      "SELECT * FROM T WHERE COL1 = 1 AND COL2 = 3;",
-      "SELECT * FROM T WHERE COL1 = 1 OR COL2 IN (3, 4);",
-      "SELECT * FROM T WHERE COL1 IN (1, 2) AND COL2 IN (3, 4);",
-      "SELECT * FROM T WHERE COL1 = 1 AND (COL2 = 3 OR COL2 = 4);"
+      "2, 2, 2, 2",
+      "2, 3, 4, 2",
+      "2, 2, 3, 2",
+      "2, 2, 4, 2"
     ],
     "correctIndex": 3,
-    "explanation": "다중 컬럼 IN `(COL1, COL2) IN ((1, 3), (1, 4))` 는 `(COL1=1 AND COL2=3) OR (COL1=1 AND COL2=4)` 와 동일하다. COL1 이 두 튜플에서 모두 1 이라 공통 인수로 묶으면 `COL1=1 AND (COL2=3 OR COL2=4)` 로 정리된다. ① 은 한 조건만, ② 는 OR 결합으로 더 넓고, ③ 은 COL1 이 2 인 행 (2, 3), (2, 4) 도 매칭하므로 의미가 다르다.",
+    "explanation": "㉠ 의 다중 칼럼 IN 은 (COL1, COL2) 쌍이 목록의 쌍과 똑같은 행만 고르므로 (1, 3), (1, 4) 의 2행이다. ㉣ 은 이를 AND·OR 로 풀어 쓴 것이라 같은 2행이고, ㉡ 도 이 경우에는 COL1 이 1 하나뿐이라 같은 2행이다. ㉢ 은 OR 라 COL1 이 1 이거나 COL2 가 3·4 인 행을 모두 골라 (1, 3), (1, 4), (2, 3), (1, NULL) 의 4행이다. 정답은 ④번이다. ① 은 OR 와 AND 의 차이를 놓친 것, ② 는 ㉡ 이 NULL 행도 잡는다고 본 것, ③ 은 OR 에서 COL2 가 NULL 인 행이 빠진다고 본 것이다(COL1 = 1 이 참이라 남는다).",
     "_source": "authored",
     "references": [
       {
+        "type": "table",
+        "caption": "T",
+        "headers": [
+          "COL1",
+          "COL2"
+        ],
+        "rows": [
+          [
+            "1",
+            "3"
+          ],
+          [
+            "1",
+            "4"
+          ],
+          [
+            "2",
+            "3"
+          ],
+          [
+            "1",
+            "NULL"
+          ]
+        ]
+      },
+      {
         "type": "sql",
-        "code": "SELECT *\nFROM   T\nWHERE  (COL1, COL2) IN ((1, 3), (1, 4));"
+        "code": "-- ㉠\nWHERE (COL1, COL2) IN ((1, 3), (1, 4))\n-- ㉡\nWHERE COL1 IN (1) AND COL2 IN (3, 4)\n-- ㉢\nWHERE COL1 IN (1, 1) OR COL2 IN (3, 4)\n-- ㉣\nWHERE (COL1 = 1 AND COL2 = 3)\n   OR (COL1 = 1 AND COL2 = 4)"
       }
     ]
   },
@@ -772,16 +798,22 @@ export const ROUND_53: QuizQuestion[] = [
     "round": 53,
     "subject": "2과목",
     "number": 25,
-    "title": "소수점 내림을 수행하는 함수에 해당하지 않는 것은?",
+    "title": "아래 SQL 의 결과(A, B, C, D)로 옳은 것은? (Oracle 기준)",
     "options": [
-      "CEIL",
-      "FLOOR",
-      "TRUNC (양수 자리 지정)",
-      "INT"
+      "-4, -3, -3, -4",
+      "-3, -3, -4, -4",
+      "-4, -4, -3, -3",
+      "-4, -3, -4, -4"
     ],
     "correctIndex": 0,
-    "explanation": "CEIL 은 소수점을 올리는 함수이므로 내림 함수에 해당하지 않는다. ② FLOOR 는 내림, ③ TRUNC 는 지정한 자리에서 버림, ④ INT 는 정수부만 취하므로 모두 내림 계열이다.",
-    "_source": "authored"
+    "explanation": "FLOOR 는 그 값 이하인 가장 큰 정수라 -3.7 을 더 작은 쪽인 -4 로 내린다. TRUNC 는 소수 부분을 버리기만 해 0 쪽인 -3 이 된다. CEIL 은 그 값 이상인 가장 작은 정수라 -3.2 를 -3 으로 올린다. ROUND 는 0.5 를 0 에서 먼 쪽으로 반올림해 -3.5 는 -4 다. 정답은 ①번이다. ② 는 FLOOR 와 CEIL 을 바꿔 본 것, ③ 은 TRUNC 를 FLOOR 처럼 보고 ROUND 를 0 쪽으로 본 것, ④ 는 CEIL 을 0 에서 먼 쪽으로 올린다고 본 것이다. 양수에서는 FLOOR 와 TRUNC 가 같지만 음수에서는 다르다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT FLOOR(-3.7) AS A,\n       TRUNC(-3.7) AS B,\n       CEIL(-3.2)  AS C,\n       ROUND(-3.5) AS D\nFROM   DUAL;"
+      }
+    ]
   },
   {
     "id": 10375,

@@ -1682,20 +1682,20 @@ export const ROUND_51: QuizQuestion[] = [
     "round": 51,
     "subject": "2과목",
     "number": 41,
-    "title": "아래 SQL 의 결과로 옳은 것은? (SYSDATE = 2023-05-10)",
+    "title": "SYSDATE 가 2023-05-10 일 때 아래 식 ㉠~㉣ 의 결과로 옳은 것은? (Oracle 기준, 모두 2023년이라 월-일만 표시)",
     "options": [
-      "2023-12-31",
-      "2023-05-01",
-      "2023-01-01",
-      "2023-05-10"
+      "01-01, 07-01, 05-15, 05-01",
+      "05-01, 07-01, 05-15, 05-01",
+      "05-10, 07-10, 05-15, 05-10",
+      "05-01, 07-01, 01-15, 01-01"
     ],
     "correctIndex": 1,
-    "explanation": "Oracle 의 TO_DATE 는 포맷에 없는 요소를 기본값으로 채운다. 연도만 주면 월은 현재 월, 일은 1일이 된다. SYSDATE 가 2023-05-10 이므로 2023-05-01 이다(②). 연도의 첫날(③)이나 오늘 날짜(④)가 되지 않는다.",
+    "explanation": "Oracle 의 TO_DATE 는 형식에 없는 부분을 기본값으로 채운다. 연도·월을 주지 않으면 현재 연도·현재 월, 일을 주지 않으면 1일, 시각은 00:00:00 이다. 그래서 ㉠ 은 2023년·현재 월 5월·1일인 2023-05-01, ㉡ 은 2023-07-01, ㉢ 은 현재 연월에 15일인 2023-05-15 다. ㉣ 의 TRUNC(날짜, 'MM') 은 그 달 1일로 잘라 2023-05-01 이다. 정답은 ②번이다. ① 은 빠진 월을 1월로 본 것, ③ 은 빠진 일을 오늘 날짜로 본 것, ④ 는 빠진 월을 1월로 보고 TRUNC 를 연 단위로 본 것이다. PostgreSQL 은 빠진 월을 1월로 채워 결과가 다르다.",
     "_source": "authored",
     "references": [
       {
         "type": "sql",
-        "code": "SELECT TO_DATE('2023', 'YYYY') FROM DUAL;"
+        "code": "-- ㉠\nTO_DATE('2023', 'YYYY')\n-- ㉡\nTO_DATE('202307', 'YYYYMM')\n-- ㉢\nTO_DATE('15', 'DD')\n-- ㉣\nTRUNC(SYSDATE, 'MM')"
       }
     ]
   },
@@ -1814,20 +1814,20 @@ export const ROUND_51: QuizQuestion[] = [
     "round": 51,
     "subject": "2과목",
     "number": 44,
-    "title": "아래 T 테이블에서 \"문자열에 리터럴 '_' 을 포함하는 행\" 을 찾는 LIKE 조건으로 옳은 것은? (기대 결과: AB_C, A_BD)",
+    "title": "아래 T 테이블에 대한 LIKE 조건 ㉠~㉣ 의 결과 행 수로 옳은 것은?",
     "options": [
-      "WHERE COL2 LIKE '%_%'",
-      "WHERE COL2 LIKE 'A%'",
-      "WHERE COL2 LIKE 'A_B%'",
-      "WHERE COL2 LIKE '%@_%' ESCAPE '@'"
+      "5, 2, 1, 1",
+      "2, 2, 3, 1",
+      "5, 1, 3, 1",
+      "5, 2, 3, 1"
     ],
     "correctIndex": 3,
-    "explanation": "LIKE 패턴에서 '_' 은 임의의 한 문자를 의미하므로 ① 처럼 그대로 쓰면 모든 행이 매칭된다. 리터럴 '_' 자체를 검색하려면 ESCAPE 문자를 지정하고 그 뒤에 '_' 을 두어야 한다. ④ 의 `%@_%` ESCAPE '@' 는 '@_' 를 리터럴 '_' 로 해석해 'AB_C', 'A_BD' 만 매칭한다. ② 'A%' 는 A 로 시작하는 행, ③ 'A_B%' 는 A 다음 아무 한 글자 뒤에 B 가 오는 행이라 밑줄 포함 여부와 다르다.",
+    "explanation": "LIKE 에서 _ 는 아무 글자 하나, % 는 0글자 이상을 뜻한다. ㉠ 의 '%_%' 는 '한 글자 이상인 문자열' 이라 5행 모두 걸린다. 글자 그대로의 _ 나 % 를 찾으려면 ESCAPE 로 지정한 문자를 앞에 붙인다. ㉡ 은 _ 가 들어 있는 AB_C, A_BD 의 2행, ㉣ 은 % 가 들어 있는 A%B 의 1행이다. ㉢ 의 'A_B%' 는 A, 아무 글자 하나, B 로 시작하는 문자열이라 A_BD, A%B, AXBD 의 3행이다. 정답은 ④번이다. ① 은 ㉢ 의 _ 를 글자 그대로의 _ 로 본 것, ② 는 ㉠ 의 _ 를 글자 그대로 본 것, ③ 은 ESCAPE 뒤의 _ 를 AB_C 에서만 찾은 것이다.",
     "_source": "authored",
     "references": [
       {
         "type": "table",
-        "caption": "T 테이블",
+        "caption": "T",
         "headers": [
           "COL2"
         ],
@@ -1840,8 +1840,18 @@ export const ROUND_51: QuizQuestion[] = [
           ],
           [
             "A_BD"
+          ],
+          [
+            "A%B"
+          ],
+          [
+            "AXBD"
           ]
         ]
+      },
+      {
+        "type": "sql",
+        "code": "-- ㉠\nWHERE COL2 LIKE '%_%'\n-- ㉡\nWHERE COL2 LIKE '%@_%' ESCAPE '@'\n-- ㉢\nWHERE COL2 LIKE 'A_B%'\n-- ㉣\nWHERE COL2 LIKE '%\\%%' ESCAPE '\\'"
       }
     ]
   },

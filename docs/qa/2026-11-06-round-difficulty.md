@@ -776,3 +776,14 @@
 | 49-2-39 | LENGTH 와 공백·LTRIM·TRIM·REPLACE | LENGTH 하나 → 네 식 결과 | 10, 5, 3, 9 | PostgreSQL 동일 |
 | 50-2-29 | LAG·LEAD·LAG 기본값·FIRST_VALUE | 함수 이름 → 네 값 계산 | 20, 30, 0, 10 | PostgreSQL 동일 |
 | 50-2-33 | DATE + 숫자(일 단위)·날짜 차이 | 식 하나 → 네 식 결과 | 13:00, 12:30, 3일 00:00, 1.5 | PostgreSQL 로 확인. 처음 쓴 기준 시각(10:00)으로는 E 가 1.58 이 되어 12:00 으로 바꿈 |
+
+## 순환 9바퀴 — 51~53회 (11-20 06시 실행)
+
+| 문항 | 개념 | 바뀐 점 | 정답 | 검증 |
+|---|---|---|---|---|
+| 51-2-41 | TO_DATE 의 빠진 부분 기본값(현재 월·1일)·TRUNC 'MM' | 식 하나 → 네 식 결과 | 05-01, 07-01, 05-15, 05-01 | Oracle 규칙(PostgreSQL 은 빠진 월을 1월로 채워 다름, 해설에 적음). 긴 날짜 보기가 줄바꿈되어 월-일로 줄임 |
+| 51-2-44 | LIKE 의 _·%·ESCAPE | 조건 고르기 → 네 조건 행 수 | 5, 2, 3, 1 | PostgreSQL 동일 |
+| 52-2-17 | Dirty·Non-Repeatable·Phantom Read | 특성 이름 → 현상 3개 이름 | Dirty, Non-Repeatable, Phantom | 정의로 판정 |
+| 52-2-21 | MINUS 의 NULL·중복 제거 vs NOT IN | 연산자 이름 → 세 SQL 행 수 | 2, 3, 0 | PostgreSQL 동일(EXCEPT) |
+| 53-2-24 | 다중 칼럼 IN 과 AND·OR 풀어쓰기 | 동치 고르기 → 네 조건 행 수 | 2, 2, 4, 2 | PostgreSQL 동일 |
+| 53-2-25 | 음수의 FLOOR·TRUNC·CEIL·ROUND | 아닌 함수 고르기 → 네 식 결과 | -4, -3, -3, -4 | PostgreSQL 동일 |
