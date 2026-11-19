@@ -1210,15 +1210,30 @@
     {
       "subject": "2과목",
       "number": 38,
-      "title": "제약 조건 설명 중 옳지 않은 것은?",
+      "title": "아래 ERD 와 제약 조건에서 SQL ㉠, ㉡ 을 차례로 실행한 뒤 '부서 테이블의 행 수, 사원 1 의 부서코드, 과제 P1 의 부서코드' 로 옳은 것은? (각 문장은 실행 후 바로 COMMIT 한다)",
       "options": [
-        "하나의 테이블에 기본키(PK) 는 하나만 설정할 수 있다.",
-        "고유키(UNIQUE) 는 NULL 값을 허용한다.",
-        "CHECK 조건은 TRUE/FALSE 로 판별 가능한 식이어야 한다.",
-        "DEFAULT 는 값이 지정되면 기존 데이터에도 소급 적용된다."
+        "0, NULL, NULL",
+        "1, D1, D2",
+        "0, D1, NULL",
+        "1, D1, NULL"
       ],
       "correctIndex": 3,
-      "explanation": "DEFAULT 는 이후 INSERT 할 때 값을 주지 않은 경우에만 적용되고, 이미 저장된 행에는 소급되지 않는다. 기본키는 테이블당 하나(①), UNIQUE 는 NULL 허용(②), CHECK 는 참·거짓을 판별하는 식(③) 은 모두 맞으므로 정답은 ④ 이다."
+      "explanation": "ON DELETE SET NULL 은 부모 행을 지울 때 자식의 외래키 칼럼을 NULL 로 바꾸는 동작이다. ㉠ 에서 D1 을 지우려면 사원 1 의 부서코드를 NULL 로 바꿔야 하는데, 이 칼럼은 NOT NULL 이다. 두 제약이 충돌해 ㉠ 은 오류가 나고 D1 삭제도 취소된다. ERD 에서 사원과의 관계는 부서 쪽 끝이 || (반드시 하나)라서 이 NOT NULL 과 맞고, 과제와의 관계는 |o (없을 수 있음)이다. ㉡ 에서 D2 를 지우면 과제 P1 의 부서코드는 NULL 을 허용하므로 NULL 로 바뀌고 삭제가 성공한다. 그래서 부서는 D1 한 행이 남고, 사원 1 의 부서코드는 D1 그대로, P1 의 부서코드는 NULL 이다. 정답은 ④번이다. ① 은 NOT NULL 과의 충돌을 놓쳐 ㉠ 이 성공한다고 본 것이고, ③ 은 ㉠ 에서 부서만 지워지고 사원은 그대로 남는다고 본 것이다. ② 는 ON DELETE SET NULL 이 없는 것처럼 ㉡ 도 거부된다고 본 것이다. 필수 관계(NOT NULL 외래키)에는 SET NULL 대신 CASCADE 나 삭제 제한을 쓴다.",
+      "references": [
+        {
+          "type": "erd",
+          "caption": "부서·사원·과제 ERD",
+          "mermaid": "erDiagram\n    부서 ||..o{ 사원 : \"소속\"\n    부서 |o..o{ 과제 : \"담당\"\n    부서 {\n        string 부서코드 PK\n    }\n    사원 {\n        int 사번 PK\n        string 부서코드 FK\n    }\n    과제 {\n        string 과제코드 PK\n        string 부서코드 FK\n    }"
+        },
+        {
+          "type": "text",
+          "content": "사원.부서코드: NOT NULL, 외래키 ON DELETE SET NULL\n과제.부서코드: NULL 허용, 외래키 ON DELETE SET NULL\n\n부서: D1, D2\n사원: (1, D1)\n과제: (P1, D2)"
+        },
+        {
+          "type": "sql",
+          "code": "-- ㉠\nDELETE FROM 부서\n WHERE 부서코드 = 'D1';\n-- ㉡\nDELETE FROM 부서\n WHERE 부서코드 = 'D2';"
+        }
+      ]
     },
     {
       "subject": "2과목",
