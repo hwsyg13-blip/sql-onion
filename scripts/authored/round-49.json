@@ -1447,19 +1447,19 @@
     {
       "subject": "2과목",
       "number": 38,
-      "title": "아래 SQL 의 결과로 옳은 것은?",
+      "title": "S 가 '02-123-4567' 일 때 아래 SQL 의 결과(A, B, C, D)로 옳은 것은? (Oracle 기준)",
       "options": [
-        "23",
-        "67",
-        "45",
-        "89"
+        "02, 4567, 67, 1",
+        "02, 4567, 67, 2",
+        "02-, 4567, 89, 2",
+        "02, 123, 67, 2"
       ],
       "correctIndex": 1,
-      "explanation": "SUBSTR 의 시작 위치가 음수면 문자열 끝에서부터 센다. '123456789' 에서 -4 는 뒤에서 네 번째 문자 6 이고, 거기서 2 글자를 잘라 '67' 이다(②). ③ 45 는 음수 부호를 무시하고 앞에서 4번째부터, ④ 89 는 맨 끝 두 글자를 자른 결과다.",
+      "explanation": "INSTR(S, '-') 는 첫 '-' 의 위치 3 이라 A 는 1번째부터 2글자인 '02' 다. INSTR(S, '-', 1, 2) 는 두 번째 '-' 의 위치 7 이라 B 는 8번째부터 끝까지인 '4567' 이다. C 는 뒤에서 4번째 '6' 부터 2글자라 '67' 이다. D 는 '-' 를 지운 문자열과의 길이 차이라 '-' 의 개수인 2 다. 정답은 ②번이다. ① 은 '-' 를 하나만 센 것, ③ 은 - 1 을 놓치고 뒤에서 2글자를 자른 것, ④ 는 INSTR 의 네 번째 인자를 놓쳐 첫 '-' 뒤를 자른 것이다.",
       "references": [
         {
           "type": "sql",
-          "code": "SELECT SUBSTR('123456789', -4, 2) FROM DUAL;"
+          "code": "SELECT\n  SUBSTR(S, 1, INSTR(S, '-') - 1) AS A,\n  SUBSTR(S, INSTR(S, '-', 1, 2) + 1)\n                                  AS B,\n  SUBSTR('123456789', -4, 2)      AS C,\n  LENGTH(S) - LENGTH(REPLACE(S, '-'))\n                                  AS D\nFROM …;"
         }
       ]
     },
@@ -1614,19 +1614,19 @@
     {
       "subject": "2과목",
       "number": 43,
-      "title": "아래 SQL 의 수행 목적에 대한 설명으로 옳은 것은?",
+      "title": "EMP 의 (부서, 연봉) 이 (A, 100), (A, 300), (B, 200), (C, 400), (C, NULL) 일 때 아래 SQL 의 결과로 옳은 것은? (출력 순서대로)",
       "options": [
-        "전체 사원의 평균 연봉",
-        "부서별 최고 연봉을 조회",
-        "전체 사원의 합계 연봉",
-        "사원 수를 세는 쿼리"
+        "A 300, C 400",
+        "C 400, A 300",
+        "C 400, A 300, B 200",
+        "C NULL, A 300"
       ],
       "correctIndex": 1,
-      "explanation": "GROUP BY 부서 로 행을 부서별로 묶고 묶음마다 MAX(연봉) 을 구하므로 부서별 최고 연봉을 조회한다(②). ① 평균은 AVG, ③ 합계는 SUM, ④ 사원 수는 COUNT 로 구한다.",
+      "explanation": "부서별로 묶은 뒤 MAX 를 구하면 A 300, B 200, C 400 이다(C 의 NULL 은 집계에서 빠진다). HAVING 으로 300 이상인 그룹만 남겨 A, C 가 남고, ORDER BY 2 DESC 는 두 번째 칼럼인 MAX(연봉) 의 내림차순이라 C 400, A 300 순서다. 정답은 ②번이다. ① 은 정렬 방향을 놓친 것, ③ 은 HAVING 조건을 놓친 것, ④ 는 NULL 이 섞이면 MAX 도 NULL 이 된다고 보고 NULL 을 가장 큰 값으로 정렬한 것이다.",
       "references": [
         {
           "type": "sql",
-          "code": "SELECT 부서, MAX(연봉)\nFROM   EMP\nGROUP BY 부서;"
+          "code": "SELECT 부서, MAX(연봉)\nFROM   EMP\nGROUP  BY 부서\nHAVING MAX(연봉) >= 300\nORDER  BY 2 DESC;"
         }
       ]
     },

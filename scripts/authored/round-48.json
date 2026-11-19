@@ -714,19 +714,19 @@
     {
       "subject": "2과목",
       "number": 20,
-      "title": "아래 SQL 의 결과 월 이름(영문) 은?",
+      "title": "아래 SQL 의 결과(A, B, C, D)로 옳은 것은? (Oracle 기준, 날짜 언어는 영어, 2023-06-10 은 토요일)",
       "options": [
-        "MARCH",
-        "APRIL",
-        "MAY",
-        "JUNE"
+        "6, JUNE, SAT, 4",
+        "06, JUN, SA, 4",
+        "06, JUN, SAT, 4",
+        "06, JUN, SAT, 9"
       ],
       "correctIndex": 3,
-      "explanation": "`TO_DATE`로 문자열을 날짜로 변환한 뒤 `TO_CHAR(..., 'MONTH')`로 월 이름을 영문으로 추출한다. 6월에 해당하는 영문 월 이름은 JUNE이므로 정답은 ④번이다. ① MARCH·② APRIL·③ MAY 는 각각 3·4·5월이다. 참고로 Oracle 의 'MONTH' 형식은 가장 긴 월 이름(SEPTEMBER, 9자) 길이에 맞춰 뒤를 공백으로 채운다.",
+      "explanation": "MM 은 두 자리 월이라 '06', MON 은 세 글자 약칭이라 'JUN', DY 는 요일 약칭이라 'SAT' 다. MONTH 는 월 이름 전체를 쓰되, 가장 긴 월 이름(SEPTEMBER, 9글자)에 맞춰 뒤를 공백으로 채운다. 그래서 'JUNE' 뒤에 공백 5개가 붙어 LENGTH 는 9 다. 공백 없이 쓰려면 'FMMONTH' 처럼 FM 을 붙인다. 정답은 ④번이다. ① 은 MM 을 한 자리로, MON 을 전체 이름으로 본 것, ② 는 DY 를 두 글자로 본 것, ③ 은 MONTH 의 공백 채우기를 놓친 것이다.",
       "references": [
         {
           "type": "sql",
-          "code": "SELECT TO_CHAR(TO_DATE('2023-06-10','YYYY-MM-DD'), 'MONTH') FROM DUAL;"
+          "code": "SELECT\n  TO_CHAR(D, 'MM')          AS A,\n  TO_CHAR(D, 'MON')         AS B,\n  TO_CHAR(D, 'DY')          AS C,\n  LENGTH(TO_CHAR(D, 'MONTH')) AS D\nFROM (SELECT TO_DATE('2023-06-10',\n        'YYYY-MM-DD') AS D FROM DUAL);"
         }
       ]
     },
@@ -1759,19 +1759,19 @@
     {
       "subject": "2과목",
       "number": 50,
-      "title": "아래 GRANT 구문의 빈칸에 들어갈 키워드로 옳은 것은?",
+      "title": "A_USER 가 아래처럼 B_USER 에게 권한을 주었다. B_USER 가 ㉠~㉣ 을 실행한 결과로 옳은 것은? (Oracle 기준)",
       "options": [
-        "TO, ON",
-        "ON, TO",
-        "FROM, TO",
-        "IN, TO"
+        "성공, 성공, 오류, 오류",
+        "성공, 오류, 오류, 오류",
+        "성공, 오류, 성공, 오류",
+        "성공, 오류, 오류, 성공"
       ],
       "correctIndex": 1,
-      "explanation": "권한 부여 구문은 GRANT 권한 ON 객체 TO 사용자 이므로 빈칸에는 차례로 ON, TO 가 들어간다(②). 권한 회수는 REVOKE 권한 ON 객체 FROM 사용자 처럼 FROM 을 쓴다(③). ① 은 ON 과 TO 의 순서가 뒤바뀌었고, ④ IN 은 GRANT 구문에 쓰지 않는다.",
+      "explanation": "GRANT 권한 ON 객체 TO 사용자 형식이며, UPDATE 는 (COL1) 처럼 칼럼을 지정해 줄 수 있다. B_USER 는 COL1 만 고칠 수 있어 ㉠ 은 성공하고 ㉡ 은 권한 부족으로 오류다. UPDATE 권한에는 조회 권한이 들어 있지 않아 ㉢ 도 오류다. WITH GRANT OPTION 없이 받은 권한은 남에게 다시 줄 수 없어 ㉣ 도 오류다. 정답은 ②번이다. ① 은 칼럼 지정을 무시한 것, ③ 은 UPDATE 권한이 SELECT 를 포함한다고 본 것, ④ 는 받은 권한을 자유롭게 다시 줄 수 있다고 본 것이다.",
       "references": [
         {
           "type": "sql",
-          "code": "GRANT INSERT (   ) 테이블명 (   ) 사용자명;"
+          "code": "-- A_USER 가 실행\nGRANT UPDATE (COL1) ON TB_A TO B_USER;\n\n-- B_USER 가 실행\n-- ㉠\nUPDATE A_USER.TB_A SET COL1 = 'X';\n-- ㉡\nUPDATE A_USER.TB_A SET COL2 = 'Y';\n-- ㉢\nSELECT * FROM A_USER.TB_A;\n-- ㉣\nGRANT UPDATE (COL1) ON A_USER.TB_A\n  TO C_USER;"
         }
       ]
     }

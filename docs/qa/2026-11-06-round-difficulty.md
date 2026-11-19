@@ -833,3 +833,14 @@
 | 46-2-27 | 단일 행 = vs = ANY·IN vs 다중 칼럼 IN | 오류 하나 → 네 SQL 결과 | 오류, 3, 3, 2 | PostgreSQL 동일 |
 | 47-2-40 | LPAD·RPAD 의 전체 길이(넘치면 자름)·RTRIM 문자 집합 | 결과 다른 것 → 네 식 결과 | AABCD, BCD, BCxy, EBC | PostgreSQL 동일 |
 | 47-2-46 | SUBSTR 시작 위치 0·범위 밖·음수 | 식 하나 → 네 식 결과 | BCDE, AB, NULL, DE | Oracle 규칙(PostgreSQL 은 위치 0 처리가 달라 해설에 적음) |
+
+## 순환 10바퀴 — 48~50회
+
+| 문항 | 개념 | 바뀐 점 | 정답 | 검증 |
+|---|---|---|---|---|
+| 48-2-20 | TO_CHAR 날짜 형식(MM·MON·DY)·MONTH 의 공백 채우기 | 월 이름 하나 → 네 식 결과 | 06, JUN, SAT, 9 | PostgreSQL 동일(MONTH 9칸) |
+| 48-2-50 | 칼럼 단위 UPDATE 권한·SELECT 미포함·GRANT OPTION 없음 | 빈칸(ON·TO) → 받은 권한으로 4개 실행 결과 | 성공, 오류, 오류, 오류 | Oracle 권한 규칙으로 판정 |
+| 49-2-43 | GROUP BY·HAVING·ORDER BY 위치 번호와 NULL | 목적 설명 → 출력 결과 | C 400, A 300 | PostgreSQL 동일 |
+| 49-2-38 | INSTR n번째·SUBSTR 로 구분자 파싱·글자 수 세기 | SUBSTR 하나 → 네 식 결과 | 02, 4567, 67, 2 | PostgreSQL 로 A·C·D 확인 |
+| 50-2-15 | 빈 결과에서 집계 vs 단일 행 함수와 NVL | 식 하나 → 네 SQL 결과 | 0, 9999, 공집합, 0 | PostgreSQL 동일 |
+| 50-2-27 | GROUP BY 없이 일반 칼럼 + 집계(HAVING·ORDER BY) | 빈칸 하나 → 네 절 중 오류 | ㉡, ㉢ | PostgreSQL 동일 |

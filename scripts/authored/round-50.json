@@ -429,19 +429,19 @@
     {
       "subject": "2과목",
       "number": 15,
-      "title": "아래 SQL 의 결과로 옳은 것은?",
+      "title": "행이 있는 TAB1 테이블에 대한 SQL ㉠~㉣ 의 결과로 옳은 것은?",
       "options": [
-        "0",
-        "9999",
-        "1",
-        "ERROR"
+        "0, 9999, 공집합, 0",
+        "9999, 9999, 9999, 0",
+        "0, 9999, 9999, 0",
+        "0, NULL, 공집합, 0"
       ],
       "correctIndex": 0,
-      "explanation": "COUNT(*) 는 조건을 만족하는 행이 없어도 NULL 이 아니라 0 을 반환한다. 그래서 NVL(0, 9999) = 0 이다(①). 대체값 9999 가 나오려면 SUM·MAX 처럼 공집합에서 NULL 을 반환하는 집계 함수여야 한다. ② 9999 는 COUNT 가 NULL 을 돌려준다고 본 값이고, ④ 오류는 나지 않는다.",
+      "explanation": "대상 행이 없어도 GROUP BY 없는 집계는 1행을 돌려준다. COUNT(*) 는 0 이라 NULL 이 아니므로 ㉠ 의 NVL 은 그대로 0 이다. MAX 는 NULL 이라 ㉡ 은 NVL 이 9999 로 바꾼다. ㉢ 은 집계가 아닌 단일 행 함수라 행이 없으면 결과도 없는 공집합이다. ㉣ 은 COUNT 라 0 이다. 정답은 ①번이다. ② 는 COUNT(*) 도 NULL 이 된다고 본 것, ③ 은 행이 없어도 단일 행 함수가 값을 낸다고 본 것, ④ 는 바깥 NVL 이 MAX 결과를 바꾼다는 점을 놓친 것이다.",
       "references": [
         {
           "type": "sql",
-          "code": "SELECT NVL(COUNT(*), 9999)\nFROM   TAB1\nWHERE  1 = 2;"
+          "code": "-- ㉠\nSELECT NVL(COUNT(*), 9999)\nFROM TAB1 WHERE 1 = 2;\n-- ㉡\nSELECT NVL(MAX(COL1), 9999)\nFROM TAB1 WHERE 1 = 2;\n-- ㉢\nSELECT NVL(COL1, 9999)\nFROM TAB1 WHERE 1 = 2;\n-- ㉣\nSELECT COUNT(NVL(COL1, 0))\nFROM TAB1 WHERE 1 = 2;"
         }
       ]
     },
@@ -855,19 +855,19 @@
     {
       "subject": "2과목",
       "number": 27,
-      "title": "부서별 최고 연봉을 조회하는 SQL 로 옳은 것은?",
+      "title": "아래 SQL 의 ( ? ) 자리에 ㉠~㉣ 을 각각 넣었을 때 오류가 발생하는 것만 모두 고른 것은?",
       "options": [
-        "GROUP BY 부서",
-        "HAVING 부서",
-        "ORDER BY 부서",
-        "WHERE 부서"
+        "㉡, ㉢",
+        "㉡",
+        "㉢",
+        "㉡, ㉢, ㉣"
       ],
       "correctIndex": 0,
-      "explanation": "SELECT 절에 집계 함수 MAX(연봉) 과 일반 컬럼 부서를 함께 쓰려면 부서를 GROUP BY 로 묶어야 부서별 최고 연봉이 나온다(①). HAVING(②)은 그룹에 대한 조건, ORDER BY(③)는 정렬, WHERE(④)는 행 조건이라 '부서' 만 쓰면 문법에 맞지 않고 그룹도 만들어지지 않는다.",
+      "explanation": "SELECT 에 일반 칼럼(부서)과 집계 함수(MAX)를 함께 쓰려면 그 칼럼으로 GROUP BY 해야 한다. ㉠ 과 ㉣ 은 부서로 묶었으니 부서별 최고 연봉이 나오고, ㉣ 처럼 집계 함수로 정렬하는 것도 된다. ㉡ 은 GROUP BY 없이 HAVING 만 써 테이블 전체가 한 그룹이 되는데, 그 안에서 부서 값은 하나로 정해지지 않아 오류다. ㉢ 도 GROUP BY 가 없어 같은 이유로 오류다. 정답은 ①번이다. ② 와 ③ 은 둘 중 하나만 오류로 본 것, ④ 는 ORDER BY 에 집계 함수를 쓸 수 없다고 본 것이다.",
       "references": [
         {
           "type": "sql",
-          "code": "SELECT 부서, MAX(연봉)\nFROM   EMP\n( ? );"
+          "code": "SELECT 부서, MAX(연봉)\nFROM   EMP\n( ? );\n-- ㉠ GROUP BY 부서\n-- ㉡ HAVING MAX(연봉) > 0\n-- ㉢ ORDER BY 부서\n-- ㉣ GROUP BY 부서\n--    ORDER BY MAX(연봉) DESC"
         }
       ]
     },
