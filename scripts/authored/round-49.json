@@ -179,28 +179,71 @@
     {
       "subject": "2과목",
       "number": 11,
-      "title": "PLAYER 테이블에서 선수명과 팀명은 오름차순, 연봉은 내림차순으로 조회하는 SQL 로 옳은 것은?",
+      "title": "아래 PLAYER 테이블에 SQL 을 실행했을 때 출력되는 선수명 순서로 옳은 것은?",
       "options": [
-        "SELECT 선수명, 팀명, 연봉 FROM PLAYER ORDER BY 선수명 DESC, 팀명 DESC, 연봉 ASC;",
-        "SELECT 선수명, 팀명, 연봉 FROM PLAYER ORDER BY 선수명 ASC, 팀명, 3 DESC;",
-        "SELECT 선수명, 팀명, 연봉 FROM PLAYER ORDER BY 선수명 ASC, 팀명 ASC, 연봉;",
-        "SELECT 선수명, 팀명, 연봉 FROM PLAYER ORDER BY 선수명, 팀명, DESC 연봉;"
+        "김, 박, 이, 최",
+        "박, 김, 이, 최",
+        "이, 박, 김, 최",
+        "박, 이, 김, 최"
       ],
       "correctIndex": 1,
-      "explanation": "ORDER BY 에 숫자를 쓰면 SELECT 목록의 위치를 뜻하므로 ② 의 3 은 세 번째 컬럼인 연봉이다. 선수명 ASC, 팀명(생략하면 ASC), 3 DESC 로 선수명·팀명은 오름차순, 연봉은 내림차순이 된다(②). ① 은 선수명·팀명이 내림차순이고 연봉이 오름차순이라 반대이고, ③ 은 연봉에 정렬 방향을 쓰지 않아 오름차순이 되며, ④ 는 DESC 를 컬럼 앞에 써서 문법 오류다."
+      "explanation": "ORDER BY 의 숫자는 SELECT 목록의 순서를 뜻해, 2 는 팀명, 3 은 연봉이다. 정렬 방향은 칼럼마다 따로 정하므로 팀명은 오름차순(기본값), 연봉만 내림차순이다. 팀 A 의 박(500)·김(300), 팀 B 의 이(500)·최(100) 순서가 되어 박, 김, 이, 최 다. 정답은 ②번이다. ① 은 DESC 가 연봉에도 적용되지 않는다고 본 것, ③ 은 DESC 가 팀명에도 적용된다고 본 것, ④ 는 연봉을 먼저 정렬한 것이다.",
+      "references": [
+        {
+          "type": "table",
+          "caption": "PLAYER",
+          "headers": [
+            "선수명",
+            "팀명",
+            "연봉"
+          ],
+          "rows": [
+            [
+              "김",
+              "A",
+              "300"
+            ],
+            [
+              "이",
+              "B",
+              "500"
+            ],
+            [
+              "박",
+              "A",
+              "500"
+            ],
+            [
+              "최",
+              "B",
+              "100"
+            ]
+          ]
+        },
+        {
+          "type": "sql",
+          "code": "SELECT 선수명, 팀명, 연봉\nFROM   PLAYER\nORDER  BY 2, 3 DESC;"
+        }
+      ]
     },
     {
       "subject": "2과목",
       "number": 12,
-      "title": "SQL 명령어 분류로 적절하지 않은 것은?",
+      "title": "아래 명령 ㉠~㉤ 중 DDL 만 모두 고른 것은?",
       "options": [
-        "DDL: CREATE, ALTER, DROP",
-        "DML: INSERT, UPDATE, DELETE",
-        "DCL: GRANT, REVOKE",
-        "DML: RENAME"
+        "㉠, ㉡",
+        "㉡, ㉢, ㉤",
+        "㉠, ㉢, ㉤",
+        "㉠, ㉡, ㉤"
       ],
       "correctIndex": 3,
-      "explanation": "RENAME 은 객체의 이름을 바꾸는 명령이라 DDL 에 속한다. DML 은 INSERT·UPDATE·DELETE·SELECT 처럼 데이터를 조작하는 명령을 말한다. ① DDL, ② DML, ③ DCL 분류는 맞다."
+      "explanation": "DDL 은 객체의 구조나 정의를 다루는 명령이다. 이름을 바꾸는 RENAME(㉠), 테이블을 비우고 저장 공간까지 초기화하는 TRUNCATE(㉡), 객체에 설명을 다는 COMMENT(㉤)가 DDL 이다. MERGE(㉢)는 행을 넣거나 고치는 DML 이고, SAVEPOINT(㉣)는 트랜잭션 안의 지점을 표시하는 TCL 이다. 정답은 ④번이다. TRUNCATE 는 행을 지우지만 DELETE 와 달리 DDL 이라 자동 COMMIT 되고 ROLLBACK 할 수 없다는 점이 자주 나온다. ① 은 COMMENT 를, ②·③ 은 MERGE 를 잘못 분류한 것이다.",
+      "references": [
+        {
+          "type": "text",
+          "content": "㉠ RENAME 주문 TO 주문_old\n㉡ TRUNCATE TABLE 로그\n㉢ MERGE INTO 재고 USING 입고 …\n㉣ SAVEPOINT S1\n㉤ COMMENT ON TABLE 주문 IS '주문 정보'"
+        }
+      ]
     },
     {
       "subject": "2과목",

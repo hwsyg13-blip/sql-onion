@@ -629,3 +629,14 @@
 | 46-2-47 | CBO 와 통계 정보·RBO | 일반 설명 → 오래된 통계 상황 | ④ | 정의로 판정 |
 | 47-2-21 | 계층형 WHERE(전개 후) vs CONNECT BY 조건(전개 중) | 옳지 않은 설명 → 세 SQL 행 수 | 4, 3, 2 | PostgreSQL 재귀 CTE 로 같은 결과 |
 | 47-2-34 | 집합 연산자는 NULL 끼리 같다고 봄 | 교집합 이름 → INTERSECT·UNION·MINUS 행 수 | 3, 4, 1 | PostgreSQL 동일(EXCEPT) |
+
+## 순환 7바퀴 — 48~50회
+
+| 문항 | 개념 | 바뀐 점 | 정답 | 검증 |
+|---|---|---|---|---|
+| 48-2-12 | 실행 순서와 별칭 사용 위치 | 순서 고르기 → 네 절에 별칭을 넣을 때 실행 여부 | ㉡ | Oracle 19c 기준(PostgreSQL 은 GROUP BY 별칭 허용) |
+| 48-2-33 | GROUPING 으로 원래 NULL 과 집계 NULL 구분 | 처리 방법 고르기 → NULL 지역이 있는 ROLLUP 결과 | 부산 7, 서울 10, 미상 5, 합계 22 | PostgreSQL 동일(COALESCE) |
+| 49-2-12 | DDL·DML·TCL 분류(RENAME·TRUNCATE·COMMENT) | 틀린 분류 → 명령 5개 중 DDL | ㉠, ㉡, ㉤ | 정의로 판정 |
+| 49-2-11 | ORDER BY 위치 번호·칼럼별 정렬 방향 | SQL 고르기 → 출력 순서 | 박, 김, 이, 최 | PostgreSQL 동일 |
+| 50-2-21 | MODIFY 길이 축소·NOT NULL 추가의 제한 | 문법 고르기 → 데이터가 있는 칼럼에 MODIFY 4개 | 성공, 오류, 오류, 성공 | PostgreSQL 동일(ALTER COLUMN) |
+| 50-2-36 | 외부 조인 조건 ON vs WHERE | 조인 방식 고르기 → 세 SQL 행 수 | 4, 3, 2 | PostgreSQL 동일 |

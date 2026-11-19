@@ -302,16 +302,22 @@ export const ROUND_48: QuizQuestion[] = [
     "round": 48,
     "subject": "2과목",
     "number": 12,
-    "title": "SELECT 문장의 실행 순서로 옳은 것은?",
+    "title": "아래 SQL 의 ㉠~㉣ 자리에 각각 해당 절을 넣었을 때, 별칭 연봉 을 써도 오류 없이 실행되는 것만 모두 고른 것은? (Oracle 19c 기준)",
     "options": [
-      "SELECT - FROM - WHERE - GROUP BY - HAVING - ORDER BY",
-      "FROM - SELECT - WHERE - GROUP BY - HAVING - ORDER BY",
-      "FROM - WHERE - GROUP BY - HAVING - ORDER BY - SELECT",
-      "FROM - WHERE - GROUP BY - HAVING - SELECT - ORDER BY"
+      "㉠, ㉡",
+      "㉡, ㉢",
+      "㉡, ㉢, ㉣",
+      "㉡"
     ],
     "correctIndex": 3,
-    "explanation": "SQL은 작성 순서와 실제 실행 순서가 다르다. 먼저 FROM으로 테이블을 가져오고, WHERE로 행을 거른 뒤, GROUP BY로 묶고, HAVING으로 그룹을 거른 다음, SELECT로 컬럼을 골라내고, 마지막으로 ORDER BY로 정렬한다. 그래서 SELECT의 별칭을 WHERE에서 못 쓰고 ORDER BY에서는 쓸 수 있는 것이다. 정답은 ④번이다. ① 은 SQL 을 작성하는 순서이고, ② 는 SELECT 를 WHERE 보다 먼저, ③ 은 ORDER BY 보다 나중에 둔 순서라 틀리다.",
-    "_source": "authored"
+    "explanation": "SELECT 문은 FROM → WHERE → GROUP BY → HAVING → SELECT → ORDER BY 순서로 처리되고, 별칭은 SELECT 단계에서 생긴다. 그래서 SELECT 보다 먼저 처리되는 WHERE(㉠)·GROUP BY(㉢)·HAVING(㉣)에서는 별칭 연봉 을 알 수 없어 오류가 나고, SELECT 뒤에 처리되는 ORDER BY(㉡)에서만 쓸 수 있다. 정답은 ④번이다. 별칭 대신 급여 * 12 를 그대로 쓰면 WHERE 에서도 쓸 수 있다. ①·②·③ 은 SELECT 보다 먼저 처리되는 절에서도 별칭을 쓸 수 있다고 본 것이다(PostgreSQL 은 GROUP BY 의 별칭을 허용해 결과가 다르다).",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT 부서, 급여 * 12 AS 연봉\nFROM   사원\n-- ㉠ WHERE  연봉 > 3000\n-- ㉡ ORDER BY 연봉 DESC\n-- ㉢ GROUP BY 부서, 연봉\n-- ㉣ HAVING 연봉 > 0"
+      }
+    ]
   },
   {
     "id": 10612,
@@ -1290,16 +1296,44 @@ export const ROUND_48: QuizQuestion[] = [
     "round": 48,
     "subject": "2과목",
     "number": 33,
-    "title": "ROLLUP 결과에서 데이터 자체의 NULL 과 구분하여, 소계·총계 행에만 '합계' 가 출력되도록 하는 처리로 가장 적절한 것은?",
+    "title": "아래 판매 테이블에 SQL 을 실행한 결과로 옳은 것은? (지역 NULL 은 '지역을 모르는 판매')",
     "options": [
-      "CASE WHEN GROUPING(컬럼) = 1 THEN '합계' ELSE 컬럼 END",
-      "NVL(컬럼, '합계')",
-      "COALESCE(컬럼, 0)",
-      "NULLIF(컬럼, '합계')"
+      "부산 7, 서울 10, 미상 5, 합계 22",
+      "부산 7, 서울 10, 합계 5, 합계 22",
+      "부산 7, 서울 10, 미상 5, 미상 22",
+      "부산 7, 서울 10, 합계 22"
     ],
     "correctIndex": 0,
-    "explanation": "ROLLUP·CUBE 의 소계·총계 행에서는 그룹 기준 컬럼이 NULL 로 표시되는데, 이 NULL 은 데이터의 NULL 이 아니라 '소계 행' 이라는 표식이다. GROUPING(컬럼) 은 그 컬럼이 소계·총계로 집계된 행이면 1, 일반 행이면 0 을 반환하므로 CASE WHEN GROUPING(컬럼) = 1 THEN '합계' ELSE 컬럼 END 로 소계 행에만 '합계' 를 출력할 수 있다(①). ② NVL 은 원래 데이터가 NULL 인 행까지 '합계' 로 바꿔 구분하지 못하고, ③ 은 NULL 을 0 으로 바꾸며, ④ NULLIF 는 값이 '합계' 와 같을 때 NULL 을 반환하는 함수라 의도와 반대다.",
-    "_source": "authored"
+    "explanation": "ROLLUP(지역) 은 지역별 행과 전체 합계 행을 만든다. 전체 합계 행의 지역도 NULL 로 나오기 때문에, 원래 데이터의 NULL 과 구분하려면 GROUPING 을 써야 한다. GROUPING(지역) 은 집계로 생긴 행에서만 1 이다. 그래서 원래 NULL 인 5 원 행은 GROUPING 이 0 이라 NVL 로 '미상', 합계 행만 '합계' 가 된다. 정렬은 GROUPING 이 0 인 행이 먼저, 그 안에서 지역 오름차순(NULL 은 맨 뒤)이다. 정답은 ①번이다. ② 는 GROUPING 대신 NVL(지역, '합계') 처럼 처리해 원래 NULL 도 '합계' 가 된 경우, ③ 은 합계 행도 NVL 로 처리한 경우, ④ 는 NULL 지역 행이 사라진다고 본 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "caption": "판매",
+        "headers": [
+          "지역",
+          "금액"
+        ],
+        "rows": [
+          [
+            "서울",
+            "10"
+          ],
+          [
+            "NULL",
+            "5"
+          ],
+          [
+            "부산",
+            "7"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT CASE WHEN GROUPING(지역) = 1\n            THEN '합계'\n            ELSE NVL(지역, '미상')\n       END       AS 구분,\n       SUM(금액) AS 합\nFROM   판매\nGROUP  BY ROLLUP(지역)\nORDER  BY GROUPING(지역), 지역;"
+      }
+    ]
   },
   {
     "id": 10633,

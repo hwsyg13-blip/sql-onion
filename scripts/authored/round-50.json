@@ -687,15 +687,21 @@
     {
       "subject": "2과목",
       "number": 21,
-      "title": "ALTER 문으로 컬럼의 형식을 변경하는 SQL 로 옳은 것은?",
+      "title": "NAME VARCHAR2(10) 칼럼에 최대 8글자 값과 NULL 이 함께 들어 있다. 아래 ㉠~㉣ 을 각각 실행한 결과로 옳은 것은? (Oracle 기준)",
       "options": [
-        "ALTER TABLE TEAM MODIFY 컬럼명 VARCHAR2(10) DEFAULT '2023-09-09' NOT NULL;",
-        "ALTER TABLE TEAM CHANGE 컬럼명 VARCHAR2(10);",
-        "ALTER COLUMN TEAM.컬럼명 TYPE VARCHAR2(10);",
-        "UPDATE TABLE TEAM MODIFY 컬럼명 VARCHAR2(10);"
+        "성공, 오류, 오류, 성공",
+        "성공, 성공, 오류, 성공",
+        "성공, 오류, 성공, 성공",
+        "성공, 오류, 오류, 오류"
       ],
       "correctIndex": 0,
-      "explanation": "Oracle 에서 컬럼 형식 변경은 ALTER TABLE ... MODIFY 구문을 사용하며 DEFAULT·NOT NULL 도 함께 지정할 수 있다. ② CHANGE 는 MySQL 문법, ③ ALTER COLUMN … TYPE 은 PostgreSQL 식 문법이며, ④ UPDATE 는 데이터를 고치는 DML 이다."
+      "explanation": "MODIFY 로 칼럼 길이를 늘리는 것(㉠)은 언제나 된다. 줄이는 것(㉡)은 이미 들어 있는 값이 새 길이에 맞을 때만 되는데, 8글자 값이 있어 5 로 줄일 수 없다. NOT NULL 을 추가하는 것(㉢)도 이미 NULL 인 행이 있어 오류다. DEFAULT 는 앞으로 들어올 행에만 적용되므로 기존 NULL 이 있어도 바로 바꿀 수 있다(㉣). 정답은 ①번이다. ② 는 길이를 줄여도 데이터를 잘라 준다고 본 것, ③ 은 NULL 이 있어도 NOT NULL 을 걸 수 있다고 본 것, ④ 는 DEFAULT 가 기존 행까지 바꿔야 해서 실패한다고 본 것이다.",
+      "references": [
+        {
+          "type": "sql",
+          "code": "-- ㉠\nALTER TABLE T\n  MODIFY (NAME VARCHAR2(20));\n-- ㉡\nALTER TABLE T\n  MODIFY (NAME VARCHAR2(5));\n-- ㉢\nALTER TABLE T\n  MODIFY (NAME NOT NULL);\n-- ㉣\nALTER TABLE T\n  MODIFY (NAME DEFAULT 'X');"
+        }
+      ]
     },
     {
       "subject": "2과목",
@@ -1131,15 +1137,21 @@
     {
       "subject": "2과목",
       "number": 36,
-      "title": "사원이 없는 부서까지 포함하여 조회하는 조인 방식은?",
+      "title": "부서 테이블에 D1, D2, D3 이 있고, 사원은 D1 에 2명(급여 100, 300), D2 에 1명(급여 200) 있다. 아래 SQL ㉠, ㉡, ㉢ 의 결과 행 수로 옳은 것은?",
       "options": [
-        "INNER JOIN",
-        "LEFT OUTER JOIN (부서 기준)",
-        "RIGHT OUTER JOIN (사원 기준)",
-        "CROSS JOIN"
+        "4, 2, 2",
+        "4, 3, 2",
+        "3, 3, 2",
+        "4, 3, 3"
       ],
       "correctIndex": 1,
-      "explanation": "사원이 없는 부서까지 나오려면 부서 테이블의 모든 행을 보존해야 한다. 부서를 왼쪽에 두고 LEFT OUTER JOIN 으로 사원을 붙이면 된다(②). ① INNER JOIN 은 사원이 없는 부서가 빠지고, 사원을 보존하는 조인(③)은 반대로 부서가 없는 사원을 남기며, ④ CROSS JOIN 은 조건 없는 카티션 곱이다."
+      "explanation": "㉠ 은 D1 이 사원 2명과, D2 가 1명과 이어지고, 사원이 없는 D3 도 NULL 로 남아 4행이다. ㉡ 처럼 조건을 ON 에 두면 조인할 사원만 고를 뿐 부서는 모두 남는다. D1 은 300 인 사원 하나, D2 는 200 인 사원, D3 은 NULL 로 3행이다. ㉢ 처럼 WHERE 에 두면 조인을 마친 뒤 거르므로, 급여가 NULL 인 D3 행과 100 인 행이 빠져 2행이 되고 외부 조인의 의미가 사라진다. 정답은 ②번이다. ① 은 ON 조건도 부서를 거른다고 본 것, ③ 은 ㉠ 에서 D1 이 한 행만 나온다고 본 것, ④ 는 WHERE 조건도 D3 을 남긴다고 본 것이다.",
+      "references": [
+        {
+          "type": "sql",
+          "code": "-- ㉠\nSELECT * FROM 부서 D\nLEFT JOIN 사원 E\n  ON D.부서 = E.부서;\n-- ㉡\nSELECT * FROM 부서 D\nLEFT JOIN 사원 E\n  ON D.부서 = E.부서\n AND E.급여 >= 200;\n-- ㉢\nSELECT * FROM 부서 D\nLEFT JOIN 사원 E\n  ON D.부서 = E.부서\nWHERE E.급여 >= 200;"
+        }
+      ]
     },
     {
       "subject": "2과목",
