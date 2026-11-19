@@ -886,15 +886,15 @@
     {
       "subject": "2과목",
       "number": 29,
-      "title": "권한(ROLE) 에 대한 설명으로 옳은 것은?",
+      "title": "사원 100명에게 같은 권한 5개를 줘야 하고, 나중에 권한 1개를 더 줄 예정이다. ROLE 에 대한 설명으로 옳은 것은? (Oracle 기준)",
       "options": [
-        "CREATE 로 권한을 부여하고 DROP 으로 회수한다.",
-        "INSERT 로 권한을 부여하고 DELETE 로 회수한다.",
-        "GRANT 로 권한을 부여하고 REVOKE 로 회수한다.",
-        "COMMIT 으로 권한을 부여하고 ROLLBACK 으로 회수한다."
+        "사용자마다 권한 5개를 따로 GRANT 해 두어야 나중에 권한을 추가하기도 쉽다.",
+        "ROLE 은 CREATE 로 권한을 부여하고 DROP 으로 권한을 회수한다.",
+        "CREATE ROLE 로 롤을 만들어 권한을 담고 사용자에게 롤을 GRANT 하면, 나중에 롤에 권한을 추가할 때 100명 모두 바로 쓸 수 있다.",
+        "ROLE 에는 객체 권한만 담을 수 있고 시스템 권한은 담을 수 없다."
       ],
       "correctIndex": 2,
-      "explanation": "권한은 GRANT 로 부여하고 REVOKE 로 회수한다. ROLE 은 권한의 묶음이며 동일하게 GRANT·REVOKE 로 관리한다. ① CREATE·DROP 은 DDL, ② INSERT·DELETE 는 DML, ④ COMMIT·ROLLBACK 은 TCL 이다."
+      "explanation": "ROLE 은 여러 권한을 묶어 이름을 붙인 것이다. CREATE ROLE R 로 만들고, GRANT 권한 TO R 로 권한을 담은 뒤, GRANT R TO 사용자 로 나눠 준다. 롤에 권한을 추가하거나 회수하면 롤을 받은 모든 사용자에게 곧바로 반영되므로 관리가 쉬워진다. 정답은 ③번이다. ① 은 사용자 100명에게 매번 따로 GRANT 해야 하는 비효율이고, ② 의 권한 부여·회수는 CREATE·DROP 이 아니라 GRANT·REVOKE 다. ④ 는 틀렸다. ROLE 에는 CREATE SESSION 같은 시스템 권한도 담을 수 있다(CONNECT, RESOURCE 가 대표적인 롤이다)."
     },
     {
       "subject": "2과목",
@@ -1479,15 +1479,55 @@
     {
       "subject": "2과목",
       "number": 45,
-      "title": "행의 중복을 제거하는 SELECT 키워드는?",
+      "title": "아래 사원 테이블에 대한 ㉠, ㉡, ㉢ 의 결과(행 수 또는 값)로 옳은 것은?",
       "options": [
-        "DISTINCT",
-        "UNIQUE",
-        "LIMIT",
-        "TOP"
+        "4, 2, 3",
+        "4, 3, 3",
+        "6, 2, 3",
+        "4, 2, 2"
       ],
       "correctIndex": 0,
-      "explanation": "SELECT 절에서 행의 중복을 제거하는 표준 키워드는 DISTINCT 이다. ② UNIQUE 는 일부 DBMS 의 동의어이며 표준 정답은 DISTINCT 이다. ③ LIMIT(MySQL)·④ TOP(SQL Server) 은 행 수를 자르는 키워드다."
+      "explanation": "DISTINCT 는 SELECT 목록 전체가 같은 행을 하나로 합친다. ㉠ 은 (A, 사원), (A, 대리), (B, 사원), (NULL, 사원) 의 4행이다. DISTINCT 는 NULL 도 하나의 값으로 모아 ㉢ 은 A, B, NULL 의 3행이다. 반면 COUNT 같은 집계 함수는 NULL 을 세지 않아 ㉡ 은 A, B 의 2 다. 정답은 ①번이다. ② 는 COUNT(DISTINCT) 가 NULL 도 센다고 본 것, ③ 은 DISTINCT 가 칼럼 하나에만 적용된다고 본 것, ④ 는 DISTINCT 가 NULL 을 버린다고 본 것이다.",
+      "references": [
+        {
+          "type": "table",
+          "caption": "사원",
+          "headers": [
+            "부서",
+            "직급"
+          ],
+          "rows": [
+            [
+              "A",
+              "사원"
+            ],
+            [
+              "A",
+              "사원"
+            ],
+            [
+              "A",
+              "대리"
+            ],
+            [
+              "B",
+              "사원"
+            ],
+            [
+              "NULL",
+              "사원"
+            ],
+            [
+              "NULL",
+              "사원"
+            ]
+          ]
+        },
+        {
+          "type": "sql",
+          "code": "-- ㉠ 결과 행 수\nSELECT DISTINCT 부서, 직급 FROM 사원;\n-- ㉡ 결과 값\nSELECT COUNT(DISTINCT 부서) FROM 사원;\n-- ㉢ 결과 행 수\nSELECT DISTINCT 부서 FROM 사원;"
+        }
+      ]
     },
     {
       "subject": "2과목",

@@ -297,15 +297,47 @@
     {
       "subject": "2과목",
       "number": 13,
-      "title": "Oracle ORDER BY 절에서 NULL 값이 가장 마지막에 출력되도록 하는 옵션은?",
+      "title": "아래 사원 테이블에 SQL 을 실행했을 때 출력되는 급여의 순서로 옳은 것은?",
       "options": [
-        "NVL(COL, 0) 으로 치환하여 정렬",
-        "NULLIF 로 치환하여 정렬",
-        "NULLS LAST 옵션을 사용",
-        "COALESCE 로 치환하여 정렬"
+        "NULL, 300, 200, 100",
+        "100, NULL, 300, 200",
+        "100, 300, NULL, 200",
+        "300, NULL, 200, 100"
       ],
       "correctIndex": 2,
-      "explanation": "Oracle 에서 ORDER BY 절에 NULLS LAST 를 명시하면 NULL 이 정렬 결과의 가장 마지막에 위치한다. ① NVL·② NULLIF·④ COALESCE 는 값을 치환하는 방식이라 정렬 의미가 달라질 수 있다."
+      "explanation": "NULLS FIRST·NULLS LAST 는 정렬 기준마다 따로 붙여 NULL 의 위치를 정한다. 먼저 부서 오름차순에 NULLS FIRST 라 부서가 NULL 인 행(급여 100)이 맨 앞, 그다음 A, B 순서다. A 안에서는 급여 내림차순인데 NULLS LAST 라 300 다음에 NULL 이 온다. 그래서 100, 300, NULL, 200 이다. 정답은 ③번이다. ① 은 급여만으로 정렬한 것, ② 는 NULLS LAST 를 놓쳐 내림차순에서 NULL 을 앞에 둔 것, ④ 는 부서의 NULLS FIRST 를 놓친 것이다.",
+      "references": [
+        {
+          "type": "table",
+          "caption": "사원",
+          "headers": [
+            "부서",
+            "급여"
+          ],
+          "rows": [
+            [
+              "A",
+              "NULL"
+            ],
+            [
+              "A",
+              "300"
+            ],
+            [
+              "B",
+              "200"
+            ],
+            [
+              "NULL",
+              "100"
+            ]
+          ]
+        },
+        {
+          "type": "sql",
+          "code": "SELECT 부서, 급여\nFROM   사원\nORDER  BY 부서 NULLS FIRST,\n          급여 DESC NULLS LAST;"
+        }
+      ]
     },
     {
       "subject": "2과목",
@@ -400,19 +432,41 @@
     {
       "subject": "2과목",
       "number": 17,
-      "title": "아래 데이터에 대해 나눗셈 연산 시 0 나누기 오류를 피하기 위해 사용되는 함수는?",
+      "title": "아래 판매 테이블에 대한 ㉠, ㉡, ㉢ 의 결과로 옳은 것은? ('㉠ / ㉡ 의 세 값 / ㉢' 순서)",
       "options": [
-        "NVL",
-        "NULLIF",
-        "COALESCE",
-        "DECODE"
+        "오류 / 25, 0, NULL / 8.33",
+        "오류 / 25, NULL, NULL / 25",
+        "25, 0, NULL / 25, NULL, NULL / 12.5",
+        "오류 / 25, NULL, NULL / 8.33"
       ],
       "correctIndex": 1,
-      "explanation": "NULLIF(COL2, 0) 은 COL2 가 0 이면 NULL, 아니면 COL2 를 반환한다. 숫자를 NULL 로 나누면 오류 대신 NULL 이 되므로 0 나누기 오류를 피할 수 있다(②). NVL(COL2, 0)(①)과 COALESCE(③)는 NULL 을 0 으로 바꿔 오히려 0 으로 나누게 되고, DECODE(④)는 인수가 최소 3개 필요해 DECODE(COL2, 0) 형태로는 오류가 난다.",
+      "explanation": "㉠ 은 둘째 행에서 50 / 0 을 계산하다 0 으로 나누기 오류가 나 전체 SQL 이 실패한다. ㉡ 의 NULLIF(수량, 0) 은 수량이 0 이면 NULL 을 돌려준다. 숫자를 NULL 로 나누면 오류 없이 NULL 이 되므로 결과는 25, NULL, NULL 이다(수량이 원래 NULL 인 셋째 행도 NULL). ㉢ 의 AVG 는 NULL 을 빼고 계산하므로 25 하나의 평균인 25 다. 정답은 ②번이다. ①·④ 는 NULL 로 나눈 결과를 0 으로 보거나 NULL 행까지 개수에 넣은 것, ③ 은 0 으로 나누면 0 이 나온다고 본 것이다.",
       "references": [
         {
+          "type": "table",
+          "caption": "판매",
+          "headers": [
+            "금액",
+            "수량"
+          ],
+          "rows": [
+            [
+              "100",
+              "4"
+            ],
+            [
+              "50",
+              "0"
+            ],
+            [
+              "30",
+              "NULL"
+            ]
+          ]
+        },
+        {
           "type": "sql",
-          "code": "SELECT COL1 / ( ? )(COL2, 0) FROM T;"
+          "code": "-- ㉠\nSELECT 금액 / 수량 FROM 판매;\n-- ㉡\nSELECT 금액 / NULLIF(수량, 0)\nFROM   판매;\n-- ㉢\nSELECT AVG(금액 / NULLIF(수량, 0))\nFROM   판매;"
         }
       ]
     },

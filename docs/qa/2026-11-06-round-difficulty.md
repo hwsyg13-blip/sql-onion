@@ -708,3 +708,14 @@
 | 49-2-32 | 제약 추가 시 기존 데이터 검사(PK·UNIQUE·복합 PK NULL) | 옳지 않은 설명 → ALTER 4개 결과 | 오류, 오류, 성공, 오류 | PostgreSQL 동일 |
 | 50-2-19 | NATURAL·USING·ON 결과 칼럼 수 | 옳지 않은 설명 → SELECT * 칼럼 수 | 3, 4, 5 | PostgreSQL \gdesc 로 확인 |
 | 50-2-23 | SAVEPOINT·COMMIT·ROLLBACK 흐름 | 분류 고르기 → 남는 행 수 | 2 | PostgreSQL 동일 |
+
+## 순환 8바퀴 — 51~53회
+
+| 문항 | 개념 | 바뀐 점 | 정답 | 검증 |
+|---|---|---|---|---|
+| 51-2-17 | 0 나누기 회피 NULLIF·NULL 나눗셈·AVG | 함수 이름 → 세 SQL 결과 | 오류 / 25, NULL, NULL / 25 | PostgreSQL 동일 |
+| 51-2-13 | 정렬 기준별 NULLS FIRST·LAST | 옵션 이름 → 두 기준 정렬 결과 | 100, 300, NULL, 200 | PostgreSQL 동일 |
+| 52-2-29 | ROLE 생성·부여·권한 추가 반영 | 문법 고르기 → 100명 권한 관리 사례 | ③ | 정의로 판정 |
+| 52-2-45 | 다중 칼럼 DISTINCT·DISTINCT 와 NULL·COUNT(DISTINCT) | 키워드 이름 → 세 SQL 결과 | 4, 2, 3 | PostgreSQL 동일 |
+| 53-2-22 | DELETE·TRUNCATE·DROP 특징(UNDO·트리거·공간·정의) | 옳지 않은 설명 → 특징 3개에 명령 | DELETE, TRUNCATE, DROP | 정의로 판정 |
+| 53-2-15 | Oracle 의 '' = NULL·SUBSTR 범위 밖·DECODE 기본값 없음 | NULL 아닌 것 고르기 → 식 5개 중 NULL | ㉠, ㉡, ㉣ | Oracle 규칙(PostgreSQL 은 '' ≠ NULL, 해설에 적음) |

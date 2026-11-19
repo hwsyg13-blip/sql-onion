@@ -382,16 +382,22 @@ export const ROUND_53: QuizQuestion[] = [
     "round": 53,
     "subject": "2과목",
     "number": 15,
-    "title": "아래 함수 중 NULL 을 반환하지 않는 것은?",
+    "title": "아래 식 ㉠~㉤ 중 Oracle 에서 NULL 을 반환하는 것만 모두 고른 것은?",
     "options": [
-      "NVL(NULL, NULL)",
-      "NULLIF('A', 'A')",
-      "COALESCE('AB', 'CD')",
-      "CASE WHEN 1=2 THEN 'Y' END"
+      "㉣",
+      "㉠, ㉣",
+      "㉠, ㉡, ㉣",
+      "㉠, ㉡, ㉢, ㉣"
     ],
     "correctIndex": 2,
-    "explanation": "COALESCE('AB', 'CD') 는 처음 NULL 이 아닌 값 'AB' 를 반환한다(③). NVL(NULL, NULL)(①)은 대체값도 NULL 이라 NULL, NULLIF('A', 'A')(②)는 두 값이 같아 NULL, ELSE 없는 CASE(④)는 조건 1 = 2 가 거짓이라 NULL 을 반환한다.",
-    "_source": "authored"
+    "explanation": "㉠ 은 시작 위치 5 가 문자열 길이 3 을 넘어 잘라 낼 글자가 없으므로, Oracle 에서는 빈 문자열이 곧 NULL 이라 NULL 이다. ㉡ 도 Oracle 이 '' 를 NULL 로 다루므로 LENGTH(NULL) = NULL 이다. ㉢ 의 CONCAT 은 NULL 을 빈 문자열처럼 이어 붙여 'A' 다. ㉣ 의 DECODE 는 맞는 값이 없고 기본값도 주지 않아 NULL 이다. ㉤ 의 INSTR 은 찾는 글자가 없으면 0 을 돌려준다. 정답은 ③번이다. ① 과 ② 는 Oracle 에서 빈 문자열이 NULL 이라는 점을 놓친 것, ④ 는 CONCAT 도 NULL 을 돌려준다고 본 것이다. PostgreSQL 은 '' 와 NULL 을 구분해 ㉠·㉡ 결과가 다르다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "-- ㉠\nSUBSTR('ABC', 5)\n-- ㉡\nLENGTH('')\n-- ㉢\nCONCAT('A', NULL)\n-- ㉣\nDECODE('X', 'Y', 1)\n-- ㉤\nINSTR('ABC', 'Z')"
+      }
+    ]
   },
   {
     "id": 10365,
@@ -694,16 +700,22 @@ export const ROUND_53: QuizQuestion[] = [
     "round": 53,
     "subject": "2과목",
     "number": 22,
-    "title": "DELETE·TRUNCATE·DROP 비교에 대한 설명 중 옳지 않은 것은?",
+    "title": "아래 특징 ㉠, ㉡, ㉢ 에 해당하는 명령을 순서대로 고른 것은? (Oracle 기준)",
     "options": [
-      "특정 테이블에 WHERE 조건 없이 DELETE 를 수행하면 DROP TABLE 과 동일한 결과를 얻는다.",
-      "DROP 은 테이블 정의를 삭제하고 TRUNCATE 는 테이블을 초기 상태로 만든다.",
-      "TRUNCATE 는 UNDO 데이터를 생성하지 않아 대량 삭제 시 DELETE 보다 빠르다.",
-      "DROP 과 TRUNCATE 는 Auto Commit 이고 DELETE 는 사용자 COMMIT 이 필요하다."
+      "DELETE, TRUNCATE, DROP",
+      "TRUNCATE, DELETE, DROP",
+      "DELETE, DROP, TRUNCATE",
+      "DROP, TRUNCATE, DELETE"
     ],
     "correctIndex": 0,
-    "explanation": "DROP 은 테이블 정의까지 삭제하고 TRUNCATE 는 테이블을 처음 상태로 만들며(②), TRUNCATE 는 UNDO 를 거의 만들지 않아 대량 삭제 시 빠르고(③), DROP·TRUNCATE 는 DDL 이라 자동 커밋되지만 DELETE 는 COMMIT 이 필요하다(④). WHERE 없는 DELETE 는 모든 행을 지울 뿐 테이블 구조는 남으므로 DROP TABLE 과 결과가 같다는 ① 이 옳지 않다.",
-    "_source": "authored"
+    "explanation": "DELETE 는 DML 이라 조건으로 일부 행만 지울 수 있고, 행마다 되돌릴 정보(UNDO)를 남겨 ROLLBACK 할 수 있으며 DELETE 트리거도 실행된다(㉠). TRUNCATE 는 DDL 이라 조건 없이 모든 행을 지우고 저장 공간을 반환하며 자동 COMMIT 되지만, 테이블 정의는 그대로 둔다(㉡). DROP 은 테이블 정의까지 지운다(㉢). 정답은 ①번이다. ② 는 DELETE 와 TRUNCATE 를, ③ 은 TRUNCATE 와 DROP 을 바꿔 본 것이고, ④ 는 셋을 모두 엇갈리게 본 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "text",
+        "content": "㉠ WHERE 로 일부 행만 지울 수 있고, 행마다 DELETE 트리거가 실행되며, COMMIT 전에는 ROLLBACK 할 수 있다.\n㉡ 모든 행을 빠르게 지우고 저장 공간을 처음 크기로 되돌리지만, 테이블 구조는 남는다. 자동 COMMIT 된다.\n㉢ 데이터와 함께 테이블 정의까지 없애, 이후 그 테이블을 조회하면 오류가 난다."
+      }
+    ]
   },
   {
     "id": 10372,
