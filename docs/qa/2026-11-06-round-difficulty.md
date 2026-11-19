@@ -357,3 +357,12 @@
 | 48-2-37 | LTRIM·RTRIM 문자 집합·TRIM | 함수 이름 → LTRIM/RTRIM('xy')/TRIM(FROM)/LENGTH(TRIM) 결과 | SQLxx, xySQL, SQL, 5 | PostgreSQL 동일 |
 | 49-2-15 | NULLIF·COALESCE·NVL2 + 집계 | 역할 짝짓기 → NULL 섞인 표에서 COUNT(NULLIF)·SUM(COALESCE)·SUM(NVL2) | 1, 60, 29 | PostgreSQL(NVL2 는 CASE) 1·60·29 |
 | 49-2-20 | ROLLUP 칼럼 순서와 소계 | GROUP BY 고르기 → ROLLUP(회원, 상품) vs ROLLUP(상품, 회원) 행 수 | 8, 7 | PostgreSQL 8·7 (CUBE 10 은 오답) |
+
+## 순환 3바퀴 — 50회 (11-19 14시 실행)
+
+| 문항 | 개념 | 바뀐 점 | 정답 | 검증·처리 |
+|---|---|---|---|---|
+| 50-2-26 | 테이블명 규칙(숫자 시작·하이픈·예약어·큰따옴표·$) | 이름 4개 중 올바른 것 → CREATE TABLE 5개 중 오류 나는 것 모두 | ㉠, ㉡, ㉢ | PostgreSQL 같은 3개 오류("SELECT"·EXAM_2026$ 생성) |
+| 50-2-31 | 계층형 역방향 전개와 LEVEL | 설명 고르기 → 대리에서 위로 올라가는 CONNECT BY 의 사장 LEVEL·행 수 | 4, 4 | PostgreSQL 재귀 CTE |
+
+부수 수정: 회차 분석 페이지의 'SQL 결과 계산 비율' 문장이 48·49·50회가 같은 숫자(44%)가 되면서 3페이지에 똑같이 반복 → 문장 앞에 '제N회는' 을 붙여 회차마다 달라지게(build-static-pages).

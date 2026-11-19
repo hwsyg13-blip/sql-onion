@@ -716,15 +716,21 @@
     {
       "subject": "2과목",
       "number": 26,
-      "title": "아래 테이블명 중 올바른 것은?",
+      "title": "아래 CREATE TABLE 문 ㉠~㉤ 을 각각 실행할 때 오류가 발생하는 것만 모두 고른 것은? (Oracle 기준)",
       "options": [
-        "2023_TBL",
-        "2023-TBL",
-        "TBL-2023",
-        "TBL_2023#"
+        "㉠, ㉡",
+        "㉠, ㉡, ㉣",
+        "㉡, ㉢, ㉤",
+        "㉠, ㉡, ㉢"
       ],
       "correctIndex": 3,
-      "explanation": "Oracle 테이블명은 문자로 시작해야 하고, 문자·숫자와 특수문자 _, $, # 만 쓸 수 있다. ④ TBL_2023# 은 문자로 시작하고 허용된 _ 와 # 만 써서 올바르다. ①② 는 숫자로 시작하고, ②③ 의 하이픈(-)은 허용되지 않는 문자다."
+      "explanation": "따옴표 없는 테이블명은 문자로 시작해야 하고, 문자·숫자와 _, $, # 만 쓸 수 있으며, 예약어는 쓸 수 없다. ㉠ 은 숫자로 시작해 오류, ㉡ 은 하이픈(-)이 있어 오류, ㉢ 은 예약어 SELECT 라 오류다. ㉣ 처럼 큰따옴표로 감싸면 예약어도 이름으로 쓸 수 있고(대신 쓸 때마다 \"SELECT\" 로 적어야 한다), ㉤ 은 허용된 _ 와 $ 만 써서 만들어진다. 정답은 ④번이다. ① 은 예약어도 테이블명이 된다고 본 것, ② 는 큰따옴표 이름을 오류로 보고 따옴표 없는 SELECT 는 된다고 본 것, ③ 은 숫자로 시작해도 되고 $ 는 안 된다고 본 것이다.",
+      "references": [
+        {
+          "type": "sql",
+          "code": "-- ㉠\nCREATE TABLE 2026_EXAM (C NUMBER);\n-- ㉡\nCREATE TABLE EXAM-2026 (C NUMBER);\n-- ㉢\nCREATE TABLE SELECT (C NUMBER);\n-- ㉣\nCREATE TABLE \"SELECT\" (C NUMBER);\n-- ㉤\nCREATE TABLE EXAM_2026$ (C NUMBER);"
+        }
+      ]
     },
     {
       "subject": "2과목",
@@ -872,15 +878,57 @@
     {
       "subject": "2과목",
       "number": 31,
-      "title": "계층형 질의 관련 설명 중 옳지 않은 것은?",
+      "title": "아래 조직 테이블에 대한 계층형 SQL 에서, 사장 행의 LEVEL 과 결과 행 수로 옳은 것은?",
       "options": [
-        "LEAF 노드의 LEVEL 은 항상 1이다.",
-        "CONNECT_BY_ISLEAF 는 리프 노드이면 1을 반환한다.",
-        "ORDER SIBLINGS BY 는 동일 레벨 내에서 정렬을 수행한다.",
-        "NOCYCLE 옵션은 사이클 발생 시 전개를 중단한다."
+        "4, 4",
+        "1, 4",
+        "4, 5",
+        "1, 1"
       ],
       "correctIndex": 0,
-      "explanation": "CONNECT_BY_ISLEAF 는 리프 노드면 1, 아니면 0 을 반환하고(②), ORDER SIBLINGS BY 는 같은 부모를 가진 형제 노드끼리 정렬하며(③), NOCYCLE 은 순환이 생기면 그 지점에서 더 전개하지 않고 오류 없이 진행한다(④). LEVEL 은 루트가 1 이고 아래로 내려갈수록 1씩 커지므로 리프 노드의 LEVEL 이 항상 1 이라는 ① 이 옳지 않다."
+      "explanation": "CONNECT BY PRIOR 상위ID = ID 는 '방금 읽은 행의 상위ID 와 같은 ID 를 가진 행' 을 다음으로 읽으라는 뜻이라, 아래에서 위로 올라가는 역방향 전개다. 대리(LEVEL 1)에서 시작해 과장(2), 부장(3), 사장(4) 순으로 올라가고, 사장의 상위ID 가 NULL 이라 멈춘다. LEVEL 은 시작한 행이 1 이므로 사장은 4, 결과는 4행이다. 정답은 ①번이다. ② 는 최상위 행은 언제나 LEVEL 1 이라고 본 것, ③ 은 부장의 다른 부하인 차장까지 펼쳐진다고 본 것, ④ 는 대리 밑으로 내려가는 순방향으로 읽어 대리만 남는다고 본 것이다.",
+      "references": [
+        {
+          "type": "table",
+          "caption": "조직",
+          "headers": [
+            "ID",
+            "상위ID",
+            "이름"
+          ],
+          "rows": [
+            [
+              "1",
+              "NULL",
+              "사장"
+            ],
+            [
+              "2",
+              "1",
+              "부장"
+            ],
+            [
+              "3",
+              "2",
+              "과장"
+            ],
+            [
+              "4",
+              "3",
+              "대리"
+            ],
+            [
+              "5",
+              "2",
+              "차장"
+            ]
+          ]
+        },
+        {
+          "type": "sql",
+          "code": "SELECT LEVEL, 이름\nFROM   조직\nSTART  WITH 이름 = '대리'\nCONNECT BY PRIOR 상위ID = ID;"
+        }
+      ]
     },
     {
       "subject": "2과목",

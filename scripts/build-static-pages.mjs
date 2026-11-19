@@ -287,7 +287,7 @@ function trendHtml(r, idx) {
   const sqlShare = s.types['SQL 결과 계산'] / s.n, avgSql = avg.types['SQL 결과 계산'] / 50;
   // 같은 문장이 여러 회차 페이지에 그대로 반복되지 않도록 회차마다 표현을 바꾼다(check-content-tone 반복 문장 검사)
   const sqlLead = ['SQL 결과를 직접 계산하는 문제가', '표를 보고 SQL 실행 결과를 구하는 문제가', '실행 결과를 손으로 따라가야 하는 SQL 문제가'][r.round % 3];
-  if (Math.abs(sqlShare - avgSql) >= 0.06) notes.push(`${sqlLead} ${pct(s.types['SQL 결과 계산'], s.n)}로 평균(${Math.round(avgSql * 100)}%)보다 ${sqlShare > avgSql ? '많다' : '적다'}.`);
+  if (Math.abs(sqlShare - avgSql) >= 0.06) notes.push(`제${r.round}회는 ${sqlLead} ${pct(s.types['SQL 결과 계산'], s.n)}로 평균(${Math.round(avgSql * 100)}%)보다 ${sqlShare > avgSql ? '많다' : '적다'}.`);
   if (s.types['오류 찾기'] >= 3) notes.push(`"오류가 나는 SQL 고르기" 가 ${s.types['오류 찾기']}문항 — 문법 규칙(별칭 위치, GROUP BY 컬럼, 집합 연산 컬럼 수 등)을 묻는 유형이 평소(${fmt1(avg.types['오류 찾기'])}문항)보다 많았다.`);
   // 같은 문장이 여러 회차 페이지에 그대로 반복되지 않도록 회차마다 표현을 바꾼다(check-content-tone 반복 문장 검사)
   const negMore = ['많았다. 맞는 보기 하나를 찾고 끝낼 수 없어 풀이 시간이 늘어나는 회차다', '많아 보기 하나하나를 판정해야 하는 시간이 길었다', '많았다 — 보기 네 개를 모두 따져 봐야 해서 시간 배분에 신경 써야 한다'][r.round % 3];
