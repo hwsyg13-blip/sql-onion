@@ -1076,15 +1076,21 @@
     {
       "subject": "2과목",
       "number": 31,
-      "title": "ROLLBACK에 대한 설명으로 적절하지 않은 것은?",
+      "title": "빈 테이블 T(C) 에 아래 SQL 을 순서대로 실행했을 때 마지막 SELECT 의 결과로 옳은 것은?",
       "options": [
-        "ROLLBACK은 트랜잭션 내에서 변경된 데이터를 이전 상태로 되돌린다.",
-        "COMMIT 이전의 DML 변경은 ROLLBACK으로 취소할 수 있다.",
-        "오라클에서 ROLLBACK이 수행되면 직전의 CREATE TABLE도 함께 취소된다.",
-        "SAVEPOINT를 사용하면 ROLLBACK의 되돌림 범위를 부분적으로 지정할 수 있다."
+        "1",
+        "1, 2, 3",
+        "1, 2",
+        "오류가 발생한다"
       ],
       "correctIndex": 2,
-      "explanation": "ROLLBACK 은 트랜잭션 안에서 변경한 데이터를 이전 상태로 되돌리며(①), COMMIT 전의 DML 은 취소할 수 있고(②), SAVEPOINT 로 되돌릴 지점을 정할 수 있다(④). Oracle 에서 CREATE TABLE 같은 DDL 은 실행 전후로 자동 커밋되므로 ROLLBACK 으로 취소되지 않는다. ③ 이 옳지 않다."
+      "explanation": "같은 이름으로 저장점을 다시 만들면 오류가 아니라 저장점이 새 위치로 옮겨진다. 그래서 ROLLBACK TO A 는 두 번째 SAVEPOINT A(2 를 넣은 뒤) 이후만 되돌려 3 만 취소되고, COMMIT 하면 1, 2 가 남는다. 정답은 ③번이다. ① 은 처음 만든 A 로 돌아간다고 본 것, ② 는 ROLLBACK TO 가 아무것도 되돌리지 않는다고 본 것, ④ 는 같은 이름의 저장점을 만들 수 없다고 본 것이다.",
+      "references": [
+        {
+          "type": "sql",
+          "code": "INSERT INTO T VALUES (1);\nSAVEPOINT A;\nINSERT INTO T VALUES (2);\nSAVEPOINT A;\nINSERT INTO T VALUES (3);\nROLLBACK TO A;\nCOMMIT;\nSELECT C FROM T ORDER BY C;"
+        }
+      ]
     },
     {
       "subject": "2과목",
@@ -1499,15 +1505,47 @@
     {
       "subject": "2과목",
       "number": 41,
-      "title": "계층형 쿼리 작성 시 일반적으로 사용하는 조인 방식은?",
+      "title": "아래 사원 테이블에 대한 셀프 조인 ㉠, ㉡ 의 결과 행 수로 옳은 것은?",
       "options": [
-        "INNER JOIN",
-        "OUTER JOIN",
-        "Self Join",
-        "NATURAL JOIN"
+        "6, 6",
+        "3, 3",
+        "3, 6",
+        "4, 8"
       ],
       "correctIndex": 2,
-      "explanation": "계층형 쿼리는 같은 테이블 안의 부모-자식 관계를 표현하므로 한 테이블을 두 번 참조해 자기 자신과 결합하는 셀프 조인 형태로 동작한다. 정답은 ③번이다. ① INNER·② OUTER·④ NATURAL JOIN 은 결과 범위나 조건 작성 방식에 따른 분류라, 자기 자신과 조인한다는 계층형 쿼리의 구조를 나타내지 않는다."
+      "explanation": "같은 테이블을 A, B 두 이름으로 불러 같은 부서끼리 짝을 짓는 셀프 조인이다. 10번 부서는 김·이·박 3명, 20번 부서는 최 1명이다. ㉡ 의 <> 는 자기 자신만 빼고 순서가 다른 짝을 모두 남겨 3 × 2 = 6행이다(김-이 와 이-김 이 따로). ㉠ 의 < 는 두 순서 중 하나만 남겨 6 / 2 = 3행이다. 최는 같은 부서에 다른 사람이 없어 어느 쪽에도 나오지 않는다. 정답은 ③번이다. ① 은 < 도 양쪽 순서를 다 남긴다고 본 것, ② 는 <> 도 한 순서만 남긴다고 본 것, ④ 는 자기 자신과의 짝까지 센 것이다.",
+      "references": [
+        {
+          "type": "table",
+          "caption": "사원",
+          "headers": [
+            "이름",
+            "부서"
+          ],
+          "rows": [
+            [
+              "김",
+              "10"
+            ],
+            [
+              "이",
+              "10"
+            ],
+            [
+              "박",
+              "10"
+            ],
+            [
+              "최",
+              "20"
+            ]
+          ]
+        },
+        {
+          "type": "sql",
+          "code": "-- ㉠\nSELECT A.이름, B.이름\nFROM   사원 A JOIN 사원 B\n       ON  A.부서 = B.부서\n       AND A.이름 < B.이름;\n-- ㉡\nSELECT A.이름, B.이름\nFROM   사원 A JOIN 사원 B\n       ON  A.부서 = B.부서\n       AND A.이름 <> B.이름;"
+        }
+      ]
     },
     {
       "subject": "2과목",

@@ -580,16 +580,63 @@ export const ROUND_45: QuizQuestion[] = [
     "round": 45,
     "subject": "2과목",
     "number": 19,
-    "title": "직급 인원이 9명 이상인 직급 중 나이가 가장 많은 직원의 이름을 조회하는 SQL로 올바른 것은?",
+    "title": "아래 EMP 테이블에 대한 SQL 의 결과(이름)로 옳은 것은?",
     "options": [
-      "SELECT 이름 FROM EMP WHERE COUNT(*) >= 9 GROUP BY 직급 ORDER BY 나이 DESC FETCH FIRST 1 ROWS ONLY;",
-      "SELECT 이름 FROM EMP GROUP BY 직급 HAVING COUNT(*) >= 9 ORDER BY 나이 DESC FETCH FIRST 1 ROWS ONLY;",
-      "SELECT 이름 FROM EMP WHERE 직급 IN (SELECT 직급 FROM EMP GROUP BY 직급 HAVING COUNT(*) >= 9) ORDER BY 나이 DESC FETCH FIRST 1 ROWS ONLY;",
-      "SELECT 이름 FROM EMP GROUP BY 직급 HAVING 나이 = MAX(나이) AND COUNT(*) >= 9 ORDER BY 나이 DESC FETCH FIRST 1 ROWS ONLY;"
+      "바",
+      "나",
+      "마",
+      "오류가 발생한다"
     ],
     "correctIndex": 2,
-    "explanation": "HAVING COUNT(*) >= 9 조건으로 9명 이상 직급을 먼저 추출하고, 해당 직급 직원 중 나이가 가장 많은 사람을 반환한다. 정답은 ③번이다. ① 은 WHERE 절에 집계 함수 COUNT(*) 를 써서 오류이고, ② 는 GROUP BY 직급 인데 그룹 컬럼이 아닌 이름·나이를 SELECT·ORDER BY 에 써서 오류이며, ④ 도 HAVING 에서 그룹 컬럼이 아닌 나이를 집계 없이 비교해 오류다.",
-    "_source": "authored"
+    "explanation": "서브쿼리는 직급별 인원을 세어 2명 이상인 직급만 돌려준다. 사원은 3명, 대리는 2명, 과장은 1명이라 사원·대리가 남는다. 바깥 쿼리는 이 두 직급의 사람(가·나·다·라·마)을 나이 내림차순으로 정렬해 첫 행만 가져오므로 40세인 마가 나온다. 정답은 ③번이다. ① 은 HAVING 조건을 놓치고 전체에서 가장 나이 많은 사람을 고른 것, ② 는 '2명 이상' 을 '2명 초과' 로 읽어 사원만 남긴 것, ④ 는 서브쿼리와 FETCH 를 함께 쓸 수 없다고 본 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "caption": "EMP",
+        "headers": [
+          "이름",
+          "직급",
+          "나이"
+        ],
+        "rows": [
+          [
+            "가",
+            "사원",
+            "25"
+          ],
+          [
+            "나",
+            "사원",
+            "31"
+          ],
+          [
+            "다",
+            "사원",
+            "28"
+          ],
+          [
+            "라",
+            "대리",
+            "35"
+          ],
+          [
+            "마",
+            "대리",
+            "40"
+          ],
+          [
+            "바",
+            "과장",
+            "50"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT 이름\nFROM   EMP\nWHERE  직급 IN (SELECT   직급\n               FROM     EMP\n               GROUP BY 직급\n               HAVING   COUNT(*) >= 2)\nORDER  BY 나이 DESC\nFETCH  FIRST 1 ROWS ONLY;"
+      }
+    ]
   },
   {
     "id": 10769,
@@ -622,16 +669,48 @@ export const ROUND_45: QuizQuestion[] = [
     "round": 45,
     "subject": "2과목",
     "number": 21,
-    "title": "ROLLUP, CUBE, GROUPING SETS 등 소계·총계 생성용 GROUP BY 확장 함수를 통칭하는 용어는?",
+    "title": "아래 판매 테이블에 대한 SQL 결과에서 ㉠·㉡·㉢ 행의 G 값으로 옳은 것은?",
     "options": [
-      "Aggregation",
-      "Partition",
-      "Grouping",
-      "Windowing"
+      "1, 2, 2",
+      "2, 1, 3",
+      "1, 2, 3",
+      "0, 0, 1"
     ],
     "correctIndex": 2,
-    "explanation": "ROLLUP, CUBE, GROUPING SETS는 GROUP BY의 확장으로 소계와 총계를 한 번에 생성하는 그룹핑(Grouping) 함수에 해당한다. ① Aggregation은 SUM·AVG 등 집계함수, ② Partition·④ Windowing은 윈도우 함수의 영역 지정에 사용된다.",
-    "_source": "authored"
+    "explanation": "GROUPING_ID(지역, 상품) 은 각 칼럼의 GROUPING 값(집계로 묶여 NULL 이 된 칼럼이면 1)을 이어 붙인 2진수를 10진수로 바꾼 값이다. 앞 칼럼이 높은 자리다. ㉠ 은 상품만 묶였으니 2진수 01 이라 1, ㉡ 은 지역만 묶였으니 10 이라 2, ㉢ 은 둘 다 묶였으니 11 이라 3 이다. 정답은 ③번이다. ① 은 합계 행도 한 칼럼만 묶인 것으로 본 것, ② 는 자리의 높낮이를 거꾸로 본 것, ④ 는 소계 행을 일반 행처럼 0 으로 본 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "caption": "판매",
+        "headers": [
+          "지역",
+          "상품",
+          "수량"
+        ],
+        "rows": [
+          [
+            "서울",
+            "P1",
+            "10"
+          ],
+          [
+            "서울",
+            "P2",
+            "20"
+          ],
+          [
+            "부산",
+            "P1",
+            "30"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT 지역, 상품, SUM(수량),\n       GROUPING_ID(지역, 상품) AS G\nFROM   판매\nGROUP  BY CUBE(지역, 상품);\n\n-- ㉠ 지역 서울, 상품 NULL 인 소계 행\n-- ㉡ 지역 NULL, 상품 P1 인 소계 행\n-- ㉢ 지역 NULL, 상품 NULL 인 합계 행"
+      }
+    ]
   },
   {
     "id": 10771,
