@@ -450,16 +450,22 @@ export const ROUND_45: QuizQuestion[] = [
     "round": 45,
     "subject": "2과목",
     "number": 15,
-    "title": "데이터 무결성을 지키기 위한 방법과 관계가 없는 것은?",
+    "title": "아래 업무 규칙 ㉠~㉢ 을 지키는 방법으로 가장 알맞게 짝지은 것은?",
     "options": [
-      "애플리케이션의 로직",
-      "Trigger",
-      "Lock",
-      "Constraints"
+      "트리거, CHECK 제약, 애플리케이션 로직",
+      "CHECK 제약, 애플리케이션 로직, 트리거",
+      "CHECK 제약, 트리거, 애플리케이션 로직",
+      "Lock, 트리거, CHECK 제약"
     ],
     "correctIndex": 2,
-    "explanation": "Lock·Unlock은 동시 접근 시의 병행성(동시성) 제어 기법이며, 데이터 무결성과는 직접적인 관련이 없다. 무결성은 제약조건(④), 트리거(②), 애플리케이션 로직(①) 등으로 보장한다.",
-    "_source": "authored"
+    "explanation": "데이터 무결성은 제약조건(Constraint), 트리거, 애플리케이션 로직으로 지킨다. 한 칼럼 값의 범위처럼 단순한 규칙(㉠)은 CHECK 제약이 가장 확실하다. 한 테이블에 변경이 생기면 다른 테이블도 자동으로 바꿔야 하는 규칙(㉡)은 트리거로 처리한다. 등급별 한도 계산과 화면 안내까지 필요한 복잡한 규칙(㉢)은 애플리케이션 로직이 알맞다. 정답은 ③번이다. ④ 의 Lock 은 여러 트랜잭션이 동시에 같은 데이터를 고치지 못하게 하는 동시성 제어 수단이라, 값이 규칙에 맞는지 정하는 무결성 방법이 아니다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "text",
+        "content": "㉠ 주문수량은 1 이상이어야 한다.\n㉡ 주문이 들어오면 상품 재고를 자동으로 줄인다.\n㉢ 회원 등급마다 하루 주문 한도를 다르게 두고, 넘으면 화면에 안내 문구를 띄운다."
+      }
+    ]
   },
   {
     "id": 10765,
@@ -534,16 +540,26 @@ export const ROUND_45: QuizQuestion[] = [
     "round": 45,
     "subject": "2과목",
     "number": 17,
-    "title": "CTAS(CREATE TABLE AS SELECT) 방식으로 테이블을 복제할 때의 특징으로 적절하지 않은 것은?",
+    "title": "아래처럼 CTAS 로 T2 를 만들었다. T2 에 그대로 옮겨 오는 것만 모두 고른 것은? (Oracle 기준)",
     "options": [
-      "원본 테이블의 데이터를 함께 복제할 수 있다.",
-      "원본 테이블의 모든 제약조건을 그대로 가져온다.",
-      "컬럼의 데이터 타입을 그대로 승계한다.",
-      "WHERE 1=2 와 함께 사용하면 구조만 복제할 수 있다."
+      "㉠, ㉡",
+      "㉠, ㉡, ㉣",
+      "㉠, ㉡, ㉢, ㉣",
+      "㉠, ㉡, ㉣, ㉤"
     ],
     "correctIndex": 1,
-    "explanation": "CTAS는 NOT NULL 제약조건만 상속되며, PRIMARY KEY·UNIQUE·FOREIGN KEY·CHECK 등은 복제되지 않는다. 정답은 ②번이다. ① CTAS 는 SELECT 결과 데이터를 함께 복제하고, ③ 컬럼의 데이터 타입도 그대로 가져오며, ④ WHERE 1=2 처럼 거짓 조건을 주면 행 없이 구조만 만든다.",
-    "_source": "authored"
+    "explanation": "CTAS(CREATE TABLE … AS SELECT)는 SELECT 결과로 새 테이블을 만들므로 데이터와 칼럼 이름·타입은 그대로 옮겨진다. 제약조건은 NOT NULL 만 따라오고, PRIMARY KEY·UNIQUE·FOREIGN KEY·CHECK 같은 다른 제약과 DEFAULT 값은 옮겨지지 않는다. 그래서 ㉠, ㉡, ㉣ 이다. 정답은 ②번이다. 필요한 제약은 CTAS 뒤에 ALTER TABLE 로 다시 추가해야 한다. 구조만 복사하려면 WHERE 1 = 2 처럼 거짓 조건을 붙인다. ① 은 NOT NULL 도 빠진다고 본 것, ③ 은 기본키까지 옮겨진다고 본 것, ④ 는 DEFAULT 도 옮겨진다고 본 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "CREATE TABLE T (\n  ID   NUMBER PRIMARY KEY,\n  NAME VARCHAR2(10) NOT NULL,\n  AMT  NUMBER DEFAULT 0\n);\n\nCREATE TABLE T2 AS\n  SELECT * FROM T;"
+      },
+      {
+        "type": "text",
+        "content": "㉠ T 의 데이터\n㉡ 칼럼 이름과 데이터 타입\n㉢ ID 의 PRIMARY KEY\n㉣ NAME 의 NOT NULL\n㉤ AMT 의 DEFAULT 0"
+      }
+    ]
   },
   {
     "id": 10767,
