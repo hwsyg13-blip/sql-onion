@@ -1918,7 +1918,7 @@ export const ROUND_46: QuizQuestion[] = [
       {
         "type": "erd",
         "caption": "사원·수당 ERD (수당은 0 또는 1건)",
-        "mermaid": "erDiagram\n    사원 ||..o| 수당 : \"지급\"\n    사원 {\n        int 사번 PK\n        int 기본급\n    }\n    수당 {\n        int 사번 PK, FK\n        int 금액\n    }"
+        "mermaid": "erDiagram\n    사원 ||--o| 수당 : \"지급\"\n    사원 {\n        int 사번 PK\n        int 기본급\n    }\n    수당 {\n        int 사번 PK, FK\n        int 금액\n    }"
       },
       {
         "type": "text",
