@@ -673,3 +673,16 @@
 | 58-2-46 | NVL·NULLIF·COALESCE·NVL2 로 거르기 | 결과 NULL 아닌 것 → 네 WHERE 의 COUNT | 2, 2, 1, 2 | PostgreSQL 로 같은 조건 확인(NVL2 는 CASE) |
 | 59-2-24 | 집합 연산의 칼럼 수·타입·ORDER BY 이름 | 옳지 않은 설명 → SQL 4개 중 오류 | ㉠, ㉡, ㉣ | Oracle 규칙(PostgreSQL 도 세 개 모두 오류) |
 | 59-2-14 | NULL 처리 식의 동치(NVL2·NVL·COALESCE·DECODE vs = NULL) | NVL2 설명 → 식 5개 중 항상 맞는 것 | ㉠, ㉡, ㉢, ㉣ | PostgreSQL 로 NVL·COALESCE·CASE 확인 |
+
+## 순환 7바퀴 — 60~62회 — 7바퀴 완료
+
+| 문항 | 개념 | 바뀐 점 | 정답 | 검증 |
+|---|---|---|---|---|
+| 60-2-48 | CUBE 에만 있는 묶음(분기 소계) | 묶음 고르기 → 표에서 CUBE 에만 있는 행 수 | 2, (NULL, 분기) | PostgreSQL 로 CUBE − ROLLUP 행 수 2 확인 |
+| 60-2-44 | DROP RESTRICT vs CASCADE(뷰 의존) | RESTRICT 결과 하나 → 두 명령 연속 결과 | ① | PostgreSQL 실제 실행 확인. Oracle 차이는 해설에 적음 |
+| 61-2-43 | 동점에서 ROW_NUMBER·RANK·DENSE_RANK·ROWNUM | SQL 고르기 → 네 방식 행 수 | 2, 2, 3, 2 | PostgreSQL 동일(ROWNUM 은 정의) |
+| 61-2-11 | 저장 공간을 차지하는 객체(테이블·인덱스) | 용어 고르기 → 객체 4개 분류 | ㉠, ㉢ | 정의로 판정 |
+| 62-2-36 | ROLLUP 인자 순서에 따른 결과 차이 | 틀린 설명 → 세 GROUP BY 행 수 | 9, 8, 11 | PostgreSQL 동일 |
+| 62-2-33 | LEVEL 과 CONNECT_BY_ISLEAF | 틀린 설명(리프 레벨 1) → 트리 결과 값 | 3, 2, 2 | PostgreSQL 재귀 CTE 로 같은 결과 |
+
+이로써 순환 7바퀴(45~62회, 2과목 36문항) 완료.

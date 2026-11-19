@@ -318,16 +318,22 @@ export const ROUND_61: QuizQuestion[] = [
     "round": 61,
     "subject": "2과목",
     "number": 11,
-    "title": "다음 중 데이터베이스에서 데이터를 저장하는 기본 단위로 가장 적절한 것은?",
+    "title": "아래 객체 ㉠~㉣ 중 실제로 데이터를 담아 저장 공간(세그먼트)을 차지하는 것만 모두 고른 것은? (Materialized View 제외)",
     "options": [
-      "테이블",
-      "뷰",
-      "인덱스",
-      "시퀀스"
+      "㉠, ㉢",
+      "㉠",
+      "㉠, ㉡",
+      "㉠, ㉡, ㉢"
     ],
     "correctIndex": 0,
-    "explanation": "관계형 데이터베이스에서 데이터를 저장하는 기본 단위는 테이블이다. ② 뷰는 데이터를 저장하지 않는 가상 테이블, ③ 인덱스는 검색 성능을 위한 객체, ④ 시퀀스는 일련번호 생성 객체이다.",
-    "_source": "authored"
+    "explanation": "데이터를 저장하는 기본 단위는 테이블이며, 행 데이터를 저장 공간에 보관한다. 인덱스도 칼럼 값과 행의 위치(ROWID)를 따로 저장해 저장 공간을 차지한다. 뷰는 SELECT 문 정의만 저장해 두고 조회할 때마다 원래 테이블을 읽는 가상 테이블이라 데이터를 담지 않는다. 시노님은 객체에 붙인 별명일 뿐이다. 정답은 ①번이다. ② 는 인덱스가 저장 공간을 쓰지 않는다고 본 것, ③·④ 는 뷰가 데이터를 저장한다고 본 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "text",
+        "content": "㉠ 테이블\n㉡ 뷰\n㉢ 인덱스\n㉣ 시노님"
+      }
+    ]
   },
   {
     "id": 9961,
@@ -1955,16 +1961,22 @@ export const ROUND_61: QuizQuestion[] = [
     "round": 61,
     "subject": "2과목",
     "number": 43,
-    "title": "다음 중 SAL(연봉)이 높은 순서로 상위 2명을 조회하는 SQL로 가장 적절한 것은?",
+    "title": "SAL 이 500, 500, 400, 300 인 EMP 테이블에서 '연봉 상위 2' 를 구하려는 SQL ㉠~㉣ 의 결과 행 수로 옳은 것은? (Oracle 기준)",
     "options": [
-      "SELECT EMP_ID FROM EMP ORDER BY SAL DESC;",
-      "SELECT EMP_ID, ROW_NUMBER() OVER (ORDER BY SAL DESC) AS RN FROM EMP WHERE RN <= 2;",
-      "SELECT EMP_ID FROM EMP WHERE ROWNUM <= 2 ORDER BY SAL DESC;",
-      "SELECT EMP_ID FROM (SELECT * FROM EMP ORDER BY SAL DESC) WHERE ROWNUM <= 2;"
+      "2, 2, 2, 2",
+      "2, 3, 3, 2",
+      "2, 2, 4, 2",
+      "2, 2, 3, 2"
     ],
     "correctIndex": 3,
-    "explanation": "SELECT 문의 논리적 수행 순서는 FROM → WHERE → GROUP BY → HAVING → SELECT → ORDER BY이다. ②는 WHERE 절에서 SELECT 절의 별칭 RN을 쓸 수 없어 오류이고, ③은 임의의 2행을 먼저 추린 뒤 정렬하므로 상위 2명이 아니다. 인라인 뷰에서 먼저 정렬한 뒤 바깥에서 ROWNUM으로 제한하는 ④가 적절하다.",
-    "_source": "authored"
+    "explanation": "ROW_NUMBER 는 동점에도 서로 다른 번호를 줘 ㉠ 은 2행이다. RANK 는 500 두 명에게 1위를 주고 다음 400 은 3위로 건너뛰어, N <= 2 는 500 두 명뿐인 2행이다. DENSE_RANK 는 건너뛰지 않아 400 이 2위가 되므로 ㉢ 은 3행이다. ㉣ 은 정렬한 뒤 앞의 2행만 자르므로 2행이다. 정답은 ④번이다. ② 는 RANK 도 400 을 2위로 본 것, ③ 은 DENSE_RANK 가 300 까지 포함한다고 본 것, ① 은 DENSE_RANK 도 동점을 따로 센다고 본 것이다. 동점까지 포함해 '상위 2위' 를 원하면 RANK 나 DENSE_RANK 를 쓰고, 결과가 왜 다른지 알아야 한다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "-- ㉠ ROW_NUMBER\nSELECT * FROM\n (SELECT E.*, ROW_NUMBER() OVER\n    (ORDER BY SAL DESC) AS N\n  FROM EMP E)\nWHERE N <= 2;\n-- ㉡ ㉠ 에서 RANK 로 바꿈\n-- ㉢ ㉠ 에서 DENSE_RANK 로 바꿈\n-- ㉣\nSELECT * FROM\n (SELECT * FROM EMP ORDER BY SAL DESC)\nWHERE ROWNUM <= 2;"
+      }
+    ]
   },
   {
     "id": 9993,
