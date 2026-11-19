@@ -401,3 +401,16 @@
 | 58-2-44 | GROUP BY + 윈도우 함수 | 윈도우 설명 → 부서별 합에 RANK·SUM(SUM) OVER | 600, 3, 2200 | PostgreSQL 동일 |
 | 59-2-11 | 롤 회수와 소유 객체 | DCL 설명 묶음 → 롤로 받은 CREATE TABLE 회수 전후 | 성공, 성공, 오류 | Oracle 규칙(롤 변경은 다시 접속 후 반영 — 문항에 명시) |
 | 59-2-34 | 날짜 ROUND('MM'·'YYYY') | ROUND 설명 묶음 → 16일·15일·7월 1일 반올림 | 12-01, 11-01, 2027 | Oracle 규칙. 처음 날짜 4개 보기가 390px 에서 중간에 꺾여 3개·짧은 형식으로 줄임 |
+
+## 순환 3바퀴 — 60~62회 (11-19 14시 실행 계속) — 3바퀴 완료
+
+| 문항 | 개념 | 바뀐 점 | 정답 | 검증 |
+|---|---|---|---|---|
+| 60-2-11 | ORDER SIBLINGS BY·CONNECT_BY_ROOT | 가상 칼럼 묶음 고르기 → 최상위 2개인 조직의 출력 순서 | 나, 마, 가, 라, 다 | PostgreSQL 재귀 CTE(형제별 정렬 경로)로 같은 순서 |
+| 60-2-34 | 집합 연산 ORDER BY·칼럼 수 규칙 | 중복 허용 연산자 이름 → SQL 5개 중 오류 | ㉡, ㉣, ㉤ | PostgreSQL 같은 3개 오류 |
+| 61-2-26 | NOCYCLE·CONNECT_BY_ISCYCLE | 계층형 설명 → 순환 데이터에서 NOCYCLE 유무 결과 | 오류 / 3 / 3 | Oracle 규칙(ISCYCLE 은 자식이 조상인 행에서 1). PostgreSQL 재귀로 순환 지점 확인 |
+| 61-2-27 | BETWEEN 순서·IN/NOT IN 과 NULL | AND·OR 우선순위(56회와 겹침) → BETWEEN 거꾸로·IN NULL·NOT IN NULL 행 수 | 0, 2, 0, 3 | PostgreSQL 동일 |
+| 62-2-13 | NULL 과 SUM(A+B) vs SUM(A)+SUM(B) | NULL 처리 설명 → 네 집계 값 | 25, 42, 1, 15 | PostgreSQL 동일 |
+| 62-2-30 | CROSS JOIN 과 빈 테이블·WHERE | 설명 고르기 → 세 COUNT | 12, 0, 3 | PostgreSQL 동일 |
+
+이로써 순환 3바퀴(45~62회) 완료. 다음 순환은 45회부터.

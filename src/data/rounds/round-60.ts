@@ -239,20 +239,56 @@ export const ROUND_60: QuizQuestion[] = [
     "round": 60,
     "subject": "2과목",
     "number": 11,
-    "title": "다음 계층형 질의에서 사용하는 가상 컬럼 및 연산자 중, 전제 조건 없이 단독으로 동작하지 않거나 특정 옵션이 선행되어야 유효한 값을 반환하는 것은 무엇인가?",
+    "title": "아래 조직 테이블에 대한 계층형 SQL 의 출력 순서(이름)로 옳은 것은?",
     "options": [
-      "가",
-      "나, 다",
-      "나, 다, 라",
-      "가, 나, 다, 라"
+      "가, 다, 라, 나, 마",
+      "마, 라, 다, 나, 가",
+      "나, 마, 가, 다, 라",
+      "나, 마, 가, 라, 다"
     ],
     "correctIndex": 3,
-    "explanation": "네 가지 모두 계층형 질의(START WITH … CONNECT BY) 안에서만 의미 있는 값을 돌려준다. LEVEL 은 계층의 깊이, CONNECT_BY_ISLEAF 는 리프 여부, CONNECT_BY_ROOT 는 루트 값으로 CONNECT BY 가 있어야 하고, CONNECT_BY_ISCYCLE 은 여기에 더해 CONNECT BY NOCYCLE 옵션이 있어야 쓸 수 있다. 그래서 가, 나, 다, 라 모두 해당한다(④). ① 은 나·다·라를, ② 는 가·라를, ③ 은 가(LEVEL)를 빠뜨렸다.",
+    "explanation": "ORDER SIBLINGS BY 는 계층 구조(부모 바로 아래 자식)를 지킨 채, 같은 부모를 둔 형제끼리만 정렬한다. 최상위 형제 가·나를 내림차순하면 나가 먼저이고, 나 아래 마가 이어진다. 그다음 가, 그리고 가의 자식 다·라를 내림차순해 라, 다 순이다. 결과는 나, 마, 가, 라, 다 다. CONNECT_BY_ROOT 이름 은 각 행이 속한 최상위 행의 이름이라 마는 '나', 라·다는 '가' 가 된다. 정답은 ④번이다. ① 은 오름차순으로 본 것, ② 는 계층을 무시하고 ORDER BY 처럼 전체를 정렬한 것, ③ 은 최상위 형제만 정렬하고 자식은 그대로 둔 것이다.",
     "_source": "authored",
     "references": [
       {
-        "type": "text",
-        "content": "* 가. LEVEL\n* 나. ISLEAF\n* 다. ISCYCLE\n* 라. CONNECT_BY_ROOT"
+        "type": "table",
+        "caption": "조직",
+        "headers": [
+          "ID",
+          "상위ID",
+          "이름"
+        ],
+        "rows": [
+          [
+            "1",
+            "NULL",
+            "가"
+          ],
+          [
+            "2",
+            "NULL",
+            "나"
+          ],
+          [
+            "3",
+            "1",
+            "다"
+          ],
+          [
+            "4",
+            "1",
+            "라"
+          ],
+          [
+            "5",
+            "2",
+            "마"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT 이름,\n       CONNECT_BY_ROOT 이름 AS 루트\nFROM   조직\nSTART  WITH 상위ID IS NULL\nCONNECT BY PRIOR ID = 상위ID\nORDER  SIBLINGS BY 이름 DESC;"
       }
     ]
   },
@@ -1402,16 +1438,22 @@ export const ROUND_60: QuizQuestion[] = [
     "round": 60,
     "subject": "2과목",
     "number": 34,
-    "title": "다음 집합 연산자 중 중복을 허용하는 것은?",
+    "title": "아래 SQL ㉠~㉤ 중 오류가 발생하는 것만 모두 고른 것은? (Oracle 기준)",
     "options": [
-      "UNION",
-      "UNION ALL",
-      "INTERSECT",
-      "EXCEPT"
+      "㉣",
+      "㉡, ㉣, ㉤",
+      "㉡, ㉣",
+      "㉣, ㉤"
     ],
     "correctIndex": 1,
-    "explanation": "UNION ALL은 두 결과 집합을 그대로 합치며 중복 행을 제거하지 않고 모두 반환한다. 반면 ① UNION·③ INTERSECT·④ EXCEPT(MINUS)는 모두 내부적으로 중복 제거(DISTINCT)를 수행한다.",
-    "_source": "authored"
+    "explanation": "집합 연산 결과의 칼럼 이름은 첫 번째 SELECT 에서 정해진다. 그래서 ORDER BY X(㉠)와 위치 번호 ORDER BY 1(㉢)은 되지만, 두 번째 SELECT 의 별칭 Y 로 정렬하는 ㉡ 은 오류다. 집합 연산으로 묶는 SELECT 들은 칼럼 수가 같아야 해서 ㉣ 은 오류이고, ORDER BY 는 맨 마지막에 한 번만 쓸 수 있어 중간에 넣은 ㉤ 도 오류다. 정답은 ②번이다. ① 은 칼럼 수만 본 것, ③ 은 ORDER BY 위치 규칙을 놓친 것, ④ 는 아무 SELECT 의 별칭으로나 정렬할 수 있다고 본 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT 1 AS X FROM DUAL\nUNION ALL\nSELECT 2 AS Y FROM DUAL\nORDER  BY X;                    -- ㉠\n\nSELECT 1 AS X FROM DUAL\nUNION ALL\nSELECT 2 AS Y FROM DUAL\nORDER  BY Y;                    -- ㉡\n\nSELECT 1 AS X FROM DUAL\nUNION ALL\nSELECT 2 AS Y FROM DUAL\nORDER  BY 1;                    -- ㉢\n\nSELECT 1, 2 FROM DUAL\nUNION ALL\nSELECT 3 FROM DUAL;             -- ㉣\n\nSELECT 1 FROM DUAL ORDER BY 1\nUNION ALL\nSELECT 2 FROM DUAL;             -- ㉤"
+      }
+    ]
   },
   {
     "id": 10034,

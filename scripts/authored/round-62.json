@@ -195,15 +195,43 @@
     {
       "subject": "2과목",
       "number": 13,
-      "title": "NULL 값의 처리에 대한 설명으로 가장 적절하지 않은 것은?",
+      "title": "아래 T 테이블에 대한 SQL 의 결과(P, Q, R, S)로 옳은 것은?",
       "options": [
-        "DISTINCT를 쓰면 중복된 NULL도 하나만 반영한다.",
-        "COUNT(DISTINCT num) 형태로 쓸 수 있다.",
-        "SUM(표현식), COUNT(표현식) 형태로 작성하면 NULL을 연산에서 제외한다.",
-        "GROUP BY의 기준 컬럼에 NULL이 포함되어 있으면 NULL을 제외한 행만 출력된다."
+        "42, 42, 3, 10",
+        "25, 42, 3, 15",
+        "25, 25, 1, 15",
+        "25, 42, 1, 15"
       ],
       "correctIndex": 3,
-      "explanation": "DISTINCT 는 NULL 끼리도 하나로 묶어 한 번만 보여 주고(①), COUNT(DISTINCT 컬럼) 형태로 쓸 수 있으며(②), SUM(표현식)·COUNT(표현식)은 NULL 을 연산에서 제외한다(③). GROUP BY 기준 컬럼이 NULL 인 행들은 NULL 그룹 하나로 묶여 결과에 나오므로 NULL 이 제외된다는 ④ 가 옳지 않다."
+      "explanation": "NULL 이 섞인 덧셈은 결과가 NULL 이다. 행마다 A + B 는 NULL, 25, NULL 이라 P 는 NULL 을 뺀 합 25, R 은 NULL 이 아닌 값의 개수 1 이다. Q 는 칼럼별로 먼저 합해서 SUM(A) 30 + SUM(B) 12 = 42 다. 같은 데이터라도 더하는 순서에 따라 P 와 Q 가 달라진다. S 의 AVG(A) 는 NULL 을 빼고 (10 + 20) / 2 = 15 다. 정답은 ④번이다. ① 은 NULL 을 0 으로 보고 계산한 것, ② 는 COUNT 가 NULL 결과도 센다고 본 것, ③ 은 SUM(A) + SUM(B) 도 행별 덧셈과 같다고 본 것이다.",
+      "references": [
+        {
+          "type": "table",
+          "caption": "T",
+          "headers": [
+            "A",
+            "B"
+          ],
+          "rows": [
+            [
+              "10",
+              "NULL"
+            ],
+            [
+              "20",
+              "5"
+            ],
+            [
+              "NULL",
+              "7"
+            ]
+          ]
+        },
+        {
+          "type": "sql",
+          "code": "SELECT SUM(A + B)        AS P,\n       SUM(A) + SUM(B)   AS Q,\n       COUNT(A + B)      AS R,\n       AVG(A)            AS S\nFROM   T;"
+        }
+      ]
     },
     {
       "subject": "2과목",
@@ -843,15 +871,21 @@
     {
       "subject": "2과목",
       "number": 30,
-      "title": "다음 중 CROSS JOIN에 대한 설명으로 가장 적절한 것은?",
+      "title": "A(ID 1, 2, 3), B(ID 2, 3, 3, 4) 테이블과 행이 하나도 없는 C 테이블이 있다. 아래 ㉠, ㉡, ㉢ 의 결과로 옳은 것은?",
       "options": [
-        "한 테이블의 각 행을 다른 테이블의 모든 행과 연결한다.",
-        "두 테이블에서 이름이 같은 컬럼을 기준으로 자동으로 연결한다.",
-        "조인 조건을 만족하는 행만 연결한다.",
-        "조인 조건을 만족하지 않는 쪽의 행도 NULL로 채워 연결한다."
+        "12, 0, 3",
+        "12, 3, 3",
+        "7, 0, 3",
+        "12, 0, 12"
       ],
       "correctIndex": 0,
-      "explanation": "CROSS JOIN은 조인 조건 없이 두 테이블의 모든 행의 조합을 만드는 카티션 곱이다. ②는 NATURAL JOIN, ③은 INNER JOIN, ④는 OUTER JOIN에 대한 설명이다."
+      "explanation": "CROSS JOIN 은 A 의 각 행을 B 의 모든 행과 짝지어 3 × 4 = 12행을 만든다. C 는 행이 없어 짝지을 상대가 없으므로 ㉡ 은 3 × 0 = 0행이다. ㉢ 은 12개 짝 중 WHERE 를 만족하는 것만 남겨 INNER JOIN 과 같아진다. ID 2 는 1쌍, ID 3 은 B 에 두 번 있어 2쌍이라 3 이다. 정답은 ①번이다. ② 는 빈 테이블과 조인해도 A 의 행이 남는다고 본 것, ③ 은 두 테이블 행 수를 더한 것, ④ 는 CROSS JOIN 에는 WHERE 가 적용되지 않는다고 본 것이다.",
+      "references": [
+        {
+          "type": "sql",
+          "code": "-- ㉠\nSELECT COUNT(*) FROM A CROSS JOIN B;\n-- ㉡\nSELECT COUNT(*) FROM A CROSS JOIN C;\n-- ㉢\nSELECT COUNT(*)\nFROM   A CROSS JOIN B\nWHERE  A.ID = B.ID;"
+        }
+      ]
     },
     {
       "subject": "2과목",
