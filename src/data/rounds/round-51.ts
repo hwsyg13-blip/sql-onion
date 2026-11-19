@@ -49,7 +49,7 @@ export const ROUND_51: QuizQuestion[] = [
       {
         "type": "erd",
         "caption": "고객·주문·주문상세·상품·배송 ERD",
-        "mermaid": "erDiagram\n    고객 ||--o{ 주문 : \"한다\"\n    주문 ||--|{ 주문상세 : \"포함\"\n    상품 ||--o{ 주문상세 : \"대상\"\n    주문 ||--o| 배송 : \"발생\"\n    주문 {\n        string 주문번호 PK\n        string 고객번호 FK\n    }\n    주문상세 {\n        string 주문번호 PK,FK\n        string 상품코드 PK,FK\n        int 수량\n    }\n    배송 {\n        string 배송번호 PK\n        string 주문번호 FK\n    }"
+        "mermaid": "erDiagram\n    고객 ||..o{ 주문 : \"한다\"\n    주문 ||--|{ 주문상세 : \"포함\"\n    상품 ||--o{ 주문상세 : \"대상\"\n    주문 ||..o| 배송 : \"발생\"\n    주문 {\n        string 주문번호 PK\n        string 고객번호 FK\n    }\n    주문상세 {\n        string 주문번호 PK,FK\n        string 상품코드 PK,FK\n        int 수량\n    }\n    배송 {\n        string 배송번호 PK\n        string 주문번호 FK\n    }"
       }
     ]
   },

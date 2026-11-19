@@ -101,7 +101,7 @@
         {
           "type": "erd",
           "caption": "부서·사원 ERD (사원-사원 관리 관계, 부서-사원 소속·부서장 관계)",
-          "mermaid": "erDiagram\n    부서 ||--o{ 사원 : \"소속\"\n    사원 |o--o| 부서 : \"부서장\"\n    사원 |o--o{ 사원 : \"관리\"\n    부서 {\n        string 부서번호 PK\n        string 부서명\n        string 부서장사번 FK\n    }\n    사원 {\n        string 사번 PK\n        string 이름\n        string 부서번호 FK\n        string 관리자사번 FK\n    }"
+          "mermaid": "erDiagram\n    부서 ||..o{ 사원 : \"소속\"\n    사원 |o..o| 부서 : \"부서장\"\n    사원 |o--o{ 사원 : \"관리\"\n    부서 {\n        string 부서번호 PK\n        string 부서명\n        string 부서장사번 FK\n    }\n    사원 {\n        string 사번 PK\n        string 이름\n        string 부서번호 FK\n        string 관리자사번 FK\n    }"
         }
       ]
     },
@@ -147,7 +147,7 @@
         {
           "type": "erd",
           "caption": "고객·주문·주문상세 ERD (속성 옆 설명 포함)",
-          "mermaid": "erDiagram\n    고객 ||--o{ 주문 : \"한다\"\n    주문 ||--|{ 주문상세 : \"포함\"\n    고객 {\n        string 고객번호 PK \"시스템이 부여한 일련번호\"\n        string 고객명\n        string 고객등급코드 \"G1~G4 코드\"\n        date 최초주문일자 \"그 고객 주문일자 중 가장 이른 날\"\n    }\n    주문 {\n        string 주문번호 PK \"시스템이 부여한 일련번호\"\n        string 고객번호 FK\n        date 주문일자\n        int 총주문금액 \"주문상세 금액의 합\"\n    }\n    주문상세 {\n        string 주문번호 PK,FK\n        int 상세순번 PK\n        int 수량\n        int 단가 \"주문 시점 판매가(입력값)\"\n        int 금액 \"수량 x 단가\"\n    }"
+          "mermaid": "erDiagram\n    고객 ||..o{ 주문 : \"한다\"\n    주문 ||--|{ 주문상세 : \"포함\"\n    고객 {\n        string 고객번호 PK \"시스템이 부여한 일련번호\"\n        string 고객명\n        string 고객등급코드 \"G1~G4 코드\"\n        date 최초주문일자 \"그 고객 주문일자 중 가장 이른 날\"\n    }\n    주문 {\n        string 주문번호 PK \"시스템이 부여한 일련번호\"\n        string 고객번호 FK\n        date 주문일자\n        int 총주문금액 \"주문상세 금액의 합\"\n    }\n    주문상세 {\n        string 주문번호 PK,FK\n        int 상세순번 PK\n        int 수량\n        int 단가 \"주문 시점 판매가(입력값)\"\n        int 금액 \"수량 x 단가\"\n    }"
         }
       ]
     },

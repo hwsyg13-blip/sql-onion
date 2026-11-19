@@ -266,7 +266,7 @@ export const ROUND_46: QuizQuestion[] = [
       {
         "type": "erd",
         "caption": "제조사·마더보드·컴퓨터·메모리슬롯·메모리 ERD",
-        "mermaid": "erDiagram\n    제조사 |o--o{ 마더보드 : \"생산\"\n    마더보드 ||--o| 컴퓨터 : \"장착\"\n    마더보드 ||--|{ 메모리슬롯 : \"보유\"\n    메모리슬롯 ||--o| 메모리 : \"꽂힘\"\n    제조사 {\n        string 제조사코드 PK\n        string 제조사명\n    }\n    마더보드 {\n        string 보드번호 PK\n        string 제조사코드 FK\n    }\n    컴퓨터 {\n        string 자산번호 PK\n        string 보드번호 FK\n    }\n    메모리슬롯 {\n        string 보드번호 PK,FK\n        int 슬롯번호 PK\n    }\n    메모리 {\n        string 메모리번호 PK\n        string 보드번호 FK\n        int 슬롯번호 FK\n    }"
+        "mermaid": "erDiagram\n    제조사 |o..o{ 마더보드 : \"생산\"\n    마더보드 ||..o| 컴퓨터 : \"장착\"\n    마더보드 ||--|{ 메모리슬롯 : \"보유\"\n    메모리슬롯 ||..o| 메모리 : \"꽂힘\"\n    제조사 {\n        string 제조사코드 PK\n        string 제조사명\n    }\n    마더보드 {\n        string 보드번호 PK\n        string 제조사코드 FK\n    }\n    컴퓨터 {\n        string 자산번호 PK\n        string 보드번호 FK\n    }\n    메모리슬롯 {\n        string 보드번호 PK,FK\n        int 슬롯번호 PK\n    }\n    메모리 {\n        string 메모리번호 PK\n        string 보드번호 FK\n        int 슬롯번호 FK\n    }"
       }
     ]
   },

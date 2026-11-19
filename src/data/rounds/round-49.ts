@@ -113,7 +113,7 @@ export const ROUND_49: QuizQuestion[] = [
       {
         "type": "erd",
         "caption": "학과·학생·수강·과목·교수 ERD",
-        "mermaid": "erDiagram\n    학과 |o--o{ 학생 : \"소속\"\n    학생 ||--|{ 수강 : \"신청\"\n    과목 ||--o{ 수강 : \"개설\"\n    교수 ||--o{ 과목 : \"담당\"\n    학생 {\n        string 학번 PK\n        string 학과코드 FK\n    }\n    수강 {\n        string 학번 PK,FK\n        string 과목코드 PK,FK\n        string 수강학기 PK\n    }\n    과목 {\n        string 과목코드 PK\n        string 교수번호 FK\n    }"
+        "mermaid": "erDiagram\n    학과 |o..o{ 학생 : \"소속\"\n    학생 ||--|{ 수강 : \"신청\"\n    과목 ||--o{ 수강 : \"개설\"\n    교수 ||..o{ 과목 : \"담당\"\n    학생 {\n        string 학번 PK\n        string 학과코드 FK\n    }\n    수강 {\n        string 학번 PK,FK\n        string 과목코드 PK,FK\n        string 수강학기 PK\n    }\n    과목 {\n        string 과목코드 PK\n        string 교수번호 FK\n    }"
       }
     ]
   },
