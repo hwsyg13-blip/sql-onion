@@ -1194,16 +1194,31 @@ export const ROUND_48: QuizQuestion[] = [
     "round": 48,
     "subject": "2과목",
     "number": 29,
-    "title": "ROLLUP(A, B) 수행 결과로 옳은 것은?",
+    "title": "아래 ERD 와 데이터에서 ㉠, ㉡ 의 결과 행 수와 ㉡ 에서 (부산, D) 행의 합계로 옳은 것은? (순서대로)",
     "options": [
-      "(A, B) 세부 집계만 반환",
-      "(A, B), (A), () 총계 포함",
-      "(A, B), (B), () 총계 포함",
-      "(A, B), (A), (B), () 모든 조합"
+      "6, 6, 0",
+      "6, 7, NULL",
+      "7, 7, NULL",
+      "6, 7, 0"
     ],
     "correctIndex": 1,
-    "explanation": "ROLLUP(A, B)는 오른쪽 컬럼부터 하나씩 빼 가며 (A, B), (A), () 세 가지 수준의 집계만 반환한다. (B) 단독 그룹은 만들지 않는다(③). CUBE(A, B)가 (A, B), (A), (B), () 모든 조합(④)을 만드는 것과 구분해야 한다. 정답은 ②번이다. ① 은 소계·총계가 없는 GROUP BY A, B 의 결과다.",
-    "_source": "authored"
+    "explanation": "ROLLUP(지역명, 매장명) 은 매장별 행, 지역별 소계, 전체 합계를 만든다. ㉠ 은 INNER JOIN 이라 매출이 없는 D 가 빠져 매장 A·B·C 3행 + 지역 2행 + 합계 1행 = 6행이다. ㉡ 은 매출을 LEFT JOIN 해 D 도 남으므로 매장 4행 + 지역 2행 + 합계 1행 = 7행이다. D 의 금액은 모두 NULL 이라 SUM 도 0 이 아니라 NULL 이다. 정답은 ②번이다. ERD 에서 매출 쪽이 0건 이상(동그라미)이라 매출 없는 매장이 있을 수 있고, 조인 방식에 따라 집계 결과가 달라진다. ① 은 LEFT JOIN 도 D 를 버린다고 본 것, ③ 은 INNER JOIN 에도 D 가 남는다고 본 것, ④ 는 NULL 만 더한 SUM 을 0 으로 본 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "erd",
+        "caption": "지역·매장·매출 ERD (매출 쪽 0건 이상)",
+        "mermaid": "erDiagram\n    지역 ||..|{ 매장 : \"포함\"\n    매장 ||..o{ 매출 : \"발생\"\n    지역 {\n        int 지역ID PK\n        string 지역명\n    }\n    매장 {\n        int 매장ID PK\n        string 매장명\n        int 지역ID FK\n    }\n    매출 {\n        int 매출ID PK\n        int 매장ID FK\n        int 금액\n    }"
+      },
+      {
+        "type": "text",
+        "content": "지역: (1, 서울), (2, 부산)\n매장: (A, 서울), (B, 서울), (C, 부산), (D, 부산)\n매출: A 10, A 20, B 30, C 40 (D 는 매출 없음)"
+      },
+      {
+        "type": "sql",
+        "code": "-- ㉠\nSELECT R.지역명, M.매장명, SUM(S.금액)\nFROM 지역 R\nJOIN 매장 M ON R.지역ID = M.지역ID\nJOIN 매출 S ON S.매장ID = M.매장ID\nGROUP BY ROLLUP(R.지역명, M.매장명);\n-- ㉡ 매출 쪽만 LEFT JOIN 으로 바꿈\nSELECT R.지역명, M.매장명, SUM(S.금액)\nFROM 지역 R\nJOIN 매장 M ON R.지역ID = M.지역ID\nLEFT JOIN 매출 S\n  ON S.매장ID = M.매장ID\nGROUP BY ROLLUP(R.지역명, M.매장명);"
+      }
+    ]
   },
   {
     "id": 10629,

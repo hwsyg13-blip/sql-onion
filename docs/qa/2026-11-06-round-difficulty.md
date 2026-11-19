@@ -916,3 +916,5 @@
 | 47-2-16 | 선택 관계(0개 이상) ERD 와 INNER·LEFT·NOT EXISTS·COUNT(칼럼) | OUTER JOIN 이름 → ERD + 데이터 + SQL 4개 | 3, 4, 1, 0 | PostgreSQL 동일, ERD 렌더 확인 |
 | 47-2-20 | M:N 해소(식별 관계) ERD 와 3중 조인·LEFT·FULL | 행 수 설명 짝짓기 → ERD + 데이터 + SQL 4개 | 3, 4, 1, 4 | PostgreSQL 동일, ERD 렌더 확인 |
 | 47-2-30 | 스칼라 서브쿼리 vs JOIN + GROUP BY (사원 없는 부서) | 최댓값 SQL 고르기 → ERD + 데이터 + SQL 2개 | 3, NULL, 2 | PostgreSQL 동일, ERD 렌더 확인 |
+| 48-2-29 | 선택 관계 ERD 에서 INNER vs LEFT JOIN 후 ROLLUP·NULL 합계 | ROLLUP 묶음 고르기 → ERD + 데이터 + SQL 2개 | 6, 7, NULL | PostgreSQL 동일, ERD 렌더 확인 |
+| 47-2-35 | 자기 참조 ERD·IS NULL vs = NULL·NOT EXISTS·셀프 LEFT JOIN | 조건 이름 → ERD + 표 + SQL 4개 | 1, 0, 2, 3 | PostgreSQL 동일, 자기 참조 ERD 렌더 확인 |

@@ -1443,16 +1443,53 @@ export const ROUND_47: QuizQuestion[] = [
     "round": 47,
     "subject": "2과목",
     "number": 35,
-    "title": "NULL 이 아닌 데이터만 조회하는 WHERE 조건은?",
+    "title": "아래 자기 참조 ERD 와 데이터에 대한 SQL ㉠~㉣ 의 결과로 옳은 것은? ('㉠ 행 수, ㉡ 행 수, ㉢ 값, ㉣ 행 수' 순서)",
     "options": [
-      "IS NOT NULL",
-      "<> NULL",
-      "!= NULL",
-      "NOT NULL"
+      "1, 0, 2, 3",
+      "1, 1, 2, 3",
+      "1, 0, 1, 2",
+      "0, 0, 2, 3"
     ],
     "correctIndex": 0,
-    "explanation": "NULL은 일반 비교 연산자로 다룰 수 없다. ② `<> NULL`이나 ③ `!= NULL`처럼 쓰면 결과가 항상 UNKNOWN이 되어 어떤 행도 통과하지 못한다. NULL 여부를 검사하려면 전용 연산자인 `IS NULL` 또는 `IS NOT NULL`을 써야 한다. 정답은 ①번이다. ④ NOT NULL 은 컬럼 제약조건 키워드라 WHERE 조건으로 쓸 수 없다.",
-    "_source": "authored"
+    "explanation": "ERD 는 사원이 다른 사원(관리자)을 참조하는 자기 참조 관계이고, 관리자 쪽이 선택이라 관리자사번에 NULL 이 들어갈 수 있다. NULL 인지는 ㉠ 처럼 IS NULL 로 확인해야 해 김 1행이 나오고, ㉡ 의 = NULL 은 늘 UNKNOWN 이라 0행이다. ㉢ 은 자기를 관리자로 가진 사원이 없는 사람이라 이·박의 2 다. ㉣ 은 사원마다 관리자 정보를 붙이는 셀프 조인으로, LEFT JOIN 이라 관리자가 없는 김도 남아 3행이다. 정답은 ①번이다. ② 는 = NULL 도 NULL 행을 잡는다고 본 것, ③ 은 부하 없는 사원을 하나로 보고 LEFT JOIN 에서 김을 뺀 것, ④ 는 IS NULL 도 NULL 행을 못 잡는다고 본 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "erd",
+        "caption": "사원 자기 참조 ERD (관리자는 없을 수 있음)",
+        "mermaid": "erDiagram\n    사원 |o..o{ 사원 : \"관리\"\n    사원 {\n        int 사번 PK\n        string 이름\n        int 관리자사번 FK\n    }"
+      },
+      {
+        "type": "table",
+        "caption": "사원",
+        "headers": [
+          "사번",
+          "이름",
+          "관리자사번"
+        ],
+        "rows": [
+          [
+            "1",
+            "김",
+            "NULL"
+          ],
+          [
+            "2",
+            "이",
+            "1"
+          ],
+          [
+            "3",
+            "박",
+            "1"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "-- ㉠\nSELECT * FROM 사원\nWHERE 관리자사번 IS NULL;\n-- ㉡\nSELECT * FROM 사원\nWHERE 관리자사번 = NULL;\n-- ㉢ 부하가 없는 사원 수\nSELECT COUNT(*) FROM 사원 E\nWHERE NOT EXISTS\n  (SELECT 1 FROM 사원 M\n   WHERE M.관리자사번 = E.사번);\n-- ㉣\nSELECT * FROM 사원 E\nLEFT JOIN 사원 M\n  ON E.관리자사번 = M.사번;"
+      }
+    ]
   },
   {
     "id": 10685,
