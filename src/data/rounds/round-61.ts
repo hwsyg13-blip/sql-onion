@@ -1431,20 +1431,20 @@ export const ROUND_61: QuizQuestion[] = [
     "round": 61,
     "subject": "2과목",
     "number": 32,
-    "title": "다음 SQL의 실행 결과에 대한 설명으로 가장 적절한 것은?",
+    "title": "다음 SQL 의 실행 결과에 대한 설명으로 가장 적절한 것은?",
     "options": [
-      "A만 다른 값이 나온다.",
-      "B와 D만 같은 값이 나온다.",
-      "모든 함수의 결과는 같다.",
-      "오류가 발생한다."
+      "A 와 D 만 같은 값이고, B 와 C 는 서로 다르다.",
+      "B 와 C 만 같은 값이고, A 와 D 는 서로 다르다.",
+      "A 와 D 가 같고, B 와 C 가 같다.",
+      "네 값이 모두 다르다."
     ],
     "correctIndex": 2,
-    "explanation": "CEIL(7.1)은 올림으로 8, FLOOR(8.2)는 버림으로 8, ROUND(7.6)은 반올림으로 8, TRUNC(8.9)는 버림으로 8이다. 모든 함수의 결과가 8로 같다. ① A(올림)도 8 이고, ② C 도 8 이며, ④ 소수 자리 인수를 생략해도 오류는 나지 않는다.",
+    "explanation": "음수에서는 방향을 헷갈리기 쉽다. CEIL 은 그 수보다 크거나 같은 가장 작은 정수라 -7.1 은 -7 이 된다(A). FLOOR 는 그 수보다 작거나 같은 가장 큰 정수라 -7.1 은 -8 이다(B). ROUND 는 0 에서 멀어지는 쪽으로 반올림하므로 -7.5 는 -8 이다(C). TRUNC 는 소수점 아래를 버려 0 쪽으로 다가가므로 -7.9 는 -7 이다(D). 그래서 A = D = -7, B = C = -8 이다. 정답은 ③번이다. ① 은 ROUND(-7.5) 를 -7 로 본 것이고, ② 는 TRUNC(-7.9) 를 -8 로 본 것이다. ④ 처럼 네 값이 모두 다르려면 결과가 네 가지 정수여야 하는데, 이 네 식의 결과는 -7 과 -8 두 가지뿐이다.",
     "_source": "authored",
     "references": [
       {
         "type": "sql",
-        "code": "SELECT CEIL(7.1) AS A, FLOOR(8.2) AS B,\n       ROUND(7.6) AS C, TRUNC(8.9) AS D\nFROM   DUAL;"
+        "code": "SELECT CEIL(-7.1)  AS A,\n       FLOOR(-7.1) AS B,\n       ROUND(-7.5) AS C,\n       TRUNC(-7.9) AS D\nFROM   DUAL;"
       }
     ]
   },
