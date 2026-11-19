@@ -662,3 +662,14 @@
 | 55-2-27 | 별칭 공백·큰따옴표·칼럼 앞 별칭 불가 | 설명 고르기 → SQL 4개 중 오류 | ㉢, ㉣ | PostgreSQL 에서도 ㉢·㉣ 오류 |
 | 56-2-22 | 단순 CASE 의 NULL 비교 vs DECODE·NVL2 | 결과 다른 것 → NULL 행의 네 식 값 | 0, -1, -1, -1 | CASE 두 가지 PostgreSQL 동일, DECODE·NVL2 는 정의 |
 | 56-2-14 | 드모르간·BETWEEN(아래 > 위)·NULL | 식만 비교 → NULL·역순 범위가 있는 표 | ① | PostgreSQL 로 네 조건 결과 행 확인 |
+
+## 순환 7바퀴 — 57~59회
+
+| 문항 | 개념 | 바뀐 점 | 정답 | 검증 |
+|---|---|---|---|---|
+| 57-2-21 | >= ANY·>= ALL·RANK·FETCH 로 최고값 찾기 | 부적절한 것 고르기 → 네 SQL 행 수 | 4, 2, 2, 1 | PostgreSQL 동일 |
+| 57-2-14 | 집계 함수와 NULL(SUM·COUNT·AVG·NVL) | 설명 고르기 → 다섯 집계 값 | 40, 4, 2, 20, 10 | PostgreSQL 동일 |
+| 58-2-11 | LTRIM·RTRIM 문자 집합·TRIM·REPLACE 2인자 | 결과 다른 것 → 네 식 결과 | 'SQLx', 'xSQL', 'SQL', 'SQL' | PostgreSQL 로 확인(REPLACE 는 빈 문자열 3인자로 대신) |
+| 58-2-46 | NVL·NULLIF·COALESCE·NVL2 로 거르기 | 결과 NULL 아닌 것 → 네 WHERE 의 COUNT | 2, 2, 1, 2 | PostgreSQL 로 같은 조건 확인(NVL2 는 CASE) |
+| 59-2-24 | 집합 연산의 칼럼 수·타입·ORDER BY 이름 | 옳지 않은 설명 → SQL 4개 중 오류 | ㉠, ㉡, ㉣ | Oracle 규칙(PostgreSQL 도 세 개 모두 오류) |
+| 59-2-14 | NULL 처리 식의 동치(NVL2·NVL·COALESCE·DECODE vs = NULL) | NVL2 설명 → 식 5개 중 항상 맞는 것 | ㉠, ㉡, ㉢, ㉣ | PostgreSQL 로 NVL·COALESCE·CASE 확인 |

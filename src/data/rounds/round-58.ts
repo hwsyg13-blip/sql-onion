@@ -280,16 +280,22 @@ export const ROUND_58: QuizQuestion[] = [
     "round": 58,
     "subject": "2과목",
     "number": 11,
-    "title": "아래 함수 호출의 결과 중 나머지와 다른 것은? (표준 SQL 기준)",
+    "title": "아래 SQL 의 결과(A, B, C, D)로 옳은 것은? (Oracle 기준)",
     "options": [
-      "LTRIM('xxSQL', 'x')",
-      "RTRIM('SQLxx', 'x')",
-      "REPLACE('xxSQLxx', 'x', 'Y')",
-      "TRIM('x' FROM 'xxSQLxx')"
+      "'SQL', 'SQL', 'SQL', 'SQL'",
+      "'SQLx', 'xSQL', 'SQL', 'xSQLx'",
+      "'SQLx', 'xSQL', 'SQL', 'SQL'",
+      "'SQL', 'xSQL', 'SQL', 'SQL'"
     ],
     "correctIndex": 2,
-    "explanation": "① `LTRIM('xxSQL','x')` → 왼쪽 'x' 제거 → 'SQL'. ② `RTRIM('SQLxx','x')` → 오른쪽 'x' 제거 → 'SQL'. ③ `REPLACE('xxSQLxx','x','Y')` → 'x' 를 모두 'Y' 로 치환 → 'YYSQLYY'. ④ `TRIM('x' FROM 'xxSQLxx')` → 양쪽 'x' 제거 → 'SQL'. ①②④ 는 'SQL' 반환, ③ 만 'YYSQLYY' 로 결과가 다르다.",
-    "_source": "authored"
+    "explanation": "LTRIM·RTRIM 의 두 번째 인자는 문자열이 아니라 '지울 문자들의 모음' 이다. LTRIM 은 왼쪽에서 x 나 y 가 아닌 문자가 나올 때까지 지워 'SQLx' 가 되고, 오른쪽의 x 는 남는다. RTRIM 은 오른쪽에서 지워 'xSQL' 이다. TRIM('x' FROM …) 은 양쪽의 x 를 모두 지워 'SQL' 이다. REPLACE 에 바꿀 문자열을 주지 않으면 찾은 문자열을 지우므로 D 도 'SQL' 이다. 정답은 ③번이다. ①·④ 는 LTRIM·RTRIM 이 양쪽을 다 지운다고 본 것, ② 는 인자 두 개짜리 REPLACE 가 아무것도 바꾸지 않는다고 본 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT LTRIM('xyxSQLx', 'xy')    AS A,\n       RTRIM('xSQLyxy', 'xy')    AS B,\n       TRIM('x' FROM 'xxSQLxx')  AS C,\n       REPLACE('xSQLx', 'x')     AS D\nFROM   DUAL;"
+      }
+    ]
   },
   {
     "id": 10111,
@@ -1832,16 +1838,22 @@ export const ROUND_58: QuizQuestion[] = [
     "round": 58,
     "subject": "2과목",
     "number": 46,
-    "title": "아래 네 개의 NULL 관련 함수 호출 중 결과가 NULL 이 아닌 것은?",
+    "title": "C 값이 0, NULL, 5 인 T 테이블에 대한 SQL ㉠~㉣ 의 결과(COUNT)로 옳은 것은? (Oracle 기준)",
     "options": [
-      "COALESCE(NULL, NULL)",
-      "NVL(NULL, 0)",
-      "NVL(NULL, NULL)",
-      "NULLIF(1, 1)"
+      "1, 1, 1, 1",
+      "2, 2, 1, 2",
+      "2, 1, 1, 2",
+      "2, 2, 2, 1"
     ],
     "correctIndex": 1,
-    "explanation": "② `NVL(NULL, 0)` 만 NULL 을 0 으로 치환하여 0 을 반환한다. ① `COALESCE(NULL, NULL)` 은 모든 인자가 NULL 이라 NULL, ③ `NVL(NULL, NULL)` 도 NULL, ④ `NULLIF(1, 1)` 은 두 인자가 같으면 NULL 반환이라 NULL.",
-    "_source": "authored"
+    "explanation": "㉠ 은 NULL 을 0 으로 바꿔 비교하므로 원래 0 인 행과 NULL 행, 2행이다. ㉡ 의 NULLIF(C, 0) 은 C 가 0 이면 NULL 을 돌려주고, C 가 NULL 이면 그대로 NULL 이라 두 행이 IS NULL 에 걸려 2행이다. ㉢ 은 NULL 을 -1 로 바꿔 0 보다 큰 5 만 남아 1행이다. ㉣ 의 NVL2(C, C, 1) 은 C 가 NULL 이 아니면 C, NULL 이면 1 이라 값이 0, 1, 5 가 되고 0 보다 큰 것은 2행이다. 정답은 ②번이다. ① 은 NULL 행이 어디에도 걸리지 않는다고 본 것, ③ 은 NULLIF 가 NULL 행을 잡지 못한다고 본 것, ④ 는 ㉢ 과 ㉣ 을 바꿔 본 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "-- ㉠\nSELECT COUNT(*) FROM T\nWHERE  NVL(C, 0) = 0;\n-- ㉡\nSELECT COUNT(*) FROM T\nWHERE  NULLIF(C, 0) IS NULL;\n-- ㉢\nSELECT COUNT(*) FROM T\nWHERE  COALESCE(C, -1) > 0;\n-- ㉣\nSELECT COUNT(*) FROM T\nWHERE  NVL2(C, C, 1) > 0;"
+      }
+    ]
   },
   {
     "id": 10146,
