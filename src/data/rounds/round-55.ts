@@ -1380,7 +1380,7 @@ export const ROUND_55: QuizQuestion[] = [
       {
         "type": "erd",
         "caption": "고객·계약·상세내용 ERD",
-        "mermaid": "erDiagram\n    고객 ||--o{ 계약 : \"체결\"\n    계약 ||--o{ 상세내용 : \"구성\"\n    고객 {\n        string 고객번호 PK\n        string 고객명\n    }\n    계약 {\n        string 계약번호 PK\n        string 고객번호 FK\n    }\n    상세내용 {\n        string 상세번호 PK\n        string 계약번호 FK\n    }"
+        "mermaid": "erDiagram\n    고객 ||..o{ 계약 : \"체결\"\n    계약 ||..o{ 상세내용 : \"구성\"\n    고객 {\n        string 고객번호 PK\n        string 고객명\n    }\n    계약 {\n        string 계약번호 PK\n        string 고객번호 FK\n    }\n    상세내용 {\n        string 상세번호 PK\n        string 계약번호 FK\n    }"
       },
       {
         "type": "table",

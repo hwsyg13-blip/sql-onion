@@ -858,7 +858,7 @@ export const ROUND_45: QuizQuestion[] = [
       {
         "type": "erd",
         "caption": "고객·주문·주문상세·상품·카테고리 ERD",
-        "mermaid": "erDiagram\n    고객 ||--o{ 주문 : \"한다\"\n    주문 ||--|{ 주문상세 : \"포함\"\n    상품 ||--o{ 주문상세 : \"주문됨\"\n    카테고리 ||--o{ 상품 : \"분류\"\n    고객 {\n        string 고객ID PK\n        string 고객명\n    }\n    주문 {\n        string 주문ID PK\n        string 고객ID FK\n        date 주문일자\n    }\n    주문상세 {\n        string 주문ID PK,FK\n        string 상품ID PK,FK\n        int 수량\n    }\n    상품 {\n        string 상품ID PK\n        string 상품명\n        string 카테고리ID FK\n    }\n    카테고리 {\n        string 카테고리ID PK\n        string 카테고리명\n    }"
+        "mermaid": "erDiagram\n    고객 ||..o{ 주문 : \"한다\"\n    주문 ||--|{ 주문상세 : \"포함\"\n    상품 ||--o{ 주문상세 : \"주문됨\"\n    카테고리 ||..o{ 상품 : \"분류\"\n    고객 {\n        string 고객ID PK\n        string 고객명\n    }\n    주문 {\n        string 주문ID PK\n        string 고객ID FK\n        date 주문일자\n    }\n    주문상세 {\n        string 주문ID PK,FK\n        string 상품ID PK,FK\n        int 수량\n    }\n    상품 {\n        string 상품ID PK\n        string 상품명\n        string 카테고리ID FK\n    }\n    카테고리 {\n        string 카테고리ID PK\n        string 카테고리명\n    }"
       },
       {
         "type": "table",
