@@ -200,15 +200,21 @@
     {
       "subject": "2과목",
       "number": 12,
-      "title": "DML 로 적절한 것은?",
+      "title": "기본키 칼럼 C 하나뿐인 빈 테이블 T 와, C 값이 2, 3, 1 인 S 테이블이 있다. 아래를 순서대로 실행할 때 마지막 SELECT 결과로 옳은 것은? (Oracle 기준, 오류가 난 문장 다음도 계속 실행)",
       "options": [
-        "INSERT, UPDATE, DELETE",
-        "CREATE, ALTER, DROP",
-        "GRANT, REVOKE",
-        "COMMIT, ROLLBACK"
+        "2",
+        "4",
+        "0",
+        "1"
       ],
       "correctIndex": 0,
-      "explanation": "DML(Data Manipulation Language)은 데이터 조작어로 INSERT·UPDATE·DELETE·SELECT가 해당된다. ② CREATE/ALTER/DROP은 DDL, ③ GRANT/REVOKE는 DCL, ④ COMMIT/ROLLBACK은 TCL이다."
+      "explanation": "두 번째 INSERT 는 S 의 세 행을 한 문장으로 넣는데, 그중 1 이 이미 T 에 있어 기본키 위반 오류가 난다. Oracle 은 오류가 난 '문장' 하나만 통째로 취소한다. 그래서 같은 문장에서 먼저 들어가려던 2, 3 도 남지 않는다. 앞서 넣은 1 은 그 문장과 상관없어 그대로다. 이어서 4 를 넣고 COMMIT 하므로 T 는 1, 4 의 2행이다. 정답은 ①번이다. ② 는 오류 전까지 들어간 2, 3 이 남는다고 본 것, ③ 은 오류 하나로 트랜잭션 전체가 취소된다고 본 것, ④ 는 오류 뒤 문장은 실행되지 않는다고 본 것이다.",
+      "references": [
+        {
+          "type": "sql",
+          "code": "INSERT INTO T VALUES (1);\nINSERT INTO T SELECT C FROM S;\nINSERT INTO T VALUES (4);\nCOMMIT;\nSELECT COUNT(*) FROM T;"
+        }
+      ]
     },
     {
       "subject": "2과목",
@@ -1731,15 +1737,21 @@
     {
       "subject": "2과목",
       "number": 48,
-      "title": "무결성 제약조건 위배에 대한 설명 중 옳지 않은 것은?",
+      "title": "회원 테이블에 ID 'A', 'B' 만 있을 때 아래 INSERT ㉠~㉣ 의 결과로 옳은 것은? ('㉠·㉡·㉢ 이 위배하는 무결성 / ㉣ 결과' 순서)",
       "options": [
-        "도서관 테이블의 회원ID 컬럼에 FOREIGN KEY 제약이 정의되지 않았더라도 다른 테이블에 없는 회원ID 값을 넣으면 참조 무결성이 위배된다.",
-        "PRIMARY KEY 컬럼에 중복 값을 삽입하면 개체 무결성이 위배된다.",
-        "CHECK 제약을 벗어난 값이 입력되면 도메인 무결성이 위배된다.",
-        "PRIMARY KEY 컬럼에 NULL 이 들어가면 개체 무결성이 위배된다."
+        "참조, 도메인, 개체 / 성공",
+        "참조, 도메인, 개체 / 오류",
+        "개체, 도메인, 참조 / 성공",
+        "참조, 개체, 도메인 / 오류"
       ],
       "correctIndex": 0,
-      "explanation": "참조 무결성은 FOREIGN KEY 제약이 정의된 경우에만 검사된다. FK 제약이 없는 회원ID 는 일반 컬럼일 뿐이라 다른 테이블에 없는 값을 넣어도 참조 무결성 위배가 아니므로 ① 이 옳지 않다. ② 기본키 중복, ④ 기본키 NULL 은 개체 무결성(기본키는 유일 + NOT NULL) 위배이고, ③ CHECK 범위를 벗어나면 도메인 무결성 위배다. ※ 복원 자료의 ④ 는 'NOT NULL 컬럼에 NULL' 이라 일반 컬럼이면 도메인 무결성으로도 볼 수 있어 정답이 둘로 읽혀, 기본키 컬럼으로 명확히 했다."
+      "explanation": "㉠ 은 회원에 없는 'C' 를 가리켜 외래키, 즉 참조 무결성을 어긴다. ㉡ 의 권수 7 은 CHECK 로 정한 값의 범위를 벗어나 도메인 무결성 위반이다. ㉢ 은 기본키에 NULL 을 넣어 개체 무결성 위반이다. 외래키 칼럼은 NULL 을 허용하므로(가리키는 회원이 아직 없다는 뜻) ㉣ 은 성공한다. 정답은 ①번이다. ② 는 외래키에 NULL 을 넣을 수 없다고 본 것, ③ 은 참조와 개체를 바꿔 본 것, ④ 는 CHECK 와 기본키 위반의 이름을 바꾸고 ㉣ 도 오류로 본 것이다.",
+      "references": [
+        {
+          "type": "sql",
+          "code": "CREATE TABLE 대출 (\n  번호   NUMBER PRIMARY KEY,\n  회원ID CHAR(1) REFERENCES 회원(ID),\n  권수   NUMBER\n         CHECK (권수 BETWEEN 1 AND 5)\n);\n\n-- ㉠\nINSERT INTO 대출 VALUES (1, 'C', 2);\n-- ㉡\nINSERT INTO 대출 VALUES (2, 'A', 7);\n-- ㉢\nINSERT INTO 대출 VALUES (NULL, 'B', 1);\n-- ㉣\nINSERT INTO 대출 VALUES (3, NULL, 1);"
+        }
+      ]
     },
     {
       "subject": "2과목",

@@ -379,3 +379,14 @@
 | 53-2-27 | 별칭 규칙(WHERE·AS 테이블 별칭·큰따옴표·별칭 후 원래 이름) | 설명 고르기 → SQL 5개 중 오류 | ㉡, ㉢, ㉤ | PostgreSQL 은 ㉢(AS 테이블 별칭) 허용 — Oracle 규칙으로 '(Oracle 기준)' 명시 |
 
 부수 수정: 회차 분석 페이지 '"오류가 나는 SQL 고르기" 가 N문항' 문장이 3페이지 이상 반복 → '제N회는' 추가(부정형 문장도 함께).
+
+## 순환 3바퀴 — 54~56회 (11-19 14시 실행 계속)
+
+| 문항 | 개념 | 바뀐 점 | 정답 | 검증 |
+|---|---|---|---|---|
+| 54-2-49 | 비등가 조인(BETWEEN 경계) | INNER JOIN 설명 → 등급 표와 BETWEEN 조인 행 수·경계값 등급 | 4행, 2, 3 | PostgreSQL 동일 |
+| 54-2-25 | CHECK 와 NULL·PK 위반 | 제약 설명 → INSERT 5개 중 성공 | ㉠, ㉡ | PostgreSQL 동일(CHECK 는 UNKNOWN 통과) |
+| 55-2-12 | 문장 단위 롤백 | DML 고르기 → INSERT … SELECT 중 PK 위반 시 남는 행 | 2 | Oracle 규칙(문장만 취소). PostgreSQL 은 문장별 자동 커밋으로 같은 결과 확인 |
+| 55-2-48 | 개체·참조·도메인 무결성, FK NULL | 위배 설명 → INSERT 4개의 위배 종류와 FK NULL 결과 | 참조, 도메인, 개체 / 성공 | PostgreSQL 동일 |
+| 56-2-38 | DEFAULT 와 명시적 NULL·기본값 변경 | 제약 설명 → INSERT 4번과 ALTER 뒤 상태 값 | N, NULL, N, Y | PostgreSQL 동일 |
+| 56-2-39 | REGEXP_INSTR(N번째·끝 위치)·INSTR 음수 | 함수 이름 → 결과 계산 | 4, 6, 5 | PostgreSQL regexp_instr 4·6, INSTR 음수는 Oracle 규칙 |

@@ -997,16 +997,22 @@ export const ROUND_54: QuizQuestion[] = [
     "round": 54,
     "subject": "2과목",
     "number": 25,
-    "title": "제약 조건에 대한 설명 중 적절하지 않은 것은?",
+    "title": "아래 테이블에 INSERT ㉠~㉤ 을 차례로 실행할 때 성공하는 것만 모두 고른 것은?",
     "options": [
-      "PRIMARY KEY 는 NOT NULL 조건을 함께 만족한다.",
-      "FOREIGN KEY 는 부모 테이블의 기본키를 참조한다.",
-      "UNIQUE KEY 는 NOT NULL 이다.",
-      "CHECK 는 특정 조건을 만족하는 값만 허용한다."
+      "㉠",
+      "㉠, ㉡, ㉢",
+      "㉠, ㉡",
+      "㉠, ㉡, ㉣"
     ],
     "correctIndex": 2,
-    "explanation": "UNIQUE 는 값의 중복만 막을 뿐 NULL 은 허용하므로 ③ 이 적절하지 않다. NULL 까지 막으려면 NOT NULL 제약을 따로 지정해야 한다. ① PK 는 유일성과 NOT NULL, ② FK 는 부모 키 참조, ④ CHECK 는 조건 검사라 모두 옳다.",
-    "_source": "authored"
+    "explanation": "㉠ 의 100 은 BETWEEN 의 끝값이라 통과한다. CHECK 는 조건이 FALSE 일 때만 막고, NULL 처럼 결과가 UNKNOWN 이면 통과시킨다. 그래서 점수 NULL 인 ㉡ 도 들어간다. ㉢ 의 101 은 CHECK 위반, ㉣ 은 기본키에 NULL, ㉤ 은 기본키 1 중복이라 오류다. 정답은 ③번이다. ① 은 CHECK 가 NULL 도 막는다고 본 것, ② 는 101 이 범위 안이라고 본 것, ④ 는 기본키에 NULL 이 들어간다고 본 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "CREATE TABLE 성적 (\n  학번 NUMBER PRIMARY KEY,\n  점수 NUMBER\n       CHECK (점수 BETWEEN 0 AND 100)\n);\n\n-- ㉠\nINSERT INTO 성적 VALUES (1, 100);\n-- ㉡\nINSERT INTO 성적 VALUES (2, NULL);\n-- ㉢\nINSERT INTO 성적 VALUES (3, 101);\n-- ㉣\nINSERT INTO 성적 VALUES (NULL, 50);\n-- ㉤\nINSERT INTO 성적 VALUES (1, 50);"
+      }
+    ]
   },
   {
     "id": 10325,
@@ -2199,16 +2205,78 @@ export const ROUND_54: QuizQuestion[] = [
     "round": 54,
     "subject": "2과목",
     "number": 49,
-    "title": "INNER JOIN 에 대한 설명 중 적절하지 않은 것은?",
+    "title": "아래 두 테이블에 대한 SQL 의 결과로 옳은 것은? ('행 수, 다의 등급, 라의 등급' 순서)",
     "options": [
-      "두 테이블에서 조인 조건이 일치하는 행만 반환된다.",
-      "ON 절에 조인 조건을 기술할 수 있다.",
-      "USING 절로 컬럼명이 같은 경우 간단히 조인할 수 있다.",
-      "조인으로 사용되는 컬럼은 반드시 컬럼명이 같아야 한다."
+      "5행, 2, 3",
+      "4행, 3, 3",
+      "4행, 2, 2",
+      "4행, 2, 3"
     ],
     "correctIndex": 3,
-    "explanation": "INNER JOIN 은 조인 조건이 일치하는 행만 반환하며(①), ON 절에 조건을 쓰거나(②) 같은 이름의 컬럼이면 USING 으로 간단히 쓸 수 있다(③). ON A.DEPTNO = B.DNO 처럼 컬럼명이 달라도 조인할 수 있으므로 반드시 같아야 한다는 ④ 가 옳지 않다.",
-    "_source": "authored"
+    "explanation": "INNER JOIN 의 조건은 = 가 아니어도 되고, 두 칼럼 이름이 같을 필요도 없다. 이처럼 범위로 짝을 짓는 것을 비등가 조인이라 한다. BETWEEN 은 양 끝 값을 포함하므로 399 인 다는 2등급(200~399), 400 인 라는 3등급(400~599)이다. 700 인 마는 어느 범위에도 들지 않아 INNER JOIN 결과에서 빠지고, 결과는 4행이다. 정답은 ④번이다. ① 은 짝이 없는 행도 남는다고 본 것, ②·③ 은 BETWEEN 의 경계값을 한쪽 등급으로 잘못 붙인 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "caption": "등급",
+        "headers": [
+          "등급",
+          "하한",
+          "상한"
+        ],
+        "rows": [
+          [
+            "1",
+            "0",
+            "199"
+          ],
+          [
+            "2",
+            "200",
+            "399"
+          ],
+          [
+            "3",
+            "400",
+            "599"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "사원",
+        "headers": [
+          "이름",
+          "급여"
+        ],
+        "rows": [
+          [
+            "가",
+            "150"
+          ],
+          [
+            "나",
+            "200"
+          ],
+          [
+            "다",
+            "399"
+          ],
+          [
+            "라",
+            "400"
+          ],
+          [
+            "마",
+            "700"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT E.이름, G.등급\nFROM   사원 E\n       INNER JOIN 등급 G\n       ON E.급여 BETWEEN G.하한\n                     AND G.상한;"
+      }
+    ]
   },
   {
     "id": 10349,
