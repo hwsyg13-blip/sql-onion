@@ -339,41 +339,19 @@
     {
       "subject": "2과목",
       "number": 14,
-      "title": "SNS별 추천점수를 집계하여 추출하는 함수로 올바른 것은?",
+      "title": "SNS_LOG(SNS, 사용자, 추천점수) 테이블에 대한 SQL ㉠~㉣ 중 오류가 발생하는 것만 모두 고른 것은?",
       "options": [
-        "SELECT SUM(추천점수) FROM SNS_LOG;",
-        "SELECT 추천점수 FROM SNS_LOG GROUP BY SNS;",
-        "SELECT SNS, SUM(추천점수) FROM SNS_LOG GROUP BY SNS;",
-        "SELECT SNS, 추천점수 FROM SNS_LOG ORDER BY SNS;"
+        "㉡",
+        "㉡, ㉣",
+        "㉠",
+        "㉠, ㉢"
       ],
       "correctIndex": 2,
-      "explanation": "SNS 별 합계를 보려면 GROUP BY SNS 로 묶고 SELECT 절에 그룹 기준 컬럼 SNS 와 집계 함수 SUM(추천점수)를 함께 쓴다(③). 결과는 FB 9, IG 3 두 행이다. ① 은 전체 합계 한 행만 나오고, ② 는 GROUP BY 에 없는 일반 컬럼(추천점수)을 집계 없이 SELECT 해 오류, ④ 는 집계 없이 정렬만 한다.",
+      "explanation": "GROUP BY 를 쓰면 SELECT 에는 GROUP BY 에 쓴 칼럼이나 집계 함수만 올 수 있다. ㉠ 은 그룹으로 묶지 않은 사용자를 그대로 보여 주려 해 한 그룹에 값이 여럿이라 오류다. 반대로 GROUP BY 에 쓴 칼럼을 SELECT 에 모두 보여 줄 필요는 없어 ㉡(사용자로도 나눠 행이 더 많아질 뿐)과 ㉢ 은 된다. ㉣ 처럼 사용자를 MAX 같은 집계 함수로 감싸면 그룹마다 값이 하나라 된다. 정답은 ③번이다. ① 과 ② 는 GROUP BY 칼럼을 모두 SELECT 해야 한다고 본 것이고, ② 는 문자 칼럼에는 MAX 를 쓸 수 없다고도 본 것이다. ④ 는 GROUP BY 칼럼을 빼면 오류라고 본 것이다.",
       "references": [
         {
-          "type": "table",
-          "caption": "SNS_LOG 테이블",
-          "headers": [
-            "SNS",
-            "사용자",
-            "추천점수"
-          ],
-          "rows": [
-            [
-              "FB",
-              "A",
-              "5"
-            ],
-            [
-              "FB",
-              "B",
-              "4"
-            ],
-            [
-              "IG",
-              "C",
-              "3"
-            ]
-          ]
+          "type": "sql",
+          "code": "-- ㉠\nSELECT SNS, 사용자, SUM(추천점수)\nFROM   SNS_LOG\nGROUP  BY SNS;\n-- ㉡\nSELECT SNS, SUM(추천점수)\nFROM   SNS_LOG\nGROUP  BY SNS, 사용자;\n-- ㉢\nSELECT SUM(추천점수)\nFROM   SNS_LOG\nGROUP  BY SNS;\n-- ㉣\nSELECT SNS, MAX(사용자), SUM(추천점수)\nFROM   SNS_LOG\nGROUP  BY SNS;"
         }
       ]
     },
@@ -1688,19 +1666,19 @@
     {
       "subject": "2과목",
       "number": 41,
-      "title": "아래 SQL의 실행 계획 단계로 가장 적절한 것은?",
+      "title": "아래 실행 계획에서 각 단계가 실행되는 순서로 옳은 것은? (Oracle 기준, 왼쪽 숫자는 ID)",
       "options": [
-        "TABLE ACCESS FULL → SORT",
-        "INDEX RANGE SCAN → TABLE ACCESS BY INDEX ROWID",
-        "HASH JOIN → NESTED LOOPS",
-        "TABLE ACCESS FULL → HASH JOIN"
+        "0 → 1 → 2 → 3 → 4",
+        "2 → 4 → 3 → 1 → 0",
+        "4 → 3 → 2 → 1 → 0",
+        "2 → 3 → 4 → 1 → 0"
       ],
       "correctIndex": 1,
-      "explanation": "INDEX 힌트로 EMP_DEPT_IDX 를 쓰도록 했으므로, 먼저 인덱스에서 DEPT_NO = 10 인 범위를 읽어 ROWID 를 얻고(INDEX RANGE SCAN), 그 ROWID 로 테이블에서 나머지 컬럼을 읽는다(TABLE ACCESS BY INDEX ROWID). ② 가 맞다. ①④ 는 인덱스를 쓰지 않는 전체 스캔이고, ③④ 의 조인 연산은 테이블이 하나뿐인 이 SQL 에 없다.",
+      "explanation": "실행 계획은 안쪽(들여쓰기가 깊은 쪽)부터, 같은 깊이에서는 위쪽부터 읽고, 자식이 끝나야 부모가 결과를 받는다. NESTED LOOPS(1)의 첫 자식인 DEPT 전체 읽기(2)가 선행 테이블로 먼저 실행된다. 이어 두 번째 자식 3 을 처리하는데, 3 은 자식인 인덱스 범위 스캔(4)으로 ROWID 를 얻은 뒤 EMP 행을 읽는다. 그래서 2 → 4 → 3 → 1 → 0 이다. 정답은 ②번이다. ① 은 위에서부터 그대로 읽은 것, ③ 은 가장 깊은 4 부터 시작해 선행 테이블을 놓친 것, ④ 는 인덱스보다 테이블을 먼저 읽는다고 본 것이다.",
       "references": [
         {
           "type": "sql",
-          "code": "SELECT /*+ INDEX(E EMP_DEPT_IDX) */ E.*\nFROM   EMP E\nWHERE  E.DEPT_NO = 10;"
+          "code": "0 SELECT STATEMENT\n1   NESTED LOOPS\n2     TABLE ACCESS FULL  DEPT\n3     TABLE ACCESS BY INDEX ROWID\n                         EMP\n4       INDEX RANGE SCAN\n                 EMP_DEPT_IDX"
         }
       ]
     },

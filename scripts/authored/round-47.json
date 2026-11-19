@@ -1416,15 +1416,21 @@
     {
       "subject": "2과목",
       "number": 40,
-      "title": "아래 네 SQL 중 결과가 나머지와 다른 것은?",
+      "title": "아래 SQL 의 결과(A, B, C, D)로 옳은 것은?",
       "options": [
-        "LPAD('BCD', 3, 'A')",
-        "RTRIM('EBCDE', 'E')",
-        "SUBSTR('ABCDE', 2, 3)",
-        "CONCAT(CONCAT(NULL, 'BC'), 'D')"
+        "AABCD, BCDEF, BCxy, EBC",
+        "AABCD, BCD, BCxy, EBC",
+        "AABCD, BCD, BCxyxy, EBCD",
+        "ABCD, BCD, BCxy, EB"
       ],
       "correctIndex": 1,
-      "explanation": "① LPAD('BCD', 3, 'A') 는 이미 길이가 3 이라 채울 자리가 없어 'BCD' 그대로다. ③ SUBSTR('ABCDE', 2, 3) 은 두 번째 글자부터 세 글자라 'BCD' 다. ④ Oracle 의 CONCAT 은 NULL 을 빈 문자열처럼 이어 붙여 CONCAT(NULL, 'BC') 가 'BC' 가 되고, 여기에 'D' 를 붙여 'BCD' 다. ② RTRIM('EBCDE', 'E') 는 오른쪽 끝의 E 만 지우고 앞쪽 E 는 남기므로 'EBCD' 가 되어 혼자 다르다."
+      "explanation": "LPAD·RPAD 의 두 번째 인자는 결과의 전체 길이다. A 는 길이 5 가 되도록 왼쪽을 'A' 로 채워 'AABCD' 다. 원래 문자열이 지정한 길이보다 길면 채우는 대신 잘라 내므로 B 는 앞 3글자 'BCD' 다. C 는 길이 4 가 될 때까지 오른쪽을 'xy' 로 채워 'BCxy' 다. D 의 RTRIM 은 오른쪽에서 D 나 E 가 아닌 글자가 나올 때까지 지워 'EBC' 다. 정답은 ②번이다. ① 은 길이가 넘쳐도 그대로 둔다고 본 것, ③ 은 채울 문자열을 통째로 두 번 붙이고 RTRIM 을 한 글자만 지운 것, ④ 는 채울 글자 수와 지울 글자 수를 잘못 센 것이다.",
+      "references": [
+        {
+          "type": "sql",
+          "code": "SELECT LPAD('BCD', 5, 'A')   AS A,\n       LPAD('BCDEF', 3, 'A') AS B,\n       RPAD('BC', 4, 'xy')   AS C,\n       RTRIM('EBCDE', 'DE')  AS D\nFROM   DUAL;"
+        }
+      ]
     },
     {
       "subject": "2과목",
@@ -1655,19 +1661,19 @@
     {
       "subject": "2과목",
       "number": 46,
-      "title": "아래 SQL 의 결과로 옳은 것은?",
+      "title": "아래 SQL 의 결과(A, B, C, D)로 옳은 것은? (Oracle 기준)",
       "options": [
-        "AB",
-        "BCDE",
-        "CDE",
-        "ABCDE"
+        "BCDE, A, NULL, DE",
+        "BCDE, AB, NULL, DE",
+        "BCDE, AB, E, ED",
+        "CDE, AB, NULL, DE"
       ],
       "correctIndex": 1,
-      "explanation": "`SUBSTR('ABCDE', 2)`는 두 번째 문자부터 끝까지 잘라 온다. 길이를 지정하지 않으면 끝까지 가져오므로 'BCDE'가 된다. 시작 위치는 1부터 센다. 정답은 ②번이다. ① AB 는 앞 두 글자, ③ CDE 는 세 번째 글자부터, ④ ABCDE 는 시작 위치를 1 로 줬을 때의 결과다.",
+      "explanation": "SUBSTR 에 길이를 주지 않으면 시작 위치부터 끝까지라 A 는 'BCDE' 다. Oracle 은 시작 위치 0 을 1 로 보므로 B 는 'AB' 다. 시작 위치가 문자열 길이를 넘으면 잘라 낼 글자가 없어 C 는 NULL 이다. 음수 위치는 뒤에서 세어 D 는 뒤에서 2번째부터 끝까지인 'DE' 다. 정답은 ②번이다. ① 은 0 을 0번째 글자로 보아 한 글자만 남긴 것, ③ 은 범위를 넘으면 마지막 글자를 준다고 보고 음수 위치를 거꾸로 읽은 것, ④ 는 위치를 0 부터 센 것이다. PostgreSQL 에서는 B 가 'A' 가 되어 결과가 다르다.",
       "references": [
         {
           "type": "sql",
-          "code": "SELECT SUBSTR('ABCDE', 2) FROM DUAL;"
+          "code": "SELECT SUBSTR('ABCDE', 2)    AS A,\n       SUBSTR('ABCDE', 0, 2) AS B,\n       SUBSTR('ABCDE', 6)    AS C,\n       SUBSTR('ABCDE', -2)   AS D\nFROM   DUAL;"
         }
       ]
     },

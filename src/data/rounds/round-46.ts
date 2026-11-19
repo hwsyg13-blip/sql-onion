@@ -1118,20 +1118,20 @@ export const ROUND_46: QuizQuestion[] = [
     "round": 46,
     "subject": "2과목",
     "number": 24,
-    "title": "아래 윈도우 절의 결과로 옳은 것은?",
+    "title": "연봉이 100, 200, 300, 400 인 4행에 아래 SQL 을 실행했다. ('300 행의 A, 200 행의 B, 300 행의 C, 200 행의 D' 순서)",
     "options": [
-      "전체 최대 연봉을 모든 행에 반환한다.",
-      "현재 행의 연봉 값을 그대로 반환한다.",
-      "이전 행까지의 최대 연봉을 반환한다.",
-      "오류가 발생한다."
+      "400, 600, 200, 3",
+      "300, 600, 200, 3",
+      "300, 500, 250, 2",
+      "300, 600, 250, 3"
     ],
     "correctIndex": 1,
-    "explanation": "ROWS BETWEEN CURRENT ROW AND CURRENT ROW로 프레임을 설정하면 누적 범위가 현재 한 행으로 한정된다. 한 행만 본 MAX는 곧 자기 자신이므로, 모든 행에서 자신의 연봉 값이 그대로 반환된다. 정답은 ②번이다. ① 전체 최대를 모든 행에 주려면 OVER () 처럼 파티션 전체를 프레임으로 잡아야 하고, ③ 이전 행까지라면 ROWS BETWEEN UNBOUNDED PRECEDING AND 1 PRECEDING 같은 프레임이 필요하며, ④ CURRENT ROW 를 시작과 끝에 모두 쓰는 프레임은 문법상 허용된다.",
+    "explanation": "ROWS BETWEEN 은 현재 행을 기준으로 계산할 행의 범위를 정한다. A 는 현재 행 하나만 보므로 300 행에서 자기 값 300 이다. B 는 앞 1행과 뒤 1행까지라 200 행에서 100 + 200 + 300 = 600 이다. C 는 처음부터 현재 행까지의 평균이라 300 행에서 (100 + 200 + 300) / 3 = 200 이다. D 는 현재 행부터 끝까지의 행 수라 200 행에서 200·300·400 의 3 이다. 정답은 ②번이다. ① 은 A 를 전체 최댓값으로 본 것, ③ 은 B 에서 뒤쪽 행을, D 에서 현재 행을 뺀 것, ④ 는 C 에 끝까지 포함한 것이다.",
     "_source": "authored",
     "references": [
       {
         "type": "sql",
-        "code": "SELECT 이름, 연봉,\n       MAX(연봉) OVER (ORDER BY 연봉 ROWS BETWEEN CURRENT ROW AND CURRENT ROW) AS M\nFROM   EMP;"
+        "code": "SELECT 연봉,\n  MAX(연봉) OVER (ORDER BY 연봉 ROWS\n    BETWEEN CURRENT ROW\n    AND CURRENT ROW)          AS A,\n  SUM(연봉) OVER (ORDER BY 연봉 ROWS\n    BETWEEN 1 PRECEDING\n    AND 1 FOLLOWING)          AS B,\n  AVG(연봉) OVER (ORDER BY 연봉 ROWS\n    BETWEEN UNBOUNDED PRECEDING\n    AND CURRENT ROW)          AS C,\n  COUNT(*) OVER (ORDER BY 연봉 ROWS\n    BETWEEN CURRENT ROW\n    AND UNBOUNDED FOLLOWING)  AS D\nFROM EMP;"
       }
     ]
   },
@@ -1220,20 +1220,20 @@ export const ROUND_46: QuizQuestion[] = [
     "round": 46,
     "subject": "2과목",
     "number": 27,
-    "title": "아래 SQL의 실행 결과로 옳은 것은?",
+    "title": "EMP 의 (부서, 급여) 가 (A, 300), (A, 200), (B, 200), (B, 100) 일 때, 아래 SQL ㉠~㉣ 의 결과로 옳은 것은? (행 수 또는 오류)",
     "options": [
-      "전체 직원 중 급여가 가장 큰 1 명만 단일 행으로 반환한다.",
-      "부서별 최상위 급여자를 모두 묶어 반환한다.",
-      "WHERE 조건이 항상 참이 되어 모든 직원을 그대로 반환한다.",
-      "\"single-row subquery returns more than one row\" 오류가 발생한다."
+      "2, 3, 3, 2",
+      "오류, 2, 3, 2",
+      "오류, 3, 2, 2",
+      "오류, 3, 3, 2"
     ],
     "correctIndex": 3,
-    "explanation": "서브쿼리 SELECT MAX(급여) FROM EMP GROUP BY 부서 는 부서마다 한 행씩, 여러 행을 반환한다. 그런데 비교 연산자 >= 는 단일 행만 받을 수 있어 \"single-row subquery returns more than one row\"(ORA-01427) 오류가 난다(④). 부서별 최고 급여와 비교하려면 >= ALL 이나 IN, 연관 서브쿼리를 써야 한다. ① 은 서브쿼리에 GROUP BY 가 없을 때(전체 MAX 하나와 비교)를 가정한 것이고, ② 는 부서별 최고 급여와 짝지어 비교하는 연관 서브쿼리를 썼을 때의 결과이며, ③ 은 오류로 실행되지 않으므로 틀리다.",
+    "explanation": "서브쿼리는 부서마다 최고 급여 300, 200 을 돌려준다. ㉠ 은 = 뒤에 여러 행이 와서 오류다. ㉡ 의 = ANY 와 ㉢ 의 IN 은 급여가 300 이나 200 인 행을 모두 고르는데, 부서를 따지지 않아 A 부서의 200 까지 걸려 3행이다. ㉣ 은 (부서, 급여) 쌍으로 비교하므로 A 의 300, B 의 200 만 정확히 골라 2행이다. 부서별 최고 급여자를 구하려면 ㉣ 처럼 다중 칼럼 서브쿼리를 써야 한다. 정답은 ④번이다. ① 은 = 도 여러 행을 받는다고 본 것, ② 와 ③ 은 = ANY 와 IN 중 하나가 부서를 구별한다고 본 것이다.",
     "_source": "authored",
     "references": [
       {
         "type": "sql",
-        "code": "SELECT 이름, 급여\nFROM   EMP\nWHERE  급여 >= (SELECT MAX(급여) FROM EMP GROUP BY 부서);"
+        "code": "-- ㉠\nSELECT 이름 FROM EMP WHERE 급여 =\n (SELECT MAX(급여) FROM EMP\n  GROUP BY 부서);\n-- ㉡\nSELECT 이름 FROM EMP WHERE 급여 = ANY\n (SELECT MAX(급여) FROM EMP\n  GROUP BY 부서);\n-- ㉢\nSELECT 이름 FROM EMP WHERE 급여 IN\n (SELECT MAX(급여) FROM EMP\n  GROUP BY 부서);\n-- ㉣\nSELECT 이름 FROM EMP\nWHERE (부서, 급여) IN\n (SELECT 부서, MAX(급여) FROM EMP\n  GROUP BY 부서);"
       }
     ]
   },
