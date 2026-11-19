@@ -1044,34 +1044,25 @@ export const ROUND_62: QuizQuestion[] = [
     "round": 62,
     "subject": "2과목",
     "number": 27,
-    "title": "다음 DEPT 테이블에 대한 (가)~(라) SQL 중 실행 시 오류가 발생하는 것은?",
+    "title": "아래 ERD 의 두 테이블에 대한 SQL (가)~(마) 중 실행 시 오류가 발생하는 것만 모두 고른 것은? (Oracle 기준)",
     "options": [
-      "(가)\nSELECT DNAME\nFROM DEPT;",
-      "(나)\nSELECT b.DEPTNO\nFROM (\n  SELECT b.DEPTNO\n  FROM DEPT b\n) a;",
-      "(다)\nSELECT SUBSTR(DNAME, 1, 3)\nFROM DEPT;",
-      "(라)\nSELECT RTRIM(DNAME)\nFROM DEPT;"
+      "(나)",
+      "(나), (라), (마)",
+      "(라), (마)",
+      "(나), (마)"
     ],
     "correctIndex": 1,
-    "explanation": "(나)는 인라인 뷰 안에서 정의한 테이블 별칭 b를 바깥 SELECT 절에서 참조하므로 오류가 발생한다. b의 유효 범위는 괄호 안의 쿼리 블록뿐이며 바깥에서는 인라인 뷰 별칭 a를 사용해야 한다(SELECT a.DEPTNO). (가) ①, (다) ③, (라) ④ 는 각각 컬럼 조회, 문자열 자르기, 오른쪽 공백 제거로 모두 정상 실행된다.",
+    "explanation": "(가) ORDER BY 는 SELECT 다음에 처리되므로 SELECT 절의 별칭 코드 를 쓸 수 있다. (나) WHERE 는 SELECT 보다 먼저 처리되어 별칭 코드 를 모르므로 오류다. (다) WHERE 절의 서브쿼리는 바깥 쿼리의 별칭 D 를 참조할 수 있다(상관 서브쿼리). (라) FROM 절의 인라인 뷰는 같은 FROM 절의 다른 테이블 D 를 참조할 수 없어 오류다. LATERAL 을 붙여야 가능하다. (마) 인라인 뷰 안의 별칭 E 는 바깥에서 보이지 않는다. 바깥에서는 인라인 뷰 별칭 A 를 써서 A.이름 으로 불러야 한다. 정답은 ②번이다. ① 은 인라인 뷰 쪽 오류 두 개를, ③ 은 WHERE 의 별칭 오류를, ④ 는 인라인 뷰가 옆 테이블을 볼 수 없다는 점을 빠뜨린 것이다.",
     "_source": "authored",
     "references": [
       {
-        "type": "table",
-        "caption": "DEPT",
-        "headers": [
-          "DEPTNO",
-          "DNAME"
-        ],
-        "rows": [
-          [
-            "10",
-            "SQL Developer"
-          ],
-          [
-            "20",
-            "SQR Master"
-          ]
-        ]
+        "type": "erd",
+        "caption": "부서·사원 ERD",
+        "mermaid": "erDiagram\n    부서 ||..o{ 사원 : \"소속\"\n    부서 {\n        string 부서코드 PK\n    }\n    사원 {\n        int 사번 PK\n        string 부서코드 FK\n        string 이름\n    }"
+      },
+      {
+        "type": "sql",
+        "code": "-- (가)\nSELECT 부서코드 AS 코드\nFROM 부서 ORDER BY 코드;\n-- (나)\nSELECT 부서코드 AS 코드\nFROM 부서 WHERE 코드 = 'D1';\n-- (다)\nSELECT D.부서코드 FROM 부서 D\nWHERE EXISTS\n  (SELECT 1 FROM 사원 E\n    WHERE E.부서코드 = D.부서코드);\n-- (라)\nSELECT X.부서코드\nFROM 부서 D,\n  (SELECT E.부서코드 FROM 사원 E\n    WHERE E.부서코드 = D.부서코드) X;\n-- (마)\nSELECT E.이름\nFROM (SELECT E.이름 FROM 사원 E) A;"
       }
     ]
   },

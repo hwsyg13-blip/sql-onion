@@ -1796,19 +1796,50 @@
     {
       "subject": "2과목",
       "number": 48,
-      "title": "부서별 연봉 합계를 구해 합계가 큰 순서대로 조회하려 한다. 아래 SQL 의 빈칸에 들어갈 키워드 조합으로 옳은 것은?",
+      "title": "부서별 연봉 합계를 큰 순서대로 보려고 아래 SQL ㉠, ㉡ 을 실행했다. 각 결과의 첫 번째 행에 나오는 부서코드로 옳은 것은? (Oracle 기준)",
       "options": [
-        "GROUP BY, DESC",
-        "HAVING, ASC",
-        "ORDER BY, DESC",
-        "GROUP BY, ASC"
+        "D3, D2",
+        "D2, D2",
+        "D2, D3",
+        "D3, D3"
       ],
       "correctIndex": 0,
-      "explanation": "부서별로 합계를 구하려면 GROUP BY 부서로 그룹을 만들어야 한다. 합계 큰 순서로 보고 싶다면 ORDER BY에 DESC(내림차순)를 붙인다. ORDER BY는 ASC가 기본이므로 큰 값부터 보려면 DESC를 명시해야 한다. 정답은 ①번이다. ② HAVING 은 그룹을 거르는 조건이라 그룹을 만드는 자리에 올 수 없고, ③ 첫 빈칸에 ORDER BY 를 넣으면 부서별로 묶이지 않으며, ②·④ 의 ASC 는 작은 값부터 정렬한다.",
+      "explanation": "SUM 은 NULL 을 빼고 더하므로 D1 은 300, D2 는 500 이다. D3 은 연봉이 모두 NULL 이라 더할 값이 없어 0 이 아니라 NULL 이 된다. Oracle 은 NULL 을 가장 큰 값처럼 정렬하므로 DESC 에서는 NULL 이 맨 앞에 온다. 그래서 ㉠ 은 D3, D2, D1 순서이고 첫 행은 D3 이다. ㉡ 은 NULLS LAST 로 NULL 을 뒤로 보내 D2, D1, D3 순서가 되고 첫 행은 D2 다. 정답은 ①번이다. ② 는 D3 의 합계를 0 으로 본 것이고, ③ 은 두 결과를 바꿔 본 것, ④ 는 NULLS LAST 가 DESC 와 함께 쓰이면 무시된다고 본 것이다. 합계가 큰 부서를 정확히 보려면 NVL(SUM(연봉), 0) 으로 정렬하거나 NULLS LAST 를 붙인다.",
       "references": [
         {
+          "type": "table",
+          "caption": "사원",
+          "headers": [
+            "사번",
+            "부서코드",
+            "연봉"
+          ],
+          "rows": [
+            [
+              "1",
+              "D1",
+              "300"
+            ],
+            [
+              "2",
+              "D1",
+              "NULL"
+            ],
+            [
+              "3",
+              "D2",
+              "500"
+            ],
+            [
+              "4",
+              "D3",
+              "NULL"
+            ]
+          ]
+        },
+        {
           "type": "sql",
-          "code": "SELECT 부서, SUM(연봉) FROM EMP\n(   ) 부서\nORDER BY SUM(연봉) (   );"
+          "code": "-- ㉠\nSELECT 부서코드, SUM(연봉)\nFROM 사원\nGROUP BY 부서코드\nORDER BY SUM(연봉) DESC;\n-- ㉡\nSELECT 부서코드, SUM(연봉)\nFROM 사원\nGROUP BY 부서코드\nORDER BY SUM(연봉) DESC\n         NULLS LAST;"
         }
       ]
     },

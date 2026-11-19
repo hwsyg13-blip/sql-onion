@@ -935,3 +935,6 @@
 | 49-2-21 | ROLLUP 칼럼 순서에 따른 소계 행 수·GROUPING SETS | 설명 고르기 → 표 + 세 GROUP BY 행 수 | 7, 8, 5 | PostgreSQL 동일 |
 | 54-2-11 | CTAS 가 옮기지 않는 PK·FK(중복·고아 행 허용)와 옮기는 NOT NULL | 옳지 않은 설명 → ERD + CTAS + INSERT 4개 중 성공 | ㉠, ㉡ | Oracle 규칙(PostgreSQL 은 NOT NULL 도 안 옮김 — 해설에 적음), PK·FK 결과는 PostgreSQL 동일 |
 | 50-2-37 | 위로 올라가는 PRIOR·아래로 내려가는 PRIOR·CONNECT BY 조건(가지치기) vs WHERE | SQL 고르기 → 자기 참조 ERD + 5행 트리 + 질의 4개 행 수 | 3, 3, 2, 4 | 재귀 CTE 로 같은 계산 확인(PostgreSQL), ERD 렌더 확인 |
+| 48-2-11 | NULL 과 비교·NOT·OR 로 모든 경우를 덮어도 빠지는 행·NVL | 부등호 뜻 → NULL 섞인 표에서 네 조건 행 수 | 2, 2, 4, 3 | PostgreSQL 동일(COALESCE) |
+| 47-2-48 | 전부 NULL 인 그룹의 SUM = NULL, DESC 에서 NULL 이 앞·NULLS LAST | 키워드 빈칸 → 두 정렬의 첫 행 | D3, D2 | PostgreSQL 동일(DESC 기본 NULLS FIRST) |
+| 62-2-27 | 별칭이 보이는 범위(ORDER BY·WHERE·상관 서브쿼리·인라인 뷰 안팎) | 오류 하나 → ERD + SQL 5개 중 오류 모두 | (나), (라), (마) | PostgreSQL 동일(세 개 오류) |
