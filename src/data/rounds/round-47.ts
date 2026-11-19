@@ -366,15 +366,15 @@ export const ROUND_47: QuizQuestion[] = [
     "round": 47,
     "subject": "2과목",
     "number": 11,
-    "title": "주문일자와 주문방법(ONLINE·OFFLINE) 두 컬럼에 대해 각 컬럼별 집계, 두 컬럼 조합 집계, 전체 집계가 모두 필요할 때 적절한 SQL 은?",
+    "title": "주문 테이블에 (주문일자, 주문방법) 조합이 (D1, ON), (D1, OFF), (D2, ON), (D2, OFF) 네 가지 있다. 집계 SQL 의 결과가 9행이었다면 GROUP BY 에 쓴 것은?",
     "options": [
       "CUBE(주문일자, 주문방법)",
       "ROLLUP(주문일자, 주문방법)",
       "GROUPING SETS(주문일자, 주문방법)",
-      "GROUP BY 주문일자, 주문방법"
+      "주문일자, 주문방법"
     ],
     "correctIndex": 0,
-    "explanation": "CUBE는 지정한 컬럼들로 만들 수 있는 모든 조합의 소계와 총계를 한 번에 만들어 준다. CUBE(A, B)는 (A, B), (A), (B), () 네 가지 그룹을 모두 반환한다. 문제는 첫 컬럼·두 번째 컬럼 각각 집계, 두 컬럼 조합 집계, 전체 집계까지 모두 필요하다고 했으므로 CUBE가 적합하다. ② ROLLUP은 (A, B), (A), ()만 만들고 (B) 단독은 만들지 않으며, ③ GROUPING SETS는 명시한 그룹(여기서는 주문일자·주문방법 각각)만 만들고, ④ 단순 GROUP BY는 (A, B) 한 종류만 만든다. 정답은 ①번이다.",
+    "explanation": "조합별 행은 4개, 일자별 소계는 D1·D2 의 2개, 방법별 소계는 ON·OFF 의 2개, 전체 합계는 1개다. CUBE 는 이 모두를 만들어 4 + 2 + 2 + 1 = 9행이다. ROLLUP 은 방법별 소계가 없어 4 + 2 + 1 = 7행, GROUPING SETS(주문일자, 주문방법) 은 일자별·방법별 소계만 만들어 2 + 2 = 4행, 일반 GROUP BY 는 조합별 4행이다. 정답은 ①번이다. 이처럼 각 방식이 만드는 묶음을 알면 결과 행 수만 보고도 어떤 GROUP BY 를 썼는지 거꾸로 알 수 있다.",
     "_source": "authored"
   },
   {
@@ -1508,16 +1508,22 @@ export const ROUND_47: QuizQuestion[] = [
     "round": 47,
     "subject": "2과목",
     "number": 37,
-    "title": "CROSS JOIN 에 대한 설명으로 옳은 것은?",
+    "title": "A 의 K 값이 1, 2, 3 이고 B 의 K 값이 2, 3, 4, 5 일 때, 아래 SQL ㉠, ㉡, ㉢ 의 결과 행 수로 옳은 것은?",
     "options": [
-      "한 테이블의 각 행에 대해 다른 테이블의 모든 행과 결합되는 조인이다.",
-      "매칭되는 행만 반환한다.",
-      "ON 절을 반드시 기술해야 한다.",
-      "동일 이름 컬럼으로 자동 조인된다."
+      "12, 2, 12",
+      "7, 2, 7",
+      "12, 12, 12",
+      "12, 2, 오류"
     ],
     "correctIndex": 0,
-    "explanation": "CROSS JOIN(카티션 곱)은 조인 조건 없이 두 테이블의 모든 행을 일대일로 짝지어 만들 수 있는 모든 조합을 반환한다. 결과 행 수는 두 테이블의 행 수의 곱이다. ②는 INNER, ③은 일반 ON 절이 있는 조인, ④는 NATURAL JOIN의 특성이라 다르다. 정답은 ①번이다.",
-    "_source": "authored"
+    "explanation": "CROSS JOIN 은 한쪽의 각 행을 다른 쪽의 모든 행과 짝지어 3 × 4 = 12행을 만든다(㉠). 여기에 WHERE 로 A.K = B.K 를 걸면 같은 값인 2, 3 의 짝만 남아 2행이 되고, 결국 등가 조인과 같은 결과가 된다(㉡). ㉢ 처럼 FROM 에 테이블을 쉼표로 나열하고 조인 조건을 쓰지 않으면 CROSS JOIN 과 같은 카티션 곱이 되어 12행이다. 정답은 ①번이다. ② 는 행 수를 더한 것, ③ 은 WHERE 가 CROSS JOIN 결과를 거르지 못한다고 본 것, ④ 는 조인 조건이 없으면 오류라고 본 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "-- ㉠\nSELECT * FROM A CROSS JOIN B;\n-- ㉡\nSELECT * FROM A CROSS JOIN B\nWHERE  A.K = B.K;\n-- ㉢\nSELECT * FROM A, B;"
+      }
+    ]
   },
   {
     "id": 10687,

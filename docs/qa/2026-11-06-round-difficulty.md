@@ -686,3 +686,14 @@
 | 62-2-33 | LEVEL 과 CONNECT_BY_ISLEAF | 틀린 설명(리프 레벨 1) → 트리 결과 값 | 3, 2, 2 | PostgreSQL 재귀 CTE 로 같은 결과 |
 
 이로써 순환 7바퀴(45~62회, 2과목 36문항) 완료.
+
+## 순환 8바퀴 — 45~47회 (보기 자료 없던 2과목 남은 것)
+
+| 문항 | 개념 | 바뀐 점 | 정답 | 검증 |
+|---|---|---|---|---|
+| 45-2-11 | INSERT 칼럼 생략·DEFAULT·NULL 직접 입력·INSERT SELECT | DML 이름 → 세 INSERT 후 집계 | 10, 2 | PostgreSQL 동일 |
+| 45-2-46 | 시스템 권한(ADMIN OPTION) vs 객체 권한(GRANT OPTION) | DCL 이름 → 권한 4개 분류 | ㉠, ㉢ | Oracle 규칙으로 판정 |
+| 46-2-26 | WHERE(그룹 전) vs HAVING(그룹 후) | SQL 고르기 → 세 SQL 결과 | A·B, 190, 0 | PostgreSQL 동일 |
+| 46-2-46 | NL·HASH·SORT MERGE 선택 기준 | 설명 고르기 → 상황 3개에 조인 방식 | NL, HASH, SORT MERGE | 정의로 판정 |
+| 47-2-11 | CUBE·ROLLUP·GROUPING SETS 행 수 역추적 | 요구 설명 → 결과 9행에서 GROUP BY 찾기 | CUBE | PostgreSQL 로 4·7·9·4 행 확인 |
+| 47-2-37 | CROSS JOIN·WHERE 조인·쉼표 조인 | 설명 고르기 → 세 SQL 행 수 | 12, 2, 12 | PostgreSQL 동일 |

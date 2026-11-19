@@ -312,16 +312,22 @@ export const ROUND_45: QuizQuestion[] = [
     "round": 45,
     "subject": "2과목",
     "number": 11,
-    "title": "테이블에 새로운 행 데이터를 입력할 때 사용하는 DML 명령어는?",
+    "title": "빈 테이블 T 에 아래 INSERT 세 개를 실행한 뒤 SELECT SUM(B), COUNT(C) FROM T 의 결과로 옳은 것은?",
     "options": [
-      "SELECT",
-      "INSERT",
-      "UPDATE",
-      "DELETE"
+      "15, 2",
+      "10, 2",
+      "10, 3",
+      "5, 2"
     ],
     "correctIndex": 1,
-    "explanation": "INSERT는 테이블에 새로운 행을 추가하는 DML 명령어이다. ① SELECT는 조회, ③ UPDATE는 기존 행 수정, ④ DELETE는 기존 행 삭제에 사용된다.",
-    "_source": "authored"
+    "explanation": "INSERT 에서 칼럼 목록에 빠진 칼럼은 DEFAULT 가 있으면 그 값, 없으면 NULL 이 들어간다. 첫 행은 (1, 5, NULL), 셋째 행은 SELECT 결과를 넣는 INSERT … SELECT 로 (3, 5, 4) 가 된다. 둘째 행처럼 NULL 을 직접 넣으면 DEFAULT 가 있어도 NULL 이 들어가 (2, NULL, 3) 이다. 그래서 SUM(B) = 5 + 5 = 10, 값이 있는 C 는 3 과 4 라 COUNT(C) = 2 다. 정답은 ②번이다. ① 은 NULL 을 직접 넣어도 DEFAULT 가 들어간다고 본 것, ③ 은 COUNT 가 NULL 도 센다고 본 것, ④ 는 INSERT … SELECT 행에 DEFAULT 가 들어가지 않는다고 본 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "CREATE TABLE T (\n  A NUMBER,\n  B NUMBER DEFAULT 5,\n  C NUMBER\n);\nINSERT INTO T (A) VALUES (1);\nINSERT INTO T VALUES (2, NULL, 3);\nINSERT INTO T (A, C)\n  SELECT 3, 4 FROM DUAL;"
+      }
+    ]
   },
   {
     "id": 10761,
@@ -2094,16 +2100,22 @@ export const ROUND_45: QuizQuestion[] = [
     "round": 45,
     "subject": "2과목",
     "number": 46,
-    "title": "GRANT, REVOKE 와 같이 권한을 부여하거나 회수하는 SQL의 분류로 옳은 것은?",
+    "title": "아래 권한 ㉠~㉣ 중 다른 사용자에게 다시 줄 수 있게 하려면 WITH ADMIN OPTION 을 붙여 GRANT 해야 하는 것만 모두 고른 것은? (Oracle 기준)",
     "options": [
-      "DDL (Data Definition Language)",
-      "DML (Data Manipulation Language)",
-      "TCL (Transaction Control Language)",
-      "DCL (Data Control Language)"
+      "㉡, ㉣",
+      "㉠",
+      "㉠, ㉡, ㉢",
+      "㉠, ㉢"
     ],
     "correctIndex": 3,
-    "explanation": "GRANT(권한 부여), REVOKE(권한 회수)는 데이터에 대한 접근 제어를 정의하는 DCL(Data Control Language)에 속한다. ① DDL은 CREATE·ALTER·DROP, ② DML은 SELECT·INSERT·UPDATE·DELETE, ③ TCL은 COMMIT·ROLLBACK·SAVEPOINT이다.",
-    "_source": "authored"
+    "explanation": "권한을 주고 회수하는 GRANT·REVOKE 는 DCL 이다. 권한은 DB 전체에 대한 시스템 권한(CREATE TABLE, CREATE SESSION 등)과 특정 객체에 대한 객체 권한(SELECT ON 주문 등)으로 나뉜다. 시스템 권한을 다시 줄 수 있게 하려면 WITH ADMIN OPTION, 객체 권한은 WITH GRANT OPTION 을 붙인다. 그래서 ㉠, ㉢ 이다. 정답은 ④번이다. ① 은 객체 권한에 ADMIN OPTION 을 쓴다고 본 것, ② 는 CREATE SESSION 을 놓친 것, ③ 은 객체 권한을 섞은 것이다. 두 옵션은 회수할 때도 달라, GRANT OPTION 으로 준 객체 권한만 회수가 연쇄된다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "text",
+        "content": "㉠ CREATE TABLE\n㉡ SELECT ON 주문\n㉢ CREATE SESSION\n㉣ UPDATE ON 주문"
+      }
+    ]
   },
   {
     "id": 10796,

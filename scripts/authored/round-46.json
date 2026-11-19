@@ -1029,15 +1029,51 @@
     {
       "subject": "2과목",
       "number": 26,
-      "title": "평균 키가 180 이상인 부서만 조회하는 SQL로 올바른 것은?",
+      "title": "아래 사원 테이블에 대한 SQL 결과로 옳은 것은? ('㉠ 결과 부서, ㉡ 의 A 평균, ㉢ 행 수' 순서)",
       "options": [
-        "SELECT 부서, AVG(키) FROM EMP WHERE AVG(키) >= 180 GROUP BY 부서;",
-        "SELECT 부서, AVG(키) FROM EMP GROUP BY 부서 HAVING AVG(키) >= 180;",
-        "SELECT 부서, AVG(키) FROM EMP HAVING AVG(키) >= 180;",
-        "SELECT 부서, AVG(키) FROM EMP WHERE 키 >= 180 GROUP BY 부서;"
+        "A, 180, 1",
+        "A·B, 190, 0",
+        "A·B, 180, 0",
+        "A, 190, 2"
       ],
       "correctIndex": 1,
-      "explanation": "그룹 함수 결과에 대한 조건은 WHERE 가 아니라 GROUP BY 뒤의 HAVING 절에 쓴다(②). ① 은 WHERE 절에 집계 함수를 써서 오류, ③ 은 GROUP BY 없이 일반 컬럼 부서와 집계 함수를 함께 써서 오류다. ④ 는 키가 180 이상인 사원만 먼저 걸러 평균을 내므로 '평균 키가 180 이상인 부서' 와 의미가 다르다."
+      "explanation": "HAVING 은 그룹을 만든 뒤 그룹 단위로 거른다. ㉠ 은 부서별 평균이 A 180, B 180, C 160 이라 A·B 가 남는다. WHERE 는 그룹을 만들기 전에 행을 거른다. ㉡ 은 키 180 이상인 행만 남겨 A 는 190 한 행이라 평균 190 이다. ㉢ 은 WHERE 로 남은 행이 A 1개, B 1개뿐이라 COUNT(*) >= 2 인 그룹이 없어 0행이다. 정답은 ②번이다. ① 은 평균 180 인 B 를 놓친 것, ③ 은 WHERE 로 거른 뒤에도 평균이 그대로라고 본 것, ④ 는 WHERE 전의 행 수로 COUNT 한 것이다.",
+      "references": [
+        {
+          "type": "table",
+          "caption": "사원",
+          "headers": [
+            "부서",
+            "키"
+          ],
+          "rows": [
+            [
+              "A",
+              "170"
+            ],
+            [
+              "A",
+              "190"
+            ],
+            [
+              "B",
+              "185"
+            ],
+            [
+              "B",
+              "175"
+            ],
+            [
+              "C",
+              "160"
+            ]
+          ]
+        },
+        {
+          "type": "sql",
+          "code": "-- ㉠\nSELECT 부서 FROM 사원\nGROUP  BY 부서\nHAVING AVG(키) >= 180;\n-- ㉡\nSELECT 부서, AVG(키) FROM 사원\nWHERE  키 >= 180\nGROUP  BY 부서;\n-- ㉢\nSELECT 부서 FROM 사원\nWHERE  키 >= 180\nGROUP  BY 부서\nHAVING COUNT(*) >= 2;"
+        }
+      ]
     },
     {
       "subject": "2과목",
@@ -1759,15 +1795,21 @@
     {
       "subject": "2과목",
       "number": 46,
-      "title": "조인 수행 시 인덱스 사용에 대한 설명으로 가장 적절한 것은?",
+      "title": "아래 상황 ㉠~㉢ 에 가장 알맞은 조인 방식을 순서대로 고른 것은?",
       "options": [
-        "NESTED LOOP JOIN은 후행 테이블의 조인 키 인덱스가 없어도 항상 효율적이다.",
-        "HASH JOIN은 조인 키에 인덱스가 반드시 존재해야 수행할 수 있다.",
-        "NESTED LOOP JOIN은 선행 테이블의 처리 건수가 적고 후행 테이블의 조인 키에 인덱스가 있을 때 유리하다.",
-        "SORT MERGE JOIN은 두 테이블을 정렬하지 않고 수행된다."
+        "HASH, NESTED LOOP, SORT MERGE",
+        "NESTED LOOP, SORT MERGE, HASH",
+        "NESTED LOOP, HASH, SORT MERGE",
+        "SORT MERGE, HASH, NESTED LOOP"
       ],
       "correctIndex": 2,
-      "explanation": "NESTED LOOP JOIN 은 선행 테이블 행마다 후행 테이블을 찾으므로, 선행 처리 건수가 적고 후행 테이블 조인 키에 인덱스가 있을 때 유리하다(③). 후행 인덱스가 없으면 매번 전체를 읽어 비효율적이고(①), HASH JOIN 은 인덱스 없이 해시 테이블로 조인하며(②), SORT MERGE JOIN 은 두 집합을 정렬한 뒤 병합한다(④)."
+      "explanation": "NESTED LOOP 는 선행 테이블의 행마다 후행 테이블을 찾으므로, 선행 건수가 적고 후행 조인 키에 인덱스가 있을 때 빠르다(㉠). HASH 조인은 한쪽으로 해시 테이블을 만들어 맞춰 보므로 인덱스 없이 대량 데이터를 등가 조인할 때 알맞고, 등가 조인에서만 쓸 수 있다(㉡). SORT MERGE 는 두 테이블을 조인 키로 정렬한 뒤 맞춰 보므로 비등가 조인에도 쓸 수 있다(㉢). 정답은 ③번이다. ① 은 ㉠·㉡ 을 바꿔 본 것, ② 는 비등가 조인에 HASH 를 쓸 수 있다고 본 것, ④ 는 셋을 모두 엇갈리게 본 것이다.",
+      "references": [
+        {
+          "type": "text",
+          "content": "㉠ 선행 테이블에서 조건으로 걸러진 행이 10건이고, 1,000만 건인 후행 테이블의 조인 키에 인덱스가 있다.\n㉡ 두 테이블 모두 수백만 건이고 등가(=) 조인인데, 조인 키에 쓸 만한 인덱스가 없다.\n㉢ 조인 조건이 BETWEEN 같은 비등가 조인이고, 두 테이블을 조인 키로 정렬할 수 있다."
+        }
+      ]
     },
     {
       "subject": "2과목",
