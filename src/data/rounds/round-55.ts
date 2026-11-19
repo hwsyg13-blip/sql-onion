@@ -930,20 +930,20 @@ export const ROUND_55: QuizQuestion[] = [
     "round": 55,
     "subject": "2과목",
     "number": 22,
-    "title": "아래 SQL 의 결과로 옳은 것은?",
+    "title": "아래 SQL 에서 마지막 인자(하위 표현식 번호)를 1, 2, 3, 4 로 바꿨을 때의 결과로 옳은 것은? (순서대로, Oracle 기준)",
     "options": [
-      "1",
-      "4",
-      "5",
-      "7"
+      "1, 4, 4, 7",
+      "1, 4, 5, 7",
+      "1, 2, 3, 4",
+      "1, 4, 5, 6"
     ],
     "correctIndex": 1,
-    "explanation": "REGEXP_INSTR 의 마지막 인자 2 는 두 번째 서브 표현식(괄호 그룹)의 위치를 반환하라는 뜻이다. 그룹은 여는 괄호 순서로 세어 첫째 (123), 둘째 (4(56)(78)) 이고, 둘째 그룹은 '4' 가 있는 4번째 위치에서 시작한다(②). ① 1 은 첫째 그룹 위치, ③ 5 는 셋째 그룹 (56) 의 위치, ④ 7 은 넷째 그룹 (78) 의 위치다.",
+    "explanation": "REGEXP_INSTR 의 마지막 인자는 몇 번째 괄호(하위 표현식)가 시작하는 위치를 돌려줄지 정한다. 괄호 번호는 여는 괄호가 나오는 순서대로 매긴다. 1번 (123) 은 1번째 글자, 2번 (4(56)(78)) 은 '4' 가 있는 4번째, 3번 (56) 은 5번째, 4번 (78) 은 7번째에서 시작한다. 정답은 ②번이다. ① 은 2번과 3번을 같은 위치로 본 것, ③ 은 위치 대신 괄호 번호를 돌려준다고 본 것, ④ 는 (78) 의 위치를 하나 앞으로 센 것이다.",
     "_source": "authored",
     "references": [
       {
         "type": "sql",
-        "code": "SELECT REGEXP_INSTR('12345678', '(123)(4(56)(78))', 1, 1, 0, 'i', 2)\nFROM DUAL;"
+        "code": "SELECT REGEXP_INSTR(\n         '12345678',\n         '(123)(4(56)(78))',\n         1, 1, 0, 'i', n)\nFROM   DUAL;"
       }
     ]
   },
@@ -954,20 +954,20 @@ export const ROUND_55: QuizQuestion[] = [
     "round": 55,
     "subject": "2과목",
     "number": 23,
-    "title": "아래 두 REGEXP_SUBSTR 함수의 결과로 옳은 것은?",
+    "title": "아래 SQL 의 결과(A, B, C, D)로 옳은 것은? (Oracle 기준)",
     "options": [
-      "bc, bc",
-      "NULL, bc",
-      "bc, NULL",
-      "NULL, NULL"
+      "bc, bc, bc, bcd",
+      "NULL, bc, bc, bcd",
+      "bc, NULL, b, bd",
+      "NULL, bc, b, NULL"
     ],
     "correctIndex": 1,
-    "explanation": "첫 번째 패턴 'b\\*c' 의 \\* 는 별표 문자 그대로라 b, *, c 가 연달아 있어야 하는데 'abcd' 에는 * 가 없어 NULL 이다. 두 번째 패턴 'b*c' 의 * 는 바로 앞 b 가 0번 이상 반복된다는 뜻이라 'bc' 와 맞아 'bc' 가 나온다. 그래서 NULL, bc 이고 정답은 ② 다. ① 은 첫 번째의 \\* 도 반복 기호로 본 결과, ③ 은 둘을 반대로 본 결과, ④ 는 두 번째 패턴도 맞지 않는다고 본 결과다.",
+    "explanation": "정규식에서 * 는 앞 글자가 0번 이상 반복된다는 뜻이고, \\* 처럼 역슬래시를 붙이면 글자 그대로의 * 가 된다. A 는 'b*c' 라는 문자열을 찾는데 'abcd' 에 * 가 없어 NULL 이다. B 의 b*c 는 b 가 0번 이상 나온 뒤 c 가 오는 부분이라 'bc' 다. C 의 [bc]+ 는 b 나 c 가 1번 이상 이어진 부분이라 'bc' 다. D 의 b.?d 는 b, 아무 글자 0~1개, d 라 'bcd' 다. 정답은 ②번이다. ① 은 \\* 도 반복으로 본 것, ③ 은 반복 기호를 거꾸로 이해한 것, ④ 는 + 가 한 글자만 잡고 ? 가 꼭 한 글자를 요구한다고 본 것이다.",
     "_source": "authored",
     "references": [
       {
         "type": "sql",
-        "code": "SELECT REGEXP_SUBSTR('abcd', 'b\\*c') AS COL1,\n       REGEXP_SUBSTR('abcd', 'b*c')  AS COL2\nFROM DUAL;"
+        "code": "SELECT\n  REGEXP_SUBSTR('abcd', 'b\\*c')   AS A,\n  REGEXP_SUBSTR('abcd', 'b*c')   AS B,\n  REGEXP_SUBSTR('abcd', '[bc]+') AS C,\n  REGEXP_SUBSTR('abcd', 'b.?d')  AS D\nFROM DUAL;"
       }
     ]
   },

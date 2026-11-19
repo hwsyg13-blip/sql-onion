@@ -1564,20 +1564,20 @@ export const ROUND_54: QuizQuestion[] = [
     "round": 54,
     "subject": "2과목",
     "number": 34,
-    "title": "아래 수강 테이블에서 강의번호 100 과 101 을 동시에 수강하는 학번을 조회하는 SQL 로 적절한 것은?",
+    "title": "아래 수강 테이블에서 '강의 100 과 101 을 모두 듣는 학번' 을 찾으려는 SQL ㉠~㉣ 의 결과 행 수로 옳은 것은?",
     "options": [
-      "SELECT 학번 FROM 수강 WHERE 강의번호 = 100 AND 강의번호 = 101;",
-      "SELECT 학번 FROM 수강 WHERE 강의번호=100 INTERSECT SELECT 학번 FROM 수강 WHERE 강의번호=101;",
-      "SELECT 학번 FROM 수강 WHERE 강의번호 IN (100, 101);",
-      "SELECT 학번 FROM 수강 WHERE 강의번호 = 100 OR 강의번호 = 101;"
+      "4, 2, 2, 2",
+      "4, 0, 2, 2",
+      "2, 0, 2, 2",
+      "4, 0, 2, 3"
     ],
     "correctIndex": 1,
-    "explanation": "① AND 는 한 행이 동시에 두 값일 수 없어 공집합, ③ IN·④ OR 은 둘 중 하나라도 만족하는 학번을 반환한다. ② INTERSECT 로 두 강의의 학번 집합을 교집합 처리해야 동시에 수강한 학번을 얻는다.",
+    "explanation": "㉠ 의 IN 은 100 이나 101 중 하나라도 들으면 고르므로 S1~S4 모두 4행이다. ㉡ 은 한 행의 강의번호가 동시에 100 이면서 101 일 수 없어 0행이다. '모두 듣는다' 는 여러 행에 걸친 조건이라 한 행씩 보는 WHERE 만으로는 표현할 수 없다. ㉢ 은 100 을 듣는 학번과 101 을 듣는 학번의 교집합이라 S1, S4 의 2행, ㉣ 은 두 강의 중 서로 다른 강의를 2개 들은 학번이라 역시 S1, S4 의 2행이다. 정답은 ②번이다. ① 은 ㉡ 이 원하는 결과를 낸다고 본 것, ③ 은 IN 이 둘 다 듣는 사람만 고른다고 본 것, ④ 는 S4 가 102 도 들어 ㉣ 의 개수가 3 이 된다고 본 것이다(WHERE 로 100·101 만 남긴 뒤 센다).",
     "_source": "authored",
     "references": [
       {
         "type": "table",
-        "caption": "수강 테이블",
+        "caption": "수강",
         "headers": [
           "학번",
           "강의번호"
@@ -1606,8 +1606,16 @@ export const ROUND_54: QuizQuestion[] = [
           [
             "S4",
             "101"
+          ],
+          [
+            "S4",
+            "102"
           ]
         ]
+      },
+      {
+        "type": "sql",
+        "code": "-- ㉠\nSELECT DISTINCT 학번 FROM 수강\nWHERE  강의번호 IN (100, 101);\n-- ㉡\nSELECT 학번 FROM 수강\nWHERE  강의번호 = 100\nAND    강의번호 = 101;\n-- ㉢\nSELECT 학번 FROM 수강\nWHERE 강의번호 = 100\nINTERSECT\nSELECT 학번 FROM 수강\nWHERE 강의번호 = 101;\n-- ㉣\nSELECT 학번 FROM 수강\nWHERE  강의번호 IN (100, 101)\nGROUP  BY 학번\nHAVING COUNT(DISTINCT 강의번호) = 2;"
       }
     ]
   },
@@ -2033,20 +2041,20 @@ export const ROUND_54: QuizQuestion[] = [
     "round": 54,
     "subject": "2과목",
     "number": 44,
-    "title": "아래 SQL 의 CASE 문 결과로 '취급안함' 이 반환되는 조건은?",
+    "title": "분류 값이 A, B, C, NULL 인 T 테이블에 아래 식 ㉠, ㉡, ㉢ 을 적용했을 때 '취급안함' 이 나오는 행 수로 옳은 것은? (Oracle 기준)",
     "options": [
-      "분류 가 'A' 인 경우",
-      "분류 가 'B' 인 경우",
-      "분류 가 'C' 인 경우",
-      "분류 가 NULL 인 경우에만"
+      "1, 1, 1",
+      "2, 2, 2",
+      "2, 1, 2",
+      "1, 2, 2"
     ],
     "correctIndex": 2,
-    "explanation": "CASE WHEN 분류 IN ('A', 'B') THEN '취급' ELSE '취급안함' 이므로 A, B 는 '취급'(①②), 그 밖의 값인 C 는 '취급안함' 이다(③). NULL 도 IN 조건이 참이 아니라 ELSE 로 가서 '취급안함' 이 되지만, NULL 인 경우에'만' 그렇다는 ④ 는 틀리다.",
+    "explanation": "CASE 는 WHEN 조건이 참일 때만 THEN 을 고르고, 거짓이거나 UNKNOWN 이면 ELSE 로 간다. ㉠ 은 C 는 거짓, NULL 은 UNKNOWN 이라 둘 다 ELSE 의 '취급안함' 이 되어 2행이다. ㉡ 은 NOT IN 조건이 C 에서는 참이지만 NULL 에서는 UNKNOWN 이라, NULL 행은 ELSE 의 '취급' 이 되어 '취급안함' 은 1행뿐이다. ㉢ 의 DECODE 는 A·B 와 같지 않은 C 와 NULL 이 모두 기본값 '취급안함' 이 되어 2행이다. 같은 뜻처럼 보여도 조건을 뒤집으면 NULL 행의 결과가 달라진다. 정답은 ③번이다. ① 은 NULL 이 어디에도 걸리지 않는다고 본 것, ② 는 NOT IN 도 NULL 을 참으로 본 것, ④ 는 ㉠ 에서 NULL 이 THEN 으로 간다고 본 것이다.",
     "_source": "authored",
     "references": [
       {
         "type": "sql",
-        "code": "SELECT CASE\n         WHEN 분류 IN ('A','B') THEN '취급'\n         ELSE '취급안함'\n       END\nFROM   T;"
+        "code": "-- ㉠\nCASE WHEN 분류 IN ('A', 'B')\n     THEN '취급' ELSE '취급안함' END\n-- ㉡\nCASE WHEN 분류 NOT IN ('A', 'B')\n     THEN '취급안함' ELSE '취급' END\n-- ㉢\nDECODE(분류, 'A', '취급',\n             'B', '취급', '취급안함')"
       }
     ]
   },

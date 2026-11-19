@@ -787,3 +787,14 @@
 | 52-2-21 | MINUS 의 NULL·중복 제거 vs NOT IN | 연산자 이름 → 세 SQL 행 수 | 2, 3, 0 | PostgreSQL 동일(EXCEPT) |
 | 53-2-24 | 다중 칼럼 IN 과 AND·OR 풀어쓰기 | 동치 고르기 → 네 조건 행 수 | 2, 2, 4, 2 | PostgreSQL 동일 |
 | 53-2-25 | 음수의 FLOOR·TRUNC·CEIL·ROUND | 아닌 함수 고르기 → 네 식 결과 | -4, -3, -3, -4 | PostgreSQL 동일 |
+
+## 순환 9바퀴 — 54~56회
+
+| 문항 | 개념 | 바뀐 점 | 정답 | 검증 |
+|---|---|---|---|---|
+| 54-2-44 | CASE 의 IN·NOT IN 과 NULL(ELSE 로 감)·DECODE | 조건 하나 고르기 → 세 식의 '취급안함' 행 수 | 2, 1, 2 | CASE 두 가지 PostgreSQL 동일, DECODE 는 정의 |
+| 54-2-34 | '모두 듣는' 조건: IN vs AND vs INTERSECT vs HAVING COUNT | SQL 고르기 → 네 SQL 행 수 | 4, 0, 2, 2 | PostgreSQL 동일 |
+| 55-2-23 | 정규식 \*(글자)·*·[ ]+·.? | 두 식 → 네 식 결과 | NULL, bc, bc, bcd | PostgreSQL 정규식 동일 |
+| 55-2-22 | REGEXP_INSTR 하위 표현식 번호 | 값 하나 → 번호 1~4 결과 | 1, 4, 5, 7 | PostgreSQL regexp_instr 동일 |
+| 56-2-31 | 격리 수준별로 남는 현상(READ COMMITTED) | 특성 이름 → 격리 수준을 올린 뒤 남는 현상 | Non-Repeatable, Phantom | 정의로 판정 |
+| 56-2-26 | 겹치지 않는 결과는 UNION ALL | 이름 고르기 → 상황에 맞는 연산자와 이유 | UNION ALL | 정의로 판정 |

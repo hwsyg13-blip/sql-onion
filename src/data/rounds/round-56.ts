@@ -953,16 +953,22 @@ export const ROUND_56: QuizQuestion[] = [
     "round": 56,
     "subject": "2과목",
     "number": 26,
-    "title": "집합 연산자에 대한 설명 중 중복을 제거하지 않는 것은?",
+    "title": "아래 두 SELECT 는 부서 조건이 서로 겹치지 않는다. 두 결과를 합칠 때 가장 알맞은 집합 연산자와 그 이유는?",
     "options": [
-      "UNION",
-      "UNION ALL",
-      "INTERSECT",
-      "MINUS"
+      "UNION — 혹시 모를 중복을 없애야 하므로",
+      "UNION ALL — 두 결과가 겹칠 수 없어 중복을 없애는 정렬 작업이 필요 없으므로",
+      "INTERSECT — 두 부서 사원을 모두 가져오므로",
+      "MINUS — 부서 10 에서 20 을 빼면 둘 다 남으므로"
     ],
     "correctIndex": 1,
-    "explanation": "UNION ALL 은 중복 제거 없이 두 결과 집합을 그대로 결합한다. ① UNION·③ INTERSECT·④ MINUS 는 모두 중복을 제거한다.",
-    "_source": "authored"
+    "explanation": "UNION 은 결과를 합친 뒤 중복을 없애려고 정렬이나 해시 작업을 하고, UNION ALL 은 중복을 없애지 않고 그대로 이어 붙인다. 부서 = 10 과 부서 = 20 은 한 행에서 동시에 참일 수 없어 두 결과가 겹치지 않으므로, 결과는 같고 추가 작업이 없는 UNION ALL 이 알맞다. 정답은 ②번이다. ① 은 결과는 같지만 불필요한 중복 제거 작업을 한다. ③ INTERSECT 는 겹치는 행만 남겨 0행이 되고, ④ MINUS 는 부서 10 사원만 남긴다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT 사번, 이름 FROM 사원\nWHERE  부서 = 10\n( ? )\nSELECT 사번, 이름 FROM 사원\nWHERE  부서 = 20;"
+      }
+    ]
   },
   {
     "id": 10226,
@@ -1119,20 +1125,20 @@ export const ROUND_56: QuizQuestion[] = [
     "round": 56,
     "subject": "2과목",
     "number": 31,
-    "title": "아래 상황에서 지켜지지 않은 트랜잭션의 특성은?",
+    "title": "A 트랜잭션이 아직 커밋되지 않은 B 트랜잭션의 수정 값을 읽어 잘못된 금액을 계산했다(Dirty Read). 격리 수준을 READ COMMITTED 로 올렸을 때, 여전히 생길 수 있는 현상만 모두 고른 것은?",
     "options": [
-      "원자성",
-      "일관성",
-      "고립성",
-      "지속성"
+      "Dirty Read",
+      "Dirty Read, Non-Repeatable Read",
+      "Non-Repeatable Read, Phantom Read",
+      "Phantom Read"
     ],
     "correctIndex": 2,
-    "explanation": "고립성(Isolation)은 동시에 실행되는 트랜잭션이 서로의 중간 상태를 보지 못하도록 격리하는 성질이다. 커밋되지 않은 다른 트랜잭션의 값을 읽은 것은 고립성 위반에 해당한다. ① 원자성은 전부 반영되거나 전부 취소되는 성질, ④ 지속성은 커밋된 결과가 영구 보존되는 성질이다. ② 일관성은 트랜잭션 전후로 데이터가 규칙에 맞는 상태를 유지하는 성질이다.",
+    "explanation": "이 상황은 트랜잭션의 고립성이 지켜지지 않은 것이다. READ COMMITTED 는 COMMIT 된 값만 읽게 해 Dirty Read 를 막는다. 그러나 같은 행을 다시 읽는 사이 다른 트랜잭션이 고치고 COMMIT 하면 값이 달라지는 Non-Repeatable Read, 다시 조회할 때 새 행이 보이는 Phantom Read 는 여전히 생길 수 있다. REPEATABLE READ 는 Non-Repeatable Read 까지, SERIALIZABLE 은 Phantom Read 까지 막는다. 정답은 ③번이다. ①·② 는 READ COMMITTED 가 Dirty Read 를 막지 못한다고 본 것, ④ 는 Non-Repeatable Read 도 막는다고 본 것이다. Oracle 의 기본 격리 수준이 READ COMMITTED 다.",
     "_source": "authored",
     "references": [
       {
         "type": "text",
-        "content": "A 트랜잭션이 계좌 잔액을 읽어 계산하는 도중, 아직 커밋되지 않은 B 트랜잭션의 수정 값을 함께 읽어 잘못된 금액을 산출했다."
+        "content": "격리 수준(낮음 → 높음): READ UNCOMMITTED → READ COMMITTED → REPEATABLE READ → SERIALIZABLE"
       }
     ]
   },
