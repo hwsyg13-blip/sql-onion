@@ -366,3 +366,16 @@
 | 50-2-31 | 계층형 역방향 전개와 LEVEL | 설명 고르기 → 대리에서 위로 올라가는 CONNECT BY 의 사장 LEVEL·행 수 | 4, 4 | PostgreSQL 재귀 CTE |
 
 부수 수정: 회차 분석 페이지의 'SQL 결과 계산 비율' 문장이 48·49·50회가 같은 숫자(44%)가 되면서 3페이지에 똑같이 반복 → 문장 앞에 '제N회는' 을 붙여 회차마다 달라지게(build-static-pages).
+
+## 순환 3바퀴 — 51~53회 (11-19 14시 실행, 사용자 "규칙 지켜" 뒤 이어서)
+
+| 문항 | 개념 | 바뀐 점 | 정답 | 검증 |
+|---|---|---|---|---|
+| 51-2-14 | 남의 테이블 접근(소유자.테이블·권한 범위·공용 동의어) | GRANT 명령 고르기 → user2 의 SQL 4개 중 오류 | ㉠, ㉢ | Oracle 규칙(스키마·권한·PUBLIC SYNONYM) |
+| 51-2-33 | 뷰는 데이터를 저장하지 않음·단순 뷰 UPDATE | 뷰 설명 → 기본 테이블 INSERT 후 뷰로 UPDATE 한 뒤 COUNT·SUM | 0, 15 | PostgreSQL 0·15 |
+| 52-2-18 | EXISTS vs IN/NOT IN 과 NULL | 서브쿼리 설명 → SELECT NULL 서브쿼리 4가지 COUNT | 3, 0, 0, 3 | PostgreSQL 동일 |
+| 52-2-28 | DROP TABLE … CASCADE CONSTRAINTS | 옵션 이름 → 외래키가 있는 부모 DROP 2번과 이후 INSERT | 오류, 3, 성공 | PostgreSQL(DROP … CASCADE 로 FK 만 삭제) 동일 |
+| 53-2-40 | RANGE(값 범위) vs ROWS | 윈도우 절 고르기 → RANGE 2 PRECEDING 합 | 50, 50 | PostgreSQL(ROWS 면 60·120) |
+| 53-2-27 | 별칭 규칙(WHERE·AS 테이블 별칭·큰따옴표·별칭 후 원래 이름) | 설명 고르기 → SQL 5개 중 오류 | ㉡, ㉢, ㉤ | PostgreSQL 은 ㉢(AS 테이블 별칭) 허용 — Oracle 규칙으로 '(Oracle 기준)' 명시 |
+
+부수 수정: 회차 분석 페이지 '"오류가 나는 SQL 고르기" 가 N문항' 문장이 3페이지 이상 반복 → '제N회는' 추가(부정형 문장도 함께).

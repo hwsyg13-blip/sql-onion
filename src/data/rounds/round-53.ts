@@ -777,16 +777,22 @@ export const ROUND_53: QuizQuestion[] = [
     "round": 53,
     "subject": "2과목",
     "number": 27,
-    "title": "테이블·컬럼 별칭 사용에 대한 다음 설명 중 옳지 않은 것은?",
+    "title": "EMP 테이블에 대한 SQL ㉠~㉤ 중 오류가 발생하는 것만 모두 고른 것은? (Oracle 기준)",
     "options": [
-      "컬럼 별칭은 AS 키워드를 생략할 수 있다.",
-      "테이블 별칭은 FROM 절에서 지정한다.",
-      "SELECT U1.T1.C1 FROM U1.T1 A; 처럼 별칭을 지정한 뒤에도 원래 테이블명을 SELECT 절에 사용할 수 있다.",
-      "ORDER BY 절에서는 SELECT 절의 별칭을 참조할 수 있다."
+      "㉡",
+      "㉡, ㉢",
+      "㉡, ㉢, ㉤",
+      "㉡, ㉤"
     ],
     "correctIndex": 2,
-    "explanation": "컬럼 별칭은 AS 를 생략할 수 있고(①), 테이블 별칭은 FROM 절에서 지정하며(②), ORDER BY 는 SELECT 이후에 처리되어 SELECT 절 별칭을 쓸 수 있다(④). FROM 절에서 테이블 별칭(A)을 지정하면 그 쿼리 안에서는 별칭으로만 참조해야 하므로, 원래 이름 U1.T1.C1 을 쓰면 오류다. ③ 이 옳지 않다.",
-    "_source": "authored"
+    "explanation": "칼럼 별칭은 SELECT 보다 나중에 처리되는 ORDER BY 에서만 쓸 수 있어 ㉠ 은 되고, WHERE 에 쓴 ㉡ 은 오류다. Oracle 은 테이블 별칭 앞에 AS 를 허용하지 않아 ㉢ 은 오류다(칼럼 별칭의 AS 는 된다). 공백이 들어간 별칭은 큰따옴표로 감싸면 되므로 ㉣ 은 된다. 테이블 별칭 E 를 붙인 뒤에는 원래 이름 EMP 로 칼럼을 부를 수 없어 ㉤ 도 오류다. 정답은 ③번이다. ① 은 ㉢·㉤ 을 허용된다고 본 것, ② 는 별칭을 붙여도 원래 테이블명을 쓸 수 있다고 본 것, ④ 는 테이블 별칭에도 AS 를 쓸 수 있다고 본 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT SAL AS 급여 FROM EMP\nORDER  BY 급여;                 -- ㉠\n\nSELECT SAL 급여 FROM EMP\nWHERE  급여 > 100;               -- ㉡\n\nSELECT E.SAL FROM EMP AS E;     -- ㉢\n\nSELECT SAL \"월 급여\" FROM EMP;   -- ㉣\n\nSELECT EMP.SAL FROM EMP E;      -- ㉤"
+      }
+    ]
   },
   {
     "id": 10377,
@@ -1280,20 +1286,50 @@ export const ROUND_53: QuizQuestion[] = [
     "round": 53,
     "subject": "2과목",
     "number": 40,
-    "title": "아래 설명에 해당하는 윈도우 절로 옳은 것은?",
+    "title": "아래 T 테이블에 대한 SQL 에서 X 가 4, 9 인 행의 S 값으로 옳은 것은?",
     "options": [
-      "RANGE BETWEEN 50 PRECEDING AND 150 FOLLOWING",
-      "ROWS BETWEEN 1 PRECEDING AND 1 FOLLOWING",
-      "ROWS UNBOUNDED PRECEDING",
-      "RANGE BETWEEN CURRENT ROW AND UNBOUNDED FOLLOWING"
+      "60, 120",
+      "50, 50",
+      "60, 50",
+      "50, 120"
     ],
     "correctIndex": 1,
-    "explanation": "행 단위로 윈도우 범위를 지정하는 것은 ROWS 이고, 현재 행의 앞뒤 한 행씩을 포함하려면 시작을 1 PRECEDING, 끝을 1 FOLLOWING 으로 지정한다. ① RANGE 는 행이 아니라 정렬 키의 값 범위를 기준으로 하므로 동일 값이 있으면 결과가 달라지고, ③ 은 첫 행부터 현재 행까지, ④ 는 현재 행부터 마지막 행까지라 범위가 다르다.",
+    "explanation": "RANGE 는 행 개수가 아니라 ORDER BY 값의 범위로 묶는다. '2 PRECEDING ~ CURRENT ROW' 는 현재 X 에서 2 를 뺀 값부터 현재 X 까지다. X = 4 는 2~4 범위라 X 가 2, 4 인 행의 20 + 30 = 50 이다. X = 9 는 7~9 범위인데 X 가 9 인 행뿐이라 50 이다. 정답은 ②번이다. ① 은 ROWS 처럼 앞의 두 행을 더한 것(10 + 20 + 30, 30 + 40 + 50), ③·④ 는 두 행 중 하나만 ROWS 로 계산한 것이다.",
     "_source": "authored",
     "references": [
       {
-        "type": "text",
-        "content": "정렬 기준에서 현재 행과 바로 앞 한 행, 바로 뒤 한 행을 합한 세 개의 행을 윈도우 범위로 지정한다."
+        "type": "table",
+        "caption": "T",
+        "headers": [
+          "X",
+          "값"
+        ],
+        "rows": [
+          [
+            "1",
+            "10"
+          ],
+          [
+            "2",
+            "20"
+          ],
+          [
+            "4",
+            "30"
+          ],
+          [
+            "5",
+            "40"
+          ],
+          [
+            "9",
+            "50"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT X,\n       SUM(값) OVER (\n         ORDER BY X\n         RANGE BETWEEN 2 PRECEDING\n                   AND CURRENT ROW\n       ) AS S\nFROM   T;"
       }
     ]
   },

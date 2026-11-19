@@ -553,16 +553,22 @@ export const ROUND_52: QuizQuestion[] = [
     "round": 52,
     "subject": "2과목",
     "number": 18,
-    "title": "서브쿼리에 대한 설명 중 적절하지 않은 것은?",
+    "title": "ID 가 1, 2, 3 인 3행짜리 T 테이블에 대한 SQL ㉠~㉣ 의 결과(COUNT)로 옳은 것은? (Oracle 기준)",
     "options": [
-      "서브쿼리는 SELECT, WHERE, FROM 절 등에 사용할 수 있다.",
-      "서브쿼리 테이블의 컬럼을 메인 쿼리에서 직접 사용할 수 있다.",
-      "연관 서브쿼리는 메인 쿼리의 컬럼을 참조한다.",
-      "스칼라 서브쿼리는 단일 값을 반환한다."
+      "0, 0, 3, 3",
+      "3, 0, 0, 3",
+      "3, 0, 3, 3",
+      "0, 0, 0, 3"
     ],
     "correctIndex": 1,
-    "explanation": "서브쿼리는 메인 쿼리의 컬럼을 참조할 수 있지만(연관 서브쿼리, ③), 메인 쿼리는 WHERE·SELECT 절 서브쿼리 안의 컬럼을 직접 쓸 수 없다. 서브쿼리 컬럼은 서브쿼리 안에서만 유효하기 때문이다(FROM 절 인라인 뷰는 테이블처럼 취급되어 예외). 따라서 ② 가 적절하지 않다. ① 서브쿼리는 SELECT·WHERE·FROM 등에 쓸 수 있고, ④ 스칼라 서브쿼리는 값 하나를 돌려준다.",
-    "_source": "authored"
+    "explanation": "EXISTS 는 서브쿼리가 행을 하나라도 돌려주는지만 본다. ㉠ 의 서브쿼리는 값이 NULL 인 행 하나를 돌려주므로 참이 되어 3행이 모두 나온다. IN 과 NOT IN 은 값을 비교한다. ㉡ 의 ID = NULL 은 UNKNOWN 이라 0, ㉢ 의 ID <> NULL 도 UNKNOWN 이라 역시 0 이다. ㉣ 의 서브쿼리는 행이 없으니 NOT EXISTS 가 참이 되어 3 이다. 정답은 ②번이다. ① 은 EXISTS 가 NULL 값을 보고 거짓이 된다고 본 것, ③ 은 NOT IN 이 NULL 과 다르니 모두 통과한다고 본 것, ④ 는 두 가지를 모두 잘못 본 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT COUNT(*) FROM T          -- ㉠\nWHERE  EXISTS (SELECT NULL FROM DUAL);\n\nSELECT COUNT(*) FROM T          -- ㉡\nWHERE  ID IN (SELECT NULL FROM DUAL);\n\nSELECT COUNT(*) FROM T          -- ㉢\nWHERE  ID NOT IN (SELECT NULL\n                  FROM   DUAL);\n\nSELECT COUNT(*) FROM T          -- ㉣\nWHERE  NOT EXISTS (SELECT 1 FROM DUAL\n                   WHERE  1 = 0);"
+      }
+    ]
   },
   {
     "id": 10418,
@@ -933,16 +939,22 @@ export const ROUND_52: QuizQuestion[] = [
     "round": 52,
     "subject": "2과목",
     "number": 28,
-    "title": "EMPLOYEE 테이블을 삭제할 때 참조하는 모든 제약 조건을 함께 제거하려면 어떤 옵션을 사용해야 하는가?",
+    "title": "아래와 같이 부서·사원 테이블이 있을 때 ㉠~㉢ 을 순서대로 실행한 결과로 옳은 것은? ('㉠ 결과, ㉡ 뒤 사원 행 수, ㉢ 결과' 순서, Oracle 기준)",
     "options": [
-      "RESTRICT",
-      "WITH GRANT",
-      "NO ACTION",
-      "CASCADE CONSTRAINTS"
+      "성공, 0, 오류",
+      "오류, 0, 성공",
+      "오류, 3, 오류",
+      "오류, 3, 성공"
     ],
     "correctIndex": 3,
-    "explanation": "테이블을 삭제하면서 이를 참조하는 외래키 등 모든 제약을 함께 제거하려면 DROP TABLE ... CASCADE CONSTRAINTS 옵션을 사용한다. ① RESTRICT 는 참조가 있으면 삭제를 막고, ② WITH GRANT 는 권한 재부여 옵션이며, ③ NO ACTION 은 참조 무결성 동작 옵션이라 제약을 지우지 않는다.",
-    "_source": "authored"
+    "explanation": "다른 테이블의 외래키가 참조하고 있는 테이블은 그냥 DROP 할 수 없어 ㉠ 은 오류다. CASCADE CONSTRAINTS 를 붙이면 부서를 참조하던 외래키 제약만 함께 지우고 부서 테이블을 삭제한다. 사원의 데이터는 건드리지 않으므로 3행 그대로다. 외래키가 사라졌으니 없는 부서 99 를 넣는 ㉢ 도 성공한다. 정답은 ④번이다. ① 은 부모를 지우면 자식이 함께 지워진다고 본 것, ② 는 CASCADE CONSTRAINTS 가 자식 행까지 지운다고 본 것, ③ 은 외래키가 남아 있다고 본 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "CREATE TABLE 부서 (\n  부서번호 NUMBER PRIMARY KEY\n);\nCREATE TABLE 사원 (\n  사번     NUMBER PRIMARY KEY,\n  부서번호 NUMBER REFERENCES 부서\n);\n-- 부서: 10, 20\n-- 사원: 3명(부서 10, 10, 20)\n\nDROP TABLE 부서;                 -- ㉠\nDROP TABLE 부서\n  CASCADE CONSTRAINTS;           -- ㉡\nINSERT INTO 사원\nVALUES (4, 99);                  -- ㉢"
+      }
+    ]
   },
   {
     "id": 10428,
