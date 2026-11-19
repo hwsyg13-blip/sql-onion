@@ -1244,21 +1244,29 @@ export const ROUND_46: QuizQuestion[] = [
     "round": 46,
     "subject": "2과목",
     "number": 28,
-    "title": "아래 ERD에 대한 설명으로 가장 적절한 것은?",
+    "title": "아래 ERD 와 데이터에서 SQL ㉠, ㉡, ㉢ 의 결과(COUNT(*))를 차례대로 나열한 것은?",
     "options": [
-      "지점은 최소 한 명의 고객을 반드시 가진다.",
-      "고객은 반드시 하나의 지점에 소속된다.",
-      "지점에 속하지 않는 고객이 존재할 수 있으므로, 별도로 추출해야 한다.",
-      "고객과 지점은 다대다 관계이다."
+      "3, 4, 4",
+      "4, 4, 5",
+      "3, 4, 5",
+      "3, 3, 5"
     ],
     "correctIndex": 2,
-    "explanation": "지점 쪽 끝의 |o 는 고객 한 명에 지점이 0개 또는 1개라는 뜻이라, 지점에 속하지 않은 고객이 있을 수 있다. 고객 쪽 끝의 o{ 는 지점 하나에 고객이 0명 이상이라는 뜻이다. 그래서 ① 지점이 고객을 반드시 가진다는 말과 ② 고객이 반드시 지점에 속한다는 말은 틀렸고, ④ 지점 쪽에 까마귀발이 없어 다대다도 아니다. ③ 처럼 지점이 없는 고객이 있을 수 있으므로, 전체 고객을 조회하려면 OUTER JOIN 을 쓰거나 따로 뽑아야 한다.",
+    "explanation": "ERD 의 지점 쪽 |o 는 지점이 없는 고객이 있을 수 있다는 뜻이고, 고객 쪽 o{ 는 고객이 없는 지점이 있을 수 있다는 뜻이다. 데이터에서도 고객 3 은 지점코드가 NULL 이고, 지점 S3 에는 고객이 없다. ㉠ 은 양쪽이 모두 맞는 행만 남겨 고객 1, 2, 4 의 3행이다. ㉡ 은 고객을 모두 남기므로 고객 3 이 지점 칼럼 NULL 로 더해져 4행이다. ㉢ 은 양쪽을 모두 남겨 ㉡ 의 4행에 S3 한 행이 더해져 5행이다. 정답은 ③번이다. ① 은 FULL OUTER JOIN 이 고객 쪽만 남긴다고 본 것이고, ② 는 NULL 끼리도 조인된다고 본 것이다. ④ 는 LEFT JOIN 에서 고객 3 을 뺀 것이다. 전체 고객을 빠짐없이 보려면 일반 조인이 아니라 고객 쪽을 남기는 OUTER JOIN 을 써야 한다.",
     "_source": "authored",
     "references": [
       {
         "type": "erd",
         "caption": "지점-고객 ERD",
-        "mermaid": "erDiagram\n    지점 |o--o{ 고객 : \"소속\""
+        "mermaid": "erDiagram\n    지점 |o..o{ 고객 : \"소속\"\n    지점 {\n        string 지점코드 PK\n    }\n    고객 {\n        int 고객번호 PK\n        string 지점코드 FK\n    }"
+      },
+      {
+        "type": "text",
+        "content": "지점: S1, S2, S3\n고객: (1, S1), (2, S1), (3, NULL), (4, S2)"
+      },
+      {
+        "type": "sql",
+        "code": "-- ㉠\nSELECT COUNT(*) FROM 고객 C\nJOIN 지점 J\n  ON C.지점코드 = J.지점코드;\n-- ㉡\nSELECT COUNT(*) FROM 고객 C\nLEFT JOIN 지점 J\n  ON C.지점코드 = J.지점코드;\n-- ㉢\nSELECT COUNT(*) FROM 고객 C\nFULL OUTER JOIN 지점 J\n  ON C.지점코드 = J.지점코드;"
       }
     ]
   },
@@ -2136,20 +2144,29 @@ export const ROUND_46: QuizQuestion[] = [
     "round": 46,
     "subject": "2과목",
     "number": 49,
-    "title": "부서 테이블에 존재하지만 대응되는 사원이 없는 부서까지 모두 조회하려 한다. 빈칸에 들어갈 조인 방식으로 올바른 것은? (사원 테이블이 FROM 절의 좌측, 부서 테이블이 우측에 위치한다고 가정)",
+    "title": "아래 ERD 와 데이터에서 SQL ㉠, ㉡, ㉢ 의 결과(COUNT(*))를 차례대로 나열한 것은?",
     "options": [
-      "RIGHT OUTER JOIN",
-      "LEFT OUTER JOIN",
-      "INNER JOIN",
-      "CROSS JOIN"
+      "4, 3, 4",
+      "4, 4, 4",
+      "4, 3, 5",
+      "3, 3, 4"
     ],
     "correctIndex": 0,
-    "explanation": "사원이 없는 부서까지 모두 보려면 부서 테이블의 행을 모두 보존해야 한다. 부서(DEPT)가 JOIN 키워드의 오른쪽에 있으므로 오른쪽 테이블을 보존하는 RIGHT OUTER JOIN 이다(①). ② LEFT OUTER JOIN 은 사원 쪽을 보존하고, ③ INNER JOIN 은 사원이 없는 부서가 빠지며, ④ CROSS JOIN 은 조건 없는 카티션 곱이다.",
+    "explanation": "㉠ 은 오른쪽 부서를 모두 남기는 RIGHT OUTER JOIN 이다. D1 에 사원 2명, D2 에 1명이 붙고, 사원이 없는 D3 도 사원 칼럼이 NULL 인 채 한 행으로 남아 4행이다. ㉡ 은 앞의 LEFT JOIN 결과(4행)에 참여를 일반 조인한다. D3 행은 E.사번 이 NULL 이라 P.사번 = E.사번 이 참이 될 수 없고, 참여가 없는 사원 2 의 행도 빠진다. 남는 것은 사원 1 의 두 행과 사원 3 의 한 행으로 3행이다. 뒤에 붙인 일반 조인이 앞의 OUTER JOIN 으로 살린 행을 다시 지운 것이다. ㉢ 은 사원과 참여를 먼저 조인한 결과(사원 1 두 행, 사원 3 한 행)를 인라인 뷰로 만든 뒤 부서에 LEFT JOIN 했다. D1 2행, D2 1행, D3 은 NULL 로 1행이 되어 4행이다. 정답은 ①번이다. ② 는 ㉡ 에서도 D3 이 남는다고 본 것이고, ③ 은 ㉢ 에서 참여가 없는 사원 2 까지 남는다고 본 것이다. ④ 는 ㉠ 을 일반 조인처럼 센 것이다.",
     "_source": "authored",
     "references": [
       {
+        "type": "erd",
+        "caption": "부서·사원·참여 ERD",
+        "mermaid": "erDiagram\n    부서 ||..o{ 사원 : \"소속\"\n    사원 ||--o{ 참여 : \"투입\"\n    부서 {\n        string 부서코드 PK\n    }\n    사원 {\n        int 사번 PK\n        string 부서코드 FK\n    }\n    참여 {\n        int 사번 PK, FK\n        string 과제 PK\n    }"
+      },
+      {
+        "type": "text",
+        "content": "부서: D1, D2, D3\n사원: (1, D1), (2, D1), (3, D2)\n참여: (1, P1), (1, P2), (3, P1)"
+      },
+      {
         "type": "sql",
-        "code": "SELECT *\nFROM   EMP E ???  JOIN DEPT D\nON     E.DNO = D.DNO;"
+        "code": "-- ㉠\nSELECT COUNT(*)\nFROM 사원 E RIGHT JOIN 부서 D\n  ON E.부서코드 = D.부서코드;\n-- ㉡\nSELECT COUNT(*)\nFROM 부서 D LEFT JOIN 사원 E\n  ON E.부서코드 = D.부서코드\nJOIN 참여 P ON P.사번 = E.사번;\n-- ㉢\nSELECT COUNT(*)\nFROM 부서 D LEFT JOIN\n  (SELECT E.부서코드\n     FROM 사원 E JOIN 참여 P\n       ON P.사번 = E.사번) X\n  ON X.부서코드 = D.부서코드;"
       }
     ]
   },

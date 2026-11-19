@@ -921,3 +921,6 @@
 | 47-2-45 | 1:M 두 개 ERD 에서 UNION·UNION ALL·JOIN·INTERSECT | UNION 설명 고르기 → ERD + 데이터 + SQL 4개 | 3, 5, 1, 1 | PostgreSQL 동일, ERD 렌더 확인 |
 | 48-2-39 | CROSS JOIN 으로 모든 조합 만든 뒤 NOT EXISTS 로 빼기 | 조인 이름 → ERD + 데이터 + SQL 3개 | 6, 4, 2 | PostgreSQL 동일, ERD 렌더 확인 |
 | 57-2-35 | 같은 이름 다른 뜻 칼럼과 NATURAL JOIN·USING·ON | 조인 이름 → ERD + 데이터 + SQL 3개 | 0, 2, 2 | PostgreSQL 동일, ERD 렌더 확인 |
+| 46-2-49 | OUTER JOIN 뒤 일반 조인이 살린 행을 지움 vs 인라인 뷰로 먼저 조인 | 조인 이름 → ERD 3개 테이블 + 데이터 + SQL 3개 | 4, 3, 4 | PostgreSQL 동일, ERD 렌더 확인 |
+| 48-2-32 | ON DELETE CASCADE 가 손자 테이블 외래키에 막힘 | DROP 옵션 이름 → ERD + 외래키 설정 + DELETE 2개 후 행 수 | 1, 2, 1 | PostgreSQL 동일(첫 DELETE 오류), ERD 렌더 확인 |
+| 46-2-28 | 양쪽 선택(|o..o{) ERD 와 INNER·LEFT·FULL OUTER | ERD 설명 고르기 → ERD + 데이터 + SQL 3개 | 3, 4, 5 | PostgreSQL 동일, ERD 렌더 확인 |
