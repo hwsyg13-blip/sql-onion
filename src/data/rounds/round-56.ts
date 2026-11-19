@@ -917,16 +917,22 @@ export const ROUND_56: QuizQuestion[] = [
     "round": 56,
     "subject": "2과목",
     "number": 29,
-    "title": "SQL 실행 순서로 올바른 것은?",
+    "title": "사원 테이블에 대한 SQL ㉠~㉣ 중 오류가 발생하는 것만 모두 고른 것은?",
     "options": [
-      "SELECT - FROM - WHERE - GROUP BY - HAVING - ORDER BY",
-      "WHERE - FROM - HAVING - GROUP BY - SELECT - ORDER BY",
-      "FROM - WHERE - GROUP BY - HAVING - SELECT - ORDER BY",
-      "FROM - WHERE - HAVING - GROUP BY - SELECT - ORDER BY"
+      "㉠",
+      "㉠, ㉢, ㉣",
+      "㉠, ㉢",
+      "㉢"
     ],
     "correctIndex": 2,
-    "explanation": "SQL 의 논리적 실행 순서는 FROM → WHERE → GROUP BY → HAVING → SELECT → ORDER BY 이다. ① 은 쓰는 순서, ② 는 WHERE 를 FROM 보다, ④ 는 HAVING 을 GROUP BY 보다 먼저 둔 순서라 틀리다.",
-    "_source": "authored"
+    "explanation": "SELECT 문은 FROM → WHERE → GROUP BY → HAVING → SELECT → ORDER BY 순서로 처리되고, 윈도우 함수는 SELECT 단계에서 계산된다. 그래서 그보다 먼저 처리되는 WHERE(㉠)와 HAVING(㉢)에는 윈도우 함수를 쓸 수 없어 오류다. ㉡ 처럼 인라인 뷰 안에서 먼저 계산한 뒤 바깥 WHERE 에서 거르면 되고, SELECT 뒤에 처리되는 ORDER BY(㉣)에는 윈도우 함수를 쓸 수 있다. 정답은 ③번이다. ① 은 HAVING 은 집계라서 된다고 본 것, ② 는 ORDER BY 에도 못 쓴다고 본 것, ④ 는 WHERE 에서 행 번호로 거를 수 있다고 본 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "-- ㉠\nSELECT 이름 FROM 사원\nWHERE  ROW_NUMBER() OVER\n       (ORDER BY 급여 DESC) = 1;\n-- ㉡\nSELECT 이름\nFROM  (SELECT 이름,\n         ROW_NUMBER() OVER\n         (ORDER BY 급여 DESC) AS RN\n       FROM 사원)\nWHERE  RN = 1;\n-- ㉢\nSELECT 부서 FROM 사원\nGROUP  BY 부서\nHAVING RANK() OVER\n       (ORDER BY SUM(급여)) = 1;\n-- ㉣\nSELECT 이름 FROM 사원\nORDER  BY ROW_NUMBER() OVER\n       (ORDER BY 급여);"
+      }
+    ]
   },
   {
     "id": 10229,
@@ -1876,16 +1882,22 @@ export const ROUND_56: QuizQuestion[] = [
     "round": 56,
     "subject": "2과목",
     "number": 48,
-    "title": "계층별 소계와 총계를 순차적으로 산출하는 집계 절은?",
+    "title": "지역이 서울 2행, 부산 1행인 판매 테이블에 대한 SQL ㉠, ㉡, ㉢ 의 결과 행 수로 옳은 것은?",
     "options": [
-      "GROUPING SETS()",
-      "ROLLUP()",
-      "CUBE()",
-      "HAVING()"
+      "3, 3, 3",
+      "3, 5, 3",
+      "3, 5, 2",
+      "2, 4, 3"
     ],
     "correctIndex": 1,
-    "explanation": "ROLLUP 은 GROUP BY ROLLUP(A, B) 처럼 지정한 순서대로 (A, B) → (A) → () 로 집계 레벨을 하나씩 줄이며 계층별 소계와 총계를 만든다(②). CUBE(③)는 모든 조합, GROUPING SETS(①)는 지정한 조합만 집계하고, HAVING(④)은 그룹 조건절이다.",
-    "_source": "authored"
+    "explanation": "㉠ 은 지역별 집계 2행(서울·부산)과 () 로 만든 전체 합계 1행을 합쳐 3행이다. GROUPING SETS 는 적힌 묶음마다 결과를 따로 만들어 붙이므로, ㉡ 처럼 (지역) 을 두 번 쓰면 지역별 행이 두 번 나와 2 + 2 + 1 = 5행이다(중복을 없애 주지 않는다). ㉢ 의 ROLLUP(지역) 은 GROUPING SETS((지역), ()) 와 같아 3행이다. 정답은 ②번이다. ① 은 같은 묶음을 두 번 써도 한 번만 계산된다고 본 것, ③ 은 ROLLUP 이 합계 행을 만들지 않는다고 본 것, ④ 는 () 를 합계로 보지 않은 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "-- ㉠\nSELECT 지역, SUM(수량) FROM 판매\nGROUP  BY GROUPING SETS ((지역), ());\n-- ㉡\nSELECT 지역, SUM(수량) FROM 판매\nGROUP  BY GROUPING SETS\n          ((지역), (지역), ());\n-- ㉢\nSELECT 지역, SUM(수량) FROM 판매\nGROUP  BY ROLLUP(지역);"
+      }
+    ]
   },
   {
     "id": 10248,

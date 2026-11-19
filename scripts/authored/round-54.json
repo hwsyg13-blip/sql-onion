@@ -210,15 +210,21 @@
     {
       "subject": "2과목",
       "number": 12,
-      "title": "뷰(VIEW) 에 대한 설명으로 적절하지 않은 것은?",
+      "title": "사원(이름, 부서, 급여) 테이블에 아래 두 뷰를 만들고 ㉠~㉣ 을 각각 실행할 때 오류가 발생하는 것만 모두 고른 것은?",
       "options": [
-        "뷰는 조회 속도를 높이기 위해 사용된다.",
-        "뷰는 실제 데이터를 저장하지 않는다.",
-        "컬럼이 추가될 때 뷰를 변경하지 않아도 응용 프로그램에 영향을 미치지 않는다.",
-        "뷰는 다른 테이블의 데이터를 참조한다."
+        "㉠, ㉢",
+        "㉠",
+        "㉠, ㉢, ㉣",
+        "오류 없음"
       ],
       "correctIndex": 0,
-      "explanation": "뷰는 조회 속도를 높이려고 쓰는 객체가 아니라 논리적 독립성, 질의 단순화, 보안(접근 제어)을 위해 사용한다. ② 뷰는 실제 데이터를 저장하지 않고 ④ 다른 테이블을 참조하며, ③ 기본 테이블에 컬럼이 추가되어도 뷰 정의를 바꾸지 않으면 응용 프로그램에 영향이 없다. 따라서 적절하지 않은 것은 ①이다."
+      "explanation": "뷰를 통한 UPDATE·DELETE·INSERT 는 뷰의 각 행이 원래 테이블의 한 행과 바로 대응될 때만 된다. V1 은 GROUP BY·SUM 으로 여러 행을 묶은 결과라 어느 행을 고쳐야 할지 정할 수 없어 ㉠·㉢ 은 오류다. V2 는 사원의 행을 그대로 골라 보여 주는 단순한 뷰라 ㉡ 의 UPDATE 는 된다. ㉣ 도 들어가는데, 뷰에 없는 부서 칼럼은 NULL 로 저장되고(WITH CHECK OPTION 이 없어 막지 않는다) V2 로는 다시 보이지 않는다. 정답은 ①번이다. ② 는 집계 뷰에서 DELETE 는 된다고 본 것, ③ 은 뷰 조건에 맞지 않는 INSERT 를 막는다고 본 것, ④ 는 뷰로는 무엇이든 바꿀 수 있다고 본 것이다.",
+      "references": [
+        {
+          "type": "sql",
+          "code": "CREATE VIEW V1 AS\n  SELECT 부서, SUM(급여) AS 합\n  FROM   사원\n  GROUP  BY 부서;\nCREATE VIEW V2 AS\n  SELECT 이름, 급여\n  FROM   사원\n  WHERE  부서 = 10;\n\n-- ㉠\nUPDATE V1 SET 합 = 0;\n-- ㉡\nUPDATE V2 SET 급여 = 급여 + 1;\n-- ㉢\nDELETE FROM V1 WHERE 부서 = 10;\n-- ㉣\nINSERT INTO V2 VALUES ('신', 100);"
+        }
+      ]
     },
     {
       "subject": "2과목",
@@ -1946,15 +1952,21 @@
     {
       "subject": "2과목",
       "number": 48,
-      "title": "단일 행 함수에 대한 설명으로 적절하지 않은 것은?",
+      "title": "입사일(문자 'YYYYMMDD')이 20240301, 20240915, 20250102, 20251120, 20251201 인 사원 테이블에 대한 SQL ㉠, ㉡, ㉢ 의 결과로 옳은 것은? ('㉠ 행 수 / ㉡ / ㉢', Oracle 19c 기준)",
       "options": [
-        "각 행에 개별적으로 적용된다.",
-        "여러 인자를 입력으로 받을 수 있다.",
-        "중첩 사용이 가능하다.",
-        "GROUP BY 절에는 사용할 수 없다."
+        "5 / 오류 / 오류",
+        "2 / 2행 / 2행",
+        "2 / 2행 / 오류",
+        "2 / 오류 / 오류"
       ],
       "correctIndex": 3,
-      "explanation": "단일 행 함수는 각 행마다 하나의 결과를 돌려주며(①), 여러 인자를 받을 수 있고(②, 예: SUBSTR), 함수 안에 함수를 중첩해 쓸 수 있다(③). SELECT·WHERE·ORDER BY 뿐 아니라 GROUP BY 절에도 쓸 수 있으므로(예: GROUP BY SUBSTR(입사일, 1, 4)) ④ 가 옳지 않다."
+      "explanation": "단일 행 함수는 GROUP BY 에도 쓸 수 있다. ㉠ 은 입사일 앞 네 글자(연도)로 묶여 2024 2명, 2025 3명의 2행이다. SELECT 절의 별칭은 GROUP BY 보다 나중에 정해지므로 GROUP BY 에 별칭 연도를 쓴 ㉡ 은 오류다. ㉢ 은 GROUP BY 가 앞 네 글자인데 SELECT 는 앞 여섯 글자(연월)를 보여 달라고 해서, 한 그룹 안에 값이 여러 개라 오류다. 정답은 ④번이다. ① 은 함수를 쓰면 행마다 따로 묶인다고 본 것, ②·③ 은 GROUP BY 에 별칭을 쓸 수 있다고 본 것이다.",
+      "references": [
+        {
+          "type": "sql",
+          "code": "-- ㉠\nSELECT SUBSTR(입사일, 1, 4) AS 연도,\n       COUNT(*)\nFROM   사원\nGROUP  BY SUBSTR(입사일, 1, 4);\n-- ㉡\nSELECT SUBSTR(입사일, 1, 4) AS 연도,\n       COUNT(*)\nFROM   사원\nGROUP  BY 연도;\n-- ㉢\nSELECT SUBSTR(입사일, 1, 6),\n       COUNT(*)\nFROM   사원\nGROUP  BY SUBSTR(입사일, 1, 4);"
+        }
+      ]
     },
     {
       "subject": "2과목",

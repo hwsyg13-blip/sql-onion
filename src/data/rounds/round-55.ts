@@ -1291,16 +1291,22 @@ export const ROUND_55: QuizQuestion[] = [
     "round": 55,
     "subject": "2과목",
     "number": 31,
-    "title": "계약이 없는 고객을 조회하는 SQL 로 적절한 것은?",
+    "title": "고객 테이블에 고객ID 1, 2, 3, 4 가 있고, 계약 테이블의 고객ID 가 1, 3, NULL 일 때 '계약이 없는 고객' 을 찾는 SQL ㉠, ㉡, ㉢ 의 결과 행 수로 옳은 것은?",
     "options": [
-      "INNER JOIN",
-      "EXISTS",
-      "NOT EXISTS",
-      "COALESCE"
+      "2, 2, 2",
+      "0, 0, 2",
+      "0, 2, 2",
+      "2, 2, 0"
     ],
     "correctIndex": 2,
-    "explanation": "계약이 '없는' 고객을 찾으려면, 고객마다 계약 테이블에 해당 고객의 행이 존재하지 않는지를 확인하는 NOT EXISTS(연관 서브쿼리)를 쓴다(③). EXISTS(②)와 INNER JOIN(①)은 반대로 계약이 있는 고객을 찾고, COALESCE(④)는 NULL 대체 함수라 관계가 없다.",
-    "_source": "authored"
+    "explanation": "㉠ 의 NOT IN 은 '고객ID <> 1 AND <> 3 AND <> NULL' 인데, <> NULL 이 UNKNOWN 이라 어떤 행도 참이 되지 못해 0행이다. 서브쿼리에 NULL 이 하나만 섞여도 NOT IN 은 결과가 사라진다. ㉡ 의 NOT EXISTS 는 고객마다 같은 고객ID 의 계약 행이 있는지만 본다. NULL 행은 어떤 고객과도 같지 않아 영향이 없고, 2·4 의 2행이다. ㉢ 은 짝이 없는 고객의 계약 칼럼이 NULL 이 되는 것을 이용해 역시 2·4 의 2행이다. 정답은 ③번이다. ① 은 NOT IN 이 NULL 을 그냥 건너뛴다고 본 것, ② 는 NOT EXISTS 도 NULL 의 영향을 받는다고 본 것, ④ 는 외부 조인 결과에서 IS NULL 이 아무것도 잡지 못한다고 본 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "-- ㉠\nSELECT * FROM 고객\nWHERE  고객ID NOT IN\n       (SELECT 고객ID FROM 계약);\n-- ㉡\nSELECT * FROM 고객 C\nWHERE  NOT EXISTS\n       (SELECT 1 FROM 계약 K\n        WHERE  K.고객ID = C.고객ID);\n-- ㉢\nSELECT C.*\nFROM   고객 C LEFT JOIN 계약 K\n       ON C.고객ID = K.고객ID\nWHERE  K.고객ID IS NULL;"
+      }
+    ]
   },
   {
     "id": 10281,
@@ -1960,16 +1966,22 @@ export const ROUND_55: QuizQuestion[] = [
     "round": 55,
     "subject": "2과목",
     "number": 47,
-    "title": "참조 무결성을 구현해 주는 키로 적절한 것은?",
+    "title": "아래처럼 자기 자신을 참조하는 사원 테이블에 INSERT ㉠~㉣ 을 차례로 실행할 때 오류가 발생하는 것만 모두 고른 것은?",
     "options": [
-      "기본키",
-      "외래키",
-      "대체키",
-      "후보키"
+      "없음",
+      "㉡",
+      "㉡, ㉣",
+      "㉠, ㉡"
     ],
     "correctIndex": 1,
-    "explanation": "참조 무결성(자식의 값이 부모에 반드시 존재)은 외래키로 구현한다(②). 기본키(①)는 개체 무결성(NOT NULL + 유일)을 보장하고, 대체키(③)는 후보키 중 기본키가 아닌 키, 후보키(④)는 기본키가 될 수 있는 키다.",
-    "_source": "authored"
+    "explanation": "외래키는 같은 테이블의 기본키도 참조할 수 있다(관리자 → 사번). 참조 무결성은 넣는 순간 가리키는 행이 있는지로 검사한다. ㉠ 의 관리자 NULL 은 '관리자 없음' 이라 허용된다. ㉡ 은 아직 없는 사번 3 을 가리켜 오류다. ㉢ 은 있는 사번 1 을 가리켜 성공하고, 그 뒤의 ㉣ 은 사번 3 이 생겼으므로 같은 값인데도 성공한다(㉡ 이 실패해서 사번 2 도 중복이 아니다). 정답은 ②번이다. ① 은 같은 테이블 참조는 검사하지 않는다고 본 것, ③ 은 ㉣ 도 실패한다고 본 것, ④ 는 외래키에 NULL 을 넣을 수 없다고 본 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "CREATE TABLE 사원 (\n  사번   NUMBER PRIMARY KEY,\n  관리자 NUMBER\n         REFERENCES 사원(사번)\n);\n-- ㉠\nINSERT INTO 사원 VALUES (1, NULL);\n-- ㉡\nINSERT INTO 사원 VALUES (2, 3);\n-- ㉢\nINSERT INTO 사원 VALUES (3, 1);\n-- ㉣\nINSERT INTO 사원 VALUES (2, 3);"
+      }
+    ]
   },
   {
     "id": 10297,

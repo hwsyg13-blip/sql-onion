@@ -447,3 +447,14 @@
 | 52-2-37 | 공통 칼럼 없는 NATURAL JOIN·공통 칼럼 한정자 | 설명 고르기 → 세 SQL 결과 | 6, 2, 오류 | PostgreSQL 6·2. ㉢ 오류는 Oracle 규칙(ORA-25155, PostgreSQL 은 허용) — '(Oracle 기준)' 표시 |
 | 53-2-32 | MINUS 중복 제거·집합 연산자 같은 우선순위 | 설명 고르기 → 세 SQL 행 수 | 2, 0, 2 | PostgreSQL(EXCEPT) 동일 |
 | 53-2-44 | ADD DEFAULT·RENAME·DROP COLUMN | 설명 고르기 → 세 ALTER 뒤 행 | BB=2, C=5 | PostgreSQL 동일 |
+
+## 순환 4바퀴 — 54~56회 (11-19 22시 실행 계속)
+
+| 문항 | 개념 | 바뀐 점 | 정답 | 검증 |
+|---|---|---|---|---|
+| 54-2-48 | GROUP BY 에 단일 행 함수·별칭 불가·SELECT 식 불일치 | 단일 행 함수 설명 → SUBSTR 로 묶는 세 SQL | 2 / 오류 / 오류 | PostgreSQL ㉠ 2·㉢ 오류. ㉡ 은 PostgreSQL 이 별칭 GROUP BY 를 허용해 Oracle 19c 기준 명시 |
+| 54-2-12 | 집계 뷰는 수정 불가·단순 뷰 INSERT | 뷰 설명 → 두 뷰에 DML 4개 중 오류 | ㉠, ㉢ | PostgreSQL 동일(㉣ 은 부서 NULL 로 저장) |
+| 55-2-31 | NOT IN·NOT EXISTS·LEFT JOIN IS NULL 과 NULL | 연산자 이름 → 계약 없는 고객 세 방식 행 수 | 0, 2, 2 | PostgreSQL 동일 |
+| 55-2-47 | 자기 참조 외래키·NULL·삽입 순서 | 키 이름 → INSERT 4개 중 오류 | ㉡ | PostgreSQL 동일 |
+| 56-2-29 | 윈도우 함수 위치(WHERE·HAVING 불가) | 실행 순서 고르기 → SQL 4개 중 오류 | ㉠, ㉢ | PostgreSQL 동일 |
+| 56-2-48 | GROUPING SETS 중복 묶음·ROLLUP 동치 | 절 이름 → 세 SQL 행 수 | 3, 5, 3 | PostgreSQL 동일 |
