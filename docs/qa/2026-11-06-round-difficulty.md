@@ -940,3 +940,5 @@
 | 62-2-27 | 별칭이 보이는 범위(ORDER BY·WHERE·상관 서브쿼리·인라인 뷰 안팎) | 오류 하나 → ERD + SQL 5개 중 오류 모두 | (나), (라), (마) | PostgreSQL 동일(세 개 오류) |
 | 47-2-25 | SELECT 에 없는 칼럼 정렬: 일반 SELECT 허용, DISTINCT·GROUP BY 에서는 오류 | DESC 위치 고르기 → SQL 4개 중 오류 | ㉡, ㉢ | PostgreSQL 동일 |
 | 48-2-30 | PRIOR 없는 CONNECT BY LEVEL(여러 행 테이블은 단계마다 곱해짐) | DUAL 한 줄 → 세 SQL 행 수 | 3, 6, 4 | Oracle 규칙, 재귀 CTE(모든 행 연결)로 6·4 확인 |
+| 58-2-27 | CASE 는 처음 참인 WHEN 에서 멈춤·단순 CASE 의 WHEN NULL·ELSE 없는 CASE 의 NULL | NULL IS NULL 한 줄 → 세 CASE 값 | 응시, 응시, NULL | PostgreSQL 동일 |
+| 59-2-13 | LIKE 의 %(0글자 포함)·_(정확히 한 글자, 한글 포함) | LIKE 하나 고르기 → 네 패턴 행 수 | 3, 1, 4, 1 | PostgreSQL 동일, 패턴은 고정폭 글꼴로 표시 |

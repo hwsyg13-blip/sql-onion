@@ -1108,20 +1108,42 @@ export const ROUND_58: QuizQuestion[] = [
     "round": 58,
     "subject": "2과목",
     "number": 27,
-    "title": "아래 SQL 수행 결과로 옳은 것은?",
+    "title": "아래 응시 테이블에 SQL 을 실행했을 때, C 행의 ㉠ 값, A 행의 ㉡ 값, A 행의 ㉢ 값을 차례대로 나열한 것은?",
     "options": [
-      "N",
-      "Y",
-      "NULL",
-      "오류 발생"
+      "우수, 미응시, 보통",
+      "응시, 응시, NULL",
+      "우수, 응시, NULL",
+      "응시, 미응시, 보통"
     ],
     "correctIndex": 1,
-    "explanation": "NULL IS NULL 은 NULL 인지를 묻는 조건이라 TRUE 다. CASE 의 첫 조건이 참이므로 'Y' 를 반환한다(②). = NULL 처럼 비교했다면 UNKNOWN 이 되어 ELSE 의 'N' 이 나왔을 것이다. ① N 은 IS NULL 을 = NULL 로 착각한 결과, ③ 조건이 참이면 THEN 의 값을 돌려주므로 NULL 이 아니며, ④ NULL IS NULL 은 정상 문법이다.",
+    "explanation": "㉠ 의 CASE 는 WHEN 을 위에서부터 검사하다 처음 참이 되는 곳에서 멈춘다. C 의 점수 5 는 두 번째 조건 점수 >= 0 에서 이미 참이라 '응시' 가 되고, 아래의 '우수' 까지 내려가지 않는다. ㉡ 은 단순 CASE 라 '점수 = NULL' 로 비교한다. NULL 과의 = 비교는 참이 될 수 없으므로 A 도 ELSE 로 가서 '응시' 가 된다. NULL 을 가려내려면 ㉠ 처럼 WHEN 점수 IS NULL 을 써야 한다. ㉢ 에서 A 의 점수 NULL 은 > 3 도 <= 3 도 참이 아니고 ELSE 도 없으므로 NULL 이 된다. 정답은 ②번이다. ① 과 ③ 은 CASE 가 가장 구체적인 조건을 고른다고 본 것이고, ① 과 ④ 는 단순 CASE 의 WHEN NULL 이 NULL 을 잡는다고 본 것이다. ① 과 ④ 는 ㉢ 에서 두 조건 중 하나는 반드시 참이라고도 보았다.",
     "_source": "authored",
     "references": [
       {
+        "type": "table",
+        "caption": "응시",
+        "headers": [
+          "이름",
+          "점수"
+        ],
+        "rows": [
+          [
+            "A",
+            "NULL"
+          ],
+          [
+            "B",
+            "0"
+          ],
+          [
+            "C",
+            "5"
+          ]
+        ]
+      },
+      {
         "type": "sql",
-        "code": "SELECT CASE WHEN NULL IS NULL THEN 'Y' ELSE 'N' END\nFROM DUAL;"
+        "code": "SELECT 이름,\n  CASE WHEN 점수 IS NULL\n         THEN '미응시'\n       WHEN 점수 >= 0 THEN '응시'\n       WHEN 점수 >= 5 THEN '우수'\n  END AS ㉠,\n  CASE 점수 WHEN NULL\n         THEN '미응시'\n       ELSE '응시'\n  END AS ㉡,\n  CASE WHEN 점수 > 3 THEN '우수'\n       WHEN 점수 <= 3 THEN '보통'\n  END AS ㉢\nFROM 응시;"
       }
     ]
   },
