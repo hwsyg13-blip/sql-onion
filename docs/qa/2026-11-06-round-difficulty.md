@@ -458,3 +458,14 @@
 | 55-2-47 | 자기 참조 외래키·NULL·삽입 순서 | 키 이름 → INSERT 4개 중 오류 | ㉡ | PostgreSQL 동일 |
 | 56-2-29 | 윈도우 함수 위치(WHERE·HAVING 불가) | 실행 순서 고르기 → SQL 4개 중 오류 | ㉠, ㉢ | PostgreSQL 동일 |
 | 56-2-48 | GROUPING SETS 중복 묶음·ROLLUP 동치 | 절 이름 → 세 SQL 행 수 | 3, 5, 3 | PostgreSQL 동일 |
+
+## 순환 4바퀴 — 57~59회 (11-19 22시 실행 계속)
+
+| 문항 | 개념 | 바뀐 점 | 정답 | 검증 |
+|---|---|---|---|---|
+| 57-2-29 | NULL 이 섞인 내림차순 RANK·DENSE_RANK | 함수 이름 → NULL 이 1위가 되는 순위 값 | 5, 4, 2 | PostgreSQL 동일(DESC 기본 NULLS FIRST) |
+| 57-2-15 | 자동 COMMIT 되는 문장(DDL·DCL) | 분류 짝 → INSERT 뒤 4가지 문장 + ROLLBACK | ㉡, ㉢ | Oracle 규칙(COMMENT ON·GRANT 자동 COMMIT) |
+| 58-2-24 | 조인 중복 vs 세미 조인(IN·EXISTS) | 방식 비교 → 중복 있는 B 와 네 COUNT | 2, 3, 2, 1 | PostgreSQL 동일 |
+| 58-2-26 | IS NOT NULL vs <> NULL vs NVL 치환 vs LENGTH | 방법 고르기 → 네 WHERE 행 수 | 3, 0, 2, 3 | PostgreSQL 동일 |
+| 59-2-33 | GROUPING SETS·CUBE·ROLLUP 행 수 | GROUP BY 고르기 → 세 방식 행 수 | 5, 8, 6 | PostgreSQL 동일 |
+| 59-2-21 | 3NF 이지만 BCNF 아님 | 정규화 설명 → 교수 → 과목 이 있는 수강 표의 최고 정규형 | 제3정규형 | 함수 종속으로 판정 |

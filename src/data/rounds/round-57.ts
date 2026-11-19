@@ -332,16 +332,22 @@ export const ROUND_57: QuizQuestion[] = [
     "round": 57,
     "subject": "2과목",
     "number": 15,
-    "title": "다음 중 SQL 명령어의 분류가 적절하지 않은 것은?",
+    "title": "빈 테이블 T 에 INSERT 한 뒤, 아래 ㉠~㉣ 중 하나를 실행하고 ROLLBACK 했다. INSERT 한 행이 그대로 남는 경우만 모두 고른 것은? (Oracle 기준, ㉠~㉣ 은 모두 성공한다고 가정)",
     "options": [
-      "DDL : TRUNCATE",
-      "DML : DROP",
-      "DCL : REVOKE",
-      "TCL : COMMIT"
+      "㉡",
+      "㉡, ㉢",
+      "㉠, ㉡, ㉢",
+      "㉣"
     ],
     "correctIndex": 1,
-    "explanation": "DROP 은 테이블·뷰 같은 객체 자체를 삭제하는 명령이라 DML 이 아니라 DDL 이다. ① TRUNCATE 도 DDL 이고, ③ REVOKE 는 권한 회수라 DCL, ④ COMMIT 은 트랜잭션 확정이라 TCL 이 맞다.",
-    "_source": "authored"
+    "explanation": "Oracle 에서 DDL 과 DCL 은 실행 전후로 자동 COMMIT 된다. COMMENT ON 은 DDL, GRANT 는 DCL 이라 ㉡·㉢ 을 실행하는 순간 앞의 INSERT 도 확정되어 ROLLBACK 해도 남는다. MERGE(㉠)는 DML 이라 INSERT 와 같은 트랜잭션에 묶여 함께 취소되고, SAVEPOINT(㉣)는 되돌릴 지점만 표시하는 TCL 이라 ROLLBACK 하면 INSERT 까지 사라진다. 정답은 ②번이다. ① 은 GRANT 는 자동 COMMIT 이 아니라고 본 것, ③ 은 MERGE 를 DDL 로 본 것, ④ 는 SAVEPOINT 가 그때까지의 작업을 저장한다고 본 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "INSERT INTO T VALUES (1);\n\n-- ㉠\nMERGE INTO T2 USING T\n  ON (T2.C = T.C)\n  WHEN NOT MATCHED THEN\n    INSERT VALUES (T.C);\n-- ㉡\nCOMMENT ON TABLE T IS '주문';\n-- ㉢\nGRANT SELECT ON T TO U;\n-- ㉣\nSAVEPOINT S1;\n\nROLLBACK;"
+      }
+    ]
   },
   {
     "id": 10165,
@@ -879,16 +885,22 @@ export const ROUND_57: QuizQuestion[] = [
     "round": 57,
     "subject": "2과목",
     "number": 29,
-    "title": "동일 값에 동일 순위를 부여하되 다음 순위를 건너뛰지 않는 순위 함수는?",
+    "title": "급여가 500, NULL, 400, 400, 300 인 사원 테이블에 아래 SQL 을 실행했다. 300 행의 RK·DR 값과 500 행의 RK 값으로 옳은 것은? (Oracle 기준)",
     "options": [
-      "DENSE_RANK",
-      "RANK",
-      "ROW_NUMBER",
-      "PERFECT_RANK"
+      "5, 4, 2",
+      "4, 3, 1",
+      "4, 4, 1",
+      "5, 5, 2"
     ],
     "correctIndex": 0,
-    "explanation": "같은 값에 같은 순위를 주고 다음 순위를 건너뛰지 않는 함수는 DENSE_RANK 다(①, 예: 1, 2, 2, 3). RANK(②)는 같은 순위 수만큼 다음 순위를 건너뛰고(1, 2, 2, 4), ROW_NUMBER(③)는 같은 값이어도 서로 다른 순번을 매긴다(1, 2, 3, 4). PERFECT_RANK(④)라는 함수는 없다.",
-    "_source": "authored"
+    "explanation": "Oracle 은 NULL 을 가장 큰 값으로 보므로 내림차순에서 NULL 이 맨 앞에 와 1위를 받는다. 그래서 500 은 2위다. 400 두 명은 공동 3위이고, RANK 는 공동 순위만큼 건너뛰어 300 이 5위, DENSE_RANK 는 건너뛰지 않아 300 이 4위다. 정답은 ①번이다. ② 는 NULL 이 맨 뒤로 간다고 본 것, ③ 은 NULL 이 뒤로 가고 RANK 도 건너뛰지 않는다고 본 것, ④ 는 DENSE_RANK 도 순위를 건너뛴다고 본 것이다. NULL 을 순위에서 빼려면 ORDER BY 급여 DESC NULLS LAST 처럼 써야 한다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT 급여,\n       RANK()       OVER\n         (ORDER BY 급여 DESC) AS RK,\n       DENSE_RANK() OVER\n         (ORDER BY 급여 DESC) AS DR\nFROM   사원;"
+      }
+    ]
   },
   {
     "id": 10179,

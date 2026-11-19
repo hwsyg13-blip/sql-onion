@@ -770,19 +770,63 @@
     {
       "subject": "2과목",
       "number": 24,
-      "title": "아래 네 개의 조인/조회 방식 중 나머지와 결과가 다른 하나는? (두 테이블 A, B 모두 ID 외에도 동일 이름 컬럼 NAME 을 추가로 가진다고 가정)",
+      "title": "아래 두 테이블에 대한 SQL ㉠~㉣ 의 결과(COUNT)로 옳은 것은?",
       "options": [
-        "A NATURAL JOIN B (동일 이름 컬럼 모두로 자동 조인)",
-        "A INNER JOIN B USING (ID) (USING 으로 ID 만 명시)",
-        "A JOIN B ON A.ID = B.ID (ON 으로 ID 만 명시)",
-        "SELECT * FROM A WHERE A.ID IN (SELECT ID FROM B) (WHERE IN 서브쿼리)"
+        "2, 3, 2, 1",
+        "1, 2, 2, 1",
+        "2, 3, 3, 2",
+        "3, 3, 2, 1"
       ],
       "correctIndex": 0,
-      "explanation": "두 테이블에는 ID 말고도 이름이 같은 NAME 컬럼이 있다. ① NATURAL JOIN 은 이름이 같은 컬럼을 모두 조인 조건으로 쓰므로 ID 와 NAME 이 둘 다 같아야 짝이 맞고, ID 가 같아도 NAME 이 다르면 빠진다. ② USING (ID) 와 ③ ON A.ID = B.ID 는 ID 만 비교하므로 NAME 과 상관없고, ④ IN 서브쿼리도 A 의 ID 가 B 에 있는지만 본다. 그래서 NAME 까지 맞아야 하는 ① 만 나머지와 결과가 달라질 수 있다.",
+      "explanation": "㉠ NATURAL JOIN 은 이름이 같은 ID 와 지역을 모두 비교한다. A 의 (1, 서울) 이 B 의 두 행과 짝이 되고, (2, 부산) 은 지역이 달라 빠져 2행이다. ㉡ 은 ID 만 비교해 1 은 B 의 두 행, 2 는 한 행과 짝이 되어 3행이다. ㉢·㉣ 은 조인이 아니라 'A 의 행을 남길지' 만 정하는 서브쿼리라, B 에 같은 값이 여러 개여도 A 의 행이 늘지 않는다. ㉢ 은 ID 1, 2 의 2행, ㉣ 은 지역까지 같은 1 하나라 1행이다. 정답은 ①번이다. ② 는 조인에서도 중복이 한 번만 센다고 본 것, ③ 은 IN·EXISTS 도 B 의 중복만큼 행이 늘어난다고 본 것, ④ 는 NATURAL JOIN 이 ID 만 비교한다고 본 것이다.",
       "references": [
         {
-          "type": "text",
-          "content": "전제: 두 테이블 A, B 가 ID 컬럼 외에 동일 이름 NAME 컬럼도 가지며, NAME 값은 행마다 일치하지 않을 수 있다."
+          "type": "table",
+          "caption": "A",
+          "headers": [
+            "ID",
+            "지역"
+          ],
+          "rows": [
+            [
+              "1",
+              "서울"
+            ],
+            [
+              "2",
+              "부산"
+            ],
+            [
+              "3",
+              "서울"
+            ]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "B",
+          "headers": [
+            "ID",
+            "지역"
+          ],
+          "rows": [
+            [
+              "1",
+              "서울"
+            ],
+            [
+              "1",
+              "서울"
+            ],
+            [
+              "2",
+              "서울"
+            ]
+          ]
+        },
+        {
+          "type": "sql",
+          "code": "-- ㉠\nSELECT COUNT(*) FROM A NATURAL JOIN B;\n-- ㉡\nSELECT COUNT(*)\nFROM   A JOIN B USING (ID);\n-- ㉢\nSELECT COUNT(*) FROM A\nWHERE  ID IN (SELECT ID FROM B);\n-- ㉣\nSELECT COUNT(*) FROM A\nWHERE  EXISTS\n       (SELECT 1 FROM B\n        WHERE  B.ID = A.ID\n        AND    B.지역 = A.지역);"
         }
       ]
     },
@@ -870,15 +914,21 @@
     {
       "subject": "2과목",
       "number": 26,
-      "title": "다음 중 COLUMN1의 값이 NULL이 아닌 행을 찾는 방법으로 가장 적절한 것은?",
+      "title": "C 값이 'A', NULL, 'X', 'B' 인 T 테이블에 대한 SQL ㉠~㉣ 의 결과 행 수로 옳은 것은?",
       "options": [
-        "SELECT * FROM MYTABLE WHERE COLUMN1 IS NOT NULL;",
-        "SELECT * FROM MYTABLE WHERE COLUMN1 <> NULL;",
-        "SELECT * FROM MYTABLE WHERE COLUMN1 != NULL;",
-        "SELECT * FROM MYTABLE WHERE COLUMN1 NOT NULL;"
+        "3, 0, 2, 3",
+        "3, 3, 3, 3",
+        "3, 0, 3, 3",
+        "3, 1, 2, 2"
       ],
       "correctIndex": 0,
-      "explanation": "NULL 은 비교 연산자(=, <>, !=)로 비교하면 항상 UNKNOWN 이라 어떤 행도 선택되지 않는다(②③). NULL 이 아닌 행은 IS NOT NULL 로 찾는다(①). ④ 는 IS 가 빠져 문법 오류다."
+      "explanation": "NULL 이 아닌 행을 고르는 정확한 방법은 IS NOT NULL 이라 ㉠ 은 3행이다. ㉡ 처럼 <> NULL 로 비교하면 모든 행에서 UNKNOWN 이 되어 0행이다. ㉢ 은 NULL 을 'X' 로 바꿔 빼는데, 원래 값이 'X' 인 행까지 함께 빠져 'A', 'B' 의 2행만 남는다. ㉣ 의 LENGTH(NULL) 은 NULL 이라 비교가 UNKNOWN 이 되어 NULL 행이 빠지고 3행이다. 정답은 ①번이다. ② 는 <> NULL 과 NVL 방식도 정확하다고 본 것, ③ 은 ㉢ 에서 진짜 'X' 행이 빠지는 것을 놓친 것, ④ 는 <> NULL 이 NULL 행을 잡고 LENGTH 가 NULL 행만 뺀다고 본 것이다.",
+      "references": [
+        {
+          "type": "sql",
+          "code": "-- ㉠\nSELECT * FROM T WHERE C IS NOT NULL;\n-- ㉡\nSELECT * FROM T WHERE C <> NULL;\n-- ㉢\nSELECT * FROM T\nWHERE  NVL(C, 'X') <> 'X';\n-- ㉣\nSELECT * FROM T WHERE LENGTH(C) > 0;"
+        }
+      ]
     },
     {
       "subject": "2과목",
