@@ -697,3 +697,14 @@
 | 46-2-46 | NL·HASH·SORT MERGE 선택 기준 | 설명 고르기 → 상황 3개에 조인 방식 | NL, HASH, SORT MERGE | 정의로 판정 |
 | 47-2-11 | CUBE·ROLLUP·GROUPING SETS 행 수 역추적 | 요구 설명 → 결과 9행에서 GROUP BY 찾기 | CUBE | PostgreSQL 로 4·7·9·4 행 확인 |
 | 47-2-37 | CROSS JOIN·WHERE 조인·쉼표 조인 | 설명 고르기 → 세 SQL 행 수 | 12, 2, 12 | PostgreSQL 동일 |
+
+## 순환 8바퀴 — 48~50회
+
+| 문항 | 개념 | 바뀐 점 | 정답 | 검증 |
+|---|---|---|---|---|
+| 48-2-35 | 뷰는 정의만 저장·CREATE OR REPLACE·기반 칼럼 삭제 | 설명 고르기 → 뷰에 대한 질문 3개 | 2개 / CREATE OR REPLACE VIEW / 오류 | Oracle 규칙(PostgreSQL 은 칼럼 삭제 자체를 막음, 해설에 적음) |
+| 48-2-41 | 윈도우 함수 네 분류 | 아닌 분류 고르기 → 함수 5개 분류 | 순위, 집계, 행 순서, 비율, 행 순서 | 정의로 판정 |
+| 49-2-49 | ROLLUP 행의 GROUPING 값 | 연산자 이름 → 소계·합계 행의 GROUPING 쌍 | (0, 1), (1, 1) | 정의로 판정 |
+| 49-2-32 | 제약 추가 시 기존 데이터 검사(PK·UNIQUE·복합 PK NULL) | 옳지 않은 설명 → ALTER 4개 결과 | 오류, 오류, 성공, 오류 | PostgreSQL 동일 |
+| 50-2-19 | NATURAL·USING·ON 결과 칼럼 수 | 옳지 않은 설명 → SELECT * 칼럼 수 | 3, 4, 5 | PostgreSQL \gdesc 로 확인 |
+| 50-2-23 | SAVEPOINT·COMMIT·ROLLBACK 흐름 | 분류 고르기 → 남는 행 수 | 2 | PostgreSQL 동일 |

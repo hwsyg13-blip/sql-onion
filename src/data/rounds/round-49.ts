@@ -1335,16 +1335,48 @@ export const ROUND_49: QuizQuestion[] = [
     "round": 49,
     "subject": "2과목",
     "number": 32,
-    "title": "PRIMARY KEY 에 대한 설명으로 적절하지 않은 것은?",
+    "title": "아래 T 테이블에 ㉠~㉣ 을 각각 실행한 결과로 옳은 것은?",
     "options": [
-      "값이 중복되지 않는다.",
-      "NULL 값을 허용하지 않는다.",
-      "테이블당 하나만 지정할 수 있다.",
-      "중복을 허용하되 NULL 은 허용하지 않는다."
+      "오류, 성공, 성공, 성공",
+      "오류, 오류, 성공, 성공",
+      "성공, 오류, 성공, 오류",
+      "오류, 오류, 성공, 오류"
     ],
     "correctIndex": 3,
-    "explanation": "PRIMARY KEY 는 UNIQUE 와 NOT NULL 을 합친 제약이라 중복도 NULL 도 허용하지 않고, 테이블당 하나만 지정할 수 있다(①②③ 은 맞다). ④ 는 중복을 허용한다고 했으므로 적절하지 않다.",
-    "_source": "authored"
+    "explanation": "제약조건을 나중에 추가하면 이미 들어 있는 데이터가 조건을 만족하는지 검사한다. ID 에는 2 가 두 번 있어 PRIMARY KEY(㉠)도 UNIQUE(㉡)도 오류다. CODE 는 값이 모두 다르고 NULL 이 없어 ㉢ 은 성공한다. ㉣ 은 (ID, CODE) 조합은 모두 다르지만, 기본키를 이루는 칼럼은 NULL 을 가질 수 없는데 ID 에 NULL 이 있어 오류다. 정답은 ④번이다. ① 은 UNIQUE 가 중복을 허용한다고 본 것, ② 는 복합 기본키 칼럼에 NULL 이 있어도 된다고 본 것, ③ 은 기존 데이터를 검사하지 않는다고 본 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "caption": "T",
+        "headers": [
+          "ID",
+          "CODE"
+        ],
+        "rows": [
+          [
+            "1",
+            "A"
+          ],
+          [
+            "2",
+            "B"
+          ],
+          [
+            "2",
+            "C"
+          ],
+          [
+            "NULL",
+            "D"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "-- ㉠\nALTER TABLE T ADD PRIMARY KEY (ID);\n-- ㉡\nALTER TABLE T ADD UNIQUE (ID);\n-- ㉢\nALTER TABLE T ADD PRIMARY KEY (CODE);\n-- ㉣\nALTER TABLE T\n  ADD PRIMARY KEY (ID, CODE);"
+      }
+    ]
   },
   {
     "id": 10582,
@@ -2069,15 +2101,15 @@ export const ROUND_49: QuizQuestion[] = [
     "round": 49,
     "subject": "2과목",
     "number": 49,
-    "title": "GROUP BY 에 나열한 컬럼 순서대로 계층적인 소계와 총계를 생성하는 확장 연산자는?",
+    "title": "GROUP BY ROLLUP(부서, 직급) 결과에서 부서별 소계 행과 전체 합계 행의 (GROUPING(부서), GROUPING(직급)) 값으로 옳은 것은? (순서대로)",
     "options": [
-      "CUBE",
-      "ROLLUP",
-      "GROUPING SETS",
-      "PIVOT"
+      "(1, 0), (1, 1)",
+      "(0, 1), (1, 1)",
+      "(0, 1), (0, 0)",
+      "(1, 1), (0, 1)"
     ],
     "correctIndex": 1,
-    "explanation": "ROLLUP(A, B) 는 (A, B) → (A) → () 처럼 GROUP BY 컬럼을 오른쪽부터 하나씩 줄여 가며 계층적인 소계와 총계를 만든다. ① CUBE 도 소계와 총계를 만들지만 컬럼 순서와 무관하게 모든 조합((A, B), (A), (B), ())을 만들고, ③ GROUPING SETS 는 지정한 그룹만 집계하며, ④ PIVOT 은 행을 열로 바꾸는 연산이다.",
+    "explanation": "ROLLUP 은 나열한 순서대로 계층적인 소계를 만들어 (부서, 직급), (부서), () 묶음을 만든다. GROUPING(칼럼) 은 그 칼럼이 집계되어 NULL 로 나온 행에서 1 이다. 부서별 소계 행은 부서 값은 있고 직급만 합쳐졌으니 (0, 1), 전체 합계 행은 둘 다 합쳐졌으니 (1, 1) 이다. 정답은 ②번이다. (1, 0) 은 직급별 소계로 CUBE 에서만 나온다(①). (0, 0) 은 일반 행이다(③). ④ 는 두 행을 바꿔 본 것이다.",
     "_source": "authored"
   },
   {

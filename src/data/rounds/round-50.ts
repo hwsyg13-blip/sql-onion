@@ -725,16 +725,22 @@ export const ROUND_50: QuizQuestion[] = [
     "round": 50,
     "subject": "2과목",
     "number": 19,
-    "title": "NATURAL JOIN 의 특징으로 옳지 않은 것은?",
+    "title": "A(ID, 이름), B(ID, 이름, 점수) 테이블에 아래 SQL ㉠, ㉡, ㉢ 을 실행했을 때 결과의 칼럼 수로 옳은 것은?",
     "options": [
-      "두 테이블 간 동일 이름의 컬럼으로 조인이 이루어진다.",
-      "등가 조인(Equi Join) 과 비등가 조인(Non-Equi Join) 이 모두 가능하다.",
-      "USING 절과 함께 사용할 수 없다.",
-      "ON 절과 함께 사용할 수 없다."
+      "3, 3, 5",
+      "3, 4, 5",
+      "5, 4, 3",
+      "3, 4, 4"
     ],
     "correctIndex": 1,
-    "explanation": "NATURAL JOIN 은 두 테이블에서 이름이 같은 모든 컬럼을 자동으로 찾아 등가(=) 조인만 수행하며(①), USING 절이나 ON 절과 함께 쓸 수 없다(③④). 비등가 조인(BETWEEN, > 등)은 할 수 없으므로 ② 가 옳지 않다.",
-    "_source": "authored"
+    "explanation": "NATURAL JOIN 은 이름이 같은 칼럼(ID, 이름)을 모두 등가 조인 조건으로 쓰고, 그 칼럼을 결과에 한 번씩만 보여 줘 ID, 이름, 점수 의 3칼럼이다. USING(ID) 는 ID 만 조건으로 쓰고 ID 를 한 번만 보여 주므로 ID, A.이름, B.이름, 점수 의 4칼럼이다. ON 은 두 테이블의 칼럼을 모두 보여 줘 2 + 3 = 5칼럼이다. 정답은 ②번이다. ① 은 USING 도 이름을 합친다고 본 것, ③ 은 순서를 거꾸로 본 것, ④ 는 ON 도 조인 칼럼을 합친다고 본 것이다. NATURAL JOIN 은 등가 조인만 되고 ON·USING 절을 함께 쓸 수 없다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "-- ㉠\nSELECT * FROM A NATURAL JOIN B;\n-- ㉡\nSELECT * FROM A JOIN B USING (ID);\n-- ㉢\nSELECT * FROM A JOIN B\n  ON A.ID = B.ID;"
+      }
+    ]
   },
   {
     "id": 10519,
@@ -841,16 +847,22 @@ export const ROUND_50: QuizQuestion[] = [
     "round": 50,
     "subject": "2과목",
     "number": 23,
-    "title": "데이터 제어어(DCL) 및 트랜잭션 제어어(TCL) 에 해당하지 않는 명령은?",
+    "title": "빈 테이블 T 에 아래 명령을 차례로 실행한 뒤 남는 행 수는?",
     "options": [
-      "GRANT",
-      "ROLLBACK",
-      "REVOKE",
-      "ALTER"
+      "4",
+      "3",
+      "1",
+      "2"
     ],
     "correctIndex": 3,
-    "explanation": "① GRANT·③ REVOKE 는 권한을 제어하는 DCL 이고 ② ROLLBACK 은 트랜잭션을 되돌리는 TCL 이다. ALTER 는 테이블 구조를 변경하는 DDL 이므로 두 분류 어디에도 속하지 않는다.",
-    "_source": "authored"
+    "explanation": "COMMIT·ROLLBACK·SAVEPOINT 는 트랜잭션을 다루는 TCL 이다. ROLLBACK TO S 는 저장점 S 이후의 작업(2 입력)만 취소하고 트랜잭션은 이어진다. 그 뒤 3 을 넣고 COMMIT 하면 1 과 3 이 확정된다. 새 트랜잭션에서 넣은 4 는 마지막 ROLLBACK 으로 취소된다. 그래서 1, 3 의 2행이 남는다. 정답은 ④번이다. ① 은 ROLLBACK 이 아무것도 취소하지 않는다고 본 것, ② 는 ROLLBACK TO S 를 놓친 것, ③ 은 ROLLBACK TO S 가 트랜잭션 전체를 취소한다고 본 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "INSERT INTO T VALUES (1);\nSAVEPOINT S;\nINSERT INTO T VALUES (2);\nROLLBACK TO S;\nINSERT INTO T VALUES (3);\nCOMMIT;\nINSERT INTO T VALUES (4);\nROLLBACK;"
+      }
+    ]
   },
   {
     "id": 10523,
