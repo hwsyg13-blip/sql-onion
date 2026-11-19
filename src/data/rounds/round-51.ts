@@ -951,20 +951,20 @@ export const ROUND_51: QuizQuestion[] = [
     "round": 51,
     "subject": "2과목",
     "number": 25,
-    "title": "아래 SQL 의 결과로 옳은 것은?",
+    "title": "아래 SQL 의 결과(A, B, C, D)로 옳은 것은? (Oracle 기준, 문자 집합 AL32UTF8 에서 한글 한 글자는 3바이트)",
     "options": [
-      "'...의', 109.0",
-      "'의 마', 110",
-      "'의 마', 109",
-      "'마...', 100"
+      "나다, 3, 6, 110",
+      "가나, 3, 9, 110",
+      "나다, 3, 9, 110",
+      "나다, 9, 9, 100"
     ],
     "correctIndex": 2,
-    "explanation": "SUBSTR('...의 마...', 4, 3) 은 4번째 문자부터 3글자를 추출 → '의 마'. ROUND(109, 1) 은 소수 첫째 자리까지 반올림하지만 정수 109 는 변환할 소수가 없으므로 109 가 그대로 유지된다. ② 의 110 은 ROUND(109, -1)(십의 자리 반올림), ④ 의 '마...', 100 은 시작 위치를 6 으로, ROUND 를 백의 자리(-2)로 본 결과다.",
+    "explanation": "SUBSTR 과 LENGTH 는 바이트가 아니라 글자 단위로 센다. A 는 2번째 글자부터 2글자인 '나다', B 는 3글자라 3 이다. LENGTHB 는 바이트 수를 세므로 한글 3글자 × 3바이트 = 9 다. ROUND(109, -1) 은 일의 자리 9 에서 반올림해 110 이다. 정답은 ③번이다. ① 은 한글을 2바이트로 본 것, ② 는 시작 위치를 0 부터 센 것, ④ 는 LENGTH 도 바이트로 세고 -1 자리를 버림으로 본 것이다.",
     "_source": "authored",
     "references": [
       {
         "type": "sql",
-        "code": "SELECT SUBSTR('...의 마...', 4, 3), ROUND(109, 1) FROM DUAL;"
+        "code": "SELECT SUBSTR('가나다라', 2, 2) AS A,\n       LENGTH('가나다')       AS B,\n       LENGTHB('가나다')      AS C,\n       ROUND(109, -1)         AS D\nFROM   DUAL;"
       }
     ]
   },
@@ -2005,20 +2005,20 @@ export const ROUND_51: QuizQuestion[] = [
     "round": 51,
     "subject": "2과목",
     "number": 47,
-    "title": "아래 SQL 의 결과로 옳은 것은?",
+    "title": "아래 SQL 의 결과(A, B, C, D)로 옳은 것은? (Oracle 기준)",
     "options": [
-      "1, -1",
-      "1, 1",
-      "3, 3",
-      "0, 0"
+      "2, 2, 1, -2",
+      "2, -1, -2, 2",
+      "2, -1, 1, -2",
+      "-1, 2, -2, 2"
     ],
     "correctIndex": 1,
-    "explanation": "Oracle의 MOD는 `m - n * TRUNC(m/n)`로 계산된다. MOD(10, 3) = 10 - 3*3 = 1, MOD(10, -3) = 10 - (-3)*(-3) = 1이다. ① 은 결과 부호가 나누는 수(-3)를 따른다고 본 결과(Oracle 은 나눠지는 수 10 의 부호), ③ 은 몫, ④ 는 나누어떨어진다고 본 결과다.",
+    "explanation": "MOD(m, n) 은 m - n × FLOOR(m / n) 이 아니라 m - n × TRUNC(m / n) 으로 계산해, 결과의 부호가 나누어지는 수 m 을 따른다. 그래서 A 는 2, C 는 -11 - 3 × (-3) = -2, D 는 11 - (-3) × (-3) = 2 다. REMAINDER 는 TRUNC 대신 ROUND 를 써서 11 - 3 × ROUND(3.67) = 11 - 12 = -1 이다. 정답은 ②번이다. ① 은 REMAINDER 를 MOD 와 같다고 보고 부호를 나누는 수에 맞춘 것, ③ 은 음수 MOD 를 양수 나머지로 바꾼 것, ④ 는 MOD 와 REMAINDER 를 바꿔 본 것이다.",
     "_source": "authored",
     "references": [
       {
         "type": "sql",
-        "code": "SELECT MOD(10, 3), MOD(10, -3) FROM DUAL;"
+        "code": "SELECT MOD(11, 3)       AS A,\n       REMAINDER(11, 3) AS B,\n       MOD(-11, 3)      AS C,\n       MOD(11, -3)      AS D\nFROM   DUAL;"
       }
     ]
   },

@@ -844,3 +844,12 @@
 | 49-2-38 | INSTR n번째·SUBSTR 로 구분자 파싱·글자 수 세기 | SUBSTR 하나 → 네 식 결과 | 02, 4567, 67, 2 | PostgreSQL 로 A·C·D 확인 |
 | 50-2-15 | 빈 결과에서 집계 vs 단일 행 함수와 NVL | 식 하나 → 네 SQL 결과 | 0, 9999, 공집합, 0 | PostgreSQL 동일 |
 | 50-2-27 | GROUP BY 없이 일반 칼럼 + 집계(HAVING·ORDER BY) | 빈칸 하나 → 네 절 중 오류 | ㉡, ㉢ | PostgreSQL 동일 |
+
+## 순환 10바퀴 — 51~52회 (53회는 남은 후보가 이미 다룬 개념뿐이라 건너뜀)
+
+| 문항 | 개념 | 바뀐 점 | 정답 | 검증 |
+|---|---|---|---|---|
+| 51-2-25 | 글자 단위 SUBSTR·LENGTH vs 바이트 LENGTHB·ROUND -1 | 두 식 → 네 식 결과 | 나다, 3, 9, 110 | PostgreSQL 로 확인(octet_length 9) |
+| 51-2-47 | MOD 부호(나누어지는 수)·REMAINDER(ROUND) | MOD 두 개 → 네 식 결과 | 2, -1, -2, 2 | MOD PostgreSQL 동일, REMAINDER 는 Oracle 정의 |
+| 52-2-24 | 그룹 조건은 HAVING·HAVING 에선 별칭 불가·ORDER BY 는 가능 | 오류 이유 고르기 → 고친 SQL 3개 실행 여부 | ㉠, ㉢ | PostgreSQL 동일 |
+| 52-2-50 | 기본키 하나·복합 PK·UNIQUE 여러 개·UNIQUE 를 참조하는 FK | 옳지 않은 설명 → CREATE TABLE 4개 중 오류 | ㉠ | PostgreSQL 동일 |
