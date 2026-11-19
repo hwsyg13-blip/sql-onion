@@ -1820,16 +1820,31 @@ export const ROUND_48: QuizQuestion[] = [
     "round": 48,
     "subject": "2과목",
     "number": 45,
-    "title": "서브쿼리에 대한 설명 중 옳은 것은?",
+    "title": "아래 ERD 와 데이터에서 서브쿼리를 쓴 SQL ㉠~㉣ 의 결과를 차례대로 나열한 것은? (오류가 나면 '오류', 아니면 결과 행 수)",
     "options": [
-      "메인쿼리에서 서브쿼리의 컬럼을 직접 사용할 수 있다.",
-      "WHERE 절에서 다중 컬럼 서브쿼리를 사용할 수 있다.",
-      "FROM 절의 서브쿼리는 스칼라 서브쿼리라고 한다.",
-      "서브쿼리의 결과 집합은 항상 메인쿼리의 영향을 받는다."
+      "3, 3, 1, 3",
+      "오류, 3, 1, 2",
+      "오류, 2, 1, 3",
+      "3, 3, 1, 2"
     ],
     "correctIndex": 1,
-    "explanation": "다중 컬럼 서브쿼리는 두 개 이상의 컬럼을 한꺼번에 반환해 WHERE 절에서 `WHERE (사번, 부서) IN (SELECT 사번, 부서 FROM ...)` 처럼 짝지어 비교할 수 있다(②). ① 메인쿼리는 서브쿼리 안의 컬럼을 직접 쓸 수 없고(서브쿼리는 메인쿼리 컬럼을 쓸 수 있다), ③ FROM 절의 서브쿼리는 인라인 뷰이며 스칼라 서브쿼리는 SELECT 절 등에서 값 하나를 돌려주는 서브쿼리다. ④ 메인쿼리의 영향을 받는 것은 메인쿼리 컬럼을 참조하는 연관 서브쿼리뿐이다.",
-    "_source": "authored"
+    "explanation": "SELECT 절의 스칼라 서브쿼리는 메인 쿼리 한 행마다 값을 하나만 돌려줘야 한다. ㉠ 은 D1 에서 사원이 김, 이 두 명이라 서브쿼리가 2행을 돌려주므로 오류가 난다. ㉡ 은 MAX 로 한 값으로 줄였으므로 부서 3행이 모두 나온다. 사원이 없는 D3 은 서브쿼리 결과가 없어 NULL 이 되지만 행은 남는다. ㉢ 은 사번이 기본키라 서브쿼리가 한 행(D1)만 돌려주므로 = 로 비교해도 되고 1행이다. ㉣ 의 IN 은 서브쿼리 결과 {D1, D1, D2} 에 들어 있는지만 보므로, 사원이 두 명인 D1 도 한 번만 나와 2행이다. 정답은 ②번이다. ① 과 ④ 는 ㉠ 이 첫 사원만 골라 준다고 본 것이고, ① 과 ③ 은 ㉣ 이 조인처럼 D1 을 두 번 낸다고 본 것이다. ③ 은 ㉡ 에서 사원이 없는 D3 이 빠진다고도 보았다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "erd",
+        "caption": "부서·사원 ERD",
+        "mermaid": "erDiagram\n    부서 ||..o{ 사원 : \"소속\"\n    부서 {\n        string 부서코드 PK\n    }\n    사원 {\n        int 사번 PK\n        string 부서코드 FK\n        string 이름\n    }"
+      },
+      {
+        "type": "text",
+        "content": "부서: D1, D2, D3\n사원: (1, D1, 김), (2, D1, 이), (3, D2, 박)"
+      },
+      {
+        "type": "sql",
+        "code": "-- ㉠\nSELECT D.부서코드,\n  (SELECT E.이름 FROM 사원 E\n    WHERE E.부서코드 = D.부서코드)\nFROM 부서 D;\n-- ㉡\nSELECT D.부서코드,\n  (SELECT MAX(E.이름) FROM 사원 E\n    WHERE E.부서코드 = D.부서코드)\nFROM 부서 D;\n-- ㉢\nSELECT * FROM 부서\nWHERE 부서코드 =\n  (SELECT 부서코드 FROM 사원\n    WHERE 사번 = 1);\n-- ㉣\nSELECT * FROM 부서\nWHERE 부서코드 IN\n  (SELECT 부서코드 FROM 사원);"
+      }
+    ]
   },
   {
     "id": 10645,

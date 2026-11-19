@@ -927,3 +927,6 @@
 | 53-2-45 | 외래키·복합 기본키·칼럼 목록 생략 시 값 개수·DEFAULT | 값 개수 하나 → ERD + 제약 + INSERT 5개 중 성공 | ㉠, ㉤ | Oracle 규칙(PostgreSQL 은 생략한 뒤쪽 값에 기본값을 채워 ㉣ 도 성공 — 해설에 적음), 나머지 PostgreSQL 동일 |
 | 61-2-35 | 테이블 3개에서 조인 조건이 하나 빠질 때의 카티션 곱 | 쉼표 조인 설명 → ERD + 데이터 + SQL 3개 | 4, 12, 8 | PostgreSQL 동일, ERD 렌더 확인 |
 | 45-2-43 | 같은 이름 칼럼이 없을 때 NATURAL JOIN = CROSS JOIN, 비등가 조인 | 조인 이름 → 두 표 + SQL 4개 | 9, 9, 9, 3 | PostgreSQL 동일 |
+| 56-2-19 | INTERSECT 비교 기준(식별자 vs 겹치는 이름)·HAVING COUNT | 연산자 이름 → ERD + 데이터 + SQL 3개 | 2, 1, 1 | PostgreSQL 동일, ERD 렌더 확인 |
+| 48-2-45 | 스칼라 서브쿼리 다중 행 오류·MAX·단일 행 =·IN 중복 | 설명 고르기 → ERD + 데이터 + SQL 4개 | 오류, 3, 1, 2 | PostgreSQL 동일(㉠ 오류), ERD 렌더 확인 |
+| 53-2-31 | NULL 허용 외래키와 MINUS·NOT IN·NOT EXISTS | 정의 → ERD(비회원 주문) + 데이터 + SQL 3개 | 2, 0, 2 | PostgreSQL 동일(EXCEPT), ERD 렌더 확인 |

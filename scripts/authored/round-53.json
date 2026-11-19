@@ -912,19 +912,28 @@
     {
       "subject": "2과목",
       "number": 31,
-      "title": "아래 설명에 해당하는 집합 연산자는?",
+      "title": "아래 ERD 처럼 비회원 주문(고객번호 NULL)이 허용될 때, '주문한 적이 없는 고객' 을 구하는 SQL ㉠, ㉡, ㉢ 의 결과 행 수를 차례대로 나열한 것은?",
       "options": [
-        "UNION",
-        "UNION ALL",
-        "INTERSECT",
-        "MINUS"
+        "2, 2, 2",
+        "3, 0, 2",
+        "2, 0, 0",
+        "2, 0, 2"
       ],
       "correctIndex": 3,
-      "explanation": "첫 번째 집합에서 두 번째 집합에 있는 행을 뺀 차집합은 MINUS(SQL Server 는 EXCEPT)다(④). ① UNION 은 중복을 제거한 합집합, ② UNION ALL 은 중복을 포함한 합집합, ③ INTERSECT 는 교집합이다.",
+      "explanation": "ERD 의 고객 쪽 |o 는 주문에 고객이 없을 수 있다는 뜻이라 주문.고객번호 에 NULL 이 들어갈 수 있다. ㉠ MINUS 는 첫 번째 결과 {1, 2, 3} 에서 두 번째 결과 {1, NULL} 에 있는 값을 빼므로 {2, 3} 의 2행이다. ㉡ 의 NOT IN 은 '고객번호 <> 1 AND 고객번호 <> NULL' 로 풀린다. NULL 과의 비교는 참이 될 수 없어 모든 행이 걸러지고 0행이 된다. ㉢ NOT EXISTS 는 같은 고객번호의 주문이 있는지만 확인한다. NULL 주문은 어느 고객과도 같지 않으므로 2, 3 이 남아 2행이다. 정답은 ④번이다. ① 은 NOT IN 의 NULL 문제를 놓친 것이고, ② 는 MINUS 가 NULL 때문에 아무것도 빼지 못한다고 본 것, ③ 은 NOT EXISTS 도 NULL 때문에 0행이 된다고 본 것이다. 외래키가 NULL 을 허용하면 NOT IN 서브쿼리에 WHERE 고객번호 IS NOT NULL 을 붙이거나 NOT EXISTS 를 쓴다.",
       "references": [
         {
+          "type": "erd",
+          "caption": "고객·주문 ERD (비회원 주문 허용)",
+          "mermaid": "erDiagram\n    고객 |o..o{ 주문 : \"주문함\"\n    고객 {\n        int 고객번호 PK\n    }\n    주문 {\n        string 주문번호 PK\n        int 고객번호 FK\n    }"
+        },
+        {
           "type": "text",
-          "content": "첫 번째 집합에서 두 번째 집합에 존재하는 행을 제외한 결과를 반환한다."
+          "content": "고객: 1, 2, 3\n주문: (O1, 1), (O2, 1), (O3, NULL)"
+        },
+        {
+          "type": "sql",
+          "code": "-- ㉠\nSELECT 고객번호 FROM 고객\nMINUS\nSELECT 고객번호 FROM 주문;\n-- ㉡\nSELECT 고객번호 FROM 고객\nWHERE 고객번호 NOT IN\n  (SELECT 고객번호 FROM 주문);\n-- ㉢\nSELECT 고객번호 FROM 고객 C\nWHERE NOT EXISTS\n  (SELECT 1 FROM 주문 O\n    WHERE O.고객번호 = C.고객번호);"
         }
       ]
     },
