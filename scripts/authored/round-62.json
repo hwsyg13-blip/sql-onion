@@ -1089,15 +1089,15 @@
     {
       "subject": "2과목",
       "number": 34,
-      "title": "다음 표에서 SUM(컬럼1) / COUNT(컬럼1)의 결과는?",
+      "title": "아래 TBL 테이블에 대한 네 식의 결과로 옳은 것은? ('SUM/COUNT(컬럼1), SUM/COUNT(*), AVG(컬럼1), AVG(NVL(컬럼1, 0))' 순서)",
       "options": [
-        "150",
-        "200",
-        "250",
-        "오류가 발생한다."
+        "150, 150, 200, 150",
+        "200, 150, 200, 150",
+        "200, 200, 200, 150",
+        "200, 150, 150, 150"
       ],
       "correctIndex": 1,
-      "explanation": "SUM(컬럼1)은 NULL을 제외한 100 + 200 + 300 = 600이고, COUNT(컬럼1)도 NULL을 제외한 3이므로 600 / 3 = 200이다. ① 150 은 NULL 을 0 으로 보고 4 로 나눈 값(600 ÷ 4)이고, ④ NULL 이 있어도 집계 함수는 오류 없이 NULL 을 건너뛴다.",
+      "explanation": "SUM(컬럼1) 은 NULL 을 빼고 600, COUNT(컬럼1) 은 값이 있는 3, COUNT(*) 는 행 수 4 다. 그래서 첫째 식은 600 / 3 = 200, 둘째 식은 600 / 4 = 150 이다. AVG(컬럼1) 은 NULL 을 빼고 계산해 SUM / COUNT(컬럼1) 과 같은 200 이고, NVL 로 NULL 을 0 으로 바꾸면 4행 모두 들어가 150 이다. 정답은 ②번이다. ① 은 COUNT(컬럼1) 도 NULL 을 센다고 본 것, ③ 은 COUNT(*) 도 NULL 행을 뺀다고 본 것, ④ 는 AVG 가 NULL 을 0 으로 본다고 생각한 것이다.",
       "references": [
         {
           "type": "table",
@@ -1119,6 +1119,10 @@
               "300"
             ]
           ]
+        },
+        {
+          "type": "sql",
+          "code": "SELECT SUM(컬럼1) / COUNT(컬럼1),\n       SUM(컬럼1) / COUNT(*),\n       AVG(컬럼1),\n       AVG(NVL(컬럼1, 0))\nFROM   TBL;"
         }
       ]
     },
@@ -1552,19 +1556,19 @@
     {
       "subject": "2과목",
       "number": 46,
-      "title": "다음 SQL에 대한 설명으로 가장 적절한 것은?",
+      "title": "로그인기록 테이블에 이순신 3행, 강감찬 2행이 있다. 아래 SQL ㉠~㉣ 에 대한 설명으로 가장 적절한 것은?",
       "options": [
-        "아래 쿼리와 결과가 동일하다.\nSELECT 사용자명, 로그인횟수\nFROM (SELECT 사용자명, COUNT(*) AS 로그인횟수\n      FROM 로그인기록\n      GROUP BY 사용자명)\nWHERE 사용자명 = '이순신' AND 로그인횟수 > 10;",
-        "SELECT 절에 '이순신' 같은 문자 리터럴을 넣으면 오류가 난다.",
-        "HAVING COUNT(*) > 10 대신 HAVING 로그인횟수 > 10으로 써도 된다.",
-        "HAVING 절을 WHERE 절로 옮겨도 결과가 같다."
+        "㉠ 과 ㉡ 은 결과가 같고, ㉢ 과 ㉣ 은 오류다.",
+        "㉠ 만 정상이고 나머지는 모두 오류다.",
+        "㉠, ㉡, ㉣ 은 정상이고 ㉢ 만 오류다.",
+        "네 SQL 모두 이순신 3 을 돌려준다."
       ],
       "correctIndex": 0,
-      "explanation": "인라인 뷰에서 먼저 그룹핑하고 별칭 로그인횟수를 만든 뒤 바깥 WHERE로 필터링하면 원 쿼리와 결과가 같다. ③ HAVING에서는 SELECT 절 별칭을 쓸 수 없고, ④ WHERE 절에는 집계 함수를 쓸 수 없어 옮길 수 없다.",
+      "explanation": "HAVING 에는 집계 함수뿐 아니라 GROUP BY 에 쓴 칼럼 조건도 쓸 수 있어 ㉠ 은 이순신 3 을 돌려준다. ㉡ 은 같은 조건을 WHERE 로 먼저 거른 것이라 결과가 같고, 그룹을 만들기 전에 행을 줄여 더 효율적이다. ㉢ 은 그룹을 만들기 전인 WHERE 에 집계 함수를 써 오류다. ㉣ 은 GROUP BY 에 없는 로그인일을 집계 없이 HAVING 에 써 오류다. 정답은 ①번이다. ② 는 WHERE 와 HAVING 을 함께 쓸 수 없다고 본 것, ③ 은 HAVING 에 아무 칼럼이나 쓸 수 있다고 본 것, ④ 는 문법 오류를 놓친 것이다.",
       "references": [
         {
           "type": "sql",
-          "code": "SELECT 사용자명, COUNT(*) AS 로그인횟수\nFROM   로그인기록\nGROUP  BY 사용자명\nHAVING 사용자명 = '이순신' AND COUNT(*) > 10;"
+          "code": "-- ㉠\nSELECT 사용자명, COUNT(*)\nFROM   로그인기록\nGROUP  BY 사용자명\nHAVING 사용자명 = '이순신'\nAND    COUNT(*) > 2;\n-- ㉡\nSELECT 사용자명, COUNT(*)\nFROM   로그인기록\nWHERE  사용자명 = '이순신'\nGROUP  BY 사용자명\nHAVING COUNT(*) > 2;\n-- ㉢\nSELECT 사용자명, COUNT(*)\nFROM   로그인기록\nWHERE  COUNT(*) > 2\nGROUP  BY 사용자명;\n-- ㉣\nSELECT 사용자명, COUNT(*)\nFROM   로그인기록\nGROUP  BY 사용자명\nHAVING 로그인일 > SYSDATE - 7;"
         }
       ]
     },

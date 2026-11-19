@@ -720,19 +720,19 @@
     {
       "subject": "2과목",
       "number": 20,
-      "title": "다음 중 보기와 동일한 결과를 출력하는 SQL은 무엇인가?",
+      "title": "주문 테이블에 (주문일자, 상품코드) 조합이 (D1, P1), (D1, P2), (D2, P1) 세 가지 있다. 아래 ㉠, ㉡, ㉢ 의 결과 행 수로 옳은 것은?",
       "options": [
-        "SELECT 주문일자, 상품코드, COUNT(*)\nFROM 주문\nGROUP BY 주문일자, ROLLUP(상품코드);",
-        "SELECT 주문일자, 상품코드, COUNT(*)\nFROM 주문\nGROUP BY ROLLUP(주문일자, 상품코드);",
-        "SELECT DISTINCT 주문일자, 상품코드, COUNT(*)\nFROM 주문\nGROUP BY ROLLUP((주문일자, 상품코드), NULL);",
-        "SELECT 주문일자, 상품코드, COUNT(*)\nFROM 주문\nGROUP BY GROUPING SETS((주문일자, 상품코드));"
+        "6, 6, 8",
+        "4, 6, 8",
+        "4, 6, 4",
+        "3, 6, 4"
       ],
       "correctIndex": 2,
-      "explanation": "보기의 ROLLUP((주문일자, 상품코드))는 두 컬럼을 하나로 묶어 (주문일자, 상품코드) 단위 집계와 전체 합계만 출력한다. ③은 (주문일자, 상품코드, NULL), (주문일자, 상품코드), ()로 전개되어 상세 집계가 두 번 반복되지만 DISTINCT로 중복이 제거되어 결과가 같아진다. ①은 주문일자 소계가 추가되고, ②는 주문일자 소계가 추가되며, ④는 전체 합계가 없어 결과가 다르다.",
+      "explanation": "괄호로 두 칼럼을 한 묶음으로 쓰면 하나의 칼럼처럼 다뤄진다. ㉠ ROLLUP((주문일자, 상품코드)) 는 GROUPING SETS((주문일자, 상품코드), ()) 와 같아 조합 3행 + 합계 1행 = 4행이다. ㉡ 은 묶음이 아니라 두 칼럼이라 조합 3 + 일자별 소계 2 + 합계 1 = 6행이다. ㉢ 의 묶음 하나짜리 CUBE 도 (묶음), () 두 가지뿐이라 ㉠ 과 같은 4행이다. 정답은 ③번이다. ① 과 ② 는 괄호 묶음을 두 칼럼처럼 본 것, ④ 는 합계 행을 놓친 것이다.",
       "references": [
         {
           "type": "sql",
-          "code": "SELECT 주문일자, 상품코드, COUNT(*)\nFROM   주문\nGROUP  BY ROLLUP((주문일자, 상품코드));"
+          "code": "-- ㉠\nGROUP BY ROLLUP((주문일자, 상품코드))\n-- ㉡\nGROUP BY ROLLUP(주문일자, 상품코드)\n-- ㉢\nGROUP BY CUBE((주문일자, 상품코드))"
         }
       ]
     },
@@ -1131,19 +1131,19 @@
     {
       "subject": "2과목",
       "number": 29,
-      "title": "다음 SQL의 실행 결과로 옳은 것은?",
+      "title": "SALES 테이블의 (SALE_DATE, AMT) 가 (1, 10), (2, 20), (2, 30), (3, 40) 일 때, 아래 SQL 에서 (2, 20) 행의 CUM1·CUM2 와 (3, 40) 행의 CUM1 값으로 옳은 것은?",
       "options": [
-        "날짜순으로 정렬된 각 행까지의 누적 합계를 계산한다.",
-        "전체 금액의 합계가 모든 행에 동일하게 표시된다.",
-        "날짜별로 그룹화 되어 금액의 합계가 표시된다.",
-        "오류가 발생한다. (OVER 절에는 PARTITION BY가 반드시 필요하다)"
+        "60, 30, 100",
+        "30, 30, 100",
+        "60, 60, 100",
+        "30, 60, 100"
       ],
       "correctIndex": 0,
-      "explanation": "OVER 절에 ORDER BY만 있고 윈도우 범위가 생략되면 기본값인 RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW가 적용되어 첫 행부터 현재 행까지의 누적 합계가 계산된다. ② 전체 합계가 모든 행에 표시되려면 OVER()처럼 ORDER BY가 없어야 하고, ③ 윈도우 함수는 행을 묶지 않으므로 날짜별로 그룹화되지 않으며, ④ PARTITION BY는 생략할 수 있어 오류가 나지 않는다.",
+      "explanation": "OVER 에 ORDER BY 만 쓰면 기본 범위가 RANGE UNBOUNDED PRECEDING 이라, 현재 행과 정렬 값이 같은 행까지 한꺼번에 더한다. 날짜 2 인 두 행은 모두 10 + 20 + 30 = 60 이 되어 (2, 20) 행의 CUM1 은 60 이다. ROWS UNBOUNDED PRECEDING 은 물리적인 행 순서대로 현재 행까지만 더해 CUM2 는 10 + 20 = 30 이다(같은 날짜 안의 순서는 정해져 있지 않을 수 있다). 마지막 날짜 3 의 CUM1 은 전체 합 100 이다. 정답은 ①번이다. ② 는 기본 범위를 ROWS 로 본 것, ③ 은 ROWS 도 같은 값을 묶는다고 본 것, ④ 는 두 방식을 바꿔 본 것이다.",
       "references": [
         {
           "type": "sql",
-          "code": "SELECT SALE_DATE, AMT,\n       SUM(AMT) OVER (ORDER BY SALE_DATE) AS CUM_AMT\nFROM   SALES;"
+          "code": "SELECT SALE_DATE, AMT,\n  SUM(AMT) OVER\n    (ORDER BY SALE_DATE) AS CUM1,\n  SUM(AMT) OVER\n    (ORDER BY SALE_DATE\n     ROWS UNBOUNDED PRECEDING)\n                        AS CUM2\nFROM SALES;"
         }
       ]
     },

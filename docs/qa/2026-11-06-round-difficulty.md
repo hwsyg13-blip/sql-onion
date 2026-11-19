@@ -809,3 +809,16 @@
 | 58-2-31 | GROUP BY 없는 HAVING·빈 결과의 집계 | 한 식 → 네 SQL 결과 | 공집합, 1, 0, NULL | PostgreSQL 동일 |
 | 59-2-26 | INSERT 자동 형변환·길이 초과·숫자 변환 실패·칼럼 생략 | 오류 하나 고르기 → INSERT 4개 중 오류 | ㉡, ㉢ | PostgreSQL 동일 |
 | 59-2-12 | OVER 안 정렬 방향에 따른 LAG·LEAD | 함수 고르기 → 행별 값 | 300, 100, 100, NULL | PostgreSQL 동일 |
+
+## 순환 9바퀴 — 60~62회 — 9바퀴 완료
+
+| 문항 | 개념 | 바뀐 점 | 정답 | 검증 |
+|---|---|---|---|---|
+| 60-2-22 | 빈 결과의 SUM·COUNT 와 바깥·안쪽 NVL | NULL 아닌 함수 고르기 → 네 식 값 | NULL, 0, 0, NULL | PostgreSQL 동일 |
+| 60-2-21 | ROWNUM IN (1, 2) 은 되고 IN (2, 3)·<> 2 의 함정 | 다른 하나 고르기 → 네 조건 행 수 | 2, 0, 0, 1 | Oracle 규칙으로 판정 |
+| 61-2-29 | 기본 범위 RANGE(같은 값 묶음) vs ROWS | 설명 고르기 → 누적합 값 | 60, 30, 100 | PostgreSQL 동일 |
+| 61-2-20 | 괄호로 묶은 칼럼의 ROLLUP·CUBE | 동치 SQL 고르기 → 세 GROUP BY 행 수 | 4, 6, 4 | PostgreSQL 동일 |
+| 62-2-46 | HAVING 의 그룹 칼럼 조건·WHERE 집계 불가·비그룹 칼럼 | 설명 고르기 → SQL 4개 판정 | ① | ㉠ PostgreSQL 결과 확인, 나머지 규칙 |
+| 62-2-34 | SUM/COUNT(칼럼)·SUM/COUNT(*)·AVG·AVG(NVL) | 식 하나 → 네 식 결과 | 200, 150, 200, 150 | PostgreSQL 동일 |
+
+이로써 순환 9바퀴(45~62회, 2과목 36문항) 완료.

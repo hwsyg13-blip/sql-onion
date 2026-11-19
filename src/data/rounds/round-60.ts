@@ -844,38 +844,20 @@ export const ROUND_60: QuizQuestion[] = [
     "round": 60,
     "subject": "2과목",
     "number": 21,
-    "title": "아래 T 테이블에 대해 SQL 들 중 결과 행 수가 나머지와 다른 하나는?",
+    "title": "행이 3건(A, B, C) 있는 T 테이블에 대한 SQL ㉠~㉣ 의 결과 행 수로 옳은 것은? (Oracle 기준)",
     "options": [
-      "SELECT * FROM T WHERE ROWNUM IN (1, 2);",
-      "SELECT * FROM T WHERE ROWNUM < 1;",
-      "SELECT * FROM T WHERE ROWNUM > 1;",
-      "SELECT * FROM T WHERE ROWNUM = 2;"
+      "2, 0, 0, 1",
+      "2, 2, 0, 2",
+      "1, 0, 0, 2",
+      "2, 0, 1, 1"
     ],
     "correctIndex": 0,
-    "explanation": "Oracle 의 `ROWNUM` 은 `WHERE` 조건이 통과된 행에 대해서만 순차적으로 부여된다. ① 은 첫 행에 ROWNUM=1, 두 번째 행에 ROWNUM=2 가 부여되어 모두 조건을 만족 → 2 건 반환. ② `ROWNUM < 1` 은 어떤 행도 만족 못 함 → 0 건. ③ `ROWNUM > 1` 은 첫 행이 ROWNUM=1 로 탈락한 뒤 다음 행에도 계속 1 이 부여되어 0 건. ④ `ROWNUM = 2` 도 ROWNUM 값이 2 로 올라가지 못해 0 건. 결과가 다른 것은 ①.",
+    "explanation": "ROWNUM 은 조건을 통과한 행에만 1, 2, 3 … 을 붙이고, 걸러진 행 다음 행은 같은 번호로 다시 검사받는다. ㉠ 은 첫 행이 1 로 통과, 다음 행이 2 로 통과, 셋째 행은 3 이라 걸러져 2행이다. ㉡ 은 첫 행이 1 이라 걸러지고 다음 행도 다시 1 이라 계속 걸러져 0행, ㉢ 은 1 보다 작은 번호가 없어 0행이다. ㉣ 은 첫 행이 1 로 통과하고, 둘째 행이 2 라 걸러진 뒤 셋째 행도 다시 2 를 받아 걸러져 1행이다. 정답은 ①번이다. ② 와 ③ 은 ROWNUM 이 원래 행 순서에 고정되어 있다고 본 것, ④ 는 ㉢ 에서 ROWNUM 이 0 부터 시작한다고 본 것이다.",
     "_source": "authored",
     "references": [
       {
-        "type": "table",
-        "caption": "T 테이블",
-        "headers": [
-          "행 순서",
-          "COL"
-        ],
-        "rows": [
-          [
-            "1",
-            "A"
-          ],
-          [
-            "2",
-            "B"
-          ],
-          [
-            "3",
-            "C"
-          ]
-        ]
+        "type": "sql",
+        "code": "-- ㉠\nSELECT * FROM T WHERE ROWNUM IN (1, 2);\n-- ㉡\nSELECT * FROM T WHERE ROWNUM IN (2, 3);\n-- ㉢\nSELECT * FROM T WHERE ROWNUM < 1;\n-- ㉣\nSELECT * FROM T WHERE ROWNUM <> 2;"
       }
     ]
   },
@@ -886,20 +868,20 @@ export const ROUND_60: QuizQuestion[] = [
     "round": 60,
     "subject": "2과목",
     "number": 22,
-    "title": "아래 SQL에서 `WHERE 1 = 2` 조건에 의해 어떤 데이터도 선택되지 않았을 때, 반환 값이 NULL이 아닌 집계 함수는?",
+    "title": "행이 있는 EMP 테이블에 아래 SQL 을 실행했을 때 결과(A, B, C, D)로 옳은 것은?",
     "options": [
-      "SUM(SAL)",
-      "AVG(SAL)",
-      "MIN(SAL)",
-      "COUNT(*)"
+      "0, 0, 0, 0",
+      "NULL, NULL, 0, NULL",
+      "NULL, 0, NULL, 0",
+      "NULL, 0, 0, NULL"
     ],
     "correctIndex": 3,
-    "explanation": "선택된 행이 없는 공집합에 집계 함수를 쓰면 SUM·AVG·MIN·MAX 는 계산할 값이 없어 NULL 을 반환하고(①②③), COUNT(*) 는 행 수 0 을 반환한다(④). 그래서 NULL 이 아닌 값을 반환하는 것은 COUNT(*) 다.",
+    "explanation": "WHERE 1 = 2 로 모든 행이 걸러져도 GROUP BY 가 없으면 집계 결과는 1행 나온다. 계산할 값이 없으니 SUM·AVG·MIN·MAX 는 NULL, COUNT 는 0 이다. 그래서 A 는 NULL, B 는 NVL 이 NULL 을 0 으로 바꿔 0, C 는 0 이다. D 의 NVL(SAL, 0) 은 행마다 적용되는데 행이 하나도 없으니 바뀔 값이 없고, AVG 는 그대로 NULL 이다. 정답은 ④번이다. ① 은 빈 집합의 SUM 을 0 으로 본 것, ② 는 바깥 NVL 이 SUM 결과를 바꾼다는 점을 놓친 것, ③ 은 COUNT 도 NULL 이 되고 안쪽 NVL 이 AVG 를 0 으로 만든다고 본 것이다.",
     "_source": "authored",
     "references": [
       {
         "type": "sql",
-        "code": "SELECT SUM(SAL),\n       AVG(SAL),\n       MIN(SAL),\n       COUNT(*)\nFROM   EMP\nWHERE  1 = 2;"
+        "code": "SELECT SUM(SAL)            AS A,\n       NVL(SUM(SAL), 0)    AS B,\n       COUNT(SAL)          AS C,\n       AVG(NVL(SAL, 0))    AS D\nFROM   EMP\nWHERE  1 = 2;"
       }
     ]
   },
