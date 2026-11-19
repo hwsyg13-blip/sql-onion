@@ -651,3 +651,14 @@
 | 52-2-43 | NVL2·NULLIF(5, 5.0)·COALESCE 중첩 | 설명 고르기 → 네 식 결과 | Y, NULL, Z, NULL | NULLIF·COALESCE 는 PostgreSQL 동일, NVL2 는 정의로 판정 |
 | 53-2-13 | SUBSTR 음수 위치·INSTR n번째·LPAD·ROUND 음수 | 결과 고르기 → 네 식 결과 | 'lop', 4, '007', -3 | LPAD·ROUND·위치 계산 PostgreSQL 로 확인 |
 | 53-2-34 | ROLLUP = GROUPING SETS 동치·CUBE 묶음 수 | 옳지 않은 설명 → 동치식과 묶음 수 | ((A, B), (A), ()) / 4 | 정의로 판정 |
+
+## 순환 7바퀴 — 54~56회
+
+| 문항 | 개념 | 바뀐 점 | 정답 | 검증 |
+|---|---|---|---|---|
+| 54-2-36 | ROWNUM 과 ORDER BY 처리 순서·ROWNUM = 2 | 결과 다른 SQL → 세 SQL 결과 | 300·100 / 500·300 / 0행 | Oracle 규칙으로 판정(읽는 순서 가정 명시) |
+| 54-2-13 | 트랜잭션 = 논리적 작업 단위 | 용어 고르기 → 이체 기능의 트랜잭션 경계 | ① | 정의로 판정 |
+| 55-2-11 | 단일 행 연산자 + 다중 행 서브쿼리 오류 | 설명 고르기 → SQL 4개 중 오류 | ㉠ | PostgreSQL 동일 |
+| 55-2-27 | 별칭 공백·큰따옴표·칼럼 앞 별칭 불가 | 설명 고르기 → SQL 4개 중 오류 | ㉢, ㉣ | PostgreSQL 에서도 ㉢·㉣ 오류 |
+| 56-2-22 | 단순 CASE 의 NULL 비교 vs DECODE·NVL2 | 결과 다른 것 → NULL 행의 네 식 값 | 0, -1, -1, -1 | CASE 두 가지 PostgreSQL 동일, DECODE·NVL2 는 정의 |
+| 56-2-14 | 드모르간·BETWEEN(아래 > 위)·NULL | 식만 비교 → NULL·역순 범위가 있는 표 | ① | PostgreSQL 로 네 조건 결과 행 확인 |

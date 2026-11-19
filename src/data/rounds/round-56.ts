@@ -483,7 +483,7 @@ export const ROUND_56: QuizQuestion[] = [
     "round": 56,
     "subject": "2과목",
     "number": 14,
-    "title": "다음 WHERE 조건 중 결과가 나머지와 다른 것은?",
+    "title": "아래 T 테이블에 각 조건을 WHERE 절에 넣었을 때, 결과로 나오는 행이 나머지와 다른 것은?",
     "options": [
       "COL3 >= 200 AND COL4 <= 200",
       "NOT (200 < COL3 OR 200 > COL4)",
@@ -491,8 +491,36 @@ export const ROUND_56: QuizQuestion[] = [
       "COL3 <= 200 AND COL4 >= 200"
     ],
     "correctIndex": 0,
-    "explanation": "②·③·④ 는 \"200이 COL3 ~ COL4 범위에 포함되는 조건\" 으로 동치이다. ①은 부등호 방향이 반대이므로 결과가 다르다.",
-    "_source": "authored"
+    "explanation": "② 는 드모르간 법칙으로 COL3 <= 200 AND COL4 >= 200 과 같고, ③ 의 200 BETWEEN COL3 AND COL4 도 같은 뜻이며, ④ 는 이를 그대로 쓴 것이다. 세 조건 모두 (150, 250), (200, 200) 두 행을 돌려준다. (250, 150) 은 BETWEEN 의 아래쪽 값이 위쪽 값보다 커서 거짓이 되고, COL3 이 NULL 인 행은 비교 결과가 UNKNOWN 이라 NOT 을 붙여도 UNKNOWN 이어서 빠진다. ① 은 부등호 방향이 반대라 (200, 200), (250, 150) 을 돌려줘 결과가 다르다. 정답은 ①번이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "caption": "T",
+        "headers": [
+          "COL3",
+          "COL4"
+        ],
+        "rows": [
+          [
+            "150",
+            "250"
+          ],
+          [
+            "200",
+            "200"
+          ],
+          [
+            "250",
+            "150"
+          ],
+          [
+            "NULL",
+            "300"
+          ]
+        ]
+      }
+    ]
   },
   {
     "id": 10214,
@@ -749,16 +777,22 @@ export const ROUND_56: QuizQuestion[] = [
     "round": 56,
     "subject": "2과목",
     "number": 22,
-    "title": "다음 중 결과가 나머지와 다른 것은?",
+    "title": "칼럼 C 가 NULL 인 행에서 아래 네 식의 값으로 옳은 것은? (순서대로, Oracle 기준)",
     "options": [
-      "CASE 칼럼 WHEN NULL THEN -1 ELSE 0 END",
-      "CASE WHEN 칼럼 IS NULL THEN -1 ELSE 0 END",
-      "DECODE(칼럼, NULL, -1, 0)",
-      "NVL2(칼럼, 0, -1)"
+      "0, -1, -1, -1",
+      "-1, -1, -1, -1",
+      "0, -1, 0, -1",
+      "-1, -1, 0, 0"
     ],
     "correctIndex": 0,
-    "explanation": "① 단순 CASE 는 NULL 을 = 로 비교해 항상 UNKNOWN 이라 ELSE 로 넘어가 항상 0 을 반환한다. ②③④ 는 칼럼이 NULL 이면 -1, 아니면 0 을 반환하므로(DECODE 는 NULL 끼리 같다고 보고, NVL2(expr, a, b) 는 NULL 이 아니면 a, NULL 이면 b 를 반환한다) 서로 같다. 따라서 결과가 다른 것은 ①이다.",
-    "_source": "authored"
+    "explanation": "㉠ 처럼 CASE 뒤에 칼럼을 쓰는 단순 CASE 는 'C = NULL' 로 비교하는데, NULL 과의 = 비교는 UNKNOWN 이라 참이 되지 않아 ELSE 의 0 이 나온다. ㉡ 은 IS NULL 로 확인해 -1 이다. DECODE 는 예외적으로 NULL 과 NULL 을 같은 값으로 보므로 ㉢ 은 -1 이다. NVL2 는 C 가 NULL 이면 세 번째 인자를 돌려줘 ㉣ 도 -1 이다. 정답은 ①번이다. ② 는 단순 CASE 도 NULL 을 잡는다고 본 것, ③ 은 DECODE 도 = 처럼 NULL 을 못 잡는다고 본 것, ④ 는 DECODE 와 NVL2 를 거꾸로 본 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "-- ㉠\nCASE C WHEN NULL THEN -1 ELSE 0 END\n-- ㉡\nCASE WHEN C IS NULL THEN -1\n     ELSE 0 END\n-- ㉢\nDECODE(C, NULL, -1, 0)\n-- ㉣\nNVL2(C, 0, -1)"
+      }
+    ]
   },
   {
     "id": 10222,

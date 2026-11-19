@@ -247,15 +247,15 @@
     {
       "subject": "2과목",
       "number": 13,
-      "title": "데이터베이스의 논리적 업무 최소 단위는?",
+      "title": "계좌 이체 기능은 '㉠ 보내는 계좌 출금 UPDATE, ㉡ 받는 계좌 입금 UPDATE, ㉢ 이체내역 INSERT' 로 이루어진다. 트랜잭션을 나누는 방법으로 가장 알맞은 것은?",
       "options": [
-        "트랜잭션",
-        "레코드",
-        "Query",
-        "테이블"
+        "㉠~㉢ 을 하나의 트랜잭션으로 묶어 모두 성공했을 때 한 번만 COMMIT 한다.",
+        "문장마다 바로 COMMIT 해 변경을 빨리 확정한다.",
+        "㉠·㉡ 은 한 트랜잭션으로 묶고, 기록용인 ㉢ 은 따로 COMMIT 한다.",
+        "㉠ 과 ㉡ 을 서로 다른 세션에서 동시에 실행해 속도를 높인다."
       ],
       "correctIndex": 0,
-      "explanation": "트랜잭션은 분리될 수 없는 하나의 논리적 업무 처리 단위이다. ② 레코드·④ 테이블·③ Query 는 물리적·구문적 단위이므로 논리적 업무 최소 단위가 아니다."
+      "explanation": "트랜잭션은 더 나눌 수 없는 논리적 작업 단위다. 이체는 출금·입금·기록이 모두 이루어져야 의미가 있으므로 하나의 트랜잭션으로 묶고, 끝까지 성공하면 COMMIT, 중간에 실패하면 ROLLBACK 해야 한다. 정답은 ①번이다. ② 는 출금만 확정된 뒤 입금이 실패하면 돈이 사라진 상태로 남는다. ③ 은 이체는 됐는데 내역이 없거나, 이체는 취소됐는데 내역만 남을 수 있다. ④ 는 두 작업이 서로 다른 트랜잭션이 되어 함께 취소할 수 없다."
     },
     {
       "subject": "2과목",
@@ -1487,15 +1487,21 @@
     {
       "subject": "2과목",
       "number": 36,
-      "title": "행이 2건인 테이블에 대해 결과가 나머지와 다른 SQL 은?",
+      "title": "T 의 급여가 300, 100, 500, 200 순서로 읽힌다고 할 때, 아래 SQL ㉠, ㉡, ㉢ 의 결과로 옳은 것은? (Oracle 기준)",
       "options": [
-        "SELECT * FROM T WHERE ROWNUM > 0;",
-        "SELECT * FROM T WHERE ROWNUM = 2;",
-        "SELECT * FROM T WHERE ROWNUM < 3;",
-        "SELECT * FROM T WHERE ROWNUM <= 2;"
+        "500·300 / 500·300 / 1행",
+        "300·100 / 500·300 / 0행",
+        "500·300 / 300·100 / 0행",
+        "300·100 / 500·300 / 1행"
       ],
       "correctIndex": 1,
-      "explanation": "ROWNUM 은 1부터 순차 부여되므로 첫 행이 ROWNUM=1 을 받고 탈락하면 다음 행에도 1 이 할당되어 2에 도달하지 못한다. 따라서 ROWNUM = 2 는 0건을 반환하고, ① ROWNUM > 0, ③ ROWNUM < 3, ④ ROWNUM <= 2 는 모두 2건을 반환한다."
+      "explanation": "ROWNUM 은 WHERE 단계에서 행을 읽는 순서대로 붙고, ORDER BY 는 그 뒤에 처리된다. ㉠ 은 먼저 읽힌 300, 100 두 행을 고른 다음 정렬해 300, 100 이다. 급여가 큰 순서로 2건을 얻으려면 ㉡ 처럼 인라인 뷰에서 먼저 정렬하고 바깥에서 ROWNUM 으로 잘라야 하며, 결과는 500, 300 이다. ㉢ 은 첫 행이 ROWNUM 1 을 받아 '= 2' 에 걸러지고, 그다음 행도 다시 1 을 받으므로 어떤 행도 2 가 되지 못해 0행이다. 정답은 ②번이다. ① 은 ㉠ 에서도 정렬이 먼저라고 본 것, ③ 은 ㉠ 과 ㉡ 을 바꿔 본 것, ④ 는 ROWNUM = 2 가 두 번째 행을 고른다고 본 것이다.",
+      "references": [
+        {
+          "type": "sql",
+          "code": "-- ㉠\nSELECT 급여 FROM T\nWHERE  ROWNUM <= 2\nORDER  BY 급여 DESC;\n-- ㉡\nSELECT 급여\nFROM  (SELECT 급여 FROM T\n       ORDER BY 급여 DESC)\nWHERE  ROWNUM <= 2;\n-- ㉢\nSELECT 급여 FROM T\nWHERE  ROWNUM = 2;"
+        }
+      ]
     },
     {
       "subject": "2과목",
