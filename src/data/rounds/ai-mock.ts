@@ -1,5 +1,5 @@
 // Auto-generated from scripts/authored/ai-mock.json
-// AI 생성 모의고사 풀 (기출 변형) · 1163문항
+// AI 생성 모의고사 풀 (기출 변형) · 1165문항
 // ⚠ 직접 편집 금지. ai-mock.json 수정 후 'node scripts/build-quiz-bank.mjs' 재실행.
 import type { QuizQuestion } from '../quizBank';
 
@@ -3261,19 +3261,25 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 130,
-    "title": "4개의 테이블로부터 필요한 칼럼을 조회하려고 한다. 최소 몇 개의 JOIN 조건이 필요한가?",
+    "title": "고객(2행), 주문(3행), 주문상세(4행), 상품(2행) 네 테이블을 조인하려 한다. 필요한 최소 조인 조건 수와, 아래 SQL 의 결과 행 수로 옳은 것은? (모든 주문상세는 주문·상품과, 모든 주문은 고객과 이어진다)",
     "options": [
-      "2개",
-      "3개",
-      "4개",
-      "5개"
+      "2개, 4행",
+      "3개, 8행",
+      "4개, 8행",
+      "3개, 4행"
     ],
     "correctIndex": 1,
-    "explanation": "테이블 N 개를 모두 연결하려면 최소 N - 1 개의 조인 조건이 필요하다(테이블 둘을 잇는 데 조건 하나). 4개면 4 - 1 = 3 개다(②). 조건이 그보다 적으면 일부 테이블이 카티션 곱으로 결합된다.",
+    "explanation": "N 개 테이블을 빠짐없이 이으려면 최소 N - 1 개의 조인 조건이 필요하다. 네 테이블이므로 3개다. 이 SQL 은 주문상세와 상품을 잇는 조건(D.상품코드 = P.상품코드)이 빠져, 앞의 세 테이블 조인 결과 4행(주문상세 수)이 상품 2행과 모두 짝을 지어 4 × 2 = 8행이 된다. 정답은 ②번이다. 조건을 넣으면 주문상세마다 상품 하나만 맞아 4행이 나온다(④ 는 조건이 다 있을 때의 행 수).",
     "chapter": "표준 조인",
     "_source": "cbt-mock",
     "_origId": "cbt-085",
-    "_cbtOrigNo": 85
+    "_cbtOrigNo": 85,
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT COUNT(*)\nFROM   고객 C, 주문 O,\n       주문상세 D, 상품 P\nWHERE  C.고객번호 = O.고객번호\nAND    O.주문번호 = D.주문번호;"
+      }
+    ]
   },
   {
     "id": 10930,
@@ -5839,19 +5845,47 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 220,
-    "title": "우선순위를 계산하는 윈도우 함수에서 동일한 우선순위가 나와도 고유의 값을 부여하기 위한 방법으로 올바른 것은 무엇인가?",
+    "title": "아래 EMP 에 대해 함수(...) OVER(ORDER BY SAL DESC) 의 결과 값이 같은 급여라도 겹치지 않고 1, 2, 3, 4 로 모두 다르게 나오는 함수는?",
     "options": [
-      "Select RANK( ) OVER (PARTITION BY DEPTNO ORDER BY SAL DESC) DEPT_RANK;",
-      "Select DENSE_RANK( ) OVER (PARTITION BY DEPTNO ORDER BY SAL DESC) DEPT_RANK;",
-      "Select ROW_NUMBER( ) OVER (PARTITION BY DEPTNO ORDER BY SAL DESC) DEPT_RANK;",
-      "Select UNIQUE_RANK( ) OVER (PARTITION BY DEPTNO ORDER BY SAL DESC) DEPT_RANK;"
+      "RANK()",
+      "DENSE_RANK()",
+      "ROW_NUMBER()",
+      "NTILE(3)"
     ],
     "correctIndex": 2,
-    "explanation": "ROW_NUMBER 는 값이 같아도 1, 2, 3 처럼 서로 다른 고유 순번을 매긴다(③). RANK(①)와 DENSE_RANK(②)는 같은 값에 같은 순위를 주고, UNIQUE_RANK(④)라는 함수는 없다.",
+    "explanation": "ROW_NUMBER 는 동점이어도 행마다 서로 다른 순번을 붙인다. 1, 2, 3, 4 가 나온다(동점인 B, C 중 누가 2 인지는 정렬 기준을 더 주지 않으면 정해지지 않는다). 정답은 ③번이다. ① RANK 는 동점에 같은 순위를 주고 다음 순위를 건너뛰어 1, 2, 2, 4 다. ② DENSE_RANK 는 건너뛰지 않아 1, 2, 2, 3 이다. ④ NTILE(3) 은 네 행을 세 묶음으로 나눠 1, 1, 2, 3 이다.",
     "chapter": "윈도우 함수",
     "_source": "cbt-mock",
     "_origId": "cbt-178",
-    "_cbtOrigNo": 178
+    "_cbtOrigNo": 178,
+    "references": [
+      {
+        "type": "table",
+        "caption": "EMP",
+        "headers": [
+          "ENAME",
+          "SAL"
+        ],
+        "rows": [
+          [
+            "A",
+            "300"
+          ],
+          [
+            "B",
+            "200"
+          ],
+          [
+            "C",
+            "200"
+          ],
+          [
+            "D",
+            "100"
+          ]
+        ]
+      }
+    ]
   },
   {
     "id": 11020,
@@ -6683,19 +6717,47 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 248,
-    "title": "다음은 윈도우 함수에 대한 설명이다. 현재 행을 기준으로 파티션 내에서 앞의 한 건, 현재행, 뒤의 한 건을 범위를 지정하는 Over의 옵션은?",
+    "title": "아래 T 에 대해 SUM(VAL) OVER(ORDER BY ID ( ? )) 의 결과가 30, 60, 90, 70 (ID 순)이 되게 하는 윈도우 절은?",
     "options": [
       "ROWS BETWEEN 1 PRECEDING AND 1 FOLLOWING",
       "RANGE UNBOUNDED PRECEDING",
       "ROWS BETWEEN CURRENT ROW AND UNBOUNDED FOLLOWING",
-      "ROWS BETWEEN 1 AND 2"
+      "ROWS BETWEEN 1 PRECEDING AND CURRENT ROW"
     ],
     "correctIndex": 0,
-    "explanation": "ROWS BETWEEN 1 PRECEDING AND 1 FOLLOWING 은 현재 행 기준 앞 1행, 현재 행, 뒤 1행을 윈도우로 지정한다. RANGE UNBOUNDED PRECEDING 은 처음부터 현재 행(값 기준)까지, ROWS BETWEEN CURRENT ROW AND UNBOUNDED FOLLOWING 은 현재 행부터 끝까지이고, ROWS BETWEEN 1 AND 2 는 PRECEDING/FOLLOWING 이 없어 잘못된 구문이다. 정답은 ① 이다.",
+    "explanation": "30, 60, 90, 70 은 앞 행·현재 행·뒤 행을 더한 값이다(ID 1 은 앞 행이 없어 10 + 20, ID 4 는 뒤 행이 없어 30 + 40). 정답은 ①번이다. ② 는 처음부터 현재 행까지 누적이라 10, 30, 60, 100 이다. ③ 은 현재 행부터 끝까지라 100, 90, 70, 40 이다. ④ 는 앞 행과 현재 행만 더해 10, 30, 50, 70 이다.",
     "chapter": "관계형 DB와 SELECT",
     "_source": "cbt-mock",
     "_origId": "cbt-207",
-    "_cbtOrigNo": 207
+    "_cbtOrigNo": 207,
+    "references": [
+      {
+        "type": "table",
+        "caption": "T",
+        "headers": [
+          "ID",
+          "VAL"
+        ],
+        "rows": [
+          [
+            "1",
+            "10"
+          ],
+          [
+            "2",
+            "20"
+          ],
+          [
+            "3",
+            "30"
+          ],
+          [
+            "4",
+            "40"
+          ]
+        ]
+      }
+    ]
   },
   {
     "id": 11048,
@@ -12185,6 +12247,48 @@ export const AI_MOCK: QuizQuestion[] = [
         "code": "SELECT * FROM dual WHERE NULL = NULL;"
       }
     ]
+  },
+  {
+    "id": 11219,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 420,
+    "title": "다음은 윈도우 함수에 대한 설명이다. 현재 행을 기준으로 파티션 내에서 앞의 한 건, 현재행, 뒤의 한 건을 범위를 지정하는 Over의 옵션은?",
+    "options": [
+      "ROWS BETWEEN 1 AND 2",
+      "ROWS BETWEEN CURRENT ROW AND UNBOUNDED FOLLOWING",
+      "RANGE UNBOUNDED PRECEDING",
+      "ROWS BETWEEN 1 PRECEDING AND 1 FOLLOWING"
+    ],
+    "correctIndex": 3,
+    "explanation": "ROWS BETWEEN 1 PRECEDING AND 1 FOLLOWING 은 현재 행 기준 앞 1행, 현재 행, 뒤 1행을 윈도우로 지정한다. ① 은 PRECEDING/FOLLOWING 이 없어 잘못된 구문, ② 는 현재 행부터 끝까지, ③ 은 처음부터 현재 값까지다. 정답은 ④ 이다.",
+    "chapter": "윈도우 함수",
+    "_source": "sqld-1140",
+    "_origId": "sqld-0221",
+    "_category": "윈도우 함수",
+    "_correctRate": 10
+  },
+  {
+    "id": 11224,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 425,
+    "title": "우선순위를 계산하는 윈도우 함수에서 동일한 우선순위가 나와도 고유의 값을 부여하기 위한 방법으로 올바른 것은 무엇인가?",
+    "options": [
+      "Select UNIQUE_RANK() OVER \n(PARTITION BY DEPTNO \nORDER BY SAL DESC) \nDEPT_RANK;",
+      "Select ROW_NUMBER() OVER \n(PARTITION BY DEPTNO \nORDER BY SAL DESC) \nDEPT_RANK;",
+      "Select DENSE_RANK() OVER \n(PARTITION BY DEPTNO \nORDER BY SAL DESC) \nDEPT_RANK;",
+      "Select RANK() OVER \n(PARTITION BY DEPTNO \nORDER BY SAL DESC) \nDEPT_RANK;"
+    ],
+    "correctIndex": 1,
+    "explanation": "윈도우 ROW_NUMBER() 함수는 동일한 우선 순위가 나올 때 고유 값을 부여한다.",
+    "chapter": "윈도우 함수",
+    "_source": "sqld-1140",
+    "_origId": "sqld-0227",
+    "_category": "윈도우 함수",
+    "_correctRate": 10
   },
   {
     "id": 11226,

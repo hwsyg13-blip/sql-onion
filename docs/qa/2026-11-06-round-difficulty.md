@@ -1087,3 +1087,6 @@ ERD 선 표기 정리 2차(11-20 14시): 식별자를 다루는 1과목 문항�
 | cbt-053 | WHERE 로 먼저 거르면 평균이 바뀜, HAVING 에 비집계 칼럼 오류 | 절 이름 → 결과에 맞는 절 | ① | PostgreSQL 실행 |
 | cbt-127 | NVL 위치(합 전/후), NULLIF·NVL2 | 함수 이름 → 결과에 맞는 식 | ① | PostgreSQL(COALESCE·CASE) 실행 |
 | cbt-198 | COUNT 는 모든 타입, AVG·SUM 은 숫자만, DISTINCT | 함수 이름 → 문자 칼럼 결과 | ③ | PostgreSQL 실행(AVG 문자 오류 확인) |
+| cbt-085 | N-1 조인 조건, 빠지면 카티션 곱으로 행이 불어남 | 개수만 → 개수 + 빠진 SQL 행 수 | 3개, 8행 | PostgreSQL 실행(8행, 조건 넣으면 4행) |
+| cbt-207 | 윈도우 절 네 가지의 합계 차이 | 설명 고르기 → 결과에 맞는 절 | ① | PostgreSQL 실행 |
+| cbt-178 | ROW_NUMBER·RANK·DENSE_RANK·NTILE 동점 처리 | 이름 고르기 → 결과로 판단 | ③ | PostgreSQL 실행 |
