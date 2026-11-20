@@ -599,16 +599,22 @@ export const ROUND_46: QuizQuestion[] = [
     "round": 46,
     "subject": "2과목",
     "number": 16,
-    "title": "SQL의 분류에 대한 설명으로 옳지 않은 것은?",
+    "title": "Oracle 에서 X 값이 1 로 COMMIT 된 테이블 T 에 대해 ㉠~㉣ 을 차례로 실행했다. 각 묶음을 마친 직후 T 의 X 값을 차례대로 나열한 것은?",
     "options": [
-      "DML은 SELECT, INSERT, UPDATE, DELETE이다.",
-      "TCL은 COMMIT, ROLLBACK, SAVEPOINT이다.",
-      "DCL은 GRANT, REVOKE이다.",
-      "DCL은 CREATE, ALTER, DROP이다."
+      "1, 1, 1, 1",
+      "2, 3, 4, 5",
+      "1, 1, 4, 4",
+      "2, 2, 4, 4"
     ],
     "correctIndex": 3,
-    "explanation": "DML 은 SELECT·INSERT·UPDATE·DELETE(①), TCL 은 COMMIT·ROLLBACK·SAVEPOINT(②), DCL 은 GRANT·REVOKE(③)다. CREATE·ALTER·DROP 은 객체 구조를 정의하는 DDL 이므로 이를 DCL 이라고 한 ④ 가 옳지 않다.",
-    "_source": "authored"
+    "explanation": "Oracle 에서 DDL(CREATE·ALTER·DROP·TRUNCATE·RENAME)과 DCL(GRANT·REVOKE)은 실행 전후로 자동 COMMIT 된다. DML 과 TCL 은 그렇지 않다. ㉠ 의 GRANT 는 DCL 이라 앞의 UPDATE 가 COMMIT 되고, 뒤의 ROLLBACK 은 되돌릴 것이 없어 X = 2 다. ㉡ 의 SAVEPOINT 는 TCL 이지만 COMMIT 이 아니다. 저장점 이름 없이 ROLLBACK 하면 트랜잭션 전체가 취소되어 X 는 마지막 COMMIT 값인 2 다. ㉢ 의 TRUNCATE 는 DDL 이라 UPDATE 가 COMMIT 되어 X = 4 다. ㉣ 의 DELETE 는 DML 이라 ROLLBACK 으로 UPDATE 까지 취소되어 X 는 4 로 남는다. 정답은 ④번이다. ① 은 자동 COMMIT 을 모두 무시한 것이고, ② 는 ROLLBACK 이 아무것도 되돌리지 못한다고 본 것, ③ 은 GRANT 를 DCL 이 아니라 자동 COMMIT 이 없는 명령으로 본 것이다. 참고로 SQL Server·PostgreSQL 은 명시적 트랜잭션 안의 DDL 도 ROLLBACK 할 수 있어 결과가 다르다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "-- ㉠\nUPDATE T SET X = 2;\nGRANT SELECT ON T TO U2;\nROLLBACK;\n-- ㉡\nUPDATE T SET X = 3;\nSAVEPOINT S1;\nROLLBACK;\n-- ㉢\nUPDATE T SET X = 4;\nTRUNCATE TABLE T_LOG;\nROLLBACK;\n-- ㉣\nUPDATE T SET X = 5;\nDELETE FROM T_LOG;\nROLLBACK;"
+      }
+    ]
   },
   {
     "id": 10716,

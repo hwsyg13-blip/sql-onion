@@ -955,3 +955,5 @@ ERD 선 표기 정리(11-20): 자식 PK 에 부모 키가 없는 관계를 점�
 | 50-2-50 | ROLLBACK TO 앞 저장점 뒤 저장점 소멸·Oracle 문장 단위 오류 | 명령 이름 → 문장 9개 실행 결과 | 오류, 2 | Oracle 규칙(PostgreSQL 은 트랜잭션 전체가 중단돼 0 — 해설에 적음), 저장점 소멸 오류는 PostgreSQL 동일 |
 | 50-2-35 | 집합 연산 ORDER BY 위치·결과 칼럼 이름(첫 SELECT)·위치 번호 | 설명 고르기 → SQL 4개 중 오류 | ㉡, ㉢ | PostgreSQL 동일 |
 | 45-2-42 | CUBE 네 묶음 행 수·직급 소계의 AVG | 개념 설명 → 표에서 행 수와 두 AVG | 8, 350, 400 | PostgreSQL 동일 |
+| 52-2-36 | AVG 의 NULL 제외 vs NVL 안쪽·바깥쪽(전부 NULL 인 그룹) | 설명 고르기 → 표에서 세 식 값 | 10, 5, 0 | PostgreSQL 동일(COALESCE) |
+| 46-2-16 | Oracle DDL·DCL 자동 COMMIT(GRANT·TRUNCATE) vs DML·TCL(SAVEPOINT) | 분류 설명 → 네 묶음 뒤 값 | 2, 2, 4, 4 | Oracle 규칙으로 판정(PostgreSQL·SQL Server 는 DDL 도 롤백 — 해설에 적음) |
