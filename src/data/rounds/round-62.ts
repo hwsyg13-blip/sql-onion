@@ -411,16 +411,22 @@ export const ROUND_62: QuizQuestion[] = [
     "round": 62,
     "subject": "2과목",
     "number": 15,
-    "title": "다음 중 NULL이 반환되지 않는 것은?",
+    "title": "Oracle 에서 다음 식 ㉠~㉤ 중 결과가 NULL 이 아닌 것만 모두 고른 것은?",
     "options": [
-      "CASE 'AB' WHEN 'CD' THEN 'EF' END",
-      "DECODE('AB', 'CD', 'EF', NULL)",
-      "COALESCE('AB', 'CD', NULL)",
-      "NULLIF('A', 'A')"
+      "㉠, ㉣",
+      "㉠, ㉢, ㉣",
+      "㉠, ㉣, ㉤",
+      "㉠, ㉢, ㉣, ㉤"
     ],
     "correctIndex": 2,
-    "explanation": "COALESCE는 인자를 순서대로 평가해 처음으로 NULL이 아닌 값 'AB'를 반환한다. ①은 일치하는 WHEN이 없고 ELSE가 없어 NULL, ②는 매칭 실패 시 기본값 NULL, ④는 두 인자가 같으면 NULL을 반환한다.",
-    "_source": "authored"
+    "explanation": "㉠ NVL2 는 첫 인자가 NULL 이면 세 번째 값을 돌려주므로 'B' 다. ㉡ NULLIF 는 두 값이 같으면 NULL 이다. ㉢ Oracle 은 길이 0 인 문자열 '' 을 NULL 로 다룬다. LENGTH(NULL) 은 0 이 아니라 NULL 이다. ㉣ DECODE 는 NULL 끼리 같다고 보므로 'Y' 다. ㉤ Oracle 의 || 연산은 NULL 을 빈 문자열처럼 이어 붙여 'A' 가 된다. 산술 연산(+)과 달리 결과가 NULL 이 되지 않는다. NULL 이 아닌 것은 ㉠, ㉣, ㉤ 이다. 정답은 ③번이다. ① 은 || 도 NULL 이 섞이면 NULL 이 된다고 본 것이고, ② 와 ④ 는 LENGTH('') 를 0 으로 본 것이다. 참고로 PostgreSQL·SQL Server 에서는 '' 이 NULL 이 아니어서 LENGTH('') 가 0 이고, 'A' || NULL 은 NULL 이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "㉠ NVL2(NULL, 'A', 'B')\n㉡ NULLIF('A', 'A')\n㉢ LENGTH('')\n㉣ DECODE(NULL, NULL, 'Y')\n㉤ 'A' || NULL"
+      }
+    ]
   },
   {
     "id": 9915,

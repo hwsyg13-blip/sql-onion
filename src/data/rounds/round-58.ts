@@ -1559,20 +1559,38 @@ export const ROUND_58: QuizQuestion[] = [
     "round": 58,
     "subject": "2과목",
     "number": 37,
-    "title": "아래 SQL의 실행 결과로 옳은 것은?",
+    "title": "아래 T 테이블에 SQL 을 실행했을 때, 'X 가 NULL 인 행의 ㉠, X 가 NULL 인 행의 ㉡, X 가 2 인 행의 ㉠' 을 차례대로 나열한 것은? (Oracle 기준)",
     "options": [
-      "Y",
-      "N",
-      "NULL",
-      "오류 발생"
+      "N, NULL, NULL",
+      "N, N, NULL",
+      "NULL, NULL, NULL",
+      "N, NULL, 2"
     ],
     "correctIndex": 0,
-    "explanation": "DECODE 는 일반 비교와 달리 NULL 과 NULL 을 같은 값으로 본다. 첫 인수 NULL 이 비교값 NULL 과 일치하므로 'Y' 를 반환한다(①). ② N 은 CASE WHEN NULL = NULL 처럼 비교했을 때의 결과다(UNKNOWN 이라 ELSE). ③ 일치하면 'Y' 를 돌려주므로 NULL 이 아니고, ④ 오류도 나지 않는다.",
+    "explanation": "DECODE 는 비교할 때 NULL 과 NULL 을 같은 값으로 본다. 그래서 X 가 NULL 인 행의 ㉠ 은 'N' 이다. 단순 CASE 는 'X = NULL' 로 비교하므로 NULL 행도 참이 되지 않고, 1 과도 같지 않으며 ELSE 가 없어 ㉡ 은 NULL 이다. NULL 을 잡으려면 CASE WHEN X IS NULL 처럼 써야 한다. X 가 2 인 행의 ㉠ 은 어느 비교값과도 같지 않고 기본값(마지막 인자)이 없으므로 NULL 이다. 정답은 ①번이다. ② 는 단순 CASE 도 NULL 끼리 같다고 본 것이고, ③ 은 DECODE 도 NULL 을 비교하지 못한다고 본 것, ④ 는 기본값이 없으면 원래 값을 돌려준다고 본 것이다.",
     "_source": "authored",
     "references": [
       {
+        "type": "table",
+        "caption": "T",
+        "headers": [
+          "X"
+        ],
+        "rows": [
+          [
+            "NULL"
+          ],
+          [
+            "1"
+          ],
+          [
+            "2"
+          ]
+        ]
+      },
+      {
         "type": "sql",
-        "code": "SELECT DECODE(NULL, NULL, 'Y', 'N') FROM DUAL;"
+        "code": "SELECT X,\n  DECODE(X, NULL, 'N',\n            1,    'one') AS ㉠,\n  CASE X WHEN NULL THEN 'N'\n         WHEN 1    THEN 'one'\n  END AS ㉡\nFROM T;"
       }
     ]
   },

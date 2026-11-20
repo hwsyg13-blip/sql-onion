@@ -959,3 +959,5 @@ ERD 선 표기 정리(11-20): 자식 PK 에 부모 키가 없는 관계를 점�
 | 46-2-16 | Oracle DDL·DCL 자동 COMMIT(GRANT·TRUNCATE) vs DML·TCL(SAVEPOINT) | 분류 설명 → 네 묶음 뒤 값 | 2, 2, 4, 4 | Oracle 규칙으로 판정(PostgreSQL·SQL Server 는 DDL 도 롤백 — 해설에 적음) |
 | 57-2-33 | 동점이 있을 때 ROWNUM·RANK·DENSE_RANK·WITH TIES 행 수 | 방식 고르기 → 표에서 네 SQL 행 수 | 2, 3, 4, 3 | PostgreSQL 동일(LIMIT·FETCH WITH TIES) |
 | 58-2-45 | TRUNC·ROUND 양수·음수 자릿수, 음수의 TRUNC | 한 식 → 네 식 결과 | 120, 123.4, 130, -100 | PostgreSQL 동일 |
+| 58-2-37 | DECODE 의 NULL=NULL·기본값 없으면 NULL vs 단순 CASE WHEN NULL | 한 식 → 표에서 세 값 | N, NULL, NULL | Oracle 규칙(DECODE 는 Oracle 전용), 단순 CASE 는 PostgreSQL 동일 |
+| 62-2-15 | Oracle 의 '' = NULL(LENGTH('') 은 NULL)·|| 는 NULL 을 무시·DECODE·NVL2·NULLIF | NULL 아닌 것 하나 → 다섯 식 중 모두 | ㉠, ㉣, ㉤ | Oracle 규칙(PostgreSQL 은 LENGTH('')=0, 'A'||NULL=NULL — 해설에 적음) |
