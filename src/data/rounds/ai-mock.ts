@@ -11995,7 +11995,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "sql",
-        "code": "create table 사원(번호 char(10) primary key, 월급 integer);\n\nSQL A : select count(번호) from 사원 where 월급 > = 100000 or 월급 < 100000;\nSQL B : select count(번호) from 사원;"
+        "code": "create table 사원\n  (번호 char(10) primary key,\n   월급 integer);\n\nSQL A : select count(번호) from 사원\n        where 월급 > = 100000\n           or 월급 < 100000;\nSQL B : select count(번호) from 사원;"
       }
     ]
   },
@@ -15425,7 +15425,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "sql",
-        "code": "SELECT COL1, COL2, COL3,\nLEAD(COL3, (ㄱ), (ㄴ)) OVER(PARTITION BY COL1 ORDER BY COL3 ) AS Result FROM Mytest"
+        "code": "SELECT COL1, COL2, COL3,\nLEAD(COL3, (ㄱ), (ㄴ)) OVER(\n  PARTITION BY COL1\n  ORDER BY COL3 ) AS Result\nFROM Mytest"
       },
       {
         "type": "table",
@@ -17155,7 +17155,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "sql",
-        "code": "SELECT mgr, empno, ename, LEVEL, CONNECT_BY_ISLEAF, SYS_CONNECT_BY_PATH(ENAME,'-') \"PATH\"\nFROM limbest.EMP\nSTART WITH mgr is null\nConnect by prior empno = mgr;"
+        "code": "SELECT mgr, empno, ename, LEVEL,\n       CONNECT_BY_ISLEAF,\n       SYS_CONNECT_BY_PATH(ENAME,'-')\n         \"PATH\"\nFROM limbest.EMP\nSTART WITH mgr is null\nConnect by prior empno = mgr;"
       },
       {
         "type": "table",
@@ -22840,7 +22840,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "sql",
-        "code": "SELECT TO_CHAR(TO_DATE(SUBSTR(JUMIN, 1, 6), 'RRMMDD'), 'YYYY-MM-DD') FROM TAB1;"
+        "code": "SELECT TO_CHAR(\n         TO_DATE(SUBSTR(JUMIN, 1, 6),\n                 'RRMMDD'),\n         'YYYY-MM-DD')\nFROM TAB1;"
       },
       {
         "type": "table",
@@ -23058,7 +23058,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "sql",
-        "code": "SELECT COUNT(TAB1.NO) FROM TAB1 LEFT OUTER JOIN TAB2 ON TAB1.NO = TAB2.NO; \nSELECT COUNT(DISTINCT TAB1.CODE) FROM TAB1 RIGHT OUTER JOIN TAB2 ON TAB1.NO = TAB2.NO;"
+        "code": "SELECT COUNT(TAB1.NO)\nFROM TAB1 LEFT OUTER JOIN TAB2\n  ON TAB1.NO = TAB2.NO;\nSELECT COUNT(DISTINCT TAB1.CODE)\nFROM TAB1 RIGHT OUTER JOIN TAB2\n  ON TAB1.NO = TAB2.NO;"
       },
       {
         "type": "table",
@@ -23567,7 +23567,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "sql",
-        "code": "SELECT REGEXP_SUBSTR('ORA-00600 Oracle SQL-Server 50', '[^0-9]+') \"REGEXPR_SUBSTR\" \nFROM DUAL;"
+        "code": "SELECT REGEXP_SUBSTR(\n  'ORA-00600 Oracle SQL-Server 50',\n  '[^0-9]+') \"REGEXPR_SUBSTR\"\nFROM DUAL;"
       }
     ]
   },
@@ -25392,7 +25392,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "sql",
-        "code": "SELECT COUNT(COL1) FROM TAB1 WHERE COL2 NOT BETWEEN 2000 AND 3000 AND COL3 NOT IN (10, 20);"
+        "code": "SELECT COUNT(COL1) FROM TAB1\nWHERE COL2 NOT BETWEEN 2000 AND 3000\n  AND COL3 NOT IN (10, 20);"
       },
       {
         "type": "table",
@@ -25858,7 +25858,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "sql",
-        "code": "SELECT * FROM EMP START WITH EMPNO = '0001' CONNECT BY MGR = PRIOR EMPNO;"
+        "code": "SELECT * FROM EMP\nSTART WITH EMPNO = '0001'\nCONNECT BY MGR = PRIOR EMPNO;"
       },
       {
         "type": "table",
@@ -26863,7 +26863,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "sql",
-        "code": "SELECT COUNT(*) C1, COUNT(COL1) C2, SUM(COL2) C3 , SUM(COL1+COL2+COL3) C4 FROM TAB1;"
+        "code": "SELECT COUNT(*) C1, COUNT(COL1) C2,\n       SUM(COL2) C3 ,\n       SUM(COL1+COL2+COL3) C4\nFROM TAB1;"
       },
       {
         "type": "table",
@@ -27721,7 +27721,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "sql",
-        "code": "SELECT REGEXP_INSTR('12345678', '(123)(4(56)(78))', 1, 1, 0, 'i', 2)  FROM DUAL;"
+        "code": "SELECT REGEXP_INSTR('12345678',\n         '(123)(4(56)(78))',\n         1, 1, 0, 'i', 2)\nFROM DUAL;"
       }
     ]
   },
@@ -28079,7 +28079,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "sql",
-        "code": "SELECT NAME, SALARY, ________ OVER (ORDER BY SALARY DESC) AS RANKING FROM TAB1;"
+        "code": "SELECT NAME, SALARY,\n       ________ OVER (\n         ORDER BY SALARY DESC)\n         AS RANKING\nFROM TAB1;"
       },
       {
         "type": "table",
@@ -32108,7 +32108,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "sql",
-        "code": "CREATE VIEW v_emp AS SELECT emp_id, emp_name, dept FROM emp WHERE dept = 'SALES';"
+        "code": "CREATE VIEW v_emp AS\nSELECT emp_id, emp_name, dept\nFROM emp WHERE dept = 'SALES';"
       }
     ]
   },
@@ -40920,7 +40920,7 @@ export const AI_MOCK: QuizQuestion[] = [
       {
         "type": "sql",
         "caption": "[SQL]",
-        "code": "SELECT A.고객번호, A.고객명, B.단말기ID, B.단말기명, C.OSID, C.OS명\nFROM   고객 A LEFT OUTER JOIN 단말기 B\nON     (A.고객번호 IN (11000, 12000) AND A.단말기ID = B.단말기ID) LEFT OUTER JOIN OS C\nON     (B.OSID = C.OSID)\nORDER BY A.고객번호;"
+        "code": "SELECT A.고객번호, A.고객명,\n       B.단말기ID, B.단말기명,\n       C.OSID, C.OS명\nFROM   고객 A LEFT OUTER JOIN 단말기 B\nON     (A.고객번호 IN (11000, 12000)\n        AND A.단말기ID = B.단말기ID)\nLEFT OUTER JOIN OS C\nON     (B.OSID = C.OSID)\nORDER BY A.고객번호;"
       }
     ]
   },
@@ -42404,7 +42404,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "sql",
-        "code": "SELECT E.*, LEVEL \n FROM 사원 E \n START WITH 매니저사원번호 IS NULL \nCONNECT BY PRIOR 사원번호 = 매니저사원번호 AND EXTRACT(MONTH FROM 입사일자) >= 7 \n ORDER SIBLINGS BY 이름;"
+        "code": "SELECT E.*, LEVEL\n FROM 사원 E\n START WITH 매니저사원번호 IS NULL\nCONNECT BY PRIOR 사원번호\n           = 매니저사원번호\n       AND EXTRACT(MONTH FROM 입사일자)\n           >= 7\n ORDER SIBLINGS BY 이름;"
       },
       {
         "type": "table",
@@ -43358,7 +43358,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "sql",
-        "code": "SELECT ROUND(TO_DATE('2024-02-20 14:00:00', 'YYYY-MM-DD HH24:MI:SS'), 'MONTH') AS D1, \nTRUNC(TO_DATE('2024-09-12 09:00:00', 'YYYY-MM-DD HH24:MI:SS')) AS D2 FROM DUAL;"
+        "code": "SELECT ROUND(TO_DATE(\n         '2024-02-20 14:00:00',\n         'YYYY-MM-DD HH24:MI:SS'),\n         'MONTH') AS D1,\nTRUNC(TO_DATE('2024-09-12 09:00:00',\n              'YYYY-MM-DD HH24:MI:SS'))\n  AS D2 FROM DUAL;"
       }
     ]
   },
@@ -43412,7 +43412,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "sql",
-        "code": "SELECT COUNT(COL1) RESULT FROM TAB1 WHERE COL3 < 100 GROUP BY COL1;   \nSELECT COUNT(COL1) RESULT FROM TAB1 WHERE COL1 IS NOT NULL GROUP BY COL1 \nHAVING SUM(COL2) > 500;"
+        "code": "SELECT COUNT(COL1) RESULT FROM TAB1\nWHERE COL3 < 100 GROUP BY COL1;\nSELECT COUNT(COL1) RESULT FROM TAB1\nWHERE COL1 IS NOT NULL GROUP BY COL1\nHAVING SUM(COL2) > 500;"
       },
       {
         "type": "table",
@@ -43852,7 +43852,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "sql",
-        "code": "ALTER TABLE TAB2 ADD FOREIGN KEY(CLASS_NO) REFERENCES TAB1(NO) ON DELETE SET NULL; \nDELETE FROM TAB1 WHERE NAME = 'C';"
+        "code": "ALTER TABLE TAB2\n  ADD FOREIGN KEY(CLASS_NO)\n  REFERENCES TAB1(NO)\n  ON DELETE SET NULL;\nDELETE FROM TAB1 WHERE NAME = 'C';"
       },
       {
         "type": "table",
@@ -43994,7 +43994,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "sql",
-        "code": "SELECT ROUND(TO_DATE('2024-08-24 12:00:00', 'YYYY-MM-DD HH24:MI:SS')) AS COL1,\n       ROUND(TO_DATE('2024-08-24 11:59:59', 'YYYY-MM-DD HH24:MI:SS')) AS COL2\nFROM   DUAL;"
+        "code": "SELECT ROUND(TO_DATE(\n         '2024-08-24 12:00:00',\n         'YYYY-MM-DD HH24:MI:SS'))\n         AS COL1,\n       ROUND(TO_DATE(\n         '2024-08-24 11:59:59',\n         'YYYY-MM-DD HH24:MI:SS'))\n         AS COL2\nFROM   DUAL;"
       }
     ]
   },
@@ -44094,7 +44094,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "sql",
-        "code": "SELECT ID FROM TAB1 ORDER BY CASE WHEN ID > 'B' THEN 'A' ELSE ID END, ID;"
+        "code": "SELECT ID FROM TAB1\nORDER BY CASE WHEN ID > 'B' THEN 'A'\n              ELSE ID END, ID;"
       },
       {
         "type": "table",
