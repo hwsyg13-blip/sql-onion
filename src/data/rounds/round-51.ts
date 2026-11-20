@@ -1316,20 +1316,50 @@ export const ROUND_51: QuizQuestion[] = [
     "round": 51,
     "subject": "2과목",
     "number": 32,
-    "title": "아래 SQL 의 WHERE 조건과 동일한 의미를 가지는 것은?",
+    "title": "아래 T 테이블에 WHERE 조건 ㉠~㉣ 을 각각 적용했을 때 조회되는 행 수를 차례대로 나열한 것은?",
     "options": [
-      "SELECT * FROM T WHERE (COL1 = 'A' AND COL2 = 1000) OR (COL1 = 'B' AND COL2 = 2000);",
-      "SELECT * FROM T WHERE COL1 = 'A' AND COL2 = 1000 AND COL1 = 'B' AND COL2 = 2000;",
-      "SELECT * FROM T WHERE COL1 IN ('A', 'B') AND COL2 IN (1000, 2000);",
-      "SELECT * FROM T WHERE COL1 = 'A' OR COL2 = 2000;"
+      "2, 4, 2, 2",
+      "2, 2, 2, 2",
+      "2, 4, 2, 4",
+      "4, 4, 2, 2"
     ],
     "correctIndex": 0,
-    "explanation": "다중 컬럼 IN `(COL1, COL2) IN (('A', 1000), ('B', 2000))` 은 각 튜플 안에서는 컬럼끼리 AND 로 묶고, 튜플 간에는 OR 로 결합한 형태와 동일하다. 즉 `(COL1='A' AND COL2=1000) OR (COL1='B' AND COL2=2000)` 으로 풀어쓸 수 있다. ② 는 한 행의 COL1 이 'A' 이면서 'B' 일 수 없어 아무 행도 나오지 않고, ③ 은 ('A', 2000)·('B', 1000) 조합까지 골라 범위가 더 넓으며, ④ 는 둘 중 한 조건만 맞아도 통과해 전혀 다른 조건이다. 그래서 정답은 ① 이다.",
+    "explanation": "㉠ 의 다중 칼럼 IN 은 (COL1, COL2) 쌍이 목록의 쌍과 똑같을 때만 참이라 (A, 1000), (B, 2000) 의 2행이다. ㉡ 은 두 칼럼을 따로 검사하므로 A·B 와 1000·2000 의 모든 조합, 즉 (A, 2000), (B, 1000) 까지 4행이 나온다. 다중 칼럼 IN 을 칼럼별 IN 으로 풀면 안 되는 이유다. ㉢ 은 쌍마다 AND 로 묶어 OR 로 이었으므로 ㉠ 과 같은 2행이다. ㉣ 은 괄호가 없지만 AND 가 OR 보다 먼저 계산되어 ㉢ 과 같이 묶이므로 역시 2행이다. 정답은 ①번이다. ② 는 칼럼별 IN 도 쌍으로 비교한다고 본 것이고, ③ 은 ㉣ 을 왼쪽부터 차례로 계산한 것, ④ 는 다중 칼럼 IN 도 칼럼을 따로 검사한다고 본 것이다.",
     "_source": "authored",
     "references": [
       {
+        "type": "table",
+        "caption": "T",
+        "headers": [
+          "COL1",
+          "COL2"
+        ],
+        "rows": [
+          [
+            "A",
+            "1000"
+          ],
+          [
+            "A",
+            "2000"
+          ],
+          [
+            "B",
+            "1000"
+          ],
+          [
+            "B",
+            "2000"
+          ],
+          [
+            "C",
+            "1000"
+          ]
+        ]
+      },
+      {
         "type": "sql",
-        "code": "SELECT *\nFROM   T\nWHERE  (COL1, COL2) IN\n       (('A', 1000), ('B', 2000));"
+        "code": "㉠ WHERE (COL1, COL2) IN\n         (('A', 1000), ('B', 2000))\n㉡ WHERE COL1 IN ('A', 'B')\n     AND COL2 IN (1000, 2000)\n㉢ WHERE (COL1 = 'A' AND COL2 = 1000)\n      OR (COL1 = 'B' AND COL2 = 2000)\n㉣ WHERE COL1 = 'A' AND COL2 = 1000\n      OR COL1 = 'B' AND COL2 = 2000"
       }
     ]
   },
