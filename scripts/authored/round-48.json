@@ -1033,15 +1033,15 @@
     {
       "subject": "2과목",
       "number": 27,
-      "title": "아래 SQL 들 중 결과 건수가 나머지와 다른 것은? (테이블 T 에는 충분한 행이 존재한다고 가정)",
+      "title": "아래 T 테이블에 대한 SQL 중 결과 건수가 나머지와 다른 것은? (Oracle 기준, 표의 순서대로 읽힌다고 가정)",
       "options": [
-        "SELECT * FROM T WHERE ROWNUM = 2;",
-        "SELECT * FROM T WHERE ROWNUM <= 2;",
-        "SELECT * FROM T WHERE ROWNUM IN (1, 2);",
-        "SELECT * FROM T WHERE ROWNUM = 1 OR ROWNUM = 2;"
+        "SELECT * FROM T WHERE ROWNUM BETWEEN 2 AND 3;",
+        "SELECT * FROM T WHERE ROWNUM < 3;",
+        "SELECT * FROM (SELECT ROWNUM RN, ID FROM T) WHERE RN BETWEEN 2 AND 3;",
+        "SELECT * FROM T WHERE ID > 3 AND ROWNUM <= 2;"
       ],
       "correctIndex": 0,
-      "explanation": "Oracle 의 ROWNUM 은 조건을 통과한 행에 1 부터 차례로 번호를 붙인다. ROWNUM = 2 는 첫 행이 1 번을 받는 순간 조건에 맞지 않아 버려지고, 다음 행도 다시 1 번을 받아 버려지므로 결과가 0 건이다. ②③④ 는 모두 ROWNUM 1 과 2 를 받아들이는 조건이라 2 건이 나온다(어떤 2 건인지는 정렬이 없어 정해지지 않는다). 결과 건수가 다른 것은 ① 이다.",
+      "explanation": "ROWNUM 은 WHERE 조건을 통과한 행에 1부터 차례로 붙는다. ① 은 첫 행이 ROWNUM 1 이라 BETWEEN 2 AND 3 을 통과하지 못하고, 그 다음 행도 다시 1 이 되어 끝까지 한 행도 나오지 않는다(0건). 정답은 ①번이다. ② 는 ROWNUM 1, 2 두 건이다. ③ 은 인라인 뷰에서 ROWNUM 을 RN 이라는 일반 칼럼으로 먼저 굳혀 두었으므로 RN 2, 3 두 건이 나온다. ④ 는 ID > 3 을 통과한 4, 5 에 ROWNUM 1, 2 가 붙어 두 건이다.",
       "references": [
         {
           "type": "table",

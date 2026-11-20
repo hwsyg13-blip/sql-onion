@@ -522,15 +522,15 @@ export const ROUND_49: QuizQuestion[] = [
     "round": 49,
     "subject": "2과목",
     "number": 17,
-    "title": "아래 두 테이블에 대해 오류가 발생하는 INNER JOIN SQL 은?",
+    "title": "아래 두 테이블에 대해 Oracle 에서 오류가 발생하는 SQL 은?",
     "options": [
-      "SELECT * FROM TEAM A INNER JOIN STADIUM B ON A.ID = B.ID;",
-      "SELECT * FROM TEAM A INNER JOIN STADIUM B USING(ID);",
+      "SELECT * FROM TEAM A JOIN STADIUM B ON A.ID = B.ID;",
+      "SELECT ID, A.COL1 FROM TEAM A JOIN STADIUM B USING (ID);",
       "SELECT * FROM TEAM A NATURAL JOIN STADIUM B;",
-      "SELECT * FROM TEAM A INNER JOIN STADIUM B ON (ID);"
+      "SELECT A.ID FROM TEAM A JOIN STADIUM B USING (ID);"
     ],
     "correctIndex": 3,
-    "explanation": "ON 절에는 A.ID = B.ID 같은 조건식을 써야 하며, ON (ID) 처럼 컬럼명만 쓰면 문법 오류다(④). 컬럼명만 쓰는 것은 USING(ID)(②)이고, ON A.ID = B.ID(①)와 NATURAL JOIN(③, 같은 이름 컬럼 ID 로 자동 조인)은 정상 실행된다.",
+    "explanation": "USING 이나 NATURAL JOIN 으로 묶은 칼럼은 두 테이블의 칼럼이 하나로 합쳐지므로 Oracle 에서는 테이블 별칭을 붙일 수 없다. ④ 의 A.ID 는 오류다(ORA-25154). 정답은 ④번이다. ② 는 USING 칼럼 ID 에 별칭을 붙이지 않았고, COL1 은 USING 칼럼이 아니라 A.COL1 처럼 별칭을 붙여도 된다. ③ 은 이름이 같은 ID 하나로 조인한다. ① 은 ON 절의 일반 조인이다. PostgreSQL 은 USING 칼럼에도 별칭을 허용해 ④ 가 실행된다.",
     "_source": "authored",
     "references": [
       {
@@ -958,36 +958,80 @@ export const ROUND_49: QuizQuestion[] = [
     "round": 49,
     "subject": "2과목",
     "number": 24,
-    "title": "아래 결과(첫 행은 0, 그 이후 직전 행 값) 를 반환하는 윈도우 함수로 옳은 것은?",
+    "title": "아래 결과(부서마다 첫 행은 0, 그 뒤는 같은 부서 직전 행 값)를 반환하는 윈도우 함수로 옳은 것은?",
     "options": [
-      "LEAD(COL1, 1, 0) OVER(ORDER BY COL1)",
-      "LAG(COL1, 1, NULL) OVER(ORDER BY COL1)",
+      "LEAD(COL1, 1, 0) OVER(PARTITION BY DEPT ORDER BY COL1)",
       "LAG(COL1, 1, 0) OVER(ORDER BY COL1)",
-      "FIRST_VALUE(COL1) OVER(ORDER BY COL1)"
+      "LAG(COL1, 1, 0) OVER(PARTITION BY DEPT ORDER BY COL1)",
+      "LAG(COL1, 2, 0) OVER(PARTITION BY DEPT ORDER BY COL1)"
     ],
     "correctIndex": 2,
-    "explanation": "LAG(COL1, 1, 0) 은 한 행 앞의 COL1 값을 가져오고, 앞 행이 없는 첫 행에는 세 번째 인자로 준 0 을 돌려준다. 그래서 결과가 0, 100, 200 이다(③). ① LEAD 는 다음 행 값을 가져와 200, 300, 0 이 되고, ② 는 기본값이 NULL 이라 첫 행이 NULL 이며, ④ FIRST_VALUE 는 모든 행에 첫 값 100 을 돌려준다.",
+    "explanation": "LAG(칼럼, n, 기본값) 은 n 행 앞의 값을 가져오고 앞 행이 없으면 기본값을 돌려준다. 부서마다 따로 세려면 PARTITION BY DEPT 가 있어야 한다. 정답은 ③번이다. ② 는 부서 구분 없이 COL1 순(100, 150, 200, 250, 300)으로 보므로 A-200 이 150, B-150 이 100 이 된다. ④ 는 두 행 앞이라 A-200 이 0, A-300 이 100 이 된다. ① LEAD 는 다음 행 값이라 A-100 이 200 이 된다.",
     "_source": "authored",
     "references": [
       {
         "type": "table",
-        "caption": "출력 결과 (COL1, 함수 결과)",
+        "caption": "T 테이블",
         "headers": [
-          "COL1",
-          "함수 결과"
+          "DEPT",
+          "COL1"
         ],
         "rows": [
           [
+            "A",
+            "100"
+          ],
+          [
+            "A",
+            "200"
+          ],
+          [
+            "A",
+            "300"
+          ],
+          [
+            "B",
+            "150"
+          ],
+          [
+            "B",
+            "250"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "출력 결과 (DEPT, COL1 순)",
+        "headers": [
+          "DEPT",
+          "COL1",
+          "결과"
+        ],
+        "rows": [
+          [
+            "A",
             "100",
             "0"
           ],
           [
+            "A",
             "200",
             "100"
           ],
           [
+            "A",
             "300",
             "200"
+          ],
+          [
+            "B",
+            "150",
+            "0"
+          ],
+          [
+            "B",
+            "250",
+            "150"
           ]
         ]
       }

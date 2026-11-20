@@ -621,13 +621,14 @@
       "number": 20,
       "title": "명령어와 분류가 올바르게 짝지어지지 않은 것은?",
       "options": [
-        "INSERT — DCL",
-        "SELECT — DML",
-        "CREATE — DDL",
-        "GRANT — DCL"
+        "REVOKE — TCL",
+        "MERGE — DML",
+        "SAVEPOINT — TCL",
+        "RENAME — DDL"
       ],
       "correctIndex": 0,
-      "explanation": "INSERT 는 DML 이므로 DCL 과 짝지어지지 않는다. ② SELECT 도 SQLD 에서는 DML(데이터 조회)로 분류한다. ③ CREATE 는 DDL, ④ GRANT 는 DCL 로 맞게 짝지어졌다."
+      "explanation": "REVOKE 는 GRANT 로 준 권한을 회수하는 명령이라 DCL(데이터 제어어)이다. TCL 로 짝지은 ① 이 틀렸다. 정답은 ①번이다. ② MERGE 는 조건에 따라 INSERT·UPDATE 를 함께 하는 DML 이다. ③ SAVEPOINT 는 COMMIT·ROLLBACK 과 함께 트랜잭션을 다루는 TCL 이다. ④ RENAME 은 객체 이름을 바꾸는 DDL 이다. 분류가 중요한 이유: Oracle 에서 DDL·DCL 은 실행 전후로 자동 COMMIT 되어 ROLLBACK 으로 되돌릴 수 없다.",
+      "references": []
     },
     {
       "subject": "2과목",

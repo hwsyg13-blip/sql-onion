@@ -481,20 +481,34 @@ export const ROUND_46: QuizQuestion[] = [
     "round": 46,
     "subject": "2과목",
     "number": 12,
-    "title": "아래 네 SQL 중 COL이 NULL일 때 반환 결과가 나머지와 다른 것은?",
+    "title": "COL 값이 NULL, 'A', 'B' 인 세 행에 대해 결과가 나머지와 다른 식은?",
     "options": [
-      "IFNULL(COL, 'value')",
-      "NVL(COL, 'value')",
-      "COALESCE(COL, 'value')",
-      "NULLIF(COL, 'value')"
+      "NVL(COL, 'A')",
+      "COALESCE(COL, 'A')",
+      "CASE WHEN COL IS NULL THEN 'A' ELSE COL END",
+      "NULLIF(COL, 'A')"
     ],
     "correctIndex": 3,
-    "explanation": "COL 이 NULL 이면 IFNULL·NVL·COALESCE(①②③)는 모두 대체값 'value' 를 반환한다. NULLIF(COL, 'value') 는 두 값이 같으면 NULL, 다르면 첫 번째 값을 반환하므로 COL 이 NULL 이면 NULL 을 반환한다(④). 결과가 다른 것은 ④ 다.",
+    "explanation": "①·②·③ 은 모두 COL 이 NULL 이면 'A', 아니면 COL 을 돌려주므로 결과가 A, A, B 로 같다. NULLIF(COL, 'A') 는 두 값이 같으면 NULL, 다르면 COL 을 돌려준다. COL 이 NULL 이면 비교 결과가 참이 아니므로 COL 인 NULL 을, 'A' 이면 NULL 을, 'B' 이면 B 를 돌려준다. 결과가 NULL, NULL, B 라 ④ 가 다르다. 정답은 ④번이다.",
     "_source": "authored",
     "references": [
       {
-        "type": "sql",
-        "code": "-- ① IFNULL(COL, 'value')\n-- ② NVL(COL, 'value')\n-- ③ COALESCE(COL, 'value')\n-- ④ NULLIF(COL, 'value')"
+        "type": "table",
+        "caption": "T 테이블",
+        "headers": [
+          "COL"
+        ],
+        "rows": [
+          [
+            "NULL"
+          ],
+          [
+            "A"
+          ],
+          [
+            "B"
+          ]
+        ]
       }
     ]
   },
@@ -559,20 +573,60 @@ export const ROUND_46: QuizQuestion[] = [
     "round": 46,
     "subject": "2과목",
     "number": 14,
-    "title": "두 SQL의 결과 집합에 대한 설명으로 옳은 것은?",
+    "title": "아래 두 테이블에 대해 UNION ALL 과 UNION 으로 합친 결과의 행 수로 옳은 것은?",
     "options": [
-      "두 SQL의 결과는 항상 동일하다.",
-      "UNION ALL은 중복을 제거하지 않고, UNION은 중복을 제거한다.",
-      "UNION은 정렬을 수행하지 않으므로 성능이 더 좋다.",
-      "UNION ALL은 서로 다른 컬럼 수를 가진 집합도 결합할 수 있다."
+      "UNION ALL 5행, UNION 4행",
+      "UNION ALL 5행, UNION 3행",
+      "UNION ALL 4행, UNION 3행",
+      "UNION ALL 5행, UNION 5행"
     ],
     "correctIndex": 1,
-    "explanation": "UNION ALL 은 두 결과를 그대로 이어 붙여 중복을 남기고, UNION 은 합친 뒤 중복을 제거한다(②). 두 테이블에 같은 행이 있으면 결과가 달라지므로 ① 은 틀렸다. ③ UNION 은 중복을 없애려고 정렬·비교를 더 하므로 오히려 느리고, ④ 집합 연산은 UNION ALL 이든 UNION 이든 컬럼 수가 같아야 한다.",
+    "explanation": "UNION ALL 은 중복을 그대로 두어 3 + 2 = 5행이다. UNION 은 두 집합 사이의 중복뿐 아니라 한 테이블 안의 중복도 없애고 결과 전체에서 서로 다른 행만 남긴다. (1, a), (2, b), (3, c) 세 행이다. 정답은 ②번이다. ① 의 4행은 TAB1 안의 (1, a) 두 행을 그대로 두고 두 테이블 사이의 (2, b) 만 지웠다고 본 것이다.",
     "_source": "authored",
     "references": [
       {
+        "type": "table",
+        "caption": "TAB1",
+        "headers": [
+          "A",
+          "B"
+        ],
+        "rows": [
+          [
+            "1",
+            "a"
+          ],
+          [
+            "1",
+            "a"
+          ],
+          [
+            "2",
+            "b"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "TAB2",
+        "headers": [
+          "A",
+          "B"
+        ],
+        "rows": [
+          [
+            "2",
+            "b"
+          ],
+          [
+            "3",
+            "c"
+          ]
+        ]
+      },
+      {
         "type": "sql",
-        "code": "SELECT A, B, C FROM TAB1\nUNION ALL\nSELECT A, B, C FROM TAB2;\n\nSELECT A, B, C FROM TAB1\nUNION\nSELECT A, B, C FROM TAB2;"
+        "code": "SELECT A, B FROM TAB1\nUNION ALL\nSELECT A, B FROM TAB2;\n\nSELECT A, B FROM TAB1\nUNION\nSELECT A, B FROM TAB2;"
       }
     ]
   },

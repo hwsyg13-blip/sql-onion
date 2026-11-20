@@ -475,15 +475,15 @@
     {
       "subject": "2과목",
       "number": 18,
-      "title": "아래 EMP 테이블에서 가장 큰 EMPNO 한 건을 반환하는 TOP-N 질의로 가장 대표적으로 사용되는 방식은?",
+      "title": "Oracle 에서 아래 ㉠, ㉡ 의 결과로 옳은 것은? (EMP 는 표의 순서대로 읽힌다고 가정)",
       "options": [
-        "ROWNUM",
-        "FETCH FIRST",
-        "TOP WITH TIES",
-        "TOP"
+        "㉠ 7369, ㉡ 7934",
+        "㉠ 7934, ㉡ 7934",
+        "㉠ 7369, ㉡ 7369",
+        "㉠ 7934, ㉡ 7369"
       ],
       "correctIndex": 0,
-      "explanation": "Oracle 에서 가장 일반적인 TOP-N 기법은 인라인 뷰에서 정렬한 뒤 외부에서 `ROWNUM` 으로 행 개수를 제한하는 방식. ② `FETCH FIRST` 는 12c 이상 지원하는 ANSI 형식이지만 빈칸 위치(`( ? ) = 1`) 와 맞지 않는다. ③④ `TOP` 은 SQL Server 문법이라 Oracle 에서 동작하지 않는다.",
+      "explanation": "ROWNUM 은 WHERE 절에서 행을 읽는 순서대로 붙고, ORDER BY 는 그 뒤에 실행된다. ㉠ 은 먼저 읽힌 7369 한 행만 남긴 뒤 그 한 행을 정렬하므로 7369 다. ㉡ 은 인라인 뷰 안에서 EMPNO 내림차순으로 먼저 정렬한 뒤 바깥에서 ROWNUM = 1 을 거르므로 가장 큰 7934 가 나온다. 정답은 ①번이다. Oracle 에서 Top-N 을 ROWNUM 으로 구할 때는 ㉡ 처럼 정렬을 인라인 뷰 안에 넣어야 한다. 12c 이상에서는 ORDER BY EMPNO DESC FETCH FIRST 1 ROWS ONLY 로도 같은 결과를 얻는다.",
       "references": [
         {
           "type": "table",
@@ -517,7 +517,7 @@
         },
         {
           "type": "sql",
-          "code": "SELECT EMPNO\nFROM   (SELECT EMPNO FROM EMP\n         ORDER BY EMPNO DESC)\nWHERE  (  ?  ) = 1;"
+          "code": "-- ㉠\nSELECT EMPNO\nFROM   EMP\nWHERE  ROWNUM = 1\nORDER  BY EMPNO DESC;\n\n-- ㉡\nSELECT EMPNO\nFROM  (SELECT EMPNO\n       FROM   EMP\n       ORDER  BY EMPNO DESC)\nWHERE  ROWNUM = 1;"
         }
       ]
     },

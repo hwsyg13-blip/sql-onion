@@ -877,19 +877,82 @@
     {
       "subject": "2과목",
       "number": 25,
-      "title": "아래 결과를 얻기 위한 GROUP BY 절로 적절하지 않은 것은?",
+      "title": "아래 T 테이블로 출력 결과를 얻으려 한다. SELECT A, B, SUM(V) FROM T 뒤에 올 GROUP BY 절로 적절하지 않은 것은? (정렬은 무시)",
       "options": [
         "GROUP BY ROLLUP(A, B)",
-        "GROUP BY GROUPING SETS( (A), (A, B), () )",
-        "GROUP BY A, B UNION ALL GROUP BY A UNION ALL GROUP BY ()",
-        "GROUP BY GROUPING SETS( (A), (A, B) )"
+        "GROUP BY GROUPING SETS((A, B), A, ())",
+        "GROUP BY CUBE(A, B) HAVING NOT (GROUPING(A) = 1 AND GROUPING(B) = 0)",
+        "GROUP BY A, ROLLUP(B)"
       ],
       "correctIndex": 3,
-      "explanation": "필요한 결과는 A 소계, (A, B) 합계, 전체 합계 세 가지다. ROLLUP(A, B)(①)는 (A, B), (A), () 를 만들고, ② GROUPING SETS((A), (A, B), ()) 와 ③ 세 GROUP BY 결과를 UNION ALL 한 것도 같은 세 그룹을 만든다. ④ GROUPING SETS((A), (A, B)) 는 전체 합계 그룹 () 가 빠져 결과가 다르다.",
+      "explanation": "결과에는 (A, B) 합계, A 소계, 전체 합계가 있다. ① ROLLUP(A, B) 와 ② GROUPING SETS((A, B), A, ()) 는 이 세 묶음을 그대로 만든다. ③ CUBE(A, B) 는 (A, B), A, B, 전체 네 묶음을 만드는데, HAVING 으로 B 만의 소계(GROUPING(A) = 1, GROUPING(B) = 0)를 빼면 나머지 세 묶음이 남아 같다. ④ A, ROLLUP(B) 는 A 를 항상 묶은 채 (A, B) 와 A 만 만들어 전체 합계 35 행이 없다. 정답은 ④번이다.",
       "references": [
         {
-          "type": "text",
-          "content": "A 단위 소계와 (A, B) 단위 합계, 그리고 전체 합계가 함께 도출되어야 한다."
+          "type": "table",
+          "caption": "T 테이블",
+          "headers": [
+            "A",
+            "B",
+            "V"
+          ],
+          "rows": [
+            [
+              "X",
+              "p",
+              "10"
+            ],
+            [
+              "X",
+              "q",
+              "20"
+            ],
+            [
+              "Y",
+              "p",
+              "5"
+            ]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "출력 결과",
+          "headers": [
+            "A",
+            "B",
+            "SUM(V)"
+          ],
+          "rows": [
+            [
+              "X",
+              "p",
+              "10"
+            ],
+            [
+              "X",
+              "q",
+              "20"
+            ],
+            [
+              "X",
+              "NULL",
+              "30"
+            ],
+            [
+              "Y",
+              "p",
+              "5"
+            ],
+            [
+              "Y",
+              "NULL",
+              "5"
+            ],
+            [
+              "NULL",
+              "NULL",
+              "35"
+            ]
+          ]
         }
       ]
     },
