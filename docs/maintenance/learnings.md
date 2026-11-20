@@ -220,3 +220,4 @@
 - (11-20) gtag config 에 debug_mode: false 를 넘겨도 GA4 는 디버그 이벤트로 받는다. 디버그가 아닐 때는 매개변수 자체를 빼야 한다(#330). BigQuery 에서 event_params 에 debug_mode 키가 있는 비율로 확인.
 - (11-20) 정답률 분석은 문항을 고친 날 이후 이벤트만 써야 한다. 11-14 시험일 이벤트가 대부분이라 그 뒤 바뀐 문항은 판단 불가. question_answer 의 chosen 은 1부터 세는 보기 번호.
 - (11-20) 전 회차 390px 자동 점검: scratchpad/scan390.cjs(ROUNDS=60,61 처럼 일부만 가능). 표 넘침은 table.scrollWidth > 부모 clientWidth 로 잡히지만, 코드 블록은 줄이 접힐 뿐 넘치지 않아 이 방법으로는 안 잡힌다 → JSON 에서 줄 너비(한글 2칸)로 따로 센다.
+- (11-20) SQL 줄 나누기 자동화는 품질이 나빠(튜플·ORDER BY 표현식을 가름) 손으로 했다. 손으로 할 때 scratchpad/sqlfix_lib.py 의 recode(공백 뺀 문자열 동일 확인)·rl(줄 단위 치환, 원래 들여쓰기 유지)·medit(모의고사 풀 _id 로 수정)을 쓰면 빠르고 안전하다. rl 은 다시 돌리면 이미 바뀐 줄을 못 찾아 FAIL 을 찍지만 해는 없다.
