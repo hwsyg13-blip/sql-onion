@@ -630,13 +630,13 @@ export const ROUND_50: QuizQuestion[] = [
     "number": 17,
     "title": "카테고리번호 11 에서 상위 카테고리까지 역방향으로 조회하는 계층형 SQL 로 옳은 것은?",
     "options": [
-      "START WITH 카테고리번호=11 CONNECT BY PRIOR 카테고리번호=상위카테고리번호",
-      "START WITH 카테고리번호=11 CONNECT BY 카테고리번호=PRIOR 상위카테고리번호",
-      "START WITH 상위카테고리번호=11 CONNECT BY PRIOR 카테고리번호=상위카테고리번호",
-      "START WITH 카테고리번호=11 CONNECT BY 상위카테고리번호=PRIOR 상위카테고리번호"
+      "START WITH 카테고리번호=11 CONNECT BY PRIOR 카테고리번호=상위번호",
+      "START WITH 카테고리번호=11 CONNECT BY 카테고리번호=PRIOR 상위번호",
+      "START WITH 상위번호=11 CONNECT BY PRIOR 카테고리번호=상위번호",
+      "START WITH 카테고리번호=11 CONNECT BY 상위번호=PRIOR 상위번호"
     ],
     "correctIndex": 1,
-    "explanation": "자식에서 부모로 올라가는 역방향 전개다. CONNECT BY 에서 PRIOR 가 붙은 컬럼은 '바로 앞에 찾은 행' 의 값이다. ② `카테고리번호 = PRIOR 상위카테고리번호` 는 앞에 찾은 행(11)의 상위카테고리번호(5)와 카테고리번호가 같은 행을 다음으로 찾으므로 11 → 5 → 2 → 1 순으로 거슬러 올라간다. ① 은 11 을 상위로 둔 자식을 찾는 순방향이라 11 한 행만 나오고, ③ 은 상위카테고리번호가 11 인 행이 없어 결과가 없으며, ④ 는 상위카테고리번호끼리 비교해 부모를 찾지 못한다.",
+    "explanation": "자식에서 부모로 올라가는 역방향 전개다. CONNECT BY 에서 PRIOR 가 붙은 컬럼은 '바로 앞에 찾은 행' 의 값이다. ② `카테고리번호 = PRIOR 상위번호` 는 앞에 찾은 행(11)의 상위번호(5)와 카테고리번호가 같은 행을 다음으로 찾으므로 11 → 5 → 2 → 1 순으로 거슬러 올라간다. ① 은 11 을 상위로 둔 자식을 찾는 순방향이라 11 한 행만 나오고, ③ 은 상위번호가 11 인 행이 없어 결과가 없으며, ④ 는 상위번호끼리 비교해 부모를 찾지 못한다.",
     "_source": "authored",
     "references": [
       {
@@ -645,7 +645,7 @@ export const ROUND_50: QuizQuestion[] = [
         "headers": [
           "카테고리번호",
           "카테고리명",
-          "상위카테고리번호"
+          "상위번호"
         ],
         "rows": [
           [
