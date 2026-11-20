@@ -28519,15 +28519,15 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "1과목",
     "number": 862,
-    "title": "논리적 데이터 모델링 단계에서 수행하는 주요 작업은 무엇인가?",
+    "title": "논리적 데이터 모델링 단계에서 수행하는 작업으로 가장 적절한 것은?",
     "options": [
-      "속성 정제 및 도메인 정의",
-      "테이블 생성",
-      "화면 설계",
-      "하드웨어 구조 분석"
+      "정규화를 하고 식별자·속성·관계를 확정한다.",
+      "테이블스페이스와 인덱스를 설계한다.",
+      "업무의 핵심 엔터티와 관계만 크게 그린다.",
+      "사용할 DBMS 제품과 서버 사양을 정한다."
     ],
     "correctIndex": 0,
-    "explanation": "논리적 모델링은 개념 모델을 바탕으로 속성을 자세히 정하고(속성 정제), 도메인을 정의하며, 정규화로 구조를 다듬는 단계다(①). 실제 테이블 생성은 물리 모델링 이후의 일이고, 화면 설계·하드웨어 분석은 데이터 모델링의 작업이 아니다.",
+    "explanation": "논리적 모델링은 개념 모델을 구체화해 정규화를 수행하고, 주식별자·속성·관계를 확정하는 단계다. 이 결과를 '데이터 모델링이 완료된 상태' 라고도 한다. 정답은 ①번이다. 핵심 엔터티와 관계만 크게 그리는 것은 개념적 모델링이고, 테이블스페이스·인덱스와 DBMS 특성에 맞춘 설계는 물리적 모델링이다.",
     "chapter": "데이터 모델링 기법",
     "_source": "sqld-1140",
     "_origId": "sqld-0803",
@@ -33888,19 +33888,25 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 988,
-    "title": "WITH GRANT OPTION이 있는 권한의 특징으로 옳은 것은?",
+    "title": "사용자 A 가 아래처럼 권한을 주었다. 설명으로 옳은 것은?",
     "options": [
-      "권한을 받은 사용자가 다른 사용자에게 같은 권한을 다시 부여할 수 있다.",
-      "권한을 절대 회수할 수 없다.",
-      "DDL 실행만 가능해진다.",
-      "트랜잭션이 자동 커밋되지 않는다."
+      "B 는 받은 SELECT 권한을 C 에게 다시 줄 수 있다.",
+      "B 는 받은 권한만으로 A.EMP 에 INSERT 도 할 수 있다.",
+      "WITH GRANT OPTION 으로 준 권한은 A 도 회수할 수 없다.",
+      "B 가 C 에게 권한을 주려면 DBA 가 따로 승인해야 한다."
     ],
     "correctIndex": 0,
-    "explanation": "WITH GRANT OPTION 으로 객체 권한을 받은 사용자는 그 권한을 다른 사용자에게 다시 부여할 수 있다. 권한은 언제든 REVOKE 로 회수할 수 있으며(오라클은 이 경우 다시 부여된 권한도 함께 회수), DDL 이나 트랜잭션과는 관계없다.",
+    "explanation": "WITH GRANT OPTION 은 받은 객체 권한을 다른 사용자에게 다시 줄 수 있게 하는 옵션이다. B 는 SELECT 를 C 에게 줄 수 있다. 정답은 ①번이다. 객체 권한은 종류별로 주므로 SELECT 만 받은 B 는 INSERT 를 할 수 없다. 권한을 준 A 는 REVOKE 로 회수할 수 있고, Oracle 에서는 이때 B 가 C 에게 준 권한도 함께 회수된다. B 가 다시 줄 때 DBA 승인은 필요 없다.",
     "chapter": "DCL·TCL",
     "_source": "sqld-1140",
     "_origId": "sqld-0964",
-    "_category": "DCL"
+    "_category": "DCL",
+    "references": [
+      {
+        "type": "sql",
+        "code": "GRANT SELECT ON A.EMP TO B\n  WITH GRANT OPTION;"
+      }
+    ]
   },
   {
     "id": 11788,
@@ -35076,15 +35082,15 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "1과목",
     "number": 1036,
-    "title": "UNIQUE 제약과 PRIMARY KEY의 차이로 옳은 것은?",
+    "title": "UNIQUE 제약과 PRIMARY KEY 의 차이로 옳은 것은? (Oracle 기준)",
     "options": [
-      "UNIQUE는 NULL을 절대 허용할 수 없다.",
-      "PRIMARY KEY는 중복을 허용한다.",
-      "PRIMARY KEY는 테이블당 하나이며 NULL을 허용하지 않는다.",
-      "UNIQUE는 참조 무결성만 보장한다."
+      "UNIQUE 칼럼에는 NULL 을 넣을 수 없다.",
+      "PRIMARY KEY 는 여러 칼럼을 묶어 만들 수 없다.",
+      "PRIMARY KEY 는 테이블에 하나만 두고 NULL 을 허용하지 않지만, UNIQUE 는 여러 개 둘 수 있고 NULL 을 허용한다.",
+      "UNIQUE 제약을 두면 그 칼럼은 자동으로 다른 테이블을 참조하는 외래키가 된다."
     ],
     "correctIndex": 2,
-    "explanation": "UNIQUE는 여러 개 존재할 수 있고 DBMS에 따라 NULL 처리 규칙이 다르지만, PK는 대표 식별자로 NULL을 허용하지 않는다.",
+    "explanation": "PRIMARY KEY 는 UNIQUE + NOT NULL 이며 테이블당 하나다. UNIQUE 는 테이블에 여러 개 둘 수 있고 NULL 을 허용한다(NULL 끼리는 같은 값으로 보지 않아 여러 행에 NULL 이 들어갈 수 있다). 정답은 ③번이다. PRIMARY KEY 는 (주문번호, 순번) 처럼 여러 칼럼을 묶은 복합키로도 만들 수 있다. 다른 테이블을 참조하는 것은 FOREIGN KEY 제약이며, UNIQUE 와는 다른 제약이다.",
     "chapter": "데이터 무결성",
     "_source": "sqld-1140",
     "_origId": "sqld-1019",
@@ -35957,15 +35963,15 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 1061,
-    "title": "뷰를 사용하는 주요 목적으로 적절한 것은?",
+    "title": "뷰(VIEW)를 사용하는 목적과 특징으로 옳은 것은?",
     "options": [
-      "반드시 모든 테이블을 하나로 합치는 것",
-      "인덱스 유지 비용을 없애는 것",
-      "모든 트랜잭션을 자동 COMMIT 하는 것",
-      "복잡한 SQL을 단순화하고 필요한 컬럼만 노출하는 것"
+      "뷰를 만들면 결과가 따로 저장되어 조회가 항상 빨라진다.",
+      "뷰를 통해서는 어떤 경우에도 INSERT·UPDATE 를 할 수 없다.",
+      "기준 테이블을 지워도 뷰는 마지막 결과로 계속 조회된다.",
+      "복잡한 조인을 숨겨 SQL 을 단순하게 하고, 필요한 칼럼만 보여 줘 보안에 도움이 된다."
     ],
     "correctIndex": 3,
-    "explanation": "뷰는 복잡한 조인·조건을 정의해 두고 간단히 조회하게 해 주며(편리성), 필요한 컬럼만 보여 주어 민감한 정보를 숨길 수 있다(보안성). 테이블을 합치거나 인덱스 비용을 없애거나 COMMIT 하는 기능은 없다.",
+    "explanation": "뷰는 SELECT 문을 저장한 가상 테이블이다. 복잡한 조인을 숨겨 쓰기 쉽게 하고(편리성), 보여 줄 칼럼만 골라 노출해 보안에 쓴다. 정답은 ④번이다. 뷰는 결과를 저장하지 않으므로 조회할 때마다 기준 테이블을 읽는다(결과를 저장하는 것은 머티리얼라이즈드 뷰다). 한 테이블의 칼럼을 그대로 보여 주는 단순 뷰는 DML 이 가능하다. 기준 테이블을 지우면 뷰를 조회할 때 오류가 난다.",
     "chapter": "View",
     "_source": "sqld-1140",
     "_origId": "sqld-1050",
@@ -37619,15 +37625,15 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 1264,
-    "title": "상관 서브쿼리의 특징으로 옳은 것은?",
+    "title": "상관(연관) 서브쿼리의 특징으로 옳은 것은?",
     "options": [
-      "FROM 절에서만 작성 가능하다.",
-      "JOIN으로 절대 변환할 수 없다.",
-      "항상 1회만 수행된다.",
-      "외부 쿼리의 각 행을 기준으로 서브쿼리가 반복 평가될 수 있다."
+      "FROM 절에서만 쓸 수 있다.",
+      "같은 결과를 JOIN 으로 바꿔 쓰는 것은 불가능하다.",
+      "바깥 쿼리의 행 수와 관계없이 서브쿼리는 한 번만 실행된다.",
+      "바깥 쿼리의 칼럼을 참조하므로 바깥 쿼리의 각 행을 기준으로 서브쿼리가 반복 평가될 수 있다."
     ],
     "correctIndex": 3,
-    "explanation": "상관(연관) 서브쿼리는 메인쿼리의 컬럼을 참조하므로 메인쿼리의 각 행마다 서브쿼리가 다시 평가될 수 있다. WHERE·SELECT 절 등 어디에나 쓸 수 있고, 같은 결과를 JOIN 으로 바꿔 쓸 수도 있다.",
+    "explanation": "상관 서브쿼리는 서브쿼리 안에서 바깥 쿼리의 칼럼을 참조하는 서브쿼리라, 바깥 행마다 그 값을 넣어 다시 평가된다. 정답은 ④번이다. 주로 WHERE 절(EXISTS 등)이나 SELECT 절(스칼라 서브쿼리)에 쓰며 FROM 절에만 쓰는 것이 아니다. 많은 경우 JOIN 이나 인라인 뷰로 바꿔 쓸 수 있다. 바깥 칼럼을 참조하지 않는 비연관 서브쿼리가 한 번 실행되는 쪽이다.",
     "chapter": "서브쿼리",
     "_source": "sqld-1140",
     "_origId": "sqld-1294",
