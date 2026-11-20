@@ -1109,3 +1109,5 @@ ERD 선 표기 정리 2차(11-20 14시): 식별자를 다루는 1과목 문항�
 | cbt-176 | FULL OUTER 결과, Oracle (+) 양쪽 불가 | 일반 설명 → 데이터 결과 | ③ | PostgreSQL 실행 + Oracle 규칙(ORA-01468) |
 | cbt-185 | LENGTH 는 공백·한글도 한 글자, 음수 SUBSTR, 날짜 차, INSTR n번째 | 영문 LENGTH 하나 → 함수 4개 | ① | Oracle 규칙(2025년 2월 28일 확인) |
 | cbt-139 | ROWNUM > 1 은 0행, 조건 통과 뒤 ROWNUM | 잘못된 사용 → 0행 찾기 | ③ | Oracle 규칙 |
+| cbt-091 | 네 집합 연산자의 중복 처리와 행 수 | 정의 문장 → 데이터 행 수 | ① | PostgreSQL 실행(7, 4, 2, 1) |
+| cbt-141 | EQUI JOIN 은 PK·FK 불필요, NON-EQUI·OUTER 결과 | 정의 문장 → SALGRADE 사례 | ② | PostgreSQL 실행(2행, LEFT 3행, = 조인 0행) |

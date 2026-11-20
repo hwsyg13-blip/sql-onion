@@ -2881,15 +2881,56 @@
       "_origNo": 91,
       "subject": "2과목",
       "chapter": "집합 연산자",
-      "title": "다음 설명 중 올바르지 않은 것은?",
+      "title": "아래 A, B 의 V 칼럼에 집합 연산자를 썼을 때 결과 행 수로 올바르지 않은 것은? (SELECT V FROM A 연산자 SELECT V FROM B)",
       "options": [
-        "UNION ALL 연산자는 조회 결과를 정렬하고 중복되는 데이터를 한 번만 표현한다.",
-        "UNION 연산자는 조회 결과에 대한 합집합을 나타내며 자동으로 정렬을 해준다.",
-        "INTERSECT 연산자는 조회 결과에 대한 교집합을 의미한다.",
-        "EXCEPT 연산자는 조회 결과에 대한 차집합을 의미한다."
+        "UNION ALL — 4행",
+        "UNION — 4행",
+        "INTERSECT — 2행",
+        "EXCEPT(Oracle 은 MINUS) — 1행"
       ],
       "correctIndex": 0,
-      "explanation": "UNION ALL 은 정렬도 중복 제거도 하지 않고 결과를 그대로 이어 붙인다. '정렬하고 중복을 한 번만 표현한다' 는 ① 은 UNION 의 설명이라 틀렸다. ② UNION 은 중복 제거 과정에서 정렬되고, ③ INTERSECT 는 교집합, ④ EXCEPT 는 차집합이다."
+      "explanation": "UNION ALL 은 중복을 그대로 두고 이어 붙이므로 4 + 3 = 7행이다. 정답은 ①번이다. ② UNION 은 전체에서 중복을 없애 1, 2, 3, 4 네 행이다. ③ INTERSECT 는 양쪽에 다 있는 2, 3 두 행이다. ④ EXCEPT(MINUS)는 A 에만 있는 값을 중복 없이 남겨 1 한 행이다. UNION·INTERSECT·EXCEPT 는 중복을 없애고, UNION ALL 만 중복을 남긴다.",
+      "references": [
+        {
+          "type": "table",
+          "caption": "A",
+          "headers": [
+            "V"
+          ],
+          "rows": [
+            [
+              "1"
+            ],
+            [
+              "1"
+            ],
+            [
+              "2"
+            ],
+            [
+              "3"
+            ]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "B",
+          "headers": [
+            "V"
+          ],
+          "rows": [
+            [
+              "2"
+            ],
+            [
+              "3"
+            ],
+            [
+              "4"
+            ]
+          ]
+        }
+      ]
     },
     {
       "_id": "cbt-092",
@@ -4502,15 +4543,69 @@
       "_origNo": 141,
       "subject": "2과목",
       "chapter": "표준 조인",
-      "title": "JOIN의 종류에 대한 설명으로 틀린 것은 무엇인가?",
+      "title": "아래 EMP, SALGRADE 와 SQL 에 대한 설명으로 틀린 것은?",
       "options": [
-        "NON-EQUI JOIN은 등가 조건이 성립되지 않은 테이블에 JOIN을 걸어주는 방법이다.",
-        "EQUI JOIN은 반드시 기본키, 외래키 관계에 의해서만 성립된다.",
-        "OUTER JOIN은 JOIN 조건을 만족하지 않는 데이터도 볼 수 있는 JOIN 방법이다.",
-        "SELF JOIN은 하나의 테이블을 논리적으로 분리시켜 EQUI JOIN을 이용하는 방법이다."
+        "등호가 아닌 BETWEEN 으로 잇는 NON-EQUI JOIN 이며 결과는 A, B 두 행이다.",
+        "EQUI JOIN 은 PK·FK 관계인 칼럼끼리만 쓸 수 있어 ON E.SAL = S.LOSAL 로 바꾸면 오류다.",
+        "LEFT OUTER JOIN 으로 바꾸면 범위에 맞는 등급이 없는 C 도 GRADE 가 NULL 로 나온다.",
+        "SELF JOIN 은 한 테이블에 별칭을 두 개 주어 서로 다른 테이블처럼 조인한다."
       ],
       "correctIndex": 1,
-      "explanation": "EQUI JOIN 은 = 조건으로 잇는 조인일 뿐, 기본키·외래키 관계가 꼭 필요하지는 않다. 값이 같은 칼럼이면 어떤 칼럼이든 쓸 수 있으므로 ② 가 틀렸다. ① NON-EQUI JOIN 은 BETWEEN·> 같은 조건, ③ OUTER JOIN 은 짝 없는 행도 남김, ④ SELF JOIN 은 한 테이블을 별칭 둘로 나눠 조인한다."
+      "explanation": "EQUI JOIN 은 = 로 잇는 조인일 뿐 PK·FK 관계가 꼭 필요하지 않다. ON E.SAL = S.LOSAL 도 오류 없이 실행되고, 값이 같은 행이 없어 결과만 0행이다. 정답은 ②번이다. ① BETWEEN 처럼 = 가 아닌 조건으로 잇는 것이 NON-EQUI JOIN 이고, 3500 인 C 는 어느 범위에도 없어 A(1), B(2) 두 행이다. ③ OUTER JOIN 은 조건에 맞지 않는 쪽 행도 NULL 로 채워 보여 준다. ④ 는 SELF JOIN 의 설명이다.",
+      "references": [
+        {
+          "type": "table",
+          "caption": "EMP",
+          "headers": [
+            "ENAME",
+            "SAL"
+          ],
+          "rows": [
+            [
+              "A",
+              "800"
+            ],
+            [
+              "B",
+              "1500"
+            ],
+            [
+              "C",
+              "3500"
+            ]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "SALGRADE",
+          "headers": [
+            "GRADE",
+            "LOSAL",
+            "HISAL"
+          ],
+          "rows": [
+            [
+              "1",
+              "700",
+              "1200"
+            ],
+            [
+              "2",
+              "1201",
+              "2000"
+            ],
+            [
+              "3",
+              "2001",
+              "3000"
+            ]
+          ]
+        },
+        {
+          "type": "sql",
+          "code": "SELECT E.ENAME, S.GRADE\nFROM   EMP E\nJOIN   SALGRADE S\n  ON   E.SAL BETWEEN S.LOSAL\n                 AND S.HISAL;"
+        }
+      ]
     },
     {
       "_id": "cbt-142",
