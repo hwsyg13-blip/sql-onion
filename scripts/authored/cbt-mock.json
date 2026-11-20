@@ -50,7 +50,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT NAME, ROW_NUMBER() OVER (ORDER BY SCORE DESC) AS RN\nFROM TB_SCORE;"
+          "code": "SELECT NAME,\n       ROW_NUMBER() OVER (\n         ORDER BY SCORE DESC) AS RN\nFROM TB_SCORE;"
         },
         {
           "type": "table",
@@ -126,7 +126,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT COUNT(SALARY), SUM(SALARY),AVG(SALARY)\nFROM EMPLOYEE;"
+          "code": "SELECT COUNT(SALARY), SUM(SALARY),\n       AVG(SALARY)\nFROM EMPLOYEE;"
         },
         {
           "type": "table",
@@ -255,7 +255,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT COUNT(NULL), COUNT(*), COUNT(1) FROM TAB;"
+          "code": "SELECT COUNT(NULL), COUNT(*), COUNT(1)\nFROM TAB;"
         }
       ]
     },
@@ -331,7 +331,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "WITH REGION_TOTAL AS (SELECT REGION, SUM(AMOUNT) AS TOTAL\nFROM TB_ORDER\nGROUP BY REGION)\nSELECT COUNT(*) FROM REGION_TOTAL\nWHERE TOTAL > 1500;"
+          "code": "WITH REGION_TOTAL AS\n  (SELECT REGION,\n          SUM(AMOUNT) AS TOTAL\nFROM TB_ORDER\nGROUP BY REGION)\nSELECT COUNT(*) FROM REGION_TOTAL\nWHERE TOTAL > 1500;"
         },
         {
           "type": "table",
@@ -611,7 +611,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT NAME, GRADE, STATUS\nFROM TB_USER\nWHERE GRADE = 'A' OR GRADE = 'B' AND STATUS = 'ACTIVE';"
+          "code": "SELECT NAME, GRADE, STATUS\nFROM TB_USER\nWHERE GRADE = 'A' OR GRADE = 'B'\n  AND STATUS = 'ACTIVE';"
         },
         {
           "type": "table",
@@ -824,7 +824,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT * FROM SQLD_33 WHERE EMP_NAME LIKE 'A%'"
+          "code": "SELECT * FROM SQLD_33\nWHERE EMP_NAME LIKE 'A%'"
         }
       ]
     },
@@ -862,7 +862,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "[1] SELECT SUM(SAL + BONUS) FROM EMP WHERE DEPTNO = 10;\n[2] SELECT SUM(NVL(SAL, 0) + NVL(BONUS, 0)) FROM EMP;\n[3] SELECT SUM(SAL) + SUM(BONUS) FROM EMP ;"
+          "code": "[1] SELECT SUM(SAL + BONUS) FROM EMP\n    WHERE DEPTNO = 10;\n[2] SELECT SUM(NVL(SAL, 0)\n             + NVL(BONUS, 0))\n    FROM EMP;\n[3] SELECT SUM(SAL) + SUM(BONUS)\n    FROM EMP ;"
         },
         {
           "type": "table",
@@ -1961,7 +1961,7 @@
         },
         {
           "type": "sql",
-          "code": "SELECT CUSTOMER, TOTAL\nFROM (SELECT CUSTOMER, SUM(AMOUNT) AS TOTAL\nFROM TB_ORDER\nGROUP BY CUSTOMER)\nWHERE TOTAL > (SELECT AVG(AMOUNT) FROM TB_ORDER);"
+          "code": "SELECT CUSTOMER, TOTAL\nFROM (SELECT CUSTOMER,\n             SUM(AMOUNT) AS TOTAL\nFROM TB_ORDER\nGROUP BY CUSTOMER)\nWHERE TOTAL > (SELECT AVG(AMOUNT)\n                 FROM TB_ORDER);"
         }
       ]
     },
@@ -2313,11 +2313,11 @@
       "references": [
         {
           "type": "sql",
-          "code": "create table 주문 (\n    주문번호    int            not null,\n    주문자명    varchar(40)    null,\n    주문금액    money          null,\n    주문일자    varchar(8)     null );"
+          "code": "create table 주문 (\n    주문번호 int not null,\n    주문자명    varchar(40)    null,\n    주문금액    money          null,\n    주문일자    varchar(8)     null );"
         },
         {
           "type": "sql",
-          "code": "create unique index 주문_pk on 주문 (주문번호);\ncreate index 주문_ind11 on 주문 (주문자명);\ncreate index 주문_ind12 on 주문 (주문일자, 주문금액);"
+          "code": "create unique index 주문_pk\n  on 주문 (주문번호);\ncreate index 주문_ind11\n  on 주문 (주문자명);\ncreate index 주문_ind12\n  on 주문 (주문일자, 주문금액);"
         }
       ]
     },
@@ -3371,7 +3371,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT TO_NUMBER('0050') + 25 FROM DUAL;"
+          "code": "SELECT TO_NUMBER('0050') + 25\nFROM DUAL;"
         }
       ]
     },
@@ -3566,7 +3566,7 @@
         },
         {
           "type": "sql",
-          "code": "SELECT (    ) OVER (ORDER BY 급여 desc) as 순위,\n       이름, 부서, 직책, 급여\nFROM SQLD_29;"
+          "code": "SELECT (    ) OVER (ORDER BY 급여 desc)\n         as 순위,\n       이름, 부서, 직책, 급여\nFROM SQLD_29;"
         }
       ]
     },
@@ -4206,7 +4206,7 @@
         },
         {
           "type": "sql",
-          "code": "/* 질의문 */\nSELECT e.dno, d.dname, e.ename, e.score\nFROM employee e, department d\nWHERE e.dno = d.dno and (e.dno, score) IN\n      (SELECT dno, max(score)\n       FROM employee GROUP BY dno);"
+          "code": "/* 질의문 */\nSELECT e.dno, d.dname, e.ename, e.score\nFROM employee e, department d\nWHERE e.dno = d.dno\n  and (e.dno, score) IN\n      (SELECT dno, max(score)\n       FROM employee GROUP BY dno);"
         }
       ]
     },
@@ -4375,7 +4375,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT COALESCE(NULL, '2', '1') FROM DUAL;"
+          "code": "SELECT COALESCE(NULL, '2', '1')\nFROM DUAL;"
         }
       ]
     },
@@ -4463,7 +4463,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT COUNT(*)\nFROM EMPLOYEE E\nLEFT JOIN DEPARTMENT D ON E.DEPT_ID =D.DEPT_ID\nWHERE D.LOC = 'SEOUL';"
+          "code": "SELECT COUNT(*)\nFROM EMPLOYEE E\nLEFT JOIN DEPARTMENT D\n  ON E.DEPT_ID =D.DEPT_ID\nWHERE D.LOC = 'SEOUL';"
         },
         {
           "type": "table",
@@ -4895,7 +4895,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT NAME\nFROM PRODUCTS\nWHERE PRICE = (SELECT MAX(PRICE) FROM PRODUCTS);"
+          "code": "SELECT NAME\nFROM PRODUCTS\nWHERE PRICE = (SELECT MAX(PRICE)\n                 FROM PRODUCTS);"
         },
         {
           "type": "table",
@@ -5003,7 +5003,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT DEPTNO, ROUND(AVG(SAL), 1) AS DEPTNO_AVG_SAL"
+          "code": "SELECT DEPTNO,\n       ROUND(AVG(SAL), 1)\n         AS DEPTNO_AVG_SAL"
         }
       ]
     },
@@ -5079,7 +5079,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT NAME,(SELECT LOC\nFROM DEPARTMENT D\nWHERE D.DEPT_ID = E.DEPT_ID) AS LOCATION\nFROM EMPLOYEE E;"
+          "code": "SELECT NAME,(SELECT LOC\nFROM DEPARTMENT D\nWHERE D.DEPT_ID = E.DEPT_ID)\n  AS LOCATION\nFROM EMPLOYEE E;"
         },
         {
           "type": "table",
@@ -5336,7 +5336,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "Select c.고객명, c.연령, c.전화번호, o.주문일자,\n       o.주문총금액, o.배송지주소\nFrom 고객 c, 주문 o\nWhere o.고객번호 = c.고객번호\nAnd c.고객등급 = 'A'\nAnd c.연령 between 51 and 60\nAnd o.주문일자 between '20101201' and '20101231'"
+          "code": "Select c.고객명, c.연령, c.전화번호,\n       o.주문일자,\n       o.주문총금액, o.배송지주소\nFrom 고객 c, 주문 o\nWhere o.고객번호 = c.고객번호\nAnd c.고객등급 = 'A'\nAnd c.연령 between 51 and 60\nAnd o.주문일자 between '20101201'\n               and '20101231'"
         },
         {
           "type": "table",
@@ -5691,7 +5691,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "CREATE TABLE 부서 (\n  부서번호 INT NOT NULL,\n  부서명 VARCHAR(20),\n  PRIMARY KEY(부서번호));\n\nCREATE TABLE 사원 (\n  사번 INT NOT NULL,\n  이름 VARCHAR(20),\n  부서번호 INT,\n  PRIMARY KEY(사번),\n  FOREIGN KEY(부서번호) REFERENCES 부서(부서번호));"
+          "code": "CREATE TABLE 부서 (\n  부서번호 INT NOT NULL,\n  부서명 VARCHAR(20),\n  PRIMARY KEY(부서번호));\n\nCREATE TABLE 사원 (\n  사번 INT NOT NULL,\n  이름 VARCHAR(20),\n  부서번호 INT,\n  PRIMARY KEY(사번),\n  FOREIGN KEY(부서번호)\n    REFERENCES 부서(부서번호));"
         },
         {
           "type": "table",

@@ -65,7 +65,7 @@
         {
           "type": "sql",
           "caption": "쿼리 1",
-          "code": "SELECT E.EMPNO, D.DNAME\nFROM EMP E LEFT OUTER JOIN DEPT D\nON E.DEPTNO = D.DEPTNO AND D.LOC = 'SEOUL';"
+          "code": "SELECT E.EMPNO, D.DNAME\nFROM EMP E LEFT OUTER JOIN DEPT D\nON E.DEPTNO = D.DEPTNO\n   AND D.LOC = 'SEOUL';"
         },
         {
           "type": "sql",
@@ -136,7 +136,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT NULLIF(COALESCE(NULL, 'A', 'B'), 'A') FROM DUAL;"
+          "code": "SELECT NULLIF(COALESCE(NULL, 'A', 'B'),\n              'A')\nFROM DUAL;"
         }
       ]
     },

@@ -51,7 +51,7 @@
         },
         {
           "type": "sql",
-          "code": "SELECT ENAME\nFROM   EMP\nWHERE  EMPNO NOT IN (SELECT MGR FROM EMP);"
+          "code": "SELECT ENAME\nFROM   EMP\nWHERE  EMPNO NOT IN\n       (SELECT MGR FROM EMP);"
         }
       ]
     },
@@ -173,7 +173,7 @@
         },
         {
           "type": "sql",
-          "code": "SELECT A, (SELECT B FROM TBL2 WHERE TBL2.A = TBL1.A)\nFROM   TBL1\nORDER  BY A;"
+          "code": "SELECT A, (SELECT B FROM TBL2\n           WHERE TBL2.A = TBL1.A)\nFROM   TBL1\nORDER  BY A;"
         }
       ]
     },
@@ -242,7 +242,7 @@
         },
         {
           "type": "sql",
-          "code": "SELECT D.DNAME, COUNT(E.EMPNO)\nFROM   DEPT D LEFT OUTER JOIN EMP E\n       ON D.DEPTNO = E.DEPTNO AND E.SAL >= 400\nGROUP  BY D.DNAME\nORDER  BY D.DNAME;"
+          "code": "SELECT D.DNAME, COUNT(E.EMPNO)\nFROM   DEPT D LEFT OUTER JOIN EMP E\n       ON D.DEPTNO = E.DEPTNO\n          AND E.SAL >= 400\nGROUP  BY D.DNAME\nORDER  BY D.DNAME;"
         }
       ]
     },
@@ -571,7 +571,7 @@
         },
         {
           "type": "sql",
-          "code": "SELECT NAME\nFROM   PLAYER\nWHERE  TEAM = 'A' OR TEAM = 'B' AND POS = 'MF'\nORDER  BY NAME;"
+          "code": "SELECT NAME\nFROM   PLAYER\nWHERE  TEAM = 'A' OR TEAM = 'B'\n  AND  POS = 'MF'\nORDER  BY NAME;"
         }
       ]
     },
@@ -665,7 +665,7 @@
         },
         {
           "type": "sql",
-          "code": "SELECT COUNT(*), COUNT(COMM), SUM(COMM),\n       AVG(COMM), AVG(NVL(COMM, 0))\nFROM   SAL_T;"
+          "code": "SELECT COUNT(*), COUNT(COMM),\n       SUM(COMM),\n       AVG(COMM), AVG(NVL(COMM, 0))\nFROM   SAL_T;"
         }
       ]
     },
@@ -716,7 +716,7 @@
         },
         {
           "type": "sql",
-          "code": "SELECT K, COUNT(*), COUNT(V), COUNT(DISTINCT V)\nFROM   T\nGROUP  BY K\nORDER  BY K NULLS LAST;"
+          "code": "SELECT K, COUNT(*), COUNT(V),\n       COUNT(DISTINCT V)\nFROM   T\nGROUP  BY K\nORDER  BY K NULLS LAST;"
         }
       ]
     },
@@ -798,7 +798,7 @@
         },
         {
           "type": "sql",
-          "code": "SELECT COALESCE(A, B), NULLIF(A, B), NVL2(A, 'Y', 'N')\nFROM   T\nORDER  BY COALESCE(A, B);"
+          "code": "SELECT COALESCE(A, B), NULLIF(A, B),\n       NVL2(A, 'Y', 'N')\nFROM   T\nORDER  BY COALESCE(A, B);"
         }
       ]
     },
@@ -831,7 +831,7 @@
         },
         {
           "type": "sql",
-          "code": "SELECT DECODE(A, NULL, 'Y', 'N'),\n       CASE A WHEN NULL THEN 'Y' ELSE 'N' END\nFROM   T;"
+          "code": "SELECT DECODE(A, NULL, 'Y', 'N'),\n       CASE A WHEN NULL THEN 'Y'\n              ELSE 'N' END\nFROM   T;"
         }
       ]
     },
@@ -1012,7 +1012,7 @@
         },
         {
           "type": "sql",
-          "code": "SELECT SUM(AMT) OVER (ORDER BY AMT) AS CUM\nFROM   SALES\nORDER  BY ID;"
+          "code": "SELECT SUM(AMT) OVER (ORDER BY AMT)\n         AS CUM\nFROM   SALES\nORDER  BY ID;"
         }
       ]
     },
@@ -1074,7 +1074,7 @@
         },
         {
           "type": "sql",
-          "code": "SELECT *\nFROM  (SELECT DEPT, JOB, SAL FROM EMP)\nPIVOT (SUM(SAL) FOR JOB IN ('CLERK' AS C, 'MGR' AS M))\nORDER BY DEPT;"
+          "code": "SELECT *\nFROM  (SELECT DEPT, JOB, SAL FROM EMP)\nPIVOT (SUM(SAL) FOR JOB\n       IN ('CLERK' AS C, 'MGR' AS M))\nORDER BY DEPT;"
         }
       ]
     },
@@ -1095,7 +1095,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT REGEXP_COUNT('A1B22C333', '[0-9]'),\n       REGEXP_COUNT('A1B22C333', '[0-9]+'),\n       REGEXP_SUBSTR('A1B22C333', '[0-9]+', 1, 2)\nFROM   DUAL;"
+          "code": "SELECT REGEXP_COUNT('A1B22C333',\n                    '[0-9]'),\n       REGEXP_COUNT('A1B22C333',\n                    '[0-9]+'),\n       REGEXP_SUBSTR('A1B22C333',\n                     '[0-9]+', 1, 2)\nFROM   DUAL;"
         }
       ]
     },
@@ -1256,7 +1256,7 @@
         },
         {
           "type": "sql",
-          "code": "UPDATE T\nSET    SAL = (SELECT MAX(B) FROM U WHERE U.ID = T.ID);"
+          "code": "UPDATE T\nSET    SAL = (SELECT MAX(B) FROM U\n               WHERE U.ID = T.ID);"
         }
       ]
     },
@@ -1806,7 +1806,7 @@
         },
         {
           "type": "sql",
-          "code": "INSERT ALL\n   WHEN N1 >= 2 THEN INTO TABLE1 (N1) VALUES (N1)\n   WHEN N1 >= 3 THEN INTO TABLE2 (N1) VALUES (N1)\n   ELSE              INTO TABLE3 (N1) VALUES (N1)\nSELECT N1 FROM TABLE0;"
+          "code": "INSERT ALL\n   WHEN N1 >= 2 THEN\n     INTO TABLE1 (N1) VALUES (N1)\n   WHEN N1 >= 3 THEN\n     INTO TABLE2 (N1) VALUES (N1)\n   ELSE\n     INTO TABLE3 (N1) VALUES (N1)\nSELECT N1 FROM TABLE0;"
         }
       ]
     },
@@ -1854,7 +1854,7 @@
         },
         {
           "type": "sql",
-          "code": "-- 첫 번째\nSELECT C3 FROM SQLD45\nWHERE  C3 <> 'JOHN'\nSTART WITH C1 = 3\nCONNECT BY C1 = PRIOR C2;\n\n-- 두 번째\nSELECT C3 FROM SQLD45\nSTART WITH C1 = 3\nCONNECT BY C1 = PRIOR C2 AND C3 <> 'JOHN';"
+          "code": "-- 첫 번째\nSELECT C3 FROM SQLD45\nWHERE  C3 <> 'JOHN'\nSTART WITH C1 = 3\nCONNECT BY C1 = PRIOR C2;\n\n-- 두 번째\nSELECT C3 FROM SQLD45\nSTART WITH C1 = 3\nCONNECT BY C1 = PRIOR C2\n       AND C3 <> 'JOHN';"
         }
       ]
     },
@@ -1950,7 +1950,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "CREATE TABLE ORIG (\n  ID    NUMBER PRIMARY KEY,\n  NAME  VARCHAR2(10) NOT NULL,\n  GRADE CHAR(1) CHECK (GRADE IN ('A', 'B'))\n);\n\nCREATE TABLE COPY AS SELECT * FROM ORIG;"
+          "code": "CREATE TABLE ORIG (\n  ID    NUMBER PRIMARY KEY,\n  NAME  VARCHAR2(10) NOT NULL,\n  GRADE CHAR(1)\n    CHECK (GRADE IN ('A', 'B'))\n);\n\nCREATE TABLE COPY AS\nSELECT * FROM ORIG;"
         }
       ]
     },
@@ -2254,7 +2254,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "-- ①\nSELECT COUNT(*) FROM T WHERE 1 = 2;\n\n-- ②\nSELECT COUNT(*) FROM T WHERE 1 = 2 GROUP BY DEPT;\n\n-- ③\nSELECT MAX(SAL) FROM T WHERE 1 = 2;"
+          "code": "-- ①\nSELECT COUNT(*) FROM T WHERE 1 = 2;\n\n-- ②\nSELECT COUNT(*) FROM T\nWHERE 1 = 2 GROUP BY DEPT;\n\n-- ③\nSELECT MAX(SAL) FROM T WHERE 1 = 2;"
         }
       ]
     },
@@ -2297,7 +2297,7 @@
         },
         {
           "type": "sql",
-          "code": "SELECT VAL, RANK() OVER (ORDER BY VAL DESC) AS R\nFROM   T\nORDER  BY R;"
+          "code": "SELECT VAL,\n       RANK() OVER (ORDER BY VAL DESC)\n         AS R\nFROM   T\nORDER  BY R;"
         }
       ]
     },
@@ -2345,7 +2345,7 @@
         },
         {
           "type": "sql",
-          "code": "SELECT ID, LAST_VALUE(VAL) OVER (ORDER BY ID) AS LV\nFROM   T\nORDER  BY ID;"
+          "code": "SELECT ID,\n       LAST_VALUE(VAL) OVER\n         (ORDER BY ID) AS LV\nFROM   T\nORDER  BY ID;"
         }
       ]
     },
@@ -2632,7 +2632,7 @@
         },
         {
           "type": "sql",
-          "code": "SELECT GRADE\nFROM   GRADE_TABLE A,\n       (SELECT MAX(SCORE) AS MAX_SCORE FROM PLAYER) B\nWHERE  A.LO <= B.MAX_SCORE\nAND    A.HI >= B.MAX_SCORE;"
+          "code": "SELECT GRADE\nFROM   GRADE_TABLE A,\n       (SELECT MAX(SCORE) AS MAX_SCORE\n          FROM PLAYER) B\nWHERE  A.LO <= B.MAX_SCORE\nAND    A.HI >= B.MAX_SCORE;"
         }
       ]
     },
@@ -2708,7 +2708,7 @@
         },
         {
           "type": "sql",
-          "code": "-- 첫 번째\n(SELECT COL1 FROM A UNION ALL SELECT COL1 FROM B)\nMINUS\nSELECT COL1 FROM C;\n\n-- 두 번째\nSELECT COL1 FROM A\nUNION ALL\n(SELECT COL1 FROM B MINUS SELECT COL1 FROM C);"
+          "code": "-- 첫 번째\n(SELECT COL1 FROM A\n UNION ALL\n SELECT COL1 FROM B)\nMINUS\nSELECT COL1 FROM C;\n\n-- 두 번째\nSELECT COL1 FROM A\nUNION ALL\n(SELECT COL1 FROM B\n MINUS\n SELECT COL1 FROM C);"
         }
       ]
     },
@@ -2814,7 +2814,7 @@
         },
         {
           "type": "sql",
-          "code": "SELECT MAX(COL1) KEEP (DENSE_RANK FIRST ORDER BY COL2),\n       MIN(COL1) KEEP (DENSE_RANK LAST  ORDER BY COL2)\nFROM   T;"
+          "code": "SELECT MAX(COL1) KEEP (DENSE_RANK\n         FIRST ORDER BY COL2),\n       MIN(COL1) KEEP (DENSE_RANK\n         LAST ORDER BY COL2)\nFROM   T;"
         }
       ]
     },
@@ -2984,7 +2984,7 @@
         },
         {
           "type": "sql",
-          "code": "SELECT ID,\n       LAG(VAL, 2, 0)   OVER (ORDER BY ID) AS L2,\n       LEAD(VAL, 1, -1) OVER (ORDER BY ID) AS N1\nFROM   매출\nORDER  BY ID;"
+          "code": "SELECT ID,\n       LAG(VAL, 2, 0) OVER\n         (ORDER BY ID) AS L2,\n       LEAD(VAL, 1, -1) OVER\n         (ORDER BY ID) AS N1\nFROM   매출\nORDER  BY ID;"
         }
       ]
     },
@@ -3046,7 +3046,7 @@
         },
         {
           "type": "sql",
-          "code": "SELECT (SELECT COUNT(*) FROM A NATURAL JOIN B),\n       (SELECT COUNT(*) FROM A JOIN B USING (SRN_NO))\nFROM   DUAL;"
+          "code": "SELECT (SELECT COUNT(*)\n          FROM A NATURAL JOIN B),\n       (SELECT COUNT(*)\n          FROM A JOIN B USING (SRN_NO))\nFROM   DUAL;"
         }
       ]
     },
@@ -3336,7 +3336,7 @@
         },
         {
           "type": "sql",
-          "code": "SELECT 사원\nFROM   EMP\nSTART WITH 매니저 IS NULL\nCONNECT BY PRIOR 사원 = 매니저 AND LEVEL <= 3\nORDER SIBLINGS BY 사원 DESC;"
+          "code": "SELECT 사원\nFROM   EMP\nSTART WITH 매니저 IS NULL\nCONNECT BY PRIOR 사원 = 매니저\n       AND LEVEL <= 3\nORDER SIBLINGS BY 사원 DESC;"
         }
       ]
     },

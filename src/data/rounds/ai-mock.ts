@@ -26,7 +26,7 @@ export const AI_MOCK: QuizQuestion[] = [
       {
         "type": "sql",
         "caption": "쿼리 1",
-        "code": "SELECT E.EMPNO, D.DNAME\nFROM EMP E LEFT OUTER JOIN DEPT D\nON E.DEPTNO = D.DEPTNO AND D.LOC = 'SEOUL';"
+        "code": "SELECT E.EMPNO, D.DNAME\nFROM EMP E LEFT OUTER JOIN DEPT D\nON E.DEPTNO = D.DEPTNO\n   AND D.LOC = 'SEOUL';"
       },
       {
         "type": "sql",
@@ -113,7 +113,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "sql",
-        "code": "SELECT NULLIF(COALESCE(NULL, 'A', 'B'), 'A') FROM DUAL;"
+        "code": "SELECT NULLIF(COALESCE(NULL, 'A', 'B'),\n              'A')\nFROM DUAL;"
       }
     ]
   },
@@ -1066,7 +1066,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "sql",
-        "code": "SELECT COUNT(SALARY), SUM(SALARY),AVG(SALARY)\nFROM EMPLOYEE;"
+        "code": "SELECT COUNT(SALARY), SUM(SALARY),\n       AVG(SALARY)\nFROM EMPLOYEE;"
       },
       {
         "type": "table",
@@ -1219,7 +1219,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "sql",
-        "code": "SELECT COUNT(NULL), COUNT(*), COUNT(1) FROM TAB;"
+        "code": "SELECT COUNT(NULL), COUNT(*), COUNT(1)\nFROM TAB;"
       }
     ]
   },
@@ -1291,7 +1291,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "sql",
-        "code": "WITH REGION_TOTAL AS (SELECT REGION, SUM(AMOUNT) AS TOTAL\nFROM TB_ORDER\nGROUP BY REGION)\nSELECT COUNT(*) FROM REGION_TOTAL\nWHERE TOTAL > 1500;"
+        "code": "WITH REGION_TOTAL AS\n  (SELECT REGION,\n          SUM(AMOUNT) AS TOTAL\nFROM TB_ORDER\nGROUP BY REGION)\nSELECT COUNT(*) FROM REGION_TOTAL\nWHERE TOTAL > 1500;"
       },
       {
         "type": "table",
@@ -1700,7 +1700,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "sql",
-        "code": "SELECT * FROM SQLD_33 WHERE EMP_NAME LIKE 'A%'"
+        "code": "SELECT * FROM SQLD_33\nWHERE EMP_NAME LIKE 'A%'"
       }
     ]
   },
@@ -1746,7 +1746,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "sql",
-        "code": "[1] SELECT SUM(SAL + BONUS) FROM EMP WHERE DEPTNO = 10;\n[2] SELECT SUM(NVL(SAL, 0) + NVL(BONUS, 0)) FROM EMP;\n[3] SELECT SUM(SAL) + SUM(BONUS) FROM EMP ;"
+        "code": "[1] SELECT SUM(SAL + BONUS) FROM EMP\n    WHERE DEPTNO = 10;\n[2] SELECT SUM(NVL(SAL, 0)\n             + NVL(BONUS, 0))\n    FROM EMP;\n[3] SELECT SUM(SAL) + SUM(BONUS)\n    FROM EMP ;"
       },
       {
         "type": "table",
@@ -3980,7 +3980,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "sql",
-        "code": "SELECT TO_NUMBER('0050') + 25 FROM DUAL;"
+        "code": "SELECT TO_NUMBER('0050') + 25\nFROM DUAL;"
       }
     ]
   },
@@ -4183,7 +4183,7 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT (    ) OVER (ORDER BY 급여 desc) as 순위,\n       이름, 부서, 직책, 급여\nFROM SQLD_29;"
+        "code": "SELECT (    ) OVER (ORDER BY 급여 desc)\n         as 순위,\n       이름, 부서, 직책, 급여\nFROM SQLD_29;"
       }
     ]
   },
@@ -4831,7 +4831,7 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "/* 질의문 */\nSELECT e.dno, d.dname, e.ename, e.score\nFROM employee e, department d\nWHERE e.dno = d.dno and (e.dno, score) IN\n      (SELECT dno, max(score)\n       FROM employee GROUP BY dno);"
+        "code": "/* 질의문 */\nSELECT e.dno, d.dname, e.ename, e.score\nFROM employee e, department d\nWHERE e.dno = d.dno\n  and (e.dno, score) IN\n      (SELECT dno, max(score)\n       FROM employee GROUP BY dno);"
       }
     ]
   },
@@ -5028,7 +5028,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "sql",
-        "code": "SELECT COALESCE(NULL, '2', '1') FROM DUAL;"
+        "code": "SELECT COALESCE(NULL, '2', '1')\nFROM DUAL;"
       }
     ]
   },
@@ -5132,7 +5132,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "sql",
-        "code": "SELECT COUNT(*)\nFROM EMPLOYEE E\nLEFT JOIN DEPARTMENT D ON E.DEPT_ID =D.DEPT_ID\nWHERE D.LOC = 'SEOUL';"
+        "code": "SELECT COUNT(*)\nFROM EMPLOYEE E\nLEFT JOIN DEPARTMENT D\n  ON E.DEPT_ID =D.DEPT_ID\nWHERE D.LOC = 'SEOUL';"
       },
       {
         "type": "table",
@@ -5604,7 +5604,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "sql",
-        "code": "SELECT NAME\nFROM PRODUCTS\nWHERE PRICE = (SELECT MAX(PRICE) FROM PRODUCTS);"
+        "code": "SELECT NAME\nFROM PRODUCTS\nWHERE PRICE = (SELECT MAX(PRICE)\n                 FROM PRODUCTS);"
       },
       {
         "type": "table",
@@ -5728,7 +5728,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "sql",
-        "code": "SELECT DEPTNO, ROUND(AVG(SAL), 1) AS DEPTNO_AVG_SAL"
+        "code": "SELECT DEPTNO,\n       ROUND(AVG(SAL), 1)\n         AS DEPTNO_AVG_SAL"
       }
     ]
   },
@@ -6343,7 +6343,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "sql",
-        "code": "CREATE TABLE 부서 (\n  부서번호 INT NOT NULL,\n  부서명 VARCHAR(20),\n  PRIMARY KEY(부서번호));\n\nCREATE TABLE 사원 (\n  사번 INT NOT NULL,\n  이름 VARCHAR(20),\n  부서번호 INT,\n  PRIMARY KEY(사번),\n  FOREIGN KEY(부서번호) REFERENCES 부서(부서번호));"
+        "code": "CREATE TABLE 부서 (\n  부서번호 INT NOT NULL,\n  부서명 VARCHAR(20),\n  PRIMARY KEY(부서번호));\n\nCREATE TABLE 사원 (\n  사번 INT NOT NULL,\n  이름 VARCHAR(20),\n  부서번호 INT,\n  PRIMARY KEY(사번),\n  FOREIGN KEY(부서번호)\n    REFERENCES 부서(부서번호));"
       },
       {
         "type": "table",
@@ -36432,7 +36432,7 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT ENAME\nFROM   EMP\nWHERE  EMPNO NOT IN (SELECT MGR FROM EMP);"
+        "code": "SELECT ENAME\nFROM   EMP\nWHERE  EMPNO NOT IN\n       (SELECT MGR FROM EMP);"
       }
     ]
   },
@@ -36562,7 +36562,7 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT A, (SELECT B FROM TBL2 WHERE TBL2.A = TBL1.A)\nFROM   TBL1\nORDER  BY A;"
+        "code": "SELECT A, (SELECT B FROM TBL2\n           WHERE TBL2.A = TBL1.A)\nFROM   TBL1\nORDER  BY A;"
       }
     ]
   },
@@ -36635,7 +36635,7 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT D.DNAME, COUNT(E.EMPNO)\nFROM   DEPT D LEFT OUTER JOIN EMP E\n       ON D.DEPTNO = E.DEPTNO AND E.SAL >= 400\nGROUP  BY D.DNAME\nORDER  BY D.DNAME;"
+        "code": "SELECT D.DNAME, COUNT(E.EMPNO)\nFROM   DEPT D LEFT OUTER JOIN EMP E\n       ON D.DEPTNO = E.DEPTNO\n          AND E.SAL >= 400\nGROUP  BY D.DNAME\nORDER  BY D.DNAME;"
       }
     ]
   },
@@ -36992,7 +36992,7 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT NAME\nFROM   PLAYER\nWHERE  TEAM = 'A' OR TEAM = 'B' AND POS = 'MF'\nORDER  BY NAME;"
+        "code": "SELECT NAME\nFROM   PLAYER\nWHERE  TEAM = 'A' OR TEAM = 'B'\n  AND  POS = 'MF'\nORDER  BY NAME;"
       }
     ]
   },
@@ -37094,7 +37094,7 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT COUNT(*), COUNT(COMM), SUM(COMM),\n       AVG(COMM), AVG(NVL(COMM, 0))\nFROM   SAL_T;"
+        "code": "SELECT COUNT(*), COUNT(COMM),\n       SUM(COMM),\n       AVG(COMM), AVG(NVL(COMM, 0))\nFROM   SAL_T;"
       }
     ]
   },
@@ -37149,7 +37149,7 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT K, COUNT(*), COUNT(V), COUNT(DISTINCT V)\nFROM   T\nGROUP  BY K\nORDER  BY K NULLS LAST;"
+        "code": "SELECT K, COUNT(*), COUNT(V),\n       COUNT(DISTINCT V)\nFROM   T\nGROUP  BY K\nORDER  BY K NULLS LAST;"
       }
     ]
   },
@@ -37239,7 +37239,7 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT COALESCE(A, B), NULLIF(A, B), NVL2(A, 'Y', 'N')\nFROM   T\nORDER  BY COALESCE(A, B);"
+        "code": "SELECT COALESCE(A, B), NULLIF(A, B),\n       NVL2(A, 'Y', 'N')\nFROM   T\nORDER  BY COALESCE(A, B);"
       }
     ]
   },
@@ -37276,7 +37276,7 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT DECODE(A, NULL, 'Y', 'N'),\n       CASE A WHEN NULL THEN 'Y' ELSE 'N' END\nFROM   T;"
+        "code": "SELECT DECODE(A, NULL, 'Y', 'N'),\n       CASE A WHEN NULL THEN 'Y'\n              ELSE 'N' END\nFROM   T;"
       }
     ]
   },
@@ -37473,7 +37473,7 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT SUM(AMT) OVER (ORDER BY AMT) AS CUM\nFROM   SALES\nORDER  BY ID;"
+        "code": "SELECT SUM(AMT) OVER (ORDER BY AMT)\n         AS CUM\nFROM   SALES\nORDER  BY ID;"
       }
     ]
   },
@@ -37539,7 +37539,7 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT *\nFROM  (SELECT DEPT, JOB, SAL FROM EMP)\nPIVOT (SUM(SAL) FOR JOB IN ('CLERK' AS C, 'MGR' AS M))\nORDER BY DEPT;"
+        "code": "SELECT *\nFROM  (SELECT DEPT, JOB, SAL FROM EMP)\nPIVOT (SUM(SAL) FOR JOB\n       IN ('CLERK' AS C, 'MGR' AS M))\nORDER BY DEPT;"
       }
     ]
   },
@@ -37564,7 +37564,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "sql",
-        "code": "SELECT REGEXP_COUNT('A1B22C333', '[0-9]'),\n       REGEXP_COUNT('A1B22C333', '[0-9]+'),\n       REGEXP_SUBSTR('A1B22C333', '[0-9]+', 1, 2)\nFROM   DUAL;"
+        "code": "SELECT REGEXP_COUNT('A1B22C333',\n                    '[0-9]'),\n       REGEXP_COUNT('A1B22C333',\n                    '[0-9]+'),\n       REGEXP_SUBSTR('A1B22C333',\n                     '[0-9]+', 1, 2)\nFROM   DUAL;"
       }
     ]
   },
@@ -37737,7 +37737,7 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "UPDATE T\nSET    SAL = (SELECT MAX(B) FROM U WHERE U.ID = T.ID);"
+        "code": "UPDATE T\nSET    SAL = (SELECT MAX(B) FROM U\n               WHERE U.ID = T.ID);"
       }
     ]
   },
@@ -38338,7 +38338,7 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "INSERT ALL\n   WHEN N1 >= 2 THEN INTO TABLE1 (N1) VALUES (N1)\n   WHEN N1 >= 3 THEN INTO TABLE2 (N1) VALUES (N1)\n   ELSE              INTO TABLE3 (N1) VALUES (N1)\nSELECT N1 FROM TABLE0;"
+        "code": "INSERT ALL\n   WHEN N1 >= 2 THEN\n     INTO TABLE1 (N1) VALUES (N1)\n   WHEN N1 >= 3 THEN\n     INTO TABLE2 (N1) VALUES (N1)\n   ELSE\n     INTO TABLE3 (N1) VALUES (N1)\nSELECT N1 FROM TABLE0;"
       }
     ]
   },
@@ -38389,7 +38389,7 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "-- 첫 번째\nSELECT C3 FROM SQLD45\nWHERE  C3 <> 'JOHN'\nSTART WITH C1 = 3\nCONNECT BY C1 = PRIOR C2;\n\n-- 두 번째\nSELECT C3 FROM SQLD45\nSTART WITH C1 = 3\nCONNECT BY C1 = PRIOR C2 AND C3 <> 'JOHN';"
+        "code": "-- 첫 번째\nSELECT C3 FROM SQLD45\nWHERE  C3 <> 'JOHN'\nSTART WITH C1 = 3\nCONNECT BY C1 = PRIOR C2;\n\n-- 두 번째\nSELECT C3 FROM SQLD45\nSTART WITH C1 = 3\nCONNECT BY C1 = PRIOR C2\n       AND C3 <> 'JOHN';"
       }
     ]
   },
@@ -38494,7 +38494,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "sql",
-        "code": "CREATE TABLE ORIG (\n  ID    NUMBER PRIMARY KEY,\n  NAME  VARCHAR2(10) NOT NULL,\n  GRADE CHAR(1) CHECK (GRADE IN ('A', 'B'))\n);\n\nCREATE TABLE COPY AS SELECT * FROM ORIG;"
+        "code": "CREATE TABLE ORIG (\n  ID    NUMBER PRIMARY KEY,\n  NAME  VARCHAR2(10) NOT NULL,\n  GRADE CHAR(1)\n    CHECK (GRADE IN ('A', 'B'))\n);\n\nCREATE TABLE COPY AS\nSELECT * FROM ORIG;"
       }
     ]
   },
@@ -38822,7 +38822,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "sql",
-        "code": "-- ①\nSELECT COUNT(*) FROM T WHERE 1 = 2;\n\n-- ②\nSELECT COUNT(*) FROM T WHERE 1 = 2 GROUP BY DEPT;\n\n-- ③\nSELECT MAX(SAL) FROM T WHERE 1 = 2;"
+        "code": "-- ①\nSELECT COUNT(*) FROM T WHERE 1 = 2;\n\n-- ②\nSELECT COUNT(*) FROM T\nWHERE 1 = 2 GROUP BY DEPT;\n\n-- ③\nSELECT MAX(SAL) FROM T WHERE 1 = 2;"
       }
     ]
   },
@@ -38868,7 +38868,7 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT VAL, RANK() OVER (ORDER BY VAL DESC) AS R\nFROM   T\nORDER  BY R;"
+        "code": "SELECT VAL,\n       RANK() OVER (ORDER BY VAL DESC)\n         AS R\nFROM   T\nORDER  BY R;"
       }
     ]
   },
@@ -38919,7 +38919,7 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT ID, LAST_VALUE(VAL) OVER (ORDER BY ID) AS LV\nFROM   T\nORDER  BY ID;"
+        "code": "SELECT ID,\n       LAST_VALUE(VAL) OVER\n         (ORDER BY ID) AS LV\nFROM   T\nORDER  BY ID;"
       }
     ]
   },
@@ -39224,7 +39224,7 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT GRADE\nFROM   GRADE_TABLE A,\n       (SELECT MAX(SCORE) AS MAX_SCORE FROM PLAYER) B\nWHERE  A.LO <= B.MAX_SCORE\nAND    A.HI >= B.MAX_SCORE;"
+        "code": "SELECT GRADE\nFROM   GRADE_TABLE A,\n       (SELECT MAX(SCORE) AS MAX_SCORE\n          FROM PLAYER) B\nWHERE  A.LO <= B.MAX_SCORE\nAND    A.HI >= B.MAX_SCORE;"
       }
     ]
   },
@@ -39303,7 +39303,7 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "-- 첫 번째\n(SELECT COL1 FROM A UNION ALL SELECT COL1 FROM B)\nMINUS\nSELECT COL1 FROM C;\n\n-- 두 번째\nSELECT COL1 FROM A\nUNION ALL\n(SELECT COL1 FROM B MINUS SELECT COL1 FROM C);"
+        "code": "-- 첫 번째\n(SELECT COL1 FROM A\n UNION ALL\n SELECT COL1 FROM B)\nMINUS\nSELECT COL1 FROM C;\n\n-- 두 번째\nSELECT COL1 FROM A\nUNION ALL\n(SELECT COL1 FROM B\n MINUS\n SELECT COL1 FROM C);"
       }
     ]
   },
@@ -39415,7 +39415,7 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT MAX(COL1) KEEP (DENSE_RANK FIRST ORDER BY COL2),\n       MIN(COL1) KEEP (DENSE_RANK LAST  ORDER BY COL2)\nFROM   T;"
+        "code": "SELECT MAX(COL1) KEEP (DENSE_RANK\n         FIRST ORDER BY COL2),\n       MIN(COL1) KEEP (DENSE_RANK\n         LAST ORDER BY COL2)\nFROM   T;"
       }
     ]
   },
@@ -39594,7 +39594,7 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT ID,\n       LAG(VAL, 2, 0)   OVER (ORDER BY ID) AS L2,\n       LEAD(VAL, 1, -1) OVER (ORDER BY ID) AS N1\nFROM   매출\nORDER  BY ID;"
+        "code": "SELECT ID,\n       LAG(VAL, 2, 0) OVER\n         (ORDER BY ID) AS L2,\n       LEAD(VAL, 1, -1) OVER\n         (ORDER BY ID) AS N1\nFROM   매출\nORDER  BY ID;"
       }
     ]
   },
@@ -39659,7 +39659,7 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT (SELECT COUNT(*) FROM A NATURAL JOIN B),\n       (SELECT COUNT(*) FROM A JOIN B USING (SRN_NO))\nFROM   DUAL;"
+        "code": "SELECT (SELECT COUNT(*)\n          FROM A NATURAL JOIN B),\n       (SELECT COUNT(*)\n          FROM A JOIN B USING (SRN_NO))\nFROM   DUAL;"
       }
     ]
   },
@@ -39967,7 +39967,7 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT 사원\nFROM   EMP\nSTART WITH 매니저 IS NULL\nCONNECT BY PRIOR 사원 = 매니저 AND LEVEL <= 3\nORDER SIBLINGS BY 사원 DESC;"
+        "code": "SELECT 사원\nFROM   EMP\nSTART WITH 매니저 IS NULL\nCONNECT BY PRIOR 사원 = 매니저\n       AND LEVEL <= 3\nORDER SIBLINGS BY 사원 DESC;"
       }
     ]
   },
@@ -40093,7 +40093,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "sql",
-        "code": "SELECT NAME, ROW_NUMBER() OVER (ORDER BY SCORE DESC) AS RN\nFROM TB_SCORE;"
+        "code": "SELECT NAME,\n       ROW_NUMBER() OVER (\n         ORDER BY SCORE DESC) AS RN\nFROM TB_SCORE;"
       },
       {
         "type": "table",
@@ -40141,7 +40141,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "sql",
-        "code": "SELECT NAME, GRADE, STATUS\nFROM TB_USER\nWHERE GRADE = 'A' OR GRADE = 'B' AND STATUS = 'ACTIVE';"
+        "code": "SELECT NAME, GRADE, STATUS\nFROM TB_USER\nWHERE GRADE = 'A' OR GRADE = 'B'\n  AND STATUS = 'ACTIVE';"
       },
       {
         "type": "table",
@@ -40397,7 +40397,7 @@ export const AI_MOCK: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT CUSTOMER, TOTAL\nFROM (SELECT CUSTOMER, SUM(AMOUNT) AS TOTAL\nFROM TB_ORDER\nGROUP BY CUSTOMER)\nWHERE TOTAL > (SELECT AVG(AMOUNT) FROM TB_ORDER);"
+        "code": "SELECT CUSTOMER, TOTAL\nFROM (SELECT CUSTOMER,\n             SUM(AMOUNT) AS TOTAL\nFROM TB_ORDER\nGROUP BY CUSTOMER)\nWHERE TOTAL > (SELECT AVG(AMOUNT)\n                 FROM TB_ORDER);"
       }
     ]
   },
@@ -40594,7 +40594,7 @@ export const AI_MOCK: QuizQuestion[] = [
     "references": [
       {
         "type": "sql",
-        "code": "SELECT NAME,(SELECT LOC\nFROM DEPARTMENT D\nWHERE D.DEPT_ID = E.DEPT_ID) AS LOCATION\nFROM EMPLOYEE E;"
+        "code": "SELECT NAME,(SELECT LOC\nFROM DEPARTMENT D\nWHERE D.DEPT_ID = E.DEPT_ID)\n  AS LOCATION\nFROM EMPLOYEE E;"
       },
       {
         "type": "table",
