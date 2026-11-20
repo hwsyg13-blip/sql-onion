@@ -1728,7 +1728,7 @@ export const ROUND_51: QuizQuestion[] = [
       {
         "type": "sql",
         "caption": "가. NOT EXISTS",
-        "code": "SELECT A.COL1\nFROM   A\nWHERE  NOT EXISTS (SELECT 1 FROM B WHERE A.COL1 = B.COL1);"
+        "code": "SELECT A.COL1\nFROM   A\nWHERE  NOT EXISTS\n       (SELECT 1 FROM B\n         WHERE A.COL1 = B.COL1);"
       },
       {
         "type": "sql",

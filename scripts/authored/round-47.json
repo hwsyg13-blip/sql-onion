@@ -482,7 +482,7 @@
         },
         {
           "type": "sql",
-          "code": "SELECT ID, VAL,\n       (  ?  ) OVER (PARTITION BY 지점 ORDER BY ID) AS PREV\nFROM   매출\nORDER BY ID;"
+          "code": "SELECT ID, VAL,\n       (  ?  ) OVER (\n         PARTITION BY 지점\n         ORDER BY ID) AS PREV\nFROM   매출\nORDER BY ID;"
         },
         {
           "type": "table",
@@ -1083,7 +1083,7 @@
         },
         {
           "type": "sql",
-          "code": "MERGE INTO A USING B ON (A.ID = B.ID)\nWHEN MATCHED THEN\n  UPDATE SET A.V = B.V WHERE B.V > A.V\nWHEN NOT MATCHED THEN\n  INSERT (ID, V) VALUES (B.ID, B.V) WHERE B.V IS NOT NULL;\n\nSELECT COUNT(*), SUM(V) FROM A;"
+          "code": "MERGE INTO A USING B\n  ON (A.ID = B.ID)\nWHEN MATCHED THEN\n  UPDATE SET A.V = B.V\n  WHERE B.V > A.V\nWHEN NOT MATCHED THEN\n  INSERT (ID, V) VALUES (B.ID, B.V)\n  WHERE B.V IS NOT NULL;\n\nSELECT COUNT(*), SUM(V) FROM A;"
         }
       ]
     },
@@ -1130,7 +1130,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT MAX(COL1) KEEP (DENSE_RANK FIRST ORDER BY COL2 DESC)\nFROM T;"
+          "code": "SELECT MAX(COL1)\n       KEEP (DENSE_RANK FIRST\n             ORDER BY COL2 DESC)\nFROM T;"
         },
         {
           "type": "table",
@@ -1749,7 +1749,7 @@
         },
         {
           "type": "sql",
-          "code": "SELECT AVG(COL1), AVG(COL2) FROM T WHERE COL2 IS NOT NULL;"
+          "code": "SELECT AVG(COL1), AVG(COL2)\nFROM T\nWHERE COL2 IS NOT NULL;"
         }
       ]
     },

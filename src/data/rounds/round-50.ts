@@ -1917,7 +1917,7 @@ export const ROUND_50: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT ID, VAL,\n       ROW_NUMBER() OVER (ORDER BY VAL DESC, ID DESC) AS RN\nFROM   T\nORDER BY ID;"
+        "code": "SELECT ID, VAL,\n       ROW_NUMBER() OVER (\n         ORDER BY VAL DESC, ID DESC)\n       AS RN\nFROM   T\nORDER BY ID;"
       }
     ]
   },

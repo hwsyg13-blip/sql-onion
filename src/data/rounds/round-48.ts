@@ -726,7 +726,7 @@ export const ROUND_48: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT ID, AMT\nFROM   TBL\nORDER BY (CASE WHEN ID = 'A' THEN 1 ELSE 2 END), AMT DESC;"
+        "code": "SELECT ID, AMT\nFROM   TBL\nORDER BY (CASE WHEN ID = 'A' THEN 1\n               ELSE 2 END),\n         AMT DESC;"
       }
     ]
   },

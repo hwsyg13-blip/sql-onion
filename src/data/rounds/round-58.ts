@@ -832,7 +832,7 @@ export const ROUND_58: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT DEPT, ID,\n       NTILE(2) OVER (PARTITION BY DEPT ORDER BY ID) AS GRP\nFROM   T\nORDER BY DEPT, ID;"
+        "code": "SELECT DEPT, ID,\n       NTILE(2) OVER (\n         PARTITION BY DEPT\n         ORDER BY ID) AS GRP\nFROM   T\nORDER BY DEPT, ID;"
       }
     ]
   },

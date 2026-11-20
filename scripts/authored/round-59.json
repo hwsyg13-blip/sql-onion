@@ -462,7 +462,7 @@
         },
         {
           "type": "sql",
-          "code": "SELECT * FROM STUDENT S\nWHERE  ( ? ) (SELECT 1 FROM LECTURE L WHERE L.SID = S.SID);\n\n-- 또는\nSELECT SID FROM STUDENT\n( ? )\nSELECT SID FROM LECTURE;"
+          "code": "SELECT * FROM STUDENT S\nWHERE  ( ? )\n       (SELECT 1 FROM LECTURE L\n         WHERE L.SID = S.SID);\n\n-- 또는\nSELECT SID FROM STUDENT\n( ? )\nSELECT SID FROM LECTURE;"
         }
       ]
     },

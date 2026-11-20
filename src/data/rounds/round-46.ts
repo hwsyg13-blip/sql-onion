@@ -2016,7 +2016,7 @@ export const ROUND_46: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT 이름, 급여\nFROM   ( SELECT 이름, 급여,\n                ROW_NUMBER() OVER (ORDER BY 급여 DESC) AS RN\n         FROM   EMP )\nWHERE  RN <= 2\nORDER BY RN;"
+        "code": "SELECT 이름, 급여\nFROM   ( SELECT 이름, 급여,\n                ROW_NUMBER() OVER (\n                  ORDER BY 급여 DESC)\n                AS RN\n         FROM   EMP )\nWHERE  RN <= 2\nORDER BY RN;"
       }
     ]
   },

@@ -368,7 +368,7 @@ export const ROUND_54: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT *\nFROM   PHONE\nWHERE  REGEXP_LIKE(PHONE, '^[0-9]{3}-[0-9]{3,4}-[0-9]{4}$');"
+        "code": "SELECT *\nFROM   PHONE\nWHERE  REGEXP_LIKE(PHONE,\n  '^[0-9]{3}-[0-9]{3,4}-[0-9]{4}$');"
       }
     ]
   },
@@ -2202,7 +2202,7 @@ export const ROUND_54: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT COUNT(*) + COUNT(COL1) + COUNT(DISTINCT COL2) FROM T;"
+        "code": "SELECT COUNT(*) + COUNT(COL1)\n     + COUNT(DISTINCT COL2)\nFROM T;"
       }
     ]
   },

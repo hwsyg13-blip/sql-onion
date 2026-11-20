@@ -723,7 +723,7 @@ export const ROUND_49: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT A, B FROM T1 WHERE (A, B) IN (SELECT A, B FROM T2);"
+        "code": "SELECT A, B FROM T1\nWHERE (A, B) IN\n      (SELECT A, B FROM T2);"
       }
     ]
   },
