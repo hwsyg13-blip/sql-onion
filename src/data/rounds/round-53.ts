@@ -332,16 +332,22 @@ export const ROUND_53: QuizQuestion[] = [
     "round": 53,
     "subject": "2과목",
     "number": 11,
-    "title": "다음 중 데이터 제어어(DCL) 에 해당하는 명령어의 조합은?",
+    "title": "Oracle 에서 아래 순서로 객체 권한을 주고받은 뒤 A 가 B 의 권한을 회수했다. 결과로 옳은 것은?",
     "options": [
-      "CREATE, ALTER",
-      "INSERT, UPDATE",
-      "GRANT, REVOKE",
-      "COMMIT, ROLLBACK"
+      "B 만 권한을 잃고, C 는 SELECT 권한이 그대로 남는다.",
+      "C 만 권한을 잃고, B 는 GRANT OPTION 만 잃는다.",
+      "B 와 C 모두 SELECT 권한을 잃는다.",
+      "C 가 권한을 가지고 있으므로 REVOKE 문이 오류로 끝난다."
     ],
     "correctIndex": 2,
-    "explanation": "GRANT 와 REVOKE 는 권한을 부여·회수하는 데이터 제어어(DCL)이다. ① CREATE/ALTER 는 DDL, ② INSERT/UPDATE 는 DML, ④ COMMIT/ROLLBACK 은 TCL 이다.",
-    "_source": "authored"
+    "explanation": "GRANT, REVOKE 는 권한을 주고 회수하는 DCL 이다. WITH GRANT OPTION 은 받은 객체 권한을 다른 사용자에게 다시 줄 수 있게 한다. Oracle 에서 이렇게 넘겨준 객체 권한은 처음 준 사용자가 회수하면 연쇄적으로 함께 회수된다. B 가 C 에게 준 권한도 사라져 B, C 모두 EMP 를 조회할 수 없다. 정답은 ③번이다. 시스템 권한을 WITH ADMIN OPTION 으로 넘긴 경우는 연쇄 회수되지 않아 C 의 권한이 남는다. 두 옵션을 구별해야 한다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "-- A 가 실행\nGRANT SELECT ON A.EMP TO B\n  WITH GRANT OPTION;\n-- B 가 실행\nGRANT SELECT ON A.EMP TO C;\n-- A 가 실행\nREVOKE SELECT ON A.EMP FROM B;"
+      }
+    ]
   },
   {
     "id": 10361,

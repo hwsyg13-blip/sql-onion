@@ -1957,16 +1957,22 @@ export const ROUND_55: QuizQuestion[] = [
     "round": 55,
     "subject": "2과목",
     "number": 43,
-    "title": "테이블 구조는 유지한 채 행만 삭제하는 명령어로 적절한 것은?",
+    "title": "Oracle 에서 DELETE, TRUNCATE, DROP 에 대한 설명으로 옳은 것은?",
     "options": [
-      "DELETE, TRUNCATE",
-      "DROP, DELETE",
-      "TRUNCATE, DROP",
-      "UPDATE, DELETE"
+      "DELETE 와 TRUNCATE 는 테이블 구조를 남기고, TRUNCATE 는 WHERE 절로 일부 행만 지울 수 없다.",
+      "TRUNCATE 는 DML 이므로 실행 뒤 ROLLBACK 으로 되돌릴 수 있다.",
+      "DELETE 로 모든 행을 지우면 TRUNCATE 처럼 테이블이 쓰던 저장 공간도 처음 크기로 돌아간다.",
+      "DROP 한 뒤에도 테이블 정의는 남아 있어 바로 INSERT 할 수 있다."
     ],
     "correctIndex": 0,
-    "explanation": "DELETE 와 TRUNCATE 는 테이블 구조는 남기고 행만 삭제한다(①, DELETE 는 조건을 줄 수 있고 TRUNCATE 는 전체 삭제). DROP 은 테이블 구조까지 삭제하므로 ②③ 은 틀리고, UPDATE(④)는 행을 지우지 않고 값을 바꾼다.",
-    "_source": "authored"
+    "explanation": "DELETE 와 TRUNCATE 는 행만 지우고 테이블 구조는 남긴다. TRUNCATE 는 테이블 전체를 비우는 명령이라 WHERE 절이 없다. 정답은 ①번이다. ② TRUNCATE 는 DDL 이라 Oracle 에서 자동 COMMIT 되어 ROLLBACK 할 수 없다. ③ DELETE 는 행을 하나씩 지우며 기록을 남길 뿐 사용하던 공간을 돌려주지 않는다. 공간을 처음 상태로 돌리는 것은 TRUNCATE 다. ④ DROP 은 구조까지 지우므로 다시 CREATE 하기 전에는 INSERT 할 수 없다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "DELETE FROM EMP;\nTRUNCATE TABLE EMP;\nDROP TABLE EMP;"
+      }
+    ]
   },
   {
     "id": 10293,

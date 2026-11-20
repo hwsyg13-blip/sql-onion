@@ -1746,19 +1746,67 @@
     {
       "subject": "2과목",
       "number": 48,
-      "title": "아래 조건이 없는 결합 형태의 조인은?",
+      "title": "아래 SQL 의 조인 형태와 결과로 옳은 것은?",
       "options": [
-        "INNER JOIN",
-        "NATURAL JOIN",
-        "OUTER JOIN",
-        "CROSS JOIN"
+        "INNER JOIN, 2",
+        "NATURAL JOIN, 6",
+        "OUTER JOIN, 12",
+        "CROSS JOIN(카티션 곱), 6"
       ],
       "correctIndex": 3,
-      "explanation": "FROM TABLE1, TABLE2 처럼 조인 조건 없이 테이블을 나열하면 두 테이블의 모든 행 조합(카티션 곱)이 나오며, 이를 ANSI 문법으로 쓴 것이 CROSS JOIN 이다(④). ① INNER·③ OUTER JOIN 은 조인 조건이 필요하고, ② NATURAL JOIN 은 같은 이름 컬럼으로 자동 등가 조인한다.",
+      "explanation": "FROM 에 두 테이블을 나열하고 두 테이블을 잇는 조건이 없으면 모든 행끼리 짝을 짓는 CROSS JOIN(카티션 곱)이 된다. WHERE 의 SAL > 300 은 EMP 만 거르는 조건이라 조인 조건이 아니다. EMP 에서 SAL > 300 인 행은 2명(400, 500)이고, 이들이 DEPT 3행과 모두 짝을 지어 2 × 3 = 6 이다. 정답은 ④번이다. ② NATURAL JOIN 은 이름이 같은 칼럼으로 잇는데 두 테이블에는 같은 이름 칼럼이 없다. ③ 12 는 필터 없이 4 × 3 을 센 값이다.",
       "references": [
         {
+          "type": "table",
+          "caption": "EMP",
+          "headers": [
+            "EMPNO",
+            "SAL"
+          ],
+          "rows": [
+            [
+              "1",
+              "200"
+            ],
+            [
+              "2",
+              "400"
+            ],
+            [
+              "3",
+              "500"
+            ],
+            [
+              "4",
+              "300"
+            ]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "DEPT",
+          "headers": [
+            "DEPTNO",
+            "DNAME"
+          ],
+          "rows": [
+            [
+              "10",
+              "영업"
+            ],
+            [
+              "20",
+              "개발"
+            ],
+            [
+              "30",
+              "인사"
+            ]
+          ]
+        },
+        {
           "type": "sql",
-          "code": "SELECT * FROM TABLE1, TABLE2;\n-- 조인 조건 없음"
+          "code": "SELECT COUNT(*)\nFROM   EMP, DEPT\nWHERE  EMP.SAL > 300;"
         }
       ]
     },

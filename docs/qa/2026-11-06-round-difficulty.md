@@ -1049,3 +1049,7 @@ ERD 선 표기 정리 2차(11-20 14시): 식별자를 다루는 1과목 문항�
 | 46-2-12 | NULLIF 에 NULL 이 들어오면 NULL, CASE 로 쓴 NVL | 이름만 → 세 행 값으로 비교 | ④ | PostgreSQL(COALESCE·CASE·NULLIF) 실행 |
 | 46-2-14 | UNION 은 한 테이블 안의 중복도 없앰 | 설명 고르기 → 행 수 계산 | 5, 3 | PostgreSQL 실행(검증기는 두 문장 결과를 함께 못 봐 오류로 셈) |
 | 49-2-17 | USING 칼럼에 별칭 붙이면 Oracle 오류(ORA-25154) | ON (ID) 문법 오류 → USING 별칭 규칙 | ④ | Oracle 규칙(PostgreSQL 은 허용 — 해설에 적음) |
+| 50-2-48 | 조인 조건 없는 나열 = 카티션 곱, 한쪽 필터는 조인 조건 아님 | 이름 고르기 → 유형 + 행 수 | CROSS, 6 | 검증기 PostgreSQL 실행 ok |
+| 52-2-33 | 선언적(처리 순서는 옵티마이저) vs 절차적 | 특징 이름 → SQL 예와 설명 중 틀린 것 | ① | 정의로 판정 |
+| 55-2-43 | TRUNCATE 는 DDL(자동 COMMIT, WHERE 없음, 공간 반환) vs DELETE | 조합 고르기 → 세 명령 설명 | ① | Oracle 규칙 |
+| 53-2-11 | WITH GRANT OPTION 객체 권한은 연쇄 회수, WITH ADMIN OPTION 은 아님 | DCL 조합 → GRANT·REVOKE 순서 결과 | ③ | Oracle 규칙 |
