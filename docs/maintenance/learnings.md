@@ -225,3 +225,4 @@
 - (11-20) verify-sql-pg/results 는 SQL 블록에 문장이 둘 이상이면 'multi-statement' 오류로 센다. 두 SQL 비교형 문항은 답을 PostgreSQL 로 따로 실행해 확인하고 QA 기록에 적는다.
 - (11-21) verify-sql-results 는 SQLite 라 LIKE 가 대소문자를 구분하지 않았다(Oracle·PostgreSQL 은 구분). `PRAGMA case_sensitive_like = ON` 을 넣어 맞춤(#329). 대소문자 함정 문항을 만들면 두 검증기 모두 확인할 것.
 - (11-21) 일부 문항은 보기마다 그림(optionReferences)이 붙어 있다(48-2-14, 54-2-21, 55-2-13, 57-2-45, 57-2-50, 58-1-8). 보기를 바꾸면 옛 그림이 남으므로 함께 지운다. patch_c2_lib.setq 가 이제 자동으로 지우고 알린다.
+- (11-21) chk.sh 출력에서 audit-content 의 '후보 없음' 줄이 사라진 것을 몇 묶음 동안 놓쳤다(M102·M166 HINT_TAIL). 검사 줄 개수를 볼 때 '후보 없음' 이 있는지도 꼭 확인하고, '보기 — 결과' 짝 형식이면 content-audit-reviewed.json 에 사유를 적어 뺀다.
