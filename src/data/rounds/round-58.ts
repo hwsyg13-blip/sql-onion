@@ -196,41 +196,21 @@ export const ROUND_58: QuizQuestion[] = [
     "round": 58,
     "subject": "1과목",
     "number": 8,
-    "title": "다음 중 상호배타적(Arc) 관계를 표현한 ERD로 가장 적절한 것은?",
+    "title": "'차량의 소유자는 법인 또는 개인 중 정확히 하나' 라는 업무 규칙을 ERD 와 테이블로 나타내는 방법으로 가장 적절한 것은?",
     "options": [
-      "차량과 소유자를 관계선 하나로 1:1 연결한 ERD",
-      "부서와 사원을 관계선 하나로 1:N 연결한 ERD",
-      "사원 엔터티가 관리자 관계로 자기 자신과 연결된 순환 관계 ERD",
-      "차량에서 법인소유자·개인소유자로 갈라지는 두 관계선을 반원(Arc)으로 가로지른 ERD"
+      "차량에 법인번호·개인번호 외래키를 두고 둘 다 NULL 을 허용하며, 다른 제약은 두지 않는다.",
+      "차량-법인, 차량-개인 두 관계를 모두 필수(반드시 있음) 관계로 그린다.",
+      "두 관계선 끝을 원(o)으로 표시하면 상호배타 관계를 뜻한다.",
+      "두 관계선을 반원(Arc)으로 묶어 상호배타 관계로 표시하고, 테이블에서는 두 외래키 중 정확히 하나만 값이 있도록 CHECK 제약을 둔다."
     ],
     "correctIndex": 3,
-    "explanation": "상호배타적(Arc) 관계는 한 엔터티가 여러 엔터티 중 반드시 하나와만 관계를 맺는 것으로, 갈라지는 관계선들을 가로지르는 반원(Arc)으로 표시한다. ④ 는 '차량의 소유자는 법인 또는 개인 중 하나' 라는 뜻이라 정답이다. ① 은 1:1, ② 는 1:N 관계, ③ 은 재귀(순환) 관계다. ※ 복원 자료에는 보기가 그림 번호(①~④)만 남아 있어, 각 그림의 내용을 글로 옮겨 보기를 복원했다.",
+    "explanation": "한 엔터티가 여러 엔터티 중 반드시 하나와만 관계를 맺는 것은 상호배타(Arc) 관계다. ERD 에서는 갈라지는 두 관계선을 반원으로 가로질러 표시한다. 외래키 두 개로 구현하면 DBMS 가 '하나만' 을 알아서 지켜 주지 않으므로 CHECK ((법인번호 IS NULL) <> (개인번호 IS NULL)) 같은 제약으로 보완한다. 정답은 ④번이다. ① 은 둘 다 비었거나 둘 다 채워진 차량을 막지 못한다. ② 는 법인과 개인을 모두 가져야 한다는 뜻이 된다. ③ 원(o)은 관계가 없을 수도 있다는 선택 표시일 뿐이다.",
     "_source": "authored",
-    "optionReferences": [
-      [
-        {
-          "type": "erd",
-          "mermaid": "erDiagram\n    차량 ||--|| 소유자 : \"보유\""
-        }
-      ],
-      [
-        {
-          "type": "erd",
-          "mermaid": "erDiagram\n    부서 ||--o{ 사원 : \"소속\""
-        }
-      ],
-      [
-        {
-          "type": "erd",
-          "mermaid": "erDiagram\n    사원 ||--o{ 사원 : \"관리\""
-        }
-      ],
-      [
-        {
-          "type": "html",
-          "html": "<div style=\"background:var(--bg-card);border:1px solid var(--border-subtle);border-radius:12px;padding:14px 12px;display:flex;justify-content:center\"><svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 320 280\" width=\"300\" style=\"max-width:100%;height:auto\" role=\"img\" aria-label=\"차량에서 법인소유자·개인소유자로 갈라지는 두 관계선을 반원(Arc)이 가로지르는 ERD\" font-family=\"Pretendard, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif\"> <g style=\"stroke:var(--point-600);fill:none\" stroke-width=\"1.4\"> <line x1=\"145\" y1=\"76\" x2=\"75\" y2=\"214\"/> <line x1=\"175\" y1=\"76\" x2=\"245\" y2=\"214\"/> <path d=\"M136 76 L137.8 90.3 L154 76\"/> <circle cx=\"134.2\" cy=\"97.4\" r=\"4\" style=\"fill:var(--bg-card)\"/> <path d=\"M166 76 L182.2 90.3 L184 76\"/> <circle cx=\"185.8\" cy=\"97.4\" r=\"4\" style=\"fill:var(--bg-card)\"/> <line x1=\"73.3\" y1=\"201.9\" x2=\"85.7\" y2=\"208.3\"/> <line x1=\"76\" y1=\"196.5\" x2=\"88.4\" y2=\"202.9\"/> <line x1=\"234.3\" y1=\"208.3\" x2=\"246.7\" y2=\"201.9\"/> <line x1=\"231.6\" y1=\"202.9\" x2=\"244\" y2=\"196.5\"/> <path d=\"M108 120 Q160 160 212 120\" stroke-width=\"2\"/> </g> <g style=\"stroke:var(--point-600);fill:var(--point-100)\" stroke-width=\"1.4\"> <rect x=\"110\" y=\"20\" width=\"100\" height=\"56\"/> <rect x=\"15\" y=\"214\" width=\"120\" height=\"50\"/> <rect x=\"185\" y=\"214\" width=\"120\" height=\"50\"/> </g> <g style=\"fill:var(--fg-1)\" font-size=\"15\" text-anchor=\"middle\"> <text x=\"160\" y=\"53\">차량</text> <text x=\"75\" y=\"244\">법인소유자</text> <text x=\"245\" y=\"244\">개인소유자</text> </g> <g style=\"fill:var(--fg-2)\" font-size=\"12\" text-anchor=\"middle\"> <text x=\"88\" y=\"150\">보유</text> <text x=\"232\" y=\"150\">보유</text> </g> </svg></div>"
-        }
-      ]
+    "references": [
+      {
+        "type": "text",
+        "content": "차량(차량번호, 법인번호, 개인번호, ...)\n법인(법인번호, ...)\n개인(개인번호, ...)"
+      }
     ]
   },
   {

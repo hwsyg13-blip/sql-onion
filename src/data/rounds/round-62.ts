@@ -1647,16 +1647,22 @@ export const ROUND_62: QuizQuestion[] = [
     "round": 62,
     "subject": "2과목",
     "number": 39,
-    "title": "집합 연산자 사용에 대한 설명으로 옳은 것은?",
+    "title": "아래 집합 연산 SQL 의 ( ? ) 자리에 대한 설명으로 옳은 것은? (Oracle 기준, EMP.SAL 과 DEPT.LOC_CD 는 NUMBER)",
     "options": [
-      "첫 번째 SELECT에 정의된 칼럼을 ORDER BY에 사용하면 오류가 난다.",
-      "두 번째 SELECT에서 정의된 컬럼명으로 ORDER BY 하면 오류가 난다.",
-      "ORDER BY 절에는 컬럼명과 별칭만 사용할 수 있으며 숫자(위치)를 쓰면 오류가 난다.",
-      "칼럼 간 데이터 타입이 서로 호환되더라도 타입이 다르면 오류가 발생한다."
+      "ORDER BY NM 은 첫 번째 SELECT 의 별칭이라 오류가 난다.",
+      "ORDER BY DNAME 처럼 두 번째 SELECT 의 칼럼 이름을 쓰면 오류가 난다.",
+      "ORDER BY 2 처럼 위치 번호는 집합 연산에서 쓸 수 없다.",
+      "두 번째 SELECT 의 LOC_CD 가 VARCHAR2 였다면 Oracle 이 숫자로 자동 변환해 그대로 실행한다."
     ],
     "correctIndex": 1,
-    "explanation": "집합 연산자에서 ORDER BY는 마지막에 한 번만 쓰며, 결과 컬럼명은 첫 번째 SELECT의 컬럼명을 따르므로 두 번째 SELECT에서 정의된 컬럼명은 사용할 수 없다. ① 첫 번째 SELECT 의 컬럼명은 ORDER BY 에 쓸 수 있고, ③ 숫자(위치)로 정렬하는 것도 가능하며, ④ 타입이 서로 호환되면 오류 없이 처리된다.",
-    "_source": "authored"
+    "explanation": "집합 연산의 결과 칼럼 이름은 첫 번째 SELECT 를 따른다(NM, SAL). 그래서 ORDER BY 에는 첫 번째 SELECT 의 칼럼 이름·별칭이나 위치 번호를 쓴다. 두 번째 SELECT 에만 있는 DNAME 은 결과 칼럼 이름이 아니라 오류다. 정답은 ②번이다. ① NM 은 결과 칼럼 이름이라 쓸 수 있다. ③ ORDER BY 2 도 된다. ④ Oracle 은 집합 연산의 같은 위치 칼럼이 숫자·문자처럼 타입 계열이 다르면 자동 변환하지 않고 오류(ORA-01790)를 낸다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT ENAME AS NM, SAL\nFROM   EMP\nUNION\nSELECT DNAME, LOC_CD\nFROM   DEPT\nORDER  BY ( ? );"
+      }
+    ]
   },
   {
     "id": 9939,
