@@ -1631,7 +1631,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT TO_CHAR(TO_DATE('2015.01.10 10', 'YYYY.MM.DD HH24') + 1/24/(60/10), 'YYYY.MM.DD HH24:MI:SS') FROM DUAL;"
+          "code": "SELECT TO_CHAR(\n  TO_DATE('2015.01.10 10',\n          'YYYY.MM.DD HH24')\n  + 1/24/(60/10),\n  'YYYY.MM.DD HH24:MI:SS')\nFROM DUAL;"
         }
       ]
     },
@@ -9551,7 +9551,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT MGR, ENAME, SAL, \n       SUM(SAL) OVER (PARTITION BY MGR ORDER BY HIREDATE ROWS BETWEEN 1 PRECEDING AND 1 FOLLOWING) AS MGR_SUM\nFROM Mytest;"
+          "code": "SELECT MGR, ENAME, SAL,\n       SUM(SAL) OVER (\n         PARTITION BY MGR\n         ORDER BY HIREDATE\n         ROWS BETWEEN 1 PRECEDING\n              AND 1 FOLLOWING)\n         AS MGR_SUM\nFROM Mytest;"
         },
         {
           "type": "table",
@@ -11555,7 +11555,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT EMPLOYEE_ID,\nDEPARTMENT_ID, LAST_NAME, SALARY, LAG(SALARY,( )) OVER(PARTITION BY DEPARTMENT_ID ORDER BY SALARY) AS BEFORE_SALARAY\nFROM EMPLOYEES\nWHERE EMPLOYEE_ID < 110;"
+          "code": "SELECT EMPLOYEE_ID,\nDEPARTMENT_ID, LAST_NAME, SALARY,\nLAG(SALARY,( )) OVER(\n  PARTITION BY DEPARTMENT_ID\n  ORDER BY SALARY) AS BEFORE_SALARAY\nFROM EMPLOYEES\nWHERE EMPLOYEE_ID < 110;"
         },
         {
           "type": "image",
@@ -11606,7 +11606,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT DNAME, JOB, COUNT(*) \"Total EMP\", SUM(SAL) \"Total Sal\" FROM SCOTT.EMP A, SCOTT.DEPT B WHERE A.DEPTNO = B.DEPTNO\nGROUP BY CUBE(DNAME,JOB);"
+          "code": "SELECT DNAME, JOB,\n       COUNT(*) \"Total EMP\",\n       SUM(SAL) \"Total Sal\"\nFROM SCOTT.EMP A, SCOTT.DEPT B\nWHERE A.DEPTNO = B.DEPTNO\nGROUP BY CUBE(DNAME,JOB);"
         },
         {
           "type": "image",
@@ -16597,7 +16597,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT TO_CHAR(TO_DATE('2024/08/24 10:00', 'YYYY/MM/DD HH24:MI') - 30/24/60, 'YYYY.MM.DD HH24:MI:SS') FROM DUAL;"
+          "code": "SELECT TO_CHAR(\n  TO_DATE('2024/08/24 10:00',\n          'YYYY/MM/DD HH24:MI')\n  - 30/24/60,\n  'YYYY.MM.DD HH24:MI:SS')\nFROM DUAL;"
         }
       ]
     },
@@ -17464,7 +17464,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT REGEXP_COUNT('abc1004 zz1234', '\\d{2}+') AS C1, REGEXP_COUNT('abc1004-zz1234-100', '\\d{2,}+') AS C2 \n FROM DUAL;"
+          "code": "SELECT REGEXP_COUNT('abc1004 zz1234',\n                    '\\d{2}+') AS C1,\n       REGEXP_COUNT(\n         'abc1004-zz1234-100',\n         '\\d{2,}+') AS C2\n FROM DUAL;"
         }
       ]
     },
@@ -17966,7 +17966,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT LTRIM(' AB DE ') AS C1,   INITCAP('ABCDE') AS C2, TO_CHAR('123', '999.99') AS C3 FROM DUAL;"
+          "code": "SELECT LTRIM(' AB DE ') AS C1,\n       INITCAP('ABCDE') AS C2,\n       TO_CHAR('123', '999.99') AS C3\nFROM DUAL;"
         }
       ]
     },
@@ -20858,7 +20858,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT LENGTH(REGEXP_REPLACE('REGEXP \\. ESCAPE CHARACTER, A|B : A OR B', '[A-z|0-9\\. ]'))  FROM DUAL;"
+          "code": "SELECT LENGTH(REGEXP_REPLACE(\n'REGEXP \\. ESCAPE CHARACTER, A|B : A OR B',\n  '[A-z|0-9\\. ]'))\nFROM DUAL;"
         }
       ]
     },
@@ -21357,7 +21357,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT DECODE(DEPTNO, 10, DECODE(JOB, 'CLERK', 'A', 'B'), 'C') AS RESULT FROM EMP ORDER BY EMPNO;"
+          "code": "SELECT DECODE(DEPTNO, 10,\n         DECODE(JOB, 'CLERK',\n                'A', 'B'),\n         'C') AS RESULT\nFROM EMP\nORDER BY EMPNO;"
         },
         {
           "type": "table",
@@ -21502,7 +21502,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT COUNT(COL1) FROM TAB1 WHERE NOT EXISTS(SELECT 'X' FROM TAB2 WHERE TAB1.COL2 = TAB2.COL2);"
+          "code": "SELECT COUNT(COL1) FROM TAB1\nWHERE NOT EXISTS\n      (SELECT 'X' FROM TAB2\n        WHERE TAB1.COL2 = TAB2.COL2);"
         },
         {
           "type": "table",
@@ -21637,7 +21637,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT COL2, SUM(COL3) AS C1, MIN(COL3) AS C2, MAX(COL3) AS C3 FROM TAB1 WHERE COL1 > 100 GROUP BY COL2;"
+          "code": "SELECT COL2, SUM(COL3) AS C1,\n       MIN(COL3) AS C2,\n       MAX(COL3) AS C3\nFROM TAB1\nWHERE COL1 > 100\nGROUP BY COL2;"
         },
         {
           "type": "table",
@@ -21778,7 +21778,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT E.ENAME, E.SAL, E.DEPTNO, D.DNAME FROM EMP E, DEPT D WHERE E.DEPTNO = D.DEPTNO AND E.SAL > 3000 ORDER BY E.ENAME;"
+          "code": "SELECT E.ENAME, E.SAL, E.DEPTNO,\n       D.DNAME\nFROM EMP E, DEPT D\nWHERE E.DEPTNO = D.DEPTNO\n  AND E.SAL > 3000\nORDER BY E.ENAME;"
         }
       ]
     },
@@ -21835,7 +21835,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT COL1, COL2, (SELECT COL2 FROM TAB2 WHERE TAB1.COL2 = TAB2.COL1) AS RESULT1, (SELECT MAX(COL2) FROM TAB3 WHERE TAB1.COL1 = TAB3.COL1) AS RESULT2 FROM TAB1;"
+          "code": "SELECT COL1, COL2,\n       (SELECT COL2 FROM TAB2\n         WHERE TAB1.COL2 = TAB2.COL1)\n         AS RESULT1,\n       (SELECT MAX(COL2) FROM TAB3\n         WHERE TAB1.COL1 = TAB3.COL1)\n         AS RESULT2\nFROM TAB1;"
         },
         {
           "type": "table",
@@ -22020,7 +22020,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT SUM(E2.SAL) AS RESULT FROM EMP E1, EMP E2 WHERE E1.HIREDATE >= E2.HIREDATE GROUP BY E1.ENAME;"
+          "code": "SELECT SUM(E2.SAL) AS RESULT\nFROM EMP E1, EMP E2\nWHERE E1.HIREDATE >= E2.HIREDATE\nGROUP BY E1.ENAME;"
         },
         {
           "type": "table",
@@ -22074,7 +22074,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT NAME, NVL((SELECT FARE FROM PROMOTION P2 WHERE P1.CODE = P2.CODE), 100) PRO_FARE FROM PRODUCT P1;"
+          "code": "SELECT NAME,\n       NVL((SELECT FARE\n              FROM PROMOTION P2\n             WHERE P1.CODE = P2.CODE),\n           100) PRO_FARE\nFROM PRODUCT P1;"
         },
         {
           "type": "table",
@@ -22166,7 +22166,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT EMPNO, ENAME, DEPTNO, SAL, LAG(SAL, 2, 0) OVER(PARTITION BY DEPTNO ORDER BY SAL) LAV_VALUE FROM EMP;"
+          "code": "SELECT EMPNO, ENAME, DEPTNO, SAL,\n       LAG(SAL, 2, 0) OVER(\n         PARTITION BY DEPTNO\n         ORDER BY SAL) LAV_VALUE\nFROM EMP;"
         },
         {
           "type": "table",
@@ -22266,7 +22266,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT RATIO_TO_REPORT(COL2) OVER() AS C1, CUME_DIST() OVER(ORDER BY COL2) AS C2, ROUND(PERCENT_RANK() OVER(ORDER BY COL2),2) AS C3 FROM TAB1;"
+          "code": "SELECT RATIO_TO_REPORT(COL2) OVER()\n         AS C1,\n       CUME_DIST() OVER(ORDER BY COL2)\n         AS C2,\n       ROUND(PERCENT_RANK() OVER(\n               ORDER BY COL2), 2) AS C3\nFROM TAB1;"
         },
         {
           "type": "table",
@@ -22315,7 +22315,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT SUM(SAL) FROM (SELECT ENAME, DEPTNO, SAL, NTILE(2) OVER(PARTITION BY DEPTNO ORDER BY SAL) AS GN FROM EMP) WHERE (DEPTNO = 10 AND GN = 1) OR (DEPTNO = 20 AND GN = 2);"
+          "code": "SELECT SUM(SAL)\nFROM (SELECT ENAME, DEPTNO, SAL,\n             NTILE(2) OVER(\n               PARTITION BY DEPTNO\n               ORDER BY SAL) AS GN\n      FROM EMP)\nWHERE (DEPTNO = 10 AND GN = 1)\n   OR (DEPTNO = 20 AND GN = 2);"
         },
         {
           "type": "table",
@@ -22513,7 +22513,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT SYS_CONNECT_BY_PATH(DNAME, '-') FROM DEPARTMENT WHERE DEPTNO = 103 START WITH PART IS NULL CONNECT BY PART = PRIOR DEPTNO ;"
+          "code": "SELECT SYS_CONNECT_BY_PATH(DNAME, '-')\nFROM DEPARTMENT\nWHERE DEPTNO = 103\nSTART WITH PART IS NULL\nCONNECT BY PART = PRIOR DEPTNO ;"
         },
         {
           "type": "table",
@@ -22601,7 +22601,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT REGEXP_SUBSTR('123-234-4545-233', '((\\d+)-(\\d+))-((\\d+)-(\\d+))', 1, 1, NULL, 4) FROM DUAL;"
+          "code": "SELECT REGEXP_SUBSTR(\n  '123-234-4545-233',\n  '((\\d+)-(\\d+))-((\\d+)-(\\d+))',\n  1, 1, NULL, 4)\nFROM DUAL;"
         }
       ]
     },
