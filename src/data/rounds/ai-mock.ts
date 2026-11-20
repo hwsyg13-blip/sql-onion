@@ -1,5 +1,5 @@
 // Auto-generated from scripts/authored/ai-mock.json
-// AI 생성 모의고사 풀 (기출 변형) · 1173문항
+// AI 생성 모의고사 풀 (기출 변형) · 1174문항
 // ⚠ 직접 편집 금지. ai-mock.json 수정 후 'node scripts/build-quiz-bank.mjs' 재실행.
 import type { QuizQuestion } from '../quizBank';
 
@@ -1149,19 +1149,25 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 56,
-    "title": "서브쿼리에 대한 설명으로 올바르지 않은 것은?",
+    "title": "아래 SQL 과 서브쿼리에 대한 설명으로 올바르지 않은 것은?",
     "options": [
-      "서브쿼리는 괄호를 사용해서 SELECT문을 감싸서 사용하는 것이다.",
-      "서브쿼리는 비교 연산자와 함께 사용이 가능하다.",
-      "서브쿼리 안에서는 메인쿼리의 칼럼을 참조할 수 없다.",
-      "서브쿼리는 SELECT절, FROM절, WHERE절 등에서 사용이 가능하다."
+      "서브쿼리는 괄호로 감싸서 쓴다.",
+      "= 같은 단일 행 비교 연산자 뒤의 서브쿼리는 한 행만 돌려줘야 한다.",
+      "위 SQL 처럼 서브쿼리 안에서 바깥 쿼리의 E.DEPTNO 를 참조하면 오류가 난다.",
+      "서브쿼리는 SELECT, FROM, WHERE, HAVING 절 등 여러 곳에 쓸 수 있다."
     ],
     "correctIndex": 2,
-    "explanation": "서브쿼리는 괄호로 감싼 SELECT 문이고(①), 비교 연산자와 함께 쓸 수 있으며(②), SELECT·FROM·WHERE 절 등에 쓸 수 있다(④). 연관(상관) 서브쿼리는 서브쿼리 안에서 메인쿼리의 칼럼을 참조하므로 ③ 이 올바르지 않다. 반대로 메인쿼리는 서브쿼리 안의 칼럼을 직접 쓸 수 없다(FROM 절의 인라인 뷰 칼럼은 예외).",
+    "explanation": "서브쿼리 안에서 바깥 쿼리의 칼럼을 참조할 수 있다. 이렇게 쓰는 것이 연관(상관) 서브쿼리이고, 위 SQL 은 바깥 행마다 그 부서의 최고 급여를 구해 부서별 최고 급여 사원을 찾는다. 그래서 ③ 이 틀렸다. 정답은 ③번이다. ① 괄호로 감싸는 것이 규칙이다. ② MAX 는 그룹마다 값 하나라 한 행만 돌려주므로 = 와 함께 쓸 수 있다. ④ 위치에 따라 스칼라 서브쿼리, 인라인 뷰, 중첩 서브쿼리라 부른다.",
     "chapter": "서브쿼리",
     "_source": "cbt-mock",
     "_origId": "cbt-006",
-    "_cbtOrigNo": 6
+    "_cbtOrigNo": 6,
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT E.ENAME\nFROM   EMP E\nWHERE  E.SAL = (SELECT MAX(SAL)\n                FROM   EMP\n                WHERE  DEPTNO = E.DEPTNO);"
+      }
+    ]
   },
   {
     "id": 10856,
@@ -5615,19 +5621,25 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 191,
-    "title": "Commit과 Rollback의 장점으로 적합하지 않은 것은 무엇인가?",
+    "title": "빈 테이블 T 에 아래 순서로 실행했다. 결과와 COMMIT·ROLLBACK 에 대한 설명으로 옳지 않은 것은?",
     "options": [
-      "데이터 무결성을 보장한다.",
-      "영구적인 변경을 할 수 없게 한다.",
-      "영구적인 변경을 하기 전에 데이터의 변경 사항 확인이 가능하다.",
-      "논리적으로 연관된 작업을 그룹핑하여 처리 가능하다."
+      "COMMIT 전에는 다른 세션에서 1, 3 이 보이지 않는다.",
+      "ROLLBACK TO A 에서 1 까지 모두 취소되어 최종적으로 3 만 남는다.",
+      "COMMIT 뒤 T 에 남는 값은 1, 3 이다.",
+      "연관된 INSERT 들을 한 트랜잭션으로 묶어 한꺼번에 반영한다."
     ],
     "correctIndex": 1,
-    "explanation": "COMMIT·ROLLBACK 덕분에 변경을 확정하기 전에 확인할 수 있고(③), 관련 작업을 하나로 묶어 처리하며(④), 데이터 무결성이 보장된다(①). COMMIT 으로 영구 변경을 할 수 있게 하는 것이므로 '영구적인 변경을 할 수 없게 한다' 는 ② 가 맞지 않다.",
+    "explanation": "ROLLBACK TO A 는 저장점 A 이후의 작업(2 입력)만 취소하고, A 이전의 1 은 그대로 둔다. 이어서 3 을 넣고 COMMIT 하므로 1, 3 이 남는다. 1 까지 취소된다는 ② 가 틀렸다. 정답은 ②번이다. ① COMMIT 전 변경은 그 세션에서만 보인다. ④ COMMIT·ROLLBACK 으로 연관된 작업을 묶어 함께 반영하거나 취소해 무결성을 지킨다.",
     "chapter": "DCL·TCL",
     "_source": "cbt-mock",
     "_origId": "cbt-149",
-    "_cbtOrigNo": 149
+    "_cbtOrigNo": 149,
+    "references": [
+      {
+        "type": "sql",
+        "code": "INSERT INTO T VALUES (1);\nSAVEPOINT A;\nINSERT INTO T VALUES (2);\nROLLBACK TO A;\nINSERT INTO T VALUES (3);\nCOMMIT;"
+      }
+    ]
   },
   {
     "id": 10991,
@@ -6566,19 +6578,54 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 223,
-    "title": "다음 중 UNION ALL에 대한 설명으로 옳은 것은?",
+    "title": "아래 A, B 에 대해 SELECT V FROM A UNION ALL SELECT V FROM B 의 결과로 옳은 것은? (행 순서는 무시)",
     "options": [
-      "결과에서 중복을 제거한다.",
-      "정렬된 결과를 반환한다.",
-      "중복을 포함하여 결과를 모두 출력한다.",
-      "두 SELECT 결과의 교집합을 구한다."
+      "1, 2, 3",
+      "1, 2, 2, 3",
+      "1, 2, 2, 2, 3",
+      "2"
     ],
     "correctIndex": 2,
-    "explanation": "UNION ALL 은 두 SELECT 결과를 중복 제거나 정렬 없이 그대로 모두 합쳐 출력한다(③). 중복을 제거하는 것은 UNION(①), 교집합은 INTERSECT(④)이며, UNION ALL 은 정렬된 결과를 보장하지 않는다(②).",
+    "explanation": "UNION ALL 은 중복을 없애지 않고 두 결과를 그대로 이어 붙인다. A 의 1, 2, 2 와 B 의 2, 3 을 합쳐 5행(2 가 세 번)이다. 정답은 ③번이다. 정렬도 하지 않으므로 순서는 보장되지 않는다. ① 은 UNION(전체 중복 제거), ② 는 두 테이블 사이의 중복만 지운 잘못된 계산, ④ 는 INTERSECT(양쪽 공통) 결과다.",
     "chapter": "집합 연산자",
     "_source": "cbt-mock",
     "_origId": "cbt-181",
-    "_cbtOrigNo": 181
+    "_cbtOrigNo": 181,
+    "references": [
+      {
+        "type": "table",
+        "caption": "A",
+        "headers": [
+          "V"
+        ],
+        "rows": [
+          [
+            "1"
+          ],
+          [
+            "2"
+          ],
+          [
+            "2"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "B",
+        "headers": [
+          "V"
+        ],
+        "rows": [
+          [
+            "2"
+          ],
+          [
+            "3"
+          ]
+        ]
+      }
+    ]
   },
   {
     "id": 11023,
@@ -11822,6 +11869,27 @@ export const AI_MOCK: QuizQuestion[] = [
     "_source": "sqld-1140",
     "_origId": "sqld-0174",
     "_category": "데이터베이스 개념",
+    "_correctRate": 10
+  },
+  {
+    "id": 11185,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 386,
+    "title": "Commit과 Rollback의 장점으로 적합하지 않은 것은 무엇인가?",
+    "options": [
+      "논리적으로 연관된 작업을 그룹핑하여 처리 가능하다.",
+      "영구적인 변경을 하기 전에 데이터의 변경 사항 확인이 가능하다.",
+      "영구적인 변경을 할 수 없게 한다.",
+      "데이터 무결성을 보장한다."
+    ],
+    "correctIndex": 2,
+    "explanation": "-데이터 무결성 보장\n-영구적인 변경을 하기 전에 데이터의 변경 사항 확인 가능\n-논리적으로 연관된 작업을 그룹핑하여 처리 가능",
+    "chapter": "DCL·TCL",
+    "_source": "sqld-1140",
+    "_origId": "sqld-0176",
+    "_category": "DCL",
     "_correctRate": 10
   },
   {
