@@ -1124,3 +1124,5 @@ ERD 선 표기 정리 2차(11-20 14시): 식별자를 다루는 1과목 문항�
 | 45-2-13 | 동명이인이면 = 서브쿼리 오류, IN 은 다른 팀까지 | 단순 UPDATE → 식별자로 찾기 | ④ | PostgreSQL 실행(② 오류, ③ 3행, ④ 2행) |
 | 46-2-15 | 실제 NULL 그룹이 있을 때 행 수, GROUPING 으로 구별 | 결과 다른 SQL → SQL·행 수 짝 중 틀린 것 | ④ | PostgreSQL 실행(4, 4, 4, 3) |
 | 46-2-21 | 동률 두 번 + COUNT(*) OVER 기본 윈도우(RANGE) | 동률 한 번·NTILE → 순위 함수 + COUNT | ② | PostgreSQL 실행 |
+| 47-2-15 | DCL 은 권한 명령, STARTUP·SHUTDOWN 은 분류 밖, TRUNCATE·MERGE·SAVEPOINT | 분류 정의 → 명령 사례 | ② | 정의로 판정 |
+| 48-1-10 | 선택 관계(|o)를 NULL 허용 FK·LEFT JOIN 으로 구현 | 기호 해석 → 구현 판단(ERD 속성 추가) | ② | 정의로 판정, ERD 렌더 확인 |

@@ -450,15 +450,16 @@
     {
       "subject": "2과목",
       "number": 15,
-      "title": "SQL 분류에 대한 설명 중 적절하지 않은 것은?",
+      "title": "SQL 명령과 분류에 대한 설명으로 적절하지 않은 것은?",
       "options": [
-        "DDL 은 객체 정의를 변경한다.",
-        "DCL 은 데이터베이스 구동과 종료를 수행한다.",
-        "DML 은 데이터 조작을 수행한다.",
-        "TCL 은 트랜잭션을 제어한다."
+        "TRUNCATE 는 행을 지우지만 테이블 구조를 다루는 DDL 이라 Oracle 에서 ROLLBACK 할 수 없다.",
+        "DCL 에는 데이터베이스를 켜고 끄는 STARTUP·SHUTDOWN 이 포함된다.",
+        "MERGE 는 조건에 따라 INSERT·UPDATE 를 함께 하는 DML 이다.",
+        "SAVEPOINT 는 트랜잭션 안에 되돌릴 지점을 정하는 TCL 이다."
       ],
       "correctIndex": 1,
-      "explanation": "SQL 명령은 역할에 따라 4가지로 분류된다. DDL은 객체 정의(CREATE/ALTER/DROP), DML은 데이터 조작(SELECT/INSERT/UPDATE/DELETE), DCL은 권한 제어(GRANT/REVOKE), TCL은 트랜잭션 제어(COMMIT/ROLLBACK)이다. DB 시작·종료(STARTUP/SHUTDOWN)는 DCL이 아닌 시스템 관리 명령에 해당한다. 따라서 \"DCL이 DB 구동·종료를 수행한다\"는 ②번 설명이 틀려서 정답이 된다. ①·③·④ 는 각각 DDL·DML·TCL 의 역할을 바르게 설명했다."
+      "explanation": "DCL 은 GRANT, REVOKE 처럼 권한을 주고 회수하는 명령이다. STARTUP·SHUTDOWN 은 SQL 분류(DDL·DML·DCL·TCL)에 속하지 않는 DBMS 관리 명령이다. 정답은 ②번이다. ① TRUNCATE 는 DDL 이라 자동 COMMIT 되어 되돌릴 수 없다. ③ MERGE 는 DML 이다. ④ SAVEPOINT 는 COMMIT·ROLLBACK 과 함께 TCL 이다.",
+      "references": []
     },
     {
       "subject": "2과목",
