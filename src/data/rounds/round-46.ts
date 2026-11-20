@@ -637,15 +637,15 @@ export const ROUND_46: QuizQuestion[] = [
     "round": 46,
     "subject": "2과목",
     "number": 15,
-    "title": "아래 T 테이블에 대한 네 SQL 중 결과가 다른 것은?",
+    "title": "A 칼럼에 실제 NULL 이 있는 아래 T 테이블에 대해, SQL 과 결과 행 수를 짝지은 것 중 틀린 것은?",
     "options": [
-      "SELECT A, SUM(X) FROM T GROUP BY A UNION ALL SELECT NULL, SUM(X) FROM T;",
-      "SELECT A, SUM(X) FROM T GROUP BY ROLLUP(A);",
-      "SELECT A, SUM(X) FROM T GROUP BY CUBE(A);",
-      "SELECT A, SUM(X) FROM T GROUP BY GROUPING SETS(A);"
+      "SELECT A, SUM(X) FROM T GROUP BY A UNION ALL SELECT NULL, SUM(X) FROM T; — 4행",
+      "SELECT A, SUM(X) FROM T GROUP BY ROLLUP(A); — 4행",
+      "SELECT A, SUM(X) FROM T GROUP BY CUBE(A); — 4행",
+      "SELECT A, SUM(X) FROM T GROUP BY GROUPING SETS(A); — 4행"
     ],
     "correctIndex": 3,
-    "explanation": "A 별 합계는 A 가 1 이면 30, 2 이면 70 이고 전체 합계는 100 이다. ① 은 A 별 합계 두 행에 A 가 NULL 인 전체 합계 한 행을 붙여 (1, 30), (2, 70), (NULL, 100) 을 돌려준다. ② ROLLUP(A) 와 ③ CUBE(A) 는 컬럼이 하나라 둘 다 A 별 합계와 전체 합계를 만들어 ① 과 같다. ④ GROUPING SETS(A) 는 A 별 합계만 만들고 전체 합계가 없어 (1, 30), (2, 70) 두 행뿐이다. 결과가 다른 것은 ④ 다.",
+    "explanation": "A 로 묶으면 1(30), 2(40), 실제 NULL(30) 세 그룹이 생긴다. ①·②·③ 은 여기에 전체 합계 100 한 행이 더해져 4행이다. ④ GROUPING SETS(A) 는 A 별 그룹만 만들고 전체 합계가 없어 3행이므로 틀렸다. 정답은 ④번이다. ROLLUP 결과에는 A 가 NULL 인 행이 두 개(실제 NULL 그룹 30, 전체 합계 100) 나온다. 둘을 구별하려면 GROUPING(A) 를 함께 출력한다. 소계·합계 행은 1, 실제 NULL 그룹은 0 이다.",
     "_source": "authored",
     "references": [
       {
@@ -665,7 +665,7 @@ export const ROUND_46: QuizQuestion[] = [
             "20"
           ],
           [
-            "2",
+            "NULL",
             "30"
           ],
           [
@@ -1038,15 +1038,15 @@ export const ROUND_46: QuizQuestion[] = [
     "round": 46,
     "subject": "2과목",
     "number": 21,
-    "title": "아래 데이터에 네 윈도우 함수를 적용했을 때, 마지막 행의 값이 나머지와 다른 것은?",
+    "title": "아래 T 에 네 윈도우 함수를 적용했을 때, VAL 이 40 인 마지막 행의 값이 나머지와 다른 것은? (모두 OVER (ORDER BY VAL))",
     "options": [
-      "RANK() OVER (ORDER BY VAL)",
-      "DENSE_RANK() OVER (ORDER BY VAL)",
-      "ROW_NUMBER() OVER (ORDER BY VAL)",
-      "NTILE(5) OVER (ORDER BY VAL)"
+      "RANK()",
+      "DENSE_RANK()",
+      "ROW_NUMBER()",
+      "COUNT(*)"
     ],
     "correctIndex": 1,
-    "explanation": "VAL 이 20 인 행이 두 개라 동률이 생긴다. ① RANK 는 1, 2, 2, 4, 5 로 동률 다음 순위를 건너뛰고 DENSE_RANK 는 1, 2, 2, 3, 4 로 건너뛰지 않는다. ③ ROW_NUMBER 는 동률과 무관하게 1, 2, 3, 4, 5 이고 ④ NTILE(5) 도 다섯 그룹으로 나누어 1, 2, 3, 4, 5 가 된다. 마지막 행의 값이 4 인 ② DENSE_RANK 만 나머지(5)와 다르다.",
+    "explanation": "동률이 20, 30 에 두 번 있다. RANK 는 1, 2, 2, 4, 4, 6 으로 동률 뒤 순위를 건너뛰어 마지막이 6 이다. DENSE_RANK 는 1, 2, 2, 3, 3, 4 로 건너뛰지 않아 마지막이 4 다. ROW_NUMBER 는 1~6 이라 6 이다. COUNT(*) OVER (ORDER BY VAL) 는 기본 윈도우가 처음부터 현재 값과 같은 행까지(RANGE)라 1, 3, 3, 5, 5, 6 이 되고 마지막은 6 이다. 마지막 행이 4 인 ② 만 다르다. 정답은 ②번이다.",
     "_source": "authored",
     "references": [
       {
@@ -1075,6 +1075,10 @@ export const ROUND_46: QuizQuestion[] = [
           ],
           [
             "5",
+            "30"
+          ],
+          [
+            "6",
             "40"
           ]
         ]
