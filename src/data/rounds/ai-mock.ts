@@ -1,5 +1,5 @@
 // Auto-generated from scripts/authored/ai-mock.json
-// AI 생성 모의고사 풀 (기출 변형) · 1174문항
+// AI 생성 모의고사 풀 (기출 변형) · 1175문항
 // ⚠ 직접 편집 금지. ai-mock.json 수정 후 'node scripts/build-quiz-bank.mjs' 재실행.
 import type { QuizQuestion } from '../quizBank';
 
@@ -1175,15 +1175,15 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 57,
-    "title": "다음 중 절차형 SQL을 이용하여 주로 만드는 것이 아닌 것은?",
+    "title": "다음 요구와 절차형 SQL 로 만드는 객체를 짝지은 것 중 틀린 것은?",
     "options": [
-      "PROCEDURE",
-      "TRIGGER",
-      "BUILT-IN FUNCTION",
-      "USER DEFINED FUNCTION"
+      "주문 테이블에 행이 INSERT 될 때마다 자동으로 재고를 줄인다 — 트리거",
+      "월말에 관리자가 호출해 여러 테이블을 한꺼번에 정산하고, 값을 돌려주지 않는다 — 프로시저",
+      "SUBSTR, ROUND 처럼 DBMS 에 기본으로 들어 있는 함수를 새로 만든다 — 사용자 정의 함수",
+      "SELECT 문 안에서 불러 고객 등급 값 하나를 돌려받는다 — 사용자 정의 함수"
     ],
     "correctIndex": 2,
-    "explanation": "절차형 SQL(PL/SQL 등)로는 저장 프로시저(PROCEDURE), 트리거(TRIGGER), 사용자 정의 함수(USER DEFINED FUNCTION)를 만든다(①②④). 내장 함수(BUILT-IN FUNCTION)는 SUM·SUBSTR 처럼 DBMS 가 기본으로 제공하는 함수라 사용자가 절차형 SQL 로 만드는 대상이 아니다(③).",
+    "explanation": "SUBSTR, ROUND 같은 함수는 DBMS 가 처음부터 제공하는 내장(Built-in) 함수라 절차형 SQL 로 만드는 대상이 아니다. 정답은 ③번이다. ① 테이블 이벤트(INSERT·UPDATE·DELETE)에 맞춰 자동으로 실행되는 것은 트리거다. ② 사용자가 호출해 여러 작업을 처리하고 반드시 값을 돌려주지 않아도 되는 것은 프로시저다. ④ 값을 하나 돌려주고 SQL 문 안에서 쓸 수 있는 것은 사용자 정의 함수다.",
     "chapter": "절차형 SQL",
     "_source": "cbt-mock",
     "_origId": "cbt-007",
@@ -7150,6 +7150,79 @@ export const AI_MOCK: QuizQuestion[] = [
           [
             "C",
             "4000"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": 11041,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 242,
+    "title": "아래 도서 테이블에서 2000년 이후 2권 이상 발행한 출판사(A사, C사)를 구하려 한다. 의도대로 동작하는 SQL 은?",
+    "options": [
+      "SELECT 출판사명 FROM 도서 WHERE 발행연도 >= 2000 GROUP BY 출판사명 HAVING COUNT(*) > 2;",
+      "SELECT 출판사명 FROM 도서 GROUP BY 출판사명 HAVING COUNT(도서번호) >= 2 AND 발행연도 >= 2000;",
+      "SELECT DISTINCT 출판사명 FROM 도서 WHERE 발행연도 >= 2000 AND COUNT(도서번호) >= 2;",
+      "SELECT 출판사명 FROM 도서 WHERE 발행연도 >= 2000 GROUP BY 출판사명 HAVING COUNT(도서번호) >= 2;"
+    ],
+    "correctIndex": 3,
+    "explanation": "행 하나에 대한 조건(발행연도 >= 2000)은 WHERE 로 먼저 거르고, 그룹 집계에 대한 조건(2권 이상)은 HAVING 에 쓴다. 2000년 이후만 세면 A사 2권, B사 1권, C사 3권이라 A사, C사가 나온다. 정답은 ④번이다. ① 은 > 2 라 2권인 A사가 빠지고 C사만 나온다. ② 는 HAVING 에 그룹으로 묶지 않은 발행연도를 써서 오류다. ③ 은 WHERE 에 집계 함수 COUNT 를 써서 오류다.",
+    "chapter": "GROUP BY·HAVING",
+    "_source": "cbt-mock",
+    "_origId": "cbt-201",
+    "_cbtOrigNo": 201,
+    "references": [
+      {
+        "type": "table",
+        "caption": "도서",
+        "headers": [
+          "도서번호",
+          "출판사명",
+          "발행연도"
+        ],
+        "rows": [
+          [
+            "1",
+            "A사",
+            "1999"
+          ],
+          [
+            "2",
+            "A사",
+            "2001"
+          ],
+          [
+            "3",
+            "A사",
+            "2005"
+          ],
+          [
+            "4",
+            "B사",
+            "2002"
+          ],
+          [
+            "5",
+            "B사",
+            "1998"
+          ],
+          [
+            "6",
+            "C사",
+            "2010"
+          ],
+          [
+            "7",
+            "C사",
+            "2011"
+          ],
+          [
+            "8",
+            "C사",
+            "2012"
           ]
         ]
       }
