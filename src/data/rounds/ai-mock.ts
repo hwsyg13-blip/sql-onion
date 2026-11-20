@@ -237,18 +237,44 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 12,
-    "title": "GROUPING SETS(A, B, C)를 사용하여 집계를 수행할 때, 생성되는 그룹핑 결과의 조합 수는?",
+    "title": "아래 T 에 대해 GROUP BY GROUPING SETS(A, B, C) 로 SUM(V) 를 구할 때, 만들어지는 그룹핑 묶음 수와 결과 행 수로 옳은 것은?",
     "options": [
-      "1개",
-      "4개",
-      "8개",
-      "3개"
+      "1개 묶음, 2행",
+      "4개 묶음, 6행",
+      "8개 묶음, 12행",
+      "3개 묶음, 5행"
     ],
     "correctIndex": 3,
-    "explanation": "GROUPING SETS 는 적은 것만큼 따로 집계한다 → (A), (B), (C) 3개. 같은 컬럼이라도 ROLLUP(A, B, C) 이면 4개, CUBE(A, B, C) 이면 2³ = 8개다.",
+    "explanation": "GROUPING SETS(A, B, C) 는 괄호 안에 적은 A, B, C 를 각각 하나의 묶음으로 따로 집계한다. 묶음은 3개이고, 총계는 () 를 적지 않았으므로 없다. A 로 묶으면 a1, a2 두 행, B 로 묶으면 b1 한 행, C 로 묶으면 c1, c2 두 행이라 모두 5행이다. 정답은 ④번이다. ② 4개는 ROLLUP(A, B, C)(3 + 총계 1), ③ 8개는 CUBE(A, B, C)(2³)의 묶음 수다.",
     "chapter": "그룹 함수",
     "_source": "ai-mock",
-    "_origId": "ai-mock-015"
+    "_origId": "ai-mock-015",
+    "references": [
+      {
+        "type": "table",
+        "caption": "T",
+        "headers": [
+          "A",
+          "B",
+          "C",
+          "V"
+        ],
+        "rows": [
+          [
+            "a1",
+            "b1",
+            "c1",
+            "10"
+          ],
+          [
+            "a2",
+            "b1",
+            "c2",
+            "20"
+          ]
+        ]
+      }
+    ]
   },
   {
     "id": 10812,
@@ -256,18 +282,42 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 13,
-    "title": "다음 중 NULLIF(A, B) 함수의 올바른 동작을 설명한 것은?",
+    "title": "아래 T 에 대해 SELECT NULLIF(A, B) FROM T; 의 결과(행 순)로 옳은 것은?",
     "options": [
-      "A와 B가 같으면 A를, 다르면 NULL을 반환한다.",
-      "A와 B가 같으면 NULL을, 다르면 A를 반환한다.",
-      "A가 NULL이면 B를 반환한다.",
-      "A와 B 중 NULL이 아닌 첫 번째 값을 반환한다."
+      "1, NULL, NULL",
+      "NULL, 1, NULL",
+      "NULL, 1, 1",
+      "1, 2, 1"
     ],
     "correctIndex": 1,
-    "explanation": "NULLIF(A, B) 는 두 값이 같으면 NULL, 다르면 A 를 돌려준다. ③(A 가 NULL 이면 B)은 NVL, ④(처음 만나는 NULL 아닌 값)는 COALESCE 의 동작이다.",
+    "explanation": "NULLIF(A, B) 는 A 와 B 가 같으면 NULL, 다르면 A 를 돌려준다. 1행은 1 = 1 이라 NULL, 2행은 1 ≠ 2 라 A 인 1, 3행은 A 가 NULL 이라 비교가 참이 아니므로 A 인 NULL 이다. 정답은 ②번이다. ③ 은 3행에서 B 를 돌려준다고 본 것이고(그것은 NVL·COALESCE 류), ① 은 같을 때 A, 다를 때 NULL 로 거꾸로 본 것이다.",
     "chapter": "함수",
     "_source": "ai-mock",
-    "_origId": "ai-mock-016"
+    "_origId": "ai-mock-016",
+    "references": [
+      {
+        "type": "table",
+        "caption": "T",
+        "headers": [
+          "A",
+          "B"
+        ],
+        "rows": [
+          [
+            "1",
+            "1"
+          ],
+          [
+            "1",
+            "2"
+          ],
+          [
+            "NULL",
+            "1"
+          ]
+        ]
+      }
+    ]
   },
   {
     "id": 10813,
@@ -275,18 +325,41 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 14,
-    "title": "윈도우 함수 중 동일한 값에 대해 같은 순위를 부여하고, 중복된 순위만큼 다음 순위를 건너뛰어 부여하는 함수는? (예: 1등, 1등, 3등)",
+    "title": "아래 EMP 에 대해 함수(...) OVER (ORDER BY SAL DESC) 의 결과가 1, 2, 2, 4 가 되는 함수는?",
     "options": [
-      "NTILE",
-      "RANK",
-      "DENSE_RANK",
-      "ROW_NUMBER"
+      "NTILE(3)",
+      "RANK()",
+      "DENSE_RANK()",
+      "ROW_NUMBER()"
     ],
     "correctIndex": 1,
-    "explanation": "동점에 같은 순위를 주고 그 수만큼 다음 순위를 건너뛰는 것(1, 1, 3)은 RANK 다. DENSE_RANK 는 건너뛰지 않고(1, 1, 2), ROW_NUMBER 는 동점이어도 1, 2, 3 으로 번호를 다르게 준다.",
+    "explanation": "RANK 는 같은 값에 같은 순위를 주고, 그 수만큼 다음 순위를 건너뛴다. 400 이 둘이라 둘 다 2위, 다음 300 은 4위다. 정답은 ②번이다. ③ DENSE_RANK 는 건너뛰지 않아 1, 2, 2, 3 이다. ④ ROW_NUMBER 는 1, 2, 3, 4 처럼 모두 다른 번호를 준다. ① NTILE(3) 은 네 행을 세 묶음으로 나눠 1, 1, 2, 3 이다.",
     "chapter": "윈도우 함수",
     "_source": "ai-mock",
-    "_origId": "ai-mock-017"
+    "_origId": "ai-mock-017",
+    "references": [
+      {
+        "type": "table",
+        "caption": "EMP",
+        "headers": [
+          "SAL"
+        ],
+        "rows": [
+          [
+            "500"
+          ],
+          [
+            "400"
+          ],
+          [
+            "400"
+          ],
+          [
+            "300"
+          ]
+        ]
+      }
+    ]
   },
   {
     "id": 10814,
@@ -566,15 +639,15 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 30,
-    "title": "다음 제약조건(Constraint) 중 테이블의 특정 컬럼에 NULL 값이 들어가는 것은 허용하되, 입력되는 값들은 서로 중복되지 않아야 함을 보장하는 것은?",
+    "title": "회원의 이메일은 비워 둘 수 있지만, 입력한 이메일은 다른 회원과 겹치면 안 된다. 알맞은 제약조건과 그 동작으로 옳은 것은? (Oracle 기준)",
     "options": [
-      "UNIQUE",
-      "FOREIGN KEY",
-      "CHECK",
-      "PRIMARY KEY"
+      "UNIQUE — 이메일이 NULL 인 회원이 여러 명이어도 입력되고, 같은 이메일을 두 번 넣으면 오류가 난다.",
+      "PRIMARY KEY — 이메일이 NULL 인 회원은 한 명까지만 입력된다.",
+      "CHECK — 새로 넣는 값이 다른 행의 값과 겹치는지 검사해 막는다.",
+      "FOREIGN KEY — 이메일 칼럼의 중복을 막고 NULL 도 허용한다."
     ],
     "correctIndex": 0,
-    "explanation": "UNIQUE 는 같은 값이 두 번 들어가는 것만 막고 NULL 은 허용한다(NULL 끼리는 같다고 보지 않아 여러 개도 가능). PRIMARY KEY 는 UNIQUE + NOT NULL 이라 NULL 을 넣을 수 없다.",
+    "explanation": "UNIQUE 는 값이 있으면 서로 달라야 하지만 NULL 은 허용한다. NULL 끼리는 같은 값으로 보지 않아 NULL 인 행이 여러 개 있어도 된다. 정답은 ①번이다. ② PRIMARY KEY 는 NULL 을 하나도 허용하지 않는다. ③ CHECK 는 한 행 안의 값이 조건(예: 나이 >= 0)에 맞는지만 보고 다른 행과 비교하지 않는다. ④ FOREIGN KEY 는 다른 테이블의 값을 참조하는지 검사할 뿐 중복을 막지 않는다.",
     "chapter": "DDL",
     "_source": "ai-mock",
     "_origId": "ai-mock-035"

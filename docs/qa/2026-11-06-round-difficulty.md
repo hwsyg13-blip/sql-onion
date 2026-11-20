@@ -1131,6 +1131,10 @@ ERD 선 표기 정리 2차(11-20 14시): 식별자를 다루는 1과목 문항�
 | cbt-032 | 커밋 전 변경은 다른 세션에 안 보임(고립성, Dirty Read 아님) | 정의 → 두 세션 순서 | ④ | Oracle READ COMMITTED 규칙 |
 | cbt-144 | 일관성(규칙 만족) vs 원자성·고립성 | 정의 문장 → 주문 등록 상황 | ③ | 정의로 판정 |
 | cbt-166 | 커밋 후 장애에도 남는 지속성 | 정의 문장 → 이체 상황 짝 | ④ | 정의로 판정 |
+| ai-mock-017 | RANK 1,2,2,4 vs DENSE_RANK·ROW_NUMBER·NTILE | 정의로 이름 → 결과로 고르기 | ② | PostgreSQL 실행 |
+| ai-mock-015 | GROUPING SETS 는 적은 묶음만(총계 없음), 묶음별 행 수 | 묶음 개수 → 개수 + 결과 행 수 | 3개, 5행 | PostgreSQL 실행 |
+| ai-mock-035 | UNIQUE 는 NULL 여러 개 허용, CHECK·FK 와 구분 | 정의로 이름 → 요구 상황 + 동작 | ① | PostgreSQL 실행(NULL 2행 입력, 중복 값 오류). audit HINT_TAIL 은 형식상 검토 완료 처리 |
+| ai-mock-016 | NULLIF 에 NULL 이 들어오면 A(NULL) 반환 | 정의 문장 → 데이터 결과 | ② | PostgreSQL 실행 |
 
 ## 11-21 06시 실행 — 11-06 이후 한 번도 안 바뀐 기출(226문항) 차례로
 
