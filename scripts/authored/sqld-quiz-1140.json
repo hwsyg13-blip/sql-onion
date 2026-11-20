@@ -3140,7 +3140,7 @@
         {
           "type": "sql",
           "caption": "[SQL]",
-          "code": "SELECT A.회원번호, A.회원명\nFROM   회원 A, 동의항목 B\nWHERE  A.회원번호 = B.회원번호\nGROUP BY A.회원번호, A.회원명\nHAVING COUNT(CASE WHEN B.동의여부 = 'N' THEN 0 ELSE NULL END) >= 1\nORDER BY A.회원번호;"
+          "code": "SELECT A.회원번호, A.회원명\nFROM   회원 A, 동의항목 B\nWHERE  A.회원번호 = B.회원번호\nGROUP BY A.회원번호, A.회원명\nHAVING COUNT(CASE WHEN B.동의여부 = 'N'\n                 THEN 0\n                 ELSE NULL END) >= 1\nORDER BY A.회원번호;"
         }
       ]
     },
@@ -4232,7 +4232,7 @@
         {
           "type": "sql",
           "caption": "[SQL]",
-          "code": "SELECT 추천경로, 추천인, 피추천인, 추천점수\nFROM   (SELECT 추천경로, 추천인, 피추천인, 추천점수\n              ,ROW_NUMBER() OVER(PARTITION BY 추천경로\n                                 ORDER BY 추천점수 DESC) AS RNUM\n        FROM   추천내역)\nWHERE  RNUM = 1;"
+          "code": "SELECT 추천경로, 추천인, 피추천인,\n       추천점수\nFROM   (SELECT 추천경로, 추천인,\n               피추천인, 추천점수\n              ,ROW_NUMBER() OVER(\n                PARTITION BY 추천경로\n                ORDER BY 추천점수 DESC)\n               AS RNUM\n        FROM   추천내역)\nWHERE  RNUM = 1;"
         }
       ]
     },
@@ -5536,7 +5536,7 @@
         {
           "type": "sql",
           "caption": "[SQL]",
-          "code": "select * from SQLD_71 order by COL1 desc, COL2 desc, COL3 desc;"
+          "code": "select * from SQLD_71\norder by COL1 desc, COL2 desc,\n         COL3 desc;"
         }
       ]
     },
@@ -5719,17 +5719,17 @@
         {
           "type": "sql",
           "caption": "LEFT OUTER JOIN",
-          "code": "SELECT * FROM TAB1 A LEFT OUTER JOIN TAB2 B ON (A.KEY1 = B.KEY2);"
+          "code": "SELECT * FROM TAB1 A\nLEFT OUTER JOIN TAB2 B\n  ON (A.KEY1 = B.KEY2);"
         },
         {
           "type": "sql",
           "caption": "RIGHT OUTER JOIN",
-          "code": "SELECT * FROM TAB1 A RIGHT OUTER JOIN TAB2 B ON (A.KEY1 = B.KEY2);"
+          "code": "SELECT * FROM TAB1 A\nRIGHT OUTER JOIN TAB2 B\n  ON (A.KEY1 = B.KEY2);"
         },
         {
           "type": "sql",
           "caption": "FULL OUTER JOIN",
-          "code": "SELECT * FROM TAB1 A FULL OUTER JOIN TAB2 B ON (A.KEY1 = B.KEY2);"
+          "code": "SELECT * FROM TAB1 A\nFULL OUTER JOIN TAB2 B\n  ON (A.KEY1 = B.KEY2);"
         },
         {
           "type": "sql",
@@ -7845,7 +7845,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT * FROM Mytest WHERE (COL1, COL2) IN (('x','y'),('KK','BB'))"
+          "code": "SELECT * FROM Mytest\nWHERE (COL1, COL2)\n      IN (('x','y'),('KK','BB'))"
         },
         {
           "type": "table",
@@ -8446,7 +8446,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "select * from Mytest order by COL1 desc,  COL2 desc, COL3 desc;"
+          "code": "select * from Mytest\norder by COL1 desc, COL2 desc,\n         COL3 desc;"
         },
         {
           "type": "table",
@@ -8667,7 +8667,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT * FROM MytestA A INNER JOIN MytestB B ON (A.KEY1 = B.KEY2);\nSELECT * FROM MytestA A LEFT OUTER JOIN MytestB B ON (A.KEY1 = B.KEY2);\nSELECT * FROM MytestA A RIGHT OUTER JOIN MytestB B ON (A.KEY1 = B.KEY2);\nSELECT * FROM MytestA A FULL OUTER JOIN MytestB B ON (A.KEY1 = B.KEY2);\nSELECT * FROM MytestA A CROSS JOIN MytestB B;"
+          "code": "SELECT * FROM MytestA A\nINNER JOIN MytestB B\n  ON (A.KEY1 = B.KEY2);\nSELECT * FROM MytestA A\nLEFT OUTER JOIN MytestB B\n  ON (A.KEY1 = B.KEY2);\nSELECT * FROM MytestA A\nRIGHT OUTER JOIN MytestB B\n  ON (A.KEY1 = B.KEY2);\nSELECT * FROM MytestA A\nFULL OUTER JOIN MytestB B\n  ON (A.KEY1 = B.KEY2);\nSELECT * FROM MytestA A\nCROSS JOIN MytestB B;"
         },
         {
           "type": "table",
@@ -9803,7 +9803,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT LEVEL, LPAD(' ',4 + (LEVEL -1) )|| EMPNO, MGR, (    ) AS ISLEAF\nFROM Mytest\nSTART WITH MGR IS NULL\nCONNECT BY PRIOR EMPNO = MGR;"
+          "code": "SELECT LEVEL,\n       LPAD(' ',4 + (LEVEL -1) )\n         || EMPNO,\n       MGR, (    ) AS ISLEAF\nFROM Mytest\nSTART WITH MGR IS NULL\nCONNECT BY PRIOR EMPNO = MGR;"
         }
       ]
     },
@@ -13790,7 +13790,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "select * from kpipool where (subkpi, mainkpi)  in((20,10),(0,30));"
+          "code": "select * from kpipool\nwhere (subkpi, mainkpi)\n      in((20,10),(0,30));"
         },
         {
           "type": "table",
@@ -16687,7 +16687,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT SUM(COL2) + SUM(COL3) FROM TAB1; \nSELECT SUM(COL2) + SUM(COL3) FROM TAB1 WHERE COL1 > 0; \nSELECT SUM(COL2) + SUM(COL3) FROM TAB1 WHERE COL1 IS NOT NULL; \nSELECT SUM(COL2) + SUM(COL3) FROM TAB1 WHERE COL1 IS NULL;"
+          "code": "SELECT SUM(COL2) + SUM(COL3) FROM TAB1;\nSELECT SUM(COL2) + SUM(COL3) FROM TAB1\nWHERE COL1 > 0;\nSELECT SUM(COL2) + SUM(COL3) FROM TAB1\nWHERE COL1 IS NOT NULL;\nSELECT SUM(COL2) + SUM(COL3) FROM TAB1\nWHERE COL1 IS NULL;"
         },
         {
           "type": "table",
@@ -17209,7 +17209,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT DNAME, \n FIRST_VALUE(NAME) OVER(PARTITION BY DNAME ORDER BY SAL) AS VALUE1, \n LAST_VALUE(NAME) OVER(PARTITION BY DNAME ORDER BY SAL) AS VALUE2 \n FROM TAB1;"
+          "code": "SELECT DNAME,\n FIRST_VALUE(NAME) OVER(\n   PARTITION BY DNAME\n   ORDER BY SAL) AS VALUE1,\n LAST_VALUE(NAME) OVER(\n   PARTITION BY DNAME\n   ORDER BY SAL) AS VALUE2\n FROM TAB1;"
         },
         {
           "type": "table",
@@ -18553,7 +18553,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT E1.EMPNO, E1.ENAME, E1.HIREDATE, COUNT(E2.EMPNO) AS CNT \n  FROM EMP E1 LEFT OUTER JOIN EMP E2 \n     ON E1.HIREDATE > E2.HIREDATE \n GROUP BY E1.EMPNO, E1.ENAME, E1.HIREDATE \n ORDER BY E1.HIREDATE;"
+          "code": "SELECT E1.EMPNO, E1.ENAME,\n       E1.HIREDATE,\n       COUNT(E2.EMPNO) AS CNT\n  FROM EMP E1 LEFT OUTER JOIN EMP E2\n     ON E1.HIREDATE > E2.HIREDATE\n GROUP BY E1.EMPNO, E1.ENAME,\n          E1.HIREDATE\n ORDER BY E1.HIREDATE;"
         },
         {
           "type": "table",
@@ -21949,7 +21949,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT SUM(TAB2.COL2) FROM TAB1, TAB2 WHERE TAB1.COL2 = TAB2.COL1;"
+          "code": "SELECT SUM(TAB2.COL2)\nFROM TAB1, TAB2\nWHERE TAB1.COL2 = TAB2.COL1;"
         },
         {
           "type": "table",
@@ -24990,7 +24990,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "1) SELECT COL1 / COL2 FROM TAB WHERE COL1 = 0 AND COL2 = 300;\n2) SELECT COL1 / COL2 FROM TAB WHERE COL1 = 300 AND COL2 = 0;\n3) SELECT COL1 / COL2 FROM TAB WHERE COL1 = 100 AND COL2 IS NULL;"
+          "code": "1) SELECT COL1 / COL2 FROM TAB\n   WHERE COL1 = 0 AND COL2 = 300;\n2) SELECT COL1 / COL2 FROM TAB\n   WHERE COL1 = 300 AND COL2 = 0;\n3) SELECT COL1 / COL2 FROM TAB\n   WHERE COL1 = 100\n     AND COL2 IS NULL;"
         },
         {
           "type": "table",
@@ -25035,7 +25035,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "-- 고객 테이블 생성\nCREATE TABLE CUSTOMER (\n  CUST_ID    NUMBER PRIMARY KEY,   -- 기본 키\n  NAME       VARCHAR2(50),\n  EMAIL      VARCHAR2(100),\n  PHONE      VARCHAR2(20)\n);\n-- 유니크 인덱스 생성\nCREATE UNIQUE INDEX UQ_CUSTOMER_EMAIL_PHONE  ON CUSTOMER (EMAIL, PHONE);"
+          "code": "-- 고객 테이블 생성\nCREATE TABLE CUSTOMER (\n  CUST_ID    NUMBER PRIMARY KEY,\n  -- 기본 키\n  NAME       VARCHAR2(50),\n  EMAIL      VARCHAR2(100),\n  PHONE      VARCHAR2(20)\n);\n-- 유니크 인덱스 생성\nCREATE UNIQUE INDEX\n  UQ_CUSTOMER_EMAIL_PHONE\n  ON CUSTOMER (EMAIL, PHONE);"
         }
       ]
     },
@@ -25940,7 +25940,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT dept, COUNT(*) FROM emp GROUP BY dept HAVING MIN(salary) >= 2500;"
+          "code": "SELECT dept, COUNT(*) FROM emp\nGROUP BY dept\nHAVING MIN(salary) >= 2500;"
         },
         {
           "type": "table",
@@ -30549,7 +30549,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT REGEXP_REPLACE('010-1234-5678', '[^0-9]', '') FROM dual;"
+          "code": "SELECT REGEXP_REPLACE('010-1234-5678',\n                      '[^0-9]', '')\nFROM dual;"
         }
       ]
     },
@@ -30571,7 +30571,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT REGEXP_SUBSTR('user@sqld.kr', '@(.+)$', 1, 1, NULL, 1) FROM dual;"
+          "code": "SELECT REGEXP_SUBSTR('user@sqld.kr',\n         '@(.+)$', 1, 1, NULL, 1)\nFROM dual;"
         }
       ]
     },
@@ -31036,7 +31036,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT REGEXP_REPLACE('010-1234-5678', '[^0-9]', '') FROM dual;"
+          "code": "SELECT REGEXP_REPLACE('010-1234-5678',\n                      '[^0-9]', '')\nFROM dual;"
         }
       ]
     },
@@ -31112,7 +31112,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT REGEXP_SUBSTR('user@sqld.kr', '@(.+)$', 1, 1, NULL, 1) FROM dual;"
+          "code": "SELECT REGEXP_SUBSTR('user@sqld.kr',\n         '@(.+)$', 1, 1, NULL, 1)\nFROM dual;"
         }
       ]
     },
@@ -32982,7 +32982,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT dept, COUNT(*) FROM emp GROUP BY dept HAVING MIN(salary) >= 2500;"
+          "code": "SELECT dept, COUNT(*) FROM emp\nGROUP BY dept\nHAVING MIN(salary) >= 2500;"
         },
         {
           "type": "table",
@@ -33315,7 +33315,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT REGEXP_REPLACE('010-1234-5678', '[^0-9]', '') FROM dual;"
+          "code": "SELECT REGEXP_REPLACE('010-1234-5678',\n                      '[^0-9]', '')\nFROM dual;"
         }
       ]
     },
@@ -36397,7 +36397,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT REGEXP_REPLACE('010-1234-5678', '[^0-9]', '') FROM dual;"
+          "code": "SELECT REGEXP_REPLACE('010-1234-5678',\n                      '[^0-9]', '')\nFROM dual;"
         }
       ]
     },
