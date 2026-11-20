@@ -1204,7 +1204,7 @@ export const ROUND_49: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT ENAME, DEPTNO, SAL,\n       RANK()       OVER (PARTITION BY DEPTNO ORDER BY SAL DESC) AS R1,\n       DENSE_RANK() OVER (PARTITION BY DEPTNO ORDER BY SAL DESC) AS R2\nFROM   EMP;"
+        "code": "SELECT ENAME, DEPTNO, SAL,\n       RANK() OVER (\n         PARTITION BY DEPTNO\n         ORDER BY SAL DESC) AS R1,\n       DENSE_RANK() OVER (\n         PARTITION BY DEPTNO\n         ORDER BY SAL DESC) AS R2\nFROM   EMP;"
       }
     ]
   },

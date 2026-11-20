@@ -503,7 +503,7 @@ export const ROUND_48: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT Y.*\nFROM   (SELECT 사원ID, MAX(연봉) OVER (PARTITION BY 부서ID) AS 최고연봉\n        FROM   사원) X,\n       사원 Y\nWHERE  X.사원ID = Y.사원ID\nAND    X.최고연봉 = Y.연봉;"
+        "code": "SELECT Y.*\nFROM   (SELECT 사원ID,\n               MAX(연봉) OVER (\n                 PARTITION BY 부서ID)\n               AS 최고연봉\n        FROM   사원) X,\n       사원 Y\nWHERE  X.사원ID = Y.사원ID\nAND    X.최고연봉 = Y.연봉;"
       }
     ],
     "optionReferences": [

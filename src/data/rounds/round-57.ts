@@ -298,7 +298,7 @@ export const ROUND_57: QuizQuestion[] = [
     "references": [
       {
         "type": "sql",
-        "code": "-- 각 옵션을 다음 SQL 로 평가:\nSELECT SUBSTR('abcdefgh', 7)                                    AS R1,\n       SUBSTR('abcdefgh', -2)                                   AS R2,\n       SUBSTR('abcdefgh', 8, -2)                                AS R3,\n       SUBSTR('abcdefgh', INSTR('abcdefgh', 'g'), 2)            AS R4\nFROM   DUAL;"
+        "code": "-- 각 옵션을 다음 SQL 로 평가:\nSELECT SUBSTR('abcdefgh', 7) AS R1,\n       SUBSTR('abcdefgh', -2) AS R2,\n       SUBSTR('abcdefgh', 8, -2) AS R3,\n       SUBSTR('abcdefgh',\n              INSTR('abcdefgh', 'g'),\n              2) AS R4\nFROM   DUAL;"
       }
     ]
   },
@@ -2155,7 +2155,7 @@ export const ROUND_57: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT Y.사원ID, Y.부서ID, Y.사원명, Y.연봉\nFROM   (SELECT 사원ID, MAX(연봉) OVER (PARTITION BY 부서ID) AS 최고연봉\n        FROM   사원) X,\n       사원 Y\nWHERE  X.사원ID = Y.사원ID\nAND    X.최고연봉 = Y.연봉;"
+        "code": "SELECT Y.사원ID, Y.부서ID,\n       Y.사원명, Y.연봉\nFROM   (SELECT 사원ID,\n               MAX(연봉) OVER (\n                 PARTITION BY 부서ID)\n               AS 최고연봉\n        FROM   사원) X,\n       사원 Y\nWHERE  X.사원ID = Y.사원ID\nAND    X.최고연봉 = Y.연봉;"
       }
     ],
     "optionReferences": [

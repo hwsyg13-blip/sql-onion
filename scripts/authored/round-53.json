@@ -588,7 +588,7 @@
         },
         {
           "type": "sql",
-          "code": "-- 사원의 매니저 이름을 조회하되 매니저가 없는 경우 '사장' 을 반환한다.\nSELECT E.이름, (  ?  ) AS 상사명\nFROM   사원 E LEFT JOIN 사원 M ON E.매니저ID = M.사원ID;"
+          "code": "-- 사원의 매니저 이름을 조회하되\n-- 매니저가 없는 경우\n-- '사장' 을 반환한다.\nSELECT E.이름, (  ?  ) AS 상사명\nFROM   사원 E LEFT JOIN 사원 M\n       ON E.매니저ID = M.사원ID;"
         },
         {
           "type": "table",

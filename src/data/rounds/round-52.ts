@@ -432,7 +432,7 @@ export const ROUND_52: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT VAL, SUM(VAL) OVER (ORDER BY ID\n                           RANGE BETWEEN 2 PRECEDING AND 2 FOLLOWING) AS S\nFROM T;"
+        "code": "SELECT VAL,\n       SUM(VAL) OVER (ORDER BY ID\n         RANGE BETWEEN 2 PRECEDING\n               AND 2 FOLLOWING) AS S\nFROM T;"
       }
     ]
   },
