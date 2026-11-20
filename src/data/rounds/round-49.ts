@@ -1566,7 +1566,7 @@ export const ROUND_49: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT COUNT(COL1), COUNT(COL2)\nFROM (SELECT DISTINCT COL1, COL2 FROM TAB1);"
+        "code": "SELECT COUNT(COL1), COUNT(COL2)\nFROM (SELECT DISTINCT COL1, COL2\n        FROM TAB1);"
       }
     ]
   },

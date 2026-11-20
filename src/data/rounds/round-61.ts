@@ -639,7 +639,7 @@ export const ROUND_61: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT COL1\nFROM   TBL1\nWHERE  COL1 <= ALL (SELECT COL2 FROM TBL2);"
+        "code": "SELECT COL1\nFROM   TBL1\nWHERE  COL1 <= ALL\n       (SELECT COL2 FROM TBL2);"
       }
     ]
   },

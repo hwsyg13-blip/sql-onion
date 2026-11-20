@@ -1059,7 +1059,7 @@
         },
         {
           "type": "sql",
-          "code": "SELECT EMPNO, DEPTNO\nFROM   EMP\nORDER BY EMPNO DESC NULLS LAST, DEPTNO DESC\nFETCH FIRST 3 ROWS ONLY;"
+          "code": "SELECT EMPNO, DEPTNO\nFROM   EMP\nORDER BY EMPNO DESC NULLS LAST,\n         DEPTNO DESC\nFETCH FIRST 3 ROWS ONLY;"
         }
       ]
     },
@@ -1862,7 +1862,7 @@
         },
         {
           "type": "sql",
-          "code": "SELECT *\nFROM  (SELECT 년도, 분기, 금액 FROM 판매)\nPIVOT (SUM(금액)\n       FOR 분기 IN ('Q1' AS Q1, 'Q2' AS Q2))\nORDER BY 년도;"
+          "code": "SELECT *\nFROM  (SELECT 년도, 분기, 금액\n         FROM 판매)\nPIVOT (SUM(금액)\n       FOR 분기 IN ('Q1' AS Q1,\n                   'Q2' AS Q2))\nORDER BY 년도;"
         }
       ]
     },

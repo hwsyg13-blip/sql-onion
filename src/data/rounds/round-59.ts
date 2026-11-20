@@ -1571,7 +1571,7 @@ export const ROUND_59: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT *\nFROM   CATEGORY\nSTART WITH category_id = 11\nCONNECT BY PRIOR category_id = 상위카테고리;"
+        "code": "SELECT *\nFROM   CATEGORY\nSTART WITH category_id = 11\nCONNECT BY PRIOR category_id\n         = 상위카테고리;"
       }
     ]
   },
@@ -1657,7 +1657,7 @@ export const ROUND_59: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "-- ㉠\nSELECT * FROM EMP NATURAL JOIN DEPT;\n\n-- ㉡\nSELECT * FROM EMP JOIN DEPT USING (부서번호);"
+        "code": "-- ㉠\nSELECT * FROM EMP NATURAL JOIN DEPT;\n\n-- ㉡\nSELECT * FROM EMP JOIN DEPT\nUSING (부서번호);"
       }
     ]
   },

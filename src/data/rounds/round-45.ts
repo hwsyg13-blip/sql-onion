@@ -1455,7 +1455,7 @@ export const ROUND_45: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT *\nFROM   T1 A\nWHERE  A.N1 NOT IN (SELECT B.N1 FROM T3 B);"
+        "code": "SELECT *\nFROM   T1 A\nWHERE  A.N1 NOT IN\n       (SELECT B.N1 FROM T3 B);"
       }
     ]
   },

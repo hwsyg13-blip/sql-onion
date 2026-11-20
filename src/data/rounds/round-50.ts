@@ -494,7 +494,7 @@ export const ROUND_50: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "-- STR = 'abcdefg'\nSELECT SUBSTR(STR, LENGTH(STR) - 3) FROM T;"
+        "code": "-- STR = 'abcdefg'\nSELECT SUBSTR(STR, LENGTH(STR) - 3)\nFROM T;"
       }
     ]
   },
@@ -932,7 +932,7 @@ export const ROUND_50: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT V FROM T1 UNION     SELECT V FROM T2;\nSELECT V FROM T1 UNION ALL SELECT V FROM T2;"
+        "code": "SELECT V FROM T1\nUNION\nSELECT V FROM T2;\nSELECT V FROM T1\nUNION ALL\nSELECT V FROM T2;"
       }
     ]
   },

@@ -1509,7 +1509,7 @@ export const ROUND_57: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT T.ID, C.NAME\nFROM   TUTOR T\nLEFT OUTER JOIN CLASS C ON T.ID = C.TUTOR_ID;"
+        "code": "SELECT T.ID, C.NAME\nFROM   TUTOR T\nLEFT OUTER JOIN CLASS C\n  ON T.ID = C.TUTOR_ID;"
       }
     ]
   },

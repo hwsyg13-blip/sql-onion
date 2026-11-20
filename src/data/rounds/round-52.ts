@@ -826,7 +826,7 @@ export const ROUND_52: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT SUM(COALESCE(C1, C2, C3)) FROM TAB1;"
+        "code": "SELECT SUM(COALESCE(C1, C2, C3))\nFROM TAB1;"
       }
     ]
   },
@@ -1698,7 +1698,7 @@ export const ROUND_52: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT P.제품명, COUNT(L.라인번호) AS 라인수\nFROM   제품 P\n       LEFT OUTER JOIN 생산제품 S\n         ON P.제품번호 = S.제품번호\n       LEFT OUTER JOIN 생산라인 L\n         ON S.라인번호 = L.라인번호\n        AND L.라인명 = '1라인'\nGROUP BY P.제품명\nORDER BY P.제품명;"
+        "code": "SELECT P.제품명,\n       COUNT(L.라인번호) AS 라인수\nFROM   제품 P\n       LEFT OUTER JOIN 생산제품 S\n         ON P.제품번호 = S.제품번호\n       LEFT OUTER JOIN 생산라인 L\n         ON S.라인번호 = L.라인번호\n        AND L.라인명 = '1라인'\nGROUP BY P.제품명\nORDER BY P.제품명;"
       }
     ]
   },

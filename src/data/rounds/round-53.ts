@@ -547,7 +547,7 @@ export const ROUND_53: QuizQuestion[] = [
     "references": [
       {
         "type": "sql",
-        "code": "CREATE TABLE 학생 (\n  학번 NUMBER DEFAULT 100 PRIMARY KEY,\n  이름 VARCHAR2(30) NOT NULL,\n  학과번호 NUMBER REFERENCES 학과(학과번호)\n);"
+        "code": "CREATE TABLE 학생 (\n  학번 NUMBER DEFAULT 100 PRIMARY KEY,\n  이름 VARCHAR2(30) NOT NULL,\n  학과번호 NUMBER\n    REFERENCES 학과(학과번호)\n);"
       }
     ]
   },
@@ -645,7 +645,7 @@ export const ROUND_53: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT * FROM 주문 WHERE 주문월 = '201010';"
+        "code": "SELECT * FROM 주문\nWHERE 주문월 = '201010';"
       }
     ]
   },
@@ -1139,7 +1139,7 @@ export const ROUND_53: QuizQuestion[] = [
       {
         "type": "sql",
         "caption": "가",
-        "code": "SELECT EMPNO,\n       (SELECT MAX(SAL) FROM EMP) AS MAX_SAL\nFROM   EMP;"
+        "code": "SELECT EMPNO,\n       (SELECT MAX(SAL) FROM EMP)\n         AS MAX_SAL\nFROM   EMP;"
       },
       {
         "type": "sql",

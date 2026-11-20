@@ -651,7 +651,7 @@ export const ROUND_62: QuizQuestion[] = [
     "references": [
       {
         "type": "sql",
-        "code": "CREATE TABLE T (\n    가  CHAR(3),\n    나  VARCHAR2(10) NOT NULL,\n    다  VARCHAR2(10) UNIQUE,\n    라  VARCHAR2(10) CHECK (라 IS NOT NULL),\n    PRIMARY KEY (가)\n);"
+        "code": "CREATE TABLE T (\n    가  CHAR(3),\n    나  VARCHAR2(10) NOT NULL,\n    다  VARCHAR2(10) UNIQUE,\n    라  VARCHAR2(10)\n        CHECK (라 IS NOT NULL),\n    PRIMARY KEY (가)\n);"
       }
     ]
   },
@@ -2072,7 +2072,7 @@ export const ROUND_62: QuizQuestion[] = [
     "references": [
       {
         "type": "sql",
-        "code": "INSERT INTO TAB1 VALUES (...);   -- 1건 추가\nSAVEPOINT S1;\nINSERT INTO TAB1 VALUES (...);   -- 1건 추가\nCOMMIT;\nINSERT INTO TAB1 VALUES (...);   -- 1건 추가\nROLLBACK TO S1;"
+        "code": "INSERT INTO TAB1 VALUES (...);\n-- 1건 추가\nSAVEPOINT S1;\nINSERT INTO TAB1 VALUES (...);\n-- 1건 추가\nCOMMIT;\nINSERT INTO TAB1 VALUES (...);\n-- 1건 추가\nROLLBACK TO S1;"
       }
     ]
   },

@@ -624,7 +624,7 @@ export const ROUND_60: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT *\nFROM   T\nWHERE  (사번, 회원번호) IN ((10005, 2003));"
+        "code": "SELECT *\nFROM   T\nWHERE  (사번, 회원번호) IN\n       ((10005, 2003));"
       }
     ]
   },
@@ -681,7 +681,7 @@ export const ROUND_60: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT EMPNO,\n       NTILE(3) OVER (ORDER BY EMPNO) AS GRP\nFROM   EMP;"
+        "code": "SELECT EMPNO,\n       NTILE(3) OVER (ORDER BY EMPNO)\n         AS GRP\nFROM   EMP;"
       }
     ]
   },
@@ -1412,7 +1412,7 @@ export const ROUND_60: QuizQuestion[] = [
     "references": [
       {
         "type": "sql",
-        "code": "-- 현재 데이터: (1001, '김하늘', NULL),\n--             (1002, '이바다', 300),\n--             (1003, '박구름', NULL)\nCREATE TABLE 사원 (\n  사번 NUMBER(4),\n  이름 VARCHAR2(10),\n  수당 NUMBER(5)\n);\n\n-- ㉠\nALTER TABLE 사원 MODIFY (수당 NOT NULL);\n-- ㉡\nALTER TABLE 사원 MODIFY (이름 VARCHAR2(20));\n-- ㉢\nALTER TABLE 사원\n  ADD (입사일 DATE DEFAULT SYSDATE NOT NULL);\n-- ㉣\nALTER TABLE 사원 MODIFY (사번 NUMBER(3));"
+        "code": "-- 현재 데이터: (1001, '김하늘', NULL),\n--             (1002, '이바다', 300),\n--             (1003, '박구름', NULL)\nCREATE TABLE 사원 (\n  사번 NUMBER(4),\n  이름 VARCHAR2(10),\n  수당 NUMBER(5)\n);\n\n-- ㉠\nALTER TABLE 사원\n  MODIFY (수당 NOT NULL);\n-- ㉡\nALTER TABLE 사원\n  MODIFY (이름 VARCHAR2(20));\n-- ㉢\nALTER TABLE 사원\n  ADD (입사일 DATE DEFAULT SYSDATE\n       NOT NULL);\n-- ㉣\nALTER TABLE 사원\n  MODIFY (사번 NUMBER(3));"
       }
     ]
   },

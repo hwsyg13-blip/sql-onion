@@ -2374,7 +2374,7 @@ export const ROUND_54: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT *\nFROM   T1 INNER JOIN T2 ON T1.COL2 = T2.COL2\nWHERE  1 = 1\nAND    T1.COL3 >= 3\nAND    T2.COL2 IN ('A', 'B');"
+        "code": "SELECT *\nFROM   T1 INNER JOIN T2\n       ON T1.COL2 = T2.COL2\nWHERE  1 = 1\nAND    T1.COL3 >= 3\nAND    T2.COL2 IN ('A', 'B');"
       }
     ]
   }

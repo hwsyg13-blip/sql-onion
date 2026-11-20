@@ -1053,7 +1053,7 @@ export const ROUND_51: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "INSERT FIRST\n  WHEN C1 >= 4  THEN INTO T1 VALUES (C1, C2)\n  WHEN C2 = 'A' THEN INTO T2 VALUES (C1, C2)\n  WHEN C1 >= 2  THEN INTO T3 VALUES (C1, C2)\n  ELSE               INTO T4 VALUES (C1, C2)\nSELECT C1, C2 FROM TAB1;"
+        "code": "INSERT FIRST\n  WHEN C1 >= 4 THEN\n    INTO T1 VALUES (C1, C2)\n  WHEN C2 = 'A' THEN\n    INTO T2 VALUES (C1, C2)\n  WHEN C1 >= 2 THEN\n    INTO T3 VALUES (C1, C2)\n  ELSE\n    INTO T4 VALUES (C1, C2)\nSELECT C1, C2 FROM TAB1;"
       }
     ]
   },
@@ -1733,7 +1733,7 @@ export const ROUND_51: QuizQuestion[] = [
       {
         "type": "sql",
         "caption": "나. NOT IN",
-        "code": "SELECT A.COL1\nFROM   A\nWHERE  A.COL1 NOT IN (SELECT B.COL1 FROM B);"
+        "code": "SELECT A.COL1\nFROM   A\nWHERE  A.COL1 NOT IN\n       (SELECT B.COL1 FROM B);"
       },
       {
         "type": "sql",
