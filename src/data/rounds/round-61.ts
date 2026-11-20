@@ -527,15 +527,15 @@ export const ROUND_61: QuizQuestion[] = [
     "round": 61,
     "subject": "2과목",
     "number": 14,
-    "title": "다음 SQL의 결과 건수로 맞는 것을 고르시오.",
+    "title": "아래 TBL 에 대한 두 SQL 의 결과 건수로 옳은 것은?",
     "options": [
-      "1",
-      "2",
-      "3",
-      "오류가 발생한다."
+      "㉠ 3, ㉡ 2",
+      "㉠ 2, ㉡ 0",
+      "㉠ 2, ㉡ 2",
+      "㉠ 오류, ㉡ 0"
     ],
     "correctIndex": 1,
-    "explanation": "IN 목록에 같은 값(100)이 중복되어도 오류는 발생하지 않으며 (COL = 100 OR COL = 200 OR COL = 100)과 같이 처리된다. 100과 200에 해당하는 행이 각 1건이므로 결과는 2건이다. ③ 3 은 IN 목록의 값 개수(3개)만큼 행이 나온다고 본 결과이고, ④ 목록에 같은 값이 있어도 오류는 나지 않는다.",
+    "explanation": "IN 은 목록의 값 중 하나와 같으면 참이다. 목록에 100 이 두 번 있어도 오류가 아니고 행이 두 번 나오지도 않는다. NULL 과의 비교는 참이 아니지만 다른 값과 같으면 참이므로 ㉠ 은 100, 200 두 건이다. NOT IN (100, NULL) 은 COL <> 100 AND COL <> NULL 과 같다. COL <> NULL 은 늘 UNKNOWN 이라 전체가 참이 될 수 없어 ㉡ 은 0건이다. 정답은 ②번이다. NOT IN 목록이나 서브쿼리에 NULL 이 섞이면 결과가 비는 것에 주의한다.",
     "_source": "authored",
     "references": [
       {
@@ -558,7 +558,7 @@ export const ROUND_61: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT * FROM TBL\nWHERE COL IN (100, 200, 100);"
+        "code": "-- ㉠\nSELECT * FROM TBL\nWHERE COL IN (100, 200, 100, NULL);\n\n-- ㉡\nSELECT * FROM TBL\nWHERE COL NOT IN (100, NULL);"
       }
     ]
   },

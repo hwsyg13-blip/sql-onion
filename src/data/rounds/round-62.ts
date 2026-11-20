@@ -1143,15 +1143,15 @@ export const ROUND_62: QuizQuestion[] = [
     "round": 62,
     "subject": "2과목",
     "number": 29,
-    "title": "NULL 값을 0으로 출력하는 함수로 옳은 것은?",
+    "title": "Oracle 에서 아래 TABLE 의 PRICE 를 결과처럼(1000, 2000, 0) 출력하는 식으로 옳은 것은?",
     "options": [
       "COALESCE(PRICE, 0)",
-      "NULL(PRICE, 0)",
+      "NVL2(PRICE, 0, PRICE)",
       "IFNULL(PRICE, 0)",
-      "NULLIF(0, PRICE)"
+      "NULLIF(PRICE, 0)"
     ],
     "correctIndex": 0,
-    "explanation": "COALESCE(PRICE, 0)은 PRICE가 NULL이면 0을 반환한다. ② NULL(PRICE, 0)이라는 함수는 없고, ③ IFNULL은 MySQL 전용이며, ④ NULLIF(a, b)는 두 값이 같으면 NULL을 반환하는 함수라 NULL 을 0 으로 바꾸지 못한다.",
+    "explanation": "COALESCE 는 인수 중 처음으로 NULL 이 아닌 값을 돌려준다. PRICE 가 있으면 그 값, NULL 이면 0 이라 1000, 2000, 0 이다. 정답은 ①번이다(NVL(PRICE, 0) 도 같다). ② NVL2(a, b, c) 는 a 가 NULL 이 아니면 b, NULL 이면 c 라 0, 0, NULL 이 된다. ③ IFNULL 은 MySQL 함수라 Oracle 에서는 오류다. ④ NULLIF(PRICE, 0) 은 PRICE 가 0 일 때 NULL 로 바꾸는 함수라 1000, 2000, NULL 이다.",
     "_source": "authored",
     "references": [
       {
