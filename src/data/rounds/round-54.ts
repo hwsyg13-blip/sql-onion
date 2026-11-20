@@ -536,7 +536,7 @@ export const ROUND_54: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT CASE WHEN COL1 = 'X' THEN NULL ELSE COL1 END\nFROM   T;"
+        "code": "SELECT CASE WHEN COL1 = 'X' THEN NULL\n            ELSE COL1 END\nFROM   T;"
       }
     ]
   },
@@ -1167,7 +1167,7 @@ export const ROUND_54: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT COUNT(*)\nFROM   TAB2\nWHERE  COL2 NOT IN (SELECT NVL(COL1, 0) FROM TAB1);"
+        "code": "SELECT COUNT(*)\nFROM   TAB2\nWHERE  COL2 NOT IN\n       (SELECT NVL(COL1, 0) FROM TAB1);"
       }
     ]
   },
@@ -1726,7 +1726,7 @@ export const ROUND_54: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "UPDATE EMP_TEST A\nSET SALARY = (SELECT SALARY * 1.1\n              FROM   EMP_TEST B\n              WHERE  A.EMPLOYEE_ID = B.EMPLOYEE_ID\n              AND    B.DEPARTMENT_ID = 60);"
+        "code": "UPDATE EMP_TEST A\nSET SALARY =\n    (SELECT SALARY * 1.1\n       FROM EMP_TEST B\n      WHERE A.EMPLOYEE_ID\n            = B.EMPLOYEE_ID\n        AND B.DEPARTMENT_ID = 60);"
       }
     ]
   },
@@ -1888,7 +1888,7 @@ export const ROUND_54: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT COL1, MIN(COL2), MAX(COL2), SUM(COL2 + COL3)\nFROM   T\nGROUP BY COL1;"
+        "code": "SELECT COL1, MIN(COL2), MAX(COL2),\n       SUM(COL2 + COL3)\nFROM   T\nGROUP BY COL1;"
       }
     ]
   },

@@ -1387,7 +1387,7 @@ export const ROUND_53: QuizQuestion[] = [
     "references": [
       {
         "type": "sql",
-        "code": "SELECT REGEXP_SUBSTR('aabbc', 'a.*', 2) AS 첫번째,\n       REGEXP_SUBSTR('aabbc', 'b.*', 4) AS 두번째\nFROM   DUAL;"
+        "code": "SELECT REGEXP_SUBSTR('aabbc', 'a.*', 2)\n         AS 첫번째,\n       REGEXP_SUBSTR('aabbc', 'b.*', 4)\n         AS 두번째\nFROM   DUAL;"
       }
     ]
   },

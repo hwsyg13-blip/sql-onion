@@ -864,7 +864,7 @@ export const ROUND_62: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "MERGE INTO 테이블1 T1\nUSING 테이블2 T2\nON (T1.num = T2.num)\nWHEN MATCHED THEN\n    UPDATE SET T1.total_pay = T1.salary + T2.comm\n    DELETE WHERE T1.total_pay < 4000\nWHEN NOT MATCHED THEN\n    INSERT (T1.num, T1.salary, T1.total_pay)\n    VALUES (T2.num, 3000, 3000);"
+        "code": "MERGE INTO 테이블1 T1\nUSING 테이블2 T2\nON (T1.num = T2.num)\nWHEN MATCHED THEN\n    UPDATE SET T1.total_pay\n             = T1.salary + T2.comm\n    DELETE WHERE T1.total_pay < 4000\nWHEN NOT MATCHED THEN\n    INSERT (T1.num, T1.salary,\n            T1.total_pay)\n    VALUES (T2.num, 3000, 3000);"
       }
     ]
   },

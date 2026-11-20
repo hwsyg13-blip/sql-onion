@@ -357,7 +357,7 @@
         },
         {
           "type": "sql",
-          "code": "SELECT *\nFROM   EMP\nWHERE  (DEPTNO, SAL) IN ( SELECT DEPTNO, MAX(SAL)\n                          FROM   EMP\n                          GROUP BY DEPTNO );"
+          "code": "SELECT *\nFROM   EMP\nWHERE  (DEPTNO, SAL) IN\n       ( SELECT DEPTNO, MAX(SAL)\n           FROM EMP\n          GROUP BY DEPTNO );"
         }
       ]
     },
@@ -1785,7 +1785,7 @@
         },
         {
           "type": "sql",
-          "code": "SELECT *\nFROM   회원 M\nWHERE  NOT EXISTS ( SELECT 'X'\n                    FROM   탈퇴 T\n                    WHERE  T.회원ID = M.회원ID );"
+          "code": "SELECT *\nFROM   회원 M\nWHERE  NOT EXISTS\n       ( SELECT 'X'\n           FROM 탈퇴 T\n          WHERE T.회원ID = M.회원ID );"
         }
       ]
     },

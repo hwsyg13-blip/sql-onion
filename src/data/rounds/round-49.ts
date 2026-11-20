@@ -511,7 +511,7 @@ export const ROUND_49: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT ID FROM TBL\nGROUP BY ID\nHAVING COUNT(*) = 2\nORDER BY (CASE WHEN ID = 999 THEN 0 ELSE ID END);"
+        "code": "SELECT ID FROM TBL\nGROUP BY ID\nHAVING COUNT(*) = 2\nORDER BY (CASE WHEN ID = 999 THEN 0\n               ELSE ID END);"
       }
     ]
   },
@@ -2306,7 +2306,7 @@ export const ROUND_49: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT GRP, COUNT(*) AS CNT\nFROM   ( SELECT NTILE(3) OVER (ORDER BY VAL) AS GRP\n         FROM   T )\nGROUP BY GRP\nORDER BY GRP;"
+        "code": "SELECT GRP, COUNT(*) AS CNT\nFROM   ( SELECT NTILE(3) OVER\n                (ORDER BY VAL) AS GRP\n         FROM   T )\nGROUP BY GRP\nORDER BY GRP;"
       },
       {
         "type": "table",

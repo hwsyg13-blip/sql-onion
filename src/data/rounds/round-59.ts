@@ -602,7 +602,7 @@ export const ROUND_59: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT EMPNO\nFROM   (SELECT EMPNO FROM EMP ORDER BY EMPNO DESC)\nWHERE  (  ?  ) = 1;"
+        "code": "SELECT EMPNO\nFROM   (SELECT EMPNO FROM EMP\n         ORDER BY EMPNO DESC)\nWHERE  (  ?  ) = 1;"
       }
     ]
   },

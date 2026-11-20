@@ -483,7 +483,7 @@ export const ROUND_51: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT COL1, NTILE(3) OVER (ORDER BY COL1) AS GRP\nFROM   T;"
+        "code": "SELECT COL1,\n       NTILE(3) OVER (ORDER BY COL1)\n         AS GRP\nFROM   T;"
       }
     ]
   },
@@ -1329,7 +1329,7 @@ export const ROUND_51: QuizQuestion[] = [
     "references": [
       {
         "type": "sql",
-        "code": "SELECT *\nFROM   T\nWHERE  (COL1, COL2) IN (('A', 1000), ('B', 2000));"
+        "code": "SELECT *\nFROM   T\nWHERE  (COL1, COL2) IN\n       (('A', 1000), ('B', 2000));"
       }
     ]
   },

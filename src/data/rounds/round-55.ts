@@ -2167,7 +2167,7 @@ export const ROUND_55: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT *\nFROM   EMP\nWHERE  DEPT IN (SELECT DEPT\n                FROM   EMP\n                WHERE  EMPNM IN ('JOHN', 'SMITH'));"
+        "code": "SELECT *\nFROM   EMP\nWHERE  DEPT IN\n       (SELECT DEPT\n          FROM EMP\n         WHERE EMPNM IN\n               ('JOHN', 'SMITH'));"
       }
     ]
   }

@@ -591,7 +591,7 @@ export const ROUND_58: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT SUM(VAL), AVG(VAL), AVG(NVL(VAL, 0)) FROM T;"
+        "code": "SELECT SUM(VAL), AVG(VAL),\n       AVG(NVL(VAL, 0))\nFROM T;"
       }
     ]
   },
