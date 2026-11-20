@@ -3683,19 +3683,51 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 141,
-    "title": "윈도우 함수에 대한 설명으로 올바르지 않은 것은?",
+    "title": "아래 EMP 에 대한 두 SQL 의 설명으로 올바르지 않은 것은?",
     "options": [
-      "윈도우 함수는 GROUP BY와 동일하게 처리 건수가 줄어든다.",
-      "PARTITION BY 컬럼;을 하면 각 컬럼의 값에 대해 윈도우 행 범위를 넘어갈 수 없다.",
-      "WINDOWING 절을 사용하려면 ORDER BY가 있어야 한다.",
-      "PARTITION BY 절이 없으면 전체 행을 대상으로 진행한다."
+      "㉠ 과 ㉡ 모두 부서 수만큼 2행이 나온다.",
+      "㉡ 은 행마다 그 부서의 합계(500 또는 1000)를 붙여 4행이 나온다.",
+      "㉡ 에서 PARTITION BY 를 빼면 모든 행에 전체 합계 1500 이 붙는다.",
+      "㉡ 에 ROWS BETWEEN 같은 윈도우 절을 쓰려면 OVER 안에 ORDER BY 가 있어야 한다."
     ],
     "correctIndex": 0,
-    "explanation": "GROUP BY는 특정 컬럼 값을 기준으로 행을 그룹화하여, 집계된 결과만 출력하므로 출력 행 수가 줄어든다. 반면, 윈도우 함수는 행 수를 줄이지 않고, 각 행에 대해 집계 결과나 순위 등의 값을 추가로 계산한다. 즉, PARTITION BY는 GROUP BY처럼 데이터를 그룹으로 나누는 역할을 하지만, 출력 행 수는 유지된다는 점에서 GROUP BY와는 처리 방식이 다르다.",
+    "explanation": "GROUP BY 는 그룹마다 한 행으로 줄이지만(㉠ 은 2행), 윈도우 함수는 행 수를 줄이지 않고 각 행에 계산 결과를 붙인다(㉡ 은 4행). 정답은 ①번이다. ② PARTITION BY DEPTNO 로 부서마다 합계를 구해 10번 행에는 500, 20번 행에는 1000 이 붙는다. ③ PARTITION BY 가 없으면 전체가 한 파티션이다. ④ 윈도우 절은 행의 순서를 기준으로 범위를 정하므로 ORDER BY 와 함께 쓴다.",
     "chapter": "윈도우 함수",
     "_source": "cbt-mock",
     "_origId": "cbt-098",
-    "_cbtOrigNo": 98
+    "_cbtOrigNo": 98,
+    "references": [
+      {
+        "type": "table",
+        "caption": "EMP",
+        "headers": [
+          "DEPTNO",
+          "SAL"
+        ],
+        "rows": [
+          [
+            "10",
+            "300"
+          ],
+          [
+            "10",
+            "200"
+          ],
+          [
+            "20",
+            "500"
+          ],
+          [
+            "20",
+            "500"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "-- ㉠\nSELECT DEPTNO, SUM(SAL)\nFROM   EMP\nGROUP  BY DEPTNO;\n\n-- ㉡\nSELECT DEPTNO, SAL,\n       SUM(SAL) OVER\n         (PARTITION BY DEPTNO)\nFROM   EMP;"
+      }
+    ]
   },
   {
     "id": 10941,
@@ -3729,19 +3761,25 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 143,
-    "title": "다음 중 집합 연산자에 대한 설명으로 올바르지 않은 것은?",
+    "title": "아래 집합 연산 SQL 에 대한 설명으로 올바르지 않은 것은?",
     "options": [
-      "UNION 연산자를 사용할 때 각각의 SELECT문에 ORDER BY를 사용할 수 있다.",
-      "UNION 은 중복을 제거하는 데 반해 UNION ALL은 중복을 제거하지 않는다.",
-      "INTERSECT는 중복 제거 및 정렬을 수행한다.",
-      "두 집합 간 중복이 없다면 UNION, UNION ALL 모두 동일한 결과를 출력한다."
+      "첫 번째 SELECT 바로 뒤에 ORDER BY 를 넣으면 그 SELECT 결과만 따로 정렬된 뒤 합쳐진다.",
+      "ORDER BY 는 마지막 SELECT 뒤에 한 번만 쓰며 합친 전체 결과를 정렬한다.",
+      "UNION 을 UNION ALL 로 바꾸면 중복까지 모두 나와 행 수가 같거나 늘어난다.",
+      "ORDER BY 에는 첫 번째 SELECT 의 칼럼 이름(별칭)이나 위치 번호를 쓴다."
     ],
     "correctIndex": 0,
-    "explanation": "집합 연산자 이용 시 ORDER BY는 전체 집합 결과에 대해 한 번만 사용해야 하므로 마지막 SELECT 문 뒤에 작성된다. UNION ALL은 중복 제거 및 정렬을 수행하지 않지만, 나머지 UNION, MINUS, INTERSECT 집합 연산자는 모두 중복 제거 및 정렬을 수행한다.",
+    "explanation": "집합 연산에서 ORDER BY 는 맨 마지막에 한 번만 쓸 수 있고 전체 결과에 적용된다(②). 첫 번째 SELECT 뒤에 ORDER BY 를 넣으면 문법 오류가 난다. 정답은 ①번이다. ③ UNION 은 중복을 없애고 UNION ALL 은 그대로 두므로 UNION ALL 의 행 수가 같거나 더 많다. ④ 결과 칼럼 이름은 첫 번째 SELECT 를 따르므로 그 이름이나 ORDER BY 1 같은 위치 번호로 정렬한다.",
     "chapter": "ORDER BY",
     "_source": "cbt-mock",
     "_origId": "cbt-100",
-    "_cbtOrigNo": 100
+    "_cbtOrigNo": 100,
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT DEPTNO FROM EMP\nUNION\nSELECT DEPTNO FROM DEPT\nORDER  BY DEPTNO;"
+      }
+    ]
   },
   {
     "id": 10943,
@@ -6029,19 +6067,51 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 218,
-    "title": "다음 중 FULL OUTER JOIN에 대한 설명으로 올바르지 않은 것은?",
+    "title": "아래 T1, T2 를 ID 로 FULL OUTER JOIN 할 때 설명으로 올바르지 않은 것은?",
     "options": [
-      "양쪽으로 OUTER JOIN하는 조인 기법을 의미한다.",
-      "조인 조건이 있어야 한다.",
-      "오라클 방식에서는 조인 조건 양쪽에 (+) 기호를 사용해 구현할 수 있다.",
-      "내부적으로 LEFT JOIN, RIGHT JOIN을 한 후 UNION한 것과 동일하다."
+      "결과는 3행이다.",
+      "같은 조건의 LEFT OUTER JOIN 결과와 RIGHT OUTER JOIN 결과를 UNION 하면 같은 결과가 나온다.",
+      "Oracle 에서는 WHERE T1.ID(+) = T2.ID(+) 처럼 양쪽에 (+) 를 붙여 같은 결과를 얻는다.",
+      "T1 에만 있는 1 은 T2 쪽 칼럼이 NULL 로 나온다."
     ],
     "correctIndex": 2,
-    "explanation": "FULL OUTER JOIN 은 양쪽 테이블을 모두 보존하는 조인으로(①), 조인 조건이 있어야 하며(②), LEFT 와 RIGHT OUTER JOIN 결과를 합쳐 중복을 없앤 것과 같다(④). Oracle 의 (+) 표기는 한쪽에만 쓸 수 있고 양쪽에 쓰면 오류가 나므로, ANSI 의 FULL OUTER JOIN 을 써야 한다. ③ 이 올바르지 않다.",
+    "explanation": "FULL OUTER JOIN 은 양쪽 테이블의 행을 모두 남긴다. 결과는 (1, NULL), (2, 2), (NULL, 3) 세 행이다(①·④). 이는 LEFT 와 RIGHT OUTER JOIN 을 합친 뒤 중복을 없앤 것과 같다(②). Oracle 의 (+) 표기는 한쪽에만 붙일 수 있고, 양쪽에 붙이면 오류(ORA-01468)가 난다. Oracle 방식으로는 LEFT·RIGHT 결과를 UNION 해서 만든다. 정답은 ③번이다.",
     "chapter": "집합 연산자",
     "_source": "cbt-mock",
     "_origId": "cbt-176",
-    "_cbtOrigNo": 176
+    "_cbtOrigNo": 176,
+    "references": [
+      {
+        "type": "table",
+        "caption": "T1",
+        "headers": [
+          "ID"
+        ],
+        "rows": [
+          [
+            "1"
+          ],
+          [
+            "2"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "T2",
+        "headers": [
+          "ID"
+        ],
+        "rows": [
+          [
+            "2"
+          ],
+          [
+            "3"
+          ]
+        ]
+      }
+    ]
   },
   {
     "id": 11018,

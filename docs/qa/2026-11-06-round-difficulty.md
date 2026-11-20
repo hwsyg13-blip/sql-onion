@@ -1104,3 +1104,6 @@ ERD 선 표기 정리 2차(11-20 14시): 식별자를 다루는 1과목 문항�
 | cbt-123 | CHAR 공백 채움 비교 vs VARCHAR2 정확 비교, LENGTH | 타입 이름 → 같은 값을 넣은 두 칼럼 | ① | Oracle 규칙(PostgreSQL 은 CHAR 길이를 공백 빼고 셈 — 그래서 Oracle 기준 명시) |
 | cbt-103 | 뷰는 저장 안 함, 기준 테이블 DROP 후 조회 오류, 단순 뷰 DML·집계 뷰 불가 | 일반 설명 → CREATE VIEW 사례 | ④ | 정의로 판정 |
 | cbt-110 | 오름차순 날짜 순서와 DBMS 별 NULL 위치 | 일반 설명 → 데이터 정렬 결과 | ④ | Oracle·SQL Server 규칙 |
+| cbt-098 | 윈도우 함수는 행 수 유지(GROUP BY 와 비교), PARTITION 없으면 전체 | 일반 설명 → 두 SQL 결과 | ① | PostgreSQL 실행(검증기는 두 문장이라 오류로 셈) |
+| cbt-100 | 집합 연산 ORDER BY 는 마지막 한 번 | 일반 설명 → SQL 사례 | ① | PostgreSQL 실행(첫 SELECT 뒤 ORDER BY 문법 오류) |
+| cbt-176 | FULL OUTER 결과, Oracle (+) 양쪽 불가 | 일반 설명 → 데이터 결과 | ③ | PostgreSQL 실행 + Oracle 규칙(ORA-01468) |
