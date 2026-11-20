@@ -1212,19 +1212,19 @@
     {
       "subject": "2과목",
       "number": 30,
-      "title": "오라클과 SQL Server에서 아래 DML·DDL이 하나의 트랜잭션으로 순차 수행된 후 (SQL Server 는 BEGIN TRANSACTION 으로 명시적 트랜잭션을 시작한 상태) ROLLBACK의 효과로 적절하지 않은 것은?",
+      "title": "1행이 COMMIT 된 테이블 T 에 아래 문장을 차례로 실행했다(SQL Server 는 BEGIN TRANSACTION 으로 시작). 실행 후 'Oracle 의 T 행 수와 T_NEW 유무 / SQL Server 의 T 행 수와 T_NEW 유무' 로 옳은 것은?",
       "options": [
-        "오라클에서는 CREATE 시 UPDATE가 자동 커밋되어 UPDATE 결과는 유지된다.",
-        "오라클에서는 CREATE로 생성된 테이블 TAB_NEW는 유지된다.",
-        "SQL Server에서는 UPDATE와 CREATE 모두 롤백되어 TAB_NEW가 생성되지 않는다.",
-        "오라클에서는 ROLLBACK이 실행되면 테이블 TAB_NEW도 함께 삭제된다."
+        "1, 없음 / 1, 없음",
+        "3, 있음 / 1, 없음",
+        "2, 있음 / 2, 있음",
+        "2, 있음 / 1, 없음"
       ],
       "correctIndex": 3,
-      "explanation": "오라클의 DDL 은 실행 전후로 자동 커밋을 동반하므로, CREATE 시점에 앞선 UPDATE 까지 커밋되고 ROLLBACK 으로 취소되지 않는다(①②는 옳다). 따라서 ROLLBACK 으로 TAB_NEW 가 삭제된다는 ④ 가 적절하지 않다. SQL Server 는 명시적 트랜잭션 안에서는 DDL 도 트랜잭션 범위에 포함되어 UPDATE 와 CREATE 가 함께 롤백된다(③). 단, SQL Server 의 기본값인 자동 커밋 모드에서는 각 문장이 바로 커밋되므로 이 전제가 필요하다.",
+      "explanation": "Oracle 은 DDL 을 실행하기 직전과 직후에 자동 COMMIT 한다. CREATE TABLE 앞에서 INSERT 2 가 확정되고 T_NEW 도 만들어진 채 확정된다. 뒤의 INSERT 3 만 ROLLBACK 으로 취소되어 T 는 1, 2 의 2행이고 T_NEW 는 남는다. SQL Server 는 명시적 트랜잭션 안의 DDL 도 트랜잭션에 묶인다. ROLLBACK 하면 INSERT 2·3 과 CREATE TABLE 이 모두 취소되어 T 는 처음의 1행이고 T_NEW 는 없다. 정답은 ④번이다. ① 은 Oracle 에서도 DDL 이 롤백된다고 본 것이고, ② 는 Oracle 의 ROLLBACK 이 아무것도 되돌리지 못한다고 본 것, ③ 은 SQL Server 도 DDL 에서 자동 COMMIT 한다고 본 것이다.",
       "references": [
         {
           "type": "sql",
-          "code": "UPDATE T1 SET COL2 = 200;\nCREATE TABLE TAB_NEW ( C1 INT );\nROLLBACK;"
+          "code": "INSERT INTO T VALUES (2);\nCREATE TABLE T_NEW (C1 INT);\nINSERT INTO T VALUES (3);\nROLLBACK;"
         }
       ]
     },

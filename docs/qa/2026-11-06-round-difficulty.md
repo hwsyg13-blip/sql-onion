@@ -980,3 +980,5 @@ ERD 선 표기 정리 2차(11-20 14시): 식별자를 다루는 1과목 문항�
 | 48-2-25 | Oracle 복합 UNIQUE: 일부 NULL 은 중복 검사, 모두 NULL 은 허용·PK NULL | 제약 조합 고르기 → INSERT 5개 중 성공 | ㉠, ㉢, ㉣ | Oracle 규칙(PostgreSQL 은 ㉡ 도 성공 — 해설에 적음) |
 | 50-2-32 | 데이터가 있는 테이블의 MODIFY(길이 축소·NOT NULL)·ADD(DEFAULT 있는/없는 NOT NULL) | 문법 고르기 → ALTER 5개 중 성공 | ㉡, ㉣ | PostgreSQL 동일(ALTER COLUMN 문법으로 확인) |
 | 59-2-25 | CTAS(WHERE 1 = 2)가 옮기지 않는 DEFAULT·기본키, 옮기는 NOT NULL | 설명 고르기 → INSERT 3개 뒤 값·결과 | NULL, 성공, 오류 | Oracle 규칙(NOT NULL 복사), DEFAULT·PK 미복사는 PostgreSQL 동일 |
+| 46-2-30 | Oracle DDL 앞뒤 자동 COMMIT vs SQL Server 명시적 트랜잭션 안 DDL 롤백 | 설명 고르기 → 문장 4개 뒤 두 DBMS 상태 | 2, 있음 / 1, 없음 | SQL Server 쪽은 PostgreSQL(트랜잭션 DDL)로 1, 없음 확인, Oracle 은 규칙 |
+| 48-2-23 | Dirty Read 없음·READ COMMITTED 의 Non-Repeatable Read·SERIALIZABLE 스냅샷 | 특성 이름 → 두 트랜잭션 순서표에서 세 조회 값 | 100, 50, 100 | 격리 수준 정의로 판정(Oracle·PostgreSQL 공통 동작) |
