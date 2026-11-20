@@ -476,7 +476,7 @@
         },
         {
           "type": "sql",
-          "code": "SELECT ID,\n       COUNT(*) OVER (ORDER BY VAL) AS CNT\nFROM   T\nORDER BY ID;"
+          "code": "SELECT ID,\n       COUNT(*) OVER (ORDER BY VAL)\n         AS CNT\nFROM   T\nORDER BY ID;"
         }
       ]
     },
@@ -688,7 +688,7 @@
         },
         {
           "type": "sql",
-          "code": "SELECT COUNT(*) FROM T WHERE COL1 = COL2;"
+          "code": "SELECT COUNT(*) FROM T\nWHERE COL1 = COL2;"
         }
       ]
     },
@@ -756,7 +756,7 @@
         },
         {
           "type": "sql",
-          "code": "SELECT 요일\nFROM   요일테이블\nWHERE  REGEXP_LIKE(요일, 'u[a-z]*day$');"
+          "code": "SELECT 요일\nFROM   요일테이블\nWHERE  REGEXP_LIKE(요일,\n         'u[a-z]*day$');"
         }
       ]
     },
@@ -1487,7 +1487,7 @@
         },
         {
           "type": "sql",
-          "code": "SELECT 지점, 월, 매출\nFROM   매출\nUNPIVOT (매출 FOR 월 IN (\"1월\", \"2월\"));"
+          "code": "SELECT 지점, 월, 매출\nFROM   매출\nUNPIVOT (매출 FOR 월\n         IN (\"1월\", \"2월\"));"
         }
       ],
       "optionReferences": [

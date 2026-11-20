@@ -770,7 +770,7 @@ export const ROUND_58: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT DEPT, JOB, SUM(SAL)\nFROM   EMP\nGROUP BY ROLLUP(DEPT, JOB)\nHAVING GROUPING(DEPT) + GROUPING(JOB) > 0;"
+        "code": "SELECT DEPT, JOB, SUM(SAL)\nFROM   EMP\nGROUP BY ROLLUP(DEPT, JOB)\nHAVING GROUPING(DEPT)\n     + GROUPING(JOB) > 0;"
       }
     ]
   },
@@ -1406,7 +1406,7 @@ export const ROUND_58: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT ID, TYPE, SUM(AMT)\nFROM   TBL\nGROUP BY ROLLUP(ID, TYPE)\nHAVING GROUPING(ID) + GROUPING(TYPE) != 1;"
+        "code": "SELECT ID, TYPE, SUM(AMT)\nFROM   TBL\nGROUP BY ROLLUP(ID, TYPE)\nHAVING GROUPING(ID)\n     + GROUPING(TYPE) != 1;"
       }
     ]
   },

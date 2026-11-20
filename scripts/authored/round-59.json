@@ -377,7 +377,7 @@
         {
           "type": "sql",
           "caption": "Oracle 표기를 어떤 ANSI 조인으로 바꿔야 할까?",
-          "code": "-- Oracle 표기\nSELECT * FROM A, B WHERE A.ID = B.ID(+);\n\n-- ANSI 표준 SQL\nSELECT * FROM A ( ? ) B ON A.ID = B.ID;"
+          "code": "-- Oracle 표기\nSELECT * FROM A, B\nWHERE A.ID = B.ID(+);\n\n-- ANSI 표준 SQL\nSELECT * FROM A ( ? ) B ON A.ID = B.ID;"
         },
         {
           "type": "table",
@@ -868,7 +868,7 @@
         },
         {
           "type": "sql",
-          "code": "-- ㉠\nWHERE 입사일시 >= DATE '2025-10-20'\n  AND 입사일시 <  DATE '2025-10-21'\n-- ㉡\nWHERE TRUNC(입사일시) = DATE '2025-10-20'\n-- ㉢\nWHERE 입사일시 BETWEEN DATE '2025-10-20'\n                  AND DATE '2025-10-21'\n-- ㉣\nWHERE 입사일시 = DATE '2025-10-20'"
+          "code": "-- ㉠\nWHERE 입사일시 >= DATE '2025-10-20'\n  AND 입사일시 <  DATE '2025-10-21'\n-- ㉡\nWHERE TRUNC(입사일시)\n      = DATE '2025-10-20'\n-- ㉢\nWHERE 입사일시\n      BETWEEN DATE '2025-10-20'\n          AND DATE '2025-10-21'\n-- ㉣\nWHERE 입사일시 = DATE '2025-10-20'"
         }
       ]
     },
@@ -1267,7 +1267,7 @@
         },
         {
           "type": "sql",
-          "code": "SELECT A.*\nFROM   ACTOR_PAY A\nWHERE  A.FEE = (SELECT MAX(FEE)\n                FROM   ACTOR_PAY\n                WHERE  ACTOR_ID = A.ACTOR_ID);"
+          "code": "SELECT A.*\nFROM   ACTOR_PAY A\nWHERE  A.FEE =\n       (SELECT MAX(FEE)\n          FROM ACTOR_PAY\n         WHERE ACTOR_ID = A.ACTOR_ID);"
         }
       ]
     },

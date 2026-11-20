@@ -640,7 +640,7 @@ export const ROUND_49: QuizQuestion[] = [
       {
         "type": "sql",
         "caption": "가",
-        "code": "SELECT A.EMP_NO, A.ENAME\nFROM   EMP A\nWHERE  EXISTS (SELECT 'X' FROM EMP B\n               WHERE  A.MGR_NO = B.EMP_NO\n                 AND  B.SAL <= 3000);"
+        "code": "SELECT A.EMP_NO, A.ENAME\nFROM   EMP A\nWHERE  EXISTS\n       (SELECT 'X' FROM EMP B\n         WHERE A.MGR_NO = B.EMP_NO\n           AND B.SAL <= 3000);"
       },
       {
         "type": "sql",
@@ -655,7 +655,7 @@ export const ROUND_49: QuizQuestion[] = [
       {
         "type": "sql",
         "caption": "라",
-        "code": "SELECT A.EMP_NO, A.ENAME\nFROM   EMP A\nWHERE  NOT EXISTS (SELECT 'X' FROM EMP B\n                   WHERE  A.MGR_NO = B.EMP_NO\n                     AND  B.SAL > 3000);"
+        "code": "SELECT A.EMP_NO, A.ENAME\nFROM   EMP A\nWHERE  NOT EXISTS\n       (SELECT 'X' FROM EMP B\n         WHERE A.MGR_NO = B.EMP_NO\n           AND B.SAL > 3000);"
       }
     ]
   },
@@ -1129,7 +1129,7 @@ export const ROUND_49: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT 고객번호, 고객명, 매출액,\n       RANK() OVER(ORDER BY 매출액 DESC) AS 순위\nFROM   ( SELECT A.고객번호,\n                MAX(A.고객명) AS 고객명,\n                SUM(B.매출액) AS 매출액\n         FROM   고객 A INNER JOIN 월별매출 B\n         ON     A.고객번호 = B.고객번호\n         GROUP BY A.고객번호 )\nORDER BY 순위;"
+        "code": "SELECT 고객번호, 고객명, 매출액,\n       RANK() OVER(\n         ORDER BY 매출액 DESC) AS 순위\nFROM ( SELECT A.고객번호,\n              MAX(A.고객명) AS 고객명,\n              SUM(B.매출액) AS 매출액\n       FROM   고객 A\n              INNER JOIN 월별매출 B\n       ON     A.고객번호 = B.고객번호\n       GROUP BY A.고객번호 )\nORDER BY 순위;"
       }
     ]
   },

@@ -1265,7 +1265,7 @@ export const ROUND_54: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT 나이_그룹, AVG(나이) AS 평균_나이\nFROM   TAB\nGROUP  BY 나이_그룹\nHAVING COUNT(나이) >= 1\nORDER  BY 나이_그룹;"
+        "code": "SELECT 나이_그룹,\n       AVG(나이) AS 평균_나이\nFROM   TAB\nGROUP  BY 나이_그룹\nHAVING COUNT(나이) >= 1\nORDER  BY 나이_그룹;"
       }
     ]
   },

@@ -1853,7 +1853,7 @@ export const ROUND_62: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT *\nFROM   T\nWHERE  NOT ( COL1 = 1 OR COL2 IS NULL );"
+        "code": "SELECT *\nFROM   T\nWHERE  NOT ( COL1 = 1\n             OR COL2 IS NULL );"
       }
     ]
   },

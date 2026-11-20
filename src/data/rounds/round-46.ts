@@ -816,7 +816,7 @@ export const ROUND_46: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "-- (가)\nSELECT NVL(SUM(COL1), 0) FROM T WHERE 1=2;\n\n-- (나)\nSELECT MIN(COL1) FROM T WHERE 1=2;\n\n-- (다)\nSELECT COUNT(*) FROM T WHERE 1=2;"
+        "code": "-- (가)\nSELECT NVL(SUM(COL1), 0) FROM T\nWHERE 1=2;\n\n-- (나)\nSELECT MIN(COL1) FROM T WHERE 1=2;\n\n-- (다)\nSELECT COUNT(*) FROM T WHERE 1=2;"
       }
     ]
   },
@@ -973,7 +973,7 @@ export const ROUND_46: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT T.NAME, S.DATE\nFROM   TUTOR T LEFT OUTER JOIN SESSIONS S\nON     T.TID = S.TID;"
+        "code": "SELECT T.NAME, S.DATE\nFROM   TUTOR T\n       LEFT OUTER JOIN SESSIONS S\nON     T.TID = S.TID;"
       }
     ]
   },
@@ -1583,7 +1583,7 @@ export const ROUND_46: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT 운전자, COUNT(운행번호) AS 운행횟수\nFROM   DRIVING_LOG\nGROUP BY 운전자;"
+        "code": "SELECT 운전자,\n       COUNT(운행번호) AS 운행횟수\nFROM   DRIVING_LOG\nGROUP BY 운전자;"
       }
     ]
   },
@@ -1638,7 +1638,7 @@ export const ROUND_46: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT *\nFROM   CUSTOMER\nWHERE  지역 IN ('서울', '대전', '부산');"
+        "code": "SELECT *\nFROM   CUSTOMER\nWHERE  지역 IN\n       ('서울', '대전', '부산');"
       }
     ]
   },
@@ -2178,7 +2178,7 @@ export const ROUND_46: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT GRP,\n       AVG(COL1) - AVG(NVL(COL1, 0)) AS D\nFROM   T\nGROUP BY GRP\nORDER BY GRP;"
+        "code": "SELECT GRP,\n       AVG(COL1) - AVG(NVL(COL1, 0))\n         AS D\nFROM   T\nGROUP BY GRP\nORDER BY GRP;"
       }
     ]
   },

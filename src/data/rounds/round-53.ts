@@ -1033,7 +1033,7 @@ export const ROUND_53: QuizQuestion[] = [
     "references": [
       {
         "type": "sql",
-        "code": "SELECT * FROM T WHERE COL <= ALL(50, 15);"
+        "code": "SELECT * FROM T\nWHERE COL <= ALL(50, 15);"
       },
       {
         "type": "table",

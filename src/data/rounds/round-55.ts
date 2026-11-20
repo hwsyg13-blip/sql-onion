@@ -764,7 +764,7 @@ export const ROUND_55: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT NVL(SUM(C1) + SUM(C2), 0) FROM T;"
+        "code": "SELECT NVL(SUM(C1) + SUM(C2), 0)\nFROM T;"
       }
     ]
   },
@@ -1216,7 +1216,7 @@ export const ROUND_55: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT *\nFROM   T\nWHERE  고객번호 = 'XX' OR 고객번호 = 'YY'\nAND    등급 = 1\nAND    지역 = '서울';"
+        "code": "SELECT *\nFROM   T\nWHERE  고객번호 = 'XX'\n   OR  고객번호 = 'YY'\nAND    등급 = 1\nAND    지역 = '서울';"
       }
     ]
   },

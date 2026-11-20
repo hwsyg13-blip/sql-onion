@@ -1592,7 +1592,7 @@ export const ROUND_48: QuizQuestion[] = [
     "references": [
       {
         "type": "sql",
-        "code": "SELECT LTRIM('xxSQLxx', 'x')       AS A,\n       RTRIM('xySQLyx', 'xy')      AS B,\n       TRIM('x' FROM 'xxSQLxx')    AS C,\n       LENGTH(TRIM('  S Q L  '))   AS D\nFROM   DUAL;"
+        "code": "SELECT LTRIM('xxSQLxx', 'x') AS A,\n       RTRIM('xySQLyx', 'xy') AS B,\n       TRIM('x' FROM 'xxSQLxx') AS C,\n       LENGTH(TRIM('  S Q L  ')) AS D\nFROM   DUAL;"
       }
     ]
   },

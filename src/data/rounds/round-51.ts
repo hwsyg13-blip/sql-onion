@@ -1663,7 +1663,7 @@ export const ROUND_51: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT A.COL1, B.COL2\nFROM   A LEFT OUTER JOIN B\nON     (A.COL1 = B.COL1 AND B.COL2 > 200);"
+        "code": "SELECT A.COL1, B.COL2\nFROM   A LEFT OUTER JOIN B\nON     (A.COL1 = B.COL1\n        AND B.COL2 > 200);"
       }
     ]
   },

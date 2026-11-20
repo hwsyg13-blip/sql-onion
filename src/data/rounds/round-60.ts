@@ -399,7 +399,7 @@ export const ROUND_60: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT *\nFROM   EMP\nWHERE  EMPNO NOT IN (SELECT MGR FROM EMP);"
+        "code": "SELECT *\nFROM   EMP\nWHERE  EMPNO NOT IN\n       (SELECT MGR FROM EMP);"
       }
     ]
   },
@@ -785,7 +785,7 @@ export const ROUND_60: QuizQuestion[] = [
     "references": [
       {
         "type": "sql",
-        "code": "SELECT REGEXP_REPLACE(\n         '2026/02/25',\n         '([0-9]{4})/([0-9]{2})/([0-9]{2})',\n         '\\3/\\2/\\1'\n       )\nFROM DUAL;"
+        "code": "SELECT REGEXP_REPLACE(\n  '2026/02/25',\n  '([0-9]{4})/([0-9]{2})/([0-9]{2})',\n  '\\3/\\2/\\1'\n)\nFROM DUAL;"
       }
     ]
   },
@@ -1556,7 +1556,7 @@ export const ROUND_60: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT EMPNO,\n       ENAME,\n       EXTRACT(YEAR FROM HIREDATE) AS YR,\n       SAL\nFROM   EMP\nUNION\nSELECT EMPNO,\n       ENAME,\n       EXTRACT(YEAR FROM HIREDATE),\n       SAL\nFROM   EMP_HIST;"
+        "code": "SELECT EMPNO,\n       ENAME,\n       EXTRACT(YEAR FROM HIREDATE)\n         AS YR,\n       SAL\nFROM   EMP\nUNION\nSELECT EMPNO,\n       ENAME,\n       EXTRACT(YEAR FROM HIREDATE),\n       SAL\nFROM   EMP_HIST;"
       }
     ]
   },
@@ -2154,7 +2154,7 @@ export const ROUND_60: QuizQuestion[] = [
     "references": [
       {
         "type": "sql",
-        "code": "CREATE TABLE MEMBER (\n  ID   VARCHAR2(10) PRIMARY KEY,\n  NAME VARCHAR2(30) NOT NULL,\n  SEX  CHAR(1)  (  ?  ) (SEX IN ('M','F'))\n);"
+        "code": "CREATE TABLE MEMBER (\n  ID   VARCHAR2(10) PRIMARY KEY,\n  NAME VARCHAR2(30) NOT NULL,\n  SEX  CHAR(1)\n       (  ?  ) (SEX IN ('M','F'))\n);"
       }
     ]
   },

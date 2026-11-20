@@ -394,7 +394,7 @@ export const ROUND_61: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT COUNT(*) AS A, COUNT(DEPT_ID) AS B\nFROM   DEPT;"
+        "code": "SELECT COUNT(*) AS A,\n       COUNT(DEPT_ID) AS B\nFROM   DEPT;"
       }
     ]
   },

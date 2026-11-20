@@ -514,7 +514,7 @@
         },
         {
           "type": "sql",
-          "code": "SELECT 이름,\n  FIRST_VALUE(이름) OVER (\n    PARTITION BY 부서 ORDER BY 급여 DESC\n  ) AS F,\n  LAST_VALUE(이름) OVER (\n    PARTITION BY 부서 ORDER BY 급여 DESC\n  ) AS L1,\n  LAST_VALUE(이름) OVER (\n    PARTITION BY 부서 ORDER BY 급여 DESC\n    ROWS BETWEEN UNBOUNDED PRECEDING\n             AND UNBOUNDED FOLLOWING\n  ) AS L2\nFROM 사원;"
+          "code": "SELECT 이름,\n  FIRST_VALUE(이름) OVER (\n    PARTITION BY 부서\n    ORDER BY 급여 DESC\n  ) AS F,\n  LAST_VALUE(이름) OVER (\n    PARTITION BY 부서\n    ORDER BY 급여 DESC\n  ) AS L1,\n  LAST_VALUE(이름) OVER (\n    PARTITION BY 부서\n    ORDER BY 급여 DESC\n    ROWS BETWEEN UNBOUNDED PRECEDING\n             AND UNBOUNDED FOLLOWING\n  ) AS L2\nFROM 사원;"
         }
       ]
     },
@@ -657,7 +657,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT SUBSTR('DATABASE', 7)     AS A,\n       SUBSTR('DATABASE', -2)    AS B,\n       SUBSTR('DATABASE', 8, -2) AS C,\n       SUBSTR('DATABASE',\n              INSTR('DATABASE', 'S'), 2)\n                                 AS D\nFROM   DUAL;"
+          "code": "SELECT SUBSTR('DATABASE', 7) AS A,\n       SUBSTR('DATABASE', -2) AS B,\n       SUBSTR('DATABASE', 8, -2) AS C,\n       SUBSTR('DATABASE',\n         INSTR('DATABASE', 'S'), 2)\n         AS D\nFROM   DUAL;"
         }
       ]
     },
