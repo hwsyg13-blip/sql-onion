@@ -1093,3 +1093,6 @@ ERD 선 표기 정리 2차(11-20 14시): 식별자를 다루는 1과목 문항�
 | cbt-195 | NULL 이 있으면 NOT IN 과 NOT EXISTS 결과가 다름 | 문법 오류 섞인 보기 → 같은 목적 DELETE 4개 | ① | PostgreSQL 실행(RETURNING 으로 지워지는 행 확인) |
 | cbt-193 | NULL 과 <> 비교는 0행(오류 아님) | 문법 고르기 → 행 수 계산 | ① | PostgreSQL 실행 |
 | cbt-059 | NATURAL JOIN 은 이름 같은 칼럼 전부(NAME 까지) | 이름 고르기 → 방식 + 행 수 | NATURAL, 0행 | PostgreSQL 실행 |
+| cbt-054 | INSERT…SELECT 칼럼 수 맞추기, VALUES 안 다중행 서브쿼리 불가, WHERE 빠짐 | 단순 문법 → 칼럼 수 다른 두 테이블 | ③ | PostgreSQL 실행 |
+| cbt-108 | 이름 규칙(문자 시작, _ $ # 허용, 예약어 불가) | 이름 문자열 → CREATE TABLE 4개 | ③ | Oracle 규칙(PostgreSQL 도 EMP_100$ 생성 확인) |
+| cbt-169 | 제약 추가 시 기존 데이터 검사 → 오류 | 문법 고르기 → 위반 데이터가 있을 때 결과 | ② | PostgreSQL 실행(오류, 제약 0개) |

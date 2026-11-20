@@ -1,5 +1,5 @@
 // Auto-generated from scripts/authored/ai-mock.json
-// AI 생성 모의고사 풀 (기출 변형) · 1166문항
+// AI 생성 모의고사 풀 (기출 변형) · 1167문항
 // ⚠ 직접 편집 금지. ai-mock.json 수정 후 'node scripts/build-quiz-bank.mjs' 재실행.
 import type { QuizQuestion } from '../quizBank';
 
@@ -2372,19 +2372,47 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 101,
-    "title": "다음 중 EMP 테이블에서 부서가 10번인 사원들만 선택하여 EMP_TEMP 테이블에 삽입하는 쿼리는? (단, EMP_TEMP와 EMP 테이블의 컬럼 개수, 자료형, 순서는 모두 같다.)",
+    "title": "EMP_TEMP(EMPNO, ENAME) 에 EMP 의 10번 부서 사원만 넣으려 한다. 오류 없이 의도대로 동작하는 SQL 은?",
     "options": [
-      "INSERT INTO EMP_TEMP SELECT * FROM EMP;",
-      "INSERT INTO EMP_TEMP VALUES(SELECT * FROM EMP WHERE DEPTNO =10);",
       "INSERT INTO EMP_TEMP SELECT * FROM EMP WHERE DEPTNO = 10;",
-      "INSERT * INTO EMP_TEMP FROM EMP WHERE DEPTNO = 10;"
+      "INSERT INTO EMP_TEMP VALUES (SELECT EMPNO, ENAME FROM EMP WHERE DEPTNO = 10);",
+      "INSERT INTO EMP_TEMP (EMPNO, ENAME) SELECT EMPNO, ENAME FROM EMP WHERE DEPTNO = 10;",
+      "INSERT INTO EMP_TEMP SELECT EMPNO, ENAME FROM EMP;"
     ],
     "correctIndex": 2,
-    "explanation": "이 문제는 INSERT INTO ... SELECT 문법을 묻는 문제이다. 이 구문은 한테이블에서 조건에 맞는 여러 행을 다른 테이블에 삽입할 때 사용한다.① 모든 직원의 정보를 EMP_TEMP에 삽입하는 문항이므로 오답이다.②, ④ 문법이 잘못되었다. INSERT INTO EMP_TEMP SELECT * FROM EMP WHERE DEPTNO = 10; 사용 시, 두 테이블(EMP_TEMP, EMP)의 컬럼 수와 자료형 순서가 정확히 일치해야 한다.",
+    "explanation": "INSERT ... SELECT 는 VALUES 없이 SELECT 결과를 그대로 넣으며, 넣을 칼럼 수와 SELECT 칼럼 수·타입이 맞아야 한다. ③ 은 두 칼럼을 맞추고 10번 부서만 골라 KIM, PARK 두 행을 넣는다. 정답은 ③번이다. ① SELECT * 는 칼럼이 3개라 EMP_TEMP 의 2개와 맞지 않아 오류다. ② VALUES 안에 여러 행·여러 칼럼을 돌려주는 서브쿼리를 넣을 수 없어 오류다. ④ 는 실행되지만 WHERE 가 없어 20번 부서 LEE 까지 들어간다.",
     "chapter": "DML",
     "_source": "cbt-mock",
     "_origId": "cbt-054",
-    "_cbtOrigNo": 54
+    "_cbtOrigNo": 54,
+    "references": [
+      {
+        "type": "table",
+        "caption": "EMP",
+        "headers": [
+          "EMPNO",
+          "ENAME",
+          "DEPTNO"
+        ],
+        "rows": [
+          [
+            "1",
+            "KIM",
+            "10"
+          ],
+          [
+            "2",
+            "LEE",
+            "20"
+          ],
+          [
+            "3",
+            "PARK",
+            "10"
+          ]
+        ]
+      }
+    ]
   },
   {
     "id": 10901,
@@ -3809,15 +3837,15 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 151,
-    "title": "다음 중 테이블명으로 가능한 것은 무엇인가?",
+    "title": "Oracle 에서 오류 없이 만들어지는 테이블은?",
     "options": [
-      "EMP-100",
-      "100EMP",
-      "EMP100",
-      "100_EMP"
+      "CREATE TABLE EMP-100 (ID NUMBER);",
+      "CREATE TABLE 100EMP (ID NUMBER);",
+      "CREATE TABLE EMP_100$ (ID NUMBER);",
+      "CREATE TABLE ORDER (ID NUMBER);"
     ],
     "correctIndex": 2,
-    "explanation": "테이블명은 문자로 시작해야 하고 문자·숫자와 _, $, # 만 쓸 수 있다. EMP100 은 문자로 시작하고 영문·숫자만 써서 올바르다(③). ① 의 하이픈(-)은 허용되지 않고, ②④ 는 숫자로 시작한다.",
+    "explanation": "테이블 이름은 문자로 시작해야 하고, 문자·숫자와 _, $, # 만 쓸 수 있으며, 예약어는 쓸 수 없다(따옴표로 감싸지 않는 경우). EMP_100$ 는 문자로 시작하고 허용된 기호만 써서 만들어진다. 정답은 ③번이다. ① 의 - 는 빼기 연산자로 해석되어 오류다. ② 는 숫자로 시작해 오류다. ④ ORDER 는 ORDER BY 에 쓰이는 예약어라 오류다.",
     "chapter": "관계형 DB와 SELECT",
     "_source": "cbt-mock",
     "_origId": "cbt-108",
@@ -5680,19 +5708,25 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 211,
-    "title": "다음 중 EMP 테이블의 DEPTNO에 외래키 제약을 추가하는 SQL은?",
+    "title": "EMP 에 DEPTNO = 30 인 행이 있고 DEPT 에는 10, 20 만 있다. 아래 문장을 실행한 결과로 옳은 것은?",
     "options": [
-      "ALTER EMP ADD FOREIGN KEY (DEPTNO) REFERENCES DEPT(DEPTNO);",
-      "ALTER TABLE EMP ADD CONSTRAINT FK_DEPT FOREIGN KEY (DEPTNO) REFERENCES DEPT(DEPTNO);",
-      "ALTER TABLE EMP FOREIGN KEY(DEPTNO) REFERENCES DEPT;",
-      "MODIFY EMP FOREIGN KEY (DEPTNO) REFERENCES DEPT(DEPTNO);"
+      "제약이 추가되고 30 인 행의 DEPTNO 는 자동으로 NULL 이 된다.",
+      "기존 데이터가 제약을 어겨 오류가 나고, 제약은 추가되지 않는다.",
+      "제약이 추가되고 30 인 행은 자동으로 삭제된다.",
+      "외래키는 CREATE TABLE 할 때만 정의할 수 있어 문법 오류다."
     ],
     "correctIndex": 1,
-    "explanation": "기존 테이블에 외래키를 추가하는 문법은 ALTER TABLE 테이블명 ADD CONSTRAINT 제약조건명 FOREIGN KEY (컬럼) REFERENCES 참조테이블(컬럼) 이다(②). ① 은 TABLE 키워드가 빠졌고, ③ 은 ADD 가 없으며, ④ MODIFY 는 ALTER TABLE 안에서 컬럼 정의를 바꿀 때 쓰는 말이라 문법 오류다.",
+    "explanation": "ALTER TABLE ... ADD CONSTRAINT ... FOREIGN KEY 는 이미 있는 테이블에 외래키를 더하는 올바른 문법이다. 다만 제약을 만들 때 기존 데이터도 검사하므로, DEPT 에 없는 30 이 있으면 오류가 나고 제약은 만들어지지 않는다. 정답은 ②번이다. ①·③ 처럼 기존 데이터를 저절로 고치거나 지우지 않는다(ON DELETE SET NULL·CASCADE 는 부모 행을 지울 때의 동작이다). ④ 외래키는 ALTER TABLE 로도 추가할 수 있다. 먼저 30 인 행을 고치거나, Oracle 에서는 NOVALIDATE 로 기존 데이터 검사를 건너뛰는 방법도 있다.",
     "chapter": "DDL",
     "_source": "cbt-mock",
     "_origId": "cbt-169",
-    "_cbtOrigNo": 169
+    "_cbtOrigNo": 169,
+    "references": [
+      {
+        "type": "sql",
+        "code": "ALTER TABLE EMP\n  ADD CONSTRAINT FK_EMP_DEPT\n  FOREIGN KEY (DEPTNO)\n  REFERENCES DEPT (DEPTNO);"
+      }
+    ]
   },
   {
     "id": 11012,
@@ -11165,6 +11199,27 @@ export const AI_MOCK: QuizQuestion[] = [
     "_source": "sqld-1140",
     "_origId": "sqld-0170",
     "_category": "ER 모델링",
+    "_correctRate": 10
+  },
+  {
+    "id": 11183,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "1과목",
+    "number": 384,
+    "title": "다음 중 테이블명으로 가능한 것은 무엇인가?",
+    "options": [
+      "100_EMP",
+      "EMP100",
+      "100EMP",
+      "EMP-100"
+    ],
+    "correctIndex": 1,
+    "explanation": "테이블명과 칼럼명은 반드시 문자로 시작해야 한다.",
+    "chapter": "데이터 모델 개념",
+    "_source": "sqld-1140",
+    "_origId": "sqld-0174",
+    "_category": "데이터베이스 개념",
     "_correctRate": 10
   },
   {
