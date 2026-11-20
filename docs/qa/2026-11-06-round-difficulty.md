@@ -1140,3 +1140,5 @@ ERD 선 표기 정리 2차(11-20 14시): 식별자를 다루는 1과목 문항�
 | 55-2-15 | 숫자로 시작하는 이름만 오류, 칼럼 옆 PK·CHECK·한글 DEFAULT 는 가능 | 쉬운 오답(VARCHAR2 불가 등) → 그럴듯한 오답 | ① | PostgreSQL 실행(이름 오류, 나머지 정의는 생성 성공) |
 | 56-2-43 | > 와 >= 경계, NOT(<) 과 NULL, HAVING 단독 오류 | 절 고르기 → SQL + 결과 짝 | ③ | PostgreSQL 실행 |
 | 56-2-47 | Oracle DESC 에서 NULL 이 맨 앞, NULLS LAST | DESC 추가 → NULL 위치까지 | ④ | Oracle 규칙(PostgreSQL 도 같은 정렬 확인) |
+| 57-2-44 | ROLLUP 6행 vs CUBE 8행 vs GROUPING SETS 4행 | 결과만 → 원본 데이터 + 결과로 판단 | ① | PostgreSQL 실행 |
+| 58-2-23 | CROSS JOIN + WHERE 비교, LEFT OUTER 는 짝 없는 행 남김 | 조인 이름 → 결과에 맞는 SQL | ② | PostgreSQL 실행(3, 4, 2, 6행) |

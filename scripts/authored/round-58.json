@@ -761,15 +761,15 @@
     {
       "subject": "2과목",
       "number": 23,
-      "title": "아래 두 테이블 A, B 와 결과 C 가 주어졌을 때 사용된 조인 종류는?",
+      "title": "아래 두 테이블 A, B 로 결과 C 를 얻는 SQL 은?",
       "options": [
-        "LEFT OUTER JOIN",
-        "CROSS JOIN",
-        "INNER JOIN",
-        "SELF JOIN"
+        "SELECT * FROM A LEFT OUTER JOIN B ON A.A + 4 >= B.B;",
+        "SELECT * FROM A CROSS JOIN B WHERE A.A + 4 >= B.B;",
+        "SELECT * FROM A INNER JOIN B ON A.A + 4 = B.B;",
+        "SELECT * FROM A CROSS JOIN B;"
       ],
       "correctIndex": 1,
-      "explanation": "두 집합의 모든 조합(카티션 곱)이 결과로 나왔으므로 CROSS JOIN. |A| × |B| = 3 × 2 = 6 행이 결과 C 에 그대로 나타난다. ① LEFT OUTER 는 왼쪽 기준 모든 행 유지(매칭 + 미매칭 NULL), ③ INNER 는 매칭만, ④ SELF 는 자기 자신과 조인.",
+      "explanation": "CROSS JOIN 으로 6쌍을 만든 뒤 A + 4 >= B 인 쌍만 남기면 A = 2 는 6 과, A = 3 은 6·7 과 맞아 (2, 6), (3, 6), (3, 7) 세 행이다. 정답은 ②번이다. ① LEFT OUTER JOIN 은 짝이 없는 A = 1 도 (1, NULL)로 남겨 4행이다. ③ = 조건은 A + 4 가 B 와 같은 (2, 6), (3, 7) 두 행뿐이다. ④ 조건이 없으면 3 × 2 = 6행이다.",
       "references": [
         {
           "type": "table",
@@ -813,24 +813,12 @@
           ],
           "rows": [
             [
-              "1",
-              "6"
-            ],
-            [
               "2",
               "6"
             ],
             [
               "3",
               "6"
-            ],
-            [
-              "1",
-              "7"
-            ],
-            [
-              "2",
-              "7"
             ],
             [
               "3",
