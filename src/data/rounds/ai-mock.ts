@@ -1,5 +1,5 @@
 // Auto-generated from scripts/authored/ai-mock.json
-// AI 생성 모의고사 풀 (기출 변형) · 1175문항
+// AI 생성 모의고사 풀 (기출 변형) · 1173문항
 // ⚠ 직접 편집 금지. ai-mock.json 수정 후 'node scripts/build-quiz-bank.mjs' 재실행.
 import type { QuizQuestion } from '../quizBank';
 
@@ -15692,33 +15692,6 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11293,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "1과목",
-    "number": 494,
-    "title": "다음은 데이터베이스 파티션 기법에 대한 설명이다. 보기에서 설명하고 있는 파티션 기법은 무엇인가?",
-    "options": [
-      "HYBRID PARTITION",
-      "LIST PARTITION",
-      "HASH PARTITION",
-      "RANGE PARTITION"
-    ],
-    "correctIndex": 1,
-    "explanation": "Range Partition은 데이터 값의 범위를 기준으로 파티션을 수행하고 List Partition은 특정 값을 지정해서 파티션을 수행한다. 또한 Hash Partition은 해시 함수를 적용하여 파티션을 수행하는 것이다.  Composite Partition은 범위와 해시를 복합적으로 사용해서 파티션을 수행한다.",
-    "chapter": "데이터 모델 개념",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0312",
-    "_category": "데이터베이스 개념",
-    "_correctRate": 10,
-    "references": [
-      {
-        "type": "text",
-        "content": "-파티셔닝 할 항목을 관리자가 직접 지정하는 방법으로 제품에 대해서 파티션을 생성하였다.\n-데이터 보관 주기에 따라서 쉽게 데이터를 삭제할 수 없다."
-      }
-    ]
-  },
-  {
     "id": 11294,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
@@ -15850,27 +15823,6 @@ export const AI_MOCK: QuizQuestion[] = [
     "_source": "sqld-1140",
     "_origId": "sqld-0318",
     "_category": "ER 모델링",
-    "_correctRate": 10
-  },
-  {
-    "id": 11300,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "1과목",
-    "number": 501,
-    "title": "데이터베이스 파티션 기법 중 날짜 및 숫자처럼 연속된 값을 기준으로 만드는 파티션 기법은?",
-    "options": [
-      "Composite Partition",
-      "Hash Partition",
-      "List Partition",
-      "Range Partition"
-    ],
-    "correctIndex": 3,
-    "explanation": "날짜·숫자처럼 연속된 값의 범위(예: 월별)로 나누는 것은 Range Partition 이다(④). List 는 지역 코드처럼 특정 값 목록으로, Hash 는 해시 함수로 고르게, Composite 는 두 방식을 섞어 나눈다.",
-    "chapter": "데이터 모델 개념",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0319",
-    "_category": "데이터베이스 개념",
     "_correctRate": 10
   },
   {
