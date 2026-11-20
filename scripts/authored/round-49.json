@@ -1155,19 +1155,23 @@
     {
       "subject": "2과목",
       "number": 28,
-      "title": "B_USER 가 아래 작업을 수행할 수 있도록 부여하는 DCL 로 가장 적절한 것은?",
+      "title": "A_USER 가 아래처럼 권한을 준 뒤 B_USER 가 SQL ㉠~㉤ 을 실행했다. 성공하는 것만 모두 고른 것은? (B_USER 에게는 T 라는 테이블이나 시노님이 없다)",
       "options": [
-        "GRANT SELECT, UPDATE TO B_USER;",
-        "REVOKE SELECT ON A_USER.TB_A FROM B_USER;",
-        "DENY UPDATE ON A_USER.TB_A TO B_USER;",
-        "GRANT SELECT, UPDATE ON A_USER.TB_A TO B_USER;"
+        "㉠",
+        "㉠, ㉡, ㉢",
+        "㉠, ㉡, ㉤",
+        "㉠, ㉡"
       ],
       "correctIndex": 3,
-      "explanation": "UPDATE ... WHERE COL2 = 3 은 조건을 평가하려고 테이블을 읽어야 하므로 UPDATE 권한과 함께 SELECT 권한도 필요하다. 객체 권한은 GRANT 권한 ON 소유자.객체 TO 사용자 형식으로 준다(④). ① 은 ON 객체가 없어 문법 오류, ② 는 권한을 회수하는 구문, ③ DENY 는 Oracle 문법이 아니며 권한을 막는 쪽이다.",
+      "explanation": "객체 권한은 'GRANT 권한 ON 소유자.객체 TO 사용자' 로 준다. UPDATE 는 칼럼을 지정해 그 칼럼만 고칠 수 있게 줄 수도 있다. ㉠ 은 SELECT 권한이 있어 성공한다. ㉡ 은 UPDATE (COL1) 권한 범위 안이라 성공한다. ㉢ 의 COL2 는 받은 칼럼이 아니라 권한 부족으로 실패한다. ㉣ 은 DELETE 권한을 받지 않아 실패한다. ㉤ 은 소유자를 적지 않아 B_USER 자신의 T 를 찾는데, 그런 테이블이나 시노님이 없으므로 실패한다. 정답은 ④번이다. ① 은 칼럼 단위 UPDATE 권한이 동작하지 않는다고 본 것이고, ② 는 칼럼을 지정해도 모든 칼럼을 고칠 수 있다고 본 것, ③ 은 권한을 받으면 소유자 이름 없이도 부를 수 있다고 본 것이다.",
       "references": [
         {
           "type": "sql",
-          "code": "UPDATE A_USER.TB_A SET COL1 = 'AAA' WHERE COL2 = 3;"
+          "code": "-- A_USER 가 실행\nGRANT SELECT ON A_USER.T TO B_USER;\nGRANT UPDATE (COL1)\n  ON A_USER.T TO B_USER;"
+        },
+        {
+          "type": "sql",
+          "code": "-- ㉠\nSELECT * FROM A_USER.T;\n-- ㉡\nUPDATE A_USER.T SET COL1 = 'X';\n-- ㉢\nUPDATE A_USER.T SET COL2 = 1;\n-- ㉣\nDELETE FROM A_USER.T;\n-- ㉤\nSELECT * FROM T;"
         }
       ]
     },

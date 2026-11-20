@@ -723,15 +723,15 @@ export const ROUND_61: QuizQuestion[] = [
     "round": 61,
     "subject": "2과목",
     "number": 18,
-    "title": "다음 중 LIKE '%A_C%' 패턴에 매칭되는 문자열은 몇 건인지 고르시오.",
+    "title": "아래 TBL 테이블에 조건 ㉠, ㉡, ㉢ 을 각각 적용했을 때 조회되는 행 수를 차례대로 나열한 것은?",
     "options": [
-      "2개",
-      "3개",
-      "4개",
-      "5개"
+      "4, 2, 2",
+      "3, 1, 2",
+      "4, 1, 1",
+      "4, 2, 1"
     ],
     "correctIndex": 2,
-    "explanation": "%는 0개 이상의 문자, _는 정확히 한 개의 문자를 의미한다. 따라서 'A', 임의의 한 글자, 'C'가 연속해야 한다. A1C, A-CD, A_C, ABC는 매칭되지만 AB_C는 A와 C 사이에 두 글자가 있어 매칭되지 않는다. 따라서 4건이다. ④ 5개는 AB_C 까지 센 값이고, ① 2개·② 3개는 _ 가 '-' 나 '_' 같은 기호 한 글자도 대신한다는 점을 놓친 값이다.",
+    "explanation": "_ 는 아무 글자 하나, % 는 0글자 이상이다. '%A_C%' 는 어딘가에 'A, 아무 글자 하나, C' 가 붙어 있으면 된다. ㉠ 은 A1C, A-CD, A_C, ABC 의 4행이다. AB_C 는 A 다음 두 번째 글자가 _ 라서 A 뒤 한 칸 건너 C 가 오지 않는다. ㉡ 은 ESCAPE 로 \\_ 를 진짜 밑줄 문자로 바꿨으므로 'A_C' 가 그대로 들어 있는 A_C 1행이다. AB_C 의 밑줄은 B 뒤에 있어 맞지 않는다. ㉢ 은 ㉠ 에 걸리지 않은 행인데, NULL 은 LIKE 도 NOT LIKE 도 UNKNOWN 이라 빠지고 AB_C 1행만 남는다. 정답은 ③번이다. ① 은 ㉡ 에 AB_C 를 넣고 ㉢ 에 NULL 을 넣은 것이고, ② 는 _ 가 밑줄 문자에는 맞지 않는다고 보고 A_C 를 ㉠ 에서 빼 ㉢ 으로 옮긴 것, ④ 는 ESCAPE 를 써도 AB_C 의 밑줄이 맞는다고 본 것이다.",
     "_source": "authored",
     "references": [
       {
@@ -755,8 +755,15 @@ export const ROUND_61: QuizQuestion[] = [
           ],
           [
             "ABC"
+          ],
+          [
+            "NULL"
           ]
         ]
+      },
+      {
+        "type": "sql",
+        "code": "㉠ COL LIKE '%A_C%'\n㉡ COL LIKE '%A\\_C%' ESCAPE '\\'\n㉢ COL NOT LIKE '%A_C%'"
       }
     ]
   },

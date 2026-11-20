@@ -982,3 +982,5 @@ ERD 선 표기 정리 2차(11-20 14시): 식별자를 다루는 1과목 문항�
 | 59-2-25 | CTAS(WHERE 1 = 2)가 옮기지 않는 DEFAULT·기본키, 옮기는 NOT NULL | 설명 고르기 → INSERT 3개 뒤 값·결과 | NULL, 성공, 오류 | Oracle 규칙(NOT NULL 복사), DEFAULT·PK 미복사는 PostgreSQL 동일 |
 | 46-2-30 | Oracle DDL 앞뒤 자동 COMMIT vs SQL Server 명시적 트랜잭션 안 DDL 롤백 | 설명 고르기 → 문장 4개 뒤 두 DBMS 상태 | 2, 있음 / 1, 없음 | SQL Server 쪽은 PostgreSQL(트랜잭션 DDL)로 1, 없음 확인, Oracle 은 규칙 |
 | 48-2-23 | Dirty Read 없음·READ COMMITTED 의 Non-Repeatable Read·SERIALIZABLE 스냅샷 | 특성 이름 → 두 트랜잭션 순서표에서 세 조회 값 | 100, 50, 100 | 격리 수준 정의로 판정(Oracle·PostgreSQL 공통 동작) |
+| 49-2-28 | 칼럼 단위 UPDATE 권한·받지 않은 DELETE·소유자 생략 시 자기 스키마 | DCL 문장 고르기 → 권한 2개 뒤 SQL 5개 중 성공 | ㉠, ㉡ | PostgreSQL 역할·칼럼 권한으로 동일 확인 |
+| 61-2-18 | LIKE 의 _ 가 밑줄과도 맞음·ESCAPE·NOT LIKE 와 NULL | 패턴 하나 행 수 → 세 조건 행 수 | 4, 1, 1 | PostgreSQL 동일 |
