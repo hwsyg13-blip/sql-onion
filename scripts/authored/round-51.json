@@ -719,19 +719,19 @@
     {
       "subject": "2과목",
       "number": 22,
-      "title": "아래 SQL 의 결과로 옳게 짝지어진 것은?",
+      "title": "Oracle 에서 다음 SQL ㉠~㉣ 중 실행 시 오류가 나는 것만 모두 고른 것은?",
       "options": [
-        "10, 10",
-        "NULL, ERROR",
-        "0, 0",
-        "NULL, NULL"
+        "㉢",
+        "㉢, ㉣",
+        "㉡, ㉢",
+        "㉡, ㉢, ㉣"
       ],
       "correctIndex": 1,
-      "explanation": "NULL 이 포함된 산술 연산 결과는 NULL 이므로 10 / NULL 은 NULL 이다. 10 / 0 은 Oracle 에서 '제수가 0' 오류(ORA-01476)가 난다. 따라서 NULL, ERROR 다(②). 0 으로 나누기를 NULL 이나 0 으로 처리해 주지 않는다(③④).",
+      "explanation": "산술 연산에 NULL 이 하나라도 섞이면 결과는 NULL 이다. ㉠ 은 NULL 이다. ㉡ 도 피제수가 NULL 이라 나누기를 따지기 전에 결과가 NULL 이 되고, 0 으로 나누기 오류가 나지 않는다. ㉢ 은 숫자를 0 으로 나누므로 오류(제수가 0)다. ㉣ 은 NVL 로 NULL 이 먼저 0 으로 바뀐 뒤 0 / 0 을 계산하게 되어 오류가 난다. 정답은 ②번이다. ① 은 NVL 을 거친 값도 NULL 처럼 넘어간다고 본 것이고, ③ 과 ④ 는 NULL 을 0 으로 나눌 때도 오류가 난다고 본 것이다. 0 으로 나누기를 피하려면 제수에 NULLIF(제수, 0) 을 써서 NULL 로 바꾼다.",
       "references": [
         {
           "type": "sql",
-          "code": "SELECT 10 / NULL, 10 / 0 FROM DUAL;"
+          "code": "-- ㉠\nSELECT 10 / NULL FROM DUAL;\n-- ㉡\nSELECT NULL / 0 FROM DUAL;\n-- ㉢\nSELECT 10 / 0 FROM DUAL;\n-- ㉣\nSELECT NVL(NULL, 0) / 0\nFROM DUAL;"
         }
       ]
     },

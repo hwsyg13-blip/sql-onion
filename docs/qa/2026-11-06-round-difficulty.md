@@ -972,3 +972,5 @@ ERD 선 표기 정리 2차(11-20 14시): 식별자를 다루는 1과목 문항�
 | 55-2-49 | 문자 BETWEEN(긴 문자열·소문자 코드값)·범위 거꾸로·NOT BETWEEN 과 NULL | 날짜 BETWEEN 동치 → 문자 표에서 세 조건 행 수 | 4, 0, 3 | PostgreSQL COLLATE "C" 로 동일(코드값 비교) |
 | 51-2-50 | 음수 FLOOR·CEIL, 음수 ROUND(.x5 는 0 에서 멀어짐)·TRUNC 소수 자리 | 두 식 → 네 식 결과 | -3, -2, -2.5, -2.4 | PostgreSQL 동일 |
 | 56-2-17 | CEIL(-0.5) = 0·ROUND(9.5)·FLOOR(-9.5)·SIGN | 세 식 → 네 식 결과 | 0, 10, -10, -1 | PostgreSQL 동일 |
+| 51-2-22 | NULL / 0 은 오류가 아니라 NULL·NVL 로 0 이 되면 0 나누기 오류 | 두 식 결과 → 네 SQL 중 오류 모두 | ㉢, ㉣ | PostgreSQL 동일(COALESCE) |
+| 53-2-23 | LTRIM·RTRIM 의 문자 집합·TRIM(FROM) 양끝만·LTRIM 은 왼쪽만 | 한 식 → 네 식 결과 | zyx, xxyxz, yxzy, 3 | PostgreSQL 동일 |

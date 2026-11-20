@@ -636,19 +636,19 @@
     {
       "subject": "2과목",
       "number": 23,
-      "title": "아래 LTRIM 함수의 결과로 옳은 것은?",
+      "title": "다음 SQL 의 결과로 옳은 것은? (A, B, C, D 순서)",
       "options": [
-        "abcd",
-        "xxxabcd",
-        "xxxxxxabcd",
-        "NULL"
+        "zyx, xxyxz, yxzy, 3",
+        "zyx, xxyxz, yxzy, 2",
+        "xyxzyx, xxyxz, yxzy, 3",
+        "zyx, xxyxz, yzy, 3"
       ],
       "correctIndex": 0,
-      "explanation": "LTRIM(문자열, 'x') 은 왼쪽부터 'x' 가 아닌 문자가 나올 때까지 지정 문자를 한 번이 아니라 모두 제거한다. 앞의 'xxxxxx' 가 전부 지워져 'abcd' 가 된다. 정답은 ① 이다. ② 는 'x' 를 세 개만 지운다고 본 결과, ③ 은 지우지 않은 원래 값, ④ 는 문자가 남으므로 NULL 이 아니다.",
+      "explanation": "LTRIM·RTRIM 의 두 번째 인자는 지울 문자들의 집합이다. 'xy' 라는 문자열 덩어리가 아니라 x 와 y 중 아무 글자나 해당한다. A 는 왼쪽부터 x, x, y, x 를 지우다 z 에서 멈춰 'zyx' 다. B 는 오른쪽부터 x, y 를 지우다 z 에서 멈춰 'xxyxz' 다. C 의 TRIM('x' FROM …) 은 양쪽 끝의 x 만 지우므로 앞의 xx 와 끝의 x 가 빠져 'yxzy' 다. 가운데 x 는 남는다. D 는 LTRIM 이 왼쪽 공백만 지워 'ab ' 가 되므로 길이가 3 이다. 정답은 ①번이다. ② 는 LTRIM 이 오른쪽 공백까지 지운다고 본 것이고, ③ 은 'xy' 를 한 덩어리로 보고 맨 앞 x 하나만 지운 것, ④ 는 TRIM 이 가운데 x 까지 모두 지운다고 본 것이다.",
       "references": [
         {
           "type": "sql",
-          "code": "SELECT LTRIM('xxxxxxabcd', 'x') FROM DUAL;"
+          "code": "SELECT LTRIM('xxyxzyx', 'xy')  AS A,\n       RTRIM('xxyxzyx', 'xy')  AS B,\n       TRIM('x' FROM 'xxyxzyx') AS C,\n       LENGTH(LTRIM('  ab ')) AS D\nFROM   DUAL;"
         }
       ]
     },
