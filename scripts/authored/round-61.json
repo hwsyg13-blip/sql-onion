@@ -1601,19 +1601,23 @@
     {
       "subject": "2과목",
       "number": 39,
-      "title": "다음 SQL과 결과가 다른 SQL은 무엇인가?",
+      "title": "SAL 값이 NULL, 0, 200 인 세 행이 있는 EMP 테이블에서, 아래 [기준] 식과 모든 행의 결과가 같은 식만 모두 고른 것은? (Oracle 기준)",
       "options": [
-        "SELECT ENAME, NVL(SAL, 100) AS RESULT FROM EMP;",
-        "SELECT ENAME, COALESCE(SAL, 100) AS RESULT FROM EMP;",
-        "SELECT ENAME, DECODE(SAL, NULL, 100, SAL) AS RESULT FROM EMP;",
-        "SELECT ENAME, NVL2(SAL, 100, SAL) AS RESULT FROM EMP;"
+        "㉠, ㉣",
+        "㉠, ㉡, ㉢",
+        "㉠, ㉡, ㉣, ㉤",
+        "㉠, ㉡, ㉣"
       ],
       "correctIndex": 3,
-      "explanation": "기준 SQL은 SAL이 NULL이면 100, 아니면 SAL을 반환한다. ① NVL, ② COALESCE, ③ DECODE(NULL 끼리 같다고 본다)는 모두 기준 SQL 과 같다. NVL2(expr, A, B)는 expr이 NULL이 아니면 A, NULL이면 B를 반환하므로 NVL2(SAL, 100, SAL)은 정반대로 동작하여 결과가 다르다.",
+      "explanation": "[기준] 은 SAL 이 NULL 이면 100, 아니면 SAL 이라 세 행에서 100, 0, 200 이다. ㉠ NVL(SAL, 100) 은 정의 그대로 같다. ㉡ NVL2(A, B, C) 는 A 가 NULL 이 아니면 B, NULL 이면 C 이므로 NVL2(SAL, SAL, 100) 도 100, 0, 200 이다. ㉢ 은 두 값의 자리가 바뀌어 NULL 이 아닐 때 100 을 내므로 NULL, 100, 100 이 된다. ㉣ DECODE 는 NULL 끼리 같다고 보므로 100, 0, 200 이다. ㉤ 은 NULLIF(SAL, 0) 이 0 을 NULL 로 바꾸기 때문에 SAL 이 0 인 행에서 100 이 나와 [기준] 과 다르다. 정답은 ④번이다. ① 은 NVL2 의 인자 순서를 반대로 본 것이고, ② 는 ㉢ 과 ㉣ 을 바꿔 본 것, ③ 은 NULLIF 가 0 행에 영향을 주지 않는다고 본 것이다.",
       "references": [
         {
           "type": "sql",
-          "code": "SELECT ENAME,\n       CASE WHEN SAL IS NULL THEN 100 ELSE SAL END AS RESULT\nFROM   EMP;"
+          "code": "-- [기준]\nCASE WHEN SAL IS NULL THEN 100\n     ELSE SAL END"
+        },
+        {
+          "type": "sql",
+          "code": "㉠ NVL(SAL, 100)\n㉡ NVL2(SAL, SAL, 100)\n㉢ NVL2(SAL, 100, SAL)\n㉣ DECODE(SAL, NULL, 100, SAL)\n㉤ COALESCE(NULLIF(SAL, 0), 100)"
         }
       ]
     },

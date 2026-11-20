@@ -963,3 +963,5 @@ ERD 선 표기 정리(11-20): 자식 PK 에 부모 키가 없는 관계를 점�
 | 62-2-15 | Oracle 의 '' = NULL(LENGTH('') 은 NULL)·|| 는 NULL 을 무시·DECODE·NVL2·NULLIF | NULL 아닌 것 하나 → 다섯 식 중 모두 | ㉠, ㉣, ㉤ | Oracle 규칙(PostgreSQL 은 LENGTH('')=0, 'A'||NULL=NULL — 해설에 적음) |
 | 53-2-38 | REGEXP_SUBSTR 패턴 해석(@ 포함·못 찾으면 NULL·$·N번째 일치) | 부적절한 입력 하나 → 네 식 결과 | @mail.co.kr, NULL, mail.co.kr, co | PostgreSQL substring·regexp_matches 로 같은 결과 확인 |
 | 59-2-43 | IN·NOT IN·NOT 과 NULL(UNKNOWN 은 WHERE 에서 버림)·NVL | 결과 다른 것 하나 → 다섯 SQL 중 조회되는 것 모두 | ㉠, ㉣ | PostgreSQL 동일(COALESCE) |
+| 49-2-30 | 기본키 칼럼의 고정 DEFAULT 는 두 번째부터 중복·명시적 NULL 은 DEFAULT 안 씀 | INSERT 하나 고르기 → 다섯 INSERT 중 성공 모두 | ㉠, ㉤ | PostgreSQL 동일 |
+| 61-2-39 | NVL·NVL2 인자 순서·DECODE NULL·NULLIF 로 0 이 바뀌는 경우 | 다른 것 하나 → 0 이 섞인 세 행에서 같은 식 모두 | ㉠, ㉡, ㉣ | CASE·COALESCE 로 PostgreSQL 확인, NVL2·DECODE 는 Oracle 정의 |

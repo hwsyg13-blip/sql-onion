@@ -1343,20 +1343,20 @@ export const ROUND_49: QuizQuestion[] = [
     "round": 49,
     "subject": "2과목",
     "number": 30,
-    "title": "아래 CREATE TABLE 에 대해 오류 없이 INSERT 되는 것은?",
+    "title": "아래 테이블을 만든 뒤 INSERT ㉠~㉤ 을 차례로 실행했다. 성공하는 문장만 모두 고른 것은?",
     "options": [
-      "INSERT INTO T1 VALUES (7, 1);",
-      "INSERT INTO T1 (C) VALUES (5);",
-      "INSERT INTO T1 (A) VALUES (NULL);",
-      "INSERT INTO T1 (B, C) VALUES (9, 1);"
+      "㉠",
+      "㉠, ㉡, ㉤",
+      "㉠, ㉢, ㉤",
+      "㉠, ㉤"
     ],
     "correctIndex": 3,
-    "explanation": "④ 는 A 를 생략했으므로 DEFAULT 9 가 들어가 PK 를 만족하고, NOT NULL 인 B 에 9 가 들어가 정상 입력된다. ① 은 컬럼 목록 없이 값 2개만 주어 컬럼 수(3개)와 맞지 않아 오류, ② 는 NOT NULL 인 B 가 빠져 NULL 이 들어가므로 오류, ③ 은 PK 인 A 에 NULL 을 명시적으로 넣어 오류다 (DEFAULT 는 값을 생략했을 때만 적용되고, NULL 을 직접 넣으면 적용되지 않는다).",
+    "explanation": "㉠ 은 칼럼 목록에서 A 를 뺐으므로 DEFAULT 9 가 들어가 성공한다. ㉡ 도 A 를 빼서 다시 9 가 들어가는데, 9 는 ㉠ 에서 이미 썼으므로 기본키 중복으로 실패한다. ㉢ 의 DEFAULT 키워드도 9 를 넣으므로 같은 이유로 실패한다. 기본키 칼럼에 고정된 기본값을 주면 두 번째 입력부터 막힌다. ㉣ 은 A 에 NULL 을 직접 넣었다. 값을 명시하면 DEFAULT 는 쓰이지 않고, 기본키는 NULL 을 허용하지 않아 실패한다. ㉤ 은 A = 7, B = 5 로 성공한다. 정답은 ④번이다. ② 와 ③ 은 DEFAULT 가 매번 다른 값을 만들어 준다고 본 것이고, ① 은 ㉤ 처럼 기본값과 다른 값을 직접 넣는 것도 막힌다고 본 것이다.",
     "_source": "authored",
     "references": [
       {
         "type": "sql",
-        "code": "CREATE TABLE T1 (\n  A NUMBER DEFAULT 9 PRIMARY KEY,\n  B NUMBER NOT NULL,\n  C NUMBER\n);"
+        "code": "CREATE TABLE T1 (\n  A NUMBER DEFAULT 9 PRIMARY KEY,\n  B NUMBER NOT NULL,\n  C NUMBER\n);\n\n-- ㉠\nINSERT INTO T1 (B, C) VALUES (1, 1);\n-- ㉡\nINSERT INTO T1 (B) VALUES (2);\n-- ㉢\nINSERT INTO T1\nVALUES (DEFAULT, 3, NULL);\n-- ㉣\nINSERT INTO T1 (A, B)\nVALUES (NULL, 4);\n-- ㉤\nINSERT INTO T1 (A, B) VALUES (7, 5);"
       }
     ]
   },
