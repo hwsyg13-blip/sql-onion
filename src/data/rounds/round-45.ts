@@ -347,20 +347,20 @@ export const ROUND_45: QuizQuestion[] = [
     "round": 45,
     "subject": "2과목",
     "number": 12,
-    "title": "아래 네 SQL 중 수행 결과가 나머지와 다른 것은?",
+    "title": "아래 네 식 중 결과가 나머지와 다른 것은? (Oracle 기준)",
     "options": [
-      "CEIL(22.14)",
-      "FLOOR(22.14)",
-      "TRUNC(22.14)",
-      "ROUND(22.14)"
+      "CEIL(-22.5)",
+      "FLOOR(-22.5)",
+      "ROUND(-22.5)",
+      "TRUNC(-23.9)"
     ],
     "correctIndex": 0,
-    "explanation": "CEIL 은 주어진 수보다 크거나 같은 가장 작은 정수로 올림하므로 CEIL(22.14) = 23 이다(①). ② FLOOR 는 작거나 같은 가장 큰 정수로 내림해 22, ③ TRUNC 는 소수점 이하를 버려 22, ④ ROUND 는 소수 첫째 자리(1)에서 반올림해 22 다. 결과가 다른 것은 ① 이다.",
+    "explanation": "음수에서는 방향을 헷갈리기 쉽다. CEIL 은 그 수보다 크거나 같은 가장 작은 정수라 -22.5 보다 큰 쪽인 -22 다. FLOOR 는 작거나 같은 가장 큰 정수라 -23, ROUND 는 0.5 를 0 에서 먼 쪽으로 보내 -23, TRUNC 는 소수점 아래를 버려 0 쪽으로 가므로 -23.9 → -23 이다. ②·③·④ 가 모두 -23 이고 ① 만 -22 다. 정답은 ①번이다.",
     "_source": "authored",
     "references": [
       {
         "type": "sql",
-        "code": "-- ① SELECT CEIL(22.14)  FROM DUAL;\n-- ② SELECT FLOOR(22.14) FROM DUAL;\n-- ③ SELECT TRUNC(22.14) FROM DUAL;\n-- ④ SELECT ROUND(22.14) FROM DUAL;"
+        "code": "-- ① CEIL(-22.5)\n-- ② FLOOR(-22.5)\n-- ③ ROUND(-22.5)\n-- ④ TRUNC(-23.9)"
       }
     ]
   },
@@ -371,22 +371,22 @@ export const ROUND_45: QuizQuestion[] = [
     "round": 45,
     "subject": "2과목",
     "number": 13,
-    "title": "선수 테이블에서 손흥민 선수가 소속된 팀의 모든 선수 포지션을 'FW'로 변경하는 SQL로 올바른 것은?",
+    "title": "선수ID 1 인 손흥민이 속한 팀의 모든 선수 포지션을 'FW' 로 바꾸려 한다. 이름이 같은 선수가 있을 때 의도대로 동작하는 SQL 은?",
     "options": [
       "UPDATE 선수 SET 포지션 = 'FW' WHERE 이름 = '손흥민';",
-      "UPDATE 선수 SET 팀ID = 'FW' WHERE 이름 = '손흥민';",
-      "UPDATE 선수 SET 포지션 = 'FW' WHERE 팀ID = '손흥민';",
-      "UPDATE 선수 SET 포지션 = 'FW' WHERE 팀ID = (SELECT 팀ID FROM 선수 WHERE 이름 = '손흥민');"
+      "UPDATE 선수 SET 포지션 = 'FW' WHERE 팀ID = (SELECT 팀ID FROM 선수 WHERE 이름 = '손흥민');",
+      "UPDATE 선수 SET 포지션 = 'FW' WHERE 팀ID IN (SELECT 팀ID FROM 선수 WHERE 이름 = '손흥민');",
+      "UPDATE 선수 SET 포지션 = 'FW' WHERE 팀ID = (SELECT 팀ID FROM 선수 WHERE 선수ID = 1);"
     ],
     "correctIndex": 3,
-    "explanation": "손흥민이 속한 팀(TOT)의 모든 선수를 바꾸려면, 서브쿼리로 손흥민의 팀ID 를 구해 그 팀ID 를 가진 행을 모두 UPDATE 해야 한다(④). ① 은 손흥민 한 명만 바꾸고, ② 는 포지션이 아니라 팀ID 를 'FW' 로 바꾸며, ③ 은 팀ID 를 선수 이름('손흥민')과 비교해 바뀌는 행이 없다.",
+    "explanation": "바꿀 대상은 선수ID 1 이 속한 T1 팀의 선수(1, 2)다. ④ 는 서브쿼리가 선수ID 로 한 행만 찾아 T1 을 돌려주므로 선수 1, 2 만 바뀐다. 정답은 ④번이다. ① 은 이름이 같은 두 손흥민(1, 4)만 바꾼다. ② 는 서브쿼리가 T1, T3 두 행을 돌려줘 = 비교에서 오류가 난다(단일 행 서브쿼리 자리에 여러 행). ③ 은 오류는 없지만 T1, T3 두 팀을 모두 바꿔 선수 1, 2, 4 가 바뀐다. 이름처럼 중복될 수 있는 값 대신 식별자로 찾아야 한다.",
     "_source": "authored",
     "references": [
       {
         "type": "table",
-        "caption": "선수 테이블",
+        "caption": "선수",
         "headers": [
-          "선수번호",
+          "선수ID",
           "이름",
           "팀ID",
           "포지션"
@@ -395,20 +395,26 @@ export const ROUND_45: QuizQuestion[] = [
           [
             "1",
             "손흥민",
-            "TOT",
-            "FW"
+            "T1",
+            "MF"
           ],
           [
             "2",
-            "다이어",
-            "TOT",
+            "황희찬",
+            "T1",
             "DF"
           ],
           [
             "3",
-            "메시",
-            "PSG",
-            "FW"
+            "김민재",
+            "T2",
+            "DF"
+          ],
+          [
+            "4",
+            "손흥민",
+            "T3",
+            "GK"
           ]
         ]
       }
