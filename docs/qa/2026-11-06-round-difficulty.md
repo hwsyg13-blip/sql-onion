@@ -965,3 +965,4 @@ ERD 선 표기 정리(11-20): 자식 PK 에 부모 키가 없는 관계를 점�
 | 59-2-43 | IN·NOT IN·NOT 과 NULL(UNKNOWN 은 WHERE 에서 버림)·NVL | 결과 다른 것 하나 → 다섯 SQL 중 조회되는 것 모두 | ㉠, ㉣ | PostgreSQL 동일(COALESCE) |
 | 49-2-30 | 기본키 칼럼의 고정 DEFAULT 는 두 번째부터 중복·명시적 NULL 은 DEFAULT 안 씀 | INSERT 하나 고르기 → 다섯 INSERT 중 성공 모두 | ㉠, ㉤ | PostgreSQL 동일 |
 | 61-2-39 | NVL·NVL2 인자 순서·DECODE NULL·NULLIF 로 0 이 바뀌는 경우 | 다른 것 하나 → 0 이 섞인 세 행에서 같은 식 모두 | ㉠, ㉡, ㉣ | CASE·COALESCE 로 PostgreSQL 확인, NVL2·DECODE 는 Oracle 정의 |
+| 51-2-16 | GROUPING_ID 이진수 값(1 = A 별, 2 = B 별, 3 = 전체)·같은 조합 두 행 | 절 이름 → 표에서 GID 로 고른 값 세 개 | 45, 4, 65 | PostgreSQL GROUPING(A, B) 로 동일 확인 |

@@ -413,19 +413,50 @@
     {
       "subject": "2과목",
       "number": 16,
-      "title": "A 와 B 각각의 소계, 총계까지 모두 출력하는 GROUP BY 절은?",
+      "title": "아래 T 테이블에 SQL 을 실행했다. 'GROUPING_ID 가 2 이고 B 가 1 인 행의 SUM(V), GROUPING_ID 가 1 또는 2 인 행의 수, GROUPING_ID 가 3 인 행의 SUM(V)' 를 차례대로 나열한 것은?",
       "options": [
-        "ROLLUP(A, B)",
-        "GROUP BY A, B",
-        "CUBE(A, B)",
-        "GROUPING SETS((A, B))"
+        "40, 4, 65",
+        "45, 3, 65",
+        "45, 4, 65",
+        "15, 4, 65"
       ],
       "correctIndex": 2,
-      "explanation": "A 별 소계, B 별 소계, 총계를 모두 보려면 (A, B), (A), (B), () 네 그룹이 필요하고 이를 한 번에 만드는 것은 CUBE(A, B) 다(③). ROLLUP(A, B)(①)는 (A, B), (A), () 만 만들어 B 별 소계가 없고, GROUP BY A, B(②)와 GROUPING SETS((A, B))(④)는 (A, B) 그룹만 만든다.",
+      "explanation": "GROUPING_ID(A, B) 는 GROUPING(A) 를 2 의 자리, GROUPING(B) 를 1 의 자리로 놓은 이진수다. 집계되어 사라진 칼럼이 1 이 된다. 그래서 (A, B) 상세 행은 0, A 별 소계(B 가 사라짐)는 1, B 별 소계(A 가 사라짐)는 2, 전체 합계는 3 이다. GID 2 는 B 별 소계라 B = 1 행은 A 와 상관없이 10 + 30 + 5 = 45 다. GID 1 은 A 별 소계 X·Y 2행, GID 2 는 B 별 소계 1·2 2행이라 합해서 4행이다. GID 3 은 전체 합계 65 다. 정답은 ③번이다. ① 은 B = 1 소계에서 같은 조합(X, 1)의 두 번째 행 5 를 빠뜨린 것이고, ② 는 GID 1 과 2 를 한쪽만 센 것, ④ 는 GID 2 를 (X, 1) 상세 행으로 본 것이다.",
       "references": [
         {
+          "type": "table",
+          "caption": "T",
+          "headers": [
+            "A",
+            "B",
+            "V"
+          ],
+          "rows": [
+            [
+              "X",
+              "1",
+              "10"
+            ],
+            [
+              "X",
+              "2",
+              "20"
+            ],
+            [
+              "Y",
+              "1",
+              "30"
+            ],
+            [
+              "X",
+              "1",
+              "5"
+            ]
+          ]
+        },
+        {
           "type": "sql",
-          "code": "SELECT A, B, SUM(X)\nFROM   T\nGROUP BY ( ? );"
+          "code": "SELECT A, B, SUM(V),\n       GROUPING_ID(A, B) AS GID\nFROM T\nGROUP BY CUBE(A, B);"
         }
       ]
     },
