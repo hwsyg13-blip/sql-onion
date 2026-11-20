@@ -961,3 +961,5 @@ ERD 선 표기 정리(11-20): 자식 PK 에 부모 키가 없는 관계를 점�
 | 58-2-45 | TRUNC·ROUND 양수·음수 자릿수, 음수의 TRUNC | 한 식 → 네 식 결과 | 120, 123.4, 130, -100 | PostgreSQL 동일 |
 | 58-2-37 | DECODE 의 NULL=NULL·기본값 없으면 NULL vs 단순 CASE WHEN NULL | 한 식 → 표에서 세 값 | N, NULL, NULL | Oracle 규칙(DECODE 는 Oracle 전용), 단순 CASE 는 PostgreSQL 동일 |
 | 62-2-15 | Oracle 의 '' = NULL(LENGTH('') 은 NULL)·|| 는 NULL 을 무시·DECODE·NVL2·NULLIF | NULL 아닌 것 하나 → 다섯 식 중 모두 | ㉠, ㉣, ㉤ | Oracle 규칙(PostgreSQL 은 LENGTH('')=0, 'A'||NULL=NULL — 해설에 적음) |
+| 53-2-38 | REGEXP_SUBSTR 패턴 해석(@ 포함·못 찾으면 NULL·$·N번째 일치) | 부적절한 입력 하나 → 네 식 결과 | @mail.co.kr, NULL, mail.co.kr, co | PostgreSQL substring·regexp_matches 로 같은 결과 확인 |
+| 59-2-43 | IN·NOT IN·NOT 과 NULL(UNKNOWN 은 WHERE 에서 버림)·NVL | 결과 다른 것 하나 → 다섯 SQL 중 조회되는 것 모두 | ㉠, ㉣ | PostgreSQL 동일(COALESCE) |

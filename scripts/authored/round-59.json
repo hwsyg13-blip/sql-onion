@@ -1533,15 +1533,21 @@
     {
       "subject": "2과목",
       "number": 43,
-      "title": "아래 SQL 들 중 WHERE 절 평가 결과가 나머지와 다른 것은?",
+      "title": "다음 SQL ㉠~㉤ 중 한 행이 조회되는 것만 모두 고른 것은?",
       "options": [
-        "SELECT * FROM DUAL WHERE 1 <> NULL;",
-        "SELECT * FROM DUAL WHERE NULL = NULL;",
-        "SELECT * FROM DUAL WHERE NULL IS NULL;",
-        "SELECT * FROM DUAL WHERE 1 > NULL;"
+        "㉣",
+        "㉠, ㉡, ㉣",
+        "㉠, ㉣",
+        "㉠, ㉢, ㉣"
       ],
       "correctIndex": 2,
-      "explanation": "①②④ 의 NULL 비교(`=`, `<>`, `>` 등 일반 연산자) 는 모두 UNKNOWN 으로 평가되어 행이 선택되지 않아 0 건 반환. 그러나 ③ `IS NULL` 은 NULL 판별 전용 연산자로 TRUE 를 반환해 1 건 (DUAL 의 한 행) 반환. 결과가 다른 것은 ③."
+      "explanation": "WHERE 는 조건이 참(TRUE)인 행만 남기고, 거짓과 UNKNOWN 은 모두 버린다. ㉠ IN 은 '1 = 1 OR 1 = NULL' 이다. 앞이 참이라 OR 전체가 참이 되어 조회된다. ㉡ NOT IN 은 '2 <> 1 AND 2 <> NULL' 이다. 뒤가 UNKNOWN 이라 AND 전체가 UNKNOWN 이 되어 조회되지 않는다. ㉢ NULL = NULL 은 UNKNOWN 이고 NOT UNKNOWN 도 UNKNOWN 이다. ㉣ 은 NVL 로 0 이 되어 참이다. ㉤ 은 NULL 이 NULL 이므로 IS NOT NULL 이 거짓이다. 정답은 ③번이다. ① 은 IN 목록에 NULL 이 있으면 무조건 UNKNOWN 이 된다고 본 것이고, ② 는 NOT IN 도 IN 처럼 하나만 맞으면 된다고 본 것, ④ 는 NOT 이 UNKNOWN 을 참으로 바꾼다고 본 것이다.",
+      "references": [
+        {
+          "type": "sql",
+          "code": "-- ㉠\nSELECT 1 FROM DUAL\nWHERE 1 IN (1, NULL);\n-- ㉡\nSELECT 1 FROM DUAL\nWHERE 2 NOT IN (1, NULL);\n-- ㉢\nSELECT 1 FROM DUAL\nWHERE NOT (NULL = NULL);\n-- ㉣\nSELECT 1 FROM DUAL\nWHERE NVL(NULL, 0) = 0;\n-- ㉤\nSELECT 1 FROM DUAL\nWHERE NULL IS NOT NULL;"
+        }
+      ]
     },
     {
       "subject": "2과목",

@@ -1350,20 +1350,20 @@ export const ROUND_53: QuizQuestion[] = [
     "round": 53,
     "subject": "2과목",
     "number": 38,
-    "title": "REGEXP_SUBSTR 로 이메일의 도메인 점(.) 유무를 검사할 때 가장 부적절한 결과가 나오는 경우는?",
+    "title": "다음 REGEXP_SUBSTR 식 ㉠~㉣ 의 결과를 차례대로 나열한 것은? (Oracle 기준)",
     "options": [
-      "name@domain.com",
-      "test@naver.co.kr",
-      "hello@nodot",
-      "user1@example.com"
+      "@mail.co.kr, @nodot, mail.co.kr, co",
+      "mail.co.kr, NULL, mail.co.kr, kr",
+      "@mail.co.kr, NULL, mail.co.kr, co",
+      "@mail.co.kr, NULL, kim, mail"
     ],
     "correctIndex": 2,
-    "explanation": "패턴 '@[^.]+\\.[a-z.]+' 는 @ 뒤에 점이 아닌 글자가 이어지다가 점(.)과 도메인 끝부분이 오는 부분을 찾는다. name@domain.com(①) → '@domain.com', test@naver.co.kr(②) → '@naver.co.kr', user1@example.com(④) → '@example.com' 처럼 점이 있는 주소는 도메인이 정상 추출된다. hello@nodot 은 @ 뒤에 점이 없어 일치하는 부분이 없으므로 NULL 이 나온다(③). ※ 복원 자료에는 검사에 쓴 SQL 이 빠져 있어, 해설의 '도메인 점 유무 검사' 를 SQL 로 보충했다.",
+    "explanation": "REGEXP_SUBSTR 은 패턴과 맞는 부분 문자열을 돌려주고, 맞는 곳이 없으면 NULL 이다. ㉠ 의 패턴은 '@ 다음에 점이 아닌 글자 여러 개, 점 하나, 그 뒤 소문자나 점' 이다. @mail 다음 .co.kr 까지 이어져 '@mail.co.kr' 이고, @ 도 패턴에 들어 있으므로 결과에 포함된다. ㉡ 은 @ 뒤에 점이 없어 \\. 에 맞는 글자가 없으므로 NULL 이다. ㉢ [^@]+$ 는 '@ 가 아닌 글자들이 문자열 끝까지' 라는 뜻이라 'mail.co.kr' 이다. ㉣ 은 1번째 글자부터 찾아 3번째로 맞는 부분을 돌려준다. 소문자 덩어리는 kim, mail, co, kr 순서라 'co' 다. 정답은 ③번이다. ① 은 맞는 곳이 없을 때 @ 뒤 전체를 준다고 본 것이고, ② 는 ㉠ 에서 @ 를 빼고 ㉣ 을 마지막 덩어리로 본 것, ④ 는 ㉢ 의 $ 를 문자열 앞으로 보고 ㉣ 의 순번을 하나씩 앞당긴 것이다.",
     "_source": "authored",
     "references": [
       {
         "type": "sql",
-        "code": "SELECT EMAIL,\n       REGEXP_SUBSTR(EMAIL, '@[^.]+\\.[a-z.]+') AS 도메인\nFROM   회원;"
+        "code": "-- ㉠\nREGEXP_SUBSTR('kim@mail.co.kr',\n              '@[^.]+\\.[a-z.]+')\n-- ㉡\nREGEXP_SUBSTR('lee@nodot',\n              '@[^.]+\\.[a-z.]+')\n-- ㉢\nREGEXP_SUBSTR('kim@mail.co.kr',\n              '[^@]+$')\n-- ㉣\nREGEXP_SUBSTR('kim@mail.co.kr',\n              '[a-z]+', 1, 3)"
       }
     ]
   },
