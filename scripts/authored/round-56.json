@@ -1592,15 +1592,15 @@
     {
       "subject": "2과목",
       "number": 43,
-      "title": "아래 PLAYER 테이블에서 키가 180 이상인 선수를 조회하는 쿼리로 가장 적절한 것은?",
+      "title": "아래 PLAYER 테이블에서 키가 180 이상인 선수를 구하려 한다. SQL 과 결과를 바르게 짝지은 것은?",
       "options": [
-        "SELECT * FROM PLAYER HAVING HEIGHT >= 180;",
-        "SELECT * FROM PLAYER GROUP BY HEIGHT >= 180;",
-        "SELECT * FROM PLAYER WHERE HEIGHT >= 180;",
-        "SELECT * FROM PLAYER ORDER BY HEIGHT >= 180;"
+        "SELECT * FROM PLAYER HAVING HEIGHT >= 180; — 3명",
+        "SELECT * FROM PLAYER WHERE HEIGHT > 180; — 이선수, 박선수, 정선수",
+        "SELECT * FROM PLAYER WHERE HEIGHT >= 180; — 이선수, 박선수, 정선수",
+        "SELECT * FROM PLAYER WHERE NOT (HEIGHT < 180); — 이선수, 박선수, 최선수, 정선수"
       ],
       "correctIndex": 2,
-      "explanation": "행 단위 필터 조건은 `WHERE` 절에서 처리한다. ① `HAVING` 은 GROUP BY 후 그룹 조건, ② `GROUP BY` 는 그룹화 키 (불리언이 올 수 없음), ④ `ORDER BY` 는 정렬이라 의미 다름.",
+      "explanation": "행 하나하나를 거르는 조건은 WHERE 에 쓴다. HEIGHT >= 180 은 180 인 박선수를 포함해 이선수, 박선수, 정선수 3명이다. 정답은 ③번이다. ① HAVING 은 그룹에 조건을 거는 절이라, GROUP BY 없이 일반 칼럼 HEIGHT 를 쓰면 오류다. ② > 180 은 180 인 박선수가 빠져 2명이다. ④ NOT (HEIGHT < 180) 에서 최선수는 NULL 이라 HEIGHT < 180 이 UNKNOWN 이고, NOT UNKNOWN 도 UNKNOWN 이라 빠진다. 결과는 ③ 과 같은 3명이다.",
       "references": [
         {
           "type": "table",
@@ -1620,10 +1620,14 @@
             ],
             [
               "박선수",
-              "178"
+              "180"
             ],
             [
               "최선수",
+              "NULL"
+            ],
+            [
+              "정선수",
               "190"
             ]
           ]
@@ -1794,15 +1798,15 @@
     {
       "subject": "2과목",
       "number": 47,
-      "title": "아래 SALES 테이블에서 매출액이 높은 순서대로 직원을 조회하는 쿼리 중 수정이 필요한 부분은?",
+      "title": "Oracle 에서 아래 SALES 를 매출이 높은 순으로, 매출이 없는(NULL) 직원은 맨 뒤에 오도록 조회하려 한다. 쿼리를 어떻게 고쳐야 하는가?",
       "options": [
-        "SELECT 절에 직원, 매출 컬럼을 명시적으로 나열해야 한다.",
-        "FROM 절을 SALES 가 아닌 EMP_SALES 뷰로 교체해야 한다.",
-        "WHERE 절에 매출 IS NOT NULL 조건을 추가해야 한다.",
-        "ORDER BY 절에 DESC 를 추가해야 한다."
+        "SELECT 절의 칼럼 순서를 매출, 직원으로 바꾼다.",
+        "ORDER BY 매출 DESC 로 바꾸기만 하면 된다.",
+        "WHERE 매출 IS NOT NULL 을 추가한다.",
+        "ORDER BY 매출 DESC NULLS LAST 로 바꾼다."
       ],
       "correctIndex": 3,
-      "explanation": "`ORDER BY 매출` 은 기본 오름차순(ASC) 정렬이라 \"매출이 높은 순\" (내림차순) 으로 출력하려면 `ORDER BY 매출 DESC` 처럼 `DESC` 를 명시해야 한다. ① SELECT 절은 정상, ② SALES 테이블 그대로 사용, ③ NULL 처리는 본 문항과 무관.",
+      "explanation": "Oracle 은 NULL 을 가장 큰 값으로 본다. 그래서 ORDER BY 매출 DESC 만 쓰면 박민수(NULL)가 맨 앞에 온다(②). 높은 순으로 정렬하면서 NULL 을 뒤로 보내려면 NULLS LAST 를 붙인다. 이영희, 김철수, 최지은, 박민수 순이 된다. 정답은 ④번이다. ③ 은 박민수를 결과에서 아예 빼 버리므로 요구와 다르다. ① 칼럼 순서는 정렬과 관계없다.",
       "references": [
         {
           "type": "table",
@@ -1822,13 +1826,17 @@
             ],
             [
               "박민수",
+              "NULL"
+            ],
+            [
+              "최지은",
               "3000"
             ]
           ]
         },
         {
           "type": "sql",
-          "code": "SELECT 직원, 매출\nFROM   SALES\nORDER BY 매출;"
+          "code": "SELECT 직원, 매출\nFROM   SALES\nORDER  BY 매출;"
         }
       ]
     },

@@ -626,20 +626,20 @@ export const ROUND_55: QuizQuestion[] = [
     "round": 55,
     "subject": "2과목",
     "number": 15,
-    "title": "아래 DDL 에서 오류가 발생하는 위치는?",
+    "title": "Oracle 에서 아래 DDL 을 실행할 때 오류가 나는 곳과 그 이유로 옳은 것은?",
     "options": [
-      "(1) 테이블명은 숫자로 시작할 수 없다.",
-      "(2) VARCHAR2 타입이 허용되지 않는다.",
-      "(3) NUMBER 타입에 크기를 지정하지 않을 수 없다.",
-      "(4) 세미콜론 위치 오류"
+      "(1) 테이블 이름이 숫자로 시작한다.",
+      "(2) PRIMARY KEY 는 칼럼 옆이 아니라 칼럼 정의를 모두 쓴 뒤 따로 적어야 한다.",
+      "(3) DEFAULT 값으로 한글 문자열을 쓸 수 없다.",
+      "(4) CHECK 제약은 칼럼 옆에 쓸 수 없고 ALTER TABLE 로만 추가한다."
     ],
     "correctIndex": 0,
-    "explanation": "Oracle 식별자 규칙상 테이블명은 영문자로 시작해야 하며 숫자로 시작할 수 없다. ② VARCHAR2(20)·③ NUMBER(크기 생략 허용)·④ 세미콜론은 모두 정상 구문이다.",
+    "explanation": "테이블·칼럼 이름은 문자로 시작해야 한다. 2026_ORDER 는 숫자로 시작해 (1)에서 오류가 난다. 정답은 ①번이다. ② PRIMARY KEY 는 칼럼 옆에 쓰는 칼럼 제약으로도, 맨 뒤에 CONSTRAINT ... PRIMARY KEY (...) 로도 쓸 수 있다. ③ DEFAULT 에는 칼럼 타입에 맞는 값이면 한글 문자열도 된다. ④ CHECK 도 칼럼 옆에 바로 쓸 수 있다.",
     "_source": "authored",
     "references": [
       {
         "type": "sql",
-        "code": "CREATE TABLE 1234_TBL (  -- (1)\n  COL1 VARCHAR2(20),     -- (2)\n  COL2 NUMBER             -- (3)\n);                        -- (4)"
+        "code": "CREATE TABLE 2026_ORDER (     -- (1)\n  ORDER_NO NUMBER(10)\n           PRIMARY KEY,       -- (2)\n  CUST_NM  VARCHAR2(20)\n           DEFAULT '미정',    -- (3)\n  AMT      NUMBER(8,2)\n           CHECK (AMT >= 0)   -- (4)\n);"
       }
     ]
   },
