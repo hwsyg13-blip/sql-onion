@@ -1142,3 +1142,6 @@ ERD 선 표기 정리 2차(11-20 14시): 식별자를 다루는 1과목 문항�
 | 56-2-47 | Oracle DESC 에서 NULL 이 맨 앞, NULLS LAST | DESC 추가 → NULL 위치까지 | ④ | Oracle 규칙(PostgreSQL 도 같은 정렬 확인) |
 | 57-2-44 | ROLLUP 6행 vs CUBE 8행 vs GROUPING SETS 4행 | 결과만 → 원본 데이터 + 결과로 판단 | ① | PostgreSQL 실행 |
 | 58-2-23 | CROSS JOIN + WHERE 비교, LEFT OUTER 는 짝 없는 행 남김 | 조인 이름 → 결과에 맞는 SQL | ② | PostgreSQL 실행(3, 4, 2, 6행) |
+| 59-2-22 | 정규식 ^·$ 와 '010-' 의 하이픈까지(0101-…·+82-010-… 함정) | 3행 데이터 → 5행 함정 데이터 | ② | PostgreSQL 정규식으로 행 수 확인(4, 2, 3, 0) |
+| 59-2-48 | CASE 첫 일치에서 멈춤(넓은 조건이 먼저면 다 C), ELSE 없음 | 상수 CASE → 순서 잘못된 등급 CASE | ① | PostgreSQL 실행 |
+| 60-2-25 | 단일 행 서브쿼리 오류, UNIQUE 만 중복을 막음 | 제약 이름 → 오류 여부 + 제약 | ① | PostgreSQL 실행(다중 행 오류) |

@@ -779,15 +779,15 @@ export const ROUND_59: QuizQuestion[] = [
     "round": 59,
     "subject": "2과목",
     "number": 22,
-    "title": "아래 PHONE 테이블에서 '010' 으로 시작하는 번호만 필터링하려 한다. 정규표현식 패턴으로 올바른 것은?",
+    "title": "아래 PHONE 테이블에서 '010-' 으로 시작하는 번호만 고르려 한다. REGEXP_LIKE 의 패턴으로 옳은 것은?",
     "options": [
-      "[^010]",
-      "^010",
-      "$010",
-      "02"
+      "'010'",
+      "'^010-'",
+      "'^010'",
+      "'010$'"
     ],
     "correctIndex": 1,
-    "explanation": "정규표현식에서 `^` 는 문자열의 시작 위치, `$` 는 끝 위치를 의미한다. ① `[^010]` 은 문자 클래스 부정(0/1 이 아닌 한 글자), ③ `$010` 은 `$` 가 잘못된 자리에 있어 의도와 다른 패턴, ④ `02` 는 02 가 포함된 모든 문자열을 의미한다. `010` 으로 시작하는 패턴은 ② `^010` 이 정답.",
+    "explanation": "^ 는 문자열의 시작, $ 는 끝을 뜻한다. '^010-' 은 맨 앞이 '010-' 인 값만 골라 010-1234-5678, 010-9999-0000 두 행이 나온다. 정답은 ②번이다. ① '010' 은 위치 상관없이 들어 있기만 하면 되어 +82-010-…, 0101-0000 까지 4행이다. ③ '^010' 은 0101-0000 도 010 으로 시작해 3행이다. ④ '010$' 는 010 으로 끝나는 값이라 0행이다.",
     "_source": "authored",
     "references": [
       {
@@ -805,12 +805,18 @@ export const ROUND_59: QuizQuestion[] = [
           ],
           [
             "010-9999-0000"
+          ],
+          [
+            "+82-010-1111-2222"
+          ],
+          [
+            "0101-0000"
           ]
         ]
       },
       {
         "type": "sql",
-        "code": "SELECT PHONE\nFROM   PHONE\nWHERE  REGEXP_LIKE(PHONE, ( ? ));"
+        "code": "SELECT PHONE\nFROM   PHONE\nWHERE  REGEXP_LIKE(PHONE, :패턴);"
       }
     ]
   },
@@ -2029,20 +2035,42 @@ export const ROUND_59: QuizQuestion[] = [
     "round": 59,
     "subject": "2과목",
     "number": 48,
-    "title": "아래 질의 결과로 옳은 것은?",
+    "title": "아래 T 에 대한 SQL 의 결과(ID 순)로 옳은 것은?",
     "options": [
-      "A",
-      "B",
-      "C",
-      "오류"
+      "C, C, NULL",
+      "A, B, NULL",
+      "A, B, C",
+      "C, C, C"
     ],
     "correctIndex": 0,
-    "explanation": "CASE 는 WHEN 조건을 위에서부터 차례로 평가해 처음 참이 되는 THEN 값을 반환하고 나머지는 보지 않는다. 첫 조건 1 = 1 이 참이므로 'A' 다(①). 두 번째 조건도 참이지만 평가되지 않으며, 조건이 겹쳐도 오류는 나지 않는다(④). ② B 는 마지막으로 참이 되는 조건을 고른 결과이고, ③ C 는 조건이 겹치면 ELSE 로 간다고 본 결과다.",
+    "explanation": "CASE 는 위에서부터 조건을 보고 처음 참인 WHEN 의 값을 돌려준 뒤 멈춘다. 95 와 85 는 첫 조건 SCORE >= 60 에서 이미 참이라 둘 다 'C' 다. 55 는 어느 조건도 참이 아니고 ELSE 가 없어 NULL 이다. 정답은 ①번이다. 의도대로 A, B, C 를 주려면 범위가 좁은 조건(>= 90)부터 적어야 한다. ② 는 조건 순서를 거꾸로 읽은 것이고, ③·④ 는 ELSE 가 없을 때 NULL 이 된다는 점을 놓쳤다.",
     "_source": "authored",
     "references": [
       {
+        "type": "table",
+        "caption": "T",
+        "headers": [
+          "ID",
+          "SCORE"
+        ],
+        "rows": [
+          [
+            "1",
+            "95"
+          ],
+          [
+            "2",
+            "85"
+          ],
+          [
+            "3",
+            "55"
+          ]
+        ]
+      },
+      {
         "type": "sql",
-        "code": "SELECT CASE WHEN 1 = 1 THEN 'A'\n            WHEN 1 = 1 THEN 'B'\n            ELSE 'C'\n       END\nFROM DUAL;"
+        "code": "SELECT ID,\n       CASE WHEN SCORE >= 60 THEN 'C'\n            WHEN SCORE >= 80 THEN 'B'\n            WHEN SCORE >= 90 THEN 'A'\n       END AS GRADE\nFROM   T;"
       }
     ]
   },
