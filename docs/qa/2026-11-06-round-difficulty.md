@@ -1099,3 +1099,5 @@ ERD 선 표기 정리 2차(11-20 14시): 식별자를 다루는 1과목 문항�
 | cbt-084 | ELSE 생략 → NULL, COUNT 는 NULL 제외 | 현상 설명 → 결과 + COUNT | ④ | PostgreSQL 실행 |
 | cbt-010 | LAST_VALUE 기본 윈도우 함정, FIRST_VALUE·LAG·RANK | 분류 고르기 → 결과에 맞는 식 | ③ | PostgreSQL 실행 |
 | cbt-036 | 연관 서브쿼리는 바깥 행마다 실행(부서 평균 vs 전체 평균) | 일반 설명 → SQL + 데이터 | ④ | PostgreSQL 실행(A, C / 비연관이면 C, D) |
+| cbt-020 | ROWNUM Top-N 과 동점, TOP 은 SQL Server, >= ALL 은 최댓값만 | SQL 고르기 → SQL + 결과 설명 | ② | Oracle 규칙(PostgreSQL 로 >= ALL 1행 확인) |
+| cbt-188 | CASCADE·SET NULL 결과와 NOT NULL FK 에 SET NULL | 설명 고르기 → 데이터에서 결과 | ① | PostgreSQL 실행(두 옵션 모두) |

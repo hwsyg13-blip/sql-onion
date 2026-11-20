@@ -1519,19 +1519,47 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 70,
-    "title": "SALARY가 높은 상위 2명만 조회하고자 할 때 올바른 SQL은? (단, Oracle 버전은 11g이다.)",
+    "title": "Oracle 11g 에서 아래 EMP 의 급여 상위 2명을 구하려 한다. SQL 과 그 결과에 대한 설명으로 옳은 것은? (EMP 는 표의 순서대로 읽힌다고 가정)",
     "options": [
-      "SELECT * FROM EMP WHERE ROWNUM <= 2 ORDER BY SALARY DESC;",
-      "SELECT * FROM (SELECT * FROM EMP ORDER BY SALARY DESC) WHERE ROWNUM <= 2;",
-      "SELECT TOP 2 * FROM EMP ORDER BY SALARY DESC;",
-      "SELECT * FROM EMP WHERE SALARY >= ALL (SELECT SALARY FROM EMP);"
+      "SELECT * FROM EMP WHERE ROWNUM <= 2 ORDER BY SAL DESC; — A, B 가 나온다.",
+      "SELECT * FROM (SELECT * FROM EMP ORDER BY SAL DESC) WHERE ROWNUM <= 2; — A 와 400 인 두 명 중 한 명, 모두 2행이 나온다.",
+      "SELECT TOP 2 * FROM EMP ORDER BY SAL DESC; — A, B, C 가 나온다.",
+      "SELECT * FROM EMP WHERE SAL >= ALL (SELECT SAL FROM EMP); — A, B 가 나온다."
     ],
     "correctIndex": 1,
-    "explanation": "상위 N개의 데이터를 추출하려면 먼저 인라인 뷰를 이용해 원하는 컬럼을 기준으로 정렬한 가상의 테이블을 만들어야 한다. 그다음 WHERE ROWNUM ≤ N을 이용해 상위 N개 데이터를 추출할 수 있다.",
+    "explanation": "ROWNUM 은 정렬 전에 붙으므로, 정렬을 인라인 뷰 안에서 먼저 하고 바깥에서 ROWNUM <= 2 로 잘라야 한다. 정렬 결과 500(A) 다음에 400 이 둘(B, C)이라, 그중 먼저 오는 한 명만 들어가 2행이다. 동점자를 모두 넣으려면 RANK 등을 써야 한다. 정답은 ②번이다. ① 은 먼저 읽힌 D, B 두 행을 고른 뒤 정렬해 B, D 가 나온다. ③ TOP 은 SQL Server 문법이라 Oracle 에서는 오류다. ④ 는 모든 급여 이상인 최댓값 A 한 명만 나온다.",
     "chapter": "ORDER BY",
     "_source": "cbt-mock",
     "_origId": "cbt-020",
-    "_cbtOrigNo": 20
+    "_cbtOrigNo": 20,
+    "references": [
+      {
+        "type": "table",
+        "caption": "EMP",
+        "headers": [
+          "ENAME",
+          "SAL"
+        ],
+        "rows": [
+          [
+            "D",
+            "300"
+          ],
+          [
+            "B",
+            "400"
+          ],
+          [
+            "A",
+            "500"
+          ],
+          [
+            "C",
+            "400"
+          ]
+        ]
+      }
+    ]
   },
   {
     "id": 10871,
@@ -6269,19 +6297,47 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 229,
-    "title": "다음은 EMP(사원) 테이블이 DEPT(부서) 테이블을 참조하는 관계를 설정하고 있다. DEPT 테이블의 행이 삭제될 때, EMP 테이블의 참조무결성을 유지하기 위해 ON DELETE CASCADE 또는 ON DELETE SET NULL 옵션을 사용할 수 있다. 다음 중 ON DELETE SET NULL과 ON DELETE CASCADE의 동작 설명으로 옳은 것은?",
+    "title": "DEPT 에서 10번 부서 행을 지울 때, EMP 외래키 옵션에 따른 결과로 옳은 것은?",
     "options": [
-      "ON DELETE CASCADE는 부모 테이블의 행이 삭제될 때 자식 테이블의 행도 자동으로 삭제된다.",
-      "ON DELETE SET NULL은 자식 테이블의 해당 행 전체가 삭제된다.",
-      "ON DELETE CASCADE를 사용하면 참조 무결성 오류가 발생한다.",
-      "ON DELETE SET NULL은 부모 행 삭제 시 외래키 컬럼이 '0'으로 초기화된다."
+      "ON DELETE CASCADE 면 EMPNO 1, 2 가 함께 지워지고, ON DELETE SET NULL 이면 1, 2 의 DEPTNO 가 NULL 이 된다.",
+      "ON DELETE CASCADE 면 1, 2 의 DEPTNO 가 NULL 이 되고, ON DELETE SET NULL 이면 1, 2 가 지워진다.",
+      "ON DELETE SET NULL 이면 1, 2 의 DEPTNO 가 0 으로 바뀐다.",
+      "EMP.DEPTNO 가 NOT NULL 이어도 ON DELETE SET NULL 은 문제없이 DEPTNO 를 NULL 로 바꾼다."
     ],
     "correctIndex": 0,
-    "explanation": "ON DELETE CASCADE는 부모 행이 삭제될 경우 해당 부모를 참조하던 자식의 행도 자동으로 DELETE 된다. ON DELETE SET NULL은 부모 행이 삭제될 경우 해당 부모를 참조하던 자식의 컬럼 값이 NULL로 변경된다.",
+    "explanation": "ON DELETE CASCADE 는 부모 행을 지우면 그 행을 참조하는 자식 행도 함께 지운다. ON DELETE SET NULL 은 자식 행은 남기고 외래키 칼럼만 NULL 로 바꾼다. 정답은 ①번이다. ② 는 두 옵션을 거꾸로 설명했다. ③ 0 이 아니라 NULL 이다. ④ 외래키 칼럼이 NOT NULL 이면 NULL 로 바꿀 수 없어 부모 행 삭제가 오류로 끝난다. 옵션이 없으면(기본) 자식 행이 있는 부모 행은 지울 수 없다.",
     "chapter": "DDL",
     "_source": "cbt-mock",
     "_origId": "cbt-188",
-    "_cbtOrigNo": 188
+    "_cbtOrigNo": 188,
+    "references": [
+      {
+        "type": "table",
+        "caption": "EMP",
+        "headers": [
+          "EMPNO",
+          "DEPTNO"
+        ],
+        "rows": [
+          [
+            "1",
+            "10"
+          ],
+          [
+            "2",
+            "10"
+          ],
+          [
+            "3",
+            "20"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "DELETE FROM DEPT\nWHERE  DEPTNO = 10;"
+      }
+    ]
   },
   {
     "id": 11029,
