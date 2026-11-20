@@ -217,7 +217,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "CREATE TABLE TAB (COL1 VARCHAR2(10)PRIMARY KEY, COL2 NUMBER ) ;\nINSERT INTO TAB VALUES ('A', 1 ) ;\nINSERT INTO TAB VALUES ('B', 2 ) ;\nINSERT INTO TAB VALUES ('C', 3 ) ;\nSAVEPOINT SV1 ;\nUPDATE TAB SET COL2 = 3 WHERE COL1 IN('A', 'B') ;\nSAVEPOINT SV2;\nINSERT INTO TAB VALUES ('D', 5) ;\nDELETE FROM TAB WHERE COL2 = 3 ;\nSAVEPOINT SV3;\nROLLBACK TO SV2;\nCOMMIT;\nSELECT COUNT(*) FROM TAB;"
+          "code": "CREATE TABLE TAB\n  (COL1 VARCHAR2(10) PRIMARY KEY,\n   COL2 NUMBER ) ;\nINSERT INTO TAB VALUES ('A', 1 ) ;\nINSERT INTO TAB VALUES ('B', 2 ) ;\nINSERT INTO TAB VALUES ('C', 3 ) ;\nSAVEPOINT SV1 ;\nUPDATE TAB SET COL2 = 3\nWHERE COL1 IN('A', 'B') ;\nSAVEPOINT SV2;\nINSERT INTO TAB VALUES ('D', 5) ;\nDELETE FROM TAB WHERE COL2 = 3 ;\nSAVEPOINT SV3;\nROLLBACK TO SV2;\nCOMMIT;\nSELECT COUNT(*) FROM TAB;"
         }
       ]
     },
@@ -1035,7 +1035,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT NEXT_DAY(ADD_MONTHS (sysdate,6),'월요일') FROM dual;"
+          "code": "SELECT NEXT_DAY(\n         ADD_MONTHS (sysdate,6),\n         '월요일')\nFROM dual;"
         }
       ]
     },
@@ -1803,7 +1803,7 @@
         },
         {
           "type": "sql",
-          "code": "SELECT DNAME, JOB, COUNT(*) \"Total Emp\", SUM(SAL) \"Total Sal\"\nFROM SCOTT.EMP A, SCOTT.DEPT B\nWHERE A.DEPTNO = B.DEPTNO\nGROUP BY CUBE(DNAME, JOB);"
+          "code": "SELECT DNAME, JOB,\n       COUNT(*) \"Total Emp\",\n       SUM(SAL) \"Total Sal\"\nFROM SCOTT.EMP A, SCOTT.DEPT B\nWHERE A.DEPTNO = B.DEPTNO\nGROUP BY CUBE(DNAME, JOB);"
         }
       ]
     },
@@ -1882,19 +1882,19 @@
         },
         {
           "type": "sql",
-          "code": "SELECT * FROM TAB1 A INNER JOIN TAB2 B ON (A.KEY1 = B.KEY2);"
+          "code": "SELECT * FROM TAB1 A\nINNER JOIN TAB2 B\n  ON (A.KEY1 = B.KEY2);"
         },
         {
           "type": "sql",
-          "code": "SELECT * FROM TAB1 A LEFT OUTER JOIN TAB2 B ON (A.KEY1 = B.KEY2);"
+          "code": "SELECT * FROM TAB1 A\nLEFT OUTER JOIN TAB2 B\n  ON (A.KEY1 = B.KEY2);"
         },
         {
           "type": "sql",
-          "code": "SELECT * FROM TAB1 A RIGHT OUTER JOIN TAB2 B ON (A.KEY1 = B.KEY2);"
+          "code": "SELECT * FROM TAB1 A\nRIGHT OUTER JOIN TAB2 B\n  ON (A.KEY1 = B.KEY2);"
         },
         {
           "type": "sql",
-          "code": "SELECT * FROM TAB1 A FULL OUTER JOIN TAB2 B ON (A.KEY1 = B.KEY2);"
+          "code": "SELECT * FROM TAB1 A\nFULL OUTER JOIN TAB2 B\n  ON (A.KEY1 = B.KEY2);"
         },
         {
           "type": "sql",
@@ -2756,7 +2756,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT 'A', 1 FROM DUAL UNION ALL SELECT 1, 'A' FROM DUAL;"
+          "code": "SELECT 'A', 1 FROM DUAL\nUNION ALL\nSELECT 1, 'A' FROM DUAL;"
         }
       ]
     },
@@ -2970,7 +2970,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT NAME, DENSE_RANK() OVER (ORDER BY PRICE DESC) AS RN\nFROM TB_PRODUCT;"
+          "code": "SELECT NAME,\n       DENSE_RANK() OVER (\n         ORDER BY PRICE DESC) AS RN\nFROM TB_PRODUCT;"
         },
         {
           "type": "table",
@@ -3912,7 +3912,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "ㄱ : SELECT COUNT(*) FROM TEST; ㄴ : SELECT COUNT(NUM2) FROM TEST;"
+          "code": "ㄱ : SELECT COUNT(*) FROM TEST;\nㄴ : SELECT COUNT(NUM2) FROM TEST;"
         }
       ]
     },

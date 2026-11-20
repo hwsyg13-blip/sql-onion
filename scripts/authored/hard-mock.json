@@ -478,7 +478,7 @@
         },
         {
           "type": "sql",
-          "code": "SELECT (SELECT COUNT(*) FROM A JOIN B ON A.ID = B.ID),\n       (SELECT COUNT(*) FROM A WHERE ID IN (SELECT ID FROM B)),\n       (SELECT COUNT(DISTINCT A.ID) FROM A JOIN B ON A.ID = B.ID)\nFROM   DUAL;"
+          "code": "SELECT\n  (SELECT COUNT(*)\n     FROM A JOIN B ON A.ID = B.ID),\n  (SELECT COUNT(*) FROM A\n    WHERE ID IN (SELECT ID FROM B)),\n  (SELECT COUNT(DISTINCT A.ID)\n     FROM A JOIN B ON A.ID = B.ID)\nFROM   DUAL;"
         }
       ]
     },
@@ -1454,7 +1454,7 @@
         },
         {
           "type": "sql",
-          "code": "UPDATE 선수\nSET    포지션 = 'FW'\nWHERE  팀ID = (SELECT 팀ID FROM 선수 WHERE 이름 = '김민재');"
+          "code": "UPDATE 선수\nSET    포지션 = 'FW'\nWHERE  팀ID = (SELECT 팀ID FROM 선수\n               WHERE 이름 = '김민재');"
         }
       ]
     },
@@ -1582,7 +1582,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT CEIL(-22.5), FLOOR(-22.5), TRUNC(-22.5), ROUND(-22.5)\nFROM   DUAL;"
+          "code": "SELECT CEIL(-22.5), FLOOR(-22.5),\n       TRUNC(-22.5), ROUND(-22.5)\nFROM   DUAL;"
         }
       ]
     },
@@ -2403,7 +2403,7 @@
         },
         {
           "type": "sql",
-          "code": "-- ①\nSELECT 이름 FROM EMP\nWHERE  급여 >= ALL (SELECT MAX(급여) FROM EMP GROUP BY 부서);\n\n-- ②\nSELECT 이름 FROM EMP\nWHERE  급여 >= ANY (SELECT MAX(급여) FROM EMP GROUP BY 부서);"
+          "code": "-- ①\nSELECT 이름 FROM EMP\nWHERE  급여 >= ALL\n       (SELECT MAX(급여) FROM EMP\n         GROUP BY 부서);\n\n-- ②\nSELECT 이름 FROM EMP\nWHERE  급여 >= ANY\n       (SELECT MAX(급여) FROM EMP\n         GROUP BY 부서);"
         }
       ]
     },
@@ -2876,7 +2876,7 @@
         },
         {
           "type": "sql",
-          "code": "-- ① 주문.고객ID REFERENCES 고객(고객ID)\n-- ② 주문.고객ID REFERENCES 고객(고객ID) ON DELETE CASCADE\n-- ③ 주문.고객ID REFERENCES 고객(고객ID) ON DELETE SET NULL"
+          "code": "-- ① 주문.고객ID\n--    REFERENCES 고객(고객ID)\n-- ② 주문.고객ID\n--    REFERENCES 고객(고객ID)\n--    ON DELETE CASCADE\n-- ③ 주문.고객ID\n--    REFERENCES 고객(고객ID)\n--    ON DELETE SET NULL"
         }
       ]
     },
@@ -3160,7 +3160,7 @@
         },
         {
           "type": "sql",
-          "code": "SELECT COUNT(*)\nFROM  (SELECT 사원ID,\n              MAX(연봉) OVER (PARTITION BY 부서ID) AS 최고연봉\n       FROM   사원) X, 사원 Y\nWHERE  X.사원ID = Y.사원ID\nAND    X.최고연봉 = Y.연봉;"
+          "code": "SELECT COUNT(*)\nFROM  (SELECT 사원ID,\n              MAX(연봉) OVER (\n                PARTITION BY 부서ID)\n              AS 최고연봉\n       FROM   사원) X, 사원 Y\nWHERE  X.사원ID = Y.사원ID\nAND    X.최고연봉 = Y.연봉;"
         }
       ]
     },
@@ -3182,7 +3182,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT COUNT(*)\nFROM  (SELECT LEVEL AS L FROM DUAL CONNECT BY LEVEL <= 3),\n      (SELECT LEVEL AS M FROM DUAL CONNECT BY LEVEL <= 2);"
+          "code": "SELECT COUNT(*)\nFROM  (SELECT LEVEL AS L FROM DUAL\n        CONNECT BY LEVEL <= 3),\n      (SELECT LEVEL AS M FROM DUAL\n        CONNECT BY LEVEL <= 2);"
         }
       ]
     },
@@ -3228,7 +3228,7 @@
         },
         {
           "type": "sql",
-          "code": "SELECT (SELECT COUNT(*) FROM T WHERE COL LIKE '%@_%' ESCAPE '@'),\n       (SELECT COUNT(*) FROM T WHERE COL LIKE '%_%')\nFROM   DUAL;"
+          "code": "SELECT\n  (SELECT COUNT(*) FROM T\n    WHERE COL LIKE '%@_%' ESCAPE '@'),\n  (SELECT COUNT(*) FROM T\n    WHERE COL LIKE '%_%')\nFROM   DUAL;"
         }
       ]
     },
