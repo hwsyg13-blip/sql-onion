@@ -984,3 +984,5 @@ ERD 선 표기 정리 2차(11-20 14시): 식별자를 다루는 1과목 문항�
 | 48-2-23 | Dirty Read 없음·READ COMMITTED 의 Non-Repeatable Read·SERIALIZABLE 스냅샷 | 특성 이름 → 두 트랜잭션 순서표에서 세 조회 값 | 100, 50, 100 | 격리 수준 정의로 판정(Oracle·PostgreSQL 공통 동작) |
 | 49-2-28 | 칼럼 단위 UPDATE 권한·받지 않은 DELETE·소유자 생략 시 자기 스키마 | DCL 문장 고르기 → 권한 2개 뒤 SQL 5개 중 성공 | ㉠, ㉡ | PostgreSQL 역할·칼럼 권한으로 동일 확인 |
 | 61-2-18 | LIKE 의 _ 가 밑줄과도 맞음·ESCAPE·NOT LIKE 와 NULL | 패턴 하나 행 수 → 세 조건 행 수 | 4, 1, 1 | PostgreSQL 동일 |
+| 62-2-12 | CTAS 계산식 칼럼은 별칭 필수(Oracle)·계산식 칼럼엔 NOT NULL 없음·PK 미복사 | 설명 고르기 → 문장 4개 결과 | 오류, 성공, 성공, 성공 | Oracle 규칙(PostgreSQL 은 별칭 없이도 이름을 붙여 ㉠ 성공 — 해설에 적음), ㉢·㉣ 은 PostgreSQL 동일 |
+| 56-2-28 | 행 잠금 대기 후 ROLLBACK·COMMIT 에 따라 달라지는 값 | 설명 고르기 → 두 세션 순서표에서 두 경우 값 | 20, 30 | 잠금·롤백 정의로 판정(Oracle·PostgreSQL 공통 동작) |

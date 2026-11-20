@@ -1042,16 +1042,53 @@ export const ROUND_56: QuizQuestion[] = [
     "round": 56,
     "subject": "2과목",
     "number": 28,
-    "title": "ROLLBACK 에 대한 설명 중 옳지 않은 것은?",
+    "title": "X 가 10 으로 COMMIT 된 테이블에서 두 세션이 아래 순서로 작업했다. ③ 에서 세션 A 가 ROLLBACK 했을 때와 COMMIT 했을 때, ④ 이후 X 값을 차례대로 나열한 것은?",
     "options": [
-      "ROLLBACK 은 트랜잭션 전체를 되돌린다.",
-      "SAVEPOINT 이후의 작업만 부분 롤백할 수 있다.",
-      "COMMIT 이전으로 롤백할 수 있다.",
-      "ROLLBACK 이후에는 해당 트랜잭션의 변경 내용이 모두 취소된다."
+      "30, 30",
+      "20, 20",
+      "20, 30",
+      "30, 20"
     ],
     "correctIndex": 2,
-    "explanation": "ROLLBACK 은 커밋되지 않은 트랜잭션 전체를 되돌리고(①④), SAVEPOINT 를 지정하면 그 이후 작업만 부분적으로 되돌릴 수 있다(②). 이미 COMMIT 된 변경은 영구 반영되어 ROLLBACK 으로 되돌릴 수 없으므로 ③ 이 옳지 않다.",
-    "_source": "authored"
+    "explanation": "① 에서 세션 A 가 행을 수정하면 그 행에 잠금이 걸린다. ② 의 세션 B 는 같은 행을 수정하려다 A 가 끝날 때까지 기다린다. A 가 ROLLBACK 하면 X 는 10 으로 돌아가고 잠금이 풀린다. B 의 UPDATE 는 이때 10 을 읽어 20 으로 바꾸고, ④ 의 COMMIT 으로 20 이 확정된다. A 가 COMMIT 하면 15 가 확정된 뒤 B 가 15 를 읽어 30 으로 바꾼다. ROLLBACK 은 COMMIT 되지 않은 변경만 되돌리고, 잠금을 풀어 기다리던 작업이 이어지게 한다. 정답은 ③번이다. ① 은 ROLLBACK 해도 A 의 +5 가 B 에게 반영된다고 본 것이고, ② 는 A 가 COMMIT 해도 B 가 처음 값 10 을 기준으로 계산한다고 본 것, ④ 는 두 경우를 바꿔 본 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "caption": "실행 순서",
+        "headers": [
+          "순서",
+          "세션",
+          "작업"
+        ],
+        "rows": [
+          [
+            "①",
+            "A",
+            "UPDATE: X = X + 5"
+          ],
+          [
+            "②",
+            "B",
+            "UPDATE: X = X * 2 (대기)"
+          ],
+          [
+            "③",
+            "A",
+            "ROLLBACK 또는 COMMIT"
+          ],
+          [
+            "④",
+            "B",
+            "COMMIT"
+          ]
+        ]
+      },
+      {
+        "type": "text",
+        "content": "①·② 는 같은 행에 대한 UPDATE 다."
+      }
+    ]
   },
   {
     "id": 10228,

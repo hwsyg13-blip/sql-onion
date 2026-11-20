@@ -257,19 +257,19 @@
     {
       "subject": "2과목",
       "number": 12,
-      "title": "다음과 같이 CTAS로 테이블을 복제할 때에 대한 설명으로 옳은 것은?",
+      "title": "T1(ID 기본키, SAL NOT NULL)에 (1, 100) 한 행이 있을 때 ㉠~㉣ 을 차례로 실행한 결과로 옳은 것은? (Oracle 기준)",
       "options": [
-        "PK는 적용되지 않는다.",
-        "NOT NULL은 적용되지 않는다.",
-        "CHECK 제약은 적용된다.",
-        "DEFAULT 값은 적용된다."
+        "오류, 성공, 성공, 성공",
+        "성공, 성공, 오류, 오류",
+        "오류, 성공, 오류, 성공",
+        "성공, 성공, 성공, 오류"
       ],
       "correctIndex": 0,
-      "explanation": "CREATE TABLE ... AS SELECT로 복제하면 컬럼의 데이터 타입과 NOT NULL 제약만 복사되고, PK·UNIQUE·FK·CHECK 제약과 기본 인덱스는 복사되지 않는다. ② NOT NULL 은 복사되므로 틀리고, ③ CHECK 와 ④ DEFAULT 는 복사되지 않으므로 틀리다.",
+      "explanation": "CTAS 는 SELECT 결과의 칼럼 이름으로 새 테이블의 칼럼을 만든다. Oracle 에서는 SAL * 12 같은 식에 별칭이 없으면 칼럼 이름을 정할 수 없어 ㉠ 이 오류가 난다. ㉡ 처럼 AS 연봉 을 붙이면 성공한다. Oracle 의 CTAS 는 원본 칼럼을 그대로 가져온 칼럼의 NOT NULL 만 옮긴다. 연봉 은 SAL 이 아니라 계산식이라 NOT NULL 이 붙지 않아 ㉢ 의 NULL 입력이 성공한다. 기본키도 옮겨지지 않으므로 이미 있는 ID 1 을 다시 넣는 ㉣ 도 성공한다. 정답은 ①번이다. ② 는 별칭 없이도 칼럼 이름을 만들어 주고 NOT NULL·기본키까지 옮긴다고 본 것이고, ③ 은 계산식 칼럼에도 원본의 NOT NULL 이 따라온다고 본 것, ④ 는 별칭 없이도 되고 기본키는 옮긴다고 본 것이다. 참고로 PostgreSQL 은 별칭이 없으면 ?column? 같은 이름을 붙여 ㉠ 도 실행된다.",
       "references": [
         {
           "type": "sql",
-          "code": "CREATE TABLE student_backup AS\nSELECT * FROM student;"
+          "code": "-- ㉠\nCREATE TABLE T2 AS\nSELECT ID, SAL * 12 FROM T1;\n-- ㉡\nCREATE TABLE T3 AS\nSELECT ID, SAL * 12 AS 연봉\nFROM T1;\n-- ㉢\nINSERT INTO T3 VALUES (2, NULL);\n-- ㉣\nINSERT INTO T3 VALUES (1, 100);"
         }
       ]
     },
