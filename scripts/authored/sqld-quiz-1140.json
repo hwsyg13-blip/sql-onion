@@ -968,7 +968,7 @@
         {
           "type": "sql",
           "caption": "생성)",
-          "code": "create table 학생 (학번 char(8) primary key,\n               장학금 integer);"
+          "code": "create table 학생 (\n  학번 char(8) primary key,\n               장학금 integer);"
         },
         {
           "type": "sql",
@@ -1276,7 +1276,7 @@
         {
           "type": "sql",
           "caption": "[SQL]",
-          "code": "UPDATE A SET VAL = 200 WHERE ID = '001';\nCREATE TABLE B ( ID CHAR(3) PRIMARY KEY);\nROLLBACK;"
+          "code": "UPDATE A SET VAL = 200\nWHERE ID = '001';\nCREATE TABLE B\n  ( ID CHAR(3) PRIMARY KEY);\nROLLBACK;"
         }
       ]
     },
@@ -1326,7 +1326,7 @@
         {
           "type": "sql",
           "caption": "[SQL구문]",
-          "code": "BEGIN TRANSACTION\nINSERT INTO 품목(품목ID, 단가)\n  VALUES('005', 2000)\nCOMMIT\nBEGIN TRANSACTION\nDELETE 품목 WHERE 품목ID='002'\nUPDATE 품목 SET 단가=2000 WHERE 단가=1000\nROLLBACK\nSELECT COUNT(품목ID) FROM 품목\n  WHERE 단가=2000"
+          "code": "BEGIN TRANSACTION\nINSERT INTO 품목(품목ID, 단가)\n  VALUES('005', 2000)\nCOMMIT\nBEGIN TRANSACTION\nDELETE 품목 WHERE 품목ID='002'\nUPDATE 품목 SET 단가=2000\nWHERE 단가=1000\nROLLBACK\nSELECT COUNT(품목ID) FROM 품목\n  WHERE 단가=2000"
         }
       ]
     },
@@ -1921,7 +1921,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "CREATE TABLE A (\n    가 VARCHAR2(10),\n    나 VARCHAR2(10),\n    다 NUMBER\n);\n\nINSERT INTO A VALUES ('009', 'A003', 600);\nINSERT INTO A VALUES ('005', 'A002', 500);\nINSERT INTO A VALUES ('002', 'A001', 300);\nINSERT INTO A VALUES ('010', 'A004', 200);\n\nCOMMIT;\n\n<SQL>\nSELECT 가, 나, SUM(다) AS 다\nFROM A\nGROUP BY 가, 나\nHAVING SUM(다) >= 500;"
+          "code": "CREATE TABLE A (\n    가 VARCHAR2(10),\n    나 VARCHAR2(10),\n    다 NUMBER\n);\n\nINSERT INTO A\nVALUES ('009', 'A003', 600);\nINSERT INTO A\nVALUES ('005', 'A002', 500);\nINSERT INTO A\nVALUES ('002', 'A001', 300);\nINSERT INTO A\nVALUES ('010', 'A004', 200);\n\nCOMMIT;\n\n<SQL>\nSELECT 가, 나, SUM(다) AS 다\nFROM A\nGROUP BY 가, 나\nHAVING SUM(다) >= 500;"
         }
       ]
     },
@@ -2536,7 +2536,7 @@
         {
           "type": "sql",
           "caption": "[SQL]",
-          "code": "SELECT *\nFROM TAB1 A LEFT OUTER JOIN TAB2 B\n  ON ( A.C1 = B.C1 AND B.C2 BETWEEN 1 AND 3)"
+          "code": "SELECT *\nFROM TAB1 A LEFT OUTER JOIN TAB2 B\n  ON ( A.C1 = B.C1\n       AND B.C2 BETWEEN 1 AND 3)"
         }
       ]
     },
@@ -2566,7 +2566,7 @@
         {
           "type": "sql",
           "caption": "[수행 SQL]",
-          "code": "SELECT A.서비스ID, A.서비스명, B.서비스URL\nFROM   (SELECT 서비스ID\n        FROM   서비스\n        INTERSECT\n        SELECT 서비스ID\n        FROM   서비스이용) A, 서비스 B\nWHERE  A.서비스ID = B.서비스ID;"
+          "code": "SELECT A.서비스ID, A.서비스명,\n       B.서비스URL\nFROM   (SELECT 서비스ID\n        FROM   서비스\n        INTERSECT\n        SELECT 서비스ID\n        FROM   서비스이용) A, 서비스 B\nWHERE  A.서비스ID = B.서비스ID;"
         }
       ]
     },
@@ -3904,7 +3904,7 @@
         {
           "type": "sql",
           "caption": "[SQL]",
-          "code": "SELECT 상품ID, 월, SUM(매출액) AS 매출액\nFROM   월별매출\nWHERE  월 BETWEEN '2014.10' AND '2014.12'\nGROUP BY GROUPING SETS((상품ID, 월));"
+          "code": "SELECT 상품ID, 월,\n       SUM(매출액) AS 매출액\nFROM   월별매출\nWHERE  월 BETWEEN '2014.10'\n              AND '2014.12'\nGROUP BY GROUPING SETS((상품ID, 월));"
         }
       ]
     },
@@ -6030,7 +6030,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT e.dno, d.dname, e.ename, e.score\nFROM employee e, department d\nWHERE e.dno = d.dno and (e.dno, score) IN\n(SELECT dno, max(score)\nFROM employee GROUP BY dno);"
+          "code": "SELECT e.dno, d.dname, e.ename, e.score\nFROM employee e, department d\nWHERE e.dno = d.dno\n  and (e.dno, score) IN\n(SELECT dno, max(score)\nFROM employee GROUP BY dno);"
         },
         {
           "type": "table",
@@ -6227,7 +6227,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT COALESCE(NULL,'2','1') FROM DUAL;"
+          "code": "SELECT COALESCE(NULL,'2','1')\nFROM DUAL;"
         }
       ]
     },
@@ -7133,7 +7133,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT ... FROM 급여이력 S\nWHERE NOT EXISTS\n(SELECT 'X' FROM 사원 P\nWHERE P.사원번호 = S.사원번호)\n\n[SQL문]\nSELECT .... FROM 급여이력 S\nLEFT OUTER JOIN 사원 P\nON(S.사원번호=P.사원번호) WHERE (         );"
+          "code": "SELECT ... FROM 급여이력 S\nWHERE NOT EXISTS\n(SELECT 'X' FROM 사원 P\nWHERE P.사원번호 = S.사원번호)\n\n[SQL문]\nSELECT .... FROM 급여이력 S\nLEFT OUTER JOIN 사원 P\nON(S.사원번호=P.사원번호)\nWHERE (         );"
         }
       ]
     },
@@ -8764,7 +8764,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT * FROM MytestA (       ) MytestB;"
+          "code": "SELECT * FROM MytestA\n(       ) MytestB;"
         },
         {
           "type": "table",
@@ -8887,7 +8887,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT SUM(SCORE) / COUNT(NO) FROM Mytest"
+          "code": "SELECT SUM(SCORE) / COUNT(NO)\nFROM Mytest"
         },
         {
           "type": "table",
@@ -9044,7 +9044,7 @@
         {
           "type": "sql",
           "caption": "[SQL1]",
-          "code": "SELECT * FROM MytestA a\nWHERE (a.col1, a.col2)\nIN (SELECT b.col1, b.col2 FROM MytestB b\nWHERE b.col3 > 1400);"
+          "code": "SELECT * FROM MytestA a\nWHERE (a.col1, a.col2)\nIN (SELECT b.col1, b.col2\n      FROM MytestB b\nWHERE b.col3 > 1400);"
         },
         {
           "type": "sql",
@@ -13294,7 +13294,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT ID, PARENT_ID, NAME,\nPARENT_NAME\nFROM SQLD_13\nWHERE PARENT_ID NOT IN (3)\nSTART WITH PARENT_ID = 0\nCONNECT BY PRIOR ID = PARENT_ID\nORDER SIBLINGS BY PARENT_ID ASC, ID ASC;"
+          "code": "SELECT ID, PARENT_ID, NAME,\nPARENT_NAME\nFROM SQLD_13\nWHERE PARENT_ID NOT IN (3)\nSTART WITH PARENT_ID = 0\nCONNECT BY PRIOR ID = PARENT_ID\nORDER SIBLINGS BY PARENT_ID ASC,\n                  ID ASC;"
         },
         {
           "type": "table",
@@ -14880,7 +14880,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT COUNT(*) FROM TEST39 GROUP BY COL1\nHAVING COUNT(*)>2;"
+          "code": "SELECT COUNT(*) FROM TEST39\nGROUP BY COL1\nHAVING COUNT(*)>2;"
         },
         {
           "type": "image",
@@ -15579,7 +15579,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT *\nFROM   TEST32\nWHERE  (COL1, COL2) IN ((10000, 'ABC'));"
+          "code": "SELECT *\nFROM   TEST32\nWHERE  (COL1, COL2) IN\n       ((10000, 'ABC'));"
         },
         {
           "type": "image",
@@ -15786,7 +15786,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT b.grade, a.StudentNo, SUM(b.grade)\nFROM TEST44_1 a, TEST44_2 b\nGROUP by\n(                       );"
+          "code": "SELECT b.grade, a.StudentNo,\n       SUM(b.grade)\nFROM TEST44_1 a, TEST44_2 b\nGROUP by\n(                       );"
         },
         {
           "type": "image",
@@ -16068,12 +16068,12 @@
         {
           "type": "sql",
           "caption": "[TEST49 DDL + INSERT]",
-          "code": "Create table test49(\n  col1 varchar(10),\n  col2 varchar(10),\n  col3 number(10)\n);\ninsert into test49 values('A', '가', 10);\ninsert into test49 values('A', '가', 20);\ninsert into test49 values('A', '다', 25);\ninsert into test49 values('B', '가', 10);\ninsert into test49 values('B', '나', 30);\ninsert into test49 values('B', '나', 20);\ninsert into test49 values('B', '나', 60);\ninsert into test49 values('C', '다', 30);"
+          "code": "Create table test49(\n  col1 varchar(10),\n  col2 varchar(10),\n  col3 number(10)\n);\ninsert into test49\n  values('A', '가', 10);\ninsert into test49\n  values('A', '가', 20);\ninsert into test49\n  values('A', '다', 25);\ninsert into test49\n  values('B', '가', 10);\ninsert into test49\n  values('B', '나', 30);\ninsert into test49\n  values('B', '나', 20);\ninsert into test49\n  values('B', '나', 60);\ninsert into test49\n  values('C', '다', 30);"
         },
         {
           "type": "sql",
           "caption": "[쿼리]",
-          "code": "SELECT NTILE_2, COUNT(*) AS ROWCNT\nFROM (\n  SELECT COL1, COL2, COL3, NTILE(3)\n         OVER (ORDER BY COL3) AS NTILE_2\n  FROM TEST49\n)\nGROUP BY NTILE_2;"
+          "code": "SELECT NTILE_2, COUNT(*) AS ROWCNT\nFROM (\n  SELECT COL1, COL2, COL3, NTILE(3)\n         OVER (ORDER BY COL3)\n           AS NTILE_2\n  FROM TEST49\n)\nGROUP BY NTILE_2;"
         },
         {
           "type": "table",
@@ -16620,7 +16620,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT COUNT(CODE) \nFROM TAB1 \nWHERE CODE LIKE '_1%' OR CODE LIKE '%A%';"
+          "code": "SELECT COUNT(CODE) \nFROM TAB1 \nWHERE CODE LIKE '_1%'\n   OR CODE LIKE '%A%';"
         },
         {
           "type": "table",
@@ -16770,7 +16770,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT SAL FROM TAB1 ORDER BY TO_CHAR(SAL);"
+          "code": "SELECT SAL FROM TAB1\nORDER BY TO_CHAR(SAL);"
         },
         {
           "type": "table",
@@ -16814,7 +16814,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT SUM(A.COL1) \nFROM TAB1 A, TAB2 B WHERE A.COL2 <> B.COL2;"
+          "code": "SELECT SUM(A.COL1) \nFROM TAB1 A, TAB2 B\nWHERE A.COL2 <> B.COL2;"
         },
         {
           "type": "table",
@@ -17441,7 +17441,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT COUNT(DECODE(DEPTNO,10,1)) AS \"10\", \nCOUNT(DECODE(DEPTNO,20,1)) AS \"20\", \nCOUNT(DECODE(DEPTNO,30,1)) AS \"30\" \n FROM EMP;"
+          "code": "SELECT COUNT(DECODE(DEPTNO,10,1))\n       AS \"10\",\nCOUNT(DECODE(DEPTNO,20,1)) AS \"20\", \nCOUNT(DECODE(DEPTNO,30,1)) AS \"30\" \n FROM EMP;"
         }
       ]
     },
@@ -18746,7 +18746,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT SUM(COL1) \n  FROM TAB1 T1 \n WHERE COL3 >= (SELECT AVG(COL3) \n                   FROM TAB2 T2 \n                  WHERE T2.COL2 = T1.COL2);"
+          "code": "SELECT SUM(COL1) \n  FROM TAB1 T1 \n WHERE COL3 >= (SELECT AVG(COL3) \n                   FROM TAB2 T2 \n                  WHERE T2.COL2\n                    = T1.COL2);"
         },
         {
           "type": "table",
@@ -19093,7 +19093,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT 사원번호, 이름, LEVEL \n  FROM 사원 \n  START WITH 사원번호 IN (1006, 1001) \nCONNECT BY PRIOR 상위관리자코드 = 사원번호;"
+          "code": "SELECT 사원번호, 이름, LEVEL \n  FROM 사원 \n  START WITH 사원번호 IN (1006, 1001) \nCONNECT BY PRIOR 상위관리자코드\n           = 사원번호;"
         },
         {
           "type": "table",
@@ -19194,7 +19194,7 @@
         {
           "type": "sql",
           "caption": "[SQL]",
-          "code": "SELECT *\nFROM   판매\n       (                              );"
+          "code": "SELECT *\nFROM   판매\n       (                       );"
         },
         {
           "type": "table",
@@ -20378,7 +20378,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT DEPTNO, SUM(SAL) AS SUM_SAL \nFROM EMP \nGROUP BY DEPTNO \nUNION ALL \nSELECT NULL DEPTNO, SUM(SAL) AS SUM_SAL \nFROM EMP; \nSELECT DEPTNO, SUM(SAL) AS SUM_SAL \nFROM EMP \nGROUP BY _______________;"
+          "code": "SELECT DEPTNO, SUM(SAL) AS SUM_SAL \nFROM EMP \nGROUP BY DEPTNO \nUNION ALL \nSELECT NULL DEPTNO,\n       SUM(SAL) AS SUM_SAL\nFROM EMP; \nSELECT DEPTNO, SUM(SAL) AS SUM_SAL \nFROM EMP \nGROUP BY _______________;"
         }
       ]
     },
@@ -20587,7 +20587,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT 사원번호, 이름, LEVEL \nFROM 사원 \nWHERE 지역 = '경기' \nSTART WITH 상위관리자코드 IS NULL \nCONNECT BY 상위관리자코드 = PRIOR 사원번호;"
+          "code": "SELECT 사원번호, 이름, LEVEL \nFROM 사원 \nWHERE 지역 = '경기' \nSTART WITH 상위관리자코드 IS NULL \nCONNECT BY 상위관리자코드\n           = PRIOR 사원번호;"
         },
         {
           "type": "table",
@@ -24584,7 +24584,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "UPDATE EMP\n   SET BONUS = (SELECT MAX(NULL)\n                  FROM BONUS_LOG B\n                 WHERE EMP.EMP_ID = B.EMP_ID\n                   AND B.YEAR = 2024);"
+          "code": "UPDATE EMP\n   SET BONUS = (SELECT MAX(NULL)\n                  FROM BONUS_LOG B\n                 WHERE EMP.EMP_ID\n                   = B.EMP_ID\n                   AND B.YEAR = 2024);"
         }
       ]
     },
@@ -25058,7 +25058,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "CREATE TABLE EMPLOYEE (\n  EMP_ID     NUMBER PRIMARY KEY,\n  NAME       VARCHAR2(50) NOT NULL,\n  EMAIL      VARCHAR2(100),\n  DEPT_ID    NUMBER,\n  CONSTRAINT UQ_EMP_EMAIL UNIQUE (EMAIL)\n);"
+          "code": "CREATE TABLE EMPLOYEE (\n  EMP_ID     NUMBER PRIMARY KEY,\n  NAME       VARCHAR2(50) NOT NULL,\n  EMAIL      VARCHAR2(100),\n  DEPT_ID    NUMBER,\n  CONSTRAINT UQ_EMP_EMAIL\n    UNIQUE (EMAIL)\n);"
         },
         {
           "type": "table",
@@ -25592,7 +25592,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT NVL(TO_CHAR(a.id), 'NO_A') AS a_id,\n       b.id AS b_id,\n       b.grade\nFROM A a\nRIGHT OUTER JOIN B b\n  ON a.id = b.id\nORDER BY b.id;"
+          "code": "SELECT NVL(TO_CHAR(a.id), 'NO_A')\n         AS a_id,\n       b.id AS b_id,\n       b.grade\nFROM A a\nRIGHT OUTER JOIN B b\n  ON a.id = b.id\nORDER BY b.id;"
         },
         {
           "type": "table",
@@ -25654,7 +25654,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT a.id,\n       COALESCE(b.grade, 'NONE') AS grade\nFROM A a\nLEFT OUTER JOIN B b\n  ON a.id = b.id\nWHERE b.id IS NULL\nORDER BY a.id;"
+          "code": "SELECT a.id,\n       COALESCE(b.grade, 'NONE')\n         AS grade\nFROM A a\nLEFT OUTER JOIN B b\n  ON a.id = b.id\nWHERE b.id IS NULL\nORDER BY a.id;"
         },
         {
           "type": "table",
@@ -25857,7 +25857,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT dept\nFROM emp\nGROUP BY dept\nHAVING MAX(salary) - MIN(salary) >= 1000\n   AND COUNT(*) >= 4\nORDER BY dept;"
+          "code": "SELECT dept\nFROM emp\nGROUP BY dept\nHAVING MAX(salary) - MIN(salary)\n       >= 1000\n   AND COUNT(*) >= 4\nORDER BY dept;"
         },
         {
           "type": "table",
@@ -27057,7 +27057,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT dept, Q1, Q2\nFROM (\n  SELECT dept, quarter_cd, amount\n  FROM sales_q\n)\nPIVOT (\n  SUM(amount)\n  FOR quarter_cd IN ('Q1' AS Q1, 'Q2' AS Q2)\n)\nORDER BY dept;"
+          "code": "SELECT dept, Q1, Q2\nFROM (\n  SELECT dept, quarter_cd, amount\n  FROM sales_q\n)\nPIVOT (\n  SUM(amount)\n  FOR quarter_cd IN ('Q1' AS Q1,\n                     'Q2' AS Q2)\n)\nORDER BY dept;"
         },
         {
           "type": "table",
@@ -27120,7 +27120,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT dept, Q1, Q2\nFROM (\n  SELECT dept, quarter_cd, amount\n  FROM sales_q\n)\nPIVOT (\n  SUM(amount)\n  FOR quarter_cd IN ('Q1' AS Q1, 'Q2' AS Q2)\n);"
+          "code": "SELECT dept, Q1, Q2\nFROM (\n  SELECT dept, quarter_cd, amount\n  FROM sales_q\n)\nPIVOT (\n  SUM(amount)\n  FOR quarter_cd IN ('Q1' AS Q1,\n                     'Q2' AS Q2)\n);"
         },
         {
           "type": "table",
@@ -27321,7 +27321,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT region,\n       seller,\n       amount,\n       ROW_NUMBER() OVER (\n         PARTITION BY region\n         ORDER BY amount DESC, seller ASC\n       ) AS rn,\n       RANK() OVER (\n         PARTITION BY region\n         ORDER BY amount DESC\n       ) AS rnk\nFROM sales_rank;"
+          "code": "SELECT region,\n       seller,\n       amount,\n       ROW_NUMBER() OVER (\n         PARTITION BY region\n         ORDER BY amount DESC,\n                  seller ASC\n       ) AS rn,\n       RANK() OVER (\n         PARTITION BY region\n         ORDER BY amount DESC\n       ) AS rnk\nFROM sales_rank;"
         },
         {
           "type": "table",
@@ -29262,7 +29262,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "INSERT INTO emp_backup (emp_id, emp_name)\nSELECT emp_id, emp_name\nFROM emp\nWHERE dept = 'SALES';"
+          "code": "INSERT INTO emp_backup\n  (emp_id, emp_name)\nSELECT emp_id, emp_name\nFROM emp\nWHERE dept = 'SALES';"
         }
       ]
     },
@@ -29628,7 +29628,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT LENGTH(TRIM(' SQLD ')) FROM dual;"
+          "code": "SELECT LENGTH(TRIM(' SQLD '))\nFROM dual;"
         }
       ]
     },
@@ -30116,7 +30116,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT emp_name,\n       CONNECT_BY_ROOT emp_name AS root_name\nFROM emp_tree\nSTART WITH mgr_id IS NULL\nCONNECT BY PRIOR emp_id = mgr_id;"
+          "code": "SELECT emp_name,\n       CONNECT_BY_ROOT emp_name\n         AS root_name\nFROM emp_tree\nSTART WITH mgr_id IS NULL\nCONNECT BY PRIOR emp_id = mgr_id;"
         },
         {
           "type": "table",
@@ -30593,7 +30593,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT dept, Q1, Q2\nFROM (\n  SELECT dept, quarter_cd, amount\n  FROM sales_q\n)\nPIVOT (\n  SUM(amount)\n  FOR quarter_cd IN ('Q1' AS Q1, 'Q2' AS Q2)\n)\nORDER BY dept;"
+          "code": "SELECT dept, Q1, Q2\nFROM (\n  SELECT dept, quarter_cd, amount\n  FROM sales_q\n)\nPIVOT (\n  SUM(amount)\n  FOR quarter_cd IN ('Q1' AS Q1,\n                     'Q2' AS Q2)\n)\nORDER BY dept;"
         },
         {
           "type": "table",
@@ -30738,7 +30738,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT dept, Q1, Q2\nFROM (\n  SELECT dept, quarter_cd, amount\n  FROM sales_q\n)\nPIVOT (\n  SUM(amount)\n  FOR quarter_cd IN ('Q1' AS Q1, 'Q2' AS Q2)\n)\nORDER BY dept;"
+          "code": "SELECT dept, Q1, Q2\nFROM (\n  SELECT dept, quarter_cd, amount\n  FROM sales_q\n)\nPIVOT (\n  SUM(amount)\n  FOR quarter_cd IN ('Q1' AS Q1,\n                     'Q2' AS Q2)\n)\nORDER BY dept;"
         },
         {
           "type": "table",
@@ -30887,7 +30887,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT dept, Q1, Q2\nFROM (\n  SELECT dept, quarter_cd, amount\n  FROM sales_q\n)\nPIVOT (\n  SUM(amount)\n  FOR quarter_cd IN ('Q1' AS Q1, 'Q2' AS Q2)\n);"
+          "code": "SELECT dept, Q1, Q2\nFROM (\n  SELECT dept, quarter_cd, amount\n  FROM sales_q\n)\nPIVOT (\n  SUM(amount)\n  FOR quarter_cd IN ('Q1' AS Q1,\n                     'Q2' AS Q2)\n);"
         },
         {
           "type": "table",
@@ -31134,7 +31134,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT LENGTH(TRIM(' SQLD ')) FROM dual;"
+          "code": "SELECT LENGTH(TRIM(' SQLD '))\nFROM dual;"
         }
       ]
     },
@@ -31504,7 +31504,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT dept, Q1, Q2\nFROM (\n  SELECT dept, quarter_cd, amount\n  FROM sales_q\n)\nPIVOT (\n  SUM(amount)\n  FOR quarter_cd IN ('Q1' AS Q1, 'Q2' AS Q2)\n)\nORDER BY dept;"
+          "code": "SELECT dept, Q1, Q2\nFROM (\n  SELECT dept, quarter_cd, amount\n  FROM sales_q\n)\nPIVOT (\n  SUM(amount)\n  FOR quarter_cd IN ('Q1' AS Q1,\n                     'Q2' AS Q2)\n)\nORDER BY dept;"
         },
         {
           "type": "table",
@@ -32115,7 +32115,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT dept, Q1, Q2\nFROM (\n  SELECT dept, quarter_cd, amount\n  FROM sales_q\n)\nPIVOT (\n  SUM(amount)\n  FOR quarter_cd IN ('Q1' AS Q1, 'Q2' AS Q2)\n)\nORDER BY dept;"
+          "code": "SELECT dept, Q1, Q2\nFROM (\n  SELECT dept, quarter_cd, amount\n  FROM sales_q\n)\nPIVOT (\n  SUM(amount)\n  FOR quarter_cd IN ('Q1' AS Q1,\n                     'Q2' AS Q2)\n)\nORDER BY dept;"
         },
         {
           "type": "table",
@@ -32246,7 +32246,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT dept\nFROM emp\nGROUP BY dept\nHAVING MAX(salary) - MIN(salary) >= 1000\n   AND COUNT(*) >= 4\nORDER BY dept;"
+          "code": "SELECT dept\nFROM emp\nGROUP BY dept\nHAVING MAX(salary) - MIN(salary)\n       >= 1000\n   AND COUNT(*) >= 4\nORDER BY dept;"
         },
         {
           "type": "table",
@@ -32851,7 +32851,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT dept, Q1, Q2\nFROM (\n  SELECT dept, quarter_cd, amount\n  FROM sales_q\n)\nPIVOT (\n  SUM(amount)\n  FOR quarter_cd IN ('Q1' AS Q1, 'Q2' AS Q2)\n);"
+          "code": "SELECT dept, Q1, Q2\nFROM (\n  SELECT dept, quarter_cd, amount\n  FROM sales_q\n)\nPIVOT (\n  SUM(amount)\n  FOR quarter_cd IN ('Q1' AS Q1,\n                     'Q2' AS Q2)\n);"
         },
         {
           "type": "table",
@@ -34116,7 +34116,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT dept, Q1, Q2\nFROM (\n  SELECT dept, quarter_cd, amount\n  FROM sales_q\n)\nPIVOT (\n  SUM(amount)\n  FOR quarter_cd IN ('Q1' AS Q1, 'Q2' AS Q2)\n);"
+          "code": "SELECT dept, Q1, Q2\nFROM (\n  SELECT dept, quarter_cd, amount\n  FROM sales_q\n)\nPIVOT (\n  SUM(amount)\n  FOR quarter_cd IN ('Q1' AS Q1,\n                     'Q2' AS Q2)\n);"
         },
         {
           "type": "table",
@@ -34342,7 +34342,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT LENGTH(TRIM(' SQLD ')) FROM dual;"
+          "code": "SELECT LENGTH(TRIM(' SQLD '))\nFROM dual;"
         }
       ]
     },
@@ -34709,7 +34709,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "INSERT INTO emp_backup (emp_id, emp_name)\nSELECT emp_id, emp_name\nFROM emp\nWHERE dept = 'SALES';"
+          "code": "INSERT INTO emp_backup\n  (emp_id, emp_name)\nSELECT emp_id, emp_name\nFROM emp\nWHERE dept = 'SALES';"
         }
       ]
     },
@@ -35125,7 +35125,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT region,\n       seller,\n       amount,\n       ROW_NUMBER() OVER (\n         PARTITION BY region\n         ORDER BY amount DESC, seller ASC\n       ) AS rn\nFROM sales_rank;"
+          "code": "SELECT region,\n       seller,\n       amount,\n       ROW_NUMBER() OVER (\n         PARTITION BY region\n         ORDER BY amount DESC,\n                  seller ASC\n       ) AS rn\nFROM sales_rank;"
         },
         {
           "type": "table",
@@ -36090,7 +36090,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT dept, Q1, Q2\nFROM (\n  SELECT dept, quarter_cd, amount\n  FROM sales_q\n)\nPIVOT (\n  SUM(amount)\n  FOR quarter_cd IN ('Q1' AS Q1, 'Q2' AS Q2)\n);"
+          "code": "SELECT dept, Q1, Q2\nFROM (\n  SELECT dept, quarter_cd, amount\n  FROM sales_q\n)\nPIVOT (\n  SUM(amount)\n  FOR quarter_cd IN ('Q1' AS Q1,\n                     'Q2' AS Q2)\n);"
         },
         {
           "type": "table",
@@ -36603,7 +36603,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT a.id,\n       COALESCE(b.grade, 'NONE') AS grade\nFROM A a\nLEFT OUTER JOIN B b\n  ON a.id = b.id\nWHERE b.id IS NULL\nORDER BY a.id;"
+          "code": "SELECT a.id,\n       COALESCE(b.grade, 'NONE')\n         AS grade\nFROM A a\nLEFT OUTER JOIN B b\n  ON a.id = b.id\nWHERE b.id IS NULL\nORDER BY a.id;"
         },
         {
           "type": "table",
@@ -36709,7 +36709,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT emp_name,\n       CONNECT_BY_ROOT emp_name AS root_name\nFROM emp_tree\nSTART WITH mgr_id IS NULL\nCONNECT BY PRIOR emp_id = mgr_id;"
+          "code": "SELECT emp_name,\n       CONNECT_BY_ROOT emp_name\n         AS root_name\nFROM emp_tree\nSTART WITH mgr_id IS NULL\nCONNECT BY PRIOR emp_id = mgr_id;"
         },
         {
           "type": "table",
@@ -37257,7 +37257,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT dept, Q1, Q2\nFROM (\n  SELECT dept, quarter_cd, amount\n  FROM sales_q\n)\nPIVOT (\n  SUM(amount)\n  FOR quarter_cd IN ('Q1' AS Q1, 'Q2' AS Q2)\n);"
+          "code": "SELECT dept, Q1, Q2\nFROM (\n  SELECT dept, quarter_cd, amount\n  FROM sales_q\n)\nPIVOT (\n  SUM(amount)\n  FOR quarter_cd IN ('Q1' AS Q1,\n                     'Q2' AS Q2)\n);"
         },
         {
           "type": "table",
@@ -37401,7 +37401,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT LENGTH(TRIM(' SQLD ')) FROM dual;"
+          "code": "SELECT LENGTH(TRIM(' SQLD '))\nFROM dual;"
         }
       ]
     },
@@ -37946,7 +37946,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT dept, Q1, Q2\nFROM (\n  SELECT dept, quarter_cd, amount\n  FROM sales_q\n)\nPIVOT (\n  SUM(amount)\n  FOR quarter_cd IN ('Q1' AS Q1, 'Q2' AS Q2)\n)\nORDER BY dept;"
+          "code": "SELECT dept, Q1, Q2\nFROM (\n  SELECT dept, quarter_cd, amount\n  FROM sales_q\n)\nPIVOT (\n  SUM(amount)\n  FOR quarter_cd IN ('Q1' AS Q1,\n                     'Q2' AS Q2)\n)\nORDER BY dept;"
         },
         {
           "type": "table",
@@ -38350,7 +38350,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT region,\n       seller,\n       amount,\n       ROW_NUMBER() OVER (\n         PARTITION BY region\n         ORDER BY amount DESC, seller ASC\n       ) AS rn,\n       RANK() OVER (\n         PARTITION BY region\n         ORDER BY amount DESC\n       ) AS rnk\nFROM sales_rank;"
+          "code": "SELECT region,\n       seller,\n       amount,\n       ROW_NUMBER() OVER (\n         PARTITION BY region\n         ORDER BY amount DESC,\n                  seller ASC\n       ) AS rn,\n       RANK() OVER (\n         PARTITION BY region\n         ORDER BY amount DESC\n       ) AS rnk\nFROM sales_rank;"
         },
         {
           "type": "table",

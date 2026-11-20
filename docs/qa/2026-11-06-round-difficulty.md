@@ -996,3 +996,4 @@ ERD 선 표기 정리 2차(11-20 14시): 식별자를 다루는 1과목 문항�
 | 47-2-12 | 실제 NULL 이 있는 칼럼의 ROLLUP — 소계 NULL 과 진짜 NULL 구별(GROUPING) | 절 고르기 → 표에서 행 수·NULL 행·GROUPING 1 행 | 6, 4, 3 | PostgreSQL 동일 |
 | 55-2-37 | Oracle(NULL 이 가장 큼) vs SQL Server(NULL 이 가장 작음)·NULLS FIRST | 기본 동작 설명 → 네 정렬의 첫 행 | 100, NULL, NULL, NULL | Oracle 쪽 PostgreSQL 동일, SQL Server 는 정의 |
 | 51-2-32 | 다중 칼럼 IN(쌍 비교) vs 칼럼별 IN·괄호 없는 AND/OR | 동치 고르기 → 표에서 네 조건 행 수 | 2, 4, 2, 2 | PostgreSQL 동일 |
+1140 문제 풀(sqld-quiz-1140, 모의고사에 섞임) 긴 SQL 250블록도 손질(11-20 22시). 문자열 리터럴은 한 글자도 바꾸지 않도록 따옴표 안 내용이 그대로인지 따로 확인. sqld-0712 는 문자열 하나가 43칸이라 그 줄만 남김.
