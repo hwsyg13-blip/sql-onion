@@ -3029,17 +3029,23 @@ export const AI_MOCK: QuizQuestion[] = [
     "number": 113,
     "title": "다음 설명 중 옳지 않은 것은?",
     "options": [
-      "Union과 Union All은 성능 차이가 없다.",
-      "Natural 조인에 해당하는 칼럼은 테이블의 칼럼명이 동일하다.",
-      "View는 실제 데이터를 가지고 있지 않는다.",
-      "서브쿼리는 Order by절에 사용할 수 있다."
+      "두 집합에 중복이 없다는 것이 확실해도 UNION 과 UNION ALL 의 처리 비용은 같다.",
+      "NATURAL JOIN 은 두 테이블에서 이름이 같은 칼럼을 모두 조인 조건으로 쓴다.",
+      "뷰는 SELECT 문만 저장하고, 조회할 때마다 기준 테이블에서 데이터를 읽는다.",
+      "위 SQL 처럼 ORDER BY 절에 스칼라 서브쿼리를 써서 부서 이름 순으로 정렬할 수 있다."
     ],
     "correctIndex": 0,
-    "explanation": "NATURAL JOIN 은 컬럼명이 같은 컬럼으로 조인하고(②), 뷰는 실제 데이터를 저장하지 않는 가상 테이블이며(③), ORDER BY 절에도 스칼라 서브쿼리를 쓸 수 있다(④). UNION 은 중복을 제거하려고 정렬 작업을 하지만 UNION ALL 은 그대로 합치기만 해 일반적으로 더 빠르므로, 성능 차이가 없다는 ① 이 옳지 않다.",
+    "explanation": "UNION 은 결과 전체에서 중복을 없애기 위해 정렬이나 해시 같은 추가 작업을 하지만, UNION ALL 은 그대로 이어 붙인다. 중복이 없다는 것이 확실하면 결과는 같고 UNION ALL 이 더 가볍다. 처리 비용이 같다는 ① 이 틀렸다. 정답은 ①번이다. ② NATURAL JOIN 의 정의다. ③ 뷰는 데이터를 따로 저장하지 않는다. ④ ORDER BY 에도 행마다 값 하나를 돌려주는 스칼라 서브쿼리를 쓸 수 있다.",
     "chapter": "ORDER BY",
     "_source": "cbt-mock",
     "_origId": "cbt-068",
-    "_cbtOrigNo": 68
+    "_cbtOrigNo": 68,
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT ENAME\nFROM   EMP E\nORDER  BY (SELECT DNAME\n            FROM   DEPT D\n            WHERE  D.DEPTNO\n                 = E.DEPTNO);"
+      }
+    ]
   },
   {
     "id": 10913,
