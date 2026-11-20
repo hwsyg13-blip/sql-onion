@@ -592,7 +592,7 @@
         },
         {
           "type": "sql",
-          "code": "-- 비교 SQL\nSELECT COUNT(*)         AS 전체,\n       COUNT(고객번호)  AS 고객번호_COUNT,\n       COUNT(집주소)    AS 집주소_COUNT,\n       COUNT(고객번호) - COUNT(집주소) AS 집주소_NULL_고객수\nFROM   고객;"
+          "code": "-- 비교 SQL\nSELECT COUNT(*) AS 전체,\n       COUNT(고객번호)\n         AS 고객번호_COUNT,\n       COUNT(집주소) AS 집주소_COUNT,\n       COUNT(고객번호) - COUNT(집주소)\n         AS 집주소_NULL_고객수\nFROM   고객;"
         }
       ]
     },
@@ -819,7 +819,7 @@
         },
         {
           "type": "sql",
-          "code": "SELECT 고객ID, 주문일자, 금액,\n       SUM(금액) OVER (PARTITION BY 고객ID ORDER BY 주문일자\n                       (  ?  )) AS 누적금액\nFROM   주문;"
+          "code": "SELECT 고객ID, 주문일자, 금액,\n       SUM(금액) OVER (\n         PARTITION BY 고객ID\n         ORDER BY 주문일자\n         (  ?  )) AS 누적금액\nFROM   주문;"
         }
       ]
     },

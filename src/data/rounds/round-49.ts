@@ -2025,7 +2025,7 @@ export const ROUND_49: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "MERGE INTO TBL1 T USING TBL2 S ON (T.ID = S.ID)\nWHEN MATCHED THEN UPDATE SET T.COL1 = S.COL2\nWHEN NOT MATCHED THEN INSERT (ID, COL1) VALUES (S.ID, S.COL2);"
+        "code": "MERGE INTO TBL1 T USING TBL2 S\n  ON (T.ID = S.ID)\nWHEN MATCHED THEN\n  UPDATE SET T.COL1 = S.COL2\nWHEN NOT MATCHED THEN\n  INSERT (ID, COL1)\n  VALUES (S.ID, S.COL2);"
       }
     ]
   },

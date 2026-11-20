@@ -1030,7 +1030,7 @@ export const ROUND_61: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT *\nFROM  (SELECT DEPT_ID, SAL FROM EMP)\nPIVOT (SUM(SAL) FOR DEPT_ID IN (10 AS A, 20 AS B, 30 AS C));"
+        "code": "SELECT *\nFROM  (SELECT DEPT_ID, SAL FROM EMP)\nPIVOT (SUM(SAL) FOR DEPT_ID\n       IN (10 AS A, 20 AS B, 30 AS C));"
       }
     ]
   },
@@ -1880,7 +1880,7 @@ export const ROUND_61: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "MERGE INTO EMP E\nUSING EMP_TEMP T\nON (E.EMP_ID = T.EMP_ID)\nWHEN MATCHED THEN\n    UPDATE SET E.EMP_NAME = T.EMP_NAME\nWHEN NOT MATCHED THEN\n    INSERT (EMP_ID, EMP_NAME) VALUES (T.EMP_ID, T.EMP_NAME);"
+        "code": "MERGE INTO EMP E\nUSING EMP_TEMP T\nON (E.EMP_ID = T.EMP_ID)\nWHEN MATCHED THEN\n    UPDATE SET E.EMP_NAME = T.EMP_NAME\nWHEN NOT MATCHED THEN\n    INSERT (EMP_ID, EMP_NAME)\n    VALUES (T.EMP_ID, T.EMP_NAME);"
       }
     ]
   },

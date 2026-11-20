@@ -2021,7 +2021,7 @@ export const ROUND_48: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT ID FROM TAB1\nORDER BY (CASE WHEN ID IN (1, 3) THEN ID * 3 ELSE ID END) DESC;"
+        "code": "SELECT ID FROM TAB1\nORDER BY (CASE WHEN ID IN (1, 3)\n               THEN ID * 3\n               ELSE ID END) DESC;"
       }
     ]
   },

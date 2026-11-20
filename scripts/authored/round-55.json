@@ -955,7 +955,7 @@
         },
         {
           "type": "sql",
-          "code": "SELECT ID, RN\nFROM   (SELECT ID, VAL,\n               ROW_NUMBER() OVER (PARTITION BY GRP\n                                  ORDER BY VAL DESC, ID) AS RN\n        FROM   T)\nWHERE  RN <= 2\nORDER BY ID;"
+          "code": "SELECT ID, RN\nFROM   (SELECT ID, VAL,\n               ROW_NUMBER() OVER (\n                 PARTITION BY GRP\n                 ORDER BY VAL DESC, ID)\n               AS RN\n        FROM   T)\nWHERE  RN <= 2\nORDER BY ID;"
         }
       ]
     },

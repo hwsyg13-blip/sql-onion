@@ -819,7 +819,7 @@ export const ROUND_51: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT COUNT(*) FROM T1\nWHERE NOT EXISTS (SELECT 'X' FROM T2 WHERE T1.COL1 = T2.COL1);"
+        "code": "SELECT COUNT(*) FROM T1\nWHERE NOT EXISTS\n      (SELECT 'X' FROM T2\n        WHERE T1.COL1 = T2.COL1);"
       }
     ]
   },

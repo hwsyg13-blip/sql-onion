@@ -1466,7 +1466,7 @@ export const ROUND_60: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT ITEM\nFROM   주문 O\nWHERE  NOT EXISTS (SELECT 1 FROM 판매 P WHERE P.ITEM = O.ITEM);"
+        "code": "SELECT ITEM\nFROM   주문 O\nWHERE  NOT EXISTS\n       (SELECT 1 FROM 판매 P\n         WHERE P.ITEM = O.ITEM);"
       }
     ]
   },

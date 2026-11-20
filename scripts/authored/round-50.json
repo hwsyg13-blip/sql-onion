@@ -550,7 +550,7 @@
         },
         {
           "type": "sql",
-          "code": "SELECT 카테고리번호, 카테고리명, LEVEL\nFROM   카테고리\n(   ?   );   -- START WITH ... CONNECT BY ... (보기에서 고르기)"
+          "code": "SELECT 카테고리번호, 카테고리명,\n       LEVEL\nFROM   카테고리\n(   ?   );\n-- START WITH ... CONNECT BY ...\n-- (보기에서 고르기)"
         },
         {
           "type": "table",

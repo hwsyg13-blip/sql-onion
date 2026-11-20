@@ -685,7 +685,7 @@ export const ROUND_52: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT DEPT, SAL,\n       RANK() OVER (PARTITION BY DEPT ORDER BY SAL DESC) AS RNK\nFROM   EMP;"
+        "code": "SELECT DEPT, SAL,\n       RANK() OVER (\n         PARTITION BY DEPT\n         ORDER BY SAL DESC) AS RNK\nFROM   EMP;"
       }
     ]
   },
