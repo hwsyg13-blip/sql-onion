@@ -386,7 +386,7 @@ export const ROUND_58: QuizQuestion[] = [
     "references": [
       {
         "type": "sql",
-        "code": "DBA : GRANT SELECT, INSERT, DELETE ON R TO U1;\nDBA : GRANT SELECT ON R TO U2 WITH GRANT OPTION;\nU2  : GRANT SELECT ON R TO U3;\nDBA : REVOKE SELECT ON R FROM U2 RESTRICT;"
+        "code": "DBA : GRANT SELECT, INSERT, DELETE\n        ON R TO U1;\nDBA : GRANT SELECT ON R TO U2\n        WITH GRANT OPTION;\nU2  : GRANT SELECT ON R TO U3;\nDBA : REVOKE SELECT ON R FROM U2\n        RESTRICT;"
       }
     ]
   },
@@ -1456,7 +1456,7 @@ export const ROUND_58: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT CASE WHEN GROUPING(지역) = 1 THEN '합계'\n            ELSE NVL(지역, '미지정')\n       END AS 구분,\n       SUM(금액)\nFROM   매출\nGROUP BY GROUPING SETS ((지역), ());"
+        "code": "SELECT CASE WHEN GROUPING(지역) = 1\n            THEN '합계'\n            ELSE NVL(지역, '미지정')\n       END AS 구분,\n       SUM(금액)\nFROM   매출\nGROUP BY GROUPING SETS ((지역), ());"
       }
     ]
   },

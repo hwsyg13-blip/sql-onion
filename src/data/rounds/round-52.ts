@@ -91,7 +91,7 @@ export const ROUND_52: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "-- FK 정의 (학생 테이블 생성 시)\nCREATE TABLE 학생 (\n  학번      VARCHAR2(10) PRIMARY KEY,\n  이름      VARCHAR2(20),\n  학과코드  VARCHAR2(4),\n  CONSTRAINT FK_학생_학과 FOREIGN KEY (학과코드)\n    REFERENCES 학과(학과코드) ON DELETE CASCADE\n);\n\n-- 부모 행 삭제\nDELETE FROM 학과 WHERE 학과코드 = 'CS';"
+        "code": "-- FK 정의 (학생 테이블 생성 시)\nCREATE TABLE 학생 (\n  학번      VARCHAR2(10) PRIMARY KEY,\n  이름      VARCHAR2(20),\n  학과코드  VARCHAR2(4),\n  CONSTRAINT FK_학생_학과\n    FOREIGN KEY (학과코드)\n    REFERENCES 학과(학과코드)\n    ON DELETE CASCADE\n);\n\n-- 부모 행 삭제\nDELETE FROM 학과 WHERE 학과코드 = 'CS';"
       }
     ]
   },

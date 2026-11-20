@@ -946,7 +946,7 @@ export const ROUND_61: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT NAME, SCORE,\n       ______() OVER(ORDER BY SCORE DESC) AS RNK\nFROM   TBL;"
+        "code": "SELECT NAME, SCORE,\n       ______() OVER(\n         ORDER BY SCORE DESC) AS RNK\nFROM   TBL;"
       }
     ]
   },
@@ -1517,7 +1517,7 @@ export const ROUND_61: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "-- 가\nSELECT COL1, COL2, COL3 FROM TBL1\nUNION\nSELECT COL1, COL2 FROM TBL2;\n\n-- 나\nSELECT COL1, COL2, COL3 FROM TBL1 ORDER BY COL1\nUNION\nSELECT COL1, COL2, COL3 FROM TBL2;\n\n-- 다\nSELECT COL1, COL2 FROM TBL1\nUNION\nSELECT COL1, COL3 FROM TBL2 ORDER BY COL1;"
+        "code": "-- 가\nSELECT COL1, COL2, COL3 FROM TBL1\nUNION\nSELECT COL1, COL2 FROM TBL2;\n\n-- 나\nSELECT COL1, COL2, COL3 FROM TBL1\nORDER BY COL1\nUNION\nSELECT COL1, COL2, COL3 FROM TBL2;\n\n-- 다\nSELECT COL1, COL2 FROM TBL1\nUNION\nSELECT COL1, COL3 FROM TBL2\nORDER BY COL1;"
       }
     ]
   },

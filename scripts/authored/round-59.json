@@ -917,7 +917,7 @@
         },
         {
           "type": "sql",
-          "code": "SELECT COALESCE(V1, V2, V3) FROM T ORDER BY ID;"
+          "code": "SELECT COALESCE(V1, V2, V3) FROM T\nORDER BY ID;"
         }
       ]
     },
@@ -978,7 +978,7 @@
         },
         {
           "type": "sql",
-          "code": "SELECT V FROM T1\nUNION\n(SELECT V FROM T2 INTERSECT SELECT V FROM T3);"
+          "code": "SELECT V FROM T1\nUNION\n(SELECT V FROM T2\n INTERSECT\n SELECT V FROM T3);"
         }
       ]
     },

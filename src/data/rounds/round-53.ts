@@ -863,7 +863,7 @@ export const ROUND_53: QuizQuestion[] = [
     "references": [
       {
         "type": "sql",
-        "code": "SELECT SUM(SAL)            -- (1)\nFROM   EMP\nWHERE  컬럼 = (SELECT ID FROM A WHERE ~)  -- (2)\nGROUP BY ID                 -- (3)\nHAVING SUM(SAL) > 5000;     -- (4)"
+        "code": "SELECT SUM(SAL)            -- (1)\nFROM   EMP\nWHERE  컬럼 =\n       (SELECT ID FROM A WHERE ~)\n       -- (2)\nGROUP BY ID                 -- (3)\nHAVING SUM(SAL) > 5000;     -- (4)"
       }
     ]
   },
@@ -1009,7 +1009,7 @@ export const ROUND_53: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT 회원ID\nFROM   회원\nORDER  BY DECODE(등급, 'VVIP', 1, 'VIP', 2, 3),\n          포인트 DESC,\n          회원ID;"
+        "code": "SELECT 회원ID\nFROM   회원\nORDER  BY DECODE(등급, 'VVIP', 1,\n                 'VIP', 2, 3),\n          포인트 DESC,\n          회원ID;"
       }
     ]
   },

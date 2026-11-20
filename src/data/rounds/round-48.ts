@@ -1157,7 +1157,7 @@ export const ROUND_48: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT ID, SAL,\n       NTILE(3) OVER (ORDER BY SAL DESC) AS GRP\nFROM   T\nORDER BY SAL DESC;"
+        "code": "SELECT ID, SAL,\n       NTILE(3) OVER (\n         ORDER BY SAL DESC) AS GRP\nFROM   T\nORDER BY SAL DESC;"
       }
     ]
   },
@@ -1810,7 +1810,7 @@ export const ROUND_48: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT 사원ID, 사원명, 연봉 FROM EMP ORDER BY 2;"
+        "code": "SELECT 사원ID, 사원명, 연봉 FROM EMP\nORDER BY 2;"
       }
     ]
   },

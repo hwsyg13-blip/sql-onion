@@ -1560,7 +1560,7 @@ export const ROUND_51: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT * FROM TAB WHERE COL1 IN (100, 200, 100);"
+        "code": "SELECT * FROM TAB\nWHERE COL1 IN (100, 200, 100);"
       }
     ]
   },
@@ -1804,7 +1804,7 @@ export const ROUND_51: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT SUM(VAL)\nOVER (ORDER BY VAL\n      RANGE BETWEEN 2 PRECEDING AND 2 FOLLOWING)\nFROM T;"
+        "code": "SELECT SUM(VAL)\nOVER (ORDER BY VAL\n      RANGE BETWEEN 2 PRECEDING\n            AND 2 FOLLOWING)\nFROM T;"
       }
     ]
   },

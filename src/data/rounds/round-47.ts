@@ -1000,7 +1000,7 @@ export const ROUND_47: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT CASE WHEN SUM(GRADE + RANK) IS NULL THEN 0\n            ELSE SUM(GRADE + RANK) END AS R1,\n       SUM(GRADE) + SUM(RANK) AS R2\nFROM   T;"
+        "code": "SELECT CASE WHEN SUM(GRADE + RANK)\n                 IS NULL\n            THEN 0\n            ELSE SUM(GRADE + RANK)\n            END AS R1,\n       SUM(GRADE) + SUM(RANK) AS R2\nFROM   T;"
       }
     ]
   },

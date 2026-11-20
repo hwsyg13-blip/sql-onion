@@ -370,7 +370,7 @@ export const ROUND_50: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "CREATE VIEW V_TBL AS\nSELECT * FROM TBL WHERE C1 = 'B' OR C1 IS NULL;\n\nSELECT SUM(C2) FROM V_TBL\nWHERE C2 >= 200 AND C1 = 'B';"
+        "code": "CREATE VIEW V_TBL AS\nSELECT * FROM TBL\nWHERE C1 = 'B' OR C1 IS NULL;\n\nSELECT SUM(C2) FROM V_TBL\nWHERE C2 >= 200 AND C1 = 'B';"
       }
     ]
   },
@@ -458,7 +458,7 @@ export const ROUND_50: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "-- ㄱ\nSELECT COUNT(*)\nFROM   TAB1 A LEFT OUTER JOIN TAB2 B\nON     (A.C1 = B.C1 AND B.C2 BETWEEN 1 AND 3);\n\n-- ㄴ\nSELECT COUNT(*)\nFROM   TAB1 A LEFT OUTER JOIN TAB2 B\nON     (A.C1 = B.C1)\nWHERE  B.C2 BETWEEN 1 AND 3;"
+        "code": "-- ㄱ\nSELECT COUNT(*)\nFROM   TAB1 A LEFT OUTER JOIN TAB2 B\nON     (A.C1 = B.C1\n        AND B.C2 BETWEEN 1 AND 3);\n\n-- ㄴ\nSELECT COUNT(*)\nFROM   TAB1 A LEFT OUTER JOIN TAB2 B\nON     (A.C1 = B.C1)\nWHERE  B.C2 BETWEEN 1 AND 3;"
       }
     ]
   },
@@ -1965,7 +1965,7 @@ export const ROUND_50: QuizQuestion[] = [
     "references": [
       {
         "type": "sql",
-        "code": "SELECT * FROM TABLE1, TABLE2;  -- 조인 조건 없음"
+        "code": "SELECT * FROM TABLE1, TABLE2;\n-- 조인 조건 없음"
       }
     ]
   },

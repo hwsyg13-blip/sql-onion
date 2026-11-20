@@ -645,7 +645,7 @@ export const ROUND_49: QuizQuestion[] = [
       {
         "type": "sql",
         "caption": "나",
-        "code": "SELECT A.EMP_NO, A.ENAME\nFROM   EMP A\nWHERE  A.MGR_NO IN (SELECT B.EMP_NO FROM EMP B\n                    WHERE  B.SAL <= 3000);"
+        "code": "SELECT A.EMP_NO, A.ENAME\nFROM   EMP A\nWHERE  A.MGR_NO IN\n       (SELECT B.EMP_NO FROM EMP B\n         WHERE B.SAL <= 3000);"
       },
       {
         "type": "sql",
@@ -1336,7 +1336,7 @@ export const ROUND_49: QuizQuestion[] = [
     "references": [
       {
         "type": "sql",
-        "code": "DBA : GRANT SELECT ON X TO U1;\nDBA : GRANT SELECT ON X TO U2 WITH GRANT OPTION;\nU2  : GRANT SELECT ON X TO U3;\nDBA : REVOKE SELECT ON X FROM U2 RESTRICT;"
+        "code": "DBA : GRANT SELECT ON X TO U1;\nDBA : GRANT SELECT ON X TO U2\n        WITH GRANT OPTION;\nU2  : GRANT SELECT ON X TO U3;\nDBA : REVOKE SELECT ON X FROM U2\n        RESTRICT;"
       }
     ]
   },

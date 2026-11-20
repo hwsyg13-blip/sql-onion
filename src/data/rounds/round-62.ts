@@ -910,7 +910,7 @@ export const ROUND_62: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "-- ㉠\nSELECT NVL(MAX('Y'), 'N') FROM T WHERE COL = 9;\n-- ㉡\nSELECT NVL(MAX('Y'), 'N') FROM T WHERE COL = 9\nGROUP BY C1;\n-- ㉢\nSELECT COUNT(*) FROM T WHERE COL = 9;\n-- ㉣\nSELECT SUM(COL) FROM T WHERE COL = 9;"
+        "code": "-- ㉠\nSELECT NVL(MAX('Y'), 'N') FROM T\nWHERE COL = 9;\n-- ㉡\nSELECT NVL(MAX('Y'), 'N') FROM T\nWHERE COL = 9\nGROUP BY C1;\n-- ㉢\nSELECT COUNT(*) FROM T WHERE COL = 9;\n-- ㉣\nSELECT SUM(COL) FROM T WHERE COL = 9;"
       }
     ]
   },
@@ -1737,7 +1737,7 @@ export const ROUND_62: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT *\nFROM   TBL1 RIGHT OUTER JOIN TBL2 USING ( ㄱ )\nWHERE  COLC >= 20;"
+        "code": "SELECT *\nFROM   TBL1 RIGHT OUTER JOIN TBL2\n       USING ( ㄱ )\nWHERE  COLC >= 20;"
       },
       {
         "type": "table",

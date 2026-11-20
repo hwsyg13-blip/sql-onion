@@ -1505,7 +1505,7 @@ export const ROUND_45: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "-- (가)\nSELECT SUM(NVL(COL1, 0) + NVL(COL2, 0)) FROM T;\n\n-- (나)\nSELECT NVL(SUM(COL1 + COL2), 0) FROM T;"
+        "code": "-- (가)\nSELECT SUM(NVL(COL1, 0) + NVL(COL2, 0))\nFROM T;\n\n-- (나)\nSELECT NVL(SUM(COL1 + COL2), 0) FROM T;"
       }
     ]
   },
