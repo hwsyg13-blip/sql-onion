@@ -1135,6 +1135,8 @@ ERD 선 표기 정리 2차(11-20 14시): 식별자를 다루는 1과목 문항�
 | ai-mock-015 | GROUPING SETS 는 적은 묶음만(총계 없음), 묶음별 행 수 | 묶음 개수 → 개수 + 결과 행 수 | 3개, 5행 | PostgreSQL 실행 |
 | ai-mock-035 | UNIQUE 는 NULL 여러 개 허용, CHECK·FK 와 구분 | 정의로 이름 → 요구 상황 + 동작 | ① | PostgreSQL 실행(NULL 2행 입력, 중복 값 오류). audit HINT_TAIL 은 형식상 검토 완료 처리 |
 | ai-mock-016 | NULLIF 에 NULL 이 들어오면 A(NULL) 반환 | 정의 문장 → 데이터 결과 | ② | PostgreSQL 실행 |
+| ai-mock-013 | NOT IN 서브쿼리에 NULL → 0건, NOT EXISTS 는 아님 | 연산자 이름 → 같은 목적 SQL 4개 | ② | PostgreSQL 실행(2, 0, 1, 1) |
+| ai-mock-012 | CONNECT_BY_ISLEAF 는 자식 없는 단말 노드 | 정의 문장 → 트리 데이터 결과 | ③ | 트리 구조로 판정(Oracle 전용 함수) |
 
 ## 11-21 06시 실행 — 11-06 이후 한 번도 안 바뀐 기출(226문항) 차례로
 
