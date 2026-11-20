@@ -2198,20 +2198,20 @@ export const ROUND_51: QuizQuestion[] = [
     "round": 51,
     "subject": "2과목",
     "number": 48,
-    "title": "아래 SQL 의 결과로 옳은 것은?",
+    "title": "T 의 COL 값이 NULL 인 한 행이 있을 때, 아래 SQL 의 결과 (X, Y, Z) 로 옳은 것은?",
     "options": [
-      "A",
-      "B",
-      "C",
-      "오류"
+      "A, A, B",
+      "B, A, NULL",
+      "A, A, NULL",
+      "B, A, B"
     ],
     "correctIndex": 1,
-    "explanation": "CASE 식은 위에서부터 차례로 평가되어 가장 먼저 참인 WHEN 절의 결과를 반환한다. `1 = 2`는 거짓이므로 넘어가고, `2 = 2`가 참이어서 'B'가 반환된다. ① A 는 1 = 2 가 거짓이라 건너뛰고, ③ C 는 참인 WHEN 이 있어 ELSE 로 가지 않으며, ④ 오류는 나지 않는다.",
+    "explanation": "X 는 CASE 뒤에 비교 대상을 쓰는 단순 CASE 라 COL = NULL 처럼 = 로 비교한다. NULL = NULL 은 참이 아니므로 ELSE 의 'B' 가 나온다. Y 는 IS NULL 로 판정해 'A' 다. Z 는 COL = 1 도, COL <> 1 도 NULL 과의 비교라 참이 아니고, ELSE 가 없으므로 NULL 이다. 결과는 (B, A, NULL)이다. 정답은 ②번이다. NULL 을 가려내려면 단순 CASE 대신 WHEN COL IS NULL 을 써야 한다.",
     "_source": "authored",
     "references": [
       {
         "type": "sql",
-        "code": "SELECT CASE WHEN 1 = 2 THEN 'A'\n            WHEN 2 = 2 THEN 'B'\n            ELSE 'C' END\nFROM DUAL;"
+        "code": "SELECT CASE COL WHEN NULL THEN 'A'\n                ELSE 'B' END AS X,\n       CASE WHEN COL IS NULL THEN 'A'\n            ELSE 'B' END AS Y,\n       CASE WHEN COL = 1 THEN 'A'\n            WHEN COL <> 1 THEN 'B'\n       END AS Z\nFROM   T;"
       }
     ]
   },
