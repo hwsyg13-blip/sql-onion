@@ -235,19 +235,19 @@
     {
       "subject": "1과목",
       "number": 10,
-      "title": "아래 설명에 해당하는 용어는?",
+      "title": "'한 사원은 한 부서에만 속한다' 는 규칙이 '한 사원이 여러 부서를 겸직할 수 있다' 로 바뀌었다. ERD 에서 달라지는 관계 표기 요소와 처리로 가장 적절한 것은?",
       "options": [
-        "Relationship Optionality",
-        "Relationship Cardinality",
-        "Relationship Name",
-        "Relationship Type"
+        "관계선택사양(Optionality) — 선 끝의 원(o)과 막대(|) 기호만 바꾼다.",
+        "관계차수(Cardinality) — 1:M 이 M:N 이 되므로 부서와 사원 사이에 소속 엔터티를 두어 1:M 두 개로 푼다.",
+        "관계명(Relationship Name) — 관계 이름을 '겸직' 으로 바꾸면 된다.",
+        "관계차수(Cardinality) — 1:M 이 M:N 이 되므로 사원 테이블에 부서코드1, 부서코드2 칼럼을 둔다."
       ],
       "correctIndex": 1,
-      "explanation": "두 엔터티 간 관계에 참여하는 인스턴스의 수 (1:1, 1:M, M:N) 를 표현하는 것은 관계 차수 (Relationship Cardinality, 또는 Degree) 이다. ① Relationship Optionality (관계 선택사양) 는 필수/선택 참여 여부, ③ Relationship Name (관계 명) 은 관계의 이름 (예: \"소속\", \"보유\"), ④ Relationship Type (관계 유형) 은 식별·비식별 등의 구분에 해당한다.",
+      "explanation": "관계차수는 한 엔터티의 인스턴스 하나에 상대 엔터티 인스턴스가 몇 개 대응하는지를 나타낸다. 사원 하나가 부서 여럿에 속할 수 있게 되면 부서-사원은 1:M 에서 M:N 으로 바뀐다. M:N 은 테이블로 바로 구현할 수 없어 소속(부서코드, 사원번호) 같은 엔터티를 두고 1:M 관계 두 개로 푼다. 정답은 ②번이다. ① 선택사양은 참여가 필수인지 선택인지를 나타낼 뿐 개수와는 관계없다. ③ 이름만 바꾸면 사원.부서코드 하나로는 여러 부서를 담지 못한다. ④ 칼럼을 늘리면 겸직 수가 칼럼 수로 묶이고 같은 의미의 칼럼이 반복되어 제1정규형을 어긴다.",
       "references": [
         {
           "type": "text",
-          "content": "두 개의 엔터티 간 관계에서 참여자의 수를 표현하는 것이며, 가장 일반적인 표현 방법은 1:M, 1:1, M:N 이다."
+          "content": "변경 전: 부서 1 ── M 사원 (사원.부서코드 FK)"
         }
       ]
     },
