@@ -1235,19 +1235,39 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 60,
-    "title": "그룹 내 행 순서 관련 함수에 속하지 않는 함수는?",
+    "title": "아래 EMP 에 대해 결과가 300, 300, 300 (SAL 내림차순)이 되는 식은?",
     "options": [
-      "FIRST_VALUE",
-      "LAST_VALUE",
-      "RANK",
-      "LAG"
+      "LAST_VALUE(SAL) OVER(ORDER BY SAL DESC)",
+      "LAG(SAL) OVER(ORDER BY SAL DESC)",
+      "FIRST_VALUE(SAL) OVER(ORDER BY SAL DESC)",
+      "RANK() OVER(ORDER BY SAL DESC)"
     ],
     "correctIndex": 2,
-    "explanation": "그룹 내 행 순서 관련 함수는 FIRST_VALUE(①), LAST_VALUE(②), LAG(④), LEAD 처럼 정렬된 윈도우에서 특정 위치 행의 값을 가져오는 함수다. RANK 는 순위를 매기는 그룹 내 순위 함수이므로 행 순서 함수에 속하지 않는다(③).",
+    "explanation": "FIRST_VALUE 는 윈도우의 첫 행 값을 돌려준다. ORDER BY 만 쓰면 윈도우는 처음부터 현재 행까지라 첫 행은 늘 300 이다. 정답은 ③번이다. ① LAST_VALUE 는 같은 기본 윈도우의 마지막 행, 즉 현재 행 값을 돌려줘 300, 200, 100 이 된다(전체의 마지막 값을 보려면 ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING 을 줘야 한다). ② LAG 는 앞 행 값이라 NULL, 300, 200 이다. ④ RANK 는 순위 함수라 1, 2, 3 이다.",
     "chapter": "윈도우 함수",
     "_source": "cbt-mock",
     "_origId": "cbt-010",
-    "_cbtOrigNo": 10
+    "_cbtOrigNo": 10,
+    "references": [
+      {
+        "type": "table",
+        "caption": "EMP",
+        "headers": [
+          "SAL"
+        ],
+        "rows": [
+          [
+            "300"
+          ],
+          [
+            "200"
+          ],
+          [
+            "100"
+          ]
+        ]
+      }
+    ]
   },
   {
     "id": 10860,
@@ -1951,19 +1971,56 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 85,
-    "title": "서브쿼리에 대한 설명으로 올바르지 않은 것은?",
+    "title": "아래 SQL 에 대한 설명으로 올바르지 않은 것은?",
     "options": [
-      "서브쿼리는 SELECT, FROM, WHERE 절 등 다양한 위치에서 사용될 수 있다.",
-      "인라인 뷰는 ORDER BY를 사용할 수 있다.",
-      "스칼라 서브쿼리는 둘 이상의 행을 반환할 수 없다.",
-      "서브쿼리는 항상 메인 쿼리보다 먼저 실행된다."
+      "서브쿼리가 바깥의 E.DEPTNO 를 참조하므로 바깥 행마다 그 부서의 평균을 다시 구한다.",
+      "결과는 A, C 두 명이다.",
+      "이 서브쿼리를 SELECT 절로 옮겨 쓰면 행마다 값 하나만 돌려줘야 하는 스칼라 서브쿼리가 된다.",
+      "서브쿼리는 항상 메인 쿼리보다 먼저 한 번만 실행되므로 결과는 전체 평균보다 급여가 높은 C, D 다."
     ],
     "correctIndex": 3,
-    "explanation": "서브쿼리는 일반적으로 메인 쿼리보다 먼저 실행되는 것처럼 보이지만, 항상 그런 것은 아니다. 특히 연관 서브쿼리(Correlated Subquery)는 메인 쿼리의 각 행을 기준으로 반복 실행되므로, 메인 쿼리가 먼저 실행되는 구조이다. 따라서 서브쿼리가 항상 먼저 실행된다는 설명은 옳지 않다.",
+    "explanation": "서브쿼리가 바깥 쿼리의 칼럼(E.DEPTNO)을 쓰는 연관(상관) 서브쿼리는 바깥 행마다 다시 실행된다(①). 부서 평균은 10 → 200, 20 → 450 이라 자기 부서 평균보다 높은 A(300), C(500)가 나온다(②). 정답은 ④번이다. ④ 의 C, D 는 연관이 없는 서브쿼리 AVG(SAL) = 325 를 한 번만 구했을 때의 결과다. 서브쿼리가 늘 먼저 한 번 실행되는 것은 아니다. ③ SELECT 절의 서브쿼리는 스칼라 서브쿼리로, 여러 행을 돌려주면 오류다.",
     "chapter": "ORDER BY",
     "_source": "cbt-mock",
     "_origId": "cbt-036",
-    "_cbtOrigNo": 36
+    "_cbtOrigNo": 36,
+    "references": [
+      {
+        "type": "table",
+        "caption": "EMP",
+        "headers": [
+          "ENAME",
+          "DEPTNO",
+          "SAL"
+        ],
+        "rows": [
+          [
+            "A",
+            "10",
+            "300"
+          ],
+          [
+            "B",
+            "10",
+            "100"
+          ],
+          [
+            "C",
+            "20",
+            "500"
+          ],
+          [
+            "D",
+            "20",
+            "400"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT ENAME\nFROM   EMP E\nWHERE  SAL > (SELECT AVG(SAL)\n              FROM   EMP\n              WHERE  DEPTNO = E.DEPTNO);"
+      }
+    ]
   },
   {
     "id": 10888,
@@ -3310,19 +3367,47 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 129,
-    "title": "Case문에서 ELSE를 생략하면 어떤 현상이 발생되는가?",
+    "title": "아래 T 에 대해 SQL 을 실행했을 때 GRADE 값(ID 순)과 COUNT(GRADE) 의 결과로 옳은 것은?",
     "options": [
-      "ELSE를 생략하고 작성하면 실행 시 ELSE 조건이 참이 되며 오류가 발생한다.",
-      "ELSE 조건이 만족하게 되면 공집합이 리턴 된다.",
-      "ELSE 조건을 만족하게 되면 무시된다.",
-      "ELSE 조건이 만족하게 되면 NULL이 된다."
+      "A, B, NULL / COUNT(GRADE) = 3",
+      "A, B, C / COUNT(GRADE) = 3",
+      "ELSE 가 없어 오류가 난다.",
+      "A, B, NULL / COUNT(GRADE) = 2"
     ],
     "correctIndex": 3,
-    "explanation": "CASE문은 IF~THEN~ELSE를 구현할 수 있는 SQL문이다. 즉, 어떤 조건이 참이면 A를 실행하고 그렇지 않으면 B를 실행하라는 것이다. CASE문에서 ELSE 조건을 생략하면 NULL이 되돌려진다.",
+    "explanation": "CASE 에서 ELSE 를 생략하면 어느 WHEN 에도 맞지 않는 행은 NULL 이 된다(오류가 아니다). 65 는 두 조건 모두 거짓이라 NULL 이다. COUNT(칼럼)은 NULL 을 세지 않으므로 GRADE 의 개수는 A, B 두 개다. 정답은 ④번이다. ① 은 COUNT 가 NULL 까지 센다고 본 것, ② 는 다음 등급이 저절로 붙는다고 본 것이다.",
     "chapter": "WHERE",
     "_source": "cbt-mock",
     "_origId": "cbt-084",
-    "_cbtOrigNo": 84
+    "_cbtOrigNo": 84,
+    "references": [
+      {
+        "type": "table",
+        "caption": "T",
+        "headers": [
+          "ID",
+          "SCORE"
+        ],
+        "rows": [
+          [
+            "1",
+            "95"
+          ],
+          [
+            "2",
+            "75"
+          ],
+          [
+            "3",
+            "65"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT ID,\n       CASE WHEN SCORE >= 90 THEN 'A'\n            WHEN SCORE >= 70 THEN 'B'\n       END AS GRADE\nFROM   T;"
+      }
+    ]
   },
   {
     "id": 10929,

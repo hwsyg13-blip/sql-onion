@@ -1096,3 +1096,6 @@ ERD 선 표기 정리 2차(11-20 14시): 식별자를 다루는 1과목 문항�
 | cbt-054 | INSERT…SELECT 칼럼 수 맞추기, VALUES 안 다중행 서브쿼리 불가, WHERE 빠짐 | 단순 문법 → 칼럼 수 다른 두 테이블 | ③ | PostgreSQL 실행 |
 | cbt-108 | 이름 규칙(문자 시작, _ $ # 허용, 예약어 불가) | 이름 문자열 → CREATE TABLE 4개 | ③ | Oracle 규칙(PostgreSQL 도 EMP_100$ 생성 확인) |
 | cbt-169 | 제약 추가 시 기존 데이터 검사 → 오류 | 문법 고르기 → 위반 데이터가 있을 때 결과 | ② | PostgreSQL 실행(오류, 제약 0개) |
+| cbt-084 | ELSE 생략 → NULL, COUNT 는 NULL 제외 | 현상 설명 → 결과 + COUNT | ④ | PostgreSQL 실행 |
+| cbt-010 | LAST_VALUE 기본 윈도우 함정, FIRST_VALUE·LAG·RANK | 분류 고르기 → 결과에 맞는 식 | ③ | PostgreSQL 실행 |
+| cbt-036 | 연관 서브쿼리는 바깥 행마다 실행(부서 평균 vs 전체 평균) | 일반 설명 → SQL + 데이터 | ④ | PostgreSQL 실행(A, C / 비연관이면 C, D) |
