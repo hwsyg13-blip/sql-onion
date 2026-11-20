@@ -184,7 +184,7 @@
         {
           "type": "erd",
           "caption": "학생·강좌·교수·수강신청 ERD",
-          "mermaid": "erDiagram\n    학생 ||--o{ 수강신청 : \"신청\"\n    강좌 ||--o{ 수강신청 : \"개설\"\n    교수 ||--o{ 강좌 : \"담당\"\n    학생 {\n        string 학번 PK\n        string 이름\n    }\n    강좌 {\n        string 강좌코드 PK\n        string 강좌명\n        string 교수번호 FK\n    }\n    교수 {\n        string 교수번호 PK\n        string 교수명\n    }\n    수강신청 {\n        string 학번 PK,FK\n        string 강좌코드 PK,FK\n        date 신청일자\n        string 성적\n    }"
+          "mermaid": "erDiagram\n    학생 ||--o{ 수강신청 : \"신청\"\n    강좌 ||--o{ 수강신청 : \"개설\"\n    교수 ||..o{ 강좌 : \"담당\"\n    학생 {\n        string 학번 PK\n        string 이름\n    }\n    강좌 {\n        string 강좌코드 PK\n        string 강좌명\n        string 교수번호 FK\n    }\n    교수 {\n        string 교수번호 PK\n        string 교수명\n    }\n    수강신청 {\n        string 학번 PK,FK\n        string 강좌코드 PK,FK\n        date 신청일자\n        string 성적\n    }"
         }
       ]
     },

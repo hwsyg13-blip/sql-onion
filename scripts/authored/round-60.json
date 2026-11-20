@@ -155,7 +155,7 @@
         {
           "type": "erd",
           "caption": "부서·사원·프로젝트참여·프로젝트 ERD",
-          "mermaid": "erDiagram\n    부서 |o--o{ 사원 : \"소속\"\n    사원 ||--o{ 프로젝트참여 : \"참여\"\n    프로젝트 ||--|{ 프로젝트참여 : \"배정\"\n    사원 {\n        string 사번 PK\n        string 부서코드 FK\n    }\n    프로젝트참여 {\n        string 사번 PK,FK\n        string 프로젝트번호 PK,FK\n        date 투입일자\n    }\n    프로젝트 {\n        string 프로젝트번호 PK\n        string 프로젝트명\n    }"
+          "mermaid": "erDiagram\n    부서 |o..o{ 사원 : \"소속\"\n    사원 ||--o{ 프로젝트참여 : \"참여\"\n    프로젝트 ||--|{ 프로젝트참여 : \"배정\"\n    사원 {\n        string 사번 PK\n        string 부서코드 FK\n    }\n    프로젝트참여 {\n        string 사번 PK,FK\n        string 프로젝트번호 PK,FK\n        date 투입일자\n    }\n    프로젝트 {\n        string 프로젝트번호 PK\n        string 프로젝트명\n    }"
         }
       ]
     },
