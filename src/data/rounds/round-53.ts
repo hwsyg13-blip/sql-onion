@@ -1795,7 +1795,7 @@ export const ROUND_53: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT NVL(MIN(COLB), 0) + NVL(MAX(COLC), 0) + SUM(NVL(SCORE, 0))\nFROM   T;"
+        "code": "SELECT NVL(MIN(COLB), 0)\n     + NVL(MAX(COLC), 0)\n     + SUM(NVL(SCORE, 0))\nFROM   T;"
       }
     ]
   },

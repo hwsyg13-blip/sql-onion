@@ -362,7 +362,7 @@ export const ROUND_58: QuizQuestion[] = [
     "references": [
       {
         "type": "sql",
-        "code": "-- 각 문자열이 패턴과 일치하면 한 행이 나온다\nSELECT 'ER-123'  FROM DUAL WHERE REGEXP_LIKE('ER-123',  '^\\w*$');\nSELECT 'abcde'   FROM DUAL WHERE REGEXP_LIKE('abcde',   '^\\w*$');\nSELECT 'SQL2025' FROM DUAL WHERE REGEXP_LIKE('SQL2025', '^\\w*$');\nSELECT 'test_01' FROM DUAL WHERE REGEXP_LIKE('test_01', '^\\w*$');"
+        "code": "-- 각 문자열이 패턴과 일치하면\n-- 한 행이 나온다\nSELECT 'ER-123' FROM DUAL\nWHERE REGEXP_LIKE('ER-123', '^\\w*$');\nSELECT 'abcde' FROM DUAL\nWHERE REGEXP_LIKE('abcde', '^\\w*$');\nSELECT 'SQL2025' FROM DUAL\nWHERE REGEXP_LIKE('SQL2025', '^\\w*$');\nSELECT 'test_01' FROM DUAL\nWHERE REGEXP_LIKE('test_01', '^\\w*$');"
       }
     ]
   },
@@ -458,7 +458,7 @@ export const ROUND_58: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "-- ㄱ. CROSS JOIN\nSELECT COUNT(*) FROM TAB1, TAB2;\n\n-- ㄴ. INNER JOIN\nSELECT COUNT(*) FROM TAB1 A INNER JOIN TAB2 B ON A.ID = B.ID;\n\n-- ㄷ. FULL OUTER JOIN\nSELECT COUNT(*) FROM TAB1 A FULL OUTER JOIN TAB2 B ON A.ID = B.ID;"
+        "code": "-- ㄱ. CROSS JOIN\nSELECT COUNT(*) FROM TAB1, TAB2;\n\n-- ㄴ. INNER JOIN\nSELECT COUNT(*)\nFROM TAB1 A INNER JOIN TAB2 B\n  ON A.ID = B.ID;\n\n-- ㄷ. FULL OUTER JOIN\nSELECT COUNT(*)\nFROM TAB1 A FULL OUTER JOIN TAB2 B\n  ON A.ID = B.ID;"
       }
     ]
   },
@@ -1757,7 +1757,7 @@ export const ROUND_58: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT E.EMPNO\nFROM   EMP E\nWHERE  E.SAL > (SELECT AVG(SAL) FROM EMP WHERE DEPTNO = E.DEPTNO);"
+        "code": "SELECT E.EMPNO\nFROM   EMP E\nWHERE  E.SAL >\n       (SELECT AVG(SAL) FROM EMP\n         WHERE DEPTNO = E.DEPTNO);"
       }
     ]
   },

@@ -572,7 +572,7 @@ export const ROUND_56: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT MAX(COL2) KEEP (DENSE_RANK FIRST ORDER BY COL1) FROM TAB1;"
+        "code": "SELECT MAX(COL2)\n       KEEP (DENSE_RANK FIRST\n             ORDER BY COL1)\nFROM TAB1;"
       }
     ]
   },

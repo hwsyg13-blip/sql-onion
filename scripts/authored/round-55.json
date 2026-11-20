@@ -1670,7 +1670,7 @@
         },
         {
           "type": "sql",
-          "code": "-- (1) SELECT COL1/COL2 FROM T WHERE COL1 = 0   AND COL2 = 300;\n-- (2) SELECT COL1/COL2 FROM T WHERE COL1 = 300 AND COL2 = 0;\n-- (3) SELECT COL1/COL2 FROM T WHERE COL1 = 100 AND COL2 IS NULL;"
+          "code": "-- (1) SELECT COL1/COL2 FROM T\n--     WHERE COL1 = 0 AND COL2 = 300;\n-- (2) SELECT COL1/COL2 FROM T\n--     WHERE COL1 = 300 AND COL2 = 0;\n-- (3) SELECT COL1/COL2 FROM T\n--     WHERE COL1 = 100\n--       AND COL2 IS NULL;"
         }
       ]
     },

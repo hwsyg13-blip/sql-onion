@@ -1234,7 +1234,7 @@ export const ROUND_59: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT *\nFROM   EMP E\nWHERE  SAL > (SELECT MAX(SAL) FROM EMP WHERE DEPTNO = E.DEPTNO);"
+        "code": "SELECT *\nFROM   EMP E\nWHERE  SAL >\n       (SELECT MAX(SAL) FROM EMP\n         WHERE DEPTNO = E.DEPTNO);"
       }
     ]
   },

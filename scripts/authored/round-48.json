@@ -1744,7 +1744,7 @@
         },
         {
           "type": "sql",
-          "code": "-- ㄱ\nSELECT SUM(COL2) FROM T1;\n\n-- ㄴ\nSELECT SUM(COL2) FROM T1 WHERE COL1 > 0;\n\n-- ㄷ\nSELECT SUM(COL2) FROM T1 WHERE COL1 IS NOT NULL OR COL3 IS NULL;\n\n-- ㄹ\nSELECT SUM(COL2) FROM T1 WHERE COL3 < 10;"
+          "code": "-- ㄱ\nSELECT SUM(COL2) FROM T1;\n\n-- ㄴ\nSELECT SUM(COL2) FROM T1\nWHERE COL1 > 0;\n\n-- ㄷ\nSELECT SUM(COL2) FROM T1\nWHERE COL1 IS NOT NULL\n   OR COL3 IS NULL;\n\n-- ㄹ\nSELECT SUM(COL2) FROM T1\nWHERE COL3 < 10;"
         }
       ]
     },

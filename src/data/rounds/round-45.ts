@@ -1551,7 +1551,7 @@ export const ROUND_45: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "-- (가)\nSELECT COL1 FROM T WHERE COL1 IN ('A', 'B') OR COL2 <> 'c';\n\n-- (나)\nSELECT COL1 FROM T WHERE COL1 IN ('A', 'B')\nUNION ALL\nSELECT COL1 FROM T WHERE COL2 <> 'c';\n\n-- (다)\nSELECT COL1 FROM T WHERE COL1 IN ('A', 'B')\nUNION\nSELECT COL1 FROM T WHERE COL2 <> 'c';\n\n-- (라)\nSELECT COL1 FROM T WHERE COL1 = 'A' OR COL1 = 'B' OR COL2 <> 'c';"
+        "code": "-- (가)\nSELECT COL1 FROM T\nWHERE COL1 IN ('A', 'B')\n   OR COL2 <> 'c';\n\n-- (나)\nSELECT COL1 FROM T\nWHERE COL1 IN ('A', 'B')\nUNION ALL\nSELECT COL1 FROM T WHERE COL2 <> 'c';\n\n-- (다)\nSELECT COL1 FROM T\nWHERE COL1 IN ('A', 'B')\nUNION\nSELECT COL1 FROM T WHERE COL2 <> 'c';\n\n-- (라)\nSELECT COL1 FROM T\nWHERE COL1 = 'A' OR COL1 = 'B'\n   OR COL2 <> 'c';"
       }
     ]
   },

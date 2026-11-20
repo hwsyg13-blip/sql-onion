@@ -570,7 +570,7 @@ export const ROUND_60: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT SAL,\n       FIRST_VALUE(SAL) OVER (ORDER BY SAL\n                              ROWS BETWEEN UNBOUNDED PRECEDING\n                                       AND CURRENT ROW) AS MIN_SAL\nFROM   T;"
+        "code": "SELECT SAL,\n       FIRST_VALUE(SAL) OVER (\n         ORDER BY SAL\n         ROWS BETWEEN UNBOUNDED\n              PRECEDING\n              AND CURRENT ROW)\n       AS MIN_SAL\nFROM   T;"
       }
     ]
   },
