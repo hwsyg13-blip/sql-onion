@@ -1,5 +1,5 @@
 // Auto-generated from scripts/authored/ai-mock.json
-// AI 생성 모의고사 풀 (기출 변형) · 1170문항
+// AI 생성 모의고사 풀 (기출 변형) · 1171문항
 // ⚠ 직접 편집 금지. ai-mock.json 수정 후 'node scripts/build-quiz-bank.mjs' 재실행.
 import type { QuizQuestion } from '../quizBank';
 
@@ -4852,6 +4852,63 @@ export const AI_MOCK: QuizQuestion[] = [
     "_source": "cbt-mock",
     "_origId": "cbt-128",
     "_cbtOrigNo": 128
+  },
+  {
+    "id": 10970,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 171,
+    "title": "아래 SQL 에서 FROM 절에 쓴 서브쿼리의 유형과 결과 행 수로 옳은 것은?",
+    "options": [
+      "스칼라 서브쿼리, 2행",
+      "인라인 뷰, 2행",
+      "연관 서브쿼리, 2행",
+      "인라인 뷰, 4행"
+    ],
+    "correctIndex": 1,
+    "explanation": "FROM 절에 쓴 서브쿼리는 인라인 뷰다. 먼저 실행되어 부서별 평균(10 → 200, 20 → 450)이라는 임시 테이블 D 를 만들고, 바깥에서 EMP 와 조인한다. 자기 부서 평균보다 급여가 높은 A(300), C(500) 두 행이 나온다. 정답은 ②번이다. ① 스칼라 서브쿼리는 SELECT 절 등에서 값 하나를 돌려주는 것이다. ③ 이 서브쿼리는 바깥 칼럼을 참조하지 않으므로 연관 서브쿼리가 아니다. ④ 4행은 평균 비교 조건 없이 조인만 했을 때의 행 수다.",
+    "chapter": "서브쿼리",
+    "_source": "cbt-mock",
+    "_origId": "cbt-129",
+    "_cbtOrigNo": 129,
+    "references": [
+      {
+        "type": "table",
+        "caption": "EMP",
+        "headers": [
+          "ENAME",
+          "DEPTNO",
+          "SAL"
+        ],
+        "rows": [
+          [
+            "A",
+            "10",
+            "300"
+          ],
+          [
+            "B",
+            "10",
+            "100"
+          ],
+          [
+            "C",
+            "20",
+            "500"
+          ],
+          [
+            "D",
+            "20",
+            "400"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT E.ENAME\nFROM   EMP E,\n       (SELECT DEPTNO,\n               AVG(SAL) AVG_SAL\n        FROM   EMP\n        GROUP  BY DEPTNO) D\nWHERE  E.DEPTNO = D.DEPTNO\nAND    E.SAL > D.AVG_SAL;"
+      }
+    ]
   },
   {
     "id": 10971,

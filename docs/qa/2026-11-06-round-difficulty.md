@@ -1112,3 +1112,4 @@ ERD 선 표기 정리 2차(11-20 14시): 식별자를 다루는 1과목 문항�
 | cbt-091 | 네 집합 연산자의 중복 처리와 행 수 | 정의 문장 → 데이터 행 수 | ① | PostgreSQL 실행(7, 4, 2, 1) |
 | cbt-141 | EQUI JOIN 은 PK·FK 불필요, NON-EQUI·OUTER 결과 | 정의 문장 → SALGRADE 사례 | ② | PostgreSQL 실행(2행, LEFT 3행, = 조인 0행) |
 | cbt-068 | UNION 은 중복 제거 비용, ORDER BY 스칼라 서브쿼리 | 일반 문장 → SQL 예 포함 | ① | PostgreSQL 실행(ORDER BY 스칼라 서브쿼리 동작 확인) |
+| cbt-129 | FROM 절 서브쿼리 = 인라인 뷰(비연관), 부서 평균 비교 결과 | 이름 고르기 → 유형 + 행 수 | 인라인 뷰, 2행 | PostgreSQL 실행 |
