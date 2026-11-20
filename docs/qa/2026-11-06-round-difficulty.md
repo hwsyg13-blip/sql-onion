@@ -1101,3 +1101,6 @@ ERD 선 표기 정리 2차(11-20 14시): 식별자를 다루는 1과목 문항�
 | cbt-036 | 연관 서브쿼리는 바깥 행마다 실행(부서 평균 vs 전체 평균) | 일반 설명 → SQL + 데이터 | ④ | PostgreSQL 실행(A, C / 비연관이면 C, D) |
 | cbt-020 | ROWNUM Top-N 과 동점, TOP 은 SQL Server, >= ALL 은 최댓값만 | SQL 고르기 → SQL + 결과 설명 | ② | Oracle 규칙(PostgreSQL 로 >= ALL 1행 확인) |
 | cbt-188 | CASCADE·SET NULL 결과와 NOT NULL FK 에 SET NULL | 설명 고르기 → 데이터에서 결과 | ① | PostgreSQL 실행(두 옵션 모두) |
+| cbt-123 | CHAR 공백 채움 비교 vs VARCHAR2 정확 비교, LENGTH | 타입 이름 → 같은 값을 넣은 두 칼럼 | ① | Oracle 규칙(PostgreSQL 은 CHAR 길이를 공백 빼고 셈 — 그래서 Oracle 기준 명시) |
+| cbt-103 | 뷰는 저장 안 함, 기준 테이블 DROP 후 조회 오류, 단순 뷰 DML·집계 뷰 불가 | 일반 설명 → CREATE VIEW 사례 | ④ | 정의로 판정 |
+| cbt-110 | 오름차순 날짜 순서와 DBMS 별 NULL 위치 | 일반 설명 → 데이터 정렬 결과 | ④ | Oracle·SQL Server 규칙 |

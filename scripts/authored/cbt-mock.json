@@ -3167,15 +3167,21 @@
       "_origNo": 103,
       "subject": "2과목",
       "chapter": "관계형 DB와 SELECT",
-      "title": "다음 중 뷰(View)에 대한 설명으로 옳지 않은 것은?",
+      "title": "아래처럼 뷰 V 를 만들었다. 뷰에 대한 설명으로 옳지 않은 것은?",
       "options": [
-        "뷰는 실행할 쿼리를 저장한 것으로 데이터를 저장하지 않는다.",
-        "단일 테이블 기반 뷰는 DML 작업이 가능하다.",
-        "복합 뷰는 DML 작업에 제약이 생길 수 있다.",
-        "테이블이 삭제되어도 뷰는 정상 실행된다."
+        "V 는 데이터를 따로 저장하지 않아, EMP 의 10번 부서 행이 바뀌면 V 조회 결과도 바로 바뀐다.",
+        "V 는 EMP 한 테이블의 칼럼을 그대로 보여 주는 뷰라 V 를 통해 SAL 을 UPDATE 할 수 있다.",
+        "V 를 GROUP BY 로 집계한 뷰로 다시 만들면 V 에 INSERT 할 수 없다.",
+        "EMP 를 DROP 한 뒤에도 V 는 마지막 조회 결과를 보관하고 있어 SELECT 가 정상 실행된다."
       ],
       "correctIndex": 3,
-      "explanation": "뷰(View)는 가상 테이블로 데이터를 저장하지 않으며, SELECT 문을 통해정의된다. 단일 테이블 기반의 단순 뷰는 DML(INSERT, UPDATE, DELETE) 작업이 가능하지만, 복합 뷰는 제약이 있어 일부 또는 모든 DML 작업이 제한된다. 기본 테이블이 삭제되면 뷰는 더이상 정상적으로 작동하지 않으며, 실행 시 오류가 발생한다. 따라서 ④는 뷰의 특성에 어긋나므로 옳지 않은 설명이다."
+      "explanation": "뷰는 SELECT 문을 저장해 둔 가상 테이블이라 데이터를 따로 갖지 않고, 조회할 때마다 기준 테이블을 읽는다(①). 그래서 기준 테이블 EMP 를 DROP 하면 V 를 조회할 때 오류가 난다. 정답은 ④번이다. ② 한 테이블의 칼럼을 그대로 보여 주는 단순 뷰는 DML 이 가능하다. ③ 집계·GROUP BY·DISTINCT 가 들어간 뷰는 원래 행과 1:1 로 대응하지 않아 INSERT·UPDATE 를 할 수 없다.",
+      "references": [
+        {
+          "type": "sql",
+          "code": "CREATE VIEW V AS\nSELECT EMPNO, ENAME, SAL\nFROM   EMP\nWHERE  DEPTNO = 10;"
+        }
+      ]
     },
     {
       "_id": "cbt-104",
@@ -3370,15 +3376,39 @@
       "_origNo": 110,
       "subject": "2과목",
       "chapter": "ORDER BY",
-      "title": "다음은 Order by에 대한 설명이다. 올바르지 않은 것은?",
+      "title": "아래 EMP 를 SELECT ENAME FROM EMP ORDER BY HIRE_DT; 로 조회할 때 DBMS 별 출력 순서로 옳은 것은?",
       "options": [
-        "기본적으로 정렬순서는 오름차순으로 정렬되지만 DESC를 사용하면 내림차순으로 정렬한다.",
-        "오름차순으로 숫자형 데이터 타입을 정렬하면 가장 작은 값부터 출력된다.",
-        "SQL Server에서 오름차순으로 정렬하면 NULL 값이 가장 먼저 나온다.",
-        "날짜형 데이터 타입을 오름차순으로 정렬하면 날짜 값이 가장 늦은 날짜가 먼저 출력된다."
+        "Oracle 과 SQL Server 모두 C, A, B",
+        "Oracle 은 B, C, A",
+        "Oracle 은 A, C, B",
+        "Oracle 은 C, A, B, SQL Server 는 B, C, A"
       ],
       "correctIndex": 3,
-      "explanation": "날짜형도 오름차순(ASC)이면 이른 날짜부터, 즉 작은 값부터 나온다. 가장 늦은 날짜가 먼저 나오는 것은 내림차순(DESC)이므로 ④ 가 올바르지 않다. ① 기본은 오름차순이고 DESC 로 내림차순, ② 숫자 오름차순은 작은 값부터, ③ SQL Server 는 NULL 을 가장 작은 값으로 보아 오름차순에서 맨 앞에 둔다(Oracle 은 맨 뒤)."
+      "explanation": "ORDER BY 의 기본은 오름차순이고, 날짜는 이른 날짜가 먼저 나온다(C 2024 → A 2025). NULL 의 위치는 DBMS 마다 다르다. Oracle 은 NULL 을 가장 큰 값으로 보아 오름차순에서 맨 뒤(C, A, B), SQL Server 는 가장 작은 값으로 보아 맨 앞(B, C, A)에 둔다. 정답은 ④번이다. ③ 은 늦은 날짜를 먼저 둔 내림차순이다. Oracle 에서 NULL 을 앞에 두려면 ORDER BY HIRE_DT NULLS FIRST 를 쓴다.",
+      "references": [
+        {
+          "type": "table",
+          "caption": "EMP",
+          "headers": [
+            "ENAME",
+            "HIRE_DT"
+          ],
+          "rows": [
+            [
+              "A",
+              "2025-03-01"
+            ],
+            [
+              "B",
+              "NULL"
+            ],
+            [
+              "C",
+              "2024-01-05"
+            ]
+          ]
+        }
+      ]
     },
     {
       "_id": "cbt-111",
@@ -3952,15 +3982,21 @@
       "_origNo": 123,
       "subject": "2과목",
       "chapter": "관계형 DB와 SELECT",
-      "title": "데이터 유형에 대한 설명 중 틀린 것은 무엇인가?",
+      "title": "Oracle 에서 C CHAR(5), V VARCHAR2(5) 칼럼에 둘 다 'AB' 를 넣었다. 설명으로 틀린 것은?",
       "options": [
-        "VARCHAR 유형은 가변 길이 숫자형이다.",
-        "CHAR 유형은 고정 길이 문자형이다.",
-        "NUMERIC 유형은 숫자형 데이터를 표현한다.",
-        "DATE 유형은 날짜 데이터를 다룰 때 사용한다."
+        "WHERE V = 'AB ' (뒤에 공백 하나)로 조회하면 1행이 나온다.",
+        "C 에는 'AB' 뒤에 공백 3개가 채워져 LENGTH(C) 는 5 다.",
+        "WHERE C = 'AB' 로 조회하면 1행이 나온다.",
+        "LENGTH(V) 는 2 다."
       ],
       "correctIndex": 0,
-      "explanation": "VARCHAR 는 가변 길이 '문자형' 이므로 숫자형이라고 한 ① 이 틀리다. CHAR 는 고정 길이 문자형(②), NUMERIC 은 숫자형(③), DATE 는 날짜형(④)으로 맞다."
+      "explanation": "CHAR 는 고정 길이라 남는 자리를 공백으로 채워 'AB   '(5자리)로 저장한다(②). CHAR 끼리 또는 CHAR 와 문자 리터럴을 비교할 때는 짧은 쪽에 공백을 채워 비교하므로 C = 'AB' 는 참이다(③). VARCHAR2 는 가변 길이라 'AB' 두 글자만 저장한다(④). VARCHAR2 비교는 공백도 한 글자로 보므로 'AB' 와 'AB ' 는 다르다. 그래서 ① 은 0행이다. 정답은 ①번이다.",
+      "references": [
+        {
+          "type": "sql",
+          "code": "CREATE TABLE T (C CHAR(5),\n                V VARCHAR2(5));\nINSERT INTO T VALUES ('AB', 'AB');"
+        }
+      ]
     },
     {
       "_id": "cbt-124",
