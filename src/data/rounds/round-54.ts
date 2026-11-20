@@ -862,15 +862,15 @@ export const ROUND_54: QuizQuestion[] = [
     "round": 54,
     "subject": "2과목",
     "number": 22,
-    "title": "아래 INNER JOIN 의 결과에서 중복되어 등장하는 이름으로 옳은 것은?",
+    "title": "아래 두 테이블을 EMPNO 로 INNER JOIN 한 결과에 대한 설명으로 옳은 것은?",
     "options": [
-      "KIM 이 두 번 반복 출력된다.",
-      "LEE 가 두 번 반복 출력된다.",
-      "PARK 이 두 번 반복 출력된다.",
-      "중복 없이 각 한 번만 출력된다."
+      "KIM 이 두 번 나와 결과는 3행이고, COUNT(DISTINCT EMP.EMPNO) 는 2 다.",
+      "LEE 가 두 번 나와 결과는 3행이다.",
+      "PARK 도 DEPT 가 NULL 로 나와 결과는 4행이다.",
+      "EMPNO 4 의 DEPT 30 도 ENAME 이 NULL 로 나와 결과는 4행이다."
     ],
     "correctIndex": 0,
-    "explanation": "INNER JOIN 은 EMPNO 가 같은 행끼리 짝을 짓는다. KIM(1)은 DEPT_EMP 에 1 이 두 번(10, 20) 있어 두 행이 나오고, LEE(2)는 한 번, PARK(3)은 짝이 없어 빠진다. 따라서 KIM 이 두 번 출력된다(①). ② LEE 는 짝이 하나, ③ PARK 은 짝이 없어 나오지 않으며, ④ KIM 이 두 번 나오므로 중복이 있다.",
+    "explanation": "INNER JOIN 은 양쪽에 짝이 있는 행만 남긴다. EMPNO 1 은 DEPT_EMP 에 두 행(10, 20)이 있어 KIM 이 두 번, EMPNO 2 는 LEE 한 번 나와 3행이다. 서로 다른 사원은 1, 2 두 명이다. 정답은 ①번이다. ③ PARK(3)과 ④ EMPNO 4 는 상대 테이블에 짝이 없어 빠진다. NULL 로 채워 남기려면 OUTER JOIN 을 써야 한다.",
     "_source": "authored",
     "references": [
       {
@@ -914,6 +914,10 @@ export const ROUND_54: QuizQuestion[] = [
           [
             "2",
             "10"
+          ],
+          [
+            "4",
+            "30"
           ]
         ]
       }
@@ -926,15 +930,15 @@ export const ROUND_54: QuizQuestion[] = [
     "round": 54,
     "subject": "2과목",
     "number": 23,
-    "title": "아래 LEFT OUTER JOIN 결과에서 특정 행이 NULL 로 출력되는 이름은?",
+    "title": "아래 SQL 의 결과에 대한 설명으로 옳은 것은?",
     "options": [
-      "SMITH 행의 DEPT 컬럼이 NULL 로 출력된다.",
-      "KIM 행의 DEPT 컬럼이 NULL 로 출력된다.",
-      "LEE 행의 DEPT 컬럼이 NULL 로 출력된다.",
-      "모든 행이 NULL 없이 출력된다."
+      "SMITH 와 LEE 의 DEPT 가 NULL 로 나와 3행이다.",
+      "SMITH 만 DEPT 가 NULL 이고 LEE 는 20 으로 나와 3행이다.",
+      "KIM 한 행만 나온다.",
+      "LEE 는 조건에 맞지 않아 빠지고 KIM, SMITH 2행이 나온다."
     ],
     "correctIndex": 0,
-    "explanation": "LEFT OUTER JOIN 은 왼쪽 EMP 의 모든 행을 보존한다. KIM(1)과 LEE(3)는 DEPT_EMP 에 짝이 있어 DEPT 가 10, 20 으로 나오고, SMITH(2)는 짝이 없어 DEPT 가 NULL 로 출력된다(①). ② KIM 과 ③ LEE 는 짝이 있어 DEPT 가 채워지고, ④ SMITH 행에는 NULL 이 생긴다.",
+    "explanation": "LEFT JOIN 의 ON 절 조건은 오른쪽 테이블에서 짝을 찾을 때만 쓰이고, 왼쪽 EMP 의 행은 모두 남는다. LEE 의 짝(DEPT 20)은 D.DEPT = 10 에 맞지 않아 짝이 없는 것으로 보고 NULL 이 된다. 결과는 (KIM, 10), (SMITH, NULL), (LEE, NULL) 3행이다. 정답은 ①번이다. ③ 은 D.DEPT = 10 을 WHERE 절로 옮겼을 때의 결과다. WHERE 는 조인이 끝난 뒤 걸러서 NULL 행까지 빠진다.",
     "_source": "authored",
     "references": [
       {
@@ -976,6 +980,10 @@ export const ROUND_54: QuizQuestion[] = [
             "20"
           ]
         ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT E.ENAME, D.DEPT\nFROM   EMP E\nLEFT   JOIN DEPT_EMP D\n  ON   E.EMPNO = D.EMPNO\n AND   D.DEPT = 10;"
       }
     ]
   },

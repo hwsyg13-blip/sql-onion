@@ -1133,3 +1133,7 @@ ERD 선 표기 정리 2차(11-20 14시): 식별자를 다루는 1과목 문항�
 | 51-2-48 | 단순 CASE 는 = 비교라 NULL 을 못 잡음, ELSE 없으면 NULL | 상수 CASE → NULL 한 행에 세 CASE | ② | PostgreSQL 실행 |
 | 52-2-25 | MIN 에 NVL(0) 을 씌우면 결과가 바뀜(SUM·MAX·COUNT 는 그대로) | MAX vs MIN 비교 → NULL 있는 집계 | ③ | PostgreSQL 실행 |
 | 52-2-22 | LIKE 의 _ 개수와 % 위치 | 패턴 고르기 → 패턴 + 결과 짝 | ③ | PostgreSQL 실행 |
+| 53-2-35 | 카티션 곱 M×N(M+N 아님)과 WHERE 비교 후 행 수 | 행 수만 → 데이터 + WHERE | 15, 6 | PostgreSQL 실행 |
+| 53-2-43 | Oracle LIKE 대소문자 구분, VARCHAR2 끝 공백 | 세 이름 → 대소문자·공백 함정 | 2명 | PostgreSQL 실행. verify-sql-results(SQLite)는 LIKE 대소문자 무시라 불일치로 잡혀 `PRAGMA case_sensitive_like = ON` 추가(다른 문항 결과 변화 없음) |
+| 54-2-22 | INNER JOIN 은 짝 없는 양쪽 행 제거, 1:M 이면 중복 | 이름 고르기 → 행 수·DISTINCT | ① | PostgreSQL 실행 |
+| 54-2-23 | LEFT JOIN 의 ON 조건 vs WHERE | NULL 이름 고르기 → ON 에 조건 추가 | ① | PostgreSQL 실행 |

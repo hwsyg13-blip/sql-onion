@@ -90,6 +90,8 @@ for (const f of fs.readdirSync(DIR).filter(f => /\.json$/.test(f)).sort()) {
     const raw = sqls[0].code || '';
     if (SKIP.test(raw) || /\(\s*\?\s*\)|\(\s{3,}\)|\[\s*\?\s*\]|_{3,}|[ㄱ-ㅎ]\s*[).]|[ⓐ-ⓩ①-④]/.test(raw) || !/^\s*(SELECT|WITH|\()/i.test(raw.replace(/--[^\n]*\n/g, ''))) { report.skipped++; return; }
     const db = new DatabaseSync(':memory:');
+    // Oracle 처럼 LIKE 가 대소문자를 구분하게 한다(SQLite 기본은 구분 안 함).
+    db.exec('PRAGMA case_sensitive_like = ON');
     try {
       for (const [i, t] of tables.entries()) {
         const name = tableName(t.caption, i);

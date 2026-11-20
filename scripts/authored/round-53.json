@@ -1081,33 +1081,61 @@
     {
       "subject": "2과목",
       "number": 35,
-      "title": "아래 두 테이블에 대한 CROSS JOIN 의 결과 행 수로 옳은 것은? (T1 의 행 수 = M, T2 의 행 수 = N)",
+      "title": "아래 T1, T2 의 CROSS JOIN 결과 행 수와, 여기에 WHERE T1.A > T2.B 를 붙였을 때의 행 수로 옳은 것은?",
       "options": [
-        "15",
-        "8",
-        "5",
-        "3"
+        "15행, 6행",
+        "8행, 6행",
+        "15행, 9행",
+        "8행, 3행"
       ],
       "correctIndex": 0,
-      "explanation": "CROSS JOIN 은 조인 조건 없이 두 테이블의 모든 행을 조합하므로 결과 행 수는 M × N 이다. M = 3, N = 5 이면 15 행이다(①). ② 8 은 M + N 을 더한 잘못된 계산이고, ③ 5 와 ④ 3 은 한 테이블의 행 수다.",
+      "explanation": "CROSS JOIN 은 모든 행끼리 짝을 지어 5 × 3 = 15행이다(8 은 더한 값이다). WHERE 는 그 15쌍 중 A > B 인 것만 남긴다. B = 1 이면 A 가 2~5 로 4쌍, B = 3 이면 4·5 로 2쌍, B = 5 이면 없음 → 6행이다. 정답은 ①번이다. WHERE 로 두 테이블 칼럼을 비교하면 결과는 비등가(NON-EQUI) 조인과 같다.",
       "references": [
         {
           "type": "table",
-          "caption": "테이블 카디널리티 (M = T1 행 수, N = T2 행 수)",
+          "caption": "T1",
           "headers": [
-            "M",
-            "N"
+            "A"
           ],
           "rows": [
             [
-              "3",
+              "1"
+            ],
+            [
+              "2"
+            ],
+            [
+              "3"
+            ],
+            [
+              "4"
+            ],
+            [
+              "5"
+            ]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "T2",
+          "headers": [
+            "B"
+          ],
+          "rows": [
+            [
+              "1"
+            ],
+            [
+              "3"
+            ],
+            [
               "5"
             ]
           ]
         },
         {
           "type": "sql",
-          "code": "SELECT *\nFROM   T1 CROSS JOIN T2;"
+          "code": "SELECT *\nFROM   T1 CROSS JOIN T2\nWHERE  T1.A > T2.B;"
         }
       ]
     },
@@ -1370,15 +1398,15 @@
     {
       "subject": "2과목",
       "number": 43,
-      "title": "아래 NAMES 테이블에서 LIKE '%n' 조건에 매칭되는 이름의 수로 옳은 것은?",
+      "title": "Oracle 의 아래 NAMES 테이블(NAME VARCHAR2)에서 LIKE '%n' 조건에 맞는 행의 수로 옳은 것은?",
       "options": [
         "1명",
         "2명",
         "3명",
-        "0명"
+        "4명"
       ],
       "correctIndex": 1,
-      "explanation": "LIKE '%n' 은 앞에 무엇이 와도 되고 마지막 글자가 소문자 n 인 문자열과 매칭된다. Kevin, Jason 은 n 으로 끝나고 Tom 은 m 으로 끝나므로 2명이다(②). ① 1명은 둘 중 하나를 놓친 값, ③ 3명은 Tom 까지 센 값이다.",
+      "explanation": "'%n' 은 마지막 글자가 소문자 n 인 값이다. Oracle 의 문자 비교는 대소문자를 구분하므로 JASON(대문자 N)은 맞지 않는다. VARCHAR2 는 입력한 공백을 그대로 저장해 'Glenn ' 의 마지막 글자는 공백이라 맞지 않는다. Kevin, Ann 두 행이다. 정답은 ②번이다. 대소문자를 가리지 않으려면 LOWER(NAME) LIKE '%n', 뒤 공백을 무시하려면 RTRIM(NAME) LIKE '%n' 처럼 쓴다.",
       "references": [
         {
           "type": "table",
@@ -1391,10 +1419,16 @@
               "Kevin"
             ],
             [
-              "Jason"
+              "JASON"
             ],
             [
               "Tom"
+            ],
+            [
+              "Ann"
+            ],
+            [
+              "Glenn (끝에 공백 1칸)"
             ]
           ]
         },
