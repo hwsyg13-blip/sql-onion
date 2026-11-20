@@ -1,5 +1,5 @@
 // Auto-generated from scripts/authored/ai-mock.json
-// AI 생성 모의고사 풀 (기출 변형) · 1165문항
+// AI 생성 모의고사 풀 (기출 변형) · 1166문항
 // ⚠ 직접 편집 금지. ai-mock.json 수정 후 'node scripts/build-quiz-bank.mjs' 재실행.
 import type { QuizQuestion } from '../quizBank';
 
@@ -2464,19 +2464,60 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 105,
-    "title": "ANSI/ISO 표준 SQL에서 두 테이블 간에 동일한 칼럼 이름을 가지는 것을 모두 출력하는 조인 방식은 무엇인가?",
+    "title": "두 테이블에서 이름이 같은 칼럼을 모두 조인 조건으로 쓰는 조인 방식과, 아래 두 테이블에 그 방식을 쓴 결과 행 수로 옳은 것은?",
     "options": [
-      "Inner Join",
-      "Cross Join",
-      "Natural Join",
-      "Using"
+      "INNER JOIN ... USING (DEPTNO), 2행",
+      "CROSS JOIN, 4행",
+      "NATURAL JOIN, 0행",
+      "NATURAL JOIN, 2행"
     ],
     "correctIndex": 2,
-    "explanation": "두 테이블에서 이름이 같은 컬럼을 모두 찾아 자동으로 등가 조인하는 방식은 NATURAL JOIN 이다(③). INNER JOIN(①)은 ON 이나 USING 으로 조건을 직접 지정해야 하고, CROSS JOIN(②)은 조건 없는 카티션 곱이며, USING(④)은 조인 방식이 아니라 같은 이름 컬럼을 지정하는 절이다.",
+    "explanation": "NATURAL JOIN 은 두 테이블에서 이름이 같은 칼럼을 모두 찾아 같은 값끼리 잇는다. 여기서는 DEPTNO 뿐 아니라 NAME(사원 이름과 부서 이름)도 이름이 같아 둘 다 조건이 되고, 'KIM' 과 '영업' 처럼 NAME 이 맞는 행이 없어 0행이다. 정답은 ③번이다. ④ 2행은 DEPTNO 로만 이었을 때의 결과로, ① 처럼 USING (DEPTNO) 로 칼럼을 직접 정해야 나온다. ② CROSS JOIN 은 조건 없이 2 × 2 = 4행이다.",
     "chapter": "표준 조인",
     "_source": "cbt-mock",
     "_origId": "cbt-059",
-    "_cbtOrigNo": 59
+    "_cbtOrigNo": 59,
+    "references": [
+      {
+        "type": "table",
+        "caption": "EMP",
+        "headers": [
+          "EMPNO",
+          "DEPTNO",
+          "NAME"
+        ],
+        "rows": [
+          [
+            "1",
+            "10",
+            "KIM"
+          ],
+          [
+            "2",
+            "20",
+            "LEE"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "DEPT",
+        "headers": [
+          "DEPTNO",
+          "NAME"
+        ],
+        "rows": [
+          [
+            "10",
+            "영업"
+          ],
+          [
+            "20",
+            "개발"
+          ]
+        ]
+      }
+    ]
   },
   {
     "id": 10905,
@@ -6252,19 +6293,25 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 234,
-    "title": "다음 SQL 문장 중 COLUMN1의 값이 널(NULL)이 아닌 경우를 찾아내는 문장으로 가장 적절한 것은?",
+    "title": "T 의 COL1 값이 10, NULL, 20 일 때 아래 두 SQL 의 결과 행 수로 옳은 것은?",
     "options": [
-      "SELECT * FROM T_TEST WHERE COLUMN1 IS NOT NULL;",
-      "SELECT * FROM T_TEST WHERE COLUMN1 < > NULL;",
-      "SELECT * FROM T_TEST WHERE COLUMN1 != NULL;",
-      "SELECT * FROM T_TEST WHERE COLUMN1 NOT NULL;"
+      "㉠ 2, ㉡ 0",
+      "㉠ 2, ㉡ 2",
+      "㉠ 3, ㉡ 0",
+      "㉠ 2, ㉡ 1"
     ],
     "correctIndex": 0,
-    "explanation": "NULL 은 = · <> · != 로 비교하면 결과가 항상 UNKNOWN 이라 아무 행도 나오지 않는다(②③). 값이 있는 행은 IS NOT NULL 로 찾는다(①). ④ 는 IS 가 빠져 문법 오류다.",
+    "explanation": "NULL 여부는 IS NULL, IS NOT NULL 로만 판정한다. ㉠ 은 10, 20 두 행이다. ㉡ 처럼 NULL 과 <>, = 같은 비교 연산을 하면 값이 무엇이든 결과가 UNKNOWN 이라 WHERE 를 통과하는 행이 없다. 10 <> NULL 도 참이 아니다. 오류 없이 0행이 나온다. 정답은 ①번이다. != NULL 도 같은 이유로 0행이다.",
     "chapter": "WHERE",
     "_source": "cbt-mock",
     "_origId": "cbt-193",
-    "_cbtOrigNo": 193
+    "_cbtOrigNo": 193,
+    "references": [
+      {
+        "type": "sql",
+        "code": "-- ㉠\nSELECT * FROM T\nWHERE  COL1 IS NOT NULL;\n\n-- ㉡\nSELECT * FROM T\nWHERE  COL1 <> NULL;"
+      }
+    ]
   },
   {
     "id": 11034,
@@ -6292,19 +6339,58 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 236,
-    "title": "다음 중 DEPT 테이블에 존재하지 않는 부서의 사원을 삭제하는 SQL은? (단, DEPTNO은 PK이다.)",
+    "title": "DEPT 에 없는 부서 번호(30)를 가진 사원만 지우고, 부서가 정해지지 않은(NULL) 사원은 남기려 한다. 옳은 SQL 은? (DEPT.DEPTNO 는 PK)",
     "options": [
       "DELETE FROM EMP WHERE DEPTNO NOT IN (SELECT DEPTNO FROM DEPT);",
-      "DELETE * FROM EMP WHERE DEPTNO !=ALL (SELECT DEPTNO FROM DEPT);",
-      "DELETE FROM EMP WHERE NOT EXISTS DEPT.DEPTNO = EMP.DEPTNO;",
-      "DELETE FROM EMP WHERE DEPTNO IS NULL;"
+      "DELETE FROM EMP E WHERE NOT EXISTS (SELECT 1 FROM DEPT D WHERE D.DEPTNO = E.DEPTNO);",
+      "DELETE FROM EMP WHERE DEPTNO IS NULL;",
+      "DELETE FROM EMP WHERE DEPTNO NOT IN (SELECT DEPTNO FROM DEPT) OR DEPTNO IS NULL;"
     ],
     "correctIndex": 0,
-    "explanation": "DEPT 에 없는 부서번호를 가진 사원은 DEPTNO NOT IN (SELECT DEPTNO FROM DEPT) 로 찾는다(①). DEPTNO 가 DEPT 의 PK 라 서브쿼리 결과에 NULL 이 없으므로 NOT IN 을 써도 안전하다. ② DELETE * 는 문법 오류, ③ NOT EXISTS 뒤에는 괄호로 감싼 서브쿼리가 와야 하고, ④ 는 부서번호가 비어 있는 사원만 지운다.",
+    "explanation": "NOT IN 은 비교 대상이 NULL 이면 결과가 UNKNOWN 이라 그 행을 고르지 않는다. EMPNO 3(NULL)은 남고, 30 인 EMPNO 2 만 지워진다. 정답은 ①번이다. ② NOT EXISTS 는 짝이 되는 DEPT 행이 없으면 참이다. NULL 은 어떤 DEPTNO 와도 같지 않아 EMPNO 3 까지 지운다. ③ 은 NULL 인 3 만 지운다. ④ 는 2 와 3 을 모두 지운다. 같은 목적이라도 NULL 이 있으면 NOT IN 과 NOT EXISTS 의 결과가 달라진다는 점이 핵심이다.",
     "chapter": "서브쿼리",
     "_source": "cbt-mock",
     "_origId": "cbt-195",
-    "_cbtOrigNo": 195
+    "_cbtOrigNo": 195,
+    "references": [
+      {
+        "type": "table",
+        "caption": "EMP",
+        "headers": [
+          "EMPNO",
+          "DEPTNO"
+        ],
+        "rows": [
+          [
+            "1",
+            "10"
+          ],
+          [
+            "2",
+            "30"
+          ],
+          [
+            "3",
+            "NULL"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "DEPT",
+        "headers": [
+          "DEPTNO"
+        ],
+        "rows": [
+          [
+            "10"
+          ],
+          [
+            "20"
+          ]
+        ]
+      }
+    ]
   },
   {
     "id": 11037,
@@ -12309,6 +12395,27 @@ export const AI_MOCK: QuizQuestion[] = [
     "_source": "sqld-1140",
     "_origId": "sqld-0229",
     "_category": "DML",
+    "_correctRate": 10
+  },
+  {
+    "id": 11228,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 429,
+    "title": "ANSI/ISO 표준 SQL에서 두 테이블 간에 동일한 칼럼 이름을 가지는 것을 모두 출력하는 조인 방식은 무엇인가?",
+    "options": [
+      "Using",
+      "Natural Join",
+      "Cross Join",
+      "Inner Join"
+    ],
+    "correctIndex": 1,
+    "explanation": "NATURAL JOIN은 두 테이블 간에 동일한 칼럼 이름을 가진 것을 모두 출력하는 조인 방법이다.\r",
+    "chapter": "조인",
+    "_source": "sqld-1140",
+    "_origId": "sqld-0232",
+    "_category": "JOIN",
     "_correctRate": 10
   },
   {

@@ -1090,3 +1090,6 @@ ERD 선 표기 정리 2차(11-20 14시): 식별자를 다루는 1과목 문항�
 | cbt-085 | N-1 조인 조건, 빠지면 카티션 곱으로 행이 불어남 | 개수만 → 개수 + 빠진 SQL 행 수 | 3개, 8행 | PostgreSQL 실행(8행, 조건 넣으면 4행) |
 | cbt-207 | 윈도우 절 네 가지의 합계 차이 | 설명 고르기 → 결과에 맞는 절 | ① | PostgreSQL 실행 |
 | cbt-178 | ROW_NUMBER·RANK·DENSE_RANK·NTILE 동점 처리 | 이름 고르기 → 결과로 판단 | ③ | PostgreSQL 실행 |
+| cbt-195 | NULL 이 있으면 NOT IN 과 NOT EXISTS 결과가 다름 | 문법 오류 섞인 보기 → 같은 목적 DELETE 4개 | ① | PostgreSQL 실행(RETURNING 으로 지워지는 행 확인) |
+| cbt-193 | NULL 과 <> 비교는 0행(오류 아님) | 문법 고르기 → 행 수 계산 | ① | PostgreSQL 실행 |
+| cbt-059 | NATURAL JOIN 은 이름 같은 칼럼 전부(NAME 까지) | 이름 고르기 → 방식 + 행 수 | NATURAL, 0행 | PostgreSQL 실행 |
