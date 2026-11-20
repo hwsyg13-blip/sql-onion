@@ -1107,3 +1107,5 @@ ERD 선 표기 정리 2차(11-20 14시): 식별자를 다루는 1과목 문항�
 | cbt-098 | 윈도우 함수는 행 수 유지(GROUP BY 와 비교), PARTITION 없으면 전체 | 일반 설명 → 두 SQL 결과 | ① | PostgreSQL 실행(검증기는 두 문장이라 오류로 셈) |
 | cbt-100 | 집합 연산 ORDER BY 는 마지막 한 번 | 일반 설명 → SQL 사례 | ① | PostgreSQL 실행(첫 SELECT 뒤 ORDER BY 문법 오류) |
 | cbt-176 | FULL OUTER 결과, Oracle (+) 양쪽 불가 | 일반 설명 → 데이터 결과 | ③ | PostgreSQL 실행 + Oracle 규칙(ORA-01468) |
+| cbt-185 | LENGTH 는 공백·한글도 한 글자, 음수 SUBSTR, 날짜 차, INSTR n번째 | 영문 LENGTH 하나 → 함수 4개 | ① | Oracle 규칙(2025년 2월 28일 확인) |
+| cbt-139 | ROWNUM > 1 은 0행, 조건 통과 뒤 ROWNUM | 잘못된 사용 → 0행 찾기 | ③ | Oracle 규칙 |

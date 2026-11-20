@@ -4438,15 +4438,47 @@
       "_origNo": 139,
       "subject": "2과목",
       "chapter": "TOP N 쿼리",
-      "title": "다음의 내용 중에서 ROWNUM을 올바르게 사용하지 않은 것은?",
+      "title": "아래 EMP(5행, 그중 10번 부서는 2명)에서 결과가 한 행도 나오지 않는 SQL 은? (Oracle 기준)",
       "options": [
-        "SELECT ROWNUM, ENAME FROM EMP;",
-        "SELECT EMPNO FROM EMP WHERE ROWNUM=1;",
-        "SELECT ENAME FROM EMP WHERE ROWNUM=2;",
-        "SELECT DEPTNO FROM EMP WHERE ROWNUM < 10;"
+        "SELECT EMPNO FROM EMP WHERE ROWNUM = 1;",
+        "SELECT EMPNO FROM EMP WHERE ROWNUM < 3;",
+        "SELECT EMPNO FROM EMP WHERE ROWNUM > 1;",
+        "SELECT EMPNO FROM EMP WHERE ROWNUM <= 5 AND DEPTNO = 10;"
       ],
       "correctIndex": 2,
-      "explanation": "ROWNUM 은 결과 행이 나오는 순서대로 1, 2, 3 … 을 붙인다. 첫 행이 ROWNUM = 1 이어야 다음 행이 2 가 될 수 있으므로, WHERE ROWNUM = 2 는 첫 행부터 탈락해 아무 행도 나오지 않는다(③). ROWNUM = 1, ROWNUM < 10 은 정상이고, 특정 순번을 고르려면 인라인 뷰에서 ROWNUM 을 별칭으로 만든 뒤 바깥에서 거른다."
+      "explanation": "ROWNUM 은 조건을 통과한 행에 1부터 차례로 붙는다. ROWNUM > 1 은 첫 행이 ROWNUM 1 이라 탈락하고, 다음 행도 다시 1 을 받아 탈락하므로 끝까지 한 행도 나오지 않는다. 정답은 ③번이다. ① 은 1행, ② 는 2행이다. ④ 는 DEPTNO = 10 을 통과한 2명에게 ROWNUM 1, 2 가 붙어 2행이 나온다. 두 번째 행 이후를 고르려면 인라인 뷰에서 ROWNUM 을 별칭으로 굳힌 뒤 바깥에서 거른다.",
+      "references": [
+        {
+          "type": "table",
+          "caption": "EMP",
+          "headers": [
+            "EMPNO",
+            "DEPTNO"
+          ],
+          "rows": [
+            [
+              "1",
+              "20"
+            ],
+            [
+              "2",
+              "10"
+            ],
+            [
+              "3",
+              "30"
+            ],
+            [
+              "4",
+              "10"
+            ],
+            [
+              "5",
+              "20"
+            ]
+          ]
+        }
+      ]
     },
     {
       "_id": "cbt-140",
@@ -5624,15 +5656,16 @@
       "_origNo": 185,
       "subject": "2과목",
       "chapter": "그룹 함수",
-      "title": "다음 중 옳지 않은 것은?",
+      "title": "Oracle 에서 함수의 결과가 옳지 않은 것은?",
       "options": [
-        "Length('YOUNGJIN') = 9",
-        "CASE 문은 If - Then - Else를 구현 할 수 있다.",
-        "(날짜1 - 날짜2)의 결과는 일수가 나온다.",
-        "COUNT(표현식)은 표현식의 값이 NULL 값인 것을 제외한 행 수를 출력한다."
+        "LENGTH('SQL 양파') = 5",
+        "SUBSTR('ABCDE', -3, 2) = 'CD'",
+        "TO_DATE('2025-03-01', 'YYYY-MM-DD') - TO_DATE('2025-02-01', 'YYYY-MM-DD') = 28",
+        "INSTR('ABCABC', 'B', 1, 2) = 5"
       ],
       "correctIndex": 0,
-      "explanation": "LENGTH('YOUNGJIN') 은 Y·O·U·N·G·J·I·N 8글자라 8 이므로 9 라고 한 ① 이 옳지 않다. CASE 문은 IF-THEN-ELSE 를 구현하고(②), 날짜끼리 빼면 일수가 나오며(③), COUNT(표현식)은 NULL 인 행을 빼고 센다(④)."
+      "explanation": "LENGTH 는 글자 수를 센다. 'SQL 양파' 는 S, Q, L, 공백, 양, 파 여섯 글자라 6 이다(공백도 한 글자, 한글도 한 글자). 정답은 ①번이다. 바이트 수를 세는 LENGTHB 는 문자 집합에 따라 값이 달라진다. ② 시작 위치가 음수면 뒤에서 센다. 뒤에서 세 번째 C 부터 두 글자라 'CD' 다. ③ 날짜끼리 빼면 일수가 나오고 2025년 2월은 28일이다. ④ 1번 자리부터 찾은 두 번째 'B' 는 5번 자리다.",
+      "references": []
     },
     {
       "_id": "cbt-186",
