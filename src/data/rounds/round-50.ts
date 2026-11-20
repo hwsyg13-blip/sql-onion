@@ -1312,16 +1312,22 @@ export const ROUND_50: QuizQuestion[] = [
     "round": 50,
     "subject": "2과목",
     "number": 35,
-    "title": "아래 설명 중 옳지 않은 것은?",
+    "title": "두 테이블 A(이름), B(성명)에 대한 집합 연산 SQL ㉠~㉣ 중 오류가 나는 것만 모두 고른 것은?",
     "options": [
-      "INTERSECT 는 두 집합의 교집합을 반환한다.",
-      "UNION 은 중복을 제거한다.",
-      "EXCEPT 는 차집합을 반환한다.",
-      "일반 집합 연산은 ORDER BY 구문으로 사용할 수 없다."
+      "㉡",
+      "㉢",
+      "㉠, ㉡",
+      "㉡, ㉢"
     ],
     "correctIndex": 3,
-    "explanation": "INTERSECT 는 교집합(①), UNION 은 중복을 제거한 합집합(②), EXCEPT(Oracle 의 MINUS)는 차집합(③)이다. 집합 연산 결과에도 마지막 SELECT 뒤에 ORDER BY 를 한 번 써서 정렬할 수 있으므로 ④ 가 옳지 않다.",
-    "_source": "authored"
+    "explanation": "집합 연산의 ORDER BY 는 전체 결과에 한 번만, 맨 마지막에 쓴다. 결과의 칼럼 이름은 첫 번째 SELECT 를 따른다. ㉠ 은 첫 번째 SELECT 의 별칭 N 으로 정렬해 문제없다. ㉡ 은 첫 번째 SELECT 뒤에 ORDER BY 를 넣어 오류다. ㉢ 의 성명 은 두 번째 SELECT 의 칼럼이라 결과 칼럼 이름이 아니므로 오류다. ㉣ 은 칼럼 위치 번호로 정렬해 문제없다. 정답은 ④번이다. ① 은 두 번째 SELECT 의 이름도 쓸 수 있다고 본 것이고, ② 는 중간 ORDER BY 를 허용한 것, ③ 은 별칭으로는 정렬할 수 없다고 본 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "-- ㉠\nSELECT 이름 AS N FROM A\nUNION\nSELECT 성명 FROM B\nORDER BY N;\n-- ㉡\nSELECT 이름 FROM A\nORDER BY 이름\nUNION\nSELECT 성명 FROM B;\n-- ㉢\nSELECT 이름 FROM A\nUNION\nSELECT 성명 FROM B\nORDER BY 성명;\n-- ㉣\nSELECT 이름 FROM A\nUNION\nSELECT 성명 FROM B\nORDER BY 1;"
+      }
+    ]
   },
   {
     "id": 10535,
@@ -2054,20 +2060,20 @@ export const ROUND_50: QuizQuestion[] = [
     "round": 50,
     "subject": "2과목",
     "number": 50,
-    "title": "아래 설명에 해당하는 명령어는?",
+    "title": "빈 테이블 T 에 대해 아래 문장을 차례로 실행했다. ㉠ 문장의 결과와, COMMIT 후 T 의 행 수로 옳은 것은? (Oracle 기준)",
     "options": [
-      "COMMIT",
-      "ROLLBACK",
-      "SAVEPOINT",
-      "GRANT"
+      "성공, 3",
+      "오류, 2",
+      "오류, 0",
+      "성공, 2"
     ],
     "correctIndex": 1,
-    "explanation": "트랜잭션 중 문제가 생겼을 때 커밋되지 않은 모든 변경을 취소하고 이전 상태로 되돌리는 명령은 ROLLBACK 이다(②). COMMIT(①)은 변경을 확정, SAVEPOINT(③)는 되돌아갈 저장점 지정, GRANT(④)는 권한 부여 명령이다.",
+    "explanation": "ROLLBACK TO SP1 은 SP1 이후의 작업(2, 3 입력)을 취소하고, SP1 뒤에 만든 저장점 SP2 도 함께 없앤다. 그래서 ㉠ ROLLBACK TO SP2 는 없는 저장점으로 돌아가려는 것이라 오류가 난다. Oracle 에서는 오류가 난 문장만 취소되고 트랜잭션은 그대로 이어진다. 1 은 SP1 전에 넣어 남아 있고, 이어서 4 를 넣은 뒤 COMMIT 하므로 T 에는 1, 4 의 2행이 남는다. 정답은 ②번이다. ① 과 ④ 는 SP1 으로 돌아간 뒤에도 SP2 가 남아 있다고 본 것이고, ③ 은 오류 한 번에 트랜잭션 전체가 취소된다고 본 것이다. 참고로 PostgreSQL 은 트랜잭션 안에서 오류가 나면 이후 문장을 모두 거부하고 COMMIT 도 ROLLBACK 으로 처리해 0행이 된다.",
     "_source": "authored",
     "references": [
       {
-        "type": "text",
-        "content": "트랜잭션 수행 중 오류가 발생한 경우 모든 작업을 취소하고 이전 상태로 되돌리는 명령"
+        "type": "sql",
+        "code": "INSERT INTO T VALUES (1);\nSAVEPOINT SP1;\nINSERT INTO T VALUES (2);\nSAVEPOINT SP2;\nINSERT INTO T VALUES (3);\nROLLBACK TO SP1;\nROLLBACK TO SP2;  -- ㉠\nINSERT INTO T VALUES (4);\nCOMMIT;"
       }
     ]
   }
