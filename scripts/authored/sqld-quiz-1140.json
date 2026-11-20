@@ -1032,7 +1032,7 @@
         {
           "type": "sql",
           "caption": "[SQL]",
-          "code": "CREATE TABLE TBL\n(\n  ID NUMBER PRIMARY KEY,\n  AMT NUMBER NOT NULL,\n  DEGREE VARCHAR2(1)\n);\n\n1. INSERT INTO TBL VALUES(1, 100)\n2. INSERT INTO TBL(ID, AMT, DEGREE) VALUES(2, 200, 'AB')\n3. INSERT INTO TBL(ID, DEGREE) VALUES(4, 'X')\n4. INSERT INTO TBL(ID, AMT) VALUES(3, 300)\n5. INSERT INTO TBL VALUES(5, 500, NULL)"
+          "code": "CREATE TABLE TBL\n(\n  ID NUMBER PRIMARY KEY,\n  AMT NUMBER NOT NULL,\n  DEGREE VARCHAR2(1)\n);\n\n1. INSERT INTO TBL VALUES(1, 100)\n2. INSERT INTO TBL(ID, AMT, DEGREE)\n   VALUES(2, 200, 'AB')\n3. INSERT INTO TBL(ID, DEGREE)\n   VALUES(4, 'X')\n4. INSERT INTO TBL(ID, AMT)\n   VALUES(3, 300)\n5. INSERT INTO TBL VALUES(5, 500, NULL)"
         }
       ]
     },
@@ -1372,7 +1372,7 @@
         {
           "type": "sql",
           "caption": "[SQL]",
-          "code": "SELECT COUNT(*)\nFROM   EMP_TBL\nWHERE  EMPNO > 100 AND SAL >= 3000 OR EMPNO = 200;"
+          "code": "SELECT COUNT(*)\nFROM   EMP_TBL\nWHERE  EMPNO > 100 AND SAL >= 3000\n   OR  EMPNO = 200;"
         }
       ]
     },
@@ -1821,7 +1821,7 @@
         {
           "type": "sql",
           "caption": "[SQL]",
-          "code": "SELECT AVG(COL3) FROM TAB_A;\nSELECT AVG(COL3) FROM TAB_A WHERE COL1 > 0;\nSELECT AVG(COL3) FROM TAB_A WHERE COL1 IS NOT NULL;"
+          "code": "SELECT AVG(COL3) FROM TAB_A;\nSELECT AVG(COL3) FROM TAB_A\nWHERE COL1 > 0;\nSELECT AVG(COL3) FROM TAB_A\nWHERE COL1 IS NOT NULL;"
         },
         {
           "type": "table",
@@ -2859,7 +2859,7 @@
         {
           "type": "sql",
           "caption": "[SQL]",
-          "code": "SELECT 사원번호, 사원명, 입사일자, 매니저사원번호\nFROM   사원\nSTART WITH 매니저사원번호 IS NULL\nCONNECT BY PRIOR 사원번호 = 매니저사원번호\nAND 입사일자 BETWEEN '2013-01-01' AND '2013-12-31'\nORDER SIBLINGS BY 사원번호;"
+          "code": "SELECT 사원번호, 사원명, 입사일자,\n       매니저사원번호\nFROM   사원\nSTART WITH 매니저사원번호 IS NULL\nCONNECT BY PRIOR 사원번호\n           = 매니저사원번호\nAND 입사일자 BETWEEN '2013-01-01'\n             AND '2013-12-31'\nORDER SIBLINGS BY 사원번호;"
         }
       ]
     },
@@ -3205,7 +3205,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT B.사원번호, B.사원명, A.부서번호, A.부서명\n, (SELECT COUNT(*)  FROM 부양가족 Y WHERE\nY.사원번호 = B.사원번호)  AS 부양가족수\nFROM 부서 A, (SELECT *\nFROM 사원\nWHERE 입사년도 = '2014')  B\nWHERE A.부서번호 = B.부서번호\nAND EXISTS (SELECT 1 FROM 사원 X WHERE X.부서번호 =\nA.부서번호);"
+          "code": "SELECT B.사원번호, B.사원명,\n       A.부서번호, A.부서명\n, (SELECT COUNT(*)  FROM 부양가족 Y\n   WHERE Y.사원번호 = B.사원번호)\n  AS 부양가족수\nFROM 부서 A, (SELECT *\nFROM 사원\nWHERE 입사년도 = '2014')  B\nWHERE A.부서번호 = B.부서번호\nAND EXISTS (SELECT 1 FROM 사원 X\n            WHERE X.부서번호 =\n                  A.부서번호);"
         }
       ]
     },
@@ -4831,7 +4831,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT PLAYER_NAME 선수명, E_PLAYER_NAME 선수영문명\nFROM PLAYER\nWHERE E_PLAYER_NAME LIKE '_A%';"
+          "code": "SELECT PLAYER_NAME 선수명,\n       E_PLAYER_NAME 선수영문명\nFROM PLAYER\nWHERE E_PLAYER_NAME LIKE '_A%';"
         }
       ]
     },
@@ -5757,7 +5757,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT DNAME, JOB, COUNT(*) \"Total Emp\", SUM(SAL) \"Total Sal\" FROM SCOTT.EMP A, SCOTT.DEPT B\nWHERE A.DEPTNO = B.DEPTNO\nGROUP BY CUBE(DNAME,JOB);"
+          "code": "SELECT DNAME, JOB,\n       COUNT(*) \"Total Emp\",\n       SUM(SAL) \"Total Sal\"\nFROM SCOTT.EMP A, SCOTT.DEPT B\nWHERE A.DEPTNO = B.DEPTNO\nGROUP BY CUBE(DNAME,JOB);"
         },
         {
           "type": "table",
@@ -10574,7 +10574,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT COALESCE(nullif(1,1),200,300) as data from dual;"
+          "code": "SELECT COALESCE(nullif(1,1),200,300)\n       as data\nfrom dual;"
         }
       ]
     },
@@ -10597,7 +10597,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT EXTRACT(YEAR FROM COL1),\n       LPAD(EXTRACT(MONTH FROM COL1), (ㄱ), (ㄴ))\nFROM   Mytest;"
+          "code": "SELECT EXTRACT(YEAR FROM COL1),\n       LPAD(EXTRACT(MONTH FROM COL1),\n            (ㄱ), (ㄴ))\nFROM   Mytest;"
         },
         {
           "type": "table",
@@ -10984,7 +10984,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "CREATE TABLE MYTEST (N1 NUMBER(20), N2 NUMBER(20) );\nINSERT INTO MYTEST VALUES(1,100);\nINSERT INTO MYTEST VALUES(2,200);\nCOMMIT;"
+          "code": "CREATE TABLE MYTEST\n  (N1 NUMBER(20), N2 NUMBER(20) );\nINSERT INTO MYTEST VALUES(1,100);\nINSERT INTO MYTEST VALUES(2,200);\nCOMMIT;"
         }
       ]
     },
@@ -11228,7 +11228,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "CREATE TABLE MYTEST (N1 NUMBER(10), N2 NUMBER(10));\nINSERT INTO MyTEST VALUES (100, 200);\nINSERT INTO MyTEST VALUES (200, 300);\nSAVEPOINT T1;\nUPDATE MYTEST SET N1=300 WHERE N2=200;\nSAVEPOINT T1;\nDELETE MYTEST WHERE N1>=200;\nROLLBACK TO SAVEPOINT T1;\nSELECT MAX(N1) FROM MYTEST;"
+          "code": "CREATE TABLE MYTEST\n  (N1 NUMBER(10), N2 NUMBER(10));\nINSERT INTO MyTEST VALUES (100, 200);\nINSERT INTO MyTEST VALUES (200, 300);\nSAVEPOINT T1;\nUPDATE MYTEST SET N1=300 WHERE N2=200;\nSAVEPOINT T1;\nDELETE MYTEST WHERE N1>=200;\nROLLBACK TO SAVEPOINT T1;\nSELECT MAX(N1) FROM MYTEST;"
         }
       ]
     },
@@ -11251,7 +11251,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT * FROM Mytesta a full outer join Mytestb b\non a.col1 = b.col1;"
+          "code": "SELECT * FROM Mytesta a\nfull outer join Mytestb b\non a.col1 = b.col1;"
         }
       ]
     },
@@ -11395,7 +11395,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT A.JUMUN, B.CUSTRANK\nFROM   (SELECT JUMUN, SUM(PRICE) AS TOTAL\n        FROM   T_ORDER\n        GROUP BY JUMUN) A, T_CUST B\nWHERE  A.TOTAL BETWEEN B.MINPRICE AND B.MAXPRICE;"
+          "code": "SELECT A.JUMUN, B.CUSTRANK\nFROM   (SELECT JUMUN,\n               SUM(PRICE) AS TOTAL\n        FROM   T_ORDER\n        GROUP BY JUMUN) A, T_CUST B\nWHERE  A.TOTAL BETWEEN B.MINPRICE\n                   AND B.MAXPRICE;"
         },
         {
           "type": "table",
@@ -11470,7 +11470,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT AVG(COL3) FROM SQLD01;\nSELECT AVG(COL3) FROM SQLD01 WHERE COL1 > 0;\nSELECT AVG(COL3) FROM SQLD01 WHERE COL1 IS NOT NULL;"
+          "code": "SELECT AVG(COL3) FROM SQLD01;\nSELECT AVG(COL3) FROM SQLD01\nWHERE COL1 > 0;\nSELECT AVG(COL3) FROM SQLD01\nWHERE COL1 IS NOT NULL;"
         },
         {
           "type": "image",
@@ -12279,7 +12279,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT SUBSTR('123456789123456789', -4,2) FROM DUAL;"
+          "code": "SELECT SUBSTR('123456789123456789',\n              -4,2)\nFROM DUAL;"
         }
       ]
     },
@@ -12575,7 +12575,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT * FROM MYTEST WHERE COL1 BETWEEN :A AND :B"
+          "code": "SELECT * FROM MYTEST\nWHERE COL1 BETWEEN :A AND :B"
         }
       ]
     },
@@ -13077,7 +13077,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT COALESCE(COL1, COL2 * 50,50) FROM sqld_12;"
+          "code": "SELECT COALESCE(COL1, COL2 * 50,50)\nFROM sqld_12;"
         },
         {
           "type": "table",
@@ -13271,7 +13271,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "CREATE TABLE TEST20\n(\nID NUMBER PRIMARY KEY,\nAGE NUMBER NOT NULL,\nNAME VARCHAR2(1)\n);\n\n(1) insert into test20 values(10,20,sysdate);\n(2)insert into test20 values(20,null,'a');\n(3)insert into test20(age, name) values(20,'a');\n(4)insert into test20(id,age,name) values(20,10,null);"
+          "code": "CREATE TABLE TEST20\n(\nID NUMBER PRIMARY KEY,\nAGE NUMBER NOT NULL,\nNAME VARCHAR2(1)\n);\n\n(1) insert into test20\n    values(10,20,sysdate);\n(2)insert into test20\n   values(20,null,'a');\n(3)insert into test20(age, name)\n   values(20,'a');\n(4)insert into test20(id,age,name)\n   values(20,10,null);"
         }
       ]
     },
@@ -14744,7 +14744,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT * FROM Orders\nWHERE ( ㄱ ) (SELECT * FROM Customers WHERE (  ㄴ  ));"
+          "code": "SELECT * FROM Orders\nWHERE ( ㄱ ) (SELECT * FROM Customers\n              WHERE (  ㄴ  ));"
         }
       ]
     },
@@ -14942,7 +14942,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT\n(             ) OVER(ORDER BY sal desc)\nas rank, name, deptname, position, sal FROM test44;"
+          "code": "SELECT\n(             ) OVER(ORDER BY sal desc)\nas rank, name, deptname, position, sal\nFROM test44;"
         },
         {
           "type": "image",
@@ -15238,7 +15238,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT 10 + 20 * (          )(NULL, 0.1, 0.2) AS 결과\nFROM   DUAL;\n-- 결과 : 14"
+          "code": "SELECT 10 + 20 *\n       (          )(NULL, 0.1, 0.2)\n       AS 결과\nFROM   DUAL;\n-- 결과 : 14"
         }
       ]
     },
@@ -15630,7 +15630,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT A.JUMUN AS \"주문\", B.CUSTRANK AS \"고객등급\"\nFROM   (SELECT JUMUN, SUM(PRICE) AS TOTAL\n        FROM   test34_1\n        GROUP BY JUMUN) A, test34_2 B\nWHERE  A.TOTAL BETWEEN B.MINPRICE AND B.MAXPRICE;"
+          "code": "SELECT A.JUMUN AS \"주문\",\n       B.CUSTRANK AS \"고객등급\"\nFROM   (SELECT JUMUN,\n               SUM(PRICE) AS TOTAL\n        FROM   test34_1\n        GROUP BY JUMUN) A, test34_2 B\nWHERE  A.TOTAL BETWEEN B.MINPRICE\n                   AND B.MAXPRICE;"
         },
         {
           "type": "table",
@@ -16516,7 +16516,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT SUM(DECODE(SIGN(SAL-4000), 1, 1, 0)) FROM TAB1;"
+          "code": "SELECT SUM(DECODE(SIGN(SAL-4000),\n                  1, 1, 0))\nFROM TAB1;"
         },
         {
           "type": "table",
@@ -17019,7 +17019,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT COUNT(DEPTNO) \n FROM EMPLOYEES \n WHERE DEPTNO <= ALL(SELECT DEPTNO \n FROM EMPLOYEES \n WHERE HIREDATE >= TO_DATE('2020/02', 'YYYY/MM'));"
+          "code": "SELECT COUNT(DEPTNO) \n FROM EMPLOYEES \n WHERE DEPTNO <= ALL(SELECT DEPTNO \n FROM EMPLOYEES \n WHERE HIREDATE >=\n        TO_DATE('2020/02', 'YYYY/MM'));"
         },
         {
           "type": "table",
@@ -17989,7 +17989,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT COALESCE(COL1, COL2, COL3) RESULT FROM TAB1;"
+          "code": "SELECT COALESCE(COL1, COL2, COL3)\n       RESULT\nFROM TAB1;"
         },
         {
           "type": "table",
@@ -18946,7 +18946,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT PRODUCT_NO, GOGAK_NO, SUM(QTY) AS TOTAL_QTY  \nFROM JUMUN \nGROUP BY GROUPING SETS(PRODUCT_NO, GOGAK_NO, ());"
+          "code": "SELECT PRODUCT_NO, GOGAK_NO,\n       SUM(QTY) AS TOTAL_QTY\nFROM JUMUN \nGROUP BY GROUPING SETS(PRODUCT_NO,\n                       GOGAK_NO, ());"
         },
         {
           "type": "table",
@@ -19248,7 +19248,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT REGEXP_REPLACE(COL1, 'A(X|Y)+\\.') FROM TAB1;"
+          "code": "SELECT REGEXP_REPLACE(COL1,\n                      'A(X|Y)+\\.')\nFROM TAB1;"
         },
         {
           "type": "table",
@@ -19355,7 +19355,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "ALTER TABLE TAB1 ADD COL4 CHAR(5); \nALTER TABLE TAB1 MODIFY COL4 DEFAULT 'AAA'; \nINSERT INTO TAB1 VALUES(4, 'D', 40, NULL); \nINSERT INTO TAB1(COL1, COL2, COL3) VALUES(5,'E',50);"
+          "code": "ALTER TABLE TAB1 ADD COL4 CHAR(5); \nALTER TABLE TAB1\n  MODIFY COL4 DEFAULT 'AAA';\nINSERT INTO TAB1\n  VALUES(4, 'D', 40, NULL);\nINSERT INTO TAB1(COL1, COL2, COL3)\n  VALUES(5,'E',50);"
         },
         {
           "type": "table",
@@ -19768,7 +19768,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT LTRIM('ORACLE', 'A') AS C1, \n        SUBSTR('SQL-SERVER', 3, 3) AS C2, \n        LENGTH(REPLACE('SQL-SERVER', 'E')) AS C3 \n FROM DUAL;"
+          "code": "SELECT LTRIM('ORACLE', 'A') AS C1, \n        SUBSTR('SQL-SERVER', 3, 3)\n          AS C2,\n        LENGTH(REPLACE('SQL-SERVER',\n                       'E')) AS C3\n FROM DUAL;"
         }
       ]
     },
@@ -19955,7 +19955,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT EMPNO \n  FROM EMP \n ORDER BY TO_CHAR(TO_NUMBER(SUBSTR(JUMIN, 3, 2)));"
+          "code": "SELECT EMPNO \n  FROM EMP \n ORDER BY TO_CHAR(TO_NUMBER(\n            SUBSTR(JUMIN, 3, 2)));"
         },
         {
           "type": "table",
@@ -23993,7 +23993,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT COALESCE(NULL, NULL, 'S', NULL, 'QL') FROM DUAL;"
+          "code": "SELECT COALESCE(NULL, NULL, 'S',\n                NULL, 'QL')\nFROM DUAL;"
         }
       ]
     },
@@ -24169,7 +24169,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT REGEXP_SUBSTR('kkkkkzzzz', 'z{3,4}') FROM DUAL;"
+          "code": "SELECT REGEXP_SUBSTR('kkkkkzzzz',\n                     'z{3,4}')\nFROM DUAL;"
         }
       ]
     },
@@ -24449,7 +24449,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "-- 1단계\nDELETE FROM EMP WHERE DEPT = 'SALES';\nSAVEPOINT A;\n-- 2단계\nUPDATE EMP SET SALARY = SALARY + 300 WHERE DEPT = 'IT';\nSAVEPOINT B;\n-- 3단계\nINSERT INTO EMP VALUES (999, 'KIM', 'HR', 5000);\nSAVEPOINT C;\n-- 4단계\nDELETE FROM EMP WHERE DEPT = 'HR';\n-- 5단계\nROLLBACK TO B;\n-- 6단계\nCOMMIT;"
+          "code": "-- 1단계\nDELETE FROM EMP WHERE DEPT = 'SALES';\nSAVEPOINT A;\n-- 2단계\nUPDATE EMP SET SALARY = SALARY + 300\nWHERE DEPT = 'IT';\nSAVEPOINT B;\n-- 3단계\nINSERT INTO EMP\nVALUES (999, 'KIM', 'HR', 5000);\nSAVEPOINT C;\n-- 4단계\nDELETE FROM EMP WHERE DEPT = 'HR';\n-- 5단계\nROLLBACK TO B;\n-- 6단계\nCOMMIT;"
         }
       ]
     },
@@ -26625,7 +26625,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT AVG(salary) FROM emp s WHERE s.dept = e.dept"
+          "code": "SELECT AVG(salary) FROM emp s\nWHERE s.dept = e.dept"
         },
         {
           "type": "table",
@@ -26921,7 +26921,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT emp_name,\n       LEVEL AS lv,\n       SYS_CONNECT_BY_PATH(emp_name, ' > ') AS path\nFROM emp_tree\nSTART WITH mgr_id IS NULL\nCONNECT BY PRIOR emp_id = mgr_id\nORDER SIBLINGS BY emp_name;"
+          "code": "SELECT emp_name,\n       LEVEL AS lv,\n       SYS_CONNECT_BY_PATH(\n         emp_name, ' > ') AS path\nFROM emp_tree\nSTART WITH mgr_id IS NULL\nCONNECT BY PRIOR emp_id = mgr_id\nORDER SIBLINGS BY emp_name;"
         },
         {
           "type": "table",
@@ -29366,7 +29366,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT NVL(comm, 0) + sal FROM emp WHERE emp_id = 1;"
+          "code": "SELECT NVL(comm, 0) + sal FROM emp\nWHERE emp_id = 1;"
         }
       ]
     },
@@ -32686,7 +32686,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT region,\n       category,\n       amount\nFROM sales\nORDER BY CASE WHEN amount >= 100 THEN 1 ELSE 2 END,\n         category DESC,\n         amount ASC,\n         region ASC;"
+          "code": "SELECT region,\n       category,\n       amount\nFROM sales\nORDER BY CASE WHEN amount >= 100\n              THEN 1 ELSE 2 END,\n         category DESC,\n         amount ASC,\n         region ASC;"
         },
         {
           "type": "table",
@@ -32914,7 +32914,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT emp_name,\n       LEVEL AS lv,\n       SYS_CONNECT_BY_PATH(emp_name, ' > ') AS path\nFROM emp_tree\nSTART WITH mgr_id IS NULL\nCONNECT BY PRIOR emp_id = mgr_id\nORDER SIBLINGS BY emp_name;"
+          "code": "SELECT emp_name,\n       LEVEL AS lv,\n       SYS_CONNECT_BY_PATH(\n         emp_name, ' > ') AS path\nFROM emp_tree\nSTART WITH mgr_id IS NULL\nCONNECT BY PRIOR emp_id = mgr_id\nORDER SIBLINGS BY emp_name;"
         },
         {
           "type": "table",
@@ -34755,7 +34755,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT A.ID, B.GRADE FROM A LEFT JOIN B ON A.ID = B.ID;"
+          "code": "SELECT A.ID, B.GRADE\nFROM A LEFT JOIN B ON A.ID = B.ID;"
         },
         {
           "type": "table",
@@ -36153,7 +36153,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT emp_name,\n       SYS_CONNECT_BY_PATH(emp_name, '/') AS path\nFROM emp_tree\nSTART WITH mgr_id IS NULL\nCONNECT BY PRIOR emp_id = mgr_id;"
+          "code": "SELECT emp_name,\n       SYS_CONNECT_BY_PATH(\n         emp_name, '/') AS path\nFROM emp_tree\nSTART WITH mgr_id IS NULL\nCONNECT BY PRIOR emp_id = mgr_id;"
         },
         {
           "type": "table",
@@ -36665,7 +36665,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT NVL(comm, 0) + sal FROM emp WHERE emp_id = 1;"
+          "code": "SELECT NVL(comm, 0) + sal FROM emp\nWHERE emp_id = 1;"
         }
       ]
     },
