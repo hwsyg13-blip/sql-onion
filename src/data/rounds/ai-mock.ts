@@ -1,5 +1,5 @@
 // Auto-generated from scripts/authored/ai-mock.json
-// AI 생성 모의고사 풀 (기출 변형) · 1176문항
+// AI 생성 모의고사 풀 (기출 변형) · 1175문항
 // ⚠ 직접 편집 금지. ai-mock.json 수정 후 'node scripts/build-quiz-bank.mjs' 재실행.
 import type { QuizQuestion } from '../quizBank';
 
@@ -6921,26 +6921,6 @@ export const AI_MOCK: QuizQuestion[] = [
         "code": "SELECT DEPTNO, JOB, SUM(SAL)\nFROM SQLD_3\nGROUP BY (    );"
       }
     ]
-  },
-  {
-    "id": 11032,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "1과목",
-    "number": 233,
-    "title": "사원 테이블에 사원번호는 기본키로 설정되어 있다. SQL문으로 사원번호 1번을 검색하는데 사원 테이블에는 하나의 ROW만 저장되어 있다. 이때 유리한 스캔 방식은 무엇으로 판단되는가?",
-    "options": [
-      "Unique Index Scan",
-      "Non-Unique Index Scan",
-      "Index Full Scan",
-      "Table Full Scan"
-    ],
-    "correctIndex": 3,
-    "explanation": "하나의 데이터(행)를 읽기 위해서는 인덱스를 사용하지 않고 테이블을 FULL SCAN하는 것이 효율적이다. 즉, 검색되는 행이 1건이므로 굳이 인덱스를 읽지 않고 바로 테이블을 검색해야 한다.",
-    "chapter": "식별자",
-    "_source": "cbt-mock",
-    "_origId": "cbt-192",
-    "_cbtOrigNo": 192
   },
   {
     "id": 11033,
