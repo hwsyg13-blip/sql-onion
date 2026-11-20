@@ -197,20 +197,21 @@ export const ROUND_49: QuizQuestion[] = [
     "round": 49,
     "subject": "1과목",
     "number": 8,
-    "title": "아래 설명에 해당하는 엔터티 분류는?",
+    "title": "아래 쇼핑몰 ERD 에서 발생 시점에 따른 행위 엔터티와 그 근거를 바르게 짝지은 것은?",
     "options": [
-      "기본 엔터티",
-      "중심 엔터티",
-      "행위 엔터티",
-      "개념 엔터티"
+      "회원 — 부모 엔터티 없이 생기고 주문의 부모가 된다.",
+      "상품 — 상품분류라는 부모 엔터티에서 생긴다.",
+      "주문상세 — 주문과 상품 두 부모에서 생기고, 주문할 때마다 행이 늘어난다.",
+      "상품분류 — 행이 거의 늘지 않고 내용도 잘 바뀌지 않는다."
     ],
     "correctIndex": 2,
-    "explanation": "행위 엔터티(Active Entity)는 두 개 이상의 부모 엔터티의 행위·트랜잭션으로부터 발생하며, 분석 초기에는 잘 드러나지 않다가 상세 설계 단계에서 식별된다. ① 기본 엔터티는 업무에 원래 존재하는 독립 엔터티, ② 중심 엔터티는 기본 엔터티에서 파생된 핵심 엔터티, ④ 개념 엔터티는 추상적·관념적 단위이다.",
+    "explanation": "행위 엔터티는 두 개 이상의 부모 엔터티에서 업무 행위의 결과로 생기며, 내용이 자주 바뀌거나 데이터가 계속 늘어난다. 주문상세는 주문과 상품 두 부모에서 생기고 주문마다 쌓이므로 행위 엔터티다. 정답은 ③번이다. ① 회원과 ④ 상품분류는 다른 엔터티 없이 먼저 존재하는 기본 엔터티의 특징이다. ② 상품은 부모가 하나(상품분류)이고 주문상세의 부모가 되므로 행위 엔터티의 근거가 되지 않는다. 주문은 회원에서 생겨 주문상세의 부모가 되는 중심 엔터티다.",
     "_source": "authored",
     "references": [
       {
-        "type": "text",
-        "content": "두 개 이상의 부모 엔터티로부터 발생되고 자주 내용이 변경되거나 데이터량이 증가하는 엔터티. 분석 초기 단계에서는 잘 나타나지 않으며 상세 설계 단계나 프로세스 상관 모델링 과정에서 드러난다."
+        "type": "erd",
+        "caption": "쇼핑몰 ERD",
+        "mermaid": "erDiagram\n    회원 ||..o{ 주문 : \"주문함\"\n    주문 ||--|{ 주문상세 : \"포함\"\n    상품 ||..o{ 주문상세 : \"담김\"\n    상품분류 ||..o{ 상품 : \"분류\""
       }
     ]
   },
@@ -366,44 +367,45 @@ export const ROUND_49: QuizQuestion[] = [
     "round": 49,
     "subject": "2과목",
     "number": 14,
-    "title": "아래 EMP 테이블에 대해 순방향 계층형 쿼리(부모 → 자식)를 구성하는 SQL 로 옳은 것은?",
+    "title": "아래 EMP 에 대한 계층형 쿼리와 그 결과를 바르게 설명한 것은? (Oracle 기준)",
     "options": [
-      "SELECT * FROM EMP START WITH MANAGER_NO IS NULL CONNECT BY PRIOR EMP_NO = MANAGER_NO;",
-      "SELECT * FROM EMP START WITH MANAGER_NO IS NULL CONNECT BY PRIOR MANAGER_NO = EMP_NO;",
-      "SELECT * FROM EMP START WITH MANAGER_NO IS NULL CONNECT BY EMP_NO = MANAGER_NO;",
-      "SELECT * FROM EMP START WITH MANAGER_NO IS NULL CONNECT BY PRIOR EMP_NO = PRIOR MANAGER_NO;"
+      "START WITH MANAGER_NO IS NULL CONNECT BY PRIOR EMP_NO = MANAGER_NO — KING 부터 아래로 4행, LEVEL 은 최대 3",
+      "START WITH MANAGER_NO IS NULL CONNECT BY PRIOR MANAGER_NO = EMP_NO — KING 부터 아래로 4행",
+      "START WITH EMP_NO = 3 CONNECT BY PRIOR EMP_NO = MANAGER_NO — SCOTT 부터 위로 KING 까지 3행",
+      "START WITH MANAGER_NO = 1 CONNECT BY PRIOR EMP_NO = MANAGER_NO — KING 을 포함해 4행"
     ],
     "correctIndex": 0,
-    "explanation": "`PRIOR` 가 붙은 컬럼은 바로 앞에 찾은 행(부모)의 값이다. ① `PRIOR EMP_NO = MANAGER_NO` 는 부모의 EMP_NO 를 MANAGER_NO 로 가진 행, 곧 자식을 찾으므로 100 → 200·300 → 400·500 순방향으로 전개된다. ② 는 부모의 MANAGER_NO 를 EMP_NO 로 가진 행을 찾는 역방향이라 루트 100(MANAGER_NO 가 NULL)에서 더 내려가지 못한다. ③ 은 PRIOR 가 없어 앞 행과 연결되지 않고 EMP_NO = MANAGER_NO 인 행도 없으며, ④ 는 앞 행의 컬럼끼리만 비교해 자식을 찾지 못하므로 ②③④ 모두 루트 100 한 행만 나온다.",
+    "explanation": "PRIOR 가 붙은 쪽이 이미 찾은(부모) 행이다. PRIOR EMP_NO = MANAGER_NO 는 앞 행의 사원번호를 관리자로 둔 행을 찾아 아래로 내려가는 순방향이다. KING(1) → JONES·BLAKE(2) → SCOTT(3) 으로 4행, LEVEL 최대 3 이다. 정답은 ①번이다. ② 는 역방향이라 KING 의 관리자를 찾는데 없으므로 KING 1행뿐이다. ③ 은 순방향이라 SCOTT 아래를 찾는데 부하가 없어 1행이다. ④ 는 시작 행이 MANAGER_NO = 1 인 JONES, BLAKE 라 KING 은 빠지고 SCOTT 까지 3행이다.",
     "_source": "authored",
     "references": [
       {
         "type": "table",
-        "caption": "EMP 테이블",
+        "caption": "EMP",
         "headers": [
           "EMP_NO",
+          "ENAME",
           "MANAGER_NO"
         ],
         "rows": [
           [
-            "100",
+            "1",
+            "KING",
             "NULL"
           ],
           [
-            "200",
-            "100"
+            "2",
+            "JONES",
+            "1"
           ],
           [
-            "300",
-            "100"
+            "3",
+            "SCOTT",
+            "2"
           ],
           [
-            "400",
-            "200"
-          ],
-          [
-            "500",
-            "300"
+            "4",
+            "BLAKE",
+            "1"
           ]
         ]
       }

@@ -1126,3 +1126,5 @@ ERD 선 표기 정리 2차(11-20 14시): 식별자를 다루는 1과목 문항�
 | 46-2-21 | 동률 두 번 + COUNT(*) OVER 기본 윈도우(RANGE) | 동률 한 번·NTILE → 순위 함수 + COUNT | ② | PostgreSQL 실행 |
 | 47-2-15 | DCL 은 권한 명령, STARTUP·SHUTDOWN 은 분류 밖, TRUNCATE·MERGE·SAVEPOINT | 분류 정의 → 명령 사례 | ② | 정의로 판정 |
 | 48-1-10 | 선택 관계(|o)를 NULL 허용 FK·LEFT JOIN 으로 구현 | 기호 해석 → 구현 판단(ERD 속성 추가) | ② | 정의로 판정, ERD 렌더 확인 |
+| 49-1-8 | 행위 엔터티(부모 둘 이상·계속 늘어남) vs 기본·중심 | 설명 → 분류 이름 → mermaid ERD 에서 엔터티 + 근거 | ③ | 정의로 판정, ERD 렌더 확인 |
+| 49-2-14 | PRIOR 위치(순방향·역방향)와 START WITH 에 따른 행 수 | SQL 고르기 → SQL + 결과 설명 | ① | PostgreSQL 재귀 쿼리로 행 수 확인(4, 1, 1, 3) |
