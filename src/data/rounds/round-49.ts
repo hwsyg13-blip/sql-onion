@@ -1808,16 +1808,58 @@ export const ROUND_49: QuizQuestion[] = [
     "round": 49,
     "subject": "2과목",
     "number": 41,
-    "title": "Oracle 에서 NULL 이 포함된 ORDER BY 결과에 대한 설명으로 옳은 것은?",
+    "title": "아래 EMP 테이블에 대해 '㉠ 결과의 3번째 행, ㉡ 결과의 2번째 행, ㉢ 결과의 4번째 행' 의 이름을 차례대로 나열한 것은? (Oracle 기준)",
     "options": [
-      "ASC 정렬 시 NULL 이 가장 먼저 출력된다.",
-      "DESC 정렬 시 NULL 이 가장 나중에 출력된다.",
-      "ASC 정렬 시 NULL 은 마지막에, DESC 정렬 시 NULL 은 가장 먼저 출력된다.",
-      "NULL 은 항상 가장 먼저 출력된다."
+      "라, 가, 마",
+      "다, 가, 다",
+      "다, 마, 다",
+      "라, 마, 마"
     ],
     "correctIndex": 2,
-    "explanation": "Oracle 의 기본 NULL 정렬 규칙은 ASC 정렬 시 NULL 을 마지막에, DESC 정렬 시 NULL 을 가장 먼저 배치한다(NULLS LAST / NULLS FIRST 가 각각 기본). NULLS FIRST·NULLS LAST 옵션으로 변경할 수 있다. ① 과 ④ 는 SQL Server 처럼 NULL 을 가장 작은 값으로 본 것이고, ② 는 DESC 에서 NULL 이 먼저 온다는 점과 반대다.",
-    "_source": "authored"
+    "explanation": "Oracle 은 NULL 을 가장 큰 값처럼 정렬한다. ASC 에서는 맨 뒤, DESC 에서는 맨 앞에 온다. NULLS FIRST·LAST 는 바로 앞의 정렬 기준 하나에만 적용된다. ㉠ 은 부서 DESC 라 NULL 부서인 나 가 먼저, 다음 B, A 순서다. 같은 부서 안에서는 급여 ASC 라 NULL 이 뒤로 가서 B 는 라(100), 다(NULL) 순서다. 나, 라, 다, 가, 마 이므로 3번째는 다 다. ㉡ 은 부서 NULLS FIRST 로 나 가 먼저, 그다음 A, B 다. 급여 DESC 에서는 NULL 이 앞이라 A 는 마(NULL), 가(300) 순서다. 나, 마, 가, 다, 라 이므로 2번째는 마 다. ㉢ 은 NULL 급여를 0 으로 바꿔 가 300, 나 200, 라 100 다음 다 와 마 가 0 으로 같고, 이름 순으로 다, 마 가 된다. 4번째는 다 다. 정답은 ③번이다. ① 은 ASC 에서 NULL 을 맨 앞으로, DESC 에서 맨 뒤로 보고 ㉢ 의 동점도 이름 역순으로 본 것이다. ② 는 ㉡ 의 급여 DESC 에서 NULL 을 뒤로 보낸 것이고, ④ 는 ㉠ 에서 NULL 급여를 앞에 두고 ㉢ 의 동점을 이름 역순으로 본 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "caption": "EMP",
+        "headers": [
+          "이름",
+          "부서",
+          "급여"
+        ],
+        "rows": [
+          [
+            "가",
+            "A",
+            "300"
+          ],
+          [
+            "나",
+            "NULL",
+            "200"
+          ],
+          [
+            "다",
+            "B",
+            "NULL"
+          ],
+          [
+            "라",
+            "B",
+            "100"
+          ],
+          [
+            "마",
+            "A",
+            "NULL"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "-- ㉠\nSELECT 이름 FROM EMP\nORDER BY 부서 DESC, 급여;\n-- ㉡\nSELECT 이름 FROM EMP\nORDER BY 부서 NULLS FIRST,\n         급여 DESC;\n-- ㉢\nSELECT 이름 FROM EMP\nORDER BY NVL(급여, 0) DESC, 이름;"
+      }
+    ]
   },
   {
     "id": 10591,

@@ -1825,19 +1825,52 @@
     {
       "subject": "2과목",
       "number": 49,
-      "title": "아래 BETWEEN 조건과 결과가 다른 것은?",
+      "title": "아래 T 테이블(문자 칼럼 V)에서 조건 ㉠, ㉡, ㉢ 으로 조회되는 행 수를 차례대로 나열한 것은? (Oracle 기본 정렬, 문자는 코드값으로 비교)",
       "options": [
-        "COL1 > 날짜(XXXX) AND COL1 < 날짜(YYYY)",
-        "COL1 >= 날짜(XXXX) AND COL1 <= 날짜(YYYY)",
-        "NOT (COL1 < 날짜(XXXX) OR COL1 > 날짜(YYYY))",
-        "날짜(XXXX) <= COL1 AND COL1 <= 날짜(YYYY)"
+        "4, 0, 3",
+        "5, 0, 2",
+        "4, 4, 3",
+        "4, 0, 4"
       ],
       "correctIndex": 0,
-      "explanation": "BETWEEN a AND b 는 a <= COL1 AND COL1 <= b 처럼 양 끝값을 포함한다. ②④ 는 같은 조건이고, ③ NOT (COL1 < a OR COL1 > b) 도 드모르간 법칙으로 COL1 >= a AND COL1 <= b 가 되어 같다. ① 은 > 와 < 를 써서 경계값 a, b 가 빠지므로 결과가 다르다.",
+      "explanation": "BETWEEN a AND b 는 V >= a AND V <= b 와 같다. 문자는 앞 글자부터 코드값으로 비교하고, 앞부분이 같으면 더 긴 쪽이 크다. 대문자(A~Z)는 소문자(a~z)보다 코드값이 작다. ㉠ 은 B, Bob, C, D 의 4행이다. Dan 은 'D' 로 시작하지만 'D' 보다 길어서 'D' 보다 크므로 빠진다. bob 은 소문자라 'D' 보다 커서 빠진다. ㉡ 은 V >= 'D' AND V <= 'B' 라 동시에 만족하는 값이 없어 0행이다. BETWEEN 은 범위를 거꾸로 써도 알아서 바꿔 주지 않는다. ㉢ 은 범위 밖인 A, bob, Dan 의 3행이다. NULL 은 BETWEEN 도 NOT BETWEEN 도 UNKNOWN 이라 어느 쪽에도 들지 않는다. 정답은 ①번이다. ② 는 Dan 을 'D' 범위 안으로 본 것이고, ③ 은 거꾸로 쓴 범위도 같은 결과를 낸다고 본 것, ④ 는 NULL 행을 NOT BETWEEN 쪽에 넣은 것이다.",
       "references": [
         {
+          "type": "table",
+          "caption": "T",
+          "headers": [
+            "V"
+          ],
+          "rows": [
+            [
+              "A"
+            ],
+            [
+              "B"
+            ],
+            [
+              "Bob"
+            ],
+            [
+              "bob"
+            ],
+            [
+              "C"
+            ],
+            [
+              "D"
+            ],
+            [
+              "Dan"
+            ],
+            [
+              "NULL"
+            ]
+          ]
+        },
+        {
           "type": "sql",
-          "code": "SELECT *\nFROM   T\nWHERE  COL1 BETWEEN 날짜(XXXX) AND 날짜(YYYY);"
+          "code": "㉠ WHERE V BETWEEN 'B' AND 'D'\n㉡ WHERE V BETWEEN 'D' AND 'B'\n㉢ WHERE V NOT BETWEEN 'B' AND 'D'"
         }
       ]
     },
