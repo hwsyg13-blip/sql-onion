@@ -957,3 +957,5 @@ ERD 선 표기 정리(11-20): 자식 PK 에 부모 키가 없는 관계를 점�
 | 45-2-42 | CUBE 네 묶음 행 수·직급 소계의 AVG | 개념 설명 → 표에서 행 수와 두 AVG | 8, 350, 400 | PostgreSQL 동일 |
 | 52-2-36 | AVG 의 NULL 제외 vs NVL 안쪽·바깥쪽(전부 NULL 인 그룹) | 설명 고르기 → 표에서 세 식 값 | 10, 5, 0 | PostgreSQL 동일(COALESCE) |
 | 46-2-16 | Oracle DDL·DCL 자동 COMMIT(GRANT·TRUNCATE) vs DML·TCL(SAVEPOINT) | 분류 설명 → 네 묶음 뒤 값 | 2, 2, 4, 4 | Oracle 규칙으로 판정(PostgreSQL·SQL Server 는 DDL 도 롤백 — 해설에 적음) |
+| 57-2-33 | 동점이 있을 때 ROWNUM·RANK·DENSE_RANK·WITH TIES 행 수 | 방식 고르기 → 표에서 네 SQL 행 수 | 2, 3, 4, 3 | PostgreSQL 동일(LIMIT·FETCH WITH TIES) |
+| 58-2-45 | TRUNC·ROUND 양수·음수 자릿수, 음수의 TRUNC | 한 식 → 네 식 결과 | 120, 123.4, 130, -100 | PostgreSQL 동일 |

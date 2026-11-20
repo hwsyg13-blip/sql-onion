@@ -1136,16 +1136,48 @@ export const ROUND_57: QuizQuestion[] = [
     "round": 57,
     "subject": "2과목",
     "number": 33,
-    "title": "Oracle 에서 상위 N건을 조회하는 방법 중 가장 일반적으로 사용되는 방식은?",
+    "title": "아래 EMP 테이블에서 '급여 상위 N명' 을 구하려고 SQL ㉠~㉣ 을 실행했다. 각 결과의 행 수를 차례대로 나열한 것은? (Oracle 12c 이상)",
     "options": [
-      "SELECT * FROM EMP WHERE ROWNUM <= 10 ORDER BY SAL DESC;",
-      "SELECT * FROM EMP ORDER BY SAL DESC LIMIT 10;",
-      "SELECT TOP 10 * FROM EMP ORDER BY SAL DESC;",
-      "SELECT * FROM (SELECT * FROM EMP ORDER BY SAL DESC) WHERE ROWNUM <= 10;"
+      "2, 2, 3, 2",
+      "2, 3, 3, 2",
+      "3, 3, 4, 3",
+      "2, 3, 4, 3"
     ],
     "correctIndex": 3,
-    "explanation": "Oracle 에서 ORDER BY 결과의 상위 N 건을 안전하게 얻으려면, 정렬을 적용한 인라인 뷰를 만든 뒤 바깥 쿼리에서 ROWNUM 조건을 거는 방식이 가장 일반적이다. ① 은 ROWNUM 이 정렬 전에 붙어 아무 10행을 정렬하고, ② LIMIT 은 MySQL·PostgreSQL 문법, ③ TOP 은 SQL Server 문법이다.",
-    "_source": "authored"
+    "explanation": "㉠ 은 정렬을 끝낸 인라인 뷰에서 ROWNUM 으로 앞의 2행만 자른다. 나와 다의 급여가 같아도 둘 중 하나만 들어가 2행이다. ㉡ RANK 는 500 이 1위, 400 두 명이 공동 2위, 300 은 4위다. R <= 2 이면 3행이다. ㉢ DENSE_RANK 는 순위를 건너뛰지 않아 300 이 3위가 된다. R <= 3 이면 4명 모두 4행이다. ㉣ 의 WITH TIES 는 2번째 행과 정렬 값이 같은 행까지 함께 내므로 400 두 명이 모두 들어가 3행이다. 정답은 ④번이다. ① 은 RANK 와 WITH TIES 가 동점을 잘라낸다고 본 것이고, ② 는 ㉢ 과 ㉣ 을 ROWNUM 처럼 센 것, ③ 은 ROWNUM 도 동점을 함께 낸다고 본 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "caption": "EMP",
+        "headers": [
+          "이름",
+          "급여"
+        ],
+        "rows": [
+          [
+            "가",
+            "500"
+          ],
+          [
+            "나",
+            "400"
+          ],
+          [
+            "다",
+            "400"
+          ],
+          [
+            "라",
+            "300"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "-- ㉠\nSELECT * FROM\n  (SELECT * FROM EMP\n    ORDER BY 급여 DESC)\nWHERE ROWNUM <= 2;\n-- ㉡\nSELECT * FROM\n  (SELECT E.*, RANK() OVER\n     (ORDER BY 급여 DESC) R\n   FROM EMP E)\nWHERE R <= 2;\n-- ㉢\nSELECT * FROM\n  (SELECT E.*, DENSE_RANK() OVER\n     (ORDER BY 급여 DESC) R\n   FROM EMP E)\nWHERE R <= 3;\n-- ㉣\nSELECT * FROM EMP\nORDER BY 급여 DESC\nFETCH FIRST 2 ROWS WITH TIES;"
+      }
+    ]
   },
   {
     "id": 10183,
