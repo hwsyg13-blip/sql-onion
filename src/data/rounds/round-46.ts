@@ -505,20 +505,50 @@ export const ROUND_46: QuizQuestion[] = [
     "round": 46,
     "subject": "2과목",
     "number": 13,
-    "title": "아래 계층형 쿼리가 사원-관리자 조직도를 최상위부터 순회하도록 빈칸을 채우시오.",
+    "title": "아래 EMP 테이블에 계층형 질의를 실행했을 때 'LEVEL 이 3 인 행 수, CONNECT_BY_ISLEAF 가 1 인 행 수, 최 행의 경로' 를 차례대로 나열한 것은? (Oracle 기준)",
     "options": [
-      "ㄱ 관리자 IS NULL, ㄴ 사원, ㄷ 관리자",
-      "ㄱ 사원 IS NULL, ㄴ 관리자, ㄷ 사원",
-      "ㄱ 관리자 = 사원, ㄴ 사원, ㄷ 관리자",
-      "ㄱ 관리자 IS NULL, ㄴ 관리자, ㄷ 사원"
+      "2, 3, /김/이/최",
+      "2, 2, /김/이/최",
+      "3, 3, /최/이/김",
+      "2, 3, 김/이/최"
     ],
     "correctIndex": 0,
-    "explanation": "조직도의 최상위 직원은 자신의 관리자가 없으므로 관리자 컬럼이 NULL이다. 따라서 START WITH 관리자 IS NULL로 출발점을 잡고, 부모(상사)의 사원번호가 자식(부하)의 관리자번호와 같다는 조건으로 트리를 위에서 아래로 펼치므로 PRIOR 사원 = 관리자가 된다. 정답은 ①번이다. ② 는 사원 IS NULL 이라 시작 행이 없고 전개 방향도 거꾸로이며, ③ 관리자 = 사원 은 자기 자신이 자기 관리자인 행이어야 해 보통 시작 행이 없고, ④ PRIOR 관리자 = 사원 은 아래에서 위로 올라가는 역방향 전개라 최상위 행에서 출발하면 더 올라갈 곳이 없다.",
+    "explanation": "START WITH 관리자 IS NULL 로 김 에서 시작하고, PRIOR 사원 = 관리자 이므로 '방금 읽은 사원을 관리자로 둔 사원' 으로 내려간다. 김(1) 아래 이·박(2), 이 아래 최·정(3) 이다. LEVEL 3 은 최, 정 의 2행이다. CONNECT_BY_ISLEAF 는 아래에 자식이 없는 행이 1 이라 박, 최, 정 의 3행이다. 박 은 LEVEL 2 지만 부하가 없어 잎이다. SYS_CONNECT_BY_PATH 는 루트부터 현재 행까지 값을 구분자로 이어 붙이고, 맨 앞에도 구분자를 붙인다. 최 는 '/김/이/최' 다. 정답은 ①번이다. ② 는 마지막 단계(LEVEL 3)만 잎으로 본 것이고, ③ 은 경로를 현재 행부터 거꾸로 적고 LEVEL 3 에 박 까지 넣은 것, ④ 는 경로 맨 앞의 구분자를 빠뜨린 것이다.",
     "_source": "authored",
     "references": [
       {
+        "type": "table",
+        "caption": "EMP",
+        "headers": [
+          "사원",
+          "관리자"
+        ],
+        "rows": [
+          [
+            "김",
+            "NULL"
+          ],
+          [
+            "이",
+            "김"
+          ],
+          [
+            "박",
+            "김"
+          ],
+          [
+            "최",
+            "이"
+          ],
+          [
+            "정",
+            "이"
+          ]
+        ]
+      },
+      {
         "type": "sql",
-        "code": "SELECT 사원, 관리자, LEVEL\nFROM   EMP\nSTART WITH (  ㄱ  )\nCONNECT BY PRIOR ( ㄴ ) = ( ㄷ );"
+        "code": "SELECT 사원, LEVEL,\n       CONNECT_BY_ISLEAF AS 잎,\n       SYS_CONNECT_BY_PATH(사원, '/')\n         AS 경로\nFROM EMP\nSTART WITH 관리자 IS NULL\nCONNECT BY PRIOR 사원 = 관리자;"
       }
     ]
   },

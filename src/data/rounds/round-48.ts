@@ -1044,16 +1044,22 @@ export const ROUND_48: QuizQuestion[] = [
     "round": 48,
     "subject": "2과목",
     "number": 25,
-    "title": "기본키 컬럼이 충족해야 하는 제약 조건 조합은?",
+    "title": "아래 테이블에 INSERT ㉠~㉤ 을 차례로 실행했을 때 성공하는 문장만 모두 고른 것은? (Oracle 기준)",
     "options": [
-      "NULL 허용 + UNIQUE",
-      "NULL 허용 + NOT NULL",
-      "NOT NULL 단독",
-      "NOT NULL + UNIQUE"
+      "㉠, ㉢",
+      "㉠, ㉡, ㉢, ㉣",
+      "㉠, ㉡, ㉢",
+      "㉠, ㉢, ㉣"
     ],
     "correctIndex": 3,
-    "explanation": "기본키는 행을 유일하게 식별해야 하므로 비어 있어도 안 되고(NOT NULL) 중복도 허용되지 않아야 한다(UNIQUE). 두 가지를 모두 만족시키는 ④번이 정답이다. ① 은 NULL 을 허용해 값이 없는 행을 식별할 수 없고, ② 는 NULL 허용과 NOT NULL 이 서로 모순되며, ③ NOT NULL 만으로는 중복 값을 막지 못한다.",
-    "_source": "authored"
+    "explanation": "기본키는 UNIQUE 와 NOT NULL 을 함께 가지므로 ㉤ 처럼 ID 가 NULL 이면 실패한다. Oracle 의 복합 UNIQUE 는 칼럼이 모두 NULL 인 행은 검사하지 않지만, 일부만 NULL 이면 NULL 이 아닌 칼럼 값이 같은 행을 중복으로 본다. ㉠ (1, NULL) 은 처음이라 성공하고, ㉡ (1, NULL) 은 X 가 같고 Y 가 둘 다 NULL 이라 중복으로 실패한다. ㉢ 과 ㉣ 은 X, Y 가 모두 NULL 이라 몇 번이든 들어간다. 정답은 ④번이다. ① 은 모두 NULL 인 행도 한 번만 허용된다고 본 것이고, ② 는 NULL 이 하나라도 있으면 중복 검사를 하지 않는다고 본 것, ③ 은 거꾸로 일부 NULL 은 검사하지 않고 모두 NULL 인 행은 한 번만 허용한다고 본 것이다. 참고로 PostgreSQL 은 NULL 이 섞인 행을 서로 다른 값으로 보아 ㉡ 도 성공한다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "CREATE TABLE T (\n  ID NUMBER PRIMARY KEY,\n  X  NUMBER,\n  Y  NUMBER,\n  CONSTRAINT UQ UNIQUE (X, Y)\n);\n\n-- ㉠\nINSERT INTO T VALUES (1, 1, NULL);\n-- ㉡\nINSERT INTO T VALUES (2, 1, NULL);\n-- ㉢\nINSERT INTO T VALUES (3, NULL, NULL);\n-- ㉣\nINSERT INTO T VALUES (4, NULL, NULL);\n-- ㉤\nINSERT INTO T VALUES (NULL, 2, 2);"
+      }
+    ]
   },
   {
     "id": 10625,

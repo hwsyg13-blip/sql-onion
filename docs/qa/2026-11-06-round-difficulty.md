@@ -976,3 +976,5 @@ ERD 선 표기 정리 2차(11-20 14시): 식별자를 다루는 1과목 문항�
 | 53-2-23 | LTRIM·RTRIM 의 문자 집합·TRIM(FROM) 양끝만·LTRIM 은 왼쪽만 | 한 식 → 네 식 결과 | zyx, xxyxz, yxzy, 3 | PostgreSQL 동일 |
 | 52-2-44 | AVG(A+B) vs AVG(A)+AVG(B) vs SUM/COUNT(*) — NULL 이 서로 다른 행에 | 결과 다른 것 하나 → 두 칼럼 표에서 네 값 | 35, 40, 17.5, 30 | PostgreSQL 동일 |
 | 58-2-39 | COALESCE 인자 범위·COUNT 는 NULL 결과 제외·NVL2 인자 순서 | 상수 COALESCE → 표에서 네 값 | 031-2, NULL, 3, 1 | PostgreSQL 동일(NVL2 는 CASE 로 확인) |
+| 46-2-13 | LEVEL·CONNECT_BY_ISLEAF(중간 단계의 잎)·SYS_CONNECT_BY_PATH 맨 앞 구분자 | 빈칸 채우기 → 표에서 세 값 | 2, 3, /김/이/최 | 재귀 CTE 로 PostgreSQL 확인 |
+| 48-2-25 | Oracle 복합 UNIQUE: 일부 NULL 은 중복 검사, 모두 NULL 은 허용·PK NULL | 제약 조합 고르기 → INSERT 5개 중 성공 | ㉠, ㉢, ㉣ | Oracle 규칙(PostgreSQL 은 ㉡ 도 성공 — 해설에 적음) |
