@@ -1223,11 +1223,11 @@ export const ROUND_62: QuizQuestion[] = [
     "references": [
       {
         "type": "table",
-        "caption": "테이블 키 구성",
+        "caption": "테이블 키 구성 (A_ID~C_ID 는 A_ID, B_ID, C_ID)",
         "headers": [
           "테이블",
-          "기본키(PK)",
-          "상위 테이블을 참조하는 외래키(FK)"
+          "PK",
+          "FK(상위 참조)"
         ],
         "rows": [
           [
@@ -1242,13 +1242,13 @@ export const ROUND_62: QuizQuestion[] = [
           ],
           [
             "C",
-            "A_ID, B_ID, C_ID",
+            "A_ID~C_ID",
             "A_ID, B_ID"
           ],
           [
             "D",
-            "A_ID, B_ID, C_ID, D_ID",
-            "A_ID, B_ID, C_ID"
+            "A_ID~D_ID",
+            "A_ID~C_ID"
           ]
         ]
       }

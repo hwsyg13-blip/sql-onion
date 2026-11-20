@@ -1170,7 +1170,7 @@
       "references": [
         {
           "type": "table",
-          "caption": "BOARD",
+          "caption": "BOARD (REG_DATE 는 2026년 월-일)",
           "headers": [
             "BOARD_TYPE",
             "TITLE",
@@ -1179,44 +1179,44 @@
           "rows": [
             [
               "게시판",
-              "자유게시글1",
-              "2026-07-01"
+              "자유글1",
+              "07-01"
             ],
             [
               "게시판",
-              "자유게시글2",
-              "2026-07-05"
+              "자유글2",
+              "07-05"
             ],
             [
               "게시판",
-              "자유게시글3",
-              "2026-07-10"
+              "자유글3",
+              "07-10"
             ],
             [
               "이벤트",
-              "여름맞이 이벤트",
-              "2026-06-20"
+              "여름 이벤트",
+              "06-20"
             ],
             [
               "이벤트",
-              "가을맞이 이벤트",
-              "2026-07-15"
+              "가을 이벤트",
+              "07-15"
             ],
             [
               "공지",
-              "시스템 점검 안내",
-              "2026-07-01"
+              "점검 안내",
+              "07-01"
             ],
             [
               "공지",
-              "이용약관 개정 안내",
-              "2026-07-18"
+              "약관 개정",
+              "07-18"
             ]
           ]
         },
         {
           "type": "sql",
-          "code": "SELECT *\nFROM (\n  SELECT BOARD_TYPE, TITLE,\n         ROW_NUMBER() OVER (PARTITION BY BOARD_TYPE\n                            ORDER BY REG_DATE DESC) AS RN\n  FROM BOARD\n)\nWHERE RN = 1;"
+          "code": "SELECT *\nFROM (\n  SELECT BOARD_TYPE, TITLE,\n         ROW_NUMBER() OVER (\n           PARTITION BY BOARD_TYPE\n           ORDER BY REG_DATE DESC)\n           AS RN\n  FROM BOARD\n)\nWHERE RN = 1;"
         }
       ]
     },

@@ -838,7 +838,7 @@ export const ROUND_47: QuizQuestion[] = [
     "references": [
       {
         "type": "sql",
-        "code": "SELECT 팀명\nFROM   팀\nWHERE  팀번호 = (SELECT 팀번호 FROM (SELECT 팀번호, SUM(연봉) AS 총급여 FROM 사원 GROUP BY 팀번호 ORDER BY 2 DESC) WHERE ROWNUM = 1);"
+        "code": "SELECT 팀명\nFROM   팀\nWHERE  팀번호 =\n  (SELECT 팀번호\n     FROM (SELECT 팀번호,\n                  SUM(연봉) AS 총급여\n             FROM 사원\n            GROUP BY 팀번호\n            ORDER BY 2 DESC)\n    WHERE ROWNUM = 1);"
       }
     ]
   },
@@ -1590,22 +1590,22 @@ export const ROUND_47: QuizQuestion[] = [
       {
         "type": "sql",
         "caption": "가",
-        "code": "SELECT A.평가번호,\n       (SELECT B.상품명 FROM 상품 B WHERE A.상품ID = B.상품ID AND ROWNUM = 1) AS 상품명\nFROM   평가항목 A;"
+        "code": "SELECT A.평가번호,\n       (SELECT B.상품명 FROM 상품 B\n         WHERE A.상품ID = B.상품ID\n           AND ROWNUM = 1) AS 상품명\nFROM   평가항목 A;"
       },
       {
         "type": "sql",
         "caption": "나",
-        "code": "SELECT (SELECT B.상품명 FROM 상품 B WHERE A.상품ID = B.상품ID) AS 상품명\nFROM   평가항목 A;"
+        "code": "SELECT (SELECT B.상품명 FROM 상품 B\n         WHERE A.상품ID = B.상품ID)\n       AS 상품명\nFROM   평가항목 A;"
       },
       {
         "type": "sql",
         "caption": "다",
-        "code": "SELECT *\nFROM   상품 A\nWHERE  A.상품ID = (SELECT 상품ID FROM 평가항목);"
+        "code": "SELECT *\nFROM   상품 A\nWHERE  A.상품ID =\n       (SELECT 상품ID FROM 평가항목);"
       },
       {
         "type": "sql",
         "caption": "라",
-        "code": "SELECT *\nFROM   상품 A\nWHERE  EXISTS (SELECT 1 FROM 평가항목 B WHERE A.상품ID = B.상품ID);"
+        "code": "SELECT *\nFROM   상품 A\nWHERE  EXISTS\n       (SELECT 1 FROM 평가항목 B\n         WHERE A.상품ID = B.상품ID);"
       }
     ]
   },

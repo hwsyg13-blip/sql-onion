@@ -599,7 +599,7 @@
         },
         {
           "type": "sql",
-          "code": "SELECT 상품분류코드, AVG(상품가격) AS 상품가격,\n       COUNT(*) OVER(ORDER BY AVG(상품가격)\n                     RANGE BETWEEN 10000 PRECEDING AND 10000 FOLLOWING) AS 유사개수\nFROM   상품\nGROUP BY 상품분류코드;"
+          "code": "SELECT 상품분류코드,\n       AVG(상품가격) AS 상품가격,\n       COUNT(*) OVER(\n         ORDER BY AVG(상품가격)\n         RANGE BETWEEN 10000 PRECEDING\n               AND 10000 FOLLOWING)\n       AS 유사개수\nFROM   상품\nGROUP BY 상품분류코드;"
         }
       ]
     },
