@@ -1214,16 +1214,22 @@ export const ROUND_50: QuizQuestion[] = [
     "round": 50,
     "subject": "2과목",
     "number": 32,
-    "title": "아래 컬럼 속성(VARCHAR2(8)) 을 변경하는 SQL 로 옳은 것은?",
+    "title": "C1 VARCHAR2(8) 칼럼에 'ABCDEF' 와 NULL 두 행이 있는 테이블 T 에 ㉠~㉤ 을 차례로 실행했다. 성공하는 문장만 모두 고른 것은? (Oracle 기준)",
     "options": [
-      "ALTER TABLE T MODIFY (COL VARCHAR2(10));",
-      "ALTER TABLE T CHANGE COL VARCHAR2(10);",
-      "ALTER TABLE T ALTER COL VARCHAR2(10);",
-      "ALTER TABLE T UPDATE COL VARCHAR2(10);"
+      "㉡, ㉣",
+      "㉡, ㉢, ㉣",
+      "㉠, ㉡, ㉣",
+      "㉡, ㉣, ㉤"
     ],
     "correctIndex": 0,
-    "explanation": "Oracle 에서 이미 있는 컬럼의 타입·크기를 바꿀 때는 ALTER TABLE 테이블명 MODIFY (컬럼명 타입) 을 쓴다(①). CHANGE(②)는 MySQL 문법, ALTER COLUMN(③ 은 COLUMN 도 빠짐)은 SQL Server 문법이며, UPDATE(④)는 데이터를 바꾸는 DML 이다.",
-    "_source": "authored"
+    "explanation": "Oracle 에서 칼럼 정의를 바꿀 때는 MODIFY, 칼럼을 더할 때는 ADD 를 쓴다. 이미 들어 있는 데이터와 맞지 않는 변경은 거부된다. ㉠ 은 6글자인 'ABCDEF' 가 4글자에 들어가지 않아 실패한다. ㉡ 처럼 길이를 늘리는 것은 성공한다. ㉢ 은 NULL 인 행이 이미 있어 NOT NULL 을 걸 수 없다. ㉣ 은 DEFAULT 0 이 있어 기존 두 행에 0 이 채워지므로 NOT NULL 을 지킬 수 있어 성공한다. ㉤ 은 기본값 없이 NOT NULL 칼럼을 더하므로 기존 행이 NULL 이 되어 실패한다(빈 테이블이면 성공). 정답은 ①번이다. ② 는 기존 NULL 행을 검사하지 않는다고 본 것이고, ③ 은 길이를 줄여도 넘치는 글자를 잘라 준다고 본 것, ④ 는 새 칼럼의 NOT NULL 은 이후 입력에만 적용된다고 본 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "-- ㉠\nALTER TABLE T\n  MODIFY (C1 VARCHAR2(4));\n-- ㉡\nALTER TABLE T\n  MODIFY (C1 VARCHAR2(10));\n-- ㉢\nALTER TABLE T\n  MODIFY (C1 NOT NULL);\n-- ㉣\nALTER TABLE T\n  ADD (C2 NUMBER DEFAULT 0 NOT NULL);\n-- ㉤\nALTER TABLE T\n  ADD (C3 NUMBER NOT NULL);"
+      }
+    ]
   },
   {
     "id": 10532,

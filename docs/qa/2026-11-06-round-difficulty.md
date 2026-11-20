@@ -978,3 +978,5 @@ ERD 선 표기 정리 2차(11-20 14시): 식별자를 다루는 1과목 문항�
 | 58-2-39 | COALESCE 인자 범위·COUNT 는 NULL 결과 제외·NVL2 인자 순서 | 상수 COALESCE → 표에서 네 값 | 031-2, NULL, 3, 1 | PostgreSQL 동일(NVL2 는 CASE 로 확인) |
 | 46-2-13 | LEVEL·CONNECT_BY_ISLEAF(중간 단계의 잎)·SYS_CONNECT_BY_PATH 맨 앞 구분자 | 빈칸 채우기 → 표에서 세 값 | 2, 3, /김/이/최 | 재귀 CTE 로 PostgreSQL 확인 |
 | 48-2-25 | Oracle 복합 UNIQUE: 일부 NULL 은 중복 검사, 모두 NULL 은 허용·PK NULL | 제약 조합 고르기 → INSERT 5개 중 성공 | ㉠, ㉢, ㉣ | Oracle 규칙(PostgreSQL 은 ㉡ 도 성공 — 해설에 적음) |
+| 50-2-32 | 데이터가 있는 테이블의 MODIFY(길이 축소·NOT NULL)·ADD(DEFAULT 있는/없는 NOT NULL) | 문법 고르기 → ALTER 5개 중 성공 | ㉡, ㉣ | PostgreSQL 동일(ALTER COLUMN 문법으로 확인) |
+| 59-2-25 | CTAS(WHERE 1 = 2)가 옮기지 않는 DEFAULT·기본키, 옮기는 NOT NULL | 설명 고르기 → INSERT 3개 뒤 값·결과 | NULL, 성공, 오류 | Oracle 규칙(NOT NULL 복사), DEFAULT·PK 미복사는 PostgreSQL 동일 |

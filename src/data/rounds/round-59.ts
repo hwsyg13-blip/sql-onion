@@ -863,16 +863,22 @@ export const ROUND_59: QuizQuestion[] = [
     "round": 59,
     "subject": "2과목",
     "number": 25,
-    "title": "CTAS(CREATE TABLE AS SELECT)에 대한 설명 중 옳은 것은?",
+    "title": "아래 T1 을 CTAS 로 복사한 뒤 ㉠~㉢ 을 차례로 실행했다. '㉠ 뒤 STATUS 값, ㉡ 의 결과, ㉢ 의 결과' 로 옳은 것은? (Oracle 기준)",
     "options": [
-      "데이터 속성을 재정의해야 한다.",
-      "NOT NULL은 전달되지 않는다.",
-      "기본키, 외래키 등 제약사항은 전달되지 않는다.",
-      "컬럼 타입은 전달되지 않는다."
+      "Y, 오류, 오류",
+      "NULL, 오류, 성공",
+      "NULL, 성공, 오류",
+      "Y, 성공, 오류"
     ],
     "correctIndex": 2,
-    "explanation": "CTAS는 컬럼 타입과 NOT NULL 제약은 그대로 전달하므로 데이터 속성을 일일이 재정의할 필요가 없다. 반면 기본키·외래키 등 다른 제약사항은 전달되지 않는다. 따라서 ③이 옳은 설명이다. ① 컬럼 타입이 그대로 넘어오므로 다시 정의할 필요가 없고, ② NOT NULL 은 전달되며, ④ 컬럼 타입도 전달된다.",
-    "_source": "authored"
+    "explanation": "WHERE 1 = 2 는 항상 거짓이라 데이터 없이 칼럼 구조만 복사된다. Oracle 의 CTAS 는 칼럼 이름·타입과 NOT NULL 만 옮기고 기본키·외래키·DEFAULT 는 옮기지 않는다. ㉠ 은 STATUS 를 빼고 넣었는데 T2 에는 DEFAULT 'Y' 가 없으므로 STATUS 는 NULL 이다. ㉡ 은 ID 1 이 또 들어가지만 T2 에는 기본키가 없어 성공한다. ㉢ 은 NAME 을 빼고 넣었는데 NOT NULL 은 옮겨져 있으므로 오류다. 정답은 ③번이다. ① 은 DEFAULT 와 기본키까지 옮겨진다고 본 것이고, ② 는 기본키는 옮기고 NOT NULL 은 옮기지 않는다고 거꾸로 본 것, ④ 는 DEFAULT 만 옮겨진다고 본 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "CREATE TABLE T1 (\n  ID     NUMBER PRIMARY KEY,\n  NAME   VARCHAR2(10) NOT NULL,\n  STATUS CHAR(1) DEFAULT 'Y'\n);\n\nCREATE TABLE T2 AS\nSELECT * FROM T1 WHERE 1 = 2;\n\n-- ㉠\nINSERT INTO T2 (ID, NAME)\nVALUES (1, 'A');\n-- ㉡\nINSERT INTO T2 (ID, NAME)\nVALUES (1, 'B');\n-- ㉢\nINSERT INTO T2 (ID)\nVALUES (2);"
+      }
+    ]
   },
   {
     "id": 10075,
