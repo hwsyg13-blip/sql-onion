@@ -221,3 +221,5 @@
 - (11-20) 정답률 분석은 문항을 고친 날 이후 이벤트만 써야 한다. 11-14 시험일 이벤트가 대부분이라 그 뒤 바뀐 문항은 판단 불가. question_answer 의 chosen 은 1부터 세는 보기 번호.
 - (11-20) 전 회차 390px 자동 점검: scratchpad/scan390.cjs(ROUNDS=60,61 처럼 일부만 가능). 표 넘침은 table.scrollWidth > 부모 clientWidth 로 잡히지만, 코드 블록은 줄이 접힐 뿐 넘치지 않아 이 방법으로는 안 잡힌다 → JSON 에서 줄 너비(한글 2칸)로 따로 센다.
 - (11-20) SQL 줄 나누기 자동화는 품질이 나빠(튜플·ORDER BY 표현식을 가름) 손으로 했다. 손으로 할 때 scratchpad/sqlfix_lib.py 의 recode(공백 뺀 문자열 동일 확인)·rl(줄 단위 치환, 원래 들여쓰기 유지)·medit(모의고사 풀 _id 로 수정)을 쓰면 빠르고 안전하다. rl 은 다시 돌리면 이미 바뀐 줄을 못 찾아 FAIL 을 찍지만 해는 없다.
+- (11-20) 모의고사 풀(ai-mock·hard-mock·cbt-mock) 문항은 화면에서 번호로 바로 열 수 없다(/exams/ai-mock 은 50문항 세트만). 캡처는 round-45.json 1과목 1~N번 자리에 title·options·correctIndex·explanation·references 를 임시로 옮겨 빌드 → shotc2 45-1… → `git checkout scripts/authored/round-45.json` 후 다시 빌드. 되돌린 뒤 git status 에 round-45 가 없어야 한다.
+- (11-20) verify-sql-pg/results 는 SQL 블록에 문장이 둘 이상이면 'multi-statement' 오류로 센다. 두 SQL 비교형 문항은 답을 PostgreSQL 로 따로 실행해 확인하고 QA 기록에 적는다.
