@@ -1894,7 +1894,7 @@ export const ROUND_59: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT *\nFROM   EMP\nWHERE  DEPTNO = (SELECT DEPTNO FROM DEPT WHERE DNAME = '없는부서');"
+        "code": "SELECT *\nFROM   EMP\nWHERE  DEPTNO =\n       (SELECT DEPTNO FROM DEPT\n         WHERE DNAME = '없는부서');"
       }
     ]
   },
@@ -2012,7 +2012,7 @@ export const ROUND_59: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT VAL,\n       MAX(VAL)         OVER ()                         AS M,\n       SUM(VAL)         OVER (ORDER BY ID)              AS S,\n       FIRST_VALUE(VAL) OVER (ORDER BY ID ROWS BETWEEN\n                              200 PRECEDING AND 200 FOLLOWING) AS F\nFROM   T;"
+        "code": "SELECT VAL,\n       MAX(VAL) OVER () AS M,\n       SUM(VAL) OVER (ORDER BY ID)\n         AS S,\n       FIRST_VALUE(VAL) OVER (\n         ORDER BY ID\n         ROWS BETWEEN 200 PRECEDING\n              AND 200 FOLLOWING) AS F\nFROM   T;"
       }
     ]
   },

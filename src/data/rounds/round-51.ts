@@ -2061,7 +2061,7 @@ export const ROUND_51: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT 지점, 일자,\n       SUM(금액) OVER (PARTITION BY 지점 ORDER BY 일자\n                       ROWS BETWEEN 1 PRECEDING AND CURRENT ROW) AS M\nFROM   T\nORDER BY 지점, 일자;"
+        "code": "SELECT 지점, 일자,\n       SUM(금액) OVER (\n         PARTITION BY 지점\n         ORDER BY 일자\n         ROWS BETWEEN 1 PRECEDING\n              AND CURRENT ROW) AS M\nFROM   T\nORDER BY 지점, 일자;"
       }
     ]
   },

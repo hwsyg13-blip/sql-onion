@@ -2177,7 +2177,7 @@ export const ROUND_47: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT COL1\nFROM (\n    SELECT COL1,\n           RANK() OVER (PARTITION BY 부서 ORDER BY 연봉 DESC) AS RN\n    FROM EMP\n)\nWHERE RN = 1\nORDER BY COL1;"
+        "code": "SELECT COL1\nFROM (\n    SELECT COL1,\n           RANK() OVER (\n             PARTITION BY 부서\n             ORDER BY 연봉 DESC) AS RN\n    FROM EMP\n)\nWHERE RN = 1\nORDER BY COL1;"
       }
     ]
   },

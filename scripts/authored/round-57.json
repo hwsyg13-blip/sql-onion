@@ -1406,7 +1406,7 @@
         },
         {
           "type": "sql",
-          "code": "SELECT *\nFROM   MONTHLY\nWHERE  YM BETWEEN '2022-11' AND '2023-05'\nAND    EXTRACT(MONTH FROM TO_DATE(YM, 'YYYY-MM')) NOT IN (1, 2, 4);"
+          "code": "SELECT *\nFROM   MONTHLY\nWHERE  YM BETWEEN '2022-11'\n              AND '2023-05'\nAND    EXTRACT(MONTH FROM\n         TO_DATE(YM, 'YYYY-MM'))\n       NOT IN (1, 2, 4);"
         }
       ]
     },

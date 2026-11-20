@@ -1792,7 +1792,7 @@ export const ROUND_61: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT * FROM TBL1\nWHERE COL1 NOT IN (SELECT COL2 FROM TBL2 WHERE COL2 IN (100, NULL));"
+        "code": "SELECT * FROM TBL1\nWHERE COL1 NOT IN\n      (SELECT COL2 FROM TBL2\n        WHERE COL2 IN (100, NULL));"
       }
     ]
   },
@@ -2147,7 +2147,7 @@ export const ROUND_61: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT (SELECT MAX(SAL) FROM EMP WHERE DEPT_ID = 30)\n     + (SELECT MIN(SAL) FROM EMP WHERE DEPT_ID = 20 AND SAL IS NULL)\nFROM DUAL;"
+        "code": "SELECT (SELECT MAX(SAL) FROM EMP\n         WHERE DEPT_ID = 30)\n     + (SELECT MIN(SAL) FROM EMP\n         WHERE DEPT_ID = 20\n           AND SAL IS NULL)\nFROM DUAL;"
       }
     ]
   },
@@ -2226,7 +2226,7 @@ export const ROUND_61: QuizQuestion[] = [
     "references": [
       {
         "type": "sql",
-        "code": "CREATE TABLE DEPT (\n    DEPT_ID    NUMBER PRIMARY KEY,\n    DEPT_NAME  VARCHAR2(20)\n);\n\nCREATE TABLE EMP (\n    EMP_ID    NUMBER PRIMARY KEY,\n    EMP_NAME  VARCHAR2(20),\n    DEPT_ID   NUMBER,\n    CONSTRAINT FK_DEPT FOREIGN KEY (DEPT_ID) REFERENCES DEPT(DEPT_ID)\n);\n\nINSERT INTO DEPT VALUES (10, '개발팀');\nINSERT INTO EMP VALUES (1, 'KIM', 10);"
+        "code": "CREATE TABLE DEPT (\n    DEPT_ID    NUMBER PRIMARY KEY,\n    DEPT_NAME  VARCHAR2(20)\n);\n\nCREATE TABLE EMP (\n    EMP_ID    NUMBER PRIMARY KEY,\n    EMP_NAME  VARCHAR2(20),\n    DEPT_ID   NUMBER,\n    CONSTRAINT FK_DEPT\n      FOREIGN KEY (DEPT_ID)\n      REFERENCES DEPT(DEPT_ID)\n);\n\nINSERT INTO DEPT VALUES (10, '개발팀');\nINSERT INTO EMP VALUES (1, 'KIM', 10);"
       }
     ]
   },

@@ -369,7 +369,7 @@ export const ROUND_55: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT DEPT, SAL,\n       DENSE_RANK() OVER (PARTITION BY DEPT ORDER BY SAL DESC) AS RNK\nFROM   EMP;"
+        "code": "SELECT DEPT, SAL,\n       DENSE_RANK() OVER (\n         PARTITION BY DEPT\n         ORDER BY SAL DESC) AS RNK\nFROM   EMP;"
       }
     ],
     "optionReferences": [
