@@ -912,7 +912,7 @@
         },
         {
           "type": "sql",
-          "code": "SELECT (SELECT COUNT(*) FROM (SELECT X FROM A UNION SELECT X FROM B)),\n       (SELECT COUNT(*) FROM (SELECT X FROM A UNION ALL SELECT X FROM B)),\n       (SELECT COUNT(*) FROM (SELECT X FROM A INTERSECT SELECT X FROM B)),\n       (SELECT COUNT(*) FROM (SELECT X FROM A MINUS SELECT X FROM B))\nFROM   DUAL;"
+          "code": "SELECT\n  (SELECT COUNT(*) FROM\n    (SELECT X FROM A UNION\n     SELECT X FROM B)),\n  (SELECT COUNT(*) FROM\n    (SELECT X FROM A UNION ALL\n     SELECT X FROM B)),\n  (SELECT COUNT(*) FROM\n    (SELECT X FROM A INTERSECT\n     SELECT X FROM B)),\n  (SELECT COUNT(*) FROM\n    (SELECT X FROM A MINUS\n     SELECT X FROM B))\nFROM   DUAL;"
         }
       ]
     },
@@ -1512,7 +1512,7 @@
         },
         {
           "type": "sql",
-          "code": "SELECT (SELECT COUNT(*) FROM T1 A\n        WHERE NOT EXISTS (SELECT 1 FROM T2 B WHERE B.COL1 = A.COL1)),\n       (SELECT COUNT(*) FROM T1\n        WHERE COL1 NOT IN (SELECT COL1 FROM T2))\nFROM   DUAL;"
+          "code": "SELECT\n  (SELECT COUNT(*) FROM T1 A\n    WHERE NOT EXISTS\n          (SELECT 1 FROM T2 B\n            WHERE B.COL1 = A.COL1)),\n  (SELECT COUNT(*) FROM T1\n    WHERE COL1 NOT IN\n          (SELECT COL1 FROM T2))\nFROM   DUAL;"
         }
       ]
     },
@@ -1662,7 +1662,7 @@
         },
         {
           "type": "sql",
-          "code": "SELECT (SELECT COUNT(*) FROM A FULL OUTER JOIN B ON A.ID = B.ID),\n       (SELECT COUNT(*) FROM (\n          SELECT A.ID AS X, B.ID AS Y FROM A LEFT JOIN B ON A.ID = B.ID\n          UNION\n          SELECT A.ID, B.ID FROM A RIGHT JOIN B ON A.ID = B.ID)),\n       (SELECT COUNT(*) FROM (\n          SELECT A.ID AS X, B.ID AS Y FROM A LEFT JOIN B ON A.ID = B.ID\n          UNION ALL\n          SELECT A.ID, B.ID FROM A RIGHT JOIN B ON A.ID = B.ID))\nFROM   DUAL;"
+          "code": "SELECT\n  (SELECT COUNT(*)\n     FROM A FULL OUTER JOIN B\n       ON A.ID = B.ID),\n  (SELECT COUNT(*) FROM (\n     SELECT A.ID AS X, B.ID AS Y\n       FROM A LEFT JOIN B\n         ON A.ID = B.ID\n     UNION\n     SELECT A.ID, B.ID\n       FROM A RIGHT JOIN B\n         ON A.ID = B.ID)),\n  (SELECT COUNT(*) FROM (\n     SELECT A.ID AS X, B.ID AS Y\n       FROM A LEFT JOIN B\n         ON A.ID = B.ID\n     UNION ALL\n     SELECT A.ID, B.ID\n       FROM A RIGHT JOIN B\n         ON A.ID = B.ID))\nFROM   DUAL;"
         }
       ]
     },
@@ -1766,7 +1766,7 @@
         },
         {
           "type": "sql",
-          "code": "SELECT (SELECT COUNT(*) FROM T WHERE COL1 IN ('A','B') OR COL2 <> 'c'),\n       (SELECT COUNT(*) FROM (SELECT COL1 FROM T WHERE COL1 IN ('A','B')\n                              UNION ALL\n                              SELECT COL1 FROM T WHERE COL2 <> 'c')),\n       (SELECT COUNT(*) FROM (SELECT COL1 FROM T WHERE COL1 IN ('A','B')\n                              UNION\n                              SELECT COL1 FROM T WHERE COL2 <> 'c'))\nFROM   DUAL;"
+          "code": "SELECT\n  (SELECT COUNT(*) FROM T\n    WHERE COL1 IN ('A','B')\n       OR COL2 <> 'c'),\n  (SELECT COUNT(*) FROM\n    (SELECT COL1 FROM T\n      WHERE COL1 IN ('A','B')\n     UNION ALL\n     SELECT COL1 FROM T\n      WHERE COL2 <> 'c')),\n  (SELECT COUNT(*) FROM\n    (SELECT COL1 FROM T\n      WHERE COL1 IN ('A','B')\n     UNION\n     SELECT COL1 FROM T\n      WHERE COL2 <> 'c'))\nFROM   DUAL;"
         }
       ]
     },
@@ -1906,7 +1906,7 @@
         },
         {
           "type": "sql",
-          "code": "SELECT V1,\n       COUNT(*) OVER (ORDER BY N1\n                      RANGE BETWEEN 50 PRECEDING AND 50 FOLLOWING) AS CNT\nFROM   T\nORDER  BY V1;"
+          "code": "SELECT V1,\n       COUNT(*) OVER (ORDER BY N1\n         RANGE BETWEEN 50 PRECEDING\n               AND 50 FOLLOWING) AS CNT\nFROM   T\nORDER  BY V1;"
         }
       ]
     },
@@ -2499,7 +2499,7 @@
         },
         {
           "type": "sql",
-          "code": "SELECT (SELECT COUNT(*) FROM (SELECT ROW_NUMBER() OVER (ORDER BY 급여 DESC) AS R FROM T) WHERE R <= 2),\n       (SELECT COUNT(*) FROM (SELECT RANK()       OVER (ORDER BY 급여 DESC) AS R FROM T) WHERE R <= 2),\n       (SELECT COUNT(*) FROM (SELECT DENSE_RANK() OVER (ORDER BY 급여 DESC) AS R FROM T) WHERE R <= 2)\nFROM   DUAL;"
+          "code": "SELECT\n  (SELECT COUNT(*) FROM\n    (SELECT ROW_NUMBER() OVER\n       (ORDER BY 급여 DESC) AS R\n       FROM T) WHERE R <= 2),\n  (SELECT COUNT(*) FROM\n    (SELECT RANK() OVER\n       (ORDER BY 급여 DESC) AS R\n       FROM T) WHERE R <= 2),\n  (SELECT COUNT(*) FROM\n    (SELECT DENSE_RANK() OVER\n       (ORDER BY 급여 DESC) AS R\n       FROM T) WHERE R <= 2)\nFROM   DUAL;"
         }
       ]
     },
@@ -3388,7 +3388,7 @@
         },
         {
           "type": "sql",
-          "code": "-- ①\nWHERE HIRE_DT >= DATE '2025-10-21' AND HIRE_DT < DATE '2025-10-22'\n\n-- ②\nWHERE TRUNC(HIRE_DT) = DATE '2025-10-21'\n\n-- ③\nWHERE HIRE_DT BETWEEN DATE '2025-10-21' AND DATE '2025-10-22'"
+          "code": "-- ①\nWHERE HIRE_DT >= DATE '2025-10-21'\n  AND HIRE_DT < DATE '2025-10-22'\n\n-- ②\nWHERE TRUNC(HIRE_DT)\n      = DATE '2025-10-21'\n\n-- ③\nWHERE HIRE_DT\n      BETWEEN DATE '2025-10-21'\n          AND DATE '2025-10-22'"
         }
       ]
     },

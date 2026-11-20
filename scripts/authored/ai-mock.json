@@ -613,7 +613,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT * FROM EMP WHERE DEPTNO NOT IN (SELECT DEPTNO FROM DEPT WHERE LOC = 'SEOUL');"
+          "code": "SELECT * FROM EMP\nWHERE DEPTNO NOT IN\n      (SELECT DEPTNO FROM DEPT\n        WHERE LOC = 'SEOUL');"
         }
       ]
     },
