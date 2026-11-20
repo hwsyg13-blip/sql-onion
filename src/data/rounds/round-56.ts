@@ -416,7 +416,7 @@ export const ROUND_56: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT COUNT(ALL COL1)      FROM TAB1 WHERE COL2 = 'A';\nSELECT COUNT(DISTINCT COL1) FROM TAB1;"
+        "code": "SELECT COUNT(ALL COL1) FROM TAB1\nWHERE COL2 = 'A';\nSELECT COUNT(DISTINCT COL1) FROM TAB1;"
       }
     ]
   },
@@ -1258,7 +1258,7 @@ export const ROUND_56: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT *\nFROM   TAB1\nWHERE  (COL1, COL2) NOT IN (SELECT COL1, COL2 FROM TAB2);"
+        "code": "SELECT *\nFROM   TAB1\nWHERE  (COL1, COL2) NOT IN\n       (SELECT COL1, COL2 FROM TAB2);"
       }
     ]
   },

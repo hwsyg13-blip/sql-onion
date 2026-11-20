@@ -276,7 +276,7 @@
         },
         {
           "type": "sql",
-          "code": "-- ㉠ SELECT * FROM T WHERE COL LIKE '%a_c%';\n-- ㉡ SELECT * FROM T WHERE COL LIKE '%a\\_c%' ESCAPE '\\';"
+          "code": "-- ㉠ SELECT * FROM T\n--    WHERE COL LIKE '%a_c%';\n-- ㉡ SELECT * FROM T\n--    WHERE COL LIKE '%a\\_c%'\n--    ESCAPE '\\';"
         }
       ]
     },
@@ -559,7 +559,7 @@
         },
         {
           "type": "sql",
-          "code": "SELECT A.ID, B.V\nFROM   A   ( ? )   B\nON     A.ID = B.ID;\n-- A에 없는 B의 행까지 모두 포함되는 결과를 얻어야 한다."
+          "code": "SELECT A.ID, B.V\nFROM   A   ( ? )   B\nON     A.ID = B.ID;\n-- A에 없는 B의 행까지 모두 포함되는\n-- 결과를 얻어야 한다."
         },
         {
           "type": "table",
@@ -1141,7 +1141,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "MERGE INTO TGT T\nUSING SRC S ON (T.ID = S.ID)\nWHEN MATCHED THEN UPDATE SET T.V = S.V\nWHEN NOT MATCHED THEN INSERT (ID, V) VALUES (S.ID, S.V);"
+          "code": "MERGE INTO TGT T\nUSING SRC S ON (T.ID = S.ID)\nWHEN MATCHED THEN\n  UPDATE SET T.V = S.V\nWHEN NOT MATCHED THEN\n  INSERT (ID, V) VALUES (S.ID, S.V);"
         }
       ]
     },
@@ -1917,7 +1917,7 @@
         },
         {
           "type": "sql",
-          "code": "SELECT *\nFROM   EMP\nWHERE  SAL > ALL (SELECT SAL FROM EMP WHERE DEPTNO = 10);"
+          "code": "SELECT *\nFROM   EMP\nWHERE  SAL > ALL (SELECT SAL FROM EMP\n                   WHERE DEPTNO = 10);"
         }
       ]
     }

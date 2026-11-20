@@ -2062,7 +2062,7 @@
         },
         {
           "type": "sql",
-          "code": "SELECT V1, N1,\n       COUNT(N1) OVER\n             (ORDER BY N1 (  ㄱ  )\n              BETWEEN 0 PRECEDING AND 50 FOLLOWING) AS CNT\nFROM   SQLD48;"
+          "code": "SELECT V1, N1,\n       COUNT(N1) OVER (\n         ORDER BY N1 (  ㄱ  )\n         BETWEEN 0 PRECEDING\n             AND 50 FOLLOWING) AS CNT\nFROM   SQLD48;"
         }
       ]
     },

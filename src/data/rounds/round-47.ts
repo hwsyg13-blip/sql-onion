@@ -1072,7 +1072,7 @@ export const ROUND_47: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT GRADE FROM GRADE_TABLE A,\n  (SELECT MAX(SCORE) AS MAX_SCORE FROM PLAYER) B\nWHERE A.LOWER <= B.MAX_SCORE AND A.UPPER >= B.MAX_SCORE;"
+        "code": "SELECT GRADE FROM GRADE_TABLE A,\n  (SELECT MAX(SCORE) AS MAX_SCORE\n     FROM PLAYER) B\nWHERE A.LOWER <= B.MAX_SCORE\n  AND A.UPPER >= B.MAX_SCORE;"
       }
     ]
   },

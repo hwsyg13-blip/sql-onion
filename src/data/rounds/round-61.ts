@@ -2272,7 +2272,7 @@ export const ROUND_61: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT SALE_DATE, AMT,\n       AMT - LAG(AMT) OVER (ORDER BY SALE_DATE) AS DIFF\nFROM SALES;"
+        "code": "SELECT SALE_DATE, AMT,\n       AMT - LAG(AMT) OVER (\n               ORDER BY SALE_DATE)\n         AS DIFF\nFROM SALES;"
       }
     ]
   },

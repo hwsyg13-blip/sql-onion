@@ -1890,7 +1890,7 @@ export const ROUND_52: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "MERGE INTO TGT T USING SRC S ON (T.ID = S.ID)\nWHEN MATCHED THEN UPDATE SET T.V = S.V\nWHEN NOT MATCHED THEN INSERT (ID, V) VALUES (S.ID, S.V);"
+        "code": "MERGE INTO TGT T USING SRC S\n  ON (T.ID = S.ID)\nWHEN MATCHED THEN\n  UPDATE SET T.V = S.V\nWHEN NOT MATCHED THEN\n  INSERT (ID, V) VALUES (S.ID, S.V);"
       }
     ]
   },

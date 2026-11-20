@@ -969,7 +969,7 @@
         },
         {
           "type": "sql",
-          "code": "SELECT * FROM A\nWHERE 번호 IN (SELECT 번호 FROM B WHERE A.성별 = B.성별);"
+          "code": "SELECT * FROM A\nWHERE 번호 IN (SELECT 번호 FROM B\n               WHERE A.성별 = B.성별);"
         }
       ]
     },
@@ -1368,7 +1368,7 @@
         },
         {
           "type": "sql",
-          "code": "SELECT EMP_ID,\n       ROW_NUMBER() OVER (ORDER BY SALARY) AS ROW_NUM,\n       RANK()       OVER (ORDER BY SALARY) AS RANK_NUM,\n       DENSE_RANK() OVER (ORDER BY SALARY) AS DRANK_NUM\nFROM   EMP;"
+          "code": "SELECT EMP_ID,\n       ROW_NUMBER() OVER\n         (ORDER BY SALARY) AS ROW_NUM,\n       RANK() OVER\n         (ORDER BY SALARY) AS RANK_NUM,\n       DENSE_RANK() OVER\n         (ORDER BY SALARY) AS DRANK_NUM\nFROM   EMP;"
         }
       ]
     },
