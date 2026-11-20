@@ -994,3 +994,4 @@ ERD 선 표기 정리 2차(11-20 14시): 식별자를 다루는 1과목 문항�
 모의고사 풀(ai-mock·cbt-mock·hard-mock) 긴 SQL 90블록도 같은 방식으로 손질 — 기출·모의고사 모두 SQL 한 줄 39칸 이내.
 이론 코드 블록(11-20 14시): 이론 30챕터를 390px 로 열어 점검 — 화면 밖으로 나가던 코드 13줄(c223·c224·c231·c233·c234)을 나눔(긴 끝 주석은 다음 줄로). 함수 표처럼 칸이 많은 표는 #280 에서 정한 대로 좌우 스크롤로 둠.
 | 47-2-12 | 실제 NULL 이 있는 칼럼의 ROLLUP — 소계 NULL 과 진짜 NULL 구별(GROUPING) | 절 고르기 → 표에서 행 수·NULL 행·GROUPING 1 행 | 6, 4, 3 | PostgreSQL 동일 |
+| 55-2-37 | Oracle(NULL 이 가장 큼) vs SQL Server(NULL 이 가장 작음)·NULLS FIRST | 기본 동작 설명 → 네 정렬의 첫 행 | 100, NULL, NULL, NULL | Oracle 쪽 PostgreSQL 동일, SQL Server 는 정의 |
