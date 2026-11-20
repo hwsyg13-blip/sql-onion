@@ -1513,33 +1513,45 @@
     {
       "subject": "2과목",
       "number": 44,
-      "title": "아래 T 테이블에 대한 네 개의 AVG 계산식 중 결과가 서로 다른 것은?",
+      "title": "아래 T 테이블에 대한 SQL 의 결과로 옳은 것은? (㉠, ㉡, ㉢, ㉣ 순서)",
       "options": [
-        "SUM(NVL(COL, 0)) / COUNT(*)",
-        "SUM(COL) / COUNT(*)",
-        "AVG(NVL(COL, 0))",
-        "AVG(COL)"
+        "35, 35, 17.5, 30",
+        "40, 40, 30, 30",
+        "35, 40, 35, 30",
+        "35, 40, 17.5, 30"
       ],
       "correctIndex": 3,
-      "explanation": "AVG(COL) 은 NULL 을 자동 제외하여 (10+20)/2 = 15 를 반환한다. ① ② ③ 은 모두 NULL 을 0 으로 취급하거나 분모가 전체 행이라 (10+0+20)/3 = 10 으로 같은 값이 나온다.",
+      "explanation": "A + B 는 둘 중 하나라도 NULL 이면 NULL 이라 행마다 30, NULL, NULL, 40 이 된다. ㉠ AVG(A + B) 는 NULL 이 아닌 30, 40 의 평균이라 35 다. ㉡ 은 열마다 따로 평균을 낸다. AVG(A) 는 (10 + 20 + 30) / 3 = 20, AVG(B) 는 (20 + 30 + 10) / 3 = 20 이라 합이 40 이다. ㉢ SUM(A + B) 는 70 인데 COUNT(*) 는 NULL 행까지 4 라 17.5 다. ㉣ 은 SUM(A) 60 과 SUM(B) 60 을 더한 120 을 4 로 나눠 30 이다. 정답은 ④번이다. ① 은 ㉡ 도 행 단위 합의 평균과 같다고 본 것이고, ② 는 A + B 에서 NULL 을 0 처럼 더한 것, ③ 은 ㉢ 의 COUNT(*) 를 NULL 아닌 행 수(2)로 본 것이다.",
       "references": [
         {
           "type": "table",
-          "caption": "T 테이블",
+          "caption": "T",
           "headers": [
-            "COL"
+            "A",
+            "B"
           ],
           "rows": [
             [
-              "10"
+              "10",
+              "20"
             ],
             [
+              "NULL",
+              "30"
+            ],
+            [
+              "20",
               "NULL"
             ],
             [
-              "20"
+              "30",
+              "10"
             ]
           ]
+        },
+        {
+          "type": "sql",
+          "code": "SELECT AVG(A + B)               AS ㉠,\n       AVG(A) + AVG(B)          AS ㉡,\n       SUM(A + B) / COUNT(*)    AS ㉢,\n       (SUM(A) + SUM(B))\n         / COUNT(*)             AS ㉣\nFROM T;"
         }
       ]
     },

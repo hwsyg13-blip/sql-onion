@@ -1429,19 +1429,59 @@
     {
       "subject": "2과목",
       "number": 39,
-      "title": "아래 SQL 수행 결과로 옳은 것은?",
+      "title": "아래 연락처 테이블에 대해 '이름이 나 인 행의 ㉠ 과 ㉡, 전체 행에 대한 ㉢ 과 ㉣' 을 차례대로 나열한 것은?",
       "options": [
-        "NULL",
-        "3",
-        "4",
-        "오류 발생"
+        "031-2, 031-2, 3, 1",
+        "031-2, NULL, 3, 1",
+        "031-2, NULL, 4, 1",
+        "031-2, NULL, 3, 3"
       ],
       "correctIndex": 1,
-      "explanation": "COALESCE 는 인수를 왼쪽부터 보며 처음 NULL 이 아닌 값을 반환한다. NULL, NULL 다음의 3 이 처음 NULL 이 아닌 값이므로 3 이다(②). 마지막 4 는 평가하지 않는다. ① 처음으로 NULL 이 아닌 값이 있으므로 NULL 이 아니고, ③ 4 는 마지막 값을 고른 결과, ④ 인수가 여러 개여도 오류는 나지 않는다.",
+      "explanation": "COALESCE 는 인자를 왼쪽부터 보며 처음으로 NULL 이 아닌 값을 돌려주고, 모두 NULL 이면 NULL 이다. 나 는 휴대폰·집이 NULL 이고 회사만 있어 ㉠ 은 '031-2' 다. ㉡ 은 회사를 인자로 넣지 않았으므로 휴대폰·집 모두 NULL 이라 NULL 이다. ㉢ 은 행마다 COALESCE 결과(010-1, 031-2, 02-3, NULL) 중 NULL 이 아닌 것만 세어 3 이다. 라 는 세 칼럼이 모두 NULL 이라 빠진다. ㉣ 의 NVL2(휴대폰, 1, NULL) 은 휴대폰이 있으면 1, 없으면 NULL 이라 가 한 명만 세어져 1 이다. 정답은 ②번이다. ① 은 ㉡ 에 없는 회사 칼럼까지 본 것이고, ③ 은 COUNT 가 NULL 결과도 센다고 본 것, ④ 는 NVL2 의 인자 순서를 반대로 읽어 휴대폰이 없는 3명을 센 것이다.",
       "references": [
         {
+          "type": "table",
+          "caption": "연락처",
+          "headers": [
+            "이름",
+            "휴대폰",
+            "집",
+            "회사"
+          ],
+          "rows": [
+            [
+              "가",
+              "010-1",
+              "NULL",
+              "02-1"
+            ],
+            [
+              "나",
+              "NULL",
+              "NULL",
+              "031-2"
+            ],
+            [
+              "다",
+              "NULL",
+              "02-3",
+              "NULL"
+            ],
+            [
+              "라",
+              "NULL",
+              "NULL",
+              "NULL"
+            ]
+          ]
+        },
+        {
           "type": "sql",
-          "code": "SELECT COALESCE(NULL, NULL, 3, 4) FROM DUAL;"
+          "code": "㉠ COALESCE(휴대폰, 집, 회사)\n㉡ COALESCE(휴대폰, 집)"
+        },
+        {
+          "type": "sql",
+          "code": "SELECT\n  COUNT(COALESCE(휴대폰, 집, 회사))\n    AS ㉢,\n  COUNT(NVL2(휴대폰, 1, NULL))\n    AS ㉣\nFROM 연락처;"
         }
       ]
     },

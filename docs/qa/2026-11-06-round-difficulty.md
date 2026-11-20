@@ -974,3 +974,5 @@ ERD 선 표기 정리 2차(11-20 14시): 식별자를 다루는 1과목 문항�
 | 56-2-17 | CEIL(-0.5) = 0·ROUND(9.5)·FLOOR(-9.5)·SIGN | 세 식 → 네 식 결과 | 0, 10, -10, -1 | PostgreSQL 동일 |
 | 51-2-22 | NULL / 0 은 오류가 아니라 NULL·NVL 로 0 이 되면 0 나누기 오류 | 두 식 결과 → 네 SQL 중 오류 모두 | ㉢, ㉣ | PostgreSQL 동일(COALESCE) |
 | 53-2-23 | LTRIM·RTRIM 의 문자 집합·TRIM(FROM) 양끝만·LTRIM 은 왼쪽만 | 한 식 → 네 식 결과 | zyx, xxyxz, yxzy, 3 | PostgreSQL 동일 |
+| 52-2-44 | AVG(A+B) vs AVG(A)+AVG(B) vs SUM/COUNT(*) — NULL 이 서로 다른 행에 | 결과 다른 것 하나 → 두 칼럼 표에서 네 값 | 35, 40, 17.5, 30 | PostgreSQL 동일 |
+| 58-2-39 | COALESCE 인자 범위·COUNT 는 NULL 결과 제외·NVL2 인자 순서 | 상수 COALESCE → 표에서 네 값 | 031-2, NULL, 3, 1 | PostgreSQL 동일(NVL2 는 CASE 로 확인) |
