@@ -981,7 +981,7 @@ export const ROUND_45: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT COUNT(*)\nFROM   고객 A, 주문 B, 주문상세 C, 상품 D, 카테고리 E\nWHERE  A.고객ID = B.고객ID\nAND    B.주문ID = C.주문ID\nAND    C.상품ID = D.상품ID\nAND    E.카테고리명 = '문구';"
+        "code": "SELECT COUNT(*)\nFROM   고객 A, 주문 B, 주문상세 C,\n       상품 D, 카테고리 E\nWHERE  A.고객ID = B.고객ID\nAND    B.주문ID = C.주문ID\nAND    C.상품ID = D.상품ID\nAND    E.카테고리명 = '문구';"
       }
     ]
   },
@@ -1269,7 +1269,7 @@ export const ROUND_45: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "INSERT FIRST\n       WHEN N1 >= 2 THEN INTO TABLE1(N1) VALUES (N1)\n       WHEN N1 >= 3 THEN INTO TABLE2(N1) VALUES (N1)\n       ELSE                INTO TABLE3    VALUES (N1)\nSELECT N1 FROM TABLE0;"
+        "code": "INSERT FIRST\n  WHEN N1 >= 2 THEN\n    INTO TABLE1(N1) VALUES (N1)\n  WHEN N1 >= 3 THEN\n    INTO TABLE2(N1) VALUES (N1)\n  ELSE\n    INTO TABLE3 VALUES (N1)\nSELECT N1 FROM TABLE0;"
       }
     ]
   },

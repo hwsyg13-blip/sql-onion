@@ -1208,7 +1208,7 @@ export const ROUND_52: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT SUM(연봉) FROM (\n  SELECT MAX(연봉) AS 연봉 FROM 사원 WHERE 부서 = 'A'\n  UNION\n  SELECT MAX(연봉) FROM 사원 WHERE 부서 = 'B'\n  UNION ALL\n  SELECT MIN(연봉) FROM 사원 WHERE 부서 = 'C'\n);"
+        "code": "SELECT SUM(연봉) FROM (\n  SELECT MAX(연봉) AS 연봉 FROM 사원\n   WHERE 부서 = 'A'\n  UNION\n  SELECT MAX(연봉) FROM 사원\n   WHERE 부서 = 'B'\n  UNION ALL\n  SELECT MIN(연봉) FROM 사원\n   WHERE 부서 = 'C'\n);"
       }
     ]
   },

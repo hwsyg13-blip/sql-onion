@@ -841,7 +841,7 @@
         },
         {
           "type": "sql",
-          "code": "SELECT SAL,\n       RANK()       OVER (ORDER BY SAL DESC) AS RNK,\n       DENSE_RANK() OVER (ORDER BY SAL DESC) AS D_RNK,\n       FIRST_VALUE(SAL) OVER (ORDER BY SAL DESC) AS FV\nFROM   사원;"
+          "code": "SELECT SAL,\n       RANK() OVER\n         (ORDER BY SAL DESC) AS RNK,\n       DENSE_RANK() OVER\n         (ORDER BY SAL DESC) AS D_RNK,\n       FIRST_VALUE(SAL) OVER\n         (ORDER BY SAL DESC) AS FV\nFROM   사원;"
         }
       ]
     },
@@ -1115,7 +1115,7 @@
         },
         {
           "type": "sql",
-          "code": "CREATE TABLE 품목 (품목ID VARCHAR(3), 단가 NUMBER);\n-- 초기 데이터: 001 1000, 002 2000, 003 1000, 004 2000\n\nBEGIN TRANSACTION;\nINSERT INTO 품목 VALUES ('005', 2000);\nCOMMIT;\n\nBEGIN TRANSACTION;\nDELETE FROM 품목 WHERE 품목ID = '002';\nBEGIN TRANSACTION;\nUPDATE 품목 SET 단가 = 2000 WHERE 단가 = 1000;\nROLLBACK;\n\nSELECT COUNT(품목ID) FROM 품목 WHERE 단가 = 2000;"
+          "code": "CREATE TABLE 품목\n  (품목ID VARCHAR(3), 단가 NUMBER);\n-- 초기 데이터: 001 1000, 002 2000,\n--             003 1000, 004 2000\n\nBEGIN TRANSACTION;\nINSERT INTO 품목 VALUES ('005', 2000);\nCOMMIT;\n\nBEGIN TRANSACTION;\nDELETE FROM 품목 WHERE 품목ID = '002';\nBEGIN TRANSACTION;\nUPDATE 품목 SET 단가 = 2000\nWHERE 단가 = 1000;\nROLLBACK;\n\nSELECT COUNT(품목ID) FROM 품목\nWHERE 단가 = 2000;"
         }
       ]
     },

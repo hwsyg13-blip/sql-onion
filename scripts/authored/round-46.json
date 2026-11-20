@@ -1205,7 +1205,7 @@
         },
         {
           "type": "sql",
-          "code": "-- (가)\nSELECT A, SUM(X) FROM T GROUP BY A ORDER BY C;\n\n-- (나)\nSELECT A, SUM(X) FROM T GROUP BY A HAVING COUNT(C) > 1;"
+          "code": "-- (가)\nSELECT A, SUM(X) FROM T\nGROUP BY A ORDER BY C;\n\n-- (나)\nSELECT A, SUM(X) FROM T\nGROUP BY A HAVING COUNT(C) > 1;"
         }
       ]
     },

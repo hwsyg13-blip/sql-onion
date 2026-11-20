@@ -2019,7 +2019,7 @@ export const ROUND_50: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT 행, 금액,\n       LAG(금액, 2, 0) OVER (ORDER BY 행) AS 이전금액\nFROM   매출;"
+        "code": "SELECT 행, 금액,\n       LAG(금액, 2, 0) OVER\n         (ORDER BY 행) AS 이전금액\nFROM   매출;"
       },
       {
         "type": "table",

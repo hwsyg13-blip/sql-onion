@@ -833,7 +833,7 @@ export const ROUND_60: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT SUM( CASE WHEN SAL = 4 THEN SAL END ),   -- ㉠\n       SUM( SAL )                               -- ㉡\nFROM   T;"
+        "code": "SELECT SUM( CASE WHEN SAL = 4\n                 THEN SAL END ), -- ㉠\n       SUM( SAL )                -- ㉡\nFROM   T;"
       }
     ]
   },

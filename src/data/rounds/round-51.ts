@@ -644,7 +644,7 @@ export const ROUND_51: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "-- ㉠ SELECT SUM(A + B + C + D) FROM T;\n-- ㉡ SELECT SUM(A) + SUM(B) + SUM(C) + SUM(D) FROM T;"
+        "code": "-- ㉠ SELECT SUM(A + B + C + D)\n--    FROM T;\n-- ㉡ SELECT SUM(A) + SUM(B)\n--         + SUM(C) + SUM(D)\n--    FROM T;"
       }
     ]
   },

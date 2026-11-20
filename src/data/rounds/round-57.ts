@@ -1948,7 +1948,7 @@ export const ROUND_57: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "DELETE FROM 회원\nWHERE  ID NOT IN (SELECT  ?  FROM 회원 GROUP BY  ?  );"
+        "code": "DELETE FROM 회원\nWHERE  ID NOT IN\n       (SELECT  ?  FROM 회원\n         GROUP BY  ?  );"
       },
       {
         "type": "table",

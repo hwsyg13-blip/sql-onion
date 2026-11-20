@@ -692,7 +692,7 @@ export const ROUND_56: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT COUNT(DISTINCT 물품) FROM 업체;\nSELECT COUNT(*) FROM 업체 WHERE 물품 IN ('p', NULL);"
+        "code": "SELECT COUNT(DISTINCT 물품) FROM 업체;\nSELECT COUNT(*) FROM 업체\nWHERE 물품 IN ('p', NULL);"
       }
     ]
   },

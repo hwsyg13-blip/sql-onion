@@ -1427,7 +1427,7 @@ export const ROUND_61: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT *\nFROM   PRODUCT\nWHERE  PROD_ID NOT IN (SELECT PARENT_ID FROM PRODUCT);"
+        "code": "SELECT *\nFROM   PRODUCT\nWHERE  PROD_ID NOT IN\n       (SELECT PARENT_ID FROM PRODUCT);"
       }
     ]
   },
@@ -2202,7 +2202,7 @@ export const ROUND_61: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT DEPTNO, PRODUCT, SUM(AMT)\nFROM SALES\nGROUP BY GROUPING SETS((DEPTNO, PRODUCT),(DEPTNO),());"
+        "code": "SELECT DEPTNO, PRODUCT, SUM(AMT)\nFROM SALES\nGROUP BY GROUPING SETS(\n  (DEPTNO, PRODUCT), (DEPTNO), ());"
       }
     ]
   },

@@ -1144,7 +1144,7 @@ export const ROUND_53: QuizQuestion[] = [
       {
         "type": "sql",
         "caption": "나",
-        "code": "SELECT *\nFROM   EMP\nWHERE  SAL = (SELECT SAL FROM EMP WHERE DEPTNO = 10);"
+        "code": "SELECT *\nFROM   EMP\nWHERE  SAL = (SELECT SAL FROM EMP\n               WHERE DEPTNO = 10);"
       },
       {
         "type": "sql",
