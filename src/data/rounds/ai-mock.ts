@@ -1,5 +1,5 @@
 // Auto-generated from scripts/authored/ai-mock.json
-// AI 생성 모의고사 풀 (기출 변형) · 1171문항
+// AI 생성 모의고사 풀 (기출 변형) · 1172문항
 // ⚠ 직접 편집 금지. ai-mock.json 수정 후 'node scripts/build-quiz-bank.mjs' 재실행.
 import type { QuizQuestion } from '../quizBank';
 
@@ -1567,19 +1567,42 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 72,
-    "title": "윈도우 함수 중에서 윈도우에서 제일 먼저 나오는 것을 0으로 하고 제일 늦게 나오는 것을 1로 해서 행 순서별 백분율을 구하는 것은?",
+    "title": "아래 T 에 대해 함수(...) OVER (ORDER BY VAL) 의 결과가 0, 0.33, 0.33, 1 이 되는 함수는? (소수 둘째 자리 반올림)",
     "options": [
-      "FIRST_VALUE",
-      "LAST_VALUE",
-      "PERCENT_RANK",
-      "CUME_DIST"
+      "FIRST_VALUE(VAL)",
+      "LAST_VALUE(VAL)",
+      "PERCENT_RANK()",
+      "CUME_DIST()"
     ],
     "correctIndex": 2,
-    "explanation": "윈도우에서 처음 나오는 행을 0, 마지막 행을 1 로 두고 순서별 백분율 순위를 구하는 함수는 PERCENT_RANK 다(③, (순위 - 1) / (전체 행 수 - 1)). CUME_DIST(④)는 현재 행 이하인 행의 누적 비율이라 첫 행이 0 이 아니고, FIRST_VALUE(①)·LAST_VALUE(②)는 첫 행·마지막 행의 값을 반환한다.",
+    "explanation": "PERCENT_RANK 는 (순위 - 1) / (전체 행 수 - 1) 로, 첫 행을 0, 마지막 행을 1 로 둔 상대 위치다. 순위가 1, 2, 2, 4 이므로 0/3, 1/3, 1/3, 3/3 = 0, 0.33, 0.33, 1 이다. 정답은 ③번이다. ④ CUME_DIST 는 현재 값 이하인 행의 비율이라 1/4, 3/4, 3/4, 4/4 = 0.25, 0.75, 0.75, 1 이다. ① FIRST_VALUE 는 늘 10, ② LAST_VALUE 는 기본 윈도우에서 현재 값과 같은 마지막 행 값이라 10, 20, 20, 40 이다.",
     "chapter": "윈도우 함수",
     "_source": "cbt-mock",
     "_origId": "cbt-022",
-    "_cbtOrigNo": 22
+    "_cbtOrigNo": 22,
+    "references": [
+      {
+        "type": "table",
+        "caption": "T",
+        "headers": [
+          "VAL"
+        ],
+        "rows": [
+          [
+            "10"
+          ],
+          [
+            "20"
+          ],
+          [
+            "20"
+          ],
+          [
+            "40"
+          ]
+        ]
+      }
+    ]
   },
   {
     "id": 10872,
@@ -2505,19 +2528,69 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 102,
-    "title": "서브쿼리의 종류 중에 서브쿼리를 실행하고 한 행, 한 칼럼을 반환하는 서브쿼리를 무엇이라고 하는가?",
+    "title": "아래 SQL 의 SELECT 절 서브쿼리 유형과 실행 결과로 옳은 것은?",
     "options": [
-      "Looping",
-      "Scalar Subquery",
-      "Associative Subquery",
-      "Access Subquery"
+      "인라인 뷰 — 3행이 나온다.",
+      "스칼라 서브쿼리 — DEPT 에 20번이 두 행이라 실행 중 오류가 난다.",
+      "스칼라 서브쿼리 — 20번 부서 사원 B 는 DNAME 이 NULL 로 나온다.",
+      "연관 서브쿼리가 아니라 한 번만 실행되어 모든 행에 같은 DNAME 이 나온다."
     ],
     "correctIndex": 1,
-    "explanation": "한 행·한 컬럼, 즉 값 하나만 반환하는 서브쿼리는 스칼라 서브쿼리(Scalar Subquery)이며 주로 SELECT 절에 쓴다(②). 두 행 이상이 반환되면 오류가 난다. Associative Subquery(③)는 연관 서브쿼리, Access Subquery(④)는 메인쿼리에 값을 제공하는 서브쿼리이고, Looping(①)은 서브쿼리 종류가 아니다.",
+    "explanation": "SELECT 절에 쓴 서브쿼리는 행마다 값 하나(한 행, 한 칼럼)를 돌려줘야 하는 스칼라 서브쿼리다. B(20)에 대해 DEPT 에서 두 행(개발, 개발2)이 나오므로 단일 행이 아니라 오류가 난다. 정답은 ②번이다. 짝이 없는 C(30)는 오류가 아니라 NULL 이 된다. ③ 은 이 경우와 헷갈린 것이다. ④ 서브쿼리가 바깥의 E.DEPTNO 를 참조하므로 연관 서브쿼리이고 행마다 실행된다. ① 인라인 뷰는 FROM 절의 서브쿼리다.",
     "chapter": "서브쿼리",
     "_source": "cbt-mock",
     "_origId": "cbt-055",
-    "_cbtOrigNo": 55
+    "_cbtOrigNo": 55,
+    "references": [
+      {
+        "type": "table",
+        "caption": "EMP",
+        "headers": [
+          "ENAME",
+          "DEPTNO"
+        ],
+        "rows": [
+          [
+            "A",
+            "10"
+          ],
+          [
+            "B",
+            "20"
+          ],
+          [
+            "C",
+            "30"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "DEPT",
+        "headers": [
+          "DEPTNO",
+          "DNAME"
+        ],
+        "rows": [
+          [
+            "10",
+            "영업"
+          ],
+          [
+            "20",
+            "개발"
+          ],
+          [
+            "20",
+            "개발2"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT E.ENAME,\n       (SELECT D.DNAME\n        FROM   DEPT D\n        WHERE  D.DEPTNO = E.DEPTNO)\nFROM   EMP E;"
+      }
+    ]
   },
   {
     "id": 10902,
@@ -3361,15 +3434,15 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 127,
-    "title": "다음 중 문법적으로 올바른 SQL은?",
+    "title": "다음 중 오류 없이 실행되는 SQL 은?",
     "options": [
-      "SELECT * WHERE DEPTNO = 10 FROM EMP;",
-      "SELECT EMP, * FROM SALARY;",
-      "SELECT * FROM EMPLOYEE WHERE SALARY > 2000;",
-      "SELECT WHERE NAME = 'A' * FROM EMP;"
+      "SELECT DEPTNO, COUNT(*) FROM EMP GROUP BY DEPTNO WHERE SAL > 100;",
+      "SELECT DEPTNO, COUNT(*) FROM EMP ORDER BY DEPTNO GROUP BY DEPTNO;",
+      "SELECT DEPTNO, COUNT(*) FROM EMP WHERE SAL > 100 GROUP BY DEPTNO HAVING COUNT(*) > 1 ORDER BY 2 DESC;",
+      "SELECT DEPTNO, ENAME, COUNT(*) FROM EMP GROUP BY DEPTNO;"
     ],
     "correctIndex": 2,
-    "explanation": "SELECT 문은 SELECT 컬럼 FROM 테이블 WHERE 조건 순서로 써야 한다. ③ 은 이 순서를 지켜 올바르다. ① 은 WHERE 가 FROM 보다 앞에 있고, ② 는 '테이블명, *' 처럼 존재하지 않는 컬럼 EMP 와 * 를 나열하는 형태라 오류이며, ④ 는 절의 순서가 뒤섞여 있다.",
+    "explanation": "절은 SELECT → FROM → WHERE → GROUP BY → HAVING → ORDER BY 순으로 써야 한다. ③ 은 순서가 맞고, ORDER BY 2 는 두 번째 칼럼 COUNT(*) 를 뜻한다. 정답은 ③번이다. ① WHERE 가 GROUP BY 뒤에 와서, ② ORDER BY 가 GROUP BY 앞에 와서 오류다. ④ 는 순서는 맞지만 GROUP BY 에 없는 ENAME 을 집계 없이 SELECT 해 오류다.",
     "chapter": "WHERE",
     "_source": "cbt-mock",
     "_origId": "cbt-082",
@@ -6159,19 +6232,51 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 214,
-    "title": "다음 중 KEY에 대한 설명으로 올바르지 않은 것은?",
+    "title": "[학생](학번, 주민번호, 이름, 학과) 에서 학번과 주민번호는 각각 모든 학생이 다르다. 키에 대한 설명으로 올바르지 않은 것은?",
     "options": [
-      "슈퍼키는 유일성과 최소성을 만족한다.",
-      "후보키는 유일성과 최소성을 만족한다.",
-      "대체키는 유일성과 최소성을 만족한다.",
-      "주 키는 유일성과 최소성을 만족한다"
+      "(학번, 이름) 은 학생을 구분할 수 있으므로 슈퍼키이자 후보키다.",
+      "학번과 주민번호는 각각 후보키다.",
+      "학번을 기본키로 정하면 주민번호는 대체키가 된다.",
+      "기본키는 후보키 중에서 고르므로 유일성과 최소성을 모두 만족한다."
     ],
     "correctIndex": 0,
-    "explanation": "슈퍼키는 유일성만 만족해도 되기 때문에 유일한 인스턴스를 식별할 수 있는 속성 조합이라면 모두 슈퍼키가 될 수 있다. 이 중 최소성까지 만족하면 후보키가 되고, 후보키 중에서 선택된 하나의 키가 주키, 나머지는 대체키가 된다.",
+    "explanation": "슈퍼키는 유일성만 만족하면 되고, 후보키는 유일성과 최소성(꼭 필요한 속성만)을 함께 만족해야 한다. (학번, 이름) 은 학생을 구분하므로 슈퍼키이지만, 이름을 빼도 학번만으로 구분되어 최소성을 어기므로 후보키가 아니다. 정답은 ①번이다. ② 학번, 주민번호는 각각 혼자서 유일하고 더 줄일 수 없어 후보키다. ③ 후보키 중 기본키로 뽑히지 않은 것이 대체키다. ④ 기본키는 후보키 중 하나라 두 성질을 모두 갖는다.",
     "chapter": "관계형 DB와 SELECT",
     "_source": "cbt-mock",
     "_origId": "cbt-172",
-    "_cbtOrigNo": 172
+    "_cbtOrigNo": 172,
+    "references": [
+      {
+        "type": "table",
+        "caption": "학생",
+        "headers": [
+          "학번",
+          "주민번호",
+          "이름",
+          "학과"
+        ],
+        "rows": [
+          [
+            "S1",
+            "R1",
+            "김",
+            "컴"
+          ],
+          [
+            "S2",
+            "R2",
+            "김",
+            "경영"
+          ],
+          [
+            "S3",
+            "R3",
+            "이",
+            "컴"
+          ]
+        ]
+      }
+    ]
   },
   {
     "id": 11014,
@@ -13563,6 +13668,27 @@ export const AI_MOCK: QuizQuestion[] = [
         "content": "ㄱ : SELECT DEPT FROM STUDENT;\nㄴ : SELECT DISTINCT DEPT\n       FROM STUDENT;\nㄷ : SELECT NAME FROM STUDENT \n       WHERE DEPT = '영문학과';"
       }
     ]
+  },
+  {
+    "id": 11251,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 452,
+    "title": "윈도우 함수 중에서 윈도우에서 제일 먼저 나오는 것을 0으로 하고 제일 늦게 나오는 것을 1로 해서 행 순서별 백분율을 구하는 것은?",
+    "options": [
+      "CUME_DIST",
+      "PERCENT_RANK",
+      "LAST_VALUE",
+      "FIRST_VALUE"
+    ],
+    "correctIndex": 1,
+    "explanation": "위의 문제는 PERCENT_RANK()라는 윈도우 함수에 대한 것이다. PERCENT_RANK() 함수는 인수로 지정한 값의 그룹 내의 위치를 백분위로 나타낸다. CUME_DIST() 함수는 인수로 지정한 값의 그룹 내 누적분포를 계산한다.",
+    "chapter": "윈도우 함수",
+    "_source": "sqld-1140",
+    "_origId": "sqld-0261",
+    "_category": "윈도우 함수",
+    "_correctRate": 10
   },
   {
     "id": 11252,

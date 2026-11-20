@@ -1113,6 +1113,10 @@ ERD 선 표기 정리 2차(11-20 14시): 식별자를 다루는 1과목 문항�
 | cbt-141 | EQUI JOIN 은 PK·FK 불필요, NON-EQUI·OUTER 결과 | 정의 문장 → SALGRADE 사례 | ② | PostgreSQL 실행(2행, LEFT 3행, = 조인 0행) |
 | cbt-068 | UNION 은 중복 제거 비용, ORDER BY 스칼라 서브쿼리 | 일반 문장 → SQL 예 포함 | ① | PostgreSQL 실행(ORDER BY 스칼라 서브쿼리 동작 확인) |
 | cbt-129 | FROM 절 서브쿼리 = 인라인 뷰(비연관), 부서 평균 비교 결과 | 이름 고르기 → 유형 + 행 수 | 인라인 뷰, 2행 | PostgreSQL 실행 |
+| cbt-022 | PERCENT_RANK (순위-1)/(n-1) vs CUME_DIST, 동률 | 이름 고르기 → 결과에 맞는 함수 | ③ | PostgreSQL 실행 |
+| cbt-055 | 스칼라 서브쿼리 다중 행 오류 vs 짝 없음 NULL, 연관 여부 | 이름 고르기 → 유형 + 결과 | ② | PostgreSQL 실행(다중 행 오류) |
+| cbt-172 | 슈퍼키(유일성) vs 후보키(유일성+최소성), 대체키 | 정의 문장 → 학생 데이터의 키 판단 | ① | 정의·데이터로 판정 |
+| cbt-082 | 절 순서와 GROUP BY 에 없는 칼럼 | 엉터리 문장 → 그럴듯한 오류 SQL | ③ | PostgreSQL 실행 |
 
 ## 11-21 06시 실행 — 11-06 이후 한 번도 안 바뀐 기출(226문항) 차례로
 
