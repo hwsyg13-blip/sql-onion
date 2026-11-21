@@ -1214,5 +1214,7 @@ sqld-0312·0319(M494·M501, 데이터베이스 파티션 기법)도 성능 데�
 |---|---|---|---|
 | 45-2-20 | INSERT 1~5 와 SAVEPOINT 하나로 남는 INSERT 고르기 | 주문 테이블 + SAVEPOINT 두 개, 같은 이름 SP1 재사용, 두 번 되돌린 뒤 SUM. 오답: SP2 되돌림 누락(1100), INSERT 4 잔존(1800), 'SP2 오류'(SP1 을 처음 위치로 착각) | PostgreSQL 16 로 실행 → 1400. 오답 값 1100·1800 손계산 확인. Oracle 도 같은 이름 SAVEPOINT 는 앞의 것을 지움 |
 | 45-2-28 | 빈 테이블에 NULL 하나씩 넣는 INSERT | 기존 두 행 + DEFAULT·NOT NULL·UNIQUE·CHECK. 명시적 NULL 은 DEFAULT 안 씀, UNIQUE 는 NULL 중복 허용, CHECK 는 NULL(UNKNOWN) 통과 | PostgreSQL 16: ①·②·④ 각각 NOT NULL·UNIQUE·CHECK 오류, ③ 만 (3, 0, NULL, NULL) 입력 |
+| 46-2-36 | 세 행 ORDER BY, NULL 하나 | 사원 6행, 부서·보너스 양쪽 NULL + 'DESC 는 보너스에만' + 보너스 NULL 동률 → 급여 오름차순. 오답: NULL 을 가장 작게(①), DESC 가 급여까지(③), SQL Server 방식(④) | PostgreSQL 16(NULL 정렬 기본값이 Oracle 과 같음) → 김하늘, 최유나, 강지우, 정민호, 이도윤, 박서준 |
+| 46-2-40 | CASE 네 행 판정 | 점수·출석 NULL, ELSE 없는 검색 CASE + 단순 CASE 의 WHEN NULL. 등급 NULL 행 수와 표시 합을 묻고, 오답은 AND 누락·WHEN NULL 매칭 두 실수 조합 | PostgreSQL 16 → 등급 (A, NULL, NULL, NULL, C), 표시 (-1, 1, 1, -1, -1) → 3건, -1 |
 
-390px 캡처: 두 문항 모두 표·SQL 넘침 없음.
+390px 캡처: 네 문항 모두 표·SQL 넘침 없음.
