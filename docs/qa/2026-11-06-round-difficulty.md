@@ -1242,5 +1242,7 @@ sqld-0312·0319(M494·M501, 데이터베이스 파티션 기법)도 성능 데�
 | 58-2-47 | 역방향 CONNECT BY 빈칸 | 6행 조직 + 역방향 전개 + WHERE 로 중간 노드 제외(전개는 계속, LEVEL 유지) | PostgreSQL 16 재귀 CTE 로 같은 전개 → SMITH(1), FORD(2), KING(4) |
 | 59-2-19 | DDL 끼인 트랜잭션 행 수 | SAVEPOINT + DDL(암시적 커밋으로 SAVEPOINT 소멸) + ROLLBACK TO 오류 + ROLLBACK | PostgreSQL 16 은 DDL 이 트랜잭션 안에 들어가므로 DDL 자리에 COMMIT 을 넣어 흉내 → 15, ROLLBACK TO 에서 'savepoint does not exist' |
 | 59-2-38 | 연관 없는 EXISTS 한 문장 | EXISTS(연관 없음)·EXISTS(연관)·NOT IN(목록 NULL)·NOT EXISTS 네 문장 | PostgreSQL 16 → 3, 1, 0, 2 |
+| 60-2-13 | 빈칸에 PIVOT | PIVOT 의 암시적 GROUP BY(사번이 남으면 사번별) vs 인라인 뷰로 칼럼 줄이기 + IN 목록 밖 직급 행 | PostgreSQL 16 은 PIVOT 이 없어 같은 GROUP BY + FILTER 집계로 흉내 → ㉠ 5행, ㉡ 2행(인사 사원 7200) |
+| 60-2-17 | FULL OUTER JOIN + NVL 고르기 | 중복 키(T1 의 2 두 행)·NULL 키(T2) FULL OUTER JOIN, (행 수, TOT 합) | PostgreSQL 16 → 5행, 1510 |
 
-390px 캡처: 서른 문항 모두 표·SQL 넘침 없음.
+390px 캡처: 서른두 문항 모두 표·SQL 넘침 없음.
