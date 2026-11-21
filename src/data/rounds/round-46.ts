@@ -2312,92 +2312,51 @@ export const ROUND_46: QuizQuestion[] = [
     "round": 46,
     "subject": "2과목",
     "number": 50,
-    "title": "아래 결과를 얻기 위한 SQL의 GROUP BY 절로 올바른 것은?",
+    "title": "아래 EMP 테이블에 대한 SQL 의 (결과 행 수, JOB 이 NULL 이면서 G 가 1 인 행 수) 로 옳은 것은?",
     "options": [
-      "ROLLUP ( GRADE, JOB )",
-      "GROUPING SETS ( GRADE, (GRADE, JOB) )",
-      "CUBE ( GRADE, JOB )",
-      "GRADE, JOB"
+      "(6, 3)",
+      "(7, 3)",
+      "(7, 4)",
+      "(6, 2)"
     ],
     "correctIndex": 1,
-    "explanation": "결과 표는 (GRADE, JOB) 세부 4행에 GRADE 단위 소계 2행만 더해진 6행이고 전체 총계 행이 없다. GROUPING SETS 는 필요한 집계 조합만 골라 지정하므로 (GRADE) 와 (GRADE, JOB) 두 조합이 정확히 이 결과를 만든다. ① ROLLUP 은 전체 총계까지 붙어 7행이 되고, ③ CUBE 는 JOB 단위 소계까지 추가되며, ④ 일반 GROUP BY 는 소계 자체가 없어 4행에 그친다.",
+    "explanation": "ROLLUP(GRADE, JOB) 은 (GRADE, JOB) 상세, (GRADE) 소계, () 총계를 만든다. 상세는 (A, MANAGER), (A, CLERK), (B, MANAGER), (B, NULL) 4행이다. B 의 JOB 이 NULL 인 행도 원래 데이터라 하나의 그룹이 된다. 여기에 GRADE 별 소계 2행과 총계 1행이 더해져 7행이다. 소계·총계 행의 JOB 은 집계 때문에 NULL 로 채워지고 GROUPING(JOB) = 1 이다. 데이터 자체가 NULL 인 (B, NULL, 50) 은 GROUPING(JOB) = 0 이다. 그래서 JOB 이 NULL 이면서 G = 1 인 행은 3행이고, 정답은 ②번이다. ① 은 데이터의 NULL 행이 B 소계와 합쳐진다고 본 값이다. ③ 은 화면에 NULL 로 보이는 행 네 개를 모두 G = 1 로 본 값이다. ④ 는 ROLLUP 에 총계 행이 없다고 본 값이다. 데이터 NULL 과 소계 NULL 을 구분하려고 GROUPING 함수를 쓴다.",
     "_source": "authored",
     "references": [
       {
         "type": "table",
-        "caption": "EMP 테이블",
+        "caption": "EMP",
         "headers": [
           "GRADE",
           "JOB",
-          "ENAME"
+          "SAL"
         ],
         "rows": [
           [
             "A",
             "MANAGER",
-            "홍길동"
+            "300"
           ],
           [
             "A",
             "CLERK",
-            "김철수"
+            "100"
           ],
           [
             "B",
             "MANAGER",
-            "이순신"
+            "250"
           ],
           [
             "B",
-            "CLERK",
-            "박지성"
+            "NULL",
+            "50"
           ]
         ]
       },
       {
         "type": "sql",
-        "code": "SELECT GRADE, JOB, COUNT(*)\nFROM   EMP\nGROUP BY (  ㄱ  );"
-      },
-      {
-        "type": "table",
-        "caption": "기대 결과",
-        "headers": [
-          "GRADE",
-          "JOB",
-          "COUNT(*)"
-        ],
-        "rows": [
-          [
-            "A",
-            "MANAGER",
-            "1"
-          ],
-          [
-            "A",
-            "CLERK",
-            "1"
-          ],
-          [
-            "B",
-            "MANAGER",
-            "1"
-          ],
-          [
-            "B",
-            "CLERK",
-            "1"
-          ],
-          [
-            "A",
-            "(NULL)",
-            "2"
-          ],
-          [
-            "B",
-            "(NULL)",
-            "2"
-          ]
-        ]
+        "code": "SELECT GRADE, JOB,\n       SUM(SAL)      AS S,\n       GROUPING(JOB) AS G\nFROM   EMP\nGROUP BY ROLLUP(GRADE, JOB);"
       }
     ]
   }

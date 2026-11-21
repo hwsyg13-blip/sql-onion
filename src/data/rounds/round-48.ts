@@ -869,20 +869,20 @@ export const ROUND_48: QuizQuestion[] = [
     "round": 48,
     "subject": "2과목",
     "number": 21,
-    "title": "아래 EMP 테이블의 HIRE_DT 컬럼에 대해 \"2025-10-21 하루\" 데이터를 조회하려 할 때 결과가 달라지는 조건은?",
+    "title": "아래 EMP 테이블에 대한 ㉠~㉣ 의 결과 행 수를 차례로 나열한 것은? (Oracle 기준, HIRE_DT 는 DATE 타입으로 시각까지 저장)",
     "options": [
-      "HIRE_DT >= DATE '2025-10-21' AND HIRE_DT < DATE '2025-10-22'",
-      "TRUNC(HIRE_DT) = DATE '2025-10-21'",
-      "HIRE_DT BETWEEN DATE '2025-10-21' AND DATE '2025-10-22'",
-      "HIRE_DT >= DATE '2025-10-21' AND HIRE_DT <= DATE '2025-10-21' + 1 - 1/86400"
+      "2, 2, 5, 5",
+      "3, 2, 5, 5",
+      "3, 2, 4, 5",
+      "3, 2, 4, 6"
     ],
     "correctIndex": 2,
-    "explanation": "Oracle DATE 리터럴 비교 시 `DATE '2025-10-22'`는 22일 0시 0분 0초를 의미한다. ①은 \"21일 0시 ≤ HIRE_DT < 22일 0시\"로 정확히 21일 하루만 잡고, ②는 TRUNC로 시간을 0시로 깎아 21일만 잡으며, ④는 \"21일 0시 ≤ HIRE_DT ≤ 22일 0시 - 1초\"라 21일 23:59:59까지만 잡는다. 그러나 ③의 BETWEEN은 양 끝값을 포함하므로 22일 0시까지 결과에 들어가 22일 0시 정각인 7004 까지 함께 조회된다. 결과가 달라지는 것은 ③번이라 정답이다.",
+    "explanation": "DATE '2025-10-22' 는 그날 0시 0분 0초다. ㉠ 의 BETWEEN 은 양 끝을 포함하므로 10-21 0시(7002), 18시 45분(7003), 10-22 0시(7004)까지 3행이다. ㉡ 은 시각을 잘라 날짜만 비교하므로 10-21 의 두 행이다. ㉢ 의 LAST_DAY(DATE '2025-10-01') 은 2025-10-31 0시라, 그날 23시 59분 59초인 7005 는 빠지고 7001~7004 4행이다. ㉣ 은 11-01 0시 미만이므로 10월 전체인 7001~7005 5행이다. 정답은 ③번이다. ① 은 BETWEEN 이 끝 날짜 0시를 빼고, LAST_DAY 가 그날 끝까지 포함한다고 본 값이다. ② 는 LAST_DAY 를 10-31 23시 59분 59초로 본 값이다. ④ 는 < 를 <= 처럼 보고 11-01 0시(7006)까지 넣은 값이다. 한 달 범위는 ㉣ 처럼 '다음 달 1일 미만' 으로 쓰는 것이 안전하다.",
     "_source": "authored",
     "references": [
       {
         "type": "table",
-        "caption": "EMP 테이블 (HIRE_DT — DATE 타입, 시·분·초 포함)",
+        "caption": "EMP",
         "headers": [
           "EMPNO",
           "HIRE_DT"
@@ -894,7 +894,7 @@ export const ROUND_48: QuizQuestion[] = [
           ],
           [
             "7002",
-            "2025-10-21 09:00:00"
+            "2025-10-21 00:00:00"
           ],
           [
             "7003",
@@ -906,9 +906,17 @@ export const ROUND_48: QuizQuestion[] = [
           ],
           [
             "7005",
-            "2025-10-22 11:00:00"
+            "2025-10-31 23:59:59"
+          ],
+          [
+            "7006",
+            "2025-11-01 00:00:00"
           ]
         ]
+      },
+      {
+        "type": "sql",
+        "code": "-- ㉠\nWHERE HIRE_DT BETWEEN DATE '2025-10-21'\n                  AND DATE '2025-10-22'\n-- ㉡\nWHERE TRUNC(HIRE_DT)\n    = DATE '2025-10-21'\n-- ㉢\nWHERE HIRE_DT >= DATE '2025-10-01'\nAND   HIRE_DT <= LAST_DAY(\n                   DATE '2025-10-01')\n-- ㉣\nWHERE HIRE_DT >= DATE '2025-10-01'\nAND   HIRE_DT < ADD_MONTHS(\n                  DATE '2025-10-01', 1)"
       }
     ]
   },
