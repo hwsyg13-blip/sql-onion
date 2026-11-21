@@ -1228,5 +1228,7 @@ sqld-0312·0319(M494·M501, 데이터베이스 파티션 기법)도 성능 데�
 | 51-2-29 | 4행 순위 함수 마지막 값 | 7행, 동점 두 쌍 + RANK·DENSE_RANK·NTILE(3)(나머지 앞 묶음부터) | PostgreSQL 16 → EMPNO 4 는 (6, 4, 3) |
 | 52-2-12 | 네 NULL 함수 중 결과가 다른 것 | 5행 + NVL2·NULLIF·COALESCE·DECODE 를 SUM/COUNT 로 묶은 (A, B, C, D). 오답: NULLIF(100, NULL)=NULL, NVL2 방향 반대, DECODE 의 NULL 비교 | PostgreSQL 16(NVL2·DECODE 는 CASE 로) → (498, 200, 4, 2) |
 | 52-2-49 | ON DELETE CASCADE 고르기 | mermaid ERD 4테이블(SET NULL·CASCADE·옵션 없음) + 데이터 + DELETE 세 문장 후 (사원, 근태, NULL 부서 사원) | PostgreSQL 16 에 같은 FK 옵션으로 실행 → ㉢ 은 평가 FK 위반 오류, 결과 (2, 2, 1). 390px 캡처로 ERD 렌더 확인 |
+| 53-2-14 | 3행 BETWEEN AND | 6행(NULL 두 칸) + NOT BETWEEN 5000 AND 3000(아래·위 뒤바뀜) + NVL. 오답: 범위를 고쳐 읽음(1), NULL AMT 포함(5), NVL 누락(3) | PostgreSQL 16 → 4. 고쳐 읽은 식 1, NVL 뺀 식 3 |
+| 53-2-42 | MIN + MAX(TO_CHAR) 3행 | 9·10·100·25 로 문자 비교('9' 가 MAX, '10' 이 MIN) + 암시적 형변환(+ 는 숫자, || 는 문자) | PostgreSQL 16(COLLATE "C" 로 바이트 비교, + 는 명시 변환) → 109, '109' |
 
-390px 캡처: 열여섯 문항 모두 표·SQL 넘침 없음.
+390px 캡처: 열여덟 문항 모두 표·SQL 넘침 없음.
