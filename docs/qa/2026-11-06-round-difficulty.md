@@ -1280,3 +1280,4 @@ sqld-0312·0319(M494·M501, 데이터베이스 파티션 기법)도 성능 데�
 | 52-2-15 | NVL 결과 중 가장 큰 행 | REPLACE(인수 2개)·INSTR(4번째 인수)·LPAD·SUBSTR(음수 시작) | PostgreSQL 16(replace 3인수·regexp_instr·substr 위치 계산으로 같은 값) → 3, 8, '007', 'OP' |
 | 57-2-40 | 숫자 BETWEEN 5행 | VARCHAR2 급여에 문자열 BETWEEN('13'·'1250000' 포함) vs TO_NUMBER 비교 | PostgreSQL 16(COLLATE "C") → ㉠ 5건(1200, 1300, 1400, 13, 1250000), ㉡ 3건. verify-sql-pg 는 표 이름 파싱 오류로 셈(검증기 한계) |
 | 55-2-18 | NULL 산술 세 행 | 산술 NULL 전파 + NVL 한쪽만 + Oracle 의 || NULL 처리 | PostgreSQL 16 은 || 에 NULL 이면 NULL 이라 concat() 으로 흉내 → 3번 행 (NULL, NULL, '10') |
+| 50-2-41 | 뷰 SUM 한 문장 | 뷰 WHERE 의 NULL 제외 + WITH CHECK OPTION 으로 INSERT·UPDATE 성공/실패 후 SUM | PostgreSQL 16 → ㉠ 600, 'A' INSERT·NULL UPDATE 는 check option 오류, 마지막 650 |

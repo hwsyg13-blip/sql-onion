@@ -1715,20 +1715,20 @@ export const ROUND_50: QuizQuestion[] = [
     "round": 50,
     "subject": "2과목",
     "number": 41,
-    "title": "아래 TBL 테이블과 뷰 V_TBL 이 있을 때, 조회 SQL 의 실행 결과로 옳은 것은?",
+    "title": "아래 TBL 테이블과 뷰 V_TBL 에 ㉠ → ㉣ 을 차례로 실행했을 때 (㉠ 의 결과, 마지막 SELECT 의 결과) 로 옳은 것은? (오류가 난 문장은 반영되지 않음)",
     "options": [
-      "300",
-      "600",
-      "800",
-      "900"
+      "(800, 850)",
+      "(600, 650)",
+      "(600, 350)",
+      "(600, 600)"
     ],
     "correctIndex": 1,
-    "explanation": "뷰 조건 C1 <> 'A' 에서 C1 이 NULL 인 행은 비교 결과가 UNKNOWN 이라 참이 아니므로 뷰에 포함되지 않는다. 뷰에는 (B, 200), (B, 100), (C, 300) 만 남아 SUM(C2) = 600 이다. NULL 행까지 포함한다고 착각하면 800(③), 전체 합계는 900(④)이다. ※ 복원 자료에서 이 번호가 2과목 12번과 같은 문제로 중복되어 있어, 같은 범위(뷰·NULL 비교)의 다른 문제로 대체했다.",
+    "explanation": "뷰의 WHERE C1 <> 'A' 에서 C1 이 NULL 인 행은 비교가 UNKNOWN 이라 빠진다. 그래서 ㉠ 은 B 200, B 100, C 300 의 합 600 이다. WITH CHECK OPTION 은 뷰를 통해 넣거나 고친 행이 뷰 조건을 만족해야 한다. ㉡ 의 'A' 는 조건에 어긋나 오류가 나고, ㉢ 의 'D' 는 조건을 만족해 들어간다. ㉣ 은 C 를 NULL 로 바꾸면 C1 <> 'A' 가 UNKNOWN 이 되어 조건을 만족하지 못하므로 오류가 난다. 마지막 SELECT 는 600 + 50 = 650 이다. 정답은 ②번이다. ① 은 NULL 도 'A' 가 아니니 뷰에 보인다고 본 값이다. ③ 은 ㉣ 이 성공해 C 행(300)이 뷰에서 사라진다고 본 값이다. ④ 는 뷰에는 INSERT 를 할 수 없다고 보고 ㉢ 도 실패한다고 본 값이다.",
     "_source": "authored",
     "references": [
       {
         "type": "table",
-        "caption": "TBL 테이블",
+        "caption": "TBL",
         "headers": [
           "C1",
           "C2"
@@ -1758,7 +1758,7 @@ export const ROUND_50: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "CREATE VIEW V_TBL AS\nSELECT * FROM TBL WHERE C1 <> 'A';\n\nSELECT SUM(C2) FROM V_TBL;"
+        "code": "CREATE VIEW V_TBL AS\nSELECT * FROM TBL\nWHERE  C1 <> 'A'\nWITH CHECK OPTION;\n\n-- ㉠\nSELECT SUM(C2) FROM V_TBL;\n-- ㉡\nINSERT INTO V_TBL VALUES ('A', 50);\n-- ㉢\nINSERT INTO V_TBL VALUES ('D', 50);\n-- ㉣\nUPDATE V_TBL SET C1 = NULL\nWHERE  C1 = 'C';\n\nSELECT SUM(C2) FROM V_TBL;"
       }
     ]
   },
