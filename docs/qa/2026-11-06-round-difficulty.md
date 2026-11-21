@@ -1207,3 +1207,12 @@ cbt-192(M233, 행이 1건이면 Table Full Scan 이 유리)는 인덱스 스캔 
 PostgreSQL 검증기의 nomatch 154건 중 숫자 보기 문항을 다시 대조: 걸린 7건(48-2-48, M752·761·765·941·1025·1138)은 모두 조건부 행 수를 묻는 문항이라 조건을 적용해 세면 정답과 일치. 틀린 정답 없음.
 sqld-0312·0319(M494·M501, 데이터베이스 파티션 기법)도 성능 데이터 모델링 범위라 범위 밖 제외에 추가(풀 1175 → 1173).
 
+
+## 11-21 14시 실행 — 11-06 이후 안 바뀐 기출(197문항) 이어서, 45회부터
+
+| 문항 | 전 | 후 | 검증 |
+|---|---|---|---|
+| 45-2-20 | INSERT 1~5 와 SAVEPOINT 하나로 남는 INSERT 고르기 | 주문 테이블 + SAVEPOINT 두 개, 같은 이름 SP1 재사용, 두 번 되돌린 뒤 SUM. 오답: SP2 되돌림 누락(1100), INSERT 4 잔존(1800), 'SP2 오류'(SP1 을 처음 위치로 착각) | PostgreSQL 16 로 실행 → 1400. 오답 값 1100·1800 손계산 확인. Oracle 도 같은 이름 SAVEPOINT 는 앞의 것을 지움 |
+| 45-2-28 | 빈 테이블에 NULL 하나씩 넣는 INSERT | 기존 두 행 + DEFAULT·NOT NULL·UNIQUE·CHECK. 명시적 NULL 은 DEFAULT 안 씀, UNIQUE 는 NULL 중복 허용, CHECK 는 NULL(UNKNOWN) 통과 | PostgreSQL 16: ①·②·④ 각각 NOT NULL·UNIQUE·CHECK 오류, ③ 만 (3, 0, NULL, NULL) 입력 |
+
+390px 캡처: 두 문항 모두 표·SQL 넘침 없음.
