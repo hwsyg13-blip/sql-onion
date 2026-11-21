@@ -59,20 +59,46 @@ export const ROUND_59: QuizQuestion[] = [
     "round": 59,
     "subject": "1과목",
     "number": 3,
-    "title": "보기가 설명하는 개념은?",
+    "title": "아래 [회원]·[주문] 테이블 정의에서 도메인 무결성을 위반하는 입력은?",
     "options": [
-      "제약조건",
-      "도메인",
-      "식별자",
-      "관계"
+      "이미 있는 회원번호 M001 로 새 회원을 입력한다.",
+      "회원등급을 'V' 로 입력한다.",
+      "회원 테이블에 없는 회원번호 M999 로 주문을 입력한다.",
+      "다른 회원이 쓰고 있는 이메일로 새 회원을 입력한다."
     ],
     "correctIndex": 1,
-    "explanation": "도메인은 속성이 가질 수 있는 값의 범위(데이터 타입, 길이, 제약 등)를 정의한 개념이다. ① 제약조건은 데이터 무결성 규칙, ③ 식별자는 엔터티의 인스턴스를 구분하는 속성, ④ 관계는 엔터티 간 연관성을 의미한다.",
+    "explanation": "도메인은 속성이 가질 수 있는 값의 범위(데이터 타입, 길이, 허용 값)를 정한 것이고, 그 범위를 벗어나면 도메인 무결성 위반이다. 회원등급은 'S'·'G'·'B' 만 허용하므로 'V' 를 넣는 ② 가 도메인 위반이다. 정답은 ②번이다. ① 은 기본키가 겹치는 것이라 개체 무결성 위반이다. ③ 은 참조할 부모 행이 없는 외래키 값이라 참조 무결성 위반이다. ④ 는 이메일에 UNIQUE 제약이 없으므로 위반이 아니다.",
     "_source": "authored",
     "references": [
       {
+        "type": "table",
+        "caption": "회원 속성 정의",
+        "headers": [
+          "속성",
+          "정의"
+        ],
+        "rows": [
+          [
+            "회원번호",
+            "PK"
+          ],
+          [
+            "회원등급",
+            "CHAR(1), 'S'·'G'·'B' 중 하나"
+          ],
+          [
+            "나이",
+            "NUMBER(3), 0 이상 150 이하"
+          ],
+          [
+            "이메일",
+            "VARCHAR2(50)"
+          ]
+        ]
+      },
+      {
         "type": "text",
-        "content": "속성이 가질 수 있는 값(데이터 타입 등)의 범위를 정의한 것"
+        "content": "주문 테이블의 회원번호는 회원 테이블의 회원번호를 참조하는 외래키다. 이메일에는 UNIQUE 제약이 없다."
       }
     ]
   },
@@ -619,32 +645,24 @@ export const ROUND_59: QuizQuestion[] = [
     "round": 59,
     "subject": "2과목",
     "number": 19,
-    "title": "아래 트랜잭션 시나리오의 최종 행 개수는?",
+    "title": "아래 SQL 을 한 세션에서 차례로 실행했을 때 마지막 SELECT 의 결과로 옳은 것은? (Oracle 기준, 오류가 난 문장은 건너뛰고 계속 실행)",
     "options": [
       "0",
+      "10",
       "15",
-      "30",
-      "NULL"
+      "18"
     ],
     "correctIndex": 2,
-    "explanation": "DDL 실행 시점에 묵시적 커밋이 발생해 직전까지의 30건이 확정된다. 이후 INSERT는 ROLLBACK으로 취소되므로 최종 30건이 남는다. ① 0 은 ROLLBACK 이 COMMIT 된 것까지 취소한다고 본 값, ② 15 는 CREATE INDEX 의 자동 커밋을 놓친 값이고, ④ COUNT(*) 는 행이 없어도 NULL 이 아니라 0 을 돌려준다.",
+    "explanation": "Oracle 에서 CREATE INDEX 같은 DDL 은 실행 직전에 그때까지의 트랜잭션을 자동으로 COMMIT 한다. 그래서 앞의 10건과 5건이 확정되고, 그 트랜잭션에 있던 SAVEPOINT A 도 함께 사라진다. 이어서 넣은 3건은 새 트랜잭션이다. ROLLBACK TO SAVEPOINT A 는 A 가 더 이상 없으므로 오류가 나고 아무것도 되돌리지 않는다. 마지막 ROLLBACK 이 3건만 취소해 15건이 남는다. 정답은 ③번이다. ① 0 은 DDL 이 커밋하지 않는다고 보고 ROLLBACK 이 전부 취소한다고 본 값이다. ② 10 은 SAVEPOINT A 가 살아 있어 5건과 3건이 취소된다고 본 값이다. ④ 18 은 마지막 ROLLBACK 을 놓치고 3건까지 남는다고 본 값이다.",
     "_source": "authored",
     "references": [
       {
-        "type": "table",
-        "caption": "T 테이블 (초기 상태 — 0건)",
-        "headers": [
-          "COL"
-        ],
-        "rows": [
-          [
-            "(empty)"
-          ]
-        ]
+        "type": "text",
+        "content": "T 테이블은 비어 있는 상태(0건)에서 시작한다."
       },
       {
         "type": "sql",
-        "code": "-- T 테이블 초기 상태: 0건\n\nINSERT INTO T ... 15건;\nCOMMIT;\n\nINSERT INTO T ... 15건;\nCREATE INDEX IDX_T ON T(COL);\n\nINSERT INTO T ... 20건;\nROLLBACK;\n\nSELECT COUNT(*) FROM T;"
+        "code": "INSERT INTO T ... ;  -- 10건\nSAVEPOINT A;\nINSERT INTO T ... ;  -- 5건\nCREATE INDEX IDX_T ON T(COL);\nINSERT INTO T ... ;  -- 3건\nROLLBACK TO SAVEPOINT A;\nROLLBACK;\n\nSELECT COUNT(*) FROM T;"
       }
     ]
   },
@@ -1476,20 +1494,20 @@ export const ROUND_59: QuizQuestion[] = [
     "round": 59,
     "subject": "2과목",
     "number": 38,
-    "title": "아래 A, B 테이블에 대한 SQL의 결과 건수로 옳은 것은?",
+    "title": "아래 A, B 테이블에 대한 ㉠~㉣ 의 결과를 차례로 나열한 것은?",
     "options": [
-      "3건",
-      "0건",
-      "1건",
-      "오류"
+      "3, 1, 0, 2",
+      "0, 1, 0, 2",
+      "3, 2, 0, 1",
+      "3, 1, 1, 2"
     ],
     "correctIndex": 0,
-    "explanation": "서브쿼리의 VAL 에는 테이블 이름이 없는데, 컬럼 이름은 가장 가까운(안쪽) FROM 부터 찾으므로 B.VAL 이다. 서브쿼리는 A 와 아무 연관이 없고, B 에 VAL 이 NULL 인 행(ID 1)이 있으니 한 행을 돌려준다. EXISTS 는 값이 아니라 행이 있는지만 보므로 SELECT NULL 이어도 참이고, A 의 모든 행에서 똑같이 참이라 3건이다(①). ③ 1건은 VAL 을 바깥 A.VAL 로 읽어 A 의 ID 2 만 남는다고 본 결과, ② 0건은 SELECT NULL 이면 결과가 없다고 본 결과, ④ 는 문법상 문제가 없다.",
+    "explanation": "㉠ 의 서브쿼리는 A 와 연결된 조건이 없다. B 에 VAL 이 NULL 인 행이 하나 있으므로 EXISTS 는 A 의 모든 행에서 참이 되어 3이다. SELECT NULL 이라도 행이 있으면 EXISTS 는 참이다. ㉡ 은 A.VAL 과 같은 B.VAL 이 있는 행만 남는데, 30 만 맞고 A 의 NULL 은 B 의 NULL 과도 같지 않아서 1이다. ㉢ 은 B.VAL 목록에 NULL 이 있어 NOT IN 이 어떤 행에서도 참이 되지 않으므로 0이다. ㉣ 은 ㉡ 의 반대라 A 의 10 과 NULL 두 행이 남아 2다. NOT EXISTS 는 목록의 NULL 에 영향을 받지 않는다. 정답은 ①번이다. ② 는 SELECT NULL 이면 행이 없다고 본 값이다. ③ 은 NULL 끼리 같다고 보고 A 의 2번을 ㉡ 에 넣은 값이다. ④ 는 NOT IN 이 목록의 NULL 을 무시한다고 보고 10 한 행을 센 값이다.",
     "_source": "authored",
     "references": [
       {
         "type": "table",
-        "caption": "A 테이블",
+        "caption": "A",
         "headers": [
           "ID",
           "VAL"
@@ -1511,7 +1529,7 @@ export const ROUND_59: QuizQuestion[] = [
       },
       {
         "type": "table",
-        "caption": "B 테이블",
+        "caption": "B",
         "headers": [
           "ID",
           "VAL"
@@ -1533,7 +1551,7 @@ export const ROUND_59: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT *\nFROM   A\nWHERE  EXISTS (SELECT NULL\n               FROM   B\n               WHERE  VAL IS NULL);"
+        "code": "-- ㉠\nSELECT COUNT(*) FROM A\nWHERE  EXISTS (SELECT NULL FROM B\n               WHERE  B.VAL IS NULL);\n-- ㉡\nSELECT COUNT(*) FROM A\nWHERE  EXISTS (SELECT 1 FROM B\n               WHERE  B.VAL = A.VAL);\n-- ㉢\nSELECT COUNT(*) FROM A\nWHERE  A.VAL NOT IN (SELECT VAL\n                     FROM   B);\n-- ㉣\nSELECT COUNT(*) FROM A\nWHERE  NOT EXISTS (\n         SELECT 1 FROM B\n         WHERE  B.VAL = A.VAL);"
       }
     ]
   },

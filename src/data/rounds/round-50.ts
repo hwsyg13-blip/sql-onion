@@ -747,42 +747,46 @@ export const ROUND_50: QuizQuestion[] = [
     "round": 50,
     "subject": "2과목",
     "number": 18,
-    "title": "아래 집계 결과(소계 행에서 NULL 이 등장하는 패턴) 에 해당하는 GROUP BY 절은?",
+    "title": "아래 T 테이블에 대해 SELECT A, B, SUM(V) FROM T 뒤에 ㉠~㉣ 의 GROUP BY 절을 각각 붙였을 때 결과 행 수를 차례로 나열한 것은?",
     "options": [
-      "ROLLUP(A, B)",
-      "GROUPING SETS((A, B))",
-      "GROUP BY A, B",
-      "CUBE(A, B)"
+      "6, 8, 5, 5",
+      "6, 8, 4, 6",
+      "5, 8, 4, 5",
+      "6, 8, 4, 5"
     ],
     "correctIndex": 3,
-    "explanation": "CUBE 는 (A,B), (A), (B), () 의 모든 부분집합을 반환하므로 (A=A1, B=NULL), (A=NULL, B=B1), (A=NULL, B=NULL) 행이 모두 등장한다. ① ROLLUP 은 (A) 소계와 () 총계만, ② GROUPING SETS((A,B)) 는 세부 행만, ③ GROUP BY A,B 는 소계 자체가 없다.",
+    "explanation": "데이터의 (A, B) 조합은 3개, A 값은 A1·A2 2개, B 값은 B1·B2 2개다. ㉠ ROLLUP(A, B) 는 (A, B) 3행 + (A) 소계 2행 + () 총계 1행 = 6행이다. ㉡ CUBE(A, B) 는 여기에 (B) 소계 2행이 더해져 8행이다. ㉢ GROUPING SETS(A, B) 는 (A) 2행과 (B) 2행만 만들어 4행이고, 상세나 총계는 없다. ㉣ ROLLUP(A), B 는 ROLLUP(A) 가 만드는 (A)·() 에 B 를 붙인 (A, B)·(B) 두 묶음이다. 3행 + 2행 = 5행이다. 정답은 ④번이다. ① 은 GROUPING SETS 에도 총계가 붙는다고 본 값이다. ② 는 ROLLUP(A), B 를 ROLLUP(A, B) 와 같게 본 값이다. ③ 은 ROLLUP 에 총계 행이 없다고 본 값이다.",
     "_source": "authored",
     "references": [
       {
         "type": "table",
-        "caption": "출력 결과 (A, B 그룹 키)",
+        "caption": "T",
         "headers": [
           "A",
-          "B"
+          "B",
+          "V"
         ],
         "rows": [
           [
             "A1",
-            "B1"
+            "B1",
+            "10"
           ],
           [
             "A1",
-            "NULL"
+            "B2",
+            "20"
           ],
           [
-            "NULL",
-            "B1"
-          ],
-          [
-            "NULL",
-            "NULL"
+            "A2",
+            "B1",
+            "30"
           ]
         ]
+      },
+      {
+        "type": "sql",
+        "code": "-- ㉠\nGROUP BY ROLLUP(A, B)\n-- ㉡\nGROUP BY CUBE(A, B)\n-- ㉢\nGROUP BY GROUPING SETS(A, B)\n-- ㉣\nGROUP BY ROLLUP(A), B"
       }
     ]
   },
@@ -817,20 +821,20 @@ export const ROUND_50: QuizQuestion[] = [
     "round": 50,
     "subject": "2과목",
     "number": 20,
-    "title": "아래 T 테이블에서 NAME 별 그룹의 최소 ID 만 남기고 나머지를 삭제하는 SQL 로 옳은 것은?",
+    "title": "아래 T 테이블에서 ㉠, ㉡ 을 각각 실행(서로 영향 없이 원래 테이블에서 실행)했을 때 남는 행 수로 옳은 것은?",
     "options": [
-      "DELETE FROM T WHERE ID NOT IN (SELECT MIN(ID) FROM T GROUP BY NAME);",
-      "DELETE FROM T WHERE ID IN (SELECT MAX(ID) FROM T GROUP BY NAME);",
-      "DELETE FROM T WHERE ID = MIN(ID);",
-      "DELETE FROM T GROUP BY NAME HAVING ID = MIN(ID);"
+      "㉠ 4행, ㉡ 5행",
+      "㉠ 4행, ㉡ 4행",
+      "㉠ 3행, ㉡ 5행",
+      "㉠ 3행, ㉡ 3행"
     ],
     "correctIndex": 0,
-    "explanation": "그룹별 MIN(ID) 를 NOT IN 으로 제외하고 나머지를 삭제하면 이름별 최소 ID 만 남는다. ② 는 MAX 만 삭제하고, ③ 은 비집계 컨텍스트에서 MIN 사용 불가, ④ 는 DELETE 에 GROUP BY/HAVING 직접 사용 불가.",
+    "explanation": "㉠ 의 GROUP BY NAME 은 NULL 인 행들도 한 그룹으로 묶는다. 그룹별 MIN(ID) 는 KIM 100, PARK 200, NULL 300, LEE 700 이고, 이 넷이 아닌 400·500·600 이 지워져 4행이 남는다. ㉡ 은 같은 이름 중 가장 작은 ID 보다 큰 행을 지운다. KIM 400 과 PARK 600 은 지워진다. 그런데 NAME 이 NULL 인 300·500 은 B.NAME = A.NAME 이 참이 되는 행이 없어 서브쿼리가 NULL 을 돌려주고, ID > NULL 은 UNKNOWN 이라 지워지지 않는다. 그래서 5행이 남는다. 정답은 ①번이다. ② 는 ㉡ 에서도 NULL 끼리 같은 이름으로 묶인다고 본 것이다. ③ 은 ㉠ 의 GROUP BY 가 NULL 그룹을 만들지 않아 300·500 이 모두 지워진다고 본 것이고, ④ 는 두 문장 모두에서 NULL 이름 행이 사라진다고 본 경우다. GROUP BY 는 NULL 을 한 그룹으로 모으지만 = 비교는 NULL 끼리 참이 아니라는 차이가 핵심이다.",
     "_source": "authored",
     "references": [
       {
         "type": "table",
-        "caption": "T 테이블",
+        "caption": "T",
         "headers": [
           "ID",
           "NAME"
@@ -846,7 +850,7 @@ export const ROUND_50: QuizQuestion[] = [
           ],
           [
             "300",
-            "KANG"
+            "NULL"
           ],
           [
             "400",
@@ -854,9 +858,21 @@ export const ROUND_50: QuizQuestion[] = [
           ],
           [
             "500",
-            "KANG"
+            "NULL"
+          ],
+          [
+            "600",
+            "PARK"
+          ],
+          [
+            "700",
+            "LEE"
           ]
         ]
+      },
+      {
+        "type": "sql",
+        "code": "-- ㉠\nDELETE FROM T\nWHERE  ID NOT IN (SELECT MIN(ID)\n                  FROM   T\n                  GROUP BY NAME);\n\n-- ㉡\nDELETE FROM T A\nWHERE  ID > (SELECT MIN(B.ID)\n             FROM   T B\n             WHERE  B.NAME = A.NAME);"
       }
     ]
   },
@@ -1330,20 +1346,20 @@ export const ROUND_50: QuizQuestion[] = [
     "round": 50,
     "subject": "2과목",
     "number": 34,
-    "title": "아래 두 테이블에 대한 네 SQL 중 결과 행 수가 가장 적은 것은?",
+    "title": "아래 두 테이블에 대한 네 SQL 의 결과 행 수를 ㉠ → ㉣ 순서로 나열한 것은?",
     "options": [
-      "SELECT * FROM A LEFT OUTER JOIN B ON A.ID = B.ID;",
-      "SELECT * FROM A RIGHT OUTER JOIN B ON A.ID = B.ID;",
-      "SELECT * FROM A FULL OUTER JOIN B ON A.ID = B.ID;",
-      "SELECT * FROM A INNER JOIN B ON A.ID = B.ID;"
+      "4, 4, 6, 2",
+      "7, 7, 8, 6",
+      "7, 7, 14, 5",
+      "7, 7, 9, 5"
     ],
     "correctIndex": 3,
-    "explanation": "공통 행은 2·3 두 건이다. ① LEFT 는 여기에 A 에만 있는 1 을 더해 3 건, ② RIGHT 는 B 에만 있는 4 를 더해 3 건, ③ FULL 은 양쪽 미매칭을 모두 더해 4 건이다. INNER 는 매칭된 2 건만 반환하므로 행 수가 가장 적은 것은 ④ 다.",
+    "explanation": "먼저 INNER JOIN(㉣)을 센다. A 의 2 두 행이 B 의 2 두 행과 각각 맞아 2 × 2 = 4행, 3 끼리 1행으로 5행이다. NULL 은 = 비교가 참이 되지 않아 서로 맞지 않는다. LEFT(㉠)는 여기에 B 와 짝이 없는 A 의 1, NULL 두 행이 더해져 7행이다. RIGHT(㉡)는 짝이 없는 B 의 4, NULL 이 더해져 7행이다. FULL(㉢)은 INNER 5행에 양쪽의 짝 없는 행 2 + 2 를 더한 9행이다. 정답은 ④번이다. ① 은 키가 같으면 한 번만 맞는다고 보고 중복 행 곱을 놓쳤다. ② 는 NULL 끼리 맞는다고 본 값이다. ③ 은 FULL OUTER JOIN 을 LEFT 와 RIGHT 를 그대로 합친 것(UNION ALL)으로 보고 INNER 부분을 두 번 셌다.",
     "_source": "authored",
     "references": [
       {
         "type": "table",
-        "caption": "A 테이블",
+        "caption": "A",
         "headers": [
           "ID"
         ],
@@ -1355,13 +1371,19 @@ export const ROUND_50: QuizQuestion[] = [
             "2"
           ],
           [
+            "2"
+          ],
+          [
             "3"
+          ],
+          [
+            "NULL"
           ]
         ]
       },
       {
         "type": "table",
-        "caption": "B 테이블",
+        "caption": "B",
         "headers": [
           "ID"
         ],
@@ -1370,12 +1392,22 @@ export const ROUND_50: QuizQuestion[] = [
             "2"
           ],
           [
+            "2"
+          ],
+          [
             "3"
           ],
           [
             "4"
+          ],
+          [
+            "NULL"
           ]
         ]
+      },
+      {
+        "type": "sql",
+        "code": "-- ㉠\nSELECT * FROM A LEFT OUTER JOIN B\n    ON A.ID = B.ID;\n-- ㉡\nSELECT * FROM A RIGHT OUTER JOIN B\n    ON A.ID = B.ID;\n-- ㉢\nSELECT * FROM A FULL OUTER JOIN B\n    ON A.ID = B.ID;\n-- ㉣\nSELECT * FROM A INNER JOIN B\n    ON A.ID = B.ID;"
       }
     ]
   },
@@ -1567,50 +1599,61 @@ export const ROUND_50: QuizQuestion[] = [
     "round": 50,
     "subject": "2과목",
     "number": 39,
-    "title": "아래 EMP 테이블에서 COUNT(DISTINCT 급여) 의 결과는?",
+    "title": "아래 EMP 테이블에 대한 SQL 의 결과 (A, B, C, D) 로 옳은 것은? (Oracle 기준)",
     "options": [
-      "5",
-      "3",
-      "4",
-      "2"
+      "(3, 3, 3, 6)",
+      "(3, 2, 3, 6)",
+      "(3, 2, 4, 6)",
+      "(4, 2, 3, 6)"
     ],
     "correctIndex": 1,
-    "explanation": "COUNT(DISTINCT 급여) 는 서로 다른 급여 값의 개수를 센다. 급여는 30000, 35000, 4000 세 종류(35000 과 4000 이 두 번씩)이므로 3 이다(②). 행 수를 그대로 세면 5(①)다. ④ 2 는 두 번씩 나온 급여(35000, 4000)만 센 값이다.",
+    "explanation": "A: SAL 의 서로 다른 값은 30000, 35000, 4000 세 개다. COUNT(DISTINCT) 도 NULL 은 세지 않는다. B: TRUNC(SAL, -4) 는 만 단위 아래를 버려 30000 → 30000, 35000 → 30000, 4000 → 0 이 되고, 서로 다른 값은 30000, 0 두 개다. C: 이름 첫 글자를 대문자로 바꾸면 S, S, A, J, S 라 S, A, J 세 개다. D: COUNT(*) 는 NULL 행까지 6 이다. 정답은 ②번이다. ① 은 TRUNC 를 ROUND 처럼 보고 35000 을 40000 으로 올려 세 값으로 센 것이다. ③ 은 UPPER 를 놓쳐 s 와 S 를 다른 글자로 센 것이다. ④ 는 COUNT(DISTINCT SAL) 이 NULL 도 하나의 값으로 센다고 본 것이다.",
     "_source": "authored",
     "references": [
       {
         "type": "table",
-        "caption": "EMP 테이블",
+        "caption": "EMP",
         "headers": [
-          "ID",
-          "급여"
+          "EMPNO",
+          "ENAME",
+          "SAL"
         ],
         "rows": [
           [
             "101",
+            "SMITH",
             "30000"
           ],
           [
             "102",
+            "scott",
             "35000"
           ],
           [
             "103",
+            "ALLEN",
             "4000"
           ],
           [
             "104",
+            "JONES",
             "35000"
           ],
           [
             "105",
+            "sally",
             "4000"
+          ],
+          [
+            "106",
+            "NULL",
+            "NULL"
           ]
         ]
       },
       {
         "type": "sql",
-        "code": "SELECT COUNT(DISTINCT 급여) FROM EMP;"
+        "code": "SELECT COUNT(DISTINCT SAL) AS A,\n       COUNT(DISTINCT TRUNC(SAL, -4))\n         AS B,\n       COUNT(DISTINCT\n         UPPER(SUBSTR(ENAME, 1, 1)))\n         AS C,\n       COUNT(*) AS D\nFROM   EMP;"
       }
     ]
   },
@@ -1672,20 +1715,20 @@ export const ROUND_50: QuizQuestion[] = [
     "round": 50,
     "subject": "2과목",
     "number": 41,
-    "title": "아래 TBL 테이블과 뷰 V_TBL 이 있을 때, 조회 SQL 의 실행 결과로 옳은 것은?",
+    "title": "아래 TBL 테이블과 뷰 V_TBL 에 ㉠ → ㉣ 을 차례로 실행했을 때 (㉠ 의 결과, 마지막 SELECT 의 결과) 로 옳은 것은? (오류가 난 문장은 반영되지 않음)",
     "options": [
-      "300",
-      "600",
-      "800",
-      "900"
+      "(800, 850)",
+      "(600, 650)",
+      "(600, 350)",
+      "(600, 600)"
     ],
     "correctIndex": 1,
-    "explanation": "뷰 조건 C1 <> 'A' 에서 C1 이 NULL 인 행은 비교 결과가 UNKNOWN 이라 참이 아니므로 뷰에 포함되지 않는다. 뷰에는 (B, 200), (B, 100), (C, 300) 만 남아 SUM(C2) = 600 이다. NULL 행까지 포함한다고 착각하면 800(③), 전체 합계는 900(④)이다. ※ 복원 자료에서 이 번호가 2과목 12번과 같은 문제로 중복되어 있어, 같은 범위(뷰·NULL 비교)의 다른 문제로 대체했다.",
+    "explanation": "뷰의 WHERE C1 <> 'A' 에서 C1 이 NULL 인 행은 비교가 UNKNOWN 이라 빠진다. 그래서 ㉠ 은 B 200, B 100, C 300 의 합 600 이다. WITH CHECK OPTION 은 뷰를 통해 넣거나 고친 행이 뷰 조건을 만족해야 한다. ㉡ 의 'A' 는 조건에 어긋나 오류가 나고, ㉢ 의 'D' 는 조건을 만족해 들어간다. ㉣ 은 C 를 NULL 로 바꾸면 C1 <> 'A' 가 UNKNOWN 이 되어 조건을 만족하지 못하므로 오류가 난다. 마지막 SELECT 는 600 + 50 = 650 이다. 정답은 ②번이다. ① 은 NULL 도 'A' 가 아니니 뷰에 보인다고 본 값이다. ③ 은 ㉣ 이 성공해 C 행(300)이 뷰에서 사라진다고 본 값이다. ④ 는 뷰에는 INSERT 를 할 수 없다고 보고 ㉢ 도 실패한다고 본 값이다.",
     "_source": "authored",
     "references": [
       {
         "type": "table",
-        "caption": "TBL 테이블",
+        "caption": "TBL",
         "headers": [
           "C1",
           "C2"
@@ -1715,7 +1758,7 @@ export const ROUND_50: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "CREATE VIEW V_TBL AS\nSELECT * FROM TBL WHERE C1 <> 'A';\n\nSELECT SUM(C2) FROM V_TBL;"
+        "code": "CREATE VIEW V_TBL AS\nSELECT * FROM TBL\nWHERE  C1 <> 'A'\nWITH CHECK OPTION;\n\n-- ㉠\nSELECT SUM(C2) FROM V_TBL;\n-- ㉡\nINSERT INTO V_TBL VALUES ('A', 50);\n-- ㉢\nINSERT INTO V_TBL VALUES ('D', 50);\n-- ㉣\nUPDATE V_TBL SET C1 = NULL\nWHERE  C1 = 'C';\n\nSELECT SUM(C2) FROM V_TBL;"
       }
     ]
   },

@@ -193,15 +193,21 @@
     {
       "subject": "1과목",
       "number": 7,
-      "title": "트랜잭션의 특성 중 \"모두 수행되거나 모두 수행되지 않아야 한다\" 는 특성은?",
+      "title": "아래 ㉠~㉣ 상황에서 지켜지지 않은 트랜잭션 특성을 바르게 짝지은 것은?",
       "options": [
-        "원자성(Atomicity)",
-        "일관성(Consistency)",
-        "고립성(Isolation)",
-        "영속성(Durability)"
+        "㉠ 원자성 ㉡ 일관성 ㉢ 고립성 ㉣ 지속성",
+        "㉠ 일관성 ㉡ 원자성 ㉢ 고립성 ㉣ 지속성",
+        "㉠ 원자성 ㉡ 일관성 ㉢ 지속성 ㉣ 고립성",
+        "㉠ 고립성 ㉡ 일관성 ㉢ 원자성 ㉣ 지속성"
       ],
       "correctIndex": 0,
-      "explanation": "'모두 수행되거나 전혀 수행되지 않아야 한다(All or Nothing)' 는 원자성이다(①). 일관성(②)은 트랜잭션 전후로 데이터가 규칙에 맞는 상태를 유지하는 것, 고립성(③)은 수행 중인 트랜잭션이 다른 트랜잭션의 영향을 받지 않는 것, 영속성(④)은 커밋된 결과가 영구히 저장되는 것이다."
+      "explanation": "㉠ 은 출금과 입금이 모두 반영되거나 모두 취소되어야 하는데 절반만 반영되었으니 원자성(Atomicity)이 깨졌다. ㉡ 은 트랜잭션이 끝난 뒤에도 데이터가 규칙(잔액 0 이상)을 만족해야 한다는 일관성(Consistency) 문제다. ㉢ 은 동시에 실행된 두 트랜잭션이 서로의 중간 결과에 영향을 받아 생긴 일이라 고립성(Isolation) 문제다. ㉣ 은 COMMIT 된 결과는 장애가 나도 남아 있어야 한다는 지속성(Durability)이 깨진 것이다. 정답은 ①번이다. ② 는 ㉠·㉡ 을, ③ 은 ㉢·㉣ 을 서로 바꿨고, ④ 는 ㉠ 과 ㉢ 을 바꿨다.",
+      "references": [
+        {
+          "type": "text",
+          "content": "㉠ 계좌 이체 도중 장애가 나서 출금만 반영되고 입금은 반영되지 않았다.\n㉡ 잔액은 0 이상이어야 한다는 규칙이 있는데, 이체가 끝난 뒤 잔액이 음수가 되었다.\n㉢ 두 사용자가 같은 좌석을 동시에 조회하고 예약해 둘 다 예약 성공 처리되었다.\n㉣ COMMIT 완료 메시지를 받은 직후 서버가 재시작되었는데, 반영한 내용이 사라졌다."
+        }
+      ]
     },
     {
       "subject": "1과목",
@@ -650,41 +656,45 @@
     {
       "subject": "2과목",
       "number": 18,
-      "title": "아래 데이터와 SQL 의 결과로 옳은 것은?",
+      "title": "아래 T 테이블에 대한 SQL 결과에서 세 번째 행의 (A, B, C) 로 옳은 것은? (Oracle 기준)",
       "options": [
-        "20, 40, 20",
-        "NULL, 40, NULL",
-        "0, 40, 0",
-        "NULL, NULL, NULL"
+        "(20, 10, '10')",
+        "(NULL, NULL, '10')",
+        "(NULL, 10, NULL)",
+        "(NULL, NULL, NULL)"
       ],
       "correctIndex": 1,
-      "explanation": "NULL 에 산술 연산을 적용하면 결과가 NULL 이 되므로, NULL 이 포함된 첫 번째·세 번째 행은 NULL 이 반환된다. ① 은 NULL 을 0 으로 보고 계산한 값, ③ 은 NULL 이 섞인 연산 결과가 0 이 된다고 본 값, ④ 는 한 행이라도 NULL 이 있으면 모든 행이 NULL 이 된다고 본 값이다.",
+      "explanation": "3번 행은 COL1 = 10, COL2 = NULL 이다. A 는 산술 연산에 NULL 이 하나라도 섞이면 결과가 NULL 이다. B 는 NVL 이 COL1 에만 걸려 있어 10 + NULL = NULL 이다. C 의 || 는 Oracle 에서 NULL 을 빈 문자열처럼 다루므로 '10' || NULL = '10' 이다. 정답은 ②번이다. ① 은 NULL 을 0 으로 계산한 값이다. ③ 은 NVL 이 COL2 에 걸린 것처럼 보고 B 를 10 으로, || 도 NULL 이 된다고 본 값이다. ④ 는 문자 연결도 산술처럼 NULL 이 된다고 본 값이다. PostgreSQL 같은 표준 DBMS 는 || 에 NULL 이 있으면 NULL 을 돌려주므로 Oracle 만의 동작이다.",
       "references": [
         {
           "type": "table",
+          "caption": "T",
           "headers": [
+            "NO",
             "COL1",
             "COL2"
           ],
           "rows": [
             [
+              "1",
               "NULL",
               "10"
             ],
             [
+              "2",
               "10",
               "10"
             ],
             [
+              "3",
               "10",
               "NULL"
             ]
-          ],
-          "caption": "T 테이블"
+          ]
         },
         {
           "type": "sql",
-          "code": "SELECT COL1 * 2 + COL2 * 2 FROM T;"
+          "code": "SELECT NO,\n       COL1 * 2 + COL2 * 2 AS A,\n       NVL(COL1, 0) + COL2 AS B,\n       COL1 || COL2        AS C\nFROM   T\nORDER BY NO;"
         }
       ]
     },
@@ -1369,19 +1379,19 @@
     {
       "subject": "2과목",
       "number": 33,
-      "title": "아래 SQL 결과의 컬럼명으로 옳은 것은?",
+      "title": "아래 T 테이블에 대한 SQL 의 (결과 행 수, 첫 번째 행의 (AAB, BBA)) 로 옳은 것은? (Oracle 기준)",
       "options": [
-        "AAB, BBA",
-        "BBA, AAB",
-        "COL1, COL2",
-        "오류가 발생한다"
+        "4행, (2, 20)",
+        "6행, (2, 20)",
+        "4행, (20, 2)",
+        "별칭이 서로 달라 오류가 발생한다"
       ],
       "correctIndex": 0,
-      "explanation": "UNION·UNION ALL 등 집합 연산 결과의 컬럼명은 첫 번째 SELECT 절의 별칭을 따른다. 두 번째 SELECT 가 같은 컬럼에 다른 별칭(BBA, AAB)을 붙여도 무시되므로 결과 컬럼명은 AAB, BBA 가 된다. ② 는 두 번째 SELECT 의 별칭이 적용된다고 본 경우, ③ 은 별칭이 모두 무시된다고 본 경우, ④ 는 양쪽 별칭이 다르면 오류가 난다고 본 경우이다.",
+      "explanation": "집합 연산 결과의 칼럼 이름은 첫 번째 SELECT 를 따른다. 결과 칼럼은 AAB(첫째), BBA(둘째)이고, 아래 SELECT 에 붙인 별칭은 무시된다. UNION 은 중복을 없애므로 위쪽은 (1, 10), (2, 20), 아래쪽은 (10, 1), (20, 2) 로 모두 4행이다. ORDER BY BBA DESC 는 결과의 둘째 칼럼 기준이라 20, 10, 2, 1 순서가 되고 첫 행은 (2, 20) 이다. 정답은 ①번이다. ② 는 UNION 을 UNION ALL 처럼 보고 (1, 10) 과 (10, 1) 을 두 번씩 센 값이다. ③ 은 아래 SELECT 의 별칭대로 첫째 칼럼을 BBA 로 보고 정렬한 결과다. ④ 는 두 SELECT 의 별칭이 달라도 칼럼 수와 데이터 타입만 맞으면 된다는 점을 놓쳤다.",
       "references": [
         {
           "type": "table",
-          "caption": "T 테이블",
+          "caption": "T",
           "headers": [
             "COL1",
             "COL2"
@@ -1394,38 +1404,16 @@
             [
               "2",
               "20"
+            ],
+            [
+              "1",
+              "10"
             ]
           ]
         },
         {
           "type": "sql",
-          "code": "SELECT COL1 AS AAB, COL2 AS BBA\nFROM   T\nUNION ALL\nSELECT COL1 AS BBA, COL2 AS AAB\nFROM   T;"
-        },
-        {
-          "type": "table",
-          "caption": "결과 (UNION ALL 후)",
-          "headers": [
-            "?",
-            "?"
-          ],
-          "rows": [
-            [
-              "1",
-              "10"
-            ],
-            [
-              "2",
-              "20"
-            ],
-            [
-              "1",
-              "10"
-            ],
-            [
-              "2",
-              "20"
-            ]
-          ]
+          "code": "SELECT COL1 AS AAB, COL2 AS BBA FROM T\nUNION\nSELECT COL2 AS BBA, COL1 AS AAB FROM T\nORDER BY BBA DESC;"
         }
       ]
     },
@@ -1640,41 +1628,55 @@
     {
       "subject": "2과목",
       "number": 40,
-      "title": "아래 EMP 테이블에서 전체 합계와 부서별 합계를 함께 출력하는 윈도우 함수 조합으로 옳은 것은?",
+      "title": "아래 EMP 테이블에 대한 SQL 결과에서 EMPNO 가 2 인 행의 (S1, S2, S3) 로 옳은 것은?",
       "options": [
-        "SUM(SAL) OVER (), SUM(SAL) OVER (PARTITION BY DEPT)",
-        "SUM(SAL) OVER (PARTITION BY DEPT), SUM(SAL) OVER ()",
-        "SUM(SAL) OVER (ORDER BY DEPT), SUM(SAL) OVER ()",
-        "SUM(SAL), SUM(SAL) OVER (PARTITION BY DEPT)"
+        "(13000, 13000, 21000)",
+        "(8000, 13000, 21000)",
+        "(13000, 21000, 21000)",
+        "(8000, 13000, 13000)"
       ],
       "correctIndex": 0,
-      "explanation": "`OVER ()` 는 파티션 없이 전체 행에 대한 합계 = 전체 합계. `OVER (PARTITION BY DEPT)` 는 부서별 합계. 문제 순서가 \"전체 합계 → 부서별 합계\" 라 ① 이 정답. ② 는 순서 반대, ③ ORDER BY 는 누적합 의미, ④ `SUM(SAL)` 만 쓰면 일반 집계라 GROUP BY 필요.",
+      "explanation": "S1 은 ORDER BY 만 있고 범위 절이 없어서 기본값 RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW 가 적용된다. RANGE 는 정렬 값이 같은 행(동점)을 한꺼번에 포함하므로, 10번 부서 3000, 5000, 5000 에서 5000 인 두 행(2·3번)은 모두 3000 + 5000 + 5000 = 13000 이다. S2 는 ORDER BY 가 없어 부서 전체 합인 13000, S3 은 OVER () 라 전체 합 21000 이다. 정답은 ①번이다. ② 는 ROWS 처럼 한 행씩 누적해 2번을 3000 + 5000 = 8000 으로 본 값이다. ③ 은 PARTITION BY 만 있는 S2 를 전체 합으로 본 값이다. ④ 는 S1 을 한 행씩 누적으로 보고, OVER () 도 부서별 합이라고 본 값이다.",
       "references": [
         {
           "type": "table",
-          "caption": "EMP 테이블",
+          "caption": "EMP",
           "headers": [
+            "EMPNO",
             "DEPT",
             "SAL"
           ],
           "rows": [
             [
+              "1",
               "10",
               "3000"
             ],
             [
+              "2",
               "10",
               "5000"
             ],
             [
+              "3",
+              "10",
+              "5000"
+            ],
+            [
+              "4",
               "20",
               "4500"
             ],
             [
+              "5",
               "20",
               "3500"
             ]
           ]
+        },
+        {
+          "type": "sql",
+          "code": "SELECT EMPNO,\n  SUM(SAL) OVER (PARTITION BY DEPT\n                 ORDER BY SAL) AS S1,\n  SUM(SAL) OVER (PARTITION BY DEPT)\n    AS S2,\n  SUM(SAL) OVER () AS S3\nFROM   EMP;"
         }
       ]
     },

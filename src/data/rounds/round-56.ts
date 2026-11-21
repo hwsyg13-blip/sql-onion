@@ -102,44 +102,48 @@ export const ROUND_56: QuizQuestion[] = [
     "round": 56,
     "subject": "1과목",
     "number": 5,
-    "title": "아래 [주문] 엔터티의 속성 중 파생 속성에 해당하는 것은?",
+    "title": "아래 [주문] 엔터티의 속성 분류로 옳지 않은 것은?",
     "options": [
-      "주문번호",
-      "주문일자",
-      "주문수량",
-      "총주문금액"
+      "주문일자 — 기본 속성",
+      "주문상태코드 — 설계 속성",
+      "총주문금액 — 파생 속성",
+      "주문번호 — 파생 속성"
     ],
     "correctIndex": 3,
-    "explanation": "파생 속성은 다른 속성으로부터 계산되어 만들어지는 속성이다. 총주문금액은 단가 × 주문수량으로 도출되므로 파생 속성이고, ① 주문번호·② 주문일자·③ 주문수량은 업무에서 직접 입력·부여되는 기본 속성이다. 파생 속성은 정합성 관리 부담이 있어 가급적 최소화한다.",
+    "explanation": "기본 속성은 업무에서 원래 나오는 값(주문일자, 단가, 주문수량), 설계 속성은 업무에 없던 것을 설계하면서 새로 만든 값(코드, 일련번호), 파생 속성은 다른 속성으로 계산되는 값이다. 주문번호는 다른 속성으로 계산되는 값이 아니라 주문을 구분하려고 시스템이 붙이는 일련번호이므로 설계 속성이다. 그래서 ④ 가 옳지 않고, 정답은 ④번이다. ① 주문일자는 기본 속성, ② 상태를 01·02·03 으로 코드화한 주문상태코드는 설계 속성, ③ 단가 × 주문수량으로 계산되는 총주문금액은 파생 속성이 맞다.",
     "_source": "authored",
     "references": [
       {
         "type": "table",
-        "caption": "주문 엔터티",
+        "caption": "주문",
         "headers": [
           "속성",
-          "값"
+          "설명"
         ],
         "rows": [
           [
             "주문번호",
-            "O1001"
+            "주문마다 붙이는 일련번호"
           ],
           [
             "주문일자",
-            "2026-03-05"
+            "업무에서 생기는 날짜"
           ],
           [
             "단가",
-            "1,200"
+            "상품 가격"
           ],
           [
             "주문수량",
-            "3"
+            "고객이 입력"
           ],
           [
             "총주문금액",
-            "3,600"
+            "단가 × 주문수량"
+          ],
+          [
+            "주문상태코드",
+            "01 접수·02 결제·03 배송"
           ]
         ]
       }
@@ -1155,52 +1159,50 @@ export const ROUND_56: QuizQuestion[] = [
     "round": 56,
     "subject": "2과목",
     "number": 30,
-    "title": "아래 결과 (NAME, SALARY, RANKING) 를 반환하는 순위 함수로 옳은 것은?",
+    "title": "아래 EMP 테이블에 대한 SQL 결과에서 David 행의 (PR, CD) 로 옳은 것은?",
     "options": [
-      "DENSE_RANK()",
-      "RANK()",
-      "PERCENT_RANK()",
-      "ROW_NUMBER()"
+      "(0.5, 0.6)",
+      "(0.25, 0.6)",
+      "(0.5, 0.4)",
+      "(0.4, 0.6)"
     ],
     "correctIndex": 0,
-    "explanation": "Bob, Smith 가 같은 7000 으로 1 위, 다음 David(6000) 이 2 위 — \"동일 순위 후 다음 순위를 건너뛰지 않는\" 패턴은 DENSE_RANK. ② RANK 는 동일 1, 1, 3, 4, 5 처럼 건너뛰며, ④ ROW_NUMBER 는 동률이어도 1, 2, 3, 4, 5 로 고유 부여, ③ PERCENT_RANK 는 0~1 비율 반환.",
+    "explanation": "PERCENT_RANK 는 (RANK - 1) / (전체 행 수 - 1) 이다. 급여 내림차순에서 Bob·Smith 가 공동 1위라 David 의 RANK 는 3이고, (3 - 1) / (5 - 1) = 0.5 다. CUME_DIST 는 정렬 순서상 자기 행까지(같은 값 포함) 오는 행의 비율이다. David 까지 Bob, Smith, David 세 행이라 3 / 5 = 0.6 이다. 정답은 ①번이다. ② 는 PERCENT_RANK 에 DENSE_RANK(2위)를 넣어 (2 - 1) / 4 = 0.25 로 계산했다. ③ 은 CUME_DIST 에서 자기 행을 빼고 앞의 두 행만 센 값이다. ④ 는 PERCENT_RANK 의 분모를 전체 행 수 5 로 둔 값이다.",
     "_source": "authored",
     "references": [
       {
         "type": "table",
-        "caption": "기대 결과 — SALARY DESC 기준 RANKING 부여",
+        "caption": "EMP",
         "headers": [
           "NAME",
-          "SALARY",
-          "RANKING"
+          "SALARY"
         ],
         "rows": [
           [
             "Bob",
-            "7000",
-            "1"
+            "7000"
           ],
           [
             "Smith",
-            "7000",
-            "1"
+            "7000"
           ],
           [
             "David",
-            "6000",
-            "2"
+            "6000"
           ],
           [
             "Alice",
-            "5000",
-            "3"
+            "5000"
           ],
           [
             "Charlie",
-            "3000",
-            "4"
+            "3000"
           ]
         ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT NAME,\n  PERCENT_RANK() OVER (\n    ORDER BY SALARY DESC) AS PR,\n  CUME_DIST() OVER (\n    ORDER BY SALARY DESC) AS CD\nFROM   EMP;"
       }
     ]
   },
@@ -1303,53 +1305,72 @@ export const ROUND_56: QuizQuestion[] = [
     "round": 56,
     "subject": "2과목",
     "number": 33,
-    "title": "아래 TAB1, TAB2 테이블에 대한 UPDATE 쿼리와 동일한 결과를 산출하는 것은?",
+    "title": "아래 두 테이블에서 ㉠, ㉡ 을 각각(서로 영향 없이 원래 데이터에서) 실행한 뒤 SELECT SUM(COL1) FROM TAB1 의 결과로 옳은 것은?",
     "options": [
-      "UPDATE TAB1 SET COL1 = (SELECT MAX(COL2) FROM TAB2 T2 WHERE T1.COL1 = T2.COL2 AND T1.COL1 >= 200);",
-      "UPDATE TAB1 SET COL1 = (SELECT COALESCE(MAX(NULL), 0) FROM TAB2 T2 WHERE T1.COL1 = T2.COL2);",
-      "UPDATE TAB1 SET COL1 = (SELECT MAX(0) FROM TAB2 T2 WHERE T1.COL1 = T2.COL2 AND T1.COL1 >= 200);",
-      "UPDATE TAB1 SET COL1 = NULL;"
+      "㉠ 1100, ㉡ 1100",
+      "㉠ 600, ㉡ 600",
+      "㉠ 250, ㉡ 750",
+      "㉠ 600, ㉡ 1100"
     ],
     "correctIndex": 3,
-    "explanation": "서브쿼리가 `SELECT MAX(NULL) FROM TAB2 ...` 이라 항상 NULL 을 반환 (MAX 의 입력이 NULL 상수). WHERE 조건과 무관하게 모든 TAB1 행의 COL1 이 NULL 로 갱신된다 = ④ `UPDATE TAB1 SET COL1 = NULL;` 과 동일. ① 은 MAX(COL2) 라 200·300 행이 값을 받고, ② 는 COALESCE 로 모든 행에 0 이 들어가며, ③ 은 MAX(0) 이라 짝이 있는 행에 0 이 들어가 결과가 다르다.",
+    "explanation": "㉠ 은 WHERE 절이 없어 TAB1 의 네 행을 모두 고친다. ID 2 는 250, ID 3 은 NULL 과 350 중 MAX 라 350(MAX 는 NULL 을 빼고 계산)이다. TAB2 에 짝이 없는 ID 1·4 는 서브쿼리 결과가 NULL 이라 COL1 이 NULL 로 바뀐다. 합은 250 + 350 = 600 이다. ㉡ 은 EXISTS 로 TAB2 에 짝이 있는 ID 2·3 만 고치므로 ID 1·4 는 100, 400 그대로다. 합은 100 + 250 + 350 + 400 = 1100. 정답은 ④번이다. ① 은 ㉠ 에서도 짝 없는 행이 원래 값을 지킨다고 본 값이다. ② 는 EXISTS 를 붙여도 결과가 같다고 본 값이다. ③ 은 MAX 에 NULL 이 섞이면 NULL 이 된다고 보고 ID 3 을 NULL 로 계산한 값이다(㉡ 은 100 + 250 + 400 = 750).",
     "_source": "authored",
     "references": [
       {
         "type": "table",
-        "caption": "TAB1 테이블 (UPDATE 전)",
+        "caption": "TAB1",
         "headers": [
+          "ID",
           "COL1"
         ],
         "rows": [
           [
+            "1",
             "100"
           ],
           [
+            "2",
             "200"
           ],
           [
+            "3",
             "300"
+          ],
+          [
+            "4",
+            "400"
           ]
         ]
       },
       {
         "type": "table",
-        "caption": "TAB2 테이블",
+        "caption": "TAB2",
         "headers": [
+          "ID",
           "COL2"
         ],
         "rows": [
           [
-            "200"
+            "2",
+            "250"
           ],
           [
-            "300"
+            "3",
+            "NULL"
+          ],
+          [
+            "3",
+            "350"
+          ],
+          [
+            "5",
+            "500"
           ]
         ]
       },
       {
         "type": "sql",
-        "code": "UPDATE TAB1 T1\nSET    COL1 = (SELECT MAX(NULL)\n               FROM   TAB2 T2\n               WHERE  T1.COL1 = T2.COL2\n               AND    T1.COL1 >= 200);"
+        "code": "-- ㉠\nUPDATE TAB1 T1\nSET    COL1 = (SELECT MAX(T2.COL2)\n               FROM   TAB2 T2\n               WHERE  T2.ID = T1.ID);\n\n-- ㉡ (㉠ 에 WHERE 절만 추가)\nUPDATE TAB1 T1\nSET    COL1 = (SELECT MAX(T2.COL2)\n               FROM   TAB2 T2\n               WHERE  T2.ID = T1.ID)\nWHERE  EXISTS (SELECT 1\n               FROM   TAB2 T2\n               WHERE  T2.ID = T1.ID);"
       }
     ]
   },
@@ -1478,15 +1499,15 @@ export const ROUND_56: QuizQuestion[] = [
     "round": 56,
     "subject": "2과목",
     "number": 36,
-    "title": "아래 NATURAL JOIN 의 결과 행 수는?",
+    "title": "아래 두 테이블에 대한 (㉠ 행 수, ㉡ 행 수, ㉡ 결과 칼럼 수) 로 옳은 것은?",
     "options": [
-      "0",
-      "3",
-      "5",
-      "15"
+      "(1, 2, 5)",
+      "(2, 2, 5)",
+      "(1, 2, 4)",
+      "(1, 2, 6)"
     ],
     "correctIndex": 0,
-    "explanation": "두 테이블의 공통 컬럼은 ID 이지만 TAB1(1, 2, 3)과 TAB2(10, 20, 30, 40, 50) 사이에 일치하는 ID 값이 없으므로 NATURAL JOIN 결과는 0 건이다. ② 3 은 TAB1 행 수, ③ 5 는 TAB2 행 수, ④ 15 는 조건 없는 CROSS JOIN 의 결과다.",
+    "explanation": "NATURAL JOIN 은 이름이 같은 칼럼 전부(ID, NAME)를 = 로 비교한다. ID 와 NAME 이 둘 다 같은 행은 (1, A) 뿐이라 ㉠ 은 1행이다. USING (ID) 는 ID 만 비교하므로 ID 1, 2 가 맞아 ㉡ 은 2행이다. ㉡ 의 칼럼은 USING 에 쓴 ID 가 한 번만 나오고, 비교하지 않은 NAME 은 양쪽 것이 따로 나와 ID, TAB1 의 NAME, CITY, TAB2 의 NAME, PHONE 5칼럼이다. 정답은 ①번이다. ② 는 NATURAL JOIN 도 ID 하나만 비교한다고 본 값이다. ③ 은 USING 에서도 NAME 이 하나로 합쳐진다고 본 칼럼 수다. ④ 는 USING 을 ON 처럼 보고 ID 가 두 번 나온다고 본 칼럼 수다.",
     "_source": "authored",
     "references": [
       {
@@ -1494,20 +1515,24 @@ export const ROUND_56: QuizQuestion[] = [
         "caption": "TAB1",
         "headers": [
           "ID",
-          "CUSTOMER"
+          "NAME",
+          "CITY"
         ],
         "rows": [
           [
             "1",
-            "A"
+            "A",
+            "서울"
           ],
           [
             "2",
-            "B"
+            "B",
+            "부산"
           ],
           [
             "3",
-            "C"
+            "C",
+            "서울"
           ]
         ]
       },
@@ -1516,34 +1541,30 @@ export const ROUND_56: QuizQuestion[] = [
         "caption": "TAB2",
         "headers": [
           "ID",
+          "NAME",
           "PHONE"
         ],
         "rows": [
           [
-            "10",
-            "111-1111"
+            "1",
+            "A",
+            "111"
           ],
           [
-            "20",
-            "222-2222"
+            "2",
+            "X",
+            "222"
           ],
           [
-            "30",
-            "333-3333"
-          ],
-          [
-            "40",
-            "444-4444"
-          ],
-          [
-            "50",
-            "555-5555"
+            "4",
+            "D",
+            "444"
           ]
         ]
       },
       {
         "type": "sql",
-        "code": "SELECT * FROM TAB1 NATURAL JOIN TAB2;"
+        "code": "-- ㉠\nSELECT * FROM TAB1 NATURAL JOIN TAB2;\n-- ㉡\nSELECT * FROM TAB1 JOIN TAB2\n       USING (ID);"
       }
     ]
   },
@@ -1908,71 +1929,62 @@ export const ROUND_56: QuizQuestion[] = [
     "round": 56,
     "subject": "2과목",
     "number": 45,
-    "title": "아래 EMP 테이블에 대한 SQL 의 실행 결과로 옳은 것은?",
+    "title": "아래 EMP 테이블에서 ㉠~㉣ 을 실행했을 때 (㉠ 결과, ㉡ 결과, ㉢ 결과 행 수, ㉣ 결과) 로 옳은 것은? (Oracle 기준)",
     "options": [
-      "800",
-      "1600",
-      "2975",
-      "오류가 발생한다."
+      "(0, 0, 1행, 0)",
+      "(NULL, NULL, 0행, 0)",
+      "(NULL, 0, 0행, 0)",
+      "(NULL, 0, 1행, NULL)"
     ],
     "correctIndex": 2,
-    "explanation": "WHERE EMPNO = 7566 조건으로 사번 7566 (JONES) 한 행만 선택되고 SAL = 2975 가 SUM 으로 집계되어 2975 가 반환된다. ① 800, ② 1600 은 다른 사번 행의 SAL 이며 본 SQL 결과가 아니다.",
+    "explanation": "40번 부서는 한 행도 없다. GROUP BY 없이 집계 함수만 쓰면 대상 행이 없어도 결과는 항상 한 행이다. 이때 SUM 은 더할 값이 없으므로 NULL(㉠), COUNT(*) 는 0(㉡)을 돌려준다. ㉣ 은 그 NULL 을 NVL 로 0 으로 바꾼다. 반면 ㉢ 처럼 GROUP BY 가 있으면 만들어질 그룹이 하나도 없어 결과가 0행이다. 정답은 ③번이다. ① 은 SUM 도 0 을 돌려준다고 보고, GROUP BY 를 써도 한 행이 나온다고 본 값이다. ② 는 COUNT(*) 도 NULL 이 된다고 본 값이다. ④ 는 GROUP BY 결과도 한 행이 나오고, NVL 이 바깥에 있으면 효과가 없다고 본 값이다.",
     "_source": "authored",
     "references": [
       {
         "type": "table",
-        "caption": "EMP 테이블",
+        "caption": "EMP",
         "headers": [
           "EMPNO",
           "ENAME",
-          "SAL"
+          "SAL",
+          "DEPTNO"
         ],
         "rows": [
           [
             "7369",
             "SMITH",
-            "800"
+            "800",
+            "20"
           ],
           [
             "7499",
             "ALLEN",
-            "1600"
+            "1600",
+            "30"
           ],
           [
             "7521",
             "WARD",
-            "1250"
+            "1250",
+            "30"
           ],
           [
             "7566",
             "JONES",
-            "2975"
-          ],
-          [
-            "7654",
-            "MARTIN",
-            "1250"
-          ],
-          [
-            "7698",
-            "BLAKE",
-            "2850"
-          ],
-          [
-            "7782",
-            "CLARK",
-            "2450"
+            "2975",
+            "20"
           ],
           [
             "7839",
             "KING",
-            "5000"
+            "5000",
+            "10"
           ]
         ]
       },
       {
         "type": "sql",
-        "code": "SELECT SUM(SAL)\nFROM   EMP\nWHERE  EMPNO = 7566;"
+        "code": "-- ㉠\nSELECT SUM(SAL) FROM EMP\nWHERE  DEPTNO = 40;\n-- ㉡\nSELECT COUNT(*) FROM EMP\nWHERE  DEPTNO = 40;\n-- ㉢\nSELECT DEPTNO, SUM(SAL) FROM EMP\nWHERE  DEPTNO = 40\nGROUP BY DEPTNO;\n-- ㉣\nSELECT NVL(SUM(SAL), 0) FROM EMP\nWHERE  DEPTNO = 40;"
       }
     ]
   },

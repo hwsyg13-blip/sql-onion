@@ -1207,3 +1207,85 @@ cbt-192(M233, 행이 1건이면 Table Full Scan 이 유리)는 인덱스 스캔 
 PostgreSQL 검증기의 nomatch 154건 중 숫자 보기 문항을 다시 대조: 걸린 7건(48-2-48, M752·761·765·941·1025·1138)은 모두 조건부 행 수를 묻는 문항이라 조건을 적용해 세면 정답과 일치. 틀린 정답 없음.
 sqld-0312·0319(M494·M501, 데이터베이스 파티션 기법)도 성능 데이터 모델링 범위라 범위 밖 제외에 추가(풀 1175 → 1173).
 
+
+## 11-21 14시 실행 — 11-06 이후 안 바뀐 기출(197문항) 이어서, 45회부터
+
+| 문항 | 전 | 후 | 검증 |
+|---|---|---|---|
+| 45-2-20 | INSERT 1~5 와 SAVEPOINT 하나로 남는 INSERT 고르기 | 주문 테이블 + SAVEPOINT 두 개, 같은 이름 SP1 재사용, 두 번 되돌린 뒤 SUM. 오답: SP2 되돌림 누락(1100), INSERT 4 잔존(1800), 'SP2 오류'(SP1 을 처음 위치로 착각) | PostgreSQL 16 로 실행 → 1400. 오답 값 1100·1800 손계산 확인. Oracle 도 같은 이름 SAVEPOINT 는 앞의 것을 지움 |
+| 45-2-28 | 빈 테이블에 NULL 하나씩 넣는 INSERT | 기존 두 행 + DEFAULT·NOT NULL·UNIQUE·CHECK. 명시적 NULL 은 DEFAULT 안 씀, UNIQUE 는 NULL 중복 허용, CHECK 는 NULL(UNKNOWN) 통과 | PostgreSQL 16: ①·②·④ 각각 NOT NULL·UNIQUE·CHECK 오류, ③ 만 (3, 0, NULL, NULL) 입력 |
+| 46-2-36 | 세 행 ORDER BY, NULL 하나 | 사원 6행, 부서·보너스 양쪽 NULL + 'DESC 는 보너스에만' + 보너스 NULL 동률 → 급여 오름차순. 오답: NULL 을 가장 작게(①), DESC 가 급여까지(③), SQL Server 방식(④) | PostgreSQL 16(NULL 정렬 기본값이 Oracle 과 같음) → 김하늘, 최유나, 강지우, 정민호, 이도윤, 박서준 |
+| 46-2-40 | CASE 네 행 판정 | 점수·출석 NULL, ELSE 없는 검색 CASE + 단순 CASE 의 WHEN NULL. 등급 NULL 행 수와 표시 합을 묻고, 오답은 AND 누락·WHEN NULL 매칭 두 실수 조합 | PostgreSQL 16 → 등급 (A, NULL, NULL, NULL, C), 표시 (-1, 1, 1, -1, -1) → 3건, -1 |
+| 47-2-28 | 세 테이블 UNION ALL·MINUS | 중복·NULL 섞인 세 테이블, 집합 연산이 NULL 을 같은 값으로 봄 + MINUS 의 중복 제거 + 위에서부터 계산. 오답 ④ 는 B MINUS C 를 먼저 한 결과 | PostgreSQL 16(EXCEPT, UNION 과 같은 우선순위) → 1, 3, 4. 괄호로 B-C 먼저 계산 → 1, 2, 3, 3, 3, 4, NULL(④) |
+| 47-2-43 | HAVING COUNT(VAL) 로 그룹 수 | COUNT(*)·COUNT(DISTINCT)·AVG + HAVING ... OR SUM(VAL) IS NULL. 오답: NULL 을 0 으로 본 AVG, 전부 NULL 인 그룹 누락, COUNT(*) 가 NULL 을 뺀다고 봄 | PostgreSQL 16 → (A,3,2,15) (C,2,0,NULL) (D,2,1,40) |
+| 48-2-38 | 모든 값에 _ 가 든 6행 LIKE ESCAPE | _·%·대소문자 섞인 7행, ESCAPE 조건 두 개 OR. 오답: 대소문자 무시(4), 첫 조건 ESCAPE 무시(5), 둘 다 무시(7) | PostgreSQL 16 → 3. ILIKE 4, 'A_%' 5, ESCAPE 없이 두 조건 7 로 오답 값도 재현 |
+| 48-2-43 | 표 없이 ROWNUM SQL 고르기 | 학생 6행(저장 순서 명시) + 네 SQL. ROWNUM 과 ORDER BY 순서, 인라인 뷰 안 ROWNUM 별칭, ROWNUM = 3 | PostgreSQL 16 에서 저장 순서 seq 로 흉내: ① 나·다·가, ③ 나·라·다. ④ 는 ROWNUM 규칙상 0건 |
+| 49-2-36 | 이름 3행 × 규칙 2행 LIKE 조인 | 이름 5행(밑줄 포함) × 규칙 3행(S%, %T%, _A%) 조인 COUNT. 오답: 이름당 한 행(4), _ 를 문자로 읽음(6), 카티션 곱(15) | PostgreSQL 16 → 7. _ 를 이스케이프하면 6 |
+| 49-2-48 | 빈칸에 IS NULL | NULL 두 행 + 네 WHERE(NOT, OR IS NULL, IN 목록의 NULL, NOT IN 목록의 NULL) 중 0건 찾기 | PostgreSQL 16 → 2·4·3·0건(NVL 은 COALESCE 로). verify-sql-* 는 '( 조건 )' 자리표시라 오류로 셈(검증기 한계) |
+| 50-2-20 | 최소 ID 남기는 DELETE 고르기 | NAME 에 NULL 두 행 + NOT IN(GROUP BY) 과 상관 서브쿼리(B.NAME = A.NAME) 두 DELETE 의 남는 행 수 | PostgreSQL 16(트랜잭션 후 ROLLBACK) → ㉠ 4행(100·200·300·700), ㉡ 5행(NULL 두 행 남음) |
+| 50-2-34 | 키 3개씩 네 조인 중 가장 적은 것 | 중복 키(2 두 행씩)·NULL 키가 있는 두 테이블의 LEFT·RIGHT·FULL·INNER 행 수. 오답: 중복 곱 누락, NULL 매칭, FULL = LEFT + RIGHT | PostgreSQL 16 → 7, 7, 9, 5 |
+| 51-2-23 | AND 조건 하나로 결과 없음 | 8행(NULL 섞임) + NOT (A OR B) AND C OR D. AND 우선, NOT UNKNOWN, OR 의 한쪽 참. 오답: OR 먼저(1), NULL 을 참으로(3), 드모르간 오류(4) | PostgreSQL 16(별도 스키마) → 2. 오답 식도 각각 1·3·4 로 재현 |
+| 51-2-29 | 4행 순위 함수 마지막 값 | 7행, 동점 두 쌍 + RANK·DENSE_RANK·NTILE(3)(나머지 앞 묶음부터) | PostgreSQL 16 → EMPNO 4 는 (6, 4, 3) |
+| 52-2-12 | 네 NULL 함수 중 결과가 다른 것 | 5행 + NVL2·NULLIF·COALESCE·DECODE 를 SUM/COUNT 로 묶은 (A, B, C, D). 오답: NULLIF(100, NULL)=NULL, NVL2 방향 반대, DECODE 의 NULL 비교 | PostgreSQL 16(NVL2·DECODE 는 CASE 로) → (498, 200, 4, 2) |
+| 52-2-49 | ON DELETE CASCADE 고르기 | mermaid ERD 4테이블(SET NULL·CASCADE·옵션 없음) + 데이터 + DELETE 세 문장 후 (사원, 근태, NULL 부서 사원) | PostgreSQL 16 에 같은 FK 옵션으로 실행 → ㉢ 은 평가 FK 위반 오류, 결과 (2, 2, 1). 390px 캡처로 ERD 렌더 확인 |
+| 53-2-14 | 3행 BETWEEN AND | 6행(NULL 두 칸) + NOT BETWEEN 5000 AND 3000(아래·위 뒤바뀜) + NVL. 오답: 범위를 고쳐 읽음(1), NULL AMT 포함(5), NVL 누락(3) | PostgreSQL 16 → 4. 고쳐 읽은 식 1, NVL 뺀 식 3 |
+| 53-2-42 | MIN + MAX(TO_CHAR) 3행 | 9·10·100·25 로 문자 비교('9' 가 MAX, '10' 이 MIN) + 암시적 형변환(+ 는 숫자, || 는 문자) | PostgreSQL 16(COLLATE "C" 로 바이트 비교, + 는 명시 변환) → 109, '109' |
+| 54-2-21 | 공통 칼럼 셋 NATURAL JOIN 행 수 | 공통 칼럼 둘(ID, GRP) + NULL 키 + T2 중복 키, (행 수, SELECT * 칼럼 수). 옛 보기 그림(optionReferences) 제거 | PostgreSQL 16 → 3행, 칼럼 id·grp·name·price 4개 |
+| 54-2-46 | 빈칸에 LAG | 지점별 PARTITION + LAG(금액, 1, 0)(기본값은 앞 행이 없을 때만) + LEAD(금액, 2), 중간 NULL 금액 | PostgreSQL 16 → 증감 NULL 은 B 2·3월 2행, A 1월 두달후 120 |
+| 55-2-33 | UNION ALL 결과 칼럼명 | 중복 행 있는 T 로 UNION(중복 제거) + 아래쪽 별칭을 뒤바꾸고 ORDER BY BBA DESC. 오답: UNION ALL 처럼(6행), 아래쪽 별칭으로 정렬, 별칭 불일치 오류 | PostgreSQL 16 → 칼럼 aab·bba, 4행, 첫 행 (2, 20) |
+| 55-2-40 | 전체·부서 합 윈도우 조합 | 동점(5000 두 행) + ORDER BY 만 있는 SUM(기본 RANGE) · PARTITION 만 · OVER () | PostgreSQL 16 → EMPNO 2 는 (13000, 13000, 21000) |
+| 56-2-33 | MAX(NULL) 상관 UPDATE 와 같은 것 | TAB2 에 NULL·중복 키 + WHERE 없는 상관 UPDATE(짝 없는 행이 NULL) vs EXISTS 추가. 오답: 짝 없는 행 유지, EXISTS 무효, MAX 가 NULL 이 됨 | PostgreSQL 16(각각 ROLLBACK) → ㉠ 600, ㉡ 1100 |
+| 56-2-45 | EMPNO 로 SUM 한 행 | 대상 행 없는 SUM·COUNT(*)·GROUP BY·NVL(SUM) 네 문장 | PostgreSQL 16 → NULL, 0, 0행, 0 |
+| 57-2-11 | OFFSET·FETCH 설명 고르기 | 동점 8행 + OFFSET/FETCH ONLY·WITH TIES·남은 행보다 큰 FETCH 세 문장 행 수 | PostgreSQL 16(WITH TIES 지원) → 2, 4, 2 |
+| 57-2-23 | HAVING >= ALL 빈칸 | 급여가 모두 NULL 인 부서 → 서브쿼리 목록에 NULL. ALL 은 0행, ANY 는 2행 | PostgreSQL 16 → ALL 0행, ANY 2행 |
+| 58-2-43 | DROP ... CASCADE CONSTRAINTS 설명 | 부모·자식 + DELETE(참조 위반)·TRUNCATE(FK 참조 테이블 불가)·DROP CASCADE CONSTRAINTS·FK 없는 INSERT 네 문장 | PostgreSQL 16(DROP TABLE ... CASCADE 가 같은 동작) → ㉠·㉡ 오류, T2 4행 |
+| 58-2-47 | 역방향 CONNECT BY 빈칸 | 6행 조직 + 역방향 전개 + WHERE 로 중간 노드 제외(전개는 계속, LEVEL 유지) | PostgreSQL 16 재귀 CTE 로 같은 전개 → SMITH(1), FORD(2), KING(4) |
+| 59-2-19 | DDL 끼인 트랜잭션 행 수 | SAVEPOINT + DDL(암시적 커밋으로 SAVEPOINT 소멸) + ROLLBACK TO 오류 + ROLLBACK | PostgreSQL 16 은 DDL 이 트랜잭션 안에 들어가므로 DDL 자리에 COMMIT 을 넣어 흉내 → 15, ROLLBACK TO 에서 'savepoint does not exist' |
+| 59-2-38 | 연관 없는 EXISTS 한 문장 | EXISTS(연관 없음)·EXISTS(연관)·NOT IN(목록 NULL)·NOT EXISTS 네 문장 | PostgreSQL 16 → 3, 1, 0, 2 |
+| 60-2-13 | 빈칸에 PIVOT | PIVOT 의 암시적 GROUP BY(사번이 남으면 사번별) vs 인라인 뷰로 칼럼 줄이기 + IN 목록 밖 직급 행 | PostgreSQL 16 은 PIVOT 이 없어 같은 GROUP BY + FILTER 집계로 흉내 → ㉠ 5행, ㉡ 2행(인사 사원 7200) |
+| 60-2-17 | FULL OUTER JOIN + NVL 고르기 | 중복 키(T1 의 2 두 행)·NULL 키(T2) FULL OUTER JOIN, (행 수, TOT 합) | PostgreSQL 16 → 5행, 1510 |
+| 61-2-37 | NVL(B, NULL) 스칼라 서브쿼리 오류 | 스칼라 서브쿼리·= 서브쿼리가 여러 행일 때(㉠·㉢), 한 행(㉡), MAX 로 한 값(㉣, 짝 없으면 NULL) | PostgreSQL 16 → ㉠·㉢ 'more than one row returned', ㉡ 100, ㉣ 정상 |
+| 61-2-44 | 값 개수 틀린 INSERT 고르기 | DEFAULT 키워드·생략 칼럼 기본값·명시 NULL·NOT NULL 칼럼 생략·값 개수 부족 다섯 문장 | PostgreSQL 16 → ㉠·㉡ 성공, ㉢·㉣ NOT NULL 오류. ㉤ 은 PG 가 모자란 뒤 칼럼을 기본값으로 채워 통과하지만 Oracle 은 ORA-00947(값 부족) — 문항은 Oracle 기준 명시 |
+| 62-2-28 | LIKE '%N' 6행 | NULL·소문자 이름 + LIKE·NOT LIKE·UPPER·'%N%' 네 문장. 오답: NOT LIKE 에 NULL 포함, 대소문자 무시, '%N%' 를 가운데로 오해 | PostgreSQL 16 → 2, 5, 3, 4 |
+| 62-2-47 | 셀프 비등가 조인 4행 | 중복 값(2 두 행)·NULL 이 있는 셀프 조인 <= · < 행 수 | PostgreSQL 16 → 11, 5 |
+
+390px 캡처: 서른여섯 문항 모두 표·SQL 넘침 없음. 45~62회 한 바퀴(회차마다 2문항) 완료.
+
+### 두 바퀴째 (같은 실행, 이번에 덜 다룬 주제 위주)
+
+45회 남은 문항(2-26·27·31·36·37·40·50)은 이번 바퀴에서 다룬 LIKE·괄호 우선순위·외부 조인과 겹쳐 건너뜀.
+
+| 문항 | 전 | 후 | 검증 |
+|---|---|---|---|
+| 46-2-50 | 결과 표 보고 ROLLUP 고르기 | 데이터 자체 NULL(JOB) + ROLLUP + GROUPING(JOB). 소계 NULL 과 데이터 NULL 구분 | PostgreSQL 16 → 7행, JOB NULL 이면서 G = 1 은 3행((B, NULL, 50) 은 G = 0) |
+| 48-2-21 | 하루 조회 조건 중 다른 것 | DATE 시각 + BETWEEN·TRUNC·LAST_DAY(그날 0시)·ADD_MONTHS 네 조건 | PostgreSQL 16(date_trunc·interval 로 같은 값) → 3, 2, 4, 5 |
+| 50-2-18 | 결과 패턴 보고 CUBE 고르기 | 3행 데이터에 ROLLUP·CUBE·GROUPING SETS(A, B)·ROLLUP(A), B 행 수 | PostgreSQL 16 → 6, 8, 4, 5 |
+| 56-2-30 | 결과 보고 DENSE_RANK 고르기 | 동점 있는 5행 PERCENT_RANK·CUME_DIST 값 | PostgreSQL 16 → David (0.5, 0.6) |
+| 57-1-9 | 학생·과목·수강 ERD 해석 | 교수 |o--o{ 과목(NULL 허용 FK) 추가 + 수강 PK 에 학기 → 재수강·담당 교수 없는 과목·수강 0건 과목·교수의 최소 담당 수 | 관계선 표기 해석 + PostgreSQL 16 에 같은 키로 만들어 재수강 2행·교수 없는 과목 입력 확인. 390px 캡처로 ERD 렌더 확인 |
+| 57-1-10 | 상품·주문 ERD 해석 | 주문 ||--|{ 주문항목(1개 이상) + 고객 FK NOT NULL + 주문항목 복합 PK | 관계선 표기 해석 + PostgreSQL 16 에서 (주문번호, 상품번호) 중복 입력이 PK 오류로 막힘 확인 |
+| 59-1-3 | '값의 범위 = 도메인' 정의 고르기 | 회원·주문 정의에서 도메인·개체·참조 무결성 위반과 위반 아님(UNIQUE 없음)을 사례로 구분 | 교재 정의(도메인 = 타입·길이·허용 값) 대조. 보기마다 위반 종류 하나씩 |
+| 58-1-5 | 1:1 선택 관계 해석 | 마더보드 쪽 FK(UNIQUE, NULL 허용) 표기 + 양쪽 |o | PostgreSQL 16: 컴퓨터 단독 등록, NULL FK 재고 2개, 같은 컴퓨터 두 번째 연결은 UNIQUE 오류 |
+| 57-1-3 | 1정규화 방법 고르기 | 릴레이션 스키마 + 함수 종속(부분·이행)으로 정규형 판정, 2NF 분해 뒤에도 이행 종속이 남는 점 | 교재 정의(부분 함수 종속 → 2NF, 이행 → 3NF) 대조. 6칸 예시 표는 390px 에서 넘쳐 스키마 글로 바꿈 |
+| 56-1-5 | 파생 속성 고르기 | 기본·설계·파생 속성 분류 전체, 일련번호(주문번호)는 설계 속성 | 교재 정의 대조. 표 3칸이 넘쳐 2칸으로 줄임 |
+
+두 바퀴째 확인: scan390(ROUNDS=45~62) 표 넘침은 원래부터 있던 54-1-7 하나(백로그 34)뿐.
+| 62-1-6 | 설명 보고 '상호 배타적 관계' 고르기 | mermaid ERD(두 부모 배타 FK) + 데이터로 저장 가능한 행 고르기 | PostgreSQL 16 에 CHECK(num_nonnulls = 1) + FK 로 구현 → ①·② CHECK 오류, ③ FK 오류, ④ 저장 |
+| 55-1-7 | 원자성 정의 고르기 | 네 상황(절반 반영·규칙 위반·동시 예약·커밋 후 소실)과 ACID 짝짓기 | 교재 정의 대조 |
+| 46-1-2 | 1:N 규칙을 테이블로 구현 | M:N + 재가입 이력 규칙 → 관계 테이블 PK 에 가입일자 | PostgreSQL 16: (고객, 서비스) PK 는 재가입이 PK 오류, (고객, 서비스, 가입일자) PK 는 2행 저장 |
+| 61-1-7 | 고객 속성 중 PK 후보 판단 | 수강 엔터티에서 후보키·슈퍼키(최소성)·재수강 업무 규칙 | PostgreSQL 16: UNIQUE(학번, 과목코드, 학기) 로 재수강 2행 저장, (학번, 과목코드) 는 중복 발생. 표 설명 칸이 넘쳐 줄임 |
+| 52-2-35 | ROLLUP((A, B)) 고르기 | 4행 데이터에 ROLLUP(A, B, C)·ROLLUP(A, (B, C))·ROLLUP((A, B), C)·GROUPING SETS((A, B, C), ()) 행 수 | PostgreSQL 16 → 10, 7, 8, 5 |
+| 56-2-36 | 공통 칼럼 하나 NATURAL JOIN 0건 | 공통 칼럼 둘(ID, NAME) NATURAL JOIN vs USING (ID) 의 행 수·칼럼 수 | PostgreSQL 16 → 1행, 2행, USING 결과 칼럼 id·name·city·name·phone 5개 |
+| 60-2-38 | 2×2 카티션 곱 | 빈 테이블과의 카티션 곱·LEFT JOIN ON 1=1·집계 인라인 뷰 | PostgreSQL 16 → 0, 2, 2. SQLite 검증기가 '(빈 테이블)' 행을 실제 행으로 넣어 mismatch → verify-sql-pg 와 같은 빈 테이블 표시 규칙을 verify-sql-results 에도 추가 |
+| 50-2-39 | COUNT(DISTINCT 급여) 5행 | NULL 행 + COUNT(DISTINCT SAL)·TRUNC(SAL, -4)·UPPER(SUBSTR) | PostgreSQL 16 → (3, 2, 3, 6). ROUND 로 바꾸면 B = 3(오답 ①) |
+| 52-2-15 | NVL 결과 중 가장 큰 행 | REPLACE(인수 2개)·INSTR(4번째 인수)·LPAD·SUBSTR(음수 시작) | PostgreSQL 16(replace 3인수·regexp_instr·substr 위치 계산으로 같은 값) → 3, 8, '007', 'OP' |
+| 57-2-40 | 숫자 BETWEEN 5행 | VARCHAR2 급여에 문자열 BETWEEN('13'·'1250000' 포함) vs TO_NUMBER 비교 | PostgreSQL 16(COLLATE "C") → ㉠ 5건(1200, 1300, 1400, 13, 1250000), ㉡ 3건. verify-sql-pg 는 표 이름 파싱 오류로 셈(검증기 한계) |
+| 55-2-18 | NULL 산술 세 행 | 산술 NULL 전파 + NVL 한쪽만 + Oracle 의 || NULL 처리 | PostgreSQL 16 은 || 에 NULL 이면 NULL 이라 concat() 으로 흉내 → 3번 행 (NULL, NULL, '10') |
+| 50-2-41 | 뷰 SUM 한 문장 | 뷰 WHERE 의 NULL 제외 + WITH CHECK OPTION 으로 INSERT·UPDATE 성공/실패 후 SUM | PostgreSQL 16 → ㉠ 600, 'A' INSERT·NULL UPDATE 는 check option 오류, 마지막 650 |
+| 60-2-37 | 4행 조인 SUM | 1:N 조인으로 SUM 이 부풀려지는 함정(조인·EXISTS·LEFT JOIN 비교) | PostgreSQL 16 → 400, 300, 700 |
+
+### 11-21 22시 실행 (7일 창 0.86 — 필수 2문항만)
+
+| 문항 | 전 | 후 | 검증 |
+|---|---|---|---|
+| 48-2-48 | LEVEL = 2 행 수 | 8행 트리 + LEVEL·CONNECT_BY_ISLEAF(자식 없는 LEVEL 2 노드 포함) | PostgreSQL 16 재귀 CTE → (3, 4, 4) |
+| 51-2-19 | GROUP BY 있는 NVL(MAX) 공집합 | 대상 행 없는 집계·GROUP BY·GROUP BY 없는 HAVING·COUNT(*) 행 수 | PostgreSQL 16 → 1, 0, 0, 1 |

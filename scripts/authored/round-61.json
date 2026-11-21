@@ -160,41 +160,49 @@
     {
       "subject": "1과목",
       "number": 7,
-      "title": "다음 [고객] 엔터티의 속성에 대한 설명으로 옳지 않은 것은?",
+      "title": "아래 [수강] 엔터티의 식별자에 대한 설명으로 옳지 않은 것은?",
       "options": [
-        "고객번호는 유일성과 최소성을 만족하므로 주식별자(PK)로 사용할 수 있다.",
-        "주민등록번호는 유일성과 최소성을 만족하므로 주식별자(PK)로 사용할 수 있다.",
-        "이메일은 유일성을 만족하므로 주식별자(PK)로 사용할 수 있다.",
-        "고객명은 중복과 NULL이 허용되므로 식별자로 사용할 수 없다."
+        "수강번호는 유일성과 최소성을 만족하므로 후보키다.",
+        "(학번, 과목코드, 학기) 는 업무 규칙에 따라 유일하고, 어느 하나를 빼면 유일성이 깨지므로 후보키다.",
+        "(학번, 과목코드, 학기, 성적) 도 유일성을 만족하므로 후보키다.",
+        "(학번, 과목코드) 는 다른 학기에 다시 신청하면 값이 겹치므로 후보키가 아니다."
       ],
       "correctIndex": 2,
-      "explanation": "주식별자는 유일성·최소성·불변성·존재성(NOT NULL)을 만족해야 한다. 이메일은 식별은 가능하지만 NULL이 허용되어 존재성을 만족하지 못하므로 주식별자로 사용할 수 없다. ① 고객번호와 ② 주민등록번호는 식별 가능하고 NOT NULL 이라 주식별자가 될 수 있고, ④ 고객명은 중복·NULL 이 허용되어 식별자가 될 수 없으므로 옳은 설명이다.",
+      "explanation": "후보키는 유일성과 최소성을 모두 만족해야 한다. (학번, 과목코드, 학기, 성적) 은 유일하긴 하지만, 성적을 빼도 (학번, 과목코드, 학기) 만으로 유일하므로 최소성을 만족하지 못한다. 이런 키는 슈퍼키다. 그래서 ③ 이 옳지 않고, 정답은 ③번이다. ① 수강번호는 하나만으로 중복이 없어 후보키다. ② 업무 규칙상 세 칼럼 조합은 한 번만 나오고, 학기를 빼면 재수강이, 학번이나 과목코드를 빼면 다른 학생이나 과목이 겹친다. ④ 재수강하면 (학번, 과목코드) 가 같은 행이 둘이 되므로 유일하지 않다.",
       "references": [
         {
           "type": "table",
-          "caption": "고객 엔터티",
+          "caption": "수강 속성",
           "headers": [
             "속성",
-            "특징"
+            "설명"
           ],
           "rows": [
             [
-              "고객번호",
-              "식별 가능, NOT NULL"
+              "수강번호",
+              "일련번호(중복 없음)"
             ],
             [
-              "주민등록번호",
-              "식별 가능, NOT NULL"
+              "학번",
+              "학생 번호"
             ],
             [
-              "이메일",
-              "식별 가능, NULL 허용"
+              "과목코드",
+              "과목 번호"
             ],
             [
-              "고객명",
-              "중복 가능, NULL 허용"
+              "학기",
+              "예: 2025-1"
+            ],
+            [
+              "성적",
+              "NULL 허용"
             ]
           ]
+        },
+        {
+          "type": "text",
+          "content": "업무 규칙: 한 학생은 같은 학기에 같은 과목을 한 번만 신청할 수 있고, 다른 학기에는 다시 신청할 수 있다."
         }
       ]
     },
@@ -1540,15 +1548,15 @@
     {
       "subject": "2과목",
       "number": 37,
-      "title": "다음 중 오류가 발생하는 SQL은?",
+      "title": "아래 두 테이블에 대한 ㉠~㉣ 중 실행 오류가 발생하는 것을 모두 고른 것은?",
       "options": [
-        "SELECT A\nFROM TBL1\nWHERE A IN (SELECT A FROM TBL2);",
-        "SELECT A, (SELECT SUM(B) FROM TBL2 WHERE TBL1.A = TBL2.A)\nFROM TBL1;",
-        "SELECT A, (SELECT NVL(B, NULL) FROM TBL2 WHERE TBL1.A = TBL2.A)\nFROM TBL1;",
-        "SELECT A\nFROM TBL1\nWHERE EXISTS (SELECT 1 FROM TBL2 WHERE TBL1.A = TBL2.A);"
+        "㉠",
+        "㉢",
+        "㉠, ㉢",
+        "㉠, ㉢, ㉣"
       ],
       "correctIndex": 2,
-      "explanation": "스칼라 서브쿼리는 단일 행·단일 컬럼만 반환해야 한다. ③은 A=100일 때 TBL2에서 두 행(10, 20)이 반환되어 오류(ORA-01427)가 발생한다. ②는 SUM 집계로 한 행이 보장되어 안전하다. ① IN 과 ④ EXISTS 는 여러 행을 받아도 되는 연산이라 오류가 없다.",
+      "explanation": "스칼라 서브쿼리와 = 비교 서브쿼리는 결과가 한 행 이하여야 하고, 두 행 이상이 나오면 실행 중에 오류가 난다. ㉠ 은 A = 100 일 때 TBL2 에서 10, 20 두 행이 나와 오류다. ㉡ 은 B > 15 인 행이 (100, 20) 하나뿐이라 정상이고 100 이 나온다. ㉢ 은 B 가 NULL 인 200, B < 15 인 100·300 이 걸려 세 행이므로 오류다. ㉣ 은 MAX 로 한 값만 돌려준다. 짝이 없는 400 은 NULL 이 될 뿐 오류가 아니다. 정답은 ③번이다. ① 은 ㉢ 의 OR 조건을 놓쳤다. ② 는 스칼라 서브쿼리가 여러 행이면 첫 행만 쓴다고 본 것이다. ④ 는 짝이 없는 행에서 스칼라 서브쿼리가 오류를 낸다고 본 것이다.",
       "references": [
         {
           "type": "table",
@@ -1565,6 +1573,9 @@
             ],
             [
               "300"
+            ],
+            [
+              "400"
             ]
           ]
         },
@@ -1593,6 +1604,10 @@
               "5"
             ]
           ]
+        },
+        {
+          "type": "sql",
+          "code": "-- ㉠\nSELECT A,\n       (SELECT B FROM TBL2\n        WHERE  TBL2.A = TBL1.A)\nFROM   TBL1;\n-- ㉡\nSELECT A FROM TBL1\nWHERE  A = (SELECT A FROM TBL2\n            WHERE  B > 15);\n-- ㉢\nSELECT A FROM TBL1\nWHERE  A = (SELECT A FROM TBL2\n            WHERE  B IS NULL\n               OR  B < 15);\n-- ㉣\nSELECT A,\n       (SELECT MAX(B) FROM TBL2\n        WHERE  TBL2.A = TBL1.A)\nFROM   TBL1;"
         }
       ]
     },
@@ -1837,19 +1852,23 @@
     {
       "subject": "2과목",
       "number": 44,
-      "title": "다음 중 오류가 발생하는 SQL은?",
+      "title": "아래 TAB 테이블에 ㉠~㉤ 을 각각 실행할 때 오류 없이 입력되는 것을 모두 고른 것은? (Oracle 기준)",
       "options": [
-        "INSERT INTO TAB VALUES (1, 'A', 'B');",
-        "INSERT INTO TAB (COL1, COL2, COL4) VALUES (1, 'A', SYSDATE);",
-        "INSERT INTO TAB (COL1, COL2) VALUES (1, 'A');",
-        "INSERT INTO TAB VALUES (1, 'A', 'B', SYSDATE);"
+        "㉠, ㉡",
+        "㉠, ㉡, ㉢",
+        "㉡, ㉤",
+        "㉠, ㉡, ㉤"
       ],
       "correctIndex": 0,
-      "explanation": "컬럼 목록을 생략하면 테이블의 모든 컬럼(4개)에 대한 값을 순서대로 모두 나열해야 한다. ①은 값이 3개뿐이라 오류가 발생한다. ②③은 NOT NULL인 COL1이 포함되어 있어 나머지는 생략해도 되며(COL3은 DEFAULT 'N' 적용), ④는 4개 컬럼에 모두 값이 있다.",
+      "explanation": "㉠ 은 VALUES 안에 DEFAULT 키워드를 써서 COL3 에 'N' 이 들어가므로 정상이다. ㉡ 은 칼럼을 지정하지 않은 COL2 는 NULL, COL3 은 기본값 'N' 이 들어가 정상이다. ㉢ 은 COL3 에 NULL 을 직접 적었다. 기본값은 값을 생략했을 때만 쓰이므로 NOT NULL 오류가 난다. ㉣ 은 COL1 을 빼먹었는데 COL1 은 기본값 없는 NOT NULL 이라 오류다. ㉤ 은 칼럼 목록 없이 값을 세 개만 넣어 칼럼 수(4개)와 맞지 않아 오류다. 정답은 ①번이다. ② 는 명시한 NULL 도 기본값으로 바뀐다고 본 것이다. ③ 은 VALUES 에 DEFAULT 를 쓸 수 없다고 보고, 모자란 값은 NULL 로 채워진다고 본 것이다. ④ 는 모자란 값만 NULL 로 채워진다고 본 것이다.",
       "references": [
         {
           "type": "sql",
-          "code": "CREATE TABLE TAB (\n    COL1  NUMBER      NOT NULL,\n    COL2  VARCHAR2(10),\n    COL3  VARCHAR2(10) DEFAULT 'N',\n    COL4  DATE\n);"
+          "code": "CREATE TABLE TAB (\n  COL1 NUMBER NOT NULL,\n  COL2 VARCHAR2(10),\n  COL3 VARCHAR2(10)\n       DEFAULT 'N' NOT NULL,\n  COL4 DATE\n);"
+        },
+        {
+          "type": "sql",
+          "code": "-- ㉠\nINSERT INTO TAB\nVALUES (1, 'A', DEFAULT, SYSDATE);\n-- ㉡\nINSERT INTO TAB (COL1, COL4)\nVALUES (2, SYSDATE);\n-- ㉢\nINSERT INTO TAB\nVALUES (3, 'C', NULL, NULL);\n-- ㉣\nINSERT INTO TAB (COL2, COL3)\nVALUES ('D', 'Y');\n-- ㉤\nINSERT INTO TAB\nVALUES (5, 'E', 'Y');"
         }
       ]
     },

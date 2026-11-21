@@ -438,42 +438,61 @@ export const ROUND_53: QuizQuestion[] = [
     "round": 53,
     "subject": "2과목",
     "number": 14,
-    "title": "아래 T 테이블에 대한 SQL 의 결과 행 개수로 옳은 것은?",
+    "title": "아래 T 테이블에 대한 SQL 의 결과로 옳은 것은? (Oracle 기준)",
     "options": [
-      "1개",
-      "2개",
-      "3개",
-      "0개"
+      "4",
+      "1",
+      "5",
+      "3"
     ],
     "correctIndex": 0,
-    "explanation": "`AMT BETWEEN 3000 AND 5000` 과 `VOL <= 10` 을 동시에 만족해야 한다. (4000, 5) 만 두 조건 모두 만족, (6000, 3) 은 AMT 범위 초과, (3000, 15) 는 VOL 초과. 따라서 1 건. ② 2개는 AMT 조건이나 VOL 조건 중 하나만 본 값, ③ 3개는 두 조건을 모두 무시한 값이다.",
+    "explanation": "BETWEEN A AND B 는 '>= A AND <= B' 와 같아서 A 가 B 보다 크면 어떤 값도 만족하지 못한다. BETWEEN 5000 AND 3000 은 항상 거짓이고, NOT 을 붙이면 AMT 가 있는 행은 모두 참이다. AMT 가 NULL 인 5번은 비교가 UNKNOWN 이라 NOT 을 붙여도 빠진다. 남은 1·2·3·4·6번 중 NVL(VOL, 0) <= 10 에서 VOL 이 15 인 3번이 빠지고, VOL 이 NULL 인 4번은 0 으로 바뀌어 남는다. 1·2·4·6번 4건, 정답은 ①번이다. ② 1 은 BETWEEN 5000 AND 3000 을 3000~5000 으로 고쳐 읽고 그 밖의 값(6000)만 센 것이다. ③ 5 는 AMT 가 NULL 인 5번도 범위 밖이니 NOT BETWEEN 이 참이라고 본 값이다. ④ 3 은 NVL 을 놓치고 VOL 이 NULL 인 4번을 뺀 값이다.",
     "_source": "authored",
     "references": [
       {
         "type": "table",
-        "caption": "T 테이블",
+        "caption": "T",
         "headers": [
+          "ID",
           "AMT",
           "VOL"
         ],
         "rows": [
           [
+            "1",
             "4000",
             "5"
           ],
           [
+            "2",
             "6000",
             "3"
           ],
           [
+            "3",
             "3000",
             "15"
+          ],
+          [
+            "4",
+            "5000",
+            "NULL"
+          ],
+          [
+            "5",
+            "NULL",
+            "2"
+          ],
+          [
+            "6",
+            "3500",
+            "10"
           ]
         ]
       },
       {
         "type": "sql",
-        "code": "SELECT COUNT(*)\nFROM   T\nWHERE  AMT BETWEEN 3000 AND 5000\nAND    VOL <= 10;"
+        "code": "SELECT COUNT(*)\nFROM   T\nWHERE  AMT NOT BETWEEN 5000 AND 3000\nAND    NVL(VOL, 0) <= 10;"
       }
     ]
   },
@@ -1572,38 +1591,41 @@ export const ROUND_53: QuizQuestion[] = [
     "round": 53,
     "subject": "2과목",
     "number": 42,
-    "title": "아래 SQL 의 결과로 옳은 것은?",
+    "title": "아래 T 테이블에 대한 SQL 의 결과 (A, B) 로 옳은 것은? (Oracle 기준)",
     "options": [
-      "100",
-      "190",
-      "NULL",
-      "오류"
+      "(109, '109')",
+      "(200, '99')",
+      "(109, 19)",
+      "오류가 발생한다"
     ],
     "correctIndex": 0,
-    "explanation": "T.COL1 = (10, 50, 90). `MIN(COL1)` = 10 (숫자), `MAX(TO_CHAR(COL1))` = '90' (문자 비교 기준 가장 큰 문자열). `숫자 + 문자열` 은 묵시적 형변환으로 10 + 90 = 100 이 된다. ③ NULL 이 섞이지 않아 NULL 이 아니고, ④ 문자 '90' 은 숫자로 자동 변환되어 오류가 나지 않는다.",
+    "explanation": "TO_CHAR(COL1) 은 문자열이라 MAX·MIN 이 숫자 크기가 아니라 앞 글자부터 비교한다. '9', '10', '100', '25' 중 첫 글자가 가장 큰 '9' 가 MAX 이고, '1' 로 시작하는 것 중 더 짧은 '10' 이 MIN 이다. A 는 숫자 MAX 100 에 문자 '9' 를 더하는데, Oracle 은 + 를 만나면 문자를 숫자로 바꿔 계산하므로 100 + 9 = 109 다. B 는 || 연결이라 숫자 MIN 9 가 문자 '9' 로 바뀌어 '10' || '9' = '109' 가 된다. A 는 숫자 109, B 는 문자 '109' 로 정답은 ①번이다. ② 는 TO_CHAR 를 해도 숫자처럼 비교된다고 보고 MAX 를 '100', MIN 을 '9' 로 잡은 값이다. ③ 은 || 를 덧셈으로 보고 10 + 9 = 19 로 계산했다. ④ 는 문자와 숫자를 + 로 더할 수 없다고 본 것인데, Oracle 은 숫자로 바꿀 수 있는 문자면 자동으로 형변환한다.",
     "_source": "authored",
     "references": [
       {
         "type": "table",
+        "caption": "T",
         "headers": [
-          "COL1"
+          "COL1 (NUMBER)"
         ],
         "rows": [
+          [
+            "9"
+          ],
           [
             "10"
           ],
           [
-            "50"
+            "100"
           ],
           [
-            "90"
+            "25"
           ]
-        ],
-        "caption": "T 테이블"
+        ]
       },
       {
         "type": "sql",
-        "code": "SELECT MIN(COL1) + MAX(TO_CHAR(COL1))\nFROM   T;"
+        "code": "SELECT MAX(COL1) + MAX(TO_CHAR(COL1))\n         AS A,\n       MIN(TO_CHAR(COL1)) || MIN(COL1)\n         AS B\nFROM   T;"
       }
     ]
   },
