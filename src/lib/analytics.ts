@@ -45,7 +45,11 @@ export function initGA() {
   };
   window.gtag('js', new Date());
   // SPA 자동 page_view 비활성 — trackPageView 가 수동 발사
-  window.gtag('config', GA_ID, { send_page_view: false, debug_mode: DEBUG_MODE });
+  // debug_mode 는 값이 false 여도 들어 있기만 하면 GA4 가 디버그 이벤트로 받는다.
+  // 그래서 디버그일 때만 넣고, 운영에서는 아예 빼야 한다.
+  window.gtag('config', GA_ID, DEBUG_MODE
+    ? { send_page_view: false, debug_mode: true }
+    : { send_page_view: false });
 }
 
 export function trackPageView(route: string, params?: any) {

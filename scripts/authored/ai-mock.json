@@ -65,7 +65,7 @@
         {
           "type": "sql",
           "caption": "쿼리 1",
-          "code": "SELECT E.EMPNO, D.DNAME\nFROM EMP E LEFT OUTER JOIN DEPT D\nON E.DEPTNO = D.DEPTNO AND D.LOC = 'SEOUL';"
+          "code": "SELECT E.EMPNO, D.DNAME\nFROM EMP E LEFT OUTER JOIN DEPT D\nON E.DEPTNO = D.DEPTNO\n   AND D.LOC = 'SEOUL';"
         },
         {
           "type": "sql",
@@ -136,7 +136,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT NULLIF(COALESCE(NULL, 'A', 'B'), 'A') FROM DUAL;"
+          "code": "SELECT NULLIF(COALESCE(NULL, 'A', 'B'),\n              'A')\nFROM DUAL;"
         }
       ]
     },
@@ -205,90 +205,274 @@
       "_source": "gemini-mock-1",
       "subject": "2과목",
       "chapter": "계층형 질의",
-      "title": "계층형 질의의 가상 컬럼인 CONNECT_BY_ISLEAF가 반환하는 값의 의미로 올바른 것은?",
+      "title": "아래 EMP 를 KING 부터 순방향으로 전개할 때 CONNECT_BY_ISLEAF 가 1 인 사원은? (Oracle)",
       "options": [
-        "현재 행에서 순환(Cycle)이 발생했으면 1, 아니면 0",
-        "현재 행이 최상위 루트 노드이면 1, 아니면 0",
-        "현재 행이 단말 노드(자식이 없는 노드)이면 1, 아니면 0",
-        "현재 노드의 전체 하위 자식 노드 개수"
+        "KING",
+        "KING, JONES",
+        "SCOTT, BLAKE",
+        "JONES"
       ],
       "correctIndex": 2,
-      "explanation": "CONNECT_BY_ISLEAF 는 더 내려갈 자식이 없는 행(리프)이면 1, 아니면 0 이다. 순환 여부를 알려 주는 건 CONNECT_BY_ISCYCLE, 루트 값은 CONNECT_BY_ROOT 다."
+      "explanation": "CONNECT_BY_ISLEAF 는 그 행 아래에 더 전개되는 자식이 없으면(단말 노드) 1, 있으면 0 이다. KING 아래 JONES·BLAKE, JONES 아래 SCOTT 이 있으므로 자식이 없는 SCOTT 과 BLAKE 가 1 이다. 정답은 ③번이다. KING 은 루트라 CONNECT_BY_ROOT 나 LEVEL = 1 로 알 수 있는 행이고, JONES 는 SCOTT 이 있어 0 이다.",
+      "references": [
+        {
+          "type": "table",
+          "caption": "EMP",
+          "headers": [
+            "EMPNO",
+            "ENAME",
+            "MGR"
+          ],
+          "rows": [
+            [
+              "1",
+              "KING",
+              "NULL"
+            ],
+            [
+              "2",
+              "JONES",
+              "1"
+            ],
+            [
+              "3",
+              "SCOTT",
+              "2"
+            ],
+            [
+              "4",
+              "BLAKE",
+              "1"
+            ]
+          ]
+        },
+        {
+          "type": "sql",
+          "code": "SELECT ENAME, CONNECT_BY_ISLEAF\nFROM   EMP\nSTART  WITH MGR IS NULL\nCONNECT BY PRIOR EMPNO = MGR;"
+        }
+      ]
     },
     {
       "_id": "ai-mock-013",
       "_source": "gemini-mock-1",
       "subject": "2과목",
       "chapter": "서브쿼리",
-      "title": "다음 중 서브쿼리 결과에 NULL이 포함되어 있을 때, 메인 쿼리의 결과가 항상 0건(Empty)이 되는 연산자는 무엇인가?",
+      "title": "아래 E, X 에 대해 결과가 0건이 되는 SQL 은? (X.DEPTNO 에 10 과 NULL 이 있다)",
       "options": [
-        "NOT EXISTS",
-        "NOT IN",
-        "IN",
-        "EXISTS"
+        "SELECT * FROM E WHERE NOT EXISTS (SELECT 1 FROM X WHERE X.DEPTNO = E.DEPTNO);",
+        "SELECT * FROM E WHERE DEPTNO NOT IN (SELECT DEPTNO FROM X);",
+        "SELECT * FROM E WHERE DEPTNO IN (SELECT DEPTNO FROM X);",
+        "SELECT * FROM E WHERE EXISTS (SELECT 1 FROM X WHERE X.DEPTNO = E.DEPTNO);"
       ],
       "correctIndex": 1,
-      "explanation": "NOT IN (1, NULL) 은 '1 이 아니고 AND NULL 도 아니다' 와 같다. NULL 과의 비교는 참·거짓을 알 수 없으니 전체가 참이 될 수 없어 0건이 된다. NOT EXISTS 는 행이 있는지만 보므로 NULL 의 영향을 받지 않는다."
+      "explanation": "NOT IN (10, NULL) 은 DEPTNO <> 10 AND DEPTNO <> NULL 과 같다. DEPTNO <> NULL 이 늘 UNKNOWN 이라 어떤 행도 참이 되지 않아 0건이다. 정답은 ②번이다. ① NOT EXISTS 는 짝이 없는 행을 찾으므로 20, 30 두 건이다(NULL 과는 짝이 되지 않는다). ③ IN 과 ④ EXISTS 는 10 한 건이다. 서브쿼리에 NULL 이 섞일 수 있으면 NOT IN 대신 NOT EXISTS 를 쓰거나 NULL 을 걸러야 한다.",
+      "references": [
+        {
+          "type": "table",
+          "caption": "E",
+          "headers": [
+            "EMPNO",
+            "DEPTNO"
+          ],
+          "rows": [
+            [
+              "1",
+              "10"
+            ],
+            [
+              "2",
+              "20"
+            ],
+            [
+              "3",
+              "30"
+            ]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "X",
+          "headers": [
+            "DEPTNO"
+          ],
+          "rows": [
+            [
+              "10"
+            ],
+            [
+              "NULL"
+            ]
+          ]
+        }
+      ]
     },
     {
       "_id": "ai-mock-015",
       "_source": "gemini-mock-1",
       "subject": "2과목",
       "chapter": "그룹 함수",
-      "title": "GROUPING SETS(A, B, C)를 사용하여 집계를 수행할 때, 생성되는 그룹핑 결과의 조합 수는?",
+      "title": "아래 T 에 대해 GROUP BY GROUPING SETS(A, B, C) 로 SUM(V) 를 구할 때, 만들어지는 그룹핑 묶음 수와 결과 행 수로 옳은 것은?",
       "options": [
-        "1개",
-        "4개",
-        "8개",
-        "3개"
+        "1개 묶음, 2행",
+        "4개 묶음, 6행",
+        "8개 묶음, 12행",
+        "3개 묶음, 5행"
       ],
       "correctIndex": 3,
-      "explanation": "GROUPING SETS 는 적은 것만큼 따로 집계한다 → (A), (B), (C) 3개. 같은 컬럼이라도 ROLLUP(A, B, C) 이면 4개, CUBE(A, B, C) 이면 2³ = 8개다."
+      "explanation": "GROUPING SETS(A, B, C) 는 괄호 안에 적은 A, B, C 를 각각 하나의 묶음으로 따로 집계한다. 묶음은 3개이고, 총계는 () 를 적지 않았으므로 없다. A 로 묶으면 a1, a2 두 행, B 로 묶으면 b1 한 행, C 로 묶으면 c1, c2 두 행이라 모두 5행이다. 정답은 ④번이다. ② 4개는 ROLLUP(A, B, C)(3 + 총계 1), ③ 8개는 CUBE(A, B, C)(2³)의 묶음 수다.",
+      "references": [
+        {
+          "type": "table",
+          "caption": "T",
+          "headers": [
+            "A",
+            "B",
+            "C",
+            "V"
+          ],
+          "rows": [
+            [
+              "a1",
+              "b1",
+              "c1",
+              "10"
+            ],
+            [
+              "a2",
+              "b1",
+              "c2",
+              "20"
+            ]
+          ]
+        }
+      ]
     },
     {
       "_id": "ai-mock-016",
       "_source": "gemini-mock-1",
       "subject": "2과목",
       "chapter": "함수",
-      "title": "다음 중 NULLIF(A, B) 함수의 올바른 동작을 설명한 것은?",
+      "title": "아래 T 에 대해 SELECT NULLIF(A, B) FROM T; 의 결과(행 순)로 옳은 것은?",
       "options": [
-        "A와 B가 같으면 A를, 다르면 NULL을 반환한다.",
-        "A와 B가 같으면 NULL을, 다르면 A를 반환한다.",
-        "A가 NULL이면 B를 반환한다.",
-        "A와 B 중 NULL이 아닌 첫 번째 값을 반환한다."
+        "1, NULL, NULL",
+        "NULL, 1, NULL",
+        "NULL, 1, 1",
+        "1, 2, 1"
       ],
       "correctIndex": 1,
-      "explanation": "NULLIF(A, B) 는 두 값이 같으면 NULL, 다르면 A 를 돌려준다. ③(A 가 NULL 이면 B)은 NVL, ④(처음 만나는 NULL 아닌 값)는 COALESCE 의 동작이다."
+      "explanation": "NULLIF(A, B) 는 A 와 B 가 같으면 NULL, 다르면 A 를 돌려준다. 1행은 1 = 1 이라 NULL, 2행은 1 ≠ 2 라 A 인 1, 3행은 A 가 NULL 이라 비교가 참이 아니므로 A 인 NULL 이다. 정답은 ②번이다. ③ 은 3행에서 B 를 돌려준다고 본 것이고(그것은 NVL·COALESCE 류), ① 은 같을 때 A, 다를 때 NULL 로 거꾸로 본 것이다.",
+      "references": [
+        {
+          "type": "table",
+          "caption": "T",
+          "headers": [
+            "A",
+            "B"
+          ],
+          "rows": [
+            [
+              "1",
+              "1"
+            ],
+            [
+              "1",
+              "2"
+            ],
+            [
+              "NULL",
+              "1"
+            ]
+          ]
+        }
+      ]
     },
     {
       "_id": "ai-mock-017",
       "_source": "gemini-mock-1",
       "subject": "2과목",
       "chapter": "윈도우 함수",
-      "title": "윈도우 함수 중 동일한 값에 대해 같은 순위를 부여하고, 중복된 순위만큼 다음 순위를 건너뛰어 부여하는 함수는? (예: 1등, 1등, 3등)",
+      "title": "아래 EMP 에 대해 함수(...) OVER (ORDER BY SAL DESC) 의 결과가 1, 2, 2, 4 가 되는 함수는?",
       "options": [
-        "NTILE",
-        "RANK",
-        "DENSE_RANK",
-        "ROW_NUMBER"
+        "NTILE(3)",
+        "RANK()",
+        "DENSE_RANK()",
+        "ROW_NUMBER()"
       ],
       "correctIndex": 1,
-      "explanation": "동점에 같은 순위를 주고 그 수만큼 다음 순위를 건너뛰는 것(1, 1, 3)은 RANK 다. DENSE_RANK 는 건너뛰지 않고(1, 1, 2), ROW_NUMBER 는 동점이어도 1, 2, 3 으로 번호를 다르게 준다."
+      "explanation": "RANK 는 같은 값에 같은 순위를 주고, 그 수만큼 다음 순위를 건너뛴다. 400 이 둘이라 둘 다 2위, 다음 300 은 4위다. 정답은 ②번이다. ③ DENSE_RANK 는 건너뛰지 않아 1, 2, 2, 3 이다. ④ ROW_NUMBER 는 1, 2, 3, 4 처럼 모두 다른 번호를 준다. ① NTILE(3) 은 네 행을 세 묶음으로 나눠 1, 1, 2, 3 이다.",
+      "references": [
+        {
+          "type": "table",
+          "caption": "EMP",
+          "headers": [
+            "SAL"
+          ],
+          "rows": [
+            [
+              "500"
+            ],
+            [
+              "400"
+            ],
+            [
+              "400"
+            ],
+            [
+              "300"
+            ]
+          ]
+        }
+      ]
     },
     {
       "_id": "ai-mock-018",
       "_source": "gemini-mock-1",
       "subject": "2과목",
       "chapter": "집합 연산자",
-      "title": "집합 연산자 MINUS(또는 EXCEPT)에 대한 설명으로 틀린 것은?",
+      "title": "아래 A, B 에 대해 SELECT V FROM A MINUS SELECT V FROM B 를 실행할 때 설명으로 틀린 것은? (Oracle 기준)",
       "options": [
-        "두 쿼리의 SELECT 절에 있는 컬럼의 개수와 데이터 타입이 일치해야 한다.",
-        "결과집합에서 중복된 행은 제거하지 않고 모두 출력한다.",
-        "첫 번째 쿼리 결과에는 존재하지만 두 번째 쿼리 결과에는 없는 차집합을 반환한다.",
-        "쿼리의 순서가 바뀌면 결과도 달라질 수 있다."
+        "두 SELECT 의 칼럼 수와 타입 계열이 맞아야 실행된다.",
+        "결과는 1, 1, 2 처럼 A 의 중복이 그대로 남는다.",
+        "결과는 A 에만 있는 1, 2 두 행이다.",
+        "순서를 바꿔 B MINUS A 로 실행하면 결과는 한 행도 없다."
       ],
       "correctIndex": 1,
-      "explanation": "MINUS 도 UNION·INTERSECT 처럼 결과에서 중복을 지운다. 중복을 그대로 두는 건 UNION ALL 하나뿐이다. 그래서 ②가 틀렸다."
+      "explanation": "MINUS(표준 SQL 의 EXCEPT)는 첫 번째 결과에서 두 번째 결과에 있는 행을 빼고, 남은 결과의 중복도 없앤다. 그래서 1 은 한 번만 나와 결과는 1, 2 두 행이다. 중복이 남는다는 ② 가 틀렸다. 정답은 ②번이다. ④ B 의 3 은 A 에도 있으므로 B MINUS A 는 공집합이다. 순서에 따라 결과가 달라지는 것이 MINUS 의 특징이다.",
+      "references": [
+        {
+          "type": "table",
+          "caption": "A",
+          "headers": [
+            "V"
+          ],
+          "rows": [
+            [
+              "1"
+            ],
+            [
+              "1"
+            ],
+            [
+              "2"
+            ],
+            [
+              "3"
+            ]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "B",
+          "headers": [
+            "V"
+          ],
+          "rows": [
+            [
+              "3"
+            ]
+          ]
+        }
+      ]
     },
     {
       "_id": "ai-mock-020",
@@ -370,15 +554,35 @@
       "_source": "gemini-mock-1",
       "subject": "2과목",
       "chapter": "함수",
-      "title": "다음 함수 중 성격이 다른 하나는 무엇인가?",
+      "title": "아래 T 의 COL 이 NULL, 0, 5 일 때 결과(행 순)가 나머지 셋과 다른 식은?",
       "options": [
-        "NVL (또는 ISNULL)",
-        "COALESCE",
-        "NULLIF",
-        "NVL2"
+        "NVL(COL, 0)",
+        "COALESCE(COL, 0)",
+        "NULLIF(COL, 0)",
+        "NVL2(COL, COL, 0)"
       ],
       "correctIndex": 2,
-      "explanation": "NVL·COALESCE·NVL2 는 NULL 을 다른 값으로 바꿔 주는 함수다. NULLIF 는 두 값이 같으면 NULL 을 '만드는' 함수라 성격이 반대다."
+      "explanation": "①·②·④ 는 모두 NULL 을 0 으로 바꾸는 함수라 0, 0, 5 가 나온다(NVL2(a, b, c) 는 a 가 NULL 이 아니면 b, NULL 이면 c). NULLIF(COL, 0) 은 반대로 COL 이 0 이면 NULL 로 바꾸는 함수다. NULL 은 그대로 NULL, 0 은 NULL, 5 는 5 라서 NULL, NULL, 5 가 된다. 정답은 ③번이다. 0 으로 나누기를 피할 때 분모에 NULLIF(분모, 0) 을 쓰는 것이 대표적인 쓰임이다.",
+      "references": [
+        {
+          "type": "table",
+          "caption": "T",
+          "headers": [
+            "COL"
+          ],
+          "rows": [
+            [
+              "NULL"
+            ],
+            [
+              "0"
+            ],
+            [
+              "5"
+            ]
+          ]
+        }
+      ]
     },
     {
       "_id": "ai-mock-027",
@@ -490,30 +694,37 @@
       "_source": "gemini-mock-1",
       "subject": "1과목",
       "chapter": "정규화",
-      "title": "데이터베이스 설계 중 반정규화(De-normalization)를 수행하는 주요 목적으로 가장 거리가 먼 것은?",
+      "title": "주문 목록 화면을 빠르게 하려고 주문 테이블에 고객명을 중복해 두는 반정규화를 했다. 이 결정의 영향으로 틀린 것은?",
       "options": [
-        "복잡한 조인(Join) 경로를 단축하여 시스템 조회 성능을 높이기 위해",
-        "데이터의 무결성과 일관성을 완벽하게 보장하기 위해",
-        "특정 테이블에 접근하는 디스크 I/O가 과도할 때 데이터를 분산시키거나 합치기 위해",
-        "집계 혹은 요약 데이터를 미리 계산해 두어 리포팅 조회 속도를 개선하기 위해"
+        "주문 목록에 고객명을 보여 줄 때 고객 테이블과 조인하지 않아도 된다.",
+        "고객명이 바뀌면 주문의 고객명도 자동으로 같이 바뀌므로 무결성이 더 좋아진다.",
+        "고객명이 바뀔 때 주문의 고객명을 맞춰 줄 방법(트리거·배치 등)이 필요하다.",
+        "같은 고객명이 주문마다 저장되어 저장 공간이 늘어난다."
       ],
       "correctIndex": 1,
-      "explanation": "반정규화는 조회를 빠르게 하려고 일부러 중복을 허용하는 것이라, 무결성은 오히려 지키기 어려워진다. 무결성을 지키는 건 정규화의 목적이다. 그래서 ②가 거리가 멀다."
+      "explanation": "반정규화는 조회 성능을 위해 일부러 중복을 허용하는 것이다. 조인이 줄어 조회는 빨라지지만(①), 같은 값이 여러 곳에 저장되어 공간이 늘고(④), 원본이 바뀌면 중복 값을 따로 맞춰야 한다(③). 중복 칼럼은 저절로 바뀌지 않으므로 맞추지 않으면 고객 테이블과 주문의 고객명이 달라진다. 무결성이 좋아진다는 ② 가 틀렸다. 정답은 ②번이다. 반정규화는 무결성을 지키는 부담을 감수하고 성능을 얻는 선택이다.",
+      "references": [
+        {
+          "type": "text",
+          "content": "변경 전: 주문(주문번호, 고객번호, 주문일자)\n변경 후: 주문(주문번호, 고객번호, 고객명, 주문일자)"
+        }
+      ]
     },
     {
       "_id": "ai-mock-035",
       "_source": "gemini-mock-1",
       "subject": "2과목",
       "chapter": "DDL",
-      "title": "다음 제약조건(Constraint) 중 테이블의 특정 컬럼에 NULL 값이 들어가는 것은 허용하되, 입력되는 값들은 서로 중복되지 않아야 함을 보장하는 것은?",
+      "title": "회원의 이메일은 비워 둘 수 있지만, 입력한 이메일은 다른 회원과 겹치면 안 된다. 알맞은 제약조건과 그 동작으로 옳은 것은? (Oracle 기준)",
       "options": [
-        "UNIQUE",
-        "FOREIGN KEY",
-        "CHECK",
-        "PRIMARY KEY"
+        "UNIQUE — 이메일이 NULL 인 회원이 여러 명이어도 입력되고, 같은 이메일을 두 번 넣으면 오류가 난다.",
+        "PRIMARY KEY — 이메일이 NULL 인 회원은 한 명까지만 입력된다.",
+        "CHECK — 새로 넣는 값이 다른 행의 값과 겹치는지 검사해 막는다.",
+        "FOREIGN KEY — 이메일 칼럼의 중복을 막고 NULL 도 허용한다."
       ],
       "correctIndex": 0,
-      "explanation": "UNIQUE 는 같은 값이 두 번 들어가는 것만 막고 NULL 은 허용한다(NULL 끼리는 같다고 보지 않아 여러 개도 가능). PRIMARY KEY 는 UNIQUE + NOT NULL 이라 NULL 을 넣을 수 없다."
+      "explanation": "UNIQUE 는 값이 있으면 서로 달라야 하지만 NULL 은 허용한다. NULL 끼리는 같은 값으로 보지 않아 NULL 인 행이 여러 개 있어도 된다. 정답은 ①번이다. ② PRIMARY KEY 는 NULL 을 하나도 허용하지 않는다. ③ CHECK 는 한 행 안의 값이 조건(예: 나이 >= 0)에 맞는지만 보고 다른 행과 비교하지 않는다. ④ FOREIGN KEY 는 다른 테이블의 값을 참조하는지 검사할 뿐 중복을 막지 않는다.",
+      "references": []
     },
     {
       "_id": "ai-mock-036",
@@ -613,7 +824,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT * FROM EMP WHERE DEPTNO NOT IN (SELECT DEPTNO FROM DEPT WHERE LOC = 'SEOUL');"
+          "code": "SELECT * FROM EMP\nWHERE DEPTNO NOT IN\n      (SELECT DEPTNO FROM DEPT\n        WHERE LOC = 'SEOUL');"
         }
       ]
     },
@@ -772,15 +983,21 @@
       "_source": "gemini-mock-2",
       "subject": "1과목",
       "chapter": "정규화",
-      "title": "정규화(Normalization) 과정과 관련된 설명 중 틀린 것은?",
+      "title": "아래 [주문상세] 테이블을 제2정규화해 주문상세(주문번호, 상품코드, 수량)와 상품(상품코드, 상품명)으로 나눴다. 이 변경의 영향으로 틀린 것은?",
       "options": [
-        "제2정규형(2NF)은 복합키로 구성된 주식별자에 대해 일부 속성에만 종속되는 부분 함수 종속을 제거하는 것이다.",
-        "제3정규형(3NF)은 식별자가 아닌 일반 속성 간에 발생하는 이행적 함수 종속(A->B, B->C일 때 A->C)을 제거하는 것이다.",
-        "제1정규형(1NF)은 모든 속성이 원자값(더 이상 분해되지 않는 단위)을 가져야 한다는 원칙이다.",
-        "정규화가 진행될수록 테이블이 잘게 쪼개져 항상 데이터 조회(SELECT) 성능이 향상된다."
+        "상품명을 바꿀 때 상품 테이블의 한 행만 고치면 된다.",
+        "아직 주문되지 않은 상품도 상품 테이블에 등록할 수 있다.",
+        "주문 내역과 상품명을 함께 보려면 두 테이블을 조인해야 한다.",
+        "테이블이 나뉘었으므로 어떤 조회든 항상 더 빨라진다."
       ],
       "correctIndex": 3,
-      "explanation": "테이블이 잘게 나뉘면 조회할 때 조인이 늘어나 오히려 느려질 수 있다. '항상 빨라진다'는 ④가 틀렸다. 그래서 필요하면 반정규화로 중복을 일부 허용한다."
+      "explanation": "상품명은 상품코드에만 종속되는 부분 종속이라 제2정규화로 떼어 냈다. 그 결과 같은 상품명이 반복되지 않아 수정은 한 곳에서 끝나고(①), 주문 없이도 상품을 넣을 수 있어 삽입 이상이 사라진다(②). 대신 주문 내역에 상품명을 붙여 보려면 조인이 필요하다(③). 조인이 늘어나면 조회가 오히려 느려질 수 있으므로 '항상 빨라진다' 는 ④ 가 틀렸다. 정답은 ④번이다. 조회가 너무 느리면 반정규화로 일부 중복을 허용하기도 한다.",
+      "references": [
+        {
+          "type": "text",
+          "content": "주문상세(주문번호, 상품코드, 상품명, 수량)\n주식별자: (주문번호, 상품코드)"
+        }
+      ]
     },
     {
       "_id": "ai-mock-057",
@@ -817,15 +1034,21 @@
       "_source": "gemini-mock-2",
       "subject": "1과목",
       "chapter": "트랜잭션과 Null",
-      "title": "트랜잭션의 특징 중 일관성(Consistency)에 대한 설명으로 올바른 것은?",
+      "title": "계좌 테이블에 '잔액은 0 이상' 이라는 CHECK 제약이 있다. 잔액이 5만 원인 계좌에서 아래 출금 문장을 실행했을 때, 관련된 트랜잭션 특성과 결과로 옳은 것은?",
       "options": [
-        "트랜잭션이 성공적으로 완료되면, 그 결과는 영구적으로 데이터베이스에 보존되어야 한다.",
-        "트랜잭션을 구성하는 연산들은 모두 정상적으로 실행되거나 아예 하나도 실행되지 않아야 한다.",
-        "트랜잭션 실행 전후의 데이터베이스 상태는 명시된 모든 무결성 제약조건을 항상 만족해야 한다.",
-        "여러 트랜잭션이 동시에 수행될 때, 서로의 연산에 끼어들거나 영향을 주어서는 안 된다."
+        "영속성 — 출금이 반영되어 잔액이 -5만 원으로 남는다.",
+        "고립성 — 다른 트랜잭션이 끝날 때까지 출금이 계속 대기한다.",
+        "일관성 — 제약을 어기는 결과라 문장이 실패하고 잔액은 5만 원 그대로다.",
+        "원자성 — 가능한 금액인 5만 원만 출금되어 잔액이 0 원이 된다."
       ],
       "correctIndex": 2,
-      "explanation": "일관성은 트랜잭션 전후에 제약조건 같은 규칙이 항상 지켜지는 성질이다 → ③. ①은 지속성, ②는 원자성, ④는 고립성의 설명이다."
+      "explanation": "일관성은 트랜잭션 전후에 데이터가 정해 둔 규칙(무결성 제약)을 만족하는 상태여야 한다는 특성이다. 결과 잔액 -5만 원은 CHECK 제약을 어기므로 문장이 오류로 실패하고 잔액은 바뀌지 않는다. 정답은 ③번이다. ① 제약을 어긴 결과는 저장되지 않는다. ② 고립성은 다른 트랜잭션과의 간섭 문제로 이 상황과 관계없다. ④ 일부만 반영하는 일은 없고, 원자성은 오히려 전부 반영되거나 전부 취소되어야 한다는 뜻이다.",
+      "references": [
+        {
+          "type": "sql",
+          "code": "UPDATE 계좌\nSET    잔액 = 잔액 - 100000\nWHERE  계좌번호 = 'A1';"
+        }
+      ]
     },
     {
       "_id": "ai-mock-060",

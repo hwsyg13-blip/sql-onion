@@ -182,7 +182,7 @@ export const ROUND_60: QuizQuestion[] = [
       {
         "type": "erd",
         "caption": "부서·사원·프로젝트참여·프로젝트 ERD",
-        "mermaid": "erDiagram\n    부서 |o--o{ 사원 : \"소속\"\n    사원 ||--o{ 프로젝트참여 : \"참여\"\n    프로젝트 ||--|{ 프로젝트참여 : \"배정\"\n    사원 {\n        string 사번 PK\n        string 부서코드 FK\n    }\n    프로젝트참여 {\n        string 사번 PK,FK\n        string 프로젝트번호 PK,FK\n        date 투입일자\n    }\n    프로젝트 {\n        string 프로젝트번호 PK\n        string 프로젝트명\n    }"
+        "mermaid": "erDiagram\n    부서 |o..o{ 사원 : \"소속\"\n    사원 ||--o{ 프로젝트참여 : \"참여\"\n    프로젝트 ||--|{ 프로젝트참여 : \"배정\"\n    사원 {\n        string 사번 PK\n        string 부서코드 FK\n    }\n    프로젝트참여 {\n        string 사번 PK,FK\n        string 프로젝트번호 PK,FK\n        date 투입일자\n    }\n    프로젝트 {\n        string 프로젝트번호 PK\n        string 프로젝트명\n    }"
       }
     ]
   },
@@ -236,16 +236,44 @@ export const ROUND_60: QuizQuestion[] = [
     "round": 60,
     "subject": "1과목",
     "number": 8,
-    "title": "주식별자를 구성하는 속성 중 한 개가 삭제되었을 때 인스턴스가 구분되지 않는다. 이러한 주식별자가 충족해야 하는 특성은?",
+    "title": "'한 학생이 같은 과목을 다른 학기에 다시 수강할 수 있다' 는 규칙이 있는 [수강] 엔터티에서, 유일성과 최소성을 모두 만족하는 주식별자는?",
     "options": [
-      "최소성",
-      "대표성",
-      "불변성",
-      "고립성"
+      "(학번, 과목코드, 학기)",
+      "(학번, 과목코드, 학기, 강의실)",
+      "(학번, 과목코드)",
+      "(학번, 학기)"
     ],
     "correctIndex": 0,
-    "explanation": "주식별자를 구성하는 속성 중 하나라도 빼면 인스턴스를 구분할 수 없다는 것은, 유일성을 만족하는 데 꼭 필요한 속성만으로 구성되어 있다는 뜻이므로 최소성이다(①). 대표성(②)은 엔터티를 대표할 수 있는 성질, 불변성(③)은 값이 자주 변하지 않는 성질이며, 고립성(④)은 트랜잭션의 특성이다.",
-    "_source": "authored"
+    "explanation": "유일성은 주식별자로 모든 인스턴스를 구분할 수 있어야 한다는 것이고, 최소성은 그중 한 속성이라도 빼면 구분이 안 될 만큼 꼭 필요한 속성만 쓴다는 것이다. 재수강이 가능하므로 (학번, 과목코드) 만으로는 같은 학생·과목의 두 학기 수강을 구분하지 못한다(③ 유일성 위반). (학번, 학기) 는 한 학기에 여러 과목을 듣는 경우를 구분하지 못한다(④ 유일성 위반). (학번, 과목코드, 학기) 는 모두 구분되고 하나라도 빼면 구분이 안 되므로 유일성과 최소성을 모두 만족한다. ② 는 여기에 필요 없는 강의실을 덧붙여 최소성을 어긴다. 정답은 ①번이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "caption": "수강 속성",
+        "headers": [
+          "속성",
+          "설명"
+        ],
+        "rows": [
+          [
+            "학번",
+            "학생"
+          ],
+          [
+            "과목코드",
+            "과목"
+          ],
+          [
+            "학기",
+            "예: 2026-1"
+          ],
+          [
+            "강의실",
+            "그 학기에 배정된 방"
+          ]
+        ]
+      }
+    ]
   },
   {
     "id": 10008,
@@ -254,16 +282,48 @@ export const ROUND_60: QuizQuestion[] = [
     "round": 60,
     "subject": "1과목",
     "number": 9,
-    "title": "정규화 단계 중 주식별자와의 종속이 아니라 주식별자가 아닌 일반 속성끼리의 종속을 제거하는 단계로, 주식별자 선정과 가장 관련이 적은 것은?",
+    "title": "아래 [사원] 테이블(주식별자: 사번)을 제3정규형을 만족하도록 나눈 결과로 옳은 것은? (부서코드가 정해지면 부서명과 부서위치가 정해진다)",
     "options": [
-      "1정규화",
-      "2정규화",
-      "3정규화",
-      "BCNF"
+      "사원(사번, 부서명), 부서(부서명, 부서위치)",
+      "사원(사번), 부서(부서코드, 부서명, 부서위치)",
+      "사원(사번, 부서코드), 부서(부서코드, 부서명, 부서위치)",
+      "사원(사번, 부서코드, 부서명), 부서(부서코드, 부서위치)"
     ],
     "correctIndex": 2,
-    "explanation": "① 1정규화는 반복되는 속성을 분리하면서 식별자 구성이 달라지고, ② 2정규화는 주식별자의 일부에만 종속되는 부분 함수 종속을 제거하며, ④ BCNF 는 결정자가 후보키인지를 따지므로 모두 주식별자와 직접 관련된다. 반면 3정규화는 주식별자가 아닌 일반 속성 사이의 이행 함수 종속을 제거하는 단계이므로 주식별자 선정과 가장 관련이 적다.",
-    "_source": "authored"
+    "explanation": "사번 → 부서코드 → 부서명·부서위치 로 이어지는 이행 함수 종속이 있다. 제3정규형은 주식별자가 아닌 속성끼리의 종속(부서코드 → 부서명·부서위치)을 따로 떼어 내는 것이다. 부서코드를 주식별자로 하는 부서 테이블을 만들고, 사원에는 부서코드만 외래키로 남기면 된다. 정답은 ③번이다. ① 은 원래 결정자가 아닌 부서명을 식별자로 썼고, ② 는 사원에서 부서코드까지 빼서 어느 부서인지 알 수 없게 되었다. ④ 는 사원에 부서명이 남아 이행 종속이 그대로 있다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "caption": "사원 (다른 칼럼 생략)",
+        "headers": [
+          "사번",
+          "부서코드",
+          "부서명",
+          "부서위치"
+        ],
+        "rows": [
+          [
+            "1",
+            "D1",
+            "영업",
+            "서울"
+          ],
+          [
+            "2",
+            "D1",
+            "영업",
+            "서울"
+          ],
+          [
+            "3",
+            "D2",
+            "인사",
+            "부산"
+          ]
+        ]
+      }
+    ]
   },
   {
     "id": 10009,
@@ -399,7 +459,7 @@ export const ROUND_60: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT *\nFROM   EMP\nWHERE  EMPNO NOT IN (SELECT MGR FROM EMP);"
+        "code": "SELECT *\nFROM   EMP\nWHERE  EMPNO NOT IN\n       (SELECT MGR FROM EMP);"
       }
     ]
   },
@@ -570,7 +630,7 @@ export const ROUND_60: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT SAL,\n       FIRST_VALUE(SAL) OVER (ORDER BY SAL\n                              ROWS BETWEEN UNBOUNDED PRECEDING\n                                       AND CURRENT ROW) AS MIN_SAL\nFROM   T;"
+        "code": "SELECT SAL,\n       FIRST_VALUE(SAL) OVER (\n         ORDER BY SAL\n         ROWS BETWEEN UNBOUNDED\n              PRECEDING\n              AND CURRENT ROW)\n       AS MIN_SAL\nFROM   T;"
       }
     ]
   },
@@ -624,7 +684,7 @@ export const ROUND_60: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT *\nFROM   T\nWHERE  (사번, 회원번호) IN ((10005, 2003));"
+        "code": "SELECT *\nFROM   T\nWHERE  (사번, 회원번호) IN\n       ((10005, 2003));"
       }
     ]
   },
@@ -681,7 +741,7 @@ export const ROUND_60: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT EMPNO,\n       NTILE(3) OVER (ORDER BY EMPNO) AS GRP\nFROM   EMP;"
+        "code": "SELECT EMPNO,\n       NTILE(3) OVER (ORDER BY EMPNO)\n         AS GRP\nFROM   EMP;"
       }
     ]
   },
@@ -785,7 +845,7 @@ export const ROUND_60: QuizQuestion[] = [
     "references": [
       {
         "type": "sql",
-        "code": "SELECT REGEXP_REPLACE(\n         '2026/02/25',\n         '([0-9]{4})/([0-9]{2})/([0-9]{2})',\n         '\\3/\\2/\\1'\n       )\nFROM DUAL;"
+        "code": "SELECT REGEXP_REPLACE(\n  '2026/02/25',\n  '([0-9]{4})/([0-9]{2})/([0-9]{2})',\n  '\\3/\\2/\\1'\n)\nFROM DUAL;"
       }
     ]
   },
@@ -833,7 +893,7 @@ export const ROUND_60: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT SUM( CASE WHEN SAL = 4 THEN SAL END ),   -- ㉠\n       SUM( SAL )                               -- ㉡\nFROM   T;"
+        "code": "SELECT SUM( CASE WHEN SAL = 4\n                 THEN SAL END ), -- ㉠\n       SUM( SAL )                -- ㉡\nFROM   T;"
       }
     ]
   },
@@ -844,38 +904,20 @@ export const ROUND_60: QuizQuestion[] = [
     "round": 60,
     "subject": "2과목",
     "number": 21,
-    "title": "아래 T 테이블에 대해 SQL 들 중 결과 행 수가 나머지와 다른 하나는?",
+    "title": "행이 3건(A, B, C) 있는 T 테이블에 대한 SQL ㉠~㉣ 의 결과 행 수로 옳은 것은? (Oracle 기준)",
     "options": [
-      "SELECT * FROM T WHERE ROWNUM IN (1, 2);",
-      "SELECT * FROM T WHERE ROWNUM < 1;",
-      "SELECT * FROM T WHERE ROWNUM > 1;",
-      "SELECT * FROM T WHERE ROWNUM = 2;"
+      "2, 0, 0, 1",
+      "2, 2, 0, 2",
+      "1, 0, 0, 2",
+      "2, 0, 1, 1"
     ],
     "correctIndex": 0,
-    "explanation": "Oracle 의 `ROWNUM` 은 `WHERE` 조건이 통과된 행에 대해서만 순차적으로 부여된다. ① 은 첫 행에 ROWNUM=1, 두 번째 행에 ROWNUM=2 가 부여되어 모두 조건을 만족 → 2 건 반환. ② `ROWNUM < 1` 은 어떤 행도 만족 못 함 → 0 건. ③ `ROWNUM > 1` 은 첫 행이 ROWNUM=1 로 탈락한 뒤 다음 행에도 계속 1 이 부여되어 0 건. ④ `ROWNUM = 2` 도 ROWNUM 값이 2 로 올라가지 못해 0 건. 결과가 다른 것은 ①.",
+    "explanation": "ROWNUM 은 조건을 통과한 행에만 1, 2, 3 … 을 붙이고, 걸러진 행 다음 행은 같은 번호로 다시 검사받는다. ㉠ 은 첫 행이 1 로 통과, 다음 행이 2 로 통과, 셋째 행은 3 이라 걸러져 2행이다. ㉡ 은 첫 행이 1 이라 걸러지고 다음 행도 다시 1 이라 계속 걸러져 0행, ㉢ 은 1 보다 작은 번호가 없어 0행이다. ㉣ 은 첫 행이 1 로 통과하고, 둘째 행이 2 라 걸러진 뒤 셋째 행도 다시 2 를 받아 걸러져 1행이다. 정답은 ①번이다. ② 와 ③ 은 ROWNUM 이 원래 행 순서에 고정되어 있다고 본 것, ④ 는 ㉢ 에서 ROWNUM 이 0 부터 시작한다고 본 것이다.",
     "_source": "authored",
     "references": [
       {
-        "type": "table",
-        "caption": "T 테이블",
-        "headers": [
-          "행 순서",
-          "COL"
-        ],
-        "rows": [
-          [
-            "1",
-            "A"
-          ],
-          [
-            "2",
-            "B"
-          ],
-          [
-            "3",
-            "C"
-          ]
-        ]
+        "type": "sql",
+        "code": "-- ㉠\nSELECT * FROM T WHERE ROWNUM IN (1, 2);\n-- ㉡\nSELECT * FROM T WHERE ROWNUM IN (2, 3);\n-- ㉢\nSELECT * FROM T WHERE ROWNUM < 1;\n-- ㉣\nSELECT * FROM T WHERE ROWNUM <> 2;"
       }
     ]
   },
@@ -886,20 +928,20 @@ export const ROUND_60: QuizQuestion[] = [
     "round": 60,
     "subject": "2과목",
     "number": 22,
-    "title": "아래 SQL에서 `WHERE 1 = 2` 조건에 의해 어떤 데이터도 선택되지 않았을 때, 반환 값이 NULL이 아닌 집계 함수는?",
+    "title": "행이 있는 EMP 테이블에 아래 SQL 을 실행했을 때 결과(A, B, C, D)로 옳은 것은?",
     "options": [
-      "SUM(SAL)",
-      "AVG(SAL)",
-      "MIN(SAL)",
-      "COUNT(*)"
+      "0, 0, 0, 0",
+      "NULL, NULL, 0, NULL",
+      "NULL, 0, NULL, 0",
+      "NULL, 0, 0, NULL"
     ],
     "correctIndex": 3,
-    "explanation": "선택된 행이 없는 공집합에 집계 함수를 쓰면 SUM·AVG·MIN·MAX 는 계산할 값이 없어 NULL 을 반환하고(①②③), COUNT(*) 는 행 수 0 을 반환한다(④). 그래서 NULL 이 아닌 값을 반환하는 것은 COUNT(*) 다.",
+    "explanation": "WHERE 1 = 2 로 모든 행이 걸러져도 GROUP BY 가 없으면 집계 결과는 1행 나온다. 계산할 값이 없으니 SUM·AVG·MIN·MAX 는 NULL, COUNT 는 0 이다. 그래서 A 는 NULL, B 는 NVL 이 NULL 을 0 으로 바꿔 0, C 는 0 이다. D 의 NVL(SAL, 0) 은 행마다 적용되는데 행이 하나도 없으니 바뀔 값이 없고, AVG 는 그대로 NULL 이다. 정답은 ④번이다. ① 은 빈 집합의 SUM 을 0 으로 본 것, ② 는 바깥 NVL 이 SUM 결과를 바꾼다는 점을 놓친 것, ③ 은 COUNT 도 NULL 이 되고 안쪽 NVL 이 AVG 를 0 으로 만든다고 본 것이다.",
     "_source": "authored",
     "references": [
       {
         "type": "sql",
-        "code": "SELECT SUM(SAL),\n       AVG(SAL),\n       MIN(SAL),\n       COUNT(*)\nFROM   EMP\nWHERE  1 = 2;"
+        "code": "SELECT SUM(SAL)            AS A,\n       NVL(SUM(SAL), 0)    AS B,\n       COUNT(SAL)          AS C,\n       AVG(NVL(SAL, 0))    AS D\nFROM   EMP\nWHERE  1 = 2;"
       }
     ]
   },
@@ -996,62 +1038,62 @@ export const ROUND_60: QuizQuestion[] = [
           [
             "서울",
             "1월",
-            "12,000"
+            "12000"
           ],
           [
             "서울",
             "2월",
-            "13,500"
+            "13500"
           ],
           [
             "서울",
             "3월",
-            "14,200"
+            "14200"
           ],
           [
             "서울",
             "4월",
-            "15,000"
+            "15000"
           ],
           [
             "부산",
             "1월",
-            "8,500"
+            "8500"
           ],
           [
             "부산",
             "2월",
-            "9,200"
+            "9200"
           ],
           [
             "부산",
             "3월",
-            "10,100"
+            "10100"
           ],
           [
             "부산",
             "4월",
-            "11,000"
+            "11000"
           ],
           [
             "대구",
             "1월",
-            "6,800"
+            "6800"
           ],
           [
             "대구",
             "2월",
-            "7,400"
+            "7400"
           ],
           [
             "대구",
             "3월",
-            "8,000"
+            "8000"
           ],
           [
             "대구",
             "4월",
-            "8,600"
+            "8600"
           ]
         ]
       },
@@ -1068,24 +1110,24 @@ export const ROUND_60: QuizQuestion[] = [
         "rows": [
           [
             "서울",
-            "12,000",
-            "13,500",
-            "14,200",
-            "15,000"
+            "12000",
+            "13500",
+            "14200",
+            "15000"
           ],
           [
             "부산",
-            "8,500",
-            "9,200",
-            "10,100",
-            "11,000"
+            "8500",
+            "9200",
+            "10100",
+            "11000"
           ],
           [
             "대구",
-            "6,800",
-            "7,400",
-            "8,000",
-            "8,600"
+            "6800",
+            "7400",
+            "8000",
+            "8600"
           ]
         ]
       }
@@ -1098,15 +1140,15 @@ export const ROUND_60: QuizQuestion[] = [
     "round": 60,
     "subject": "2과목",
     "number": 25,
-    "title": "아래 SQL의 서브쿼리가 항상 1건 이하만 반환하도록 보장하기 위해 T2.A 컬럼이 가져야 할 제약 조건은?",
+    "title": "아래 SQL 에 대한 설명으로 옳은 것은?",
     "options": [
-      "UNIQUE",
-      "NOT NULL",
-      "FOREIGN KEY",
-      "CHECK"
+      "지금 데이터로는 서브쿼리가 2행을 돌려줘 오류가 나며, T2.A 에 UNIQUE 제약이 있으면 서브쿼리가 늘 1건 이하가 된다.",
+      "지금 데이터로는 오류가 나며, T2.A 에 NOT NULL 제약이 있으면 서브쿼리가 늘 1건 이하가 된다.",
+      "오류 없이 10, 20 두 행이 나온다.",
+      "지금 데이터로는 오류가 나며, T2.A 를 외래키로 만들면 서브쿼리가 늘 1건 이하가 된다."
     ],
     "correctIndex": 0,
-    "explanation": "외부 쿼리가 '=' 단일 행 비교를 사용하므로 서브쿼리 (SELECT COL2 FROM T2 WHERE A='A') 가 반드시 0행 또는 1행만 반환해야 한다. 만약 T2.A='A' 인 행이 둘 이상이면 'ORA-01427: single-row subquery returns more than one row' 오류가 발생한다. 따라서 검색 키인 T2.A 컬럼이 UNIQUE여야 'A='A''인 행이 최대 1건으로 보장된다. ② NOT NULL은 NULL만 막을 뿐 중복은 허용하고, ③ FOREIGN KEY는 다른 테이블 참조를 강제, ④ CHECK는 값 도메인을 제한할 뿐 단일성과 무관하다. 정답은 ①.",
+    "explanation": "= 오른쪽의 서브쿼리는 단일 행 서브쿼리여야 한다. A = 'A' 인 행이 두 개라 서브쿼리가 10, 20 두 행을 돌려줘 오류가 난다. T2.A 에 UNIQUE 제약을 두면 같은 A 값이 두 번 들어갈 수 없어 이 서브쿼리는 늘 0건이나 1건만 돌려준다. 정답은 ①번이다. ② NOT NULL 은 값이 비지 않게 할 뿐 중복을 막지 않는다. ④ 외래키도 중복을 막지 않는다. ③ 처럼 10, 20 을 얻으려면 = 대신 IN 을 써야 한다.",
     "_source": "authored",
     "references": [
       {
@@ -1175,7 +1217,7 @@ export const ROUND_60: QuizQuestion[] = [
     "references": [
       {
         "type": "sql",
-        "code": "SELECT SAL,\n       SUM(SAL) OVER (ORDER BY SAL ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS 누적합계\nFROM   EMP;"
+        "code": "SELECT SAL,\n       SUM(SAL) OVER (ORDER BY SAL\n         ROWS BETWEEN UNBOUNDED\n              PRECEDING\n              AND CURRENT ROW)\n       AS 누적합계\nFROM   EMP;"
       }
     ]
   },
@@ -1430,7 +1472,7 @@ export const ROUND_60: QuizQuestion[] = [
     "references": [
       {
         "type": "sql",
-        "code": "-- 현재 데이터: (1001, '김하늘', NULL),\n--             (1002, '이바다', 300),\n--             (1003, '박구름', NULL)\nCREATE TABLE 사원 (\n  사번 NUMBER(4),\n  이름 VARCHAR2(10),\n  수당 NUMBER(5)\n);\n\n-- ㉠\nALTER TABLE 사원 MODIFY (수당 NOT NULL);\n-- ㉡\nALTER TABLE 사원 MODIFY (이름 VARCHAR2(20));\n-- ㉢\nALTER TABLE 사원\n  ADD (입사일 DATE DEFAULT SYSDATE NOT NULL);\n-- ㉣\nALTER TABLE 사원 MODIFY (사번 NUMBER(3));"
+        "code": "-- 현재 데이터: (1001, '김하늘', NULL),\n--             (1002, '이바다', 300),\n--             (1003, '박구름', NULL)\nCREATE TABLE 사원 (\n  사번 NUMBER(4),\n  이름 VARCHAR2(10),\n  수당 NUMBER(5)\n);\n\n-- ㉠\nALTER TABLE 사원\n  MODIFY (수당 NOT NULL);\n-- ㉡\nALTER TABLE 사원\n  MODIFY (이름 VARCHAR2(20));\n-- ㉢\nALTER TABLE 사원\n  ADD (입사일 DATE DEFAULT SYSDATE\n       NOT NULL);\n-- ㉣\nALTER TABLE 사원\n  MODIFY (사번 NUMBER(3));"
       }
     ]
   },
@@ -1484,7 +1526,7 @@ export const ROUND_60: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT ITEM\nFROM   주문 O\nWHERE  NOT EXISTS (SELECT 1 FROM 판매 P WHERE P.ITEM = O.ITEM);"
+        "code": "SELECT ITEM\nFROM   주문 O\nWHERE  NOT EXISTS\n       (SELECT 1 FROM 판매 P\n         WHERE P.ITEM = O.ITEM);"
       }
     ]
   },
@@ -1574,7 +1616,7 @@ export const ROUND_60: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT EMPNO,\n       ENAME,\n       EXTRACT(YEAR FROM HIREDATE) AS YR,\n       SAL\nFROM   EMP\nUNION\nSELECT EMPNO,\n       ENAME,\n       EXTRACT(YEAR FROM HIREDATE),\n       SAL\nFROM   EMP_HIST;"
+        "code": "SELECT EMPNO,\n       ENAME,\n       EXTRACT(YEAR FROM HIREDATE)\n         AS YR,\n       SAL\nFROM   EMP\nUNION\nSELECT EMPNO,\n       ENAME,\n       EXTRACT(YEAR FROM HIREDATE),\n       SAL\nFROM   EMP_HIST;"
       }
     ]
   },
@@ -1780,7 +1822,7 @@ export const ROUND_60: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "MERGE INTO TGT T\nUSING SRC S\nON (T.ID = S.ID)\nWHEN MATCHED THEN\n  UPDATE SET T.V1 = 100, T.V2 = 100\nWHEN NOT MATCHED THEN\n  INSERT (ID, V1, V2, V3) VALUES (S.ID, 100, 100, 100);"
+        "code": "MERGE INTO TGT T\nUSING SRC S\nON (T.ID = S.ID)\nWHEN MATCHED THEN\n  UPDATE SET T.V1 = 100, T.V2 = 100\nWHEN NOT MATCHED THEN\n  INSERT (ID, V1, V2, V3)\n  VALUES (S.ID, 100, 100, 100);"
       }
     ]
   },
@@ -1894,7 +1936,7 @@ export const ROUND_60: QuizQuestion[] = [
     "references": [
       {
         "type": "sql",
-        "code": "CREATE TABLE T (\n  ID  NUMBER GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1),\n  VAL NUMBER CHECK (VAL > 0)\n);\n\nINSERT INTO T(VAL) VALUES (-1);\nINSERT INTO T(VAL) VALUES ( 0);\nINSERT INTO T(VAL) VALUES ( 1);\nCOMMIT;\n\nSELECT COUNT(*) FROM T;"
+        "code": "CREATE TABLE T (\n  ID  NUMBER GENERATED ALWAYS\n      AS IDENTITY\n      (START WITH 1 INCREMENT BY 1),\n  VAL NUMBER CHECK (VAL > 0)\n);\n\nINSERT INTO T(VAL) VALUES (-1);\nINSERT INTO T(VAL) VALUES ( 0);\nINSERT INTO T(VAL) VALUES ( 1);\nCOMMIT;\n\nSELECT COUNT(*) FROM T;"
       }
     ]
   },
@@ -2038,7 +2080,7 @@ export const ROUND_60: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT 부서, 사원, 급여\nFROM ( SELECT 부서, 사원, 급여,\n              (  ?  ) OVER (PARTITION BY 부서 ORDER BY 급여 DESC) AS RNK\n       FROM   EMP )\nWHERE RNK <= 3;"
+        "code": "SELECT 부서, 사원, 급여\nFROM ( SELECT 부서, 사원, 급여,\n              (  ?  ) OVER (\n                PARTITION BY 부서\n                ORDER BY 급여 DESC)\n              AS RNK\n       FROM   EMP )\nWHERE RNK <= 3;"
       }
     ]
   },
@@ -2172,7 +2214,7 @@ export const ROUND_60: QuizQuestion[] = [
     "references": [
       {
         "type": "sql",
-        "code": "CREATE TABLE MEMBER (\n  ID   VARCHAR2(10) PRIMARY KEY,\n  NAME VARCHAR2(30) NOT NULL,\n  SEX  CHAR(1)  (  ?  ) (SEX IN ('M','F'))\n);"
+        "code": "CREATE TABLE MEMBER (\n  ID   VARCHAR2(10) PRIMARY KEY,\n  NAME VARCHAR2(30) NOT NULL,\n  SEX  CHAR(1)\n       (  ?  ) (SEX IN ('M','F'))\n);"
       }
     ]
   },

@@ -114,15 +114,22 @@
     {
       "subject": "1과목",
       "number": 5,
-      "title": "다음 중 틀린 것은?",
+      "title": "아래 ERD 에 대한 설명 중 틀린 것은?",
       "options": [
-        "관계는 두 엔터티 사이의 연관성을 표현한다.",
-        "식별 관계에서는 부모의 식별자가 자식의 주식별자에 포함된다.",
-        "I/E 표기법에서 식별 관계는 점선, 비식별 관계는 실선으로 표현한다.",
-        "비식별 관계에서는 부모의 식별자가 자식의 일반 속성이 된다."
+        "주문과 주문상세는 실선으로 이어진 식별 관계라, 주문번호가 주문상세의 주식별자에 들어간다.",
+        "고객과 주문은 점선으로 이어진 비식별 관계라, 고객번호는 주문의 일반 속성(외래키)이다.",
+        "식별 관계와 비식별 관계는 선의 모양이 아니라 선 끝의 기호(||, o{)로 구분한다.",
+        "주문상세 쪽 |{ 는 주문 하나에 주문상세가 한 건 이상 있어야 한다는 뜻이다."
       ],
       "correctIndex": 2,
-      "explanation": "식별 관계는 강한 연결이므로 실선, 비식별 관계는 느슨한 연결이므로 점선으로 표현한다. ③은 반대로 서술했다. (바커 표기법에서는 실선·점선이 식별 여부가 아니라 필수·선택 참여를 나타낸다.) ①②④ 는 옳은 설명이다."
+      "explanation": "IE 표기에서 식별 관계는 실선, 비식별 관계는 점선으로 그린다. 선 끝의 기호(||, |o, |{, o{)는 관계 차수와 선택 사양(필수·선택)을 나타낸다. 식별 여부를 선 끝 기호로 구분한다는 ③ 이 틀렸다. 정답은 ③번이다. ① 주문상세의 주식별자에 주문번호(PK, FK)가 들어 있어 식별 관계다. ② 주문의 주식별자는 주문번호뿐이고 고객번호는 외래키 일반 속성이라 비식별 관계다. ④ |{ 는 하나 이상(필수, 다수)을 뜻한다.",
+      "references": [
+        {
+          "type": "erd",
+          "caption": "고객·주문·주문상세 ERD",
+          "mermaid": "erDiagram\n    고객 ||..o{ 주문 : \"주문함\"\n    주문 ||--|{ 주문상세 : \"포함\"\n    고객 {\n        string 고객번호 PK\n    }\n    주문 {\n        string 주문번호 PK\n        string 고객번호 FK\n    }\n    주문상세 {\n        string 주문번호 PK, FK\n        int 순번 PK\n    }"
+        }
+      ]
     },
     {
       "subject": "1과목",
@@ -166,15 +173,16 @@
     {
       "subject": "1과목",
       "number": 8,
-      "title": "주식별자에 대한 설명으로 옳지 않은 것은?",
+      "title": "회원 엔터티의 주식별자를 이메일로 정하자는 의견이 나왔다. 아래 검토 의견 중 옳지 않은 것은?",
       "options": [
-        "주식별자는 해당 엔터티의 모든 인스턴스를 유일하게 구분할 수 있어야 한다.",
-        "주식별자를 구성하는 속성의 수는 가능한 한 적게 구성한다.",
-        "주식별자는 NULL 값을 가질 수 없다.",
-        "이미 정의된 주식별자라도 업무 변화에 따라 유연하게 변경할 수 있다."
+        "이메일을 등록하지 않은 회원이 있다면 주식별자가 될 수 없다.",
+        "이메일을 바꾸는 회원이 있다면 바뀌지 않는 회원번호가 주식별자로 더 낫다.",
+        "모든 회원의 이메일이 서로 다르다면 유일성은 만족한다.",
+        "주식별자는 업무가 바뀌면 언제든 값을 바꿔 쓰면 되므로, 이메일이 바뀌는 것은 문제가 되지 않는다."
       ],
       "correctIndex": 3,
-      "explanation": "주식별자는 유일성·최소성·존재성(NOT NULL)과 함께 불변성을 만족해야 한다. 한 번 정해지면 업무 환경이 바뀌어도 쉽게 변하지 않아야 하며, 값이 변하면 이를 물려받은 자식 엔터티의 키까지 모두 수정해야 하므로 ④는 옳지 않다. ① 은 유일성, ② 는 최소성, ③ 은 존재성으로 옳은 설명이다."
+      "explanation": "주식별자는 유일해야 하고(③), 값이 반드시 있어야 하며(①), 한번 정해지면 바뀌지 않아야 한다. 주식별자 값이 바뀌면 그 값을 외래키로 가진 주문·게시글 같은 자식 데이터를 모두 고쳐야 하고, 하나라도 놓치면 연결이 끊어진다. 그래서 자주 바뀌는 이메일보다 바뀌지 않는 회원번호가 낫다(②). 주식별자를 언제든 바꿔도 된다는 ④ 가 옳지 않다. 정답은 ④번이다.",
+      "references": []
     },
     {
       "subject": "1과목",
@@ -224,15 +232,21 @@
     {
       "subject": "1과목",
       "number": 10,
-      "title": "데이터 모델링 관점에서 트랜잭션의 역할로 가장 적절한 것은?",
+      "title": "주문 등록 업무는 ① 주문 저장 ② 주문상세 저장 ③ 상품 재고 차감 의 세 작업으로 이루어진다. 데이터 모델링 관점에서 트랜잭션에 대한 설명으로 가장 적절한 것은?",
       "options": [
-        "여러 사용자가 동시에 접근해도 서로 간섭하지 않도록 한다.",
-        "하나의 작업이 전부 반영되거나 전부 취소되도록 한다.",
-        "함께 처리되어야 하는 데이터의 범위를 하나의 단위로 규정하여 무결성이 지켜지도록 한다.",
-        "데이터를 백업하고 장애 시 복구한다."
+        "주문상세를 저장하기 전에 장애가 나도 주문은 남겨 두는 것이 무결성에 맞다.",
+        "재고 차감은 여러 사용자가 겹치지 않게 하는 일이므로 트랜잭션 범위와는 관계없다.",
+        "세 작업을 하나의 트랜잭션 단위로 정해 두면 모두 반영되거나 모두 취소되어 주문과 재고가 어긋나지 않는다.",
+        "트랜잭션은 가능한 한 작게 나누는 것이 좋으므로 세 작업을 각각 따로 커밋한다."
       ],
       "correctIndex": 2,
-      "explanation": "데이터 모델을 설계하는 관점에서 트랜잭션은 출금과 입금처럼 절대 나눠지면 안 되는 하나의 업무 흐름, 즉 함께 처리되어야 하는 데이터의 논리적 범위를 규정하여 무결성을 보장하기 위한 개념이다. ①②④는 고립성·원자성·복구와 같은 물리적(기술적) 특징에 가깝다. ※ 복원 출처마다 정답이 ②(원자성)·③ 으로 갈린다. ② 는 DBMS 가 보장하는 트랜잭션 특성(원자성) 설명이고, 문제는 '데이터 모델링 관점' 을 묻고 있어 ③ 을 정답으로 했다."
+      "explanation": "모델링에서 트랜잭션은 함께 처리되어야 하는 데이터의 범위를 하나의 업무 단위로 정해 무결성을 지키는 역할을 한다. 주문만 있고 주문상세가 없거나, 주문은 됐는데 재고가 줄지 않으면 데이터가 서로 맞지 않는다. 세 작업을 한 트랜잭션으로 묶어 모두 성공하면 반영하고 하나라도 실패하면 모두 취소해야 한다. 정답은 ③번이다. ① 주문만 남으면 주문상세 없는 주문이 생겨 무결성이 깨진다. ② 재고 차감도 주문과 함께 맞아야 하는 데이터라 같은 범위에 넣어야 한다. ④ 따로 커밋하면 중간에 실패했을 때 앞의 작업만 반영되어 데이터가 어긋난다.",
+      "references": [
+        {
+          "type": "text",
+          "content": "주문 등록 = 주문 저장 + 주문상세 저장 + 재고 차감"
+        }
+      ]
     },
     {
       "subject": "2과목",
@@ -256,19 +270,19 @@
     {
       "subject": "2과목",
       "number": 12,
-      "title": "다음과 같이 CTAS로 테이블을 복제할 때에 대한 설명으로 옳은 것은?",
+      "title": "T1(ID 기본키, SAL NOT NULL)에 (1, 100) 한 행이 있을 때 ㉠~㉣ 을 차례로 실행한 결과로 옳은 것은? (Oracle 기준)",
       "options": [
-        "PK는 적용되지 않는다.",
-        "NOT NULL은 적용되지 않는다.",
-        "CHECK 제약은 적용된다.",
-        "DEFAULT 값은 적용된다."
+        "오류, 성공, 성공, 성공",
+        "성공, 성공, 오류, 오류",
+        "오류, 성공, 오류, 성공",
+        "성공, 성공, 성공, 오류"
       ],
       "correctIndex": 0,
-      "explanation": "CREATE TABLE ... AS SELECT로 복제하면 컬럼의 데이터 타입과 NOT NULL 제약만 복사되고, PK·UNIQUE·FK·CHECK 제약과 기본 인덱스는 복사되지 않는다. ② NOT NULL 은 복사되므로 틀리고, ③ CHECK 와 ④ DEFAULT 는 복사되지 않으므로 틀리다.",
+      "explanation": "CTAS 는 SELECT 결과의 칼럼 이름으로 새 테이블의 칼럼을 만든다. Oracle 에서는 SAL * 12 같은 식에 별칭이 없으면 칼럼 이름을 정할 수 없어 ㉠ 이 오류가 난다. ㉡ 처럼 AS 연봉 을 붙이면 성공한다. Oracle 의 CTAS 는 원본 칼럼을 그대로 가져온 칼럼의 NOT NULL 만 옮긴다. 연봉 은 SAL 이 아니라 계산식이라 NOT NULL 이 붙지 않아 ㉢ 의 NULL 입력이 성공한다. 기본키도 옮겨지지 않으므로 이미 있는 ID 1 을 다시 넣는 ㉣ 도 성공한다. 정답은 ①번이다. ② 는 별칭 없이도 칼럼 이름을 만들어 주고 NOT NULL·기본키까지 옮긴다고 본 것이고, ③ 은 계산식 칼럼에도 원본의 NOT NULL 이 따라온다고 본 것, ④ 는 별칭 없이도 되고 기본키는 옮긴다고 본 것이다. 참고로 PostgreSQL 은 별칭이 없으면 ?column? 같은 이름을 붙여 ㉠ 도 실행된다.",
       "references": [
         {
           "type": "sql",
-          "code": "CREATE TABLE student_backup AS\nSELECT * FROM student;"
+          "code": "-- ㉠\nCREATE TABLE T2 AS\nSELECT ID, SAL * 12 FROM T1;\n-- ㉡\nCREATE TABLE T3 AS\nSELECT ID, SAL * 12 AS 연봉\nFROM T1;\n-- ㉢\nINSERT INTO T3 VALUES (2, NULL);\n-- ㉣\nINSERT INTO T3 VALUES (1, 100);"
         }
       ]
     },
@@ -316,34 +330,40 @@
     {
       "subject": "2과목",
       "number": 14,
-      "title": "다음 SQL의 수행 결과는?",
+      "title": "아래 SQL 의 결과(A, B, C, D)로 옳은 것은? (Oracle 기준)",
       "options": [
-        "2",
-        "3",
-        "4",
-        "5"
+        "4, 4, 4, 3",
+        "4, 3, 4, 2",
+        "4, 3, 0, 2",
+        "4, 3, 0, 3"
       ],
       "correctIndex": 2,
-      "explanation": "REGEXP_COUNT(문자열, 패턴, 시작위치)는 패턴이 일치하는 횟수를 센다. 'abcd' 가 4번 반복되니 'ab' 도 겹치지 않고 정확히 4번 나와 ③ 4 다.",
+      "explanation": "REGEXP_COUNT 의 세 번째 인자는 검색을 시작할 위치다. A 는 처음부터 'ab' 를 세어 4, B 는 5번째 글자부터 세어 첫 'ab' 를 빼고 3 이다. C 는 대소문자를 구분해 대문자 'AB' 가 없어 0 이다. D 는 찾은 부분이 겹치지 않게 세므로 'aaaa' 에서 'aa' 를 앞에서부터 두 번 잡아 2 다. 정답은 ③번이다. ① 은 시작 위치와 대소문자를 무시하고 겹쳐 센 것, ② 는 대소문자를 구분하지 않는다고 본 것, ④ 는 겹쳐 센 것이다.",
       "references": [
         {
           "type": "sql",
-          "code": "SELECT REGEXP_COUNT('abcdabcdabcdabcd', 'ab', 1)\nFROM   DUAL;"
+          "code": "SELECT\n  REGEXP_COUNT('abcdabcdabcdabcd',\n               'ab', 1)   AS A,\n  REGEXP_COUNT('abcdabcdabcdabcd',\n               'ab', 5)   AS B,\n  REGEXP_COUNT('abcdabcdabcdabcd',\n               'AB')      AS C,\n  REGEXP_COUNT('aaaa', 'aa') AS D\nFROM DUAL;"
         }
       ]
     },
     {
       "subject": "2과목",
       "number": 15,
-      "title": "다음 중 NULL이 반환되지 않는 것은?",
+      "title": "Oracle 에서 다음 식 ㉠~㉤ 중 결과가 NULL 이 아닌 것만 모두 고른 것은?",
       "options": [
-        "CASE 'AB' WHEN 'CD' THEN 'EF' END",
-        "DECODE('AB', 'CD', 'EF', NULL)",
-        "COALESCE('AB', 'CD', NULL)",
-        "NULLIF('A', 'A')"
+        "㉠, ㉣",
+        "㉠, ㉢, ㉣",
+        "㉠, ㉣, ㉤",
+        "㉠, ㉢, ㉣, ㉤"
       ],
       "correctIndex": 2,
-      "explanation": "COALESCE는 인자를 순서대로 평가해 처음으로 NULL이 아닌 값 'AB'를 반환한다. ①은 일치하는 WHEN이 없고 ELSE가 없어 NULL, ②는 매칭 실패 시 기본값 NULL, ④는 두 인자가 같으면 NULL을 반환한다."
+      "explanation": "㉠ NVL2 는 첫 인자가 NULL 이면 세 번째 값을 돌려주므로 'B' 다. ㉡ NULLIF 는 두 값이 같으면 NULL 이다. ㉢ Oracle 은 길이 0 인 문자열 '' 을 NULL 로 다룬다. LENGTH(NULL) 은 0 이 아니라 NULL 이다. ㉣ DECODE 는 NULL 끼리 같다고 보므로 'Y' 다. ㉤ Oracle 의 || 연산은 NULL 을 빈 문자열처럼 이어 붙여 'A' 가 된다. 산술 연산(+)과 달리 결과가 NULL 이 되지 않는다. NULL 이 아닌 것은 ㉠, ㉣, ㉤ 이다. 정답은 ③번이다. ① 은 || 도 NULL 이 섞이면 NULL 이 된다고 본 것이고, ② 와 ④ 는 LENGTH('') 를 0 으로 본 것이다. 참고로 PostgreSQL·SQL Server 에서는 '' 이 NULL 이 아니어서 LENGTH('') 가 0 이고, 'A' || NULL 은 NULL 이다.",
+      "references": [
+        {
+          "type": "sql",
+          "code": "㉠ NVL2(NULL, 'A', 'B')\n㉡ NULLIF('A', 'A')\n㉢ LENGTH('')\n㉣ DECODE(NULL, NULL, 'Y')\n㉤ 'A' || NULL"
+        }
+      ]
     },
     {
       "subject": "2과목",
@@ -530,7 +550,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "CREATE TABLE T (\n    가  CHAR(3),\n    나  VARCHAR2(10) NOT NULL,\n    다  VARCHAR2(10) UNIQUE,\n    라  VARCHAR2(10) CHECK (라 IS NOT NULL),\n    PRIMARY KEY (가)\n);"
+          "code": "CREATE TABLE T (\n    가  CHAR(3),\n    나  VARCHAR2(10) NOT NULL,\n    다  VARCHAR2(10) UNIQUE,\n    라  VARCHAR2(10)\n        CHECK (라 IS NOT NULL),\n    PRIMARY KEY (가)\n);"
         }
       ]
     },
@@ -728,7 +748,7 @@
         },
         {
           "type": "sql",
-          "code": "MERGE INTO 테이블1 T1\nUSING 테이블2 T2\nON (T1.num = T2.num)\nWHEN MATCHED THEN\n    UPDATE SET T1.total_pay = T1.salary + T2.comm\n    DELETE WHERE T1.total_pay < 4000\nWHEN NOT MATCHED THEN\n    INSERT (T1.num, T1.salary, T1.total_pay)\n    VALUES (T2.num, 3000, 3000);"
+          "code": "MERGE INTO 테이블1 T1\nUSING 테이블2 T2\nON (T1.num = T2.num)\nWHEN MATCHED THEN\n    UPDATE SET T1.total_pay\n             = T1.salary + T2.comm\n    DELETE WHERE T1.total_pay < 4000\nWHEN NOT MATCHED THEN\n    INSERT (T1.num, T1.salary,\n            T1.total_pay)\n    VALUES (T2.num, 3000, 3000);"
         }
       ]
     },
@@ -900,15 +920,15 @@
     {
       "subject": "2과목",
       "number": 29,
-      "title": "NULL 값을 0으로 출력하는 함수로 옳은 것은?",
+      "title": "Oracle 에서 아래 TABLE 의 PRICE 를 결과처럼(1000, 2000, 0) 출력하는 식으로 옳은 것은?",
       "options": [
         "COALESCE(PRICE, 0)",
-        "NULL(PRICE, 0)",
+        "NVL2(PRICE, 0, PRICE)",
         "IFNULL(PRICE, 0)",
-        "NULLIF(0, PRICE)"
+        "NULLIF(PRICE, 0)"
       ],
       "correctIndex": 0,
-      "explanation": "COALESCE(PRICE, 0)은 PRICE가 NULL이면 0을 반환한다. ② NULL(PRICE, 0)이라는 함수는 없고, ③ IFNULL은 MySQL 전용이며, ④ NULLIF(a, b)는 두 값이 같으면 NULL을 반환하는 함수라 NULL 을 0 으로 바꾸지 못한다.",
+      "explanation": "COALESCE 는 인수 중 처음으로 NULL 이 아닌 값을 돌려준다. PRICE 가 있으면 그 값, NULL 이면 0 이라 1000, 2000, 0 이다. 정답은 ①번이다(NVL(PRICE, 0) 도 같다). ② NVL2(a, b, c) 는 a 가 NULL 이 아니면 b, NULL 이면 c 라 0, 0, NULL 이 된다. ③ IFNULL 은 MySQL 함수라 Oracle 에서는 오류다. ④ NULLIF(PRICE, 0) 은 PRICE 가 0 일 때 NULL 로 바꾸는 함수라 1000, 2000, NULL 이다.",
       "references": [
         {
           "type": "table",
@@ -1089,15 +1109,15 @@
     {
       "subject": "2과목",
       "number": 34,
-      "title": "다음 표에서 SUM(컬럼1) / COUNT(컬럼1)의 결과는?",
+      "title": "아래 TBL 테이블에 대한 네 식의 결과로 옳은 것은? ('SUM/COUNT(컬럼1), SUM/COUNT(*), AVG(컬럼1), AVG(NVL(컬럼1, 0))' 순서)",
       "options": [
-        "150",
-        "200",
-        "250",
-        "오류가 발생한다."
+        "150, 150, 200, 150",
+        "200, 150, 200, 150",
+        "200, 200, 200, 150",
+        "200, 150, 150, 150"
       ],
       "correctIndex": 1,
-      "explanation": "SUM(컬럼1)은 NULL을 제외한 100 + 200 + 300 = 600이고, COUNT(컬럼1)도 NULL을 제외한 3이므로 600 / 3 = 200이다. ① 150 은 NULL 을 0 으로 보고 4 로 나눈 값(600 ÷ 4)이고, ④ NULL 이 있어도 집계 함수는 오류 없이 NULL 을 건너뛴다.",
+      "explanation": "SUM(컬럼1) 은 NULL 을 빼고 600, COUNT(컬럼1) 은 값이 있는 3, COUNT(*) 는 행 수 4 다. 그래서 첫째 식은 600 / 3 = 200, 둘째 식은 600 / 4 = 150 이다. AVG(컬럼1) 은 NULL 을 빼고 계산해 SUM / COUNT(컬럼1) 과 같은 200 이고, NVL 로 NULL 을 0 으로 바꾸면 4행 모두 들어가 150 이다. 정답은 ②번이다. ① 은 COUNT(컬럼1) 도 NULL 을 센다고 본 것, ③ 은 COUNT(*) 도 NULL 행을 뺀다고 본 것, ④ 는 AVG 가 NULL 을 0 으로 본다고 생각한 것이다.",
       "references": [
         {
           "type": "table",
@@ -1119,6 +1139,10 @@
               "300"
             ]
           ]
+        },
+        {
+          "type": "sql",
+          "code": "SELECT SUM(컬럼1) / COUNT(컬럼1),\n       SUM(컬럼1) / COUNT(*),\n       AVG(컬럼1),\n       AVG(NVL(컬럼1, 0))\nFROM   TBL;"
         }
       ]
     },
@@ -1304,15 +1328,21 @@
     {
       "subject": "2과목",
       "number": 39,
-      "title": "집합 연산자 사용에 대한 설명으로 옳은 것은?",
+      "title": "아래 집합 연산 SQL 의 ( ? ) 자리에 대한 설명으로 옳은 것은? (Oracle 기준, EMP.SAL 과 DEPT.LOC_CD 는 NUMBER)",
       "options": [
-        "첫 번째 SELECT에 정의된 칼럼을 ORDER BY에 사용하면 오류가 난다.",
-        "두 번째 SELECT에서 정의된 컬럼명으로 ORDER BY 하면 오류가 난다.",
-        "ORDER BY 절에는 컬럼명과 별칭만 사용할 수 있으며 숫자(위치)를 쓰면 오류가 난다.",
-        "칼럼 간 데이터 타입이 서로 호환되더라도 타입이 다르면 오류가 발생한다."
+        "ORDER BY NM 은 첫 번째 SELECT 의 별칭이라 오류가 난다.",
+        "ORDER BY DNAME 처럼 두 번째 SELECT 의 칼럼 이름을 쓰면 오류가 난다.",
+        "ORDER BY 2 처럼 위치 번호는 집합 연산에서 쓸 수 없다.",
+        "두 번째 SELECT 의 LOC_CD 가 VARCHAR2 였다면 Oracle 이 숫자로 자동 변환해 그대로 실행한다."
       ],
       "correctIndex": 1,
-      "explanation": "집합 연산자에서 ORDER BY는 마지막에 한 번만 쓰며, 결과 컬럼명은 첫 번째 SELECT의 컬럼명을 따르므로 두 번째 SELECT에서 정의된 컬럼명은 사용할 수 없다. ① 첫 번째 SELECT 의 컬럼명은 ORDER BY 에 쓸 수 있고, ③ 숫자(위치)로 정렬하는 것도 가능하며, ④ 타입이 서로 호환되면 오류 없이 처리된다."
+      "explanation": "집합 연산의 결과 칼럼 이름은 첫 번째 SELECT 를 따른다(NM, SAL). 그래서 ORDER BY 에는 첫 번째 SELECT 의 칼럼 이름·별칭이나 위치 번호를 쓴다. 두 번째 SELECT 에만 있는 DNAME 은 결과 칼럼 이름이 아니라 오류다. 정답은 ②번이다. ① NM 은 결과 칼럼 이름이라 쓸 수 있다. ③ ORDER BY 2 도 된다. ④ Oracle 은 집합 연산의 같은 위치 칼럼이 숫자·문자처럼 타입 계열이 다르면 자동 변환하지 않고 오류(ORA-01790)를 낸다.",
+      "references": [
+        {
+          "type": "sql",
+          "code": "SELECT ENAME AS NM, SAL\nFROM   EMP\nUNION\nSELECT DNAME, LOC_CD\nFROM   DEPT\nORDER  BY ( ? );"
+        }
+      ]
     },
     {
       "subject": "2과목",
@@ -1396,7 +1426,7 @@
         },
         {
           "type": "sql",
-          "code": "SELECT *\nFROM   TBL1 RIGHT OUTER JOIN TBL2 USING ( ㄱ )\nWHERE  COLC >= 20;"
+          "code": "SELECT *\nFROM   TBL1 RIGHT OUTER JOIN TBL2\n       USING ( ㄱ )\nWHERE  COLC >= 20;"
         },
         {
           "type": "table",
@@ -1502,7 +1532,7 @@
         },
         {
           "type": "sql",
-          "code": "SELECT *\nFROM   T\nWHERE  NOT ( COL1 = 1 OR COL2 IS NULL );"
+          "code": "SELECT *\nFROM   T\nWHERE  NOT ( COL1 = 1\n             OR COL2 IS NULL );"
         }
       ]
     },
@@ -1552,19 +1582,19 @@
     {
       "subject": "2과목",
       "number": 46,
-      "title": "다음 SQL에 대한 설명으로 가장 적절한 것은?",
+      "title": "로그인기록 테이블에 이순신 3행, 강감찬 2행이 있다. 아래 SQL ㉠~㉣ 에 대한 설명으로 가장 적절한 것은?",
       "options": [
-        "아래 쿼리와 결과가 동일하다.\nSELECT 사용자명, 로그인횟수\nFROM (SELECT 사용자명, COUNT(*) AS 로그인횟수\n      FROM 로그인기록\n      GROUP BY 사용자명)\nWHERE 사용자명 = '이순신' AND 로그인횟수 > 10;",
-        "SELECT 절에 '이순신' 같은 문자 리터럴을 넣으면 오류가 난다.",
-        "HAVING COUNT(*) > 10 대신 HAVING 로그인횟수 > 10으로 써도 된다.",
-        "HAVING 절을 WHERE 절로 옮겨도 결과가 같다."
+        "㉠ 과 ㉡ 은 결과가 같고, ㉢ 과 ㉣ 은 오류다.",
+        "㉠ 만 정상이고 나머지는 모두 오류다.",
+        "㉠, ㉡, ㉣ 은 정상이고 ㉢ 만 오류다.",
+        "네 SQL 모두 이순신 3 을 돌려준다."
       ],
       "correctIndex": 0,
-      "explanation": "인라인 뷰에서 먼저 그룹핑하고 별칭 로그인횟수를 만든 뒤 바깥 WHERE로 필터링하면 원 쿼리와 결과가 같다. ③ HAVING에서는 SELECT 절 별칭을 쓸 수 없고, ④ WHERE 절에는 집계 함수를 쓸 수 없어 옮길 수 없다.",
+      "explanation": "HAVING 에는 집계 함수뿐 아니라 GROUP BY 에 쓴 칼럼 조건도 쓸 수 있어 ㉠ 은 이순신 3 을 돌려준다. ㉡ 은 같은 조건을 WHERE 로 먼저 거른 것이라 결과가 같고, 그룹을 만들기 전에 행을 줄여 더 효율적이다. ㉢ 은 그룹을 만들기 전인 WHERE 에 집계 함수를 써 오류다. ㉣ 은 GROUP BY 에 없는 로그인일을 집계 없이 HAVING 에 써 오류다. 정답은 ①번이다. ② 는 WHERE 와 HAVING 을 함께 쓸 수 없다고 본 것, ③ 은 HAVING 에 아무 칼럼이나 쓸 수 있다고 본 것, ④ 는 문법 오류를 놓친 것이다.",
       "references": [
         {
           "type": "sql",
-          "code": "SELECT 사용자명, COUNT(*) AS 로그인횟수\nFROM   로그인기록\nGROUP  BY 사용자명\nHAVING 사용자명 = '이순신' AND COUNT(*) > 10;"
+          "code": "-- ㉠\nSELECT 사용자명, COUNT(*)\nFROM   로그인기록\nGROUP  BY 사용자명\nHAVING 사용자명 = '이순신'\nAND    COUNT(*) > 2;\n-- ㉡\nSELECT 사용자명, COUNT(*)\nFROM   로그인기록\nWHERE  사용자명 = '이순신'\nGROUP  BY 사용자명\nHAVING COUNT(*) > 2;\n-- ㉢\nSELECT 사용자명, COUNT(*)\nFROM   로그인기록\nWHERE  COUNT(*) > 2\nGROUP  BY 사용자명;\n-- ㉣\nSELECT 사용자명, COUNT(*)\nFROM   로그인기록\nGROUP  BY 사용자명\nHAVING 로그인일 > SYSDATE - 7;"
         }
       ]
     },
@@ -1623,7 +1653,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "INSERT INTO TAB1 VALUES (...);   -- 1건 추가\nSAVEPOINT S1;\nINSERT INTO TAB1 VALUES (...);   -- 1건 추가\nCOMMIT;\nINSERT INTO TAB1 VALUES (...);   -- 1건 추가\nROLLBACK TO S1;"
+          "code": "INSERT INTO TAB1 VALUES (...);\n-- 1건 추가\nSAVEPOINT S1;\nINSERT INTO TAB1 VALUES (...);\n-- 1건 추가\nCOMMIT;\nINSERT INTO TAB1 VALUES (...);\n-- 1건 추가\nROLLBACK TO S1;"
         }
       ]
     },
@@ -1696,40 +1726,31 @@
         },
         {
           "type": "sql",
-          "code": "-- ㉠\nSELECT NVL(MAX('Y'), 'N') FROM T WHERE COL = 9;\n-- ㉡\nSELECT NVL(MAX('Y'), 'N') FROM T WHERE COL = 9\nGROUP BY C1;\n-- ㉢\nSELECT COUNT(*) FROM T WHERE COL = 9;\n-- ㉣\nSELECT SUM(COL) FROM T WHERE COL = 9;"
+          "code": "-- ㉠\nSELECT NVL(MAX('Y'), 'N') FROM T\nWHERE COL = 9;\n-- ㉡\nSELECT NVL(MAX('Y'), 'N') FROM T\nWHERE COL = 9\nGROUP BY C1;\n-- ㉢\nSELECT COUNT(*) FROM T WHERE COL = 9;\n-- ㉣\nSELECT SUM(COL) FROM T WHERE COL = 9;"
         }
       ]
     },
     {
       "subject": "2과목",
       "number": 27,
-      "title": "다음 DEPT 테이블에 대한 (가)~(라) SQL 중 실행 시 오류가 발생하는 것은?",
+      "title": "아래 ERD 의 두 테이블에 대한 SQL (가)~(마) 중 실행 시 오류가 발생하는 것만 모두 고른 것은? (Oracle 기준)",
       "options": [
-        "(가)\nSELECT DNAME\nFROM DEPT;",
-        "(나)\nSELECT b.DEPTNO\nFROM (\n  SELECT b.DEPTNO\n  FROM DEPT b\n) a;",
-        "(다)\nSELECT SUBSTR(DNAME, 1, 3)\nFROM DEPT;",
-        "(라)\nSELECT RTRIM(DNAME)\nFROM DEPT;"
+        "(나)",
+        "(나), (라), (마)",
+        "(라), (마)",
+        "(나), (마)"
       ],
       "correctIndex": 1,
-      "explanation": "(나)는 인라인 뷰 안에서 정의한 테이블 별칭 b를 바깥 SELECT 절에서 참조하므로 오류가 발생한다. b의 유효 범위는 괄호 안의 쿼리 블록뿐이며 바깥에서는 인라인 뷰 별칭 a를 사용해야 한다(SELECT a.DEPTNO). (가) ①, (다) ③, (라) ④ 는 각각 컬럼 조회, 문자열 자르기, 오른쪽 공백 제거로 모두 정상 실행된다.",
+      "explanation": "(가) ORDER BY 는 SELECT 다음에 처리되므로 SELECT 절의 별칭 코드 를 쓸 수 있다. (나) WHERE 는 SELECT 보다 먼저 처리되어 별칭 코드 를 모르므로 오류다. (다) WHERE 절의 서브쿼리는 바깥 쿼리의 별칭 D 를 참조할 수 있다(상관 서브쿼리). (라) FROM 절의 인라인 뷰는 같은 FROM 절의 다른 테이블 D 를 참조할 수 없어 오류다. LATERAL 을 붙여야 가능하다. (마) 인라인 뷰 안의 별칭 E 는 바깥에서 보이지 않는다. 바깥에서는 인라인 뷰 별칭 A 를 써서 A.이름 으로 불러야 한다. 정답은 ②번이다. ① 은 인라인 뷰 쪽 오류 두 개를, ③ 은 WHERE 의 별칭 오류를, ④ 는 인라인 뷰가 옆 테이블을 볼 수 없다는 점을 빠뜨린 것이다.",
       "references": [
         {
-          "type": "table",
-          "caption": "DEPT",
-          "headers": [
-            "DEPTNO",
-            "DNAME"
-          ],
-          "rows": [
-            [
-              "10",
-              "SQL Developer"
-            ],
-            [
-              "20",
-              "SQR Master"
-            ]
-          ]
+          "type": "erd",
+          "caption": "부서·사원 ERD",
+          "mermaid": "erDiagram\n    부서 ||..o{ 사원 : \"소속\"\n    부서 {\n        string 부서코드 PK\n    }\n    사원 {\n        int 사번 PK\n        string 부서코드 FK\n        string 이름\n    }"
+        },
+        {
+          "type": "sql",
+          "code": "-- (가)\nSELECT 부서코드 AS 코드\nFROM 부서 ORDER BY 코드;\n-- (나)\nSELECT 부서코드 AS 코드\nFROM 부서 WHERE 코드 = 'D1';\n-- (다)\nSELECT D.부서코드 FROM 부서 D\nWHERE EXISTS\n  (SELECT 1 FROM 사원 E\n    WHERE E.부서코드 = D.부서코드);\n-- (라)\nSELECT X.부서코드\nFROM 부서 D,\n  (SELECT E.부서코드 FROM 사원 E\n    WHERE E.부서코드 = D.부서코드) X;\n-- (마)\nSELECT E.이름\nFROM (SELECT E.이름 FROM 사원 E) A;"
         }
       ]
     },
@@ -1748,11 +1769,11 @@
       "references": [
         {
           "type": "table",
-          "caption": "테이블 키 구성",
+          "caption": "테이블 키 구성 (A_ID~C_ID 는 A_ID, B_ID, C_ID)",
           "headers": [
             "테이블",
-            "기본키(PK)",
-            "상위 테이블을 참조하는 외래키(FK)"
+            "PK",
+            "FK(상위 참조)"
           ],
           "rows": [
             [
@@ -1767,13 +1788,13 @@
             ],
             [
               "C",
-              "A_ID, B_ID, C_ID",
+              "A_ID~C_ID",
               "A_ID, B_ID"
             ],
             [
               "D",
-              "A_ID, B_ID, C_ID, D_ID",
-              "A_ID, B_ID, C_ID"
+              "A_ID~D_ID",
+              "A_ID~C_ID"
             ]
           ]
         }
@@ -1830,7 +1851,7 @@
         },
         {
           "type": "sql",
-          "code": "SELECT CONNECT_BY_ROOT EMPNO AS ROOT_EMPNO, COUNT(*) AS CNT\nFROM   EMP\nSTART WITH MGR IS NULL\nCONNECT BY MGR = PRIOR EMPNO\nGROUP  BY CONNECT_BY_ROOT EMPNO\nORDER  BY ROOT_EMPNO;"
+          "code": "SELECT CONNECT_BY_ROOT EMPNO\n         AS ROOT_EMPNO,\n       COUNT(*) AS CNT\nFROM   EMP\nSTART WITH MGR IS NULL\nCONNECT BY MGR = PRIOR EMPNO\nGROUP  BY CONNECT_BY_ROOT EMPNO\nORDER  BY ROOT_EMPNO;"
         },
         {
           "type": "table",
@@ -1867,7 +1888,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "CREATE TABLE DEPT (\n  DEPTNO NUMBER PRIMARY KEY\n);\n\nCREATE TABLE EMP (\n  EMPNO  NUMBER CONSTRAINT EMP_PK PRIMARY KEY,\n  DEPTNO NUMBER CONSTRAINT EMP_FK REFERENCES DEPT(DEPTNO)\n);"
+          "code": "CREATE TABLE DEPT (\n  DEPTNO NUMBER PRIMARY KEY\n);\n\nCREATE TABLE EMP (\n  EMPNO  NUMBER\n         CONSTRAINT EMP_PK PRIMARY KEY,\n  DEPTNO NUMBER\n         CONSTRAINT EMP_FK\n         REFERENCES DEPT(DEPTNO)\n);"
         }
       ]
     }

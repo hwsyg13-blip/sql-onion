@@ -59,16 +59,22 @@ export const ROUND_58: QuizQuestion[] = [
     "round": 58,
     "subject": "1과목",
     "number": 3,
-    "title": "데이터 모델링을 구성하는 세 가지 관점(View)에 해당하지 않는 것은?",
+    "title": "쇼핑몰을 모델링하면서 한 작업 ㉠, ㉡, ㉢ 을 데이터 모델링의 세 관점에 차례대로 짝지은 것으로 옳은 것은?",
     "options": [
-      "데이터 관점 (Data, What)",
-      "프로세스 관점 (Process, How)",
-      "상관 관점 (Interaction)",
-      "기술 관점 (Technical)"
+      "데이터 관점, 상관 관점, 프로세스 관점",
+      "프로세스 관점, 데이터 관점, 상관 관점",
+      "데이터 관점, 프로세스 관점, 기술 관점",
+      "데이터 관점, 프로세스 관점, 상관 관점"
     ],
     "correctIndex": 3,
-    "explanation": "데이터 모델링은 ① 데이터 관점(업무가 어떤 데이터와 관련되는가, What), ② 프로세스 관점(업무가 실제로 어떤 일을 하는가, How), 데이터와 프로세스의 ③ 상관 관점(Interaction) 세 가지로 구성된다. ④ 기술 관점은 여기에 포함되지 않는다.",
-    "_source": "authored"
+    "explanation": "데이터 모델링은 세 관점으로 본다. 데이터 관점(What)은 업무에 필요한 데이터와 그 관계(㉠), 프로세스 관점(How)은 업무가 실제로 하는 일(㉡), 상관 관점(Interaction)은 업무가 데이터에 주는 영향, 즉 어떤 프로세스가 어떤 데이터를 생성·조회·수정·삭제하는지(㉢, CRUD 매트릭스)다. 정답은 ④번이다. ① 과 ② 는 관점을 서로 바꿔 짝지은 것이고, ③ 의 기술 관점은 세 관점에 들어가지 않는다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "text",
+        "content": "㉠ 고객·주문·상품 엔터티와 속성을 정한다.\n㉡ 주문 접수 → 결제 → 배송으로 이어지는 업무 절차를 정리한다.\n㉢ '주문 등록' 업무가 주문을 생성(C)하고 상품 재고를 수정(U)하는지 표로 정리한다."
+      }
+    ]
   },
   {
     "id": 10103,
@@ -144,16 +150,44 @@ export const ROUND_58: QuizQuestion[] = [
     "round": 58,
     "subject": "1과목",
     "number": 7,
-    "title": "관계형 데이터베이스 정규화 과정 중 '이행적 함수 종속성(Transitive Functional Dependency)'을 제거하는 단계는?",
+    "title": "[수강신청] 테이블을 제3정규형까지 만들 때, 각 단계에서 없애는 함수 종속을 바르게 짝지은 것은?",
     "options": [
-      "제1정규화",
-      "제2정규화",
-      "제3정규화",
-      "BCNF"
+      "2정규화: 학과코드 → 학과명 / 3정규화: 학번 → 학생이름",
+      "2정규화: (학번, 과목코드) → 성적 / 3정규화: 학번 → 학과코드",
+      "2정규화: 학번 → 학생이름, 학과코드 / 3정규화: 학과코드 → 학과명",
+      "2정규화: 학과코드 → 학과명 / 3정규화: (학번, 과목코드) → 성적"
     ],
     "correctIndex": 2,
-    "explanation": "① 제1정규화는 속성의 원자성을 확보하고, ② 제2정규화는 주식별자에 대한 부분 함수 종속을 제거하며, 제3정규화는 주식별자가 아닌 일반 속성 사이의 이행적 함수 종속성을 제거한다. ④ BCNF 는 모든 결정자가 후보키가 되도록 분해하는 단계이다.",
-    "_source": "authored"
+    "explanation": "제2정규화는 주식별자의 일부에만 종속된 속성(부분 종속)을 떼어 내고, 제3정규화는 일반 속성을 거쳐 종속되는 속성(이행 종속)을 떼어 낸다. 학생이름·학과코드는 주식별자 중 학번에만 종속되므로 2정규화에서 학생(학번, 학생이름, 학과코드, 학과명)으로 분리하고, 수강신청에는 (학번, 과목코드, 성적)만 남는다. 분리한 학생 테이블에서 학과명은 학번 → 학과코드 → 학과명 으로 이행 종속이므로 3정규화에서 학과(학과코드, 학과명)로 다시 나눈다. 정답은 ③번이다. ② 의 (학번, 과목코드) → 성적 은 완전 종속이라 없앨 대상이 아니고, ①·④ 는 이행 종속을 2정규화 단계로 잘못 보냈다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "text",
+        "content": "수강신청(학번, 과목코드, 학생이름, 학과코드, 학과명, 성적)\n주식별자: (학번, 과목코드)"
+      },
+      {
+        "type": "table",
+        "caption": "함수 종속",
+        "headers": [
+          "결정자",
+          "종속 속성"
+        ],
+        "rows": [
+          [
+            "(학번, 과목코드)",
+            "성적"
+          ],
+          [
+            "학번",
+            "학생이름, 학과코드"
+          ],
+          [
+            "학과코드",
+            "학과명"
+          ]
+        ]
+      }
+    ]
   },
   {
     "id": 10107,
@@ -162,41 +196,21 @@ export const ROUND_58: QuizQuestion[] = [
     "round": 58,
     "subject": "1과목",
     "number": 8,
-    "title": "다음 중 상호배타적(Arc) 관계를 표현한 ERD로 가장 적절한 것은?",
+    "title": "'차량의 소유자는 법인 또는 개인 중 정확히 하나' 라는 업무 규칙을 ERD 와 테이블로 나타내는 방법으로 가장 적절한 것은?",
     "options": [
-      "차량과 소유자를 관계선 하나로 1:1 연결한 ERD",
-      "부서와 사원을 관계선 하나로 1:N 연결한 ERD",
-      "사원 엔터티가 관리자 관계로 자기 자신과 연결된 순환 관계 ERD",
-      "차량에서 법인소유자·개인소유자로 갈라지는 두 관계선을 반원(Arc)으로 가로지른 ERD"
+      "차량에 법인번호·개인번호 외래키를 두고 둘 다 NULL 을 허용하며, 다른 제약은 두지 않는다.",
+      "차량-법인, 차량-개인 두 관계를 모두 필수(반드시 있음) 관계로 그린다.",
+      "두 관계선 끝을 원(o)으로 표시하면 상호배타 관계를 뜻한다.",
+      "두 관계선을 반원(Arc)으로 묶어 상호배타 관계로 표시하고, 테이블에서는 두 외래키 중 정확히 하나만 값이 있도록 CHECK 제약을 둔다."
     ],
     "correctIndex": 3,
-    "explanation": "상호배타적(Arc) 관계는 한 엔터티가 여러 엔터티 중 반드시 하나와만 관계를 맺는 것으로, 갈라지는 관계선들을 가로지르는 반원(Arc)으로 표시한다. ④ 는 '차량의 소유자는 법인 또는 개인 중 하나' 라는 뜻이라 정답이다. ① 은 1:1, ② 는 1:N 관계, ③ 은 재귀(순환) 관계다. ※ 복원 자료에는 보기가 그림 번호(①~④)만 남아 있어, 각 그림의 내용을 글로 옮겨 보기를 복원했다.",
+    "explanation": "한 엔터티가 여러 엔터티 중 반드시 하나와만 관계를 맺는 것은 상호배타(Arc) 관계다. ERD 에서는 갈라지는 두 관계선을 반원으로 가로질러 표시한다. 외래키 두 개로 구현하면 DBMS 가 '하나만' 을 알아서 지켜 주지 않으므로 CHECK ((법인번호 IS NULL) <> (개인번호 IS NULL)) 같은 제약으로 보완한다. 정답은 ④번이다. ① 은 둘 다 비었거나 둘 다 채워진 차량을 막지 못한다. ② 는 법인과 개인을 모두 가져야 한다는 뜻이 된다. ③ 원(o)은 관계가 없을 수도 있다는 선택 표시일 뿐이다.",
     "_source": "authored",
-    "optionReferences": [
-      [
-        {
-          "type": "erd",
-          "mermaid": "erDiagram\n    차량 ||--|| 소유자 : \"보유\""
-        }
-      ],
-      [
-        {
-          "type": "erd",
-          "mermaid": "erDiagram\n    부서 ||--o{ 사원 : \"소속\""
-        }
-      ],
-      [
-        {
-          "type": "erd",
-          "mermaid": "erDiagram\n    사원 ||--o{ 사원 : \"관리\""
-        }
-      ],
-      [
-        {
-          "type": "html",
-          "html": "<div style=\"background:var(--bg-card);border:1px solid var(--border-subtle);border-radius:12px;padding:14px 12px;display:flex;justify-content:center\"><svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 320 280\" width=\"300\" style=\"max-width:100%;height:auto\" role=\"img\" aria-label=\"차량에서 법인소유자·개인소유자로 갈라지는 두 관계선을 반원(Arc)이 가로지르는 ERD\" font-family=\"Pretendard, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif\"> <g style=\"stroke:var(--point-600);fill:none\" stroke-width=\"1.4\"> <line x1=\"145\" y1=\"76\" x2=\"75\" y2=\"214\"/> <line x1=\"175\" y1=\"76\" x2=\"245\" y2=\"214\"/> <path d=\"M136 76 L137.8 90.3 L154 76\"/> <circle cx=\"134.2\" cy=\"97.4\" r=\"4\" style=\"fill:var(--bg-card)\"/> <path d=\"M166 76 L182.2 90.3 L184 76\"/> <circle cx=\"185.8\" cy=\"97.4\" r=\"4\" style=\"fill:var(--bg-card)\"/> <line x1=\"73.3\" y1=\"201.9\" x2=\"85.7\" y2=\"208.3\"/> <line x1=\"76\" y1=\"196.5\" x2=\"88.4\" y2=\"202.9\"/> <line x1=\"234.3\" y1=\"208.3\" x2=\"246.7\" y2=\"201.9\"/> <line x1=\"231.6\" y1=\"202.9\" x2=\"244\" y2=\"196.5\"/> <path d=\"M108 120 Q160 160 212 120\" stroke-width=\"2\"/> </g> <g style=\"stroke:var(--point-600);fill:var(--point-100)\" stroke-width=\"1.4\"> <rect x=\"110\" y=\"20\" width=\"100\" height=\"56\"/> <rect x=\"15\" y=\"214\" width=\"120\" height=\"50\"/> <rect x=\"185\" y=\"214\" width=\"120\" height=\"50\"/> </g> <g style=\"fill:var(--fg-1)\" font-size=\"15\" text-anchor=\"middle\"> <text x=\"160\" y=\"53\">차량</text> <text x=\"75\" y=\"244\">법인소유자</text> <text x=\"245\" y=\"244\">개인소유자</text> </g> <g style=\"fill:var(--fg-2)\" font-size=\"12\" text-anchor=\"middle\"> <text x=\"88\" y=\"150\">보유</text> <text x=\"232\" y=\"150\">보유</text> </g> </svg></div>"
-        }
-      ]
+    "references": [
+      {
+        "type": "text",
+        "content": "차량(차량번호, 법인번호, 개인번호, ...)\n법인(법인번호, ...)\n개인(개인번호, ...)"
+      }
     ]
   },
   {
@@ -338,7 +352,7 @@ export const ROUND_58: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "-- ㉠ SELECT * FROM T WHERE COL LIKE '%a_c%';\n-- ㉡ SELECT * FROM T WHERE COL LIKE '%a\\_c%' ESCAPE '\\';"
+        "code": "-- ㉠ SELECT * FROM T\n--    WHERE COL LIKE '%a_c%';\n-- ㉡ SELECT * FROM T\n--    WHERE COL LIKE '%a\\_c%'\n--    ESCAPE '\\';"
       }
     ]
   },
@@ -362,7 +376,7 @@ export const ROUND_58: QuizQuestion[] = [
     "references": [
       {
         "type": "sql",
-        "code": "-- 각 문자열이 패턴과 일치하면 한 행이 나온다\nSELECT 'ER-123'  FROM DUAL WHERE REGEXP_LIKE('ER-123',  '^\\w*$');\nSELECT 'abcde'   FROM DUAL WHERE REGEXP_LIKE('abcde',   '^\\w*$');\nSELECT 'SQL2025' FROM DUAL WHERE REGEXP_LIKE('SQL2025', '^\\w*$');\nSELECT 'test_01' FROM DUAL WHERE REGEXP_LIKE('test_01', '^\\w*$');"
+        "code": "-- 각 문자열이 패턴과 일치하면\n-- 한 행이 나온다\nSELECT 'ER-123' FROM DUAL\nWHERE REGEXP_LIKE('ER-123', '^\\w*$');\nSELECT 'abcde' FROM DUAL\nWHERE REGEXP_LIKE('abcde', '^\\w*$');\nSELECT 'SQL2025' FROM DUAL\nWHERE REGEXP_LIKE('SQL2025', '^\\w*$');\nSELECT 'test_01' FROM DUAL\nWHERE REGEXP_LIKE('test_01', '^\\w*$');"
       }
     ]
   },
@@ -386,7 +400,7 @@ export const ROUND_58: QuizQuestion[] = [
     "references": [
       {
         "type": "sql",
-        "code": "DBA : GRANT SELECT, INSERT, DELETE ON R TO U1;\nDBA : GRANT SELECT ON R TO U2 WITH GRANT OPTION;\nU2  : GRANT SELECT ON R TO U3;\nDBA : REVOKE SELECT ON R FROM U2 RESTRICT;"
+        "code": "DBA : GRANT SELECT, INSERT, DELETE\n        ON R TO U1;\nDBA : GRANT SELECT ON R TO U2\n        WITH GRANT OPTION;\nU2  : GRANT SELECT ON R TO U3;\nDBA : REVOKE SELECT ON R FROM U2\n        RESTRICT;"
       }
     ]
   },
@@ -458,7 +472,7 @@ export const ROUND_58: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "-- ㄱ. CROSS JOIN\nSELECT COUNT(*) FROM TAB1, TAB2;\n\n-- ㄴ. INNER JOIN\nSELECT COUNT(*) FROM TAB1 A INNER JOIN TAB2 B ON A.ID = B.ID;\n\n-- ㄷ. FULL OUTER JOIN\nSELECT COUNT(*) FROM TAB1 A FULL OUTER JOIN TAB2 B ON A.ID = B.ID;"
+        "code": "-- ㄱ. CROSS JOIN\nSELECT COUNT(*) FROM TAB1, TAB2;\n\n-- ㄴ. INNER JOIN\nSELECT COUNT(*)\nFROM TAB1 A INNER JOIN TAB2 B\n  ON A.ID = B.ID;\n\n-- ㄷ. FULL OUTER JOIN\nSELECT COUNT(*)\nFROM TAB1 A FULL OUTER JOIN TAB2 B\n  ON A.ID = B.ID;"
       }
     ]
   },
@@ -591,7 +605,7 @@ export const ROUND_58: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT SUM(VAL), AVG(VAL), AVG(NVL(VAL, 0)) FROM T;"
+        "code": "SELECT SUM(VAL), AVG(VAL),\n       AVG(NVL(VAL, 0))\nFROM T;"
       }
     ]
   },
@@ -656,7 +670,7 @@ export const ROUND_58: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT A.ID, B.V\nFROM   A   ( ? )   B\nON     A.ID = B.ID;\n-- A에 없는 B의 행까지 모두 포함되는 결과를 얻어야 한다."
+        "code": "SELECT A.ID, B.V\nFROM   A   ( ? )   B\nON     A.ID = B.ID;\n-- A에 없는 B의 행까지 모두 포함되는\n-- 결과를 얻어야 한다."
       },
       {
         "type": "table",
@@ -693,20 +707,29 @@ export const ROUND_58: QuizQuestion[] = [
     "round": 58,
     "subject": "2과목",
     "number": 20,
-    "title": "아래 SQL 관련 설명 중 옳지 않은 것은?",
+    "title": "아래 부서·사원 데이터에서 SQL ㉠~㉣ 의 결과를 차례대로 나열한 것은? (오류가 나면 '오류', 아니면 결과 행 수, Oracle 기준)",
     "options": [
-      "GROUP BY 절은 SELECT 절보다 먼저 수행된다.",
-      "HAVING 절은 그룹 함수 결과를 조건으로 사용할 수 있다.",
-      "GROUP BY 절에 명시되지 않은 일반 컬럼은 SELECT 절에 자유롭게 사용할 수 있다.",
-      "HAVING 절이 WHERE 절보다 먼저 수행되지는 않는다."
+      "2, 2, 2, 1",
+      "오류, 2, 2, 2",
+      "오류, 2, 2, 1",
+      "오류, 오류, 2, 1"
     ],
     "correctIndex": 2,
-    "explanation": "SQL 처리 순서는 FROM → WHERE → GROUP BY → HAVING → SELECT → ORDER BY 라서 GROUP BY 는 SELECT 보다 먼저 수행되고(①), HAVING 은 그룹 함수 결과를 조건으로 쓸 수 있으며(②), WHERE 보다 늦게 수행된다(④). GROUP BY 를 쓰면 SELECT 절에는 GROUP BY 컬럼과 집계 함수만 올 수 있고 그 밖의 일반 컬럼은 오류가 나므로 ③ 이 옳지 않다.",
+    "explanation": "GROUP BY 를 쓰면 SELECT 절에는 GROUP BY 에 적은 칼럼과 집계 함수만 올 수 있다. ㉠ 의 D.부서명 은 부서코드가 정해지면 하나로 정해지는 값이지만, GROUP BY 에 없고 집계 함수로 감싸지도 않았으므로 Oracle 에서는 GROUP BY 식이 아니라는 오류가 난다. ㉡ 처럼 부서명을 GROUP BY 에 함께 넣거나, ㉢ 처럼 MAX 로 감싸면 실행된다. 일반 조인이라 사원이 없는 D3 은 빠지고 D1, D2 의 2행이다. ㉣ 은 그룹을 만든 뒤 HAVING 으로 사원이 2명 이상인 D1 만 남겨 1행이다. 정답은 ③번이다. ① 은 부서명이 부서코드에 따라 정해지니 ㉠ 도 된다고 본 것이고, ② 는 HAVING 을 빠뜨린 것, ④ 는 GROUP BY 에 칼럼을 여러 개 쓰면 안 된다고 본 것이다. 참고로 PostgreSQL 은 GROUP BY 에 기본키(부서코드)가 있으면 그 테이블의 다른 칼럼을 허용해 ㉠ 도 실행된다.",
     "_source": "authored",
     "references": [
       {
+        "type": "erd",
+        "caption": "부서·사원 ERD",
+        "mermaid": "erDiagram\n    부서 ||..o{ 사원 : \"소속\"\n    부서 {\n        string 부서코드 PK\n        string 부서명\n    }\n    사원 {\n        int 사번 PK\n        string 부서코드 FK\n    }"
+      },
+      {
+        "type": "text",
+        "content": "부서: (D1, 영업), (D2, 인사), (D3, 기획)\n사원: (1, D1), (2, D1), (3, D2)"
+      },
+      {
         "type": "sql",
-        "code": "SELECT DEPTNO, SUM(SAL)\nFROM   EMP\nGROUP BY DEPTNO\nHAVING SUM(SAL) > 10000;"
+        "code": "-- ㉠\nSELECT D.부서코드, D.부서명,\n       COUNT(*)\nFROM 부서 D, 사원 E\nWHERE E.부서코드 = D.부서코드\nGROUP BY D.부서코드;\n-- ㉡\nSELECT D.부서코드, D.부서명,\n       COUNT(*)\nFROM 부서 D, 사원 E\nWHERE E.부서코드 = D.부서코드\nGROUP BY D.부서코드, D.부서명;\n-- ㉢\nSELECT D.부서코드,\n       MAX(D.부서명), COUNT(*)\nFROM 부서 D, 사원 E\nWHERE E.부서코드 = D.부서코드\nGROUP BY D.부서코드;\n-- ㉣ ㉢ 에 다음을 덧붙임\nHAVING COUNT(*) >= 2;"
       }
     ]
   },
@@ -761,7 +784,7 @@ export const ROUND_58: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT DEPT, JOB, SUM(SAL)\nFROM   EMP\nGROUP BY ROLLUP(DEPT, JOB)\nHAVING GROUPING(DEPT) + GROUPING(JOB) > 0;"
+        "code": "SELECT DEPT, JOB, SUM(SAL)\nFROM   EMP\nGROUP BY ROLLUP(DEPT, JOB)\nHAVING GROUPING(DEPT)\n     + GROUPING(JOB) > 0;"
       }
     ]
   },
@@ -823,7 +846,7 @@ export const ROUND_58: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT DEPT, ID,\n       NTILE(2) OVER (PARTITION BY DEPT ORDER BY ID) AS GRP\nFROM   T\nORDER BY DEPT, ID;"
+        "code": "SELECT DEPT, ID,\n       NTILE(2) OVER (\n         PARTITION BY DEPT\n         ORDER BY ID) AS GRP\nFROM   T\nORDER BY DEPT, ID;"
       }
     ]
   },
@@ -834,15 +857,15 @@ export const ROUND_58: QuizQuestion[] = [
     "round": 58,
     "subject": "2과목",
     "number": 23,
-    "title": "아래 두 테이블 A, B 와 결과 C 가 주어졌을 때 사용된 조인 종류는?",
+    "title": "아래 두 테이블 A, B 로 결과 C 를 얻는 SQL 은?",
     "options": [
-      "LEFT OUTER JOIN",
-      "CROSS JOIN",
-      "INNER JOIN",
-      "SELF JOIN"
+      "SELECT * FROM A LEFT OUTER JOIN B ON A.A + 4 >= B.B;",
+      "SELECT * FROM A CROSS JOIN B WHERE A.A + 4 >= B.B;",
+      "SELECT * FROM A INNER JOIN B ON A.A + 4 = B.B;",
+      "SELECT * FROM A CROSS JOIN B;"
     ],
     "correctIndex": 1,
-    "explanation": "두 집합의 모든 조합(카티션 곱)이 결과로 나왔으므로 CROSS JOIN. |A| × |B| = 3 × 2 = 6 행이 결과 C 에 그대로 나타난다. ① LEFT OUTER 는 왼쪽 기준 모든 행 유지(매칭 + 미매칭 NULL), ③ INNER 는 매칭만, ④ SELF 는 자기 자신과 조인.",
+    "explanation": "CROSS JOIN 으로 6쌍을 만든 뒤 A + 4 >= B 인 쌍만 남기면 A = 2 는 6 과, A = 3 은 6·7 과 맞아 (2, 6), (3, 6), (3, 7) 세 행이다. 정답은 ②번이다. ① LEFT OUTER JOIN 은 짝이 없는 A = 1 도 (1, NULL)로 남겨 4행이다. ③ = 조건은 A + 4 가 B 와 같은 (2, 6), (3, 7) 두 행뿐이다. ④ 조건이 없으면 3 × 2 = 6행이다.",
     "_source": "authored",
     "references": [
       {
@@ -887,24 +910,12 @@ export const ROUND_58: QuizQuestion[] = [
         ],
         "rows": [
           [
-            "1",
-            "6"
-          ],
-          [
             "2",
             "6"
           ],
           [
             "3",
             "6"
-          ],
-          [
-            "1",
-            "7"
-          ],
-          [
-            "2",
-            "7"
           ],
           [
             "3",
@@ -1099,20 +1110,42 @@ export const ROUND_58: QuizQuestion[] = [
     "round": 58,
     "subject": "2과목",
     "number": 27,
-    "title": "아래 SQL 수행 결과로 옳은 것은?",
+    "title": "아래 응시 테이블에 SQL 을 실행했을 때, C 행의 ㉠ 값, A 행의 ㉡ 값, A 행의 ㉢ 값을 차례대로 나열한 것은?",
     "options": [
-      "N",
-      "Y",
-      "NULL",
-      "오류 발생"
+      "우수, 미응시, 보통",
+      "응시, 응시, NULL",
+      "우수, 응시, NULL",
+      "응시, 미응시, 보통"
     ],
     "correctIndex": 1,
-    "explanation": "NULL IS NULL 은 NULL 인지를 묻는 조건이라 TRUE 다. CASE 의 첫 조건이 참이므로 'Y' 를 반환한다(②). = NULL 처럼 비교했다면 UNKNOWN 이 되어 ELSE 의 'N' 이 나왔을 것이다. ① N 은 IS NULL 을 = NULL 로 착각한 결과, ③ 조건이 참이면 THEN 의 값을 돌려주므로 NULL 이 아니며, ④ NULL IS NULL 은 정상 문법이다.",
+    "explanation": "㉠ 의 CASE 는 WHEN 을 위에서부터 검사하다 처음 참이 되는 곳에서 멈춘다. C 의 점수 5 는 두 번째 조건 점수 >= 0 에서 이미 참이라 '응시' 가 되고, 아래의 '우수' 까지 내려가지 않는다. ㉡ 은 단순 CASE 라 '점수 = NULL' 로 비교한다. NULL 과의 = 비교는 참이 될 수 없으므로 A 도 ELSE 로 가서 '응시' 가 된다. NULL 을 가려내려면 ㉠ 처럼 WHEN 점수 IS NULL 을 써야 한다. ㉢ 에서 A 의 점수 NULL 은 > 3 도 <= 3 도 참이 아니고 ELSE 도 없으므로 NULL 이 된다. 정답은 ②번이다. ① 과 ③ 은 CASE 가 가장 구체적인 조건을 고른다고 본 것이고, ① 과 ④ 는 단순 CASE 의 WHEN NULL 이 NULL 을 잡는다고 본 것이다. ① 과 ④ 는 ㉢ 에서 두 조건 중 하나는 반드시 참이라고도 보았다.",
     "_source": "authored",
     "references": [
       {
+        "type": "table",
+        "caption": "응시",
+        "headers": [
+          "이름",
+          "점수"
+        ],
+        "rows": [
+          [
+            "A",
+            "NULL"
+          ],
+          [
+            "B",
+            "0"
+          ],
+          [
+            "C",
+            "5"
+          ]
+        ]
+      },
+      {
         "type": "sql",
-        "code": "SELECT CASE WHEN NULL IS NULL THEN 'Y' ELSE 'N' END\nFROM DUAL;"
+        "code": "SELECT 이름,\n  CASE WHEN 점수 IS NULL\n         THEN '미응시'\n       WHEN 점수 >= 0 THEN '응시'\n       WHEN 점수 >= 5 THEN '우수'\n  END AS ㉠,\n  CASE 점수 WHEN NULL\n         THEN '미응시'\n       ELSE '응시'\n  END AS ㉡,\n  CASE WHEN 점수 > 3 THEN '우수'\n       WHEN 점수 <= 3 THEN '보통'\n  END AS ㉢\nFROM 응시;"
       }
     ]
   },
@@ -1170,7 +1203,7 @@ export const ROUND_58: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT EMPNO, DEPTNO\nFROM   EMP\nORDER BY EMPNO DESC NULLS LAST, DEPTNO DESC\nFETCH FIRST 3 ROWS ONLY;"
+        "code": "SELECT EMPNO, DEPTNO\nFROM   EMP\nORDER BY EMPNO DESC NULLS LAST,\n         DEPTNO DESC\nFETCH FIRST 3 ROWS ONLY;"
       }
     ]
   },
@@ -1262,7 +1295,7 @@ export const ROUND_58: QuizQuestion[] = [
     "references": [
       {
         "type": "sql",
-        "code": "MERGE INTO TGT T\nUSING SRC S ON (T.ID = S.ID)\nWHEN MATCHED THEN UPDATE SET T.V = S.V\nWHEN NOT MATCHED THEN INSERT (ID, V) VALUES (S.ID, S.V);"
+        "code": "MERGE INTO TGT T\nUSING SRC S ON (T.ID = S.ID)\nWHEN MATCHED THEN\n  UPDATE SET T.V = S.V\nWHEN NOT MATCHED THEN\n  INSERT (ID, V) VALUES (S.ID, S.V);"
       }
     ]
   },
@@ -1273,20 +1306,20 @@ export const ROUND_58: QuizQuestion[] = [
     "round": 58,
     "subject": "2과목",
     "number": 31,
-    "title": "아래 SQL의 결과로 옳은 것은?",
+    "title": "행이 있는 EMP 테이블과 DUAL 에 대한 SQL ㉠~㉣ 의 결과로 옳은 것은?",
     "options": [
-      "1",
-      "0",
-      "9999",
-      "공집합"
+      "0, 1, 공집합, 공집합",
+      "공집합, 1, 공집합, NULL",
+      "공집합, 1, 0, 공집합",
+      "공집합, 1, 0, NULL"
     ],
     "correctIndex": 3,
-    "explanation": "DUAL은 한 건만 반환하므로 COUNT(*)는 1이다. HAVING 조건 COUNT(*) > 4 를 만족하지 않아 결과는 공집합이 된다. ① 1 은 HAVING 조건을 무시한 COUNT 값, ② 0 은 조건을 만족하지 않으면 0 이 나온다고 본 값이고, ③ 9999 같은 값은 나올 수 없다. GROUP BY 가 없어도 HAVING 은 전체를 한 그룹으로 보고 거른다.",
+    "explanation": "GROUP BY 없이 HAVING 을 쓰면 테이블 전체가 하나의 그룹이 되고, HAVING 조건이 거짓이면 그 그룹이 빠져 공집합이 된다. ㉠ 은 COUNT(*) 가 1 이라 > 4 가 거짓이어서 공집합, ㉡ 은 참이라 1 이다. WHERE 로 행이 모두 걸러져도 집계 그룹은 하나 남아 COUNT(*) 는 0, MAX(SAL) 은 NULL 이다. 그래서 ㉢ 은 0 = 0 이 참이라 0 이 나오고, ㉣ 도 NULL IS NULL 이 참이라 NULL 이 담긴 1행이다. 정답은 ④번이다. ① 은 HAVING 이 거짓이면 0 이 나온다고 본 것, ②·③ 은 행이 없으면 집계 그룹도 없다고 본 것이다.",
     "_source": "authored",
     "references": [
       {
         "type": "sql",
-        "code": "SELECT COUNT(*)\nFROM   DUAL\nHAVING COUNT(*) > 4;"
+        "code": "-- ㉠\nSELECT COUNT(*) FROM DUAL\nHAVING COUNT(*) > 4;\n-- ㉡\nSELECT COUNT(*) FROM DUAL\nHAVING COUNT(*) = 1;\n-- ㉢\nSELECT COUNT(*) FROM EMP\nWHERE  1 = 0\nHAVING COUNT(*) = 0;\n-- ㉣\nSELECT MAX(SAL) FROM EMP\nWHERE  1 = 0\nHAVING MAX(SAL) IS NULL;"
       }
     ]
   },
@@ -1375,7 +1408,7 @@ export const ROUND_58: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT ID, TYPE, SUM(AMT)\nFROM   TBL\nGROUP BY ROLLUP(ID, TYPE)\nHAVING GROUPING(ID) + GROUPING(TYPE) != 1;"
+        "code": "SELECT ID, TYPE, SUM(AMT)\nFROM   TBL\nGROUP BY ROLLUP(ID, TYPE)\nHAVING GROUPING(ID)\n     + GROUPING(TYPE) != 1;"
       }
     ]
   },
@@ -1425,7 +1458,7 @@ export const ROUND_58: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT CASE WHEN GROUPING(지역) = 1 THEN '합계'\n            ELSE NVL(지역, '미지정')\n       END AS 구분,\n       SUM(금액)\nFROM   매출\nGROUP BY GROUPING SETS ((지역), ());"
+        "code": "SELECT CASE WHEN GROUPING(지역) = 1\n            THEN '합계'\n            ELSE NVL(지역, '미지정')\n       END AS 구분,\n       SUM(금액)\nFROM   매출\nGROUP BY GROUPING SETS ((지역), ());"
       }
     ]
   },
@@ -1436,20 +1469,20 @@ export const ROUND_58: QuizQuestion[] = [
     "round": 58,
     "subject": "2과목",
     "number": 35,
-    "title": "아래 SQL(Oracle)의 결과로 옳은 것은?",
+    "title": "아래 SQL 의 결과(A, B, C, D)로 옳은 것은? (Oracle 기준)",
     "options": [
-      "ABCXYZ",
-      "NULL",
-      "ABC NULL XYZ",
-      "오류 발생"
+      "ABCXYZ, A, 1, EMPTY",
+      "NULL, A, 1, (빈 문자열)",
+      "ABCXYZ, NULL, NULL, EMPTY",
+      "ABC NULL XYZ, A, 2, EMPTY"
     ],
     "correctIndex": 0,
-    "explanation": "Oracle 의 문자 연결 연산자 || 는 NULL 을 빈 문자열처럼 취급해 무시한다. 따라서 'ABC' || NULL || 'XYZ' = 'ABCXYZ' 다(①). 산술 연산과 달리 결과가 NULL 이 되지 않고(②), ④ 오류도 나지 않는다. ③ 처럼 'NULL' 이라는 글자가 끼어들지도 않는다.",
+    "explanation": "Oracle 의 || 와 CONCAT 은 NULL 을 빈 문자열처럼 이어 붙여 A 는 'ABCXYZ', B 는 'A' 다. 또 Oracle 은 빈 문자열 '' 을 NULL 로 다룬다. 그래서 C 는 'A' 에 아무것도 붙지 않아 길이 1 이고, D 는 '' 이 NULL 이므로 NVL 이 'EMPTY' 로 바꾼다. 정답은 ①번이다. ② 는 || 가 NULL 을 만나면 NULL 이 된다고 보고 '' 을 값으로 본 것, ③ 은 CONCAT 이 NULL 을 돌려준다고 본 것, ④ 는 NULL 을 글자 그대로 붙인다고 본 것이다. PostgreSQL 에서는 || 에 NULL 이 섞이면 NULL 이고 '' 은 NULL 이 아니라 결과가 다르다.",
     "_source": "authored",
     "references": [
       {
         "type": "sql",
-        "code": "SELECT 'ABC' || NULL || 'XYZ' FROM DUAL;"
+        "code": "SELECT 'ABC' || NULL || 'XYZ' AS A,\n       CONCAT('A', '')          AS B,\n       LENGTH('A' || '')        AS C,\n       NVL('', 'EMPTY')         AS D\nFROM   DUAL;"
       }
     ]
   },
@@ -1528,20 +1561,38 @@ export const ROUND_58: QuizQuestion[] = [
     "round": 58,
     "subject": "2과목",
     "number": 37,
-    "title": "아래 SQL의 실행 결과로 옳은 것은?",
+    "title": "아래 T 테이블에 SQL 을 실행했을 때, 'X 가 NULL 인 행의 ㉠, X 가 NULL 인 행의 ㉡, X 가 2 인 행의 ㉠' 을 차례대로 나열한 것은? (Oracle 기준)",
     "options": [
-      "Y",
-      "N",
-      "NULL",
-      "오류 발생"
+      "N, NULL, NULL",
+      "N, N, NULL",
+      "NULL, NULL, NULL",
+      "N, NULL, 2"
     ],
     "correctIndex": 0,
-    "explanation": "DECODE 는 일반 비교와 달리 NULL 과 NULL 을 같은 값으로 본다. 첫 인수 NULL 이 비교값 NULL 과 일치하므로 'Y' 를 반환한다(①). ② N 은 CASE WHEN NULL = NULL 처럼 비교했을 때의 결과다(UNKNOWN 이라 ELSE). ③ 일치하면 'Y' 를 돌려주므로 NULL 이 아니고, ④ 오류도 나지 않는다.",
+    "explanation": "DECODE 는 비교할 때 NULL 과 NULL 을 같은 값으로 본다. 그래서 X 가 NULL 인 행의 ㉠ 은 'N' 이다. 단순 CASE 는 'X = NULL' 로 비교하므로 NULL 행도 참이 되지 않고, 1 과도 같지 않으며 ELSE 가 없어 ㉡ 은 NULL 이다. NULL 을 잡으려면 CASE WHEN X IS NULL 처럼 써야 한다. X 가 2 인 행의 ㉠ 은 어느 비교값과도 같지 않고 기본값(마지막 인자)이 없으므로 NULL 이다. 정답은 ①번이다. ② 는 단순 CASE 도 NULL 끼리 같다고 본 것이고, ③ 은 DECODE 도 NULL 을 비교하지 못한다고 본 것, ④ 는 기본값이 없으면 원래 값을 돌려준다고 본 것이다.",
     "_source": "authored",
     "references": [
       {
+        "type": "table",
+        "caption": "T",
+        "headers": [
+          "X"
+        ],
+        "rows": [
+          [
+            "NULL"
+          ],
+          [
+            "1"
+          ],
+          [
+            "2"
+          ]
+        ]
+      },
+      {
         "type": "sql",
-        "code": "SELECT DECODE(NULL, NULL, 'Y', 'N') FROM DUAL;"
+        "code": "SELECT X,\n  DECODE(X, NULL, 'N',\n            1,    'one') AS ㉠,\n  CASE X WHEN NULL THEN 'N'\n         WHEN 1    THEN 'one'\n  END AS ㉡\nFROM T;"
       }
     ]
   },
@@ -1552,20 +1603,20 @@ export const ROUND_58: QuizQuestion[] = [
     "round": 58,
     "subject": "2과목",
     "number": 38,
-    "title": "아래 SQL의 실행 결과(COUNT(*) 값)로 옳은 것은?",
+    "title": "아래 SQL ㉠, ㉡, ㉢ 의 결과로 옳은 것은? (Oracle 기준, T 는 2행짜리 테이블)",
     "options": [
-      "0",
-      "1",
-      "2",
-      "3"
+      "2, 10, 4",
+      "1, 10, 4",
+      "2, 10, 6",
+      "2, 4, 6"
     ],
     "correctIndex": 2,
-    "explanation": "DUAL 은 한 행짜리 테이블이고, CONNECT BY LEVEL <= 2 는 LEVEL 1, 2 인 행을 계층 전개로 만들어 두 행을 생성한다. 따라서 COUNT(*) = 2 다(③). 이는 원하는 개수만큼 행을 만들 때 자주 쓰는 방법이다. ① 0·② 1 은 CONNECT BY 가 행을 늘리지 않는다고 본 값, ④ 3 은 LEVEL 을 0 부터 센다고 본 값이다.",
+    "explanation": "PRIOR 없이 CONNECT BY LEVEL <= n 을 쓰면 행마다 조건을 만족하는 모든 행을 자식으로 붙여 나간다. DUAL 은 1행이라 LEVEL 1, 2, … 가 하나씩 생겨 ㉠ 은 2행이고, ㉡ 은 1 + 2 + 3 + 4 = 10 이다. ㉢ 처럼 행이 2개인 테이블에 쓰면 LEVEL 1 에서 2행, 그 2행이 각각 2행씩을 자식으로 붙여 LEVEL 2 에서 4행이 생겨 모두 6행이다. 정답은 ③번이다. ①·② 는 행이 여러 개여도 LEVEL 마다 한 번씩만 늘어난다고 본 것, ④ 는 SUM 대신 행 수를 센 것이다. 숫자 행을 만들 때는 1행짜리 DUAL 로 쓰는 이유다.",
     "_source": "authored",
     "references": [
       {
         "type": "sql",
-        "code": "SELECT COUNT(*)\nFROM DUAL\nCONNECT BY LEVEL <= 2;"
+        "code": "-- ㉠\nSELECT COUNT(*) FROM DUAL\nCONNECT BY LEVEL <= 2;\n-- ㉡\nSELECT SUM(LEVEL) FROM DUAL\nCONNECT BY LEVEL <= 4;\n-- ㉢\nSELECT COUNT(*) FROM T\nCONNECT BY LEVEL <= 2;"
       }
     ]
   },
@@ -1576,20 +1627,60 @@ export const ROUND_58: QuizQuestion[] = [
     "round": 58,
     "subject": "2과목",
     "number": 39,
-    "title": "아래 SQL 수행 결과로 옳은 것은?",
+    "title": "아래 연락처 테이블에 대해 '이름이 나 인 행의 ㉠ 과 ㉡, 전체 행에 대한 ㉢ 과 ㉣' 을 차례대로 나열한 것은?",
     "options": [
-      "NULL",
-      "3",
-      "4",
-      "오류 발생"
+      "031-2, 031-2, 3, 1",
+      "031-2, NULL, 3, 1",
+      "031-2, NULL, 4, 1",
+      "031-2, NULL, 3, 3"
     ],
     "correctIndex": 1,
-    "explanation": "COALESCE 는 인수를 왼쪽부터 보며 처음 NULL 이 아닌 값을 반환한다. NULL, NULL 다음의 3 이 처음 NULL 이 아닌 값이므로 3 이다(②). 마지막 4 는 평가하지 않는다. ① 처음으로 NULL 이 아닌 값이 있으므로 NULL 이 아니고, ③ 4 는 마지막 값을 고른 결과, ④ 인수가 여러 개여도 오류는 나지 않는다.",
+    "explanation": "COALESCE 는 인자를 왼쪽부터 보며 처음으로 NULL 이 아닌 값을 돌려주고, 모두 NULL 이면 NULL 이다. 나 는 휴대폰·집이 NULL 이고 회사만 있어 ㉠ 은 '031-2' 다. ㉡ 은 회사를 인자로 넣지 않았으므로 휴대폰·집 모두 NULL 이라 NULL 이다. ㉢ 은 행마다 COALESCE 결과(010-1, 031-2, 02-3, NULL) 중 NULL 이 아닌 것만 세어 3 이다. 라 는 세 칼럼이 모두 NULL 이라 빠진다. ㉣ 의 NVL2(휴대폰, 1, NULL) 은 휴대폰이 있으면 1, 없으면 NULL 이라 가 한 명만 세어져 1 이다. 정답은 ②번이다. ① 은 ㉡ 에 없는 회사 칼럼까지 본 것이고, ③ 은 COUNT 가 NULL 결과도 센다고 본 것, ④ 는 NVL2 의 인자 순서를 반대로 읽어 휴대폰이 없는 3명을 센 것이다.",
     "_source": "authored",
     "references": [
       {
+        "type": "table",
+        "caption": "연락처",
+        "headers": [
+          "이름",
+          "휴대폰",
+          "집",
+          "회사"
+        ],
+        "rows": [
+          [
+            "가",
+            "010-1",
+            "NULL",
+            "02-1"
+          ],
+          [
+            "나",
+            "NULL",
+            "NULL",
+            "031-2"
+          ],
+          [
+            "다",
+            "NULL",
+            "02-3",
+            "NULL"
+          ],
+          [
+            "라",
+            "NULL",
+            "NULL",
+            "NULL"
+          ]
+        ]
+      },
+      {
         "type": "sql",
-        "code": "SELECT COALESCE(NULL, NULL, 3, 4) FROM DUAL;"
+        "code": "㉠ COALESCE(휴대폰, 집, 회사)\n㉡ COALESCE(휴대폰, 집)"
+      },
+      {
+        "type": "sql",
+        "code": "SELECT\n  COUNT(COALESCE(휴대폰, 집, 회사))\n    AS ㉢,\n  COUNT(NVL2(휴대폰, 1, NULL))\n    AS ㉣\nFROM 연락처;"
       }
     ]
   },
@@ -1600,20 +1691,20 @@ export const ROUND_58: QuizQuestion[] = [
     "round": 58,
     "subject": "2과목",
     "number": 40,
-    "title": "아래 SQL의 결과로 옳은 것은?",
+    "title": "아래 SQL 의 결과(A, B, C, D)로 옳은 것은? (Oracle 기준)",
     "options": [
-      "1",
-      "2",
-      "3",
-      "4"
+      "3, 6, 5, 2",
+      "3, 9, 6, 2",
+      "3, 6, 6, 2",
+      "3, 6, 6, 3"
     ],
     "correctIndex": 2,
-    "explanation": "REGEXP_INSTR 은 패턴이 처음 매칭되는 시작 위치를 1 부터 세어 반환한다. '123123123' 에서 3 번째 문자부터 '3', '1', '2' 가 이어져 '312' 와 일치하므로 3 을 반환한다. ① 1 은 패턴 대신 '123' 을 찾은 결과, ② 2 는 위치를 0 부터 센 결과, ④ 4 는 두 번째 '123' 의 시작 위치다.",
+    "explanation": "REGEXP_INSTR 은 패턴이 처음 나오는 위치를 돌려줘 '312' 는 3번째 글자에서 시작하므로 A 는 3 이다. 네 번째 인자는 몇 번째로 나온 것을 찾을지라, B 는 두 번째 '312' 의 시작 위치 6 이다. 다섯 번째 인자가 1 이면 시작 위치 대신 일치한 부분 바로 다음 위치를 돌려줘, 첫 '312'(3~5번째) 다음인 C 는 6 이다. REGEXP_COUNT 는 겹치지 않게 세어 3·6번째의 2번이다(9번째부터는 '3' 한 글자뿐). 정답은 ③번이다. ① 은 C 를 일치한 마지막 글자 위치로 본 것, ② 는 B 를 세 번째 위치로 본 것, ④ 는 끝의 '3' 까지 센 것이다.",
     "_source": "authored",
     "references": [
       {
         "type": "sql",
-        "code": "SELECT REGEXP_INSTR('123123123', '312')\nFROM DUAL;"
+        "code": "SELECT\n  REGEXP_INSTR('123123123', '312')\n    AS A,\n  REGEXP_INSTR('123123123', '312',\n               1, 2)      AS B,\n  REGEXP_INSTR('123123123', '312',\n               1, 1, 1)   AS C,\n  REGEXP_COUNT('123123123', '312')\n    AS D\nFROM DUAL;"
       }
     ]
   },
@@ -1668,7 +1759,7 @@ export const ROUND_58: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT E.EMPNO\nFROM   EMP E\nWHERE  E.SAL > (SELECT AVG(SAL) FROM EMP WHERE DEPTNO = E.DEPTNO);"
+        "code": "SELECT E.EMPNO\nFROM   EMP E\nWHERE  E.SAL >\n       (SELECT AVG(SAL) FROM EMP\n         WHERE DEPTNO = E.DEPTNO);"
       }
     ]
   },
@@ -1814,20 +1905,20 @@ export const ROUND_58: QuizQuestion[] = [
     "round": 58,
     "subject": "2과목",
     "number": 45,
-    "title": "아래 SQL의 수행 결과로 옳은 것은?",
+    "title": "아래 SQL 의 결과로 옳은 것은? (A, B, C, D 순서)",
     "options": [
-      "120",
-      "123",
-      "123.4",
-      "130"
+      "120, 123.4, 130, -100",
+      "120, 123.5, 130, -200",
+      "130, 123.4, 120, -100",
+      "120, 123.4, 120, -200"
     ],
     "correctIndex": 0,
-    "explanation": "TRUNC(숫자, -1) 은 소수점 왼쪽 첫째 자리(일의 자리)부터 버린다. 123.456 에서 일의 자리 3 과 소수 부분을 버려 120 이다(①). 123(②)은 TRUNC(123.456, 0), 123.4(③)는 TRUNC(123.456, 1), 130(④)은 십의 자리로 올림해야 나오는 값이며, ROUND(123.456, -1) 로 반올림해도 120 이다.",
+    "explanation": "두 번째 인자는 남길 자리를 뜻한다. 양수면 소수점 아래 그 자리까지, 음수면 정수부의 그 자리(-1 은 일의 자리, -2 는 십의 자리)까지 0 으로 만든다. A 는 일의 자리를 버려 120, B 는 소수 첫째 자리까지 남기고 버려 123.4 다. TRUNC 는 반올림하지 않으므로 123.5 가 되지 않는다. C 는 일의 자리 5 에서 반올림해 130 이다. D 는 십의 자리 아래를 버리는데, TRUNC 는 0 쪽으로 자르므로 음수도 -100 이 된다(-200 이 아님). 정답은 ①번이다. ② 는 B 를 반올림하고 D 를 FLOOR 처럼 내린 것이고, ③ 은 A 와 C 를 바꿔 본 것, ④ 는 ROUND 도 버린다고 보고 D 를 내린 것이다.",
     "_source": "authored",
     "references": [
       {
         "type": "sql",
-        "code": "SELECT TRUNC(123.456, -1) FROM DUAL;"
+        "code": "SELECT TRUNC(123.456, -1)  AS A,\n       TRUNC(123.456, 1)   AS B,\n       ROUND(125, -1)      AS C,\n       TRUNC(-123.456, -2) AS D\nFROM   DUAL;"
       }
     ]
   },
@@ -2020,7 +2111,7 @@ export const ROUND_58: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT *\nFROM  (SELECT 년도, 분기, 금액 FROM 판매)\nPIVOT (SUM(금액)\n       FOR 분기 IN ('Q1' AS Q1, 'Q2' AS Q2))\nORDER BY 년도;"
+        "code": "SELECT *\nFROM  (SELECT 년도, 분기, 금액\n         FROM 판매)\nPIVOT (SUM(금액)\n       FOR 분기 IN ('Q1' AS Q1,\n                   'Q2' AS Q2))\nORDER BY 년도;"
       }
     ]
   },
@@ -2080,7 +2171,7 @@ export const ROUND_58: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT *\nFROM   EMP\nWHERE  SAL > ALL (SELECT SAL FROM EMP WHERE DEPTNO = 10);"
+        "code": "SELECT *\nFROM   EMP\nWHERE  SAL > ALL (SELECT SAL FROM EMP\n                   WHERE DEPTNO = 10);"
       }
     ]
   }

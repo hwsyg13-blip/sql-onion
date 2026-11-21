@@ -5,34 +5,29 @@
     {
       "subject": "1과목",
       "number": 1,
-      "title": "데이터 모델링에 대한 설명 중 옳지 않은 것은?",
+      "title": "데이터 모델링 작업 사례와 그 특징의 연결로 틀린 것은?",
       "options": [
-        "현실 세계를 추상화·단순화하여 표현한다.",
-        "업무 규칙을 반영한다.",
-        "엔터티 간 관계를 정의한다.",
-        "반드시 모든 데이터를 정규화해야 한다."
+        "업무 담당자 설명 중 관리할 대상만 골라 엔터티로 그렸다 — 추상화",
+        "복잡한 업무를 약속된 표기법으로 그려 쉽게 이해하도록 했다 — 단순화",
+        "'고객' 이 부서마다 다른 뜻이라 정의를 하나로 정했다 — 명확화",
+        "조회가 잦은 집계 값도 중복이므로 어떤 경우에도 모델에 두지 않는다 — 정규화 원칙"
       ],
       "correctIndex": 3,
-      "explanation": "데이터 모델링은 현실 세계를 추상화·단순화해 표현하고(①), 업무 규칙을 반영하며(②), 엔터티 간 관계를 정의한다(③). 정규화는 중복을 줄이는 기본 원칙이지만, 조회 성능 등 업무 요건에 따라 반정규화를 하기도 하므로 '반드시 모든 데이터를 정규화해야 한다' 는 ④ 가 옳지 않다."
+      "explanation": "데이터 모델링의 특징은 추상화(현실에서 관리할 대상만 골라 일정한 형식으로 표현), 단순화(약속된 표기법으로 쉽게 이해하게 표현), 명확화(애매함을 없애고 뜻을 하나로 정함)다. ①·②·③ 은 각각 이에 맞다. 정규화는 중복을 줄이는 기본 원칙이지만, 조회 성능 등 업무 요건에 따라 집계 값을 중복해 두는 반정규화도 모델링에서 결정한다. '어떤 경우에도 두지 않는다' 는 ④ 가 틀렸다. 정답은 ④번이다.",
+      "references": []
     },
     {
       "subject": "1과목",
       "number": 2,
-      "title": "아래 설명에 해당하는 스키마 구조는?",
+      "title": "아래 변경 중 3단계 스키마 구조에서 개념 스키마를 고쳐야 하는 것은?",
       "options": [
-        "외부 스키마",
-        "개념 스키마",
-        "내부 스키마",
-        "논리 스키마"
+        "영업팀만 쓰는, 고객 이름과 연락처만 보이는 뷰를 새로 만든다.",
+        "회사 전체가 쓰는 고객 테이블에 '탈퇴일' 칼럼을 추가한다.",
+        "주문 테이블 조회가 느려 주문일 칼럼에 인덱스를 만든다.",
+        "데이터 파일을 더 빠른 디스크로 옮긴다."
       ],
       "correctIndex": 1,
-      "explanation": "데이터베이스의 3단계 스키마는 외부(①, 사용자별 뷰), 개념(조직 전체 통합 구조), 내부(③, 물리 저장 구조)로 나뉜다. 설명이 \"조직 전체 관점의 통합 표현\"이라고 했으므로 개념 스키마에 해당해 정답은 ②번이다. ④ 논리 스키마는 3단계 스키마 구조의 정식 명칭이 아니다.",
-      "references": [
-        {
-          "type": "text",
-          "content": "모든 사용자 관점을 통합한 조직 전체 관점의 통합 표현이며, DB 에 저장되는 데이터와 그들 간의 관계를 표현한다."
-        }
-      ]
+      "explanation": "개념 스키마는 모든 사용자 관점을 통합한 조직 전체의 데이터 구조로, 어떤 테이블에 어떤 칼럼이 있고 서로 어떻게 연결되는지를 정의한다. 전사 공용 테이블에 칼럼을 더하는 ② 가 여기에 해당한다. 정답은 ②번이다. ① 처럼 특정 사용자에게만 보이는 뷰는 외부 스키마, ③ 의 인덱스와 ④ 의 저장 위치처럼 물리적으로 어떻게 저장하는지는 내부 스키마의 일이다."
     },
     {
       "subject": "1과목",
@@ -75,15 +70,21 @@
     {
       "subject": "1과목",
       "number": 5,
-      "title": "데이터 조회 성능 향상을 위해 원래 속성의 값을 계산하여 저장한 속성은?",
+      "title": "주문 엔터티의 속성 중 조회 성능을 위해 다른 값으로 계산해 저장해 둔 파생 속성은?",
       "options": [
-        "파생속성(Derived Attribute)",
-        "기본속성(Basic Attribute)",
-        "설계속성(Designed Attribute)",
-        "PK속성"
+        "총주문금액",
+        "주문일자",
+        "주문번호",
+        "배송지주소"
       ],
       "correctIndex": 0,
-      "explanation": "다른 속성에서 계산해 만든 속성이 파생속성이다. 매번 계산하지 않고 미리 계산값을 저장해 두면 조회 성능이 좋아지지만, 원본 값이 바뀌면 함께 갱신해야 한다는 부담이 따른다. 정답은 ①번이다. ② 기본속성은 업무에서 바로 뽑아낸 원래 속성, ③ 설계속성은 코드·일련번호처럼 설계하면서 새로 만든 속성이고, ④ PK속성은 구성 방식(PK·FK·일반) 기준의 분류라 계산값과 관계없다."
+      "explanation": "파생 속성은 다른 속성으로 계산하거나 변형해 얻는 값을, 조회를 빠르게 하려고 따로 저장해 둔 속성이다. 총주문금액은 주문상세의 금액을 더한 값이라 파생 속성이다. 정답은 ①번이다. 주문일자·배송지주소는 업무에서 바로 얻는 기본 속성이고, 주문번호는 업무 규칙에 따라 새로 만든 설계 속성이다. 파생 속성은 원래 값이 바뀔 때마다 함께 고쳐야 하므로 꼭 필요한 것만 둔다.",
+      "references": [
+        {
+          "type": "text",
+          "content": "· 주문번호: 시스템이 날짜 + 일련번호로 붙인다.\n· 주문일자: 고객이 주문한 날이다.\n· 배송지주소: 고객이 주문서에 적은 주소다.\n· 총주문금액: 주문상세의 수량과 단가로 정해지며, 목록 화면을 빠르게 보여 주려고 주문에도 저장해 둔다."
+        }
+      ]
     },
     {
       "subject": "1과목",
@@ -101,7 +102,7 @@
         {
           "type": "erd",
           "caption": "부서·사원·교육이력·구매신청 ERD (식별자 위치 ①②③④)",
-          "mermaid": "erDiagram\n    부서 ||--o{ 사원 : \"소속\"\n    사원 ||--o{ 교육이력 : \"이수\"\n    사원 ||--o{ 구매신청 : \"신청\"\n    부서 {\n        string 부서번호 PK \"①\"\n    }\n    사원 {\n        string 사원번호 PK\n        string 부서번호 FK\n        string 주민등록번호 \"② AK1_1\"\n    }\n    교육이력 {\n        string 사원번호 PK,FK \"③\"\n        string 수강일자 PK \"③\"\n    }\n    구매신청 {\n        string 주문번호 PK \"④\"\n        string 사원번호 FK\n        string 주문일자\n    }"
+          "mermaid": "erDiagram\n    부서 ||..o{ 사원 : \"소속\"\n    사원 ||--o{ 교육이력 : \"이수\"\n    사원 ||..o{ 구매신청 : \"신청\"\n    부서 {\n        string 부서번호 PK \"①\"\n    }\n    사원 {\n        string 사원번호 PK\n        string 부서번호 FK\n        string 주민등록번호 \"② AK1_1\"\n    }\n    교육이력 {\n        string 사원번호 PK,FK \"③\"\n        string 수강일자 PK \"③\"\n    }\n    구매신청 {\n        string 주문번호 PK \"④\"\n        string 사원번호 FK\n        string 주문일자\n    }"
         }
       ]
     },
@@ -195,46 +196,76 @@
         {
           "type": "erd",
           "caption": "부서·사원·프로젝트·프로젝트참여 ERD",
-          "mermaid": "erDiagram\n    부서 |o--o{ 사원 : \"소속\"\n    부서 ||--o{ 프로젝트 : \"주관\"\n    사원 ||--o{ 프로젝트참여 : \"참여\"\n    프로젝트 ||--|{ 프로젝트참여 : \"배정\"\n    부서 {\n        string 부서코드 PK\n        string 부서명\n    }\n    사원 {\n        string 사원번호 PK\n        string 사원명\n        string 부서코드 FK\n    }\n    프로젝트 {\n        string 프로젝트번호 PK\n        string 프로젝트명\n        string 주관부서코드 FK\n    }\n    프로젝트참여 {\n        string 사원번호 PK,FK\n        string 프로젝트번호 PK,FK\n        string 역할\n    }"
+          "mermaid": "erDiagram\n    부서 |o..o{ 사원 : \"소속\"\n    부서 ||..o{ 프로젝트 : \"주관\"\n    사원 ||--o{ 프로젝트참여 : \"참여\"\n    프로젝트 ||--|{ 프로젝트참여 : \"배정\"\n    부서 {\n        string 부서코드 PK\n        string 부서명\n    }\n    사원 {\n        string 사원번호 PK\n        string 사원명\n        string 부서코드 FK\n    }\n    프로젝트 {\n        string 프로젝트번호 PK\n        string 프로젝트명\n        string 주관부서코드 FK\n    }\n    프로젝트참여 {\n        string 사원번호 PK,FK\n        string 프로젝트번호 PK,FK\n        string 역할\n    }"
         }
       ]
     },
     {
       "subject": "1과목",
       "number": 10,
-      "title": "아래 ERD 에 대한 설명 중 옳지 않은 것은?",
+      "title": "아래 ERD 를 테이블로 구현할 때의 설명으로 옳지 않은 것은?",
       "options": [
-        "계정그룹은 여러 계정을 가질 수 있다.",
-        "계정은 반드시 계정그룹 하나에 속해야 한다.",
-        "계정그룹 없이도 계정이 존재할 수 있다.",
-        "계정그룹의 주식별자는 계정 수와 무관하다."
+        "계정그룹 하나는 계정을 여러 개 가질 수도, 하나도 갖지 않을 수도 있다.",
+        "계정.그룹ID 는 NOT NULL 외래키로 만들어야 한다.",
+        "그룹이 없는 계정까지 그룹명과 함께 보려면 계정 기준 LEFT OUTER JOIN 이 필요하다.",
+        "그룹ID 를 비운 채 계정을 INSERT 해도 외래키 오류가 나지 않는다."
       ],
       "correctIndex": 1,
-      "explanation": "계정그룹 쪽 끝의 |o 는 계정 한 건에 계정그룹이 0개 또는 1개라는 뜻이다. 계정은 계정그룹에 속하지 않을 수도 있으므로, 반드시 하나에 속해야 한다는 ② 가 옳지 않다. ③ 은 같은 내용을 옳게 말한 것이다. ① 계정 쪽 끝이 o{ 라 계정그룹 하나가 여러 계정을 가질 수 있고, ④ 계정그룹을 구분하는 주식별자는 계정이 몇 개인지와 상관없이 정해진다.",
+      "explanation": "계정그룹 쪽 끝의 |o 는 계정 한 건에 계정그룹이 0개 또는 1개라는 뜻이다. 계정은 그룹 없이도 있을 수 있으므로 계정.그룹ID 는 NULL 을 허용해야 한다. NOT NULL 로 만들라는 ② 가 옳지 않다. 정답은 ②번이다. ① 계정 쪽 끝의 o{ 는 0개 이상이다. ③ INNER JOIN 은 그룹ID 가 NULL 인 계정을 빼므로 계정 기준 LEFT OUTER JOIN 을 써야 한다. ④ 외래키 칼럼이 NULL 이면 참조 검사를 하지 않아 오류가 나지 않는다.",
       "references": [
         {
           "type": "erd",
-          "caption": "계정-계정그룹 ERD",
-          "mermaid": "erDiagram\n    계정그룹 |o--o{ 계정 : \"포함\""
+          "caption": "계정그룹-계정 ERD",
+          "mermaid": "erDiagram\n    계정그룹 |o..o{ 계정 : \"포함\"\n    계정그룹 {\n        string 그룹ID PK\n        string 그룹명\n    }\n    계정 {\n        string 계정ID PK\n        string 그룹ID FK\n    }"
         }
       ]
     },
     {
       "subject": "2과목",
       "number": 11,
-      "title": "아래 WHERE 조건의 의미로 옳은 것은?",
+      "title": "아래 선수 테이블에서 WHERE 조건 ㉠~㉣ 을 각각 적용했을 때 조회되는 행 수를 차례대로 나열한 것은? (Oracle 기준)",
       "options": [
-        "키가 185 미만인 선수",
-        "키가 185 초과인 선수",
-        "키가 185 이하인 선수",
-        "키가 185 이상인 선수"
+        "2, 3, 5, 3",
+        "2, 3, 4, 3",
+        "2, 2, 5, 2",
+        "2, 2, 4, 3"
       ],
       "correctIndex": 3,
-      "explanation": "`>=`는 \"크거나 같다\"는 의미로 한국어로는 \"이상\"에 해당한다. 따라서 키 185도 포함한다. `>` 만 있으면 \"초과\"(②)라 185는 빠진다. 정답은 ④번이다. ① 미만은 `<`, ③ 이하는 `<=` 에 해당한다.",
+      "explanation": "㉠ 은 185 이상이라 190, 185 의 2행이다. ㉡ 은 '185 미만이 아니다' 이지만, 키가 NULL 인 라 는 키 < 185 가 UNKNOWN 이고 NOT UNKNOWN 도 UNKNOWN 이라 빠진다. 그래서 ㉠ 과 같은 2행이다. ㉢ 은 모든 값이 둘 중 하나에는 걸릴 것 같지만, NULL 은 두 비교가 모두 UNKNOWN 이라 빠지고 4행이다. ㉣ 은 NULL 을 0 으로 바꾼 뒤 비교하므로 라 가 포함되어 180, 0(라), 175 의 3행이다. 정답은 ④번이다. ① 과 ② 는 NOT 을 붙이면 NULL 행도 돌아온다고 본 것이고, ① 과 ③ 은 ㉢ 이 모든 행을 낸다고 본 것이다. ③ 은 ㉣ 에서도 NULL 이 빠진다고 보았다.",
       "references": [
         {
-          "type": "sql",
-          "code": "SELECT 선수이름 FROM 선수 WHERE 키 >= 185;"
+          "type": "table",
+          "caption": "선수",
+          "headers": [
+            "이름",
+            "키"
+          ],
+          "rows": [
+            [
+              "가",
+              "190"
+            ],
+            [
+              "나",
+              "185"
+            ],
+            [
+              "다",
+              "180"
+            ],
+            [
+              "라",
+              "NULL"
+            ],
+            [
+              "마",
+              "175"
+            ]
+          ]
+        },
+        {
+          "type": "text",
+          "content": "㉠ WHERE 키 >= 185\n㉡ WHERE NOT (키 < 185)\n㉢ WHERE 키 >= 185 OR 키 < 185\n㉣ WHERE NVL(키, 0) < 185"
         }
       ]
     },
@@ -401,7 +432,7 @@
         },
         {
           "type": "sql",
-          "code": "SELECT Y.*\nFROM   (SELECT 사원ID, MAX(연봉) OVER (PARTITION BY 부서ID) AS 최고연봉\n        FROM   사원) X,\n       사원 Y\nWHERE  X.사원ID = Y.사원ID\nAND    X.최고연봉 = Y.연봉;"
+          "code": "SELECT Y.*\nFROM   (SELECT 사원ID,\n               MAX(연봉) OVER (\n                 PARTITION BY 부서ID)\n               AS 최고연봉\n        FROM   사원) X,\n       사원 Y\nWHERE  X.사원ID = Y.사원ID\nAND    X.최고연봉 = Y.연봉;"
         }
       ],
       "optionReferences": [
@@ -569,7 +600,7 @@
         },
         {
           "type": "sql",
-          "code": "SELECT 상품분류코드, AVG(상품가격) AS 상품가격,\n       COUNT(*) OVER(ORDER BY AVG(상품가격)\n                     RANGE BETWEEN 10000 PRECEDING AND 10000 FOLLOWING) AS 유사개수\nFROM   상품\nGROUP BY 상품분류코드;"
+          "code": "SELECT 상품분류코드,\n       AVG(상품가격) AS 상품가격,\n       COUNT(*) OVER(\n         ORDER BY AVG(상품가격)\n         RANGE BETWEEN 10000 PRECEDING\n               AND 10000 FOLLOWING)\n       AS 유사개수\nFROM   상품\nGROUP BY 상품분류코드;"
         }
       ]
     },
@@ -614,7 +645,7 @@
         },
         {
           "type": "sql",
-          "code": "SELECT ID, AMT\nFROM   TBL\nORDER BY (CASE WHEN ID = 'A' THEN 1 ELSE 2 END), AMT DESC;"
+          "code": "SELECT ID, AMT\nFROM   TBL\nORDER BY (CASE WHEN ID = 'A' THEN 1\n               ELSE 2 END),\n         AMT DESC;"
         }
       ]
     },
@@ -714,19 +745,19 @@
     {
       "subject": "2과목",
       "number": 20,
-      "title": "아래 SQL 의 결과 월 이름(영문) 은?",
+      "title": "아래 SQL 의 결과(A, B, C, D)로 옳은 것은? (Oracle 기준, 날짜 언어는 영어, 2023-06-10 은 토요일)",
       "options": [
-        "MARCH",
-        "APRIL",
-        "MAY",
-        "JUNE"
+        "6, JUNE, SAT, 4",
+        "06, JUN, SA, 4",
+        "06, JUN, SAT, 4",
+        "06, JUN, SAT, 9"
       ],
       "correctIndex": 3,
-      "explanation": "`TO_DATE`로 문자열을 날짜로 변환한 뒤 `TO_CHAR(..., 'MONTH')`로 월 이름을 영문으로 추출한다. 6월에 해당하는 영문 월 이름은 JUNE이므로 정답은 ④번이다. ① MARCH·② APRIL·③ MAY 는 각각 3·4·5월이다. 참고로 Oracle 의 'MONTH' 형식은 가장 긴 월 이름(SEPTEMBER, 9자) 길이에 맞춰 뒤를 공백으로 채운다.",
+      "explanation": "MM 은 두 자리 월이라 '06', MON 은 세 글자 약칭이라 'JUN', DY 는 요일 약칭이라 'SAT' 다. MONTH 는 월 이름 전체를 쓰되, 가장 긴 월 이름(SEPTEMBER, 9글자)에 맞춰 뒤를 공백으로 채운다. 그래서 'JUNE' 뒤에 공백 5개가 붙어 LENGTH 는 9 다. 공백 없이 쓰려면 'FMMONTH' 처럼 FM 을 붙인다. 정답은 ④번이다. ① 은 MM 을 한 자리로, MON 을 전체 이름으로 본 것, ② 는 DY 를 두 글자로 본 것, ③ 은 MONTH 의 공백 채우기를 놓친 것이다.",
       "references": [
         {
           "type": "sql",
-          "code": "SELECT TO_CHAR(TO_DATE('2023-06-10','YYYY-MM-DD'), 'MONTH') FROM DUAL;"
+          "code": "SELECT\n  TO_CHAR(D, 'MM')          AS A,\n  TO_CHAR(D, 'MON')         AS B,\n  TO_CHAR(D, 'DY')          AS C,\n  LENGTH(TO_CHAR(D, 'MONTH')) AS D\nFROM (SELECT TO_DATE('2023-06-10',\n        'YYYY-MM-DD') AS D FROM DUAL);"
         }
       ]
     },
@@ -811,22 +842,60 @@
         },
         {
           "type": "sql",
-          "code": "SELECT SAL,\n       RANK()       OVER (ORDER BY SAL DESC) AS RNK,\n       DENSE_RANK() OVER (ORDER BY SAL DESC) AS D_RNK,\n       FIRST_VALUE(SAL) OVER (ORDER BY SAL DESC) AS FV\nFROM   사원;"
+          "code": "SELECT SAL,\n       RANK() OVER\n         (ORDER BY SAL DESC) AS RNK,\n       DENSE_RANK() OVER\n         (ORDER BY SAL DESC) AS D_RNK,\n       FIRST_VALUE(SAL) OVER\n         (ORDER BY SAL DESC) AS FV\nFROM   사원;"
         }
       ]
     },
     {
       "subject": "2과목",
       "number": 23,
-      "title": "트랜잭션의 ACID 특성 중 '다른 트랜잭션의 영향을 받지 않는다' 는 특성은?",
+      "title": "잔액이 100 으로 COMMIT 된 계좌에 두 트랜잭션이 아래 순서로 작업한다. T1 이 READ COMMITTED 일 때 ③·⑤ 의 조회 값과, T1 이 SERIALIZABLE 일 때 ⑤ 의 조회 값을 차례대로 나열한 것은? (Oracle 기준)",
       "options": [
-        "원자성",
-        "일관성",
-        "격리성(고립성)",
-        "지속성"
+        "50, 50, 50",
+        "100, 50, 50",
+        "100, 50, 100",
+        "50, 50, 100"
       ],
       "correctIndex": 2,
-      "explanation": "트랜잭션 ACID 중 격리성(Isolation)은 동시에 실행되는 다른 트랜잭션의 중간 결과로부터 영향을 받지 않고 마치 혼자 실행되는 것처럼 동작하도록 보장하는 성질이다. 정답은 ③번이다. ① 원자성은 전부 수행되거나 전부 취소되는 성질, ② 일관성은 실행 전후 DB 가 일관된 상태를 유지하는 성질, ④ 지속성은 COMMIT 된 결과가 영구히 남는 성질이다."
+      "explanation": "Oracle 은 COMMIT 되지 않은 변경을 다른 트랜잭션에 보여 주지 않는다(Dirty Read 없음). 그래서 ③ 은 어느 격리 수준에서든 100 이다. READ COMMITTED 는 문장을 실행하는 시점에 COMMIT 된 값을 읽는다. ④ 에서 T2 가 COMMIT 했으므로 ⑤ 는 50 이다. 같은 트랜잭션 안에서 같은 값을 두 번 읽었는데 결과가 달라지는 Non-Repeatable Read 다. SERIALIZABLE 은 트랜잭션이 시작된 시점(첫 조회)의 데이터를 끝까지 보므로 ⑤ 도 100 이다. 고립성(Isolation)을 가장 강하게 지키는 수준이다. 정답은 ③번이다. ① 과 ④ 는 COMMIT 전 값을 읽는 Dirty Read 가 일어난다고 본 것이고, ② 는 SERIALIZABLE 도 READ COMMITTED 처럼 새로 COMMIT 된 값을 읽는다고 본 것이다.",
+      "references": [
+        {
+          "type": "table",
+          "caption": "실행 순서",
+          "headers": [
+            "순서",
+            "T1",
+            "T2"
+          ],
+          "rows": [
+            [
+              "①",
+              "조회 → 100",
+              ""
+            ],
+            [
+              "②",
+              "",
+              "50 으로 UPDATE"
+            ],
+            [
+              "③",
+              "조회",
+              ""
+            ],
+            [
+              "④",
+              "",
+              "COMMIT"
+            ],
+            [
+              "⑤",
+              "조회",
+              ""
+            ]
+          ]
+        }
+      ]
     },
     {
       "subject": "2과목",
@@ -888,15 +957,21 @@
     {
       "subject": "2과목",
       "number": 25,
-      "title": "기본키 컬럼이 충족해야 하는 제약 조건 조합은?",
+      "title": "아래 테이블에 INSERT ㉠~㉤ 을 차례로 실행했을 때 성공하는 문장만 모두 고른 것은? (Oracle 기준)",
       "options": [
-        "NULL 허용 + UNIQUE",
-        "NULL 허용 + NOT NULL",
-        "NOT NULL 단독",
-        "NOT NULL + UNIQUE"
+        "㉠, ㉢",
+        "㉠, ㉡, ㉢, ㉣",
+        "㉠, ㉡, ㉢",
+        "㉠, ㉢, ㉣"
       ],
       "correctIndex": 3,
-      "explanation": "기본키는 행을 유일하게 식별해야 하므로 비어 있어도 안 되고(NOT NULL) 중복도 허용되지 않아야 한다(UNIQUE). 두 가지를 모두 만족시키는 ④번이 정답이다. ① 은 NULL 을 허용해 값이 없는 행을 식별할 수 없고, ② 는 NULL 허용과 NOT NULL 이 서로 모순되며, ③ NOT NULL 만으로는 중복 값을 막지 못한다."
+      "explanation": "기본키는 UNIQUE 와 NOT NULL 을 함께 가지므로 ㉤ 처럼 ID 가 NULL 이면 실패한다. Oracle 의 복합 UNIQUE 는 칼럼이 모두 NULL 인 행은 검사하지 않지만, 일부만 NULL 이면 NULL 이 아닌 칼럼 값이 같은 행을 중복으로 본다. ㉠ (1, NULL) 은 처음이라 성공하고, ㉡ (1, NULL) 은 X 가 같고 Y 가 둘 다 NULL 이라 중복으로 실패한다. ㉢ 과 ㉣ 은 X, Y 가 모두 NULL 이라 몇 번이든 들어간다. 정답은 ④번이다. ① 은 모두 NULL 인 행도 한 번만 허용된다고 본 것이고, ② 는 NULL 이 하나라도 있으면 중복 검사를 하지 않는다고 본 것, ③ 은 거꾸로 일부 NULL 은 검사하지 않고 모두 NULL 인 행은 한 번만 허용한다고 본 것이다. 참고로 PostgreSQL 은 NULL 이 섞인 행을 서로 다른 값으로 보아 ㉡ 도 성공한다.",
+      "references": [
+        {
+          "type": "sql",
+          "code": "CREATE TABLE T (\n  ID NUMBER PRIMARY KEY,\n  X  NUMBER,\n  Y  NUMBER,\n  CONSTRAINT UQ UNIQUE (X, Y)\n);\n\n-- ㉠\nINSERT INTO T VALUES (1, 1, NULL);\n-- ㉡\nINSERT INTO T VALUES (2, 1, NULL);\n-- ㉢\nINSERT INTO T VALUES (3, NULL, NULL);\n-- ㉣\nINSERT INTO T VALUES (4, NULL, NULL);\n-- ㉤\nINSERT INTO T VALUES (NULL, 2, 2);"
+        }
+      ]
     },
     {
       "subject": "2과목",
@@ -951,22 +1026,22 @@
         },
         {
           "type": "sql",
-          "code": "SELECT ID, SAL,\n       NTILE(3) OVER (ORDER BY SAL DESC) AS GRP\nFROM   T\nORDER BY SAL DESC;"
+          "code": "SELECT ID, SAL,\n       NTILE(3) OVER (\n         ORDER BY SAL DESC) AS GRP\nFROM   T\nORDER BY SAL DESC;"
         }
       ]
     },
     {
       "subject": "2과목",
       "number": 27,
-      "title": "아래 SQL 들 중 결과 건수가 나머지와 다른 것은? (테이블 T 에는 충분한 행이 존재한다고 가정)",
+      "title": "아래 T 테이블에 대한 SQL 중 결과 건수가 나머지와 다른 것은? (Oracle 기준, 표의 순서대로 읽힌다고 가정)",
       "options": [
-        "SELECT * FROM T WHERE ROWNUM = 2;",
-        "SELECT * FROM T WHERE ROWNUM <= 2;",
-        "SELECT * FROM T WHERE ROWNUM IN (1, 2);",
-        "SELECT * FROM T WHERE ROWNUM = 1 OR ROWNUM = 2;"
+        "SELECT * FROM T WHERE ROWNUM BETWEEN 2 AND 3;",
+        "SELECT * FROM T WHERE ROWNUM < 3;",
+        "SELECT * FROM (SELECT ROWNUM RN, ID FROM T) WHERE RN BETWEEN 2 AND 3;",
+        "SELECT * FROM T WHERE ID > 3 AND ROWNUM <= 2;"
       ],
       "correctIndex": 0,
-      "explanation": "Oracle 의 ROWNUM 은 조건을 통과한 행에 1 부터 차례로 번호를 붙인다. ROWNUM = 2 는 첫 행이 1 번을 받는 순간 조건에 맞지 않아 버려지고, 다음 행도 다시 1 번을 받아 버려지므로 결과가 0 건이다. ②③④ 는 모두 ROWNUM 1 과 2 를 받아들이는 조건이라 2 건이 나온다(어떤 2 건인지는 정렬이 없어 정해지지 않는다). 결과 건수가 다른 것은 ① 이다.",
+      "explanation": "ROWNUM 은 WHERE 조건을 통과한 행에 1부터 차례로 붙는다. ① 은 첫 행이 ROWNUM 1 이라 BETWEEN 2 AND 3 을 통과하지 못하고, 그 다음 행도 다시 1 이 되어 끝까지 한 행도 나오지 않는다(0건). 정답은 ①번이다. ② 는 ROWNUM 1, 2 두 건이다. ③ 은 인라인 뷰에서 ROWNUM 을 RN 이라는 일반 칼럼으로 먼저 굳혀 두었으므로 RN 2, 3 두 건이 나온다. ④ 는 ID > 3 을 통과한 4, 5 에 ROWNUM 1, 2 가 붙어 두 건이다.",
       "references": [
         {
           "type": "table",
@@ -1041,39 +1116,54 @@
         },
         {
           "type": "sql",
-          "code": "CREATE TABLE 품목 (품목ID VARCHAR(3), 단가 NUMBER);\n-- 초기 데이터: 001 1000, 002 2000, 003 1000, 004 2000\n\nBEGIN TRANSACTION;\nINSERT INTO 품목 VALUES ('005', 2000);\nCOMMIT;\n\nBEGIN TRANSACTION;\nDELETE FROM 품목 WHERE 품목ID = '002';\nBEGIN TRANSACTION;\nUPDATE 품목 SET 단가 = 2000 WHERE 단가 = 1000;\nROLLBACK;\n\nSELECT COUNT(품목ID) FROM 품목 WHERE 단가 = 2000;"
+          "code": "CREATE TABLE 품목\n  (품목ID VARCHAR(3), 단가 NUMBER);\n-- 초기 데이터: 001 1000, 002 2000,\n--             003 1000, 004 2000\n\nBEGIN TRANSACTION;\nINSERT INTO 품목 VALUES ('005', 2000);\nCOMMIT;\n\nBEGIN TRANSACTION;\nDELETE FROM 품목 WHERE 품목ID = '002';\nBEGIN TRANSACTION;\nUPDATE 품목 SET 단가 = 2000\nWHERE 단가 = 1000;\nROLLBACK;\n\nSELECT COUNT(품목ID) FROM 품목\nWHERE 단가 = 2000;"
         }
       ]
     },
     {
       "subject": "2과목",
       "number": 29,
-      "title": "ROLLUP(A, B) 수행 결과로 옳은 것은?",
+      "title": "아래 ERD 와 데이터에서 ㉠, ㉡ 의 결과 행 수와 ㉡ 에서 (부산, D) 행의 합계로 옳은 것은? (순서대로)",
       "options": [
-        "(A, B) 세부 집계만 반환",
-        "(A, B), (A), () 총계 포함",
-        "(A, B), (B), () 총계 포함",
-        "(A, B), (A), (B), () 모든 조합"
+        "6, 6, 0",
+        "6, 7, NULL",
+        "7, 7, NULL",
+        "6, 7, 0"
       ],
       "correctIndex": 1,
-      "explanation": "ROLLUP(A, B)는 오른쪽 컬럼부터 하나씩 빼 가며 (A, B), (A), () 세 가지 수준의 집계만 반환한다. (B) 단독 그룹은 만들지 않는다(③). CUBE(A, B)가 (A, B), (A), (B), () 모든 조합(④)을 만드는 것과 구분해야 한다. 정답은 ②번이다. ① 은 소계·총계가 없는 GROUP BY A, B 의 결과다."
+      "explanation": "ROLLUP(지역명, 매장명) 은 매장별 행, 지역별 소계, 전체 합계를 만든다. ㉠ 은 INNER JOIN 이라 매출이 없는 D 가 빠져 매장 A·B·C 3행 + 지역 2행 + 합계 1행 = 6행이다. ㉡ 은 매출을 LEFT JOIN 해 D 도 남으므로 매장 4행 + 지역 2행 + 합계 1행 = 7행이다. D 의 금액은 모두 NULL 이라 SUM 도 0 이 아니라 NULL 이다. 정답은 ②번이다. ERD 에서 매출 쪽이 0건 이상(동그라미)이라 매출 없는 매장이 있을 수 있고, 조인 방식에 따라 집계 결과가 달라진다. ① 은 LEFT JOIN 도 D 를 버린다고 본 것, ③ 은 INNER JOIN 에도 D 가 남는다고 본 것, ④ 는 NULL 만 더한 SUM 을 0 으로 본 것이다.",
+      "references": [
+        {
+          "type": "erd",
+          "caption": "지역·매장·매출 ERD (매출 쪽 0건 이상)",
+          "mermaid": "erDiagram\n    지역 ||..|{ 매장 : \"포함\"\n    매장 ||..o{ 매출 : \"발생\"\n    지역 {\n        int 지역ID PK\n        string 지역명\n    }\n    매장 {\n        int 매장ID PK\n        string 매장명\n        int 지역ID FK\n    }\n    매출 {\n        int 매출ID PK\n        int 매장ID FK\n        int 금액\n    }"
+        },
+        {
+          "type": "text",
+          "content": "지역: (1, 서울), (2, 부산)\n매장: (A, 서울), (B, 서울), (C, 부산), (D, 부산)\n매출: A 10, A 20, B 30, C 40 (D 는 매출 없음)"
+        },
+        {
+          "type": "sql",
+          "code": "-- ㉠\nSELECT R.지역명, M.매장명, SUM(S.금액)\nFROM 지역 R\nJOIN 매장 M ON R.지역ID = M.지역ID\nJOIN 매출 S ON S.매장ID = M.매장ID\nGROUP BY ROLLUP(R.지역명, M.매장명);\n-- ㉡ 매출 쪽만 LEFT JOIN 으로 바꿈\nSELECT R.지역명, M.매장명, SUM(S.금액)\nFROM 지역 R\nJOIN 매장 M ON R.지역ID = M.지역ID\nLEFT JOIN 매출 S\n  ON S.매장ID = M.매장ID\nGROUP BY ROLLUP(R.지역명, M.매장명);"
+        }
+      ]
     },
     {
       "subject": "2과목",
       "number": 30,
-      "title": "아래 SQL 의 결과로 옳은 것은?",
+      "title": "아래 SQL ㉠, ㉡, ㉢ 의 결과(COUNT(*))를 차례대로 나열한 것은? (Oracle 기준, T 는 ID 1, 2 의 두 행을 가진 테이블)",
       "options": [
-        "0",
-        "1",
-        "2",
-        "NULL"
+        "3, 4, 2",
+        "3, 6, 2",
+        "3, 6, 4",
+        "2, 4, 4"
       ],
       "correctIndex": 2,
-      "explanation": "`CONNECT BY LEVEL <= 2`는 LEVEL이 1, 2가 되는 두 행을 가상으로 만들어내는 패턴이다. DUAL은 한 행짜리 더미 테이블이지만 CONNECT BY와 결합하면 LEVEL 조건을 만족할 때까지 행이 복제된다. 결과적으로 LEVEL=1, LEVEL=2의 두 행이 만들어지고 COUNT(*)는 2를 반환한다. 정답은 ③번이다. ② 1 은 DUAL 의 한 행만 센 값이고, COUNT(*) 는 행이 없어도 0 을 돌려줄 뿐 ④ NULL 이 되지 않는다.",
+      "explanation": "PRIOR 없이 CONNECT BY LEVEL <= n 만 쓰면 '앞 단계의 모든 행' 과 '테이블의 모든 행' 이 부모·자식으로 연결된다. ㉠ DUAL 은 한 행이라 단계마다 한 행씩 이어져 LEVEL 1, 2, 3 의 3행이 된다. 숫자 1~n 을 만드는 데 자주 쓰는 방법이다. ㉡ 은 T 가 두 행이다. LEVEL 1 에 2행이 있고, LEVEL 2 에서는 그 2행 각각에 T 의 2행이 모두 자식으로 붙어 2 × 2 = 4행이 생긴다. 합하면 6행이다. ㉢ 은 계층을 만든 뒤 WHERE 로 LEVEL 2 만 남기므로 4행이다. 정답은 ③번이다. ① 은 ㉡ 을 행 수 × 단계 수로 계산한 것이고, ② 는 ㉢ 에서 LEVEL 2 도 테이블 행 수만큼만 생긴다고 본 것, ④ 는 ㉠ 이 DUAL 한 행에서 LEVEL 1 을 빼고 센 것이다.",
       "references": [
         {
           "type": "sql",
-          "code": "SELECT COUNT(*) FROM DUAL CONNECT BY LEVEL <= 2;"
+          "code": "-- ㉠\nSELECT COUNT(*) FROM DUAL\nCONNECT BY LEVEL <= 3;\n-- ㉡\nSELECT COUNT(*) FROM T\nCONNECT BY LEVEL <= 2;\n-- ㉢\nSELECT COUNT(*) FROM T\nWHERE LEVEL = 2\nCONNECT BY LEVEL <= 2;"
         }
       ]
     },
@@ -1123,15 +1213,30 @@
     {
       "subject": "2과목",
       "number": 32,
-      "title": "FK 가 설정된 자식 테이블을 포함하여 DROP 하려면 어떤 옵션이 필요한가?",
+      "title": "아래 ERD 와 외래키 설정에서 SQL ㉠, ㉡ 을 차례로 실행한 뒤 부서, 사원, 근태 테이블의 행 수로 옳은 것은? (각 문장은 실행 후 바로 COMMIT 한다)",
       "options": [
-        "RESTRICT",
-        "CASCADE CONSTRAINTS",
-        "NO ACTION",
-        "REPLACE"
+        "0, 0, 0",
+        "1, 2, 1",
+        "0, 0, 1",
+        "1, 3, 1"
       ],
       "correctIndex": 1,
-      "explanation": "DROP TABLE 을 할 때 다른 테이블의 외래키가 이 테이블을 참조하고 있으면 기본적으로 삭제가 거부된다. CASCADE CONSTRAINTS 를 붙이면 참조하던 외래키 제약을 함께 지우고 테이블을 삭제한다(②). ① RESTRICT 는 참조가 있으면 삭제를 막는 쪽이고, ③ NO ACTION 은 외래키를 만들 때 정하는 참조 동작이며, ④ REPLACE 는 CREATE OR REPLACE VIEW 처럼 객체를 다시 만들 때 쓰는 말이다."
+      "explanation": "㉠ 에서 D1 을 지우면 ON DELETE CASCADE 때문에 D1 소속 사원 1, 2 도 함께 지워야 한다. 그런데 사원 1 은 근태가 참조하고 있고, 근태 쪽 외래키에는 삭제 옵션이 없다. 자식이 남은 부모 행은 지울 수 없으므로 ㉠ 은 오류가 나고, 문장 전체가 취소되어 부서 D1 과 사원 1, 2 가 그대로 남는다. ㉡ 은 D2 를 지우면서 사원 3 을 함께 지운다. 사원 3 을 참조하는 근태가 없어 성공한다. 그래서 부서 1행(D1), 사원 2행(1, 2), 근태 1행이 남는다. 정답은 ②번이다. ① 은 CASCADE 가 근태까지 이어진다고 본 것이고, ③ 은 ㉠ 이 근태를 남긴 채 성공한다고 본 것, ④ 는 ㉡ 의 CASCADE 를 빠뜨린 것이다. 부서 테이블 자체를 DROP 할 때도 참조하는 외래키가 있으면 거부된다. Oracle 에서는 DROP TABLE 부서 CASCADE CONSTRAINTS 로 외래키 제약을 함께 지워야 한다.",
+      "references": [
+        {
+          "type": "erd",
+          "caption": "부서·사원·근태 ERD",
+          "mermaid": "erDiagram\n    부서 ||..o{ 사원 : \"소속\"\n    사원 ||--o{ 근태 : \"기록\"\n    부서 {\n        string 부서코드 PK\n    }\n    사원 {\n        int 사번 PK\n        string 부서코드 FK\n    }\n    근태 {\n        int 사번 PK, FK\n        string 일자 PK\n    }"
+        },
+        {
+          "type": "text",
+          "content": "외래키 설정\n사원.부서코드 → 부서: ON DELETE CASCADE\n근태.사번 → 사원: 삭제 옵션 없음\n\n부서: D1, D2\n사원: (1, D1), (2, D1), (3, D2)\n근태: (1, 11-03)"
+        },
+        {
+          "type": "sql",
+          "code": "-- ㉠\nDELETE FROM 부서\n WHERE 부서코드 = 'D1';\n-- ㉡\nDELETE FROM 부서\n WHERE 부서코드 = 'D2';"
+        }
+      ]
     },
     {
       "subject": "2과목",
@@ -1301,7 +1406,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT LTRIM('xxSQLxx', 'x')       AS A,\n       RTRIM('xySQLyx', 'xy')      AS B,\n       TRIM('x' FROM 'xxSQLxx')    AS C,\n       LENGTH(TRIM('  S Q L  '))   AS D\nFROM   DUAL;"
+          "code": "SELECT LTRIM('xxSQLxx', 'x') AS A,\n       RTRIM('xySQLyx', 'xy') AS B,\n       TRIM('x' FROM 'xxSQLxx') AS C,\n       LENGTH(TRIM('  S Q L  ')) AS D\nFROM   DUAL;"
         }
       ]
     },
@@ -1354,15 +1459,30 @@
     {
       "subject": "2과목",
       "number": 39,
-      "title": "조인 조건 없이 두 테이블의 모든 조합을 반환하는 조인은?",
+      "title": "아래 ERD 와 데이터에서 '아직 신청하지 않은 (사원, 과정) 조합' 을 찾으려 한다. SQL ㉠, ㉡, ㉢ 의 결과 행 수로 옳은 것은?",
       "options": [
-        "CROSS JOIN",
-        "INNER JOIN",
-        "LEFT OUTER JOIN",
-        "FULL OUTER JOIN"
+        "6, 4, 2",
+        "5, 3, 2",
+        "6, 6, 2",
+        "6, 4, 6"
       ],
       "correctIndex": 0,
-      "explanation": "CROSS JOIN(카티션 곱)은 조인 조건 없이 두 테이블의 모든 행을 짝지어 만들 수 있는 모든 조합을 반환하며, 결과 행 수는 두 테이블 행 수의 곱이 된다. ② INNER JOIN은 매칭 조건이 필요하고, ③ LEFT/④ FULL OUTER JOIN은 매칭 조건이 있는 상태에서 미매칭 행까지 보존하는 조인이라 의미가 다르다. 정답은 ①번이다."
+      "explanation": "CROSS JOIN 은 조인 조건 없이 모든 조합을 만들어 사원 3명 × 과정 2개 = 6행이다(㉠). 이렇게 가능한 모든 조합을 만든 뒤 ㉡ 처럼 NOT EXISTS 로 이미 신청한 2건을 빼면 아직 신청하지 않은 조합 4행이 남는다. ㉢ 은 신청을 거쳐 이어지는 실제 신청 내역이라 2행이다. 정답은 ①번이다. ② 는 CROSS JOIN 을 행 수의 합으로 본 것, ③ 은 NOT EXISTS 가 아무것도 빼지 못한다고 본 것, ④ 는 ㉢ 도 모든 조합을 만든다고 본 것이다.",
+      "references": [
+        {
+          "type": "erd",
+          "caption": "사원·신청·과정 ERD",
+          "mermaid": "erDiagram\n    사원 ||..o{ 신청 : \"신청함\"\n    과정 ||..o{ 신청 : \"받음\"\n    사원 {\n        string 이름 PK\n    }\n    신청 {\n        string 이름 FK\n        string 과정명 FK\n    }\n    과정 {\n        string 과정명 PK\n    }"
+        },
+        {
+          "type": "text",
+          "content": "사원: 김, 이, 박 / 과정: SQL, DB\n신청: (김, SQL), (이, DB)"
+        },
+        {
+          "type": "sql",
+          "code": "-- ㉠\nSELECT * FROM 사원 CROSS JOIN 과정;\n-- ㉡\nSELECT E.이름, K.과정명\nFROM 사원 E CROSS JOIN 과정 K\nWHERE NOT EXISTS\n  (SELECT 1 FROM 신청 R\n   WHERE R.이름 = E.이름\n   AND   R.과정명 = K.과정명);\n-- ㉢\nSELECT * FROM 사원 E\nJOIN 신청 R ON E.이름 = R.이름\nJOIN 과정 K ON K.과정명 = R.과정명;"
+        }
+      ]
     },
     {
       "subject": "2과목",
@@ -1479,7 +1599,7 @@
         },
         {
           "type": "sql",
-          "code": "SELECT 사원ID, 사원명, 연봉 FROM EMP ORDER BY 2;"
+          "code": "SELECT 사원ID, 사원명, 연봉 FROM EMP\nORDER BY 2;"
         }
       ]
     },
@@ -1549,15 +1669,30 @@
     {
       "subject": "2과목",
       "number": 45,
-      "title": "서브쿼리에 대한 설명 중 옳은 것은?",
+      "title": "아래 ERD 와 데이터에서 서브쿼리를 쓴 SQL ㉠~㉣ 의 결과를 차례대로 나열한 것은? (오류가 나면 '오류', 아니면 결과 행 수)",
       "options": [
-        "메인쿼리에서 서브쿼리의 컬럼을 직접 사용할 수 있다.",
-        "WHERE 절에서 다중 컬럼 서브쿼리를 사용할 수 있다.",
-        "FROM 절의 서브쿼리는 스칼라 서브쿼리라고 한다.",
-        "서브쿼리의 결과 집합은 항상 메인쿼리의 영향을 받는다."
+        "3, 3, 1, 3",
+        "오류, 3, 1, 2",
+        "오류, 2, 1, 3",
+        "3, 3, 1, 2"
       ],
       "correctIndex": 1,
-      "explanation": "다중 컬럼 서브쿼리는 두 개 이상의 컬럼을 한꺼번에 반환해 WHERE 절에서 `WHERE (사번, 부서) IN (SELECT 사번, 부서 FROM ...)` 처럼 짝지어 비교할 수 있다(②). ① 메인쿼리는 서브쿼리 안의 컬럼을 직접 쓸 수 없고(서브쿼리는 메인쿼리 컬럼을 쓸 수 있다), ③ FROM 절의 서브쿼리는 인라인 뷰이며 스칼라 서브쿼리는 SELECT 절 등에서 값 하나를 돌려주는 서브쿼리다. ④ 메인쿼리의 영향을 받는 것은 메인쿼리 컬럼을 참조하는 연관 서브쿼리뿐이다."
+      "explanation": "SELECT 절의 스칼라 서브쿼리는 메인 쿼리 한 행마다 값을 하나만 돌려줘야 한다. ㉠ 은 D1 에서 사원이 김, 이 두 명이라 서브쿼리가 2행을 돌려주므로 오류가 난다. ㉡ 은 MAX 로 한 값으로 줄였으므로 부서 3행이 모두 나온다. 사원이 없는 D3 은 서브쿼리 결과가 없어 NULL 이 되지만 행은 남는다. ㉢ 은 사번이 기본키라 서브쿼리가 한 행(D1)만 돌려주므로 = 로 비교해도 되고 1행이다. ㉣ 의 IN 은 서브쿼리 결과 {D1, D1, D2} 에 들어 있는지만 보므로, 사원이 두 명인 D1 도 한 번만 나와 2행이다. 정답은 ②번이다. ① 과 ④ 는 ㉠ 이 첫 사원만 골라 준다고 본 것이고, ① 과 ③ 은 ㉣ 이 조인처럼 D1 을 두 번 낸다고 본 것이다. ③ 은 ㉡ 에서 사원이 없는 D3 이 빠진다고도 보았다.",
+      "references": [
+        {
+          "type": "erd",
+          "caption": "부서·사원 ERD",
+          "mermaid": "erDiagram\n    부서 ||..o{ 사원 : \"소속\"\n    부서 {\n        string 부서코드 PK\n    }\n    사원 {\n        int 사번 PK\n        string 부서코드 FK\n        string 이름\n    }"
+        },
+        {
+          "type": "text",
+          "content": "부서: D1, D2, D3\n사원: (1, D1, 김), (2, D1, 이), (3, D2, 박)"
+        },
+        {
+          "type": "sql",
+          "code": "-- ㉠\nSELECT D.부서코드,\n  (SELECT E.이름 FROM 사원 E\n    WHERE E.부서코드 = D.부서코드)\nFROM 부서 D;\n-- ㉡\nSELECT D.부서코드,\n  (SELECT MAX(E.이름) FROM 사원 E\n    WHERE E.부서코드 = D.부서코드)\nFROM 부서 D;\n-- ㉢\nSELECT * FROM 부서\nWHERE 부서코드 =\n  (SELECT 부서코드 FROM 사원\n    WHERE 사번 = 1);\n-- ㉣\nSELECT * FROM 부서\nWHERE 부서코드 IN\n  (SELECT 부서코드 FROM 사원);"
+        }
+      ]
     },
     {
       "subject": "2과목",
@@ -1610,7 +1745,7 @@
         },
         {
           "type": "sql",
-          "code": "-- ㄱ\nSELECT SUM(COL2) FROM T1;\n\n-- ㄴ\nSELECT SUM(COL2) FROM T1 WHERE COL1 > 0;\n\n-- ㄷ\nSELECT SUM(COL2) FROM T1 WHERE COL1 IS NOT NULL OR COL3 IS NULL;\n\n-- ㄹ\nSELECT SUM(COL2) FROM T1 WHERE COL3 < 10;"
+          "code": "-- ㄱ\nSELECT SUM(COL2) FROM T1;\n\n-- ㄴ\nSELECT SUM(COL2) FROM T1\nWHERE COL1 > 0;\n\n-- ㄷ\nSELECT SUM(COL2) FROM T1\nWHERE COL1 IS NOT NULL\n   OR COL3 IS NULL;\n\n-- ㄹ\nSELECT SUM(COL2) FROM T1\nWHERE COL3 < 10;"
         }
       ]
     },
@@ -1650,7 +1785,7 @@
         },
         {
           "type": "sql",
-          "code": "SELECT ID FROM TAB1\nORDER BY (CASE WHEN ID IN (1, 3) THEN ID * 3 ELSE ID END) DESC;"
+          "code": "SELECT ID FROM TAB1\nORDER BY (CASE WHEN ID IN (1, 3)\n               THEN ID * 3\n               ELSE ID END) DESC;"
         }
       ]
     },
@@ -1759,19 +1894,19 @@
     {
       "subject": "2과목",
       "number": 50,
-      "title": "아래 GRANT 구문의 빈칸에 들어갈 키워드로 옳은 것은?",
+      "title": "A_USER 가 아래처럼 B_USER 에게 권한을 주었다. B_USER 가 ㉠~㉣ 을 실행한 결과로 옳은 것은? (Oracle 기준)",
       "options": [
-        "TO, ON",
-        "ON, TO",
-        "FROM, TO",
-        "IN, TO"
+        "성공, 성공, 오류, 오류",
+        "성공, 오류, 오류, 오류",
+        "성공, 오류, 성공, 오류",
+        "성공, 오류, 오류, 성공"
       ],
       "correctIndex": 1,
-      "explanation": "권한 부여 구문은 GRANT 권한 ON 객체 TO 사용자 이므로 빈칸에는 차례로 ON, TO 가 들어간다(②). 권한 회수는 REVOKE 권한 ON 객체 FROM 사용자 처럼 FROM 을 쓴다(③). ① 은 ON 과 TO 의 순서가 뒤바뀌었고, ④ IN 은 GRANT 구문에 쓰지 않는다.",
+      "explanation": "GRANT 권한 ON 객체 TO 사용자 형식이며, UPDATE 는 (COL1) 처럼 칼럼을 지정해 줄 수 있다. B_USER 는 COL1 만 고칠 수 있어 ㉠ 은 성공하고 ㉡ 은 권한 부족으로 오류다. UPDATE 권한에는 조회 권한이 들어 있지 않아 ㉢ 도 오류다. WITH GRANT OPTION 없이 받은 권한은 남에게 다시 줄 수 없어 ㉣ 도 오류다. 정답은 ②번이다. ① 은 칼럼 지정을 무시한 것, ③ 은 UPDATE 권한이 SELECT 를 포함한다고 본 것, ④ 는 받은 권한을 자유롭게 다시 줄 수 있다고 본 것이다.",
       "references": [
         {
           "type": "sql",
-          "code": "GRANT INSERT (   ) 테이블명 (   ) 사용자명;"
+          "code": "-- A_USER 가 실행\nGRANT UPDATE (COL1) ON TB_A TO B_USER;\n\n-- B_USER 가 실행\n-- ㉠\nUPDATE A_USER.TB_A SET COL1 = 'X';\n-- ㉡\nUPDATE A_USER.TB_A SET COL2 = 'Y';\n-- ㉢\nSELECT * FROM A_USER.TB_A;\n-- ㉣\nGRANT UPDATE (COL1) ON A_USER.TB_A\n  TO C_USER;"
         }
       ]
     }

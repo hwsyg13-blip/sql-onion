@@ -5,19 +5,51 @@
     {
       "subject": "1과목",
       "number": 1,
-      "title": "아래 설명에 해당하는 데이터 모델링 관점은?",
+      "title": "아래 CRUD 매트릭스(데이터와 프로세스의 상관 관점)를 검토한 결과로 가장 적절한 것은?",
       "options": [
-        "데이터 관점",
-        "데이터와 프로세스의 상관 관점",
-        "프로세스 관점",
-        "보안 관점"
+        "모든 엔터티가 한 번 이상 쓰였으므로 빠진 프로세스는 없다.",
+        "배송을 만드는(C) 프로세스가 없으므로 빠진 프로세스나 잘못 적은 칸이 있는지 확인한다.",
+        "CRUD 매트릭스는 데이터 관점만 보므로 프로세스가 빠졌는지는 알 수 없다.",
+        "고객에 R 이 여러 번 나오므로 고객 엔터티를 나눠야 한다."
       ],
       "correctIndex": 1,
-      "explanation": "데이터 모델링은 보는 시각에 따라 셋으로 나뉜다. 데이터 관점(①)은 어떤 데이터를 다루는지(What), 프로세스 관점(③)은 업무가 어떻게 처리되는지(How)에 집중한다. 데이터와 프로세스의 상관 관점(②)은 두 가지를 함께 보면서 업무 처리 방법에 따라 데이터가 어떤 영향을 받는지(Interaction)를 모델링한다. 설명이 바로 이 영향 관계라 정답은 ②번이다. ④ 보안 관점은 데이터 모델링의 세 관점에 들지 않는다.",
+      "explanation": "CRUD 매트릭스는 프로세스가 엔터티를 만들고(C)·읽고(R)·고치고(U)·지우는(D)지 표로 그려 데이터와 프로세스의 상관 관점을 검증한다. 엔터티마다 C 가 적어도 하나 있어야 데이터가 생긴다. 배송은 R 만 있고 C 가 없어 배송을 등록하는 프로세스가 빠졌거나 표를 잘못 적은 것이다. 정답은 ②번이다. ① 쓰였는지가 아니라 C 가 있는지를 봐야 한다. ③ 프로세스와 데이터를 함께 보는 도구다. ④ R 이 여러 번인 것은 여러 프로세스가 읽는다는 뜻일 뿐 엔터티를 나눌 이유가 아니다.",
       "references": [
         {
-          "type": "text",
-          "content": "업무가 처리하는 일의 방법에 따라 데이터가 어떻게 영향을 받는지 모델링한다."
+          "type": "table",
+          "caption": "CRUD 매트릭스",
+          "headers": [
+            "프로세스",
+            "고객",
+            "주문",
+            "배송"
+          ],
+          "rows": [
+            [
+              "회원가입",
+              "C",
+              "",
+              ""
+            ],
+            [
+              "주문하기",
+              "R",
+              "C",
+              ""
+            ],
+            [
+              "배송조회",
+              "R",
+              "R",
+              "R"
+            ],
+            [
+              "주문취소",
+              "",
+              "D",
+              "R"
+            ]
+          ]
         }
       ]
     },
@@ -87,15 +119,21 @@
     {
       "subject": "1과목",
       "number": 3,
-      "title": "파생속성에 해당하는 예로 적절한 것은?",
+      "title": "아래 [주문] 엔터티의 속성 ㉠~㉤ 중 파생 속성만 모두 고른 것은?",
       "options": [
-        "회원 ID",
-        "생년월일",
-        "상품 단가",
-        "상품 총금액 (단가 × 수량)"
+        "㉣",
+        "㉠, ㉣",
+        "㉢, ㉣, ㉤",
+        "㉣, ㉤"
       ],
       "correctIndex": 3,
-      "explanation": "다른 속성에서 계산되어 만들어지는 속성을 파생속성이라고 한다. ① 회원 ID·② 생년월일·③ 상품 단가는 시스템에 직접 입력되어 보관되는 기본속성이다. 반면 상품 총금액은 단가 × 수량으로 계산되어 도출되므로 파생속성이다. 정답은 ④번이다."
+      "explanation": "속성은 만들어진 방식에 따라 기본 속성(업무에서 원래 쓰던 값), 설계 속성(설계하면서 새로 만든 값), 파생 속성(다른 속성에서 계산해 얻는 값)으로 나눈다. ㉣ 주문금액과 ㉤ 상품종류수는 주문상세를 더하거나 세면 언제든 다시 구할 수 있으므로 파생 속성이다. ㉠ 시스템이 붙인 일련번호와 ㉢ 업무상 만든 코드는 설계 속성이고, ㉡ 주문일자는 기본 속성이다. 정답은 ④번이다. ① 은 개수를 세어 얻는 값도 계산 결과라는 점을 놓친 것이고, ② 와 ③ 은 시스템·업무가 새로 만든 설계 속성을 파생 속성으로 본 것이다. 파생 속성은 원본(주문상세)이 바뀔 때마다 함께 고쳐야 하므로 꼭 필요할 때만 둔다.",
+      "references": [
+        {
+          "type": "text",
+          "content": "㉠ 주문번호: 시스템이 붙이는 일련번호\n㉡ 주문일자: 고객이 주문한 날\n㉢ 주문상태코드: 01 접수, 02 배송중처럼 업무상 정한 코드\n㉣ 주문금액: 주문상세 금액을 모두 더한 값\n㉤ 상품종류수: 주문상세 건수"
+        }
+      ]
     },
     {
       "subject": "1과목",
@@ -237,15 +275,21 @@
     {
       "subject": "1과목",
       "number": 8,
-      "title": "성능 모델링에 대한 설명으로 가장 적절한 것은?",
+      "title": "주문 목록 화면이 매번 주문과 고객을 조인해 고객명을 보여주는데 응답이 느리다. 성능 모델링 관점에서 가장 적절한 대응은?",
       "options": [
-        "반정규화만 수행한다.",
-        "정규화 없이 성능 모델만 설계한다.",
-        "일반적으로 완전 정규화를 수행한 후 성능을 고려하여 반정규화를 수행한다.",
-        "정규화는 성능과 무관하다."
+        "처음 설계할 때부터 자주 쓰는 컬럼을 모든 테이블에 중복해 두면 이후 조정이 필요 없다.",
+        "조인이 느리므로 주문과 고객을 한 테이블로 합치는 것을 가장 먼저 한다.",
+        "정규화 모델에서 조회량을 확인하고, 인덱스로 안 풀릴 때 고객명 중복을 검토하며 동기화 방법도 정한다.",
+        "주문에 중복한 고객명은 원본과 달라져도 조회 성능에는 문제가 없으므로 따로 맞출 필요가 없다."
       ],
       "correctIndex": 2,
-      "explanation": "정규화는 데이터 중복을 줄이고 무결성을 높이는 작업이고, 반정규화는 성능을 위해 일부러 중복을 허용해 조회 속도를 끌어올리는 작업이다. 표준 절차는 먼저 정규화를 끝까지 수행해 깨끗한 모델을 만든 뒤, 실측되는 성능 이슈에 맞춰 필요한 부분만 반정규화하는 것이다. 처음부터 반정규화를 남발하면 데이터 정합성이 깨지기 쉽다. 정답은 ③번이다. ① 반정규화만 하거나 ② 정규화 없이 설계하면 중복과 이상 현상을 통제할 수 없고, ④ 정규화도 테이블 크기와 조인 수를 바꾸므로 성능과 무관하지 않다."
+      "explanation": "성능 모델링은 정규화를 먼저 끝낸 모델을 기준으로, 실제 조회량과 처리 방식을 보고 필요한 곳만 조정하는 순서로 한다. 조인 조건 컬럼(주문.고객번호, 주문일자)에 인덱스를 두는 것처럼 구조를 바꾸지 않는 방법을 먼저 보고, 그래도 느리면 주문에 고객명을 중복하는 반정규화를 검토한다. 반정규화할 때는 고객명이 바뀌었을 때 어떻게 맞출지도 함께 정해야 한다. 정답은 ③번이다. ① 처음부터 중복을 넣으면 정합성 관리가 어려워진다. ② 테이블을 합치는 것은 인덱스 등 다른 방법을 본 다음의 선택지다. ④ 중복 컬럼이 원본과 다르면 화면에 틀린 고객명이 나오므로 동기화 방법이 꼭 필요하다.",
+      "references": [
+        {
+          "type": "sql",
+          "code": "SELECT O.주문번호, C.고객명\nFROM   주문 O\nJOIN   고객 C\n  ON   C.고객번호 = O.고객번호\nWHERE  O.주문일자 >= :시작일;"
+        }
+      ]
     },
     {
       "subject": "1과목",
@@ -323,15 +367,47 @@
     {
       "subject": "2과목",
       "number": 12,
-      "title": "첫 번째 컬럼 집계, 첫 번째+두 번째 컬럼 집계, 전체 집계가 필요한 SQL 로 적절한 것은?",
+      "title": "아래 T 테이블(평가 칼럼에 실제 NULL 이 있음)에 SQL 을 실행했을 때 '결과 행 수, 평가 칼럼이 NULL 로 보이는 행 수, GROUPING(평가) 가 1 인 행 수' 를 차례대로 나열한 것은?",
       "options": [
-        "CUBE(평가항목, 평가)",
-        "ROLLUP(평가항목, 평가)",
-        "GROUPING SETS((평가항목, 평가), (평가항목), (평가))",
-        "GROUP BY 평가항목"
+        "6, 3, 3",
+        "6, 4, 3",
+        "5, 3, 3",
+        "6, 4, 4"
       ],
       "correctIndex": 1,
-      "explanation": "ROLLUP(A, B)는 오른쪽 컬럼부터 하나씩 빼 가며 (A, B), (A), () 세 가지 그룹을 만든다. 문제는 첫 컬럼 집계, 두 컬럼 조합 집계, 전체 집계가 필요하므로 정확히 ROLLUP이 만드는 세 가지 그룹과 일치한다. ① CUBE는 (B) 단독까지 추가로 만들어 결과 행이 더 많아 의도에 맞지 않는다. 정답은 ②번이다. ③ 은 전체 집계 () 가 빠지고 대신 (평가) 단독 집계가 들어 있으며, ④ GROUP BY 평가항목 은 첫 컬럼 집계 하나만 만든다."
+      "explanation": "ROLLUP(항목, 평가) 는 (항목, 평가) 상세, 항목별 소계, 전체 합계를 만든다. 상세는 (A, 상), (A, NULL), (B, 중) 의 3행이다. 평가가 NULL 인 원래 행도 하나의 그룹으로 남는다. 항목별 소계가 A, B 2행, 전체 합계가 1행이라 모두 6행이다. 소계·합계 행은 평가 칼럼이 NULL 로 표시되므로, 원래 데이터의 (A, NULL) 까지 합쳐 평가가 NULL 로 보이는 행은 4행이다. GROUPING(평가) 는 그 행이 평가를 집계해서 생긴 행일 때만 1 이라 소계 2행과 합계 1행의 3행이다. 원래 NULL 인 (A, NULL) 상세 행은 0 이다. 정답은 ②번이다. ① 은 원래 NULL 인 행을 빠뜨린 것이고, ③ 은 NULL 인 원래 행을 소계와 합쳐 버린 것, ④ 는 GROUPING 이 값이 NULL 이기만 하면 1 이 된다고 본 것이다. 소계 행과 진짜 NULL 을 구별하려면 GROUPING 을 써야 한다.",
+      "references": [
+        {
+          "type": "table",
+          "caption": "T",
+          "headers": [
+            "항목",
+            "평가",
+            "점수"
+          ],
+          "rows": [
+            [
+              "A",
+              "상",
+              "90"
+            ],
+            [
+              "A",
+              "NULL",
+              "70"
+            ],
+            [
+              "B",
+              "중",
+              "80"
+            ]
+          ]
+        },
+        {
+          "type": "sql",
+          "code": "SELECT 항목, 평가, SUM(점수),\n       GROUPING(평가) AS G\nFROM T\nGROUP BY ROLLUP(항목, 평가);"
+        }
+      ]
     },
     {
       "subject": "2과목",
@@ -374,28 +450,44 @@
     {
       "subject": "2과목",
       "number": 15,
-      "title": "SQL 분류에 대한 설명 중 적절하지 않은 것은?",
+      "title": "SQL 명령과 분류에 대한 설명으로 적절하지 않은 것은?",
       "options": [
-        "DDL 은 객체 정의를 변경한다.",
-        "DCL 은 데이터베이스 구동과 종료를 수행한다.",
-        "DML 은 데이터 조작을 수행한다.",
-        "TCL 은 트랜잭션을 제어한다."
+        "TRUNCATE 는 행을 지우지만 테이블 구조를 다루는 DDL 이라 Oracle 에서 ROLLBACK 할 수 없다.",
+        "DCL 에는 데이터베이스를 켜고 끄는 STARTUP·SHUTDOWN 이 포함된다.",
+        "MERGE 는 조건에 따라 INSERT·UPDATE 를 함께 하는 DML 이다.",
+        "SAVEPOINT 는 트랜잭션 안에 되돌릴 지점을 정하는 TCL 이다."
       ],
       "correctIndex": 1,
-      "explanation": "SQL 명령은 역할에 따라 4가지로 분류된다. DDL은 객체 정의(CREATE/ALTER/DROP), DML은 데이터 조작(SELECT/INSERT/UPDATE/DELETE), DCL은 권한 제어(GRANT/REVOKE), TCL은 트랜잭션 제어(COMMIT/ROLLBACK)이다. DB 시작·종료(STARTUP/SHUTDOWN)는 DCL이 아닌 시스템 관리 명령에 해당한다. 따라서 \"DCL이 DB 구동·종료를 수행한다\"는 ②번 설명이 틀려서 정답이 된다. ①·③·④ 는 각각 DDL·DML·TCL 의 역할을 바르게 설명했다."
+      "explanation": "DCL 은 GRANT, REVOKE 처럼 권한을 주고 회수하는 명령이다. STARTUP·SHUTDOWN 은 SQL 분류(DDL·DML·DCL·TCL)에 속하지 않는 DBMS 관리 명령이다. 정답은 ②번이다. ① TRUNCATE 는 DDL 이라 자동 COMMIT 되어 되돌릴 수 없다. ③ MERGE 는 DML 이다. ④ SAVEPOINT 는 COMMIT·ROLLBACK 과 함께 TCL 이다.",
+      "references": []
     },
     {
       "subject": "2과목",
       "number": 16,
-      "title": "테이블 조인 시 매칭되지 않는 행까지 포함하여 조회하는 조인은?",
+      "title": "아래 ERD 와 데이터에 대한 SQL ㉠~㉣ 의 결과로 옳은 것은? ('㉠ 행 수, ㉡ 행 수, ㉢ 값, ㉣ 값' 순서)",
       "options": [
-        "INNER JOIN",
-        "NATURAL JOIN",
-        "CROSS JOIN",
-        "OUTER JOIN"
+        "3, 3, 1, NULL",
+        "3, 4, 1, 1",
+        "4, 4, 1, 0",
+        "3, 4, 1, 0"
       ],
       "correctIndex": 3,
-      "explanation": "① 일반 조인(INNER JOIN)은 양쪽 테이블에 모두 매칭되는 행만 결과로 보여준다. 매칭되지 않은 행까지 결과에 살리고 싶을 때 사용하는 것이 OUTER JOIN이다. LEFT/RIGHT/FULL 세 가지 형태가 있어 각각 한쪽 또는 양쪽의 미매칭 행을 NULL로 채워 보존한다. 정답은 ④번이다. ② NATURAL JOIN 은 이름이 같은 컬럼으로 묶는 내부 조인의 한 형태라 매칭되는 행만 남고, ③ CROSS JOIN 은 조건 없이 모든 조합을 만든다."
+      "explanation": "ERD 에서 주문 쪽 끝이 동그라미 + 까마귀발이라 주문이 없는 고객(C3)이 있을 수 있다. 이런 관계는 조인 방식에 따라 결과가 달라진다. ㉠ INNER JOIN 은 짝이 있는 주문 3행만 나온다. ㉡ LEFT JOIN 은 주문 없는 C3 도 주문 칼럼 NULL 로 남아 4행이다. ㉢ 은 주문이 없는 고객 수라 C3 하나로 1 이다. ㉣ 은 C3 의 LEFT JOIN 결과 1행에서 주문번호가 NULL 이라 COUNT(O.주문번호) 는 0 이다(COUNT(*) 였다면 1). 정답은 ④번이다. ① 은 LEFT JOIN 도 짝 없는 행을 버린다고 보고 COUNT 가 NULL 을 돌려준다고 본 것, ② 는 COUNT(칼럼) 이 NULL 행도 센다고 본 것, ③ 은 INNER JOIN 에도 C3 가 남는다고 본 것이다.",
+      "references": [
+        {
+          "type": "erd",
+          "caption": "고객·주문 ERD (주문 쪽 0개 이상)",
+          "mermaid": "erDiagram\n    고객 ||..o{ 주문 : \"주문함\"\n    고객 {\n        string 고객번호 PK\n    }\n    주문 {\n        string 주문번호 PK\n        string 고객번호 FK\n    }"
+        },
+        {
+          "type": "text",
+          "content": "고객: C1, C2, C3\n주문: (O1, C1), (O2, C1), (O3, C2)"
+        },
+        {
+          "type": "sql",
+          "code": "-- ㉠\nSELECT * FROM 고객 C\nJOIN 주문 O ON C.고객번호 = O.고객번호;\n-- ㉡\nSELECT * FROM 고객 C\nLEFT JOIN 주문 O\n  ON C.고객번호 = O.고객번호;\n-- ㉢\nSELECT COUNT(*) FROM 고객 C\nWHERE NOT EXISTS\n  (SELECT 1 FROM 주문 O\n   WHERE O.고객번호 = C.고객번호);\n-- ㉣ C3 의 주문 수\nSELECT COUNT(O.주문번호)\nFROM 고객 C LEFT JOIN 주문 O\n  ON C.고객번호 = O.고객번호\nWHERE C.고객번호 = 'C3';"
+        }
+      ]
     },
     {
       "subject": "2과목",
@@ -467,7 +559,7 @@
         },
         {
           "type": "sql",
-          "code": "SELECT ID, VAL,\n       (  ?  ) OVER (PARTITION BY 지점 ORDER BY ID) AS PREV\nFROM   매출\nORDER BY ID;"
+          "code": "SELECT ID, VAL,\n       (  ?  ) OVER (\n         PARTITION BY 지점\n         ORDER BY ID) AS PREV\nFROM   매출\nORDER BY ID;"
         },
         {
           "type": "table",
@@ -561,15 +653,30 @@
     {
       "subject": "2과목",
       "number": 20,
-      "title": "아래 네 조인 중 결과 행 수가 잘못 매칭된 것은?",
+      "title": "아래 ERD 와 데이터에 대한 SQL ㉠~㉣ 의 결과 행 수로 옳은 것은?",
       "options": [
-        "INNER JOIN: 매칭 행만 반환",
-        "LEFT OUTER JOIN: 좌측 전체 + 매칭",
-        "RIGHT OUTER JOIN: 우측 전체 + 매칭",
-        "FULL OUTER JOIN: 양쪽 매칭 행만 반환"
+        "3, 3, 1, 4",
+        "3, 4, 2, 4",
+        "3, 4, 1, 3",
+        "3, 4, 1, 4"
       ],
       "correctIndex": 3,
-      "explanation": "FULL OUTER JOIN은 양쪽 테이블의 행을 모두 살리는 조인이라, 매칭되지 않은 행도 NULL로 채워 결과에 포함시킨다. 즉 LEFT OUTER JOIN과 RIGHT OUTER JOIN의 결과를 합친 합집합과 같다. \"양쪽 매칭 행만 반환\"이라는 ④번 설명은 INNER JOIN의 동작이지 FULL OUTER JOIN의 동작이 아니므로 잘못된 매칭이 된다. 정답은 ④번이다. ①·②·③ 은 각 조인의 결과를 바르게 설명했다."
+      "explanation": "학생과 과목의 M:N 관계를 수강 엔터티로 풀었고, 수강의 주식별자는 학번 + 과목코드(식별 관계, 실선)다. 수강 쪽이 0개 이상이라 수강하지 않은 학생(S3)이 있을 수 있다. ㉠ 세 테이블 INNER JOIN 은 수강 3행만큼 3행이다. ㉡ LEFT JOIN 은 S3 가 NULL 로 더해져 4행, ㉢ 은 K2 를 신청한 S1 하나라 1행이다. ㉣ FULL OUTER JOIN 은 학생 쪽 S3 를 남기지만, 수강 행은 모두 학생이 있어 더 늘지 않아 ㉡ 과 같은 4행이다(식별 관계라 학생 없는 수강은 생길 수 없다). 정답은 ④번이다. ① 은 LEFT JOIN 에서 S3 를 놓친 것, ② 는 K2 수강을 2건으로 센 것, ③ 은 FULL OUTER JOIN 이 LEFT 보다 행이 적다고 본 것이다.",
+      "references": [
+        {
+          "type": "erd",
+          "caption": "학생·수강·과목 ERD (M:N 해소)",
+          "mermaid": "erDiagram\n    학생 ||--o{ 수강 : \"신청\"\n    과목 ||--o{ 수강 : \"개설\"\n    학생 {\n        string 학번 PK\n    }\n    수강 {\n        string 학번 PK, FK\n        string 과목코드 PK, FK\n    }\n    과목 {\n        string 과목코드 PK\n    }"
+        },
+        {
+          "type": "text",
+          "content": "학생: S1, S2, S3 / 과목: K1, K2\n수강: (S1, K1), (S1, K2), (S2, K1)"
+        },
+        {
+          "type": "sql",
+          "code": "-- ㉠\nSELECT * FROM 학생 S\nJOIN 수강 E ON S.학번 = E.학번\nJOIN 과목 K ON K.과목코드 = E.과목코드;\n-- ㉡\nSELECT * FROM 학생 S\nLEFT JOIN 수강 E ON S.학번 = E.학번;\n-- ㉢\nSELECT * FROM 수강\nWHERE 과목코드 = 'K2';\n-- ㉣\nSELECT * FROM 학생 S\nFULL OUTER JOIN 수강 E\n  ON S.학번 = E.학번;"
+        }
+      ]
     },
     {
       "subject": "2과목",
@@ -691,7 +798,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT 팀명\nFROM   팀\nWHERE  팀번호 = (SELECT 팀번호 FROM (SELECT 팀번호, SUM(연봉) AS 총급여 FROM 사원 GROUP BY 팀번호 ORDER BY 2 DESC) WHERE ROWNUM = 1);"
+          "code": "SELECT 팀명\nFROM   팀\nWHERE  팀번호 =\n  (SELECT 팀번호\n     FROM (SELECT 팀번호,\n                  SUM(연봉) AS 총급여\n             FROM 사원\n            GROUP BY 팀번호\n            ORDER BY 2 DESC)\n    WHERE ROWNUM = 1);"
         }
       ]
     },
@@ -755,19 +862,45 @@
     {
       "subject": "2과목",
       "number": 25,
-      "title": "내림차순 정렬을 수행하는 SQL 에서 수정이 필요한 부분은?",
+      "title": "급여가 높은 순으로 정렬하려고 아래 사원 테이블에 SQL ㉠~㉣ 을 작성했다. 실행 시 오류가 나는 것만 모두 고른 것은?",
       "options": [
-        "SELECT 절",
-        "FROM 절",
-        "WHERE 절",
-        "ORDER BY 절에 DESC 추가"
+        "㉡",
+        "㉢",
+        "㉠, ㉡",
+        "㉡, ㉢"
       ],
       "correctIndex": 3,
-      "explanation": "ORDER BY는 기본적으로 오름차순(ASC)으로 정렬한다. 내림차순으로 바꾸려면 컬럼 뒤에 명시적으로 DESC 키워드를 붙여야 한다. ①·②·③ 의 SELECT/FROM/WHERE 절은 정렬과 무관하므로 정답은 ④번이다.",
+      "explanation": "㉠ 처럼 일반 SELECT 에서는 SELECT 절에 없는 칼럼(급여)으로도 정렬할 수 있다. 박, 김, 이 순서로 나온다. ㉡ 은 DISTINCT 로 부서 A 의 두 행이 하나로 합쳐진다. 합쳐진 A 행이 급여 300 과 200 중 어느 값으로 정렬될지 정할 수 없으므로, DISTINCT 를 쓰면 ORDER BY 에는 SELECT 목록의 항목만 쓸 수 있다. 오류다. ㉢ 도 같은 이유다. GROUP BY 뒤에는 그룹마다 한 행만 남으므로 ORDER BY 에 개별 행의 급여를 쓸 수 없고, 그룹 칼럼이나 집계 함수(MAX(급여))를 써야 한다. ㉣ 은 집계 결과의 별칭 M 으로 정렬해 B 400, A 300 순서로 나온다. 정답은 ④번이다. ① 과 ② 는 둘 중 하나만 오류로 본 것이고, ③ 은 SELECT 절에 없는 칼럼으로는 언제나 정렬할 수 없다고 본 것이다.",
       "references": [
         {
+          "type": "table",
+          "caption": "사원",
+          "headers": [
+            "이름",
+            "부서",
+            "급여"
+          ],
+          "rows": [
+            [
+              "김",
+              "A",
+              "300"
+            ],
+            [
+              "이",
+              "A",
+              "200"
+            ],
+            [
+              "박",
+              "B",
+              "400"
+            ]
+          ]
+        },
+        {
           "type": "sql",
-          "code": "SELECT ... FROM ... WHERE ... ORDER BY A;"
+          "code": "-- ㉠\nSELECT 이름 FROM 사원\nORDER BY 급여 DESC;\n-- ㉡\nSELECT DISTINCT 부서 FROM 사원\nORDER BY 급여 DESC;\n-- ㉢\nSELECT 부서, MAX(급여) FROM 사원\nGROUP BY 부서\nORDER BY 급여 DESC;\n-- ㉣\nSELECT 부서, MAX(급여) AS M\nFROM 사원\nGROUP BY 부서\nORDER BY M DESC;"
         }
       ]
     },
@@ -812,7 +945,7 @@
         },
         {
           "type": "sql",
-          "code": "SELECT CASE WHEN SUM(GRADE + RANK) IS NULL THEN 0\n            ELSE SUM(GRADE + RANK) END AS R1,\n       SUM(GRADE) + SUM(RANK) AS R2\nFROM   T;"
+          "code": "SELECT CASE WHEN SUM(GRADE + RANK)\n                 IS NULL\n            THEN 0\n            ELSE SUM(GRADE + RANK)\n            END AS R1,\n       SUM(GRADE) + SUM(RANK) AS R2\nFROM   T;"
         }
       ]
     },
@@ -879,7 +1012,7 @@
         },
         {
           "type": "sql",
-          "code": "SELECT GRADE FROM GRADE_TABLE A,\n  (SELECT MAX(SCORE) AS MAX_SCORE FROM PLAYER) B\nWHERE A.LOWER <= B.MAX_SCORE AND A.UPPER >= B.MAX_SCORE;"
+          "code": "SELECT GRADE FROM GRADE_TABLE A,\n  (SELECT MAX(SCORE) AS MAX_SCORE\n     FROM PLAYER) B\nWHERE A.LOWER <= B.MAX_SCORE\n  AND A.UPPER >= B.MAX_SCORE;"
         }
       ]
     },
@@ -1027,22 +1160,37 @@
         },
         {
           "type": "sql",
-          "code": "MERGE INTO A USING B ON (A.ID = B.ID)\nWHEN MATCHED THEN\n  UPDATE SET A.V = B.V WHERE B.V > A.V\nWHEN NOT MATCHED THEN\n  INSERT (ID, V) VALUES (B.ID, B.V) WHERE B.V IS NOT NULL;\n\nSELECT COUNT(*), SUM(V) FROM A;"
+          "code": "MERGE INTO A USING B\n  ON (A.ID = B.ID)\nWHEN MATCHED THEN\n  UPDATE SET A.V = B.V\n  WHERE B.V > A.V\nWHEN NOT MATCHED THEN\n  INSERT (ID, V) VALUES (B.ID, B.V)\n  WHERE B.V IS NOT NULL;\n\nSELECT COUNT(*), SUM(V) FROM A;"
         }
       ]
     },
     {
       "subject": "2과목",
       "number": 30,
-      "title": "최대값을 조회하는 SQL 로 옳은 것은?",
+      "title": "아래 ERD 와 데이터에 대한 SQL ㉠, ㉡ 의 결과로 옳은 것은? ('㉠ 행 수, ㉠ 의 기획 부서 값, ㉡ 행 수' 순서)",
       "options": [
-        "SELECT MAX(COL) FROM T WHERE ROWNUM = 1;",
-        "SELECT * FROM (SELECT COL FROM T ORDER BY COL DESC) WHERE ROWNUM = 1;",
-        "SELECT COL FROM T ORDER BY COL DESC WHERE ROWNUM = 1;",
-        "SELECT COL FROM T WHERE ROWNUM = (SELECT MAX(COL) FROM T);"
+        "3, 0, 2",
+        "3, NULL, 2",
+        "2, NULL, 2",
+        "3, NULL, 3"
       ],
       "correctIndex": 1,
-      "explanation": "ROWNUM은 결과 행에 1부터 차례로 번호를 매기는 가상 컬럼이다. 그러나 ROWNUM은 ORDER BY가 적용되기 전에 매겨지므로 단순히 `WHERE ROWNUM = 1`만 쓰면 정렬이 무시된 첫 행이 나와 최대값이 보장되지 않는다. 따라서 인라인 뷰 안에서 먼저 ORDER BY DESC로 정렬해 둔 뒤, 바깥에서 ROWNUM = 1로 첫 행을 잘라야 안전하게 최대값을 얻을 수 있다. 정답은 ②번이다. ① 은 WHERE ROWNUM = 1 이 먼저 임의의 한 행만 남긴 뒤 MAX 를 구해 전체 최대값이 보장되지 않고, ③ 은 ORDER BY 뒤에 WHERE 가 와 문법 오류이며, ④ 는 행 번호(ROWNUM)를 최대값과 비교해 의미가 다르다."
+      "explanation": "ERD 에서 사원 쪽이 0명 이상이라 사원이 없는 부서(기획)가 있을 수 있다. ㉠ 은 부서 테이블의 행마다 스칼라 서브쿼리로 최고 급여를 구하므로 부서 3행이 모두 나오고, 사원이 없는 기획은 서브쿼리 결과가 없어 NULL 이다. ㉡ 은 INNER JOIN 뒤에 묶어 사원이 있는 영업·인사 2행만 나온다. 같은 '부서별 최고 급여' 라도 사원 없는 부서를 보여 줄지에 따라 방식을 골라야 한다. 정답은 ②번이다. ① 은 결과가 없는 스칼라 서브쿼리를 0 으로 본 것, ③ 은 스칼라 서브쿼리도 행을 버린다고 본 것, ④ 는 INNER JOIN 에도 기획이 남는다고 본 것이다.",
+      "references": [
+        {
+          "type": "erd",
+          "caption": "부서·사원 ERD (사원 쪽 0명 이상)",
+          "mermaid": "erDiagram\n    부서 ||..o{ 사원 : \"소속\"\n    부서 {\n        string 부서코드 PK\n        string 부서명\n    }\n    사원 {\n        string 사번 PK\n        string 부서코드 FK\n        int 급여\n    }"
+        },
+        {
+          "type": "text",
+          "content": "부서: (D1, 영업), (D2, 인사), (D3, 기획)\n사원: (김, D1, 300), (이, D1, 500), (박, D2, 400)"
+        },
+        {
+          "type": "sql",
+          "code": "-- ㉠\nSELECT D.부서명,\n       (SELECT MAX(E.급여)\n        FROM   사원 E\n        WHERE  E.부서코드 = D.부서코드)\nFROM   부서 D;\n-- ㉡\nSELECT D.부서명, MAX(E.급여)\nFROM   부서 D JOIN 사원 E\n  ON D.부서코드 = E.부서코드\nGROUP  BY D.부서명;"
+        }
+      ]
     },
     {
       "subject": "2과목",
@@ -1059,7 +1207,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT MAX(COL1) KEEP (DENSE_RANK FIRST ORDER BY COL2 DESC)\nFROM T;"
+          "code": "SELECT MAX(COL1)\n       KEEP (DENSE_RANK FIRST\n             ORDER BY COL2 DESC)\nFROM T;"
         },
         {
           "type": "table",
@@ -1222,15 +1370,52 @@
     {
       "subject": "2과목",
       "number": 35,
-      "title": "NULL 이 아닌 데이터만 조회하는 WHERE 조건은?",
+      "title": "아래 자기 참조 ERD 와 데이터에 대한 SQL ㉠~㉣ 의 결과로 옳은 것은? ('㉠ 행 수, ㉡ 행 수, ㉢ 값, ㉣ 행 수' 순서)",
       "options": [
-        "IS NOT NULL",
-        "<> NULL",
-        "!= NULL",
-        "NOT NULL"
+        "1, 0, 2, 3",
+        "1, 1, 2, 3",
+        "1, 0, 1, 2",
+        "0, 0, 2, 3"
       ],
       "correctIndex": 0,
-      "explanation": "NULL은 일반 비교 연산자로 다룰 수 없다. ② `<> NULL`이나 ③ `!= NULL`처럼 쓰면 결과가 항상 UNKNOWN이 되어 어떤 행도 통과하지 못한다. NULL 여부를 검사하려면 전용 연산자인 `IS NULL` 또는 `IS NOT NULL`을 써야 한다. 정답은 ①번이다. ④ NOT NULL 은 컬럼 제약조건 키워드라 WHERE 조건으로 쓸 수 없다."
+      "explanation": "ERD 는 사원이 다른 사원(관리자)을 참조하는 자기 참조 관계이고, 관리자 쪽이 선택이라 관리자사번에 NULL 이 들어갈 수 있다. NULL 인지는 ㉠ 처럼 IS NULL 로 확인해야 해 김 1행이 나오고, ㉡ 의 = NULL 은 늘 UNKNOWN 이라 0행이다. ㉢ 은 자기를 관리자로 가진 사원이 없는 사람이라 이·박의 2 다. ㉣ 은 사원마다 관리자 정보를 붙이는 셀프 조인으로, LEFT JOIN 이라 관리자가 없는 김도 남아 3행이다. 정답은 ①번이다. ② 는 = NULL 도 NULL 행을 잡는다고 본 것, ③ 은 부하 없는 사원을 하나로 보고 LEFT JOIN 에서 김을 뺀 것, ④ 는 IS NULL 도 NULL 행을 못 잡는다고 본 것이다.",
+      "references": [
+        {
+          "type": "erd",
+          "caption": "사원 자기 참조 ERD (관리자는 없을 수 있음)",
+          "mermaid": "erDiagram\n    사원 |o..o{ 사원 : \"관리\"\n    사원 {\n        int 사번 PK\n        string 이름\n        int 관리자사번 FK\n    }"
+        },
+        {
+          "type": "table",
+          "caption": "사원",
+          "headers": [
+            "사번",
+            "이름",
+            "관리자사번"
+          ],
+          "rows": [
+            [
+              "1",
+              "김",
+              "NULL"
+            ],
+            [
+              "2",
+              "이",
+              "1"
+            ],
+            [
+              "3",
+              "박",
+              "1"
+            ]
+          ]
+        },
+        {
+          "type": "sql",
+          "code": "-- ㉠\nSELECT * FROM 사원\nWHERE 관리자사번 IS NULL;\n-- ㉡\nSELECT * FROM 사원\nWHERE 관리자사번 = NULL;\n-- ㉢ 부하가 없는 사원 수\nSELECT COUNT(*) FROM 사원 E\nWHERE NOT EXISTS\n  (SELECT 1 FROM 사원 M\n   WHERE M.관리자사번 = E.사번);\n-- ㉣\nSELECT * FROM 사원 E\nLEFT JOIN 사원 M\n  ON E.관리자사번 = M.사번;"
+        }
+      ]
     },
     {
       "subject": "2과목",
@@ -1300,22 +1485,22 @@
         {
           "type": "sql",
           "caption": "가",
-          "code": "SELECT A.평가번호,\n       (SELECT B.상품명 FROM 상품 B WHERE A.상품ID = B.상품ID AND ROWNUM = 1) AS 상품명\nFROM   평가항목 A;"
+          "code": "SELECT A.평가번호,\n       (SELECT B.상품명 FROM 상품 B\n         WHERE A.상품ID = B.상품ID\n           AND ROWNUM = 1) AS 상품명\nFROM   평가항목 A;"
         },
         {
           "type": "sql",
           "caption": "나",
-          "code": "SELECT (SELECT B.상품명 FROM 상품 B WHERE A.상품ID = B.상품ID) AS 상품명\nFROM   평가항목 A;"
+          "code": "SELECT (SELECT B.상품명 FROM 상품 B\n         WHERE A.상품ID = B.상품ID)\n       AS 상품명\nFROM   평가항목 A;"
         },
         {
           "type": "sql",
           "caption": "다",
-          "code": "SELECT *\nFROM   상품 A\nWHERE  A.상품ID = (SELECT 상품ID FROM 평가항목);"
+          "code": "SELECT *\nFROM   상품 A\nWHERE  A.상품ID =\n       (SELECT 상품ID FROM 평가항목);"
         },
         {
           "type": "sql",
           "caption": "라",
-          "code": "SELECT *\nFROM   상품 A\nWHERE  EXISTS (SELECT 1 FROM 평가항목 B WHERE A.상품ID = B.상품ID);"
+          "code": "SELECT *\nFROM   상품 A\nWHERE  EXISTS\n       (SELECT 1 FROM 평가항목 B\n         WHERE A.상품ID = B.상품ID);"
         }
       ]
     },
@@ -1416,15 +1601,21 @@
     {
       "subject": "2과목",
       "number": 40,
-      "title": "아래 네 SQL 중 결과가 나머지와 다른 것은?",
+      "title": "아래 SQL 의 결과(A, B, C, D)로 옳은 것은?",
       "options": [
-        "LPAD('BCD', 3, 'A')",
-        "RTRIM('EBCDE', 'E')",
-        "SUBSTR('ABCDE', 2, 3)",
-        "CONCAT(CONCAT(NULL, 'BC'), 'D')"
+        "AABCD, BCDEF, BCxy, EBC",
+        "AABCD, BCD, BCxy, EBC",
+        "AABCD, BCD, BCxyxy, EBCD",
+        "ABCD, BCD, BCxy, EB"
       ],
       "correctIndex": 1,
-      "explanation": "① LPAD('BCD', 3, 'A') 는 이미 길이가 3 이라 채울 자리가 없어 'BCD' 그대로다. ③ SUBSTR('ABCDE', 2, 3) 은 두 번째 글자부터 세 글자라 'BCD' 다. ④ Oracle 의 CONCAT 은 NULL 을 빈 문자열처럼 이어 붙여 CONCAT(NULL, 'BC') 가 'BC' 가 되고, 여기에 'D' 를 붙여 'BCD' 다. ② RTRIM('EBCDE', 'E') 는 오른쪽 끝의 E 만 지우고 앞쪽 E 는 남기므로 'EBCD' 가 되어 혼자 다르다."
+      "explanation": "LPAD·RPAD 의 두 번째 인자는 결과의 전체 길이다. A 는 길이 5 가 되도록 왼쪽을 'A' 로 채워 'AABCD' 다. 원래 문자열이 지정한 길이보다 길면 채우는 대신 잘라 내므로 B 는 앞 3글자 'BCD' 다. C 는 길이 4 가 될 때까지 오른쪽을 'xy' 로 채워 'BCxy' 다. D 의 RTRIM 은 오른쪽에서 D 나 E 가 아닌 글자가 나올 때까지 지워 'EBC' 다. 정답은 ②번이다. ① 은 길이가 넘쳐도 그대로 둔다고 본 것, ③ 은 채울 문자열을 통째로 두 번 붙이고 RTRIM 을 한 글자만 지운 것, ④ 는 채울 글자 수와 지울 글자 수를 잘못 센 것이다.",
+      "references": [
+        {
+          "type": "sql",
+          "code": "SELECT LPAD('BCD', 5, 'A')   AS A,\n       LPAD('BCDEF', 3, 'A') AS B,\n       RPAD('BC', 4, 'xy')   AS C,\n       RTRIM('EBCDE', 'DE')  AS D\nFROM   DUAL;"
+        }
+      ]
     },
     {
       "subject": "2과목",
@@ -1635,39 +1826,54 @@
         },
         {
           "type": "sql",
-          "code": "SELECT AVG(COL1), AVG(COL2) FROM T WHERE COL2 IS NOT NULL;"
+          "code": "SELECT AVG(COL1), AVG(COL2)\nFROM T\nWHERE COL2 IS NOT NULL;"
         }
       ]
     },
     {
       "subject": "2과목",
       "number": 45,
-      "title": "UNION 에 대한 설명으로 가장 적절한 것은?",
+      "title": "아래 ERD 와 데이터에서 '주문했거나 문의한 고객' 등을 구하는 SQL ㉠~㉣ 의 결과 행 수로 옳은 것은?",
       "options": [
-        "UNION ALL 보다 성능이 좋다.",
-        "상호 배타적 조건에만 사용된다.",
-        "합집합이며 중복 행은 하나로 취급한다.",
-        "중복 허용을 기본으로 한다."
+        "3, 5, 2, 1",
+        "5, 5, 1, 1",
+        "3, 5, 1, 1",
+        "3, 3, 1, 2"
       ],
       "correctIndex": 2,
-      "explanation": "UNION 은 두 SELECT 결과를 합치되 중복된 행은 하나로 줄인다(③). 중복을 없애려고 정렬·비교를 더 하므로 ① 과 달리 UNION ALL 보다 일반적으로 느리다. ② UNION 은 두 조건이 서로 배타적인지와 상관없이 쓸 수 있고, ④ 중복을 그대로 두는 것은 UNION ALL 이다."
+      "explanation": "고객 한 명이 주문과 문의를 여러 건 가질 수 있는 1:M 관계 두 개다. ㉠ UNION 은 두 결과를 합치고 중복을 하나로 줄여 C1, C2, C3 의 3행이다. ㉡ UNION ALL 은 중복을 남겨 3 + 2 = 5행이다. ㉢ 조인은 같은 고객번호끼리 짝을 지어, C2 의 주문 1건과 문의 1건이 만나 1행이다. ㉣ INTERSECT 는 양쪽에 모두 있는 C2 하나라 1행이다. 정답은 ③번이다. ① 은 조인에서 C1 도 짝이 생긴다고 본 것, ② 는 UNION 도 중복을 남긴다고 본 것, ④ 는 UNION ALL 도 중복을 없앤다고 보고 교집합을 2명으로 본 것이다.",
+      "references": [
+        {
+          "type": "erd",
+          "caption": "고객·주문·문의 ERD",
+          "mermaid": "erDiagram\n    고객 ||..o{ 주문 : \"주문함\"\n    고객 ||..o{ 문의 : \"문의함\"\n    고객 {\n        string 고객번호 PK\n    }\n    주문 {\n        string 주문번호 PK\n        string 고객번호 FK\n    }\n    문의 {\n        string 문의번호 PK\n        string 고객번호 FK\n    }"
+        },
+        {
+          "type": "text",
+          "content": "주문의 고객번호: C1, C1, C2\n문의의 고객번호: C2, C3"
+        },
+        {
+          "type": "sql",
+          "code": "-- ㉠\nSELECT 고객번호 FROM 주문\nUNION\nSELECT 고객번호 FROM 문의;\n-- ㉡\nSELECT 고객번호 FROM 주문\nUNION ALL\nSELECT 고객번호 FROM 문의;\n-- ㉢\nSELECT O.고객번호\nFROM 주문 O JOIN 문의 Q\n  ON O.고객번호 = Q.고객번호;\n-- ㉣\nSELECT 고객번호 FROM 주문\nINTERSECT\nSELECT 고객번호 FROM 문의;"
+        }
+      ]
     },
     {
       "subject": "2과목",
       "number": 46,
-      "title": "아래 SQL 의 결과로 옳은 것은?",
+      "title": "아래 SQL 의 결과(A, B, C, D)로 옳은 것은? (Oracle 기준)",
       "options": [
-        "AB",
-        "BCDE",
-        "CDE",
-        "ABCDE"
+        "BCDE, A, NULL, DE",
+        "BCDE, AB, NULL, DE",
+        "BCDE, AB, E, ED",
+        "CDE, AB, NULL, DE"
       ],
       "correctIndex": 1,
-      "explanation": "`SUBSTR('ABCDE', 2)`는 두 번째 문자부터 끝까지 잘라 온다. 길이를 지정하지 않으면 끝까지 가져오므로 'BCDE'가 된다. 시작 위치는 1부터 센다. 정답은 ②번이다. ① AB 는 앞 두 글자, ③ CDE 는 세 번째 글자부터, ④ ABCDE 는 시작 위치를 1 로 줬을 때의 결과다.",
+      "explanation": "SUBSTR 에 길이를 주지 않으면 시작 위치부터 끝까지라 A 는 'BCDE' 다. Oracle 은 시작 위치 0 을 1 로 보므로 B 는 'AB' 다. 시작 위치가 문자열 길이를 넘으면 잘라 낼 글자가 없어 C 는 NULL 이다. 음수 위치는 뒤에서 세어 D 는 뒤에서 2번째부터 끝까지인 'DE' 다. 정답은 ②번이다. ① 은 0 을 0번째 글자로 보아 한 글자만 남긴 것, ③ 은 범위를 넘으면 마지막 글자를 준다고 보고 음수 위치를 거꾸로 읽은 것, ④ 는 위치를 0 부터 센 것이다. PostgreSQL 에서는 B 가 'A' 가 되어 결과가 다르다.",
       "references": [
         {
           "type": "sql",
-          "code": "SELECT SUBSTR('ABCDE', 2) FROM DUAL;"
+          "code": "SELECT SUBSTR('ABCDE', 2)    AS A,\n       SUBSTR('ABCDE', 0, 2) AS B,\n       SUBSTR('ABCDE', 6)    AS C,\n       SUBSTR('ABCDE', -2)   AS D\nFROM   DUAL;"
         }
       ]
     },
@@ -1693,19 +1899,50 @@
     {
       "subject": "2과목",
       "number": 48,
-      "title": "부서별 연봉 합계를 구해 합계가 큰 순서대로 조회하려 한다. 아래 SQL 의 빈칸에 들어갈 키워드 조합으로 옳은 것은?",
+      "title": "부서별 연봉 합계를 큰 순서대로 보려고 아래 SQL ㉠, ㉡ 을 실행했다. 각 결과의 첫 번째 행에 나오는 부서코드로 옳은 것은? (Oracle 기준)",
       "options": [
-        "GROUP BY, DESC",
-        "HAVING, ASC",
-        "ORDER BY, DESC",
-        "GROUP BY, ASC"
+        "D3, D2",
+        "D2, D2",
+        "D2, D3",
+        "D3, D3"
       ],
       "correctIndex": 0,
-      "explanation": "부서별로 합계를 구하려면 GROUP BY 부서로 그룹을 만들어야 한다. 합계 큰 순서로 보고 싶다면 ORDER BY에 DESC(내림차순)를 붙인다. ORDER BY는 ASC가 기본이므로 큰 값부터 보려면 DESC를 명시해야 한다. 정답은 ①번이다. ② HAVING 은 그룹을 거르는 조건이라 그룹을 만드는 자리에 올 수 없고, ③ 첫 빈칸에 ORDER BY 를 넣으면 부서별로 묶이지 않으며, ②·④ 의 ASC 는 작은 값부터 정렬한다.",
+      "explanation": "SUM 은 NULL 을 빼고 더하므로 D1 은 300, D2 는 500 이다. D3 은 연봉이 모두 NULL 이라 더할 값이 없어 0 이 아니라 NULL 이 된다. Oracle 은 NULL 을 가장 큰 값처럼 정렬하므로 DESC 에서는 NULL 이 맨 앞에 온다. 그래서 ㉠ 은 D3, D2, D1 순서이고 첫 행은 D3 이다. ㉡ 은 NULLS LAST 로 NULL 을 뒤로 보내 D2, D1, D3 순서가 되고 첫 행은 D2 다. 정답은 ①번이다. ② 는 D3 의 합계를 0 으로 본 것이고, ③ 은 두 결과를 바꿔 본 것, ④ 는 NULLS LAST 가 DESC 와 함께 쓰이면 무시된다고 본 것이다. 합계가 큰 부서를 정확히 보려면 NVL(SUM(연봉), 0) 으로 정렬하거나 NULLS LAST 를 붙인다.",
       "references": [
         {
+          "type": "table",
+          "caption": "사원",
+          "headers": [
+            "사번",
+            "부서코드",
+            "연봉"
+          ],
+          "rows": [
+            [
+              "1",
+              "D1",
+              "300"
+            ],
+            [
+              "2",
+              "D1",
+              "NULL"
+            ],
+            [
+              "3",
+              "D2",
+              "500"
+            ],
+            [
+              "4",
+              "D3",
+              "NULL"
+            ]
+          ]
+        },
+        {
           "type": "sql",
-          "code": "SELECT 부서, SUM(연봉) FROM EMP\n(   ) 부서\nORDER BY SUM(연봉) (   );"
+          "code": "-- ㉠\nSELECT 부서코드, SUM(연봉)\nFROM 사원\nGROUP BY 부서코드\nORDER BY SUM(연봉) DESC;\n-- ㉡\nSELECT 부서코드, SUM(연봉)\nFROM 사원\nGROUP BY 부서코드\nORDER BY SUM(연봉) DESC\n         NULLS LAST;"
         }
       ]
     },
@@ -1770,7 +2007,7 @@
         },
         {
           "type": "sql",
-          "code": "SELECT COL1\nFROM (\n    SELECT COL1,\n           RANK() OVER (PARTITION BY 부서 ORDER BY 연봉 DESC) AS RN\n    FROM EMP\n)\nWHERE RN = 1\nORDER BY COL1;"
+          "code": "SELECT COL1\nFROM (\n    SELECT COL1,\n           RANK() OVER (\n             PARTITION BY 부서\n             ORDER BY 연봉 DESC) AS RN\n    FROM EMP\n)\nWHERE RN = 1\nORDER BY COL1;"
         }
       ]
     },
@@ -1835,7 +2072,7 @@
         },
         {
           "type": "sql",
-          "code": "SELECT COUNT(*) FROM T\nSTART WITH COL1 = 2\nCONNECT BY PRIOR COL1 = COL2 AND COL1 <> 5;"
+          "code": "SELECT COUNT(*) FROM T\nSTART WITH COL1 = 2\nCONNECT BY PRIOR COL1 = COL2\n       AND COL1 <> 5;"
         }
       ]
     }

@@ -50,15 +50,22 @@
     {
       "subject": "1과목",
       "number": 2,
-      "title": "관계의 표기법 요소가 아닌 것은?",
+      "title": "아래 ERD 의 관계 표기(관계명·관계차수·관계선택사양)를 바르게 읽은 것은? (IE 표기법)",
       "options": [
-        "관계명",
-        "관계차수",
-        "관계선택사양",
-        "관계분류"
+        "관계명: 고객, 관계차수: 1:M, 고객은 주문이 반드시 하나 이상 있어야 한다.",
+        "관계명: 주문함, 관계차수: M:N, 주문은 고객이 없을 수 있다.",
+        "관계명: 주문함, 관계차수: 1:1, 고객은 주문이 없을 수 있다.",
+        "관계명: 주문함, 관계차수: 1:M, 주문은 반드시 고객 하나에 속하고 고객은 주문이 없을 수 있다."
       ],
       "correctIndex": 3,
-      "explanation": "관계의 표기법은 관계명(관계의 이름), 관계차수(1:1, 1:M, M:N), 관계선택사양(필수·선택) 세 가지다(①②③). '관계분류' 는 표기법 요소가 아니다(④)."
+      "explanation": "관계 표기의 요소는 관계명, 관계차수, 관계선택사양이다. 관계명은 관계선 위의 이름(주문함)이다. 관계차수는 선 끝 모양으로 읽는다. 주문 쪽 끝이 까마귀발({)이라 고객 하나에 주문이 여럿일 수 있는 1:M 이다. 관계선택사양은 원(o, 없을 수 있음)과 막대(|, 반드시 있음)로 읽는다. 고객 쪽 끝의 || 는 주문 하나에 고객이 반드시 하나라는 뜻이고, 주문 쪽 끝의 o{ 는 고객이 주문을 하나도 안 했을 수 있다는 뜻이다. 정답은 ④번이다. ① 은 엔터티 이름을 관계명으로 보고 주문 쪽 원(o)을 필수로 읽은 것이고, ② 는 한쪽에만 까마귀발이 있는데 M:N 으로 본 것, ③ 은 까마귀발을 무시하고 1:1 로 본 것이다.",
+      "references": [
+        {
+          "type": "erd",
+          "caption": "고객·주문 ERD",
+          "mermaid": "erDiagram\n    고객 ||..o{ 주문 : \"주문함\"\n    고객 {\n        string 고객번호 PK\n    }\n    주문 {\n        string 주문번호 PK\n        string 고객번호 FK\n    }"
+        }
+      ]
     },
     {
       "subject": "1과목",
@@ -101,19 +108,20 @@
     {
       "subject": "1과목",
       "number": 5,
-      "title": "발생 시점 기준 중심 엔터티에 해당하는 예는?",
+      "title": "아래 병원 ERD 에서 발생 시점에 따른 중심 엔터티로 가장 적절한 것은?",
       "options": [
-        "사원",
-        "고객",
-        "계약",
-        "주문목록"
+        "환자",
+        "의사",
+        "진료",
+        "처방내역"
       ],
       "correctIndex": 2,
-      "explanation": "사원·고객(①②)은 다른 엔터티 없이 스스로 존재하는 기본 엔터티, 계약(③)은 기본 엔터티(고객·상품 등)로부터 생겨 업무의 중심이 되는 중심 엔터티, 주문목록(④)은 두 개 이상의 엔터티(주문·상품)로부터 생기고 자주 바뀌는 행위 엔터티다. SQL 전문가 가이드의 예시(기본: 사원·부서·고객 / 중심: 계약·사고·청구 / 행위: 주문목록·사원변경이력)와 같다. ※ 복원 자료의 보기(프로젝트, 주문)는 분류가 갈려 정답이 하나로 정해지지 않아, 가이드 예시로 보기를 바꿨다.",
+      "explanation": "중심 엔터티는 기본 엔터티로부터 생겨 업무의 중심 역할을 하고, 다시 행위 엔터티의 부모가 된다. 진료는 기본 엔터티인 환자·의사에서 생기고 처방내역의 부모가 되므로 중심 엔터티다. 정답은 ③번이다. ① 환자와 ② 의사는 다른 엔터티 없이 존재하는 기본 엔터티다. ④ 처방내역은 진료와 약품 두 부모에서 생기고 처방할 때마다 늘어나는 행위 엔터티다. 주문·계약·청구처럼 업무의 중심 거래가 흔히 중심 엔터티가 된다.",
       "references": [
         {
-          "type": "text",
-          "content": "발생 시점 기준 엔터티 분류\n\n• 기본(Key) 엔터티: 다른 엔터티에 의존하지 않고 독립적으로 존재한다.\n• 중심(Main) 엔터티: 기본 엔터티로부터 발생하며, 다른 행위 엔터티의 부모가 된다.\n• 행위(Action) 엔터티: 두 개 이상의 부모 엔터티로부터 업무 행위의 결과로 발생한다."
+          "type": "erd",
+          "caption": "병원 ERD",
+          "mermaid": "erDiagram\n    환자 ||..o{ 진료 : \"받음\"\n    의사 ||..o{ 진료 : \"담당\"\n    진료 ||--o{ 처방내역 : \"포함\"\n    약품 ||..o{ 처방내역 : \"처방\""
         }
       ]
     },
@@ -139,34 +147,66 @@
     {
       "subject": "1과목",
       "number": 7,
-      "title": "아래 설명에 해당하는 개념은?",
+      "title": "아래 [좌석예약] 인스턴스를 유일하게 구분하는 식별자로 가장 적절한 속성 조합은? (한 공연은 여러 회차가 있고, 같은 좌석을 회차마다 따로 예약한다)",
       "options": [
-        "관계",
-        "속성",
-        "도메인",
-        "식별자"
+        "(공연ID)",
+        "(공연ID, 좌석)",
+        "(회차, 좌석)",
+        "(공연ID, 회차, 좌석)"
       ],
       "correctIndex": 3,
-      "explanation": "엔터티의 인스턴스를 유일하게 구분하는 하나 또는 그 이상의 속성 집합은 식별자다(④). 관계(①)는 엔터티 사이의 연관, 속성(②)은 엔터티를 구성하는 더 이상 분리되지 않는 데이터 단위, 도메인(③)은 속성이 가질 수 있는 값의 범위다.",
+      "explanation": "식별자는 엔터티의 인스턴스를 유일하게 구분하는 하나 이상의 속성 집합이다. (공연ID, 좌석)은 P1-A1 이 1회·2회 두 번 나오고, (회차, 좌석)은 1회-A1 이 P1·P2 두 번 나와 구분하지 못한다. (공연ID, 회차, 좌석)은 모두 다르고 하나라도 빼면 겹치므로 유일성과 최소성을 함께 만족한다. 정답은 ④번이다. 예약자는 같은 사람이 여러 좌석을 예약할 수 있어 식별자에 넣지 않는다.",
       "references": [
         {
-          "type": "text",
-          "content": "엔터티의 인스턴스를 유일하게 구분할 수 있게 하는 하나 또는 그 이상의 속성 집합"
+          "type": "table",
+          "caption": "좌석예약",
+          "headers": [
+            "공연ID",
+            "회차",
+            "좌석",
+            "예약자"
+          ],
+          "rows": [
+            [
+              "P1",
+              "1",
+              "A1",
+              "김"
+            ],
+            [
+              "P1",
+              "2",
+              "A1",
+              "이"
+            ],
+            [
+              "P2",
+              "1",
+              "A1",
+              "박"
+            ],
+            [
+              "P1",
+              "1",
+              "A2",
+              "최"
+            ]
+          ]
         }
       ]
     },
     {
       "subject": "1과목",
       "number": 8,
-      "title": "데이터베이스 스키마의 종류가 아닌 것은?",
+      "title": "아래 산출물 중 3단계 스키마(외부·개념·내부) 어디에도 해당하지 않는 것은?",
       "options": [
-        "외부 스키마",
-        "내부 스키마",
-        "개념 스키마",
-        "응용 스키마"
+        "사용자·업무별로 필요한 데이터만 보여 주는 뷰 정의",
+        "조직 전체의 테이블·칼럼·관계를 통합한 정의",
+        "데이터 파일 배치, 인덱스 등 저장 구조 정의",
+        "응용 프로그램 소스에 들어 있는 SQL 문 모음"
       ],
       "correctIndex": 3,
-      "explanation": "ANSI/SPARC 3단계 구조의 스키마는 사용자 관점의 외부 스키마(①), 조직 전체 관점의 개념 스키마(③), 물리적 저장 구조의 내부 스키마(②) 세 가지다. 응용 스키마는 이 분류에 없다(④)."
+      "explanation": "3단계 스키마는 사용자 관점의 외부 스키마(①), 조직 전체 관점의 개념 스키마(②), 저장 관점의 내부 스키마(③)로 이루어진다. 응용 프로그램 소스의 SQL 모음은 데이터베이스 구조를 정의하는 스키마가 아니라 데이터를 쓰는 프로그램 쪽 산출물이다. '응용 스키마' 같은 단계는 3단계 스키마에 없다. 정답은 ④번이다."
     },
     {
       "subject": "1과목",
@@ -184,22 +224,50 @@
         {
           "type": "erd",
           "caption": "학생·강좌·교수·수강신청 ERD",
-          "mermaid": "erDiagram\n    학생 ||--o{ 수강신청 : \"신청\"\n    강좌 ||--o{ 수강신청 : \"개설\"\n    교수 ||--o{ 강좌 : \"담당\"\n    학생 {\n        string 학번 PK\n        string 이름\n    }\n    강좌 {\n        string 강좌코드 PK\n        string 강좌명\n        string 교수번호 FK\n    }\n    교수 {\n        string 교수번호 PK\n        string 교수명\n    }\n    수강신청 {\n        string 학번 PK,FK\n        string 강좌코드 PK,FK\n        date 신청일자\n        string 성적\n    }"
+          "mermaid": "erDiagram\n    학생 ||--o{ 수강신청 : \"신청\"\n    강좌 ||--o{ 수강신청 : \"개설\"\n    교수 ||..o{ 강좌 : \"담당\"\n    학생 {\n        string 학번 PK\n        string 이름\n    }\n    강좌 {\n        string 강좌코드 PK\n        string 강좌명\n        string 교수번호 FK\n    }\n    교수 {\n        string 교수번호 PK\n        string 교수명\n    }\n    수강신청 {\n        string 학번 PK,FK\n        string 강좌코드 PK,FK\n        date 신청일자\n        string 성적\n    }"
         }
       ]
     },
     {
       "subject": "1과목",
       "number": 10,
-      "title": "속성이 가질 수 있는 값의 범위를 정의한 것으로, 데이터 타입과 범위를 지정한 개념은?",
+      "title": "아래 세 엔터티의 금액 속성을 도메인 관점에서 본 설명으로 가장 적절한 것은?",
       "options": [
-        "도메인",
-        "엔터티",
-        "식별자",
-        "인스턴스"
+        "같은 의미의 금액이므로 하나의 '금액' 도메인을 정의해 타입·길이·허용 범위를 통일하는 것이 좋다.",
+        "도메인은 엔터티마다 하나씩만 정의하므로 세 엔터티의 금액은 따로 정의해야 한다.",
+        "도메인은 주식별자 속성에만 정의하므로 금액 속성과는 관계가 없다.",
+        "환불금액을 문자형으로 둔 것은 표현 방식의 차이일 뿐 도메인과는 상관없다."
       ],
       "correctIndex": 0,
-      "explanation": "속성이 가질 수 있는 값의 범위(데이터 타입·크기·제약)를 정의한 것은 도메인이다(①). 엔터티(②)는 관리할 대상 집합, 식별자(③)는 인스턴스를 구분하는 속성, 인스턴스(④)는 엔터티에 속한 개별 데이터 한 건이다."
+      "explanation": "도메인은 속성이 가질 수 있는 값의 범위(데이터 타입, 길이, 허용 값, 기본값 등)를 정한 것이다. 의미가 같은 속성에 같은 도메인을 적용하면 엔터티가 달라도 타입과 범위가 일관되어, 금액끼리 비교·계산할 때 형 변환이나 자릿수 문제가 생기지 않는다. 표처럼 같은 '원 단위 금액' 이 NUMBER(10), NUMBER(12,2), VARCHAR2(10) 로 제각각이면 도메인이 통일되지 않은 상태다. 정답은 ①번이다. ② 도메인은 엔터티가 아니라 속성의 값 범위를 정하는 것이라 여러 엔터티가 함께 쓸 수 있고, ③ 주식별자에 한정되지 않으며, ④ 금액을 문자형으로 두면 계산·정렬이 달라지므로 바로 도메인 문제다.",
+      "references": [
+        {
+          "type": "table",
+          "caption": "금액 속성 정의",
+          "headers": [
+            "엔터티.속성",
+            "타입"
+          ],
+          "rows": [
+            [
+              "주문.주문금액",
+              "NUMBER(10)"
+            ],
+            [
+              "결제.결제금액",
+              "NUMBER(12,2)"
+            ],
+            [
+              "환불.환불금액",
+              "VARCHAR2(10)"
+            ]
+          ]
+        },
+        {
+          "type": "text",
+          "content": "세 속성 모두 '원 단위 금액' 을 뜻한다."
+        }
+      ]
     },
     {
       "subject": "2과목",
@@ -308,7 +376,7 @@
         },
         {
           "type": "sql",
-          "code": "CREATE VIEW V_TBL AS\nSELECT * FROM TBL WHERE C1 = 'B' OR C1 IS NULL;\n\nSELECT SUM(C2) FROM V_TBL\nWHERE C2 >= 200 AND C1 = 'B';"
+          "code": "CREATE VIEW V_TBL AS\nSELECT * FROM TBL\nWHERE C1 = 'B' OR C1 IS NULL;\n\nSELECT SUM(C2) FROM V_TBL\nWHERE C2 >= 200 AND C1 = 'B';"
         }
       ]
     },
@@ -391,7 +459,7 @@
         },
         {
           "type": "sql",
-          "code": "-- ㄱ\nSELECT COUNT(*)\nFROM   TAB1 A LEFT OUTER JOIN TAB2 B\nON     (A.C1 = B.C1 AND B.C2 BETWEEN 1 AND 3);\n\n-- ㄴ\nSELECT COUNT(*)\nFROM   TAB1 A LEFT OUTER JOIN TAB2 B\nON     (A.C1 = B.C1)\nWHERE  B.C2 BETWEEN 1 AND 3;"
+          "code": "-- ㄱ\nSELECT COUNT(*)\nFROM   TAB1 A LEFT OUTER JOIN TAB2 B\nON     (A.C1 = B.C1\n        AND B.C2 BETWEEN 1 AND 3);\n\n-- ㄴ\nSELECT COUNT(*)\nFROM   TAB1 A LEFT OUTER JOIN TAB2 B\nON     (A.C1 = B.C1)\nWHERE  B.C2 BETWEEN 1 AND 3;"
         }
       ]
     },
@@ -422,26 +490,26 @@
         },
         {
           "type": "sql",
-          "code": "-- STR = 'abcdefg'\nSELECT SUBSTR(STR, LENGTH(STR) - 3) FROM T;"
+          "code": "-- STR = 'abcdefg'\nSELECT SUBSTR(STR, LENGTH(STR) - 3)\nFROM T;"
         }
       ]
     },
     {
       "subject": "2과목",
       "number": 15,
-      "title": "아래 SQL 의 결과로 옳은 것은?",
+      "title": "행이 있는 TAB1 테이블에 대한 SQL ㉠~㉣ 의 결과로 옳은 것은?",
       "options": [
-        "0",
-        "9999",
-        "1",
-        "ERROR"
+        "0, 9999, 공집합, 0",
+        "9999, 9999, 9999, 0",
+        "0, 9999, 9999, 0",
+        "0, NULL, 공집합, 0"
       ],
       "correctIndex": 0,
-      "explanation": "COUNT(*) 는 조건을 만족하는 행이 없어도 NULL 이 아니라 0 을 반환한다. 그래서 NVL(0, 9999) = 0 이다(①). 대체값 9999 가 나오려면 SUM·MAX 처럼 공집합에서 NULL 을 반환하는 집계 함수여야 한다. ② 9999 는 COUNT 가 NULL 을 돌려준다고 본 값이고, ④ 오류는 나지 않는다.",
+      "explanation": "대상 행이 없어도 GROUP BY 없는 집계는 1행을 돌려준다. COUNT(*) 는 0 이라 NULL 이 아니므로 ㉠ 의 NVL 은 그대로 0 이다. MAX 는 NULL 이라 ㉡ 은 NVL 이 9999 로 바꾼다. ㉢ 은 집계가 아닌 단일 행 함수라 행이 없으면 결과도 없는 공집합이다. ㉣ 은 COUNT 라 0 이다. 정답은 ①번이다. ② 는 COUNT(*) 도 NULL 이 된다고 본 것, ③ 은 행이 없어도 단일 행 함수가 값을 낸다고 본 것, ④ 는 바깥 NVL 이 MAX 결과를 바꾼다는 점을 놓친 것이다.",
       "references": [
         {
           "type": "sql",
-          "code": "SELECT NVL(COUNT(*), 9999)\nFROM   TAB1\nWHERE  1 = 2;"
+          "code": "-- ㉠\nSELECT NVL(COUNT(*), 9999)\nFROM TAB1 WHERE 1 = 2;\n-- ㉡\nSELECT NVL(MAX(COL1), 9999)\nFROM TAB1 WHERE 1 = 2;\n-- ㉢\nSELECT NVL(COL1, 9999)\nFROM TAB1 WHERE 1 = 2;\n-- ㉣\nSELECT COUNT(NVL(COL1, 0))\nFROM TAB1 WHERE 1 = 2;"
         }
       ]
     },
@@ -509,13 +577,13 @@
       "number": 17,
       "title": "카테고리번호 11 에서 상위 카테고리까지 역방향으로 조회하는 계층형 SQL 로 옳은 것은?",
       "options": [
-        "START WITH 카테고리번호=11 CONNECT BY PRIOR 카테고리번호=상위카테고리번호",
-        "START WITH 카테고리번호=11 CONNECT BY 카테고리번호=PRIOR 상위카테고리번호",
-        "START WITH 상위카테고리번호=11 CONNECT BY PRIOR 카테고리번호=상위카테고리번호",
-        "START WITH 카테고리번호=11 CONNECT BY 상위카테고리번호=PRIOR 상위카테고리번호"
+        "START WITH 카테고리번호=11 CONNECT BY PRIOR 카테고리번호=상위번호",
+        "START WITH 카테고리번호=11 CONNECT BY 카테고리번호=PRIOR 상위번호",
+        "START WITH 상위번호=11 CONNECT BY PRIOR 카테고리번호=상위번호",
+        "START WITH 카테고리번호=11 CONNECT BY 상위번호=PRIOR 상위번호"
       ],
       "correctIndex": 1,
-      "explanation": "자식에서 부모로 올라가는 역방향 전개다. CONNECT BY 에서 PRIOR 가 붙은 컬럼은 '바로 앞에 찾은 행' 의 값이다. ② `카테고리번호 = PRIOR 상위카테고리번호` 는 앞에 찾은 행(11)의 상위카테고리번호(5)와 카테고리번호가 같은 행을 다음으로 찾으므로 11 → 5 → 2 → 1 순으로 거슬러 올라간다. ① 은 11 을 상위로 둔 자식을 찾는 순방향이라 11 한 행만 나오고, ③ 은 상위카테고리번호가 11 인 행이 없어 결과가 없으며, ④ 는 상위카테고리번호끼리 비교해 부모를 찾지 못한다.",
+      "explanation": "자식에서 부모로 올라가는 역방향 전개다. CONNECT BY 에서 PRIOR 가 붙은 컬럼은 '바로 앞에 찾은 행' 의 값이다. ② `카테고리번호 = PRIOR 상위번호` 는 앞에 찾은 행(11)의 상위번호(5)와 카테고리번호가 같은 행을 다음으로 찾으므로 11 → 5 → 2 → 1 순으로 거슬러 올라간다. ① 은 11 을 상위로 둔 자식을 찾는 순방향이라 11 한 행만 나오고, ③ 은 상위번호가 11 인 행이 없어 결과가 없으며, ④ 는 상위번호끼리 비교해 부모를 찾지 못한다.",
       "references": [
         {
           "type": "table",
@@ -523,7 +591,7 @@
           "headers": [
             "카테고리번호",
             "카테고리명",
-            "상위카테고리번호"
+            "상위번호"
           ],
           "rows": [
             [
@@ -550,7 +618,7 @@
         },
         {
           "type": "sql",
-          "code": "SELECT 카테고리번호, 카테고리명, LEVEL\nFROM   카테고리\n(   ?   );   -- START WITH ... CONNECT BY ... (보기에서 고르기)"
+          "code": "SELECT 카테고리번호, 카테고리명,\n       LEVEL\nFROM   카테고리\n(   ?   );\n-- START WITH ... CONNECT BY ...\n-- (보기에서 고르기)"
         },
         {
           "type": "table",
@@ -810,7 +878,7 @@
         },
         {
           "type": "sql",
-          "code": "SELECT V FROM T1 UNION     SELECT V FROM T2;\nSELECT V FROM T1 UNION ALL SELECT V FROM T2;"
+          "code": "SELECT V FROM T1\nUNION\nSELECT V FROM T2;\nSELECT V FROM T1\nUNION ALL\nSELECT V FROM T2;"
         }
       ]
     },
@@ -855,19 +923,19 @@
     {
       "subject": "2과목",
       "number": 27,
-      "title": "부서별 최고 연봉을 조회하는 SQL 로 옳은 것은?",
+      "title": "아래 SQL 의 ( ? ) 자리에 ㉠~㉣ 을 각각 넣었을 때 오류가 발생하는 것만 모두 고른 것은?",
       "options": [
-        "GROUP BY 부서",
-        "HAVING 부서",
-        "ORDER BY 부서",
-        "WHERE 부서"
+        "㉡, ㉢",
+        "㉡",
+        "㉢",
+        "㉡, ㉢, ㉣"
       ],
       "correctIndex": 0,
-      "explanation": "SELECT 절에 집계 함수 MAX(연봉) 과 일반 컬럼 부서를 함께 쓰려면 부서를 GROUP BY 로 묶어야 부서별 최고 연봉이 나온다(①). HAVING(②)은 그룹에 대한 조건, ORDER BY(③)는 정렬, WHERE(④)는 행 조건이라 '부서' 만 쓰면 문법에 맞지 않고 그룹도 만들어지지 않는다.",
+      "explanation": "SELECT 에 일반 칼럼(부서)과 집계 함수(MAX)를 함께 쓰려면 그 칼럼으로 GROUP BY 해야 한다. ㉠ 과 ㉣ 은 부서로 묶었으니 부서별 최고 연봉이 나오고, ㉣ 처럼 집계 함수로 정렬하는 것도 된다. ㉡ 은 GROUP BY 없이 HAVING 만 써 테이블 전체가 한 그룹이 되는데, 그 안에서 부서 값은 하나로 정해지지 않아 오류다. ㉢ 도 GROUP BY 가 없어 같은 이유로 오류다. 정답은 ①번이다. ② 와 ③ 은 둘 중 하나만 오류로 본 것, ④ 는 ORDER BY 에 집계 함수를 쓸 수 없다고 본 것이다.",
       "references": [
         {
           "type": "sql",
-          "code": "SELECT 부서, MAX(연봉)\nFROM   EMP\n( ? );"
+          "code": "SELECT 부서, MAX(연봉)\nFROM   EMP\n( ? );\n-- ㉠ GROUP BY 부서\n-- ㉡ HAVING MAX(연봉) > 0\n-- ㉢ ORDER BY 부서\n-- ㉣ GROUP BY 부서\n--    ORDER BY MAX(연봉) DESC"
         }
       ]
     },
@@ -907,7 +975,7 @@
         },
         {
           "type": "sql",
-          "code": "SELECT SUM(급여)/3, COUNT(*), COUNT(급여) FROM T;"
+          "code": "SELECT SUM(급여)/3, COUNT(*),\n       COUNT(급여)\nFROM T;"
         }
       ]
     },
@@ -1053,15 +1121,21 @@
     {
       "subject": "2과목",
       "number": 32,
-      "title": "아래 컬럼 속성(VARCHAR2(8)) 을 변경하는 SQL 로 옳은 것은?",
+      "title": "C1 VARCHAR2(8) 칼럼에 'ABCDEF' 와 NULL 두 행이 있는 테이블 T 에 ㉠~㉤ 을 차례로 실행했다. 성공하는 문장만 모두 고른 것은? (Oracle 기준)",
       "options": [
-        "ALTER TABLE T MODIFY (COL VARCHAR2(10));",
-        "ALTER TABLE T CHANGE COL VARCHAR2(10);",
-        "ALTER TABLE T ALTER COL VARCHAR2(10);",
-        "ALTER TABLE T UPDATE COL VARCHAR2(10);"
+        "㉡, ㉣",
+        "㉡, ㉢, ㉣",
+        "㉠, ㉡, ㉣",
+        "㉡, ㉣, ㉤"
       ],
       "correctIndex": 0,
-      "explanation": "Oracle 에서 이미 있는 컬럼의 타입·크기를 바꿀 때는 ALTER TABLE 테이블명 MODIFY (컬럼명 타입) 을 쓴다(①). CHANGE(②)는 MySQL 문법, ALTER COLUMN(③ 은 COLUMN 도 빠짐)은 SQL Server 문법이며, UPDATE(④)는 데이터를 바꾸는 DML 이다."
+      "explanation": "Oracle 에서 칼럼 정의를 바꿀 때는 MODIFY, 칼럼을 더할 때는 ADD 를 쓴다. 이미 들어 있는 데이터와 맞지 않는 변경은 거부된다. ㉠ 은 6글자인 'ABCDEF' 가 4글자에 들어가지 않아 실패한다. ㉡ 처럼 길이를 늘리는 것은 성공한다. ㉢ 은 NULL 인 행이 이미 있어 NOT NULL 을 걸 수 없다. ㉣ 은 DEFAULT 0 이 있어 기존 두 행에 0 이 채워지므로 NOT NULL 을 지킬 수 있어 성공한다. ㉤ 은 기본값 없이 NOT NULL 칼럼을 더하므로 기존 행이 NULL 이 되어 실패한다(빈 테이블이면 성공). 정답은 ①번이다. ② 는 기존 NULL 행을 검사하지 않는다고 본 것이고, ③ 은 길이를 줄여도 넘치는 글자를 잘라 준다고 본 것, ④ 는 새 칼럼의 NOT NULL 은 이후 입력에만 적용된다고 본 것이다.",
+      "references": [
+        {
+          "type": "sql",
+          "code": "-- ㉠\nALTER TABLE T\n  MODIFY (C1 VARCHAR2(4));\n-- ㉡\nALTER TABLE T\n  MODIFY (C1 VARCHAR2(10));\n-- ㉢\nALTER TABLE T\n  MODIFY (C1 NOT NULL);\n-- ㉣\nALTER TABLE T\n  ADD (C2 NUMBER DEFAULT 0 NOT NULL);\n-- ㉤\nALTER TABLE T\n  ADD (C3 NUMBER NOT NULL);"
+        }
+      ]
     },
     {
       "subject": "2과목",
@@ -1136,15 +1210,21 @@
     {
       "subject": "2과목",
       "number": 35,
-      "title": "아래 설명 중 옳지 않은 것은?",
+      "title": "두 테이블 A(이름), B(성명)에 대한 집합 연산 SQL ㉠~㉣ 중 오류가 나는 것만 모두 고른 것은?",
       "options": [
-        "INTERSECT 는 두 집합의 교집합을 반환한다.",
-        "UNION 은 중복을 제거한다.",
-        "EXCEPT 는 차집합을 반환한다.",
-        "일반 집합 연산은 ORDER BY 구문으로 사용할 수 없다."
+        "㉡",
+        "㉢",
+        "㉠, ㉡",
+        "㉡, ㉢"
       ],
       "correctIndex": 3,
-      "explanation": "INTERSECT 는 교집합(①), UNION 은 중복을 제거한 합집합(②), EXCEPT(Oracle 의 MINUS)는 차집합(③)이다. 집합 연산 결과에도 마지막 SELECT 뒤에 ORDER BY 를 한 번 써서 정렬할 수 있으므로 ④ 가 옳지 않다."
+      "explanation": "집합 연산의 ORDER BY 는 전체 결과에 한 번만, 맨 마지막에 쓴다. 결과의 칼럼 이름은 첫 번째 SELECT 를 따른다. ㉠ 은 첫 번째 SELECT 의 별칭 N 으로 정렬해 문제없다. ㉡ 은 첫 번째 SELECT 뒤에 ORDER BY 를 넣어 오류다. ㉢ 의 성명 은 두 번째 SELECT 의 칼럼이라 결과 칼럼 이름이 아니므로 오류다. ㉣ 은 칼럼 위치 번호로 정렬해 문제없다. 정답은 ④번이다. ① 은 두 번째 SELECT 의 이름도 쓸 수 있다고 본 것이고, ② 는 중간 ORDER BY 를 허용한 것, ③ 은 별칭으로는 정렬할 수 없다고 본 것이다.",
+      "references": [
+        {
+          "type": "sql",
+          "code": "-- ㉠\nSELECT 이름 AS N FROM A\nUNION\nSELECT 성명 FROM B\nORDER BY N;\n-- ㉡\nSELECT 이름 FROM A\nORDER BY 이름\nUNION\nSELECT 성명 FROM B;\n-- ㉢\nSELECT 이름 FROM A\nUNION\nSELECT 성명 FROM B\nORDER BY 성명;\n-- ㉣\nSELECT 이름 FROM A\nUNION\nSELECT 성명 FROM B\nORDER BY 1;"
+        }
+      ]
     },
     {
       "subject": "2과목",
@@ -1168,37 +1248,54 @@
     {
       "subject": "2과목",
       "number": 37,
-      "title": "아래 부서 테이블에서 부서코드 11 → 7 → 2 의 계층 결과를 반환하는 SQL 로 옳은 것은?",
+      "title": "아래 ERD 와 데이터에 대해 Oracle 계층형 질의 ㉠~㉣ 의 결과 행 수를 차례대로 나열한 것은?",
       "options": [
-        "START WITH 부서코드=2 CONNECT BY 상위부서코드 = PRIOR 부서코드",
-        "START WITH 부서코드=2 CONNECT BY PRIOR 상위부서코드 = 부서코드",
-        "START WITH 부서코드=11 CONNECT BY 상위부서코드 = PRIOR 부서코드",
-        "START WITH 부서코드=11 CONNECT BY PRIOR 상위부서코드 = 부서코드"
+        "3, 3, 4, 4",
+        "3, 2, 2, 4",
+        "1, 3, 2, 4",
+        "3, 3, 2, 4"
       ],
       "correctIndex": 3,
-      "explanation": "부서 11 에서 시작해 자식→부모 방향(역방향) 으로 2 까지 거슬러 올라간다. PRIOR 상위부서코드 = 부서코드 형태가 자식 행의 상위부서코드 가 부모 행의 부서코드와 매칭되어 역방향 전개가 이루어진다. ① 은 2 에서 아래(순방향)로 내려가 2 → 7 → 11 로 순서가 반대이고, ② 는 2 에서 위로 올라가 2 한 행만, ③ 은 11 에서 아래로 내려가 11 한 행만 나온다.",
+      "explanation": "트리는 2 아래에 7, 9 가 있고 7 아래에 11, 12 가 있다. ㉠ 은 PRIOR 가 상위코드 쪽에 있어 '방금 읽은 행의 상위코드 = 다음 행의 코드' 로 위로 올라간다. 11 → 7 → 2 의 3행이다. ㉡ 은 '방금 읽은 행의 코드 = 다음 행의 상위코드' 로 아래로 내려가 7, 11, 12 의 3행이다. ㉢ 은 조건을 CONNECT BY 에 넣었다. 7 로 내려가는 연결 자체가 막혀 7 과 그 아래 11, 12 가 모두 빠지고 2, 9 의 2행만 남는다. ㉣ 은 조건을 WHERE 에 넣었다. WHERE 는 트리를 다 만든 뒤 행을 거르므로 7 한 행만 빠지고 2, 9, 11, 12 의 4행이 남는다. 정답은 ④번이다. ① 은 ㉢ 과 ㉣ 을 같다고 본 것이고, ② 는 ㉡ 에서 7 을 빼고 센 것, ③ 은 ㉠ 이 위로 올라가지 못하고 11 하나만 낸다고 본 것이다.",
       "references": [
         {
+          "type": "erd",
+          "caption": "부서 자기 참조 ERD",
+          "mermaid": "erDiagram\n    부서 |o..o{ 부서 : \"상위\"\n    부서 {\n        int 코드 PK\n        int 상위코드 FK\n    }"
+        },
+        {
           "type": "table",
-          "caption": "부서 테이블",
+          "caption": "부서",
           "headers": [
-            "부서코드",
-            "상위부서코드"
+            "코드",
+            "상위코드"
           ],
           "rows": [
             [
-              "11",
-              "7"
+              "2",
+              "NULL"
             ],
             [
               "7",
               "2"
             ],
             [
-              "2",
-              "NULL"
+              "9",
+              "2"
+            ],
+            [
+              "11",
+              "7"
+            ],
+            [
+              "12",
+              "7"
             ]
           ]
+        },
+        {
+          "type": "sql",
+          "code": "-- ㉠\nSELECT 코드 FROM 부서\nSTART WITH 코드 = 11\nCONNECT BY PRIOR 상위코드 = 코드;\n-- ㉡\nSELECT 코드 FROM 부서\nSTART WITH 코드 = 7\nCONNECT BY 상위코드 = PRIOR 코드;\n-- ㉢\nSELECT 코드 FROM 부서\nSTART WITH 코드 = 2\nCONNECT BY PRIOR 코드 = 상위코드\n       AND 코드 <> 7;\n-- ㉣\nSELECT 코드 FROM 부서\nWHERE 코드 <> 7\nSTART WITH 코드 = 2\nCONNECT BY PRIOR 코드 = 상위코드;"
         }
       ]
     },
@@ -1552,7 +1649,7 @@
         },
         {
           "type": "sql",
-          "code": "INSERT INTO T VALUES (1);\nINSERT INTO T VALUES (2);\nSAVEPOINT SV1;\nUPDATE T SET VAL = 4 WHERE VAL = 1;\nSAVEPOINT SV1;          -- 덮어쓰기 (이전 SV1 폐기)\nDELETE FROM T WHERE VAL = 2;\nROLLBACK TO SAVEPOINT SV1;\nINSERT INTO T VALUES (3);\nCOMMIT;\nSELECT MAX(VAL) FROM T;"
+          "code": "INSERT INTO T VALUES (1);\nINSERT INTO T VALUES (2);\nSAVEPOINT SV1;\nUPDATE T SET VAL = 4 WHERE VAL = 1;\nSAVEPOINT SV1;\n-- 덮어쓰기 (이전 SV1 폐기)\nDELETE FROM T WHERE VAL = 2;\nROLLBACK TO SAVEPOINT SV1;\nINSERT INTO T VALUES (3);\nCOMMIT;\nSELECT MAX(VAL) FROM T;"
         }
       ]
     },
@@ -1656,7 +1753,7 @@
         },
         {
           "type": "sql",
-          "code": "SELECT ID, VAL,\n       ROW_NUMBER() OVER (ORDER BY VAL DESC, ID DESC) AS RN\nFROM   T\nORDER BY ID;"
+          "code": "SELECT ID, VAL,\n       ROW_NUMBER() OVER (\n         ORDER BY VAL DESC, ID DESC)\n       AS RN\nFROM   T\nORDER BY ID;"
         }
       ]
     },
@@ -1682,19 +1779,67 @@
     {
       "subject": "2과목",
       "number": 48,
-      "title": "아래 조건이 없는 결합 형태의 조인은?",
+      "title": "아래 SQL 의 조인 형태와 결과로 옳은 것은?",
       "options": [
-        "INNER JOIN",
-        "NATURAL JOIN",
-        "OUTER JOIN",
-        "CROSS JOIN"
+        "INNER JOIN, 2",
+        "NATURAL JOIN, 6",
+        "OUTER JOIN, 12",
+        "CROSS JOIN(카티션 곱), 6"
       ],
       "correctIndex": 3,
-      "explanation": "FROM TABLE1, TABLE2 처럼 조인 조건 없이 테이블을 나열하면 두 테이블의 모든 행 조합(카티션 곱)이 나오며, 이를 ANSI 문법으로 쓴 것이 CROSS JOIN 이다(④). ① INNER·③ OUTER JOIN 은 조인 조건이 필요하고, ② NATURAL JOIN 은 같은 이름 컬럼으로 자동 등가 조인한다.",
+      "explanation": "FROM 에 두 테이블을 나열하고 두 테이블을 잇는 조건이 없으면 모든 행끼리 짝을 짓는 CROSS JOIN(카티션 곱)이 된다. WHERE 의 SAL > 300 은 EMP 만 거르는 조건이라 조인 조건이 아니다. EMP 에서 SAL > 300 인 행은 2명(400, 500)이고, 이들이 DEPT 3행과 모두 짝을 지어 2 × 3 = 6 이다. 정답은 ④번이다. ② NATURAL JOIN 은 이름이 같은 칼럼으로 잇는데 두 테이블에는 같은 이름 칼럼이 없다. ③ 12 는 필터 없이 4 × 3 을 센 값이다.",
       "references": [
         {
+          "type": "table",
+          "caption": "EMP",
+          "headers": [
+            "EMPNO",
+            "SAL"
+          ],
+          "rows": [
+            [
+              "1",
+              "200"
+            ],
+            [
+              "2",
+              "400"
+            ],
+            [
+              "3",
+              "500"
+            ],
+            [
+              "4",
+              "300"
+            ]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "DEPT",
+          "headers": [
+            "DEPTNO",
+            "DNAME"
+          ],
+          "rows": [
+            [
+              "10",
+              "영업"
+            ],
+            [
+              "20",
+              "개발"
+            ],
+            [
+              "30",
+              "인사"
+            ]
+          ]
+        },
+        {
           "type": "sql",
-          "code": "SELECT * FROM TABLE1, TABLE2;  -- 조인 조건 없음"
+          "code": "SELECT COUNT(*)\nFROM   EMP, DEPT\nWHERE  EMP.SAL > 300;"
         }
       ]
     },
@@ -1743,7 +1888,7 @@
         },
         {
           "type": "sql",
-          "code": "SELECT 행, 금액,\n       LAG(금액, 2, 0) OVER (ORDER BY 행) AS 이전금액\nFROM   매출;"
+          "code": "SELECT 행, 금액,\n       LAG(금액, 2, 0) OVER\n         (ORDER BY 행) AS 이전금액\nFROM   매출;"
         },
         {
           "type": "table",
@@ -1786,19 +1931,19 @@
     {
       "subject": "2과목",
       "number": 50,
-      "title": "아래 설명에 해당하는 명령어는?",
+      "title": "빈 테이블 T 에 대해 아래 문장을 차례로 실행했다. ㉠ 문장의 결과와, COMMIT 후 T 의 행 수로 옳은 것은? (Oracle 기준)",
       "options": [
-        "COMMIT",
-        "ROLLBACK",
-        "SAVEPOINT",
-        "GRANT"
+        "성공, 3",
+        "오류, 2",
+        "오류, 0",
+        "성공, 2"
       ],
       "correctIndex": 1,
-      "explanation": "트랜잭션 중 문제가 생겼을 때 커밋되지 않은 모든 변경을 취소하고 이전 상태로 되돌리는 명령은 ROLLBACK 이다(②). COMMIT(①)은 변경을 확정, SAVEPOINT(③)는 되돌아갈 저장점 지정, GRANT(④)는 권한 부여 명령이다.",
+      "explanation": "ROLLBACK TO SP1 은 SP1 이후의 작업(2, 3 입력)을 취소하고, SP1 뒤에 만든 저장점 SP2 도 함께 없앤다. 그래서 ㉠ ROLLBACK TO SP2 는 없는 저장점으로 돌아가려는 것이라 오류가 난다. Oracle 에서는 오류가 난 문장만 취소되고 트랜잭션은 그대로 이어진다. 1 은 SP1 전에 넣어 남아 있고, 이어서 4 를 넣은 뒤 COMMIT 하므로 T 에는 1, 4 의 2행이 남는다. 정답은 ②번이다. ① 과 ④ 는 SP1 으로 돌아간 뒤에도 SP2 가 남아 있다고 본 것이고, ③ 은 오류 한 번에 트랜잭션 전체가 취소된다고 본 것이다. 참고로 PostgreSQL 은 트랜잭션 안에서 오류가 나면 이후 문장을 모두 거부하고 COMMIT 도 ROLLBACK 으로 처리해 0행이 된다.",
       "references": [
         {
-          "type": "text",
-          "content": "트랜잭션 수행 중 오류가 발생한 경우 모든 작업을 취소하고 이전 상태로 되돌리는 명령"
+          "type": "sql",
+          "code": "INSERT INTO T VALUES (1);\nSAVEPOINT SP1;\nINSERT INTO T VALUES (2);\nSAVEPOINT SP2;\nINSERT INTO T VALUES (3);\nROLLBACK TO SP1;\nROLLBACK TO SP2;  -- ㉠\nINSERT INTO T VALUES (4);\nCOMMIT;"
         }
       ]
     }

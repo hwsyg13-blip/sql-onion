@@ -108,15 +108,15 @@ export const ROUND_59: QuizQuestion[] = [
     "round": 59,
     "subject": "1과목",
     "number": 5,
-    "title": "속성의 특성에 따른 분류(기본·설계·파생 속성)에 대한 설명 중 옳지 않은 것은?",
+    "title": "고객 엔터티에 주문 금액의 합계인 '누적구매금액' 을 파생 속성으로 두었다. 이에 대한 설명으로 옳지 않은 것은?",
     "options": [
-      "기본 속성은 업무로부터 추출한 일반적인 속성이다.",
-      "설계 속성은 원래 업무상 필요한 속성은 아니지만 코드나 일련번호처럼 설계하면서 새로 만들거나 변형한 속성이다.",
-      "파생 속성은 다른 속성으로부터 계산·변형되어 생성되는 속성이다.",
-      "파생 속성은 원본 값이 바뀌어도 자동으로 일관성이 유지되므로 가능한 한 많이 정의하는 것이 좋다."
+      "고객 목록에 누적구매금액을 보여 줄 때 주문을 매번 합산하지 않아도 되어 조회가 빨라진다.",
+      "주문이 추가되거나 취소될 때마다 누적구매금액도 함께 고쳐야 한다.",
+      "함께 고치는 처리를 빠뜨리면 주문 합계와 누적구매금액이 서로 어긋난다.",
+      "원래 값이 바뀌면 DBMS 가 파생 속성을 자동으로 다시 계산해 주므로 관리 부담이 없다."
     ],
     "correctIndex": 3,
-    "explanation": "파생 속성은 다른 속성 값으로 계산한 값이라, 원본이 바뀔 때 함께 갱신하지 않으면 값이 어긋난다. 그래서 데이터 정합성을 위해 꼭 필요한 경우에만 최소한으로 정의한다(④ 가 옳지 않음). ①②③ 은 속성의 특성에 따른 분류(기본·설계·파생)를 바르게 설명했다. ※ 복원 자료에서 이 번호가 2과목 24번과 같은 집합 연산자 문제로 들어가 있어, 1과목 범위의 문제로 대체했다.",
+    "explanation": "파생 속성은 다른 속성으로 계산되는 값을 미리 저장해 둔 것이라 조회는 빨라지지만(①), 원래 값이 바뀔 때마다 직접 함께 고쳐야 하고(②), 이를 놓치면 값이 어긋난다(③). DBMS 는 저장된 파생 속성을 저절로 다시 계산하지 않으므로, 트리거나 애플리케이션으로 맞추는 부담이 따른다. 그래서 ④ 가 옳지 않다. 정답은 ④번이다. 이런 이유로 파생 속성은 꼭 필요한 것만 둔다.",
     "_source": "authored"
   },
   {
@@ -175,16 +175,22 @@ export const ROUND_59: QuizQuestion[] = [
     "round": 59,
     "subject": "1과목",
     "number": 8,
-    "title": "트랜잭션의 특성(ACID)에 해당하지 않는 것은?",
+    "title": "계좌 이체 트랜잭션에서 나타나는 상황과 트랜잭션 특성의 연결로 틀린 것은?",
     "options": [
-      "원자성(Atomicity)",
-      "상호성(Interactivity)",
-      "일관성(Consistency)",
-      "영속성(Durability)"
+      "입금 전에 장애가 나면 출금도 함께 취소된다 — 원자성",
+      "이체가 끝나기 전에는 다른 사용자가 중간 잔액을 볼 수 없다 — 영속성",
+      "이체 전후 두 계좌 잔액의 합이 같아야 한다 — 일관성",
+      "COMMIT 된 이체는 서버가 다시 시작되어도 남아 있다 — 영속성"
     ],
     "correctIndex": 1,
-    "explanation": "트랜잭션의 네 가지 특성은 원자성(Atomicity), 일관성(Consistency), 고립성(Isolation), 영속성(Durability)이다. 상호성(Interactivity)은 ACID와 무관한 개념이므로 정답이다. ① 원자성, ③ 일관성, ④ 영속성은 ACID 에 속한다.",
-    "_source": "authored"
+    "explanation": "다른 트랜잭션이 끝나지 않은 트랜잭션의 중간 결과를 볼 수 없게 하는 것은 고립성(Isolation)이다. ② 를 영속성으로 연결한 것이 틀렸다. 정답은 ②번이다. ① 모두 반영되거나 모두 취소되는 것은 원자성, ③ 트랜잭션 전후에 데이터가 규칙에 맞는 상태로 남는 것은 일관성, ④ 커밋된 결과가 장애 뒤에도 사라지지 않는 것은 영속성이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "text",
+        "content": "A 계좌에서 10만 원 출금 → B 계좌에 10만 원 입금 → COMMIT"
+      }
+    ]
   },
   {
     "id": 10058,
@@ -266,38 +272,20 @@ export const ROUND_59: QuizQuestion[] = [
     "round": 59,
     "subject": "2과목",
     "number": 12,
-    "title": "아래 T 테이블에서 바로 직전 행의 값을 가져오되, 정렬을 내림차순으로 지정해 역방향 탐색 효과를 내려면 가장 적절한 함수와 정렬 조합은?",
+    "title": "ID 1, 2, 3 의 VAL 이 100, 200, 300 인 T 테이블에 아래 SQL 을 실행했다. ID 2 행의 P1, N1, P2 와 ID 3 행의 P1 값으로 옳은 것은? (순서대로)",
     "options": [
-      "LAG, ORDER BY 조건은 ASC",
-      "LAG, ORDER BY 조건은 DESC",
-      "LEAD, ORDER BY 조건은 ASC",
-      "LEAD, ORDER BY 조건은 DESC"
+      "100, 300, 300, 200",
+      "300, 100, 100, NULL",
+      "300, 100, 300, NULL",
+      "100, 300, 100, 200"
     ],
     "correctIndex": 1,
-    "explanation": "`LAG` 는 \"이전 행\" 의 값을 가져오는 함수다. ORDER BY 가 ASC 면 ID=1, 2, 3 순으로 정렬되어 LAG 가 ID=1 의 직전 행(없음 → NULL), ID=2 의 직전(=ID=1, VAL=100) 을 반환한다. ORDER BY 를 DESC 로 바꾸면 ID=3, 2, 1 순이라 LAG 가 \"논리적 다음 행\"(원래 데이터 기준) 을 가져오는 효과 = LEAD 와 같음. 정답은 ② LAG + DESC. ① LAG + ASC 는 원래 순서의 이전 행이라 역방향 효과가 없고, ③ LEAD + ASC 는 다음 행을 가져오며, ④ LEAD + DESC 는 원래 순서의 이전 행을 가져와 ① 과 같은 결과가 된다.",
+    "explanation": "LAG·LEAD 의 '이전·다음' 은 OVER 안의 ORDER BY 로 정한 순서를 따른다. ORDER BY ID DESC 면 3, 2, 1 순서라 ID 2 의 이전 행은 ID 3, 다음 행은 ID 1 이다. 그래서 P1 은 300, N1 은 100 이다. 오름차순 P2 에서 ID 2 의 이전 행은 ID 1 이라 100 이다. 내림차순에서 ID 3 은 첫 행이라 이전 행이 없어 P1 은 NULL 이다. 정답은 ②번이다. ① 과 ④ 는 DESC 를 무시하고 ID 순서로 본 것, ③ 은 P2 에도 DESC 가 적용된다고 본 것이다.",
     "_source": "authored",
     "references": [
       {
-        "type": "table",
-        "caption": "T 테이블",
-        "headers": [
-          "ID",
-          "VAL"
-        ],
-        "rows": [
-          [
-            "1",
-            "100"
-          ],
-          [
-            "2",
-            "200"
-          ],
-          [
-            "3",
-            "300"
-          ]
-        ]
+        "type": "sql",
+        "code": "SELECT ID,\n  LAG(VAL)  OVER\n    (ORDER BY ID DESC) AS P1,\n  LEAD(VAL) OVER\n    (ORDER BY ID DESC) AS N1,\n  LAG(VAL)  OVER\n    (ORDER BY ID)      AS P2\nFROM T;"
       }
     ]
   },
@@ -308,23 +296,27 @@ export const ROUND_59: QuizQuestion[] = [
     "round": 59,
     "subject": "2과목",
     "number": 13,
-    "title": "아래 연구소 테이블에서 결과 (A연구소, 화학연구소, 연구소) 를 모두 조회할 수 있는 SQL 로 옳은 것은?",
+    "title": "아래 연구소 테이블에 LIKE 조건 ㉠~㉣ 을 각각 적용했을 때 조회되는 행 수를 차례대로 나열한 것은?",
     "options": [
-      "SELECT * FROM 연구소 WHERE 명 = '_연구소';",
-      "SELECT * FROM 연구소 WHERE 명 = '%연구소';",
-      "SELECT * FROM 연구소 WHERE 명 LIKE '%연구소';",
-      "SELECT * FROM 연구소 WHERE 명 LIKE '_연구소';"
+      "3, 1, 3, 1",
+      "2, 1, 4, 1",
+      "3, 1, 4, 1",
+      "3, 2, 4, 2"
     ],
     "correctIndex": 2,
-    "explanation": "`=` 비교는 정확히 그 문자열이어야 매칭되므로 ① `'_연구소'` 는 \"_연구소\" 라는 문자열만 찾고, ② `'%연구소'` 도 \"%연구소\" 문자열만 찾는다 (모두 매칭 0 건). LIKE 와 함께 써야 와일드카드로 동작. ③ `LIKE '%연구소'` 는 `%` (0 글자 이상) 라 \"연구소\" 단독도 포함해 세 행 모두 매칭. ④ `LIKE '_연구소'` 는 `_` (정확히 1 글자) 라 \"A연구소\" 만 매칭, \"화학연구소\" 와 \"연구소\" 는 누락.",
+    "explanation": "% 는 0글자 이상, _ 는 정확히 한 글자를 뜻한다. ㉠ 은 '연구소' 로 끝나는 값이다. % 는 0글자도 되므로 '연구소' 자체도 포함되어 연구소, A연구소, 화학연구소 의 3행이다. '연 구소' 는 가운데 공백이 있어 연속된 '연구소' 가 아니다. ㉡ 은 앞에 정확히 한 글자가 있어야 하므로 A연구소 1행이다. 한글도 한 글자로 센다. ㉢ 은 '연구소' 가 어디든 들어 있으면 되어 연구소, A연구소, 화학연구소, 연구소장 의 4행이다. ㉣ 은 앞에 _ 두 개, 즉 정확히 두 글자가 있고 '연구소' 뒤는 무엇이든 되므로 화학연구소 1행이다. 정답은 ③번이다. ① 은 ㉢ 에서 연구소장 을, ② 는 ㉠ 에서 '연구소' 자체를 빠뜨린 것이다. ④ 는 _ 를 '한 글자 이하' 로 본 것이다.",
     "_source": "authored",
     "references": [
       {
         "type": "table",
+        "caption": "연구소",
         "headers": [
           "명"
         ],
         "rows": [
+          [
+            "연구소"
+          ],
           [
             "A연구소"
           ],
@@ -332,10 +324,16 @@ export const ROUND_59: QuizQuestion[] = [
             "화학연구소"
           ],
           [
-            "연구소"
+            "연구소장"
+          ],
+          [
+            "연 구소"
           ]
-        ],
-        "caption": "연구소 테이블"
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "㉠ 명 LIKE '%연구소'\n㉡ 명 LIKE '_연구소'\n㉢ 명 LIKE '%연구소%'\n㉣ 명 LIKE '__연구소%'"
       }
     ]
   },
@@ -466,7 +464,7 @@ export const ROUND_59: QuizQuestion[] = [
       {
         "type": "sql",
         "caption": "Oracle 표기를 어떤 ANSI 조인으로 바꿔야 할까?",
-        "code": "-- Oracle 표기\nSELECT * FROM A, B WHERE A.ID = B.ID(+);\n\n-- ANSI 표준 SQL\nSELECT * FROM A ( ? ) B ON A.ID = B.ID;"
+        "code": "-- Oracle 표기\nSELECT * FROM A, B\nWHERE A.ID = B.ID(+);\n\n-- ANSI 표준 SQL\nSELECT * FROM A ( ? ) B ON A.ID = B.ID;"
       },
       {
         "type": "table",
@@ -556,7 +554,7 @@ export const ROUND_59: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT * FROM STUDENT S\nWHERE  ( ? ) (SELECT 1 FROM LECTURE L WHERE L.SID = S.SID);\n\n-- 또는\nSELECT SID FROM STUDENT\n( ? )\nSELECT SID FROM LECTURE;"
+        "code": "SELECT * FROM STUDENT S\nWHERE  ( ? )\n       (SELECT 1 FROM LECTURE L\n         WHERE L.SID = S.SID);\n\n-- 또는\nSELECT SID FROM STUDENT\n( ? )\nSELECT SID FROM LECTURE;"
       }
     ]
   },
@@ -567,15 +565,15 @@ export const ROUND_59: QuizQuestion[] = [
     "round": 59,
     "subject": "2과목",
     "number": 18,
-    "title": "아래 EMP 테이블에서 가장 큰 EMPNO 한 건을 반환하는 TOP-N 질의로 가장 대표적으로 사용되는 방식은?",
+    "title": "Oracle 에서 아래 ㉠, ㉡ 의 결과로 옳은 것은? (EMP 는 표의 순서대로 읽힌다고 가정)",
     "options": [
-      "ROWNUM",
-      "FETCH FIRST",
-      "TOP WITH TIES",
-      "TOP"
+      "㉠ 7369, ㉡ 7934",
+      "㉠ 7934, ㉡ 7934",
+      "㉠ 7369, ㉡ 7369",
+      "㉠ 7934, ㉡ 7369"
     ],
     "correctIndex": 0,
-    "explanation": "Oracle 에서 가장 일반적인 TOP-N 기법은 인라인 뷰에서 정렬한 뒤 외부에서 `ROWNUM` 으로 행 개수를 제한하는 방식. ② `FETCH FIRST` 는 12c 이상 지원하는 ANSI 형식이지만 빈칸 위치(`( ? ) = 1`) 와 맞지 않는다. ③④ `TOP` 은 SQL Server 문법이라 Oracle 에서 동작하지 않는다.",
+    "explanation": "ROWNUM 은 WHERE 절에서 행을 읽는 순서대로 붙고, ORDER BY 는 그 뒤에 실행된다. ㉠ 은 먼저 읽힌 7369 한 행만 남긴 뒤 그 한 행을 정렬하므로 7369 다. ㉡ 은 인라인 뷰 안에서 EMPNO 내림차순으로 먼저 정렬한 뒤 바깥에서 ROWNUM = 1 을 거르므로 가장 큰 7934 가 나온다. 정답은 ①번이다. Oracle 에서 Top-N 을 ROWNUM 으로 구할 때는 ㉡ 처럼 정렬을 인라인 뷰 안에 넣어야 한다. 12c 이상에서는 ORDER BY EMPNO DESC FETCH FIRST 1 ROWS ONLY 로도 같은 결과를 얻는다.",
     "_source": "authored",
     "references": [
       {
@@ -610,7 +608,7 @@ export const ROUND_59: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT EMPNO\nFROM   (SELECT EMPNO FROM EMP ORDER BY EMPNO DESC)\nWHERE  (  ?  ) = 1;"
+        "code": "-- ㉠\nSELECT EMPNO\nFROM   EMP\nWHERE  ROWNUM = 1\nORDER  BY EMPNO DESC;\n\n-- ㉡\nSELECT EMPNO\nFROM  (SELECT EMPNO\n       FROM   EMP\n       ORDER  BY EMPNO DESC)\nWHERE  ROWNUM = 1;"
       }
     ]
   },
@@ -701,7 +699,7 @@ export const ROUND_59: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "-- 비교 SQL\nSELECT COUNT(*)         AS 전체,\n       COUNT(고객번호)  AS 고객번호_COUNT,\n       COUNT(집주소)    AS 집주소_COUNT,\n       COUNT(고객번호) - COUNT(집주소) AS 집주소_NULL_고객수\nFROM   고객;"
+        "code": "-- 비교 SQL\nSELECT COUNT(*) AS 전체,\n       COUNT(고객번호)\n         AS 고객번호_COUNT,\n       COUNT(집주소) AS 집주소_COUNT,\n       COUNT(고객번호) - COUNT(집주소)\n         AS 집주소_NULL_고객수\nFROM   고객;"
       }
     ]
   },
@@ -781,15 +779,15 @@ export const ROUND_59: QuizQuestion[] = [
     "round": 59,
     "subject": "2과목",
     "number": 22,
-    "title": "아래 PHONE 테이블에서 '010' 으로 시작하는 번호만 필터링하려 한다. 정규표현식 패턴으로 올바른 것은?",
+    "title": "아래 PHONE 테이블에서 '010-' 으로 시작하는 번호만 고르려 한다. REGEXP_LIKE 의 패턴으로 옳은 것은?",
     "options": [
-      "[^010]",
-      "^010",
-      "$010",
-      "02"
+      "'010'",
+      "'^010-'",
+      "'^010'",
+      "'010$'"
     ],
     "correctIndex": 1,
-    "explanation": "정규표현식에서 `^` 는 문자열의 시작 위치, `$` 는 끝 위치를 의미한다. ① `[^010]` 은 문자 클래스 부정(0/1 이 아닌 한 글자), ③ `$010` 은 `$` 가 잘못된 자리에 있어 의도와 다른 패턴, ④ `02` 는 02 가 포함된 모든 문자열을 의미한다. `010` 으로 시작하는 패턴은 ② `^010` 이 정답.",
+    "explanation": "^ 는 문자열의 시작, $ 는 끝을 뜻한다. '^010-' 은 맨 앞이 '010-' 인 값만 골라 010-1234-5678, 010-9999-0000 두 행이 나온다. 정답은 ②번이다. ① '010' 은 위치 상관없이 들어 있기만 하면 되어 +82-010-…, 0101-0000 까지 4행이다. ③ '^010' 은 0101-0000 도 010 으로 시작해 3행이다. ④ '010$' 는 010 으로 끝나는 값이라 0행이다.",
     "_source": "authored",
     "references": [
       {
@@ -807,12 +805,18 @@ export const ROUND_59: QuizQuestion[] = [
           ],
           [
             "010-9999-0000"
+          ],
+          [
+            "+82-010-1111-2222"
+          ],
+          [
+            "0101-0000"
           ]
         ]
       },
       {
         "type": "sql",
-        "code": "SELECT PHONE\nFROM   PHONE\nWHERE  REGEXP_LIKE(PHONE, ( ? ));"
+        "code": "SELECT PHONE\nFROM   PHONE\nWHERE  REGEXP_LIKE(PHONE, :패턴);"
       }
     ]
   },
@@ -823,20 +827,20 @@ export const ROUND_59: QuizQuestion[] = [
     "round": 59,
     "subject": "2과목",
     "number": 23,
-    "title": "아래 두 REGEXP_SUBSTR 호출에서 입력 문자열은 'BCD' 이고 결과가 (첫번째='BCD', 두번째=NULL) 이 되도록 빈칸 두 개에 들어갈 정규식 패턴 조합은?",
+    "title": "아래 SQL 의 결과(A, B, C, D)로 옳은 것은? (Oracle 기준)",
     "options": [
-      "'B.D', 'B.D'",
-      "'BCD', 'BCD'",
-      "'B.D', 'b.d'",
-      "'b.d', 'B.D'"
+      "BCD, BCD, BCD, BxD",
+      "NULL, NULL, BCD, BCD",
+      "NULL, BCD, BCD, BxD",
+      "NULL, BCD, B.D, BxD"
     ],
     "correctIndex": 2,
-    "explanation": "정규식의 `.` 은 아무 문자 하나를 뜻한다. 첫 번째 빈칸에 'B.D' 를 넣으면 'B' + 아무 문자(C) + 'D' 로 'BCD' 와 맞아 'BCD' 가 나온다. 두 번째 빈칸의 'b.d' 는 소문자라, 대소문자를 구분하는 Oracle REGEXP 기본 동작에서는 'BCD' 와 맞지 않아 NULL 이 나온다. 그래서 정답은 ③ 'B.D', 'b.d' 다. ① 은 둘 다 'B.D' 라 두 결과가 모두 'BCD' 이고, ② 도 둘 다 'BCD' 이며, ④ 는 첫 번째가 NULL 이 되어 원하는 결과와 반대다.",
+    "explanation": "정규식 함수는 기본적으로 대소문자를 구분한다. A 는 소문자 b·d 를 찾는데 'BCD' 는 대문자라 일치하지 않아 NULL 이다. 마지막 인자로 'i' 를 주면 대소문자를 무시해 B 는 'BCD' 다. C 는 대문자 패턴이라 그대로 'BCD' 이고, . 은 아무 글자 하나라 결과에 '.' 이 나오지 않는다. D 는 'i' 옵션으로 대문자 C 도 'c' 에 걸려 'BxD' 가 된다. 정답은 ③번이다. ① 은 기본이 대소문자 무시라고 본 것, ② 는 'i' 옵션이 SUBSTR 과 REPLACE 에 적용되지 않는다고 본 것, ④ 는 . 을 글자 그대로의 점으로 본 것이다.",
     "_source": "authored",
     "references": [
       {
         "type": "sql",
-        "code": "SELECT REGEXP_SUBSTR('BCD', ( ? )) AS 첫번째,\n       REGEXP_SUBSTR('BCD', ( ? )) AS 두번째\nFROM DUAL;"
+        "code": "SELECT\n  REGEXP_SUBSTR('BCD', 'b.d')     AS A,\n  REGEXP_SUBSTR('BCD', 'b.d',\n                1, 1, 'i')        AS B,\n  REGEXP_SUBSTR('BCD', 'B.D')     AS C,\n  REGEXP_REPLACE('BCD', 'c', 'x',\n                 1, 0, 'i')       AS D\nFROM DUAL;"
       }
     ]
   },
@@ -871,16 +875,22 @@ export const ROUND_59: QuizQuestion[] = [
     "round": 59,
     "subject": "2과목",
     "number": 25,
-    "title": "CTAS(CREATE TABLE AS SELECT)에 대한 설명 중 옳은 것은?",
+    "title": "아래 T1 을 CTAS 로 복사한 뒤 ㉠~㉢ 을 차례로 실행했다. '㉠ 뒤 STATUS 값, ㉡ 의 결과, ㉢ 의 결과' 로 옳은 것은? (Oracle 기준)",
     "options": [
-      "데이터 속성을 재정의해야 한다.",
-      "NOT NULL은 전달되지 않는다.",
-      "기본키, 외래키 등 제약사항은 전달되지 않는다.",
-      "컬럼 타입은 전달되지 않는다."
+      "Y, 오류, 오류",
+      "NULL, 오류, 성공",
+      "NULL, 성공, 오류",
+      "Y, 성공, 오류"
     ],
     "correctIndex": 2,
-    "explanation": "CTAS는 컬럼 타입과 NOT NULL 제약은 그대로 전달하므로 데이터 속성을 일일이 재정의할 필요가 없다. 반면 기본키·외래키 등 다른 제약사항은 전달되지 않는다. 따라서 ③이 옳은 설명이다. ① 컬럼 타입이 그대로 넘어오므로 다시 정의할 필요가 없고, ② NOT NULL 은 전달되며, ④ 컬럼 타입도 전달된다.",
-    "_source": "authored"
+    "explanation": "WHERE 1 = 2 는 항상 거짓이라 데이터 없이 칼럼 구조만 복사된다. Oracle 의 CTAS 는 칼럼 이름·타입과 NOT NULL 만 옮기고 기본키·외래키·DEFAULT 는 옮기지 않는다. ㉠ 은 STATUS 를 빼고 넣었는데 T2 에는 DEFAULT 'Y' 가 없으므로 STATUS 는 NULL 이다. ㉡ 은 ID 1 이 또 들어가지만 T2 에는 기본키가 없어 성공한다. ㉢ 은 NAME 을 빼고 넣었는데 NOT NULL 은 옮겨져 있으므로 오류다. 정답은 ③번이다. ① 은 DEFAULT 와 기본키까지 옮겨진다고 본 것이고, ② 는 기본키는 옮기고 NOT NULL 은 옮기지 않는다고 거꾸로 본 것, ④ 는 DEFAULT 만 옮겨진다고 본 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "CREATE TABLE T1 (\n  ID     NUMBER PRIMARY KEY,\n  NAME   VARCHAR2(10) NOT NULL,\n  STATUS CHAR(1) DEFAULT 'Y'\n);\n\nCREATE TABLE T2 AS\nSELECT * FROM T1 WHERE 1 = 2;\n\n-- ㉠\nINSERT INTO T2 (ID, NAME)\nVALUES (1, 'A');\n-- ㉡\nINSERT INTO T2 (ID, NAME)\nVALUES (1, 'B');\n-- ㉢\nINSERT INTO T2 (ID)\nVALUES (2);"
+      }
+    ]
   },
   {
     "id": 10075,
@@ -889,20 +899,20 @@ export const ROUND_59: QuizQuestion[] = [
     "round": 59,
     "subject": "2과목",
     "number": 26,
-    "title": "다음 INSERT 문 중 입력 오류가 발생하는 것은?",
+    "title": "아래 테이블에 INSERT ㉠~㉣ 을 각각 실행할 때 오류가 발생하는 것만 모두 고른 것은? (Oracle 기준)",
     "options": [
-      "INSERT INTO TABLE1 VALUES (1, SYSDATE, '001');",
-      "INSERT INTO TABLE1 VALUES (1, TO_DATE('2024-06-06', 'YYYY-MM-DD'), '001');",
-      "INSERT INTO TABLE1 VALUES (1, DATE '2024-06-06', '001');",
-      "INSERT INTO TABLE1 VALUES (1, 20240606, '001');"
+      "㉢",
+      "㉠, ㉢",
+      "㉠, ㉡, ㉢",
+      "㉡, ㉢"
     ],
     "correctIndex": 3,
-    "explanation": "B 컬럼은 DATE 타입인데 숫자 리터럴 20240606이 직접 입력되어 자동 변환이 이루어지지 않으므로 타입 불일치 오류가 발생한다. ① SYSDATE, ② TO_DATE(...), ③ DATE 리터럴은 모두 DATE 값이라 정상 입력된다.",
+    "explanation": "㉠ 의 '10' 은 숫자로, 123 은 문자로 자동 형변환되어 들어간다. ㉣ 처럼 칼럼 목록에 없는 B, C 는 NULL 이 되므로 성공한다. ㉡ 은 'ABCDEFGHIJK' 가 11글자라 VARCHAR2(10) 을 넘어 오류, ㉢ 은 'A1' 을 숫자로 바꿀 수 없어 오류다. 정답은 ④번이다. ① 은 길이 초과를 놓친 것, ② 와 ③ 은 숫자 모양의 문자 '10' 도 숫자 칼럼에 넣을 수 없다고 본 것이다.",
     "_source": "authored",
     "references": [
       {
         "type": "sql",
-        "code": "CREATE TABLE TABLE1 (\n  A NUMBER,\n  B DATE,\n  C VARCHAR2(10)\n);"
+        "code": "CREATE TABLE TABLE1 (\n  A NUMBER,\n  B DATE,\n  C VARCHAR2(10)\n);\n-- ㉠\nINSERT INTO TABLE1\nVALUES ('10', SYSDATE, 123);\n-- ㉡\nINSERT INTO TABLE1\nVALUES (1, NULL, 'ABCDEFGHIJK');\n-- ㉢\nINSERT INTO TABLE1\nVALUES ('A1', SYSDATE, 'X');\n-- ㉣\nINSERT INTO TABLE1 (A) VALUES (1);"
       }
     ]
   },
@@ -957,7 +967,7 @@ export const ROUND_59: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT 고객ID, 주문일자, 금액,\n       SUM(금액) OVER (PARTITION BY 고객ID ORDER BY 주문일자\n                       (  ?  )) AS 누적금액\nFROM   주문;"
+        "code": "SELECT 고객ID, 주문일자, 금액,\n       SUM(금액) OVER (\n         PARTITION BY 고객ID\n         ORDER BY 주문일자\n         (  ?  )) AS 누적금액\nFROM   주문;"
       }
     ]
   },
@@ -1011,7 +1021,7 @@ export const ROUND_59: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "-- ㉠\nWHERE 입사일시 >= DATE '2025-10-20'\n  AND 입사일시 <  DATE '2025-10-21'\n-- ㉡\nWHERE TRUNC(입사일시) = DATE '2025-10-20'\n-- ㉢\nWHERE 입사일시 BETWEEN DATE '2025-10-20'\n                  AND DATE '2025-10-21'\n-- ㉣\nWHERE 입사일시 = DATE '2025-10-20'"
+        "code": "-- ㉠\nWHERE 입사일시 >= DATE '2025-10-20'\n  AND 입사일시 <  DATE '2025-10-21'\n-- ㉡\nWHERE TRUNC(입사일시)\n      = DATE '2025-10-20'\n-- ㉢\nWHERE 입사일시\n      BETWEEN DATE '2025-10-20'\n          AND DATE '2025-10-21'\n-- ㉣\nWHERE 입사일시 = DATE '2025-10-20'"
       }
     ]
   },
@@ -1065,7 +1075,7 @@ export const ROUND_59: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT COALESCE(V1, V2, V3) FROM T ORDER BY ID;"
+        "code": "SELECT COALESCE(V1, V2, V3) FROM T\nORDER BY ID;"
       }
     ]
   },
@@ -1131,7 +1141,7 @@ export const ROUND_59: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT V FROM T1\nUNION\n(SELECT V FROM T2 INTERSECT SELECT V FROM T3);"
+        "code": "SELECT V FROM T1\nUNION\n(SELECT V FROM T2\n INTERSECT\n SELECT V FROM T3);"
       }
     ]
   },
@@ -1236,7 +1246,7 @@ export const ROUND_59: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT *\nFROM   EMP E\nWHERE  SAL > (SELECT MAX(SAL) FROM EMP WHERE DEPTNO = E.DEPTNO);"
+        "code": "SELECT *\nFROM   EMP E\nWHERE  SAL >\n       (SELECT MAX(SAL) FROM EMP\n         WHERE DEPTNO = E.DEPTNO);"
       }
     ]
   },
@@ -1455,7 +1465,7 @@ export const ROUND_59: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT A.*\nFROM   ACTOR_PAY A\nWHERE  A.FEE = (SELECT MAX(FEE)\n                FROM   ACTOR_PAY\n                WHERE  ACTOR_ID = A.ACTOR_ID);"
+        "code": "SELECT A.*\nFROM   ACTOR_PAY A\nWHERE  A.FEE =\n       (SELECT MAX(FEE)\n          FROM ACTOR_PAY\n         WHERE ACTOR_ID = A.ACTOR_ID);"
       }
     ]
   },
@@ -1573,7 +1583,7 @@ export const ROUND_59: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT *\nFROM   CATEGORY\nSTART WITH category_id = 11\nCONNECT BY PRIOR category_id = 상위카테고리;"
+        "code": "SELECT *\nFROM   CATEGORY\nSTART WITH category_id = 11\nCONNECT BY PRIOR category_id\n         = 상위카테고리;"
       }
     ]
   },
@@ -1659,7 +1669,7 @@ export const ROUND_59: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "-- ㉠\nSELECT * FROM EMP NATURAL JOIN DEPT;\n\n-- ㉡\nSELECT * FROM EMP JOIN DEPT USING (부서번호);"
+        "code": "-- ㉠\nSELECT * FROM EMP NATURAL JOIN DEPT;\n\n-- ㉡\nSELECT * FROM EMP JOIN DEPT\nUSING (부서번호);"
       }
     ]
   },
@@ -1756,16 +1766,22 @@ export const ROUND_59: QuizQuestion[] = [
     "round": 59,
     "subject": "2과목",
     "number": 43,
-    "title": "아래 SQL 들 중 WHERE 절 평가 결과가 나머지와 다른 것은?",
+    "title": "다음 SQL ㉠~㉤ 중 한 행이 조회되는 것만 모두 고른 것은?",
     "options": [
-      "SELECT * FROM DUAL WHERE 1 <> NULL;",
-      "SELECT * FROM DUAL WHERE NULL = NULL;",
-      "SELECT * FROM DUAL WHERE NULL IS NULL;",
-      "SELECT * FROM DUAL WHERE 1 > NULL;"
+      "㉣",
+      "㉠, ㉡, ㉣",
+      "㉠, ㉣",
+      "㉠, ㉢, ㉣"
     ],
     "correctIndex": 2,
-    "explanation": "①②④ 의 NULL 비교(`=`, `<>`, `>` 등 일반 연산자) 는 모두 UNKNOWN 으로 평가되어 행이 선택되지 않아 0 건 반환. 그러나 ③ `IS NULL` 은 NULL 판별 전용 연산자로 TRUE 를 반환해 1 건 (DUAL 의 한 행) 반환. 결과가 다른 것은 ③.",
-    "_source": "authored"
+    "explanation": "WHERE 는 조건이 참(TRUE)인 행만 남기고, 거짓과 UNKNOWN 은 모두 버린다. ㉠ IN 은 '1 = 1 OR 1 = NULL' 이다. 앞이 참이라 OR 전체가 참이 되어 조회된다. ㉡ NOT IN 은 '2 <> 1 AND 2 <> NULL' 이다. 뒤가 UNKNOWN 이라 AND 전체가 UNKNOWN 이 되어 조회되지 않는다. ㉢ NULL = NULL 은 UNKNOWN 이고 NOT UNKNOWN 도 UNKNOWN 이다. ㉣ 은 NVL 로 0 이 되어 참이다. ㉤ 은 NULL 이 NULL 이므로 IS NOT NULL 이 거짓이다. 정답은 ③번이다. ① 은 IN 목록에 NULL 이 있으면 무조건 UNKNOWN 이 된다고 본 것이고, ② 는 NOT IN 도 IN 처럼 하나만 맞으면 된다고 본 것, ④ 는 NOT 이 UNKNOWN 을 참으로 바꾼다고 본 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "-- ㉠\nSELECT 1 FROM DUAL\nWHERE 1 IN (1, NULL);\n-- ㉡\nSELECT 1 FROM DUAL\nWHERE 2 NOT IN (1, NULL);\n-- ㉢\nSELECT 1 FROM DUAL\nWHERE NOT (NULL = NULL);\n-- ㉣\nSELECT 1 FROM DUAL\nWHERE NVL(NULL, 0) = 0;\n-- ㉤\nSELECT 1 FROM DUAL\nWHERE NULL IS NOT NULL;"
+      }
+    ]
   },
   {
     "id": 10093,
@@ -1813,7 +1829,7 @@ export const ROUND_59: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "CREATE TABLE PARENT (ID NUMBER PRIMARY KEY);\nCREATE TABLE CHILD  (\n  ID     NUMBER PRIMARY KEY,\n  PAR_ID NUMBER REFERENCES PARENT(ID) ON DELETE CASCADE\n);\n\nINSERT INTO PARENT VALUES (1);\nINSERT INTO CHILD  VALUES (10, 1);\nDELETE FROM PARENT WHERE ID = 1;"
+        "code": "CREATE TABLE PARENT\n  (ID NUMBER PRIMARY KEY);\nCREATE TABLE CHILD  (\n  ID     NUMBER PRIMARY KEY,\n  PAR_ID NUMBER REFERENCES PARENT(ID)\n         ON DELETE CASCADE\n);\n\nINSERT INTO PARENT VALUES (1);\nINSERT INTO CHILD  VALUES (10, 1);\nDELETE FROM PARENT WHERE ID = 1;"
       }
     ]
   },
@@ -1890,7 +1906,7 @@ export const ROUND_59: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT *\nFROM   EMP\nWHERE  DEPTNO = (SELECT DEPTNO FROM DEPT WHERE DNAME = '없는부서');"
+        "code": "SELECT *\nFROM   EMP\nWHERE  DEPTNO =\n       (SELECT DEPTNO FROM DEPT\n         WHERE DNAME = '없는부서');"
       }
     ]
   },
@@ -2008,7 +2024,7 @@ export const ROUND_59: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT VAL,\n       MAX(VAL)         OVER ()                         AS M,\n       SUM(VAL)         OVER (ORDER BY ID)              AS S,\n       FIRST_VALUE(VAL) OVER (ORDER BY ID ROWS BETWEEN\n                              200 PRECEDING AND 200 FOLLOWING) AS F\nFROM   T;"
+        "code": "SELECT VAL,\n       MAX(VAL) OVER () AS M,\n       SUM(VAL) OVER (ORDER BY ID)\n         AS S,\n       FIRST_VALUE(VAL) OVER (\n         ORDER BY ID\n         ROWS BETWEEN 200 PRECEDING\n              AND 200 FOLLOWING) AS F\nFROM   T;"
       }
     ]
   },
@@ -2019,20 +2035,42 @@ export const ROUND_59: QuizQuestion[] = [
     "round": 59,
     "subject": "2과목",
     "number": 48,
-    "title": "아래 질의 결과로 옳은 것은?",
+    "title": "아래 T 에 대한 SQL 의 결과(ID 순)로 옳은 것은?",
     "options": [
-      "A",
-      "B",
-      "C",
-      "오류"
+      "C, C, NULL",
+      "A, B, NULL",
+      "A, B, C",
+      "C, C, C"
     ],
     "correctIndex": 0,
-    "explanation": "CASE 는 WHEN 조건을 위에서부터 차례로 평가해 처음 참이 되는 THEN 값을 반환하고 나머지는 보지 않는다. 첫 조건 1 = 1 이 참이므로 'A' 다(①). 두 번째 조건도 참이지만 평가되지 않으며, 조건이 겹쳐도 오류는 나지 않는다(④). ② B 는 마지막으로 참이 되는 조건을 고른 결과이고, ③ C 는 조건이 겹치면 ELSE 로 간다고 본 결과다.",
+    "explanation": "CASE 는 위에서부터 조건을 보고 처음 참인 WHEN 의 값을 돌려준 뒤 멈춘다. 95 와 85 는 첫 조건 SCORE >= 60 에서 이미 참이라 둘 다 'C' 다. 55 는 어느 조건도 참이 아니고 ELSE 가 없어 NULL 이다. 정답은 ①번이다. 의도대로 A, B, C 를 주려면 범위가 좁은 조건(>= 90)부터 적어야 한다. ② 는 조건 순서를 거꾸로 읽은 것이고, ③·④ 는 ELSE 가 없을 때 NULL 이 된다는 점을 놓쳤다.",
     "_source": "authored",
     "references": [
       {
+        "type": "table",
+        "caption": "T",
+        "headers": [
+          "ID",
+          "SCORE"
+        ],
+        "rows": [
+          [
+            "1",
+            "95"
+          ],
+          [
+            "2",
+            "85"
+          ],
+          [
+            "3",
+            "55"
+          ]
+        ]
+      },
+      {
         "type": "sql",
-        "code": "SELECT CASE WHEN 1 = 1 THEN 'A'\n            WHEN 1 = 1 THEN 'B'\n            ELSE 'C'\n       END\nFROM DUAL;"
+        "code": "SELECT ID,\n       CASE WHEN SCORE >= 60 THEN 'C'\n            WHEN SCORE >= 80 THEN 'B'\n            WHEN SCORE >= 90 THEN 'A'\n       END AS GRADE\nFROM   T;"
       }
     ]
   },

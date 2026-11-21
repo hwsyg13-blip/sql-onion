@@ -5,47 +5,94 @@
     {
       "subject": "1과목",
       "number": 1,
-      "title": "다음 중 외부스키마에 대한 설명으로 옳지 않은 것은?",
+      "title": "영업팀용으로 고객 이름·연락처·담당자만 보여 주는 뷰를 만들었다. 이 외부 스키마에 대한 설명으로 옳지 않은 것은?",
       "options": [
-        "사용자나 응용프로그램 개발자의 관점에서 필요한 데이터베이스의 논리적 구조이다.",
-        "하나의 데이터베이스에 대해 여러 개의 외부스키마가 존재할 수 있다.",
-        "데이터베이스 전체의 저장 구조를 정의하며 물리적 저장 방법을 포함한다.",
-        "응용프로그램이 필요로 하는 데이터만 정의하여 접근 범위를 제한할 수 있다."
+        "영업팀이 업무에 필요한 데이터만 골라 볼 수 있다.",
+        "같은 데이터베이스에 팀마다 서로 다른 외부 스키마를 여러 개 둘 수 있다.",
+        "이 뷰를 정의하면 데이터 파일 배치와 인덱스 같은 저장 구조도 함께 정해진다.",
+        "급여 같은 칼럼을 빼서 영업팀이 접근할 수 있는 범위를 제한할 수 있다."
       ],
       "correctIndex": 2,
-      "explanation": "외부 스키마는 사용자 관점의 뷰(View) 단계다. 사용자나 개발자가 보는 논리적 구조이고(①), 하나의 DB 에 여러 개를 만들 수 있으며(②), 필요한 데이터만 정의해 접근 범위를 제한할 수 있다(④). ③ 의 '전체 저장 구조·물리적 저장 방법' 은 내부 스키마에 대한 설명이라 옳지 않다. (외계인이네: 외부·개념·내부)"
+      "explanation": "외부 스키마는 사용자나 응용 프로그램 관점에서 필요한 부분만 보여 주는 개별 정의로, 같은 데이터베이스에 여러 개 있을 수 있다(①, ②). 보여 줄 칼럼을 골라 접근 범위를 제한하는 데도 쓴다(④). 데이터 파일 배치와 인덱스 같은 저장 구조는 내부 스키마가 정하며, 외부 스키마를 만든다고 정해지지 않는다. 그래서 ③ 이 옳지 않다. 정답은 ③번이다.",
+      "references": []
     },
     {
       "subject": "1과목",
       "number": 2,
-      "title": "다음 설명이 나타내는 것으로 가장 적절한 것은?",
+      "title": "[회원] 속성의 도메인이 아래와 같을 때, 도메인을 어겨 입력할 수 없는 값은? (성별, 나이, 가입일 순)",
       "options": [
-        "도메인",
-        "식별자",
-        "엔터티",
-        "인스턴스"
+        "('W', 30, 2026-01-05)",
+        "('F', 0, 2026-01-05)",
+        "('M', 150, 2025-12-31)",
+        "('M', 45, 2024-02-29)"
       ],
       "correctIndex": 0,
-      "explanation": "도메인은 속성이 가질 수 있는 값의 범위(데이터 타입, 제약 사항)를 의미한다. 속성에 대한 타입·제약·값의 범위라는 키워드가 나오면 도메인을 떠올린다. ② 식별자는 인스턴스를 구분하는 속성, ③ 엔터티는 업무에서 관리하는 대상의 집합, ④ 인스턴스는 엔터티의 개별 건이라 값의 범위와는 관계가 없다.",
+      "explanation": "도메인은 속성이 가질 수 있는 값의 타입·길이·허용 범위를 정한 것이다. 성별은 'M', 'F' 만 허용하므로 'W' 는 길이가 1이어도 도메인을 어긴다. 정답은 ①번이다. ② 나이 0 과 ③ 나이 150 은 허용 범위의 양 끝값이라 들어갈 수 있다. ④ 2024년은 윤년이라 2월 29일이 있는 올바른 날짜다.",
       "references": [
         {
-          "type": "text",
-          "content": "속성에 대한 타입이나 제약 사항으로, 해당 속성이 가질 수 있는 값의 범위를 의미한다."
+          "type": "table",
+          "caption": "도메인 정의",
+          "headers": [
+            "속성",
+            "타입",
+            "허용 범위"
+          ],
+          "rows": [
+            [
+              "성별",
+              "CHAR(1)",
+              "'M', 'F'"
+            ],
+            [
+              "나이",
+              "NUMBER(3)",
+              "0 ~ 150"
+            ],
+            [
+              "가입일",
+              "DATE",
+              "올바른 날짜"
+            ]
+          ]
         }
       ]
     },
     {
       "subject": "1과목",
       "number": 3,
-      "title": "엔터티를 유형/무형 엔터티 기준으로 분류할 때, 다음 중 이 분류 기준에 해당하지 않는 것은?",
+      "title": "아래 병원 업무의 엔터티를 유형·무형(유형·개념·사건) 기준으로 분류한 것으로 옳은 것은?",
       "options": [
-        "유형 엔터티",
-        "개념 엔터티",
-        "사건 엔터티",
-        "행위 엔터티"
+        "의사 - 개념 엔터티, 진료 - 사건 엔터티",
+        "진료과목 - 유형 엔터티, 진료 - 개념 엔터티",
+        "의사 - 유형 엔터티, 진료과목 - 사건 엔터티",
+        "의사 - 유형 엔터티, 진료과목 - 개념 엔터티, 진료 - 사건 엔터티"
       ],
       "correctIndex": 3,
-      "explanation": "엔터티는 유형·무형 기준으로 유형·개념·사건 엔터티로 나뉜다. 행위 엔터티는 발생 시점 기준(기본·중심·행위 엔터티)의 분류이므로 유형·무형 기준에 해당하지 않는다. ①②③ 은 유형·무형 기준의 분류다."
+      "explanation": "유무형 기준은 유형·개념·사건 엔터티로 나눈다. 유형 엔터티는 물리적 형태가 있고 안정적인 대상(의사), 개념 엔터티는 물리적 형태 없이 개념으로만 존재하는 대상(진료과목), 사건 엔터티는 업무를 하면서 발생하는 대상(진료)이다. 정답은 ④번이다. ① 의사는 실체가 있는 유형 엔터티다. ② 진료과목은 형태가 없는 개념이고 진료는 업무 중 생기는 사건이다. ③ 진료과목은 발생하는 일이 아니라 개념이다. 기본·중심·행위는 발생 시점 기준이라 이 분류와 섞지 않는다.",
+      "references": [
+        {
+          "type": "table",
+          "caption": "엔터티",
+          "headers": [
+            "엔터티",
+            "설명"
+          ],
+          "rows": [
+            [
+              "의사",
+              "병원에 근무하는 사람"
+            ],
+            [
+              "진료과목",
+              "내과·외과 같은 구분"
+            ],
+            [
+              "진료",
+              "환자가 진료받은 일"
+            ]
+          ]
+        }
+      ]
     },
     {
       "subject": "1과목",
@@ -332,7 +379,7 @@
         },
         {
           "type": "sql",
-          "code": "SELECT COUNT(*) AS A, COUNT(DEPT_ID) AS B\nFROM   DEPT;"
+          "code": "SELECT COUNT(*) AS A,\n       COUNT(DEPT_ID) AS B\nFROM   DEPT;"
         }
       ]
     },
@@ -410,15 +457,15 @@
     {
       "subject": "2과목",
       "number": 14,
-      "title": "다음 SQL의 결과 건수로 맞는 것을 고르시오.",
+      "title": "아래 TBL 에 대한 두 SQL 의 결과 건수로 옳은 것은?",
       "options": [
-        "1",
-        "2",
-        "3",
-        "오류가 발생한다."
+        "㉠ 3, ㉡ 2",
+        "㉠ 2, ㉡ 0",
+        "㉠ 2, ㉡ 2",
+        "㉠ 오류, ㉡ 0"
       ],
       "correctIndex": 1,
-      "explanation": "IN 목록에 같은 값(100)이 중복되어도 오류는 발생하지 않으며 (COL = 100 OR COL = 200 OR COL = 100)과 같이 처리된다. 100과 200에 해당하는 행이 각 1건이므로 결과는 2건이다. ③ 3 은 IN 목록의 값 개수(3개)만큼 행이 나온다고 본 결과이고, ④ 목록에 같은 값이 있어도 오류는 나지 않는다.",
+      "explanation": "IN 은 목록의 값 중 하나와 같으면 참이다. 목록에 100 이 두 번 있어도 오류가 아니고 행이 두 번 나오지도 않는다. NULL 과의 비교는 참이 아니지만 다른 값과 같으면 참이므로 ㉠ 은 100, 200 두 건이다. NOT IN (100, NULL) 은 COL <> 100 AND COL <> NULL 과 같다. COL <> NULL 은 늘 UNKNOWN 이라 전체가 참이 될 수 없어 ㉡ 은 0건이다. 정답은 ②번이다. NOT IN 목록이나 서브쿼리에 NULL 이 섞이면 결과가 비는 것에 주의한다.",
       "references": [
         {
           "type": "table",
@@ -440,7 +487,7 @@
         },
         {
           "type": "sql",
-          "code": "SELECT * FROM TBL\nWHERE COL IN (100, 200, 100);"
+          "code": "-- ㉠\nSELECT * FROM TBL\nWHERE COL IN (100, 200, 100, NULL);\n\n-- ㉡\nSELECT * FROM TBL\nWHERE COL NOT IN (100, NULL);"
         }
       ]
     },
@@ -557,7 +604,7 @@
         },
         {
           "type": "sql",
-          "code": "SELECT COL1\nFROM   TBL1\nWHERE  COL1 <= ALL (SELECT COL2 FROM TBL2);"
+          "code": "SELECT COL1\nFROM   TBL1\nWHERE  COL1 <= ALL\n       (SELECT COL2 FROM TBL2);"
         }
       ]
     },
@@ -632,15 +679,15 @@
     {
       "subject": "2과목",
       "number": 18,
-      "title": "다음 중 LIKE '%A_C%' 패턴에 매칭되는 문자열은 몇 건인지 고르시오.",
+      "title": "아래 TBL 테이블에 조건 ㉠, ㉡, ㉢ 을 각각 적용했을 때 조회되는 행 수를 차례대로 나열한 것은?",
       "options": [
-        "2개",
-        "3개",
-        "4개",
-        "5개"
+        "4, 2, 2",
+        "3, 1, 2",
+        "4, 1, 1",
+        "4, 2, 1"
       ],
       "correctIndex": 2,
-      "explanation": "%는 0개 이상의 문자, _는 정확히 한 개의 문자를 의미한다. 따라서 'A', 임의의 한 글자, 'C'가 연속해야 한다. A1C, A-CD, A_C, ABC는 매칭되지만 AB_C는 A와 C 사이에 두 글자가 있어 매칭되지 않는다. 따라서 4건이다. ④ 5개는 AB_C 까지 센 값이고, ① 2개·② 3개는 _ 가 '-' 나 '_' 같은 기호 한 글자도 대신한다는 점을 놓친 값이다.",
+      "explanation": "_ 는 아무 글자 하나, % 는 0글자 이상이다. '%A_C%' 는 어딘가에 'A, 아무 글자 하나, C' 가 붙어 있으면 된다. ㉠ 은 A1C, A-CD, A_C, ABC 의 4행이다. AB_C 는 A 다음 두 번째 글자가 _ 라서 A 뒤 한 칸 건너 C 가 오지 않는다. ㉡ 은 ESCAPE 로 \\_ 를 진짜 밑줄 문자로 바꿨으므로 'A_C' 가 그대로 들어 있는 A_C 1행이다. AB_C 의 밑줄은 B 뒤에 있어 맞지 않는다. ㉢ 은 ㉠ 에 걸리지 않은 행인데, NULL 은 LIKE 도 NOT LIKE 도 UNKNOWN 이라 빠지고 AB_C 1행만 남는다. 정답은 ③번이다. ① 은 ㉡ 에 AB_C 를 넣고 ㉢ 에 NULL 을 넣은 것이고, ② 는 _ 가 밑줄 문자에는 맞지 않는다고 보고 A_C 를 ㉠ 에서 빼 ㉢ 으로 옮긴 것, ④ 는 ESCAPE 를 써도 AB_C 의 밑줄이 맞는다고 본 것이다.",
       "references": [
         {
           "type": "table",
@@ -663,8 +710,15 @@
             ],
             [
               "ABC"
+            ],
+            [
+              "NULL"
             ]
           ]
+        },
+        {
+          "type": "sql",
+          "code": "㉠ COL LIKE '%A_C%'\n㉡ COL LIKE '%A\\_C%' ESCAPE '\\'\n㉢ COL NOT LIKE '%A_C%'"
         }
       ]
     },
@@ -720,19 +774,19 @@
     {
       "subject": "2과목",
       "number": 20,
-      "title": "다음 중 보기와 동일한 결과를 출력하는 SQL은 무엇인가?",
+      "title": "주문 테이블에 (주문일자, 상품코드) 조합이 (D1, P1), (D1, P2), (D2, P1) 세 가지 있다. 아래 ㉠, ㉡, ㉢ 의 결과 행 수로 옳은 것은?",
       "options": [
-        "SELECT 주문일자, 상품코드, COUNT(*)\nFROM 주문\nGROUP BY 주문일자, ROLLUP(상품코드);",
-        "SELECT 주문일자, 상품코드, COUNT(*)\nFROM 주문\nGROUP BY ROLLUP(주문일자, 상품코드);",
-        "SELECT DISTINCT 주문일자, 상품코드, COUNT(*)\nFROM 주문\nGROUP BY ROLLUP((주문일자, 상품코드), NULL);",
-        "SELECT 주문일자, 상품코드, COUNT(*)\nFROM 주문\nGROUP BY GROUPING SETS((주문일자, 상품코드));"
+        "6, 6, 8",
+        "4, 6, 8",
+        "4, 6, 4",
+        "3, 6, 4"
       ],
       "correctIndex": 2,
-      "explanation": "보기의 ROLLUP((주문일자, 상품코드))는 두 컬럼을 하나로 묶어 (주문일자, 상품코드) 단위 집계와 전체 합계만 출력한다. ③은 (주문일자, 상품코드, NULL), (주문일자, 상품코드), ()로 전개되어 상세 집계가 두 번 반복되지만 DISTINCT로 중복이 제거되어 결과가 같아진다. ①은 주문일자 소계가 추가되고, ②는 주문일자 소계가 추가되며, ④는 전체 합계가 없어 결과가 다르다.",
+      "explanation": "괄호로 두 칼럼을 한 묶음으로 쓰면 하나의 칼럼처럼 다뤄진다. ㉠ ROLLUP((주문일자, 상품코드)) 는 GROUPING SETS((주문일자, 상품코드), ()) 와 같아 조합 3행 + 합계 1행 = 4행이다. ㉡ 은 묶음이 아니라 두 칼럼이라 조합 3 + 일자별 소계 2 + 합계 1 = 6행이다. ㉢ 의 묶음 하나짜리 CUBE 도 (묶음), () 두 가지뿐이라 ㉠ 과 같은 4행이다. 정답은 ③번이다. ① 과 ② 는 괄호 묶음을 두 칼럼처럼 본 것, ④ 는 합계 행을 놓친 것이다.",
       "references": [
         {
           "type": "sql",
-          "code": "SELECT 주문일자, 상품코드, COUNT(*)\nFROM   주문\nGROUP  BY ROLLUP((주문일자, 상품코드));"
+          "code": "-- ㉠\nGROUP BY ROLLUP((주문일자, 상품코드))\n-- ㉡\nGROUP BY ROLLUP(주문일자, 상품코드)\n-- ㉢\nGROUP BY CUBE((주문일자, 상품코드))"
         }
       ]
     },
@@ -827,7 +881,7 @@
         },
         {
           "type": "sql",
-          "code": "SELECT NAME, SCORE,\n       ______() OVER(ORDER BY SCORE DESC) AS RNK\nFROM   TBL;"
+          "code": "SELECT NAME, SCORE,\n       ______() OVER(\n         ORDER BY SCORE DESC) AS RNK\nFROM   TBL;"
         }
       ]
     },
@@ -901,7 +955,7 @@
         },
         {
           "type": "sql",
-          "code": "SELECT *\nFROM  (SELECT DEPT_ID, SAL FROM EMP)\nPIVOT (SUM(SAL) FOR DEPT_ID IN (10 AS A, 20 AS B, 30 AS C));"
+          "code": "SELECT *\nFROM  (SELECT DEPT_ID, SAL FROM EMP)\nPIVOT (SUM(SAL) FOR DEPT_ID\n       IN (10 AS A, 20 AS B, 30 AS C));"
         }
       ]
     },
@@ -1131,19 +1185,19 @@
     {
       "subject": "2과목",
       "number": 29,
-      "title": "다음 SQL의 실행 결과로 옳은 것은?",
+      "title": "SALES 테이블의 (SALE_DATE, AMT) 가 (1, 10), (2, 20), (2, 30), (3, 40) 일 때, 아래 SQL 에서 (2, 20) 행의 CUM1·CUM2 와 (3, 40) 행의 CUM1 값으로 옳은 것은?",
       "options": [
-        "날짜순으로 정렬된 각 행까지의 누적 합계를 계산한다.",
-        "전체 금액의 합계가 모든 행에 동일하게 표시된다.",
-        "날짜별로 그룹화 되어 금액의 합계가 표시된다.",
-        "오류가 발생한다. (OVER 절에는 PARTITION BY가 반드시 필요하다)"
+        "60, 30, 100",
+        "30, 30, 100",
+        "60, 60, 100",
+        "30, 60, 100"
       ],
       "correctIndex": 0,
-      "explanation": "OVER 절에 ORDER BY만 있고 윈도우 범위가 생략되면 기본값인 RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW가 적용되어 첫 행부터 현재 행까지의 누적 합계가 계산된다. ② 전체 합계가 모든 행에 표시되려면 OVER()처럼 ORDER BY가 없어야 하고, ③ 윈도우 함수는 행을 묶지 않으므로 날짜별로 그룹화되지 않으며, ④ PARTITION BY는 생략할 수 있어 오류가 나지 않는다.",
+      "explanation": "OVER 에 ORDER BY 만 쓰면 기본 범위가 RANGE UNBOUNDED PRECEDING 이라, 현재 행과 정렬 값이 같은 행까지 한꺼번에 더한다. 날짜 2 인 두 행은 모두 10 + 20 + 30 = 60 이 되어 (2, 20) 행의 CUM1 은 60 이다. ROWS UNBOUNDED PRECEDING 은 물리적인 행 순서대로 현재 행까지만 더해 CUM2 는 10 + 20 = 30 이다(같은 날짜 안의 순서는 정해져 있지 않을 수 있다). 마지막 날짜 3 의 CUM1 은 전체 합 100 이다. 정답은 ①번이다. ② 는 기본 범위를 ROWS 로 본 것, ③ 은 ROWS 도 같은 값을 묶는다고 본 것, ④ 는 두 방식을 바꿔 본 것이다.",
       "references": [
         {
           "type": "sql",
-          "code": "SELECT SALE_DATE, AMT,\n       SUM(AMT) OVER (ORDER BY SALE_DATE) AS CUM_AMT\nFROM   SALES;"
+          "code": "SELECT SALE_DATE, AMT,\n  SUM(AMT) OVER\n    (ORDER BY SALE_DATE) AS CUM1,\n  SUM(AMT) OVER\n    (ORDER BY SALE_DATE\n     ROWS UNBOUNDED PRECEDING)\n                        AS CUM2\nFROM SALES;"
         }
       ]
     },
@@ -1162,7 +1216,7 @@
       "references": [
         {
           "type": "table",
-          "caption": "BOARD",
+          "caption": "BOARD (REG_DATE 는 2026년 월-일)",
           "headers": [
             "BOARD_TYPE",
             "TITLE",
@@ -1171,44 +1225,44 @@
           "rows": [
             [
               "게시판",
-              "자유게시글1",
-              "2026-07-01"
+              "자유글1",
+              "07-01"
             ],
             [
               "게시판",
-              "자유게시글2",
-              "2026-07-05"
+              "자유글2",
+              "07-05"
             ],
             [
               "게시판",
-              "자유게시글3",
-              "2026-07-10"
+              "자유글3",
+              "07-10"
             ],
             [
               "이벤트",
-              "여름맞이 이벤트",
-              "2026-06-20"
+              "여름 이벤트",
+              "06-20"
             ],
             [
               "이벤트",
-              "가을맞이 이벤트",
-              "2026-07-15"
+              "가을 이벤트",
+              "07-15"
             ],
             [
               "공지",
-              "시스템 점검 안내",
-              "2026-07-01"
+              "점검 안내",
+              "07-01"
             ],
             [
               "공지",
-              "이용약관 개정 안내",
-              "2026-07-18"
+              "약관 개정",
+              "07-18"
             ]
           ]
         },
         {
           "type": "sql",
-          "code": "SELECT *\nFROM (\n  SELECT BOARD_TYPE, TITLE,\n         ROW_NUMBER() OVER (PARTITION BY BOARD_TYPE\n                            ORDER BY REG_DATE DESC) AS RN\n  FROM BOARD\n)\nWHERE RN = 1;"
+          "code": "SELECT *\nFROM (\n  SELECT BOARD_TYPE, TITLE,\n         ROW_NUMBER() OVER (\n           PARTITION BY BOARD_TYPE\n           ORDER BY REG_DATE DESC)\n           AS RN\n  FROM BOARD\n)\nWHERE RN = 1;"
         }
       ]
     },
@@ -1263,26 +1317,26 @@
         },
         {
           "type": "sql",
-          "code": "SELECT *\nFROM   PRODUCT\nWHERE  PROD_ID NOT IN (SELECT PARENT_ID FROM PRODUCT);"
+          "code": "SELECT *\nFROM   PRODUCT\nWHERE  PROD_ID NOT IN\n       (SELECT PARENT_ID FROM PRODUCT);"
         }
       ]
     },
     {
       "subject": "2과목",
       "number": 32,
-      "title": "다음 SQL의 실행 결과에 대한 설명으로 가장 적절한 것은?",
+      "title": "다음 SQL 의 실행 결과에 대한 설명으로 가장 적절한 것은?",
       "options": [
-        "A만 다른 값이 나온다.",
-        "B와 D만 같은 값이 나온다.",
-        "모든 함수의 결과는 같다.",
-        "오류가 발생한다."
+        "A 와 D 만 같은 값이고, B 와 C 는 서로 다르다.",
+        "B 와 C 만 같은 값이고, A 와 D 는 서로 다르다.",
+        "A 와 D 가 같고, B 와 C 가 같다.",
+        "네 값이 모두 다르다."
       ],
       "correctIndex": 2,
-      "explanation": "CEIL(7.1)은 올림으로 8, FLOOR(8.2)는 버림으로 8, ROUND(7.6)은 반올림으로 8, TRUNC(8.9)는 버림으로 8이다. 모든 함수의 결과가 8로 같다. ① A(올림)도 8 이고, ② C 도 8 이며, ④ 소수 자리 인수를 생략해도 오류는 나지 않는다.",
+      "explanation": "음수에서는 방향을 헷갈리기 쉽다. CEIL 은 그 수보다 크거나 같은 가장 작은 정수라 -7.1 은 -7 이 된다(A). FLOOR 는 그 수보다 작거나 같은 가장 큰 정수라 -7.1 은 -8 이다(B). ROUND 는 0 에서 멀어지는 쪽으로 반올림하므로 -7.5 는 -8 이다(C). TRUNC 는 소수점 아래를 버려 0 쪽으로 다가가므로 -7.9 는 -7 이다(D). 그래서 A = D = -7, B = C = -8 이다. 정답은 ③번이다. ① 은 ROUND(-7.5) 를 -7 로 본 것이고, ② 는 TRUNC(-7.9) 를 -8 로 본 것이다. ④ 처럼 네 값이 모두 다르려면 결과가 네 가지 정수여야 하는데, 이 네 식의 결과는 -7 과 -8 두 가지뿐이다.",
       "references": [
         {
           "type": "sql",
-          "code": "SELECT CEIL(7.1) AS A, FLOOR(8.2) AS B,\n       ROUND(7.6) AS C, TRUNC(8.9) AS D\nFROM   DUAL;"
+          "code": "SELECT CEIL(-7.1)  AS A,\n       FLOOR(-7.1) AS B,\n       ROUND(-7.5) AS C,\n       TRUNC(-7.9) AS D\nFROM   DUAL;"
         }
       ]
     },
@@ -1343,7 +1397,7 @@
         },
         {
           "type": "sql",
-          "code": "-- 가\nSELECT COL1, COL2, COL3 FROM TBL1\nUNION\nSELECT COL1, COL2 FROM TBL2;\n\n-- 나\nSELECT COL1, COL2, COL3 FROM TBL1 ORDER BY COL1\nUNION\nSELECT COL1, COL2, COL3 FROM TBL2;\n\n-- 다\nSELECT COL1, COL2 FROM TBL1\nUNION\nSELECT COL1, COL3 FROM TBL2 ORDER BY COL1;"
+          "code": "-- 가\nSELECT COL1, COL2, COL3 FROM TBL1\nUNION\nSELECT COL1, COL2 FROM TBL2;\n\n-- 나\nSELECT COL1, COL2, COL3 FROM TBL1\nORDER BY COL1\nUNION\nSELECT COL1, COL2, COL3 FROM TBL2;\n\n-- 다\nSELECT COL1, COL2 FROM TBL1\nUNION\nSELECT COL1, COL3 FROM TBL2\nORDER BY COL1;"
         }
       ]
     },
@@ -1402,26 +1456,35 @@
         },
         {
           "type": "sql",
-          "code": "-- 가\nSELECT COL1\nFROM TBL1\nWHERE COL1 NOT IN (SELECT COL2 FROM TBL2 WHERE COL2 IS NOT NULL);\n\n-- 나\nSELECT COL1\nFROM TBL1\nWHERE NOT EXISTS (SELECT 1 FROM TBL2 WHERE TBL1.COL1 = TBL2.COL2);\n\n-- 다\nSELECT T1.COL1\nFROM TBL1 T1 LEFT JOIN TBL2 T2\nON T1.COL1 = T2.COL2\nWHERE T2.COL2 IS NULL;"
+          "code": "-- 가\nSELECT COL1\nFROM TBL1\nWHERE COL1 NOT IN\n      (SELECT COL2 FROM TBL2\n        WHERE COL2 IS NOT NULL);\n\n-- 나\nSELECT COL1\nFROM TBL1\nWHERE NOT EXISTS\n      (SELECT 1 FROM TBL2\n        WHERE TBL1.COL1 = TBL2.COL2);\n\n-- 다\nSELECT T1.COL1\nFROM TBL1 T1 LEFT JOIN TBL2 T2\nON T1.COL1 = T2.COL2\nWHERE T2.COL2 IS NULL;"
         }
       ]
     },
     {
       "subject": "2과목",
       "number": 35,
-      "title": "다음 SQL에 대한 설명으로 옳은 것은?",
+      "title": "아래 ERD 와 데이터에서 SQL ㉠, ㉡, ㉢ 의 결과(COUNT(*))를 차례대로 나열한 것은?",
       "options": [
-        "두 테이블의 조인 조건이 없으므로 CROSS JOIN(Cartesian Product)이 발생한다.",
-        "EMP와 DEPT가 DEPT_ID를 기준으로 자동 조인된다.",
-        "오류가 발생하여 실행되지 않는다.",
-        "EQUI JOIN이 자동으로 적용된다."
+        "4, 12, 8",
+        "4, 12, 4",
+        "4, 3, 4",
+        "4, 24, 8"
       ],
       "correctIndex": 0,
-      "explanation": "FROM 절에 두 테이블만 나열하고 조인 조건이 없으므로 두 테이블의 모든 행의 조합(카테시안 곱, 크로스 조인)이 생성된다. ② ④ 처럼 저절로 등가 조인이 되지는 않으며(같은 이름 컬럼으로 조인하려면 NATURAL JOIN 을 명시해야 한다), ③ 조인 조건이 없어도 문법 오류는 아니다.",
+      "explanation": "테이블 3개를 빠짐없이 연결하려면 조인 조건이 최소 2개 필요하다. ㉠ 은 두 조건을 모두 써서 참여 4행이 각자 사원과 부서 하나씩에 붙어 4행이다. ㉡ 은 참여와의 조건이 빠졌다. 부서·사원 조인 결과 3행에 참여 4행이 모두 곱해져 3 × 4 = 12행이 된다. ㉢ 은 부서와의 조건이 빠졌다. 사원·참여 조인 결과 4행에 부서 2행이 곱해져 4 × 2 = 8행이다. 정답은 ①번이다. ② 는 ㉢ 에서 부서가 곱해지지 않는다고 본 것이고, ③ 은 조건이 빠진 테이블을 아예 무시한 것이다. ④ 는 ㉡ 에서 사원 3행, 참여 4행, 부서 2행을 모두 곱한 것인데, 부서와 사원 사이에는 조건이 있어 부서는 곱해지지 않는다. 쉼표로 나열한 테이블 사이에 조건이 하나라도 빠지면 그 부분에서 카티션 곱이 생긴다.",
       "references": [
         {
+          "type": "erd",
+          "caption": "부서·사원·참여 ERD",
+          "mermaid": "erDiagram\n    부서 ||..o{ 사원 : \"소속\"\n    사원 ||--o{ 참여 : \"투입\"\n    부서 {\n        string 부서코드 PK\n    }\n    사원 {\n        int 사번 PK\n        string 부서코드 FK\n    }\n    참여 {\n        int 사번 PK, FK\n        string 과제 PK\n    }"
+        },
+        {
+          "type": "text",
+          "content": "부서: D1, D2\n사원: (1, D1), (2, D1), (3, D2)\n참여: (1, P1), (1, P2), (3, P1), (3, P3)"
+        },
+        {
           "type": "sql",
-          "code": "SELECT E.DEPT_ID, D.DEPT_ID\nFROM   EMP E, DEPT D;"
+          "code": "-- ㉠\nSELECT COUNT(*)\nFROM 부서 D, 사원 E, 참여 P\nWHERE E.부서코드 = D.부서코드\n  AND P.사번 = E.사번;\n-- ㉡\nSELECT COUNT(*)\nFROM 부서 D, 사원 E, 참여 P\nWHERE E.부서코드 = D.부서코드;\n-- ㉢\nSELECT COUNT(*)\nFROM 부서 D, 사원 E, 참여 P\nWHERE P.사번 = E.사번;"
         }
       ]
     },
@@ -1584,26 +1647,30 @@
         },
         {
           "type": "sql",
-          "code": "SELECT * FROM TBL1\nWHERE COL1 NOT IN (SELECT COL2 FROM TBL2 WHERE COL2 IN (100, NULL));"
+          "code": "SELECT * FROM TBL1\nWHERE COL1 NOT IN\n      (SELECT COL2 FROM TBL2\n        WHERE COL2 IN (100, NULL));"
         }
       ]
     },
     {
       "subject": "2과목",
       "number": 39,
-      "title": "다음 SQL과 결과가 다른 SQL은 무엇인가?",
+      "title": "SAL 값이 NULL, 0, 200 인 세 행이 있는 EMP 테이블에서, 아래 [기준] 식과 모든 행의 결과가 같은 식만 모두 고른 것은? (Oracle 기준)",
       "options": [
-        "SELECT ENAME, NVL(SAL, 100) AS RESULT FROM EMP;",
-        "SELECT ENAME, COALESCE(SAL, 100) AS RESULT FROM EMP;",
-        "SELECT ENAME, DECODE(SAL, NULL, 100, SAL) AS RESULT FROM EMP;",
-        "SELECT ENAME, NVL2(SAL, 100, SAL) AS RESULT FROM EMP;"
+        "㉠, ㉣",
+        "㉠, ㉡, ㉢",
+        "㉠, ㉡, ㉣, ㉤",
+        "㉠, ㉡, ㉣"
       ],
       "correctIndex": 3,
-      "explanation": "기준 SQL은 SAL이 NULL이면 100, 아니면 SAL을 반환한다. ① NVL, ② COALESCE, ③ DECODE(NULL 끼리 같다고 본다)는 모두 기준 SQL 과 같다. NVL2(expr, A, B)는 expr이 NULL이 아니면 A, NULL이면 B를 반환하므로 NVL2(SAL, 100, SAL)은 정반대로 동작하여 결과가 다르다.",
+      "explanation": "[기준] 은 SAL 이 NULL 이면 100, 아니면 SAL 이라 세 행에서 100, 0, 200 이다. ㉠ NVL(SAL, 100) 은 정의 그대로 같다. ㉡ NVL2(A, B, C) 는 A 가 NULL 이 아니면 B, NULL 이면 C 이므로 NVL2(SAL, SAL, 100) 도 100, 0, 200 이다. ㉢ 은 두 값의 자리가 바뀌어 NULL 이 아닐 때 100 을 내므로 NULL, 100, 100 이 된다. ㉣ DECODE 는 NULL 끼리 같다고 보므로 100, 0, 200 이다. ㉤ 은 NULLIF(SAL, 0) 이 0 을 NULL 로 바꾸기 때문에 SAL 이 0 인 행에서 100 이 나와 [기준] 과 다르다. 정답은 ④번이다. ① 은 NVL2 의 인자 순서를 반대로 본 것이고, ② 는 ㉢ 과 ㉣ 을 바꿔 본 것, ③ 은 NULLIF 가 0 행에 영향을 주지 않는다고 본 것이다.",
       "references": [
         {
           "type": "sql",
-          "code": "SELECT ENAME,\n       CASE WHEN SAL IS NULL THEN 100 ELSE SAL END AS RESULT\nFROM   EMP;"
+          "code": "-- [기준]\nCASE WHEN SAL IS NULL THEN 100\n     ELSE SAL END"
+        },
+        {
+          "type": "sql",
+          "code": "㉠ NVL(SAL, 100)\n㉡ NVL2(SAL, SAL, 100)\n㉢ NVL2(SAL, 100, SAL)\n㉣ DECODE(SAL, NULL, 100, SAL)\n㉤ COALESCE(NULLIF(SAL, 0), 100)"
         }
       ]
     },
@@ -1658,26 +1725,26 @@
         },
         {
           "type": "sql",
-          "code": "MERGE INTO EMP E\nUSING EMP_TEMP T\nON (E.EMP_ID = T.EMP_ID)\nWHEN MATCHED THEN\n    UPDATE SET E.EMP_NAME = T.EMP_NAME\nWHEN NOT MATCHED THEN\n    INSERT (EMP_ID, EMP_NAME) VALUES (T.EMP_ID, T.EMP_NAME);"
+          "code": "MERGE INTO EMP E\nUSING EMP_TEMP T\nON (E.EMP_ID = T.EMP_ID)\nWHEN MATCHED THEN\n    UPDATE SET E.EMP_NAME = T.EMP_NAME\nWHEN NOT MATCHED THEN\n    INSERT (EMP_ID, EMP_NAME)\n    VALUES (T.EMP_ID, T.EMP_NAME);"
         }
       ]
     },
     {
       "subject": "2과목",
       "number": 41,
-      "title": "다음 SQL의 결과로 가장 적절한 것은 무엇인가?",
+      "title": "아래 SQL 의 결과(A, B, C, D)로 옳은 것은? (Oracle 기준)",
       "options": [
-        "AABBCC, ABBC",
-        "AABBC, AABBCC",
-        "AABBC, ABBC",
-        "AABBCC, AABBCC"
+        "AABBCC, ABBC, AA, NULL",
+        "AABBC, AABBCC, AAB, B",
+        "AABBC, ABBC, AA, NULL",
+        "AABBC, ABBC, AB, NULL"
       ],
       "correctIndex": 2,
-      "explanation": "패턴 '(A|B)+C'는 A 또는 B가 1회 이상 반복된 뒤 C가 오는 패턴으로 왼쪽부터 최장 일치하여 'AABBC'가 된다(C는 반복 대상이 아니라 1개). 패턴 'AB+C'는 A 바로 뒤에 B가 1회 이상 이어진 뒤 C가 와야 하므로 첫 A(다음이 A)는 탈락하고 두 번째 A부터 매칭되어 'ABBC'가 된다. ①④ 의 첫 값 AABBCC 는 C 도 반복된다고 본 값이고, ②④ 의 두 번째 값 AABBCC 는 AB+C 가 첫 A 부터 끝까지 맞는다고 본 값이다.",
+      "explanation": "(A|B)+ 는 A 나 B 가 1번 이상 이어진 부분이라 'AABB' 뒤에 C 하나가 붙어 A 는 'AABBC' 다(C 는 하나만 찾는다). AB+C 는 A 하나, B 가 1번 이상, C 하나라 두 번째 A 부터 시작한 'ABBC' 가 B 다. [AB]{2} 는 A 나 B 가 정확히 2글자인 부분이라 맨 앞의 'AA' 가 C 다. ^B 는 문자열이 B 로 시작해야 하는데 A 로 시작하므로 D 는 NULL 이다. 정답은 ③번이다. ① 은 C 까지 모두 붙인 것, ② 는 AB+C 가 앞의 A 들도 함께 잡는다고 본 것, ④ 는 [AB]{2} 가 서로 다른 두 글자를 요구한다고 본 것이다.",
       "references": [
         {
           "type": "sql",
-          "code": "SELECT REGEXP_SUBSTR('AABBCC', '(A|B)+C'),\n       REGEXP_SUBSTR('AABBCC', 'AB+C')\nFROM   DUAL;"
+          "code": "SELECT\n  REGEXP_SUBSTR('AABBCC', '(A|B)+C')\n    AS A,\n  REGEXP_SUBSTR('AABBCC', 'AB+C')\n    AS B,\n  REGEXP_SUBSTR('AABBCC', '[AB]{2}')\n    AS C,\n  REGEXP_SUBSTR('AABBCC', '^B')\n    AS D\nFROM DUAL;"
         }
       ]
     },
@@ -1895,7 +1962,7 @@
         },
         {
           "type": "sql",
-          "code": "SELECT (SELECT MAX(SAL) FROM EMP WHERE DEPT_ID = 30)\n     + (SELECT MIN(SAL) FROM EMP WHERE DEPT_ID = 20 AND SAL IS NULL)\nFROM DUAL;"
+          "code": "SELECT (SELECT MAX(SAL) FROM EMP\n         WHERE DEPT_ID = 30)\n     + (SELECT MIN(SAL) FROM EMP\n         WHERE DEPT_ID = 20\n           AND SAL IS NULL)\nFROM DUAL;"
         }
       ]
     },
@@ -1945,7 +2012,7 @@
         },
         {
           "type": "sql",
-          "code": "SELECT DEPTNO, PRODUCT, SUM(AMT)\nFROM SALES\nGROUP BY GROUPING SETS((DEPTNO, PRODUCT),(DEPTNO),());"
+          "code": "SELECT DEPTNO, PRODUCT, SUM(AMT)\nFROM SALES\nGROUP BY GROUPING SETS(\n  (DEPTNO, PRODUCT), (DEPTNO), ());"
         }
       ]
     },
@@ -1964,7 +2031,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "CREATE TABLE DEPT (\n    DEPT_ID    NUMBER PRIMARY KEY,\n    DEPT_NAME  VARCHAR2(20)\n);\n\nCREATE TABLE EMP (\n    EMP_ID    NUMBER PRIMARY KEY,\n    EMP_NAME  VARCHAR2(20),\n    DEPT_ID   NUMBER,\n    CONSTRAINT FK_DEPT FOREIGN KEY (DEPT_ID) REFERENCES DEPT(DEPT_ID)\n);\n\nINSERT INTO DEPT VALUES (10, '개발팀');\nINSERT INTO EMP VALUES (1, 'KIM', 10);"
+          "code": "CREATE TABLE DEPT (\n    DEPT_ID    NUMBER PRIMARY KEY,\n    DEPT_NAME  VARCHAR2(20)\n);\n\nCREATE TABLE EMP (\n    EMP_ID    NUMBER PRIMARY KEY,\n    EMP_NAME  VARCHAR2(20),\n    DEPT_ID   NUMBER,\n    CONSTRAINT FK_DEPT\n      FOREIGN KEY (DEPT_ID)\n      REFERENCES DEPT(DEPT_ID)\n);\n\nINSERT INTO DEPT VALUES (10, '개발팀');\nINSERT INTO EMP VALUES (1, 'KIM', 10);"
         }
       ]
     },
@@ -2005,7 +2072,7 @@
         },
         {
           "type": "sql",
-          "code": "SELECT SALE_DATE, AMT,\n       AMT - LAG(AMT) OVER (ORDER BY SALE_DATE) AS DIFF\nFROM SALES;"
+          "code": "SELECT SALE_DATE, AMT,\n       AMT - LAG(AMT) OVER (\n               ORDER BY SALE_DATE)\n         AS DIFF\nFROM SALES;"
         }
       ]
     },
