@@ -1670,13 +1670,13 @@ export const ROUND_49: QuizQuestion[] = [
     "number": 36,
     "title": "아래 두 테이블에 대한 SQL 의 결과로 옳은 것은?",
     "options": [
-      "(1, SMITH, 1, S%), (3, SCOTT, 1, S%), (1, SMITH, 2, %T%), (3, SCOTT, 2, %T%)",
-      "(1, SMITH, 1, S%) 한 건만 반환된다.",
-      "조인 조건이 없으므로 TAB1 × TAB2 카티션 곱(8건)이 그대로 반환된다.",
-      "조건을 만족하는 행이 없어 공집합이 반환된다."
+      "7",
+      "4",
+      "6",
+      "15"
     ],
     "correctIndex": 0,
-    "explanation": "조인 조건 A.NAME LIKE B.RULE 은 TAB2 의 RULE 값을 패턴으로 쓴다. 'S%' 는 S 로 시작하는 SMITH, SCOTT 에, '%T%' 는 T 를 포함하는 SMITH, SCOTT 에 매칭되고 ALICE 는 어디에도 매칭되지 않는다. 그래서 4행이 나온다(①). 조인 조건이 있으므로 카티션 곱(③)이 아니다. ② 는 SMITH 와 S% 한 쌍만 본 결과, ④ 조건에 맞는 행이 있어 공집합이 아니다.",
+    "explanation": "LIKE 의 오른쪽에 칼럼이 와도 그 값이 패턴으로 쓰인다. 그래서 TAB1 의 이름 하나가 규칙 여러 개와 맞으면 그만큼 행이 생긴다. SMITH 는 S% 와 %T% 에 맞아 2행, SCOTT 도 2행, S_TOM 도 S 로 시작하고 T 가 있어 2행이다. ALICE 는 S 로 시작하지 않고 T 도 없으며 두 번째 글자가 L 이라 0행이다. JAMES 는 _A% (아무 한 글자 다음 A) 에 맞아 1행이다. 2 + 0 + 2 + 2 + 1 = 7, 정답은 ①번이다. ② 4 는 규칙과 하나라도 맞는 이름 수를 센 것으로, 조인이 이름마다 한 행만 만든다고 본 값이다. ③ 6 은 _A% 의 _ 를 밑줄 문자 그대로로 읽어 JAMES 를 뺀 값이다. ④ 15 는 조인 조건이 없다고 보고 5 × 3 카티션 곱을 센 것이다.",
     "_source": "authored",
     "references": [
       {
@@ -1698,6 +1698,14 @@ export const ROUND_49: QuizQuestion[] = [
           [
             "3",
             "SCOTT"
+          ],
+          [
+            "4",
+            "S_TOM"
+          ],
+          [
+            "5",
+            "JAMES"
           ]
         ]
       },
@@ -1705,7 +1713,7 @@ export const ROUND_49: QuizQuestion[] = [
         "type": "table",
         "caption": "TAB2",
         "headers": [
-          "ID",
+          "RID",
           "RULE"
         ],
         "rows": [
@@ -1716,12 +1724,16 @@ export const ROUND_49: QuizQuestion[] = [
           [
             "2",
             "%T%"
+          ],
+          [
+            "3",
+            "_A%"
           ]
         ]
       },
       {
         "type": "sql",
-        "code": "SELECT * FROM TAB1 A, TAB2 B\nWHERE A.NAME LIKE B.RULE;"
+        "code": "SELECT COUNT(*)\nFROM   TAB1 A, TAB2 B\nWHERE  A.NAME LIKE B.RULE;"
       }
     ]
   },
@@ -2246,41 +2258,54 @@ export const ROUND_49: QuizQuestion[] = [
     "round": 49,
     "subject": "2과목",
     "number": 48,
-    "title": "아래 SQL 의 빈칸에 들어갈 조건식으로 옳은 것은? (결과 행 수: 2건)",
+    "title": "아래 T 테이블에 네 WHERE 조건을 각각 적용했을 때, 결과가 한 건도 나오지 않는 것은? (Oracle 기준)",
     "options": [
-      "= NULL",
-      "!= NULL",
-      "IS NOT NULL",
-      "IS NULL"
+      "NOT (COL = 'A')",
+      "COL <> 'A' OR COL IS NULL",
+      "NVL(COL, 'A') <> 'B' AND COL IN ('A', 'C', NULL)",
+      "COL NOT IN ('A', NULL)"
     ],
     "correctIndex": 3,
-    "explanation": "NULL 은 어떤 값과도 = / != 비교 시 UNKNOWN 으로 평가되어 결과에서 제외되므로 NULL 여부는 반드시 IS NULL / IS NOT NULL 로 판별해야 한다. ④ `IS NULL` 을 넣으면 COL = 'A' 인 행과 COL 이 NULL 인 행을 합쳐 2 건이 반환된다. ①·② 는 NULL 비교가 UNKNOWN 이라 'A' 한 건만 반환되고, ③ `IS NOT NULL` 은 'A', 'B', 'C' 세 건이 반환되어 결과 행 수가 다르다.",
+    "explanation": "④ 의 COL NOT IN ('A', NULL) 은 COL <> 'A' AND COL <> NULL 과 같다. COL <> NULL 은 어떤 값이든 알 수 없음(UNKNOWN)이라 AND 전체가 참이 될 수 없고, 한 건도 나오지 않는다. 정답은 ④번이다. ① NOT (COL = 'A') 는 B, C 두 건이다. COL 이 NULL 인 행은 COL = 'A' 가 UNKNOWN 이고 NOT 을 붙여도 UNKNOWN 이라 빠진다. ② 는 B, C 에 NULL 인 두 행이 더해져 네 건이다. ③ 의 IN ('A', 'C', NULL) 은 OR 로 풀리므로 A·C 와 같은 행은 참이 되고 NULL 항목은 결과에 영향이 없다. 1·4·6번이 남고, 이 행들은 NVL(COL, 'A') <> 'B' 도 참이라 세 건이다. NULL 이 목록에 들어갔을 때 IN 은 그대로 동작하지만 NOT IN 은 결과를 모두 지운다는 차이가 핵심이다.",
     "_source": "authored",
     "references": [
       {
         "type": "table",
-        "caption": "T 테이블",
+        "caption": "T",
         "headers": [
+          "ID",
           "COL"
         ],
         "rows": [
           [
+            "1",
             "A"
           ],
           [
+            "2",
             "B"
           ],
           [
+            "3",
             "NULL"
           ],
           [
+            "4",
             "C"
+          ],
+          [
+            "5",
+            "NULL"
+          ],
+          [
+            "6",
+            "A"
           ]
         ]
       },
       {
         "type": "sql",
-        "code": "SELECT * FROM T\nWHERE  COL = 'A'\nOR     COL ( ? );"
+        "code": "SELECT * FROM T\nWHERE  ( 조건 );"
       }
     ]
   },

@@ -1220,5 +1220,7 @@ sqld-0312·0319(M494·M501, 데이터베이스 파티션 기법)도 성능 데�
 | 47-2-43 | HAVING COUNT(VAL) 로 그룹 수 | COUNT(*)·COUNT(DISTINCT)·AVG + HAVING ... OR SUM(VAL) IS NULL. 오답: NULL 을 0 으로 본 AVG, 전부 NULL 인 그룹 누락, COUNT(*) 가 NULL 을 뺀다고 봄 | PostgreSQL 16 → (A,3,2,15) (C,2,0,NULL) (D,2,1,40) |
 | 48-2-38 | 모든 값에 _ 가 든 6행 LIKE ESCAPE | _·%·대소문자 섞인 7행, ESCAPE 조건 두 개 OR. 오답: 대소문자 무시(4), 첫 조건 ESCAPE 무시(5), 둘 다 무시(7) | PostgreSQL 16 → 3. ILIKE 4, 'A_%' 5, ESCAPE 없이 두 조건 7 로 오답 값도 재현 |
 | 48-2-43 | 표 없이 ROWNUM SQL 고르기 | 학생 6행(저장 순서 명시) + 네 SQL. ROWNUM 과 ORDER BY 순서, 인라인 뷰 안 ROWNUM 별칭, ROWNUM = 3 | PostgreSQL 16 에서 저장 순서 seq 로 흉내: ① 나·다·가, ③ 나·라·다. ④ 는 ROWNUM 규칙상 0건 |
+| 49-2-36 | 이름 3행 × 규칙 2행 LIKE 조인 | 이름 5행(밑줄 포함) × 규칙 3행(S%, %T%, _A%) 조인 COUNT. 오답: 이름당 한 행(4), _ 를 문자로 읽음(6), 카티션 곱(15) | PostgreSQL 16 → 7. _ 를 이스케이프하면 6 |
+| 49-2-48 | 빈칸에 IS NULL | NULL 두 행 + 네 WHERE(NOT, OR IS NULL, IN 목록의 NULL, NOT IN 목록의 NULL) 중 0건 찾기 | PostgreSQL 16 → 2·4·3·0건(NVL 은 COALESCE 로). verify-sql-* 는 '( 조건 )' 자리표시라 오류로 셈(검증기 한계) |
 
-390px 캡처: 여덟 문항 모두 표·SQL 넘침 없음.
+390px 캡처: 열 문항 모두 표·SQL 넘침 없음.
