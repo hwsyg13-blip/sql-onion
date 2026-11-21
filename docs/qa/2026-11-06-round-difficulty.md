@@ -1216,5 +1216,7 @@ sqld-0312·0319(M494·M501, 데이터베이스 파티션 기법)도 성능 데�
 | 45-2-28 | 빈 테이블에 NULL 하나씩 넣는 INSERT | 기존 두 행 + DEFAULT·NOT NULL·UNIQUE·CHECK. 명시적 NULL 은 DEFAULT 안 씀, UNIQUE 는 NULL 중복 허용, CHECK 는 NULL(UNKNOWN) 통과 | PostgreSQL 16: ①·②·④ 각각 NOT NULL·UNIQUE·CHECK 오류, ③ 만 (3, 0, NULL, NULL) 입력 |
 | 46-2-36 | 세 행 ORDER BY, NULL 하나 | 사원 6행, 부서·보너스 양쪽 NULL + 'DESC 는 보너스에만' + 보너스 NULL 동률 → 급여 오름차순. 오답: NULL 을 가장 작게(①), DESC 가 급여까지(③), SQL Server 방식(④) | PostgreSQL 16(NULL 정렬 기본값이 Oracle 과 같음) → 김하늘, 최유나, 강지우, 정민호, 이도윤, 박서준 |
 | 46-2-40 | CASE 네 행 판정 | 점수·출석 NULL, ELSE 없는 검색 CASE + 단순 CASE 의 WHEN NULL. 등급 NULL 행 수와 표시 합을 묻고, 오답은 AND 누락·WHEN NULL 매칭 두 실수 조합 | PostgreSQL 16 → 등급 (A, NULL, NULL, NULL, C), 표시 (-1, 1, 1, -1, -1) → 3건, -1 |
+| 47-2-28 | 세 테이블 UNION ALL·MINUS | 중복·NULL 섞인 세 테이블, 집합 연산이 NULL 을 같은 값으로 봄 + MINUS 의 중복 제거 + 위에서부터 계산. 오답 ④ 는 B MINUS C 를 먼저 한 결과 | PostgreSQL 16(EXCEPT, UNION 과 같은 우선순위) → 1, 3, 4. 괄호로 B-C 먼저 계산 → 1, 2, 3, 3, 3, 4, NULL(④) |
+| 47-2-43 | HAVING COUNT(VAL) 로 그룹 수 | COUNT(*)·COUNT(DISTINCT)·AVG + HAVING ... OR SUM(VAL) IS NULL. 오답: NULL 을 0 으로 본 AVG, 전부 NULL 인 그룹 누락, COUNT(*) 가 NULL 을 뺀다고 봄 | PostgreSQL 16 → (A,3,2,15) (C,2,0,NULL) (D,2,1,40) |
 
-390px 캡처: 네 문항 모두 표·SQL 넘침 없음.
+390px 캡처: 여섯 문항 모두 표·SQL 넘침 없음.
