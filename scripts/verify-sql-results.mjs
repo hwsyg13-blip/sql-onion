@@ -99,7 +99,8 @@ for (const f of fs.readdirSync(DIR).filter(f => /\.json$/.test(f)).sort()) {
         const cols = t.headers.map(h => `"${String(h).trim()}"`);
         db.exec(`CREATE TABLE "${name}" (${cols.join(',')})`);
         const st = db.prepare(`INSERT INTO "${name}" VALUES (${cols.map(() => '?').join(',')})`);
-        for (const r of t.rows || []) st.run(...t.headers.map((_, j) => cell(r[j])));
+        // verify-sql-pg 와 같이 '(empty)'·'(없음)'·'(빈 테이블)' 한 칸짜리 행은 빈 테이블 표시로 본다.
+        for (const r of (t.rows || []).filter(r => !(r.length === 1 && /^\((empty|없음|빈 테이블)\)$/i.test(String(r[0]).trim())))) st.run(...t.headers.map((_, j) => cell(r[j])));
       }
       // 한 블록에 쿼리가 여러 개면 각각 실행. 모두 단일 값이면 "v1, v2" 한 행으로 합친다 (보기 "3, 4" 형식).
       const parts = raw.replace(/--[^\n]*/g, ' ').split(';').map(x => x.trim()).filter(Boolean);

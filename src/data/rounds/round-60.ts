@@ -1674,20 +1674,20 @@ export const ROUND_60: QuizQuestion[] = [
     "round": 60,
     "subject": "2과목",
     "number": 38,
-    "title": "아래 두 테이블 A, B 에 대한 SQL 의 결과로 옳은 것은?",
+    "title": "아래 A, B 테이블에 대한 ㉠~㉢ 의 결과를 차례로 나열한 것은? (B 는 비어 있다)",
     "options": [
-      "4",
-      "2",
-      "0",
-      "오류"
+      "0, 2, 2",
+      "2, 2, 2",
+      "0, 0, 0",
+      "0, 2, 0"
     ],
     "correctIndex": 0,
-    "explanation": "조인 조건이 없는 `FROM A, B` 는 카티션 곱(Cross Join)이라 결과 행 수 = `|A| × |B|` = 2 × 2 = 4. `COUNT(*)` 가 4 를 반환한다. ② 2 는 한 테이블의 행 수만 센 값, ③ 0 은 조건이 없으면 조인이 안 된다고 본 값이고, ④ 조인 조건이 없어도 오류는 나지 않는다.",
+    "explanation": "㉠ 의 카티션 곱은 2 × 0 = 0 행이다. 한쪽이 비어 있으면 곱도 비어 있다. ㉡ 의 LEFT OUTER JOIN 은 B 에 짝이 없어도 A 의 행을 남기므로 2행이다. ㉢ 의 인라인 뷰는 GROUP BY 없는 집계라 B 가 비어 있어도 CNT = 0 인 한 행을 돌려준다. 그래서 2 × 1 = 2행이다. 정답은 ①번이다. ② 는 빈 테이블과의 카티션 곱에서 A 행이 그대로 남는다고 본 값이다. ③ 은 빈 테이블이 끼면 어떤 조인이든 결과가 없다고 본 값이다. ④ 는 빈 테이블에 COUNT(*) 를 하면 행이 나오지 않는다고 본 값이다.",
     "_source": "authored",
     "references": [
       {
         "type": "table",
-        "caption": "A 테이블",
+        "caption": "A",
         "headers": [
           "COL"
         ],
@@ -1702,22 +1702,19 @@ export const ROUND_60: QuizQuestion[] = [
       },
       {
         "type": "table",
-        "caption": "B 테이블",
+        "caption": "B",
         "headers": [
           "COL"
         ],
         "rows": [
           [
-            "b1"
-          ],
-          [
-            "b2"
+            "(빈 테이블)"
           ]
         ]
       },
       {
         "type": "sql",
-        "code": "SELECT COUNT(*)\nFROM   A, B;"
+        "code": "-- ㉠\nSELECT COUNT(*) FROM A, B;\n-- ㉡\nSELECT COUNT(*)\nFROM   A LEFT OUTER JOIN B\n       ON 1 = 1;\n-- ㉢\nSELECT COUNT(*)\nFROM   A, (SELECT COUNT(*) AS CNT\n           FROM   B) V;"
       }
     ]
   },

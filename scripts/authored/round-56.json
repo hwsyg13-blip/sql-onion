@@ -1319,35 +1319,39 @@
     {
       "subject": "2과목",
       "number": 36,
-      "title": "아래 NATURAL JOIN 의 결과 행 수는?",
+      "title": "아래 두 테이블에 대한 (㉠ 행 수, ㉡ 행 수, ㉡ 결과 칼럼 수) 로 옳은 것은?",
       "options": [
-        "0",
-        "3",
-        "5",
-        "15"
+        "(1, 2, 5)",
+        "(2, 2, 5)",
+        "(1, 2, 4)",
+        "(1, 2, 6)"
       ],
       "correctIndex": 0,
-      "explanation": "두 테이블의 공통 컬럼은 ID 이지만 TAB1(1, 2, 3)과 TAB2(10, 20, 30, 40, 50) 사이에 일치하는 ID 값이 없으므로 NATURAL JOIN 결과는 0 건이다. ② 3 은 TAB1 행 수, ③ 5 는 TAB2 행 수, ④ 15 는 조건 없는 CROSS JOIN 의 결과다.",
+      "explanation": "NATURAL JOIN 은 이름이 같은 칼럼 전부(ID, NAME)를 = 로 비교한다. ID 와 NAME 이 둘 다 같은 행은 (1, A) 뿐이라 ㉠ 은 1행이다. USING (ID) 는 ID 만 비교하므로 ID 1, 2 가 맞아 ㉡ 은 2행이다. ㉡ 의 칼럼은 USING 에 쓴 ID 가 한 번만 나오고, 비교하지 않은 NAME 은 양쪽 것이 따로 나와 ID, TAB1 의 NAME, CITY, TAB2 의 NAME, PHONE 5칼럼이다. 정답은 ①번이다. ② 는 NATURAL JOIN 도 ID 하나만 비교한다고 본 값이다. ③ 은 USING 에서도 NAME 이 하나로 합쳐진다고 본 칼럼 수다. ④ 는 USING 을 ON 처럼 보고 ID 가 두 번 나온다고 본 칼럼 수다.",
       "references": [
         {
           "type": "table",
           "caption": "TAB1",
           "headers": [
             "ID",
-            "CUSTOMER"
+            "NAME",
+            "CITY"
           ],
           "rows": [
             [
               "1",
-              "A"
+              "A",
+              "서울"
             ],
             [
               "2",
-              "B"
+              "B",
+              "부산"
             ],
             [
               "3",
-              "C"
+              "C",
+              "서울"
             ]
           ]
         },
@@ -1356,34 +1360,30 @@
           "caption": "TAB2",
           "headers": [
             "ID",
+            "NAME",
             "PHONE"
           ],
           "rows": [
             [
-              "10",
-              "111-1111"
+              "1",
+              "A",
+              "111"
             ],
             [
-              "20",
-              "222-2222"
+              "2",
+              "X",
+              "222"
             ],
             [
-              "30",
-              "333-3333"
-            ],
-            [
-              "40",
-              "444-4444"
-            ],
-            [
-              "50",
-              "555-5555"
+              "4",
+              "D",
+              "444"
             ]
           ]
         },
         {
           "type": "sql",
-          "code": "SELECT * FROM TAB1 NATURAL JOIN TAB2;"
+          "code": "-- ㉠\nSELECT * FROM TAB1 NATURAL JOIN TAB2;\n-- ㉡\nSELECT * FROM TAB1 JOIN TAB2\n       USING (ID);"
         }
       ]
     },

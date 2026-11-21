@@ -1274,3 +1274,5 @@ sqld-0312·0319(M494·M501, 데이터베이스 파티션 기법)도 성능 데�
 | 46-1-2 | 1:N 규칙을 테이블로 구현 | M:N + 재가입 이력 규칙 → 관계 테이블 PK 에 가입일자 | PostgreSQL 16: (고객, 서비스) PK 는 재가입이 PK 오류, (고객, 서비스, 가입일자) PK 는 2행 저장 |
 | 61-1-7 | 고객 속성 중 PK 후보 판단 | 수강 엔터티에서 후보키·슈퍼키(최소성)·재수강 업무 규칙 | PostgreSQL 16: UNIQUE(학번, 과목코드, 학기) 로 재수강 2행 저장, (학번, 과목코드) 는 중복 발생. 표 설명 칸이 넘쳐 줄임 |
 | 52-2-35 | ROLLUP((A, B)) 고르기 | 4행 데이터에 ROLLUP(A, B, C)·ROLLUP(A, (B, C))·ROLLUP((A, B), C)·GROUPING SETS((A, B, C), ()) 행 수 | PostgreSQL 16 → 10, 7, 8, 5 |
+| 56-2-36 | 공통 칼럼 하나 NATURAL JOIN 0건 | 공통 칼럼 둘(ID, NAME) NATURAL JOIN vs USING (ID) 의 행 수·칼럼 수 | PostgreSQL 16 → 1행, 2행, USING 결과 칼럼 id·name·city·name·phone 5개 |
+| 60-2-38 | 2×2 카티션 곱 | 빈 테이블과의 카티션 곱·LEFT JOIN ON 1=1·집계 인라인 뷰 | PostgreSQL 16 → 0, 2, 2. SQLite 검증기가 '(빈 테이블)' 행을 실제 행으로 넣어 mismatch → verify-sql-pg 와 같은 빈 테이블 표시 규칙을 verify-sql-results 에도 추가 |
