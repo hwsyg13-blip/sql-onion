@@ -631,18 +631,19 @@
     {
       "subject": "2과목",
       "number": 19,
-      "title": "아래 TAB1 테이블에 대한 SQL 의 결과로 옳은 것은?",
+      "title": "아래 TAB1 테이블에 대한 ㉠~㉣ 의 결과 행 수를 차례로 나열한 것은?",
       "options": [
-        "공집합",
-        "'X' 한 행",
-        "NULL 한 행",
-        "MAX(COL1) 값"
+        "1, 0, 0, 1",
+        "1, 1, 1, 1",
+        "0, 0, 0, 1",
+        "1, 0, 1, 1"
       ],
       "correctIndex": 0,
-      "explanation": "TAB1 의 COL2 값이 모두 9 이하라 `WHERE COL2 > 9` 를 만족하는 행이 없다. `GROUP BY` 가 지정된 SQL 은 그룹이 0 개이면 결과 행도 0 개로 공집합이 된다. `GROUP BY` 가 없었다면 단일 그룹으로 처리되어 `MAX(COL1)` = NULL → NVL 로 'X' 1 행이 나오겠지만, 본 SQL 은 `GROUP BY COL1` 이라 공집합이 정답. ② 'X' 한 행은 GROUP BY 가 없을 때의 결과, ③ NULL 한 행은 거기에 NVL 도 없을 때의 결과이고, ④ 그룹이 없어 MAX 값도 나오지 않는다.",
+      "explanation": "COL2 > 9 인 행은 없다. ㉠ 은 GROUP BY 없는 집계라 대상 행이 없어도 한 행을 돌려준다. MAX 가 NULL 이라 NVL 로 'X' 가 나와 1행이다. ㉡ 은 GROUP BY 가 있어 만들어질 그룹이 없으므로 0행이다. ㉢ 은 GROUP BY 없이 HAVING 만 쓰면 테이블 전체가 한 그룹이 되는데, COUNT(*) = 2 라 HAVING 조건이 거짓이어서 그 한 그룹도 빠져 0행이다. ㉣ 은 ㉠ 과 같은 이유로 0 이 담긴 1행이다. 정답은 ①번이다. ② 는 NVL 을 쓰면 언제나 한 행이 나온다고 본 값이다. ③ 은 대상 행이 없으면 NVL(MAX) 도 행이 없다고 본 값이다. ④ 는 GROUP BY 가 없으면 HAVING 이 무시된다고 본 값이다.",
       "references": [
         {
           "type": "table",
+          "caption": "TAB1",
           "headers": [
             "COL1",
             "COL2"
@@ -656,12 +657,11 @@
               "B",
               "7"
             ]
-          ],
-          "caption": "TAB1 테이블"
+          ]
         },
         {
           "type": "sql",
-          "code": "SELECT NVL(MAX(COL1), 'X')\nFROM   TAB1\nWHERE  COL2 > 9\nGROUP BY COL1;"
+          "code": "-- ㉠\nSELECT NVL(MAX(COL1), 'X') FROM TAB1\nWHERE  COL2 > 9;\n-- ㉡\nSELECT NVL(MAX(COL1), 'X') FROM TAB1\nWHERE  COL2 > 9\nGROUP BY COL1;\n-- ㉢\nSELECT NVL(MAX(COL1), 'X') FROM TAB1\nHAVING COUNT(*) > 9;\n-- ㉣\nSELECT COUNT(*) FROM TAB1\nWHERE  COL2 > 9;"
         }
       ]
     },

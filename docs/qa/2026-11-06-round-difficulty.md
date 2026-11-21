@@ -1282,3 +1282,10 @@ sqld-0312·0319(M494·M501, 데이터베이스 파티션 기법)도 성능 데�
 | 55-2-18 | NULL 산술 세 행 | 산술 NULL 전파 + NVL 한쪽만 + Oracle 의 || NULL 처리 | PostgreSQL 16 은 || 에 NULL 이면 NULL 이라 concat() 으로 흉내 → 3번 행 (NULL, NULL, '10') |
 | 50-2-41 | 뷰 SUM 한 문장 | 뷰 WHERE 의 NULL 제외 + WITH CHECK OPTION 으로 INSERT·UPDATE 성공/실패 후 SUM | PostgreSQL 16 → ㉠ 600, 'A' INSERT·NULL UPDATE 는 check option 오류, 마지막 650 |
 | 60-2-37 | 4행 조인 SUM | 1:N 조인으로 SUM 이 부풀려지는 함정(조인·EXISTS·LEFT JOIN 비교) | PostgreSQL 16 → 400, 300, 700 |
+
+### 11-21 22시 실행 (7일 창 0.86 — 필수 2문항만)
+
+| 문항 | 전 | 후 | 검증 |
+|---|---|---|---|
+| 48-2-48 | LEVEL = 2 행 수 | 8행 트리 + LEVEL·CONNECT_BY_ISLEAF(자식 없는 LEVEL 2 노드 포함) | PostgreSQL 16 재귀 CTE → (3, 4, 4) |
+| 51-2-19 | GROUP BY 있는 NVL(MAX) 공집합 | 대상 행 없는 집계·GROUP BY·GROUP BY 없는 HAVING·COUNT(*) 행 수 | PostgreSQL 16 → 1, 0, 0, 1 |
