@@ -1092,15 +1092,15 @@ export const ROUND_62: QuizQuestion[] = [
     "round": 62,
     "subject": "2과목",
     "number": 28,
-    "title": "다음 SQL의 수행 결과는?",
+    "title": "아래 EMP 테이블에 대한 ㉠~㉣ 의 결과를 차례로 나열한 것은? (Oracle 기준)",
     "options": [
-      "JONES",
-      "ALLEN, JONES, MARTIN",
-      "ALLEN, MARTIN",
-      "결과 없음"
+      "2, 6, 3, 4",
+      "3, 4, 3, 5",
+      "2, 5, 3, 4",
+      "2, 5, 3, 2"
     ],
     "correctIndex": 2,
-    "explanation": "LIKE '%N'은 N으로 끝나는 문자열만 매칭한다. ALLEN과 MARTIN이 해당하며, JONES는 N이 중간에 포함될 뿐 S로 끝나므로 제외된다. 따라서 ① 은 틀리고, ② 는 '%N%'(N 포함)로 본 결과이며, ④ ALLEN·MARTIN 이 N 으로 끝나므로 결과가 있다.",
+    "explanation": "Oracle 의 LIKE 는 대소문자를 구분한다. ㉠ 은 대문자 N 으로 끝나는 ALLEN, MARTIN 2건이다. Ann 은 소문자 n 으로 끝나서 빠진다. ㉡ 은 ㉠ 의 반대처럼 보이지만 ENAME 이 NULL 인 행은 LIKE 도 NOT LIKE 도 UNKNOWN 이라 빠진다. 그래서 8 - 2 - 1 = 5건(SMITH, JONES, KING, BLAKE, Ann)이다. ㉢ 은 대문자로 바꾼 뒤 비교하므로 ANN 까지 3건이다. ㉣ 의 '%N%' 는 위치와 상관없이 N 이 들어 있으면 되므로 ALLEN, JONES, MARTIN, KING 4건이다. 정답은 ③번이다. ① 은 NOT LIKE 에 NULL 행도 들어간다고 본 값이다. ② 는 LIKE 가 대소문자를 구분하지 않는다고 본 값이다. ④ 는 '%N%' 가 N 이 처음이나 끝이 아닌 가운데에 있어야 한다고 보고 JONES, KING 만 센 값이다.",
     "_source": "authored",
     "references": [
       {
@@ -1127,12 +1127,18 @@ export const ROUND_62: QuizQuestion[] = [
           ],
           [
             "BLAKE"
+          ],
+          [
+            "NULL"
+          ],
+          [
+            "Ann"
           ]
         ]
       },
       {
         "type": "sql",
-        "code": "SELECT ENAME\nFROM   EMP\nWHERE  ENAME LIKE '%N';"
+        "code": "-- ㉠\nSELECT COUNT(*) FROM EMP\nWHERE  ENAME LIKE '%N';\n-- ㉡\nSELECT COUNT(*) FROM EMP\nWHERE  ENAME NOT LIKE '%N';\n-- ㉢\nSELECT COUNT(*) FROM EMP\nWHERE  UPPER(ENAME) LIKE '%N';\n-- ㉣\nSELECT COUNT(*) FROM EMP\nWHERE  ENAME LIKE '%N%';"
       }
     ]
   },
@@ -2033,15 +2039,15 @@ export const ROUND_62: QuizQuestion[] = [
     "round": 62,
     "subject": "2과목",
     "number": 47,
-    "title": "다음 SQL의 수행 결과는?",
+    "title": "아래 TAB 테이블에 대한 ㉠, ㉡ 의 결과로 옳은 것은?",
     "options": [
-      "4",
-      "6",
-      "10",
-      "결과 없음"
+      "㉠ 6, ㉡ 3",
+      "㉠ 16, ㉡ 9",
+      "㉠ 11, ㉡ 5",
+      "㉠ 11, ㉡ 7"
     ],
     "correctIndex": 2,
-    "explanation": "A.COL1 <= B.COL1을 만족하는 (A, B) 조합의 개수를 센다. A=1은 B가 1, 2, 3, 4로 4건, A=2는 3건, A=3은 2건, A=4는 1건이므로 4 + 3 + 2 + 1 = 10건이다. ① 4 는 같은 값끼리만(=), ② 6 은 A < B 로 센 값이다.",
+    "explanation": "같은 테이블을 두 번 읽어 5 × 5 = 25 쌍을 만든 뒤 조건으로 거른다. NULL 이 들어간 쌍은 비교가 UNKNOWN 이라 모두 빠지므로, 1, 2, 2, 3 네 행끼리 16 쌍만 보면 된다. ㉠ 은 A 가 1 이면 B 네 행 모두(4쌍), A 가 2 인 두 행은 각각 B 의 2, 2, 3(3쌍씩 6쌍), A 가 3 이면 B 의 3(1쌍)이라 11 이다. ㉡ 은 같은 값을 빼고 A 가 1 이면 B 의 2, 2, 3(3쌍), A 가 2 인 두 행은 각각 B 의 3(2쌍)이라 5 다. 정답은 ③번이다. ① 은 중복 값을 하나로 보고 1, 2, 3 세 값끼리만 센 값이다. ② 는 NULL 을 가장 작은 값처럼 보고 NULL 쌍까지 센 값이다. ④ 는 2 가 든 두 행을 서로 다른 행이라는 이유로 '작다' 에도 넣어 2쌍을 더 센 값이다.",
     "_source": "authored",
     "references": [
       {
@@ -2058,16 +2064,19 @@ export const ROUND_62: QuizQuestion[] = [
             "2"
           ],
           [
+            "2"
+          ],
+          [
             "3"
           ],
           [
-            "4"
+            "NULL"
           ]
         ]
       },
       {
         "type": "sql",
-        "code": "SELECT COUNT(*)\nFROM   TAB A, TAB B\nWHERE  A.COL1 <= B.COL1;"
+        "code": "-- ㉠\nSELECT COUNT(*)\nFROM   TAB A, TAB B\nWHERE  A.COL1 <= B.COL1;\n-- ㉡\nSELECT COUNT(*)\nFROM   TAB A, TAB B\nWHERE  A.COL1 < B.COL1;"
       }
     ]
   },
