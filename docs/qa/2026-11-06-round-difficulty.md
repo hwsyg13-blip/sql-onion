@@ -1226,5 +1226,7 @@ sqld-0312·0319(M494·M501, 데이터베이스 파티션 기법)도 성능 데�
 | 50-2-34 | 키 3개씩 네 조인 중 가장 적은 것 | 중복 키(2 두 행씩)·NULL 키가 있는 두 테이블의 LEFT·RIGHT·FULL·INNER 행 수. 오답: 중복 곱 누락, NULL 매칭, FULL = LEFT + RIGHT | PostgreSQL 16 → 7, 7, 9, 5 |
 | 51-2-23 | AND 조건 하나로 결과 없음 | 8행(NULL 섞임) + NOT (A OR B) AND C OR D. AND 우선, NOT UNKNOWN, OR 의 한쪽 참. 오답: OR 먼저(1), NULL 을 참으로(3), 드모르간 오류(4) | PostgreSQL 16(별도 스키마) → 2. 오답 식도 각각 1·3·4 로 재현 |
 | 51-2-29 | 4행 순위 함수 마지막 값 | 7행, 동점 두 쌍 + RANK·DENSE_RANK·NTILE(3)(나머지 앞 묶음부터) | PostgreSQL 16 → EMPNO 4 는 (6, 4, 3) |
+| 52-2-12 | 네 NULL 함수 중 결과가 다른 것 | 5행 + NVL2·NULLIF·COALESCE·DECODE 를 SUM/COUNT 로 묶은 (A, B, C, D). 오답: NULLIF(100, NULL)=NULL, NVL2 방향 반대, DECODE 의 NULL 비교 | PostgreSQL 16(NVL2·DECODE 는 CASE 로) → (498, 200, 4, 2) |
+| 52-2-49 | ON DELETE CASCADE 고르기 | mermaid ERD 4테이블(SET NULL·CASCADE·옵션 없음) + 데이터 + DELETE 세 문장 후 (사원, 근태, NULL 부서 사원) | PostgreSQL 16 에 같은 FK 옵션으로 실행 → ㉢ 은 평가 FK 위반 오류, 결과 (2, 2, 1). 390px 캡처로 ERD 렌더 확인 |
 
-390px 캡처: 열네 문항 모두 표·SQL 넘침 없음.
+390px 캡처: 열여섯 문항 모두 표·SQL 넘침 없음.
