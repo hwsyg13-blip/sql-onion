@@ -1224,5 +1224,7 @@ sqld-0312·0319(M494·M501, 데이터베이스 파티션 기법)도 성능 데�
 | 49-2-48 | 빈칸에 IS NULL | NULL 두 행 + 네 WHERE(NOT, OR IS NULL, IN 목록의 NULL, NOT IN 목록의 NULL) 중 0건 찾기 | PostgreSQL 16 → 2·4·3·0건(NVL 은 COALESCE 로). verify-sql-* 는 '( 조건 )' 자리표시라 오류로 셈(검증기 한계) |
 | 50-2-20 | 최소 ID 남기는 DELETE 고르기 | NAME 에 NULL 두 행 + NOT IN(GROUP BY) 과 상관 서브쿼리(B.NAME = A.NAME) 두 DELETE 의 남는 행 수 | PostgreSQL 16(트랜잭션 후 ROLLBACK) → ㉠ 4행(100·200·300·700), ㉡ 5행(NULL 두 행 남음) |
 | 50-2-34 | 키 3개씩 네 조인 중 가장 적은 것 | 중복 키(2 두 행씩)·NULL 키가 있는 두 테이블의 LEFT·RIGHT·FULL·INNER 행 수. 오답: 중복 곱 누락, NULL 매칭, FULL = LEFT + RIGHT | PostgreSQL 16 → 7, 7, 9, 5 |
+| 51-2-23 | AND 조건 하나로 결과 없음 | 8행(NULL 섞임) + NOT (A OR B) AND C OR D. AND 우선, NOT UNKNOWN, OR 의 한쪽 참. 오답: OR 먼저(1), NULL 을 참으로(3), 드모르간 오류(4) | PostgreSQL 16(별도 스키마) → 2. 오답 식도 각각 1·3·4 로 재현 |
+| 51-2-29 | 4행 순위 함수 마지막 값 | 7행, 동점 두 쌍 + RANK·DENSE_RANK·NTILE(3)(나머지 앞 묶음부터) | PostgreSQL 16 → EMPNO 4 는 (6, 4, 3) |
 
-390px 캡처: 열두 문항 모두 표·SQL 넘침 없음.
+390px 캡처: 열네 문항 모두 표·SQL 넘침 없음.

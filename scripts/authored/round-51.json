@@ -810,19 +810,19 @@
     {
       "subject": "2과목",
       "number": 23,
-      "title": "아래 T 테이블에 대한 SQL 의 결과로 옳은 것은?",
+      "title": "아래 T 테이블에 대한 SQL 의 결과로 옳은 것은? (Oracle 기준)",
       "options": [
-        "전체 행",
-        "COL1 = 'CPG' 인 행",
-        "COL2 <= 10 인 행",
-        "조건을 만족하는 행 없음 (결과 없음)"
+        "1",
+        "3",
+        "4",
+        "2"
       ],
       "correctIndex": 3,
-      "explanation": "표의 모든 행은 COL1 = 'CPG' 이거나 COL2 ≤ 10 이라 `COL1 <> 'CPG' AND COL2 > 10` 두 조건을 동시에 만족하는 행이 없다. ① 은 조건을 무시한 결과, ② 는 <> 를 = 로 본 결과, ③ 은 COL2 조건을 반대로 본 결과다.",
+      "explanation": "AND 가 OR 보다 먼저 묶이므로 조건은 (NOT (COL1 = 'CPG' OR COL2 <= 10) AND COL1 <> 'XYZ') OR COL2 IS NULL 이다. NOT (…) 이 참이려면 COL1 이 CPG 가 아니고 COL2 가 10 보다 커야 한다. 여기에 맞는 행은 (NULL, 15)·(XYZ, 30)·(ABC, 12) 후보인데, (XYZ, 30) 은 COL1 <> 'XYZ' 에서 빠진다. (NULL, 15) 는 COL1 = 'CPG' 가 UNKNOWN 이라 NOT 을 붙여도 UNKNOWN 이고, COL1 <> 'XYZ' 도 UNKNOWN 이라 빠진다. 그래서 앞쪽 묶음은 (ABC, 12) 한 행이다. 뒤의 OR COL2 IS NULL 로 (ABC, NULL) 이 더해진다. 이 행은 앞쪽 묶음이 UNKNOWN 이지만 OR 의 한쪽이 참이면 참이다. 모두 2건, 정답은 ④번이다. ① 1 은 OR 를 먼저 묶어 NOT (…) AND (COL1 <> 'XYZ' OR COL2 IS NULL) 로 읽은 값이다. ② 3 은 COL1 이 NULL 인 (NULL, 15) 도 'CPG' 나 'XYZ' 가 아니니 참이라고 본 값이다. ③ 4 는 NOT (A OR B) 를 NOT A OR NOT B 로 잘못 풀어 COL1 <> 'CPG' OR COL2 > 10 으로 계산한 값이다.",
       "references": [
         {
           "type": "table",
-          "caption": "T 테이블",
+          "caption": "T",
           "headers": [
             "COL1",
             "COL2"
@@ -843,12 +843,28 @@
             [
               "XYZ",
               "8"
+            ],
+            [
+              "NULL",
+              "15"
+            ],
+            [
+              "ABC",
+              "NULL"
+            ],
+            [
+              "XYZ",
+              "30"
+            ],
+            [
+              "ABC",
+              "12"
             ]
           ]
         },
         {
           "type": "sql",
-          "code": "SELECT * FROM T\nWHERE COL1 <> 'CPG' AND COL2 > 10;"
+          "code": "SELECT COUNT(*)\nFROM   T\nWHERE  NOT (COL1 = 'CPG'\n            OR COL2 <= 10)\nAND    COL1 <> 'XYZ'\nOR     COL2 IS NULL;"
         }
       ]
     },
@@ -1110,19 +1126,19 @@
     {
       "subject": "2과목",
       "number": 29,
-      "title": "아래 EMP 테이블에 대해 다음 네 SQL 을 수행한 RNK 결과 중 마지막 행의 값이 나머지와 다른 것은?",
+      "title": "아래 EMP 테이블에 대한 SQL 결과에서 EMPNO 가 4 인 행의 (R1, R2, R3) 값으로 옳은 것은?",
       "options": [
-        "RANK() OVER (ORDER BY SAL DESC)",
-        "DENSE_RANK() OVER (ORDER BY SAL DESC)",
-        "ROW_NUMBER() OVER (ORDER BY SAL DESC)",
-        "NTILE(4) OVER (ORDER BY SAL DESC)"
+        "(6, 4, 2)",
+        "(6, 4, 3)",
+        "(4, 4, 3)",
+        "(6, 6, 3)"
       ],
       "correctIndex": 1,
-      "explanation": "SAL 이 같은 행이 두 개 있을 때 RANK 는 1, 2, 2, 4 로 동률 다음 순위를 건너뛰고 DENSE_RANK 는 1, 2, 2, 3 으로 건너뛰지 않는다. ROW_NUMBER 는 동률과 무관하게 1, 2, 3, 4 를 부여하고 NTILE(4) 도 네 그룹으로 나누어 1, 2, 3, 4 가 된다. 마지막 행의 값이 3 인 DENSE_RANK 만 나머지(4)와 다르다. ① RANK, ③ ROW_NUMBER, ④ NTILE(4) 는 마지막 행이 모두 4 다.",
+      "explanation": "급여 내림차순으로 놓으면 5000(1번), 4500(5·6번), 4000(2·3번), 3000(4번), 2000(7번)이다. RANK 는 같은 값에 같은 순위를 주고 그 수만큼 다음 순위를 건너뛴다. 1, 2, 2, 4, 4, 6, 7 이 되어 4번은 6이다. DENSE_RANK 는 건너뛰지 않아 1, 2, 2, 3, 3, 4, 5 로 4번은 4다. NTILE(3) 은 7행을 세 묶음으로 나누는데 나머지 1행은 앞 묶음부터 하나씩 더 받는다. 묶음 크기는 3, 2, 2 이고, 1·5·6번이 1, 2·3번이 2, 4·7번이 3이다. 4번은 (6, 4, 3), 정답은 ②번이다. ① 은 NTILE 묶음을 3, 3, 1 로 나눠 4번을 2로 본 것이다. ③ 은 RANK 가 DENSE_RANK 처럼 건너뛰지 않는다고 본 것이다. ④ 는 반대로 DENSE_RANK 도 건너뛴다고 본 것이다.",
       "references": [
         {
           "type": "table",
-          "caption": "EMP 테이블",
+          "caption": "EMP",
           "headers": [
             "EMPNO",
             "SAL"
@@ -1143,8 +1159,24 @@
             [
               "4",
               "3000"
+            ],
+            [
+              "5",
+              "4500"
+            ],
+            [
+              "6",
+              "4500"
+            ],
+            [
+              "7",
+              "2000"
             ]
           ]
+        },
+        {
+          "type": "sql",
+          "code": "SELECT EMPNO,\n  RANK() OVER (ORDER BY SAL DESC)\n    AS R1,\n  DENSE_RANK() OVER (ORDER BY SAL DESC)\n    AS R2,\n  NTILE(3) OVER (ORDER BY SAL DESC,\n                          EMPNO)\n    AS R3\nFROM   EMP;"
         }
       ]
     },
