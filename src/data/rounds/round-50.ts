@@ -747,42 +747,46 @@ export const ROUND_50: QuizQuestion[] = [
     "round": 50,
     "subject": "2과목",
     "number": 18,
-    "title": "아래 집계 결과(소계 행에서 NULL 이 등장하는 패턴) 에 해당하는 GROUP BY 절은?",
+    "title": "아래 T 테이블에 대해 SELECT A, B, SUM(V) FROM T 뒤에 ㉠~㉣ 의 GROUP BY 절을 각각 붙였을 때 결과 행 수를 차례로 나열한 것은?",
     "options": [
-      "ROLLUP(A, B)",
-      "GROUPING SETS((A, B))",
-      "GROUP BY A, B",
-      "CUBE(A, B)"
+      "6, 8, 5, 5",
+      "6, 8, 4, 6",
+      "5, 8, 4, 5",
+      "6, 8, 4, 5"
     ],
     "correctIndex": 3,
-    "explanation": "CUBE 는 (A,B), (A), (B), () 의 모든 부분집합을 반환하므로 (A=A1, B=NULL), (A=NULL, B=B1), (A=NULL, B=NULL) 행이 모두 등장한다. ① ROLLUP 은 (A) 소계와 () 총계만, ② GROUPING SETS((A,B)) 는 세부 행만, ③ GROUP BY A,B 는 소계 자체가 없다.",
+    "explanation": "데이터의 (A, B) 조합은 3개, A 값은 A1·A2 2개, B 값은 B1·B2 2개다. ㉠ ROLLUP(A, B) 는 (A, B) 3행 + (A) 소계 2행 + () 총계 1행 = 6행이다. ㉡ CUBE(A, B) 는 여기에 (B) 소계 2행이 더해져 8행이다. ㉢ GROUPING SETS(A, B) 는 (A) 2행과 (B) 2행만 만들어 4행이고, 상세나 총계는 없다. ㉣ ROLLUP(A), B 는 ROLLUP(A) 가 만드는 (A)·() 에 B 를 붙인 (A, B)·(B) 두 묶음이다. 3행 + 2행 = 5행이다. 정답은 ④번이다. ① 은 GROUPING SETS 에도 총계가 붙는다고 본 값이다. ② 는 ROLLUP(A), B 를 ROLLUP(A, B) 와 같게 본 값이다. ③ 은 ROLLUP 에 총계 행이 없다고 본 값이다.",
     "_source": "authored",
     "references": [
       {
         "type": "table",
-        "caption": "출력 결과 (A, B 그룹 키)",
+        "caption": "T",
         "headers": [
           "A",
-          "B"
+          "B",
+          "V"
         ],
         "rows": [
           [
             "A1",
-            "B1"
+            "B1",
+            "10"
           ],
           [
             "A1",
-            "NULL"
+            "B2",
+            "20"
           ],
           [
-            "NULL",
-            "B1"
-          ],
-          [
-            "NULL",
-            "NULL"
+            "A2",
+            "B1",
+            "30"
           ]
         ]
+      },
+      {
+        "type": "sql",
+        "code": "-- ㉠\nGROUP BY ROLLUP(A, B)\n-- ㉡\nGROUP BY CUBE(A, B)\n-- ㉢\nGROUP BY GROUPING SETS(A, B)\n-- ㉣\nGROUP BY ROLLUP(A), B"
       }
     ]
   },

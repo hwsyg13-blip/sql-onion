@@ -1259,3 +1259,5 @@ sqld-0312·0319(M494·M501, 데이터베이스 파티션 기법)도 성능 데�
 |---|---|---|---|
 | 46-2-50 | 결과 표 보고 ROLLUP 고르기 | 데이터 자체 NULL(JOB) + ROLLUP + GROUPING(JOB). 소계 NULL 과 데이터 NULL 구분 | PostgreSQL 16 → 7행, JOB NULL 이면서 G = 1 은 3행((B, NULL, 50) 은 G = 0) |
 | 48-2-21 | 하루 조회 조건 중 다른 것 | DATE 시각 + BETWEEN·TRUNC·LAST_DAY(그날 0시)·ADD_MONTHS 네 조건 | PostgreSQL 16(date_trunc·interval 로 같은 값) → 3, 2, 4, 5 |
+| 50-2-18 | 결과 패턴 보고 CUBE 고르기 | 3행 데이터에 ROLLUP·CUBE·GROUPING SETS(A, B)·ROLLUP(A), B 행 수 | PostgreSQL 16 → 6, 8, 4, 5 |
+| 56-2-30 | 결과 보고 DENSE_RANK 고르기 | 동점 있는 5행 PERCENT_RANK·CUME_DIST 값 | PostgreSQL 16 → David (0.5, 0.6) |
