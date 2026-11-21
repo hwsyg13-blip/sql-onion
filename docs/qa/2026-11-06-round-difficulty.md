@@ -1236,5 +1236,7 @@ sqld-0312·0319(M494·M501, 데이터베이스 파티션 기법)도 성능 데�
 | 55-2-40 | 전체·부서 합 윈도우 조합 | 동점(5000 두 행) + ORDER BY 만 있는 SUM(기본 RANGE) · PARTITION 만 · OVER () | PostgreSQL 16 → EMPNO 2 는 (13000, 13000, 21000) |
 | 56-2-33 | MAX(NULL) 상관 UPDATE 와 같은 것 | TAB2 에 NULL·중복 키 + WHERE 없는 상관 UPDATE(짝 없는 행이 NULL) vs EXISTS 추가. 오답: 짝 없는 행 유지, EXISTS 무효, MAX 가 NULL 이 됨 | PostgreSQL 16(각각 ROLLBACK) → ㉠ 600, ㉡ 1100 |
 | 56-2-45 | EMPNO 로 SUM 한 행 | 대상 행 없는 SUM·COUNT(*)·GROUP BY·NVL(SUM) 네 문장 | PostgreSQL 16 → NULL, 0, 0행, 0 |
+| 57-2-11 | OFFSET·FETCH 설명 고르기 | 동점 8행 + OFFSET/FETCH ONLY·WITH TIES·남은 행보다 큰 FETCH 세 문장 행 수 | PostgreSQL 16(WITH TIES 지원) → 2, 4, 2 |
+| 57-2-23 | HAVING >= ALL 빈칸 | 급여가 모두 NULL 인 부서 → 서브쿼리 목록에 NULL. ALL 은 0행, ANY 는 2행 | PostgreSQL 16 → ALL 0행, ANY 2행 |
 
-390px 캡처: 스물네 문항 모두 표·SQL 넘침 없음.
+390px 캡처: 스물여섯 문항 모두 표·SQL 넘침 없음.

@@ -207,23 +207,61 @@
     {
       "subject": "2과목",
       "number": 11,
-      "title": "아래 SQL 실행 결과에 대한 설명으로 옳은 것은?",
+      "title": "아래 TAB1 테이블에서 ㉠~㉢ 의 결과 행 수를 차례로 나열한 것은? (Oracle 12c 이상)",
       "options": [
-        "가",
-        "나",
-        "가, 다",
-        "가, 나, 다"
+        "2, 4, 2",
+        "2, 2, 2",
+        "2, 4, 5",
+        "4, 4, 2"
       ],
       "correctIndex": 0,
-      "explanation": "OFFSET n ROWS 는 처음 n건을 건너뛴다. FETCH FIRST k ROWS ONLY 는 정확히 k건 이하를 반환하므로 5건을 초과할 수 없다. ② 나 는 OFFSET 3 이 3번째 행만 뺀다고 본 것이라 틀리고, ③·④ 는 틀린 다(5건 초과)를 포함했다.",
+      "explanation": "점수 내림차순은 90, 85, 85, 80, 80, 80, 70, 60 이다. ㉠ 은 앞의 두 행(90, 85)을 건너뛰고 다음 두 행(85, 80)만 가져오므로 2행이다. ㉡ 의 WITH TIES 는 마지막으로 가져온 행(80)과 정렬 값이 같은 행을 모두 더 붙인다. 85, 80 다음에 80 두 행이 더 붙어 4행이다. ㉢ 은 여섯 행을 건너뛰면 70, 60 두 행만 남아, FETCH 가 5행을 요청해도 2행만 나온다. 정답은 ①번이다. ② 는 WITH TIES 를 ONLY 와 같게 본 값이다. ③ 은 FETCH NEXT 5 ROWS 가 항상 5행을 채운다고 본 값이다. ④ 는 ONLY 도 동점 행을 함께 가져온다고 본 값이다.",
       "references": [
         {
-          "type": "sql",
-          "code": "SELECT *\nFROM   TAB1\nORDER BY NO DESC\nOFFSET 3 ROWS\nFETCH FIRST 5 ROWS ONLY;"
+          "type": "table",
+          "caption": "TAB1",
+          "headers": [
+            "NO",
+            "SCORE"
+          ],
+          "rows": [
+            [
+              "1",
+              "90"
+            ],
+            [
+              "2",
+              "85"
+            ],
+            [
+              "3",
+              "85"
+            ],
+            [
+              "4",
+              "80"
+            ],
+            [
+              "5",
+              "80"
+            ],
+            [
+              "6",
+              "80"
+            ],
+            [
+              "7",
+              "70"
+            ],
+            [
+              "8",
+              "60"
+            ]
+          ]
         },
         {
-          "type": "text",
-          "content": "가. 정렬된 결과에서 처음 세 개의 행을 건너뛰고 다음부터 최대 5건을 반환한다.\n나. 3번째 행만 제외한다.\n다. 결과가 5개 초과 행이 나올 수 있다."
+          "type": "sql",
+          "code": "-- ㉠\nSELECT NO FROM TAB1\nORDER BY SCORE DESC\nOFFSET 2 ROWS\nFETCH NEXT 2 ROWS ONLY;\n-- ㉡\nSELECT NO FROM TAB1\nORDER BY SCORE DESC\nOFFSET 2 ROWS\nFETCH NEXT 2 ROWS WITH TIES;\n-- ㉢\nSELECT NO FROM TAB1\nORDER BY SCORE DESC\nOFFSET 6 ROWS\nFETCH NEXT 5 ROWS ONLY;"
         }
       ]
     },
@@ -558,19 +596,19 @@
     {
       "subject": "2과목",
       "number": 23,
-      "title": "아래 EMP 테이블에 대한 SQL 의 빈칸에 들어갈 조건으로 가장 적절한 것은?",
+      "title": "아래 EMP 테이블에서 ㉠ 과 ㉡ 의 결과 행 수로 옳은 것은? (㉡ 은 ㉠ 의 ALL 을 ANY 로만 바꾼 것)",
       "options": [
-        "ORDER BY AVG(SAL) >= ANY (SELECT AVG(SAL) FROM EMP GROUP BY DEPTNO)",
-        "ORDER BY AVG(SAL) >= ALL (SELECT AVG(SAL) FROM EMP GROUP BY DEPTNO)",
-        "HAVING AVG(SAL) >= ANY (SELECT AVG(SAL) FROM EMP GROUP BY DEPTNO)",
-        "HAVING AVG(SAL) >= ALL (SELECT AVG(SAL) FROM EMP GROUP BY DEPTNO)"
+        "㉠ 1행, ㉡ 2행",
+        "㉠ 1행, ㉡ 3행",
+        "㉠ 0행, ㉡ 0행",
+        "㉠ 0행, ㉡ 2행"
       ],
       "correctIndex": 3,
-      "explanation": "그룹 단위 조건은 HAVING 으로 지정해야 하므로 ①·② 의 ORDER BY 는 조건절이 될 수 없다. \"다른 모든 부서의 평균보다 크거나 같다\" 는 조건은 서브쿼리가 돌려주는 모든 값과 비교하는 `>= ALL` 로 표현한다. ③ 의 `>= ANY` 는 어느 하나보다만 크면 되므로 최솟값 기준이 되어 의미가 다르다. 예시 데이터에서 10 번 부서 평균은 4000, 20 번 부서 평균은 3500 이므로 ④ 는 10 번 부서만 남겨 최대 급여 5000 을 반환한다.",
+      "explanation": "서브쿼리는 부서별 평균이라 10번 4000, 20번 3500, 30번은 급여가 모두 NULL 이라 NULL 이다. ㉠ 의 >= ALL 은 목록의 모든 값과 비교해 전부 참이어야 한다. 그런데 목록에 NULL 이 있으면 그 비교가 UNKNOWN 이 되어 어떤 부서도 참이 될 수 없으므로 0행이다. ㉡ 의 >= ANY 는 하나라도 참이면 된다. 10번(4000 >= 3500)과 20번(3500 >= 3500)은 참이 되지만, 30번은 자기 평균이 NULL 이라 모든 비교가 UNKNOWN 이다. 그래서 2행, 정답은 ④번이다. ① 은 ALL 목록의 NULL 을 무시하고 평균이 가장 높은 10번이 나온다고 본 값이다. ② 는 거기에 30번까지 ANY 를 통과한다고 본 값이다. ③ 은 NULL 하나 때문에 ANY 도 결과가 사라진다고 본 값이다.",
       "references": [
         {
           "type": "table",
-          "caption": "EMP 테이블",
+          "caption": "EMP",
           "headers": [
             "EMPNO",
             "DEPTNO",
@@ -596,16 +634,22 @@
               "4",
               "20",
               "4500"
+            ],
+            [
+              "5",
+              "30",
+              "NULL"
+            ],
+            [
+              "6",
+              "30",
+              "NULL"
             ]
           ]
         },
         {
-          "type": "text",
-          "content": "부서별 평균 급여가 가장 높은 부서의 최대 급여를 조회한다."
-        },
-        {
           "type": "sql",
-          "code": "SELECT MAX(SAL)\nFROM   EMP\nGROUP BY DEPTNO\n(  ?  );"
+          "code": "-- ㉠\nSELECT DEPTNO, MAX(SAL)\nFROM   EMP\nGROUP BY DEPTNO\nHAVING AVG(SAL) >= ALL (\n         SELECT AVG(SAL)\n         FROM   EMP\n         GROUP BY DEPTNO);\n-- ㉡ ALL → ANY"
         }
       ]
     },
