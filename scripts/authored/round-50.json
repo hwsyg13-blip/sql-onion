@@ -1403,49 +1403,60 @@
     {
       "subject": "2과목",
       "number": 39,
-      "title": "아래 EMP 테이블에서 COUNT(DISTINCT 급여) 의 결과는?",
+      "title": "아래 EMP 테이블에 대한 SQL 의 결과 (A, B, C, D) 로 옳은 것은? (Oracle 기준)",
       "options": [
-        "5",
-        "3",
-        "4",
-        "2"
+        "(3, 3, 3, 6)",
+        "(3, 2, 3, 6)",
+        "(3, 2, 4, 6)",
+        "(4, 2, 3, 6)"
       ],
       "correctIndex": 1,
-      "explanation": "COUNT(DISTINCT 급여) 는 서로 다른 급여 값의 개수를 센다. 급여는 30000, 35000, 4000 세 종류(35000 과 4000 이 두 번씩)이므로 3 이다(②). 행 수를 그대로 세면 5(①)다. ④ 2 는 두 번씩 나온 급여(35000, 4000)만 센 값이다.",
+      "explanation": "A: SAL 의 서로 다른 값은 30000, 35000, 4000 세 개다. COUNT(DISTINCT) 도 NULL 은 세지 않는다. B: TRUNC(SAL, -4) 는 만 단위 아래를 버려 30000 → 30000, 35000 → 30000, 4000 → 0 이 되고, 서로 다른 값은 30000, 0 두 개다. C: 이름 첫 글자를 대문자로 바꾸면 S, S, A, J, S 라 S, A, J 세 개다. D: COUNT(*) 는 NULL 행까지 6 이다. 정답은 ②번이다. ① 은 TRUNC 를 ROUND 처럼 보고 35000 을 40000 으로 올려 세 값으로 센 것이다. ③ 은 UPPER 를 놓쳐 s 와 S 를 다른 글자로 센 것이다. ④ 는 COUNT(DISTINCT SAL) 이 NULL 도 하나의 값으로 센다고 본 것이다.",
       "references": [
         {
           "type": "table",
-          "caption": "EMP 테이블",
+          "caption": "EMP",
           "headers": [
-            "ID",
-            "급여"
+            "EMPNO",
+            "ENAME",
+            "SAL"
           ],
           "rows": [
             [
               "101",
+              "SMITH",
               "30000"
             ],
             [
               "102",
+              "scott",
               "35000"
             ],
             [
               "103",
+              "ALLEN",
               "4000"
             ],
             [
               "104",
+              "JONES",
               "35000"
             ],
             [
               "105",
+              "sally",
               "4000"
+            ],
+            [
+              "106",
+              "NULL",
+              "NULL"
             ]
           ]
         },
         {
           "type": "sql",
-          "code": "SELECT COUNT(DISTINCT 급여) FROM EMP;"
+          "code": "SELECT COUNT(DISTINCT SAL) AS A,\n       COUNT(DISTINCT TRUNC(SAL, -4))\n         AS B,\n       COUNT(DISTINCT\n         UPPER(SUBSTR(ENAME, 1, 1)))\n         AS C,\n       COUNT(*) AS D\nFROM   EMP;"
         }
       ]
     },

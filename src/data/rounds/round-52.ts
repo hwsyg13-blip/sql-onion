@@ -530,46 +530,20 @@ export const ROUND_52: QuizQuestion[] = [
     "round": 52,
     "subject": "2과목",
     "number": 15,
-    "title": "아래 T 테이블에 NVL(금액, 0) 을 적용했을 때 출력 결과가 가장 큰 금액인 행은?",
+    "title": "아래 SQL 의 결과 (A, B, C, D) 로 옳은 것은? (Oracle 기준)",
     "options": [
-      "1번 행 (1000)",
-      "2번 행 (NVL 로 0 출력)",
-      "3번 행 (3000)",
-      "4번 행 (NVL 로 0 출력)"
+      "(6, 8, '007', 'OP')",
+      "(3, 5, '007', 'OP')",
+      "(3, 8, '007', 'OP')",
+      "(3, 8, '007', 'ER')"
     ],
     "correctIndex": 2,
-    "explanation": "NVL(금액, 0) 적용 후 출력값: ID=1 → 1000, ID=2 → 0 (NVL 적용), ID=3 → 3000, ID=4 → 0 (NVL 적용). 가장 큰 값은 ID=3 의 3000. 정답 ③. ① 1000 은 두 번째로 큰 값, ② 와 ④ 는 NVL 로 0 이 된 행이다.",
+    "explanation": "A: REPLACE 에 바꿀 문자열을 주지 않으면 찾은 문자열을 지운다. 'A-B--C' 에서 '-' 를 모두 지우면 'ABC' 라 길이는 3 이다. B: INSTR(문자열, 'O', 1, 2) 는 1번째 글자부터 찾아 두 번째로 나오는 'O' 의 위치다. HELLO 의 O(5) 다음 WORLD 의 O 라 8 이다. C: LPAD 는 왼쪽을 '0' 으로 채워 세 자리를 만들어 '007' 이다. D: SUBSTR 의 시작 위치가 음수면 뒤에서부터 센다. 뒤에서 4번째 글자 O 부터 2글자라 'OP' 다. 정답은 ③번이다. ① 은 세 번째 인수가 없으면 REPLACE 가 아무것도 바꾸지 않는다고 본 값이다. ② 는 INSTR 의 네 번째 인수(몇 번째 등장인지)를 놓치고 첫 'O' 위치를 쓴 값이다. ④ 는 음수 시작 위치를 '끝에서 2글자' 로 읽은 값이다.",
     "_source": "authored",
     "references": [
       {
-        "type": "table",
-        "headers": [
-          "ID",
-          "금액"
-        ],
-        "rows": [
-          [
-            "1",
-            "1000"
-          ],
-          [
-            "2",
-            "NULL"
-          ],
-          [
-            "3",
-            "3000"
-          ],
-          [
-            "4",
-            "NULL"
-          ]
-        ],
-        "caption": "T 테이블"
-      },
-      {
         "type": "sql",
-        "code": "SELECT NVL(금액, 0) FROM T;"
+        "code": "SELECT LENGTH(REPLACE('A-B--C', '-'))\n         AS A,\n       INSTR('HELLO WORLD', 'O', 1, 2)\n         AS B,\n       LPAD('7', 3, '0') AS C,\n       SUBSTR('SQLDEVELOPER', -4, 2)\n         AS D\nFROM   DUAL;"
       }
     ]
   },
