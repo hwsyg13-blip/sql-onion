@@ -1244,5 +1244,7 @@ sqld-0312·0319(M494·M501, 데이터베이스 파티션 기법)도 성능 데�
 | 59-2-38 | 연관 없는 EXISTS 한 문장 | EXISTS(연관 없음)·EXISTS(연관)·NOT IN(목록 NULL)·NOT EXISTS 네 문장 | PostgreSQL 16 → 3, 1, 0, 2 |
 | 60-2-13 | 빈칸에 PIVOT | PIVOT 의 암시적 GROUP BY(사번이 남으면 사번별) vs 인라인 뷰로 칼럼 줄이기 + IN 목록 밖 직급 행 | PostgreSQL 16 은 PIVOT 이 없어 같은 GROUP BY + FILTER 집계로 흉내 → ㉠ 5행, ㉡ 2행(인사 사원 7200) |
 | 60-2-17 | FULL OUTER JOIN + NVL 고르기 | 중복 키(T1 의 2 두 행)·NULL 키(T2) FULL OUTER JOIN, (행 수, TOT 합) | PostgreSQL 16 → 5행, 1510 |
+| 61-2-37 | NVL(B, NULL) 스칼라 서브쿼리 오류 | 스칼라 서브쿼리·= 서브쿼리가 여러 행일 때(㉠·㉢), 한 행(㉡), MAX 로 한 값(㉣, 짝 없으면 NULL) | PostgreSQL 16 → ㉠·㉢ 'more than one row returned', ㉡ 100, ㉣ 정상 |
+| 61-2-44 | 값 개수 틀린 INSERT 고르기 | DEFAULT 키워드·생략 칼럼 기본값·명시 NULL·NOT NULL 칼럼 생략·값 개수 부족 다섯 문장 | PostgreSQL 16 → ㉠·㉡ 성공, ㉢·㉣ NOT NULL 오류. ㉤ 은 PG 가 모자란 뒤 칼럼을 기본값으로 채워 통과하지만 Oracle 은 ORA-00947(값 부족) — 문항은 Oracle 기준 명시 |
 
-390px 캡처: 서른두 문항 모두 표·SQL 넘침 없음.
+390px 캡처: 서른네 문항 모두 표·SQL 넘침 없음.
