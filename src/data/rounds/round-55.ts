@@ -1535,20 +1535,20 @@ export const ROUND_55: QuizQuestion[] = [
     "round": 55,
     "subject": "2과목",
     "number": 33,
-    "title": "아래 SQL 결과의 컬럼명으로 옳은 것은?",
+    "title": "아래 T 테이블에 대한 SQL 의 (결과 행 수, 첫 번째 행의 (AAB, BBA)) 로 옳은 것은? (Oracle 기준)",
     "options": [
-      "AAB, BBA",
-      "BBA, AAB",
-      "COL1, COL2",
-      "오류가 발생한다"
+      "4행, (2, 20)",
+      "6행, (2, 20)",
+      "4행, (20, 2)",
+      "별칭이 서로 달라 오류가 발생한다"
     ],
     "correctIndex": 0,
-    "explanation": "UNION·UNION ALL 등 집합 연산 결과의 컬럼명은 첫 번째 SELECT 절의 별칭을 따른다. 두 번째 SELECT 가 같은 컬럼에 다른 별칭(BBA, AAB)을 붙여도 무시되므로 결과 컬럼명은 AAB, BBA 가 된다. ② 는 두 번째 SELECT 의 별칭이 적용된다고 본 경우, ③ 은 별칭이 모두 무시된다고 본 경우, ④ 는 양쪽 별칭이 다르면 오류가 난다고 본 경우이다.",
+    "explanation": "집합 연산 결과의 칼럼 이름은 첫 번째 SELECT 를 따른다. 결과 칼럼은 AAB(첫째), BBA(둘째)이고, 아래 SELECT 에 붙인 별칭은 무시된다. UNION 은 중복을 없애므로 위쪽은 (1, 10), (2, 20), 아래쪽은 (10, 1), (20, 2) 로 모두 4행이다. ORDER BY BBA DESC 는 결과의 둘째 칼럼 기준이라 20, 10, 2, 1 순서가 되고 첫 행은 (2, 20) 이다. 정답은 ①번이다. ② 는 UNION 을 UNION ALL 처럼 보고 (1, 10) 과 (10, 1) 을 두 번씩 센 값이다. ③ 은 아래 SELECT 의 별칭대로 첫째 칼럼을 BBA 로 보고 정렬한 결과다. ④ 는 두 SELECT 의 별칭이 달라도 칼럼 수와 데이터 타입만 맞으면 된다는 점을 놓쳤다.",
     "_source": "authored",
     "references": [
       {
         "type": "table",
-        "caption": "T 테이블",
+        "caption": "T",
         "headers": [
           "COL1",
           "COL2"
@@ -1561,38 +1561,16 @@ export const ROUND_55: QuizQuestion[] = [
           [
             "2",
             "20"
+          ],
+          [
+            "1",
+            "10"
           ]
         ]
       },
       {
         "type": "sql",
-        "code": "SELECT COL1 AS AAB, COL2 AS BBA\nFROM   T\nUNION ALL\nSELECT COL1 AS BBA, COL2 AS AAB\nFROM   T;"
-      },
-      {
-        "type": "table",
-        "caption": "결과 (UNION ALL 후)",
-        "headers": [
-          "?",
-          "?"
-        ],
-        "rows": [
-          [
-            "1",
-            "10"
-          ],
-          [
-            "2",
-            "20"
-          ],
-          [
-            "1",
-            "10"
-          ],
-          [
-            "2",
-            "20"
-          ]
-        ]
+        "code": "SELECT COL1 AS AAB, COL2 AS BBA FROM T\nUNION\nSELECT COL2 AS BBA, COL1 AS AAB FROM T\nORDER BY BBA DESC;"
       }
     ]
   },
@@ -1841,42 +1819,56 @@ export const ROUND_55: QuizQuestion[] = [
     "round": 55,
     "subject": "2과목",
     "number": 40,
-    "title": "아래 EMP 테이블에서 전체 합계와 부서별 합계를 함께 출력하는 윈도우 함수 조합으로 옳은 것은?",
+    "title": "아래 EMP 테이블에 대한 SQL 결과에서 EMPNO 가 2 인 행의 (S1, S2, S3) 로 옳은 것은?",
     "options": [
-      "SUM(SAL) OVER (), SUM(SAL) OVER (PARTITION BY DEPT)",
-      "SUM(SAL) OVER (PARTITION BY DEPT), SUM(SAL) OVER ()",
-      "SUM(SAL) OVER (ORDER BY DEPT), SUM(SAL) OVER ()",
-      "SUM(SAL), SUM(SAL) OVER (PARTITION BY DEPT)"
+      "(13000, 13000, 21000)",
+      "(8000, 13000, 21000)",
+      "(13000, 21000, 21000)",
+      "(8000, 13000, 13000)"
     ],
     "correctIndex": 0,
-    "explanation": "`OVER ()` 는 파티션 없이 전체 행에 대한 합계 = 전체 합계. `OVER (PARTITION BY DEPT)` 는 부서별 합계. 문제 순서가 \"전체 합계 → 부서별 합계\" 라 ① 이 정답. ② 는 순서 반대, ③ ORDER BY 는 누적합 의미, ④ `SUM(SAL)` 만 쓰면 일반 집계라 GROUP BY 필요.",
+    "explanation": "S1 은 ORDER BY 만 있고 범위 절이 없어서 기본값 RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW 가 적용된다. RANGE 는 정렬 값이 같은 행(동점)을 한꺼번에 포함하므로, 10번 부서 3000, 5000, 5000 에서 5000 인 두 행(2·3번)은 모두 3000 + 5000 + 5000 = 13000 이다. S2 는 ORDER BY 가 없어 부서 전체 합인 13000, S3 은 OVER () 라 전체 합 21000 이다. 정답은 ①번이다. ② 는 ROWS 처럼 한 행씩 누적해 2번을 3000 + 5000 = 8000 으로 본 값이다. ③ 은 PARTITION BY 만 있는 S2 를 전체 합으로 본 값이다. ④ 는 S1 을 한 행씩 누적으로 보고, OVER () 도 부서별 합이라고 본 값이다.",
     "_source": "authored",
     "references": [
       {
         "type": "table",
-        "caption": "EMP 테이블",
+        "caption": "EMP",
         "headers": [
+          "EMPNO",
           "DEPT",
           "SAL"
         ],
         "rows": [
           [
+            "1",
             "10",
             "3000"
           ],
           [
+            "2",
             "10",
             "5000"
           ],
           [
+            "3",
+            "10",
+            "5000"
+          ],
+          [
+            "4",
             "20",
             "4500"
           ],
           [
+            "5",
             "20",
             "3500"
           ]
         ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT EMPNO,\n  SUM(SAL) OVER (PARTITION BY DEPT\n                 ORDER BY SAL) AS S1,\n  SUM(SAL) OVER (PARTITION BY DEPT)\n    AS S2,\n  SUM(SAL) OVER () AS S3\nFROM   EMP;"
       }
     ]
   },

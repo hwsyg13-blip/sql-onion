@@ -1232,5 +1232,7 @@ sqld-0312·0319(M494·M501, 데이터베이스 파티션 기법)도 성능 데�
 | 53-2-42 | MIN + MAX(TO_CHAR) 3행 | 9·10·100·25 로 문자 비교('9' 가 MAX, '10' 이 MIN) + 암시적 형변환(+ 는 숫자, || 는 문자) | PostgreSQL 16(COLLATE "C" 로 바이트 비교, + 는 명시 변환) → 109, '109' |
 | 54-2-21 | 공통 칼럼 셋 NATURAL JOIN 행 수 | 공통 칼럼 둘(ID, GRP) + NULL 키 + T2 중복 키, (행 수, SELECT * 칼럼 수). 옛 보기 그림(optionReferences) 제거 | PostgreSQL 16 → 3행, 칼럼 id·grp·name·price 4개 |
 | 54-2-46 | 빈칸에 LAG | 지점별 PARTITION + LAG(금액, 1, 0)(기본값은 앞 행이 없을 때만) + LEAD(금액, 2), 중간 NULL 금액 | PostgreSQL 16 → 증감 NULL 은 B 2·3월 2행, A 1월 두달후 120 |
+| 55-2-33 | UNION ALL 결과 칼럼명 | 중복 행 있는 T 로 UNION(중복 제거) + 아래쪽 별칭을 뒤바꾸고 ORDER BY BBA DESC. 오답: UNION ALL 처럼(6행), 아래쪽 별칭으로 정렬, 별칭 불일치 오류 | PostgreSQL 16 → 칼럼 aab·bba, 4행, 첫 행 (2, 20) |
+| 55-2-40 | 전체·부서 합 윈도우 조합 | 동점(5000 두 행) + ORDER BY 만 있는 SUM(기본 RANGE) · PARTITION 만 · OVER () | PostgreSQL 16 → EMPNO 2 는 (13000, 13000, 21000) |
 
-390px 캡처: 스무 문항 모두 표·SQL 넘침 없음.
+390px 캡처: 스물두 문항 모두 표·SQL 넘침 없음.
