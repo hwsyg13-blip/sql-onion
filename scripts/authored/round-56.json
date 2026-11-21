@@ -1138,52 +1138,71 @@
     {
       "subject": "2과목",
       "number": 33,
-      "title": "아래 TAB1, TAB2 테이블에 대한 UPDATE 쿼리와 동일한 결과를 산출하는 것은?",
+      "title": "아래 두 테이블에서 ㉠, ㉡ 을 각각(서로 영향 없이 원래 데이터에서) 실행한 뒤 SELECT SUM(COL1) FROM TAB1 의 결과로 옳은 것은?",
       "options": [
-        "UPDATE TAB1 SET COL1 = (SELECT MAX(COL2) FROM TAB2 T2 WHERE T1.COL1 = T2.COL2 AND T1.COL1 >= 200);",
-        "UPDATE TAB1 SET COL1 = (SELECT COALESCE(MAX(NULL), 0) FROM TAB2 T2 WHERE T1.COL1 = T2.COL2);",
-        "UPDATE TAB1 SET COL1 = (SELECT MAX(0) FROM TAB2 T2 WHERE T1.COL1 = T2.COL2 AND T1.COL1 >= 200);",
-        "UPDATE TAB1 SET COL1 = NULL;"
+        "㉠ 1100, ㉡ 1100",
+        "㉠ 600, ㉡ 600",
+        "㉠ 250, ㉡ 750",
+        "㉠ 600, ㉡ 1100"
       ],
       "correctIndex": 3,
-      "explanation": "서브쿼리가 `SELECT MAX(NULL) FROM TAB2 ...` 이라 항상 NULL 을 반환 (MAX 의 입력이 NULL 상수). WHERE 조건과 무관하게 모든 TAB1 행의 COL1 이 NULL 로 갱신된다 = ④ `UPDATE TAB1 SET COL1 = NULL;` 과 동일. ① 은 MAX(COL2) 라 200·300 행이 값을 받고, ② 는 COALESCE 로 모든 행에 0 이 들어가며, ③ 은 MAX(0) 이라 짝이 있는 행에 0 이 들어가 결과가 다르다.",
+      "explanation": "㉠ 은 WHERE 절이 없어 TAB1 의 네 행을 모두 고친다. ID 2 는 250, ID 3 은 NULL 과 350 중 MAX 라 350(MAX 는 NULL 을 빼고 계산)이다. TAB2 에 짝이 없는 ID 1·4 는 서브쿼리 결과가 NULL 이라 COL1 이 NULL 로 바뀐다. 합은 250 + 350 = 600 이다. ㉡ 은 EXISTS 로 TAB2 에 짝이 있는 ID 2·3 만 고치므로 ID 1·4 는 100, 400 그대로다. 합은 100 + 250 + 350 + 400 = 1100. 정답은 ④번이다. ① 은 ㉠ 에서도 짝 없는 행이 원래 값을 지킨다고 본 값이다. ② 는 EXISTS 를 붙여도 결과가 같다고 본 값이다. ③ 은 MAX 에 NULL 이 섞이면 NULL 이 된다고 보고 ID 3 을 NULL 로 계산한 값이다(㉡ 은 100 + 250 + 400 = 750).",
       "references": [
         {
           "type": "table",
-          "caption": "TAB1 테이블 (UPDATE 전)",
+          "caption": "TAB1",
           "headers": [
+            "ID",
             "COL1"
           ],
           "rows": [
             [
+              "1",
               "100"
             ],
             [
+              "2",
               "200"
             ],
             [
+              "3",
               "300"
+            ],
+            [
+              "4",
+              "400"
             ]
           ]
         },
         {
           "type": "table",
-          "caption": "TAB2 테이블",
+          "caption": "TAB2",
           "headers": [
+            "ID",
             "COL2"
           ],
           "rows": [
             [
-              "200"
+              "2",
+              "250"
             ],
             [
-              "300"
+              "3",
+              "NULL"
+            ],
+            [
+              "3",
+              "350"
+            ],
+            [
+              "5",
+              "500"
             ]
           ]
         },
         {
           "type": "sql",
-          "code": "UPDATE TAB1 T1\nSET    COL1 = (SELECT MAX(NULL)\n               FROM   TAB2 T2\n               WHERE  T1.COL1 = T2.COL2\n               AND    T1.COL1 >= 200);"
+          "code": "-- ㉠\nUPDATE TAB1 T1\nSET    COL1 = (SELECT MAX(T2.COL2)\n               FROM   TAB2 T2\n               WHERE  T2.ID = T1.ID);\n\n-- ㉡ (㉠ 에 WHERE 절만 추가)\nUPDATE TAB1 T1\nSET    COL1 = (SELECT MAX(T2.COL2)\n               FROM   TAB2 T2\n               WHERE  T2.ID = T1.ID)\nWHERE  EXISTS (SELECT 1\n               FROM   TAB2 T2\n               WHERE  T2.ID = T1.ID);"
         }
       ]
     },
@@ -1683,70 +1702,61 @@
     {
       "subject": "2과목",
       "number": 45,
-      "title": "아래 EMP 테이블에 대한 SQL 의 실행 결과로 옳은 것은?",
+      "title": "아래 EMP 테이블에서 ㉠~㉣ 을 실행했을 때 (㉠ 결과, ㉡ 결과, ㉢ 결과 행 수, ㉣ 결과) 로 옳은 것은? (Oracle 기준)",
       "options": [
-        "800",
-        "1600",
-        "2975",
-        "오류가 발생한다."
+        "(0, 0, 1행, 0)",
+        "(NULL, NULL, 0행, 0)",
+        "(NULL, 0, 0행, 0)",
+        "(NULL, 0, 1행, NULL)"
       ],
       "correctIndex": 2,
-      "explanation": "WHERE EMPNO = 7566 조건으로 사번 7566 (JONES) 한 행만 선택되고 SAL = 2975 가 SUM 으로 집계되어 2975 가 반환된다. ① 800, ② 1600 은 다른 사번 행의 SAL 이며 본 SQL 결과가 아니다.",
+      "explanation": "40번 부서는 한 행도 없다. GROUP BY 없이 집계 함수만 쓰면 대상 행이 없어도 결과는 항상 한 행이다. 이때 SUM 은 더할 값이 없으므로 NULL(㉠), COUNT(*) 는 0(㉡)을 돌려준다. ㉣ 은 그 NULL 을 NVL 로 0 으로 바꾼다. 반면 ㉢ 처럼 GROUP BY 가 있으면 만들어질 그룹이 하나도 없어 결과가 0행이다. 정답은 ③번이다. ① 은 SUM 도 0 을 돌려준다고 보고, GROUP BY 를 써도 한 행이 나온다고 본 값이다. ② 는 COUNT(*) 도 NULL 이 된다고 본 값이다. ④ 는 GROUP BY 결과도 한 행이 나오고, NVL 이 바깥에 있으면 효과가 없다고 본 값이다.",
       "references": [
         {
           "type": "table",
-          "caption": "EMP 테이블",
+          "caption": "EMP",
           "headers": [
             "EMPNO",
             "ENAME",
-            "SAL"
+            "SAL",
+            "DEPTNO"
           ],
           "rows": [
             [
               "7369",
               "SMITH",
-              "800"
+              "800",
+              "20"
             ],
             [
               "7499",
               "ALLEN",
-              "1600"
+              "1600",
+              "30"
             ],
             [
               "7521",
               "WARD",
-              "1250"
+              "1250",
+              "30"
             ],
             [
               "7566",
               "JONES",
-              "2975"
-            ],
-            [
-              "7654",
-              "MARTIN",
-              "1250"
-            ],
-            [
-              "7698",
-              "BLAKE",
-              "2850"
-            ],
-            [
-              "7782",
-              "CLARK",
-              "2450"
+              "2975",
+              "20"
             ],
             [
               "7839",
               "KING",
-              "5000"
+              "5000",
+              "10"
             ]
           ]
         },
         {
           "type": "sql",
-          "code": "SELECT SUM(SAL)\nFROM   EMP\nWHERE  EMPNO = 7566;"
+          "code": "-- ㉠\nSELECT SUM(SAL) FROM EMP\nWHERE  DEPTNO = 40;\n-- ㉡\nSELECT COUNT(*) FROM EMP\nWHERE  DEPTNO = 40;\n-- ㉢\nSELECT DEPTNO, SUM(SAL) FROM EMP\nWHERE  DEPTNO = 40\nGROUP BY DEPTNO;\n-- ㉣\nSELECT NVL(SUM(SAL), 0) FROM EMP\nWHERE  DEPTNO = 40;"
         }
       ]
     },

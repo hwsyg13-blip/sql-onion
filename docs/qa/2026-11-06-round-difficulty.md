@@ -1234,5 +1234,7 @@ sqld-0312·0319(M494·M501, 데이터베이스 파티션 기법)도 성능 데�
 | 54-2-46 | 빈칸에 LAG | 지점별 PARTITION + LAG(금액, 1, 0)(기본값은 앞 행이 없을 때만) + LEAD(금액, 2), 중간 NULL 금액 | PostgreSQL 16 → 증감 NULL 은 B 2·3월 2행, A 1월 두달후 120 |
 | 55-2-33 | UNION ALL 결과 칼럼명 | 중복 행 있는 T 로 UNION(중복 제거) + 아래쪽 별칭을 뒤바꾸고 ORDER BY BBA DESC. 오답: UNION ALL 처럼(6행), 아래쪽 별칭으로 정렬, 별칭 불일치 오류 | PostgreSQL 16 → 칼럼 aab·bba, 4행, 첫 행 (2, 20) |
 | 55-2-40 | 전체·부서 합 윈도우 조합 | 동점(5000 두 행) + ORDER BY 만 있는 SUM(기본 RANGE) · PARTITION 만 · OVER () | PostgreSQL 16 → EMPNO 2 는 (13000, 13000, 21000) |
+| 56-2-33 | MAX(NULL) 상관 UPDATE 와 같은 것 | TAB2 에 NULL·중복 키 + WHERE 없는 상관 UPDATE(짝 없는 행이 NULL) vs EXISTS 추가. 오답: 짝 없는 행 유지, EXISTS 무효, MAX 가 NULL 이 됨 | PostgreSQL 16(각각 ROLLBACK) → ㉠ 600, ㉡ 1100 |
+| 56-2-45 | EMPNO 로 SUM 한 행 | 대상 행 없는 SUM·COUNT(*)·GROUP BY·NVL(SUM) 네 문장 | PostgreSQL 16 → NULL, 0, 0행, 0 |
 
-390px 캡처: 스물두 문항 모두 표·SQL 넘침 없음.
+390px 캡처: 스물네 문항 모두 표·SQL 넘침 없음.
