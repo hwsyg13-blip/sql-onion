@@ -123,7 +123,7 @@ export const ROUND_45: QuizQuestion[] = [
       {
         "type": "erd",
         "caption": "부서·사원 ERD (사원-사원 관리 관계, 부서-사원 소속·부서장 관계)",
-        "mermaid": "erDiagram\n    부서 ||--o{ 사원 : \"소속\"\n    사원 |o--o| 부서 : \"부서장\"\n    사원 |o--o{ 사원 : \"관리\"\n    부서 {\n        string 부서번호 PK\n        string 부서명\n        string 부서장사번 FK\n    }\n    사원 {\n        string 사번 PK\n        string 이름\n        string 부서번호 FK\n        string 관리자사번 FK\n    }"
+        "mermaid": "erDiagram\n    부서 ||..o{ 사원 : \"소속\"\n    사원 |o..o| 부서 : \"부서장\"\n    사원 |o--o{ 사원 : \"관리\"\n    부서 {\n        string 부서번호 PK\n        string 부서명\n        string 부서장사번 FK\n    }\n    사원 {\n        string 사번 PK\n        string 이름\n        string 부서번호 FK\n        string 관리자사번 FK\n    }"
       }
     ]
   },
@@ -134,16 +134,27 @@ export const ROUND_45: QuizQuestion[] = [
     "round": 45,
     "subject": "1과목",
     "number": 5,
-    "title": "부모 엔터티로부터 속성을 상속받았지만 자식 엔터티의 주식별자로 사용하지 않고 일반 속성으로만 사용하는 경우에 해당하지 않는 것은?",
+    "title": "아래 ERD 와 업무 상황 ㉠~㉣ 중, 배송을 주문과 비식별자 관계(주문번호를 일반 속성으로 받음)로 둔 근거로 알맞은 것만 모두 고른 것은?",
     "options": [
-      "자식 엔터티에서 받은 속성이 반드시 필수가 아니어도 무방하여, 부모 없는 자식 인스턴스가 존재할 수 있을 때",
-      "엔터티별로 데이터의 생명주기(Data Life Cycle)를 다르게 관리할 경우",
-      "여러 엔터티가 하나로 통합되어 표현되었으나, 각 엔터티가 별도의 관계를 가질 때",
-      "부모 엔터티와 자식 엔터티의 Data Life Cycle이 같을 때"
+      "㉠",
+      "㉠, ㉡",
+      "㉡, ㉢",
+      "㉠, ㉡, ㉣"
     ],
     "correctIndex": 3,
-    "explanation": "Data Life Cycle이 동일할 경우에는 부모의 식별자를 자식의 주식별자로 그대로 상속받아 식별자 관계를 구성하는 것이 자연스럽다. 정답은 ④번이다. ①·②·③ 은 부모 없는 자식 허용, 생명주기 분리, 통합 엔터티의 별도 관계처럼 비식별자 관계를 선택하는 대표적인 경우다.",
-    "_source": "authored"
+    "explanation": "부모의 주식별자를 자식의 주식별자에 넣는 것이 식별자 관계, 일반 속성으로만 받는 것이 비식별자 관계다. ㉠ 처럼 부모(주문) 없이 자식(배송)이 생길 수 있으면 주문번호가 비어 있을 수 있으므로 주식별자에 넣을 수 없다. ㉡ 처럼 부모와 자식의 생명주기가 다르면 자식을 부모에 묶지 않는 편이 맞다. ㉣ 처럼 자식이 자기 식별자로 충분히 구분된다면 부모 키를 주식별자에 넣어 키를 길게 만들 이유가 없다. ㉢ 은 생명주기가 같아 오히려 식별자 관계의 근거다. 정답은 ④번이다. ① 과 ② 는 자식 자체 식별자로 충분한 경우(㉣)를 빠뜨린 것이고, ③ 은 생명주기가 같은 ㉢ 을 비식별자 근거로 본 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "erd",
+        "caption": "주문·배송 ERD",
+        "mermaid": "erDiagram\n    주문 |o..o{ 배송 : \"발생\"\n    주문 {\n        string 주문번호 PK\n    }\n    배송 {\n        string 배송번호 PK\n        string 주문번호 FK\n    }"
+      },
+      {
+        "type": "text",
+        "content": "㉠ 창고 간 이동처럼 주문 없이 생기는 배송도 등록한다.\n㉡ 주문이 취소·삭제되어도 배송 이력은 5년간 따로 보관한다.\n㉢ 배송은 언제나 주문과 함께 생기고 주문과 함께 지워진다.\n㉣ 배송은 자체 배송번호만으로 조회·추적한다."
+      }
+    ]
   },
   {
     "id": 10755,
@@ -184,7 +195,7 @@ export const ROUND_45: QuizQuestion[] = [
       {
         "type": "erd",
         "caption": "고객·주문·주문상세 ERD (속성 옆 설명 포함)",
-        "mermaid": "erDiagram\n    고객 ||--o{ 주문 : \"한다\"\n    주문 ||--|{ 주문상세 : \"포함\"\n    고객 {\n        string 고객번호 PK \"시스템이 부여한 일련번호\"\n        string 고객명\n        string 고객등급코드 \"G1~G4 코드\"\n        date 최초주문일자 \"그 고객 주문일자 중 가장 이른 날\"\n    }\n    주문 {\n        string 주문번호 PK \"시스템이 부여한 일련번호\"\n        string 고객번호 FK\n        date 주문일자\n        int 총주문금액 \"주문상세 금액의 합\"\n    }\n    주문상세 {\n        string 주문번호 PK,FK\n        int 상세순번 PK\n        int 수량\n        int 단가 \"주문 시점 판매가(입력값)\"\n        int 금액 \"수량 x 단가\"\n    }"
+        "mermaid": "erDiagram\n    고객 ||..o{ 주문 : \"한다\"\n    주문 ||--|{ 주문상세 : \"포함\"\n    고객 {\n        string 고객번호 PK \"시스템이 부여한 일련번호\"\n        string 고객명\n        string 고객등급코드 \"G1~G4 코드\"\n        date 최초주문일자 \"그 고객 주문일자 중 가장 이른 날\"\n    }\n    주문 {\n        string 주문번호 PK \"시스템이 부여한 일련번호\"\n        string 고객번호 FK\n        date 주문일자\n        int 총주문금액 \"주문상세 금액의 합\"\n    }\n    주문상세 {\n        string 주문번호 PK,FK\n        int 상세순번 PK\n        int 수량\n        int 단가 \"주문 시점 판매가(입력값)\"\n        int 금액 \"수량 x 단가\"\n    }"
       }
     ]
   },
@@ -336,20 +347,20 @@ export const ROUND_45: QuizQuestion[] = [
     "round": 45,
     "subject": "2과목",
     "number": 12,
-    "title": "아래 네 SQL 중 수행 결과가 나머지와 다른 것은?",
+    "title": "아래 네 식 중 결과가 나머지와 다른 것은? (Oracle 기준)",
     "options": [
-      "CEIL(22.14)",
-      "FLOOR(22.14)",
-      "TRUNC(22.14)",
-      "ROUND(22.14)"
+      "CEIL(-22.5)",
+      "FLOOR(-22.5)",
+      "ROUND(-22.5)",
+      "TRUNC(-23.9)"
     ],
     "correctIndex": 0,
-    "explanation": "CEIL 은 주어진 수보다 크거나 같은 가장 작은 정수로 올림하므로 CEIL(22.14) = 23 이다(①). ② FLOOR 는 작거나 같은 가장 큰 정수로 내림해 22, ③ TRUNC 는 소수점 이하를 버려 22, ④ ROUND 는 소수 첫째 자리(1)에서 반올림해 22 다. 결과가 다른 것은 ① 이다.",
+    "explanation": "음수에서는 방향을 헷갈리기 쉽다. CEIL 은 그 수보다 크거나 같은 가장 작은 정수라 -22.5 보다 큰 쪽인 -22 다. FLOOR 는 작거나 같은 가장 큰 정수라 -23, ROUND 는 0.5 를 0 에서 먼 쪽으로 보내 -23, TRUNC 는 소수점 아래를 버려 0 쪽으로 가므로 -23.9 → -23 이다. ②·③·④ 가 모두 -23 이고 ① 만 -22 다. 정답은 ①번이다.",
     "_source": "authored",
     "references": [
       {
         "type": "sql",
-        "code": "-- ① SELECT CEIL(22.14)  FROM DUAL;\n-- ② SELECT FLOOR(22.14) FROM DUAL;\n-- ③ SELECT TRUNC(22.14) FROM DUAL;\n-- ④ SELECT ROUND(22.14) FROM DUAL;"
+        "code": "-- ① CEIL(-22.5)\n-- ② FLOOR(-22.5)\n-- ③ ROUND(-22.5)\n-- ④ TRUNC(-23.9)"
       }
     ]
   },
@@ -360,22 +371,22 @@ export const ROUND_45: QuizQuestion[] = [
     "round": 45,
     "subject": "2과목",
     "number": 13,
-    "title": "선수 테이블에서 손흥민 선수가 소속된 팀의 모든 선수 포지션을 'FW'로 변경하는 SQL로 올바른 것은?",
+    "title": "선수ID 1 인 손흥민이 속한 팀의 모든 선수 포지션을 'FW' 로 바꾸려 한다. 이름이 같은 선수가 있을 때 의도대로 동작하는 SQL 은?",
     "options": [
       "UPDATE 선수 SET 포지션 = 'FW' WHERE 이름 = '손흥민';",
-      "UPDATE 선수 SET 팀ID = 'FW' WHERE 이름 = '손흥민';",
-      "UPDATE 선수 SET 포지션 = 'FW' WHERE 팀ID = '손흥민';",
-      "UPDATE 선수 SET 포지션 = 'FW' WHERE 팀ID = (SELECT 팀ID FROM 선수 WHERE 이름 = '손흥민');"
+      "UPDATE 선수 SET 포지션 = 'FW' WHERE 팀ID = (SELECT 팀ID FROM 선수 WHERE 이름 = '손흥민');",
+      "UPDATE 선수 SET 포지션 = 'FW' WHERE 팀ID IN (SELECT 팀ID FROM 선수 WHERE 이름 = '손흥민');",
+      "UPDATE 선수 SET 포지션 = 'FW' WHERE 팀ID = (SELECT 팀ID FROM 선수 WHERE 선수ID = 1);"
     ],
     "correctIndex": 3,
-    "explanation": "손흥민이 속한 팀(TOT)의 모든 선수를 바꾸려면, 서브쿼리로 손흥민의 팀ID 를 구해 그 팀ID 를 가진 행을 모두 UPDATE 해야 한다(④). ① 은 손흥민 한 명만 바꾸고, ② 는 포지션이 아니라 팀ID 를 'FW' 로 바꾸며, ③ 은 팀ID 를 선수 이름('손흥민')과 비교해 바뀌는 행이 없다.",
+    "explanation": "바꿀 대상은 선수ID 1 이 속한 T1 팀의 선수(1, 2)다. ④ 는 서브쿼리가 선수ID 로 한 행만 찾아 T1 을 돌려주므로 선수 1, 2 만 바뀐다. 정답은 ④번이다. ① 은 이름이 같은 두 손흥민(1, 4)만 바꾼다. ② 는 서브쿼리가 T1, T3 두 행을 돌려줘 = 비교에서 오류가 난다(단일 행 서브쿼리 자리에 여러 행). ③ 은 오류는 없지만 T1, T3 두 팀을 모두 바꿔 선수 1, 2, 4 가 바뀐다. 이름처럼 중복될 수 있는 값 대신 식별자로 찾아야 한다.",
     "_source": "authored",
     "references": [
       {
         "type": "table",
-        "caption": "선수 테이블",
+        "caption": "선수",
         "headers": [
-          "선수번호",
+          "선수ID",
           "이름",
           "팀ID",
           "포지션"
@@ -384,20 +395,26 @@ export const ROUND_45: QuizQuestion[] = [
           [
             "1",
             "손흥민",
-            "TOT",
-            "FW"
+            "T1",
+            "MF"
           ],
           [
             "2",
-            "다이어",
-            "TOT",
+            "황희찬",
+            "T1",
             "DF"
           ],
           [
             "3",
-            "메시",
-            "PSG",
-            "FW"
+            "김민재",
+            "T2",
+            "DF"
+          ],
+          [
+            "4",
+            "손흥민",
+            "T3",
+            "GK"
           ]
         ]
       }
@@ -410,42 +427,20 @@ export const ROUND_45: QuizQuestion[] = [
     "round": 45,
     "subject": "2과목",
     "number": 14,
-    "title": "SNS별 추천점수를 집계하여 추출하는 함수로 올바른 것은?",
+    "title": "SNS_LOG(SNS, 사용자, 추천점수) 테이블에 대한 SQL ㉠~㉣ 중 오류가 발생하는 것만 모두 고른 것은?",
     "options": [
-      "SELECT SUM(추천점수) FROM SNS_LOG;",
-      "SELECT 추천점수 FROM SNS_LOG GROUP BY SNS;",
-      "SELECT SNS, SUM(추천점수) FROM SNS_LOG GROUP BY SNS;",
-      "SELECT SNS, 추천점수 FROM SNS_LOG ORDER BY SNS;"
+      "㉡",
+      "㉡, ㉣",
+      "㉠",
+      "㉠, ㉢"
     ],
     "correctIndex": 2,
-    "explanation": "SNS 별 합계를 보려면 GROUP BY SNS 로 묶고 SELECT 절에 그룹 기준 컬럼 SNS 와 집계 함수 SUM(추천점수)를 함께 쓴다(③). 결과는 FB 9, IG 3 두 행이다. ① 은 전체 합계 한 행만 나오고, ② 는 GROUP BY 에 없는 일반 컬럼(추천점수)을 집계 없이 SELECT 해 오류, ④ 는 집계 없이 정렬만 한다.",
+    "explanation": "GROUP BY 를 쓰면 SELECT 에는 GROUP BY 에 쓴 칼럼이나 집계 함수만 올 수 있다. ㉠ 은 그룹으로 묶지 않은 사용자를 그대로 보여 주려 해 한 그룹에 값이 여럿이라 오류다. 반대로 GROUP BY 에 쓴 칼럼을 SELECT 에 모두 보여 줄 필요는 없어 ㉡(사용자로도 나눠 행이 더 많아질 뿐)과 ㉢ 은 된다. ㉣ 처럼 사용자를 MAX 같은 집계 함수로 감싸면 그룹마다 값이 하나라 된다. 정답은 ③번이다. ① 과 ② 는 GROUP BY 칼럼을 모두 SELECT 해야 한다고 본 것이고, ② 는 문자 칼럼에는 MAX 를 쓸 수 없다고도 본 것이다. ④ 는 GROUP BY 칼럼을 빼면 오류라고 본 것이다.",
     "_source": "authored",
     "references": [
       {
-        "type": "table",
-        "caption": "SNS_LOG 테이블",
-        "headers": [
-          "SNS",
-          "사용자",
-          "추천점수"
-        ],
-        "rows": [
-          [
-            "FB",
-            "A",
-            "5"
-          ],
-          [
-            "FB",
-            "B",
-            "4"
-          ],
-          [
-            "IG",
-            "C",
-            "3"
-          ]
-        ]
+        "type": "sql",
+        "code": "-- ㉠\nSELECT SNS, 사용자, SUM(추천점수)\nFROM   SNS_LOG\nGROUP  BY SNS;\n-- ㉡\nSELECT SNS, SUM(추천점수)\nFROM   SNS_LOG\nGROUP  BY SNS, 사용자;\n-- ㉢\nSELECT SUM(추천점수)\nFROM   SNS_LOG\nGROUP  BY SNS;\n-- ㉣\nSELECT SNS, MAX(사용자), SUM(추천점수)\nFROM   SNS_LOG\nGROUP  BY SNS;"
       }
     ]
   },
@@ -628,7 +623,7 @@ export const ROUND_45: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT 이름,\n  FIRST_VALUE(이름) OVER (\n    PARTITION BY 부서 ORDER BY 급여 DESC\n  ) AS F,\n  LAST_VALUE(이름) OVER (\n    PARTITION BY 부서 ORDER BY 급여 DESC\n  ) AS L1,\n  LAST_VALUE(이름) OVER (\n    PARTITION BY 부서 ORDER BY 급여 DESC\n    ROWS BETWEEN UNBOUNDED PRECEDING\n             AND UNBOUNDED FOLLOWING\n  ) AS L2\nFROM 사원;"
+        "code": "SELECT 이름,\n  FIRST_VALUE(이름) OVER (\n    PARTITION BY 부서\n    ORDER BY 급여 DESC\n  ) AS F,\n  LAST_VALUE(이름) OVER (\n    PARTITION BY 부서\n    ORDER BY 급여 DESC\n  ) AS L1,\n  LAST_VALUE(이름) OVER (\n    PARTITION BY 부서\n    ORDER BY 급여 DESC\n    ROWS BETWEEN UNBOUNDED PRECEDING\n             AND UNBOUNDED FOLLOWING\n  ) AS L2\nFROM 사원;"
       }
     ]
   },
@@ -791,7 +786,7 @@ export const ROUND_45: QuizQuestion[] = [
     "references": [
       {
         "type": "sql",
-        "code": "SELECT SUBSTR('DATABASE', 7)     AS A,\n       SUBSTR('DATABASE', -2)    AS B,\n       SUBSTR('DATABASE', 8, -2) AS C,\n       SUBSTR('DATABASE',\n              INSTR('DATABASE', 'S'), 2)\n                                 AS D\nFROM   DUAL;"
+        "code": "SELECT SUBSTR('DATABASE', 7) AS A,\n       SUBSTR('DATABASE', -2) AS B,\n       SUBSTR('DATABASE', 8, -2) AS C,\n       SUBSTR('DATABASE',\n         INSTR('DATABASE', 'S'), 2)\n         AS D\nFROM   DUAL;"
       }
     ]
   },
@@ -880,7 +875,7 @@ export const ROUND_45: QuizQuestion[] = [
       {
         "type": "erd",
         "caption": "고객·주문·주문상세·상품·카테고리 ERD",
-        "mermaid": "erDiagram\n    고객 ||--o{ 주문 : \"한다\"\n    주문 ||--|{ 주문상세 : \"포함\"\n    상품 ||--o{ 주문상세 : \"주문됨\"\n    카테고리 ||--o{ 상품 : \"분류\"\n    고객 {\n        string 고객ID PK\n        string 고객명\n    }\n    주문 {\n        string 주문ID PK\n        string 고객ID FK\n        date 주문일자\n    }\n    주문상세 {\n        string 주문ID PK,FK\n        string 상품ID PK,FK\n        int 수량\n    }\n    상품 {\n        string 상품ID PK\n        string 상품명\n        string 카테고리ID FK\n    }\n    카테고리 {\n        string 카테고리ID PK\n        string 카테고리명\n    }"
+        "mermaid": "erDiagram\n    고객 ||..o{ 주문 : \"한다\"\n    주문 ||--|{ 주문상세 : \"포함\"\n    상품 ||--o{ 주문상세 : \"주문됨\"\n    카테고리 ||..o{ 상품 : \"분류\"\n    고객 {\n        string 고객ID PK\n        string 고객명\n    }\n    주문 {\n        string 주문ID PK\n        string 고객ID FK\n        date 주문일자\n    }\n    주문상세 {\n        string 주문ID PK,FK\n        string 상품ID PK,FK\n        int 수량\n    }\n    상품 {\n        string 상품ID PK\n        string 상품명\n        string 카테고리ID FK\n    }\n    카테고리 {\n        string 카테고리ID PK\n        string 카테고리명\n    }"
       },
       {
         "type": "table",
@@ -1003,7 +998,7 @@ export const ROUND_45: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT COUNT(*)\nFROM   고객 A, 주문 B, 주문상세 C, 상품 D, 카테고리 E\nWHERE  A.고객ID = B.고객ID\nAND    B.주문ID = C.주문ID\nAND    C.상품ID = D.상품ID\nAND    E.카테고리명 = '문구';"
+        "code": "SELECT COUNT(*)\nFROM   고객 A, 주문 B, 주문상세 C,\n       상품 D, 카테고리 E\nWHERE  A.고객ID = B.고객ID\nAND    B.주문ID = C.주문ID\nAND    C.상품ID = D.상품ID\nAND    E.카테고리명 = '문구';"
       }
     ]
   },
@@ -1014,20 +1009,83 @@ export const ROUND_45: QuizQuestion[] = [
     "round": 45,
     "subject": "2과목",
     "number": 25,
-    "title": "아래 결과를 얻기 위한 GROUP BY 절로 적절하지 않은 것은?",
+    "title": "아래 T 테이블로 출력 결과를 얻으려 한다. SELECT A, B, SUM(V) FROM T 뒤에 올 GROUP BY 절로 적절하지 않은 것은? (정렬은 무시)",
     "options": [
       "GROUP BY ROLLUP(A, B)",
-      "GROUP BY GROUPING SETS( (A), (A, B), () )",
-      "GROUP BY A, B UNION ALL GROUP BY A UNION ALL GROUP BY ()",
-      "GROUP BY GROUPING SETS( (A), (A, B) )"
+      "GROUP BY GROUPING SETS((A, B), A, ())",
+      "GROUP BY CUBE(A, B) HAVING NOT (GROUPING(A) = 1 AND GROUPING(B) = 0)",
+      "GROUP BY A, ROLLUP(B)"
     ],
     "correctIndex": 3,
-    "explanation": "필요한 결과는 A 소계, (A, B) 합계, 전체 합계 세 가지다. ROLLUP(A, B)(①)는 (A, B), (A), () 를 만들고, ② GROUPING SETS((A), (A, B), ()) 와 ③ 세 GROUP BY 결과를 UNION ALL 한 것도 같은 세 그룹을 만든다. ④ GROUPING SETS((A), (A, B)) 는 전체 합계 그룹 () 가 빠져 결과가 다르다.",
+    "explanation": "결과에는 (A, B) 합계, A 소계, 전체 합계가 있다. ① ROLLUP(A, B) 와 ② GROUPING SETS((A, B), A, ()) 는 이 세 묶음을 그대로 만든다. ③ CUBE(A, B) 는 (A, B), A, B, 전체 네 묶음을 만드는데, HAVING 으로 B 만의 소계(GROUPING(A) = 1, GROUPING(B) = 0)를 빼면 나머지 세 묶음이 남아 같다. ④ A, ROLLUP(B) 는 A 를 항상 묶은 채 (A, B) 와 A 만 만들어 전체 합계 35 행이 없다. 정답은 ④번이다.",
     "_source": "authored",
     "references": [
       {
-        "type": "text",
-        "content": "A 단위 소계와 (A, B) 단위 합계, 그리고 전체 합계가 함께 도출되어야 한다."
+        "type": "table",
+        "caption": "T 테이블",
+        "headers": [
+          "A",
+          "B",
+          "V"
+        ],
+        "rows": [
+          [
+            "X",
+            "p",
+            "10"
+          ],
+          [
+            "X",
+            "q",
+            "20"
+          ],
+          [
+            "Y",
+            "p",
+            "5"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "출력 결과",
+        "headers": [
+          "A",
+          "B",
+          "SUM(V)"
+        ],
+        "rows": [
+          [
+            "X",
+            "p",
+            "10"
+          ],
+          [
+            "X",
+            "q",
+            "20"
+          ],
+          [
+            "X",
+            "NULL",
+            "30"
+          ],
+          [
+            "Y",
+            "p",
+            "5"
+          ],
+          [
+            "Y",
+            "NULL",
+            "5"
+          ],
+          [
+            "NULL",
+            "NULL",
+            "35"
+          ]
+        ]
       }
     ]
   },
@@ -1291,7 +1349,7 @@ export const ROUND_45: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "INSERT FIRST\n       WHEN N1 >= 2 THEN INTO TABLE1(N1) VALUES (N1)\n       WHEN N1 >= 3 THEN INTO TABLE2(N1) VALUES (N1)\n       ELSE                INTO TABLE3    VALUES (N1)\nSELECT N1 FROM TABLE0;"
+        "code": "INSERT FIRST\n  WHEN N1 >= 2 THEN\n    INTO TABLE1(N1) VALUES (N1)\n  WHEN N1 >= 3 THEN\n    INTO TABLE2(N1) VALUES (N1)\n  ELSE\n    INTO TABLE3 VALUES (N1)\nSELECT N1 FROM TABLE0;"
       }
     ]
   },
@@ -1477,7 +1535,7 @@ export const ROUND_45: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT *\nFROM   T1 A\nWHERE  A.N1 NOT IN (SELECT B.N1 FROM T3 B);"
+        "code": "SELECT *\nFROM   T1 A\nWHERE  A.N1 NOT IN\n       (SELECT B.N1 FROM T3 B);"
       }
     ]
   },
@@ -1527,7 +1585,7 @@ export const ROUND_45: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "-- (가)\nSELECT SUM(NVL(COL1, 0) + NVL(COL2, 0)) FROM T;\n\n-- (나)\nSELECT NVL(SUM(COL1 + COL2), 0) FROM T;"
+        "code": "-- (가)\nSELECT SUM(NVL(COL1, 0) + NVL(COL2, 0))\nFROM T;\n\n-- (나)\nSELECT NVL(SUM(COL1 + COL2), 0) FROM T;"
       }
     ]
   },
@@ -1573,7 +1631,7 @@ export const ROUND_45: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "-- (가)\nSELECT COL1 FROM T WHERE COL1 IN ('A', 'B') OR COL2 <> 'c';\n\n-- (나)\nSELECT COL1 FROM T WHERE COL1 IN ('A', 'B')\nUNION ALL\nSELECT COL1 FROM T WHERE COL2 <> 'c';\n\n-- (다)\nSELECT COL1 FROM T WHERE COL1 IN ('A', 'B')\nUNION\nSELECT COL1 FROM T WHERE COL2 <> 'c';\n\n-- (라)\nSELECT COL1 FROM T WHERE COL1 = 'A' OR COL1 = 'B' OR COL2 <> 'c';"
+        "code": "-- (가)\nSELECT COL1 FROM T\nWHERE COL1 IN ('A', 'B')\n   OR COL2 <> 'c';\n\n-- (나)\nSELECT COL1 FROM T\nWHERE COL1 IN ('A', 'B')\nUNION ALL\nSELECT COL1 FROM T WHERE COL2 <> 'c';\n\n-- (다)\nSELECT COL1 FROM T\nWHERE COL1 IN ('A', 'B')\nUNION\nSELECT COL1 FROM T WHERE COL2 <> 'c';\n\n-- (라)\nSELECT COL1 FROM T\nWHERE COL1 = 'A' OR COL1 = 'B'\n   OR COL2 <> 'c';"
       }
     ]
   },
@@ -1894,20 +1952,20 @@ export const ROUND_45: QuizQuestion[] = [
     "round": 45,
     "subject": "2과목",
     "number": 41,
-    "title": "아래 SQL의 실행 계획 단계로 가장 적절한 것은?",
+    "title": "아래 실행 계획에서 각 단계가 실행되는 순서로 옳은 것은? (Oracle 기준, 왼쪽 숫자는 ID)",
     "options": [
-      "TABLE ACCESS FULL → SORT",
-      "INDEX RANGE SCAN → TABLE ACCESS BY INDEX ROWID",
-      "HASH JOIN → NESTED LOOPS",
-      "TABLE ACCESS FULL → HASH JOIN"
+      "0 → 1 → 2 → 3 → 4",
+      "2 → 4 → 3 → 1 → 0",
+      "4 → 3 → 2 → 1 → 0",
+      "2 → 3 → 4 → 1 → 0"
     ],
     "correctIndex": 1,
-    "explanation": "INDEX 힌트로 EMP_DEPT_IDX 를 쓰도록 했으므로, 먼저 인덱스에서 DEPT_NO = 10 인 범위를 읽어 ROWID 를 얻고(INDEX RANGE SCAN), 그 ROWID 로 테이블에서 나머지 컬럼을 읽는다(TABLE ACCESS BY INDEX ROWID). ② 가 맞다. ①④ 는 인덱스를 쓰지 않는 전체 스캔이고, ③④ 의 조인 연산은 테이블이 하나뿐인 이 SQL 에 없다.",
+    "explanation": "실행 계획은 안쪽(들여쓰기가 깊은 쪽)부터, 같은 깊이에서는 위쪽부터 읽고, 자식이 끝나야 부모가 결과를 받는다. NESTED LOOPS(1)의 첫 자식인 DEPT 전체 읽기(2)가 선행 테이블로 먼저 실행된다. 이어 두 번째 자식 3 을 처리하는데, 3 은 자식인 인덱스 범위 스캔(4)으로 ROWID 를 얻은 뒤 EMP 행을 읽는다. 그래서 2 → 4 → 3 → 1 → 0 이다. 정답은 ②번이다. ① 은 위에서부터 그대로 읽은 것, ③ 은 가장 깊은 4 부터 시작해 선행 테이블을 놓친 것, ④ 는 인덱스보다 테이블을 먼저 읽는다고 본 것이다.",
     "_source": "authored",
     "references": [
       {
         "type": "sql",
-        "code": "SELECT /*+ INDEX(E EMP_DEPT_IDX) */ E.*\nFROM   EMP E\nWHERE  E.DEPT_NO = 10;"
+        "code": "0 SELECT STATEMENT\n1   NESTED LOOPS\n2     TABLE ACCESS FULL  DEPT\n3     TABLE ACCESS BY INDEX ROWID\n                         EMP\n4       INDEX RANGE SCAN\n                 EMP_DEPT_IDX"
       }
     ]
   },
@@ -1918,20 +1976,46 @@ export const ROUND_45: QuizQuestion[] = [
     "round": 45,
     "subject": "2과목",
     "number": 42,
-    "title": "아래 SQL이 나타내는 개념으로 가장 적절한 것은?",
+    "title": "아래 EMP 테이블에 SQL 을 실행했을 때 '결과 행 수, 직급이 사원인 소계 행의 AVG(급여), 전체 합계 행의 AVG(급여)' 로 옳은 것은?",
     "options": [
-      "(부서), (직급), () 그룹별 소계와 전체 합계만 생성한다.",
-      "(부서, 직급), (부서), (직급), () 네 그룹 조합의 집계를 생성한다.",
-      "(부서, 직급) 단위 집계만 생성하고 소계는 생성하지 않는다.",
-      "지정된 컬럼 순서에 따라 계층적 소계만 생성한다."
+      "6, 350, 400",
+      "8, 350, 400",
+      "8, 300, 400",
+      "8, 350, 1200"
     ],
     "correctIndex": 1,
-    "explanation": "CUBE는 지정된 모든 컬럼의 가능한 조합에 대해 소계와 총계를 생성한다. ROLLUP은 지정 순서에 따른 계층적 소계만(④) 생성한다는 점에서 구분된다. 정답은 ②번이다. ① 은 (부서, 직급) 세부 집계가 빠졌고, ③ 은 소계·총계가 없는 일반 GROUP BY 부서, 직급 의 결과다.",
+    "explanation": "CUBE(부서, 직급) 은 (부서, 직급), (부서), (직급), () 네 묶음을 모두 집계한다. (부서, 직급) 은 영업-사원, 영업-대리, 인사-사원 의 3행, (부서) 는 영업·인사 2행, (직급) 은 사원·대리 2행, () 는 1행이라 모두 8행이다. 직급이 사원인 소계 행은 부서를 가리지 않고 사원 두 명(300, 400)의 평균이라 350 이다. 전체 합계 행은 세 명의 평균 (300 + 500 + 400) / 3 = 400 이다. 정답은 ②번이다. ① 은 ROLLUP 처럼 (직급) 소계를 빼고 센 것이고, ③ 은 사원 소계를 영업 부서 사원만으로 계산한 것, ④ 는 AVG 대신 합계를 쓴 것이다.",
     "_source": "authored",
     "references": [
       {
+        "type": "table",
+        "caption": "EMP",
+        "headers": [
+          "부서",
+          "직급",
+          "급여"
+        ],
+        "rows": [
+          [
+            "영업",
+            "사원",
+            "300"
+          ],
+          [
+            "영업",
+            "대리",
+            "500"
+          ],
+          [
+            "인사",
+            "사원",
+            "400"
+          ]
+        ]
+      },
+      {
         "type": "sql",
-        "code": "SELECT 부서, 직급, AVG(급여)\nFROM   EMP\nGROUP BY CUBE(부서, 직급);"
+        "code": "SELECT 부서, 직급, AVG(급여)\nFROM EMP\nGROUP BY CUBE(부서, 직급);"
       }
     ]
   },
@@ -1942,20 +2026,68 @@ export const ROUND_45: QuizQuestion[] = [
     "round": 45,
     "subject": "2과목",
     "number": 43,
-    "title": "아래 SQL1과 동일한 결과를 반환하도록 SQL2의 빈칸에 들어갈 조인 방식은?",
+    "title": "같은 이름의 칼럼이 하나도 없는 아래 두 테이블에 대해 SQL ㉠~㉣ 의 결과(COUNT(*))를 차례대로 나열한 것은?",
     "options": [
-      "CROSS JOIN",
-      "INNER JOIN",
-      "NATURAL JOIN",
-      "FULL OUTER JOIN"
+      "9, 9, 9, 3",
+      "9, 0, 9, 3",
+      "9, 오류, 9, 3",
+      "9, 3, 9, 3"
     ],
     "correctIndex": 0,
-    "explanation": "FROM A, B 처럼 조인 조건 없이 테이블을 나열하면 두 테이블의 모든 행 조합(카티션 곱)이 나온다. ANSI 문법에서 이와 같은 것은 CROSS JOIN 이다(①). ② INNER JOIN 은 ON 조건이 필요하고, ③ NATURAL JOIN 은 같은 이름 컬럼으로 등가 조인하며, ④ FULL OUTER JOIN 도 조인 조건이 있어야 한다.",
+    "explanation": "㉠ 처럼 조인 조건 없이 테이블을 나열하면 3 × 3 = 9행의 카티션 곱이 나오고, ANSI 문법의 ㉢ CROSS JOIN 도 같은 9행이다. ㉡ NATURAL JOIN 은 이름이 같은 칼럼을 모두 찾아 등가 조건으로 쓰는데, 두 테이블에는 같은 이름의 칼럼이 없다. 비교할 조건이 하나도 없으니 오류나 0행이 아니라 CROSS JOIN 처럼 9행이 나온다. ㉣ 은 급여가 하한과 상한 사이인 등급만 붙이는 비등가 조인이라 직원마다 한 행씩 3행이다. 정답은 ①번이다. ② 와 ③ 은 같은 이름 칼럼이 없으면 NATURAL JOIN 이 0행을 내거나 실패한다고 본 것이고, ④ 는 NATURAL JOIN 이 알아서 범위 조건을 찾는다고 본 것이다.",
     "_source": "authored",
     "references": [
       {
+        "type": "table",
+        "caption": "직원",
+        "headers": [
+          "사번",
+          "급여"
+        ],
+        "rows": [
+          [
+            "1",
+            "150"
+          ],
+          [
+            "2",
+            "250"
+          ],
+          [
+            "3",
+            "350"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "급여등급",
+        "headers": [
+          "등급",
+          "하한",
+          "상한"
+        ],
+        "rows": [
+          [
+            "A",
+            "100",
+            "199"
+          ],
+          [
+            "B",
+            "200",
+            "299"
+          ],
+          [
+            "C",
+            "300",
+            "399"
+          ]
+        ]
+      },
+      {
         "type": "sql",
-        "code": "[SQL1]\nSELECT * FROM A, B;\n\n[SQL2]\nSELECT * FROM A (  ㄱ  ) B;"
+        "code": "-- ㉠\nSELECT COUNT(*) FROM 직원, 급여등급;\n-- ㉡\nSELECT COUNT(*) FROM 직원\nNATURAL JOIN 급여등급;\n-- ㉢\nSELECT COUNT(*) FROM 직원\nCROSS JOIN 급여등급;\n-- ㉣\nSELECT COUNT(*) FROM 직원 E\nJOIN 급여등급 G\n  ON E.급여 BETWEEN G.하한\n               AND G.상한;"
       }
     ]
   },
@@ -2176,7 +2308,7 @@ export const ROUND_45: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT GRP, COUNT(*) AS CNT\nFROM   ( SELECT NTILE(3) OVER (ORDER BY VAL) AS GRP\n         FROM   T )\nGROUP BY GRP\nORDER BY GRP;"
+        "code": "SELECT GRP, COUNT(*) AS CNT\nFROM   ( SELECT NTILE(3) OVER\n                (ORDER BY VAL) AS GRP\n         FROM   T )\nGROUP BY GRP\nORDER BY GRP;"
       },
       {
         "type": "table",
@@ -2252,7 +2384,7 @@ export const ROUND_45: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT V1, N1,\n       COUNT(N1) OVER\n             (ORDER BY N1 (  ㄱ  )\n              BETWEEN 0 PRECEDING AND 50 FOLLOWING) AS CNT\nFROM   SQLD48;"
+        "code": "SELECT V1, N1,\n       COUNT(N1) OVER (\n         ORDER BY N1 (  ㄱ  )\n         BETWEEN 0 PRECEDING\n             AND 50 FOLLOWING) AS CNT\nFROM   SQLD48;"
       }
     ]
   },

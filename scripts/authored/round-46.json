@@ -229,7 +229,7 @@
         {
           "type": "erd",
           "caption": "제조사·마더보드·컴퓨터·메모리슬롯·메모리 ERD",
-          "mermaid": "erDiagram\n    제조사 |o--o{ 마더보드 : \"생산\"\n    마더보드 ||--o| 컴퓨터 : \"장착\"\n    마더보드 ||--|{ 메모리슬롯 : \"보유\"\n    메모리슬롯 ||--o| 메모리 : \"꽂힘\"\n    제조사 {\n        string 제조사코드 PK\n        string 제조사명\n    }\n    마더보드 {\n        string 보드번호 PK\n        string 제조사코드 FK\n    }\n    컴퓨터 {\n        string 자산번호 PK\n        string 보드번호 FK\n    }\n    메모리슬롯 {\n        string 보드번호 PK,FK\n        int 슬롯번호 PK\n    }\n    메모리 {\n        string 메모리번호 PK\n        string 보드번호 FK\n        int 슬롯번호 FK\n    }"
+          "mermaid": "erDiagram\n    제조사 |o..o{ 마더보드 : \"생산\"\n    마더보드 ||..o| 컴퓨터 : \"장착\"\n    마더보드 ||--|{ 메모리슬롯 : \"보유\"\n    메모리슬롯 ||..o| 메모리 : \"꽂힘\"\n    제조사 {\n        string 제조사코드 PK\n        string 제조사명\n    }\n    마더보드 {\n        string 보드번호 PK\n        string 제조사코드 FK\n    }\n    컴퓨터 {\n        string 자산번호 PK\n        string 보드번호 FK\n    }\n    메모리슬롯 {\n        string 보드번호 PK,FK\n        int 슬롯번호 PK\n    }\n    메모리 {\n        string 메모리번호 PK\n        string 보드번호 FK\n        int 슬롯번호 FK\n    }"
         }
       ]
     },
@@ -420,72 +420,156 @@
     {
       "subject": "2과목",
       "number": 12,
-      "title": "아래 네 SQL 중 COL이 NULL일 때 반환 결과가 나머지와 다른 것은?",
+      "title": "COL 값이 NULL, 'A', 'B' 인 세 행에 대해 결과가 나머지와 다른 식은?",
       "options": [
-        "IFNULL(COL, 'value')",
-        "NVL(COL, 'value')",
-        "COALESCE(COL, 'value')",
-        "NULLIF(COL, 'value')"
+        "NVL(COL, 'A')",
+        "COALESCE(COL, 'A')",
+        "CASE WHEN COL IS NULL THEN 'A' ELSE COL END",
+        "NULLIF(COL, 'A')"
       ],
       "correctIndex": 3,
-      "explanation": "COL 이 NULL 이면 IFNULL·NVL·COALESCE(①②③)는 모두 대체값 'value' 를 반환한다. NULLIF(COL, 'value') 는 두 값이 같으면 NULL, 다르면 첫 번째 값을 반환하므로 COL 이 NULL 이면 NULL 을 반환한다(④). 결과가 다른 것은 ④ 다.",
+      "explanation": "①·②·③ 은 모두 COL 이 NULL 이면 'A', 아니면 COL 을 돌려주므로 결과가 A, A, B 로 같다. NULLIF(COL, 'A') 는 두 값이 같으면 NULL, 다르면 COL 을 돌려준다. COL 이 NULL 이면 비교 결과가 참이 아니므로 COL 인 NULL 을, 'A' 이면 NULL 을, 'B' 이면 B 를 돌려준다. 결과가 NULL, NULL, B 라 ④ 가 다르다. 정답은 ④번이다.",
       "references": [
         {
-          "type": "sql",
-          "code": "-- ① IFNULL(COL, 'value')\n-- ② NVL(COL, 'value')\n-- ③ COALESCE(COL, 'value')\n-- ④ NULLIF(COL, 'value')"
+          "type": "table",
+          "caption": "T 테이블",
+          "headers": [
+            "COL"
+          ],
+          "rows": [
+            [
+              "NULL"
+            ],
+            [
+              "A"
+            ],
+            [
+              "B"
+            ]
+          ]
         }
       ]
     },
     {
       "subject": "2과목",
       "number": 13,
-      "title": "아래 계층형 쿼리가 사원-관리자 조직도를 최상위부터 순회하도록 빈칸을 채우시오.",
+      "title": "아래 EMP 테이블에 계층형 질의를 실행했을 때 'LEVEL 이 3 인 행 수, CONNECT_BY_ISLEAF 가 1 인 행 수, 최 행의 경로' 를 차례대로 나열한 것은? (Oracle 기준)",
       "options": [
-        "ㄱ 관리자 IS NULL, ㄴ 사원, ㄷ 관리자",
-        "ㄱ 사원 IS NULL, ㄴ 관리자, ㄷ 사원",
-        "ㄱ 관리자 = 사원, ㄴ 사원, ㄷ 관리자",
-        "ㄱ 관리자 IS NULL, ㄴ 관리자, ㄷ 사원"
+        "2, 3, /김/이/최",
+        "2, 2, /김/이/최",
+        "3, 3, /최/이/김",
+        "2, 3, 김/이/최"
       ],
       "correctIndex": 0,
-      "explanation": "조직도의 최상위 직원은 자신의 관리자가 없으므로 관리자 컬럼이 NULL이다. 따라서 START WITH 관리자 IS NULL로 출발점을 잡고, 부모(상사)의 사원번호가 자식(부하)의 관리자번호와 같다는 조건으로 트리를 위에서 아래로 펼치므로 PRIOR 사원 = 관리자가 된다. 정답은 ①번이다. ② 는 사원 IS NULL 이라 시작 행이 없고 전개 방향도 거꾸로이며, ③ 관리자 = 사원 은 자기 자신이 자기 관리자인 행이어야 해 보통 시작 행이 없고, ④ PRIOR 관리자 = 사원 은 아래에서 위로 올라가는 역방향 전개라 최상위 행에서 출발하면 더 올라갈 곳이 없다.",
+      "explanation": "START WITH 관리자 IS NULL 로 김 에서 시작하고, PRIOR 사원 = 관리자 이므로 '방금 읽은 사원을 관리자로 둔 사원' 으로 내려간다. 김(1) 아래 이·박(2), 이 아래 최·정(3) 이다. LEVEL 3 은 최, 정 의 2행이다. CONNECT_BY_ISLEAF 는 아래에 자식이 없는 행이 1 이라 박, 최, 정 의 3행이다. 박 은 LEVEL 2 지만 부하가 없어 잎이다. SYS_CONNECT_BY_PATH 는 루트부터 현재 행까지 값을 구분자로 이어 붙이고, 맨 앞에도 구분자를 붙인다. 최 는 '/김/이/최' 다. 정답은 ①번이다. ② 는 마지막 단계(LEVEL 3)만 잎으로 본 것이고, ③ 은 경로를 현재 행부터 거꾸로 적고 LEVEL 3 에 박 까지 넣은 것, ④ 는 경로 맨 앞의 구분자를 빠뜨린 것이다.",
       "references": [
         {
+          "type": "table",
+          "caption": "EMP",
+          "headers": [
+            "사원",
+            "관리자"
+          ],
+          "rows": [
+            [
+              "김",
+              "NULL"
+            ],
+            [
+              "이",
+              "김"
+            ],
+            [
+              "박",
+              "김"
+            ],
+            [
+              "최",
+              "이"
+            ],
+            [
+              "정",
+              "이"
+            ]
+          ]
+        },
+        {
           "type": "sql",
-          "code": "SELECT 사원, 관리자, LEVEL\nFROM   EMP\nSTART WITH (  ㄱ  )\nCONNECT BY PRIOR ( ㄴ ) = ( ㄷ );"
+          "code": "SELECT 사원, LEVEL,\n       CONNECT_BY_ISLEAF AS 잎,\n       SYS_CONNECT_BY_PATH(사원, '/')\n         AS 경로\nFROM EMP\nSTART WITH 관리자 IS NULL\nCONNECT BY PRIOR 사원 = 관리자;"
         }
       ]
     },
     {
       "subject": "2과목",
       "number": 14,
-      "title": "두 SQL의 결과 집합에 대한 설명으로 옳은 것은?",
+      "title": "아래 두 테이블에 대해 UNION ALL 과 UNION 으로 합친 결과의 행 수로 옳은 것은?",
       "options": [
-        "두 SQL의 결과는 항상 동일하다.",
-        "UNION ALL은 중복을 제거하지 않고, UNION은 중복을 제거한다.",
-        "UNION은 정렬을 수행하지 않으므로 성능이 더 좋다.",
-        "UNION ALL은 서로 다른 컬럼 수를 가진 집합도 결합할 수 있다."
+        "UNION ALL 5행, UNION 4행",
+        "UNION ALL 5행, UNION 3행",
+        "UNION ALL 4행, UNION 3행",
+        "UNION ALL 5행, UNION 5행"
       ],
       "correctIndex": 1,
-      "explanation": "UNION ALL 은 두 결과를 그대로 이어 붙여 중복을 남기고, UNION 은 합친 뒤 중복을 제거한다(②). 두 테이블에 같은 행이 있으면 결과가 달라지므로 ① 은 틀렸다. ③ UNION 은 중복을 없애려고 정렬·비교를 더 하므로 오히려 느리고, ④ 집합 연산은 UNION ALL 이든 UNION 이든 컬럼 수가 같아야 한다.",
+      "explanation": "UNION ALL 은 중복을 그대로 두어 3 + 2 = 5행이다. UNION 은 두 집합 사이의 중복뿐 아니라 한 테이블 안의 중복도 없애고 결과 전체에서 서로 다른 행만 남긴다. (1, a), (2, b), (3, c) 세 행이다. 정답은 ②번이다. ① 의 4행은 TAB1 안의 (1, a) 두 행을 그대로 두고 두 테이블 사이의 (2, b) 만 지웠다고 본 것이다.",
       "references": [
         {
+          "type": "table",
+          "caption": "TAB1",
+          "headers": [
+            "A",
+            "B"
+          ],
+          "rows": [
+            [
+              "1",
+              "a"
+            ],
+            [
+              "1",
+              "a"
+            ],
+            [
+              "2",
+              "b"
+            ]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "TAB2",
+          "headers": [
+            "A",
+            "B"
+          ],
+          "rows": [
+            [
+              "2",
+              "b"
+            ],
+            [
+              "3",
+              "c"
+            ]
+          ]
+        },
+        {
           "type": "sql",
-          "code": "SELECT A, B, C FROM TAB1\nUNION ALL\nSELECT A, B, C FROM TAB2;\n\nSELECT A, B, C FROM TAB1\nUNION\nSELECT A, B, C FROM TAB2;"
+          "code": "SELECT A, B FROM TAB1\nUNION ALL\nSELECT A, B FROM TAB2;\n\nSELECT A, B FROM TAB1\nUNION\nSELECT A, B FROM TAB2;"
         }
       ]
     },
     {
       "subject": "2과목",
       "number": 15,
-      "title": "아래 T 테이블에 대한 네 SQL 중 결과가 다른 것은?",
+      "title": "A 칼럼에 실제 NULL 이 있는 아래 T 테이블에 대해, SQL 과 결과 행 수를 짝지은 것 중 틀린 것은?",
       "options": [
-        "SELECT A, SUM(X) FROM T GROUP BY A UNION ALL SELECT NULL, SUM(X) FROM T;",
-        "SELECT A, SUM(X) FROM T GROUP BY ROLLUP(A);",
-        "SELECT A, SUM(X) FROM T GROUP BY CUBE(A);",
-        "SELECT A, SUM(X) FROM T GROUP BY GROUPING SETS(A);"
+        "SELECT A, SUM(X) FROM T GROUP BY A UNION ALL SELECT NULL, SUM(X) FROM T; — 4행",
+        "SELECT A, SUM(X) FROM T GROUP BY ROLLUP(A); — 4행",
+        "SELECT A, SUM(X) FROM T GROUP BY CUBE(A); — 4행",
+        "SELECT A, SUM(X) FROM T GROUP BY GROUPING SETS(A); — 4행"
       ],
       "correctIndex": 3,
-      "explanation": "A 별 합계는 A 가 1 이면 30, 2 이면 70 이고 전체 합계는 100 이다. ① 은 A 별 합계 두 행에 A 가 NULL 인 전체 합계 한 행을 붙여 (1, 30), (2, 70), (NULL, 100) 을 돌려준다. ② ROLLUP(A) 와 ③ CUBE(A) 는 컬럼이 하나라 둘 다 A 별 합계와 전체 합계를 만들어 ① 과 같다. ④ GROUPING SETS(A) 는 A 별 합계만 만들고 전체 합계가 없어 (1, 30), (2, 70) 두 행뿐이다. 결과가 다른 것은 ④ 다.",
+      "explanation": "A 로 묶으면 1(30), 2(40), 실제 NULL(30) 세 그룹이 생긴다. ①·②·③ 은 여기에 전체 합계 100 한 행이 더해져 4행이다. ④ GROUPING SETS(A) 는 A 별 그룹만 만들고 전체 합계가 없어 3행이므로 틀렸다. 정답은 ④번이다. ROLLUP 결과에는 A 가 NULL 인 행이 두 개(실제 NULL 그룹 30, 전체 합계 100) 나온다. 둘을 구별하려면 GROUPING(A) 를 함께 출력한다. 소계·합계 행은 1, 실제 NULL 그룹은 0 이다.",
       "references": [
         {
           "type": "table",
@@ -504,7 +588,7 @@
               "20"
             ],
             [
-              "2",
+              "NULL",
               "30"
             ],
             [
@@ -518,15 +602,21 @@
     {
       "subject": "2과목",
       "number": 16,
-      "title": "SQL의 분류에 대한 설명으로 옳지 않은 것은?",
+      "title": "Oracle 에서 X 값이 1 로 COMMIT 된 테이블 T 에 대해 ㉠~㉣ 을 차례로 실행했다. 각 묶음을 마친 직후 T 의 X 값을 차례대로 나열한 것은?",
       "options": [
-        "DML은 SELECT, INSERT, UPDATE, DELETE이다.",
-        "TCL은 COMMIT, ROLLBACK, SAVEPOINT이다.",
-        "DCL은 GRANT, REVOKE이다.",
-        "DCL은 CREATE, ALTER, DROP이다."
+        "1, 1, 1, 1",
+        "2, 3, 4, 5",
+        "1, 1, 4, 4",
+        "2, 2, 4, 4"
       ],
       "correctIndex": 3,
-      "explanation": "DML 은 SELECT·INSERT·UPDATE·DELETE(①), TCL 은 COMMIT·ROLLBACK·SAVEPOINT(②), DCL 은 GRANT·REVOKE(③)다. CREATE·ALTER·DROP 은 객체 구조를 정의하는 DDL 이므로 이를 DCL 이라고 한 ④ 가 옳지 않다."
+      "explanation": "Oracle 에서 DDL(CREATE·ALTER·DROP·TRUNCATE·RENAME)과 DCL(GRANT·REVOKE)은 실행 전후로 자동 COMMIT 된다. DML 과 TCL 은 그렇지 않다. ㉠ 의 GRANT 는 DCL 이라 앞의 UPDATE 가 COMMIT 되고, 뒤의 ROLLBACK 은 되돌릴 것이 없어 X = 2 다. ㉡ 의 SAVEPOINT 는 TCL 이지만 COMMIT 이 아니다. 저장점 이름 없이 ROLLBACK 하면 트랜잭션 전체가 취소되어 X 는 마지막 COMMIT 값인 2 다. ㉢ 의 TRUNCATE 는 DDL 이라 UPDATE 가 COMMIT 되어 X = 4 다. ㉣ 의 DELETE 는 DML 이라 ROLLBACK 으로 UPDATE 까지 취소되어 X 는 4 로 남는다. 정답은 ④번이다. ① 은 자동 COMMIT 을 모두 무시한 것이고, ② 는 ROLLBACK 이 아무것도 되돌리지 못한다고 본 것, ③ 은 GRANT 를 DCL 이 아니라 자동 COMMIT 이 없는 명령으로 본 것이다. 참고로 SQL Server·PostgreSQL 은 명시적 트랜잭션 안의 DDL 도 ROLLBACK 할 수 있어 결과가 다르다.",
+      "references": [
+        {
+          "type": "sql",
+          "code": "-- ㉠\nUPDATE T SET X = 2;\nGRANT SELECT ON T TO U2;\nROLLBACK;\n-- ㉡\nUPDATE T SET X = 3;\nSAVEPOINT S1;\nROLLBACK;\n-- ㉢\nUPDATE T SET X = 4;\nTRUNCATE TABLE T_LOG;\nROLLBACK;\n-- ㉣\nUPDATE T SET X = 5;\nDELETE FROM T_LOG;\nROLLBACK;"
+        }
+      ]
     },
     {
       "subject": "2과목",
@@ -688,7 +778,7 @@
         },
         {
           "type": "sql",
-          "code": "-- (가)\nSELECT NVL(SUM(COL1), 0) FROM T WHERE 1=2;\n\n-- (나)\nSELECT MIN(COL1) FROM T WHERE 1=2;\n\n-- (다)\nSELECT COUNT(*) FROM T WHERE 1=2;"
+          "code": "-- (가)\nSELECT NVL(SUM(COL1), 0) FROM T\nWHERE 1=2;\n\n-- (나)\nSELECT MIN(COL1) FROM T WHERE 1=2;\n\n-- (다)\nSELECT COUNT(*) FROM T WHERE 1=2;"
         }
       ]
     },
@@ -835,22 +925,22 @@
         },
         {
           "type": "sql",
-          "code": "SELECT T.NAME, S.DATE\nFROM   TUTOR T LEFT OUTER JOIN SESSIONS S\nON     T.TID = S.TID;"
+          "code": "SELECT T.NAME, S.DATE\nFROM   TUTOR T\n       LEFT OUTER JOIN SESSIONS S\nON     T.TID = S.TID;"
         }
       ]
     },
     {
       "subject": "2과목",
       "number": 21,
-      "title": "아래 데이터에 네 윈도우 함수를 적용했을 때, 마지막 행의 값이 나머지와 다른 것은?",
+      "title": "아래 T 에 네 윈도우 함수를 적용했을 때, VAL 이 40 인 마지막 행의 값이 나머지와 다른 것은? (모두 OVER (ORDER BY VAL))",
       "options": [
-        "RANK() OVER (ORDER BY VAL)",
-        "DENSE_RANK() OVER (ORDER BY VAL)",
-        "ROW_NUMBER() OVER (ORDER BY VAL)",
-        "NTILE(5) OVER (ORDER BY VAL)"
+        "RANK()",
+        "DENSE_RANK()",
+        "ROW_NUMBER()",
+        "COUNT(*)"
       ],
       "correctIndex": 1,
-      "explanation": "VAL 이 20 인 행이 두 개라 동률이 생긴다. ① RANK 는 1, 2, 2, 4, 5 로 동률 다음 순위를 건너뛰고 DENSE_RANK 는 1, 2, 2, 3, 4 로 건너뛰지 않는다. ③ ROW_NUMBER 는 동률과 무관하게 1, 2, 3, 4, 5 이고 ④ NTILE(5) 도 다섯 그룹으로 나누어 1, 2, 3, 4, 5 가 된다. 마지막 행의 값이 4 인 ② DENSE_RANK 만 나머지(5)와 다르다.",
+      "explanation": "동률이 20, 30 에 두 번 있다. RANK 는 1, 2, 2, 4, 4, 6 으로 동률 뒤 순위를 건너뛰어 마지막이 6 이다. DENSE_RANK 는 1, 2, 2, 3, 3, 4 로 건너뛰지 않아 마지막이 4 다. ROW_NUMBER 는 1~6 이라 6 이다. COUNT(*) OVER (ORDER BY VAL) 는 기본 윈도우가 처음부터 현재 값과 같은 행까지(RANGE)라 1, 3, 3, 5, 5, 6 이 되고 마지막은 6 이다. 마지막 행이 4 인 ② 만 다르다. 정답은 ②번이다.",
       "references": [
         {
           "type": "table",
@@ -878,6 +968,10 @@
             ],
             [
               "5",
+              "30"
+            ],
+            [
+              "6",
               "40"
             ]
           ]
@@ -997,19 +1091,19 @@
     {
       "subject": "2과목",
       "number": 24,
-      "title": "아래 윈도우 절의 결과로 옳은 것은?",
+      "title": "연봉이 100, 200, 300, 400 인 4행에 아래 SQL 을 실행했다. ('300 행의 A, 200 행의 B, 300 행의 C, 200 행의 D' 순서)",
       "options": [
-        "전체 최대 연봉을 모든 행에 반환한다.",
-        "현재 행의 연봉 값을 그대로 반환한다.",
-        "이전 행까지의 최대 연봉을 반환한다.",
-        "오류가 발생한다."
+        "400, 600, 200, 3",
+        "300, 600, 200, 3",
+        "300, 500, 250, 2",
+        "300, 600, 250, 3"
       ],
       "correctIndex": 1,
-      "explanation": "ROWS BETWEEN CURRENT ROW AND CURRENT ROW로 프레임을 설정하면 누적 범위가 현재 한 행으로 한정된다. 한 행만 본 MAX는 곧 자기 자신이므로, 모든 행에서 자신의 연봉 값이 그대로 반환된다. 정답은 ②번이다. ① 전체 최대를 모든 행에 주려면 OVER () 처럼 파티션 전체를 프레임으로 잡아야 하고, ③ 이전 행까지라면 ROWS BETWEEN UNBOUNDED PRECEDING AND 1 PRECEDING 같은 프레임이 필요하며, ④ CURRENT ROW 를 시작과 끝에 모두 쓰는 프레임은 문법상 허용된다.",
+      "explanation": "ROWS BETWEEN 은 현재 행을 기준으로 계산할 행의 범위를 정한다. A 는 현재 행 하나만 보므로 300 행에서 자기 값 300 이다. B 는 앞 1행과 뒤 1행까지라 200 행에서 100 + 200 + 300 = 600 이다. C 는 처음부터 현재 행까지의 평균이라 300 행에서 (100 + 200 + 300) / 3 = 200 이다. D 는 현재 행부터 끝까지의 행 수라 200 행에서 200·300·400 의 3 이다. 정답은 ②번이다. ① 은 A 를 전체 최댓값으로 본 것, ③ 은 B 에서 뒤쪽 행을, D 에서 현재 행을 뺀 것, ④ 는 C 에 끝까지 포함한 것이다.",
       "references": [
         {
           "type": "sql",
-          "code": "SELECT 이름, 연봉,\n       MAX(연봉) OVER (ORDER BY 연봉 ROWS BETWEEN CURRENT ROW AND CURRENT ROW) AS M\nFROM   EMP;"
+          "code": "SELECT 연봉,\n  MAX(연봉) OVER (ORDER BY 연봉 ROWS\n    BETWEEN CURRENT ROW\n    AND CURRENT ROW)          AS A,\n  SUM(연봉) OVER (ORDER BY 연봉 ROWS\n    BETWEEN 1 PRECEDING\n    AND 1 FOLLOWING)          AS B,\n  AVG(연봉) OVER (ORDER BY 연봉 ROWS\n    BETWEEN UNBOUNDED PRECEDING\n    AND CURRENT ROW)          AS C,\n  COUNT(*) OVER (ORDER BY 연봉 ROWS\n    BETWEEN CURRENT ROW\n    AND UNBOUNDED FOLLOWING)  AS D\nFROM EMP;"
         }
       ]
     },
@@ -1084,39 +1178,47 @@
     {
       "subject": "2과목",
       "number": 27,
-      "title": "아래 SQL의 실행 결과로 옳은 것은?",
+      "title": "EMP 의 (부서, 급여) 가 (A, 300), (A, 200), (B, 200), (B, 100) 일 때, 아래 SQL ㉠~㉣ 의 결과로 옳은 것은? (행 수 또는 오류)",
       "options": [
-        "전체 직원 중 급여가 가장 큰 1 명만 단일 행으로 반환한다.",
-        "부서별 최상위 급여자를 모두 묶어 반환한다.",
-        "WHERE 조건이 항상 참이 되어 모든 직원을 그대로 반환한다.",
-        "\"single-row subquery returns more than one row\" 오류가 발생한다."
+        "2, 3, 3, 2",
+        "오류, 2, 3, 2",
+        "오류, 3, 2, 2",
+        "오류, 3, 3, 2"
       ],
       "correctIndex": 3,
-      "explanation": "서브쿼리 SELECT MAX(급여) FROM EMP GROUP BY 부서 는 부서마다 한 행씩, 여러 행을 반환한다. 그런데 비교 연산자 >= 는 단일 행만 받을 수 있어 \"single-row subquery returns more than one row\"(ORA-01427) 오류가 난다(④). 부서별 최고 급여와 비교하려면 >= ALL 이나 IN, 연관 서브쿼리를 써야 한다. ① 은 서브쿼리에 GROUP BY 가 없을 때(전체 MAX 하나와 비교)를 가정한 것이고, ② 는 부서별 최고 급여와 짝지어 비교하는 연관 서브쿼리를 썼을 때의 결과이며, ③ 은 오류로 실행되지 않으므로 틀리다.",
+      "explanation": "서브쿼리는 부서마다 최고 급여 300, 200 을 돌려준다. ㉠ 은 = 뒤에 여러 행이 와서 오류다. ㉡ 의 = ANY 와 ㉢ 의 IN 은 급여가 300 이나 200 인 행을 모두 고르는데, 부서를 따지지 않아 A 부서의 200 까지 걸려 3행이다. ㉣ 은 (부서, 급여) 쌍으로 비교하므로 A 의 300, B 의 200 만 정확히 골라 2행이다. 부서별 최고 급여자를 구하려면 ㉣ 처럼 다중 칼럼 서브쿼리를 써야 한다. 정답은 ④번이다. ① 은 = 도 여러 행을 받는다고 본 것, ② 와 ③ 은 = ANY 와 IN 중 하나가 부서를 구별한다고 본 것이다.",
       "references": [
         {
           "type": "sql",
-          "code": "SELECT 이름, 급여\nFROM   EMP\nWHERE  급여 >= (SELECT MAX(급여) FROM EMP GROUP BY 부서);"
+          "code": "-- ㉠\nSELECT 이름 FROM EMP WHERE 급여 =\n (SELECT MAX(급여) FROM EMP\n  GROUP BY 부서);\n-- ㉡\nSELECT 이름 FROM EMP WHERE 급여 = ANY\n (SELECT MAX(급여) FROM EMP\n  GROUP BY 부서);\n-- ㉢\nSELECT 이름 FROM EMP WHERE 급여 IN\n (SELECT MAX(급여) FROM EMP\n  GROUP BY 부서);\n-- ㉣\nSELECT 이름 FROM EMP\nWHERE (부서, 급여) IN\n (SELECT 부서, MAX(급여) FROM EMP\n  GROUP BY 부서);"
         }
       ]
     },
     {
       "subject": "2과목",
       "number": 28,
-      "title": "아래 ERD에 대한 설명으로 가장 적절한 것은?",
+      "title": "아래 ERD 와 데이터에서 SQL ㉠, ㉡, ㉢ 의 결과(COUNT(*))를 차례대로 나열한 것은?",
       "options": [
-        "지점은 최소 한 명의 고객을 반드시 가진다.",
-        "고객은 반드시 하나의 지점에 소속된다.",
-        "지점에 속하지 않는 고객이 존재할 수 있으므로, 별도로 추출해야 한다.",
-        "고객과 지점은 다대다 관계이다."
+        "3, 4, 4",
+        "4, 4, 5",
+        "3, 4, 5",
+        "3, 3, 5"
       ],
       "correctIndex": 2,
-      "explanation": "지점 쪽 끝의 |o 는 고객 한 명에 지점이 0개 또는 1개라는 뜻이라, 지점에 속하지 않은 고객이 있을 수 있다. 고객 쪽 끝의 o{ 는 지점 하나에 고객이 0명 이상이라는 뜻이다. 그래서 ① 지점이 고객을 반드시 가진다는 말과 ② 고객이 반드시 지점에 속한다는 말은 틀렸고, ④ 지점 쪽에 까마귀발이 없어 다대다도 아니다. ③ 처럼 지점이 없는 고객이 있을 수 있으므로, 전체 고객을 조회하려면 OUTER JOIN 을 쓰거나 따로 뽑아야 한다.",
+      "explanation": "ERD 의 지점 쪽 |o 는 지점이 없는 고객이 있을 수 있다는 뜻이고, 고객 쪽 o{ 는 고객이 없는 지점이 있을 수 있다는 뜻이다. 데이터에서도 고객 3 은 지점코드가 NULL 이고, 지점 S3 에는 고객이 없다. ㉠ 은 양쪽이 모두 맞는 행만 남겨 고객 1, 2, 4 의 3행이다. ㉡ 은 고객을 모두 남기므로 고객 3 이 지점 칼럼 NULL 로 더해져 4행이다. ㉢ 은 양쪽을 모두 남겨 ㉡ 의 4행에 S3 한 행이 더해져 5행이다. 정답은 ③번이다. ① 은 FULL OUTER JOIN 이 고객 쪽만 남긴다고 본 것이고, ② 는 NULL 끼리도 조인된다고 본 것이다. ④ 는 LEFT JOIN 에서 고객 3 을 뺀 것이다. 전체 고객을 빠짐없이 보려면 일반 조인이 아니라 고객 쪽을 남기는 OUTER JOIN 을 써야 한다.",
       "references": [
         {
           "type": "erd",
           "caption": "지점-고객 ERD",
-          "mermaid": "erDiagram\n    지점 |o--o{ 고객 : \"소속\""
+          "mermaid": "erDiagram\n    지점 |o..o{ 고객 : \"소속\"\n    지점 {\n        string 지점코드 PK\n    }\n    고객 {\n        int 고객번호 PK\n        string 지점코드 FK\n    }"
+        },
+        {
+          "type": "text",
+          "content": "지점: S1, S2, S3\n고객: (1, S1), (2, S1), (3, NULL), (4, S2)"
+        },
+        {
+          "type": "sql",
+          "code": "-- ㉠\nSELECT COUNT(*) FROM 고객 C\nJOIN 지점 J\n  ON C.지점코드 = J.지점코드;\n-- ㉡\nSELECT COUNT(*) FROM 고객 C\nLEFT JOIN 지점 J\n  ON C.지점코드 = J.지점코드;\n-- ㉢\nSELECT COUNT(*) FROM 고객 C\nFULL OUTER JOIN 지점 J\n  ON C.지점코드 = J.지점코드;"
         }
       ]
     },
@@ -1161,26 +1263,26 @@
         },
         {
           "type": "sql",
-          "code": "-- (가)\nSELECT A, SUM(X) FROM T GROUP BY A ORDER BY C;\n\n-- (나)\nSELECT A, SUM(X) FROM T GROUP BY A HAVING COUNT(C) > 1;"
+          "code": "-- (가)\nSELECT A, SUM(X) FROM T\nGROUP BY A ORDER BY C;\n\n-- (나)\nSELECT A, SUM(X) FROM T\nGROUP BY A HAVING COUNT(C) > 1;"
         }
       ]
     },
     {
       "subject": "2과목",
       "number": 30,
-      "title": "오라클과 SQL Server에서 아래 DML·DDL이 하나의 트랜잭션으로 순차 수행된 후 (SQL Server 는 BEGIN TRANSACTION 으로 명시적 트랜잭션을 시작한 상태) ROLLBACK의 효과로 적절하지 않은 것은?",
+      "title": "1행이 COMMIT 된 테이블 T 에 아래 문장을 차례로 실행했다(SQL Server 는 BEGIN TRANSACTION 으로 시작). 실행 후 'Oracle 의 T 행 수와 T_NEW 유무 / SQL Server 의 T 행 수와 T_NEW 유무' 로 옳은 것은?",
       "options": [
-        "오라클에서는 CREATE 시 UPDATE가 자동 커밋되어 UPDATE 결과는 유지된다.",
-        "오라클에서는 CREATE로 생성된 테이블 TAB_NEW는 유지된다.",
-        "SQL Server에서는 UPDATE와 CREATE 모두 롤백되어 TAB_NEW가 생성되지 않는다.",
-        "오라클에서는 ROLLBACK이 실행되면 테이블 TAB_NEW도 함께 삭제된다."
+        "1, 없음 / 1, 없음",
+        "3, 있음 / 1, 없음",
+        "2, 있음 / 2, 있음",
+        "2, 있음 / 1, 없음"
       ],
       "correctIndex": 3,
-      "explanation": "오라클의 DDL 은 실행 전후로 자동 커밋을 동반하므로, CREATE 시점에 앞선 UPDATE 까지 커밋되고 ROLLBACK 으로 취소되지 않는다(①②는 옳다). 따라서 ROLLBACK 으로 TAB_NEW 가 삭제된다는 ④ 가 적절하지 않다. SQL Server 는 명시적 트랜잭션 안에서는 DDL 도 트랜잭션 범위에 포함되어 UPDATE 와 CREATE 가 함께 롤백된다(③). 단, SQL Server 의 기본값인 자동 커밋 모드에서는 각 문장이 바로 커밋되므로 이 전제가 필요하다.",
+      "explanation": "Oracle 은 DDL 을 실행하기 직전과 직후에 자동 COMMIT 한다. CREATE TABLE 앞에서 INSERT 2 가 확정되고 T_NEW 도 만들어진 채 확정된다. 뒤의 INSERT 3 만 ROLLBACK 으로 취소되어 T 는 1, 2 의 2행이고 T_NEW 는 남는다. SQL Server 는 명시적 트랜잭션 안의 DDL 도 트랜잭션에 묶인다. ROLLBACK 하면 INSERT 2·3 과 CREATE TABLE 이 모두 취소되어 T 는 처음의 1행이고 T_NEW 는 없다. 정답은 ④번이다. ① 은 Oracle 에서도 DDL 이 롤백된다고 본 것이고, ② 는 Oracle 의 ROLLBACK 이 아무것도 되돌리지 못한다고 본 것, ③ 은 SQL Server 도 DDL 에서 자동 COMMIT 한다고 본 것이다.",
       "references": [
         {
           "type": "sql",
-          "code": "UPDATE T1 SET COL2 = 200;\nCREATE TABLE TAB_NEW ( C1 INT );\nROLLBACK;"
+          "code": "INSERT INTO T VALUES (2);\nCREATE TABLE T_NEW (C1 INT);\nINSERT INTO T VALUES (3);\nROLLBACK;"
         }
       ]
     },
@@ -1367,7 +1469,7 @@
         },
         {
           "type": "sql",
-          "code": "SELECT 운전자, COUNT(운행번호) AS 운행횟수\nFROM   DRIVING_LOG\nGROUP BY 운전자;"
+          "code": "SELECT 운전자,\n       COUNT(운행번호) AS 운행횟수\nFROM   DRIVING_LOG\nGROUP BY 운전자;"
         }
       ]
     },
@@ -1417,7 +1519,7 @@
         },
         {
           "type": "sql",
-          "code": "SELECT *\nFROM   CUSTOMER\nWHERE  지역 IN ('서울', '대전', '부산');"
+          "code": "SELECT *\nFROM   CUSTOMER\nWHERE  지역 IN\n       ('서울', '대전', '부산');"
         }
       ]
     },
@@ -1680,19 +1782,28 @@
     {
       "subject": "2과목",
       "number": 43,
-      "title": "아래 SQL의 COALESCE 절에 대한 설명으로 옳은 것은?",
+      "title": "아래 ERD 와 데이터에서 SQL 의 ㉠, ㉡, ㉢ 값을 차례대로 나열한 것은?",
       "options": [
-        "COM이 NULL이면 SAL을, NULL이 아니면 COM을 반환한다.",
-        "COM과 SAL의 합을 반환한다.",
-        "COM과 SAL 중 큰 값을 반환한다.",
-        "COM이 NULL이 아니면 SAL을 반환한다."
+        "350, 650, 1",
+        "350, 650, 2",
+        "300, 650, 1",
+        "350, 350, 1"
       ],
       "correctIndex": 0,
-      "explanation": "COALESCE 는 인수를 왼쪽부터 보며 처음으로 NULL 이 아닌 값을 반환한다. COALESCE(COM, SAL) 은 COM 이 NULL 이 아니면 COM, NULL 이면 SAL 이다(①). 합(②)이나 큰 값(③)을 구하지 않으며, ④ 는 반대로 설명했다.",
+      "explanation": "LEFT JOIN 결과는 3행이다. 사원 1 은 수당 50, 사원 2 는 수당 행이 없어 A 쪽 칼럼이 모두 NULL, 사원 3 은 수당 행은 있지만 금액이 NULL 이다. ㉠ COALESCE(A.금액, E.기본급) 은 금액이 NULL 이 아니면 금액을, NULL 이면 기본급을 돌려준다. 행마다 50, 200, 100 이 되어 합은 350 이다. 수당 행이 없어서 생긴 NULL 과 금액 자체가 NULL 인 경우를 구분하지 않는다. ㉡ 은 열마다 따로 합한다. SUM(A.금액) 은 NULL 을 빼고 50, SUM(E.기본급) 은 600 이라 650 이다. ㉢ COUNT(A.금액) 은 NULL 이 아닌 금액만 세어 1 이다. 정답은 ①번이다. ② 는 수당 행이 있는 사원 3 의 NULL 금액까지 센 것이고(COUNT(A.사번) 이면 2), ③ 은 사원 3 처럼 수당 행이 있으면 COALESCE 가 기본급으로 넘어가지 않는다고 본 것이다. ④ 는 ㉡ 을 SUM(A.금액 + E.기본급) 처럼 행마다 더한 것이다. 그러면 NULL 이 섞인 행이 빠져 사원 1 의 350 만 남는다.",
       "references": [
         {
+          "type": "erd",
+          "caption": "사원·수당 ERD (수당은 0 또는 1건)",
+          "mermaid": "erDiagram\n    사원 ||--o| 수당 : \"지급\"\n    사원 {\n        int 사번 PK\n        int 기본급\n    }\n    수당 {\n        int 사번 PK, FK\n        int 금액\n    }"
+        },
+        {
+          "type": "text",
+          "content": "사원(사번, 기본급): (1, 300), (2, 200), (3, 100)\n수당(사번, 금액): (1, 50), (3, NULL)"
+        },
+        {
           "type": "sql",
-          "code": "SELECT 사번, COALESCE(COM, SAL) AS 보상\nFROM   EMP;"
+          "code": "SELECT\n  SUM(COALESCE(A.금액, E.기본급))\n    AS ㉠,\n  SUM(A.금액) + SUM(E.기본급)\n    AS ㉡,\n  COUNT(A.금액) AS ㉢\nFROM 사원 E LEFT JOIN 수당 A\n  ON A.사번 = E.사번;"
         }
       ]
     },
@@ -1741,7 +1852,7 @@
         },
         {
           "type": "sql",
-          "code": "SELECT 이름, 급여\nFROM   ( SELECT 이름, 급여,\n                ROW_NUMBER() OVER (ORDER BY 급여 DESC) AS RN\n         FROM   EMP )\nWHERE  RN <= 2\nORDER BY RN;"
+          "code": "SELECT 이름, 급여\nFROM   ( SELECT 이름, 급여,\n                ROW_NUMBER() OVER (\n                  ORDER BY 급여 DESC)\n                AS RN\n         FROM   EMP )\nWHERE  RN <= 2\nORDER BY RN;"
         }
       ]
     },
@@ -1883,26 +1994,35 @@
         },
         {
           "type": "sql",
-          "code": "SELECT GRP,\n       AVG(COL1) - AVG(NVL(COL1, 0)) AS D\nFROM   T\nGROUP BY GRP\nORDER BY GRP;"
+          "code": "SELECT GRP,\n       AVG(COL1) - AVG(NVL(COL1, 0))\n         AS D\nFROM   T\nGROUP BY GRP\nORDER BY GRP;"
         }
       ]
     },
     {
       "subject": "2과목",
       "number": 49,
-      "title": "부서 테이블에 존재하지만 대응되는 사원이 없는 부서까지 모두 조회하려 한다. 빈칸에 들어갈 조인 방식으로 올바른 것은? (사원 테이블이 FROM 절의 좌측, 부서 테이블이 우측에 위치한다고 가정)",
+      "title": "아래 ERD 와 데이터에서 SQL ㉠, ㉡, ㉢ 의 결과(COUNT(*))를 차례대로 나열한 것은?",
       "options": [
-        "RIGHT OUTER JOIN",
-        "LEFT OUTER JOIN",
-        "INNER JOIN",
-        "CROSS JOIN"
+        "4, 3, 4",
+        "4, 4, 4",
+        "4, 3, 5",
+        "3, 3, 4"
       ],
       "correctIndex": 0,
-      "explanation": "사원이 없는 부서까지 모두 보려면 부서 테이블의 행을 모두 보존해야 한다. 부서(DEPT)가 JOIN 키워드의 오른쪽에 있으므로 오른쪽 테이블을 보존하는 RIGHT OUTER JOIN 이다(①). ② LEFT OUTER JOIN 은 사원 쪽을 보존하고, ③ INNER JOIN 은 사원이 없는 부서가 빠지며, ④ CROSS JOIN 은 조건 없는 카티션 곱이다.",
+      "explanation": "㉠ 은 오른쪽 부서를 모두 남기는 RIGHT OUTER JOIN 이다. D1 에 사원 2명, D2 에 1명이 붙고, 사원이 없는 D3 도 사원 칼럼이 NULL 인 채 한 행으로 남아 4행이다. ㉡ 은 앞의 LEFT JOIN 결과(4행)에 참여를 일반 조인한다. D3 행은 E.사번 이 NULL 이라 P.사번 = E.사번 이 참이 될 수 없고, 참여가 없는 사원 2 의 행도 빠진다. 남는 것은 사원 1 의 두 행과 사원 3 의 한 행으로 3행이다. 뒤에 붙인 일반 조인이 앞의 OUTER JOIN 으로 살린 행을 다시 지운 것이다. ㉢ 은 사원과 참여를 먼저 조인한 결과(사원 1 두 행, 사원 3 한 행)를 인라인 뷰로 만든 뒤 부서에 LEFT JOIN 했다. D1 2행, D2 1행, D3 은 NULL 로 1행이 되어 4행이다. 정답은 ①번이다. ② 는 ㉡ 에서도 D3 이 남는다고 본 것이고, ③ 은 ㉢ 에서 참여가 없는 사원 2 까지 남는다고 본 것이다. ④ 는 ㉠ 을 일반 조인처럼 센 것이다.",
       "references": [
         {
+          "type": "erd",
+          "caption": "부서·사원·참여 ERD",
+          "mermaid": "erDiagram\n    부서 ||..o{ 사원 : \"소속\"\n    사원 ||--o{ 참여 : \"투입\"\n    부서 {\n        string 부서코드 PK\n    }\n    사원 {\n        int 사번 PK\n        string 부서코드 FK\n    }\n    참여 {\n        int 사번 PK, FK\n        string 과제 PK\n    }"
+        },
+        {
+          "type": "text",
+          "content": "부서: D1, D2, D3\n사원: (1, D1), (2, D1), (3, D2)\n참여: (1, P1), (1, P2), (3, P1)"
+        },
+        {
           "type": "sql",
-          "code": "SELECT *\nFROM   EMP E ???  JOIN DEPT D\nON     E.DNO = D.DNO;"
+          "code": "-- ㉠\nSELECT COUNT(*)\nFROM 사원 E RIGHT JOIN 부서 D\n  ON E.부서코드 = D.부서코드;\n-- ㉡\nSELECT COUNT(*)\nFROM 부서 D LEFT JOIN 사원 E\n  ON E.부서코드 = D.부서코드\nJOIN 참여 P ON P.사번 = E.사번;\n-- ㉢\nSELECT COUNT(*)\nFROM 부서 D LEFT JOIN\n  (SELECT E.부서코드\n     FROM 사원 E JOIN 참여 P\n       ON P.사번 = E.사번) X\n  ON X.부서코드 = D.부서코드;"
         }
       ]
     },

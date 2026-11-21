@@ -11,16 +11,22 @@ export const ROUND_56: QuizQuestion[] = [
     "round": 56,
     "subject": "1과목",
     "number": 1,
-    "title": "데이터베이스 스키마의 종류가 아닌 것은?",
+    "title": "ANSI/SPARC 3단계 구조에서 (가)~(다)에 해당하는 스키마를 바르게 짝지은 것은?",
     "options": [
-      "응용 스키마",
-      "외부 스키마",
-      "개념 스키마",
-      "내부 스키마"
+      "(가) 외부, (나) 개념, (다) 내부",
+      "(가) 개념, (나) 외부, (다) 내부",
+      "(가) 외부, (나) 내부, (다) 개념",
+      "(가) 내부, (나) 개념, (다) 외부"
     ],
     "correctIndex": 0,
-    "explanation": "ANSI/SPARC 3단계 구조의 스키마는 외부 스키마(②, 사용자 관점), 개념 스키마(③, 조직 전체 관점), 내부 스키마(④, 물리적 저장 구조) 세 가지다. 응용 스키마는 이 분류에 없다(①).",
-    "_source": "authored"
+    "explanation": "외부 스키마는 사용자나 응용 프로그램이 보는 관점(가), 개념 스키마는 조직 전체의 데이터와 관계·제약조건(나), 내부 스키마는 물리적으로 저장되는 구조(다)를 정의한다. 정답은 ①번이다. 3단계로 나누는 이유는 독립성이다. 내부 스키마(다)를 바꿔도 개념 스키마가 그대로인 것이 물리적 독립성, 개념 스키마(나)를 바꿔도 외부 스키마(가)가 그대로인 것이 논리적 독립성이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "text",
+        "content": "(가) 영업팀이 쓰는 '고객별 매출' 화면에 맞춘 뷰 정의\n(나) 회사 전체 데이터와 그 관계, 제약조건 정의\n(다) 테이블이 저장되는 파일과 인덱스 저장 방식"
+      }
+    ]
   },
   {
     "id": 10201,
@@ -53,15 +59,15 @@ export const ROUND_56: QuizQuestion[] = [
     "round": 56,
     "subject": "1과목",
     "number": 3,
-    "title": "발생 시점에 따라 구분되는 엔터티의 유형으로 적절하지 않은 것은?",
+    "title": "엔터티 분류 기준과 그 기준에 속하는 엔터티 종류를 짝지은 것 중 잘못된 것은?",
     "options": [
-      "관계 엔터티",
-      "행위 엔터티",
-      "중심 엔터티",
-      "기본 엔터티"
+      "발생 시점 — 관계 엔터티",
+      "발생 시점 — 행위 엔터티",
+      "유형·무형 — 사건 엔터티",
+      "유형·무형 — 개념 엔터티"
     ],
     "correctIndex": 0,
-    "explanation": "발생 시점에 따른 엔터티 분류는 기본(④)·중심(③)·행위(②) 세 가지다. 관계 엔터티는 다대다 관계를 풀 때 만드는 교차 엔터티를 부르는 말이라 이 분류에 없으므로 정답은 ① 이다.",
+    "explanation": "엔터티는 유형·무형 기준으로 유형·개념·사건 엔터티, 발생 시점 기준으로 기본(키)·중심(메인)·행위 엔터티로 나눈다. 관계 엔터티는 M:N 관계를 풀 때 생기는 엔터티를 부르는 말로, 발생 시점 분류의 이름이 아니다(발생 시점으로 보면 대개 행위 엔터티에 해당한다). 그래서 ① 이 잘못 짝지어졌다. 정답은 ①번이다. ②·③·④ 는 모두 해당 기준의 분류다.",
     "_source": "authored"
   },
   {
@@ -195,16 +201,44 @@ export const ROUND_56: QuizQuestion[] = [
     "round": 56,
     "subject": "1과목",
     "number": 8,
-    "title": "업무에 의해 만들어진 식별자로 가장 적절한 것은?",
+    "title": "'학생은 같은 학기에 같은 과목을 한 번만 신청할 수 있다' 는 업무 규칙이 있는 [수강신청] 엔터티의 식별자에 대한 설명으로 옳은 것은?",
     "options": [
-      "외부 식별자",
-      "내부 식별자",
-      "본질 식별자",
-      "인조 식별자"
+      "신청번호는 업무에서 원래 쓰던 값이므로 본질 식별자다.",
+      "학번은 학생 엔터티에서 받아 온 값이라 인조 식별자다.",
+      "(학번, 과목코드, 학기) 는 업무 규칙에서 나온 본질 식별자이고, 신청번호로 바꾸면 인조 식별자가 된다.",
+      "신청번호를 주식별자로 쓰면 같은 학기 같은 과목의 중복 신청이 자동으로 막힌다."
     ],
     "correctIndex": 2,
-    "explanation": "업무에 의해 원래부터 만들어지는 식별자는 본질 식별자다(③). 인조 식별자(④)는 업무와 무관하게 편의상 인위적으로 만든 식별자이고, 외부 식별자(①)·내부 식별자(②)는 다른 엔터티와의 관계로 가져왔는지(FK) 엔터티 내부에서 정했는지에 따른 분류라 질문과 기준이 다르다.",
-    "_source": "authored"
+    "explanation": "본질 식별자는 업무에서 원래 인스턴스를 구분하던 값이고, 인조 식별자는 편의상 새로 만든 값(일련번호 등)이다. 업무 규칙상 한 학생이 한 학기에 한 과목을 한 번만 신청하므로 (학번, 과목코드, 학기) 가 수강신청을 구분하는 본질 식별자다. 이것을 대신해 신청번호를 쓰면 인조 식별자가 된다. 정답은 ③번이다. ① 신청번호는 시스템이 붙인 일련번호라 인조 식별자다. ② 다른 엔터티에서 받아 온 것은 외부 식별자 여부의 문제이고, 본질·인조 구분과는 다르다. ④ 인조 식별자를 쓰면 신청번호만 다르면 같은 (학번, 과목코드, 학기) 가 또 들어갈 수 있다. 중복을 막으려면 그 세 속성에 따로 UNIQUE 제약을 걸어야 한다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "caption": "수강신청 속성",
+        "headers": [
+          "속성",
+          "설명"
+        ],
+        "rows": [
+          [
+            "학번",
+            "학생에게서 받아 옴"
+          ],
+          [
+            "과목코드",
+            "과목에게서 받아 옴"
+          ],
+          [
+            "학기",
+            "예: 2026-1"
+          ],
+          [
+            "신청번호",
+            "시스템이 붙이는 일련번호"
+          ]
+        ]
+      }
+    ]
   },
   {
     "id": 10208,
@@ -416,7 +450,7 @@ export const ROUND_56: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT COUNT(ALL COL1)      FROM TAB1 WHERE COL2 = 'A';\nSELECT COUNT(DISTINCT COL1) FROM TAB1;"
+        "code": "SELECT COUNT(ALL COL1) FROM TAB1\nWHERE COL2 = 'A';\nSELECT COUNT(DISTINCT COL1) FROM TAB1;"
       }
     ]
   },
@@ -572,7 +606,7 @@ export const ROUND_56: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT MAX(COL2) KEEP (DENSE_RANK FIRST ORDER BY COL1) FROM TAB1;"
+        "code": "SELECT MAX(COL2)\n       KEEP (DENSE_RANK FIRST\n             ORDER BY COL1)\nFROM TAB1;"
       }
     ]
   },
@@ -633,20 +667,20 @@ export const ROUND_56: QuizQuestion[] = [
     "round": 56,
     "subject": "2과목",
     "number": 17,
-    "title": "아래 SQL 의 실행 결과로 옳은 것은?",
+    "title": "아래 SQL 의 실행 결과로 옳은 것은? (A, B, C, D 순서)",
     "options": [
-      "9, 9, 9",
-      "10, 9, 9",
-      "9, 9, 10",
-      "10, 10, 9"
+      "-1, 10, -9, -1",
+      "0, 10, -10, -1",
+      "0, 9, -10, -0.5",
+      "0, 10, -9, -1"
     ],
     "correctIndex": 1,
-    "explanation": "CEIL(9.36) 은 올림이라 10, ROUND(9.48) 은 소수 첫째 자리 4 에서 반올림해 9, FLOOR(9.72) 는 내림이라 9 다. 그래서 10, 9, 9 이고 정답은 ② 다. ① 은 CEIL 을 버림으로, ③ 은 FLOOR 를 올림으로 본 결과이고, ④ 는 ROUND(9.48) 을 10 으로 본 결과다.",
+    "explanation": "A 의 CEIL(-0.5) 은 -0.5 보다 크거나 같은 가장 작은 정수라 0 이다(-1 은 -0.5 보다 작다). B 의 ROUND(9.5) 는 소수 첫째 자리 5 에서 올려 10 이다. C 의 FLOOR(-9.5) 는 -9.5 보다 작거나 같은 가장 큰 정수라 -10 이다. D 의 SIGN 은 값의 크기가 아니라 부호만 알려 주는 함수로, 음수면 -1, 0 이면 0, 양수면 1 이다. 정답은 ②번이다. ① 은 CEIL 과 FLOOR 를 양수처럼 계산한 것이고, ③ 은 ROUND 를 버림으로 보고 SIGN 이 원래 값을 돌려준다고 본 것, ④ 는 FLOOR(-9.5) 를 0 쪽으로 자른 것이다.",
     "_source": "authored",
     "references": [
       {
         "type": "sql",
-        "code": "SELECT CEIL(9.36),\n       ROUND(9.48),\n       FLOOR(9.72)\nFROM   DUAL;"
+        "code": "SELECT CEIL(-0.5)  AS A,\n       ROUND(9.5)  AS B,\n       FLOOR(-9.5) AS C,\n       SIGN(-0.5)  AS D\nFROM   DUAL;"
       }
     ]
   },
@@ -692,7 +726,7 @@ export const ROUND_56: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT COUNT(DISTINCT 물품) FROM 업체;\nSELECT COUNT(*) FROM 업체 WHERE 물품 IN ('p', NULL);"
+        "code": "SELECT COUNT(DISTINCT 물품) FROM 업체;\nSELECT COUNT(*) FROM 업체\nWHERE 물품 IN ('p', NULL);"
       }
     ]
   },
@@ -703,16 +737,31 @@ export const ROUND_56: QuizQuestion[] = [
     "round": 56,
     "subject": "2과목",
     "number": 19,
-    "title": "두 결과 집합의 교집합을 반환하는 집합 연산자는?",
+    "title": "아래 ERD 와 데이터에서 'DB 와 OS 를 모두 신청한 학생' 을 구하려고 SQL ㉠, ㉡, ㉢ 을 작성했다. 각 SQL 의 결과 행 수를 차례대로 나열한 것은?",
     "options": [
-      "UNION",
-      "INTERSECT",
-      "MINUS",
-      "EXCEPT"
+      "1, 1, 1",
+      "2, 1, 1",
+      "2, 2, 1",
+      "2, 1, 3"
     ],
     "correctIndex": 1,
-    "explanation": "두 결과 집합에 모두 있는 행(교집합)을 반환하는 것은 INTERSECT 다(②). ① UNION 은 합집합, ③ MINUS(Oracle)·④ EXCEPT(SQL Server)는 차집합이다.",
-    "_source": "authored"
+    "explanation": "INTERSECT 는 두 결과에 모두 있는 행을 중복 없이 돌려준다. 무엇을 기준으로 비교하는지가 중요하다. ㉠ 은 이름으로 비교했다. DB 신청자의 이름은 {김, 이}, OS 신청자의 이름도 {김, 이} 라서 2행이 나온다. 그런데 DB 를 신청한 김은 학번 1, OS 를 신청한 김은 학번 2 로 서로 다른 학생이다. ERD 에서 학생을 구별하는 식별자는 학번이고 이름은 겹칠 수 있다. ㉡ 은 학번으로 비교해 {1, 3} 과 {2, 3} 의 교집합인 3 한 행이다. ㉢ 은 학번별로 두 과목 중 몇 개를 신청했는지 세어 2개인 학번 3 만 남긴다. 수강의 기본키가 (학번, 과목) 이라 같은 과목이 두 번 세어질 일이 없다. 정답은 ②번이다. ① 은 이름이 겹친다는 점을 놓친 것이고, ③ 은 ㉡ 도 이름처럼 겹친다고 본 것이다. ④ 는 ㉢ 에서 HAVING 을 빼고 WHERE 만 적용해 DB·OS 신청 학번 1, 2, 3 을 모두 센 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "erd",
+        "caption": "학생·수강 ERD",
+        "mermaid": "erDiagram\n    학생 ||--o{ 수강 : \"신청\"\n    학생 {\n        int 학번 PK\n        string 이름\n    }\n    수강 {\n        int 학번 PK, FK\n        string 과목 PK\n    }"
+      },
+      {
+        "type": "text",
+        "content": "학생: (1, 김), (2, 김), (3, 이)\n수강: (1, DB), (2, OS), (3, DB), (3, OS)"
+      },
+      {
+        "type": "sql",
+        "code": "-- ㉠\nSELECT S.이름\nFROM 학생 S JOIN 수강 C\n  ON C.학번 = S.학번\nWHERE C.과목 = 'DB'\nINTERSECT\nSELECT S.이름\nFROM 학생 S JOIN 수강 C\n  ON C.학번 = S.학번\nWHERE C.과목 = 'OS';\n-- ㉡\nSELECT 학번 FROM 수강\nWHERE 과목 = 'DB'\nINTERSECT\nSELECT 학번 FROM 수강\nWHERE 과목 = 'OS';\n-- ㉢\nSELECT 학번 FROM 수강\nWHERE 과목 IN ('DB', 'OS')\nGROUP BY 학번\nHAVING COUNT(*) = 2;"
+      }
+    ]
   },
   {
     "id": 10219,
@@ -918,7 +967,7 @@ export const ROUND_56: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT COL1      FROM TAB1 WHERE COL1 = 'z';\nSELECT MAX(COL1) FROM TAB1 WHERE COL1 = 'z';"
+        "code": "SELECT COL1 FROM TAB1\nWHERE COL1 = 'z';\nSELECT MAX(COL1) FROM TAB1\nWHERE COL1 = 'z';"
       }
     ]
   },
@@ -953,16 +1002,22 @@ export const ROUND_56: QuizQuestion[] = [
     "round": 56,
     "subject": "2과목",
     "number": 26,
-    "title": "집합 연산자에 대한 설명 중 중복을 제거하지 않는 것은?",
+    "title": "아래 두 SELECT 는 부서 조건이 서로 겹치지 않는다. 두 결과를 합칠 때 가장 알맞은 집합 연산자와 그 이유는?",
     "options": [
-      "UNION",
-      "UNION ALL",
-      "INTERSECT",
-      "MINUS"
+      "UNION — 혹시 모를 중복을 없애야 하므로",
+      "UNION ALL — 두 결과가 겹칠 수 없어 중복을 없애는 정렬 작업이 필요 없으므로",
+      "INTERSECT — 두 부서 사원을 모두 가져오므로",
+      "MINUS — 부서 10 에서 20 을 빼면 둘 다 남으므로"
     ],
     "correctIndex": 1,
-    "explanation": "UNION ALL 은 중복 제거 없이 두 결과 집합을 그대로 결합한다. ① UNION·③ INTERSECT·④ MINUS 는 모두 중복을 제거한다.",
-    "_source": "authored"
+    "explanation": "UNION 은 결과를 합친 뒤 중복을 없애려고 정렬이나 해시 작업을 하고, UNION ALL 은 중복을 없애지 않고 그대로 이어 붙인다. 부서 = 10 과 부서 = 20 은 한 행에서 동시에 참일 수 없어 두 결과가 겹치지 않으므로, 결과는 같고 추가 작업이 없는 UNION ALL 이 알맞다. 정답은 ②번이다. ① 은 결과는 같지만 불필요한 중복 제거 작업을 한다. ③ INTERSECT 는 겹치는 행만 남겨 0행이 되고, ④ MINUS 는 부서 10 사원만 남긴다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT 사번, 이름 FROM 사원\nWHERE  부서 = 10\n( ? )\nSELECT 사번, 이름 FROM 사원\nWHERE  부서 = 20;"
+      }
+    ]
   },
   {
     "id": 10226,
@@ -1021,16 +1076,53 @@ export const ROUND_56: QuizQuestion[] = [
     "round": 56,
     "subject": "2과목",
     "number": 28,
-    "title": "ROLLBACK 에 대한 설명 중 옳지 않은 것은?",
+    "title": "X 가 10 으로 COMMIT 된 테이블에서 두 세션이 아래 순서로 작업했다. ③ 에서 세션 A 가 ROLLBACK 했을 때와 COMMIT 했을 때, ④ 이후 X 값을 차례대로 나열한 것은?",
     "options": [
-      "ROLLBACK 은 트랜잭션 전체를 되돌린다.",
-      "SAVEPOINT 이후의 작업만 부분 롤백할 수 있다.",
-      "COMMIT 이전으로 롤백할 수 있다.",
-      "ROLLBACK 이후에는 해당 트랜잭션의 변경 내용이 모두 취소된다."
+      "30, 30",
+      "20, 20",
+      "20, 30",
+      "30, 20"
     ],
     "correctIndex": 2,
-    "explanation": "ROLLBACK 은 커밋되지 않은 트랜잭션 전체를 되돌리고(①④), SAVEPOINT 를 지정하면 그 이후 작업만 부분적으로 되돌릴 수 있다(②). 이미 COMMIT 된 변경은 영구 반영되어 ROLLBACK 으로 되돌릴 수 없으므로 ③ 이 옳지 않다.",
-    "_source": "authored"
+    "explanation": "① 에서 세션 A 가 행을 수정하면 그 행에 잠금이 걸린다. ② 의 세션 B 는 같은 행을 수정하려다 A 가 끝날 때까지 기다린다. A 가 ROLLBACK 하면 X 는 10 으로 돌아가고 잠금이 풀린다. B 의 UPDATE 는 이때 10 을 읽어 20 으로 바꾸고, ④ 의 COMMIT 으로 20 이 확정된다. A 가 COMMIT 하면 15 가 확정된 뒤 B 가 15 를 읽어 30 으로 바꾼다. ROLLBACK 은 COMMIT 되지 않은 변경만 되돌리고, 잠금을 풀어 기다리던 작업이 이어지게 한다. 정답은 ③번이다. ① 은 ROLLBACK 해도 A 의 +5 가 B 에게 반영된다고 본 것이고, ② 는 A 가 COMMIT 해도 B 가 처음 값 10 을 기준으로 계산한다고 본 것, ④ 는 두 경우를 바꿔 본 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "caption": "실행 순서",
+        "headers": [
+          "순서",
+          "세션",
+          "작업"
+        ],
+        "rows": [
+          [
+            "①",
+            "A",
+            "UPDATE: X = X + 5"
+          ],
+          [
+            "②",
+            "B",
+            "UPDATE: X = X * 2 (대기)"
+          ],
+          [
+            "③",
+            "A",
+            "ROLLBACK 또는 COMMIT"
+          ],
+          [
+            "④",
+            "B",
+            "COMMIT"
+          ]
+        ]
+      },
+      {
+        "type": "text",
+        "content": "①·② 는 같은 행에 대한 UPDATE 다."
+      }
+    ]
   },
   {
     "id": 10228,
@@ -1119,20 +1211,20 @@ export const ROUND_56: QuizQuestion[] = [
     "round": 56,
     "subject": "2과목",
     "number": 31,
-    "title": "아래 상황에서 지켜지지 않은 트랜잭션의 특성은?",
+    "title": "A 트랜잭션이 아직 커밋되지 않은 B 트랜잭션의 수정 값을 읽어 잘못된 금액을 계산했다(Dirty Read). 격리 수준을 READ COMMITTED 로 올렸을 때, 여전히 생길 수 있는 현상만 모두 고른 것은?",
     "options": [
-      "원자성",
-      "일관성",
-      "고립성",
-      "지속성"
+      "Dirty Read",
+      "Dirty Read, Non-Repeatable Read",
+      "Non-Repeatable Read, Phantom Read",
+      "Phantom Read"
     ],
     "correctIndex": 2,
-    "explanation": "고립성(Isolation)은 동시에 실행되는 트랜잭션이 서로의 중간 상태를 보지 못하도록 격리하는 성질이다. 커밋되지 않은 다른 트랜잭션의 값을 읽은 것은 고립성 위반에 해당한다. ① 원자성은 전부 반영되거나 전부 취소되는 성질, ④ 지속성은 커밋된 결과가 영구 보존되는 성질이다. ② 일관성은 트랜잭션 전후로 데이터가 규칙에 맞는 상태를 유지하는 성질이다.",
+    "explanation": "이 상황은 트랜잭션의 고립성이 지켜지지 않은 것이다. READ COMMITTED 는 COMMIT 된 값만 읽게 해 Dirty Read 를 막는다. 그러나 같은 행을 다시 읽는 사이 다른 트랜잭션이 고치고 COMMIT 하면 값이 달라지는 Non-Repeatable Read, 다시 조회할 때 새 행이 보이는 Phantom Read 는 여전히 생길 수 있다. REPEATABLE READ 는 Non-Repeatable Read 까지, SERIALIZABLE 은 Phantom Read 까지 막는다. 정답은 ③번이다. ①·② 는 READ COMMITTED 가 Dirty Read 를 막지 못한다고 본 것, ④ 는 Non-Repeatable Read 도 막는다고 본 것이다. Oracle 의 기본 격리 수준이 READ COMMITTED 다.",
     "_source": "authored",
     "references": [
       {
         "type": "text",
-        "content": "A 트랜잭션이 계좌 잔액을 읽어 계산하는 도중, 아직 커밋되지 않은 B 트랜잭션의 수정 값을 함께 읽어 잘못된 금액을 산출했다."
+        "content": "격리 수준(낮음 → 높음): READ UNCOMMITTED → READ COMMITTED → REPEATABLE READ → SERIALIZABLE"
       }
     ]
   },
@@ -1200,7 +1292,7 @@ export const ROUND_56: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT *\nFROM   TAB1\nWHERE  (COL1, COL2) NOT IN (SELECT COL1, COL2 FROM TAB2);"
+        "code": "SELECT *\nFROM   TAB1\nWHERE  (COL1, COL2) NOT IN\n       (SELECT COL1, COL2 FROM TAB2);"
       }
     ]
   },
@@ -1618,41 +1710,20 @@ export const ROUND_56: QuizQuestion[] = [
     "round": 56,
     "subject": "2과목",
     "number": 41,
-    "title": "아래 사원 데이터에 대한 AVG, MIN 결과로 옳은 것은?",
+    "title": "SAL 값이 1000, 1000, 2500, NULL 인 T 테이블에 아래 SQL 을 실행한 결과로 옳은 것은? (순서대로)",
     "options": [
-      "1500, 1000",
-      "1000, 2500",
-      "1125, 1000",
-      "1500, NULL"
+      "1500, 1500, 2, 0",
+      "1125, 1750, 3, 0",
+      "1500, 1750, 2, 0",
+      "1500, 1750, 2, 1000"
     ],
     "correctIndex": 2,
-    "explanation": "두 집계의 NULL 처리 방식이 다른 점이 핵심이다. AVG(NVL(SAL, 0))는 NULL을 0으로 치환해 모든 4행이 평균에 포함되어 (1000+1000+2500+0)÷4 = 1125. MIN(SAL)은 NVL이 적용되지 않아 NULL을 자동 제외하고 1000, 1000, 2500 중 최솟값 1000. 따라서 결과는 (1125, 1000)으로 정답은 ③번이다. ① 1500 은 NVL 없이 NULL 을 빼고 평균을 낸 값(4500 ÷ 3), ② 는 MIN 자리에 최댓값을 적은 것, ④ 는 NULL 을 빼고 평균을 내면서 MIN 이 NULL 이라고 본 결과다.",
+    "explanation": "집계 함수는 NULL 을 빼고 계산한다. AVG(SAL) 은 (1000 + 1000 + 2500) / 3 = 1500 이다. DISTINCT 를 붙이면 중복 값을 하나로 줄여 1000, 2500 만 남으므로 AVG 는 1750, COUNT 는 2 다. MIN(NVL(SAL, 0)) 은 NULL 이 0 으로 바뀐 뒤 최솟값을 구해 0 이다. 정답은 ③번이다. ① 은 DISTINCT 를 무시한 것, ② 는 AVG 에 NULL 을 0 으로 넣고 COUNT(DISTINCT) 에 NULL 을 센 것, ④ 는 NVL 로 바뀐 0 을 놓친 것이다.",
     "_source": "authored",
     "references": [
       {
-        "type": "table",
-        "headers": [
-          "SAL"
-        ],
-        "rows": [
-          [
-            "1000"
-          ],
-          [
-            "1000"
-          ],
-          [
-            "2500"
-          ],
-          [
-            "(NULL)"
-          ]
-        ],
-        "caption": "T 테이블"
-      },
-      {
         "type": "sql",
-        "code": "SELECT AVG(NVL(SAL,0)), MIN(SAL) FROM T;"
+        "code": "SELECT AVG(SAL),\n       AVG(DISTINCT SAL),\n       COUNT(DISTINCT SAL),\n       MIN(NVL(SAL, 0))\nFROM   T;"
       }
     ]
   },
@@ -1736,15 +1807,15 @@ export const ROUND_56: QuizQuestion[] = [
     "round": 56,
     "subject": "2과목",
     "number": 43,
-    "title": "아래 PLAYER 테이블에서 키가 180 이상인 선수를 조회하는 쿼리로 가장 적절한 것은?",
+    "title": "아래 PLAYER 테이블에서 키가 180 이상인 선수를 구하려 한다. SQL 과 결과를 바르게 짝지은 것은?",
     "options": [
-      "SELECT * FROM PLAYER HAVING HEIGHT >= 180;",
-      "SELECT * FROM PLAYER GROUP BY HEIGHT >= 180;",
-      "SELECT * FROM PLAYER WHERE HEIGHT >= 180;",
-      "SELECT * FROM PLAYER ORDER BY HEIGHT >= 180;"
+      "SELECT * FROM PLAYER HAVING HEIGHT >= 180; — 3명",
+      "SELECT * FROM PLAYER WHERE HEIGHT > 180; — 이선수, 박선수, 정선수",
+      "SELECT * FROM PLAYER WHERE HEIGHT >= 180; — 이선수, 박선수, 정선수",
+      "SELECT * FROM PLAYER WHERE NOT (HEIGHT < 180); — 이선수, 박선수, 최선수, 정선수"
     ],
     "correctIndex": 2,
-    "explanation": "행 단위 필터 조건은 `WHERE` 절에서 처리한다. ① `HAVING` 은 GROUP BY 후 그룹 조건, ② `GROUP BY` 는 그룹화 키 (불리언이 올 수 없음), ④ `ORDER BY` 는 정렬이라 의미 다름.",
+    "explanation": "행 하나하나를 거르는 조건은 WHERE 에 쓴다. HEIGHT >= 180 은 180 인 박선수를 포함해 이선수, 박선수, 정선수 3명이다. 정답은 ③번이다. ① HAVING 은 그룹에 조건을 거는 절이라, GROUP BY 없이 일반 칼럼 HEIGHT 를 쓰면 오류다. ② > 180 은 180 인 박선수가 빠져 2명이다. ④ NOT (HEIGHT < 180) 에서 최선수는 NULL 이라 HEIGHT < 180 이 UNKNOWN 이고, NOT UNKNOWN 도 UNKNOWN 이라 빠진다. 결과는 ③ 과 같은 3명이다.",
     "_source": "authored",
     "references": [
       {
@@ -1765,10 +1836,14 @@ export const ROUND_56: QuizQuestion[] = [
           ],
           [
             "박선수",
-            "178"
+            "180"
           ],
           [
             "최선수",
+            "NULL"
+          ],
+          [
+            "정선수",
             "190"
           ]
         ]
@@ -1958,15 +2033,15 @@ export const ROUND_56: QuizQuestion[] = [
     "round": 56,
     "subject": "2과목",
     "number": 47,
-    "title": "아래 SALES 테이블에서 매출액이 높은 순서대로 직원을 조회하는 쿼리 중 수정이 필요한 부분은?",
+    "title": "Oracle 에서 아래 SALES 를 매출이 높은 순으로, 매출이 없는(NULL) 직원은 맨 뒤에 오도록 조회하려 한다. 쿼리를 어떻게 고쳐야 하는가?",
     "options": [
-      "SELECT 절에 직원, 매출 컬럼을 명시적으로 나열해야 한다.",
-      "FROM 절을 SALES 가 아닌 EMP_SALES 뷰로 교체해야 한다.",
-      "WHERE 절에 매출 IS NOT NULL 조건을 추가해야 한다.",
-      "ORDER BY 절에 DESC 를 추가해야 한다."
+      "SELECT 절의 칼럼 순서를 매출, 직원으로 바꾼다.",
+      "ORDER BY 매출 DESC 로 바꾸기만 하면 된다.",
+      "WHERE 매출 IS NOT NULL 을 추가한다.",
+      "ORDER BY 매출 DESC NULLS LAST 로 바꾼다."
     ],
     "correctIndex": 3,
-    "explanation": "`ORDER BY 매출` 은 기본 오름차순(ASC) 정렬이라 \"매출이 높은 순\" (내림차순) 으로 출력하려면 `ORDER BY 매출 DESC` 처럼 `DESC` 를 명시해야 한다. ① SELECT 절은 정상, ② SALES 테이블 그대로 사용, ③ NULL 처리는 본 문항과 무관.",
+    "explanation": "Oracle 은 NULL 을 가장 큰 값으로 본다. 그래서 ORDER BY 매출 DESC 만 쓰면 박민수(NULL)가 맨 앞에 온다(②). 높은 순으로 정렬하면서 NULL 을 뒤로 보내려면 NULLS LAST 를 붙인다. 이영희, 김철수, 최지은, 박민수 순이 된다. 정답은 ④번이다. ③ 은 박민수를 결과에서 아예 빼 버리므로 요구와 다르다. ① 칼럼 순서는 정렬과 관계없다.",
     "_source": "authored",
     "references": [
       {
@@ -1987,13 +2062,17 @@ export const ROUND_56: QuizQuestion[] = [
           ],
           [
             "박민수",
+            "NULL"
+          ],
+          [
+            "최지은",
             "3000"
           ]
         ]
       },
       {
         "type": "sql",
-        "code": "SELECT 직원, 매출\nFROM   SALES\nORDER BY 매출;"
+        "code": "SELECT 직원, 매출\nFROM   SALES\nORDER  BY 매출;"
       }
     ]
   },
@@ -2123,7 +2202,7 @@ export const ROUND_56: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "CREATE TABLE TAB1 (COL1 NUMBER, COL2 NUMBER);\nINSERT INTO TAB1 VALUES (1, 2);\nINSERT INTO TAB1 VALUES (2, 1);\nINSERT INTO TAB1 VALUES (3, 4);\nSAVEPOINT SP1;\n\nUPDATE TAB1 SET COL1 = 4 WHERE COL2 <= 2;\nSAVEPOINT SP2;\n\nDELETE FROM TAB1 WHERE COL2 = 2;\nROLLBACK TO SAVEPOINT SP2;\n\nINSERT INTO TAB1 VALUES (4, 1);\nCOMMIT;\n\nSELECT COUNT(*) FROM TAB1 WHERE COL1 = 4;"
+        "code": "CREATE TABLE TAB1\n  (COL1 NUMBER, COL2 NUMBER);\nINSERT INTO TAB1 VALUES (1, 2);\nINSERT INTO TAB1 VALUES (2, 1);\nINSERT INTO TAB1 VALUES (3, 4);\nSAVEPOINT SP1;\n\nUPDATE TAB1 SET COL1 = 4\nWHERE COL2 <= 2;\nSAVEPOINT SP2;\n\nDELETE FROM TAB1 WHERE COL2 = 2;\nROLLBACK TO SAVEPOINT SP2;\n\nINSERT INTO TAB1 VALUES (4, 1);\nCOMMIT;\n\nSELECT COUNT(*) FROM TAB1\nWHERE COL1 = 4;"
       }
     ]
   }

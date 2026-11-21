@@ -91,7 +91,7 @@ export const ROUND_52: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "-- FK 정의 (학생 테이블 생성 시)\nCREATE TABLE 학생 (\n  학번      VARCHAR2(10) PRIMARY KEY,\n  이름      VARCHAR2(20),\n  학과코드  VARCHAR2(4),\n  CONSTRAINT FK_학생_학과 FOREIGN KEY (학과코드)\n    REFERENCES 학과(학과코드) ON DELETE CASCADE\n);\n\n-- 부모 행 삭제\nDELETE FROM 학과 WHERE 학과코드 = 'CS';"
+        "code": "-- FK 정의 (학생 테이블 생성 시)\nCREATE TABLE 학생 (\n  학번      VARCHAR2(10) PRIMARY KEY,\n  이름      VARCHAR2(20),\n  학과코드  VARCHAR2(4),\n  CONSTRAINT FK_학생_학과\n    FOREIGN KEY (학과코드)\n    REFERENCES 학과(학과코드)\n    ON DELETE CASCADE\n);\n\n-- 부모 행 삭제\nDELETE FROM 학과 WHERE 학과코드 = 'CS';"
       }
     ]
   },
@@ -126,15 +126,15 @@ export const ROUND_52: QuizQuestion[] = [
     "round": 52,
     "subject": "1과목",
     "number": 4,
-    "title": "개념적 데이터 모델링에 대한 설명으로 옳은 것은?",
+    "title": "새 프로젝트 첫 주, 현업 담당자들과 '우리 업무에 어떤 핵심 대상이 있고 서로 어떻게 연결되는지' 전체 윤곽을 합의하려 한다. 이 단계의 모델링과 그 특징으로 옳은 것은?",
     "options": [
-      "추상화 수준이 높아 세부 구현을 파악하기 어렵다.",
-      "물리적 저장 구조에 가장 가깝다.",
-      "성능 튜닝을 위한 단계이다.",
-      "인덱스 설계를 포함한다."
+      "개념적 모델링 — 추상화 수준이 높아 핵심 엔터티와 관계를 넓게 그리며, 세부 구현은 드러나지 않는다.",
+      "개념적 모델링 — 물리적 저장 구조에 가장 가까워 인덱스까지 정한다.",
+      "논리적 모델링 — 성능 튜닝을 위해 반정규화를 먼저 한다.",
+      "물리적 모델링 — 업무 전체 범위를 주제영역으로 나눈다."
     ],
     "correctIndex": 0,
-    "explanation": "개념적 데이터 모델링은 추상화 수준이 가장 높아 업무 중심으로 표현되며 세부 구현(저장 구조·인덱스·튜닝 등)은 다루지 않는다. ② 물리적 저장 구조, ③ 성능 튜닝, ④ 인덱스 설계는 물리적 데이터 모델링에서 다룬다.",
+    "explanation": "개념적 데이터 모델링은 가장 추상적인 단계로, 업무의 핵심 엔터티와 관계를 포괄적으로 그려 현업과 범위를 합의한다. 속성·식별자·저장 구조 같은 세부는 아직 정하지 않는다. 정답은 ①번이다. ② 의 저장 구조와 인덱스는 물리적 모델링, ③ 의 반정규화도 성능을 고려하는 물리 단계의 일이며 정규화를 먼저 해야 한다. ④ 의 주제영역 구분은 물리 단계가 아니라 개념 단계에서 한다.",
     "_source": "authored"
   },
   {
@@ -168,16 +168,39 @@ export const ROUND_52: QuizQuestion[] = [
     "round": 52,
     "subject": "1과목",
     "number": 6,
-    "title": "'ERD 에서 인스턴스는 두 개 이상의 속성을 가지고, 속성은 하나의 속성값을 가진다' 는 규칙을 표현한 도식으로 옳은 것은?",
+    "title": "아래 [회원] 데이터를 엔터티·인스턴스·속성·속성값의 관계로 볼 때 가장 적절한 것은?",
     "options": [
-      "엔터티 ─ 인스턴스(1:1) ─ 속성(1:1) ─ 속성값(1:1)",
-      "엔터티 ─ 인스턴스(1:M) ─ 속성(1:M) ─ 속성값(1:M)",
-      "엔터티 ─ 인스턴스(M:1) ─ 속성(M:1) ─ 속성값(1:1)",
-      "엔터티 ─ 인스턴스(1:M) ─ 속성(1:M) ─ 속성값(1:1)"
+      "회원 엔터티에는 인스턴스가 하나만 있어야 한다.",
+      "인스턴스 하나는 속성을 하나만 가질 수 있다.",
+      "M02 의 전화번호에 값 두 개를 넣은 것은 속성이 여러 값을 가질 수 있다는 규칙에 맞는다.",
+      "인스턴스는 여러 속성을 갖지만 한 속성은 인스턴스마다 값이 하나여야 하므로, 전화번호는 따로 분리해야 한다."
     ],
     "correctIndex": 3,
-    "explanation": "한 엔터티는 여러 인스턴스를 가지고(1:M), 한 인스턴스는 두 개 이상의 속성을 가지며(1:M), 한 속성은 하나의 속성값만 가진다(1:1). 따라서 ④ 가 옳다. ① 은 인스턴스·속성도 하나뿐인 것으로, ② 는 속성이 여러 값을 갖는 것으로, ③ 은 관계 방향을 반대로(M:1) 표현했다.",
-    "_source": "authored"
+    "explanation": "엔터티는 여러 인스턴스를 갖고(1:M), 인스턴스 하나는 두 개 이상의 속성을 가지며(1:M), 속성 하나는 인스턴스마다 속성값 하나만 갖는다(1:1). M02 의 전화번호처럼 한 칸에 값이 둘이면 이 규칙(제1정규형의 원자값)을 어긴다. 회원전화번호(회원번호, 전화번호)처럼 따로 분리해야 한다. 정답은 ④번이다. ① 엔터티는 인스턴스가 두 개 이상이어야 엔터티로 본다. ② 인스턴스는 속성을 여러 개 가진다. ③ 속성 하나에 값 여러 개는 허용되지 않는다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "caption": "회원",
+        "headers": [
+          "회원번호",
+          "이름",
+          "전화번호"
+        ],
+        "rows": [
+          [
+            "M01",
+            "김하늘",
+            "010-1111"
+          ],
+          [
+            "M02",
+            "이바다",
+            "010-2222, 010-3333"
+          ]
+        ]
+      }
+    ]
   },
   {
     "id": 10406,
@@ -432,7 +455,7 @@ export const ROUND_52: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT VAL, SUM(VAL) OVER (ORDER BY ID\n                           RANGE BETWEEN 2 PRECEDING AND 2 FOLLOWING) AS S\nFROM T;"
+        "code": "SELECT VAL,\n       SUM(VAL) OVER (ORDER BY ID\n         RANGE BETWEEN 2 PRECEDING\n               AND 2 FOLLOWING) AS S\nFROM T;"
       }
     ]
   },
@@ -598,20 +621,20 @@ export const ROUND_52: QuizQuestion[] = [
     "round": 52,
     "subject": "2과목",
     "number": 17,
-    "title": "아래 설명에 해당하는 트랜잭션의 특성은?",
+    "title": "트랜잭션의 고립성이 충분하지 않을 때 생기는 아래 현상 ㉠~㉢ 의 이름을 바르게 짝지은 것은?",
     "options": [
-      "원자성",
-      "일관성",
-      "고립성",
-      "지속성"
+      "Phantom Read, Dirty Read, Non-Repeatable Read",
+      "Non-Repeatable Read, Dirty Read, Phantom Read",
+      "Dirty Read, Non-Repeatable Read, Phantom Read",
+      "Dirty Read, Phantom Read, Non-Repeatable Read"
     ],
     "correctIndex": 2,
-    "explanation": "트랜잭션의 ACID 중 고립성(Isolation)에 대한 설명이다. 동시 실행되는 다른 트랜잭션의 영향을 받지 않고 독립적으로 수행됨을 보장한다. ① 원자성은 전부 되거나 전부 취소, ② 일관성은 규칙에 맞는 상태 유지, ④ 지속성은 커밋 결과의 영구 보존이다.",
+    "explanation": "고립성은 동시에 실행되는 트랜잭션이 서로의 중간 결과에 영향을 받지 않아야 한다는 성질이다. 이것이 약하면 세 가지 문제가 생긴다. 확정되지 않은 값을 읽는 것은 Dirty Read(㉠), 같은 행을 다시 읽을 때 값이 달라지는 것은 Non-Repeatable Read(㉡), 같은 조건으로 다시 조회할 때 없던 행이 생기는 것은 Phantom Read(㉢)다. 정답은 ③번이다. ② 와 ④ 는 값이 바뀌는 것(행 수정)과 행이 새로 생기는 것(행 추가)을 바꿔 본 것이다. Oracle 의 기본 격리 수준(READ COMMITTED)은 Dirty Read 는 막지만 나머지 둘은 생길 수 있다.",
     "_source": "authored",
     "references": [
       {
         "type": "text",
-        "content": "트랜잭션이 동시에 실행될 경우 다른 트랜잭션에 의해 영향을 받지 않고 독립적으로 실행되어야 한다."
+        "content": "㉠ 다른 트랜잭션이 바꾸고 아직 COMMIT 하지 않은 값을 읽었는데, 그 트랜잭션이 ROLLBACK 했다.\n㉡ 한 트랜잭션 안에서 같은 행을 두 번 읽었는데, 그사이 다른 트랜잭션이 고치고 COMMIT 해 값이 달라졌다.\n㉢ 한 트랜잭션 안에서 같은 조건으로 두 번 조회했는데, 그사이 다른 트랜잭션이 행을 추가해 두 번째에 없던 행이 나타났다."
       }
     ]
   },
@@ -685,7 +708,7 @@ export const ROUND_52: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT DEPT, SAL,\n       RANK() OVER (PARTITION BY DEPT ORDER BY SAL DESC) AS RNK\nFROM   EMP;"
+        "code": "SELECT DEPT, SAL,\n       RANK() OVER (\n         PARTITION BY DEPT\n         ORDER BY SAL DESC) AS RNK\nFROM   EMP;"
       }
     ]
   },
@@ -698,13 +721,13 @@ export const ROUND_52: QuizQuestion[] = [
     "number": 20,
     "title": "명령어와 분류가 올바르게 짝지어지지 않은 것은?",
     "options": [
-      "INSERT — DCL",
-      "SELECT — DML",
-      "CREATE — DDL",
-      "GRANT — DCL"
+      "REVOKE — TCL",
+      "MERGE — DML",
+      "SAVEPOINT — TCL",
+      "RENAME — DDL"
     ],
     "correctIndex": 0,
-    "explanation": "INSERT 는 DML 이므로 DCL 과 짝지어지지 않는다. ② SELECT 도 SQLD 에서는 DML(데이터 조회)로 분류한다. ③ CREATE 는 DDL, ④ GRANT 는 DCL 로 맞게 짝지어졌다.",
+    "explanation": "REVOKE 는 GRANT 로 준 권한을 회수하는 명령이라 DCL(데이터 제어어)이다. TCL 로 짝지은 ① 이 틀렸다. 정답은 ①번이다. ② MERGE 는 조건에 따라 INSERT·UPDATE 를 함께 하는 DML 이다. ③ SAVEPOINT 는 COMMIT·ROLLBACK 과 함께 트랜잭션을 다루는 TCL 이다. ④ RENAME 은 객체 이름을 바꾸는 DDL 이다. 분류가 중요한 이유: Oracle 에서 DDL·DCL 은 실행 전후로 자동 COMMIT 되어 ROLLBACK 으로 되돌릴 수 없다.",
     "_source": "authored"
   },
   {
@@ -714,20 +737,20 @@ export const ROUND_52: QuizQuestion[] = [
     "round": 52,
     "subject": "2과목",
     "number": 21,
-    "title": "아래 설명에 해당하는 집합 연산자는?",
+    "title": "A 의 값이 1, NULL, NULL, 2 이고 B 의 값이 NULL 하나일 때, 아래 SQL ㉠, ㉡, ㉢ 의 결과 행 수로 옳은 것은? (E 는 행이 없는 테이블)",
     "options": [
-      "UNION",
-      "UNION ALL",
-      "INTERSECT",
-      "EXCEPT"
+      "3, 3, 2",
+      "2, 4, 0",
+      "3, 4, 2",
+      "2, 3, 0"
     ],
     "correctIndex": 3,
-    "explanation": "첫 번째 결과 집합에서 두 번째 결과 집합에 존재하는 행을 제외하는 차집합 연산자는 EXCEPT(Oracle 의 MINUS) 이다. ① UNION 은 합집합, ② UNION ALL 은 중복을 포함한 합집합, ③ INTERSECT 는 교집합이다.",
+    "explanation": "MINUS 는 첫 번째 결과에서 두 번째 결과에 있는 값을 빼고 중복을 없앤다. 집합 연산은 NULL 끼리를 같은 값으로 보므로 ㉠ 은 A 의 NULL 이 모두 빠져 1, 2 의 2행이다. ㉡ 은 뺄 값이 없지만 중복은 없어져 1, NULL, 2 의 3행이다. ㉢ 의 NOT IN 은 'V <> NULL' 을 검사하는데 결과가 늘 UNKNOWN 이라 어떤 행도 남지 않아 0행이다. 같은 '빼기' 처럼 보여도 MINUS 와 NOT IN 은 NULL 을 다르게 다룬다. 정답은 ④번이다. ① 은 MINUS 가 NULL 을 빼지 못하고 NOT IN 이 NULL 만 뺀다고 본 것, ② 와 ③ 은 ㉡ 에서 중복이 남는다고 본 것이다.",
     "_source": "authored",
     "references": [
       {
-        "type": "text",
-        "content": "첫 번째 결과 집합에서 두 번째 결과 집합에 존재하는 행을 제외하고 반환한다."
+        "type": "sql",
+        "code": "-- ㉠\nSELECT V FROM A\nMINUS\nSELECT V FROM B;\n-- ㉡\nSELECT V FROM A\nMINUS\nSELECT V FROM E;\n-- ㉢\nSELECT V FROM A\nWHERE  V NOT IN (SELECT V FROM B);"
       }
     ]
   },
@@ -738,15 +761,15 @@ export const ROUND_52: QuizQuestion[] = [
     "round": 52,
     "subject": "2과목",
     "number": 22,
-    "title": "아래 NAMES 테이블에서 세 번째 문자가 'L' 인 단어를 찾는 LIKE 패턴으로 옳은 것은?",
+    "title": "아래 NAMES 테이블에서 세 번째 글자가 'L' 인 단어를 찾으려 한다. LIKE 패턴과 그 결과를 바르게 짝지은 것은?",
     "options": [
-      "'L%'",
-      "'%L'",
-      "'__L%'",
-      "'L__%'"
+      "'%L%' — HELLO, MILK, GULF",
+      "'__L' — HELLO, MILK, GULF",
+      "'__L%' — HELLO, MILK, GULF",
+      "'%L_' — HELLO, MILK, GULF"
     ],
     "correctIndex": 2,
-    "explanation": "LIKE 패턴에서 `_` 는 임의의 한 문자, `%` 는 0개 이상의 임의 문자를 의미한다. 따라서 \"세 번째 문자가 'L'\" 을 표현하려면 앞에 `_` 두 개를 두어 임의의 두 문자를 건너뛴 뒤 'L', 그 뒤에 `%` 로 임의 길이 문자열을 잇는 `'__L%'` 가 된다. ① 은 'L' 로 시작, ② 는 'L' 로 끝남, ④ 는 'L' 로 시작하는 세 글자 이상 단어를 찾는 패턴이라 의미가 다르다. 표에서 '__L%' 에 맞는 단어는 HELLO, MILK, GULF 다.",
+    "explanation": "_ 는 정확히 한 글자, % 는 0글자 이상이다. '__L%' 는 앞의 두 글자 다음 세 번째가 L 이고 그 뒤는 상관없으므로 HELLO, MILK, GULF 가 나온다. 정답은 ③번이다. ① '%L%' 는 L 이 어디든 있으면 되어 다섯 단어 모두 나온다. ② '__L' 은 세 번째가 L 인 정확히 세 글자 단어라 하나도 나오지 않는다. ④ '%L_' 는 끝에서 두 번째가 L 인 단어라 APPLE, HELLO, WORLD, MILK, GULF 다섯 개 모두 나온다.",
     "_source": "authored",
     "references": [
       {
@@ -772,11 +795,6 @@ export const ROUND_52: QuizQuestion[] = [
             "GULF"
           ]
         ]
-      },
-      {
-        "type": "sql",
-        "caption": "( ) 안에 들어갈 LIKE 패턴 고르기",
-        "code": "SELECT *\nFROM   NAMES\nWHERE  NAME LIKE ( );"
       }
     ]
   },
@@ -826,7 +844,7 @@ export const ROUND_52: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT SUM(COALESCE(C1, C2, C3)) FROM TAB1;"
+        "code": "SELECT SUM(COALESCE(C1, C2, C3))\nFROM TAB1;"
       }
     ]
   },
@@ -837,20 +855,20 @@ export const ROUND_52: QuizQuestion[] = [
     "round": 52,
     "subject": "2과목",
     "number": 24,
-    "title": "아래 SQL 이 오류를 일으키는 이유로 가장 적절한 것은?",
+    "title": "아래 SQL 은 WHERE 절에 집계 함수를 써서 오류가 난다. ㉠~㉢ 로 바꿨을 때 오류 없이 실행되는 것만 모두 고른 것은? (Oracle 기준)",
     "options": [
-      "WHERE 절은 GROUP BY 보다 먼저 평가되어 집계 함수를 쓸 수 없다",
-      "GROUP BY 절에 집계 함수를 쓸 수 없다",
-      "SELECT 절의 별칭은 WHERE 절에서 참조할 수 없다",
-      "ORDER BY 절은 별칭을 참조할 수 없다"
+      "㉠, ㉢",
+      "㉠",
+      "㉠, ㉡, ㉢",
+      "㉡, ㉢"
     ],
     "correctIndex": 0,
-    "explanation": "SQL 은 FROM → WHERE → GROUP BY → HAVING → SELECT → ORDER BY 순으로 평가된다. WHERE 는 그룹이 만들어지기 전에 행을 거르는 단계라 집계 함수를 쓸 수 없고, 집계 결과로 걸러내려면 GROUP BY 뒤의 HAVING 을 써야 한다. ② GROUP BY 절에는 집계 함수가 없고, ③ 이 SQL 은 WHERE 에서 별칭을 쓰지 않았으며, ④ ORDER BY 는 별칭을 쓸 수 있다.",
+    "explanation": "WHERE 는 그룹을 만들기 전에 행을 거르는 절이라 집계 함수를 쓸 수 없고, 그룹 조건은 HAVING 에 써야 한다. 그래서 ㉠ 은 된다. SELECT 절의 별칭은 SELECT 단계에서 생기는데 HAVING 은 그보다 먼저 처리되어 ㉡ 의 '합계' 를 알 수 없어 오류다. ORDER BY 는 SELECT 뒤에 처리되어 ㉢ 처럼 별칭을 쓸 수 있다. 정답은 ①번이다. ② 는 ORDER BY 에도 별칭을 못 쓴다고 본 것, ③ 과 ④ 는 HAVING 에서 별칭을 쓸 수 있다고 본 것이다.",
     "_source": "authored",
     "references": [
       {
         "type": "sql",
-        "code": "SELECT DEPTNO, SUM(SAL) AS 합계\nFROM   EMP\nWHERE  SUM(SAL) > 1000\nGROUP BY DEPTNO;"
+        "code": "SELECT DEPTNO, SUM(SAL) AS 합계\nFROM   EMP\nWHERE  SUM(SAL) > 1000\nGROUP  BY DEPTNO;\n-- ㉠ WHERE 를 지우고 GROUP BY 뒤에\n--    HAVING SUM(SAL) > 1000\n-- ㉡ WHERE 를 지우고 GROUP BY 뒤에\n--    HAVING 합계 > 1000\n-- ㉢ WHERE 를 지우고 GROUP BY 뒤에\n--    ORDER BY 합계"
       }
     ]
   },
@@ -861,15 +879,15 @@ export const ROUND_52: QuizQuestion[] = [
     "round": 52,
     "subject": "2과목",
     "number": 25,
-    "title": "아래 EMP 테이블에 대해 두 컬럼 A, B 의 값이 서로 다른 결과가 되는 SQL 은?",
+    "title": "SAL 에 NULL 이 있는 아래 EMP 에 대해, 두 칼럼 A, B 의 값이 서로 다른 SQL 은?",
     "options": [
-      "SELECT SUM(SAL) AS A, SUM(SAL) AS B FROM EMP;",
-      "SELECT AVG(SAL) AS A, AVG(SAL) AS B FROM EMP;",
-      "SELECT MAX(SAL) AS A, MIN(SAL) AS B FROM EMP;",
-      "SELECT COUNT(SAL) AS A, COUNT(SAL) AS B FROM EMP;"
+      "SELECT SUM(SAL) AS A, SUM(NVL(SAL, 0)) AS B FROM EMP;",
+      "SELECT MAX(SAL) AS A, MAX(NVL(SAL, 0)) AS B FROM EMP;",
+      "SELECT MIN(SAL) AS A, MIN(NVL(SAL, 0)) AS B FROM EMP;",
+      "SELECT COUNT(*) AS A, COUNT(EMPNO) AS B FROM EMP;"
     ],
     "correctIndex": 2,
-    "explanation": "MAX 와 MIN 은 각각 최댓값(5000)·최솟값(2000) 을 반환하므로 A 와 B 결과가 다르다. ① SUM/② AVG/④ COUNT 는 동일 함수를 두 번 호출하므로 A 와 B 가 같다.",
+    "explanation": "집계 함수는 NULL 을 빼고 계산한다. MIN(SAL) 은 NULL 을 빼고 가장 작은 3500 이지만, MIN(NVL(SAL, 0)) 은 NULL 이 0 으로 바뀌어 0 이 된다. 정답은 ③번이다. ① 합계는 NULL 을 빼든 0 으로 더하든 12000 으로 같다. ② 0 은 최댓값 5000 보다 작아 MAX 에 영향을 주지 않는다. ④ EMPNO 에는 NULL 이 없어 COUNT(EMPNO) 도 행 수 4 와 같다.",
     "_source": "authored",
     "references": [
       {
@@ -890,11 +908,11 @@ export const ROUND_52: QuizQuestion[] = [
           ],
           [
             "7003",
-            "2800"
+            "NULL"
           ],
           [
             "7004",
-            "2000"
+            "3500"
           ]
         ]
       }
@@ -1136,16 +1154,22 @@ export const ROUND_52: QuizQuestion[] = [
     "round": 52,
     "subject": "2과목",
     "number": 33,
-    "title": "SQL 의 특징으로 볼 수 없는 것은?",
+    "title": "아래 SQL 로 'SAL 이 300 이상인 사원 수' 를 구할 때, SQL 의 특징에 대한 설명으로 틀린 것은?",
     "options": [
-      "절차적(Procedural)",
-      "구조적(Structured)",
-      "집합적(Set-based)",
-      "선언적(Declarative)"
+      "SQL 은 어느 인덱스를 먼저 읽을지 같은 처리 순서를 사용자가 직접 정해야 결과가 나온다.",
+      "SQL 은 원하는 결과의 조건만 적고, 처리 방법은 옵티마이저가 정한다.",
+      "SQL 은 조건에 맞는 여러 행을 한 번에 집합으로 다룬다.",
+      "반복문으로 한 행씩 읽어 SAL 을 비교하고 개수를 더하는 방식은 절차적 처리다."
     ],
     "correctIndex": 0,
-    "explanation": "SQL 은 원하는 결과를 기술하면 처리 방법은 DBMS 가 결정하는 비절차적·선언적 언어다. 집합 단위로 데이터를 다루고 정해진 구문 구조를 따르므로 ②③④ 는 SQL 의 특징이 맞다.",
-    "_source": "authored"
+    "explanation": "SQL 은 무엇을 원하는지만 적는 선언적 언어다. 어떤 인덱스를 쓸지, 어떤 순서로 읽을지는 옵티마이저가 실행 계획으로 정한다. 사용자가 처리 순서를 꼭 정해야 한다는 ① 이 틀렸다. 정답은 ①번이다. ② 선언적, ③ 집합적 처리는 SQL 의 특징이다. ④ 처럼 한 행씩 반복하며 처리 순서를 직접 적는 것은 절차적 방식으로, PL/SQL 같은 절차형 언어가 이렇게 쓴다. 힌트로 실행 방법을 제안할 수는 있지만 결과를 얻는 데 꼭 필요한 것은 아니다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT COUNT(*)\nFROM   EMP\nWHERE  SAL >= 300;"
+      }
+    ]
   },
   {
     "id": 10433,
@@ -1208,7 +1232,7 @@ export const ROUND_52: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT SUM(연봉) FROM (\n  SELECT MAX(연봉) AS 연봉 FROM 사원 WHERE 부서 = 'A'\n  UNION\n  SELECT MAX(연봉) FROM 사원 WHERE 부서 = 'B'\n  UNION ALL\n  SELECT MIN(연봉) FROM 사원 WHERE 부서 = 'C'\n);"
+        "code": "SELECT SUM(연봉) FROM (\n  SELECT MAX(연봉) AS 연봉 FROM 사원\n   WHERE 부서 = 'A'\n  UNION\n  SELECT MAX(연봉) FROM 사원\n   WHERE 부서 = 'B'\n  UNION ALL\n  SELECT MIN(연봉) FROM 사원\n   WHERE 부서 = 'C'\n);"
       }
     ]
   },
@@ -1296,16 +1320,48 @@ export const ROUND_52: QuizQuestion[] = [
     "round": 52,
     "subject": "2과목",
     "number": 36,
-    "title": "NULL 을 포함한 컬럼에 대한 AVG 계산에 대한 설명으로 옳은 것은?",
+    "title": "아래 T 테이블에 SQL 을 실행했을 때, A 그룹의 ㉠·㉡ 값과 B 그룹의 ㉢ 값을 차례대로 나열한 것은?",
     "options": [
-      "AVG(컬럼) 과 AVG(NVL(컬럼, 0)) 은 항상 같다.",
-      "AVG(컬럼) 은 NULL 을 0 으로 처리하여 계산한다.",
-      "AVG(NVL(컬럼, 0)) 은 NULL 행을 제외하고 계산한다.",
-      "AVG(컬럼) 과 AVG(NVL(컬럼, 0)) 은 NULL 처리 방식이 달라 결과가 다를 수 있다."
+      "10, 10, NULL",
+      "5, 5, 0",
+      "10, 5, NULL",
+      "10, 5, 0"
     ],
     "correctIndex": 3,
-    "explanation": "AVG(컬럼) 은 NULL 행을 빼고 값이 있는 행만으로 평균을 구하지만, AVG(NVL(컬럼, 0)) 은 NULL 을 0 으로 바꿔 분모에도 포함하므로 결과가 다를 수 있다(④). 예를 들어 10, 20, NULL 이면 AVG 는 15, NVL 을 쓰면 10 이다. ①②③ 은 이 처리 방식을 반대로 설명했다. ※ 값이 모두 0 인 경우처럼 두 결과가 우연히 같을 수도 있어, ④ 를 '다를 수 있다' 로 다듬었다.",
-    "_source": "authored"
+    "explanation": "AVG(X) 는 NULL 을 빼고 계산한다. A 그룹은 10 하나만 남아 ㉠ 은 10 이다. ㉡ 은 NVL 로 NULL 을 먼저 0 으로 바꾼 뒤 평균을 내므로 (10 + 0) / 2 = 5 다. NULL 을 빼느냐 0 으로 세느냐에 따라 평균이 달라진다. B 그룹은 X 가 모두 NULL 이라 AVG(X) 가 NULL 이 되고, ㉢ 은 그 결과에 NVL 을 씌워 0 이 된다. 같은 B 그룹이라도 ㉡ 은 0 을 두 번 더해 평균 0 이 되고, ㉠ 은 NULL 로 남는다. 정답은 ④번이다. ① 은 NVL 이 평균에 영향을 주지 않는다고 본 것이고, ② 는 AVG(X) 도 NULL 을 0 으로 센다고 본 것, ③ 은 평균을 낸 뒤 씌운 NVL 은 효과가 없다고 본 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "caption": "T",
+        "headers": [
+          "G",
+          "X"
+        ],
+        "rows": [
+          [
+            "A",
+            "10"
+          ],
+          [
+            "A",
+            "NULL"
+          ],
+          [
+            "B",
+            "NULL"
+          ],
+          [
+            "B",
+            "NULL"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT G,\n       AVG(X)         AS ㉠,\n       AVG(NVL(X, 0)) AS ㉡,\n       NVL(AVG(X), 0) AS ㉢\nFROM T\nGROUP BY G;"
+      }
+    ]
   },
   {
     "id": 10436,
@@ -1400,16 +1456,31 @@ export const ROUND_52: QuizQuestion[] = [
     "round": 52,
     "subject": "2과목",
     "number": 38,
-    "title": "제약 조건 설명 중 옳지 않은 것은?",
+    "title": "아래 ERD 와 제약 조건에서 SQL ㉠, ㉡ 을 차례로 실행한 뒤 '부서 테이블의 행 수, 사원 1 의 부서코드, 과제 P1 의 부서코드' 로 옳은 것은? (각 문장은 실행 후 바로 COMMIT 한다)",
     "options": [
-      "하나의 테이블에 기본키(PK) 는 하나만 설정할 수 있다.",
-      "고유키(UNIQUE) 는 NULL 값을 허용한다.",
-      "CHECK 조건은 TRUE/FALSE 로 판별 가능한 식이어야 한다.",
-      "DEFAULT 는 값이 지정되면 기존 데이터에도 소급 적용된다."
+      "0, NULL, NULL",
+      "1, D1, D2",
+      "0, D1, NULL",
+      "1, D1, NULL"
     ],
     "correctIndex": 3,
-    "explanation": "DEFAULT 는 이후 INSERT 할 때 값을 주지 않은 경우에만 적용되고, 이미 저장된 행에는 소급되지 않는다. 기본키는 테이블당 하나(①), UNIQUE 는 NULL 허용(②), CHECK 는 참·거짓을 판별하는 식(③) 은 모두 맞으므로 정답은 ④ 이다.",
-    "_source": "authored"
+    "explanation": "ON DELETE SET NULL 은 부모 행을 지울 때 자식의 외래키 칼럼을 NULL 로 바꾸는 동작이다. ㉠ 에서 D1 을 지우려면 사원 1 의 부서코드를 NULL 로 바꿔야 하는데, 이 칼럼은 NOT NULL 이다. 두 제약이 충돌해 ㉠ 은 오류가 나고 D1 삭제도 취소된다. ERD 에서 사원과의 관계는 부서 쪽 끝이 || (반드시 하나)라서 이 NOT NULL 과 맞고, 과제와의 관계는 |o (없을 수 있음)이다. ㉡ 에서 D2 를 지우면 과제 P1 의 부서코드는 NULL 을 허용하므로 NULL 로 바뀌고 삭제가 성공한다. 그래서 부서는 D1 한 행이 남고, 사원 1 의 부서코드는 D1 그대로, P1 의 부서코드는 NULL 이다. 정답은 ④번이다. ① 은 NOT NULL 과의 충돌을 놓쳐 ㉠ 이 성공한다고 본 것이고, ③ 은 ㉠ 에서 부서만 지워지고 사원은 그대로 남는다고 본 것이다. ② 는 ON DELETE SET NULL 이 없는 것처럼 ㉡ 도 거부된다고 본 것이다. 필수 관계(NOT NULL 외래키)에는 SET NULL 대신 CASCADE 나 삭제 제한을 쓴다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "erd",
+        "caption": "부서·사원·과제 ERD",
+        "mermaid": "erDiagram\n    부서 ||..o{ 사원 : \"소속\"\n    부서 |o..o{ 과제 : \"담당\"\n    부서 {\n        string 부서코드 PK\n    }\n    사원 {\n        int 사번 PK\n        string 부서코드 FK\n    }\n    과제 {\n        string 과제코드 PK\n        string 부서코드 FK\n    }"
+      },
+      {
+        "type": "text",
+        "content": "사원.부서코드: NOT NULL, 외래키 ON DELETE SET NULL\n과제.부서코드: NULL 허용, 외래키 ON DELETE SET NULL\n\n부서: D1, D2\n사원: (1, D1)\n과제: (P1, D2)"
+      },
+      {
+        "type": "sql",
+        "code": "-- ㉠\nDELETE FROM 부서\n WHERE 부서코드 = 'D1';\n-- ㉡\nDELETE FROM 부서\n WHERE 부서코드 = 'D2';"
+      }
+    ]
   },
   {
     "id": 10438,
@@ -1418,16 +1489,35 @@ export const ROUND_52: QuizQuestion[] = [
     "round": 52,
     "subject": "2과목",
     "number": 39,
-    "title": "지정한 컬럼의 모든 부분집합 조합에 대해 집계를 산출하는 절은?",
+    "title": "아래 ERD 와 데이터에서 SQL 의 ㉮ 자리에 ㉠, ㉡, ㉢ 을 각각 넣었을 때 결과 행 수를 차례대로 나열한 것은?",
     "options": [
-      "ROLLUP",
-      "GROUPING SETS",
-      "GROUP BY",
-      "CUBE"
+      "11, 7, 5",
+      "9, 6, 6",
+      "8, 6, 4",
+      "9, 6, 4"
     ],
     "correctIndex": 3,
-    "explanation": "지정한 컬럼들의 모든 부분집합 조합에 대해 집계를 산출하는 절은 CUBE 이다. ① ROLLUP 은 계층적 소계만, ② GROUPING SETS 는 명시한 조합만 산출한다. ③ GROUP BY 는 지정한 컬럼 조합 하나만 집계한다.",
-    "_source": "authored"
+    "explanation": "먼저 일반 조인이라 매출이 없는 B2 는 결과에 들어오지 않는다. 남는 (지역, 매장) 조합은 (서울, S1), (서울, S2), (부산, B1) 의 3개다. ㉠ CUBE 는 두 칼럼의 모든 부분집합을 집계한다. (지역, 매장) 3행 + (지역) 2행 + (매장) 3행 + 전체 1행 = 9행이다. ㉡ ROLLUP 은 앞 칼럼부터 하나씩 줄여 가므로 (지역, 매장) 3행 + (지역) 2행 + 전체 1행 = 6행이다. ㉢ 은 적은 묶음만 집계해 3행 + 1행 = 4행이다. 정답은 ④번이다. ERD 에서 매장은 지역을 하나만 가지므로, CUBE 가 더 만드는 (매장) 소계 3행은 상세 행과 합계가 똑같다. 지역 → 매장처럼 계층이 있는 칼럼에는 ROLLUP 이면 충분하다. ① 은 매출이 없는 B2 까지 센 것이고, ② 는 ㉢ 의 () 를 묶음 2개로 본 것, ③ 은 CUBE 에서 전체 합계 행을 빠뜨린 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "erd",
+        "caption": "매장·매출 ERD",
+        "mermaid": "erDiagram\n    매장 ||..o{ 매출 : \"발생\"\n    매장 {\n        string 매장코드 PK\n        string 지역\n    }\n    매출 {\n        int 매출번호 PK\n        string 매장코드 FK\n        int 금액\n    }"
+      },
+      {
+        "type": "text",
+        "content": "매장: (S1, 서울), (S2, 서울), (B1, 부산), (B2, 부산)\n매출(매장코드, 금액): (S1, 100), (S1, 50), (S2, 70), (B1, 40)"
+      },
+      {
+        "type": "sql",
+        "code": "SELECT M.지역, M.매장코드,\n       SUM(R.금액)\nFROM 매장 M JOIN 매출 R\n  ON R.매장코드 = M.매장코드\nGROUP BY ㉮;"
+      },
+      {
+        "type": "text",
+        "content": "㉠ CUBE(M.지역, M.매장코드)\n㉡ ROLLUP(M.지역, M.매장코드)\n㉢ GROUPING SETS((M.지역, M.매장코드), ())"
+      }
+    ]
   },
   {
     "id": 10439,
@@ -1632,7 +1722,7 @@ export const ROUND_52: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT P.제품명, COUNT(L.라인번호) AS 라인수\nFROM   제품 P\n       LEFT OUTER JOIN 생산제품 S\n         ON P.제품번호 = S.제품번호\n       LEFT OUTER JOIN 생산라인 L\n         ON S.라인번호 = L.라인번호\n        AND L.라인명 = '1라인'\nGROUP BY P.제품명\nORDER BY P.제품명;"
+        "code": "SELECT P.제품명,\n       COUNT(L.라인번호) AS 라인수\nFROM   제품 P\n       LEFT OUTER JOIN 생산제품 S\n         ON P.제품번호 = S.제품번호\n       LEFT OUTER JOIN 생산라인 L\n         ON S.라인번호 = L.라인번호\n        AND L.라인명 = '1라인'\nGROUP BY P.제품명\nORDER BY P.제품명;"
       }
     ]
   },
@@ -1667,34 +1757,46 @@ export const ROUND_52: QuizQuestion[] = [
     "round": 52,
     "subject": "2과목",
     "number": 44,
-    "title": "아래 T 테이블에 대한 네 개의 AVG 계산식 중 결과가 서로 다른 것은?",
+    "title": "아래 T 테이블에 대한 SQL 의 결과로 옳은 것은? (㉠, ㉡, ㉢, ㉣ 순서)",
     "options": [
-      "SUM(NVL(COL, 0)) / COUNT(*)",
-      "SUM(COL) / COUNT(*)",
-      "AVG(NVL(COL, 0))",
-      "AVG(COL)"
+      "35, 35, 17.5, 30",
+      "40, 40, 30, 30",
+      "35, 40, 35, 30",
+      "35, 40, 17.5, 30"
     ],
     "correctIndex": 3,
-    "explanation": "AVG(COL) 은 NULL 을 자동 제외하여 (10+20)/2 = 15 를 반환한다. ① ② ③ 은 모두 NULL 을 0 으로 취급하거나 분모가 전체 행이라 (10+0+20)/3 = 10 으로 같은 값이 나온다.",
+    "explanation": "A + B 는 둘 중 하나라도 NULL 이면 NULL 이라 행마다 30, NULL, NULL, 40 이 된다. ㉠ AVG(A + B) 는 NULL 이 아닌 30, 40 의 평균이라 35 다. ㉡ 은 열마다 따로 평균을 낸다. AVG(A) 는 (10 + 20 + 30) / 3 = 20, AVG(B) 는 (20 + 30 + 10) / 3 = 20 이라 합이 40 이다. ㉢ SUM(A + B) 는 70 인데 COUNT(*) 는 NULL 행까지 4 라 17.5 다. ㉣ 은 SUM(A) 60 과 SUM(B) 60 을 더한 120 을 4 로 나눠 30 이다. 정답은 ④번이다. ① 은 ㉡ 도 행 단위 합의 평균과 같다고 본 것이고, ② 는 A + B 에서 NULL 을 0 처럼 더한 것, ③ 은 ㉢ 의 COUNT(*) 를 NULL 아닌 행 수(2)로 본 것이다.",
     "_source": "authored",
     "references": [
       {
         "type": "table",
-        "caption": "T 테이블",
+        "caption": "T",
         "headers": [
-          "COL"
+          "A",
+          "B"
         ],
         "rows": [
           [
-            "10"
+            "10",
+            "20"
           ],
           [
+            "NULL",
+            "30"
+          ],
+          [
+            "20",
             "NULL"
           ],
           [
-            "20"
+            "30",
+            "10"
           ]
         ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT AVG(A + B)               AS ㉠,\n       AVG(A) + AVG(B)          AS ㉡,\n       SUM(A + B) / COUNT(*)    AS ㉢,\n       (SUM(A) + SUM(B))\n         / COUNT(*)             AS ㉣\nFROM T;"
       }
     ]
   },
@@ -1812,7 +1914,7 @@ export const ROUND_52: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "MERGE INTO TGT T USING SRC S ON (T.ID = S.ID)\nWHEN MATCHED THEN UPDATE SET T.V = S.V\nWHEN NOT MATCHED THEN INSERT (ID, V) VALUES (S.ID, S.V);"
+        "code": "MERGE INTO TGT T USING SRC S\n  ON (T.ID = S.ID)\nWHEN MATCHED THEN\n  UPDATE SET T.V = S.V\nWHEN NOT MATCHED THEN\n  INSERT (ID, V) VALUES (S.ID, S.V);"
       }
     ]
   },
@@ -1922,15 +2024,21 @@ export const ROUND_52: QuizQuestion[] = [
     "round": 52,
     "subject": "2과목",
     "number": 50,
-    "title": "아래 설명 중 옳지 않은 것은?",
+    "title": "아래 CREATE TABLE ㉠~㉣ 중 오류가 발생하는 것만 모두 고른 것은? (Oracle 기준, ㉣ 은 ㉢ 다음에 실행)",
     "options": [
-      "기본키는 한 테이블에 두 개 이상일 수 있다.",
-      "고유키는 NULL 값을 허용한다.",
-      "외래키는 부모 테이블의 기본키를 참조한다.",
-      "CHECK 제약 조건은 특정 조건을 만족하는 값만 허용한다."
+      "㉠",
+      "㉠, ㉣",
+      "㉡",
+      "㉠, ㉡"
     ],
     "correctIndex": 0,
-    "explanation": "고유키(UNIQUE)는 NULL 을 허용하고(②), 외래키는 부모 테이블의 기본키(또는 UNIQUE 키)를 참조하며(③), CHECK 는 조건을 만족하는 값만 허용한다(④). 기본키는 한 테이블에 하나만 만들 수 있고, 여러 컬럼으로 구성해도(복합 키) 하나의 기본키이므로 ① 이 옳지 않다.",
-    "_source": "authored"
+    "explanation": "기본키는 테이블마다 하나만 둘 수 있어 칼럼 두 개에 각각 PRIMARY KEY 를 단 ㉠ 은 오류다. 여러 칼럼으로 기본키를 만들려면 ㉡ 처럼 PRIMARY KEY (A, B) 로 한 번에 지정한다. UNIQUE 는 한 테이블에 여러 개 둘 수 있어 ㉢ 은 된다. 외래키는 부모의 기본키뿐 아니라 UNIQUE 칼럼도 참조할 수 있어 ㉣ 도 된다. 정답은 ①번이다. ② 는 외래키가 기본키만 참조할 수 있다고 본 것, ③ 과 ④ 는 복합 기본키를 두 개의 기본키로 본 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "sql",
+        "code": "-- ㉠\nCREATE TABLE T1 (\n  A NUMBER PRIMARY KEY,\n  B NUMBER PRIMARY KEY);\n-- ㉡\nCREATE TABLE T2 (\n  A NUMBER, B NUMBER,\n  PRIMARY KEY (A, B));\n-- ㉢\nCREATE TABLE T3 (\n  A NUMBER UNIQUE,\n  B NUMBER UNIQUE);\n-- ㉣\nCREATE TABLE T4 (\n  X NUMBER REFERENCES T3(B));"
+      }
+    ]
   }
 ];

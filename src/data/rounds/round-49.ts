@@ -35,7 +35,7 @@ export const ROUND_49: QuizQuestion[] = [
     "round": 49,
     "subject": "1과목",
     "number": 2,
-    "title": "속성이 가질 수 있는 데이터 값의 범위를 무엇이라 하는가?",
+    "title": "주문수량·재고수량·입고수량 속성이 모두 '0 이상의 정수, NULL 불가' 라는 같은 규칙을 따르게 하려 한다. 이때 정의해 여러 속성에 함께 적용하는 것은?",
     "options": [
       "관계",
       "식별자",
@@ -43,7 +43,7 @@ export const ROUND_49: QuizQuestion[] = [
       "인스턴스"
     ],
     "correctIndex": 2,
-    "explanation": "속성이 가질 수 있는 값의 범위를 도메인이라고 한다(③). 성별 속성이라면 '남'·'여' 두 값만 올 수 있다는 식으로 정하고, 데이터 타입과 길이, NULL 허용 여부 같은 제약도 함께 정의한다. ① 관계는 엔터티와 엔터티 사이의 연관이고, ② 식별자는 인스턴스 하나하나를 구분하는 속성이며, ④ 인스턴스는 엔터티에 속한 개별 데이터 한 건이다.",
+    "explanation": "도메인은 속성이 가질 수 있는 값의 범위로, 데이터 타입·크기·허용 값·NULL 허용 여부 같은 규칙을 묶은 것이다. '수량' 도메인을 한 번 정의해 세 속성에 적용하면 같은 규칙을 일관되게 지킬 수 있다. 정답은 ③번이다. 관계는 엔터티 사이의 연관, 식별자는 인스턴스를 구별하는 속성, 인스턴스는 엔터티의 개별 행이라 값의 규칙을 정하는 것과는 관계가 없다.",
     "_source": "authored"
   },
   {
@@ -53,7 +53,7 @@ export const ROUND_49: QuizQuestion[] = [
     "round": 49,
     "subject": "1과목",
     "number": 3,
-    "title": "주식별자를 구성하는 속성 중 하나라도 제거되면 유일성을 만족하지 못하는 특성은?",
+    "title": "학생 엔터티에서 학번만으로 모든 학생이 구별되는데, 주식별자를 '학번 + 이름' 으로 정했다. 이 주식별자가 어긴 특성은?",
     "options": [
       "대표성",
       "유일성",
@@ -61,8 +61,36 @@ export const ROUND_49: QuizQuestion[] = [
       "불변성"
     ],
     "correctIndex": 2,
-    "explanation": "주식별자는 유일성·최소성·불변성·존재성을 갖춰야 한다. 그중 최소성은 유일성을 만족하는 데 꼭 필요한 속성만으로 구성한다는 뜻이라, 구성 속성을 하나라도 빼면 유일성이 깨진다(③). ② 유일성은 주식별자로 모든 인스턴스를 서로 구분할 수 있다는 성질이고, ④ 불변성은 한번 정해진 값이 바뀌지 않아야 한다는 성질이다. ① 대표성은 주식별자의 특성이 아니라, 식별자를 대표성 여부에 따라 주식별자와 보조식별자로 나눌 때 쓰는 기준이다.",
-    "_source": "authored"
+    "explanation": "최소성은 주식별자를 이루는 속성이 유일성을 만족하는 데 꼭 필요한 만큼만 있어야 한다는 특성이다. 학번만으로 이미 모든 행이 구별되므로 이름을 더한 '학번 + 이름' 은 이름을 빼도 유일성이 유지되어 최소성을 어긴다. 정답은 ③번이다. 학번 + 이름 은 여전히 모든 학생을 구별하므로 유일성은 만족하고(②), 대표성(①)·불변성(④)과도 관계가 없다. 이름은 김처럼 겹칠 수 있어 혼자서는 식별자가 될 수 없다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "caption": "학생",
+        "headers": [
+          "학번",
+          "이름",
+          "학과"
+        ],
+        "rows": [
+          [
+            "2501",
+            "김",
+            "컴공"
+          ],
+          [
+            "2502",
+            "이",
+            "경영"
+          ],
+          [
+            "2503",
+            "김",
+            "컴공"
+          ]
+        ]
+      }
+    ]
   },
   {
     "id": 10553,
@@ -85,7 +113,7 @@ export const ROUND_49: QuizQuestion[] = [
       {
         "type": "erd",
         "caption": "학과·학생·수강·과목·교수 ERD",
-        "mermaid": "erDiagram\n    학과 |o--o{ 학생 : \"소속\"\n    학생 ||--|{ 수강 : \"신청\"\n    과목 ||--o{ 수강 : \"개설\"\n    교수 ||--o{ 과목 : \"담당\"\n    학생 {\n        string 학번 PK\n        string 학과코드 FK\n    }\n    수강 {\n        string 학번 PK,FK\n        string 과목코드 PK,FK\n        string 수강학기 PK\n    }\n    과목 {\n        string 과목코드 PK\n        string 교수번호 FK\n    }"
+        "mermaid": "erDiagram\n    학과 |o..o{ 학생 : \"소속\"\n    학생 ||--|{ 수강 : \"신청\"\n    과목 ||--o{ 수강 : \"개설\"\n    교수 ||..o{ 과목 : \"담당\"\n    학생 {\n        string 학번 PK\n        string 학과코드 FK\n    }\n    수강 {\n        string 학번 PK,FK\n        string 과목코드 PK,FK\n        string 수강학기 PK\n    }\n    과목 {\n        string 과목코드 PK\n        string 교수번호 FK\n    }"
       }
     ]
   },
@@ -169,20 +197,21 @@ export const ROUND_49: QuizQuestion[] = [
     "round": 49,
     "subject": "1과목",
     "number": 8,
-    "title": "아래 설명에 해당하는 엔터티 분류는?",
+    "title": "아래 쇼핑몰 ERD 에서 발생 시점에 따른 행위 엔터티와 그 근거를 바르게 짝지은 것은?",
     "options": [
-      "기본 엔터티",
-      "중심 엔터티",
-      "행위 엔터티",
-      "개념 엔터티"
+      "회원 — 부모 엔터티 없이 생기고 주문의 부모가 된다.",
+      "상품 — 상품분류라는 부모 엔터티에서 생긴다.",
+      "주문상세 — 주문과 상품 두 부모에서 생기고, 주문할 때마다 행이 늘어난다.",
+      "상품분류 — 행이 거의 늘지 않고 내용도 잘 바뀌지 않는다."
     ],
     "correctIndex": 2,
-    "explanation": "행위 엔터티(Active Entity)는 두 개 이상의 부모 엔터티의 행위·트랜잭션으로부터 발생하며, 분석 초기에는 잘 드러나지 않다가 상세 설계 단계에서 식별된다. ① 기본 엔터티는 업무에 원래 존재하는 독립 엔터티, ② 중심 엔터티는 기본 엔터티에서 파생된 핵심 엔터티, ④ 개념 엔터티는 추상적·관념적 단위이다.",
+    "explanation": "행위 엔터티는 두 개 이상의 부모 엔터티에서 업무 행위의 결과로 생기며, 내용이 자주 바뀌거나 데이터가 계속 늘어난다. 주문상세는 주문과 상품 두 부모에서 생기고 주문마다 쌓이므로 행위 엔터티다. 정답은 ③번이다. ① 회원과 ④ 상품분류는 다른 엔터티 없이 먼저 존재하는 기본 엔터티의 특징이다. ② 상품은 부모가 하나(상품분류)이고 주문상세의 부모가 되므로 행위 엔터티의 근거가 되지 않는다. 주문은 회원에서 생겨 주문상세의 부모가 되는 중심 엔터티다.",
     "_source": "authored",
     "references": [
       {
-        "type": "text",
-        "content": "두 개 이상의 부모 엔터티로부터 발생되고 자주 내용이 변경되거나 데이터량이 증가하는 엔터티. 분석 초기 단계에서는 잘 나타나지 않으며 상세 설계 단계나 프로세스 상관 모델링 과정에서 드러난다."
+        "type": "erd",
+        "caption": "쇼핑몰 ERD",
+        "mermaid": "erDiagram\n    회원 ||..o{ 주문 : \"주문함\"\n    주문 ||--|{ 주문상세 : \"포함\"\n    상품 ||..o{ 주문상세 : \"담김\"\n    상품분류 ||..o{ 상품 : \"분류\""
       }
     ]
   },
@@ -217,15 +246,15 @@ export const ROUND_49: QuizQuestion[] = [
     "round": 49,
     "subject": "1과목",
     "number": 10,
-    "title": "두 엔터티 간 관계에서 참여자의 수를 표현하는 것은?",
+    "title": "'한 부서에는 사원이 여러 명 있을 수 있고, 사원은 한 부서에만 속한다' 는 업무 규칙이 정하는 관계의 요소는?",
     "options": [
-      "관계차성(Optionality)",
+      "관계선택사양(Optionality)",
       "관계차수(Cardinality)",
       "관계명(Relationship Name)",
       "관계속성(Relationship Attribute)"
     ],
     "correctIndex": 1,
-    "explanation": "관계차수(Cardinality)는 두 엔터티 사이에서 관계에 참여하는 인스턴스 수를 나타내며 1:1, 1:M, M:N 으로 표현한다(②). IE 표기에서는 `|` 가 하나, 까마귀발(`<`)이 여럿을 뜻한다. `o` 는 참여가 필수가 아님(0 가능)을 나타내는 ① 관계선택사양(Optionality) 기호이고, ③ 관계명은 관계의 이름이다. ④ 관계속성은 관계 표기의 3요소에 들지 않는다.",
+    "explanation": "관계차수는 두 엔터티의 관계에 참여하는 인스턴스의 수로, 1:1, 1:M, M:N 으로 나타낸다. 이 규칙은 부서 하나에 사원 여럿, 사원 하나에 부서 하나라는 수를 정하므로 1:M 관계차수다. 정답은 ②번이다. 관계선택사양(①)은 참여가 필수인지 선택인지('반드시', '때때로'), 관계명(③)은 '소속된다' 같은 관계의 이름이다. 관계속성(④)은 관계 표기 요소에 들지 않는다.",
     "_source": "authored"
   },
   {
@@ -338,44 +367,45 @@ export const ROUND_49: QuizQuestion[] = [
     "round": 49,
     "subject": "2과목",
     "number": 14,
-    "title": "아래 EMP 테이블에 대해 순방향 계층형 쿼리(부모 → 자식)를 구성하는 SQL 로 옳은 것은?",
+    "title": "아래 EMP 에 대한 계층형 쿼리와 그 결과를 바르게 설명한 것은? (Oracle 기준)",
     "options": [
-      "SELECT * FROM EMP START WITH MANAGER_NO IS NULL CONNECT BY PRIOR EMP_NO = MANAGER_NO;",
-      "SELECT * FROM EMP START WITH MANAGER_NO IS NULL CONNECT BY PRIOR MANAGER_NO = EMP_NO;",
-      "SELECT * FROM EMP START WITH MANAGER_NO IS NULL CONNECT BY EMP_NO = MANAGER_NO;",
-      "SELECT * FROM EMP START WITH MANAGER_NO IS NULL CONNECT BY PRIOR EMP_NO = PRIOR MANAGER_NO;"
+      "START WITH MANAGER_NO IS NULL CONNECT BY PRIOR EMP_NO = MANAGER_NO — KING 부터 아래로 4행, LEVEL 은 최대 3",
+      "START WITH MANAGER_NO IS NULL CONNECT BY PRIOR MANAGER_NO = EMP_NO — KING 부터 아래로 4행",
+      "START WITH EMP_NO = 3 CONNECT BY PRIOR EMP_NO = MANAGER_NO — SCOTT 부터 위로 KING 까지 3행",
+      "START WITH MANAGER_NO = 1 CONNECT BY PRIOR EMP_NO = MANAGER_NO — KING 을 포함해 4행"
     ],
     "correctIndex": 0,
-    "explanation": "`PRIOR` 가 붙은 컬럼은 바로 앞에 찾은 행(부모)의 값이다. ① `PRIOR EMP_NO = MANAGER_NO` 는 부모의 EMP_NO 를 MANAGER_NO 로 가진 행, 곧 자식을 찾으므로 100 → 200·300 → 400·500 순방향으로 전개된다. ② 는 부모의 MANAGER_NO 를 EMP_NO 로 가진 행을 찾는 역방향이라 루트 100(MANAGER_NO 가 NULL)에서 더 내려가지 못한다. ③ 은 PRIOR 가 없어 앞 행과 연결되지 않고 EMP_NO = MANAGER_NO 인 행도 없으며, ④ 는 앞 행의 컬럼끼리만 비교해 자식을 찾지 못하므로 ②③④ 모두 루트 100 한 행만 나온다.",
+    "explanation": "PRIOR 가 붙은 쪽이 이미 찾은(부모) 행이다. PRIOR EMP_NO = MANAGER_NO 는 앞 행의 사원번호를 관리자로 둔 행을 찾아 아래로 내려가는 순방향이다. KING(1) → JONES·BLAKE(2) → SCOTT(3) 으로 4행, LEVEL 최대 3 이다. 정답은 ①번이다. ② 는 역방향이라 KING 의 관리자를 찾는데 없으므로 KING 1행뿐이다. ③ 은 순방향이라 SCOTT 아래를 찾는데 부하가 없어 1행이다. ④ 는 시작 행이 MANAGER_NO = 1 인 JONES, BLAKE 라 KING 은 빠지고 SCOTT 까지 3행이다.",
     "_source": "authored",
     "references": [
       {
         "type": "table",
-        "caption": "EMP 테이블",
+        "caption": "EMP",
         "headers": [
           "EMP_NO",
+          "ENAME",
           "MANAGER_NO"
         ],
         "rows": [
           [
-            "100",
+            "1",
+            "KING",
             "NULL"
           ],
           [
-            "200",
-            "100"
+            "2",
+            "JONES",
+            "1"
           ],
           [
-            "300",
-            "100"
+            "3",
+            "SCOTT",
+            "2"
           ],
           [
-            "400",
-            "200"
-          ],
-          [
-            "500",
-            "300"
+            "4",
+            "BLAKE",
+            "1"
           ]
         ]
       }
@@ -483,7 +513,7 @@ export const ROUND_49: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT ID FROM TBL\nGROUP BY ID\nHAVING COUNT(*) = 2\nORDER BY (CASE WHEN ID = 999 THEN 0 ELSE ID END);"
+        "code": "SELECT ID FROM TBL\nGROUP BY ID\nHAVING COUNT(*) = 2\nORDER BY (CASE WHEN ID = 999 THEN 0\n               ELSE ID END);"
       }
     ]
   },
@@ -494,15 +524,15 @@ export const ROUND_49: QuizQuestion[] = [
     "round": 49,
     "subject": "2과목",
     "number": 17,
-    "title": "아래 두 테이블에 대해 오류가 발생하는 INNER JOIN SQL 은?",
+    "title": "아래 두 테이블에 대해 Oracle 에서 오류가 발생하는 SQL 은?",
     "options": [
-      "SELECT * FROM TEAM A INNER JOIN STADIUM B ON A.ID = B.ID;",
-      "SELECT * FROM TEAM A INNER JOIN STADIUM B USING(ID);",
+      "SELECT * FROM TEAM A JOIN STADIUM B ON A.ID = B.ID;",
+      "SELECT ID, A.COL1 FROM TEAM A JOIN STADIUM B USING (ID);",
       "SELECT * FROM TEAM A NATURAL JOIN STADIUM B;",
-      "SELECT * FROM TEAM A INNER JOIN STADIUM B ON (ID);"
+      "SELECT A.ID FROM TEAM A JOIN STADIUM B USING (ID);"
     ],
     "correctIndex": 3,
-    "explanation": "ON 절에는 A.ID = B.ID 같은 조건식을 써야 하며, ON (ID) 처럼 컬럼명만 쓰면 문법 오류다(④). 컬럼명만 쓰는 것은 USING(ID)(②)이고, ON A.ID = B.ID(①)와 NATURAL JOIN(③, 같은 이름 컬럼 ID 로 자동 조인)은 정상 실행된다.",
+    "explanation": "USING 이나 NATURAL JOIN 으로 묶은 칼럼은 두 테이블의 칼럼이 하나로 합쳐지므로 Oracle 에서는 테이블 별칭을 붙일 수 없다. ④ 의 A.ID 는 오류다(ORA-25154). 정답은 ④번이다. ② 는 USING 칼럼 ID 에 별칭을 붙이지 않았고, COL1 은 USING 칼럼이 아니라 A.COL1 처럼 별칭을 붙여도 된다. ③ 은 이름이 같은 ID 하나로 조인한다. ① 은 ON 절의 일반 조인이다. PostgreSQL 은 USING 칼럼에도 별칭을 허용해 ④ 가 실행된다.",
     "_source": "authored",
     "references": [
       {
@@ -612,12 +642,12 @@ export const ROUND_49: QuizQuestion[] = [
       {
         "type": "sql",
         "caption": "가",
-        "code": "SELECT A.EMP_NO, A.ENAME\nFROM   EMP A\nWHERE  EXISTS (SELECT 'X' FROM EMP B\n               WHERE  A.MGR_NO = B.EMP_NO\n                 AND  B.SAL <= 3000);"
+        "code": "SELECT A.EMP_NO, A.ENAME\nFROM   EMP A\nWHERE  EXISTS\n       (SELECT 'X' FROM EMP B\n         WHERE A.MGR_NO = B.EMP_NO\n           AND B.SAL <= 3000);"
       },
       {
         "type": "sql",
         "caption": "나",
-        "code": "SELECT A.EMP_NO, A.ENAME\nFROM   EMP A\nWHERE  A.MGR_NO IN (SELECT B.EMP_NO FROM EMP B\n                    WHERE  B.SAL <= 3000);"
+        "code": "SELECT A.EMP_NO, A.ENAME\nFROM   EMP A\nWHERE  A.MGR_NO IN\n       (SELECT B.EMP_NO FROM EMP B\n         WHERE B.SAL <= 3000);"
       },
       {
         "type": "sql",
@@ -627,7 +657,7 @@ export const ROUND_49: QuizQuestion[] = [
       {
         "type": "sql",
         "caption": "라",
-        "code": "SELECT A.EMP_NO, A.ENAME\nFROM   EMP A\nWHERE  NOT EXISTS (SELECT 'X' FROM EMP B\n                   WHERE  A.MGR_NO = B.EMP_NO\n                     AND  B.SAL > 3000);"
+        "code": "SELECT A.EMP_NO, A.ENAME\nFROM   EMP A\nWHERE  NOT EXISTS\n       (SELECT 'X' FROM EMP B\n         WHERE A.MGR_NO = B.EMP_NO\n           AND B.SAL > 3000);"
       }
     ]
   },
@@ -695,7 +725,7 @@ export const ROUND_49: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT A, B FROM T1 WHERE (A, B) IN (SELECT A, B FROM T2);"
+        "code": "SELECT A, B FROM T1\nWHERE (A, B) IN\n      (SELECT A, B FROM T2);"
       }
     ]
   },
@@ -761,20 +791,60 @@ export const ROUND_49: QuizQuestion[] = [
     "round": 49,
     "subject": "2과목",
     "number": 21,
-    "title": "아래 SQL 의 ROLLUP 컬럼 순서에 대한 설명으로 옳은 것은?",
+    "title": "아래 학생 테이블에서 SQL 의 ㉮ 자리에 ㉠, ㉡, ㉢ 을 각각 넣었을 때 결과 행 수를 차례대로 나열한 것은?",
     "options": [
-      "ROLLUP 에 컬럼 순서는 의미가 없다.",
-      "첫 번째 컬럼 기준으로 순차 집계된다.",
-      "컬럼 순서에 따라 집계 레벨이 달라진다.",
-      "ROLLUP 은 한 번의 집계만 수행한다."
+      "7, 7, 5",
+      "8, 7, 5",
+      "7, 8, 5",
+      "7, 8, 7"
     ],
     "correctIndex": 2,
-    "explanation": "ROLLUP(고객등급, 지역, 상품) 은 (고객등급, 지역, 상품), (고객등급, 지역), (고객등급), () 네 단위로 집계한다. 맨 오른쪽 컬럼부터 하나씩 빼 가며 소계를 내기 때문에, ROLLUP(지역, 고객등급, 상품) 처럼 순서를 바꾸면 (지역) 소계가 생기고 (고객등급) 소계는 사라진다. 순서가 집계 단위를 정하므로 ③ 이 옳다. ① 순서가 바뀌면 결과가 달라지고, ② 첫 번째 컬럼부터가 아니라 오른쪽 컬럼부터 하나씩 빼며 소계를 만들며, ④ 여러 단계의 집계를 한 번에 만든다.",
+    "explanation": "(학과, 학년) 조합은 CS-1, CS-2, CS-3, EE-1 의 4개다(학번 1 과 5 는 같은 조합). ㉠ 은 (학과, 학년) 4행 + 학과 소계 2행(CS, EE) + 전체 1행 = 7행이다. ㉡ 은 순서가 바뀌어 (학년, 학과) 4행 + 학년 소계 3행(1, 2, 3학년) + 전체 1행 = 8행이다. 같은 칼럼이라도 ROLLUP 은 앞에 쓴 칼럼 기준으로 소계를 내므로 순서에 따라 결과가 달라진다. ㉢ GROUPING SETS(학과, 학년) 은 학과별 2행과 학년별 3행만 내고 상세 행과 전체 합계는 없어 5행이다. 정답은 ③번이다. ① 은 ROLLUP 의 순서가 결과에 영향이 없다고 본 것, ② 는 두 순서의 소계를 바꿔 센 것, ④ 는 GROUPING SETS 도 ROLLUP 처럼 전체 합계와 상세 행을 낸다고 본 것이다.",
     "_source": "authored",
     "references": [
       {
+        "type": "table",
+        "caption": "학생",
+        "headers": [
+          "학번",
+          "학과",
+          "학년"
+        ],
+        "rows": [
+          [
+            "1",
+            "CS",
+            "1"
+          ],
+          [
+            "2",
+            "CS",
+            "2"
+          ],
+          [
+            "3",
+            "CS",
+            "3"
+          ],
+          [
+            "4",
+            "EE",
+            "1"
+          ],
+          [
+            "5",
+            "CS",
+            "1"
+          ]
+        ]
+      },
+      {
         "type": "sql",
-        "code": "SELECT 고객등급, 지역, 상품, SUM(매출)\nFROM   판매\nGROUP BY ROLLUP(고객등급, 지역, 상품);"
+        "code": "SELECT 학과, 학년, COUNT(*)\nFROM 학생\nGROUP BY ㉮;"
+      },
+      {
+        "type": "text",
+        "content": "㉠ ROLLUP(학과, 학년)\n㉡ ROLLUP(학년, 학과)\n㉢ GROUPING SETS(학과, 학년)"
       }
     ]
   },
@@ -890,36 +960,80 @@ export const ROUND_49: QuizQuestion[] = [
     "round": 49,
     "subject": "2과목",
     "number": 24,
-    "title": "아래 결과(첫 행은 0, 그 이후 직전 행 값) 를 반환하는 윈도우 함수로 옳은 것은?",
+    "title": "아래 결과(부서마다 첫 행은 0, 그 뒤는 같은 부서 직전 행 값)를 반환하는 윈도우 함수로 옳은 것은?",
     "options": [
-      "LEAD(COL1, 1, 0) OVER(ORDER BY COL1)",
-      "LAG(COL1, 1, NULL) OVER(ORDER BY COL1)",
+      "LEAD(COL1, 1, 0) OVER(PARTITION BY DEPT ORDER BY COL1)",
       "LAG(COL1, 1, 0) OVER(ORDER BY COL1)",
-      "FIRST_VALUE(COL1) OVER(ORDER BY COL1)"
+      "LAG(COL1, 1, 0) OVER(PARTITION BY DEPT ORDER BY COL1)",
+      "LAG(COL1, 2, 0) OVER(PARTITION BY DEPT ORDER BY COL1)"
     ],
     "correctIndex": 2,
-    "explanation": "LAG(COL1, 1, 0) 은 한 행 앞의 COL1 값을 가져오고, 앞 행이 없는 첫 행에는 세 번째 인자로 준 0 을 돌려준다. 그래서 결과가 0, 100, 200 이다(③). ① LEAD 는 다음 행 값을 가져와 200, 300, 0 이 되고, ② 는 기본값이 NULL 이라 첫 행이 NULL 이며, ④ FIRST_VALUE 는 모든 행에 첫 값 100 을 돌려준다.",
+    "explanation": "LAG(칼럼, n, 기본값) 은 n 행 앞의 값을 가져오고 앞 행이 없으면 기본값을 돌려준다. 부서마다 따로 세려면 PARTITION BY DEPT 가 있어야 한다. 정답은 ③번이다. ② 는 부서 구분 없이 COL1 순(100, 150, 200, 250, 300)으로 보므로 A-200 이 150, B-150 이 100 이 된다. ④ 는 두 행 앞이라 A-200 이 0, A-300 이 100 이 된다. ① LEAD 는 다음 행 값이라 A-100 이 200 이 된다.",
     "_source": "authored",
     "references": [
       {
         "type": "table",
-        "caption": "출력 결과 (COL1, 함수 결과)",
+        "caption": "T 테이블",
         "headers": [
-          "COL1",
-          "함수 결과"
+          "DEPT",
+          "COL1"
         ],
         "rows": [
           [
+            "A",
+            "100"
+          ],
+          [
+            "A",
+            "200"
+          ],
+          [
+            "A",
+            "300"
+          ],
+          [
+            "B",
+            "150"
+          ],
+          [
+            "B",
+            "250"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "출력 결과 (DEPT, COL1 순)",
+        "headers": [
+          "DEPT",
+          "COL1",
+          "결과"
+        ],
+        "rows": [
+          [
+            "A",
             "100",
             "0"
           ],
           [
+            "A",
             "200",
             "100"
           ],
           [
+            "A",
             "300",
             "200"
+          ],
+          [
+            "B",
+            "150",
+            "0"
+          ],
+          [
+            "B",
+            "250",
+            "150"
           ]
         ]
       }
@@ -1061,7 +1175,7 @@ export const ROUND_49: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT 고객번호, 고객명, 매출액,\n       RANK() OVER(ORDER BY 매출액 DESC) AS 순위\nFROM   ( SELECT A.고객번호,\n                MAX(A.고객명) AS 고객명,\n                SUM(B.매출액) AS 매출액\n         FROM   고객 A INNER JOIN 월별매출 B\n         ON     A.고객번호 = B.고객번호\n         GROUP BY A.고객번호 )\nORDER BY 순위;"
+        "code": "SELECT 고객번호, 고객명, 매출액,\n       RANK() OVER(\n         ORDER BY 매출액 DESC) AS 순위\nFROM ( SELECT A.고객번호,\n              MAX(A.고객명) AS 고객명,\n              SUM(B.매출액) AS 매출액\n       FROM   고객 A\n              INNER JOIN 월별매출 B\n       ON     A.고객번호 = B.고객번호\n       GROUP BY A.고객번호 )\nORDER BY 순위;"
       }
     ]
   },
@@ -1136,7 +1250,7 @@ export const ROUND_49: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT ENAME, DEPTNO, SAL,\n       RANK()       OVER (PARTITION BY DEPTNO ORDER BY SAL DESC) AS R1,\n       DENSE_RANK() OVER (PARTITION BY DEPTNO ORDER BY SAL DESC) AS R2\nFROM   EMP;"
+        "code": "SELECT ENAME, DEPTNO, SAL,\n       RANK() OVER (\n         PARTITION BY DEPTNO\n         ORDER BY SAL DESC) AS R1,\n       DENSE_RANK() OVER (\n         PARTITION BY DEPTNO\n         ORDER BY SAL DESC) AS R2\nFROM   EMP;"
       }
     ]
   },
@@ -1227,20 +1341,24 @@ export const ROUND_49: QuizQuestion[] = [
     "round": 49,
     "subject": "2과목",
     "number": 28,
-    "title": "B_USER 가 아래 작업을 수행할 수 있도록 부여하는 DCL 로 가장 적절한 것은?",
+    "title": "A_USER 가 아래처럼 권한을 준 뒤 B_USER 가 SQL ㉠~㉤ 을 실행했다. 성공하는 것만 모두 고른 것은? (B_USER 에게는 T 라는 테이블이나 시노님이 없다)",
     "options": [
-      "GRANT SELECT, UPDATE TO B_USER;",
-      "REVOKE SELECT ON A_USER.TB_A FROM B_USER;",
-      "DENY UPDATE ON A_USER.TB_A TO B_USER;",
-      "GRANT SELECT, UPDATE ON A_USER.TB_A TO B_USER;"
+      "㉠",
+      "㉠, ㉡, ㉢",
+      "㉠, ㉡, ㉤",
+      "㉠, ㉡"
     ],
     "correctIndex": 3,
-    "explanation": "UPDATE ... WHERE COL2 = 3 은 조건을 평가하려고 테이블을 읽어야 하므로 UPDATE 권한과 함께 SELECT 권한도 필요하다. 객체 권한은 GRANT 권한 ON 소유자.객체 TO 사용자 형식으로 준다(④). ① 은 ON 객체가 없어 문법 오류, ② 는 권한을 회수하는 구문, ③ DENY 는 Oracle 문법이 아니며 권한을 막는 쪽이다.",
+    "explanation": "객체 권한은 'GRANT 권한 ON 소유자.객체 TO 사용자' 로 준다. UPDATE 는 칼럼을 지정해 그 칼럼만 고칠 수 있게 줄 수도 있다. ㉠ 은 SELECT 권한이 있어 성공한다. ㉡ 은 UPDATE (COL1) 권한 범위 안이라 성공한다. ㉢ 의 COL2 는 받은 칼럼이 아니라 권한 부족으로 실패한다. ㉣ 은 DELETE 권한을 받지 않아 실패한다. ㉤ 은 소유자를 적지 않아 B_USER 자신의 T 를 찾는데, 그런 테이블이나 시노님이 없으므로 실패한다. 정답은 ④번이다. ① 은 칼럼 단위 UPDATE 권한이 동작하지 않는다고 본 것이고, ② 는 칼럼을 지정해도 모든 칼럼을 고칠 수 있다고 본 것, ③ 은 권한을 받으면 소유자 이름 없이도 부를 수 있다고 본 것이다.",
     "_source": "authored",
     "references": [
       {
         "type": "sql",
-        "code": "UPDATE A_USER.TB_A SET COL1 = 'AAA' WHERE COL2 = 3;"
+        "code": "-- A_USER 가 실행\nGRANT SELECT ON A_USER.T TO B_USER;\nGRANT UPDATE (COL1)\n  ON A_USER.T TO B_USER;"
+      },
+      {
+        "type": "sql",
+        "code": "-- ㉠\nSELECT * FROM A_USER.T;\n-- ㉡\nUPDATE A_USER.T SET COL1 = 'X';\n-- ㉢\nUPDATE A_USER.T SET COL2 = 1;\n-- ㉣\nDELETE FROM A_USER.T;\n-- ㉤\nSELECT * FROM T;"
       }
     ]
   },
@@ -1264,7 +1382,7 @@ export const ROUND_49: QuizQuestion[] = [
     "references": [
       {
         "type": "sql",
-        "code": "DBA : GRANT SELECT ON X TO U1;\nDBA : GRANT SELECT ON X TO U2 WITH GRANT OPTION;\nU2  : GRANT SELECT ON X TO U3;\nDBA : REVOKE SELECT ON X FROM U2 RESTRICT;"
+        "code": "DBA : GRANT SELECT ON X TO U1;\nDBA : GRANT SELECT ON X TO U2\n        WITH GRANT OPTION;\nU2  : GRANT SELECT ON X TO U3;\nDBA : REVOKE SELECT ON X FROM U2\n        RESTRICT;"
       }
     ]
   },
@@ -1275,20 +1393,20 @@ export const ROUND_49: QuizQuestion[] = [
     "round": 49,
     "subject": "2과목",
     "number": 30,
-    "title": "아래 CREATE TABLE 에 대해 오류 없이 INSERT 되는 것은?",
+    "title": "아래 테이블을 만든 뒤 INSERT ㉠~㉤ 을 차례로 실행했다. 성공하는 문장만 모두 고른 것은?",
     "options": [
-      "INSERT INTO T1 VALUES (7, 1);",
-      "INSERT INTO T1 (C) VALUES (5);",
-      "INSERT INTO T1 (A) VALUES (NULL);",
-      "INSERT INTO T1 (B, C) VALUES (9, 1);"
+      "㉠",
+      "㉠, ㉡, ㉤",
+      "㉠, ㉢, ㉤",
+      "㉠, ㉤"
     ],
     "correctIndex": 3,
-    "explanation": "④ 는 A 를 생략했으므로 DEFAULT 9 가 들어가 PK 를 만족하고, NOT NULL 인 B 에 9 가 들어가 정상 입력된다. ① 은 컬럼 목록 없이 값 2개만 주어 컬럼 수(3개)와 맞지 않아 오류, ② 는 NOT NULL 인 B 가 빠져 NULL 이 들어가므로 오류, ③ 은 PK 인 A 에 NULL 을 명시적으로 넣어 오류다 (DEFAULT 는 값을 생략했을 때만 적용되고, NULL 을 직접 넣으면 적용되지 않는다).",
+    "explanation": "㉠ 은 칼럼 목록에서 A 를 뺐으므로 DEFAULT 9 가 들어가 성공한다. ㉡ 도 A 를 빼서 다시 9 가 들어가는데, 9 는 ㉠ 에서 이미 썼으므로 기본키 중복으로 실패한다. ㉢ 의 DEFAULT 키워드도 9 를 넣으므로 같은 이유로 실패한다. 기본키 칼럼에 고정된 기본값을 주면 두 번째 입력부터 막힌다. ㉣ 은 A 에 NULL 을 직접 넣었다. 값을 명시하면 DEFAULT 는 쓰이지 않고, 기본키는 NULL 을 허용하지 않아 실패한다. ㉤ 은 A = 7, B = 5 로 성공한다. 정답은 ④번이다. ② 와 ③ 은 DEFAULT 가 매번 다른 값을 만들어 준다고 본 것이고, ① 은 ㉤ 처럼 기본값과 다른 값을 직접 넣는 것도 막힌다고 본 것이다.",
     "_source": "authored",
     "references": [
       {
         "type": "sql",
-        "code": "CREATE TABLE T1 (\n  A NUMBER DEFAULT 9 PRIMARY KEY,\n  B NUMBER NOT NULL,\n  C NUMBER\n);"
+        "code": "CREATE TABLE T1 (\n  A NUMBER DEFAULT 9 PRIMARY KEY,\n  B NUMBER NOT NULL,\n  C NUMBER\n);\n\n-- ㉠\nINSERT INTO T1 (B, C) VALUES (1, 1);\n-- ㉡\nINSERT INTO T1 (B) VALUES (2);\n-- ㉢\nINSERT INTO T1\nVALUES (DEFAULT, 3, NULL);\n-- ㉣\nINSERT INTO T1 (A, B)\nVALUES (NULL, 4);\n-- ㉤\nINSERT INTO T1 (A, B) VALUES (7, 5);"
       }
     ]
   },
@@ -1444,7 +1562,7 @@ export const ROUND_49: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT MAX(COL1) OVER(ORDER BY COL1 ROWS BETWEEN UNBOUNDED PRECEDING AND 2 FOLLOWING) AS MAX,\n       SUM(COL2) OVER(ORDER BY COL1 ROWS BETWEEN 1 PRECEDING AND CURRENT ROW) AS SUM,\n       FIRST_VALUE(COL1) OVER(ORDER BY COL1 RANGE BETWEEN 200 PRECEDING AND 200 FOLLOWING) AS FIRST\nFROM T;"
+        "code": "SELECT MAX(COL1) OVER(ORDER BY COL1\n         ROWS BETWEEN UNBOUNDED\n              PRECEDING\n              AND 2 FOLLOWING) AS MAX,\n       SUM(COL2) OVER(ORDER BY COL1\n         ROWS BETWEEN 1 PRECEDING\n              AND CURRENT ROW) AS SUM,\n       FIRST_VALUE(COL1)\n         OVER(ORDER BY COL1\n         RANGE BETWEEN 200 PRECEDING\n               AND 200 FOLLOWING)\n         AS FIRST\nFROM T;"
       }
     ]
   },
@@ -1494,7 +1612,7 @@ export const ROUND_49: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT COUNT(COL1), COUNT(COL2)\nFROM (SELECT DISTINCT COL1, COL2 FROM TAB1);"
+        "code": "SELECT COUNT(COL1), COUNT(COL2)\nFROM (SELECT DISTINCT COL1, COL2\n        FROM TAB1);"
       }
     ]
   },
@@ -1638,20 +1756,20 @@ export const ROUND_49: QuizQuestion[] = [
     "round": 49,
     "subject": "2과목",
     "number": 38,
-    "title": "아래 SQL 의 결과로 옳은 것은?",
+    "title": "S 가 '02-123-4567' 일 때 아래 SQL 의 결과(A, B, C, D)로 옳은 것은? (Oracle 기준)",
     "options": [
-      "23",
-      "67",
-      "45",
-      "89"
+      "02, 4567, 67, 1",
+      "02, 4567, 67, 2",
+      "02-, 4567, 89, 2",
+      "02, 123, 67, 2"
     ],
     "correctIndex": 1,
-    "explanation": "SUBSTR 의 시작 위치가 음수면 문자열 끝에서부터 센다. '123456789' 에서 -4 는 뒤에서 네 번째 문자 6 이고, 거기서 2 글자를 잘라 '67' 이다(②). ③ 45 는 음수 부호를 무시하고 앞에서 4번째부터, ④ 89 는 맨 끝 두 글자를 자른 결과다.",
+    "explanation": "INSTR(S, '-') 는 첫 '-' 의 위치 3 이라 A 는 1번째부터 2글자인 '02' 다. INSTR(S, '-', 1, 2) 는 두 번째 '-' 의 위치 7 이라 B 는 8번째부터 끝까지인 '4567' 이다. C 는 뒤에서 4번째 '6' 부터 2글자라 '67' 이다. D 는 '-' 를 지운 문자열과의 길이 차이라 '-' 의 개수인 2 다. 정답은 ②번이다. ① 은 '-' 를 하나만 센 것, ③ 은 - 1 을 놓치고 뒤에서 2글자를 자른 것, ④ 는 INSTR 의 네 번째 인자를 놓쳐 첫 '-' 뒤를 자른 것이다.",
     "_source": "authored",
     "references": [
       {
         "type": "sql",
-        "code": "SELECT SUBSTR('123456789', -4, 2) FROM DUAL;"
+        "code": "SELECT\n  SUBSTR(S, 1, INSTR(S, '-') - 1) AS A,\n  SUBSTR(S, INSTR(S, '-', 1, 2) + 1)\n                                  AS B,\n  SUBSTR('123456789', -4, 2)      AS C,\n  LENGTH(S) - LENGTH(REPLACE(S, '-'))\n                                  AS D\nFROM …;"
       }
     ]
   },
@@ -1740,16 +1858,58 @@ export const ROUND_49: QuizQuestion[] = [
     "round": 49,
     "subject": "2과목",
     "number": 41,
-    "title": "Oracle 에서 NULL 이 포함된 ORDER BY 결과에 대한 설명으로 옳은 것은?",
+    "title": "아래 EMP 테이블에 대해 '㉠ 결과의 3번째 행, ㉡ 결과의 2번째 행, ㉢ 결과의 4번째 행' 의 이름을 차례대로 나열한 것은? (Oracle 기준)",
     "options": [
-      "ASC 정렬 시 NULL 이 가장 먼저 출력된다.",
-      "DESC 정렬 시 NULL 이 가장 나중에 출력된다.",
-      "ASC 정렬 시 NULL 은 마지막에, DESC 정렬 시 NULL 은 가장 먼저 출력된다.",
-      "NULL 은 항상 가장 먼저 출력된다."
+      "라, 가, 마",
+      "다, 가, 다",
+      "다, 마, 다",
+      "라, 마, 마"
     ],
     "correctIndex": 2,
-    "explanation": "Oracle 의 기본 NULL 정렬 규칙은 ASC 정렬 시 NULL 을 마지막에, DESC 정렬 시 NULL 을 가장 먼저 배치한다(NULLS LAST / NULLS FIRST 가 각각 기본). NULLS FIRST·NULLS LAST 옵션으로 변경할 수 있다. ① 과 ④ 는 SQL Server 처럼 NULL 을 가장 작은 값으로 본 것이고, ② 는 DESC 에서 NULL 이 먼저 온다는 점과 반대다.",
-    "_source": "authored"
+    "explanation": "Oracle 은 NULL 을 가장 큰 값처럼 정렬한다. ASC 에서는 맨 뒤, DESC 에서는 맨 앞에 온다. NULLS FIRST·LAST 는 바로 앞의 정렬 기준 하나에만 적용된다. ㉠ 은 부서 DESC 라 NULL 부서인 나 가 먼저, 다음 B, A 순서다. 같은 부서 안에서는 급여 ASC 라 NULL 이 뒤로 가서 B 는 라(100), 다(NULL) 순서다. 나, 라, 다, 가, 마 이므로 3번째는 다 다. ㉡ 은 부서 NULLS FIRST 로 나 가 먼저, 그다음 A, B 다. 급여 DESC 에서는 NULL 이 앞이라 A 는 마(NULL), 가(300) 순서다. 나, 마, 가, 다, 라 이므로 2번째는 마 다. ㉢ 은 NULL 급여를 0 으로 바꿔 가 300, 나 200, 라 100 다음 다 와 마 가 0 으로 같고, 이름 순으로 다, 마 가 된다. 4번째는 다 다. 정답은 ③번이다. ① 은 ASC 에서 NULL 을 맨 앞으로, DESC 에서 맨 뒤로 보고 ㉢ 의 동점도 이름 역순으로 본 것이다. ② 는 ㉡ 의 급여 DESC 에서 NULL 을 뒤로 보낸 것이고, ④ 는 ㉠ 에서 NULL 급여를 앞에 두고 ㉢ 의 동점을 이름 역순으로 본 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "caption": "EMP",
+        "headers": [
+          "이름",
+          "부서",
+          "급여"
+        ],
+        "rows": [
+          [
+            "가",
+            "A",
+            "300"
+          ],
+          [
+            "나",
+            "NULL",
+            "200"
+          ],
+          [
+            "다",
+            "B",
+            "NULL"
+          ],
+          [
+            "라",
+            "B",
+            "100"
+          ],
+          [
+            "마",
+            "A",
+            "NULL"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "-- ㉠\nSELECT 이름 FROM EMP\nORDER BY 부서 DESC, 급여;\n-- ㉡\nSELECT 이름 FROM EMP\nORDER BY 부서 NULLS FIRST,\n         급여 DESC;\n-- ㉢\nSELECT 이름 FROM EMP\nORDER BY NVL(급여, 0) DESC, 이름;"
+      }
+    ]
   },
   {
     "id": 10591,
@@ -1830,20 +1990,20 @@ export const ROUND_49: QuizQuestion[] = [
     "round": 49,
     "subject": "2과목",
     "number": 43,
-    "title": "아래 SQL 의 수행 목적에 대한 설명으로 옳은 것은?",
+    "title": "EMP 의 (부서, 연봉) 이 (A, 100), (A, 300), (B, 200), (C, 400), (C, NULL) 일 때 아래 SQL 의 결과로 옳은 것은? (출력 순서대로)",
     "options": [
-      "전체 사원의 평균 연봉",
-      "부서별 최고 연봉을 조회",
-      "전체 사원의 합계 연봉",
-      "사원 수를 세는 쿼리"
+      "A 300, C 400",
+      "C 400, A 300",
+      "C 400, A 300, B 200",
+      "C NULL, A 300"
     ],
     "correctIndex": 1,
-    "explanation": "GROUP BY 부서 로 행을 부서별로 묶고 묶음마다 MAX(연봉) 을 구하므로 부서별 최고 연봉을 조회한다(②). ① 평균은 AVG, ③ 합계는 SUM, ④ 사원 수는 COUNT 로 구한다.",
+    "explanation": "부서별로 묶은 뒤 MAX 를 구하면 A 300, B 200, C 400 이다(C 의 NULL 은 집계에서 빠진다). HAVING 으로 300 이상인 그룹만 남겨 A, C 가 남고, ORDER BY 2 DESC 는 두 번째 칼럼인 MAX(연봉) 의 내림차순이라 C 400, A 300 순서다. 정답은 ②번이다. ① 은 정렬 방향을 놓친 것, ③ 은 HAVING 조건을 놓친 것, ④ 는 NULL 이 섞이면 MAX 도 NULL 이 된다고 보고 NULL 을 가장 큰 값으로 정렬한 것이다.",
     "_source": "authored",
     "references": [
       {
         "type": "sql",
-        "code": "SELECT 부서, MAX(연봉)\nFROM   EMP\nGROUP BY 부서;"
+        "code": "SELECT 부서, MAX(연봉)\nFROM   EMP\nGROUP  BY 부서\nHAVING MAX(연봉) >= 300\nORDER  BY 2 DESC;"
       }
     ]
   },
@@ -1911,7 +2071,7 @@ export const ROUND_49: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "MERGE INTO TBL1 T USING TBL2 S ON (T.ID = S.ID)\nWHEN MATCHED THEN UPDATE SET T.COL1 = S.COL2\nWHEN NOT MATCHED THEN INSERT (ID, COL1) VALUES (S.ID, S.COL2);"
+        "code": "MERGE INTO TBL1 T USING TBL2 S\n  ON (T.ID = S.ID)\nWHEN MATCHED THEN\n  UPDATE SET T.COL1 = S.COL2\nWHEN NOT MATCHED THEN\n  INSERT (ID, COL1)\n  VALUES (S.ID, S.COL2);"
       }
     ]
   },
@@ -2192,7 +2352,7 @@ export const ROUND_49: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT GRP, COUNT(*) AS CNT\nFROM   ( SELECT NTILE(3) OVER (ORDER BY VAL) AS GRP\n         FROM   T )\nGROUP BY GRP\nORDER BY GRP;"
+        "code": "SELECT GRP, COUNT(*) AS CNT\nFROM   ( SELECT NTILE(3) OVER\n                (ORDER BY VAL) AS GRP\n         FROM   T )\nGROUP BY GRP\nORDER BY GRP;"
       },
       {
         "type": "table",

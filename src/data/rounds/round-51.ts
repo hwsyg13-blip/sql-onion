@@ -49,7 +49,7 @@ export const ROUND_51: QuizQuestion[] = [
       {
         "type": "erd",
         "caption": "고객·주문·주문상세·상품·배송 ERD",
-        "mermaid": "erDiagram\n    고객 ||--o{ 주문 : \"한다\"\n    주문 ||--|{ 주문상세 : \"포함\"\n    상품 ||--o{ 주문상세 : \"대상\"\n    주문 ||--o| 배송 : \"발생\"\n    주문 {\n        string 주문번호 PK\n        string 고객번호 FK\n    }\n    주문상세 {\n        string 주문번호 PK,FK\n        string 상품코드 PK,FK\n        int 수량\n    }\n    배송 {\n        string 배송번호 PK\n        string 주문번호 FK\n    }"
+        "mermaid": "erDiagram\n    고객 ||..o{ 주문 : \"한다\"\n    주문 ||--|{ 주문상세 : \"포함\"\n    상품 ||--o{ 주문상세 : \"대상\"\n    주문 ||..o| 배송 : \"발생\"\n    주문 {\n        string 주문번호 PK\n        string 고객번호 FK\n    }\n    주문상세 {\n        string 주문번호 PK,FK\n        string 상품코드 PK,FK\n        int 수량\n    }\n    배송 {\n        string 배송번호 PK\n        string 주문번호 FK\n    }"
       }
     ]
   },
@@ -84,16 +84,44 @@ export const ROUND_51: QuizQuestion[] = [
     "round": 51,
     "subject": "1과목",
     "number": 4,
-    "title": "발생 시점에 따른 엔터티 분류에 해당하지 않는 것은?",
+    "title": "아래 급여 관리 업무의 엔터티를 발생 시점에 따라 분류한 것으로 옳은 것은?",
     "options": [
-      "기본 엔터티",
-      "사건 엔터티",
-      "중심 엔터티",
-      "행위 엔터티"
+      "사원 - 중심 엔터티, 급여지급 - 기본 엔터티",
+      "부서 - 기본 엔터티, 급여지급 - 중심 엔터티, 지급변경이력 - 행위 엔터티",
+      "부서 - 행위 엔터티, 사원 - 중심 엔터티",
+      "사원 - 사건 엔터티, 지급변경이력 - 기본 엔터티"
     ],
     "correctIndex": 1,
-    "explanation": "발생 시점에 따른 엔터티 분류는 기본(키)(①)·중심(③)·행위(④) 세 가지다. 사건 엔터티는 유무형에 따른 분류(유형·개념·사건)에 속해 여기에 해당하지 않으므로 정답은 ② 다.",
-    "_source": "authored"
+    "explanation": "발생 시점에 따른 분류는 기본·중심·행위 엔터티다. 기본 엔터티는 다른 엔터티에 의존하지 않고 원래 존재하는 것(부서, 사원), 중심 엔터티는 기본 엔터티에서 생겨 업무의 중심이 되는 것(급여지급), 행위 엔터티는 두 개 이상의 엔터티에서 업무가 진행되며 생기는 이력·변경 정보(지급변경이력)다. 정답은 ②번이다. ① 은 사원과 급여지급을 바꿔 본 것이고, ③ 부서는 원래 있는 기본 엔터티다. ④ 사건 엔터티는 유형·개념·사건으로 나누는 유무형 기준의 분류라 발생 시점 분류에 쓰지 않는다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "caption": "엔터티",
+        "headers": [
+          "엔터티",
+          "설명"
+        ],
+        "rows": [
+          [
+            "부서",
+            "원래 있는 조직 단위"
+          ],
+          [
+            "사원",
+            "입사하면 등록"
+          ],
+          [
+            "급여지급",
+            "매달 사원에게 지급"
+          ],
+          [
+            "지급변경이력",
+            "변경 때마다 쌓임"
+          ]
+        ]
+      }
+    ]
   },
   {
     "id": 10454,
@@ -127,16 +155,40 @@ export const ROUND_51: QuizQuestion[] = [
     "round": 51,
     "subject": "1과목",
     "number": 6,
-    "title": "파생 속성에 해당하는 예시로 적절한 것은?",
+    "title": "[고객] 엔터티의 속성을 특성에 따라 바르게 분류한 것은?",
     "options": [
-      "고객번호",
-      "주문일자",
-      "상품코드",
-      "최종주문일자"
+      "고객번호-기본, 가입일자-설계, 누적주문금액-파생",
+      "고객번호-설계, 가입일자-파생, 누적주문금액-기본",
+      "고객번호-파생, 가입일자-기본, 누적주문금액-설계",
+      "고객번호-설계, 가입일자-기본, 누적주문금액-파생"
     ],
     "correctIndex": 3,
-    "explanation": "파생 속성은 다른 속성의 값을 계산하거나 변형해 만든 속성이다. 최종주문일자는 주문 데이터 중 가장 마지막 주문일자를 구해 얻는 값이므로 파생 속성이다(④). 고객번호(①)·상품코드(③)는 식별을 위해 정한 설계 속성 성격이고, 주문일자(②)는 업무에서 바로 발생하는 기본 속성이다.",
-    "_source": "authored"
+    "explanation": "속성은 특성에 따라 기본 속성(업무에서 바로 생기는 값), 설계 속성(모델링을 위해 새로 만들거나 코드화한 값), 파생 속성(다른 속성으로 계산한 값)으로 나눈다. 고객번호는 업무에 원래 있던 값이 아니라 식별을 위해 시스템이 부여한 일련번호라 설계 속성이다. 가입일자는 가입할 때 생기는 값을 그대로 적으므로 기본 속성이다. 누적주문금액은 주문 금액을 더해 얻으므로 파생 속성이다. 정답은 ④번이다. 파생 속성은 원본(주문)이 바뀔 때마다 다시 맞춰야 하므로 꼭 필요한 경우에만 둔다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "caption": "고객 속성",
+        "headers": [
+          "속성",
+          "값이 정해지는 방식"
+        ],
+        "rows": [
+          [
+            "고객번호",
+            "시스템이 일련번호로 부여"
+          ],
+          [
+            "가입일자",
+            "가입할 때 그대로 기록"
+          ],
+          [
+            "누적주문금액",
+            "주문 금액을 모두 더함"
+          ]
+        ]
+      }
+    ]
   },
   {
     "id": 10456,
@@ -233,16 +285,36 @@ export const ROUND_51: QuizQuestion[] = [
     "round": 51,
     "subject": "1과목",
     "number": 10,
-    "title": "업무에서 필요로 하는 인스턴스를 관리하고자 하는 의미상 더 이상 분리되지 않는 최소의 데이터 단위는?",
+    "title": "[고객] 엔터티에 주소를 둘 때, 하나의 속성으로 둘지 시·구·상세주소로 나눌지 정하는 기준으로 가장 적절한 것은?",
     "options": [
-      "엔터티",
-      "인스턴스",
-      "속성",
-      "관계"
+      "속성은 글자 단위까지 쪼갤 수 있으면 쪼개야 하므로 항상 B 로 한다.",
+      "인스턴스 수를 줄이기 위해 항상 A 로 한다.",
+      "업무에서 시·구 단위로 조회하거나 집계하면 B, 주소를 통째로만 쓰면 A 로 한다.",
+      "다른 엔터티와 관계를 맺으려면 반드시 B 로 나눠야 한다."
     ],
     "correctIndex": 2,
-    "explanation": "업무에서 관리하려는 의미상 더 이상 분리되지 않는 최소의 데이터 단위는 속성이다(③). 엔터티(①)는 속성들의 집합으로 관리 대상 그 자체, 인스턴스(②)는 엔터티에 속한 개별 데이터 한 건, 관계(④)는 엔터티 사이의 연관이다.",
-    "_source": "authored"
+    "explanation": "속성은 업무에서 관리하려는, 의미상 더 나눌 필요가 없는 최소 데이터 단위다. 어디까지가 최소 단위인지는 업무가 정한다. 구별 고객 수를 집계하거나 시 단위로 배송 지역을 고른다면 시·구가 각각 의미 있는 단위이므로 나누고, 배송지로 통째로만 쓴다면 주소 하나가 최소 단위다. 정답은 ③번이다. ① 업무에 의미 없는 단위까지 쪼개면 관리만 복잡해진다. ② 속성을 나누는 것은 인스턴스 수와 관계없다. ④ 관계는 식별자로 맺으며 주소를 나누는 것과 관계없다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "caption": "주소 설계안",
+        "headers": [
+          "설계안",
+          "속성"
+        ],
+        "rows": [
+          [
+            "A",
+            "주소"
+          ],
+          [
+            "B",
+            "시, 구, 상세주소"
+          ]
+        ]
+      }
+    ]
   },
   {
     "id": 10460,
@@ -483,7 +555,7 @@ export const ROUND_51: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT COL1, NTILE(3) OVER (ORDER BY COL1) AS GRP\nFROM   T;"
+        "code": "SELECT COL1,\n       NTILE(3) OVER (ORDER BY COL1)\n         AS GRP\nFROM   T;"
       }
     ]
   },
@@ -494,20 +566,51 @@ export const ROUND_51: QuizQuestion[] = [
     "round": 51,
     "subject": "2과목",
     "number": 16,
-    "title": "A 와 B 각각의 소계, 총계까지 모두 출력하는 GROUP BY 절은?",
+    "title": "아래 T 테이블에 SQL 을 실행했다. 'GROUPING_ID 가 2 이고 B 가 1 인 행의 SUM(V), GROUPING_ID 가 1 또는 2 인 행의 수, GROUPING_ID 가 3 인 행의 SUM(V)' 를 차례대로 나열한 것은?",
     "options": [
-      "ROLLUP(A, B)",
-      "GROUP BY A, B",
-      "CUBE(A, B)",
-      "GROUPING SETS((A, B))"
+      "40, 4, 65",
+      "45, 3, 65",
+      "45, 4, 65",
+      "15, 4, 65"
     ],
     "correctIndex": 2,
-    "explanation": "A 별 소계, B 별 소계, 총계를 모두 보려면 (A, B), (A), (B), () 네 그룹이 필요하고 이를 한 번에 만드는 것은 CUBE(A, B) 다(③). ROLLUP(A, B)(①)는 (A, B), (A), () 만 만들어 B 별 소계가 없고, GROUP BY A, B(②)와 GROUPING SETS((A, B))(④)는 (A, B) 그룹만 만든다.",
+    "explanation": "GROUPING_ID(A, B) 는 GROUPING(A) 를 2 의 자리, GROUPING(B) 를 1 의 자리로 놓은 이진수다. 집계되어 사라진 칼럼이 1 이 된다. 그래서 (A, B) 상세 행은 0, A 별 소계(B 가 사라짐)는 1, B 별 소계(A 가 사라짐)는 2, 전체 합계는 3 이다. GID 2 는 B 별 소계라 B = 1 행은 A 와 상관없이 10 + 30 + 5 = 45 다. GID 1 은 A 별 소계 X·Y 2행, GID 2 는 B 별 소계 1·2 2행이라 합해서 4행이다. GID 3 은 전체 합계 65 다. 정답은 ③번이다. ① 은 B = 1 소계에서 같은 조합(X, 1)의 두 번째 행 5 를 빠뜨린 것이고, ② 는 GID 1 과 2 를 한쪽만 센 것, ④ 는 GID 2 를 (X, 1) 상세 행으로 본 것이다.",
     "_source": "authored",
     "references": [
       {
+        "type": "table",
+        "caption": "T",
+        "headers": [
+          "A",
+          "B",
+          "V"
+        ],
+        "rows": [
+          [
+            "X",
+            "1",
+            "10"
+          ],
+          [
+            "X",
+            "2",
+            "20"
+          ],
+          [
+            "Y",
+            "1",
+            "30"
+          ],
+          [
+            "X",
+            "1",
+            "5"
+          ]
+        ]
+      },
+      {
         "type": "sql",
-        "code": "SELECT A, B, SUM(X)\nFROM   T\nGROUP BY ( ? );"
+        "code": "SELECT A, B, SUM(V),\n       GROUPING_ID(A, B) AS GID\nFROM T\nGROUP BY CUBE(A, B);"
       }
     ]
   },
@@ -613,7 +716,7 @@ export const ROUND_51: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "-- ㉠ SELECT SUM(A + B + C + D) FROM T;\n-- ㉡ SELECT SUM(A) + SUM(B) + SUM(C) + SUM(D) FROM T;"
+        "code": "-- ㉠ SELECT SUM(A + B + C + D)\n--    FROM T;\n-- ㉡ SELECT SUM(A) + SUM(B)\n--         + SUM(C) + SUM(D)\n--    FROM T;"
       }
     ]
   },
@@ -788,7 +891,7 @@ export const ROUND_51: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT COUNT(*) FROM T1\nWHERE NOT EXISTS (SELECT 'X' FROM T2 WHERE T1.COL1 = T2.COL1);"
+        "code": "SELECT COUNT(*) FROM T1\nWHERE NOT EXISTS\n      (SELECT 'X' FROM T2\n        WHERE T1.COL1 = T2.COL1);"
       }
     ]
   },
@@ -799,20 +902,20 @@ export const ROUND_51: QuizQuestion[] = [
     "round": 51,
     "subject": "2과목",
     "number": 22,
-    "title": "아래 SQL 의 결과로 옳게 짝지어진 것은?",
+    "title": "Oracle 에서 다음 SQL ㉠~㉣ 중 실행 시 오류가 나는 것만 모두 고른 것은?",
     "options": [
-      "10, 10",
-      "NULL, ERROR",
-      "0, 0",
-      "NULL, NULL"
+      "㉢",
+      "㉢, ㉣",
+      "㉡, ㉢",
+      "㉡, ㉢, ㉣"
     ],
     "correctIndex": 1,
-    "explanation": "NULL 이 포함된 산술 연산 결과는 NULL 이므로 10 / NULL 은 NULL 이다. 10 / 0 은 Oracle 에서 '제수가 0' 오류(ORA-01476)가 난다. 따라서 NULL, ERROR 다(②). 0 으로 나누기를 NULL 이나 0 으로 처리해 주지 않는다(③④).",
+    "explanation": "산술 연산에 NULL 이 하나라도 섞이면 결과는 NULL 이다. ㉠ 은 NULL 이다. ㉡ 도 피제수가 NULL 이라 나누기를 따지기 전에 결과가 NULL 이 되고, 0 으로 나누기 오류가 나지 않는다. ㉢ 은 숫자를 0 으로 나누므로 오류(제수가 0)다. ㉣ 은 NVL 로 NULL 이 먼저 0 으로 바뀐 뒤 0 / 0 을 계산하게 되어 오류가 난다. 정답은 ②번이다. ① 은 NVL 을 거친 값도 NULL 처럼 넘어간다고 본 것이고, ③ 과 ④ 는 NULL 을 0 으로 나눌 때도 오류가 난다고 본 것이다. 0 으로 나누기를 피하려면 제수에 NULLIF(제수, 0) 을 써서 NULL 로 바꾼다.",
     "_source": "authored",
     "references": [
       {
         "type": "sql",
-        "code": "SELECT 10 / NULL, 10 / 0 FROM DUAL;"
+        "code": "-- ㉠\nSELECT 10 / NULL FROM DUAL;\n-- ㉡\nSELECT NULL / 0 FROM DUAL;\n-- ㉢\nSELECT 10 / 0 FROM DUAL;\n-- ㉣\nSELECT NVL(NULL, 0) / 0\nFROM DUAL;"
       }
     ]
   },
@@ -951,20 +1054,20 @@ export const ROUND_51: QuizQuestion[] = [
     "round": 51,
     "subject": "2과목",
     "number": 25,
-    "title": "아래 SQL 의 결과로 옳은 것은?",
+    "title": "아래 SQL 의 결과(A, B, C, D)로 옳은 것은? (Oracle 기준, 문자 집합 AL32UTF8 에서 한글 한 글자는 3바이트)",
     "options": [
-      "'...의', 109.0",
-      "'의 마', 110",
-      "'의 마', 109",
-      "'마...', 100"
+      "나다, 3, 6, 110",
+      "가나, 3, 9, 110",
+      "나다, 3, 9, 110",
+      "나다, 9, 9, 100"
     ],
     "correctIndex": 2,
-    "explanation": "SUBSTR('...의 마...', 4, 3) 은 4번째 문자부터 3글자를 추출 → '의 마'. ROUND(109, 1) 은 소수 첫째 자리까지 반올림하지만 정수 109 는 변환할 소수가 없으므로 109 가 그대로 유지된다. ② 의 110 은 ROUND(109, -1)(십의 자리 반올림), ④ 의 '마...', 100 은 시작 위치를 6 으로, ROUND 를 백의 자리(-2)로 본 결과다.",
+    "explanation": "SUBSTR 과 LENGTH 는 바이트가 아니라 글자 단위로 센다. A 는 2번째 글자부터 2글자인 '나다', B 는 3글자라 3 이다. LENGTHB 는 바이트 수를 세므로 한글 3글자 × 3바이트 = 9 다. ROUND(109, -1) 은 일의 자리 9 에서 반올림해 110 이다. 정답은 ③번이다. ① 은 한글을 2바이트로 본 것, ② 는 시작 위치를 0 부터 센 것, ④ 는 LENGTH 도 바이트로 세고 -1 자리를 버림으로 본 것이다.",
     "_source": "authored",
     "references": [
       {
         "type": "sql",
-        "code": "SELECT SUBSTR('...의 마...', 4, 3), ROUND(109, 1) FROM DUAL;"
+        "code": "SELECT SUBSTR('가나다라', 2, 2) AS A,\n       LENGTH('가나다')       AS B,\n       LENGTHB('가나다')      AS C,\n       ROUND(109, -1)         AS D\nFROM   DUAL;"
       }
     ]
   },
@@ -1022,7 +1125,7 @@ export const ROUND_51: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "INSERT FIRST\n  WHEN C1 >= 4  THEN INTO T1 VALUES (C1, C2)\n  WHEN C2 = 'A' THEN INTO T2 VALUES (C1, C2)\n  WHEN C1 >= 2  THEN INTO T3 VALUES (C1, C2)\n  ELSE               INTO T4 VALUES (C1, C2)\nSELECT C1, C2 FROM TAB1;"
+        "code": "INSERT FIRST\n  WHEN C1 >= 4 THEN\n    INTO T1 VALUES (C1, C2)\n  WHEN C2 = 'A' THEN\n    INTO T2 VALUES (C1, C2)\n  WHEN C1 >= 2 THEN\n    INTO T3 VALUES (C1, C2)\n  ELSE\n    INTO T4 VALUES (C1, C2)\nSELECT C1, C2 FROM TAB1;"
       }
     ]
   },
@@ -1033,20 +1136,56 @@ export const ROUND_51: QuizQuestion[] = [
     "round": 51,
     "subject": "2과목",
     "number": 27,
-    "title": "아래 조건을 만족하는 SQL 로 옳은 것은?",
+    "title": "'팀이 A 또는 B 이면서 키가 180 이상인 선수' 를 찾으려고 아래 조건 ㉠~㉣ 을 작성했다. 각 조건으로 조회되는 행 수를 차례대로 나열한 것은?",
     "options": [
-      "WHERE TEAM_CODE = A AND B",
-      "WHERE (TEAM_CODE = 'A' OR TEAM_CODE = 'B') AND (다른 조건)",
-      "WHERE TEAM_CODE IN (A, B) OR (다른 조건)",
-      "WHERE TEAM_CODE BETWEEN A AND B"
+      "2, 2, 2, 2",
+      "3, 2, 2, 2",
+      "3, 2, 2, 4",
+      "3, 3, 2, 2"
     ],
     "correctIndex": 1,
-    "explanation": "팀 코드가 'A' 또는 'B' 는 OR 로 묶고, 다른 조건과는 AND 로 결합하므로 괄호로 우선순위를 명시해야 한다. 문자열 리터럴은 따옴표로 감싸야 한다. ① 은 문법이 맞지 않고(TEAM_CODE = A AND B), ③ 은 OR 로 묶어 다른 조건이 없어도 통과하며, ④ BETWEEN 은 범위라 A 와 B 사이의 다른 값도 포함한다.",
+    "explanation": "논리 연산자는 NOT → AND → OR 순서로 먼저 계산한다. ㉠ 은 AND 가 먼저 묶여 '팀 = A' OR '(팀 = B AND 키 >= 180)' 이 된다. A 팀은 키와 상관없이 가·나 가 모두 나오고 B 팀은 라 만 나와 3행이다. ㉡ 은 괄호로 OR 를 먼저 묶어 의도대로 나·라 의 2행이다. ㉢ 의 IN 은 OR 를 괄호로 묶은 것과 같아 2행이다. ㉣ 은 NOT 이 AND 보다 먼저라 '(팀 이 C 가 아님) AND 키 >= 180' 이 되어 나·라 의 2행이다. 정답은 ②번이다. ① 은 ㉠ 도 괄호를 친 것처럼 계산한 것이고, ③ 은 ㉣ 의 NOT 이 뒤의 조건 전체에 걸려 NOT (팀 = C AND 키 >= 180) 이 된다고 보고 마 한 명만 뺀 것, ④ 는 괄호가 있어도 AND 가 먼저 계산된다고 본 것이다.",
     "_source": "authored",
     "references": [
       {
-        "type": "text",
-        "content": "팀 코드가 A 또는 B 이고, 다른 조건을 함께 만족하는 행을 조회한다."
+        "type": "table",
+        "caption": "선수",
+        "headers": [
+          "이름",
+          "팀",
+          "키"
+        ],
+        "rows": [
+          [
+            "가",
+            "A",
+            "170"
+          ],
+          [
+            "나",
+            "A",
+            "185"
+          ],
+          [
+            "다",
+            "B",
+            "175"
+          ],
+          [
+            "라",
+            "B",
+            "190"
+          ],
+          [
+            "마",
+            "C",
+            "195"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "㉠ WHERE 팀 = 'A' OR 팀 = 'B'\n        AND 키 >= 180\n㉡ WHERE (팀 = 'A' OR 팀 = 'B')\n        AND 키 >= 180\n㉢ WHERE 팀 IN ('A', 'B')\n        AND 키 >= 180\n㉣ WHERE NOT 팀 = 'C'\n        AND 키 >= 180"
       }
     ]
   },
@@ -1249,20 +1388,50 @@ export const ROUND_51: QuizQuestion[] = [
     "round": 51,
     "subject": "2과목",
     "number": 32,
-    "title": "아래 SQL 의 WHERE 조건과 동일한 의미를 가지는 것은?",
+    "title": "아래 T 테이블에 WHERE 조건 ㉠~㉣ 을 각각 적용했을 때 조회되는 행 수를 차례대로 나열한 것은?",
     "options": [
-      "SELECT * FROM T WHERE (COL1 = 'A' AND COL2 = 1000) OR (COL1 = 'B' AND COL2 = 2000);",
-      "SELECT * FROM T WHERE COL1 = 'A' AND COL2 = 1000 AND COL1 = 'B' AND COL2 = 2000;",
-      "SELECT * FROM T WHERE COL1 IN ('A', 'B') AND COL2 IN (1000, 2000);",
-      "SELECT * FROM T WHERE COL1 = 'A' OR COL2 = 2000;"
+      "2, 4, 2, 2",
+      "2, 2, 2, 2",
+      "2, 4, 2, 4",
+      "4, 4, 2, 2"
     ],
     "correctIndex": 0,
-    "explanation": "다중 컬럼 IN `(COL1, COL2) IN (('A', 1000), ('B', 2000))` 은 각 튜플 안에서는 컬럼끼리 AND 로 묶고, 튜플 간에는 OR 로 결합한 형태와 동일하다. 즉 `(COL1='A' AND COL2=1000) OR (COL1='B' AND COL2=2000)` 으로 풀어쓸 수 있다. ② 는 한 행의 COL1 이 'A' 이면서 'B' 일 수 없어 아무 행도 나오지 않고, ③ 은 ('A', 2000)·('B', 1000) 조합까지 골라 범위가 더 넓으며, ④ 는 둘 중 한 조건만 맞아도 통과해 전혀 다른 조건이다. 그래서 정답은 ① 이다.",
+    "explanation": "㉠ 의 다중 칼럼 IN 은 (COL1, COL2) 쌍이 목록의 쌍과 똑같을 때만 참이라 (A, 1000), (B, 2000) 의 2행이다. ㉡ 은 두 칼럼을 따로 검사하므로 A·B 와 1000·2000 의 모든 조합, 즉 (A, 2000), (B, 1000) 까지 4행이 나온다. 다중 칼럼 IN 을 칼럼별 IN 으로 풀면 안 되는 이유다. ㉢ 은 쌍마다 AND 로 묶어 OR 로 이었으므로 ㉠ 과 같은 2행이다. ㉣ 은 괄호가 없지만 AND 가 OR 보다 먼저 계산되어 ㉢ 과 같이 묶이므로 역시 2행이다. 정답은 ①번이다. ② 는 칼럼별 IN 도 쌍으로 비교한다고 본 것이고, ③ 은 ㉣ 을 왼쪽부터 차례로 계산한 것, ④ 는 다중 칼럼 IN 도 칼럼을 따로 검사한다고 본 것이다.",
     "_source": "authored",
     "references": [
       {
+        "type": "table",
+        "caption": "T",
+        "headers": [
+          "COL1",
+          "COL2"
+        ],
+        "rows": [
+          [
+            "A",
+            "1000"
+          ],
+          [
+            "A",
+            "2000"
+          ],
+          [
+            "B",
+            "1000"
+          ],
+          [
+            "B",
+            "2000"
+          ],
+          [
+            "C",
+            "1000"
+          ]
+        ]
+      },
+      {
         "type": "sql",
-        "code": "SELECT *\nFROM   T\nWHERE  (COL1, COL2) IN (('A', 1000), ('B', 2000));"
+        "code": "㉠ WHERE (COL1, COL2) IN\n         (('A', 1000), ('B', 2000))\n㉡ WHERE COL1 IN ('A', 'B')\n     AND COL2 IN (1000, 2000)\n㉢ WHERE (COL1 = 'A' AND COL2 = 1000)\n      OR (COL1 = 'B' AND COL2 = 2000)\n㉣ WHERE COL1 = 'A' AND COL2 = 1000\n      OR COL1 = 'B' AND COL2 = 2000"
       }
     ]
   },
@@ -1493,7 +1662,7 @@ export const ROUND_51: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT * FROM TAB WHERE COL1 IN (100, 200, 100);"
+        "code": "SELECT * FROM TAB\nWHERE COL1 IN (100, 200, 100);"
       }
     ]
   },
@@ -1596,7 +1765,7 @@ export const ROUND_51: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT A.COL1, B.COL2\nFROM   A LEFT OUTER JOIN B\nON     (A.COL1 = B.COL1 AND B.COL2 > 200);"
+        "code": "SELECT A.COL1, B.COL2\nFROM   A LEFT OUTER JOIN B\nON     (A.COL1 = B.COL1\n        AND B.COL2 > 200);"
       }
     ]
   },
@@ -1661,12 +1830,12 @@ export const ROUND_51: QuizQuestion[] = [
       {
         "type": "sql",
         "caption": "가. NOT EXISTS",
-        "code": "SELECT A.COL1\nFROM   A\nWHERE  NOT EXISTS (SELECT 1 FROM B WHERE A.COL1 = B.COL1);"
+        "code": "SELECT A.COL1\nFROM   A\nWHERE  NOT EXISTS\n       (SELECT 1 FROM B\n         WHERE A.COL1 = B.COL1);"
       },
       {
         "type": "sql",
         "caption": "나. NOT IN",
-        "code": "SELECT A.COL1\nFROM   A\nWHERE  A.COL1 NOT IN (SELECT B.COL1 FROM B);"
+        "code": "SELECT A.COL1\nFROM   A\nWHERE  A.COL1 NOT IN\n       (SELECT B.COL1 FROM B);"
       },
       {
         "type": "sql",
@@ -1682,20 +1851,20 @@ export const ROUND_51: QuizQuestion[] = [
     "round": 51,
     "subject": "2과목",
     "number": 41,
-    "title": "아래 SQL 의 결과로 옳은 것은? (SYSDATE = 2023-05-10)",
+    "title": "SYSDATE 가 2023-05-10 일 때 아래 식 ㉠~㉣ 의 결과로 옳은 것은? (Oracle 기준, 모두 2023년이라 월-일만 표시)",
     "options": [
-      "2023-12-31",
-      "2023-05-01",
-      "2023-01-01",
-      "2023-05-10"
+      "01-01, 07-01, 05-15, 05-01",
+      "05-01, 07-01, 05-15, 05-01",
+      "05-10, 07-10, 05-15, 05-10",
+      "05-01, 07-01, 01-15, 01-01"
     ],
     "correctIndex": 1,
-    "explanation": "Oracle 의 TO_DATE 는 포맷에 없는 요소를 기본값으로 채운다. 연도만 주면 월은 현재 월, 일은 1일이 된다. SYSDATE 가 2023-05-10 이므로 2023-05-01 이다(②). 연도의 첫날(③)이나 오늘 날짜(④)가 되지 않는다.",
+    "explanation": "Oracle 의 TO_DATE 는 형식에 없는 부분을 기본값으로 채운다. 연도·월을 주지 않으면 현재 연도·현재 월, 일을 주지 않으면 1일, 시각은 00:00:00 이다. 그래서 ㉠ 은 2023년·현재 월 5월·1일인 2023-05-01, ㉡ 은 2023-07-01, ㉢ 은 현재 연월에 15일인 2023-05-15 다. ㉣ 의 TRUNC(날짜, 'MM') 은 그 달 1일로 잘라 2023-05-01 이다. 정답은 ②번이다. ① 은 빠진 월을 1월로 본 것, ③ 은 빠진 일을 오늘 날짜로 본 것, ④ 는 빠진 월을 1월로 보고 TRUNC 를 연 단위로 본 것이다. PostgreSQL 은 빠진 월을 1월로 채워 결과가 다르다.",
     "_source": "authored",
     "references": [
       {
         "type": "sql",
-        "code": "SELECT TO_DATE('2023', 'YYYY') FROM DUAL;"
+        "code": "-- ㉠\nTO_DATE('2023', 'YYYY')\n-- ㉡\nTO_DATE('202307', 'YYYYMM')\n-- ㉢\nTO_DATE('15', 'DD')\n-- ㉣\nTRUNC(SYSDATE, 'MM')"
       }
     ]
   },
@@ -1737,7 +1906,7 @@ export const ROUND_51: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT SUM(VAL)\nOVER (ORDER BY VAL\n      RANGE BETWEEN 2 PRECEDING AND 2 FOLLOWING)\nFROM T;"
+        "code": "SELECT SUM(VAL)\nOVER (ORDER BY VAL\n      RANGE BETWEEN 2 PRECEDING\n            AND 2 FOLLOWING)\nFROM T;"
       }
     ]
   },
@@ -1814,20 +1983,20 @@ export const ROUND_51: QuizQuestion[] = [
     "round": 51,
     "subject": "2과목",
     "number": 44,
-    "title": "아래 T 테이블에서 \"문자열에 리터럴 '_' 을 포함하는 행\" 을 찾는 LIKE 조건으로 옳은 것은? (기대 결과: AB_C, A_BD)",
+    "title": "아래 T 테이블에 대한 LIKE 조건 ㉠~㉣ 의 결과 행 수로 옳은 것은?",
     "options": [
-      "WHERE COL2 LIKE '%_%'",
-      "WHERE COL2 LIKE 'A%'",
-      "WHERE COL2 LIKE 'A_B%'",
-      "WHERE COL2 LIKE '%@_%' ESCAPE '@'"
+      "5, 2, 1, 1",
+      "2, 2, 3, 1",
+      "5, 1, 3, 1",
+      "5, 2, 3, 1"
     ],
     "correctIndex": 3,
-    "explanation": "LIKE 패턴에서 '_' 은 임의의 한 문자를 의미하므로 ① 처럼 그대로 쓰면 모든 행이 매칭된다. 리터럴 '_' 자체를 검색하려면 ESCAPE 문자를 지정하고 그 뒤에 '_' 을 두어야 한다. ④ 의 `%@_%` ESCAPE '@' 는 '@_' 를 리터럴 '_' 로 해석해 'AB_C', 'A_BD' 만 매칭한다. ② 'A%' 는 A 로 시작하는 행, ③ 'A_B%' 는 A 다음 아무 한 글자 뒤에 B 가 오는 행이라 밑줄 포함 여부와 다르다.",
+    "explanation": "LIKE 에서 _ 는 아무 글자 하나, % 는 0글자 이상을 뜻한다. ㉠ 의 '%_%' 는 '한 글자 이상인 문자열' 이라 5행 모두 걸린다. 글자 그대로의 _ 나 % 를 찾으려면 ESCAPE 로 지정한 문자를 앞에 붙인다. ㉡ 은 _ 가 들어 있는 AB_C, A_BD 의 2행, ㉣ 은 % 가 들어 있는 A%B 의 1행이다. ㉢ 의 'A_B%' 는 A, 아무 글자 하나, B 로 시작하는 문자열이라 A_BD, A%B, AXBD 의 3행이다. 정답은 ④번이다. ① 은 ㉢ 의 _ 를 글자 그대로의 _ 로 본 것, ② 는 ㉠ 의 _ 를 글자 그대로 본 것, ③ 은 ESCAPE 뒤의 _ 를 AB_C 에서만 찾은 것이다.",
     "_source": "authored",
     "references": [
       {
         "type": "table",
-        "caption": "T 테이블",
+        "caption": "T",
         "headers": [
           "COL2"
         ],
@@ -1840,8 +2009,18 @@ export const ROUND_51: QuizQuestion[] = [
           ],
           [
             "A_BD"
+          ],
+          [
+            "A%B"
+          ],
+          [
+            "AXBD"
           ]
         ]
+      },
+      {
+        "type": "sql",
+        "code": "-- ㉠\nWHERE COL2 LIKE '%_%'\n-- ㉡\nWHERE COL2 LIKE '%@_%' ESCAPE '@'\n-- ㉢\nWHERE COL2 LIKE 'A_B%'\n-- ㉣\nWHERE COL2 LIKE '%\\%%' ESCAPE '\\'"
       }
     ]
   },
@@ -1984,7 +2163,7 @@ export const ROUND_51: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT 지점, 일자,\n       SUM(금액) OVER (PARTITION BY 지점 ORDER BY 일자\n                       ROWS BETWEEN 1 PRECEDING AND CURRENT ROW) AS M\nFROM   T\nORDER BY 지점, 일자;"
+        "code": "SELECT 지점, 일자,\n       SUM(금액) OVER (\n         PARTITION BY 지점\n         ORDER BY 일자\n         ROWS BETWEEN 1 PRECEDING\n              AND CURRENT ROW) AS M\nFROM   T\nORDER BY 지점, 일자;"
       }
     ]
   },
@@ -1995,20 +2174,20 @@ export const ROUND_51: QuizQuestion[] = [
     "round": 51,
     "subject": "2과목",
     "number": 47,
-    "title": "아래 SQL 의 결과로 옳은 것은?",
+    "title": "아래 SQL 의 결과(A, B, C, D)로 옳은 것은? (Oracle 기준)",
     "options": [
-      "1, -1",
-      "1, 1",
-      "3, 3",
-      "0, 0"
+      "2, 2, 1, -2",
+      "2, -1, -2, 2",
+      "2, -1, 1, -2",
+      "-1, 2, -2, 2"
     ],
     "correctIndex": 1,
-    "explanation": "Oracle의 MOD는 `m - n * TRUNC(m/n)`로 계산된다. MOD(10, 3) = 10 - 3*3 = 1, MOD(10, -3) = 10 - (-3)*(-3) = 1이다. ① 은 결과 부호가 나누는 수(-3)를 따른다고 본 결과(Oracle 은 나눠지는 수 10 의 부호), ③ 은 몫, ④ 는 나누어떨어진다고 본 결과다.",
+    "explanation": "MOD(m, n) 은 m - n × FLOOR(m / n) 이 아니라 m - n × TRUNC(m / n) 으로 계산해, 결과의 부호가 나누어지는 수 m 을 따른다. 그래서 A 는 2, C 는 -11 - 3 × (-3) = -2, D 는 11 - (-3) × (-3) = 2 다. REMAINDER 는 TRUNC 대신 ROUND 를 써서 11 - 3 × ROUND(3.67) = 11 - 12 = -1 이다. 정답은 ②번이다. ① 은 REMAINDER 를 MOD 와 같다고 보고 부호를 나누는 수에 맞춘 것, ③ 은 음수 MOD 를 양수 나머지로 바꾼 것, ④ 는 MOD 와 REMAINDER 를 바꿔 본 것이다.",
     "_source": "authored",
     "references": [
       {
         "type": "sql",
-        "code": "SELECT MOD(10, 3), MOD(10, -3) FROM DUAL;"
+        "code": "SELECT MOD(11, 3)       AS A,\n       REMAINDER(11, 3) AS B,\n       MOD(-11, 3)      AS C,\n       MOD(11, -3)      AS D\nFROM   DUAL;"
       }
     ]
   },
@@ -2019,20 +2198,20 @@ export const ROUND_51: QuizQuestion[] = [
     "round": 51,
     "subject": "2과목",
     "number": 48,
-    "title": "아래 SQL 의 결과로 옳은 것은?",
+    "title": "T 의 COL 값이 NULL 인 한 행이 있을 때, 아래 SQL 의 결과 (X, Y, Z) 로 옳은 것은?",
     "options": [
-      "A",
-      "B",
-      "C",
-      "오류"
+      "A, A, B",
+      "B, A, NULL",
+      "A, A, NULL",
+      "B, A, B"
     ],
     "correctIndex": 1,
-    "explanation": "CASE 식은 위에서부터 차례로 평가되어 가장 먼저 참인 WHEN 절의 결과를 반환한다. `1 = 2`는 거짓이므로 넘어가고, `2 = 2`가 참이어서 'B'가 반환된다. ① A 는 1 = 2 가 거짓이라 건너뛰고, ③ C 는 참인 WHEN 이 있어 ELSE 로 가지 않으며, ④ 오류는 나지 않는다.",
+    "explanation": "X 는 CASE 뒤에 비교 대상을 쓰는 단순 CASE 라 COL = NULL 처럼 = 로 비교한다. NULL = NULL 은 참이 아니므로 ELSE 의 'B' 가 나온다. Y 는 IS NULL 로 판정해 'A' 다. Z 는 COL = 1 도, COL <> 1 도 NULL 과의 비교라 참이 아니고, ELSE 가 없으므로 NULL 이다. 결과는 (B, A, NULL)이다. 정답은 ②번이다. NULL 을 가려내려면 단순 CASE 대신 WHEN COL IS NULL 을 써야 한다.",
     "_source": "authored",
     "references": [
       {
         "type": "sql",
-        "code": "SELECT CASE WHEN 1 = 2 THEN 'A'\n            WHEN 2 = 2 THEN 'B'\n            ELSE 'C' END\nFROM DUAL;"
+        "code": "SELECT CASE COL WHEN NULL THEN 'A'\n                ELSE 'B' END AS X,\n       CASE WHEN COL IS NULL THEN 'A'\n            ELSE 'B' END AS Y,\n       CASE WHEN COL = 1 THEN 'A'\n            WHEN COL <> 1 THEN 'B'\n       END AS Z\nFROM   T;"
       }
     ]
   },
@@ -2067,20 +2246,20 @@ export const ROUND_51: QuizQuestion[] = [
     "round": 51,
     "subject": "2과목",
     "number": 50,
-    "title": "아래 SQL 의 결과는?",
+    "title": "아래 SQL 의 결과로 옳은 것은? (A, B, C, D 순서)",
     "options": [
-      "10, -2",
-      "10, -3",
-      "11, -3",
-      "11, -2"
+      "-2, -3, -2.4, -2.5",
+      "-3, -2, -2.5, -2.4",
+      "-3, -2, -2.4, -2.4",
+      "-3, -3, -2.5, -2.5"
     ],
     "correctIndex": 1,
-    "explanation": "FLOOR 는 주어진 수보다 작거나 같은 정수 중 가장 큰 값으로 내림한다. FLOOR(10.4) = 10, 음수 FLOOR(-2.4) 는 -2.4 보다 작거나 같은 가장 큰 정수인 -3 이다(②). 소수점만 버리는 TRUNC(-2.4) 라면 -2 가 되며(①), 11(③④)은 CEIL 의 결과다.",
+    "explanation": "FLOOR 는 그 수보다 작거나 같은 가장 큰 정수라 -2.5 는 -3(A), CEIL 은 크거나 같은 가장 작은 정수라 -2(B) 다. 음수에서는 '내림' 이 절댓값을 키우는 쪽이다. C 의 ROUND(-2.45, 1) 은 소수 둘째 자리 5 에서 반올림하는데, 0 에서 멀어지는 쪽으로 올리므로 -2.5 다. D 의 TRUNC 는 소수 첫째 자리 아래를 버려 0 쪽으로 다가가 -2.4 다. 정답은 ②번이다. ① 은 FLOOR 와 CEIL, ROUND 와 TRUNC 를 서로 바꿔 본 것이고, ③ 은 음수 ROUND 가 0 쪽으로 반올림된다고 본 것, ④ 는 CEIL 과 TRUNC 도 음수에서 아래로 내린다고 본 것이다.",
     "_source": "authored",
     "references": [
       {
         "type": "sql",
-        "code": "SELECT FLOOR(10.4), FLOOR(-2.4) FROM DUAL;"
+        "code": "SELECT FLOOR(-2.5)      AS A,\n       CEIL(-2.5)       AS B,\n       ROUND(-2.45, 1)  AS C,\n       TRUNC(-2.45, 1)  AS D\nFROM   DUAL;"
       }
     ]
   }

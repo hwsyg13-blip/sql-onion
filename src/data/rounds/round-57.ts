@@ -35,16 +35,22 @@ export const ROUND_57: QuizQuestion[] = [
     "round": 57,
     "subject": "1과목",
     "number": 2,
-    "title": "엔터티의 생성 시점에 따른 분류가 아닌 것은?",
+    "title": "은행 업무의 엔터티를 발생 시점에 따라 바르게 분류한 것은?",
     "options": [
-      "기본 엔터티",
-      "중심 엔터티",
-      "사건 엔터티",
-      "행위 엔터티"
+      "고객-중심, 계좌-기본, 입출금내역-행위",
+      "고객-기본, 계좌-행위, 입출금내역-중심",
+      "고객-기본, 계좌-중심, 입출금내역-행위",
+      "고객-기본, 계좌-중심, 입출금내역-사건"
     ],
     "correctIndex": 2,
-    "explanation": "엔터티를 발생 시점(생성 시점)에 따라 나누면 기본 엔터티(①), 중심 엔터티(②), 행위 엔터티(④)다. 사건 엔터티는 유무형에 따른 분류(유형·개념·사건)에 속하므로 발생 시점에 따른 분류가 아니다(③).",
-    "_source": "authored"
+    "explanation": "발생 시점에 따른 분류는 기본·중심·행위 엔터티다. 고객은 다른 엔터티 없이 먼저 존재하는 기본 엔터티, 계좌는 고객으로부터 생겨 업무의 중심이 되는 중심 엔터티, 입출금내역은 계좌에서 일어나는 행위가 쌓이는 행위 엔터티다. 정답은 ③번이다. ① 은 고객과 계좌를 바꿨고, ② 는 계좌와 입출금내역을 바꿨다. ④ 의 사건 엔터티는 유무형(유형·개념·사건)에 따른 분류라 발생 시점 분류에 섞어 쓸 수 없다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "text",
+        "content": "고객: 은행과 거래하는 사람\n계좌: 고객이 개설한 예금 계좌\n입출금내역: 계좌에 돈이 들고 날 때마다 쌓이는 기록"
+      }
+    ]
   },
   {
     "id": 10152,
@@ -298,7 +304,7 @@ export const ROUND_57: QuizQuestion[] = [
     "references": [
       {
         "type": "sql",
-        "code": "-- 각 옵션을 다음 SQL 로 평가:\nSELECT SUBSTR('abcdefgh', 7)                                    AS R1,\n       SUBSTR('abcdefgh', -2)                                   AS R2,\n       SUBSTR('abcdefgh', 8, -2)                                AS R3,\n       SUBSTR('abcdefgh', INSTR('abcdefgh', 'g'), 2)            AS R4\nFROM   DUAL;"
+        "code": "-- 각 옵션을 다음 SQL 로 평가:\nSELECT SUBSTR('abcdefgh', 7) AS R1,\n       SUBSTR('abcdefgh', -2) AS R2,\n       SUBSTR('abcdefgh', 8, -2) AS R3,\n       SUBSTR('abcdefgh',\n              INSTR('abcdefgh', 'g'),\n              2) AS R4\nFROM   DUAL;"
       }
     ]
   },
@@ -405,15 +411,15 @@ export const ROUND_57: QuizQuestion[] = [
     "round": 57,
     "subject": "2과목",
     "number": 17,
-    "title": "아래 SQL 에 사용된 서브쿼리의 유형으로 옳은 것은?",
+    "title": "아래 SQL 에 사용된 서브쿼리의 유형과 결과 행 수로 옳은 것은?",
     "options": [
-      "단일 행 서브쿼리",
-      "다중 행 서브쿼리",
-      "다중 컬럼 서브쿼리",
-      "연관(상관) 서브쿼리"
+      "다중 행 서브쿼리, 3행",
+      "연관 서브쿼리, 2행",
+      "다중 컬럼 서브쿼리, 2행",
+      "다중 컬럼 서브쿼리, 3행"
     ],
     "correctIndex": 2,
-    "explanation": "서브쿼리가 DEPTNO 와 MAX(SAL) 두 컬럼을 돌려주고, 메인 쿼리가 (DEPTNO, SAL) 을 한 쌍으로 묶어 IN 으로 비교하므로 다중 컬럼 서브쿼리다(③). 부서별 최고 급여자를 뽑을 때 자주 쓰는 형태다. ① 단일 행·② 다중 행은 돌려주는 행 수로 나눈 이름이라 컬럼 두 개를 한 쌍으로 비교한다는 이 SQL 의 특징을 나타내지 못하고, 서브쿼리가 메인 쿼리의 컬럼을 참조하지 않으므로 ④ 연관 서브쿼리도 아니다.",
+    "explanation": "서브쿼리가 (DEPTNO, MAX(SAL)) 두 칼럼을 돌려주고 바깥에서 두 칼럼을 쌍으로 비교하므로 다중 컬럼 서브쿼리다. 서브쿼리 결과는 (10, 500), (20, 400) 이고, 이 쌍과 똑같은 행은 EMPNO 2, 3 두 행이다. 정답은 ③번이다. ④ 의 3행은 DEPTNO IN (10, 20) AND SAL IN (500, 400) 처럼 따로 비교했을 때 나온다. 이 경우 10번 부서의 400(EMPNO 1)도 걸린다. 서브쿼리가 바깥 칼럼을 참조하지 않으므로 연관 서브쿼리도 아니다.",
     "_source": "authored",
     "references": [
       {
@@ -428,7 +434,7 @@ export const ROUND_57: QuizQuestion[] = [
           [
             "1",
             "10",
-            "300"
+            "400"
           ],
           [
             "2",
@@ -439,12 +445,17 @@ export const ROUND_57: QuizQuestion[] = [
             "3",
             "20",
             "400"
+          ],
+          [
+            "4",
+            "20",
+            "300"
           ]
         ]
       },
       {
         "type": "sql",
-        "code": "SELECT *\nFROM   EMP\nWHERE  (DEPTNO, SAL) IN ( SELECT DEPTNO, MAX(SAL)\n                          FROM   EMP\n                          GROUP BY DEPTNO );"
+        "code": "SELECT *\nFROM   EMP\nWHERE  (DEPTNO, SAL) IN\n       ( SELECT DEPTNO, MAX(SAL)\n           FROM EMP\n          GROUP BY DEPTNO );"
       }
     ]
   },
@@ -578,7 +589,7 @@ export const ROUND_57: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT ID,\n       COUNT(*) OVER (ORDER BY VAL) AS CNT\nFROM   T\nORDER BY ID;"
+        "code": "SELECT ID,\n       COUNT(*) OVER (ORDER BY VAL)\n         AS CNT\nFROM   T\nORDER BY ID;"
       }
     ]
   },
@@ -815,7 +826,7 @@ export const ROUND_57: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT COUNT(*) FROM T WHERE COL1 = COL2;"
+        "code": "SELECT COUNT(*) FROM T\nWHERE COL1 = COL2;"
       }
     ]
   },
@@ -893,7 +904,7 @@ export const ROUND_57: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT 요일\nFROM   요일테이블\nWHERE  REGEXP_LIKE(요일, 'u[a-z]*day$');"
+        "code": "SELECT 요일\nFROM   요일테이블\nWHERE  REGEXP_LIKE(요일,\n         'u[a-z]*day$');"
       }
     ]
   },
@@ -1136,16 +1147,48 @@ export const ROUND_57: QuizQuestion[] = [
     "round": 57,
     "subject": "2과목",
     "number": 33,
-    "title": "Oracle 에서 상위 N건을 조회하는 방법 중 가장 일반적으로 사용되는 방식은?",
+    "title": "아래 EMP 테이블에서 '급여 상위 N명' 을 구하려고 SQL ㉠~㉣ 을 실행했다. 각 결과의 행 수를 차례대로 나열한 것은? (Oracle 12c 이상)",
     "options": [
-      "SELECT * FROM EMP WHERE ROWNUM <= 10 ORDER BY SAL DESC;",
-      "SELECT * FROM EMP ORDER BY SAL DESC LIMIT 10;",
-      "SELECT TOP 10 * FROM EMP ORDER BY SAL DESC;",
-      "SELECT * FROM (SELECT * FROM EMP ORDER BY SAL DESC) WHERE ROWNUM <= 10;"
+      "2, 2, 3, 2",
+      "2, 3, 3, 2",
+      "3, 3, 4, 3",
+      "2, 3, 4, 3"
     ],
     "correctIndex": 3,
-    "explanation": "Oracle 에서 ORDER BY 결과의 상위 N 건을 안전하게 얻으려면, 정렬을 적용한 인라인 뷰를 만든 뒤 바깥 쿼리에서 ROWNUM 조건을 거는 방식이 가장 일반적이다. ① 은 ROWNUM 이 정렬 전에 붙어 아무 10행을 정렬하고, ② LIMIT 은 MySQL·PostgreSQL 문법, ③ TOP 은 SQL Server 문법이다.",
-    "_source": "authored"
+    "explanation": "㉠ 은 정렬을 끝낸 인라인 뷰에서 ROWNUM 으로 앞의 2행만 자른다. 나와 다의 급여가 같아도 둘 중 하나만 들어가 2행이다. ㉡ RANK 는 500 이 1위, 400 두 명이 공동 2위, 300 은 4위다. R <= 2 이면 3행이다. ㉢ DENSE_RANK 는 순위를 건너뛰지 않아 300 이 3위가 된다. R <= 3 이면 4명 모두 4행이다. ㉣ 의 WITH TIES 는 2번째 행과 정렬 값이 같은 행까지 함께 내므로 400 두 명이 모두 들어가 3행이다. 정답은 ④번이다. ① 은 RANK 와 WITH TIES 가 동점을 잘라낸다고 본 것이고, ② 는 ㉢ 과 ㉣ 을 ROWNUM 처럼 센 것, ③ 은 ROWNUM 도 동점을 함께 낸다고 본 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "caption": "EMP",
+        "headers": [
+          "이름",
+          "급여"
+        ],
+        "rows": [
+          [
+            "가",
+            "500"
+          ],
+          [
+            "나",
+            "400"
+          ],
+          [
+            "다",
+            "400"
+          ],
+          [
+            "라",
+            "300"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "-- ㉠\nSELECT * FROM\n  (SELECT * FROM EMP\n    ORDER BY 급여 DESC)\nWHERE ROWNUM <= 2;\n-- ㉡\nSELECT * FROM\n  (SELECT E.*, RANK() OVER\n     (ORDER BY 급여 DESC) R\n   FROM EMP E)\nWHERE R <= 2;\n-- ㉢\nSELECT * FROM\n  (SELECT E.*, DENSE_RANK() OVER\n     (ORDER BY 급여 DESC) R\n   FROM EMP E)\nWHERE R <= 3;\n-- ㉣\nSELECT * FROM EMP\nORDER BY 급여 DESC\nFETCH FIRST 2 ROWS WITH TIES;"
+      }
+    ]
   },
   {
     "id": 10183,
@@ -1196,16 +1239,31 @@ export const ROUND_57: QuizQuestion[] = [
     "round": 57,
     "subject": "2과목",
     "number": 35,
-    "title": "동일한 이름의 컬럼을 기준으로 자동 조인을 수행하는 JOIN 방식은?",
+    "title": "아래 ERD 처럼 부서와 사원 모두에 '이름' 칼럼이 있다(부서 이름, 사원 이름). 데이터가 다음과 같을 때 SQL ㉠, ㉡, ㉢ 의 결과 행 수로 옳은 것은?",
     "options": [
-      "INNER JOIN",
-      "LEFT OUTER JOIN",
-      "NATURAL JOIN",
-      "RIGHT OUTER JOIN"
+      "2, 2, 2",
+      "0, 0, 2",
+      "0, 2, 2",
+      "2, 0, 2"
     ],
     "correctIndex": 2,
-    "explanation": "NATURAL JOIN 은 두 테이블에서 이름과 데이터 타입이 동일한 컬럼을 자동으로 찾아 등가 조인하며 ON·USING 절을 명시할 필요가 없다. ① INNER JOIN 은 ON·USING 으로 조건을 직접 써야 하고, ② LEFT·④ RIGHT OUTER JOIN 은 한쪽 행을 보존하는 방식일 뿐 같은 이름 컬럼을 자동으로 찾지 않는다.",
-    "_source": "authored"
+    "explanation": "NATURAL JOIN 은 이름이 같은 칼럼을 모두 조인 조건으로 쓴다. 두 테이블에 부서코드뿐 아니라 뜻이 다른 '이름' 도 있어서, ㉠ 은 부서코드가 같고 부서 이름 = 사원 이름 인 행만 찾게 되어 0행이다. USING(부서코드) 는 지정한 칼럼만 비교하므로 ㉡ 은 2행이고, ON 으로 조건을 직접 쓴 ㉢ 도 2행이다. 정답은 ③번이다. ERD 에서 같은 이름의 칼럼이 다른 뜻으로 쓰이면 NATURAL JOIN 은 의도와 다른 결과를 낸다. ① 은 NATURAL JOIN 이 외래키만 비교한다고 본 것, ② 는 USING 도 모든 같은 이름 칼럼을 비교한다고 본 것, ④ 는 두 방식을 바꿔 본 것이다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "erd",
+        "caption": "부서·사원 ERD (두 테이블 모두 '이름' 칼럼)",
+        "mermaid": "erDiagram\n    부서 ||..o{ 사원 : \"소속\"\n    부서 {\n        string 부서코드 PK\n        string 이름\n    }\n    사원 {\n        int 사번 PK\n        string 부서코드 FK\n        string 이름\n    }"
+      },
+      {
+        "type": "text",
+        "content": "부서: (D1, 영업), (D2, 인사)\n사원: (1, D1, 김), (2, D2, 이)"
+      },
+      {
+        "type": "sql",
+        "code": "-- ㉠\nSELECT * FROM 부서 NATURAL JOIN 사원;\n-- ㉡\nSELECT * FROM 부서\nJOIN 사원 USING (부서코드);\n-- ㉢\nSELECT * FROM 부서 D JOIN 사원 E\n  ON D.부서코드 = E.부서코드;"
+      }
+    ]
   },
   {
     "id": 10185,
@@ -1238,24 +1296,20 @@ export const ROUND_57: QuizQuestion[] = [
     "round": 57,
     "subject": "2과목",
     "number": 37,
-    "title": "아래 SQL 의 결과 값으로 옳은 것은?",
+    "title": "C 값이 1, 1, 2, NULL, NULL 인 T 테이블에 아래 SQL 을 실행했다. C 가 NULL 인 그룹 행의 CNT_ALL·CNT_C 값과 결과 행 수로 옳은 것은? (순서대로)",
     "options": [
-      "105, 70",
-      "70, 105",
-      "70, NULL",
-      "70, 70"
+      "0, 0, 2",
+      "2, 0, 3",
+      "2, 2, 3",
+      "2, 0, 2"
     ],
     "correctIndex": 1,
-    "explanation": "T 테이블에 70건이 있으므로 COUNT(*) = 70, COUNT(*) + 35 = 105 이고, SELECT 절에 쓴 순서대로 70, 105 가 나온다(②). ① 은 두 값의 순서를 바꿨고, 집계 결과에 숫자를 더하는 것은 정상적인 연산이라 ③ 처럼 NULL 이 되지 않으며, ④ 는 더한 35 를 빠뜨린 값이다.",
+    "explanation": "GROUP BY 는 NULL 도 하나의 그룹으로 모으므로 결과는 1, 2, NULL 의 3행이다. NULL 그룹에서 COUNT(*) 는 행 자체를 세어 2 지만, COUNT(C) 는 NULL 을 세지 않아 0 이다. 정답은 ②번이다. ① 은 NULL 그룹의 행도 세지 않는다고 본 것, ③ 은 COUNT(C) 도 NULL 을 센다고 본 것, ④ 는 GROUP BY 가 NULL 그룹을 만들지 않는다고 본 것이다.",
     "_source": "authored",
     "references": [
       {
-        "type": "text",
-        "content": "T 테이블에는 총 70건의 행이 저장되어 있다."
-      },
-      {
         "type": "sql",
-        "code": "SELECT COUNT(*), COUNT(*) + 35\nFROM   T;"
+        "code": "SELECT C,\n       COUNT(*) AS CNT_ALL,\n       COUNT(C) AS CNT_C\nFROM   T\nGROUP  BY C;"
       }
     ]
   },
@@ -1323,20 +1377,20 @@ export const ROUND_57: QuizQuestion[] = [
     "round": 57,
     "subject": "2과목",
     "number": 39,
-    "title": "아래 SQL 의 실행 결과로 옳은 것은? (오늘 날짜는 2025년 8월 15일 오후 1시로 가정)",
+    "title": "SYSDATE 가 2025-08-15 13:00 일 때 아래 SQL 의 결과(A, B, C, D)로 옳은 것은? (Oracle 기준, 날짜만 YY.M.D 로 표시)",
     "options": [
-      "2025/01/01 00:00:00, 2026/01/01 00:00:00",
-      "2025/08/15 13:00:00, 2025/08/15 13:00:00",
-      "2024/12/31 00:00:00, 2025/01/01 00:00:00",
-      "2025/01/01 00:00:00, 2025/01/01 00:00:00"
+      "25.1.1, 26.1.1, 25.8.1, 25.8.16",
+      "25.1.1, 25.1.1, 25.9.1, 25.8.15",
+      "25.1.1, 26.1.1, 25.9.1, 25.8.16",
+      "24.12.31, 26.1.1, 25.8.1, 25.8.15"
     ],
     "correctIndex": 0,
-    "explanation": "TRUNC 는 지정한 단위 아래를 모두 버리므로 TRUNC(SYSDATE, 'YYYY') 는 그해 1월 1일 0시, 즉 2025/01/01 00:00:00 이다. ROUND 는 반올림이고, 연 단위로 반올림할 때는 7월 1일이 기준이다. 8월 15일은 7월 1일 이후라 다음 해로 올라가 2026/01/01 00:00:00 이 된다. 그래서 정답은 ① 이다. ② 는 함수를 적용하지 않은 현재 시각, ③ 은 TRUNC 결과를 전날로 착각한 값, ④ 는 ROUND 도 버림으로 계산한 값이다.",
+    "explanation": "날짜의 TRUNC 는 지정한 단위의 처음으로 잘라 A 는 2025-01-01 이다. ROUND 는 단위의 절반을 넘으면 다음 단위로 올린다. 연(YYYY)은 7월 1일부터 올리므로 8월 15일인 B 는 2026-01-01, 월(MM)은 16일부터 올리므로 15일인 C 는 2025-08-01, 일(DD)은 정오(12:00)부터 올리므로 13시인 D 는 2025-08-16 이다. 정답은 ①번이다. ② 는 연은 내리고 월은 15일에 올린 것, ③ 은 15일을 월의 절반을 넘은 것으로 본 것, ④ 는 TRUNC 를 전날로 보고 13시를 내린 것이다.",
     "_source": "authored",
     "references": [
       {
         "type": "sql",
-        "code": "SELECT TRUNC(SYSDATE, 'YYYY'),\n       ROUND(SYSDATE, 'YYYY')\nFROM DUAL;"
+        "code": "SELECT TRUNC(SYSDATE, 'YYYY') AS A,\n       ROUND(SYSDATE, 'YYYY') AS B,\n       ROUND(SYSDATE, 'MM')   AS C,\n       ROUND(SYSDATE, 'DD')   AS D\nFROM   DUAL;"
       }
     ]
   },
@@ -1466,7 +1520,7 @@ export const ROUND_57: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT T.ID, C.NAME\nFROM   TUTOR T\nLEFT OUTER JOIN CLASS C ON T.ID = C.TUTOR_ID;"
+        "code": "SELECT T.ID, C.NAME\nFROM   TUTOR T\nLEFT OUTER JOIN CLASS C\n  ON T.ID = C.TUTOR_ID;"
       }
     ]
   },
@@ -1526,7 +1580,7 @@ export const ROUND_57: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "MERGE INTO TGT T\nUSING SRC S ON (T.ID = S.ID)\nWHEN MATCHED     THEN UPDATE SET T.VAL = S.VAL\nWHEN NOT MATCHED THEN INSERT (ID, VAL) VALUES (S.ID, S.VAL);"
+        "code": "MERGE INTO TGT T\nUSING SRC S ON (T.ID = S.ID)\nWHEN MATCHED THEN\n  UPDATE SET T.VAL = S.VAL\nWHEN NOT MATCHED THEN\n  INSERT (ID, VAL)\n  VALUES (S.ID, S.VAL);"
       }
     ]
   },
@@ -1580,7 +1634,7 @@ export const ROUND_57: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT *\nFROM   MONTHLY\nWHERE  YM BETWEEN '2022-11' AND '2023-05'\nAND    EXTRACT(MONTH FROM TO_DATE(YM, 'YYYY-MM')) NOT IN (1, 2, 4);"
+        "code": "SELECT *\nFROM   MONTHLY\nWHERE  YM BETWEEN '2022-11'\n              AND '2023-05'\nAND    EXTRACT(MONTH FROM\n         TO_DATE(YM, 'YYYY-MM'))\n       NOT IN (1, 2, 4);"
       }
     ]
   },
@@ -1591,20 +1645,46 @@ export const ROUND_57: QuizQuestion[] = [
     "round": 57,
     "subject": "2과목",
     "number": 44,
-    "title": "아래 결과에 해당하는 집계 연산은?",
+    "title": "아래 EMP 에 대해 SELECT DEPT, JOB, SUM(SAL) FROM EMP 뒤에 어떤 GROUP BY 절을 써야 결과 표가 나오는가? (정렬은 무시)",
     "options": [
-      "ROLLUP",
-      "GROUPING SETS",
-      "GROUP BY",
-      "CUBE"
+      "GROUP BY ROLLUP(DEPT, JOB)",
+      "GROUP BY GROUPING SETS(DEPT, JOB)",
+      "GROUP BY DEPT, JOB",
+      "GROUP BY CUBE(DEPT, JOB)"
     ],
     "correctIndex": 0,
-    "explanation": "결과 표를 보면 (DEPT=10, JOB=CLERK) 같은 세부 집계, (DEPT=10, JOB=NULL) 부서 소계, (NULL, NULL) 전체 총계가 나타난다. 이는 ROLLUP(DEPT, JOB) 이 만드는 (DEPT, JOB) → (DEPT) → () 패턴과 정확히 일치. ④ CUBE 는 추가로 (JOB) 단독 소계까지 만들고, ② GROUPING SETS 는 명시 그룹만, ③ GROUP BY 는 세부 집계만 만든다.",
+    "explanation": "결과에는 (DEPT, JOB) 별 합계 3행, DEPT 별 소계 2행(JOB 이 NULL), 전체 합계 1행이 있다. 오른쪽부터 하나씩 줄여 가며 묶는 ROLLUP(DEPT, JOB) 이 이 6행을 만든다. 정답은 ①번이다. ④ CUBE 는 여기에 JOB 별 소계(NULL, CLERK 4000)(NULL, MGR 1000)까지 더해 8행이다. ② GROUPING SETS(DEPT, JOB) 은 DEPT 별·JOB 별 소계만 4행이고 (DEPT, JOB) 행과 총계가 없다. ③ 은 (DEPT, JOB) 3행뿐이다.",
     "_source": "authored",
     "references": [
       {
         "type": "table",
-        "caption": "결과 (집계 연산 출력)",
+        "caption": "EMP",
+        "headers": [
+          "DEPT",
+          "JOB",
+          "SAL"
+        ],
+        "rows": [
+          [
+            "10",
+            "CLERK",
+            "1000"
+          ],
+          [
+            "10",
+            "MGR",
+            "1000"
+          ],
+          [
+            "20",
+            "CLERK",
+            "3000"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "결과",
         "headers": [
           "DEPT",
           "JOB",
@@ -1618,12 +1698,27 @@ export const ROUND_57: QuizQuestion[] = [
           ],
           [
             "10",
-            "(NULL)",
+            "MGR",
+            "1000"
+          ],
+          [
+            "10",
+            "NULL",
             "2000"
           ],
           [
-            "(NULL)",
-            "(NULL)",
+            "20",
+            "CLERK",
+            "3000"
+          ],
+          [
+            "20",
+            "NULL",
+            "3000"
+          ],
+          [
+            "NULL",
+            "NULL",
             "5000"
           ]
         ]
@@ -1671,7 +1766,7 @@ export const ROUND_57: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT 지점, 월, 매출\nFROM   매출\nUNPIVOT (매출 FOR 월 IN (\"1월\", \"2월\"));"
+        "code": "SELECT 지점, 월, 매출\nFROM   매출\nUNPIVOT (매출 FOR 월\n         IN (\"1월\", \"2월\"));"
       }
     ],
     "optionReferences": [
@@ -1905,7 +2000,7 @@ export const ROUND_57: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "DELETE FROM 회원\nWHERE  ID NOT IN (SELECT  ?  FROM 회원 GROUP BY  ?  );"
+        "code": "DELETE FROM 회원\nWHERE  ID NOT IN\n       (SELECT  ?  FROM 회원\n         GROUP BY  ?  );"
       },
       {
         "type": "table",
@@ -1984,7 +2079,7 @@ export const ROUND_57: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT *\nFROM   회원 M\nWHERE  NOT EXISTS ( SELECT 'X'\n                    FROM   탈퇴 T\n                    WHERE  T.회원ID = M.회원ID );"
+        "code": "SELECT *\nFROM   회원 M\nWHERE  NOT EXISTS\n       ( SELECT 'X'\n           FROM 탈퇴 T\n          WHERE T.회원ID = M.회원ID );"
       }
     ]
   },
@@ -2112,7 +2207,7 @@ export const ROUND_57: QuizQuestion[] = [
       },
       {
         "type": "sql",
-        "code": "SELECT Y.사원ID, Y.부서ID, Y.사원명, Y.연봉\nFROM   (SELECT 사원ID, MAX(연봉) OVER (PARTITION BY 부서ID) AS 최고연봉\n        FROM   사원) X,\n       사원 Y\nWHERE  X.사원ID = Y.사원ID\nAND    X.최고연봉 = Y.연봉;"
+        "code": "SELECT Y.사원ID, Y.부서ID,\n       Y.사원명, Y.연봉\nFROM   (SELECT 사원ID,\n               MAX(연봉) OVER (\n                 PARTITION BY 부서ID)\n               AS 최고연봉\n        FROM   사원) X,\n       사원 Y\nWHERE  X.사원ID = Y.사원ID\nAND    X.최고연봉 = Y.연봉;"
       }
     ],
     "optionReferences": [

@@ -63,7 +63,7 @@
     {
       "subject": "1과목",
       "number": 4,
-      "title": "아래 설명을 만족하는 정규형은?",
+      "title": "아래 업무 규칙이 있는 [특강신청] 테이블이 만족하는 가장 높은 정규형은?",
       "options": [
         "1정규형",
         "2정규형",
@@ -71,11 +71,42 @@
         "BCNF"
       ],
       "correctIndex": 2,
-      "explanation": "일반 속성이 모두 주식별자에 함수 종속하고(2정규형까지 만족), 일반 속성 사이의 이행 함수 종속까지 제거한 상태는 3정규형이다(③). 1정규형(①)은 원자값, 2정규형(②)은 부분 함수 종속 제거까지이며, BCNF(④)는 결정자가 모두 후보키가 되도록 한 단계다.",
+      "explanation": "모든 칸이 값 하나라 제1정규형이다. 강사는 학번만으로도(학생은 여러 특강을 듣는다), 특강명만으로도(한 특강에 강사가 여럿) 정해지지 않고 (학번, 특강명) 전체로 정해지므로 부분 종속이 없어 제2정규형이다. 일반 속성이 강사 하나뿐이라 일반 속성 사이의 이행 종속도 없어 제3정규형이다. 그러나 '강사는 한 특강만 맡는다' 는 규칙 때문에 강사 → 특강명 종속이 있다. 결정자인 강사가 후보키가 아니므로 BCNF 는 만족하지 않는다. 가장 높은 정규형은 제3정규형이고 정답은 ③번이다. BCNF 로 만들려면 강사(강사, 특강명)와 특강신청(학번, 강사)으로 나눈다.",
       "references": [
         {
           "type": "text",
-          "content": "일반 속성이 주식별자에 모두 함수 종속하며 이행 함수 종속을 제거한 상태"
+          "content": "주식별자: (학번, 특강명)\n- 한 특강은 여러 강사가 분반으로 나눠 맡는다.\n- 강사는 한 특강만 맡는다.\n- 학생은 한 특강을 한 강사에게만 듣는다."
+        },
+        {
+          "type": "table",
+          "caption": "특강신청",
+          "headers": [
+            "학번",
+            "특강명",
+            "강사"
+          ],
+          "rows": [
+            [
+              "S1",
+              "SQL",
+              "김강사"
+            ],
+            [
+              "S2",
+              "SQL",
+              "박강사"
+            ],
+            [
+              "S1",
+              "모델링",
+              "이강사"
+            ],
+            [
+              "S3",
+              "SQL",
+              "김강사"
+            ]
+          ]
         }
       ]
     },
@@ -102,47 +133,112 @@
     {
       "subject": "1과목",
       "number": 6,
-      "title": "아래 설명에 해당하는 정규화는?",
+      "title": "아래 [주문상품] 테이블에서 상품 P1 의 이름을 바꾸려면 세 행을 모두 고쳐야 한다. 이 문제를 없애는 정규화와 분해 결과로 옳은 것은?",
       "options": [
-        "1정규화",
-        "2정규화",
-        "3정규화",
-        "BCNF"
+        "1정규화 — 상품명을 더 작은 값으로 쪼갠다.",
+        "2정규화 — 주문상품(주문번호, 상품코드, 수량)과 상품(상품코드, 상품명)으로 나눈다.",
+        "3정규화 — 주문상품(주문번호, 상품코드, 수량)과 상품(상품코드, 상품명)으로 나눈다.",
+        "BCNF — 주문(주문번호, 수량)과 상품(상품코드, 상품명)으로 나눈다."
       ],
       "correctIndex": 1,
-      "explanation": "주식별자의 일부에만 종속된 속성(부분 함수 종속)을 분리하는 것은 2정규화다(②). 1정규화(①)는 반복 그룹·다중 값을 없애 원자값으로 만드는 것, 3정규화(③)는 이행 함수 종속 제거, BCNF(④)는 후보키가 아닌 결정자를 제거하는 것이다.",
+      "explanation": "상품명은 주식별자 (주문번호, 상품코드) 전체가 아니라 그 일부인 상품코드만으로 정해진다(부분 함수 종속). 그래서 같은 상품이 주문될 때마다 상품명이 반복되고, 이름을 바꾸면 여러 행을 고쳐야 하는 갱신 이상이 생긴다. 부분 종속을 없애는 것은 제2정규화이고, 상품명을 상품(상품코드, 상품명)으로 떼어 내면 주문상품에는 (주문번호, 상품코드, 수량)이 남는다. 정답은 ②번이다. ① 상품명은 이미 값 하나라 제1정규형을 만족한다. ③ 분해 모양은 같지만 이행 종속(일반 속성 → 일반 속성)이 아니라 부분 종속을 없앤 것이므로 3정규화가 아니다. ④ 수량은 주문번호와 상품코드가 함께 있어야 정해지므로 주문으로 옮기면 안 된다.",
       "references": [
         {
           "type": "text",
-          "content": "부분 함수 종속을 나누어 해결한다."
+          "content": "주식별자: (주문번호, 상품코드)"
+        },
+        {
+          "type": "table",
+          "caption": "주문상품",
+          "headers": [
+            "주문번호",
+            "상품코드",
+            "상품명",
+            "수량"
+          ],
+          "rows": [
+            [
+              "1001",
+              "P1",
+              "볼펜",
+              "3"
+            ],
+            [
+              "1002",
+              "P1",
+              "볼펜",
+              "1"
+            ],
+            [
+              "1003",
+              "P1",
+              "볼펜",
+              "5"
+            ]
+          ]
         }
       ]
     },
     {
       "subject": "1과목",
       "number": 7,
-      "title": "상호 배타적 관계(Arc Relationship) 에 대한 설명 중 옳지 않은 것은?",
+      "title": "차량의 소유자가 법인소유자 또는 개인소유자 중 하나인 상호 배타적(Arc) 관계에 대한 설명으로 옳지 않은 것은?",
       "options": [
-        "상호 배타적 관계는 배타적 상속이 불가능하다.",
-        "두 관계 중 하나만 선택된다.",
-        "차량 엔터티가 법인 또는 개인 중 하나의 소유자와 연결되는 예가 대표적이다.",
-        "ERD 상에서 아크(Arc) 기호로 표현된다."
+        "한 차량이 법인소유자와 개인소유자 모두와 동시에 연결될 수 있다.",
+        "차량에 두 소유자의 외래키 칼럼을 각각 두면, 한 행에서는 둘 중 하나에만 값이 들어가야 한다.",
+        "소유자구분(법인/개인)과 소유자번호 칼럼 하나로 구현할 수도 있는데, 이때는 외래키 제약을 바로 걸기 어렵다.",
+        "ERD 에서는 두 관계선을 가로지르는 호(Arc)로 표시한다."
       ],
       "correctIndex": 0,
-      "explanation": "상호 배타적 관계(아크 관계)는 한 엔터티가 여러 부모 엔터티 중 하나와만 관계를 맺는 것으로(②), 차량의 소유자가 법인 또는 개인 중 하나인 경우가 대표적이며(③) ERD 에서 아크 기호로 표시한다(④). 이런 배타적 관계는 부모 쪽을 슈퍼타입-서브타입(배타적 서브타입) 구조로 설계해 표현할 수도 있으므로 '배타적 상속이 불가능하다' 는 ① 이 옳지 않다."
+      "explanation": "상호 배타적 관계는 여러 관계 중 하나만 선택되는 관계다. 차량 한 대는 법인소유자와 개인소유자 중 하나와만 연결되므로 둘 모두와 동시에 연결된다는 ① 이 옳지 않다. 정답은 ①번이다. ② 외래키를 따로 두는 방식에서는 두 칼럼 중 하나만 값이 있도록 CHECK 등으로 막아야 한다. ③ 구분 칼럼과 번호 칼럼 하나로 합치면 칼럼은 줄지만, 그 번호가 어느 테이블을 가리키는지 행마다 달라 외래키 제약 하나로 묶을 수 없다. ④ IE 표기에서는 두 관계선 위에 호를 그려 표시한다.",
+      "references": [
+        {
+          "type": "erd",
+          "caption": "차량·소유자 ERD (두 소유 관계는 상호 배타적)",
+          "mermaid": "erDiagram\n    법인소유자 |o..o{ 차량 : \"소유\"\n    개인소유자 |o..o{ 차량 : \"소유\"\n    법인소유자 {\n        string 법인번호 PK\n    }\n    개인소유자 {\n        string 주민번호 PK\n    }\n    차량 {\n        string 차량번호 PK\n        string 법인번호 FK\n        string 주민번호 FK\n    }"
+        }
+      ]
     },
     {
       "subject": "1과목",
       "number": 8,
-      "title": "다른 엔터티의 주식별자를 참조하는 키는?",
+      "title": "주문 테이블의 고객번호 칼럼은 고객 테이블의 기본키를 가리킨다. 이 칼럼의 이름과, 여러 주문이 같은 고객번호를 가질 수 있는지로 옳은 것은?",
       "options": [
-        "외래키(FK)",
-        "기본키(PK)",
-        "후보키",
-        "대체키"
+        "외래키 / 같을 수 있다",
+        "기본키 / 같을 수 없다",
+        "외래키 / 같을 수 없다",
+        "대체키 / 같을 수 있다"
       ],
       "correctIndex": 0,
-      "explanation": "다른 엔터티의 주식별자를 참조해 가져온 키는 외래키(FK)로, 참조 무결성을 보장한다(①). 기본키(②)는 자기 엔터티의 인스턴스를 구분하는 대표 키, 후보키(③)는 유일성과 최소성을 만족해 기본키가 될 수 있는 키, 대체키(④)는 후보키 중 기본키로 선택되지 않은 키다."
+      "explanation": "다른 테이블의 기본키를 가리켜 테이블끼리 이어 주는 칼럼은 외래키다. 외래키에는 유일 조건이 없어, 한 고객이 여러 번 주문하면 O1·O2 처럼 같은 고객번호가 여러 행에 나온다(1:M 관계). 정답은 ①번이다. ② 는 주문의 기본키인 주문번호를 설명한 것이다. ③ 은 외래키를 유일해야 하는 것으로 본 것, ④ 의 대체키는 기본키로 뽑히지 않은 후보키라 중복될 수 없다.",
+      "references": [
+        {
+          "type": "table",
+          "caption": "주문",
+          "headers": [
+            "주문번호",
+            "고객번호",
+            "주문일"
+          ],
+          "rows": [
+            [
+              "O1",
+              "C1",
+              "11-01"
+            ],
+            [
+              "O2",
+              "C1",
+              "11-03"
+            ],
+            [
+              "O3",
+              "C2",
+              "11-03"
+            ]
+          ]
+        }
+      ]
     },
     {
       "subject": "1과목",
@@ -180,15 +276,21 @@
     {
       "subject": "2과목",
       "number": 11,
-      "title": "다음 중 데이터 제어어(DCL) 에 해당하는 명령어의 조합은?",
+      "title": "Oracle 에서 아래 순서로 객체 권한을 주고받은 뒤 A 가 B 의 권한을 회수했다. 결과로 옳은 것은?",
       "options": [
-        "CREATE, ALTER",
-        "INSERT, UPDATE",
-        "GRANT, REVOKE",
-        "COMMIT, ROLLBACK"
+        "B 만 권한을 잃고, C 는 SELECT 권한이 그대로 남는다.",
+        "C 만 권한을 잃고, B 는 GRANT OPTION 만 잃는다.",
+        "B 와 C 모두 SELECT 권한을 잃는다.",
+        "C 가 권한을 가지고 있으므로 REVOKE 문이 오류로 끝난다."
       ],
       "correctIndex": 2,
-      "explanation": "GRANT 와 REVOKE 는 권한을 부여·회수하는 데이터 제어어(DCL)이다. ① CREATE/ALTER 는 DDL, ② INSERT/UPDATE 는 DML, ④ COMMIT/ROLLBACK 은 TCL 이다."
+      "explanation": "GRANT, REVOKE 는 권한을 주고 회수하는 DCL 이다. WITH GRANT OPTION 은 받은 객체 권한을 다른 사용자에게 다시 줄 수 있게 한다. Oracle 에서 이렇게 넘겨준 객체 권한은 처음 준 사용자가 회수하면 연쇄적으로 함께 회수된다. B 가 C 에게 준 권한도 사라져 B, C 모두 EMP 를 조회할 수 없다. 정답은 ③번이다. 시스템 권한을 WITH ADMIN OPTION 으로 넘긴 경우는 연쇄 회수되지 않아 C 의 권한이 남는다. 두 옵션을 구별해야 한다.",
+      "references": [
+        {
+          "type": "sql",
+          "code": "-- A 가 실행\nGRANT SELECT ON A.EMP TO B\n  WITH GRANT OPTION;\n-- B 가 실행\nGRANT SELECT ON A.EMP TO C;\n-- A 가 실행\nREVOKE SELECT ON A.EMP FROM B;"
+        }
+      ]
     },
     {
       "subject": "2과목",
@@ -427,7 +529,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "CREATE TABLE 학생 (\n  학번 NUMBER DEFAULT 100 PRIMARY KEY,\n  이름 VARCHAR2(30) NOT NULL,\n  학과번호 NUMBER REFERENCES 학과(학과번호)\n);"
+          "code": "CREATE TABLE 학생 (\n  학번 NUMBER DEFAULT 100 PRIMARY KEY,\n  이름 VARCHAR2(30) NOT NULL,\n  학과번호 NUMBER\n    REFERENCES 학과(학과번호)\n);"
         }
       ]
     },
@@ -515,7 +617,7 @@
         },
         {
           "type": "sql",
-          "code": "SELECT * FROM 주문 WHERE 주문월 = '201010';"
+          "code": "SELECT * FROM 주문\nWHERE 주문월 = '201010';"
         }
       ]
     },
@@ -560,7 +662,7 @@
         },
         {
           "type": "sql",
-          "code": "-- 사원의 매니저 이름을 조회하되 매니저가 없는 경우 '사장' 을 반환한다.\nSELECT E.이름, (  ?  ) AS 상사명\nFROM   사원 E LEFT JOIN 사원 M ON E.매니저ID = M.사원ID;"
+          "code": "-- 사원의 매니저 이름을 조회하되\n-- 매니저가 없는 경우\n-- '사장' 을 반환한다.\nSELECT E.이름, (  ?  ) AS 상사명\nFROM   사원 E LEFT JOIN 사원 M\n       ON E.매니저ID = M.사원ID;"
         },
         {
           "type": "table",
@@ -608,53 +710,85 @@
     {
       "subject": "2과목",
       "number": 23,
-      "title": "아래 LTRIM 함수의 결과로 옳은 것은?",
+      "title": "다음 SQL 의 결과로 옳은 것은? (A, B, C, D 순서)",
       "options": [
-        "abcd",
-        "xxxabcd",
-        "xxxxxxabcd",
-        "NULL"
+        "zyx, xxyxz, yxzy, 3",
+        "zyx, xxyxz, yxzy, 2",
+        "xyxzyx, xxyxz, yxzy, 3",
+        "zyx, xxyxz, yzy, 3"
       ],
       "correctIndex": 0,
-      "explanation": "LTRIM(문자열, 'x') 은 왼쪽부터 'x' 가 아닌 문자가 나올 때까지 지정 문자를 한 번이 아니라 모두 제거한다. 앞의 'xxxxxx' 가 전부 지워져 'abcd' 가 된다. 정답은 ① 이다. ② 는 'x' 를 세 개만 지운다고 본 결과, ③ 은 지우지 않은 원래 값, ④ 는 문자가 남으므로 NULL 이 아니다.",
+      "explanation": "LTRIM·RTRIM 의 두 번째 인자는 지울 문자들의 집합이다. 'xy' 라는 문자열 덩어리가 아니라 x 와 y 중 아무 글자나 해당한다. A 는 왼쪽부터 x, x, y, x 를 지우다 z 에서 멈춰 'zyx' 다. B 는 오른쪽부터 x, y 를 지우다 z 에서 멈춰 'xxyxz' 다. C 의 TRIM('x' FROM …) 은 양쪽 끝의 x 만 지우므로 앞의 xx 와 끝의 x 가 빠져 'yxzy' 다. 가운데 x 는 남는다. D 는 LTRIM 이 왼쪽 공백만 지워 'ab ' 가 되므로 길이가 3 이다. 정답은 ①번이다. ② 는 LTRIM 이 오른쪽 공백까지 지운다고 본 것이고, ③ 은 'xy' 를 한 덩어리로 보고 맨 앞 x 하나만 지운 것, ④ 는 TRIM 이 가운데 x 까지 모두 지운다고 본 것이다.",
       "references": [
         {
           "type": "sql",
-          "code": "SELECT LTRIM('xxxxxxabcd', 'x') FROM DUAL;"
+          "code": "SELECT LTRIM('xxyxzyx', 'xy')  AS A,\n       RTRIM('xxyxzyx', 'xy')  AS B,\n       TRIM('x' FROM 'xxyxzyx') AS C,\n       LENGTH(LTRIM('  ab ')) AS D\nFROM   DUAL;"
         }
       ]
     },
     {
       "subject": "2과목",
       "number": 24,
-      "title": "아래 SQL 의 WHERE 조건과 동일한 의미를 가지는 것은?",
+      "title": "아래 T 테이블에 대한 WHERE 조건 ㉠~㉣ 의 결과 행 수로 옳은 것은?",
       "options": [
-        "SELECT * FROM T WHERE COL1 = 1 AND COL2 = 3;",
-        "SELECT * FROM T WHERE COL1 = 1 OR COL2 IN (3, 4);",
-        "SELECT * FROM T WHERE COL1 IN (1, 2) AND COL2 IN (3, 4);",
-        "SELECT * FROM T WHERE COL1 = 1 AND (COL2 = 3 OR COL2 = 4);"
+        "2, 2, 2, 2",
+        "2, 3, 4, 2",
+        "2, 2, 3, 2",
+        "2, 2, 4, 2"
       ],
       "correctIndex": 3,
-      "explanation": "다중 컬럼 IN `(COL1, COL2) IN ((1, 3), (1, 4))` 는 `(COL1=1 AND COL2=3) OR (COL1=1 AND COL2=4)` 와 동일하다. COL1 이 두 튜플에서 모두 1 이라 공통 인수로 묶으면 `COL1=1 AND (COL2=3 OR COL2=4)` 로 정리된다. ① 은 한 조건만, ② 는 OR 결합으로 더 넓고, ③ 은 COL1 이 2 인 행 (2, 3), (2, 4) 도 매칭하므로 의미가 다르다.",
+      "explanation": "㉠ 의 다중 칼럼 IN 은 (COL1, COL2) 쌍이 목록의 쌍과 똑같은 행만 고르므로 (1, 3), (1, 4) 의 2행이다. ㉣ 은 이를 AND·OR 로 풀어 쓴 것이라 같은 2행이고, ㉡ 도 이 경우에는 COL1 이 1 하나뿐이라 같은 2행이다. ㉢ 은 OR 라 COL1 이 1 이거나 COL2 가 3·4 인 행을 모두 골라 (1, 3), (1, 4), (2, 3), (1, NULL) 의 4행이다. 정답은 ④번이다. ① 은 OR 와 AND 의 차이를 놓친 것, ② 는 ㉡ 이 NULL 행도 잡는다고 본 것, ③ 은 OR 에서 COL2 가 NULL 인 행이 빠진다고 본 것이다(COL1 = 1 이 참이라 남는다).",
       "references": [
         {
+          "type": "table",
+          "caption": "T",
+          "headers": [
+            "COL1",
+            "COL2"
+          ],
+          "rows": [
+            [
+              "1",
+              "3"
+            ],
+            [
+              "1",
+              "4"
+            ],
+            [
+              "2",
+              "3"
+            ],
+            [
+              "1",
+              "NULL"
+            ]
+          ]
+        },
+        {
           "type": "sql",
-          "code": "SELECT *\nFROM   T\nWHERE  (COL1, COL2) IN ((1, 3), (1, 4));"
+          "code": "-- ㉠\nWHERE (COL1, COL2) IN ((1, 3), (1, 4))\n-- ㉡\nWHERE COL1 IN (1) AND COL2 IN (3, 4)\n-- ㉢\nWHERE COL1 IN (1, 1) OR COL2 IN (3, 4)\n-- ㉣\nWHERE (COL1 = 1 AND COL2 = 3)\n   OR (COL1 = 1 AND COL2 = 4)"
         }
       ]
     },
     {
       "subject": "2과목",
       "number": 25,
-      "title": "소수점 내림을 수행하는 함수에 해당하지 않는 것은?",
+      "title": "아래 SQL 의 결과(A, B, C, D)로 옳은 것은? (Oracle 기준)",
       "options": [
-        "CEIL",
-        "FLOOR",
-        "TRUNC (양수 자리 지정)",
-        "INT"
+        "-4, -3, -3, -4",
+        "-3, -3, -4, -4",
+        "-4, -4, -3, -3",
+        "-4, -3, -4, -4"
       ],
       "correctIndex": 0,
-      "explanation": "CEIL 은 소수점을 올리는 함수이므로 내림 함수에 해당하지 않는다. ② FLOOR 는 내림, ③ TRUNC 는 지정한 자리에서 버림, ④ INT 는 정수부만 취하므로 모두 내림 계열이다."
+      "explanation": "FLOOR 는 그 값 이하인 가장 큰 정수라 -3.7 을 더 작은 쪽인 -4 로 내린다. TRUNC 는 소수 부분을 버리기만 해 0 쪽인 -3 이 된다. CEIL 은 그 값 이상인 가장 작은 정수라 -3.2 를 -3 으로 올린다. ROUND 는 0.5 를 0 에서 먼 쪽으로 반올림해 -3.5 는 -4 다. 정답은 ①번이다. ② 는 FLOOR 와 CEIL 을 바꿔 본 것, ③ 은 TRUNC 를 FLOOR 처럼 보고 ROUND 를 0 쪽으로 본 것, ④ 는 CEIL 을 0 에서 먼 쪽으로 올린다고 본 것이다. 양수에서는 FLOOR 와 TRUNC 가 같지만 음수에서는 다르다.",
+      "references": [
+        {
+          "type": "sql",
+          "code": "SELECT FLOOR(-3.7) AS A,\n       TRUNC(-3.7) AS B,\n       CEIL(-3.2)  AS C,\n       ROUND(-3.5) AS D\nFROM   DUAL;"
+        }
+      ]
     },
     {
       "subject": "2과목",
@@ -671,7 +805,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT SUM(SAL)            -- (1)\nFROM   EMP\nWHERE  컬럼 = (SELECT ID FROM A WHERE ~)  -- (2)\nGROUP BY ID                 -- (3)\nHAVING SUM(SAL) > 5000;     -- (4)"
+          "code": "SELECT SUM(SAL)            -- (1)\nFROM   EMP\nWHERE  컬럼 =\n       (SELECT ID FROM A WHERE ~)\n       -- (2)\nGROUP BY ID                 -- (3)\nHAVING SUM(SAL) > 5000;     -- (4)"
         }
       ]
     },
@@ -802,7 +936,7 @@
         },
         {
           "type": "sql",
-          "code": "SELECT 회원ID\nFROM   회원\nORDER  BY DECODE(등급, 'VVIP', 1, 'VIP', 2, 3),\n          포인트 DESC,\n          회원ID;"
+          "code": "SELECT 회원ID\nFROM   회원\nORDER  BY DECODE(등급, 'VVIP', 1,\n                 'VIP', 2, 3),\n          포인트 DESC,\n          회원ID;"
         }
       ]
     },
@@ -821,7 +955,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT * FROM T WHERE COL <= ALL(50, 15);"
+          "code": "SELECT * FROM T\nWHERE COL <= ALL(50, 15);"
         },
         {
           "type": "table",
@@ -852,19 +986,28 @@
     {
       "subject": "2과목",
       "number": 31,
-      "title": "아래 설명에 해당하는 집합 연산자는?",
+      "title": "아래 ERD 처럼 비회원 주문(고객번호 NULL)이 허용될 때, '주문한 적이 없는 고객' 을 구하는 SQL ㉠, ㉡, ㉢ 의 결과 행 수를 차례대로 나열한 것은?",
       "options": [
-        "UNION",
-        "UNION ALL",
-        "INTERSECT",
-        "MINUS"
+        "2, 2, 2",
+        "3, 0, 2",
+        "2, 0, 0",
+        "2, 0, 2"
       ],
       "correctIndex": 3,
-      "explanation": "첫 번째 집합에서 두 번째 집합에 있는 행을 뺀 차집합은 MINUS(SQL Server 는 EXCEPT)다(④). ① UNION 은 중복을 제거한 합집합, ② UNION ALL 은 중복을 포함한 합집합, ③ INTERSECT 는 교집합이다.",
+      "explanation": "ERD 의 고객 쪽 |o 는 주문에 고객이 없을 수 있다는 뜻이라 주문.고객번호 에 NULL 이 들어갈 수 있다. ㉠ MINUS 는 첫 번째 결과 {1, 2, 3} 에서 두 번째 결과 {1, NULL} 에 있는 값을 빼므로 {2, 3} 의 2행이다. ㉡ 의 NOT IN 은 '고객번호 <> 1 AND 고객번호 <> NULL' 로 풀린다. NULL 과의 비교는 참이 될 수 없어 모든 행이 걸러지고 0행이 된다. ㉢ NOT EXISTS 는 같은 고객번호의 주문이 있는지만 확인한다. NULL 주문은 어느 고객과도 같지 않으므로 2, 3 이 남아 2행이다. 정답은 ④번이다. ① 은 NOT IN 의 NULL 문제를 놓친 것이고, ② 는 MINUS 가 NULL 때문에 아무것도 빼지 못한다고 본 것, ③ 은 NOT EXISTS 도 NULL 때문에 0행이 된다고 본 것이다. 외래키가 NULL 을 허용하면 NOT IN 서브쿼리에 WHERE 고객번호 IS NOT NULL 을 붙이거나 NOT EXISTS 를 쓴다.",
       "references": [
         {
+          "type": "erd",
+          "caption": "고객·주문 ERD (비회원 주문 허용)",
+          "mermaid": "erDiagram\n    고객 |o..o{ 주문 : \"주문함\"\n    고객 {\n        int 고객번호 PK\n    }\n    주문 {\n        string 주문번호 PK\n        int 고객번호 FK\n    }"
+        },
+        {
           "type": "text",
-          "content": "첫 번째 집합에서 두 번째 집합에 존재하는 행을 제외한 결과를 반환한다."
+          "content": "고객: 1, 2, 3\n주문: (O1, 1), (O2, 1), (O3, NULL)"
+        },
+        {
+          "type": "sql",
+          "code": "-- ㉠\nSELECT 고객번호 FROM 고객\nMINUS\nSELECT 고객번호 FROM 주문;\n-- ㉡\nSELECT 고객번호 FROM 고객\nWHERE 고객번호 NOT IN\n  (SELECT 고객번호 FROM 주문);\n-- ㉢\nSELECT 고객번호 FROM 고객 C\nWHERE NOT EXISTS\n  (SELECT 1 FROM 주문 O\n    WHERE O.고객번호 = C.고객번호);"
         }
       ]
     },
@@ -903,12 +1046,12 @@
         {
           "type": "sql",
           "caption": "가",
-          "code": "SELECT EMPNO,\n       (SELECT MAX(SAL) FROM EMP) AS MAX_SAL\nFROM   EMP;"
+          "code": "SELECT EMPNO,\n       (SELECT MAX(SAL) FROM EMP)\n         AS MAX_SAL\nFROM   EMP;"
         },
         {
           "type": "sql",
           "caption": "나",
-          "code": "SELECT *\nFROM   EMP\nWHERE  SAL = (SELECT SAL FROM EMP WHERE DEPTNO = 10);"
+          "code": "SELECT *\nFROM   EMP\nWHERE  SAL = (SELECT SAL FROM EMP\n               WHERE DEPTNO = 10);"
         },
         {
           "type": "sql",
@@ -938,33 +1081,61 @@
     {
       "subject": "2과목",
       "number": 35,
-      "title": "아래 두 테이블에 대한 CROSS JOIN 의 결과 행 수로 옳은 것은? (T1 의 행 수 = M, T2 의 행 수 = N)",
+      "title": "아래 T1, T2 의 CROSS JOIN 결과 행 수와, 여기에 WHERE T1.A > T2.B 를 붙였을 때의 행 수로 옳은 것은?",
       "options": [
-        "15",
-        "8",
-        "5",
-        "3"
+        "15행, 6행",
+        "8행, 6행",
+        "15행, 9행",
+        "8행, 3행"
       ],
       "correctIndex": 0,
-      "explanation": "CROSS JOIN 은 조인 조건 없이 두 테이블의 모든 행을 조합하므로 결과 행 수는 M × N 이다. M = 3, N = 5 이면 15 행이다(①). ② 8 은 M + N 을 더한 잘못된 계산이고, ③ 5 와 ④ 3 은 한 테이블의 행 수다.",
+      "explanation": "CROSS JOIN 은 모든 행끼리 짝을 지어 5 × 3 = 15행이다(8 은 더한 값이다). WHERE 는 그 15쌍 중 A > B 인 것만 남긴다. B = 1 이면 A 가 2~5 로 4쌍, B = 3 이면 4·5 로 2쌍, B = 5 이면 없음 → 6행이다. 정답은 ①번이다. WHERE 로 두 테이블 칼럼을 비교하면 결과는 비등가(NON-EQUI) 조인과 같다.",
       "references": [
         {
           "type": "table",
-          "caption": "테이블 카디널리티 (M = T1 행 수, N = T2 행 수)",
+          "caption": "T1",
           "headers": [
-            "M",
-            "N"
+            "A"
           ],
           "rows": [
             [
-              "3",
+              "1"
+            ],
+            [
+              "2"
+            ],
+            [
+              "3"
+            ],
+            [
+              "4"
+            ],
+            [
+              "5"
+            ]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "T2",
+          "headers": [
+            "B"
+          ],
+          "rows": [
+            [
+              "1"
+            ],
+            [
+              "3"
+            ],
+            [
               "5"
             ]
           ]
         },
         {
           "type": "sql",
-          "code": "SELECT *\nFROM   T1 CROSS JOIN T2;"
+          "code": "SELECT *\nFROM   T1 CROSS JOIN T2\nWHERE  T1.A > T2.B;"
         }
       ]
     },
@@ -1090,19 +1261,19 @@
     {
       "subject": "2과목",
       "number": 38,
-      "title": "REGEXP_SUBSTR 로 이메일의 도메인 점(.) 유무를 검사할 때 가장 부적절한 결과가 나오는 경우는?",
+      "title": "다음 REGEXP_SUBSTR 식 ㉠~㉣ 의 결과를 차례대로 나열한 것은? (Oracle 기준)",
       "options": [
-        "name@domain.com",
-        "test@naver.co.kr",
-        "hello@nodot",
-        "user1@example.com"
+        "@mail.co.kr, @nodot, mail.co.kr, co",
+        "mail.co.kr, NULL, mail.co.kr, kr",
+        "@mail.co.kr, NULL, mail.co.kr, co",
+        "@mail.co.kr, NULL, kim, mail"
       ],
       "correctIndex": 2,
-      "explanation": "패턴 '@[^.]+\\.[a-z.]+' 는 @ 뒤에 점이 아닌 글자가 이어지다가 점(.)과 도메인 끝부분이 오는 부분을 찾는다. name@domain.com(①) → '@domain.com', test@naver.co.kr(②) → '@naver.co.kr', user1@example.com(④) → '@example.com' 처럼 점이 있는 주소는 도메인이 정상 추출된다. hello@nodot 은 @ 뒤에 점이 없어 일치하는 부분이 없으므로 NULL 이 나온다(③). ※ 복원 자료에는 검사에 쓴 SQL 이 빠져 있어, 해설의 '도메인 점 유무 검사' 를 SQL 로 보충했다.",
+      "explanation": "REGEXP_SUBSTR 은 패턴과 맞는 부분 문자열을 돌려주고, 맞는 곳이 없으면 NULL 이다. ㉠ 의 패턴은 '@ 다음에 점이 아닌 글자 여러 개, 점 하나, 그 뒤 소문자나 점' 이다. @mail 다음 .co.kr 까지 이어져 '@mail.co.kr' 이고, @ 도 패턴에 들어 있으므로 결과에 포함된다. ㉡ 은 @ 뒤에 점이 없어 \\. 에 맞는 글자가 없으므로 NULL 이다. ㉢ [^@]+$ 는 '@ 가 아닌 글자들이 문자열 끝까지' 라는 뜻이라 'mail.co.kr' 이다. ㉣ 은 1번째 글자부터 찾아 3번째로 맞는 부분을 돌려준다. 소문자 덩어리는 kim, mail, co, kr 순서라 'co' 다. 정답은 ③번이다. ① 은 맞는 곳이 없을 때 @ 뒤 전체를 준다고 본 것이고, ② 는 ㉠ 에서 @ 를 빼고 ㉣ 을 마지막 덩어리로 본 것, ④ 는 ㉢ 의 $ 를 문자열 앞으로 보고 ㉣ 의 순번을 하나씩 앞당긴 것이다.",
       "references": [
         {
           "type": "sql",
-          "code": "SELECT EMAIL,\n       REGEXP_SUBSTR(EMAIL, '@[^.]+\\.[a-z.]+') AS 도메인\nFROM   회원;"
+          "code": "-- ㉠\nREGEXP_SUBSTR('kim@mail.co.kr',\n              '@[^.]+\\.[a-z.]+')\n-- ㉡\nREGEXP_SUBSTR('lee@nodot',\n              '@[^.]+\\.[a-z.]+')\n-- ㉢\nREGEXP_SUBSTR('kim@mail.co.kr',\n              '[^@]+$')\n-- ㉣\nREGEXP_SUBSTR('kim@mail.co.kr',\n              '[a-z]+', 1, 3)"
         }
       ]
     },
@@ -1121,7 +1292,7 @@
       "references": [
         {
           "type": "sql",
-          "code": "SELECT REGEXP_SUBSTR('aabbc', 'a.*', 2) AS 첫번째,\n       REGEXP_SUBSTR('aabbc', 'b.*', 4) AS 두번째\nFROM   DUAL;"
+          "code": "SELECT REGEXP_SUBSTR('aabbc', 'a.*', 2)\n         AS 첫번째,\n       REGEXP_SUBSTR('aabbc', 'b.*', 4)\n         AS 두번째\nFROM   DUAL;"
         }
       ]
     },
@@ -1227,15 +1398,15 @@
     {
       "subject": "2과목",
       "number": 43,
-      "title": "아래 NAMES 테이블에서 LIKE '%n' 조건에 매칭되는 이름의 수로 옳은 것은?",
+      "title": "Oracle 의 아래 NAMES 테이블(NAME VARCHAR2)에서 LIKE '%n' 조건에 맞는 행의 수로 옳은 것은?",
       "options": [
         "1명",
         "2명",
         "3명",
-        "0명"
+        "4명"
       ],
       "correctIndex": 1,
-      "explanation": "LIKE '%n' 은 앞에 무엇이 와도 되고 마지막 글자가 소문자 n 인 문자열과 매칭된다. Kevin, Jason 은 n 으로 끝나고 Tom 은 m 으로 끝나므로 2명이다(②). ① 1명은 둘 중 하나를 놓친 값, ③ 3명은 Tom 까지 센 값이다.",
+      "explanation": "'%n' 은 마지막 글자가 소문자 n 인 값이다. Oracle 의 문자 비교는 대소문자를 구분하므로 JASON(대문자 N)은 맞지 않는다. VARCHAR2 는 입력한 공백을 그대로 저장해 'Glenn ' 의 마지막 글자는 공백이라 맞지 않는다. Kevin, Ann 두 행이다. 정답은 ②번이다. 대소문자를 가리지 않으려면 LOWER(NAME) LIKE '%n', 뒤 공백을 무시하려면 RTRIM(NAME) LIKE '%n' 처럼 쓴다.",
       "references": [
         {
           "type": "table",
@@ -1248,10 +1419,16 @@
               "Kevin"
             ],
             [
-              "Jason"
+              "JASON"
             ],
             [
               "Tom"
+            ],
+            [
+              "Ann"
+            ],
+            [
+              "Glenn (끝에 공백 1칸)"
             ]
           ]
         },
@@ -1283,19 +1460,28 @@
     {
       "subject": "2과목",
       "number": 45,
-      "title": "아래 테이블에 대한 INSERT 중 오류가 발생하는 것은?",
+      "title": "아래 ERD 의 주문상세 테이블에 INSERT ㉠~㉤ 을 차례로 실행할 때, 성공하는 문장만 모두 고른 것은? (Oracle 기준)",
       "options": [
-        "INSERT INTO TEST45 VALUES (1, 2, 3);",
-        "INSERT INTO TEST45 VALUES (1, 2, 3, 4);",
-        "INSERT INTO TEST45 (COL1, COL2, COL3) VALUES (1, 2, 3);",
-        "INSERT INTO TEST45 (COL1, COL2, COL3, COL4) VALUES (1, 2, 3, 4);"
+        "㉠, ㉤",
+        "㉠, ㉡, ㉤",
+        "㉠, ㉣, ㉤",
+        "㉠, ㉢, ㉤"
       ],
       "correctIndex": 0,
-      "explanation": "TEST45 는 컬럼이 4개다. 컬럼 목록을 생략한 INSERT 는 모든 컬럼에 순서대로 값을 줘야 하는데, ① 은 값이 3개뿐이라 '값의 수가 충분하지 않다' 는 오류가 난다. ② 는 4개를 모두 줬고, ③ 은 컬럼 3개를 명시해 COL4 에 NULL 이 들어가며, ④ 는 4개 컬럼을 명시했으므로 모두 정상이다.",
+      "explanation": "㉠ 은 주문 O1 과 상품 P1 이 모두 있고 키도 처음이라 성공한다. ㉡ 의 P3 은 상품 테이블에 없어 외래키 위반이다. ㉢ 은 ㉠ 과 (주문번호, 상품코드) 가 같아 기본키 위반이다. ㉣ 은 칼럼 목록 없이 값을 2개만 주었다. 칼럼 목록을 생략하면 테이블의 모든 칼럼(3개)에 값을 줘야 하므로 Oracle 에서는 값의 개수가 모자란다는 오류가 난다. DEFAULT 는 칼럼 목록에서 빠진 칼럼에만 들어간다. ㉤ 은 칼럼 목록에서 수량을 뺐으므로 DEFAULT 1 이 들어가 NOT NULL 도 지키고 성공한다. 정답은 ①번이다. ② 는 외래키 검사를, ④ 는 복합 기본키 검사를 빠뜨린 것이다. ③ 은 칼럼 목록 없이도 모자란 값에 DEFAULT 가 채워진다고 본 것이다. 참고로 PostgreSQL 은 ㉣ 처럼 뒤쪽 값을 생략하면 기본값을 채워 넣어 성공한다.",
       "references": [
         {
+          "type": "erd",
+          "caption": "주문·주문상세·상품 ERD",
+          "mermaid": "erDiagram\n    주문 ||--|{ 주문상세 : \"포함\"\n    상품 ||--o{ 주문상세 : \"판매\"\n    주문 {\n        string 주문번호 PK\n    }\n    주문상세 {\n        string 주문번호 PK, FK\n        string 상품코드 PK, FK\n        int 수량\n    }\n    상품 {\n        string 상품코드 PK\n    }"
+        },
+        {
+          "type": "text",
+          "content": "주문상세.수량: DEFAULT 1, NOT NULL\n주문: O1 / 상품: P1, P2\n주문상세: 비어 있음"
+        },
+        {
           "type": "sql",
-          "code": "CREATE TABLE TEST45 (\n  COL1 NUMBER,\n  COL2 NUMBER,\n  COL3 NUMBER,\n  COL4 NUMBER\n);"
+          "code": "-- ㉠\nINSERT INTO 주문상세\nVALUES ('O1', 'P1', 2);\n-- ㉡\nINSERT INTO 주문상세\nVALUES ('O1', 'P3', 1);\n-- ㉢\nINSERT INTO 주문상세\nVALUES ('O1', 'P1', 5);\n-- ㉣\nINSERT INTO 주문상세\nVALUES ('O1', 'P2');\n-- ㉤\nINSERT INTO 주문상세\n  (주문번호, 상품코드)\nVALUES ('O1', 'P2');"
         }
       ]
     },
@@ -1475,22 +1661,59 @@
         },
         {
           "type": "sql",
-          "code": "SELECT NVL(MIN(COLB), 0) + NVL(MAX(COLC), 0) + SUM(NVL(SCORE, 0))\nFROM   T;"
+          "code": "SELECT NVL(MIN(COLB), 0)\n     + NVL(MAX(COLC), 0)\n     + SUM(NVL(SCORE, 0))\nFROM   T;"
         }
       ]
     },
     {
       "subject": "2과목",
       "number": 49,
-      "title": "테이블 제약조건 변경에 대한 설명으로 옳지 않은 것은?",
+      "title": "데이터가 아래와 같을 때 사원 테이블에 ㉠~㉤ 을 각각 실행했다. 성공하는 것만 모두 고른 것은? (부서 테이블에는 D1 만 있다)",
       "options": [
-        "PK 는 NOT NULL 과 UNIQUE 가 결합된 제약이다.",
-        "FOREIGN KEY 는 참조 대상이 존재해야 추가할 수 있다.",
-        "CHECK 조건은 기존 데이터도 위반 여부를 검사한다.",
-        "제약 조건 NOT NULL 추가 시 이미 NULL 값이 존재하면 오류 없이 수행된다."
+        "㉢",
+        "㉠, ㉡, ㉢, ㉣, ㉤",
+        "㉢, ㉣, ㉤",
+        "㉢, ㉤"
       ],
       "correctIndex": 3,
-      "explanation": "PK 는 NOT NULL 과 UNIQUE 를 합친 제약이고(①), FK 는 참조할 테이블의 PK·UNIQUE 가 있어야 추가할 수 있으며(②), CHECK 제약을 추가하면 기본적으로 기존 데이터도 위반 여부를 검사한다(③). 이미 NULL 이 있는 컬럼에 NOT NULL 을 추가하면 기존 데이터가 제약을 위반해 오류가 나므로 ④ 가 옳지 않다."
+      "explanation": "제약 조건을 나중에 추가하면 이미 들어 있는 데이터도 그 제약을 지키는지 검사하고, 하나라도 어기면 추가가 거부된다. ㉠ 은 사번 2 의 급여 -50 이 0 이상이 아니라 실패한다. ㉡ 은 사번 2 의 부서코드 D9 가 부서 테이블에 없어 실패한다. NULL 부서코드는 외래키 검사를 받지 않으므로 문제가 되지 않는다. ㉢ 은 부서코드 값이 D1, D9, NULL, NULL 인데, UNIQUE 는 NULL 을 비교 대상으로 보지 않아 NULL 이 두 개여도 성공한다. ㉣ 은 급여가 NULL 인 사번 3 때문에 실패한다. ㉤ 은 -50, 100, 200 이 모두 1000 미만이고, NULL 은 CHECK 결과가 UNKNOWN 이라 위반으로 보지 않아 성공한다. 정답은 ④번이다. ① 은 CHECK 에서도 NULL 이 위반이 된다고 본 것이고, ② 는 기존 데이터는 검사하지 않는다고 본 것, ③ 은 NOT NULL 추가도 앞으로 들어올 데이터에만 적용된다고 본 것이다.",
+      "references": [
+        {
+          "type": "table",
+          "caption": "사원",
+          "headers": [
+            "사번",
+            "부서코드",
+            "급여"
+          ],
+          "rows": [
+            [
+              "1",
+              "D1",
+              "100"
+            ],
+            [
+              "2",
+              "D9",
+              "-50"
+            ],
+            [
+              "3",
+              "NULL",
+              "NULL"
+            ],
+            [
+              "4",
+              "NULL",
+              "200"
+            ]
+          ]
+        },
+        {
+          "type": "sql",
+          "code": "-- ㉠\nALTER TABLE 사원 ADD CONSTRAINT CK1\n  CHECK (급여 >= 0);\n-- ㉡\nALTER TABLE 사원 ADD CONSTRAINT FK1\n  FOREIGN KEY (부서코드)\n  REFERENCES 부서 (부서코드);\n-- ㉢\nALTER TABLE 사원 ADD CONSTRAINT UQ1\n  UNIQUE (부서코드);\n-- ㉣\nALTER TABLE 사원\n  MODIFY (급여 NOT NULL);\n-- ㉤\nALTER TABLE 사원 ADD CONSTRAINT CK2\n  CHECK (급여 < 1000);"
+        }
+      ]
     },
     {
       "subject": "2과목",
