@@ -1230,5 +1230,7 @@ sqld-0312·0319(M494·M501, 데이터베이스 파티션 기법)도 성능 데�
 | 52-2-49 | ON DELETE CASCADE 고르기 | mermaid ERD 4테이블(SET NULL·CASCADE·옵션 없음) + 데이터 + DELETE 세 문장 후 (사원, 근태, NULL 부서 사원) | PostgreSQL 16 에 같은 FK 옵션으로 실행 → ㉢ 은 평가 FK 위반 오류, 결과 (2, 2, 1). 390px 캡처로 ERD 렌더 확인 |
 | 53-2-14 | 3행 BETWEEN AND | 6행(NULL 두 칸) + NOT BETWEEN 5000 AND 3000(아래·위 뒤바뀜) + NVL. 오답: 범위를 고쳐 읽음(1), NULL AMT 포함(5), NVL 누락(3) | PostgreSQL 16 → 4. 고쳐 읽은 식 1, NVL 뺀 식 3 |
 | 53-2-42 | MIN + MAX(TO_CHAR) 3행 | 9·10·100·25 로 문자 비교('9' 가 MAX, '10' 이 MIN) + 암시적 형변환(+ 는 숫자, || 는 문자) | PostgreSQL 16(COLLATE "C" 로 바이트 비교, + 는 명시 변환) → 109, '109' |
+| 54-2-21 | 공통 칼럼 셋 NATURAL JOIN 행 수 | 공통 칼럼 둘(ID, GRP) + NULL 키 + T2 중복 키, (행 수, SELECT * 칼럼 수). 옛 보기 그림(optionReferences) 제거 | PostgreSQL 16 → 3행, 칼럼 id·grp·name·price 4개 |
+| 54-2-46 | 빈칸에 LAG | 지점별 PARTITION + LAG(금액, 1, 0)(기본값은 앞 행이 없을 때만) + LEAD(금액, 2), 중간 NULL 금액 | PostgreSQL 16 → 증감 NULL 은 B 2·3월 2행, A 1월 두달후 120 |
 
-390px 캡처: 열여덟 문항 모두 표·SQL 넘침 없음.
+390px 캡처: 스무 문항 모두 표·SQL 넘침 없음.
