@@ -1257,73 +1257,56 @@ export const ROUND_52: QuizQuestion[] = [
     "round": 52,
     "subject": "2과목",
     "number": 35,
-    "title": "아래 T 테이블에서 소계 없이 (A, B) 세부 집계와 () 총계만 한 번에 나타내기 위해 괄호를 중첩한 ROLLUP 구문으로 옳은 것은?",
+    "title": "아래 T 테이블에 대해 SELECT A, B, C, SUM(V) FROM T 뒤에 ㉠~㉣ 을 각각 붙였을 때 결과 행 수를 차례로 나열한 것은?",
     "options": [
-      "ROLLUP(A, B)",
-      "ROLLUP((A), B)",
-      "ROLLUP((A, B))",
-      "ROLLUP(A, (B))"
+      "10, 8, 7, 5",
+      "10, 10, 10, 5",
+      "10, 7, 8, 5",
+      "9, 6, 7, 5"
     ],
     "correctIndex": 2,
-    "explanation": "중첩 괄호 `((A, B))` 는 (A, B) 를 하나의 그룹 단위로 취급하므로 (A, B) 세부 집계와 () 총계 두 가지만 반환된다. ① `ROLLUP(A, B)` 는 (A, B), (A), () 세 그룹, ② `ROLLUP((A), B)` 는 (A, B), (A), () 와 동일, ④ `ROLLUP(A, (B))` 는 (A, B), (A), () 와 동일하게 (A) 소계가 추가된다.",
+    "explanation": "ROLLUP 안의 괄호는 여러 칼럼을 한 단위로 묶어, 그 안에서는 소계를 만들지 않는다. 데이터의 (A, B, C) 조합은 4개, (A, B) 조합은 (A1, B1), (A1, B2), (A2, B1) 3개, A 값은 2개다. ㉠ ROLLUP(A, B, C) 는 (A, B, C) 4 + (A, B) 3 + (A) 2 + () 1 = 10행이다. ㉡ 은 (B, C) 를 한 단위로 보므로 (A, B, C) 4 + (A) 2 + () 1 = 7행으로, (A, B) 소계가 없다. ㉢ 은 (A, B) 를 한 단위로 보므로 (A, B, C) 4 + (A, B) 3 + () 1 = 8행으로, (A) 소계가 없다. ㉣ 은 상세 4행과 총계 1행만 만들어 5행이다. 정답은 ③번이다. ① 은 ㉡ 과 ㉢ 을 서로 바꿨다. ② 는 괄호를 무시하고 셋 다 ROLLUP(A, B, C) 와 같다고 본 값이다. ④ 는 ROLLUP 에 총계 행이 없다고 본 값이다.",
     "_source": "authored",
     "references": [
       {
         "type": "table",
-        "caption": "T 테이블",
+        "caption": "T",
         "headers": [
           "A",
           "B",
-          "C"
+          "C",
+          "V"
         ],
         "rows": [
           [
             "A1",
             "B1",
+            "C1",
             "10"
           ],
           [
             "A1",
-            "B2",
+            "B1",
+            "C2",
             "20"
+          ],
+          [
+            "A1",
+            "B2",
+            "C1",
+            "30"
           ],
           [
             "A2",
             "B1",
-            "30"
+            "C1",
+            "40"
           ]
         ]
       },
       {
-        "type": "table",
-        "caption": "기대 결과 — (A, B) 세부 + () 총계만 (A 단독 소계 없음)",
-        "headers": [
-          "A",
-          "B",
-          "SUM(C)"
-        ],
-        "rows": [
-          [
-            "A1",
-            "B1",
-            "10"
-          ],
-          [
-            "A1",
-            "B2",
-            "20"
-          ],
-          [
-            "A2",
-            "B1",
-            "30"
-          ],
-          [
-            "(NULL)",
-            "(NULL)",
-            "60"
-          ]
-        ]
+        "type": "sql",
+        "code": "-- ㉠\nGROUP BY ROLLUP(A, B, C)\n-- ㉡\nGROUP BY ROLLUP(A, (B, C))\n-- ㉢\nGROUP BY ROLLUP((A, B), C)\n-- ㉣\nGROUP BY GROUPING SETS((A, B, C), ())"
       }
     ]
   },
