@@ -817,20 +817,20 @@ export const ROUND_50: QuizQuestion[] = [
     "round": 50,
     "subject": "2과목",
     "number": 20,
-    "title": "아래 T 테이블에서 NAME 별 그룹의 최소 ID 만 남기고 나머지를 삭제하는 SQL 로 옳은 것은?",
+    "title": "아래 T 테이블에서 ㉠, ㉡ 을 각각 실행(서로 영향 없이 원래 테이블에서 실행)했을 때 남는 행 수로 옳은 것은?",
     "options": [
-      "DELETE FROM T WHERE ID NOT IN (SELECT MIN(ID) FROM T GROUP BY NAME);",
-      "DELETE FROM T WHERE ID IN (SELECT MAX(ID) FROM T GROUP BY NAME);",
-      "DELETE FROM T WHERE ID = MIN(ID);",
-      "DELETE FROM T GROUP BY NAME HAVING ID = MIN(ID);"
+      "㉠ 4행, ㉡ 5행",
+      "㉠ 4행, ㉡ 4행",
+      "㉠ 3행, ㉡ 5행",
+      "㉠ 3행, ㉡ 3행"
     ],
     "correctIndex": 0,
-    "explanation": "그룹별 MIN(ID) 를 NOT IN 으로 제외하고 나머지를 삭제하면 이름별 최소 ID 만 남는다. ② 는 MAX 만 삭제하고, ③ 은 비집계 컨텍스트에서 MIN 사용 불가, ④ 는 DELETE 에 GROUP BY/HAVING 직접 사용 불가.",
+    "explanation": "㉠ 의 GROUP BY NAME 은 NULL 인 행들도 한 그룹으로 묶는다. 그룹별 MIN(ID) 는 KIM 100, PARK 200, NULL 300, LEE 700 이고, 이 넷이 아닌 400·500·600 이 지워져 4행이 남는다. ㉡ 은 같은 이름 중 가장 작은 ID 보다 큰 행을 지운다. KIM 400 과 PARK 600 은 지워진다. 그런데 NAME 이 NULL 인 300·500 은 B.NAME = A.NAME 이 참이 되는 행이 없어 서브쿼리가 NULL 을 돌려주고, ID > NULL 은 UNKNOWN 이라 지워지지 않는다. 그래서 5행이 남는다. 정답은 ①번이다. ② 는 ㉡ 에서도 NULL 끼리 같은 이름으로 묶인다고 본 것이다. ③ 은 ㉠ 의 GROUP BY 가 NULL 그룹을 만들지 않아 300·500 이 모두 지워진다고 본 것이고, ④ 는 두 문장 모두에서 NULL 이름 행이 사라진다고 본 경우다. GROUP BY 는 NULL 을 한 그룹으로 모으지만 = 비교는 NULL 끼리 참이 아니라는 차이가 핵심이다.",
     "_source": "authored",
     "references": [
       {
         "type": "table",
-        "caption": "T 테이블",
+        "caption": "T",
         "headers": [
           "ID",
           "NAME"
@@ -846,7 +846,7 @@ export const ROUND_50: QuizQuestion[] = [
           ],
           [
             "300",
-            "KANG"
+            "NULL"
           ],
           [
             "400",
@@ -854,9 +854,21 @@ export const ROUND_50: QuizQuestion[] = [
           ],
           [
             "500",
-            "KANG"
+            "NULL"
+          ],
+          [
+            "600",
+            "PARK"
+          ],
+          [
+            "700",
+            "LEE"
           ]
         ]
+      },
+      {
+        "type": "sql",
+        "code": "-- ㉠\nDELETE FROM T\nWHERE  ID NOT IN (SELECT MIN(ID)\n                  FROM   T\n                  GROUP BY NAME);\n\n-- ㉡\nDELETE FROM T A\nWHERE  ID > (SELECT MIN(B.ID)\n             FROM   T B\n             WHERE  B.NAME = A.NAME);"
       }
     ]
   },
@@ -1330,20 +1342,20 @@ export const ROUND_50: QuizQuestion[] = [
     "round": 50,
     "subject": "2과목",
     "number": 34,
-    "title": "아래 두 테이블에 대한 네 SQL 중 결과 행 수가 가장 적은 것은?",
+    "title": "아래 두 테이블에 대한 네 SQL 의 결과 행 수를 ㉠ → ㉣ 순서로 나열한 것은?",
     "options": [
-      "SELECT * FROM A LEFT OUTER JOIN B ON A.ID = B.ID;",
-      "SELECT * FROM A RIGHT OUTER JOIN B ON A.ID = B.ID;",
-      "SELECT * FROM A FULL OUTER JOIN B ON A.ID = B.ID;",
-      "SELECT * FROM A INNER JOIN B ON A.ID = B.ID;"
+      "4, 4, 6, 2",
+      "7, 7, 8, 6",
+      "7, 7, 14, 5",
+      "7, 7, 9, 5"
     ],
     "correctIndex": 3,
-    "explanation": "공통 행은 2·3 두 건이다. ① LEFT 는 여기에 A 에만 있는 1 을 더해 3 건, ② RIGHT 는 B 에만 있는 4 를 더해 3 건, ③ FULL 은 양쪽 미매칭을 모두 더해 4 건이다. INNER 는 매칭된 2 건만 반환하므로 행 수가 가장 적은 것은 ④ 다.",
+    "explanation": "먼저 INNER JOIN(㉣)을 센다. A 의 2 두 행이 B 의 2 두 행과 각각 맞아 2 × 2 = 4행, 3 끼리 1행으로 5행이다. NULL 은 = 비교가 참이 되지 않아 서로 맞지 않는다. LEFT(㉠)는 여기에 B 와 짝이 없는 A 의 1, NULL 두 행이 더해져 7행이다. RIGHT(㉡)는 짝이 없는 B 의 4, NULL 이 더해져 7행이다. FULL(㉢)은 INNER 5행에 양쪽의 짝 없는 행 2 + 2 를 더한 9행이다. 정답은 ④번이다. ① 은 키가 같으면 한 번만 맞는다고 보고 중복 행 곱을 놓쳤다. ② 는 NULL 끼리 맞는다고 본 값이다. ③ 은 FULL OUTER JOIN 을 LEFT 와 RIGHT 를 그대로 합친 것(UNION ALL)으로 보고 INNER 부분을 두 번 셌다.",
     "_source": "authored",
     "references": [
       {
         "type": "table",
-        "caption": "A 테이블",
+        "caption": "A",
         "headers": [
           "ID"
         ],
@@ -1355,13 +1367,19 @@ export const ROUND_50: QuizQuestion[] = [
             "2"
           ],
           [
+            "2"
+          ],
+          [
             "3"
+          ],
+          [
+            "NULL"
           ]
         ]
       },
       {
         "type": "table",
-        "caption": "B 테이블",
+        "caption": "B",
         "headers": [
           "ID"
         ],
@@ -1370,12 +1388,22 @@ export const ROUND_50: QuizQuestion[] = [
             "2"
           ],
           [
+            "2"
+          ],
+          [
             "3"
           ],
           [
             "4"
+          ],
+          [
+            "NULL"
           ]
         ]
+      },
+      {
+        "type": "sql",
+        "code": "-- ㉠\nSELECT * FROM A LEFT OUTER JOIN B\n    ON A.ID = B.ID;\n-- ㉡\nSELECT * FROM A RIGHT OUTER JOIN B\n    ON A.ID = B.ID;\n-- ㉢\nSELECT * FROM A FULL OUTER JOIN B\n    ON A.ID = B.ID;\n-- ㉣\nSELECT * FROM A INNER JOIN B\n    ON A.ID = B.ID;"
       }
     ]
   },
