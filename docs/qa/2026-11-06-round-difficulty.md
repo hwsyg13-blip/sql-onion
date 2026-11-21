@@ -1238,5 +1238,7 @@ sqld-0312·0319(M494·M501, 데이터베이스 파티션 기법)도 성능 데�
 | 56-2-45 | EMPNO 로 SUM 한 행 | 대상 행 없는 SUM·COUNT(*)·GROUP BY·NVL(SUM) 네 문장 | PostgreSQL 16 → NULL, 0, 0행, 0 |
 | 57-2-11 | OFFSET·FETCH 설명 고르기 | 동점 8행 + OFFSET/FETCH ONLY·WITH TIES·남은 행보다 큰 FETCH 세 문장 행 수 | PostgreSQL 16(WITH TIES 지원) → 2, 4, 2 |
 | 57-2-23 | HAVING >= ALL 빈칸 | 급여가 모두 NULL 인 부서 → 서브쿼리 목록에 NULL. ALL 은 0행, ANY 는 2행 | PostgreSQL 16 → ALL 0행, ANY 2행 |
+| 58-2-43 | DROP ... CASCADE CONSTRAINTS 설명 | 부모·자식 + DELETE(참조 위반)·TRUNCATE(FK 참조 테이블 불가)·DROP CASCADE CONSTRAINTS·FK 없는 INSERT 네 문장 | PostgreSQL 16(DROP TABLE ... CASCADE 가 같은 동작) → ㉠·㉡ 오류, T2 4행 |
+| 58-2-47 | 역방향 CONNECT BY 빈칸 | 6행 조직 + 역방향 전개 + WHERE 로 중간 노드 제외(전개는 계속, LEVEL 유지) | PostgreSQL 16 재귀 CTE 로 같은 전개 → SMITH(1), FORD(2), KING(4) |
 
-390px 캡처: 스물여섯 문항 모두 표·SQL 넘침 없음.
+390px 캡처: 스물여덟 문항 모두 표·SQL 넘침 없음.

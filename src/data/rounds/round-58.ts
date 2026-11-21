@@ -1794,22 +1794,22 @@ export const ROUND_58: QuizQuestion[] = [
     "round": 58,
     "subject": "2과목",
     "number": 43,
-    "title": "아래 T1, T2 테이블 구조에서 `DROP TABLE T1 CASCADE CONSTRAINTS` 수행 결과로 옳은 것은?",
+    "title": "아래 T1(부모)·T2(자식) 테이블에 ㉠ → ㉣ 을 차례로 실행했을 때 (성공한 문장 수, 마지막 T2 행 수) 로 옳은 것은? (Oracle 기준, T2.T1_ID 는 T1.ID 를 참조하는 외래키, 삭제 옵션 없음)",
     "options": [
-      "부모 테이블이 함께 삭제된다.",
-      "T1 테이블과 T1 테이블을 참조하는 FK 제약 조건을 함께 삭제한다.",
-      "자식 테이블의 기본키가 삭제된다.",
-      "자식 테이블 전체가 삭제된다."
+      "3문장 성공, T2 4행",
+      "2문장 성공, T2 4행",
+      "2문장 성공, T2 1행",
+      "1문장 성공, T2 3행"
     ],
     "correctIndex": 1,
-    "explanation": "`CASCADE CONSTRAINTS` 옵션은 대상 테이블(T1) 을 삭제하면서, T1 을 참조하는 다른 테이블의 외래키(FK) 제약 조건까지 함께 제거한다. 본 케이스에서는 T2 의 FK 제약(REFERENCES T1) 만 삭제되고 T2 테이블 자체는 그대로 남는다. ①, ④ 는 T2 가 삭제되지 않으므로 오답, ③ T2 의 PK 도 그대로.",
+    "explanation": "㉠ 은 T2 의 (10, 1) 이 ID 1 을 참조하고 있고 삭제 옵션이 없으므로 오류가 난다. ㉡ TRUNCATE 는 행 하나하나를 지우는 DELETE 와 달리, 다른 테이블의 외래키가 참조하고 있는 테이블이면 실제 참조 행이 있든 없든 실행되지 않는다. ㉢ 의 CASCADE CONSTRAINTS 는 T1 을 지우면서 T1 을 참조하던 T2 의 외래키 제약조건만 함께 지운다. T2 의 행은 그대로 3행이다. ㉣ 은 외래키가 사라졌으므로 T1 에 없는 99 를 넣어도 성공한다. 성공은 ㉢·㉣ 두 문장, T2 는 4행이라 정답은 ②번이다. ① 은 TRUNCATE 가 외래키와 상관없이 된다고 본 값이다. ③ 은 CASCADE CONSTRAINTS 가 자식 행까지 지운다고 본 값이다. ④ 는 부모가 없어진 뒤에도 외래키가 남아 ㉣ 이 거부된다고 본 값이다.",
     "_source": "authored",
     "references": [
       {
         "type": "table",
-        "caption": "T1 테이블 (부모, PK = ID)",
+        "caption": "T1",
         "headers": [
-          "ID"
+          "ID (PK)"
         ],
         "rows": [
           [
@@ -1822,10 +1822,10 @@ export const ROUND_58: QuizQuestion[] = [
       },
       {
         "type": "table",
-        "caption": "T2 테이블 (자식, FK: T1_ID → T1.ID)",
+        "caption": "T2",
         "headers": [
-          "ID",
-          "T1_ID"
+          "ID (PK)",
+          "T1_ID (FK)"
         ],
         "rows": [
           [
@@ -1835,12 +1835,16 @@ export const ROUND_58: QuizQuestion[] = [
           [
             "20",
             "2"
+          ],
+          [
+            "30",
+            "NULL"
           ]
         ]
       },
       {
         "type": "sql",
-        "code": "DROP TABLE T1 CASCADE CONSTRAINTS;"
+        "code": "-- ㉠\nDELETE FROM T1 WHERE ID = 1;\n-- ㉡\nTRUNCATE TABLE T1;\n-- ㉢\nDROP TABLE T1 CASCADE CONSTRAINTS;\n-- ㉣\nINSERT INTO T2 VALUES (40, 99);"
       }
     ]
   },
@@ -1953,20 +1957,20 @@ export const ROUND_58: QuizQuestion[] = [
     "round": 58,
     "subject": "2과목",
     "number": 47,
-    "title": "아래 EMP 테이블에서 특정 노드부터 상위로 올라가는 역방향 계층형 탐색 조건으로 가장 적절한 것은?",
+    "title": "아래 EMP 테이블에 대한 계층형 SQL 의 결과(출력 순서대로 ENAME(LEVEL))로 옳은 것은?",
     "options": [
-      "PRIOR MGR = EMPNO",
-      "PRIOR EMPNO = MGR",
-      "MGR = EMPNO",
-      "PRIOR EMPNO = PRIOR MGR"
+      "SMITH(1), FORD(2), KING(4)",
+      "SMITH(1), FORD(2)",
+      "SMITH(1), FORD(2), KING(3)",
+      "KING(1), FORD(3), SMITH(4)"
     ],
     "correctIndex": 0,
-    "explanation": "`PRIOR MGR = EMPNO` 는 \"이전(자식) 행의 MGR 이 다음(부모) 행의 EMPNO 와 같으면 연결\" 의미. 자식 → 부모 역방향 전개. EMPNO=7902(FORD) 에서 시작하면 MGR=7566(JONES) 으로, 다시 7566 의 MGR=7839(KING) 으로 올라간다. ② 는 정방향, ③ 은 PRIOR 없음, ④ 는 자기 참조.",
+    "explanation": "PRIOR MGR = EMPNO 는 앞 행의 관리자 번호를 가진 사원을 다음 행으로 찾으므로 아래에서 위로 올라간다. SMITH(7369)에서 시작해 FORD(7902) → JONES(7566) → KING(7839) 순으로 LEVEL 1~4 가 매겨진다. WHERE 절은 계층 전개가 끝난 뒤 걸러내는 단계라, JONES 행만 결과에서 빠지고 그 위의 KING 까지 전개는 계속되며 LEVEL 도 그대로 4 다. 정답은 ①번이다. ② 는 WHERE 에 걸린 JONES 에서 전개가 멈춘다고 본 결과다. 전개를 멈추게 하려면 조건을 CONNECT BY 절에 넣어야 한다. ③ 은 JONES 가 빠지면 LEVEL 이 다시 매겨진다고 본 결과다. ④ 는 KING 부터 위에서 아래로 전개된다고 본 결과다.",
     "_source": "authored",
     "references": [
       {
         "type": "table",
-        "caption": "EMP 테이블",
+        "caption": "EMP",
         "headers": [
           "EMPNO",
           "ENAME",
@@ -1992,12 +1996,22 @@ export const ROUND_58: QuizQuestion[] = [
             "7369",
             "SMITH",
             "7902"
+          ],
+          [
+            "7698",
+            "BLAKE",
+            "7839"
+          ],
+          [
+            "7499",
+            "ALLEN",
+            "7698"
           ]
         ]
       },
       {
         "type": "sql",
-        "code": "SELECT *\nFROM   EMP\nSTART WITH EMPNO = 7902\nCONNECT BY (  ?  );"
+        "code": "SELECT ENAME, LEVEL\nFROM   EMP\nWHERE  ENAME <> 'JONES'\nSTART WITH EMPNO = 7369\nCONNECT BY PRIOR MGR = EMPNO;"
       }
     ]
   },
