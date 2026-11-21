@@ -15,9 +15,7 @@
   "current_mission": null,
   "my_prs": [
     195,
-    324,
-    329,
-    330
+    324
   ],
   "merged_prs": [
     197,
@@ -109,7 +107,10 @@
     313,
     314,
     315,
-    316
+    316,
+    329,
+    330,
+    331
   ],
   "stop_reason": "밤 실행 — 5시간 0.55·7일 0.50 (기준 0.98 미만). 난이도 15차 #317 만들고 멈춤: 사용자 \"머지\" 없이는 반영 안 됨, 다음 우선순위(AdSense·GA4 BigQuery 첫 분석)는 11-16 10:23 적재 뒤에 가능",
   "releases": [
@@ -328,5 +329,16 @@
     "kakao_webhook_note": "11-18 사용자가 계정 상태 변경 웹훅을 https://sqldyangpa.com 로 테스트 → 403(X-Vercel-Mitigated: deny, Vercel 방화벽). 로그인에 웹훅 불필요 — URL 비워 두라고 안내. 방화벽 우회 안 함",
     "db_plan": "결제 붙일 때 Vercel Storage(Marketplace) Postgres(Neon) 추가, DATABASE_URL 하나로 접속 — 이관 쉽게 일반 SQL. 카카오 앱(1656582) 바꾸지 말 것(회원번호가 앱별)",
     "icons_pr": "#325 예전 동그라미 양파 아이콘 → 메인 로고 양파(파비콘·홈 화면·검색 로고). 예전 아이콘 사용 금지(사용자 11-18)"
+  },
+  "last_merge": {
+    "at": "2026-11-21 07:1x KST",
+    "release_pr": 331,
+    "bundled": [
+      329,
+      330
+    ],
+    "main_sha": "adbd4e1",
+    "deploy": "Production success (Actions Deploy to Vercel)",
+    "deploys_24h_before": 0
   }
 }

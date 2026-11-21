@@ -228,3 +228,4 @@
 - (11-21) chk.sh 출력에서 audit-content 의 '후보 없음' 줄이 사라진 것을 몇 묶음 동안 놓쳤다(M102·M166 HINT_TAIL). 검사 줄 개수를 볼 때 '후보 없음' 이 있는지도 꼭 확인하고, '보기 — 결과' 짝 형식이면 content-audit-reviewed.json 에 사유를 적어 뺀다.
 - (11-21) 1140 풀은 같은 문제 사본이 3~4개씩 있다. 빌드 중복 제외 키는 '제목(채움 문구 제외) + 정렬한 보기 + 참고' 이고 해설이 가장 긴 사본을 남긴다. 한 사본만 바꾸면 옛 사본이 되살아나므로, 제목·보기 집합이 같은 사본을 모두 찾아 같은 내용으로 바꾸고 사본마다 정답 자리(correctIndex)만 맞춘다(scratchpad/patch_q1.py 의 group/apply). 바꾸기 전후 '[중복 제외] N 문항' 수가 같아야 한다.
 - (11-21 06시) PR 상태: #195·#324·#329·#330 모두 열림·draft·충돌 없음. 열린 PR 5개(#194 포함) 상한이라 새 PR 대신 #329 에 이어 올리는 방식으로 운영. 7일 창이 낮 실행 하나에 약 0.09 오르므로, 7일 창이 0.80 을 넘기면 남은 실행 수를 계산해 보고에 미리 알린다.
+- (11-21) `git fetch origin <branch>` 만으로는 origin/<branch> 원격 추적 ref 가 안 생겨 `worktree add … origin/release/…` 가 "invalid reference" 로 실패한다. `git fetch origin <b>:refs/remotes/origin/<b>` 처럼 refspec 을 적는다. 또 원격 브랜치 삭제(git push --delete, REST DELETE refs)는 이 환경 프록시가 막는다 — 남겨 둬도 된다.
