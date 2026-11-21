@@ -1261,3 +1261,5 @@ sqld-0312·0319(M494·M501, 데이터베이스 파티션 기법)도 성능 데�
 | 48-2-21 | 하루 조회 조건 중 다른 것 | DATE 시각 + BETWEEN·TRUNC·LAST_DAY(그날 0시)·ADD_MONTHS 네 조건 | PostgreSQL 16(date_trunc·interval 로 같은 값) → 3, 2, 4, 5 |
 | 50-2-18 | 결과 패턴 보고 CUBE 고르기 | 3행 데이터에 ROLLUP·CUBE·GROUPING SETS(A, B)·ROLLUP(A), B 행 수 | PostgreSQL 16 → 6, 8, 4, 5 |
 | 56-2-30 | 결과 보고 DENSE_RANK 고르기 | 동점 있는 5행 PERCENT_RANK·CUME_DIST 값 | PostgreSQL 16 → David (0.5, 0.6) |
+| 57-1-9 | 학생·과목·수강 ERD 해석 | 교수 |o--o{ 과목(NULL 허용 FK) 추가 + 수강 PK 에 학기 → 재수강·담당 교수 없는 과목·수강 0건 과목·교수의 최소 담당 수 | 관계선 표기 해석 + PostgreSQL 16 에 같은 키로 만들어 재수강 2행·교수 없는 과목 입력 확인. 390px 캡처로 ERD 렌더 확인 |
+| 57-1-10 | 상품·주문 ERD 해석 | 주문 ||--|{ 주문항목(1개 이상) + 고객 FK NOT NULL + 주문항목 복합 PK | 관계선 표기 해석 + PostgreSQL 16 에서 (주문번호, 상품번호) 중복 입력이 PK 오류로 막힘 확인 |
