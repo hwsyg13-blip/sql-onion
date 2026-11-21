@@ -747,42 +747,46 @@ export const ROUND_55: QuizQuestion[] = [
     "round": 55,
     "subject": "2과목",
     "number": 18,
-    "title": "아래 데이터와 SQL 의 결과로 옳은 것은?",
+    "title": "아래 T 테이블에 대한 SQL 결과에서 세 번째 행의 (A, B, C) 로 옳은 것은? (Oracle 기준)",
     "options": [
-      "20, 40, 20",
-      "NULL, 40, NULL",
-      "0, 40, 0",
-      "NULL, NULL, NULL"
+      "(20, 10, '10')",
+      "(NULL, NULL, '10')",
+      "(NULL, 10, NULL)",
+      "(NULL, NULL, NULL)"
     ],
     "correctIndex": 1,
-    "explanation": "NULL 에 산술 연산을 적용하면 결과가 NULL 이 되므로, NULL 이 포함된 첫 번째·세 번째 행은 NULL 이 반환된다. ① 은 NULL 을 0 으로 보고 계산한 값, ③ 은 NULL 이 섞인 연산 결과가 0 이 된다고 본 값, ④ 는 한 행이라도 NULL 이 있으면 모든 행이 NULL 이 된다고 본 값이다.",
+    "explanation": "3번 행은 COL1 = 10, COL2 = NULL 이다. A 는 산술 연산에 NULL 이 하나라도 섞이면 결과가 NULL 이다. B 는 NVL 이 COL1 에만 걸려 있어 10 + NULL = NULL 이다. C 의 || 는 Oracle 에서 NULL 을 빈 문자열처럼 다루므로 '10' || NULL = '10' 이다. 정답은 ②번이다. ① 은 NULL 을 0 으로 계산한 값이다. ③ 은 NVL 이 COL2 에 걸린 것처럼 보고 B 를 10 으로, || 도 NULL 이 된다고 본 값이다. ④ 는 문자 연결도 산술처럼 NULL 이 된다고 본 값이다. PostgreSQL 같은 표준 DBMS 는 || 에 NULL 이 있으면 NULL 을 돌려주므로 Oracle 만의 동작이다.",
     "_source": "authored",
     "references": [
       {
         "type": "table",
+        "caption": "T",
         "headers": [
+          "NO",
           "COL1",
           "COL2"
         ],
         "rows": [
           [
+            "1",
             "NULL",
             "10"
           ],
           [
+            "2",
             "10",
             "10"
           ],
           [
+            "3",
             "10",
             "NULL"
           ]
-        ],
-        "caption": "T 테이블"
+        ]
       },
       {
         "type": "sql",
-        "code": "SELECT COL1 * 2 + COL2 * 2 FROM T;"
+        "code": "SELECT NO,\n       COL1 * 2 + COL2 * 2 AS A,\n       NVL(COL1, 0) + COL2 AS B,\n       COL1 || COL2        AS C\nFROM   T\nORDER BY NO;"
       }
     ]
   },

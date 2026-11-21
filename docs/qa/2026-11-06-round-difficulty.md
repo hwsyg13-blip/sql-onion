@@ -1278,3 +1278,5 @@ sqld-0312·0319(M494·M501, 데이터베이스 파티션 기법)도 성능 데�
 | 60-2-38 | 2×2 카티션 곱 | 빈 테이블과의 카티션 곱·LEFT JOIN ON 1=1·집계 인라인 뷰 | PostgreSQL 16 → 0, 2, 2. SQLite 검증기가 '(빈 테이블)' 행을 실제 행으로 넣어 mismatch → verify-sql-pg 와 같은 빈 테이블 표시 규칙을 verify-sql-results 에도 추가 |
 | 50-2-39 | COUNT(DISTINCT 급여) 5행 | NULL 행 + COUNT(DISTINCT SAL)·TRUNC(SAL, -4)·UPPER(SUBSTR) | PostgreSQL 16 → (3, 2, 3, 6). ROUND 로 바꾸면 B = 3(오답 ①) |
 | 52-2-15 | NVL 결과 중 가장 큰 행 | REPLACE(인수 2개)·INSTR(4번째 인수)·LPAD·SUBSTR(음수 시작) | PostgreSQL 16(replace 3인수·regexp_instr·substr 위치 계산으로 같은 값) → 3, 8, '007', 'OP' |
+| 57-2-40 | 숫자 BETWEEN 5행 | VARCHAR2 급여에 문자열 BETWEEN('13'·'1250000' 포함) vs TO_NUMBER 비교 | PostgreSQL 16(COLLATE "C") → ㉠ 5건(1200, 1300, 1400, 13, 1250000), ㉡ 3건. verify-sql-pg 는 표 이름 파싱 오류로 셈(검증기 한계) |
+| 55-2-18 | NULL 산술 세 행 | 산술 NULL 전파 + NVL 한쪽만 + Oracle 의 || NULL 처리 | PostgreSQL 16 은 || 에 NULL 이면 NULL 이라 concat() 으로 흉내 → 3번 행 (NULL, NULL, '10') |
