@@ -2,9 +2,8 @@
 // TopNav + mobile nav
 import React from 'react';
 import { Btn, Ic } from './Atoms';
-import { UserMenu } from '../screens/LoginScreen';
 
-export const TopNav = ({route, onNavigate, dark, onToggleDark, user, onLogout, betaNoAuth = false}: any) => {
+export const TopNav = ({route, onNavigate, dark, onToggleDark, user, onLogout, betaNoAuth = false, loginEnabled = false}: any) => {
   const links = [
     {id: "home",   label: "홈"},
     {id: "plan",   label: "3주 공부계획"},
@@ -60,15 +59,23 @@ export const TopNav = ({route, onNavigate, dark, onToggleDark, user, onLogout, b
           background: "transparent", border: "1px solid var(--border-default)",
           borderRadius: 10, color: "var(--fg-2)", cursor: "pointer",
         }}>{dark ? <Ic.Sun/> : <Ic.Moon/>}</button>
-        {betaNoAuth
-          ? <span
+        {loginEnabled
+          ? <button onClick={() => onNavigate("mypage")} aria-label="마이페이지" title="마이페이지" style={{
+              width: 36, height: 36, display: "inline-flex", alignItems: "center", justifyContent: "center",
+              background: user ? "var(--point-050)" : "transparent",
+              border: `1px solid ${route === "mypage" ? "var(--point-600)" : "var(--border-default)"}`,
+              borderRadius: 10, color: route === "mypage" ? "var(--point-600)" : "var(--fg-2)", cursor: "pointer",
+              fontFamily: "inherit", fontSize: 14, fontWeight: 700, padding: 0, overflow: "hidden",
+            }}>{user
+              ? (user.avatarUrl
+                  ? <img src={user.avatarUrl} alt="" width="34" height="34" style={{objectFit: "cover"}}/>
+                  : <span style={{color: "var(--point-600)"}}>{user.avatar}</span>)
+              : <Ic.User size={18}/>}</button>
+          : <span
               title="베타 버전 — 사용자 피드백을 받으며 다듬는 중이에요 🧅"
               aria-label="베타 버전"
               style={{fontSize:11,color:"var(--fg-3)",padding:"6px 10px",background:"var(--bg-muted)",borderRadius:999,fontWeight:600,cursor:"help"}}
             >BETA</span>
-          : user
-            ? <UserMenu user={user} onLogout={onLogout} onNavigate={onNavigate}/>
-            : <Btn size="sm" variant="ghost" icon={<Ic.User size={16}/>} onClick={() => onNavigate("login")}>로그인</Btn>
         }
       </div>
     </header>

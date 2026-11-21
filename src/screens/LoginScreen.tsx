@@ -4,7 +4,8 @@
 
 import React from 'react';
 import { Btn, Ic, Mascot, MascotGuide, OnionMark } from '../components/Atoms';
-import { signInWithGoogle } from '../lib/auth';
+// 예전 프로토타입 화면 — 지금은 쓰지 않는다(로그인은 MyPageScreen 의 카카오). 요금제 화면이 아이콘만 가져다 쓴다.
+const signInWithGoogle = async () => { throw new Error('지원하지 않는 로그인 방식이에요.'); };
 
 // ---------- Brand icons (원본 브랜드 자산이 아닌, 각 서비스 공식 배포 가능 단순 심볼 기반 재작성)
 export const GoogleGlyph = ({size = 18}: any) => (
