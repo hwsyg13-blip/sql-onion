@@ -26169,20 +26169,47 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "1과목",
     "number": 783,
-    "title": "다음 SQL 문장 중 COL1 값이 널(NULL)이 아닌 경우를 찾아내는 문장으로 가장 적절한 것은?",
+    "title": "아래 T 테이블에 대한 네 WHERE 조건의 결과 행 수를 차례로 나열한 것은? (Oracle 기준)",
     "options": [
-      "SELECT * FROM TAB1 WHERE COL1 NOT NULL;",
-      "SELECT * FROM TAB1 WHERE COL1 != NULL;",
-      "SELECT * FROM TAB1 WHERE COL1 <> NULL;",
-      "SELECT * FROM TAB1 WHERE COL1 IS NOT NULL;"
+      "3, 3, 3, 3",
+      "0, 3, 4, 3",
+      "3, 3, 3, 2",
+      "0, 3, 3, 2"
     ],
     "correctIndex": 3,
-    "explanation": "NULL 은 = · != · <> 같은 비교 연산으로는 판별할 수 없어 결과가 항상 UNKNOWN 이다(②③ 은 아무 행도 안 나온다). 반드시 IS NULL / IS NOT NULL 을 써야 한다(④). ① 은 IS 가 빠져 문법 오류다.",
+    "explanation": "㉠ 은 NULL 과 비교하면 어떤 값이든 UNKNOWN 이라 0행이다. NULL 확인은 IS NULL·IS NOT NULL 로 해야 한다. ㉡ 은 NULL 이 아닌 A, X, B 3행이다. ㉢ 의 COL1 = COL1 은 값이 있으면 참이지만 NULL 행에서는 NULL = NULL 이 UNKNOWN 이라 빠져 3행이다. ㉣ 은 NULL 을 'X' 로 바꿔 거르는데, 실제 값이 'X' 인 행까지 함께 빠져 A, B 2행이다. 정답은 ④번이다. ① 은 <> NULL 이 NULL 아닌 행을 고른다고 보고, NVL 치환이 실제 'X' 를 지운다는 점도 놓친 값이다. ② 는 COL1 = COL1 이 NULL 행에서도 참이라고 본 값이다. ③ 은 ㉠ 을 IS NOT NULL 과 같게 본 값이다.",
     "chapter": "함수",
     "_source": "sqld-1140",
     "_origId": "sqld-0692",
     "_category": "NULL",
-    "_correctRate": 10
+    "_correctRate": 10,
+    "references": [
+      {
+        "type": "table",
+        "caption": "T",
+        "headers": [
+          "COL1"
+        ],
+        "rows": [
+          [
+            "A"
+          ],
+          [
+            "NULL"
+          ],
+          [
+            "X"
+          ],
+          [
+            "B"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT COUNT(*) FROM T WHERE ( 조건 );\n-- ㉠ COL1 <> NULL\n-- ㉡ NOT (COL1 IS NULL)\n-- ㉢ COL1 = COL1\n-- ㉣ NVL(COL1, 'X') <> 'X'"
+      }
+    ]
   },
   {
     "id": 11583,
@@ -29097,20 +29124,27 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "1과목",
     "number": 867,
-    "title": "약한 엔터티(Weak Entity)의 특징은?",
+    "title": "아래 ERD 에서 주문항목 엔터티에 대한 설명으로 옳은 것은?",
     "options": [
-      "기본 키가 있음",
-      "독립적으로 존재 가능",
-      "강한 엔터티에 의존",
-      "항상 1:1 관계"
+      "주문항목은 주문 없이도 단독으로 생성될 수 있다.",
+      "항목번호 하나만으로 모든 주문의 주문항목을 구분할 수 있다.",
+      "주문항목은 주문에 존재가 종속되고, 주문번호와 항목번호를 합쳐야 식별된다.",
+      "주문을 삭제하면 외래키 설정과 상관없이 주문항목 행은 항상 그대로 남는다."
     ],
     "correctIndex": 2,
-    "explanation": "약한 엔터티는 자기 속성만으로는 행을 구분할 수 없어, 강한(부모) 엔터티의 식별자를 받아 와야 식별된다(③). 그래서 부모 없이 독립적으로 존재할 수 없다. 예: 주문 없이 존재할 수 없는 주문상세.",
+    "explanation": "주문항목은 주문번호를 주식별자에 포함하는 식별 관계의 자식이라, 주문이 있어야만 존재할 수 있는 약한 엔터티다. 항목번호는 한 주문 안에서만 1, 2, 3 … 으로 구분하는 부분 식별자라서, 주문번호와 합쳐야 전체 주문항목 가운데 하나를 가리킬 수 있다. 정답은 ③번이다. ① 은 식별 관계의 자식이 부모 없이 생긴다고 본 것이다. ② 는 항목번호가 주문마다 다시 1 부터 시작한다는 점을 놓쳤다. ④ 는 외래키 동작을 무시했다. 삭제 옵션이 없으면 참조하는 주문항목이 있는 주문은 지울 수 없고, CASCADE 면 함께 지워진다.",
     "chapter": "데이터 모델 개념",
     "_source": "sqld-1140",
     "_origId": "sqld-0808",
     "_category": "데이터베이스 개념",
-    "_correctRate": 10
+    "_correctRate": 10,
+    "references": [
+      {
+        "type": "erd",
+        "caption": "주문·주문항목 ERD",
+        "mermaid": "erDiagram\n    주문 ||--|{ 주문항목 : \"포함\"\n    주문 {\n        string 주문번호 PK\n        date 주문일\n    }\n    주문항목 {\n        string 주문번호 PK, FK\n        number 항목번호 PK\n        string 상품명\n    }"
+      }
+    ]
   },
   {
     "id": 11667,
