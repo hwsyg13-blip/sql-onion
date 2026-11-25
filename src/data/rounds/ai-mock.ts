@@ -7735,59 +7735,6 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11043,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 244,
-    "title": "아래 EMP 에 대해 각 함수(...) OVER (ORDER BY SAL DESC) 의 결과(A, B, C, D 순)를 설명한 것 중 올바르지 않은 것은?",
-    "options": [
-      "RANK() 는 1, 2, 2, 4 다.",
-      "DENSE_RANK() 는 1, 2, 2, 3 이다.",
-      "COUNT(*) 는 1, 2, 3, 4 다.",
-      "ROW_NUMBER() 는 동점인 B, C 에도 서로 다른 번호를 줘서 네 값이 모두 다르다."
-    ],
-    "correctIndex": 2,
-    "explanation": "COUNT(*) OVER (ORDER BY SAL DESC) 는 기본 윈도우가 처음부터 현재 값과 같은 값까지(RANGE)라, 동점인 B, C 는 둘 다 400 까지 센 3 이 된다. 결과는 1, 3, 3, 4 이므로 ③ 이 틀렸다. 정답은 ③번이다. ① RANK 는 동점에 같은 순위를 주고 다음 순위를 건너뛴다. ② DENSE_RANK 는 건너뛰지 않는다. ④ ROW_NUMBER 는 1~4 를 하나씩 준다(B, C 중 누가 먼저인지는 정렬 기준을 더 주어야 정해진다).",
-    "chapter": "윈도우 함수",
-    "_source": "cbt-mock",
-    "_origId": "cbt-203",
-    "_cbtOrigNo": 203,
-    "references": [
-      {
-        "type": "table",
-        "caption": "EMP",
-        "headers": [
-          "ENAME",
-          "DEPT",
-          "SAL"
-        ],
-        "rows": [
-          [
-            "A",
-            "10",
-            "500"
-          ],
-          [
-            "B",
-            "10",
-            "400"
-          ],
-          [
-            "C",
-            "20",
-            "400"
-          ],
-          [
-            "D",
-            "20",
-            "300"
-          ]
-        ]
-      }
-    ]
-  },
-  {
     "id": 11044,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
@@ -10932,20 +10879,67 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 338,
-    "title": "다음 중 계층형 질의문에 대한 설명으로 가장 부적절한 것은?",
+    "title": "아래 조직 테이블에 (가), (나) 를 실행했을 때 결과 행 수로 옳은 것은? (Oracle 기준)",
     "options": [
-      "오라클의 계층형 질의문에서 PRIOR 키워드는 CONNECT BY 절에만 사용할 수 있으며 'prior 자식 = 부모' 형태로 사용하면 순방향 전개로 수행 된다.",
-      "오라클의 계층형 질의문에서 WHERE 절은 모든 전개를 진행한 이후 필터 조건으로서 조건을 만족하는 데이터만을 추출하는데 활용된다.",
-      "SQL Server에서의 계층형 질의문은 앵커 멤버를 실행하여 기본 결과 집합을 만들고 이후 재귀 멤버를 지속적으로 실행한다.",
-      "SQL Server에서의 계층형 질의문은 CTE(Common Table Expression)를 재귀 호출함으로써 계층 구조를 전개한다."
+      "(가) 3 / (나) 5",
+      "(가) 5 / (나) 3",
+      "(가) 5 / (나) 5",
+      "(가) 3 / (나) 3"
     ],
     "correctIndex": 0,
-    "explanation": "① 의 뒷부분(\"PRIOR 자식 = 부모\" 는 부모에서 자식으로 내려가는 순방향)은 맞지만, PRIOR 는 CONNECT BY 절뿐 아니라 SELECT·WHERE 절에서도 쓸 수 있으므로 \"CONNECT BY 절에만\" 이 틀렸다(①). ② 계층형 질의의 WHERE 는 전개를 마친 뒤 거르는 조건이고, ③④ SQL Server 는 재귀 CTE 로 앵커 멤버를 먼저 실행한 뒤 재귀 멤버를 반복해 계층을 펼친다.",
+    "explanation": "CONNECT BY 절의 조건은 계층을 따라 내려갈 때 적용되어, 조건에 맞지 않는 행에서 아래로 더 내려가지 않는다. (가) 는 사번 2(A) 에서 전개가 멈추므로 A 밑의 C(4), D(5) 까지 함께 빠지고 사장, B, E 3행이 남는다. (나) 의 WHERE 는 계층을 다 만든 뒤 결과에서 해당 행만 빼므로 A 한 행만 빠지고 5행이다. 정답은 ①번이다. ② 는 두 절의 역할을 거꾸로 보았다. ③ 은 CONNECT BY 의 조건도 그 행 하나만 뺀다고 착각한 결과다. ④ 는 WHERE 도 그 아래 행까지 뺀다고 착각한 결과다. PostgreSQL 16 에서 재귀 CTE 로 옮겨 실행해도 3행, 5행이다.",
     "chapter": "계층형 질의",
     "_source": "sqld-1140",
     "_origId": "sqld-0110",
     "_category": "계층형 질의",
-    "_correctRate": 10
+    "_correctRate": 10,
+    "references": [
+      {
+        "type": "table",
+        "caption": "조직",
+        "headers": [
+          "사번",
+          "이름",
+          "관리자"
+        ],
+        "rows": [
+          [
+            "1",
+            "사장",
+            "NULL"
+          ],
+          [
+            "2",
+            "A",
+            "1"
+          ],
+          [
+            "3",
+            "B",
+            "1"
+          ],
+          [
+            "4",
+            "C",
+            "2"
+          ],
+          [
+            "5",
+            "D",
+            "2"
+          ],
+          [
+            "6",
+            "E",
+            "3"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "-- (가)\nSELECT 사번 FROM 조직\nSTART WITH 관리자 IS NULL\nCONNECT BY PRIOR 사번 = 관리자\n       AND 사번 <> 2;\n\n-- (나)\nSELECT 사번 FROM 조직\nWHERE  사번 <> 2\nSTART WITH 관리자 IS NULL\nCONNECT BY PRIOR 사번 = 관리자;"
+      }
+    ]
   },
   {
     "id": 11139,
@@ -12857,6 +12851,59 @@ export const AI_MOCK: QuizQuestion[] = [
     "_origId": "sqld-0188",
     "_category": "그룹 함수",
     "_correctRate": 10
+  },
+  {
+    "id": 11195,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 396,
+    "title": "아래 성적 테이블에 SQL 을 실행했을 때 '라' 행의 R1, R2, R3 값으로 옳은 것은?",
+    "options": [
+      "R1: 4, R2: 3, R3: 4",
+      "R1: 3, R2: 3, R3: 4",
+      "R1: 4, R2: 4, R3: 4",
+      "R1: 3, R2: 2, R3: 3"
+    ],
+    "correctIndex": 0,
+    "explanation": "나와 다가 80점으로 같다. RANK 는 같은 값에 같은 순위(2위)를 주고, 같은 순위의 개수만큼 다음 순위를 건너뛰므로 라는 4위다. DENSE_RANK 는 같은 순위를 주되 건너뛰지 않아 라는 3위다. ROW_NUMBER 는 같은 값이어도 서로 다른 번호를 매기며, 여기서는 이름으로 순서를 정해 나 2, 다 3, 라 4 가 된다. 정답은 ①번이다. ② 는 RANK 도 건너뛰지 않는다고 착각한 결과다. ③ 은 DENSE_RANK 도 건너뛴다고 착각한 결과다. ④ 는 세 함수 모두 동점을 하나로 묶어 센 값이다.",
+    "chapter": "윈도우 함수",
+    "_source": "sqld-1140",
+    "_origId": "sqld-0189",
+    "_category": "윈도우 함수",
+    "_correctRate": 10,
+    "references": [
+      {
+        "type": "table",
+        "caption": "성적",
+        "headers": [
+          "이름",
+          "점수"
+        ],
+        "rows": [
+          [
+            "가",
+            "90"
+          ],
+          [
+            "나",
+            "80"
+          ],
+          [
+            "다",
+            "80"
+          ],
+          [
+            "라",
+            "70"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT 이름,\n  RANK() OVER\n    (ORDER BY 점수 DESC) AS R1,\n  DENSE_RANK() OVER\n    (ORDER BY 점수 DESC) AS R2,\n  ROW_NUMBER() OVER\n    (ORDER BY 점수 DESC,\n              이름) AS R3\nFROM 성적;"
+      }
+    ]
   },
   {
     "id": 11197,

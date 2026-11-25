@@ -1362,3 +1362,5 @@ sqld-0312·0319(M494·M501, 데이터베이스 파티션 기법)도 성능 데�
 | sqld-0102 | INTERSECT 이름 고르기 | 중복·NULL 이 있는 두 표에서 INTERSECT 와 IN 서브쿼리 결과 비교 | PostgreSQL 16 → INTERSECT 1, NULL / IN 1, 1. 390px 화면 확인. 사본 없음 |
 | sqld-0178 | COUNT 이름 고르기 | 문자 MAX(사전 순 'A9' > 'A100'), COUNT 의 NULL 제외, COUNT DISTINCT 결과 | PostgreSQL 16 (COLLATE "C") → A9, 3, 2. 검증기 ok. 390px 화면 확인. 사본 없음 |
 | sqld-0221 | ROWS 1 PRECEDING~1 FOLLOWING 고르기 | 이동평균 값 계산 (양 끝은 있는 행만으로 평균) | PostgreSQL 16 → 15, 20, 30, 35. 검증기 ok. 390px 화면 확인. 사본 없음 |
+| sqld-0189 | 순위 함수 설명 고르기 | 동점이 있는 표에서 RANK·DENSE_RANK·ROW_NUMBER 값 | PostgreSQL 16 → 라: 4, 3, 4. 390px 화면 확인. 사본 없음 |
+| sqld-0110 | 계층형 질의 설명 고르기 | CONNECT BY 절 조건(가지째 잘림)과 WHERE 조건(그 행만 빠짐)의 행 수 차이 | PostgreSQL 16 재귀 CTE 로 옮겨 실행 → 3행, 5행. 390px 화면 확인. 사본 없음 |
