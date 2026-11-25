@@ -7292,15 +7292,47 @@
       "_correctRate": 10,
       "subject": "2과목",
       "chapter": "윈도우 함수",
-      "title": "우선순위를 계산하는 윈도우 함수에서 동일한 우선순위가 나와도 고유의 값을 부여하기 위한 방법으로 올바른 것은 무엇인가?",
+      "title": "아래 성적 테이블에서 SQL 의 ㉠ 에 넣었을 때, 실행할 때마다 R 값이 달라질 수 있는 것은? (이름은 모두 다르다)",
       "options": [
-        "Select UNIQUE_RANK() OVER \n(PARTITION BY DEPTNO \nORDER BY SAL DESC) \nDEPT_RANK;",
-        "Select ROW_NUMBER() OVER \n(PARTITION BY DEPTNO \nORDER BY SAL DESC) \nDEPT_RANK;",
-        "Select DENSE_RANK() OVER \n(PARTITION BY DEPTNO \nORDER BY SAL DESC) \nDEPT_RANK;",
-        "Select RANK() OVER \n(PARTITION BY DEPTNO \nORDER BY SAL DESC) \nDEPT_RANK;"
+        "RANK() OVER (ORDER BY 점수 DESC)",
+        "ROW_NUMBER() OVER (ORDER BY 점수 DESC)",
+        "DENSE_RANK() OVER (ORDER BY 점수 DESC)",
+        "ROW_NUMBER() OVER (ORDER BY 점수 DESC, 이름)"
       ],
       "correctIndex": 1,
-      "explanation": "윈도우 ROW_NUMBER() 함수는 동일한 우선 순위가 나올 때 고유 값을 부여한다."
+      "explanation": "ROW_NUMBER 는 동점이어도 행마다 서로 다른 번호를 매긴다. 그런데 ORDER BY 점수 만으로는 80점인 나와 다 중 누가 먼저인지 정해지지 않으므로, 실행할 때마다 나 2·다 3 이 될 수도, 나 3·다 2 가 될 수도 있다. 정답은 ②번이다. ① RANK 는 동점에 같은 순위(나·다 모두 2, 라 4)를, ③ DENSE_RANK 도 같은 순위(나·다 2, 라 3)를 주므로 값이 흔들리지 않는다. ④ 는 이름을 두 번째 정렬 기준으로 넣어 나 2, 다 3 으로 항상 같다. 동점에도 고유 번호가 필요하면 ④ 처럼 겹치지 않는 칼럼을 정렬 기준에 더한다.",
+      "references": [
+        {
+          "type": "table",
+          "caption": "성적",
+          "headers": [
+            "이름",
+            "점수"
+          ],
+          "rows": [
+            [
+              "가",
+              "90"
+            ],
+            [
+              "나",
+              "80"
+            ],
+            [
+              "다",
+              "80"
+            ],
+            [
+              "라",
+              "70"
+            ]
+          ]
+        },
+        {
+          "type": "sql",
+          "code": "SELECT 이름,\n       ㉠ AS R\nFROM   성적;"
+        }
+      ]
     },
     {
       "_id": "sqld-0228",
@@ -16699,15 +16731,15 @@
       "_correctRate": 10,
       "subject": "2과목",
       "chapter": "함수",
-      "title": "다음 보기에서 SELECT 결과가 NULL이 아닌 경우는?",
+      "title": "Oracle 에서 실행했을 때 결과가 'Y' 인 것은?",
       "options": [
-        "SELECT NULLIF('A','A') FROM DUAL;",
-        "SELECT DECODE('A','B','C',NULL) FROM DUAL;",
-        "SELECT CASE 0 WHEN 1 THEN 2 ELSE NULL END FROM DUAL;",
-        "SELECT COALESCE(1,2,3) FROM DUAL;"
+        "SELECT CASE NULL WHEN NULL THEN 'Y' ELSE 'N' END FROM DUAL;",
+        "SELECT CASE WHEN NULL = NULL THEN 'Y' ELSE 'N' END FROM DUAL;",
+        "SELECT NVL2(NULLIF('A', 'A'), 'Y', 'N') FROM DUAL;",
+        "SELECT DECODE(NULL, NULL, 'Y', 'N') FROM DUAL;"
       ],
       "correctIndex": 3,
-      "explanation": "④ COALESCE(1, 2, 3) 은 처음 나오는 NULL 이 아닌 값 1 을 돌려준다. 나머지는 모두 NULL 이다. ① NULLIF('A', 'A') 는 두 값이 같아 NULL, ② DECODE('A', 'B', 'C', NULL) 은 'A' 가 'B' 와 달라 기본값 NULL, ③ CASE 0 WHEN 1 … 은 0 이 1 이 아니라 ELSE NULL 이다."
+      "explanation": "DECODE 는 Oracle 이 예외로 NULL 과 NULL 을 같은 값으로 비교하는 함수라서, 첫 인자 NULL 이 검색값 NULL 과 맞아 'Y' 가 나온다. 정답은 ④번이다. ① 단순 CASE 는 내부적으로 NULL = NULL 로 비교해 UNKNOWN 이 되므로 ELSE 로 가서 'N' 이다. ② 도 NULL = NULL 이 참이 아니어서 'N' 이다. ③ NULLIF('A', 'A') 는 두 값이 같아 NULL 이고, NVL2 는 첫 인자가 NULL 이면 세 번째 값을 돌려줘 'N' 이다. PostgreSQL 16 에서 ①·②·③ 은 모두 'N' 이고, DECODE 처럼 NULL 끼리 같다고 보는 IS NOT DISTINCT FROM 으로 바꾸면 'Y' 가 나온다."
     },
     {
       "_id": "sqld-0536",
