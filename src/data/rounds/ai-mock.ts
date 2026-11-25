@@ -1,5 +1,5 @@
 // Auto-generated from scripts/authored/ai-mock.json
-// AI 생성 모의고사 풀 (기출 변형) · 1124문항
+// AI 생성 모의고사 풀 (기출 변형) · 1105문항
 // ⚠ 직접 편집 금지. ai-mock.json 수정 후 'node scripts/build-quiz-bank.mjs' 재실행.
 import type { QuizQuestion } from '../quizBank';
 
@@ -35306,26 +35306,6 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "데이터 모델링 기법"
   },
   {
-    "id": 11799,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "1과목",
-    "number": 1000,
-    "title": "N:M 관계를 논리 모델로 전환할 때 적절한 방법은?",
-    "options": [
-      "한쪽 엔터티를 삭제한다.",
-      "N:M 관계는 논리 모델에서 그대로 유지해야 한다.",
-      "외래키 없이 텍스트 컬럼에만 저장한다.",
-      "교차 엔터티를 추가하여 두 개의 1:N 관계로 해소한다."
-    ],
-    "correctIndex": 3,
-    "explanation": "N:M 관계는 테이블로 바로 구현할 수 없어서 가운데에 교차 엔터티를 두고 1:N 관계 두 개로 나눈다(④). 예: 학생 N:M 과목 → 학생 1:N 수강, 과목 1:N 수강. 교차 엔터티는 양쪽 기본키를 외래키로 받아 기본키로 쓰는 경우가 많다.",
-    "chapter": "데이터 모델링 기법",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0977",
-    "_category": "데이터 모델링 기법"
-  },
-  {
     "id": 11800,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
@@ -35344,66 +35324,6 @@ export const AI_MOCK: QuizQuestion[] = [
     "_source": "sqld-1140",
     "_origId": "sqld-0978",
     "_category": "데이터 모델링 기법"
-  },
-  {
-    "id": 11801,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "1과목",
-    "number": 1002,
-    "title": "속성의 원자성을 높이는 모델링 방식으로 옳은 것은?",
-    "options": [
-      "전화번호 3개를 하나의 컬럼에 콤마로 저장한다.",
-      "조인 감소를 위해 모든 속성을 VARCHAR 하나에 직렬화한다.",
-      "코드와 코드명을 한 컬럼에 함께 저장한다.",
-      "반복 속성을 분리하여 하나의 컬럼에는 하나의 값만 저장한다."
-    ],
-    "correctIndex": 3,
-    "explanation": "원자성은 한 칼럼에 하나의 값만 들어가는 것이다. 전화번호 여러 개나 코드와 코드명을 한 칸에 몰아 넣으면 원자성이 깨진다. 반복되는 속성은 별도 행이나 테이블로 분리해 칸마다 값 하나만 두어야 한다(④, 제1정규형).",
-    "chapter": "데이터 모델링 기법",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0979",
-    "_category": "데이터 모델링 기법"
-  },
-  {
-    "id": 11802,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "1과목",
-    "number": 1003,
-    "title": "일반적인 데이터베이스 설계 순서로 옳은 것은?",
-    "options": [
-      "물리 설계 -> 개념 설계 -> 논리 설계",
-      "개념 설계 -> 논리 설계 -> 물리 설계",
-      "논리 설계 -> 물리 설계 -> 개념 설계",
-      "인덱스 설계 -> 업무 분석 -> 개념 설계"
-    ],
-    "correctIndex": 1,
-    "explanation": "데이터베이스 설계는 개념 설계(핵심 엔터티·관계) → 논리 설계(속성·키·정규화) → 물리 설계(테이블·인덱스·저장 구조) 순서로, 추상적인 것에서 구체적인 것으로 진행한다(②).",
-    "chapter": "데이터베이스 설계",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0981",
-    "_category": "데이터베이스 설계"
-  },
-  {
-    "id": 11803,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "1과목",
-    "number": 1004,
-    "title": "물리 설계 단계에서 주로 결정하는 사항으로 옳은 것은?",
-    "options": [
-      "인덱스, 파티션, 저장 구조와 접근 경로",
-      "엔터티와 관계의 후보 목록",
-      "업무 용어 사전만 작성하는 작업",
-      "식별자 존재 여부만 검토하는 작업"
-    ],
-    "correctIndex": 0,
-    "explanation": "물리 설계는 논리 모델을 실제 DBMS 에 맞게 구현하는 단계로, 인덱스·파티션·저장 구조·접근 경로처럼 성능과 저장 효율에 관한 것을 정한다(①). 엔터티와 관계를 찾는 일은 개념·논리 모델링 단계의 일이다.",
-    "chapter": "데이터베이스 설계",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0982",
-    "_category": "데이터베이스 설계"
   },
   {
     "id": 11804,
@@ -35880,26 +35800,6 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11818,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 1019,
-    "title": "다음 설명 중 TRUNCATE TABLE에 대한 설명으로 가장 적절한 것은?",
-    "options": [
-      "테이블 전체 데이터를 빠르게 비우는 DDL이다.",
-      "조건절을 사용해 일부 행만 삭제한다.",
-      "권한을 회수하는 명령이다.",
-      "뷰 정의를 변경하는 명령이다."
-    ],
-    "correctIndex": 0,
-    "explanation": "TRUNCATE TABLE 은 테이블 구조는 남기고 데이터 전체를 한꺼번에 비우는 DDL 이다(①). 행마다 로그를 남기지 않아 DELETE 보다 빠르지만 WHERE 조건을 쓸 수 없고, 자동 커밋되어 ROLLBACK 할 수 없다(Oracle 기준).",
-    "chapter": "DDL",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0998",
-    "_category": "DDL"
-  },
-  {
     "id": 11821,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
@@ -36128,26 +36028,6 @@ export const AI_MOCK: QuizQuestion[] = [
         "code": "SELECT COALESCE(NULL, NULL, 5, 10)\nFROM dual;"
       }
     ]
-  },
-  {
-    "id": 11832,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "1과목",
-    "number": 1033,
-    "title": "다음 조건으로 올바르게 NULL이 아닌 행만 조회하는 방법은?",
-    "options": [
-      "WHERE bonus <> NULL",
-      "WHERE bonus = NOT NULL",
-      "WHERE bonus IS NOT NULL",
-      "WHERE NOT bonus = NULL"
-    ],
-    "correctIndex": 2,
-    "explanation": "NULL 은 = · <> 로 비교하면 결과가 항상 UNKNOWN 이라 아무 행도 나오지 않는다(①④). 값이 있는 행은 IS NOT NULL 로 찾는다(③). ② 의 '= NOT NULL' 은 문법 오류다.",
-    "chapter": "함수",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1015",
-    "_category": "NULL"
   },
   {
     "id": 11834,
@@ -37051,26 +36931,6 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "View"
   },
   {
-    "id": 11861,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 1062,
-    "title": "다음 SQL에서 동점자가 있을 때 RANK와 DENSE_RANK의 차이로 옳은 것은?",
-    "options": [
-      "둘 다 항상 동일하다.",
-      "DENSE_RANK만 정렬 절을 사용한다.",
-      "RANK는 순위가 건너뛰고 DENSE_RANK는 건너뛰지 않는다.",
-      "ROW_NUMBER와 완전히 동일하다."
-    ],
-    "correctIndex": 2,
-    "explanation": "동점이 있으면 RANK 는 같은 순위를 준 뒤 그 수만큼 다음 순위를 건너뛰고(1, 2, 2, 4), DENSE_RANK 는 건너뛰지 않는다(1, 2, 2, 3). ROW_NUMBER 는 동점이어도 1, 2, 3, 4 처럼 고유한 번호를 준다. 세 함수 모두 OVER 안에 ORDER BY 를 쓴다.",
-    "chapter": "윈도우 함수",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1052",
-    "_category": "윈도우 함수"
-  },
-  {
     "id": 11862,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
@@ -37157,26 +37017,6 @@ export const AI_MOCK: QuizQuestion[] = [
         "code": "SELECT region,\n       seller,\n       amount,\n       SUM(amount) OVER (\n         PARTITION BY region\n         ORDER BY amount DESC\n         ROWS BETWEEN UNBOUNDED\n              PRECEDING\n              AND CURRENT ROW\n       ) AS run_amt\nFROM sales_rank;"
       }
     ]
-  },
-  {
-    "id": 11864,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 1065,
-    "title": "ROW_NUMBER() OVER (PARTITION BY dept ORDER BY sal DESC)의 의미로 옳은 것은?",
-    "options": [
-      "전체 테이블에서 한 번만 번호를 부여한다.",
-      "부서별 합계를 계산한다.",
-      "부서별로 급여가 높은 순서의 일련번호를 부여한다.",
-      "NULL만 번호를 부여한다."
-    ],
-    "correctIndex": 2,
-    "explanation": "PARTITION BY dept 로 부서마다 따로, ORDER BY sal DESC 로 급여가 높은 사람부터 1, 2, 3 … 번호를 붙인다(③). ROW_NUMBER 는 급여가 같아도 서로 다른 번호를 준다.",
-    "chapter": "윈도우 함수",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1055",
-    "_category": "윈도우 함수"
   },
   {
     "id": 11870,
@@ -38159,86 +37999,6 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11986,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 1187,
-    "title": "INTERSECT의 의미로 옳은 것은?",
-    "options": [
-      "차집합",
-      "교집합",
-      "정렬",
-      "합집합"
-    ],
-    "correctIndex": 1,
-    "explanation": "INTERSECT 는 두 SELECT 결과에 모두 있는 행만 돌려주는 교집합이다(②). 합집합은 UNION, 차집합은 MINUS(SQL Server 는 EXCEPT)다.",
-    "chapter": "집합 연산자",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1205",
-    "_category": "집합 연산자"
-  },
-  {
-    "id": 11988,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 1189,
-    "title": "ALTER TABLE로 가능한 작업으로 옳은 것은?",
-    "options": [
-      "컬럼 추가, 수정, 삭제 등 구조 변경",
-      "권한 부여만 수행",
-      "트랜잭션 저장점 생성",
-      "데이터만 조회"
-    ],
-    "correctIndex": 0,
-    "explanation": "ALTER는 객체 구조 변경 명령이다.",
-    "chapter": "DDL",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1208",
-    "_category": "DDL"
-  },
-  {
-    "id": 11989,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 1190,
-    "title": "ORDER BY 절에 대한 설명으로 옳은 것은?",
-    "options": [
-      "집계 함수와 함께 사용할 수 없다.",
-      "한 컬럼만 사용할 수 있다.",
-      "WHERE 절보다 먼저 수행된다.",
-      "SELECT 결과 집합의 표시 순서를 제어한다."
-    ],
-    "correctIndex": 3,
-    "explanation": "ORDER BY는 출력 결과의 정렬 순서를 결정한다.",
-    "chapter": "DML",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1209",
-    "_category": "DML"
-  },
-  {
-    "id": 11992,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "1과목",
-    "number": 1193,
-    "title": "기본 테이블 구조가 변경될 때 VIEW 관련 주의점으로 옳은 것은?",
-    "options": [
-      "뷰는 SELECT 문을 포함할 수 없다.",
-      "뷰는 기본 테이블과 완전히 독립적이다.",
-      "기본 테이블 변경이 뷰 조회 오류로 이어질 수 있다.",
-      "뷰는 DROP TABLE보다 먼저 삭제할 수 없다."
-    ],
-    "correctIndex": 2,
-    "explanation": "뷰는 기본 테이블 정의에 의존한다.",
-    "chapter": "View",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1214",
-    "_category": "View"
-  },
-  {
     "id": 11993,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
@@ -38311,26 +38071,6 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12006,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 1207,
-    "title": "MINUS(A, B)의 의미로 옳은 것은?",
-    "options": [
-      "A에만 존재하는 차집합",
-      "중복 데이터만 추출",
-      "A와 B의 교집합",
-      "A와 B의 합집합"
-    ],
-    "correctIndex": 0,
-    "explanation": "A MINUS B 는 A 결과에서 B 에도 있는 행을 빼고 A 에만 있는 행을 돌려주는 차집합이다(①). 결과의 중복은 제거된다. SQL Server 에서는 같은 기능을 EXCEPT 로 쓴다.",
-    "chapter": "집합 연산자",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1229",
-    "_category": "집합 연산자"
-  },
-  {
     "id": 12012,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
@@ -38395,66 +38135,6 @@ export const AI_MOCK: QuizQuestion[] = [
         ]
       }
     ]
-  },
-  {
-    "id": 12013,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 1214,
-    "title": "다음 표현식의 결과는? NULLIF(100, 100)",
-    "options": [
-      "100",
-      "NULL",
-      "에러",
-      "0"
-    ],
-    "correctIndex": 1,
-    "explanation": "NULLIF(a, b) 는 두 값이 같으면 NULL, 다르면 a 를 돌려준다. 100 과 100 은 같으므로 NULL 이다(②). NULLIF(100, 200) 이라면 100 이 나온다.",
-    "chapter": "함수",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1236",
-    "_category": "NULL"
-  },
-  {
-    "id": 12019,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 1220,
-    "title": "엔터티 무결성(Entity Integrity)에 대한 설명으로 옳은 것은?",
-    "options": [
-      "기본키는 NULL일 수 없다.",
-      "CHECK 제약은 엔터티 무결성만 보장한다.",
-      "엔터티 무결성은 권한 제어를 의미한다.",
-      "외래키는 반드시 NULL이어야 한다."
-    ],
-    "correctIndex": 0,
-    "explanation": "엔터티 무결성은 기본키 값이 반드시 있고(NOT NULL) 중복되지 않아야 한다는 규칙이다(①). CHECK 로 허용 값 범위를 제한하는 것은 도메인 무결성, 외래키 값이 부모에 있어야 한다는 것은 참조 무결성이다.",
-    "chapter": "데이터 무결성",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1243",
-    "_category": "데이터 무결성"
-  },
-  {
-    "id": 12020,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "1과목",
-    "number": 1221,
-    "title": "ANSI/SPARC 3단계 스키마 구조에 대한 설명으로 옳은 것은?",
-    "options": [
-      "내부 스키마는 사용자별 보기를 각각 정의한다.",
-      "외부 스키마는 물리 저장 장치를 직접 기술한다.",
-      "외부 스키마는 사용자 관점의 뷰를 정의한다.",
-      "개념 스키마는 인덱스 파일 위치를 기술한다."
-    ],
-    "correctIndex": 2,
-    "explanation": "외부 스키마는 사용자별 관점, 개념 스키마는 통합 논리 구조, 내부 스키마는 물리 저장 구조를 다룬다.",
-    "chapter": "데이터 모델 개념",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1244",
-    "_category": "데이터베이스 개념"
   },
   {
     "id": 12024,
@@ -38596,26 +38276,6 @@ export const AI_MOCK: QuizQuestion[] = [
         ]
       }
     ]
-  },
-  {
-    "id": 12039,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "1과목",
-    "number": 1240,
-    "title": "참조 무결성(Referential Integrity)에 대한 설명으로 옳은 것은?",
-    "options": [
-      "외래키는 중복될 수 없다.",
-      "참조 무결성은 집계 함수가 보장한다.",
-      "자식 테이블은 부모 없이 항상 먼저 생성돼야 한다.",
-      "자식의 외래키 값은 부모의 기본키 값에 존재하거나 NULL이어야 한다."
-    ],
-    "correctIndex": 3,
-    "explanation": "참조 무결성은 자식 테이블의 외래키 값이 부모 테이블의 기본키에 실제로 있거나 NULL 이어야 한다는 규칙이다(④). 외래키 값은 중복될 수 있고(한 부서에 여러 사원), 부모 테이블을 먼저 만들어야 자식이 참조할 수 있다.",
-    "chapter": "데이터 무결성",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1267",
-    "_category": "데이터 무결성"
   },
   {
     "id": 12042,
@@ -38879,26 +38539,6 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 12092,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 1293,
-    "title": "DCL이 담당하는 영역으로 옳은 것은?",
-    "options": [
-      "데이터 조회",
-      "권한과 보안 제어",
-      "집계 결과 계산",
-      "테이블 생성"
-    ],
-    "correctIndex": 1,
-    "explanation": "DCL은 GRANT, REVOKE와 같이 권한과 접근 제어를 담당한다.",
-    "chapter": "DCL·TCL",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1327",
-    "_category": "DCL"
-  },
-  {
     "id": 12095,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
@@ -38963,26 +38603,6 @@ export const AI_MOCK: QuizQuestion[] = [
         ]
       }
     ]
-  },
-  {
-    "id": 12098,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 1299,
-    "title": "계층형 질의에서 루트 행을 지정하는 절로 옳은 것은?",
-    "options": [
-      "START WITH",
-      "GROUP BY",
-      "HAVING",
-      "ORDER SIBLINGS BY"
-    ],
-    "correctIndex": 0,
-    "explanation": "계층형 질의에서 START WITH 는 전개를 시작할 루트 행을 지정한다(예: START WITH mgr IS NULL). CONNECT BY 는 부모-자식 연결 조건, ORDER SIBLINGS BY 는 같은 부모를 둔 형제끼리의 정렬이다.",
-    "chapter": "계층형 질의",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1335",
-    "_category": "계층형 질의"
   },
   {
     "id": 12104,
