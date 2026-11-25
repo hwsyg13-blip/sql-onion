@@ -1340,3 +1340,5 @@ sqld-0312·0319(M494·M501, 데이터베이스 파티션 기법)도 성능 데�
 | sqld-0445 | M:N 해소 정의 고르기 | 학생-과목 ERD 에서 성적 속성을 둘 위치(교차 엔터티) 판단 | 교재 정의 대조. mermaid ERD, 390px 화면 확인. 사본 없음 |
 | sqld-0179 | HAVING 절 이름 고르기 | 주문 표 + 빈칸 SQL 에 WHERE/HAVING 조합을 넣어 고객 A 만 나오는 것 고르기 (COUNT(*) 가 NULL 행 포함) | PostgreSQL 16 → ① A,C ② A,B,C ③ A,B ④ A. 390px 화면 확인. 사본 없음 |
 | sqld-0324 | 양수 TRUNC/ROUND/CEIL/FLOOR | 음수 -35.8·-35.45·-35.2 로 바꿔 방향 착각 유도 | PostgreSQL 16 → trunc -35, round(-35.45,1) -35.5, ceil -35, floor -36. 사본 없음 |
+| sqld-0373 | NVL/NULLIF 기본값 | Oracle 의 '' = NULL 규칙과 \|\| 의 NULL 처리로 LENGTH('') 가 NULL 인지 판단 | PostgreSQL 16 에서 '' → NULL, \|\| → concat() 로 옮겨 실행: B, A, NULL, A. 사본 없음 |
+| sqld-0232 | NATURAL JOIN 이름 고르기 | 공통 칼럼이 둘(부서코드·지역)인 표에서 NATURAL JOIN 과 USING 결과 행 수 비교 | PostgreSQL 16 → NATURAL 2행, USING 4행. 390px 화면 확인. 사본 없음 |

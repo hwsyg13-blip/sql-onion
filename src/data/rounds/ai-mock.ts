@@ -13812,20 +13812,94 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 429,
-    "title": "ANSI/ISO 표준 SQL에서 두 테이블 간에 동일한 칼럼 이름을 가지는 것을 모두 출력하는 조인 방식은 무엇인가?",
+    "title": "아래 두 테이블에 (가), (나) SQL 을 실행했을 때 결과 행 수로 옳은 것은?",
     "options": [
-      "Using",
-      "Natural Join",
-      "Cross Join",
-      "Inner Join"
+      "(가) 4행, (나) 4행",
+      "(가) 2행, (나) 4행",
+      "(가) 2행, (나) 5행",
+      "(가) 오류, (나) 4행"
     ],
     "correctIndex": 1,
-    "explanation": "NATURAL JOIN은 두 테이블 간에 동일한 칼럼 이름을 가진 것을 모두 출력하는 조인 방법이다.\r",
+    "explanation": "NATURAL JOIN 은 두 테이블에서 이름이 같은 칼럼을 모두 찾아 등치 조건으로 쓴다. 여기서는 부서코드와 지역이 둘 다 겹치므로 (가) 는 부서코드와 지역이 모두 같은 행만 남는다. 101(10, 서울)과 104(30, 서울)만 맞아 2행이다. (나) 는 USING 에 적은 부서코드 하나로만 조인하므로 부서코드가 있는 101~104 가 모두 붙어 4행이다. 정답은 ②번이다. ① 은 (가) 도 부서코드로만 조인한다고 착각한 결과다. ③ 은 부서코드가 NULL 인 105 까지 붙는다고 착각한 결과인데, NULL 은 어떤 값과도 같지 않아 조인되지 않는다. ④ 처럼 겹치는 칼럼이 둘이라고 NATURAL JOIN 이 오류를 내지는 않는다.",
     "chapter": "조인",
     "_source": "sqld-1140",
     "_origId": "sqld-0232",
     "_category": "JOIN",
-    "_correctRate": 10
+    "_correctRate": 10,
+    "references": [
+      {
+        "type": "table",
+        "caption": "사원",
+        "headers": [
+          "사번",
+          "이름",
+          "부서코드",
+          "지역"
+        ],
+        "rows": [
+          [
+            "101",
+            "김",
+            "10",
+            "서울"
+          ],
+          [
+            "102",
+            "이",
+            "10",
+            "부산"
+          ],
+          [
+            "103",
+            "박",
+            "20",
+            "서울"
+          ],
+          [
+            "104",
+            "최",
+            "30",
+            "서울"
+          ],
+          [
+            "105",
+            "정",
+            "NULL",
+            "서울"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "부서",
+        "headers": [
+          "부서코드",
+          "부서명",
+          "지역"
+        ],
+        "rows": [
+          [
+            "10",
+            "영업",
+            "서울"
+          ],
+          [
+            "20",
+            "개발",
+            "부산"
+          ],
+          [
+            "30",
+            "인사",
+            "서울"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "-- (가)\nSELECT *\nFROM   사원 NATURAL JOIN 부서;\n\n-- (나)\nSELECT *\nFROM   사원 JOIN 부서\n       USING (부서코드);"
+      }
+    ]
   },
   {
     "id": 11229,
@@ -18173,15 +18247,15 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 543,
-    "title": "다음 중 NULL 값을 반환하는 쿼리는 어떤 것인가?",
+    "title": "Oracle 에서 실행했을 때 결과가 NULL 인 것은?",
     "options": [
-      "SELECT NVL(null,'B') FROM DUAL",
-      "SELECT NVL(null,0)+10 FROM DUAL",
-      "SELECT NULLIF('B','B') FROM DUAL",
-      "SELECT COALESCE(NULL,'20') FROM DUAL"
+      "SELECT COALESCE('', NULL, 'B') FROM DUAL",
+      "SELECT 'A' || NULL FROM DUAL",
+      "SELECT LENGTH('') FROM DUAL",
+      "SELECT NULLIF('A', NULL) FROM DUAL"
     ],
     "correctIndex": 2,
-    "explanation": "NULLIF(A, B) 는 A 와 B 가 같으면 NULL, 다르면 A 를 반환하므로 NULLIF('B','B') 는 NULL 이다. ① NVL(NULL,'B') 는 'B', ② NVL(NULL,0)+10 은 10, ④ COALESCE(NULL,'20') 은 처음 만나는 NULL 이 아닌 값 '20' 을 반환한다.",
+    "explanation": "Oracle 은 길이가 0 인 문자열 '' 을 NULL 로 저장하고 비교한다. 그래서 LENGTH('') 는 LENGTH(NULL) 과 같아 결과가 NULL 이다. 0 이 나온다고 생각하기 쉽지만 0 이 아니다. 정답은 ③번이다. ① COALESCE 는 앞에서부터 NULL 이 아닌 첫 값을 돌려주는데, '' 도 NULL 이라 건너뛰고 'B' 가 나온다. ② Oracle 의 || 연결은 NULL 을 빈 문자열처럼 이어 붙여 'A' 가 된다. ④ NULLIF(A, B) 는 두 값이 같을 때만 NULL 을 돌려준다. 'A' = NULL 은 참이 아니므로 첫 번째 값 'A' 가 그대로 나온다.",
     "chapter": "함수",
     "_source": "sqld-1140",
     "_origId": "sqld-0373",
