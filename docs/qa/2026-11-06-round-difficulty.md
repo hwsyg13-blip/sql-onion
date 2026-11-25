@@ -1319,4 +1319,5 @@ sqld-0312·0319(M494·M501, 데이터베이스 파티션 기법)도 성능 데�
 | 47-2-22 | 최단신 SQL 중 다른 것 | IN(TEAM, MIN)·상관 = MIN·인라인 뷰·NOT EXISTS(더 작은 선수) + 키 NULL 선수 | PostgreSQL 16 → 3, 3, 3, 4 (NOT EXISTS 만 NULL 선수 포함) |
 | 50-2-11 | 평균 학점 SQL 고르기 | AVG 와 NULL, AVG(NVL), SUM/COUNT(*), LEFT JOIN 으로 수강 없는 학생 | PostgreSQL 16 → 2, 1, 1, 1 |
 | cbt-079 | DELETE·TRUNCATE·DROP 비교 정의 | ROLLBACK·TRUNCATE(DDL 암시적 커밋)·DROP 이 섞인 시나리오 | PostgreSQL 16 에서 TRUNCATE 자리에 COMMIT 으로 흉내 → T 2행, T2 없음 |
-| cbt-133 | 입력 명령어(INSERT) 고르기 | MERGE: MATCHED UPDATE(WHERE 조건)·NOT MATCHED INSERT, 짝 없는 T 행 유지 | PostgreSQL 16 MERGE(WHEN MATCHED AND …) → 4행, 1250. 옛 사본(같은 정의 문항)이 다른 풀에 있어 중복 제외 247 → 246 |
+| cbt-133 | 입력 명령어(INSERT) 고르기 | MERGE: MATCHED UPDATE(WHERE 조건)·NOT MATCHED INSERT, 짝 없는 T 행 유지 | PostgreSQL 16 MERGE(WHEN MATCHED AND …) → 4행, 1250. 1140 풀 사본 sqld-0175 도 같은 내용으로 맞춰 중복 제외 247 유지 |
+| cbt-154 (+ 사본 sqld-0181) | 별칭 쓴 SQL 의 틀린 줄 고르기 | 테이블 별칭 뒤 원래 이름 사용·ORDER BY 별칭·모호한 칼럼·WHERE 별칭 다섯 문장 | PostgreSQL 16 → ㉠·㉣·㉤ 오류(별칭 뒤 테이블 이름, team_id 모호, WHERE 별칭) |

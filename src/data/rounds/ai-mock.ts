@@ -1,5 +1,5 @@
 // Auto-generated from scripts/authored/ai-mock.json
-// AI 생성 모의고사 풀 (기출 변형) · 1174문항
+// AI 생성 모의고사 풀 (기출 변형) · 1173문항
 // ⚠ 직접 편집 금지. ai-mock.json 수정 후 'node scripts/build-quiz-bank.mjs' 재실행.
 import type { QuizQuestion } from '../quizBank';
 
@@ -6091,19 +6091,25 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 196,
-    "title": "다음 SQL 문장에서 틀린 부분은 어디인가?",
+    "title": "PLAYER(PLAYER_NAME, TEAM_ID), TEAM(TEAM_ID, TEAM_NAME) 테이블에 대한 ㉠~㉤ 중 오류가 나는 것을 모두 고른 것은?",
     "options": [
-      "SELECT PLAYER.PLAYER_NAME 선수명, TEAM.TEAM_NAME 팀명",
-      "FROM PLAYER P, TEAM T",
-      "WHERE P.TEAM_ID = T.TEAM_ID",
-      "ORDER BY 선수명;"
+      "㉠, ㉣, ㉤",
+      "㉠, ㉤",
+      "㉠, ㉢, ㉣, ㉤",
+      "㉣, ㉤"
     ],
     "correctIndex": 0,
-    "explanation": "FROM 절에서 PLAYER P, TEAM T 처럼 테이블 별칭을 지정하면 SELECT 절에서도 별칭으로 써야 한다. ① 은 PLAYER.PLAYER_NAME, TEAM.TEAM_NAME 처럼 원래 테이블명을 써서 오류가 난다. ③ 의 조인 조건은 별칭을 바르게 썼고, ④ 의 ORDER BY 는 SELECT 절 컬럼 별칭(선수명)을 쓸 수 있다.",
+    "explanation": "㉠ 은 FROM 절에서 PLAYER 에 별칭 P 를 붙였으므로 그 문장 안에서는 테이블 이름 PLAYER 로 칼럼을 가리킬 수 없어 오류다. ㉡ 은 ORDER BY 에서 SELECT 별칭을 쓰는 것이라 정상이다. ㉢ 의 PLAYER_NAME·TEAM_NAME 은 각각 한 테이블에만 있는 칼럼이라 앞에 테이블을 붙이지 않아도 된다. ㉣ 의 TEAM_ID 는 두 테이블에 모두 있어 어느 쪽인지 정할 수 없으므로 오류(열 이름이 모호함)다. ㉤ 은 WHERE 가 SELECT 보다 먼저 처리되어 별칭 선수명을 아직 쓸 수 없으므로 오류다. 정답은 ①번이다. ② 는 ㉣ 처럼 두 테이블에 같은 이름의 칼럼이 있는 경우를 놓친 것이다. ③ 은 조인할 때는 모든 칼럼에 테이블을 붙여야 한다고 생각한 것이다. ④ 는 별칭을 붙여도 원래 테이블 이름을 쓸 수 있다고 본 것이다.",
     "chapter": "ORDER BY",
     "_source": "cbt-mock",
     "_origId": "cbt-154",
-    "_cbtOrigNo": 154
+    "_cbtOrigNo": 154,
+    "references": [
+      {
+        "type": "sql",
+        "code": "-- ㉠\nSELECT PLAYER.PLAYER_NAME\nFROM   PLAYER P;\n-- ㉡\nSELECT P.PLAYER_NAME AS 선수명\nFROM   PLAYER P\nORDER BY 선수명;\n-- ㉢\nSELECT PLAYER_NAME, TEAM_NAME\nFROM   PLAYER P, TEAM T\nWHERE  P.TEAM_ID = T.TEAM_ID;\n-- ㉣\nSELECT TEAM_ID\nFROM   PLAYER P, TEAM T\nWHERE  P.TEAM_ID = T.TEAM_ID;\n-- ㉤\nSELECT P.PLAYER_NAME 선수명\nFROM   PLAYER P\nWHERE  선수명 LIKE '김%';"
+      }
+    ]
   },
   {
     "id": 10996,
@@ -12262,27 +12268,6 @@ export const AI_MOCK: QuizQuestion[] = [
     "_source": "sqld-1140",
     "_origId": "sqld-0174",
     "_category": "데이터베이스 개념",
-    "_correctRate": 10
-  },
-  {
-    "id": 11184,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 385,
-    "title": "데이터를 입력하기 위해 사용하는 SQL 명령어는 무엇인가?",
-    "options": [
-      "ALTER",
-      "UPDATE",
-      "INSERT",
-      "CREATE"
-    ],
-    "correctIndex": 2,
-    "explanation": "데이터를 입력하기 위해서 INSERT 명령어를 사용한다.",
-    "chapter": "DML",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0175",
-    "_category": "DML",
     "_correctRate": 10
   },
   {

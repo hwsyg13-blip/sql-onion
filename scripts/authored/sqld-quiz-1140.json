@@ -4785,15 +4785,65 @@
       "_correctRate": 10,
       "subject": "2과목",
       "chapter": "DML",
-      "title": "데이터를 입력하기 위해 사용하는 SQL 명령어는 무엇인가?",
+      "title": "아래 T, S 테이블에 MERGE 를 실행한 뒤 T 의 (행 수, AMT 합계) 로 옳은 것은? (Oracle 기준)",
       "options": [
-        "ALTER",
-        "UPDATE",
-        "INSERT",
-        "CREATE"
+        "(3, 1150)",
+        "(4, 1250)",
+        "(4, 1300)",
+        "(4, 1050)"
       ],
-      "correctIndex": 2,
-      "explanation": "데이터를 입력하기 위해서 INSERT 명령어를 사용한다."
+      "correctIndex": 1,
+      "explanation": "MERGE 는 S 의 행마다 T 에 짝(ON 조건)이 있으면 UPDATE, 없으면 INSERT 를 한다. ID 2 는 짝이 있고 S.AMT 250 이 100 보다 커서 200 + 250 = 450 이 된다. ID 4 도 짝이 있지만 S.AMT 50 이 WHERE 조건을 만족하지 못해 400 그대로다. ID 3 은 T 에 없어 300 으로 새로 들어간다. S 에 없는 T 의 ID 1 은 건드리지 않는다. 결과는 100, 450, 300, 400 으로 4행, 합계 1250 이다. 정답은 ②번이다. ① 은 S 에 없는 T 의 행(ID 1)이 지워진다고 본 값이다. ③ 은 UPDATE 의 WHERE 를 무시하고 ID 4 도 450 으로 더한 값이다. ④ 는 SET 을 S.AMT 로 바꿔 넣는다고 보고 ID 2 를 250 으로 계산한 값이다.",
+      "references": [
+        {
+          "type": "table",
+          "caption": "T",
+          "headers": [
+            "ID",
+            "AMT"
+          ],
+          "rows": [
+            [
+              "1",
+              "100"
+            ],
+            [
+              "2",
+              "200"
+            ],
+            [
+              "4",
+              "400"
+            ]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "S",
+          "headers": [
+            "ID",
+            "AMT"
+          ],
+          "rows": [
+            [
+              "2",
+              "250"
+            ],
+            [
+              "3",
+              "300"
+            ],
+            [
+              "4",
+              "50"
+            ]
+          ]
+        },
+        {
+          "type": "sql",
+          "code": "MERGE INTO T\nUSING S ON (T.ID = S.ID)\nWHEN MATCHED THEN\n  UPDATE SET T.AMT = T.AMT + S.AMT\n  WHERE S.AMT > 100\nWHEN NOT MATCHED THEN\n  INSERT (ID, AMT)\n  VALUES (S.ID, S.AMT);"
+        }
+      ]
     },
     {
       "_id": "sqld-0176",
@@ -4876,15 +4926,21 @@
       "_correctRate": 10,
       "subject": "2과목",
       "chapter": "DML",
-      "title": "다음 SQL 문장에서 틀린 부분은 어디인가?",
+      "title": "PLAYER(PLAYER_NAME, TEAM_ID), TEAM(TEAM_ID, TEAM_NAME) 테이블에 대한 ㉠~㉤ 중 오류가 나는 것을 모두 고른 것은?",
       "options": [
-        "SELECT PLAYER.PLAYER_NAME 선수명, TEAM.TEAM_NAME 팀명",
-        "FROM PLAYER P, TEAM T",
-        "WHERE P.TEAM_ID = T.TEAM_ID",
-        "ORDER BY 선수명;"
+        "㉠, ㉣, ㉤",
+        "㉠, ㉤",
+        "㉠, ㉢, ㉣, ㉤",
+        "㉣, ㉤"
       ],
       "correctIndex": 0,
-      "explanation": "FROM 절에서 PLAYER P, TEAM T 처럼 테이블 별칭을 붙이면 SELECT 절에서도 별칭(P., T.)으로 써야 한다. ① 은 원래 테이블명(PLAYER., TEAM.)을 써서 오류가 난다. ③ 의 조인 조건은 별칭을 바르게 썼고, ④ 의 ORDER BY 는 SELECT 절 컬럼 별칭(선수명)을 쓸 수 있다."
+      "explanation": "㉠ 은 FROM 절에서 PLAYER 에 별칭 P 를 붙였으므로 그 문장 안에서는 테이블 이름 PLAYER 로 칼럼을 가리킬 수 없어 오류다. ㉡ 은 ORDER BY 에서 SELECT 별칭을 쓰는 것이라 정상이다. ㉢ 의 PLAYER_NAME·TEAM_NAME 은 각각 한 테이블에만 있는 칼럼이라 앞에 테이블을 붙이지 않아도 된다. ㉣ 의 TEAM_ID 는 두 테이블에 모두 있어 어느 쪽인지 정할 수 없으므로 오류(열 이름이 모호함)다. ㉤ 은 WHERE 가 SELECT 보다 먼저 처리되어 별칭 선수명을 아직 쓸 수 없으므로 오류다. 정답은 ①번이다. ② 는 ㉣ 처럼 두 테이블에 같은 이름의 칼럼이 있는 경우를 놓친 것이다. ③ 은 조인할 때는 모든 칼럼에 테이블을 붙여야 한다고 생각한 것이다. ④ 는 별칭을 붙여도 원래 테이블 이름을 쓸 수 있다고 본 것이다.",
+      "references": [
+        {
+          "type": "sql",
+          "code": "-- ㉠\nSELECT PLAYER.PLAYER_NAME\nFROM   PLAYER P;\n-- ㉡\nSELECT P.PLAYER_NAME AS 선수명\nFROM   PLAYER P\nORDER BY 선수명;\n-- ㉢\nSELECT PLAYER_NAME, TEAM_NAME\nFROM   PLAYER P, TEAM T\nWHERE  P.TEAM_ID = T.TEAM_ID;\n-- ㉣\nSELECT TEAM_ID\nFROM   PLAYER P, TEAM T\nWHERE  P.TEAM_ID = T.TEAM_ID;\n-- ㉤\nSELECT P.PLAYER_NAME 선수명\nFROM   PLAYER P\nWHERE  선수명 LIKE '김%';"
+        }
+      ]
     },
     {
       "_id": "sqld-0182",
