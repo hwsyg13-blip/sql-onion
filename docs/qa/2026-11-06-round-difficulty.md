@@ -1289,3 +1289,10 @@ sqld-0312·0319(M494·M501, 데이터베이스 파티션 기법)도 성능 데�
 |---|---|---|---|
 | 48-2-48 | LEVEL = 2 행 수 | 8행 트리 + LEVEL·CONNECT_BY_ISLEAF(자식 없는 LEVEL 2 노드 포함) | PostgreSQL 16 재귀 CTE → (3, 4, 4) |
 | 51-2-19 | GROUP BY 있는 NVL(MAX) 공집합 | 대상 행 없는 집계·GROUP BY·GROUP BY 없는 HAVING·COUNT(*) 행 수 | PostgreSQL 16 → 1, 0, 0, 1 |
+
+### 11-25 14시 실행 (7일 창 초기화 뒤)
+
+| 문항 | 전 | 후 | 검증 |
+|---|---|---|---|
+| 62-2-42 | INSERT FIRST 한 문장 | INSERT ALL vs FIRST + NULL 행과 ELSE | PostgreSQL 16 은 다중 테이블 INSERT 가 없어 FILTER 집계로 같은 분기를 계산 → ㉠ (3, 2, 2), ㉡ (3, 0, 2) |
+| 62-2-45 | UNPIVOT IN 목록 빈칸 | UNPIVOT 기본 EXCLUDE NULLS vs INCLUDE NULLS + WHERE 합계 | PostgreSQL 16 에서 UNION ALL 로 같은 행 생성 → 4, 6, 110 |

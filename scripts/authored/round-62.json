@@ -1468,15 +1468,15 @@
     {
       "subject": "2과목",
       "number": 42,
-      "title": "다음 INSERT FIRST 수행 후 t1, t2, t3의 행 수는? (t1, t2, t3 순서)",
+      "title": "빈 테이블 t1, t2, t3 에 ㉠ 을 실행한 결과와, 세 테이블을 비운 뒤 ㉡ 을 실행한 결과를 (t1, t2, t3) 행 수로 나열한 것은? (Oracle 기준)",
       "options": [
-        "2, 0, 0",
-        "2, 0, 1",
-        "2, 1, 0",
-        "2, 1, 1"
+        "㉠ 3, 2, 1 / ㉡ 3, 0, 1",
+        "㉠ 3, 2, 2 / ㉡ 3, 0, 2",
+        "㉠ 3, 2, 2 / ㉡ 3, 2, 2",
+        "㉠ 3, 2, 0 / ㉡ 3, 0, 2"
       ],
       "correctIndex": 1,
-      "explanation": "INSERT FIRST는 각 행에 대해 처음으로 만족하는 WHEN 절에만 삽입한다. c1이 2와 5인 행은 첫 번째 조건(>= 2)을 만족해 t1에 들어가고(두 번째 조건은 평가되지 않음), 1은 어떤 WHEN도 만족하지 않아 ELSE의 t3에 들어간다. 따라서 2, 0, 1이다. ④ 2, 1, 1 은 INSERT ALL 처럼 5 를 t2 에도 넣은 결과이고, ③ 은 거기에 ELSE 로 가는 1 까지 빠뜨렸으며, ① 은 ELSE 로 가는 1 을 빠뜨린 값이다.",
+      "explanation": "INSERT ALL 은 행마다 WHEN 을 모두 검사해 참인 곳에 전부 넣고, 하나도 참이 아니면 ELSE 로 보낸다. 2 는 t1, 3 과 5 는 t1 과 t2 둘 다, 1 은 어느 WHEN 도 참이 아니라 t3 이다. NULL 은 비교가 모두 UNKNOWN 이라 참인 WHEN 이 없으므로 역시 ELSE 로 가 t3 이다. ㉠ 은 (3, 2, 2) 다. INSERT FIRST 는 처음 참이 된 WHEN 하나에만 넣는다. 3 과 5 도 첫 WHEN(c1 >= 2)에서 t1 으로 가고 t2 는 비어 (3, 0, 2) 가 된다. 정답은 ②번이다. ① 은 NULL 행이 ELSE 로도 가지 않고 버려진다고 본 값이다. ③ 은 ALL 과 FIRST 의 차이를 놓친 값이다. ④ 는 INSERT ALL 에서는 ELSE 가 쓰이지 않는다고 본 값이다.",
       "references": [
         {
           "type": "table",
@@ -1492,13 +1492,19 @@
               "2"
             ],
             [
+              "3"
+            ],
+            [
               "5"
+            ],
+            [
+              "NULL"
             ]
           ]
         },
         {
           "type": "sql",
-          "code": "INSERT FIRST\n  WHEN c1 >= 2 THEN INTO t1\n  WHEN c1 >= 3 THEN INTO t2\n  ELSE INTO t3\nSELECT c1 FROM ts;"
+          "code": "-- ㉠\nINSERT ALL\n  WHEN c1 >= 2 THEN INTO t1\n  WHEN c1 >= 3 THEN INTO t2\n  ELSE INTO t3\nSELECT c1 FROM ts;\n-- ㉡ (㉠ 에서 ALL 만 FIRST 로)\nINSERT FIRST\n  WHEN c1 >= 2 THEN INTO t1\n  WHEN c1 >= 3 THEN INTO t2\n  ELSE INTO t3\nSELECT c1 FROM ts;"
         }
       ]
     },
@@ -1550,43 +1556,43 @@
     {
       "subject": "2과목",
       "number": 45,
-      "title": "다음 UNPIVOT 구문에서 괄호 (ㄱ)에 들어갈 것은?",
+      "title": "아래 SALES 테이블에 대한 ㉠~㉢ 의 결과를 차례로 나열한 것은? (Oracle 기준)",
       "options": [
-        "40, 30, 20",
-        "AMOUNT_3, AMOUNT_2, AMOUNT_1",
-        "AMOUNT, AMOUNT, AMOUNT",
-        "ID, 구분, AMOUNT"
+        "6, 6, 110",
+        "4, 6, 110",
+        "4, 4, 110",
+        "2, 6, 110"
       ],
       "correctIndex": 1,
-      "explanation": "UNPIVOT의 IN 절에는 행으로 풀어낼 원본 컬럼명(AMOUNT_3, AMOUNT_2, AMOUNT_1)을 나열한다. 이 컬럼명이 구분 컬럼의 값이 되고, 컬럼 값이 AMOUNT에 담긴다. ① 은 컬럼 값을, ③ 은 결과 컬럼명을 적은 것이고, ④ 는 SELECT 목록을 적은 것이라 IN 절에 들어갈 수 없다.",
+      "explanation": "UNPIVOT 은 칼럼 Q1·Q2·Q3 을 행으로 바꿔 원래 한 행이 세 행이 된다. 다만 기본값이 EXCLUDE NULLS 라 값이 NULL 인 칸은 행으로 만들지 않는다. ㉠ 은 6칸 중 NULL 두 칸을 뺀 4행이다. ㉡ 은 INCLUDE NULLS 를 붙여 NULL 칸도 행이 되므로 6행이다. ㉢ 은 ㉠ 의 4행(20, 40, 50, 60) 중 50 이하인 20 + 40 + 50 = 110 이다. 정답은 ②번이다. ① 은 기본값이 NULL 도 포함한다고 본 값이다. ③ 은 INCLUDE NULLS 를 붙여도 달라지지 않는다고 본 값이다. ④ 는 UNPIVOT 뒤에도 원래 행 수가 그대로라고 본 값이다.",
       "references": [
         {
           "type": "table",
           "caption": "SALES",
           "headers": [
             "ID",
-            "AMOUNT_3",
-            "AMOUNT_2",
-            "AMOUNT_1"
+            "Q1",
+            "Q2",
+            "Q3"
           ],
           "rows": [
             [
               "100",
               "20",
-              "30",
+              "NULL",
               "40"
             ],
             [
               "200",
               "50",
               "60",
-              "45"
+              "NULL"
             ]
           ]
         },
         {
           "type": "sql",
-          "code": "SELECT ID, 구분, AMOUNT\nFROM   SALES\nUNPIVOT ( AMOUNT FOR 구분 IN ( ㄱ ) )\nWHERE  AMOUNT <= 40;"
+          "code": "-- ㉠\nSELECT COUNT(*)\nFROM   SALES\nUNPIVOT (AMOUNT FOR 분기\n         IN (Q1, Q2, Q3));\n-- ㉡\nSELECT COUNT(*)\nFROM   SALES\nUNPIVOT INCLUDE NULLS\n        (AMOUNT FOR 분기\n         IN (Q1, Q2, Q3));\n-- ㉢\nSELECT SUM(AMOUNT)\nFROM   SALES\nUNPIVOT (AMOUNT FOR 분기\n         IN (Q1, Q2, Q3))\nWHERE  AMOUNT <= 50;"
         }
       ]
     },
