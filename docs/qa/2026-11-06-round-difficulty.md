@@ -1380,3 +1380,5 @@ sqld-0312·0319(M494·M501, 데이터베이스 파티션 기법)도 성능 데�
 | sqld-0268 | 3층 스키마 단계 고르기 | 저장 구조 변경·칼럼 추가 상황을 물리적/논리적 독립성으로 짝짓기 | 교재 정의 대조. 390px 화면 확인. 사본 없음 |
 | sqld-0274 | ALTER ADD 문법 고르기 | 행이 있는 테이블에 NOT NULL 칼럼 추가(DEFAULT 유무), Oracle 의 ADD COLUMN·MODIFY 오류 | PostgreSQL 16 → NOT NULL 만 있으면 contains null values 오류, DEFAULT 'NONE' NOT NULL 은 성공(3행 NONE). ③④ 는 Oracle 문법 규칙(PG 는 ADD COLUMN 허용 — 해설에 명시). 390px 화면 확인. 사본 없음 |
 | sqld-0243 | 3테이블 최소 조인 조건 수 | 조인 조건 하나가 빠진 3테이블 조인의 결과 행 수(카테시안 곱) | PostgreSQL 16 → 8행(조건 둘이면 4행). 390px 화면 확인. 보기가 숫자뿐이라 보기 일치 사본 후보는 많지만 제목이 같은 사본 없음 |
+| sqld-0238 | 양수 숫자 함수 짝 | 음수 MOD(부호는 피제수 따라감)·CEIL·ROUND | PostgreSQL 16 → mod(-7,3) -1, ceil -38, sign -1, round(-38.5) -39. 390px 화면 확인. 사본 없음 |
+| sqld-0412 | 미커밋 데이터 설명 고르기 | 두 세션 시간순 실행에서 각 시점 COUNT (자기 변경은 보이고 남의 미커밋은 안 보임) | PostgreSQL 16 두 세션으로 같은 순서 실행 → 3, 4, 4. 390px 화면 확인. 사본 없음 |
