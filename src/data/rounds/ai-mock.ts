@@ -1,5 +1,5 @@
 // Auto-generated from scripts/authored/ai-mock.json
-// AI 생성 모의고사 풀 (기출 변형) · 1155문항
+// AI 생성 모의고사 풀 (기출 변형) · 1124문항
 // ⚠ 직접 편집 금지. ai-mock.json 수정 후 'node scripts/build-quiz-bank.mjs' 재실행.
 import type { QuizQuestion } from '../quizBank';
 
@@ -21258,20 +21258,26 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 602,
-    "title": "DBA가 데이터를 잘못 수정하여서 COMMIT 하기 전 원래의 값으로 복원하는 SQL구는?",
+    "title": "Oracle 에서 빈 테이블 T 에 아래 문장을 순서대로 실행했을 때, ㉠ 의 결과와 마지막 COUNT 로 옳은 것은?",
     "options": [
-      "REVOKE",
-      "GRANT",
-      "ROLLBACK",
-      "COMMIT"
+      "㉠ 은 오류가 나고, COUNT 는 2 다.",
+      "㉠ 은 3 만 취소하고, COUNT 는 2 다.",
+      "㉠ 은 2·3 을 취소하고, COUNT 는 1 이다.",
+      "㉠ 은 오류가 나고, COUNT 는 3 이다."
     ],
-    "correctIndex": 2,
-    "explanation": "아직 COMMIT 하지 않은 변경을 취소하고 마지막 COMMIT 시점으로 되돌리는 것은 ROLLBACK 이다(③). COMMIT 은 변경을 확정하고, GRANT·REVOKE 는 권한을 주고 빼앗는 DCL 이다.",
+    "correctIndex": 0,
+    "explanation": "COMMIT 을 하면 트랜잭션이 끝나면서 그 안에서 만든 저장점도 모두 사라진다. 그래서 COMMIT 뒤의 ROLLBACK TO SP1 은 없는 저장점을 찾게 되어 오류(ORA-01086)가 난다. 이어지는 ROLLBACK 은 COMMIT 뒤에 넣은 3 만 취소하므로 1, 2 가 남아 COUNT 는 2 다. 정답은 ①번이다. ② 는 저장점이 COMMIT 뒤에도 남는다고 착각한 결과다. ③ 은 커밋된 2 까지 되돌릴 수 있다고 보았다. ④ 는 마지막 ROLLBACK 이 3 을 취소한다는 점을 빠뜨렸다. PostgreSQL 16 에서 COMMIT 뒤 새 트랜잭션을 열어 같은 순서로 실행해도 savepoint does not exist 오류가 나고 COUNT 는 2 다.",
     "chapter": "트랜잭션 관리",
     "_source": "sqld-1140",
     "_origId": "sqld-0440",
     "_category": "트랜잭션 관리",
-    "_correctRate": 10
+    "_correctRate": 10,
+    "references": [
+      {
+        "type": "sql",
+        "code": "INSERT INTO T VALUES (1);\nSAVEPOINT SP1;\nINSERT INTO T VALUES (2);\nCOMMIT;\nINSERT INTO T VALUES (3);\nROLLBACK TO SP1;   -- ㉠\nROLLBACK;\nSELECT COUNT(*) FROM T;"
+      }
+    ]
   },
   {
     "id": 11402,
@@ -21439,27 +21445,6 @@ export const AI_MOCK: QuizQuestion[] = [
         "caption": "IE 표기법 ERD — [고객마스터] 고객번호(PK), 가입일자, 유입경로, 고객등급, 거주지, 전화번호, 주소. [계좌마스터] 계좌번호 + 고객번호(FK) 가 함께 주식별자(PK), 계좌명, 관리지점, 계좌유형, 예수금, 평균잔고, 계좌개설일, 휴면계좌여부, 계좌정지여부, 인터넷뱅킹신청여부. 관계: 고객마스터 1 — 까마귀발 N 계좌마스터."
       }
     ]
-  },
-  {
-    "id": 11408,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "1과목",
-    "number": 609,
-    "title": "식별자 중에서 비즈니스 프로세스에 의하여 만들어지는 식별자로 대체 여부로 분리되는 식별자는 무엇인가?",
-    "options": [
-      "인조 식별자",
-      "내부 식별자",
-      "단일 식별자",
-      "본질 식별자"
-    ],
-    "correctIndex": 3,
-    "explanation": "대체 여부에 따라서 본질 식별자와 인조 식별자로 분류되고 본질 식별자는 비즈니스 프로세스에 의해서 만들어지는 식별자이다. 인조 식별자는 인위적으로 만들어진 식별자를 의미한다.",
-    "chapter": "데이터 모델 개념",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0449",
-    "_category": "데이터베이스 개념",
-    "_correctRate": 10
   },
   {
     "id": 11409,
@@ -22022,27 +22007,6 @@ export const AI_MOCK: QuizQuestion[] = [
         "content": "TEST 테이블의 NAME 칼럼의 데이터 타입을 CHAR에서 VARCHAR로 변경하고 데이터 크기를 100으로 늘린다."
       }
     ]
-  },
-  {
-    "id": 11422,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 623,
-    "title": "다음은 NULL 값에 대한 설명이다. 올바른 것은?",
-    "options": [
-      "NULL 값은 아직 알려지지 않은 미지의 값이다.",
-      "ORACLE에서 NULL은 TRUE 혹은 FALSE의 의미이다.",
-      "MS-SQL에서 NULL 값은 0이다.",
-      "데이터베이스의 NULL 값의 의미는 DBMS 종류별로 다르게 해석한다."
-    ],
-    "correctIndex": 0,
-    "explanation": "NULL 은 '아직 알 수 없는 값' 으로 0 이나 공백, TRUE·FALSE 와 다르다(①). 이 뜻은 DBMS 와 관계없이 같으며, MS-SQL 에서도 NULL 은 0 이 아니다.",
-    "chapter": "함수",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0468",
-    "_category": "NULL",
-    "_correctRate": 10
   },
   {
     "id": 11423,
@@ -22725,20 +22689,26 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 642,
-    "title": "테이블에 대한 권한을 부여하는 DCL 명령어는?",
+    "title": "Oracle 에서 아래 순서로 실행한 뒤의 상태로 옳은 것은? (EMP 는 SCOTT 소유 테이블이다)",
     "options": [
-      "ROLLBACK",
-      "REVOKE",
-      "GRANT",
-      "COMMIT"
+      "U1, U2 모두 EMP 를 조회할 수 없다.",
+      "U1 만 조회할 수 없고, U2 는 계속 조회할 수 있다.",
+      "U1 이 U2 에게 준 권한이 남아 있어 3) 의 REVOKE 가 오류로 끝난다.",
+      "REVOKE 는 U1 이 직접 받은 권한만 지우므로 U1, U2 모두 조회할 수 있다."
     ],
-    "correctIndex": 2,
-    "explanation": "테이블 권한을 주는 DCL 은 GRANT 다(③). REVOKE 는 권한 회수, COMMIT·ROLLBACK 은 트랜잭션을 확정·취소하는 TCL 이다.",
+    "correctIndex": 0,
+    "explanation": "WITH GRANT OPTION 으로 받은 객체 권한을 회수하면, 그 사용자가 다른 사용자에게 다시 준 권한도 함께 회수된다. 3) 에서 U1 의 SELECT 가 회수되면서 U1 이 U2 에게 준 SELECT 도 사라져 둘 다 조회할 수 없다. 정답은 ①번이다. ② 는 연쇄 회수를 빠뜨렸다. 시스템 권한을 WITH ADMIN OPTION 으로 준 경우에는 연쇄 회수되지 않으므로 둘을 헷갈리기 쉽다. ③ 은 PostgreSQL 의 동작이다. PostgreSQL 은 CASCADE 없이 실행하면 dependent privileges exist 오류를 내고, REVOKE … CASCADE 로 실행하면 U1, U2 모두 권한이 사라진다. ④ 처럼 U1 의 권한이 남는 일은 없다.",
     "chapter": "DCL·TCL",
     "_source": "sqld-1140",
     "_origId": "sqld-0492",
     "_category": "DCL",
-    "_correctRate": 10
+    "_correctRate": 10,
+    "references": [
+      {
+        "type": "sql",
+        "code": "-- 1) SCOTT 접속\nGRANT SELECT ON EMP TO U1\n  WITH GRANT OPTION;\n-- 2) U1 접속\nGRANT SELECT ON SCOTT.EMP TO U2;\n-- 3) SCOTT 접속\nREVOKE SELECT ON EMP FROM U1;"
+      }
+    ]
   },
   {
     "id": 11442,
@@ -24336,27 +24306,6 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11494,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "1과목",
-    "number": 695,
-    "title": "개념 스키마에 대한 설명으로 틀린 것을 고르시오.",
-    "options": [
-      "설계자 관점의 스키마다.",
-      "데이터베이스의 물리적 저장 구조를 표현한다.",
-      "전체 데이터베이스 내의 규칙과 구조를 표현한다.",
-      "사용자 전체 집단의 데이터베이스 구조이다."
-    ],
-    "correctIndex": 1,
-    "explanation": "개념 스키마는 조직 전체 관점에서 데이터베이스의 논리적 구조와 규칙을 표현한 것으로, 설계자 관점이다. 데이터가 디스크에 어떻게 저장되는지 같은 물리적 저장 구조는 내부 스키마의 몫이므로 ② 가 틀렸다.",
-    "chapter": "데이터베이스 설계",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0567",
-    "_category": "데이터베이스 설계",
-    "_correctRate": 10
-  },
-  {
     "id": 11495,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
@@ -24378,48 +24327,6 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11496,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "1과목",
-    "number": 697,
-    "title": "3층 스키마의 데이터베이스를 보는 관점이 아닌 사람은?",
-    "options": [
-      "사용자",
-      "구조자",
-      "설계자",
-      "개발자"
-    ],
-    "correctIndex": 1,
-    "explanation": "3층 스키마의 관점은 외부 스키마 = 사용자, 개념 스키마 = 설계자, 내부 스키마 = 개발자 관점이다. '구조자' 라는 관점은 없다.",
-    "chapter": "데이터베이스 설계",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0569",
-    "_category": "데이터베이스 설계",
-    "_correctRate": 10
-  },
-  {
-    "id": 11497,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "1과목",
-    "number": 698,
-    "title": "3층 스키마의 물리적 저장 구조를 의미하는 것은?",
-    "options": [
-      "외부스키마",
-      "구조스키마",
-      "내부스키마",
-      "개념스키마"
-    ],
-    "correctIndex": 2,
-    "explanation": "3층 스키마는 외부·개념·내부 스키마로 나뉜다. 물리적 저장 구조(저장 장치, 레코드 형식, 인덱스 등)를 기술하는 것은 내부 스키마이다. 외부 스키마는 사용자 관점의 뷰, 개념 스키마는 전체 데이터베이스의 논리적 구조를 나타내며, '구조 스키마'라는 단계는 없다.",
-    "chapter": "데이터베이스 설계",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0570",
-    "_category": "데이터베이스 설계",
-    "_correctRate": 10
-  },
-  {
     "id": 11498,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
@@ -24437,27 +24344,6 @@ export const AI_MOCK: QuizQuestion[] = [
     "chapter": "엔터티",
     "_source": "sqld-1140",
     "_origId": "sqld-0572",
-    "_category": "ER 모델링",
-    "_correctRate": 10
-  },
-  {
-    "id": 11499,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "1과목",
-    "number": 700,
-    "title": "속성의 분류 중 속성의 특성에 따른 분류가 아닌 것은? ",
-    "options": [
-      "설계속성",
-      "일반속성",
-      "파생속성",
-      "기본속성"
-    ],
-    "correctIndex": 1,
-    "explanation": "속성의 특성에 따른 분류는 기본 속성(업무에서 원래 나오는 값), 설계 속성(코드·일련번호처럼 설계 때 만든 값), 파생 속성(다른 속성으로 계산한 값) 세 가지다. 일반 속성은 엔터티 구성 방식에 따른 분류(PK 속성, FK 속성, 일반 속성)에 속한다.",
-    "chapter": "엔터티",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0573",
     "_category": "ER 모델링",
     "_correctRate": 10
   },
@@ -24601,27 +24487,6 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11505,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 706,
-    "title": "NULL에 대한 설명으로 가장 적절하지 않은 것은?",
-    "options": [
-      "공백문자 혹은 숫자 0과는 다른 의미를 갖는다.",
-      "NULL로만 구성된 컬럼을 COUNT한 결과는 공집합이다.",
-      "NULL과의 모든 비교(IS NULL 제외)는 알 수 없음을 반환한다.",
-      "정해지지 않은 값을 의미한다."
-    ],
-    "correctIndex": 1,
-    "explanation": "COUNT(컬럼)은 NULL 이 아닌 값의 개수를 세므로, NULL 로만 구성된 컬럼을 COUNT 하면 공집합이 아니라 0 이 반환된다(SUM·AVG·MAX 는 NULL). ① NULL 은 공백이나 0 과 다르고, ③ NULL 과의 비교는 UNKNOWN, ④ 정해지지 않은 값이라는 설명은 맞다.",
-    "chapter": "함수",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0579",
-    "_category": "NULL",
-    "_correctRate": 10
-  },
-  {
     "id": 11506,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
@@ -24708,27 +24573,6 @@ export const AI_MOCK: QuizQuestion[] = [
     "chapter": "함수",
     "_source": "sqld-1140",
     "_origId": "sqld-0584",
-    "_category": "단일행 함수",
-    "_correctRate": 10
-  },
-  {
-    "id": 11510,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 711,
-    "title": "함수의 실행 결과로 적절하지 않은 것은?",
-    "options": [
-      "SIGN(120) : 1",
-      "ROUND(12345.678, -2) : 12350",
-      "FLOOR(3.5) : 3",
-      "CEIL(3.5) : 4"
-    ],
-    "correctIndex": 1,
-    "explanation": "ROUND(12345.678, -2) 는 백의 자리까지 남기도록 십의 자리에서 반올림한다. 십의 자리 숫자 4 는 5 미만이라 버려져 12300 이다(12350 이 아님). ① SIGN(120) = 1(양수), ③ FLOOR(3.5) = 3(내림), ④ CEIL(3.5) = 4(올림) 는 맞다.",
-    "chapter": "함수",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0585",
     "_category": "단일행 함수",
     "_correctRate": 10
   },
@@ -26919,27 +26763,6 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11568,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "1과목",
-    "number": 769,
-    "title": "엔터티간 1:1, 1:M 과 같이 관계의 기수성을 나타내는 것을 무엇이라 하는가? ",
-    "options": [
-      "관계정의",
-      "관계선택성",
-      "관계차수",
-      "관계명"
-    ],
-    "correctIndex": 2,
-    "explanation": "1:1, 1:M, M:N 처럼 한 엔터티의 인스턴스가 상대 엔터티의 인스턴스 몇 개와 관계를 맺는지를 나타내는 것은 관계차수(Cardinality)이다. 관계선택성(Optionality)은 관계가 필수인지 선택인지, 관계명은 관계의 이름을 뜻한다.",
-    "chapter": "엔터티",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0674",
-    "_category": "ER 모델링",
-    "_correctRate": 10
-  },
-  {
     "id": 11569,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
@@ -27144,27 +26967,6 @@ export const AI_MOCK: QuizQuestion[] = [
     "_source": "sqld-1140",
     "_origId": "sqld-0684",
     "_category": "DML",
-    "_correctRate": 10
-  },
-  {
-    "id": 11578,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 779,
-    "title": "다음 함수 사용시 결과값이 올바르지 않은 것은? ",
-    "options": [
-      "SIGN(0) = 0",
-      "MOD(8,3) = 2",
-      "FLOOR(-12.345) = -13",
-      "CEIL(-12.345) = -13"
-    ],
-    "correctIndex": 3,
-    "explanation": "CEIL 은 그 값보다 크거나 같은 가장 작은 정수(올림)라 CEIL(-12.345) = -12 다. -13 이라는 ④ 가 틀렸다. 음수에서 올림은 0 쪽으로 간다는 점에 주의한다. FLOOR(-12.345) 는 작거나 같은 가장 큰 정수라 -13(③), SIGN(0) = 0(①), MOD(8, 3) = 2(②) 는 맞다.",
-    "chapter": "함수",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0686",
-    "_category": "단일행 함수",
     "_correctRate": 10
   },
   {
@@ -27946,27 +27748,6 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11595,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 796,
-    "title": "COMMIT 이후의 데이터 상태로 옳지 않은 것은? ",
-    "options": [
-      "COMMIT을 수행한 사용자만 결과를 볼 수 있다.",
-      "이전 데이터는 영원히 되돌릴 수 없다.",
-      "변경된 행에 대한 잠금이 풀리고 다른 사용자들이 행을 조작할 수 있다.",
-      "데이터에 대한 변경 사항이 데이터베이스에 영구 저장된다."
-    ],
-    "correctIndex": 0,
-    "explanation": "COMMIT 하면 변경 내용이 DB 에 영구 저장되고(④), 이전 상태로 되돌릴 수 없으며(②), 잠금이 풀려 다른 사용자도 그 행을 다룰 수 있다(③). 커밋된 데이터는 모든 사용자가 볼 수 있으므로 'COMMIT 한 사용자만 볼 수 있다' 는 ① 이 틀렸다. 커밋 전에는 변경한 본인만 바뀐 값을 본다.",
-    "chapter": "트랜잭션 관리",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0714",
-    "_category": "트랜잭션 관리",
-    "_correctRate": 10
-  },
-  {
     "id": 11596,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
@@ -28032,33 +27813,6 @@ export const AI_MOCK: QuizQuestion[] = [
       {
         "type": "sql",
         "code": "CREATE TABLE TAB1\n  (COL1 NUMBER, COL2 NUMBER);\nINSERT INTO TAB1 VALUES(100, 100); \nCOMMIT;"
-      }
-    ]
-  },
-  {
-    "id": 11599,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "1과목",
-    "number": 800,
-    "title": "Oracle 에서 빈 테이블 T 에 아래 문장을 순서대로 실행했을 때, ㉠ 의 결과와 마지막 COUNT 로 옳은 것은?",
-    "options": [
-      "㉠ 은 오류가 나고, COUNT 는 2 다.",
-      "㉠ 은 3 만 취소하고, COUNT 는 2 다.",
-      "㉠ 은 2·3 을 취소하고, COUNT 는 1 이다.",
-      "㉠ 은 오류가 나고, COUNT 는 3 이다."
-    ],
-    "correctIndex": 0,
-    "explanation": "COMMIT 을 하면 트랜잭션이 끝나면서 그 안에서 만든 저장점도 모두 사라진다. 그래서 COMMIT 뒤의 ROLLBACK TO SP1 은 없는 저장점을 찾게 되어 오류(ORA-01086)가 난다. 이어지는 ROLLBACK 은 COMMIT 뒤에 넣은 3 만 취소하므로 1, 2 가 남아 COUNT 는 2 다. 정답은 ①번이다. ② 는 저장점이 COMMIT 뒤에도 남는다고 착각한 결과다. ③ 은 커밋된 2 까지 되돌릴 수 있다고 보았다. ④ 는 마지막 ROLLBACK 이 3 을 취소한다는 점을 빠뜨렸다. PostgreSQL 16 에서 COMMIT 뒤 새 트랜잭션을 열어 같은 순서로 실행해도 savepoint does not exist 오류가 나고 COUNT 는 2 다.",
-    "chapter": "데이터 무결성",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0719",
-    "_category": "데이터 무결성",
-    "_correctRate": 10,
-    "references": [
-      {
-        "type": "sql",
-        "code": "INSERT INTO T VALUES (1);\nSAVEPOINT SP1;\nINSERT INTO T VALUES (2);\nCOMMIT;\nINSERT INTO T VALUES (3);\nROLLBACK TO SP1;   -- ㉠\nROLLBACK;\nSELECT COUNT(*) FROM T;"
       }
     ]
   },
@@ -28155,27 +27909,6 @@ export const AI_MOCK: QuizQuestion[] = [
     "chapter": "엔터티",
     "_source": "sqld-1140",
     "_origId": "sqld-0723",
-    "_category": "ER 모델링",
-    "_correctRate": 10
-  },
-  {
-    "id": 11604,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "1과목",
-    "number": 805,
-    "title": "다음 중 관계를 구성하는 요소가 아닌 것은?",
-    "options": [
-      "관계정의",
-      "선택성(Optionality)",
-      "차수(Cardinality)",
-      "관계명"
-    ],
-    "correctIndex": 0,
-    "explanation": "관계는 관계명(관계의 이름), 관계차수(Cardinality: 1:1, 1:M, M:N), 관계선택사양(Optionality: 필수/선택)으로 구성된다. '관계정의'는 구성 요소가 아니다.",
-    "chapter": "엔터티",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0724",
     "_category": "ER 모델링",
     "_correctRate": 10
   },
@@ -28284,48 +28017,6 @@ export const AI_MOCK: QuizQuestion[] = [
     "_source": "sqld-1140",
     "_origId": "sqld-0727",
     "_category": "ER 모델링",
-    "_correctRate": 10
-  },
-  {
-    "id": 11608,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 809,
-    "title": "트랜잭션의 특징 중 옳지 않은 것은?",
-    "options": [
-      "중복성",
-      "지속성",
-      "원자성",
-      "일관성"
-    ],
-    "correctIndex": 0,
-    "explanation": "트랜잭션의 4가지 특징은 원자성(Atomicity), 일관성(Consistency), 고립성(Isolation), 지속성(Durability), 줄여서 ACID 다. '중복성' 은 해당하지 않는다.",
-    "chapter": "트랜잭션 관리",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0728",
-    "_category": "트랜잭션 관리",
-    "_correctRate": 10
-  },
-  {
-    "id": 11609,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "1과목",
-    "number": 810,
-    "title": "NULL에 대한 설명으로 틀린 것은?",
-    "options": [
-      "NULL과의 비교 연산은 UNKNOWN 을 리턴한다.",
-      "NULL이 포함된 컬럼의 SUM 값은 항상 NULL이다.",
-      "NULL + 100은 NULL을 리턴한다.",
-      "COUNT는 NULL을 세지 않는다."
-    ],
-    "correctIndex": 1,
-    "explanation": "SUM 같은 집계 함수는 NULL 을 빼고 계산하므로 NULL 이 섞여 있어도 나머지 값의 합이 나온다. 모든 값이 NULL 일 때만 결과가 NULL 이다. 그래서 '항상 NULL' 이라는 ② 가 틀렸다. ① NULL 과의 비교 결과는 UNKNOWN 이고(조건에서는 참이 아니라 걸러짐), ③ NULL + 100 은 NULL, ④ COUNT(칼럼) 은 NULL 을 세지 않는다. ※ 원 자료의 ① 은 'FALSE 를 리턴한다' 로 적혀 있어 가이드 기준(UNKNOWN)으로 보면 이것도 틀린 설명이 되므로, 단일 정답이 되도록 바로잡았다.",
-    "chapter": "함수",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0729",
-    "_category": "NULL",
     "_correctRate": 10
   },
   {
@@ -29420,27 +29111,6 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11639,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "1과목",
-    "number": 840,
-    "title": "다음 중 단일 속성이 아닌 것은?",
-    "options": [
-      "주소",
-      "핸드폰번호",
-      "성별",
-      "이름"
-    ],
-    "correctIndex": 0,
-    "explanation": "주소는 시·구·동·번지처럼 더 작은 의미로 나눌 수 있어 복합 속성이다(①). 핸드폰번호·성별·이름은 더 나누지 않고 하나의 값으로 쓰는 단일(단순) 속성이다.",
-    "chapter": "엔터티",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0773",
-    "_category": "ER 모델링",
-    "_correctRate": 10
-  },
-  {
     "id": 11640,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
@@ -29459,27 +29129,6 @@ export const AI_MOCK: QuizQuestion[] = [
     "_source": "sqld-1140",
     "_origId": "sqld-0774",
     "_category": "ER 모델링",
-    "_correctRate": 10
-  },
-  {
-    "id": 11641,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "1과목",
-    "number": 842,
-    "title": "다음 중 주식별자의 특징이 아닌 것은?",
-    "options": [
-      "종속성",
-      "불변성",
-      "최소성",
-      "유일성"
-    ],
-    "correctIndex": 0,
-    "explanation": "주식별자의 4가지 특징은 유일성(모든 행을 구분), 최소성(꼭 필요한 속성만), 불변성(값이 바뀌지 않음), 존재성(반드시 값이 있음)이다. '종속성' 은 특징이 아니다.",
-    "chapter": "식별자",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0775",
-    "_category": "식별자",
     "_correctRate": 10
   },
   {
@@ -29528,27 +29177,6 @@ export const AI_MOCK: QuizQuestion[] = [
     "_source": "sqld-1140",
     "_origId": "sqld-0778",
     "_category": "트랜잭션 관리",
-    "_correctRate": 10
-  },
-  {
-    "id": 11644,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "1과목",
-    "number": 845,
-    "title": "다음 중 NULL만으로 구성된 컬럼을 계산하여 NULL이 리턴되지 않는 함수는?",
-    "options": [
-      "MIN",
-      "AVG",
-      "SUM",
-      "COUNT"
-    ],
-    "correctIndex": 3,
-    "explanation": "COUNT(컬럼)은 NULL 이 아닌 값의 개수를 세므로 NULL 로만 구성된 컬럼이면 0 을 반환한다. MIN, AVG, SUM 같은 다른 집계 함수는 계산할 값이 하나도 없으므로 NULL 을 반환한다.",
-    "chapter": "함수",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0779",
-    "_category": "NULL",
     "_correctRate": 10
   },
   {
@@ -30030,27 +29658,6 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11657,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 858,
-    "title": "5개의 테이블 조인 시 조인 조건의 최소 개수는?",
-    "options": [
-      "4",
-      "3",
-      "2",
-      "1"
-    ],
-    "correctIndex": 0,
-    "explanation": "조인 조건은 테이블을 둘씩 잇는 다리다. 테이블 5개를 한 줄로 이으려면 다리 4개(A-B, B-C, C-D, D-E)가 필요하다. N개 테이블은 최소 N-1개의 조인 조건이 필요하다.",
-    "chapter": "조인",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0798",
-    "_category": "JOIN",
-    "_correctRate": 10
-  },
-  {
     "id": 11658,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
@@ -30209,27 +29816,6 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11664,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "1과목",
-    "number": 865,
-    "title": "다음 중 정규화의 주요 목적이 아닌 것은?",
-    "options": [
-      "중복 데이터 제거",
-      "무결성 향상",
-      "성능 향상",
-      "종속성 제거"
-    ],
-    "correctIndex": 2,
-    "explanation": "정규화의 목적은 중복을 없애고(①), 함수 종속을 정리해(④) 이상 현상을 막고 무결성을 높이는 것이다(②). 테이블이 잘게 나뉘어 조인이 늘면 조회 성능은 오히려 떨어질 수 있으므로 성능 향상(③)은 목적이 아니다. 성능을 위해서는 반정규화를 한다.",
-    "chapter": "정규화",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0806",
-    "_category": "정규화",
-    "_correctRate": 10
-  },
-  {
     "id": 11665,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
@@ -30277,27 +29863,6 @@ export const AI_MOCK: QuizQuestion[] = [
         "mermaid": "erDiagram\n    주문 ||--|{ 주문항목 : \"포함\"\n    주문 {\n        string 주문번호 PK\n        date 주문일\n    }\n    주문항목 {\n        string 주문번호 PK, FK\n        number 항목번호 PK\n        string 상품명\n    }"
       }
     ]
-  },
-  {
-    "id": 11667,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "1과목",
-    "number": 868,
-    "title": "ERD에서 식별자는 무엇을 의미하는가?",
-    "options": [
-      "속성 이름",
-      "유일하게 개체를 구분하는 키",
-      "테이블 간의 관계",
-      "속성 값의 범위"
-    ],
-    "correctIndex": 1,
-    "explanation": "식별자는 엔터티 안에서 각 인스턴스(행)를 하나씩 구분해 주는 속성 또는 속성의 묶음이다(②). 속성 값의 범위는 도메인, 테이블 간 연결은 관계다.",
-    "chapter": "엔터티",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0811",
-    "_category": "ER 모델링",
-    "_correctRate": 10
   },
   {
     "id": 11668,
@@ -30428,48 +29993,6 @@ export const AI_MOCK: QuizQuestion[] = [
     "chapter": "데이터 모델 개념",
     "_source": "sqld-1140",
     "_origId": "sqld-0819",
-    "_category": "데이터베이스 개념",
-    "_correctRate": 10
-  },
-  {
-    "id": 11674,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "1과목",
-    "number": 875,
-    "title": "다음 중 엔터티 생성시점에 따른 분류가 아닌 것은?",
-    "options": [
-      "기본엔터티",
-      "중심엔터티",
-      "사건엔터티",
-      "행위엔터티"
-    ],
-    "correctIndex": 2,
-    "explanation": "SQL 전문가 가이드의 발생 시점에 따른 분류는 기본(키)·중심(메인)·행위 엔터티 세 가지다(①②④). 사건 엔터티는 유무형에 따른 분류(유형·개념·사건)에 속하므로 발생 시점 분류가 아니다(③). ※ 기존 정답 ② 를 가이드 분류에 맞춰 ③ 으로 바로잡았다.",
-    "chapter": "데이터 모델 개념",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0821",
-    "_category": "데이터베이스 개념",
-    "_correctRate": 10
-  },
-  {
-    "id": 11675,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "1과목",
-    "number": 876,
-    "title": "스키마의 종류로 옳지 않은 것은?",
-    "options": [
-      "응용 스키마",
-      "외부 스키마",
-      "개념 스키마",
-      "내부 스키마"
-    ],
-    "correctIndex": 0,
-    "explanation": "ANSI/SPARC 3단계 스키마는 외부 스키마(사용자 관점), 개념 스키마(전체 논리 구조), 내부 스키마(물리 저장 구조)로 구성된다. '응용 스키마'라는 단계는 없다.",
-    "chapter": "데이터 모델 개념",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0822",
     "_category": "데이터베이스 개념",
     "_correctRate": 10
   },
@@ -31500,27 +31023,6 @@ export const AI_MOCK: QuizQuestion[] = [
         "content": "<참고>\nHR.EMPLOYEES와 HR.DEPARTMENTS는 DEPARTMENT_ID 컬럼을 공통으로 가진 테이블이다."
       }
     ]
-  },
-  {
-    "id": 11702,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 903,
-    "title": "다음 중 UNION ALL 연산자와 동일한 결과를 생성하는 동작 방식은?",
-    "options": [
-      "두 SELECT 결과를 중복 없이 합친다.",
-      "두 SELECT 결과를 교집합으로 추출한다.",
-      "두 SELECT 결과를 모두 합치되 중복을 제거한다.",
-      "두 SELECT 결과를 모두 합치며 중복도 포함한다."
-    ],
-    "correctIndex": 3,
-    "explanation": "UNION ALL 은 두 SELECT 결과를 중복 제거 없이 모두 이어 붙인다(④). ①③ 처럼 중복을 없애는 것은 UNION, ② 교집합은 INTERSECT 다.",
-    "chapter": "집합 연산자",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0858",
-    "_category": "집합 연산자",
-    "_correctRate": 10
   },
   {
     "id": 11703,
@@ -34419,46 +33921,6 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11750,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 951,
-    "title": "ORDER BY dept, salary DESC의 정렬 우선순위는?",
-    "options": [
-      "dept 오름차순 후 동일 dept 내에서 salary 내림차순이다.",
-      "salary 내림차순 후 dept 오름차순이다.",
-      "두 컬럼을 동시에 무작위 정렬한다.",
-      "salary만 정렬한다."
-    ],
-    "correctIndex": 0,
-    "explanation": "ORDER BY 는 앞에 쓴 컬럼부터 정렬하고, 앞 컬럼 값이 같을 때만 다음 컬럼으로 정렬한다. dept 는 정렬 방향을 쓰지 않아 기본값인 오름차순, 같은 dept 안에서는 salary 내림차순이다.",
-    "chapter": "DML",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0919",
-    "_category": "DML"
-  },
-  {
-    "id": 11751,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 952,
-    "title": "ORDER BY 절에 대한 설명으로 옳은 것은?",
-    "options": [
-      "WHERE 절보다 먼저 수행된다.",
-      "SELECT 결과 집합의 표시 순서를 제어한다.",
-      "집계 함수와 함께 사용할 수 없다.",
-      "한 컬럼만 사용할 수 있다."
-    ],
-    "correctIndex": 1,
-    "explanation": "ORDER BY 는 SELECT 결과를 어떤 순서로 보여 줄지 정하며, 가장 마지막에 실행된다(WHERE 보다 나중). 집계 함수(ORDER BY SUM(sal))나 여러 컬럼(ORDER BY dept, sal DESC)도 쓸 수 있다.",
-    "chapter": "DML",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0920",
-    "_category": "DML"
-  },
-  {
     "id": 11752,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
@@ -34908,26 +34370,6 @@ export const AI_MOCK: QuizQuestion[] = [
         "content": "A = {1,2,2,3}, B = {2,3,4}"
       }
     ]
-  },
-  {
-    "id": 11761,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 962,
-    "title": "INTERSECT의 의미로 옳은 것은?",
-    "options": [
-      "합집합",
-      "차집합",
-      "교집합",
-      "정렬"
-    ],
-    "correctIndex": 2,
-    "explanation": "INTERSECT 는 두 SELECT 결과에 모두 있는 행만 돌려주는 교집합이다(중복은 제거). 합집합은 UNION / UNION ALL, 차집합은 MINUS(SQL Server 는 EXCEPT)다.",
-    "chapter": "집합 연산자",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0934",
-    "_category": "집합 연산자"
   },
   {
     "id": 11762,
@@ -35416,26 +34858,6 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11775,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 976,
-    "title": "일반 VIEW의 특징으로 옳은 것은?",
-    "options": [
-      "일반적으로 자체 데이터는 저장하지 않는다.",
-      "항상 인덱스를 가진다.",
-      "트리거를 만들 수 없다.",
-      "FROM 절에 사용할 수 없다."
-    ],
-    "correctIndex": 0,
-    "explanation": "일반 뷰는 SELECT 문만 저장하고, 조회할 때마다 기본 테이블에서 데이터를 읽으므로 자체 데이터를 저장하지 않는다(데이터를 저장하는 것은 머티리얼라이즈드 뷰). 뷰는 FROM 절에서 테이블처럼 쓸 수 있고, 일반적으로 인덱스를 직접 만들 수 없다.",
-    "chapter": "View",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0952",
-    "_category": "View"
-  },
-  {
     "id": 11776,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
@@ -35482,26 +34904,6 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "View"
   },
   {
-    "id": 11778,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "1과목",
-    "number": 979,
-    "title": "기본 테이블 구조가 변경될 때 VIEW 관련 주의점으로 옳은 것은?",
-    "options": [
-      "뷰는 기본 테이블과 완전히 독립적이다.",
-      "뷰는 SELECT 문을 포함할 수 없다.",
-      "뷰는 DROP TABLE보다 먼저 삭제할 수 없다.",
-      "기본 테이블 변경이 뷰 조회 오류로 이어질 수 있다."
-    ],
-    "correctIndex": 3,
-    "explanation": "뷰는 기본 테이블에 의존하므로, 뷰가 참조하는 컬럼을 삭제·변경하거나 테이블을 삭제하면 뷰를 조회할 때 오류가 난다. 뷰는 SELECT 문으로 정의되며, 기본 테이블과 독립적이지 않다.",
-    "chapter": "View",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0955",
-    "_category": "View"
-  },
-  {
     "id": 11779,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
@@ -35526,26 +34928,6 @@ export const AI_MOCK: QuizQuestion[] = [
         "code": "CREATE TABLE dept (\n  dept_id NUMBER PRIMARY KEY\n);\nCREATE TABLE emp (\n  emp_id NUMBER PRIMARY KEY,\n  dept_id NUMBER\n);\nALTER TABLE emp\nADD CONSTRAINT fk_emp_dept\nFOREIGN KEY (dept_id)\n  REFERENCES dept(dept_id);"
       }
     ]
-  },
-  {
-    "id": 11780,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 981,
-    "title": "CREATE TABLE의 의미로 옳은 것은?",
-    "options": [
-      "기존 데이터를 조회한다.",
-      "행 단위 수정만 수행한다.",
-      "새 테이블 객체를 생성한다.",
-      "권한을 부여한다."
-    ],
-    "correctIndex": 2,
-    "explanation": "CREATE TABLE 은 새 테이블(컬럼, 데이터 타입, 제약조건)을 만드는 DDL 이다. 데이터 조회는 SELECT, 행 수정은 UPDATE, 권한 부여는 GRANT 이다.",
-    "chapter": "DDL",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0957",
-    "_category": "DDL"
   },
   {
     "id": 11781,
@@ -35640,32 +35022,6 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11785,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 986,
-    "title": "Oracle 에서 아래 순서로 실행한 뒤의 상태로 옳은 것은? (EMP 는 SCOTT 소유 테이블이다)",
-    "options": [
-      "U1, U2 모두 EMP 를 조회할 수 없다.",
-      "U1 만 조회할 수 없고, U2 는 계속 조회할 수 있다.",
-      "U1 이 U2 에게 준 권한이 남아 있어 3) 의 REVOKE 가 오류로 끝난다.",
-      "REVOKE 는 U1 이 직접 받은 권한만 지우므로 U1, U2 모두 조회할 수 있다."
-    ],
-    "correctIndex": 0,
-    "explanation": "WITH GRANT OPTION 으로 받은 객체 권한을 회수하면, 그 사용자가 다른 사용자에게 다시 준 권한도 함께 회수된다. 3) 에서 U1 의 SELECT 가 회수되면서 U1 이 U2 에게 준 SELECT 도 사라져 둘 다 조회할 수 없다. 정답은 ①번이다. ② 는 연쇄 회수를 빠뜨렸다. 시스템 권한을 WITH ADMIN OPTION 으로 준 경우에는 연쇄 회수되지 않으므로 둘을 헷갈리기 쉽다. ③ 은 PostgreSQL 의 동작이다. PostgreSQL 은 CASCADE 없이 실행하면 dependent privileges exist 오류를 내고, REVOKE … CASCADE 로 실행하면 U1, U2 모두 권한이 사라진다. ④ 처럼 U1 의 권한이 남는 일은 없다.",
-    "chapter": "DCL·TCL",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0962",
-    "_category": "DCL",
-    "references": [
-      {
-        "type": "sql",
-        "code": "-- 1) SCOTT 접속\nGRANT SELECT ON EMP TO U1\n  WITH GRANT OPTION;\n-- 2) U1 접속\nGRANT SELECT ON SCOTT.EMP TO U2;\n-- 3) SCOTT 접속\nREVOKE SELECT ON EMP FROM U1;"
-      }
-    ]
-  },
-  {
     "id": 11786,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
@@ -35716,26 +35072,6 @@ export const AI_MOCK: QuizQuestion[] = [
         "code": "GRANT SELECT ON A.EMP TO B\n  WITH GRANT OPTION;"
       }
     ]
-  },
-  {
-    "id": 11788,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 989,
-    "title": "DCL 명령의 범주로 옳은 것은?",
-    "options": [
-      "데이터 조회",
-      "테이블 생성",
-      "권한 및 보안 제어",
-      "집계 처리"
-    ],
-    "correctIndex": 2,
-    "explanation": "DCL 은 GRANT·REVOKE 처럼 누가 어떤 작업을 할 수 있는지, 즉 권한과 보안을 제어하는 명령이다(③). 데이터 조회는 DML(SELECT), 테이블 생성은 DDL 이다.",
-    "chapter": "DCL·TCL",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0965",
-    "_category": "DCL"
   },
   {
     "id": 11789,
@@ -35840,26 +35176,6 @@ export const AI_MOCK: QuizQuestion[] = [
         "content": "작업1: INSERT A\nSAVEPOINT S1\n작업2: INSERT B\nROLLBACK\n작업3: INSERT C\nCOMMIT"
       }
     ]
-  },
-  {
-    "id": 11793,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "1과목",
-    "number": 994,
-    "title": "ANSI/SPARC 3단계 스키마 구조에 대한 설명으로 옳은 것은?",
-    "options": [
-      "외부 스키마는 물리 저장 장치를 직접 기술한다.",
-      "외부 스키마는 사용자 관점의 뷰를 정의한다.",
-      "개념 스키마는 인덱스 파일 위치를 기술한다.",
-      "내부 스키마는 사용자별 보기를 각각 정의한다."
-    ],
-    "correctIndex": 1,
-    "explanation": "외부 스키마는 사용자·응용 프로그램마다 필요한 부분만 보여 주는 관점(뷰)을 정의한다(②). 조직 전체의 논리 구조는 개념 스키마, 인덱스·저장 위치 같은 물리 구조는 내부 스키마가 다룬다.",
-    "chapter": "데이터 모델 개념",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0971",
-    "_category": "데이터베이스 개념"
   },
   {
     "id": 11794,
@@ -36584,26 +35900,6 @@ export const AI_MOCK: QuizQuestion[] = [
     "_category": "DDL"
   },
   {
-    "id": 11819,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 1020,
-    "title": "CREATE TABLE 문의 주된 목적은 무엇인가?",
-    "options": [
-      "새로운 테이블 구조를 정의하는 것",
-      "기존 데이터를 조회하는 것",
-      "권한을 부여하는 것",
-      "트랜잭션을 종료하는 것"
-    ],
-    "correctIndex": 0,
-    "explanation": "CREATE TABLE 은 칼럼 이름·데이터 타입·제약조건을 정해 새 테이블을 만드는 DDL 이다(①). 데이터 조회는 SELECT(DML), 권한 부여는 GRANT(DCL), 트랜잭션 종료는 COMMIT·ROLLBACK(TCL)이다.",
-    "chapter": "DDL",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0999",
-    "_category": "DDL"
-  },
-  {
     "id": 11821,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
@@ -36656,26 +35952,6 @@ export const AI_MOCK: QuizQuestion[] = [
         "code": "GRANT SELECT, INSERT ON emp TO user1;\nREVOKE INSERT ON emp FROM user1;"
       }
     ]
-  },
-  {
-    "id": 11824,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 1025,
-    "title": "DCL이 담당하는 영역으로 옳은 것은?",
-    "options": [
-      "테이블 생성",
-      "데이터 조회",
-      "권한과 보안 제어",
-      "집계 결과 계산"
-    ],
-    "correctIndex": 2,
-    "explanation": "DCL(Data Control Language)은 GRANT(권한 부여)·REVOKE(권한 회수)로 누가 무엇을 할 수 있는지 통제한다(③). 테이블 생성은 DDL, 데이터 조회는 DML(SELECT)이다.",
-    "chapter": "DCL·TCL",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1005",
-    "_category": "DCL"
   },
   {
     "id": 11825,
@@ -37706,26 +36982,6 @@ export const AI_MOCK: QuizQuestion[] = [
         ]
       }
     ]
-  },
-  {
-    "id": 11857,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 1058,
-    "title": "뷰(View)에 대한 설명으로 옳은 것은?",
-    "options": [
-      "뷰는 항상 독립적인 물리 데이터를 가진다.",
-      "뷰는 인덱스를 대체하는 저장소다.",
-      "기본 테이블의 데이터를 이용해 가상 테이블처럼 조회할 수 있다.",
-      "뷰는 트랜잭션을 자동 종료한다."
-    ],
-    "correctIndex": 2,
-    "explanation": "뷰는 기본 테이블을 조회하는 SELECT 문을 저장한 가상 테이블이다. 자체 데이터를 물리적으로 저장하지 않고(머티리얼라이즈드 뷰 제외), 인덱스를 대신하거나 트랜잭션을 끝내는 기능도 없다.",
-    "chapter": "View",
-    "_source": "sqld-1140",
-    "_origId": "sqld-1046",
-    "_category": "View"
   },
   {
     "id": 11858,
@@ -38903,6 +38159,26 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
+    "id": 11986,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 1187,
+    "title": "INTERSECT의 의미로 옳은 것은?",
+    "options": [
+      "차집합",
+      "교집합",
+      "정렬",
+      "합집합"
+    ],
+    "correctIndex": 1,
+    "explanation": "INTERSECT 는 두 SELECT 결과에 모두 있는 행만 돌려주는 교집합이다(②). 합집합은 UNION, 차집합은 MINUS(SQL Server 는 EXCEPT)다.",
+    "chapter": "집합 연산자",
+    "_source": "sqld-1140",
+    "_origId": "sqld-1205",
+    "_category": "집합 연산자"
+  },
+  {
     "id": 11988,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
@@ -38921,6 +38197,46 @@ export const AI_MOCK: QuizQuestion[] = [
     "_source": "sqld-1140",
     "_origId": "sqld-1208",
     "_category": "DDL"
+  },
+  {
+    "id": 11989,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 1190,
+    "title": "ORDER BY 절에 대한 설명으로 옳은 것은?",
+    "options": [
+      "집계 함수와 함께 사용할 수 없다.",
+      "한 컬럼만 사용할 수 있다.",
+      "WHERE 절보다 먼저 수행된다.",
+      "SELECT 결과 집합의 표시 순서를 제어한다."
+    ],
+    "correctIndex": 3,
+    "explanation": "ORDER BY는 출력 결과의 정렬 순서를 결정한다.",
+    "chapter": "DML",
+    "_source": "sqld-1140",
+    "_origId": "sqld-1209",
+    "_category": "DML"
+  },
+  {
+    "id": 11992,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "1과목",
+    "number": 1193,
+    "title": "기본 테이블 구조가 변경될 때 VIEW 관련 주의점으로 옳은 것은?",
+    "options": [
+      "뷰는 SELECT 문을 포함할 수 없다.",
+      "뷰는 기본 테이블과 완전히 독립적이다.",
+      "기본 테이블 변경이 뷰 조회 오류로 이어질 수 있다.",
+      "뷰는 DROP TABLE보다 먼저 삭제할 수 없다."
+    ],
+    "correctIndex": 2,
+    "explanation": "뷰는 기본 테이블 정의에 의존한다.",
+    "chapter": "View",
+    "_source": "sqld-1140",
+    "_origId": "sqld-1214",
+    "_category": "View"
   },
   {
     "id": 11993,
@@ -39119,6 +38435,26 @@ export const AI_MOCK: QuizQuestion[] = [
     "_source": "sqld-1140",
     "_origId": "sqld-1243",
     "_category": "데이터 무결성"
+  },
+  {
+    "id": 12020,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "1과목",
+    "number": 1221,
+    "title": "ANSI/SPARC 3단계 스키마 구조에 대한 설명으로 옳은 것은?",
+    "options": [
+      "내부 스키마는 사용자별 보기를 각각 정의한다.",
+      "외부 스키마는 물리 저장 장치를 직접 기술한다.",
+      "외부 스키마는 사용자 관점의 뷰를 정의한다.",
+      "개념 스키마는 인덱스 파일 위치를 기술한다."
+    ],
+    "correctIndex": 2,
+    "explanation": "외부 스키마는 사용자별 관점, 개념 스키마는 통합 논리 구조, 내부 스키마는 물리 저장 구조를 다룬다.",
+    "chapter": "데이터 모델 개념",
+    "_source": "sqld-1140",
+    "_origId": "sqld-1244",
+    "_category": "데이터베이스 개념"
   },
   {
     "id": 12024,
@@ -39541,6 +38877,26 @@ export const AI_MOCK: QuizQuestion[] = [
         "code": "CREATE VIEW v_sales AS\nSELECT emp_id, dept\nFROM emp\nWHERE dept = 'SALES'\nWITH CHECK OPTION;"
       }
     ]
+  },
+  {
+    "id": 12092,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 1293,
+    "title": "DCL이 담당하는 영역으로 옳은 것은?",
+    "options": [
+      "데이터 조회",
+      "권한과 보안 제어",
+      "집계 결과 계산",
+      "테이블 생성"
+    ],
+    "correctIndex": 1,
+    "explanation": "DCL은 GRANT, REVOKE와 같이 권한과 접근 제어를 담당한다.",
+    "chapter": "DCL·TCL",
+    "_source": "sqld-1140",
+    "_origId": "sqld-1327",
+    "_category": "DCL"
   },
   {
     "id": 12095,
