@@ -15779,15 +15779,57 @@
       "_correctRate": 10,
       "subject": "2과목",
       "chapter": "윈도우 함수",
-      "title": "파티션별 윈도우에서 가장 먼저 나온 값을 구하는 WINDOW FUNCTION은 무엇인가?",
+      "title": "아래 EMP 테이블에 대한 SQL 결과에서 ENAME 이 B 인 행의 (F, L1, L2) 로 옳은 것은?",
       "options": [
-        "LEAD",
-        "LAST_VALUE",
-        "LAG",
-        "FIRST_VALUE"
+        "(A, C, C)",
+        "(A, B, B)",
+        "(B, B, C)",
+        "(A, B, C)"
       ],
       "correctIndex": 3,
-      "explanation": "FIRST_VALUE 는 파티션에서 정렬 순서상 가장 먼저 나오는 값을 돌려준다(④). LAST_VALUE 는 마지막 값, LAG 는 앞 행 값, LEAD 는 뒤 행 값이다."
+      "explanation": "ORDER BY 만 쓰고 범위를 적지 않으면 기본 범위는 '처음부터 현재 행까지(RANGE UNBOUNDED PRECEDING AND CURRENT ROW)' 다. FIRST_VALUE 는 범위의 첫 행이라 10번 부서에서 급여가 가장 낮은 A 다. L1 의 LAST_VALUE 는 같은 기본 범위의 마지막 행, 즉 현재 행 B 가 된다. L2 는 범위를 파티션 끝까지(UNBOUNDED FOLLOWING) 넓혔으므로 C 다. 정답은 ④번이다. ① 은 기본 범위가 파티션 전체라고 보고 L1 을 C 로 본 값이다. ② 는 범위를 넓혀도 LAST_VALUE 가 현재 행이라고 본 값이다. ③ 은 FIRST_VALUE 도 현재 행이라고 본 값이다. 파티션의 마지막 값을 구하려면 L2 처럼 범위를 끝까지 지정해야 한다.",
+      "references": [
+        {
+          "type": "table",
+          "caption": "EMP",
+          "headers": [
+            "DEPT",
+            "ENAME",
+            "SAL"
+          ],
+          "rows": [
+            [
+              "10",
+              "A",
+              "3000"
+            ],
+            [
+              "10",
+              "B",
+              "4000"
+            ],
+            [
+              "10",
+              "C",
+              "5000"
+            ],
+            [
+              "20",
+              "D",
+              "2000"
+            ],
+            [
+              "20",
+              "E",
+              "2500"
+            ]
+          ]
+        },
+        {
+          "type": "sql",
+          "code": "SELECT ENAME,\n  FIRST_VALUE(ENAME) OVER (\n    PARTITION BY DEPT ORDER BY SAL) F,\n  LAST_VALUE(ENAME) OVER (\n    PARTITION BY DEPT ORDER BY SAL) L1,\n  LAST_VALUE(ENAME) OVER (\n    PARTITION BY DEPT ORDER BY SAL\n    ROWS BETWEEN UNBOUNDED PRECEDING\n         AND UNBOUNDED FOLLOWING) L2\nFROM   EMP;"
+        }
+      ]
     },
     {
       "_id": "sqld-0554",
@@ -28454,15 +28496,21 @@
       "_category": "DCL",
       "subject": "2과목",
       "chapter": "DCL·TCL",
-      "title": "REVOKE INSERT ON emp FROM user1의 의미로 옳은 것은?",
+      "title": "아래 권한 작업을 모두 실행한 뒤 사용자 U1, U2 가 새로 접속했을 때 (U1 의 EMP 조회, U1 의 EMP 입력, U2 의 EMP 조회) 가능 여부로 옳은 것은? (Oracle 기준)",
       "options": [
-        "SELECT 권한도 함께 회수된다.",
-        "emp 테이블이 삭제된다.",
-        "user1의 INSERT 권한만 회수한다.",
-        "user1 계정이 잠긴다."
+        "(가능, 가능, 불가)",
+        "(불가, 불가, 불가)",
+        "(가능, 불가, 불가)",
+        "(가능, 불가, 가능)"
       ],
       "correctIndex": 2,
-      "explanation": "REVOKE 는 지정한 권한만 회수한다. REVOKE INSERT ON emp FROM user1 은 user1 의 INSERT 권한만 회수하고, 이미 받은 SELECT 권한은 그대로 남는다. 테이블이 삭제되거나 계정이 잠기지 않는다."
+      "explanation": "롤에 준 권한을 회수하면 그 롤을 받은 모든 사용자에게서 롤을 통한 권한이 함께 사라진다. R1 에서 SELECT·INSERT 를 회수했으므로 U2 는 EMP 를 조회할 수 없다. U1 은 R1 을 통한 권한은 잃었지만, SELECT 는 따로 직접 받았기 때문에 조회는 그대로 할 수 있다. INSERT 는 R1 으로만 받았으므로 할 수 없다. 정답은 ③번이다. ① 은 롤에서 회수해도 이미 롤을 받은 사용자의 권한은 남는다고 본 값이다. ② 는 롤의 권한을 회수하면 같은 권한을 직접 받은 것까지 사라진다고 본 값이다. ④ 는 U2 도 U1 처럼 직접 받은 권한이 있다고 착각한 값이다.",
+      "references": [
+        {
+          "type": "sql",
+          "code": "CREATE ROLE R1;\nGRANT SELECT, INSERT ON EMP TO R1;\nGRANT R1 TO U1;\nGRANT R1 TO U2;\nGRANT SELECT ON EMP TO U1;\n\nREVOKE SELECT, INSERT ON EMP FROM R1;"
+        }
+      ]
     },
     {
       "_id": "sqld-0964",
@@ -32734,15 +32782,21 @@
       "_category": "DCL",
       "subject": "2과목",
       "chapter": "DCL·TCL",
-      "title": "REVOKE INSERT ON emp FROM user1의 의미로 옳은 것은?",
+      "title": "아래 권한 작업을 모두 실행한 뒤 사용자 U1, U2 가 새로 접속했을 때 (U1 의 EMP 조회, U1 의 EMP 입력, U2 의 EMP 조회) 가능 여부로 옳은 것은? (Oracle 기준)",
       "options": [
-        "emp 테이블이 삭제된다.",
-        "user1 계정이 잠긴다.",
-        "SELECT 권한도 함께 회수된다.",
-        "user1의 INSERT 권한만 회수한다."
+        "(가능, 가능, 불가)",
+        "(불가, 불가, 불가)",
+        "(가능, 불가, 불가)",
+        "(가능, 불가, 가능)"
       ],
-      "correctIndex": 3,
-      "explanation": "부여된 권한 일부만 선택적으로 회수할 수 있다."
+      "correctIndex": 2,
+      "explanation": "롤에 준 권한을 회수하면 그 롤을 받은 모든 사용자에게서 롤을 통한 권한이 함께 사라진다. R1 에서 SELECT·INSERT 를 회수했으므로 U2 는 EMP 를 조회할 수 없다. U1 은 R1 을 통한 권한은 잃었지만, SELECT 는 따로 직접 받았기 때문에 조회는 그대로 할 수 있다. INSERT 는 R1 으로만 받았으므로 할 수 없다. 정답은 ③번이다. ① 은 롤에서 회수해도 이미 롤을 받은 사용자의 권한은 남는다고 본 값이다. ② 는 롤의 권한을 회수하면 같은 권한을 직접 받은 것까지 사라진다고 본 값이다. ④ 는 U2 도 U1 처럼 직접 받은 권한이 있다고 착각한 값이다.",
+      "references": [
+        {
+          "type": "sql",
+          "code": "CREATE ROLE R1;\nGRANT SELECT, INSERT ON EMP TO R1;\nGRANT R1 TO U1;\nGRANT R1 TO U2;\nGRANT SELECT ON EMP TO U1;\n\nREVOKE SELECT, INSERT ON EMP FROM R1;"
+        }
+      ]
     },
     {
       "_id": "sqld-1160",
