@@ -1321,3 +1321,4 @@ sqld-0312·0319(M494·M501, 데이터베이스 파티션 기법)도 성능 데�
 | cbt-079 | DELETE·TRUNCATE·DROP 비교 정의 | ROLLBACK·TRUNCATE(DDL 암시적 커밋)·DROP 이 섞인 시나리오 | PostgreSQL 16 에서 TRUNCATE 자리에 COMMIT 으로 흉내 → T 2행, T2 없음 |
 | cbt-133 | 입력 명령어(INSERT) 고르기 | MERGE: MATCHED UPDATE(WHERE 조건)·NOT MATCHED INSERT, 짝 없는 T 행 유지 | PostgreSQL 16 MERGE(WHEN MATCHED AND …) → 4행, 1250. 1140 풀 사본 sqld-0175 도 같은 내용으로 맞춰 중복 제외 247 유지 |
 | cbt-154 (+ 사본 sqld-0181) | 별칭 쓴 SQL 의 틀린 줄 고르기 | 테이블 별칭 뒤 원래 이름 사용·ORDER BY 별칭·모호한 칼럼·WHERE 별칭 다섯 문장 | PostgreSQL 16 → ㉠·㉣·㉤ 오류(별칭 뒤 테이블 이름, team_id 모호, WHERE 별칭) |
+| cbt-060 | 순수 관계 연산자 아닌 것 | DIVIDE·PROJECT(집합이라 중복 없음)·SELECT·차집합을 작은 릴레이션에 적용한 튜플 수 | PostgreSQL 16(DIVIDE 는 이중 NOT EXISTS, PROJECT 는 DISTINCT) → 2, 3, 3, 1. 사본 없음 |
