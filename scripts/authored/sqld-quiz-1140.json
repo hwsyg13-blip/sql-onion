@@ -28211,16 +28211,57 @@
       "_category": "서브쿼리",
       "subject": "2과목",
       "chapter": "서브쿼리",
-      "title": "다음 조건의 의미로 옳은 것은? salary > ALL (SELECT salary FROM emp WHERE dept = 'HR')",
+      "title": "아래 사원 테이블에 (가), (나) 를 실행했을 때 결과 행 수로 옳은 것은? (XX 부서는 없다)",
       "options": [
-        "HR 부서의 최소 급여보다 큰 값을 찾는다.",
-        "HR 부서와 동일 급여만 찾는다.",
-        "HR 부서 급여 중 하나만 만족하면 된다.",
-        "HR 부서의 최대 급여보다 큰 급여를 찾는 것과 같다."
+        "(가) 1 / (나) 0",
+        "(가) 3 / (나) 5",
+        "(가) 3 / (나) 0",
+        "(가) 1 / (나) 5"
       ],
       "correctIndex": 3,
-      "explanation": "> ALL 은 서브쿼리의 모든 값보다 커야 참이므로, HR 부서 급여 중 가장 큰 값보다 큰 급여를 찾는 것과 같다. 최솟값보다 크면 되는 것은 > ANY 이다.",
-      "references": []
+      "explanation": "> ALL 은 서브쿼리가 돌려준 모든 값보다 커야 참이라, HR 의 최대 급여 300 보다 큰 것과 같다. (가) 는 400 인 '마' 한 명이라 1 행이다. (나) 는 XX 부서가 없어 서브쿼리가 0 행을 돌려준다. 비교할 값이 하나도 없으면 > ALL 은 '모든 값보다 크다' 를 어기는 값이 없으므로 참이 되어 5 행이 모두 나온다. 정답은 ④번이다. ① 은 빈 서브쿼리면 아무 행도 안 나온다고 착각한 결과로, 이것은 > ANY 의 동작이다. ② 와 ③ 은 > ALL 을 최솟값 200 보다 큰 것(> ANY)으로 읽었다. PostgreSQL 16 에서도 1, 5 다.",
+      "references": [
+        {
+          "type": "table",
+          "caption": "사원",
+          "headers": [
+            "이름",
+            "부서",
+            "급여"
+          ],
+          "rows": [
+            [
+              "가",
+              "HR",
+              "200"
+            ],
+            [
+              "나",
+              "HR",
+              "300"
+            ],
+            [
+              "다",
+              "IT",
+              "100"
+            ],
+            [
+              "라",
+              "IT",
+              "250"
+            ],
+            [
+              "마",
+              "IT",
+              "400"
+            ]
+          ]
+        },
+        {
+          "type": "sql",
+          "code": "-- (가)\nSELECT 이름 FROM 사원\nWHERE  급여 > ALL (SELECT 급여\n                   FROM   사원\n                   WHERE  부서 = 'HR');\n\n-- (나)\nSELECT 이름 FROM 사원\nWHERE  급여 > ALL (SELECT 급여\n                   FROM   사원\n                   WHERE  부서 = 'XX');"
+        }
+      ]
     },
     {
       "_id": "sqld-0895",
@@ -28484,15 +28525,47 @@
       "_category": "NULL",
       "subject": "2과목",
       "chapter": "함수",
-      "title": "NVL(col, 0)의 의미로 옳은 것은?",
+      "title": "아래 수당 테이블에 SQL 을 실행했을 때 A, B, C 값으로 옳은 것은?",
       "options": [
-        "col이 0이면 NULL로 바꾼다.",
-        "평균값으로 자동 대체한다.",
-        "col이 NULL이 아니면 행을 삭제한다.",
-        "col이 NULL이면 0으로 대체한다."
+        "A: 100, B: 100, C: 4",
+        "A: 200, B: 200, C: 2",
+        "A: 100, B: 200, C: 4",
+        "A: 200, B: 100, C: 2"
       ],
       "correctIndex": 3,
-      "explanation": "NVL(col, 0) 은 col 이 NULL 이면 0 을, NULL 이 아니면 col 값을 그대로 반환한다. 행을 지우거나 값을 바꾸지 않고 조회 결과에서만 대체한다."
+      "explanation": "집계 함수는 NULL 을 빼고 계산한다. A 는 COMM 이 있는 두 행(100, 300)만으로 평균을 내 200 이다. B 는 NVL 로 NULL 을 0 으로 바꾼 뒤 네 행으로 평균을 내 (100 + 0 + 300 + 0) / 4 = 100 이다. C 는 NULL 이 아닌 COMM 만 세어 2 다. 정답은 ④번이다. ① 과 ③ 은 AVG 가 NULL 행도 분모에 넣는다고 착각했다. ② 는 NVL 을 써도 평균이 그대로라고 보았다. '수당이 없는 사람도 0 으로 쳐서 평균' 을 원하면 B 처럼 써야 한다. PostgreSQL 16(NVL → COALESCE)에서도 200, 100, 2 다.",
+      "references": [
+        {
+          "type": "table",
+          "caption": "수당",
+          "headers": [
+            "이름",
+            "COMM"
+          ],
+          "rows": [
+            [
+              "가",
+              "100"
+            ],
+            [
+              "나",
+              "NULL"
+            ],
+            [
+              "다",
+              "300"
+            ],
+            [
+              "라",
+              "NULL"
+            ]
+          ]
+        },
+        {
+          "type": "sql",
+          "code": "SELECT AVG(COMM)         AS A,\n       AVG(NVL(COMM, 0)) AS B,\n       COUNT(COMM)       AS C\nFROM   수당;"
+        }
+      ]
     },
     {
       "_id": "sqld-0905",

@@ -1403,3 +1403,5 @@ sqld-0312·0319(M494·M501, 데이터베이스 파티션 기법)도 성능 데�
 | sqld-0514 | 숫자형 아닌 타입 고르기 | CHAR(5)·VARCHAR2(5) 에 'AB'·'AB ' 를 넣고 리터럴 비교 행 수 (공백 채움 비교) | PostgreSQL 16 char/varchar → 2, 1, 1. CHAR 칼럼과 VARCHAR 칼럼끼리 비교는 PG(3행)와 Oracle(0행)이 달라 보기에서 뺌(해설에 명시). 390px 화면 확인. 사본 없음 |
 | sqld-0485 | 정규화 목적 아닌 것(보안) 고르기 | 부분 종속이 있는 수강 표에서 삽입·갱신·삭제 이상 세 상황 짝짓기 | 교재 정의 대조. 390px 화면 확인(4칸 표 넘침 없음). 사본 없음 |
 | sqld-0863 | 데이터 타입 설명 고르기 | 시각이 든 DATE 칼럼에 = 날짜·BETWEEN 두 날짜·TRUNC 비교 행 수 | PostgreSQL 16 timestamp → 1, 3, 2. 390px 화면 확인. 사본 없음 |
+| sqld-0894 | > ALL 뜻 고르기 | > ALL 서브쿼리 결과 행 수, 서브쿼리가 0 행일 때 모든 행 반환 | PostgreSQL 16 → 1, 5. 390px 화면 확인. 사본 없음 |
+| sqld-0903 | NVL 뜻 고르기 | AVG(COMM)·AVG(NVL(COMM,0))·COUNT(COMM) 값 비교 | PostgreSQL 16 (COALESCE) → 200, 100, 2. 검증기 ok. 390px 화면 확인. 사본 없음 |
