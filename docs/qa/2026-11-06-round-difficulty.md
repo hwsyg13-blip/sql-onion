@@ -1364,3 +1364,5 @@ sqld-0312·0319(M494·M501, 데이터베이스 파티션 기법)도 성능 데�
 | sqld-0221 | ROWS 1 PRECEDING~1 FOLLOWING 고르기 | 이동평균 값 계산 (양 끝은 있는 행만으로 평균) | PostgreSQL 16 → 15, 20, 30, 35. 검증기 ok. 390px 화면 확인. 사본 없음 |
 | sqld-0189 | 순위 함수 설명 고르기 | 동점이 있는 표에서 RANK·DENSE_RANK·ROW_NUMBER 값 | PostgreSQL 16 → 라: 4, 3, 4. 390px 화면 확인. 사본 없음 |
 | sqld-0110 | 계층형 질의 설명 고르기 | CONNECT BY 절 조건(가지째 잘림)과 WHERE 조건(그 행만 빠짐)의 행 수 차이 | PostgreSQL 16 재귀 CTE 로 옮겨 실행 → 3행, 5행. 390px 화면 확인. 사본 없음 |
+| sqld-0122 | 뷰 설명 고르기 | 뷰 생성 뒤 원본 INSERT·뷰 UPDATE·뷰 INSERT(조건 밖 행) 결과 판단 | PostgreSQL 16 → V10 3행, 원본 사번 1 급여 400, 뷰로 넣은 행은 부서 NULL·V10 0행. 390px 화면 확인. 사본 없음 |
+| sqld-0224 | ORDER BY 설명 고르기 | CASE 식 정렬 + 두 번째 키 DESC, NULL 등급이 ELSE 로 가는지 | PostgreSQL 16 → 라, 나, 다, 마, 가. 390px 화면 확인. 사본 없음 |
