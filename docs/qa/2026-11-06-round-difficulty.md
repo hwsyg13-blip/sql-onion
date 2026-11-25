@@ -1384,3 +1384,5 @@ sqld-0312·0319(M494·M501, 데이터베이스 파티션 기법)도 성능 데�
 | sqld-0412 | 미커밋 데이터 설명 고르기 | 두 세션 시간순 실행에서 각 시점 COUNT (자기 변경은 보이고 남의 미커밋은 안 보임) | PostgreSQL 16 두 세션으로 같은 순서 실행 → 3, 4, 4. 390px 화면 확인. 사본 없음 |
 | sqld-0281 | 계층형 함수 아닌 것 고르기 | 중간 행에서 START WITH 한 전개의 LEVEL·CONNECT_BY_ROOT·SYS_CONNECT_BY_PATH 값 | PostgreSQL 16 재귀 CTE 로 옮겨 실행 → C: 3, A, /A/B/C. 390px 화면 확인. 사본 없음 |
 | sqld-0240 | LENGTH 값 틀린 것 고르기 | 윤년 날짜 빼기·앞뒤 공백 LENGTH·말일 ADD_MONTHS·TRUNC(날짜)+1 | PostgreSQL 16 → 2, 5, 2024-02-29, 2024-03-01 00:00. 390px 화면 확인. 사본 없음 |
+| sqld-0388 | 테이블명 규칙 고르기 | CREATE TABLE 넷 중 오류(숫자 시작) 고르기 — 큰따옴표 이름·$ 포함 이름은 가능 | PostgreSQL 16 → ①②③ 생성, ④ 만 오류. 390px 화면 확인. 사본 없음 |
+| sqld-0389 | ROUND 이름 고르기 | 음수 자릿수 ROUND·TRUNC 결과 (음수 TRUNC 는 0 쪽으로) | PostgreSQL 16 → 1200, 1230, 1200, -1200. 390px 화면 확인. 사본 없음 |
