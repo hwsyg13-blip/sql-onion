@@ -1318,3 +1318,5 @@ sqld-0312·0319(M494·M501, 데이터베이스 파티션 기법)도 성능 데�
 | 55-2-29 | 손자 조회 셀프 조인 고르기 | 3단 셀프 조인(특정 조부/전체 사슬) + LEFT JOIN 으로 조부 없는 행 | PostgreSQL 16 → (2, 3, 3) |
 | 47-2-22 | 최단신 SQL 중 다른 것 | IN(TEAM, MIN)·상관 = MIN·인라인 뷰·NOT EXISTS(더 작은 선수) + 키 NULL 선수 | PostgreSQL 16 → 3, 3, 3, 4 (NOT EXISTS 만 NULL 선수 포함) |
 | 50-2-11 | 평균 학점 SQL 고르기 | AVG 와 NULL, AVG(NVL), SUM/COUNT(*), LEFT JOIN 으로 수강 없는 학생 | PostgreSQL 16 → 2, 1, 1, 1 |
+| cbt-079 | DELETE·TRUNCATE·DROP 비교 정의 | ROLLBACK·TRUNCATE(DDL 암시적 커밋)·DROP 이 섞인 시나리오 | PostgreSQL 16 에서 TRUNCATE 자리에 COMMIT 으로 흉내 → T 2행, T2 없음 |
+| cbt-133 | 입력 명령어(INSERT) 고르기 | MERGE: MATCHED UPDATE(WHERE 조건)·NOT MATCHED INSERT, 짝 없는 T 행 유지 | PostgreSQL 16 MERGE(WHEN MATCHED AND …) → 4행, 1250. 옛 사본(같은 정의 문항)이 다른 풀에 있어 중복 제외 247 → 246 |

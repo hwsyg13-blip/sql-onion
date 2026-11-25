@@ -2689,15 +2689,54 @@
       "_origNo": 79,
       "subject": "2과목",
       "chapter": "DCL·TCL",
-      "title": "DELETE, TRUNCATE, DROP 명령을 비교한 것으로 옳은 것은?",
+      "title": "아래 T, T2 테이블(커밋된 상태)에 ㉠~㉥ 을 차례로 실행한 뒤의 상태로 옳은 것은? (Oracle 기준)",
       "options": [
-        "DROP, TRUNCATE는 DDL이고 DELETE는 DML이다.",
-        "DROP, TRUNCATE는 테이블 자체를 삭제하고, DELETE는 테이블 자체는 남아있다.",
-        "DELETE FROM 테이블;과 TRUNCATE TABLE 테이블;의 결과 행은 다르다.",
-        "DELETE는 ROLLBACK이 불가능하다."
+        "T 는 2행, T2 는 없어진다.",
+        "T 는 3행, T2 는 없어진다.",
+        "T 는 2행, T2 는 빈 테이블로 남는다.",
+        "T 는 1행, T2 는 없어진다."
       ],
       "correctIndex": 0,
-      "explanation": "• DELETE는 DML로 ROLLBACK이 가능하며 실행 시 테이블 자체는 남아있다. • TRUNCATE는 DDL로 ROLLBACK이 불가하며, 실행 시 테이블을 초기 상태로 되돌린다(테이블 구조 자체는 남아있음). • DROP은 DDL로 ROLLBACK도 불가능하고 테이블 구조 자체를 삭제한다."
+      "explanation": "DELETE 는 DML 이라 ㉡ ROLLBACK 으로 ㉠ 이 취소되어 T 는 다시 3행이다. ㉢ 의 DELETE 뒤에 실행한 TRUNCATE 는 DDL 이라, 실행 직전에 그때까지의 트랜잭션을 자동으로 커밋한다. 그래서 ID 2 삭제가 확정되고 ㉤ ROLLBACK 은 되돌릴 것이 없다. TRUNCATE 자체도 ROLLBACK 으로 되돌릴 수 없다. ㉥ DROP 은 데이터뿐 아니라 테이블 구조까지 없앤다. T 는 2행, T2 는 없어지므로 정답은 ①번이다. ② 는 TRUNCATE 의 자동 커밋을 놓치고 ㉤ 이 ID 2 삭제를 되돌린다고 본 것이다. ③ 은 DROP 을 TRUNCATE 처럼 데이터만 지운다고 본 것이다. ④ 는 ㉡ ROLLBACK 이 ㉠ 을 되돌리지 못한다고 본 것이다.",
+      "references": [
+        {
+          "type": "table",
+          "caption": "T",
+          "headers": [
+            "ID"
+          ],
+          "rows": [
+            [
+              "1"
+            ],
+            [
+              "2"
+            ],
+            [
+              "3"
+            ]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "T2",
+          "headers": [
+            "ID"
+          ],
+          "rows": [
+            [
+              "10"
+            ],
+            [
+              "20"
+            ]
+          ]
+        },
+        {
+          "type": "sql",
+          "code": "-- ㉠\nDELETE FROM T WHERE ID = 1;\n-- ㉡\nROLLBACK;\n-- ㉢\nDELETE FROM T WHERE ID = 2;\n-- ㉣\nTRUNCATE TABLE T2;\n-- ㉤\nROLLBACK;\n-- ㉥\nDROP TABLE T2;"
+        }
+      ]
     },
     {
       "_id": "cbt-080",
@@ -4509,15 +4548,65 @@
       "_origNo": 133,
       "subject": "2과목",
       "chapter": "DML",
-      "title": "데이터를 입력하기 위해 사용하는 SQL 명령어는 무엇인가?",
+      "title": "아래 T, S 테이블에 MERGE 를 실행한 뒤 T 의 (행 수, AMT 합계) 로 옳은 것은? (Oracle 기준)",
       "options": [
-        "CREATE",
-        "INSERT",
-        "UPDATE",
-        "ALTER"
+        "(3, 1150)",
+        "(4, 1250)",
+        "(4, 1300)",
+        "(4, 1050)"
       ],
       "correctIndex": 1,
-      "explanation": "테이블에 새 데이터를 입력하는 명령어는 DML 인 INSERT 다(②). UPDATE(③)는 이미 있는 데이터를 수정하고, CREATE(①)·ALTER(④)는 테이블 같은 객체의 구조를 만들거나 바꾸는 DDL 이다."
+      "explanation": "MERGE 는 S 의 행마다 T 에 짝(ON 조건)이 있으면 UPDATE, 없으면 INSERT 를 한다. ID 2 는 짝이 있고 S.AMT 250 이 100 보다 커서 200 + 250 = 450 이 된다. ID 4 도 짝이 있지만 S.AMT 50 이 WHERE 조건을 만족하지 못해 400 그대로다. ID 3 은 T 에 없어 300 으로 새로 들어간다. S 에 없는 T 의 ID 1 은 건드리지 않는다. 결과는 100, 450, 300, 400 으로 4행, 합계 1250 이다. 정답은 ②번이다. ① 은 S 에 없는 T 의 행(ID 1)이 지워진다고 본 값이다. ③ 은 UPDATE 의 WHERE 를 무시하고 ID 4 도 450 으로 더한 값이다. ④ 는 SET 을 S.AMT 로 바꿔 넣는다고 보고 ID 2 를 250 으로 계산한 값이다.",
+      "references": [
+        {
+          "type": "table",
+          "caption": "T",
+          "headers": [
+            "ID",
+            "AMT"
+          ],
+          "rows": [
+            [
+              "1",
+              "100"
+            ],
+            [
+              "2",
+              "200"
+            ],
+            [
+              "4",
+              "400"
+            ]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "S",
+          "headers": [
+            "ID",
+            "AMT"
+          ],
+          "rows": [
+            [
+              "2",
+              "250"
+            ],
+            [
+              "3",
+              "300"
+            ],
+            [
+              "4",
+              "50"
+            ]
+          ]
+        },
+        {
+          "type": "sql",
+          "code": "MERGE INTO T\nUSING S ON (T.ID = S.ID)\nWHEN MATCHED THEN\n  UPDATE SET T.AMT = T.AMT + S.AMT\n  WHERE S.AMT > 100\nWHEN NOT MATCHED THEN\n  INSERT (ID, AMT)\n  VALUES (S.ID, S.AMT);"
+        }
+      ]
     },
     {
       "_id": "cbt-134",
