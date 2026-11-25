@@ -1388,3 +1388,5 @@ sqld-0312·0319(M494·M501, 데이터베이스 파티션 기법)도 성능 데�
 | sqld-0389 | ROUND 이름 고르기 | 음수 자릿수 ROUND·TRUNC 결과 (음수 TRUNC 는 0 쪽으로) | PostgreSQL 16 → 1200, 1230, 1200, -1200. 390px 화면 확인. 사본 없음 |
 | sqld-0413 | IS NOT NULL SQL 고르기 | NULL·문자열 'NULL'·공백이 섞인 칼럼에 NOT IN (NULL)·IS NOT NULL·!= ''·<> 'NULL' 행 수 | PostgreSQL 16 (㉢ 은 Oracle '' = NULL 로 옮김) → 0, 3, 0, 2. 390px 화면 확인. 사본 없음 |
 | sqld-0417 | 윈도우 SQL 오류 고르기 | 빈칸에 넣는 ROWS 범위 넷 중 오류(끝에 UNBOUNDED PRECEDING) 고르기, 시작만 쓴 범위의 뜻 | PostgreSQL 16 → ② 만 오류(frame end cannot be UNBOUNDED PRECEDING), ④ 100, 300, 600. 390px 화면 확인. 사본 없음 |
+| sqld-0430 | SUBSTR 이름 고르기 | 음수 시작 SUBSTR·INSTR n 번째 위치·INSTR+SUBSTR 조합 값 | PostgreSQL 16 (음수 시작 → RIGHT, n 번째 → REGEXP_INSTR) → '11', '-202', 10, '2026-11'. 390px 화면 확인. 사본 없음 |
+| sqld-0962 | GRANT 뜻 고르기 | WITH GRANT OPTION 으로 받은 권한을 다시 준 뒤 원래 권한 회수 → 연쇄 회수 | PostgreSQL 16 → CASCADE 없으면 dependent privileges exist 오류(해설에 Oracle 과 차이 명시), CASCADE 후 U1·U2 모두 권한 없음. 390px 화면 확인. 사본 없음 |

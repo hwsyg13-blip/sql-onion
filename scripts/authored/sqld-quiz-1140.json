@@ -13863,15 +13863,15 @@
       "_correctRate": 10,
       "subject": "2과목",
       "chapter": "함수",
-      "title": "다음 중 문자열의 m번째 위치에서 n개의 길이에 해당하는 문자열을 반환하는 함수는?",
+      "title": "문자열 'SQLD-2026-11' 에 대한 함수와 결과의 짝이 옳은 것은? (Oracle 기준)",
       "options": [
-        "SUBSTR(문자열,M,N)",
-        "STRING_SPLIT(문자열,M,N)",
-        "CONCAT(문자열,M,N)",
-        "TRIM(문자열,M,N)"
+        "SUBSTR('SQLD-2026-11', -2) → '11'",
+        "SUBSTR('SQLD-2026-11', 5, 4) → '2026'",
+        "INSTR('SQLD-2026-11', '-', 1, 2) → 5",
+        "SUBSTR('SQLD-2026-11', INSTR('SQLD-2026-11', '-') + 1) → '2026'"
       ],
       "correctIndex": 0,
-      "explanation": "①번 SUBSTR은 입력받은 문자열의 m번째 위치에서 n개의 길이만큼 잘라 리턴한다. 참고로 SUBSTRING은 SQL Server에서 사용하는 방식이다."
+      "explanation": "SUBSTR(문자열, m, n) 은 m 번째 글자부터 n 글자를 돌려주고, m 이 음수면 뒤에서부터 센다. ① 은 뒤에서 두 번째 글자부터 끝까지라 '11' 이다. 정답은 ①번이다. ② 5 번째 글자는 첫 번째 '-' 라서 '-202' 가 나온다('2026' 은 6 번째부터). ③ INSTR 의 네 번째 인자 2 는 두 번째로 나오는 '-' 의 위치라 10 이다. 5 는 첫 번째 '-' 의 위치다. ④ 첫 '-' 다음(6 번째)부터 길이를 정하지 않았으므로 끝까지인 '2026-11' 이다. PostgreSQL 16 에서 음수 시작은 RIGHT, n 번째 위치는 REGEXP_INSTR 로 옮겨 실행하면 '11', '-202', 10, '2026-11' 이다."
     },
     {
       "_id": "sqld-0431",
@@ -29890,15 +29890,21 @@
       "_category": "DCL",
       "subject": "2과목",
       "chapter": "DCL·TCL",
-      "title": "GRANT SELECT, INSERT ON emp TO user1의 의미로 옳은 것은?",
+      "title": "Oracle 에서 아래 순서로 실행한 뒤의 상태로 옳은 것은? (EMP 는 SCOTT 소유 테이블이다)",
       "options": [
-        "user1에게 emp 테이블의 조회와 입력 권한을 준다.",
-        "user1을 삭제한다.",
-        "emp 테이블 구조를 바꾼다.",
-        "모든 사용자 권한을 회수한다."
+        "U1, U2 모두 EMP 를 조회할 수 없다.",
+        "U1 만 조회할 수 없고, U2 는 계속 조회할 수 있다.",
+        "U1 이 U2 에게 준 권한이 남아 있어 3) 의 REVOKE 가 오류로 끝난다.",
+        "REVOKE 는 U1 이 직접 받은 권한만 지우므로 U1, U2 모두 조회할 수 있다."
       ],
       "correctIndex": 0,
-      "explanation": "GRANT 권한 ON 객체 TO 사용자 는 사용자에게 객체 권한을 주는 DCL 이다. GRANT SELECT, INSERT ON emp TO user1 은 user1 에게 emp 테이블의 조회(SELECT)와 입력(INSERT) 권한을 함께 준다. 권한 회수는 REVOKE, 구조 변경은 ALTER 이다."
+      "explanation": "WITH GRANT OPTION 으로 받은 객체 권한을 회수하면, 그 사용자가 다른 사용자에게 다시 준 권한도 함께 회수된다. 3) 에서 U1 의 SELECT 가 회수되면서 U1 이 U2 에게 준 SELECT 도 사라져 둘 다 조회할 수 없다. 정답은 ①번이다. ② 는 연쇄 회수를 빠뜨렸다. 시스템 권한을 WITH ADMIN OPTION 으로 준 경우에는 연쇄 회수되지 않으므로 둘을 헷갈리기 쉽다. ③ 은 PostgreSQL 의 동작이다. PostgreSQL 은 CASCADE 없이 실행하면 dependent privileges exist 오류를 내고, REVOKE … CASCADE 로 실행하면 U1, U2 모두 권한이 사라진다. ④ 처럼 U1 의 권한이 남는 일은 없다.",
+      "references": [
+        {
+          "type": "sql",
+          "code": "-- 1) SCOTT 접속\nGRANT SELECT ON EMP TO U1\n  WITH GRANT OPTION;\n-- 2) U1 접속\nGRANT SELECT ON SCOTT.EMP TO U2;\n-- 3) SCOTT 접속\nREVOKE SELECT ON EMP FROM U1;"
+        }
+      ]
     },
     {
       "_id": "sqld-0963",
