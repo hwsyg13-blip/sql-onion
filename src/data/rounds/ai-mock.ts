@@ -1,5 +1,5 @@
 // Auto-generated from scripts/authored/ai-mock.json
-// AI 생성 모의고사 풀 (기출 변형) · 1173문항
+// AI 생성 모의고사 풀 (기출 변형) · 1172문항
 // ⚠ 직접 편집 금지. ai-mock.json 수정 후 'node scripts/build-quiz-bank.mjs' 재실행.
 import type { QuizQuestion } from '../quizBank';
 
@@ -11245,20 +11245,52 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 345,
-    "title": "다음 중 서브쿼리에 대해 설명으로 가장 적절한 것은?",
+    "title": "아래 직원 테이블에서 SQL 의 ㉠ 에 넣었을 때 오류가 나는 것은?",
     "options": [
-      "서브 쿼리는 항상 메인쿼리에서 읽혀진 데이터에 대해 서브쿼리에서 해당 조건이 만족하는지를 확인하는 방식으로 수행된다.",
-      "연관 서브쿼리는 주로 메인쿼리에 값을 제공하기 위한 목적으로 사용한다.",
-      "다중 행 서브쿼리 비교 연산자는 단일 행 서브쿼리의 비교 연산자로도 사용할 수 있다.",
-      "단일 행 서브쿼리는 서브쿼리의 실행 결과가 항상 한 건 이하의 서브쿼리로서 IN, ALL 등의 비교 연산자를 사용하여야 한다."
+      "IN (SELECT MAX(급여) FROM 직원)",
+      "> ANY (SELECT 급여 FROM 직원 WHERE 부서 = 'B')",
+      "= (SELECT MAX(급여) FROM 직원 GROUP BY 부서)",
+      "= (SELECT 급여 FROM 직원 WHERE 부서 = 'C')"
     ],
     "correctIndex": 2,
-    "explanation": "① 메인 쿼리의 결과가 서브쿼리로 제공될 수도 있고, 서브쿼리의 결과가 메인쿼리로 제공될 수도 있으므로 실행 순서는 상황에 따라 달라진다.\n② 비 연관 서브쿼리가 주로 메인쿼리에 값을 제공하기 위한 목적으로 사용된다.\n③ 단일 행 서브쿼리의 비교연산자는 다중 행 서브쿼리의 비교연산자로 사용할 수 없지만, 반대의 경우는 가능하다.\n④ 단일 행 서브쿼리의 비교연산자로는 =, <, <=, >, >=, <> 를 쓴다. IN, ALL 등의 비교연산자는 다중 행 서브쿼리의 비교연산자 이다.",
+    "explanation": "= 같은 단일 행 비교 연산자 뒤의 서브쿼리는 한 행 이하만 돌려줘야 한다. ③ 의 서브쿼리는 GROUP BY 부서 때문에 부서마다 한 행씩, 300 과 200 두 행을 돌려줘 오류가 난다. PostgreSQL 16 에서도 more than one row returned by a subquery 오류가 난다. 정답은 ③번이다. ① 처럼 IN, ANY 같은 다중 행 연산자는 서브쿼리가 한 행만 돌려줘도 쓸 수 있어 '나' 가 나온다. ② 는 B 부서 급여 200 보다 큰 '나' 가 나온다. ④ 는 C 부서가 없어 서브쿼리가 0행이고, 이때는 오류가 아니라 비교 결과가 NULL 이 되어 아무 행도 나오지 않는다.",
     "chapter": "서브쿼리",
     "_source": "sqld-1140",
     "_origId": "sqld-0118",
     "_category": "서브쿼리",
-    "_correctRate": 10
+    "_correctRate": 10,
+    "references": [
+      {
+        "type": "table",
+        "caption": "직원",
+        "headers": [
+          "이름",
+          "부서",
+          "급여"
+        ],
+        "rows": [
+          [
+            "가",
+            "A",
+            "100"
+          ],
+          [
+            "나",
+            "A",
+            "300"
+          ],
+          [
+            "다",
+            "B",
+            "200"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT 이름\nFROM   직원\nWHERE  급여 ㉠;"
+      }
+    ]
   },
   {
     "id": 11145,
@@ -12860,27 +12892,6 @@ export const AI_MOCK: QuizQuestion[] = [
         "code": "SELECT E.이름, G.등급\nFROM   사원 E, 급여등급 G\nWHERE  E.급여 BETWEEN G.하한\n                   AND G.상한;"
       }
     ]
-  },
-  {
-    "id": 11191,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 392,
-    "title": "다음 중 SELF JOIN을 수행해야 할 때는 어떤 경우인가?",
-    "options": [
-      "한 테이블 내에서 연관된 칼럼은 없으나 JOIN을 해야 한다.",
-      "두 테이블에 공통 칼럼이 존재하고 두 테이블이 연관 관계가 있다.",
-      "두 테이블에 연관된 칼럼은 없으나 JOIN을 해야 한다.",
-      "한 테이블 내에서 두 칼럼이 연관 관계가 있다."
-    ],
-    "correctIndex": 3,
-    "explanation": "SELF  JOIN은 하나의 테이블에서 두 개의 칼럼이 연관 관계를 가지고 있는 경우에 사용한다.",
-    "chapter": "조인",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0185",
-    "_category": "JOIN",
-    "_correctRate": 10
   },
   {
     "id": 11192,
