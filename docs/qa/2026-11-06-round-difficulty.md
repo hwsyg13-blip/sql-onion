@@ -1405,3 +1405,4 @@ sqld-0312·0319(M494·M501, 데이터베이스 파티션 기법)도 성능 데�
 | sqld-0863 | 데이터 타입 설명 고르기 | 시각이 든 DATE 칼럼에 = 날짜·BETWEEN 두 날짜·TRUNC 비교 행 수 | PostgreSQL 16 timestamp → 1, 3, 2. 390px 화면 확인. 사본 없음 |
 | sqld-0894 | > ALL 뜻 고르기 | > ALL 서브쿼리 결과 행 수, 서브쿼리가 0 행일 때 모든 행 반환 | PostgreSQL 16 → 1, 5. 390px 화면 확인. 사본 없음 |
 | sqld-0903 | NVL 뜻 고르기 | AVG(COMM)·AVG(NVL(COMM,0))·COUNT(COMM) 값 비교 | PostgreSQL 16 (COALESCE) → 200, 100, 2. 검증기 ok. 390px 화면 확인. 사본 없음 |
+| sqld-0960 (+ 사본 1000·1328) | ALTER TABLE 용도 고르기 | 데이터가 있는 테이블에 ADD(DEFAULT)·MODIFY 늘리기/줄이기·RENAME·DROP 을 차례로 실행해 오류 나는 것 고르기 | PostgreSQL 16 → 크기 줄이기만 value too long 오류, 끝난 뒤 ID·회원명(20). 사본 둘도 같은 내용(중복 제외 251 그대로). 390px 화면 확인 |

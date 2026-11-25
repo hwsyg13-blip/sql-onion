@@ -30154,15 +30154,21 @@
       "_category": "DDL",
       "subject": "2과목",
       "chapter": "DDL",
-      "title": "ALTER TABLE로 가능한 작업으로 옳은 것은?",
+      "title": "회원(ID NUMBER, 이름 VARCHAR2(10)) 테이블에 이름이 'SMITH', 'KIM' 인 두 행이 있다. 아래 ㉠~㉤ 을 순서대로 실행할 때 오류가 나는 것만 모두 고른 것은? (Oracle 기준)",
       "options": [
-        "데이터만 조회",
-        "트랜잭션 저장점 생성",
-        "권한 부여만 수행",
-        "컬럼 추가, 수정, 삭제 등 구조 변경"
+        "㉡, ㉢",
+        "㉢, ㉤",
+        "㉠, ㉢",
+        "㉢"
       ],
       "correctIndex": 3,
-      "explanation": "ALTER TABLE 은 이미 만든 테이블의 구조를 바꾸는 DDL 로, 컬럼 추가(ADD)·변경(MODIFY)·삭제(DROP COLUMN)·이름 변경(RENAME COLUMN), 제약조건 추가·삭제를 할 수 있다. 저장점은 SAVEPOINT, 권한 부여는 GRANT 이다."
+      "explanation": "ALTER TABLE 로 칼럼을 추가(ADD)·변경(MODIFY)·이름 변경(RENAME COLUMN)·삭제(DROP COLUMN)할 수 있다. ㉠ 은 기존 행에 DEFAULT 'B' 가 채워지며 추가되고, ㉡ 처럼 크기를 늘리는 것은 데이터가 있어도 된다. ㉢ 은 크기를 3 으로 줄이는데 이미 5 글자인 'SMITH' 가 있어 오류가 난다. ㉣·㉤ 은 정상이다. 정답은 ④번이다. ① 은 데이터가 있으면 크기를 늘리는 것도 안 된다고 보았다. ② 는 칼럼 삭제가 안 된다고, ③ 은 DEFAULT 가 있는 칼럼 추가가 안 된다고 착각한 결과다. PostgreSQL 16(MODIFY → ALTER COLUMN … TYPE)에서도 ㉢ 만 value too long 오류가 나고, 끝난 뒤 칼럼은 ID, 회원명(20) 이다.",
+      "references": [
+        {
+          "type": "sql",
+          "code": "㉠ ALTER TABLE 회원\n     ADD (등급 VARCHAR2(5)\n          DEFAULT 'B');\n㉡ ALTER TABLE 회원\n     MODIFY (이름 VARCHAR2(20));\n㉢ ALTER TABLE 회원\n     MODIFY (이름 VARCHAR2(3));\n㉣ ALTER TABLE 회원\n     RENAME COLUMN 이름 TO 회원명;\n㉤ ALTER TABLE 회원\n     DROP COLUMN 등급;"
+        }
+      ]
     },
     {
       "_id": "sqld-0961",
@@ -31036,15 +31042,21 @@
       "_category": "DDL",
       "subject": "2과목",
       "chapter": "DDL",
-      "title": "ALTER TABLE로 가능한 작업으로 옳은 것은?",
+      "title": "회원(ID NUMBER, 이름 VARCHAR2(10)) 테이블에 이름이 'SMITH', 'KIM' 인 두 행이 있다. 아래 ㉠~㉤ 을 순서대로 실행할 때 오류가 나는 것만 모두 고른 것은? (Oracle 기준)",
       "options": [
-        "데이터 조회만 수행",
-        "SAVEPOINT 생성만 수행",
-        "권한 회수만 수행",
-        "컬럼 추가와 제약조건 추가"
+        "㉡, ㉢",
+        "㉢, ㉤",
+        "㉠, ㉢",
+        "㉢"
       ],
       "correctIndex": 3,
-      "explanation": "ALTER TABLE 은 테이블 구조를 바꾸는 DDL 로, 칼럼 추가(ADD)·변경(MODIFY)·삭제(DROP COLUMN), 제약조건 추가·삭제, 칼럼 이름 변경(RENAME COLUMN) 등을 할 수 있다(④). 조회·SAVEPOINT·권한 회수는 각각 SELECT, TCL, REVOKE 의 일이다."
+      "explanation": "ALTER TABLE 로 칼럼을 추가(ADD)·변경(MODIFY)·이름 변경(RENAME COLUMN)·삭제(DROP COLUMN)할 수 있다. ㉠ 은 기존 행에 DEFAULT 'B' 가 채워지며 추가되고, ㉡ 처럼 크기를 늘리는 것은 데이터가 있어도 된다. ㉢ 은 크기를 3 으로 줄이는데 이미 5 글자인 'SMITH' 가 있어 오류가 난다. ㉣·㉤ 은 정상이다. 정답은 ④번이다. ① 은 데이터가 있으면 크기를 늘리는 것도 안 된다고 보았다. ② 는 칼럼 삭제가 안 된다고, ③ 은 DEFAULT 가 있는 칼럼 추가가 안 된다고 착각한 결과다. PostgreSQL 16(MODIFY → ALTER COLUMN … TYPE)에서도 ㉢ 만 value too long 오류가 나고, 끝난 뒤 칼럼은 ID, 회원명(20) 이다.",
+      "references": [
+        {
+          "type": "sql",
+          "code": "㉠ ALTER TABLE 회원\n     ADD (등급 VARCHAR2(5)\n          DEFAULT 'B');\n㉡ ALTER TABLE 회원\n     MODIFY (이름 VARCHAR2(20));\n㉢ ALTER TABLE 회원\n     MODIFY (이름 VARCHAR2(3));\n㉣ ALTER TABLE 회원\n     RENAME COLUMN 이름 TO 회원명;\n㉤ ALTER TABLE 회원\n     DROP COLUMN 등급;"
+        }
+      ]
     },
     {
       "_id": "sqld-1001",
@@ -39151,15 +39163,21 @@
       "_category": "DDL",
       "subject": "2과목",
       "chapter": "DDL",
-      "title": "ALTER TABLE로 가능한 작업으로 옳은 것은?",
+      "title": "회원(ID NUMBER, 이름 VARCHAR2(10)) 테이블에 이름이 'SMITH', 'KIM' 인 두 행이 있다. 아래 ㉠~㉤ 을 순서대로 실행할 때 오류가 나는 것만 모두 고른 것은? (Oracle 기준)",
       "options": [
-        "권한 회수만 수행",
-        "SAVEPOINT 생성만 수행",
-        "데이터 조회만 수행",
-        "컬럼 추가와 제약조건 추가"
+        "㉡, ㉢",
+        "㉢, ㉤",
+        "㉠, ㉢",
+        "㉢"
       ],
       "correctIndex": 3,
-      "explanation": "ALTER TABLE은 컬럼, 제약조건 등 구조 변경에 사용된다."
+      "explanation": "ALTER TABLE 로 칼럼을 추가(ADD)·변경(MODIFY)·이름 변경(RENAME COLUMN)·삭제(DROP COLUMN)할 수 있다. ㉠ 은 기존 행에 DEFAULT 'B' 가 채워지며 추가되고, ㉡ 처럼 크기를 늘리는 것은 데이터가 있어도 된다. ㉢ 은 크기를 3 으로 줄이는데 이미 5 글자인 'SMITH' 가 있어 오류가 난다. ㉣·㉤ 은 정상이다. 정답은 ④번이다. ① 은 데이터가 있으면 크기를 늘리는 것도 안 된다고 보았다. ② 는 칼럼 삭제가 안 된다고, ③ 은 DEFAULT 가 있는 칼럼 추가가 안 된다고 착각한 결과다. PostgreSQL 16(MODIFY → ALTER COLUMN … TYPE)에서도 ㉢ 만 value too long 오류가 나고, 끝난 뒤 칼럼은 ID, 회원명(20) 이다.",
+      "references": [
+        {
+          "type": "sql",
+          "code": "㉠ ALTER TABLE 회원\n     ADD (등급 VARCHAR2(5)\n          DEFAULT 'B');\n㉡ ALTER TABLE 회원\n     MODIFY (이름 VARCHAR2(20));\n㉢ ALTER TABLE 회원\n     MODIFY (이름 VARCHAR2(3));\n㉣ ALTER TABLE 회원\n     RENAME COLUMN 이름 TO 회원명;\n㉤ ALTER TABLE 회원\n     DROP COLUMN 등급;"
+        }
+      ]
     },
     {
       "_id": "sqld-1329",
