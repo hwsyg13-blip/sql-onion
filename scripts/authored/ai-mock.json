@@ -1318,15 +1318,21 @@
       "_source": "gemini-mock-2",
       "subject": "2과목",
       "chapter": "DDL",
-      "title": "UNIQUE 제약조건에 대한 설명 중 틀린 것은?",
+      "title": "아래 T 테이블에 ㉠~㉤ 을 순서대로 하나씩 실행할 때 성공하는 INSERT 만 모두 고른 것은? (오류가 난 문장만 실패한다)",
       "options": [
-        "UNIQUE 제약조건이 설정된 컬럼은 자동으로 NOT NULL 제약조건이 부여된다.",
-        "해당 컬럼에 동일한 값이 중복되어 저장되는 것을 방지한다.",
-        "NULL 값은 비교 대상이 아니므로 하나의 테이블 내에 여러 개의 NULL 값이 삽입되는 것을 허용한다.",
-        "테이블 내에서 여러 개의 컬럼을 조합하여(Composite) 하나의 UNIQUE 제약을 생성할 수 있다."
+        "㉠, ㉡, ㉢",
+        "㉠, ㉡",
+        "㉠, ㉡, ㉢, ㉣",
+        "㉠, ㉡, ㉣"
       ],
       "correctIndex": 0,
-      "explanation": "UNIQUE 는 NULL 을 허용하므로 NOT NULL 이 자동으로 붙지 않는다. UNIQUE 와 NOT NULL 을 합친 것이 PRIMARY KEY 다. 그래서 ①이 틀렸다."
+      "explanation": "UNIQUE 는 같은 값이 두 번 들어오는 것만 막고 NULL 은 허용한다. NULL 끼리는 같은 값으로 비교되지 않으므로 ㉡ 과 ㉢ 처럼 NULL 을 여러 번 넣어도 된다. PRIMARY KEY 는 UNIQUE 에 NOT NULL 이 더해진 것이라 ㉣ 처럼 ID 에 NULL 을 넣으면 오류다. ㉤ 은 이미 있는 'a@x' 와 겹쳐 UNIQUE 위반이다. 정답은 ①번이다. ② 는 UNIQUE 칼럼에 NULL 을 한 번만 넣을 수 있다고 착각한 결과다. ③ 과 ④ 는 PRIMARY KEY 도 NULL 을 받아 준다고 보았다. PostgreSQL 16 에서도 ㉣·㉤ 만 실패하고 ID 1, 2, 3 이 남는다.",
+      "references": [
+        {
+          "type": "sql",
+          "code": "CREATE TABLE T (\n  ID    NUMBER PRIMARY KEY,\n  EMAIL VARCHAR2(20) UNIQUE\n);\n㉠ INSERT INTO T VALUES (1, 'a@x');\n㉡ INSERT INTO T VALUES (2, NULL);\n㉢ INSERT INTO T VALUES (3, NULL);\n㉣ INSERT INTO T VALUES (NULL, 'b@x');\n㉤ INSERT INTO T VALUES (4, 'a@x');"
+        }
+      ]
     }
   ]
 }
