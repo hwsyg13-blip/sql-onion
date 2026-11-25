@@ -1400,3 +1400,4 @@ sqld-0312·0319(M494·M501, 데이터베이스 파티션 기법)도 성능 데�
 | sqld-0766 (+ 사본 0719) | TCL 설명 고르기 | COMMIT 뒤 ROLLBACK TO 저장점(오류)과 마지막 ROLLBACK 뒤 COUNT | PostgreSQL 16 → savepoint does not exist 오류, COUNT 2. 0719 는 같은 문항이라 같은 내용으로 맞춤 → 중복 제외 251(남은 풀 1169). 390px 화면 확인 |
 | sqld-0416 | 차집합 연산자 이름 고르기 | 중복·NULL 이 있는 표에서 MINUS(EXCEPT) 와 NOT IN 결과 비교 | PostgreSQL 16 (EXCEPT) → (가) 1, NULL / (나) 1, 1. 390px 화면 확인. 사본 없음 |
 | sqld-0378 (+ 사본 0411) | ACID 아닌 것(통합성) 고르기 | 계좌 이체 상황 넷을 원자성·일관성·고립성·지속성과 짝짓기 | 교재 정의 대조. 0411 은 보기 순서만 다른 같은 문항이라 같은 내용으로 맞춤(중복 제외 251 그대로). 390px 화면 확인 |
+| sqld-0514 | 숫자형 아닌 타입 고르기 | CHAR(5)·VARCHAR2(5) 에 'AB'·'AB ' 를 넣고 리터럴 비교 행 수 (공백 채움 비교) | PostgreSQL 16 char/varchar → 2, 1, 1. CHAR 칼럼과 VARCHAR 칼럼끼리 비교는 PG(3행)와 Oracle(0행)이 달라 보기에서 뺌(해설에 명시). 390px 화면 확인. 사본 없음 |

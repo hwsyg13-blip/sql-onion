@@ -23115,20 +23115,26 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 658,
-    "title": "다음 중 NUMERIC(숫자) 형이 아닌 하나는?",
+    "title": "아래처럼 만든 T 테이블에서 ㉠, ㉡, ㉢ 조건으로 조회한 행 수를 차례대로 적은 것은? (Oracle 기준)",
     "options": [
-      "DECIMAL",
-      "FLOAT",
-      "CHAR",
-      "INT"
+      "1 / 1 / 1",
+      "2 / 2 / 0",
+      "2 / 1 / 1",
+      "1 / 2 / 0"
     ],
     "correctIndex": 2,
-    "explanation": "CHAR 는 고정 길이 문자형이라 숫자형이 아니다(③). DECIMAL·FLOAT·INT 는 모두 숫자형(NUMERIC 계열)이다. 문자형에는 CHAR(고정 길이), VARCHAR/VARCHAR2(가변 길이)가 있다.",
+    "explanation": "CHAR(5) 는 고정 길이라 'AB' 와 'AB ' 가 모두 뒤에 공백을 채워 'AB   ' 로 저장된다. CHAR 와 문자 리터럴을 비교할 때는 짧은 쪽에 공백을 채워 맞춘 뒤 비교하므로 ㉠ 은 1, 2 번 두 행이다. VARCHAR2 는 넣은 그대로 저장하고 공백도 한 글자로 따진다. 그래서 ㉡ 은 'AB' 인 1 번, ㉢ 은 'AB ' 인 2 번만 맞아 각각 1 행이다. 정답은 ③번이다. ① 은 CHAR 도 넣은 그대로 저장된다고 착각한 결과다. ② 와 ④ 는 VARCHAR2 도 뒤 공백을 무시한다고 착각한 결과다. PostgreSQL 16 의 char(5)·varchar(5) 로 실행해도 2, 1, 1 이다(단, CHAR 칼럼과 VARCHAR 칼럼끼리 비교하는 방식은 PostgreSQL 과 Oracle 이 다르다).",
     "chapter": "함수",
     "_source": "sqld-1140",
     "_origId": "sqld-0514",
     "_category": "단일행 함수",
-    "_correctRate": 10
+    "_correctRate": 10,
+    "references": [
+      {
+        "type": "sql",
+        "code": "CREATE TABLE T (\n  ID NUMBER,\n  C  CHAR(5),\n  V  VARCHAR2(5)\n);\nINSERT INTO T VALUES (1, 'AB', 'AB');\nINSERT INTO T VALUES (2, 'AB ', 'AB ');\nINSERT INTO T VALUES (3, 'ABC', 'ABC');\n\n㉠ WHERE C = 'AB'\n㉡ WHERE V = 'AB'\n㉢ WHERE V = 'AB '"
+      }
+    ]
   },
   {
     "id": 11458,
