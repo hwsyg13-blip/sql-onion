@@ -1342,3 +1342,5 @@ sqld-0312·0319(M494·M501, 데이터베이스 파티션 기법)도 성능 데�
 | sqld-0324 | 양수 TRUNC/ROUND/CEIL/FLOOR | 음수 -35.8·-35.45·-35.2 로 바꿔 방향 착각 유도 | PostgreSQL 16 → trunc -35, round(-35.45,1) -35.5, ceil -35, floor -36. 사본 없음 |
 | sqld-0373 | NVL/NULLIF 기본값 | Oracle 의 '' = NULL 규칙과 \|\| 의 NULL 처리로 LENGTH('') 가 NULL 인지 판단 | PostgreSQL 16 에서 '' → NULL, \|\| → concat() 로 옮겨 실행: B, A, NULL, A. 사본 없음 |
 | sqld-0232 | NATURAL JOIN 이름 고르기 | 공통 칼럼이 둘(부서코드·지역)인 표에서 NATURAL JOIN 과 USING 결과 행 수 비교 | PostgreSQL 16 → NATURAL 2행, USING 4행. 390px 화면 확인. 사본 없음 |
+| sqld-0186 | 인라인 뷰 이름 고르기 | ROWNUM + ORDER BY 를 같은 층에 둔 SQL 과 인라인 뷰로 먼저 정렬한 SQL 의 결과 비교 | PostgreSQL 16 에서 ROWNUM → 읽기 순서 LIMIT 로 옮겨 실행: (가) B,A (나) B,D. 390px 화면 확인. 사본 없음 |
+| sqld-0391 | ORDER BY 기본 정렬 방향 | 위치 번호 정렬 + NULL 이 섞인 DESC + 두 번째 키 오름차순 결과 순서 | PostgreSQL 16 (NULL 최대값 규칙 Oracle 과 같음) → 나, 다, 가, 라. 390px 화면 확인. 사본 없음 |
