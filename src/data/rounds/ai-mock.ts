@@ -1107,18 +1107,63 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 41,
-    "title": "집합 연산자(Set Operator) UNION과 UNION ALL의 차이점에 대한 설명으로 올바른 것은?",
+    "title": "아래 두 테이블에 대해 (가) UNION 결과 행 수, (나) UNION ALL 결과 행 수, (다) (가) 결과의 칼럼 이름으로 옳은 것은?",
     "options": [
-      "UNION은 중복된 행을 하나로 합쳐서 출력하지만, UNION ALL은 두 질의의 결과를 중복 제거 없이 단순히 이어붙여 출력한다.",
-      "집합 연산자를 사용할 때는 양쪽 쿼리의 SELECT 절 컬럼 개수가 달라도 데이터 타입만 같으면 정상 실행된다.",
-      "출력되는 컬럼의 헤더명(Alias)은 두 번째(아래쪽) 쿼리에 명시된 컬럼명을 따른다.",
-      "UNION ALL은 중복 데이터를 제거하기 위해 내부적으로 Sort 작업을 수행하므로 UNION보다 성능이 떨어진다."
+      "(가) 4 / (나) 7 / (다) X",
+      "(가) 3 / (나) 7 / (다) X",
+      "(가) 4 / (나) 7 / (다) Y",
+      "(가) 5 / (나) 7 / (다) X"
     ],
     "correctIndex": 0,
-    "explanation": "UNION은 중복 제거를 위해 내부 정렬·중복 제거 단계가 있어 일반적으로 UNION ALL보다 느리다. 컬럼 개수와 위치별 데이터 타입은 양쪽 쿼리가 일치해야 하며, 결과 컬럼명은 첫 번째(위쪽) 쿼리의 컬럼명을 따른다.",
+    "explanation": "UNION 은 두 결과를 합친 뒤 중복을 없앤다. 이때 A 안에서 겹친 1 도 하나로 줄고, NULL 끼리도 같은 값으로 보아 하나만 남아 1, 2, 3, NULL 4행이다. UNION ALL 은 중복을 그대로 두고 이어 붙여 4 + 3 = 7행이다. 결과 칼럼 이름은 첫 번째 SELECT 의 X 를 따른다. 정답은 ①번이다. ② 는 NULL 이 결과에서 빠진다고 착각한 결과다. ③ 은 칼럼 이름이 아래쪽 SELECT 를 따른다고 보았다. ④ 는 A 안의 중복(1, 1)이 남는다고 착각한 결과다. UNION 은 중복 제거를 위해 정렬·해시 작업이 들어가므로, 중복이 없다는 것을 알면 UNION ALL 이 더 가볍다. PostgreSQL 16 에서도 4행, 7행, 칼럼 이름 x 다.",
     "chapter": "집합 연산자",
     "_source": "ai-mock",
-    "_origId": "ai-mock-047"
+    "_origId": "ai-mock-047",
+    "references": [
+      {
+        "type": "table",
+        "caption": "A",
+        "headers": [
+          "V"
+        ],
+        "rows": [
+          [
+            "1"
+          ],
+          [
+            "1"
+          ],
+          [
+            "2"
+          ],
+          [
+            "NULL"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "B",
+        "headers": [
+          "V"
+        ],
+        "rows": [
+          [
+            "2"
+          ],
+          [
+            "NULL"
+          ],
+          [
+            "3"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT V AS X FROM A\nUNION          -- (나)는 UNION ALL\nSELECT V AS Y FROM B;"
+      }
+    ]
   },
   {
     "id": 10841,
