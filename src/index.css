@@ -1697,6 +1697,7 @@ html[data-theme="dark"] .theory-md table tbody tr:nth-child(even) { background: 
 }
 .mt-mc-text {
   flex: 1; font-size: 13px; color: var(--fg-2); line-height: 1.5;
+  white-space: pre-line;
 }
 
 /* 풀이 결과 박스 */
