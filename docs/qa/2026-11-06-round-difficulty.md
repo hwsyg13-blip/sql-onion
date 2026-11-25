@@ -1296,3 +1296,5 @@ sqld-0312·0319(M494·M501, 데이터베이스 파티션 기법)도 성능 데�
 |---|---|---|---|
 | 62-2-42 | INSERT FIRST 한 문장 | INSERT ALL vs FIRST + NULL 행과 ELSE | PostgreSQL 16 은 다중 테이블 INSERT 가 없어 FILTER 집계로 같은 분기를 계산 → ㉠ (3, 2, 2), ㉡ (3, 0, 2) |
 | 62-2-45 | UNPIVOT IN 목록 빈칸 | UNPIVOT 기본 EXCLUDE NULLS vs INCLUDE NULLS + WHERE 합계 | PostgreSQL 16 에서 UNION ALL 로 같은 행 생성 → 4, 6, 110 |
+| 46-2-38 | ACID 정의(원자성) | READ COMMITTED 에서 가능한 현상(Dirty·Non-Repeatable·Phantom Read) | PostgreSQL 16 두 세션으로 확인: READ COMMITTED 에서 같은 행 100→999, 조건 행 수 2→3 으로 바뀜, 커밋 전 변경은 안 보임(PG 는 READ UNCOMMITTED 도 READ COMMITTED 처럼 동작). 교재 ANSI 표 대조 |
+| 53-2-17 | ORDER BY 요구사항 빈칸 | 별칭·SELECT 목록 위치 번호·NULLS LAST·동점 정렬 | PostgreSQL 16(COLLATE "C") → 정, 김, 최, 박, 이. NULLS LAST 빼면 정, 김, 최, 이, 박(오답 ②) |

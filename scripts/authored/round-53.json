@@ -513,23 +513,61 @@
     {
       "subject": "2과목",
       "number": 17,
-      "title": "아래 요구사항을 만족하는 ORDER BY 절로 가장 적절한 것은?",
+      "title": "아래 MEMBER 테이블에 대한 SQL 의 결과로 출력되는 이름 순서로 옳은 것은? (Oracle 기준)",
       "options": [
-        "ORDER BY 주문번호 DESC, 금액 ASC",
-        "ORDER BY 주문번호 DESC, 금액테이블번호 ASC",
-        "ORDER BY 주문번호 DESC, 4 DESC, 1 ASC",
-        "ORDER BY 주문번호 DESC, 4 DESC, 1 DESC"
+        "정, 최, 김, 박, 이",
+        "정, 김, 최, 이, 박",
+        "정, 김, 최, 박, 이",
+        "박, 이, 김, 최, 정"
       ],
       "correctIndex": 2,
-      "explanation": "요구사항은 주문번호 내림차순 → 4번 컬럼(금액) 내림차순 → 1번 컬럼(회원번호) 오름차순이다. ORDER BY 에는 SELECT 절 컬럼의 순번을 쓸 수 있으므로 ORDER BY 주문번호 DESC, 4 DESC, 1 ASC 가 맞다(③). ① 은 금액을 오름차순으로, ② 는 없는 컬럼으로, ④ 는 회원번호를 내림차순으로 정렬한다.",
+      "explanation": "ORDER BY 에는 SELECT 절의 별칭(G)과 SELECT 목록의 순서 번호를 쓸 수 있다. 3 은 세 번째 칼럼인 포인트, 1 은 첫 번째 칼럼인 이름이다. 등급 내림차순이라 C(정) → B → A 순이다. B 의 최·김은 포인트가 300 으로 같아 이름 오름차순(김, 최)이다. A 의 박(500)·이(NULL)는 포인트 내림차순인데 NULLS LAST 라 NULL 인 이가 뒤로 간다. 그래서 정, 김, 최, 박, 이가 되고, 정답은 ③번이다. ① 은 1 을 테이블의 첫 칼럼인 번호로 보고 최(1)를 김(4)보다 앞에 둔 결과다. ② 는 NULLS LAST 를 놓쳐, Oracle 의 내림차순 기본값대로 NULL 을 앞에 둔 결과다. ④ 는 G DESC 를 오름차순으로 읽은 결과다.",
       "references": [
         {
-          "type": "sql",
-          "code": "SELECT 회원번호,    -- 1번 컬럼\n       회원명,      -- 2번 컬럼\n       주문번호,    -- 3번 컬럼\n       금액         -- 4번 컬럼\nFROM   주문\n[ ORDER BY  ?  ];"
+          "type": "table",
+          "caption": "MEMBER",
+          "headers": [
+            "번호",
+            "이름",
+            "등급",
+            "포인트"
+          ],
+          "rows": [
+            [
+              "1",
+              "최",
+              "B",
+              "300"
+            ],
+            [
+              "2",
+              "이",
+              "A",
+              "NULL"
+            ],
+            [
+              "3",
+              "박",
+              "A",
+              "500"
+            ],
+            [
+              "4",
+              "김",
+              "B",
+              "300"
+            ],
+            [
+              "5",
+              "정",
+              "C",
+              "100"
+            ]
+          ]
         },
         {
-          "type": "text",
-          "content": "요구사항: 주문번호 내림차순 정렬 후, 같은 주문번호 내에서 4번 컬럼(금액) 내림차순, 1번 컬럼(회원번호) 오름차순으로 정렬한다."
+          "type": "sql",
+          "code": "SELECT 이름, 등급 AS G, 포인트\nFROM   MEMBER\nORDER BY G DESC,\n         3 DESC NULLS LAST,\n         1;"
         }
       ]
     },
