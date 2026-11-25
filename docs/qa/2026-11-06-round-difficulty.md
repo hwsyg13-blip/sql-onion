@@ -1360,3 +1360,5 @@ sqld-0312·0319(M494·M501, 데이터베이스 파티션 기법)도 성능 데�
 | sqld-0011 | 엔터티 특징 정의 고르기 | 쇼핑몰 후보 넷 중 인스턴스 하나·관계 없음인 후보 고르기 | 교재 정의 대조. 390px 화면 확인. 사본 없음 |
 | sqld-0225 | ELSE 생략 시 결과 고르기 | ELSE 없는 CASE 를 COUNT·SUM 에 넣고 NULL 상태 행과 ELSE 0 차이 계산 | PostgreSQL 16 → A 1, B 4, C 2. 390px 화면 확인. 사본 없음 |
 | sqld-0102 | INTERSECT 이름 고르기 | 중복·NULL 이 있는 두 표에서 INTERSECT 와 IN 서브쿼리 결과 비교 | PostgreSQL 16 → INTERSECT 1, NULL / IN 1, 1. 390px 화면 확인. 사본 없음 |
+| sqld-0178 | COUNT 이름 고르기 | 문자 MAX(사전 순 'A9' > 'A100'), COUNT 의 NULL 제외, COUNT DISTINCT 결과 | PostgreSQL 16 (COLLATE "C") → A9, 3, 2. 검증기 ok. 390px 화면 확인. 사본 없음 |
+| sqld-0221 | ROWS 1 PRECEDING~1 FOLLOWING 고르기 | 이동평균 값 계산 (양 끝은 있는 행만으로 평균) | PostgreSQL 16 → 15, 20, 30, 35. 검증기 ok. 390px 화면 확인. 사본 없음 |
