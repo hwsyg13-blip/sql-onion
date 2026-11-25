@@ -1368,3 +1368,4 @@ sqld-0312·0319(M494·M501, 데이터베이스 파티션 기법)도 성능 데�
 | sqld-0224 | ORDER BY 설명 고르기 | CASE 식 정렬 + 두 번째 키 DESC, NULL 등급이 ELSE 로 가는지 | PostgreSQL 16 → 라, 나, 다, 마, 가. 390px 화면 확인. 사본 없음 |
 | sqld-0126 | CUBE·ROLLUP 설명 고르기 | 같은 표에 ROLLUP·CUBE·GROUPING SETS 를 바꿔 넣은 결과 행 수 | PostgreSQL 16 → 6, 8, 4. 390px 화면 확인. 사본 없음 |
 | sqld-0130 | 윈도우 함수 설명 고르기 | GROUP BY 와 PARTITION BY 윈도우 합계의 행 수·값 비교 (ORDER BY 없는 윈도우 = 파티션 전체) | PostgreSQL 16 → GROUP BY 2행, 윈도우 3행(A 400, 400). 390px 화면 확인. 사본 없음 |
+| sqld-0182 | JOIN 종류 설명 고르기 | 경계값이 겹치는 급여등급 표와 BETWEEN 비등가 조인 행 수 (양 끝 포함, 짝 없는 행 제외) | PostgreSQL 16 → 4행(가1, 나1, 나2, 다2). 390px 화면 확인. 사본 없음 |
