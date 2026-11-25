@@ -1594,19 +1594,19 @@
     {
       "subject": "2과목",
       "number": 40,
-      "title": "아래 SQL에서 오류가 발생하는 절은?",
+      "title": "EMP(DEPT, SAL) 테이블에 대한 아래 ㉠~㉤ 중 오류가 나는 것을 모두 고른 것은? (Oracle 19c 기준)",
       "options": [
-        "SELECT 절",
-        "FROM 절",
-        "WHERE 절의 제품코드 별칭 사용",
-        "ORDER BY 절의 제품코드 별칭 사용"
+        "㉠",
+        "㉠, ㉢",
+        "㉠, ㉢, ㉤",
+        "㉠, ㉢, ㉣, ㉤"
       ],
       "correctIndex": 2,
-      "explanation": "SQL 처리 순서는 FROM → WHERE → … → SELECT → ORDER BY 다. WHERE 절은 SELECT 보다 먼저 처리되어 SELECT 절에서 붙인 별칭 '제품코드' 를 알 수 없으므로 오류가 난다(③). ORDER BY 는 SELECT 이후에 처리되어 별칭을 쓸 수 있다(④). ① SELECT 절과 ② FROM 절 자체에는 문제가 없다.",
+      "explanation": "SQL 은 FROM → WHERE → GROUP BY → HAVING → SELECT → ORDER BY 순서로 처리된다. SELECT 절의 별칭은 SELECT 가 처리된 뒤에야 생기므로, 그보다 먼저 처리되는 WHERE(㉠), HAVING(㉢), GROUP BY(㉤)에서는 쓸 수 없다. ORDER BY 는 SELECT 뒤라 별칭(㉡)도, SELECT 목록의 위치 번호(㉣)도 쓸 수 있다. 정답은 ③번이다. ① 과 ② 는 GROUP BY·HAVING 에서 별칭을 쓸 수 있다고 본 것이고, ④ 는 ORDER BY 의 위치 번호도 안 된다고 본 것이다. 참고로 PostgreSQL 과 Oracle 23ai 는 GROUP BY 에 별칭을 허용하지만, 시험은 Oracle 19c 이하의 표준 처리 순서를 기준으로 한다.",
       "references": [
         {
           "type": "sql",
-          "code": "SELECT PRODUCT_CD AS 제품코드\nFROM   PRODUCT\nWHERE  제품코드 = 'A01'\nAND    제품코드 LIKE 'A%'\nORDER BY 제품코드;"
+          "code": "-- ㉠\nSELECT SAL * 12 AS 연봉 FROM EMP\nWHERE  연봉 > 30000;\n-- ㉡\nSELECT SAL * 12 AS 연봉 FROM EMP\nORDER BY 연봉 DESC;\n-- ㉢\nSELECT DEPT, SUM(SAL) AS 합계\nFROM   EMP GROUP BY DEPT\nHAVING 합계 > 5000;\n-- ㉣\nSELECT DEPT, SUM(SAL) AS 합계\nFROM   EMP GROUP BY DEPT\nORDER BY 2 DESC;\n-- ㉤\nSELECT DEPT AS 부서, COUNT(*)\nFROM   EMP GROUP BY 부서;"
         }
       ]
     },
@@ -1936,60 +1936,57 @@
     {
       "subject": "2과목",
       "number": 50,
-      "title": "아래 주문 테이블에 대한 SQL 이 반환하는 결과에 대한 설명으로 가장 적절한 것은?",
+      "title": "아래 주문 테이블에 대한 ㉠~㉢ 에서 (㉠ 의 C001 주문건수, ㉡ 의 C001 주문건수, ㉢ 의 결과 행 수, ㉠ 의 C003 주문건수) 로 옳은 것은?",
       "options": [
-        "주문 수량이 10을 넘는 건이 있는 고객의 주문 건수를 조회한다",
-        "주문 수량 총 합계가 10을 넘는 고객의 주문 건수를 조회한다",
-        "주문 횟수가 10건을 넘는 고객의 주문 건수를 조회한다",
-        "수량 컬럼이 NULL이 아닌 고객의 주문 건수를 조회한다"
+        "(3, 1, 2, 2)",
+        "(3, 3, 2, 2)",
+        "(3, 1, 2, 1)",
+        "(1, 1, 2, 1)"
       ],
       "correctIndex": 0,
-      "explanation": "`GROUP BY 고객ID` 로 고객별 그룹을 만들고 `HAVING MAX(수량) > 10` 으로 \"한 건이라도 수량이 10 을 초과하는\" 고객 그룹만 남긴다. ② 는 SUM, ③ 은 COUNT, ④ 는 IS NOT NULL 조건이라야 한다.",
+      "explanation": "WHERE 는 그룹을 만들기 전에 행을 거르고, HAVING 은 그룹을 만든 뒤 그룹을 거른다. ㉠ 은 고객별로 묶은 뒤 최대 수량이 10 을 넘는 그룹 C001(최대 12), C003(최대 15)만 남긴다. 그룹 안의 행은 그대로라 C001 은 3건, C003 은 NULL 행까지 COUNT(*) 로 2건이다. ㉡ 은 먼저 수량 > 10 인 행만 남기므로 C001 은 12 한 건이다. ㉢ 은 수량 합이 16 을 넘는 C001(20), C002(17) 두 그룹이라 2행이다. C003 은 SUM 이 NULL 을 빼고 15 라 빠진다. 정답은 ①번이다. ② 는 WHERE 와 HAVING 을 같게 본 값이다. ③ 은 COUNT(*) 도 NULL 행을 뺀다고 본 값이다. ④ 는 HAVING 도 그룹 안의 행을 조건에 맞는 것만 남긴다고 본 값이다.",
       "references": [
         {
           "type": "table",
-          "caption": "주문 테이블",
+          "caption": "주문",
           "headers": [
             "고객ID",
-            "주문번호",
             "수량"
           ],
           "rows": [
             [
               "C001",
-              "O100",
               "5"
             ],
             [
               "C001",
-              "O101",
               "12"
             ],
             [
               "C001",
-              "O102",
               "3"
             ],
             [
               "C002",
-              "O103",
               "8"
             ],
             [
               "C002",
-              "O104",
               "9"
             ],
             [
               "C003",
-              "O105",
               "15"
+            ],
+            [
+              "C003",
+              "NULL"
             ]
           ]
         },
         {
           "type": "sql",
-          "code": "SELECT 고객ID, COUNT(*) AS 주문건수\nFROM   주문\nGROUP BY 고객ID\nHAVING MAX(수량) > 10;"
+          "code": "-- ㉠\nSELECT 고객ID, COUNT(*) AS 주문건수\nFROM   주문 GROUP BY 고객ID\nHAVING MAX(수량) > 10;\n-- ㉡\nSELECT 고객ID, COUNT(*) AS 주문건수\nFROM   주문 WHERE 수량 > 10\nGROUP BY 고객ID;\n-- ㉢\nSELECT 고객ID, COUNT(수량)\nFROM   주문 GROUP BY 고객ID\nHAVING SUM(수량) > 16;"
         }
       ]
     }
