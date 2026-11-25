@@ -2698,15 +2698,66 @@
       "_correctRate": 10,
       "subject": "2과목",
       "chapter": "집합 연산자",
-      "title": "SET OPERATOR 중에서 수학의 교집합과 같은 기능을 하는 연산자로 가장 적절한 것은?",
+      "title": "아래 두 테이블에 (가), (나) 를 실행했을 때 결과로 옳은 것은? (행 순서는 무시한다)",
       "options": [
-        "EXCEPT",
-        "MINUS",
-        "INTERSECT",
-        "UNION"
+        "(가) 1 / (나) 1",
+        "(가) 1, 1, NULL / (나) 1, 1",
+        "(가) 1, NULL / (나) 1, 1",
+        "(가) 1 / (나) 1, 1, NULL"
       ],
       "correctIndex": 2,
-      "explanation": "수학의 교집합처럼 두 결과에 모두 있는 행만 돌려주는 연산자는 INTERSECT 다(③). 합집합은 UNION / UNION ALL, 차집합은 MINUS(Oracle)·EXCEPT(SQL Server)다."
+      "explanation": "INTERSECT 는 두 결과에 모두 있는 행을 중복 없이 돌려주고, 이때는 NULL 끼리도 같은 값으로 본다. A 와 B 에 함께 있는 값은 1 과 NULL 이므로 (가) 는 1, NULL 두 행이다. (나) 의 IN 은 A 의 행을 하나씩 = 로 비교해 남기는 방식이라 A 의 중복 1 두 개가 그대로 나오고, NULL = NULL 은 참이 아니어서 A 의 NULL 행은 빠진다. 정답은 ③번이다. ① 은 INTERSECT 도 NULL 을 다른 값으로 본다고 착각했고 (나) 의 중복도 없앴다. ② 는 INTERSECT 가 중복을 남긴다고 보았다. ④ 는 두 연산의 NULL 처리를 거꾸로 적용했다.",
+      "references": [
+        {
+          "type": "table",
+          "caption": "A",
+          "headers": [
+            "V"
+          ],
+          "rows": [
+            [
+              "1"
+            ],
+            [
+              "1"
+            ],
+            [
+              "2"
+            ],
+            [
+              "NULL"
+            ],
+            [
+              "3"
+            ]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "B",
+          "headers": [
+            "V"
+          ],
+          "rows": [
+            [
+              "1"
+            ],
+            [
+              "NULL"
+            ],
+            [
+              "NULL"
+            ],
+            [
+              "4"
+            ]
+          ]
+        },
+        {
+          "type": "sql",
+          "code": "-- (가)\nSELECT V FROM A\nINTERSECT\nSELECT V FROM B;\n\n-- (나)\nSELECT V FROM A\nWHERE  V IN (SELECT V FROM B);"
+        }
+      ]
     },
     {
       "_id": "sqld-0104",
@@ -6724,15 +6775,47 @@
       "_correctRate": 10,
       "subject": "2과목",
       "chapter": "DML",
-      "title": "CASE문에서 ELSE를 생략하면 어떤 현상이 발생되는가?",
+      "title": "아래 주문 테이블에 SQL 을 실행했을 때 A, B, C 값으로 옳은 것은?",
       "options": [
-        "ELSE 조건이 만족하게 되면 NULL이 된다.",
-        "ELSE 조건을 만족하게 되면 무시한다.",
-        "ELSE 조건이 만족하게 되면 공집합이 리턴 된다.",
-        "ELSE를 생략하고 작성하면 실행 시 ELSE 조건이 참이 되며 오류가 발생한다."
+        "A: 1, B: 4, C: 2",
+        "A: 1, B: 1, C: 3",
+        "A: 4, B: 4, C: 2",
+        "A: 1, B: 4, C: 3"
       ],
       "correctIndex": 0,
-      "explanation": "CASE문은 IF~THEN~ELSE를 구현할 수 있는 SQL문이다. 즉, 어떤 조건이 참이면 A를 실행하고 그렇지 않으면 B를 실행하라는 것이다. CASE문에서 ELSE 조건을 생략하면 NULL이 되돌려진다."
+      "explanation": "CASE 에서 ELSE 를 생략하면 어느 WHEN 에도 맞지 않는 행은 NULL 이 된다. A 는 완료인 1행만 1 이고 나머지는 NULL 이라, NULL 을 세지 않는 COUNT 는 1 이다. B 는 ELSE 0 때문에 나머지 행도 0 이라는 값을 가지므로 COUNT 가 4 다. COUNT 는 값이 무엇이든 NULL 만 아니면 센다. C 는 취소·대기 두 행만 1 이다. 상태가 NULL 인 4번 행은 NULL <> '완료' 가 참이 아니라 UNKNOWN 이어서 THEN 으로 가지 않고 NULL 이 되므로 합계는 2 다. 정답은 ①번이다. ② 는 COUNT 가 0 을 세지 않는다고 보고, NULL <> '완료' 를 참으로 보았다. ③ 은 ELSE 가 없어도 COUNT 가 모든 행을 센다고 착각한 결과다. ④ 는 NULL 행이 C 의 조건을 만족한다고 착각한 결과다.",
+      "references": [
+        {
+          "type": "table",
+          "caption": "주문",
+          "headers": [
+            "주문번호",
+            "상태"
+          ],
+          "rows": [
+            [
+              "1",
+              "완료"
+            ],
+            [
+              "2",
+              "취소"
+            ],
+            [
+              "3",
+              "대기"
+            ],
+            [
+              "4",
+              "NULL"
+            ]
+          ]
+        },
+        {
+          "type": "sql",
+          "code": "SELECT\n  COUNT(CASE WHEN 상태 = '완료'\n             THEN 1 END) AS A,\n  COUNT(CASE WHEN 상태 = '완료'\n             THEN 1 ELSE 0 END) AS B,\n  SUM(CASE WHEN 상태 <> '완료'\n           THEN 1 END) AS C\nFROM 주문;"
+        }
+      ]
     },
     {
       "_id": "sqld-0226",

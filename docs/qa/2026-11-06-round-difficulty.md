@@ -1358,3 +1358,5 @@ sqld-0312·0319(M494·M501, 데이터베이스 파티션 기법)도 성능 데�
 | sqld-0082 | GROUP BY 밖 칼럼 정렬 오류 | DISTINCT + SELECT 에 없는 칼럼 정렬 오류 vs 별칭·집계·일반 정렬 | PostgreSQL 16 → ② 만 오류(for SELECT DISTINCT, ORDER BY expressions must appear in select list), 나머지 실행됨. 390px 화면 확인. 사본 없음 |
 | sqld-0085 | 실행 순서 나열 고르기 | 실행 순서 때문에 별칭·집계 함수를 쓸 수 있는 절이 갈리는 SQL 넷 중 실행되는 것 | PostgreSQL 16 → ① 만 실행(A:1200, B:200), ②③ 별칭 없음 오류, ④ WHERE 집계 오류. 390px 화면 확인. 사본 없음 |
 | sqld-0011 | 엔터티 특징 정의 고르기 | 쇼핑몰 후보 넷 중 인스턴스 하나·관계 없음인 후보 고르기 | 교재 정의 대조. 390px 화면 확인. 사본 없음 |
+| sqld-0225 | ELSE 생략 시 결과 고르기 | ELSE 없는 CASE 를 COUNT·SUM 에 넣고 NULL 상태 행과 ELSE 0 차이 계산 | PostgreSQL 16 → A 1, B 4, C 2. 390px 화면 확인. 사본 없음 |
+| sqld-0102 | INTERSECT 이름 고르기 | 중복·NULL 이 있는 두 표에서 INTERSECT 와 IN 서브쿼리 결과 비교 | PostgreSQL 16 → INTERSECT 1, NULL / IN 1, 1. 390px 화면 확인. 사본 없음 |

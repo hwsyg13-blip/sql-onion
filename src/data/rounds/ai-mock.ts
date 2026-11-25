@@ -3869,54 +3869,6 @@ export const AI_MOCK: QuizQuestion[] = [
     "_cbtOrigNo": 83
   },
   {
-    "id": 10928,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 129,
-    "title": "아래 T 에 대해 SQL 을 실행했을 때 GRADE 값(ID 순)과 COUNT(GRADE) 의 결과로 옳은 것은?",
-    "options": [
-      "A, B, NULL / COUNT(GRADE) = 3",
-      "A, B, C / COUNT(GRADE) = 3",
-      "ELSE 가 없어 오류가 난다.",
-      "A, B, NULL / COUNT(GRADE) = 2"
-    ],
-    "correctIndex": 3,
-    "explanation": "CASE 에서 ELSE 를 생략하면 어느 WHEN 에도 맞지 않는 행은 NULL 이 된다(오류가 아니다). 65 는 두 조건 모두 거짓이라 NULL 이다. COUNT(칼럼)은 NULL 을 세지 않으므로 GRADE 의 개수는 A, B 두 개다. 정답은 ④번이다. ① 은 COUNT 가 NULL 까지 센다고 본 것, ② 는 다음 등급이 저절로 붙는다고 본 것이다.",
-    "chapter": "WHERE",
-    "_source": "cbt-mock",
-    "_origId": "cbt-084",
-    "_cbtOrigNo": 84,
-    "references": [
-      {
-        "type": "table",
-        "caption": "T",
-        "headers": [
-          "ID",
-          "SCORE"
-        ],
-        "rows": [
-          [
-            "1",
-            "95"
-          ],
-          [
-            "2",
-            "75"
-          ],
-          [
-            "3",
-            "65"
-          ]
-        ]
-      },
-      {
-        "type": "sql",
-        "code": "SELECT ID,\n       CASE WHEN SCORE >= 90 THEN 'A'\n            WHEN SCORE >= 70 THEN 'B'\n       END AS GRADE\nFROM   T;"
-      }
-    ]
-  },
-  {
     "id": 10929,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
@@ -10772,20 +10724,71 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 334,
-    "title": "SET OPERATOR 중에서 수학의 교집합과 같은 기능을 하는 연산자로 가장 적절한 것은?",
+    "title": "아래 두 테이블에 (가), (나) 를 실행했을 때 결과로 옳은 것은? (행 순서는 무시한다)",
     "options": [
-      "EXCEPT",
-      "MINUS",
-      "INTERSECT",
-      "UNION"
+      "(가) 1 / (나) 1",
+      "(가) 1, 1, NULL / (나) 1, 1",
+      "(가) 1, NULL / (나) 1, 1",
+      "(가) 1 / (나) 1, 1, NULL"
     ],
     "correctIndex": 2,
-    "explanation": "수학의 교집합처럼 두 결과에 모두 있는 행만 돌려주는 연산자는 INTERSECT 다(③). 합집합은 UNION / UNION ALL, 차집합은 MINUS(Oracle)·EXCEPT(SQL Server)다.",
+    "explanation": "INTERSECT 는 두 결과에 모두 있는 행을 중복 없이 돌려주고, 이때는 NULL 끼리도 같은 값으로 본다. A 와 B 에 함께 있는 값은 1 과 NULL 이므로 (가) 는 1, NULL 두 행이다. (나) 의 IN 은 A 의 행을 하나씩 = 로 비교해 남기는 방식이라 A 의 중복 1 두 개가 그대로 나오고, NULL = NULL 은 참이 아니어서 A 의 NULL 행은 빠진다. 정답은 ③번이다. ① 은 INTERSECT 도 NULL 을 다른 값으로 본다고 착각했고 (나) 의 중복도 없앴다. ② 는 INTERSECT 가 중복을 남긴다고 보았다. ④ 는 두 연산의 NULL 처리를 거꾸로 적용했다.",
     "chapter": "집합 연산자",
     "_source": "sqld-1140",
     "_origId": "sqld-0102",
     "_category": "집합 연산자",
-    "_correctRate": 10
+    "_correctRate": 10,
+    "references": [
+      {
+        "type": "table",
+        "caption": "A",
+        "headers": [
+          "V"
+        ],
+        "rows": [
+          [
+            "1"
+          ],
+          [
+            "1"
+          ],
+          [
+            "2"
+          ],
+          [
+            "NULL"
+          ],
+          [
+            "3"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "B",
+        "headers": [
+          "V"
+        ],
+        "rows": [
+          [
+            "1"
+          ],
+          [
+            "NULL"
+          ],
+          [
+            "NULL"
+          ],
+          [
+            "4"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "-- (가)\nSELECT V FROM A\nINTERSECT\nSELECT V FROM B;\n\n-- (나)\nSELECT V FROM A\nWHERE  V IN (SELECT V FROM B);"
+      }
+    ]
   },
   {
     "id": 11134,
@@ -13962,6 +13965,59 @@ export const AI_MOCK: QuizQuestion[] = [
     "_origId": "sqld-0224",
     "_category": "DML",
     "_correctRate": 10
+  },
+  {
+    "id": 11222,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 423,
+    "title": "아래 주문 테이블에 SQL 을 실행했을 때 A, B, C 값으로 옳은 것은?",
+    "options": [
+      "A: 1, B: 4, C: 2",
+      "A: 1, B: 1, C: 3",
+      "A: 4, B: 4, C: 2",
+      "A: 1, B: 4, C: 3"
+    ],
+    "correctIndex": 0,
+    "explanation": "CASE 에서 ELSE 를 생략하면 어느 WHEN 에도 맞지 않는 행은 NULL 이 된다. A 는 완료인 1행만 1 이고 나머지는 NULL 이라, NULL 을 세지 않는 COUNT 는 1 이다. B 는 ELSE 0 때문에 나머지 행도 0 이라는 값을 가지므로 COUNT 가 4 다. COUNT 는 값이 무엇이든 NULL 만 아니면 센다. C 는 취소·대기 두 행만 1 이다. 상태가 NULL 인 4번 행은 NULL <> '완료' 가 참이 아니라 UNKNOWN 이어서 THEN 으로 가지 않고 NULL 이 되므로 합계는 2 다. 정답은 ①번이다. ② 는 COUNT 가 0 을 세지 않는다고 보고, NULL <> '완료' 를 참으로 보았다. ③ 은 ELSE 가 없어도 COUNT 가 모든 행을 센다고 착각한 결과다. ④ 는 NULL 행이 C 의 조건을 만족한다고 착각한 결과다.",
+    "chapter": "DML",
+    "_source": "sqld-1140",
+    "_origId": "sqld-0225",
+    "_category": "DML",
+    "_correctRate": 10,
+    "references": [
+      {
+        "type": "table",
+        "caption": "주문",
+        "headers": [
+          "주문번호",
+          "상태"
+        ],
+        "rows": [
+          [
+            "1",
+            "완료"
+          ],
+          [
+            "2",
+            "취소"
+          ],
+          [
+            "3",
+            "대기"
+          ],
+          [
+            "4",
+            "NULL"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT\n  COUNT(CASE WHEN 상태 = '완료'\n             THEN 1 END) AS A,\n  COUNT(CASE WHEN 상태 = '완료'\n             THEN 1 ELSE 0 END) AS B,\n  SUM(CASE WHEN 상태 <> '완료'\n           THEN 1 END) AS C\nFROM 주문;"
+      }
+    ]
   },
   {
     "id": 11224,
