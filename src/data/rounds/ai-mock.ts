@@ -852,18 +852,24 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 34,
-    "title": "오라클(Oracle) DBMS에서 시퀀스(Sequence)를 사용할 때 발생하는 현상으로 틀린 것은?",
+    "title": "아래 SQL 을 한 세션에서 차례로 실행했을 때 마지막 SELECT 의 결과 (COUNT(*), MAX(ID), CURRVAL) 로 옳은 것은? (Oracle 기준, T 는 빈 테이블)",
     "options": [
-      "ROLLBACK이 발생하면 추출되었던 시퀀스 번호도 다시 원래 번호로 되돌아간다.",
-      "NEXTVAL은 호출할 때마다 설정된 증가치(INCREMENT BY)만큼 새로운 값을 생성한다.",
-      "CURRVAL은 현재 세션에서 NEXTVAL을 한 번이라도 호출한 후에만 참조할 수 있다.",
-      "CACHE 옵션을 사용하면 메모리에 미리 번호를 할당하여 속도를 높일 수 있지만, 인스턴스 비정상 종료 시 번호 결번이 생길 수 있다."
+      "(1, 3, 3)",
+      "(1, 1, 1)",
+      "(3, 3, 3)",
+      "(1, 1, 3)"
     ],
     "correctIndex": 0,
-    "explanation": "시퀀스는 트랜잭션과 따로 움직인다. 한 번 NEXTVAL 로 꺼낸 번호는 ROLLBACK 해도 돌아오지 않아 번호가 비게(결번) 된다. 그래서 ①이 틀렸다.",
+    "explanation": "시퀀스는 트랜잭션과 따로 움직여서, NEXTVAL 로 한 번 꺼낸 번호는 ROLLBACK 해도 되돌아가지 않는다. 앞의 두 INSERT 가 1, 2 를 쓰고 ROLLBACK 으로 행은 사라지지만 시퀀스는 2 까지 진행된 상태다. 다음 INSERT 가 3 을 받아 커밋된다. 테이블에는 3 한 행이 있고 CURRVAL 은 이 세션에서 마지막으로 꺼낸 3 이다. 정답은 ①번이다. ② 는 ROLLBACK 이 시퀀스 번호까지 되돌린다고 본 값이다. ③ 은 ROLLBACK 을 무시하고 세 행이 남는다고 본 값이다. ④ 는 행 값과 시퀀스 값이 따로 논다고 보고 MAX(ID) 를 1 로 본 값이다. 그래서 시퀀스로 만든 번호에는 빈 번호가 생길 수 있다.",
     "chapter": "DDL",
     "_source": "ai-mock",
-    "_origId": "ai-mock-039"
+    "_origId": "ai-mock-039",
+    "references": [
+      {
+        "type": "sql",
+        "code": "CREATE SEQUENCE SQ\n  START WITH 1 INCREMENT BY 1;\n\nINSERT INTO T VALUES (SQ.NEXTVAL);\nINSERT INTO T VALUES (SQ.NEXTVAL);\nROLLBACK;\nINSERT INTO T VALUES (SQ.NEXTVAL);\nCOMMIT;\n\nSELECT COUNT(*), MAX(ID), SQ.CURRVAL\nFROM   T;"
+      }
+    ]
   },
   {
     "id": 10834,
@@ -1086,18 +1092,66 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 46,
-    "title": "분석 함수 중 KEEP (DENSE_RANK FIRST/LAST ORDER BY ...) 구문의 용도로 올바른 것은?",
+    "title": "아래 EMP 테이블에 대한 SQL 결과에서 (10번 부서의 F, 10번 부서의 L, 20번 부서의 F) 로 옳은 것은? (Oracle 기준)",
     "options": [
-      "동일한 값을 가진 데이터 간에 고유한 일련번호를 무작위로 부여하기 위해 사용된다.",
-      "데이터의 백분위수(Percentile)를 구하여 상위 N% 에 해당하는 값을 계산한다.",
-      "정렬된 데이터를 기반으로 현재 행의 앞선 행(LAG)이나 뒤따르는 행(LEAD)의 데이터를 가져온다.",
-      "전체 집합을 그룹으로 나눈 뒤, 그룹 내에서 정렬 기준에 따라 가장 처음(또는 마지막) 행의 특정 컬럼 값을 추출한다."
+      "(3000, 5000, 2500)",
+      "(5000, 3000, 2500)",
+      "(4000, 3000, 2500)",
+      "(4000, 5000, 2500)"
     ],
     "correctIndex": 3,
-    "explanation": "KEEP (DENSE_RANK FIRST ORDER BY …) 는 그룹마다 정렬했을 때 맨 앞(LAST 면 맨 뒤) 행의 다른 컬럼 값을 꺼낸다. 예: 부서별로 급여가 가장 높은 사원의 이름 — MAX(ENAME) KEEP (DENSE_RANK FIRST ORDER BY SAL DESC).",
+    "explanation": "KEEP (DENSE_RANK FIRST ORDER BY HIRE) 는 그룹 안에서 HIRE 가 가장 이른 행들만 남긴 뒤 앞의 집계 함수를 적용한다. 10번 부서에서 가장 이른 2020-01-01 에 입사한 사람은 A(3000)·B(4000) 둘이라 MAX 를 적용해 F = 4000 이다. LAST 는 가장 늦은 2021-03-01 의 C(5000) 만 남아 L = 5000 이다. 20번 부서의 F 는 2019-05-01 의 D(2500)다. 정답은 ④번이다. ① 은 동점인 두 행 중 첫 행만 고른다고 보고 MAX 를 무시한 값이다. ② 는 KEEP 을 무시하고 부서 전체의 MAX·MIN 을 구한 값이다. ③ 은 LAST 를 내림차순의 첫 번째로 오해해 가장 이른 입사자 쪽에서 MIN 을 고른 값이다.",
     "chapter": "윈도우 함수",
     "_source": "ai-mock",
-    "_origId": "ai-mock-054"
+    "_origId": "ai-mock-054",
+    "references": [
+      {
+        "type": "table",
+        "caption": "EMP",
+        "headers": [
+          "DEPT",
+          "ENAME",
+          "SAL",
+          "HIRE"
+        ],
+        "rows": [
+          [
+            "10",
+            "A",
+            "3000",
+            "2020-01-01"
+          ],
+          [
+            "10",
+            "B",
+            "4000",
+            "2020-01-01"
+          ],
+          [
+            "10",
+            "C",
+            "5000",
+            "2021-03-01"
+          ],
+          [
+            "20",
+            "D",
+            "2500",
+            "2019-05-01"
+          ],
+          [
+            "20",
+            "E",
+            "2800",
+            "2022-01-01"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT DEPT,\n  MAX(SAL) KEEP (DENSE_RANK FIRST\n                 ORDER BY HIRE) AS F,\n  MIN(SAL) KEEP (DENSE_RANK LAST\n                 ORDER BY HIRE) AS L\nFROM   EMP\nGROUP BY DEPT;"
+      }
+    ]
   },
   {
     "id": 10846,
