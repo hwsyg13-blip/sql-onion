@@ -446,15 +446,21 @@
       "_origNo": 17,
       "subject": "2과목",
       "chapter": "DCL·TCL",
-      "title": "사용자 SCOTT에게 EMP 테이블에 대한 SELECT, UPDATE 권한을 부여하려고 한다. 이때 그 권한을 제3자에게 다시 전달할 수 있도록 하려면 적절한 SQL은?",
+      "title": "EMP 테이블 소유자가 아래처럼 권한을 준 뒤, SCOTT 이 ㉠~㉣ 을 실행할 때 성공하는 것만 모두 고른 것은?",
       "options": [
-        "GRANT SELECT, UPDATE ON EMP TO SCOTT;",
-        "GRANT SELECT, UPDATE ON EMP TO SCOTT WITH GRANT OPTION;",
-        "GRANT ALL ON EMP TO SCOTT;",
-        "GRANT UPDATE ON EMP TO SCOTT, WITH GRANT OPTION;"
+        "㉠, ㉡, ㉣",
+        "㉠, ㉣",
+        "㉠, ㉡, ㉢, ㉣",
+        "㉣"
       ],
       "correctIndex": 1,
-      "explanation": "GRANT ... TO 사용자 구문은 해당 사용자에게 권한만 부여한다. 하지만, 제3자에게 해당 권한을 다시 부여할 수 있도록 하려면 WITH GRANT OPTION 구문이 반드시 함께 사용되어야 한다. 따라서 사용자 SCOTT에게 SELECT와 UPDATE 권한을 부여하고, 그 권한을 다른 사용자에게도 전달할 수 있도록 하려면, WITH GRANT OPTION을 명시해야 한다."
+      "explanation": "UPDATE (SAL) 처럼 권한 뒤 괄호에 칼럼을 적으면 그 칼럼만 수정할 수 있는 칼럼 단위 권한이 된다. ㉠ 은 SAL 만 바꾸므로 성공하고, ㉡ 은 권한이 없는 ENAME 을 바꿔 권한 부족 오류가 난다. ㉢ DELETE 는 받지 않은 권한이다. ㉣ SELECT 는 테이블 전체에 받았으므로 성공한다. 정답은 ②번이다. ① 은 UPDATE 권한이 모든 칼럼에 걸린다고 착각한 결과다. ③ 은 UPDATE 가 DELETE 까지 포함한다고 보았다. ④ 는 칼럼을 지정하면 UPDATE 가 아예 안 된다고 착각한 결과다. 받은 권한을 다른 사용자에게 다시 주게 하려면 끝에 WITH GRANT OPTION 을 붙인다. PostgreSQL 16 에서도 ㉠·㉣ 만 성공하고 ㉡·㉢ 은 permission denied 다.",
+      "references": [
+        {
+          "type": "sql",
+          "code": "-- 소유자\nGRANT SELECT, UPDATE (SAL)\n  ON EMP TO SCOTT;\n\n-- SCOTT\n㉠ UPDATE EMP SET SAL = 200\n   WHERE EMPNO = 1;\n㉡ UPDATE EMP SET ENAME = 'LEE'\n   WHERE EMPNO = 1;\n㉢ DELETE FROM EMP\n   WHERE EMPNO = 1;\n㉣ SELECT * FROM EMP;"
+        }
+      ]
     },
     {
       "_id": "cbt-018",
