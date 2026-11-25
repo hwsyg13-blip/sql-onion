@@ -8423,15 +8423,15 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "1과목",
     "number": 261,
-    "title": "다음 중 엔터티의 일반적인 특징으로 가장 부적절한 것은?",
+    "title": "다음 쇼핑몰 업무 분석에서 나온 후보 가운데 엔터티로 정의하기에 가장 부적절한 것은?",
     "options": [
-      "엔터티는 반드시 속성을 포함해야 한다.",
-      "엔터티는 업무 프로세스에 의해 이용되어야 한다.",
-      "유일한 식별자에 의해 식별이 가능해야 한다.",
-      "다른 엔터티와의 관계를 가지지 않는다."
+      "고객: 회원 수만 명. 회원번호로 구분하고 이름·주소·연락처를 관리하며 주문을 한다.",
+      "상품: 수천 개. 상품코드로 구분하고 상품명·가격을 관리하며 주문상세에 담긴다.",
+      "배송: 주문마다 생긴다. 배송번호로 구분하고 택배사·송장번호를 관리하며 주문과 연결된다.",
+      "회사정보: 운영 회사 한 곳의 상호·주소. 화면에 표시만 하고 어디와도 연결되지 않는다."
     ],
     "correctIndex": 3,
-    "explanation": "엔터티는 반드시 속성을 가지고(①), 업무 프로세스에 이용되며(②), 유일한 식별자로 식별되어야 한다(③). 또 다른 엔터티와 최소 한 개 이상의 관계를 가져야 하므로 관계를 가지지 않는다는 ④ 가 부적절하다.",
+    "explanation": "엔터티가 되려면 업무에 필요하고, 식별자로 구분되는 인스턴스가 두 개 이상 있으며, 속성을 가지고, 다른 엔터티와 관계를 하나 이상 가져야 한다. 회사정보는 인스턴스가 하나뿐이고 다른 엔터티와 관계도 없어 엔터티로 보기 어렵다. 이런 값은 보통 설정값이나 코드로 관리한다. 정답은 ④번이다. ①~③ 은 인스턴스가 여럿이고 식별자와 속성이 있으며 주문 또는 주문상세와 관계를 맺는다.",
     "chapter": "엔터티",
     "_source": "sqld-1140",
     "_origId": "sqld-0011",
@@ -10366,15 +10366,15 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 324,
-    "title": "다음 중 SELECT 문장의 실행 순서를 올바르게 나열한 것은?",
+    "title": "사원(부서, 급여) 테이블에 대해 SQL 의 논리적 실행 순서를 생각할 때, Oracle 에서 오류 없이 실행되는 것은?",
     "options": [
-      "FROM - WHERE - GROUP BY - HAVING - SELECT - ORDER BY",
-      "FROM - WHERE - GROUP BY - HAVING - ORDER BY - SELECT",
-      "FROM - SELECT - WHERE - GROUP BY - HAVING - ORDER BY",
-      "SELECT - FROM - WHERE - GROUP BY - HAVING - ORDER BY"
+      "SELECT 부서, SUM(급여) AS 합계 FROM 사원 GROUP BY 부서 ORDER BY 합계 DESC;",
+      "SELECT 급여 * 12 AS 연봉 FROM 사원 WHERE 연봉 > 3000;",
+      "SELECT 부서, SUM(급여) AS 합계 FROM 사원 GROUP BY 부서 HAVING 합계 > 1000;",
+      "SELECT 부서, SUM(급여) FROM 사원 WHERE SUM(급여) > 1000 GROUP BY 부서;"
     ],
     "correctIndex": 0,
-    "explanation": "SELECT 문은 FROM → WHERE → GROUP BY → HAVING → SELECT → ORDER BY 순으로 처리된다. SELECT 절의 별칭을 ORDER BY 에서는 쓸 수 있지만 WHERE 에서는 쓸 수 없는 이유가 이 순서다. 정답은 ① 이다.",
+    "explanation": "SELECT 문은 FROM → WHERE → GROUP BY → HAVING → SELECT → ORDER BY 순서로 처리된다. SELECT 에서 붙인 별칭은 SELECT 단계에서 생기므로 그보다 뒤에 오는 ORDER BY 에서만 쓸 수 있다. 정답은 ①번이다. ② 는 WHERE 가 SELECT 보다 먼저 처리되어 '연봉' 이라는 이름을 아직 모른다. ③ 의 HAVING 도 SELECT 보다 앞이라 별칭 '합계' 를 쓸 수 없고 HAVING SUM(급여) > 1000 처럼 적어야 한다. ④ 는 그룹을 만들기 전인 WHERE 에 집계 함수를 써서 오류가 난다. PostgreSQL 16 에서도 ① 만 실행되고 나머지 셋은 오류가 난다.",
     "chapter": "DML",
     "_source": "sqld-1140",
     "_origId": "sqld-0085",
