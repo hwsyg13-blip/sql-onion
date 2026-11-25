@@ -1312,3 +1312,5 @@ sqld-0312·0319(M494·M501, 데이터베이스 파티션 기법)도 성능 데�
 | 60-2-50 | HAVING MAX > 10 설명 | WHERE vs HAVING, COUNT(*) 와 NULL, SUM 의 NULL 제외 | PostgreSQL 16 → ㉠ C001 3·C003 2, ㉡ C001 1, ㉢ 2행 |
 | 52-2-14 | PRIOR 위치 빈칸 | 네 가지 CONNECT BY(PRIOR 위치·등호 양쪽 바꾸기·시작점)의 행 수 | PostgreSQL 16 재귀 CTE 로 같은 전개 → 5, 1, 4, 3 |
 | 45-2-26 | FULL OUTER 와 다른 집합 연산 고르기 | A 에 똑같은 행 두 번 → UNION 이 원래 중복까지 합침, UNION ALL, 반조인 UNION ALL | PostgreSQL 16 → 4, 3, 6, 4 |
+| 51-2-30 | 네 SQL 중 결과 다른 하나 | NULL 이 양쪽에 있을 때 MINUS·NOT IN·NOT EXISTS·LEFT JOIN IS NULL 행 수 | PostgreSQL 16(EXCEPT) → 2, 0, 3, 3 |
+| 53-2-36 | ROWNUM 상위 5 SQL 고르기 | 5·6번째 동점에서 ROWNUM·RANK·DENSE_RANK·FETCH WITH TIES 행 수 | PostgreSQL 16(ROWNUM 은 LIMIT 로) → 5, 6, 7, 6 |

@@ -1334,20 +1334,20 @@ export const ROUND_51: QuizQuestion[] = [
     "round": 51,
     "subject": "2과목",
     "number": 30,
-    "title": "아래 두 테이블에 대한 네 SQL 중 결과가 다른 하나는?",
+    "title": "아래 두 테이블에 대한 ㉠~㉣ 의 결과 행 수를 차례로 나열한 것은?",
     "options": [
-      "SELECT COL1 FROM T1 MINUS SELECT COL1 FROM T2;",
-      "SELECT T1.COL1 FROM T1, T2 WHERE T1.COL1 <> T2.COL1;",
-      "SELECT COL1 FROM T1 WHERE COL1 NOT IN (SELECT COL1 FROM T2);",
-      "SELECT T1.COL1 FROM T1 LEFT JOIN T2 ON T1.COL1 = T2.COL1 WHERE T2.COL1 IS NULL;"
+      "2, 2, 2, 2",
+      "2, 0, 3, 3",
+      "3, 0, 3, 3",
+      "2, 0, 2, 3"
     ],
     "correctIndex": 1,
-    "explanation": "① MINUS·③ NOT IN·④ LEFT JOIN+IS NULL 은 모두 'T1 에는 있고 T2 에는 없는 값 (D, E)' 을 반환하지만, T1, T2 카티션 곱에 `<>` 조건을 적용하면 비교 대상이 다른 모든 행과 매칭되어 중복된 결과가 나오므로 다른 답이 된다.",
+    "explanation": "㉠ MINUS 는 집합 연산이라 NULL 끼리를 같은 값으로 본다. T1 의 NULL 도 T2 의 NULL 과 같아서 빠지고 B, D 2행이다. ㉡ NOT IN 은 목록에 NULL 이 있어 어떤 행에서도 참이 될 수 없으므로 0행이다. ㉢ NOT EXISTS 는 = 로 비교하므로 T1 의 NULL 은 T2 의 어느 행과도 같지 않다. 그래서 NULL 도 '없는 값' 으로 남아 B, D, NULL 3행이다. ㉣ 의 LEFT JOIN 뒤 IS NULL 거르기도 같은 이유로 B, D, NULL 3행이다. 정답은 ②번이다. ① 은 네 방법이 늘 같은 결과를 낸다고 본 값이다. ③ 은 MINUS 도 NULL 을 남긴다고 본 값이다. ④ 는 NOT EXISTS 가 NULL 행을 빼고 LEFT JOIN 만 남긴다고 본 값이다.",
     "_source": "authored",
     "references": [
       {
         "type": "table",
-        "caption": "T1 테이블",
+        "caption": "T1",
         "headers": [
           "COL1"
         ],
@@ -1365,13 +1365,13 @@ export const ROUND_51: QuizQuestion[] = [
             "D"
           ],
           [
-            "E"
+            "NULL"
           ]
         ]
       },
       {
         "type": "table",
-        "caption": "T2 테이블",
+        "caption": "T2",
         "headers": [
           "COL1"
         ],
@@ -1380,12 +1380,16 @@ export const ROUND_51: QuizQuestion[] = [
             "A"
           ],
           [
-            "B"
+            "C"
           ],
           [
-            "C"
+            "NULL"
           ]
         ]
+      },
+      {
+        "type": "sql",
+        "code": "-- ㉠\nSELECT COL1 FROM T1\nMINUS\nSELECT COL1 FROM T2;\n-- ㉡\nSELECT COL1 FROM T1\nWHERE  COL1 NOT IN (SELECT COL1\n                    FROM   T2);\n-- ㉢\nSELECT COL1 FROM T1\nWHERE  NOT EXISTS (\n         SELECT 1 FROM T2\n         WHERE  T2.COL1 = T1.COL1);\n-- ㉣\nSELECT T1.COL1\nFROM   T1 LEFT JOIN T2\n       ON T1.COL1 = T2.COL1\nWHERE  T2.COL1 IS NULL;"
       }
     ]
   },

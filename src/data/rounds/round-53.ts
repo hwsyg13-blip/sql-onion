@@ -1380,77 +1380,58 @@ export const ROUND_53: QuizQuestion[] = [
     "round": 53,
     "subject": "2과목",
     "number": 36,
-    "title": "아래 EMP 테이블에서 SAL 상위 5순위 사원을 조회하는 SQL 로 옳은 것은?",
+    "title": "아래 EMP 테이블에서 '급여 상위 5' 를 구하는 ㉠~㉣ 의 결과 행 수를 차례로 나열한 것은? (Oracle 12c 이상)",
     "options": [
-      "SELECT * FROM EMP WHERE ROWNUM <= 5 ORDER BY SAL DESC;",
-      "SELECT DISTINCT SAL FROM EMP ORDER BY SAL DESC;",
-      "SELECT * FROM (SELECT * FROM EMP ORDER BY SAL DESC) WHERE ROWNUM <= 5;",
-      "SELECT * FROM EMP FETCH FIRST 5 ROWS ONLY;"
+      "5, 5, 5, 5",
+      "5, 6, 6, 6",
+      "5, 6, 7, 6",
+      "5, 5, 7, 6"
     ],
     "correctIndex": 2,
-    "explanation": "Oracle 의 `ROWNUM` 은 `ORDER BY` 가 적용되기 전에 행에 1 부터 부여된다. ① 처럼 `WHERE ROWNUM <= 5` 와 `ORDER BY` 를 한 SELECT 안에 두면 정렬되지 않은 임의의 5 건이 잡힌 뒤 정렬되어 \"상위 5 건\" 이 보장되지 않는다. ② `DISTINCT` 는 중복 제거일 뿐 행 수를 5 로 제한하지 않는다. ④ 는 `ORDER BY` 가 없어 어떤 5 건이 나올지 보장되지 않는다. 정답은 인라인 뷰에서 먼저 정렬한 뒤 외부 쿼리에서 `ROWNUM <= 5` 를 적용하는 ③ 번 패턴이다.",
+    "explanation": "급여 순서는 5000, 3000, 3000, 2975, 2850, 2850, 2450 이고 5번째와 6번째가 2850 으로 동점이다. ㉠ 의 ROWNUM 은 동점과 상관없이 정렬된 앞 5행만 자르므로 5행이고, BLAKE·ALLEN 중 누가 들어갈지는 정해져 있지 않다. ㉡ RANK 는 1, 2, 2, 4, 5, 5, 7 이라 5 이하가 6행이다. ㉢ DENSE_RANK 는 1, 2, 2, 3, 4, 4, 5 라 CLARK 까지 7행이 모두 5 이하다. ㉣ WITH TIES 는 5번째 행과 같은 값까지 더 가져와 6행이다. 정답은 ③번이다. ① 은 모든 방법이 정확히 5행을 준다고 본 값이다. ② 는 DENSE_RANK 를 RANK 와 같게 본 값이다. ④ 는 RANK 가 동점을 함께 포함하지 않는다고 본 값이다.",
     "_source": "authored",
     "references": [
       {
         "type": "table",
+        "caption": "EMP",
         "headers": [
-          "EMPNO",
           "ENAME",
           "SAL"
         ],
         "rows": [
           [
-            "7839",
             "KING",
             "5000"
           ],
           [
-            "7902",
             "FORD",
             "3000"
           ],
           [
-            "7788",
             "SCOTT",
             "3000"
           ],
           [
-            "7566",
             "JONES",
             "2975"
           ],
           [
-            "7698",
             "BLAKE",
             "2850"
           ],
           [
-            "7782",
+            "ALLEN",
+            "2850"
+          ],
+          [
             "CLARK",
             "2450"
-          ],
-          [
-            "7499",
-            "ALLEN",
-            "1600"
-          ],
-          [
-            "7521",
-            "WARD",
-            "1250"
-          ],
-          [
-            "7654",
-            "MARTIN",
-            "1250"
-          ],
-          [
-            "7934",
-            "MILLER",
-            "1300"
           ]
-        ],
-        "caption": "EMP 테이블"
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "-- ㉠\nSELECT * FROM (SELECT * FROM EMP\n               ORDER BY SAL DESC)\nWHERE  ROWNUM <= 5;\n-- ㉡\nSELECT * FROM (\n  SELECT E.*, RANK() OVER\n         (ORDER BY SAL DESC) AS R\n  FROM EMP E) WHERE R <= 5;\n-- ㉢ ㉡ 의 RANK 를 DENSE_RANK 로\n-- ㉣\nSELECT * FROM EMP\nORDER BY SAL DESC\nFETCH FIRST 5 ROWS WITH TIES;"
       }
     ]
   },
