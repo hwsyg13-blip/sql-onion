@@ -1986,7 +1986,7 @@ export const ROUND_62: QuizQuestion[] = [
       "2, 6, 110"
     ],
     "correctIndex": 1,
-    "explanation": "UNPIVOT 은 칼럼 Q1·Q2·Q3 을 행으로 바꿔 원래 한 행이 세 행이 된다. 다만 기본값이 EXCLUDE NULLS 라 값이 NULL 인 칸은 행으로 만들지 않는다. ㉠ 은 6칸 중 NULL 두 칸을 뺀 4행이다. ㉡ 은 INCLUDE NULLS 를 붙여 NULL 칸도 행이 되므로 6행이다. ㉢ 은 ㉠ 의 4행(20, 40, 50, 60) 중 50 이하인 20 + 40 + 50 = 110 이다. 정답은 ②번이다. ① 은 기본값이 NULL 도 포함한다고 본 값이다. ③ 은 INCLUDE NULLS 를 붙여도 달라지지 않는다고 본 값이다. ④ 는 UNPIVOT 뒤에도 원래 행 수가 그대로라고 본 값이다.",
+    "explanation": "UNPIVOT 은 칼럼 Q1·Q2·Q3 을 행으로 바꿔 원래 한 행이 세 행이 된다. 다만 기본값이 EXCLUDE NULLS 라 값이 NULL 인 칸은 행으로 만들지 않는다. ㉠ 은 6칸 중 NULL 두 칸을 뺀 4행이다. ㉡ 은 INCLUDE NULLS 를 붙여 NULL 칸도 행이 되므로 6행이다. ㉢ 은 ㉠ 의 4행(20, 40, 50, 60) 중 50 이하인 20 + 40 + 50 = 110 이다. 정답은 ②번이다. ① 은 기본값이 NULL 도 포함한다고 본 값이다. ③ 은 INCLUDE NULLS 를 붙여도 달라지지 않는다고 생각하면 나오는 값이다. ④ 는 UNPIVOT 뒤에도 원래 행 수가 그대로라고 착각한 결과다.",
     "_source": "authored",
     "references": [
       {

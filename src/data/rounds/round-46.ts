@@ -2324,7 +2324,7 @@ export const ROUND_46: QuizQuestion[] = [
       "(6, 2)"
     ],
     "correctIndex": 1,
-    "explanation": "ROLLUP(GRADE, JOB) 은 (GRADE, JOB) 상세, (GRADE) 소계, () 총계를 만든다. 상세는 (A, MANAGER), (A, CLERK), (B, MANAGER), (B, NULL) 4행이다. B 의 JOB 이 NULL 인 행도 원래 데이터라 하나의 그룹이 된다. 여기에 GRADE 별 소계 2행과 총계 1행이 더해져 7행이다. 소계·총계 행의 JOB 은 집계 때문에 NULL 로 채워지고 GROUPING(JOB) = 1 이다. 데이터 자체가 NULL 인 (B, NULL, 50) 은 GROUPING(JOB) = 0 이다. 그래서 JOB 이 NULL 이면서 G = 1 인 행은 3행이고, 정답은 ②번이다. ① 은 데이터의 NULL 행이 B 소계와 합쳐진다고 본 값이다. ③ 은 화면에 NULL 로 보이는 행 네 개를 모두 G = 1 로 본 값이다. ④ 는 ROLLUP 에 총계 행이 없다고 본 값이다. 데이터 NULL 과 소계 NULL 을 구분하려고 GROUPING 함수를 쓴다.",
+    "explanation": "ROLLUP(GRADE, JOB) 은 (GRADE, JOB) 상세, (GRADE) 소계, () 총계를 만든다. 상세는 (A, MANAGER), (A, CLERK), (B, MANAGER), (B, NULL) 4행이다. B 의 JOB 이 NULL 인 행도 원래 데이터라 하나의 그룹이 된다. 여기에 GRADE 별 소계 2행과 총계 1행이 더해져 7행이다. 소계·총계 행의 JOB 은 집계 때문에 NULL 로 채워지고 GROUPING(JOB) = 1 이다. 데이터 자체가 NULL 인 (B, NULL, 50) 은 GROUPING(JOB) = 0 이다. 그래서 JOB 이 NULL 이면서 G = 1 인 행은 3행이고, 정답은 ②번이다. ① 은 데이터의 NULL 행이 B 소계와 합쳐진다고 본 값이다. ③ 은 화면에 NULL 로 보이는 행 네 개를 모두 G = 1 로 생각하면 나오는 값이다. ④ 는 ROLLUP 에 총계 행이 없다고 착각한 결과다. 데이터 NULL 과 소계 NULL 을 구분하려고 GROUPING 함수를 쓴다.",
     "_source": "authored",
     "references": [
       {

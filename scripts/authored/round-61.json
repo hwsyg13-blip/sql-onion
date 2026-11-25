@@ -1860,7 +1860,7 @@
         "㉠, ㉡, ㉤"
       ],
       "correctIndex": 0,
-      "explanation": "㉠ 은 VALUES 안에 DEFAULT 키워드를 써서 COL3 에 'N' 이 들어가므로 정상이다. ㉡ 은 칼럼을 지정하지 않은 COL2 는 NULL, COL3 은 기본값 'N' 이 들어가 정상이다. ㉢ 은 COL3 에 NULL 을 직접 적었다. 기본값은 값을 생략했을 때만 쓰이므로 NOT NULL 오류가 난다. ㉣ 은 COL1 을 빼먹었는데 COL1 은 기본값 없는 NOT NULL 이라 오류다. ㉤ 은 칼럼 목록 없이 값을 세 개만 넣어 칼럼 수(4개)와 맞지 않아 오류다. 정답은 ①번이다. ② 는 명시한 NULL 도 기본값으로 바뀐다고 본 것이다. ③ 은 VALUES 에 DEFAULT 를 쓸 수 없다고 보고, 모자란 값은 NULL 로 채워진다고 본 것이다. ④ 는 모자란 값만 NULL 로 채워진다고 본 것이다.",
+      "explanation": "㉠ 은 VALUES 안에 DEFAULT 키워드를 써서 COL3 에 'N' 이 들어가므로 정상이다. ㉡ 은 칼럼을 지정하지 않은 COL2 는 NULL, COL3 은 기본값 'N' 이 들어가 정상이다. ㉢ 은 COL3 에 NULL 을 직접 적었다. 기본값은 값을 생략했을 때만 쓰이므로 NOT NULL 오류가 난다. ㉣ 은 COL1 을 빼먹었는데 COL1 은 기본값 없는 NOT NULL 이라 오류다. ㉤ 은 칼럼 목록 없이 값을 세 개만 넣어 칼럼 수(4개)와 맞지 않아 오류다. 정답은 ①번이다. ② 는 명시한 NULL 도 기본값으로 바뀐다고 본 것이다. ③ 은 VALUES 에 DEFAULT 를 쓸 수 없다고 보고, 모자란 값은 NULL 로 채워진다고 생각한 것이다. ④ 는 모자란 값만 NULL 로 채워진다고 착각한 것이다.",
       "references": [
         {
           "type": "sql",

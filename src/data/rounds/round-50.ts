@@ -336,7 +336,7 @@ export const ROUND_50: QuizQuestion[] = [
       "2, 1, 2, 1"
     ],
     "correctIndex": 2,
-    "explanation": "AVG 는 NULL 을 빼고 평균을 낸다. ㉠ 에서 S1 은 (4.0 + 2.0) / 2 = 3.0, S2 는 3.5 한 값의 평균이라 3.5 로 둘 다 남는다. S3 은 학점이 NULL 뿐이라 평균이 NULL 이어서 빠져 2행이다. ㉡ 은 NULL 을 0 으로 바꿔 S2 가 (3.5 + 0) / 2 = 1.75 가 되어 S1 만 남는다. ㉢ 의 SUM / COUNT(*) 도 NULL 행을 분모에 넣으므로 ㉡ 과 같은 1행이다. ㉣ 은 LEFT JOIN 으로 수강 기록이 없는 S4 까지 남기고, 강좌가 하나도 없는 S4 만 고르므로 1행이다. 정답은 ③번이다. ① 은 ㉡ 의 NVL 이 결과를 바꾸지 않는다고 본 값이다. ② 는 평균이 NULL 인 S3 도 통과한다고 본 값이다. ④ 는 SUM / COUNT(*) 가 AVG 와 같다고 본 값이다.",
+    "explanation": "AVG 는 NULL 을 빼고 평균을 낸다. ㉠ 에서 S1 은 (4.0 + 2.0) / 2 = 3.0, S2 는 3.5 한 값의 평균이라 3.5 로 둘 다 남는다. S3 은 학점이 NULL 뿐이라 평균이 NULL 이어서 빠져 2행이다. ㉡ 은 NULL 을 0 으로 바꿔 S2 가 (3.5 + 0) / 2 = 1.75 가 되어 S1 만 남는다. ㉢ 의 SUM / COUNT(*) 도 NULL 행을 분모에 넣으므로 ㉡ 과 같은 1행이다. ㉣ 은 LEFT JOIN 으로 수강 기록이 없는 S4 까지 남기고, 강좌가 하나도 없는 S4 만 고르므로 1행이다. 정답은 ③번이다. ① 은 ㉡ 의 NVL 이 결과를 바꾸지 않는다고 본 값이다. ② 는 평균이 NULL 인 S3 도 통과한다고 생각하면 나오는 값이다. ④ 는 SUM / COUNT(*) 가 AVG 와 같다고 착각한 결과다.",
     "_source": "authored",
     "references": [
       {
@@ -765,7 +765,7 @@ export const ROUND_50: QuizQuestion[] = [
       "6, 8, 4, 5"
     ],
     "correctIndex": 3,
-    "explanation": "데이터의 (A, B) 조합은 3개, A 값은 A1·A2 2개, B 값은 B1·B2 2개다. ㉠ ROLLUP(A, B) 는 (A, B) 3행 + (A) 소계 2행 + () 총계 1행 = 6행이다. ㉡ CUBE(A, B) 는 여기에 (B) 소계 2행이 더해져 8행이다. ㉢ GROUPING SETS(A, B) 는 (A) 2행과 (B) 2행만 만들어 4행이고, 상세나 총계는 없다. ㉣ ROLLUP(A), B 는 ROLLUP(A) 가 만드는 (A)·() 에 B 를 붙인 (A, B)·(B) 두 묶음이다. 3행 + 2행 = 5행이다. 정답은 ④번이다. ① 은 GROUPING SETS 에도 총계가 붙는다고 본 값이다. ② 는 ROLLUP(A), B 를 ROLLUP(A, B) 와 같게 본 값이다. ③ 은 ROLLUP 에 총계 행이 없다고 본 값이다.",
+    "explanation": "데이터의 (A, B) 조합은 3개, A 값은 A1·A2 2개, B 값은 B1·B2 2개다. ㉠ ROLLUP(A, B) 는 (A, B) 3행 + (A) 소계 2행 + () 총계 1행 = 6행이다. ㉡ CUBE(A, B) 는 여기에 (B) 소계 2행이 더해져 8행이다. ㉢ GROUPING SETS(A, B) 는 (A) 2행과 (B) 2행만 만들어 4행이고, 상세나 총계는 없다. ㉣ ROLLUP(A), B 는 ROLLUP(A) 가 만드는 (A)·() 에 B 를 붙인 (A, B)·(B) 두 묶음이다. 3행 + 2행 = 5행이다. 정답은 ④번이다. ① 은 GROUPING SETS 에도 총계가 붙는다고 본 값이다. ② 는 ROLLUP(A), B 를 ROLLUP(A, B) 와 같게 생각하면 나오는 값이다. ③ 은 ROLLUP 에 총계 행이 없다고 착각한 결과다.",
     "_source": "authored",
     "references": [
       {
@@ -1733,7 +1733,7 @@ export const ROUND_50: QuizQuestion[] = [
       "(600, 600)"
     ],
     "correctIndex": 1,
-    "explanation": "뷰의 WHERE C1 <> 'A' 에서 C1 이 NULL 인 행은 비교가 UNKNOWN 이라 빠진다. 그래서 ㉠ 은 B 200, B 100, C 300 의 합 600 이다. WITH CHECK OPTION 은 뷰를 통해 넣거나 고친 행이 뷰 조건을 만족해야 한다. ㉡ 의 'A' 는 조건에 어긋나 오류가 나고, ㉢ 의 'D' 는 조건을 만족해 들어간다. ㉣ 은 C 를 NULL 로 바꾸면 C1 <> 'A' 가 UNKNOWN 이 되어 조건을 만족하지 못하므로 오류가 난다. 마지막 SELECT 는 600 + 50 = 650 이다. 정답은 ②번이다. ① 은 NULL 도 'A' 가 아니니 뷰에 보인다고 본 값이다. ③ 은 ㉣ 이 성공해 C 행(300)이 뷰에서 사라진다고 본 값이다. ④ 는 뷰에는 INSERT 를 할 수 없다고 보고 ㉢ 도 실패한다고 본 값이다.",
+    "explanation": "뷰의 WHERE C1 <> 'A' 에서 C1 이 NULL 인 행은 비교가 UNKNOWN 이라 빠진다. 그래서 ㉠ 은 B 200, B 100, C 300 의 합 600 이다. WITH CHECK OPTION 은 뷰를 통해 넣거나 고친 행이 뷰 조건을 만족해야 한다. ㉡ 의 'A' 는 조건에 어긋나 오류가 나고, ㉢ 의 'D' 는 조건을 만족해 들어간다. ㉣ 은 C 를 NULL 로 바꾸면 C1 <> 'A' 가 UNKNOWN 이 되어 조건을 만족하지 못하므로 오류가 난다. 마지막 SELECT 는 600 + 50 = 650 이다. 정답은 ②번이다. ① 은 NULL 도 'A' 가 아니니 뷰에 보인다고 본 값이다. ③ 은 ㉣ 이 성공해 C 행(300)이 뷰에서 사라진다고 생각하면 나오는 값이다. ④ 는 뷰에는 INSERT 를 할 수 없다고 보고 ㉢ 도 실패한다고 착각한 결과다.",
     "_source": "authored",
     "references": [
       {

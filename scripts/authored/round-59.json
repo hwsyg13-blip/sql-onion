@@ -327,7 +327,7 @@
         "6, 7, 9, 5"
       ],
       "correctIndex": 0,
-      "explanation": "㉠ 은 사원(E)마다 그 관리자(M)를 붙이는 셀프 조인이다. MGR 이 NULL 인 KING 은 짝이 없어 빠지고 6행이다. ㉡ 은 사원 쪽을 기준으로 한 LEFT OUTER JOIN 이라 KING 도 관리자 칸이 NULL 인 채로 남아 7행이다. ㉢ 은 관리자 쪽(M)을 기준으로 부하(E)를 붙인다. 부하가 둘인 KING·BLAKE 는 2행씩, 하나인 JONES·FORD 는 1행씩, 부하가 없는 SMITH·ALLEN·WARD 는 NULL 과 함께 1행씩 남아 2 + 2 + 1 + 1 + 3 = 9행이다. ㉣ 은 NULL 을 빼고 서로 다른 MGR 값(7839, 7566, 7902, 7698)을 세어 4다. 정답은 ①번이다. 6, 7, 7, 4 는 ㉢ 도 ㉡ 과 같다고 본 값이다. 7, 7, 9, 4 는 내부 조인에도 KING 이 남는다고 본 값이다. 6, 7, 9, 5 는 COUNT(DISTINCT) 가 NULL 도 하나로 센다고 본 값이다.",
+      "explanation": "㉠ 은 사원(E)마다 그 관리자(M)를 붙이는 셀프 조인이다. MGR 이 NULL 인 KING 은 짝이 없어 빠지고 6행이다. ㉡ 은 사원 쪽을 기준으로 한 LEFT OUTER JOIN 이라 KING 도 관리자 칸이 NULL 인 채로 남아 7행이다. ㉢ 은 관리자 쪽(M)을 기준으로 부하(E)를 붙인다. 부하가 둘인 KING·BLAKE 는 2행씩, 하나인 JONES·FORD 는 1행씩, 부하가 없는 SMITH·ALLEN·WARD 는 NULL 과 함께 1행씩 남아 2 + 2 + 1 + 1 + 3 = 9행이다. ㉣ 은 NULL 을 빼고 서로 다른 MGR 값(7839, 7566, 7902, 7698)을 세어 4다. 정답은 ①번이다. 6, 7, 7, 4 는 ㉢ 도 ㉡ 과 같다고 본 값이다. 7, 7, 9, 4 는 내부 조인에도 KING 이 남는다고 생각하면 나오는 값이다. 6, 7, 9, 5 는 COUNT(DISTINCT) 가 NULL 도 하나로 센다고 착각한 결과다.",
       "references": [
         {
           "type": "table",
@@ -582,7 +582,7 @@
         "18"
       ],
       "correctIndex": 2,
-      "explanation": "Oracle 에서 CREATE INDEX 같은 DDL 은 실행 직전에 그때까지의 트랜잭션을 자동으로 COMMIT 한다. 그래서 앞의 10건과 5건이 확정되고, 그 트랜잭션에 있던 SAVEPOINT A 도 함께 사라진다. 이어서 넣은 3건은 새 트랜잭션이다. ROLLBACK TO SAVEPOINT A 는 A 가 더 이상 없으므로 오류가 나고 아무것도 되돌리지 않는다. 마지막 ROLLBACK 이 3건만 취소해 15건이 남는다. 정답은 ③번이다. ① 0 은 DDL 이 커밋하지 않는다고 보고 ROLLBACK 이 전부 취소한다고 본 값이다. ② 10 은 SAVEPOINT A 가 살아 있어 5건과 3건이 취소된다고 본 값이다. ④ 18 은 마지막 ROLLBACK 을 놓치고 3건까지 남는다고 본 값이다.",
+      "explanation": "Oracle 에서 CREATE INDEX 같은 DDL 은 실행 직전에 그때까지의 트랜잭션을 자동으로 COMMIT 한다. 그래서 앞의 10건과 5건이 확정되고, 그 트랜잭션에 있던 SAVEPOINT A 도 함께 사라진다. 이어서 넣은 3건은 새 트랜잭션이다. ROLLBACK TO SAVEPOINT A 는 A 가 더 이상 없으므로 오류가 나고 아무것도 되돌리지 않는다. 마지막 ROLLBACK 이 3건만 취소해 15건이 남는다. 정답은 ③번이다. ① 0 은 DDL 이 커밋하지 않는다고 보고 ROLLBACK 이 전부 취소한다고 본 값이다. ② 10 은 SAVEPOINT A 가 살아 있어 5건과 3건이 취소된다고 생각하면 나오는 값이다. ④ 18 은 마지막 ROLLBACK 을 놓치고 3건까지 남는다고 착각한 결과다.",
       "references": [
         {
           "type": "text",

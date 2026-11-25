@@ -1122,7 +1122,7 @@ export const ROUND_45: QuizQuestion[] = [
       "4, 3, 6, 4"
     ],
     "correctIndex": 3,
-    "explanation": "㉠ FULL OUTER JOIN 은 KEY 1 이 B 없이 1행, KEY 2 는 A 의 두 행이 B 의 한 행과 각각 맞아 같은 내용의 2행, KEY 3 이 A 없이 1행으로 4행이다. ㉡ 은 LEFT(3행)와 RIGHT(3행)를 UNION 하는데, UNION 은 중복을 없애므로 KEY 2 의 같은 두 행이 한 행으로 합쳐져 3행이 된다. 원래 데이터에 있던 중복까지 사라지는 것이다. ㉢ UNION ALL 은 겹치는 KEY 2 행을 양쪽에서 모두 가져와 6행이다. ㉣ 은 RIGHT 쪽에서 A 에 짝이 없는 행(KEY 3)만 붙이므로 3 + 1 = 4 행으로 FULL OUTER JOIN 과 같다. 정답은 ④번이다. ① 은 UNION 이 원래 데이터의 중복은 남긴다고 본 값이다. ② 는 ㉣ 에서도 중복이 합쳐진다고 본 값이다. ③ 은 FULL OUTER JOIN 도 같은 행을 하나로 합친다고 본 값이다.",
+    "explanation": "㉠ FULL OUTER JOIN 은 KEY 1 이 B 없이 1행, KEY 2 는 A 의 두 행이 B 의 한 행과 각각 맞아 같은 내용의 2행, KEY 3 이 A 없이 1행으로 4행이다. ㉡ 은 LEFT(3행)와 RIGHT(3행)를 UNION 하는데, UNION 은 중복을 없애므로 KEY 2 의 같은 두 행이 한 행으로 합쳐져 3행이 된다. 원래 데이터에 있던 중복까지 사라지는 것이다. ㉢ UNION ALL 은 겹치는 KEY 2 행을 양쪽에서 모두 가져와 6행이다. ㉣ 은 RIGHT 쪽에서 A 에 짝이 없는 행(KEY 3)만 붙이므로 3 + 1 = 4 행으로 FULL OUTER JOIN 과 같다. 정답은 ④번이다. ① 은 UNION 이 원래 데이터의 중복은 남긴다고 본 값이다. ② 는 ㉣ 에서도 중복이 합쳐진다고 생각하면 나오는 값이다. ③ 은 FULL OUTER JOIN 도 같은 행을 하나로 합친다고 착각한 결과다.",
     "_source": "authored",
     "references": [
       {

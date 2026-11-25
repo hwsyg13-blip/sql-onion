@@ -1858,7 +1858,7 @@ export const ROUND_55: QuizQuestion[] = [
       "(8000, 13000, 13000)"
     ],
     "correctIndex": 0,
-    "explanation": "S1 은 ORDER BY 만 있고 범위 절이 없어서 기본값 RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW 가 적용된다. RANGE 는 정렬 값이 같은 행(동점)을 한꺼번에 포함하므로, 10번 부서 3000, 5000, 5000 에서 5000 인 두 행(2·3번)은 모두 3000 + 5000 + 5000 = 13000 이다. S2 는 ORDER BY 가 없어 부서 전체 합인 13000, S3 은 OVER () 라 전체 합 21000 이다. 정답은 ①번이다. ② 는 ROWS 처럼 한 행씩 누적해 2번을 3000 + 5000 = 8000 으로 본 값이다. ③ 은 PARTITION BY 만 있는 S2 를 전체 합으로 본 값이다. ④ 는 S1 을 한 행씩 누적으로 보고, OVER () 도 부서별 합이라고 본 값이다.",
+    "explanation": "S1 은 ORDER BY 만 있고 범위 절이 없어서 기본값 RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW 가 적용된다. RANGE 는 정렬 값이 같은 행(동점)을 한꺼번에 포함하므로, 10번 부서 3000, 5000, 5000 에서 5000 인 두 행(2·3번)은 모두 3000 + 5000 + 5000 = 13000 이다. S2 는 ORDER BY 가 없어 부서 전체 합인 13000, S3 은 OVER () 라 전체 합 21000 이다. 정답은 ①번이다. ② 는 ROWS 처럼 한 행씩 누적해 2번을 3000 + 5000 = 8000 으로 본 값이다. ③ 은 PARTITION BY 만 있는 S2 를 전체 합으로 생각하면 나오는 값이다. ④ 는 S1 을 한 행씩 누적으로 보고, OVER () 도 부서별 합이라고 착각한 결과다.",
     "_source": "authored",
     "references": [
       {
