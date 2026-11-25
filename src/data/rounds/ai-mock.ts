@@ -12496,20 +12496,64 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 389,
-    "title": "SQL 문장에서 집합별로 집계된 데이터에 대한 조회 조건을 제한하기 위해서 사용하는 절은 어느 것인가?",
+    "title": "아래 주문 테이블에서 '금액이 100 이상인 주문이 2건 이상인 고객' 을 구하려고 한다. SQL 의 ㉠, ㉡ 에 넣었을 때 결과로 고객 A 한 행만 나오는 것은?",
     "options": [
-      "FROM절",
-      "WHERE절",
-      "GROUP BY절",
-      "HAVING절"
+      "㉠ 비움, ㉡ HAVING COUNT(*) >= 2 AND MIN(금액) >= 100",
+      "㉠ WHERE 금액 >= 100, ㉡ HAVING SUM(금액) >= 400",
+      "㉠ 비움, ㉡ HAVING COUNT(금액) >= 2 AND SUM(금액) >= 400",
+      "㉠ WHERE 금액 >= 100, ㉡ HAVING COUNT(*) >= 2"
     ],
     "correctIndex": 3,
-    "explanation": "일반적인 SQL 문장에서 조회하는 데이터를 제한하기 위해서는 WHERE절을 사용하지만 그룹별로 조회할 때 집계 데이터에 대한 제한 조건을 사용하기 위해서는 HAVING절을 사용한다.",
+    "explanation": "개별 행을 거르는 조건은 WHERE 에, 그룹으로 묶은 뒤의 집계값 조건은 HAVING 에 둔다. ④ 는 ㉠ 의 WHERE 로 금액 100 미만과 NULL 행을 먼저 빼고, 남은 행을 고객별로 세어 2건 이상만 남긴다. A 는 100·300 두 건, B 는 400 한 건, C 는 500 한 건이라 A 만 나온다. 정답은 ④번이다. ① 은 COUNT(*) 가 NULL 행도 세고 MIN 은 NULL 을 빼고 계산하므로 C 도 건수 2, 최솟값 500 으로 통과해 A, C 가 나온다. ② 는 건수를 보지 않고 합계만 봐서 A(400), B(400), C(500) 가 모두 나온다. ③ 은 WHERE 가 없어 B 의 50·60 까지 세어 B(3건, 합계 510) 가 함께 나온다.",
     "chapter": "그룹 함수",
     "_source": "sqld-1140",
     "_origId": "sqld-0179",
     "_category": "그룹 함수",
-    "_correctRate": 10
+    "_correctRate": 10,
+    "references": [
+      {
+        "type": "table",
+        "caption": "주문",
+        "headers": [
+          "고객",
+          "금액"
+        ],
+        "rows": [
+          [
+            "A",
+            "100"
+          ],
+          [
+            "A",
+            "300"
+          ],
+          [
+            "B",
+            "50"
+          ],
+          [
+            "B",
+            "60"
+          ],
+          [
+            "B",
+            "400"
+          ],
+          [
+            "C",
+            "500"
+          ],
+          [
+            "C",
+            "NULL"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT 고객\nFROM   주문\n㉠\nGROUP BY 고객\n㉡;"
+      }
+    ]
   },
   {
     "id": 11190,
@@ -16498,15 +16542,15 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 505,
-    "title": "다음 SQL문의 실행 결과로 올바른 것은?",
+    "title": "다음 함수와 실행 결과의 짝이 옳은 것은? (Oracle 기준)",
     "options": [
-      "SELECT TRUNC(35.8) FROM DUAL -> 36",
-      "SELECT ROUND(36.8,0) FROM DUAL -> 36",
-      "SELECT CEIL(35.8) FROM DUAL -> 36",
-      "SELECT FLOOR(35.8) FROM DUAL -> 36"
+      "TRUNC(-35.8) → -36",
+      "ROUND(-35.45, 1) → -35.4",
+      "CEIL(-35.8) → -35",
+      "FLOOR(-35.2) → -35"
     ],
     "correctIndex": 2,
-    "explanation": "CEIL(35.8) 은 35.8 보다 크거나 같은 가장 작은 정수라 36 이다(③). ① TRUNC(35.8) 은 소수를 버려 35, ② ROUND(36.8, 0) 은 반올림해 37, ④ FLOOR(35.8) 은 작거나 같은 가장 큰 정수라 35 다.",
+    "explanation": "CEIL 은 주어진 수보다 크거나 같은 정수 중 가장 작은 값이다. 수직선에서 -35.8 의 오른쪽에 있는 가장 가까운 정수는 -35 라서 ③ 이 맞다. 정답은 ③번이다. ① TRUNC 는 소수 부분을 잘라 낼 뿐이라 -35 가 된다. -36 은 FLOOR(-35.8) 의 결과다. ② ROUND 는 절댓값 기준으로 반올림하므로 -35.45 의 둘째 자리 5 를 올려 -35.5 가 된다. ④ FLOOR 는 작거나 같은 정수 중 가장 큰 값이라 -35.2 의 왼쪽에 있는 -36 이다.",
     "chapter": "함수",
     "_source": "sqld-1140",
     "_origId": "sqld-0324",
