@@ -1417,3 +1417,4 @@ sqld-0312·0319(M494·M501, 데이터베이스 파티션 기법)도 성능 데�
 | ai-mock-047 | UNION·UNION ALL 차이 고르기 | 중복·NULL 이 있는 두 표의 UNION·UNION ALL 행 수와 결과 칼럼 이름 | PostgreSQL 16 → 4, 7, x(첫 SELECT 별칭). 390px 화면 확인. 사본 없음 |
 | ai-mock-060 | UNIQUE 설명 고르기 | PK·UNIQUE 테이블에 INSERT 다섯 개(UNIQUE 여러 NULL 허용, PK NULL 불가, 중복) 차례 실행 | PostgreSQL 16 → ㉣ NOT NULL 위반, ㉤ UNIQUE 위반, 남은 ID 1·2·3. 390px 화면 확인. 사본 없음 |
 | ai-mock-049 | NULL 집계 설명 고르기 | GROUP BY 칼럼에 NULL 이 있을 때 그룹 수, 값이 모두 NULL 인 그룹의 COUNT·SUM | PostgreSQL 16 → 3행(NULL 그룹 포함), B: 1, 0, NULL. 검증기 ok. 390px 화면 확인. 사본 없음 |
+| ai-mock-046 | 스칼라 서브쿼리 오류 조건 고르기 | 부서 테이블에 코드가 중복될 때 스칼라 서브쿼리 결과(문장 전체 오류) | PostgreSQL 16 → more than one row returned by a subquery 오류. SQLite 검증기는 2행이어도 첫 행을 돌려줘 mismatch 로 잡음 → verify-sql-results 에서 '오류가 정답' 문항은 건너뛰고 PG 검증기가 맡도록 수정(skipped 300→310, mismatch 0). 390px 화면 확인. 사본 없음 |
