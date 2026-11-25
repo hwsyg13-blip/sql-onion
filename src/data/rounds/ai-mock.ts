@@ -2861,76 +2861,6 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 10901,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 102,
-    "title": "아래 SQL 의 SELECT 절 서브쿼리 유형과 실행 결과로 옳은 것은?",
-    "options": [
-      "인라인 뷰 — 3행이 나온다.",
-      "스칼라 서브쿼리 — DEPT 에 20번이 두 행이라 실행 중 오류가 난다.",
-      "스칼라 서브쿼리 — 20번 부서 사원 B 는 DNAME 이 NULL 로 나온다.",
-      "연관 서브쿼리가 아니라 한 번만 실행되어 모든 행에 같은 DNAME 이 나온다."
-    ],
-    "correctIndex": 1,
-    "explanation": "SELECT 절에 쓴 서브쿼리는 행마다 값 하나(한 행, 한 칼럼)를 돌려줘야 하는 스칼라 서브쿼리다. B(20)에 대해 DEPT 에서 두 행(개발, 개발2)이 나오므로 단일 행이 아니라 오류가 난다. 정답은 ②번이다. 짝이 없는 C(30)는 오류가 아니라 NULL 이 된다. ③ 은 이 경우와 헷갈린 것이다. ④ 서브쿼리가 바깥의 E.DEPTNO 를 참조하므로 연관 서브쿼리이고 행마다 실행된다. ① 인라인 뷰는 FROM 절의 서브쿼리다.",
-    "chapter": "서브쿼리",
-    "_source": "cbt-mock",
-    "_origId": "cbt-055",
-    "_cbtOrigNo": 55,
-    "references": [
-      {
-        "type": "table",
-        "caption": "EMP",
-        "headers": [
-          "ENAME",
-          "DEPTNO"
-        ],
-        "rows": [
-          [
-            "A",
-            "10"
-          ],
-          [
-            "B",
-            "20"
-          ],
-          [
-            "C",
-            "30"
-          ]
-        ]
-      },
-      {
-        "type": "table",
-        "caption": "DEPT",
-        "headers": [
-          "DEPTNO",
-          "DNAME"
-        ],
-        "rows": [
-          [
-            "10",
-            "영업"
-          ],
-          [
-            "20",
-            "개발"
-          ],
-          [
-            "20",
-            "개발2"
-          ]
-        ]
-      },
-      {
-        "type": "sql",
-        "code": "SELECT E.ENAME,\n       (SELECT D.DNAME\n        FROM   DEPT D\n        WHERE  D.DEPTNO = E.DEPTNO)\nFROM   EMP E;"
-      }
-    ]
-  },
-  {
     "id": 10902,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
@@ -13739,6 +13669,33 @@ export const AI_MOCK: QuizQuestion[] = [
     "_origId": "sqld-0227",
     "_category": "윈도우 함수",
     "_correctRate": 10
+  },
+  {
+    "id": 11225,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 426,
+    "title": "아래 SQL 의 서브쿼리 ㉠~㉢ 을 종류에 맞게 짝지은 것은?",
+    "options": [
+      "㉠ 인라인 뷰 / ㉡ 스칼라 서브쿼리 / ㉢ 다중 행 서브쿼리",
+      "㉠ 스칼라 서브쿼리 / ㉡ 인라인 뷰 / ㉢ 단일 행 서브쿼리",
+      "㉠ 상관 스칼라 서브쿼리 / ㉡ 인라인 뷰 / ㉢ 다중 행 서브쿼리",
+      "㉠ 비상관 스칼라 서브쿼리 / ㉡ 인라인 뷰 / ㉢ 다중 행 서브쿼리"
+    ],
+    "correctIndex": 2,
+    "explanation": "㉠ 은 SELECT 절에서 한 행·한 칼럼을 돌려주는 스칼라 서브쿼리이고, 바깥 쿼리의 E.DEPTNO 를 안에서 참조하므로 상관 서브쿼리다. 바깥 행마다 다시 실행된다. ㉡ 은 FROM 절에서 테이블처럼 쓰이는 인라인 뷰다. ㉢ 은 WHERE 절에서 IN 과 함께 쓰였고 급여가 3000 을 넘는 사원의 직무가 여러 개일 수 있으므로 다중 행 서브쿼리다. 정답은 ③번이다. ① 은 위치에 따른 이름(SELECT 절은 스칼라, FROM 절은 인라인 뷰)을 서로 바꿨다. ② 는 IN 과 함께 쓰는 서브쿼리를 단일 행으로 본 것이다. 단일 행 서브쿼리는 = 같은 단일 행 비교 연산자와 쓴다. ④ 는 ㉠ 이 바깥 칼럼(E.DEPTNO)을 참조한다는 점을 놓쳤다.",
+    "chapter": "서브쿼리",
+    "_source": "sqld-1140",
+    "_origId": "sqld-0228",
+    "_category": "서브쿼리",
+    "_correctRate": 10,
+    "references": [
+      {
+        "type": "sql",
+        "code": "SELECT E.ENAME,\n       (SELECT D.DNAME          -- ㉠\n        FROM   DEPT D\n        WHERE  D.DEPTNO = E.DEPTNO)\n         AS DNAME,\n       A.AVG_SAL\nFROM   EMP E,\n      (SELECT DEPTNO,           -- ㉡\n              AVG(SAL) AS AVG_SAL\n       FROM   EMP\n       GROUP BY DEPTNO) A\nWHERE  E.DEPTNO = A.DEPTNO\nAND    E.JOB IN (SELECT JOB     -- ㉢\n                 FROM   EMP\n                 WHERE  SAL > 3000);"
+      }
+    ]
   },
   {
     "id": 11226,

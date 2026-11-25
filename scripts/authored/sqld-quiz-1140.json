@@ -6425,15 +6425,21 @@
       "_correctRate": 10,
       "subject": "2과목",
       "chapter": "서브쿼리",
-      "title": "서브쿼리의 종류 중에 서브쿼리를 실행하고 한 행, 한 칼럼을 반환하는 서브쿼리를 무엇이라고 하는가?",
+      "title": "아래 SQL 의 서브쿼리 ㉠~㉢ 을 종류에 맞게 짝지은 것은?",
       "options": [
-        "Access Subquery",
-        "Associative Subquery",
-        "Scala Subquery",
-        "Looping"
+        "㉠ 인라인 뷰 / ㉡ 스칼라 서브쿼리 / ㉢ 다중 행 서브쿼리",
+        "㉠ 스칼라 서브쿼리 / ㉡ 인라인 뷰 / ㉢ 단일 행 서브쿼리",
+        "㉠ 상관 스칼라 서브쿼리 / ㉡ 인라인 뷰 / ㉢ 다중 행 서브쿼리",
+        "㉠ 비상관 스칼라 서브쿼리 / ㉡ 인라인 뷰 / ㉢ 다중 행 서브쿼리"
       ],
       "correctIndex": 2,
-      "explanation": "스칼라 서브쿼리는 SELECT문에서 사용하는 서브쿼리로 한 행만 반환한다."
+      "explanation": "㉠ 은 SELECT 절에서 한 행·한 칼럼을 돌려주는 스칼라 서브쿼리이고, 바깥 쿼리의 E.DEPTNO 를 안에서 참조하므로 상관 서브쿼리다. 바깥 행마다 다시 실행된다. ㉡ 은 FROM 절에서 테이블처럼 쓰이는 인라인 뷰다. ㉢ 은 WHERE 절에서 IN 과 함께 쓰였고 급여가 3000 을 넘는 사원의 직무가 여러 개일 수 있으므로 다중 행 서브쿼리다. 정답은 ③번이다. ① 은 위치에 따른 이름(SELECT 절은 스칼라, FROM 절은 인라인 뷰)을 서로 바꿨다. ② 는 IN 과 함께 쓰는 서브쿼리를 단일 행으로 본 것이다. 단일 행 서브쿼리는 = 같은 단일 행 비교 연산자와 쓴다. ④ 는 ㉠ 이 바깥 칼럼(E.DEPTNO)을 참조한다는 점을 놓쳤다.",
+      "references": [
+        {
+          "type": "sql",
+          "code": "SELECT E.ENAME,\n       (SELECT D.DNAME          -- ㉠\n        FROM   DEPT D\n        WHERE  D.DEPTNO = E.DEPTNO)\n         AS DNAME,\n       A.AVG_SAL\nFROM   EMP E,\n      (SELECT DEPTNO,           -- ㉡\n              AVG(SAL) AS AVG_SAL\n       FROM   EMP\n       GROUP BY DEPTNO) A\nWHERE  E.DEPTNO = A.DEPTNO\nAND    E.JOB IN (SELECT JOB     -- ㉢\n                 FROM   EMP\n                 WHERE  SAL > 3000);"
+        }
+      ]
     },
     {
       "_id": "sqld-0229",

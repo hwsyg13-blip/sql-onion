@@ -1326,3 +1326,4 @@ sqld-0312·0319(M494·M501, 데이터베이스 파티션 기법)도 성능 데�
 | ai-mock-054 | KEEP 용도 설명 | MAX/MIN … KEEP (DENSE_RANK FIRST/LAST ORDER BY) 동점 포함 계산 | PostgreSQL 16 에 KEEP 이 없어 MIN/MAX(HIRE) 와 FILTER 로 흉내 → 10번 (4000, 5000), 20번 F 2500. 사본 없음 |
 | ai-mock-022 | 누적 프레임 구문 고르기 | 이동 창(1 PRECEDING~1 FOLLOWING)·빈 창(UNBOUNDED~1 PRECEDING)·ROWS 2 PRECEDING 값 | PostgreSQL 16 → D=1 (30, NULL), D=3 C 20. 사본 없음 |
 | ai-mock-045 | GROUPING_ID 설명 | CUBE 결과의 GROUPING_ID 비트 값(A 가 높은 자리) | PostgreSQL 16 GROUPING(A, B)(같은 비트 순서) → 0/1/2/3, SUM 40 행은 2. 사본 없음 |
+| sqld-0228 | 스칼라 서브쿼리 이름(오타 'Scala', 범위 밖 Access Subquery 보기) | 한 SQL 안의 상관 스칼라·인라인 뷰·다중 행 서브쿼리 구분 | PostgreSQL 16 에서 SQL 정상 실행, ㉢ 서브쿼리 3행 확인. 사본 없음(중복 제외 247 유지) |
