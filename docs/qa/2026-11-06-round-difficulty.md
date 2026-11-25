@@ -1409,3 +1409,4 @@ sqld-0312·0319(M494·M501, 데이터베이스 파티션 기법)도 성능 데�
 | 이론 c213 | 숫자 함수 표에 MOD(7,3) 만 | MOD 결과 부호는 앞 수를 따른다는 설명 + MOD(-7, 3) = -1 줄 추가 (sqld-0238 과 짝) | PostgreSQL 16 mod(-7,3) = -1. 390px 표 확인(원래부터 표 안 가로 스크롤) |
 | 이론 c221 | ANY·ALL 표에 빈 서브쿼리 경우 없음 | '서브쿼리가 0행이면 > ALL 은 모든 행 참, > ANY 는 모두 거짓' 줄 추가 (sqld-0894 와 짝) | PostgreSQL 16 → 빈 서브쿼리 > ALL 5행/5행. 390px 표 확인 |
 | 이론 c232 | COMMIT 줄에 저장점 소멸 설명 없음 | 'COMMIT 하면 그때까지 만든 저장점도 사라져 ROLLBACK TO 는 오류' 추가 (sqld-0766 과 짝) | PostgreSQL 16 → savepoint does not exist. 390px 표 확인 |
+| 이론 c233 | 데이터 타입 설명 없음 | CHAR·VARCHAR2·NUMBER(p,s)·DATE 의 저장과 비교 주의 표 추가 (sqld-0514·0863 과 짝) | PostgreSQL 16 → 12.345::numeric(5,2) = 12.35, char(5) = 'AB' 참, varchar = 'AB ' 거짓. 390px 표 확인 |
