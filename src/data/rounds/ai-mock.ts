@@ -1164,18 +1164,72 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 44,
-    "title": "다음 중 MERGE 구문의 특징으로 틀린 것은?",
+    "title": "아래 두 테이블에 MERGE 를 실행한 뒤 목표 테이블의 행 수와 금액 합계로 옳은 것은? (Oracle 기준)",
     "options": [
-      "여러 번 테이블을 조회하고 처리해야 하는 기존의 절차적 로직을 단순화하여 성능 향상에 도움을 준다.",
-      "ON 절에 사용된 조인 조건 컬럼은 MATCHED (UPDATE) 절에서 그 값을 변경할 수 있다.",
-      "조건에 따라 데이터를 삽입(INSERT)하거나 수정(UPDATE)하는 단일 SQL 문장이다.",
-      "필요에 따라 WHEN MATCHED 절이나 WHEN NOT MATCHED 절 중 하나만 선택적으로 사용할 수 있다."
+      "4행, 합계 850",
+      "3행, 합계 850",
+      "5행, 합계 850",
+      "2행, 합계 550"
     ],
     "correctIndex": 1,
-    "explanation": "MERGE 의 ON 절 조인 키는 같은 행을 찾는 기준이라 UPDATE 로 바꿀 수 없다(오라클은 오류). 바꿀 수 있다는 ②가 틀렸다.",
+    "explanation": "ID 1 은 짝이 있어 150 으로 바뀐다. ID 2 도 짝이 있어 0 으로 바뀐 뒤, UPDATE 다음에 붙은 DELETE WHERE T.금액 = 0 을 만족해 지워진다. DELETE WHERE 는 바뀐 뒤의 값으로 판단한다. ID 3 은 원본에 없어 그대로 300 이다. ID 4 는 짝이 없고 금액이 0 보다 커 들어가고, ID 5 는 INSERT 의 WHERE S.금액 > 0 을 만족하지 못해 들어가지 않는다. 결과는 150, 300, 400 의 3행, 합계 850 이다. 정답은 ②번이다. ① 은 DELETE WHERE 를 빠뜨렸다(ID 2 가 0 으로 남음). ③ 은 INSERT 의 WHERE 까지 빠뜨렸다. ④ 는 원본에 없는 ID 3 까지 지워진다고 착각한 결과다. ON 절의 조인 칼럼(ID)은 UPDATE SET 에서 바꿀 수 없다. PostgreSQL 16 의 MERGE(WHEN MATCHED AND … THEN DELETE)로 옮겨 실행해도 3행, 850 이다.",
     "chapter": "DML",
     "_source": "ai-mock",
-    "_origId": "ai-mock-052"
+    "_origId": "ai-mock-052",
+    "references": [
+      {
+        "type": "table",
+        "caption": "목표",
+        "headers": [
+          "ID",
+          "금액"
+        ],
+        "rows": [
+          [
+            "1",
+            "100"
+          ],
+          [
+            "2",
+            "200"
+          ],
+          [
+            "3",
+            "300"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "원본",
+        "headers": [
+          "ID",
+          "금액"
+        ],
+        "rows": [
+          [
+            "1",
+            "150"
+          ],
+          [
+            "2",
+            "0"
+          ],
+          [
+            "4",
+            "400"
+          ],
+          [
+            "5",
+            "0"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "MERGE INTO 목표 T\nUSING 원본 S\nON (T.ID = S.ID)\nWHEN MATCHED THEN\n  UPDATE SET T.금액 = S.금액\n  DELETE WHERE T.금액 = 0\nWHEN NOT MATCHED THEN\n  INSERT (ID, 금액)\n  VALUES (S.ID, S.금액)\n  WHERE S.금액 > 0;"
+      }
+    ]
   },
   {
     "id": 10844,

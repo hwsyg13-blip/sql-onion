@@ -1413,3 +1413,4 @@ sqld-0312·0319(M494·M501, 데이터베이스 파티션 기법)도 성능 데�
 | 이론 c224 | 윈도우 함수 세부 규칙 빠짐 | ROW_NUMBER 동점 순서 미정(보조 정렬 기준), 범위 끝에 UNBOUNDED PRECEDING 불가, FIRST_VALUE 는 NULL 도 가져옴(DESC 면 NULL 첫 행) 추가 (sqld-0227·0417·0756 과 짝) | PostgreSQL 16 → frame end 오류, DESC FIRST_VALUE NULL 확인. 390px 표 확인 |
 | ai-mock-027 | 다중 칼럼 서브쿼리 설명 고르기 | 단일 칼럼 IN(급여만)과 (부서, 급여) IN 결과 비교 — 다른 부서 최고 급여와 같은 행이 끼어듦 | PostgreSQL 16 → (가) 가, 나, 다, 마 / (나) 가, 다, 마. 390px 화면 확인. 사본 없음 |
 | ai-mock-009 | 집합 연산자 설명 고르기 | 칼럼 수·타입 불일치, 중간 ORDER BY 오류와 끝 ORDER BY 별칭 정상 | PostgreSQL 16 → ①②③ 오류(칼럼 수, integer·date, syntax), ④ 실행. 390px 화면 확인. 사본 없음 |
+| ai-mock-052 | MERGE 특징 고르기 | UPDATE 뒤 DELETE WHERE(바뀐 값 기준)·INSERT WHERE 가 있는 MERGE 결과 행 수·합계 | PostgreSQL 16 MERGE(WHEN MATCHED AND … DELETE)로 옮겨 실행 → 3행, 850(1:150, 3:300, 4:400). 390px 화면 확인. 사본 없음 |
