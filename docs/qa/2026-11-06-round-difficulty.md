@@ -1354,3 +1354,5 @@ sqld-0312·0319(M494·M501, 데이터베이스 파티션 기법)도 성능 데�
 | sqld-0094 | USING 문법 오류 고르기 | NULL 구장 팀이 있는 표에서 내부 조인 셋과 (+) 외부 조인의 행 수 비교 | PostgreSQL 16 에서 (+) → LEFT JOIN 으로 옮겨 실행: 2, 2, 2, 3행. 390px 화면 확인. 사본 없음 |
 | sqld-0291 | 윈도우 프레임 문법 오류 고르기 | 급여 동률이 있는 표에서 RANGE 와 ROWS 누적합 값 비교 | PostgreSQL 16 → EMPNO 2: RANGE 500, ROWS 300. 390px 화면 확인. 사본 없음 |
 | sqld-0330 | LIKE 세 번째 글자 패턴 고르기 | '__K%' 와 ESCAPE 로 밑줄 문자를 찾는 조건의 행 수 (% 0글자 포함) | PostgreSQL 16 → (가) 3, (나) 2. 390px 화면 확인. 사본 없음 |
+| sqld-0211 | EXISTS SQL 고르기 | 같은 성별 부양가족이 둘인 직원이 있는 표에서 EXISTS 와 조인의 행 수 비교 (조인 중복) | PostgreSQL 16 → EXISTS 1, 조인 2 (성별 조건 빼면 3, 5). 390px 화면 확인. 사본 없음 |
+| sqld-0082 | GROUP BY 밖 칼럼 정렬 오류 | DISTINCT + SELECT 에 없는 칼럼 정렬 오류 vs 별칭·집계·일반 정렬 | PostgreSQL 16 → ② 만 오류(for SELECT DISTINCT, ORDER BY expressions must appear in select list), 나머지 실행됨. 390px 화면 확인. 사본 없음 |

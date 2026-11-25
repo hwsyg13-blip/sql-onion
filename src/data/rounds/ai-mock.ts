@@ -10324,15 +10324,15 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 322,
-    "title": "다음 SQL 중 오류가 발생하는 것은?",
+    "title": "지역별매출(지역, 년, 매출금액) 테이블에 실행했을 때 오류가 나는 SQL 은? (Oracle 기준)",
     "options": [
-      "SELECT 지역, SUM(매출금액) AS 매출금액\nFROM 지역별매출\nGROUP BY 지역\nHAVING SUM(매출금액) > 1000\nORDER BY COUNT(*) ASC;",
-      "SELECT 지역, SUM(매출금액) AS 매출금액\nFROM 지역별매출\nGROUP BY 지역\nORDER BY 년 DESC;",
-      "SELECT 지역, 매출금액\nFROM 지역별매출\nORDER BY 년 ASC;",
-      "SELECT 지역, SUM(매출금액) AS 매출금액\nFROM 지역별매출\nGROUP BY 지역\nORDER BY 매출금액 DESC;"
+      "SELECT 지역, SUM(매출금액) AS 합계 FROM 지역별매출 GROUP BY 지역 ORDER BY 합계 DESC;",
+      "SELECT DISTINCT 지역 FROM 지역별매출 ORDER BY 년 DESC;",
+      "SELECT 지역 FROM 지역별매출 GROUP BY 지역 ORDER BY MAX(년) DESC;",
+      "SELECT 지역, 매출금액 FROM 지역별매출 ORDER BY 년 DESC;"
     ],
     "correctIndex": 1,
-    "explanation": "GROUP BY 를 쓰면 ORDER BY 에는 GROUP BY 컬럼이나 집계 함수만 올 수 있다. ② 는 GROUP BY 에 없는 년 으로 정렬해 오류가 난다. ③ 은 GROUP BY 가 없어 SELECT 에 없는 컬럼으로도 정렬할 수 있다. 정답은 ② 이다.",
+    "explanation": "DISTINCT 를 쓰면 중복을 없앤 결과에는 '년' 이 남지 않는다. 같은 지역에 년이 여러 개라면 어느 값으로 정렬할지 정할 수 없어서, ORDER BY 에는 SELECT 목록에 있는 식만 올 수 있다. 그래서 ② 는 ORA-01791 오류가 난다. PostgreSQL 에서도 같은 문장이 오류로 끝난다. 정답은 ②번이다. ① ORDER BY 에는 SELECT 의 별칭을 쓸 수 있다(HAVING 에는 쓸 수 없다). ③ GROUP BY 가 있을 때 ORDER BY 에는 SELECT 에 없더라도 그룹마다 하나로 정해지는 집계 함수를 쓸 수 있다. ④ GROUP BY 도 DISTINCT 도 없으면 SELECT 에 없는 칼럼으로도 정렬할 수 있다.",
     "chapter": "그룹 함수",
     "_source": "sqld-1140",
     "_origId": "sqld-0082",
@@ -13497,20 +13497,88 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 411,
-    "title": "다음 중 자신과 성별이 같은 부양가족을 가진 직원의 이름을 검색하는 질의를 SQL로 적절하게 표현한 것을 고르시오.",
+    "title": "아래 두 테이블에 (가), (나) 를 실행했을 때 결과 행 수로 옳은 것은?",
     "options": [
-      "SELECT E.이름\nFROM 직원 AS E\nWHERE NOT EXISTS (SELECT * FROM 부양가족 WHERE E.직원번호 = 직원번호 AND E.성별 = 성별);",
-      "SELECT E.이름\nFROM 직원 AS E\nWHERE EXISTS (SELECT * FROM 부양가족 WHERE E.직원번호 = 직원번호 AND E.성별 = 성별);",
-      "SELECT E.이름\nFROM 직원 AS E\nWHERE NOT EXISTS (SELECT * FROM 부양가족 WHERE E.직원번호 = 직원번호);",
-      "SELECT E.이름\nFROM 직원 AS E\nWHERE E.직원번호 LIKE (SELECT 직원번호 FROM 부양가족 WHERE E.성별 = 성별);"
+      "(가) 1 / (나) 1",
+      "(가) 1 / (나) 2",
+      "(가) 1 / (나) 3",
+      "(가) 3 / (나) 5"
     ],
     "correctIndex": 1,
-    "explanation": "'자신과 성별이 같은 부양가족이 있는 직원' 이므로, 부양가족 중 직원번호와 성별이 모두 같은 행이 있는지 EXISTS 로 확인한다(②). ① 은 NOT EXISTS 라 그런 부양가족이 없는 직원, ③ 은 부양가족이 아예 없는 직원을 찾는다. ④ 는 여러 행을 돌려줄 수 있는 서브쿼리를 LIKE 로 비교해 오류가 난다.",
+    "explanation": "두 SQL 모두 '자신과 성별이 같은 부양가족이 있는 직원' 을 찾는다. 조건에 맞는 짝은 김(남)–첫째(남), 김(남)–둘째(남) 둘뿐이다. (가) 의 EXISTS 는 맞는 행이 하나라도 있는지만 보고 직원 한 명을 한 번만 내보내 1행이다. (나) 의 조인은 맞는 짝마다 한 행씩 만들어 김이 두 번 나와 2행이다. 정답은 ②번이다. ① 은 조인도 중복을 없애 준다고 착각한 결과다. ③ 은 (나) 에서 성별 조건을 빼고 김의 부양가족 셋을 모두 붙였다. ④ 는 두 SQL 모두 성별 조건을 무시한 값이다.",
     "chapter": "서브쿼리",
     "_source": "sqld-1140",
     "_origId": "sqld-0211",
     "_category": "서브쿼리",
-    "_correctRate": 10
+    "_correctRate": 10,
+    "references": [
+      {
+        "type": "table",
+        "caption": "직원",
+        "headers": [
+          "직원번호",
+          "이름",
+          "성별"
+        ],
+        "rows": [
+          [
+            "1",
+            "김",
+            "남"
+          ],
+          [
+            "2",
+            "이",
+            "여"
+          ],
+          [
+            "3",
+            "박",
+            "남"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "부양가족",
+        "headers": [
+          "직원번호",
+          "가족명",
+          "성별"
+        ],
+        "rows": [
+          [
+            "1",
+            "첫째",
+            "남"
+          ],
+          [
+            "1",
+            "둘째",
+            "남"
+          ],
+          [
+            "1",
+            "셋째",
+            "여"
+          ],
+          [
+            "2",
+            "아들",
+            "남"
+          ],
+          [
+            "3",
+            "어머니",
+            "여"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "-- (가)\nSELECT E.이름\nFROM   직원 E\nWHERE EXISTS (\n  SELECT 1 FROM 부양가족 D\n  WHERE D.직원번호 = E.직원번호\n    AND D.성별 = E.성별);\n\n-- (나)\nSELECT E.이름\nFROM   직원 E\nJOIN   부양가족 D\n  ON   D.직원번호 = E.직원번호\n AND   D.성별 = E.성별;"
+      }
+    ]
   },
   {
     "id": 11211,
