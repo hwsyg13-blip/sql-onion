@@ -19207,6 +19207,33 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
+    "id": 11347,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 548,
+    "title": "아래 계좌 이체 상황 (가)~(라) 와 트랜잭션 특성을 바르게 짝지은 것은?",
+    "options": [
+      "(가) 원자성 (나) 일관성 (다) 고립성 (라) 지속성",
+      "(가) 일관성 (나) 원자성 (다) 고립성 (라) 지속성",
+      "(가) 원자성 (나) 고립성 (다) 일관성 (라) 지속성",
+      "(가) 지속성 (나) 일관성 (다) 고립성 (라) 원자성"
+    ],
+    "correctIndex": 0,
+    "explanation": "원자성은 트랜잭션의 작업이 모두 반영되거나 하나도 반영되지 않는 성질이라 (가) 에 해당한다. 일관성은 트랜잭션 전후로 정해 둔 규칙(무결성)이 지켜지는 성질이라 (나), 고립성은 동시에 실행되는 트랜잭션이 서로의 중간 결과를 보지 않는 성질이라 (다), 지속성은 커밋된 결과가 장애 뒤에도 남는 성질이라 (라) 다. 정답은 ①번이다. 나머지 보기는 원자성과 일관성, 일관성과 고립성, 원자성과 지속성을 서로 바꾸었다. '통합성' 은 트랜잭션 특성(ACID)에 들어가지 않는다.",
+    "chapter": "트랜잭션 관리",
+    "_source": "sqld-1140",
+    "_origId": "sqld-0378",
+    "_category": "트랜잭션 관리",
+    "_correctRate": 10,
+    "references": [
+      {
+        "type": "text",
+        "content": "(가) A 계좌 출금 뒤 B 계좌 입금 전에 장애가 나자, 출금까지 모두 취소되었다.\n(나) '잔액은 0 이상' 규칙이 있어, 잔액보다 큰 금액의 이체는 처리 후에도 규칙이 깨지지 않도록 거부되었다.\n(다) 같은 계좌로 이체 두 건이 동시에 처리되었지만, 한쪽이 다른 쪽의 처리 중간 금액을 읽지 않았다.\n(라) 커밋 직후 서버 전원이 꺼졌지만, 다시 켜자 이체 결과가 그대로 남아 있었다."
+      }
+    ]
+  },
+  {
     "id": 11348,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
@@ -19912,27 +19939,6 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11374,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 575,
-    "title": "다음 중 데이터베이스에서 작업을 처리하는 트랜잭션의 특징에 해당되지 않는 것은?",
-    "options": [
-      "일관성",
-      "통합성",
-      "고립성",
-      "원자성"
-    ],
-    "correctIndex": 1,
-    "explanation": "트랜잭션의 특성(ACID)은 원자성(Atomicity), 일관성(Consistency), 고립성(Isolation), 지속성(Durability)이다. 통합성은 ACID 에 해당하지 않는다. (고립성은 교재에 따라 독립성·격리성이라고도 부른다.)",
-    "chapter": "트랜잭션 관리",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0411",
-    "_category": "트랜잭션 관리",
-    "_correctRate": 10
-  },
-  {
     "id": 11375,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
@@ -20078,20 +20084,62 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 580,
-    "title": "다음 중 차집합을 구할 수 있는 집합 연산자로 올바른 것은?",
+    "title": "아래 두 테이블에 (가), (나) 를 실행했을 때 결과로 옳은 것은? (행 순서는 무시하며, Oracle 의 MINUS 는 표준 EXCEPT 와 같다)",
     "options": [
-      "intersect",
-      "except",
-      "union all",
-      "union"
+      "(가) 1, 1, NULL, NULL / (나) 1, 1",
+      "(가) 1, NULL / (나) 1, 1",
+      "(가) 1, NULL / (나) 1, NULL",
+      "(가) 1 / (나) 1, 1, NULL, NULL"
     ],
     "correctIndex": 1,
-    "explanation": "차집합은 except 다(②, Oracle 에서는 MINUS). intersect 는 교집합, union all 은 중복 포함 합집합, union 은 중복 제거 합집합이다.",
+    "explanation": "MINUS(EXCEPT) 는 A 에만 있는 행을 중복 없이 돌려주고, 집합 연산에서는 NULL 끼리 같은 값으로 묶는다. A 에서 B 의 2 를 빼면 1 과 NULL 이 남고 중복이 없어져 (가) 는 1, NULL 두 행이다. (나) 의 NOT IN 은 A 의 행을 하나씩 V <> 2 로 비교해 남기므로 중복 1 두 개가 그대로 나온다. V 가 NULL 인 행은 NULL <> 2 가 UNKNOWN 이라 빠진다. 정답은 ②번이다. ① 은 MINUS 가 중복을 남긴다고 보았다. ③ 은 NOT IN 도 NULL 행을 남긴다고 착각했고 중복도 없앴다. ④ 는 두 연산의 NULL 처리를 거꾸로 적용했다. PostgreSQL 16(EXCEPT)에서도 (가) 1, NULL / (나) 1, 1 이다.",
     "chapter": "집합 연산자",
     "_source": "sqld-1140",
     "_origId": "sqld-0416",
     "_category": "집합 연산자",
-    "_correctRate": 10
+    "_correctRate": 10,
+    "references": [
+      {
+        "type": "table",
+        "caption": "A",
+        "headers": [
+          "V"
+        ],
+        "rows": [
+          [
+            "1"
+          ],
+          [
+            "1"
+          ],
+          [
+            "2"
+          ],
+          [
+            "NULL"
+          ],
+          [
+            "NULL"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "B",
+        "headers": [
+          "V"
+        ],
+        "rows": [
+          [
+            "2"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "-- (가)\nSELECT V FROM A\nMINUS\nSELECT V FROM B;\n\n-- (나)\nSELECT V FROM A\nWHERE  V NOT IN (SELECT V FROM B);"
+      }
+    ]
   },
   {
     "id": 11380,
