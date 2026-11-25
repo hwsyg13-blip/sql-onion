@@ -142,15 +142,15 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 7,
-    "title": "집합 연산자(Set Operator)를 사용한 쿼리의 특징으로 옳지 않은 것은?",
+    "title": "A(이름 VARCHAR2, 급여 NUMBER), B(성명 VARCHAR2, 입사일 DATE) 테이블에 대해 오류 없이 실행되는 SQL 은?",
     "options": [
-      "UNION ALL은 두 질의의 결과를 중복 제거 없이 단순히 더하므로 정렬 작업이 발생하지 않아 UNION보다 성능상 유리하다.",
-      "INTERSECT 연산자는 두 질의의 결과에 모두 존재하는 교집합을 반환하며 중복된 행은 하나만 출력한다.",
-      "UNION은 두 질의의 결과를 합치면서 중복된 행을 제거하며, 이 과정에서 내부적으로 정렬(Sort) 작업이 발생할 수 있다.",
-      "MINUS(또는 EXCEPT) 연산자를 사용할 때, 첫 번째 쿼리의 컬럼 수와 데이터 타입은 두 번째 쿼리와 달라도 무방하다."
+      "SELECT 이름, 급여 FROM A UNION SELECT 성명 FROM B;",
+      "SELECT 이름, 급여 FROM A UNION SELECT 성명, 입사일 FROM B;",
+      "SELECT 이름 FROM A ORDER BY 이름 UNION SELECT 성명 FROM B;",
+      "SELECT 이름 AS NM FROM A UNION SELECT 성명 FROM B ORDER BY NM;"
     ],
     "correctIndex": 3,
-    "explanation": "집합 연산자는 MINUS 를 포함해 모두 위·아래 SELECT 의 컬럼 수가 같고, 같은 자리끼리 타입이 맞아야 실행된다. 달라도 된다는 ④가 틀렸다.",
+    "explanation": "집합 연산자로 위아래 결과를 합치려면 칼럼 수가 같고, 같은 자리 칼럼의 데이터 타입이 서로 맞아야 한다. 결과 칼럼 이름은 첫 번째 SELECT 를 따르고, ORDER BY 는 맨 끝에 한 번만 쓴다. ④ 는 칼럼 수(1개)와 타입(문자)이 맞고, 끝의 ORDER BY 에서 첫 SELECT 의 별칭 NM 을 썼으므로 실행된다. 정답은 ④번이다. ① 은 칼럼 수가 2개와 1개로 달라 오류다. ② 는 두 번째 칼럼이 NUMBER 와 DATE 로 타입이 맞지 않아 오류다. ③ 은 집합 연산 중간의 SELECT 에 ORDER BY 를 써서 오류다. PostgreSQL 16 에서도 ①·②·③ 은 오류, ④ 는 김, 박, 이 순으로 나온다.",
     "chapter": "집합 연산자",
     "_source": "ai-mock",
     "_origId": "ai-mock-009"
@@ -667,18 +667,60 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 22,
-    "title": "다중 컬럼 서브쿼리(Multi-Column Subquery)에 대한 설명 중 적절하지 않은 것은?",
+    "title": "아래 사원 테이블에 (가), (나) 를 실행한 결과로 옳은 것은?",
     "options": [
-      "주로 IN 연산자와 결합하여 (컬럼1, 컬럼2) IN (서브쿼리) 형태로 사용된다.",
-      "서브쿼리의 결과가 여러 컬럼으로 반환되며, 메인 쿼리 조건절과 동시에 비교된다.",
-      "오라클(Oracle) 등 일부 DBMS에서는 지원하지만, 모든 DBMS가 지원하는 표준 문법은 아니다.",
-      "메인 쿼리에서 비교할 컬럼의 순서와 서브쿼리에서 반환하는 컬럼의 순서는 달라도 이름만 같으면 무방하다."
+      "(가) 가, 다, 마 / (나) 가, 다, 마",
+      "(가) 가, 나, 다, 마 / (나) 가, 나, 다, 마",
+      "(가) 가, 다, 마 / (나) 가, 나, 다, 마",
+      "(가) 가, 나, 다, 마 / (나) 가, 다, 마"
     ],
     "correctIndex": 3,
-    "explanation": "(컬럼1, 컬럼2) IN (SELECT …) 는 이름이 아니라 적은 순서대로 짝지어 비교한다. 순서가 다르면 엉뚱한 컬럼끼리 비교된다. 이름만 같으면 된다는 ④가 틀렸다.",
+    "explanation": "부서별 최고 급여는 A 300, B 200, C 300 이다. (가) 는 급여만 비교하므로 300 이나 200 이면 부서와 상관없이 뽑힌다. A 부서의 '나' 는 자기 부서 최고가 아닌데도 B 부서 최고 급여 200 과 같아 함께 나와 가, 나, 다, 마 4명이다. (나) 는 (부서, 급여) 쌍을 한꺼번에 비교하는 다중 칼럼 서브쿼리라 (A, 300), (B, 200), (C, 300) 과 정확히 같은 가, 다, 마만 나온다. 비교 칼럼의 순서와 개수는 서브쿼리의 SELECT 목록과 맞아야 한다. 정답은 ④번이다. ① 은 (가) 도 부서별로 비교된다고 착각했다. ② 는 (나) 도 급여만 맞으면 된다고 보았다. ③ 은 두 결과를 바꾸었다. PostgreSQL 16 에서도 (가) 4명, (나) 3명이다.",
     "chapter": "서브쿼리",
     "_source": "ai-mock",
-    "_origId": "ai-mock-027"
+    "_origId": "ai-mock-027",
+    "references": [
+      {
+        "type": "table",
+        "caption": "사원",
+        "headers": [
+          "이름",
+          "부서",
+          "급여"
+        ],
+        "rows": [
+          [
+            "가",
+            "A",
+            "300"
+          ],
+          [
+            "나",
+            "A",
+            "200"
+          ],
+          [
+            "다",
+            "B",
+            "200"
+          ],
+          [
+            "라",
+            "B",
+            "100"
+          ],
+          [
+            "마",
+            "C",
+            "300"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "-- (가)\nSELECT 이름 FROM 사원\nWHERE  급여 IN\n       (SELECT MAX(급여) FROM 사원\n        GROUP  BY 부서);\n\n-- (나)\nSELECT 이름 FROM 사원\nWHERE  (부서, 급여) IN\n       (SELECT 부서, MAX(급여)\n        FROM   사원\n        GROUP  BY 부서);"
+      }
+    ]
   },
   {
     "id": 10822,
