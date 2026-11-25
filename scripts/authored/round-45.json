@@ -983,22 +983,22 @@
     {
       "subject": "2과목",
       "number": 26,
-      "title": "아래 두 테이블 A, B 에 대한 네 SQL 중 FULL OUTER JOIN 의 결과와 다른 것은?",
+      "title": "아래 두 테이블에 대한 ㉠~㉣ 의 결과 행 수를 차례로 나열한 것은? (A 에는 똑같은 행이 두 번 들어 있다)",
       "options": [
-        "SELECT * FROM A FULL OUTER JOIN B ON A.KEY = B.KEY;",
-        "SELECT * FROM A FULL JOIN B ON A.KEY = B.KEY;",
-        "(A LEFT OUTER JOIN B) UNION (A RIGHT OUTER JOIN B)",
-        "(A LEFT OUTER JOIN B) UNION ALL (A RIGHT OUTER JOIN B)"
+        "4, 4, 6, 4",
+        "4, 3, 6, 3",
+        "3, 3, 6, 3",
+        "4, 3, 6, 4"
       ],
       "correctIndex": 3,
-      "explanation": "FULL OUTER JOIN 은 양쪽에 짝이 있는 KEY 2, 3 을 한 번씩, 짝이 없는 1(A 쪽)과 4(B 쪽)를 NULL 과 함께 돌려줘 4행이다. ① 과 ② 는 같은 문법(FULL JOIN 은 OUTER 를 생략한 것)이다. ③ 은 LEFT 결과(1, 2, 3)와 RIGHT 결과(2, 3, 4)를 UNION 으로 합치면서 겹치는 2, 3 이 한 번만 남아 FULL OUTER JOIN 과 같다. ④ UNION ALL 은 중복을 남기므로 2, 3 이 두 번씩 나와 6행이 되어 결과가 다르다.",
+      "explanation": "㉠ FULL OUTER JOIN 은 KEY 1 이 B 없이 1행, KEY 2 는 A 의 두 행이 B 의 한 행과 각각 맞아 같은 내용의 2행, KEY 3 이 A 없이 1행으로 4행이다. ㉡ 은 LEFT(3행)와 RIGHT(3행)를 UNION 하는데, UNION 은 중복을 없애므로 KEY 2 의 같은 두 행이 한 행으로 합쳐져 3행이 된다. 원래 데이터에 있던 중복까지 사라지는 것이다. ㉢ UNION ALL 은 겹치는 KEY 2 행을 양쪽에서 모두 가져와 6행이다. ㉣ 은 RIGHT 쪽에서 A 에 짝이 없는 행(KEY 3)만 붙이므로 3 + 1 = 4 행으로 FULL OUTER JOIN 과 같다. 정답은 ④번이다. ① 은 UNION 이 원래 데이터의 중복은 남긴다고 본 값이다. ② 는 ㉣ 에서도 중복이 합쳐진다고 본 값이다. ③ 은 FULL OUTER JOIN 도 같은 행을 하나로 합친다고 본 값이다.",
       "references": [
         {
           "type": "table",
-          "caption": "A 테이블",
+          "caption": "A",
           "headers": [
             "KEY",
-            "VAL_A"
+            "VAL"
           ],
           "rows": [
             [
@@ -1010,17 +1010,17 @@
               "AA2"
             ],
             [
-              "3",
-              "AA3"
+              "2",
+              "AA2"
             ]
           ]
         },
         {
           "type": "table",
-          "caption": "B 테이블",
+          "caption": "B",
           "headers": [
             "KEY",
-            "VAL_B"
+            "VAL"
           ],
           "rows": [
             [
@@ -1030,12 +1030,12 @@
             [
               "3",
               "BB3"
-            ],
-            [
-              "4",
-              "BB4"
             ]
           ]
+        },
+        {
+          "type": "sql",
+          "code": "-- ㉠\nSELECT * FROM A FULL OUTER JOIN B\n    ON A.KEY = B.KEY;\n-- ㉡\nSELECT * FROM A LEFT JOIN B\n    ON A.KEY = B.KEY\nUNION\nSELECT * FROM A RIGHT JOIN B\n    ON A.KEY = B.KEY;\n-- ㉢ ㉡ 의 UNION 을 UNION ALL 로\n-- ㉣\nSELECT * FROM A LEFT JOIN B\n    ON A.KEY = B.KEY\nUNION ALL\nSELECT * FROM A RIGHT JOIN B\n    ON A.KEY = B.KEY\nWHERE  A.KEY IS NULL;"
         }
       ]
     },

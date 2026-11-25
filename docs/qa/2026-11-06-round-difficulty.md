@@ -1310,3 +1310,5 @@ sqld-0312·0319(M494·M501, 데이터베이스 파티션 기법)도 성능 데�
 | 60-2-28 | PK 중복 INSERT 고르기 | INSERT … SELECT 한 문장에서 한 행이 PK 위반이면 문장 전체 취소, NOT IN 으로 걸러 다시 넣기 | PostgreSQL 16 → ㉠ 뒤 2행(오류), ㉡ 뒤 4행 |
 | 60-2-40 | WHERE 별칭 오류 위치 | 처리 순서로 별칭 사용 가능 절 판단(WHERE·HAVING·GROUP BY 불가, ORDER BY 별칭·위치 번호 가능), Oracle 19c 기준 명시 | PostgreSQL 16: WHERE·HAVING 별칭 오류, ORDER BY 별칭·번호 정상. GROUP BY 별칭은 PG 가 허용(Oracle 19c 는 ORA-00904, 23ai 부터 허용) — 해설에 명시 |
 | 60-2-50 | HAVING MAX > 10 설명 | WHERE vs HAVING, COUNT(*) 와 NULL, SUM 의 NULL 제외 | PostgreSQL 16 → ㉠ C001 3·C003 2, ㉡ C001 1, ㉢ 2행 |
+| 52-2-14 | PRIOR 위치 빈칸 | 네 가지 CONNECT BY(PRIOR 위치·등호 양쪽 바꾸기·시작점)의 행 수 | PostgreSQL 16 재귀 CTE 로 같은 전개 → 5, 1, 4, 3 |
+| 45-2-26 | FULL OUTER 와 다른 집합 연산 고르기 | A 에 똑같은 행 두 번 → UNION 이 원래 중복까지 합침, UNION ALL, 반조인 UNION ALL | PostgreSQL 16 → 4, 3, 6, 4 |
