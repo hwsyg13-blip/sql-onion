@@ -1,5 +1,5 @@
 // Auto-generated from scripts/authored/ai-mock.json
-// AI 생성 모의고사 풀 (기출 변형) · 1170문항
+// AI 생성 모의고사 풀 (기출 변형) · 1169문항
 // ⚠ 직접 편집 금지. ai-mock.json 수정 후 'node scripts/build-quiz-bank.mjs' 재실행.
 import type { QuizQuestion } from '../quizBank';
 
@@ -27975,20 +27975,26 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "1과목",
     "number": 800,
-    "title": "다음 설명 중 가장 적절하지 않은 것은?",
+    "title": "Oracle 에서 빈 테이블 T 에 아래 문장을 순서대로 실행했을 때, ㉠ 의 결과와 마지막 COUNT 로 옳은 것은?",
     "options": [
-      "NULL값이 삽입되어 있는 경우 UNIQUE 제약조건을 추가할 수 없다.",
-      "이미 존재하는 컬럼에 대해 NOT NULL 제약조건 추가 시 반드시 MODIFY로 처리한다.",
-      "제약 조건 추가 시 제약조건 이름을 명시하지 않을 수 있다.",
-      "외래키를 생성 한 경우 부모 테이블의 참조키 컬럼을 삭제할 수 없다."
+      "㉠ 은 오류가 나고, COUNT 는 2 다.",
+      "㉠ 은 3 만 취소하고, COUNT 는 2 다.",
+      "㉠ 은 2·3 을 취소하고, COUNT 는 1 이다.",
+      "㉠ 은 오류가 나고, COUNT 는 3 이다."
     ],
     "correctIndex": 0,
-    "explanation": "UNIQUE 는 NULL 을 허용하므로, NULL 이 들어 있어도 NULL 이 아닌 값끼리 중복만 없으면 UNIQUE 제약을 추가할 수 있다. ① 이 틀렸다. ② 이미 있는 칼럼의 NOT NULL 은 MODIFY 로 추가하고, ③ 제약조건 이름은 생략할 수 있으며(자동 생성), ④ 자식이 참조 중인 부모 키 칼럼은 그냥 삭제할 수 없다.",
+    "explanation": "COMMIT 을 하면 트랜잭션이 끝나면서 그 안에서 만든 저장점도 모두 사라진다. 그래서 COMMIT 뒤의 ROLLBACK TO SP1 은 없는 저장점을 찾게 되어 오류(ORA-01086)가 난다. 이어지는 ROLLBACK 은 COMMIT 뒤에 넣은 3 만 취소하므로 1, 2 가 남아 COUNT 는 2 다. 정답은 ①번이다. ② 는 저장점이 COMMIT 뒤에도 남는다고 착각한 결과다. ③ 은 커밋된 2 까지 되돌릴 수 있다고 보았다. ④ 는 마지막 ROLLBACK 이 3 을 취소한다는 점을 빠뜨렸다. PostgreSQL 16 에서 COMMIT 뒤 새 트랜잭션을 열어 같은 순서로 실행해도 savepoint does not exist 오류가 나고 COUNT 는 2 다.",
     "chapter": "데이터 무결성",
     "_source": "sqld-1140",
     "_origId": "sqld-0719",
     "_category": "데이터 무결성",
-    "_correctRate": 10
+    "_correctRate": 10,
+    "references": [
+      {
+        "type": "sql",
+        "code": "INSERT INTO T VALUES (1);\nSAVEPOINT SP1;\nINSERT INTO T VALUES (2);\nCOMMIT;\nINSERT INTO T VALUES (3);\nROLLBACK TO SP1;   -- ㉠\nROLLBACK;\nSELECT COUNT(*) FROM T;"
+      }
+    ]
   },
   {
     "id": 11600,
@@ -29235,27 +29241,6 @@ export const AI_MOCK: QuizQuestion[] = [
         ]
       }
     ]
-  },
-  {
-    "id": 11633,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 834,
-    "title": "다음 설명 중 가장 적절하지 않은 것은?",
-    "options": [
-      "SAVEPOINT 지점이 COMMIT 이전일때 해당 SAVEPOINT까지 ROLLBACK 시도 시 COMMIT이후 까지만 ROLLBACK 된다.",
-      "ROLLBACK을 한 명령을 다시 ROLLBACK으로 취소할 수 없다.",
-      "INSERT 한 이후 컬럼 추가 시 INSERT 값은 자동 저장되어 ROLLBACK 할 수 없다.",
-      "COMMIT을 한 이후에는 ROLLBACK을 수행해도 이전 값으로 돌아갈 수 없다."
-    ],
-    "correctIndex": 0,
-    "explanation": "COMMIT 을 하면 그 앞에 만든 SAVEPOINT 는 모두 사라진다. 그래서 COMMIT 뒤에 ROLLBACK TO SP1 을 실행하면 '저장점이 없다'는 오류가 나고 아무것도 취소되지 않는다 → ①이 틀렸다. ② ROLLBACK 자체를 다시 되돌릴 수는 없고, ③ 컬럼 추가(ALTER, DDL)는 자동 COMMIT 이라 앞의 INSERT 도 확정되며, ④ COMMIT 한 뒤에는 ROLLBACK 해도 돌아오지 않는다.",
-    "chapter": "트랜잭션 관리",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0766",
-    "_category": "트랜잭션 관리",
-    "_correctRate": 10
   },
   {
     "id": 11634,

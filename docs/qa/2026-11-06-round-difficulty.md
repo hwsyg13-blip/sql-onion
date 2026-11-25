@@ -1397,3 +1397,4 @@ sqld-0312·0319(M494·M501, 데이터베이스 파티션 기법)도 성능 데�
 | sqld-0018 | 속성 명명 규칙 고르기 | 속성명 후보 넷 중 규칙 위반(여러 엔터티 같은 이름·서술식) 고르기 | 교재 정의 대조. 390px 화면 확인. 사본 없음 |
 | sqld-0227 | ROW_NUMBER 이름 고르기 | 동점이 있을 때 실행마다 값이 흔들리는 순위식 고르기 (보조 정렬 기준 유무) | PostgreSQL 16 → RANK 1·2·2·4, DENSE_RANK 1·2·2·3, ROW_NUMBER 동점 행끼리 순서 미정, 이름 보조 정렬 시 1·2·3·4. 390px 화면 확인. 사본 없음 |
 | sqld-0535 | NULL 아닌 결과 고르기 | 단순 CASE·= NULL·NVL2(NULLIF)·DECODE 의 NULL 비교 차이 | PostgreSQL 16 → ①②③ 'N', DECODE 는 Oracle 전용이라 IS NOT DISTINCT FROM 으로 옮기면 'Y'(해설에 명시). 390px 화면 확인. 사본 없음 |
+| sqld-0766 (+ 사본 0719) | TCL 설명 고르기 | COMMIT 뒤 ROLLBACK TO 저장점(오류)과 마지막 ROLLBACK 뒤 COUNT | PostgreSQL 16 → savepoint does not exist 오류, COUNT 2. 0719 는 같은 문항이라 같은 내용으로 맞춤 → 중복 제외 251(남은 풀 1169). 390px 화면 확인 |
