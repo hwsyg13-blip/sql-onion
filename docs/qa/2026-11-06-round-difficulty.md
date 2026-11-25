@@ -1366,3 +1366,5 @@ sqld-0312·0319(M494·M501, 데이터베이스 파티션 기법)도 성능 데�
 | sqld-0110 | 계층형 질의 설명 고르기 | CONNECT BY 절 조건(가지째 잘림)과 WHERE 조건(그 행만 빠짐)의 행 수 차이 | PostgreSQL 16 재귀 CTE 로 옮겨 실행 → 3행, 5행. 390px 화면 확인. 사본 없음 |
 | sqld-0122 | 뷰 설명 고르기 | 뷰 생성 뒤 원본 INSERT·뷰 UPDATE·뷰 INSERT(조건 밖 행) 결과 판단 | PostgreSQL 16 → V10 3행, 원본 사번 1 급여 400, 뷰로 넣은 행은 부서 NULL·V10 0행. 390px 화면 확인. 사본 없음 |
 | sqld-0224 | ORDER BY 설명 고르기 | CASE 식 정렬 + 두 번째 키 DESC, NULL 등급이 ELSE 로 가는지 | PostgreSQL 16 → 라, 나, 다, 마, 가. 390px 화면 확인. 사본 없음 |
+| sqld-0126 | CUBE·ROLLUP 설명 고르기 | 같은 표에 ROLLUP·CUBE·GROUPING SETS 를 바꿔 넣은 결과 행 수 | PostgreSQL 16 → 6, 8, 4. 390px 화면 확인. 사본 없음 |
+| sqld-0130 | 윈도우 함수 설명 고르기 | GROUP BY 와 PARTITION BY 윈도우 합계의 행 수·값 비교 (ORDER BY 없는 윈도우 = 파티션 전체) | PostgreSQL 16 → GROUP BY 2행, 윈도우 3행(A 400, 400). 390px 화면 확인. 사본 없음 |

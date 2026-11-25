@@ -11626,20 +11626,52 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 351,
-    "title": "다음 설명 중 가장 적절한 것은?",
+    "title": "아래 판매 테이블에 GROUP BY 절만 바꿔 실행했을 때 (가) ROLLUP, (나) CUBE, (다) GROUPING SETS 의 결과 행 수로 옳은 것은?",
     "options": [
-      "CUBE 그룹 함수는 인자로 주어진 컬럼의 결합 가능한 모든 조합에 대해서 집계를 수행하므로 다른 그룹 함수에 비해 시스템에 대한 부하가 크다.",
-      "CUBE, ROLLUP, GROUPING SETS 함수들의 대상 컬럼 중 집계된 컬럼 이외의 대상 컬럼 값은 해당 컬럼의 데이터 중 가장 작은 값을 반환한다.",
-      "GROUPING SETS 함수의 경우에는 함수의 인자로 주어진 컬럼의 순서에 따라 결과가 달라지므로 컬럼의 순서가 중요하다.",
-      "일반 그룹 함수를 사용하여 CUBE, GROUPING SETS와 같은 그룹함수와 동일한 결과를 추출할 수 있으나, ROLLUP 그룹 함수와 동일한 결과는 추출할 수 없다."
+      "(가) 6 / (나) 8 / (다) 4",
+      "(가) 6 / (나) 9 / (다) 4",
+      "(가) 6 / (나) 8 / (다) 5",
+      "(가) 5 / (나) 8 / (다) 4"
     ],
     "correctIndex": 0,
-    "explanation": "② CUBE, ROLLUP, GROUPING SETS 함수들에 의해 집계된 레코드에서 집계 대상 컬럼 이외의 GROUP 대상 컬럼의 값은 NULL을 반환한다.\n③ 함수의 인자로 주어진 컬럼의 순서에 따라 다른 결과를 추출하게 되는 그룹 함수는 ROLLUP 이며, 나열된 컬럼에 대해 계층 구조로 집계를 출력한다.\n④ CUBE, GROUPING SETS, ROLLUP 세가지 그룹 함수 모두 일반 그룹 함수로 동일한 결과를 추출할 수 있다.",
+    "explanation": "(가) ROLLUP(지역, 제품) 은 (지역, 제품) 3행 + 지역별 소계 2행(서울, 부산) + 전체 합계 1행으로 6행이다. (나) CUBE 는 여기에 제품별 소계 2행(X, Y)이 더해져 8행이다. (다) GROUPING SETS(지역, 제품) 은 지역별 2행과 제품별 2행만 따로 구해 붙이므로 4행이고, 전체 합계나 (지역, 제품) 상세 행은 없다. 정답은 ①번이다. ② 는 CUBE 를 2 × 2 조합 모두에 상세까지 더해 센 값이다. ③ 은 GROUPING SETS 에도 전체 합계가 붙는다고 착각한 결과다. ④ 는 ROLLUP 의 전체 합계 행을 빠뜨렸다. PostgreSQL 16 에서도 6, 8, 4 행이다.",
     "chapter": "그룹 함수",
     "_source": "sqld-1140",
     "_origId": "sqld-0126",
     "_category": "그룹 함수",
-    "_correctRate": 10
+    "_correctRate": 10,
+    "references": [
+      {
+        "type": "table",
+        "caption": "판매",
+        "headers": [
+          "지역",
+          "제품",
+          "금액"
+        ],
+        "rows": [
+          [
+            "서울",
+            "X",
+            "10"
+          ],
+          [
+            "서울",
+            "Y",
+            "20"
+          ],
+          [
+            "부산",
+            "X",
+            "30"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT 지역, 제품, SUM(금액)\nFROM   판매\n-- (가) GROUP BY ROLLUP(지역, 제품)\n-- (나) GROUP BY CUBE(지역, 제품)\n-- (다) GROUP BY\n--        GROUPING SETS(지역, 제품)"
+      }
+    ]
   },
   {
     "id": 11151,
@@ -11939,20 +11971,48 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 354,
-    "title": "다음 중 윈도우 함수 (Window Function, Analytic Function)에 대한 설명으로 가장 부적절한 것은?",
+    "title": "아래 사원 테이블에 (가), (나) 를 실행했을 때 결과에 대한 설명으로 옳은 것은?",
     "options": [
-      "윈도우 함수 적용 범위는 Partition을 넘을 수 없다.",
-      "윈도우 함수 처리로 인해 결과 건수가 줄어든다.",
-      "Partition 구문이 없으면 전체 집합을 하나의 Partition으로 정의한 것과 동일하다.",
-      "Partition과 Group By 구문은 의미적으로 유사하다."
+      "(가) 2행, (나) 2행이다.",
+      "(가) 2행, (나) 3행이고 (나) 의 A 부서 두 행은 모두 400 이다.",
+      "(가) 2행, (나) 3행이고 (나) 의 A 부서 두 행은 100, 400 이다.",
+      "(가) 3행, (나) 3행이다."
     ],
     "correctIndex": 1,
-    "explanation": "윈도우 함수는 GROUP BY 처럼 행을 묶어 줄이지 않고, 각 행 옆에 계산 결과를 붙여 준다. 그래서 결과 건수는 원래 행 수 그대로다(② 가 틀림). ① 계산 범위는 PARTITION 안으로 한정되고, ③ PARTITION BY 가 없으면 전체가 하나의 파티션이며, ④ 데이터를 나눈다는 점에서 PARTITION BY 와 GROUP BY 는 의미가 비슷하다.",
+    "explanation": "GROUP BY 는 그룹마다 한 행으로 줄이므로 (가) 는 A, B 2행이다. 윈도우 함수는 행 수를 줄이지 않고 각 행 옆에 계산 결과를 붙이므로 (나) 는 3행이다. OVER 안에 ORDER BY 가 없으면 파티션 전체가 윈도우가 되어 A 부서 두 행 모두 100 + 300 = 400 이 나온다. 정답은 ②번이다. ① 은 윈도우 함수도 GROUP BY 처럼 행을 줄인다고 착각한 결과다. ③ 은 ORDER BY 가 있을 때의 누적합처럼 계산했다. ④ 는 GROUP BY 가 행을 줄이지 않는다고 보았다.",
     "chapter": "윈도우 함수",
     "_source": "sqld-1140",
     "_origId": "sqld-0130",
     "_category": "윈도우 함수",
-    "_correctRate": 10
+    "_correctRate": 10,
+    "references": [
+      {
+        "type": "table",
+        "caption": "사원",
+        "headers": [
+          "부서",
+          "급여"
+        ],
+        "rows": [
+          [
+            "A",
+            "100"
+          ],
+          [
+            "A",
+            "300"
+          ],
+          [
+            "B",
+            "200"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "-- (가)\nSELECT 부서, SUM(급여)\nFROM   사원\nGROUP  BY 부서;\n\n-- (나)\nSELECT 부서,\n       SUM(급여) OVER\n         (PARTITION BY 부서)\nFROM   사원;"
+      }
+    ]
   },
   {
     "id": 11154,
