@@ -5577,19 +5577,66 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "1과목",
     "number": 176,
-    "title": "3차정규화에 대한 설명으로 옳은 것을 고르시오.",
+    "title": "아래 사원 테이블을 제3정규형으로 분해한 것으로 가장 적절한 것은?",
     "options": [
-      "속성 간 종속성을 가지면 안 된다.",
-      "모든 속성은 반드시 기본 키 전부에 종속되어야 한다.",
-      "모든 속성은 반드시 하나의 값을 가져야 한다.",
-      "다수의 주식별자를 분리시킨다."
+      "사원(사번, 이름, 부서코드, 부서명) + 지역(부서명, 위치)",
+      "사원(사번, 이름) + 부서(사번, 부서코드, 부서명, 위치)",
+      "사원(사번, 이름, 부서명, 위치) + 부서(부서코드, 부서명)",
+      "사원(사번, 이름, 부서코드) + 부서(부서코드, 부서명, 위치)"
     ],
-    "correctIndex": 0,
-    "explanation": "3정규화는 2정규형에서 식별자가 아닌 일반 속성끼리의 종속(이행 함수 종속)을 제거하는 것이다(①). ② 는 2정규화(부분 함수 종속 제거), ③ 은 1정규화(원자값) 설명이고, ④ 는 정규화 단계 설명이 아니다.",
+    "correctIndex": 3,
+    "explanation": "사번 → 부서코드 → 부서명·위치로 이어지는 이행 함수 종속이 있어 이 테이블은 제2정규형까지만 만족한다. 제3정규형은 주식별자가 아닌 속성끼리의 종속을 떼어 내는 것이므로, 부서코드를 결정자로 하는 부서(부서코드, 부서명, 위치)를 따로 만들고 사원에는 부서코드만 외래키로 남긴다. 다시 조인하면 원래 4행이 그대로 나온다. 정답은 ④번이다. ① 은 부서코드 → 부서명 종속이 사원에 그대로 남고, 부서명이 겹쳐 영업 부서 사원마다 서울·부산이 함께 붙는다. ② 는 부서 테이블 안에 사번 → 부서코드 → 부서명 이행 종속이 그대로 있다. ③ 은 사원에서 부서코드를 빼 버려 부서명으로 다시 조인하면 영업 사원이 D1, D3 에 모두 붙는 가짜 행이 생긴다.",
     "chapter": "속성",
     "_source": "cbt-mock",
     "_origId": "cbt-134",
-    "_cbtOrigNo": 134
+    "_cbtOrigNo": 134,
+    "references": [
+      {
+        "type": "table",
+        "caption": "사원",
+        "headers": [
+          "사번",
+          "이름",
+          "부서코드",
+          "부서명",
+          "위치"
+        ],
+        "rows": [
+          [
+            "101",
+            "김",
+            "D1",
+            "영업",
+            "서울"
+          ],
+          [
+            "102",
+            "이",
+            "D1",
+            "영업",
+            "서울"
+          ],
+          [
+            "103",
+            "박",
+            "D2",
+            "개발",
+            "판교"
+          ],
+          [
+            "104",
+            "최",
+            "D3",
+            "영업",
+            "부산"
+          ]
+        ]
+      },
+      {
+        "type": "text",
+        "content": "함수 종속: 사번 → 이름, 부서코드 / 부서코드 → 부서명, 위치\n부서명은 부서마다 겹칠 수 있다(D1, D3 모두 영업)."
+      }
+    ]
   },
   {
     "id": 10976,
@@ -16993,20 +17040,26 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 516,
-    "title": "다음 중 데이터베이스 관리 언어에 대한 설명으로 올바르지 않은 것은?",
+    "title": "Oracle 에서 아래 문장을 순서대로 실행한 뒤 SELECT SUM(C) FROM T 의 결과로 옳은 것은? (자동 커밋은 꺼져 있다)",
     "options": [
-      "DML은 테이블의 구조를 정의하거나 변경하는 언어이다.",
-      "COMMIT과 ROLLBACK, SAVEPOINT는 TCL 명령어이다.",
-      "DML은 질의를 실행하여 데이터를 조작할 수 있으며 INSERT, UPDATE, SELECT, DELETE구가 있다.",
-      "DDL은 테이블, 뷰, 인덱스 등을 생성하거나 변경하는 것으로 CREATE, ALTER, DROP, RENAME 등이 있다."
+      "4",
+      "NULL",
+      "1",
+      "8"
     ],
     "correctIndex": 0,
-    "explanation": "테이블의 구조를 정의·변경하는 것은 DDL(CREATE, ALTER, DROP, RENAME)이다. DML은 INSERT, UPDATE, DELETE, SELECT 로 데이터를 조작하고, TCL은 COMMIT, ROLLBACK, SAVEPOINT 이다.",
+    "explanation": "Oracle 에서 CREATE, ALTER, DROP 같은 DDL 은 실행 직전과 직후에 커밋을 자동으로 한다. ROLLBACK TO SP1 으로 2 가 취소되어 1 만 남고, 3 을 넣은 뒤 CREATE INDEX 가 실행되면서 1, 3 이 커밋된다. 마지막 ROLLBACK 은 그 뒤에 넣은 4 만 취소하므로 합계는 1 + 3 = 4 다. 정답은 ①번이다. ② 는 DDL 의 자동 커밋을 빠뜨려 마지막 ROLLBACK 이 모든 INSERT 를 취소한다고 착각한 결과다. ③ 은 마지막 ROLLBACK 이 SP1 시점으로 돌아간다고 착각한 결과인데, 커밋이 일어나면 그 전의 저장점도 사라진다. ④ 는 문장마다 커밋된다고 보고 마지막 ROLLBACK 이 아무것도 취소하지 못한다고 착각한 결과다.",
     "chapter": "DML",
     "_source": "sqld-1140",
     "_origId": "sqld-0339",
     "_category": "DML",
-    "_correctRate": 10
+    "_correctRate": 10,
+    "references": [
+      {
+        "type": "sql",
+        "code": "CREATE TABLE T (C NUMBER);\nINSERT INTO T VALUES (1);\nSAVEPOINT SP1;\nINSERT INTO T VALUES (2);\nROLLBACK TO SP1;\nINSERT INTO T VALUES (3);\nCREATE INDEX IX_T ON T (C);\nINSERT INTO T VALUES (4);\nROLLBACK;"
+      }
+    ]
   },
   {
     "id": 11316,

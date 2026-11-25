@@ -1344,3 +1344,5 @@ sqld-0312·0319(M494·M501, 데이터베이스 파티션 기법)도 성능 데�
 | sqld-0232 | NATURAL JOIN 이름 고르기 | 공통 칼럼이 둘(부서코드·지역)인 표에서 NATURAL JOIN 과 USING 결과 행 수 비교 | PostgreSQL 16 → NATURAL 2행, USING 4행. 390px 화면 확인. 사본 없음 |
 | sqld-0186 | 인라인 뷰 이름 고르기 | ROWNUM + ORDER BY 를 같은 층에 둔 SQL 과 인라인 뷰로 먼저 정렬한 SQL 의 결과 비교 | PostgreSQL 16 에서 ROWNUM → 읽기 순서 LIMIT 로 옮겨 실행: (가) B,A (나) B,D. 390px 화면 확인. 사본 없음 |
 | sqld-0391 | ORDER BY 기본 정렬 방향 | 위치 번호 정렬 + NULL 이 섞인 DESC + 두 번째 키 오름차순 결과 순서 | PostgreSQL 16 (NULL 최대값 규칙 Oracle 과 같음) → 나, 다, 가, 라. 390px 화면 확인. 사본 없음 |
+| sqld-0159 (+ 사본 cbt-134) | 3NF 정의 고르기 | 이행 종속이 있는 사원 표를 보고 제3정규형 분해 고르기 (부서명 중복으로 잘못된 분해는 가짜 행) | PostgreSQL 16 재조인 행 수: ④ 4행(원본과 같음), ①·③ 7행. 5열 표 390px 넘침 → 사번·열 이름 줄여 해결. 사본도 같은 내용 |
+| sqld-0339 | DDL/DML 분류 | SAVEPOINT·ROLLBACK TO·DDL 암시적 커밋이 섞인 순서 실행 후 SUM | PostgreSQL 16 에서 CREATE INDEX 뒤 COMMIT 을 넣어 옮겨 실행 → 4. 390px 화면 확인. 사본 없음 |
