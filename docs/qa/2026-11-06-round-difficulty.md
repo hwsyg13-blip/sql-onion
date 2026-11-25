@@ -1392,3 +1392,4 @@ sqld-0312·0319(M494·M501, 데이터베이스 파티션 기법)도 성능 데�
 | sqld-0962 | GRANT 뜻 고르기 | WITH GRANT OPTION 으로 받은 권한을 다시 준 뒤 원래 권한 회수 → 연쇄 회수 | PostgreSQL 16 → CASCADE 없으면 dependent privileges exist 오류(해설에 Oracle 과 차이 명시), CASCADE 후 U1·U2 모두 권한 없음. 390px 화면 확인. 사본 없음 |
 | sqld-0756 | MIN 대신 쓸 윈도우 함수 고르기 | NULL 이 있는 파티션에서 MIN 과 FIRST_VALUE(오름·내림차순) 비교 | PostgreSQL 16 → A 부서 100, 100, NULL. 390px 화면 확인. 사본 없음 |
 | sqld-0169 (+ 같은 제목 cbt-093) | 논리 모델링 이름 고르기 | 작업 셋을 개념·논리·물리 단계로 짝짓기 | 교재 정의 대조. cbt-093 은 제목이 같고 보기만 다른 문항이라 같은 내용으로 맞춤 → 중복 제외 250(남은 풀 1170). 390px 화면 확인 |
+| sqld-0060 | 이상 현상 설명 고르기 | 시간 흐름 셋을 더티·반복 불가능·팬텀 리드로 짝짓고 READ COMMITTED 에서 막히는 것 고르기 | PostgreSQL 16 READ COMMITTED 두 세션 → 미커밋 중 300(더티 리드 없음), 커밋 뒤 500(반복 불가능한 읽기 발생). 390px 화면 확인. 사본 없음 |
