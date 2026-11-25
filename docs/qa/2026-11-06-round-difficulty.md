@@ -1304,3 +1304,5 @@ sqld-0312·0319(M494·M501, 데이터베이스 파티션 기법)도 성능 데�
 | 57-2-34 | NVL(COUNT(*)) 한 문장 | NVL 을 집계 안/밖에 둘 때, COUNT(NVL), 빈 결과의 COUNT | PostgreSQL 16 → 0, 0, NULL, 2, 0 |
 | 52-2-41 | 모두 매칭되는 4가지 조인 행 수 | 중복 키 세 테이블 LEFT→INNER(외부 조인이 걸러짐), LEFT→LEFT, 다른 키로 LEFT, 괄호로 조인 순서 변경 | PostgreSQL 16 → 2, 5, 6, 5 |
 | 47-2-39 | A·B·C 식별 관계 조인 조건 | 고객·주문·주문상세 mermaid ERD(복합 PK 전파)로 조인 경로·조건 판단 | PostgreSQL 16: 주문상세만으로 고객별 합계 = 주문 경유 합계(C1 220, C2 30), 주문과 고객번호 하나로만 조인하면 4행 → 7행으로 늘어남. 390px 캡처로 ERD 확인 |
+| 54-2-35 | 셀프 조인 순위 빈칸 | COUNT(*)+1(RANK)·COUNT(DISTINCT)+1(DENSE_RANK)·>= COUNT, 동점 | PostgreSQL 16 → 김 R1 3·R3 4, 최 R2 4 |
+| 57-2-46 | GROUP BY 에 없는 칼럼 하나 고르기 | GROUP BY JOB, DEPT 와 함께 쓸 수 있는 SELECT 목록 6개(식·함수·상수·집계) | PostgreSQL 16 → ㉢(EMPNO)·㉤(SAL)만 오류 |

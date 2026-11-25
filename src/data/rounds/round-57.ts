@@ -1946,46 +1946,20 @@ export const ROUND_57: QuizQuestion[] = [
     "round": 57,
     "subject": "2과목",
     "number": 46,
-    "title": "아래 EMP 테이블에 대한 SQL 의 괄호에 들어갈 수 없는 컬럼은?",
+    "title": "EMP(EMPNO, JOB, DEPT, SAL) 에 대해 SELECT ( 목록 ) FROM EMP GROUP BY JOB, DEPT; 를 실행할 때, 아래 ㉠~㉥ 중 오류가 나는 목록을 모두 고른 것은?",
     "options": [
-      "EMPNO",
-      "JOB",
-      "DEPT",
-      "NULL"
+      "㉢, ㉤",
+      "㉡, ㉢, ㉤",
+      "㉢, ㉣, ㉤",
+      "㉢, ㉤, ㉥"
     ],
     "correctIndex": 0,
-    "explanation": "`GROUP BY JOB, DEPT` 가 명시된 SQL 에서 SELECT 절에는 GROUP BY 에 포함된 컬럼(JOB, DEPT) 또는 집계 함수만 올 수 있다. ① EMPNO 는 GROUP BY 에 없는 일반 컬럼이라 집계 함수 없이 그대로 쓰면 ORA-00979 오류 발생. ②③ 은 그룹 컬럼이라 OK, ④ NULL 은 상수라 OK.",
+    "explanation": "GROUP BY 를 쓰면 SELECT 에는 그룹마다 값이 하나로 정해지는 것만 올 수 있다. GROUP BY 에 쓴 칼럼(JOB, DEPT)과 그 칼럼만으로 만든 식, 집계 함수, 상수가 여기에 해당한다. ㉢ 의 EMPNO 와 ㉤ 의 SAL 은 그룹 안에 여러 값이 있어 하나로 정할 수 없으므로 오류다. 같은 칼럼이라도 AVG(SAL) 처럼 집계 함수 안에 넣으면 된다. 정답은 ①번이다. ② 는 그룹 칼럼을 이어 붙인 식(㉡)도 안 된다고 본 것이고, ③ 은 그룹 칼럼에 함수를 씌운 식(㉣)도 안 된다고 본 것이다. ④ 는 상수 'X'(㉥)도 GROUP BY 에 없어서 안 된다고 본 것이다.",
     "_source": "authored",
     "references": [
       {
-        "type": "table",
-        "caption": "EMP 테이블",
-        "headers": [
-          "EMPNO",
-          "JOB",
-          "DEPT"
-        ],
-        "rows": [
-          [
-            "1",
-            "CLERK",
-            "10"
-          ],
-          [
-            "2",
-            "MGR",
-            "10"
-          ],
-          [
-            "3",
-            "CLERK",
-            "20"
-          ]
-        ]
-      },
-      {
-        "type": "sql",
-        "code": "SELECT ( ? ), COUNT(EMPNO)\nFROM   EMP\nGROUP BY JOB, DEPT;"
+        "type": "text",
+        "content": "㉠ JOB, COUNT(EMPNO)\n㉡ DEPT || '-' || JOB, MAX(SAL)\n㉢ EMPNO, COUNT(*)\n㉣ UPPER(JOB), SUM(SAL)\n㉤ SAL, AVG(SAL)\n㉥ 'X', COUNT(*)"
       }
     ]
   },
