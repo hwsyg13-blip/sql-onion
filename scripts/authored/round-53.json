@@ -574,19 +574,23 @@
     {
       "subject": "2과목",
       "number": 18,
-      "title": "아래 테이블 DDL 에 대한 설명 중 옳지 않은 것은?",
+      "title": "아래 DDL 로 만든 학생 테이블에 ㉠~㉤ 을 순서대로 하나씩 실행할 때 성공하는 INSERT 만 모두 고른 것은? (학과 테이블에는 학과번호 10, 20 만 있고, 오류가 난 문장만 실패한다)",
       "options": [
-        "학번 컬럼에 DEFAULT 값이 지정되어 있다.",
-        "학생 이름은 NULL 을 허용하지 않는다.",
-        "학과번호는 학과 테이블을 참조한다.",
-        "DEFAULT 때문에 101·102·103 학생 번호로 입력해도 학번에는 NULL 이 들어간다."
+        "㉠, ㉡, ㉢",
+        "㉠, ㉢, ㉣",
+        "㉠, ㉢, ㉤",
+        "㉠, ㉢"
       ],
       "correctIndex": 3,
-      "explanation": "학번에는 DEFAULT 100 이 지정되어 있고(①), 이름은 NOT NULL 이며(②), 학과번호는 학과 테이블을 참조한다(③). DEFAULT 는 INSERT 에서 값을 생략했을 때만 쓰이고, 101·102·103 처럼 값을 넣으면 그 값이 그대로 저장되므로 ④ 가 옳지 않다.",
+      "explanation": "DEFAULT 는 INSERT 에서 그 칼럼을 생략했을 때만 쓰인다. ㉠ 은 학번을 생략해 DEFAULT 100 이 들어가고 학과 10 도 있어 성공한다. ㉡ 도 학번을 생략해 100 이 들어가려 하지만 ㉠ 이 이미 100 을 써서 PRIMARY KEY 중복 오류가 난다. ㉢ 의 학과번호 NULL 은 외래키 검사를 받지 않아 성공한다. ㉣ 은 학과 테이블에 없는 30 을 참조해 외래키 오류, ㉤ 은 NOT NULL 인 이름을 생략해 오류가 난다. 정답은 ④번이다. PostgreSQL 16 에서 같은 순서로 실행하면 학번 100, 101 두 행만 남는다. ① 은 DEFAULT 가 매번 다른 값을 만든다고 착각한 결과다. ② 는 외래키가 없는 값도 받아 준다고 보았다. ③ 은 생략한 이름이 빈 값으로 들어간다고 착각한 결과다.",
       "references": [
         {
           "type": "sql",
-          "code": "CREATE TABLE 학생 (\n  학번 NUMBER DEFAULT 100 PRIMARY KEY,\n  이름 VARCHAR2(30) NOT NULL,\n  학과번호 NUMBER\n    REFERENCES 학과(학과번호)\n);"
+          "code": "CREATE TABLE 학생 (\n  학번 NUMBER DEFAULT 100\n       PRIMARY KEY,\n  이름 VARCHAR2(30) NOT NULL,\n  학과번호 NUMBER\n    REFERENCES 학과(학과번호)\n);"
+        },
+        {
+          "type": "sql",
+          "code": "㉠ INSERT INTO 학생 (이름, 학과번호)\n   VALUES ('김', 10);\n㉡ INSERT INTO 학생 (이름)\n   VALUES ('이');\n㉢ INSERT INTO 학생\n   VALUES (101, '박', NULL);\n㉣ INSERT INTO 학생\n   VALUES (102, '최', 30);\n㉤ INSERT INTO 학생 (학번, 학과번호)\n   VALUES (103, 20);"
         }
       ]
     },
@@ -1386,15 +1390,69 @@
     {
       "subject": "2과목",
       "number": 41,
-      "title": "계층형 SQL 에서 ORDER SIBLINGS BY 와 NOCYCLE 옵션에 대한 설명 중 옳은 것은?",
+      "title": "아래 메뉴 테이블에 계층형 SQL 을 실행했을 때 결과의 이름 순서로 옳은 것은? (Oracle 기준)",
       "options": [
-        "NOCYCLE 을 수행한 뒤 순환 발생 행을 CONNECT_BY_ISCYCLE 로 확인할 수 있다.",
-        "SIBLINGS 는 전체 트리를 재정렬한다.",
-        "일반 ORDER BY 를 쓰면 계층형 결과의 순서가 그대로 보존된다.",
-        "NOCYCLE 은 CONNECT_BY_ROOT 와 반드시 함께 사용한다."
+        "홈, 고객, 문의, 상품, 할인, 신상품",
+        "홈, 상품, 신상품, 할인, 고객, 문의",
+        "홈, 고객, 상품, 문의, 할인, 신상품",
+        "홈, 고객, 할인, 문의, 상품, 신상품"
       ],
       "correctIndex": 0,
-      "explanation": "NOCYCLE 옵션은 순환을 만나면 전개를 중단하며, 순환이 발생한 행은 CONNECT_BY_ISCYCLE 의사 컬럼으로 식별할 수 있다. ② SIBLINGS 는 같은 부모를 둔 형제끼리만 정렬하고, ③ 일반 ORDER BY 는 전체 결과를 다시 정렬해 계층 순서를 깨뜨리며, ④ NOCYCLE 은 CONNECT_BY_ROOT 와 상관없이 쓸 수 있다."
+      "explanation": "ORDER SIBLINGS BY 는 트리 모양(부모 다음에 그 자식들)을 그대로 두고, 같은 부모를 둔 형제끼리만 순서 값으로 정렬한다. 홈 아래 형제는 고객(1), 상품(2) 순이고, 고객 밑의 문의를 다 내려간 뒤 상품으로 넘어가 그 밑의 할인(1), 신상품(2) 이 온다. 정답은 ①번이다. ② 는 형제 정렬 없이 ID 순서로 내려간 결과다. ③ 은 같은 레벨끼리 모아 정렬한 결과로, 계층형 질의는 이렇게 레벨 단위로 나열하지 않는다. ④ 는 일반 ORDER BY 순서처럼 전체를 다시 정렬해 부모·자식 순서가 깨진 결과다. 참고로 데이터에 순환이 있으면 NOCYCLE 로 전개를 멈추고 CONNECT_BY_ISCYCLE 로 그 행을 찾을 수 있다. PostgreSQL 16 에서 형제 순서 경로로 정렬하는 재귀 CTE 로 옮겨 실행하면 ① 순서가 나온다.",
+      "references": [
+        {
+          "type": "table",
+          "caption": "메뉴",
+          "headers": [
+            "ID",
+            "상위ID",
+            "이름",
+            "순서"
+          ],
+          "rows": [
+            [
+              "1",
+              "NULL",
+              "홈",
+              "1"
+            ],
+            [
+              "2",
+              "1",
+              "상품",
+              "2"
+            ],
+            [
+              "3",
+              "1",
+              "고객",
+              "1"
+            ],
+            [
+              "4",
+              "2",
+              "신상품",
+              "2"
+            ],
+            [
+              "5",
+              "2",
+              "할인",
+              "1"
+            ],
+            [
+              "6",
+              "3",
+              "문의",
+              "1"
+            ]
+          ]
+        },
+        {
+          "type": "sql",
+          "code": "SELECT 이름\nFROM   메뉴\nSTART WITH 상위ID IS NULL\nCONNECT BY PRIOR ID = 상위ID\nORDER SIBLINGS BY 순서;"
+        }
+      ]
     },
     {
       "subject": "2과목",

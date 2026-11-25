@@ -1370,3 +1370,5 @@ sqld-0312·0319(M494·M501, 데이터베이스 파티션 기법)도 성능 데�
 | sqld-0130 | 윈도우 함수 설명 고르기 | GROUP BY 와 PARTITION BY 윈도우 합계의 행 수·값 비교 (ORDER BY 없는 윈도우 = 파티션 전체) | PostgreSQL 16 → GROUP BY 2행, 윈도우 3행(A 400, 400). 390px 화면 확인. 사본 없음 |
 | sqld-0182 | JOIN 종류 설명 고르기 | 경계값이 겹치는 급여등급 표와 BETWEEN 비등가 조인 행 수 (양 끝 포함, 짝 없는 행 제외) | PostgreSQL 16 → 4행(가1, 나1, 나2, 다2). 390px 화면 확인. 사본 없음 |
 | sqld-0019 | 관계 표기 설명 고르기 | 관계 넷을 존재/행위 관계로 나누기 | 교재 정의 대조. 390px 화면 확인. 사본 없음 |
+| 53-2-18 | DDL 설명 고르기 (DEFAULT 는 생략할 때만) | DEFAULT PK·NOT NULL·FK 테이블에 INSERT 다섯 개를 차례로 실행해 성공하는 것 고르기 | PostgreSQL 16 → ㉡ PK 중복, ㉣ FK 위반, ㉤ NOT NULL 위반, 남은 행 100·101. 390px 화면 확인 |
+| 53-2-41 | SIBLINGS·NOCYCLE 설명 고르기 | 메뉴 트리에 ORDER SIBLINGS BY 를 건 결과 순서 (ID 순 전개·레벨 순·전체 정렬 함정) | PostgreSQL 16 재귀 CTE(형제 순서 경로 정렬)로 옮겨 실행 → 홈, 고객, 문의, 상품, 할인, 신상품. 390px 화면 확인 |
