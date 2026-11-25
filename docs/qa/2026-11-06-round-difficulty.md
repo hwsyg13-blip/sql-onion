@@ -1408,3 +1408,4 @@ sqld-0312·0319(M494·M501, 데이터베이스 파티션 기법)도 성능 데�
 | sqld-0960 (+ 사본 1000·1328) | ALTER TABLE 용도 고르기 | 데이터가 있는 테이블에 ADD(DEFAULT)·MODIFY 늘리기/줄이기·RENAME·DROP 을 차례로 실행해 오류 나는 것 고르기 | PostgreSQL 16 → 크기 줄이기만 value too long 오류, 끝난 뒤 ID·회원명(20). 사본 둘도 같은 내용(중복 제외 251 그대로). 390px 화면 확인 |
 | 이론 c213 | 숫자 함수 표에 MOD(7,3) 만 | MOD 결과 부호는 앞 수를 따른다는 설명 + MOD(-7, 3) = -1 줄 추가 (sqld-0238 과 짝) | PostgreSQL 16 mod(-7,3) = -1. 390px 표 확인(원래부터 표 안 가로 스크롤) |
 | 이론 c221 | ANY·ALL 표에 빈 서브쿼리 경우 없음 | '서브쿼리가 0행이면 > ALL 은 모든 행 참, > ANY 는 모두 거짓' 줄 추가 (sqld-0894 와 짝) | PostgreSQL 16 → 빈 서브쿼리 > ALL 5행/5행. 390px 표 확인 |
+| 이론 c232 | COMMIT 줄에 저장점 소멸 설명 없음 | 'COMMIT 하면 그때까지 만든 저장점도 사라져 ROLLBACK TO 는 오류' 추가 (sqld-0766 과 짝) | PostgreSQL 16 → savepoint does not exist. 390px 표 확인 |
