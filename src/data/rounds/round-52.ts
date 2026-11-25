@@ -370,42 +370,56 @@ export const ROUND_52: QuizQuestion[] = [
     "round": 52,
     "subject": "2과목",
     "number": 12,
-    "title": "아래 T 테이블 (VAL, OPT) 에 대해 결과 값이 나머지와 다른 함수는?",
+    "title": "아래 T 테이블에 대한 SQL 의 결과 (A, B, C, D) 로 옳은 것은? (Oracle 기준)",
     "options": [
-      "NVL(VAL, OPT)",
-      "COALESCE(VAL, OPT)",
-      "NULLIF(VAL, OPT)",
-      "CASE WHEN VAL IS NOT NULL THEN VAL ELSE OPT END"
+      "(498, 100, 4, 2)",
+      "(648, 200, 4, 2)",
+      "(498, 200, 4, 2)",
+      "(498, 200, 4, 0)"
     ],
     "correctIndex": 2,
-    "explanation": "NULLIF 는 두 인자가 같으면 NULL, 다르면 첫 번째 값을 반환하므로 나머지와 결과가 다르다. ① NVL/② COALESCE/④ CASE 는 VAL 이 NULL 일 때 OPT 로 대체하고 그 외에는 VAL 을 그대로 반환하므로 동일한 결과를 낸다.",
+    "explanation": "A: NVL2(VAL, OPT, -1) 은 VAL 이 NULL 이 아니면 OPT, NULL 이면 -1 을 돌려준다. 1번 50, 2번 NULL(OPT 가 NULL), 3번 -1, 4번 450, 5번 -1 이고, SUM 은 NULL 을 빼므로 50 + 450 - 1 - 1 = 498 이다. B: NULLIF(VAL, OPT) 는 두 값이 같으면 NULL, 다르면 VAL 이다. 1번 100, 2번은 100 과 NULL 이 같지 않으므로 100, 3·5번은 VAL 이 NULL, 4번은 같아서 NULL 이라 합은 200 이다. C: COALESCE 는 처음 나오는 NULL 아닌 값이라 5번만 NULL 이 되어 4건이다. D: DECODE 는 일반 비교와 달리 NULL 과 NULL 을 같은 값으로 본다. VAL 이 NULL 인 3·5번이 1 이 되어 2 다. 정답은 ③번이다. ① 은 2번의 NULLIF(100, NULL) 을 NULL 로 본 값이다. ② 는 NVL2 가 VAL 이 있을 때 VAL 을 돌려준다고 본 값(100 + 100 + 450 - 2 = 648)이다. ④ 는 DECODE 의 NULL 비교도 = 처럼 참이 안 된다고 본 값이다.",
     "_source": "authored",
     "references": [
       {
         "type": "table",
-        "caption": "T 테이블",
+        "caption": "T",
         "headers": [
+          "ID",
           "VAL",
           "OPT"
         ],
         "rows": [
           [
+            "1",
             "100",
             "50"
           ],
           [
+            "2",
             "100",
             "NULL"
           ],
           [
+            "3",
             "NULL",
             "250"
           ],
           [
+            "4",
             "450",
-            "100"
+            "450"
+          ],
+          [
+            "5",
+            "NULL",
+            "NULL"
           ]
         ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT\n  SUM(NVL2(VAL, OPT, -1))      AS A,\n  SUM(NULLIF(VAL, OPT))        AS B,\n  COUNT(COALESCE(VAL, OPT))    AS C,\n  SUM(DECODE(VAL, NULL, 1, 0)) AS D\nFROM T;"
       }
     ]
   },
@@ -466,20 +480,20 @@ export const ROUND_52: QuizQuestion[] = [
     "round": 52,
     "subject": "2과목",
     "number": 14,
-    "title": "아래 EMP 테이블 (사원-매니저) 에 대한 계층형 SQL 에서 PRIOR 키워드가 들어갈 위치로 옳은 것은?",
+    "title": "아래 EMP 테이블에 SELECT 사원 FROM EMP 뒤에 ㉠~㉣ 을 각각 붙였을 때 결과 행 수를 차례로 나열한 것은?",
     "options": [
-      "ㄱ 위치",
-      "ㄴ 위치",
-      "ㄱ·ㄴ 위치 모두",
-      "위치 어디도 아님"
+      "5, 1, 4, 3",
+      "5, 5, 4, 3",
+      "5, 1, 4, 1",
+      "5, 1, 1, 3"
     ],
     "correctIndex": 0,
-    "explanation": "루트(START WITH 매니저 IS NULL)에서 시작해 부모 행의 사원 값과 자식 행의 매니저 값이 일치하는 행을 따라 내려가는 순방향 전개이므로 PRIOR 는 사원 앞(ㄱ)에 온다. 즉 CONNECT BY PRIOR 사원 = 매니저 형태이다. ② ㄴ(매니저 앞)에 오면 역방향이라 루트 한 행만 나오고, ③ PRIOR 는 한쪽에만 붙이며, ④ PRIOR 가 없으면 부모·자식 방향을 정하지 못한다.",
+    "explanation": "PRIOR 가 붙은 쪽이 바로 앞(부모 쪽으로 읽은) 행의 값이다. ㉠ 의 PRIOR 사원 = 매니저 는 앞 행의 사원을 매니저로 둔 행, 즉 부하를 찾아 내려가므로 100 에서 시작해 5행 모두 나온다. ㉡ 은 앞 행의 매니저를 사원으로 가진 행, 즉 상사를 찾아 올라간다. 시작인 100 은 매니저가 없어 1행에서 끝난다. ㉢ 은 500 에서 위로 400 → 200 → 100 을 따라가 4행이다. ㉣ 의 매니저 = PRIOR 사원 은 ㉠ 과 같은 뜻(등호 양쪽만 바꿈)이라 200 에서 아래로 400, 500 이 이어져 3행이다. 정답은 ①번이다. ② 는 ㉡ 도 ㉠ 처럼 내려간다고 본 값이다. ③ 은 PRIOR 가 오른쪽에 있으면 방향이 반대가 된다고 보고 ㉣ 을 위로 올라가는 전개로 읽은 값이다. ④ 는 ㉢ 에서 시작 행만 나온다고 본 값이다.",
     "_source": "authored",
     "references": [
       {
         "type": "table",
-        "caption": "EMP 테이블",
+        "caption": "EMP",
         "headers": [
           "사원",
           "매니저"
@@ -500,12 +514,16 @@ export const ROUND_52: QuizQuestion[] = [
           [
             "400",
             "200"
+          ],
+          [
+            "500",
+            "400"
           ]
         ]
       },
       {
         "type": "sql",
-        "code": "SELECT 사원, 매니저\nFROM   EMP\nSTART WITH 매니저 IS NULL\nCONNECT BY ( ㄱ ) 사원 = ( ㄴ ) 매니저;"
+        "code": "-- ㉠\nSTART WITH 매니저 IS NULL\nCONNECT BY PRIOR 사원 = 매니저\n-- ㉡\nSTART WITH 매니저 IS NULL\nCONNECT BY PRIOR 매니저 = 사원\n-- ㉢\nSTART WITH 사원 = 500\nCONNECT BY PRIOR 매니저 = 사원\n-- ㉣\nSTART WITH 사원 = 200\nCONNECT BY 매니저 = PRIOR 사원"
       }
     ]
   },
@@ -516,46 +534,20 @@ export const ROUND_52: QuizQuestion[] = [
     "round": 52,
     "subject": "2과목",
     "number": 15,
-    "title": "아래 T 테이블에 NVL(금액, 0) 을 적용했을 때 출력 결과가 가장 큰 금액인 행은?",
+    "title": "아래 SQL 의 결과 (A, B, C, D) 로 옳은 것은? (Oracle 기준)",
     "options": [
-      "1번 행 (1000)",
-      "2번 행 (NVL 로 0 출력)",
-      "3번 행 (3000)",
-      "4번 행 (NVL 로 0 출력)"
+      "(6, 8, '007', 'OP')",
+      "(3, 5, '007', 'OP')",
+      "(3, 8, '007', 'OP')",
+      "(3, 8, '007', 'ER')"
     ],
     "correctIndex": 2,
-    "explanation": "NVL(금액, 0) 적용 후 출력값: ID=1 → 1000, ID=2 → 0 (NVL 적용), ID=3 → 3000, ID=4 → 0 (NVL 적용). 가장 큰 값은 ID=3 의 3000. 정답 ③. ① 1000 은 두 번째로 큰 값, ② 와 ④ 는 NVL 로 0 이 된 행이다.",
+    "explanation": "A: REPLACE 에 바꿀 문자열을 주지 않으면 찾은 문자열을 지운다. 'A-B--C' 에서 '-' 를 모두 지우면 'ABC' 라 길이는 3 이다. B: INSTR(문자열, 'O', 1, 2) 는 1번째 글자부터 찾아 두 번째로 나오는 'O' 의 위치다. HELLO 의 O(5) 다음 WORLD 의 O 라 8 이다. C: LPAD 는 왼쪽을 '0' 으로 채워 세 자리를 만들어 '007' 이다. D: SUBSTR 의 시작 위치가 음수면 뒤에서부터 센다. 뒤에서 4번째 글자 O 부터 2글자라 'OP' 다. 정답은 ③번이다. ① 은 세 번째 인수가 없으면 REPLACE 가 아무것도 바꾸지 않는다고 본 값이다. ② 는 INSTR 의 네 번째 인수(몇 번째 등장인지)를 놓치고 첫 'O' 위치를 쓴 값이다. ④ 는 음수 시작 위치를 '끝에서 2글자' 로 읽은 값이다.",
     "_source": "authored",
     "references": [
       {
-        "type": "table",
-        "headers": [
-          "ID",
-          "금액"
-        ],
-        "rows": [
-          [
-            "1",
-            "1000"
-          ],
-          [
-            "2",
-            "NULL"
-          ],
-          [
-            "3",
-            "3000"
-          ],
-          [
-            "4",
-            "NULL"
-          ]
-        ],
-        "caption": "T 테이블"
-      },
-      {
         "type": "sql",
-        "code": "SELECT NVL(금액, 0) FROM T;"
+        "code": "SELECT LENGTH(REPLACE('A-B--C', '-'))\n         AS A,\n       INSTR('HELLO WORLD', 'O', 1, 2)\n         AS B,\n       LPAD('7', 3, '0') AS C,\n       SUBSTR('SQLDEVELOPER', -4, 2)\n         AS D\nFROM   DUAL;"
       }
     ]
   },
@@ -1243,73 +1235,56 @@ export const ROUND_52: QuizQuestion[] = [
     "round": 52,
     "subject": "2과목",
     "number": 35,
-    "title": "아래 T 테이블에서 소계 없이 (A, B) 세부 집계와 () 총계만 한 번에 나타내기 위해 괄호를 중첩한 ROLLUP 구문으로 옳은 것은?",
+    "title": "아래 T 테이블에 대해 SELECT A, B, C, SUM(V) FROM T 뒤에 ㉠~㉣ 을 각각 붙였을 때 결과 행 수를 차례로 나열한 것은?",
     "options": [
-      "ROLLUP(A, B)",
-      "ROLLUP((A), B)",
-      "ROLLUP((A, B))",
-      "ROLLUP(A, (B))"
+      "10, 8, 7, 5",
+      "10, 10, 10, 5",
+      "10, 7, 8, 5",
+      "9, 6, 7, 5"
     ],
     "correctIndex": 2,
-    "explanation": "중첩 괄호 `((A, B))` 는 (A, B) 를 하나의 그룹 단위로 취급하므로 (A, B) 세부 집계와 () 총계 두 가지만 반환된다. ① `ROLLUP(A, B)` 는 (A, B), (A), () 세 그룹, ② `ROLLUP((A), B)` 는 (A, B), (A), () 와 동일, ④ `ROLLUP(A, (B))` 는 (A, B), (A), () 와 동일하게 (A) 소계가 추가된다.",
+    "explanation": "ROLLUP 안의 괄호는 여러 칼럼을 한 단위로 묶어, 그 안에서는 소계를 만들지 않는다. 데이터의 (A, B, C) 조합은 4개, (A, B) 조합은 (A1, B1), (A1, B2), (A2, B1) 3개, A 값은 2개다. ㉠ ROLLUP(A, B, C) 는 (A, B, C) 4 + (A, B) 3 + (A) 2 + () 1 = 10행이다. ㉡ 은 (B, C) 를 한 단위로 보므로 (A, B, C) 4 + (A) 2 + () 1 = 7행으로, (A, B) 소계가 없다. ㉢ 은 (A, B) 를 한 단위로 보므로 (A, B, C) 4 + (A, B) 3 + () 1 = 8행으로, (A) 소계가 없다. ㉣ 은 상세 4행과 총계 1행만 만들어 5행이다. 정답은 ③번이다. ① 은 ㉡ 과 ㉢ 을 서로 바꿨다. ② 는 괄호를 무시하고 셋 다 ROLLUP(A, B, C) 와 같다고 본 값이다. ④ 는 ROLLUP 에 총계 행이 없다고 본 값이다.",
     "_source": "authored",
     "references": [
       {
         "type": "table",
-        "caption": "T 테이블",
+        "caption": "T",
         "headers": [
           "A",
           "B",
-          "C"
+          "C",
+          "V"
         ],
         "rows": [
           [
             "A1",
             "B1",
+            "C1",
             "10"
           ],
           [
             "A1",
-            "B2",
+            "B1",
+            "C2",
             "20"
+          ],
+          [
+            "A1",
+            "B2",
+            "C1",
+            "30"
           ],
           [
             "A2",
             "B1",
-            "30"
+            "C1",
+            "40"
           ]
         ]
       },
       {
-        "type": "table",
-        "caption": "기대 결과 — (A, B) 세부 + () 총계만 (A 단독 소계 없음)",
-        "headers": [
-          "A",
-          "B",
-          "SUM(C)"
-        ],
-        "rows": [
-          [
-            "A1",
-            "B1",
-            "10"
-          ],
-          [
-            "A1",
-            "B2",
-            "20"
-          ],
-          [
-            "A2",
-            "B1",
-            "30"
-          ],
-          [
-            "(NULL)",
-            "(NULL)",
-            "60"
-          ]
-        ]
+        "type": "sql",
+        "code": "-- ㉠\nGROUP BY ROLLUP(A, B, C)\n-- ㉡\nGROUP BY ROLLUP(A, (B, C))\n-- ㉢\nGROUP BY ROLLUP((A, B), C)\n-- ㉣\nGROUP BY GROUPING SETS((A, B, C), ())"
       }
     ]
   },
@@ -1574,60 +1549,83 @@ export const ROUND_52: QuizQuestion[] = [
     "round": 52,
     "subject": "2과목",
     "number": 41,
-    "title": "아래 두 테이블 T1(3행), T2(3행) 에 대한 네 가지 JOIN SQL 중 결과 행 수가 나머지와 다른 것은? (단, 모든 행이 매칭되는 데이터)",
+    "title": "아래 세 테이블에 대한 ㉠~㉣ 의 결과를 차례로 나열한 것은?",
     "options": [
-      "SELECT * FROM T1 INNER JOIN T2 ON T1.ID = T2.ID;",
-      "SELECT * FROM T1 LEFT OUTER JOIN T2 ON T1.ID = T2.ID;",
-      "SELECT * FROM T1 RIGHT OUTER JOIN T2 ON T1.ID = T2.ID;",
-      "SELECT * FROM T1 CROSS JOIN T2;"
+      "5, 5, 6, 5",
+      "2, 5, 5, 5",
+      "2, 5, 6, 2",
+      "2, 5, 6, 5"
     ],
     "correctIndex": 3,
-    "explanation": "INNER/LEFT/RIGHT OUTER JOIN 은 모두 ON 조건으로 ID 가 매칭되는 행만 반환하므로 (모든 행이 매칭되는 가정에서) 결과는 3 행으로 동일하다. CROSS JOIN 은 조인 조건 없이 모든 조합을 반환하므로 3 × 3 = 9 행으로 결과 행 수가 가장 많다. ①·②·③ 은 모든 행이 매칭되어 3행으로 같고, ④ 만 9행이다.",
+    "explanation": "먼저 T1 LEFT JOIN T2 는 (1, 1), (2, 2), (2, 2), (3, NULL), (4, NULL) 5행이다. ㉠ 은 여기에 T2.ID 로 T3 를 내부 조인한다. T2.ID 가 2 인 두 행만 T3 와 맞고 NULL 인 행은 빠지므로 2행이다. 뒤에 붙은 내부 조인이 앞의 외부 조인 결과를 다시 걸러 내는 것이다. ㉡ 은 외부 조인이라 5행이 그대로 남는다. ㉢ 은 T1.ID 로 T3 를 붙이므로 T1 의 3 이 T3 의 3 두 행과 맞아 1행이 늘어나 6행이다. ㉣ 은 괄호 안 T2 JOIN T3 를 먼저 계산해 (2, 2) 두 행과 (5, 5) 를 만든다. 이것을 T1 에 LEFT JOIN 하면 1·3·4 는 NULL 로 남고 2 는 두 행이 되어 5행이다. 정답은 ④번이다. ① 은 내부 조인이 뒤에 와도 외부 조인 결과가 유지된다고 본 값이다. ② 는 ㉢ 에서 T3 의 3 이 두 행이라는 점을 놓쳤다. ③ 은 ㉣ 의 괄호를 무시하고 ㉠ 과 같게 본 값이다.",
     "_source": "authored",
     "references": [
       {
         "type": "table",
-        "caption": "T1 테이블",
+        "caption": "T1",
         "headers": [
-          "ID",
-          "VAL"
+          "ID"
         ],
         "rows": [
           [
-            "1",
-            "A"
+            "1"
           ],
           [
-            "2",
-            "B"
+            "2"
           ],
           [
-            "3",
-            "C"
+            "3"
+          ],
+          [
+            "4"
           ]
         ]
       },
       {
         "type": "table",
-        "caption": "T2 테이블",
+        "caption": "T2",
         "headers": [
-          "ID",
-          "DESCRIPTION"
+          "ID"
         ],
         "rows": [
           [
-            "1",
-            "X"
+            "1"
           ],
           [
-            "2",
-            "Y"
+            "2"
           ],
           [
-            "3",
-            "Z"
+            "2"
+          ],
+          [
+            "5"
           ]
         ]
+      },
+      {
+        "type": "table",
+        "caption": "T3",
+        "headers": [
+          "ID"
+        ],
+        "rows": [
+          [
+            "2"
+          ],
+          [
+            "3"
+          ],
+          [
+            "3"
+          ],
+          [
+            "5"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "-- ㉠\nSELECT COUNT(*)\nFROM   T1 LEFT JOIN T2 ON T1.ID = T2.ID\n       JOIN T3 ON T2.ID = T3.ID;\n-- ㉡\nSELECT COUNT(*)\nFROM   T1 LEFT JOIN T2 ON T1.ID = T2.ID\n       LEFT JOIN T3 ON T2.ID = T3.ID;\n-- ㉢\nSELECT COUNT(*)\nFROM   T1 LEFT JOIN T2 ON T1.ID = T2.ID\n       LEFT JOIN T3 ON T1.ID = T3.ID;\n-- ㉣\nSELECT COUNT(*)\nFROM   T1 LEFT JOIN\n       (T2 JOIN T3 ON T2.ID = T3.ID)\n       ON T1.ID = T2.ID;"
       }
     ]
   },
@@ -1999,21 +1997,102 @@ export const ROUND_52: QuizQuestion[] = [
     "round": 52,
     "subject": "2과목",
     "number": 49,
-    "title": "아래 부서·사원 ERD 에서 부서 한 행을 삭제할 때 그 부서를 참조하는 사원 행도 함께 삭제되게 하려면, 사원 테이블의 외래키에 어떤 옵션을 설정해야 하는가?",
+    "title": "아래 ERD 와 데이터에서 ㉠ → ㉢ 을 차례로 실행했을 때 (사원 행 수, 근태 행 수, 부서번호가 NULL 인 사원 수) 로 옳은 것은? (문장마다 자동 커밋, 오류가 난 문장은 반영되지 않음)",
     "options": [
-      "ON DELETE RESTRICT",
-      "ON DELETE SET NULL",
-      "ON DELETE CASCADE",
-      "ON DELETE NO ACTION"
+      "(1, 1, 1)",
+      "(2, 2, 0)",
+      "(2, 2, 1)",
+      "(1, 1, 0)"
     ],
     "correctIndex": 2,
-    "explanation": "자식(사원) 테이블의 외래키에 ON DELETE CASCADE 를 걸면 부모(부서) 행을 지울 때 그 부서를 참조하는 사원 행도 함께 지워진다(③). ① RESTRICT 와 ④ NO ACTION 은 참조하는 사원이 있으면 부서 삭제 자체를 거부하고, ② SET NULL 은 사원 행을 남긴 채 부서번호만 NULL 로 바꾼다.",
+    "explanation": "㉠ 은 E1 을 지우고, 근태의 외래키가 ON DELETE CASCADE 라 E1 의 근태 1·2 도 함께 지워진다. ㉡ 은 D1 을 지우는데 사원의 외래키는 ON DELETE SET NULL 이라 E2 는 남고 부서번호만 NULL 이 된다. ㉢ 은 E3 를 지우려 하지만 평가의 외래키에는 옵션이 없어(NO ACTION) E3 를 참조하는 평가 1 이 있으므로 오류가 난다. 문장 전체가 취소되어 E3 와 근태 4 도 그대로다. 남은 사원은 E2·E3 두 행, 근태는 3·4 두 행, 부서번호가 NULL 인 사원은 E2 하나라 (2, 2, 1), 정답은 ③번이다. ① 은 ㉢ 이 성공해 E3 와 근태 4 가 지워진다고 본 값이다. ② 는 사원이 D1 을 참조하고 있으니 ㉡ 이 거부된다고 생각하면 나오는 값이다. ④ 는 SET NULL 을 CASCADE 처럼 보고 ㉡ 에서 E2 와 근태 3 까지 지워진다고 착각한 결과다.",
     "_source": "authored",
     "references": [
       {
         "type": "erd",
-        "caption": "부서-사원 ERD",
-        "mermaid": "erDiagram\n    부서 ||..o{ 사원 : \"소속\"\n    부서 {\n        string 부서번호 PK\n    }\n    사원 {\n        string 사원번호 PK\n        string 부서번호 FK \"ON DELETE CASCADE\"\n    }"
+        "caption": "부서·사원·근태·평가 ERD",
+        "mermaid": "erDiagram\n    부서 |o..o{ 사원 : \"소속\"\n    사원 ||..o{ 근태 : \"기록\"\n    사원 ||..o{ 평가 : \"대상\"\n    부서 {\n        string 부서번호 PK\n    }\n    사원 {\n        string 사원번호 PK\n        string 부서번호 FK \"ON DELETE SET NULL\"\n    }\n    근태 {\n        number 근태번호 PK\n        string 사원번호 FK \"ON DELETE CASCADE\"\n    }\n    평가 {\n        number 평가번호 PK\n        string 사원번호 FK \"옵션 없음\"\n    }"
+      },
+      {
+        "type": "table",
+        "caption": "부서",
+        "headers": [
+          "부서번호"
+        ],
+        "rows": [
+          [
+            "D1"
+          ],
+          [
+            "D2"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "사원",
+        "headers": [
+          "사원번호",
+          "부서번호"
+        ],
+        "rows": [
+          [
+            "E1",
+            "D1"
+          ],
+          [
+            "E2",
+            "D1"
+          ],
+          [
+            "E3",
+            "D2"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "근태",
+        "headers": [
+          "근태번호",
+          "사원번호"
+        ],
+        "rows": [
+          [
+            "1",
+            "E1"
+          ],
+          [
+            "2",
+            "E1"
+          ],
+          [
+            "3",
+            "E2"
+          ],
+          [
+            "4",
+            "E3"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "평가",
+        "headers": [
+          "평가번호",
+          "사원번호"
+        ],
+        "rows": [
+          [
+            "1",
+            "E3"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "-- ㉠\nDELETE FROM 사원 WHERE 사원번호 = 'E1';\n-- ㉡\nDELETE FROM 부서 WHERE 부서번호 = 'D1';\n-- ㉢\nDELETE FROM 사원 WHERE 사원번호 = 'E3';"
       }
     ]
   },

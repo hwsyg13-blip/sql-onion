@@ -367,41 +367,60 @@
     {
       "subject": "2과목",
       "number": 14,
-      "title": "아래 T 테이블에 대한 SQL 의 결과 행 개수로 옳은 것은?",
+      "title": "아래 T 테이블에 대한 SQL 의 결과로 옳은 것은? (Oracle 기준)",
       "options": [
-        "1개",
-        "2개",
-        "3개",
-        "0개"
+        "4",
+        "1",
+        "5",
+        "3"
       ],
       "correctIndex": 0,
-      "explanation": "`AMT BETWEEN 3000 AND 5000` 과 `VOL <= 10` 을 동시에 만족해야 한다. (4000, 5) 만 두 조건 모두 만족, (6000, 3) 은 AMT 범위 초과, (3000, 15) 는 VOL 초과. 따라서 1 건. ② 2개는 AMT 조건이나 VOL 조건 중 하나만 본 값, ③ 3개는 두 조건을 모두 무시한 값이다.",
+      "explanation": "BETWEEN A AND B 는 '>= A AND <= B' 와 같아서 A 가 B 보다 크면 어떤 값도 만족하지 못한다. BETWEEN 5000 AND 3000 은 항상 거짓이고, NOT 을 붙이면 AMT 가 있는 행은 모두 참이다. AMT 가 NULL 인 5번은 비교가 UNKNOWN 이라 NOT 을 붙여도 빠진다. 남은 1·2·3·4·6번 중 NVL(VOL, 0) <= 10 에서 VOL 이 15 인 3번이 빠지고, VOL 이 NULL 인 4번은 0 으로 바뀌어 남는다. 1·2·4·6번 4건, 정답은 ①번이다. ② 1 은 BETWEEN 5000 AND 3000 을 3000~5000 으로 고쳐 읽고 그 밖의 값(6000)만 센 것이다. ③ 5 는 AMT 가 NULL 인 5번도 범위 밖이니 NOT BETWEEN 이 참이라고 본 값이다. ④ 3 은 NVL 을 놓치고 VOL 이 NULL 인 4번을 뺀 값이다.",
       "references": [
         {
           "type": "table",
-          "caption": "T 테이블",
+          "caption": "T",
           "headers": [
+            "ID",
             "AMT",
             "VOL"
           ],
           "rows": [
             [
+              "1",
               "4000",
               "5"
             ],
             [
+              "2",
               "6000",
               "3"
             ],
             [
+              "3",
               "3000",
               "15"
+            ],
+            [
+              "4",
+              "5000",
+              "NULL"
+            ],
+            [
+              "5",
+              "NULL",
+              "2"
+            ],
+            [
+              "6",
+              "3500",
+              "10"
             ]
           ]
         },
         {
           "type": "sql",
-          "code": "SELECT COUNT(*)\nFROM   T\nWHERE  AMT BETWEEN 3000 AND 5000\nAND    VOL <= 10;"
+          "code": "SELECT COUNT(*)\nFROM   T\nWHERE  AMT NOT BETWEEN 5000 AND 3000\nAND    NVL(VOL, 0) <= 10;"
         }
       ]
     },
@@ -494,42 +513,84 @@
     {
       "subject": "2과목",
       "number": 17,
-      "title": "아래 요구사항을 만족하는 ORDER BY 절로 가장 적절한 것은?",
+      "title": "아래 MEMBER 테이블에 대한 SQL 의 결과로 출력되는 이름 순서로 옳은 것은? (Oracle 기준)",
       "options": [
-        "ORDER BY 주문번호 DESC, 금액 ASC",
-        "ORDER BY 주문번호 DESC, 금액테이블번호 ASC",
-        "ORDER BY 주문번호 DESC, 4 DESC, 1 ASC",
-        "ORDER BY 주문번호 DESC, 4 DESC, 1 DESC"
+        "정, 최, 김, 박, 이",
+        "정, 김, 최, 이, 박",
+        "정, 김, 최, 박, 이",
+        "박, 이, 김, 최, 정"
       ],
       "correctIndex": 2,
-      "explanation": "요구사항은 주문번호 내림차순 → 4번 컬럼(금액) 내림차순 → 1번 컬럼(회원번호) 오름차순이다. ORDER BY 에는 SELECT 절 컬럼의 순번을 쓸 수 있으므로 ORDER BY 주문번호 DESC, 4 DESC, 1 ASC 가 맞다(③). ① 은 금액을 오름차순으로, ② 는 없는 컬럼으로, ④ 는 회원번호를 내림차순으로 정렬한다.",
+      "explanation": "ORDER BY 에는 SELECT 절의 별칭(G)과 SELECT 목록의 순서 번호를 쓸 수 있다. 3 은 세 번째 칼럼인 포인트, 1 은 첫 번째 칼럼인 이름이다. 등급 내림차순이라 C(정) → B → A 순이다. B 의 최·김은 포인트가 300 으로 같아 이름 오름차순(김, 최)이다. A 의 박(500)·이(NULL)는 포인트 내림차순인데 NULLS LAST 라 NULL 인 이가 뒤로 간다. 그래서 정, 김, 최, 박, 이가 되고, 정답은 ③번이다. ① 은 1 을 테이블의 첫 칼럼인 번호로 보고 최(1)를 김(4)보다 앞에 둔 결과다. ② 는 NULLS LAST 를 놓쳐, Oracle 의 내림차순 기본값대로 NULL 을 앞에 둔 결과다. ④ 는 G DESC 를 오름차순으로 읽은 결과다.",
       "references": [
         {
-          "type": "sql",
-          "code": "SELECT 회원번호,    -- 1번 컬럼\n       회원명,      -- 2번 컬럼\n       주문번호,    -- 3번 컬럼\n       금액         -- 4번 컬럼\nFROM   주문\n[ ORDER BY  ?  ];"
+          "type": "table",
+          "caption": "MEMBER",
+          "headers": [
+            "번호",
+            "이름",
+            "등급",
+            "포인트"
+          ],
+          "rows": [
+            [
+              "1",
+              "최",
+              "B",
+              "300"
+            ],
+            [
+              "2",
+              "이",
+              "A",
+              "NULL"
+            ],
+            [
+              "3",
+              "박",
+              "A",
+              "500"
+            ],
+            [
+              "4",
+              "김",
+              "B",
+              "300"
+            ],
+            [
+              "5",
+              "정",
+              "C",
+              "100"
+            ]
+          ]
         },
         {
-          "type": "text",
-          "content": "요구사항: 주문번호 내림차순 정렬 후, 같은 주문번호 내에서 4번 컬럼(금액) 내림차순, 1번 컬럼(회원번호) 오름차순으로 정렬한다."
+          "type": "sql",
+          "code": "SELECT 이름, 등급 AS G, 포인트\nFROM   MEMBER\nORDER BY G DESC,\n         3 DESC NULLS LAST,\n         1;"
         }
       ]
     },
     {
       "subject": "2과목",
       "number": 18,
-      "title": "아래 테이블 DDL 에 대한 설명 중 옳지 않은 것은?",
+      "title": "아래 DDL 로 만든 학생 테이블에 ㉠~㉤ 을 순서대로 하나씩 실행할 때 성공하는 INSERT 만 모두 고른 것은? (학과 테이블에는 학과번호 10, 20 만 있고, 오류가 난 문장만 실패한다)",
       "options": [
-        "학번 컬럼에 DEFAULT 값이 지정되어 있다.",
-        "학생 이름은 NULL 을 허용하지 않는다.",
-        "학과번호는 학과 테이블을 참조한다.",
-        "DEFAULT 때문에 101·102·103 학생 번호로 입력해도 학번에는 NULL 이 들어간다."
+        "㉠, ㉡, ㉢",
+        "㉠, ㉢, ㉣",
+        "㉠, ㉢, ㉤",
+        "㉠, ㉢"
       ],
       "correctIndex": 3,
-      "explanation": "학번에는 DEFAULT 100 이 지정되어 있고(①), 이름은 NOT NULL 이며(②), 학과번호는 학과 테이블을 참조한다(③). DEFAULT 는 INSERT 에서 값을 생략했을 때만 쓰이고, 101·102·103 처럼 값을 넣으면 그 값이 그대로 저장되므로 ④ 가 옳지 않다.",
+      "explanation": "DEFAULT 는 INSERT 에서 그 칼럼을 생략했을 때만 쓰인다. ㉠ 은 학번을 생략해 DEFAULT 100 이 들어가고 학과 10 도 있어 성공한다. ㉡ 도 학번을 생략해 100 이 들어가려 하지만 ㉠ 이 이미 100 을 써서 PRIMARY KEY 중복 오류가 난다. ㉢ 의 학과번호 NULL 은 외래키 검사를 받지 않아 성공한다. ㉣ 은 학과 테이블에 없는 30 을 참조해 외래키 오류, ㉤ 은 NOT NULL 인 이름을 생략해 오류가 난다. 정답은 ④번이다. PostgreSQL 16 에서 같은 순서로 실행하면 학번 100, 101 두 행만 남는다. ① 은 DEFAULT 가 매번 다른 값을 만든다고 착각한 결과다. ② 는 외래키가 없는 값도 받아 준다고 보았다. ③ 은 생략한 이름이 빈 값으로 들어간다고 착각한 결과다.",
       "references": [
         {
           "type": "sql",
-          "code": "CREATE TABLE 학생 (\n  학번 NUMBER DEFAULT 100 PRIMARY KEY,\n  이름 VARCHAR2(30) NOT NULL,\n  학과번호 NUMBER\n    REFERENCES 학과(학과번호)\n);"
+          "code": "CREATE TABLE 학생 (\n  학번 NUMBER DEFAULT 100\n       PRIMARY KEY,\n  이름 VARCHAR2(30) NOT NULL,\n  학과번호 NUMBER\n    REFERENCES 학과(학과번호)\n);"
+        },
+        {
+          "type": "sql",
+          "code": "㉠ INSERT INTO 학생 (이름, 학과번호)\n   VALUES ('김', 10);\n㉡ INSERT INTO 학생 (이름)\n   VALUES ('이');\n㉢ INSERT INTO 학생\n   VALUES (101, '박', NULL);\n㉣ INSERT INTO 학생\n   VALUES (102, '최', 30);\n㉤ INSERT INTO 학생 (학번, 학과번호)\n   VALUES (103, 20);"
         }
       ]
     },
@@ -1142,76 +1203,57 @@
     {
       "subject": "2과목",
       "number": 36,
-      "title": "아래 EMP 테이블에서 SAL 상위 5순위 사원을 조회하는 SQL 로 옳은 것은?",
+      "title": "아래 EMP 테이블에서 '급여 상위 5' 를 구하는 ㉠~㉣ 의 결과 행 수를 차례로 나열한 것은? (Oracle 12c 이상)",
       "options": [
-        "SELECT * FROM EMP WHERE ROWNUM <= 5 ORDER BY SAL DESC;",
-        "SELECT DISTINCT SAL FROM EMP ORDER BY SAL DESC;",
-        "SELECT * FROM (SELECT * FROM EMP ORDER BY SAL DESC) WHERE ROWNUM <= 5;",
-        "SELECT * FROM EMP FETCH FIRST 5 ROWS ONLY;"
+        "5, 5, 5, 5",
+        "5, 6, 6, 6",
+        "5, 6, 7, 6",
+        "5, 5, 7, 6"
       ],
       "correctIndex": 2,
-      "explanation": "Oracle 의 `ROWNUM` 은 `ORDER BY` 가 적용되기 전에 행에 1 부터 부여된다. ① 처럼 `WHERE ROWNUM <= 5` 와 `ORDER BY` 를 한 SELECT 안에 두면 정렬되지 않은 임의의 5 건이 잡힌 뒤 정렬되어 \"상위 5 건\" 이 보장되지 않는다. ② `DISTINCT` 는 중복 제거일 뿐 행 수를 5 로 제한하지 않는다. ④ 는 `ORDER BY` 가 없어 어떤 5 건이 나올지 보장되지 않는다. 정답은 인라인 뷰에서 먼저 정렬한 뒤 외부 쿼리에서 `ROWNUM <= 5` 를 적용하는 ③ 번 패턴이다.",
+      "explanation": "급여 순서는 5000, 3000, 3000, 2975, 2850, 2850, 2450 이고 5번째와 6번째가 2850 으로 동점이다. ㉠ 의 ROWNUM 은 동점과 상관없이 정렬된 앞 5행만 자르므로 5행이고, BLAKE·ALLEN 중 누가 들어갈지는 정해져 있지 않다. ㉡ RANK 는 1, 2, 2, 4, 5, 5, 7 이라 5 이하가 6행이다. ㉢ DENSE_RANK 는 1, 2, 2, 3, 4, 4, 5 라 CLARK 까지 7행이 모두 5 이하다. ㉣ WITH TIES 는 5번째 행과 같은 값까지 더 가져와 6행이다. 정답은 ③번이다. ① 은 모든 방법이 정확히 5행을 준다고 본 값이다. ② 는 DENSE_RANK 를 RANK 와 같게 생각하면 나오는 값이다. ④ 는 RANK 가 동점을 함께 포함하지 않는다고 착각한 결과다.",
       "references": [
         {
           "type": "table",
+          "caption": "EMP",
           "headers": [
-            "EMPNO",
             "ENAME",
             "SAL"
           ],
           "rows": [
             [
-              "7839",
               "KING",
               "5000"
             ],
             [
-              "7902",
               "FORD",
               "3000"
             ],
             [
-              "7788",
               "SCOTT",
               "3000"
             ],
             [
-              "7566",
               "JONES",
               "2975"
             ],
             [
-              "7698",
               "BLAKE",
               "2850"
             ],
             [
-              "7782",
+              "ALLEN",
+              "2850"
+            ],
+            [
               "CLARK",
               "2450"
-            ],
-            [
-              "7499",
-              "ALLEN",
-              "1600"
-            ],
-            [
-              "7521",
-              "WARD",
-              "1250"
-            ],
-            [
-              "7654",
-              "MARTIN",
-              "1250"
-            ],
-            [
-              "7934",
-              "MILLER",
-              "1300"
             ]
-          ],
-          "caption": "EMP 테이블"
+          ]
+        },
+        {
+          "type": "sql",
+          "code": "-- ㉠\nSELECT * FROM (SELECT * FROM EMP\n               ORDER BY SAL DESC)\nWHERE  ROWNUM <= 5;\n-- ㉡\nSELECT * FROM (\n  SELECT E.*, RANK() OVER\n         (ORDER BY SAL DESC) AS R\n  FROM EMP E) WHERE R <= 5;\n-- ㉢ ㉡ 의 RANK 를 DENSE_RANK 로\n-- ㉣\nSELECT * FROM EMP\nORDER BY SAL DESC\nFETCH FIRST 5 ROWS WITH TIES;"
         }
       ]
     },
@@ -1348,50 +1390,107 @@
     {
       "subject": "2과목",
       "number": 41,
-      "title": "계층형 SQL 에서 ORDER SIBLINGS BY 와 NOCYCLE 옵션에 대한 설명 중 옳은 것은?",
+      "title": "아래 메뉴 테이블에 계층형 SQL 을 실행했을 때 결과의 이름 순서로 옳은 것은? (Oracle 기준)",
       "options": [
-        "NOCYCLE 을 수행한 뒤 순환 발생 행을 CONNECT_BY_ISCYCLE 로 확인할 수 있다.",
-        "SIBLINGS 는 전체 트리를 재정렬한다.",
-        "일반 ORDER BY 를 쓰면 계층형 결과의 순서가 그대로 보존된다.",
-        "NOCYCLE 은 CONNECT_BY_ROOT 와 반드시 함께 사용한다."
+        "홈, 고객, 문의, 상품, 할인, 신상품",
+        "홈, 상품, 신상품, 할인, 고객, 문의",
+        "홈, 고객, 상품, 문의, 할인, 신상품",
+        "홈, 고객, 할인, 문의, 상품, 신상품"
       ],
       "correctIndex": 0,
-      "explanation": "NOCYCLE 옵션은 순환을 만나면 전개를 중단하며, 순환이 발생한 행은 CONNECT_BY_ISCYCLE 의사 컬럼으로 식별할 수 있다. ② SIBLINGS 는 같은 부모를 둔 형제끼리만 정렬하고, ③ 일반 ORDER BY 는 전체 결과를 다시 정렬해 계층 순서를 깨뜨리며, ④ NOCYCLE 은 CONNECT_BY_ROOT 와 상관없이 쓸 수 있다."
+      "explanation": "ORDER SIBLINGS BY 는 트리 모양(부모 다음에 그 자식들)을 그대로 두고, 같은 부모를 둔 형제끼리만 순서 값으로 정렬한다. 홈 아래 형제는 고객(1), 상품(2) 순이고, 고객 밑의 문의를 다 내려간 뒤 상품으로 넘어가 그 밑의 할인(1), 신상품(2) 이 온다. 정답은 ①번이다. ② 는 형제 정렬 없이 ID 순서로 내려간 결과다. ③ 은 같은 레벨끼리 모아 정렬한 결과로, 계층형 질의는 이렇게 레벨 단위로 나열하지 않는다. ④ 는 일반 ORDER BY 순서처럼 전체를 다시 정렬해 부모·자식 순서가 깨진 결과다. 참고로 데이터에 순환이 있으면 NOCYCLE 로 전개를 멈추고 CONNECT_BY_ISCYCLE 로 그 행을 찾을 수 있다. PostgreSQL 16 에서 형제 순서 경로로 정렬하는 재귀 CTE 로 옮겨 실행하면 ① 순서가 나온다.",
+      "references": [
+        {
+          "type": "table",
+          "caption": "메뉴",
+          "headers": [
+            "ID",
+            "상위ID",
+            "이름",
+            "순서"
+          ],
+          "rows": [
+            [
+              "1",
+              "NULL",
+              "홈",
+              "1"
+            ],
+            [
+              "2",
+              "1",
+              "상품",
+              "2"
+            ],
+            [
+              "3",
+              "1",
+              "고객",
+              "1"
+            ],
+            [
+              "4",
+              "2",
+              "신상품",
+              "2"
+            ],
+            [
+              "5",
+              "2",
+              "할인",
+              "1"
+            ],
+            [
+              "6",
+              "3",
+              "문의",
+              "1"
+            ]
+          ]
+        },
+        {
+          "type": "sql",
+          "code": "SELECT 이름\nFROM   메뉴\nSTART WITH 상위ID IS NULL\nCONNECT BY PRIOR ID = 상위ID\nORDER SIBLINGS BY 순서;"
+        }
+      ]
     },
     {
       "subject": "2과목",
       "number": 42,
-      "title": "아래 SQL 의 결과로 옳은 것은?",
+      "title": "아래 T 테이블에 대한 SQL 의 결과 (A, B) 로 옳은 것은? (Oracle 기준)",
       "options": [
-        "100",
-        "190",
-        "NULL",
-        "오류"
+        "(109, '109')",
+        "(200, '99')",
+        "(109, 19)",
+        "오류가 발생한다"
       ],
       "correctIndex": 0,
-      "explanation": "T.COL1 = (10, 50, 90). `MIN(COL1)` = 10 (숫자), `MAX(TO_CHAR(COL1))` = '90' (문자 비교 기준 가장 큰 문자열). `숫자 + 문자열` 은 묵시적 형변환으로 10 + 90 = 100 이 된다. ③ NULL 이 섞이지 않아 NULL 이 아니고, ④ 문자 '90' 은 숫자로 자동 변환되어 오류가 나지 않는다.",
+      "explanation": "TO_CHAR(COL1) 은 문자열이라 MAX·MIN 이 숫자 크기가 아니라 앞 글자부터 비교한다. '9', '10', '100', '25' 중 첫 글자가 가장 큰 '9' 가 MAX 이고, '1' 로 시작하는 것 중 더 짧은 '10' 이 MIN 이다. A 는 숫자 MAX 100 에 문자 '9' 를 더하는데, Oracle 은 + 를 만나면 문자를 숫자로 바꿔 계산하므로 100 + 9 = 109 다. B 는 || 연결이라 숫자 MIN 9 가 문자 '9' 로 바뀌어 '10' || '9' = '109' 가 된다. A 는 숫자 109, B 는 문자 '109' 로 정답은 ①번이다. ② 는 TO_CHAR 를 해도 숫자처럼 비교된다고 보고 MAX 를 '100', MIN 을 '9' 로 잡은 값이다. ③ 은 || 를 덧셈으로 보고 10 + 9 = 19 로 계산했다. ④ 는 문자와 숫자를 + 로 더할 수 없다고 본 것인데, Oracle 은 숫자로 바꿀 수 있는 문자면 자동으로 형변환한다.",
       "references": [
         {
           "type": "table",
+          "caption": "T",
           "headers": [
-            "COL1"
+            "COL1 (NUMBER)"
           ],
           "rows": [
+            [
+              "9"
+            ],
             [
               "10"
             ],
             [
-              "50"
+              "100"
             ],
             [
-              "90"
+              "25"
             ]
-          ],
-          "caption": "T 테이블"
+          ]
         },
         {
           "type": "sql",
-          "code": "SELECT MIN(COL1) + MAX(TO_CHAR(COL1))\nFROM   T;"
+          "code": "SELECT MAX(COL1) + MAX(TO_CHAR(COL1))\n         AS A,\n       MIN(TO_CHAR(COL1)) || MIN(COL1)\n         AS B\nFROM   T;"
         }
       ]
     },

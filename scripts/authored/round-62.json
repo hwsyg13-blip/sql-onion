@@ -134,19 +134,24 @@
     {
       "subject": "1과목",
       "number": 6,
-      "title": "다음 설명에 해당하는 것은?",
+      "title": "아래 상호배타적 관계에서 [계좌] 테이블에 저장될 수 있는 행은?",
       "options": [
-        "식별 관계",
-        "비식별 관계",
-        "제약 조건",
-        "상호 배타적 관계"
+        "(A1, 개인 P1, 법인 C1)",
+        "(A2, 개인 NULL, 법인 NULL)",
+        "(A3, 개인 P9, 법인 NULL)",
+        "(A4, 개인 NULL, 법인 C1)"
       ],
       "correctIndex": 3,
-      "explanation": "하나의 엔터티가 둘 이상의 부모와 관계를 맺을 때 한 시점에는 오직 하나의 부모와만 관계를 가지며, 하나가 선택되면 다른 쪽 외래키는 NULL이어야 하는 구조는 상호 배타적 관계(Exclusive Relationship)이다. 예를 들어 결제는 개인 회원의 결제이거나 법인 회원의 결제이지 동시에 둘일 수 없다. ① 식별 관계와 ② 비식별 관계는 부모 키를 자식의 어디에 두느냐의 구분이라 \"둘 중 하나의 부모만\" 이라는 설명과 다르고, ③ 제약 조건은 범위가 너무 넓은 말이다.",
+      "explanation": "상호배타적 관계는 두 부모 중 어느 한쪽하고만 관계를 맺는다. 그래서 두 외래키 중 정확히 하나만 값이 있고 나머지는 NULL 이어야 한다. ④ 는 법인고객 C1 만 가리키고 C1 이 실제로 있으므로 저장할 수 있다. 정답은 ④번이다. ① 은 두 부모를 동시에 가리켜 배타 조건을 어긴다. ② 는 소유자가 없어 '정확히 하나' 라는 업무 규칙을 어긴다. ③ 은 배타 조건은 지키지만 P9 가 개인고객에 없어 참조 무결성을 어긴다.",
       "references": [
         {
+          "type": "erd",
+          "caption": "개인고객·법인고객·계좌 ERD",
+          "mermaid": "erDiagram\n    개인고객 |o--o{ 계좌 : \"소유(배타)\"\n    법인고객 |o--o{ 계좌 : \"소유(배타)\"\n    개인고객 {\n        string 개인고객번호 PK\n    }\n    법인고객 {\n        string 법인고객번호 PK\n    }\n    계좌 {\n        string 계좌번호 PK\n        string 개인고객번호 FK \"배타\"\n        string 법인고객번호 FK \"배타\"\n    }"
+        },
+        {
           "type": "text",
-          "content": "하나의 엔터티가 두 개 이상의 부모 엔터티와 관계를 맺을 때, 어느 한 시점에는 오직 하나의 부모와만 관계를 가져야 하는 제약 조건이다. 즉, A 관계를 선택하면 B 관계의 외래키는 NULL이어야 하고, B 관계를 선택하면 A 관계의 외래키는 NULL이어야 한다."
+          "content": "업무 규칙: 계좌는 개인고객 또는 법인고객 중 정확히 하나가 소유한다.\n개인고객: P1, P2 / 법인고객: C1"
         }
       ]
     },
@@ -874,15 +879,15 @@
     {
       "subject": "2과목",
       "number": 28,
-      "title": "다음 SQL의 수행 결과는?",
+      "title": "아래 EMP 테이블에 대한 ㉠~㉣ 의 결과를 차례로 나열한 것은? (Oracle 기준)",
       "options": [
-        "JONES",
-        "ALLEN, JONES, MARTIN",
-        "ALLEN, MARTIN",
-        "결과 없음"
+        "2, 6, 3, 4",
+        "3, 4, 3, 5",
+        "2, 5, 3, 4",
+        "2, 5, 3, 2"
       ],
       "correctIndex": 2,
-      "explanation": "LIKE '%N'은 N으로 끝나는 문자열만 매칭한다. ALLEN과 MARTIN이 해당하며, JONES는 N이 중간에 포함될 뿐 S로 끝나므로 제외된다. 따라서 ① 은 틀리고, ② 는 '%N%'(N 포함)로 본 결과이며, ④ ALLEN·MARTIN 이 N 으로 끝나므로 결과가 있다.",
+      "explanation": "Oracle 의 LIKE 는 대소문자를 구분한다. ㉠ 은 대문자 N 으로 끝나는 ALLEN, MARTIN 2건이다. Ann 은 소문자 n 으로 끝나서 빠진다. ㉡ 은 ㉠ 의 반대처럼 보이지만 ENAME 이 NULL 인 행은 LIKE 도 NOT LIKE 도 UNKNOWN 이라 빠진다. 그래서 8 - 2 - 1 = 5건(SMITH, JONES, KING, BLAKE, Ann)이다. ㉢ 은 대문자로 바꾼 뒤 비교하므로 ANN 까지 3건이다. ㉣ 의 '%N%' 는 위치와 상관없이 N 이 들어 있으면 되므로 ALLEN, JONES, MARTIN, KING 4건이다. 정답은 ③번이다. ① 은 NOT LIKE 에 NULL 행도 들어간다고 본 값이다. ② 는 LIKE 가 대소문자를 구분하지 않는다고 본 값이다. ④ 는 '%N%' 가 N 이 처음이나 끝이 아닌 가운데에 있어야 한다고 보고 JONES, KING 만 센 값이다.",
       "references": [
         {
           "type": "table",
@@ -908,12 +913,18 @@
             ],
             [
               "BLAKE"
+            ],
+            [
+              "NULL"
+            ],
+            [
+              "Ann"
             ]
           ]
         },
         {
           "type": "sql",
-          "code": "SELECT ENAME\nFROM   EMP\nWHERE  ENAME LIKE '%N';"
+          "code": "-- ㉠\nSELECT COUNT(*) FROM EMP\nWHERE  ENAME LIKE '%N';\n-- ㉡\nSELECT COUNT(*) FROM EMP\nWHERE  ENAME NOT LIKE '%N';\n-- ㉢\nSELECT COUNT(*) FROM EMP\nWHERE  UPPER(ENAME) LIKE '%N';\n-- ㉣\nSELECT COUNT(*) FROM EMP\nWHERE  ENAME LIKE '%N%';"
         }
       ]
     },
@@ -1457,15 +1468,15 @@
     {
       "subject": "2과목",
       "number": 42,
-      "title": "다음 INSERT FIRST 수행 후 t1, t2, t3의 행 수는? (t1, t2, t3 순서)",
+      "title": "빈 테이블 t1, t2, t3 에 ㉠ 을 실행한 결과와, 세 테이블을 비운 뒤 ㉡ 을 실행한 결과를 (t1, t2, t3) 행 수로 나열한 것은? (Oracle 기준)",
       "options": [
-        "2, 0, 0",
-        "2, 0, 1",
-        "2, 1, 0",
-        "2, 1, 1"
+        "㉠ 3, 2, 1 / ㉡ 3, 0, 1",
+        "㉠ 3, 2, 2 / ㉡ 3, 0, 2",
+        "㉠ 3, 2, 2 / ㉡ 3, 2, 2",
+        "㉠ 3, 2, 0 / ㉡ 3, 0, 2"
       ],
       "correctIndex": 1,
-      "explanation": "INSERT FIRST는 각 행에 대해 처음으로 만족하는 WHEN 절에만 삽입한다. c1이 2와 5인 행은 첫 번째 조건(>= 2)을 만족해 t1에 들어가고(두 번째 조건은 평가되지 않음), 1은 어떤 WHEN도 만족하지 않아 ELSE의 t3에 들어간다. 따라서 2, 0, 1이다. ④ 2, 1, 1 은 INSERT ALL 처럼 5 를 t2 에도 넣은 결과이고, ③ 은 거기에 ELSE 로 가는 1 까지 빠뜨렸으며, ① 은 ELSE 로 가는 1 을 빠뜨린 값이다.",
+      "explanation": "INSERT ALL 은 행마다 WHEN 을 모두 검사해 참인 곳에 전부 넣고, 하나도 참이 아니면 ELSE 로 보낸다. 2 는 t1, 3 과 5 는 t1 과 t2 둘 다, 1 은 어느 WHEN 도 참이 아니라 t3 이다. NULL 은 비교가 모두 UNKNOWN 이라 참인 WHEN 이 없으므로 역시 ELSE 로 가 t3 이다. ㉠ 은 (3, 2, 2) 다. INSERT FIRST 는 처음 참이 된 WHEN 하나에만 넣는다. 3 과 5 도 첫 WHEN(c1 >= 2)에서 t1 으로 가고 t2 는 비어 (3, 0, 2) 가 된다. 정답은 ②번이다. ① 은 NULL 행이 ELSE 로도 가지 않고 버려진다고 본 값이다. ③ 은 ALL 과 FIRST 의 차이를 놓친 값이다. ④ 는 INSERT ALL 에서는 ELSE 가 쓰이지 않는다고 본 값이다.",
       "references": [
         {
           "type": "table",
@@ -1481,13 +1492,19 @@
               "2"
             ],
             [
+              "3"
+            ],
+            [
               "5"
+            ],
+            [
+              "NULL"
             ]
           ]
         },
         {
           "type": "sql",
-          "code": "INSERT FIRST\n  WHEN c1 >= 2 THEN INTO t1\n  WHEN c1 >= 3 THEN INTO t2\n  ELSE INTO t3\nSELECT c1 FROM ts;"
+          "code": "-- ㉠\nINSERT ALL\n  WHEN c1 >= 2 THEN INTO t1\n  WHEN c1 >= 3 THEN INTO t2\n  ELSE INTO t3\nSELECT c1 FROM ts;\n-- ㉡ (㉠ 에서 ALL 만 FIRST 로)\nINSERT FIRST\n  WHEN c1 >= 2 THEN INTO t1\n  WHEN c1 >= 3 THEN INTO t2\n  ELSE INTO t3\nSELECT c1 FROM ts;"
         }
       ]
     },
@@ -1539,43 +1556,43 @@
     {
       "subject": "2과목",
       "number": 45,
-      "title": "다음 UNPIVOT 구문에서 괄호 (ㄱ)에 들어갈 것은?",
+      "title": "아래 SALES 테이블에 대한 ㉠~㉢ 의 결과를 차례로 나열한 것은? (Oracle 기준)",
       "options": [
-        "40, 30, 20",
-        "AMOUNT_3, AMOUNT_2, AMOUNT_1",
-        "AMOUNT, AMOUNT, AMOUNT",
-        "ID, 구분, AMOUNT"
+        "6, 6, 110",
+        "4, 6, 110",
+        "4, 4, 110",
+        "2, 6, 110"
       ],
       "correctIndex": 1,
-      "explanation": "UNPIVOT의 IN 절에는 행으로 풀어낼 원본 컬럼명(AMOUNT_3, AMOUNT_2, AMOUNT_1)을 나열한다. 이 컬럼명이 구분 컬럼의 값이 되고, 컬럼 값이 AMOUNT에 담긴다. ① 은 컬럼 값을, ③ 은 결과 컬럼명을 적은 것이고, ④ 는 SELECT 목록을 적은 것이라 IN 절에 들어갈 수 없다.",
+      "explanation": "UNPIVOT 은 칼럼 Q1·Q2·Q3 을 행으로 바꿔 원래 한 행이 세 행이 된다. 다만 기본값이 EXCLUDE NULLS 라 값이 NULL 인 칸은 행으로 만들지 않는다. ㉠ 은 6칸 중 NULL 두 칸을 뺀 4행이다. ㉡ 은 INCLUDE NULLS 를 붙여 NULL 칸도 행이 되므로 6행이다. ㉢ 은 ㉠ 의 4행(20, 40, 50, 60) 중 50 이하인 20 + 40 + 50 = 110 이다. 정답은 ②번이다. ① 은 기본값이 NULL 도 포함한다고 본 값이다. ③ 은 INCLUDE NULLS 를 붙여도 달라지지 않는다고 생각하면 나오는 값이다. ④ 는 UNPIVOT 뒤에도 원래 행 수가 그대로라고 착각한 결과다.",
       "references": [
         {
           "type": "table",
           "caption": "SALES",
           "headers": [
             "ID",
-            "AMOUNT_3",
-            "AMOUNT_2",
-            "AMOUNT_1"
+            "Q1",
+            "Q2",
+            "Q3"
           ],
           "rows": [
             [
               "100",
               "20",
-              "30",
+              "NULL",
               "40"
             ],
             [
               "200",
               "50",
               "60",
-              "45"
+              "NULL"
             ]
           ]
         },
         {
           "type": "sql",
-          "code": "SELECT ID, 구분, AMOUNT\nFROM   SALES\nUNPIVOT ( AMOUNT FOR 구분 IN ( ㄱ ) )\nWHERE  AMOUNT <= 40;"
+          "code": "-- ㉠\nSELECT COUNT(*)\nFROM   SALES\nUNPIVOT (AMOUNT FOR 분기\n         IN (Q1, Q2, Q3));\n-- ㉡\nSELECT COUNT(*)\nFROM   SALES\nUNPIVOT INCLUDE NULLS\n        (AMOUNT FOR 분기\n         IN (Q1, Q2, Q3));\n-- ㉢\nSELECT SUM(AMOUNT)\nFROM   SALES\nUNPIVOT (AMOUNT FOR 분기\n         IN (Q1, Q2, Q3))\nWHERE  AMOUNT <= 50;"
         }
       ]
     },
@@ -1601,15 +1618,15 @@
     {
       "subject": "2과목",
       "number": 47,
-      "title": "다음 SQL의 수행 결과는?",
+      "title": "아래 TAB 테이블에 대한 ㉠, ㉡ 의 결과로 옳은 것은?",
       "options": [
-        "4",
-        "6",
-        "10",
-        "결과 없음"
+        "㉠ 6, ㉡ 3",
+        "㉠ 16, ㉡ 9",
+        "㉠ 11, ㉡ 5",
+        "㉠ 11, ㉡ 7"
       ],
       "correctIndex": 2,
-      "explanation": "A.COL1 <= B.COL1을 만족하는 (A, B) 조합의 개수를 센다. A=1은 B가 1, 2, 3, 4로 4건, A=2는 3건, A=3은 2건, A=4는 1건이므로 4 + 3 + 2 + 1 = 10건이다. ① 4 는 같은 값끼리만(=), ② 6 은 A < B 로 센 값이다.",
+      "explanation": "같은 테이블을 두 번 읽어 5 × 5 = 25 쌍을 만든 뒤 조건으로 거른다. NULL 이 들어간 쌍은 비교가 UNKNOWN 이라 모두 빠지므로, 1, 2, 2, 3 네 행끼리 16 쌍만 보면 된다. ㉠ 은 A 가 1 이면 B 네 행 모두(4쌍), A 가 2 인 두 행은 각각 B 의 2, 2, 3(3쌍씩 6쌍), A 가 3 이면 B 의 3(1쌍)이라 11 이다. ㉡ 은 같은 값을 빼고 A 가 1 이면 B 의 2, 2, 3(3쌍), A 가 2 인 두 행은 각각 B 의 3(2쌍)이라 5 다. 정답은 ③번이다. ① 은 중복 값을 하나로 보고 1, 2, 3 세 값끼리만 센 값이다. ② 는 NULL 을 가장 작은 값처럼 보고 NULL 쌍까지 센 값이다. ④ 는 2 가 든 두 행을 서로 다른 행이라는 이유로 '작다' 에도 넣어 2쌍을 더 센 값이다.",
       "references": [
         {
           "type": "table",
@@ -1625,16 +1642,19 @@
               "2"
             ],
             [
+              "2"
+            ],
+            [
               "3"
             ],
             [
-              "4"
+              "NULL"
             ]
           ]
         },
         {
           "type": "sql",
-          "code": "SELECT COUNT(*)\nFROM   TAB A, TAB B\nWHERE  A.COL1 <= B.COL1;"
+          "code": "-- ㉠\nSELECT COUNT(*)\nFROM   TAB A, TAB B\nWHERE  A.COL1 <= B.COL1;\n-- ㉡\nSELECT COUNT(*)\nFROM   TAB A, TAB B\nWHERE  A.COL1 < B.COL1;"
         }
       ]
     },
@@ -1660,34 +1680,74 @@
     {
       "subject": "2과목",
       "number": 50,
-      "title": "다음 권한 부여·회수 내역에 대해 옳은 것은?",
+      "title": "다음 권한 부여·회수를 차례로 실행한 뒤, 철수와 영희가 T 테이블에 쓸 수 있는 권한을 바르게 나타낸 것은?",
       "options": [
-        "DROP ROLE STAFF를 하면 철수의 SELECT 권한이 사라진다.",
-        "철수는 STAFF 권한이 없어서 SELECT를 할 수 없다.",
-        "영희는 DELETE 권한을 사용할 수 있다.",
-        "철수의 INSERT 권한을 박탈하려면 STAFF와 MGR 둘 다에서 박탈해야 한다."
+        "철수: SELECT·DELETE·UPDATE / 영희: SELECT",
+        "철수: SELECT·INSERT·DELETE·UPDATE / 영희: SELECT",
+        "철수: DELETE·UPDATE / 영희: SELECT",
+        "철수: SELECT·DELETE·UPDATE / 영희: SELECT·DELETE"
       ],
       "correctIndex": 0,
-      "explanation": "STAFF 롤은 MGR 롤에 부여되고 MGR 롤은 철수에게 부여되었으므로 철수는 MGR을 통해 STAFF의 권한(SELECT 등)을 갖는다. STAFF 롤을 삭제하면 MGR을 거쳐 받은 철수의 SELECT 권한도 함께 사라진다. ② 철수는 MGR 을 통해 SELECT 를 할 수 있고, ③ 영희는 STAFF만 받았으므로 DELETE 권한이 없으며, ④ INSERT 권한은 STAFF에서만 회수하면 MGR 을 거친 권한도 함께 사라진다.",
+      "explanation": "롤 안에 롤을 넣으면 권한이 이어진다. 철수는 MGR 을 받았고 MGR 안에 STAFF 가 들어 있으므로 MGR 의 DELETE·UPDATE 와 STAFF 의 SELECT 를 모두 쓸 수 있다. 영희는 STAFF 만 받아 SELECT 만 쓸 수 있다. 마지막 REVOKE 로 STAFF 의 INSERT 가 회수되었으므로, STAFF 를 통해 INSERT 를 받던 철수와 영희 모두 INSERT 를 쓸 수 없다. 롤에서 한 번만 회수하면 그 롤을 받은 모든 사용자에게 바로 반영된다. 정답은 ①번이다. ② 는 롤에서 회수해도 이미 받은 사용자에게는 남는다고 착각한 결과다. ③ 은 MGR 안에 넣은 STAFF 의 권한이 철수에게 이어지지 않는다고 보았다. ④ 는 영희도 MGR 권한을 받은 것처럼 보았다. PostgreSQL 16 에서 같은 롤 구성을 만들어 확인하면 철수는 SELECT·DELETE 참, INSERT 거짓, 영희는 SELECT 만 참이다.",
       "references": [
         {
           "type": "text",
-          "content": "SELECT, INSERT 권한 → STAFF 롤에 부여\nDELETE, UPDATE 권한 → MGR 롤에 부여\nSTAFF 롤 → MGR 롤에 부여\nMGR 롤 → 철수에게 부여\nSTAFF 롤 → 영희에게 부여\nREVOKE INSERT FROM STAFF"
+          "content": "GRANT SELECT, INSERT ON T TO STAFF;\nGRANT DELETE, UPDATE ON T TO MGR;\nGRANT STAFF TO MGR;\nGRANT MGR TO 철수;\nGRANT STAFF TO 영희;\nREVOKE INSERT ON T FROM STAFF;"
         }
       ]
     },
     {
       "subject": "2과목",
       "number": 16,
-      "title": "급여 값이 모두 서로 다른 EMP 테이블에서 급여가 가장 적은 직원 5명을 조회하려고 한다. 다음 중 실행 순서 때문에 의도와 다른 결과를 낼 수 있는 SQL은?",
+      "title": "아래 EMP 테이블(표의 순서대로 읽힌다고 가정)에서 급여가 적은 3명을 구하려고 한다. 결과 행 수가 4인 SQL 과, 급여 300 인 '가' 가 결과에 들어가는 SQL 을 차례대로 고른 것은?",
       "options": [
-        "(가) SQL Server\nSELECT TOP 5 * FROM EMP ORDER BY SAL ASC;",
-        "(나) SQL Server\nSELECT TOP 5 WITH TIES * FROM EMP ORDER BY SAL ASC;",
-        "(다) Oracle\nSELECT * FROM EMP WHERE ROWNUM <= 5 ORDER BY SAL ASC;",
-        "(라) 표준 SQL\nSELECT * FROM EMP ORDER BY SAL ASC FETCH FIRST 5 ROWS ONLY;"
+        "(나), (라)",
+        "(가), (다)",
+        "(나), (다)",
+        "(라), (가)"
       ],
       "correctIndex": 2,
-      "explanation": "Oracle에서 같은 쿼리 블록의 ROWNUM <= 5는 ORDER BY 정렬보다 먼저 적용된다. 임의로 뽑힌 5행만 정렬될 뿐 급여가 가장 적은 5명이 보장되지 않는다. (가) TOP 5와 (라) FETCH FIRST는 정렬 결과의 앞 5행을 제한하고, (나) WITH TIES는 경계값과 같은 행을 추가로 포함하지만 급여가 모두 다르다고 했으므로 정확히 5행이 나온다. (다)를 고치려면 인라인 뷰 안에서 먼저 정렬한 뒤 바깥에서 ROWNUM을 적용해야 한다."
+      "explanation": "(나) 의 WITH TIES 는 3번째 값(200)과 같은 행을 모두 함께 내보내므로 나(100), 바(150), 다·라(200) 4행이다. (가) TOP 3 과 (라) FETCH FIRST 3 ROWS ONLY 는 정렬한 뒤 앞 3행만 내보내 3행이다(동점인 다·라 중 하나만 나온다). (다) 는 같은 쿼리 안의 ROWNUM <= 3 이 ORDER BY 보다 먼저 적용되어, 먼저 읽힌 가, 나, 다 3행을 고른 뒤 정렬한다. 그래서 급여가 가장 큰 편인 '가' 가 끼어든다. 정답은 ③번이다. 급여 순 상위 3명을 Oracle ROWNUM 으로 구하려면 인라인 뷰 안에서 먼저 정렬해야 한다. PostgreSQL 16 에서 WITH TIES 는 나, 바, 다, 라 4행, ROWNUM 방식(읽기 순서 3행 후 정렬)은 나, 다, 가 다.",
+      "references": [
+        {
+          "type": "table",
+          "caption": "EMP",
+          "headers": [
+            "이름",
+            "급여"
+          ],
+          "rows": [
+            [
+              "가",
+              "300"
+            ],
+            [
+              "나",
+              "100"
+            ],
+            [
+              "다",
+              "200"
+            ],
+            [
+              "라",
+              "200"
+            ],
+            [
+              "마",
+              "400"
+            ],
+            [
+              "바",
+              "150"
+            ]
+          ]
+        },
+        {
+          "type": "sql",
+          "code": "-- (가) SQL Server\nSELECT TOP 3 * FROM EMP\nORDER  BY 급여;\n-- (나) SQL Server\nSELECT TOP 3 WITH TIES * FROM EMP\nORDER  BY 급여;\n-- (다) Oracle\nSELECT * FROM EMP\nWHERE  ROWNUM <= 3\nORDER  BY 급여;\n-- (라) 표준 SQL\nSELECT * FROM EMP\nORDER  BY 급여\nFETCH  FIRST 3 ROWS ONLY;"
+        }
+      ]
     },
     {
       "subject": "2과목",

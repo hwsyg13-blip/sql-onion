@@ -727,19 +727,20 @@ export const ROUND_51: QuizQuestion[] = [
     "round": 51,
     "subject": "2과목",
     "number": 19,
-    "title": "아래 TAB1 테이블에 대한 SQL 의 결과로 옳은 것은?",
+    "title": "아래 TAB1 테이블에 대한 ㉠~㉣ 의 결과 행 수를 차례로 나열한 것은?",
     "options": [
-      "공집합",
-      "'X' 한 행",
-      "NULL 한 행",
-      "MAX(COL1) 값"
+      "1, 0, 0, 1",
+      "1, 1, 1, 1",
+      "0, 0, 0, 1",
+      "1, 0, 1, 1"
     ],
     "correctIndex": 0,
-    "explanation": "TAB1 의 COL2 값이 모두 9 이하라 `WHERE COL2 > 9` 를 만족하는 행이 없다. `GROUP BY` 가 지정된 SQL 은 그룹이 0 개이면 결과 행도 0 개로 공집합이 된다. `GROUP BY` 가 없었다면 단일 그룹으로 처리되어 `MAX(COL1)` = NULL → NVL 로 'X' 1 행이 나오겠지만, 본 SQL 은 `GROUP BY COL1` 이라 공집합이 정답. ② 'X' 한 행은 GROUP BY 가 없을 때의 결과, ③ NULL 한 행은 거기에 NVL 도 없을 때의 결과이고, ④ 그룹이 없어 MAX 값도 나오지 않는다.",
+    "explanation": "COL2 > 9 인 행은 없다. ㉠ 은 GROUP BY 없는 집계라 대상 행이 없어도 한 행을 돌려준다. MAX 가 NULL 이라 NVL 로 'X' 가 나와 1행이다. ㉡ 은 GROUP BY 가 있어 만들어질 그룹이 없으므로 0행이다. ㉢ 은 GROUP BY 없이 HAVING 만 쓰면 테이블 전체가 한 그룹이 되는데, COUNT(*) = 2 라 HAVING 조건이 거짓이어서 그 한 그룹도 빠져 0행이다. ㉣ 은 ㉠ 과 같은 이유로 0 이 담긴 1행이다. 정답은 ①번이다. ② 는 NVL 을 쓰면 언제나 한 행이 나온다고 본 값이다. ③ 은 대상 행이 없으면 NVL(MAX) 도 행이 없다고 생각하면 나오는 값이다. ④ 는 GROUP BY 가 없으면 HAVING 이 무시된다고 착각한 결과다.",
     "_source": "authored",
     "references": [
       {
         "type": "table",
+        "caption": "TAB1",
         "headers": [
           "COL1",
           "COL2"
@@ -753,12 +754,11 @@ export const ROUND_51: QuizQuestion[] = [
             "B",
             "7"
           ]
-        ],
-        "caption": "TAB1 테이블"
+        ]
       },
       {
         "type": "sql",
-        "code": "SELECT NVL(MAX(COL1), 'X')\nFROM   TAB1\nWHERE  COL2 > 9\nGROUP BY COL1;"
+        "code": "-- ㉠\nSELECT NVL(MAX(COL1), 'X') FROM TAB1\nWHERE  COL2 > 9;\n-- ㉡\nSELECT NVL(MAX(COL1), 'X') FROM TAB1\nWHERE  COL2 > 9\nGROUP BY COL1;\n-- ㉢\nSELECT NVL(MAX(COL1), 'X') FROM TAB1\nHAVING COUNT(*) > 9;\n-- ㉣\nSELECT COUNT(*) FROM TAB1\nWHERE  COL2 > 9;"
       }
     ]
   },
@@ -926,20 +926,20 @@ export const ROUND_51: QuizQuestion[] = [
     "round": 51,
     "subject": "2과목",
     "number": 23,
-    "title": "아래 T 테이블에 대한 SQL 의 결과로 옳은 것은?",
+    "title": "아래 T 테이블에 대한 SQL 의 결과로 옳은 것은? (Oracle 기준)",
     "options": [
-      "전체 행",
-      "COL1 = 'CPG' 인 행",
-      "COL2 <= 10 인 행",
-      "조건을 만족하는 행 없음 (결과 없음)"
+      "1",
+      "3",
+      "4",
+      "2"
     ],
     "correctIndex": 3,
-    "explanation": "표의 모든 행은 COL1 = 'CPG' 이거나 COL2 ≤ 10 이라 `COL1 <> 'CPG' AND COL2 > 10` 두 조건을 동시에 만족하는 행이 없다. ① 은 조건을 무시한 결과, ② 는 <> 를 = 로 본 결과, ③ 은 COL2 조건을 반대로 본 결과다.",
+    "explanation": "AND 가 OR 보다 먼저 묶이므로 조건은 (NOT (COL1 = 'CPG' OR COL2 <= 10) AND COL1 <> 'XYZ') OR COL2 IS NULL 이다. NOT (…) 이 참이려면 COL1 이 CPG 가 아니고 COL2 가 10 보다 커야 한다. 여기에 맞는 행은 (NULL, 15)·(XYZ, 30)·(ABC, 12) 후보인데, (XYZ, 30) 은 COL1 <> 'XYZ' 에서 빠진다. (NULL, 15) 는 COL1 = 'CPG' 가 UNKNOWN 이라 NOT 을 붙여도 UNKNOWN 이고, COL1 <> 'XYZ' 도 UNKNOWN 이라 빠진다. 그래서 앞쪽 묶음은 (ABC, 12) 한 행이다. 뒤의 OR COL2 IS NULL 로 (ABC, NULL) 이 더해진다. 이 행은 앞쪽 묶음이 UNKNOWN 이지만 OR 의 한쪽이 참이면 참이다. 모두 2건, 정답은 ④번이다. ① 1 은 OR 를 먼저 묶어 NOT (…) AND (COL1 <> 'XYZ' OR COL2 IS NULL) 로 읽은 값이다. ② 3 은 COL1 이 NULL 인 (NULL, 15) 도 'CPG' 나 'XYZ' 가 아니니 참이라고 본 값이다. ③ 4 는 NOT (A OR B) 를 NOT A OR NOT B 로 잘못 풀어 COL1 <> 'CPG' OR COL2 > 10 으로 계산한 값이다.",
     "_source": "authored",
     "references": [
       {
         "type": "table",
-        "caption": "T 테이블",
+        "caption": "T",
         "headers": [
           "COL1",
           "COL2"
@@ -960,12 +960,28 @@ export const ROUND_51: QuizQuestion[] = [
           [
             "XYZ",
             "8"
+          ],
+          [
+            "NULL",
+            "15"
+          ],
+          [
+            "ABC",
+            "NULL"
+          ],
+          [
+            "XYZ",
+            "30"
+          ],
+          [
+            "ABC",
+            "12"
           ]
         ]
       },
       {
         "type": "sql",
-        "code": "SELECT * FROM T\nWHERE COL1 <> 'CPG' AND COL2 > 10;"
+        "code": "SELECT COUNT(*)\nFROM   T\nWHERE  NOT (COL1 = 'CPG'\n            OR COL2 <= 10)\nAND    COL1 <> 'XYZ'\nOR     COL2 IS NULL;"
       }
     ]
   },
@@ -1256,20 +1272,20 @@ export const ROUND_51: QuizQuestion[] = [
     "round": 51,
     "subject": "2과목",
     "number": 29,
-    "title": "아래 EMP 테이블에 대해 다음 네 SQL 을 수행한 RNK 결과 중 마지막 행의 값이 나머지와 다른 것은?",
+    "title": "아래 EMP 테이블에 대한 SQL 결과에서 EMPNO 가 4 인 행의 (R1, R2, R3) 값으로 옳은 것은?",
     "options": [
-      "RANK() OVER (ORDER BY SAL DESC)",
-      "DENSE_RANK() OVER (ORDER BY SAL DESC)",
-      "ROW_NUMBER() OVER (ORDER BY SAL DESC)",
-      "NTILE(4) OVER (ORDER BY SAL DESC)"
+      "(6, 4, 2)",
+      "(6, 4, 3)",
+      "(4, 4, 3)",
+      "(6, 6, 3)"
     ],
     "correctIndex": 1,
-    "explanation": "SAL 이 같은 행이 두 개 있을 때 RANK 는 1, 2, 2, 4 로 동률 다음 순위를 건너뛰고 DENSE_RANK 는 1, 2, 2, 3 으로 건너뛰지 않는다. ROW_NUMBER 는 동률과 무관하게 1, 2, 3, 4 를 부여하고 NTILE(4) 도 네 그룹으로 나누어 1, 2, 3, 4 가 된다. 마지막 행의 값이 3 인 DENSE_RANK 만 나머지(4)와 다르다. ① RANK, ③ ROW_NUMBER, ④ NTILE(4) 는 마지막 행이 모두 4 다.",
+    "explanation": "급여 내림차순으로 놓으면 5000(1번), 4500(5·6번), 4000(2·3번), 3000(4번), 2000(7번)이다. RANK 는 같은 값에 같은 순위를 주고 그 수만큼 다음 순위를 건너뛴다. 1, 2, 2, 4, 4, 6, 7 이 되어 4번은 6이다. DENSE_RANK 는 건너뛰지 않아 1, 2, 2, 3, 3, 4, 5 로 4번은 4다. NTILE(3) 은 7행을 세 묶음으로 나누는데 나머지 1행은 앞 묶음부터 하나씩 더 받는다. 묶음 크기는 3, 2, 2 이고, 1·5·6번이 1, 2·3번이 2, 4·7번이 3이다. 4번은 (6, 4, 3), 정답은 ②번이다. ① 은 NTILE 묶음을 3, 3, 1 로 나눠 4번을 2로 본 것이다. ③ 은 RANK 가 DENSE_RANK 처럼 건너뛰지 않는다고 생각한 것이다. ④ 는 반대로 DENSE_RANK 도 건너뛴다고 착각한 것이다.",
     "_source": "authored",
     "references": [
       {
         "type": "table",
-        "caption": "EMP 테이블",
+        "caption": "EMP",
         "headers": [
           "EMPNO",
           "SAL"
@@ -1290,8 +1306,24 @@ export const ROUND_51: QuizQuestion[] = [
           [
             "4",
             "3000"
+          ],
+          [
+            "5",
+            "4500"
+          ],
+          [
+            "6",
+            "4500"
+          ],
+          [
+            "7",
+            "2000"
           ]
         ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT EMPNO,\n  RANK() OVER (ORDER BY SAL DESC)\n    AS R1,\n  DENSE_RANK() OVER (ORDER BY SAL DESC)\n    AS R2,\n  NTILE(3) OVER (ORDER BY SAL DESC,\n                          EMPNO)\n    AS R3\nFROM   EMP;"
       }
     ]
   },
@@ -1302,20 +1334,20 @@ export const ROUND_51: QuizQuestion[] = [
     "round": 51,
     "subject": "2과목",
     "number": 30,
-    "title": "아래 두 테이블에 대한 네 SQL 중 결과가 다른 하나는?",
+    "title": "아래 두 테이블에 대한 ㉠~㉣ 의 결과 행 수를 차례로 나열한 것은?",
     "options": [
-      "SELECT COL1 FROM T1 MINUS SELECT COL1 FROM T2;",
-      "SELECT T1.COL1 FROM T1, T2 WHERE T1.COL1 <> T2.COL1;",
-      "SELECT COL1 FROM T1 WHERE COL1 NOT IN (SELECT COL1 FROM T2);",
-      "SELECT T1.COL1 FROM T1 LEFT JOIN T2 ON T1.COL1 = T2.COL1 WHERE T2.COL1 IS NULL;"
+      "2, 2, 2, 2",
+      "2, 0, 3, 3",
+      "3, 0, 3, 3",
+      "2, 0, 2, 3"
     ],
     "correctIndex": 1,
-    "explanation": "① MINUS·③ NOT IN·④ LEFT JOIN+IS NULL 은 모두 'T1 에는 있고 T2 에는 없는 값 (D, E)' 을 반환하지만, T1, T2 카티션 곱에 `<>` 조건을 적용하면 비교 대상이 다른 모든 행과 매칭되어 중복된 결과가 나오므로 다른 답이 된다.",
+    "explanation": "㉠ MINUS 는 집합 연산이라 NULL 끼리를 같은 값으로 본다. T1 의 NULL 도 T2 의 NULL 과 같아서 빠지고 B, D 2행이다. ㉡ NOT IN 은 목록에 NULL 이 있어 어떤 행에서도 참이 될 수 없으므로 0행이다. ㉢ NOT EXISTS 는 = 로 비교하므로 T1 의 NULL 은 T2 의 어느 행과도 같지 않다. 그래서 NULL 도 '없는 값' 으로 남아 B, D, NULL 3행이다. ㉣ 의 LEFT JOIN 뒤 IS NULL 거르기도 같은 이유로 B, D, NULL 3행이다. 정답은 ②번이다. ① 은 네 방법이 늘 같은 결과를 낸다고 본 값이다. ③ 은 MINUS 도 NULL 을 남긴다고 생각하면 나오는 값이다. ④ 는 NOT EXISTS 가 NULL 행을 빼고 LEFT JOIN 만 남긴다고 착각한 결과다.",
     "_source": "authored",
     "references": [
       {
         "type": "table",
-        "caption": "T1 테이블",
+        "caption": "T1",
         "headers": [
           "COL1"
         ],
@@ -1333,13 +1365,13 @@ export const ROUND_51: QuizQuestion[] = [
             "D"
           ],
           [
-            "E"
+            "NULL"
           ]
         ]
       },
       {
         "type": "table",
-        "caption": "T2 테이블",
+        "caption": "T2",
         "headers": [
           "COL1"
         ],
@@ -1348,12 +1380,16 @@ export const ROUND_51: QuizQuestion[] = [
             "A"
           ],
           [
-            "B"
+            "C"
           ],
           [
-            "C"
+            "NULL"
           ]
         ]
+      },
+      {
+        "type": "sql",
+        "code": "-- ㉠\nSELECT COL1 FROM T1\nMINUS\nSELECT COL1 FROM T2;\n-- ㉡\nSELECT COL1 FROM T1\nWHERE  COL1 NOT IN (SELECT COL1\n                    FROM   T2);\n-- ㉢\nSELECT COL1 FROM T1\nWHERE  NOT EXISTS (\n         SELECT 1 FROM T2\n         WHERE  T2.COL1 = T1.COL1);\n-- ㉣\nSELECT T1.COL1\nFROM   T1 LEFT JOIN T2\n       ON T1.COL1 = T2.COL1\nWHERE  T2.COL1 IS NULL;"
       }
     ]
   },
@@ -1364,20 +1400,20 @@ export const ROUND_51: QuizQuestion[] = [
     "round": 51,
     "subject": "2과목",
     "number": 31,
-    "title": "아래 SQL Server 테이블에 대한 INSERT 결과로 옳은 것은?",
+    "title": "아래 SQL Server 스크립트를 차례로 실행했을 때(문장마다 자동 커밋) 마지막 SELECT 의 결과로 옳은 것은?",
     "options": [
-      "1",
-      "2",
-      "3",
-      "0"
+      "1, 3",
+      "1, 1",
+      "3, 3",
+      "0, NULL"
     ],
     "correctIndex": 0,
-    "explanation": "VALUE 에 CHECK (VALUE >= 3) 제약이 있어 1, 2 를 넣는 INSERT 는 제약 위반으로 실패하고, 3 만 들어간다. IDENTITY 컬럼 MAIN 은 자동으로 채워진다. 따라서 COUNT(*) = 1 이다(①). ② 2 는 CHECK 를 >= 2 처럼 본 값, ③ 3 은 CHECK 를 무시한 값, ④ 0 은 하나라도 실패하면 모두 취소된다고 본 값이다.",
+    "explanation": "VALUE 에 CHECK (VALUE >= 3) 이 걸려 있어 1, 2 를 넣는 INSERT 는 오류가 나고 3 만 들어가므로 COUNT(*) 는 1 이다. IDENTITY 값은 INSERT 를 시도할 때 먼저 하나씩 쓰이고, 그 INSERT 가 실패해도 되돌려 쓰지 않는다. 실패한 두 문장이 1, 2 를 써 버렸기 때문에 들어간 행의 MAIN 은 3 이다. 정답은 ①번이다. ② 는 실패한 INSERT 가 IDENTITY 값을 쓰지 않는다고 본 값이다. ③ 은 CHECK 를 무시하고 세 행이 모두 들어간다고 생각하면 나오는 값이다. ④ 는 한 문장이라도 실패하면 앞뒤 문장까지 모두 취소된다고 착각한 결과다. 문장마다 자동 커밋이므로 실패한 문장만 취소된다.",
     "_source": "authored",
     "references": [
       {
         "type": "sql",
-        "code": "CREATE TABLE T1 (\n  MAIN  INT IDENTITY(1,1),\n  VALUE INT CHECK (VALUE >= 3)\n);\n\nINSERT INTO T1 VALUES(1);\nINSERT INTO T1 VALUES(2);\nINSERT INTO T1 VALUES(3);\n\nSELECT COUNT(*) FROM T1;"
+        "code": "CREATE TABLE T1 (\n  MAIN  INT IDENTITY(1,1),\n  VALUE INT CHECK (VALUE >= 3)\n);\n\nINSERT INTO T1 (VALUE) VALUES (1);\nINSERT INTO T1 (VALUE) VALUES (2);\nINSERT INTO T1 (VALUE) VALUES (3);\n\nSELECT COUNT(*), MAX(MAIN) FROM T1;"
       }
     ]
   },

@@ -869,20 +869,20 @@ export const ROUND_48: QuizQuestion[] = [
     "round": 48,
     "subject": "2과목",
     "number": 21,
-    "title": "아래 EMP 테이블의 HIRE_DT 컬럼에 대해 \"2025-10-21 하루\" 데이터를 조회하려 할 때 결과가 달라지는 조건은?",
+    "title": "아래 EMP 테이블에 대한 ㉠~㉣ 의 결과 행 수를 차례로 나열한 것은? (Oracle 기준, HIRE_DT 는 DATE 타입으로 시각까지 저장)",
     "options": [
-      "HIRE_DT >= DATE '2025-10-21' AND HIRE_DT < DATE '2025-10-22'",
-      "TRUNC(HIRE_DT) = DATE '2025-10-21'",
-      "HIRE_DT BETWEEN DATE '2025-10-21' AND DATE '2025-10-22'",
-      "HIRE_DT >= DATE '2025-10-21' AND HIRE_DT <= DATE '2025-10-21' + 1 - 1/86400"
+      "2, 2, 5, 5",
+      "3, 2, 5, 5",
+      "3, 2, 4, 5",
+      "3, 2, 4, 6"
     ],
     "correctIndex": 2,
-    "explanation": "Oracle DATE 리터럴 비교 시 `DATE '2025-10-22'`는 22일 0시 0분 0초를 의미한다. ①은 \"21일 0시 ≤ HIRE_DT < 22일 0시\"로 정확히 21일 하루만 잡고, ②는 TRUNC로 시간을 0시로 깎아 21일만 잡으며, ④는 \"21일 0시 ≤ HIRE_DT ≤ 22일 0시 - 1초\"라 21일 23:59:59까지만 잡는다. 그러나 ③의 BETWEEN은 양 끝값을 포함하므로 22일 0시까지 결과에 들어가 22일 0시 정각인 7004 까지 함께 조회된다. 결과가 달라지는 것은 ③번이라 정답이다.",
+    "explanation": "DATE '2025-10-22' 는 그날 0시 0분 0초다. ㉠ 의 BETWEEN 은 양 끝을 포함하므로 10-21 0시(7002), 18시 45분(7003), 10-22 0시(7004)까지 3행이다. ㉡ 은 시각을 잘라 날짜만 비교하므로 10-21 의 두 행이다. ㉢ 의 LAST_DAY(DATE '2025-10-01') 은 2025-10-31 0시라, 그날 23시 59분 59초인 7005 는 빠지고 7001~7004 4행이다. ㉣ 은 11-01 0시 미만이므로 10월 전체인 7001~7005 5행이다. 정답은 ③번이다. ① 은 BETWEEN 이 끝 날짜 0시를 빼고, LAST_DAY 가 그날 끝까지 포함한다고 본 값이다. ② 는 LAST_DAY 를 10-31 23시 59분 59초로 본 값이다. ④ 는 < 를 <= 처럼 보고 11-01 0시(7006)까지 넣은 값이다. 한 달 범위는 ㉣ 처럼 '다음 달 1일 미만' 으로 쓰는 것이 안전하다.",
     "_source": "authored",
     "references": [
       {
         "type": "table",
-        "caption": "EMP 테이블 (HIRE_DT — DATE 타입, 시·분·초 포함)",
+        "caption": "EMP",
         "headers": [
           "EMPNO",
           "HIRE_DT"
@@ -894,7 +894,7 @@ export const ROUND_48: QuizQuestion[] = [
           ],
           [
             "7002",
-            "2025-10-21 09:00:00"
+            "2025-10-21 00:00:00"
           ],
           [
             "7003",
@@ -906,9 +906,17 @@ export const ROUND_48: QuizQuestion[] = [
           ],
           [
             "7005",
-            "2025-10-22 11:00:00"
+            "2025-10-31 23:59:59"
+          ],
+          [
+            "7006",
+            "2025-11-01 00:00:00"
           ]
         ]
+      },
+      {
+        "type": "sql",
+        "code": "-- ㉠\nWHERE HIRE_DT BETWEEN DATE '2025-10-21'\n                  AND DATE '2025-10-22'\n-- ㉡\nWHERE TRUNC(HIRE_DT)\n    = DATE '2025-10-21'\n-- ㉢\nWHERE HIRE_DT >= DATE '2025-10-01'\nAND   HIRE_DT <= LAST_DAY(\n                   DATE '2025-10-01')\n-- ㉣\nWHERE HIRE_DT >= DATE '2025-10-01'\nAND   HIRE_DT < ADD_MONTHS(\n                  DATE '2025-10-01', 1)"
       }
     ]
   },
@@ -1603,20 +1611,20 @@ export const ROUND_48: QuizQuestion[] = [
     "round": 48,
     "subject": "2과목",
     "number": 38,
-    "title": "아래 T 테이블에 대한 LIKE 조건 SQL 의 결과로 옳은 것은?",
+    "title": "아래 T 테이블에 대한 SQL 의 결과로 옳은 것은? (Oracle 기준)",
     "options": [
-      "2건",
-      "4건",
-      "5건",
-      "6건"
+      "4",
+      "5",
+      "7",
+      "3"
     ],
     "correctIndex": 3,
-    "explanation": "`ESCAPE '@'` 옵션으로 `@_` 를 리터럴 밑줄(`_`) 로 해석한다. 따라서 패턴 `'%@_%'` 는 \"문자열 안에 `_` 를 포함하는 행\" 을 의미하며, T 테이블의 모든 6 행이 `_` 를 포함하므로 6 건이 매칭된다. ESCAPE 를 빼고 '%_%' 로 써도 _ 가 임의의 한 글자가 되어 한 글자 이상인 6 행이 모두 매칭되므로, 이 데이터에서는 ① 2건·② 4건·③ 5건처럼 일부만 나오는 경우가 없다.",
+    "explanation": "ESCAPE '@' 로 정하면 @ 바로 뒤의 _ 나 % 는 와일드카드가 아니라 문자 그대로가 된다. 첫 조건 'A@_%' 는 'A_' 로 시작하는 값이라 A_B, A__B 두 건이다. AXB·AB_ 는 두 번째 글자가 _ 가 아니고, a_b 는 소문자라 맞지 않는다(Oracle 의 LIKE 는 대소문자를 구분한다). 둘째 조건 '%@%%' 는 % 문자가 들어 있는 값이라 A%B 한 건이다. 두 조건은 OR 이고 겹치는 행이 없으므로 3건, 정답은 ④번이다. ① 4 는 a_b 까지 대소문자 구분 없이 센 값이다. ② 5 는 첫 조건의 @_ 를 아무 한 글자로 읽어 A 로 시작하고 두 글자 이상인 값(A_B, AXB, A%B, AB_, A__B)을 센 것이다. ③ 7 은 둘째 조건까지 ESCAPE 를 무시해 '%%%' 가 모든 값과 맞는다고 본 것이다.",
     "_source": "authored",
     "references": [
       {
         "type": "table",
-        "caption": "T 테이블",
+        "caption": "T",
         "headers": [
           "COL"
         ],
@@ -1625,25 +1633,28 @@ export const ROUND_48: QuizQuestion[] = [
             "A_B"
           ],
           [
-            "C_D"
+            "AXB"
           ],
           [
-            "E_F"
+            "A%B"
           ],
           [
-            "G_H"
+            "AB_"
           ],
           [
-            "I_J"
+            "_AB"
           ],
           [
-            "K_L"
+            "A__B"
+          ],
+          [
+            "a_b"
           ]
         ]
       },
       {
         "type": "sql",
-        "code": "SELECT COUNT(*)\nFROM   T\nWHERE  COL LIKE '%@_%' ESCAPE '@';"
+        "code": "SELECT COUNT(*)\nFROM   T\nWHERE  COL LIKE 'A@_%' ESCAPE '@'\n   OR  COL LIKE '%@%%' ESCAPE '@';"
       }
     ]
   },
@@ -1821,16 +1832,52 @@ export const ROUND_48: QuizQuestion[] = [
     "round": 48,
     "subject": "2과목",
     "number": 43,
-    "title": "상위 10건을 조회하는 ROWNUM 기반 SQL 로 옳은 것은? (Oracle 환경)",
+    "title": "아래 [학생] 테이블(표 순서대로 저장됨)에서 점수 상위 3명을 점수 내림차순으로 정확히 출력하는 SQL 은? (Oracle 기준)",
     "options": [
-      "SELECT 컬럼 FROM T WHERE ROWNUM <= 10 ORDER BY 컬럼 DESC;",
-      "SELECT 컬럼 FROM T ORDER BY 컬럼 DESC WHERE ROWNUM <= 10;",
-      "SELECT * FROM (SELECT 컬럼 FROM T ORDER BY 컬럼 DESC) WHERE ROWNUM <= 10;",
-      "SELECT 컬럼 FROM T WHERE ROWNUM = 10 ORDER BY 컬럼 DESC;"
+      "SELECT 이름 FROM 학생 WHERE ROWNUM <= 3 ORDER BY 점수 DESC;",
+      "SELECT 이름 FROM (SELECT 이름, ROWNUM AS RN FROM 학생 ORDER BY 점수 DESC) WHERE RN <= 3;",
+      "SELECT 이름 FROM (SELECT 이름 FROM 학생 ORDER BY 점수 DESC) WHERE ROWNUM <= 3;",
+      "SELECT 이름 FROM (SELECT 이름 FROM 학생 ORDER BY 점수 DESC) WHERE ROWNUM = 3;"
     ],
     "correctIndex": 2,
-    "explanation": "Oracle의 ROWNUM은 ORDER BY가 적용되기 전 단계에서 행에 1부터 부여된다. 따라서 같은 SELECT 안에서 `WHERE ROWNUM <= 10 ... ORDER BY ... DESC`처럼 쓰면 정렬되지 않은 임의의 10건이 잡힌 뒤 정렬되어 \"상위 10건\"이 보장되지 않는다. 안전하게 상위 10건을 얻으려면 인라인 뷰 안에서 먼저 ORDER BY DESC로 정렬한 뒤, 바깥쪽에서 `WHERE ROWNUM <= 10`으로 자르는 ③번 패턴을 써야 한다. ②는 문법 오류(`WHERE` 가 `ORDER BY` 뒤에 올 수 없음), ④는 `ROWNUM = 10` 이 절대 만족되지 않아 항상 0건이 반환된다. 정답은 ③번이다.",
-    "_source": "authored"
+    "explanation": "ROWNUM 은 행을 읽어 WHERE 를 통과하는 순서대로 붙고, ORDER BY 는 그 다음에 실행된다. 그래서 정렬을 먼저 끝낸 인라인 뷰 바깥에서 ROWNUM 을 걸어야 상위 N건이 된다. ③ 은 안쪽에서 점수 내림차순(나 90, 라 88, 다 85, …)으로 정렬한 뒤 앞의 세 행을 잘라 나, 라, 다 가 나온다. 정답은 ③번이다. ① 은 저장 순서대로 가·나·다 세 행에 ROWNUM 1~3 이 붙어 먼저 잘리고, 그 셋을 정렬해 나, 다, 가 가 된다. ② 는 인라인 뷰 안에서 ROWNUM 을 RN 으로 받았는데, 이 값도 ORDER BY 전에 저장 순서로 매겨지므로 가 1, 나 2, 다 3 이 되어 결과가 ① 과 같다. ④ 는 첫 행이 ROWNUM 1 을 받아야 2, 3 으로 이어지는데 첫 행부터 ROWNUM = 3 을 만족하지 못해 버려지므로 한 건도 나오지 않는다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "table",
+        "caption": "학생",
+        "headers": [
+          "이름",
+          "점수"
+        ],
+        "rows": [
+          [
+            "가",
+            "70"
+          ],
+          [
+            "나",
+            "90"
+          ],
+          [
+            "다",
+            "85"
+          ],
+          [
+            "라",
+            "88"
+          ],
+          [
+            "마",
+            "60"
+          ],
+          [
+            "바",
+            "80"
+          ]
+        ]
+      }
+    ]
   },
   {
     "id": 10643,
@@ -2032,20 +2079,20 @@ export const ROUND_48: QuizQuestion[] = [
     "round": 48,
     "subject": "2과목",
     "number": 48,
-    "title": "아래 트리 구조에 대해 START WITH 와 CONNECT BY 로 트리 전개 시 LEVEL = 2 인 행의 개수는?",
+    "title": "아래 EMP 테이블에 대한 계층형 SQL 결과에서 (LEVEL 이 2 인 행 수, LF 가 1 인 행 수, 가장 큰 LEVEL) 로 옳은 것은?",
     "options": [
-      "1",
-      "3",
-      "4",
-      "7"
+      "(3, 3, 4)",
+      "(3, 4, 4)",
+      "(3, 4, 3)",
+      "(3, 5, 4)"
     ],
     "correctIndex": 1,
-    "explanation": "START WITH 매니저 IS NULL 이라 매니저가 없는 A 가 루트(LEVEL 1)다. CONNECT BY PRIOR 사원 = 매니저 는 앞 행의 사원을 매니저로 가진 행, 곧 부하 직원을 찾아 내려간다. A 를 매니저로 둔 B·C·D 가 LEVEL 2 이고, 그 아래 E·F(B 의 부하)와 G(D 의 부하)가 LEVEL 3 이다. LEVEL 2 인 행은 3개다(②). ① 1 은 루트 A 만 센 값, ③ 4 는 LEVEL 2 이하(A·B·C·D)를 센 값, ④ 7 은 전체 행 수다.",
+    "explanation": "A 에서 시작해 PRIOR 사원 = 매니저 로 아래로 내려가므로 A 가 LEVEL 1, 그 부하 B·C·D 가 LEVEL 2, E·F·G 가 LEVEL 3, H 가 LEVEL 4 다. LEVEL 2 는 3행, 가장 큰 LEVEL 은 4 다. CONNECT_BY_ISLEAF 는 자식이 없는 행(리프)이면 1 이다. E, F, H 와 부하가 없는 C 까지 4행이다. 정답은 ②번이다. ① 은 LEVEL 2 인 C 도 자식이 없어 리프라는 점을 놓쳤다. ③ 은 LEVEL 을 0 부터 센다고 본 값이다. ④ 는 자식이 하나뿐인 G 도 리프로 센 값이다.",
     "_source": "authored",
     "references": [
       {
         "type": "table",
-        "caption": "EMP 테이블",
+        "caption": "EMP",
         "headers": [
           "사원",
           "매니저"
@@ -2078,12 +2125,16 @@ export const ROUND_48: QuizQuestion[] = [
           [
             "G",
             "D"
+          ],
+          [
+            "H",
+            "G"
           ]
         ]
       },
       {
         "type": "sql",
-        "code": "SELECT 사원, LEVEL\nFROM   EMP\nSTART WITH 매니저 IS NULL\nCONNECT BY PRIOR 사원 = 매니저;"
+        "code": "SELECT 사원, LEVEL,\n       CONNECT_BY_ISLEAF AS LF\nFROM   EMP\nSTART WITH 매니저 IS NULL\nCONNECT BY PRIOR 사원 = 매니저;"
       }
     ]
   },

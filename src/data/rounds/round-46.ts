@@ -29,21 +29,25 @@ export const ROUND_46: QuizQuestion[] = [
     "round": 46,
     "subject": "1과목",
     "number": 2,
-    "title": "아래 업무 규칙과 ERD 를 테이블로 구현할 때 가장 적절한 것은? (업무 규칙: 고객은 반드시 하나의 서비스에만 가입하며, 하나의 서비스에는 여러 고객이 가입할 수 있다.)",
+    "title": "아래 업무 규칙과 ERD 를 테이블로 구현할 때 가장 적절한 것은?",
     "options": [
+      "서비스가입(고객번호, 서비스번호, 가입일자) 테이블을 두고 세 칼럼을 합쳐 PK 로 한다.",
+      "서비스가입(고객번호, 서비스번호) 테이블을 두고 두 칼럼을 합쳐 PK 로 한다.",
       "고객 테이블에 서비스번호를 NOT NULL 외래키로 둔다.",
-      "서비스 테이블에 고객번호를 외래키로 둔다.",
-      "서비스계약 테이블(계약번호 PK, 고객번호, 서비스번호)을 새로 두어 고객과 서비스를 연결한다.",
-      "서비스계약 테이블(고객번호 + 서비스번호 복합 PK)을 새로 두어 고객과 서비스를 연결한다."
+      "서비스 테이블에 고객번호를 외래키로 둔다."
     ],
     "correctIndex": 0,
-    "explanation": "서비스와 고객은 1:N 관계(한 서비스에 여러 고객, 한 고객은 하나의 서비스)이므로 N 쪽인 고객 테이블에 서비스번호를 외래키로 둔다. 고객은 반드시 가입해야 하므로 NOT NULL 로 필수 관계까지 보장된다(①). ② 는 한 서비스에 고객이 한 명만 연결되어 \"여러 고객\" 규칙을 표현하지 못한다. ③·④ 처럼 별도 관계 테이블을 두는 것은 M:N 관계를 해소하는 방식으로, 한 고객이 여러 서비스에 가입하는 것을 막지 못하고 고객이 반드시 가입해야 한다는 규칙도 강제하지 못한다. ※ 복원 자료의 조건(1:1 필수)이 모호해 정답 논쟁이 있어, 업무 규칙을 명확히 하고 보기를 정리했다.",
+    "explanation": "고객과 서비스는 M:N 이라 어느 한쪽 테이블에 외래키를 두는 것으로는 표현할 수 없고, 둘을 잇는 관계 테이블이 필요하다. 또 같은 고객이 같은 서비스에 다시 가입한 이력도 남겨야 하므로, PK 에 가입일자처럼 가입마다 달라지는 값을 넣어야 한다. 정답은 ①번이다. ② 는 (고객번호, 서비스번호) 가 PK 라 재가입 행이 기존 행과 겹쳐 저장되지 않는다. ③ 은 고객 한 명이 서비스 하나에만 가입하는 1:N 구조다. ④ 는 서비스 하나에 고객 한 명만 연결되는 구조라 업무 규칙과 맞지 않는다.",
     "_source": "authored",
     "references": [
       {
+        "type": "text",
+        "content": "업무 규칙\n· 고객은 여러 서비스에 가입할 수 있고, 한 서비스에는 여러 고객이 가입한다.\n· 해지한 서비스에 다시 가입할 수 있으며, 가입할 때마다 이력을 모두 남긴다."
+      },
+      {
         "type": "erd",
-        "caption": "서비스-고객 ERD (고객 쪽 필수 1, 서비스 쪽 0..N)",
-        "mermaid": "erDiagram\n    서비스 ||--o{ 고객 : \"가입\""
+        "caption": "고객·서비스 ERD",
+        "mermaid": "erDiagram\n    고객 }o--o{ 서비스 : \"가입\"\n    고객 {\n        string 고객번호 PK\n    }\n    서비스 {\n        string 서비스번호 PK\n    }"
       }
     ]
   },
@@ -1707,46 +1711,68 @@ export const ROUND_46: QuizQuestion[] = [
     "round": 46,
     "subject": "2과목",
     "number": 36,
-    "title": "아래 SQL의 결과로 옳은 것은? (오라클에서 NULL은 정렬 시 가장 큰 값으로 간주된다.)",
+    "title": "아래 [사원] 테이블에 SQL 을 수행했을 때 출력되는 이름의 순서로 옳은 것은? (Oracle 기준)",
     "options": [
-      "(A,1,100), (A,1,NULL), (A,2,50)",
-      "(A,1,NULL), (A,1,100), (A,2,50)",
-      "(A,2,50), (A,1,100), (A,1,NULL)",
-      "(A,1,NULL), (A,2,50), (A,1,100)"
+      "최유나, 강지우, 김하늘, 정민호, 이도윤, 박서준",
+      "김하늘, 최유나, 강지우, 정민호, 이도윤, 박서준",
+      "김하늘, 최유나, 강지우, 이도윤, 정민호, 박서준",
+      "박서준, 김하늘, 최유나, 강지우, 정민호, 이도윤"
     ],
     "correctIndex": 1,
-    "explanation": "COL1, COL2는 오름차순이므로 1이 먼저 배치되고, 이후 COL3는 DESC이므로 오라클 기준 NULL이 가장 먼저 정렬된다. 정답은 ②번이다. ① 은 DESC 에서 NULL 을 맨 뒤로 보냈고, ③ 은 COL2 까지 내림차순으로 본 순서다. COL2 는 정렬 방향이 없어 기본값 ASC 이므로 1 이 먼저 온다.",
+    "explanation": "Oracle 은 정렬할 때 NULL 을 가장 큰 값으로 본다. 그래서 오름차순이면 맨 뒤, 내림차순이면 맨 앞에 온다. 먼저 부서 오름차순이라 10 → 20 → NULL(박서준) 순으로 묶인다. 10번 부서는 보너스 내림차순인데 김하늘의 NULL 이 가장 큰 값이라 맨 앞이고, 이어서 최유나(80), 강지우(30)다. 20번 부서는 두 사람 모두 보너스가 NULL 이라 마지막 키인 급여 오름차순으로 정민호(150), 이도윤(200) 순이다. DESC 는 바로 앞의 보너스에만 붙고 급여는 기본값인 오름차순이다. 정답은 ②번이다. ① 은 보너스 NULL 을 가장 작은 값으로 보고 김하늘을 10번 부서 맨 뒤로 보냈다. ③ 은 DESC 가 급여까지 걸린다고 보고 20번 부서를 급여가 큰 순서로 놓았다. ④ 는 부서 NULL 을 오름차순 맨 앞에 둔 것으로, NULL 을 가장 작게 보는 SQL Server 방식이다.",
     "_source": "authored",
     "references": [
       {
         "type": "table",
+        "caption": "사원",
         "headers": [
-          "COL1",
-          "COL2",
-          "COL3"
+          "이름",
+          "부서",
+          "급여",
+          "보너스"
         ],
         "rows": [
           [
-            "A",
-            "1",
-            "100"
-          ],
-          [
-            "A",
-            "1",
+            "김하늘",
+            "10",
+            "300",
             "NULL"
           ],
           [
-            "A",
-            "2",
-            "50"
+            "이도윤",
+            "20",
+            "200",
+            "NULL"
+          ],
+          [
+            "박서준",
+            "NULL",
+            "400",
+            "100"
+          ],
+          [
+            "최유나",
+            "10",
+            "250",
+            "80"
+          ],
+          [
+            "정민호",
+            "20",
+            "150",
+            "NULL"
+          ],
+          [
+            "강지우",
+            "10",
+            "300",
+            "30"
           ]
-        ],
-        "caption": "T 테이블"
+        ]
       },
       {
         "type": "sql",
-        "code": "SELECT COL1, COL2, COL3\nFROM   T\nORDER BY COL1, COL2, COL3 DESC;"
+        "code": "SELECT 이름\nFROM   사원\nORDER BY 부서, 보너스 DESC, 급여;"
       }
     ]
   },
@@ -1781,20 +1807,20 @@ export const ROUND_46: QuizQuestion[] = [
     "round": 46,
     "subject": "2과목",
     "number": 38,
-    "title": "트랜잭션의 특성 중 다음 설명에 해당하는 것은?",
+    "title": "트랜잭션 고립성 수준이 READ COMMITTED 일 때, 아래 ㉠~㉢ 중 일어날 수 있는 현상을 모두 고른 것은?",
     "options": [
-      "원자성(Atomicity)",
-      "일관성(Consistency)",
-      "고립성(Isolation)",
-      "지속성(Durability)"
+      "㉡, ㉢",
+      "㉠, ㉡, ㉢",
+      "㉢",
+      "일어나는 현상이 없다"
     ],
     "correctIndex": 0,
-    "explanation": "원자성(Atomicity)은 트랜잭션의 모든 연산이 모두 성공해 반영되거나, 하나라도 실패하면 전혀 수행되지 않은 상태로 남아야 한다는 ALL OR NOTHING 속성이다. 일관성·고립성·지속성과 함께 ACID를 구성한다. ② 일관성은 실행 전후에 DB 가 일관된 상태를 유지하는 성질, ③ 고립성은 다른 트랜잭션의 영향을 받지 않는 성질, ④ 지속성은 COMMIT 된 결과가 영구히 남는 성질이다.",
+    "explanation": "㉠ 은 Dirty Read, ㉡ 은 Non-Repeatable Read, ㉢ 은 Phantom Read 다. READ COMMITTED 는 커밋된 데이터만 읽게 해 Dirty Read 는 막지만, 문장마다 그 시점에 커밋된 값을 새로 읽는다. 그래서 같은 트랜잭션 안에서도 다시 읽으면 값이 바뀌거나(㉡) 새 행이 보일 수 있다(㉢). 정답은 ①번이다. ② 는 READ UNCOMMITTED 에서 일어날 수 있는 현상까지 넣은 것이다. ③ 은 REPEATABLE READ 수준의 설명이다(같은 행 다시 읽기는 막지만 새 행은 보일 수 있음). ④ 는 SERIALIZABLE 수준이다.",
     "_source": "authored",
     "references": [
       {
         "type": "text",
-        "content": "트랜잭션에서 정의된 연산들은 모두 성공적으로 수행되거나, 전혀 수행되지 않은 상태로 남아야 한다. (ALL OR NOTHING)"
+        "content": "㉠ T1 이 아직 커밋하지 않은 변경을 T2 가 읽는다.\n㉡ T2 가 같은 행을 두 번 읽는 사이에 T1 이 그 행을 수정하고 커밋해, 두 번의 값이 다르다.\n㉢ T2 가 같은 조건으로 두 번 조회하는 사이에 T1 이 조건에 맞는 새 행을 넣고 커밋해, 두 번의 행 수가 다르다."
       }
     ]
   },
@@ -1874,46 +1900,56 @@ export const ROUND_46: QuizQuestion[] = [
     "round": 46,
     "subject": "2과목",
     "number": 40,
-    "title": "아래 데이터와 CASE 문의 결과로 옳은 것은?",
+    "title": "아래 [T] 테이블에 SQL 을 수행했을 때, 등급이 NULL 인 행의 수와 표시 열의 합으로 옳은 것은? (Oracle 기준)",
     "options": [
-      "A, A, B, S",
-      "B, B, A, S",
-      "B, B, B, S",
-      "S, A, B, B"
+      "2건, -1",
+      "3건, -1",
+      "3건, 1",
+      "2건, 1"
     ],
     "correctIndex": 1,
-    "explanation": "CASE 식은 위에서 아래로 평가되며, 첫 번째로 참이 되는 WHEN의 결과가 반환된다. 1행(50,150)과 2행(100,250)은 COL1<=100을 만족해 'B', 3행(200,150)은 COL1>100이지만 COL2<=200이어서 'A', 4행(300,400)은 어느 조건도 만족하지 않아 ELSE의 'S'가 된다. 정답은 ②번이다. ① 은 1·2행을 'A' 로 봤지만 첫 WHEN(COL1 <= 100)이 먼저 참이라 'B' 이고, ③ 은 3행을 'B' 로 봤지만 COL1 = 200 은 첫 조건이 거짓이며, ④ 는 순서를 거꾸로 적었다.",
+    "explanation": "등급: 1번은 95 라 'A' 다. 2번(70, Y)은 어느 WHEN 에도 맞지 않는데 ELSE 가 없으므로 NULL 이다. 3번은 점수가 NULL 이라 비교가 모두 알 수 없음(UNKNOWN)이 되고, 출석도 Y 라 NULL 이다. 4번(85, N)은 80 이상이지만 출석이 'Y' 가 아니라서 두 번째 조건이 거짓이고, 출석이 NULL 도 아니어서 NULL 이다. 5번은 출석이 NULL 이라 'C' 다. 등급이 NULL 인 행은 2·3·4번 세 건이다. 표시: 단순 CASE 는 '출석 = 값' 으로 비교하므로 WHEN NULL 은 '출석 = NULL' 이 되어 어떤 행에서도 참이 되지 않는다. 출석이 NULL 인 1·5번은 ELSE 로 가 -1, Y 인 2·3번은 1, N 인 4번은 -1 이다. 합은 -1 + 1 + 1 - 1 - 1 = -1. 정답은 ②번이다. ① 과 ④ 는 4번을 'B' 로 본 것(AND 조건을 놓침), ③ 과 ④ 는 WHEN NULL 이 NULL 과 맞는다고 보고 1·5번을 0 으로 센 값이다. NULL 을 걸러야 할 때는 단순 CASE 대신 CASE WHEN 출석 IS NULL 처럼 써야 한다.",
     "_source": "authored",
     "references": [
       {
         "type": "table",
+        "caption": "T",
         "headers": [
-          "COL1",
-          "COL2"
+          "ID",
+          "점수",
+          "출석"
         ],
         "rows": [
           [
-            "50",
-            "150"
+            "1",
+            "95",
+            "NULL"
           ],
           [
-            "100",
-            "250"
+            "2",
+            "70",
+            "Y"
           ],
           [
-            "200",
-            "150"
+            "3",
+            "NULL",
+            "Y"
           ],
           [
-            "300",
-            "400"
+            "4",
+            "85",
+            "N"
+          ],
+          [
+            "5",
+            "60",
+            "NULL"
           ]
-        ],
-        "caption": "T 테이블"
+        ]
       },
       {
         "type": "sql",
-        "code": "SELECT CASE WHEN COL1 <= 100 THEN 'B'\n            WHEN COL2 <= 200 THEN 'A'\n            ELSE 'S'\n       END\nFROM   T;"
+        "code": "SELECT ID,\n  CASE WHEN 점수 >= 90 THEN 'A'\n       WHEN 점수 >= 80\n        AND 출석 = 'Y' THEN 'B'\n       WHEN 출석 IS NULL THEN 'C'\n  END AS 등급,\n  CASE 출석 WHEN 'Y'  THEN 1\n            WHEN NULL THEN 0\n            ELSE -1\n  END AS 표시\nFROM   T;"
       }
     ]
   },
@@ -2280,92 +2316,51 @@ export const ROUND_46: QuizQuestion[] = [
     "round": 46,
     "subject": "2과목",
     "number": 50,
-    "title": "아래 결과를 얻기 위한 SQL의 GROUP BY 절로 올바른 것은?",
+    "title": "아래 EMP 테이블에 대한 SQL 의 (결과 행 수, JOB 이 NULL 이면서 G 가 1 인 행 수) 로 옳은 것은?",
     "options": [
-      "ROLLUP ( GRADE, JOB )",
-      "GROUPING SETS ( GRADE, (GRADE, JOB) )",
-      "CUBE ( GRADE, JOB )",
-      "GRADE, JOB"
+      "(6, 3)",
+      "(7, 3)",
+      "(7, 4)",
+      "(6, 2)"
     ],
     "correctIndex": 1,
-    "explanation": "결과 표는 (GRADE, JOB) 세부 4행에 GRADE 단위 소계 2행만 더해진 6행이고 전체 총계 행이 없다. GROUPING SETS 는 필요한 집계 조합만 골라 지정하므로 (GRADE) 와 (GRADE, JOB) 두 조합이 정확히 이 결과를 만든다. ① ROLLUP 은 전체 총계까지 붙어 7행이 되고, ③ CUBE 는 JOB 단위 소계까지 추가되며, ④ 일반 GROUP BY 는 소계 자체가 없어 4행에 그친다.",
+    "explanation": "ROLLUP(GRADE, JOB) 은 (GRADE, JOB) 상세, (GRADE) 소계, () 총계를 만든다. 상세는 (A, MANAGER), (A, CLERK), (B, MANAGER), (B, NULL) 4행이다. B 의 JOB 이 NULL 인 행도 원래 데이터라 하나의 그룹이 된다. 여기에 GRADE 별 소계 2행과 총계 1행이 더해져 7행이다. 소계·총계 행의 JOB 은 집계 때문에 NULL 로 채워지고 GROUPING(JOB) = 1 이다. 데이터 자체가 NULL 인 (B, NULL, 50) 은 GROUPING(JOB) = 0 이다. 그래서 JOB 이 NULL 이면서 G = 1 인 행은 3행이고, 정답은 ②번이다. ① 은 데이터의 NULL 행이 B 소계와 합쳐진다고 본 값이다. ③ 은 화면에 NULL 로 보이는 행 네 개를 모두 G = 1 로 생각하면 나오는 값이다. ④ 는 ROLLUP 에 총계 행이 없다고 착각한 결과다. 데이터 NULL 과 소계 NULL 을 구분하려고 GROUPING 함수를 쓴다.",
     "_source": "authored",
     "references": [
       {
         "type": "table",
-        "caption": "EMP 테이블",
+        "caption": "EMP",
         "headers": [
           "GRADE",
           "JOB",
-          "ENAME"
+          "SAL"
         ],
         "rows": [
           [
             "A",
             "MANAGER",
-            "홍길동"
+            "300"
           ],
           [
             "A",
             "CLERK",
-            "김철수"
+            "100"
           ],
           [
             "B",
             "MANAGER",
-            "이순신"
+            "250"
           ],
           [
             "B",
-            "CLERK",
-            "박지성"
+            "NULL",
+            "50"
           ]
         ]
       },
       {
         "type": "sql",
-        "code": "SELECT GRADE, JOB, COUNT(*)\nFROM   EMP\nGROUP BY (  ㄱ  );"
-      },
-      {
-        "type": "table",
-        "caption": "기대 결과",
-        "headers": [
-          "GRADE",
-          "JOB",
-          "COUNT(*)"
-        ],
-        "rows": [
-          [
-            "A",
-            "MANAGER",
-            "1"
-          ],
-          [
-            "A",
-            "CLERK",
-            "1"
-          ],
-          [
-            "B",
-            "MANAGER",
-            "1"
-          ],
-          [
-            "B",
-            "CLERK",
-            "1"
-          ],
-          [
-            "A",
-            "(NULL)",
-            "2"
-          ],
-          [
-            "B",
-            "(NULL)",
-            "2"
-          ]
-        ]
+        "code": "SELECT GRADE, JOB,\n       SUM(SAL)      AS S,\n       GROUPING(JOB) AS G\nFROM   EMP\nGROUP BY ROLLUP(GRADE, JOB);"
       }
     ]
   }
