@@ -1069,15 +1069,51 @@
       "_source": "gemini-mock-2",
       "subject": "2과목",
       "chapter": "그룹 함수",
-      "title": "NULL 데이터가 포함된 그룹 함수 연산의 결과에 대한 설명으로 틀린 것은? (단, T1 테이블의 COL1 값은 [10, 20, NULL, 30] 이다.)",
+      "title": "아래 T1 테이블에 SQL 을 실행했을 때 결과 행 수와 GRP 가 'B' 인 행의 C1, C2, S 값으로 옳은 것은?",
       "options": [
-        "COUNT(*)의 결과는 4이다.",
-        "AVG(COL1)의 결과는 15이다.",
-        "COUNT(COL1)의 결과는 3이다.",
-        "SUM(COL1)의 결과는 60이다."
+        "2행 / B: 1, 0, NULL",
+        "3행 / B: 1, 0, NULL",
+        "3행 / B: 1, 0, 0",
+        "4행 / B: 1, 1, NULL"
       ],
       "correctIndex": 1,
-      "explanation": "AVG 는 NULL 을 빼고 계산한다. 10 + 20 + 30 = 60 을 NULL 이 아닌 3개로 나누니 20 이다. 4로 나눈 15 라는 ②가 틀렸다. COUNT(*) 4, COUNT(COL1) 3, SUM 60 은 맞다."
+      "explanation": "GROUP BY 에서는 GRP 가 NULL 인 행들도 버리지 않고 하나의 그룹으로 묶는다. 그래서 A, B, NULL 세 그룹이 나와 3행이다. B 그룹은 행이 1개라 COUNT(*) 는 1, COL1 이 NULL 이라 COUNT(COL1) 은 0, 더할 값이 하나도 없어 SUM 은 0 이 아니라 NULL 이다. 정답은 ②번이다. ① 은 GRP 가 NULL 인 행이 결과에서 빠진다고 착각한 결과다. ③ 은 값이 없는 SUM 을 0 으로 보았다(0 이 필요하면 NVL(SUM(COL1), 0)). ④ 는 NULL 행이 각각 다른 그룹이 된다고 보고, COUNT(COL1) 이 NULL 도 센다고 착각했다. NULL 그룹의 합계는 50 이다. PostgreSQL 16 에서도 3행, B 는 1, 0, NULL 이다.",
+      "references": [
+        {
+          "type": "table",
+          "caption": "T1",
+          "headers": [
+            "GRP",
+            "COL1"
+          ],
+          "rows": [
+            [
+              "A",
+              "10"
+            ],
+            [
+              "A",
+              "NULL"
+            ],
+            [
+              "NULL",
+              "20"
+            ],
+            [
+              "NULL",
+              "30"
+            ],
+            [
+              "B",
+              "NULL"
+            ]
+          ]
+        },
+        {
+          "type": "sql",
+          "code": "SELECT GRP,\n       COUNT(*)    AS C1,\n       COUNT(COL1) AS C2,\n       SUM(COL1)   AS S\nFROM   T1\nGROUP  BY GRP;"
+        }
+      ]
     },
     {
       "_id": "ai-mock-050",

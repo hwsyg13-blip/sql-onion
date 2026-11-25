@@ -1416,3 +1416,4 @@ sqld-0312·0319(M494·M501, 데이터베이스 파티션 기법)도 성능 데�
 | ai-mock-052 | MERGE 특징 고르기 | UPDATE 뒤 DELETE WHERE(바뀐 값 기준)·INSERT WHERE 가 있는 MERGE 결과 행 수·합계 | PostgreSQL 16 MERGE(WHEN MATCHED AND … DELETE)로 옮겨 실행 → 3행, 850(1:150, 3:300, 4:400). 390px 화면 확인. 사본 없음 |
 | ai-mock-047 | UNION·UNION ALL 차이 고르기 | 중복·NULL 이 있는 두 표의 UNION·UNION ALL 행 수와 결과 칼럼 이름 | PostgreSQL 16 → 4, 7, x(첫 SELECT 별칭). 390px 화면 확인. 사본 없음 |
 | ai-mock-060 | UNIQUE 설명 고르기 | PK·UNIQUE 테이블에 INSERT 다섯 개(UNIQUE 여러 NULL 허용, PK NULL 불가, 중복) 차례 실행 | PostgreSQL 16 → ㉣ NOT NULL 위반, ㉤ UNIQUE 위반, 남은 ID 1·2·3. 390px 화면 확인. 사본 없음 |
+| ai-mock-049 | NULL 집계 설명 고르기 | GROUP BY 칼럼에 NULL 이 있을 때 그룹 수, 값이 모두 NULL 인 그룹의 COUNT·SUM | PostgreSQL 16 → 3행(NULL 그룹 포함), B: 1, 0, NULL. 검증기 ok. 390px 화면 확인. 사본 없음 |
