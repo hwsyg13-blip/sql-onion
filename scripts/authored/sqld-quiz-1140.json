@@ -13202,15 +13202,47 @@
       "_correctRate": 10,
       "subject": "2과목",
       "chapter": "함수",
-      "title": "다음 중 COL100에 NULL이 없는 데이터를 찾는 SQL로 올바른 것은?",
+      "title": "아래 T1 테이블에서 ㉠~㉣ 조건으로 조회한 행 수를 차례대로 적은 것으로 옳은 것은? (Oracle 기준, COL100 의 'NULL' 은 네 글자 문자열이다)",
       "options": [
-        "SELECT COL1 FROM T1 WHERE COL100 NOT IN (NULL)",
-        "SELECT COL1 FROM T1 WHERE COL100 IS NOT NULL",
-        "SELECT COL1 FROM T1 WHERE COL100 != ''",
-        "SELECT COL1 FROM T1 WHERE COL100 <> 'NULL'"
+        "0 / 3 / 3 / 2",
+        "0 / 3 / 0 / 2",
+        "3 / 3 / 0 / 3",
+        "0 / 2 / 0 / 2"
       ],
       "correctIndex": 1,
-      "explanation": "NULL 은 = · != · IN 같은 비교로는 찾을 수 없고 IS NULL / IS NOT NULL 로만 판단한다. 값이 있는 행은 COL100 IS NOT NULL 로 찾는다(②). ① NOT IN (NULL) 은 항상 UNKNOWN 이라 결과가 없고, ④ 'NULL' 은 그냥 문자열이다."
+      "explanation": "㉠ NOT IN (NULL) 은 COL100 <> NULL 과 같아 언제나 UNKNOWN 이므로 0 행이다. ㉡ IS NOT NULL 은 실제 NULL 인 2번만 빼고 3 행이다. 문자열 'NULL' 과 공백 한 칸은 값이 있다. ㉢ Oracle 은 '' 를 NULL 로 다루므로 COL100 != NULL 이 되어 0 행이다. ㉣ 은 'A' 와 공백 두 행이고, NULL 인 행은 비교 결과가 UNKNOWN 이라 빠져 2 행이다. 정답은 ②번이다. ① 은 '' 를 빈 문자열로 보는 SQL Server·PostgreSQL 방식이다. ③ 은 NOT IN (NULL) 이 NULL 만 빼 준다고 보고 ㉣ 에 NULL 행까지 넣었다. ④ 는 문자열 'NULL' 을 진짜 NULL 로 보았다. PostgreSQL 16 에서 ㉢ 만 NULL 비교로 옮겨 실행하면 0, 3, 0, 2 다.",
+      "references": [
+        {
+          "type": "table",
+          "caption": "T1",
+          "headers": [
+            "COL1",
+            "COL100"
+          ],
+          "rows": [
+            [
+              "1",
+              "'A'"
+            ],
+            [
+              "2",
+              "NULL"
+            ],
+            [
+              "3",
+              "'NULL'"
+            ],
+            [
+              "4",
+              "' '(공백 한 칸)"
+            ]
+          ]
+        },
+        {
+          "type": "sql",
+          "code": "㉠ WHERE COL100 NOT IN (NULL)\n㉡ WHERE COL100 IS NOT NULL\n㉢ WHERE COL100 != ''\n㉣ WHERE COL100 <> 'NULL'"
+        }
+      ]
     },
     {
       "_id": "sqld-0414",
@@ -13288,15 +13320,21 @@
       "_correctRate": 10,
       "subject": "2과목",
       "chapter": "윈도우 함수",
-      "title": "다음은 WINDOW FUNCTION에 대한 사용 방법이다. 가장 올바르지 않은 SQL문은 무엇인가?",
+      "title": "사원 테이블에 아래 SQL 의 ㉠ 을 바꿔 넣을 때 오류가 나는 것은?",
       "options": [
-        "SUM(급여) OVER(PARTITION BY JOB ORDER BY JOB RANGE BETWEEN UNBOUNDED\nPRECEDING AND CURRENT ROW) SAL",
-        "SUM(급여) OVER(PARTITION BY JOB ORDER BY EMPNO RANGE BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED PRECEDING) SAL",
-        "SUM(급여) OVER(PARTITION BY JOB ORDER BY EMPNO RANGE BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING) SAL",
-        "SUM(급여)  OVER()"
+        "ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW",
+        "ROWS BETWEEN CURRENT ROW AND UNBOUNDED PRECEDING",
+        "ROWS BETWEEN 1 PRECEDING AND 1 FOLLOWING",
+        "ROWS 2 PRECEDING"
       ],
       "correctIndex": 1,
-      "explanation": "윈도우 범위 RANGE BETWEEN 시작 AND 끝 에서 UNBOUNDED PRECEDING(파티션 첫 행)은 시작에만 쓸 수 있다. ② 처럼 끝에 UNBOUNDED PRECEDING 을 쓰면 오류다. ①③ 은 처음부터 현재 행·끝까지, ④ OVER() 는 전체 합계로 모두 정상이다."
+      "explanation": "윈도우 범위는 BETWEEN 시작 AND 끝 으로 쓰고, 끝이 시작보다 앞에 올 수 없다. UNBOUNDED PRECEDING 은 파티션의 첫 행을 뜻해 시작에만 쓸 수 있으므로 ② 는 오류다. PostgreSQL 16 에서도 frame end cannot be UNBOUNDED PRECEDING 오류가 난다. 정답은 ②번이다. ① 은 처음부터 현재 행까지의 누적이다. ③ 은 앞뒤 한 행과 현재 행이다. ④ 처럼 BETWEEN 없이 시작만 쓰면 끝은 CURRENT ROW 가 되어 'ROWS BETWEEN 2 PRECEDING AND CURRENT ROW' 와 같다. 급여가 100, 200, 300 이면 ④ 의 합계는 100, 300, 600 이다.",
+      "references": [
+        {
+          "type": "sql",
+          "code": "SELECT EMPNO,\n       SUM(급여) OVER (\n         ORDER BY EMPNO\n         ㉠ ) AS 합계\nFROM   사원;"
+        }
+      ]
     },
     {
       "_id": "sqld-0419",
