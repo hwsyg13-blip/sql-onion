@@ -1575,20 +1575,20 @@ export const ROUND_56: QuizQuestion[] = [
     "round": 56,
     "subject": "2과목",
     "number": 37,
-    "title": "아래 TAB1 테이블에서 결과(COUNT() = 2) 를 산출하는 쿼리는?",
+    "title": "아래 TAB1 테이블에 대한 (㉠ 결과, ㉡ 결과 행 수, ㉢ 결과, ㉣ 결과) 로 옳은 것은?",
     "options": [
-      "SELECT COUNT(DISTINCT COL1) FROM TAB1 WHERE COL2 <= 20;",
-      "SELECT COUNT(COL1) FROM TAB1 WHERE COL2 <= 20;",
-      "SELECT COUNT(COL1) FROM TAB1 WHERE COL2 <= 20 GROUP BY COL1;",
-      "SELECT COUNT(COL1) FROM TAB1 WHERE COL2 < 30 GROUP BY COL1;"
+      "(2, 2, 1, 3)",
+      "(3, 2, 1, 3)",
+      "(2, 1, 1, 3)",
+      "(2, 2, 1, 1)"
     ],
     "correctIndex": 0,
-    "explanation": "`COL2 <= 20` 만족 행은 (A,10), (A,20), (B,20) 3 행. ① `COUNT(DISTINCT COL1)` = {A, B} = 2 → 결과 2. ② `COUNT(COL1)` = 3 (행 수). ③④ GROUP BY 라 행이 여러 건 반환되어 단일 값 2 안 됨. 정답은 ①.",
+    "explanation": "㉠ 은 COL2 가 20 이하인 A, A, B 중 서로 다른 값 A, B 를 세어 2 다. ㉡ 은 같은 행을 COL1 별로 묶어 A(2), B(1) 두 그룹이 되므로 결과는 2행이다. GROUP BY 가 있으면 그룹마다 한 행이 나온다. ㉢ 은 행이 두 개 이상인 그룹이 A 하나뿐이라 1 이다. ㉣ 은 COL1 마다 그 그룹의 최댓값과 같은 행을 남기는 상관 서브쿼리라 A 의 20, B 의 20, C 의 30 세 행이 되어 3 이다. 정답은 ①번이다. ② 는 DISTINCT 를 놓쳐 A, A, B 를 모두 센 값이다. ③ 은 GROUP BY 가 있어도 결과가 한 행이라고 본 값이다. ④ 는 서브쿼리를 테이블 전체의 MAX(30)로 보고 C 한 행만 센 값이다.",
     "_source": "authored",
     "references": [
       {
         "type": "table",
-        "caption": "TAB1 테이블",
+        "caption": "TAB1",
         "headers": [
           "COL1",
           "COL2"
@@ -1613,16 +1613,8 @@ export const ROUND_56: QuizQuestion[] = [
         ]
       },
       {
-        "type": "table",
-        "caption": "기대 결과 (COUNT 결과 = 2)",
-        "headers": [
-          "COUNT()"
-        ],
-        "rows": [
-          [
-            "2"
-          ]
-        ]
+        "type": "sql",
+        "code": "-- ㉠\nSELECT COUNT(DISTINCT COL1) FROM TAB1\nWHERE  COL2 <= 20;\n-- ㉡\nSELECT COUNT(COL1) FROM TAB1\nWHERE  COL2 <= 20\nGROUP BY COL1;\n-- ㉢\nSELECT COUNT(*)\nFROM  (SELECT COL1 FROM TAB1\n       GROUP BY COL1\n       HAVING COUNT(*) >= 2);\n-- ㉣\nSELECT COUNT(*) FROM TAB1 T\nWHERE  COL2 = (SELECT MAX(COL2)\n               FROM   TAB1\n               WHERE  COL1 = T.COL1);"
       }
     ]
   },

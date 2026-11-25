@@ -1300,3 +1300,5 @@ sqld-0312·0319(M494·M501, 데이터베이스 파티션 기법)도 성능 데�
 | 53-2-17 | ORDER BY 요구사항 빈칸 | 별칭·SELECT 목록 위치 번호·NULLS LAST·동점 정렬 | PostgreSQL 16(COLLATE "C") → 정, 김, 최, 박, 이. NULLS LAST 빼면 정, 김, 최, 이, 박(오답 ②) |
 | 59-2-15 | 사원·상사 번호 셀프 조인 고르기 | 셀프 조인 내부·LEFT(사원 기준)·LEFT(관리자 기준)·COUNT(DISTINCT MGR) | PostgreSQL 16 → 6, 7, 9, 4 |
 | 55-2-26 | 로그인 쿼리 설명 고르기 | TRUNC 로 날짜별 COUNT(DISTINCT) + HAVING, ROUND 와의 차이 | PostgreSQL 16(date_trunc) → M001·M002 2행, M002 일수 2. 12시간 더해 ROUND 처럼 하면 1(오답) |
+| 56-2-37 | COUNT() = 2 쿼리 고르기 | COUNT(DISTINCT)·GROUP BY 행 수·HAVING·상관 MAX 서브쿼리 | PostgreSQL 16 → (2, 2, 1, 3) |
+| 57-2-34 | NVL(COUNT(*)) 한 문장 | NVL 을 집계 안/밖에 둘 때, COUNT(NVL), 빈 결과의 COUNT | PostgreSQL 16 → 0, 0, NULL, 2, 0 |
