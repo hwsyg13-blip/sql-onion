@@ -1351,20 +1351,20 @@ export const ROUND_57: QuizQuestion[] = [
     "round": 57,
     "subject": "2과목",
     "number": 38,
-    "title": "아래 NAME 테이블에서 결과가 (Kim, Tim) 으로 나오도록 LIKE 조건을 설정한 것은? (SQL Server)",
+    "title": "아래 NAME 테이블에 대한 ㉠~㉣ 의 결과 행 수를 차례로 나열한 것은? (SQL Server, 대소문자를 구분하는 정렬 규칙)",
     "options": [
-      "WHERE name LIKE '_im'",
-      "WHERE name LIKE '%im'",
-      "WHERE name LIKE '[JK]im'",
-      "WHERE name LIKE '[KT]im'"
+      "2, 5, 3, 6",
+      "2, 6, 3, 7",
+      "2, 5, 4, 7",
+      "2, 5, 3, 7"
     ],
     "correctIndex": 3,
-    "explanation": "SQL Server LIKE 의 문자 클래스 `[KT]` 는 \"K 또는 T 한 글자\" 를 의미. ④ `[KT]im` 은 Kim 과 Tim 만 매칭. ① `_im` 은 임의 한 글자 + im 이라 Jim/Kim/Tim 모두 매칭. ② `%im` 도 모두 매칭. ③ `[JK]im` 은 Jim/Kim 매칭 (Tim 누락).",
+    "explanation": "SQL Server 의 LIKE 에서 [ ] 는 그 안의 한 글자, [^ ] 는 그 밖의 한 글자, [A-K] 는 범위 안의 한 글자를 뜻한다. ㉠ 은 첫 글자가 J 나 K 이고 뒤가 im 인 세 글자라 Jim, Kim 2행이다. ㉡ 은 첫 글자가 J 가 아닌 세 글자 ?im 이라 Kim, Tim, kim, Aim, Lim 5행이다. Jimmy 는 다섯 글자라 빠진다. ㉢ 은 첫 글자가 A~K 인 대문자라 Jim, Kim, Aim 3행이다. 대소문자를 구분하므로 소문자 k 로 시작하는 kim 은 빠진다. ㉣ 은 둘째·셋째 글자가 im 이고 뒤에 아무 글자나 와도 되므로 7행 모두다. 정답은 ④번이다. ① 은 % 가 뒤 글자를 허용한다는 점을 놓쳐 Jimmy 를 뺀 값이다. ② 는 [^J] 를 '아무 글자' 로 보고 Jim 까지 센 값이다. ③ 은 대소문자를 구분하지 않는다고 보고 kim 을 넣은 값이다.",
     "_source": "authored",
     "references": [
       {
         "type": "table",
-        "caption": "NAME 테이블",
+        "caption": "NAME",
         "headers": [
           "name"
         ],
@@ -1377,27 +1377,24 @@ export const ROUND_57: QuizQuestion[] = [
           ],
           [
             "Tim"
+          ],
+          [
+            "kim"
+          ],
+          [
+            "Aim"
+          ],
+          [
+            "Jimmy"
+          ],
+          [
+            "Lim"
           ]
         ]
       },
       {
         "type": "sql",
-        "code": "SELECT name\nFROM   NAME\nWHERE  ( ? );"
-      },
-      {
-        "type": "table",
-        "caption": "기대 결과",
-        "headers": [
-          "name"
-        ],
-        "rows": [
-          [
-            "Kim"
-          ],
-          [
-            "Tim"
-          ]
-        ]
+        "code": "-- ㉠\nSELECT COUNT(*) FROM NAME\nWHERE  name LIKE '[JK]im';\n-- ㉡\nSELECT COUNT(*) FROM NAME\nWHERE  name LIKE '[^J]im';\n-- ㉢\nSELECT COUNT(*) FROM NAME\nWHERE  name LIKE '[A-K]im';\n-- ㉣\nSELECT COUNT(*) FROM NAME\nWHERE  name LIKE '_im%';"
       }
     ]
   },

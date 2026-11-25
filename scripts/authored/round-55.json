@@ -1161,19 +1161,19 @@
     {
       "subject": "2과목",
       "number": 29,
-      "title": "아래 EMP 테이블에서 '홍길동' 의 자식의 자식 노드를 셀프 조인으로 조회하는 SQL 로 옳은 것은?",
+      "title": "아래 EMP 테이블(MGR 은 상사의 EMPNO)에 대한 (㉠ 행 수, ㉡ 행 수, ㉢ 에서 G 가 NULL 인 행 수) 로 옳은 것은?",
       "options": [
-        "SELECT C.EMPNO, C.ENAME, C.MGR FROM EMP A, EMP B, EMP C WHERE A.ENAME='홍길동' AND B.MGR=A.EMPNO AND C.MGR=B.EMPNO;",
-        "SELECT A.EMPNO, A.ENAME FROM EMP A WHERE A.ENAME='홍길동';",
-        "SELECT B.EMPNO, B.ENAME FROM EMP A, EMP B WHERE A.ENAME='홍길동' AND B.MGR=A.EMPNO;",
-        "SELECT * FROM EMP WHERE MGR = '홍길동';"
+        "(2, 3, 3)",
+        "(2, 2, 3)",
+        "(2, 3, 2)",
+        "(3, 3, 3)"
       ],
       "correctIndex": 0,
-      "explanation": "'홍길동' 을 A 로, 자식을 B(`B.MGR = A.EMPNO`), 자식의 자식을 C(`C.MGR = B.EMPNO`) 로 두고 EMP 를 세 번 셀프 조인해 C 를 조회. ② 는 홍길동 본인만, ③ 은 자식까지만, ④ 는 ENAME 을 MGR 로 비교(ENAME 은 이름, MGR 은 매니저 번호)라 잘못된 비교.",
+      "explanation": "㉠ 은 홍(A) → 부하(B: 이, 강) → 그 부하(C) 로 두 단계를 내려가 최, 김 2행이다. 박은 최의 부하라 홍에게는 증손자다. ㉡ 은 조부·부·손자로 이어지는 세 단계 사슬을 모두 찾으므로 홍-이-최, 홍-강-김, 이-최-박 3행이다. ㉢ 은 직원마다 상사의 상사(조부)를 LEFT JOIN 으로 붙인다. 홍은 상사가 없고, 이·강은 상사(홍)는 있지만 그 위가 없어 G 가 NULL 이다. 최·김·박은 각각 홍, 홍, 이가 붙는다. 그래서 NULL 은 3행이다. 정답은 ①번이다. ② 는 ㉡ 도 홍에서 시작하는 사슬만 센 값이다. ③ 은 상사가 있는 이·강은 G 도 채워진다고 본 값이다. ④ 는 ㉠ 에 증손자 박까지 넣은 값이다.",
       "references": [
         {
           "type": "table",
-          "caption": "EMP 테이블",
+          "caption": "EMP",
           "headers": [
             "EMPNO",
             "ENAME",
@@ -1182,30 +1182,39 @@
           "rows": [
             [
               "1001",
-              "홍길동",
-              "(NULL)"
+              "홍",
+              "NULL"
             ],
             [
               "1002",
-              "이순신",
+              "이",
               "1001"
             ],
             [
               "1003",
-              "강감찬",
+              "강",
               "1001"
             ],
             [
               "1004",
-              "최영",
+              "최",
               "1002"
             ],
             [
               "1005",
-              "김유신",
+              "김",
               "1003"
+            ],
+            [
+              "1006",
+              "박",
+              "1004"
             ]
           ]
+        },
+        {
+          "type": "sql",
+          "code": "-- ㉠ 홍의 손자\nSELECT C.ENAME\nFROM   EMP A, EMP B, EMP C\nWHERE  A.ENAME = '홍'\nAND    B.MGR = A.EMPNO\nAND    C.MGR = B.EMPNO;\n-- ㉡ ㉠ 에서 A.ENAME 조건만 뺌\n-- ㉢\nSELECT C.ENAME, A.ENAME AS G\nFROM   EMP C\nLEFT JOIN EMP B ON C.MGR = B.EMPNO\nLEFT JOIN EMP A ON B.MGR = A.EMPNO;"
         }
       ]
     },
