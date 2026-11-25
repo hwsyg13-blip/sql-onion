@@ -1324,3 +1324,5 @@ sqld-0312·0319(M494·M501, 데이터베이스 파티션 기법)도 성능 데�
 | cbt-060 | 순수 관계 연산자 아닌 것 | DIVIDE·PROJECT(집합이라 중복 없음)·SELECT·차집합을 작은 릴레이션에 적용한 튜플 수 | PostgreSQL 16(DIVIDE 는 이중 NOT EXISTS, PROJECT 는 DISTINCT) → 2, 3, 3, 1. 사본 없음 |
 | ai-mock-039 | 시퀀스 설명 중 틀린 것 | NEXTVAL 뒤 ROLLBACK(시퀀스는 안 되돌아감) → (COUNT, MAX, CURRVAL) | PostgreSQL 16 시퀀스 → (1, 3, 3). 사본 없음 |
 | ai-mock-054 | KEEP 용도 설명 | MAX/MIN … KEEP (DENSE_RANK FIRST/LAST ORDER BY) 동점 포함 계산 | PostgreSQL 16 에 KEEP 이 없어 MIN/MAX(HIRE) 와 FILTER 로 흉내 → 10번 (4000, 5000), 20번 F 2500. 사본 없음 |
+| ai-mock-022 | 누적 프레임 구문 고르기 | 이동 창(1 PRECEDING~1 FOLLOWING)·빈 창(UNBOUNDED~1 PRECEDING)·ROWS 2 PRECEDING 값 | PostgreSQL 16 → D=1 (30, NULL), D=3 C 20. 사본 없음 |
+| ai-mock-045 | GROUPING_ID 설명 | CUBE 결과의 GROUPING_ID 비트 값(A 가 높은 자리) | PostgreSQL 16 GROUPING(A, B)(같은 비트 순서) → 0/1/2/3, SUM 40 행은 2. 사본 없음 |
