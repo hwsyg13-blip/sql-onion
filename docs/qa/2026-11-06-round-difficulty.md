@@ -1316,3 +1316,5 @@ sqld-0312·0319(M494·M501, 데이터베이스 파티션 기법)도 성능 데�
 | 53-2-36 | ROWNUM 상위 5 SQL 고르기 | 5·6번째 동점에서 ROWNUM·RANK·DENSE_RANK·FETCH WITH TIES 행 수 | PostgreSQL 16(ROWNUM 은 LIMIT 로) → 5, 6, 7, 6 |
 | 57-2-38 | [KT]im 고르기 | SQL Server LIKE 의 [ ]·[^ ]·[A-K] 범위·_ % (대소문자 구분 정렬 명시) | PostgreSQL 16 SIMILAR TO 로 같은 패턴 → 2, 5, 3, 7 |
 | 55-2-29 | 손자 조회 셀프 조인 고르기 | 3단 셀프 조인(특정 조부/전체 사슬) + LEFT JOIN 으로 조부 없는 행 | PostgreSQL 16 → (2, 3, 3) |
+| 47-2-22 | 최단신 SQL 중 다른 것 | IN(TEAM, MIN)·상관 = MIN·인라인 뷰·NOT EXISTS(더 작은 선수) + 키 NULL 선수 | PostgreSQL 16 → 3, 3, 3, 4 (NOT EXISTS 만 NULL 선수 포함) |
+| 50-2-11 | 평균 학점 SQL 고르기 | AVG 와 NULL, AVG(NVL), SUM/COUNT(*), LEFT JOIN 으로 수강 없는 학생 | PostgreSQL 16 → 2, 1, 1, 1 |

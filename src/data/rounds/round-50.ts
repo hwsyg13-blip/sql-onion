@@ -328,67 +328,77 @@ export const ROUND_50: QuizQuestion[] = [
     "round": 50,
     "subject": "2과목",
     "number": 11,
-    "title": "평균 학점이 3.0 이상인 학생을 조회하는 SQL 로 가장 적절한 것은?",
+    "title": "아래 STUDENT, ENROLL 테이블에 대한 ㉠~㉣ 의 결과 행 수를 차례로 나열한 것은?",
     "options": [
-      "SELECT 학번 FROM STUDENT WHERE AVG(학점) >= 3.0;",
-      "SELECT 학번 FROM STUDENT S, ENROLL E WHERE S.학번 = E.학번 HAVING AVG(학점) >= 3.0;",
-      "SELECT S.학번 FROM STUDENT S JOIN ENROLL E ON S.학번 = E.학번 GROUP BY S.학번 HAVING AVG(E.학점) >= 3.0;",
-      "SELECT 학번 FROM ENROLL WHERE AVG(학점) >= 3.0;"
+      "2, 2, 1, 1",
+      "3, 1, 1, 1",
+      "2, 1, 1, 1",
+      "2, 1, 2, 1"
     ],
     "correctIndex": 2,
-    "explanation": "학점은 ENROLL 에 있으므로 STUDENT 와 조인 후 학번으로 GROUP BY 하고 HAVING 으로 평균 학점을 필터링해야 한다. ① 과 ④ 는 WHERE 에 집계 함수를 써서 오류, ② 는 GROUP BY 없이 학번과 HAVING 을 함께 써서 오류다.",
+    "explanation": "AVG 는 NULL 을 빼고 평균을 낸다. ㉠ 에서 S1 은 (4.0 + 2.0) / 2 = 3.0, S2 는 3.5 한 값의 평균이라 3.5 로 둘 다 남는다. S3 은 학점이 NULL 뿐이라 평균이 NULL 이어서 빠져 2행이다. ㉡ 은 NULL 을 0 으로 바꿔 S2 가 (3.5 + 0) / 2 = 1.75 가 되어 S1 만 남는다. ㉢ 의 SUM / COUNT(*) 도 NULL 행을 분모에 넣으므로 ㉡ 과 같은 1행이다. ㉣ 은 LEFT JOIN 으로 수강 기록이 없는 S4 까지 남기고, 강좌가 하나도 없는 S4 만 고르므로 1행이다. 정답은 ③번이다. ① 은 ㉡ 의 NVL 이 결과를 바꾸지 않는다고 본 값이다. ② 는 평균이 NULL 인 S3 도 통과한다고 본 값이다. ④ 는 SUM / COUNT(*) 가 AVG 와 같다고 본 값이다.",
     "_source": "authored",
     "references": [
       {
         "type": "table",
-        "caption": "STUDENT 테이블",
+        "caption": "STUDENT",
         "headers": [
-          "컬럼"
+          "학번"
         ],
         "rows": [
           [
-            "학과"
+            "S1"
           ],
           [
-            "학번 (PK)"
+            "S2"
           ],
           [
-            "강좌"
+            "S3"
+          ],
+          [
+            "S4"
           ]
         ]
       },
       {
         "type": "table",
-        "caption": "CLASS 테이블",
+        "caption": "ENROLL",
         "headers": [
-          "컬럼"
+          "학번",
+          "강좌",
+          "학점"
         ],
         "rows": [
           [
-            "강좌번호 (PK)"
+            "S1",
+            "A",
+            "4.0"
           ],
           [
-            "..."
+            "S1",
+            "B",
+            "2.0"
+          ],
+          [
+            "S2",
+            "A",
+            "3.5"
+          ],
+          [
+            "S2",
+            "B",
+            "NULL"
+          ],
+          [
+            "S3",
+            "A",
+            "NULL"
           ]
         ]
       },
       {
-        "type": "table",
-        "caption": "ENROLL 테이블",
-        "headers": [
-          "컬럼"
-        ],
-        "rows": [
-          [
-            "학번 (PK, FK)"
-          ],
-          [
-            "강좌번호 (PK, FK)"
-          ],
-          [
-            "학점"
-          ]
-        ]
+        "type": "sql",
+        "code": "-- 공통\nSELECT S.학번\nFROM   STUDENT S JOIN ENROLL E\n       ON S.학번 = E.학번\nGROUP BY S.학번\n-- ㉠ HAVING AVG(E.학점) >= 3.0\n-- ㉡ HAVING AVG(NVL(E.학점, 0)) >= 3.0\n-- ㉢ HAVING SUM(E.학점) / COUNT(*)\n--             >= 3.0\n-- ㉣ (JOIN 을 LEFT JOIN 으로 바꾸고)\n--    HAVING COUNT(E.강좌) = 0"
       }
     ]
   },

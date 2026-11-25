@@ -841,56 +841,61 @@ export const ROUND_47: QuizQuestion[] = [
     "round": 47,
     "subject": "2과목",
     "number": 22,
-    "title": "아래 PLAYER 테이블에 대한 SQL 과 다른 결과를 반환하는 것은? (각 팀의 최단신 선수의 PNAME 을 조회)",
+    "title": "아래 PLAYER 테이블에서 팀별 최단신 선수를 구하려는 ㉠~㉣ 의 결과 행 수를 차례로 나열한 것은?",
     "options": [
-      "SELECT P.PNAME FROM PLAYER P WHERE EXISTS (SELECT 1 FROM PLAYER X WHERE X.TEAM_ID = P.TEAM_ID AND X.HEIGHT = P.HEIGHT AND X.HEIGHT = (SELECT MIN(HEIGHT) FROM PLAYER WHERE TEAM_ID = P.TEAM_ID));",
-      "SELECT P.PNAME FROM PLAYER P, (SELECT TEAM_ID, MIN(HEIGHT) AS MH FROM PLAYER GROUP BY TEAM_ID) M WHERE P.TEAM_ID = M.TEAM_ID AND P.HEIGHT = M.MH;",
-      "SELECT P.PNAME FROM PLAYER P JOIN PLAYER X ON P.TEAM_ID = X.TEAM_ID GROUP BY P.PNAME, P.TEAM_ID, P.HEIGHT HAVING P.HEIGHT = MIN(X.HEIGHT);",
-      "SELECT P.PNAME FROM PLAYER P WHERE EXISTS (SELECT 1 FROM PLAYER X WHERE X.TEAM_ID = P.TEAM_ID);"
+      "3, 3, 3, 3",
+      "2, 2, 2, 3",
+      "4, 4, 4, 4",
+      "3, 3, 3, 4"
     ],
     "correctIndex": 3,
-    "explanation": "원본 SQL 은 `(TEAM_ID, HEIGHT) IN (SELECT TEAM_ID, MIN(HEIGHT) ...)` 으로 \"각 팀의 최단신 선수\" 를 조회한다. ① 상관 서브쿼리, ② 인라인 뷰 조인, ③ JOIN + HAVING 형태로 모두 같은 결과를 낸다. ④ 는 단순히 \"같은 TEAM_ID 행이 존재하는지\" 만 확인하므로 PLAYER 테이블의 선수 5명이 모두 반환되어 결과가 다르다.",
+    "explanation": "MIN 은 NULL 을 빼고 계산해 T01 은 175, T02 는 178 이다. ㉠·㉡·㉢ 은 모두 키가 그 최솟값과 같은 선수를 고르므로 동점인 김·박과 강, 3행이다. 키가 NULL 인 정은 = 비교가 참이 되지 않아 빠진다. ㉣ 은 '같은 팀에 나보다 작은 선수가 없는' 선수를 고른다. 정은 X.HEIGHT < NULL 이 어떤 행에서도 참이 아니어서 서브쿼리가 비고, NOT EXISTS 가 참이 되어 결과에 들어간다. 그래서 4행이다. 정답은 ④번이다. ① 은 네 방법이 NULL 이 있어도 같은 결과를 낸다고 본 값이다. ② 는 동점이면 한 명만 나온다고 본 값이다. ③ 은 MIN 이 NULL 을 가장 작은 값으로 본다고 생각한 값이다.",
     "_source": "authored",
     "references": [
       {
         "type": "table",
-        "caption": "PLAYER 테이블",
+        "caption": "PLAYER",
         "headers": [
-          "TEAM_ID",
+          "TEAM",
           "PNAME",
           "HEIGHT"
         ],
         "rows": [
           [
             "T01",
-            "김철수",
+            "김",
             "175"
           ],
           [
             "T01",
-            "이영희",
+            "이",
             "180"
           ],
           [
             "T01",
-            "박민수",
+            "박",
             "175"
           ],
           [
+            "T01",
+            "정",
+            "NULL"
+          ],
+          [
             "T02",
-            "최정훈",
+            "최",
             "182"
           ],
           [
             "T02",
-            "강동원",
+            "강",
             "178"
           ]
         ]
       },
       {
         "type": "sql",
-        "code": "SELECT P.PNAME\nFROM   PLAYER P\nWHERE  (TEAM_ID, HEIGHT) IN (\n    SELECT TEAM_ID, MIN(HEIGHT)\n    FROM   PLAYER\n    GROUP BY TEAM_ID\n);"
+        "code": "-- ㉠\nSELECT PNAME FROM PLAYER\nWHERE  (TEAM, HEIGHT) IN (\n         SELECT TEAM, MIN(HEIGHT)\n         FROM   PLAYER GROUP BY TEAM);\n-- ㉡\nSELECT PNAME FROM PLAYER P\nWHERE  HEIGHT = (\n         SELECT MIN(HEIGHT) FROM PLAYER\n         WHERE  TEAM = P.TEAM);\n-- ㉢\nSELECT P.PNAME\nFROM   PLAYER P,\n      (SELECT TEAM, MIN(HEIGHT) MH\n       FROM PLAYER GROUP BY TEAM) M\nWHERE  P.TEAM = M.TEAM\nAND    P.HEIGHT = M.MH;\n-- ㉣\nSELECT PNAME FROM PLAYER P\nWHERE  NOT EXISTS (\n         SELECT 1 FROM PLAYER X\n         WHERE  X.TEAM = P.TEAM\n         AND    X.HEIGHT < P.HEIGHT);"
       }
     ]
   },
