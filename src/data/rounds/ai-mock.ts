@@ -9307,20 +9307,26 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "1과목",
     "number": 295,
-    "title": "표준 SQL(SQL1999)에서 테이블을 생성할 때 참조 관계를 정의하기 위해 외래키(Foreign Key)를 선언한다. 자식 테이블의 FK 데이터를 입력할 때 부모 테이블에 해당 PK 가 없으면 입력을 허용하지 않는 참조 동작(Referential Action)은?",
+    "title": "아래 (가)~(라) 요구사항에 맞는 참조 무결성 규칙을 바르게 짝지은 것은?",
     "options": [
-      "DEPENDENT",
-      "AUTOMATIC",
-      "RESTRICT",
-      "CASCADE"
+      "(가) CASCADE (나) RESTRICT (다) DEPENDENT (라) SET NULL",
+      "(가) CASCADE (나) SET NULL (다) AUTOMATIC (라) RESTRICT",
+      "(가) DEPENDENT (나) RESTRICT (다) CASCADE (라) SET NULL",
+      "(가) CASCADE (나) RESTRICT (다) AUTOMATIC (라) DEFAULT"
     ],
     "correctIndex": 0,
-    "explanation": "부모 테이블에 해당 PK 가 있을 때만 자식 테이블의 FK 입력을 허용하는 입력 참조동작은 DEPENDENT 다. AUTOMATIC 은 부모 PK 를 자동 생성한 뒤 입력, RESTRICT·CASCADE 는 주로 부모 삭제 시의 동작(삭제 제한, 연쇄 삭제)이다. 정답은 ① 이다.",
+    "explanation": "삭제 규칙에서 CASCADE 는 부모를 지우면 자식도 함께 지우고(가), RESTRICT 는 자식이 있으면 부모 삭제를 막으며(나), SET NULL 은 자식의 외래키를 NULL 로 바꾼다(라). 입력 규칙에서 DEPENDENT 는 부모에 그 값이 있을 때만 자식 입력을 허용한다(다). PostgreSQL 에서 같은 제약을 걸고 실행하면 없는 부서코드 입력과 사원이 있는 부서 삭제는 오류가 나고, 주문 삭제 뒤 주문상세는 0행, 고객 삭제 뒤 주문의 고객번호는 NULL 이 된다. 정답은 ①번이다. ② 의 AUTOMATIC 은 부모가 없으면 부모를 먼저 만들고 입력하는 규칙이라 (다) 와 반대다. ③ 은 입력 규칙인 DEPENDENT 를 삭제 요구사항에 붙였다. ④ 의 DEFAULT 는 외래키를 NULL 이 아닌 기본값으로 바꾼다.",
     "chapter": "데이터 무결성",
     "_source": "sqld-1140",
     "_origId": "sqld-0052",
     "_category": "데이터 무결성",
-    "_correctRate": 10
+    "_correctRate": 10,
+    "references": [
+      {
+        "type": "text",
+        "content": "(가) 주문을 삭제하면 그 주문의 주문상세도 함께 삭제한다.\n(나) 소속 사원이 한 명이라도 있는 부서는 삭제할 수 없다.\n(다) 사원을 입력할 때 부서 테이블에 없는 부서코드면 입력을 거부한다.\n(라) 고객을 삭제하면 그 고객이 한 주문의 고객번호를 NULL 로 바꾼다."
+      }
+    ]
   },
   {
     "id": 11095,
@@ -10555,20 +10561,74 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 330,
-    "title": "다음 중 팀(TEAM) 테이블과 구장(STADIUM) 테이블의 관계를 이용해서 소속팀이 가지고 있는 전용구장의 정보를 팀의 정보와 함께 출력하는 SQL을 작성할 때 결과가 다른 것은?",
+    "title": "아래 TEAM, STADIUM 테이블에서 SQL 의 ㉠ 에 넣었을 때 결과 행 수가 나머지 셋과 다른 것은? (Oracle 기준)",
     "options": [
-      "SELECT TEAM.REGION_NAME, TEAM.TEAM_NAME, \nTEAM.STADIUM_ID, STADIUM.STADIUM_NAME \nFROM TEAM, STADIUM \nWHERE TEAM.STADIUM_ID = STADIUM.STADIUM_ID;",
-      "SELECT T.REGION_NAME, T.TEAM_NAME, T.STADIUM_ID, \nS.STADIUM_NAME\n FROM TEAM T, STADIUM S\n WHERE T.STADIUM_ID = S.STADIUM_ID;",
-      "SELECT TEAM.REGION_NAME, TEAM.TEAM_NAME, \nTEAM.STADIUM_ID, STADIUM.STADIUM_NAME \nFROM TEAM INNER JOIN STADIUM\n ON (TEAM.STADIUM_ID =\n STADIUM.STADIUM_ID) ;",
-      "SELECT T.REGION_NAME, T.TEAM_NAME, T.STADIUM_ID, \nS.STADIUM_NAME\n FROM TEAM T INNER JOIN STADIUM S\n USING (T.STADIUM_ID = S.STADIUM_ID);"
+      "FROM TEAM T, STADIUM S WHERE T.STADIUM_ID = S.STADIUM_ID",
+      "FROM TEAM T INNER JOIN STADIUM S ON T.STADIUM_ID = S.STADIUM_ID",
+      "FROM TEAM T JOIN STADIUM S USING (STADIUM_ID)",
+      "FROM TEAM T, STADIUM S WHERE T.STADIUM_ID = S.STADIUM_ID(+)"
     ],
     "correctIndex": 3,
-    "explanation": "USING 절에는 조인할 공통 컬럼 이름만 괄호로 적어야 하고(USING (STADIUM_ID)), 테이블 별칭이나 = 조건을 쓸 수 없다. ④ 는 USING (T.STADIUM_ID = S.STADIUM_ID) 로 문법 오류가 나서 결과가 다르다. ①②③ 은 같은 내부 조인이다.",
+    "explanation": "①, ②, ③ 은 모두 STADIUM_ID 가 같은 행끼리만 붙이는 내부 조인이라 울산–문수, 포항–스틸야드 2행이 나온다. ③ 의 USING 은 조인 칼럼에 별칭을 붙이지 못하지만, 여기서는 SELECT 에 STADIUM_ID 를 쓰지 않아 오류 없이 실행된다. ④ 는 STADIUM 쪽에 (+) 를 붙인 왼쪽 외부 조인이라, 짝이 없는 신생 팀도 STADIUM_NAME 을 NULL 로 채워 함께 나와 3행이다. 정답은 ④번이다. 짝이 없는 상암 구장은 어느 SQL 에서도 나오지 않는다.",
     "chapter": "조인",
     "_source": "sqld-1140",
     "_origId": "sqld-0094",
     "_category": "JOIN",
-    "_correctRate": 10
+    "_correctRate": 10,
+    "references": [
+      {
+        "type": "table",
+        "caption": "TEAM",
+        "headers": [
+          "TEAM_ID",
+          "TEAM_NAME",
+          "STADIUM_ID"
+        ],
+        "rows": [
+          [
+            "K01",
+            "울산",
+            "S01"
+          ],
+          [
+            "K02",
+            "포항",
+            "S02"
+          ],
+          [
+            "K03",
+            "신생",
+            "NULL"
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "STADIUM",
+        "headers": [
+          "STADIUM_ID",
+          "STADIUM_NAME"
+        ],
+        "rows": [
+          [
+            "S01",
+            "문수"
+          ],
+          [
+            "S02",
+            "스틸야드"
+          ],
+          [
+            "S03",
+            "상암"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT T.TEAM_NAME,\n       S.STADIUM_NAME\n㉠;"
+      }
+    ]
   },
   {
     "id": 11130,
