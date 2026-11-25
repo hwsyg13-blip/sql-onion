@@ -1680,34 +1680,74 @@
     {
       "subject": "2과목",
       "number": 50,
-      "title": "다음 권한 부여·회수 내역에 대해 옳은 것은?",
+      "title": "다음 권한 부여·회수를 차례로 실행한 뒤, 철수와 영희가 T 테이블에 쓸 수 있는 권한을 바르게 나타낸 것은?",
       "options": [
-        "DROP ROLE STAFF를 하면 철수의 SELECT 권한이 사라진다.",
-        "철수는 STAFF 권한이 없어서 SELECT를 할 수 없다.",
-        "영희는 DELETE 권한을 사용할 수 있다.",
-        "철수의 INSERT 권한을 박탈하려면 STAFF와 MGR 둘 다에서 박탈해야 한다."
+        "철수: SELECT·DELETE·UPDATE / 영희: SELECT",
+        "철수: SELECT·INSERT·DELETE·UPDATE / 영희: SELECT",
+        "철수: DELETE·UPDATE / 영희: SELECT",
+        "철수: SELECT·DELETE·UPDATE / 영희: SELECT·DELETE"
       ],
       "correctIndex": 0,
-      "explanation": "STAFF 롤은 MGR 롤에 부여되고 MGR 롤은 철수에게 부여되었으므로 철수는 MGR을 통해 STAFF의 권한(SELECT 등)을 갖는다. STAFF 롤을 삭제하면 MGR을 거쳐 받은 철수의 SELECT 권한도 함께 사라진다. ② 철수는 MGR 을 통해 SELECT 를 할 수 있고, ③ 영희는 STAFF만 받았으므로 DELETE 권한이 없으며, ④ INSERT 권한은 STAFF에서만 회수하면 MGR 을 거친 권한도 함께 사라진다.",
+      "explanation": "롤 안에 롤을 넣으면 권한이 이어진다. 철수는 MGR 을 받았고 MGR 안에 STAFF 가 들어 있으므로 MGR 의 DELETE·UPDATE 와 STAFF 의 SELECT 를 모두 쓸 수 있다. 영희는 STAFF 만 받아 SELECT 만 쓸 수 있다. 마지막 REVOKE 로 STAFF 의 INSERT 가 회수되었으므로, STAFF 를 통해 INSERT 를 받던 철수와 영희 모두 INSERT 를 쓸 수 없다. 롤에서 한 번만 회수하면 그 롤을 받은 모든 사용자에게 바로 반영된다. 정답은 ①번이다. ② 는 롤에서 회수해도 이미 받은 사용자에게는 남는다고 착각한 결과다. ③ 은 MGR 안에 넣은 STAFF 의 권한이 철수에게 이어지지 않는다고 보았다. ④ 는 영희도 MGR 권한을 받은 것처럼 보았다. PostgreSQL 16 에서 같은 롤 구성을 만들어 확인하면 철수는 SELECT·DELETE 참, INSERT 거짓, 영희는 SELECT 만 참이다.",
       "references": [
         {
           "type": "text",
-          "content": "SELECT, INSERT 권한 → STAFF 롤에 부여\nDELETE, UPDATE 권한 → MGR 롤에 부여\nSTAFF 롤 → MGR 롤에 부여\nMGR 롤 → 철수에게 부여\nSTAFF 롤 → 영희에게 부여\nREVOKE INSERT FROM STAFF"
+          "content": "GRANT SELECT, INSERT ON T TO STAFF;\nGRANT DELETE, UPDATE ON T TO MGR;\nGRANT STAFF TO MGR;\nGRANT MGR TO 철수;\nGRANT STAFF TO 영희;\nREVOKE INSERT ON T FROM STAFF;"
         }
       ]
     },
     {
       "subject": "2과목",
       "number": 16,
-      "title": "급여 값이 모두 서로 다른 EMP 테이블에서 급여가 가장 적은 직원 5명을 조회하려고 한다. 다음 중 실행 순서 때문에 의도와 다른 결과를 낼 수 있는 SQL은?",
+      "title": "아래 EMP 테이블(표의 순서대로 읽힌다고 가정)에서 급여가 적은 3명을 구하려고 한다. 결과 행 수가 4인 SQL 과, 급여 300 인 '가' 가 결과에 들어가는 SQL 을 차례대로 고른 것은?",
       "options": [
-        "(가) SQL Server\nSELECT TOP 5 * FROM EMP ORDER BY SAL ASC;",
-        "(나) SQL Server\nSELECT TOP 5 WITH TIES * FROM EMP ORDER BY SAL ASC;",
-        "(다) Oracle\nSELECT * FROM EMP WHERE ROWNUM <= 5 ORDER BY SAL ASC;",
-        "(라) 표준 SQL\nSELECT * FROM EMP ORDER BY SAL ASC FETCH FIRST 5 ROWS ONLY;"
+        "(나), (라)",
+        "(가), (다)",
+        "(나), (다)",
+        "(라), (가)"
       ],
       "correctIndex": 2,
-      "explanation": "Oracle에서 같은 쿼리 블록의 ROWNUM <= 5는 ORDER BY 정렬보다 먼저 적용된다. 임의로 뽑힌 5행만 정렬될 뿐 급여가 가장 적은 5명이 보장되지 않는다. (가) TOP 5와 (라) FETCH FIRST는 정렬 결과의 앞 5행을 제한하고, (나) WITH TIES는 경계값과 같은 행을 추가로 포함하지만 급여가 모두 다르다고 했으므로 정확히 5행이 나온다. (다)를 고치려면 인라인 뷰 안에서 먼저 정렬한 뒤 바깥에서 ROWNUM을 적용해야 한다."
+      "explanation": "(나) 의 WITH TIES 는 3번째 값(200)과 같은 행을 모두 함께 내보내므로 나(100), 바(150), 다·라(200) 4행이다. (가) TOP 3 과 (라) FETCH FIRST 3 ROWS ONLY 는 정렬한 뒤 앞 3행만 내보내 3행이다(동점인 다·라 중 하나만 나온다). (다) 는 같은 쿼리 안의 ROWNUM <= 3 이 ORDER BY 보다 먼저 적용되어, 먼저 읽힌 가, 나, 다 3행을 고른 뒤 정렬한다. 그래서 급여가 가장 큰 편인 '가' 가 끼어든다. 정답은 ③번이다. 급여 순 상위 3명을 Oracle ROWNUM 으로 구하려면 인라인 뷰 안에서 먼저 정렬해야 한다. PostgreSQL 16 에서 WITH TIES 는 나, 바, 다, 라 4행, ROWNUM 방식(읽기 순서 3행 후 정렬)은 나, 다, 가 다.",
+      "references": [
+        {
+          "type": "table",
+          "caption": "EMP",
+          "headers": [
+            "이름",
+            "급여"
+          ],
+          "rows": [
+            [
+              "가",
+              "300"
+            ],
+            [
+              "나",
+              "100"
+            ],
+            [
+              "다",
+              "200"
+            ],
+            [
+              "라",
+              "200"
+            ],
+            [
+              "마",
+              "400"
+            ],
+            [
+              "바",
+              "150"
+            ]
+          ]
+        },
+        {
+          "type": "sql",
+          "code": "-- (가) SQL Server\nSELECT TOP 3 * FROM EMP\nORDER  BY 급여;\n-- (나) SQL Server\nSELECT TOP 3 WITH TIES * FROM EMP\nORDER  BY 급여;\n-- (다) Oracle\nSELECT * FROM EMP\nWHERE  ROWNUM <= 3\nORDER  BY 급여;\n-- (라) 표준 SQL\nSELECT * FROM EMP\nORDER  BY 급여\nFETCH  FIRST 3 ROWS ONLY;"
+        }
+      ]
     },
     {
       "subject": "2과목",
