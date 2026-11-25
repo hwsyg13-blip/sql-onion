@@ -364,7 +364,7 @@ export const CBTExam = ({examId = "round-60", onFinish, onNavigate, onExit, mock
                           fontSize:16,fontWeight:700,fontFamily:"var(--font-mono)",
                           display:"inline-flex",alignItems:"center",justifyContent:"center",marginTop:1,
                         }}>{i+1}</span>
-                        <span style={{fontSize:14.5,color:optFg,fontWeight: sel ? 600 : 400,lineHeight:1.65,flex:1}}>{renderInlineMd(opt)}</span>
+                        <span style={{fontSize:14.5,color:optFg,fontWeight: sel ? 600 : 400,lineHeight:1.65,flex:1,whiteSpace:"pre-line"}}>{renderInlineMd(opt)}</span>
                       </div>
                       {optRefs && <OptionReferences refs={optRefs}/>}
                     </div>
