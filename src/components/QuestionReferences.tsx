@@ -85,7 +85,7 @@ function RefTable({ headers, rows, caption }: any) {
     <div>
       {caption && <div style={CAPTION_STYLE}>{caption}</div>}
       <div style={{ overflowX: 'auto' }}>
-        <table style={{
+        <table className="qref-table" style={{
           borderCollapse: 'collapse',
           minWidth: '100%',
           fontSize: 13.5,
