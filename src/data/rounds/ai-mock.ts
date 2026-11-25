@@ -1,5 +1,5 @@
 // Auto-generated from scripts/authored/ai-mock.json
-// AI 생성 모의고사 풀 (기출 변형) · 1169문항
+// AI 생성 모의고사 풀 (기출 변형) · 1155문항
 // ⚠ 직접 편집 금지. ai-mock.json 수정 후 'node scripts/build-quiz-bank.mjs' 재실행.
 import type { QuizQuestion } from '../quizBank';
 
@@ -2719,6 +2719,26 @@ export const AI_MOCK: QuizQuestion[] = [
         "code": "SELECT ENAME\nFROM   EMP E\nWHERE  SAL > (SELECT AVG(SAL)\n              FROM   EMP\n              WHERE  DEPTNO = E.DEPTNO);"
       }
     ]
+  },
+  {
+    "id": 10885,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 86,
+    "title": "소계, 중계, 합계처럼 계층적 분류를 포함하고 있는 데이터의 집계에 적합한 GROUP 함수 두 가지는 무엇인가?",
+    "options": [
+      "ROLLUP, SUM",
+      "GROUPING, SUM",
+      "ROLLUP, CUBE",
+      "CUBE, SUM"
+    ],
+    "correctIndex": 2,
+    "explanation": "ROLLUP, CUBE는 GROUP BY의 확장된 형태로 병렬로 수행이 가능하고 사용하기가 쉽기 때문에 효과적이다. 다차원적인 집계가 필요한 경우는 CUBE를 사용한다.",
+    "chapter": "관계형 DB와 SELECT",
+    "_source": "cbt-mock",
+    "_origId": "cbt-037",
+    "_cbtOrigNo": 37
   },
   {
     "id": 10888,
@@ -9432,16 +9452,16 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "1과목",
     "number": 292,
-    "title": "다음 중 물리적 테이블 명으로 가장 적절한 것은?",
+    "title": "Oracle 에서 다음 CREATE TABLE 문 중 오류가 나는 것은?",
     "options": [
-      "100_EMP",
-      "EMP-100",
-      "100-EMP",
-      "EMP_10"
+      "CREATE TABLE SALES_2024 (A NUMBER);",
+      "CREATE TABLE \"2024 SALES\" (A NUMBER);",
+      "CREATE TABLE SALES$2024 (A NUMBER);",
+      "CREATE TABLE 2024_SALES (A NUMBER);"
     ],
     "correctIndex": 3,
-    "explanation": "테이블명은 문자로 시작해야 하고 A-Z, a-z, 0-9, _, $, # 만 쓸 수 있다. 숫자로 시작하는 100_EMP·100-EMP 와 하이픈(-)이 들어간 EMP-100 은 쓸 수 없고 EMP_10 만 가능하다. 정답은 ④ 이다.",
-    "chapter": "데이터베이스 설계",
+    "explanation": "따옴표 없이 쓰는 테이블명은 문자로 시작해야 하고, 문자·숫자·_·$·# 만 쓸 수 있다. ④ 2024_SALES 는 숫자로 시작해 오류가 난다. 정답은 ④번이다. ① 은 규칙을 모두 지킨다. ② 처럼 큰따옴표로 감싸면 숫자로 시작하거나 공백이 있는 이름도 만들 수 있다. 다만 이후에도 항상 \"2024 SALES\" 처럼 따옴표와 대소문자를 똑같이 써야 한다. ③ $ 는 첫 글자만 아니면 쓸 수 있다. PostgreSQL 16 에서도 ①·②·③ 은 만들어지고 ④ 만 오류가 난다.",
+    "chapter": "DML",
     "_source": "sqld-1140",
     "_origId": "sqld-0047",
     "_category": "데이터베이스 설계",
@@ -12590,48 +12610,6 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11160,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "1과목",
-    "number": 361,
-    "title": "발생 시점에 따라 구분할 수 있는 엔터티의 유형이 아닌 것은?",
-    "options": [
-      "개념 엔터티",
-      "기본 엔터티",
-      "중심 엔터티",
-      "행위 엔터티"
-    ],
-    "correctIndex": 0,
-    "explanation": "엔터티는 발생 시점에 따라 기본/핵심 엔터티, 중심 엔터티, 행위 엔터티로 구분이 된다. 발생 시점에 따른 종류에는 개념 엔터티라는 용어는 없으며, 추상화 수준이 높은 모델링의 단계로 개념 데이터 모델링이라고 표현한다.",
-    "chapter": "엔터티",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0144",
-    "_category": "ER 모델링",
-    "_correctRate": 10
-  },
-  {
-    "id": 11161,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "1과목",
-    "number": 362,
-    "title": "자신의 속성이 없어도 다른 속성을 이용하여 결과를 도출할 수 있는 특징을 가진 속성의 이름은?",
-    "options": [
-      "관계 속성",
-      "파생 속성",
-      "기본 속성",
-      "설계 속성"
-    ],
-    "correctIndex": 1,
-    "explanation": "파생 속성은 자기 고유의 값이 아니라 다른 속성으로 계산해서 얻는 속성이다(예: 주문금액 = 단가 × 수량, 나이 = 생년월일로 계산). 원본이 바뀌면 다시 계산해야 하므로 꼭 필요한 경우에만 둔다.",
-    "chapter": "엔터티",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0145",
-    "_category": "ER 모델링",
-    "_correctRate": 10
-  },
-  {
     "id": 11162,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
@@ -12845,27 +12823,6 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11177,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "1과목",
-    "number": 378,
-    "title": "발생 시점에 따른 엔터티 분류에 의한 중심 엔터티가 아닌 것은?",
-    "options": [
-      "계약",
-      "사원",
-      "주문",
-      "매출"
-    ],
-    "correctIndex": 1,
-    "explanation": "사원, 부서, 고객, 상품, 자재 등이 기본 엔터티가 될 수 있다.",
-    "chapter": "엔터티",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0168",
-    "_category": "ER 모델링",
-    "_correctRate": 10
-  },
-  {
     "id": 11179,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
@@ -12904,27 +12861,6 @@ export const AI_MOCK: QuizQuestion[] = [
     "chapter": "데이터 모델 개념",
     "_source": "sqld-1140",
     "_origId": "sqld-0173",
-    "_category": "데이터베이스 개념",
-    "_correctRate": 10
-  },
-  {
-    "id": 11183,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "1과목",
-    "number": 384,
-    "title": "다음 중 테이블명으로 가능한 것은 무엇인가?",
-    "options": [
-      "100_EMP",
-      "EMP100",
-      "100EMP",
-      "EMP-100"
-    ],
-    "correctIndex": 1,
-    "explanation": "테이블명과 칼럼명은 반드시 문자로 시작해야 한다.",
-    "chapter": "데이터 모델 개념",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0174",
     "_category": "데이터베이스 개념",
     "_correctRate": 10
   },
@@ -13245,27 +13181,6 @@ export const AI_MOCK: QuizQuestion[] = [
     "_source": "sqld-1140",
     "_origId": "sqld-0187",
     "_category": "서브쿼리",
-    "_correctRate": 10
-  },
-  {
-    "id": 11194,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 395,
-    "title": "소계, 중계, 합계처럼 계층적 분류를 포함하고 있는 데이터의 집계에 적합한 GROUP 함수 두 가지는 무엇인가?",
-    "options": [
-      "CUBE, SUM",
-      "ROLLUP, CUBE",
-      "GROUPING, SUM",
-      "ROLLUP, SUM"
-    ],
-    "correctIndex": 1,
-    "explanation": "소계·중계·합계처럼 단계별로 묶어 집계할 때는 ROLLUP 과 CUBE 를 쓴다(②). ROLLUP 은 왼쪽 칼럼부터 계층적으로, CUBE 는 가능한 모든 조합으로 소계를 만든다. SUM 은 일반 집계 함수, GROUPING 은 소계 행인지 판별하는 함수다.",
-    "chapter": "그룹 함수",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0188",
-    "_category": "그룹 함수",
     "_correctRate": 10
   },
   {
@@ -15659,27 +15574,6 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11259,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "1과목",
-    "number": 460,
-    "title": "데이터베이스 정규화 중에서 기본키를 제외하고 칼럼 간에 종속성이 발생하면 테이블을 분할하는 것은?",
-    "options": [
-      "제4정규화",
-      "제3정규화",
-      "제2정규화",
-      "제1정규화"
-    ],
-    "correctIndex": 1,
-    "explanation": "기본키가 아닌 일반 칼럼끼리 종속 관계가 있는 것(이행 함수 종속)을 없애려고 테이블을 나누는 단계는 제3정규화다(②). 예: 사번 → 부서코드 → 부서명 이면 부서 테이블을 따로 만든다.",
-    "chapter": "정규화",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0270",
-    "_category": "정규화",
-    "_correctRate": 10
-  },
-  {
     "id": 11260,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
@@ -16995,27 +16889,6 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11285,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 486,
-    "title": "EMP 테이블의 급여합계에 대해서 결합 가능한 모든 조건의 합계를 계산하는 것은?",
-    "options": [
-      "CUBE(DEPTNO, JOB)",
-      "ROLLUP(DEPTNO, JOB)",
-      "GROUPING SETS(DEPTNO, JOB)",
-      "GROUP BY DEPTNO, JOB"
-    ],
-    "correctIndex": 0,
-    "explanation": "CUBE(DEPTNO, JOB) 는 (DEPTNO, JOB), DEPTNO 별, JOB 별, 전체 합계까지 결합 가능한 모든 조합의 집계를 만든다(①). ROLLUP 은 왼쪽부터 계층적으로만(DEPTNO 별, 전체), GROUPING SETS 는 지정한 기준만 집계한다.",
-    "chapter": "그룹 함수",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0302",
-    "_category": "그룹 함수",
-    "_correctRate": 10
-  },
-  {
     "id": 11286,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
@@ -17373,27 +17246,6 @@ export const AI_MOCK: QuizQuestion[] = [
     "_correctRate": 10
   },
   {
-    "id": 11295,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "1과목",
-    "number": 496,
-    "title": "엔터티 간의 관계 중 비식별 관계에 대한 설명으로 올바르지 않은 것은?",
-    "options": [
-      "반드시 부모 엔터티에 종속한다.",
-      "부모 쪽의 관계 참여가 선택적 관계이다.",
-      "엔터티 간의 관계를 점선으로 표현한다.",
-      "약한 연결 관계를 표현하고 있다."
-    ],
-    "correctIndex": 0,
-    "explanation": "'반드시 부모에 종속한다' 는 식별 관계의 설명이라 ① 이 틀렸다. 비식별 관계는 부모 키를 일반 속성(외래키)으로만 받아 부모 없이도 자식이 생길 수 있고(② 부모 쪽 참여가 선택적), ERD 에서 점선으로 그리며(③), 약한 연결 관계를 나타낸다(④).",
-    "chapter": "엔터티",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0314",
-    "_category": "ER 모델링",
-    "_correctRate": 10
-  },
-  {
     "id": 11296,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
@@ -17428,20 +17280,56 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "1과목",
     "number": 498,
-    "title": "정규화를 수행하지 않고 엔터티에 데이터를 입력할 때 불필요한 데이터를 같이 입력하거나 삭제하면 다른 데이터까지 같이 삭제되는 문제는?",
+    "title": "아래 수강 테이블(주식별자: 학번 + 강좌코드)에서 생기는 (가)~(다) 현상을 이상 현상 종류와 바르게 짝지은 것은?",
     "options": [
-      "연결 함정",
-      "이상현상",
-      "제2정규화",
-      "제3정규화"
+      "(가) 갱신 이상 (나) 삽입 이상 (다) 삭제 이상",
+      "(가) 삽입 이상 (나) 삭제 이상 (다) 갱신 이상",
+      "(가) 삽입 이상 (나) 갱신 이상 (다) 삭제 이상",
+      "(가) 삭제 이상 (나) 갱신 이상 (다) 삽입 이상"
     ],
-    "correctIndex": 1,
-    "explanation": "정규화를 하지 않아서 발생하는 문제점을 이상현상이라고 한다. 이상현상에는 삽입 이상현상, 갱신 이상현상, 삭제 이상현상이 있다.",
+    "correctIndex": 2,
+    "explanation": "강사·강사전화는 주식별자 전체가 아니라 강좌코드에만 종속된다(부분 함수 종속). 이 때문에 (가) 처럼 학번 없이는 강좌 정보를 넣지 못하는 삽입 이상, (나) 처럼 같은 값이 여러 행에 있어 일부만 고치면 값이 어긋나는 갱신 이상, (다) 처럼 수강 행을 지우면 강좌 정보까지 사라지는 삭제 이상이 생긴다. 정답은 ③번이다. 나머지 보기는 세 이상의 이름을 서로 바꾸었다. 강좌(강좌코드, 강사, 강사전화) 를 따로 떼어 내는 제2정규화로 세 이상을 모두 없앨 수 있다. 정규화는 중복과 이상 현상을 줄이려는 것이지 보안을 위한 것이 아니다.",
     "chapter": "정규화",
     "_source": "sqld-1140",
     "_origId": "sqld-0316",
     "_category": "정규화",
-    "_correctRate": 10
+    "_correctRate": 10,
+    "references": [
+      {
+        "type": "table",
+        "caption": "수강",
+        "headers": [
+          "학번",
+          "강좌코드",
+          "강사",
+          "강사전화"
+        ],
+        "rows": [
+          [
+            "1",
+            "DB1",
+            "김",
+            "1111"
+          ],
+          [
+            "2",
+            "DB1",
+            "김",
+            "1111"
+          ],
+          [
+            "3",
+            "OS1",
+            "이",
+            "2222"
+          ]
+        ]
+      },
+      {
+        "type": "text",
+        "content": "(가) 아직 수강생이 없는 새 강좌 NW1 의 강사를 넣으려 했지만 학번이 없어 넣을 수 없다.\n(나) 김 강사의 전화를 바꾸며 1번 행만 고쳐 DB1 강사전화가 두 값이 되었다.\n(다) 3번 학생이 OS1 수강을 취소해 행을 지우자 OS1 의 강사 정보도 함께 사라졌다."
+      }
+    ]
   },
   {
     "id": 11298,
@@ -17462,27 +17350,6 @@ export const AI_MOCK: QuizQuestion[] = [
     "_source": "sqld-1140",
     "_origId": "sqld-0317",
     "_category": "정규화",
-    "_correctRate": 10
-  },
-  {
-    "id": 11299,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "1과목",
-    "number": 500,
-    "title": "키 엔터티라고도 하며 발생 시점에 따라서 엔터티를 분류할 때 독립적으로 생성되는 엔터티는 무엇인가?",
-    "options": [
-      "종결 엔터티",
-      "행위 엔터티",
-      "중심 엔터티",
-      "기본 엔터티"
-    ],
-    "correctIndex": 3,
-    "explanation": "발생 시점에 따라 엔터티를 나누면 기본(키) 엔터티, 중심 엔터티, 행위 엔터티다. 다른 엔터티 없이 독립적으로 생기는 것은 기본 엔터티다(④, 예: 고객, 상품, 부서). 중심 엔터티는 기본 엔터티에서 생겨 업무의 중심이 되는 것(예: 주문), 행위 엔터티는 두 개 이상의 엔터티에서 생기는 것(예: 주문 이력)이다.",
-    "chapter": "엔터티",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0318",
-    "_category": "ER 모델링",
     "_correctRate": 10
   },
   {
@@ -19565,27 +19432,6 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11350,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 551,
-    "title": "동일한 순위에 대해서 동일한 순위를 부여하고 다음 순위를 건너뛰지 않는 것은?",
-    "options": [
-      "RATIO_TO_REPORT",
-      "ROW_NUMBER",
-      "DENSE_RANK",
-      "RANK"
-    ],
-    "correctIndex": 2,
-    "explanation": "DENSE_RANK 는 동점에 같은 순위를 주고 다음 순위를 건너뛰지 않는다(1, 2, 2, 3). RANK 는 동점 수만큼 건너뛰고(1, 2, 2, 4), ROW_NUMBER 는 동점이어도 다른 번호를 주며, RATIO_TO_REPORT 는 순위가 아니라 합계 대비 비율이다.",
-    "chapter": "윈도우 함수",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0382",
-    "_category": "윈도우 함수",
-    "_correctRate": 10
-  },
-  {
     "id": 11351,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
@@ -19693,27 +19539,6 @@ export const AI_MOCK: QuizQuestion[] = [
         "code": "SELECT * FROM EMP\nWHERE EMP_NAME LIKE 'K%';"
       }
     ]
-  },
-  {
-    "id": 11355,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 556,
-    "title": "Oracle 에서 다음 CREATE TABLE 문 중 오류가 나는 것은?",
-    "options": [
-      "CREATE TABLE SALES_2024 (A NUMBER);",
-      "CREATE TABLE \"2024 SALES\" (A NUMBER);",
-      "CREATE TABLE SALES$2024 (A NUMBER);",
-      "CREATE TABLE 2024_SALES (A NUMBER);"
-    ],
-    "correctIndex": 3,
-    "explanation": "따옴표 없이 쓰는 테이블명은 문자로 시작해야 하고, 문자·숫자·_·$·# 만 쓸 수 있다. ④ 2024_SALES 는 숫자로 시작해 오류가 난다. 정답은 ④번이다. ① 은 규칙을 모두 지킨다. ② 처럼 큰따옴표로 감싸면 숫자로 시작하거나 공백이 있는 이름도 만들 수 있다. 다만 이후에도 항상 \"2024 SALES\" 처럼 따옴표와 대소문자를 똑같이 써야 한다. ③ $ 는 첫 글자만 아니면 쓸 수 있다. PostgreSQL 16 에서도 ①·②·③ 은 만들어지고 ④ 만 오류가 난다.",
-    "chapter": "DML",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0388",
-    "_category": "DML",
-    "_correctRate": 10
   },
   {
     "id": 11356,
@@ -19847,27 +19672,6 @@ export const AI_MOCK: QuizQuestion[] = [
         "alt": "문항 이미지 j393-1"
       }
     ]
-  },
-  {
-    "id": 11360,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 561,
-    "title": "SQL문의 집합 연산자에 대한 설명이다. 다음 중 INTERSECT로 올바른 것은?",
-    "options": [
-      "양쪽 모두 포함된 행을 검색한다.",
-      "차집합을 검색한다.",
-      "중복을 제거한 결과의 합을 검색한다.",
-      "중복을 포함한 결과의 합을 검색한다."
-    ],
-    "correctIndex": 0,
-    "explanation": "INTERSECT 는 양쪽 결과에 모두 있는 행만 돌려주는 교집합이다(①, 중복은 한 번만). ② 차집합은 MINUS, ③ 중복을 없앤 합집합은 UNION, ④ 중복을 포함한 합집합은 UNION ALL 이다.",
-    "chapter": "집합 연산자",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0394",
-    "_category": "집합 연산자",
-    "_correctRate": 10
   },
   {
     "id": 11361,
@@ -20062,27 +19866,6 @@ export const AI_MOCK: QuizQuestion[] = [
         "alt": "문항 이미지 j403-1"
       }
     ]
-  },
-  {
-    "id": 11368,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "1과목",
-    "number": 569,
-    "title": "식별자 분류체계에서 업무에 의해서 만들어지는 식별자로 대체 여부로 분류되는 것은?",
-    "options": [
-      "단일 식별자",
-      "본질 식별자",
-      "내부 식별자",
-      "주식별자"
-    ],
-    "correctIndex": 1,
-    "explanation": "대체 여부에 따라서 식별자는 본질 식별자와 인조식별자로 분류된다. 본질 식별자는 업무에 의해서 만들어지는 식별자이고 인조 식별자는 인위적으로 만들어진 식별자이다.",
-    "chapter": "데이터 모델 개념",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0405",
-    "_category": "데이터베이스 개념",
-    "_correctRate": 10
   },
   {
     "id": 11369,
@@ -21470,27 +21253,6 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
-    "id": 11400,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 601,
-    "title": "SELECT문의 결과 집합에 따른 가상의 순번은 무엇인가?",
-    "options": [
-      "HASH",
-      "COUNT",
-      "ROWNUM",
-      "ROWID"
-    ],
-    "correctIndex": 2,
-    "explanation": "ROWNUM 은 조회 결과 행에 1, 2, 3 … 순서로 붙는 가상의 번호(의사 칼럼)라 상위 N건을 뽑을 때 쓴다. ROWID 는 행이 실제로 저장된 위치를 가리키는 주소이고, COUNT 는 건수를 세는 집계 함수, HASH 는 순번과 관계없다.",
-    "chapter": "윈도우 함수",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0439",
-    "_category": "윈도우 함수",
-    "_correctRate": 10
-  },
-  {
     "id": 11401,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
@@ -22819,63 +22581,6 @@ export const AI_MOCK: QuizQuestion[] = [
         "type": "image",
         "src": "/sqld-images/j484-1.png",
         "alt": "문항 이미지 j484-1"
-      }
-    ]
-  },
-  {
-    "id": 11435,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 636,
-    "title": "아래 수강 테이블(주식별자: 학번 + 강좌코드)에서 생기는 (가)~(다) 현상을 이상 현상 종류와 바르게 짝지은 것은?",
-    "options": [
-      "(가) 갱신 이상 (나) 삽입 이상 (다) 삭제 이상",
-      "(가) 삽입 이상 (나) 삭제 이상 (다) 갱신 이상",
-      "(가) 삽입 이상 (나) 갱신 이상 (다) 삭제 이상",
-      "(가) 삭제 이상 (나) 갱신 이상 (다) 삽입 이상"
-    ],
-    "correctIndex": 2,
-    "explanation": "강사·강사전화는 주식별자 전체가 아니라 강좌코드에만 종속된다(부분 함수 종속). 이 때문에 (가) 처럼 학번 없이는 강좌 정보를 넣지 못하는 삽입 이상, (나) 처럼 같은 값이 여러 행에 있어 일부만 고치면 값이 어긋나는 갱신 이상, (다) 처럼 수강 행을 지우면 강좌 정보까지 사라지는 삭제 이상이 생긴다. 정답은 ③번이다. 나머지 보기는 세 이상의 이름을 서로 바꾸었다. 강좌(강좌코드, 강사, 강사전화) 를 따로 떼어 내는 제2정규화로 세 이상을 모두 없앨 수 있다. 정규화는 중복과 이상 현상을 줄이려는 것이지 보안을 위한 것이 아니다.",
-    "chapter": "정규화",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0485",
-    "_category": "정규화",
-    "_correctRate": 10,
-    "references": [
-      {
-        "type": "table",
-        "caption": "수강",
-        "headers": [
-          "학번",
-          "강좌코드",
-          "강사",
-          "강사전화"
-        ],
-        "rows": [
-          [
-            "1",
-            "DB1",
-            "김",
-            "1111"
-          ],
-          [
-            "2",
-            "DB1",
-            "김",
-            "1111"
-          ],
-          [
-            "3",
-            "OS1",
-            "이",
-            "2222"
-          ]
-        ]
-      },
-      {
-        "type": "text",
-        "content": "(가) 아직 수강생이 없는 새 강좌 NW1 의 강사를 넣으려 했지만 학번이 없어 넣을 수 없다.\n(나) 김 강사의 전화를 바꾸며 1번 행만 고쳐 DB1 강사전화가 두 값이 되었다.\n(다) 3번 학생이 OS1 수강을 취소해 행을 지우자 OS1 의 강사 정보도 함께 사라졌다."
       }
     ]
   },
