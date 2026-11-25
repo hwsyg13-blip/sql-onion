@@ -254,7 +254,7 @@ export const OptionList = ({q, selected, setSelected, checked}) => (
                 fontSize:16,fontWeight:700,fontFamily:"var(--font-mono)",
                 display:"inline-flex",alignItems:"center",justifyContent:"center",marginTop:1,
               }}>{i+1}</span>
-              <span style={{fontSize:14.5,color:optFg,fontWeight: (sel || ok || bad) ? 600 : 400,lineHeight:1.65,flex:1}}>{opt}</span>
+              <span style={{fontSize:14.5,color:optFg,fontWeight: (sel || ok || bad) ? 600 : 400,lineHeight:1.65,flex:1,whiteSpace:"pre-line"}}>{opt}</span>
             </div>
             {optRefs && <OptionReferences refs={optRefs}/>}
           </div>

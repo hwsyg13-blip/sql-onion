@@ -702,24 +702,24 @@ export const ROUND_54: QuizQuestion[] = [
     "round": 54,
     "subject": "2과목",
     "number": 21,
-    "title": "아래 두 테이블을 NATURAL JOIN 한 결과로 옳은 것은?",
+    "title": "아래 두 테이블에 대한 SQL 의 (결과 행 수, 결과 칼럼 수) 로 옳은 것은?",
     "options": [
-      "3건",
-      "2건",
-      "1건",
-      "공집합"
+      "(3, 4)",
+      "(4, 4)",
+      "(2, 4)",
+      "(3, 6)"
     ],
     "correctIndex": 0,
-    "explanation": "NATURAL JOIN 은 두 테이블에서 동일한 이름을 가진 모든 컬럼을 자동으로 조인 조건으로 사용한다. T1·T2 에서 KEYA·KEYB 는 이름이 다르므로 조인 조건에서 제외되고, 동일명 컬럼인 COL1·COL2 만 매칭 대상이 된다. (A,가) 그룹: T1 의 (1,A,가)/(2,A,가) 2행 × T2 의 (1,A,가) 1행 = 2건, (C,다) 그룹: T1 의 (5,C,다) 1행 × T2 의 (3,C,다) 1행 = 1건. 합계 3건. 결과 테이블의 공통 컬럼은 한 번씩만 나타나며 KEYA·KEYB 는 그대로 보존된다. ② 2건은 (C, 다) 짝을 놓친 값, ③ 1건은 KEYA = KEYB 까지 조인 조건으로 본 값((1, A, 가) 한 쌍), ④ 공집합은 이름이 다른 KEY 컬럼 때문에 조인이 안 된다고 본 결과다.",
+    "explanation": "NATURAL JOIN 은 이름이 같은 칼럼 모두(ID, GRP)를 = 로 비교한다. (1, A) 는 양쪽에 있어 1행, (2, A) 와 (2, B) 는 GRP 가 달라 빠진다. (3, NULL) 은 GRP 가 둘 다 NULL 이지만 NULL = NULL 은 참이 아니라서 빠진다. (5, C) 는 T2 에 두 행이라 2행이 된다. 모두 3행이다. SELECT * 를 하면 공통 칼럼 ID, GRP 는 한 번씩만 나오고 그 뒤에 NAME, PRICE 가 붙어 4칼럼이다. 정답은 ①번이다. ② 는 (3, NULL) 끼리도 맞는다고 본 값이다. ③ 은 (5, C) 가 T2 에 두 번 있어도 한 행만 나온다고 본 값이다. ④ 는 INNER JOIN … ON 처럼 T1, T2 의 ID·GRP 가 각각 따로 나온다고 본 칼럼 수다.",
     "_source": "authored",
     "references": [
       {
         "type": "table",
         "caption": "T1",
         "headers": [
-          "KEYA",
-          "COL1",
-          "COL2"
+          "ID",
+          "GRP",
+          "NAME"
         ],
         "rows": [
           [
@@ -733,6 +733,11 @@ export const ROUND_54: QuizQuestion[] = [
             "가"
           ],
           [
+            "3",
+            "NULL",
+            "나"
+          ],
+          [
             "5",
             "C",
             "다"
@@ -743,116 +748,42 @@ export const ROUND_54: QuizQuestion[] = [
         "type": "table",
         "caption": "T2",
         "headers": [
-          "KEYB",
-          "COL1",
-          "COL2"
+          "ID",
+          "GRP",
+          "PRICE"
         ],
         "rows": [
           [
             "1",
             "A",
-            "가"
+            "100"
+          ],
+          [
+            "2",
+            "B",
+            "200"
           ],
           [
             "3",
+            "NULL",
+            "300"
+          ],
+          [
+            "5",
             "C",
-            "다"
+            "500"
+          ],
+          [
+            "5",
+            "C",
+            "550"
           ]
         ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT *\nFROM   T1 NATURAL JOIN T2;"
       }
-    ],
-    "optionReferences": [
-      [
-        {
-          "type": "table",
-          "caption": "보기 ① 결과",
-          "headers": [
-            "COL1",
-            "COL2",
-            "KEYA",
-            "KEYB"
-          ],
-          "rows": [
-            [
-              "A",
-              "가",
-              "1",
-              "1"
-            ],
-            [
-              "A",
-              "가",
-              "2",
-              "1"
-            ],
-            [
-              "C",
-              "다",
-              "5",
-              "3"
-            ]
-          ]
-        }
-      ],
-      [
-        {
-          "type": "table",
-          "caption": "보기 ② 결과",
-          "headers": [
-            "COL1",
-            "COL2",
-            "KEYA",
-            "KEYB"
-          ],
-          "rows": [
-            [
-              "A",
-              "가",
-              "1",
-              "1"
-            ],
-            [
-              "A",
-              "가",
-              "2",
-              "1"
-            ]
-          ]
-        }
-      ],
-      [
-        {
-          "type": "table",
-          "caption": "보기 ③ 결과",
-          "headers": [
-            "COL1",
-            "COL2",
-            "KEYA",
-            "KEYB"
-          ],
-          "rows": [
-            [
-              "A",
-              "가",
-              "1",
-              "1"
-            ]
-          ]
-        }
-      ],
-      [
-        {
-          "type": "table",
-          "caption": "보기 ④ 결과",
-          "headers": [
-            "COL1",
-            "COL2",
-            "KEYA",
-            "KEYB"
-          ],
-          "rows": []
-        }
-      ]
     ]
   },
   {
@@ -1650,46 +1581,50 @@ export const ROUND_54: QuizQuestion[] = [
     "round": 54,
     "subject": "2과목",
     "number": 35,
-    "title": "아래 T1 테이블에 대한 SELF JOIN 등수 쿼리(T2 는 T1 의 별칭)에서 빈칸 ⓐ, ⓑ 에 들어갈 내용으로 옳은 것은?",
+    "title": "아래 T1 테이블에 대한 SQL(T2 는 T1 의 별칭) 결과에서 (김의 R1, 김의 R3, 최의 R2) 로 옳은 것은?",
     "options": [
-      "ⓐ COUNT(*) + 1 / ⓑ T1.점수 < T2.점수",
-      "ⓐ COUNT(*) / ⓑ T1.점수 = T2.점수",
-      "ⓐ COUNT(*) + 1 / ⓑ T1.점수 > T2.점수",
-      "ⓐ COUNT(*) - 1 / ⓑ T1.점수 <= T2.점수"
+      "(3, 4, 4)",
+      "(3, 3, 4)",
+      "(3, 4, 5)",
+      "(2, 4, 4)"
     ],
     "correctIndex": 0,
-    "explanation": "자기보다 점수가 높은 사람 수에 1 을 더하면 순위가 된다. 따라서 ⓐ 는 `COUNT(*) + 1`, ⓑ 의 비교 조건은 `T1.점수 < T2.점수` 가 되어야 한다. ② 는 점수가 같은 사람 수, ③ 은 자기보다 점수가 낮은 사람 수 + 1 이라 순위가 거꾸로 되고, ④ 는 자기 이상인 인원 − 1 이라 1등이 0 이 된다.",
+    "explanation": "R1 은 나보다 점수가 높은 사람 수 + 1 이라 RANK 와 같다. 김(85)보다 높은 사람은 이(95), 홍(90) 둘이라 R1 = 3 이다. R3 은 나 이상인 사람 수라 김과 같은 85 인 박, 김 자신까지 들어가 95, 90, 85, 85 로 4 다. 동점이 있으면 R1 과 R3 은 달라진다. R2 는 나보다 높은 '서로 다른 점수' 의 수 + 1 이라 DENSE_RANK 와 같다. 최(80)보다 높은 점수는 95, 90, 85 세 가지라 R2 = 4 다. 정답은 ①번이다. ② 는 >= 도 > 처럼 보고 김의 R3 을 3 으로 센 값이다. ③ 은 DISTINCT 를 놓쳐 85 를 두 번 센 값(최의 R2 = 5)이다. ④ 는 R1 에서 + 1 을 빼먹은 값이다.",
     "_source": "authored",
     "references": [
       {
         "type": "table",
-        "caption": "T1 테이블",
+        "caption": "T1",
         "headers": [
           "이름",
           "점수"
         ],
         "rows": [
           [
-            "홍길동",
+            "홍",
             "90"
           ],
           [
-            "김철수",
+            "김",
             "85"
           ],
           [
-            "이영희",
+            "이",
             "95"
           ],
           [
-            "박지성",
+            "박",
+            "85"
+          ],
+          [
+            "최",
             "80"
           ]
         ]
       },
       {
         "type": "sql",
-        "code": "SELECT 이름, 점수,\n       (SELECT  ⓐ \n        FROM   T1 T2\n        WHERE   ⓑ ) AS 순위\nFROM   T1\nORDER BY 순위;"
+        "code": "SELECT 이름, 점수,\n  (SELECT COUNT(*) + 1 FROM T1 T2\n   WHERE  T2.점수 > T1.점수) AS R1,\n  (SELECT COUNT(DISTINCT T2.점수) + 1\n   FROM   T1 T2\n   WHERE  T2.점수 > T1.점수) AS R2,\n  (SELECT COUNT(*) FROM T1 T2\n   WHERE  T2.점수 >= T1.점수) AS R3\nFROM   T1;"
       }
     ]
   },
@@ -2137,60 +2072,61 @@ export const ROUND_54: QuizQuestion[] = [
     "round": 54,
     "subject": "2과목",
     "number": 46,
-    "title": "아래 T 테이블에 대한 SQL 의 출력 결과(COL1, 함수 결과) 가 다음과 같을 때 빈칸 윈도우 함수로 옳은 것은?",
+    "title": "아래 매출 테이블에 대한 SQL 결과에서 (증감이 NULL 인 행 수, 지점 A·1월 행의 두달후 값) 으로 옳은 것은?",
     "options": [
-      "LAG(COL1) OVER (ORDER BY COL1)",
-      "LEAD(COL1) OVER (ORDER BY COL1)",
-      "ROW_NUMBER() OVER (ORDER BY COL1)",
-      "RANK() OVER (ORDER BY COL1)"
+      "(2, 120)",
+      "(1, 120)",
+      "(2, 150)",
+      "(4, 120)"
     ],
     "correctIndex": 0,
-    "explanation": "출력 결과가 (1, NULL), (2, 1), (3, 2) 형태 — 두 번째 컬럼이 '직전 행의 COL1 값' 임을 의미. LAG 는 이전 행의 값을 반환하며 첫 행은 NULL. ② LEAD 는 다음 행 값이라 (1, 2), (2, 3), (3, NULL) 가 되어 반대. ③ ROW_NUMBER 는 1, 2, 3 (NULL 없음). ④ RANK 도 동일하게 1, 2, 3. 정답 ① LAG.",
+    "explanation": "LAG(금액, 1, 0) 의 세 번째 인수 0 은 앞 행이 없을 때(지점별 첫 달)만 쓰인다. 앞 행이 있는데 그 금액이 NULL 이면 NULL 을 그대로 가져온다. 지점 A 는 100 - 0 = 100, 150 - 100 = 50, 120 - 150 = -30 이다. 지점 B 는 1월 200 - 0 = 200, 2월은 자기 금액이 NULL 이라 NULL, 3월은 앞 행 금액이 NULL 이라 260 - NULL = NULL 이다. 증감이 NULL 인 행은 B 의 2·3월 두 행이다. LEAD(금액, 2) 는 같은 지점 안에서 두 행 뒤 값이라 A 1월은 3월 금액 120 이다. 정답은 ①번이다. ② 는 기본값 0 이 앞 행의 NULL 값까지 바꿔 준다고 보고 B 3월을 260 으로 계산했다. ③ 은 LEAD(금액, 2) 를 바로 다음 행(150)으로 본 값이다. ④ 는 기본값을 무시해 지점별 첫 달까지 NULL 로 센 값이다.",
     "_source": "authored",
     "references": [
       {
         "type": "table",
-        "caption": "T 테이블 (원본 입력 데이터)",
+        "caption": "매출",
         "headers": [
-          "COL1"
+          "지점",
+          "월",
+          "금액"
         ],
         "rows": [
           [
-            "1"
+            "A",
+            "1",
+            "100"
           ],
           [
-            "2"
+            "A",
+            "2",
+            "150"
           ],
           [
-            "3"
+            "A",
+            "3",
+            "120"
+          ],
+          [
+            "B",
+            "1",
+            "200"
+          ],
+          [
+            "B",
+            "2",
+            "NULL"
+          ],
+          [
+            "B",
+            "3",
+            "260"
           ]
         ]
       },
       {
         "type": "sql",
-        "code": "SELECT COL1,\n       (  ?  ) AS 함수결과\nFROM   T;"
-      },
-      {
-        "type": "table",
-        "caption": "기대 출력 결과 (COL1, 함수결과)",
-        "headers": [
-          "COL1",
-          "함수결과"
-        ],
-        "rows": [
-          [
-            "1",
-            "NULL"
-          ],
-          [
-            "2",
-            "1"
-          ],
-          [
-            "3",
-            "2"
-          ]
-        ]
+        "code": "SELECT 지점, 월,\n  금액 - LAG(금액, 1, 0) OVER (\n    PARTITION BY 지점 ORDER BY 월)\n    AS 증감,\n  LEAD(금액, 2) OVER (\n    PARTITION BY 지점 ORDER BY 월)\n    AS 두달후\nFROM   매출;"
       }
     ]
   },

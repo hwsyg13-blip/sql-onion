@@ -160,15 +160,15 @@
       "_source": "gemini-mock-1",
       "subject": "2과목",
       "chapter": "집합 연산자",
-      "title": "집합 연산자(Set Operator)를 사용한 쿼리의 특징으로 옳지 않은 것은?",
+      "title": "A(이름 VARCHAR2, 급여 NUMBER), B(성명 VARCHAR2, 입사일 DATE) 테이블에 대해 오류 없이 실행되는 SQL 은?",
       "options": [
-        "UNION ALL은 두 질의의 결과를 중복 제거 없이 단순히 더하므로 정렬 작업이 발생하지 않아 UNION보다 성능상 유리하다.",
-        "INTERSECT 연산자는 두 질의의 결과에 모두 존재하는 교집합을 반환하며 중복된 행은 하나만 출력한다.",
-        "UNION은 두 질의의 결과를 합치면서 중복된 행을 제거하며, 이 과정에서 내부적으로 정렬(Sort) 작업이 발생할 수 있다.",
-        "MINUS(또는 EXCEPT) 연산자를 사용할 때, 첫 번째 쿼리의 컬럼 수와 데이터 타입은 두 번째 쿼리와 달라도 무방하다."
+        "SELECT 이름, 급여 FROM A UNION SELECT 성명 FROM B;",
+        "SELECT 이름, 급여 FROM A UNION SELECT 성명, 입사일 FROM B;",
+        "SELECT 이름 FROM A ORDER BY 이름 UNION SELECT 성명 FROM B;",
+        "SELECT 이름 AS NM FROM A UNION SELECT 성명 FROM B ORDER BY NM;"
       ],
       "correctIndex": 3,
-      "explanation": "집합 연산자는 MINUS 를 포함해 모두 위·아래 SELECT 의 컬럼 수가 같고, 같은 자리끼리 타입이 맞아야 실행된다. 달라도 된다는 ④가 틀렸다."
+      "explanation": "집합 연산자로 위아래 결과를 합치려면 칼럼 수가 같고, 같은 자리 칼럼의 데이터 타입이 서로 맞아야 한다. 결과 칼럼 이름은 첫 번째 SELECT 를 따르고, ORDER BY 는 맨 끝에 한 번만 쓴다. ④ 는 칼럼 수(1개)와 타입(문자)이 맞고, 끝의 ORDER BY 에서 첫 SELECT 의 별칭 NM 을 썼으므로 실행된다. 정답은 ④번이다. ① 은 칼럼 수가 2개와 1개로 달라 오류다. ② 는 두 번째 칼럼이 NUMBER 와 DATE 로 타입이 맞지 않아 오류다. ③ 은 집합 연산 중간의 SELECT 에 ORDER BY 를 써서 오류다. PostgreSQL 16 에서도 ①·②·③ 은 오류, ④ 는 김, 박, 이 순으로 나온다."
     },
     {
       "_id": "ai-mock-010",
@@ -494,15 +494,51 @@
       "_source": "gemini-mock-1",
       "subject": "2과목",
       "chapter": "윈도우 함수",
-      "title": "윈도우 함수에서 누적 합계를 구할 때 사용하는 프레임(Frame) 지정 구문 중, 현재 파티션의 첫 번째 행부터 현재 행까지를 의미하는 올바른 구문은?",
+      "title": "아래 T 테이블에 대한 SQL 결과에서 (D = 1 행의 A, D = 1 행의 B, D = 3 행의 C) 로 옳은 것은?",
       "options": [
-        "ROWS BETWEEN 1 PRECEDING AND 1 FOLLOWING",
-        "ROWS CURRENT ROW ONLY",
-        "ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW",
-        "ROWS BETWEEN CURRENT ROW AND UNBOUNDED FOLLOWING"
+        "(30, 0, 20)",
+        "(60, NULL, 20)",
+        "(30, NULL, 20)",
+        "(30, NULL, 25)"
       ],
       "correctIndex": 2,
-      "explanation": "누계는 '파티션 첫 행부터 지금 행까지' 더하면 된다 → ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW. ①은 앞뒤 한 행씩, ④는 지금 행부터 끝까지다."
+      "explanation": "A 는 앞 행 하나·현재 행·뒤 행 하나를 더한다. D = 1 은 앞 행이 없어 10 + 20 = 30 이다. B 는 처음부터 바로 앞 행까지인데, D = 1 은 앞 행이 하나도 없어 창이 비어 있으므로 SUM 이 NULL 이다. C 의 ROWS 2 PRECEDING 은 'BETWEEN 2 PRECEDING AND CURRENT ROW' 를 줄여 쓴 것이다. D = 3 은 10, 20, 30 세 행의 평균 20 이다. 정답은 ③번이다. ① 은 빈 창의 SUM 이 0 이라고 본 값이다. ② 는 창이 항상 세 행을 채운다고 보고 D = 1 에 다른 행까지 더한 값이다. ④ 는 ROWS 2 PRECEDING 을 현재 행을 포함한 두 행(20, 30)으로 보고 평균을 25 로 계산한 값이다.",
+      "references": [
+        {
+          "type": "table",
+          "caption": "T",
+          "headers": [
+            "D",
+            "AMT"
+          ],
+          "rows": [
+            [
+              "1",
+              "10"
+            ],
+            [
+              "2",
+              "20"
+            ],
+            [
+              "3",
+              "30"
+            ],
+            [
+              "4",
+              "40"
+            ],
+            [
+              "5",
+              "50"
+            ]
+          ]
+        },
+        {
+          "type": "sql",
+          "code": "SELECT D,\n  SUM(AMT) OVER (ORDER BY D\n    ROWS BETWEEN 1 PRECEDING\n             AND 1 FOLLOWING) AS A,\n  SUM(AMT) OVER (ORDER BY D\n    ROWS BETWEEN UNBOUNDED PRECEDING\n             AND 1 PRECEDING) AS B,\n  AVG(AMT) OVER (ORDER BY D\n    ROWS 2 PRECEDING) AS C\nFROM   T;"
+        }
+      ]
     },
     {
       "_id": "ai-mock-023",
@@ -589,15 +625,57 @@
       "_source": "gemini-mock-1",
       "subject": "2과목",
       "chapter": "서브쿼리",
-      "title": "다중 컬럼 서브쿼리(Multi-Column Subquery)에 대한 설명 중 적절하지 않은 것은?",
+      "title": "아래 사원 테이블에 (가), (나) 를 실행한 결과로 옳은 것은?",
       "options": [
-        "주로 IN 연산자와 결합하여 (컬럼1, 컬럼2) IN (서브쿼리) 형태로 사용된다.",
-        "서브쿼리의 결과가 여러 컬럼으로 반환되며, 메인 쿼리 조건절과 동시에 비교된다.",
-        "오라클(Oracle) 등 일부 DBMS에서는 지원하지만, 모든 DBMS가 지원하는 표준 문법은 아니다.",
-        "메인 쿼리에서 비교할 컬럼의 순서와 서브쿼리에서 반환하는 컬럼의 순서는 달라도 이름만 같으면 무방하다."
+        "(가) 가, 다, 마 / (나) 가, 다, 마",
+        "(가) 가, 나, 다, 마 / (나) 가, 나, 다, 마",
+        "(가) 가, 다, 마 / (나) 가, 나, 다, 마",
+        "(가) 가, 나, 다, 마 / (나) 가, 다, 마"
       ],
       "correctIndex": 3,
-      "explanation": "(컬럼1, 컬럼2) IN (SELECT …) 는 이름이 아니라 적은 순서대로 짝지어 비교한다. 순서가 다르면 엉뚱한 컬럼끼리 비교된다. 이름만 같으면 된다는 ④가 틀렸다."
+      "explanation": "부서별 최고 급여는 A 300, B 200, C 300 이다. (가) 는 급여만 비교하므로 300 이나 200 이면 부서와 상관없이 뽑힌다. A 부서의 '나' 는 자기 부서 최고가 아닌데도 B 부서 최고 급여 200 과 같아 함께 나와 가, 나, 다, 마 4명이다. (나) 는 (부서, 급여) 쌍을 한꺼번에 비교하는 다중 칼럼 서브쿼리라 (A, 300), (B, 200), (C, 300) 과 정확히 같은 가, 다, 마만 나온다. 비교 칼럼의 순서와 개수는 서브쿼리의 SELECT 목록과 맞아야 한다. 정답은 ④번이다. ① 은 (가) 도 부서별로 비교된다고 착각했다. ② 는 (나) 도 급여만 맞으면 된다고 보았다. ③ 은 두 결과를 바꾸었다. PostgreSQL 16 에서도 (가) 4명, (나) 3명이다.",
+      "references": [
+        {
+          "type": "table",
+          "caption": "사원",
+          "headers": [
+            "이름",
+            "부서",
+            "급여"
+          ],
+          "rows": [
+            [
+              "가",
+              "A",
+              "300"
+            ],
+            [
+              "나",
+              "A",
+              "200"
+            ],
+            [
+              "다",
+              "B",
+              "200"
+            ],
+            [
+              "라",
+              "B",
+              "100"
+            ],
+            [
+              "마",
+              "C",
+              "300"
+            ]
+          ]
+        },
+        {
+          "type": "sql",
+          "code": "-- (가)\nSELECT 이름 FROM 사원\nWHERE  급여 IN\n       (SELECT MAX(급여) FROM 사원\n        GROUP  BY 부서);\n\n-- (나)\nSELECT 이름 FROM 사원\nWHERE  (부서, 급여) IN\n       (SELECT 부서, MAX(급여)\n        FROM   사원\n        GROUP  BY 부서);"
+        }
+      ]
     },
     {
       "_id": "ai-mock-028",
@@ -782,15 +860,21 @@
       "_source": "gemini-mock-1",
       "subject": "2과목",
       "chapter": "DDL",
-      "title": "오라클(Oracle) DBMS에서 시퀀스(Sequence)를 사용할 때 발생하는 현상으로 틀린 것은?",
+      "title": "아래 SQL 을 한 세션에서 차례로 실행했을 때 마지막 SELECT 의 결과 (COUNT(*), MAX(ID), CURRVAL) 로 옳은 것은? (Oracle 기준, T 는 빈 테이블)",
       "options": [
-        "ROLLBACK이 발생하면 추출되었던 시퀀스 번호도 다시 원래 번호로 되돌아간다.",
-        "NEXTVAL은 호출할 때마다 설정된 증가치(INCREMENT BY)만큼 새로운 값을 생성한다.",
-        "CURRVAL은 현재 세션에서 NEXTVAL을 한 번이라도 호출한 후에만 참조할 수 있다.",
-        "CACHE 옵션을 사용하면 메모리에 미리 번호를 할당하여 속도를 높일 수 있지만, 인스턴스 비정상 종료 시 번호 결번이 생길 수 있다."
+        "(1, 3, 3)",
+        "(1, 1, 1)",
+        "(3, 3, 3)",
+        "(1, 1, 3)"
       ],
       "correctIndex": 0,
-      "explanation": "시퀀스는 트랜잭션과 따로 움직인다. 한 번 NEXTVAL 로 꺼낸 번호는 ROLLBACK 해도 돌아오지 않아 번호가 비게(결번) 된다. 그래서 ①이 틀렸다."
+      "explanation": "시퀀스는 트랜잭션과 따로 움직여서, NEXTVAL 로 한 번 꺼낸 번호는 ROLLBACK 해도 되돌아가지 않는다. 앞의 두 INSERT 가 1, 2 를 쓰고 ROLLBACK 으로 행은 사라지지만 시퀀스는 2 까지 진행된 상태다. 다음 INSERT 가 3 을 받아 커밋된다. 테이블에는 3 한 행이 있고 CURRVAL 은 이 세션에서 마지막으로 꺼낸 3 이다. 정답은 ①번이다. ② 는 ROLLBACK 이 시퀀스 번호까지 되돌린다고 본 값이다. ③ 은 ROLLBACK 을 무시하고 세 행이 남는다고 본 값이다. ④ 는 행 값과 시퀀스 값이 따로 논다고 보고 MAX(ID) 를 1 로 본 값이다. 그래서 시퀀스로 만든 번호에는 빈 번호가 생길 수 있다.",
+      "references": [
+        {
+          "type": "sql",
+          "code": "CREATE SEQUENCE SQ\n  START WITH 1 INCREMENT BY 1;\n\nINSERT INTO T VALUES (SQ.NEXTVAL);\nINSERT INTO T VALUES (SQ.NEXTVAL);\nROLLBACK;\nINSERT INTO T VALUES (SQ.NEXTVAL);\nCOMMIT;\n\nSELECT COUNT(*), MAX(ID), SQ.CURRVAL\nFROM   T;"
+        }
+      ]
     },
     {
       "_id": "ai-mock-040",
@@ -833,15 +917,47 @@
       "_source": "gemini-mock-2",
       "subject": "2과목",
       "chapter": "계층형 질의",
-      "title": "다음 계층형 질의(Hierarchical Query)에 대한 설명 중 틀린 것은?",
+      "title": "아래 메뉴 테이블(가 → 나 → 다 → 가 로 순환)에 SQL 을 실행했을 때 결과 행 수와 CONNECT_BY_ISCYCLE 이 1 인 행으로 옳은 것은? (Oracle 기준)",
       "options": [
-        "CONNECT_BY_ROOT 연산자를 사용하면 계층 구조상 최상위(루트) 노드의 해당 컬럼 값을 반환할 수 있다.",
-        "SYS_CONNECT_BY_PATH 함수는 루트 노드부터 현재 노드까지의 경로를 지정한 구분자와 함께 문자열로 반환한다.",
-        "ORDER SIBLINGS BY 절을 사용하면 계층 구조의 형태(트리)를 훼손하지 않고, 동일한 부모를 가진 형제 노드 사이에서만 정렬을 수행한다.",
-        "CONNECT_BY_ISCYCLE 가상 컬럼은 현재 행이 자식 노드를 가지고 있는지(단말 노드가 아닌지) 여부를 1과 0으로 반환한다."
+        "순환 때문에 오류가 난다.",
+        "4행, CY = 1 인 행은 가",
+        "3행, CY = 1 인 행은 가",
+        "3행, CY = 1 인 행은 다"
       ],
       "correctIndex": 3,
-      "explanation": "자식이 없는 행(리프)인지 알려 주는 건 CONNECT_BY_ISLEAF 다. CONNECT_BY_ISCYCLE 은 데이터가 빙글빙글 순환하는지(NOCYCLE 과 함께) 알려 준다. 그래서 ④가 틀렸다."
+      "explanation": "가(1) 에서 시작해 나(2), 다(3) 순으로 내려간다. 다의 자식은 상위ID = 3 인 가인데, 가는 이미 지나온 조상이라 다시 내려가면 끝없이 돈다. NOCYCLE 을 쓰면 이 지점에서 전개를 멈추므로 가, 나, 다 3행만 나온다. CONNECT_BY_ISCYCLE 은 자식 중에 조상이 있어 순환을 일으키는 행에 1 을 붙이므로 다가 1 이다. 정답은 ④번이다. ① NOCYCLE 이 없으면 순환 오류(ORA-01436)가 나지만 여기서는 NOCYCLE 을 썼다. ② 순환을 만든 가를 한 번 더 출력하지 않는다. ③ 은 순환이 다시 돌아간 가에 표시된다고 착각한 결과다. 자식이 있는지(단말 여부)를 보는 것은 CONNECT_BY_ISLEAF 다. PostgreSQL 16 의 재귀 CTE CYCLE 절로 실행하면 가, 나, 다 다음에 가가 순환 표시와 함께 한 번 더 나오는데, 이 마지막 가로 가는 길을 연 행이 바로 다다.",
+      "references": [
+        {
+          "type": "table",
+          "caption": "메뉴",
+          "headers": [
+            "ID",
+            "상위ID",
+            "이름"
+          ],
+          "rows": [
+            [
+              "1",
+              "3",
+              "가"
+            ],
+            [
+              "2",
+              "1",
+              "나"
+            ],
+            [
+              "3",
+              "2",
+              "다"
+            ]
+          ]
+        },
+        {
+          "type": "sql",
+          "code": "SELECT 이름, LEVEL,\n       CONNECT_BY_ISCYCLE AS CY\nFROM   메뉴\nSTART  WITH ID = 1\nCONNECT BY NOCYCLE\n       PRIOR ID = 상위ID;"
+        }
+      ]
     },
     {
       "_id": "ai-mock-043",
@@ -863,60 +979,223 @@
       "_source": "gemini-mock-2",
       "subject": "2과목",
       "chapter": "그룹 함수",
-      "title": "다음 중 GROUPING_ID 함수에 대한 설명으로 가장 적절한 것은?",
+      "title": "아래 T 테이블에 대한 SQL 결과에서 (SUM(V) 가 40 인 행의 G, G 가 1 인 행 수, G 의 최댓값) 으로 옳은 것은? (Oracle 기준)",
       "options": [
-        "GROUP BY 절에 명시된 컬럼들의 고유한 식별자(Primary Key) 값을 추출한다.",
-        "데이터 집합에서 무작위로 그룹 아이디를 부여하여 데이터를 분할할 때 사용한다.",
-        "ROLLUP이나 CUBE에 의해 소계가 계산된 행인지 판별하여 0 또는 1을 반환한다.",
-        "여러 개의 인자를 받아 각 컬럼의 GROUPING 함수 반환값(0 또는 1)을 연결한 이진수를 십진수로 변환하여 반환한다."
+        "(1, 2, 3)",
+        "(2, 2, 2)",
+        "(2, 1, 3)",
+        "(2, 2, 3)"
       ],
       "correctIndex": 3,
-      "explanation": "GROUPING_ID(A, B) 는 GROUPING(A), GROUPING(B) 의 0/1 을 이어 붙인 이진수를 십진수로 바꾼 값이다. 예: A 소계 행이면 GROUPING 값이 (0, 1) → 이진수 01 → 1. ③(0 또는 1)은 컬럼 하나짜리 GROUPING 함수의 설명이다."
+      "explanation": "GROUPING_ID(A, B) 는 GROUPING(A) 와 GROUPING(B) 를 이어 붙인 2진수를 10진수로 바꾼 값이다. A 가 높은 자리, B 가 낮은 자리다. 상세 행은 00 = 0, A 별 소계(B 가 묶임)는 01 = 1, B 별 소계(A 가 묶임)는 10 = 2, 총계는 11 = 3 이다. SUM(V) 가 40 인 행은 b1 의 B 별 소계(10 + 30)라 G = 2 다. G = 1 인 A 별 소계는 a1, a2 두 행이고, 최댓값은 총계의 3 이다. 정답은 ④번이다. ① 은 A 를 낮은 자리로 보고 B 별 소계를 1 로 계산한 값이다. ② 는 최댓값을 인자 개수(2)로 본 값이다. ③ 은 G = 1 을 총계 한 행으로 본 값이다.",
+      "references": [
+        {
+          "type": "table",
+          "caption": "T",
+          "headers": [
+            "A",
+            "B",
+            "V"
+          ],
+          "rows": [
+            [
+              "a1",
+              "b1",
+              "10"
+            ],
+            [
+              "a1",
+              "b2",
+              "20"
+            ],
+            [
+              "a2",
+              "b1",
+              "30"
+            ]
+          ]
+        },
+        {
+          "type": "sql",
+          "code": "SELECT A, B, SUM(V),\n       GROUPING_ID(A, B) AS G\nFROM   T\nGROUP BY CUBE(A, B);"
+        }
+      ]
     },
     {
       "_id": "ai-mock-046",
       "_source": "gemini-mock-2",
       "subject": "2과목",
       "chapter": "서브쿼리",
-      "title": "스칼라 서브쿼리(Scalar Subquery) 실행 시 런타임 오류(에러)가 발생하는 경우는?",
+      "title": "아래 두 테이블(부서 테이블에 B 가 두 번 들어 있다)에 SQL 을 실행한 결과로 옳은 것은?",
       "options": [
-        "서브쿼리의 실행 결과가 0건(Empty Set)일 때",
-        "서브쿼리의 실행 결과가 2건 이상의 행(Row)을 반환할 때",
-        "서브쿼리의 결과 값이 메인 쿼리의 출력 데이터 타입과 자동으로 호환될 때",
-        "서브쿼리 내부에서 메인 쿼리의 컬럼을 참조하는 상관 서브쿼리 형태로 작성되었을 때"
+        "3행이 나오고, '나' 의 부서명은 NULL 이다.",
+        "오류가 나서 아무 행도 나오지 않는다.",
+        "'나' 행만 빠지고 2행이 나온다.",
+        "3행이 나오고, '나' 의 부서명은 '개발', '연구' 중 하나다."
       ],
       "correctIndex": 1,
-      "explanation": "스칼라 서브쿼리는 값 하나만 돌려줘야 한다. 2건 이상이 나오면 어느 값을 넣을지 몰라 오류가 난다. 0건이면 NULL 로 처리될 뿐 오류가 아니다."
+      "explanation": "SELECT 절의 스칼라 서브쿼리는 바깥 행마다 값을 하나만 돌려줘야 한다. '나' 의 부서 B 는 부서 테이블에 두 행이 있어 서브쿼리가 2행을 돌려주므로 실행 중 오류(ORA-01427)가 나고, 문장 전체가 실패해 결과가 나오지 않는다. 정답은 ②번이다. ① 맞는 행이 0개일 때가 NULL 이고, 여기서는 '다'(부서 C)가 그 경우다. ③ 문제가 된 행만 빼고 보여 주지 않는다. ④ 여러 값 중 하나를 골라 주지 않는다. 부서명을 하나로 정해야 한다면 MAX(D.부서명) 처럼 집계하거나, 부서 테이블의 부서에 PK·UNIQUE 를 걸어 중복을 막는다. PostgreSQL 16 에서도 more than one row returned by a subquery 오류가 난다.",
+      "references": [
+        {
+          "type": "table",
+          "caption": "사원",
+          "headers": [
+            "이름",
+            "부서"
+          ],
+          "rows": [
+            [
+              "가",
+              "A"
+            ],
+            [
+              "나",
+              "B"
+            ],
+            [
+              "다",
+              "C"
+            ]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "부서",
+          "headers": [
+            "부서",
+            "부서명"
+          ],
+          "rows": [
+            [
+              "A",
+              "영업"
+            ],
+            [
+              "B",
+              "개발"
+            ],
+            [
+              "B",
+              "연구"
+            ]
+          ]
+        },
+        {
+          "type": "sql",
+          "code": "SELECT E.이름,\n       (SELECT D.부서명\n        FROM   부서 D\n        WHERE  D.부서 = E.부서)\n         AS 부서명\nFROM   사원 E;"
+        }
+      ]
     },
     {
       "_id": "ai-mock-047",
       "_source": "gemini-mock-2",
       "subject": "2과목",
       "chapter": "집합 연산자",
-      "title": "집합 연산자(Set Operator) UNION과 UNION ALL의 차이점에 대한 설명으로 올바른 것은?",
+      "title": "아래 두 테이블에 대해 (가) UNION 결과 행 수, (나) UNION ALL 결과 행 수, (다) (가) 결과의 칼럼 이름으로 옳은 것은?",
       "options": [
-        "UNION은 중복된 행을 하나로 합쳐서 출력하지만, UNION ALL은 두 질의의 결과를 중복 제거 없이 단순히 이어붙여 출력한다.",
-        "집합 연산자를 사용할 때는 양쪽 쿼리의 SELECT 절 컬럼 개수가 달라도 데이터 타입만 같으면 정상 실행된다.",
-        "출력되는 컬럼의 헤더명(Alias)은 두 번째(아래쪽) 쿼리에 명시된 컬럼명을 따른다.",
-        "UNION ALL은 중복 데이터를 제거하기 위해 내부적으로 Sort 작업을 수행하므로 UNION보다 성능이 떨어진다."
+        "(가) 4 / (나) 7 / (다) X",
+        "(가) 3 / (나) 7 / (다) X",
+        "(가) 4 / (나) 7 / (다) Y",
+        "(가) 5 / (나) 7 / (다) X"
       ],
       "correctIndex": 0,
-      "explanation": "UNION은 중복 제거를 위해 내부 정렬·중복 제거 단계가 있어 일반적으로 UNION ALL보다 느리다. 컬럼 개수와 위치별 데이터 타입은 양쪽 쿼리가 일치해야 하며, 결과 컬럼명은 첫 번째(위쪽) 쿼리의 컬럼명을 따른다."
+      "explanation": "UNION 은 두 결과를 합친 뒤 중복을 없앤다. 이때 A 안에서 겹친 1 도 하나로 줄고, NULL 끼리도 같은 값으로 보아 하나만 남아 1, 2, 3, NULL 4행이다. UNION ALL 은 중복을 그대로 두고 이어 붙여 4 + 3 = 7행이다. 결과 칼럼 이름은 첫 번째 SELECT 의 X 를 따른다. 정답은 ①번이다. ② 는 NULL 이 결과에서 빠진다고 착각한 결과다. ③ 은 칼럼 이름이 아래쪽 SELECT 를 따른다고 보았다. ④ 는 A 안의 중복(1, 1)이 남는다고 착각한 결과다. UNION 은 중복 제거를 위해 정렬·해시 작업이 들어가므로, 중복이 없다는 것을 알면 UNION ALL 이 더 가볍다. PostgreSQL 16 에서도 4행, 7행, 칼럼 이름 x 다.",
+      "references": [
+        {
+          "type": "table",
+          "caption": "A",
+          "headers": [
+            "V"
+          ],
+          "rows": [
+            [
+              "1"
+            ],
+            [
+              "1"
+            ],
+            [
+              "2"
+            ],
+            [
+              "NULL"
+            ]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "B",
+          "headers": [
+            "V"
+          ],
+          "rows": [
+            [
+              "2"
+            ],
+            [
+              "NULL"
+            ],
+            [
+              "3"
+            ]
+          ]
+        },
+        {
+          "type": "sql",
+          "code": "SELECT V AS X FROM A\nUNION          -- (나)는 UNION ALL\nSELECT V AS Y FROM B;"
+        }
+      ]
     },
     {
       "_id": "ai-mock-049",
       "_source": "gemini-mock-2",
       "subject": "2과목",
       "chapter": "그룹 함수",
-      "title": "NULL 데이터가 포함된 그룹 함수 연산의 결과에 대한 설명으로 틀린 것은? (단, T1 테이블의 COL1 값은 [10, 20, NULL, 30] 이다.)",
+      "title": "아래 T1 테이블에 SQL 을 실행했을 때 결과 행 수와 GRP 가 'B' 인 행의 C1, C2, S 값으로 옳은 것은?",
       "options": [
-        "COUNT(*)의 결과는 4이다.",
-        "AVG(COL1)의 결과는 15이다.",
-        "COUNT(COL1)의 결과는 3이다.",
-        "SUM(COL1)의 결과는 60이다."
+        "2행 / B: 1, 0, NULL",
+        "3행 / B: 1, 0, NULL",
+        "3행 / B: 1, 0, 0",
+        "4행 / B: 1, 1, NULL"
       ],
       "correctIndex": 1,
-      "explanation": "AVG 는 NULL 을 빼고 계산한다. 10 + 20 + 30 = 60 을 NULL 이 아닌 3개로 나누니 20 이다. 4로 나눈 15 라는 ②가 틀렸다. COUNT(*) 4, COUNT(COL1) 3, SUM 60 은 맞다."
+      "explanation": "GROUP BY 에서는 GRP 가 NULL 인 행들도 버리지 않고 하나의 그룹으로 묶는다. 그래서 A, B, NULL 세 그룹이 나와 3행이다. B 그룹은 행이 1개라 COUNT(*) 는 1, COL1 이 NULL 이라 COUNT(COL1) 은 0, 더할 값이 하나도 없어 SUM 은 0 이 아니라 NULL 이다. 정답은 ②번이다. ① 은 GRP 가 NULL 인 행이 결과에서 빠진다고 착각한 결과다. ③ 은 값이 없는 SUM 을 0 으로 보았다(0 이 필요하면 NVL(SUM(COL1), 0)). ④ 는 NULL 행이 각각 다른 그룹이 된다고 보고, COUNT(COL1) 이 NULL 도 센다고 착각했다. NULL 그룹의 합계는 50 이다. PostgreSQL 16 에서도 3행, B 는 1, 0, NULL 이다.",
+      "references": [
+        {
+          "type": "table",
+          "caption": "T1",
+          "headers": [
+            "GRP",
+            "COL1"
+          ],
+          "rows": [
+            [
+              "A",
+              "10"
+            ],
+            [
+              "A",
+              "NULL"
+            ],
+            [
+              "NULL",
+              "20"
+            ],
+            [
+              "NULL",
+              "30"
+            ],
+            [
+              "B",
+              "NULL"
+            ]
+          ]
+        },
+        {
+          "type": "sql",
+          "code": "SELECT GRP,\n       COUNT(*)    AS C1,\n       COUNT(COL1) AS C2,\n       SUM(COL1)   AS S\nFROM   T1\nGROUP  BY GRP;"
+        }
+      ]
     },
     {
       "_id": "ai-mock-050",
@@ -938,15 +1217,69 @@
       "_source": "gemini-mock-2",
       "subject": "2과목",
       "chapter": "DML",
-      "title": "다음 중 MERGE 구문의 특징으로 틀린 것은?",
+      "title": "아래 두 테이블에 MERGE 를 실행한 뒤 목표 테이블의 행 수와 금액 합계로 옳은 것은? (Oracle 기준)",
       "options": [
-        "여러 번 테이블을 조회하고 처리해야 하는 기존의 절차적 로직을 단순화하여 성능 향상에 도움을 준다.",
-        "ON 절에 사용된 조인 조건 컬럼은 MATCHED (UPDATE) 절에서 그 값을 변경할 수 있다.",
-        "조건에 따라 데이터를 삽입(INSERT)하거나 수정(UPDATE)하는 단일 SQL 문장이다.",
-        "필요에 따라 WHEN MATCHED 절이나 WHEN NOT MATCHED 절 중 하나만 선택적으로 사용할 수 있다."
+        "4행, 합계 850",
+        "3행, 합계 850",
+        "5행, 합계 850",
+        "2행, 합계 550"
       ],
       "correctIndex": 1,
-      "explanation": "MERGE 의 ON 절 조인 키는 같은 행을 찾는 기준이라 UPDATE 로 바꿀 수 없다(오라클은 오류). 바꿀 수 있다는 ②가 틀렸다."
+      "explanation": "ID 1 은 짝이 있어 150 으로 바뀐다. ID 2 도 짝이 있어 0 으로 바뀐 뒤, UPDATE 다음에 붙은 DELETE WHERE T.금액 = 0 을 만족해 지워진다. DELETE WHERE 는 바뀐 뒤의 값으로 판단한다. ID 3 은 원본에 없어 그대로 300 이다. ID 4 는 짝이 없고 금액이 0 보다 커 들어가고, ID 5 는 INSERT 의 WHERE S.금액 > 0 을 만족하지 못해 들어가지 않는다. 결과는 150, 300, 400 의 3행, 합계 850 이다. 정답은 ②번이다. ① 은 DELETE WHERE 를 빠뜨렸다(ID 2 가 0 으로 남음). ③ 은 INSERT 의 WHERE 까지 빠뜨렸다. ④ 는 원본에 없는 ID 3 까지 지워진다고 착각한 결과다. ON 절의 조인 칼럼(ID)은 UPDATE SET 에서 바꿀 수 없다. PostgreSQL 16 의 MERGE(WHEN MATCHED AND … THEN DELETE)로 옮겨 실행해도 3행, 850 이다.",
+      "references": [
+        {
+          "type": "table",
+          "caption": "목표",
+          "headers": [
+            "ID",
+            "금액"
+          ],
+          "rows": [
+            [
+              "1",
+              "100"
+            ],
+            [
+              "2",
+              "200"
+            ],
+            [
+              "3",
+              "300"
+            ]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "원본",
+          "headers": [
+            "ID",
+            "금액"
+          ],
+          "rows": [
+            [
+              "1",
+              "150"
+            ],
+            [
+              "2",
+              "0"
+            ],
+            [
+              "4",
+              "400"
+            ],
+            [
+              "5",
+              "0"
+            ]
+          ]
+        },
+        {
+          "type": "sql",
+          "code": "MERGE INTO 목표 T\nUSING 원본 S\nON (T.ID = S.ID)\nWHEN MATCHED THEN\n  UPDATE SET T.금액 = S.금액\n  DELETE WHERE T.금액 = 0\nWHEN NOT MATCHED THEN\n  INSERT (ID, 금액)\n  VALUES (S.ID, S.금액)\n  WHERE S.금액 > 0;"
+        }
+      ]
     },
     {
       "_id": "ai-mock-053",
@@ -968,15 +1301,63 @@
       "_source": "gemini-mock-2",
       "subject": "2과목",
       "chapter": "윈도우 함수",
-      "title": "분석 함수 중 KEEP (DENSE_RANK FIRST/LAST ORDER BY ...) 구문의 용도로 올바른 것은?",
+      "title": "아래 EMP 테이블에 대한 SQL 결과에서 (10번 부서의 F, 10번 부서의 L, 20번 부서의 F) 로 옳은 것은? (Oracle 기준)",
       "options": [
-        "동일한 값을 가진 데이터 간에 고유한 일련번호를 무작위로 부여하기 위해 사용된다.",
-        "데이터의 백분위수(Percentile)를 구하여 상위 N% 에 해당하는 값을 계산한다.",
-        "정렬된 데이터를 기반으로 현재 행의 앞선 행(LAG)이나 뒤따르는 행(LEAD)의 데이터를 가져온다.",
-        "전체 집합을 그룹으로 나눈 뒤, 그룹 내에서 정렬 기준에 따라 가장 처음(또는 마지막) 행의 특정 컬럼 값을 추출한다."
+        "(3000, 5000, 2500)",
+        "(5000, 3000, 2500)",
+        "(4000, 3000, 2500)",
+        "(4000, 5000, 2500)"
       ],
       "correctIndex": 3,
-      "explanation": "KEEP (DENSE_RANK FIRST ORDER BY …) 는 그룹마다 정렬했을 때 맨 앞(LAST 면 맨 뒤) 행의 다른 컬럼 값을 꺼낸다. 예: 부서별로 급여가 가장 높은 사원의 이름 — MAX(ENAME) KEEP (DENSE_RANK FIRST ORDER BY SAL DESC)."
+      "explanation": "KEEP (DENSE_RANK FIRST ORDER BY HIRE) 는 그룹 안에서 HIRE 가 가장 이른 행들만 남긴 뒤 앞의 집계 함수를 적용한다. 10번 부서에서 가장 이른 2020-01-01 에 입사한 사람은 A(3000)·B(4000) 둘이라 MAX 를 적용해 F = 4000 이다. LAST 는 가장 늦은 2021-03-01 의 C(5000) 만 남아 L = 5000 이다. 20번 부서의 F 는 2019-05-01 의 D(2500)다. 정답은 ④번이다. ① 은 동점인 두 행 중 첫 행만 고른다고 보고 MAX 를 무시한 값이다. ② 는 KEEP 을 무시하고 부서 전체의 MAX·MIN 을 구한 값이다. ③ 은 LAST 를 내림차순의 첫 번째로 오해해 가장 이른 입사자 쪽에서 MIN 을 고른 값이다.",
+      "references": [
+        {
+          "type": "table",
+          "caption": "EMP",
+          "headers": [
+            "DEPT",
+            "ENAME",
+            "SAL",
+            "HIRE"
+          ],
+          "rows": [
+            [
+              "10",
+              "A",
+              "3000",
+              "2020-01-01"
+            ],
+            [
+              "10",
+              "B",
+              "4000",
+              "2020-01-01"
+            ],
+            [
+              "10",
+              "C",
+              "5000",
+              "2021-03-01"
+            ],
+            [
+              "20",
+              "D",
+              "2500",
+              "2019-05-01"
+            ],
+            [
+              "20",
+              "E",
+              "2800",
+              "2022-01-01"
+            ]
+          ]
+        },
+        {
+          "type": "sql",
+          "code": "SELECT DEPT,\n  MAX(SAL) KEEP (DENSE_RANK FIRST\n                 ORDER BY HIRE) AS F,\n  MIN(SAL) KEEP (DENSE_RANK LAST\n                 ORDER BY HIRE) AS L\nFROM   EMP\nGROUP BY DEPT;"
+        }
+      ]
     },
     {
       "_id": "ai-mock-055",
@@ -1055,15 +1436,21 @@
       "_source": "gemini-mock-2",
       "subject": "2과목",
       "chapter": "DDL",
-      "title": "UNIQUE 제약조건에 대한 설명 중 틀린 것은?",
+      "title": "아래 T 테이블에 ㉠~㉤ 을 순서대로 하나씩 실행할 때 성공하는 INSERT 만 모두 고른 것은? (오류가 난 문장만 실패한다)",
       "options": [
-        "UNIQUE 제약조건이 설정된 컬럼은 자동으로 NOT NULL 제약조건이 부여된다.",
-        "해당 컬럼에 동일한 값이 중복되어 저장되는 것을 방지한다.",
-        "NULL 값은 비교 대상이 아니므로 하나의 테이블 내에 여러 개의 NULL 값이 삽입되는 것을 허용한다.",
-        "테이블 내에서 여러 개의 컬럼을 조합하여(Composite) 하나의 UNIQUE 제약을 생성할 수 있다."
+        "㉠, ㉡, ㉢",
+        "㉠, ㉡",
+        "㉠, ㉡, ㉢, ㉣",
+        "㉠, ㉡, ㉣"
       ],
       "correctIndex": 0,
-      "explanation": "UNIQUE 는 NULL 을 허용하므로 NOT NULL 이 자동으로 붙지 않는다. UNIQUE 와 NOT NULL 을 합친 것이 PRIMARY KEY 다. 그래서 ①이 틀렸다."
+      "explanation": "UNIQUE 는 같은 값이 두 번 들어오는 것만 막고 NULL 은 허용한다. NULL 끼리는 같은 값으로 비교되지 않으므로 ㉡ 과 ㉢ 처럼 NULL 을 여러 번 넣어도 된다. PRIMARY KEY 는 UNIQUE 에 NOT NULL 이 더해진 것이라 ㉣ 처럼 ID 에 NULL 을 넣으면 오류다. ㉤ 은 이미 있는 'a@x' 와 겹쳐 UNIQUE 위반이다. 정답은 ①번이다. ② 는 UNIQUE 칼럼에 NULL 을 한 번만 넣을 수 있다고 착각한 결과다. ③ 과 ④ 는 PRIMARY KEY 도 NULL 을 받아 준다고 보았다. PostgreSQL 16 에서도 ㉣·㉤ 만 실패하고 ID 1, 2, 3 이 남는다.",
+      "references": [
+        {
+          "type": "sql",
+          "code": "CREATE TABLE T (\n  ID    NUMBER PRIMARY KEY,\n  EMAIL VARCHAR2(20) UNIQUE\n);\n㉠ INSERT INTO T VALUES (1, 'a@x');\n㉡ INSERT INTO T VALUES (2, NULL);\n㉢ INSERT INTO T VALUES (3, NULL);\n㉣ INSERT INTO T VALUES (NULL, 'b@x');\n㉤ INSERT INTO T VALUES (4, 'a@x');"
+        }
+      ]
     }
   ]
 }

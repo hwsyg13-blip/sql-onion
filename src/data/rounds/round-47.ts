@@ -841,56 +841,61 @@ export const ROUND_47: QuizQuestion[] = [
     "round": 47,
     "subject": "2과목",
     "number": 22,
-    "title": "아래 PLAYER 테이블에 대한 SQL 과 다른 결과를 반환하는 것은? (각 팀의 최단신 선수의 PNAME 을 조회)",
+    "title": "아래 PLAYER 테이블에서 팀별 최단신 선수를 구하려는 ㉠~㉣ 의 결과 행 수를 차례로 나열한 것은?",
     "options": [
-      "SELECT P.PNAME FROM PLAYER P WHERE EXISTS (SELECT 1 FROM PLAYER X WHERE X.TEAM_ID = P.TEAM_ID AND X.HEIGHT = P.HEIGHT AND X.HEIGHT = (SELECT MIN(HEIGHT) FROM PLAYER WHERE TEAM_ID = P.TEAM_ID));",
-      "SELECT P.PNAME FROM PLAYER P, (SELECT TEAM_ID, MIN(HEIGHT) AS MH FROM PLAYER GROUP BY TEAM_ID) M WHERE P.TEAM_ID = M.TEAM_ID AND P.HEIGHT = M.MH;",
-      "SELECT P.PNAME FROM PLAYER P JOIN PLAYER X ON P.TEAM_ID = X.TEAM_ID GROUP BY P.PNAME, P.TEAM_ID, P.HEIGHT HAVING P.HEIGHT = MIN(X.HEIGHT);",
-      "SELECT P.PNAME FROM PLAYER P WHERE EXISTS (SELECT 1 FROM PLAYER X WHERE X.TEAM_ID = P.TEAM_ID);"
+      "3, 3, 3, 3",
+      "2, 2, 2, 3",
+      "4, 4, 4, 4",
+      "3, 3, 3, 4"
     ],
     "correctIndex": 3,
-    "explanation": "원본 SQL 은 `(TEAM_ID, HEIGHT) IN (SELECT TEAM_ID, MIN(HEIGHT) ...)` 으로 \"각 팀의 최단신 선수\" 를 조회한다. ① 상관 서브쿼리, ② 인라인 뷰 조인, ③ JOIN + HAVING 형태로 모두 같은 결과를 낸다. ④ 는 단순히 \"같은 TEAM_ID 행이 존재하는지\" 만 확인하므로 PLAYER 테이블의 선수 5명이 모두 반환되어 결과가 다르다.",
+    "explanation": "MIN 은 NULL 을 빼고 계산해 T01 은 175, T02 는 178 이다. ㉠·㉡·㉢ 은 모두 키가 그 최솟값과 같은 선수를 고르므로 동점인 김·박과 강, 3행이다. 키가 NULL 인 정은 = 비교가 참이 되지 않아 빠진다. ㉣ 은 '같은 팀에 나보다 작은 선수가 없는' 선수를 고른다. 정은 X.HEIGHT < NULL 이 어떤 행에서도 참이 아니어서 서브쿼리가 비고, NOT EXISTS 가 참이 되어 결과에 들어간다. 그래서 4행이다. 정답은 ④번이다. ① 은 네 방법이 NULL 이 있어도 같은 결과를 낸다고 본 값이다. ② 는 동점이면 한 명만 나온다고 본 값이다. ③ 은 MIN 이 NULL 을 가장 작은 값으로 본다고 생각한 값이다.",
     "_source": "authored",
     "references": [
       {
         "type": "table",
-        "caption": "PLAYER 테이블",
+        "caption": "PLAYER",
         "headers": [
-          "TEAM_ID",
+          "TEAM",
           "PNAME",
           "HEIGHT"
         ],
         "rows": [
           [
             "T01",
-            "김철수",
+            "김",
             "175"
           ],
           [
             "T01",
-            "이영희",
+            "이",
             "180"
           ],
           [
             "T01",
-            "박민수",
+            "박",
             "175"
           ],
           [
+            "T01",
+            "정",
+            "NULL"
+          ],
+          [
             "T02",
-            "최정훈",
+            "최",
             "182"
           ],
           [
             "T02",
-            "강동원",
+            "강",
             "178"
           ]
         ]
       },
       {
         "type": "sql",
-        "code": "SELECT P.PNAME\nFROM   PLAYER P\nWHERE  (TEAM_ID, HEIGHT) IN (\n    SELECT TEAM_ID, MIN(HEIGHT)\n    FROM   PLAYER\n    GROUP BY TEAM_ID\n);"
+        "code": "-- ㉠\nSELECT PNAME FROM PLAYER\nWHERE  (TEAM, HEIGHT) IN (\n         SELECT TEAM, MIN(HEIGHT)\n         FROM   PLAYER GROUP BY TEAM);\n-- ㉡\nSELECT PNAME FROM PLAYER P\nWHERE  HEIGHT = (\n         SELECT MIN(HEIGHT) FROM PLAYER\n         WHERE  TEAM = P.TEAM);\n-- ㉢\nSELECT P.PNAME\nFROM   PLAYER P,\n      (SELECT TEAM, MIN(HEIGHT) MH\n       FROM PLAYER GROUP BY TEAM) M\nWHERE  P.TEAM = M.TEAM\nAND    P.HEIGHT = M.MH;\n-- ㉣\nSELECT PNAME FROM PLAYER P\nWHERE  NOT EXISTS (\n         SELECT 1 FROM PLAYER X\n         WHERE  X.TEAM = P.TEAM\n         AND    X.HEIGHT < P.HEIGHT);"
       }
     ]
   },
@@ -1159,20 +1164,20 @@ export const ROUND_47: QuizQuestion[] = [
     "round": 47,
     "subject": "2과목",
     "number": 28,
-    "title": "아래 세 테이블 A, B, C 에 대한 집합 연산 SQL 의 결과로 옳은 것은?",
+    "title": "아래 세 테이블 A, B, C 에 대한 집합 연산 SQL 의 결과로 옳은 것은? (Oracle 기준)",
     "options": [
-      "1, 3, 5",
-      "1, 2, 3",
-      "2, 4, 6",
-      "공집합"
+      "1, 3, 4",
+      "1, 3, 4, NULL",
+      "1, 3, 3, 3, 4",
+      "1, 2, 3, 3, 3, 4, NULL"
     ],
     "correctIndex": 0,
-    "explanation": "집합 연산자는 위에서부터 차례로 적용된다. 먼저 A UNION ALL B 로 중복을 남긴 채 합치면 1, 2, 3, 3, 4, 5 가 된다. 여기서 MINUS C 로 C 에 있는 2, 4, 6 을 빼면 1, 3, 3, 5 가 남고, MINUS 는 중복을 없애므로 결과는 1, 3, 5 다(①). ② 1, 2, 3 은 A 만 본 값, ③ 2, 4, 6 은 C 자체이고, C 에 없는 1·3·5 가 남으므로 ④ 공집합도 아니다.",
+    "explanation": "집합 연산자는 우선순위가 같아서 위에서부터 차례로 계산한다. 먼저 A UNION ALL B 는 중복을 그대로 두어 1, 2, 3, 3, NULL, 3, 4, NULL 여덟 행이다. 여기서 MINUS 는 결과를 중복 없는 집합으로 만든 뒤 C 에 있는 값을 뺀다. 중복을 없애면 1, 2, 3, 4, NULL 이고, C 의 2 와 NULL 이 빠진다. 집합 연산은 WHERE 의 = 비교와 달리 NULL 끼리를 같은 값으로 보기 때문에 NULL 도 지워진다. 남은 1, 3, 4 를 정렬하면 ①번이다. ② 는 NULL = NULL 이 참이 아니니 MINUS 로도 안 빠진다고 본 것이다. ③ 은 MINUS 가 중복을 남긴다고 보고 3 을 세 번 썼다. ④ 는 B MINUS C 를 먼저 계산(3, 4)하고 A 에 UNION ALL 한 결과로, 위에서부터 계산한다는 규칙을 놓쳤다.",
     "_source": "authored",
     "references": [
       {
         "type": "table",
-        "caption": "A 테이블",
+        "caption": "A",
         "headers": [
           "COL1"
         ],
@@ -1185,12 +1190,18 @@ export const ROUND_47: QuizQuestion[] = [
           ],
           [
             "3"
+          ],
+          [
+            "3"
+          ],
+          [
+            "NULL"
           ]
         ]
       },
       {
         "type": "table",
-        "caption": "B 테이블",
+        "caption": "B",
         "headers": [
           "COL1"
         ],
@@ -1202,13 +1213,13 @@ export const ROUND_47: QuizQuestion[] = [
             "4"
           ],
           [
-            "5"
+            "NULL"
           ]
         ]
       },
       {
         "type": "table",
-        "caption": "C 테이블",
+        "caption": "C",
         "headers": [
           "COL1"
         ],
@@ -1217,16 +1228,16 @@ export const ROUND_47: QuizQuestion[] = [
             "2"
           ],
           [
-            "4"
+            "NULL"
           ],
           [
-            "6"
+            "5"
           ]
         ]
       },
       {
         "type": "sql",
-        "code": "SELECT COL1 FROM A\nUNION ALL\nSELECT COL1 FROM B\nMINUS\nSELECT COL1 FROM C;"
+        "code": "SELECT COL1 FROM A\nUNION ALL\nSELECT COL1 FROM B\nMINUS\nSELECT COL1 FROM C\nORDER BY 1;"
       }
     ]
   },
@@ -1776,21 +1787,21 @@ export const ROUND_47: QuizQuestion[] = [
     "round": 47,
     "subject": "2과목",
     "number": 39,
-    "title": "테이블 A, B, C 가 식별자 관계로 연결된 구조에 대한 설명 중 옳지 않은 것은?",
+    "title": "아래 ERD(모든 관계가 식별 관계)에 대한 설명으로 옳지 않은 것은?",
     "options": [
-      "테이블 세 개를 조인하려면 최소 조건은 두 개이다.",
-      "식별자 관계는 부모 키가 자식의 PK 에 포함된다.",
-      "조인 조건은 최소 3개 이상이어야 한다.",
-      "식별자 관계에서는 자식이 부모 없이 존재할 수 없다."
+      "주문상세와 고객은 주문을 거치지 않고 고객번호 하나로 바로 조인할 수 있다.",
+      "주문상세와 주문을 조인할 때는 고객번호와 주문순번 두 조건이 모두 필요하다.",
+      "고객별 주문상세 금액 합계를 구하려면 반드시 주문 테이블을 함께 조인해야 한다.",
+      "주문상세의 주식별자는 세 칼럼으로 이루어진다."
     ],
     "correctIndex": 2,
-    "explanation": "일반적으로 N개의 테이블을 조인하려면 최소 N - 1개의 조인 조건이 필요하다. A·B·C 세 테이블이라면 조건 두 개면 충분하다(①). 따라서 \"조인 조건이 최소 3개 이상이어야 한다\"는 ③번 설명은 잘못되어 정답이 된다. 식별자 관계는 부모 키가 자식의 PK 일부가 되며(②), 이로 인해 자식은 부모 없이 존재할 수 없는 의존 관계가 된다(④).",
+    "explanation": "식별 관계에서는 부모의 주식별자가 자식의 주식별자에 그대로 들어간다. 고객번호가 주문을 거쳐 주문상세까지 내려와 있으므로, 고객별 금액 합계는 주문상세만으로 GROUP BY 고객번호 하면 구할 수 있다. 주문 테이블을 꼭 조인해야 한다는 ③ 이 옳지 않고, 정답은 ③번이다. ① 같은 이유로 고객과 주문상세는 고객번호로 바로 조인된다. ② 주문의 주식별자가 (고객번호, 주문순번) 이라 둘 중 하나만 쓰면 다른 주문의 상세까지 붙어 행이 늘어난다. ④ 주문상세의 주식별자는 (고객번호, 주문순번, 상세순번) 이다. 이렇게 식별 관계가 이어지면 조인 경로는 짧아지지만 아래로 갈수록 주식별자 칼럼이 늘어난다.",
     "_source": "authored",
     "references": [
       {
         "type": "erd",
-        "caption": "A-B-C 식별자 관계 ERD (1:N 연쇄 — A 의 PK 가 C 까지 순차 전파)",
-        "mermaid": "erDiagram\n    A ||--o{ B : \"갖는다\"\n    B ||--o{ C : \"갖는다\""
+        "caption": "고객·주문·주문상세 ERD",
+        "mermaid": "erDiagram\n    고객 ||--o{ 주문 : \"한다\"\n    주문 ||--|{ 주문상세 : \"포함\"\n    고객 {\n        string 고객번호 PK\n    }\n    주문 {\n        string 고객번호 PK, FK\n        number 주문순번 PK\n        date 주문일\n    }\n    주문상세 {\n        string 고객번호 PK, FK\n        number 주문순번 PK, FK\n        number 상세순번 PK\n        number 금액\n    }"
       }
     ]
   },
@@ -1946,20 +1957,20 @@ export const ROUND_47: QuizQuestion[] = [
     "round": 47,
     "subject": "2과목",
     "number": 43,
-    "title": "아래 T 테이블에 대한 SQL 의 결과로 옳은 것은?",
+    "title": "아래 T 테이블에 대한 SQL 의 결과로 옳은 것은? (ID 순서대로 (ID, C1, C2, C3))",
     "options": [
-      "3, 2 (두 행)",
-      "3, 2, 2 (세 행)",
-      "3 (한 행)",
-      "그룹 함수 오류"
+      "(A, 3, 2, 15), (C, 2, 0, NULL), (D, 2, 1, 40)",
+      "(A, 3, 2, 10), (C, 2, 0, NULL), (D, 2, 1, 40)",
+      "(A, 3, 2, 15), (D, 2, 2, 40)",
+      "(A, 2, 2, 15), (C, 0, 0, NULL), (D, 2, 1, 40)"
     ],
     "correctIndex": 0,
-    "explanation": "ID 로 묶으면 A(3행), B(1행), C(2행), D(2행) 네 그룹이다. HAVING 은 COUNT(*) 가 아니라 COUNT(VAL) 로 거르는데, COUNT(VAL) 은 NULL 을 빼고 센다. A 2, B 1, C 0, D 2 다. 그래서 A 와 D 만 남고, SELECT 의 COUNT(*) 는 그룹의 전체 행 수라 A 는 3, D 는 2 다. ID 순으로 3, 2 두 행이다(①). ② 는 COUNT(VAL) 도 NULL 을 센다고 본 결과(C 가 남음)이고, ③ 은 COUNT(VAL) 이 같은 값(D 의 40, 40)을 한 번만 센다고 본 결과다(그건 COUNT(DISTINCT VAL)). ④ SELECT 에 집계 함수만 있고 ORDER BY 의 ID 는 GROUP BY 컬럼이라 오류가 나지 않는다.",
+    "explanation": "COUNT(*) 는 NULL 이 든 행까지 세고, COUNT(VAL)·COUNT(DISTINCT VAL)·SUM·AVG 는 NULL 을 빼고 계산한다. 그룹별로 보면 A 는 COUNT(VAL) 이 2 라 남고, C1 = 3, C2 = 2, AVG = (10 + 20) / 2 = 15 다. B 는 COUNT(VAL) 이 1 이고 SUM 이 30 이라 빠진다. C 는 값이 모두 NULL 이라 COUNT(VAL) = 0 이지만 SUM(VAL) 이 NULL 이므로 OR 뒤 조건으로 남는다. C1 = 2, C2 = 0, AVG 는 NULL 이다. D 는 40 이 두 번이라 COUNT(VAL) = 2 로 남고 C2 = 1, AVG = 40 이다. E 는 COUNT(VAL) 이 1, SUM 이 50 이라 빠진다. 정답은 ①번이다. ② 는 A 의 NULL 을 0 으로 보고 30 / 3 = 10 으로 평균을 냈다. ③ 은 값이 없는 그룹의 SUM 이 NULL 이라는 점과 DISTINCT 를 놓쳤다. ④ 는 COUNT(*) 도 NULL 행을 뺀다고 본 결과다.",
     "_source": "authored",
     "references": [
       {
         "type": "table",
-        "caption": "T 테이블",
+        "caption": "T",
         "headers": [
           "ID",
           "VAL"
@@ -1996,12 +2007,20 @@ export const ROUND_47: QuizQuestion[] = [
           [
             "D",
             "40"
+          ],
+          [
+            "E",
+            "50"
+          ],
+          [
+            "E",
+            "NULL"
           ]
         ]
       },
       {
         "type": "sql",
-        "code": "SELECT COUNT(*)\nFROM   T\nGROUP BY ID\nHAVING COUNT(VAL) >= 2\nORDER BY ID;"
+        "code": "SELECT ID,\n       COUNT(*)            AS C1,\n       COUNT(DISTINCT VAL) AS C2,\n       AVG(VAL)            AS C3\nFROM   T\nGROUP BY ID\nHAVING COUNT(VAL) >= 2\n    OR SUM(VAL) IS NULL\nORDER BY ID;"
       }
     ]
   },

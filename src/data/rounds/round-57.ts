@@ -59,34 +59,24 @@ export const ROUND_57: QuizQuestion[] = [
     "round": 57,
     "subject": "1과목",
     "number": 3,
-    "title": "아래 [직원] 테이블을 제1정규화 하기 위한 방법으로 가장 옳은 것은?",
+    "title": "아래 [수강신청] 테이블과 함수 종속에 대한 설명으로 옳은 것은?",
     "options": [
-      "직원 속성 값이 두 개인 경우가 있어 원자성을 위배하므로 직원1 컬럼, 직원2 컬럼을 둔다.",
-      "부서코드를 별도의 테이블로 분리한다.",
-      "직원 속성 값을 각 행에 하나씩만 담도록 개개 레코드로 분해한다.",
-      "직원명을 관계형 배열 타입으로 저장한다."
+      "모든 값이 원자값이고 기본키가 있으므로 이미 3정규형이다.",
+      "교수 → 교수연구실 은 기본키 일부에만 종속된 부분 함수 종속이다.",
+      "이름이 기본키의 일부인 학번에만 종속되므로 2정규형을 만족하지 않는다.",
+      "2정규형으로 분해하면 교수연구실의 이행 함수 종속도 함께 없어진다."
     ],
     "correctIndex": 2,
-    "explanation": "제1정규형은 모든 속성이 원자값(하나의 값)을 가져야 하므로, 한 칸에 '홍길동, 이순신' 이 함께 든 직원명을 행 단위로 나눠 한 행에 한 명씩 담는다(③). ① 처럼 직원1·직원2 컬럼으로 늘리면 반복 그룹이 생겨 여전히 1정규형이 아니고, ② 부서코드 분리는 이 문제와 무관하며, ④ 배열 타입 저장은 원자값 조건을 위반한다.",
+    "explanation": "기본키가 (학번, 과목코드) 인데 이름은 학번만으로, 과목명·교수는 과목코드만으로 정해진다. 이처럼 기본키 일부에 종속된 속성(부분 함수 종속)이 있으면 1정규형이지만 2정규형은 아니다. 정답은 ③번이다. ① 은 원자값이면 1정규형일 뿐 3정규형까지 보장하지 않는다. ② 의 교수 → 교수연구실 은 일반 속성이 다른 일반 속성을 정하는 이행 함수 종속이다. ④ 는 2정규형 분해로 학생(학번, 이름), 과목(과목코드, 과목명, 교수, 교수연구실), 수강(학번, 과목코드) 이 되는데, 과목 테이블에 과목코드 → 교수 → 교수연구실 이 남는다. 이것은 3정규화에서 교수(교수, 교수연구실)를 떼어 내야 없어진다.",
     "_source": "authored",
     "references": [
       {
-        "type": "table",
-        "caption": "직원 테이블 (제1정규화 전)",
-        "headers": [
-          "부서코드",
-          "직원명"
-        ],
-        "rows": [
-          [
-            "D10",
-            "홍길동, 이순신"
-          ],
-          [
-            "D20",
-            "강감찬"
-          ]
-        ]
+        "type": "text",
+        "content": "수강신청(학번, 과목코드, 이름, 과목명, 교수, 교수연구실)\n기본키: 학번 + 과목코드"
+      },
+      {
+        "type": "text",
+        "content": "함수 종속\n학번 → 이름\n과목코드 → 과목명, 교수\n교수 → 교수연구실"
       }
     ]
   },
@@ -213,21 +203,21 @@ export const ROUND_57: QuizQuestion[] = [
     "round": 57,
     "subject": "1과목",
     "number": 9,
-    "title": "아래 ERD에 대한 해석 중 옳지 않은 것은?",
+    "title": "아래 ERD 에 대한 해석으로 옳지 않은 것은?",
     "options": [
-      "한 학생은 수강하지 않을 수도 있다.",
-      "한 과목은 여러 학생이 수강할 수 있다.",
-      "수강 엔터티는 학생과 과목 사이의 관계 엔터티이다.",
-      "과목 인스턴스 추가하려면 학생 필요하다."
+      "한 학생이 같은 과목을 다른 학기에 다시 들은 기록을 따로 남길 수 있다.",
+      "담당 교수가 아직 정해지지 않은 과목도 등록할 수 있다.",
+      "수강 신청이 한 건도 없는 과목도 존재할 수 있다.",
+      "모든 교수는 한 과목 이상을 반드시 담당해야 한다."
     ],
     "correctIndex": 3,
-    "explanation": "ERD 는 학생·과목 쪽이 필수 1(||), 수강 쪽이 선택 0..N(o{) 이다. 따라서 학생은 수강하지 않을 수 있고(①), 한 과목은 여러 학생이 수강할 수 있으며(②), 수강은 학생과 과목의 M:N 을 해소한 관계 엔터티다(③). 과목은 수강(학생)과 무관하게 먼저 등록될 수 있으므로 과목을 추가하려면 학생이 필요하다는 ④ 가 옳지 않다.",
+    "explanation": "교수와 과목 사이 선은 과목 쪽이 o{(0개 이상), 교수 쪽이 |o(0 또는 1)다. 한 교수가 담당하는 과목은 0개일 수도 있으므로 '반드시 한 과목 이상' 이라는 ④ 가 틀렸다. 정답은 ④번이다. ① 수강의 PK 가 (학번, 과목코드, 학기) 라 학기가 다르면 같은 학생·과목 조합도 다른 행이 된다. ② 교수 쪽이 |o 이고 과목의 교수번호가 NULL 허용이라, 담당 교수 없이 과목을 넣을 수 있다. ③ 과목과 수강 사이 선은 수강 쪽이 o{ 라 수강이 0건인 과목도 있을 수 있다.",
     "_source": "authored",
     "references": [
       {
         "type": "erd",
-        "caption": "학생·수강·과목 ERD (M:N 정규화 — [수강] 교차 엔터티)",
-        "mermaid": "erDiagram\n    학생 ||--o{ 수강 : \"수강\"\n    과목 ||--o{ 수강 : \"개설\""
+        "caption": "학생·수강·과목·교수 ERD",
+        "mermaid": "erDiagram\n    학생 ||--o{ 수강 : \"신청\"\n    과목 ||--o{ 수강 : \"개설\"\n    교수 |o--o{ 과목 : \"담당\"\n    학생 {\n        string 학번 PK\n    }\n    과목 {\n        string 과목코드 PK\n        string 교수번호 FK \"NULL 허용\"\n    }\n    수강 {\n        string 학번 PK, FK\n        string 과목코드 PK, FK\n        string 학기 PK\n        number 성적\n    }\n    교수 {\n        string 교수번호 PK\n    }"
       }
     ]
   },
@@ -238,21 +228,21 @@ export const ROUND_57: QuizQuestion[] = [
     "round": 57,
     "subject": "1과목",
     "number": 10,
-    "title": "아래 ERD 해석 중 옳지 않은 것은?",
+    "title": "아래 ERD 에 대한 해석으로 옳지 않은 것은?",
     "options": [
-      "상품엔 주문이 무조건 포함된다.",
-      "주문엔 상품이 무조건 포함된다.",
-      "하나의 상품은 여러 주문에 포함될 수 있다.",
-      "주문 없이도 상품은 등록될 수 있다."
+      "주문항목이 하나도 없는 주문도 정상적인 데이터로 저장될 수 있다.",
+      "한 번도 주문되지 않은 상품도 등록될 수 있다.",
+      "주문 한 건은 반드시 한 명의 고객에게 속한다.",
+      "주문항목의 PK 가 (주문번호, 상품번호) 이므로 같은 주문에 같은 상품이 두 행으로 들어갈 수 없다."
     ],
     "correctIndex": 0,
-    "explanation": "상품 ||--o{ 주문 은 상품 쪽이 필수 1, 주문 쪽이 선택 0..N 이다. 그래서 주문은 반드시 상품 하나를 포함하고(②), 한 상품은 여러 주문에 포함될 수 있으며(③), 주문이 없어도 상품은 등록될 수 있다(④). 상품에 반드시 주문이 있어야 한다는 ① 은 주문 쪽 선택 표기(o)와 맞지 않아 옳지 않다.",
+    "explanation": "주문과 주문항목 사이 선은 주문항목 쪽이 |{(1개 이상)다. 주문 한 건에는 주문항목이 최소 하나 있어야 하므로 ① 이 틀렸다. 정답은 ①번이다. ② 상품과 주문항목 사이는 주문항목 쪽이 o{(0개 이상)라 주문되지 않은 상품도 있을 수 있다. ③ 고객 쪽이 ||(정확히 하나)이고 주문의 고객번호가 NOT NULL 이라 주문은 반드시 한 고객에게 속한다. ④ 주문항목의 PK 가 (주문번호, 상품번호) 라 같은 조합은 한 번만 들어간다. 같은 상품을 더 사면 수량을 늘린다.",
     "_source": "authored",
     "references": [
       {
         "type": "erd",
-        "caption": "상품·주문·주문항목 ERD",
-        "mermaid": "erDiagram\n    상품 ||--o{ 주문 : \"주문\"\n    주문 ||--o{ 주문항목 : \"포함\""
+        "caption": "고객·주문·주문항목·상품 ERD",
+        "mermaid": "erDiagram\n    고객 ||--o{ 주문 : \"한다\"\n    주문 ||--|{ 주문항목 : \"포함\"\n    상품 ||--o{ 주문항목 : \"대상\"\n    고객 {\n        string 고객번호 PK\n    }\n    주문 {\n        string 주문번호 PK\n        string 고객번호 FK \"NOT NULL\"\n    }\n    주문항목 {\n        string 주문번호 PK, FK\n        string 상품번호 PK, FK\n        number 수량\n    }\n    상품 {\n        string 상품번호 PK\n    }"
       }
     ]
   },
@@ -263,24 +253,62 @@ export const ROUND_57: QuizQuestion[] = [
     "round": 57,
     "subject": "2과목",
     "number": 11,
-    "title": "아래 SQL 실행 결과에 대한 설명으로 옳은 것은?",
+    "title": "아래 TAB1 테이블에서 ㉠~㉢ 의 결과 행 수를 차례로 나열한 것은? (Oracle 12c 이상)",
     "options": [
-      "가",
-      "나",
-      "가, 다",
-      "가, 나, 다"
+      "2, 4, 2",
+      "2, 2, 2",
+      "2, 4, 5",
+      "4, 4, 2"
     ],
     "correctIndex": 0,
-    "explanation": "OFFSET n ROWS 는 처음 n건을 건너뛴다. FETCH FIRST k ROWS ONLY 는 정확히 k건 이하를 반환하므로 5건을 초과할 수 없다. ② 나 는 OFFSET 3 이 3번째 행만 뺀다고 본 것이라 틀리고, ③·④ 는 틀린 다(5건 초과)를 포함했다.",
+    "explanation": "점수 내림차순은 90, 85, 85, 80, 80, 80, 70, 60 이다. ㉠ 은 앞의 두 행(90, 85)을 건너뛰고 다음 두 행(85, 80)만 가져오므로 2행이다. ㉡ 의 WITH TIES 는 마지막으로 가져온 행(80)과 정렬 값이 같은 행을 모두 더 붙인다. 85, 80 다음에 80 두 행이 더 붙어 4행이다. ㉢ 은 여섯 행을 건너뛰면 70, 60 두 행만 남아, FETCH 가 5행을 요청해도 2행만 나온다. 정답은 ①번이다. ② 는 WITH TIES 를 ONLY 와 같게 본 값이다. ③ 은 FETCH NEXT 5 ROWS 가 항상 5행을 채운다고 생각하면 나오는 값이다. ④ 는 ONLY 도 동점 행을 함께 가져온다고 착각한 결과다.",
     "_source": "authored",
     "references": [
       {
-        "type": "sql",
-        "code": "SELECT *\nFROM   TAB1\nORDER BY NO DESC\nOFFSET 3 ROWS\nFETCH FIRST 5 ROWS ONLY;"
+        "type": "table",
+        "caption": "TAB1",
+        "headers": [
+          "NO",
+          "SCORE"
+        ],
+        "rows": [
+          [
+            "1",
+            "90"
+          ],
+          [
+            "2",
+            "85"
+          ],
+          [
+            "3",
+            "85"
+          ],
+          [
+            "4",
+            "80"
+          ],
+          [
+            "5",
+            "80"
+          ],
+          [
+            "6",
+            "80"
+          ],
+          [
+            "7",
+            "70"
+          ],
+          [
+            "8",
+            "60"
+          ]
+        ]
       },
       {
-        "type": "text",
-        "content": "가. 정렬된 결과에서 처음 세 개의 행을 건너뛰고 다음부터 최대 5건을 반환한다.\n나. 3번째 행만 제외한다.\n다. 결과가 5개 초과 행이 나올 수 있다."
+        "type": "sql",
+        "code": "-- ㉠\nSELECT NO FROM TAB1\nORDER BY SCORE DESC\nOFFSET 2 ROWS\nFETCH NEXT 2 ROWS ONLY;\n-- ㉡\nSELECT NO FROM TAB1\nORDER BY SCORE DESC\nOFFSET 2 ROWS\nFETCH NEXT 2 ROWS WITH TIES;\n-- ㉢\nSELECT NO FROM TAB1\nORDER BY SCORE DESC\nOFFSET 6 ROWS\nFETCH NEXT 5 ROWS ONLY;"
       }
     ]
   },
@@ -674,20 +702,20 @@ export const ROUND_57: QuizQuestion[] = [
     "round": 57,
     "subject": "2과목",
     "number": 23,
-    "title": "아래 EMP 테이블에 대한 SQL 의 빈칸에 들어갈 조건으로 가장 적절한 것은?",
+    "title": "아래 EMP 테이블에서 ㉠ 과 ㉡ 의 결과 행 수로 옳은 것은? (㉡ 은 ㉠ 의 ALL 을 ANY 로만 바꾼 것)",
     "options": [
-      "ORDER BY AVG(SAL) >= ANY (SELECT AVG(SAL) FROM EMP GROUP BY DEPTNO)",
-      "ORDER BY AVG(SAL) >= ALL (SELECT AVG(SAL) FROM EMP GROUP BY DEPTNO)",
-      "HAVING AVG(SAL) >= ANY (SELECT AVG(SAL) FROM EMP GROUP BY DEPTNO)",
-      "HAVING AVG(SAL) >= ALL (SELECT AVG(SAL) FROM EMP GROUP BY DEPTNO)"
+      "㉠ 1행, ㉡ 2행",
+      "㉠ 1행, ㉡ 3행",
+      "㉠ 0행, ㉡ 0행",
+      "㉠ 0행, ㉡ 2행"
     ],
     "correctIndex": 3,
-    "explanation": "그룹 단위 조건은 HAVING 으로 지정해야 하므로 ①·② 의 ORDER BY 는 조건절이 될 수 없다. \"다른 모든 부서의 평균보다 크거나 같다\" 는 조건은 서브쿼리가 돌려주는 모든 값과 비교하는 `>= ALL` 로 표현한다. ③ 의 `>= ANY` 는 어느 하나보다만 크면 되므로 최솟값 기준이 되어 의미가 다르다. 예시 데이터에서 10 번 부서 평균은 4000, 20 번 부서 평균은 3500 이므로 ④ 는 10 번 부서만 남겨 최대 급여 5000 을 반환한다.",
+    "explanation": "서브쿼리는 부서별 평균이라 10번 4000, 20번 3500, 30번은 급여가 모두 NULL 이라 NULL 이다. ㉠ 의 >= ALL 은 목록의 모든 값과 비교해 전부 참이어야 한다. 그런데 목록에 NULL 이 있으면 그 비교가 UNKNOWN 이 되어 어떤 부서도 참이 될 수 없으므로 0행이다. ㉡ 의 >= ANY 는 하나라도 참이면 된다. 10번(4000 >= 3500)과 20번(3500 >= 3500)은 참이 되지만, 30번은 자기 평균이 NULL 이라 모든 비교가 UNKNOWN 이다. 그래서 2행, 정답은 ④번이다. ① 은 ALL 목록의 NULL 을 무시하고 평균이 가장 높은 10번이 나온다고 본 값이다. ② 는 거기에 30번까지 ANY 를 통과한다고 생각하면 나오는 값이다. ③ 은 NULL 하나 때문에 ANY 도 결과가 사라진다고 착각한 결과다.",
     "_source": "authored",
     "references": [
       {
         "type": "table",
-        "caption": "EMP 테이블",
+        "caption": "EMP",
         "headers": [
           "EMPNO",
           "DEPTNO",
@@ -713,16 +741,22 @@ export const ROUND_57: QuizQuestion[] = [
             "4",
             "20",
             "4500"
+          ],
+          [
+            "5",
+            "30",
+            "NULL"
+          ],
+          [
+            "6",
+            "30",
+            "NULL"
           ]
         ]
       },
       {
-        "type": "text",
-        "content": "부서별 평균 급여가 가장 높은 부서의 최대 급여를 조회한다."
-      },
-      {
         "type": "sql",
-        "code": "SELECT MAX(SAL)\nFROM   EMP\nGROUP BY DEPTNO\n(  ?  );"
+        "code": "-- ㉠\nSELECT DEPTNO, MAX(SAL)\nFROM   EMP\nGROUP BY DEPTNO\nHAVING AVG(SAL) >= ALL (\n         SELECT AVG(SAL)\n         FROM   EMP\n         GROUP BY DEPTNO);\n-- ㉡ ALL → ANY"
       }
     ]
   },
@@ -1197,38 +1231,35 @@ export const ROUND_57: QuizQuestion[] = [
     "round": 57,
     "subject": "2과목",
     "number": 34,
-    "title": "아래 SQL 의 실행 결과는?",
+    "title": "아래 T 테이블(X 가 모두 NULL)에 대한 ㉠~㉤ 중 결과가 0 인 것을 모두 고른 것은?",
     "options": [
-      "NULL",
-      "1",
-      "9999",
-      "0"
+      "㉠, ㉡",
+      "㉠, ㉡, ㉢",
+      "㉡, ㉤",
+      "㉠, ㉡, ㉤"
     ],
     "correctIndex": 3,
-    "explanation": "WHERE 1 = 2 로 선택되는 행이 없어도 COUNT(*) 는 NULL 이 아니라 0 을 반환한다. 그래서 NVL(0, 9999) = 0 이다(④). 대체값 9999 는 COUNT 결과가 NULL 일 때만 쓰이는데, COUNT 는 NULL 을 반환하지 않는다. ① COUNT 는 NULL 을 돌려주지 않으므로 NULL 이 아니고, ③ 9999 는 COUNT 결과가 NULL 이라고 본 값이다.",
+    "explanation": "㉠ 은 NULL 을 먼저 0 으로 바꿔 더하므로 0 이다. ㉡ 은 SUM(X) 가 NULL(더할 값이 없음)이고 그것을 NVL 로 0 으로 바꿔 0 이다. ㉢ 은 NULL 만 있어 SUM 이 NULL 이다. ㉣ 은 NVL 로 두 값이 모두 0 이 되어 NULL 이 아니므로 COUNT 는 2 다. ㉤ 은 대상 행이 없어도 COUNT(*) 가 0 을 돌려주고, 0 은 NULL 이 아니라 NVL 이 바꾸지 않으므로 0 이다. 정답은 ④번이다. ① 은 ㉤ 에서 COUNT 가 NULL 이 되어 9999 가 나온다고 본 것이다. ② 는 SUM 이 NULL 을 0 으로 계산한다고 생각한 것이다. ③ 은 NVL 을 SUM 안에 넣으면 결과가 달라진다고 착각한 것이다.",
     "_source": "authored",
     "references": [
       {
         "type": "table",
-        "caption": "TBL 테이블",
+        "caption": "T",
         "headers": [
-          "COL"
+          "X"
         ],
         "rows": [
           [
-            "A"
+            "NULL"
           ],
           [
-            "B"
-          ],
-          [
-            "C"
+            "NULL"
           ]
         ]
       },
       {
         "type": "sql",
-        "code": "SELECT NVL(COUNT(*), 9999)\nFROM   TBL\nWHERE  1 = 2;"
+        "code": "-- ㉠\nSELECT SUM(NVL(X, 0)) FROM T;\n-- ㉡\nSELECT NVL(SUM(X), 0) FROM T;\n-- ㉢\nSELECT SUM(X) FROM T;\n-- ㉣\nSELECT COUNT(NVL(X, 0)) FROM T;\n-- ㉤\nSELECT NVL(COUNT(*), 9999) FROM T\nWHERE  1 = 2;"
       }
     ]
   },
@@ -1320,20 +1351,20 @@ export const ROUND_57: QuizQuestion[] = [
     "round": 57,
     "subject": "2과목",
     "number": 38,
-    "title": "아래 NAME 테이블에서 결과가 (Kim, Tim) 으로 나오도록 LIKE 조건을 설정한 것은? (SQL Server)",
+    "title": "아래 NAME 테이블에 대한 ㉠~㉣ 의 결과 행 수를 차례로 나열한 것은? (SQL Server, 대소문자를 구분하는 정렬 규칙)",
     "options": [
-      "WHERE name LIKE '_im'",
-      "WHERE name LIKE '%im'",
-      "WHERE name LIKE '[JK]im'",
-      "WHERE name LIKE '[KT]im'"
+      "2, 5, 3, 6",
+      "2, 6, 3, 7",
+      "2, 5, 4, 7",
+      "2, 5, 3, 7"
     ],
     "correctIndex": 3,
-    "explanation": "SQL Server LIKE 의 문자 클래스 `[KT]` 는 \"K 또는 T 한 글자\" 를 의미. ④ `[KT]im` 은 Kim 과 Tim 만 매칭. ① `_im` 은 임의 한 글자 + im 이라 Jim/Kim/Tim 모두 매칭. ② `%im` 도 모두 매칭. ③ `[JK]im` 은 Jim/Kim 매칭 (Tim 누락).",
+    "explanation": "SQL Server 의 LIKE 에서 [ ] 는 그 안의 한 글자, [^ ] 는 그 밖의 한 글자, [A-K] 는 범위 안의 한 글자를 뜻한다. ㉠ 은 첫 글자가 J 나 K 이고 뒤가 im 인 세 글자라 Jim, Kim 2행이다. ㉡ 은 첫 글자가 J 가 아닌 세 글자 ?im 이라 Kim, Tim, kim, Aim, Lim 5행이다. Jimmy 는 다섯 글자라 빠진다. ㉢ 은 첫 글자가 A~K 인 대문자라 Jim, Kim, Aim 3행이다. 대소문자를 구분하므로 소문자 k 로 시작하는 kim 은 빠진다. ㉣ 은 둘째·셋째 글자가 im 이고 뒤에 아무 글자나 와도 되므로 7행 모두다. 정답은 ④번이다. ① 은 % 가 뒤 글자를 허용한다는 점을 놓쳐 Jimmy 를 뺀 값이다. ② 는 [^J] 를 '아무 글자' 로 보고 Jim 까지 센 값이다. ③ 은 대소문자를 구분하지 않는다고 보고 kim 을 넣은 값이다.",
     "_source": "authored",
     "references": [
       {
         "type": "table",
-        "caption": "NAME 테이블",
+        "caption": "NAME",
         "headers": [
           "name"
         ],
@@ -1346,27 +1377,24 @@ export const ROUND_57: QuizQuestion[] = [
           ],
           [
             "Tim"
+          ],
+          [
+            "kim"
+          ],
+          [
+            "Aim"
+          ],
+          [
+            "Jimmy"
+          ],
+          [
+            "Lim"
           ]
         ]
       },
       {
         "type": "sql",
-        "code": "SELECT name\nFROM   NAME\nWHERE  ( ? );"
-      },
-      {
-        "type": "table",
-        "caption": "기대 결과",
-        "headers": [
-          "name"
-        ],
-        "rows": [
-          [
-            "Kim"
-          ],
-          [
-            "Tim"
-          ]
-        ]
+        "code": "-- ㉠\nSELECT COUNT(*) FROM NAME\nWHERE  name LIKE '[JK]im';\n-- ㉡\nSELECT COUNT(*) FROM NAME\nWHERE  name LIKE '[^J]im';\n-- ㉢\nSELECT COUNT(*) FROM NAME\nWHERE  name LIKE '[A-K]im';\n-- ㉣\nSELECT COUNT(*) FROM NAME\nWHERE  name LIKE '_im%';"
       }
     ]
   },
@@ -1401,50 +1429,58 @@ export const ROUND_57: QuizQuestion[] = [
     "round": 57,
     "subject": "2과목",
     "number": 40,
-    "title": "아래 사원 테이블에서 2 등급(급여 1,200 ~ 1,400) 에 해당하는 사원의 수는?",
+    "title": "아래 사원 테이블의 급여 칼럼이 VARCHAR2 일 때 ㉠, ㉡ 의 결과로 옳은 것은? (Oracle 기준)",
     "options": [
-      "1개",
-      "2개",
-      "3개",
-      "4개"
+      "㉠ 3, ㉡ 3",
+      "㉠ 5, ㉡ 5",
+      "㉠ 5, ㉡ 3",
+      "㉠ 4, ㉡ 3"
     ],
     "correctIndex": 2,
-    "explanation": "BETWEEN 1200 AND 1400 (양 끝 포함) 조건을 만족하는 행은 B(1,200), C(1,300), D(1,400) 3 명. A(1,100) 와 E(1,500) 은 범위 밖. ① 1개·② 2개 는 BETWEEN 이 양 끝(또는 한쪽 끝) 값을 빼는 것으로 본 값, ④ 4개는 범위 밖 행까지 센 값이다.",
+    "explanation": "㉠ 은 문자끼리 비교라 숫자 크기가 아니라 앞 글자부터 차례로 비교한다. '1200' 이상 '1400' 이하인 문자열은 '1200', '1300', '1400' 에 더해, '12'·'13' 으로 시작하는 '1250000' 과 '13' 도 들어간다. '13' 은 앞 두 글자 '13' 이 '12' 보다 크고 '14' 보다 작기 때문이다. 그래서 5건이다. '900' 은 첫 글자 9 가 1 보다 커서, '15000' 은 '15' 가 '14' 보다 커서 빠진다. ㉡ 은 숫자로 바꿔 비교하므로 1200, 1300, 1400 3건이다. 정답은 ③번이다. ① 은 문자 칼럼도 숫자처럼 비교된다고 본 값이다. ② 는 TO_NUMBER 로 바꿔도 결과가 같다고 생각하면 나오는 값이다. ④ 는 '13' 처럼 짧은 문자열은 범위에 못 든다고 착각한 결과다.",
     "_source": "authored",
     "references": [
       {
         "type": "table",
-        "caption": "사원 테이블",
+        "caption": "사원 (급여 VARCHAR2(10))",
         "headers": [
-          "사원",
+          "이름",
           "급여"
         ],
         "rows": [
           [
             "A",
-            "1,100"
+            "900"
           ],
           [
             "B",
-            "1,200"
+            "1200"
           ],
           [
             "C",
-            "1,300"
+            "1300"
           ],
           [
             "D",
-            "1,400"
+            "1400"
           ],
           [
             "E",
-            "1,500"
+            "13"
+          ],
+          [
+            "F",
+            "1250000"
+          ],
+          [
+            "G",
+            "15000"
           ]
         ]
       },
       {
         "type": "sql",
-        "code": "SELECT COUNT(*)\nFROM   사원\nWHERE  급여 BETWEEN 1200 AND 1400;"
+        "code": "-- ㉠\nSELECT COUNT(*) FROM 사원\nWHERE  급여 BETWEEN '1200' AND '1400';\n-- ㉡\nSELECT COUNT(*) FROM 사원\nWHERE  TO_NUMBER(급여)\n       BETWEEN 1200 AND 1400;"
       }
     ]
   },
@@ -1907,46 +1943,20 @@ export const ROUND_57: QuizQuestion[] = [
     "round": 57,
     "subject": "2과목",
     "number": 46,
-    "title": "아래 EMP 테이블에 대한 SQL 의 괄호에 들어갈 수 없는 컬럼은?",
+    "title": "EMP(EMPNO, JOB, DEPT, SAL) 에 대해 SELECT ( 목록 ) FROM EMP GROUP BY JOB, DEPT; 를 실행할 때, 아래 ㉠~㉥ 중 오류가 나는 목록을 모두 고른 것은?",
     "options": [
-      "EMPNO",
-      "JOB",
-      "DEPT",
-      "NULL"
+      "㉢, ㉤",
+      "㉡, ㉢, ㉤",
+      "㉢, ㉣, ㉤",
+      "㉢, ㉤, ㉥"
     ],
     "correctIndex": 0,
-    "explanation": "`GROUP BY JOB, DEPT` 가 명시된 SQL 에서 SELECT 절에는 GROUP BY 에 포함된 컬럼(JOB, DEPT) 또는 집계 함수만 올 수 있다. ① EMPNO 는 GROUP BY 에 없는 일반 컬럼이라 집계 함수 없이 그대로 쓰면 ORA-00979 오류 발생. ②③ 은 그룹 컬럼이라 OK, ④ NULL 은 상수라 OK.",
+    "explanation": "GROUP BY 를 쓰면 SELECT 에는 그룹마다 값이 하나로 정해지는 것만 올 수 있다. GROUP BY 에 쓴 칼럼(JOB, DEPT)과 그 칼럼만으로 만든 식, 집계 함수, 상수가 여기에 해당한다. ㉢ 의 EMPNO 와 ㉤ 의 SAL 은 그룹 안에 여러 값이 있어 하나로 정할 수 없으므로 오류다. 같은 칼럼이라도 AVG(SAL) 처럼 집계 함수 안에 넣으면 된다. 정답은 ①번이다. ② 는 그룹 칼럼을 이어 붙인 식(㉡)도 안 된다고 본 것이고, ③ 은 그룹 칼럼에 함수를 씌운 식(㉣)도 안 된다고 본 것이다. ④ 는 상수 'X'(㉥)도 GROUP BY 에 없어서 안 된다고 본 것이다.",
     "_source": "authored",
     "references": [
       {
-        "type": "table",
-        "caption": "EMP 테이블",
-        "headers": [
-          "EMPNO",
-          "JOB",
-          "DEPT"
-        ],
-        "rows": [
-          [
-            "1",
-            "CLERK",
-            "10"
-          ],
-          [
-            "2",
-            "MGR",
-            "10"
-          ],
-          [
-            "3",
-            "CLERK",
-            "20"
-          ]
-        ]
-      },
-      {
-        "type": "sql",
-        "code": "SELECT ( ? ), COUNT(EMPNO)\nFROM   EMP\nGROUP BY JOB, DEPT;"
+        "type": "text",
+        "content": "㉠ JOB, COUNT(EMPNO)\n㉡ DEPT || '-' || JOB, MAX(SAL)\n㉢ EMPNO, COUNT(*)\n㉣ UPPER(JOB), SUM(SAL)\n㉤ SAL, AVG(SAL)\n㉥ 'X', COUNT(*)"
       }
     ]
   },

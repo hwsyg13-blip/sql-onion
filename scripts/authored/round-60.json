@@ -404,124 +404,61 @@
     {
       "subject": "2과목",
       "number": 13,
-      "title": "아래 결과를 얻기 위해 빈칸에 들어갈 SQL로 가장 적절한 것은?",
+      "title": "아래 급여 테이블에 ㉠, ㉡ 을 실행했을 때 (㉠ 행 수, ㉡ 행 수, ㉡ 에서 인사 행의 사원 값) 으로 옳은 것은? (Oracle 기준)",
       "options": [
-        "GROUP BY 부서 HAVING 직급 IN ('사원','대리','팀장','부장')",
-        "PIVOT (SUM(연봉) FOR 직급 IN ('사원','대리','팀장','부장'))",
-        "WHERE 직급 LIKE '%사원%' OR 직급 LIKE '%부장%'",
-        "UNPIVOT (연봉 FOR 직급 IN (사원, 대리, 팀장, 부장))"
+        "(2, 2, 7200)",
+        "(5, 2, 7200)",
+        "(4, 2, 7200)",
+        "(5, 2, 3500)"
       ],
       "correctIndex": 1,
-      "explanation": "결과 표는 부서를 행으로, 직급(사원·대리·팀장·부장)을 열로 가지는 가로형 표이다. 직급 컬럼의 값을 컬럼명으로 펼치고 연봉을 집계하는 PIVOT 절이 정확히 부합한다. ① GROUP BY는 직급별 집계를 하나의 행으로 만들지 못하고, ③ LIKE는 행 필터에 불과하며, ④ UNPIVOT은 가로 → 세로 변환이라 방향이 반대다.",
+      "explanation": "PIVOT 은 PIVOT 절에 나오지 않은 칼럼 전부로 GROUP BY 를 한다. ㉠ 은 급여 테이블을 그대로 썼으므로 사번과 부서가 그룹 기준이 된다. 사번이 모두 달라 5행이 그대로 나온다. 직급이 부장인 5번도 IN 목록에 없을 뿐 그룹은 만들어지므로 사원·대리가 NULL 인 행으로 남는다. ㉡ 은 인라인 뷰에서 사번을 빼고 부서·직급·연봉만 넘겼다. 그래서 부서만 그룹 기준이 되어 인사, IT 2행이다. 인사의 사원 값은 3500 + 3700 = 7200 이다. 정답은 ②번이다. ① 은 ㉠ 도 부서별로 묶인다고 본 값이다. 사번이 남아 있으면 부서별 집계가 되지 않는다. ③ 은 IN 목록에 없는 부장 행이 결과에서 빠진다고 생각하면 나오는 값이다. ④ 는 SUM 대신 첫 행 값만 들어간다고 착각한 결과다.",
       "references": [
         {
           "type": "table",
+          "caption": "급여",
           "headers": [
+            "사번",
             "부서",
             "직급",
             "연봉"
           ],
           "rows": [
             [
-              "인사팀",
+              "1",
+              "인사",
               "사원",
-              "3,500"
+              "3500"
             ],
             [
-              "인사팀",
+              "2",
+              "인사",
               "대리",
-              "4,500"
+              "4500"
             ],
             [
-              "인사팀",
-              "팀장",
-              "6,000"
-            ],
-            [
-              "인사팀",
-              "부장",
-              "8,000"
-            ],
-            [
-              "IT팀",
+              "3",
+              "인사",
               "사원",
-              "4,000"
+              "3700"
             ],
             [
-              "IT팀",
-              "대리",
-              "5,000"
-            ],
-            [
-              "IT팀",
-              "팀장",
-              "7,000"
-            ],
-            [
-              "IT팀",
-              "부장",
-              "9,000"
-            ],
-            [
-              "행정팀",
+              "4",
+              "IT",
               "사원",
-              "3,200"
+              "4000"
             ],
             [
-              "행정팀",
-              "대리",
-              "4,200"
-            ],
-            [
-              "행정팀",
-              "팀장",
-              "5,800"
-            ],
-            [
-              "행정팀",
+              "5",
+              "IT",
               "부장",
-              "7,500"
+              "9000"
             ]
-          ],
-          "caption": "급여 테이블"
+          ]
         },
         {
           "type": "sql",
-          "code": "SELECT *\nFROM   급여\n(  ?  );"
-        },
-        {
-          "type": "table",
-          "headers": [
-            "부서",
-            "사원",
-            "대리",
-            "팀장",
-            "부장"
-          ],
-          "rows": [
-            [
-              "인사팀",
-              "3,500",
-              "4,500",
-              "6,000",
-              "8,000"
-            ],
-            [
-              "IT팀",
-              "4,000",
-              "5,000",
-              "7,000",
-              "9,000"
-            ],
-            [
-              "행정팀",
-              "3,200",
-              "4,200",
-              "5,800",
-              "7,500"
-            ]
-          ],
-          "caption": "결과"
+          "code": "-- ㉠\nSELECT *\nFROM   급여\nPIVOT (SUM(연봉)\n       FOR 직급 IN ('사원' AS 사원,\n                    '대리' AS 대리));\n-- ㉡\nSELECT *\nFROM   (SELECT 부서, 직급, 연봉\n        FROM   급여)\nPIVOT (SUM(연봉)\n       FOR 직급 IN ('사원' AS 사원,\n                    '대리' AS 대리));"
         }
       ]
     },
@@ -666,15 +603,15 @@
     {
       "subject": "2과목",
       "number": 17,
-      "title": "아래 두 테이블을 조인하여 양쪽의 모든 행을 포함하되 NULL 값은 0으로 치환한 결과를 얻으려 한다. 가장 적절한 SQL은?",
+      "title": "아래 두 테이블에 대한 SQL 의 (결과 행 수, TOT 의 합계) 로 옳은 것은?",
       "options": [
-        "SELECT NVL(T1.VAL,0), NVL(T2.VAL,0) FROM T1 CROSS JOIN T2;",
-        "SELECT NVL(T1.VAL,0), NVL(T2.VAL,0) FROM T1 FULL OUTER JOIN T2 ON T1.ID = T2.ID;",
-        "SELECT T1.VAL, T2.VAL FROM T1 FULL OUTER JOIN T2 ON T1.ID = T2.ID;",
-        "SELECT T1.VAL, T2.VAL FROM T1 UNION T2;"
+        "(4, 1110)",
+        "(5, 1510)",
+        "(5, 1310)",
+        "(4, 910)"
       ],
       "correctIndex": 1,
-      "explanation": "양쪽 테이블의 모든 행을 빠짐없이 보존하려면 FULL OUTER JOIN을 사용해야 한다. 매칭되지 않은 행은 NULL로 채워지며, NVL 함수를 통해 0으로 치환할 수 있다. ① CROSS JOIN은 양쪽 모든 행의 조합을 생성하므로 결과가 폭증하고, ③은 NVL이 빠져 NULL이 그대로 노출되며, ④ UNION은 두 결과를 위아래로 합치는 연산이라 이 문제의 의도와 맞지 않는다.",
+      "explanation": "ID 2 는 T1 에 두 행, T2 에 한 행이라 T2 의 200 이 두 번 짝지어져 (2, 350), (2, 360) 이 된다. T1 에만 있는 1 은 (1, 100), T2 에만 있는 3 은 (3, 300) 이다. T2 의 ID 가 NULL 인 행은 어느 T1 행과도 = 가 참이 되지 않지만, FULL OUTER JOIN 이라 짝 없는 행으로 남아 (NULL, 400) 이 된다. 모두 5행이고 TOT 합계는 100 + 350 + 360 + 300 + 400 = 1510, 정답은 ②번이다. ① 은 키가 NULL 인 T2 행이 빠진다고 본 값이다. ③ 은 T2 의 200 이 한 번만 짝지어진다고 보고 (2, 160) 을 짝 없는 행으로 계산한 값이다. ④ 는 두 실수를 함께 한 값이다.",
       "references": [
         {
           "type": "table",
@@ -691,6 +628,10 @@
             [
               "2",
               "150"
+            ],
+            [
+              "2",
+              "160"
             ]
           ]
         },
@@ -709,8 +650,16 @@
             [
               "3",
               "300"
+            ],
+            [
+              "NULL",
+              "400"
             ]
           ]
+        },
+        {
+          "type": "sql",
+          "code": "SELECT COALESCE(T1.ID, T2.ID) AS ID,\n       NVL(T1.VAL, 0)\n         + NVL(T2.VAL, 0) AS TOT\nFROM   T1 FULL OUTER JOIN T2\n       ON T1.ID = T2.ID;"
         }
       ]
     },
@@ -1111,23 +1060,19 @@
     {
       "subject": "2과목",
       "number": 28,
-      "title": "아래 테이블에 대해 수행할 때 오류가 발생하는 INSERT 문은?",
+      "title": "아래 T, SRC 테이블에서 ㉠, ㉡ 을 차례로 실행했을 때(문장마다 자동 커밋) (㉠ 직후 T 행 수, ㉡ 직후 T 행 수) 로 옳은 것은?",
       "options": [
-        "INSERT INTO T VALUES (3, 'C');",
-        "INSERT INTO T VALUES (1, 'D');",
-        "INSERT INTO T VALUES (4, NULL);",
-        "INSERT INTO T (ID, NAME) VALUES (5, 'E');"
+        "(3, 4)",
+        "(2, 4)",
+        "(4, 4)",
+        "(2, 2)"
       ],
       "correctIndex": 1,
-      "explanation": "PRIMARY KEY 는 유일성과 NOT NULL 을 동시에 강제한다. ID 가 이미 1 인 행이 있으므로 ② 는 기본키 중복으로 오류가 난다. ③ 의 NAME 은 기본키가 아니라 NULL 을 넣어도 문제가 없고, ①④ 는 중복되지 않는 새 ID 라 정상 입력된다.",
+      "explanation": "㉠ 은 SRC 의 세 행을 한 문장으로 넣는데, 그중 ID 2 가 T 의 기본키와 겹쳐 오류가 난다. 오류가 나면 그 문장이 넣으려던 행 전체가 취소되므로(문장 단위 원자성) 3, 4 도 들어가지 않고 T 는 2행 그대로다. ㉡ 은 T 에 없는 ID 만 골라 3, 4 를 넣으므로 4행이 된다. 정답은 ②번이다. (3, 4) 는 오류가 나기 전에 들어간 3 은 남는다고 본 값이다. (4, 4) 는 겹치는 행만 건너뛰고 나머지는 들어간다고 생각하면 나오는 값이다. (2, 2) 는 ㉡ 도 실패한다고 착각한 결과다.",
       "references": [
         {
-          "type": "sql",
-          "code": "CREATE TABLE T (\n    ID    NUMBER      PRIMARY KEY,\n    NAME  VARCHAR2(10)\n);"
-        },
-        {
           "type": "table",
-          "caption": "T 테이블 (현재 데이터)",
+          "caption": "T (ID 는 PK)",
           "headers": [
             "ID",
             "NAME"
@@ -1142,6 +1087,32 @@
               "B"
             ]
           ]
+        },
+        {
+          "type": "table",
+          "caption": "SRC",
+          "headers": [
+            "ID",
+            "NAME"
+          ],
+          "rows": [
+            [
+              "3",
+              "C"
+            ],
+            [
+              "2",
+              "X"
+            ],
+            [
+              "4",
+              "D"
+            ]
+          ]
+        },
+        {
+          "type": "sql",
+          "code": "-- ㉠\nINSERT INTO T\nSELECT ID, NAME FROM SRC;\n-- ㉡\nINSERT INTO T\nSELECT ID, NAME FROM SRC\nWHERE  ID NOT IN (SELECT ID FROM T);"
         }
       ]
     },
@@ -1465,88 +1436,82 @@
     {
       "subject": "2과목",
       "number": 37,
-      "title": "아래 두 테이블을 조인한 결과의 SUM 값으로 옳은 것은?",
+      "title": "아래 주문·배송 테이블에 대한 ㉠~㉢ 의 결과를 차례로 나열한 것은?",
       "options": [
-        "100",
-        "120",
-        "140",
-        "NULL"
+        "400, 300, 700",
+        "300, 300, 600",
+        "400, 400, 700",
+        "400, 300, 600"
       ],
       "correctIndex": 0,
-      "explanation": "WHERE A.컬럼1 = B.컬럼1 로 등가 조인하면 테이블1 의 1~4 가 테이블2 의 1~4 와 한 번씩 매칭되고, 테이블2 의 5 는 짝이 없어 빠진다. 매칭된 행의 컬럼2 합은 10 + 20 + 30 + 40 = 100 이다(①). ④ 짝이 없는 테이블2 의 5 는 등가 조인 결과에 들어오지 않으므로 합계가 NULL 이 되지 않는다.",
+      "explanation": "O1 은 배송이 두 회차라 조인하면 O1 행이 두 번 나온다. ㉠ 은 O1(100) 두 번과 O2(200) 한 번을 더해 400 이다. 배송이 없는 O3 은 빠진다. ㉡ 의 EXISTS 는 배송이 있는지만 확인하고 주문 행을 늘리지 않으므로 O1 + O2 = 300 이다. ㉢ 의 LEFT OUTER JOIN 은 ㉠ 의 세 행에 배송 없는 O3 를 더해 100 + 100 + 200 + 300 = 700 이다. 정답은 ①번이다. ② 는 조인해도 주문 금액이 한 번만 더해진다고 본 값이다. ③ 은 EXISTS 도 조인처럼 행을 늘린다고 생각하면 나오는 값이다. ④ 는 LEFT OUTER JOIN 에서는 O1 이 한 번만 나온다고 착각한 결과다. 1:N 조인 뒤에 1 쪽 값을 합하면 부풀려진다는 점이 핵심이다.",
       "references": [
         {
           "type": "table",
-          "caption": "테이블1",
+          "caption": "주문",
           "headers": [
-            "컬럼1",
-            "컬럼2"
+            "주문번호",
+            "금액"
           ],
           "rows": [
             [
-              "1",
-              "10"
+              "O1",
+              "100"
             ],
             [
-              "2",
-              "20"
+              "O2",
+              "200"
             ],
             [
-              "3",
-              "30"
-            ],
-            [
-              "4",
-              "40"
+              "O3",
+              "300"
             ]
           ]
         },
         {
           "type": "table",
-          "caption": "테이블2",
+          "caption": "배송",
           "headers": [
-            "컬럼1"
+            "주문번호",
+            "회차"
           ],
           "rows": [
             [
+              "O1",
               "1"
             ],
             [
+              "O1",
               "2"
             ],
             [
-              "3"
-            ],
-            [
-              "4"
-            ],
-            [
-              "5"
+              "O2",
+              "1"
             ]
           ]
         },
         {
           "type": "sql",
-          "code": "SELECT SUM(A.컬럼2)\nFROM   테이블1 A, 테이블2 B\nWHERE  A.컬럼1 = B.컬럼1;"
+          "code": "-- ㉠\nSELECT SUM(A.금액)\nFROM   주문 A, 배송 B\nWHERE  A.주문번호 = B.주문번호;\n-- ㉡\nSELECT SUM(A.금액)\nFROM   주문 A\nWHERE  EXISTS (SELECT 1 FROM 배송 B\n               WHERE  B.주문번호\n                    = A.주문번호);\n-- ㉢\nSELECT SUM(A.금액)\nFROM   주문 A LEFT OUTER JOIN 배송 B\n       ON A.주문번호 = B.주문번호;"
         }
       ]
     },
     {
       "subject": "2과목",
       "number": 38,
-      "title": "아래 두 테이블 A, B 에 대한 SQL 의 결과로 옳은 것은?",
+      "title": "아래 A, B 테이블에 대한 ㉠~㉢ 의 결과를 차례로 나열한 것은? (B 는 비어 있다)",
       "options": [
-        "4",
-        "2",
-        "0",
-        "오류"
+        "0, 2, 2",
+        "2, 2, 2",
+        "0, 0, 0",
+        "0, 2, 0"
       ],
       "correctIndex": 0,
-      "explanation": "조인 조건이 없는 `FROM A, B` 는 카티션 곱(Cross Join)이라 결과 행 수 = `|A| × |B|` = 2 × 2 = 4. `COUNT(*)` 가 4 를 반환한다. ② 2 는 한 테이블의 행 수만 센 값, ③ 0 은 조건이 없으면 조인이 안 된다고 본 값이고, ④ 조인 조건이 없어도 오류는 나지 않는다.",
+      "explanation": "㉠ 의 카티션 곱은 2 × 0 = 0 행이다. 한쪽이 비어 있으면 곱도 비어 있다. ㉡ 의 LEFT OUTER JOIN 은 B 에 짝이 없어도 A 의 행을 남기므로 2행이다. ㉢ 의 인라인 뷰는 GROUP BY 없는 집계라 B 가 비어 있어도 CNT = 0 인 한 행을 돌려준다. 그래서 2 × 1 = 2행이다. 정답은 ①번이다. ② 는 빈 테이블과의 카티션 곱에서 A 행이 그대로 남는다고 본 값이다. ③ 은 빈 테이블이 끼면 어떤 조인이든 결과가 없다고 생각하면 나오는 값이다. ④ 는 빈 테이블에 COUNT(*) 를 하면 행이 나오지 않는다고 착각한 결과다.",
       "references": [
         {
           "type": "table",
-          "caption": "A 테이블",
+          "caption": "A",
           "headers": [
             "COL"
           ],
@@ -1561,22 +1526,19 @@
         },
         {
           "type": "table",
-          "caption": "B 테이블",
+          "caption": "B",
           "headers": [
             "COL"
           ],
           "rows": [
             [
-              "b1"
-            ],
-            [
-              "b2"
+              "(빈 테이블)"
             ]
           ]
         },
         {
           "type": "sql",
-          "code": "SELECT COUNT(*)\nFROM   A, B;"
+          "code": "-- ㉠\nSELECT COUNT(*) FROM A, B;\n-- ㉡\nSELECT COUNT(*)\nFROM   A LEFT OUTER JOIN B\n       ON 1 = 1;\n-- ㉢\nSELECT COUNT(*)\nFROM   A, (SELECT COUNT(*) AS CNT\n           FROM   B) V;"
         }
       ]
     },
@@ -1632,19 +1594,19 @@
     {
       "subject": "2과목",
       "number": 40,
-      "title": "아래 SQL에서 오류가 발생하는 절은?",
+      "title": "EMP(DEPT, SAL) 테이블에 대한 아래 ㉠~㉤ 중 오류가 나는 것을 모두 고른 것은? (Oracle 19c 기준)",
       "options": [
-        "SELECT 절",
-        "FROM 절",
-        "WHERE 절의 제품코드 별칭 사용",
-        "ORDER BY 절의 제품코드 별칭 사용"
+        "㉠",
+        "㉠, ㉢",
+        "㉠, ㉢, ㉤",
+        "㉠, ㉢, ㉣, ㉤"
       ],
       "correctIndex": 2,
-      "explanation": "SQL 처리 순서는 FROM → WHERE → … → SELECT → ORDER BY 다. WHERE 절은 SELECT 보다 먼저 처리되어 SELECT 절에서 붙인 별칭 '제품코드' 를 알 수 없으므로 오류가 난다(③). ORDER BY 는 SELECT 이후에 처리되어 별칭을 쓸 수 있다(④). ① SELECT 절과 ② FROM 절 자체에는 문제가 없다.",
+      "explanation": "SQL 은 FROM → WHERE → GROUP BY → HAVING → SELECT → ORDER BY 순서로 처리된다. SELECT 절의 별칭은 SELECT 가 처리된 뒤에야 생기므로, 그보다 먼저 처리되는 WHERE(㉠), HAVING(㉢), GROUP BY(㉤)에서는 쓸 수 없다. ORDER BY 는 SELECT 뒤라 별칭(㉡)도, SELECT 목록의 위치 번호(㉣)도 쓸 수 있다. 정답은 ③번이다. ① 과 ② 는 GROUP BY·HAVING 에서 별칭을 쓸 수 있다고 본 것이고, ④ 는 ORDER BY 의 위치 번호도 안 된다고 본 것이다. 참고로 PostgreSQL 과 Oracle 23ai 는 GROUP BY 에 별칭을 허용하지만, 시험은 Oracle 19c 이하의 표준 처리 순서를 기준으로 한다.",
       "references": [
         {
           "type": "sql",
-          "code": "SELECT PRODUCT_CD AS 제품코드\nFROM   PRODUCT\nWHERE  제품코드 = 'A01'\nAND    제품코드 LIKE 'A%'\nORDER BY 제품코드;"
+          "code": "-- ㉠\nSELECT SAL * 12 AS 연봉 FROM EMP\nWHERE  연봉 > 30000;\n-- ㉡\nSELECT SAL * 12 AS 연봉 FROM EMP\nORDER BY 연봉 DESC;\n-- ㉢\nSELECT DEPT, SUM(SAL) AS 합계\nFROM   EMP GROUP BY DEPT\nHAVING 합계 > 5000;\n-- ㉣\nSELECT DEPT, SUM(SAL) AS 합계\nFROM   EMP GROUP BY DEPT\nORDER BY 2 DESC;\n-- ㉤\nSELECT DEPT AS 부서, COUNT(*)\nFROM   EMP GROUP BY 부서;"
         }
       ]
     },
@@ -1974,60 +1936,57 @@
     {
       "subject": "2과목",
       "number": 50,
-      "title": "아래 주문 테이블에 대한 SQL 이 반환하는 결과에 대한 설명으로 가장 적절한 것은?",
+      "title": "아래 주문 테이블에 대한 ㉠~㉢ 에서 (㉠ 의 C001 주문건수, ㉡ 의 C001 주문건수, ㉢ 의 결과 행 수, ㉠ 의 C003 주문건수) 로 옳은 것은?",
       "options": [
-        "주문 수량이 10을 넘는 건이 있는 고객의 주문 건수를 조회한다",
-        "주문 수량 총 합계가 10을 넘는 고객의 주문 건수를 조회한다",
-        "주문 횟수가 10건을 넘는 고객의 주문 건수를 조회한다",
-        "수량 컬럼이 NULL이 아닌 고객의 주문 건수를 조회한다"
+        "(3, 1, 2, 2)",
+        "(3, 3, 2, 2)",
+        "(3, 1, 2, 1)",
+        "(1, 1, 2, 1)"
       ],
       "correctIndex": 0,
-      "explanation": "`GROUP BY 고객ID` 로 고객별 그룹을 만들고 `HAVING MAX(수량) > 10` 으로 \"한 건이라도 수량이 10 을 초과하는\" 고객 그룹만 남긴다. ② 는 SUM, ③ 은 COUNT, ④ 는 IS NOT NULL 조건이라야 한다.",
+      "explanation": "WHERE 는 그룹을 만들기 전에 행을 거르고, HAVING 은 그룹을 만든 뒤 그룹을 거른다. ㉠ 은 고객별로 묶은 뒤 최대 수량이 10 을 넘는 그룹 C001(최대 12), C003(최대 15)만 남긴다. 그룹 안의 행은 그대로라 C001 은 3건, C003 은 NULL 행까지 COUNT(*) 로 2건이다. ㉡ 은 먼저 수량 > 10 인 행만 남기므로 C001 은 12 한 건이다. ㉢ 은 수량 합이 16 을 넘는 C001(20), C002(17) 두 그룹이라 2행이다. C003 은 SUM 이 NULL 을 빼고 15 라 빠진다. 정답은 ①번이다. ② 는 WHERE 와 HAVING 을 같게 본 값이다. ③ 은 COUNT(*) 도 NULL 행을 뺀다고 생각하면 나오는 값이다. ④ 는 HAVING 도 그룹 안의 행을 조건에 맞는 것만 남긴다고 착각한 결과다.",
       "references": [
         {
           "type": "table",
-          "caption": "주문 테이블",
+          "caption": "주문",
           "headers": [
             "고객ID",
-            "주문번호",
             "수량"
           ],
           "rows": [
             [
               "C001",
-              "O100",
               "5"
             ],
             [
               "C001",
-              "O101",
               "12"
             ],
             [
               "C001",
-              "O102",
               "3"
             ],
             [
               "C002",
-              "O103",
               "8"
             ],
             [
               "C002",
-              "O104",
               "9"
             ],
             [
               "C003",
-              "O105",
               "15"
+            ],
+            [
+              "C003",
+              "NULL"
             ]
           ]
         },
         {
           "type": "sql",
-          "code": "SELECT 고객ID, COUNT(*) AS 주문건수\nFROM   주문\nGROUP BY 고객ID\nHAVING MAX(수량) > 10;"
+          "code": "-- ㉠\nSELECT 고객ID, COUNT(*) AS 주문건수\nFROM   주문 GROUP BY 고객ID\nHAVING MAX(수량) > 10;\n-- ㉡\nSELECT 고객ID, COUNT(*) AS 주문건수\nFROM   주문 WHERE 수량 > 10\nGROUP BY 고객ID;\n-- ㉢\nSELECT 고객ID, COUNT(수량)\nFROM   주문 GROUP BY 고객ID\nHAVING SUM(수량) > 16;"
         }
       ]
     }

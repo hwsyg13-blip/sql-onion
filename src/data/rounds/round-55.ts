@@ -229,16 +229,22 @@ export const ROUND_55: QuizQuestion[] = [
     "round": 55,
     "subject": "1과목",
     "number": 7,
-    "title": "트랜잭션의 특성 중 \"모두 수행되거나 모두 수행되지 않아야 한다\" 는 특성은?",
+    "title": "아래 ㉠~㉣ 상황에서 지켜지지 않은 트랜잭션 특성을 바르게 짝지은 것은?",
     "options": [
-      "원자성(Atomicity)",
-      "일관성(Consistency)",
-      "고립성(Isolation)",
-      "영속성(Durability)"
+      "㉠ 원자성 ㉡ 일관성 ㉢ 고립성 ㉣ 지속성",
+      "㉠ 일관성 ㉡ 원자성 ㉢ 고립성 ㉣ 지속성",
+      "㉠ 원자성 ㉡ 일관성 ㉢ 지속성 ㉣ 고립성",
+      "㉠ 고립성 ㉡ 일관성 ㉢ 원자성 ㉣ 지속성"
     ],
     "correctIndex": 0,
-    "explanation": "'모두 수행되거나 전혀 수행되지 않아야 한다(All or Nothing)' 는 원자성이다(①). 일관성(②)은 트랜잭션 전후로 데이터가 규칙에 맞는 상태를 유지하는 것, 고립성(③)은 수행 중인 트랜잭션이 다른 트랜잭션의 영향을 받지 않는 것, 영속성(④)은 커밋된 결과가 영구히 저장되는 것이다.",
-    "_source": "authored"
+    "explanation": "㉠ 은 출금과 입금이 모두 반영되거나 모두 취소되어야 하는데 절반만 반영되었으니 원자성(Atomicity)이 깨졌다. ㉡ 은 트랜잭션이 끝난 뒤에도 데이터가 규칙(잔액 0 이상)을 만족해야 한다는 일관성(Consistency) 문제다. ㉢ 은 동시에 실행된 두 트랜잭션이 서로의 중간 결과에 영향을 받아 생긴 일이라 고립성(Isolation) 문제다. ㉣ 은 COMMIT 된 결과는 장애가 나도 남아 있어야 한다는 지속성(Durability)이 깨진 것이다. 정답은 ①번이다. ② 는 ㉠·㉡ 을, ③ 은 ㉢·㉣ 을 서로 바꿨고, ④ 는 ㉠ 과 ㉢ 을 바꿨다.",
+    "_source": "authored",
+    "references": [
+      {
+        "type": "text",
+        "content": "㉠ 계좌 이체 도중 장애가 나서 출금만 반영되고 입금은 반영되지 않았다.\n㉡ 잔액은 0 이상이어야 한다는 규칙이 있는데, 이체가 끝난 뒤 잔액이 음수가 되었다.\n㉢ 두 사용자가 같은 좌석을 동시에 조회하고 예약해 둘 다 예약 성공 처리되었다.\n㉣ COMMIT 완료 메시지를 받은 직후 서버가 재시작되었는데, 반영한 내용이 사라졌다."
+      }
+    ]
   },
   {
     "id": 10257,
@@ -741,42 +747,46 @@ export const ROUND_55: QuizQuestion[] = [
     "round": 55,
     "subject": "2과목",
     "number": 18,
-    "title": "아래 데이터와 SQL 의 결과로 옳은 것은?",
+    "title": "아래 T 테이블에 대한 SQL 결과에서 세 번째 행의 (A, B, C) 로 옳은 것은? (Oracle 기준)",
     "options": [
-      "20, 40, 20",
-      "NULL, 40, NULL",
-      "0, 40, 0",
-      "NULL, NULL, NULL"
+      "(20, 10, '10')",
+      "(NULL, NULL, '10')",
+      "(NULL, 10, NULL)",
+      "(NULL, NULL, NULL)"
     ],
     "correctIndex": 1,
-    "explanation": "NULL 에 산술 연산을 적용하면 결과가 NULL 이 되므로, NULL 이 포함된 첫 번째·세 번째 행은 NULL 이 반환된다. ① 은 NULL 을 0 으로 보고 계산한 값, ③ 은 NULL 이 섞인 연산 결과가 0 이 된다고 본 값, ④ 는 한 행이라도 NULL 이 있으면 모든 행이 NULL 이 된다고 본 값이다.",
+    "explanation": "3번 행은 COL1 = 10, COL2 = NULL 이다. A 는 산술 연산에 NULL 이 하나라도 섞이면 결과가 NULL 이다. B 는 NVL 이 COL1 에만 걸려 있어 10 + NULL = NULL 이다. C 의 || 는 Oracle 에서 NULL 을 빈 문자열처럼 다루므로 '10' || NULL = '10' 이다. 정답은 ②번이다. ① 은 NULL 을 0 으로 계산한 값이다. ③ 은 NVL 이 COL2 에 걸린 것처럼 보고 B 를 10 으로, || 도 NULL 이 된다고 본 값이다. ④ 는 문자 연결도 산술처럼 NULL 이 된다고 본 값이다. PostgreSQL 같은 표준 DBMS 는 || 에 NULL 이 있으면 NULL 을 돌려주므로 Oracle 만의 동작이다.",
     "_source": "authored",
     "references": [
       {
         "type": "table",
+        "caption": "T",
         "headers": [
+          "NO",
           "COL1",
           "COL2"
         ],
         "rows": [
           [
+            "1",
             "NULL",
             "10"
           ],
           [
+            "2",
             "10",
             "10"
           ],
           [
+            "3",
             "10",
             "NULL"
           ]
-        ],
-        "caption": "T 테이블"
+        ]
       },
       {
         "type": "sql",
-        "code": "SELECT COL1 * 2 + COL2 * 2 FROM T;"
+        "code": "SELECT NO,\n       COL1 * 2 + COL2 * 2 AS A,\n       NVL(COL1, 0) + COL2 AS B,\n       COL1 || COL2        AS C\nFROM   T\nORDER BY NO;"
       }
     ]
   },
@@ -1151,20 +1161,20 @@ export const ROUND_55: QuizQuestion[] = [
     "round": 55,
     "subject": "2과목",
     "number": 26,
-    "title": "아래 로그인 관련 쿼리 설명 중 적절하지 않은 것은?",
+    "title": "아래 로그인이력 테이블에 대한 SQL 의 (결과 행 수, M002 행의 일수) 로 옳은 것은? (Oracle 기준, 로그인일시는 DATE)",
     "options": [
-      "5일간 하루 3회 로그인한 경우 전체 로그인 건수는 15회이다.",
-      "ORDER BY ALIAS1, ALIAS2 형태의 SQL 은 정상적으로 동작한다.",
-      "ORDER BY 절에는 SELECT 절에 사용한 별칭을 참조할 수 없다.",
-      "DISTINCT 사용 시 중복된 로그인 이력은 하나로 집계된다."
+      "(3, 2)",
+      "(2, 1)",
+      "(2, 2)",
+      "(2, 3)"
     ],
     "correctIndex": 2,
-    "explanation": "ORDER BY 절은 SELECT 절이 평가된 뒤에 수행되므로 SELECT 절에서 부여한 별칭을 그대로 참조할 수 있다. 따라서 별칭을 참조할 수 없다는 ③ 이 적절하지 않다. ② 는 같은 이유로 정상 동작하고, ① 은 5 × 3 = 15 회로 옳으며, ④ DISTINCT 는 중복 행을 하나로 묶는다.",
+    "explanation": "TRUNC(날짜) 는 시각을 버리고 그날 0시로 만든다. M001 은 05-01 두 번, 05-02 한 번이라 일수 2, 횟수 3 이다. M002 는 05-01 13:00 이 05-01, 05-02 00:00·09:00 이 05-02 라 일수 2, 횟수 3 이다. M003 은 횟수가 1 이라 HAVING 에서 빠진다. 결과는 2행이고 M002 의 일수는 2 다. 정답은 ③번이다. (3, 2) 는 HAVING 을 무시하고 M003 까지 센 값이다. (2, 1) 은 TRUNC 를 ROUND 처럼 보고 05-01 13:00 을 05-02 로 올린 값이다. (2, 3) 은 COUNT(DISTINCT …) 를 COUNT(*) 처럼 로그인 횟수로 센 값이다.",
     "_source": "authored",
     "references": [
       {
         "type": "table",
-        "caption": "로그인이력 테이블",
+        "caption": "로그인이력",
         "headers": [
           "회원ID",
           "로그인일시"
@@ -1172,25 +1182,37 @@ export const ROUND_55: QuizQuestion[] = [
         "rows": [
           [
             "M001",
-            "2025-05-01 09:10"
+            "05-01 09:10"
           ],
           [
             "M001",
-            "2025-05-01 13:20"
+            "05-01 13:20"
           ],
           [
             "M001",
-            "2025-05-02 10:05"
+            "05-02 10:05"
           ],
           [
             "M002",
-            "2025-05-01 11:00"
+            "05-01 13:00"
+          ],
+          [
+            "M002",
+            "05-02 00:00"
+          ],
+          [
+            "M002",
+            "05-02 09:00"
+          ],
+          [
+            "M003",
+            "05-03 08:00"
           ]
         ]
       },
       {
         "type": "sql",
-        "code": "SELECT   회원ID AS ALIAS1,\n         TRUNC(로그인일시) AS ALIAS2,\n         COUNT(*) AS 로그인횟수\nFROM     로그인이력\nGROUP BY 회원ID, TRUNC(로그인일시)\nORDER BY ALIAS1, ALIAS2;"
+        "code": "SELECT 회원ID,\n  COUNT(DISTINCT TRUNC(로그인일시))\n    AS 일수,\n  COUNT(*) AS 횟수\nFROM   로그인이력\nGROUP BY 회원ID\nHAVING COUNT(*) >= 2;"
       }
     ]
   },
@@ -1285,20 +1307,20 @@ export const ROUND_55: QuizQuestion[] = [
     "round": 55,
     "subject": "2과목",
     "number": 29,
-    "title": "아래 EMP 테이블에서 '홍길동' 의 자식의 자식 노드를 셀프 조인으로 조회하는 SQL 로 옳은 것은?",
+    "title": "아래 EMP 테이블(MGR 은 상사의 EMPNO)에 대한 (㉠ 행 수, ㉡ 행 수, ㉢ 에서 G 가 NULL 인 행 수) 로 옳은 것은?",
     "options": [
-      "SELECT C.EMPNO, C.ENAME, C.MGR FROM EMP A, EMP B, EMP C WHERE A.ENAME='홍길동' AND B.MGR=A.EMPNO AND C.MGR=B.EMPNO;",
-      "SELECT A.EMPNO, A.ENAME FROM EMP A WHERE A.ENAME='홍길동';",
-      "SELECT B.EMPNO, B.ENAME FROM EMP A, EMP B WHERE A.ENAME='홍길동' AND B.MGR=A.EMPNO;",
-      "SELECT * FROM EMP WHERE MGR = '홍길동';"
+      "(2, 3, 3)",
+      "(2, 2, 3)",
+      "(2, 3, 2)",
+      "(3, 3, 3)"
     ],
     "correctIndex": 0,
-    "explanation": "'홍길동' 을 A 로, 자식을 B(`B.MGR = A.EMPNO`), 자식의 자식을 C(`C.MGR = B.EMPNO`) 로 두고 EMP 를 세 번 셀프 조인해 C 를 조회. ② 는 홍길동 본인만, ③ 은 자식까지만, ④ 는 ENAME 을 MGR 로 비교(ENAME 은 이름, MGR 은 매니저 번호)라 잘못된 비교.",
+    "explanation": "㉠ 은 홍(A) → 부하(B: 이, 강) → 그 부하(C) 로 두 단계를 내려가 최, 김 2행이다. 박은 최의 부하라 홍에게는 증손자다. ㉡ 은 조부·부·손자로 이어지는 세 단계 사슬을 모두 찾으므로 홍-이-최, 홍-강-김, 이-최-박 3행이다. ㉢ 은 직원마다 상사의 상사(조부)를 LEFT JOIN 으로 붙인다. 홍은 상사가 없고, 이·강은 상사(홍)는 있지만 그 위가 없어 G 가 NULL 이다. 최·김·박은 각각 홍, 홍, 이가 붙는다. 그래서 NULL 은 3행이다. 정답은 ①번이다. ② 는 ㉡ 도 홍에서 시작하는 사슬만 센 값이다. ③ 은 상사가 있는 이·강은 G 도 채워진다고 본 값이다. ④ 는 ㉠ 에 증손자 박까지 넣은 값이다.",
     "_source": "authored",
     "references": [
       {
         "type": "table",
-        "caption": "EMP 테이블",
+        "caption": "EMP",
         "headers": [
           "EMPNO",
           "ENAME",
@@ -1307,30 +1329,39 @@ export const ROUND_55: QuizQuestion[] = [
         "rows": [
           [
             "1001",
-            "홍길동",
-            "(NULL)"
+            "홍",
+            "NULL"
           ],
           [
             "1002",
-            "이순신",
+            "이",
             "1001"
           ],
           [
             "1003",
-            "강감찬",
+            "강",
             "1001"
           ],
           [
             "1004",
-            "최영",
+            "최",
             "1002"
           ],
           [
             "1005",
-            "김유신",
+            "김",
             "1003"
+          ],
+          [
+            "1006",
+            "박",
+            "1004"
           ]
         ]
+      },
+      {
+        "type": "sql",
+        "code": "-- ㉠ 홍의 손자\nSELECT C.ENAME\nFROM   EMP A, EMP B, EMP C\nWHERE  A.ENAME = '홍'\nAND    B.MGR = A.EMPNO\nAND    C.MGR = B.EMPNO;\n-- ㉡ ㉠ 에서 A.ENAME 조건만 뺌\n-- ㉢\nSELECT C.ENAME, A.ENAME AS G\nFROM   EMP C\nLEFT JOIN EMP B ON C.MGR = B.EMPNO\nLEFT JOIN EMP A ON B.MGR = A.EMPNO;"
       }
     ]
   },
@@ -1535,20 +1566,20 @@ export const ROUND_55: QuizQuestion[] = [
     "round": 55,
     "subject": "2과목",
     "number": 33,
-    "title": "아래 SQL 결과의 컬럼명으로 옳은 것은?",
+    "title": "아래 T 테이블에 대한 SQL 의 (결과 행 수, 첫 번째 행의 (AAB, BBA)) 로 옳은 것은? (Oracle 기준)",
     "options": [
-      "AAB, BBA",
-      "BBA, AAB",
-      "COL1, COL2",
-      "오류가 발생한다"
+      "4행, (2, 20)",
+      "6행, (2, 20)",
+      "4행, (20, 2)",
+      "별칭이 서로 달라 오류가 발생한다"
     ],
     "correctIndex": 0,
-    "explanation": "UNION·UNION ALL 등 집합 연산 결과의 컬럼명은 첫 번째 SELECT 절의 별칭을 따른다. 두 번째 SELECT 가 같은 컬럼에 다른 별칭(BBA, AAB)을 붙여도 무시되므로 결과 컬럼명은 AAB, BBA 가 된다. ② 는 두 번째 SELECT 의 별칭이 적용된다고 본 경우, ③ 은 별칭이 모두 무시된다고 본 경우, ④ 는 양쪽 별칭이 다르면 오류가 난다고 본 경우이다.",
+    "explanation": "집합 연산 결과의 칼럼 이름은 첫 번째 SELECT 를 따른다. 결과 칼럼은 AAB(첫째), BBA(둘째)이고, 아래 SELECT 에 붙인 별칭은 무시된다. UNION 은 중복을 없애므로 위쪽은 (1, 10), (2, 20), 아래쪽은 (10, 1), (20, 2) 로 모두 4행이다. ORDER BY BBA DESC 는 결과의 둘째 칼럼 기준이라 20, 10, 2, 1 순서가 되고 첫 행은 (2, 20) 이다. 정답은 ①번이다. ② 는 UNION 을 UNION ALL 처럼 보고 (1, 10) 과 (10, 1) 을 두 번씩 센 값이다. ③ 은 아래 SELECT 의 별칭대로 첫째 칼럼을 BBA 로 보고 정렬한 결과다. ④ 는 두 SELECT 의 별칭이 달라도 칼럼 수와 데이터 타입만 맞으면 된다는 점을 놓쳤다.",
     "_source": "authored",
     "references": [
       {
         "type": "table",
-        "caption": "T 테이블",
+        "caption": "T",
         "headers": [
           "COL1",
           "COL2"
@@ -1561,38 +1592,16 @@ export const ROUND_55: QuizQuestion[] = [
           [
             "2",
             "20"
+          ],
+          [
+            "1",
+            "10"
           ]
         ]
       },
       {
         "type": "sql",
-        "code": "SELECT COL1 AS AAB, COL2 AS BBA\nFROM   T\nUNION ALL\nSELECT COL1 AS BBA, COL2 AS AAB\nFROM   T;"
-      },
-      {
-        "type": "table",
-        "caption": "결과 (UNION ALL 후)",
-        "headers": [
-          "?",
-          "?"
-        ],
-        "rows": [
-          [
-            "1",
-            "10"
-          ],
-          [
-            "2",
-            "20"
-          ],
-          [
-            "1",
-            "10"
-          ],
-          [
-            "2",
-            "20"
-          ]
-        ]
+        "code": "SELECT COL1 AS AAB, COL2 AS BBA FROM T\nUNION\nSELECT COL2 AS BBA, COL1 AS AAB FROM T\nORDER BY BBA DESC;"
       }
     ]
   },
@@ -1841,42 +1850,56 @@ export const ROUND_55: QuizQuestion[] = [
     "round": 55,
     "subject": "2과목",
     "number": 40,
-    "title": "아래 EMP 테이블에서 전체 합계와 부서별 합계를 함께 출력하는 윈도우 함수 조합으로 옳은 것은?",
+    "title": "아래 EMP 테이블에 대한 SQL 결과에서 EMPNO 가 2 인 행의 (S1, S2, S3) 로 옳은 것은?",
     "options": [
-      "SUM(SAL) OVER (), SUM(SAL) OVER (PARTITION BY DEPT)",
-      "SUM(SAL) OVER (PARTITION BY DEPT), SUM(SAL) OVER ()",
-      "SUM(SAL) OVER (ORDER BY DEPT), SUM(SAL) OVER ()",
-      "SUM(SAL), SUM(SAL) OVER (PARTITION BY DEPT)"
+      "(13000, 13000, 21000)",
+      "(8000, 13000, 21000)",
+      "(13000, 21000, 21000)",
+      "(8000, 13000, 13000)"
     ],
     "correctIndex": 0,
-    "explanation": "`OVER ()` 는 파티션 없이 전체 행에 대한 합계 = 전체 합계. `OVER (PARTITION BY DEPT)` 는 부서별 합계. 문제 순서가 \"전체 합계 → 부서별 합계\" 라 ① 이 정답. ② 는 순서 반대, ③ ORDER BY 는 누적합 의미, ④ `SUM(SAL)` 만 쓰면 일반 집계라 GROUP BY 필요.",
+    "explanation": "S1 은 ORDER BY 만 있고 범위 절이 없어서 기본값 RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW 가 적용된다. RANGE 는 정렬 값이 같은 행(동점)을 한꺼번에 포함하므로, 10번 부서 3000, 5000, 5000 에서 5000 인 두 행(2·3번)은 모두 3000 + 5000 + 5000 = 13000 이다. S2 는 ORDER BY 가 없어 부서 전체 합인 13000, S3 은 OVER () 라 전체 합 21000 이다. 정답은 ①번이다. ② 는 ROWS 처럼 한 행씩 누적해 2번을 3000 + 5000 = 8000 으로 본 값이다. ③ 은 PARTITION BY 만 있는 S2 를 전체 합으로 생각하면 나오는 값이다. ④ 는 S1 을 한 행씩 누적으로 보고, OVER () 도 부서별 합이라고 착각한 결과다.",
     "_source": "authored",
     "references": [
       {
         "type": "table",
-        "caption": "EMP 테이블",
+        "caption": "EMP",
         "headers": [
+          "EMPNO",
           "DEPT",
           "SAL"
         ],
         "rows": [
           [
+            "1",
             "10",
             "3000"
           ],
           [
+            "2",
             "10",
             "5000"
           ],
           [
+            "3",
+            "10",
+            "5000"
+          ],
+          [
+            "4",
             "20",
             "4500"
           ],
           [
+            "5",
             "20",
             "3500"
           ]
         ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT EMPNO,\n  SUM(SAL) OVER (PARTITION BY DEPT\n                 ORDER BY SAL) AS S1,\n  SUM(SAL) OVER (PARTITION BY DEPT)\n    AS S2,\n  SUM(SAL) OVER () AS S3\nFROM   EMP;"
       }
     ]
   },

@@ -1697,6 +1697,7 @@ html[data-theme="dark"] .theory-md table tbody tr:nth-child(even) { background: 
 }
 .mt-mc-text {
   flex: 1; font-size: 13px; color: var(--fg-2); line-height: 1.5;
+  white-space: pre-line;
 }
 
 /* 풀이 결과 박스 */
@@ -1903,3 +1904,9 @@ html, body { overflow-x: hidden; }
 
 /* AdSense — 채울 광고가 없으면(unfilled) 빈 상자를 남기지 않는다 */
 ins.adsbygoogle[data-ad-status="unfilled"] { display: none !important; }
+
+/* 문항 보기 표: 좁은 화면에서는 칸 좌우 여백만 줄여 5칸 표도 가로 스크롤 없이 보이게 한다.
+   (칸 내용은 줄바꿈하지 않는다 — 날짜·SQL 값이 끊기면 읽기 어렵다.) */
+@media (max-width: 480px) {
+  .qref-table th, .qref-table td { padding-left: 6px !important; padding-right: 6px !important; }
+}

@@ -446,15 +446,21 @@
       "_origNo": 17,
       "subject": "2과목",
       "chapter": "DCL·TCL",
-      "title": "사용자 SCOTT에게 EMP 테이블에 대한 SELECT, UPDATE 권한을 부여하려고 한다. 이때 그 권한을 제3자에게 다시 전달할 수 있도록 하려면 적절한 SQL은?",
+      "title": "EMP 테이블 소유자가 아래처럼 권한을 준 뒤, SCOTT 이 ㉠~㉣ 을 실행할 때 성공하는 것만 모두 고른 것은?",
       "options": [
-        "GRANT SELECT, UPDATE ON EMP TO SCOTT;",
-        "GRANT SELECT, UPDATE ON EMP TO SCOTT WITH GRANT OPTION;",
-        "GRANT ALL ON EMP TO SCOTT;",
-        "GRANT UPDATE ON EMP TO SCOTT, WITH GRANT OPTION;"
+        "㉠, ㉡, ㉣",
+        "㉠, ㉣",
+        "㉠, ㉡, ㉢, ㉣",
+        "㉣"
       ],
       "correctIndex": 1,
-      "explanation": "GRANT ... TO 사용자 구문은 해당 사용자에게 권한만 부여한다. 하지만, 제3자에게 해당 권한을 다시 부여할 수 있도록 하려면 WITH GRANT OPTION 구문이 반드시 함께 사용되어야 한다. 따라서 사용자 SCOTT에게 SELECT와 UPDATE 권한을 부여하고, 그 권한을 다른 사용자에게도 전달할 수 있도록 하려면, WITH GRANT OPTION을 명시해야 한다."
+      "explanation": "UPDATE (SAL) 처럼 권한 뒤 괄호에 칼럼을 적으면 그 칼럼만 수정할 수 있는 칼럼 단위 권한이 된다. ㉠ 은 SAL 만 바꾸므로 성공하고, ㉡ 은 권한이 없는 ENAME 을 바꿔 권한 부족 오류가 난다. ㉢ DELETE 는 받지 않은 권한이다. ㉣ SELECT 는 테이블 전체에 받았으므로 성공한다. 정답은 ②번이다. ① 은 UPDATE 권한이 모든 칼럼에 걸린다고 착각한 결과다. ③ 은 UPDATE 가 DELETE 까지 포함한다고 보았다. ④ 는 칼럼을 지정하면 UPDATE 가 아예 안 된다고 착각한 결과다. 받은 권한을 다른 사용자에게 다시 주게 하려면 끝에 WITH GRANT OPTION 을 붙인다. PostgreSQL 16 에서도 ㉠·㉣ 만 성공하고 ㉡·㉢ 은 permission denied 다.",
+      "references": [
+        {
+          "type": "sql",
+          "code": "-- 소유자\nGRANT SELECT, UPDATE (SAL)\n  ON EMP TO SCOTT;\n\n-- SCOTT\n㉠ UPDATE EMP SET SAL = 200\n   WHERE EMPNO = 1;\n㉡ UPDATE EMP SET ENAME = 'LEE'\n   WHERE EMPNO = 1;\n㉢ DELETE FROM EMP\n   WHERE EMPNO = 1;\n㉣ SELECT * FROM EMP;"
+        }
+      ]
     },
     {
       "_id": "cbt-018",
@@ -653,15 +659,53 @@
       "_origNo": 23,
       "subject": "1과목",
       "chapter": "엔터티",
-      "title": "엔터티 - 인스턴스 - 속성 - 속성값에 대한 관계 설명 중 틀린 것을 고르시오.",
+      "title": "아래 [사원] 엔터티를 보고 (인스턴스 수, 속성 수, 한 인스턴스의 한 속성이 가지는 속성값 수) 로 옳은 것은?",
       "options": [
-        "한 개의 엔터티는 두 개 이상의 인스턴스 집합이어야 한다.",
-        "하나의 속성은 하나 이상의 속성값을 가진다.",
-        "한 개의 엔터티는 두 개 이상의 속성을 갖는다.",
-        "엔터티 하나의 인스턴스는 다른 엔터티의 인스턴스 간 관계인 Pairing을 가진다."
+        "(4, 4, 4)",
+        "(16, 4, 1)",
+        "(4, 4, 1)",
+        "(4, 16, 1)"
       ],
-      "correctIndex": 1,
-      "explanation": "한 엔터티는 두 개 이상의 인스턴스 집합이고(①), 두 개 이상의 속성을 가지며(③), 엔터티의 인스턴스는 다른 엔터티 인스턴스와 관계(Pairing)를 맺는다(④). 하나의 속성은 하나의 속성값만 가지며, 여러 값을 가지면 정규화(1정규형) 대상이므로 ② 가 틀리다."
+      "correctIndex": 2,
+      "explanation": "엔터티 안의 행 하나하나가 인스턴스이고 4개다. 사번·이름·부서·직급 같은 칼럼이 속성이며 4개다. 하나의 인스턴스는 각 속성에 대해 하나의 속성값만 가진다(원자값). 102 의 직급처럼 값이 비어 있는 NULL 도 속성값이 여러 개가 되는 것은 아니다. 그래서 (4, 4, 1) 이고 정답은 ③번이다. ① 은 한 속성이 인스턴스 수만큼 값을 가진다고 본 값이다. ② 는 칸(속성값) 16개를 인스턴스로 센 값이다. ④ 는 칸 16개를 속성으로 센 값이다.",
+      "references": [
+        {
+          "type": "table",
+          "caption": "사원",
+          "headers": [
+            "사번",
+            "이름",
+            "부서",
+            "직급"
+          ],
+          "rows": [
+            [
+              "101",
+              "김",
+              "영업",
+              "대리"
+            ],
+            [
+              "102",
+              "이",
+              "인사",
+              "NULL"
+            ],
+            [
+              "103",
+              "박",
+              "영업",
+              "과장"
+            ],
+            [
+              "104",
+              "최",
+              "IT",
+              "사원"
+            ]
+          ]
+        }
+      ]
     },
     {
       "_id": "cbt-024",
@@ -1967,15 +2011,70 @@
       "_origNo": 60,
       "subject": "2과목",
       "chapter": "집합 연산자",
-      "title": "다음 중 순수 관계 연산자가 아닌 것은?",
+      "title": "아래 [수강]·[필수] 릴레이션에 관계 대수 연산 ㉠~㉣ 을 적용한 결과의 튜플 수를 차례로 나열한 것은?",
       "options": [
-        "SELECT",
-        "DIVIDE",
-        "UNION",
-        "PROJECT"
+        "2, 6, 3, 1",
+        "1, 3, 3, 1",
+        "2, 3, 3, 1",
+        "3, 3, 3, 1"
       ],
       "correctIndex": 2,
-      "explanation": "순수 관계 연산자는 관계형 데이터베이스에 맞게 새로 만든 SELECT, PROJECT, JOIN, DIVIDE 다(①②④). UNION 은 수학의 집합 개념을 가져온 일반 집합 연산자(UNION, INTERSECTION, DIFFERENCE, PRODUCT)에 속하므로 순수 관계 연산자가 아니다(③)."
+      "explanation": "㉠ DIVIDE 는 필수의 모든 과목(DB, OS)과 짝을 이루는 학번을 고른다. S1 과 S3 은 둘 다 들었고 S3 이 NW 를 더 들은 것은 상관없어 2개다. S2 는 OS 가 없어 빠진다. ㉡ PROJECT 는 학번 칼럼만 남기는데, 관계 대수의 결과는 집합이라 중복이 없어 S1, S2, S3 3개다. ㉢ SELECT 는 과목이 DB 인 튜플 3개다. ㉣ 은 전체 학번 {S1, S2, S3} 에서 OS 를 들은 학번 {S1, S3} 를 빼 S2 1개다. 정답은 ③번이다. ① 은 PROJECT 가 SQL 의 SELECT 처럼 중복을 남긴다고 본 값이다. ② 는 DIVIDE 를 필수 과목과 정확히 같은 과목만 들은 학번으로 본 값(S1 만)이다. ④ 는 DIVIDE 를 필수 과목 중 하나라도 들은 학번으로 본 값이다.",
+      "references": [
+        {
+          "type": "table",
+          "caption": "수강",
+          "headers": [
+            "학번",
+            "과목"
+          ],
+          "rows": [
+            [
+              "S1",
+              "DB"
+            ],
+            [
+              "S1",
+              "OS"
+            ],
+            [
+              "S2",
+              "DB"
+            ],
+            [
+              "S3",
+              "DB"
+            ],
+            [
+              "S3",
+              "OS"
+            ],
+            [
+              "S3",
+              "NW"
+            ]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "필수",
+          "headers": [
+            "과목"
+          ],
+          "rows": [
+            [
+              "DB"
+            ],
+            [
+              "OS"
+            ]
+          ]
+        },
+        {
+          "type": "text",
+          "content": "㉠ 수강 ÷ 필수 (DIVIDE)\n㉡ π학번(수강) (PROJECT)\n㉢ σ과목='DB'(수강) (SELECT)\n㉣ π학번(수강) − π학번(σ과목='OS'(수강))"
+        }
+      ]
     },
     {
       "_id": "cbt-061",
@@ -2689,15 +2788,54 @@
       "_origNo": 79,
       "subject": "2과목",
       "chapter": "DCL·TCL",
-      "title": "DELETE, TRUNCATE, DROP 명령을 비교한 것으로 옳은 것은?",
+      "title": "아래 T, T2 테이블(커밋된 상태)에 ㉠~㉥ 을 차례로 실행한 뒤의 상태로 옳은 것은? (Oracle 기준)",
       "options": [
-        "DROP, TRUNCATE는 DDL이고 DELETE는 DML이다.",
-        "DROP, TRUNCATE는 테이블 자체를 삭제하고, DELETE는 테이블 자체는 남아있다.",
-        "DELETE FROM 테이블;과 TRUNCATE TABLE 테이블;의 결과 행은 다르다.",
-        "DELETE는 ROLLBACK이 불가능하다."
+        "T 는 2행, T2 는 없어진다.",
+        "T 는 3행, T2 는 없어진다.",
+        "T 는 2행, T2 는 빈 테이블로 남는다.",
+        "T 는 1행, T2 는 없어진다."
       ],
       "correctIndex": 0,
-      "explanation": "• DELETE는 DML로 ROLLBACK이 가능하며 실행 시 테이블 자체는 남아있다. • TRUNCATE는 DDL로 ROLLBACK이 불가하며, 실행 시 테이블을 초기 상태로 되돌린다(테이블 구조 자체는 남아있음). • DROP은 DDL로 ROLLBACK도 불가능하고 테이블 구조 자체를 삭제한다."
+      "explanation": "DELETE 는 DML 이라 ㉡ ROLLBACK 으로 ㉠ 이 취소되어 T 는 다시 3행이다. ㉢ 의 DELETE 뒤에 실행한 TRUNCATE 는 DDL 이라, 실행 직전에 그때까지의 트랜잭션을 자동으로 커밋한다. 그래서 ID 2 삭제가 확정되고 ㉤ ROLLBACK 은 되돌릴 것이 없다. TRUNCATE 자체도 ROLLBACK 으로 되돌릴 수 없다. ㉥ DROP 은 데이터뿐 아니라 테이블 구조까지 없앤다. T 는 2행, T2 는 없어지므로 정답은 ①번이다. ② 는 TRUNCATE 의 자동 커밋을 놓치고 ㉤ 이 ID 2 삭제를 되돌린다고 본 것이다. ③ 은 DROP 을 TRUNCATE 처럼 데이터만 지운다고 본 것이다. ④ 는 ㉡ ROLLBACK 이 ㉠ 을 되돌리지 못한다고 본 것이다.",
+      "references": [
+        {
+          "type": "table",
+          "caption": "T",
+          "headers": [
+            "ID"
+          ],
+          "rows": [
+            [
+              "1"
+            ],
+            [
+              "2"
+            ],
+            [
+              "3"
+            ]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "T2",
+          "headers": [
+            "ID"
+          ],
+          "rows": [
+            [
+              "10"
+            ],
+            [
+              "20"
+            ]
+          ]
+        },
+        {
+          "type": "sql",
+          "code": "-- ㉠\nDELETE FROM T WHERE ID = 1;\n-- ㉡\nROLLBACK;\n-- ㉢\nDELETE FROM T WHERE ID = 2;\n-- ㉣\nTRUNCATE TABLE T2;\n-- ㉤\nROLLBACK;\n-- ㉥\nDROP TABLE T2;"
+        }
+      ]
     },
     {
       "_id": "cbt-080",
@@ -3048,15 +3186,21 @@
       "_origNo": 93,
       "subject": "1과목",
       "chapter": "데이터 모델 개념",
-      "title": "데이터 모델링이 최종적으로 완료된 상태라고 정의할 수 있는, 즉 물리적인 스키마 설계를 하기 전 단계를 가리키는 말은?",
+      "title": "아래 (가)~(다) 작업을 데이터 모델링 단계에 맞게 짝지은 것으로 옳은 것은?",
       "options": [
-        "물리적 데이터 모델링",
-        "논리적 데이터 모델링",
-        "개괄 데이터 모델링",
-        "데이터 모델링"
+        "(가) 논리 (나) 개념 (다) 물리",
+        "(가) 개념 (나) 물리 (다) 논리",
+        "(가) 개념 (나) 논리 (다) 물리",
+        "(가) 개념 (나) 논리 (다) 논리"
       ],
-      "correctIndex": 1,
-      "explanation": "논리적 데이터 모델링의 결과로 얻어지는 논리 데이터 모델은 데이터 모델링이 최종적으로 완료된 상태라고 정의할 수 있다. 즉 물리적인 스키마 설계를 하기 전 단계의 '데이터 모델' 상태를 일컫는 말이다."
+      "correctIndex": 2,
+      "explanation": "개념적 모델링은 업무 관점에서 핵심 엔터티와 관계를 추려 범위를 정하는 단계다(가). 논리적 모델링은 특정 DBMS 와 상관없이 속성·식별자·관계를 빠짐없이 정하고 정규화를 하는 단계로, 데이터 모델링이 사실상 완성되는 단계다(나). 물리적 모델링은 실제 DBMS 에 맞춰 타입·인덱스·저장 구조를 정하는 단계다(다). 정답은 ③번이다. ① 은 개념과 논리를 바꾸었다. ② 는 DBMS 와 무관한 정규화를 물리 단계로 보았다. ④ 는 DBMS 에 맞춘 타입·저장 구조 결정을 논리 단계로 보았다.",
+      "references": [
+        {
+          "type": "text",
+          "content": "(가) 업무 담당자와 함께 핵심 엔터티와 그 관계만 그려 시스템 범위를 합의했다.\n(나) 모든 속성과 식별자를 정하고, 정규화로 중복과 이상 현상을 없앴다.\n(다) 사용할 DBMS 에 맞춰 칼럼 데이터 타입·인덱스·테이블스페이스를 정했다."
+        }
+      ]
     },
     {
       "_id": "cbt-094",
@@ -4509,15 +4653,65 @@
       "_origNo": 133,
       "subject": "2과목",
       "chapter": "DML",
-      "title": "데이터를 입력하기 위해 사용하는 SQL 명령어는 무엇인가?",
+      "title": "아래 T, S 테이블에 MERGE 를 실행한 뒤 T 의 (행 수, AMT 합계) 로 옳은 것은? (Oracle 기준)",
       "options": [
-        "CREATE",
-        "INSERT",
-        "UPDATE",
-        "ALTER"
+        "(3, 1150)",
+        "(4, 1250)",
+        "(4, 1300)",
+        "(4, 1050)"
       ],
       "correctIndex": 1,
-      "explanation": "테이블에 새 데이터를 입력하는 명령어는 DML 인 INSERT 다(②). UPDATE(③)는 이미 있는 데이터를 수정하고, CREATE(①)·ALTER(④)는 테이블 같은 객체의 구조를 만들거나 바꾸는 DDL 이다."
+      "explanation": "MERGE 는 S 의 행마다 T 에 짝(ON 조건)이 있으면 UPDATE, 없으면 INSERT 를 한다. ID 2 는 짝이 있고 S.AMT 250 이 100 보다 커서 200 + 250 = 450 이 된다. ID 4 도 짝이 있지만 S.AMT 50 이 WHERE 조건을 만족하지 못해 400 그대로다. ID 3 은 T 에 없어 300 으로 새로 들어간다. S 에 없는 T 의 ID 1 은 건드리지 않는다. 결과는 100, 450, 300, 400 으로 4행, 합계 1250 이다. 정답은 ②번이다. ① 은 S 에 없는 T 의 행(ID 1)이 지워진다고 본 값이다. ③ 은 UPDATE 의 WHERE 를 무시하고 ID 4 도 450 으로 더한 값이다. ④ 는 SET 을 S.AMT 로 바꿔 넣는다고 보고 ID 2 를 250 으로 계산한 값이다.",
+      "references": [
+        {
+          "type": "table",
+          "caption": "T",
+          "headers": [
+            "ID",
+            "AMT"
+          ],
+          "rows": [
+            [
+              "1",
+              "100"
+            ],
+            [
+              "2",
+              "200"
+            ],
+            [
+              "4",
+              "400"
+            ]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "S",
+          "headers": [
+            "ID",
+            "AMT"
+          ],
+          "rows": [
+            [
+              "2",
+              "250"
+            ],
+            [
+              "3",
+              "300"
+            ],
+            [
+              "4",
+              "50"
+            ]
+          ]
+        },
+        {
+          "type": "sql",
+          "code": "MERGE INTO T\nUSING S ON (T.ID = S.ID)\nWHEN MATCHED THEN\n  UPDATE SET T.AMT = T.AMT + S.AMT\n  WHERE S.AMT > 100\nWHEN NOT MATCHED THEN\n  INSERT (ID, AMT)\n  VALUES (S.ID, S.AMT);"
+        }
+      ]
     },
     {
       "_id": "cbt-134",
@@ -4525,15 +4719,62 @@
       "_origNo": 134,
       "subject": "1과목",
       "chapter": "속성",
-      "title": "3차정규화에 대한 설명으로 옳은 것을 고르시오.",
+      "title": "아래 사원 테이블을 제3정규형으로 분해한 것으로 가장 적절한 것은?",
       "options": [
-        "속성 간 종속성을 가지면 안 된다.",
-        "모든 속성은 반드시 기본 키 전부에 종속되어야 한다.",
-        "모든 속성은 반드시 하나의 값을 가져야 한다.",
-        "다수의 주식별자를 분리시킨다."
+        "사원(사번, 이름, 부서코드, 부서명) + 지역(부서명, 위치)",
+        "사원(사번, 이름) + 부서(사번, 부서코드, 부서명, 위치)",
+        "사원(사번, 이름, 부서명, 위치) + 부서(부서코드, 부서명)",
+        "사원(사번, 이름, 부서코드) + 부서(부서코드, 부서명, 위치)"
       ],
-      "correctIndex": 0,
-      "explanation": "3정규화는 2정규형에서 식별자가 아닌 일반 속성끼리의 종속(이행 함수 종속)을 제거하는 것이다(①). ② 는 2정규화(부분 함수 종속 제거), ③ 은 1정규화(원자값) 설명이고, ④ 는 정규화 단계 설명이 아니다."
+      "correctIndex": 3,
+      "explanation": "사번 → 부서코드 → 부서명·위치로 이어지는 이행 함수 종속이 있어 이 테이블은 제2정규형까지만 만족한다. 제3정규형은 주식별자가 아닌 속성끼리의 종속을 떼어 내는 것이므로, 부서코드를 결정자로 하는 부서(부서코드, 부서명, 위치)를 따로 만들고 사원에는 부서코드만 외래키로 남긴다. 다시 조인하면 원래 4행이 그대로 나온다. 정답은 ④번이다. ① 은 부서코드 → 부서명 종속이 사원에 그대로 남고, 부서명이 겹쳐 영업 부서 사원마다 서울·부산이 함께 붙는다. ② 는 부서 테이블 안에 사번 → 부서코드 → 부서명 이행 종속이 그대로 있다. ③ 은 사원에서 부서코드를 빼 버려 부서명으로 다시 조인하면 영업 사원이 D1, D3 에 모두 붙는 가짜 행이 생긴다.",
+      "references": [
+        {
+          "type": "table",
+          "caption": "사원",
+          "headers": [
+            "사번",
+            "이름",
+            "부서코드",
+            "부서명",
+            "위치"
+          ],
+          "rows": [
+            [
+              "101",
+              "김",
+              "D1",
+              "영업",
+              "서울"
+            ],
+            [
+              "102",
+              "이",
+              "D1",
+              "영업",
+              "서울"
+            ],
+            [
+              "103",
+              "박",
+              "D2",
+              "개발",
+              "판교"
+            ],
+            [
+              "104",
+              "최",
+              "D3",
+              "영업",
+              "부산"
+            ]
+          ]
+        },
+        {
+          "type": "text",
+          "content": "함수 종속: 사번 → 이름, 부서코드 / 부서코드 → 부서명, 위치\n부서명은 부서마다 겹칠 수 있다(D1, D3 모두 영업)."
+        }
+      ]
     },
     {
       "_id": "cbt-135",
@@ -5166,15 +5407,21 @@
       "_origNo": 154,
       "subject": "2과목",
       "chapter": "ORDER BY",
-      "title": "다음 SQL 문장에서 틀린 부분은 어디인가?",
+      "title": "PLAYER(PLAYER_NAME, TEAM_ID), TEAM(TEAM_ID, TEAM_NAME) 테이블에 대한 ㉠~㉤ 중 오류가 나는 것을 모두 고른 것은?",
       "options": [
-        "SELECT PLAYER.PLAYER_NAME 선수명, TEAM.TEAM_NAME 팀명",
-        "FROM PLAYER P, TEAM T",
-        "WHERE P.TEAM_ID = T.TEAM_ID",
-        "ORDER BY 선수명;"
+        "㉠, ㉣, ㉤",
+        "㉠, ㉤",
+        "㉠, ㉢, ㉣, ㉤",
+        "㉣, ㉤"
       ],
       "correctIndex": 0,
-      "explanation": "FROM 절에서 PLAYER P, TEAM T 처럼 테이블 별칭을 지정하면 SELECT 절에서도 별칭으로 써야 한다. ① 은 PLAYER.PLAYER_NAME, TEAM.TEAM_NAME 처럼 원래 테이블명을 써서 오류가 난다. ③ 의 조인 조건은 별칭을 바르게 썼고, ④ 의 ORDER BY 는 SELECT 절 컬럼 별칭(선수명)을 쓸 수 있다."
+      "explanation": "㉠ 은 FROM 절에서 PLAYER 에 별칭 P 를 붙였으므로 그 문장 안에서는 테이블 이름 PLAYER 로 칼럼을 가리킬 수 없어 오류다. ㉡ 은 ORDER BY 에서 SELECT 별칭을 쓰는 것이라 정상이다. ㉢ 의 PLAYER_NAME·TEAM_NAME 은 각각 한 테이블에만 있는 칼럼이라 앞에 테이블을 붙이지 않아도 된다. ㉣ 의 TEAM_ID 는 두 테이블에 모두 있어 어느 쪽인지 정할 수 없으므로 오류(열 이름이 모호함)다. ㉤ 은 WHERE 가 SELECT 보다 먼저 처리되어 별칭 선수명을 아직 쓸 수 없으므로 오류다. 정답은 ①번이다. ② 는 ㉣ 처럼 두 테이블에 같은 이름의 칼럼이 있는 경우를 놓친 것이다. ③ 은 조인할 때는 모든 칼럼에 테이블을 붙여야 한다고 생각한 것이다. ④ 는 별칭을 붙여도 원래 테이블 이름을 쓸 수 있다고 본 것이다.",
+      "references": [
+        {
+          "type": "sql",
+          "code": "-- ㉠\nSELECT PLAYER.PLAYER_NAME\nFROM   PLAYER P;\n-- ㉡\nSELECT P.PLAYER_NAME AS 선수명\nFROM   PLAYER P\nORDER BY 선수명;\n-- ㉢\nSELECT PLAYER_NAME, TEAM_NAME\nFROM   PLAYER P, TEAM T\nWHERE  P.TEAM_ID = T.TEAM_ID;\n-- ㉣\nSELECT TEAM_ID\nFROM   PLAYER P, TEAM T\nWHERE  P.TEAM_ID = T.TEAM_ID;\n-- ㉤\nSELECT P.PLAYER_NAME 선수명\nFROM   PLAYER P\nWHERE  선수명 LIKE '김%';"
+        }
+      ]
     },
     {
       "_id": "cbt-155",
