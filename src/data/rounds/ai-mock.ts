@@ -1,5 +1,5 @@
 // Auto-generated from scripts/authored/ai-mock.json
-// AI 생성 모의고사 풀 (기출 변형) · 1171문항
+// AI 생성 모의고사 풀 (기출 변형) · 1170문항
 // ⚠ 직접 편집 금지. ai-mock.json 수정 후 'node scripts/build-quiz-bank.mjs' 재실행.
 import type { QuizQuestion } from '../quizBank';
 
@@ -4061,19 +4061,25 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "1과목",
     "number": 137,
-    "title": "데이터 모델링이 최종적으로 완료된 상태라고 정의할 수 있는, 즉 물리적인 스키마 설계를 하기 전 단계를 가리키는 말은?",
+    "title": "아래 (가)~(다) 작업을 데이터 모델링 단계에 맞게 짝지은 것으로 옳은 것은?",
     "options": [
-      "물리적 데이터 모델링",
-      "논리적 데이터 모델링",
-      "개괄 데이터 모델링",
-      "데이터 모델링"
+      "(가) 논리 (나) 개념 (다) 물리",
+      "(가) 개념 (나) 물리 (다) 논리",
+      "(가) 개념 (나) 논리 (다) 물리",
+      "(가) 개념 (나) 논리 (다) 논리"
     ],
-    "correctIndex": 1,
-    "explanation": "논리적 데이터 모델링의 결과로 얻어지는 논리 데이터 모델은 데이터 모델링이 최종적으로 완료된 상태라고 정의할 수 있다. 즉 물리적인 스키마 설계를 하기 전 단계의 '데이터 모델' 상태를 일컫는 말이다.",
+    "correctIndex": 2,
+    "explanation": "개념적 모델링은 업무 관점에서 핵심 엔터티와 관계를 추려 범위를 정하는 단계다(가). 논리적 모델링은 특정 DBMS 와 상관없이 속성·식별자·관계를 빠짐없이 정하고 정규화를 하는 단계로, 데이터 모델링이 사실상 완성되는 단계다(나). 물리적 모델링은 실제 DBMS 에 맞춰 타입·인덱스·저장 구조를 정하는 단계다(다). 정답은 ③번이다. ① 은 개념과 논리를 바꾸었다. ② 는 DBMS 와 무관한 정규화를 물리 단계로 보았다. ④ 는 DBMS 에 맞춘 타입·저장 구조 결정을 논리 단계로 보았다.",
     "chapter": "데이터 모델 개념",
     "_source": "cbt-mock",
     "_origId": "cbt-093",
-    "_cbtOrigNo": 93
+    "_cbtOrigNo": 93,
+    "references": [
+      {
+        "type": "text",
+        "content": "(가) 업무 담당자와 함께 핵심 엔터티와 그 관계만 그려 시스템 범위를 합의했다.\n(나) 모든 속성과 식별자를 정하고, 정규화로 중복과 이상 현상을 없앴다.\n(다) 사용할 DBMS 에 맞춰 칼럼 데이터 타입·인덱스·테이블스페이스를 정했다."
+      }
+    ]
   },
   {
     "id": 10938,
@@ -12568,27 +12574,6 @@ export const AI_MOCK: QuizQuestion[] = [
     "_source": "sqld-1140",
     "_origId": "sqld-0168",
     "_category": "ER 모델링",
-    "_correctRate": 10
-  },
-  {
-    "id": 11178,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "1과목",
-    "number": 379,
-    "title": "데이터 모델링이 최종적으로 완료된 상태라고 정의할 수 있는, 즉 물리적인 스키마 설계를 하기 전 단계를 가리키는 말은?",
-    "options": [
-      "개념적 데이터 모델링",
-      "개괄 데이터 모델링",
-      "논리적 데이터 모델링",
-      "물리적 데이터 모델링"
-    ],
-    "correctIndex": 2,
-    "explanation": "논리적 데이터 모델링의 결과로 얻어지는 논리 데이터 모델은 데이터 모델링이 최종적으로 완료된 상태라고 정의할 수 있다. 즉 물리적인 스키마 설계를 하기 전 단계의 '데이터 모델' 상태를 일컫는 말이다.",
-    "chapter": "데이터 모델링 기법",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0169",
-    "_category": "데이터 모델링 기법",
     "_correctRate": 10
   },
   {
@@ -28745,20 +28730,57 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 826,
-    "title": "MIN 함수와 동일하게 사용할 수 있는 WINDOW 함수는?",
+    "title": "아래 사원 테이블에 SQL 을 실행했을 때 부서 A 행들의 M, F1, F2 값으로 옳은 것은? (Oracle 기준)",
     "options": [
-      "FIRST_VALUE",
-      "LEAD",
-      "RATIO_TO_REPORT",
-      "LAG"
+      "M: 100, F1: 100, F2: NULL",
+      "M: 100, F1: 100, F2: 300",
+      "M: NULL, F1: 100, F2: NULL",
+      "M: 100, F1: NULL, F2: 300"
     ],
     "correctIndex": 0,
-    "explanation": "FIRST_VALUE 는 파티션 안에서 정렬했을 때 첫 번째 값을 돌려준다. 오름차순(ORDER BY 칼럼 ASC)으로 정렬하면 첫 값이 곧 최솟값이므로 MIN 과 같은 결과를 얻을 수 있다. 같은 원리로 LAST_VALUE 를 쓰면 MAX 와 같은 결과를 얻을 수 있다(프레임을 끝까지 지정해야 함). LAG·LEAD 는 앞·뒤 행 값, RATIO_TO_REPORT 는 합계 대비 비율이다.",
+    "explanation": "MIN 은 NULL 을 빼고 계산해 A 부서는 100 이다. FIRST_VALUE 는 정렬한 파티션의 첫 행 값을 그대로 가져오고 NULL 도 건너뛰지 않는다. Oracle 은 NULL 을 가장 큰 값으로 보아 오름차순에서는 맨 뒤, 내림차순에서는 맨 앞에 둔다. 그래서 F1(오름차순)의 첫 행은 100, F2(내림차순)의 첫 행은 급여가 NULL 인 '다' 라서 NULL 이다. 정답은 ①번이다. ② 는 FIRST_VALUE 가 NULL 을 건너뛴다고 착각한 결과다. ③ 은 MIN 이 NULL 을 가장 작은 값으로 본다고 착각한 결과다. ④ 는 NULL 정렬 위치를 거꾸로 보았다. PostgreSQL 16 에서도 A 부서는 100, 100, NULL 이다.",
     "chapter": "윈도우 함수",
     "_source": "sqld-1140",
     "_origId": "sqld-0756",
     "_category": "윈도우 함수",
-    "_correctRate": 10
+    "_correctRate": 10,
+    "references": [
+      {
+        "type": "table",
+        "caption": "사원",
+        "headers": [
+          "부서",
+          "이름",
+          "급여"
+        ],
+        "rows": [
+          [
+            "A",
+            "가",
+            "100"
+          ],
+          [
+            "A",
+            "나",
+            "300"
+          ],
+          [
+            "A",
+            "다",
+            "NULL"
+          ],
+          [
+            "B",
+            "라",
+            "200"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT 이름,\n  MIN(급여) OVER\n    (PARTITION BY 부서) AS M,\n  FIRST_VALUE(급여) OVER\n    (PARTITION BY 부서\n     ORDER BY 급여) AS F1,\n  FIRST_VALUE(급여) OVER\n    (PARTITION BY 부서\n     ORDER BY 급여 DESC) AS F2\nFROM 사원;"
+      }
+    ]
   },
   {
     "id": 11626,
