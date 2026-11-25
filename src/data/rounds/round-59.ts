@@ -394,19 +394,20 @@ export const ROUND_59: QuizQuestion[] = [
     "round": 59,
     "subject": "2과목",
     "number": 15,
-    "title": "아래 EMP 테이블에서 직원 번호와 해당 직원의 상사 번호를 함께 조회하려 한다. 가장 적절한 SQL은?",
+    "title": "아래 EMP 테이블에 대한 ㉠~㉣ 의 결과를 차례로 나열한 것은?",
     "options": [
-      "SELECT E.EMPNO, M.EMPNO AS MGR_NO FROM EMP E, EMP M WHERE E.MGR = M.EMPNO;",
-      "SELECT E.EMPNO, M.EMPNO AS MGR_NO FROM EMP E JOIN EMP M ON E.EMPNO = M.EMPNO;",
-      "SELECT EMPNO, MGR FROM EMP WHERE MGR = EMPNO;",
-      "SELECT EMPNO, MGR FROM EMP GROUP BY EMPNO;"
+      "6, 7, 9, 4",
+      "6, 7, 7, 4",
+      "7, 7, 9, 4",
+      "6, 7, 9, 5"
     ],
     "correctIndex": 0,
-    "explanation": "셀프 조인을 통해 동일 EMP 테이블을 두 번 참조하여 직원의 MGR과 다른 행의 EMPNO를 매칭해야 한다. ①은 E.MGR = M.EMPNO 조건으로 직원과 상사를 정확히 연결한다. ②는 동일 EMPNO를 매칭하므로 자기 자신만 반환되고, ③은 MGR이 자신의 EMPNO와 같은 행만 찾으므로 일반적으로 결과가 없으며, ④는 GROUP BY만으로는 상사 정보를 얻을 수 없다.",
+    "explanation": "㉠ 은 사원(E)마다 그 관리자(M)를 붙이는 셀프 조인이다. MGR 이 NULL 인 KING 은 짝이 없어 빠지고 6행이다. ㉡ 은 사원 쪽을 기준으로 한 LEFT OUTER JOIN 이라 KING 도 관리자 칸이 NULL 인 채로 남아 7행이다. ㉢ 은 관리자 쪽(M)을 기준으로 부하(E)를 붙인다. 부하가 둘인 KING·BLAKE 는 2행씩, 하나인 JONES·FORD 는 1행씩, 부하가 없는 SMITH·ALLEN·WARD 는 NULL 과 함께 1행씩 남아 2 + 2 + 1 + 1 + 3 = 9행이다. ㉣ 은 NULL 을 빼고 서로 다른 MGR 값(7839, 7566, 7902, 7698)을 세어 4다. 정답은 ①번이다. 6, 7, 7, 4 는 ㉢ 도 ㉡ 과 같다고 본 값이다. 7, 7, 9, 4 는 내부 조인에도 KING 이 남는다고 본 값이다. 6, 7, 9, 5 는 COUNT(DISTINCT) 가 NULL 도 하나로 센다고 본 값이다.",
     "_source": "authored",
     "references": [
       {
         "type": "table",
+        "caption": "EMP",
         "headers": [
           "EMPNO",
           "ENAME",
@@ -414,22 +415,45 @@ export const ROUND_59: QuizQuestion[] = [
         ],
         "rows": [
           [
+            "7839",
+            "KING",
+            "NULL"
+          ],
+          [
             "7566",
             "JONES",
             "7839"
           ],
           [
-            "7839",
-            "KING",
-            "(NULL)"
-          ],
-          [
             "7902",
             "FORD",
             "7566"
+          ],
+          [
+            "7369",
+            "SMITH",
+            "7902"
+          ],
+          [
+            "7698",
+            "BLAKE",
+            "7839"
+          ],
+          [
+            "7499",
+            "ALLEN",
+            "7698"
+          ],
+          [
+            "7521",
+            "WARD",
+            "7698"
           ]
-        ],
-        "caption": "EMP 테이블"
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "-- ㉠\nSELECT COUNT(*) FROM EMP E, EMP M\nWHERE  E.MGR = M.EMPNO;\n-- ㉡\nSELECT COUNT(*)\nFROM   EMP E LEFT OUTER JOIN EMP M\n       ON E.MGR = M.EMPNO;\n-- ㉢\nSELECT COUNT(*)\nFROM   EMP M LEFT OUTER JOIN EMP E\n       ON E.MGR = M.EMPNO;\n-- ㉣\nSELECT COUNT(DISTINCT MGR) FROM EMP;"
       }
     ]
   },
