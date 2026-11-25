@@ -1060,23 +1060,19 @@
     {
       "subject": "2과목",
       "number": 28,
-      "title": "아래 테이블에 대해 수행할 때 오류가 발생하는 INSERT 문은?",
+      "title": "아래 T, SRC 테이블에서 ㉠, ㉡ 을 차례로 실행했을 때(문장마다 자동 커밋) (㉠ 직후 T 행 수, ㉡ 직후 T 행 수) 로 옳은 것은?",
       "options": [
-        "INSERT INTO T VALUES (3, 'C');",
-        "INSERT INTO T VALUES (1, 'D');",
-        "INSERT INTO T VALUES (4, NULL);",
-        "INSERT INTO T (ID, NAME) VALUES (5, 'E');"
+        "(3, 4)",
+        "(2, 4)",
+        "(4, 4)",
+        "(2, 2)"
       ],
       "correctIndex": 1,
-      "explanation": "PRIMARY KEY 는 유일성과 NOT NULL 을 동시에 강제한다. ID 가 이미 1 인 행이 있으므로 ② 는 기본키 중복으로 오류가 난다. ③ 의 NAME 은 기본키가 아니라 NULL 을 넣어도 문제가 없고, ①④ 는 중복되지 않는 새 ID 라 정상 입력된다.",
+      "explanation": "㉠ 은 SRC 의 세 행을 한 문장으로 넣는데, 그중 ID 2 가 T 의 기본키와 겹쳐 오류가 난다. 오류가 나면 그 문장이 넣으려던 행 전체가 취소되므로(문장 단위 원자성) 3, 4 도 들어가지 않고 T 는 2행 그대로다. ㉡ 은 T 에 없는 ID 만 골라 3, 4 를 넣으므로 4행이 된다. 정답은 ②번이다. (3, 4) 는 오류가 나기 전에 들어간 3 은 남는다고 본 값이다. (4, 4) 는 겹치는 행만 건너뛰고 나머지는 들어간다고 본 값이다. (2, 2) 는 ㉡ 도 실패한다고 본 값이다.",
       "references": [
         {
-          "type": "sql",
-          "code": "CREATE TABLE T (\n    ID    NUMBER      PRIMARY KEY,\n    NAME  VARCHAR2(10)\n);"
-        },
-        {
           "type": "table",
-          "caption": "T 테이블 (현재 데이터)",
+          "caption": "T (ID 는 PK)",
           "headers": [
             "ID",
             "NAME"
@@ -1091,6 +1087,32 @@
               "B"
             ]
           ]
+        },
+        {
+          "type": "table",
+          "caption": "SRC",
+          "headers": [
+            "ID",
+            "NAME"
+          ],
+          "rows": [
+            [
+              "3",
+              "C"
+            ],
+            [
+              "2",
+              "X"
+            ],
+            [
+              "4",
+              "D"
+            ]
+          ]
+        },
+        {
+          "type": "sql",
+          "code": "-- ㉠\nINSERT INTO T\nSELECT ID, NAME FROM SRC;\n-- ㉡\nINSERT INTO T\nSELECT ID, NAME FROM SRC\nWHERE  ID NOT IN (SELECT ID FROM T);"
         }
       ]
     },

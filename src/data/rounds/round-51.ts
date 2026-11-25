@@ -1396,20 +1396,20 @@ export const ROUND_51: QuizQuestion[] = [
     "round": 51,
     "subject": "2과목",
     "number": 31,
-    "title": "아래 SQL Server 테이블에 대한 INSERT 결과로 옳은 것은?",
+    "title": "아래 SQL Server 스크립트를 차례로 실행했을 때(문장마다 자동 커밋) 마지막 SELECT 의 결과로 옳은 것은?",
     "options": [
-      "1",
-      "2",
-      "3",
-      "0"
+      "1, 3",
+      "1, 1",
+      "3, 3",
+      "0, NULL"
     ],
     "correctIndex": 0,
-    "explanation": "VALUE 에 CHECK (VALUE >= 3) 제약이 있어 1, 2 를 넣는 INSERT 는 제약 위반으로 실패하고, 3 만 들어간다. IDENTITY 컬럼 MAIN 은 자동으로 채워진다. 따라서 COUNT(*) = 1 이다(①). ② 2 는 CHECK 를 >= 2 처럼 본 값, ③ 3 은 CHECK 를 무시한 값, ④ 0 은 하나라도 실패하면 모두 취소된다고 본 값이다.",
+    "explanation": "VALUE 에 CHECK (VALUE >= 3) 이 걸려 있어 1, 2 를 넣는 INSERT 는 오류가 나고 3 만 들어가므로 COUNT(*) 는 1 이다. IDENTITY 값은 INSERT 를 시도할 때 먼저 하나씩 쓰이고, 그 INSERT 가 실패해도 되돌려 쓰지 않는다. 실패한 두 문장이 1, 2 를 써 버렸기 때문에 들어간 행의 MAIN 은 3 이다. 정답은 ①번이다. ② 는 실패한 INSERT 가 IDENTITY 값을 쓰지 않는다고 본 값이다. ③ 은 CHECK 를 무시하고 세 행이 모두 들어간다고 본 값이다. ④ 는 한 문장이라도 실패하면 앞뒤 문장까지 모두 취소된다고 본 값이다. 문장마다 자동 커밋이므로 실패한 문장만 취소된다.",
     "_source": "authored",
     "references": [
       {
         "type": "sql",
-        "code": "CREATE TABLE T1 (\n  MAIN  INT IDENTITY(1,1),\n  VALUE INT CHECK (VALUE >= 3)\n);\n\nINSERT INTO T1 VALUES(1);\nINSERT INTO T1 VALUES(2);\nINSERT INTO T1 VALUES(3);\n\nSELECT COUNT(*) FROM T1;"
+        "code": "CREATE TABLE T1 (\n  MAIN  INT IDENTITY(1,1),\n  VALUE INT CHECK (VALUE >= 3)\n);\n\nINSERT INTO T1 (VALUE) VALUES (1);\nINSERT INTO T1 (VALUE) VALUES (2);\nINSERT INTO T1 (VALUE) VALUES (3);\n\nSELECT COUNT(*), MAX(MAIN) FROM T1;"
       }
     ]
   },
