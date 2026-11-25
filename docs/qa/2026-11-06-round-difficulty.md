@@ -1303,3 +1303,4 @@ sqld-0312·0319(M494·M501, 데이터베이스 파티션 기법)도 성능 데�
 | 56-2-37 | COUNT() = 2 쿼리 고르기 | COUNT(DISTINCT)·GROUP BY 행 수·HAVING·상관 MAX 서브쿼리 | PostgreSQL 16 → (2, 2, 1, 3) |
 | 57-2-34 | NVL(COUNT(*)) 한 문장 | NVL 을 집계 안/밖에 둘 때, COUNT(NVL), 빈 결과의 COUNT | PostgreSQL 16 → 0, 0, NULL, 2, 0 |
 | 52-2-41 | 모두 매칭되는 4가지 조인 행 수 | 중복 키 세 테이블 LEFT→INNER(외부 조인이 걸러짐), LEFT→LEFT, 다른 키로 LEFT, 괄호로 조인 순서 변경 | PostgreSQL 16 → 2, 5, 6, 5 |
+| 47-2-39 | A·B·C 식별 관계 조인 조건 | 고객·주문·주문상세 mermaid ERD(복합 PK 전파)로 조인 경로·조건 판단 | PostgreSQL 16: 주문상세만으로 고객별 합계 = 주문 경유 합계(C1 220, C2 30), 주문과 고객번호 하나로만 조인하면 4행 → 7행으로 늘어남. 390px 캡처로 ERD 확인 |
