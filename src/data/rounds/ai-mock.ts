@@ -15565,6 +15565,59 @@ export const AI_MOCK: QuizQuestion[] = [
     ]
   },
   {
+    "id": 11275,
+    "examSetId": "ai-mock",
+    "examLabel": "모의고사",
+    "subject": "2과목",
+    "number": 476,
+    "title": "아래 사원 테이블에 SQL 을 실행했을 때 EMPNO 가 2 인 행의 '가', '나' 값으로 옳은 것은?",
+    "options": [
+      "가: 300, 나: 300",
+      "가: 500, 나: 300",
+      "가: 300, 나: 500",
+      "가: 500, 나: 500"
+    ],
+    "correctIndex": 1,
+    "explanation": "RANGE 는 정렬 값이 같은 행(동료 행)을 한 묶음으로 보아, 현재 행과 급여가 같은 행까지 모두 윈도우에 넣는다. EMPNO 2 의 급여 200 은 EMPNO 3 과 같으므로 가는 100 + 200 + 200 = 500 이다. ROWS 는 물리적인 행 단위로 끊으므로, 급여·EMPNO 순으로 정렬했을 때 EMPNO 2 까지인 100 + 200 = 300 이 나는 값이다. 정답은 ②번이다. ① 은 RANGE 도 행 단위로 끊는다고 착각한 결과다. ③ 은 두 방식을 거꾸로 적용했다. ④ 는 ROWS 도 같은 급여를 묶는다고 착각한 결과다. EMPNO 3 은 가, 나 모두 500 이다.",
+    "chapter": "윈도우 함수",
+    "_source": "sqld-1140",
+    "_origId": "sqld-0291",
+    "_category": "윈도우 함수",
+    "_correctRate": 10,
+    "references": [
+      {
+        "type": "table",
+        "caption": "사원",
+        "headers": [
+          "EMPNO",
+          "급여"
+        ],
+        "rows": [
+          [
+            "1",
+            "100"
+          ],
+          [
+            "2",
+            "200"
+          ],
+          [
+            "3",
+            "200"
+          ],
+          [
+            "4",
+            "300"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "SELECT EMPNO,\n  SUM(급여) OVER (ORDER BY 급여\n    RANGE BETWEEN UNBOUNDED\n    PRECEDING AND CURRENT ROW) AS 가,\n  SUM(급여) OVER (ORDER BY 급여, EMPNO\n    ROWS BETWEEN UNBOUNDED\n    PRECEDING AND CURRENT ROW) AS 나\nFROM 사원;"
+      }
+    ]
+  },
+  {
     "id": 11276,
     "examSetId": "ai-mock",
     "examLabel": "모의고사",
@@ -16864,20 +16917,50 @@ export const AI_MOCK: QuizQuestion[] = [
     "examLabel": "모의고사",
     "subject": "2과목",
     "number": 509,
-    "title": "다음 중 LIKE문에서 세 번째 문자가 'K'인 문자열을 조회하는 것으로 가장 올바른 것은?",
+    "title": "아래 코드 테이블에서 (가), (나) 조건을 만족하는 행 수로 옳은 것은?",
     "options": [
-      "SELECT * FROM EMP WHERE ENAME LIKE '__K%'",
-      "SELECT * FROM EMP WHERE ENAME LIKE '[__K]%'",
-      "SELECT * FROM EMP WHERE ENAME LIKE '%K%'",
-      "SELECT * FROM EMP WHERE ENAME LIKE 'K%'"
+      "(가) 3 / (나) 2",
+      "(가) 2 / (나) 2",
+      "(가) 3 / (나) 3",
+      "(가) 3 / (나) 5"
     ],
     "correctIndex": 0,
-    "explanation": "① 밑줄(_)은 아무 문자 한 개를 뜻하므로 '__K%'는 앞의 두 글자는 무엇이든 되고 세 번째 글자가 K인 문자열이다.\n②(SQL Server 문법) 첫 번째 문자가 _ 또는 K인 모든 문자열을 검색하는 조건이다.\n③K 문자가 포함된 모든 문자열\n④K로 시작하는 문자열",
+    "explanation": "_ 는 아무 문자 한 개, % 는 0개 이상의 문자를 뜻한다. (가) '__K%' 는 세 번째 글자가 K 인 값으로 ABK1, A_K2, AKK 3행이다. AKK 처럼 K 뒤에 글자가 없어도 % 가 0글자와도 맞으므로 포함된다. (나) 는 ESCAPE '\\' 로 \\ 뒤의 _ 를 진짜 밑줄 문자로 바꾸었으므로, 두 번째 글자가 밑줄인 A_K2, K_ 2행이다. 정답은 ①번이다. ② 는 % 가 한 글자 이상이어야 한다고 보고 AKK 를 뺐다. ③ 은 (나) 를 밑줄이 어디에든 있는 값으로 읽어 AB_K 까지 셌다. ④ 는 ESCAPE 를 무시해 '__%' 처럼 두 글자 이상인 값을 모두 셌다.",
     "chapter": "DML",
     "_source": "sqld-1140",
     "_origId": "sqld-0330",
     "_category": "DML",
-    "_correctRate": 10
+    "_correctRate": 10,
+    "references": [
+      {
+        "type": "table",
+        "caption": "코드",
+        "headers": [
+          "C"
+        ],
+        "rows": [
+          [
+            "ABK1"
+          ],
+          [
+            "A_K2"
+          ],
+          [
+            "AKK"
+          ],
+          [
+            "K_"
+          ],
+          [
+            "AB_K"
+          ]
+        ]
+      },
+      {
+        "type": "sql",
+        "code": "-- (가)\nWHERE C LIKE '__K%'\n\n-- (나)\nWHERE C LIKE '_\\_%' ESCAPE '\\'"
+      }
+    ]
   },
   {
     "id": 11309,
@@ -19390,27 +19473,6 @@ export const AI_MOCK: QuizQuestion[] = [
     "_source": "sqld-1140",
     "_origId": "sqld-0416",
     "_category": "집합 연산자",
-    "_correctRate": 10
-  },
-  {
-    "id": 11380,
-    "examSetId": "ai-mock",
-    "examLabel": "모의고사",
-    "subject": "2과목",
-    "number": 581,
-    "title": "다음은 WINDOW FUNCTION에 대한 사용 방법이다. 가장 올바르지 않은 SQL문은 무엇인가?",
-    "options": [
-      "SUM(급여) OVER(PARTITION BY JOB ORDER BY JOB RANGE BETWEEN UNBOUNDED\nPRECEDING AND CURRENT ROW) SAL",
-      "SUM(급여) OVER(PARTITION BY JOB ORDER BY EMPNO RANGE BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED PRECEDING) SAL",
-      "SUM(급여) OVER(PARTITION BY JOB ORDER BY EMPNO RANGE BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING) SAL",
-      "SUM(급여)  OVER()"
-    ],
-    "correctIndex": 1,
-    "explanation": "윈도우 범위 RANGE BETWEEN 시작 AND 끝 에서 UNBOUNDED PRECEDING(파티션 첫 행)은 시작에만 쓸 수 있다. ② 처럼 끝에 UNBOUNDED PRECEDING 을 쓰면 오류다. ①③ 은 처음부터 현재 행·끝까지, ④ OVER() 는 전체 합계로 모두 정상이다.",
-    "chapter": "윈도우 함수",
-    "_source": "sqld-1140",
-    "_origId": "sqld-0417",
-    "_category": "윈도우 함수",
     "_correctRate": 10
   },
   {

@@ -1352,3 +1352,5 @@ sqld-0312·0319(M494·M501, 데이터베이스 파티션 기법)도 성능 데�
 | sqld-0150 | 본질/인조 분류 이름 고르기 | 주문상세 인조키 도입 상황에서 본질·인조·내부·외부 식별자 기준을 섞은 설명 판단 | PostgreSQL 16 → 인조 PK 만 둔 테이블에 같은 (주문번호, 상품번호) 2행 입력됨, UNIQUE 추가 시 오류. 390px 화면 확인. 사본 없음 |
 | sqld-0052 | DEPENDENT 이름 고르기 | 요구사항 넷에 CASCADE·RESTRICT·DEPENDENT·SET NULL 짝짓기 (AUTOMATIC·DEFAULT 함정) | PostgreSQL 16 → 없는 부모값 입력 오류, RESTRICT 삭제 오류, CASCADE 후 0행, SET NULL 확인. 사본 없음 |
 | sqld-0094 | USING 문법 오류 고르기 | NULL 구장 팀이 있는 표에서 내부 조인 셋과 (+) 외부 조인의 행 수 비교 | PostgreSQL 16 에서 (+) → LEFT JOIN 으로 옮겨 실행: 2, 2, 2, 3행. 390px 화면 확인. 사본 없음 |
+| sqld-0291 | 윈도우 프레임 문법 오류 고르기 | 급여 동률이 있는 표에서 RANGE 와 ROWS 누적합 값 비교 | PostgreSQL 16 → EMPNO 2: RANGE 500, ROWS 300. 390px 화면 확인. 사본 없음 |
+| sqld-0330 | LIKE 세 번째 글자 패턴 고르기 | '__K%' 와 ESCAPE 로 밑줄 문자를 찾는 조건의 행 수 (% 0글자 포함) | PostgreSQL 16 → (가) 3, (나) 2. 390px 화면 확인. 사본 없음 |
