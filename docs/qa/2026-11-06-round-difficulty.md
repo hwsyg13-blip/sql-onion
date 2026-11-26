@@ -1427,3 +1427,5 @@ sqld-0312·0319(M494·M501, 데이터베이스 파티션 기법)도 성능 데�
 | sqld-1018 (+ 사본 1291) | 도메인 무결성 방법 고르기 | PK·NOT NULL·CHECK·FK 가 있는 테이블에 INSERT 넷을 넣어 개체·도메인·참조 무결성 위반 짝짓기 | PostgreSQL 16 → (가) PK 중복, (나) CHECK, (다) FK, (라) NOT NULL 위반. 390px 화면 확인 |
 | 62-2-16 | 급여가 모두 다른 표에서 순서 오류 SQL 고르기 | 동점이 있는 표로 TOP·WITH TIES·ROWNUM·FETCH FIRST 의 행 수와 끼어드는 행 판단 | PostgreSQL 16 → WITH TIES 4행(나, 바, 다, 라), ROWNUM 방식 나, 다, 가. 390px 화면 확인 |
 | 62-2-50 | 롤 권한 설명 고르기 | 롤 안의 롤 + 롤에서 REVOKE 뒤 사용자별 최종 권한 | PostgreSQL 16 롤 구성 → 철수 SELECT·DELETE 참, INSERT 거짓 / 영희 SELECT 만. 390px 화면 확인 |
+| 54-2-19 | 동명 테이블 칼럼 지정 오류 고르기 | 두 스키마 동명 테이블에서 오류 나는 SQL + 별칭 조인(조건 없음)의 결과 행 수 | PostgreSQL 16 → (가) table reference is ambiguous, (라) 6행. 390px 화면 확인 |
+| 54-1-8 | 인조 식별자 이름 고르기 | 인조 PK 도입 시 맞는 설명 모두 고르기 (원래 키 UNIQUE 필요, 외래키 단순화) | PostgreSQL 16 → 상세ID PK 만이면 같은 세 값 2행 입력됨, 그 상태로는 UNIQUE 생성 불가. 390px 화면 확인 |
