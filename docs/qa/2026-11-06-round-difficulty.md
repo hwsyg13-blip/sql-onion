@@ -1431,3 +1431,5 @@ sqld-0312·0319(M494·M501, 데이터베이스 파티션 기법)도 성능 데�
 | 54-1-8 | 인조 식별자 이름 고르기 | 인조 PK 도입 시 맞는 설명 모두 고르기 (원래 키 UNIQUE 필요, 외래키 단순화) | PostgreSQL 16 → 상세ID PK 만이면 같은 세 값 2행 입력됨, 그 상태로는 UNIQUE 생성 불가. 390px 화면 확인 |
 | 57-2-12 | SUBSTR 결과 다른 것 고르기 | SUBSTR 시작 0·범위 밖·음수 시작·음수/0 길이 중 NULL 인 것 모두 고르기 | PostgreSQL 16 에 Oracle SUBSTR 규칙 함수를 만들어 실행 → 'abc', NULL, 'fg', NULL, NULL. 390px 화면 확인 |
 | 57-1-4 | 파생 속성 알맞은 것 하나 | 저장해 둘 계산값 모두 고르기 (주문 당시 금액처럼 다시 계산 못 하는 값 포함) | 교재 정의 대조. 390px 화면 확인 |
+| 60-2-19 | REGEXP_REPLACE 결과 하나 | 맞는 행·안 맞는 행(그대로)·일부만 맞는 행(그 부분만) 세 결과 | PostgreSQL 16 regexp_replace → 25.02.2026 / 2026/2/5 / 메모 25.02.2026 끝. 390px 화면 확인 |
+| 60-2-49 | CHECK 이름 고르기 | CHECK (SEX IN ('M','F')) 에 대소문자·NULL·길이 초과 INSERT 차례 실행 | PostgreSQL 16 → 'm' CHECK 위반, 'MF' value too long, NULL 통과, a·c·e 남음. 390px 화면 확인 |

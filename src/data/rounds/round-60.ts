@@ -781,20 +781,38 @@ export const ROUND_60: QuizQuestion[] = [
     "round": 60,
     "subject": "2과목",
     "number": 19,
-    "title": "다음 SQL의 실행 결과로 옳은 것은?",
+    "title": "아래 T 테이블에 SQL 을 실행했을 때 세 행의 결과를 차례대로 적은 것으로 옳은 것은? (Oracle 기준)",
     "options": [
-      "2026/02/25",
-      "25/02/2026",
-      "02/25/2026",
-      "2026-02-25"
+      "25.02.2026 / 5.2.2026 / 25.02.2026",
+      "25.02.2026 / 2026/2/5 / 메모 25.02.2026 끝",
+      "25.02.2026 / NULL / 메모 25.02.2026 끝",
+      "25.02.2026 / 2026/2/5 / 25.02.2026"
     ],
     "correctIndex": 1,
-    "explanation": "패턴의 세 괄호가 각각 연(2026), 월(02), 일(25)을 캡처하고, 바꿀 문자열 '\\3/\\2/\\1' 은 셋째·둘째·첫째 그룹 순서로 이어 붙인다. 따라서 '25/02/2026' 이다(②). ① 은 그대로, ③ 은 월/일/연, ④ 는 구분자를 바꾼 것으로 패턴과 맞지 않다.",
+    "explanation": "세 괄호가 연·월·일을 붙잡고, 바꿀 문자열 '\\3.\\2.\\1' 이 일.월.연 순서로 다시 이어 붙인다. 첫 행은 25.02.2026 이 된다. 둘째 행은 월·일이 한 자리라 [0-9]{2} 와 맞지 않으므로 바꿀 부분이 없고, REGEXP_REPLACE 는 이때 원래 문자열을 그대로 돌려준다(NULL 이 아니다). 셋째 행은 패턴과 맞는 가운데 부분만 바뀌고 앞뒤 '메모 ', ' 끝' 은 그대로 남는다. 정답은 ②번이다. ① 은 한 자리 숫자도 맞는다고 착각했고, ④ 는 맞는 부분만이 아니라 문자열 전체가 바뀐다고 보았다. ③ 은 맞는 부분이 없으면 NULL 이 된다고 착각한 결과다. PostgreSQL 16 의 REGEXP_REPLACE 로 실행해도 같은 세 값이 나온다.",
     "_source": "authored",
     "references": [
       {
+        "type": "table",
+        "caption": "T",
+        "headers": [
+          "D"
+        ],
+        "rows": [
+          [
+            "2026/02/25"
+          ],
+          [
+            "2026/2/5"
+          ],
+          [
+            "메모 2026/02/25 끝"
+          ]
+        ]
+      },
+      {
         "type": "sql",
-        "code": "SELECT REGEXP_REPLACE(\n  '2026/02/25',\n  '([0-9]{4})/([0-9]{2})/([0-9]{2})',\n  '\\3/\\2/\\1'\n)\nFROM DUAL;"
+        "code": "SELECT REGEXP_REPLACE(D,\n  '([0-9]{4})/([0-9]{2})/([0-9]{2})',\n  '\\3.\\2.\\1')\nFROM T;"
       }
     ]
   },
@@ -2163,20 +2181,20 @@ export const ROUND_60: QuizQuestion[] = [
     "round": 60,
     "subject": "2과목",
     "number": 49,
-    "title": "아래 DDL에서 성별 컬럼에 'M' 또는 'F'만 허용하도록 강제하는 제약 조건은?",
+    "title": "아래 MEMBER 테이블에 ㉠~㉤ 을 순서대로 하나씩 실행할 때 성공하는 INSERT 만 모두 고른 것은? (오류가 난 문장만 실패한다)",
     "options": [
-      "NOT NULL",
-      "CHECK",
-      "PRIMARY KEY",
-      "FOREIGN KEY"
+      "㉠, ㉤",
+      "㉠, ㉢, ㉤",
+      "㉠, ㉡, ㉤",
+      "㉠, ㉡, ㉢, ㉤"
     ],
     "correctIndex": 1,
-    "explanation": "특정 컬럼이 지정한 값 집합에 한정되도록 강제하려면 CHECK 제약 조건을 사용한다. ① NOT NULL은 NULL 금지만, ③ PRIMARY KEY는 유일성+NOT NULL을, ④ FOREIGN KEY는 다른 테이블 참조를 강제할 뿐 값 도메인을 제한하지 못한다.",
+    "explanation": "CHECK 는 조건이 거짓일 때만 막고, 결과가 UNKNOWN 이면 통과시킨다. ㉢ 의 NULL 은 NULL IN ('M', 'F') 가 UNKNOWN 이라 들어간다(막으려면 NOT NULL 을 함께 건다). ㉡ 의 소문자 'm' 은 'M' 과 다른 값이라 CHECK 위반이고, ㉣ 의 'MF' 는 CHAR(1) 보다 길어 값이 너무 크다는 오류가 난다. ㉠·㉤ 은 정상이다. 정답은 ②번이다. ① 은 CHECK 가 NULL 도 막는다고 착각했다. ③ 과 ④ 는 문자 비교가 대소문자를 구분하지 않는다고 보았다. PostgreSQL 16 에서도 ㉡ 은 CHECK 위반, ㉣ 은 value too long 오류이고 a, c, e 가 남는다.",
     "_source": "authored",
     "references": [
       {
         "type": "sql",
-        "code": "CREATE TABLE MEMBER (\n  ID   VARCHAR2(10) PRIMARY KEY,\n  NAME VARCHAR2(30) NOT NULL,\n  SEX  CHAR(1)\n       (  ?  ) (SEX IN ('M','F'))\n);"
+        "code": "CREATE TABLE MEMBER (\n  ID  VARCHAR2(10) PRIMARY KEY,\n  SEX CHAR(1)\n      CHECK (SEX IN ('M', 'F'))\n);\n㉠ INSERT … VALUES ('a', 'M');\n㉡ INSERT … VALUES ('b', 'm');\n㉢ INSERT … VALUES ('c', NULL);\n㉣ INSERT … VALUES ('d', 'MF');\n㉤ INSERT … VALUES ('e', 'F');"
       }
     ]
   },
