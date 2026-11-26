@@ -245,3 +245,4 @@
 - (11-25 밤) verify-sql-results 는 SQLite(node:sqlite)라 Oracle 실행 오류 일부를 재현하지 못한다(스칼라 서브쿼리 2행 → 첫 행 반환). 정답이 '오류' 보기면 SQLite 쪽은 건너뛰고 verify-sql-pg 의 '오류가 정답' 처리에 맡긴다. 이론 화면 주소는 /learn/cXXX (정적 /theory/cXXX/ 는 색인용).
 - (11-25 밤) 7일 창 배분: 큰 대화 맥락에서는 한 턴마다 5시간 창이 0.005~0.01 씩 오르고 7일 창도 함께 오른다(이번 실행 0.11→0.21). 7일 초기화까지 남은 정기 실행 수로 나눠 한 실행당 7일 창 몫을 정해 두고, 사용자 기간 지시(예: 11-30 까지 매 실행 2문항)가 막히지 않게 한다. 5시간 창이 곧 초기화되더라도 7일 창 몫을 넘기면 멈춘다.
 - (11-25 밤) 1140 풀의 쉬운 정의형은 상향한 문항과 개념이 같으면 같은 내용으로 맞춰 묶는 '통합'이 빠르고 효과가 크다(한 번에 수십 개). 화면에 실제로 나오는지는 src/data/rounds/ai-mock.ts 에 제목이 있는지로 확인(범위 밖·사본은 이미 빠져 있을 수 있음).
+- (11-26) wt-maint 동기화는 반드시 'git fetch origin maintenance/maintainer-agent:refs/remotes/origin/maintenance/maintainer-agent' 처럼 받을 곳까지 적는다. 받을 곳 없이 fetch 하면 FETCH_HEAD 만 바뀌어, 이어서 reset --hard 하면 옛 커밋으로 돌아간다.
