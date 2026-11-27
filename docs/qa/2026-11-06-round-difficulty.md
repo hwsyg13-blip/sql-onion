@@ -1433,3 +1433,5 @@ sqld-0312·0319(M494·M501, 데이터베이스 파티션 기법)도 성능 데�
 | 57-1-4 | 파생 속성 알맞은 것 하나 | 저장해 둘 계산값 모두 고르기 (주문 당시 금액처럼 다시 계산 못 하는 값 포함) | 교재 정의 대조. 390px 화면 확인 |
 | 60-2-19 | REGEXP_REPLACE 결과 하나 | 맞는 행·안 맞는 행(그대로)·일부만 맞는 행(그 부분만) 세 결과 | PostgreSQL 16 regexp_replace → 25.02.2026 / 2026/2/5 / 메모 25.02.2026 끝. 390px 화면 확인 |
 | 60-2-49 | CHECK 이름 고르기 | CHECK (SEX IN ('M','F')) 에 대소문자·NULL·길이 초과 INSERT 차례 실행 | PostgreSQL 16 → 'm' CHECK 위반, 'MF' value too long, NULL 통과, a·c·e 남음. 390px 화면 확인 |
+| 60-2-26 | ROWS 축약형 같은 뜻 고르기 | 동점이 있는 SAL 로 100, 500, 500, 800 이 나오는 범위 고르기 (RANGE·ROWS·1 PRECEDING·뒤로 범위) | PostgreSQL 16 → RANGE 100,500,500,800 / ROWS 100,300,500,800 / 1 PRECEDING NULL,100,300,500 / CURRENT~FOLLOWING 800,700,700,300. 390px 화면 확인 |
+| 60-2-43 | CHECK 실패 후 COUNT | COUNT 와 남은 행 ID (실패한 INSERT 도 IDENTITY 번호 소모) | PostgreSQL 16 IDENTITY → COUNT 1, MAX(ID) 3. 390px 화면 확인 |

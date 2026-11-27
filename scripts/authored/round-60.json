@@ -1040,19 +1040,19 @@
     {
       "subject": "2과목",
       "number": 26,
-      "title": "아래 쿼리의 `ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW` 절과 동등한 의미를 가진 절은?",
+      "title": "SAL 이 100, 200, 200, 300 인 EMP 테이블에 아래 SQL 을 실행했다. ㉠ 에 넣었을 때 누적합계가 100, 500, 500, 800 으로 나오는 것은?",
       "options": [
+        "RANGE UNBOUNDED PRECEDING",
         "ROWS UNBOUNDED PRECEDING",
         "ROWS BETWEEN UNBOUNDED PRECEDING AND 1 PRECEDING",
-        "RANGE UNBOUNDED PRECEDING",
         "RANGE BETWEEN CURRENT ROW AND UNBOUNDED FOLLOWING"
       ],
       "correctIndex": 0,
-      "explanation": "ROWS UNBOUNDED PRECEDING은 윈도우 시작점만 명시한 축약형으로, 종료점이 생략되면 기본값인 CURRENT ROW가 적용된다. 즉 ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW와 동등하다. ②는 종료점이 1 PRECEDING이라 누적합 의미가 다르고, ③·④는 RANGE 모드라 동일 정렬 키를 가진 행을 묶어 처리하므로 ROWS 기반과 결과가 다를 수 있다.",
+      "explanation": "RANGE 는 정렬 값이 같은 행(200, 200)을 한 묶음으로 보아, 현재 행과 같은 값까지 모두 더한다. 그래서 두 200 행이 모두 100 + 200 + 200 = 500 이 되어 100, 500, 500, 800 이다. 정답은 ①번이다. ② ROWS UNBOUNDED PRECEDING 은 'ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW' 와 같은 말로, 행 하나씩 끊어 100, 300, 500, 800 이 된다. ③ 은 현재 행을 빼고 앞 행까지만 더해 NULL, 100, 300, 500 이다. ④ 는 현재 값부터 끝까지 더해 800, 700, 700, 300 이다. OVER (ORDER BY SAL) 처럼 범위를 생략해도 기본값이 RANGE UNBOUNDED PRECEDING 이라 ① 과 같다. PostgreSQL 16 에서도 네 결과가 그대로 나온다.",
       "references": [
         {
           "type": "sql",
-          "code": "SELECT SAL,\n       SUM(SAL) OVER (ORDER BY SAL\n         ROWS BETWEEN UNBOUNDED\n              PRECEDING\n              AND CURRENT ROW)\n       AS 누적합계\nFROM   EMP;"
+          "code": "SELECT SAL,\n       SUM(SAL) OVER (ORDER BY SAL\n         ㉠ ) AS 누적합계\nFROM   EMP;"
         }
       ]
     },
@@ -1687,19 +1687,19 @@
     {
       "subject": "2과목",
       "number": 43,
-      "title": "아래 CREATE TABLE과 INSERT 수행 후 최종 COUNT 값으로 옳은 것은?",
+      "title": "아래 CREATE TABLE 과 INSERT 를 수행한 뒤 COUNT(*) 와 남은 행의 ID 로 옳은 것은? (실패한 문장만 취소된다)",
       "options": [
-        "0",
-        "1",
-        "2",
-        "3"
+        "COUNT 1 / ID 1",
+        "COUNT 1 / ID 3",
+        "COUNT 2 / ID 2",
+        "COUNT 0 / 행 없음"
       ],
       "correctIndex": 1,
-      "explanation": "VAL 에 CHECK (VAL > 0) 제약이 있으므로 -1 과 0 을 넣는 INSERT 는 제약 위반으로 실패하고, 1 만 들어간다. ID 는 IDENTITY 로 자동 생성된다. 실패한 문장은 그 문장만 취소되고 COMMIT 으로 1 이 확정되어 COUNT(*) = 1 이다(②). ① 0 은 한 문장이 실패하면 트랜잭션 전체가 취소된다고 본 값이고, ③ 2 는 0 도 CHECK (VAL > 0) 를 통과한다고 본 값, ④ 3 은 CHECK 를 무시한 값이다.",
+      "explanation": "CHECK (VAL > 0) 때문에 -1 과 0 을 넣는 INSERT 는 실패하고, 실패한 그 문장만 취소된다. 그래서 1 하나만 남아 COUNT 는 1 이다. IDENTITY 는 내부 시퀀스에서 번호를 먼저 받은 뒤 제약을 검사하므로, 실패한 두 문장도 1, 2 를 써 버렸다. 마지막 INSERT 는 3 을 받는다. 정답은 ②번이다. ① 은 실패한 문장은 번호를 쓰지 않는다고 착각한 결과다. ③ 은 0 도 CHECK (VAL > 0) 를 통과한다고 보았다. ④ 는 한 문장이 실패하면 트랜잭션 전체가 취소된다고 착각한 결과다. 시퀀스로 받은 번호는 롤백해도 되돌아가지 않아 중간이 비는 일이 흔하다. PostgreSQL 16 의 IDENTITY 로 실행해도 COUNT 1, ID 3 이다.",
       "references": [
         {
           "type": "sql",
-          "code": "CREATE TABLE T (\n  ID  NUMBER GENERATED ALWAYS\n      AS IDENTITY\n      (START WITH 1 INCREMENT BY 1),\n  VAL NUMBER CHECK (VAL > 0)\n);\n\nINSERT INTO T(VAL) VALUES (-1);\nINSERT INTO T(VAL) VALUES ( 0);\nINSERT INTO T(VAL) VALUES ( 1);\nCOMMIT;\n\nSELECT COUNT(*) FROM T;"
+          "code": "CREATE TABLE T (\n  ID  NUMBER GENERATED ALWAYS\n      AS IDENTITY\n      (START WITH 1 INCREMENT BY 1),\n  VAL NUMBER CHECK (VAL > 0)\n);\nINSERT INTO T(VAL) VALUES (-1);\nINSERT INTO T(VAL) VALUES ( 0);\nINSERT INTO T(VAL) VALUES ( 1);\nCOMMIT;\nSELECT COUNT(*), MAX(ID) FROM T;"
         }
       ]
     },
