@@ -1437,3 +1437,5 @@ sqld-0312·0319(M494·M501, 데이터베이스 파티션 기법)도 성능 데�
 | 60-2-43 | CHECK 실패 후 COUNT | COUNT 와 남은 행 ID (실패한 INSERT 도 IDENTITY 번호 소모) | PostgreSQL 16 IDENTITY → COUNT 1, MAX(ID) 3. 390px 화면 확인 |
 | 59-2-49 | NOCYCLE 키워드 빈칸 | 순환 데이터에 NOCYCLE 전개 결과 행 수와 CONNECT_BY_ISCYCLE = 1 인 행의 LEVEL | PostgreSQL 16 CYCLE 절 → 나·다·라 후 나가 순환 표시(LEVEL 4), 길을 연 행 = 라(LEVEL 3). 390px 화면 확인 |
 | 59-1-5 | 파생 속성 설명 틀린 것 | 넣기·지우기만 동기화한 파생 속성에서 금액 수정 후 어긋나는 값 | PostgreSQL 16 같은 순서 실행 → 누적구매금액 200, SUM 250. 390px 화면 확인 |
+| 58-2-21 | ROLLUP·CUBE 설명 고르기 | JOB 이 실제 NULL 인 행이 섞인 ROLLUP 에서 GROUPING 합 > 0 인 행 수·합계 | PostgreSQL 16 → ROLLUP 4행(8000·7000·2000·17000), CUBE 7행. 390px 화면 확인 |
+| 58-2-22 | NTILE(2) 결과 | NTILE(3) 에서 5행(2+2+1)·2행(묶음 3 못 채움) 부서 결과 | PostgreSQL 16 → 1, 1, 2, 2, 3, 1, 2 (PARTITION 없으면 1, 1, 1, 2, 2, 3, 3). 390px 화면 확인 |
