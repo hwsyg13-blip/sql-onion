@@ -15,8 +15,7 @@
   "current_mission": null,
   "my_prs": [
     195,
-    324,
-    335
+    324
   ],
   "merged_prs": [
     197,
@@ -335,5 +334,5 @@
     "db_plan": "결제 붙일 때 Vercel Storage(Marketplace) Postgres(Neon) 추가, DATABASE_URL 하나로 접속 — 이관 쉽게 일반 SQL. 카카오 앱(1656582) 바꾸지 말 것(회원번호가 앱별)",
     "icons_pr": "#325 예전 동그라미 양파 아이콘 → 메인 로고 양파(파비콘·홈 화면·검색 로고). 예전 아이콘 사용 금지(사용자 11-18)"
   },
-  "last_merge": "2026-11-26 #334 (release: #332, #333) f644b2b, prod success"
+  "last_merge": "2026-11-27 #335 squash dd77c59, prod success"
 }
