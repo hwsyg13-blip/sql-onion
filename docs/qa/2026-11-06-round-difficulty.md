@@ -1439,3 +1439,5 @@ sqld-0312·0319(M494·M501, 데이터베이스 파티션 기법)도 성능 데�
 | 59-1-5 | 파생 속성 설명 틀린 것 | 넣기·지우기만 동기화한 파생 속성에서 금액 수정 후 어긋나는 값 | PostgreSQL 16 같은 순서 실행 → 누적구매금액 200, SUM 250. 390px 화면 확인 |
 | 58-2-21 | ROLLUP·CUBE 설명 고르기 | JOB 이 실제 NULL 인 행이 섞인 ROLLUP 에서 GROUPING 합 > 0 인 행 수·합계 | PostgreSQL 16 → ROLLUP 4행(8000·7000·2000·17000), CUBE 7행. 390px 화면 확인 |
 | 58-2-22 | NTILE(2) 결과 | NTILE(3) 에서 5행(2+2+1)·2행(묶음 3 못 채움) 부서 결과 | PostgreSQL 16 → 1, 1, 2, 2, 3, 1, 2 (PARTITION 없으면 1, 1, 1, 2, 2, 3, 3). 390px 화면 확인 |
+| 61-2-38 | NOT IN + IN (100, NULL) 결과 하나 | IN (NULL) / IS NULL / NOT EXISTS 세 SQL 의 행 수 | PostgreSQL 16 → 2, 0, 3. 390px 화면 확인 |
+| 61-2-46 | 0건 MIN + 숫자 = NULL | 0건 집계 + NVL, COUNT(SAL) 의 NULL 제외까지 합친 값 | PostgreSQL 16(COALESCE) → 2801. 390px 화면 확인 |
