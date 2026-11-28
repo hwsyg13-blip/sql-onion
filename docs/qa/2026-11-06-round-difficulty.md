@@ -1441,3 +1441,5 @@ sqld-0312·0319(M494·M501, 데이터베이스 파티션 기법)도 성능 데�
 | 58-2-22 | NTILE(2) 결과 | NTILE(3) 에서 5행(2+2+1)·2행(묶음 3 못 채움) 부서 결과 | PostgreSQL 16 → 1, 1, 2, 2, 3, 1, 2 (PARTITION 없으면 1, 1, 1, 2, 2, 3, 3). 390px 화면 확인 |
 | 61-2-38 | NOT IN + IN (100, NULL) 결과 하나 | IN (NULL) / IS NULL / NOT EXISTS 세 SQL 의 행 수 | PostgreSQL 16 → 2, 0, 3. 390px 화면 확인 |
 | 61-2-46 | 0건 MIN + 숫자 = NULL | 0건 집계 + NVL, COUNT(SAL) 의 NULL 제외까지 합친 값 | PostgreSQL 16(COALESCE) → 2801. 390px 화면 확인 |
+| 56-2-15 | KEEP FIRST 결과 하나 | 그룹별 KEEP FIRST·LAST + 정렬 칼럼 NULL(NULLS LAST) | PostgreSQL 16 그룹별 DENSE_RANK 로 재현 → A 20·30, B 50·5. 390px 화면 확인 |
+| 56-2-35 | 카티션 곱 10 × 10 | 카티션 곱·= 조인·<> 조인 행 수 (중복 값, NULL) | PostgreSQL 16 → 12, 3, 6. 390px 화면 확인 |

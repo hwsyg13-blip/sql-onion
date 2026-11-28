@@ -492,49 +492,60 @@
     {
       "subject": "2과목",
       "number": 15,
-      "title": "아래 쿼리의 결과로 옳은 것은?",
+      "title": "아래 쿼리의 결과에서 그룹별 F, L 값으로 옳은 것은? (Oracle 기준)",
       "options": [
-        "10",
-        "20",
-        "40",
-        "60"
+        "A: 20, 30 / B: 50, 40",
+        "A: 20, 30 / B: 50, 5",
+        "A: 20, 30 / B: 5, 40",
+        "A: 10, 30 / B: 40, 5"
       ],
       "correctIndex": 1,
-      "explanation": "KEEP (DENSE_RANK FIRST ORDER BY COL1) 은 COL1 오름차순으로 가장 앞 순위인 행들(COL1 = 1 인 두 행)만 남긴 뒤 MAX(COL2)를 구한다. 그 두 행의 COL2 는 10, 20 이라 결과는 20 이다(②). ① 10 은 MAX 대신 MIN 을 쓴 값이고, 전체에서 MAX 를 구하면 50 이 나온다(KEEP 없이). ③ 40 은 COL1 이 가장 큰 행들(DENSE_RANK LAST)에서 MIN 을 구한 값이다.",
+      "explanation": "KEEP (DENSE_RANK FIRST ORDER BY COL1) 은 COL1 순서로 맨 앞 순위인 행만 남기고, LAST 는 맨 뒤 순위인 행만 남긴 다음 앞의 집계 함수를 적용한다. A 그룹은 COL1 = 1 인 두 행(10, 20)이 맨 앞이라 F = MAX = 20, COL1 = 2 인 행(30)이 맨 뒤라 L = 30 이다. B 그룹이 함정이다. Oracle 의 오름차순 정렬은 NULL 을 맨 뒤에 둔다(NULLS LAST). 그래서 맨 앞 순위는 COL1 = 3 인 두 행(40, 50)이고 F = 50, 맨 뒤 순위는 COL1 이 NULL 인 행이라 L = 5 다. 정답은 ②번이다. ① 은 정렬할 때 NULL 행을 빼고 COL1 = 3 을 맨 뒤로 보았다. ③ 은 NULL 이 맨 앞에 온다고 착각한 결과다. ④ 는 FIRST 에 MIN, LAST 에 MAX 를 적용한 값이다. PostgreSQL 16 에는 KEEP 이 없어 그룹별 DENSE_RANK 로 맨 앞·맨 뒤 순위를 골라 집계했고, A 20·30, B 50·5 가 나왔다.",
       "references": [
         {
           "type": "table",
+          "caption": "TAB1 테이블",
           "headers": [
+            "GRP",
             "COL1",
             "COL2"
           ],
           "rows": [
             [
+              "A",
               "1",
               "10"
             ],
             [
+              "A",
               "1",
               "20"
             ],
             [
+              "A",
               "2",
               "30"
             ],
             [
+              "B",
+              "NULL",
+              "5"
+            ],
+            [
+              "B",
               "3",
               "40"
             ],
             [
+              "B",
               "3",
               "50"
             ]
-          ],
-          "caption": "TAB1 테이블"
+          ]
         },
         {
           "type": "sql",
-          "code": "SELECT MAX(COL2)\n       KEEP (DENSE_RANK FIRST\n             ORDER BY COL1)\nFROM TAB1;"
+          "code": "SELECT GRP,\n       MAX(COL2) KEEP\n         (DENSE_RANK FIRST\n          ORDER BY COL1) AS F,\n       MIN(COL2) KEEP\n         (DENSE_RANK LAST\n          ORDER BY COL1) AS L\nFROM   TAB1\nGROUP  BY GRP\nORDER  BY GRP;"
         }
       ]
     },
@@ -1252,21 +1263,21 @@
     {
       "subject": "2과목",
       "number": 35,
-      "title": "테이블 TAB1, TAB2 에 각각 10건씩 데이터가 있을 때 다음 쿼리의 결과는?",
+      "title": "아래 두 테이블에 SQL ㉠, ㉡, ㉢ 을 실행했을 때 COUNT(*) 결과로 옳은 것은?",
       "options": [
-        "10",
-        "20",
-        "100",
-        "오류가 발생한다."
+        "12, 3, 9",
+        "7, 3, 6",
+        "12, 3, 6",
+        "12, 2, 6"
       ],
       "correctIndex": 2,
-      "explanation": "FROM TAB1, TAB2 에 조인 조건이 없으면 두 테이블의 모든 행 조합(카티션 곱)이 만들어진다. 10건 × 10건 = 100건이므로 COUNT(*) 는 100 이다(③). ① 10 은 한 테이블의 행 수, ② 20 은 두 테이블 행 수의 합이고, ④ 조건이 없어도 오류는 나지 않는다.",
+      "explanation": "㉠ 은 조인 조건이 없어 모든 행 조합(카티션 곱)이 만들어진다. 3행 × 4행 = 12 다. ㉡ 은 값이 같은 조합만 센다. TAB1 의 1 은 TAB2 의 1 두 행과, 2 는 한 행과 맞아 3 이다. ㉢ 은 값이 다른 조합이다. TAB2 의 NULL 은 어떤 값과 비교해도 UNKNOWN 이라 = 에도 <> 에도 걸리지 않는다. NULL 이 아닌 TAB2 3행과의 조합 9개에서 같은 조합 3개를 빼면 6 이다. 정답은 ③번이다. ① 은 ㉡ 과 ㉢ 을 더하면 ㉠ 이 된다고 보고 NULL 조합까지 <> 로 세었다. ② 는 카티션 곱을 두 테이블 행 수의 합으로 착각했다. ④ 는 같은 값 1 이 TAB2 에 두 번 있어도 한 번만 맞는다고 보았다. PostgreSQL 16 에서 실행한 결과도 12, 3, 6 이다.",
       "references": [
         {
           "type": "table",
-          "caption": "TAB1 테이블 (10건 가정)",
+          "caption": "TAB1",
           "headers": [
-            "COL1"
+            "C1"
           ],
           "rows": [
             [
@@ -1277,42 +1288,33 @@
             ],
             [
               "3"
-            ],
-            [
-              "…"
-            ],
-            [
-              "10"
             ]
           ]
         },
         {
           "type": "table",
-          "caption": "TAB2 테이블 (10건 가정)",
+          "caption": "TAB2",
           "headers": [
-            "COL1"
+            "C1"
           ],
           "rows": [
             [
-              "A"
+              "1"
             ],
             [
-              "B"
+              "1"
             ],
             [
-              "C"
+              "2"
             ],
             [
-              "…"
-            ],
-            [
-              "J"
+              "NULL"
             ]
           ]
         },
         {
           "type": "sql",
-          "code": "SELECT COUNT(*) FROM TAB1, TAB2;"
+          "code": "-- ㉠\nSELECT COUNT(*)\nFROM   TAB1, TAB2;\n-- ㉡\nSELECT COUNT(*)\nFROM   TAB1 A, TAB2 B\nWHERE  A.C1 = B.C1;\n-- ㉢\nSELECT COUNT(*)\nFROM   TAB1 A, TAB2 B\nWHERE  A.C1 <> B.C1;"
         }
       ]
     },
